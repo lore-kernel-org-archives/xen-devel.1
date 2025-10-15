@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EEECCCD18E
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 08:36:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1143263.1477020 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40A4FCCD193
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 08:36:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1143266.1477031 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8wzM-0002Bk-VI; Wed, 15 Oct 2025 08:36:04 +0000
+	id 1v8wzO-0002PS-4a; Wed, 15 Oct 2025 08:36:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1143263.1477020; Wed, 15 Oct 2025 08:36:04 +0000
+Received: by outflank-mailman (output) from mailman id 1143266.1477031; Wed, 15 Oct 2025 08:36:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8wzM-0002BX-PR; Wed, 15 Oct 2025 08:36:04 +0000
-Received: by outflank-mailman (input) for mailman id 1143263;
+	id 1v8wzN-0002PL-WB; Wed, 15 Oct 2025 08:36:05 +0000
+Received: by outflank-mailman (input) for mailman id 1143266;
  Wed, 15 Oct 2025 08:36:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xhcp=4Y=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1v8wsR-0006Qy-7H
- for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 08:28:55 +0000
+ id 1v8wrz-0005tz-PM
+ for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 08:28:27 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id fbbbcee6-a9a0-11f0-980a-7dc792cee155;
- Wed, 15 Oct 2025 10:28:53 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id ebcddd7f-a9a0-11f0-9d15-b5c5bf9af7f9;
+ Wed, 15 Oct 2025 10:28:26 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C3A1E2379;
- Wed, 15 Oct 2025 01:28:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E5B262308;
+ Wed, 15 Oct 2025 01:28:17 -0700 (PDT)
 Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
  [10.1.194.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF2653F66E;
- Wed, 15 Oct 2025 01:28:47 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8ACDB3F66E;
+ Wed, 15 Oct 2025 01:28:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbbbcee6-a9a0-11f0-980a-7dc792cee155
+X-Inumbo-ID: ebcddd7f-a9a0-11f0-9d15-b5c5bf9af7f9
 From: Kevin Brodsky <kevin.brodsky@arm.com>
 To: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org,
@@ -83,119 +83,85 @@ Cc: linux-kernel@vger.kernel.org,
 	sparclinux@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	x86@kernel.org
-Subject: [PATCH v3 13/13] mm: introduce arch_wants_lazy_mmu_mode()
-Date: Wed, 15 Oct 2025 09:27:27 +0100
-Message-ID: <20251015082727.2395128-14-kevin.brodsky@arm.com>
+Subject: [PATCH v3 08/13] arm64: mm: replace TIF_LAZY_MMU with in_lazy_mmu_mode()
+Date: Wed, 15 Oct 2025 09:27:22 +0100
+Message-ID: <20251015082727.2395128-9-kevin.brodsky@arm.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20251015082727.2395128-1-kevin.brodsky@arm.com>
 References: <20251015082727.2395128-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-powerpc decides at runtime whether the lazy MMU mode should be used.
-
-To avoid the overhead associated with managing
-task_struct::lazy_mmu_state if the mode isn't used, introduce
-arch_wants_lazy_mmu_mode() and bail out of lazy_mmu_mode_* if it
-returns false. Add a default definition returning true, and an
-appropriate implementation for powerpc.
+The generic lazy_mmu layer now tracks whether a task is in lazy MMU
+mode. As a result we no longer need a TIF flag for that purpose -
+let's use the new in_lazy_mmu_mode() helper instead.
 
 Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
 ---
-This patch seemed like a good idea to start with, but now I'm not so
-sure that the churn added to the generic layer is worth it.
+ arch/arm64/include/asm/pgtable.h     | 16 +++-------------
+ arch/arm64/include/asm/thread_info.h |  3 +--
+ 2 files changed, 4 insertions(+), 15 deletions(-)
 
-It provides a minor optimisation for just powerpc. x86 with XEN_PV also
-chooses at runtime whether to implement lazy_mmu helpers or not, but
-it doesn't fit this API so neatly and isn't handled here.
----
- .../include/asm/book3s/64/tlbflush-hash.h        | 11 ++++++-----
- include/linux/pgtable.h                          | 16 ++++++++++++----
- 2 files changed, 18 insertions(+), 9 deletions(-)
-
-diff --git a/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h b/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-index bbc54690d374..a91b354cf87c 100644
---- a/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-+++ b/arch/powerpc/include/asm/book3s/64/tlbflush-hash.h
-@@ -23,10 +23,14 @@ DECLARE_PER_CPU(struct ppc64_tlb_batch, ppc64_tlb_batch);
+diff --git a/arch/arm64/include/asm/pgtable.h b/arch/arm64/include/asm/pgtable.h
+index f15ca4d62f09..944e512767db 100644
+--- a/arch/arm64/include/asm/pgtable.h
++++ b/arch/arm64/include/asm/pgtable.h
+@@ -62,30 +62,21 @@ static inline void emit_pte_barriers(void)
  
- extern void __flush_tlb_pending(struct ppc64_tlb_batch *batch);
+ static inline void queue_pte_barriers(void)
+ {
+-	unsigned long flags;
+-
+ 	if (in_interrupt()) {
+ 		emit_pte_barriers();
+ 		return;
+ 	}
  
-+#define arch_wants_lazy_mmu_mode arch_wants_lazy_mmu_mode
-+static inline bool arch_wants_lazy_mmu_mode(void)
-+{
-+	return !radix_enabled();
-+}
-+
+-	flags = read_thread_flags();
+-
+-	if (flags & BIT(TIF_LAZY_MMU)) {
+-		/* Avoid the atomic op if already set. */
+-		if (!(flags & BIT(TIF_LAZY_MMU_PENDING)))
+-			set_thread_flag(TIF_LAZY_MMU_PENDING);
+-	} else {
++	if (in_lazy_mmu_mode())
++		test_and_set_thread_flag(TIF_LAZY_MMU_PENDING);
++	else
+ 		emit_pte_barriers();
+-	}
+ }
+ 
  static inline void arch_enter_lazy_mmu_mode(void)
  {
--	if (radix_enabled())
--		return;
- 	/*
- 	 * apply_to_page_range can call us this preempt enabled when
- 	 * operating on kernel page tables.
-@@ -46,9 +50,6 @@ static inline void arch_flush_lazy_mmu_mode(void)
- 
- static inline void arch_leave_lazy_mmu_mode(void)
- {
--	if (radix_enabled())
--		return;
+ 	if (in_interrupt())
+ 		return;
 -
- 	arch_flush_lazy_mmu_mode();
- 	preempt_enable();
+-	set_thread_flag(TIF_LAZY_MMU);
  }
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 718c9c788114..db4f388d2a16 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -261,11 +261,19 @@ static inline int pmd_dirty(pmd_t pmd)
-  * currently enabled.
-  */
- #ifdef CONFIG_ARCH_LAZY_MMU
-+
-+#ifndef arch_wants_lazy_mmu_mode
-+static inline bool arch_wants_lazy_mmu_mode(void)
-+{
-+	return true;
-+}
-+#endif
-+
- static inline void lazy_mmu_mode_enable(void)
- {
- 	struct lazy_mmu_state *state = &current->lazy_mmu_state;
  
--	if (in_interrupt())
-+	if (!arch_wants_lazy_mmu_mode() || in_interrupt())
+ static inline void arch_flush_lazy_mmu_mode(void)
+@@ -103,7 +94,6 @@ static inline void arch_leave_lazy_mmu_mode(void)
  		return;
  
- 	VM_BUG_ON(state->count == U8_MAX);
-@@ -283,7 +291,7 @@ static inline void lazy_mmu_mode_disable(void)
- {
- 	struct lazy_mmu_state *state = &current->lazy_mmu_state;
+ 	arch_flush_lazy_mmu_mode();
+-	clear_thread_flag(TIF_LAZY_MMU);
+ }
  
--	if (in_interrupt())
-+	if (!arch_wants_lazy_mmu_mode() || in_interrupt())
- 		return;
+ #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+diff --git a/arch/arm64/include/asm/thread_info.h b/arch/arm64/include/asm/thread_info.h
+index f241b8601ebd..4ff8da0767d9 100644
+--- a/arch/arm64/include/asm/thread_info.h
++++ b/arch/arm64/include/asm/thread_info.h
+@@ -84,8 +84,7 @@ void arch_setup_new_exec(void);
+ #define TIF_SME_VL_INHERIT	28	/* Inherit SME vl_onexec across exec */
+ #define TIF_KERNEL_FPSTATE	29	/* Task is in a kernel mode FPSIMD section */
+ #define TIF_TSC_SIGSEGV		30	/* SIGSEGV on counter-timer access */
+-#define TIF_LAZY_MMU		31	/* Task in lazy mmu mode */
+-#define TIF_LAZY_MMU_PENDING	32	/* Ops pending for lazy mmu mode exit */
++#define TIF_LAZY_MMU_PENDING	31	/* Ops pending for lazy mmu mode exit */
  
- 	VM_BUG_ON(state->count == 0);
-@@ -303,7 +311,7 @@ static inline void lazy_mmu_mode_pause(void)
- {
- 	struct lazy_mmu_state *state = &current->lazy_mmu_state;
- 
--	if (in_interrupt())
-+	if (!arch_wants_lazy_mmu_mode() || in_interrupt())
- 		return;
- 
- 	VM_WARN_ON(state->count == 0 || !state->enabled);
-@@ -316,7 +324,7 @@ static inline void lazy_mmu_mode_resume(void)
- {
- 	struct lazy_mmu_state *state = &current->lazy_mmu_state;
- 
--	if (in_interrupt())
-+	if (!arch_wants_lazy_mmu_mode() || in_interrupt())
- 		return;
- 
- 	VM_WARN_ON(state->count == 0 || state->enabled);
+ #define _TIF_SIGPENDING		(1 << TIF_SIGPENDING)
+ #define _TIF_NEED_RESCHED	(1 << TIF_NEED_RESCHED)
 -- 
 2.47.0
 
