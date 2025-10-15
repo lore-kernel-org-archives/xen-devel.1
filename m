@@ -4,37 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 032E4CCD193
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 08:54:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1143370.1477089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C39CCD196
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Oct 2025 09:13:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1143383.1477100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8xH5-0008Je-12; Wed, 15 Oct 2025 08:54:23 +0000
+	id 1v8xZM-0002lj-Od; Wed, 15 Oct 2025 09:13:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1143370.1477089; Wed, 15 Oct 2025 08:54:22 +0000
+Received: by outflank-mailman (output) from mailman id 1143383.1477100; Wed, 15 Oct 2025 09:13:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v8xH4-0008JX-Ug; Wed, 15 Oct 2025 08:54:22 +0000
-Received: by outflank-mailman (input) for mailman id 1143370;
- Wed, 15 Oct 2025 08:54:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v8xZM-0002lc-Kk; Wed, 15 Oct 2025 09:13:16 +0000
+Received: by outflank-mailman (input) for mailman id 1143383;
+ Wed, 15 Oct 2025 09:13:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=toq2=4Y=intel.com=lkp@srs-se1.protection.inumbo.net>)
- id 1v8xH2-0008JR-Su
- for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 08:54:21 +0000
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 879fe1cc-a9a4-11f0-980a-7dc792cee155;
- Wed, 15 Oct 2025 10:54:18 +0200 (CEST)
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Oct 2025 01:54:15 -0700
-Received: from lkp-server02.sh.intel.com (HELO 66d7546c76b2) ([10.239.97.151])
- by fmviesa001.fm.intel.com with ESMTP; 15 Oct 2025 01:54:10 -0700
-Received: from kbuild by 66d7546c76b2 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1v8xGq-0003eZ-0P;
- Wed, 15 Oct 2025 08:54:08 +0000
+ (envelope-from <SRS0=aLBx=4Y=kernel.org=leon@srs-se1.protection.inumbo.net>)
+ id 1v8xZL-0002lR-F4
+ for xen-devel@lists.xenproject.org; Wed, 15 Oct 2025 09:13:15 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2d440bd4-a9a7-11f0-9d15-b5c5bf9af7f9;
+ Wed, 15 Oct 2025 11:13:14 +0200 (CEST)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 808BC62555;
+ Wed, 15 Oct 2025 09:13:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84E0DC4CEF9;
+ Wed, 15 Oct 2025 09:13:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,93 +43,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 879fe1cc-a9a4-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1760518458; x=1792054458;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=+BB5rvJB9mUeya+4DU9TUHtTCg+zs/03Q0ZHCN0cD80=;
-  b=Cmbogn/Rb1mK3C6PtK5ClL/jk0i/O2SJIOaY17CHgq/J8JrRU1cpbRA1
-   J2Zt7+QwUoi6s6bgcTFAwKZEpU2Jx9Z+oyZTWBF/Bt8eHNObv2DjALTh8
-   QnXUgneDUKtB90Bmh+gMJRhM4nZYojVX6WJdi3L+7JE0y5cecvhhvmHiV
-   5a/14sDv7cGSh32b+RQUMElzK5NlZZQ8r9PsgZmJho+CLoFF/307hJpZL
-   agfkD84/PQjdWRJvRXUsjzKZv/NeLs61EhOFtqMX1VZDU5Fe9qVzu0vOv
-   HozzMBpXQZrmAU+O3+47rgt3HVl64N74GIHGf+ErrBcAGqZwMHjAD5JZU
-   g==;
-X-CSE-ConnectionGUID: UO3u6POQSvG7eIXHr2GyfA==
-X-CSE-MsgGUID: WxtftDXxS1+0jqfAoS3lOA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11582"; a="50253064"
-X-IronPort-AV: E=Sophos;i="6.19,230,1754982000"; 
-   d="scan'208";a="50253064"
-X-CSE-ConnectionGUID: 9G14ytpfQl2dHZh/4Qmtzg==
-X-CSE-MsgGUID: zzuIIelBSnefzwE8pAWIJw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,230,1754982000"; 
-   d="scan'208";a="213062822"
-Date: Wed, 15 Oct 2025 16:53:32 +0800
-From: kernel test robot <lkp@intel.com>
-To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org,
-	x86@kernel.org, linux-hyperv@vger.kernel.org,
-	virtualization@lists.linux.dev, kvm@vger.kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, Juergen Gross <jgross@suse.com>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+X-Inumbo-ID: 2d440bd4-a9a7-11f0-9d15-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1760519592;
+	bh=fj+wjstxPuu4pe6Ir9X+TCy/RdK5uIxhfZIK9PjQE3s=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=oQijT4BYDA7G26UJzNdP8FR+Sso17sVT6tLq404JDkxEXIL0SNUGgqKnqLAytRMDc
+	 ybAzgl7PHHhZyg6HwZsrKBErF8H9uQdAB918IqBZI2EmZsuuLeHmRsIh/x/CMRPuW/
+	 hbuFpAnoTb56m0BmBdt1IW2nKqXOiKg+vIQfCq+mZUZ52Ics6N2shnm0co1H8Ntqpo
+	 tYykaD+29yiu12+E8zdxTGe/nfssPj1oRKuBWWpNG9ywOgTVIfeN4yGPnr+Uab0knw
+	 e+80KUPBDOcAIVqRMB21aCnj3es2K2B3WII0PdnnK8Q2Rvik9Y2ZxaH3Zx9omBBGbj
+	 LHFZbbKctgdsw==
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Matt Turner <mattst88@gmail.com>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Geoff Levand <geoff@infradead.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Andreas Larsson <andreas@gaisler.com>,
 	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v3 21/21] x86/pvlocks: Move paravirt spinlock functions
- into own header
-Message-ID: <202510151611.uYXVunzo-lkp@intel.com>
-References: <20251006074606.1266-22-jgross@suse.com>
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>
+Cc: iommu@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	linux-alpha@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	sparclinux@vger.kernel.org,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Jason Gunthorpe <jgg@nvidia.com>
+Subject: [PATCH v5 02/14] dma-mapping: convert dummy ops to physical address mapping
+Date: Wed, 15 Oct 2025 12:12:48 +0300
+Message-ID: <20251015-remove-map-page-v5-2-3bbfe3a25cdf@kernel.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251015-remove-map-page-v5-0-3bbfe3a25cdf@kernel.org>
+References: <20251015-remove-map-page-v5-0-3bbfe3a25cdf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251006074606.1266-22-jgross@suse.com>
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.15-dev
+Content-Transfer-Encoding: 8bit
 
-Hi Juergen,
+From: Leon Romanovsky <leonro@nvidia.com>
 
-kernel test robot noticed the following build errors:
+Change dma_dummy_map_page and dma_dummy_unmap_page routines
+to accept physical address and rename them.
 
-[auto build test ERROR on tip/sched/core]
-[also build test ERROR on kvm/queue kvm/next linus/master v6.18-rc1 next-20251014]
-[cannot apply to tip/x86/core kvm/linux-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ kernel/dma/dummy.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Juergen-Gross/x86-paravirt-Remove-not-needed-includes-of-paravirt-h/20251010-094850
-base:   tip/sched/core
-patch link:    https://lore.kernel.org/r/20251006074606.1266-22-jgross%40suse.com
-patch subject: [PATCH v3 21/21] x86/pvlocks: Move paravirt spinlock functions into own header
-config: x86_64-randconfig-001-20251015 (https://download.01.org/0day-ci/archive/20251015/202510151611.uYXVunzo-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251015/202510151611.uYXVunzo-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202510151611.uYXVunzo-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   ld: vmlinux.o: in function `kvm_guest_init':
-   arch/x86/kernel/kvm.c:828:(.init.text+0x440f4): undefined reference to `pv_ops_lock'
->> ld: arch/x86/kernel/kvm.c:828:(.init.text+0x4410e): undefined reference to `pv_ops_lock'
-   ld: arch/x86/kernel/kvm.c:828:(.init.text+0x4411a): undefined reference to `pv_ops_lock'
+diff --git a/kernel/dma/dummy.c b/kernel/dma/dummy.c
+index 92de80e5b057..16a51736a2a3 100644
+--- a/kernel/dma/dummy.c
++++ b/kernel/dma/dummy.c
+@@ -11,17 +11,16 @@ static int dma_dummy_mmap(struct device *dev, struct vm_area_struct *vma,
+ 	return -ENXIO;
+ }
+ 
+-static dma_addr_t dma_dummy_map_page(struct device *dev, struct page *page,
+-		unsigned long offset, size_t size, enum dma_data_direction dir,
+-		unsigned long attrs)
++static dma_addr_t dma_dummy_map_phys(struct device *dev, phys_addr_t phys,
++		size_t size, enum dma_data_direction dir, unsigned long attrs)
+ {
+ 	return DMA_MAPPING_ERROR;
+ }
+-static void dma_dummy_unmap_page(struct device *dev, dma_addr_t dma_handle,
++static void dma_dummy_unmap_phys(struct device *dev, dma_addr_t dma_handle,
+ 		size_t size, enum dma_data_direction dir, unsigned long attrs)
+ {
+ 	/*
+-	 * Dummy ops doesn't support map_page, so unmap_page should never be
++	 * Dummy ops doesn't support map_phys, so unmap_page should never be
+ 	 * called.
+ 	 */
+ 	WARN_ON_ONCE(true);
+@@ -51,8 +50,8 @@ static int dma_dummy_supported(struct device *hwdev, u64 mask)
+ 
+ const struct dma_map_ops dma_dummy_ops = {
+ 	.mmap                   = dma_dummy_mmap,
+-	.map_page               = dma_dummy_map_page,
+-	.unmap_page             = dma_dummy_unmap_page,
++	.map_phys               = dma_dummy_map_phys,
++	.unmap_phys             = dma_dummy_unmap_phys,
+ 	.map_sg                 = dma_dummy_map_sg,
+ 	.unmap_sg               = dma_dummy_unmap_sg,
+ 	.dma_supported          = dma_dummy_supported,
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.51.0
+
 
