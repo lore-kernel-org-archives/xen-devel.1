@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7445CCD194
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Oct 2025 07:36:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1144232.1477694 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876BACCD183
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Oct 2025 07:36:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1144257.1477713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v9IWx-0002Z0-6n; Thu, 16 Oct 2025 07:36:11 +0000
+	id 1v9IXJ-0003tY-SH; Thu, 16 Oct 2025 07:36:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1144232.1477694; Thu, 16 Oct 2025 07:36:11 +0000
+Received: by outflank-mailman (output) from mailman id 1144257.1477713; Thu, 16 Oct 2025 07:36:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v9IWx-0002Yp-21; Thu, 16 Oct 2025 07:36:11 +0000
-Received: by outflank-mailman (input) for mailman id 1144232;
- Thu, 16 Oct 2025 07:36:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v9IXJ-0003tR-Ob; Thu, 16 Oct 2025 07:36:33 +0000
+Received: by outflank-mailman (input) for mailman id 1144257;
+ Thu, 16 Oct 2025 07:36:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CbFY=4Z=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1v9ITr-0006T6-1N
- for xen-devel@lists.xenproject.org; Thu, 16 Oct 2025 07:32:59 +0000
+ id 1v9IT1-0006tj-89
+ for xen-devel@lists.xenproject.org; Thu, 16 Oct 2025 07:32:07 +0000
 Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
  [2a00:1450:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55e0c517-aa62-11f0-980a-7dc792cee155;
- Thu, 16 Oct 2025 09:32:57 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 377a78da-aa62-11f0-9d15-b5c5bf9af7f9;
+ Thu, 16 Oct 2025 09:32:06 +0200 (CEST)
 Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4710022571cso2744345e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Oct 2025 00:32:57 -0700 (PDT)
+ 5b1f17b1804b1-46e384dfde0so4193555e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Oct 2025 00:32:06 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4710cda4ecasm13066995e9.4.2025.10.16.00.32.56
+ 5b1f17b1804b1-4711442d3ddsm10102325e9.5.2025.10.16.00.32.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Oct 2025 00:32:56 -0700 (PDT)
+ Thu, 16 Oct 2025 00:32:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55e0c517-aa62-11f0-980a-7dc792cee155
+X-Inumbo-ID: 377a78da-aa62-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760599977; x=1761204777; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1760599926; x=1761204726; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=DjE8gka2JkJuiym43SgnPm2cUSuJ0d65kAjd/ktU954=;
-        b=d6bhth1Y3QfpUjMOMz3xMLcYW4R9Ks5zSYv68Ep7NxXGvGrxQFNSaIVgeq7iVEgMRl
-         EbXB180+Wpldmu/zxxveXFm5F1V0U/mPsX+t0Qd4M1CE0uqBCTIldm0fsZZSivoYjFWt
-         X6Wu/v2YnnZBtHngYVT9g/tmyBQeWuxjmmlHr3WMU/zNLgUAtBe5HssgUxhWwA+YPCeA
-         B4N+a80JXJcLFjnJPPc+1RLro6vHolRo5+cCwwMylHciAUno3Z8cgkE1ctK0IPaQTbN1
-         stzR403rygyCQN7Nd03C1bw9DwIO7M0WNgdoUiLmv9NKjXeSUWB7QT0CSDUb8BgF8VdC
-         TR2Q==
+        bh=rKpTq2ffZAsnBRLXECm8mxV5KD3b0PiuTaOk80DCvHo=;
+        b=IRYnbWtf/V9Q+Habm/dXXWfE/FkSvzeNpnI9fGbcb3734l+7S3kN6SKdgTu4k6+oIB
+         xU8ThwRTIpB8Nhw0Dp/Jc7tuPha9SIinUeRU7/NhAQy+LNs2sEFxqfj86f9W+q7rmi0o
+         vjNvjLUb5XEwKdAkRguUthVQ61Q9iKInbaCH3GuiBkj2eTVTpC2zTYCxoXtLXAjo7wvV
+         YOg9aIYeKpOsxduzihZSL+pbBeXuGW3fckMw6BNNe+fNvhALB6RwYWQ9xIUkfivchCqu
+         biN6CwV5TjelYb5dF3sCcTK8nNdod0SuEXt1awtxvn+yDthhryKZgkxruBkiRW7CQjlP
+         vt6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760599977; x=1761204777;
+        d=1e100.net; s=20230601; t=1760599926; x=1761204726;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=DjE8gka2JkJuiym43SgnPm2cUSuJ0d65kAjd/ktU954=;
-        b=hdxNV52GTkFlEUeGqw51QaMj2P/+wIgneLElkwhNps4ACDvuUfq9QkuxniaIgCQYRm
-         7l659OyMXCi/KlaPFGaXWc1sgItcjaCImr1Ry6ab+3fiuSEbbpxMz+NxKQd1aI88W8si
-         a8vgmw8/1LClwux98VkpNdGefFQGrEu1v40fOMJyQ1CK8veNWe0WWQRttAgJIxL20Brp
-         kl9592LC4a+RgOhlM09Q+TZPN+I3vkitEt49TZf3hQ3G+qY/GB+qDAmmc+sPLX3EkK6y
-         hJEdYONA57GcnUCuUVS2tsscoV/OIsTfbjBH/eZ0Djp+VuR29DSZ5WYTJYQQdwxELZqV
-         17Fw==
-X-Gm-Message-State: AOJu0YwNoWhFLOYkHXrEBzy2eAlPPvu/mKxGGYkNMbx+cpybrlPbop4s
-	SCjKtckBAeFTqFrU9ge48Q9ue3p9VatMziWBHqkQuupv6AXobsUCKzsS8EIfr2y8ugq4FWKCy3O
-	oMfs=
-X-Gm-Gg: ASbGncs0NWeA1yAwZMB0m6Fas3HZ7cbD3xP9bG5fuN1RzND0twi8w7AbbwHXACT+8Un
-	IQzkU+fpVcq61biNYk2KakCEbr8aIDjws5lrwZSycZ4JMEXvtXIyhXeogxw1p4zH7hUw6GsbcgX
-	P8brvKCWgeHjog0kT5VdTEWNMMhaYbJZG10i+/dN854Yuw9gmmdGnUP2TeUlFGHztOWWgSjoaKi
-	sl81JHDUR4/J72Gu1uiWhKk1h1xRDZNXaOuhzQg0E6TdnQbYQr21k+VhvjD4sbkJpI/R1lEYcvN
-	P588FCrQSkOahRfV5S/jps9rseUVlWgWxDORcFVpOBMTm5GGkHLNC5DCK6BASz6T0TRqRJERbi6
-	lV6xGVsrM+q72slok46eIqVJnya1G9wVm4MkRa4b2NhyC9zr9tuaSgWxYace0SEnVOFxk2YN5Tg
-	la5ZkmiPjjc+7gT8a3EIvxrXdB9UmqZp3BG0Xbng8d/uLg3kk1+MysqHSO4081FibgHBYQNNI=
-X-Google-Smtp-Source: AGHT+IGanN6vEl768wvh1OFIaksRzZKkRi1RkoP8MrA3NSYqwISK0JR5AqInqjhmFTslkWtI+bItdw==
-X-Received: by 2002:a05:600c:83c3:b0:471:11a3:a6a9 with SMTP id 5b1f17b1804b1-47111a3a6e9mr8877025e9.37.1760599976754;
-        Thu, 16 Oct 2025 00:32:56 -0700 (PDT)
-Message-ID: <a1baa567-6901-48d1-ba9d-f0a688de7eaf@suse.com>
-Date: Thu, 16 Oct 2025 09:32:55 +0200
+        bh=rKpTq2ffZAsnBRLXECm8mxV5KD3b0PiuTaOk80DCvHo=;
+        b=nSZG1BaP1rkxUzMbLVufGjUQ1F7VjhKHBnTGiMoK+VQa6OrFJBtBHjw33cUNOoS7vG
+         FZsawwqs9DLlQly+Pqk4r/hFi3euGzfgql3OByx1nwB7HJ3hcMTBMzNgUpZ1tERURYV3
+         xBHLObmELH50UhbZy7xxX1IyoASl39mvu4a/uEpbFypu3uLhb6UU00ARTk3+TCt/N6KU
+         4BGq1HIZ8FREFI2PPWLfTCjXxaOUcKPBy2SqHKe7LQOpz5mYx8Q0jOsaDEYQFni35iyU
+         FIWa99QBP6g9BayqIGzsBW7/pEYYcxJflCxF5Jp5Y6VDllAEK0BhMvFVx7WwVOWHD3kt
+         RHyg==
+X-Gm-Message-State: AOJu0YwHlBYtzRkNXSaWOECy4zyAmKSPKCMICVKMg5n9wzmcX48HLnn2
+	U87Bedn5YyKTqwpzNRAwFIY+Nj0UQPiGKX9kgaGAnF5S9YT9OTwPID8nO9E5pmhF5KVsXmegmTT
+	6oGo=
+X-Gm-Gg: ASbGncti4bNjAK64mPguZP4L7nsL0F+P/jNqSpjY9gGRMsMAeutBQSs09xS+HJ1Kaly
+	M5LrwFZBWmcIuBWhLCGBfanNn5pJ4t3ZIPKtUd0KpwhXZjzjJZ99y09N6/f1x4MW4E7GAx+uAZW
+	brpPraheOHnlfAU+MD4zpO5G2ox+9bUDudzyPdaiUSK8Khw/QYeMiAWdS5DbxfhpIHTLrtgKvrr
+	HtXuPwBYKSVu6xbM1ODfG3pKOxaA649BOAv8toQgfjbop6zINcDjM9AVzXZin/qO35ve2l7wTZb
+	qk17qgK4uzJ4YKsLMKZsXGeepzs/hLlDrwXxD3vlA5yodwW2U8ROlrDbLYu8vE2Yzb8r6MRAzZE
+	4FavMJnxaPNRk2HYqQJrNI5xLvS8QvAK9oJM/ZtNYC4W+8Yry295BTXVBv1aFhMSm2Z0JwzUTkr
+	k1KL3Bg1oGN3vpw/V9E1o5IKvzMsb+CSQEshXpfL2YeXLBmdWamysZT5yoZsZIC9r1x8lTREw=
+X-Google-Smtp-Source: AGHT+IFsTTq5kY0m4KKJdirhTJfN554145+ptMQvZpsOe5DVY74MsO1YcWCjzYwlV+0a3xPIsHxdEw==
+X-Received: by 2002:a05:600c:1e8c:b0:46e:326e:4501 with SMTP id 5b1f17b1804b1-46fa9a9ea20mr205904315e9.10.1760599925801;
+        Thu, 16 Oct 2025 00:32:05 -0700 (PDT)
+Message-ID: <64d52793-be70-4ae8-9bae-ad88f6379395@suse.com>
+Date: Thu, 16 Oct 2025 09:32:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 05/10] x86/HPET: avoid indirect call to event handler
+Subject: [PATCH for-4.21 03/10] x86/HPET: use single, global, low-priority
+ vector for broadcast IRQ
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
 References: <8d94abf8-70d1-478c-885e-ff9a960ac72d@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -124,69 +126,179 @@ In-Reply-To: <8d94abf8-70d1-478c-885e-ff9a960ac72d@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-It's only ever handle_hpet_broadcast() that's used. While we now don't
-enable IRQs right away, still play safe and convert the function pointer
-to a boolean, to make sure no calls occur too early.
+Using dynamically allocated / maintained vectors has several downsides:
+- possible nesting of IRQs due to the effects of IRQ migration,
+- reduction of vectors available for devices,
+- IRQs not moving as intended if there's shortage of vectors,
+- higher runtime overhead.
 
+As the vector also doesn't need to be of any priority (first and foremost
+it really shouldn't be of higher or same priority as the timer IRQ, as
+that raises TIMER_SOFTIRQ anyway), avoid any "ordinary" vectors altogther
+and use a vector from the 0x10...0x1f exception vector space. Exception vs
+interrupt can easily be distinguished by checking for the presence of an
+error code.
+
+Fixes: 996576b965cc ("xen: allow up to 16383 cpus")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+This is an alternative proposal to
+https://lists.xen.org/archives/html/xen-devel/2014-03/msg00399.html.
+
+The Fixes: tag indicates where the problem got signficantly worse; in
+principle it was there already before (crashing at perhaps 6 or 7 levels
+of nested IRQs).
 
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -40,7 +40,7 @@ struct hpet_event_channel
-     s_time_t      next_event;
-     cpumask_var_t cpumask;
-     spinlock_t    lock;
--    void          (*event_handler)(struct hpet_event_channel *ch);
-+    bool          event_handler;
+@@ -9,17 +9,19 @@
+ #include <xen/timer.h>
+ #include <xen/smp.h>
+ #include <xen/softirq.h>
++#include <xen/cpuidle.h>
+ #include <xen/irq.h>
+ #include <xen/numa.h>
+ #include <xen/param.h>
+ #include <xen/sched.h>
  
-     unsigned int idx;   /* physical channel idx */
-     unsigned int cpu;   /* msi target */
-@@ -194,7 +194,7 @@ static void evt_do_broadcast(cpumask_t *
-        cpumask_raise_softirq(mask, TIMER_SOFTIRQ);
+ #include <asm/apic.h>
+-#include <asm/fixmap.h>
+ #include <asm/div64.h>
++#include <asm/fixmap.h>
++#include <asm/genapic.h>
+ #include <asm/hpet.h>
++#include <asm/irq-vectors.h>
+ #include <asm/msi.h>
+-#include <xen/cpuidle.h>
+ 
+ #define MAX_DELTA_NS MILLISECS(10*1000)
+ #define MIN_DELTA_NS MICROSECS(20)
+@@ -307,15 +309,13 @@ static void cf_check hpet_msi_set_affini
+     struct hpet_event_channel *ch = desc->action->dev_id;
+     struct msi_msg msg = ch->msi.msg;
+ 
+-    msg.dest32 = set_desc_affinity(desc, mask);
+-    if ( msg.dest32 == BAD_APICID )
+-        return;
++    /* This really is only for dump_irqs(). */
++    cpumask_copy(desc->arch.cpu_mask, mask);
+ 
+-    msg.data &= ~MSI_DATA_VECTOR_MASK;
+-    msg.data |= MSI_DATA_VECTOR(desc->arch.vector);
++    msg.dest32 = cpu_mask_to_apicid(mask);
+     msg.address_lo &= ~MSI_ADDR_DEST_ID_MASK;
+     msg.address_lo |= MSI_ADDR_DEST_ID(msg.dest32);
+-    if ( msg.data != ch->msi.msg.data || msg.dest32 != ch->msi.msg.dest32 )
++    if ( msg.dest32 != ch->msi.msg.dest32 )
+         hpet_msi_write(ch, &msg);
  }
  
--static void cf_check handle_hpet_broadcast(struct hpet_event_channel *ch)
-+static void handle_hpet_broadcast(struct hpet_event_channel *ch)
+@@ -328,7 +328,7 @@ static hw_irq_controller hpet_msi_type =
+     .shutdown   = hpet_msi_shutdown,
+     .enable	    = hpet_msi_unmask,
+     .disable    = hpet_msi_mask,
+-    .ack        = ack_nonmaskable_msi_irq,
++    .ack        = irq_actor_none,
+     .end        = end_nonmaskable_irq,
+     .set_affinity   = hpet_msi_set_affinity,
+ };
+@@ -347,6 +347,12 @@ static int __init hpet_setup_msi_irq(str
+     u32 cfg = hpet_read32(HPET_Tn_CFG(ch->idx));
+     irq_desc_t *desc = irq_to_desc(ch->msi.irq);
+ 
++    clear_irq_vector(ch->msi.irq);
++    ret = bind_irq_vector(ch->msi.irq, HPET_BROADCAST_VECTOR, &cpu_online_map);
++    if ( ret )
++        return ret;
++    cpumask_setall(desc->affinity);
++
+     if ( iommu_intremap != iommu_intremap_off )
+     {
+         ch->msi.hpet_id = hpet_blockid;
+@@ -457,7 +463,7 @@ static struct hpet_event_channel *hpet_g
+     /*
+      * Try the least recently used channel first.  It may still have its IRQ's
+      * affinity set to the desired CPU.  This way we also limit having multiple
+-     * of our IRQs raised on the same CPU, in possibly a nested manner.
++     * of our IRQs raised on the same CPU.
+      */
+     ch = per_cpu(lru_channel, cpu);
+     if ( ch && !test_and_set_bit(HPET_EVT_USED_BIT, &ch->flags) )
+@@ -497,6 +503,7 @@ static void set_channel_irq_affinity(str
+     spin_lock(&desc->lock);
+     hpet_msi_mask(desc);
+     hpet_msi_set_affinity(desc, cpumask_of(ch->cpu));
++    per_cpu(vector_irq, ch->cpu)[HPET_BROADCAST_VECTOR] = ch->msi.irq;
+     hpet_msi_unmask(desc);
+     spin_unlock(&desc->lock);
+ 
+--- a/xen/arch/x86/include/asm/irq-vectors.h
++++ b/xen/arch/x86/include/asm/irq-vectors.h
+@@ -18,6 +18,15 @@
+ /* IRQ0 (timer) is statically allocated but must be high priority. */
+ #define IRQ0_VECTOR             0xf0
+ 
++/*
++ * Low-priority (for now statically allocated) vectors, sharing entry
++ * points with exceptions in the 0x10 ... 0x1f range, as long as the
++ * respective exception has an error code.
++ */
++#define FIRST_LOPRIORITY_VECTOR 0x10
++#define HPET_BROADCAST_VECTOR   X86_EXC_AC
++#define LAST_LOPRIORITY_VECTOR  0x1f
++
+ /* Legacy PIC uses vectors 0x20-0x2f. */
+ #define FIRST_LEGACY_VECTOR     FIRST_DYNAMIC_VECTOR
+ #define LAST_LEGACY_VECTOR      (FIRST_LEGACY_VECTOR + 0xf)
+@@ -40,7 +49,7 @@
+ /* There's no IRQ2 at the PIC. */
+ #define IRQ_MOVE_CLEANUP_VECTOR (FIRST_LEGACY_VECTOR + 2)
+ 
+-#define FIRST_IRQ_VECTOR        FIRST_DYNAMIC_VECTOR
++#define FIRST_IRQ_VECTOR        FIRST_LOPRIORITY_VECTOR
+ #define LAST_IRQ_VECTOR         LAST_HIPRIORITY_VECTOR
+ 
+ #endif /* _ASM_IRQ_VECTORS_H */
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -755,8 +755,9 @@ void setup_vector_irq(unsigned int cpu)
+         if ( !irq_desc_initialized(desc) )
+             continue;
+         vector = irq_to_vector(irq);
+-        if ( vector >= FIRST_HIPRIORITY_VECTOR &&
+-             vector <= LAST_HIPRIORITY_VECTOR )
++        if ( vector <= (vector >= FIRST_HIPRIORITY_VECTOR
++                        ? LAST_HIPRIORITY_VECTOR
++                        : LAST_LOPRIORITY_VECTOR) )
+             cpumask_set_cpu(cpu, desc->arch.cpu_mask);
+         else if ( !cpumask_test_cpu(cpu, desc->arch.cpu_mask) )
+             continue;
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -158,7 +158,7 @@ void msi_compose_msg(unsigned vector, co
  {
-     cpumask_t mask;
-     s_time_t now, next_event;
-@@ -254,7 +254,7 @@ static void cf_check hpet_interrupt_hand
-     if ( ch->cpu != cpu )
+     memset(msg, 0, sizeof(*msg));
+ 
+-    if ( vector < FIRST_DYNAMIC_VECTOR )
++    if ( vector < FIRST_LOPRIORITY_VECTOR )
          return;
  
--    ch->event_handler(ch);
-+    handle_hpet_broadcast(ch);
- }
+     if ( cpu_mask )
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -1045,7 +1045,13 @@ END(entry_GP)
  
- static void cf_check hpet_msi_unmask(struct irq_desc *desc)
-@@ -515,7 +515,7 @@ static void set_channel_irq_affinity(str
- 
-     /* We may have missed an interrupt due to the temporary masking. */
-     if ( ch->event_handler && ch->next_event < NOW() )
--        ch->event_handler(ch);
-+        handle_hpet_broadcast(ch);
- }
- 
- static void hpet_attach_channel(unsigned int cpu,
-@@ -643,7 +643,7 @@ void __init hpet_broadcast_init(void)
-         hpet_events[i].next_event = STIME_MAX;
-         spin_lock_init(&hpet_events[i].lock);
-         smp_wmb();
--        hpet_events[i].event_handler = handle_hpet_broadcast;
-+        hpet_events[i].event_handler = true;
- 
-         hpet_events[i].msi.msi_attrib.maskbit = 1;
-         hpet_events[i].msi.msi_attrib.pos = MSI_TYPE_HPET;
-@@ -794,7 +794,9 @@ int hpet_legacy_irq_tick(void)
-          (hpet_events->flags & (HPET_EVT_DISABLE|HPET_EVT_LEGACY)) !=
-          HPET_EVT_LEGACY )
-         return 0;
--    hpet_events->event_handler(hpet_events);
-+
-+    handle_hpet_broadcast(hpet_events);
-+
-     return 1;
- }
+ FUNC(entry_AC)
+         ENDBR64
++        /* #AC shares its entry point with the HPET broadcast interrupt. */
++        test  $8, %spl
++        jz    .Lac
++        push  $0
++.Lac:
+         movb  $X86_EXC_AC, EFRAME_entry_vector(%rsp)
++        jnz   common_interrupt
+         jmp   handle_exception
+ END(entry_AC)
  
 
 
