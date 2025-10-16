@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F25CCD183
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Oct 2025 07:32:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1144184.1477633 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B5FCCD183
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Oct 2025 07:33:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1144192.1477642 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v9ITR-00080B-Fk; Thu, 16 Oct 2025 07:32:33 +0000
+	id 1v9IUg-0008W5-Oi; Thu, 16 Oct 2025 07:33:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1144184.1477633; Thu, 16 Oct 2025 07:32:33 +0000
+Received: by outflank-mailman (output) from mailman id 1144192.1477642; Thu, 16 Oct 2025 07:33:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1v9ITR-000803-D8; Thu, 16 Oct 2025 07:32:33 +0000
-Received: by outflank-mailman (input) for mailman id 1144184;
- Thu, 16 Oct 2025 07:32:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1v9IUg-0008Vy-Lw; Thu, 16 Oct 2025 07:33:50 +0000
+Received: by outflank-mailman (input) for mailman id 1144192;
+ Thu, 16 Oct 2025 07:33:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CbFY=4Z=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1v9ITQ-0006T6-Pb
- for xen-devel@lists.xenproject.org; Thu, 16 Oct 2025 07:32:32 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 460d1b93-aa62-11f0-980a-7dc792cee155;
- Thu, 16 Oct 2025 09:32:31 +0200 (CEST)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-46e42fa08e4so3356175e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Oct 2025 00:32:31 -0700 (PDT)
+ id 1v9IUf-0008Vq-V6
+ for xen-devel@lists.xenproject.org; Thu, 16 Oct 2025 07:33:49 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 74a620b2-aa62-11f0-9d15-b5c5bf9af7f9;
+ Thu, 16 Oct 2025 09:33:49 +0200 (CEST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-46e34052bb7so4496435e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Oct 2025 00:33:49 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4711444d919sm9776065e9.14.2025.10.16.00.32.29
+ ffacd0b85a97d-426e6f03a76sm17261029f8f.36.2025.10.16.00.33.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Oct 2025 00:32:30 -0700 (PDT)
+ Thu, 16 Oct 2025 00:33:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 460d1b93-aa62-11f0-980a-7dc792cee155
+X-Inumbo-ID: 74a620b2-aa62-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760599950; x=1761204750; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1760600028; x=1761204828; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=V65ZkZ395fafRCHZS/zrJWqELR8Nj+iaElKK9I3wBLM=;
-        b=ZMzlL3hjqVjYh8SIdlb6J4aekfZErVr7KZu0qUqV+Z0DcfY8J1BjOkWflhVEKQpz71
-         0ImLx4ghLgXIs3wYPCEbjJKkILNNO0KPHhnQuw6yzP3NQDFi6WUJmEiSQWTj6rV6a0hc
-         lq/wBEzOaNeWdVZFlUHx1eEzrAeaUC2iMAi4LYDAwrzEr112CIK2kFjJveyfRDbpe4up
-         RbtdWPUtebpJGLhEKDwo5Ocpl3aG1dLxgHW/ia6Xp26usjnj0ziv2jecdpvVxxgOcCFd
-         Gg1OJWtBWswqNx7/wIowEopHSB66uoedfrRHcGO4fBCH6EQ/aWWD+We5iMUVrCqGfT1c
-         gRFQ==
+        bh=13M+/3VJWIBsfQVB3cpUAfRtGMDjQMAaPR0JB5urI7I=;
+        b=KssVAodpTmSbaxlfMRCgZXs0IogyXFJExabr6c734Jr4R+ntH2wvAnYgaVPK8agK2B
+         +f3w/Rc7hSo677uXRAdtr6em1qztfEysnRZugdZ6CirM2ssDbZN5b8n9DP7vclm4N5XG
+         5VHWno3OgbP/q0w60u5i1iJtzGk46YpcHJnAUyzt3At6O2QFxxH8JJRZy2LDWDzqKkKv
+         cehrnG8lAk1vMBXwE2L6+ZGTiF6VaII7nMNbsm9Tr//ZoPx+8kus6XPsIn8/vpIvwQE6
+         5ExuvWDhYRqYqeBmuBDAuvpzwfYe9i7V4B5Fl0zJ7Rk1DDmeoGQqjJAo3rq7YFUr6CZD
+         Wq6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760599950; x=1761204750;
+        d=1e100.net; s=20230601; t=1760600028; x=1761204828;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=V65ZkZ395fafRCHZS/zrJWqELR8Nj+iaElKK9I3wBLM=;
-        b=JKTHr/K2uNKVbdo6E4eN5CltZn/+wuyDrowhPgaaioPxkO9JIgJrw03nsoGniyjG69
-         B3VEXZTC2iuJBAdmslRKchboI7H7Etj/MCEPMC00RCyWaZswwwzCo17InalYLeG1VMfH
-         J6GPcXpYwgTCSehoKLsaMQyk/PprJAhajY0lA0gcRlnvWpzKVw/USZDZaCEun3NlM/St
-         nAcJBaBH0wTn/zWfTSCYtqIaOGnorcmgh64g4ABL5yJimjsHrya5NZx2QGQMtw1j93cv
-         sPaBP2adgSy3yhh+0aAlwCzGNMnXggxWn1yRdxqGtN3FhBk1UWx8uCdSExis+5BlcMFb
-         1zCg==
-X-Gm-Message-State: AOJu0YxemibZUB4IEG6kzt1bnYX/lvtCJtYrg8/r1lMoOnxz5vG1Gyvf
-	ku43lFGtLVxE0XjgpxFv8J2secB4PMHrUouTeh9PGTh2nyHXkZP4XhUAlXks8cNQdQM9C8jxCl9
-	eFvs=
-X-Gm-Gg: ASbGncscng08u9C8qW+HmT0MZMpYeVS+LLyoLHYYWms/MLecbrFhZh1L+zwUiFsLZ4I
-	bfSvRg9WDlBzkXkB0YWJfks5JQh62D8TUplvfFW3t0rlXhA2iYXNxhHW5HveAjHfxmRlMDMgxhs
-	dEkZ0Uv8weoDgHVpJRy34BKdwK6KAOEhHIT1XpWU27VCYMki40g+Xgwp84nBumTdtMGboRIteZO
-	6Thi9ZAQFjoLRtmpM1CnNaZRWkqxiQsTPaCOYs1TYIux6k/inUVt3N/RBPSjj/Ov7mLOtEzJyGp
-	g0y5WATbwNadqREpkuIiMbCEXHbqzijmk3rugmlsN74e94U5DhkgKsOW0m7tUy5d0tkTRTkcY/E
-	ZklZ341frBN+PBFKmchRSVp/wN0yjf4btq5w5+7ZaAGT5kpRnVn2iQjBrGsaIj7d3yyysf93iur
-	uPdBI2at/81mdJO6keCEpbfnkcWucLz8X1djh+m9ucbSJ2Sp0Z53e+0MD1BqoezTvkWXVawoeU+
-	2csnCZxgw==
-X-Google-Smtp-Source: AGHT+IGExuecQHMcMThBN04NXiCdhbFFiy3hh6zBX5FNGlfL2Vu5MipJ5VxAO0rkDJmfFxcTc+cS7Q==
-X-Received: by 2002:a05:600d:416a:b0:46e:6339:79d1 with SMTP id 5b1f17b1804b1-46fa9a8b3cbmr212337515e9.5.1760599950240;
-        Thu, 16 Oct 2025 00:32:30 -0700 (PDT)
-Message-ID: <e16e2b62-9c2b-4534-8279-daf986cf438b@suse.com>
-Date: Thu, 16 Oct 2025 09:32:29 +0200
+        bh=13M+/3VJWIBsfQVB3cpUAfRtGMDjQMAaPR0JB5urI7I=;
+        b=Gu6/Kx7JGBxYVNkJDFFbTXSGyW63JSkS+8vZ94O6hSAFb3tI8eDgrzOLcQFeHXnWy4
+         /FLp5wZckCGsk4UOvfyZbXN2DPMR8563y/kqaBRVb2f4rXw6xqYvfqlOCkmmrBxg5DEH
+         QFBXcpACDIGHbAIDF2oiiWyoZvUGkky20ig+OvF3tkFUeOQB7WMcniK9/b2wSNu4k8Fo
+         ZChDvucQh/VhLndCDd2xoTqMeYKQqleeaF6xvuFIgv5yuK7INp4IoOSdl5YQ21H352zk
+         Y1fO4HgpC+XBcyl9dCNmKWPI8KCVPiiByeZBB9yrj+OnUGx/m3MNzRLn6LQxSk2njPjw
+         0EQA==
+X-Gm-Message-State: AOJu0Ywjs/GjgtdLjZoZnorn58YYoO5rIDBfBAsw+MZPH9/2IutXNBZP
+	ngLvJp8c+sEMrXyZTf4tPLZKKoYD9oatEqDTaQxWJVJrA7sVTK5i3dVxFqxbVurHojDHqewUSz0
+	6LOk=
+X-Gm-Gg: ASbGnctV3qtIb6IGx7X77NmgvfqYPEoC6LwtbUyyZ6sqedG8QSy++Gctb9OkiqLEpad
+	Qnd9AOVOV61i1KReu6pHnhLmiAqrb8kWFxye447L4eJwv5jzQO3DRDU8cdV3eiK4mSwNj6/ZAjc
+	2cK+VdmDYFfmSzGmIBw1d7t55+gJ2nPB2ww4o8q55fdpKPWowzGYpcyXF0w/I3Pn80ykS6vkblW
+	FyKL3r+uPgSXrFj6lsmKc9kYHtVSqfcDINdYB2J5XKZWXpJS5nPVGFFibzSdXdEHpMXGP/BtYIG
+	I8YZOfZCl1EhUon0R1L8qwhV6Q2NXTnVUsIxfttPTcQTsQOfZ9HZRGXKIqWugiah/+pq3u26fgW
+	sKa/IklfsGCh9bpqu0Gb7dcuy86XToeNgSwCDy7Xls1ZvqSv4/nwdbgF8XVhOdgNTgr2gaSP5Kd
+	lv87f9SESm2LlZCJINqfw+BdseRxs2sKQlTl10to+IkXBCcgMHh6PAuvYzxKJ1Kfe2cNfMqzI=
+X-Google-Smtp-Source: AGHT+IGGKtxw8FOpuJTAG3en2jjMRpRrwVESgBykcZnUULvUrUKMyLfwxAsdL0Wx/HXgonGvGRPTcw==
+X-Received: by 2002:a05:600d:634d:b0:46e:1f92:49aa with SMTP id 5b1f17b1804b1-46fab65d93cmr142158845e9.15.1760600028569;
+        Thu, 16 Oct 2025 00:33:48 -0700 (PDT)
+Message-ID: <c6ad1e1a-b008-4c2f-8385-e8bcaa7bffbe@suse.com>
+Date: Thu, 16 Oct 2025 09:33:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH for-4.21 04/10] x86/HPET: ignore "stale" IRQs
+Subject: [PATCH 07/10] x86/HPET: move legacy tick IRQ count adjustment
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 References: <8d94abf8-70d1-478c-885e-ff9a960ac72d@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -126,42 +124,32 @@ In-Reply-To: <8d94abf8-70d1-478c-885e-ff9a960ac72d@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Following hpet_detach_channel(), IRQs may still occur: Ones may already
-be in flight (both from before and after the last IRQ migration, i.e. on
-possibly two distinct vectors targeting two different CPUs), and new ones
-may still be raised as long as the channel is enabled.
+If already we play with the IRQ count, we should do so only if we actually
+"consume" the interrupt; normal timer IRQs should not have any adjustment
+done.
 
+Fixes: 353533232730 ("cpuidle: fix the menu governor to enhance IO performance")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-RFC: Previously, when we still used "normal" IRQs, this would only work
-     correctly if there's no shortage of vectors, i.e. if the original
-     hpet_msi_set_affinity()'s call to set_desc_affinity() would succeed.
-     With that changed the patch may not actually be of much help anymore
-     (hence I've also dropped the Fixes: tag again); it was pretty useful
-     prior to that.
+_Why_ we do these adjustments (also elsewhere) I don't reeally know.
 
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -241,8 +241,9 @@ again:
- static void cf_check hpet_interrupt_handler(int irq, void *data)
+@@ -788,13 +788,13 @@ int hpet_broadcast_is_available(void)
+ 
+ int hpet_legacy_irq_tick(void)
  {
-     struct hpet_event_channel *ch = data;
-+    unsigned int cpu = smp_processor_id();
- 
 -    this_cpu(irq_count)--;
-+    per_cpu(irq_count, cpu)--;
+-
+     if ( !hpet_events ||
+          (hpet_events->flags & (HPET_EVT_DISABLE|HPET_EVT_LEGACY)) !=
+          HPET_EVT_LEGACY )
+         return 0;
  
-     if ( !ch->event_handler )
-     {
-@@ -250,6 +251,9 @@ static void cf_check hpet_interrupt_hand
-         return;
-     }
- 
-+    if ( ch->cpu != cpu )
-+        return;
++    this_cpu(irq_count)--;
 +
-     ch->event_handler(ch);
- }
+     handle_hpet_broadcast(hpet_events);
  
+     return 1;
 
 
