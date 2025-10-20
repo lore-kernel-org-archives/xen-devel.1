@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34419CCD199
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 16:06:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1146655.1479107 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC15CCD199
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 16:09:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1146722.1479118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAsOZ-0006GN-Kg; Mon, 20 Oct 2025 16:06:03 +0000
+	id 1vAsS7-0007jX-3i; Mon, 20 Oct 2025 16:09:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1146655.1479107; Mon, 20 Oct 2025 16:06:03 +0000
+Received: by outflank-mailman (output) from mailman id 1146722.1479118; Mon, 20 Oct 2025 16:09:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAsOZ-0006GG-Hz; Mon, 20 Oct 2025 16:06:03 +0000
-Received: by outflank-mailman (input) for mailman id 1146655;
- Mon, 20 Oct 2025 16:06:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7iz2=45=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vAsOY-0006DT-CM
- for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 16:06:02 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id abc7a0be-adce-11f0-980a-7dc792cee155;
- Mon, 20 Oct 2025 18:06:00 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4710683a644so40787155e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 09:06:00 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427f009a976sm16216312f8f.32.2025.10.20.09.05.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 09:05:59 -0700 (PDT)
+	id 1vAsS7-0007jQ-0a; Mon, 20 Oct 2025 16:09:43 +0000
+Received: by outflank-mailman (input) for mailman id 1146722;
+ Mon, 20 Oct 2025 16:09:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Li3P=45=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vAsHD-0004DQ-4N
+ for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 15:58:27 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9cfef3c2-adcd-11f0-9d15-b5c5bf9af7f9;
+ Mon, 20 Oct 2025 17:58:26 +0200 (CEST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-637e74e9104so6216969a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 08:58:26 -0700 (PDT)
+Received: from fedora (user-109-243-146-38.play-internet.pl. [109.243.146.38])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-63c48ab560esm6966067a12.12.2025.10.20.08.58.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 08:58:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,99 +47,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: abc7a0be-adce-11f0-980a-7dc792cee155
+X-Inumbo-ID: 9cfef3c2-adcd-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760976360; x=1761581160; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=vq3bhDlm8IpAKVIazdcJpU7iVvI7XNw/vJYPDKjfEf4=;
-        b=Gqq49ZcDawyx2oILAeodSdsc7cZTMHk4W2gG934i84L5fGOdfAsPAhZB9TV/LflK6+
-         3RDAFuqkGrBV7G3Yn+mUpX83f+HHfESN70kr3wY2cGf/mmifOsX50lJj9T6opyhaBO7J
-         YQ4K9M4YajvXhItAupVfPHvBdnoWivgD+33ZU24JKKv9fXkILOQW3B8L571yhxb3MtYP
-         qVJW08Sg9fhUvMrNRtc14PZ4lo/cvu4M3KxI+G2vluBCo+f0J65yC6obKnTmmD+HSfEy
-         3F+89nhaqHlWAb5OZqY4c++aN9Oc6UaKPbCntRKDjrsBaCSGHu3Z92d8URUDtVg4ohUk
-         Xqdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760976360; x=1761581160;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1760975905; x=1761580705; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vq3bhDlm8IpAKVIazdcJpU7iVvI7XNw/vJYPDKjfEf4=;
-        b=YTVc6Y35HSZMyXs2vFTF4nIMUCbWKYCt9QVmk4KWsXxdvs7GaXi3MpmhVMr5+7kauY
-         2KCW08OSeyobUZUtmUPI+XKX/rtePwd08h/QbnfiQYLdL6JQd1MvcEerX8UZA6ir5iHw
-         mUHRLjicLwDY6Z5+onuu0Jo0HGl/C3eQFhwOJqUzT1NBS2hcrUr2Y2/AC+qnDCJrZubr
-         /nMTnq547EIv5JP49H9L8yjdUWUsopdblS7elM/d2W97NX+ptKzayBsLzZc5fswlVtbM
-         BzgUTEZQMREHFLEKNjUBUKNEYVflmGZbHu4DdB8ondXlutp3i/BPGvaAkQaTC18WF92M
-         ne9w==
-X-Forwarded-Encrypted: i=1; AJvYcCWl4o188tGCfjh8h7Y/nEPaptys6Xem2RngWhu1NjTuXOkS+/h8aBwA2IYyfEtryGglP9bBea+VVDE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzkX/6gkS1ZwvhX7cYWKQrKcqVDUTtPdiDF2Gif086LtOQt9pMj
-	yAuYOA1wds2iXhVrdEA7YSGT97uSg0dK4bqysfo5gwZDJBmgsTWee5iQ+DBByXcfHA==
-X-Gm-Gg: ASbGncutZ0NwpJUShaD1fwMSsbZatNjkoEn4Ky3ioz3dcB+hxQv7NfiOi1Hb5mc4HWP
-	2BIlXtCUMNimVXgjH2uM/F4rTmUQtqVs+RtazRCNitO3ZRj3+Gc0Kq1YP35Zi0O8/F8GoAzXEzg
-	b8PBYLcq1enXMHQEi5hO5ZUN08gvwEDKF771MxbdFGY8aFXqNmpV0AvLj1rO3t/oQC0odohJDt4
-	ee3LTgAeoqQuZpEIiEREuAbD3RHC36E97owwzm9vdEQCupb+ir42PfRuS6uL5b4d/lW8yJJvG++
-	c4E1z0K33DSOXtB7Ofn1dUhI1e6w26QP1c+vmGlJnlX+oQAFKcFVSa1laSNMTFDWKbhGup49RxZ
-	RZaslgSEi8vgF63AafcLHmeXZzbq2uw9ZV59EOLeAmXfqOJBYqGux8cndv/Rz6iJwmbFTN8aZ3S
-	zXaLHDwPhfyjqHHjZmQHh3Qxnv4T4eQjYyJEsCWHc3WpoZEA1/UYTfs7jBYv3SJ6UWt4v147w=
-X-Google-Smtp-Source: AGHT+IGZiFTe9Ohj1H5Wx/2HL1A4WoHx8ldE0tOu1qPCOLVYen//rj4yvzQsJJfCQRKs8I0McTinpg==
-X-Received: by 2002:a05:600c:45c9:b0:46e:37d5:dbed with SMTP id 5b1f17b1804b1-471172d7ee5mr104765715e9.12.1760976360093;
-        Mon, 20 Oct 2025 09:06:00 -0700 (PDT)
-Message-ID: <9bd75b6b-4db2-494d-8926-416d533b89d3@suse.com>
-Date: Mon, 20 Oct 2025 18:05:59 +0200
+        bh=Cxtv3BMlv21jdp4Ip+HjiyNuW5KsWMFtWda7wHvVoac=;
+        b=CsBk/M7DOc4rBsp3ZF7kBYm/jBGW70uoqtsdQKTZ6qXxoZHxhi+picsHiMGBKIPjit
+         41E2LYgFlWqAVqwMNoT9d9abHt/nxPNbJhk5N+DiQkM3h6ecz7KXL40XztW1RDZVxf4b
+         JVAA1JGKlR0QdItr8xyTtcFho6T7wSsYEEqW8QhOasSH5tyhVIxLnNYbl1NsyOBLvsvz
+         W6UDvcQbDIhNxKAmXvYAsD5pHiszC3rpMwqWV7O7udNz9C1Z3o6NUrrc8CI0lwSfJmMv
+         ye7mmmwp7fa62SRUn5nUH/zYSmLq5TL8IlFe6WsrVBvs18sBvaC0vPYLzPWw66MpzCwk
+         D5pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1760975905; x=1761580705;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Cxtv3BMlv21jdp4Ip+HjiyNuW5KsWMFtWda7wHvVoac=;
+        b=ZUmllFLwKRozhqMwedSGc2in6Mc6gwIb941nUp7sq+wN6Xu0xOVtzoztuTb+OKBF4Z
+         bIo1kyseGJL09jx7FYZbD05Ln4PinGxeNGe0Gn1wnR53R8iPEC+6ETZPk8NRNs2xWMNv
+         S8abHySf+tAQvgOq0lLRHwkN9VuGyu0/aJ+UwIROcG+jGUZ1ynbK6qk3yRTxBQnSGfTG
+         IQcyneyZ9tJYlL8D8FwEYI2OrYALP7w1ckDi+eA+GYRwUFW9jEK3JF9WVfp2/XquMUGX
+         2ATL9DXb/4QFa7Ib9rMPW7tbEG8mtlXIz3LgRoTt+ATX06psduJsNouF3n8m9dDm0xVH
+         4nJw==
+X-Gm-Message-State: AOJu0Yzcdjo8N/84Ox8wka1113BTFzqGAjT4yYMkPpNG/26ozH/S/EbZ
+	LXc6UIwvE8Up+wcfd6HwNthdPSpQCZmV5Pap9P2oFlM4zsBX9dqfgBQNdEQzRA==
+X-Gm-Gg: ASbGncv1zyqcMzJBl8Nu9UJPAjFZlNiSa5ELxE1oEIeXKyYxV2Ju0t26xojtxB+TGxX
+	RbzNv+kkEAEJZzdbjyV7/j/faXX75juZ+tRZc0vO9z3I68BIUndhC/5IliH5tJKlffqNj4gKHS2
+	VguWClcbV4UQEGbH/XRpibC0xOeiiR5PyA/Tl8LG1zkZe1Fs26mtV2vRBARpwkJ20axLwSfKDvz
+	O9Mpzp0eU6xvwdzn0Zpvj3sr9GeuUV+dfOYSeW5VMwNrk+tHLWlqzM0kkoQIoz/nxGwi9FW+QqP
+	8QsX+XhB33wyuyYsoKk0M58MvWrDAgdUNN3sg5E2YKHdOTWUxc36g6RbOmkAmas2qWPiAbj6s4w
+	PUjojlEvcszw/2zObMTUJB9Ie58n+SE1n7yzihTZh09lUJXDrQYVGOBUod6iDJbRG9k6UBMq7Ey
+	c3YGdwvgoLu67EIvF+RJfBuLnA4yQn5Pc9ElRLuO5YC1P+Qs8=
+X-Google-Smtp-Source: AGHT+IF5ucbhQzw4jIkyq+gtZKbaydALhhXv5GV/+yNefqCo4pLvofWsWifLfqFebcjWNU0rfjICjQ==
+X-Received: by 2002:a05:6402:5c8:b0:639:6bc8:c7bd with SMTP id 4fb4d7f45d1cf-63c1f645c25mr12323874a12.15.1760975905504;
+        Mon, 20 Oct 2025 08:58:25 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [for 4.22 v5 15/18] xen/riscv: implement put_page()
+Date: Mon, 20 Oct 2025 17:57:58 +0200
+Message-ID: <6b2fa23a871eb6a8405265dcf3bbac51f29c84b6.1760974017.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <cover.1760974017.git.oleksii.kurochko@gmail.com>
+References: <cover.1760974017.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-4.21?] xl: drop redundant return value check from
- list_domains_details()
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <13d8a3ff-ed58-4b35-ae3c-0411cd34f7b8@suse.com>
- <3f98f469-7da1-4356-916c-a4523f887001@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <3f98f469-7da1-4356-916c-a4523f887001@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 20.10.2025 17:56, Oleksii Kurochko wrote:
-> 
-> On 10/20/25 1:33 PM, Jan Beulich wrote:
->> The check that was added to address a Coverity report renderned another,
->> later check dead, which Coverity again complains about.
->>
->> Fixes: d0193c6d6716 ("tools/xl: check return value of printf_info_one_json() in list_domains_details()")
->> Coverity ID: 1667251
->> Signed-off-by: Jan Beulich<jbeulich@suse.com>
-> 
-> Release-Acked-by: Oleksii Kurochko<oleksii.kurochko@gmail.com>
+Implement put_page(), as it will be used by  p2m_put_*-related code.
 
-Thanks, but we'll want to take Roger's fix (which you also did ack).
+Although CONFIG_STATIC_MEMORY has not yet been introduced for RISC-V,
+a stub for PGC_static is added to avoid cluttering the code of
+put_page() with #ifdefs.
 
-Jan
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in V5:
+ - Correct code style of do-while loop in put_page().
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+---
+Changes in V4:
+ - Update the comment message:
+   s/p2m_put_code/p2m_put_*-related code.
+   s/put_page_nr/put_page.
+---
+ xen/arch/riscv/include/asm/mm.h |  7 +++++++
+ xen/arch/riscv/mm.c             | 24 +++++++++++++++++++-----
+ 2 files changed, 26 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index dd8cdc9782..0503c92e6c 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -264,6 +264,13 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ /* Page is Xen heap? */
+ #define _PGC_xen_heap     PG_shift(2)
+ #define PGC_xen_heap      PG_mask(1, 2)
++#ifdef CONFIG_STATIC_MEMORY
++/* Page is static memory */
++#define _PGC_static       PG_shift(3)
++#define PGC_static        PG_mask(1, 3)
++#else
++#define PGC_static     0
++#endif
+ /* Page is broken? */
+ #define _PGC_broken       PG_shift(7)
+ #define PGC_broken        PG_mask(1, 7)
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 1ef015f179..2e42293986 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -362,11 +362,6 @@ unsigned long __init calc_phys_offset(void)
+     return phys_offset;
+ }
+ 
+-void put_page(struct page_info *page)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ void arch_dump_shared_mem_info(void)
+ {
+     BUG_ON("unimplemented");
+@@ -627,3 +622,22 @@ void flush_page_to_ram(unsigned long mfn, bool sync_icache)
+     if ( sync_icache )
+         invalidate_icache();
+ }
++
++void put_page(struct page_info *page)
++{
++    unsigned long nx, x, y = page->count_info;
++
++    do {
++        ASSERT((y & PGC_count_mask) >= 1);
++        x  = y;
++        nx = x - 1;
++    } while ( unlikely((y = cmpxchg(&page->count_info, x, nx)) != x) );
++
++    if ( unlikely((nx & PGC_count_mask) == 0) )
++    {
++        if ( unlikely(nx & PGC_static) )
++            free_domstatic_page(page);
++        else
++            free_domheap_page(page);
++    }
++}
+-- 
+2.51.0
+
 
