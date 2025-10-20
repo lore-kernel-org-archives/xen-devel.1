@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0736BCCD193
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 12:21:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1146275.1478714 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F99BCCD199
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 13:20:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1146292.1478778 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAotE-000110-2P; Mon, 20 Oct 2025 12:21:28 +0000
+	id 1vApo0-00019z-Jt; Mon, 20 Oct 2025 13:20:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1146275.1478714; Mon, 20 Oct 2025 12:21:28 +0000
+Received: by outflank-mailman (output) from mailman id 1146292.1478778; Mon, 20 Oct 2025 13:20:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAotD-00010t-VD; Mon, 20 Oct 2025 12:21:27 +0000
-Received: by outflank-mailman (input) for mailman id 1146275;
- Mon, 20 Oct 2025 12:21:26 +0000
+	id 1vApo0-00019o-Fl; Mon, 20 Oct 2025 13:20:08 +0000
+Received: by outflank-mailman (input) for mailman id 1146292;
+ Mon, 20 Oct 2025 13:20:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=abR8=45=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vAotC-00010n-5G
- for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 12:21:26 +0000
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [2a01:111:f403:c107::1])
+ <SRS0=ZoK0=45=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1vApnz-0007j7-8I
+ for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 13:20:07 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 480f2340-adaf-11f0-980a-7dc792cee155;
- Mon, 20 Oct 2025 14:21:20 +0200 (CEST)
-Received: from DM6PR03MB5227.namprd03.prod.outlook.com (2603:10b6:5:247::22)
- by SA6PR03MB7688.namprd03.prod.outlook.com (2603:10b6:806:440::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Mon, 20 Oct
- 2025 12:21:16 +0000
-Received: from DM6PR03MB5227.namprd03.prod.outlook.com
- ([fe80::c9a0:563d:c344:aec2]) by DM6PR03MB5227.namprd03.prod.outlook.com
- ([fe80::c9a0:563d:c344:aec2%5]) with mapi id 15.20.9228.016; Mon, 20 Oct 2025
- 12:21:16 +0000
+ id 7e1128d1-adb7-11f0-980a-7dc792cee155;
+ Mon, 20 Oct 2025 15:20:05 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-42421b1514fso2728824f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 06:20:05 -0700 (PDT)
+Received: from localhost.localdomain (host-78-149-11-196.as13285.net.
+ [78.149.11.196]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-427ea5b3c65sm15267835f8f.15.2025.10.20.06.20.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 06:20:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,165 +47,211 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 480f2340-adaf-11f0-980a-7dc792cee155
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Xoz8ZYlsPE9MHCrFKzHGagRH6WRYIIOm9GtMNoFHauMHj5IfwX01GV0O46P4bZo1dv3duZvbyH1SDzyhvvV87ciAXHwQnVcPHKd1nkozNmZ1wTnWHAaIHXaUCu01HC0xT9/pCCih1bKvEzfY/fIpkslyIAsnylaC6IszZ7UmvfYrMtGRnQKDlO2Gm4qUjPSr96CzHjo/tqTDBabBLUbGtv/axg6tw7o1P+XLZrkJ5eiFq2OK6oGhVMhZUO5b5N9Yegn16W8wvekM4FlWFEowlm6XQ85+HrJVXOQXQTPRf2a/YT87c5zRH0pGzJQGuyhfNOP+rwrmhXD/oLi5KHwILw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W8lGfR1TvN2D25hNGTy1nzdUjimJEtQYwoLxwiFrF3Y=;
- b=QBTQUPk9vdLEuvK2N/pCzIYuujRqIW7XkOhZBOHVTKXgT70fiGpJVAMyU/y0g+21nsF8u4hVOZfkYwqEhv/1ijkZAy7csTxd0NSazmeMo0/lMgaVx+O8H9bvfHiiT0Ybx5+CrGJjfqIVilfCJXPUg1pzRrIFiPrVRi1rbp0ZcC/sLyOtceYCcM/if2dvlXMvwGXR/K2YBLAs0ziA2/ShAc5WT3Rh22PL1NL6F4UCB/g+0Xlq7REW9z5AB/M5ehxOJoD9sHVanob84yFy7riuSNDXkNNP1xU+v7oCs7bRSXcCybpO4Di36ftHxOW+2LBtCGQrJIONDim4ROe6/a0X4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W8lGfR1TvN2D25hNGTy1nzdUjimJEtQYwoLxwiFrF3Y=;
- b=aJRqeUQgrA/T7UMn8BFa4PpaStMhx4KNfhJt0vC0xnPxneVCmLwL5dQuF0bMn80sGLAnG/61rtzlU8lPY/6aeWs/wXgOZ4UonW3oEsIRI/64dEe54RhtAZ3YNt0Oo/xQim++x72yXKB0KeT/Er8UO6z3H0yeRMfnlFgOx0YLgBs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: oleksii.kurochko@gmail.com,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH for-4.21] tools/xl: fix for dead code in list_domains_details()
-Date: Mon, 20 Oct 2025 13:19:59 +0100
-Message-ID: <20251020121959.54337-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.51.0
+X-Inumbo-ID: 7e1128d1-adb7-11f0-980a-7dc792cee155
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1760966405; x=1761571205; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=A7U1lvFhiTkuuq1fJOCE2O4Cy9uGnElIdZlJyTgO8ts=;
+        b=ko2hxvCooupRyF8dxh/FUnLeLK38/sWeG2E1/wHlHtZADmcKo4aQkUplJyu5wm2VSi
+         RdsKtWzUfjjBdoLeFLuztavppwo4oCsLMHAAHFYjfgkkfblM+pyGRR6NYN61VN9EkSNz
+         auLCXBLybyrL5vitUqgzSm2taRkdwsIUZHbmA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1760966405; x=1761571205;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=A7U1lvFhiTkuuq1fJOCE2O4Cy9uGnElIdZlJyTgO8ts=;
+        b=t7qsDktxJZodJ/ZR3CYR14Ihh/kHNow7cjFsdpffmsLhqIHBeJQ3yqy0Z+WcLo9/79
+         swQbV31/126K+/dpqNZorhsWolMPNRUNURKax28kjK30n/TCXf0Z4IFPLz+H4igJm3jI
+         4PHq3MSKvEbSDGxunHcdiGRa43KjEIeyWFyEjgtNwwcJ8rFhUZLEqkDFQWBPpePW3ods
+         0+b8LAHQZMZea/Y0Duoh3k9HNQMmDkRpnl99KR+dCu3BRDfIFz+ONcrgtki4afRAeaTO
+         HvX34gY7tee7IS69IEJDzRP1x3M65KfYRHEEJF/js+9pEXq7QPjnuWD/cnU4vakCUsUc
+         Dz8A==
+X-Gm-Message-State: AOJu0Ywq/jDUY7yxo/huuIplVa6/VLmabeXjFsoSWjCc5rW/Y2fla/BZ
+	D/L++uclKd9nYmPyIuT3hgaQU6N3nIq4I5jc9aN2YF29dg7PbFphwMy8bDOwXb2EvRUStbndatj
+	IZD+tO741bA==
+X-Gm-Gg: ASbGncvCyTeu5Lw7WG8xUvwrhNwSR2cTBlqYVBZx3zz7yk9Dy3gvYATwN++jmByoqB4
+	k+s3Q6M7M8ZikufsiHMJvA0AkMegqPrQGH89mmvOjit4BCDnVC3tEUwIrUnGTA6St0puvRXUrYF
+	yRcyrfZ93fiy29vAYg+ozdPV2nuwa2aMQxuzhXyMlUQhmTrwJkEL0FrUy6Jooh5z3Z9Eiv3Njoj
+	KIMZiLwWHm09Va/qUNOxeHxN8DXQ4xH/N9fwLlnoVo3tmXkXek78//UYtZtJTVa8AeXCbqxyiHY
+	t+ZLLS74QomDOkqGXUCw2IefHURDGEp10hBJGF02sTdVElBxpwEu/iNiRoWgrZL9m7d4jBZoUPG
+	LJsq3E3gXmgopeb2Bl3j4h+1mP9PZFEF64GLci6V85W0dw5iJHD2K0hB24AQ5Q8wW2l0f9tZC2E
+	CTfjFWNNi9Ht/Wi1TJKbUawF3N0XlyXD1de4ujh8Brs/l/wC2XjSw=
+X-Google-Smtp-Source: AGHT+IGt6etmuW+YxtwxSmoDBmcjvGWaKMcSQvb4fjMnId8i03Gd+DIzD2e48xJxhfNX75dr+WafbQ==
+X-Received: by 2002:a05:6000:2884:b0:428:3f70:4b2 with SMTP id ffacd0b85a97d-4283f70078cmr5018119f8f.63.1760966404696;
+        Mon, 20 Oct 2025 06:20:04 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 5/5] x86/ucode: Relax digest check when Entrysign is fixed in firmware
+Date: Mon, 20 Oct 2025 14:19:55 +0100
+Message-Id: <20251020131955.2928261-6-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251020131955.2928261-1-andrew.cooper3@citrix.com>
+References: <20251020131955.2928261-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA2P292CA0003.ESPP292.PROD.OUTLOOK.COM
- (2603:10a6:250:1::20) To DM6PR03MB5227.namprd03.prod.outlook.com
- (2603:10b6:5:247::22)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR03MB5227:EE_|SA6PR03MB7688:EE_
-X-MS-Office365-Filtering-Correlation-Id: 455f8e07-a4c8-4a50-1b7f-08de0fd32a8c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?YnVvOUZ2eFhlckdYUVBjbERhQmRxaUd0Znk4WGxYdzljME1YRmI5Z1VnMXhH?=
- =?utf-8?B?WFlMRk1EbzZQRmxPUHJjbnlmLzFTQyt5Ryttb3YvZE16cGJYSVladWgyd3Yz?=
- =?utf-8?B?T1ZvTnlDOXB0TVdqUE5kaWV6N2Q3YUdHTzBGdEtQdUY0ZmpDS3RENjdGWWlw?=
- =?utf-8?B?RzNwQVlMRHZmNThOUXBwUkdSOTFBdFJ4Q20wbzhkazV6S2g0SWZSV1R1bHJ4?=
- =?utf-8?B?am5Na0h2WmRwTFJhRWxrYU5ELzVJWWd5UUUvYlBSZXpBTFFxZXQvQXNTN2hI?=
- =?utf-8?B?M2h6bm5QWXlRK1RkcU93cmVpckJPWmhxMFRmYmVNT0Y2dmNGMWM3WFRlQURK?=
- =?utf-8?B?RVhsNUlJazJPMnQwdkdkQWFydnMvU0lSbXpIandZM3RTSDRpZW9SVVVGbStP?=
- =?utf-8?B?am9BaVFIWDBqWTJiWUpKek1ONURlL0FxR2ZrRWMxMmYwTTk3MFROTy9BTzBj?=
- =?utf-8?B?dXZtR2gyOWJpQS96SDhLck53QS94MzJrWDN3bmp3NWQ1Z3BQMnpiZjlOM2hD?=
- =?utf-8?B?RkJRNSt1MkJHV1lpRWg0MmwrdnNsVERVS2g2cG9ZZjlWK2tNcHZ2eDRyUWt6?=
- =?utf-8?B?dTExdXpjZ0RhTTlzN1JIOXJna3VQVUxrWkpsaVRUSXh2RDdRWWMySitWNVdI?=
- =?utf-8?B?VW9rSlRraDQxeFo4cGd4c3UwMTRrcTZ4NlZLa0JpSlQ2NEZoSVlMYjVLdmpk?=
- =?utf-8?B?MloyZ0lab2lmTnpSbVU5ZnFkZEdvTFRMcXVuOHJKeGt2bEhJU2tseis3a3V6?=
- =?utf-8?B?RUJSaC92UGVWZjNTL3pLWDhoanZPTHZFVGdjUmJFMFppY2V3ZlRVRTR3L2Ix?=
- =?utf-8?B?MFVFQmR5Y0s5MENwaXlXaEM5UjQ3RWZPejlOWXVmQXVJck95R1BkZGd0ckNM?=
- =?utf-8?B?MXAyaEczZ2NqSFhmTnlqSTRBeFlEdnFUdytUbHM4RGUwb3RUV0lNUzQ0UDRq?=
- =?utf-8?B?NzdwdnJ1Wi9oeFZSU3ZzVklRQVlkeGIxeTJ6c2lFUFMweVhsQTZObHdqK0VZ?=
- =?utf-8?B?dHNQN1Z3bDNwSGxGdEY2bzJ2UDFmY2dTYjdDZG1JUWh3a0JVS1pLUk4yenor?=
- =?utf-8?B?NWc5WUU1WHY3Um9mdGprS0pRVkU3YW5JWk9HTDZMUkZtUzJlbzdIeDlFNXJS?=
- =?utf-8?B?d0Ivd0MvWUVRb014OHN1ai9Pd0FBeWN5bWFiUnZ1TzJac2lreTBJYTNWbW9Z?=
- =?utf-8?B?bk4ySnNYa0ZrQkt2bFJreGV0TENuZUlUZGkzZ1Z4MlUwSTQwelRlSEttVkIx?=
- =?utf-8?B?UmFTMDNZMmw1clhkWlJoaGszd0VxTnpOcVRveTdGVTgyNk1oNDZZVlJWTndr?=
- =?utf-8?B?K2FCNlFqb0xOYm9ZNExOdjBrMkRxTkFtOGR0WGEvZWx0Q3RLeHZlZlZXUmV3?=
- =?utf-8?B?a0V3eXh6NkJFckVSV2N2V3hBVjF0SWZKRWlrNkt0L0NaM3NyV1hORENHMERR?=
- =?utf-8?B?eGNXLzJ6L3VsdFNlekhOcVQxOXZNQ1R1TFljaG9ibkp5cEVRVFo3aFV1V255?=
- =?utf-8?B?USsvYlg1ciswOGd2WnRxb1RWWHFFbzh6V0tJTExSK3ZleXJrblRhblgxSFhV?=
- =?utf-8?B?eks1WU5ONndrNkpHSXMzbWR3Z1RveFZRS3F6MEIyMWZhWmFXSnpFMTBROVNu?=
- =?utf-8?B?dk1Ba2pJOFFlV3Bqd3FpcjJyZUF4R00wNjVoSjBub004NitDVmVHOU95MlYx?=
- =?utf-8?B?dkl1NFNQKzZTd0o2VlRUdTIrL1ZabEdWbDhEalBzYnFwVlBCeXhaOWY1YW1F?=
- =?utf-8?B?ZnUxaC9hK3p5RDJlZ1JWS0VZcTVGS3NRT0V1MWVreTdlNGpwWlVrTGlvT3Yz?=
- =?utf-8?B?cGxSeE5NS3o3aEMxVmJEWkN1c3dXaDl1QTJaZ2RnaFJ4N3ZUYVRmNU8rVU9h?=
- =?utf-8?B?cDc4a2h2NEFzQXIrajczazNPRkhZVkN4bWxjaXJPVzZ0aU5SWldoYzNhTVhL?=
- =?utf-8?Q?TkPO8JOQd1njNJ1Q46C+shlOPDF8+oPk?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR03MB5227.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RXlqUWRmWjNjdU9SaW8xV3BqRDgwelhwNEZjSkREWHl1OEt2OGREVlFVMDdv?=
- =?utf-8?B?MTF0RFg2Q2hCS3FFSUpndXBuaTJlQ2xwdEw0THhzblBjbS9yVjBkLzVHQ0xr?=
- =?utf-8?B?S2swTE5NUjBwK3FCQ2ZGck4wZWthMitLNXpCTWMrV1Z0VnlOK0tUOXh4bjd1?=
- =?utf-8?B?ajRzQXZtRlczZFV3REprRkpSRmg4bVVpa21BdFBxQmdabGl1UkVQYlhZM0g0?=
- =?utf-8?B?cVdIY1MxZGkvSGtkUXFvQXZjSnUrTFhFdG52aUxLWkVPblFRbVZWQStYNUZY?=
- =?utf-8?B?NzBwYzB5a282Y2F0ZUFQb1hsbDc5K2Vpd2NDbzRLQXZzUmhtTlQyN2NzZ0Ur?=
- =?utf-8?B?eE9oT01IT0xVZWdzYTZ6WUNUOWUzZjdHKzFHWW9CYmg3WjFuaGNBSy8wclFO?=
- =?utf-8?B?WlRNNzIxS2JOM3BjalJGVkNYUDd1VGY0SkJiSTVWY2FjWFd2SEZmdU1zdERO?=
- =?utf-8?B?aFptcG5qZHd5R2JCREhETDdzTUpqNDZBMk1nVzdjNDk5cDREUzdZZS9aaHNy?=
- =?utf-8?B?eE5vSjVlNm95MU1JVVZTZ2dWQXdyZ0FYblh6U2hCNlQ3TUxSUjlTdTliY2gr?=
- =?utf-8?B?Ly9GWml4ZzZFRzFHV3ErYzRicFN4c0tvN2ZsOTJmeGlvTTdtSFc4ZzF1MXgz?=
- =?utf-8?B?cFJZWDFCaEZ6NGFySGlSZ2FhcG51aFJwdUZwSWdlaE9oRWVjYzVJdFdUdytO?=
- =?utf-8?B?WGhaOHFCeUpMQ2dxQlNIU0owTUVXTHc4dUlyaGpRVHVLalIvakcwcHpISnc4?=
- =?utf-8?B?YmFyaGFWZjlVUkVLRHNlOGhWZnN5UFVPQXExMXpSRjAvWGdlZWk3V2lMYXkx?=
- =?utf-8?B?am4wNmVMaTQ0RkM2SURWSjl5R0RuZXhmVmZCTDlUaG1IR09lZHVBaDhTZTRm?=
- =?utf-8?B?MTl3VVlEY0UwYTdiamJ6cTRFTlgxV2FWcDNFaUpDZENEK1h6bjVOZCtxazlu?=
- =?utf-8?B?K1VNdEMxRThBUTdVMUEwMkFhalowcTNPUnNHT1ZRRmFXMVltWDFuY3NMcnJj?=
- =?utf-8?B?OHhGOE9ibFNqdzZGT3NpVUs1V1JnOTdGb3JXMTdZV1ZIQlRaUW9vVjVjZ29y?=
- =?utf-8?B?ejF0MU85Y1VlZHVMZUJ5U25lUFlyeVUraGV1c1loTHJOZHN2RkF2SzVVQitx?=
- =?utf-8?B?eVlWNEdYdHE3Z2x3N0Y0NWtXZnJqeXdFRHdxRWY5QnJHYkVxRGZscFNGdDRq?=
- =?utf-8?B?dXU5YlkzczBnVXZlQ3Z1VmpGbGRON1ByWnR2d1Y5SUJQeVI5RCs1UHRETVZo?=
- =?utf-8?B?SFVjWk5Md0o1TWVmVFQvWlo5YUtRUnhWdnZ1OVVmb2xUVzNEQTMwRnhoZnNH?=
- =?utf-8?B?VUdRS1p6cllRQnJ3Sk5iUXlDQnB6Q0xGRWhWbTRJdkJjSDFPcXAxai9sMHBu?=
- =?utf-8?B?eVNUQjZ1UVRDa3VrUHRLQzVYS29iMDBRZ1dTRi9yckl6ekxnS2pOVnRrZEVN?=
- =?utf-8?B?SVVML3dDdVVEdGgxendkb2ZURDR2OVlrbDRhdFFBVEdEVXBTRGNXaWRrTm9z?=
- =?utf-8?B?NG1abXNudDlnVWJzU0gxb1FDWmFvWnNRaCtKUHFrc2F5UHYwQlRVRk0zVTJi?=
- =?utf-8?B?MXpRbjBFUzZHWjRjd0RDWUMwSEk1ME5sNWg1MmhPaXVkeDZjT3VXWTdpc29z?=
- =?utf-8?B?THRMQjJuZkZBZXYrUjZZNFdkcksvcWl1SS8veUlyWS9jZjVOb2gyR01FYktq?=
- =?utf-8?B?dno0RHBuVlpZa3JodmpUbXlNMjNUYmxCTTk3Y3pSa0pPVjdTZ0JPdUFwYjd4?=
- =?utf-8?B?aDNjQWtCZWpodFQyS253aEd4UG5CR2VvN0IzQWxITU9TZUdDbHhWb045TVZl?=
- =?utf-8?B?ZWpPaEpsaktEdXl6dWkrOFJ5TEFEakd0ZTVNVnB6NVNjYU5jYzVmR0plNFdB?=
- =?utf-8?B?N1dWWi95ajBEaE9yZ2tQc1NqSXdCL3hzeTh4MktZeW9USzdYWGE4Zi8xRE1I?=
- =?utf-8?B?QTZNNVRxUWVPZ3U0Zjd3WFFINFJyaW5ZZVpQV1NzMDF2UU0zZi92ZEhZNmFk?=
- =?utf-8?B?UXcrSVgzaE82U0dscHowQmdTTEw4emMrL1JOUXJ0SWNjUXpKajFKRUYyS3pu?=
- =?utf-8?B?anhnQmtXSTBzZUxtcFd2ZzdON3djLzFFdFQ4c0hPaVNJcGlsTUdSVkVwMCt5?=
- =?utf-8?Q?I0079NPbtO+hpL9/pfCdW5FBT?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 455f8e07-a4c8-4a50-1b7f-08de0fd32a8c
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR03MB5227.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 12:21:16.1626
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7AdceMrukc1RADLJ4JqrwbeYB439nAUC742p2UKPSn3gl3ZQYeQW7EEb62jGcD9NvIW6sWOlAZw1jtOgg6gJFw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR03MB7688
 
-Commit d0193c6d6716 introduced checking for the return value of
-printf_info_one_json(), but failed to remove a further check down, which
-now Coverity complains is dead code.
+When Entrysign has been mitigated in firwmare, it is believed to be safe to
+pass blobs to the CPU again.  This avoids us needing to update the digest
+table for new microcodes.
 
-The correct fix is to make the call to json_object_array_add() conditional
-on printf_info_one_json() having been successful, so that the further call
-to libxl_domain_config_dispose() is not avoided.
+Relax the digest check when firmware looks to be up to date, and leave behind
+a clear message when not.
 
-CID: 1667251
-Fixes: d0193c6d6716 ("tools/xl: check return value of printf_info_one_json() in list_domains_details()")
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+This is best-effort only.  If a malicious microcode has been loaded prior to
+Xen running, then all bets are off.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-As with previous fixes, needs to be considered for 4.21.
----
- tools/xl/xl_info.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
-index dbb682cc52a6..98fc879e636c 100644
---- a/tools/xl/xl_info.c
-+++ b/tools/xl/xl_info.c
-@@ -584,9 +584,8 @@ static void list_domains_details(const libxl_dominfo *info, int nb_domain)
- #ifdef HAVE_LIBJSONC
-             json_object *jso_value;
-             rc = printf_info_one_json(&jso_value, info[i].domid, &d_config);
--            if (rc)
--                goto out;
--            json_object_array_add(jso, jso_value);
-+            if (!rc)
-+                json_object_array_add(jso, jso_value);
- #elif defined(HAVE_LIBYAJL)
-             s = printf_info_one_json(hand, info[i].domid, &d_config);
+I need to double check the revision table.  I think I need to submit a
+correction to Linux first.
+---
+ xen/arch/x86/cpu/microcode/amd.c     | 81 +++++++++++++++++++++++++++-
+ xen/arch/x86/cpu/microcode/core.c    |  2 +
+ xen/arch/x86/cpu/microcode/private.h |  2 +
+ 3 files changed, 84 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index 30bddc89da0a..b5b55b7a00cd 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -101,6 +101,7 @@ static const struct patch_digest {
+ } patch_digests[] = {
+ #include "amd-patch-digests.c"
+ };
++static bool __ro_after_init entrysign_mitigiated_in_firmware;
+ 
+ static int cf_check cmp_patch_id(const void *key, const void *elem)
+ {
+@@ -125,7 +126,7 @@ static bool check_digest(const struct container_microcode *mc)
+      * microcode updates.  Mitigate by checking the digest of the patch
+      * against a list of known provenance.
+      */
+-    if ( boot_cpu_data.family < 0x17 ||
++    if ( boot_cpu_data.family < 0x17 || entrysign_mitigiated_in_firmware ||
+          !opt_digest_check )
+         return true;
+ 
+@@ -597,3 +598,81 @@ static void __init __constructor test_digests_sorted(void)
+     }
+ }
+ #endif /* CONFIG_SELF_TESTS */
++
++/*
++ * The Entrysign vulnerability affects all Zen1 thru Zen5 CPUs.  Firmware
++ * fixes were produced in Nov/Dec 2025.  Zen3 thru Zen5 can continue to take
++ * OS-loadable microcode updates using a new signature scheme, as long as
++ * firmware has been updated first.
++ */
++void __init amd_check_entrysign(void)
++{
++    unsigned int curr_rev;
++    uint8_t fixed_rev;
++
++    if ( boot_cpu_data.vendor != X86_VENDOR_AMD ||
++         boot_cpu_data.family < 0x17 ||
++         boot_cpu_data.family > 0x1a )
++        return;
++
++    /*
++     * Table taken from Linux, which is the only known source of information
++     * about client revisions.
++     */
++    curr_rev = this_cpu(cpu_sig).rev;
++    switch ( curr_rev >> 8 )
++    {
++    case 0x080012: fixed_rev = 0x6f; break;
++    case 0x080082: fixed_rev = 0x0f; break;
++    case 0x083010: fixed_rev = 0x7c; break;
++    case 0x086001: fixed_rev = 0x0e; break;
++    case 0x086081: fixed_rev = 0x08; break;
++    case 0x087010: fixed_rev = 0x34; break;
++    case 0x08a000: fixed_rev = 0x0a; break;
++    case 0x0a0010: fixed_rev = 0x7a; break;
++    case 0x0a0011: fixed_rev = 0xda; break;
++    case 0x0a0012: fixed_rev = 0x43; break;
++    case 0x0a0082: fixed_rev = 0x0e; break;
++    case 0x0a1011: fixed_rev = 0x53; break;
++    case 0x0a1012: fixed_rev = 0x4e; break;
++    case 0x0a1081: fixed_rev = 0x09; break;
++    case 0x0a2010: fixed_rev = 0x2f; break;
++    case 0x0a2012: fixed_rev = 0x12; break;
++    case 0x0a4041: fixed_rev = 0x09; break;
++    case 0x0a5000: fixed_rev = 0x13; break;
++    case 0x0a6012: fixed_rev = 0x0a; break;
++    case 0x0a7041: fixed_rev = 0x09; break;
++    case 0x0a7052: fixed_rev = 0x08; break;
++    case 0x0a7080: fixed_rev = 0x09; break;
++    case 0x0a70c0: fixed_rev = 0x09; break;
++    case 0x0aa001: fixed_rev = 0x16; break;
++    case 0x0aa002: fixed_rev = 0x18; break;
++    case 0x0b0021: fixed_rev = 0x46; break;
++    case 0x0b1010: fixed_rev = 0x46; break;
++    case 0x0b2040: fixed_rev = 0x31; break;
++    case 0x0b4040: fixed_rev = 0x31; break;
++    case 0x0b6000: fixed_rev = 0x31; break;
++    case 0x0b7000: fixed_rev = 0x31; break;
++    default:
++        printk(XENLOG_WARNING
++               "Unrecognised CPU %02x-%02x-%02x ucode 0x%08x, assuming vulnerable to Entrysign\n",
++               boot_cpu_data.family, boot_cpu_data.model,
++               boot_cpu_data.stepping, curr_rev);
++        return;
++    }
++
++    /*
++     * This check is best-effort.  If the platform looks to be out of date, it
++     * probably is.  If the platform looks to be fixed, it either genuinely
++     * is, or malware has gotten in before Xen booted and all bets are off.
++     */
++    if ( (uint8_t)curr_rev >= fixed_rev )
++    {
++        entrysign_mitigiated_in_firmware = true;
++        return;
++    }
++
++    printk(XENLOG_ERR
++           "Platform vulnerable to Entrysign (SB-7033, CVE-2024-36347) - firmware update required\n");
++    add_taint(TAINT_CPU_OUT_OF_SPEC);
++}
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 2705bb43c97f..1d1a5aa4b097 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -750,6 +750,8 @@ static int __init early_microcode_load(struct boot_info *bi)
+     int idx = opt_mod_idx;
+     int rc;
+ 
++    amd_check_entrysign();
++
+     /*
+      * Cmdline parsing ensures this invariant holds, so that we don't end up
+      * trying to mix multiple ways of finding the microcode.
+diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
+index f5e2bfee00d9..e6c965dc99dd 100644
+--- a/xen/arch/x86/cpu/microcode/private.h
++++ b/xen/arch/x86/cpu/microcode/private.h
+@@ -81,8 +81,10 @@ extern bool opt_digest_check;
+  */
+ #ifdef CONFIG_AMD
+ void ucode_probe_amd(struct microcode_ops *ops);
++void amd_check_entrysign(void);
+ #else
+ static inline void ucode_probe_amd(struct microcode_ops *ops) {}
++static inline void amd_check_entrysign(void) {}
  #endif
+ 
+ #ifdef CONFIG_INTEL
 -- 
-2.51.0
+2.39.5
 
 
