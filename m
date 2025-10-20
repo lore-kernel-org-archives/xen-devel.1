@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0207CCD199
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:19:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1146150.1478614 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE09CCD199
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:22:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1146159.1478623 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAnv9-0003YR-9c; Mon, 20 Oct 2025 11:19:23 +0000
+	id 1vAnxb-00058R-Ra; Mon, 20 Oct 2025 11:21:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1146150.1478614; Mon, 20 Oct 2025 11:19:23 +0000
+Received: by outflank-mailman (output) from mailman id 1146159.1478623; Mon, 20 Oct 2025 11:21:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAnv9-0003YK-6c; Mon, 20 Oct 2025 11:19:23 +0000
-Received: by outflank-mailman (input) for mailman id 1146150;
- Mon, 20 Oct 2025 11:19:22 +0000
+	id 1vAnxb-00058K-OM; Mon, 20 Oct 2025 11:21:55 +0000
+Received: by outflank-mailman (input) for mailman id 1146159;
+ Mon, 20 Oct 2025 11:21:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7iz2=45=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vAnv8-0003Y5-9L
- for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:19:22 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ id 1vAnxa-00058E-5Q
+ for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:21:54 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9f9a3ed0-ada6-11f0-980a-7dc792cee155;
- Mon, 20 Oct 2025 13:19:20 +0200 (CEST)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-4283be7df63so1014106f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:19:20 -0700 (PDT)
+ id f9b12817-ada6-11f0-980a-7dc792cee155;
+ Mon, 20 Oct 2025 13:21:51 +0200 (CEST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-47100eae3e5so39349555e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:21:51 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427ea5b3acfsm14781399f8f.14.2025.10.20.04.19.19
+ 5b1f17b1804b1-47160987184sm59788055e9.11.2025.10.20.04.21.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 04:19:19 -0700 (PDT)
+ Mon, 20 Oct 2025 04:21:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f9a3ed0-ada6-11f0-980a-7dc792cee155
+X-Inumbo-ID: f9b12817-ada6-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760959160; x=1761563960; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1760959311; x=1761564111; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=AI0XfI34h1Zl5StAh9WFtTOYxg7ZUNHMx3r652w6/xg=;
-        b=W+/4+05DNcG+00bPdjuUWXuROpZ3FqlT41iNBgHt6vawcicItb8l7tsQGJyDvUpwJR
-         zJxD0fPLdWootS0mrlCLf9OBDQ37M4zEV4fGim45rf6MXTLmanf0IiQ6C5t9qAWw+uT1
-         9mBh458RtyBjytlXxhGnOx4oKcUyGEgNKwfReTrj0rmKKdickxzgNmEdFqtWBFlpUWbA
-         T1qLIzmIsUYKJyXQFqXQeRpu6SuwXt3QvpeOifbCXahQR1DgI5dk8uJm9tAjFLUZTTQ2
-         Lcx+Be+gYYPbAKm/rQbzEeHikj9Vu6rDXaycbsZ2dY8fNQujHqDyN5kk/tUljJOvHaX9
-         qrWw==
+        bh=Yfju5TuSYr1gnKBFs17R38Pvw/Jb2fzNTTH63D/Pa3U=;
+        b=EVoV4FFZ9R4OPzh/RUdqZM4nmyJL+xldLXM4kiY2Wh5WHuxUNmt3hkYP2VN6o0t8n3
+         mQ+FZwkeO5numFXz1RsRwhZ+5DTMkw4y8Djwwid0rBACSot/+lKQlW4I2K1R6W0z1DzV
+         aywrOlKgwEuegsyQsfo+vVPl4CHs0I8gHiy9F+buQcekxChHEbeOKBkZ7Ref4zoGtI68
+         Rb0BfjfeGl+sQWlMrI2LZEIamCIP+Sbs84XPQT2yDLObFcmj6vo9tqQ28SYvy7H26iC8
+         CCRFwzY2ly3sOFfxRoflEAfYJrkeCk5U7C3d0qQ+4Sx7QXWk/JfP3p9Cy+LdlT/1Au2b
+         4ung==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760959160; x=1761563960;
+        d=1e100.net; s=20230601; t=1760959311; x=1761564111;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=AI0XfI34h1Zl5StAh9WFtTOYxg7ZUNHMx3r652w6/xg=;
-        b=NY+9pUAPDYtj+OvrEbN7IfFYrMOtATLKi726ctO5E358fIdQhRPJBRWTkE+gjAzn9j
-         +byqIEyTebapcnPKGyLP8mSNkYfG+akCm+LJailiYyCGHCYTFEz0p0JFzpYhYrdi6QgE
-         s2AbY8EjJMMxbhk7THFRvLlerZqHkwh6pffSeZa/oLVVCXwubMTO1O8LBoCJtsVwXQsa
-         uu20e/H9F36X02fomFPMUF6ZyLmIFC52YJinJO/4hHnBzt8uDDfVtvXdHYuJd/pzpxaW
-         nJg4J6w62u0qjTSxvR10NewWD+LnYM6H142L832A810i3dey4+QFk8ncGca/CF5IVjQE
-         UvgA==
-X-Gm-Message-State: AOJu0YwOPCJHccCmNEqrpgccWOMJa4To2vGqSr1EQl68/e8uq34Bn8Cs
-	JEZCHbwZSl8w+aJeK67NNXxCkoJhNKDVAueLeBTiZy0XDIY3X7VF4eACGCIPZVVPacUlMeUiVbo
-	XWkk=
-X-Gm-Gg: ASbGnct69Ft2seR7yvFEup1LGFB25IJyd8iwUqfclLLU2I3/O1aqTjKWK+MFm9vvOLV
-	nDELtc1/UNYpB8JoKlW097//wdBnDd7jc6IgZgBrf0w5/HZ4CM6b8IlpMlgsUbTasNflfod7EVw
-	E/YCKatKlRTUa0Oo3CUSbJ66+vxC3wwi8BeQWbCCAweN89odL8xIXUO8pq40QVTLRBQc9kF+VkC
-	x0g56CB3y+6UaqeL/R/YoS0ZEJa8JsnT+5GkSC0eVXAAImCPzNdfqMxIMv5KHM6Gh6dlo03mDMX
-	+3ji7ec8T3C8ST0DGdViJLQ47SvNdqAAuPscyMqgpMKsuGUlpIG1qZwnj7ATzLeojRinuCLPGPx
-	gFsy9HZ21LMCEa1jy94OMXYgUhph2DgSa0YYtnpbn/2bwUssys9kLzHWBXK1YY5cWXaSDMguuii
-	dNl2WfMOix2VxgHUcI0/cprsqirGx3dCMYjnFCKPXaK4QDhfyHJZyumOISCZuN
-X-Google-Smtp-Source: AGHT+IHCXE0dJDtsjlPTRwNty5pqiwlUd1ly4yT/a6uQB5hIdfdbppAaqSjA3JntMNUWWYupbhdqPA==
-X-Received: by 2002:a05:6000:2301:b0:428:3e62:3225 with SMTP id ffacd0b85a97d-4283e6236f6mr5165411f8f.60.1760959159759;
-        Mon, 20 Oct 2025 04:19:19 -0700 (PDT)
-Message-ID: <c357cb79-a10d-4d81-9695-9d16a4080595@suse.com>
-Date: Mon, 20 Oct 2025 13:19:20 +0200
+        bh=Yfju5TuSYr1gnKBFs17R38Pvw/Jb2fzNTTH63D/Pa3U=;
+        b=GKNyAdiyAxYdYPXvRjtddNLnaciCAF/GSWgTmHeMF+MyB1s9uk7Ee1+NTESOY68jfL
+         RuPdCSyN7JCJsRZI6FHA5GW1Amazkg0n1u88ebtby0V3ozTMEwm14GfcjEC3bteddDnt
+         cE1G+Di1kygZRtpbDIHHs6ZwxvEjTWyGx33PSyIA2gTh3G94sL94WKYhq4Gv+OCmtdYj
+         iImuN8frufq5cq2sKqYjNc3qVFI7C4EZGJ0gQaYAirZ7KPMeQb3w2heHi16wjXHpy8Un
+         DVAuiZc/eXbATKzI3UcNhlZDQR5cueQHBvKT15yw1KRrgxwkYpcpAMbKbm49TmhVaIBM
+         iAgQ==
+X-Gm-Message-State: AOJu0YxN4BHJCYI6jYZqNTQ367e6vO5W+gM9K0hH30a/UCPA7nOFDBtr
+	l7eDRyxsVDHdDPgfWTSaYVlPi27lSeYEAtJHwnxWyT6GGqmnGB/qbByNKbY7GvqA4vigzTAbz+w
+	gdv8=
+X-Gm-Gg: ASbGncs9I8MDNLPaQyztjrxvOWLtgK4hUSKASuYCgqlrVa++QOwBhDCxLGWWQtaRYqt
+	d86UXzDK10X1BDL9gwd/oHdQAJIwfuZ5s0kneULiI77/ySIMpCnUarG4Ust5z7C88fbkzhUi2qf
+	/SZ0SU8xmKuccMmuzyYk4qBTvs4kGCSgbTluTO986ALB8MBUV6XxPlOx+uDux5FhfRkvcM8ij+6
+	K64GY0KA8xq/aMVUXF4zMUZmErgaOoQECg3TZhuUs6QGRRj7ln+VLxQoARw9EfIV7c4yL9rH52O
+	0MdNa15wPKjlpABWcLM21EHRJtfxNa3I9o41ulAdBPeol/OYyFPPX9ittq62DJLyRpmnXmikgo5
+	sYl/EBJ/ek5lUOmFiQWFTiWOuwIybdzjomQn0AQn/Gi2dQTgyabXCows1OmqwoPXUuHACJVwAPr
+	Pky0EWUR0TZzZNLgDNHcrmPNjS5KrP/mNlHlFesDN8VgVY9EYlP4S1M1RXHV2NOKPmhTIMAMs=
+X-Google-Smtp-Source: AGHT+IEtmGDyRsBl9htJ526cm9h+9wIw5KznJsMXYVif6/SuHdjk7VYyyZ1p99weciLPSfTIwx7dXw==
+X-Received: by 2002:a05:600c:3488:b0:459:e398:ed89 with SMTP id 5b1f17b1804b1-4711786c586mr89914955e9.1.1760959311006;
+        Mon, 20 Oct 2025 04:21:51 -0700 (PDT)
+Message-ID: <65b6c05b-49f4-4a3e-aa13-abf5da99f9cb@suse.com>
+Date: Mon, 20 Oct 2025 13:21:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 for-4.21 3/9] x86/HPET: replace handle_hpet_broadcast()'s
- on-stack cpumask_t
+Subject: [PATCH v2 9/9] x86/HPET: simplify "expire" check a little in
+ reprogram_hpet_evt_channel()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 References: <b66ea488-2d47-472c-9520-8590fdf89e0e@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -126,110 +125,30 @@ In-Reply-To: <b66ea488-2d47-472c-9520-8590fdf89e0e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-With large NR_CPUS on-stack cpumask_t variables are problematic. Now that
-the IRQ handler can't be invoked in a nested manner anymore, we can
-instead use a per-CPU variable. While we can't use scratch_cpumask in code
-invoked from IRQ handlers, simply amend that one with a HPET-special form.
-(Note that only one of the two IRQ handling functions can come into play
-at any one time.)
+When this was added, the log message was updated correctly, but the zero
+case was needlessly checked separately: hpet_broadcast_enter() had a zero
+check added at the same time, while handle_hpet_broadcast() can't possibly
+pass 0 here anyway.
 
-Fixes: 996576b965cc ("xen: allow up to 16383 cpus")
+Fixes: 7145897cfb81 ("cpuidle: Fix for timer_deadline==0 case")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-While doing this I noticed that this and all pre-existing uses of
-DEFINE_PER_CPU_READ_MOSTLY() aren't quite right: When the type is
-cpumask_var_t, the variable is read-mostly only when NR_CPUS <=
-2 * BITS_PER_LONG. That'll want sorting separately, though.
-
-It is important for this to not be moved ahead of "x86/HPET: use single,
-global, low-priority vector for broadcast IRQ", as the original call here
-from set_channel_irq_affinity() may not use the new variable (it would
-need to use scratch_cpumask instead).
 ---
 v2: New.
 
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -196,7 +196,7 @@ static void evt_do_broadcast(cpumask_t *
+@@ -147,10 +147,10 @@ static int reprogram_hpet_evt_channel(
+     int64_t delta;
+     int ret;
  
- static void cf_check handle_hpet_broadcast(struct hpet_event_channel *ch)
- {
--    cpumask_t mask;
-+    cpumask_t *scratch = this_cpu(hpet_scratch_cpumask);
-     s_time_t now, next_event;
-     unsigned int cpu;
-     unsigned long flags;
-@@ -209,7 +209,7 @@ again:
-     spin_unlock_irqrestore(&ch->lock, flags);
+-    if ( (ch->flags & HPET_EVT_DISABLE) || (expire == 0) )
++    if ( ch->flags & HPET_EVT_DISABLE )
+         return 0;
  
-     next_event = STIME_MAX;
--    cpumask_clear(&mask);
-+    cpumask_clear(scratch);
-     now = NOW();
- 
-     /* find all expired events */
-@@ -218,13 +218,13 @@ again:
-         s_time_t deadline = ACCESS_ONCE(per_cpu(timer_deadline, cpu));
- 
-         if ( deadline <= now )
--            __cpumask_set_cpu(cpu, &mask);
-+            __cpumask_set_cpu(cpu, scratch);
-         else if ( deadline < next_event )
-             next_event = deadline;
-     }
- 
-     /* wakeup the cpus which have an expired event. */
--    evt_do_broadcast(&mask);
-+    evt_do_broadcast(scratch);
- 
-     if ( next_event != STIME_MAX )
+-    if ( unlikely(expire < 0) )
++    if ( unlikely(expire <= 0) )
      {
---- a/xen/arch/x86/include/asm/smp.h
-+++ b/xen/arch/x86/include/asm/smp.h
-@@ -22,6 +22,7 @@
- DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
- DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
- DECLARE_PER_CPU(cpumask_var_t, scratch_cpumask);
-+DECLARE_PER_CPU(cpumask_var_t, hpet_scratch_cpumask);
- DECLARE_PER_CPU(cpumask_var_t, send_ipi_cpumask);
- 
- /*
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -55,6 +55,9 @@ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t
- DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, scratch_cpumask);
- static cpumask_t scratch_cpu0mask;
- 
-+DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, hpet_scratch_cpumask);
-+static cpumask_t hpet_scratch_cpu0mask;
-+
- DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, send_ipi_cpumask);
- static cpumask_t send_ipi_cpu0mask;
- 
-@@ -976,6 +979,8 @@ static void cpu_smpboot_free(unsigned in
-         FREE_CPUMASK_VAR(per_cpu(cpu_core_mask, cpu));
-         if ( per_cpu(scratch_cpumask, cpu) != &scratch_cpu0mask )
-             FREE_CPUMASK_VAR(per_cpu(scratch_cpumask, cpu));
-+        if ( per_cpu(hpet_scratch_cpumask, cpu) != &hpet_scratch_cpu0mask )
-+            FREE_CPUMASK_VAR(per_cpu(hpet_scratch_cpumask, cpu));
-         if ( per_cpu(send_ipi_cpumask, cpu) != &send_ipi_cpu0mask )
-             FREE_CPUMASK_VAR(per_cpu(send_ipi_cpumask, cpu));
-     }
-@@ -1112,6 +1117,7 @@ static int cpu_smpboot_alloc(unsigned in
-     if ( !(cond_zalloc_cpumask_var(&per_cpu(cpu_sibling_mask, cpu)) &&
-            cond_zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) &&
-            cond_alloc_cpumask_var(&per_cpu(scratch_cpumask, cpu)) &&
-+           cond_alloc_cpumask_var(&per_cpu(hpet_scratch_cpumask, cpu)) &&
-            cond_alloc_cpumask_var(&per_cpu(send_ipi_cpumask, cpu))) )
-         goto out;
- 
-@@ -1239,6 +1245,7 @@ void __init smp_prepare_boot_cpu(void)
-     cpumask_set_cpu(cpu, &cpu_present_map);
- #if NR_CPUS > 2 * BITS_PER_LONG
-     per_cpu(scratch_cpumask, cpu) = &scratch_cpu0mask;
-+    per_cpu(hpet_scratch_cpumask, cpu) = &hpet_scratch_cpu0mask;
-     per_cpu(send_ipi_cpumask, cpu) = &send_ipi_cpu0mask;
- #endif
- 
+         printk(KERN_DEBUG "reprogram: expire <= 0\n");
+         return -ETIME;
 
 
