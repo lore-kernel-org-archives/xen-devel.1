@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFF5CCD199
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:26:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1146198.1478669 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9DD2CCD193
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:26:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1146229.1478684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAo1q-0007Ac-8K; Mon, 20 Oct 2025 11:26:18 +0000
+	id 1vAo2H-0008Nz-LX; Mon, 20 Oct 2025 11:26:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1146198.1478669; Mon, 20 Oct 2025 11:26:18 +0000
+Received: by outflank-mailman (output) from mailman id 1146229.1478684; Mon, 20 Oct 2025 11:26:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAo1q-00079J-21; Mon, 20 Oct 2025 11:26:18 +0000
-Received: by outflank-mailman (input) for mailman id 1146198;
- Mon, 20 Oct 2025 11:26:16 +0000
+	id 1vAo2H-0008Ns-Ir; Mon, 20 Oct 2025 11:26:45 +0000
+Received: by outflank-mailman (input) for mailman id 1146229;
+ Mon, 20 Oct 2025 11:26:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7iz2=45=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vAnvY-0001y1-QE
- for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:19:48 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ id 1vAnwg-0001y1-S1
+ for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:20:58 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b030de25-ada6-11f0-9d15-b5c5bf9af7f9;
- Mon, 20 Oct 2025 13:19:48 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-471b80b994bso21402135e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:19:48 -0700 (PDT)
+ id d9fd58f3-ada6-11f0-9d15-b5c5bf9af7f9;
+ Mon, 20 Oct 2025 13:20:58 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-46fcf9f63b6so22311905e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:20:58 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427ea5a0f88sm14360924f8f.7.2025.10.20.04.19.47
+ 5b1f17b1804b1-47154d38309sm142168915e9.9.2025.10.20.04.20.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 04:19:47 -0700 (PDT)
+ Mon, 20 Oct 2025 04:20:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b030de25-ada6-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: d9fd58f3-ada6-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760959188; x=1761563988; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1760959258; x=1761564058; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=CR7zFEwvrxzSG3gB+46rCvPXK38/dK1o+Nvm/MzzJ9E=;
-        b=KU37/lenM3sFxXsCG7bWjyd56Lab/YJ7K6KDTHxjLUxriGFt4jS/6528MyWhd2EuHl
-         GiXuP5jUDXfyzSAKgwCcCxF6Wn1n+oS9ZupoDFOxmO8DzlXNId1OQyyUdVhH5ULRFVFR
-         L2x/3ZlDBO0BWVUwM4t9JqefQ7d8bSa0Kb2ouV6/S54EbYzOAaGGLvYNGE5ZLfRYQc/U
-         uYLvlVGQKZl46uVEH0Imes1poM+7Bt4jR57kWatTSp7BRkkl5ZUYQBcXAw1hco8mry7F
-         wMvRiUTR4F3eRqyVSnnO1zmj4VA8LzvScFWbKN86XuvoM7LcKgdL6B+hCjy/cFiOSSUE
-         b4Ww==
+        bh=rds4jnnN9NVrTZyuc+q65+QBQEjCAV7rC8oJIxMqDF8=;
+        b=DvtaxUr3fc0WHOImWZeiK+H6ToJPY9jRlhe5DyKLGXpsTfurc0yvR/3pEatQsaBg7v
+         Jzlwqzwv0NrBJ5Kk+KbmTaelbXiC1uZKMRIQQULlIhfM5nkec8hAGgO9+5IYUf5G9tja
+         XWyt8T64Iy8pZGjJZkCs+dQNG0KKpk9tMDAXSisogRHhWU7y/s3/Kca/+cke6WBuxykN
+         1XWpuBFH95MIsDHzVncHH09a2c3OwUYtQ11xH8kKVFy/lCqq7/zIVq3aEN7mVSCra7ii
+         MiRPnTHjWX66jsiySarVIF2ppdP9oLpBUtn3a03X38to4k8t+5eeEGwFQ2Uj44400Wmr
+         Nb2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760959188; x=1761563988;
+        d=1e100.net; s=20230601; t=1760959258; x=1761564058;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=CR7zFEwvrxzSG3gB+46rCvPXK38/dK1o+Nvm/MzzJ9E=;
-        b=VMCyGFYaptIEFXWs3dvFy8mLpz7wlbtcCGmGE22bFQeOGtBlr1dC6qOPjdDm+SAPrY
-         J/Xrphr5vqkEptMUojeV26CG0WaJrBM1C5YO0w7jqHFf8D/K37F80l3b8eHRbJ1o4nMP
-         14kG+FGTYQFX3c3G3EnAB+VIbCnh6rNRpqpb+EhwvSN4FQSR1HrFNZwQo3wV5wy77m/n
-         dGuNemw0S77t5G8zn/gibOuX4p4ilwsiggjvjs7q5eITB4KordunxGzEzDfwX5Aq+bVR
-         yE0IVLhnQQZNxSscVXEYQXSy9BsbNMFDigngGUXlRW9jICXcuhDKzwS43ajzxQ7NOBJz
-         yImg==
-X-Gm-Message-State: AOJu0Yxo2Dhzxj4iJoB+rj0p7LYlD7ooEJsa7JODbpp2SeL9TYdPdc+l
-	j7FNjvEXADbVuf7D0AvG0dhBysHRQThTofovYQte8jHkJ2pUfKVBzxgUcLyH28VCzdqfcsDwpTo
-	rEH8=
-X-Gm-Gg: ASbGncvGTPFnwTvn/2qBEJBIVmpF8tyihHj5DB0q0FZj05IadvbylqVoSzGdtPr7QEZ
-	bqW5ZfuW8xVOq2QYTXBdGVqjNTRRH88VmvK/RffpG57gf/gvW+HIeP2evOcvXt51ySnjnKkbeB3
-	8onTEIEJre688Q/MJfYZnUMeDqXMVp6eNPNFtvLUIALSWh5jtHYGSX/SDhSRoJI9mMQ6GCW6IoL
-	hXjnbX8L+k2ffEXAM7UhJY3lahaBidCRf8kBBAnWAIjNYCMnaFa7cA/1emMQ/Vvvk1Sc9rs8NHN
-	YG6HQ+wNF3IptQdVi3wi1kfoEc80e+rsyO3vvaEnEnqnv/yh/Uo3uzaD7/DAAHJndy5ilRiKo7P
-	53wO84BUUcJNdoP+oNI3TH+di9/nGTkrbKq+p4yNartbNyn3J4JcIny/nqXpmGJXa9czkqBcpQJ
-	NhgFo/jXhTyPAnDk8KK8Ap5ym+vQLuSQpgE52hKbTkpicA1MZ5iJo+WYAo0r9gUbqXBwXzJRQ=
-X-Google-Smtp-Source: AGHT+IEd49XdP31L+DSylBiy/DOCgThBkpasnl3hoODQF5+iU+ABD66x9VEEnjzlv83dAxeMPWlKDQ==
-X-Received: by 2002:a05:600c:4e86:b0:471:13fc:4ad3 with SMTP id 5b1f17b1804b1-4711787847bmr109747565e9.2.1760959187605;
-        Mon, 20 Oct 2025 04:19:47 -0700 (PDT)
-Message-ID: <ce20e740-5f5c-48c2-a1a2-b0029be268b7@suse.com>
-Date: Mon, 20 Oct 2025 13:19:48 +0200
+        bh=rds4jnnN9NVrTZyuc+q65+QBQEjCAV7rC8oJIxMqDF8=;
+        b=qg8m1RMzcaEQvWBt7nzBW/lc7jj63GYMvq/PAAi70lZRlXRtGotbnLlbVp9LThTdVR
+         C2Mki77hXYtewVBPa+r4eR6vbUxSkunG3W9CZfoUNvOxSkq2j17mGy9CROpd68Ux/eTQ
+         0iMYrk3c69m21UwaGJUnJUYFXGN8xmVRq4RgsNHPmgH5heRyxMR/bpHf1eZ43t+H0qAw
+         xIuJWw7qJ5O4Mm+o6DAJv9hMoD0UNU65J2Vl/cx3ujnWCyLl8QavczP1YJ7uGclOeNMF
+         JUhtNd1EzrCWP64Q8jGZTE0Z98ha+IVR3QW24JZWGMwTOQjwfTuYrhuMuyo+wu/bumEy
+         tXrg==
+X-Gm-Message-State: AOJu0Yz4MDQR7EB6maWUsV/rxs4i92EbuBhgOjkwUPYJCg2Oby1HJmja
+	/i1gkvmlpXXxxyRh/bukA9Lsl/Uxt9LX/Fl0sx8DnVsgBsSHrnDYAzfyMsNp1uLWElvGrTVe38C
+	2EMU=
+X-Gm-Gg: ASbGncvXnkp1TFWRV/R3BKVKmsrh26Sii7YqHfW2/yWTVAvX+lc/4BaPfkUYKlFCxQq
+	guDr7q/48VSTmBC1nJNnYgwhzelN7IuCdzueiGlYsnJZj/z0r9OW0PrsBZTQ5UBapbK+5SJ2L9p
+	3oTB8xANYCbYV5lCBR92zu4LdC2UmoHUUrTa8FGsYnJeJjBZwX/fPHvx6x1hNGtbysLhPUkzSf4
+	62VSKcQ/4DZQ/8QB75svI1zQhMihNP1WGUBJhMl3Vi9BAidFQ+Hzao+SPnKiuzoiex/HCuWYQXA
+	7DVQeo5gBXTTyUZOvqlXapTyx2QeyyBAoOGAvfp0OdoBA2ef2Ao5oUjQCqxKX5pktYE1UVdYilM
+	unBdMUHMleoooPAVsPEC0Bl8pBbE9VfGsAtZcrnxUG8xrUvt6T2XjTcthCgBONPY4j9XDjtb0nB
+	I7zFHiwUTOfWDhAcZOxmLToIVXGAvLnHCyp8nVuZbhq/CoYxheHN3ObjupFXKqC+yU2OHFWayYr
+	Yv2hMpBgg==
+X-Google-Smtp-Source: AGHT+IFxeSoKZVTafA7dqmByPVATZl0pltbsEYB4cctuuaQSYVLfZrncYc3yd+dH+OjUjxxC/ofeWQ==
+X-Received: by 2002:a05:600c:6385:b0:458:a7fa:211d with SMTP id 5b1f17b1804b1-47117912365mr94081455e9.29.1760959257809;
+        Mon, 20 Oct 2025 04:20:57 -0700 (PDT)
+Message-ID: <7e376968-1eb6-4f0d-a9eb-167b26d90786@suse.com>
+Date: Mon, 20 Oct 2025 13:20:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 4/9] x86/HPET: avoid indirect call to event handler
+Subject: [PATCH v2 7/9] x86/HPET: reduce hpet_next_event() call sites
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -124,62 +125,46 @@ In-Reply-To: <b66ea488-2d47-472c-9520-8590fdf89e0e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-It's only ever handle_hpet_broadcast() that's used. While we now don't
-enable IRQs right away, still play safe and convert the function pointer
-to a boolean, to make sure no calls occur too early.
+I'm surprised gcc doesn't manage to do that: At least in debug builds two
+call sites exist, just like source code has it. That's not necessary
+though - by using do/while we can reduce this to a single call site. Then
+the function will be inlined.
+
+While improving code gen, also switch the function's 2nd parameter to
+unsigned.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-v2: Re-base over changes earlier in the series.
+Oddly enough the CDQE is replaced by an entirely unnecessary 32-bit MOV of
+a register to itself (i.e. zero-extending to 64 bits), as that's
+immediately preceded by a 32-bit ADD targeting the same register.
 
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -40,7 +40,7 @@ struct hpet_event_channel
-     s_time_t      next_event;
-     cpumask_var_t cpumask;
-     spinlock_t    lock;
--    void          (*event_handler)(struct hpet_event_channel *ch);
-+    bool          event_handler;
- 
-     unsigned int idx;   /* physical channel idx */
-     unsigned int cpu;   /* msi target */
-@@ -194,7 +194,7 @@ static void evt_do_broadcast(cpumask_t *
-        cpumask_raise_softirq(mask, TIMER_SOFTIRQ);
+@@ -124,7 +124,7 @@ static inline unsigned long ns2ticks(uns
+     return (unsigned long) tmp;
  }
  
--static void cf_check handle_hpet_broadcast(struct hpet_event_channel *ch)
-+static void handle_hpet_broadcast(struct hpet_event_channel *ch)
+-static int hpet_next_event(unsigned long delta, int timer)
++static int hpet_next_event(unsigned long delta, unsigned int timer)
  {
-     cpumask_t *scratch = this_cpu(hpet_scratch_cpumask);
-     s_time_t now, next_event;
-@@ -250,7 +250,7 @@ static void cf_check hpet_interrupt_hand
-         return;
-     }
+     uint32_t cnt, cmp;
+     unsigned long flags;
+@@ -173,12 +173,10 @@ static int reprogram_hpet_evt_channel(
+     delta = max_t(int64_t, delta, MIN_DELTA_NS);
+     delta = ns2ticks(delta, ch->shift, ch->mult);
  
--    ch->event_handler(ch);
-+    handle_hpet_broadcast(ch);
+-    ret = hpet_next_event(delta, ch->idx);
+-    while ( ret && force )
+-    {
+-        delta += delta;
++    do {
+         ret = hpet_next_event(delta, ch->idx);
+-    }
++        delta += delta;
++    } while ( ret && force );
+ 
+     return ret;
  }
- 
- static void hpet_enable_channel(struct hpet_event_channel *ch)
-@@ -657,7 +657,7 @@ void __init hpet_broadcast_init(void)
-         hpet_events[i].next_event = STIME_MAX;
-         spin_lock_init(&hpet_events[i].lock);
-         smp_wmb();
--        hpet_events[i].event_handler = handle_hpet_broadcast;
-+        hpet_events[i].event_handler = true;
- 
-         hpet_events[i].msi.msi_attrib.maskbit = 1;
-         hpet_events[i].msi.msi_attrib.pos = MSI_TYPE_HPET;
-@@ -808,7 +808,9 @@ int hpet_legacy_irq_tick(void)
-          (hpet_events->flags & (HPET_EVT_DISABLE|HPET_EVT_LEGACY)) !=
-          HPET_EVT_LEGACY )
-         return 0;
--    hpet_events->event_handler(hpet_events);
-+
-+    handle_hpet_broadcast(hpet_events);
-+
-     return 1;
- }
- 
 
 
