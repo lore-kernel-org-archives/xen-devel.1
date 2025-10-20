@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9DD2CCD193
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:26:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1146229.1478684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAB4CCD199
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Oct 2025 11:26:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1146231.1478690 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAo2H-0008Nz-LX; Mon, 20 Oct 2025 11:26:45 +0000
+	id 1vAo2I-0008Pv-1D; Mon, 20 Oct 2025 11:26:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1146229.1478684; Mon, 20 Oct 2025 11:26:45 +0000
+Received: by outflank-mailman (output) from mailman id 1146231.1478690; Mon, 20 Oct 2025 11:26:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vAo2H-0008Ns-Ir; Mon, 20 Oct 2025 11:26:45 +0000
-Received: by outflank-mailman (input) for mailman id 1146229;
- Mon, 20 Oct 2025 11:26:44 +0000
+	id 1vAo2H-0008PU-P1; Mon, 20 Oct 2025 11:26:45 +0000
+Received: by outflank-mailman (input) for mailman id 1146231;
+ Mon, 20 Oct 2025 11:26:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7iz2=45=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vAnwg-0001y1-S1
- for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:20:58 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
+ id 1vAnvv-0001y1-Hx
+ for xen-devel@lists.xenproject.org; Mon, 20 Oct 2025 11:20:11 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d9fd58f3-ada6-11f0-9d15-b5c5bf9af7f9;
- Mon, 20 Oct 2025 13:20:58 +0200 (CEST)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-46fcf9f63b6so22311905e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:20:58 -0700 (PDT)
+ id bdb4c719-ada6-11f0-9d15-b5c5bf9af7f9;
+ Mon, 20 Oct 2025 13:20:11 +0200 (CEST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-426f1574a14so3118878f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Oct 2025 04:20:11 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47154d38309sm142168915e9.9.2025.10.20.04.20.57
+ ffacd0b85a97d-427ea5b3c65sm14775468f8f.15.2025.10.20.04.20.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 04:20:57 -0700 (PDT)
+ Mon, 20 Oct 2025 04:20:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d9fd58f3-ada6-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: bdb4c719-ada6-11f0-9d15-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760959258; x=1761564058; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1760959210; x=1761564010; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=rds4jnnN9NVrTZyuc+q65+QBQEjCAV7rC8oJIxMqDF8=;
-        b=DvtaxUr3fc0WHOImWZeiK+H6ToJPY9jRlhe5DyKLGXpsTfurc0yvR/3pEatQsaBg7v
-         Jzlwqzwv0NrBJ5Kk+KbmTaelbXiC1uZKMRIQQULlIhfM5nkec8hAGgO9+5IYUf5G9tja
-         XWyt8T64Iy8pZGjJZkCs+dQNG0KKpk9tMDAXSisogRHhWU7y/s3/Kca/+cke6WBuxykN
-         1XWpuBFH95MIsDHzVncHH09a2c3OwUYtQ11xH8kKVFy/lCqq7/zIVq3aEN7mVSCra7ii
-         MiRPnTHjWX66jsiySarVIF2ppdP9oLpBUtn3a03X38to4k8t+5eeEGwFQ2Uj44400Wmr
-         Nb2Q==
+        bh=4ft3MIA/0HMfE9mn1CrSRGwasVj918sVnbBRryONFvI=;
+        b=KchrSwBYdFKlg9rBgtvq/FVuIq6lS4C1xMIgvoSd5JSUeIcHo5kxFzs6Ys7gvkuO/q
+         VClNQIvVIuYjLzdhJ8nqroP8S5zJQSGHyKFMUjiU5gOTceQHN16sq2eF7dib9B5RFaFa
+         2aIT+uO4/Idxi3vZ/3bGZX3OGx/ZZX+O/qpyGUuZwp8sHnzRQy732GamQ4bWfAwMjg/6
+         oSVIlSUXMQjYuIQiUxbvRw4saMPv4tBPIqCCUiye28hC1O3O6Xi0ua/KmSkingw5qBwr
+         5CSw3NOKNNwt+mfZaYLqyjTmhqbKPO8x1JE+AapC7RBgEBQYx0yxKt66RNWTlF/ZGFC2
+         VYCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760959258; x=1761564058;
+        d=1e100.net; s=20230601; t=1760959210; x=1761564010;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=rds4jnnN9NVrTZyuc+q65+QBQEjCAV7rC8oJIxMqDF8=;
-        b=qg8m1RMzcaEQvWBt7nzBW/lc7jj63GYMvq/PAAi70lZRlXRtGotbnLlbVp9LThTdVR
-         C2Mki77hXYtewVBPa+r4eR6vbUxSkunG3W9CZfoUNvOxSkq2j17mGy9CROpd68Ux/eTQ
-         0iMYrk3c69m21UwaGJUnJUYFXGN8xmVRq4RgsNHPmgH5heRyxMR/bpHf1eZ43t+H0qAw
-         xIuJWw7qJ5O4Mm+o6DAJv9hMoD0UNU65J2Vl/cx3ujnWCyLl8QavczP1YJ7uGclOeNMF
-         JUhtNd1EzrCWP64Q8jGZTE0Z98ha+IVR3QW24JZWGMwTOQjwfTuYrhuMuyo+wu/bumEy
-         tXrg==
-X-Gm-Message-State: AOJu0Yz4MDQR7EB6maWUsV/rxs4i92EbuBhgOjkwUPYJCg2Oby1HJmja
-	/i1gkvmlpXXxxyRh/bukA9Lsl/Uxt9LX/Fl0sx8DnVsgBsSHrnDYAzfyMsNp1uLWElvGrTVe38C
-	2EMU=
-X-Gm-Gg: ASbGncvXnkp1TFWRV/R3BKVKmsrh26Sii7YqHfW2/yWTVAvX+lc/4BaPfkUYKlFCxQq
-	guDr7q/48VSTmBC1nJNnYgwhzelN7IuCdzueiGlYsnJZj/z0r9OW0PrsBZTQ5UBapbK+5SJ2L9p
-	3oTB8xANYCbYV5lCBR92zu4LdC2UmoHUUrTa8FGsYnJeJjBZwX/fPHvx6x1hNGtbysLhPUkzSf4
-	62VSKcQ/4DZQ/8QB75svI1zQhMihNP1WGUBJhMl3Vi9BAidFQ+Hzao+SPnKiuzoiex/HCuWYQXA
-	7DVQeo5gBXTTyUZOvqlXapTyx2QeyyBAoOGAvfp0OdoBA2ef2Ao5oUjQCqxKX5pktYE1UVdYilM
-	unBdMUHMleoooPAVsPEC0Bl8pBbE9VfGsAtZcrnxUG8xrUvt6T2XjTcthCgBONPY4j9XDjtb0nB
-	I7zFHiwUTOfWDhAcZOxmLToIVXGAvLnHCyp8nVuZbhq/CoYxheHN3ObjupFXKqC+yU2OHFWayYr
-	Yv2hMpBgg==
-X-Google-Smtp-Source: AGHT+IFxeSoKZVTafA7dqmByPVATZl0pltbsEYB4cctuuaQSYVLfZrncYc3yd+dH+OjUjxxC/ofeWQ==
-X-Received: by 2002:a05:600c:6385:b0:458:a7fa:211d with SMTP id 5b1f17b1804b1-47117912365mr94081455e9.29.1760959257809;
-        Mon, 20 Oct 2025 04:20:57 -0700 (PDT)
-Message-ID: <7e376968-1eb6-4f0d-a9eb-167b26d90786@suse.com>
-Date: Mon, 20 Oct 2025 13:20:58 +0200
+        bh=4ft3MIA/0HMfE9mn1CrSRGwasVj918sVnbBRryONFvI=;
+        b=gjQRpF3Qw8RgXuYENend5CveGLTQdVVdS0e0w17mDnP5rNeLUFQBC3uZ4k5YQxf9Zc
+         zaE62Am8F45ArStqLIIGuX9DFr5cJ+hgvoo8G+ATiuBpXA2i6WdgUq1t+pl18fwU9onM
+         NQq/0kXafENP83dAVHYAoTFWF9c7tCIqPldt3BCDART6+0R6U2BAAYfyFL0Gy7AFybLS
+         c23RpHBowjGIBWmjkY0jo9W8dwpuEz9bGxXhPKjhksW2E+GnzbP3KDByYc8H2dLeSkJp
+         k0ZzmuiJQ2pDJuNItjHxRJI55ZFm1rdgY+ny/1W7bkvytPRoAuaT0vV3sDHIXppTGFmd
+         eZhw==
+X-Gm-Message-State: AOJu0Yw9FMjXYWPm4zNp/PuckvHUQl1kepwEUtl5cbeoPe24Y4Ermd78
+	1zl6/Wqy3331SF5JTF5I9regnEG7Ley4XkZL9h/kVmCFRtBU4wJ/Yt5/MVaXRRLbNTvclRPAX21
+	MH9Y=
+X-Gm-Gg: ASbGncuebV0MQ0HdB1VcBfeB/FAJ1UXJ4OI3x02MA6KR/ezYkNL+4EKBg/KKFREF2oz
+	wgUQA53z17brIyt4F/V9M9xzviO14ecRd3t9Xj50Fi2cbUlVBDRLdf6mnx2nGXSFNsekVcPHbVy
+	N+yRn+Vv+roSg15KM4FSE6rfcnVL/N5Wr3yYDbJipTauFAaXMZjcAIqwuk9qBke2eiY0WIHweCL
+	rAlHsqOg1xwEUo5PmfyxGWu3XW+XbKCgVR2RwliqOyGBVG6ObRwZ5i0jfLfslBM+dCiG/YN/xDe
+	fPFiXPcFaorqt5RbjwR1+ujjpJH4WdDtQpTGrm+7BYuRk/UdRmHdyZ6JznZmzwB4XN7FIGIHZg8
+	MlLQRNeSBFNMwY0yn3GoYajr9RtdqY/IKPtw9oIki9tfbMLgENW8PPdq2SgLc5g+GYT1Hl31nWZ
+	oJfznc6pT52JjRdkLqpS6GkeOCew/fY2ktk/TH8NqFkPvMYSq0d4nFoLYI7pW/
+X-Google-Smtp-Source: AGHT+IFtQTKy/kD9PVEIcrRDmAyEd7RxNmjmlzPY/NFMDBBs2q9i+v800+Wp2aSt0Pa8jb5qSvSR5A==
+X-Received: by 2002:a05:600c:8185:b0:46f:b43a:aeed with SMTP id 5b1f17b1804b1-4711792cc0cmr88221065e9.40.1760959210236;
+        Mon, 20 Oct 2025 04:20:10 -0700 (PDT)
+Message-ID: <95d977f5-6ccc-4a86-9ddd-bce0f70bc476@suse.com>
+Date: Mon, 20 Oct 2025 13:20:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 7/9] x86/HPET: reduce hpet_next_event() call sites
+Subject: [PATCH v2 5/9] x86/HPET: make another channel flags update atomic
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -125,46 +124,26 @@ In-Reply-To: <b66ea488-2d47-472c-9520-8590fdf89e0e@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I'm surprised gcc doesn't manage to do that: At least in debug builds two
-call sites exist, just like source code has it. That's not necessary
-though - by using do/while we can reduce this to a single call site. Then
-the function will be inlined.
+Unlike the setting of HPET_EVT_LEGACY in hpet_broadcast_init(), the
+setting of HPET_EVT_DISABLE in hpet_disable_legacy_broadcast() isn't init-
+only and hence can race other flag manipulation (not all of which occur
+while holding the channel's lock). While possibly any such updates would
+only ever occur when HPET_EVT_LEGACY isn't set in the first place, this
+doesn't look straightforward to prove, so better be on the safe side.
 
-While improving code gen, also switch the function's 2nd parameter to
-unsigned.
-
+Fixes: d09486dba36a ("cpuidle: Enable hpet broadcast by default")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Oddly enough the CDQE is replaced by an entirely unnecessary 32-bit MOV of
-a register to itself (i.e. zero-extending to 64 bits), as that's
-immediately preceded by a 32-bit ADD targeting the same register.
 
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -124,7 +124,7 @@ static inline unsigned long ns2ticks(uns
-     return (unsigned long) tmp;
- }
+@@ -723,7 +723,7 @@ void hpet_disable_legacy_broadcast(void)
  
--static int hpet_next_event(unsigned long delta, int timer)
-+static int hpet_next_event(unsigned long delta, unsigned int timer)
- {
-     uint32_t cnt, cmp;
-     unsigned long flags;
-@@ -173,12 +173,10 @@ static int reprogram_hpet_evt_channel(
-     delta = max_t(int64_t, delta, MIN_DELTA_NS);
-     delta = ns2ticks(delta, ch->shift, ch->mult);
+     spin_lock_irqsave(&hpet_events->lock, flags);
  
--    ret = hpet_next_event(delta, ch->idx);
--    while ( ret && force )
--    {
--        delta += delta;
-+    do {
-         ret = hpet_next_event(delta, ch->idx);
--    }
-+        delta += delta;
-+    } while ( ret && force );
+-    hpet_events->flags |= HPET_EVT_DISABLE;
++    set_bit(HPET_EVT_DISABLE_BIT, &hpet_events->flags);
  
-     return ret;
- }
+     /* disable HPET T0 */
+     cfg = hpet_read32(HPET_Tn_CFG(0));
 
 
