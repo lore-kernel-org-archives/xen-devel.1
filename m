@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C174CCD193
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BD8CCD1BF
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Oct 2025 09:12:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1148836.1480687 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1148839.1480716 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vBrMs-0003zh-TZ; Thu, 23 Oct 2025 09:12:22 +0000
+	id 1vBrMw-0004l1-T7; Thu, 23 Oct 2025 09:12:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1148836.1480687; Thu, 23 Oct 2025 09:12:22 +0000
+Received: by outflank-mailman (output) from mailman id 1148839.1480716; Thu, 23 Oct 2025 09:12:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vBrMs-0003za-OS; Thu, 23 Oct 2025 09:12:22 +0000
-Received: by outflank-mailman (input) for mailman id 1148836;
- Thu, 23 Oct 2025 09:12:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vBrMw-0004kt-ON; Thu, 23 Oct 2025 09:12:26 +0000
+Received: by outflank-mailman (input) for mailman id 1148839;
+ Thu, 23 Oct 2025 09:12:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vapE=5A=bounce.vates.tech=bounce-md_30504962.68f9f173.v1-291a88186bbd414a9eb5fb1b639043c2@srs-se1.protection.inumbo.net>)
- id 1vBrMr-0003Xf-33
- for xen-devel@lists.xenproject.org; Thu, 23 Oct 2025 09:12:21 +0000
-Received: from mail180-10.suw31.mandrillapp.com
- (mail180-10.suw31.mandrillapp.com [198.2.180.10])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 607b37cf-aff0-11f0-9d15-b5c5bf9af7f9;
- Thu, 23 Oct 2025 11:12:20 +0200 (CEST)
-Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail180-10.suw31.mandrillapp.com (Mailchimp) with ESMTP id
- 4csgKH1Plkz5QlgsB
- for <xen-devel@lists.xenproject.org>; Thu, 23 Oct 2025 09:12:19 +0000 (GMT)
+ <SRS0=xdiZ=5A=bounce.vates.tech=bounce-md_30504962.68f9f171.v1-62ce87008b414352a437bdf9322b8903@srs-se1.protection.inumbo.net>)
+ id 1vBrMu-0004V7-Rw
+ for xen-devel@lists.xenproject.org; Thu, 23 Oct 2025 09:12:24 +0000
+Received: from mail187-3.suw11.mandrillapp.com
+ (mail187-3.suw11.mandrillapp.com [198.2.187.3])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5fb59c3d-aff0-11f0-980a-7dc792cee155;
+ Thu, 23 Oct 2025 11:12:18 +0200 (CEST)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-3.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4csgKF3cy7zDRJJTy
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Oct 2025 09:12:17 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 291a88186bbd414a9eb5fb1b639043c2; Thu, 23 Oct 2025 09:12:19 +0000
+ 62ce87008b414352a437bdf9322b8903; Thu, 23 Oct 2025 09:12:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,114 +44,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 607b37cf-aff0-11f0-9d15-b5c5bf9af7f9
+X-Inumbo-ID: 5fb59c3d-aff0-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1761210739; x=1761480739;
-	bh=dmYymRXdQlvyIjJOCaPFoHAY8shqwbUzyg9v7qIutBA=;
+	s=mte1; t=1761210737; x=1761480737;
+	bh=ISwWHQVTQY5EpDzB9R3kRNbTEtx9jHYcJ14ZAaa+DSw=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=mPV/TU44iBbaoJW9BLPOGhcaSkRH05kyrPRkqHQ/82/ErTSdxQuUyEIOgSP8HCNk+
-	 kvaLv6TyHpBjHS+cydUhkM97oemt9CEZXiSd92vgN5ShuYgv/G/KGX7c+SVPcQE4YP
-	 jMEG9wir9j0+HWbfjXGudhRnOe//ow3TTTULBdzMfjXYWC4vI1OJOzkXM/eJpw9xPJ
-	 Kv3r1tNZXuWH09kwamV9lihaJOaSP2DfPUMB/Ay/MncSEK0nM2aM0z20OY5RK287KA
-	 o8adwnerk1/GlHv5EN4XC15g74J1rnm3XFwkDVr5XypLuQ2u8P4gbuos/9J20ikUjj
-	 4M5vpq+ISWfoA==
+	b=tt6hASuV80FoYEEbV9VtZmoCQRQXXnb7fmE7MPrLiiPZFZumiVWVrl/ge/F3ZKYca
+	 xtJJlhyJmCGFQyRk8BEKCdX+4rFZDpsoqft5dg2wHArN+InU325jlXs8NAZT3eloZe
+	 l2Q7oSCMYUNMpI8VVGFhLw0FS0ZAZOVDsO0p7oCLVq9o+ov6b7+Jn08ZH4Wjp/oHnP
+	 AAsfLiu7CCzVZHnbn5Bk/tugOMAFbpqTi08w+2jmaW0dE82/9Yb3YgetG00CVzRV7c
+	 BXQ4nTmOMxc+Cx8sRjw3MRGOkV3M/grhosyixhfQ3/RPL0kvQCRxDIBcpRqa1fmi+L
+	 trpQfOQ/txufQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1761210739; x=1761471239; i=teddy.astie@vates.tech;
-	bh=dmYymRXdQlvyIjJOCaPFoHAY8shqwbUzyg9v7qIutBA=;
+	t=1761210737; x=1761471237; i=teddy.astie@vates.tech;
+	bh=ISwWHQVTQY5EpDzB9R3kRNbTEtx9jHYcJ14ZAaa+DSw=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=qqtzB1pAwuJg6H7CmJzuWQmt7vGlU7MBHGZ7zYXpKgH+wr+CPSW2jJf6WGrjRgaSY
-	 z4wZSYd4nC6ViBCqcB62n2S0+LVqnB+qdZwcH+CAUdMb/7ens2vTb7GUAbwrTrN7XB
-	 JXQ8jaAlZUKbQjJ2dhK3Z5wfepMm+IcvUFrP43MEX8v9B4Ck84xe8uwdayb8o8o/6Z
-	 meuo0a0Aqxo+c/C1pc+iuh78yAeJd7khtvZPeMi9UuKMUTT1mvonewkuNKf7kiTpI8
-	 Jgwdobq0KSZJOCxZTUoyjrsiq4iqggpJkEZ4KOEATrwI+8MmLUCFGy/R4tpZOvzGC4
-	 bIMZIvN1cTSNA==
+	b=WGI8GujYpaiADEOS4lxBEkSihptbwAXig2dMYUv72WYtGSWboqS3vugpdk819f2XU
+	 ECGFJhoRqEb5URsW4JKJx/9dTnVSbBpwApenC5HPpW/s+oB0UbjhfjGef2MbBbBULC
+	 QNJIlf6gMHArE/UdBZdp8pZFLnzGMfbVWWhgx4KYKjiL59tEmT4F6ZrPFitTagaEzg
+	 iC8j8apoRf+keFE/rn1NmsLzrFUH7ostC7rYnienzZsc3rynjWyjdqleIgxkN3CkAV
+	 sPoNbRK8enwUnf9kkuBZ/aKRLQ0Ll+OYHObJSD3/BK4pZufXQphNcgWuFkiolXmiS3
+	 MElP2BpxfGObA==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v2=203/5]=20vtd:=20Collapse=20x86=20subdirectory?=
+Subject: =?utf-8?Q?[PATCH=20v2=204/5]=20vtd:=20Remove=20IO=5FxAPIC=5Froute=5Fentry=20macro?=
 X-Mailer: git-send-email 2.51.1
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1761210736930
+X-Bm-Transport-Timestamp: 1761210737079
 To: xen-devel@lists.xenproject.org
 Cc: "Teddy Astie" <teddy.astie@vates.tech>
-Message-Id: <3e9e5ea80bb534b69bd315099da6b5d049852823.1761209564.git.teddy.astie@vates.tech>
+Message-Id: <5bd53445740ba85c8b49d9018b6600fd90eadb50.1761209564.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1761209564.git.teddy.astie@vates.tech>
 References: <cover.1761209564.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.291a88186bbd414a9eb5fb1b639043c2?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.62ce87008b414352a437bdf9322b8903?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251023:md
-Date: Thu, 23 Oct 2025 09:12:19 +0000
+Date: Thu, 23 Oct 2025 09:12:17 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-The x86 subdirectory was originally meant to split x86-specific logic from
-general VT-d code. Today, Xen only supports VT-d on x86 and the code actually
-implemented in this subdirectory isn't x86-specific (e.g ATS code is not x86
-specific).
-
-As ats.c is the only remaining file in this directory, and isn't x86 specific,
-move it up to vtd directory and remove the now empty x86 subdirectory.
+This macro was introduced to abstract between IO-APIC and IO-SAPIC (ia64),
+now that ia64 isn't supported anymore, this macro now only refers to IO-APIC.
 
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
 v2:
- - reviewed commit description
+ - formatting changes
 
- xen/drivers/passthrough/vtd/Makefile        |  3 +--
- xen/drivers/passthrough/vtd/{x86 => }/ats.c | 10 +++++-----
- xen/drivers/passthrough/vtd/x86/Makefile    |  1 -
- 3 files changed, 6 insertions(+), 8 deletions(-)
- rename xen/drivers/passthrough/vtd/{x86 => }/ats.c (97%)
- delete mode 100644 xen/drivers/passthrough/vtd/x86/Makefile
+ xen/drivers/passthrough/vtd/intremap.c | 10 +++++-----
+ xen/drivers/passthrough/vtd/vtd.h      |  3 ---
+ 2 files changed, 5 insertions(+), 8 deletions(-)
 
-diff --git a/xen/drivers/passthrough/vtd/Makefile b/xen/drivers/passthrough/vtd/Makefile
-index fde7555fac..328a014016 100644
---- a/xen/drivers/passthrough/vtd/Makefile
-+++ b/xen/drivers/passthrough/vtd/Makefile
-@@ -1,5 +1,4 @@
--obj-$(CONFIG_X86) += x86/
+diff --git a/xen/drivers/passthrough/vtd/intremap.c b/xen/drivers/passthrough/vtd/intremap.c
+index 6c779d476d..612e08bcec 100644
+--- a/xen/drivers/passthrough/vtd/intremap.c
++++ b/xen/drivers/passthrough/vtd/intremap.c
+@@ -269,7 +269,7 @@ static unsigned int alloc_remap_entry(struct vtd_iommu *iommu, unsigned int nr)
+ }
+ 
+ static int remap_entry_to_ioapic_rte(
+-    struct vtd_iommu *iommu, int index, struct IO_xAPIC_route_entry *old_rte)
++    struct vtd_iommu *iommu, int index, struct IO_APIC_route_entry *old_rte)
+ {
+     struct iremap_entry *iremap_entry = NULL, *iremap_entries;
+     unsigned long flags;
+@@ -317,8 +317,8 @@ static int remap_entry_to_ioapic_rte(
+ }
+ 
+ static int ioapic_rte_to_remap_entry(struct vtd_iommu *iommu,
+-    int apic, unsigned int ioapic_pin, struct IO_xAPIC_route_entry *old_rte,
+-    struct IO_xAPIC_route_entry new_rte)
++    int apic, unsigned int ioapic_pin, struct IO_APIC_route_entry *old_rte,
++    struct IO_APIC_route_entry new_rte)
+ {
+     struct iremap_entry *iremap_entry = NULL, *iremap_entries;
+     struct iremap_entry new_ire;
+@@ -399,7 +399,7 @@ unsigned int cf_check io_apic_read_remap_rte(
+ {
+     unsigned int ioapic_pin = (reg - 0x10) / 2;
+     int index;
+-    struct IO_xAPIC_route_entry old_rte = { };
++    struct IO_APIC_route_entry old_rte = {};
+     int rte_upper = (reg & 1) ? 1 : 0;
+     struct vtd_iommu *iommu = ioapic_to_iommu(IO_APIC_ID(apic));
+ 
+@@ -421,7 +421,7 @@ unsigned int cf_check io_apic_read_remap_rte(
+ void cf_check io_apic_write_remap_rte(
+     unsigned int apic, unsigned int pin, uint64_t rte)
+ {
+-    struct IO_xAPIC_route_entry old_rte = {}, new_rte;
++    struct IO_APIC_route_entry old_rte = {}, new_rte;
+     struct vtd_iommu *iommu = ioapic_to_iommu(IO_APIC_ID(apic));
+     int rc;
+ 
+diff --git a/xen/drivers/passthrough/vtd/vtd.h b/xen/drivers/passthrough/vtd/vtd.h
+index b95124517b..f0286b40c3 100644
+--- a/xen/drivers/passthrough/vtd/vtd.h
++++ b/xen/drivers/passthrough/vtd/vtd.h
+@@ -31,9 +31,6 @@
+ #define MAP_ERROR_RECOVERY    (1u << 2)
+ #define UNMAP_ME_PHANTOM_FUNC (1u << 3)
+ 
+-/* Allow for both IOAPIC and IOSAPIC. */
+-#define IO_xAPIC_route_entry IO_APIC_route_entry
 -
-+obj-y += ats.o
- obj-y += iommu.o
- obj-y += dmar.o
- obj-y += utils.o
-diff --git a/xen/drivers/passthrough/vtd/x86/ats.c b/xen/drivers/passthrough/vtd/ats.c
-similarity index 97%
-rename from xen/drivers/passthrough/vtd/x86/ats.c
-rename to xen/drivers/passthrough/vtd/ats.c
-index fed3588e8e..3b7c4028a6 100644
---- a/xen/drivers/passthrough/vtd/x86/ats.c
-+++ b/xen/drivers/passthrough/vtd/ats.c
-@@ -23,11 +23,11 @@
- #include <xen/pci.h>
- #include <xen/pci_regs.h>
- #include <asm/msi.h>
--#include "../iommu.h"
--#include "../dmar.h"
--#include "../vtd.h"
--#include "../extern.h"
--#include "../../ats.h"
-+#include "iommu.h"
-+#include "dmar.h"
-+#include "vtd.h"
-+#include "extern.h"
-+#include "../ats.h"
- 
- static LIST_HEAD(ats_dev_drhd_units);
- 
-diff --git a/xen/drivers/passthrough/vtd/x86/Makefile b/xen/drivers/passthrough/vtd/x86/Makefile
-deleted file mode 100644
-index 82b3904a91..0000000000
---- a/xen/drivers/passthrough/vtd/x86/Makefile
-+++ /dev/null
-@@ -1 +0,0 @@
--obj-y += ats.o
-\ No newline at end of file
+ struct IO_APIC_route_remap_entry {
+     union {
+         u64 val;
 -- 
 2.51.1
 
