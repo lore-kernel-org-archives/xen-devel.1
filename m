@@ -4,35 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1D5CCF9EB
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Oct 2025 15:38:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1150562.1481673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45C9CCF9E0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Oct 2025 15:42:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1150588.1481696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCJrM-00049M-7O; Fri, 24 Oct 2025 15:37:44 +0000
+	id 1vCJvZ-0006uu-Um; Fri, 24 Oct 2025 15:42:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1150562.1481673; Fri, 24 Oct 2025 15:37:44 +0000
+Received: by outflank-mailman (output) from mailman id 1150588.1481696; Fri, 24 Oct 2025 15:42:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCJrM-00048c-1k; Fri, 24 Oct 2025 15:37:44 +0000
-Received: by outflank-mailman (input) for mailman id 1150562;
- Fri, 24 Oct 2025 15:37:42 +0000
+	id 1vCJvZ-0006un-Ru; Fri, 24 Oct 2025 15:42:05 +0000
+Received: by outflank-mailman (input) for mailman id 1150588;
+ Fri, 24 Oct 2025 15:42:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QEVg=5B=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
- id 1vCJrK-0003nv-Si
- for xen-devel@lists.xenproject.org; Fri, 24 Oct 2025 15:37:42 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 5f0f4677-b0ef-11f0-980a-7dc792cee155;
- Fri, 24 Oct 2025 17:37:38 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7FCA41D34;
- Fri, 24 Oct 2025 08:37:30 -0700 (PDT)
-Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 096CF3F63F;
- Fri, 24 Oct 2025 08:37:36 -0700 (PDT)
+ <SRS0=btSP=5B=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
+ id 1vCJvY-0006uh-8j
+ for xen-devel@lists.xenproject.org; Fri, 24 Oct 2025 15:42:04 +0000
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c207::3])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fa17ef03-b0ef-11f0-980a-7dc792cee155;
+ Fri, 24 Oct 2025 17:41:59 +0200 (CEST)
+Received: from DB3PR06CA0029.eurprd06.prod.outlook.com (2603:10a6:8:1::42) by
+ DU0PR08MB9417.eurprd08.prod.outlook.com (2603:10a6:10:420::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9253.13; Fri, 24 Oct 2025 15:41:55 +0000
+Received: from DU6PEPF0000B61C.eurprd02.prod.outlook.com
+ (2603:10a6:8:1:cafe::1e) by DB3PR06CA0029.outlook.office365.com
+ (2603:10a6:8:1::42) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.13 via Frontend Transport; Fri,
+ 24 Oct 2025 15:41:55 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU6PEPF0000B61C.mail.protection.outlook.com (10.167.8.135) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.7
+ via Frontend Transport; Fri, 24 Oct 2025 15:41:55 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
+ by DU0PR08MB8041.eurprd08.prod.outlook.com (2603:10a6:10:3e5::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Fri, 24 Oct
+ 2025 15:41:22 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::ab1e:55db:9d8:afbc]) by DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::ab1e:55db:9d8:afbc%5]) with mapi id 15.20.9253.011; Fri, 24 Oct 2025
+ 15:41:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,238 +63,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f0f4677-b0ef-11f0-980a-7dc792cee155
-From: Harry Ramsey <harry.ramsey@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: luca.fancellu@arm.com,
-	Harry Ramsey <yourmail@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/3] arm: Implement setup_mm for MPU systems
-Date: Fri, 24 Oct 2025 16:37:17 +0100
-Message-ID: <20251024153719.408806-2-harry.ramsey@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251024153719.408806-1-harry.ramsey@arm.com>
+X-Inumbo-ID: fa17ef03-b0ef-11f0-980a-7dc792cee155
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=fMcNOTX5vGq+WwjGSdIFCUQ71vVvhgmDlefYyrv0dUsBTm/VuOSwRTiXWMcqIS3rqP+1YD+5QHReNQxkkv1DW5AVMZK85e6zAiX+lU7jG4zdGh5stQaKyAyYC5nzFNOiOzm7DV1vpUXEcJCXCp4vW3zZ4WZ58CRhzAIJlPn62ooI7cgXpW/MP5KyFK3qzuc5IaK58F52bJ7coKswMTsJdDuDBM35fBcXVBzhYJYKYvMCaVWTxWzHWzB3+qqEtlBD7sz2/eNqJryiBoKwbMiz8uT4rnZyGeb3LP/+cACiHdupoH81tdBHQQ8iEvV0rBvVdMxq3BShdo5tE+qS0rvjWA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OBBqelmR6bkOUaL51ofDaDC3tEoXtyZOGD7eXlEuaBw=;
+ b=DvBLjt6qjiHyX7wYqv2z16b6hoRBWa5bJ2Q9K59ST355yzGM9KYVd/nQDOtlWNS6BWFSbaXtFRKEbIt6PFuvg+4g0Qr50ryyRFyNzV98N0nMgJoGj9oRQE34XAPt7JBxddesx6ZsE4vzYjzHQAPoeDb/vFjDzU4g/m7xYvTOC7dNkNMGf6aLai9SFve1u7gL4XUQB5LnFogqnbLMkMK3EyK5wkpnbr0Bd9Y1bdBSp1v7ASxy024hdGUqTX/s7EsTJFrCnESfWxw2GKFxlG2DhgglADSY3Ly1rfUA/L9Kpv9uxIP0XcDgmWr25Zxyc8TbOJFZcc7kWWGqUBQ/zyisRw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OBBqelmR6bkOUaL51ofDaDC3tEoXtyZOGD7eXlEuaBw=;
+ b=Q4lSzmiPdmdTAUPWLF1GNGJJma1RG0HBAcXk42Z+mEzfF5oXO06NVx3XLsk8w6C0efwv+6bpdJr5LA1GhHjTToVFY6LZlPQ3OCBIkedR8fi5qOQx6WFCE21sdy/voZwZTwsfhYrrji1QkAOCH+sx88XXvxxL4G1ZVWrcyVXVO2U=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=y6xghRwnyxl1iXlOgyCKM0m2bOXkWErSms/7G/6WPTb3v2acHBxlUfQSViGFJ2qVxwU+nOG5fdQvNWZmkbFsVV1tTWyD19k4XQbL7cHPjC+bndLib8J3fhSNNLwl8VPDZN6tg882Q+9HVrDeaZXXflqsRs1wOeVJNA+xn+DeU9MswSmSzxDQObxX93cqfmdmm5lZdJD/DZgv0ZBDgS8ng2V9j8k6+I7J6GnSq42X5lOPdYSM1L4bQAPAG5YGjvYsQBa+7Unsstyw1ggRxTinnFW4M0OC/ouUqgM/iFDF6s9l/X5rB4uFkq39KujfUvYS6STA88z7/udBqtuFzlf9zw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OBBqelmR6bkOUaL51ofDaDC3tEoXtyZOGD7eXlEuaBw=;
+ b=uFEpePaP/O0FrlKm9Fvd2ourYNnL0mj6gA613Oja3xbuStGIS8Ql84PwfCj5hEfZBHZvzOazhMcGz+UgYxN6WsTo/kNBRQYyhoMPl8E8e5acPLHUUOxo2hRMnHsyixp0zv1mh2O267hOvC0wH3CV89gXB1K0v4hnIBB0zfQ7C8/mObdld30DtTRP7mKpnDC2wckI76rUjAeumWFQZ9ZoAmAUnoTSzgGy5o8tB7x/2TxeqZfEta4iAT2FPYLi5Dx00D5ge+5Kh4jBjbm80eXBExI+0MTIcRIQwfssB5v+RrCx39b5EiM+frOBgRjP+oB/VNtmSbXGQzb7pdsJfLVBuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OBBqelmR6bkOUaL51ofDaDC3tEoXtyZOGD7eXlEuaBw=;
+ b=Q4lSzmiPdmdTAUPWLF1GNGJJma1RG0HBAcXk42Z+mEzfF5oXO06NVx3XLsk8w6C0efwv+6bpdJr5LA1GhHjTToVFY6LZlPQ3OCBIkedR8fi5qOQx6WFCE21sdy/voZwZTwsfhYrrji1QkAOCH+sx88XXvxxL4G1ZVWrcyVXVO2U=
+From: Luca Fancellu <Luca.Fancellu@arm.com>
+To: Harry Ramsey <Harry.Ramsey@arm.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Harry
+ Ramsey <yourmail@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH 1/3] arm: Implement setup_mm for MPU systems
+Thread-Topic: [PATCH 1/3] arm: Implement setup_mm for MPU systems
+Thread-Index: AQHcRPwjhXV/u7H6OkO1vDTcVnOBzLTRby6A
+Date: Fri, 24 Oct 2025 15:41:21 +0000
+Message-ID: <A3747BFE-3210-491B-A745-8AA9CCD79C8C@arm.com>
 References: <20251024153719.408806-1-harry.ramsey@arm.com>
+ <20251024153719.408806-2-harry.ramsey@arm.com>
+In-Reply-To: <20251024153719.408806-2-harry.ramsey@arm.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3826.700.81)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	DU2PR08MB7272:EE_|DU0PR08MB8041:EE_|DU6PEPF0000B61C:EE_|DU0PR08MB9417:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb3d3d91-6724-41a2-c84a-08de1313dc27
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?utf-8?B?QW5qWmg1OFVSVVZuSHpiVHhKN0VaMHF4YmMzNmlWQklVMHVVazVxYllUTDY1?=
+ =?utf-8?B?ZGxMbVB1ZXViVndsSlJxQXhneDU1TytyVkVOQ2Y4djZyMG1VdEt4QmJUclpR?=
+ =?utf-8?B?Rndnbmo1VVJjSkRCenhLWnp3Y0dwYlZYNUtuTFZPRzV6dkhVWFV4YmlQNmV5?=
+ =?utf-8?B?cVAxQlV3VUJuUWNKTnhwU3BVRVJPSzM2SUFTZHNDdnYyekxyQW9UYkZQU3ZW?=
+ =?utf-8?B?Q0dMN3VwcjRxcXpBSDBaV3B4WkVRWlU1SXpnaUtJdDJCU09HRjEzaHFrckVa?=
+ =?utf-8?B?SGZUa2hScFNFcHZnZWhvM0JIM3BKWHE3Q0ZteXVPUitPelFmUGg1Q24yL2Ny?=
+ =?utf-8?B?am9yREsrVHlRMGNTdjFva21uRnZFdUhGVHB6bWIvZ1h0NFV0VXRrMG91VlVB?=
+ =?utf-8?B?Yi9VNUk1Yzd0ZjJkb0N4RzJSTnNXT1dtZFlqUXlCbFRGMmR0dlYyQnVSVWFD?=
+ =?utf-8?B?QVJaQkNDa01zVXo2WERqL3k3NHlUR01jZTVvTFZ2a0wvYnk2ZmxsMUVnRjhB?=
+ =?utf-8?B?Uk03Z01DRnNGL0xrNXNvR2E3Vmh3bXhWMjdlM1ZNd0JRdEdjL3dneUx5dldP?=
+ =?utf-8?B?bmR0WkZDTkZ5N3VMVDhWUEZCaE5GM2JBdjYxRW9wMUZwd1RyeGljR3o1T0Mz?=
+ =?utf-8?B?U3BvT041ekpINnFxMTJNK2c2NzdFcndiNTUvWTBNQmlON21YaTc2TnRaeDho?=
+ =?utf-8?B?cU5pMXkwYUZpM2dRSlpjSTluN2ZLWkpXbUFpRXNzRWR6TEEzeURRdEM4Z3d5?=
+ =?utf-8?B?SXNFTkJ5YktmMWNkS3Y4NWdkOGFZOTRMOEwxajlrcEZreDljcG5STlpKZzFV?=
+ =?utf-8?B?R0gxTldZbFlXOHVBRUJmTUp6MGxRaEZ2TUJxKzl2blVnQmdiSnZPdFdpZnpz?=
+ =?utf-8?B?TDZhRTdyV1dQaGU1Y3lhZkZFWFRhVTFVODhvbkpjeVY1K1ZaNEpsWnRNcEZ4?=
+ =?utf-8?B?cVFRZkJzd2tPWkVGTkhrTzU3aTljSjhEbk02OWJUMCs3d2V2ZkUzaitiWDA3?=
+ =?utf-8?B?dWxWcEo0ZEQ4Q2dtSHVScWtRRW54T1ZVTDB2OHBFL3d1T1huQnhLQzFmS3oy?=
+ =?utf-8?B?MFFaUWxTay9BUmU2RzhDNWFGYk12SzlRWWNTZ1Y3M3FSeWpCdTZnODJSYXZt?=
+ =?utf-8?B?RW1LbFovNUo3TVNna0hHL2E4YnUvNTdicS9yM0VsQzV5UXk4cUgwRW93S1lG?=
+ =?utf-8?B?WGRDMnNaT3lxQVlianNCMVFLWVcraGdnK1c1cFdsbGR1OVk0TU1OQU8xRS9B?=
+ =?utf-8?B?eXZMOTNobnVsUlRycngwVnNLMnlMcVJzQTJMNzhaSGZlRXhEekpBbTdwcnRI?=
+ =?utf-8?B?dG9JcDRqVHRCM2dHd1N5K2FWbGVFd3k0TzVaQVI3anV6VnBnaklLeGF6cE1w?=
+ =?utf-8?B?NmtmWHNvUDRjWHFJWFBjV2NWdjRVU2hidktjU2l0SXRTWGQrSnRraWYrOHhI?=
+ =?utf-8?B?VXZLMDdZWWFTeVh4SXdoT1NqazI0bFFpVGN2cE0wMXVHT1FoTWI5YVY0THdQ?=
+ =?utf-8?B?Nitkdy93TERNY1NDU2hEZUZrMTNpSnpGNUd3RC8rOS9CZjdpOWtHanBqbFpj?=
+ =?utf-8?B?amxWVkNPTzJIVlpORkVCQlo3b2tRM3M1U0hJRHhucnZFUlVvYVVTY0xCV1Q0?=
+ =?utf-8?B?Y0dEMHpmSGNKZ3liekRHcUFwUkZTWEpac2o0U016emJNVlVqUFNDNXVPQWtQ?=
+ =?utf-8?B?UHdVdGRvZHBETGI5Y2VkcnFTMDlWSkNoc3E1TzJrK25pVGMwa2FZcWZBRXJr?=
+ =?utf-8?B?R1dZMS9kdlRCZzJldXh2dDFhb3RiUFBpbmRjMFh5eUpERUZjZ1VpdUFvRDVE?=
+ =?utf-8?B?RXR6bU8xKzVPZXBjeGdNL1NCL0kwZ0hnVFFuZkY0a245Y3lOcm04WEs1Rk1F?=
+ =?utf-8?B?TVkxYXVxMXVsVmM2b1kvK0FVTzFPRDdiMGMwM0FqNkJYWmdVbzFNbDVzcEVS?=
+ =?utf-8?B?N3g4dmFwQktwVGh2SkJ0eHM2Z1ZhSzZqVDVKL3dnVDJYdGFWSFZzWkc2UG5N?=
+ =?utf-8?B?TTlHTU9jNkNNeEZkREc0WWE5dGkranliS282WG1OWXM1VHlWZjl1NEE1NFBl?=
+ =?utf-8?Q?bEykhz?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AA948D37F500284C8C9420884B44DDD8@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8041
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DU6PEPF0000B61C.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	c12b509b-ed45-4476-7bd2-08de1313c826
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|376014|35042699022|1800799024|14060799003|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?bmNrOFAyZlNSSWlyMWQvVHZrWmZNUjBvdjJqQmQ5aG5IYzRmamVYZkZobUlT?=
+ =?utf-8?B?Ykw1YUVsbzE3NUZMSGlrSXRoM1BIK25sY1VSL3lnejFUcXI1MGZGSG1YMklo?=
+ =?utf-8?B?WWlYTDV1SGxRb3dFdW9sM05FTFkzY3ZwM2w0Y0c3Y1pVS0JMTDljZ2J2cmda?=
+ =?utf-8?B?ajdNWWlSOCs4QkR5cjFjcW9CQUUyZVJhc0FUSDlpbVM5QVhUcWtidjdtSThJ?=
+ =?utf-8?B?MlVjdjMrTVRlbzJ2WkIxRXRqc213alNVSUd3Nmk0YzFxV053elZYS3pvMGpB?=
+ =?utf-8?B?eHJkeDlxZnVNdGVKa2VzV3dvZ1dZbk5ZamZURm5JSXFMV28xaVl3dk5BT2Rr?=
+ =?utf-8?B?YzNxd3pBa3VJMlBSd2wvRS9WcDFBa1dPWmJvR2hXUTZGYXIyL0JIZ0hsSnNt?=
+ =?utf-8?B?OFRLQU9aVDNsSFFUTkhyS1JoTGJJRGtSS3czTkI0NExQVkxRa1lES0h4WTZv?=
+ =?utf-8?B?VUIwdC9SRk1mZ05YQWh6SWxDdWdvdUVqN05WQW9sRk1yL256N2hqZTlDY2Vx?=
+ =?utf-8?B?Ni9pcXB4dnJQNWViN2pzMWlhUnJOYkZOMUlyYXNQbDZhUTFvZHdEQ21OYTRs?=
+ =?utf-8?B?cnBnZjY0VWExYUZDUjcvQWpEOXA0K21QbGEzVkdSemZBWC9WdEVTb0dody9B?=
+ =?utf-8?B?RTVvT0tWVW1hRVZzOTYzNjUyaFlmV05FWDMzVzFkSXhjQlk4czZVRmpFUFBy?=
+ =?utf-8?B?ZkZOa0ZWTERjVGhRWEtRQVZGaTJIbmZsbG54R2hkZS9mNWtsdGF4SktrOXZa?=
+ =?utf-8?B?QXI2aVJmZkwzL1JneFJSS1hJQ1Rua0F3ajduYTNWbXNjZDhJOUU3M0ZGalJl?=
+ =?utf-8?B?TnZwVUM5S1VHWWRjYWRkUVBYWmlTZTIreXZuOFZLWERtWFRFTk1hR1RnUzRz?=
+ =?utf-8?B?eVJTNVhjaXlFY3FhODFnSlhxRndSTHRSUk4wQ2s2aFlON2kzdlNxeGZXdDdG?=
+ =?utf-8?B?TVAzYzYyTGZrQTlxREEwR1Y0bDZCaFJFeEEzaTlScS9nR01zUWphMG95TWIx?=
+ =?utf-8?B?OENuZDdpVlhRNm8vbUVDVjUyazQ4RzRyazVzc3BTd0ZhaEhaUGl5RUtJbVNH?=
+ =?utf-8?B?b0hLNVc5YXo5SHpHZ051cHFwcTllelhHNnNodUJMSkVRY3ZzbFp5anluMXQv?=
+ =?utf-8?B?em5IZTU5ZlpRaW82WDhIMG0rek9GeDgrUXNod2ZzZkZmRUlHVWI5Z0lreTdC?=
+ =?utf-8?B?TTJ1d3czRVlYcXhtVWNEZlNPL0R5cGl1aUdqOVJwVGxndlFPTzg3NTJoaFMv?=
+ =?utf-8?B?WEdBMTZ3VEd5em1DckF2VWtCSC9CSmxUaVc3STVIWDZrck9GODVKaHZOZWFC?=
+ =?utf-8?B?Y3VKK1NHRDVEcVYwVXhCS3hFdVE4dTlHeGk5MEROUEtCdDNjZmdDd1o5NlMw?=
+ =?utf-8?B?eW0vRmQvTHVvWWRBUVpFbmxzaEtNMW5yZTJVV0NsMjYvMDRoRzJVdkxxZUJN?=
+ =?utf-8?B?U0dXeFd5cnNQTGVzR3ViYnZlNUhIcklZVEJmUGJaTGdBTVVrVmg0R01vOVRN?=
+ =?utf-8?B?WXlpa2x1YzZiSSszRHlrTWRiK2Y4bUd5M3ZNSTRhdC8xeG1RT2Zsdml2YVU1?=
+ =?utf-8?B?Ti9lbDJFaU51K1JRRnYzUTA0U0h3SzNnNmhtbDdscGhyZzFRVEphMTliS3Yy?=
+ =?utf-8?B?Z1RDbThNMmw1d1gydmlhNFBmUkdGYmtEVjNxQnNBc0VtbXJTd3pRbkxQWkVZ?=
+ =?utf-8?B?T094MFZWTTJlMW1Wb2xuMDBmcGd4NkRPRlFqSDlGU3luanFFYi8rcGJKVUhL?=
+ =?utf-8?B?SmxDYVNDK2pDbzFBcFRKTFNsR3dLLzZIWkkvbHV2aUpsYlphSHZSTGgwWGo3?=
+ =?utf-8?B?cDVKNHpoU2VOTUwrOWo4eVc3Yk1UR3hUWGE3ZFNhQXVCeDFJcnJUVTJtdHM4?=
+ =?utf-8?B?MEpTWTlFbGVMZlpOWDRKTmptMTM5emtGUkpqYmswcC96aXlWdVVCUW04aDNu?=
+ =?utf-8?B?TWhYbUdjeC9XTzk1SXBuY0NqaGcyWnZoRWlRV3pteGNobXJOdUM5TnpTOVFO?=
+ =?utf-8?B?Tjg2M1VoTnpuT09SV0daOEhlbTc4dHFNVmkyV0ZKSUZNZy9HZ3Z3K25yd0lG?=
+ =?utf-8?B?Nm1FR2c1eDVqQ2MrS1hjaWM2ZkJKbXdIMEdTUGF2SXVWYTI0bk1KRDFka1Rh?=
+ =?utf-8?Q?lWfk=3D?=
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(35042699022)(1800799024)(14060799003)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2025 15:41:55.1049
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb3d3d91-6724-41a2-c84a-08de1313dc27
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DU6PEPF0000B61C.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9417
 
-From: Harry Ramsey <your mail@arm.com>
-
-Implement `setup_mm` for MPU systems. This variant does not require
-setting up a direct map.
-
-To reduce code duplication the common initalisation code for both MPU
-and MMU Arm64 configurations is refactored into `setup_mm`. Platform-specific
-setup steps are now handled by a new helper function `setup_mm_helper`.
-
-Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
----
- xen/arch/arm/arm64/mmu/mm.c   | 26 +-------------------
- xen/arch/arm/include/asm/mm.h |  2 ++
- xen/arch/arm/mm.c             | 45 +++++++++++++++++++++++++++++++++++
- xen/arch/arm/mpu/mm.c         | 30 +++++++++++++++++++++--
- 4 files changed, 76 insertions(+), 27 deletions(-)
-
-diff --git a/xen/arch/arm/arm64/mmu/mm.c b/xen/arch/arm/arm64/mmu/mm.c
-index 3e64be6ae6..70b53be032 100644
---- a/xen/arch/arm/arm64/mmu/mm.c
-+++ b/xen/arch/arm/arm64/mmu/mm.c
-@@ -4,8 +4,6 @@
- #include <xen/llc-coloring.h>
- #include <xen/mm.h>
- #include <xen/pfn.h>
--#include <xen/static-memory.h>
--#include <xen/static-shmem.h>
- 
- #include <asm/setup.h>
- 
-@@ -240,33 +238,18 @@ static void __init setup_directmap_mappings(unsigned long base_mfn,
-         panic("Unable to setup the directmap mappings.\n");
- }
- 
--void __init setup_mm(void)
-+void __init setup_mm_helper(void)
- {
-     const struct membanks *banks = bootinfo_get_mem();
-     paddr_t ram_start = INVALID_PADDR;
-     paddr_t ram_end = 0;
--    paddr_t ram_size = 0;
-     unsigned int i;
- 
--    init_pdx();
--
--    /*
--     * We need some memory to allocate the page-tables used for the directmap
--     * mappings. But some regions may contain memory already allocated
--     * for other uses (e.g. modules, reserved-memory...).
--     *
--     * For simplicity, add all the free regions in the boot allocator.
--     */
--    populate_boot_allocator();
--
--    total_pages = 0;
--
-     for ( i = 0; i < banks->nr_banks; i++ )
-     {
-         const struct membank *bank = &banks->bank[i];
-         paddr_t bank_end = bank->start + bank->size;
- 
--        ram_size = ram_size + bank->size;
-         ram_start = min(ram_start, bank->start);
-         ram_end = max(ram_end, bank_end);
- 
-@@ -274,16 +257,9 @@ void __init setup_mm(void)
-                                  PFN_DOWN(bank->size));
-     }
- 
--    total_pages += ram_size >> PAGE_SHIFT;
--
-     directmap_virt_end = XENHEAP_VIRT_START + ram_end - ram_start;
-     directmap_mfn_start = maddr_to_mfn(ram_start);
-     directmap_mfn_end = maddr_to_mfn(ram_end);
--
--    setup_frametable_mappings(ram_start, ram_end);
--
--    init_staticmem_pages();
--    init_sharedmem_pages();
- }
- 
- /*
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 7a93dad2ed..1f5b41e602 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -202,6 +202,8 @@ extern void remove_early_mappings(void);
- extern int prepare_secondary_mm(int cpu);
- /* Map a frame table to cover physical addresses ps through pe */
- extern void setup_frametable_mappings(paddr_t ps, paddr_t pe);
-+/* Helper function to setup memory management */
-+extern void setup_mm_helper(void);
- /* map a physical range in virtual memory */
- void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int attributes);
- 
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 3b05b46ee0..f26c28aaf5 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -12,8 +12,12 @@
- #include <xen/grant_table.h>
- #include <xen/guest_access.h>
- #include <xen/mm.h>
-+#include <xen/static-memory.h>
-+#include <xen/static-shmem.h>
- #include <xen/vmap.h>
- 
-+#include <asm/setup.h>
-+
- #include <xsm/xsm.h>
- 
- #include <public/memory.h>
-@@ -24,6 +28,47 @@
- 
- unsigned long frametable_base_pdx __read_mostly;
- 
-+#if !defined(CONFIG_ARM_32) || defined(CONFIG_MPU)
-+void __init setup_mm(void)
-+{
-+    const struct membanks *banks = bootinfo_get_mem();
-+    paddr_t ram_start = INVALID_PADDR;
-+    paddr_t ram_end = 0;
-+    paddr_t ram_size = 0;
-+    unsigned int i;
-+
-+    init_pdx();
-+
-+    /*
-+     * We need some memory to allocate the page-tables used for the directmap
-+     * mappings. But some regions may contain memory already allocated
-+     * for other uses (e.g. modules, reserved-memory...).
-+     *
-+     * For simplicity, add all the free regions in the boot allocator.
-+     */
-+    populate_boot_allocator();
-+
-+    for ( i = 0; i < banks->nr_banks; i++ )
-+    {
-+        const struct membank *bank = &banks->bank[i];
-+        paddr_t bank_end = bank->start + bank->size;
-+
-+        ram_size = ram_size + bank->size;
-+        ram_start = min(ram_start, bank->start);
-+        ram_end = max(ram_end, bank_end);
-+    }
-+
-+    total_pages = ram_size >> PAGE_SHIFT;
-+
-+    setup_mm_helper();
-+
-+    setup_frametable_mappings(ram_start, ram_end);
-+
-+    init_staticmem_pages();
-+    init_sharedmem_pages();
-+}
-+#endif
-+
- bool flags_has_rwx(unsigned int flags)
- {
-     /*
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 3f155b7db2..a058db19ef 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -8,9 +8,11 @@
- #include <xen/sizes.h>
- #include <xen/spinlock.h>
- #include <xen/types.h>
-+#include <xen/pfn.h>
- #include <asm/mpu.h>
- #include <asm/mpu/mm.h>
- #include <asm/page.h>
-+#include <asm/setup.h>
- #include <asm/sysregs.h>
- 
- struct page_info *frame_table;
-@@ -378,9 +380,33 @@ int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
-     return xen_mpumap_update(virt, mfn_to_maddr(mfn_add(mfn, nr_mfns)), flags);
- }
- 
--void __init setup_mm(void)
-+/*
-+ * Heap must be statically configured in Device Tree through "xen,static-heap"
-+ * on MPU systems, use setup_mm_helper() for that.
-+ */
-+void __init setup_mm_helper(void)
- {
--    BUG_ON("unimplemented");
-+    const struct membanks *reserved_mem = bootinfo_get_reserved_mem();
-+    unsigned int bank = 0;
-+
-+    for ( ; bank < reserved_mem->nr_banks; bank++ )
-+    {
-+        if ( reserved_mem->bank[bank].type == MEMBANK_STATIC_HEAP )
-+        {
-+            paddr_t bank_start = round_pgup(reserved_mem->bank[bank].start);
-+            paddr_t bank_size = round_pgdown(reserved_mem->bank[bank].size);
-+            paddr_t bank_end = bank_start + bank_size;
-+
-+            /* Map static heap with one MPU protection region */
-+            if ( xen_mpumap_update(bank_start, bank_end, PAGE_HYPERVISOR) )
-+                panic("Failed to map static heap\n");
-+
-+            break;
-+        }
-+    }
-+
-+    if ( bank == reserved_mem->nr_banks )
-+        panic("No static heap memory bank found\n");
- }
- 
- int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
--- 
-2.43.0
-
+SGkgSGFycnksDQoNCj4gT24gMjQgT2N0IDIwMjUsIGF0IDE2OjM3LCBIYXJyeSBSYW1zZXkgPEhh
+cnJ5LlJhbXNleUBhcm0uY29tPiB3cm90ZToNCj4gDQo+IEZyb206IEhhcnJ5IFJhbXNleSA8eW91
+ciBtYWlsQGFybS5jb20+DQoNCndlIHdpbGwgZml4IHRoZSBhdXRob3JzaGlwIGluIHYyLCBmb3Ig
+bm93IGxldOKAmXMgbGVhdmUgdGhpcyBzZXJpZSB0byBjb2xsZWN0IHRoZSBjb21tZW50cyBmcm9t
+DQp0aGUgbWFpbGluZyBsaXN0Lg0KDQpDaGVlcnMsDQpMdWNhDQoNCg==
 
