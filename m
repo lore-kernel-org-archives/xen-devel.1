@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24962CCD1BF
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Oct 2025 15:38:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1150563.1481686 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 451B6CCF9E0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Oct 2025 15:38:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1150560.1481656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCJrO-0004ZU-DJ; Fri, 24 Oct 2025 15:37:46 +0000
+	id 1vCJrK-0003tg-My; Fri, 24 Oct 2025 15:37:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1150563.1481686; Fri, 24 Oct 2025 15:37:46 +0000
+Received: by outflank-mailman (output) from mailman id 1150560.1481656; Fri, 24 Oct 2025 15:37:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCJrO-0004ZJ-AJ; Fri, 24 Oct 2025 15:37:46 +0000
-Received: by outflank-mailman (input) for mailman id 1150563;
- Fri, 24 Oct 2025 15:37:45 +0000
+	id 1vCJrK-0003tZ-K8; Fri, 24 Oct 2025 15:37:42 +0000
+Received: by outflank-mailman (input) for mailman id 1150560;
+ Fri, 24 Oct 2025 15:37:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QEVg=5B=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
- id 1vCJrN-0003nv-Iu
- for xen-devel@lists.xenproject.org; Fri, 24 Oct 2025 15:37:45 +0000
+ id 1vCJrJ-0003nv-Jd
+ for xen-devel@lists.xenproject.org; Fri, 24 Oct 2025 15:37:41 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 6214e1ff-b0ef-11f0-980a-7dc792cee155;
- Fri, 24 Oct 2025 17:37:44 +0200 (CEST)
+ id 5c9f0cea-b0ef-11f0-980a-7dc792cee155;
+ Fri, 24 Oct 2025 17:37:35 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 789161515;
- Fri, 24 Oct 2025 08:37:35 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5246D1515;
+ Fri, 24 Oct 2025 08:37:26 -0700 (PDT)
 Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 21B953F63F;
- Fri, 24 Oct 2025 08:37:42 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA6403F63F;
+ Fri, 24 Oct 2025 08:37:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6214e1ff-b0ef-11f0-980a-7dc792cee155
+X-Inumbo-ID: 5c9f0cea-b0ef-11f0-980a-7dc792cee155
 From: Harry Ramsey <harry.ramsey@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: luca.fancellu@arm.com,
@@ -53,43 +53,42 @@ Cc: luca.fancellu@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 3/3] arm: Implement ioremap_attr for MPU
-Date: Fri, 24 Oct 2025 16:37:19 +0100
-Message-ID: <20251024153719.408806-4-harry.ramsey@arm.com>
+Subject: [PATCH 0/3] Third MPU series
+Date: Fri, 24 Oct 2025 16:37:16 +0100
+Message-ID: <20251024153719.408806-1-harry.ramsey@arm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251024153719.408806-1-harry.ramsey@arm.com>
-References: <20251024153719.408806-1-harry.ramsey@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implement the function `ioremap_attr` for MPU systems.
+Hello,
 
-Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
----
- xen/arch/arm/mpu/mm.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+This series aims to further the ongoing work to introduce support for MPU
+systems in xen.
 
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index c5128244b7..3570ce6b27 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -475,8 +475,13 @@ void free_init_memory(void)
- 
- void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int flags)
- {
--    BUG_ON("unimplemented");
--    return NULL;
-+    paddr_t start_pg = round_pgdown(start);
-+    paddr_t end_pg = round_pgup(start_pg + len);
-+    if ( xen_mpumap_update(start_pg, end_pg, flags) )
-+        return NULL;
-+
-+    /* Mapped or already mapped */
-+    return maddr_to_virt(start_pg);
- }
- 
- /*
--- 
+The patches in this series implement the logic to map MPU regions.
+
+Thanks,
+Harry Ramsey
+
+Harry Ramsey (2):
+  arm/mpu: Implement setup_mm for MPU systems
+  arm/mpu: Implement reference counting for overlapping regions
+
+Luca Fancellu (1):
+  arm/mpu: Implement ioremap_attr for MPU
+
+ xen/arch/arm/arm32/asm-offsets.c         |   2 +
+ xen/arch/arm/arm64/asm-offsets.c         |   2 +
+ xen/arch/arm/arm64/mmu/mm.c              |  25 +----
+ xen/arch/arm/include/asm/arm32/mpu.h     |   2 +
+ xen/arch/arm/include/asm/arm64/mpu.h     |   2 +
+ xen/arch/arm/include/asm/mm.h            |   2 +
+ xen/arch/arm/include/asm/mpu/regions.inc |  11 ++-
+ xen/arch/arm/mm.c                        |  45 +++++++++
+ xen/arch/arm/mpu/mm.c                    | 121 +++++++++++++++++++----
+ 9 files changed, 166 insertions(+), 46 deletions(-)
+
+--
 2.43.0
 
 
