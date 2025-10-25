@@ -4,33 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C65CCCD1BF
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Oct 2025 20:10:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1151243.1481916 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02BFCCF9E5
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Oct 2025 21:51:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1151162.1481926 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCkaY-0004aH-GS; Sat, 25 Oct 2025 20:10:10 +0000
+	id 1vCmAI-0007sT-C1; Sat, 25 Oct 2025 21:51:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1151243.1481916; Sat, 25 Oct 2025 20:10:10 +0000
+Received: by outflank-mailman (output) from mailman id 1151162.1481926; Sat, 25 Oct 2025 21:51:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vCkaY-0004aA-By; Sat, 25 Oct 2025 20:10:10 +0000
-Received: by outflank-mailman (input) for mailman id 1151243;
- Sat, 25 Oct 2025 20:10:09 +0000
+	id 1vCmAI-0007sM-8Q; Sat, 25 Oct 2025 21:51:10 +0000
+Received: by outflank-mailman (input) for mailman id 1151162;
+ Sat, 25 Oct 2025 13:47:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aHFQ=5C=gmail.com=freddy77@srs-se1.protection.inumbo.net>)
- id 1vCkaX-000392-GS
- for xen-devel@lists.xenproject.org; Sat, 25 Oct 2025 20:10:09 +0000
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [2607:f8b0:4864:20::b133])
+ <SRS0=rCcB=5C=failmail.dev=patrick@srs-se1.protection.inumbo.net>)
+ id 1vCebk-0001KO-SQ
+ for xen-devel@lists.xen.org; Sat, 25 Oct 2025 13:47:00 +0000
+Received: from failmail.dev (failmail.dev [162.55.49.44])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 99dab77f-b1de-11f0-980a-7dc792cee155;
- Sat, 25 Oct 2025 22:10:07 +0200 (CEST)
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-63e393c4a8aso3925787d50.2
- for <xen-devel@lists.xenproject.org>; Sat, 25 Oct 2025 13:10:07 -0700 (PDT)
+ id 100f32b9-b1a9-11f0-980a-7dc792cee155;
+ Sat, 25 Oct 2025 15:46:53 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,70 +38,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99dab77f-b1de-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761423006; x=1762027806; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=TZHvKenrpBFiKUIp59zxttbgmMI64UBGFdP5y2QzeKQ=;
-        b=S+hByAWsvQwMqT+rFMGAsSLjMPceIq7HznJSzhdKHCxwG2LB/CPpcTkpZZOx8gsW5E
-         xJkRB8yvGn8O5U6BSFSh4wJzYYV59a6eFqdxaNo1whXN8cHPAljjgHmgqlrYFUghgM6s
-         QtVPrSEaHBQkZs4ZQo0GgxZogSmmShpKxgfaVCXqjXffSYEClg3HbDm0TRuPZONMLx7C
-         O4ag3Ku5v9U55MeySnAIDO4rV6L4s9xo0qBEJUX7X9ZOL/Vdq1R1vfhWiC4kq/ivBf+B
-         00PFk0J0UdfvTaogtAlWpmanDvMkmZDjWl8xxbuFjb7YlvQCiQfR/YW2KvcrmJYch9C2
-         4qkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761423006; x=1762027806;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TZHvKenrpBFiKUIp59zxttbgmMI64UBGFdP5y2QzeKQ=;
-        b=I/8YQlUKgxtIts+b5Bz7HybsBr3WEPEmQt40B3oxlqWqxE8h28cxlW4UAdLUpSvz8f
-         o1PdtWmh4jjutCHgdP77+jPrccyRjerEymbU12if1B2q+Qo/H59ZuQZhYQE+i3M15iwi
-         bSxOisWxxCVP3H7BmSrsBCNJgI3Zq92gAuqXldgTQk9XO8AvP3rZ8LPHFKRXhVXmv6ZK
-         AkkubTDU8lVqxfQe1a3pKB8wxV55f1o/fA8y0VXtTdRhIyoRwLz8MygkOPvWES0oyhbt
-         UzaGdgg9mgvYN3OlK1uEt2LsIWxyRrVdmuWyM4H0Y9HsBOLSvsSAKgikMJ58goCaiw0p
-         /sQg==
-X-Gm-Message-State: AOJu0YxCDpZCwM+6OlwOKFXbMm5EV6wpxTGewCt4DNCMPG4FFjNJi/lE
-	MgGGBHQ8ig+edJj2hWPr/E2/D32g2cN1lStM7vmyMXgh4gXRL1j8AsUvEWBy7t3e2Gc3fx2eQ3t
-	BWg5l1yXoeF+yPgu9PKjtnFojHbRUxIcRrA==
-X-Gm-Gg: ASbGncuYEGXKSVeeHCONR/9xepfOmUBXsUOfE38dFLy2t0XnHn4E7gKMtgra2czW5a0
-	+IaEMEgi6UGv/Z2zj2xT97pO3L3r6MnoFvSctykAFOuzmmU7VBv1Bq0768gRXGpqnf3uKFDldpW
-	MSqYREAfY67X7Wi8aiYXgDnvieUl3vJX0ykwp9xj4tAm0QLfeWOofqcPK43wWN3d1wYYsAWWJmQ
-	ZVdY8/Imklywjim8KwEKt3y88wrTe3bJM3Pi7T0bOatnUOvbDA4M0Vv3eey
-X-Google-Smtp-Source: AGHT+IEwga0Gy48EGTX6J/zYPv3IOrrKdqpKEO1MgqtzAx0IfS28AlLbWfUe2jHUmEThmR4P7BrOBqAr0hO/ak7Nq7Q=
-X-Received: by 2002:a05:690e:1483:b0:63e:29ad:ad8 with SMTP id
- 956f58d0204a3-63e29ad0e51mr18247718d50.25.1761423006511; Sat, 25 Oct 2025
- 13:10:06 -0700 (PDT)
+X-Inumbo-ID: 100f32b9-b1a9-11f0-980a-7dc792cee155
+DKIM-Signature: v=1; a=rsa-sha256; s=rsa_default; d=failmail.dev; c=relaxed/relaxed; r=y;
+	h=Subject:From:To:Date:Message-ID; t=1761399891; bh=BpAzC6KqIFyvNtFl55X1Ecu
+	3ee15Bu1PFYWXuX/7qXE=; b=VF+V2Ha9ChWjTi3OitXixXe9x+Kt9TpmzRdevxWob3IboTo4yB
+	K6oZYgmODKPTZXDy4qPJORspMGoPj9fNnGanbkGKDfm47gA679begvzO8ah5RpA0ZIlo8792Pdn
+	3jA8dWMgKCw5Srb+yLIHoNn/39doLMOZsWtOroO1xBufHIBYfmz3vro79RWL3xBizTL6zhPjOuS
+	Ws/JaMpg3KK3fUmm3pkbN+EtPNswG/wwINu7rzg2YH683T8h6A04Vq0PPgtK5Ff+jUvHGaOsxvt
+	c2daZGOQlGc/86xO6laSfWxxgDcL/jv+14bUwCTbWaLnJ83xfTpvZth+UKPqH4/o4jw==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=ed_default; d=failmail.dev; c=relaxed/relaxed; r=y;
+	h=Subject:From:To:Date:Message-ID; t=1761399891; bh=BpAzC6KqIFyvNtFl55X1Ecu
+	3ee15Bu1PFYWXuX/7qXE=; b=s4PNiwtqa4hcz0EmNJrdVkBBZ2Mh0Y52j8kMordcOU02MYNl/p
+	ZbAMNdQFtPKK8WC5y8DonYJAz5fOy4bwoDCQ==;
+Message-ID: <ab3a978a-2088-4a39-a4c1-822ae5050fe6@failmail.dev>
+Date: Sat, 25 Oct 2025 13:44:00 +0000
 MIME-Version: 1.0
-References: <CAHt6W4dnM1pLMnDVyywc_2d-6nry7pFCYomSvRjyuH7sRm0J4Q@mail.gmail.com>
- <72a2f002-23fd-4d06-8c44-3e535533bec2@citrix.com>
-In-Reply-To: <72a2f002-23fd-4d06-8c44-3e535533bec2@citrix.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 25 Oct 2025 21:09:54 +0100
-X-Gm-Features: AS18NWBrAfHa2q4j67EgIj2tXQtQPp61krvPOaAIoeeBoq2I19sOGmwSfLy8G80
-Message-ID: <CAHt6W4cumdaGHzwNTMzyYvFVCs8X8FoddT1KaiGrmAVgUYgw+g@mail.gmail.com>
-Subject: Re: [PATCH] xen/pci: prevent infinite loop for faulty SR-IOV cards
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+To: xen-devel@lists.xen.org
+From: Patrick <patrick@failmail.dev>
+Content-Language: en-US
+Subject: [BUG]: Crashing Xen when nestedhvm is enabled
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, 24 Oct 2025 at 16:58, Andrew Cooper <andrew.cooper3@citrix.com> wrote:
->
-> On 24/10/2025 4:13 pm, Frediano Ziglio wrote:
-> > If a SR-IOV card presents an I/O space inside a BAR the
-> > code will continue to loop on the same card.
-> > This is due to the missing increment of the cycle variable.
-> >
-> > Signed-off-by: Frediano Ziglio <frediano.ziglio@cloud.com>
->
-> Yes, that's buggy.  Was this from a real card, or just code inspection?
->
+Dear all,
 
-Code inspection.
+I think I have found a way for a guest to crash the hypervisor,
+when hardware nesting is enabled and we are running on Intel using VMX.
 
-> ~Andrew
+This is done by executing the following steps in the non nested guest:
 
-Frediano
+- Enable VMX and set a vmcs active
+- Override the revision id of the active vmcs using memory access to any invalid id
+- call vmwrite to write the `MSR_BITMAP`
+
+Basically this:
+```C
+vmxon();
+vmcs = alloc();
+*(uint32_t*)vmcs = correct_vmcs_revision_id;
+vmptrld(vmcs);
+*vmcs = invalide_vmcs_revision_id;
+vmwrite(MSR_BITMAP, NULL);
+```
+
+The `vmptrld` will set the provided vmcs as the link pointer as seen in
+`xen/arch/x86/hvm/vmx/vvmx.c:1834`
+```
+if ( cpu_has_vmx_vmcs_shadowing )
+    nvmx_set_vmcs_pointer(v, nvcpu->nv_vvmcx);
+```
+
+If the guest now calls `VMWRITE` it will access that vmcs directly,
+execpt if writing/reading the `IO_BITMAP` or the `MSR_BITMAP`
+
+`xen/arch/x86/hvm/vmx/vvmx.c:107`
+```
+/*
+* For the following 6 encodings, we need to handle them in VMM.
+* Let them vmexit as usual.
+*/
+set_bit(IO_BITMAP_A, vw);
+set_bit(VMCS_HIGH(IO_BITMAP_A), vw);
+set_bit(IO_BITMAP_B, vw);
+set_bit(VMCS_HIGH(IO_BITMAP_B), vw);
+set_bit(MSR_BITMAP, vw);
+set_bit(VMCS_HIGH(MSR_BITMAP), vw);
+```
+
+If we now execute `vmwrite(MSR_BITMAP, 0)` in the guest it will execute this stack:
+```
+nvmx_handle_vmwrite
+set_vvmcs_safe
+set_vvmcs_real_safe
+virtual_vmcs_vmwrite_safe
+virtual_vmcs_enter
+__vmptrld
+```
+The vmcs pointer being loaded in the last step being the one supplied by the guest
+that has been overwritten.
+Since we have overwritten the `vmcs_revision_id` the hardware will reject the vmptrld, which
+will call `BUG()`.
+
+---
+A secondary similar bug happens when calling `VMXOFF` while a shadow vmcs is active.
+This will not clear the shadow vmcs, and crash the guest if it ever writes to the vmcs again.
+Effectively locking the page of being modified until a new vmcs is set active.
+This should be fixed by applying this patch:
+
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 2432af58e0..3895dd158a 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -1589,6 +1589,8 @@ static int nvmx_handle_vmxoff(struct cpu_user_regs *regs)
+     struct vcpu *v=current;
+     struct nestedvmx *nvmx = &vcpu_2_nvmx(v);
+ 
++	if ( cpu_has_vmx_vmcs_shadowing )
++		nvmx_clear_vmcs_pointer(v, nvcpu->nv_vvmcx);
+     nvmx_purge_vvmcs(v);
+     nvmx->vmxon_region_pa = INVALID_PADDR;
+
+As far as I have read it is not specifically stated in the Intel SDM that a VMXOFF clears the active vmcs, however it
+does also not state anything otherwise and I thinks it's saner to clear it than to crash the guest because of an
+vmcs error, when it has vmx disabled.
+ 
+
 
