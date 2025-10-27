@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53B7CCF9F0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A10ACCF9EF
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Oct 2025 22:17:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1151820.1482355 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1151823.1482386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDVWZ-0000u4-Cb; Mon, 27 Oct 2025 22:17:11 +0000
+	id 1vDVWg-0001bh-Ah; Mon, 27 Oct 2025 22:17:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1151820.1482355; Mon, 27 Oct 2025 22:17:11 +0000
+Received: by outflank-mailman (output) from mailman id 1151823.1482386; Mon, 27 Oct 2025 22:17:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDVWZ-0000tY-8V; Mon, 27 Oct 2025 22:17:11 +0000
-Received: by outflank-mailman (input) for mailman id 1151820;
- Mon, 27 Oct 2025 22:17:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vDVWg-0001aw-5X; Mon, 27 Oct 2025 22:17:18 +0000
+Received: by outflank-mailman (input) for mailman id 1151823;
+ Mon, 27 Oct 2025 22:17:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kuhB=5E=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vDVWY-0000qq-KB
- for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 22:17:10 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ae31aa1a-b382-11f0-9d16-b5c5bf9af7f9;
- Mon, 27 Oct 2025 23:17:09 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-47109187c32so28219825e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 15:17:10 -0700 (PDT)
+ id 1vDVWe-0001Ic-9j
+ for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 22:17:16 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id afef5a8b-b382-11f0-980a-7dc792cee155;
+ Mon, 27 Oct 2025 23:17:12 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-475dc6029b6so24869555e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 15:17:12 -0700 (PDT)
 Received: from localhost.localdomain (host-78-149-11-196.as13285.net.
  [78.149.11.196]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475de57b156sm148785595e9.13.2025.10.27.15.17.08
+ 5b1f17b1804b1-475de57b156sm148785595e9.13.2025.10.27.15.17.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 15:17:08 -0700 (PDT)
+ Mon, 27 Oct 2025 15:17:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae31aa1a-b382-11f0-9d16-b5c5bf9af7f9
+X-Inumbo-ID: afef5a8b-b382-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1761603429; x=1762208229; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1761603432; x=1762208232; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VE3mMInBfN23ll5cf6fJavclqS1vi+3CRHMmk9cq9v0=;
-        b=XaMrKvBS4jAeD6AjzW8KlDjDOH0PwMRuxPVpLDzGvtLN2Lmj/IlZ7OwNyYHbeEixMr
-         YwOUVhL43EvUbFDd1nsnYvMLgOq/GwGGP469Hk3ThJi014Euayct+mn5YX+x+RB5ISLC
-         LjfGYnVZ7aCAOe+HNC6LgLgOP1i/IYfzrVVy4=
+        bh=XPm17Di3amUuRs7iaGe/NVQW8x+O/P1o19S+UioYfX4=;
+        b=YPwluO88tbplUvDbaVvksuQo9tWa45DeX2bNtRXjXQpOURAJXwg6ms9io3jPlXNgpc
+         1mKgVyJs1io66cBtQXG710TCJZCLaxrcp3z8yi8XbKEZxSCT/s6K98MpCrAEcoZ62+Lf
+         DuC5KfiQoXa0qhvsZjcyaHTXZ2YiJ8pdmWPdY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761603429; x=1762208229;
+        d=1e100.net; s=20230601; t=1761603432; x=1762208232;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=VE3mMInBfN23ll5cf6fJavclqS1vi+3CRHMmk9cq9v0=;
-        b=c+v3Ho6Th5f+WtpLhEdQBCdRrngsvlbX7izPhRwhLbi6I2EsnuspNE4OVUWQqSeWqa
-         28Ulz2e9V22SqiJFC85WQ39LUjBxfsBxhG86dfl4U9aGBp+RS9z3Rn1oGlUiurOR06UF
-         Ri4EqsNSnrbOPOicp2I7GjXESk55iIb/fyjSryEtK0kzBjN1OHUhrBRW1M4fxnFRlkJg
-         mO2Ky3vDvvq8/fc5X/2+HRyRhd561ODV79eBCLGQnZcbzGWI/h35k26GRcIm9kq02mrr
-         eNZ0Jne7WtR/6b+PI6Bepy9vse0C+IiTLScZVZt9QHPrQecaYFZ9pr4KDVX7s1p5wrlD
-         GZVA==
-X-Gm-Message-State: AOJu0Yw+eJi3CErNyABWyFxsKcDPi0zuiie5oGLFvOispiC2WtnFEjiP
-	0Ns03Ewjaz96+JB6xdVetEHqGqiJWX+1noDRDfSEGrdCcBsP/0e3Ul5Kb+dTnwMvfXg0ngYxZjq
-	U7jynKYWzHA==
-X-Gm-Gg: ASbGncuQTsEeiCGWKFDB27CDzgewzjxY+fMticT/7T3Md9XQZO5Jg/1DLeKN7Lm53HU
-	n1vl/fsB9/njqIFFSnJULUUO5OhoadSVwk3AlXbvdoUg4LNJG2fPiv57qeFSQrFnlbBr4N8gazS
-	sJHYm2h6DcYlkmxI/PPLPZitkUK3wDgmHbvmu3Cxhxh4k3YY6C1R57NMNhC5vLgvEtg5ZmRF8Vx
-	G8MHcJbCmkLD6/lU69lY7oNMdPgWdDX47RpnXItUQpep7J4RpEKkDNIl25imoZo0dABcu4fzJ/U
-	+YYBRJSj/OTKzpQe2yTN08jDc/shxbXxgjkQw/HCXAzaDBlPHqqCUhRUBWR3jXccuLLvYdTfwa1
-	8VSw3hnsUtxP1Lzamo+5VeCn7tiA3H2H9pOUYwOR/DzqZKGPMoJUgl726hwUiXQ4cvnRSgjFP0E
-	h8PppnpA1rGM0sac2gCgl42EEYB4c41D6Mhp4YXZfa5fXaiz/RsFE9DjDDDZeZiw==
-X-Google-Smtp-Source: AGHT+IFco5yk1ZVisa4K7g88Lu+yzwh414XnzznpRCiRX4bvn+BssdTH6CW19Dw8EGBtpbi72Gqpdg==
-X-Received: by 2002:a05:600c:46ca:b0:471:3b6:f2d with SMTP id 5b1f17b1804b1-47717e7a668mr8381645e9.38.1761603429129;
-        Mon, 27 Oct 2025 15:17:09 -0700 (PDT)
+        bh=XPm17Di3amUuRs7iaGe/NVQW8x+O/P1o19S+UioYfX4=;
+        b=iezyh/hOw5C8SqEac8WHnypzIkagchbJgT5dG5AMD5zaZQD10MN449dc4HhJU1rkm7
+         XgP/teE2ofnNlDDmSOnMUnhoqNsz3SFniQ3qU35ndC+T0e8lFnRKNFCCCtYw9pOxCMuf
+         DB759KOFK6EmPYqplqvOwuQoQ1gAXe8eV+QM6hDXht2CMrVVE+SKXlDrWQ0DAww6ohQH
+         mu1jZzo2hwNC6db7kOMUyOEQVlYI4CoGKidovjgnjSW7UGaVJEGRXDyWKRDbKXg6cG1w
+         83rfCkubzeES3lXxpvhe9BRpACXQuEDPbHd8nmXqrU+6WpjPomz+Ppw2a8gqW8lnPeAU
+         k0Qw==
+X-Gm-Message-State: AOJu0YzuuMbf1WeqZySpvYHDAC5jep8yp7q8hHSgIBL6eSH/lWnjNiUx
+	vTnuDokjut0X31WKR6qG5adxneYdyFBq7GP2Ogn+pKX0H7Ms/BP9BV2VTrFEqARi/HdeW6jnOPi
+	3cZR9Ti1W4w==
+X-Gm-Gg: ASbGncu/BF4eksZeRPnc+J/bOpg5dBpc0Q8cCP7fSRLo2YZzVKhz019XrTWRjCNmp/2
+	q/7J0lGZQAqogEWxN+fEz0vdw1RDDYk7vHMxvCpyvVtJldVkMBhKMx0d5KDKR0kl2Qtv8JFMWK0
+	UANOjh/MhNaMzADEG2Zp1ifcFtCEOEB+K4E3scxyji+tQkIOTrv4GtkuqEe+0lMPvZnD2k+Ogse
+	O8iBgXZqrZWNRthiLLHhCUMZ5oEe/uQruCfF6ALLQzyCLTvO+UMjK9HzoX7bnJbskH57R9COzub
+	GarX+bnhITGQsCPg1kQjC4M7dkToLpK6SR+RGXKB5rVPWgWHFFoyfbbcfyNNXYn2lsFxe1GtDIe
+	VY8t9zjqQlf7fD2760ndF4wrCAneDTK8s5hgL4zuLQkZuFqyxGd7Xe/rLt/bcw4AoFb+v9sROeW
+	5KBanaB2mfvR7eupuMXTjbTb+Bq0VSPHB8ujOQMEvLL6bS+p8kHbqXMYQ9EuRNIQ==
+X-Google-Smtp-Source: AGHT+IGyGGwCvSA4pNerPIhK4CDh5ZKSm26JQnco8GOmtCPBU7D7ZzSoNfYoZcvIvLPZwMT7r050TA==
+X-Received: by 2002:a05:600d:8354:b0:471:1717:421 with SMTP id 5b1f17b1804b1-47717e523e5mr7630105e9.19.1761603432062;
+        Mon, 27 Oct 2025 15:17:12 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/5] x86/ucode: Abort parallel load early on any control thread error
-Date: Mon, 27 Oct 2025 22:16:58 +0000
-Message-Id: <20251027221702.3362552-2-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 3/5] x86/ucode: Cross check the minimum revision
+Date: Mon, 27 Oct 2025 22:17:00 +0000
+Message-Id: <20251027221702.3362552-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251027221702.3362552-1-andrew.cooper3@citrix.com>
 References: <20251027221702.3362552-1-andrew.cooper3@citrix.com>
@@ -98,40 +98,99 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-EIO is not the only error that ucode_ops.apply_microcode() can produce.
-EINVAL, EEXISTS and ENXIO can be generated too, each of which mean that Xen is
-unhappy in some way with the proposed blob.
+For Zen3-5 microcode blobs signed with the updated signature scheme, the
+checksum field has been reused to be a min_revision field, referring to the
+microcode revision which fixed Entrysign (SB-7033, CVE-2024-36347).
 
-Some of these can be bypassed with --force, which will cause the parallel load
-to be attempted.
+Cross-check this when trying to load microcode, but allow --force to override
+it.  If the signature scheme is genuinely different, a #GP will occur.
 
-Fixes: 5ed12565aa32 ("microcode: rendezvous CPUs in NMI handler and load ucode")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/cpu/microcode/core.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 1b093bc98a58..2705bb43c97f 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -392,10 +392,10 @@ static int control_thread_fn(const struct microcode_patch *patch,
-         atomic_inc(&cpu_updated);
-     atomic_inc(&cpu_out);
+v2:
+ * Tweak comment
+---
+ xen/arch/x86/cpu/microcode/amd.c | 49 +++++++++++++++++++++++++++++++-
+ 1 file changed, 48 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index 457810182480..ba03401c24c5 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -42,7 +42,10 @@ struct microcode_patch {
+     uint8_t  mc_patch_data_id[2];
+     uint8_t  mc_patch_data_len;
+     uint8_t  init_flag;
+-    uint32_t mc_patch_data_checksum;
++    union {
++        uint32_t checksum; /* Fam12h and earlier */
++        uint32_t min_rev;  /* Zen3-5, post Entrysign */
++    };
+     uint32_t nb_dev_id;
+     uint32_t sb_dev_id;
+     uint16_t processor_rev_id;
+@@ -270,6 +273,42 @@ static int cf_check amd_compare(
+     return compare_revisions(old->patch_id, new->patch_id);
+ }
  
--    if ( ret == -EIO )
-+    if ( ret )
-     {
-         printk(XENLOG_ERR
--               "Late loading aborted: CPU%u failed to update ucode\n", cpu);
-+               "Late loading aborted: CPU%u failed to update ucode: %d\n", cpu, ret);
-         goto out;
++/*
++ * Check whether this patch has a minimum revision given, and whether the
++ * condition is satisfied.
++ *
++ * In linux-firmware for CPUs suffering from the Entrysign vulnerability,
++ * ucodes signed with the updated signature algorithm have reused the checksum
++ * field as a min-revision field.  From public archives, the checksum field
++ * appears to have been unused since Fam12h.
++ *
++ * Returns false if there is a min revision given, and it suggests that that
++ * the patch cannot be loaded on the current system.  True otherwise.
++ */
++static bool check_min_rev(const struct microcode_patch *patch)
++{
++    ASSERT(microcode_fits_cpu(patch));
++
++    if ( patch->processor_rev_id < 0xa000 || /* pre Zen3? */
++         patch->min_rev == 0 )               /* No min rev specified */
++        return true;
++
++    /*
++     * Sanity check, as this is a reused field.  If this is a true
++     * min_revision field, it will differ only in the bottom byte from the
++     * patch_id.  Otherwise, it's probably a checksum.
++     */
++    if ( (patch->patch_id ^ patch->min_rev) & ~0xff )
++    {
++        printk(XENLOG_WARNING
++               "microcode: patch %#x has unexpected min_rev %#x\n",
++               patch->patch_id, patch->min_rev);
++        return true;
++    }
++
++    return this_cpu(cpu_sig).rev >= patch->min_rev;
++}
++
+ static int cf_check apply_microcode(const struct microcode_patch *patch,
+                                     unsigned int flags)
+ {
+@@ -299,6 +338,14 @@ static int cf_check apply_microcode(const struct microcode_patch *patch,
+         return -ENXIO;
      }
  
++    if ( !ucode_force && !check_min_rev(patch) )
++    {
++        printk(XENLOG_ERR
++               "microcode: CPU%u current rev %#x below patch min_rev %#x\n",
++               cpu, sig->rev, patch->min_rev);
++        return -ENXIO;
++    }
++
+     hw_err = wrmsr_safe(MSR_AMD_PATCHLOADER, (unsigned long)patch);
+ 
+     /* get patch id after patching */
 -- 
 2.39.5
 
