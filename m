@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1157ECCF9E5
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Oct 2025 22:17:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1151819.1482350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23692CCF9EA
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Oct 2025 22:17:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1151824.1482391 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDVWZ-0000r8-52; Mon, 27 Oct 2025 22:17:11 +0000
+	id 1vDVWg-0001fc-MD; Mon, 27 Oct 2025 22:17:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1151819.1482350; Mon, 27 Oct 2025 22:17:11 +0000
+Received: by outflank-mailman (output) from mailman id 1151824.1482391; Mon, 27 Oct 2025 22:17:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDVWZ-0000r1-2M; Mon, 27 Oct 2025 22:17:11 +0000
-Received: by outflank-mailman (input) for mailman id 1151819;
- Mon, 27 Oct 2025 22:17:10 +0000
+	id 1vDVWg-0001e7-Dx; Mon, 27 Oct 2025 22:17:18 +0000
+Received: by outflank-mailman (input) for mailman id 1151824;
+ Mon, 27 Oct 2025 22:17:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kuhB=5E=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vDVWY-0000qq-7s
- for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 22:17:10 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1vDVWe-0000qq-MZ
+ for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 22:17:16 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ad906cf4-b382-11f0-9d16-b5c5bf9af7f9;
- Mon, 27 Oct 2025 23:17:09 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-47719ad0c7dso439225e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 15:17:08 -0700 (PDT)
+ id b1e9955c-b382-11f0-9d16-b5c5bf9af7f9;
+ Mon, 27 Oct 2025 23:17:16 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-47112a73785so33421095e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 15:17:16 -0700 (PDT)
 Received: from localhost.localdomain (host-78-149-11-196.as13285.net.
  [78.149.11.196]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475de57b156sm148785595e9.13.2025.10.27.15.17.06
+ 5b1f17b1804b1-475de57b156sm148785595e9.13.2025.10.27.15.17.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 15:17:06 -0700 (PDT)
+ Mon, 27 Oct 2025 15:17:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,79 +47,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad906cf4-b382-11f0-9d16-b5c5bf9af7f9
+X-Inumbo-ID: b1e9955c-b382-11f0-9d16-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1761603428; x=1762208228; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2Sb5SD3pBvQ5uxtHopREOmW0xwkP7MusILvgCF1UZSo=;
-        b=cugG+I2tiPOMm1O6nzV9nIV5x8e59YHs+3qVBpaqoYrwGXF8OL6N2JVciz0iCD//he
-         gtrbQ0n//Hmo4nWf8POo5pXVVaQjUycL4yc1+ry6BJ34dQiJc/VGAOoUJKCZKHZh/ZlC
-         F8oWJe8OLXuWAi7wX5hAhIMvMVD7pd2VloDL0=
+        d=citrix.com; s=google; t=1761603435; x=1762208235; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vFg+MrgS3JAmSaxfSKWCNpVbupEI6lxBhJ1JFipFx3s=;
+        b=DKjt0p7y+txA/YAkY+LE6bqMHzpKgW/nbIWg8Zjd6u3aQNmY697ytb1Uxx7UX8VC8r
+         8PYIpO4ZEyGwzlostwd1ypGJwW4D2iTyvFsCWhXLLDBUobNdpJAu0YbyAHvNS/e9tH3T
+         Ru4uZ6sni2YgMQMPPMOhuNdMGpRSiGAzu2w3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761603428; x=1762208228;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2Sb5SD3pBvQ5uxtHopREOmW0xwkP7MusILvgCF1UZSo=;
-        b=WY3BtxDwI9Ozgt5uC3Xdn09kAWKVfx3+urjNeAygC8WmF/rp/EEWVI9TSz2x3oL60k
-         CajK1PQQjiryqlggMy8lChlU/TZd+mS+z89vcrPtwdXhDQxWJ7CEQWrD/0ASU6+3ppjr
-         yV3ci0Tn3LzrnqmYVETPVp0PN5Nsrkr4SEdjW0I4wcbxmk9DplN+yieZbteu9z8z48UM
-         0+AhCjFF1el/fYUC++P4cOZKXQP1QGFrxhOFHoMpkH+Ph9jC5scymWO4pfy3W8575C1J
-         4F8XMNnz1l4YMN43OWcREVHnRpyPkwh6Tg74n7bUZYjRzxpyNSSAMNAYuoQc4jtvP05N
-         uV1w==
-X-Gm-Message-State: AOJu0YzClGPbFKhJYdpGftPHCcx1fu9N0PVznihwohIjnr4WISTr0Dsx
-	KHORV9Mj7aZx2qpgq/njEiw5o17DVxDpNGrzjSuziQxh+/lUcuuCLdT3sHM6nS2l92pWsoFhq6V
-	YFYIEwG+WHQ==
-X-Gm-Gg: ASbGncvKxc5mkfPH5ZtHVomkjLuWWwbf5BnKCAgWYX0sBYrxIpaIi9rx/6YEaKncMJC
-	KMokTzyqSZPizzpMZQ4NezXwSOkSpaLjVBvbx/uU4WJeXNgzrWOLQyUm5g0x7+Q3dZeH7HEhxPB
-	ZUZVNoEKkkAM8nmWEDg7/xeCnkajuGb7PvUqF+n4j+D7OnxifUhKZttWHeWZM0bLcnowMHofauK
-	aYhQiiPhs0S9r8epMg3uKhmJ3goTcmAZHzY7whU2cE+HUnUo3r3DBIu5RsVsu17UrdIGev+dGBG
-	MzoyHAOGU5weexWILAm4bk/fXRSmtMXs919nwxqHZf9Mcj6svg69lTsncZ83hpScyWFIBl3V2oZ
-	HOeEezqDCMwlPRTTTOxCmbLcFYh3phsiFnuTJ2hTQuZV+21kP11zpa++0/SmH6tsMfwZPal693i
-	ubPZl8ck4kZPayAw8++8wvW+ZGSLgFRzc3vTQr7geem/TKJJ1QFC/4cFtPRuTvAA==
-X-Google-Smtp-Source: AGHT+IHDhGN5b8Bk0dhm4lv/ONNhf+W2/lKwrcMYTU0P1Zshe6tYaTY9L/tHq1UsVTrmZZFUqqKiBw==
-X-Received: by 2002:a05:600c:6303:b0:477:fad:acd9 with SMTP id 5b1f17b1804b1-47717e40960mr12895195e9.34.1761603427991;
-        Mon, 27 Oct 2025 15:17:07 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761603435; x=1762208235;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vFg+MrgS3JAmSaxfSKWCNpVbupEI6lxBhJ1JFipFx3s=;
+        b=c36r8FzIHYPm7Yu5GIQiInEgYWl/bARXBqbaJ2QlmKzOkrUm+AnZxlReqfPAULe6PG
+         POsascIUa5aHxmK+rZqCX9MgpQr9gXofYPpbzFz79+QetOGFdAKEzSSKJTvMPebebePR
+         9sIRKn1BnsJ81Sy4cdI9R5+uOfZIWAAgDTPHMB4ruSiIsiDKfYeZoOSf1u6uYteiuGHN
+         wsFcKI8juCWCd46dSgVW8+FiBLAl84Hs3c5RRdjnOHiEoL8MnFiXUKCIMzA9Yfaa4dgv
+         BlH8Y5DGC5VbFYlihWtPAMNuJIMJw5RvAQCrI0NcTpMF8cjJWkN4D+QLDeNFlY+SZXhD
+         CLHw==
+X-Gm-Message-State: AOJu0YzU/lQ2KAMP7s6kOwnQby3hlSCtdgQZSiql+KzlQmtyp1UD4Oyh
+	A9EhEZ+O4j+0UVam/ez2JAX1vynjn6Vly3YJOaYuF4a9NXFdIOdbSDlbwq0Ky9LyIObbWYOeYgB
+	lf4t3EV5/LA==
+X-Gm-Gg: ASbGncup6zajhhpUvnCHj5NZAdKGewXEl89BTSM2XBks1JvjQNNsr6JPNc02VFfamLP
+	tkOVfbaZ0quzPJCgqGNcw9VZAwYoovhhlWGejbAAh0mfHcHQyOxooTagymLc5t2pCanMJ+CQD/B
+	PJZ3pA12YaqEw+54QiHKx1/wjHr4OO2LRYLFylLUD/Ai0jy9nsb/qZGCsA7phdKTj4Tfb0l9PD3
+	ZrpMbLdiP1ifYC80Ta8ZwSKclzVBL3r4BR4hktAUrB7A+ozbVp37HElcmqBuZmtj48mRzRptu3f
+	QOjzP4VZuSvN+ewH4F6GT+gSGmairPd6Zheu7l/wFx8Cc4Oc9w4CGhj46Et8lIHD4Xex4twPV5G
+	lfe8LM+jspbu9Dr2OAdW6Ks1On/rUD+7MywpaKWFHVKgrMoHhRKzUG5yqCzXxuM5FPJE+KHC5T9
+	kufEO5Y+hIGVmGGQJz9TYbRaJU4HFwDNTfPsRiEXUUzEBa1vFXornGPRmM1gkFjQ==
+X-Google-Smtp-Source: AGHT+IENdA4LEWfkLT3/8rVPLBEAQi17VCw5WRhElf149pX1W+1DZrAxUoANYp+daQSVSVKX1TI7iQ==
+X-Received: by 2002:a05:600c:6215:b0:46e:33b2:c8da with SMTP id 5b1f17b1804b1-47717e416admr11550005e9.32.1761603435386;
+        Mon, 27 Oct 2025 15:17:15 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.21 0/5] x86/ucode: Support loading latest ucode from linux-firwmare
-Date: Mon, 27 Oct 2025 22:16:57 +0000
-Message-Id: <20251027221702.3362552-1-andrew.cooper3@citrix.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 5/5] x86/ucode: Relax digest check when Entrysign is fixed in firmware
+Date: Mon, 27 Oct 2025 22:17:02 +0000
+Message-Id: <20251027221702.3362552-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251027221702.3362552-1-andrew.cooper3@citrix.com>
+References: <20251027221702.3362552-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-linux-firmware now contains microcode signed with the new signature scheme.
-Xen currently refuses to load these as we've not updated the digest list.
+When Entrysign has been mitigated in firwmare, it is believed to be safe to
+rely on the CPU patchloader again.  This avoids us needing to maintain the
+digest table for all new microcode indefinitely.
 
-The plan was always to stop using the digest list in due course, which is what
-this series does.  A fix for the RDSEED vulnerability is imminent, and it's
-critical that Xen can load this microcode.
+Relax the digest check when firmware looks to be up to date, and leave behind
+a clear message when not.
 
-As such, this is intended for backport to all trees including security trees,
-and therefore really does need to get into Xen 4.21
+This is best-effort only.  If a malicious microcode has been loaded prior to
+Xen running, then all bets are off.
 
-Andrew Cooper (5):
-  x86/ucode: Abort parallel load early on any control thread error
-  x86/ucode: Refine TLB flush fix for AMD Fam17h CPUs
-  x86/ucode: Cross check the minimum revision
-  x86/ucode: Refine the boundary checks for Entrysign
-  x86/ucode: Relax digest check when Entrysign is fixed in firmware
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
- docs/misc/xen-command-line.pandoc    |   7 +-
- xen/arch/x86/cpu/microcode/amd.c     | 158 +++++++++++++++++++++++++--
- xen/arch/x86/cpu/microcode/core.c    |   6 +-
- xen/arch/x86/cpu/microcode/private.h |   2 +
- xen/arch/x86/flushtlb.c              |   3 +-
- xen/arch/x86/include/asm/flushtlb.h  |   5 +
- 6 files changed, 165 insertions(+), 16 deletions(-)
+v2:
+ * Corrections to the revision table.
+ * Updates to various comments.
+ * Add a "WARNING: " prefix to the message about vulnerability
+---
+ xen/arch/x86/cpu/microcode/amd.c     | 86 +++++++++++++++++++++++++++-
+ xen/arch/x86/cpu/microcode/core.c    |  2 +
+ xen/arch/x86/cpu/microcode/private.h |  2 +
+ 3 files changed, 87 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index f331d9dfee6e..9ecf6c37d3f4 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -101,6 +101,7 @@ static const struct patch_digest {
+ } patch_digests[] = {
+ #include "amd-patch-digests.c"
+ };
++static bool __ro_after_init entrysign_mitigiated_in_firmware;
+ 
+ static int cf_check cmp_patch_id(const void *key, const void *elem)
+ {
+@@ -122,11 +123,11 @@ static bool check_digest(const struct container_microcode *mc)
+ 
+     /*
+      * Zen1 thru Zen5 CPUs are known to use a weak signature algorithm on
+-     * microcode updates.  Mitigate by checking the digest of the patch
+-     * against a list of known provenance.
++     * microcode updates.  If this has not been mitigated in firmware,
++     * checking the digest of the patch against a list of known provenance.
+      */
+     if ( boot_cpu_data.family < 0x17 || boot_cpu_data.family > 0x1a ||
+-         !opt_digest_check )
++         entrysign_mitigiated_in_firmware || !opt_digest_check )
+         return true;
+ 
+     pd = bsearch(&patch->patch_id, patch_digests, ARRAY_SIZE(patch_digests),
+@@ -603,3 +604,82 @@ static void __init __constructor test_digests_sorted(void)
+     }
+ }
+ #endif /* CONFIG_SELF_TESTS */
++
++/*
++ * The Entrysign vulnerability affects all Zen1 thru Zen5 CPUs.  Firmware
++ * fixes were produced from Nov 2024.  Zen3 thru Zen5 can continue to take
++ * OS-loadable microcode updates using a new signature scheme, as long as
++ * firmware has been updated first.
++ */
++void __init amd_check_entrysign(void)
++{
++    unsigned int curr_rev;
++    uint8_t fixed_rev;
++
++    if ( boot_cpu_data.vendor != X86_VENDOR_AMD ||
++         boot_cpu_data.family < 0x17 ||
++         boot_cpu_data.family > 0x1a )
++        return;
++
++    /*
++     * Table taken from Linux, which is the only known source of information
++     * about client revisions.  Note, Linux expresses "last-vulnerable-rev"
++     * while Xen wants "first-fixed-rev".
++     */
++    curr_rev = this_cpu(cpu_sig).rev;
++    switch ( curr_rev >> 8 )
++    {
++    case 0x080012: fixed_rev = 0x78; break;
++    case 0x080082: fixed_rev = 0x10; break;
++    case 0x083010: fixed_rev = 0x7d; break;
++    case 0x086001: fixed_rev = 0x0f; break;
++    case 0x086081: fixed_rev = 0x09; break;
++    case 0x087010: fixed_rev = 0x35; break;
++    case 0x08a000: fixed_rev = 0x0b; break;
++    case 0x0a0010: fixed_rev = 0x7b; break;
++    case 0x0a0011: fixed_rev = 0xdb; break;
++    case 0x0a0012: fixed_rev = 0x44; break;
++    case 0x0a0082: fixed_rev = 0x0f; break;
++    case 0x0a1011: fixed_rev = 0x54; break;
++    case 0x0a1012: fixed_rev = 0x4f; break;
++    case 0x0a1081: fixed_rev = 0x0a; break;
++    case 0x0a2010: fixed_rev = 0x30; break;
++    case 0x0a2012: fixed_rev = 0x13; break;
++    case 0x0a4041: fixed_rev = 0x0a; break;
++    case 0x0a5000: fixed_rev = 0x14; break;
++    case 0x0a6012: fixed_rev = 0x0b; break;
++    case 0x0a7041: fixed_rev = 0x0a; break;
++    case 0x0a7052: fixed_rev = 0x09; break;
++    case 0x0a7080: fixed_rev = 0x0a; break;
++    case 0x0a70c0: fixed_rev = 0x0a; break;
++    case 0x0aa001: fixed_rev = 0x17; break;
++    case 0x0aa002: fixed_rev = 0x19; break;
++    case 0x0b0021: fixed_rev = 0x47; break;
++    case 0x0b1010: fixed_rev = 0x47; break;
++    case 0x0b2040: fixed_rev = 0x32; break;
++    case 0x0b4040: fixed_rev = 0x32; break;
++    case 0x0b6000: fixed_rev = 0x32; break;
++    case 0x0b7000: fixed_rev = 0x32; break;
++    default:
++        printk(XENLOG_WARNING
++               "Unrecognised CPU %02x-%02x-%02x ucode 0x%08x, assuming vulnerable to Entrysign\n",
++               boot_cpu_data.family, boot_cpu_data.model,
++               boot_cpu_data.stepping, curr_rev);
++        return;
++    }
++
++    /*
++     * This check is best-effort.  If the platform looks to be out of date, it
++     * probably is.  If the platform looks to be fixed, it either genuinely
++     * is, or malware has gotten in before Xen booted and all bets are off.
++     */
++    if ( (uint8_t)curr_rev >= fixed_rev )
++    {
++        entrysign_mitigiated_in_firmware = true;
++        return;
++    }
++
++    printk(XENLOG_WARNING
++           "WARNING: Platform vulnerable to Entrysign (SB-7033, CVE-2024-36347) - firmware update required\n");
++    add_taint(TAINT_CPU_OUT_OF_SPEC);
++}
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 2705bb43c97f..1d1a5aa4b097 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -750,6 +750,8 @@ static int __init early_microcode_load(struct boot_info *bi)
+     int idx = opt_mod_idx;
+     int rc;
+ 
++    amd_check_entrysign();
++
+     /*
+      * Cmdline parsing ensures this invariant holds, so that we don't end up
+      * trying to mix multiple ways of finding the microcode.
+diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
+index f5e2bfee00d9..e6c965dc99dd 100644
+--- a/xen/arch/x86/cpu/microcode/private.h
++++ b/xen/arch/x86/cpu/microcode/private.h
+@@ -81,8 +81,10 @@ extern bool opt_digest_check;
+  */
+ #ifdef CONFIG_AMD
+ void ucode_probe_amd(struct microcode_ops *ops);
++void amd_check_entrysign(void);
+ #else
+ static inline void ucode_probe_amd(struct microcode_ops *ops) {}
++static inline void amd_check_entrysign(void) {}
+ #endif
+ 
+ #ifdef CONFIG_INTEL
 -- 
 2.39.5
 
