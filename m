@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501F6CCF9EB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531CACCF9EE
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Oct 2025 17:27:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1151698.1482251 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1151699.1482261 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDQzR-0002er-Je; Mon, 27 Oct 2025 17:26:41 +0000
+	id 1vDQzS-0002t5-RY; Mon, 27 Oct 2025 17:26:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1151698.1482251; Mon, 27 Oct 2025 17:26:41 +0000
+Received: by outflank-mailman (output) from mailman id 1151699.1482261; Mon, 27 Oct 2025 17:26:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vDQzR-0002ei-Gy; Mon, 27 Oct 2025 17:26:41 +0000
-Received: by outflank-mailman (input) for mailman id 1151698;
- Mon, 27 Oct 2025 17:26:39 +0000
+	id 1vDQzS-0002su-O0; Mon, 27 Oct 2025 17:26:42 +0000
+Received: by outflank-mailman (input) for mailman id 1151699;
+ Mon, 27 Oct 2025 17:26:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ym1g=5E=bounce.vates.tech=bounce-md_30504962.68ffab49.v1-067f4abfdae24386913dabdb34f3bf1b@srs-se1.protection.inumbo.net>)
- id 1vDQzP-0002R5-SL
- for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 17:26:39 +0000
-Received: from mail187-33.suw11.mandrillapp.com
- (mail187-33.suw11.mandrillapp.com [198.2.187.33])
+ <SRS0=2wYw=5E=bounce.vates.tech=bounce-md_30504962.68ffab4a.v1-e398a002f6d4460abb9430a6f194f0fa@srs-se1.protection.inumbo.net>)
+ id 1vDQzQ-0002R5-Qb
+ for xen-devel@lists.xenproject.org; Mon, 27 Oct 2025 17:26:40 +0000
+Received: from mail132-22.atl131.mandrillapp.com
+ (mail132-22.atl131.mandrillapp.com [198.2.132.22])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 167b652c-b35a-11f0-980a-7dc792cee155;
- Mon, 27 Oct 2025 18:26:36 +0100 (CET)
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-33.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4cwL5j5ldfzBsThqt
- for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 17:26:33 +0000 (GMT)
+ id 162cf369-b35a-11f0-980a-7dc792cee155;
+ Mon, 27 Oct 2025 18:26:35 +0100 (CET)
+Received: from pmta09.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail132-22.atl131.mandrillapp.com (Mailchimp) with ESMTP id
+ 4cwL5k0J97zGlswD6
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Oct 2025 17:26:34 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 067f4abfdae24386913dabdb34f3bf1b; Mon, 27 Oct 2025 17:26:33 +0000
+ e398a002f6d4460abb9430a6f194f0fa; Mon, 27 Oct 2025 17:26:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,62 +45,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 167b652c-b35a-11f0-980a-7dc792cee155
+X-Inumbo-ID: 162cf369-b35a-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1761585993; x=1761855993;
-	bh=1nrAjCCsJDTL8+q5w1d+Usd1KVZTaIlpHPrgdwOze5k=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=dmwW/0ckmNdFrOQJ1Di4/ofnTuPhjTueOQRmuYLMTNox+LIQVyAUBEvzftmy9t4n5
-	 UHmn1/xAaXhMokB7ISB8o5abL442qKtPxjfVnTWr3vs2Jnxl7njhnsMFZlt7FhF5qZ
-	 wRIDnm/6AKAVOCu9yjx+W0lQ6JH4RxbbRZT16AcZjOQy9DeHXsd6U1+mGfaeFx65H/
-	 qc2U9I8g6P12KCr8ENbA+sjNNTGpkUCqOGmzokczlPfxRlUYDaSS6FJp3vDwdqq95U
-	 87JCTgeahUx5DwQc9bLVAJwCEuhlIN2YBG9ovImkuYuVi1Bsm767mm2M+LnobIJVfv
-	 Yq4cW8A+zzz3A==
+	s=mte1; t=1761585994; x=1761855994;
+	bh=cXuN84KuaZFRe6aRXpvY17AsdlfQZOrMM+Ab77LOAIc=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=eQ/8YMJk7r4Q/ctdhb4rkSnYx5u8VhqGPdh9/nO7h0HwdrfuxuKfAK7gR5v98Kit1
+	 lA9uyt+16WOtHK/mkJFe7ND/OBwv8GgJ38XZ6nhknszwREwonxo/VLN7Pxdssf0M3G
+	 27c1TMSD0KnxrhwFG9i5TfD1aBpe2bx9mBEuqnZj3CCmohpJUSD7VG7fpm0SSaLpwT
+	 BDCs793tjs2Yylww0URlle5YmpctMLO+8AWQxr+8el5CQ4PFhoF9HXcr3QZ1+cc4Sq
+	 4SkESlIqJXmiuFYJuOzPSCPbP5axUqTaK5lHgDWwzYDfSVB9ofa8ot14vYND6T73FZ
+	 1iYfdm3tMzJIg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1761585993; x=1761846493; i=teddy.astie@vates.tech;
-	bh=1nrAjCCsJDTL8+q5w1d+Usd1KVZTaIlpHPrgdwOze5k=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=zTOO1gcmBx6+U9IeXZVIiFt27yfeZglQ/JJ4DO3+VFUovx/YSrN1kGc20e8DJGZRn
-	 VmE8y1JGnjHUTRMkwYL/LVy5u7SLXmVpcJmSlh0YD1hdHoNtqnVtt/ZQ+1MFztG70f
-	 zs7hzc7Wm0y0ptl1/07YefEN9MEG1wtBOiqI+lCgAVZrl8zbumJcm013K2hd+OrIZI
-	 Zfp49s+dUeddVMqTBapN+rMeEeZaH2maynSwAxX6/VE3Z1YqK9V1aun0GB45DjW3Bh
-	 pEDnnFeRu7Tf5lFy8+5scXt6QiNYmqFe9SDZ+1gymmz+eoMvwrHfU+ZaXTAPONoS7O
-	 Gi2qoWLfaJG4A==
+	t=1761585994; x=1761846494; i=teddy.astie@vates.tech;
+	bh=cXuN84KuaZFRe6aRXpvY17AsdlfQZOrMM+Ab77LOAIc=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=GaK9Y2iXiuz8m9vUZUouueuiCSdLyei80/nQmg7hSvtAVLuqAtwul6kax+8KLxyJ2
+	 dxuRkPaxXbiyScIsA/4Y+E6b8VaKkfSoTOoH29blkvolY+I/DJQmezGfuOTuq1kYcb
+	 nuRfjA3zjRewNslX+FFHlqurhvGFPhvziTbpG2PgTHiYA5dJy/+wGVtC2492/23iOM
+	 ENn+IUhzX7h132wCCMXxEDCid51BwXKOllmSodtT5BZ9Fpc2JKbJ+zqQVYzpaNN8u/
+	 j3oJ+LT/mI0PmK/px1ZMWrTFHa6E9MmN8cvlVPzmoLCkQD24ztgvuP/UAU10dCYkHM
+	 L1uruMFtWOuSQ==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20for-4.22=200/2]=20Support=20for=20Intel=20temperature=20sensors=20(DTS)?=
+Subject: =?utf-8?Q?[RFC=20PATCH=20for-4.22=201/2]=20x86/platform:=20Expose=20DTS=20sensors=20MSR?=
 X-Mailer: git-send-email 2.51.1
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1761585992748
+X-Bm-Transport-Timestamp: 1761585993124
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
-Message-Id: <cover.1761585640.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <48b15617f248852560a0e0674eea65d25330c605.1761585640.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1761585640.git.teddy.astie@vates.tech>
+References: <cover.1761585640.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.067f4abfdae24386913dabdb34f3bf1b?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.e398a002f6d4460abb9430a6f194f0fa?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251027:md
-Date: Mon, 27 Oct 2025 17:26:33 +0000
+Date: Mon, 27 Oct 2025 17:26:34 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-The idea here is to expose the DTS sensors through XENPF_resource_op
-and introduce a new dedicated tool to expose it for the user.
+Intel provide CPU sensors through "DTS" MSRs. As there MSR are core-specific
+(or package-specific), we can't reliably fetch them from Dom0 directly.
+Expose these MSR (if supported) through XENPF_resource_op so that it is
+accessible through hypercall.
 
-Teddy Astie (2):
-  x86/platform: Expose DTS sensors MSR
-  tools: Introduce xen-inteltemp tool
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+I'm not a fan of doing a inline cpuid check here, but I don't have a
+better approach in mind.
 
- tools/misc/.gitignore                |  1 +
- tools/misc/Makefile                  |  4 ++
- tools/misc/xen-inteltemp.c           | 98 ++++++++++++++++++++++++++++
- xen/arch/x86/include/asm/msr-index.h |  2 +
- xen/arch/x86/platform_hypercall.c    |  6 ++
- 5 files changed, 111 insertions(+)
- create mode 100644 tools/misc/xen-inteltemp.c
+ xen/arch/x86/include/asm/msr-index.h | 2 ++
+ xen/arch/x86/platform_hypercall.c    | 6 ++++++
+ 2 files changed, 8 insertions(+)
 
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index df52587c85..98dda629e5 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -510,6 +510,8 @@
+ #define MSR_IA32_THERM_INTERRUPT	0x0000019b
+ #define MSR_IA32_THERM_STATUS		0x0000019c
+ #define MSR_IA32_MISC_ENABLE		0x000001a0
++#define MSR_IA32_TEMPERATURE_TARGET   0x000001a2
++#define MSR_IA32_PACKAGE_THERM_STATUS 0x000001b1
+ #define MSR_IA32_MISC_ENABLE_FAST_STRING  (1<<0)
+ #define MSR_IA32_MISC_ENABLE_PERF_AVAIL   (1<<7)
+ #define MSR_IA32_MISC_ENABLE_BTS_UNAVAIL  (1<<11)
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index 79bb99e0b6..3190803cc2 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -86,6 +86,12 @@ static bool msr_read_allowed(unsigned int msr)
+ 
+     case MSR_MCU_OPT_CTRL:
+         return cpu_has_srbds_ctrl;
++    
++    case MSR_IA32_TEMPERATURE_TARGET:
++    case MSR_IA32_THERM_STATUS:
++    case MSR_IA32_PACKAGE_THERM_STATUS:
++        return boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
++            (cpuid_eax(0x6) & 0x1); /* Digital temperature sensor */
+     }
+ 
+     if ( ppin_msr && msr == ppin_msr )
 -- 
 2.51.1
 
