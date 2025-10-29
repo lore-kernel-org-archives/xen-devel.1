@@ -4,36 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BD1CCF9F1
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Oct 2025 15:59:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1152913.1483436 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59601CCF9F0
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Oct 2025 16:05:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1152951.1483446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vE8aO-0007fc-VJ; Wed, 29 Oct 2025 15:59:44 +0000
+	id 1vE8ff-0002BJ-Gp; Wed, 29 Oct 2025 16:05:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1152913.1483436; Wed, 29 Oct 2025 15:59:44 +0000
+Received: by outflank-mailman (output) from mailman id 1152951.1483446; Wed, 29 Oct 2025 16:05:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vE8aO-0007fT-Rv; Wed, 29 Oct 2025 15:59:44 +0000
-Received: by outflank-mailman (input) for mailman id 1152913;
- Wed, 29 Oct 2025 15:59:42 +0000
+	id 1vE8ff-0002BC-Dy; Wed, 29 Oct 2025 16:05:11 +0000
+Received: by outflank-mailman (input) for mailman id 1152951;
+ Wed, 29 Oct 2025 16:05:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ufu9=5G=bounce.vates.tech=bounce-md_30504962.690239e5.v1-afb8864a290e453a817b2593eea3e1f7@srs-se1.protection.inumbo.net>)
- id 1vE8aM-0006vP-Rc
- for xen-devel@lists.xenproject.org; Wed, 29 Oct 2025 15:59:42 +0000
-Received: from mail187-33.suw11.mandrillapp.com
- (mail187-33.suw11.mandrillapp.com [198.2.187.33])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 430e942c-b4e0-11f0-9d16-b5c5bf9af7f9;
- Wed, 29 Oct 2025 16:59:34 +0100 (CET)
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-33.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4cxX4P22nLzBsTkj3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Oct 2025 15:59:33 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- afb8864a290e453a817b2593eea3e1f7; Wed, 29 Oct 2025 15:59:33 +0000
+ <SRS0=U31q=5G=raptorengineering.com=tpearson@srs-se1.protection.inumbo.net>)
+ id 1vE8fe-0002B6-6F
+ for xen-devel@lists.xenproject.org; Wed, 29 Oct 2025 16:05:10 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0a3edf17-b4e1-11f0-9d16-b5c5bf9af7f9;
+ Wed, 29 Oct 2025 17:05:08 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id C6A98779070E;
+ Wed, 29 Oct 2025 11:05:07 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id Yx97adz-WRUd; Wed, 29 Oct 2025 11:05:07 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 1BC817790717;
+ Wed, 29 Oct 2025 11:05:07 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id U55PUZrAEqGH; Wed, 29 Oct 2025 11:05:07 -0500 (CDT)
+Received: from vali.starlink.edu (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id F19EB779070E;
+ Wed, 29 Oct 2025 11:05:06 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,115 +53,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 430e942c-b4e0-11f0-9d16-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1761753573; x=1762023573;
-	bh=fX3FQuwJNcVnrtIjh9/0e8sasKI627tRhXFxwIbZXVI=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=oVfsFR0cSu5vn9AbovxZA3Xye3mi9d9CjhjzPRyqn74IE+qaKjTHEYbDasUgQeK0p
-	 89TaT2HLfS/5GPIUFDXFenzbfq5s35lvKVBMSH8h9fRd31WOOKD+qxRwbXd91KMq9S
-	 ELf070yqwk4MNCsZV8PoE/ijfNXTbaYEWmF8TvBOEeKwE2n+jchNPQDZ1fkUS7jpTT
-	 8eZmpoc5p+Tb0/usMyi3STh5wGriaFQ3FKxp9UoLq+QrLzc1/3Fd9tvXK3D4zIW9i2
-	 bKgklBWy+dLrJk6MYvGM4z6oirOyp+1nMCkOHjCrQs3/xlqAPiS012vSPhK5/Z6mf9
-	 9sTL9/+OxSS2g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1761753573; x=1762014073; i=teddy.astie@vates.tech;
-	bh=fX3FQuwJNcVnrtIjh9/0e8sasKI627tRhXFxwIbZXVI=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=mx+otb9E04VeomKWpOp0/PgV5Tz6gHwUnACikxaS0Zu3lW99NV0GcNv3+W9rVrjzO
-	 1GJRAv0SYQucrgmh+Cjs9DaXBHQDGUQXmmAPckaf+zDZ6G9iCHbyz0yYL2kUuLxWcI
-	 VL67+4Q9QVab6AJO15s3z3jETd8dkHBOecz7gviedNyGpEizvW9C8ROvZYfJQHn60f
-	 2NUFJk1fLp0pojibvOMo/I3Vv+z5aEYll5Xqrnu3wTjcpioAWnaA9MkFGHTGSzsK4e
-	 0ku1oS2SMut/kezBmhxH3WNRdx5M1hhj33uIYYHVxOcrwc0S3UGeEPsolFl/W6olxB
-	 MEXZzQ39ezZdw==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20for-4.22=20v2=202/3]=20x86/platform:=20Expose=20DTS=20sensors=20MSR?=
-X-Mailer: git-send-email 2.51.2
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1761753572425
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <1001287258cf9652c749c66c6565478085a8657c.1761752801.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1761752801.git.teddy.astie@vates.tech>
-References: <cover.1761752801.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.afb8864a290e453a817b2593eea3e1f7?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20251029:md
-Date: Wed, 29 Oct 2025 15:59:33 +0000
+X-Inumbo-ID: 0a3edf17-b4e1-11f0-9d16-b5c5bf9af7f9
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 1BC817790717
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1761753907; bh=hIuuevtjoRG6683Bb6Uibcw6e08U4IN2Bg6m1N/XZ00=;
+	h=Date:From:To:Message-ID:MIME-Version;
+	b=Dh6J4ZnasTMHYy50lSkECIErKyptK0EnN4wtNdNeIoRGU9aOh8G2T8k0qlFubkqo1
+	 bVa3dw/64EM1ArZvBAzEgzwVAHZi7KuI9WUGzcvjLEuWR6LBIdV8fKxoeP4nZKSicq
+	 7HL2iYU59/IIhEmhpi61S/pnOx9npsd3NkEMpvI0=
+X-Virus-Scanned: amavisd-new at rptsys.com
+Date: Wed, 29 Oct 2025 11:05:03 -0500 (CDT)
+From: Timothy Pearson <tpearson@raptorengineering.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Message-ID: <1606518270.4741.1761753903655.JavaMail.zimbra@raptorengineeringinc.com>
+In-Reply-To: <45cb7914-5875-4bdc-a5ee-80c2093dff84@suse.com>
+References: <1094743618.4119.1761694133918.JavaMail.zimbra@raptorengineeringinc.com> <45cb7914-5875-4bdc-a5ee-80c2093dff84@suse.com>
+Subject: Re: [PATCH] xen/ppc: Fix tooling FTBFS due to missing definitions
+ in public header
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-
-Intel provide CPU sensors through "DTS" MSRs. As there MSR are core-specific
-(or package-specific), we can't reliably fetch them from Dom0 directly.
-Expose these MSR (if supported) through XENPF_resource_op so that it is
-accessible through hypercall.
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
-v2:
- - move DTS MSR out of legacy list, review MSR naming
- - use CPU policy instead of inline CPUID
-
- xen/arch/x86/include/asm/msr-index.h | 3 +++
- xen/arch/x86/platform_hypercall.c    | 6 ++++++
- 2 files changed, 9 insertions(+)
-
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index df52587c85..7c6af7bd4d 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -115,6 +115,9 @@
- #define  MCU_OPT_CTRL_GDS_MIT_DIS           (_AC(1, ULL) <<  4)
- #define  MCU_OPT_CTRL_GDS_MIT_LOCK          (_AC(1, ULL) <<  5)
- 
-+#define MSR_DTS_TEMPERATURE_TARGET          0x000001a2
-+#define MSR_DTS_PACKAGE_THERM_STATUS        0x000001b1
-+
- #define MSR_FRED_RSP_SL0                    0x000001cc
- #define MSR_FRED_RSP_SL1                    0x000001cd
- #define MSR_FRED_RSP_SL2                    0x000001ce
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 79bb99e0b6..d9872ddd3e 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -27,6 +27,7 @@
- #include <asm/current.h>
- #include <public/platform.h>
- #include <acpi/cpufreq/processor_perf.h>
-+#include <asm/cpu-policy.h>
- #include <asm/edd.h>
- #include <asm/microcode.h>
- #include <asm/mtrr.h>
-@@ -86,6 +87,11 @@ static bool msr_read_allowed(unsigned int msr)
- 
-     case MSR_MCU_OPT_CTRL:
-         return cpu_has_srbds_ctrl;
-+    
-+    case MSR_IA32_THERM_STATUS:
-+    case MSR_DTS_TEMPERATURE_TARGET:
-+    case MSR_DTS_PACKAGE_THERM_STATUS:
-+        return raw_cpu_policy.basic.pm.dts;
-     }
- 
-     if ( ppin_msr && msr == ppin_msr )
--- 
-2.51.2
+X-Mailer: Zimbra 8.5.0_GA_3042 (ZimbraWebClient - GC141 (Linux)/8.5.0_GA_3042)
+Thread-Topic: xen/ppc: Fix tooling FTBFS due to missing definitions in public header
+Thread-Index: NMmV+mSK9hUa1L/097StWJNj4y6iFA==
 
 
 
---
-Teddy Astie | Vates XCP-ng Developer
+----- Original Message -----
+> From: "Jan Beulich" <jbeulich@suse.com>
+> To: "Timothy Pearson" <tpearson@raptorengineering.com>
+> Cc: "xen-devel" <xen-devel@lists.xenproject.org>
+> Sent: Wednesday, October 29, 2025 2:59:11 AM
+> Subject: Re: [PATCH] xen/ppc: Fix tooling FTBFS due to missing definitions in public header
 
-XCP-ng & Xen Orchestra - Vates solutions
+> On 29.10.2025 00:28, Timothy Pearson wrote:
+>> int64_aligned_t and uint64_aligned_t need to be exposed when the GNU C compiler
+>> is in use.
+>> ---
+>>  xen/include/public/arch-ppc.h | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> 
+> However, first of all this needs your own S-o-b.
+> 
+> Jan
 
-web: https://vates.tech
-
+My apologies for that.  Was getting a new development box set up for Xen and somehow missed that on the first two patches.
 
