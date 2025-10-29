@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8356CCF9EE
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Oct 2025 23:55:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1153176.1483619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAF1CCF9EE
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Oct 2025 23:55:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1153178.1483646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vEG0N-0002Rc-6q; Wed, 29 Oct 2025 23:55:03 +0000
+	id 1vEG0Q-00034t-Qi; Wed, 29 Oct 2025 23:55:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1153176.1483619; Wed, 29 Oct 2025 23:55:03 +0000
+Received: by outflank-mailman (output) from mailman id 1153178.1483646; Wed, 29 Oct 2025 23:55:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vEG0N-0002Qw-2k; Wed, 29 Oct 2025 23:55:03 +0000
-Received: by outflank-mailman (input) for mailman id 1153176;
- Wed, 29 Oct 2025 23:55:02 +0000
+	id 1vEG0Q-00034m-NE; Wed, 29 Oct 2025 23:55:06 +0000
+Received: by outflank-mailman (input) for mailman id 1153178;
+ Wed, 29 Oct 2025 23:55:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Xz0O=5G=epam.com=grygorii_strashko@srs-se1.protection.inumbo.net>)
- id 1vEG0M-0002OI-1j
- for xen-devel@lists.xenproject.org; Wed, 29 Oct 2025 23:55:02 +0000
+ id 1vEG0P-0002OI-DT
+ for xen-devel@lists.xenproject.org; Wed, 29 Oct 2025 23:55:05 +0000
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [2a01:111:f403:c200::5])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ae037674-b522-11f0-980a-7dc792cee155;
- Thu, 30 Oct 2025 00:55:00 +0100 (CET)
+ id aff06c27-b522-11f0-980a-7dc792cee155;
+ Thu, 30 Oct 2025 00:55:03 +0100 (CET)
 Received: from AS2PR03MB8907.eurprd03.prod.outlook.com (2603:10a6:20b:5e4::22)
  by VI1PR03MB6336.eurprd03.prod.outlook.com (2603:10a6:800:139::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.15; Wed, 29 Oct
- 2025 23:54:53 +0000
+ 2025 23:54:57 +0000
 Received: from AS2PR03MB8907.eurprd03.prod.outlook.com
  ([fe80::804:c187:252a:9593]) by AS2PR03MB8907.eurprd03.prod.outlook.com
  ([fe80::804:c187:252a:9593%3]) with mapi id 15.20.9275.013; Wed, 29 Oct 2025
- 23:54:52 +0000
+ 23:54:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae037674-b522-11f0-980a-7dc792cee155
+X-Inumbo-ID: aff06c27-b522-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WXxIGp3rS5bBBgb/FsxPP9voGWWcnOe6pgTVSXcmF+GEgsqjlRu1KUQ9r4zjDQARwGIbpuIpxvcqIke5/i+NsPg/J8blpo99444KttzZnhP82ORBcxcID1gACex8E/Pj1HcllM7v9+VNT0IH61Dj+yF8pQL6ezAFTD98/+pl0HdPyA/uYQt9kpyxKWOoBBrU+37WWTe3B1JxZtgRiyDrrHySIwvYQNRS+7GymGCwL08L89EdHnNl8hZIEG4tl+fK/T7ku6pHx10UHkT8w1On8drrsT8chxaREFXr9Y7R6Vnku39cbSAl0o/go5QIU15d1NKZy8RFVSBMB1jMPzZHrA==
+ b=Ht77dcaBFwddSNfHVhoDhL03ltwHNxiWCS1qxJpD11X2JBPy8CSJBYEeLpvzuxFwj9B+Y0HnXkpsE+S/FjoosWzb4IFy0KN1v+jhS8K9fLoYjLK2VMhVIek/vn2I2GTb62dHmzJLKRC3gMINvzhOFCEfjGvW2+LDOMUla510Eb0xDXAgVLb5Wic34kw7fd5gudcGC9NFTR/MEFJTYYJerkUekI5XKQ2tTU2IsHfTHFHXEcLCYhwWkdCVXnpGETbPfMpgPahTzKVPj++7IAPW2RQTGMxstRCH787wBQd69B25VOaRVncwb6VUIHLsGHMu56E/EJn68mUHRaQSuJuLvw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nB2W6kvPkMyCwnn3lorcsSQRs/CY2MtyjSCDhvSFvo8=;
- b=Ll5vT2tzF3YpzjzwDT17m879ULz4+MHRDio+ttmfmL/kS078hYmy1brYZSBZO2i8i94vi4YvxeQQ9IepXYb8df7tMlmgtn6l8hoMaCueQZ3HIk+y5vG2/ClVG360caFfaFdQ6ayMf2GRZfOVnkQJZ9WXRYYtlCc7K7kzgSq9sX+ffeYys3ACOgeH0HnDRtymrLoIXT84isJ232M8zNd3HPEVB5iAvegtk1aWQpxGaTakdnpGuD/WNV4NerJ7alYsLTXeSSq6rtvCFP4F+bNBE7kLuWJjCaz4KD2Yf6l6uPiJFfG6wG/wv0g0OxMyurQxKHw5punQB/628CKSgSrz6g==
+ bh=il7YhGntNP2H/6iqRFr6trkLVAFYpSgjbytJCfNcxDo=;
+ b=Tia7udHTlYMCLactlwlZjB+iwNjdyc/Ma6LWGQh/Pc3nuEeRdDIGfFjLKFFrESOR0VTHM7U/Ww96/MVcNaqG4nNLAlfYppLLtfnf4UZNehQwOipc0XWG12W24CDZArvFafNWx2p28P2W2uSEe4iWTGgdvG8CcFKtqieM3xPoJk+7arYvCJ+0MaDWjBmZLyTUez4UDOfRUv5yTzPFmEKEtSW7QyOb+A4uerKbnPd7kuRidmvIdppN1H+KaQHvvARVFtbk2MYhC2Bw8p5y2P9CoKHbTHUc4WNDLp8oc5RjlBaTGpmXj86Pr2QTBiKsXiyeqo69olibqdJZ7m8BnK/78A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nB2W6kvPkMyCwnn3lorcsSQRs/CY2MtyjSCDhvSFvo8=;
- b=jtIpJBlgAInzWmhMp6Br+N8Q6WDTyZYi3kmb0NJ3KbKPZBL54I2DlJz91vOdSe3pWs+p+4lGASIfHEbNCRjZZNfKwxO+k3P+7CKwlBteASyg+MKCrQWMg9rXTFh9zYCtXDPOFiMEogulzGJQtC76r70aQsrRZ+ya4RlWwkvRikkiygITpV5ZWCHLsNQgSpCsAHcOZXEb6k05jE+miRL8hDpUxGaTIhSMBFZRIerqFGLH5jm88VuMjkQBY37YyRuxD49ngc9FQZwDLdmVfsUND4ssjwGKzJTTMoncD5T3yMUtwzzoBqNxUvcaqDrmtiGYAOvqUbKAH7T4LR1bciWFHQ==
+ bh=il7YhGntNP2H/6iqRFr6trkLVAFYpSgjbytJCfNcxDo=;
+ b=AL3wObV3d+yy5qew7SQvzr3Qw8xrzMiwnn5/EPM7OZMcTiSX9oZv/ENMF6BcATp2Q+nIQcFaLggW4TLO7rjIfUx8945ajG9R8fWl1DY82VQnE8XX8WdCKndrFTDDL/6HvZEHvUC30reDm5FBLTe8sL0YdE9GGG7wKxQD+R6EtLyyd/2YSVeOU6jkLv9bfncCjuYXV8E7uCgs8r+lSXgGYKDD45L2XgKM7E+EP5fiS4gQ6dPvntvKK2YAbq/1N5+eIxFkgm4tLdRdAf/m5J4FDuXtPtK0E7ox7v7fvBpQZxhqt4dyfO34RXZIc2Axfx3n1gyfkoFnBgT92XfdI0D6GQ==
 From: Grygorii Strashko <grygorii_strashko@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Grygorii Strashko <grygorii_strashko@epam.com>, Jan Beulich
@@ -71,11 +71,13 @@ CC: Grygorii Strashko <grygorii_strashko@epam.com>, Jan Beulich
 	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Tim Deegan
 	<tim@xen.org>, Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie
 	<teddy.astie@vates.tech>
-Subject: [XEN][PATCH 0/3] x86/hvm: vmx: refactor cache disable mode code
-Thread-Topic: [XEN][PATCH 0/3] x86/hvm: vmx: refactor cache disable mode code
-Thread-Index: AQHcSS9rVSowLTGsJkyGsEcuP5+npw==
-Date: Wed, 29 Oct 2025 23:54:52 +0000
-Message-ID: <20251029235448.602380-1-grygorii_strashko@epam.com>
+Subject: [XEN][PATCH 3/3] x86/hvm: vmx: refactor cache disable mode data
+Thread-Topic: [XEN][PATCH 3/3] x86/hvm: vmx: refactor cache disable mode data
+Thread-Index: AQHcSS9ubBvE8ofkdUWCspcCjT9/kA==
+Date: Wed, 29 Oct 2025 23:54:57 +0000
+Message-ID: <20251029235448.602380-4-grygorii_strashko@epam.com>
+References: <20251029235448.602380-1-grygorii_strashko@epam.com>
+In-Reply-To: <20251029235448.602380-1-grygorii_strashko@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -84,118 +86,358 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AS2PR03MB8907:EE_|VI1PR03MB6336:EE_
-x-ms-office365-filtering-correlation-id: 7d52d166-5906-4b83-2743-08de17468ddf
+x-ms-office365-filtering-correlation-id: f645fb71-d978-4838-cd34-08de174690bf
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?Z2xzQZfgE3U7eFuNNxAcZ+VYECLb58AM1UqMpSsUI1P1rRuKWHAu9PRsbx?=
- =?iso-8859-1?Q?85OQAkn8jyrbZwmI0OmkLUCBsjJen6f595uO1O9dN4frAQW4Af1SSZNPzk?=
- =?iso-8859-1?Q?XZ0mfsU2UUztmLb0cu1367RbIXoIx/CqnM4o3YJ9fnlCUN+txQZ/tdlwC1?=
- =?iso-8859-1?Q?56FQQogYcEJHIzfjz/1jQyzL2eKZD0EBjo4bO6JOa8N+n8xW3yYvu/HJfP?=
- =?iso-8859-1?Q?6YG9To1OceD8TMNnXUNDbMf3iojYSJhOSSciM6tDlQdcAAtZ9bJcf5ro8G?=
- =?iso-8859-1?Q?WgfcdNM5hRpq+uW8KtPnAVEPLduh++0EcCQz9xO0x6isRNQYZbGvfm+UoH?=
- =?iso-8859-1?Q?VtaqVavkHscqGMjEnEDR2GzsjDJEC4dLNZ05As5z30miEPq3d5AKSdAY11?=
- =?iso-8859-1?Q?dpk07P/igYeDThF1hMAunIUvpDJTB2OPSwA6D2nPm5f2SWIUN9votmY+Qs?=
- =?iso-8859-1?Q?TfjLbYwzEGVHQGCagnhmKL1IkTowKSgJXTb0XQjaBKIbEuZkqZEhCTpdSQ?=
- =?iso-8859-1?Q?pV7fkt3E9Ozj2+3+X5lEiYKbdYIKpIXTrT/ydsS4IZyBC/1XcILYbroyF8?=
- =?iso-8859-1?Q?MPwipPdL/SeoZy1VytjjqyNJWIxLqvUssOuXbpp34SV2GFdsdRvpnZM9Od?=
- =?iso-8859-1?Q?nRBTyCkdTLA8N/0PbhNE9Ljp6Wx+liOekt+Qx2E/xzy3uSMVt3AsyU2Utw?=
- =?iso-8859-1?Q?xDm0TOrnW0GMI0tcS55icUQmMguEZcPSJd5aCBgAASnWLmpMK7VQjbNFeR?=
- =?iso-8859-1?Q?39onaFqMaX41DYNxjOfLACWSUdWKOVm8/b/8zqoh7jpj1s02A0M5KxA0jJ?=
- =?iso-8859-1?Q?LL86db8Y0RRcScHZxImojkJhSc/rw//VrFhhqb8aokqJBc2n/ScKMbiNFE?=
- =?iso-8859-1?Q?d6nts4aIeB2Cnj0RgZhWCiZH/lMpbfcnI8V+/eGxCmKi273gNPRvWV6R1c?=
- =?iso-8859-1?Q?SyV5eerT7IiCp8NzuygAfE7wonim57MZvIyEi64ryE/66QSr6ZdPXXKiuh?=
- =?iso-8859-1?Q?Zy+TjrdyG80T2nHde/B/z2pgFOEz5zrRDLAof/wB1OHITV7I8eoVUYbuJN?=
- =?iso-8859-1?Q?EjmoqnVcEk9/Tk/jpTP+w3r8C8hyDMOJuXKx2Nm/WbNM3MeDEPLPi0rgsd?=
- =?iso-8859-1?Q?D09wfv3+BcBqGWn6pXBnnf5QipxzmBbE60dXF2VWL6G5nDxeIldE/I6LNl?=
- =?iso-8859-1?Q?RAW6ONn7lou+yKKwuPeHnLZnSXpDJ126sYMj6sZpk0wj99vk8lxMbC36Ex?=
- =?iso-8859-1?Q?meTzzGBw0CYXE3ZplgrwHrf6i6X8K+k+CTWzhxZdrmR257YYyuRkym+EHo?=
- =?iso-8859-1?Q?WeEMF1vKeiiYpX/T+M7ZwOP6pmA9hoeizVjpNt7NTDjNCJw0GItU4X7Whn?=
- =?iso-8859-1?Q?QP9BhjXkJV7ZZxGCagqsoTfMk/Ok/RRx7QjZ7u9xj+PilGmU2uh5AfOEqE?=
- =?iso-8859-1?Q?VaSqzZaJHkfnGFw85HLTXjMlHKFJnuHckQbMzb16yYBblys90iThUVGmFi?=
- =?iso-8859-1?Q?tnpg6+NAIATIW/mmvHbKnsRVNj/fxIlDZOnsT2PW1Zq35DTTCISxiUxNAC?=
- =?iso-8859-1?Q?Pp6gfAcoqJnDo/KfTSfr/mYLNPaV?=
+ =?iso-8859-1?Q?7tyB1sSsCwWzcaYSGHa7PC89goEy3ZwJqYuoHz4Xr0w5wDn3YvYxQrlk+P?=
+ =?iso-8859-1?Q?SyaznnWdKF2Fetd1tcx8tbIfy+3j9pESuSrjEohAK1dgnSI5hGbiHflYga?=
+ =?iso-8859-1?Q?LzxaM3YtbvKV4SE1LeaFC17eUms/j4Cav6cjZYXHCY4v/I0801y8aKTgXq?=
+ =?iso-8859-1?Q?shC9RkWwjLD6PeoE1PIs9GdiWhKRr2YJLPg3CgH+bILFambGOQztJAJPpF?=
+ =?iso-8859-1?Q?fxP2NtCjiVsOu/m/RzyHoUCzDZPycofagZg7tjePAcLnNRwlCtsMZq9X4Q?=
+ =?iso-8859-1?Q?BNjIdLUX4GJJ+zbDMJqD9x3sX7Bo++tUYTymGNI/xIwitfaallvM9L/csf?=
+ =?iso-8859-1?Q?NIm13UH9mNGiJ11nwpk0fbm621p/va5ciuqNxEVLW/RDkwlGw4ixhNzVwB?=
+ =?iso-8859-1?Q?A8taapZHvc5sHwT8pAJWB1TDtoKd+AFwCFv0YTCxFSUJ1MgtQ4lgon58sh?=
+ =?iso-8859-1?Q?YxhvcIQ/rPx0WvLbdRQKrv5aZUKHhVP/Dkt6GqcS16WDp3MXqQEbm6ijxd?=
+ =?iso-8859-1?Q?iSiDsKChHmOI4WJubG/GGezi2RoMp/Po7ZSaDRmb1WeQXdh1Fc7MjTfTlH?=
+ =?iso-8859-1?Q?Ben0wtZOLt/30j4Fgx6sZWWnd9UhTAIRCWhbCoo8hhf1Le/Av2FMqxxa6g?=
+ =?iso-8859-1?Q?kMwVvi74WFURgK62ANliVN2NyfhGalrYh9/Dw5y05ENUfcNAy3q306oEv2?=
+ =?iso-8859-1?Q?/KAewb5xw9FAIuGPkg201rqrVsJVzZ4/+b3F64DME71HwvXwwOjBfNX186?=
+ =?iso-8859-1?Q?dSAmdjFHU+urLn668daEIgnscNSRSQ4COIBshu2iMPyqbsraecZ6igS+4s?=
+ =?iso-8859-1?Q?EBTrWqKGc57hOq77Zcyoipe+VhwCIS4AEktp2qjzh4hu/oyf2xbkEUr6Sa?=
+ =?iso-8859-1?Q?Aq0Chmv88hrTUiwSQERYaMRxkWTyTm/Ba1lC2e6BDvJRVlJG1skxk9Sivk?=
+ =?iso-8859-1?Q?lHJQScsLDu1hVjUzTkWNgve00Go4nIvWq3AgH5bPXfDsydrXTLfkurTPts?=
+ =?iso-8859-1?Q?lQ5TyhsCfhJDa0mQAnmUZ31JDV4T02CVGf+Bzukh87BePb9BgE2uA0vI8+?=
+ =?iso-8859-1?Q?Vem3H/XZglbzHIeJeeV9mUUKB2j7PPxD2ivTC0oB2auEq6F8bazAxCb0hG?=
+ =?iso-8859-1?Q?GVM9kIfpdKEpOp1a2ZjG1lNw2d2djudBlcAwIXRaBeEJo3qbOLo/GY2KOQ?=
+ =?iso-8859-1?Q?N+lqTwiF6F5IDqvfpXYkl2FHCo8dhZNh1LaQXmv1nUvEPM9ZtasghL7OMj?=
+ =?iso-8859-1?Q?CkDsnVMvcCtiMXcSKaw0iOqAnmPauPv9kHiuxkJGFg8CWOAOeWVI3v3xoS?=
+ =?iso-8859-1?Q?xRq5WqAE8+vF8ll1PjbRNNecUGBbXKguc1I1DtvE1d6XcGSJkWgM1VkcWl?=
+ =?iso-8859-1?Q?F7aCAx+6PV4PCmALtpbW8gx4mIW+Khjzu3/E9nBeEP4tTEMcBHSe9zpTPq?=
+ =?iso-8859-1?Q?uwHPAKLmb2IbBYcamWoo9ne55qKS/YgVPTP5Hpgfhap4aZNDQbdIsncyh/?=
+ =?iso-8859-1?Q?R25XAOeTDUEhEshKNKIBS0+81vyVc7GYKX6sHKNukN9B9rzbg3FekN9WL3?=
+ =?iso-8859-1?Q?4CHC1/dWegpTCEaTQ+CQuNI9Gf2M?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB8907.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?QfSUt+J201hJGYDGBJCP2ys+Vm2u/HLAgFyfeGfCPC3/bcfa8h4PGXfxd5?=
- =?iso-8859-1?Q?UFr87yDxD9rnavqc3MP/eqgRZFIJyORwQ/VzDwrnZvy8cmeFOXhvrRZEMy?=
- =?iso-8859-1?Q?XIG68kAAP3VovtWmd7RMBYFdwvi4sC6TYvcuzTFB779r/e+nVSb0Uyn+FN?=
- =?iso-8859-1?Q?x5U1vgq68tASoYPNHSjrTPMCvB5J4G/r5+GGp4cDJFunly5gL6wWENi7Rh?=
- =?iso-8859-1?Q?qla9Ss0+RPuRyKkupKdw+k7D+mmGfVRUeI3QdpLhDZqxCEoRLJbor9jRqd?=
- =?iso-8859-1?Q?A29DPh9LLjZ3nxtuAgikyqU6VbaB2Dl+HNa8bouV3BAUXxQHRJzcZoh5qV?=
- =?iso-8859-1?Q?VtTxsUTZWHGod+E9RyP1qlLoy9MlFb/c56SuIJBZwbNyneDyYFOcqMKn8U?=
- =?iso-8859-1?Q?HW1POKhP4SOGMSyDxcWzKxDwHe9exXawzhggaEa5eigWbIslJWOyAfo78W?=
- =?iso-8859-1?Q?0CQqEhisNJvWKWKYWom2cclX1rnIi1dfmZcob8dU6pqWM8CDoOKiPyrvaR?=
- =?iso-8859-1?Q?bIcVXgAeRjDpfbgF6TMbREHf3tuj4XBbx5DMye/VVCgh9bTGBZTwD6Lrem?=
- =?iso-8859-1?Q?nsmU3o6BQD3es3QNRpvl4ihYvsnEF7CuKERHuOHULDh9KO67eBxpmvHBFm?=
- =?iso-8859-1?Q?IPI1hNrwPtgBW4f1AXgh937J30qrxgFaJM9pBzPvNnt+0RBxJFMjpwUPca?=
- =?iso-8859-1?Q?fy3WjRQfeaSME2mSWTDzxR/woauk5uh1m+FknLVQAjztq9g4mAa+EHP68Y?=
- =?iso-8859-1?Q?FpSBoJn3mkIEqyMKBj1oPilbyrmBo//Qqaiy+sa/ELNW6grW1WgUKjgrly?=
- =?iso-8859-1?Q?UeNpLHZbUk2OKA0O5G7NXoAqEpP69JO6KBZ34OMS5ssxprSwyMRwJL4YiW?=
- =?iso-8859-1?Q?QodJiUDQ7EX8ViFRkE5axht/1OuxXlSnPAK8bnufvm9x+IhT2a2RR32l8w?=
- =?iso-8859-1?Q?ZOFcwoAg+55KxkRv0nhxPI13xNtsXpT0QrsjJAZdlymczGZTqLUDmaypUa?=
- =?iso-8859-1?Q?NvUyY2npMjGIrwcfoSNYEjtGexXYV1XToND9AAkh1LMy+x9S2pmjfnKZGX?=
- =?iso-8859-1?Q?N/q+HlYWsLz+qXeQ0htJp/DuTU7LMGAEXLBudpd5l50lGpXlbYDxX4peQx?=
- =?iso-8859-1?Q?uO20J51CSENA0uG9LQGVcYn/F/bihtY3C3jfKgmUKapRiWZ7Fm8spkFSXY?=
- =?iso-8859-1?Q?vE0+k95OXje9O5OA9S66kEKAWT3vyt7DzVlpt/LMXzjuDA4qBudGW5H8BP?=
- =?iso-8859-1?Q?e4XxlHrlvj2Ohwyfut1K9jmX+py6oNXkJsEP3zZHWBBZP48Q1eQweuRg66?=
- =?iso-8859-1?Q?oX3Rq3mRtNSfOj2gUmlAwLLxaxwUaq1xFvN8Z1rQph9aPqCVwfQ2bA5mcn?=
- =?iso-8859-1?Q?0UyLHaHyPbcBcFb2J2zYNgEFHD6GOoMFhds2XtpbZ1Xx8MKPpti59k7rMj?=
- =?iso-8859-1?Q?UC/FDwdbkIxJ3+fvkcnOJqALAImN0gTgvj9J3e0CUEYLLZI5l8OvAq481c?=
- =?iso-8859-1?Q?RK+7FNO5kPia4ZRb8+AhlHLSiUExQKec8x07TuYeTVUhdZygWLzcFP3w+B?=
- =?iso-8859-1?Q?eDi5chcLUsCAxB19IwkxHx6GxyC2iFC1n1vbjDtpGznXWKKgFYoIXiNowx?=
- =?iso-8859-1?Q?ViKWOe8RsVSBWS7nUSNgQbBRGI0FBpd8hrc0k/o/L9SWP42YfW03zKdw?=
- =?iso-8859-1?Q?=3D=3D?=
+ =?iso-8859-1?Q?EdMDITq49WLRWJMlKr8eTu0U5aLNDFTWG4J2QjXdRivVxNKcro4lBnJPfX?=
+ =?iso-8859-1?Q?lOatSkg6LvDudUYEbqktxIZWUDm3TAS+Pz306EgJ95Ny7NTWMisZVp0WY8?=
+ =?iso-8859-1?Q?3l8bGLEbCtlfWTQG4vMMdgx2iNuiX8L4S/CsfrksaoyCG3k0g+MqNfPhG2?=
+ =?iso-8859-1?Q?kFlYYS8vvi8tgUPxHJ1Jyk2CArkh21tg1HRAxmUFTLSA5zTQx5JEkGc5rh?=
+ =?iso-8859-1?Q?tGpk2T8GhuYM1uMgXchgomfL9yhg+3uH/tsld7BKXQSKAl0Ic0RGdp+N45?=
+ =?iso-8859-1?Q?g5YYFKtNef4qZQBHHlRe5aItVYFcIvBqnUPfEK5xLxvUK6GbE5QUQqcotY?=
+ =?iso-8859-1?Q?09GfIjS7sGvKWWrQcqtp0g/l5Jr1GQ9Gkqsyyw6pomo8jBWGHu0vN3FEhk?=
+ =?iso-8859-1?Q?y+Y+o7QPwYO9fygy/JrphcoOjptGWKVPufNaCd14ymf3QPSZ/LkrbP8akA?=
+ =?iso-8859-1?Q?ePQzN8pudwAZdwcDJiHXZ8co22Bvkvj1Vu3D6BFseesij1B6TtSmq8T/Ml?=
+ =?iso-8859-1?Q?gnoYpzZa0I5loZHGiwQbgLOFGSLwcMGCwod6T7XGeym9JKm7nX5ftCT8FK?=
+ =?iso-8859-1?Q?5k87vprql9TTCqdMiLG3roVUcj++ALbi3YwPxVsNy4GAJPFUvxJdsxN3Fq?=
+ =?iso-8859-1?Q?dA3adR+DSIYJAbs51TPEDmZ5qhcYGkgDY2hnBlV8HBiQIHZJv01gocvQF8?=
+ =?iso-8859-1?Q?arycHMIHGYVX/gb81hXLYVnzL6PLX902zyr85doeORm29qlmVNjR7Txp8i?=
+ =?iso-8859-1?Q?MSI2XQQq0iXHtTvyOVMyqhrc2WJeaOCFZTQ3zct9YHqjT/8msuEQrWbCjh?=
+ =?iso-8859-1?Q?T8lERQLAUg/88ExzswO9FXCUfctG4GH3E3r84V0dHjFsyzkmb1sNN7UmXc?=
+ =?iso-8859-1?Q?O4vs3JPvjWvOEtxhuLdShlbz1NDL3HpP4hCSra/1YTxlhyrCWoMhRKihcf?=
+ =?iso-8859-1?Q?64D+8mZaCOjjfWF9HeRhq46hL2F9Oxwy17O01PsaVQGRT+/IhFKPSaPrOG?=
+ =?iso-8859-1?Q?eZMscSEBeex4U2MsawQO4vQS7khajndsfUOPiGYXCha7V/9NmfVbOqCB33?=
+ =?iso-8859-1?Q?jqyBz7/x0gG/zrxL1bDoZluFWVilWlOlX2/QrB3NdpjC5ujEL4jZiBBMmQ?=
+ =?iso-8859-1?Q?UL1kQj9YQkOhQRf8P49R7UWTq+on7j1Pj7w4+Q0ocp9CVm4M09JquT0exZ?=
+ =?iso-8859-1?Q?NMwwY3BVTJL5t4Y2QXtkLjp6GSPIj1WeoK5AcYb5VM49z7CT13uG9LtVvZ?=
+ =?iso-8859-1?Q?fZQDjtcKT6NsD0xoHQI2O3P2pg9tZ2hYWCQ1ALPZOqoD/QfAhmyOnC1CgB?=
+ =?iso-8859-1?Q?0Qx3bn/KoMS1nEO6T5ND0ED20iX8hioJwTLf6WshlWLw/s0DMKuXjIyjZQ?=
+ =?iso-8859-1?Q?jws3uNraG7jtnQ84UTvndASdc8caczdJ1Wu0rQw8wvNBtfxFbPYLn4qhzY?=
+ =?iso-8859-1?Q?hfZ1D90gCMO+MdEGD88pPw097DaXCH1DTAZvJl2Po8uUgNbotkKLazbXqR?=
+ =?iso-8859-1?Q?Rxg/d4VJPHwY8SaAoPrySqY1KUh3GuG8k78AEQHlIIZwTkdDR5b85usizr?=
+ =?iso-8859-1?Q?dJF/bYaczRKQdKxLS2EeJeLlDtk8XlRyHr3RN5FjQxaeBTEYgsTS0Harwg?=
+ =?iso-8859-1?Q?/YX7Hsl3jsz0/a+rCBEyDZkyqU0tLaLo3lAJI3t5sEx8rn2Bu7NTB4wZTX?=
+ =?iso-8859-1?Q?6TZwvVQ3YBfIMEyKh94=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB8907.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d52d166-5906-4b83-2743-08de17468ddf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Oct 2025 23:54:52.8230
+X-MS-Exchange-CrossTenant-Network-Message-Id: f645fb71-d978-4838-cd34-08de174690bf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Oct 2025 23:54:57.6530
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: V2FQuSr1PlXOrxGCtJ18CAHdQWLG8uHY8i8wlJmNIYMQ40dv7voEc38aSRr5DBB3HHCWsrzs/1MQQCfnw+RG8ZC0o5Kxy1ltCl3QmLpohuE=
+X-MS-Exchange-CrossTenant-userprincipalname: YMQctobJpjVCtVOPz+07f8WqMwI3HX+MNfLxGvYgKY/mSl0q9HKgfQDceVeepVZzYYuoVpGEf5n3eZMjv9PTdWKGzBeVSECqQPoqVlJaLco=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB6336
 
 From: Grygorii Strashko <grygorii_strashko@epam.com>
 
-The cache disable mode code (hvm_shadow_handle_cd()) is relevant only for I=
-ntel VT-x (VMX),
-hence:
-- move hvm_shadow_handle_cd()/ hvm_set_uc_mode()/domain_exit_uc_mode() in V=
-MX code
-- account for SHADOW_PAGING when use hvm_shadow_handle_cd()
-- move cache disable mode data into VMX specific structures
+The Cache Disable mode data is used only by VMX code, so move it from
+common HVM structures into VMX specific structures:
+- move "uc_lock", "is_in_uc_mode" fields from struct hvm_domain to struct
+vmx_domain;
+- move "cache_mode" field from struct hvm_vcpu to struct vmx_vcpu.
 
-Based on discussion [1].
+Hence, the "is_in_uc_mode" field is used directly in mm/shadow/multi.c
+_sh_propagate(), introduce the hvm_is_in_uc_mode() macro to avoid direct
+access to this field and account for INTEL_VMX configuration.
 
-[1] https://patchwork.kernel.org/project/xen-devel/patch/20251023151903.560=
-947-1-grygorii_strashko@epam.com/
-
-Grygorii Strashko (3):
-  x86/hvm: move hvm_shadow_handle_cd() in vmx code
-  x86/hvm: vmx: account for SHADOW_PAGING when use
-    hvm_shadow_handle_cd()
-  x86/hvm: vmx: refactor cache disable mode data
-
- xen/arch/x86/hvm/hvm.c                  | 59 ---------------------
- xen/arch/x86/hvm/vmx/vmx.c              | 70 +++++++++++++++++++++++--
- xen/arch/x86/include/asm/hvm/domain.h   |  6 ---
- xen/arch/x86/include/asm/hvm/hvm.h      |  3 ++
- xen/arch/x86/include/asm/hvm/support.h  |  2 -
- xen/arch/x86/include/asm/hvm/vcpu.h     |  3 --
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h | 14 +++++
- xen/arch/x86/include/asm/mtrr.h         |  3 --
+Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+---
+ xen/arch/x86/hvm/hvm.c                  |  1 -
+ xen/arch/x86/hvm/vmx/vmx.c              | 29 +++++++++++++------------
+ xen/arch/x86/include/asm/hvm/domain.h   |  6 -----
+ xen/arch/x86/include/asm/hvm/hvm.h      |  3 +++
+ xen/arch/x86/include/asm/hvm/vcpu.h     |  3 ---
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h | 14 ++++++++++++
+ xen/arch/x86/include/asm/mtrr.h         |  3 ---
  xen/arch/x86/mm/shadow/multi.c          |  2 +-
- 9 files changed, 83 insertions(+), 79 deletions(-)
+ 8 files changed, 33 insertions(+), 28 deletions(-)
 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 9caca93e5f56..c09fb2ba6873 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -608,7 +608,6 @@ int hvm_domain_initialise(struct domain *d,
+     }
+=20
+     spin_lock_init(&d->arch.hvm.irq_lock);
+-    spin_lock_init(&d->arch.hvm.uc_lock);
+     spin_lock_init(&d->arch.hvm.write_map.lock);
+     rwlock_init(&d->arch.hvm.mmcfg_lock);
+     INIT_LIST_HEAD(&d->arch.hvm.write_map.list);
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 05b394840e59..23dbf60ec37f 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -583,6 +583,7 @@ static int cf_check vmx_domain_initialise(struct domain=
+ *d)
+     int rc;
+=20
+     d->arch.ctxt_switch =3D &csw;
++    spin_lock_init(&d->arch.hvm.vmx.uc_lock);
+=20
+     /*
+      * Work around CVE-2018-12207?  The hardware domain is already permitt=
+ed
+@@ -1432,7 +1433,7 @@ static bool domain_exit_uc_mode(struct vcpu *v)
+     {
+         if ( (vs =3D=3D v) || !vs->is_initialised )
+             continue;
+-        if ( (vs->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) ||
++        if ( (vs->arch.hvm.vmx.cache_mode =3D=3D NO_FILL_CACHE_MODE) ||
+              mtrr_pat_not_equal(vs, v) )
+             return false;
+     }
+@@ -1442,7 +1443,7 @@ static bool domain_exit_uc_mode(struct vcpu *v)
+=20
+ static void hvm_set_uc_mode(struct vcpu *v, bool is_in_uc_mode)
+ {
+-    v->domain->arch.hvm.is_in_uc_mode =3D is_in_uc_mode;
++    v->domain->arch.hvm.vmx.is_in_uc_mode =3D is_in_uc_mode;
+     shadow_blow_tables_per_domain(v->domain);
+ }
+=20
+@@ -1451,10 +1452,10 @@ static void hvm_shadow_handle_cd(struct vcpu *v, un=
+signed long value)
+     if ( value & X86_CR0_CD )
+     {
+         /* Entering no fill cache mode. */
+-        spin_lock(&v->domain->arch.hvm.uc_lock);
+-        v->arch.hvm.cache_mode =3D NO_FILL_CACHE_MODE;
++        spin_lock(&v->domain->arch.hvm.vmx.uc_lock);
++        v->arch.hvm.vmx.cache_mode =3D NO_FILL_CACHE_MODE;
+=20
+-        if ( !v->domain->arch.hvm.is_in_uc_mode )
++        if ( !v->domain->arch.hvm.vmx.is_in_uc_mode )
+         {
+             domain_pause_nosync(v->domain);
+=20
+@@ -1464,26 +1465,26 @@ static void hvm_shadow_handle_cd(struct vcpu *v, un=
+signed long value)
+=20
+             domain_unpause(v->domain);
+         }
+-        spin_unlock(&v->domain->arch.hvm.uc_lock);
++        spin_unlock(&v->domain->arch.hvm.vmx.uc_lock);
+     }
+     else if ( !(value & X86_CR0_CD) &&
+-              (v->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
++              (v->arch.hvm.vmx.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
+     {
+         /* Exit from no fill cache mode. */
+-        spin_lock(&v->domain->arch.hvm.uc_lock);
+-        v->arch.hvm.cache_mode =3D NORMAL_CACHE_MODE;
++        spin_lock(&v->domain->arch.hvm.vmx.uc_lock);
++        v->arch.hvm.vmx.cache_mode =3D NORMAL_CACHE_MODE;
+=20
+         if ( domain_exit_uc_mode(v) )
+             hvm_set_uc_mode(v, false);
+=20
+-        spin_unlock(&v->domain->arch.hvm.uc_lock);
++        spin_unlock(&v->domain->arch.hvm.vmx.uc_lock);
+     }
+ }
+=20
+ static int cf_check vmx_set_guest_pat(struct vcpu *v, u64 gpat)
+ {
+     if ( !paging_mode_hap(v->domain) ||
+-         unlikely(v->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
++         unlikely(v->arch.hvm.vmx.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
+         return 0;
+=20
+     vmx_vmcs_enter(v);
+@@ -1495,7 +1496,7 @@ static int cf_check vmx_set_guest_pat(struct vcpu *v,=
+ u64 gpat)
+ static int cf_check vmx_get_guest_pat(struct vcpu *v, u64 *gpat)
+ {
+     if ( !paging_mode_hap(v->domain) ||
+-         unlikely(v->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
++         unlikely(v->arch.hvm.vmx.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
+         return 0;
+=20
+     vmx_vmcs_enter(v);
+@@ -1541,11 +1542,11 @@ static void cf_check vmx_handle_cd(struct vcpu *v, =
+unsigned long value)
+=20
+             wbinvd();               /* flush possibly polluted cache */
+             hvm_asid_flush_vcpu(v); /* invalidate memory type cached in TL=
+B */
+-            v->arch.hvm.cache_mode =3D NO_FILL_CACHE_MODE;
++            v->arch.hvm.vmx.cache_mode =3D NO_FILL_CACHE_MODE;
+         }
+         else
+         {
+-            v->arch.hvm.cache_mode =3D NORMAL_CACHE_MODE;
++            v->arch.hvm.vmx.cache_mode =3D NORMAL_CACHE_MODE;
+             vmx_set_guest_pat(v, *pat);
+             if ( !is_iommu_enabled(v->domain) || iommu_snoop )
+                 vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, VMX_MSR_RW);
+diff --git a/xen/arch/x86/include/asm/hvm/domain.h b/xen/arch/x86/include/a=
+sm/hvm/domain.h
+index 95d9336a28f0..83be2bd1c29c 100644
+--- a/xen/arch/x86/include/asm/hvm/domain.h
++++ b/xen/arch/x86/include/asm/hvm/domain.h
+@@ -97,12 +97,6 @@ struct hvm_domain {
+     /* VRAM dirty support.  Protect with the domain paging lock. */
+     struct sh_dirty_vram *dirty_vram;
+=20
+-    /* If one of vcpus of this domain is in no_fill_mode or
+-     * mtrr/pat between vcpus is not the same, set is_in_uc_mode
+-     */
+-    spinlock_t             uc_lock;
+-    bool                   is_in_uc_mode;
+-
+     bool                   is_s3_suspended;
+=20
+     /* Compatibility setting for a bug in x2APIC LDR */
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/=
+hvm/hvm.h
+index 6f174ef658f1..ce31401a5d53 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -392,6 +392,9 @@ static inline bool using_svm(void)
+     return IS_ENABLED(CONFIG_AMD_SVM) && cpu_has_svm;
+ }
+=20
++#define hvm_is_in_uc_mode(d) \
++    (using_vmx() && (d)->arch.hvm.vmx.is_in_uc_mode)
++
+ #ifdef CONFIG_HVM
+=20
+ #define hvm_get_guest_tsc(v) hvm_get_guest_tsc_fixed(v, 0)
+diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm=
+/hvm/vcpu.h
+index 9ed9eaff3bc5..eae9ac53767b 100644
+--- a/xen/arch/x86/include/asm/hvm/vcpu.h
++++ b/xen/arch/x86/include/asm/hvm/vcpu.h
+@@ -168,9 +168,6 @@ struct hvm_vcpu {
+=20
+     u8                  evtchn_upcall_vector;
+=20
+-    /* Which cache mode is this VCPU in (CR0:CD/NW)? */
+-    u8                  cache_mode;
+-
+     struct hvm_vcpu_io  hvm_io;
+=20
+     /* Pending hw/sw interrupt (.vector =3D -1 means nothing pending). */
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include=
+/asm/hvm/vmx/vmcs.h
+index ecd91389302c..44a535d16207 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -46,7 +46,9 @@ struct ept_data {
+=20
+ #define _VMX_DOMAIN_PML_ENABLED    0
+ #define VMX_DOMAIN_PML_ENABLED     (1ul << _VMX_DOMAIN_PML_ENABLED)
++
+ struct vmx_domain {
++    spinlock_t uc_lock;
+     mfn_t apic_access_mfn;
+     /* VMX_DOMAIN_* */
+     unsigned int status;
+@@ -56,6 +58,12 @@ struct vmx_domain {
+      * around CVE-2018-12207 as appropriate.
+      */
+     bool exec_sp;
++    /*
++     * If one of vcpus of this domain is in no_fill_mode or
++     * mtrr/pat between vcpus is not the same, set is_in_uc_mode.
++     * Protected by uc_lock.
++     */
++    bool is_in_uc_mode;
+ };
+=20
+ /*
+@@ -93,6 +101,9 @@ struct pi_blocking_vcpu {
+     spinlock_t           *lock;
+ };
+=20
++#define NORMAL_CACHE_MODE          0
++#define NO_FILL_CACHE_MODE         2
++
+ struct vmx_vcpu {
+     /* Physical address of VMCS. */
+     paddr_t              vmcs_pa;
+@@ -156,6 +167,9 @@ struct vmx_vcpu {
+=20
+     uint8_t              lbr_flags;
+=20
++    /* Which cache mode is this VCPU in (CR0:CD/NW)? */
++    uint8_t              cache_mode;
++
+     /* Bitmask of segments that we can't safely use in virtual 8086 mode *=
+/
+     uint16_t             vm86_segment_mask;
+     /* Shadow CS, SS, DS, ES, FS, GS, TR while in virtual 8086 mode */
+diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtr=
+r.h
+index 25d442659df2..3a5b4f5b6eec 100644
+--- a/xen/arch/x86/include/asm/mtrr.h
++++ b/xen/arch/x86/include/asm/mtrr.h
+@@ -7,9 +7,6 @@
+ #define MEMORY_NUM_TYPES     MTRR_NUM_TYPES
+ #define NO_HARDCODE_MEM_TYPE MTRR_NUM_TYPES
+=20
+-#define NORMAL_CACHE_MODE          0
+-#define NO_FILL_CACHE_MODE         2
+-
+ #define INVALID_MEM_TYPE X86_NUM_MT
+=20
+ /* In the Intel processor's MTRR interface, the MTRR type is always held i=
+n
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.=
+c
+index 7be9c180ec43..03be61e225c0 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -559,7 +559,7 @@ _sh_propagate(struct vcpu *v,
+         if ( !mmio_mfn &&
+              (type =3D hvm_get_mem_pinned_cacheattr(d, target_gfn, 0)) >=
+=3D 0 )
+             sflags |=3D pat_type_2_pte_flags(type);
+-        else if ( d->arch.hvm.is_in_uc_mode )
++        else if ( hvm_is_in_uc_mode(d) )
+             sflags |=3D pat_type_2_pte_flags(X86_MT_UC);
+         else
+             if ( iomem_access_permitted(d, mfn_x(target_mfn), mfn_x(target=
+_mfn)) )
 --=20
 2.34.1
 
