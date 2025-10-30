@@ -4,56 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1C2CCF9F8
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Oct 2025 08:42:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1153423.1483761 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C3ACCF9F1
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Oct 2025 10:10:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1153445.1483771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vEOEP-0000RU-MO; Thu, 30 Oct 2025 08:42:05 +0000
+	id 1vEPbc-0003VQ-PE; Thu, 30 Oct 2025 10:10:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1153423.1483761; Thu, 30 Oct 2025 08:42:05 +0000
+Received: by outflank-mailman (output) from mailman id 1153445.1483771; Thu, 30 Oct 2025 10:10:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vEOEP-0000RN-Jq; Thu, 30 Oct 2025 08:42:05 +0000
-Received: by outflank-mailman (input) for mailman id 1153423;
- Thu, 30 Oct 2025 08:42:04 +0000
+	id 1vEPbc-0003VJ-MX; Thu, 30 Oct 2025 10:10:08 +0000
+Received: by outflank-mailman (input) for mailman id 1153445;
+ Thu, 30 Oct 2025 10:10:07 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EEwi=5H=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1vEOEO-0000RH-M9
- for xen-devel@lists.xenproject.org; Thu, 30 Oct 2025 08:42:04 +0000
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [2a01:111:f403:c111::9])
+ <SRS0=cjXm=5H=bounce.vates.tech=bounce-md_30504962.69033978.v1-b29dce87efbd455d956221e9d52bfd0c@srs-se1.protection.inumbo.net>)
+ id 1vEPbb-0003UE-Mo
+ for xen-devel@lists.xenproject.org; Thu, 30 Oct 2025 10:10:07 +0000
+Received: from mail187-33.suw11.mandrillapp.com
+ (mail187-33.suw11.mandrillapp.com [198.2.187.33])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4b7c5839-b56c-11f0-980a-7dc792cee155;
- Thu, 30 Oct 2025 09:41:58 +0100 (CET)
-Received: from CH2PR18CA0032.namprd18.prod.outlook.com (2603:10b6:610:55::12)
- by MW4PR12MB7336.namprd12.prod.outlook.com (2603:10b6:303:21a::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Thu, 30 Oct
- 2025 08:41:52 +0000
-Received: from DS3PEPF0000C37F.namprd04.prod.outlook.com
- (2603:10b6:610:55:cafe::9d) by CH2PR18CA0032.outlook.office365.com
- (2603:10b6:610:55::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.14 via Frontend Transport; Thu,
- 30 Oct 2025 08:41:52 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS3PEPF0000C37F.mail.protection.outlook.com (10.167.23.9) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 08:41:52 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 30 Oct
- 2025 01:41:51 -0700
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 30 Oct
- 2025 01:41:50 -0700
-Received: from [10.71.194.215] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Thu, 30 Oct 2025 01:41:49 -0700
+ id 98b03314-b578-11f0-980a-7dc792cee155;
+ Thu, 30 Oct 2025 11:10:01 +0100 (CET)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-33.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4cy0Gc3yxTzBsThgs
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Oct 2025 10:10:00 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ b29dce87efbd455d956221e9d52bfd0c; Thu, 30 Oct 2025 10:10:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,192 +45,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b7c5839-b56c-11f0-980a-7dc792cee155
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IOLXesMlH2MijGp3PSLpMTrkNOK30kv2Kf2b79ZWuX7RCSl5UNlFckYFgELpjY0C6lNlAGaFHwb9wmZCUnzah6WSTCRRfX5/LnwyzJj+gTsUKUYHIjpFem5qDdDoBl4Qp2v0vSbULlUVqEn0G5dY4R+qSHbHzryRP3Q7F+dYFJ98HsmnWmpYCfTuQBrgOUk9dXOjgCCNLzah1Jsc5lvBK9fUrH2oNLakXKLJtFXGusOgjNB7siTtACYKeZZbqvVR0V1wBhpaq4koLrvTPeczr1hT7PYYN2XxVwCNdHO4nYT9Hw2e1ft1nwjJ3IxES3JIk6i5pbueSGBduETTCemQ1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/y0o0RcELoKu8pbsP+8R9y5P9bLFXwib2yu9DI228oI=;
- b=Jx3uuL/ji6r4MTsUAl6n5ivB0f7OwDhfN810RopYIAW5uIwcg/04WWqchfmxyz9KpdkXGks+8kcwA4hC+XT0Erxxl3V1rcOfT+WWIFkYEIar1AbTKYYZIk5/2kuSfNeLWq32HxDjscYWwAav5TJ6zqapuMm1+4VCeJb/TSm+XlcusaEvka/uMOPKa3Ht/YubmVOJI4hD+eQMPuiPzXLDe4wj4f4MAvuF5Pzq8irDwtu83rff98s8yIh2vIXV4dM9tsYb9zakFZvfAuGdxsL4bzpqRnd8wNwrtS9Pdw91kjNQphwBnrB4JRehIMK/sg/aSABX0cpAV47aRyZ8GmTwQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/y0o0RcELoKu8pbsP+8R9y5P9bLFXwib2yu9DI228oI=;
- b=CYX40KqGzxpN6qCi0N5HOU/2CN3TKxVD5qGo+0dpPSnJ/aeS+6HtgVieNjTkD7OtxWqo9a4rARaSZ6YYVT5vPM+2AcMnnKRrLrc6DRcqyBUj7JYhdpR0muDhqUAyCBEOL9ErC4cqo1keL4G+hp4E1usVXgHGrK02WfcOJRHNMmc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <5c1db85b-8733-47d5-b751-864cdb45aca4@amd.com>
-Date: Thu, 30 Oct 2025 09:41:44 +0100
+X-Inumbo-ID: 98b03314-b578-11f0-980a-7dc792cee155
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1761819000; x=1762089000;
+	bh=Op07uysFkdxYKCi5iyDtoSrHdCyqvqDkUa4fwK+hB9M=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=R9jpaDLo+1NiwDl21FZmXauR3RTA7I+60Mjx0fCKhtURExaOvSpZHT9mV+gpI/+oh
+	 upLBnxDpHAUXZCX5nD/TGok1Pj7L7leiwQfQveT/hx7ZSQyqttfYpBl/kDRGhYWULc
+	 Zk34cxSElkEJGhYVpsp1CtIjJWVdjart4B3xSVEaBin+C/7v3YQSOq69aTCLh24AKy
+	 XzhRqy4msG13ybNT9tqOeLaJ1LTvW3q8pi3gI04/cGq6GbPD0mRAZ8qr4WuFBtbxgM
+	 /tymCxfBM2C/c4tkKLsMk/wIYB5URa09Y21R0r+/J9iGphkB0L83qvvUwaw32e+gjf
+	 GxZjvLYUnqTWA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1761819000; x=1762079500; i=teddy.astie@vates.tech;
+	bh=Op07uysFkdxYKCi5iyDtoSrHdCyqvqDkUa4fwK+hB9M=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=H1RLWZvrNlq9h9hEzR3udI8NRwH8NOXyYKgOKBU/P3Y9TYg2OH3Q22c9ZNj8Vbp0m
+	 1KGwPTd1OPsdr2NQYn07gQ+zq2f6r57J3TwyX5VCS5QOdYnCCPS5ZbJ5Gzh9Cq4zGu
+	 kieAuJt87S50vyTU+m4vOIaAVeFyxA/ig4MRt7XD6a5+d6yhPog8q/GMwLR19GhO7O
+	 Meyzd3hZbCrmy5qYzp8T2noOhQFgzPUhwaSre9AZI0x76EPHY+OhGIixgwQHdd0KAF
+	 H6hWKceHYstEv2BIvGbXQPoyJqewhXc7trhGdg3r4rLNID5EaMDpFvBKSVH/REa2zg
+	 kIu/vUzE6FqBQ==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[RFC=20PATCH=20for-4.22=20v2=201/3]=20x86/cpu-policy:=20Infrastructure=20for=20CPUID=20leaf=200x6?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1761818999480
+Message-Id: <9f578a95-12ab-4e4d-a699-d6ad8a882ab8@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+References: <cover.1761752801.git.teddy.astie@vates.tech> <3ad34c3e1de444798dcfe0e673375f28f1a654ec.1761752801.git.teddy.astie@vates.tech> <080c2780-2810-4ba8-8f9c-57c1fc4135f9@suse.com>
+In-Reply-To: <080c2780-2810-4ba8-8f9c-57c1fc4135f9@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b29dce87efbd455d956221e9d52bfd0c?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20251030:md
+Date: Thu, 30 Oct 2025 10:10:00 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] xen/char: implement suspend/resume calls for SCIF
- driver
-To: Mykola Kvach <xakep.amatop@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Oleksandr Andrushchenko
-	<oleksandr_andrushchenko@epam.com>, Mykola Kvach <mykola_kvach@epam.com>
-References: <e57133182b9bcecb519911c8b3f0d871955d6fef.1754540991.git.mykola_kvach@epam.com>
- <CAGeoDV9ejB-6tg0eNK-6jD8zEZb1G0+AmJNaKVt50P4DiB6Kng@mail.gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <CAGeoDV9ejB-6tg0eNK-6jD8zEZb1G0+AmJNaKVt50P4DiB6Kng@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37F:EE_|MW4PR12MB7336:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d49915d-ee61-435a-c46f-08de17902ca6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?dkR4b1RDRlk5S0h4aU4yVjdqMTlSMnJkY0oyZUYrY2FxSnpicFl3N2s4eUZU?=
- =?utf-8?B?VXVDRDc3djJ5WmM3R1JzbDNOSS9hWWhGdE9DUHVZaFlFcktjMGdxS2duV2di?=
- =?utf-8?B?NzM3Y0VTRGRhRkdtVWNBTGxlNUhDZ1JIbTdCWWk3Z1VqQm1XbUNEVFlIQWdk?=
- =?utf-8?B?T2xWWWpWQ3J3aGRRR1hMT0N5Tjh2bGZvaG9qTVFYS2t4a0t3djUyZi9YSHpa?=
- =?utf-8?B?M1UvemtmQkJFWUdKMjlZdHN1Y3NhODlJYUptcmdFaVlxaUo2TFdJbHQ5OW9R?=
- =?utf-8?B?Y01JY3NaYnk4NllHSXRQUmJXdS9kSjcrZVNPV2FvNkJzbGdFU1FqK0ErWkdS?=
- =?utf-8?B?MFVXQXBYSEVaQk1USTRubGdhY2QwNS9Eb21uSEVuaG14V3dOQnJRQVFKWElw?=
- =?utf-8?B?OG9lWEMyK3JvRmo4ZjRhN2llL2NZVlBrVFp0SXJ3UGhZV2hWc05xTnQxdm85?=
- =?utf-8?B?M0ZydjRzazRnQzJpcHoxaFlhME5YRk1PZ0N4V25RbXQzamduK3NUanlyOXVq?=
- =?utf-8?B?K3hYL0lteUExTU11YUZ4aHFqamZ0dzJRdVhhZmdiaTNYcEhibXBPaFZmSWtw?=
- =?utf-8?B?c2RsaC9FcENiRWFvc1hSY0xUck0vZ2NoVWFOZjdHT29MRTFFWUR1UUJkNDE5?=
- =?utf-8?B?VDAvMVROVFFEUWU1REtKeGk3Qkk5dkF2SHhURlR6N0NCcG9ZRjdGVmM5MG9L?=
- =?utf-8?B?VUthOTcrMGY5dnFic0x4ZzNiWW5DbmpRTGxlak9MNEZkWkQvS2szWkdGVmpJ?=
- =?utf-8?B?U3MzU3dKQm12OXJublRYeWl3U2Y4OHVnT0ExZTBlczJjd2dlaGxjZ1R5SzB4?=
- =?utf-8?B?czdndDkrajNTUnFZTFVJK1c1bUNxSWxGNll2WUpubFo5OGo4VEpBNWxGaVJG?=
- =?utf-8?B?ZFd3UTRCTWZaOW9oaklxdWdqQVU4a1dpUFVMY1VIc3pxUllRcU9CN2xJM29Q?=
- =?utf-8?B?b29jNFhTczdxZGRVRVlUZVJONDdvc05pd1ZOUjVVd3NDcHlRR21KZTZ1MDkr?=
- =?utf-8?B?TGlRNU9IekZ0elllbERKKzFmenF4YlB2VUREdWZYSURVYUxNK0EwVEt0TVNh?=
- =?utf-8?B?QldwRVBsZXVhR3Y0MmVXN2R0YUV4SURpK2JhR1JYRVFPOW5QaGdwYlljenZ3?=
- =?utf-8?B?ZHQ3Zm16aGRaWi92QjdRcmdZYnpnRlVzaW9HbG8zY2tSMFNOUXZuRXEvNTFx?=
- =?utf-8?B?WHVJK0V3WXowQzV2cXd2UlRmMW93ZFVHQ2g0d24zVUVzejBVYk5aeFFPZjFo?=
- =?utf-8?B?eTB0bmE1Q0FjbDRNY1hDelUzcmcrRk1ZM1FpVGh2QzY5VWdxTG5PQ1R5WVRC?=
- =?utf-8?B?alVxeW5Tdjk1Vll2Z3FyN1ZNRmhVem0zMGxpdnVoSFMxcEVtOEpYMnBlMS9I?=
- =?utf-8?B?bkhNVGp5YjZEYk1QUEIyaGtZQUlzNzJwanhmM0J2WDh6ZXRRdEpmVWxRVUhP?=
- =?utf-8?B?bm9uS3hkV2RseHlBVXVOTy9LZm1WMHlYMlBMN0pjMFBPT20zdEI5L1ZHZW9X?=
- =?utf-8?B?STdvbEZpRENjaUNONnI2MFdXUHRmT1VzOWdqeEZMVTVkYitMZ0grQWZ6em5w?=
- =?utf-8?B?TE9HckNOQXM0V1Btdjg1WklBZVZhcmZ4QmdEcEttQU1taW9KZ0k4Y2h6NWNO?=
- =?utf-8?B?bW8vUHpwRDFyaGNoaC9IQW9vRGVNVkZYeGhzTE9CaU5VUVpTKzVIejZvcHVQ?=
- =?utf-8?B?cFd1MVh1Y1dVeHdVcDZFWFpka3V2UkdpYkhyYXRXY3hZRzNzc1ZmZnVwOUFa?=
- =?utf-8?B?cG9ac2l2WmkzOFRZNGNQWmE4b0orT2pTOWZlMlNuelkrVXJaRmtsdkR3aHNv?=
- =?utf-8?B?ZERENWRjNFFIWXREKzY0RUhSOWZycHdDZ1pOMDlTTnR4NlkvY0xhdEJXYjl5?=
- =?utf-8?B?OGJmWGhtYjF4UjA2YVdVcUVveGVHaE53VDRPQjR5WkRnUFRyYTN0VFlPVGxT?=
- =?utf-8?B?Rk9GaytMbVN5VGVscEdSbHc1NEI4eHpnNC92L0IxYks5U3ZFcG1BZzJreFpj?=
- =?utf-8?B?UDhFekIvV0NRN3dSRUlYcURzLzJwRVcvdUZ0MmRzSldrcjFTRHZTaFlDSWg4?=
- =?utf-8?B?RmpHZ1RxNjVSOUNHbXgxM3JzRFkwQ1F1ZnlVSzJVWnhoM3Jmbzd6VmtjUVZV?=
- =?utf-8?Q?fNKU=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 08:41:52.4261
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d49915d-ee61-435a-c46f-08de17902ca6
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF0000C37F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7336
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-
-
-On 30/10/2025 08:59, Mykola Kvach wrote:
-> @Stefano Stabellini @Michal Orzel @Julien Grall @Bertrand Marquis ping
+Le 30/10/2025 =C3=A0 08:14, Jan Beulich a =C3=A9crit=C2=A0:
+> On 29.10.2025 16:59, Teddy Astie wrote:
+>> From: Jan Beulich <jbeulich@suse.com>
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+>> ---
+>> v2: introduced
 > 
-> On Thu, Aug 7, 2025 at 8:16 AM Mykola Kvach <xakep.amatop@gmail.com> wrote:
->>
->> From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
->>
->> Implement suspend and resume callbacks for the SCIF UART driver,
->> enabled when CONFIG_SYSTEM_SUSPEND is set. This allows proper
->> handling of UART state across system suspend/resume cycles.
->>
->> Tested on Renesas R-Car H3 Starter Kit.
->>
->> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
->> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
->> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
->> ---
->> In patch v5, there are no changes at all;
->> it was done just to trigger a review.
->>
->> In patch v4, enhance commit message, no functional changes
->>
->> In patch v2, I just added a CONFIG_SYSTEM_SUSPEND check around
->> the suspend/resume functions in the SCIF driver.
->> ---
->>  xen/drivers/char/scif-uart.c | 40 ++++++++++++++++++++++++++++++++++--
->>  1 file changed, 38 insertions(+), 2 deletions(-)
->>
->> diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
->> index 757793ca45..888821a3b8 100644
->> --- a/xen/drivers/char/scif-uart.c
->> +++ b/xen/drivers/char/scif-uart.c
->> @@ -139,9 +139,8 @@ static void scif_uart_interrupt(int irq, void *data)
->>      }
->>  }
->>
->> -static void __init scif_uart_init_preirq(struct serial_port *port)
->> +static void scif_uart_disable(struct scif_uart *uart)
->>  {
->> -    struct scif_uart *uart = port->uart;
->>      const struct port_params *params = uart->params;
->>
->>      /*
->> @@ -155,6 +154,14 @@ static void __init scif_uart_init_preirq(struct serial_port *port)
->>
->>      /* Reset TX/RX FIFOs */
->>      scif_writew(uart, SCIF_SCFCR, SCFCR_RFRST | SCFCR_TFRST);
->> +}
+> This being a change of mine, I'm not happy for the title to have changed,=
+ and
+> for the (little bit of) description to have been dropped.
+> 
+>> --- a/xen/include/xen/lib/x86/cpu-policy.h
+>> +++ b/xen/include/xen/lib/x86/cpu-policy.h
+>> @@ -121,7 +121,32 @@ struct cpu_policy
+>>               uint64_t :64, :64; /* Leaf 0x3 - PSN. */
+>>               uint64_t :64, :64; /* Leaf 0x4 - Structured Cache. */
+>>               uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
+>> -            uint64_t :64, :64; /* Leaf 0x6 - Therm/Perf. */
 >> +
->> +static void scif_uart_init_preirq(struct serial_port *port)
->> +{
->> +    struct scif_uart *uart = port->uart;
->> +    const struct port_params *params = uart->params;
+>> +            /* Leaf 0x6 - Therm/Perf. */
+>> +            struct {
+>> +                uint32_t /* a */
+>> +                    dts:1,
+>> +                    turbo:1,
+>> +                    arat:1,
+>> +                    :4,
+>> +                    hwp:1,
+>> +                    hwp_notification:1,
+>> +                    hwp_activity_window:1,
+>> +                    hwp_epp:1,
+>> +                    hwp_plr:1,
+>> +                    :1,
+>> +                    hdc:1,
+>> +                    :2,
+>> +                    hwp_peci:1,
+>> +                    :2,
+>> +                    hw_feedback:1,
+>> +                    :12;
+>> +                uint32_t /* b */:32;
+>> +                uint32_t /* c */ aperfmperf:1,
+>> +                    :31;
+>> +                uint32_t /* d */:32;
+>> +            } pm;
 >> +
->> +    scif_uart_disable(uart);
->>
->>      /* Clear all errors and flags */
->>      scif_readw(uart, params->status_reg);
->> @@ -271,6 +278,31 @@ static void scif_uart_stop_tx(struct serial_port *port)
->>      scif_writew(uart, SCIF_SCSCR, scif_readw(uart, SCIF_SCSCR) & ~SCSCR_TIE);
->>  }
->>
->> +#ifdef CONFIG_SYSTEM_SUSPEND
->> +
->> +static void scif_uart_suspend(struct serial_port *port)
->> +{
->> +    struct scif_uart *uart = port->uart;
->> +
->> +    scif_uart_stop_tx(port);
->> +    scif_uart_disable(uart);
->> +}
->> +
->> +static void scif_uart_resume(struct serial_port *port)
->> +{
->> +    struct scif_uart *uart = port->uart;
->> +    const struct port_params *params = uart->params;
->> +    uint16_t ctrl;
->> +
->> +    scif_uart_init_preirq(port);
-This will also call scif_uart_disable() that was already invoked during suspend.
-Why do we need to re-disable it when resuming?
+>>               uint64_t :64, :64; /* Leaf 0x7 - Structured Features. */
+>>               uint64_t :64, :64; /* Leaf 0x8 - rsvd */
+>>               uint64_t :64, :64; /* Leaf 0x9 - DCA */
+> 
+> As I had said, this (really: the use of these bits in the host policy) ac=
+tually
+> requires an adjustment to cpu-policy.c as well, which I'm carrying as a s=
+eparate,
+> prereq change (re-produced below). May I suggest that your work go on top=
+ of mine
+> (which I'll post once we have branched 4.21 off)?
+> 
 
-Other than that:
-Acked-by: Michal Orzel <michal.orzel@amd.com>
+I'm ok with it.
 
-~Michal
+> Jan
+> 
+> x86/cpu-policy: move invocation of recalculate_misc()
+> 
+> The function is about guest exposure of features / leaves. There's no nee=
+d
+> for it to be applied on the host policy. In fact doing so gets in the way
+> of using the host policy in certain places.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> --- a/xen/arch/x86/cpu-policy.c
+> +++ b/xen/arch/x86/cpu-policy.c
+> @@ -424,7 +424,6 @@ void __init calculate_host_policy(void)
+>       x86_cpu_featureset_to_policy(boot_cpu_data.x86_capability, p);
+>       recalculate_xstate(p);
+>       recalculate_tile(p);
+> -    recalculate_misc(p);
+>   
+>       /* When vPMU is disabled, drop it from the host policy. */
+>       if ( vpmu_mode =3D=3D XENPMU_MODE_OFF )
+> @@ -705,6 +704,7 @@ static void __init calculate_pv_max_poli
+>       unsigned int i;
+>   
+>       *p =3D host_cpu_policy;
+> +    recalculate_misc(p);
+>   
+>       guest_common_max_leaves(p);
+>   
+> @@ -809,6 +809,7 @@ static void __init calculate_hvm_max_pol
+>       const uint32_t *mask;
+>   
+>       *p =3D host_cpu_policy;
+> +    recalculate_misc(p);
+>   
+>       guest_common_max_leaves(p);
+>   
+> 
+> 
+
+Teddy
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
 
