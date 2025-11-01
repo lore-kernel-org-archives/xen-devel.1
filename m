@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E617CCF9F8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417E7CCFA06
 	for <xen-devel@archiver.kernel.org>; Sat,  1 Nov 2025 11:57:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1154893.1484549 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1154891.1484529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vFAEE-0002ci-4b; Sat, 01 Nov 2025 11:57:06 +0000
+	id 1vFAEC-0002B9-G8; Sat, 01 Nov 2025 11:57:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1154893.1484549; Sat, 01 Nov 2025 11:57:06 +0000
+Received: by outflank-mailman (output) from mailman id 1154891.1484529; Sat, 01 Nov 2025 11:57:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vFAEE-0002cb-1a; Sat, 01 Nov 2025 11:57:06 +0000
-Received: by outflank-mailman (input) for mailman id 1154893;
- Sat, 01 Nov 2025 11:57:04 +0000
+	id 1vFAEC-0002B2-CT; Sat, 01 Nov 2025 11:57:04 +0000
+Received: by outflank-mailman (input) for mailman id 1154891;
+ Sat, 01 Nov 2025 11:57:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rLmn=5J=epam.com=Oleksii_Moisieiev@srs-se1.protection.inumbo.net>)
- id 1vFAEC-0002Ar-GQ
- for xen-devel@lists.xenproject.org; Sat, 01 Nov 2025 11:57:04 +0000
+ id 1vFAEA-0002Ar-Qi
+ for xen-devel@lists.xenproject.org; Sat, 01 Nov 2025 11:57:03 +0000
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [2a01:111:f403:c200::5])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0ce5cc6-b719-11f0-980a-7dc792cee155;
- Sat, 01 Nov 2025 12:57:02 +0100 (CET)
+ id df81880c-b719-11f0-980a-7dc792cee155;
+ Sat, 01 Nov 2025 12:57:00 +0100 (CET)
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
  by DBBPR03MB7130.eurprd03.prod.outlook.com (2603:10a6:10:20e::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Sat, 1 Nov
- 2025 11:56:56 +0000
+ 2025 11:56:57 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc%5]) with mapi id 15.20.9275.013; Sat, 1 Nov 2025
- 11:56:56 +0000
+ 11:56:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0ce5cc6-b719-11f0-980a-7dc792cee155
+X-Inumbo-ID: df81880c-b719-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DgmJA3uAa49HE3Ve+scjSFzxgFXDeZboeCHqtZ6My4f91dxWBugrdGNyyoZ2r4B2XLNPiVi2ujbysZ9+YWjP2pZjhZvq0pgygUHV/IEorQTj4evl7OShGK8slnGk5hivZUNytwAX2Bx3yJoocpsp1gn2fWWfukG9VocgnUDxaQBqARH+CXC21rOFMA5iXSkTr3wQ3ypr/+CF74AI/9Fb0EYqHR4aGuQtu3gHvqIlghBCou6tkZHuQe6T2d7akxntdY4iRi2tZwpj6CSCq0COxyYuQlNNUOWYzGVJgVkRw2tuLL5qRUg1nWHcQhGwnTWmyGm9a49Iz2gSU8C4dlJw2A==
+ b=l/DfiffdbKObjs4etChOzVJKvrCIeyB0WwYaBI9w1ZG2xQZhsudFDPWR27U2CVC8GO+y02EHA2KNg7XctyLl8qB1DPTE9cgiReyE0HL/0zMyC2g0SQ+gidmHNXCHpWUxzIWjU5Oaquk6dMgyuYKlkEfNdNwenvnGjAyp7m3BNjpuwfBAdgum/SvXLlukUMEbWViKkslPy1aK1YnyneBqx4UGJfD9dnq2cykYZh8amK1dUDZzHsNLgOnxDcQR7v36+SUui0jYb0kzhNZmSXNaokATqb2vVhPU9Ujqmb6UgcRzxPpe1eO8VXYEUud9CDNxJe629kqz+lJbhAPUtJ6LNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ap5pNvfbZqnecfxDiQ1kPQR6h+0LuyG2cuRDI9rbD24=;
- b=vGGLGZF+DhHeiFyrH81ZlkDa2y8sOCp+DLr3dImfR9XdaRumdEJ6QsIYY/ip6p9j0XVgPYDN0lj8Wjp90C+2OfNF3CqjksVqm1/6ckGLR/TuNvN3R+vb16BC/s5HqUSnG0BAJOmgyBzSEQK1p5i1+2fKcee/aDskiQ/R1Ui/i0DM+mNVANYtX1R2EhDAWJHlh4Q39TI3RbtKdfSPnwskkGu/fumOrgw0NORJUZhbmtt4YnHgR11IdGDuev2kN9XrCvyigbS37dA14yOBhATfCSsYtvQ8Mc9BK1PyW374csxt0j2+nbxE4dmIP/okNwqCCsTqTLasCxincmQvhzxhcg==
+ bh=cT/yEXmI45eBiggl8I8upOczw/AqEfdB0lot1gsx/GM=;
+ b=C9YU1UFeFyW6Pm9bRw1tATjNWqvmB4IqlJtjfy1FwLIW+ESuCBesI3ZI/Ba/phKqyoDx/3jb/mgHMybQGfBNivecgydy2ElQ/o737iKcG+nBCrIScy4hfU1L6nN7nYA3eNkGGWB7AFFYXtuN9TNMSSp3UnFj336656M51F8SIRpLsMy5auxIA5bWnrztCxCJra03gC1gZ9w2tDv2o0a+Cnh8rA0qXqb4DomL80BI5a4E+sGVGmlzgDhygkZ+XaPJsPFduUmVf7xBoMtawyWL2RA/ecRMTjEHEqaKpy7asgPDrwfqc9+lrLVZyr7JoZIsEukt2tut0iKmqthWxetegg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ap5pNvfbZqnecfxDiQ1kPQR6h+0LuyG2cuRDI9rbD24=;
- b=mAjQVZu4447JOHgdq2jMg95X+rnT9e/mGZi0zNXEDYzK0QwxgnZ/yMWtIvKaHPKK4xrvg9VX+tPkeNurSdbJPCFNgLqm4i9QD34UiZTSdg2Tj2pxeCdnMfV9ZXHSKaxJT5hRlw4Huhx06zOx1TYU4d1xlMXbv5mPVyxeY8dp4nr4GdyTbgqjFCnA2pMU3evG68spvechPxZj7JNZozCfDSL+rAohmG7xwXeUOcNUfKaVii50TzrwwxGGtzF9HDAIjeFCfJ2JkqXVO1msL4E5YzMqFSVgnuIMqG4pomMSAdiru97v1336pDIbTOK4uDziw5opiV3CF6fxG9XLNUHFPw==
+ bh=cT/yEXmI45eBiggl8I8upOczw/AqEfdB0lot1gsx/GM=;
+ b=ekTXNkd7WjEEVhHfCcc0zaOXl+4Le3/lm4N04ACxF0gjBeRjV7jpR8fenRRuyfeemGpvm3RysvekUlCR7MYYKewKR3IbPUTgoBXTHrsQT6ZW1sNxvqKgcPsdkFMcl7L6izgejOKEVo+csP7weDse09aZsh+CchJg+Se3+J1dQtUHl1hQ+wWZvjrgkqU4Z5IT/W554psb6My49BNV+/lKFt4tkQRfzpK+UKONqT0RSf9X6t2YHU9PDL4aXpZrGvx5W73rgL5LKc7hohBkVZgyqaBdkCUXH0NGejnYJN3Cd4wuQHaF5UZdOe/jrOIFnxQ058EiqzDjuxixf8Dy9JbDsg==
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
@@ -72,16 +72,13 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
 	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
 	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Grygorii Strashko <grygorii_strashko@epam.com>, Oleksii Moisieiev
-	<Oleksii_Moisieiev@epam.com>
-Subject: [PATCH v6 1/5] xen/domctl: extend XEN_DOMCTL_assign_device to handle
- not only iommu
-Thread-Topic: [PATCH v6 1/5] xen/domctl: extend XEN_DOMCTL_assign_device to
- handle not only iommu
-Thread-Index: AQHcSyafS16SOr0Uk0OkeRdy8jd8Cg==
-Date: Sat, 1 Nov 2025 11:56:56 +0000
+	Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+Subject: [PATCH v6 3/5] lib/arm: Add I/O memory copy helpers
+Thread-Topic: [PATCH v6 3/5] lib/arm: Add I/O memory copy helpers
+Thread-Index: AQHcSyafwNcBoMRdYEm2n7tK7o4JtQ==
+Date: Sat, 1 Nov 2025 11:56:57 +0000
 Message-ID:
- <b0a72660d58608c80e7408eb8df32ec369d4e45b.1761998077.git.oleksii_moisieiev@epam.com>
+ <33372689f3097b0dde1d47b81a1bb8176b35d20c.1761998077.git.oleksii_moisieiev@epam.com>
 References: <cover.1761998077.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1761998077.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -92,71 +89,71 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DBBPR03MB7130:EE_
-x-ms-office365-filtering-correlation-id: ec32d77b-1be7-474f-876b-08de193dc187
+x-ms-office365-filtering-correlation-id: fafdac47-cdc8-4cdd-084d-08de193dc220
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|1800799024|7416014|376014|366016|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?zDDDDGvDmvRsu8STx5Y5Qc5dr8IWAWgWUw8n+/o2czaDi1VP9Fj1lWivTC?=
- =?iso-8859-1?Q?WjekNoafnE34dzslhqwURmCrryzltIhX1fv3KqPX6wTO2y8Aj5nwZMaiCW?=
- =?iso-8859-1?Q?TOjMt2hzvXhG4woZNC2xsxz/XygjsU+Zh62I0V6aa4Apj3C0/V9jxjPc4k?=
- =?iso-8859-1?Q?Se+3WH7LFKS/h5OYdZPISlcv5t2wqphbe1ggpA9ao0QO6lEtK34rRVF74q?=
- =?iso-8859-1?Q?KzqNdLXFliUr4PeQjUL6BLZj5Oi7m14PXTClpZ7LHMsXm6bjWbInQpvDNL?=
- =?iso-8859-1?Q?e1s2JCTnxPLlivfZVT9XUgFzHBhSSoFFARSbn9FUKc0KAGXtZIAf3eRCCJ?=
- =?iso-8859-1?Q?HN2AdKffGw4dFKoLfp5M2i44FtA2RTwCmw0ec/3NNbavMQM8oEpcfb5G4+?=
- =?iso-8859-1?Q?fYxLvJ8H/yoBFF3tmUjdVVBFOQgPVDWtxxMuRy4ZJq0nl3CzUcRLibf++o?=
- =?iso-8859-1?Q?jcYbjRuIEPXqwZQmRpoQSTXWYI8U8hdSDXZB67t99doZwV8Zp690s9TA/g?=
- =?iso-8859-1?Q?uaJWkd4DU3QrMevErC9wnaUzJfbm01owZkspjHqhXnoqtwh2zdZrIsCqE1?=
- =?iso-8859-1?Q?0uTRlgbauXRFk8gmFSM2Sk2/pGMp1E0pf4vsVq0dDc06E232ehzaunmX0n?=
- =?iso-8859-1?Q?cG1Em1WXM970iOkP4FJF4AkqpR5hKjKjs+AFQhyNsXvyMJbFGY0NfPgRaL?=
- =?iso-8859-1?Q?3WVnEvVaLDN2HtEUD7ZGaSXBtOeKdl+DZc2IKKeV7/n9m84BRP/j6XE4In?=
- =?iso-8859-1?Q?kDuGnm8oN0SX6SHSPJ1heRfEn1M04RtiB+ocLeGyZwPm+jOHaQe5wNnNPa?=
- =?iso-8859-1?Q?QIFoetANqGvJxsN3gqh1/xwxRpQC/rLdW6aNd7HxYlvPaH1fvkMxoPRHS2?=
- =?iso-8859-1?Q?olWTpq6L3cIutNjRvg058TUMY8LGzXs2i9IOYofAol9QmrEa/PCTOuNEDh?=
- =?iso-8859-1?Q?zDE5NLGmnZakmxdu39oVT3unKDqulZiZKkSZOmZxKqOuUn0zzrA2vJ1LQy?=
- =?iso-8859-1?Q?04+RJgZqR6WLA9lKfvivYtkJ+K/uFVUmCSoYsP4Ev9BiLRBZK9Lm27XIRt?=
- =?iso-8859-1?Q?dQi3mhbNvUL8uOJ18waUooB/snYekbAGGrAYr6Bxef7ssUJkwjm5hHaYhn?=
- =?iso-8859-1?Q?rPqUJ5nlncFmtoTxXqEUDDr+0O3ihWeBLu2WmFocDmI9e+5u8o24Zc2pEn?=
- =?iso-8859-1?Q?sGWssNgKpkGtm4q+pLZ7zMjM1w/x8nwipRdzMpulelV+8ORr7AdZaY7WKD?=
- =?iso-8859-1?Q?dQ6pf4SXpDdWjnfyT9nPGOf1uIE7+i6eqZMAWooLQIitg2ZSWgTOAXrHAq?=
- =?iso-8859-1?Q?/sWnNrB5HT8M9eImv+mceHydT41zvNW+cEphXdIjsNOggiAhREuxDGaLZa?=
- =?iso-8859-1?Q?tQn1QXg1j3Zcie6pNVfRO51iJRvkIGJhtfvMKrJpP0z/hCc6ZGkTy9N+xf?=
- =?iso-8859-1?Q?7IITLyeuN4S6K+8ZcqDcslvka3OzE5WVHHofnBQqKaFWxfoTw0FZbNeCXN?=
- =?iso-8859-1?Q?HOSP5Oq0horiBK9AXyRrWL7rtuvUjSkGtZjoPnsitG+7SOoalW1MELNVQd?=
- =?iso-8859-1?Q?4qSJ4pxqm7eHwMMildhbwIRLM+eY?=
+ =?iso-8859-1?Q?ycyjRMQses7+NDsdmDGv0AxCz0UuFMlbivqEL73pyo5D0K3581wE2qF65s?=
+ =?iso-8859-1?Q?7vUbiM0RS9XPaytNYfTQhhk4g9hdnzEGxYzaVhhoNgQRpaTEYC0rHo3OBX?=
+ =?iso-8859-1?Q?lCYXHN7yFZBjc7QUTNTkwPohttUs1sPsXV7EOQ4mKrZEeufpJwuid4nnls?=
+ =?iso-8859-1?Q?MphyK27WDJWq6Z+a8QN1LwyQ1IrhG1trxpEkM5lsIQ4pA74pFrzztWRjxz?=
+ =?iso-8859-1?Q?keNvzKNjvXbeSMMANK1dnmpRmitG0qb5VOKCjZDeWha2YpJDZ0MH3iHNNO?=
+ =?iso-8859-1?Q?2yDFesFqxIM3xBlF99flEGrSlZo0o/CXXM6Dm3gs4SAzjMVBAkeRPpaIwx?=
+ =?iso-8859-1?Q?MeKiBe9gW12fXpFMqyRbtvY+wD7Xu5gOzuNvAph8j8dnXUyRw2c8L+18r8?=
+ =?iso-8859-1?Q?yRXUBDWNYlWf/FgSPbTwa8XZm96L/PvwPolZLKAgMNPls86SaweWJODNVe?=
+ =?iso-8859-1?Q?of27kNGwxIAtKw3KfX+bAsyb+Dc/gYZvmgTOfZZfYW0gLjrh0SoTpSxprJ?=
+ =?iso-8859-1?Q?XWj7Rlq4DREk2rON3qk4jFiYNA0z+NQoZ1orI+WIvqcLGnBYMCdI+pjYT7?=
+ =?iso-8859-1?Q?MVc8uH9SCbY7LzsSvPXrekbnRDXCmaob491e9Xjo4KAmMJaG0grzf9sVL9?=
+ =?iso-8859-1?Q?ON5MXCCw8ZqnI8UBH6ltykE9l8CBVB2BYtEaOi/ARxWITE71S2nou0UZx+?=
+ =?iso-8859-1?Q?E/E8nLo9wZ7HpOej7+cKm++f0G1zRHld7uOnCo7s74Z1+Uhv0+nTIxtDpk?=
+ =?iso-8859-1?Q?ykVlKyiogf7278xls0JUMxhUmH/T1cvhP1peyGHMUb/m+XhYHE6Tp4kAm9?=
+ =?iso-8859-1?Q?bl37LjJuXtoXlzF+5MTzPuJrSyY9XHSwMWFXvHJjEb6wY56QepTfo367fi?=
+ =?iso-8859-1?Q?1jPot9tWBUVqbShSH6GTlHrkfHAQC6dl0H1282Hb5izzBpiNlBfAVAcqu4?=
+ =?iso-8859-1?Q?TqaDw3Lonlf3jbcGW7JHAmaGPdcgOO3t6GL4uarA1azn9NdD3Kkb3FwGdO?=
+ =?iso-8859-1?Q?/JmAxqJiHVLowjQJxLBl70Zl1Kd768D4/DlQaDaUnfNMWAndLbksUF104w?=
+ =?iso-8859-1?Q?xPPjV1mAL+gNVjmR4uCmITg8WBFxdHdBhpCRgwga7lFE11CE7Jdj8b6V2W?=
+ =?iso-8859-1?Q?RSUV5sTwEi0EhsiRYqz3YnUCDujilctzScRAfhJblbiLXV/7ewrRchvfe4?=
+ =?iso-8859-1?Q?b32Etll5x/wtN9zHlwhjI0ns2C/pH+HusUSdk0uNGVWnZKOw37QVuAEpx/?=
+ =?iso-8859-1?Q?klNKMHYtktbj80i+I3VrIHzVG0feDpFeE/6S6ArgZefczowpO9QEyHAVGi?=
+ =?iso-8859-1?Q?UolzfxJgLh5aLngi3TUQJanjlbgKXhOmGtP7LzfxXIg3Sbr9zYR535A0T1?=
+ =?iso-8859-1?Q?x/Z1Xh7w5rqIrA+VtITB9F/LFekA+bWnHJVZ1jgdsYEqYHCRpfXMMXLB08?=
+ =?iso-8859-1?Q?Ey/nhNtFrtc80UZXnTslZiY6fKFtFnQZ4wmmmOmJjLM8xK1jTCrnp/0V6F?=
+ =?iso-8859-1?Q?6lEnUjzKMzWJmOOl6WgypfDfeYkr3oezkAUAmBpuE+lU2QZlTUJTBlVDUP?=
+ =?iso-8859-1?Q?9XYz21JE0iwZQpE5YT7+Ltk5bCpt?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB8946.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?3UM73ozT2ZXxVerZIzbhAYUvgKBvoIKortFJ2cZW5jWOoxGSxk7ny+oaMA?=
- =?iso-8859-1?Q?Kw4xS9LWFq+YUA1glNy1mq+utE1H/1gWwbPJ3MD4K3v8wWtDEsdvhcdi2C?=
- =?iso-8859-1?Q?hJoWKoGY3/o9DDox4EKKJe566RfdHQwA9jbdqS5HYjXgMR4QK0GyeyQQLa?=
- =?iso-8859-1?Q?x43ru1xqCEkEW/Zp1BacnlY4QtppHoTfy+wHvRDQ1qtGzS8u8vYcWGHgaA?=
- =?iso-8859-1?Q?xFLqwlTSJBK0Y0JU4XSD41e5v3OmSVGPiXfkZTeR3IkhF8c4fFVP/WknRO?=
- =?iso-8859-1?Q?jc0QZ3BkxOEcV3rWuWx6F+3n+6gpm0nEKpVRcIAJSd//qMGZ+vhiXqSdVc?=
- =?iso-8859-1?Q?5cgnaJyWO0gvugvky/vFmEm6r6VF7eTi9ejrVRjSz+BUTQ6CN5wAi8u6Be?=
- =?iso-8859-1?Q?Ouaj5uXD4AXGgl3omiC7YLSkVpO7Wij1G1tNc9Gj0f6gYbdv3MkoWxPF2P?=
- =?iso-8859-1?Q?H0p9V/VvChh1zMxo19Xb0bNRFAu+1WsA91PG1OygYtEJ/nTvlQGx2XD/hH?=
- =?iso-8859-1?Q?zDlMa2VzoQvYZP+EhucHka1Sjnu9PioBZjQkJC50C1TSatGOXgev8ELlKX?=
- =?iso-8859-1?Q?VpczCpx0GYWrzYA+HIFtrYusGoeWt3PaPFXYbkoJu4Lr83AwnSjxTOLxsU?=
- =?iso-8859-1?Q?ihJD6LK4iKVeQfBYHQckzSXSPsBLi74pe+2ubFdEi65a1+VPtZux+NNgK6?=
- =?iso-8859-1?Q?XyvpKzZzkFTKb6nygF+ZxDViawC0oiX9fYPwMmaZdpKC7UrKjEeFIwcLai?=
- =?iso-8859-1?Q?8nrwnKGlCvxl7uhKadYLme8rMVZHnEU83CjaSDyBBydqeJGDMnt7yv+e+f?=
- =?iso-8859-1?Q?VzXhJywS9RP1V25YqiFH5WBvlJ8yXOvps+oI8b5+V6lPQMK8E3Ht9FRx6Z?=
- =?iso-8859-1?Q?p/0zQroRJZVbYVr6P/LtXe4WC0jb+AGVZzIeDXwxP71PZMWGsuotg+wYCz?=
- =?iso-8859-1?Q?jAFO4ryPmDDayU+u9TROVr4yg981LsnwJ2KZ9h84Zz5x4ZMYjEkS+KUgU2?=
- =?iso-8859-1?Q?dAVnPonwp+U8mXnvhzMr/2JHYwx2gOWWvJtoxt9zzdWx1pKSSOWBzCNtQ4?=
- =?iso-8859-1?Q?Udj1s4BldjkWZHNo1sEuqaUalWG6UpY0eJsBFUFzGsiEOOASi5/WKk3FvW?=
- =?iso-8859-1?Q?qgWxggwwI2hvO8Mry6aQUoMBxasD5GaR3tljE40pnaTMpNMx3U4ufSvrZJ?=
- =?iso-8859-1?Q?Ul/0xOcg3BHyAUNOXFU9RFMYlybxffbwcc3WG/+qfMwu6JXo3cl8s43kro?=
- =?iso-8859-1?Q?dmCI78V+wf1ZZLx9rS8XIUE4i1vGg++uSjWNpCwimiZXBlMTGY2YPhmyWt?=
- =?iso-8859-1?Q?DTTmjKesEgdMM3DTN0d5GDKtqrBwE5ptUbGma2oXBvuRtl8N4kScYHw7Gr?=
- =?iso-8859-1?Q?kXQoncQueM4j1W5X5B7nIjRElwES68Q83ndaT3uDoYFFh7mYH6TqJNkxrF?=
- =?iso-8859-1?Q?Y/qwOn1O+OklyzEjOg+FFinzCEC1UssK902t3jEv3i3qSLsnnUjJbKMYb4?=
- =?iso-8859-1?Q?/Q2mRiao21FDudlZxc8eHoBMTsFdM85d+muIxY5Lw2dYmCNlK7JadUYUlx?=
- =?iso-8859-1?Q?R3HTLbncg2yDZmgLKk4EjU1YM3KJA9QLDCaD4wu8WTgGVAlxN03sGZemHC?=
- =?iso-8859-1?Q?4CqZqnNy83YSmhyrrD6apK1JdjtUIBa/UUqvS5dK0qTMaBesvF6drUHw?=
+ =?iso-8859-1?Q?MWSHB+Gy3u+21RQ8N6BPGKmQtjTL8VKzsT6S2WCPCZwxJELO1wFUyM5bwh?=
+ =?iso-8859-1?Q?yh8dXqn8+rpkPwNuCCpepJWRQccXUw6aRX2RhN6dRlf06lAfyUr/hhoLpE?=
+ =?iso-8859-1?Q?GqI0pdAGOmNd5W+WF8lGyPkKcWFBhfubwvjfeig0Z21kdGnyaLsdTdt8bK?=
+ =?iso-8859-1?Q?mTotHMjywf7Xcf0bpO29sh67Zy+1oxJONODzEXZMnZyJa3Gf2dD/VkXWKF?=
+ =?iso-8859-1?Q?xT+rYiuDS793NtPDM7Ot7SumvsJrz463vBaoO2Gl5Uo+Cd+uQrKkBIfleI?=
+ =?iso-8859-1?Q?bU3MyqDiGOk40gthuaKc1YxwKle91F821O++EWTt8yRl0hQcDDPQaygwJ9?=
+ =?iso-8859-1?Q?BXtaIKsqeI7jc0DKTqXVmr1f9WGjChcQQ6ahA5EmDfCl4TT75H6t/MEpUr?=
+ =?iso-8859-1?Q?v43gL2nSGaHtmjhjYRYB9MLzsM1iqqWJ88V0bWCDqgW5jJAg/T8DhJb0yg?=
+ =?iso-8859-1?Q?m0+fOpWKVO4Y8E0bv98aOTiNcYEnQVQQt0lTS2UfXj5qLOU8UiVo7Ota+C?=
+ =?iso-8859-1?Q?Y6DpJAQfY1etOU+jdVkYp33Oh8nu0NKyvf9b9B7R/UfTauGIyjlj0ezjYa?=
+ =?iso-8859-1?Q?/vkS1WhZ1Fmi6xCJHqtopP3pd2OLdLmdXyG7S7Uxf72NeqFFI+OnifRr/5?=
+ =?iso-8859-1?Q?xFH2wd4tokf/jZijbx+G5vynJPpeewFB/BqDos1k6hLj27PnQArVR7yv/P?=
+ =?iso-8859-1?Q?67EP8X3lmI8oQAAOu8NkkRcbwtTdYnSazDX0FMzxu1CMHonOLCZ+NAP/m9?=
+ =?iso-8859-1?Q?HQ5w8sFGPCBFyjjbgp2QJ4+VDhErzv1P/f8ISDBu9n+6PgAiXp+kMG9CrK?=
+ =?iso-8859-1?Q?7o+e+OkB55k/k0RIKlfsAD6N2CXNAjvzLjXp6XJYZfEkQy2DbxO5QCSaxK?=
+ =?iso-8859-1?Q?HfuJdpuNC7/QxyYrf8Upza09/qIv6Oc16riaNmfbQ2itdzlwDb3s6nlrKx?=
+ =?iso-8859-1?Q?4tiRljQ7MkA/FkTZWDknkBEaD3JOLWrV8dtQQmvXzwm0p9qwUbajpO9Syr?=
+ =?iso-8859-1?Q?iki4ELkEvCuCpfxKvyb89c/MXHZ01jhdwB89MGEXK1Hie+9g3O4rSGTwrx?=
+ =?iso-8859-1?Q?sImjxHYPKcbIjwSjj6GF+zLX4WudLi2EtgJ9jSs3eh013XYUv0IhMZQ83c?=
+ =?iso-8859-1?Q?a5pqB3IBpAXfIhybz0yBoR2sFqb0D0RxbvPmsm+W+EPYufgHIdbxk976ra?=
+ =?iso-8859-1?Q?cKuOz7cg6hTx5UzcoBr15KsfJPnQHbvvMWMRkKTTzAhmO2P21E0Wlt2lIf?=
+ =?iso-8859-1?Q?wiQOt7ZY2BdSUqzk5dsNFVhrLyrzyD2eBI1r7TjMH6mD4NBokK/iEUvsVz?=
+ =?iso-8859-1?Q?eVI5nj9gXGW4Bz24tDyujmTu+TfuARkCTAwPLLYSzRtLE8jY848xLgT8yW?=
+ =?iso-8859-1?Q?J/OGqQmdrZAf1kIbTel61P7SXyDYzXVlzfUBiQ1bStHqn87JEz8LUMHQJu?=
+ =?iso-8859-1?Q?qRd/go2D2SiqB3tkFrD1pCDJg1b8BH3QAqg4q6JaneVkL50PsPzK/QM0uO?=
+ =?iso-8859-1?Q?kX+pSdo2oM0ro6h8YqgoWts7n1sp21A6jKyr+7YuD8iwSU3JjhIHSwEFKf?=
+ =?iso-8859-1?Q?qq3XejOjAysfiWPjXb5KSwBzQjDyV5AkG7paRvw8x32bX6r7awaZC5lDcb?=
+ =?iso-8859-1?Q?EiPpBjf9ysFpgElR1arUjmJlaat28lChNTUuCXMC9MZqJWZigusZsatw?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -164,223 +161,328 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ec32d77b-1be7-474f-876b-08de193dc187
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2025 11:56:56.3165
+X-MS-Exchange-CrossTenant-Network-Message-Id: fafdac47-cdc8-4cdd-084d-08de193dc220
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2025 11:56:57.3554
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GwtNHkJbb24eWhfnwY1WIt9sUG+cWIhtzCzYig/7QyiEENpiImxaIKCAfWlTcAzUJfhOVXqiULLz3J6hMfCFJZ/ruHnQSYvp82a3R39B/d4=
+X-MS-Exchange-CrossTenant-userprincipalname: MrNyCxpbZbT2jGEB6X+8psSJ7X4yox0a8+/MGA3ZUYdkcSSXNZpDXDk2HXLkaddCxRzi+6LUGaTlbYIVISvB4TiyOwP5sD9z2jaYwlChLtI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB7130
 
-From: Grygorii Strashko <grygorii_strashko@epam.com>
+This commit introduces two helper functions, `__memcpy_fromio` and
+`__memcpy_toio`, to provide a robust mechanism for copying data between
+standard memory and memory-mapped I/O (MMIO) space for the ARM
+architecture.
 
-Add chained handling of assigned DT devices to support access-controller
-functionality through SCI framework, so DT device assign request can be
-passed to FW for processing and enabling VM access to requested device
-(for example, device power management through FW interface like SCMI).
+These functions are designed to handle memory transfers safely,
+accounting for potential address alignment issues to ensure correctness
+and improve performance where possible. The implementation is specific
+to ARM and uses relaxed I/O accessors.
 
-The SCI access-controller DT device processing is chained after IOMMU
-processing and expected to be executed for any DT device regardless of its
-protection by IOMMU (or if IOMMU is disabled).
+__memcpy_fromio:
+Copies a block of data from an I/O memory source to a destination in
+standard ("real") memory. The implementation first handles any unaligned
+bytes at the beginning of the source buffer individually using byte-wise
+reads. It then copies the bulk of the data using 32-bit reads for
+efficiency, and finally processes any remaining bytes at the end of the
+buffer.
 
-This allows to pass not only IOMMU protected DT device through
-xl.cfg:"dtdev" property for processing:
+__memcpy_toio:
+Copies a block of data from standard memory to a destination in I/O
+memory space. It follows a similar strategy, handling any initial
+unaligned portion of the destination buffer byte-by-byte before using
+more efficient 32-bit writes for the main, aligned part of the transfer.
+Any trailing bytes are also handled individually.
 
-dtdev =3D [
-    "/soc/video@e6ef0000", <- IOMMU protected device
-    "/soc/i2c@e6508000", <- not IOMMU protected device
-]
+The double underscore (__) prefix follows the Linux kernel convention for
+low-level or "raw" implementation functions that:
 
-The change is done in two parts:
-1) update iommu_do_dt_domctl() to check for dt_device_is_protected() and
-not fail if DT device is not protected by IOMMU
-2) add chained call to sci_do_domctl() in do_domctl()
+1. Indicate internal/low-level implementation: The __ prefix signals that t=
+hese
+   are the actual implementation functions, not wrapper macros or inline he=
+lpers.
+   On x86, memcpy_fromio/memcpy_toio are simply #defined as memcpy (see
+   xen/arch/x86/dmi_scan.c), but on ARM they require special handling.
 
-Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+2. Architecture-specific behavior: Unlike x86 where IO memory can be access=
+ed
+   like regular memory, ARM requires specific IO accessor functions (readl_=
+relaxed,
+   writel_relaxed, etc.) to ensure proper memory barriers and hardware sema=
+ntics.
+
+3. Prevent accidental misuse: The __ prefix warns developers that these fun=
+ctions:
+   - Have specific alignment and ordering requirements
+   - Must not be confused with regular memcpy()
+   - Are meant for IO memory regions only (marked with __iomem)
+
+4. Consistent with Linux kernel style: This naming convention is inherited =
+from
+   the Linux kernel's ARM implementation (see linux/arch/arm/include/asm/io=
+.h),
+   maintaining compatibility and familiarity for developers working across =
+both
+   codebases.
+
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 ---
 
 Changes in v6:
-- change iommu_do_domctl and sci_do_domctl command order and
-call sci_do_domctl first which will produce cleaner code path.
-Also dropped changing return code when iommu was disabled in
-iommu_do_domctl.
+- sorted objs in Makefile alhabetically
+- added newline at the end of Makefile
+- used uint{N}_t intead of u{N}
+- add comment about why 32 bit IO operations were used
+- updated cast opertaions to avoid dropping constness which is wrong
+- move function definitions to generic place so the could be reused by
+other arch
+- add SPDX tag to io.c
 
 Changes in v5:
-- return -EINVAL if mediator without assign_dt_device was provided
-- invert return code check for iommu_do_domctl in
-XEN_DOMCTL_assign_device domctl processing to make cleaner code
-- change -ENOTSUPP error code to -ENXIO in sci_do_domctl
-- handle -ENXIO return comde of iommu_do_domctl
-- leave !dt_device_is_protected check in iommu_do_dt_domctl to make
-code work the same way it's done in "handle_device" call while
-creating hwdom(dom0) and "handle_passthrough_prop" call for dom0less
-creation
-- drop return check from sci_assign_dt_device call as not needed
-- do not return EINVAL when addign_dt_device is not set. That is
-because this callback is optional and not implemented in single-agent drive=
-r
+- move memcpy_toio/fromio to the generic place
 
- xen/arch/arm/firmware/sci.c             | 35 +++++++++++++++++++++++++
- xen/arch/arm/include/asm/firmware/sci.h | 14 ++++++++++
- xen/common/domctl.c                     | 26 ++++++++++++++++++
- xen/drivers/passthrough/device_tree.c   |  6 +++++
- 4 files changed, 81 insertions(+)
+ xen/include/xen/lib/io.h |  83 +++++++++++++++++++++++++++++++
+ xen/lib/Makefile         |   1 +
+ xen/lib/arm/Makefile     |   1 +
+ xen/lib/arm/io.c         | 102 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 187 insertions(+)
+ create mode 100644 xen/include/xen/lib/io.h
+ create mode 100644 xen/lib/arm/Makefile
+ create mode 100644 xen/lib/arm/io.c
 
-diff --git a/xen/arch/arm/firmware/sci.c b/xen/arch/arm/firmware/sci.c
-index aa93cda7f0..31a7e5c28b 100644
---- a/xen/arch/arm/firmware/sci.c
-+++ b/xen/arch/arm/firmware/sci.c
-@@ -126,6 +126,41 @@ int sci_assign_dt_device(struct domain *d, struct dt_d=
-evice_node *dev)
-     return 0;
- }
-=20
-+int sci_do_domctl(struct xen_domctl *domctl, struct domain *d,
-+                  XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-+{
-+    struct dt_device_node *dev;
-+    int ret =3D 0;
+diff --git a/xen/include/xen/lib/io.h b/xen/include/xen/lib/io.h
+new file mode 100644
+index 0000000000..16758691b8
+--- /dev/null
++++ b/xen/include/xen/lib/io.h
+@@ -0,0 +1,83 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Generic I/O memory copy function prototypes.
++ *
++ * These functions provide low-level implementation for copying data betwe=
+en
++ * regular memory and I/O memory regions. Each architecture must provide i=
+ts
++ * own implementation based on the specific requirements of the architectu=
+re's
++ * memory model and I/O access patterns.
++ *
++ * Architecture-specific implementations:
++ * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++ * Each architecture should implement these functions in xen/lib/<arch>/io=
+.c
++ * based on their hardware requirements:
++ *
++ * - ARM/ARM64: Requires special I/O accessors (readl_relaxed, writel_rela=
+xed)
++ *              with proper memory barriers and alignment handling.
++ *              See xen/lib/arm/io.c for implementation.
++ *
++ * - x86/x86_64: I/O memory is directly accessible, so typically uses:
++ *               #define memcpy_fromio memcpy
++ *               #define memcpy_toio   memcpy
++ *               See xen/arch/x86/dmi_scan.c for example usage.
++ *
++ * - Other architectures (RISC-V, PowerPC, MIPS, etc.): Should provide the=
+ir
++ *   own implementations following the function signatures defined below.
++ *
++ * Naming Convention:
++ * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++ * The double underscore (__) prefix indicates these are low-level "raw"
++ * implementation functions, following the Linux kernel convention for
++ * architecture-specific primitives. This warns developers that these
++ * functions have specific requirements and should not be confused with
++ * regular memcpy().
++ */
 +
-+    switch ( domctl->cmd )
-+    {
-+    case XEN_DOMCTL_assign_device:
-+        ret =3D -ENXIO;
-+        if ( domctl->u.assign_device.dev !=3D XEN_DOMCTL_DEV_DT )
-+            break;
++#ifndef _XEN_LIB_IO_H
++#define _XEN_LIB_IO_H
 +
-+        if ( !cur_mediator )
-+            break;
-+
-+        if ( !cur_mediator->assign_dt_device )
-+            break;
-+
-+        ret =3D dt_find_node_by_gpath(domctl->u.assign_device.u.dt.path,
-+                                    domctl->u.assign_device.u.dt.size, &de=
-v);
-+        if ( ret )
-+            return ret;
-+
-+        ret =3D sci_assign_dt_device(d, dev);
-+
-+        break;
-+    default:
-+        /* do not fail here as call is chained with iommu handling */
-+        break;
-+    }
-+
-+    return ret;
-+}
-+
- static int __init sci_init(void)
- {
-     struct dt_device_node *np;
-diff --git a/xen/arch/arm/include/asm/firmware/sci.h b/xen/arch/arm/include=
-/asm/firmware/sci.h
-index 3500216bc2..a2d314e627 100644
---- a/xen/arch/arm/include/asm/firmware/sci.h
-+++ b/xen/arch/arm/include/asm/firmware/sci.h
-@@ -146,6 +146,14 @@ int sci_dt_finalize(struct domain *d, void *fdt);
-  * control" functionality.
-  */
- int sci_assign_dt_device(struct domain *d, struct dt_device_node *dev);
++#include <xen/types.h>
 +
 +/*
-+ * SCI domctl handler
++ * __memcpy_fromio - Copy data from I/O memory space to regular memory
++ * @to: Destination buffer in regular memory
++ * @from: Source address in I/O memory space (must be marked __iomem)
++ * @count: Number of bytes to copy
 + *
-+ * Only XEN_DOMCTL_assign_device is handled for now.
++ * This function handles copying from memory-mapped I/O regions using
++ * architecture-appropriate I/O accessor functions. It ensures proper:
++ * - Memory ordering and barriers
++ * - Alignment requirements
++ * - Hardware-specific access semantics
++ *
++ * Each architecture provides its own implementation that may:
++ * - Use special I/O accessor functions (ARM: readl_relaxed, readb_relaxed=
+)
++ * - Implement alignment handling for devices requiring specific access si=
+zes
++ * - Add memory barriers to ensure ordering with other I/O operations
++ * - Or simply map to memcpy() if the architecture allows direct I/O acces=
+s
 + */
-+int sci_do_domctl(struct xen_domctl *domctl, struct domain *d,
-+                  XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
- #else
++extern void __memcpy_fromio(void *to, const volatile void __iomem *from,
++                            size_t count);
++
++/*
++ * __memcpy_toio - Copy data from regular memory to I/O memory space
++ * @to: Destination address in I/O memory space (must be marked __iomem)
++ * @from: Source buffer in regular memory
++ * @count: Number of bytes to copy
++ *
++ * This function handles copying to memory-mapped I/O regions using
++ * architecture-appropriate I/O accessor functions. It ensures proper:
++ * - Memory ordering and barriers
++ * - Alignment requirements
++ * - Hardware-specific access semantics
++ *
++ * Each architecture provides its own implementation that may:
++ * - Use special I/O accessor functions (ARM: writel_relaxed, writeb_relax=
+ed)
++ * - Implement alignment handling for devices requiring specific access si=
+zes
++ * - Add memory barriers to ensure ordering with other I/O operations
++ * - Or simply map to memcpy() if the architecture allows direct I/O acces=
+s
++ */
++extern void __memcpy_toio(volatile void __iomem *to, const void *from,
++                          size_t count);
++
++#endif /* _XEN_LIB_IO_H */
+diff --git a/xen/lib/Makefile b/xen/lib/Makefile
+index 5ccb1e5241..6bb0491d89 100644
+--- a/xen/lib/Makefile
++++ b/xen/lib/Makefile
+@@ -1,3 +1,4 @@
++obj-$(CONFIG_ARM) +=3D arm/
+ obj-$(CONFIG_X86) +=3D x86/
 =20
- static inline bool sci_domain_is_enabled(struct domain *d)
-@@ -195,6 +203,12 @@ static inline int sci_assign_dt_device(struct domain *=
-d,
-     return 0;
- }
-=20
-+static inline int sci_do_domctl(struct xen_domctl *domctl, struct domain *=
-d,
-+                                XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_dom=
-ctl)
+ lib-y +=3D bsearch.o
+diff --git a/xen/lib/arm/Makefile b/xen/lib/arm/Makefile
+new file mode 100644
+index 0000000000..8a7b6cfd59
+--- /dev/null
++++ b/xen/lib/arm/Makefile
+@@ -0,0 +1 @@
++obj-y +=3D io.o
+diff --git a/xen/lib/arm/io.c b/xen/lib/arm/io.c
+new file mode 100644
+index 0000000000..fbce204775
+--- /dev/null
++++ b/xen/lib/arm/io.c
+@@ -0,0 +1,102 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <asm/io.h>
++#include <xen/lib/io.h>
++
++/*
++ * These functions use 32-bit (uint32_t) IO operations rather than 64-bit =
+for
++ * the following reasons:
++ *
++ * 1. ARM32/ARM64 compatibility: On ARM32, there is no atomic 64-bit IO ac=
+cessor
++ *    (readq_relaxed). Only readq_relaxed_non_atomic() exists, which inter=
+nally
++ *    performs two separate 32-bit reads. Using it would not provide any
++ *    performance benefit and could introduce ordering issues.
++ *
++ * 2. Hardware compatibility: Many IO devices only support 32-bit aligned =
+accesses.
++ *    64-bit accesses might not be supported or could cause bus errors on =
+some
++ *    hardware.
++ *
++ * 3. Simplicity: Using 32-bit operations keeps the code simple, maintaina=
+ble,
++ *    and consistent across both ARM32 and ARM64 architectures without
++ *    architecture-specific conditionals.
++ *
++ * The performance difference between 32-bit and 64-bit operations in this
++ * context is negligible compared to the IO access latency itself.
++ */
++
++/*
++ * memcpy_fromio - Copy data from IO memory space to "real" memory space.
++ * @to: Where to copy to
++ * @from: Where to copy from
++ * @count: The size of the area.
++ */
++void __memcpy_fromio(void *to, const volatile void __iomem *from,
++                     size_t count)
 +{
-+    return 0;
++    while ( count && !IS_ALIGNED((unsigned long)from, 4) )
++    {
++        *(uint8_t *)to =3D readb_relaxed(from);
++        from++;
++        to++;
++        count--;
++    }
++
++    while ( count >=3D 4 )
++    {
++        *(uint32_t *)to =3D readl_relaxed(from);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
++
++    while ( count )
++    {
++        *(uint8_t *)to =3D readb_relaxed(from);
++        from++;
++        to++;
++        count--;
++    }
 +}
 +
- #endif /* CONFIG_ARM_SCI */
-=20
- #endif /* __ASM_ARM_SCI_H */
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 954d790226..b89559ef7b 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -29,6 +29,7 @@
- #include <xen/xvmalloc.h>
-=20
- #include <asm/current.h>
-+#include <asm/firmware/sci.h>
- #include <asm/irq.h>
- #include <asm/page.h>
- #include <asm/p2m.h>
-@@ -827,7 +828,32 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_=
-domctl)
-     case XEN_DOMCTL_test_assign_device:
-     case XEN_DOMCTL_deassign_device:
-     case XEN_DOMCTL_get_device_group:
-+        int ret1;
-+       =20
-+        /*
-+         * Add chained handling of assigned DT devices to support
-+         * access-controller functionality through SCI framework, so
-+         * DT device assign request can be passed to FW for processing and
-+         * enabling VM access to requested device.
-+         * The access-controller DT device processing is chained before IO=
-MMU
-+         * processing preserving return code and expected to be executed f=
-or
-+         * any DT device regardless if DT device is protected by IOMMU or
-+         * not (or IOMMU is disabled).
-+         */
-+        ret1 =3D sci_do_domctl(op, d, u_domctl);
++/*
++ * memcpy_toio - Copy data from "real" memory space to IO memory space.
++ * @to: Where to copy to
++ * @from: Where to copy from
++ * @count: The size of the area.
++ */
++void __memcpy_toio(volatile void __iomem *to, const void *from,
++                   size_t count)
++{
++    while ( count && !IS_ALIGNED((unsigned long)to, 4) )
++    {
++        writeb_relaxed(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
 +
-         ret =3D iommu_do_domctl(op, d, u_domctl);
-+        if ( ret < 0 )
-+            return ret;
++    while ( count >=3D 4 )
++    {
++        writel_relaxed(*(const uint32_t *)from, to);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
 +
-+        /*
-+         * If IOMMU processing was successful, check for SCI processing re=
-turn
-+         * code and if it was failed then overwrite the return code to pro=
-pagate
-+         * SCI failure back to caller.
-+         */
-+        if ( ret1 !=3D -ENXIO )
-+            ret =3D ret1;
++    while ( count )
++    {
++        writeb_relaxed(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
++}
 +
-         break;
-=20
-     case XEN_DOMCTL_get_paging_mempool_size:
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthroug=
-h/device_tree.c
-index f5850a2607..29a44dc773 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -379,6 +379,12 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, stru=
-ct domain *d,
-             break;
-         }
-=20
-+        if ( !dt_device_is_protected(dev) )
-+        {
-+            ret =3D 0;
-+            break;
-+        }
-+
-         ret =3D iommu_assign_dt_device(d, dev);
-=20
-         if ( ret )
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 8
++ * tab-width: 8
++ * indent-tabs-mode: t
++ * End:
++ */
 --=20
 2.34.1
 
