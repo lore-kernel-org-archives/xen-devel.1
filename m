@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5757CCFA03
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Nov 2025 09:58:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1156637.1485662 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09452CCF9F8
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Nov 2025 09:58:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1156644.1485671 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vGwkh-0006oC-73; Thu, 06 Nov 2025 09:57:59 +0000
+	id 1vGwlS-0007FB-EY; Thu, 06 Nov 2025 09:58:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1156637.1485662; Thu, 06 Nov 2025 09:57:59 +0000
+Received: by outflank-mailman (output) from mailman id 1156644.1485671; Thu, 06 Nov 2025 09:58:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vGwkh-0006o5-3y; Thu, 06 Nov 2025 09:57:59 +0000
-Received: by outflank-mailman (input) for mailman id 1156637;
- Thu, 06 Nov 2025 09:57:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vGwlS-0007F4-Bq; Thu, 06 Nov 2025 09:58:46 +0000
+Received: by outflank-mailman (input) for mailman id 1156644;
+ Thu, 06 Nov 2025 09:58:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IWGa=5O=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vGwkg-0006nz-1i
- for xen-devel@lists.xenproject.org; Thu, 06 Nov 2025 09:57:58 +0000
+ id 1vGwlQ-0007Es-GP
+ for xen-devel@lists.xenproject.org; Thu, 06 Nov 2025 09:58:44 +0000
 Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
  [2a00:1450:4864:20::532])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 10ba5f10-baf7-11f0-980a-7dc792cee155;
- Thu, 06 Nov 2025 10:57:55 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2da8028f-baf7-11f0-9d17-b5c5bf9af7f9;
+ Thu, 06 Nov 2025 10:58:43 +0100 (CET)
 Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-640b2a51750so1305564a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 06 Nov 2025 01:57:54 -0800 (PST)
+ 4fb4d7f45d1cf-640bd9039fbso1268806a12.2
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Nov 2025 01:58:43 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7289682544sm174583366b.53.2025.11.06.01.57.53
+ 4fb4d7f45d1cf-6411f86e12fsm1450849a12.34.2025.11.06.01.58.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 01:57:53 -0800 (PST)
+ Thu, 06 Nov 2025 01:58:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,47 +47,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10ba5f10-baf7-11f0-980a-7dc792cee155
+X-Inumbo-ID: 2da8028f-baf7-11f0-9d17-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1762423074; x=1763027874; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1762423123; x=1763027923; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=2pV8SBOsPTBHMSriyI7Vv4bb6edPP5QubO2Uijno1hM=;
-        b=JUYgtLenxlMaasCiBjiiAfz9A2ARXxw7Y+OGu5DufzAJzFqKbUcHmVOttdIVBvtk5B
-         cnIIplAU6qiQRXwF9+t4SfQnmUcvX+BYrG/fBhEMlFrbVmlFfUpTK0XdgdmCat7Cd9XW
-         dS6Z3NQxLXNsuUda1Uj67xhn+WHacXykka6jrxCrYRrK8hGA0xEb5kacTGQZiC4boc5W
-         vE0X5n18M+f+bHTJ/k51X0lf9xsa/JAtnMA/ahPosI2gIEMfhnAQn6LYhLSKcqOoDE27
-         uu/6fkYGHTZtS9DZj1b6nDNzDJTbBjO+iJJT1CSt4WxODNE4Xhu7966uMmFS8Su9JBQU
-         uVjg==
+        bh=Rhfy11/guVwOWQYPdtOxX6VZ1SgjtOwJ5IhKiblhsPY=;
+        b=BlzhoIrHmZudP9qN9o7u9MIZLt829Hr/ArSlTHR0UyKzJFp+SMZ8o9Rc4uYqF/vt6Q
+         HNrouep880I15crRVpayqVTwrsijuS/0SUuFbZX7iAPAIIXhIhrzg1VKQ6x3SUtwvSht
+         hX3uaAMLk7qnJrmZTwxAGMkPpwNesWrTHQP9NDhlGbh195WSHr1Ox7HVGA7HYhcAJ/bd
+         DzR0sxlUM89RsF+BUBbjlJdmt8chnG5DSIrYHN/wbRMTgTWFvPXk+GJCrkWR4r3tw66m
+         SoRuG+mK3OLwbJ66b33w0Zo5EwF5BtgcGi8fFlqrEosX6giQGP9iDQisrr8rKQyg1Dx+
+         bvtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762423074; x=1763027874;
+        d=1e100.net; s=20230601; t=1762423123; x=1763027923;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2pV8SBOsPTBHMSriyI7Vv4bb6edPP5QubO2Uijno1hM=;
-        b=uHeVGYuY+ApXcTgBfUkTa6+wcJH5vLzibITqRnIc41TUiyR7QQIZbJT+on8hDHRKW1
-         f03eHQiLmSWo88lqDybeHKMPesPNtfblitUuBUNqY0NOM+bnNqT4f2UA71EACWPhFTnk
-         tg87VDruHx3+4AdxQWPS8DvDMro8bn9NQLykyj3aZVKhLb9NpnBsZQkUFKVPXSSzE39n
-         aECnzSqmB7nUBMxSsPRD/UhU3V6EhfAvX+RIUWVajz7dMl/TLvD0/ieqaVfwm0YI4OC0
-         zVoeiZOVDgd5wo6TdBY9T0hViZaIrW2/COydd46zypLHrGCJN/5dSMd2bdp6OUNt0RXl
-         yLog==
-X-Forwarded-Encrypted: i=1; AJvYcCUKftHiFsFZG/ybelbJHQ7jT26ph8g4nvK7HrTWEdntGODLOy9EANvvtV1L3oP+ARXUBps+37gWtFg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzVdiWjgxv4kLFGYQRWKbMj09HVqPRG/OrD2egWjCJVAGGmHbNi
-	2Xn3CaKPBpN6obps1OAYaraGP0U+zTwI+U89n4O4rzPIQqS68IuYXW+BiaJgsdNslw==
-X-Gm-Gg: ASbGncuF0FA8IY3Fq0MbdGVYuffwZl8SJhlMygKwowABwiCyY3k3Bn3D5Jo6FTkySsW
-	qmNWx1P1x3GXLeMk3pYAFLX9GOLbyHfBWez+QxbVFEYR3lCcYF8SASFHMNWdh3aBvseY9m0JS2Q
-	/m3JdDEWm3eeMVRatU+9LCSn8VLRTIBQi+T5f/RmjlXV3ahLh3lC7w0cs74NnIBfIzPDbJeSNK8
-	HKL3RIr7EYrC2e9c/9wSiGOXkJB4lZ9N29+bRpeCGZK2OhWnkN+EWV/V4zVG8yw5tD29McJhv+R
-	djWe/yBn1FGqZQ8sag7XHsiycXpnCGu1Lwc+omDptSn6DC5vV6klskcEd2FmowzH00SovNaJO/+
-	dnp54lg8BOIiPQDmo3agEeJrfpqJE6tLExhyFFGdVqSX9Imwb5wgoKma8byGrV/ndXdC1iIDOQK
-	+VvMwHR0g7JLZEPu1ouM6jlq4/Ku3V1jbEPOB+xZTQyFKbAJihUQMkcwUtT/60
-X-Google-Smtp-Source: AGHT+IEuTn/BnleDYIkzdv8wOmSTxYhlItq1EppSz24bYdRDHlxDQxF3/TOz6/pHi+cS+Suvxnfazw==
-X-Received: by 2002:a17:907:944a:b0:b6d:8d8d:3010 with SMTP id a640c23a62f3a-b72655b7411mr510969166b.56.1762423073633;
-        Thu, 06 Nov 2025 01:57:53 -0800 (PST)
-Message-ID: <45031a9f-1072-4a41-9b46-35bf6437880b@suse.com>
-Date: Thu, 6 Nov 2025 10:57:56 +0100
+        bh=Rhfy11/guVwOWQYPdtOxX6VZ1SgjtOwJ5IhKiblhsPY=;
+        b=LrKHVjd24pOlqllGtM3o6ftfoEO6q84lrkRNnEP/gwILIPyyFX6wAp5GZVymzZi71H
+         HRLHvD5uGDW9nz6Dl0q3I+A8ChfnXLrxbSt+rPJRSPyCOluM5N6tC18SjTOIqkeEKmt/
+         vKJEX0dtiMAN0nKkxnJvyETj9hHf4vDvh9JsJJvbj1J0Hj79cQHNfZinHQ+lPhAzwMzg
+         BBnnavo/AanxvIKxCQmFfWs3ZNUpw2Lc6y3HuVp+ONID5YTev9RGlvVliCPWB+j5o+L6
+         nDyHi5oP774psKideJBi3aHfAB1P89yXB8+jzRVbLjJXcVqS0T2l/fwv/2FJ6/LhO9DB
+         AAHA==
+X-Forwarded-Encrypted: i=1; AJvYcCUKmlyrPD9IVQrU8doysn1s6ggUzGPPoDWsuC4SLBzrdHC8vB2he7yEgRltNILp5KMWHTHam4xkT7k=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzxm53JrI9jz8yFb9CvNEHC01aPe3IzIHjzCauk9pHs3J4h9UeW
+	lWVY6v171dt+WixwP2GcJ5LafdiBnk18roFYv6Gb3as+pAegVewgIeCukBwb2oOuaQ==
+X-Gm-Gg: ASbGncsayLU/oZ1BB9uc40ZhT07KVXkqCnRREE5VljGW07xjtCypgyHRCVQ54sB7Phy
+	1V11bYj0ynzYLweDa/upIoHtxyXX3SuK1ICwDUP0FJQSYUyJ5vsrmFpR8vGc9x23W3SIuzk2DyQ
+	k8hFYgRaViuZjBrhxqekAtarDEMjitulzbafFMZOg+P7KZDZO7aK5wjz+4hN16Af/OEp6xe0VdW
+	9g9Ep8WWt35s/wvIhmNCe6pj/E9Jo8oEBXDX48DdnxZBs6bkL9SWZ1LFekRuhtUFGqyq6B2Xix9
+	8TuLq6lhdoH2vUAMqJ78UQDwU76Cy9ecXU/JWXEJuFtVF3uOV8Xc6sl+2Adv+t2cUOHUxBBUr1f
+	cecO18iw7C5VV7wqGnQNAemoqiB/SFmZN3XY4I0I10Y4+OBCJizzMuy8PGUoqp1WEN8kz9u1114
+	5cPUd0Sou3m22MMiQR0fGGliam+QdLpGZ373Iaty2e8SswfJjNhwOROYvvShes
+X-Google-Smtp-Source: AGHT+IHcLjJMU8ICjH35PQNPqkue1GotyAeT9ZIeySnFON4yVYZCTD/M+iEni5QVAmcnvyckm3eGxg==
+X-Received: by 2002:a05:6402:26cd:b0:640:ccb0:f4e9 with SMTP id 4fb4d7f45d1cf-64105a3ee29mr5445800a12.19.1762423122984;
+        Thu, 06 Nov 2025 01:58:42 -0800 (PST)
+Message-ID: <34c195a5-0e3c-4a19-bc92-374f2fbded34@suse.com>
+Date: Thu, 6 Nov 2025 10:58:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [XEN][PATCH] xen/x86: guest_access: optimize raw_x_guest() for PV
@@ -132,16 +132,6 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 31.10.2025 22:20, Grygorii Strashko wrote:
-> --- a/xen/arch/x86/include/asm/guest_access.h
-> +++ b/xen/arch/x86/include/asm/guest_access.h
-> @@ -13,6 +13,7 @@
->  #include <asm/hvm/guest_access.h>
->  
->  /* Raw access functions: no type checking. */
-> +#if defined(CONFIG_PV) && defined(CONFIG_HVM)
->  #define raw_copy_to_guest(dst, src, len)        \
->      (is_hvm_vcpu(current) ?                     \
->       copy_to_user_hvm((dst), (src), (len)) :    \
 > @@ -34,6 +35,43 @@
 >       copy_from_user_hvm((dst), (src), (len)) :  \
 >       __copy_from_guest_pv(dst, src, len))
@@ -149,80 +139,8 @@ On 31.10.2025 22:20, Grygorii Strashko wrote:
 > +#elif defined(CONFIG_HVM)
 > +#define raw_copy_to_guest(dst, src, len)        \
 > +     copy_to_user_hvm((dst), (src), (len))
-> +#define raw_copy_from_guest(dst, src, len)      \
-> +     copy_from_user_hvm((dst), (src), (len))
-> +#define raw_clear_guest(dst,  len)              \
-> +     clear_user_hvm((dst), (len))
-> +#define __raw_copy_to_guest(dst, src, len)      \
-> +     copy_to_user_hvm((dst), (src), (len))
-> +#define __raw_copy_from_guest(dst, src, len)    \
-> +     copy_from_user_hvm((dst), (src), (len))
-> +
-> +#elif defined(CONFIG_PV)
-> +#define raw_copy_to_guest(dst, src, len)        \
-> +     copy_to_guest_pv(dst, src, len)
-> +#define raw_copy_from_guest(dst, src, len)      \
-> +     copy_from_guest_pv(dst, src, len)
-> +#define raw_clear_guest(dst,  len)              \
-> +     clear_guest_pv(dst, len)
-> +#define __raw_copy_to_guest(dst, src, len)      \
-> +     __copy_to_guest_pv(dst, src, len)
-> +#define __raw_copy_from_guest(dst, src, len)    \
-> +     __copy_from_guest_pv(dst, src, len)
-> +
-> +#else
-> +#define raw_copy_to_guest(dst, src, len)        \
-> +        ((void)(dst), (void)(src), (void)(len), 1)
-> +#define raw_copy_from_guest(dst, src, len)      \
-> +        ((void)(dst), (void)(src), (void)(len), 1)
-> +#define raw_clear_guest(dst, len)               \
-> +        ((void)(dst), (void)(len), 1)
-> +#define __raw_copy_to_guest(dst, src, len)      \
-> +        ((void)(dst), (void)(src), (void)(len), 1)
-> +#define __raw_copy_from_guest(dst, src, len)    \
-> +        ((void)(dst), (void)(src), (void)(len), 1)
-> +#endif
 
-I have to admit that I don't really like the repetition.
-
-Style-wise you want to be consistent with the adding of blank lines around the
-preprocessor directives: Imo here there want to be ones on both sides of each
-of the directives.
-
-For the last block, I'd further prefer if "len" was returned. That's properly
-representing that nothing was copied. And if these were all using a single
-inline stub function, ...
-
-> --- a/xen/common/domain.c
-> +++ b/xen/common/domain.c
-> @@ -1985,8 +1985,9 @@ bool update_runstate_area(struct vcpu *v)
->  #endif
->          guest_handle--;
->          runstate.state_entry_time |= XEN_RUNSTATE_UPDATE;
-> -        __raw_copy_to_guest(guest_handle,
-> -                            (void *)(&runstate.state_entry_time + 1) - 1, 1);
-> +        (void)__raw_copy_to_guest(guest_handle,
-> +                                  (void *)(&runstate.state_entry_time + 1) - 1,
-> +                                  1);
->          smp_wmb();
->      }
->  
-> @@ -2008,8 +2009,9 @@ bool update_runstate_area(struct vcpu *v)
->      {
->          runstate.state_entry_time &= ~XEN_RUNSTATE_UPDATE;
->          smp_wmb();
-> -        __raw_copy_to_guest(guest_handle,
-> -                            (void *)(&runstate.state_entry_time + 1) - 1, 1);
-> +        (void)__raw_copy_to_guest(guest_handle,
-> +                                  (void *)(&runstate.state_entry_time + 1) - 1,
-> +                                  1);
->      }
->  
->      update_guest_memory_policy(v, &policy);
-
-... these changes would become unnecessary (I dislike such unnecessary - as per
-the C spec - casts, even if I understand that for Misra we may need to gain quite
-a few of them).
+Oh, and: Please omit unnecessary parentheses - they only hamper readability.
 
 Jan
 
