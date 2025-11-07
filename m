@@ -4,40 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB48DCCF9F8
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Nov 2025 15:13:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1157634.1486398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36600CCFA05
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Nov 2025 15:23:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1157727.1486407 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vHO9c-0002Th-BL; Fri, 07 Nov 2025 15:13:32 +0000
+	id 1vHOIp-0004Fk-5S; Fri, 07 Nov 2025 15:23:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1157634.1486398; Fri, 07 Nov 2025 15:13:32 +0000
+Received: by outflank-mailman (output) from mailman id 1157727.1486407; Fri, 07 Nov 2025 15:23:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vHO9c-0002Ta-8f; Fri, 07 Nov 2025 15:13:32 +0000
-Received: by outflank-mailman (input) for mailman id 1157634;
- Fri, 07 Nov 2025 14:34:08 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vHOIp-0004Fd-2l; Fri, 07 Nov 2025 15:23:03 +0000
+Received: by outflank-mailman (input) for mailman id 1157727;
+ Fri, 07 Nov 2025 15:23:02 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ijGK=5P=gmail.com=davidhildenbrandkernel@srs-se1.protection.inumbo.net>)
- id 1vHNXU-00034l-Ly
- for xen-devel@lists.xenproject.org; Fri, 07 Nov 2025 14:34:08 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d0b891b9-bbe6-11f0-980a-7dc792cee155;
- Fri, 07 Nov 2025 15:34:06 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-429c82bf86bso428001f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 07 Nov 2025 06:34:06 -0800 (PST)
-Received: from ?IPV6:2003:d8:2f30:b00:cea9:dee:d607:41d?
- (p200300d82f300b00cea90deed607041d.dip0.t-ipconnect.de.
- [2003:d8:2f30:b00:cea9:dee:d607:41d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42ac67845ccsm5465086f8f.36.2025.11.07.06.34.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Nov 2025 06:34:05 -0800 (PST)
+ <SRS0=2Yjs=5P=arm.com=ryan.roberts@srs-se1.protection.inumbo.net>)
+ id 1vHOIo-0004FX-BO
+ for xen-devel@lists.xenproject.org; Fri, 07 Nov 2025 15:23:02 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id a5b3da9d-bbed-11f0-9d17-b5c5bf9af7f9;
+ Fri, 07 Nov 2025 16:23:01 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9C58F1515;
+ Fri,  7 Nov 2025 07:22:52 -0800 (PST)
+Received: from [10.57.86.134] (unknown [10.57.86.134])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0C093F694;
+ Fri,  7 Nov 2025 07:22:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,53 +44,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d0b891b9-bbe6-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762526046; x=1763130846; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=U9gy2Et/tdx42KkCuY9tv69YTLaLyxM7iG0J3rCGUz8=;
-        b=SVxfm8Us9O/Hl2XZVVBQ/NbJlHz9vYs3S2QXaHnswggcbccnDFykZbIMsboidUsMMa
-         F1Ytv1Kd6qlmTjCjeEFeItuseoSWUVPRTmCUG2+XQbdIMq8V2Wlf5t1733vWa1QbS9oX
-         5p91sdZyT5rDyd0ETH2CEgN2YfbVOJ+Wzf8UbTlKmY/ECkLb5fph9Cz/cEqSE0y+wpPk
-         5hU0Vp1l1wKdVqLP7C3H8fXYxytge/Y51oEYIXBxxJifGq0/BXPQd6O9a+V1D4Kc/PvI
-         Yc6kwqtwh4umw/cNPI+wqiXyoOWNd32YaLwrvaMyLYh/AYlT4S5OLOzsw6sQWBfYg+Is
-         g59g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762526046; x=1763130846;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=U9gy2Et/tdx42KkCuY9tv69YTLaLyxM7iG0J3rCGUz8=;
-        b=WPKTYcafxAT8AmkrAzOsJ1H0qjRAfv9hlg5vy0jjGQX2UDvLCS1ymiBjOkltSlxrTA
-         2c5zR4eoP2uSd250n1BQ8y3eo8J6OPR+TdRbIJQPaEKyM0UxESKP8bGfjPtszMbWf0S6
-         YP7Dz7WbusonYlU4kqCxQDzixJNCsWQcIdfXAMiIPNdi8dZwGG8H8c9Lq+kTvb/YWEXF
-         nnlPFY/A500vloDpjDzaZTzr6OB/7ZHzCCUATuL3L8w2uevi69bO0y2BUWcJu5b5TntF
-         SRyVpo5TIIAqCsvBArTqucGM8IGs/czyLHlCLjFWqoZdaLuHHoCJIh6Tkxv050Cl7wlC
-         gpew==
-X-Forwarded-Encrypted: i=1; AJvYcCXjINX7hZhaKGjbFLm8RwgeJnmeEu7kA4cKND3sXFEcDMNg4GPd2611daQ+ebuYnVAEQHsd1N9G4fE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzxh50Oy0d7V61J4I2p/AvHiA7eUGOSeBtnXwCxA2FeinUseMzA
-	l9zUA4ekID+kukWpJlDCPb3nnnVKWy5d9OCecWbNktCI2Z84SYUrOQZx
-X-Gm-Gg: ASbGncuCbZNb+20+icw6evCcTWc5iz60O1hXrSmNqpZOw5Q/vvw1LE3m1S+FTdCR/Vu
-	uNDj4Ghrja6OVVgyDQPcOpTifPuihyD1lTZ4MVgt+f2E20eY+3amwYrIoct1U9mnW7QhN7xkzzQ
-	5PRDsFWlaCytFab7kIcKfEhO/X9zKxazIXdHXjvZ1aqoTPziKoTzC21SXDZm/YAHiMpiFiylrgV
-	blncrgYj/wDCzDx3wr2nWqSOUu1nlwOz98TPmbUsFfD4fNQQTbM5NQBt96INSAB5K+ua0j6TX7F
-	Lt/nRsST3xW/dQYIDQ9/IikReP+SIMDBjm1UCtCF2t/fuDmDuoDZH92nXSKRt6x0y1HbMNHDTZr
-	5zZVpC6BaBHefv4M16AdhHRNR2McB98or0nDLzPLFBQFBFuDZHL96lnwkAmeuX7S8SLkKievH58
-	cxSbl9pg9MV58BNtdH6Tvi3qV7l4G8OwttPb+KxaJAHfa8KHRJC+m208hy+ItADXq+JxitB5re5
-	uk2v++xw0GrHKazQ/zaIjVstkpiEAw=
-X-Google-Smtp-Source: AGHT+IEbeI8C8CzNAXSH/bs89gWIf/ZmK+BLjDzXB4QFwcXH6hASOjwiIfYomA42vxdn493DYIICBw==
-X-Received: by 2002:a05:6000:2084:b0:427:e1bf:13bd with SMTP id ffacd0b85a97d-42ae5adfd73mr3148986f8f.52.1762526045768;
-        Fri, 07 Nov 2025 06:34:05 -0800 (PST)
-Message-ID: <c764489e-0626-4a50-87b5-39e15d9db733@gmail.com>
-Date: Fri, 7 Nov 2025 15:34:03 +0100
+X-Inumbo-ID: a5b3da9d-bbed-11f0-9d17-b5c5bf9af7f9
+Message-ID: <645178fd-df4e-42fe-b55e-97d9506499be@arm.com>
+Date: Fri, 7 Nov 2025 15:22:54 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 06/12] mm: introduce generic lazy_mmu helpers
-To: Ryan Roberts <ryan.roberts@arm.com>, Kevin Brodsky
- <kevin.brodsky@arm.com>, linux-mm@kvack.org
+Content-Language: en-GB
+To: "David Hildenbrand (Red Hat)" <davidhildenbrandkernel@gmail.com>,
+ Kevin Brodsky <kevin.brodsky@arm.com>, linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org, Alexander Gordeev <agordeev@linux.ibm.com>,
  Andreas Larsson <andreas@gaisler.com>,
  Andrew Morton <akpm@linux-foundation.org>,
@@ -120,36 +77,79 @@ Cc: linux-kernel@vger.kernel.org, Alexander Gordeev <agordeev@linux.ibm.com>,
 References: <20251029100909.3381140-1-kevin.brodsky@arm.com>
  <20251029100909.3381140-7-kevin.brodsky@arm.com>
  <71418b31-aedb-4600-9558-842515dd6c44@arm.com>
-From: "David Hildenbrand (Red Hat)" <davidhildenbrandkernel@gmail.com>
-Content-Language: en-US
-In-Reply-To: <71418b31-aedb-4600-9558-842515dd6c44@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <c764489e-0626-4a50-87b5-39e15d9db733@gmail.com>
+From: Ryan Roberts <ryan.roberts@arm.com>
+In-Reply-To: <c764489e-0626-4a50-87b5-39e15d9db733@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
->>   #ifndef pte_batch_hint
->> diff --git a/mm/kasan/shadow.c b/mm/kasan/shadow.c
->> index 5d2a876035d6..c49b029d3593 100644
->> --- a/mm/kasan/shadow.c
->> +++ b/mm/kasan/shadow.c
->> @@ -305,7 +305,7 @@ static int kasan_populate_vmalloc_pte(pte_t *ptep, unsigned long addr,
->>   	pte_t pte;
->>   	int index;
->>   
->> -	arch_leave_lazy_mmu_mode();
->> +	lazy_mmu_mode_pause();
+On 07/11/2025 14:34, David Hildenbrand (Red Hat) wrote:
+>>>   #ifndef pte_batch_hint
+>>> diff --git a/mm/kasan/shadow.c b/mm/kasan/shadow.c
+>>> index 5d2a876035d6..c49b029d3593 100644
+>>> --- a/mm/kasan/shadow.c
+>>> +++ b/mm/kasan/shadow.c
+>>> @@ -305,7 +305,7 @@ static int kasan_populate_vmalloc_pte(pte_t *ptep,
+>>> unsigned long addr,
+>>>       pte_t pte;
+>>>       int index;
+>>>   -    arch_leave_lazy_mmu_mode();
+>>> +    lazy_mmu_mode_pause();
+>>
+>> I wonder if there really are use cases that *require* pause/resume? I think
+>> these kasan cases could be correctly implemented using a new nest level instead?
+>> Are there cases where the effects really need to be immediate or do the effects
+>> just need to be visible when you get to where the resume is?
+>>
+>> If the latter, that could just be turned into a nested disable (e.g. a flush).
+>> In this case, there is only 1 PTE write so no benefit, but I wonder if other
+>> cases may have more PTE writes that could then still be batched. It would be
+>> nice to simplify the API by removing pause/resume if we can?
 > 
-> I wonder if there really are use cases that *require* pause/resume? I think
-> these kasan cases could be correctly implemented using a new nest level instead?
-> Are there cases where the effects really need to be immediate or do the effects
-> just need to be visible when you get to where the resume is?
+> It has clear semantics, clearer than some nest-disable IMHO.
 > 
-> If the latter, that could just be turned into a nested disable (e.g. a flush).
-> In this case, there is only 1 PTE write so no benefit, but I wonder if other
-> cases may have more PTE writes that could then still be batched. It would be
-> nice to simplify the API by removing pause/resume if we can?
+> Maybe you can elaborate how you would change ("simplify") the API in that
+> regard? What would the API look like?
 
-It has clear semantics, clearer than some nest-disable IMHO.
+By simplify, I just meant can we remove lazy_mmu_mode_pause() and
+lazy_mmu_mode_resume() ?
 
-Maybe you can elaborate how you would change ("simplify") the API in 
-that regard? What would the API look like?
+
+We currently have:
+
+apply_to_page_range
+  lazy_mmu_mode_enable()
+    kasan_populate_vmalloc_pte()
+      lazy_mmu_mode_pause()
+      <code>
+      lazy_mmu_mode_resume()
+  lazy_mmu_mode_disable()
+
+Where <code> is setting ptes. But if <code> doesn't need the effects to be
+visible until lazy_mmu_mode_resume(), then you could replace the block with:
+
+apply_to_page_range
+  lazy_mmu_mode_enable()
+    kasan_populate_vmalloc_pte()
+      lazy_mmu_mode_enable()
+      <code>
+      lazy_mmu_mode_disable()
+  lazy_mmu_mode_disable()
+
+However, looking at this more closely, I'm not really clear on why we need *any*
+special attention to lazy mmu inside of kasan_populate_vmalloc_pte() and
+kasan_depopulate_vmalloc_pte().
+
+I *think* that the original concern was that we were doing ptep_get(ptep) inside
+of a lazy_mmu block? So we need to flush so that the getter returns the most
+recent value? But given we have never written to that particular ptep while in
+the lazy mmu block, there is surely no hazard in the first place?
+
+apply_to_existing_page_range() will only call kasan_depopulate_vmalloc_pte()
+once per pte, right? So given we read the ptep before writing it, there should
+be no hazard? If so we can remove pause/resume.
+
+Thanks,
+Ryan
+
 
