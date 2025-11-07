@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5005CCFA1C
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Nov 2025 08:29:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1157386.1486175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0B7CCF9F8
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Nov 2025 10:17:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1157449.1486215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vHHq7-0003hy-IB; Fri, 07 Nov 2025 08:28:59 +0000
+	id 1vHJWE-0001eq-PF; Fri, 07 Nov 2025 10:16:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1157386.1486175; Fri, 07 Nov 2025 08:28:59 +0000
+Received: by outflank-mailman (output) from mailman id 1157449.1486215; Fri, 07 Nov 2025 10:16:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vHHq7-0003hA-BK; Fri, 07 Nov 2025 08:28:59 +0000
-Received: by outflank-mailman (input) for mailman id 1157386;
- Fri, 07 Nov 2025 08:28:58 +0000
+	id 1vHJWE-0001ej-M6; Fri, 07 Nov 2025 10:16:34 +0000
+Received: by outflank-mailman (input) for mailman id 1157449;
+ Fri, 07 Nov 2025 10:16:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=suI1=5P=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vHHq6-0003eW-5o
- for xen-devel@lists.xenproject.org; Fri, 07 Nov 2025 08:28:58 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cd983019-bbb3-11f0-9d17-b5c5bf9af7f9;
- Fri, 07 Nov 2025 09:28:57 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b7272012d30so74360166b.2
- for <xen-devel@lists.xenproject.org>; Fri, 07 Nov 2025 00:28:57 -0800 (PST)
-Received: from [192.168.50.2] (pool185-5-253-110.as6723.net. [185.5.253.110])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b72bdbcaeaasm186291766b.1.2025.11.07.00.28.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Nov 2025 00:28:55 -0800 (PST)
+ <SRS0=DTK6=5P=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
+ id 1vHJWD-0001ed-MQ
+ for xen-devel@lists.xenproject.org; Fri, 07 Nov 2025 10:16:33 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id d4715197-bbc2-11f0-9d17-b5c5bf9af7f9;
+ Fri, 07 Nov 2025 11:16:31 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B30531515;
+ Fri,  7 Nov 2025 02:16:22 -0800 (PST)
+Received: from [10.57.40.58] (unknown [10.57.40.58])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C9F5E3F66E;
+ Fri,  7 Nov 2025 02:16:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,327 +44,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd983019-bbb3-11f0-9d17-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762504137; x=1763108937; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=PkwNcN7lNA8yjMuppF3gbnvT8EESBLGSdHJNmN1pAvM=;
-        b=Cs/MrhVUiujLLr2GVqmo1fReW20T3N9zVpLIOrJ8o+S/gz9HYLQenqMFXcoRY2HBO1
-         SYcj51inaoNTzQvEwvY3mnL5qa4TIs/LQoN3E/Ghur97KdqW4T6EQQDV5ZteV5WW/jld
-         l6Mkq4yGWKxP58yj+XPbNPGDWT+A2n5ZPik1NbxoA24xxXF0DlfsL80wlEi8DwwqRygK
-         CrNThA5xqbrHZc1Q7N6SYruVkN9dC7UYxz7ZAzmY4G62Jd5ATyzzD9E5SU11wnO4JF11
-         J3JCm7bt+dLgAD0KHDadGCpt7fKwewFgxM3we+TUORzMAl8VTMcZAgBnMW/uVIpp8mjF
-         0OQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762504137; x=1763108937;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PkwNcN7lNA8yjMuppF3gbnvT8EESBLGSdHJNmN1pAvM=;
-        b=JFJyye25ZgWOfrVJBNIhgnqftxslLPqMSB/4kRYHZLboCeW/awvPwDYiNtQLbZdHQJ
-         s5PUxOgPeUD+e3U7HX6JvZM0UWjgb7NjiY4/RTR1ZDxk0dTqwt8RLIIp9gjyF32kCG7A
-         liYQxoIBNPzYmKojVX6yHd8ajEtoa/0G6SryMld2mNe9mdK5MiBVwnaJc3hc5CcY/SSt
-         jRKsALeVCT1Rgjkxe/li1Q82o4Yy2qi+6CZQsR8Ot/m/xPztP3m5hNfbusK9zqI+kN6H
-         1WJIUl8gyF1ACPyvudUY+Z+Q2b/5EzCBpQaerI2Kn+gVyPRXAE+iREppkb3M82axkZOr
-         MKGw==
-X-Forwarded-Encrypted: i=1; AJvYcCWEVrxTgjM4XGe3O0EgJa9Ao1Z+Q3MFpw4HLCSPeF3qFBdkqUqvBYDzDjQFP/1/9qLvlZY8D6je0gU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx0pdC8+n3iAc7H6KRZTcje3aP73wrBbRIMQlNdylHXssRJI+wt
-	Cti1cnQktIsB9VEaTJQwRMkujcjRTuUkrqFQE0JB9pvsDJqDsYWuuRjk
-X-Gm-Gg: ASbGncuTeSnErP9KpaNbb+EOYujtPyVOkUx7i9vqfJ9MIM0S8EDYuDJKieDiiQnPeBl
-	ppRDSQjaBhAXR9ee7Hqy81jUgJ3nZz2rkBuHEkzkOAFWtcDBmXPQvvSBNno/tihYn/EfN5OvC4x
-	hvYBrIk5gzROmizAqhoVs+oHPA+EHYmbwuUWmJmI160zGIdPUiFBdB9qejv2a3/JP4V3e4aOCgE
-	Hdf5x5OXs+7khElwEd/8tN/5tCpJvrkFpJ+C19NiufDbX/l5WiXvA1wchd+btsM+E8q/HnGYELT
-	K3sDGJZe5KkngTyCncKbqhcWzdKRgImI70d1Dm5tyEZlpSiTo1vYowikozIyIXG0Ei5JYnamTR3
-	OTrb/d/9p3Hr8hloLq22KdvjmKvC58JK3mRsJylhY/OO0o0zz4p/zGr2oSWc1+r5aFWZZTELVGC
-	cwe6Vw+0LJwNOoQTtXeK+FRdAWySlAPfncSJY=
-X-Google-Smtp-Source: AGHT+IGmi7Nd+1V1HB78WrfR2YaCRGz4GK08rmvtSx2BEaCkuYcoSwWry59kZ1MddyZubeYDuz8urA==
-X-Received: by 2002:a17:906:dc92:b0:b6d:95b3:5881 with SMTP id a640c23a62f3a-b72c0d5d85emr211485866b.33.1762504136401;
-        Fri, 07 Nov 2025 00:28:56 -0800 (PST)
-Message-ID: <c3d0dbc8-559d-4393-842a-617532a52e21@gmail.com>
-Date: Fri, 7 Nov 2025 10:26:58 +0200
+X-Inumbo-ID: d4715197-bbc2-11f0-9d17-b5c5bf9af7f9
+Message-ID: <9f749c3e-4f93-40c1-b5c6-74d2ead92d00@arm.com>
+Date: Fri, 7 Nov 2025 10:16:12 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Subject: Re: [PATCH v13 07/12] xen/arm: add support for cache coloring
- configuration via device-tree
-To: Carlo Nonato <carlo.nonato@minervasys.tech>,
- xen-devel@lists.xenproject.org
-Cc: andrea.bastoni@minervasys.tech, marco.solieri@minervasys.tech,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <20241217170637.233097-1-carlo.nonato@minervasys.tech>
- <20241217170637.233097-8-carlo.nonato@minervasys.tech>
-Content-Language: en-US
-In-Reply-To: <20241217170637.233097-8-carlo.nonato@minervasys.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v4 07/12] mm: enable lazy_mmu sections to nest
+To: Alexander Gordeev <agordeev@linux.ibm.com>
+Cc: Ritesh Harjani <ritesh.list@gmail.com>, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, Andreas Larsson <andreas@gaisler.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Borislav Petkov
+ <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ David Hildenbrand <david@redhat.com>, "David S. Miller"
+ <davem@davemloft.net>, David Woodhouse <dwmw2@infradead.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+ Jann Horn <jannh@google.com>, Juergen Gross <jgross@suse.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Michal Hocko <mhocko@suse.com>,
+ Mike Rapoport <rppt@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
+ Peter Zijlstra <peterz@infradead.org>, Ryan Roberts <ryan.roberts@arm.com>,
+ Suren Baghdasaryan <surenb@google.com>, Thomas Gleixner
+ <tglx@linutronix.de>, Vlastimil Babka <vbabka@suse.cz>,
+ Will Deacon <will@kernel.org>, Yeoreum Yun <yeoreum.yun@arm.com>,
+ linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
+ sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+References: <20251029100909.3381140-1-kevin.brodsky@arm.com>
+ <20251029100909.3381140-8-kevin.brodsky@arm.com>
+ <87ms5050g0.ritesh.list@gmail.com>
+ <50d1b63a-88d7-4484-82c0-3bde96e3207d-agordeev@linux.ibm.com>
+ <48a4ecb5-3412-4d3f-9e43-535f8bee505f@arm.com>
+ <d5435e75-036b-44a5-a989-722e13f94b3e-agordeev@linux.ibm.com>
+Content-Language: en-GB
+From: Kevin Brodsky <kevin.brodsky@arm.com>
+In-Reply-To: <d5435e75-036b-44a5-a989-722e13f94b3e-agordeev@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Carlo,
+On 06/11/2025 15:33, Alexander Gordeev wrote:
+>> [...]
+>>>>   static inline void lazy_mmu_mode_enable(void)
+>>>>   {
+>>>>  -	arch_enter_lazy_mmu_mode();
+>>>>  +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
+>>>>  +
+>>>>  +	VM_WARN_ON_ONCE(state->nesting_level == U8_MAX);
+>>>>  +	/* enable() must not be called while paused */
+>>>>  +	VM_WARN_ON(state->nesting_level > 0 && !state->active);
+>>>>  +
+>>>>  +	if (state->nesting_level++ == 0) {
+>>>>  +		arch_enter_lazy_mmu_mode();
+>>>>  +		state->active = true;
+>>>>  +	}
+>>>>   }
+>>>>
+>>>> ... I think it make more sense to enable the state after the arch_**
+>>>> call right.
+>>> But then in_lazy_mmu_mode() would return false if called from
+>>> arch_enter_lazy_mmu_mode(). Not big problem, but still..
+>> The ordering of nesting_level/active was the way you expected in v3, but
+>> the conclusion of the discussion with David H [1] is that it doesn't
+>> really matter so I simplified the ordering in v4 - the arch hooks
+>> shouldn't call in_lazy_mmu_mode() or inspect lazy_mmu_state.
+>> arch_enter()/arch_leave() shouldn't need it anyway since they're called
+>> once per outer section (not in nested sections). arch_flush() could
+>> potentially do something different when nested, but that seems unlikely.
+>>
+>> - Kevin
+>>
+>> [1]
+>> https://lore.kernel.org/all/af4414b6-617c-4dc8-bddc-3ea00d1f6f3b@redhat.com/
+> I might be misunderstand this conversation, but it looked to me as a discussion
+> about lazy_mmu_state::nesting_level value, not lazy_mmu_state::active.
+>
+> I do use in_lazy_mmu_mode() (lazy_mmu_state::active) check from the arch-
+> callbacks. Here is the example (and likely the only case so far) where it hits:
 
-Thank you for the patch.
+Sorry I didn't mean arch callbacks in general, I meant the ones called
+from lazy_mmu_mode_*, that is arch_*_lazy_mmu_mode.
 
-On 17/12/2024 19:06, Carlo Nonato wrote:
-> Add the "llc-colors" Device Tree property to express DomUs and Dom0less
-> color configurations.
-> 
-> Based on original work from: Luca Miccio <lucmiccio@gmail.com>
-> 
-> Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
-> Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com> # non-Arm
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-> ---
-> v13:
-> - no changes
-> v12:
-> - no changes
-> v11:
-> - made clear that llc-colors device-tree property is Arm64-only in booting.txt
-> v10:
-> - no changes
-> v9:
-> - use best-effort allocation in domain_set_llc_colors_from_str()
-> v8:
-> - fixed memory leak on error path of domain_set_llc_colors_from_str()
-> - realloc colors array after parsing from string to reduce memory usage
-> v7:
-> - removed alloc_colors() helper usage from domain_set_llc_colors_from_str()
-> v6:
-> - rewrote domain_set_llc_colors_from_str() to be more explicit
-> v5:
-> - static-mem check has been moved in a previous patch
-> - added domain_set_llc_colors_from_str() to set colors after domain creation
-> ---
->   docs/misc/arm/device-tree/booting.txt |  5 +++
->   docs/misc/cache-coloring.rst          | 48 +++++++++++++++++++++++++++
->   xen/arch/arm/dom0less-build.c         | 10 ++++++
->   xen/common/llc-coloring.c             | 40 ++++++++++++++++++++++
->   xen/include/xen/llc-coloring.h        |  1 +
->   xen/include/xen/xmalloc.h             | 12 +++++++
->   6 files changed, 116 insertions(+)
-> 
-> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-> index 3a04f5c57f..9c881baccc 100644
-> --- a/docs/misc/arm/device-tree/booting.txt
-> +++ b/docs/misc/arm/device-tree/booting.txt
-> @@ -162,6 +162,11 @@ with the following properties:
->   
->       An integer specifying the number of vcpus to allocate to the guest.
->   
-> +- llc-colors
-> +    A string specifying the LLC color configuration for the guest.
-> +    Refer to docs/misc/cache_coloring.rst for syntax. This option is applicable
-> +    only to Arm64 guests.
-> +
->   - vpl011
->   
->       An empty property to enable/disable a virtual pl011 for the guest to
-> diff --git a/docs/misc/cache-coloring.rst b/docs/misc/cache-coloring.rst
-> index 7b47d0ed92..e097e74032 100644
-> --- a/docs/misc/cache-coloring.rst
-> +++ b/docs/misc/cache-coloring.rst
-> @@ -14,6 +14,7 @@ If needed, change the maximum number of colors with
->   ``CONFIG_LLC_COLORS_ORDER=<n>``.
->   
->   Runtime configuration is done via `Command line parameters`_.
-> +For DomUs follow `DomUs configuration`_.
->   
->   Background
->   **********
-> @@ -149,6 +150,53 @@ LLC specs can be manually set via the above command line parameters. This
->   bypasses any auto-probing and it's used to overcome failing situations, such as
->   flawed probing logic, or for debugging/testing purposes.
->   
-> +DomUs configuration
-> +*******************
-> +
-> +DomUs colors can be set either in the ``xl`` configuration file (documentation
-> +at `docs/man/xl.cfg.pod.5.in`) or via Device Tree (documentation at
-> +`docs/misc/arm/device-tree/booting.txt`) using the ``llc-colors`` option.
-> +For example:
-> +
-> +::
-> +
-> +    xen,xen-bootargs = "console=dtuart dtuart=serial0 dom0_mem=1G dom0_max_vcpus=1 sched=null llc-coloring=on dom0-llc-colors=2-6";
-> +    xen,dom0-bootargs "console=hvc0 earlycon=xen earlyprintk=xen root=/dev/ram0"
-> +
-> +    dom0 {
-> +        compatible = "xen,linux-zimage" "xen,multiboot-module";
-> +        reg = <0x0 0x1000000 0x0 15858176>;
-> +    };
-> +
-> +    dom0-ramdisk {
-> +        compatible = "xen,linux-initrd" "xen,multiboot-module";
-> +        reg = <0x0 0x2000000 0x0 20638062>;
-> +    };
-> +
-> +    domU0 {
-> +        #address-cells = <0x1>;
-> +        #size-cells = <0x1>;
-> +        compatible = "xen,domain";
-> +        memory = <0x0 0x40000>;
-> +        llc-colors = "4-8,10,11,12";
-> +        cpus = <0x1>;
-> +        vpl011 = <0x1>;
-> +
-> +        module@2000000 {
-> +            compatible = "multiboot,kernel", "multiboot,module";
-> +            reg = <0x2000000 0xffffff>;
-> +            bootargs = "console=ttyAMA0";
-> +        };
-> +
-> +        module@30000000 {
-> +            compatible = "multiboot,ramdisk", "multiboot,module";
-> +            reg = <0x3000000 0xffffff>;
-> +        };
-> +    };
-> +
-> +**Note:** If no color configuration is provided for a domain, the default one,
-> +which corresponds to all available colors is used instead.
-> +
->   Known issues and limitations
->   ****************************
->   
-> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-> index 67b1503647..49d1f14d65 100644
-> --- a/xen/arch/arm/dom0less-build.c
-> +++ b/xen/arch/arm/dom0less-build.c
-> @@ -817,6 +817,7 @@ void __init create_domUs(void)
->       bool iommu = false;
->       const struct dt_device_node *cpupool_node,
->                                   *chosen = dt_find_node_by_path("/chosen");
-> +    const char *llc_colors_str = NULL;
->   
->       BUG_ON(chosen == NULL);
->       dt_for_each_child_node(chosen, node)
-> @@ -965,6 +966,10 @@ void __init create_domUs(void)
->   #endif
->           }
->   
-> +        dt_property_read_string(node, "llc-colors", &llc_colors_str);
-> +        if ( !llc_coloring_enabled && llc_colors_str )
-> +            panic("'llc-colors' found, but LLC coloring is disabled\n");
-> +
->           /*
->            * The variable max_init_domid is initialized with zero, so here it's
->            * very important to use the pre-increment operator to call
-> @@ -975,6 +980,11 @@ void __init create_domUs(void)
->               panic("Error creating domain %s (rc = %ld)\n",
->                     dt_node_name(node), PTR_ERR(d));
->   
-> +        if ( llc_coloring_enabled &&
-> +             (rc = domain_set_llc_colors_from_str(d, llc_colors_str)) )
-> +            panic("Error initializing LLC coloring for domain %s (rc = %d)\n",
-> +                  dt_node_name(node), rc);
-> +
->           d->is_console = true;
->           dt_device_set_used_by(node, d->domain_id);
->   
-> diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
-> index 3dd1aaa4df..5a0e3bac59 100644
-> --- a/xen/common/llc-coloring.c
-> +++ b/xen/common/llc-coloring.c
-> @@ -282,6 +282,46 @@ void domain_llc_coloring_free(struct domain *d)
->       xfree(__va(__pa(d->llc_colors)));
->   }
->   
-> +int __init domain_set_llc_colors_from_str(struct domain *d, const char *str)
-> +{
-> +    int err;
-> +    unsigned int *colors, num_colors;
-> +
-> +    if ( !str )
-> +    {
-> +        domain_set_default_colors(d);
-> +        return 0;
-> +    }
-> +
-> +    colors = xmalloc_array(unsigned int, max_nr_colors);
-> +    if ( !colors )
-> +        return -ENOMEM;
-> +
-> +    err = parse_color_config(str, colors, max_nr_colors, &num_colors);
-> +    if ( err )
-> +    {
-> +        printk(XENLOG_ERR "Error parsing LLC color configuration");
+Patch 8 also makes use of in_lazy_mmu_mode() in set_pte() et al. on arm64.
 
-Missing \n at the end of this printk.
+- Kevin
 
-> +        xfree(colors);
-> +        return err;
-> +    }
-> +
-> +    if ( !check_colors(colors, num_colors) )
-> +    {
-> +        printk(XENLOG_ERR "%pd: bad LLC color config\n", d);
-> +        xfree(colors);
-> +        return -EINVAL;
-> +    }
-> +
-> +    /* Adjust the size cause it was initially set to max_nr_colors */
-> +    d->llc_colors = xrealloc_array(colors, num_colors);
-> +    if ( !d->llc_colors )
-> +        d->llc_colors = colors;
-> +
-> +    d->num_llc_colors = num_colors;
-> +
-> +    return 0;
-> +}
-> +
->   /*
->    * Local variables:
->    * mode: C
-> diff --git a/xen/include/xen/llc-coloring.h b/xen/include/xen/llc-coloring.h
-> index 26353c808a..5d1355b3c9 100644
-> --- a/xen/include/xen/llc-coloring.h
-> +++ b/xen/include/xen/llc-coloring.h
-> @@ -34,6 +34,7 @@ void arch_llc_coloring_init(void);
->   int dom0_set_llc_colors(struct domain *d);
->   int domain_set_llc_colors(struct domain *d,
->                             const struct xen_domctl_set_llc_colors *config);
-> +int domain_set_llc_colors_from_str(struct domain *d, const char *str);
->   
->   #endif /* __XEN_LLC_COLORING_H__ */
->   
-> diff --git a/xen/include/xen/xmalloc.h b/xen/include/xen/xmalloc.h
-> index b903fa2e26..f0412fb4e0 100644
-> --- a/xen/include/xen/xmalloc.h
-> +++ b/xen/include/xen/xmalloc.h
-> @@ -37,6 +37,9 @@
->       ((_type *)_xmalloc_array(sizeof(_type), __alignof__(_type), _num))
->   #define xzalloc_array(_type, _num) \
->       ((_type *)_xzalloc_array(sizeof(_type), __alignof__(_type), _num))
-> +#define xrealloc_array(_ptr, _num)                                  \
-> +    ((typeof(_ptr))_xrealloc_array(_ptr, sizeof(typeof(*(_ptr))),   \
-> +                                   __alignof__(typeof(*(_ptr))), _num))
->   
->   /* Allocate space for a structure with a flexible array of typed objects. */
->   #define xzalloc_flex_struct(type, field, nr) \
-> @@ -98,6 +101,15 @@ static inline void *_xzalloc_array(
->       return _xzalloc(size * num, align);
->   }
->   
-> +static inline void *_xrealloc_array(
-> +    void *ptr, unsigned long size, unsigned long align, unsigned long num)
-> +{
-> +    /* Check for overflow. */
-> +    if ( size && num > UINT_MAX / size )
-> +        return NULL;
-> +    return _xrealloc(ptr, size * num, align);
-> +}
-> +
->   /*
->    * Pooled allocator interface.
->    */
-
-Best regards,
-Mykola
-
+> static int kasan_populate_vmalloc_pte(pte_t *ptep, unsigned long addr,
+> 				      void *_data)
+> {
+> 	lazy_mmu_mode_pause();
+> 	...
+> 	if (likely(pte_none(ptep_get(ptep)))) {
+>
+> 		/* Here set_pte() checks whether we are in lazy_mmu mode */
+> 		set_pte_at(&init_mm, addr, ptep, pte);	<--- calls set_pte()
+> 		data->pages[index] = NULL;
+> 	}
+> 	...
+> 	lazy_mmu_mode_resume();
+> 	...
+> }
+>
+> So without in_lazy_mmu_mode() check above the arch-specific set_pte()
+> implementation enters a wrong branch, which ends up in:
+>
+> [  394.503134] Call Trace:
+> [  394.503137]  [<00007fffe01333f4>] dump_stack_lvl+0xbc/0xf0 FWIW 
+> [  394.503143]  [<00007fffe010298c>] vpanic+0x1cc/0x418 
+> [  394.503149]  [<00007fffe0102c7a>] panic+0xa2/0xa8 
+> [  394.503154]  [<00007fffe01e7a8a>] check_panic_on_warn+0x8a/0xb0 
+> [  394.503160]  [<00007fffe082d122>] end_report+0x72/0x110 
+> [  394.503166]  [<00007fffe082d3e6>] kasan_report+0xc6/0x100 
+> [  394.503171]  [<00007fffe01b9556>] ipte_batch_ptep_get+0x146/0x150 
+> [  394.503176]  [<00007fffe0830096>] kasan_populate_vmalloc_pte+0xe6/0x1e0 
+> [  394.503183]  [<00007fffe0718050>] apply_to_pte_range+0x1a0/0x570 
+> [  394.503189]  [<00007fffe07260fa>] __apply_to_page_range+0x3ca/0x8f0 
+> [  394.503195]  [<00007fffe0726648>] apply_to_page_range+0x28/0x40 
+> [  394.503201]  [<00007fffe082fe34>] __kasan_populate_vmalloc+0x324/0x340 
+> [  394.503207]  [<00007fffe076954e>] alloc_vmap_area+0x31e/0xbf0 
+> [  394.503213]  [<00007fffe0770106>] __get_vm_area_node+0x1a6/0x2d0 
+> [  394.503218]  [<00007fffe07716fa>] __vmalloc_node_range_noprof+0xba/0x260 
+> [  394.503224]  [<00007fffe0771970>] __vmalloc_node_noprof+0xd0/0x110 
+> [  394.503229]  [<00007fffe0771a22>] vmalloc_noprof+0x32/0x40 
+> [  394.503234]  [<00007fff604eaa42>] full_fit_alloc_test+0xb2/0x3e0 [test_vmalloc] 
+> [  394.503241]  [<00007fff604eb478>] test_func+0x488/0x760 [test_vmalloc] 
+> [  394.503247]  [<00007fffe025ad68>] kthread+0x368/0x630 
+> [  394.503253]  [<00007fffe01391e0>] __ret_from_fork+0xd0/0x490 
+> [  394.503259]  [<00007fffe24e468a>] ret_from_fork+0xa/0x30 
+>
+> I could have cached lazy_mmu_state::active as arch-specific data
+> and check it, but then what is the point to have it generalized?
+>
+> Thanks!
 
