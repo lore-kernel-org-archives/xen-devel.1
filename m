@@ -4,35 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF99CCFA18
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Nov 2025 15:57:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1159070.1487462 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC034CCFA18
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Nov 2025 16:20:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1159089.1487494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vIqjq-00064A-1p; Tue, 11 Nov 2025 15:56:58 +0000
+	id 1vIr6I-0002Ld-7v; Tue, 11 Nov 2025 16:20:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1159070.1487462; Tue, 11 Nov 2025 15:56:58 +0000
+Received: by outflank-mailman (output) from mailman id 1159089.1487494; Tue, 11 Nov 2025 16:20:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vIqjp-000643-VV; Tue, 11 Nov 2025 15:56:57 +0000
-Received: by outflank-mailman (input) for mailman id 1159070;
- Tue, 11 Nov 2025 15:56:57 +0000
+	id 1vIr6I-0002LW-4z; Tue, 11 Nov 2025 16:20:10 +0000
+Received: by outflank-mailman (input) for mailman id 1159089;
+ Tue, 11 Nov 2025 16:20:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=g0ws=5T=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1vIqjp-00063t-1q
- for xen-devel@lists.xenproject.org; Tue, 11 Nov 2025 15:56:57 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 0aedf674-bf17-11f0-9d18-b5c5bf9af7f9;
- Tue, 11 Nov 2025 16:56:54 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5ECCC2F;
- Tue, 11 Nov 2025 07:56:45 -0800 (PST)
-Received: from [10.57.38.153] (unknown [10.57.38.153])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 489953F63F;
- Tue, 11 Nov 2025 07:56:47 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=6vR8=5T=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1vIr6H-00027n-4N
+ for xen-devel@lists.xenproject.org; Tue, 11 Nov 2025 16:20:09 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4a53aac1-bf1a-11f0-9d18-b5c5bf9af7f9;
+ Tue, 11 Nov 2025 17:20:08 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 38DC521CE4;
+ Tue, 11 Nov 2025 16:20:08 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CFEB414A47;
+ Tue, 11 Nov 2025 16:20:07 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id KzMnMTdiE2lDDQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 11 Nov 2025 16:20:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,220 +54,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0aedf674-bf17-11f0-9d18-b5c5bf9af7f9
-Message-ID: <58fd1a6e-f2c4-421c-9b95-dea4b244a515@arm.com>
-Date: Tue, 11 Nov 2025 16:56:44 +0100
+X-Inumbo-ID: 4a53aac1-bf1a-11f0-9d18-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1762878008; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9sxmnTjwEbOo9LTw+g6Xhcgog1RwNkt63wuL1s3lR+k=;
+	b=sSbz6ggdRUHPgJNvKpQMkLp7A5AgFSdjhbyP4Q3EYxoGIU3pYDYKoInd6QPS0Yr636gBEB
+	4DU43bl1WTZ+vmr3d3shL1soy0ADrsKzWH/zN6kHhbMpfhraiQFph2+9p6CdPCCDnuDUsQ
+	Y0sUynag83H/BDJeBxGtIU4FmOtoxbM=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=sSbz6ggd
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1762878008; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9sxmnTjwEbOo9LTw+g6Xhcgog1RwNkt63wuL1s3lR+k=;
+	b=sSbz6ggdRUHPgJNvKpQMkLp7A5AgFSdjhbyP4Q3EYxoGIU3pYDYKoInd6QPS0Yr636gBEB
+	4DU43bl1WTZ+vmr3d3shL1soy0ADrsKzWH/zN6kHhbMpfhraiQFph2+9p6CdPCCDnuDUsQ
+	Y0sUynag83H/BDJeBxGtIU4FmOtoxbM=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 1/5] config: remove stale definition from Config.mk
+Date: Tue, 11 Nov 2025 17:19:55 +0100
+Message-ID: <20251111161959.13667-2-jgross@suse.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251111161959.13667-1-jgross@suse.com>
+References: <20251111161959.13667-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 07/12] mm: enable lazy_mmu sections to nest
-To: Ryan Roberts <ryan.roberts@arm.com>, linux-mm@kvack.org
-Cc: linux-kernel@vger.kernel.org, Alexander Gordeev <agordeev@linux.ibm.com>,
- Andreas Larsson <andreas@gaisler.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Borislav Petkov
- <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- David Hildenbrand <david@redhat.com>, "David S. Miller"
- <davem@davemloft.net>, David Woodhouse <dwmw2@infradead.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
- Jann Horn <jannh@google.com>, Juergen Gross <jgross@suse.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Michal Hocko <mhocko@suse.com>,
- Mike Rapoport <rppt@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
- Peter Zijlstra <peterz@infradead.org>, Suren Baghdasaryan
- <surenb@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Vlastimil Babka <vbabka@suse.cz>, Will Deacon <will@kernel.org>,
- Yeoreum Yun <yeoreum.yun@arm.com>, linux-arm-kernel@lists.infradead.org,
- linuxppc-dev@lists.ozlabs.org, sparclinux@vger.kernel.org,
- xen-devel@lists.xenproject.org, x86@kernel.org
-References: <20251029100909.3381140-1-kevin.brodsky@arm.com>
- <20251029100909.3381140-8-kevin.brodsky@arm.com>
- <999feffa-5d1d-42e3-bd3a-d949f2a9de9d@arm.com>
- <cc9dc398-b9c5-4bb8-94ad-7e7f3ddd5b4f@arm.com>
- <824bf705-e9d6-4eeb-9532-9059fa56427f@arm.com>
-From: Kevin Brodsky <kevin.brodsky@arm.com>
-Content-Language: en-GB
-In-Reply-To: <824bf705-e9d6-4eeb-9532-9059fa56427f@arm.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 38DC521CE4
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	MIME_TRACE(0.00)[0:+];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:email,suse.com:mid,suse.com:dkim,config.mk:url];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	DKIM_TRACE(0.00)[suse.com:+]
+X-Rspamd-Action: no action
 
-On 11/11/2025 10:24, Ryan Roberts wrote:
-> [...]
->
->>>> +		state->active = true;
->>>> +		arch_enter_lazy_mmu_mode();
->>>> +	}
->>>>  }
->>>>  
->>>>  static inline void lazy_mmu_mode_disable(void)
->>>>  {
->>>> -	arch_leave_lazy_mmu_mode();
->>>> +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
->>>> +
->>>> +	VM_WARN_ON_ONCE(state->nesting_level == 0);
->>>> +	VM_WARN_ON(!state->active);
->>>> +
->>>> +	if (--state->nesting_level == 0) {
->>>> +		state->active = false;
->>>> +		arch_leave_lazy_mmu_mode();
->>>> +	} else {
->>>> +		/* Exiting a nested section */
->>>> +		arch_flush_lazy_mmu_mode();
->>>> +	}
->>>>  }
->>>>  
->>>>  static inline void lazy_mmu_mode_pause(void)
->>>>  {
->>>> +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
->>>> +
->>>> +	VM_WARN_ON(state->nesting_level == 0 || !state->active);
->>> nit: do you need the first condition? I think when nesting_level==0, we expect
->>> to be !active?
->> I suppose this should never happen indeed - I was just being extra
->> defensive.
->>
->> Either way David suggested allowing pause()/resume() to be called
->> outside of any section so the next version will bail out on
->> nesting_level == 0.
-> Ignoring my current opinion that we don't need pause/resume at all for now; Are
-> you suggesting that pause/resume will be completely independent of
-> enable/disable? I think that would be best. So enable/disable increment and
-> decrement the nesting_level counter regardless of whether we are paused.
-> nesting_level 0 => 1 enables if not paused. nesting_level 1 => 0 disables if not
-> paused. pause disables nesting_level >= 1, resume enables if nesting_level >= 1.
+buildmakevars2shellvars is used nowhere, so remove it.
 
-This is something else. Currently the rules are:
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ Config.mk | 6 ------
+ 1 file changed, 6 deletions(-)
 
-[A]
+diff --git a/Config.mk b/Config.mk
+index 7edbab8efe..e1556dfbfa 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -149,12 +149,6 @@ else
+ date = $(shell LC_ALL=C date $(1))
+ endif
+ 
+-define buildmakevars2shellvars
+-    export PREFIX="$(prefix)";                                            \
+-    export XEN_SCRIPT_DIR="$(XEN_SCRIPT_DIR)";                            \
+-    export XEN_ROOT="$(XEN_ROOT)"
+-endef
+-
+ #
+ # Compare $(1) and $(2) and replace $(2) with $(1) if they differ
+ #
+-- 
+2.51.0
 
-// pausing forbidden
-enable()
-    pause()
-    // pausing/enabling forbidden
-    resume()
-disable()
-
-David suggested allowing:
-
-[B]
-
-pause()
-// pausing/enabling forbidden
-resume()
-
-Your suggestion is also allowing:
-
-[C]
-
-pause()
-    // pausing forbidden
-    enable()
-    disable()
-resume()
-
-> Perhaps we also need nested pause/resume? Then you just end up with 2 counters;
-> enable_count and pause_count. Sorry if this has already been discussed.
-
-And finally:
-
-[D]
-
-pause()
-    pause()
-        enable()
-        disable()
-    resume()
-resume()
-
-I don't really mind either way, but I don't see an immediate use for [C]
-and [D] - the idea is that the paused section is short and controlled,
-not made up of arbitrary calls. A potential downside of allowing [C] and
-[D] is that it makes it harder to detect unintended nesting (fewer
-VM_WARN assertions). Happy to implement it if this proves useful though.
-
-OTOH the idea behind [B] is that it allows the caller of
-pause()/resume() not to care about whether lazy MMU is actually enabled
-or not - i.e. the kasan helpers would keep working even if
-apply_to_page_range() didn't use lazy MMU any more.
-
->>>> +
->>>> +	state->active = false;
->>>>  	arch_leave_lazy_mmu_mode();
->>>>  }
->>>>  
->>>>  static inline void lazy_mmu_mode_resume(void)
->>>>  {
->>>> +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
->>>> +
->>>> +	VM_WARN_ON(state->nesting_level == 0 || state->active);
->>> Similar argument?
->>>
->>>> +
->>>> +	state->active = true;
->>>>  	arch_enter_lazy_mmu_mode();
->>>>  }
->>>>  #else
->>>> diff --git a/include/linux/sched.h b/include/linux/sched.h
->>>> index cbb7340c5866..11566d973f42 100644
->>>> --- a/include/linux/sched.h
->>>> +++ b/include/linux/sched.h
->>>> @@ -1441,6 +1441,10 @@ struct task_struct {
->>>>  
->>>>  	struct page_frag		task_frag;
->>>>  
->>>> +#ifdef CONFIG_ARCH_HAS_LAZY_MMU_MODE
->>>> +	struct lazy_mmu_state		lazy_mmu_state;
->>>> +#endif
->>>> +
->>>>  #ifdef CONFIG_TASK_DELAY_ACCT
->>>>  	struct task_delay_info		*delays;
->>>>  #endif
->>>> @@ -1724,6 +1728,18 @@ static inline char task_state_to_char(struct task_struct *tsk)
->>>>  	return task_index_to_char(task_state_index(tsk));
->>>>  }
->>>>  
->>>> +#ifdef CONFIG_ARCH_HAS_LAZY_MMU_MODE
->>>> +static inline bool in_lazy_mmu_mode(void)
->>>> +{
->>>> +	return current->lazy_mmu_state.active;
->>>> +}
->>>> +#else
->>>> +static inline bool in_lazy_mmu_mode(void)
->>>> +{
->>>> +	return false;
->>> Just pointing out that this isn't really a correct implementation:
->>>
->>> lazy_mmu_mode_enable()
->>> ASSERT(in_lazy_mmu_mode()) << triggers for arches without lazy mmu
->>> lazy_mmu_mode_disable()
->>>
->>> Although it probably doesn't matter in practice?
->> I'd say that the expectation is invalid - lazy MMU mode can only be
->> enabled if the architecture supports it. In fact as you pointed out
->> above the API may be called in interrupt context but it will have no
->> effect, so this sequence would always fail in interrupt context.
-> Yep, but previously there was no way to query the current state so it didn't
-> matter. Now you have a query API so it might matter if/when people come along
-> and use it in unexpected ways.
-
-I suppose the best we can do is document it alongside those helpers
-(David has already suggested some documentation, see patch 11).
-
->> Worth nothing that in_lazy_mmu_mode() is only ever called from arch code
->> where lazy MMU is implemented. I added the fallback as a matter of
->> principle, but it isn't actually required.
-> Yes, I agree that's the intent. I'm just wondering if it's possible to enforce
-> that only arch code uses this. Perhaps add some docs to explain that it's only
-> intended for arches that implement lazy_mmu, and don't define it for arches that
-> don't, which would catch any generic users?
-
-Yep sounds like the best option - a lot less risk of misuse if it can't
-be called from generic code :) The build would still succeed on arch's
-that implement it, but the kernel CI should catch such calls sooner or
-later.
-
-- Kevin
 
