@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A115CCCFA1A
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Nov 2025 16:20:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1159088.1487484 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D72CCFA1A
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Nov 2025 16:20:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1159090.1487504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vIr6G-000280-1j; Tue, 11 Nov 2025 16:20:08 +0000
+	id 1vIr6Q-0002fL-Fq; Tue, 11 Nov 2025 16:20:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1159088.1487484; Tue, 11 Nov 2025 16:20:08 +0000
+Received: by outflank-mailman (output) from mailman id 1159090.1487504; Tue, 11 Nov 2025 16:20:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vIr6F-00027t-VJ; Tue, 11 Nov 2025 16:20:07 +0000
-Received: by outflank-mailman (input) for mailman id 1159088;
- Tue, 11 Nov 2025 16:20:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vIr6Q-0002fE-CF; Tue, 11 Nov 2025 16:20:18 +0000
+Received: by outflank-mailman (input) for mailman id 1159090;
+ Tue, 11 Nov 2025 16:20:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=6vR8=5T=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vIr6E-00027n-H7
- for xen-devel@lists.xenproject.org; Tue, 11 Nov 2025 16:20:06 +0000
+ id 1vIr6O-0002cf-HU
+ for xen-devel@lists.xenproject.org; Tue, 11 Nov 2025 16:20:16 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 480d5dff-bf1a-11f0-9d18-b5c5bf9af7f9;
- Tue, 11 Nov 2025 17:20:05 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4dc7bffa-bf1a-11f0-980a-7dc792cee155;
+ Tue, 11 Nov 2025 17:20:14 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6C55521CE5;
- Tue, 11 Nov 2025 16:20:02 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id EA1CF21CE5;
+ Tue, 11 Nov 2025 16:20:13 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0BF0214A47;
- Tue, 11 Nov 2025 16:20:02 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9815A14A47;
+ Tue, 11 Nov 2025 16:20:13 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id tYE6ATJiE2k/DQAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 11 Nov 2025 16:20:02 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id /xtlIz1iE2lYDQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 11 Nov 2025 16:20:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,23 +54,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 480d5dff-bf1a-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 4dc7bffa-bf1a-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1762878003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=TXYSHdawEHsmAGrSuze4VfCWTtsO74yLxzbTMsz6XcM=;
-	b=AU65P3BxWF54Au3Kya+Xi2n94jCp9F7Gs4l+DqAztevlIYHQY1NDYHnJTWVGLjk1b7Mz7Y
-	XBJQ6Uozr/81bv56iYzTToFyP8C8VlzZzxeILcwa8i6L89jPOAWUEk7Jwrgsizdy9F/VXW
-	tbhkMfWEeW+PjCrGuigAJM7X4eMxLMc=
+	t=1762878014; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6/icCTTtv5rJ6FYoAuIqJyhSavJniLkM4kKGv1wpb8o=;
+	b=emMRyEOJEMR4txVJq43sjPHczZwLu3XjxqJ1ggsiy8mKxM6jFoEpCQDA0UXixoWsnvoLvL
+	3uk/aZ/Xni/BvdmJcvbkEWHpjJmWXDC2Xpvv/3QgWu34DeKKJ1m31hwywgm49xUFon1f4k
+	e5AbGWFel2dt9MdPB4PGOzTfghmf0Ig=
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=BZAFoQz+
+	dkim=pass header.d=suse.com header.s=susede1 header.b=tOGIctiu
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1762878002; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=TXYSHdawEHsmAGrSuze4VfCWTtsO74yLxzbTMsz6XcM=;
-	b=BZAFoQz+MzPpyyg+eNf7+YW91Z9S02jRb422qIbTaiD91QaM4kJHdk9+lipcl5sAVsIHuK
-	w0yQX+yRkv6VrGWdatiDah/oHuvwYMFy39aZ/wXHnq5YWovy6AjE5I9DUEYkzaUS1dJ0ML
-	2PCZyw/YrLl6RACMdN5OmVw+xY3GGmw=
+	t=1762878013; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6/icCTTtv5rJ6FYoAuIqJyhSavJniLkM4kKGv1wpb8o=;
+	b=tOGIctiuADyOGbDT4ZOWRU9iDqJFmnl3cOXk3NsGSXTujVd6V9nTFzpNm/R1qaXxqANtSz
+	tWIm7VFr8wPXL/RbyM0GH515oGnr/pv+gDtXiTHV5V+ntMjeJD0l1cwMbklyjQ7Uc3xgQW
+	kyePb/BXc8kyOapdYScJY3GCOLrv7vk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -80,18 +84,17 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>
-Subject: [PATCH 0/5] configure: reduce number of files created
-Date: Tue, 11 Nov 2025 17:19:54 +0100
-Message-ID: <20251111161959.13667-1-jgross@suse.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 2/5] build: add new make pattern for making file from file.src
+Date: Tue, 11 Nov 2025 17:19:56 +0100
+Message-ID: <20251111161959.13667-3-jgross@suse.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251111161959.13667-1-jgross@suse.com>
+References: <20251111161959.13667-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 6C55521CE5
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: EA1CF21CE5
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-3.01 / 50.00];
 	BAYES_HAM(-3.00)[99.99%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
@@ -110,91 +113,60 @@ X-Spamd-Result: default: False [-3.01 / 50.00];
 	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,conf.in:url,xen-watchdog.in:url,pod.in:url,config.mk:url,xendriverdomain.in:url,ml.in:url,xendomains.in:url,launch-xenstore.in:url,vif-setup.in:url];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:email,suse.com:mid,suse.com:dkim,config.mk:url];
 	RCVD_TLS_ALL(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	DKIM_TRACE(0.00)[suse.com:+]
+X-Rspamd-Action: no action
 
-Instead of creating lots of files during configure, create those
-files (where possible) rather at build time. This reduces the need
-to run configure when e.g. changing a man page containing a path
-defined by the configure run.
+Add a new make pattern for creating <file> from <file>.src at build
+time. Define the recipe as a macro in order to avoid replicating it
+for cases where it needs to handle subdirectories (creating
+<dir>/<file> from <dir>/<file>.src).
 
-Juergen Gross (5):
-  config: remove stale definition from Config.mk
-  build: add new make pattern for making file from file.src
-  docs: rename *.in files to *.src
-  config: remove unused paths from config/Paths.mk.in
-  tools: rename most *.in files to *.src
+This can be used instead of the current approach to perform the similar
+step for file.in during ./configure by renaming the source file to
+file.src.
 
- .gitignore                                    |  1 +
- Config.mk                                     | 20 ++++++++++++------
- config/Paths.mk.in                            |  5 -----
- config/Tools-paths.mk.in                      | 10 +++++++++
- docs/Makefile                                 |  8 ++++++-
- docs/configure                                |  7 +------
- docs/configure.ac                             |  9 +-------
- ...pod.in => xl-disk-configuration.5.pod.src} |  0
- ....in => xl-network-configuration.5.pod.src} |  0
- docs/man/{xl.1.pod.in => xl.1.pod.src}        |  0
- .../man/{xl.cfg.5.pod.in => xl.cfg.5.pod.src} |  0
- .../{xl.conf.5.pod.in => xl.conf.5.pod.src}   |  0
- tools/configure                               | 21 ++-----------------
- tools/configure.ac                            | 19 +----------------
- tools/hotplug/FreeBSD/Makefile                |  8 ++++++-
- .../rc.d/{xencommons.in => xencommons.src}    |  0
- ...xendriverdomain.in => xendriverdomain.src} |  0
- tools/hotplug/Linux/Makefile                  | 11 +++++++++-
- ...xencommons.in => sysconfig.xencommons.src} |  0
- ...xendomains.in => sysconfig.xendomains.src} |  0
- .../{xen-watchdog.in => xen-watchdog.src}     |  0
- .../init.d/{xencommons.in => xencommons.src}  |  0
- .../init.d/{xendomains.in => xendomains.src}  |  0
- ...xendriverdomain.in => xendriverdomain.src} |  0
- ...launch-xenstore.in => launch-xenstore.src} |  0
- .../Linux/{vif-setup.in => vif-setup.src}     |  0
- ...common.sh.in => xen-hotplug-common.sh.src} |  0
- .../Linux/{xendomains.in => xendomains.src}   |  0
- tools/hotplug/NetBSD/Makefile                 |  8 ++++++-
- .../rc.d/{xencommons.in => xencommons.src}    |  0
- ...xendriverdomain.in => xendriverdomain.src} |  0
- tools/hotplug/common/Makefile                 |  5 ++++-
- .../{hotplugpath.sh.in => hotplugpath.sh.src} |  0
- tools/ocaml/libs/xs/Makefile                  |  7 +++++++
- .../libs/xs/{paths.ml.in => paths.ml.src}     |  0
- tools/ocaml/xenstored/Makefile                |  7 ++++++-
- ...oxenstored.conf.in => oxenstored.conf.src} |  0
- .../xenstored/{paths.ml.in => paths.ml.src}   |  0
- 38 files changed, 78 insertions(+), 68 deletions(-)
- create mode 100644 config/Tools-paths.mk.in
- rename docs/man/{xl-disk-configuration.5.pod.in => xl-disk-configuration.5.pod.src} (100%)
- rename docs/man/{xl-network-configuration.5.pod.in => xl-network-configuration.5.pod.src} (100%)
- rename docs/man/{xl.1.pod.in => xl.1.pod.src} (100%)
- rename docs/man/{xl.cfg.5.pod.in => xl.cfg.5.pod.src} (100%)
- rename docs/man/{xl.conf.5.pod.in => xl.conf.5.pod.src} (100%)
- rename tools/hotplug/FreeBSD/rc.d/{xencommons.in => xencommons.src} (100%)
- rename tools/hotplug/FreeBSD/rc.d/{xendriverdomain.in => xendriverdomain.src} (100%)
- rename tools/hotplug/Linux/init.d/{sysconfig.xencommons.in => sysconfig.xencommons.src} (100%)
- rename tools/hotplug/Linux/init.d/{sysconfig.xendomains.in => sysconfig.xendomains.src} (100%)
- rename tools/hotplug/Linux/init.d/{xen-watchdog.in => xen-watchdog.src} (100%)
- rename tools/hotplug/Linux/init.d/{xencommons.in => xencommons.src} (100%)
- rename tools/hotplug/Linux/init.d/{xendomains.in => xendomains.src} (100%)
- rename tools/hotplug/Linux/init.d/{xendriverdomain.in => xendriverdomain.src} (100%)
- rename tools/hotplug/Linux/{launch-xenstore.in => launch-xenstore.src} (100%)
- rename tools/hotplug/Linux/{vif-setup.in => vif-setup.src} (100%)
- rename tools/hotplug/Linux/{xen-hotplug-common.sh.in => xen-hotplug-common.sh.src} (100%)
- rename tools/hotplug/Linux/{xendomains.in => xendomains.src} (100%)
- rename tools/hotplug/NetBSD/rc.d/{xencommons.in => xencommons.src} (100%)
- rename tools/hotplug/NetBSD/rc.d/{xendriverdomain.in => xendriverdomain.src} (100%)
- rename tools/hotplug/common/{hotplugpath.sh.in => hotplugpath.sh.src} (100%)
- rename tools/ocaml/libs/xs/{paths.ml.in => paths.ml.src} (100%)
- rename tools/ocaml/xenstored/{oxenstored.conf.in => oxenstored.conf.src} (100%)
- rename tools/ocaml/xenstored/{paths.ml.in => paths.ml.src} (100%)
+This will avoid having to run ./configure just because of modifying a
+file depending on a variable set by configure.
 
+Prepare to have multiple files as source for the replacement patterns.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ Config.mk | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/Config.mk b/Config.mk
+index e1556dfbfa..0ea1640371 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -159,6 +159,20 @@ define move-if-changed
+ 	if ! cmp -s $(1) $(2); then mv -f $(1) $(2); else rm -f $(1); fi
+ endef
+ 
++PATH_FILES := Paths
++INC_FILES := $(foreach f, $(PATH_FILES), $(XEN_ROOT)/config/$(f).mk)
++
++include $(INC_FILES)
++
++BUILD_MAKE_VARS := $(foreach f, $(PATH_FILES), $(shell awk '$$2 == ":=" { print $$1; }' $(XEN_ROOT)/config/$(f).mk.in))
++
++define apply-build-vars
++	sed $(foreach v, $(BUILD_MAKE_VARS), -e 's#@$(v)@#$($(v))#g') <$< >$@
++endef
++
++%:: %.src
++	$(apply-build-vars)
++
+ CFLAGS += -fno-strict-aliasing
+ 
+ CFLAGS += -std=gnu99
 -- 
 2.51.0
 
