@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0E9CD13DD
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 16:22:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1160303.1488490 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 474E8CD3423
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 16:23:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1160306.1488516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJDcL-0000fN-6o; Wed, 12 Nov 2025 16:22:45 +0000
+	id 1vJDcQ-0001EG-3K; Wed, 12 Nov 2025 16:22:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1160303.1488490; Wed, 12 Nov 2025 16:22:45 +0000
+Received: by outflank-mailman (output) from mailman id 1160306.1488516; Wed, 12 Nov 2025 16:22:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJDcL-0000fG-3M; Wed, 12 Nov 2025 16:22:45 +0000
-Received: by outflank-mailman (input) for mailman id 1160303;
- Wed, 12 Nov 2025 16:22:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vJDcP-0001Cp-S8; Wed, 12 Nov 2025 16:22:49 +0000
+Received: by outflank-mailman (input) for mailman id 1160306;
+ Wed, 12 Nov 2025 16:22:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vb/2=5U=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vJDcJ-0000RL-Hy
- for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 16:22:43 +0000
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [2a01:111:f403:c001::2])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cf9992f6-bfe3-11f0-9d18-b5c5bf9af7f9;
- Wed, 12 Nov 2025 17:22:42 +0100 (CET)
-Received: from BN9PR03CA0204.namprd03.prod.outlook.com (2603:10b6:408:f9::29)
- by SJ0PR12MB6758.namprd12.prod.outlook.com (2603:10b6:a03:44a::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Wed, 12 Nov
- 2025 16:22:35 +0000
+ id 1vJDcO-0000RX-Qt
+ for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 16:22:48 +0000
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c107::3])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d29f6041-bfe3-11f0-980a-7dc792cee155;
+ Wed, 12 Nov 2025 17:22:47 +0100 (CET)
+Received: from BN9PR03CA0199.namprd03.prod.outlook.com (2603:10b6:408:f9::24)
+ by SJ5PPFE4FC9FAB3.namprd12.prod.outlook.com
+ (2603:10b6:a0f:fc02::9a7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Wed, 12 Nov
+ 2025 16:22:37 +0000
 Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
- (2603:10b6:408:f9:cafe::55) by BN9PR03CA0204.outlook.office365.com
- (2603:10b6:408:f9::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Wed,
- 12 Nov 2025 16:22:35 +0000
+ (2603:10b6:408:f9:cafe::7c) by BN9PR03CA0199.outlook.office365.com
+ (2603:10b6:408:f9::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.16 via Frontend Transport; Wed,
+ 12 Nov 2025 16:22:37 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.0 via Frontend Transport; Wed, 12 Nov 2025 16:22:34 +0000
+ 15.20.9343.0 via Frontend Transport; Wed, 12 Nov 2025 16:22:37 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 12 Nov
- 2025 08:22:31 -0800
+ 2025 08:22:35 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf9992f6-bfe3-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: d29f6041-bfe3-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dWoddzX0nL/RtPDkX4fGkha15irCHr8QiqGhyb9X9InBHYZktYCybDYm+W3D3RxOZIAFZlbs5F58XM/tu/56tdxFW6FpLBJPTeIH57Mp0TtqoyFc8ZP0dUQ6TlSulq6uUrQblJazJ4zfAa1pdsEnQkiK3Mr29VMGpMwrwuGknbd9H8IJrDJ1Wvp7dgtyjrHeU4OUXeeOyamRShuZ4yTZx6MdV3AmfEbp3uRJ0dQpQ2fL2h8kZDo2SgHWCnrJchQC1/iiL5URleS6wKHSYMip5U3jUds0QXQO/p6eAZ2N5q/ze7MJlD9rf5lA3dAemE1xNVBqS7uhfMURM7jCY+Sggg==
+ b=nmWRS0VEPOiBM7Sad1179CXDJoO/5iCuoJgUYVUJJNXF6Q9THJOCqmuBj2LutWVMexB7K5AXSkDvtWT7Lnuht4x+YqLcvqgY7/G02zlv5dmTrY5ULKSuNH1nISC70nE1v30FSBRilSgyomRXrGe1OKRlrQQ2GYz4M9uF7pqyZc9q8bKuFbAuNUOxSZ/o5FJaMsGFkS4Cm9ylTlVX/SPwwV9zrfbobMaaabg8Wt82/D9UZw8djlr0fpw+JjL8aJ6C8SBdKuARbu64DGlcrlhMVwLDZw4n0VZpPpoWrslIqKHGK4ywEHUEPuQp9x3GCHJmzs1nUeMCB3Chr9gGCl0hpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4Loe3auNsQGtsQe4VcnZlToVD2AT8r0kPmm2eVxOlhk=;
- b=clog8pkVJjIrb7UJ8xkvSeSNSIRyWTmcSYCyTue3Tkyq0Q2PDxoE49LkVePELQ0t28ThUauzL34do1hg10HMR0qFdTLZ+2iJZwbXAD5QC5+qp4Hg4Pkawc29eV/03LVH9El6oL/z6GWwuCwVoCddqHqcJemkibyc4VAR69H7y9Jw7NL5yhio1Ga2TBbfUZPSiAFTScqgfpInd+YWydEvwGcS8Wzeon3SwgljbHWcmAcr0avARg10fjUyeleVlZoBzIyLbBrulFFv7eXMzKbXtjCvpcX2GrBRwfSdEfV+co+wnwCDHMK8MykvD0IgegB3Ip2G3SaoJOAKB/O9buIeTg==
+ bh=ZXBRlT+vmpj7q780lMTRkbD8kmp9sJpq7zet8o+dSy0=;
+ b=JOhhLXC1WsStcH3+7YOk2mcTzjf21RxF4Oi7I+o/GxPzeB5xJYpneEjK4ddXEnYp3Fs5Azm4LfDfxXHjWGmz+goA3fOGgGPwdDI561uKYW1rlnJQnWkbFJZ2ZlBiUMNHPElOVRi78CJtnRheAyccNU9uOrWQ8RLmOo9VNvQCeSiGapK+fV+Q0n54sQEHbW/D+R0cZB4cVLv437Af0j7bCCZnBmJmVrHleI12Tyrx7Rwk+bEMZGjxiQPjbtLsSDfPkJvAsU18PnsnM5F1NBeqq9nVoqOJ38GmU4IOOwbStzBGqR+BSspRDCnkCHifS0ZCYAc0V2M+bVfP/DU6md0lzw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4Loe3auNsQGtsQe4VcnZlToVD2AT8r0kPmm2eVxOlhk=;
- b=a0vNrh8NWuvYtXmINn4rAQcLu66ezWLCrE5CubS/8FQPq9BtKox+AkjNtK1uVvkpgw0zheGjldXWss+T0yeG5hrf6VTikfDzlPGqUSD3/Jk/rNVBkDLa6QE7tRUJ4Ofd2TpVVTsu9UlBsXz5fGzo0l/6tT49+zcOo6xonWb1LHs=
+ bh=ZXBRlT+vmpj7q780lMTRkbD8kmp9sJpq7zet8o+dSy0=;
+ b=avAMx6LNDVt0+g3zsTmp3V+Kd8oKOGkaEFjl3sTF2t6w40/a4OrM+6VKJ3XjnUuaORzMKMR919vTuKbt6WpoRayUrynS235ybbPJv8mR0dBTJYKDed3KTg3SJ6g5A2DBg3urzMFwoPXnCGwJ7cEaYPxSbdmwu4xmmDPNUbqB+7k=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -84,14 +84,13 @@ From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Daniel P.
- Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>
-Subject: [PATCH 0/4] Add Kconfig option to remove microcode loading support
-Date: Wed, 12 Nov 2025 17:22:13 +0100
-Message-ID: <20251112162219.226075-1-alejandro.garciavallejo@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 3/4] x86: Split out early_microcode_load() and microcode_load_one()
+Date: Wed, 12 Nov 2025 17:22:16 +0100
+Message-ID: <20251112162219.226075-4-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251112162219.226075-1-alejandro.garciavallejo@amd.com>
+References: <20251112162219.226075-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -100,103 +99,282 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|SJ0PR12MB6758:EE_
-X-MS-Office365-Filtering-Correlation-Id: f5a9dfec-2edd-4c67-522d-08de2207b03c
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|SJ5PPFE4FC9FAB3:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f27baef-e039-4b20-1cbb-08de2207b1de
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?/QuRt4Rfc6IdGMyiJT3RZsHSpI7yzNj5UlZlw2bH1XOsOMU2fMRycHEjL3tJ?=
- =?us-ascii?Q?mPQY0otZr4pKNcsSNnJw1JN7GAoQG2CSG9tcXqW79LjVin1lvQqo8ircSXnL?=
- =?us-ascii?Q?0vNeK8HzOuL401CC56Pa5kAtpanMieg379kprk2e/qu+t3AC91zCe29OfhB0?=
- =?us-ascii?Q?dwyhvDex8S57uKwzGJE5vD/JOMlen9hq4FOGAP6rd3xOfjRG1/EZBptP1Gz9?=
- =?us-ascii?Q?8IndUCtIh/nXrkrSPq8vOK4B7QlLhQENv7H+/1DnVeH6XhP9rf5XHX0GnVLh?=
- =?us-ascii?Q?jmdcXHj6yfilqkX8+wKDBTUB9a5lYCdLg1g3yULcAwdRp9k80lEPB75MWwsg?=
- =?us-ascii?Q?k573MipzC3Cut0Qn//+XGMSy2LIpQm1AdUPQPJ1ZsyDuf2P2lI5k4vtgNlgy?=
- =?us-ascii?Q?w4vDpWm5aWiPuLXuYUy+zjYwDsAOjkabCApQRwNGq5OA3C44vf7GMX3NLT8j?=
- =?us-ascii?Q?Sc7UeGX6rpkbT0NL4p4WVB4149ZZCMRFoP36w12ka1+2Vz4+DO/um14WvXSR?=
- =?us-ascii?Q?5xJid2n2r6hKIK+rOe6ygqLU0MyxnIPn5IXitNMN8gyid1zQ+9JXbVmbHI84?=
- =?us-ascii?Q?217yb3ZksZQ8EpZFmcr5zUyJ7A9MGjOcLo3j0PzX3uxDwaJuvxzdphoT334r?=
- =?us-ascii?Q?ILoBjxKGxUaOthL4iWkT7coBWhvGm8yTAgARnfYOM86lri9jzblBtBZ7qmBD?=
- =?us-ascii?Q?SxRMYimhIJwH0y7HI1aXK3PdoWbA13wZ1mPFEvxIWvHXyGHY0o/7hHEcp34H?=
- =?us-ascii?Q?t8E45HdNHvFFNFbaFFYxgzdvleKssJbffHbXXxV4BeVTLnlpDP53gWqG6uY/?=
- =?us-ascii?Q?GUGgeebFBOfhTyk5zuEZYwQEJRIOa4Bw5sCj0k/eFmpCZ0hAR/hgvdqjGlCY?=
- =?us-ascii?Q?vkSQTvGDMd/bcpuIak7s7svCf2huwLusAmC04bURijGYyDTygD3qyCAGSwBf?=
- =?us-ascii?Q?uYsVpmbPIcHNtuXaNwVEB2rI9dEHNqmUZLYOvDfKc1T/pWrZ1MUcbYZ261LC?=
- =?us-ascii?Q?UAygwgC3xZRc7MBeZB39A5Wh20NXDw9n7pYr+DIeHFGIiAsMVezhFl/bdLef?=
- =?us-ascii?Q?b2ygTnHCumnCOK06HWAZ9WqfXj+LA6XCMVvmIOnHavh4p65K0BPwLrhJSK9m?=
- =?us-ascii?Q?3c1OpSNPizEvNmcoMB+wMUKa+oyo2Z7TW/g1Qwb56wpPrpvB7Tz4N8w8Nl4y?=
- =?us-ascii?Q?cxvgJhBg/J4xo70kTMFtq1fiMnw4EO7eIj4sYHP1FbdNWIJ4y689kDTG2TXb?=
- =?us-ascii?Q?0JmBTuabeEgtPTBsgpblDBrEeX96rVcpof0H6iTM4XwYyhJK0nfL0j93RHBQ?=
- =?us-ascii?Q?RoayRsp0z++GawGOjTPBr6+rJJriU4CN+6Ysu69FYnKWWupP7yXuMu509gxd?=
- =?us-ascii?Q?3fhVdqIab9Fu2NQo9FYPOyyaHcC0XtcSZC2vQILtRU8oyy1MI5FH1oJpUNJo?=
- =?us-ascii?Q?w+9hxYkH64bvOS+NMLau70E0pzmrUgpsNx+3Er/TVavDDUeOEb2f1j4OlwAM?=
- =?us-ascii?Q?4pdg12lt2JC+AkUYS7mQEMh+6Ol1fbeSWVorZNdLlOb+XMyePVMeDiLNCoNa?=
- =?us-ascii?Q?U/wuSxwmtrHe9GBK+m0=3D?=
+	=?us-ascii?Q?hQKbQR2MaDAKGtXTeonY3HgciYsVBb1kjp1E211JQoMN3D3QDV2anCbsjQ2k?=
+ =?us-ascii?Q?HOhSgmmklcoezIBz85LKUd6j+8hBI+21qSd97d6coznzC8lYecPm45/upnFJ?=
+ =?us-ascii?Q?BOBYUTdiIKHnyNjBPEgMw0URtleuaZqM1Iur5VHcVw2GwDg618nzOw6Ch3IG?=
+ =?us-ascii?Q?GttBrLxfqiuyYgm7aJKat3uWbG8BgQ4G9z8UdfReMSQaAWmm2/VSHQHPuoXd?=
+ =?us-ascii?Q?fw9GoFK/9odNAEwGlge0FnrH+OAriKsEfTY5odLwR+4XKw/Rjpf+g/J/W+Wg?=
+ =?us-ascii?Q?E9wPIw+vyRZPJpDO5vhZcVp5byQq18MbLoLnPM+C9c+teA+5j0yafbKrGHtQ?=
+ =?us-ascii?Q?kuhn4xGsoG/Hljh/kNeIm/sSlCJrPjK8HH9rwIe2rXhB97/bBTJ6OAsL/iMI?=
+ =?us-ascii?Q?0u8Sy8FTCX2fNvUQ4jUCH1jVsxCsxRt9paDLWZoj7FJoqDMPsLTUXf8WmL4c?=
+ =?us-ascii?Q?YnuN4/U/n1zMHF9DfxHxT7VoqzOCK8uOwu9WsaTUbZTZAL/uSeDAnsnOrJAH?=
+ =?us-ascii?Q?0gi0ZflQWhNaSB1sSK7ltCL3FlPjdBeoF4bQ5CUuNJfgfU+bp3ZzjN3ELEwZ?=
+ =?us-ascii?Q?VtdrZyVydwTcSxIQ5ZQVi+/EF6MptGMnMRANEXdmS8X2xm+GotFagwb6VgpK?=
+ =?us-ascii?Q?NL++svOW8GUj3AKJnOQsz3TngDtnq34b2K+Pxh5BkYjc+UAIRnaDxIOpS2Ov?=
+ =?us-ascii?Q?/rb6Hg1WkdQol/MCX4BCmluBDdZA6y6a9PLH5UrQsFIPlbR20AZxFyT+S/4p?=
+ =?us-ascii?Q?oIFKvNlauBALzwBHjGUEPTxIxOlI72uU88RIKmt0XaeR5yGKqt1tBXY2WnHE?=
+ =?us-ascii?Q?M6BmeJTzYGZrNOxhFUvEGht5zVA0rsy1EsMkFDty2NaA2Mtut+nJ1cIn6tV9?=
+ =?us-ascii?Q?maKnhdT4C21r3l4bDbHfhCYBy0eRCNoN6FodG5HxWuR5zHyQPJfGFqFNx7Uu?=
+ =?us-ascii?Q?gnpS/uB5q8VoUKIPcCblDYaMauVXHS6PDF2ylf79c6IzRJ6DVbm7oecy7W/0?=
+ =?us-ascii?Q?08eanYEsEaUSFHBsOyuiyMKvYT5zv+snj8FMcm1mbYzT5d8F1vXSpR7YKTd7?=
+ =?us-ascii?Q?zEdC0nSxFxZEXtoeZrQXRw1s22Dl4VkQcqhvNdR1Ojwf1sC6jg6mWFBa4Uao?=
+ =?us-ascii?Q?4rpy5B79PovOIXuBeltwuCFtOLFhUw2i67RAXPo0FJBdsV7htkH/+ait5AFa?=
+ =?us-ascii?Q?ivGXli3ZzQEbH+BEUndWPN4HAA7Lr0hs7DV/Pw1o5M4a80qEACwqwz1XCF6A?=
+ =?us-ascii?Q?8LhaYTlWRplmoa46HxvXTkjzM1KfWLxlNDFBHaUpgsVcL9utAxQ02udDD0tp?=
+ =?us-ascii?Q?TNzYu+0wxhDG9bLkPvk1HevA3sfoU/cYm3q1kAbRaWWEg5cHEDpnvk3taPin?=
+ =?us-ascii?Q?UoOt1i/C93KAsUbCMKkkBwQIUsLUqR6dXP9ZgAmrCUFc0NS/44jWTQqgOgaG?=
+ =?us-ascii?Q?PgIvph49wICKoN6Uwo4ifpuFaWsuMjNvLgYBC+I6uGiJGq/tcVxAKU5513Fi?=
+ =?us-ascii?Q?vwK7QVrdBTJnnmTZXEAY/Xu2/2HIT/2SjjD2qW8SaIB4+teQdT+3C+QL2Ys1?=
+ =?us-ascii?Q?0Wqj/TD7p0wV001Dvx8=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 16:22:34.9607
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 16:22:37.7006
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5a9dfec-2edd-4c67-522d-08de2207b03c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f27baef-e039-4b20-1cbb-08de2207b1de
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	BN3PEPF0000B06C.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6758
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFE4FC9FAB3
 
-Hi,
+A later patch compiles out most of the microcode loading code by removing
+core.c from the Makefile based on Kconfig. These functions are important
+to set up the ucode_op to read the microcode revision and report it on
+every CPU.
 
-The series is mostly a refactor between everything needed to load microcode and
-the bare minimum to probe the current microcode revision.
+Not a functional change.
 
-The Kconfig option keeps the reading of microcode rev data around, as it's very
-relevant for security and debuggability in order to deduce which erratas apply
-to the current platform.
-
-The idea is to move everything that must still be compiled with !CONFIG_UCODE
-onto {,amd-,intel-}base.c, then remove everything else conditionally at the
-Makefile level.
-
-Renaming files (e.g: s/base/core/ and s/core/common/) would better reflect
-post-series reality, but it'd be annoying for later backports in this general
-area.
-
-Cheers,
-Alejandro
-
-Alejandro Vallejo (4):
-  x86: Split out AMD-specific code to be executed without ucode loading
-  x86: Split out Intel-specific code to be executed without ucode
-    loading
-  x86: Split out early_microcode_load() and microcode_load_one()
-  x86: Add Kconfig option to disable microcode loading
-
- xen/arch/x86/Kconfig                    | 12 ++++
- xen/arch/x86/cpu/microcode/Makefile     |  9 ++-
- xen/arch/x86/cpu/microcode/amd-base.c   | 55 +++++++++++++++++++
- xen/arch/x86/cpu/microcode/amd.c        | 55 ++-----------------
- xen/arch/x86/cpu/microcode/amd.h        | 15 +++++
- xen/arch/x86/cpu/microcode/base.c       | 73 +++++++++++++++++++++++++
- xen/arch/x86/cpu/microcode/core.c       | 58 +-------------------
- xen/arch/x86/cpu/microcode/intel-base.c | 50 +++++++++++++++++
- xen/arch/x86/cpu/microcode/intel.c      | 56 +++----------------
- xen/arch/x86/cpu/microcode/intel.h      | 16 ++++++
- xen/arch/x86/cpu/microcode/private.h    | 14 +++++
- xen/arch/x86/efi/efi-boot.h             |  2 +-
- xen/arch/x86/platform_hypercall.c       |  2 +
- 13 files changed, 259 insertions(+), 158 deletions(-)
- create mode 100644 xen/arch/x86/cpu/microcode/amd-base.c
- create mode 100644 xen/arch/x86/cpu/microcode/amd.h
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+ xen/arch/x86/cpu/microcode/Makefile  |  1 +
+ xen/arch/x86/cpu/microcode/base.c    | 72 ++++++++++++++++++++++++++++
+ xen/arch/x86/cpu/microcode/core.c    | 57 +---------------------
+ xen/arch/x86/cpu/microcode/private.h | 14 ++++++
+ 4 files changed, 89 insertions(+), 55 deletions(-)
  create mode 100644 xen/arch/x86/cpu/microcode/base.c
- create mode 100644 xen/arch/x86/cpu/microcode/intel-base.c
- create mode 100644 xen/arch/x86/cpu/microcode/intel.h
 
-
-base-commit: e00c1673992e07ed31e9c60fefa8d053491abbe6
+diff --git a/xen/arch/x86/cpu/microcode/Makefile b/xen/arch/x86/cpu/microcode/Makefile
+index 74289981e3..765195ada3 100644
+--- a/xen/arch/x86/cpu/microcode/Makefile
++++ b/xen/arch/x86/cpu/microcode/Makefile
+@@ -1,5 +1,6 @@
+ obj-$(CONFIG_AMD) += amd.o
+ obj-$(CONFIG_AMD) += amd-base.o
++obj-y += base.o
+ obj-y += core.o
+ obj-$(CONFIG_INTEL) += intel.o
+ obj-$(CONFIG_INTEL) += intel-base.o
+diff --git a/xen/arch/x86/cpu/microcode/base.c b/xen/arch/x86/cpu/microcode/base.c
+new file mode 100644
+index 0000000000..895ee78d2e
+--- /dev/null
++++ b/xen/arch/x86/cpu/microcode/base.c
+@@ -0,0 +1,72 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/alternative-call.h>
++
++#include <xen/errno.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++
++#include <asm/asm_defns.h>
++#include <asm/cpufeature.h>
++#include <asm/x86-vendors.h>
++#include <asm/microcode.h>
++
++#include "private.h"
++
++struct microcode_ops __ro_after_init ucode_ops;
++
++int microcode_update_one(void)
++{
++    /*
++     * This path is used for APs and S3 resume.  Read the microcode revision
++     * if possible, even if we can't load microcode.
++     */
++    if ( ucode_ops.collect_cpu_info )
++        alternative_vcall(ucode_ops.collect_cpu_info);
++
++    return _microcode_update_one();
++}
++
++int __init early_microcode_init(struct boot_info *bi)
++{
++    const struct cpuinfo_x86 *c = &boot_cpu_data;
++
++    switch ( c->vendor )
++    {
++    case X86_VENDOR_AMD:
++        ucode_probe_amd(&ucode_ops);
++        break;
++
++    case X86_VENDOR_INTEL:
++        ucode_probe_intel(&ucode_ops);
++        break;
++    }
++
++    if ( !ucode_ops.collect_cpu_info )
++    {
++        printk(XENLOG_INFO "Microcode loading not available\n");
++        return -ENODEV;
++    }
++
++    ucode_ops.collect_cpu_info();
++
++    printk(XENLOG_INFO "BSP microcode revision: 0x%08x\n", this_cpu(cpu_sig).rev);
++
++    /*
++     * Some hypervisors deliberately report a microcode revision of -1 to
++     * mean that they will not accept microcode updates.
++     *
++     * It's also possible the hardware might have built-in support to disable
++     * updates and someone (e.g: a baremetal cloud provider) disabled them.
++     *
++     * Take the hint in either case and ignore the microcode interface.
++     */
++    if ( !ucode_ops.apply_microcode || this_cpu(cpu_sig).rev == ~0 )
++    {
++        printk(XENLOG_INFO "Microcode loading disabled due to: %s\n",
++               ucode_ops.apply_microcode ? "rev = ~0" : "HW toggle");
++        ucode_ops.apply_microcode = NULL;
++        return -ENODEV;
++    }
++
++    return early_microcode_load(bi);
++}
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 1d1a5aa4b0..553a0ced15 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -162,8 +162,6 @@ static int __init cf_check parse_ucode(const char *s)
+ }
+ custom_param("ucode", parse_ucode);
+ 
+-static struct microcode_ops __ro_after_init ucode_ops;
+-
+ static DEFINE_SPINLOCK(microcode_mutex);
+ 
+ DEFINE_PER_CPU(struct cpu_signature, cpu_sig);
+@@ -648,7 +646,7 @@ int ucode_update_hcall(XEN_GUEST_HANDLE(const_void) buf,
+ }
+ 
+ /* Load a cached update to current cpu */
+-int microcode_update_one(void)
++int _microcode_update_one(void)
+ {
+     int rc;
+ 
+@@ -736,13 +734,7 @@ static int __init cf_check microcode_init_cache(void)
+ }
+ presmp_initcall(microcode_init_cache);
+ 
+-/*
+- * There are several tasks:
+- * - Locate the ucode blob in the boot modules.
+- * - Parse and attempt in-place load.
+- * - Inform microcode_init_cache() of how to find the blob again.
+- */
+-static int __init early_microcode_load(struct boot_info *bi)
++int __init early_microcode_load(struct boot_info *bi)
+ {
+     void *data = NULL;
+     size_t size;
+@@ -873,48 +865,3 @@ static int __init early_microcode_load(struct boot_info *bi)
+ 
+     return rc;
+ }
+-
+-int __init early_microcode_init(struct boot_info *bi)
+-{
+-    const struct cpuinfo_x86 *c = &boot_cpu_data;
+-
+-    switch ( c->vendor )
+-    {
+-    case X86_VENDOR_AMD:
+-        ucode_probe_amd(&ucode_ops);
+-        break;
+-
+-    case X86_VENDOR_INTEL:
+-        ucode_probe_intel(&ucode_ops);
+-        break;
+-    }
+-
+-    if ( !ucode_ops.collect_cpu_info )
+-    {
+-        printk(XENLOG_INFO "Microcode loading not available\n");
+-        return -ENODEV;
+-    }
+-
+-    ucode_ops.collect_cpu_info();
+-
+-    printk(XENLOG_INFO "BSP microcode revision: 0x%08x\n", this_cpu(cpu_sig).rev);
+-
+-    /*
+-     * Some hypervisors deliberately report a microcode revision of -1 to
+-     * mean that they will not accept microcode updates.
+-     *
+-     * It's also possible the hardware might have built-in support to disable
+-     * updates and someone (e.g: a baremetal cloud provider) disabled them.
+-     *
+-     * Take the hint in either case and ignore the microcode interface.
+-     */
+-    if ( !ucode_ops.apply_microcode || this_cpu(cpu_sig).rev == ~0 )
+-    {
+-        printk(XENLOG_INFO "Microcode loading disabled due to: %s\n",
+-               ucode_ops.apply_microcode ? "rev = ~0" : "HW toggle");
+-        ucode_ops.apply_microcode = NULL;
+-        return -ENODEV;
+-    }
+-
+-    return early_microcode_load(bi);
+-}
+diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
+index e6c965dc99..881ea7d8d9 100644
+--- a/xen/arch/x86/cpu/microcode/private.h
++++ b/xen/arch/x86/cpu/microcode/private.h
+@@ -5,6 +5,8 @@
+ 
+ #include <asm/microcode.h>
+ 
++struct boot_info;
++
+ /* Opaque.  Internals are vendor-specific. */
+ struct microcode_patch;
+ 
+@@ -68,6 +70,7 @@ struct microcode_ops {
+ };
+ 
+ extern bool opt_digest_check;
++extern struct microcode_ops ucode_ops;
+ 
+ /*
+  * Microcode loading falls into one of 3 states.
+@@ -93,4 +96,15 @@ void ucode_probe_intel(struct microcode_ops *ops);
+ static inline void ucode_probe_intel(struct microcode_ops *ops) {}
+ #endif
+ 
++/*
++ * There are several tasks:
++ * - Locate the ucode blob in the boot modules.
++ * - Parse and attempt in-place load.
++ * - Inform microcode_init_cache() of how to find the blob again.
++ */
++int early_microcode_load(struct boot_info *bi);
++
++/* Attempt performaing a microcode load */
++int _microcode_update_one(void);
++
+ #endif /* ASM_X86_MICROCODE_PRIVATE_H */
 -- 
 2.43.0
 
