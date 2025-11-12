@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E871ACCF9F8
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 10:58:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1159789.1488097 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E17CCF9F8
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 11:02:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1159807.1488108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ8Yg-0003Y0-RC; Wed, 12 Nov 2025 10:58:38 +0000
+	id 1vJ8bs-0005Go-9I; Wed, 12 Nov 2025 11:01:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1159789.1488097; Wed, 12 Nov 2025 10:58:38 +0000
+Received: by outflank-mailman (output) from mailman id 1159807.1488108; Wed, 12 Nov 2025 11:01:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ8Yg-0003Xt-Of; Wed, 12 Nov 2025 10:58:38 +0000
-Received: by outflank-mailman (input) for mailman id 1159789;
- Wed, 12 Nov 2025 10:58:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vJ8bs-0005Gh-6J; Wed, 12 Nov 2025 11:01:56 +0000
+Received: by outflank-mailman (input) for mailman id 1159807;
+ Wed, 12 Nov 2025 11:01:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=76yT=5U=bounce.vates.tech=bounce-md_30504962.6914685b.v1-68640975b6574f6b8a5b1d3da2c2f2b5@srs-se1.protection.inumbo.net>)
- id 1vJ8Yf-00033O-Ii
- for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 10:58:37 +0000
+ <SRS0=K372=5U=bounce.vates.tech=bounce-md_30504962.691466e9.v1-1fd812512d564af1beb27716acce14a2@srs-se1.protection.inumbo.net>)
+ id 1vJ8Sm-0000Wh-0L
+ for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 10:52:32 +0000
 Received: from mail136-17.atl41.mandrillapp.com
  (mail136-17.atl41.mandrillapp.com [198.2.136.17])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 895d6952-bfb6-11f0-9d18-b5c5bf9af7f9;
- Wed, 12 Nov 2025 11:58:36 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id acca7913-bfb5-11f0-980a-7dc792cee155;
+ Wed, 12 Nov 2025 11:52:26 +0100 (CET)
 Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
  by mail136-17.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4d60kg19pxzPm0ZNG
- for <xen-devel@lists.xenproject.org>; Wed, 12 Nov 2025 10:58:35 +0000 (GMT)
+ 4d60bY13JHzPm0bYq
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Nov 2025 10:52:25 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 68640975b6574f6b8a5b1d3da2c2f2b5; Wed, 12 Nov 2025 10:58:35 +0000
+ 1fd812512d564af1beb27716acce14a2; Wed, 12 Nov 2025 10:52:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,95 +45,259 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 895d6952-bfb6-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: acca7913-bfb5-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1762945115; x=1763215115;
-	bh=tBMtXLUrgGGGSeKU3UBukiIF2xYXSSZmdQGOIQ0dPwI=;
+	s=mte1; t=1762944745; x=1763214745;
+	bh=86aQGi/7GaUPH3vqhUSGrPmTwZia3vX6HeEK4SO4NAs=;
 	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=NX4L6NBSPxfbqhJ0pUjK/vh6oJQxscppgq04n9B1iiXJ+dtfKAl6fTOJbpI+BFSFJ
-	 gxWg6+N5JouZ7m/8tUgGWuSN66EF76FYQ3VKW/in52iExWBqVHtKj0098xHwcn3p8z
-	 jtZM5BPtVfJiZE0NdcYwxd9GRs3bVVUIyOEDvNS5equ2TzzDP7gcKiUsMiFujRhl5H
-	 gj0fZ1tsbkVylrtqToGOd0X/r+JPAWnuCgRFsFFHA/EMYfwdOOaY1heQVeQfE6aEm3
-	 JvIoYMuT0vb92sEs/EmLgvh9LYRVkMp15UwFmxQpJMCfWJOk5PDzj/pRDwqiTGc08V
-	 zu/EFoK0c7dcQ==
+	b=aZJVM2zfz6tLfkQtLB8W5lFwm4X3VObWKiH6VrAAFQJ7B6AQ8+CzHkZpViDKy4VJ/
+	 sKWDN5iUeVPDFKbx44KuqY9TdtD16bDlKhMdKPDBpYldBe7DR2VJkti7fwNwCfqYlQ
+	 juzGlIv9fY434WqzPetarbj7Z+fvgO0mSW5iHVLBXxAOzb0FuaOboF8kZiJjn8d7sh
+	 38AQicU1lBkmFjtQtqtxwPwVVbs+INN+xXlmPZK4w22XQbD/xy1rK9L0wH9GuRaL++
+	 8Aw35lbNxAQRYQ5CSk4yua+940v2IZTzgNnBaPAiXspXZoIIGaJY0danrFSdHc8g3K
+	 bBUEhDrPF5bnw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1762945115; x=1763205615; i=teddy.astie@vates.tech;
-	bh=tBMtXLUrgGGGSeKU3UBukiIF2xYXSSZmdQGOIQ0dPwI=;
+	t=1762944745; x=1763205245; i=teddy.astie@vates.tech;
+	bh=86aQGi/7GaUPH3vqhUSGrPmTwZia3vX6HeEK4SO4NAs=;
 	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=ZARYiMwDH6UoMyNcgvdyd8iZF+XgZXWLkC7UnCfSycYKZSnGD0hzIRjnwA63NDjUA
-	 HYepfdOza5bO61jCdrx6RXoL0LPouby3JE3Z0vpwCJHxnn5ArnZJU7VI2gl3W31l5Y
-	 2Bvndz19dJGuT8sPGy2leAUJg6gQ5jYNP0YVZmJqP8AH0h68DkOa2HQ4ReatWEoalQ
-	 R0mmY0x7TsfUNgkZLalKSAfusP7AUtoqx82X9VvfSNlz1iYnVd/I6e9F9KXu9px0+W
-	 WwllN5eGcsTZ6XBNiywsmPK+EdCnJzuUiVn+6kfFtU9ERg5WoDNbigEKB5/Xmxp8hW
-	 5tI/JSoIZhImA==
+	b=gghIszI8ppzkHpmXXAoIM7qBapCg6fzPlPfORzROVnF1CKiuw3Z44G7pcgRxCTufZ
+	 9DeQ3mdK6WG1dxJrIKiGBnQJ0wPZsttfclHD5QWWzm5U/YSiFqKWPe80EiOV26kW3S
+	 Wu35s0+izpfdSZpBu/0wODsXIEDHc2Lv/agwLCfXTyMZghHaVt4DvzuGG0ZXQJ8W8B
+	 GQRQfnhLk0CFQFL/3betC2zpl4l8HQ0qIN1lZxyfn9w6ocBrTwM+h5zINARoOGHPzT
+	 n4RDZ5lUqrcBLJKh95uAqKmxh4Cpr6cdFOIWFcw1qLr4eNs22FGBsIHTopxPJvDVjV
+	 5ZLxjUE8p90Mg==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[XEN][PATCH=200/5]=20x86:=20pvh:=20allow=20to=20disable=2032-bit=20(COMPAT)=20interface=20support?=
+Subject: =?utf-8?Q?Re:=20[RESEND=20PATCH=20v2=201/3]=20x86/hvm:=20move=20hvm=5Fshadow=5Fhandle=5Fcd()=20to=20vmx=20code?=
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1762945113454
-Message-Id: <fa98c390-db6a-4b3a-b34c-820625f139a4@vates.tech>
+X-Bm-Transport-Timestamp: 1762944743850
+Message-Id: <93dd7056-234d-4d3d-ae1f-d73f33a35f1a@vates.tech>
 To: "Grygorii Strashko" <grygorii_strashko@epam.com>, xen-devel@lists.xenproject.org
-Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>, "Jason Andryuk" <jason.andryuk@amd.com>
-References: <20251111175413.3540690-1-grygorii_strashko@epam.com>
-In-Reply-To: <20251111175413.3540690-1-grygorii_strashko@epam.com>
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Jason Andryuk" <jason.andryuk@amd.com>
+References: <20251111200958.3576341-1-grygorii_strashko@epam.com> <20251111200958.3576341-2-grygorii_strashko@epam.com>
+In-Reply-To: <20251111200958.3576341-2-grygorii_strashko@epam.com>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.68640975b6574f6b8a5b1d3da2c2f2b5?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1fd812512d564af1beb27716acce14a2?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251112:md
-Date: Wed, 12 Nov 2025 10:58:35 +0000
+Date: Wed, 12 Nov 2025 10:52:25 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Le 11/11/2025 =C3=A0 18:55, Grygorii Strashko a =C3=A9crit=C2=A0:
+Le 11/11/2025 =C3=A0 21:11, Grygorii Strashko a =C3=A9crit=C2=A0:
 > From: Grygorii Strashko <grygorii_strashko@epam.com>
 > 
-> Hi
+> Functions:
+>   hvm_shadow_handle_cd()
+>   hvm_set_uc_mode()
+>   domain_exit_uc_mode()
+> are used only by Intel VMX code, so move them to VMX code.
 > 
-> This series introduces possibility to disable 32-bit (COMPAT) interface s=
-upport
-> in the following cases:
->        - Only PVH domains are used
+> While here:
+> - minor format change in domain_exit_uc_mode()
+> - s/(0/1)/(false/true) for bool types
+> - use "struct domain *" as parameter in hvm_set_uc_mode()
+> - use "struct domain *d" as local var in hvm_shadow_handle_cd()
+> 
+> No functional changes.
+> 
+> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+> ---
+> changes in v2:
+> - use "struct domain *" as parameter in hvm_set_uc_mode()
+> - use "struct domain *d" as local var in hvm_shadow_handle_cd()
+> - move code before vmx_handle_cd()
+> 
+>   xen/arch/x86/hvm/hvm.c                 | 58 ------------------------
+>   xen/arch/x86/hvm/vmx/vmx.c             | 61 ++++++++++++++++++++++++++
+>   xen/arch/x86/include/asm/hvm/support.h |  2 -
+>   3 files changed, 61 insertions(+), 60 deletions(-)
+> 
+> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> index da3cde1ff0e6..9caca93e5f56 100644
+> --- a/xen/arch/x86/hvm/hvm.c
+> +++ b/xen/arch/x86/hvm/hvm.c
+> @@ -2168,30 +2168,6 @@ int hvm_set_efer(uint64_t value)
+>       return X86EMUL_OKAY;
+>   }
+>   
+> -/* Exit UC mode only if all VCPUs agree on MTRR/PAT and are not in no_fi=
+ll. */
+> -static bool domain_exit_uc_mode(struct vcpu *v)
+> -{
+> -    struct domain *d =3D v->domain;
+> -    struct vcpu *vs;
+> -
+> -    for_each_vcpu ( d, vs )
+> -    {
+> -        if ( (vs =3D=3D v) || !vs->is_initialised )
+> -            continue;
+> -        if ( (vs->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) ||
+> -             mtrr_pat_not_equal(vs, v) )
+> -            return 0;
+> -    }
+> -
+> -    return 1;
+> -}
+> -
+> -static void hvm_set_uc_mode(struct vcpu *v, bool is_in_uc_mode)
+> -{
+> -    v->domain->arch.hvm.is_in_uc_mode =3D is_in_uc_mode;
+> -    shadow_blow_tables_per_domain(v->domain);
+> -}
+> -
+>   int hvm_mov_to_cr(unsigned int cr, unsigned int gpr)
+>   {
+>       struct vcpu *curr =3D current;
+> @@ -2273,40 +2249,6 @@ int hvm_mov_from_cr(unsigned int cr, unsigned int =
+gpr)
+>       return X86EMUL_UNHANDLEABLE;
+>   }
+>   
+> -void hvm_shadow_handle_cd(struct vcpu *v, unsigned long value)
+> -{
+> -    if ( value & X86_CR0_CD )
+> -    {
+> -        /* Entering no fill cache mode. */
+> -        spin_lock(&v->domain->arch.hvm.uc_lock);
+> -        v->arch.hvm.cache_mode =3D NO_FILL_CACHE_MODE;
+> -
+> -        if ( !v->domain->arch.hvm.is_in_uc_mode )
+> -        {
+> -            domain_pause_nosync(v->domain);
+> -
+> -            /* Flush physical caches. */
+> -            flush_all(FLUSH_CACHE_EVICT);
+> -            hvm_set_uc_mode(v, 1);
+> -
+> -            domain_unpause(v->domain);
+> -        }
+> -        spin_unlock(&v->domain->arch.hvm.uc_lock);
+> -    }
+> -    else if ( !(value & X86_CR0_CD) &&
+> -              (v->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
+> -    {
+> -        /* Exit from no fill cache mode. */
+> -        spin_lock(&v->domain->arch.hvm.uc_lock);
+> -        v->arch.hvm.cache_mode =3D NORMAL_CACHE_MODE;
+> -
+> -        if ( domain_exit_uc_mode(v) )
+> -            hvm_set_uc_mode(v, 0);
+> -
+> -        spin_unlock(&v->domain->arch.hvm.uc_lock);
+> -    }
+> -}
+> -
+>   static void hvm_update_cr(struct vcpu *v, unsigned int cr, unsigned lon=
+g value)
+>   {
+>       v->arch.hvm.guest_cr[cr] =3D value;
+> diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+> index 6f2cc635e582..d7efd0a73add 100644
+> --- a/xen/arch/x86/hvm/vmx/vmx.c
+> +++ b/xen/arch/x86/hvm/vmx/vmx.c
+> @@ -44,6 +44,7 @@
+>   #include <asm/processor.h>
+>   #include <asm/prot-key.h>
+>   #include <asm/regs.h>
+> +#include <asm/shadow.h>
+>   #include <asm/spec_ctrl.h>
+>   #include <asm/stubs.h>
+>   #include <asm/x86_emulate.h>
+> @@ -1451,6 +1452,66 @@ static int cf_check vmx_get_guest_pat(struct vcpu =
+*v, u64 *gpat)
+>       return 1;
+>   }
+>   
+> +/* Exit UC mode only if all VCPUs agree on MTRR/PAT and are not in no_fi=
+ll. */
+> +static bool domain_exit_uc_mode(struct vcpu *v)
+> +{
+> +    struct domain *d =3D v->domain;
+> +    struct vcpu *vs;
+> +
+> +    for_each_vcpu(d, vs)
+> +    {
+> +        if ( (vs =3D=3D v) || !vs->is_initialised )
+> +            continue;
+> +        if ( (vs->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) ||
+> +             mtrr_pat_not_equal(vs, v) )
+> +            return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +
+> +static void hvm_set_uc_mode(struct domain *d, bool is_in_uc_mode)
+> +{
+> +    d->arch.hvm.is_in_uc_mode =3D is_in_uc_mode;
+> +    shadow_blow_tables_per_domain(d);
+> +}
+> +
+> +static void hvm_shadow_handle_cd(struct vcpu *v, unsigned long value)
+> +{
+> +    struct domain *d =3D v->domain;
+> +
+> +    if ( value & X86_CR0_CD )
+> +    {
+> +        /* Entering no fill cache mode. */
+> +        spin_lock(&d->arch.hvm.uc_lock);
+> +        v->arch.hvm.cache_mode =3D NO_FILL_CACHE_MODE;
+> +
+> +        if ( !d->arch.hvm.is_in_uc_mode )
+> +        {
+> +            domain_pause_nosync(d);
+> +
+> +            /* Flush physical caches. */
+> +            flush_all(FLUSH_CACHE_EVICT);
+> +            hvm_set_uc_mode(d, true);
+> +
+> +            domain_unpause(d);
+> +        }
+> +        spin_unlock(&d->arch.hvm.uc_lock);
+> +    }
+> +    else if ( !(value & X86_CR0_CD) &&
+> +              (v->arch.hvm.cache_mode =3D=3D NO_FILL_CACHE_MODE) )
+> +    {
+> +        /* Exit from no fill cache mode. */
+> +        spin_lock(&d->arch.hvm.uc_lock);
+> +        v->arch.hvm.cache_mode =3D NORMAL_CACHE_MODE;
+> +
+> +        if ( domain_exit_uc_mode(v) )
+> +            hvm_set_uc_mode(d, false);
+> +
+> +        spin_unlock(&d->arch.hvm.uc_lock);
+> +    }
+> +}
+> +
 
-I assume this one is mostly due to hvmloader being today running in 
-protected mode 32-bits rather than a limitation "HVM" itself. I don't 
-think of anything else preventing HVM (with 64-bits guests or 32-bits 
-ones without Xen support) from working with COMPAT disabled.
+Given that these functions are now static in vmx.c, I would give them 
+the vmx_* prefix instead of hvm_* (which could be confusing as it sounds 
+like something that is in general code).
 
->        - Guests (OS) are started by using direct Direct Kernel Boot
->        - Guests (OS) are 64-bit and Guest early boot code, which is runni=
-ng not
->          in 64-bit mode, does not access Xen interfaces
->          (hypercalls, shared_info, ..)
-> 
-> If above criterias are met the COMPAT HVM interface become unreachable an=
-d can be disabled.
-> Coverage reports analyze and adding guard (debug) exceptions in hvm_hyper=
-call/hvm_do_multicall_call
-> and hvm_latch_shinfo_size() confirm that COMPAT HVM interface is unused f=
-or safety use-case.
-> 
-> Grygorii Strashko (5):
->    x86: hvm: dm: factor out compat code under ifdefs
->    x86: hvm: compat: introduce vcpu_is_hcall_compat() helper
->    x86: hvm: factor out compat code under ifdefs
->    x86: pvh: allow to disable 32-bit interface support
->    x86: constify has_32bit_shinfo() if !CONFIG_COMPAT
-> 
->   xen/arch/x86/hvm/Kconfig          | 19 +++++++++++++++-
->   xen/arch/x86/hvm/dm.c             |  2 ++
->   xen/arch/x86/hvm/hvm.c            | 22 +++++++++++++-----
->   xen/arch/x86/hvm/hypercall.c      | 37 +++++++++++++++++++++++--------
->   xen/arch/x86/hypercall.c          |  6 +----
->   xen/arch/x86/include/asm/domain.h |  3 ++-
->   xen/common/kernel.c               |  2 +-
->   xen/include/xen/sched.h           |  9 ++++++++
->   8 files changed, 78 insertions(+), 22 deletions(-)
-> 
+>   static void cf_check vmx_handle_cd(struct vcpu *v, unsigned long value)
+>   {
+>       if ( !paging_mode_hap(v->domain) )
+> diff --git a/xen/arch/x86/include/asm/hvm/support.h b/xen/arch/x86/includ=
+e/asm/hvm/support.h
+> index 2a7ba36af06f..9e9fa6295567 100644
+> --- a/xen/arch/x86/include/asm/hvm/support.h
+> +++ b/xen/arch/x86/include/asm/hvm/support.h
+> @@ -119,8 +119,6 @@ void hvm_rdtsc_intercept(struct cpu_user_regs *regs);
+>   
+>   int __must_check hvm_handle_xsetbv(u32 index, u64 new_bv);
+>   
+> -void hvm_shadow_handle_cd(struct vcpu *v, unsigned long value);
+> -
+>   /*
+>    * These functions all return X86EMUL return codes.  For hvm_set_*(), t=
+he
+>    * caller is responsible for injecting #GP[0] if X86EMUL_EXCEPTION is
 
 Teddy
 
