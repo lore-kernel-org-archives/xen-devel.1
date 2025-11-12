@@ -4,40 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88808CCFA1E
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 07:06:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1159500.1487809 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E61ECCCF9F8
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 07:08:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1159511.1487821 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ4vZ-0003vY-ON; Wed, 12 Nov 2025 07:06:01 +0000
+	id 1vJ4xz-0004S8-5j; Wed, 12 Nov 2025 07:08:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1159500.1487809; Wed, 12 Nov 2025 07:06:01 +0000
+Received: by outflank-mailman (output) from mailman id 1159511.1487821; Wed, 12 Nov 2025 07:08:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ4vZ-0003vR-Lt; Wed, 12 Nov 2025 07:06:01 +0000
-Received: by outflank-mailman (input) for mailman id 1159500;
- Wed, 12 Nov 2025 07:06:00 +0000
+	id 1vJ4xz-0004S1-19; Wed, 12 Nov 2025 07:08:31 +0000
+Received: by outflank-mailman (input) for mailman id 1159511;
+ Wed, 12 Nov 2025 07:08:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=K5hw=5U=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vJ4vY-0003vJ-9K
- for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 07:06:00 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EQc1=5U=bounce.vates.tech=bounce-md_30504962.69143269.v1-d068692f474a423bb6591a33a5e4c6c5@srs-se1.protection.inumbo.net>)
+ id 1vJ4xx-0004Rv-Gv
+ for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 07:08:29 +0000
+Received: from mail136-17.atl41.mandrillapp.com
+ (mail136-17.atl41.mandrillapp.com [198.2.136.17])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0a6c0591-bf96-11f0-9d18-b5c5bf9af7f9;
- Wed, 12 Nov 2025 08:05:59 +0100 (CET)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-42b427cda88so261698f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 11 Nov 2025 23:05:59 -0800 (PST)
-Received: from ?IPV6:2003:ca:b70c:6a60:8d0a:6473:d951:bd22?
- (p200300cab70c6a608d0a6473d951bd22.dip0.t-ipconnect.de.
- [2003:ca:b70c:6a60:8d0a:6473:d951:bd22])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42b4789896esm6498295f8f.38.2025.11.11.23.05.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Nov 2025 23:05:57 -0800 (PST)
+ id 62a680f2-bf96-11f0-9d18-b5c5bf9af7f9;
+ Wed, 12 Nov 2025 08:08:27 +0100 (CET)
+Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail136-17.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4d5vd5690rzPm0ZmK
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Nov 2025 07:08:25 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ d068692f474a423bb6591a33a5e4c6c5; Wed, 12 Nov 2025 07:08:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,95 +45,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a6c0591-bf96-11f0-9d18-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1762931158; x=1763535958; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=CEzIo7/N6EGU0IppSdci/EWmEm145xbiQsm65A5WP0E=;
-        b=NRBjhZJ8xUePU3KuqpPNkXpU8yvdPMPkOx0FlZen/vzdcWt7WZjgDfSUaYRJZPJOAW
-         oOBwJeA6Sf5L6Iirk/g3HyV6NvYPvMOvIcRSCkbpaxRlrtg54hDjDS+b75JUWl26uFU6
-         fxMUNEFsU27qiGmv3/1vgBfqfH0ilo9oD1tEAPbZBOkUqSpbX22SkLzxmx/y2IOXsCJX
-         Uh2X/sWFJKW0c8jN97SgOl1IA7TmK7d67mFqHrZ5faGhiaM2D231fpi4/nLIJT9dh9Lb
-         l7sD1Ph/shmDnhDRx39tX2mVK6/FtrbgUoZWzbUnqn8/SH9OK/EgGLzDJ2BG01ZHv1Wf
-         Y9qA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762931158; x=1763535958;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CEzIo7/N6EGU0IppSdci/EWmEm145xbiQsm65A5WP0E=;
-        b=go4NmJ7DMS3gejXEFa1ogFUmYrEuhD2Mb20kZchKDtbcukJy/MWf8cfK5ok4qsWVM3
-         d0hB+7VS2glIdHh4JeS1MJo8zsk03rW8JMejo2yVyVinUo+4yEbxAFamsunGKT7tNmxD
-         m/W8XKQENITbBpsqQxA4q9PGc11Z5qsqq/ALwB3tMT8aW1sQVIrqHvwPgbmkOdL+LWJq
-         qqvf4qisYNupvvxteMrcnzMNSNgFtlQNzdT0Zk4tHIrCm7ZohVn6LVCzoTJNwhByRAo3
-         S7PRn/99lltY4/CukKc+Co15UXDIStxmsRMiQsI5nIMxxLsmZOuU8jRHrGV/MnMKeDqL
-         KtMQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVGakKyFvwXsYQ6QgHBBLze6q0RZ+k2b/M3yew/i4CYoXLPttzfWVjbIF5fTEMyi/cgCm8vZR1QOy0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YydYtt1O9xX/ulpTUg4rbn6d7LQ6AgUFUTenbYtijMCykof2zRS
-	nz/LX6+4Gb3dZnkx2dkNUheonDjl/cKXSGufHjZ39cgQodp4lncDcICJmU28SZ2ZkA==
-X-Gm-Gg: ASbGncsq9j6VQc38bYaXfPRYo/CnzKRCB1uZtGByFoUroSbWZhhlLeFxCEM6mNyUkcv
-	ucViPRweIQss01m2LQpUkq95X3cmNyeKpqNtUryxdZnyp0b5WuGsC3rbgQYcrBjF2AqoruDvlXn
-	dSLD07qKc9jOf8VdqvwDvkTpZz9GUjBw4k0uhPpQezD4ntmkygX/MIYX+6lWVN5r5PxuKW/BZWU
-	Du80FJQEkTHyfwDG/fh+eDlEVseTJciJY2agZRhMg+9XPsA6gtIQVzXSwMZY0MJ7UP4Q3rSIbno
-	84zjFNLYNprW8XLP5ax6G1BHoyyU1TVJESoWHDTu2UmNTaHra9axh1i3AuSz4W1wn3Q+hF9ivbo
-	KEV/nbU+XMwlcWj/WyAPqEsEU0IwbSF/Oju+cuSWfcO8jE02Os+mvOS6BKaOi82OiHmW38M6hE4
-	7smD9K0xvLqOcYeb0n4iS5SkH9wwbzT/ZPtCJ5eLcxgrKW6cdce8Dq2ymHRVHZB9RtKk0Ju9x8a
-	Vv0X9fj8y4OnHjsSAkz4rdxdrpvZEER8XY53g==
-X-Google-Smtp-Source: AGHT+IG2U3PMGkNQQCcqiCvmR+tiG4atE0kkbDtxKYB0IZ/Q6/XYA3RGptxpGDhxWVRCNv3ivM5wVA==
-X-Received: by 2002:a05:6000:178c:b0:42b:4081:ccea with SMTP id ffacd0b85a97d-42b4bdaacbdmr1238512f8f.35.1762931158498;
-        Tue, 11 Nov 2025 23:05:58 -0800 (PST)
-Message-ID: <0192173c-c88d-4f73-95fc-5ae2ab3a0bb1@suse.com>
-Date: Wed, 12 Nov 2025 08:05:56 +0100
+X-Inumbo-ID: 62a680f2-bf96-11f0-9d18-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1762931305; x=1763201305;
+	bh=Oa4yrycR7NIuFObzqDKHG41ZmuCJzPot29fGUbt2GPo=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=S7rkVGk4NzzMc0ty25NVhMX/EhcVew8Ob4VNw/upJv/qQanYMyaGKbhAxTs81dAZC
+	 ilfhl58S68VkjJlFm+TMaSNcb+ACWsShm9VPOE7dJ0btyuUSkUohR5R3DLNlGtgsTg
+	 npCrVykHtBf4aurJa+h2YRglJcUK5ST6kd4nEn9iHk2ZlJXyGWh7SYbt3XHUMY9GZq
+	 aOWDki8LWD/Ul69G7UI14+bbmihWSV0R3x10a9uzFfaBDLKOGJUJMznkMl1ejQyUJk
+	 ij0YBwFWvxzaGRla9YbpZEeaXyHhS4cUZdfNw5bqkfrcdeAqohAp63Oyn1TtkddUQd
+	 Rny6FWxhOoiSQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1762931305; x=1763191805; i=ngoc-tu.dinh@vates.tech;
+	bh=Oa4yrycR7NIuFObzqDKHG41ZmuCJzPot29fGUbt2GPo=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=CSaW4rK3iIQVvqUAoWd633BSSoDHptDkDEdj2ruoBlm5hPC/ufnF5yFixOOFIkwcD
+	 yVh9/x34UBfXUSiN2xKtlq1aRWdVy3X7eUyLuB1Nhu+PLUPyxEG9iV0MRkvGV5dE+O
+	 DL+w1lU+2yZnxqYgn1d1VCBlHvGftzY/KxMxPKTLeyZHkdyT5CVzL4WGjFXDHtFtQA
+	 zsSbz5RYNU5h6hI5LgSDURVOrbiBczJIi5wqeGj7Zwl1RVc9Qf+6pVkz/kP6jxKL4W
+	 4YoQMDFez2fdMUJ+GIjJBK/7qBhiGQPqXQw56qZfo21LzBUEkHN35QQ3fenwACL3Dm
+	 ztHN7jggUy6YA==
+From: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
+Subject: =?utf-8?Q?[PATCH]=20xen:=20Expose=20time=5Foffset=20in=20struct=20arch=5Fshared=5Finfo?=
+X-Mailer: git-send-email 2.51.2.windows.1
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1762931304036
+To: xen-devel@lists.xenproject.org
+Cc: "Anthony PERARD" <anthony.perard@vates.tech>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Bertrand Marquis" <bertrand.marquis@arm.com>, "Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>, "Tu Dinh" <ngoc-tu.dinh@vates.tech>
+Message-Id: <20251112070815.545-1-ngoc-tu.dinh@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.d068692f474a423bb6591a33a5e4c6c5?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20251112:md
+Date: Wed, 12 Nov 2025 07:08:25 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] config: remove stale definition from Config.mk
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20251111161959.13667-1-jgross@suse.com>
- <20251111161959.13667-2-jgross@suse.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20251111161959.13667-2-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 11.11.2025 17:19, Juergen Gross wrote:
-> buildmakevars2shellvars is used nowhere, so remove it.
+time_offset is currently always added to wc_sec. This means that without
+the actual value of time_offset, guests have no way of knowing what's
+the actual host clock. Once the guest clock drifts beyond 1 second,
+updates to the guest RTC would themselves change time_offset and make it
+impossible to resync guest time to host time.
 
-Amends: 1eb944f65055 ("tools: remove qemu-traditional")
+Since there's no way to add more fields to struct shared_info, the
+addition has to be done through struct arch_shared_info instead. Add two
+fields in arch_shared_info representing time_offset's low and high
+32-bit halves.
 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+Provide a new feature bit XENFEAT_shared_info_time_offset for this
+functionality.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+---
+ tools/include/xen-foreign/reference.size | 5 ++---
+ xen/common/kernel.c                      | 3 ++-
+ xen/common/time.c                        | 5 +++++
+ xen/include/public/arch-arm.h            | 2 ++
+ xen/include/public/arch-ppc.h            | 3 +++
+ xen/include/public/arch-riscv.h          | 3 ++-
+ xen/include/public/arch-x86/xen.h        | 3 +++
+ xen/include/public/features.h            | 5 +++++
+ 8 files changed, 24 insertions(+), 5 deletions(-)
+
+diff --git a/tools/include/xen-foreign/reference.size b/tools/include/xen-foreign/reference.size
+index 11a06a7a43..38e799617a 100644
+--- a/tools/include/xen-foreign/reference.size
++++ b/tools/include/xen-foreign/reference.size
+@@ -9,6 +9,5 @@ vcpu_guest_context        |     352     352    2800    5168
+ arch_vcpu_info            |       0       0      24      16
+ vcpu_time_info            |      32      32      32      32
+ vcpu_info                 |      48      48      64      64
+-arch_shared_info          |       0       0      28      48
+-shared_info               |    1088    1088    2344    3136
+-
++arch_shared_info          |       8       8      36      56
++shared_info               |    1096    1096    2352    3144
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index e6979352e1..dbd2cf9c76 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -676,7 +676,8 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ #ifdef CONFIG_X86
+                         (1U << XENFEAT_vcpu_time_phys_area) |
+ #endif
+-                        (1U << XENFEAT_runstate_phys_area);
++                        (1U << XENFEAT_runstate_phys_area) |
++                        (1U << XENFEAT_shared_info_time_offset);
+             if ( VM_ASSIST(d, pae_extended_cr3) )
+                 fi.submap |= (1U << XENFEAT_pae_pgdir_above_4gb);
+             if ( paging_mode_translate(d) )
+diff --git a/xen/common/time.c b/xen/common/time.c
+index c873b5731b..0f38b1342d 100644
+--- a/xen/common/time.c
++++ b/xen/common/time.c
+@@ -118,6 +118,11 @@ void update_domain_wallclock_time(struct domain *d)
+     shared_info(d, wc_sec_hi) = sec >> 32;
+ #endif
+ 
++    shared_info(d, arch.time_offset) =
++        (uint32_t)(uint64_t)d->time_offset.seconds;
++    shared_info(d, arch.time_offset_hi) =
++        (uint32_t)((uint64_t)d->time_offset.seconds >> 32);
++
+     smp_wmb();
+     *wc_version = version_update_end(*wc_version);
+ 
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index b31324f8d4..2f34fb409b 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -363,6 +363,8 @@ struct arch_vcpu_info {
+ typedef struct arch_vcpu_info arch_vcpu_info_t;
+ 
+ struct arch_shared_info {
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ typedef uint64_t xen_callback_t;
+diff --git a/xen/include/public/arch-ppc.h b/xen/include/public/arch-ppc.h
+index 4ca453a284..5bb47e09d3 100644
+--- a/xen/include/public/arch-ppc.h
++++ b/xen/include/public/arch-ppc.h
+@@ -92,6 +92,9 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ 
+ struct arch_shared_info {
+     uint64_t boot_timebase;
++
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ 
+ struct arch_vcpu_info {
+diff --git a/xen/include/public/arch-riscv.h b/xen/include/public/arch-riscv.h
+index 168263b920..e502aade99 100644
+--- a/xen/include/public/arch-riscv.h
++++ b/xen/include/public/arch-riscv.h
+@@ -65,8 +65,9 @@ struct arch_vcpu_info {
+ };
+ typedef struct arch_vcpu_info arch_vcpu_info_t;
+ 
+-/* TODO:  add a placeholder entry if no real ones surface */
+ struct arch_shared_info {
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ 
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
+index b99a691706..598af31e4e 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -263,6 +263,9 @@ struct arch_shared_info {
+     /* There's no room for this field in the generic structure. */
+     uint32_t wc_sec_hi;
+ #endif
++
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ 
+diff --git a/xen/include/public/features.h b/xen/include/public/features.h
+index 8801930947..b48591c17a 100644
+--- a/xen/include/public/features.h
++++ b/xen/include/public/features.h
+@@ -128,6 +128,11 @@
+  */
+ #define XENFEAT_dm_msix_all_writes        20
+ 
++/*
++ * arch_shared_info provides time_offset and time_offset_hi
++ */
++#define XENFEAT_shared_info_time_offset   21
++
+ #define XENFEAT_NR_SUBMAPS 1
+ 
+ #endif /* __XEN_PUBLIC_FEATURES_H__ */
+-- 
+2.43.0
+
+
+
+--
+Ngoc Tu Dinh | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
