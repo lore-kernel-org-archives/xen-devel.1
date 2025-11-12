@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBCCCCF9F8
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 10:43:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1159680.1487989 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DF1CCF9F8
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Nov 2025 10:52:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1159698.1488028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ8Jo-0004uh-3f; Wed, 12 Nov 2025 10:43:16 +0000
+	id 1vJ8SA-0007Mo-Ol; Wed, 12 Nov 2025 10:51:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1159680.1487989; Wed, 12 Nov 2025 10:43:16 +0000
+Received: by outflank-mailman (output) from mailman id 1159698.1488028; Wed, 12 Nov 2025 10:51:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJ8Jn-0004ua-Vy; Wed, 12 Nov 2025 10:43:15 +0000
-Received: by outflank-mailman (input) for mailman id 1159680;
- Wed, 12 Nov 2025 10:43:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vJ8SA-0007Ma-KT; Wed, 12 Nov 2025 10:51:54 +0000
+Received: by outflank-mailman (input) for mailman id 1159698;
+ Wed, 12 Nov 2025 10:51:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DUs6=5U=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1vJ8Jm-0004uU-EN
- for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 10:43:14 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 602d0799-bfb4-11f0-980a-7dc792cee155;
- Wed, 12 Nov 2025 11:43:08 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7755A1515;
- Wed, 12 Nov 2025 02:42:59 -0800 (PST)
-Received: from [10.57.41.24] (unknown [10.57.41.24])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A008F3F5A1;
- Wed, 12 Nov 2025 02:43:00 -0800 (PST)
+ <SRS0=ulhw=5U=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
+ id 1vJ8S8-0006fP-Tl
+ for xen-devel@lists.xenproject.org; Wed, 12 Nov 2025 10:51:52 +0000
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [2a01:111:f403:c201::6])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 97c28258-bfb5-11f0-9d18-b5c5bf9af7f9;
+ Wed, 12 Nov 2025 11:51:50 +0100 (CET)
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by PAWPR03MB9786.eurprd03.prod.outlook.com
+ (2603:10a6:102:2e8::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Wed, 12 Nov
+ 2025 10:51:47 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9298.015; Wed, 12 Nov 2025
+ 10:51:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,234 +49,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 602d0799-bfb4-11f0-980a-7dc792cee155
-Message-ID: <cdb4b97a-415b-4dba-877b-0cd570381a6d@arm.com>
-Date: Wed, 12 Nov 2025 11:42:58 +0100
+X-Inumbo-ID: 97c28258-bfb5-11f0-9d18-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UIunFsVEGYhcl5IVW48zB1HszazKjgssxNQVOZ5Uq/Wkcws+2wpKqvgOW31V2Df2pCn3UdQ6Fm1gU1VgQYRi7nPBNWUuQ3rxf7rcAGD3qfLzmb6KblZ4Tm9aFNH7bB0eJO/Aba38ICypVDrsRVTDsmtZohXh/ndVmhPoLH8WmisxK6cyxJXYuNVjhFfJBwwpzPeqMPMVwQQ6NJOf9nndgCIU7WQkTi7gHo/nqFZlJUvPW+gJ9Nvy2l+hIZH+1YS7o2MaxXzzWIqQ7v6bIUhT0b4FVRitw9rRGYviG9OTYM1ClKORpXtR+aF/GLYJ5/tmZNzmy6+529pynHP/Kf+rjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0NqkjAuClLmD7EKX2Kq8rTElBLtaqpCAVge0cueom7o=;
+ b=N4/WcQHSsZVyhLsciYsN4EXyoyTRoWqp0vKfXGe/rh9ro3vwWN6DMTbDPLg7Kpxfv3YzEGG6kzsh/0P2XsAfom2r7RQD9uKkydMA0SXCS3n7Cozx/5AIE1D2al5/zSXKIGZrWxM56Egzor/320Tf2QuRrdUTIZ+D2DUhM6ta2aRNyo9pZKlWWOOIBjoeT1Rn5s7tkVxhGTbXWvlPt0vIsCGi93nP/N4gXddrrrSj5WyzNO+cFaq9q0K1gkB95UI03HhMrGsmJvBgoHhyXCg9O0oEBYVkUlqOX+MouFJZUM21eUbgcttGOfoshpmIteByoTwm+Zx1qm6VbZZFhv9i5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0NqkjAuClLmD7EKX2Kq8rTElBLtaqpCAVge0cueom7o=;
+ b=K/w1Rzv51YJ/zNYvo6FwMOOIVOCiurge7rM7thqvlBhdkePMUBe3iDvB+UdKy+bTK3iyMD9rNKKRNHZBbezG8klZjIWpAi8OrEt1uCszwfpdMSx8WQjDQNo+8Fg/hR8QkIP2ioNy8tApCrRMw1QKqZlBiz/wJiU8+bWkgtBtpiPjkKwAot6WAH/VQDq6Ba+7KagOzgzvP7D+K/zZaJ6oFbqSu0vpJWTqhpa1gd0Wf/t21a2fJIU9Tmapu1Jrkh8eeVd/gKPfmNWqRQ7sd/SE/g/6+HLetqbClMt2+6oKWP5iB9CSX+xwP7sx/sNjxz4Msr1Tw3G7pTEgad91Fca6KQ==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v4 3/8] arm/irq: Keep track of irq affinities
+Thread-Topic: [PATCH v4 3/8] arm/irq: Keep track of irq affinities
+Thread-Index: AQHcU8JXa8Kfz7C3KE+RoTRetAsLUA==
+Date: Wed, 12 Nov 2025 10:51:47 +0000
+Message-ID:
+ <a467474ba2476ff85c52483f47ac1ba6a67a7a22.1762939773.git.mykyta_poturai@epam.com>
+References: <cover.1762939773.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1762939773.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PAWPR03MB9786:EE_
+x-ms-office365-filtering-correlation-id: e783116c-4e85-46f4-22e6-08de21d97a6c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700021;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?cd20ZZNR6TSzY+/yHhwLVYz+2LfditFAn5Ep/rs5LVI24cKX+oeM4vEckf?=
+ =?iso-8859-1?Q?zfCMbT8s9+ripUjWpUwnjbdjnzp70ZIaSUgrScrpPGLyAjI5fPTfAwqw3l?=
+ =?iso-8859-1?Q?0ud5XdQJdl0LR7kBCVfpZ0C6mdmZCYNpGv7ezK59254h1+yF+o5cja3yjV?=
+ =?iso-8859-1?Q?bq6D8iTERsxrBLBUgVfuVip6Q5DfmCOLnxD70E6EQyD0jRvc+CpXQL45gd?=
+ =?iso-8859-1?Q?LVAFJPz1R7KZ5AfmQjFynf+HrGeBABQS3B39E94+rgfp5kC8L1+Oy4R2Ol?=
+ =?iso-8859-1?Q?nE13SWQPuvZf5RH69j7B9WshIOb6D9URaCYYgxfb/hlQ2RwdAHtXbCCauj?=
+ =?iso-8859-1?Q?JB50NVWYIZeeI9rowsjUfMAoE7Z2pi+eCoSWWIyLEGkYSjAFfl2SJ+BhTl?=
+ =?iso-8859-1?Q?M7dag/y30WUpWDgI4LH/XYQM7FgRDyzM2ZjG2ykjwfeJfvHBMNgBA6j3AR?=
+ =?iso-8859-1?Q?cI1e1DYVDn+Wot0//lwJU49PBeSf877ixkr7fHop4Aq5VlUhh3LfW8MszQ?=
+ =?iso-8859-1?Q?7YH2WAzPvzWt6J1ltaSy0L8o5CtuOtywHWNzn8n2i0LiTwyJWYOyZoM24Y?=
+ =?iso-8859-1?Q?rCITe+2J6CRKiacqe4dRvZSkViy+Hq/j7M9EFaDZjlmFQaAn0343eZlOGQ?=
+ =?iso-8859-1?Q?qaEJvFTfp77Lz79Wik8El3rHZ5oG4yrePwMzhRZkae31CJBACgwt7FgjSG?=
+ =?iso-8859-1?Q?pV8wjPCtWa7hJZuz/wdeRxao9Ge4C1GIYXRo57T5+R4HWd4gtcWXMwDkg/?=
+ =?iso-8859-1?Q?tJXrJiooB0p8ZYRvFJo2yN6Ln5O3ysh4z5U/VNVEXiaDN1YyEmHcCE45O+?=
+ =?iso-8859-1?Q?slGBpzh1r49Tb5q6rxx1u2rclH5E6Cc1myKjAaVnwfZ6rxlgAZtfQ+mLTF?=
+ =?iso-8859-1?Q?jpoIAX8UR8mJ/6UJPhhq036PRJmTqbTwM+1i0thtBGj71bfCI7wlMMM7XA?=
+ =?iso-8859-1?Q?i74pO1GPCK11T8bBli1Xm6ntMXEzRLy1tiArZLm27lvOda034qzQ4HKzy7?=
+ =?iso-8859-1?Q?XYezl7x6ly3jzYlURBKOUw52l/TrglXPJ7vtIltF/lr66Dz7WsSq/S8Std?=
+ =?iso-8859-1?Q?pX8wE7oYQSwWxSsbrOBmFo6uFoRqNOpfK05YRrwYD5OsC7i3ikk0EMZQ7C?=
+ =?iso-8859-1?Q?qr1DHz+GL2VZSuT/DhbsFzuLpYgLtKDOpgxon+17GHbGVmwllPs5VOlVhF?=
+ =?iso-8859-1?Q?UfDxAy2a5WtUVQAINTdX0XZ/VBXVBU5PUd8Y2acbdgrSGi3HzsP5eqzoV7?=
+ =?iso-8859-1?Q?4moAUFF16W5QumNuZpgn0y3VDt6WB5+n/9rksCM/XupSgjQ9y0FwJeA9jL?=
+ =?iso-8859-1?Q?tiIIcLnrxbbzBPIL6yViXFLMuJybnR3LY/wskH1eBXqgI7pIfi49UrsPHj?=
+ =?iso-8859-1?Q?lUh/svQj5/FEuhIhTFhCVqQ3Ya9TADA5u5d2lOCYf1cZ8qTxKRVKtgEQXL?=
+ =?iso-8859-1?Q?50fdCnIVOYXNIFmVYDzh8ZOeci9s/+kgPjMhn6pGrsDSVhLk9uZQVF5n4K?=
+ =?iso-8859-1?Q?8TPya89Cvtg/Sy3wGh2ThzowEVwQo/ZsbMAeXs8LEwz+2kyZ0uKlggvIAI?=
+ =?iso-8859-1?Q?iWVNC3Acrt2m5X/GPCMJZys2UVDy?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?BeOiBqAv4PR6fLUNmvFCELM0iCmFPeNqKu3hMf4S9Ge9akJBjDqmsSboKE?=
+ =?iso-8859-1?Q?zYILBFU2xKspoVF/D8ZbUk9YvhdOEzin6ElvRuUbdEgLa52f0YRjXEt8Mu?=
+ =?iso-8859-1?Q?LleWiJri8/EfHAvn1scOHgIcLzvSJmU6zYklbi6Y/+U05n9xSiNiX8z3BF?=
+ =?iso-8859-1?Q?kpPwppRaUHPz784x4hk/ysjqWP1d+lObm4O/Y4HFHUDgTnSk29BAKlWmr2?=
+ =?iso-8859-1?Q?Dxsq1awtMRtD09ur5Z0QpczRxNLiECJ77gLXk290lW/1ZYOOS+rbyCdwpk?=
+ =?iso-8859-1?Q?8RHTxqngykCoOGk7LfVlhoB1XHSctHxfMVT/6ZRNt3lVUsMMQ57tUZuCq9?=
+ =?iso-8859-1?Q?yrh4tM4xkXKPdc9r866NQlLKbMUqIYUkGjBKq/pC4c4tK1rc0evMnqHUoL?=
+ =?iso-8859-1?Q?N3TAy2FM+N1bAx47eARqf43hPbM9dqzR6UJOMvp7RiV99oi+0zO6ZjP4XF?=
+ =?iso-8859-1?Q?iTv8ui9uxXNwPJdtLveVOr3BxdCzkkGSj99WlciD1vwAOAkjxulQnvNluW?=
+ =?iso-8859-1?Q?nbrDYe3rqO+6WZtzWwsCFYclQ0qsyMXa9P5eah9tj9k/51A7Patwn4IBvp?=
+ =?iso-8859-1?Q?qvKebqTB8XFT3rU/cAmjYGdXAN+XSZNX3H2h+P81R0OdGckfNVYg4MIUy6?=
+ =?iso-8859-1?Q?L4klAtLptUo27pqMRshdNbYV0zWVOl7/t0LBtV/a59yRJo0TWaxJt4Orlh?=
+ =?iso-8859-1?Q?Rpet6LGH6ktbzQOq3x+eYp8yr9KDuEU9WwXb2faASgLAUXR9kIMoDldqVa?=
+ =?iso-8859-1?Q?a+MhdwAn8wizGOT3OBSmHAUPOJh+L4901fttqNpmhdngamewgMZL4BUmwm?=
+ =?iso-8859-1?Q?FAi+Hn4SPMeWe6umjZW3dkWWOASJIghjG6p/UxawouPmrHS8zydmmwWb5X?=
+ =?iso-8859-1?Q?T3zBjc/07dT8IUCs/AnSr4TQvxmgTLHJQqTxsFNcKYIXpn6zrpbLtiPn/7?=
+ =?iso-8859-1?Q?rx9PkpxKnkmopbCHgbceUSB2gmuJaEAf9ohvMHUeby3V961vdYsg6N5g/V?=
+ =?iso-8859-1?Q?QF7dQWQ6jFPFvs8dRDatIaFYrT4gNrNAIyJgMXiyU068VBLrqkZFSypWEw?=
+ =?iso-8859-1?Q?r2UH7o4gBp/EngWkKSxBeSWsFwFZxGFVr5TJ01/mh/JXW8FztjDFk4rj/Y?=
+ =?iso-8859-1?Q?wFCTAubC8N4VnR4KKOldGkxVQKqlCotiBx4lwKccn3KNOKos4W3V2P3eYF?=
+ =?iso-8859-1?Q?fy4LYX4+njVu6zWNOhdTJjWESsqHxe11FpwiO23ctV9c4By97PIKjjhwrA?=
+ =?iso-8859-1?Q?0raPfl6uulj3oEhq138ApfyG8IQAWCs9uIiwaJAxG1iOp23IixeCSwvcS4?=
+ =?iso-8859-1?Q?rvNIMp0sXl7Hx5lbGokCVFgPOOkZtTy8db1IeF8P+GebYWKqqvYHBcyz1S?=
+ =?iso-8859-1?Q?PbNN6vEQmMPCo19BqdSCnk3tW7cFURAUPDtnZsUkqXbh0xV+1esUwQUuRt?=
+ =?iso-8859-1?Q?VMkLykKiP8L4z5P9A/hNNw3zHRI9L4hzMTi0QUWYNoW+FG+8rA6OrPfeu7?=
+ =?iso-8859-1?Q?O0EZPUzAiK+v7OJ+Bo5W85yECWTL0/WXDoFib5CBCY7fp/4gN26481AdkH?=
+ =?iso-8859-1?Q?PS4i2LQglI8ASq5OITroBUis8k8Ti69SNrrz5tQi9V9y4PJp3KmZrmjGUB?=
+ =?iso-8859-1?Q?Jr7+/RvVxHfF+v0N0ky0bDvITMNbWZejiUqTgjYNZNgEL7GYBiWm+0CA?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 07/12] mm: enable lazy_mmu sections to nest
-To: Ryan Roberts <ryan.roberts@arm.com>, linux-mm@kvack.org,
- David Hildenbrand <david@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Alexander Gordeev <agordeev@linux.ibm.com>,
- Andreas Larsson <andreas@gaisler.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Borislav Petkov
- <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- "David S. Miller" <davem@davemloft.net>,
- David Woodhouse <dwmw2@infradead.org>, "H. Peter Anvin" <hpa@zytor.com>,
- Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
- Juergen Gross <jgross@suse.com>, "Liam R. Howlett"
- <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Michal Hocko <mhocko@suse.com>,
- Mike Rapoport <rppt@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
- Peter Zijlstra <peterz@infradead.org>, Suren Baghdasaryan
- <surenb@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Vlastimil Babka <vbabka@suse.cz>, Will Deacon <will@kernel.org>,
- Yeoreum Yun <yeoreum.yun@arm.com>, linux-arm-kernel@lists.infradead.org,
- linuxppc-dev@lists.ozlabs.org, sparclinux@vger.kernel.org,
- xen-devel@lists.xenproject.org, x86@kernel.org
-References: <20251029100909.3381140-1-kevin.brodsky@arm.com>
- <20251029100909.3381140-8-kevin.brodsky@arm.com>
- <999feffa-5d1d-42e3-bd3a-d949f2a9de9d@arm.com>
- <cc9dc398-b9c5-4bb8-94ad-7e7f3ddd5b4f@arm.com>
- <824bf705-e9d6-4eeb-9532-9059fa56427f@arm.com>
- <58fd1a6e-f2c4-421c-9b95-dea4b244a515@arm.com>
- <8f70692c-25a9-4bd0-94ab-43ab435e4b1b@arm.com>
-From: Kevin Brodsky <kevin.brodsky@arm.com>
-Content-Language: en-GB
-In-Reply-To: <8f70692c-25a9-4bd0-94ab-43ab435e4b1b@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e783116c-4e85-46f4-22e6-08de21d97a6c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Nov 2025 10:51:47.7457
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: vjAZlfqUelx24C+9gUWiL7EBWMITQoeijk/CnzJKWnNnLbKHzuLz3VQEmX6vE2cEGwYvqA1j2dJXGnia6Dwgeg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB9786
 
-On 11/11/2025 17:03, Ryan Roberts wrote:
-> On 11/11/2025 15:56, Kevin Brodsky wrote:
->> On 11/11/2025 10:24, Ryan Roberts wrote:
->>> [...]
->>>
->>>>>> +		state->active = true;
->>>>>> +		arch_enter_lazy_mmu_mode();
->>>>>> +	}
->>>>>>  }
->>>>>>  
->>>>>>  static inline void lazy_mmu_mode_disable(void)
->>>>>>  {
->>>>>> -	arch_leave_lazy_mmu_mode();
->>>>>> +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
->>>>>> +
->>>>>> +	VM_WARN_ON_ONCE(state->nesting_level == 0);
->>>>>> +	VM_WARN_ON(!state->active);
->>>>>> +
->>>>>> +	if (--state->nesting_level == 0) {
->>>>>> +		state->active = false;
->>>>>> +		arch_leave_lazy_mmu_mode();
->>>>>> +	} else {
->>>>>> +		/* Exiting a nested section */
->>>>>> +		arch_flush_lazy_mmu_mode();
->>>>>> +	}
->>>>>>  }
->>>>>>  
->>>>>>  static inline void lazy_mmu_mode_pause(void)
->>>>>>  {
->>>>>> +	struct lazy_mmu_state *state = &current->lazy_mmu_state;
->>>>>> +
->>>>>> +	VM_WARN_ON(state->nesting_level == 0 || !state->active);
->>>>> nit: do you need the first condition? I think when nesting_level==0, we expect
->>>>> to be !active?
->>>> I suppose this should never happen indeed - I was just being extra
->>>> defensive.
->>>>
->>>> Either way David suggested allowing pause()/resume() to be called
->>>> outside of any section so the next version will bail out on
->>>> nesting_level == 0.
->>> Ignoring my current opinion that we don't need pause/resume at all for now; Are
->>> you suggesting that pause/resume will be completely independent of
->>> enable/disable? I think that would be best. So enable/disable increment and
->>> decrement the nesting_level counter regardless of whether we are paused.
->>> nesting_level 0 => 1 enables if not paused. nesting_level 1 => 0 disables if not
->>> paused. pause disables nesting_level >= 1, resume enables if nesting_level >= 1.
->> This is something else. Currently the rules are:
->>
->> [A]
->>
->> // pausing forbidden
->> enable()
->>     pause()
->>     // pausing/enabling forbidden
->>     resume()
->> disable()
->>
->> David suggested allowing:
->>
->> [B]
->>
->> pause()
->> // pausing/enabling forbidden
->> resume()
->>
->> Your suggestion is also allowing:
->>
->> [C]
->>
->> pause()
->>     // pausing forbidden
->>     enable()
->>     disable()
->> resume()
-> I think the current kasan kasan_depopulate_vmalloc_pte() path will require [C]
-> if CONFIG_DEBUG_PAGEALLOC is enabled on arm64. It calls __free_page() while
-> paused. I guess CONFIG_DEBUG_PAGEALLOC will cause __free_page() ->
-> debug_pagealloc_unmap_pages() ->->-> update_range_prot() -> lazy_mmu_enable().
+Currently on Arm the desc->affinity mask of an irq is never updated,
+which makes it hard to know the actual affinity of an interrupt.
 
-Well, I really should have tried booting with KASAN enabled before...
-lazy_mmu_mode_enable() complains exactly as you predicted:
+Fix this by updating the field in irq_set_affinity.
 
-> [    1.047587] WARNING: CPU: 0 PID: 1 at include/linux/pgtable.h:273
-> update_range_prot+0x2dc/0x50c
-> [    1.048025] Modules linked in:
-> [    1.048296] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted
-> 6.18.0-rc3-00012-ga901e7f479f1 #142 PREEMPT
-> [    1.048706] Hardware name: FVP Base RevC (DT)
-> [    1.048941] pstate: 11400009 (nzcV daif +PAN -UAO -TCO +DIT -SSBS
-> BTYPE=--)
-> [    1.049309] pc : update_range_prot+0x2dc/0x50c
-> [    1.049631] lr : update_range_prot+0x80/0x50c
-> [    1.049950] sp : ffff8000800e6f20
-> [    1.050162] x29: ffff8000800e6fb0 x28: ffff700010014000 x27:
-> ffff700010016000
-> [    1.050747] x26: 0000000000000000 x25: 0000000000000001 x24:
-> 00000000008800f7
-> [    1.051308] x23: 0000000000000000 x22: fff00008000f7000 x21:
-> fff00008003009f8
-> [    1.051884] x20: fff00008000f8000 x19: 1ffff0001001cdea x18:
-> ffff800080769000
-> [    1.052469] x17: ffff95c63264ec00 x16: ffff8000800e7504 x15:
-> 0000000000000003
-> [    1.053045] x14: ffff95c63482f000 x13: 0000000000000000 x12:
-> ffff783ffc0007bf
-> [    1.053620] x11: 1ffff83ffc0007be x10: ffff783ffc0007be x9 :
-> dfff800000000000
-> [    1.054203] x8 : fffd80010001f000 x7 : ffffffffffffffff x6 :
-> 0000000000000001
-> [    1.054776] x5 : 0000000000000000 x4 : fff00008003009f9 x3 :
-> 1ffe00010006013f
-> [    1.055348] x2 : fff0000800300000 x1 : 0000000000000001 x0 :
-> 0000000000000000
-> [    1.055912] Call trace:
-> [    1.056100]  update_range_prot+0x2dc/0x50c (P)
-> [    1.056478]  set_memory_valid+0x44/0x70
-> [    1.056850]  __kernel_map_pages+0x68/0xe4
-> [    1.057226]  __free_frozen_pages+0x528/0x1180
-> [    1.057601]  ___free_pages+0x11c/0x160
-> [    1.057961]  __free_pages+0x14/0x20
-> [    1.058307]  kasan_depopulate_vmalloc_pte+0xd4/0x184
-> [    1.058748]  __apply_to_page_range+0x678/0xda8
-> [    1.059149]  apply_to_existing_page_range+0x14/0x20
-> [    1.059553]  kasan_release_vmalloc+0x138/0x200
-> [    1.059982]  purge_vmap_node+0x1b4/0x8a0
-> [    1.060371]  __purge_vmap_area_lazy+0x4f8/0x870
-> [    1.060779]  _vm_unmap_aliases+0x488/0x6ec
-> [    1.061176]  vm_unmap_aliases+0x1c/0x34
-> [    1.061567]  change_memory_common+0x17c/0x380
-> [    1.061949]  set_memory_ro+0x18/0x24
-> [...]
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
+v3->v4:
+* patch introduced
+---
+ xen/arch/arm/irq.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> Arguably you could move the resume() to before the __free_page(). But it just
-> illustrates that it's all a bit brittle at the moment...
-
-Difficult to disagree. With things like DEBUG_PAGEALLOC it becomes very
-hard to know what is guaranteed not to use lazy MMU.
-
->>> Perhaps we also need nested pause/resume? Then you just end up with 2 counters;
->>> enable_count and pause_count. Sorry if this has already been discussed.
->> And finally:
->>
->> [D]
->>
->> pause()
->>     pause()
->>         enable()
->>         disable()
->>     resume()
->> resume()
->>
->> I don't really mind either way, but I don't see an immediate use for [C]
->> and [D] - the idea is that the paused section is short and controlled,
->> not made up of arbitrary calls. 
-> If my thinking above is correct, then I've already demonstrated that this is not
-> the case. So I'd be inclined to go with [D] on the basis that it is the most robust.
->
-> Keeping 2 nesting counts (enable and pause) feels pretty elegant to me and gives
-> the fewest opportunities for surprises.
-
-Agreed, if we're going to allow enable() within a paused section, then
-we might as well allow paused sections to nest too. The use-case is
-clear, so I'm happy to go ahead and make those changes.
-
-David, any thoughts?
-
-- Kevin
-
->
-> Thanks,
-> Ryan
->
->> A potential downside of allowing [C] and
->> [D] is that it makes it harder to detect unintended nesting (fewer
->> VM_WARN assertions). Happy to implement it if this proves useful though.
->>
->> OTOH the idea behind [B] is that it allows the caller of
->> pause()/resume() not to care about whether lazy MMU is actually enabled
->> or not - i.e. the kasan helpers would keep working even if
->> apply_to_page_range() didn't use lazy MMU any more.
->>
->>>>>> +
->>>>>> +	state->active = false;
->>>>>>  	arch_leave_lazy_mmu_mode();
->>>>>>  }
->>>>>>  
->>>>>> [...]
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index 73e58a5108..28b40331f7 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -219,7 +219,10 @@ static inline struct domain *irq_get_domain(struct irq=
+_desc *desc)
+ void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
+ {
+     if ( desc !=3D NULL )
++    {
++        cpumask_copy(desc->affinity, mask);
+         desc->handler->set_affinity(desc, mask);
++    }
+ }
+=20
+ int request_irq(unsigned int irq, unsigned int irqflags,
+--=20
+2.51.2
 
