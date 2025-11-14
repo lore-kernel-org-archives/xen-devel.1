@@ -4,47 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA465CE7A9A
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Nov 2025 09:20:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1162363.1490033 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F635CE7A97
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Nov 2025 09:28:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1162378.1490044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJpyt-0005GA-Jv; Fri, 14 Nov 2025 09:20:35 +0000
+	id 1vJq62-0006BY-9f; Fri, 14 Nov 2025 09:27:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1162363.1490033; Fri, 14 Nov 2025 09:20:35 +0000
+Received: by outflank-mailman (output) from mailman id 1162378.1490044; Fri, 14 Nov 2025 09:27:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vJpyt-0005G3-HN; Fri, 14 Nov 2025 09:20:35 +0000
-Received: by outflank-mailman (input) for mailman id 1162363;
- Fri, 14 Nov 2025 09:20:34 +0000
+	id 1vJq62-0006BR-6w; Fri, 14 Nov 2025 09:27:58 +0000
+Received: by outflank-mailman (input) for mailman id 1162378;
+ Fri, 14 Nov 2025 09:27:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=o/3C=5W=csgroup.eu=christophe.leroy@srs-se1.protection.inumbo.net>)
- id 1vJpys-0005Fx-Kz
- for xen-devel@lists.xenproject.org; Fri, 14 Nov 2025 09:20:34 +0000
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 2bfd335c-c13b-11f0-9d18-b5c5bf9af7f9;
- Fri, 14 Nov 2025 10:20:33 +0100 (CET)
-Received: from localhost (mailhub4.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4d7B3S6g5lz9sSm;
- Fri, 14 Nov 2025 10:02:12 +0100 (CET)
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Jh3Mqk4UdkM3; Fri, 14 Nov 2025 10:02:12 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4d7B3P5h7Hz9sSt;
- Fri, 14 Nov 2025 10:02:09 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 940058B770;
- Fri, 14 Nov 2025 10:02:09 +0100 (CET)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id WOt_dcMEhEst; Fri, 14 Nov 2025 10:02:09 +0100 (CET)
-Received: from [192.168.235.99] (unknown [192.168.235.99])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id DCFEA8B76E;
- Fri, 14 Nov 2025 10:02:07 +0100 (CET)
+ <SRS0=0Jk/=5W=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vJq60-0006BG-M0
+ for xen-devel@lists.xenproject.org; Fri, 14 Nov 2025 09:27:56 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2c7b551e-c13c-11f0-9d18-b5c5bf9af7f9;
+ Fri, 14 Nov 2025 10:27:43 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b6d402422c2so272134866b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 14 Nov 2025 01:27:43 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-71-38.play-internet.pl.
+ [109.243.71.38]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b734fad44b4sm351744066b.28.2025.11.14.01.27.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Nov 2025 01:27:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,408 +47,396 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bfd335c-c13b-11f0-9d18-b5c5bf9af7f9
-X-Virus-Scanned: amavisd-new at c-s.fr
-X-Virus-Scanned: amavisd-new at c-s.fr
-Message-ID: <83cdd7e8-51a7-4989-b270-93cec301cde7@csgroup.eu>
-Date: Fri, 14 Nov 2025 10:02:07 +0100
+X-Inumbo-ID: 2c7b551e-c13c-11f0-9d18-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763112463; x=1763717263; darn=lists.xenproject.org;
+        h=in-reply-to:content-language:references:cc:to:subject:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MVKERs91mOCm7IAcUp0XjHIoVNY8W/5iSvj/CJSrAxM=;
+        b=m7fSZgu1dsIumR+9NdtmGqzS2CajQPzp9SAOe8rtk4ZndLgFtALv8WhsxFTbEVZBxa
+         n2dPqi5aivvJbDs9IsdNkA7ZwCfyyio069Xlp9E4X3p4QhEC9stXHOmpIDaTCyBOzz/E
+         yqIrv8knXoHX31hflGD8Dg+2wSCeRqS1YTBktxPX3DcYF5P3U7uW7gVTY/5eu3+GtBJ5
+         kdueu9TAxSS1gF8FdV9vayfvMH2ajT0vPMGlYt6oS6kXLNPP4YDUBFF+83r6hdBo9WOq
+         oRsO6Jv6liWpzxlvm2ZbYoAihGlkneR0bOPMjB038QQQq2pFNA2PrZue6WRjWKQZCjhq
+         HoNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763112463; x=1763717263;
+        h=in-reply-to:content-language:references:cc:to:subject:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=MVKERs91mOCm7IAcUp0XjHIoVNY8W/5iSvj/CJSrAxM=;
+        b=J8JY9JtnnuE38skqszalsWApqSVc6d7SUXwGuXdSJw1jIQGDTzVgJrXX/XxSrdcyp2
+         MiDGxPNlyPGQoRJA2MpTUzoIVgMbGMgXcCGfHjjSVrpjQjE9HlM1yZPW7SF+YPIwxYfB
+         HS0z+2iHcm/HwD79a0l2esmCXSnnyUHCe0QDtOgTSYT5DLmjkVCIHzbRdSMWm9KOyk8D
+         rcxH52V3L2e3ZjI4Z4QDkpacJVqbq5oCmJRqziiox69GKYggn0T5xudd9g72iVw5zr6s
+         rYvDaZZJFS8k372sHQjjH2G38v8sAnsoodEBL3hDdkkSneBLTkSvCaoNztFF9fluGY41
+         VTnQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUp45wHrut3DcBYetT6cYUHFTrgbBfJy0riK9XKK6rvrqJAJBvfRSpCgBMFR8hZn4ogK5g8d5v3Zfk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxDWwaWTbcxwGb6KopmmXkaw5pEqJcoDqi8XN7txJOZ4g8tlfAe
+	ty+5CwxK+08MXLxqtX1IKWWsDE++DQlZ5pYFhDusBEwBwUFAZj1YaW0k
+X-Gm-Gg: ASbGncvsILsWRcHMLrXTk2YwlY5vmMugfaaxkqIjk1sgXBtA8OGbXrKaIAF1VPiH/Td
+	uuqqZoop6qiKBHy67bK7aJDIuRTb+5yl7d4GV1PqnNeshr2lf2sdl98O1z2KrOnZa3jZaJEeinm
+	+bXWRbt2pWwEOBE0sxpe/50bJLSKApUesx3tOfNnFmrYUPvUTk7SR1A1ujP7U2lM121bO/oADfA
+	rPASpRj6bkMrnVZoKMGVCLQSVptskWgf/O5najf6oh37TODZmVm+Dj33D+AxvuHXBo/nGMjMNAC
+	xbAUVujf8cGsNpOaD2UBT8nu0OgIlq862vT+1+uFmQfhG5m2q6rTygS7nhP06GgZIBR8nlnlHjq
+	w9x2r4Nx5cjZLcwLeiAgXk3Hak4o/4BnAL+ZwGCdU7ThokEZRQMc82JIlRDiBtrOdXkrcnceALF
+	GteP9JqEc6NHrNlboYmRyuPmZZG7yMURwrT+CK0ixq/+RNmcURaw==
+X-Google-Smtp-Source: AGHT+IHEaP8TA9rtQXfFZUrU/3l/kbFb7PCQik0PalKgyIrzSacPlF2MeFnEr6vaOmM8+p5GlffotA==
+X-Received: by 2002:a17:907:da9:b0:b72:60d9:32b0 with SMTP id a640c23a62f3a-b7367828bd4mr236797866b.3.1763112461559;
+        Fri, 14 Nov 2025 01:27:41 -0800 (PST)
+Content-Type: multipart/alternative;
+ boundary="------------ihJQpW5AIiAsY4FgPUKoUE3H"
+Message-ID: <cf96c62e-cac0-4b18-9524-0703c6492453@gmail.com>
+Date: Fri, 14 Nov 2025 10:27:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 10/14] powerpc: Convert to physical address DMA mapping
-To: Leon Romanovsky <leon@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>, Russell King <linux@armlinux.org.uk>,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Matt Turner <mattst88@gmail.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>, Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Geoff Levand <geoff@infradead.org>, "David S. Miller" <davem@davemloft.net>,
- Andreas Larsson <andreas@gaisler.com>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>
-Cc: iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, xen-devel@lists.xenproject.org,
- linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- sparclinux@vger.kernel.org
-References: <20251015-remove-map-page-v5-0-3bbfe3a25cdf@kernel.org>
- <20251015-remove-map-page-v5-10-3bbfe3a25cdf@kernel.org>
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-Content-Language: fr-FR
-In-Reply-To: <20251015-remove-map-page-v5-10-3bbfe3a25cdf@kernel.org>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [for 4.22 v5 02/18] xen/riscv: introduce VMID allocation and
+ manegement
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1760974017.git.oleksii.kurochko@gmail.com>
+ <bdbe6c13991c2d166614795d43db3f71d790c00f.1760974017.git.oleksii.kurochko@gmail.com>
+ <7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com>
+Content-Language: en-US
+In-Reply-To: <7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com>
+
+This is a multi-part message in MIME format.
+--------------ihJQpW5AIiAsY4FgPUKoUE3H
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 
-
-Le 15/10/2025 à 11:12, Leon Romanovsky a écrit :
-> From: Leon Romanovsky <leonro@nvidia.com>
-> 
-> Adapt PowerPC DMA to use physical addresses in order to prepare code
-> to removal .map_page and .unmap_page.
-> 
-> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-
-Reviewed-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-
-Non fatal comments below.
-
-> ---
->   arch/powerpc/include/asm/iommu.h         |  8 ++++----
->   arch/powerpc/kernel/dma-iommu.c          | 22 ++++++++++-----------
->   arch/powerpc/kernel/iommu.c              | 14 +++++++-------
->   arch/powerpc/platforms/ps3/system-bus.c  | 33 ++++++++++++++++++--------------
->   arch/powerpc/platforms/pseries/ibmebus.c | 15 ++++++++-------
->   arch/powerpc/platforms/pseries/vio.c     | 21 +++++++++++---------
->   6 files changed, 60 insertions(+), 53 deletions(-)
-> 
-> diff --git a/arch/powerpc/include/asm/iommu.h b/arch/powerpc/include/asm/iommu.h
-> index b410021ad4c6..eafdd63cd6c4 100644
-> --- a/arch/powerpc/include/asm/iommu.h
-> +++ b/arch/powerpc/include/asm/iommu.h
-> @@ -274,12 +274,12 @@ extern void *iommu_alloc_coherent(struct device *dev, struct iommu_table *tbl,
->   				  unsigned long mask, gfp_t flag, int node);
->   extern void iommu_free_coherent(struct iommu_table *tbl, size_t size,
->   				void *vaddr, dma_addr_t dma_handle);
-> -extern dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
-> -				 struct page *page, unsigned long offset,
-> -				 size_t size, unsigned long mask,
-> +extern dma_addr_t iommu_map_phys(struct device *dev, struct iommu_table *tbl,
-> +				 phys_addr_t phys, size_t size,
-> +				 unsigned long mask,
->   				 enum dma_data_direction direction,
->   				 unsigned long attrs);
-
-'extern' is pointless for function prototypes.
-
-Report from checkpatch:
-
-CHECK: extern prototypes should be avoided in .h files
-#31: FILE: arch/powerpc/include/asm/iommu.h:277:
-+extern dma_addr_t iommu_map_phys(struct device *dev, struct iommu_table 
-*tbl,
-
-
-> -extern void iommu_unmap_page(struct iommu_table *tbl, dma_addr_t dma_handle,
-> +extern void iommu_unmap_phys(struct iommu_table *tbl, dma_addr_t dma_handle,
->   			     size_t size, enum dma_data_direction direction,
->   			     unsigned long attrs);
-
-Same:
-
-CHECK: extern prototypes should be avoided in .h files
-#37: FILE: arch/powerpc/include/asm/iommu.h:282:
-+extern void iommu_unmap_phys(struct iommu_table *tbl, dma_addr_t 
-dma_handle,
-
-
-
->   
-> diff --git a/arch/powerpc/kernel/dma-iommu.c b/arch/powerpc/kernel/dma-iommu.c
-> index 0359ab72cd3b..aa3689d61917 100644
-> --- a/arch/powerpc/kernel/dma-iommu.c
-> +++ b/arch/powerpc/kernel/dma-iommu.c
-> @@ -93,28 +93,26 @@ static void dma_iommu_free_coherent(struct device *dev, size_t size,
->   
->   /* Creates TCEs for a user provided buffer.  The user buffer must be
->    * contiguous real kernel storage (not vmalloc).  The address passed here
-> - * comprises a page address and offset into that page. The dma_addr_t
-> - * returned will point to the same byte within the page as was passed in.
-> + * is a physical address to that page. The dma_addr_t returned will point
-> + * to the same byte within the page as was passed in.
->    */
-> -static dma_addr_t dma_iommu_map_page(struct device *dev, struct page *page,
-> -				     unsigned long offset, size_t size,
-> +static dma_addr_t dma_iommu_map_phys(struct device *dev, phys_addr_t phys,
-> +				     size_t size,
->   				     enum dma_data_direction direction,
->   				     unsigned long attrs)
->   {
-> -	return iommu_map_page(dev, get_iommu_table_base(dev), page, offset,
-> -			      size, dma_get_mask(dev), direction, attrs);
-> +	return iommu_map_phys(dev, get_iommu_table_base(dev), phys, size,
-> +			      dma_get_mask(dev), direction, attrs);
->   }
->   
-> -
-> -static void dma_iommu_unmap_page(struct device *dev, dma_addr_t dma_handle,
-> +static void dma_iommu_unmap_phys(struct device *dev, dma_addr_t dma_handle,
->   				 size_t size, enum dma_data_direction direction,
->   				 unsigned long attrs)
->   {
-> -	iommu_unmap_page(get_iommu_table_base(dev), dma_handle, size, direction,
-> +	iommu_unmap_phys(get_iommu_table_base(dev), dma_handle, size, direction,
->   			 attrs);
->   }
->   
-> -
->   static int dma_iommu_map_sg(struct device *dev, struct scatterlist *sglist,
->   			    int nelems, enum dma_data_direction direction,
->   			    unsigned long attrs)
-> @@ -211,8 +209,8 @@ const struct dma_map_ops dma_iommu_ops = {
->   	.map_sg			= dma_iommu_map_sg,
->   	.unmap_sg		= dma_iommu_unmap_sg,
->   	.dma_supported		= dma_iommu_dma_supported,
-> -	.map_page		= dma_iommu_map_page,
-> -	.unmap_page		= dma_iommu_unmap_page,
-> +	.map_phys		= dma_iommu_map_phys,
-> +	.unmap_phys		= dma_iommu_unmap_phys,
->   	.get_required_mask	= dma_iommu_get_required_mask,
->   	.mmap			= dma_common_mmap,
->   	.get_sgtable		= dma_common_get_sgtable,
-> diff --git a/arch/powerpc/kernel/iommu.c b/arch/powerpc/kernel/iommu.c
-> index 244eb4857e7f..6b5f4b72ce97 100644
-> --- a/arch/powerpc/kernel/iommu.c
-> +++ b/arch/powerpc/kernel/iommu.c
-> @@ -848,12 +848,12 @@ EXPORT_SYMBOL_GPL(iommu_tce_table_put);
->   
->   /* Creates TCEs for a user provided buffer.  The user buffer must be
->    * contiguous real kernel storage (not vmalloc).  The address passed here
-> - * comprises a page address and offset into that page. The dma_addr_t
-> - * returned will point to the same byte within the page as was passed in.
-> + * is physical address into that page. The dma_addr_t returned will point
-> + * to the same byte within the page as was passed in.
->    */
-> -dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
-> -			  struct page *page, unsigned long offset, size_t size,
-> -			  unsigned long mask, enum dma_data_direction direction,
-> +dma_addr_t iommu_map_phys(struct device *dev, struct iommu_table *tbl,
-> +			  phys_addr_t phys, size_t size, unsigned long mask,
-> +			  enum dma_data_direction direction,
->   			  unsigned long attrs)
->   {
->   	dma_addr_t dma_handle = DMA_MAPPING_ERROR;
-> @@ -863,7 +863,7 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
->   
->   	BUG_ON(direction == DMA_NONE);
->   
-> -	vaddr = page_address(page) + offset;
-> +	vaddr = phys_to_virt(phys);
->   	uaddr = (unsigned long)vaddr;
->   
->   	if (tbl) {
-> @@ -890,7 +890,7 @@ dma_addr_t iommu_map_page(struct device *dev, struct iommu_table *tbl,
->   	return dma_handle;
->   }
->   
-> -void iommu_unmap_page(struct iommu_table *tbl, dma_addr_t dma_handle,
-> +void iommu_unmap_phys(struct iommu_table *tbl, dma_addr_t dma_handle,
->   		      size_t size, enum dma_data_direction direction,
->   		      unsigned long attrs)
->   {
-> diff --git a/arch/powerpc/platforms/ps3/system-bus.c b/arch/powerpc/platforms/ps3/system-bus.c
-> index afbaabf182d0..f4f3477d3a23 100644
-> --- a/arch/powerpc/platforms/ps3/system-bus.c
-> +++ b/arch/powerpc/platforms/ps3/system-bus.c
-> @@ -551,18 +551,20 @@ static void ps3_free_coherent(struct device *_dev, size_t size, void *vaddr,
->   
->   /* Creates TCEs for a user provided buffer.  The user buffer must be
->    * contiguous real kernel storage (not vmalloc).  The address passed here
-> - * comprises a page address and offset into that page. The dma_addr_t
-> - * returned will point to the same byte within the page as was passed in.
-> + * is physical address to that hat page. The dma_addr_t returned will point
-> + * to the same byte within the page as was passed in.
->    */
->   
-> -static dma_addr_t ps3_sb_map_page(struct device *_dev, struct page *page,
-> -	unsigned long offset, size_t size, enum dma_data_direction direction,
-> -	unsigned long attrs)
-> +static dma_addr_t ps3_sb_map_phys(struct device *_dev, phys_addr_t phys,
-> +	size_t size, enum dma_data_direction direction, unsigned long attrs)
-
-CHECK: Alignment should match open parenthesis
-#151: FILE: arch/powerpc/platforms/ps3/system-bus.c:559:
-+static dma_addr_t ps3_sb_map_phys(struct device *_dev, phys_addr_t phys,
-+	size_t size, enum dma_data_direction direction, unsigned long attrs)
-
-
-
->   {
->   	struct ps3_system_bus_device *dev = ps3_dev_to_system_bus_dev(_dev);
->   	int result;
->   	dma_addr_t bus_addr;
-> -	void *ptr = page_address(page) + offset;
-> +	void *ptr = phys_to_virt(phys);
+On 11/6/25 3:05 PM, Jan Beulich wrote:
+> On 20.10.2025 17:57, Oleksii Kurochko wrote:
+>
+> +static unsigned int vmidlen_detect(void)
+> +{
+> +    unsigned int vmid_bits;
 > +
-> +	if (unlikely(attrs & DMA_ATTR_MMIO))
-> +		return DMA_MAPPING_ERROR;
->   
->   	result = ps3_dma_map(dev->d_region, (unsigned long)ptr, size,
->   			     &bus_addr,
-> @@ -577,8 +579,8 @@ static dma_addr_t ps3_sb_map_page(struct device *_dev, struct page *page,
->   	return bus_addr;
->   }
->   
-> -static dma_addr_t ps3_ioc0_map_page(struct device *_dev, struct page *page,
-> -				    unsigned long offset, size_t size,
-> +static dma_addr_t ps3_ioc0_map_phys(struct device *_dev, phys_addr_t phys,
-> +				    size_t size,
->   				    enum dma_data_direction direction,
->   				    unsigned long attrs)
->   {
-> @@ -586,7 +588,10 @@ static dma_addr_t ps3_ioc0_map_page(struct device *_dev, struct page *page,
->   	int result;
->   	dma_addr_t bus_addr;
->   	u64 iopte_flag;
-> -	void *ptr = page_address(page) + offset;
-> +	void *ptr = phys_to_virt(phys);
+> +    /*
+> +     * According to the RISC-V Privileged Architecture Spec:
+> +     *   When MODE=Bare, guest physical addresses are equal to supervisor
+> +     *   physical addresses, and there is no further memory protection
+> +     *   for a guest virtual machine beyond the physical memory protection
+> +     *   scheme described in Section "Physical Memory Protection".
+> +     *   In this case, the remaining fields in hgatp must be set to zeros.
+> +     * Thereby it is necessary to set gstage_mode not equal to Bare.
+> +     */
+> +    ASSERT(gstage_mode != HGATP_MODE_OFF);
+> +    csr_write(CSR_HGATP,
+> +              MASK_INSR(gstage_mode, HGATP_MODE_MASK) | HGATP_VMID_MASK);
+> +    vmid_bits = MASK_EXTR(csr_read(CSR_HGATP), HGATP_VMID_MASK);
+> +    vmid_bits = flsl(vmid_bits);
+> +    csr_write(CSR_HGATP, _AC(0, UL));
 > +
-> +	if (unlikely(attrs & DMA_ATTR_MMIO))
-> +		return DMA_MAPPING_ERROR;
->   
->   	iopte_flag = CBE_IOPTE_M;
->   	switch (direction) {
-> @@ -613,7 +618,7 @@ static dma_addr_t ps3_ioc0_map_page(struct device *_dev, struct page *page,
->   	return bus_addr;
->   }
->   
-> -static void ps3_unmap_page(struct device *_dev, dma_addr_t dma_addr,
-> +static void ps3_unmap_phys(struct device *_dev, dma_addr_t dma_addr,
->   	size_t size, enum dma_data_direction direction, unsigned long attrs)
+> +    /*
+> +     * From RISC-V spec:
+> +     *   Speculative executions of the address-translation algorithm behave as
+> +     *   non-speculative executions of the algorithm do, except that they must
+> +     *   not set the dirty bit for a PTE, they must not trigger an exception,
+> +     *   and they must not create address-translation cache entries if those
+> +     *   entries would have been invalidated by any SFENCE.VMA instruction
+> +     *   executed by the hart since the speculative execution of the algorithm
+> +     *   began.
+> +     *
+> +     * Also, despite of the fact here it is mentioned that when V=0 two-stage
+> +     * address translation is inactivated:
+> +     *   The current virtualization mode, denoted V, indicates whether the hart
+> +     *   is currently executing in a guest. When V=1, the hart is either in
+> +     *   virtual S-mode (VS-mode), or in virtual U-mode (VU-mode) atop a guest
+> +     *   OS running in VS-mode. When V=0, the hart is either in M-mode, in
+> +     *   HS-mode, or in U-mode atop an OS running in HS-mode. The
+> +     *   virtualization mode also indicates whether two-stage address
+> +     *   translation is active (V=1) or inactive (V=0).
+> +     * But on the same side, writing to hgatp register activates it:
+> +     *   The hgatp register is considered active for the purposes of
+> +     *   the address-translation algorithm unless the effective privilege mode
+> +     *   is U and hstatus.HU=0.
+> +     *
+> +     * Thereby it leaves some room for speculation even in this stage of boot,
+> +     * so it could be that we polluted local TLB so flush all guest TLB.
+> +     */
+> +    local_hfence_gvma_all();
+> That's a lot of redundancy with gstage_mode_detect(). The function call here
+> actually renders the one there redundant, afaict. Did you consider putting a
+> single instance at the end of it in pre_gstage_init()? Otherwise at least
+> don't repeat the comment here, but merely point at the other one?
 
-CHECK: Alignment should match open parenthesis
-#193: FILE: arch/powerpc/platforms/ps3/system-bus.c:622:
-+static void ps3_unmap_phys(struct device *_dev, dma_addr_t dma_addr,
-  	size_t size, enum dma_data_direction direction, unsigned long attrs)
-
-
-
->   {
->   	struct ps3_system_bus_device *dev = ps3_dev_to_system_bus_dev(_dev);
-> @@ -690,8 +695,8 @@ static const struct dma_map_ops ps3_sb_dma_ops = {
->   	.map_sg = ps3_sb_map_sg,
->   	.unmap_sg = ps3_sb_unmap_sg,
->   	.dma_supported = ps3_dma_supported,
-> -	.map_page = ps3_sb_map_page,
-> -	.unmap_page = ps3_unmap_page,
-> +	.map_phys = ps3_sb_map_phys,
-> +	.unmap_phys = ps3_unmap_phys,
->   	.mmap = dma_common_mmap,
->   	.get_sgtable = dma_common_get_sgtable,
->   	.alloc_pages_op = dma_common_alloc_pages,
-> @@ -704,8 +709,8 @@ static const struct dma_map_ops ps3_ioc0_dma_ops = {
->   	.map_sg = ps3_ioc0_map_sg,
->   	.unmap_sg = ps3_ioc0_unmap_sg,
->   	.dma_supported = ps3_dma_supported,
-> -	.map_page = ps3_ioc0_map_page,
-> -	.unmap_page = ps3_unmap_page,
-> +	.map_phys = ps3_ioc0_map_phys,
-> +	.unmap_phys = ps3_unmap_phys,
->   	.mmap = dma_common_mmap,
->   	.get_sgtable = dma_common_get_sgtable,
->   	.alloc_pages_op = dma_common_alloc_pages,
-> diff --git a/arch/powerpc/platforms/pseries/ibmebus.c b/arch/powerpc/platforms/pseries/ibmebus.c
-> index 3436b0af795e..cad2deb7e70d 100644
-> --- a/arch/powerpc/platforms/pseries/ibmebus.c
-> +++ b/arch/powerpc/platforms/pseries/ibmebus.c
-> @@ -86,17 +86,18 @@ static void ibmebus_free_coherent(struct device *dev,
->   	kfree(vaddr);
->   }
->   
-> -static dma_addr_t ibmebus_map_page(struct device *dev,
-> -				   struct page *page,
-> -				   unsigned long offset,
-> +static dma_addr_t ibmebus_map_phys(struct device *dev, phys_addr_t phys,
->   				   size_t size,
->   				   enum dma_data_direction direction,
->   				   unsigned long attrs)
->   {
-> -	return (dma_addr_t)(page_address(page) + offset);
-> +	if (attrs & DMA_ATTR_MMIO)
-> +		return DMA_MAPPING_ERROR;
-> +
-> +	return (dma_addr_t)(phys_to_virt(phys));
->   }
->   
-> -static void ibmebus_unmap_page(struct device *dev,
-> +static void ibmebus_unmap_phys(struct device *dev,
->   			       dma_addr_t dma_addr,
->   			       size_t size,
->   			       enum dma_data_direction direction,
-> @@ -146,8 +147,8 @@ static const struct dma_map_ops ibmebus_dma_ops = {
->   	.unmap_sg           = ibmebus_unmap_sg,
->   	.dma_supported      = ibmebus_dma_supported,
->   	.get_required_mask  = ibmebus_dma_get_required_mask,
-> -	.map_page           = ibmebus_map_page,
-> -	.unmap_page         = ibmebus_unmap_page,
-> +	.map_phys           = ibmebus_map_phys,
-> +	.unmap_phys         = ibmebus_unmap_phys,
->   };
->   
->   static int ibmebus_match_path(struct device *dev, const void *data)
-> diff --git a/arch/powerpc/platforms/pseries/vio.c b/arch/powerpc/platforms/pseries/vio.c
-> index ac1d2d2c9a88..18cffac5468f 100644
-> --- a/arch/powerpc/platforms/pseries/vio.c
-> +++ b/arch/powerpc/platforms/pseries/vio.c
-> @@ -512,18 +512,21 @@ static void vio_dma_iommu_free_coherent(struct device *dev, size_t size,
->   	vio_cmo_dealloc(viodev, roundup(size, PAGE_SIZE));
->   }
->   
-> -static dma_addr_t vio_dma_iommu_map_page(struct device *dev, struct page *page,
-> -                                         unsigned long offset, size_t size,
-> -                                         enum dma_data_direction direction,
-> -                                         unsigned long attrs)
-> +static dma_addr_t vio_dma_iommu_map_phys(struct device *dev, phys_addr_t phys,
-> +					 size_t size,
-> +					 enum dma_data_direction direction,
-> +					 unsigned long attrs)
->   {
->   	struct vio_dev *viodev = to_vio_dev(dev);
->   	struct iommu_table *tbl = get_iommu_table_base(dev);
->   	dma_addr_t ret = DMA_MAPPING_ERROR;
->   
-> +	if (unlikely(attrs & DMA_ATTR_MMIO))
-> +		return ret;
-> +
->   	if (vio_cmo_alloc(viodev, roundup(size, IOMMU_PAGE_SIZE(tbl))))
->   		goto out_fail;
-> -	ret = iommu_map_page(dev, tbl, page, offset, size, dma_get_mask(dev),
-> +	ret = iommu_map_phys(dev, tbl, phys, size, dma_get_mask(dev),
->   			direction, attrs);
-
-CHECK: Alignment should match open parenthesis
-#285: FILE: arch/powerpc/platforms/pseries/vio.c:530:
-+	ret = iommu_map_phys(dev, tbl, phys, size, dma_get_mask(dev),
-  			direction, attrs);
+Agree, it could be moved to the end of pre_gstage_init().
 
 
->   	if (unlikely(ret == DMA_MAPPING_ERROR))
->   		goto out_deallocate;
-> @@ -536,7 +539,7 @@ static dma_addr_t vio_dma_iommu_map_page(struct device *dev, struct page *page,
->   	return DMA_MAPPING_ERROR;
->   }
->   
-> -static void vio_dma_iommu_unmap_page(struct device *dev, dma_addr_t dma_handle,
-> +static void vio_dma_iommu_unmap_phys(struct device *dev, dma_addr_t dma_handle,
->   				     size_t size,
->   				     enum dma_data_direction direction,
->   				     unsigned long attrs)
-> @@ -544,7 +547,7 @@ static void vio_dma_iommu_unmap_page(struct device *dev, dma_addr_t dma_handle,
->   	struct vio_dev *viodev = to_vio_dev(dev);
->   	struct iommu_table *tbl = get_iommu_table_base(dev);
->   
-> -	iommu_unmap_page(tbl, dma_handle, size, direction, attrs);
-> +	iommu_unmap_phys(tbl, dma_handle, size, direction, attrs);
->   	vio_cmo_dealloc(viodev, roundup(size, IOMMU_PAGE_SIZE(tbl)));
->   }
->   
-> @@ -605,8 +608,8 @@ static const struct dma_map_ops vio_dma_mapping_ops = {
->   	.free              = vio_dma_iommu_free_coherent,
->   	.map_sg            = vio_dma_iommu_map_sg,
->   	.unmap_sg          = vio_dma_iommu_unmap_sg,
-> -	.map_page          = vio_dma_iommu_map_page,
-> -	.unmap_page        = vio_dma_iommu_unmap_page,
-> +	.map_phys          = vio_dma_iommu_map_phys,
-> +	.unmap_phys        = vio_dma_iommu_unmap_phys,
->   	.dma_supported     = dma_iommu_dma_supported,
->   	.get_required_mask = dma_iommu_get_required_mask,
->   	.mmap		   = dma_common_mmap,
-> 
+>> +    return vmid_bits;
+>> +}
+>> +
+>> +void vmid_init(void)
+> This (and its helper) isn't __init because you intend to also call it during
+> bringup of secondary processors?
 
+Yes, I wasn't able to find that VMIDLEN is guaranteed to be same for all
+harts.
+
+>> +    unsigned int vmid_len = vmidlen_detect();
+>> +    struct vmid_data *data = &this_cpu(vmid_data);
+>> +
+>> +    BUILD_BUG_ON((HGATP_VMID_MASK >> HGATP_VMID_SHIFT) >
+>> +                 (BIT((sizeof(data->max_vmid) * BITS_PER_BYTE), UL) - 1));
+>> +
+>> +    data->max_vmid = BIT(vmid_len, U) - 1;
+>> +    data->used = opt_vmid && (vmid_len > 1);
+>> +
+>> +    if ( g_vmid_used < 0 )
+>> +    {
+>> +        g_vmid_used = data->used;
+>> +        printk("VMIDs use is %sabled\n", data->used ? "en" : "dis");
+>> +    }
+>> +    else if ( g_vmid_used != data->used )
+>> +        printk("CPU%u: VMIDs use is %sabled\n", smp_processor_id(),
+>> +               data->used ? "en" : "dis");
+>> +
+>> +    /* Zero indicates 'invalid generation', so we start the count at one. */
+>> +    data->generation = 1;
+>> +
+>> +    /* Zero indicates 'VMIDs use disabled', so we start the count at one. */
+>> +    data->next_vmid = 1;
+>> +}
+>> +
+>> +void vmid_flush_vcpu(struct vcpu *v)
+>> +{
+>> +    write_atomic(&v->arch.vmid.generation, 0);
+>> +}
+>> +
+>> +void vmid_flush_hart(void)
+>> +{
+>> +    struct vmid_data *data = &this_cpu(vmid_data);
+>> +
+>> +    if ( !data->used )
+>> +        return;
+>> +
+>> +    if ( likely(++data->generation != 0) )
+>> +        return;
+>> +
+>> +    /*
+>> +     * VMID generations are 64 bit.  Overflow of generations never happens.
+>> +     * For safety, we simply disable ASIDs, so correctness is established; it
+>> +     * only runs a bit slower.
+>> +     */
+>> +    printk("%s: VMID generation overrun. Disabling VMIDs.\n", __func__);
+> Is logging of the function name of any value here?
+
+Agree, there is no any sense for the logging of the function name.
+
+>   Also, despite the x86
+> original havinbg it like this - generally no full stops please if log
+> messages. "VMID generation overrun; disabling VMIDs\n" would do.
+
+Sure, I will drop it and will try to not add it in such cases. But could you
+please remind (if I asked that before) me what is the reason why full stop
+shouldn't be presented in such cases?
+
+>> +bool vmid_handle_vmenter(struct vcpu_vmid *vmid)
+>> +{
+>> +    struct vmid_data *data = &this_cpu(vmid_data);
+>> +
+>> +    /* Test if VCPU has valid VMID. */
+> x86 has a ->disabled check up from here; why do you not check ->used?
+
+The x86 comment confused me, at first I thought the check was related to
+erratum #170, but now I see that it might actually be useful here, so I'll add:
+     if ( !data->used )
+         goto disabled;
+
+Thanks.
+
+~ Oleksii
+
+--------------ihJQpW5AIiAsY4FgPUKoUE3H
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 11/6/25 3:05 PM, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com">
+      <pre wrap="" class="moz-quote-pre">On 20.10.2025 17:57, Oleksii Kurochko wrote:
+
++static unsigned int vmidlen_detect(void)
++{
++    unsigned int vmid_bits;
++
++    /*
++     * According to the RISC-V Privileged Architecture Spec:
++     *   When MODE=Bare, guest physical addresses are equal to supervisor
++     *   physical addresses, and there is no further memory protection
++     *   for a guest virtual machine beyond the physical memory protection
++     *   scheme described in Section "Physical Memory Protection".
++     *   In this case, the remaining fields in hgatp must be set to zeros.
++     * Thereby it is necessary to set gstage_mode not equal to Bare.
++     */
++    ASSERT(gstage_mode != HGATP_MODE_OFF);
++    csr_write(CSR_HGATP,
++              MASK_INSR(gstage_mode, HGATP_MODE_MASK) | HGATP_VMID_MASK);
++    vmid_bits = MASK_EXTR(csr_read(CSR_HGATP), HGATP_VMID_MASK);
++    vmid_bits = flsl(vmid_bits);
++    csr_write(CSR_HGATP, _AC(0, UL));
++
++    /*
++     * From RISC-V spec:
++     *   Speculative executions of the address-translation algorithm behave as
++     *   non-speculative executions of the algorithm do, except that they must
++     *   not set the dirty bit for a PTE, they must not trigger an exception,
++     *   and they must not create address-translation cache entries if those
++     *   entries would have been invalidated by any SFENCE.VMA instruction
++     *   executed by the hart since the speculative execution of the algorithm
++     *   began.
++     *
++     * Also, despite of the fact here it is mentioned that when V=0 two-stage
++     * address translation is inactivated:
++     *   The current virtualization mode, denoted V, indicates whether the hart
++     *   is currently executing in a guest. When V=1, the hart is either in
++     *   virtual S-mode (VS-mode), or in virtual U-mode (VU-mode) atop a guest
++     *   OS running in VS-mode. When V=0, the hart is either in M-mode, in
++     *   HS-mode, or in U-mode atop an OS running in HS-mode. The
++     *   virtualization mode also indicates whether two-stage address
++     *   translation is active (V=1) or inactive (V=0).
++     * But on the same side, writing to hgatp register activates it:
++     *   The hgatp register is considered active for the purposes of
++     *   the address-translation algorithm unless the effective privilege mode
++     *   is U and hstatus.HU=0.
++     *
++     * Thereby it leaves some room for speculation even in this stage of boot,
++     * so it could be that we polluted local TLB so flush all guest TLB.
++     */
++    local_hfence_gvma_all();
+</pre>
+      <pre wrap="" class="moz-quote-pre">That's a lot of redundancy with gstage_mode_detect(). The function call here
+actually renders the one there redundant, afaict. Did you consider putting a
+single instance at the end of it in pre_gstage_init()? Otherwise at least
+don't repeat the comment here, but merely point at the other one?</pre>
+    </blockquote>
+    <pre>Agree, it could be moved to the end of pre_gstage_init().</pre>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com">
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+    return vmid_bits;
++}
++
++void vmid_init(void)
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">This (and its helper) isn't __init because you intend to also call it during
+bringup of secondary processors?</pre>
+    </blockquote>
+    <pre>Yes, I wasn't able to find that VMIDLEN is guaranteed to be same for all
+harts.
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com">
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+    unsigned int vmid_len = vmidlen_detect();
++    struct vmid_data *data = &amp;this_cpu(vmid_data);
++
++    BUILD_BUG_ON((HGATP_VMID_MASK &gt;&gt; HGATP_VMID_SHIFT) &gt;
++                 (BIT((sizeof(data-&gt;max_vmid) * BITS_PER_BYTE), UL) - 1));
++
++    data-&gt;max_vmid = BIT(vmid_len, U) - 1;
++    data-&gt;used = opt_vmid &amp;&amp; (vmid_len &gt; 1);
++
++    if ( g_vmid_used &lt; 0 )
++    {
++        g_vmid_used = data-&gt;used;
++        printk("VMIDs use is %sabled\n", data-&gt;used ? "en" : "dis");
++    }
++    else if ( g_vmid_used != data-&gt;used )
++        printk("CPU%u: VMIDs use is %sabled\n", smp_processor_id(),
++               data-&gt;used ? "en" : "dis");
++
++    /* Zero indicates 'invalid generation', so we start the count at one. */
++    data-&gt;generation = 1;
++
++    /* Zero indicates 'VMIDs use disabled', so we start the count at one. */
++    data-&gt;next_vmid = 1;
++}
++
++void vmid_flush_vcpu(struct vcpu *v)
++{
++    write_atomic(&amp;v-&gt;arch.vmid.generation, 0);
++}
++
++void vmid_flush_hart(void)
++{
++    struct vmid_data *data = &amp;this_cpu(vmid_data);
++
++    if ( !data-&gt;used )
++        return;
++
++    if ( likely(++data-&gt;generation != 0) )
++        return;
++
++    /*
++     * VMID generations are 64 bit.  Overflow of generations never happens.
++     * For safety, we simply disable ASIDs, so correctness is established; it
++     * only runs a bit slower.
++     */
++    printk("%s: VMID generation overrun. Disabling VMIDs.\n", __func__);
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">Is logging of the function name of any value here?</pre>
+    </blockquote>
+    <pre>Agree, there is no any sense for the logging of the function name.
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com">
+      <pre wrap="" class="moz-quote-pre"> Also, despite the x86
+original havinbg it like this - generally no full stops please if log
+messages. "VMID generation overrun; disabling VMIDs\n" would do.</pre>
+    </blockquote>
+    <pre>Sure, I will drop it and will try to not add it in such cases. But could you
+please remind (if I asked that before) me what is the reason why full stop
+shouldn't be presented in such cases?
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:7e9671b3-6972-45b8-9cba-4447fa802fe2@suse.com">
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+bool vmid_handle_vmenter(struct vcpu_vmid *vmid)
++{
++    struct vmid_data *data = &amp;this_cpu(vmid_data);
++
++    /* Test if VCPU has valid VMID. */
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">x86 has a -&gt;disabled check up from here; why do you not check -&gt;used?</pre>
+    </blockquote>
+    <pre>The x86 comment confused me, at first I thought the check was related to
+erratum #170, but now I see that it might actually be useful here, so I'll add:
+    if ( !data-&gt;used )
+        goto disabled;
+
+Thanks.
+
+~ Oleksii</pre>
+  </body>
+</html>
+
+--------------ihJQpW5AIiAsY4FgPUKoUE3H--
 
