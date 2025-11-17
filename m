@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EFECEBF91
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Nov 2025 22:21:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1164262.1491264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C9DCCEACEF
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Nov 2025 22:21:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1164261.1491254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vL7bF-0002bT-5q; Mon, 17 Nov 2025 22:21:29 +0000
+	id 1vL7bC-0002Nx-Vo; Mon, 17 Nov 2025 22:21:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1164262.1491264; Mon, 17 Nov 2025 22:21:29 +0000
+Received: by outflank-mailman (output) from mailman id 1164261.1491254; Mon, 17 Nov 2025 22:21:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vL7bF-0002bM-3C; Mon, 17 Nov 2025 22:21:29 +0000
-Received: by outflank-mailman (input) for mailman id 1164262;
- Mon, 17 Nov 2025 22:21:27 +0000
+	id 1vL7bC-0002Nq-T9; Mon, 17 Nov 2025 22:21:26 +0000
+Received: by outflank-mailman (input) for mailman id 1164261;
+ Mon, 17 Nov 2025 22:21:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FLbM=5Z=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vL7bD-0002Nh-BI
- for xen-devel@lists.xenproject.org; Mon, 17 Nov 2025 22:21:27 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1vL7bB-0002Nh-Rk
+ for xen-devel@lists.xenproject.org; Mon, 17 Nov 2025 22:21:25 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c1f41323-c403-11f0-9d18-b5c5bf9af7f9;
- Mon, 17 Nov 2025 23:21:26 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-477632d9326so33051505e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 17 Nov 2025 14:21:26 -0800 (PST)
+ id c0575012-c403-11f0-9d18-b5c5bf9af7f9;
+ Mon, 17 Nov 2025 23:21:24 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4779aa4f928so26276465e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Nov 2025 14:21:24 -0800 (PST)
 Received: from localhost.localdomain (host-92-29-237-183.as13285.net.
  [92.29.237.183]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42c9628ebacsm15223789f8f.30.2025.11.17.14.21.25
+ ffacd0b85a97d-42c9628ebacsm15223789f8f.30.2025.11.17.14.21.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 14:21:25 -0800 (PST)
+ Mon, 17 Nov 2025 14:21:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,110 +47,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1f41323-c403-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: c0575012-c403-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1763418086; x=1764022886; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0EH5GucMwXGqWhJcPk1xUrIEMbDP0L0S0sWt+dj5pD8=;
-        b=KLsytlqYBD4WA88bUHDYY/MmPNYHKi9ztastV9P6lF+bMAqMOyDmbx16QJeHi0WKTs
-         h2gPEnixUshGtlXuC8ptETduFikZCZBN6oetTC9YJpxH7SKRRriNktr2QruR4j9iPsVT
-         Bwe1eaGvog1gf5iHQPK2F0gbV8JllhwBhsV50=
+        d=citrix.com; s=google; t=1763418083; x=1764022883; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xAssDXxe9d1SYR0UCm/UeqgJSXMhl1SsVae+18Hf8aU=;
+        b=iotsTt1sp1YoS8TjKubZ6rowXqD/wqvBMYh92cyuaxunT6bxdpiUSNEoimGnrEQT8T
+         cJOfReNrCiESwlb2d7VkWlDcUBqEbx1ySstZr7eBPdkm1qqbiTVCTFGj+g9iJX8baQNK
+         6rBekrnoztdc4kklQjQof5f/jYFmx3FpmoAH8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763418086; x=1764022886;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=0EH5GucMwXGqWhJcPk1xUrIEMbDP0L0S0sWt+dj5pD8=;
-        b=tSPmWDtIbUhVZnUVTAwm1E34q1RXY5mnGFrHtTWKiEz1ljwrAx2+NPf3R2F8Dl2Lee
-         kKqksHxfuWXWZTJCGXAQ4opQqFNajXweyMnGVinX0HoYjCqpij6AaHhhkjseu9347lvH
-         a72jHqfokYFFW3mh6bCNrVV1TKU9O0Ghl2f3yGmPgdkumxUM3MFpMrtCu8yYksg1zuQ+
-         NWTFzgf0adTo9nDR0QbMNo6F6ZQBzGn29yFRXynb4hQhtvDDaRdwfEPNTWyeKM+A+ics
-         dT1mJKYhte/SznS30jD1YAMVb3CxQFkJdR6eIwy8S4VO8h21XcU6HrdOp98Qhrk6AV7s
-         0HUA==
-X-Gm-Message-State: AOJu0YwSfiooF7YQ+qQJQ5nJ3vi7hPIzgLfycCVWynxHZeWNgR7wyoXf
-	bqQh0c4nUeR9j1hefOIKrbFogpxyu1Px4GIsMZYmOR7fZh6SOVn+YmXeSnNQmrFCNX2Er2QU/BQ
-	NHmxdUeA=
-X-Gm-Gg: ASbGncsKoKb/wAro0/mtpmzMK0JRL06h1Y5ZnDuVMK3W63SbsodfybF1MGDPahq1gyD
-	EqpuJPVm1LX4iFpanaG43a5IiDUMXMHyuzE/mGRPakN3JZLqVs/JlP0Re648WJgI6F6yBO2CJvR
-	vgT962yWDs0sPhlvZriV1xTC6X5y4rhuA9SJYq6wiyFv2buI7M5balZtM/de3SF6cQRwAEGnlme
-	SVPdXqpMcP4p7nplcsv/yAEG3SD/lalMC88yCJ78/z/XYE1q+XAjgvWj+QzRJ0jzW9TQlP3JpBf
-	Cpa9/Vecx9m+luKeEcj0To8fiAA9x/ZnHKbLR8FMfEDnB5B6GR0nOx6FcwqjXvOEJ5+7BvrDD6G
-	XjiuvojehM9Ak45MSZ2OS0wMhid5tzCh4BQaMZp+nlmKeLDHO0jviP+VxtF8wFKrgqf5EuD7qp8
-	FMbqy2yHMacxapzdZs6WdElFEn0cAD7EAbCM/Ke82wI8cJabeRqT0=
-X-Google-Smtp-Source: AGHT+IFMby+nD02SNTcy7GT8KlTdwfb6ZYI/udhxHT1ifds0MnlO/6g25QzPN4r7zPtISkr+ekvslA==
-X-Received: by 2002:a05:600c:4744:b0:46f:b327:ecfb with SMTP id 5b1f17b1804b1-4778fe5ebb8mr142554435e9.9.1763418086033;
-        Mon, 17 Nov 2025 14:21:26 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763418083; x=1764022883;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xAssDXxe9d1SYR0UCm/UeqgJSXMhl1SsVae+18Hf8aU=;
+        b=r3gH5I4aUxuIZpcc3EjX1tcDOkMVyTY4jHymNu58cTYoY5KxxO7V1m1MV3Kg1WHEKo
+         UgKgM+4hIrkty3v0FkG57ACPLLhMSeVIDHCvLnMOPPkwRBif9gHNo5iCdIcsO0J7cmlI
+         bpE9ztnLOmMpmHacH++SeanhYQrVaic1gYeARpdn5yO16YUtuNHK8b3lnT43XJ0w6X9C
+         CGJ0Eve2hAxeXe9D8AMKcDH99kp9+77mCzEsBVkm8TD32LcGWSrR6l+aNGEPQ8/ClT5+
+         lus5NCs4r4nKEcKV5fiDmxW2k/qY/tz5HhA2QhwSgVZXGJxFQ0m6g2ksTBW4WHYd9XBi
+         sR+Q==
+X-Gm-Message-State: AOJu0YyiutVwyMxnPGXwVBOxAdtKmNM9nrrVscK1NEy0FvjGpqwmiWOF
+	o0RVC9SjfXpeyGCWOHoTKuJHfsMx6JXMYmkBLEuiqXWy0J8GXIDL0lne3fMRF0K8XsI18q1f6vR
+	VCmlJl3w=
+X-Gm-Gg: ASbGncuOct2hZGyfVvWGv5zHoczkpelnyu3ZkkwldpPvOMqC2UozVtc5p7JWrzIKfWC
+	MoTmYYnF/C9rkfeNH9h87FsDPRt4w1lRsn3fqdDUf6HlKtg9yvmFptDrANvIUXBkxxvNeny5byy
+	rggfAeew9yd2xtHXLkk6HJUnt5ujqqFMr2EAm4QuKMCIo3a4OOrA4Q0O0zariNhk9R5JpOAE+4O
+	86uKIuOWYJDh00lqXMdegZOM1IPiu4JrBGMgZSvqVNmPLiV+D8RRoaU0DuXeDJi8ddRo3LK+dYu
+	4i0UUWw448U6DAWU2FZUNp0+nZp4F5D9t1UR69XHey0oCvbbZft/tZwn9KHiaCctjnGZZbVNelg
+	joOTylEgXQqNuVhP+gEWWgXBFPbP39k0704SoWpIQH1w/x4kK7SvuKxK8MsqBB+nDIM7/9GS282
+	D3NgE3L78aEmTVRSLvoEH0SqqkuosFzPHUcevAMlLbj/EBBsNTsDs=
+X-Google-Smtp-Source: AGHT+IH6pINDv8Idyh/RMoeRHXErQQHDJWfr0K6rWZFB9EurlOtp+s/zFaceIlGiqVI7eGZZg/DBOg==
+X-Received: by 2002:a05:600c:450f:b0:477:76bf:e1fb with SMTP id 5b1f17b1804b1-4778fe4a05emr149992655e9.16.1763418083248;
+        Mon, 17 Nov 2025 14:21:23 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/3] x86/ucode: Create a real type for loading_state
-Date: Mon, 17 Nov 2025 22:21:20 +0000
-Message-Id: <20251117222120.473451-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/3] x86/ucode: Parallel loading fixes
+Date: Mon, 17 Nov 2025 22:21:17 +0000
+Message-Id: <20251117222120.473451-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251117222120.473451-1-andrew.cooper3@citrix.com>
-References: <20251117222120.473451-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Using typeof() in wait_for_state()/set_state() unnecesserily cryptic, and more
-verbose than using a proper type.
+At least patch 1 wants backporting.  Commit e0bb712a28a9 ("x86/ucode: Abort
+parallel load early on any control thread error") made the problem easier to
+hit, but the bug has been present since the introduction of parallel loading.
 
-No functional change.
+Another potential fix would be to have stop_machine_run()'s error value filled
+in using cmpxchg.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/cpu/microcode/core.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+Andrew Cooper (3):
+  x86/ucode: Fix error handling during parallel ucode load
+  x86/ucode: Drop structurally unreachable ASSERT()s
+  x86/ucode: Create a real type for loading_state
 
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 7aaf62839f56..fe47c3a6c18d 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -70,12 +70,13 @@ static unsigned int nr_cores;
-  *  - LOADING_ENTER: all CPUs have called in. Initiate ucode loading.
-  *  - LOADING_EXIT: ucode loading is done or aborted.
-  */
--static enum {
-+typedef enum {
-     LOADING_PREPARE,
-     LOADING_CALLIN,
-     LOADING_ENTER,
-     LOADING_EXIT,
--} loading_state;
-+} loading_state_t;
-+static loading_state_t loading_state;
- 
- struct patch_with_flags {
-     unsigned int flags;
-@@ -237,9 +238,9 @@ static bool cf_check wait_cpu_callout(unsigned int nr)
-     return atomic_read(&cpu_out) >= nr;
- }
- 
--static bool wait_for_state(typeof(loading_state) state)
-+static bool wait_for_state(loading_state_t state)
- {
--    typeof(loading_state) cur_state;
-+    loading_state_t cur_state;
- 
-     while ( (cur_state = ACCESS_ONCE(loading_state)) != state )
-     {
-@@ -251,7 +252,7 @@ static bool wait_for_state(typeof(loading_state) state)
-     return true;
- }
- 
--static void set_state(typeof(loading_state) state)
-+static void set_state(loading_state_t state)
- {
-     ACCESS_ONCE(loading_state) = state;
- }
+ xen/arch/x86/cpu/microcode/core.c | 37 +++++++++++++++----------------
+ 1 file changed, 18 insertions(+), 19 deletions(-)
+
 -- 
 2.39.5
 
