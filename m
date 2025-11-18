@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA093CEDDA1
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 15:40:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1165058.1491905 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB1D5CEE328
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 15:40:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1165055.1491874 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLNo9-0005Hu-4B; Tue, 18 Nov 2025 15:39:53 +0000
+	id 1vLNo5-0004c8-6a; Tue, 18 Nov 2025 15:39:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1165058.1491905; Tue, 18 Nov 2025 15:39:53 +0000
+Received: by outflank-mailman (output) from mailman id 1165055.1491874; Tue, 18 Nov 2025 15:39:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLNo8-0005H8-VG; Tue, 18 Nov 2025 15:39:52 +0000
-Received: by outflank-mailman (input) for mailman id 1165058;
- Tue, 18 Nov 2025 15:39:52 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vLNo5-0004c1-3c; Tue, 18 Nov 2025 15:39:49 +0000
+Received: by outflank-mailman (input) for mailman id 1165055;
+ Tue, 18 Nov 2025 15:39:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=n9C8=52=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vLNo8-0004pf-7K
- for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 15:39:52 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1fbea06-c494-11f0-980a-7dc792cee155;
- Tue, 18 Nov 2025 16:39:50 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-644f90587e5so2210502a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Nov 2025 07:39:50 -0800 (PST)
+ id 1vLNo3-0004bv-7Y
+ for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 15:39:47 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cef8b762-c494-11f0-9d18-b5c5bf9af7f9;
+ Tue, 18 Nov 2025 16:39:45 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b735ce67d1dso726415766b.3
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Nov 2025 07:39:45 -0800 (PST)
 Received: from EPUAKYIW02F7.. (pool185-5-253-54.as6723.net. [185.5.253.54])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b734fd80d27sm1391385266b.40.2025.11.18.07.39.48
+ a640c23a62f3a-b734fd80d27sm1391385266b.40.2025.11.18.07.39.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 07:39:49 -0800 (PST)
+ Tue, 18 Nov 2025 07:39:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1fbea06-c494-11f0-980a-7dc792cee155
+X-Inumbo-ID: cef8b762-c494-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763480390; x=1764085190; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+IE/6U2/jxx06UiTUo+lX1PbDac7ac5Ki4u3TKrSREY=;
-        b=ae5z4BfSyT1L7yg6+zC2NbkvzxbnuhyPg2NEfeTy4cPv9XOF8HfUbnskMJhujoWobI
-         T7ZCi3Lz+uxW8a8A1e1gALMflkNk94TinDMkQgiBybUZf86d67oOc2EywKJ2xMf7ylE2
-         fRARnOomheo524Rj55F/jDb8cu6nBSwlNrP0JeVPte0190FX/lh28t510p7sMxLp42/d
-         /Qj9xh4fPOElwaRg08KiPEM1YkXrVZvmP+V00zn0DQB4K6lrdRMW0FLgdIVYlSm7H493
-         lxM39GO7QbWE5wBue8DkkV1V6U/4mowMGXAhH/Wrv2XT0a8R+vHKiRnqyXnwtFlomCic
-         spoA==
+        d=gmail.com; s=20230601; t=1763480385; x=1764085185; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=PUBxZxu1lwBqJ05KLC6IWQDKtIZoU6QUJa/RF+r/zco=;
+        b=M/kdnscTu0aLB731siignaUJ4e42MbaBkJGVFlQdlF36SWSgiqmaEK8kCyD5Necd62
+         v7r3f/8LyQ6eBO4ZntkG/zPVCjTL1UbTUX+HKiu/wWZT2kSfgugaPvqXx12qHhtiqZsR
+         yHGm/m9L+creFsQKQ3d4U85cITzIWqWpwAtfWg1OjJe3kuiIIW3YCVhPyC21bSqHYpOe
+         3dodcN6xTxKQKT2p2klZn7mfnFSlc3umDPRjWfKMi32zYDnZrQEFFQUBGVD8kQ4Lu6+G
+         FIEFOzIuyRTEA2vgwX4pi1QzX/g5agkJ+IPfm89ooxENX4AF4rhzjcrKxAVFxUsBv1u9
+         KQFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763480390; x=1764085190;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=+IE/6U2/jxx06UiTUo+lX1PbDac7ac5Ki4u3TKrSREY=;
-        b=SjqHuuDraT9xm7tc0S46pmB9smjxzOFujicPkljOZkS9CReC3fzXQX4JG5iUZTeYeI
-         xh6wSfI1b71zjS+FI0QpGQSyCL4InSq3moaes7e3JK3/33vfnDUb3HK6QZQdaZHZdmzI
-         JjtZxYGjc2kGYcA+EJ/K4WTXrMFzsC9p5zpvZGW+BH+WkKtIU0zL04oLfmKhNRYhcABh
-         dTTvo0K0nP3leJSbBx6aaY/+cOPPZiOtqONLrhtj6yH82Z6cATnAc3FfNQzB8DTndfzX
-         0e1uWS5fOIdu4BJevZzs6efN4HlJp92XrKmAHSYinQC5RbbmWJ+e9ww0/jwmTucBCjNM
-         V57Q==
-X-Gm-Message-State: AOJu0Yw3uQ5Hc8IxciCSLtaXSyiU1hJQdBHGtEcSMjmuIVONotcbCvvk
-	4HNB/x/kuQ776URgwVRekMdUCIrfaJNyT7hXmyxg3IQ6XxSwo/+I5W9hQvU+OSsss5g=
-X-Gm-Gg: ASbGncvEiCzeOt3q3x7cMxsLEpIp+WquGJLtMKdc5B8gO728rs+qXCZ6K92rLXI7IvQ
-	6AwW2U7Us0iF7ZArBCAoo/ppSPWssIxEjl6NqodmiUNYW+iQ1cklYChPWjWabzSuIJ/Fu7LwvBy
-	8HgVgWjbvMu6NbZtNTHIcJaB70GIU38svM01rznb4mnVLqDD+luWpM1Iw0bdwBoxyWSoJFzQhRV
-	ONc78Ivh943UQvZOs3zaA3EeZxiKhbifnGhj7noghBBFX1UPl/9FNPY2Epl2RAcf8XTch04j6S+
-	WrH0HJDY3WRIuPKJCfuPSSudXkRCuVqmsX5ohIOOXzflChxnLZkxXhJnY/bxrMTrElp/lZzrs/G
-	WKapJprI6+5WMae0pz+b2t7pRL6V6qhAKvSUd9GkzNmV6TtmC4Ln7gfuUY7QOLra4l7kU/bTUnS
-	IYP20u0mp0nqg4gSmyH0ZQ7bHlmGupAhzK6EokACoODeA=
-X-Google-Smtp-Source: AGHT+IGspqpLQVqJEfAtmfmsTcS7G26/37S4TaDKtxuqTB51rg7iKd6MO9sAN/Y4UCS40Wfj9i9PUg==
-X-Received: by 2002:a17:907:1c01:b0:b0e:d477:4972 with SMTP id a640c23a62f3a-b736780c3b1mr1466748066b.25.1763480389685;
-        Tue, 18 Nov 2025 07:39:49 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763480385; x=1764085185;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PUBxZxu1lwBqJ05KLC6IWQDKtIZoU6QUJa/RF+r/zco=;
+        b=WE3fvnKWznKa4qBuldwl3oJ08+M6iel8NaNIboNrtUlhksAt/lFjYiIcE/b2e01tgH
+         lRHTqxoq1kwyWSck0prtpt9dUNk5JgoTYBl+fJxPuvI2kpbk7d2iAcuEcz3SEjEt7927
+         c2kBDJ2KuBVQYQzcown3/9uccoS/eDKVYIh0ceiD8rhjk8gVsAFRd/ad3uKALd+qp7Bt
+         EtvgKlJIGdd9RDXAAvmtzDFgDcfXJPCfk8s/Hz9s/1kNh2urSLthj61qlk8oGIfiq3C1
+         mYli7E885JC7KK0b936e7amuIL9Z0TpG6sIFcmiSiH7KKUkIjawr9ucPazvR2qqYVo6k
+         Td7g==
+X-Gm-Message-State: AOJu0Yz/wx1irmzHoalEIYTBhbR8iuuFiqbVH6LXyv4tsqo9qZ3mGSnr
+	Aq+WWr9UCsRzO0Utl1F/V3nAprvTWh4dq3Sw9ABbpLPb4zNSkUpVgEfFkKNG6ASEsVw=
+X-Gm-Gg: ASbGncv/LiS5NVZRubtDGWVNOceqXPgw6mbnToJjkMsYneZVaZzEXIA5MklrIqkAf0h
+	GrsS3/6aHOHnmASFg2k2L6MI5DqaRs8rQyQ8SR/7y4iOdBjptfrkmPLz0fyRNy+jUHn+qU4n9WN
+	a8jv4mf4RnNMiCOqDMRw1O5gBBJthlXjhAoYsac1QBzNlQCIIBoTOaX6JBh4jiM7swvgYPQ7gvy
+	Wahh6YKq/BBec9CWK231malUOFfzecLtd6OSEiL1JChK6oPRCsAukh4eoAvcCO7xK8vS29CAqAK
+	qSCU8vEFGdvDh5Mqtc8JcDXlXyX4nkUWpIZt1Iibhkk4Rw6+7bCEzFyPWkhH/FnpIe8k3h+u2uI
+	cWuyzSeOEE3ljeH6fWckUS7lt9c5EDoxruO1rf5j4kMVOhyDevtRcZDTJOi0X5JcrRjNAJgNBk3
+	U7O79XSyMl5Nq4blD8i68i5PzGddP1ha5WbFk2E9T6kmY=
+X-Google-Smtp-Source: AGHT+IHyRtLYTCTV1H0wye6KCJJiNoj0Pt2IF3N8dBdl7UqPFvTmJYle74n5Jg/3qsfd3AXsu6dzfA==
+X-Received: by 2002:a17:906:d551:b0:b50:b539:8be6 with SMTP id a640c23a62f3a-b736795c7f0mr1331632466b.43.1763480384556;
+        Tue, 18 Nov 2025 07:39:44 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v14 3/4] SUPPORT.md: Document PSCI SYSTEM_SUSPEND support for guests
-Date: Tue, 18 Nov 2025 17:37:30 +0200
-Message-ID: <aacae215d49a6cc96f4add793c6637d2fced8ddd.1763479083.git.xakep.amatop@gmail.com>
+	Juergen Gross <jgross@suse.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v14 0/4] Enable guest suspend/resume support on ARM via vPSCI
+Date: Tue, 18 Nov 2025 17:37:27 +0200
+Message-ID: <cover.1763479083.git.xakep.amatop@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1763479083.git.xakep.amatop@gmail.com>
-References: <cover.1763479083.git.xakep.amatop@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+This patch series introduces the initial support for guest suspend
+and resume on ARM platforms using the PSCI SYSTEM_SUSPEND interface. The main
+goal is to allow ARM guests to request suspension using PSCI and be resumed
+by the control domain (e.g., via "xl resume").
 
-Add a new entry under the "Virtual Hardware, Hypervisor" section
-documenting support for the optional PSCI SYSTEM_SUSPEND function
-exposed to guests.
 
-This function is available via the virtual PSCI interface and allows
-guest domains (domUs) to initiate system suspend operations.
+Background
 
-The feature is currently marked as "Tech Preview".
+The PSCI SYSTEM_SUSPEND call is part of the PSCI v1.0+ specification and is
+used by guests to enter the deepest possible power state. On Xen/ARM, we
+emulate this interface in the virtual PSCI (vPSCI) layer for guests.
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+This series includes:
+
+1. A new vPSCI implementation of the PSCI SYSTEM_SUSPEND function for guests
+2. Documentation updates to SUPPORT.md to reflect PSCI and vPSCI support status
+3. Enabling "xl resume" command compilation for ARM, which was previously disabled
+
+
+Usage
+
+For Linux-based guests:
+  - Suspend can be triggered using: "echo mem > /sys/power/state" or "systemctl suspend"
+  - Resume can be performed from control domain using: "xl resume <domain>"
+
+For more information, refer to the official Linux kernel documentation on power management.
+
+Note that currently, SYSTEM_SUSPEND is supported only for guest domains (not for
+the hardware domain).
 ---
-Changes in V14:
-- fixes in commit message.
----
- SUPPORT.md | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index d441bccf37..8e7ab7cb3e 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -962,8 +962,9 @@ Emulated PSCI interface exposed to guests. We support all mandatory
- functions of PSCI 1.1. See below for the list of optional PSCI call
- implemented and their status.
- 
--   Status, Mandatory: Supported
--   Status, MIGRATE_INFO_TYPE: Supported
-+    Status, Mandatory: Supported
-+    Status, MIGRATE_INFO_TYPE: Supported
-+    Status, SYSTEM_SUSPEND: Tech Preview
- 
- ## Virtual Hardware, QEMU
- 
+This is the first part of previous patch series and originally consist only
+with necessary changes needed for guest domain suspend.
+
+The second part can be found here:
+    https://patchew.org/Xen/cover.1756763487.git.mykola._5Fkvach@epam.com/
+---
+
+Changes introduced in v14:
+- move arch_domain_resume() to its own header, drop typeof usage for
+  the resume context, move resume error prints into arch_domain_resume(),
+  and address review nits
+- move the suspend-to-RAM changelog entry to the 4.22 section
+- commit message tweaks.
+
+Mykola Kvach (4):
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
+  tools/xl: Allow compilation of 'xl resume' command on Arm
+  SUPPORT.md: Document PSCI SYSTEM_SUSPEND support for guests
+  CHANGELOG: Document guest suspend/resume to RAM support on Arm
+
+ CHANGELOG.md                          |   4 +
+ SUPPORT.md                            |   5 +-
+ tools/include/libxl.h                 |   1 -
+ tools/xl/xl.h                         |   4 +-
+ tools/xl/xl_cmdtable.c                |   4 +-
+ tools/xl/xl_migrate.c                 |   2 +-
+ tools/xl/xl_saverestore.c             |   2 +-
+ tools/xl/xl_vmcontrol.c               |  12 +--
+ xen/arch/arm/domain.c                 |  41 +++++++++
+ xen/arch/arm/include/asm/domain.h     |   2 +
+ xen/arch/arm/include/asm/perfc_defn.h |   1 +
+ xen/arch/arm/include/asm/psci.h       |   2 +
+ xen/arch/arm/include/asm/suspend.h    |  24 ++++++
+ xen/arch/arm/include/asm/vpsci.h      |   5 +-
+ xen/arch/arm/vpsci.c                  | 116 +++++++++++++++++++++-----
+ xen/common/domain.c                   |   5 ++
+ xen/include/xen/suspend.h             |  15 ++++
+ 17 files changed, 208 insertions(+), 37 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/suspend.h
+ create mode 100644 xen/include/xen/suspend.h
+
 -- 
 2.43.0
-
 
