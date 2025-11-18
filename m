@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A762CEDDA7
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 15:07:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1164935.1491785 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B856CEDDA1
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 15:09:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1164945.1491795 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLNIl-0003LG-Nb; Tue, 18 Nov 2025 15:07:27 +0000
+	id 1vLNKO-00040G-7j; Tue, 18 Nov 2025 15:09:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1164935.1491785; Tue, 18 Nov 2025 15:07:27 +0000
+Received: by outflank-mailman (output) from mailman id 1164945.1491795; Tue, 18 Nov 2025 15:09:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLNIl-0003L9-KX; Tue, 18 Nov 2025 15:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 1164935;
- Tue, 18 Nov 2025 15:07:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vLNKO-000409-4H; Tue, 18 Nov 2025 15:09:08 +0000
+Received: by outflank-mailman (input) for mailman id 1164945;
+ Tue, 18 Nov 2025 15:09:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=maYy=52=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vLNIk-00033y-04
- for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 15:07:26 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4a805d05-c490-11f0-9d18-b5c5bf9af7f9;
- Tue, 18 Nov 2025 16:07:25 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b73b24f1784so272297966b.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Nov 2025 07:07:25 -0800 (PST)
+ id 1vLNKN-000403-7V
+ for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 15:09:07 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 85ecb686-c490-11f0-980a-7dc792cee155;
+ Tue, 18 Nov 2025 16:09:05 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b735487129fso887276166b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Nov 2025 07:09:05 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b734fa81296sm1393799666b.6.2025.11.18.07.07.23
+ a640c23a62f3a-b734fd809fasm1377008966b.45.2025.11.18.07.09.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Nov 2025 07:07:24 -0800 (PST)
+ Tue, 18 Nov 2025 07:09:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,55 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a805d05-c490-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 85ecb686-c490-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763478445; x=1764083245; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1763478544; x=1764083344; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=UcLxhIrNXaMN+dEZIS/JAOfVnBILwCijMp1B3XCEPJ8=;
-        b=EoyIwBqaKYIu7aNm2p71Lczqz+xj/H2j6+ZwolZH8Q1MyUf1OnV79wb5hXjhFJRAW2
-         Lk6aD+QocT9o3KPhnq1ORlp39YouNnqUQhXrVJweYkGE1bvpaeoOV5qwq29kLSbOpV3X
-         Z4xjMUiFyJWrEmDxLYxFAh7XD/S/brcEn5k/qqC+riSIU90DNMV9ASueWwNmIIuvctS4
-         oTTCbP3sBrRbalOfmhQJLOG0SkkrDdJGFxL3rakOfJcalfDNyIMscOUkki4/sx/Qhkl6
-         9agYf5f4C929YxOShyHG8HcwuigyFxp/KZSgO6DJ4l3OvrDFxYyXu+kW5LfT7AnqeA2s
-         Ysgg==
+        bh=GTDHw2weO1AUBfmHmJK8dwo4mfz5EckyJJgzqO2xOwA=;
+        b=NBIP8Qkp3P+7Apoye79IAKEtBeHU9UNkIJivOGO3YU2QZNCOTFuEFsc9SrOekLtujG
+         GcAVzjauRXeULfkGJA/4dEibNVpg2Ezo4Z83M95IskGmYGGnOVbETaCaV4VkMU1A05Kj
+         4khHDhqi2vV7G58f8LghBiUcUJb0lsbuxdCBKj0CHcY3ZctZDDIS/JcPQQK6JoX9hcKT
+         R4/bksgeJ/trkLKYLKP7edt0LGErksDpNb61ejtMM/8DckaY9DN7E1elAxykAB5Kla3a
+         3uiyScDLq8l1W4/6qcbohqP68dTkwYovGjGxnvjm0zLyALR9lHVTH0D6ddamM+hZdGyC
+         hVQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763478445; x=1764083245;
+        d=1e100.net; s=20230601; t=1763478544; x=1764083344;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UcLxhIrNXaMN+dEZIS/JAOfVnBILwCijMp1B3XCEPJ8=;
-        b=PCNxfoyvwQYHETA6XOYhr6RalWJnX1bWba0YPCHro7epv/CXkwMUrtoxnPsL7YmuOc
-         l/KuIP6TdFf7J6REOf8yyLt7u+8UWH1C89sfet89/AhA9eEicK7OcT2kpYnjPNftW+OO
-         DpKfuJFBaFHsKL9TN/FP1lZEJSAxqQ6r0ZbjJH2S+R+i/RiBN1zT9uBvRrgQbnLoHtTH
-         01w7we2t+gE4B6yum2920Un6EJhPoM7VNwyaj4cZe12y8ZfBWz1TYklIoAtaPsA9QMbS
-         RobvgH+Q+qJ23xo+ZFeBCxrRTodtNbIsc8LlYIcM/7jSIA82vFQvWh+HeXo1nOvJbJeW
-         5y1A==
-X-Gm-Message-State: AOJu0Yw8r0s+n71NY805jhK8XR65k2M+MBMJYXr1UiA3w6roNwwbxqXi
-	R3LV7b9UbrjPHhLCZKu94dp5xZ2J7yUkeRpt9V/awiywGxogPVd3siB9y6vCwL7JjJTTN3EXCQ9
-	ODaQ=
-X-Gm-Gg: ASbGncs/Sb5lfM0n7kFEmleMcG0qkqXpok4h7kjhREXpRJy366D4uxIOI/6k8dXr4dB
-	KQDO3VJ5irArGzgpcnhT0t1k8JdMkXOy/C9MfHiUfK0Vu8joq14DVpGmEJHlWIiJYnoDfZCKTI2
-	8uvV4tepwZc1XghTPaOf9oBqRkid7mRFiZMnYaEocYGURGK5YBFAHS3j49/Du69RZfPfYw0bivv
-	cW9afuDUERzyBRt7Oj4mF4i4rzDrwgNsC80PUi+gxQObOwwZs+G7MSdfsbg5GaYuGzQzIps3ujZ
-	f+QBZrz5CHnhVYDJ1OpSIu6ifYPwmP21WzIwPwN+Afvk0/yeTDyxQA60Sx260S0ZZyW+snA27O5
-	OMyHciNTpXWepRrOkCaDPVOPt8O+7My51QBvmtZDnQPY5JS5xDn83LzPMbU9IYcRfl1i7H5YbzK
-	fIu5PiHfq/vPWaYE7LX6Uq0rYayoMdyKagsiZBU026SKmxWYDaThmaCwCC4a48vSfBCqf/HmpR3
-	RIoAvxS/2lpag==
-X-Google-Smtp-Source: AGHT+IE2AMQszacX3K1IzrjUWAeT0RvSIr8T9X7hWthAm+aZ3Z96afG5mCWt0bR5QdrEXk8PAbchzA==
-X-Received: by 2002:a17:907:2d87:b0:b6d:3456:14b3 with SMTP id a640c23a62f3a-b75a0a546b7mr365066466b.20.1763478444409;
-        Tue, 18 Nov 2025 07:07:24 -0800 (PST)
-Message-ID: <505029ff-cb2e-425c-bf5c-3ac364f32140@suse.com>
-Date: Tue, 18 Nov 2025 16:07:23 +0100
+        bh=GTDHw2weO1AUBfmHmJK8dwo4mfz5EckyJJgzqO2xOwA=;
+        b=PpxkAIy+/xsPrfWJMWq7LkZ2HkoAXiRXekf1xxwAOnPyQQn9xk0ZlV2q4l95Xa9tqw
+         qlyPjIV7pIN0BnAJ1I3b9Hdjd5kFO22XjNWury8HSmEcEMoL6dZJKFufcj49Kj4GHfCJ
+         7CI/tMdPl/lJYiIzBvOiWOr12UwDttgvfwygLu2PDl+sH5XOTPGwlbrEjrQ5yfoboQBM
+         oihkSu4IEVCH63Zo1MPfp1WsQgSH021mRXuID/pf8UKp2NJnINM073zbb9uX8/rB2Mom
+         JW0PX4vOh4ajblThFZblsd3N8fjlJXX5S2H3/vfaX2l6+7vWuB/gJW0rhnAC7Oz8iTC6
+         dV2A==
+X-Gm-Message-State: AOJu0Yxugq930fAbm/8Pzyb7e8n0vnDKesJ5nRwgVBXnnvoW4lVsHZOs
+	lJfZUpIL8nJRC5PXqeQaoaxe2PYWgy66Hf9gLpk8/l2YyRqUB4gM8+pBKk4IVH+NqE1XQIZ6AAn
+	rW1g=
+X-Gm-Gg: ASbGncs3U1QXuToBKaOfR2vVQs6YLjaqMWxdOG1XqF+40fMJgT7y5U2ZI1UgwclyMC7
+	106D3vnMJbj1dBAxvdiB7fP+iYlY85E3z0dDSlzHSfrVbRKuoL6P1QeEOKBk75nRFteaEMMQSkN
+	2JONW/IqxR2Kaj/92R/FYpz+ZejE3Nz8Awq33vei8865H20lbi7ZtEaqeDtj0CUlBVHmge9Dm+X
+	WvpIOqT6qT4x+1WX4R7yMCXOxBi/evnSorUf8rcX0RL6ZzIJulbq3WfTlfd8OdAbe6Wls+cPI9/
+	ZNcgTIHdYOTecuGCWk1R+r82/O7bX7B7ppXsa4ZIV8ewNZ2AqWcEp19GvKnTp28L2Vl3tB44zVf
+	EkUOb+pVB2y/Yp3jkNgLxsqRRfsR5NJNTvul4F3hMtSEef6UEsUYQ+fxwBH6WyYyhElZF8t6e3Z
+	YXum3VgxxcByqEfpkwk419W+YcNLzfhjoiLEooA7i8BHLuCoB5uy3/kKjGcbtI7AGCBd4GODytY
+	QFL5IsIXERBcw==
+X-Google-Smtp-Source: AGHT+IG3BCZghm7TEjUUuD1BxyRHTbjbFWeuzyTzfuwgLhtPozzm+QKLrPoqRE7cBld2KTh8wnJTKw==
+X-Received: by 2002:a17:907:7eaa:b0:b76:2d96:6c28 with SMTP id a640c23a62f3a-b762d966d88mr158348966b.24.1763478544425;
+        Tue, 18 Nov 2025 07:09:04 -0800 (PST)
+Message-ID: <c0ed26a0-6e34-4aab-ad7d-44b9f596b1e9@suse.com>
+Date: Tue, 18 Nov 2025 16:09:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 4/8] x86: replace APERFMPERF synthetic feature bit
+Subject: [PATCH 8/8] x86/cpufreq: use host CPU policy in HWP driver
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Jason Andryuk <jason.andryuk@amd.com>
 References: <53ef6c9a-1115-4bb4-bb7f-e2595ab9d0b6@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -125,71 +126,143 @@ In-Reply-To: <53ef6c9a-1115-4bb4-bb7f-e2595ab9d0b6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Use the respective host CPU policy bit instead.
+There's no need to invoke CPUID yet another time. This way two of the
+static booleans can also go away.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -523,10 +523,6 @@ static void generic_identify(struct cpui
- 	if ( cpu_has(c, X86_FEATURE_CLFLUSH) )
- 		c->x86_clflush_size = ((ebx >> 8) & 0xff) * 8;
+--- a/xen/arch/x86/acpi/cpufreq/hwp.c
++++ b/xen/arch/x86/acpi/cpufreq/hwp.c
+@@ -18,9 +18,6 @@
  
--	if ( (c->cpuid_level >= CPUID_PM_LEAF) &&
--	     (cpuid_ecx(CPUID_PM_LEAF) & CPUID6_ECX_APERFMPERF_CAPABILITY) )
--		__set_bit(X86_FEATURE_APERFMPERF, c->x86_capability);
+ static bool __ro_after_init hwp_in_use;
+ 
+-static bool __ro_after_init feature_hwp_notification;
+-static bool __ro_after_init feature_hwp_activity_window;
 -
- 	/* AMD-defined flags: level 0x80000001 */
- 	if (c->extended_cpuid_level >= 0x80000001)
- 		cpuid(0x80000001, &tmp, &tmp,
+ static bool __read_mostly feature_hdc;
+ 
+ static bool __ro_after_init opt_cpufreq_hdc = true;
+@@ -165,8 +162,6 @@ bool hwp_active(void)
+ 
+ static bool __init hwp_available(void)
+ {
+-    unsigned int eax;
+-
+     if ( boot_cpu_data.cpuid_level < CPUID_PM_LEAF )
+     {
+         hwp_verbose("cpuid_level (%#x) lacks HWP support\n",
+@@ -183,29 +178,25 @@ static bool __init hwp_available(void)
+         return false;
+     }
+ 
+-    eax = cpuid_eax(CPUID_PM_LEAF);
+-
+     hwp_verbose("%d notify: %d act-window: %d energy-perf: %d pkg-level: %d peci: %d\n",
+-                !!(eax & CPUID6_EAX_HWP),
+-                !!(eax & CPUID6_EAX_HWP_NOTIFICATION),
+-                !!(eax & CPUID6_EAX_HWP_ACTIVITY_WINDOW),
+-                !!(eax & CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE),
+-                !!(eax & CPUID6_EAX_HWP_PACKAGE_LEVEL_REQUEST),
+-                !!(eax & CPUID6_EAX_HWP_PECI));
++                host_cpu_policy.basic.pm.hwp,
++                host_cpu_policy.basic.pm.hwp_notification,
++                host_cpu_policy.basic.pm.hwp_activity_window,
++                host_cpu_policy.basic.pm.hwp_epp,
++                host_cpu_policy.basic.pm.hwp_plr,
++                host_cpu_policy.basic.pm.hwp_peci);
+ 
+-    if ( !(eax & CPUID6_EAX_HWP) )
++    if ( !host_cpu_policy.basic.pm.hwp )
+         return false;
+ 
+-    if ( !(eax & CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE) )
++    if ( !host_cpu_policy.basic.pm.hwp_epp )
+     {
+         hwp_verbose("disabled: No energy/performance preference available");
+ 
+         return false;
+     }
+ 
+-    feature_hwp_notification    = eax & CPUID6_EAX_HWP_NOTIFICATION;
+-    feature_hwp_activity_window = eax & CPUID6_EAX_HWP_ACTIVITY_WINDOW;
+-    feature_hdc                 = eax & CPUID6_EAX_HDC;
++    feature_hdc                 = host_cpu_policy.basic.pm.hdc;
+ 
+     hwp_verbose("Hardware Duty Cycling (HDC) %ssupported%s\n",
+                 feature_hdc ? "" : "not ",
+@@ -213,7 +204,7 @@ static bool __init hwp_available(void)
+                             : "");
+ 
+     hwp_verbose("HW_FEEDBACK %ssupported\n",
+-                (eax & CPUID6_EAX_HW_FEEDBACK) ? "" : "not ");
++                host_cpu_policy.basic.pm.hw_feedback ? "" : "not ");
+ 
+     hwp_in_use = true;
+ 
+@@ -226,7 +217,8 @@ static int cf_check hwp_cpufreq_verify(s
+ {
+     struct hwp_drv_data *data = per_cpu(hwp_drv_data, policy->cpu);
+ 
+-    if ( !feature_hwp_activity_window && data->activity_window )
++    if ( !host_cpu_policy.basic.pm.hwp_activity_window &&
++         data->activity_window )
+     {
+         hwp_verbose("HWP activity window not supported\n");
+ 
+@@ -268,7 +260,7 @@ static int cf_check hwp_cpufreq_target(s
+     hwp_req.max_perf = data->maximum;
+     hwp_req.desired = data->desired;
+     hwp_req.energy_perf = data->energy_perf;
+-    if ( feature_hwp_activity_window )
++    if ( host_cpu_policy.basic.pm.hwp_activity_window )
+         hwp_req.activity_window = data->activity_window;
+ 
+     if ( hwp_req.raw == data->curr_req.raw )
+@@ -365,7 +357,7 @@ static void cf_check hwp_init_msrs(void
+     }
+ 
+     /* Ensure we don't generate interrupts */
+-    if ( feature_hwp_notification )
++    if ( host_cpu_policy.basic.pm.hwp_notification )
+         wrmsr_safe(MSR_HWP_INTERRUPT, 0);
+ 
+     if ( !(val & PM_ENABLE_HWP_ENABLE) )
+@@ -537,7 +529,8 @@ int get_hwp_para(unsigned int cpu,
+         return -ENODATA;
+ 
+     cppc_para->features         =
+-        (feature_hwp_activity_window ? XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW : 0);
++        (host_cpu_policy.basic.pm.hwp_activity_window
++         ? XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW : 0);
+     cppc_para->lowest           = data->hw.lowest;
+     cppc_para->lowest_nonlinear = data->hw.most_efficient;
+     cppc_para->nominal          = data->hw.guaranteed;
+@@ -585,7 +578,7 @@ int set_hwp_para(struct cpufreq_policy *
+ 
+     /* Clear out activity window if lacking HW supported. */
+     if ( (set_cppc->set_params & XEN_SYSCTL_CPPC_SET_ACT_WINDOW) &&
+-         !feature_hwp_activity_window )
++         !host_cpu_policy.basic.pm.hwp_activity_window )
+     {
+         set_cppc->set_params &= ~XEN_SYSCTL_CPPC_SET_ACT_WINDOW;
+         cleared_act_window = true;
 --- a/xen/arch/x86/include/asm/cpufeature.h
 +++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -11,7 +11,9 @@
- #include <xen/macros.h>
+@@ -115,14 +115,6 @@ static inline bool boot_cpu_has(unsigned
+ }
  
- #ifndef __ASSEMBLY__
-+#include <asm/cpu-policy.h>
- #include <asm/cpuid.h>
-+#include <xen/lib/x86/cpu-policy.h>
- #else
- #include <asm/cpufeatureset.h>
- #endif
-@@ -121,7 +123,6 @@ static inline bool boot_cpu_has(unsigned
- #define CPUID6_EAX_HDC                               BIT(13, U)
- #define CPUID6_EAX_HWP_PECI                          BIT(16, U)
- #define CPUID6_EAX_HW_FEEDBACK                       BIT(19, U)
--#define CPUID6_ECX_APERFMPERF_CAPABILITY             BIT(0, U)
+ #define CPUID_PM_LEAF                                6
+-#define CPUID6_EAX_HWP                               BIT(7, U)
+-#define CPUID6_EAX_HWP_NOTIFICATION                  BIT(8, U)
+-#define CPUID6_EAX_HWP_ACTIVITY_WINDOW               BIT(9, U)
+-#define CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE BIT(10, U)
+-#define CPUID6_EAX_HWP_PACKAGE_LEVEL_REQUEST         BIT(11, U)
+-#define CPUID6_EAX_HDC                               BIT(13, U)
+-#define CPUID6_EAX_HWP_PECI                          BIT(16, U)
+-#define CPUID6_EAX_HW_FEEDBACK                       BIT(19, U)
  
  /* CPUID level 0x00000001.edx */
  #define cpu_has_fpu             1
-@@ -175,6 +176,9 @@ static inline bool boot_cpu_has(unsigned
- #define cpu_has_fma4            boot_cpu_has(X86_FEATURE_FMA4)
- #define cpu_has_tbm             boot_cpu_has(X86_FEATURE_TBM)
- 
-+/* CPUID level 0x00000006.ecx */
-+#define cpu_has_aperfmperf      host_cpu_policy.basic.pm.aperfmperf
-+
- /* CPUID level 0x0000000D:1.eax */
- #define cpu_has_xsaveopt        boot_cpu_has(X86_FEATURE_XSAVEOPT)
- #define cpu_has_xsavec          boot_cpu_has(X86_FEATURE_XSAVEC)
-@@ -292,7 +296,6 @@ static inline bool boot_cpu_has(unsigned
- /* Synthesized. */
- #define cpu_has_arch_perfmon    boot_cpu_has(X86_FEATURE_ARCH_PERFMON)
- #define cpu_has_cpuid_faulting  boot_cpu_has(X86_FEATURE_CPUID_FAULTING)
--#define cpu_has_aperfmperf      boot_cpu_has(X86_FEATURE_APERFMPERF)
- #define cpu_has_xen_lbr         boot_cpu_has(X86_FEATURE_XEN_LBR)
- #define cpu_has_xen_shstk       (IS_ENABLED(CONFIG_XEN_SHSTK) && \
-                                  boot_cpu_has(X86_FEATURE_XEN_SHSTK))
---- a/xen/arch/x86/include/asm/cpufeatures.h
-+++ b/xen/arch/x86/include/asm/cpufeatures.h
-@@ -19,7 +19,7 @@ XEN_CPUFEATURE(TSC_RELIABLE,      X86_SY
- XEN_CPUFEATURE(XTOPOLOGY,         X86_SYNTH( 5)) /* cpu topology enum extensions */
- XEN_CPUFEATURE(CPUID_FAULTING,    X86_SYNTH( 6)) /* cpuid faulting */
- XEN_CPUFEATURE(XEN_FRED,          X86_SYNTH( 7)) /* Xen uses FRED */
--XEN_CPUFEATURE(APERFMPERF,        X86_SYNTH( 8)) /* APERFMPERF */
-+/* Bit 8 unused */
- XEN_CPUFEATURE(MFENCE_RDTSC,      X86_SYNTH( 9)) /* MFENCE synchronizes RDTSC */
- XEN_CPUFEATURE(XEN_SMEP,          X86_SYNTH(10)) /* SMEP gets used by Xen itself */
- XEN_CPUFEATURE(XEN_SMAP,          X86_SYNTH(11)) /* SMAP gets used by Xen itself */
 
 
