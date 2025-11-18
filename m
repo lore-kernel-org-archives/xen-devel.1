@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B20CACEDD86
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 13:36:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1164700.1491600 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D5DCEDD81
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Nov 2025 13:37:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1164707.1491675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLLsu-0004Sj-GT; Tue, 18 Nov 2025 13:36:40 +0000
+	id 1vLLt3-0006N3-3k; Tue, 18 Nov 2025 13:36:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1164700.1491600; Tue, 18 Nov 2025 13:36:40 +0000
+Received: by outflank-mailman (output) from mailman id 1164707.1491675; Tue, 18 Nov 2025 13:36:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLLsu-0004S8-C4; Tue, 18 Nov 2025 13:36:40 +0000
-Received: by outflank-mailman (input) for mailman id 1164700;
- Tue, 18 Nov 2025 13:36:39 +0000
+	id 1vLLt2-0006Mp-VS; Tue, 18 Nov 2025 13:36:48 +0000
+Received: by outflank-mailman (input) for mailman id 1164707;
+ Tue, 18 Nov 2025 13:36:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0ey2=52=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1vLLst-0004PV-CQ
- for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 13:36:39 +0000
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [2a01:111:f403:c201::6])
+ id 1vLLt1-0004PV-Cc
+ for xen-devel@lists.xenproject.org; Tue, 18 Nov 2025 13:36:47 +0000
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c201::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b5feae2-c483-11f0-980a-7dc792cee155;
- Tue, 18 Nov 2025 14:36:37 +0100 (CET)
+ id a05f0900-c483-11f0-980a-7dc792cee155;
+ Tue, 18 Nov 2025 14:36:45 +0100 (CET)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by PAXPR03MB7650.eurprd03.prod.outlook.com
- (2603:10a6:102:1de::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.18; Tue, 18 Nov
- 2025 13:36:33 +0000
+ (2603:10a6:102:30d::12) by AM9PR03MB7217.eurprd03.prod.outlook.com
+ (2603:10a6:20b:26d::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.21; Tue, 18 Nov
+ 2025 13:36:36 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9320.013; Tue, 18 Nov 2025
- 13:36:33 +0000
+ 13:36:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,35 +49,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b5feae2-c483-11f0-980a-7dc792cee155
+X-Inumbo-ID: a05f0900-c483-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FymBHOQ5qqRyn4hne7vE/T9D6noxTf2bSZwhHrEj345SS5IFvu3/PTnN9MlNONOoWPBj8I+50wJzzC7K5xJmrGPDgI8solUGnIEpWPkiMaTjhC2qSisv2nqh+7tCoALu2hVtk9GoyE0QdtoyrgdbOaKIwjcP7brjulf801K0K5zfS3o4isUcg49U2y/g1DN+al9pYXBD+pIhNDPdvaccI1v4NcYxLnLwx0jXH/RHwj2gwxljsYMVUu5nsiE9Qa/fynQ0uz3MOZNm3m6eBzLfypvW54nzOEB/wFtn3pdWSE4FwkK28devawJxNRwIFcgRI9hxrIuR+V8OzY7scL9dVw==
+ b=W2bzKBtmeF64AUTos2yyfOpFsVYE7kE5n3/jf+ak0Di8PYvPF4Rwiloo+B0BQwaNuYDDnjhpvS0H0ZMXLeBJaD53J1fwP9OX4K72XxQ0cqquPijI0/sSTEf48JjwKzrRHAe/2a4j4io1lCTVd84ofyo9dRcS+xbemF+O4WUMPEwJ/CqI/0X/291zdVaNpHOVF07Mbmi8gcQhoRh+XBV0+hXtLkpW6xwaVzb+q8/XzWjjsaL/zQRG182xrwo0XzQEufZZB/0dx+qD02J6vTgmzFR+wn0QrEVjXMYl2kx5YkTKNSZW7vUXqO3QH6lW9SdweBacTq5ZNYu98OFVsFazfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hTGuoCs2WHO4MzRcHi6p/mnMsry/Pk1E1urssND/pzw=;
- b=xIYXcSFU4Q9s5zJ0j1z7VkfOKFfAF5hPGrFe+/vojLFDVcpjGfFrPTsew0P+8iZmpNTRPWX+OiGwrWLvpJbZOkgPZTpm3DKwEk1klKT2C4vsjxgrAyy+a67QNPoEkGhfbvzHJWoP1dEmlFF8huOr96hpkxfdZDCIrnYyB0hIdWWUrw0qi5VcwDqTV9Q43sucxtOSzyxVX1EycfpbQZqQGGCRtUrfheWi5TiS6EweOVtzcmIKPIbIN3hK7Hmg1T7jk2IGrIh1iIIGrvvhdy7FvqmmKrXs7LJEXxriL+468W83lXSE+2BDwElBUYoSzyjKCNOksubwTu9HlH5LHd1w1A==
+ bh=71+mXVMCcGmDzHT41p1W9p55Yh86fh2s7rzxAEHrAJw=;
+ b=N0ucQZzDJguJKalspgqma/G91se0Zdq3RC1H8AA2Ym741M4m+gHDuQ8LXEY0i/Cblre9jCgVSkNI/P8kUJW3zn6pQeYbmF/InWL06Gy61KYH2YS2eiE2tmzVqIBe3PsA6YY2nl8VqPk9YlxszGhTSbntcys1MY8P/0KJejMpPMRbVb7+Tn5Mpi9Yvzxd40IMLIX1hA4jMMu5xISNaGUGgi71vCEA/fGWSAYzCKT0N8gEsfEUwKlfbRDN3VB4wXox5saPZEA5OlqVGbR9AGKuRW+p3w1Vgq3R0IlJWLX9+gyWcnK0tv/gbBBE1D2B+K+SR2N8MlUpSpUxJCIg1Mslig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hTGuoCs2WHO4MzRcHi6p/mnMsry/Pk1E1urssND/pzw=;
- b=Vq9Z6QthU0mIWIOFHnuoff3lbPQYuEAeXhGNsMOLiJpcziK+KbiBSeLX8rPRb0wNzTydJb+2CgYj/puO3QzW/kZWLCm1VnLmTgjF4GyOA5CTH0Gm/qtWxN8mBMblZyQfsG0lyekeIvtgo2x2YNFxoJIU34NUQfjPNLddT1+uPBSsdNkSRAFRuUQQ0NLdZOFQKfpkA0tvJ/4p0nhTI1IUHTdA7X8NhQlwd+kN1nER+tZHFW/mNtopIgf97szbyrvNQrtIcswJYOrKIZoyCOSCexzvqbxLscqciI3neGSZu/gAdfN71dquQIK5zHGsrPqzT4nNZQvrUKJ/mWlzs+82xA==
+ bh=71+mXVMCcGmDzHT41p1W9p55Yh86fh2s7rzxAEHrAJw=;
+ b=E/VeAtKOzg9M5cTIPzGtYx0mCfGfpAMywO78hUf6mHJbbNA/WBzrbtbvlqKzPQMlBFFyUzzdwKOjb+AavcaSePSxK2QHUgRXQQac+cJWGyUCQqvmUKXrRIvK5vlrmte5j8973gR7VUxBVIkHi8iREs7exB2ma2Z/D7iesEAIHhHf/M3FoDSqtZA5TEXQZ7ZK5T37J6wS9f49h/X3z+Bs+EXtr56fvuELfjgeS1yF+u0dLI6RcYzHsyAYQbJtHseGek+RgmeRcbRSLytQ8xLYNFzdTsgZSpDV/H03p3eIK9kRi3tMMdsrsBqUw3n++fodkR+ueIy25EaO9uHJH4h5rA==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <stefano.stabellini@amd.com>, Stefano Stabellini
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>, Stewart Hildebrand <stewart.hildebrand@amd.com>,
-	Mykyta Poturai <Mykyta_Poturai@epam.com>
-Subject: [PATCH v3 3/8] xen/vpci: introduce has_vpci_bridge
-Thread-Topic: [PATCH v3 3/8] xen/vpci: introduce has_vpci_bridge
-Thread-Index: AQHcWJBaPhgfVTH0K0SSYJwd1HNNWw==
-Date: Tue, 18 Nov 2025 13:36:33 +0000
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 8/8] arm/pci: enable vpci for hwdom when pci-scan is
+ enabled
+Thread-Topic: [PATCH v3 8/8] arm/pci: enable vpci for hwdom when pci-scan is
+ enabled
+Thread-Index: AQHcWJBceLVR272n0Uem7ppfvpbz3Q==
+Date: Tue, 18 Nov 2025 13:36:36 +0000
 Message-ID:
- <207b6aef763d12426385efb925beeebbbb56f6b3.1763462211.git.mykyta_poturai@epam.com>
+ <81b3d59050df8482652c081270350dfc965b5900.1763462211.git.mykyta_poturai@epam.com>
 References: <cover.1763462211.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1763462211.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -87,72 +87,71 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PAXPR03MB7650:EE_
-x-ms-office365-filtering-correlation-id: 854ced44-1825-49f9-8720-08de26a77d60
-x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|AM9PR03MB7217:EE_
+x-ms-office365-filtering-correlation-id: c30c8f24-07d7-4949-6112-08de26a77edc
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700021;
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?r66zxSukQZ67c8+d9nWDC9YLF8bwV3aaThXUCimBJMXIB9qqA/HKCpv+Ri?=
- =?iso-8859-1?Q?jt0/D/l4nC42KaftAcsDq5j6Jp+jVPTfr5KvJ43YfAuEyYUizq8XcuqCCM?=
- =?iso-8859-1?Q?l73Hpjmsp9i1Mw/AuMMpQs+DAGBeXdJO7RWsFmhcYZMeQhcJ3PkoHJWkbE?=
- =?iso-8859-1?Q?ZtUmDnim/u7qMy93vMdzm5dCZVjxwUCbEm+erNIVWbT+Grhg5wDGriZlwE?=
- =?iso-8859-1?Q?Xxv4AMwaih6CG27SHF9bUnJonTt8tuSzlYj8vC4urQ0i96KEQZXcwXojB7?=
- =?iso-8859-1?Q?f/RQ0DHz73l/FR6vyvda1v8xhk4HPl4a770OwH+4NerFyek64m5pzgq1uz?=
- =?iso-8859-1?Q?R/YXtju16LhiU3VIk28jCQZSW2szZA8s8W8lRITiJyI+R4I79rCtnhz9l0?=
- =?iso-8859-1?Q?h/Ugv1fSjgt7DRKtzzgu7N4W5sE0m0JKmBBQCMfsOqnZ7f+KsCZN0K94+X?=
- =?iso-8859-1?Q?pP9zkZ2HxefenCu+OC9pLorEa/c/B4Z1gCbFTgZ+WfkfDxKmHWmKl0knOl?=
- =?iso-8859-1?Q?U1a06whBikH9oQUNIm9A9t6wAXosjKlMVsDQz3L1cTIZyAQ4lGX0tUBPSJ?=
- =?iso-8859-1?Q?yRcHiPCBJAR4Sf75pitq3CtHYzF0/qtmOJUXSQhn5sra4TUZUV1Y4rbHvV?=
- =?iso-8859-1?Q?UVTUPbCVW92VQbhxzQeyQ2xfs7m5l/EMzi025DKH+Ba+G2kHjfJeM4Us8V?=
- =?iso-8859-1?Q?e5jLoWPB17gExBsSlVvXc8Q3m8nhnPGOVpuoEJZXtEYAduzrPQOCAc8HHs?=
- =?iso-8859-1?Q?8mr0odyhbdAwKKXRgKshMW/vBphenzCpoHWhlzhDLCkB01+wOWu4cWB+2z?=
- =?iso-8859-1?Q?hZGvzS9ytN18AfqW8HUU2rpsoQQSU7xy1kl/zEQr1cfGs1qNDnXFDbyWGG?=
- =?iso-8859-1?Q?S/ufST2tbyxpJGAHhhlFhE9kBf/ejELOlvcMyEz3TL2aEcErlHqxzWbUgT?=
- =?iso-8859-1?Q?3kJPDixRTCmsbjmkLYhgJdxxegqG+MF7AGBUZ5bU9rAN12de/s2rK5QMb+?=
- =?iso-8859-1?Q?Mvhe+O+2MXf1YLRMWNnxaFpvtUQCTYV7gtxRKwvB4jnPbjFcZbdek0LkVq?=
- =?iso-8859-1?Q?Qi0U31DcwSo8Wa6IveFxLymlbHr1lKBaeEZbI3idCGTdZgV56cRdVRtBLa?=
- =?iso-8859-1?Q?+6S2rN+9RWDIIXwtefUjOaTn3gYi5fcbnnjZ2qSokYafibZG1uxWH07Mtw?=
- =?iso-8859-1?Q?o1/k7Wy1mwSGAQ8UH7EmSSV1FA8wkLW/tMNl3KRNmUcZ5kpH71m9IciaZy?=
- =?iso-8859-1?Q?8E+A+u+g+8mfFuNbAW6z9kcnu3pobdv2t9uCVf7ZxpU7N04k8OFdyqOCQS?=
- =?iso-8859-1?Q?xVdX1zUUWYwUdzksd+jONdUFYsLfI8lWlcwax9Ai/d/G/wY6DAgQ50uyP5?=
- =?iso-8859-1?Q?rwnNYkmQFzoiue2vK4QZQKwWDV32YyTQFdlPMMnKpbzTaKiJKAII8LDM6L?=
- =?iso-8859-1?Q?gSg40ANG36tJQhRWqbe7BDKoM06N1XJM8N/7r52Vdh0Vj2zWFIDq2H7H0F?=
- =?iso-8859-1?Q?/fwW6x9aSbO1tLW0fURWYgUYy8WJuA4vlcWbIhViROMkOXFoH2rdzcX76c?=
- =?iso-8859-1?Q?Qg3OqbQYtQyfhb1O2FVAimykC4rC?=
+ =?iso-8859-1?Q?bkP9oyIRUL9S1YL9lIJlZkqOHNto/J1moVKhxN/Qlua/n6eTa/xWw4lI+L?=
+ =?iso-8859-1?Q?Fpnse4S4Bhp/0vhtcE2Fhf5xymC7ntO4WvBc33kK3PSjii7FjayV8XqWyn?=
+ =?iso-8859-1?Q?ldTgKMYHkB4fUSzQfiiho2G7h4oyCdN81tdWxhzJwm3RF6Zb5oxVjrrrwW?=
+ =?iso-8859-1?Q?9iGziGjtIZgA9bG0l7HfeYD4ZtKDNgU1s1Ch+/6347SYPPSFY/RTC9AYao?=
+ =?iso-8859-1?Q?tfveDDaXo3QpvtDFaaTMFC+RtrEm0U/b8hkmZ6aX3avw6+qU5Fa2TuDxBu?=
+ =?iso-8859-1?Q?qpEI3XLNjL2aJxnC92Qq726+6oYESMsLgKmUOCKNwPaqXJggGh7HAVEiuF?=
+ =?iso-8859-1?Q?TkrqdH3KkfrVP+odmJToWqg0ihpoqZtd09dsmakgalArdvi+n4msnC58d7?=
+ =?iso-8859-1?Q?W7Eav8GvyvW+O95PgGi3N5WR60s30VF2ZroczQvkq3Fia0pAVHUKrpndu8?=
+ =?iso-8859-1?Q?E4PAPGSU1nmHzwJM7peyAKUrmAnyxEdxUkYINMmPRhJEwr4mJJMQEwMEy6?=
+ =?iso-8859-1?Q?hARjyxn/lbTkZUKc2XLJzGrbgB6DIYiMwig7L5rn8hu/jwPXcRyF9cHqD2?=
+ =?iso-8859-1?Q?FsKCnQFvtCy8SQhWwecoQ/TOawp8+rjzNoRqZGcfgq94uqgVeQ1AtZyS8w?=
+ =?iso-8859-1?Q?Low9Ps4EiFEYG3VxvaFd0p8G57Z+CYnK7BP3NC/qWwfrDDqJa6C+cwV/rK?=
+ =?iso-8859-1?Q?SAhQFVV7FPG/v9wYCSDHs2JkwofIWZzX89eYvU7XvPpyrL71/DIsPJQrUQ?=
+ =?iso-8859-1?Q?WcJ+0YwJCG9+CjxePc4uVOYP9Hm5ZLlSeDy4o1IIXZ7Z8lgyfC+P+G9bX+?=
+ =?iso-8859-1?Q?inhDEnbUHwJ+ZXCcBONZI0IMyU76USJdB27NizLXlttwxCq+T87UAGeuqM?=
+ =?iso-8859-1?Q?4KSXipuVRCO9XexOV0R/PDr2FD810AM36T1S8+ph8TlhD90GaR7mLfZRpx?=
+ =?iso-8859-1?Q?LvhgR0doX3PiMcXTz9mG5xg7Gr0z4p33ybAJ3s1RBZnSQ1wdx8jEZDVdKu?=
+ =?iso-8859-1?Q?GwpzAxvi4GONXEpvffuMvi+usPOD0Ha1iX4b3QOawQoR1/GfSMJVA3Jn15?=
+ =?iso-8859-1?Q?CxYPHGJfRVHA2gtDKvgYY+6mS3YMIpEzvvsedSpD6C/vXGJLqnuIuAo2mE?=
+ =?iso-8859-1?Q?ulbPs9hzScCvDA+E3IdVbaYbD9JZwoPx2/0rAmK8d2pmt868JCQLeRo9Zu?=
+ =?iso-8859-1?Q?OnQYZji5Z5jpcXAxsh8elxb3DfAZo9WcKKjDmbS1fe833i7oRFxRykUVa1?=
+ =?iso-8859-1?Q?h8naHTF3Kiq7mmdMDq+rLIbsypJiU9+0frSPLMlyMGXbtgsoZCVWPqXoWW?=
+ =?iso-8859-1?Q?XlrCNCLQD7jolfIWmZMC2qI4MQyg6BGYYHvph75Ch+uGjxdVHA8ZK843l2?=
+ =?iso-8859-1?Q?5dD0rmadt43B5tW80ba2RRp1Q+SdhtvAUYko6DGjQHSEPyyejaFXQHyDo6?=
+ =?iso-8859-1?Q?3Auc/FZmboNB6oFI/L3+3kisTNwNf1Hll6ypVe5DPE9scnqLYcaXbghov8?=
+ =?iso-8859-1?Q?lebMvO5DK1vzbzdRNN/R4dYsNzYEits+xiOqiYf3f7Eat19lz41/u8XIe3?=
+ =?iso-8859-1?Q?3+oUXAHwisCo6Bglkd0oK3o06oLA?=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700021);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?i65KbYz14aKuLLV2Tp9bhg7Gwx9tJEA7aEeUUeXppFKFAdeyP3iQkf/LRT?=
- =?iso-8859-1?Q?hZKxD1BXlxBizdDU3MTSq7Z68xJuBawdQjKIhiYM/frw1h3iPV6lTMTCpg?=
- =?iso-8859-1?Q?JBsVbgAA3zJ4T5dlMqCJzN84DRkWzYOMCHjCVEmOeYTTX6Bk0Qmo71o7n/?=
- =?iso-8859-1?Q?RjyC0gzl0KqL4yJrVRL59wFmG1XGnKhgYQsdYOxVG5emMYaBduJJSLb7eV?=
- =?iso-8859-1?Q?6FBHnrEUp5/yZXhwfGGze4pNELkVHwawNpg+ubuXD/wZXoQ3ZKEa45EcaN?=
- =?iso-8859-1?Q?OaQDsA2EjUROwBIawmyKmLtB9la8gawwp2koj/2jpsK9e62tq9Qf3TXTE9?=
- =?iso-8859-1?Q?GY/lXIfms1Muc5KDML1mljKBG2AND4i7vuJ9M79k/r8rbWNFliEaPiXKhD?=
- =?iso-8859-1?Q?sKwxohX3qHgd8vZ7lNVn9h0qrdh23f5GMsis84QTn1ZyjnPKeeDvgHKffZ?=
- =?iso-8859-1?Q?uaZseBTIX35A6Rz5E2UKpg4gqsXEdN0X+Vmazis3tXgpFr3mfn0dZMGe04?=
- =?iso-8859-1?Q?3LUSZ2u1nHiNNyu8mUGMHaNfY2Av7W3+k5bDWkC+AowvvBHq7GVjC4ZbS0?=
- =?iso-8859-1?Q?WRe5OfjHLZPMCQOVC4HAOvl7VogsfmFS9crvDA3Mp0s16cA4acZaeHrYFA?=
- =?iso-8859-1?Q?tj2JdInk8nU/hL8lJ5p4bBpS1UaQQBw0FfOnohKi0hXgs+ezjtytkzsuVm?=
- =?iso-8859-1?Q?mUdxg+2mkWGYU/m38qatDvdP7ab5TkNPeqgrmj1XODreeMt/MgjVKeVc5G?=
- =?iso-8859-1?Q?k9uQwdpBCNKlfpkaQndSiob/blsndZ2nhR1rxpxgLhwKbjPxw9bRy7oUlH?=
- =?iso-8859-1?Q?1lbUvSG7Kvvi+WQp8Z6t2Tq/CTUMEyOcfHDNQkfvXnQRcw/bjbDv0ovRZB?=
- =?iso-8859-1?Q?NU3F5Zhr/jSPo07Xz84PhiIiLnWBe1E/h8o6mFt814TSj3hW18pn/YWsS9?=
- =?iso-8859-1?Q?imw4dzuwcK/O7kjlK1YIuxbbSLu1FGbBTILaWotQPORdzUVpXRHkezS0gq?=
- =?iso-8859-1?Q?tJpL7UfVDGD32VCcP9oi5bEQy5oNx377SS8G/CjYCKVvUVubB0Markqqrf?=
- =?iso-8859-1?Q?7yF0Yb10xri0eAOdxeekMG72dCSX/WZP/gUWL16Alp3viFSyzJAgntXfEG?=
- =?iso-8859-1?Q?Z0xE4uLLE4luvyrb/pqcWBIL9/A9uqfo/LMGFTMwv8YIHix9WeMmvWF7Jx?=
- =?iso-8859-1?Q?pzbkuG33aiPyef4hveMdbHOGH9LYajWjxI7hUUBcC7fv3rhL+UjM0PbHLj?=
- =?iso-8859-1?Q?eyQxCWVYZPOOwdc7j7YQISHauevot9pkiGdbj94tY6ZpydaBOLend3wQKY?=
- =?iso-8859-1?Q?cQctGA5jeIXndRgFZeDB5XL/voDCJySGEBuV7CE1ugHJEJGR264d4lwDai?=
- =?iso-8859-1?Q?ypGv1prO8w91K2yK+SYJku/6fhAHOk9L91oz3DADiySatTrEJxxR+Hal9V?=
- =?iso-8859-1?Q?p498WCZ0a27l2HJAi7n9afrXrOUbEETUJta7n7RkABbx5EOtgbm3EQsS+V?=
- =?iso-8859-1?Q?KlfQ8k8ppOaGzExOHeqnRNTjaroBMJgUxWQxjxktNlb9PbRSeAhUrwmZLB?=
- =?iso-8859-1?Q?HVfBB59nVS3M0l7cdezTLzDsjZM/0vKu6WAGOiJgT9g6co9lLVfZPP40K1?=
- =?iso-8859-1?Q?6Laobx1sC2IdBDQIFdYmswaHO9jl/meA+gHCK8JcGNvhu71YldZ17rjQ?=
+ =?iso-8859-1?Q?shfWLQBmEWWUHPBF1SoVqjYzW/MiFI0P4zmlj9S1qmHr5aC2CXS7SoCP0o?=
+ =?iso-8859-1?Q?mYKKk/8Y9Bzjn6S2bOz6kvvnCceIiD2RRBWKiUK5Q1gLDnybJRSu+M632u?=
+ =?iso-8859-1?Q?LP7EfHycJgjp8Nop6e46u1F8W7j2NQKLVMB4vu5MBAC2UjHSapagxKrlNg?=
+ =?iso-8859-1?Q?8SEudBqQk7BhsR1KjxifDJJ1edZufVw5J3Si+G86rG5dPxafDpbgdfp3uv?=
+ =?iso-8859-1?Q?4B3M/byqHWsDz9/yTPUEGH885zBIXbZ8EMWMUYoYO71HD3bazFJXvcnBTa?=
+ =?iso-8859-1?Q?pgnTCQNu4PN8Uv/8cxTLb9ByMF15eCtnaV78buTYq4yQwC9yiahvpAYw/X?=
+ =?iso-8859-1?Q?XMqngumC5JRojhSRVV6b2M4dEzNE9AF9JV9b4x85vc7hSmyCARahI8IxJg?=
+ =?iso-8859-1?Q?Sa9p3E6odRaCcGY6Y9+ORUj6dpCTK0/AuHPLqnpUxFMTlDTaptzyT1DiO1?=
+ =?iso-8859-1?Q?b/EEDi9LJ1sdSojJkeBB18S3xCdgzvIQyUCBds155qpsUcy7yYHALCiXp5?=
+ =?iso-8859-1?Q?MTtYoYRUFd2AML70u5mQ4hyj5TakkdqDqhnPEfcR1+GEVGqupnedTx747n?=
+ =?iso-8859-1?Q?eFluyoQ+gIHhvxnEPGu+XeZcshNQjm1Agn2o0x0DJGne3wXV7s6qBPM9u0?=
+ =?iso-8859-1?Q?UBQxfjqnSxt28AwNWUjzX/U3iTZRw2ymK9w3W6YNmBurYX407pr0bFhmmu?=
+ =?iso-8859-1?Q?19ik5GoIwu3ym/raG02nCoaTjsqCUkTTW8HNF/mdkYX3/q0eUTj1OIkrTn?=
+ =?iso-8859-1?Q?fn/c/y1OJIxNJyqx6u3o5q59XiHXOuYQnsVdGTUUOU/U9+965Q2ggXfP3C?=
+ =?iso-8859-1?Q?9JZ86y9WYy6Fe3TN6yjoGaCc55opV2w1bWgrVC9lv6bInUK23tWiBTkTTF?=
+ =?iso-8859-1?Q?YwuJ93QXTyjXEwQrajshATzckDMLmI0deLOOpTGn0cjnRF++VgLlUffagO?=
+ =?iso-8859-1?Q?A0B1oSZB5QsZOM0o5pl39DseDtqCAhx2zV1CuofHvbWlBHC6NdL3X4k0Uu?=
+ =?iso-8859-1?Q?6aUTZVQxEdQr5KySDuswFtzEymP2d+r9eY9SaLiznUrrpZreHT3Md6+sHx?=
+ =?iso-8859-1?Q?O+CbdRYlC/3JaiaAT3n2NHPrsG8AiSr5s8AtTJTj+DYZryYzwJaWoMI3Vj?=
+ =?iso-8859-1?Q?esigJwvBVzk69jyXBj2oQ4P5COvhw00K82giZNM/H58fA3gJSrIclW5/Si?=
+ =?iso-8859-1?Q?JpDVlAOhsLTbKSqHmfCpgcpNFn1YYeqjuOLu/KeAHx2CnBV3HZjqHG8g0m?=
+ =?iso-8859-1?Q?Kb1B5xhY0Rjemrepkxj0ycGZR3DiaaSzFkHprs2NEwdYutgYHqL/jBSXuO?=
+ =?iso-8859-1?Q?iRA0fYgmmGbfTJwU92B+LTGEHAuoyw4/7ZOLRjUPlzkUgoqxAxy6jtaJot?=
+ =?iso-8859-1?Q?CUz2TT8fzK5yypHT4pHM7E1S0XxYK1b4zy0F2S/64fOmNxy6wWMnEZtzRj?=
+ =?iso-8859-1?Q?35SIl9rJJyhGkk0wIPURQ+GI3gQpoERxcsHgjfdUT5ET8MAbmKoiCSTpdE?=
+ =?iso-8859-1?Q?Eky3yigt0SXHo8sxHdVXY+h9kB9zXsgCol74LWbnRlwZRqtMpfePF+r1ct?=
+ =?iso-8859-1?Q?1ZEA2aIlAuoCnfFEPF7OduOHBHKbDnW7vAtc7q3KutpGDObX3SloxkPpv8?=
+ =?iso-8859-1?Q?KdBmJkpfJ+tthxvrhgcdGaU+HYCumkpS3z79i1KWBhtPBMQ1ZyD279lw?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -160,367 +159,45 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 854ced44-1825-49f9-8720-08de26a77d60
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Nov 2025 13:36:33.7994
+X-MS-Exchange-CrossTenant-Network-Message-Id: c30c8f24-07d7-4949-6112-08de26a77edc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Nov 2025 13:36:36.2504
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TUszDvzFAlQQbsu/YTbekjpVBrHu+Q86XXZQ5K3sq3CNtWt0lRQzrCDF49NzaRXkE/euuAmPy1NNrmBaMzml/Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR03MB7650
+X-MS-Exchange-CrossTenant-userprincipalname: 1sS5jYNExYjIaHBGIBMlUPwua7DcmKhJbCeEt783WAbgedmEpuMNDOp/yKwOVXJ4FI54z00xC+o31SRsNxxT2A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB7217
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+With pci-scan implemented it is now possible to use vpci for hardware
+domains. Update has_vpci to reflect this change.
 
-With Dom0 now being able to use a virtual bridge we need a way to
-distinguish Dom0 using HW bridghe from Dom0 using virtual bridge.
-Introduce a new macro has_vpci_bridge that would determine if a domain
-should be treated as using HW bridge (only Dom0 with pci-scan disabled)
-or as using a virtual one (all DomUs and Dom0 with pci-scan enabled)
-
-Use the macro in drivers/vpci.
-
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
 v2->v3:
-* s/is_hwdom/is_hw_bridge/
+* replace hwdom_uses_vpci with has_vpci_bridge
 
 v1->v2:
-* simplify definition
+* fix typo in commit message
 ---
- xen/arch/arm/include/asm/pci.h |  1 +
- xen/arch/arm/pci/pci.c         |  2 +-
- xen/drivers/vpci/header.c      | 74 +++++++++++++++++-----------------
- xen/drivers/vpci/vpci.c        |  4 +-
- xen/include/xen/vpci.h         |  8 ++++
- 5 files changed, 50 insertions(+), 39 deletions(-)
+ xen/arch/arm/include/asm/domain.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.=
-h
-index 0680b2f50c..7289f7688b 100644
---- a/xen/arch/arm/include/asm/pci.h
-+++ b/xen/arch/arm/include/asm/pci.h
-@@ -23,6 +23,7 @@
- #define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
+omain.h
+index af3e168374..3eac0aea64 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -305,8 +305,7 @@ static inline void arch_vcpu_block(struct vcpu *v) {}
 =20
- extern bool pci_passthrough_enabled;
-+extern bool pci_scan_enabled;
+ #define arch_vm_assist_valid_mask(d) (1UL << VMASST_TYPE_runstate_update_f=
+lag)
 =20
- struct rangeset;
+-/* vPCI is not available on Arm */
+-#define has_vpci(d)    ({ (void)(d); false; })
++#define has_vpci(d)    (is_hardware_domain(d) && has_vpci_bridge(d))
 =20
-diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
-index 49ee003c5e..951639eb3f 100644
---- a/xen/arch/arm/pci/pci.c
-+++ b/xen/arch/arm/pci/pci.c
-@@ -92,7 +92,7 @@ bool __read_mostly pci_passthrough_enabled;
- boolean_param("pci-passthrough", pci_passthrough_enabled);
-=20
- /* By default pci scan is disabled. */
--static __ro_after_init bool pci_scan_enabled;
-+__ro_after_init bool pci_scan_enabled;
- boolean_param("pci-scan", pci_scan_enabled);
-=20
- static int __init pci_init(void)
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 469f497744..528e8b660b 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -230,7 +230,7 @@ bool vpci_process_pending(struct vcpu *v)
-=20
-             read_unlock(&v->domain->pci_lock);
-=20
--            if ( !is_hardware_domain(v->domain) )
-+            if ( has_vpci_bridge(v->domain) )
-                 domain_crash(v->domain);
-=20
-             return false;
-@@ -492,7 +492,7 @@ static int modify_bars(const struct pci_dev *pdev, uint=
-16_t cmd, bool rom_only)
-             }
-         }
-=20
--        if ( !is_hardware_domain(d) )
-+        if ( has_vpci_bridge(d) )
-             break;
-=20
-         d =3D dom_xen;
-@@ -522,7 +522,7 @@ static void cf_check cmd_write(
- {
-     struct vpci_header *header =3D data;
-=20
--    if ( !is_hardware_domain(pdev->domain) )
-+    if ( has_vpci_bridge(pdev->domain) )
-     {
-         const struct vpci *vpci =3D pdev->vpci;
-=20
-@@ -564,7 +564,7 @@ static void cf_check bar_write(
-     struct vpci_bar *bar =3D data;
-     bool hi =3D false;
-=20
--    ASSERT(is_hardware_domain(pdev->domain));
-+    ASSERT(!has_vpci_bridge(pdev->domain));
-=20
-     if ( bar->type =3D=3D VPCI_BAR_MEM64_HI )
-     {
-@@ -747,7 +747,7 @@ static int vpci_init_capability_list(struct pci_dev *pd=
-ev)
- {
-     int rc;
-     bool mask_cap_list =3D false;
--    bool is_hwdom =3D is_hardware_domain(pdev->domain);
-+    bool is_hw_bridge =3D !has_vpci_bridge(pdev->domain);
-=20
-     if ( pci_conf_read16(pdev->sbdf, PCI_STATUS) & PCI_STATUS_CAP_LIST )
-     {
-@@ -758,17 +758,17 @@ static int vpci_init_capability_list(struct pci_dev *=
-pdev)
-             PCI_CAP_ID_MSIX,
-         };
-         /*
--         * For dom0, we should expose all capabilities instead of a fixed
-+         * For hw bridge, we should expose all capabilities instead of a f=
-ixed
-          * capabilities array, so setting n to 0 here is to get the next
-          * capability position directly in pci_find_next_cap_ttl.
-          */
--        const unsigned int n =3D is_hwdom ? 0 : ARRAY_SIZE(supported_caps)=
-;
-+        const unsigned int n =3D is_hw_bridge ? 0 : ARRAY_SIZE(supported_c=
-aps);
-=20
-         next =3D pci_find_next_cap_ttl(pdev->sbdf, PCI_CAPABILITY_LIST,
-                                      supported_caps, n, &ttl);
-=20
-         rc =3D vpci_add_register(pdev->vpci, vpci_read_val,
--                               is_hwdom ? vpci_hw_write8 : NULL,
-+                               is_hw_bridge ? vpci_hw_write8 : NULL,
-                                PCI_CAPABILITY_LIST, 1,
-                                (void *)(uintptr_t)next);
-         if ( rc )
-@@ -776,7 +776,7 @@ static int vpci_init_capability_list(struct pci_dev *pd=
-ev)
-=20
-         next &=3D ~3;
-=20
--        if ( !next && !is_hwdom )
-+        if ( !next && !is_hw_bridge )
-             /*
-              * If we don't have any supported capabilities to expose to th=
-e
-              * guest, mask the PCI_STATUS_CAP_LIST bit in the status
-@@ -792,7 +792,7 @@ static int vpci_init_capability_list(struct pci_dev *pd=
-ev)
-                                          pos + PCI_CAP_LIST_NEXT,
-                                          supported_caps, n, &ttl);
-=20
--            if ( !is_hwdom )
-+            if ( !is_hw_bridge )
-             {
-                 rc =3D vpci_add_register(pdev->vpci, vpci_hw_read8, NULL,
-                                        pos + PCI_CAP_LIST_ID, 1, NULL);
-@@ -801,7 +801,7 @@ static int vpci_init_capability_list(struct pci_dev *pd=
-ev)
-             }
-=20
-             rc =3D vpci_add_register(pdev->vpci, vpci_read_val,
--                                   is_hwdom ? vpci_hw_write8 : NULL,
-+                                   is_hw_bridge ? vpci_hw_write8 : NULL,
-                                    pos + PCI_CAP_LIST_NEXT, 1,
-                                    (void *)(uintptr_t)next);
-             if ( rc )
-@@ -811,8 +811,8 @@ static int vpci_init_capability_list(struct pci_dev *pd=
-ev)
-         }
-     }
-=20
--    /* Return early for the hw domain, no masking of PCI_STATUS. */
--    if ( is_hwdom )
-+    /* Return early for the hw bridge, no masking of PCI_STATUS. */
-+    if ( is_hw_bridge )
-         return 0;
-=20
-     /* Utilize rsvdp_mask to hide PCI_STATUS_CAP_LIST from the guest. */
-@@ -829,7 +829,7 @@ static int vpci_init_ext_capability_list(const struct p=
-ci_dev *pdev)
- {
-     unsigned int pos =3D PCI_CFG_SPACE_SIZE;
-=20
--    if ( !is_hardware_domain(pdev->domain) )
-+    if ( has_vpci_bridge(pdev->domain) )
-         /* Extended capabilities read as zero, write ignore for DomU */
-         return vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-                                  pos, 4, (void *)0);
-@@ -866,7 +866,7 @@ int vpci_init_header(struct pci_dev *pdev)
-     struct vpci_header *header =3D &pdev->vpci->header;
-     struct vpci_bar *bars =3D header->bars;
-     int rc;
--    bool is_hwdom =3D is_hardware_domain(pdev->domain);
-+    bool is_hw_bridge =3D !has_vpci_bridge(pdev->domain);
-=20
-     ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
-=20
-@@ -893,15 +893,15 @@ int vpci_init_header(struct pci_dev *pdev)
-      * PCI_COMMAND_PARITY, PCI_COMMAND_SERR, and PCI_COMMAND_FAST_BACK.
-      */
-     rc =3D vpci_add_register_mask(pdev->vpci,
--                                is_hwdom ? vpci_hw_read16 : guest_cmd_read=
-,
-+                                is_hw_bridge ? vpci_hw_read16 : guest_cmd_=
-read,
-                                 cmd_write, PCI_COMMAND, 2, header, 0, 0,
--                                is_hwdom ? 0
--                                         : PCI_COMMAND_RSVDP_MASK |
--                                           PCI_COMMAND_IO |
--                                           PCI_COMMAND_PARITY |
--                                           PCI_COMMAND_WAIT |
--                                           PCI_COMMAND_SERR |
--                                           PCI_COMMAND_FAST_BACK,
-+                                is_hw_bridge ? 0
-+                                             : PCI_COMMAND_RSVDP_MASK |
-+                                               PCI_COMMAND_IO |
-+                                               PCI_COMMAND_PARITY |
-+                                               PCI_COMMAND_WAIT |
-+                                               PCI_COMMAND_SERR |
-+                                               PCI_COMMAND_FAST_BACK,
-                                 0);
-     if ( rc )
-         return rc;
-@@ -925,7 +925,7 @@ int vpci_init_header(struct pci_dev *pdev)
-      * start with memory decoding disabled, and modify_bars() will not be =
-called
-      * at the end of this function.
-      */
--    if ( !is_hwdom )
-+    if ( !is_hw_bridge )
-         cmd &=3D ~(PCI_COMMAND_VGA_PALETTE | PCI_COMMAND_INVALIDATE |
-                  PCI_COMMAND_SPECIAL | PCI_COMMAND_MASTER | PCI_COMMAND_ME=
-MORY |
-                  PCI_COMMAND_IO);
-@@ -933,7 +933,7 @@ int vpci_init_header(struct pci_dev *pdev)
-     header->guest_cmd =3D cmd;
-=20
-     /* Disable memory decoding before sizing. */
--    if ( !is_hwdom || (cmd & PCI_COMMAND_MEMORY) )
-+    if ( !is_hw_bridge || (cmd & PCI_COMMAND_MEMORY) )
-         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd & ~PCI_COMMAND_MEMOR=
-Y);
-=20
-     for ( i =3D 0; i < num_bars; i++ )
-@@ -945,9 +945,10 @@ int vpci_init_header(struct pci_dev *pdev)
-         {
-             bars[i].type =3D VPCI_BAR_MEM64_HI;
-             rc =3D vpci_add_register(pdev->vpci,
--                                   is_hwdom ? vpci_hw_read32
--                                            : guest_mem_bar_read,
--                                   is_hwdom ? bar_write : guest_mem_bar_wr=
-ite,
-+                                   is_hw_bridge ? vpci_hw_read32
-+                                                : guest_mem_bar_read,
-+                                   is_hw_bridge ? bar_write
-+                                                : guest_mem_bar_write,
-                                    reg, 4, &bars[i]);
-             if ( rc )
-                 goto fail;
-@@ -959,7 +960,7 @@ int vpci_init_header(struct pci_dev *pdev)
-         if ( (val & PCI_BASE_ADDRESS_SPACE) =3D=3D PCI_BASE_ADDRESS_SPACE_=
-IO )
-         {
-             bars[i].type =3D VPCI_BAR_IO;
--            if ( !IS_ENABLED(CONFIG_X86) && !is_hwdom )
-+            if ( !IS_ENABLED(CONFIG_X86) && !is_hw_bridge )
-             {
-                 rc =3D vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-                                        reg, 4, (void *)0);
-@@ -988,7 +989,7 @@ int vpci_init_header(struct pci_dev *pdev)
-         {
-             bars[i].type =3D VPCI_BAR_EMPTY;
-=20
--            if ( !is_hwdom )
-+            if ( !is_hw_bridge )
-             {
-                 rc =3D vpci_add_register(pdev->vpci, vpci_read_val, NULL,
-                                        reg, 4, (void *)0);
-@@ -1005,17 +1006,18 @@ int vpci_init_header(struct pci_dev *pdev)
-         bars[i].prefetchable =3D val & PCI_BASE_ADDRESS_MEM_PREFETCH;
-=20
-         rc =3D vpci_add_register(pdev->vpci,
--                               is_hwdom ? vpci_hw_read32 : guest_mem_bar_r=
-ead,
--                               is_hwdom ? bar_write : guest_mem_bar_write,
-+                               is_hw_bridge ? vpci_hw_read32
-+                                            : guest_mem_bar_read,
-+                               is_hw_bridge ? bar_write : guest_mem_bar_wr=
-ite,
-                                reg, 4, &bars[i]);
-         if ( rc )
-             goto fail;
-     }
-=20
-     /* Check expansion ROM. */
--    rc =3D is_hwdom ? pci_size_mem_bar(pdev->sbdf, rom_reg, &addr, &size,
--                                     PCI_BAR_ROM)
--                  : 0;
-+    rc =3D is_hw_bridge ? pci_size_mem_bar(pdev->sbdf, rom_reg, &addr, &si=
-ze,
-+                                         PCI_BAR_ROM)
-+                      : 0;
-     if ( rc > 0 && size )
-     {
-         struct vpci_bar *rom =3D &header->bars[num_bars];
-@@ -1038,7 +1040,7 @@ int vpci_init_header(struct pci_dev *pdev)
-                 goto fail;
-         }
-     }
--    else if ( !is_hwdom )
-+    else if ( !is_hw_bridge )
-     {
-         /* TODO: Check expansion ROM, we do not handle ROM for guests for =
-now */
-         header->bars[num_bars].type =3D VPCI_BAR_EMPTY;
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index 07c7071d0a..8ea89b9805 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -48,7 +48,7 @@ static int assign_virtual_sbdf(struct pci_dev *pdev)
-=20
-     ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
-=20
--    if ( is_hardware_domain(d) )
-+    if ( !has_vpci_bridge(d) )
-         return 0;
-=20
-     /*
-@@ -429,7 +429,7 @@ static const struct pci_dev *translate_virtual_device(c=
-onst struct domain *d,
- #ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
-     const struct pci_dev *pdev;
-=20
--    ASSERT(!is_hardware_domain(d));
-+    ASSERT(has_vpci_bridge(d));
-     ASSERT(rw_is_locked(&d->pci_lock));
-=20
-     for_each_pdev ( d, pdev )
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 9ae75d946a..d4695cb353 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -339,6 +339,14 @@ static inline int __must_check vpci_reset_device(struc=
-t pci_dev *pdev)
-     return vpci_assign_device(pdev);
- }
-=20
-+#ifdef CONFIG_ARM
-+#include <asm/pci.h>
-+
-+#define has_vpci_bridge(d) (!is_hardware_domain(d) || pci_scan_enabled)
-+#else
-+#define has_vpci_bridge(d) (!is_hardware_domain(d))
-+#endif
-+
- #endif
-=20
- /*
+ struct arch_vcpu_io {
+     struct instr_details dabt_instr; /* when the instruction is decoded */
 --=20
 2.51.2
 
