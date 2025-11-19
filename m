@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F973CF6488
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 22:46:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1166460.1492985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFAB9CF6488
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 22:48:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1166481.1493006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLqwc-0005mV-0S; Wed, 19 Nov 2025 22:46:34 +0000
+	id 1vLqyJ-0006mC-Kv; Wed, 19 Nov 2025 22:48:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1166460.1492985; Wed, 19 Nov 2025 22:46:33 +0000
+Received: by outflank-mailman (output) from mailman id 1166481.1493006; Wed, 19 Nov 2025 22:48:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLqwb-0005mO-Tj; Wed, 19 Nov 2025 22:46:33 +0000
-Received: by outflank-mailman (input) for mailman id 1166460;
- Wed, 19 Nov 2025 22:46:32 +0000
+	id 1vLqyJ-0006m5-H8; Wed, 19 Nov 2025 22:48:19 +0000
+Received: by outflank-mailman (input) for mailman id 1166481;
+ Wed, 19 Nov 2025 22:48:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=y3JJ=53=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
- id 1vLqwa-0005mA-NR
- for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 22:46:32 +0000
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c10d::3])
+ id 1vLqyH-0006lz-UA
+ for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 22:48:18 +0000
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c107::3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94f3541f-c599-11f0-980a-7dc792cee155;
- Wed, 19 Nov 2025 23:46:28 +0100 (CET)
-Received: from BYAPR06CA0052.namprd06.prod.outlook.com (2603:10b6:a03:14b::29)
- by PH0PR12MB5678.namprd12.prod.outlook.com (2603:10b6:510:14e::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.22; Wed, 19 Nov
- 2025 22:46:23 +0000
-Received: from CO1PEPF000042AD.namprd03.prod.outlook.com
- (2603:10b6:a03:14b:cafe::ea) by BYAPR06CA0052.outlook.office365.com
- (2603:10b6:a03:14b::29) with Microsoft SMTP Server (version=TLS1_3,
+ id d4a71e21-c599-11f0-980a-7dc792cee155;
+ Wed, 19 Nov 2025 23:48:15 +0100 (CET)
+Received: from DM6PR10CA0002.namprd10.prod.outlook.com (2603:10b6:5:60::15) by
+ BY5PR12MB4114.namprd12.prod.outlook.com (2603:10b6:a03:20c::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
+ 2025 22:48:01 +0000
+Received: from DS1PEPF00017096.namprd05.prod.outlook.com
+ (2603:10b6:5:60:cafe::9c) by DM6PR10CA0002.outlook.office365.com
+ (2603:10b6:5:60::15) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Wed,
- 19 Nov 2025 22:46:21 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF000042AD.mail.protection.outlook.com (10.167.243.42) with Microsoft
+ 19 Nov 2025 22:48:01 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS1PEPF00017096.mail.protection.outlook.com (10.167.18.100) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Wed, 19 Nov 2025 22:46:22 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9343.9 via Frontend Transport; Wed, 19 Nov 2025 22:48:01 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 19 Nov
- 2025 14:46:21 -0800
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 14:48:01 -0800
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 19 Nov
- 2025 16:46:21 -0600
-Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Wed, 19 Nov 2025 14:46:20 -0800
+ 2025 16:48:00 -0600
+Received: from [172.27.232.218] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 19 Nov 2025 14:48:00 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,142 +65,387 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94f3541f-c599-11f0-980a-7dc792cee155
+X-Inumbo-ID: d4a71e21-c599-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D6pdPn0lX0G72L/NgQ972YX2rREjmPusC6fo1HPQmDBnRa3T2XEZzpQ8hbyABGl02kOnZm6ixrYWpbCvwUyB2lxfm+sDmbd5idPJl0Y1dBIiRV4wNjJbY5ix7STxOvDjuKCpEr5xXCZHJVau8U+U7n1I0y/0fkBbldJ3D471Qy25DkC+w3EY/rQ+lO9076atq1sjkLt2JM90XJhfZWZz9g/Jx3rQyYUiBZgBF3v8s/x9ALP7wNUS/v6GH0HUH0GH7NtPkauVnGqyyASLHGws+Q7FTFVamABmlc+ps4p53SdLs5QLA3ZSwiOf38p3eO/5pt+UkG68opaZ5LQnuZfkDw==
+ b=bMFrCf89FuDLkpS6yCiDHwUtcVvslD6Ir/I9E/cbZz+cjvF7B+XT+hQhNR9LR4oPKawt8IZw10ZwJwumX2pkPfunmMEdEIz3GqPhf9yVTSWhpdAdJJcv94+AlU5vIA7GzY+8mb+OvhsIZqP6o0nknRQRC9fJy6upIqFgHtVjIoNvE3dUNsQbbNQ/a67yBTkWxbopV3eJYRcvJgSz394tJId31v3zQqOu//2kN6rtJ1EltLZYAEenY8IEWHyh0esa12xsM4JBicTzLUFzoQ4rZNjsOfaie0xgpVAUldif+BFw+MgVNJI8eCZ0Mk+D1KYsJp/0YXihUw/3HphlA6jmbQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0Jc7jSgi9oFlLTE+/8M413tkZoZeYTb/nTYdwbRMV2g=;
- b=tYZ0ggGNGpZRRhCx9FmcIhQXqPezyiNsZVSB1wnPINmFhEd5E/JaDoyj/2F5ayl6cEGsy/c0EkqAlTtAbOrN4K4z54wDpzSn5Sh+joT3T1yGIDVH/bZQ4v7cXwvkrtTw1umQ5hrvsW6DlkWfz4KT1KsIJiqZs6UJUFirjVT958o8wBAgvtYq7rloGEJZvUJBetSq6WZypU1wPQ6wVOM2x0DT1oTWdd0GNw38lM6BOavO8wYMBSEqmws1q4p93pcElI3oUQOi4M3RiQqh4jpQz5kmYDGX5S8QkalwOmy6tmTYGsbebFKRwYHGiDRrqz6ck6vrQLA8lmgQIYN3FZyRpg==
+ bh=CxTZ3E6qf3AJrBjrl2JcXEXmHe+j/ntA1ZrKOpbSnvY=;
+ b=Rz0pEYIoqezXqjGgFKE9pksUIV9NamKaThS5k8jtWcE+xNnJfUZghzrpl74vU3CdN+pMCzlWuGvrFyR0ZnWwDcgOIKE/QaQcAUlQThYaWMiK+Tfi0hFsc/y0aksC0VUrjxYRgHSzGc0dTTvUONxyD8+cCGnpu/cKSRIcOiYdF2q4lIO6FnXC0fqxxx0Sg5wowTDk9e34hoD1opByXNypajjl8JBdFGd7yjDsTzAacBHNqeTPanE6vsEX+cw/T2kD4sUQ1Kr8VGqvie9EsvkIU3466nVb/bajBEHJz48SngSfJVSeeok3GHG7nJSIA3iLoxwhqyzQUlP+mEjb+xQ78w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0Jc7jSgi9oFlLTE+/8M413tkZoZeYTb/nTYdwbRMV2g=;
- b=5JkRGdIblZPIlG2oz9dHJR0iSCYwKInmzazb+thN2WwkJHpYVA5daXXkAmmO6rnREFtVxPOxgNGdW4hVllc9htiYkyPFb19Q8+xj+xKpXSjJX5nLQfOJ0gysaDAvd4g+pHqmcf5TulS/yHZvf0WlKOXhsKevkQg3jpVfJTKUP6Q=
+ bh=CxTZ3E6qf3AJrBjrl2JcXEXmHe+j/ntA1ZrKOpbSnvY=;
+ b=VIzzygL19ExHm4Re6sH0Q5gjKuaNw62h5GcWZKf+7YuAG5oEXZ3zGnKVm4YKo0SCigy5sxnCybleBl7Ekl/PD4Nr58Eb8A7wM1n+oTSrYZPaWlXv0YrNVii4+Wu7VP4NlxmB11Xtm4wbGZ0QrGoSiK+J/o8dWA3prguPsr22dKY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Jason Andryuk <jason.andryuk@amd.com>
-To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>
-CC: Yann Sionneau <yann.sionneau@vates.tech>, Jason Andryuk
-	<jason.andryuk@amd.com>, <xen-devel@lists.xenproject.org>,
-	<linux-kernel@vger.kernel.org>
-Subject: [PATCH 1/2] xenbus: Use .freeze/.thaw to handle xenbus devices
-Date: Wed, 19 Nov 2025 17:47:29 -0500
-Message-ID: <20251119224731.61497-2-jason.andryuk@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251119224731.61497-1-jason.andryuk@amd.com>
-References: <20251119224731.61497-1-jason.andryuk@amd.com>
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <596ea613-5f09-42cf-88e3-0cb7a4220ff1@amd.com>
+Date: Wed, 19 Nov 2025 17:48:01 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: domU suspend issue - freeze processes failed - Linux 6.16
+To: Yann Sionneau <yann.sionneau@vates.tech>, <xen-devel@lists.xenproject.org>
+References: <aKiBJeqsYx_4Top5@mail-itl> <aKiBwEsogK420kwo@mail-itl>
+ <05e9628d-83e5-4feb-881d-5854b72bd560@suse.com> <aKi6Foj-Lx_n0L6l@mail-itl>
+ <aNEgTgis2JeyQ4HA@mail-itl> <8f6b8f08-ca62-467b-a6be-4d33208e5393@epam.com>
+ <aNPyW5a7BHni-SuI@mail-itl> <32097dc9-761f-4319-9fa8-6bcb15c06a82@vates.tech>
+ <45fbc094-f90a-415d-abd8-8e1404251530@amd.com>
+ <36d3599b-f8d8-496a-88a1-d64a4fa6e37a@vates.tech>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <36d3599b-f8d8-496a-88a1-d64a4fa6e37a@vates.tech>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: jason.andryuk@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042AD:EE_|PH0PR12MB5678:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67d5c2f8-24c6-4b04-74fb-08de27bd76bc
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017096:EE_|BY5PR12MB4114:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57ed61fc-d6d8-427c-3132-08de27bdb199
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Id+LCTrbsvcX2IT4nFK94uUOT9WKUd/RkIDBFYYJivl5sO2z+OKDnw7zWpyu?=
- =?us-ascii?Q?H+AmhBresYelwRY7jD5eoKhK+aJDRGZ7+xgyH4s8tH9hE2rurkZFlbkJlWxx?=
- =?us-ascii?Q?mDoPJmHy6Ds3AKzn9DbKuy/PQHoycyT1UzJNM2C9TX3B8F9CU77+7UeQrx/5?=
- =?us-ascii?Q?4T7YyL1+ET8nVgHhFvStbolk36cDxsgiLibQlU5BwwF1AEVyRdhro4TJ1RjC?=
- =?us-ascii?Q?lh00U+ZUf8CnoooFGD/SzJ/PRCWWmkuw3KAusBhE3f2rAV3TwN/jrMJGj4vS?=
- =?us-ascii?Q?RVaw61SsYpBY1IyLU+cZxnjl/NC4CFmtgR6bUc4V0jnmmebb7/EkFwCXbeOO?=
- =?us-ascii?Q?8d+XIxWEVmlAEZc2euOvKx5uCuDBZ3qmzyciwJzwdFNuqFYh8ayx5/Z2rzg/?=
- =?us-ascii?Q?4tQJZ2h0/mdrxcxhqAG02ZL5gvMVuzaDdP8Gbd7F4VSfMWHfAbFUrPGB9IwI?=
- =?us-ascii?Q?TLboR41ueiZMbualhHjAZOU9DBWSbcfjIV+Id95srOpumMTZ+F9S2sCAfymp?=
- =?us-ascii?Q?mFOU4LiW0iMnCcPc2n4IOew8kGHMhQZJB3kVIdzDzDjyNlww5Ltbna5ESSl3?=
- =?us-ascii?Q?YWgnvD7qVuhNpW1UcQOJfaGLpxz4WIoCGspge9UBXUvCLeDok8UQOI85lfBT?=
- =?us-ascii?Q?IOkERW0yAwlJ87cAt6XKotZlz0mSjmjUKI0gsRFU+OWf7M+5IHXbfstGmQVa?=
- =?us-ascii?Q?yKNNlOGRIQqD4bSGA15kAT1f5qt/XIdyWHkk+aISzb7DxpD0eDEf46DcIq7Z?=
- =?us-ascii?Q?9CXAW8BTsxym4JYtasvvIoa/mhCO1+lBi93syQTPVFfLj7N/r3Fip2qE5OzR?=
- =?us-ascii?Q?dIF07zuX82H4wEi6MZmw3yeLCRzJcDNLFqv+yzqNdz74mid+qkBzHZ1VBVqu?=
- =?us-ascii?Q?tH7Cu6tyHIzvUZ08/W9OmINLcvWiv6q6BO/xn4pvVYXaItPJ//hLZfLeG+Lr?=
- =?us-ascii?Q?xq+2oovPlBYIZ8TPEEZ1jj3Xm1o0blcNYCzOvjy5VhxJyWKd3U8Ad8Cb7yoL?=
- =?us-ascii?Q?LEV//q4/It+diT+DW3rgnekHnKFFDI9xLyx32CC4GkUCbtMCUQXBOJrdBLIT?=
- =?us-ascii?Q?AS9oGQeZ/9Ega7kqfhoPVLH4Vmn3o3XsYNupq/TsAOeIw+STwxNb4ZBlgHSy?=
- =?us-ascii?Q?uEFb7ZzuKdGTd9oH1txuym0OppzyRnuJ/dY9PykTI0KrcC5qF5KPx2cCcg0L?=
- =?us-ascii?Q?1irkg5SSGxbhVTMDW9YSQ0o1fE+0bjb8Yq+78ObwXVgT+qNo82p1bbjtOWeA?=
- =?us-ascii?Q?3Hq9+H5DaV+0xzL2BP3Q1cciquydvSm/6mXaOBRBlaFcNy2EHfOQdRz3wtfG?=
- =?us-ascii?Q?DXXy2b4TjNnsLOZyA34ofh5lVGMC0LzJalYB23/h4UVSE2AqvovCpvnfvc3i?=
- =?us-ascii?Q?Nx0MIB3DVCKr+gDx0qjoKHIJGrXOXnoPkwfUZwbPHXXtNNMiQ7clX5bXIyga?=
- =?us-ascii?Q?MHgZv63KU3O2p+cLoZKirANsTNKzuqzkXtd03xS4A+2PYzCHkXfp2s3QzoOI?=
- =?us-ascii?Q?k53GMk10CxnGdIYcReVNeVkcGMEti2iHthlM7lZOp30QQa6AqdS8/0Ae4FXM?=
- =?us-ascii?Q?XOVBwATEqcjNA1K2JaU=3D?=
+	=?utf-8?B?S2NSTW5MK0grTEdmWHY1WmhzRTIxNFhCTUUwN1RBbnRDNmZxUWJoM1BGQ25G?=
+ =?utf-8?B?eFZFM0tiSUF1Z015UVorSXcxeDRmd05nZWhoN2R1ZVdGWkpFb2N2SmpCSHoz?=
+ =?utf-8?B?TDVRcVVGdC9jcnpDZ2pReVdROVpmL2hnVUpqa3BCVTA1TFhBWk9WMDZxOGdo?=
+ =?utf-8?B?OVArbDhUWVJwZll6VHhpTXNqb2t1WDlXZHZ6VTVPSXZyb1RMOVFJRzNCdGdl?=
+ =?utf-8?B?T2NzYUc1d0FNWGNzTk42TXlUM1VFUHRFM3VOMy9TVzgxUGJuMUxMZmIrd1l5?=
+ =?utf-8?B?akR1K29Va2tDVlJmT1R5emIvRGlTNk1vMmd6L2VYcTl6dVZlZW9md2Q2SkdG?=
+ =?utf-8?B?L1RqR0g2dXhOWituOEJEeGI1R3U0aktRaXdQSkZIQXQxd2tUd0VwOUw0WGJX?=
+ =?utf-8?B?YVgzbkl2UnE1S0dPRStQQW56OFA1MWFXSVNlSUxxQ2I1Q3RxeWNCU1NUVkRE?=
+ =?utf-8?B?L0tpaDZlZVR2RGsxOS9UZ3A4a1o5WUNFVFltUWxZNy9ZTXpjMjJoY3dNK2lL?=
+ =?utf-8?B?dzNYdTByRkhkWFBXMnN4ZEFQU3Q3ZlM4c21DSkd0OStTT0ZXeC81VnUwTGxJ?=
+ =?utf-8?B?QUVaeUlyV2lDQ05VbUgzNDBuakpWWTlSTm1QSjNlZWt1eUowWUNxU215V2M2?=
+ =?utf-8?B?OUt0R0RnWUhvOG0wbTFkcFdzWWdsS3JEYlNIcDMxcFZIdFNYKzJDQnJGNnUv?=
+ =?utf-8?B?aVRvWm5oOEdTUkwvNi92NEdpMHRHSnp4dEI2NEt0M2NtM3NYSVIyOFArSXNC?=
+ =?utf-8?B?NldFR3Q2UVBzcytsU0JrQTM5UVJMN3BWczBQdzNETzNFUXdWeW5Tb0VBemMr?=
+ =?utf-8?B?SXFkYWFzWnlTZHdSU0dDcHhNcG1mbzZlY0U0dTVrV3RDZGx1SlRvWXpJWXlu?=
+ =?utf-8?B?YXlralVBQ3VISXpERVFUaStvL1JQcGswNVZHeGhDc2IwU3B4RWlsZEt2OVBI?=
+ =?utf-8?B?VmVpSUtTaWJnOHdCY21ETzFnSzZRSHF4WEhNRjFLNlQwVWxXSElQcFZUdmUz?=
+ =?utf-8?B?d0pQemFmY1A5UlgzRVM4K2Z6VmxyM0pxZ2N0NXIvekJTdXhlUlE4UjN3em5T?=
+ =?utf-8?B?RlZYRlpyMXZhY2xSZUpLQ0t1YkZ4aTR3cTNGSURkeWRQQkcyMWYyVVdsTjZv?=
+ =?utf-8?B?YzFGS1M5ZVZyc0xDWElmTFpxQVgzT3lXbjMrOEdwY0VjdnF3c3pLOG1wbTEw?=
+ =?utf-8?B?cU5JNURxNE9QMVlmUnBCUDUwQkIwS1d1SzNwbU9YNHYxVlBDVDYwSlFTb1M2?=
+ =?utf-8?B?dDJqY0JUd212VzNnVnVqbUhYUWRQN0tHRUt1cU5kSjVEVW5VSitWM2wybTdw?=
+ =?utf-8?B?ZVYzRDVHSUowNFloekFDWGhodVVSaHh1NFdWNEd6RWJlR0ZQajZQRXFCQXZ0?=
+ =?utf-8?B?d1FsblZrcUlyVmxYR3Q0ODdHNXFZUUgrVGFrOGMyR2FkNnd6bFB1YmlvQ1pn?=
+ =?utf-8?B?Njdmb3hFdFp5VFN1TVNwZXNEaFFGS3A4eU1tMGNzMzFJL0NxYzZHYUtoVEtZ?=
+ =?utf-8?B?dllaQ1BPZHFPQTJ3ZFp2b0JGR1hJK1BTY2owVjkxQllSMEQwT3k2aERkakdC?=
+ =?utf-8?B?TVBIQ256c2tEaHlvKzR5RnBZa3dQOFYwdUhXY01RQVRocWtRc05IWjEzNnVN?=
+ =?utf-8?B?NU5RNnUrajdYMXNreWVFR3VIM2pHWjdMUHNJenhBM3Z3NXhVK29OV1dqQ1pn?=
+ =?utf-8?B?TTNzKzIxOUtSUCtrSVYxci9xMEhzYjZ2NjY1WGVoeGlCVFMyWUZKYkdkWThT?=
+ =?utf-8?B?c3RHUHM4MmNyelVTZm9QMCtmbnJ2QU1obVJFWGMvWDhiRzlGTEpYcG1xSDgr?=
+ =?utf-8?B?MjZPMjE4SU5POHNnN0ZpUW9qYTFha0xWaTJvSWVoR2c2elU4TXJwN0NtbXZU?=
+ =?utf-8?B?bVcxZUhoVk15aVYxc3gzL3BlQ3UvMnlUOHNCM3JqaTdncFJwRHJ1ZjhzdmJh?=
+ =?utf-8?B?akd1UVZtUWI0dElLUlRCWjdqR2J5RUp4NkxBR0l6MWRIOUlBNVRqbHZNbXdE?=
+ =?utf-8?B?WHhQMUFRdmkrbldUcHNHREptQSt2dzVoMm8vcXhlNmtoTUI2ajRiRWJJbEJL?=
+ =?utf-8?B?a3RNMVJzc0U2MXZNcWpIQnIyckJoZmt0K3pCUFhPdGMyTGdmT0VDR0hTTVJx?=
+ =?utf-8?Q?PM7/O8DS0w3/of17EIwQEOAkH?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 22:46:22.6215
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 22:48:01.4289
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67d5c2f8-24c6-4b04-74fb-08de27bd76bc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57ed61fc-d6d8-427c-3132-08de27bdb199
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000042AD.namprd03.prod.outlook.com
+	DS1PEPF00017096.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5678
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4114
 
-The goal is to fix s2idle and S3 for Xen PV devices.  A domain resuming
-from s3 or s2idle disconnects its PV devices during resume.  The
-backends are not expecting this and do not reconnect.
 
-b3e96c0c7562 ("xen: use freeze/restore/thaw PM events for suspend/
-resume/chkpt") changed xen_suspend()/do_suspend() from
-PMSG_SUSPEND/PMSG_RESUME to PMSG_FREEZE/PMSG_THAW/PMSG_RESTORE, but the
-suspend/resume callbacks remained.
 
-.freeze/restore are used with hiberation where Linux restarts in a new
-place in the future.  .suspend/resume are useful for runtime power
-management for the duration of a boot.
+On 2025-11-13 10:55, Yann Sionneau wrote:
+> On 10/6/25 16:28, Jason Andryuk wrote:
+>> On 2025-09-24 10:28, Yann Sionneau wrote:
+>>> On 9/24/25 15:30, Marek Marczykowski-Górecki wrote:
+>>>> On Wed, Sep 24, 2025 at 01:17:15PM +0300, Grygorii Strashko wrote:
+>>>>>
+>>>>>
+>>>>> On 22.09.25 13:09, Marek Marczykowski-Górecki wrote:
+>>>>>> On Fri, Aug 22, 2025 at 08:42:30PM +0200, Marek Marczykowski-
+>>>>>> Górecki wrote:
+>>>>>>> On Fri, Aug 22, 2025 at 05:27:20PM +0200, Jürgen Groß wrote:
+>>>>>>>> On 22.08.25 16:42, Marek Marczykowski-Górecki wrote:
+>>>>>>>>> On Fri, Aug 22, 2025 at 04:39:33PM +0200, Marek Marczykowski-
+>>>>>>>>> Górecki wrote:
+>>>>>>>>>> Hi,
+>>>>>>>>>>
+>>>>>>>>>> When suspending domU I get the following issue:
+>>>>>>>>>>
+>>>>>>>>>>          Freezing user space processes
+>>>>>>>>>>          Freezing user space processes failed after 20.004
+>>>>>>>>>> seconds (1 tasks refusing to freeze, wq_busy=0):
+>>>>>>>>>>          task:xl              state:D stack:0     pid:466
+>>>>>>>>>> tgid:466   ppid:1      task_flags:0x400040 flags:0x00004006
+>>>>>>>>>>          Call Trace:
+>>>>>>>>>>           <TASK>
+>>>>>>>>>>           __schedule+0x2f3/0x780
+>>>>>>>>>>           schedule+0x27/0x80
+>>>>>>>>>>           schedule_preempt_disabled+0x15/0x30
+>>>>>>>>>>           __mutex_lock.constprop.0+0x49f/0x880
+>>>>>>>>>>           unregister_xenbus_watch+0x216/0x230
+>>>>>>>>>>           xenbus_write_watch+0xb9/0x220
+>>>>>>>>>>           xenbus_file_write+0x131/0x1b0
+>>>>>>>>>>           vfs_writev+0x26c/0x3d0
+>>>>>>>>>>           ? do_writev+0xeb/0x110
+>>>>>>>>>>           do_writev+0xeb/0x110
+>>>>>>>>>>           do_syscall_64+0x84/0x2c0
+>>>>>>>>>>           ? do_syscall_64+0x200/0x2c0
+>>>>>>>>>>           ? generic_handle_irq+0x3f/0x60
+>>>>>>>>>>           ? syscall_exit_work+0x108/0x140
+>>>>>>>>>>           ? do_syscall_64+0x200/0x2c0
+>>>>>>>>>>           ? __irq_exit_rcu+0x4c/0xe0
+>>>>>>>>>>           entry_SYSCALL_64_after_hwframe+0x76/0x7e
+>>>>>>>>>>          RIP: 0033:0x79b618138642
+>>>>>>>>>>          RSP: 002b:00007fff9a192fc8 EFLAGS: 00000246 ORIG_RAX:
+>>>>>>>>>> 0000000000000014
+>>>>>>>>>>          RAX: ffffffffffffffda RBX: 00000000024fd490 RCX:
+>>>>>>>>>> 000079b618138642
+>>>>>>>>>>          RDX: 0000000000000003 RSI: 00007fff9a193120 RDI:
+>>>>>>>>>> 0000000000000014
+>>>>>>>>>>          RBP: 00007fff9a193000 R08: 0000000000000000 R09:
+>>>>>>>>>> 0000000000000000
+>>>>>>>>>>          R10: 0000000000000000 R11: 0000000000000246 R12:
+>>>>>>>>>> 0000000000000014
+>>>>>>>>>>          R13: 00007fff9a193120 R14: 0000000000000003 R15:
+>>>>>>>>>> 0000000000000000
+>>>>>>>>>>           </TASK>
+>>>>>>>>>>          OOM killer enabled.
+>>>>>>>>>>          Restarting tasks: Starting
+>>>>>>>>>>          Restarting tasks: Done
+>>>>>>>>>>          xen:manage: do_suspend: freeze processes failed -16
+>>>>>>>>>>
+>>>>>>>>>> The process in question is `xl devd` daemon. It's a domU serving a
+>>>>>>>>>> xenvif backend.
+>>>>>>>>>>
+>>>>>>>>>> I noticed it on 6.16.1, but looking at earlier test logs I see
+>>>>>>>>>> it with
+>>>>>>>>>> 6.16-rc6 already (but interestingly, not 6.16-rc2 yet? feels
+>>>>>>>>>> weird given
+>>>>>>>>>> seemingly no relevant changes between rc2 and rc6).
+>>>>>>>>>
+>>>>>>>>> I forgot to include link for (a little) more details:
+>>>>>>>>> https://github.com/QubesOS/qubes-linux-kernel/pull/1157
+>>>>>>>>>
+>>>>>>>>> Especially, there is another call trace with panic_on_warn
+>>>>>>>>> enabled -
+>>>>>>>>> slightly different, but looks related.
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> I'm pretty sure the PV variant for suspending is just wrong: it
+>>>>>>>> is calling
+>>>>>>>> dpm_suspend_start() from do_suspend() without taking the required
+>>>>>>>> system_transition_mutex, resulting in the WARN() in
+>>>>>>>> pm_restrict_gfp_mask().
+>>>>>>>>
+>>>>>>>> It might be as easy as just adding the mutex() call to
+>>>>>>>> do_suspend(), but I'm
+>>>>>>>> really not sure that will be a proper fix.
+>>>>>>>
+>>>>>>> Hm, this might explain the second call trace, but not the freeze
+>>>>>>> failure
+>>>>>>> quoted here above, I think?
+>>>>>>
+>>>>>> While the patch I sent appears to fix this particular issue, it
+>>>>>> made me
+>>>>>> wonder: is there any fundamental reason why do_suspend() is not using
+>>>>>> pm_suspend() and register Xen-specific actions via
+>>>>>> platform_suspend_ops
+>>>>>> (and maybe syscore_ops)? From a brief look at the code, it should
+>>>>>> theoretically be possible, and should avoid issues like this.
+>>>>>>
+>>>>>> I tried to do a quick&dirty attempt at that[1], and it failed
+>>>>>> (panic). I
+>>>>>> surely made several mistakes there (and also left a ton of todo
+>>>>>> comments). But before spending any more time at that, I'd like to ask
+>>>>>> if this is a viable option at all.
+>>>>>
+>>>>> I think it might, but be careful with this, because there are two
+>>>>> "System Low power" paths in Linux
+>>>>> 1) Suspend2RAM and Co
+>>>>> 2) Hybernation
+>>>>>
+>>>>> While "Suspend2RAM and Co" path is relatively straight forward and
+>>>>> expected to be always
+>>>>> started through pm_suspend(). In general, it's expected to happen
+>>>>>     - from sysfs (User space)
+>>>>>     - from autosuspend (wakelocks).
+>>>>>
+>>>>> the "hibernation" path is more complicated:(
+>>>>> - Genuine Linux hybernation hibernate()/hibernate_quiet_exec()
+>>>>
+>>>> IIUC hibernation is very different as it puts Linux in charge of dumping
+>>>> all the state to the disk. In case of Xen, the primary use case for
+>>>> suspend is preparing VM for Xen toolstack serializing its state to disk
+>>>> (or migrating to another host).
+>>>> Additionally, VM suspend may be used as preparation for host suspend
+>>>> (this is what I actually do here). This is especially relevant if the VM
+>>>> has some PCI passthrough - to properly suspend (and resume) devices
+>>>> across host suspend.
+>>>>
+>>>>> I'm not sure what path Xen originally implemented :( It seems like
+>>>>> "suspend2RAM",
+>>>>> but, at the same time "hybernation" specific staff is used, like
+>>>>> PMSG_FREEZE/PMSG_THAW/PMSG_RESTORE.
+>>>>> As result, Linux suspend/hybernation code moves forward while Xen
+>>>>> stays behind and unsync.
+>>>>
+>>>> Yeah, I think it's supposed to be suspend2RAM. TBH the
+>>>> PMSG_FREEZE/PMSG_THAW/PMSG_RESTORE confuses me too and Qubes OS has a
+>>>> patch[2] to switch it to PMSG_SUSPEND/PMSG_RESUME.
+>>>>
+>>>>> So it sounds reasonable to avoid custom implementation, but may be
+>>>>> not easy :(
+>>>>>
+>>>>> Suspending Xen features can be split between suspend stages, but
+>>>>> not sure if platform_suspend_ops can be used.
+>>>>>
+>>>>> Generic suspend stages list
+>>>>> - freeze
+>>>>> - prepare
+>>>>> - suspend
+>>>>> - suspend_late
+>>>>> - suspend_noirq (SPIs disabled, except wakeups)
+>>>>>      [most of Xen specific staff has to be suspended at this point]
+>>>>> - disable_secondary_cpus
+>>>>> - arch disable IRQ (from this point no IRQs allowed, no timers, no
+>>>>> scheduling)
+>>>>> - syscore_suspend
+>>>>>      [rest here]
+>>>>> - platform->enter() (suspended)
+>>>>>
+>>>>> You can't just overwrite platform_suspend_ops, because ARM64 is
+>>>>> expected to enter
+>>>>> suspend through PSCI FW interface:
+>>>>> drivers/firmware/psci/psci.c
+>>>>>     static const struct platform_suspend_ops psci_suspend_ops = {
+>>>>
+>>>> Does this apply to a VM on ARM64 too? At least on x86, the VM is
+>>>> supposed to make a hypercall to tell Xen it suspended (the hypercall
+>>>> will return only on resume).
+>>>>
+>>>>> As an option, some Xen components could be converted to use
+>>>>> syscore_ops (but not xenstore),
+>>>>> and some might need to use DD(dev_pm_ops).
+>>>>>
+>>>>>>
+>>>>>> [1] https://github.com/marmarek/linux/
+>>>>>> commit/47cfdb991c85566c9c333570511e67bf477a5da6
+>>>>>
+>>>>> -- 
+>>>>> Best regards,
+>>>>> -grygorii
+>>>>>
+>>>>
+>>>> [2] https://github.com/QubesOS/qubes-linux-kernel/blob/main/xen-pm-
+>>>> use-suspend.patch
+>>>>
+>>>
+>>> On my setup I get a weird behavior when trying to suspend (s2idle) a
+>>> Linux guest.
+>>> Doing echo freeze > /sys/power/state in the guest seems to "freeze" the
+>>> guest for good, I could not unfreeze it afterward.
+>>> VCPU goes to 100% according to XenOrchestra
+>>> xl list shows state "r" but xl console blocks forever
+>>> xl shutdown would block for some time and then print:
+>>> Shutting down domain 721
+>>> ?ibxl: error: libxl_domain.c:848:pvcontrol_cb: guest didn't acknowledge
+>>> control request: -9
+>>> shutdown failed (rc=-9)
+>>>
+>>> Do you think it's related to your current issue?
+>>
+>> idle=halt on the Linux command line addresses the 100% CPU usage.  Or
+>> alternatively C2 needs to be implemented for guest vcpus.  I forget
+>> preceisely, but I think the 100% CPU is because there are no C-states
+>> available and Linux/cpuidle won't use halt by default.
+>>
+>> To wake up, you need a wake up source.  The ACPI buttons presses will do
+>> that:
+>> xl trigger $dom power
+>> xl trigger $dom sleep
+>>
+>> However, I think without changes, domU s2idle/S3 will detach all its PV
+>> devices.  Naturally they don't get reconnected on resume.  You can hack
+>> around that to skip the detach.
+>>
+>> Actually, maybe we just need:
+>> --- i/drivers/xen/xenbus/xenbus_probe_frontend.c
+>> +++ w/drivers/xen/xenbus/xenbus_probe_frontend.c
+>> @@ -148,8 +148,6 @@ static void xenbus_frontend_dev_shutdown(struct
+>> device *_dev)
+>>    }
+>>
+>>    static const struct dev_pm_ops xenbus_pm_ops = {
+>> -       .suspend        = xenbus_dev_suspend,
+>> -       .resume         = xenbus_frontend_dev_resume,
+>>           .freeze         = xenbus_dev_suspend,
+>>           .thaw           = xenbus_dev_cancel,
+>> -       .restore        = xenbus_dev_resume,
+>> +       .restore        = xenbus_frontend_dev_resume,
+>>    };
+>>
+>> b3e96c0c7562 ("xen: use freeze/restore/thaw PM events for suspend/
+>> resume/chkpt") changed from PMSG_SUSPEND/PMSG_RESUME to PMSG_FREEZE/
+>> PMSG_THAW/PMSG_RESTORE, but the suspend/resume callbacks remained.  But
+>> freeze and suspend being identical doesn't seem correct.
+>>
+>> This would leave xl save/restore/migrate using the hibernate freeze/
+>> thaw/resume.  S3/s2idle would no touch the PV devices, so they would
+>> still be present on resume.  Maybe there are cases I am not thinking of
+>> though.
+>>
+>> Regards,
+>> Jason
+>>
+> 
+> Hi all,
+> 
+> I finally took time to try what you guyz advised, thanks for all the
+> answers!
+> 
+> So, I tried this on a clean Debian 13 VM install on a XCP-ng 8.3 (Xen
+> 4.17.5 with local patches) host.
+> 
+> 1/ Just booting with idle=halt/nomwait/poll didn't help with waking up
+> the VM, it kept being in a weird unwakable state. Even providing xl
+> trigger power/sleep events. Although I reckon you were saying it would
+> help with the CPU@100% and indeed I don't see this anymore.
 
-The current behavior of the callbacks works for an xl save/restore or
-live migration where the domain is restored/migrated to a new location
-and connecting to a not-already-connected backend.
+Yes, just 100% CPU.
 
-Change xenbus_pm_ops to use .freeze/thaw/restore and drop the
-.suspend/resume hook.  This matches the use in drivers/xen/manage.c for
-save/restore and live migration.  With .suspend/resume empty, PV devices
-are left connected during s2idle and s3, so PV devices are not changed
-and work after resume.
+> 2/ Just applying QubesOS patch
+> https://github.com/QubesOS/qubes-linux-kernel/blob/main/xen-events-Add-wakeup-support-to-xen-pirq.patch
+> did help *a bit*. Hitting a key would wake the VM, then show again the
+> Debian desktop, with some flickering, allowing to move the mouse and bit
+> and hitting some keys on the keyboard ... then it would very quickly
+> completely freeze and stay dead.
 
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
----
- drivers/xen/xenbus/xenbus_probe_frontend.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+I think this is needed for dom0 s2idle, but not for domU.
 
-diff --git a/drivers/xen/xenbus/xenbus_probe_frontend.c b/drivers/xen/xenbus/xenbus_probe_frontend.c
-index 6d1819269cbe..199917b6f77c 100644
---- a/drivers/xen/xenbus/xenbus_probe_frontend.c
-+++ b/drivers/xen/xenbus/xenbus_probe_frontend.c
-@@ -148,11 +148,9 @@ static void xenbus_frontend_dev_shutdown(struct device *_dev)
- }
- 
- static const struct dev_pm_ops xenbus_pm_ops = {
--	.suspend	= xenbus_dev_suspend,
--	.resume		= xenbus_frontend_dev_resume,
- 	.freeze		= xenbus_dev_suspend,
- 	.thaw		= xenbus_dev_cancel,
--	.restore	= xenbus_dev_resume,
-+	.restore	= xenbus_frontend_dev_resume,
- };
- 
- static struct xen_bus_type xenbus_frontend = {
--- 
-2.34.1
+> 3/ on top of previous patch, applying your modification (removing
+> .suspend, .resume and changing .restore to xenbus_frontend_dev_resume):
+> then tadaaa I can wake the VM and it stays alive afterward. It seems it
+> fixes the issue (I did not test for very very long though).
+> 
+> Thanks for the help on this!
+> What do you think we should do to move this forward? Submit those
+> changes to upstream Linux? That will take long to end up in distros...
 
+I submitted the patch for #3.  Yes, it'll take a little while to get to 
+distros, but I don't see any other choice here.
+
+Regards,
+Jason
 
