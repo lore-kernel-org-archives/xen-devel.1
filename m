@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC9CBCF2592
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 07:41:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1165570.1492278 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 799AFCF2598
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 07:54:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1165583.1492296 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLcnv-0005qh-Qh; Wed, 19 Nov 2025 07:40:39 +0000
+	id 1vLd18-0008Dn-6b; Wed, 19 Nov 2025 07:54:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1165570.1492278; Wed, 19 Nov 2025 07:40:39 +0000
+Received: by outflank-mailman (output) from mailman id 1165583.1492296; Wed, 19 Nov 2025 07:54:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLcnv-0005qa-MY; Wed, 19 Nov 2025 07:40:39 +0000
-Received: by outflank-mailman (input) for mailman id 1165570;
- Wed, 19 Nov 2025 07:40:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nJND=53=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vLcnu-0005qE-Mt
- for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 07:40:38 +0000
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [2a00:1450:4864:20::52d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 08e52d80-c51b-11f0-980a-7dc792cee155;
- Wed, 19 Nov 2025 08:40:35 +0100 (CET)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64162c04f90so10127714a12.0
- for <xen-devel@lists.xenproject.org>; Tue, 18 Nov 2025 23:40:35 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6433a3d82cfsm14462110a12.2.2025.11.18.23.40.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Nov 2025 23:40:33 -0800 (PST)
+	id 1vLd18-0008Dg-3i; Wed, 19 Nov 2025 07:54:18 +0000
+Received: by outflank-mailman (input) for mailman id 1165583;
+ Wed, 19 Nov 2025 07:54:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+YCl=53=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
+ id 1vLd16-00088E-PV
+ for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 07:54:16 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id f0c58cc3-c51c-11f0-9d18-b5c5bf9af7f9;
+ Wed, 19 Nov 2025 08:54:14 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C619E1477;
+ Tue, 18 Nov 2025 23:54:05 -0800 (PST)
+Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 536893F740;
+ Tue, 18 Nov 2025 23:54:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,132 +44,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08e52d80-c51b-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763538035; x=1764142835; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=qfyLvtK0+cQEh3RVeWZ+tqWHVoNUyoODHiQvDK/+9Ew=;
-        b=NKIZOe7SBVsPyi5OOdqKaWN/7IXEKeilZjN2FJ8fwTzJ4JQwSs1VXD+FGNK2U+Xrek
-         jDLiT/j17JsxKVxzF37rHxCfrEy0Ye5FMFCenGUX3jIkP4ftiiNAfFy0ov40DD6nlVmV
-         V6mKIB60KdNt/8SML14oAi1cOrbamLv+7t2Cahm6GbkisU8DxukV9L58zul5nmdrs/7O
-         7KMbght0X3VWcuWDa9ylExxD7V2MVuYm4c34xvKLXE9jeLqdQrK129Joo1o0Az0M+FN6
-         Map82+/0/AOSAl9FnM4g/p7W/LxYXs1k4yzMFnuGeVVQlBPYCWpQKvB/wTLmp77+pglH
-         s06Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763538035; x=1764142835;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qfyLvtK0+cQEh3RVeWZ+tqWHVoNUyoODHiQvDK/+9Ew=;
-        b=U7AmW6NwZOSOj0NbugYt2kHsXK3nrs1JG55jw8y/4qtPsJti4l1x6FWzyI2FTFS0A0
-         bZWrPR1oMaPI1TzK3/M/fa2Dy7sNYJvCdXKow6lc5ieWf1ojH6nDisTbuVuvre+GjyF9
-         zba73p0d/DKk82buDXttZXjDoC/dOBsxbOThJZZroROO0ds7x/k8Zu3OPVhg+IkA6Cfn
-         YWlkuuZMbY95qwHbAKFr6LJThb1p+8D6gcxLJFY5YzZKiUjDltYL0nKp/9cKY7Wkn9N8
-         7/cy9DIip7QVYPS+HW4uyZotr9jrqKGK/YJ0PMzjNSzYy/0jyEWNQEm2Vq6EqNQqbr+D
-         OhOg==
-X-Forwarded-Encrypted: i=1; AJvYcCUy0d4SFaPK/UaPByEi8/G+p7xjfh4RPPY6uwWNfjWaIVNABpORnjcJg7U5aoAdlCV/Lp+hEUJC3nw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwL7s+O+T8KPmzqlA0+7KuJTe4t/yUXxK/TgwInM4RRo9VSoI7A
-	Cy4o2Z1+XsmNrgIo4pcvA47U47qP5RAJmjJ+ydY6G3lH632TxXR8u+wqrHjdmuRqmVvds2dK0l9
-	6JuM=
-X-Gm-Gg: ASbGncsGsT0fIOzi4RyxnI/IRAamRwKjIkpET3Ld7A5kvDOyC4X6A0r17e8f3uzK+Ko
-	xuaHyUbbMrGdX8PseBZCvITtxUrl1kIRtGDC3VhJ7Rl9rGfDJgkUdfDtnYOEWWjFP0qed/KXrUl
-	TJP7HGNrVbgKaQOWDJTZ8ypPXqr6SkAk9nBYzS39R5dBg2JC77Q0z0OS8t6KjRfgM0Bx8ww+Bnh
-	scAOfpr+6iQOJtI2a3D3AAAiPpQKvmuJE3+KkwFkqPcZeKVqubCy1lb2qKDP81Cz/ojENVyFO95
-	IZbVfeA/Kpz5v/BnTAb0Kbk1XckaZgpTaWsc4+fuD8VWXp+u0Sa24wPtB+YQ/64IG/31OXiumsf
-	jpwyqUoYSj7ZNsPS9qdyIkPplSM/9y8WupUBhMDEqs+tHlRybAp1e+EaHlSRnZ45pqQ6Jxe9jO0
-	ZcYi8JtbcxPzSYNErMMWlfsBpknIUjteM7WQdxvZ1wr8dweDBAhUS7IOBYduPvMCvcqpgODeTpg
-	gbWzVFJYZLF2w==
-X-Google-Smtp-Source: AGHT+IGFDyXTLdOwndlGsdT6ZFt6tI4wcuy5rmQH+R44R1KL38m2RoBfJ3IKVP/UZ/4s2mFZZAqwKA==
-X-Received: by 2002:a05:6402:278f:b0:62f:8274:d6bd with SMTP id 4fb4d7f45d1cf-64350dee90emr17673898a12.8.1763538034681;
-        Tue, 18 Nov 2025 23:40:34 -0800 (PST)
-Message-ID: <bf617c69-8e51-4e9f-bcfa-9e51f3be7aa8@suse.com>
-Date: Wed, 19 Nov 2025 08:40:31 +0100
+X-Inumbo-ID: f0c58cc3-c51c-11f0-9d18-b5c5bf9af7f9
+From: Harry Ramsey <harry.ramsey@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Luca.Fancellu@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 2/3] arm/mpu: Implement reference counting for inclusive regions
+Date: Wed, 19 Nov 2025 07:53:50 +0000
+Message-ID: <20251119075351.3926690-3-harry.ramsey@arm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251119075351.3926690-1-harry.ramsey@arm.com>
+References: <20251119075351.3926690-1-harry.ramsey@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/8] x86/Intel: use host CPU policy for ARAT checking
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <53ef6c9a-1115-4bb4-bb7f-e2595ab9d0b6@suse.com>
- <65cb802c-922d-4bee-9dee-566367bec6ed@suse.com>
- <15a614d7-1646-4ad7-a298-edb77baae279@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <15a614d7-1646-4ad7-a298-edb77baae279@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 18.11.2025 20:42, Andrew Cooper wrote:
-> On 18/11/2025 3:08 pm, Jan Beulich wrote:
->> There's no need to invoke CPUID yet another time. However, as the host CPU
->> policy is set up only shortly after init_intel() ran on the BSP, defer the
->> logic to a pre-SMP initcall. This can't be (a new) one in cpu/intel.c
->> though, as that's linked after acpi/cpu_idle.c (which is where we already
->> need the feature set). Since opt_arat is local to the cpu/ subtree,
->> introduce a new Intel-specific helper to hold the code needed.
->>
->> Further, as we assume symmetry anyway, use setup_force_cpu_cap() and hence
->> limit the checking to the boot CPU.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> The need to move where cpu_has_arat is checked would go away if we did
->> away with opt_arat (as mentioned in the previous patch), and hence could
->> use cpu_has_arat directly where right now XEN_ARAT is checked.
->>
->> --- a/xen/arch/x86/acpi/cpu_idle.c
->> +++ b/xen/arch/x86/acpi/cpu_idle.c
->> @@ -1666,6 +1666,9 @@ static int __init cf_check cpuidle_presm
->>  {
->>      void *cpu = (void *)(long)smp_processor_id();
->>  
->> +    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL )
->> +        intel_init_arat();
-> 
-> I really would prefer to avoid the need for this.
+Implement reference counting to enable inclusive MPU regions. An
+inclusive region is defined as a region encapsulated inside a
+previously allocated region sharing the same permissions.
 
-So would I, but ...
+Reference counts are incremented and decremented in
+xen_mpumap_update_entry. A region will be destroyed if the reference
+count is 0 upon calling destroy_xen_mappings and if the full region
+range is specified.
 
-> Now that microcode loading has moved to the start of day, we can drop
-> most of the order-of-init complexity for CPUID/etc, and I expect that
-> problems like this will cease to exist as a result.
-> 
-> Notably, we've now got no relevant difference between early_init() and
-> regular init().  That was a complexity we inherited from Linux.
+Additionally XEN_MPUMAP_ENTRY_SHIFT and XEN_MPUMAP_ENTRY_SHIFT_ZERO are
+no longer hardcoded and defined inside asm-offsets.c.
 
-... I don't see how this leads to any concrete suggestion as to better
-arrangements. With cpu_has_arat using the host policy now,
-setup_force_cpu_cap(X86_FEATURE_XEN_ARAT) being conditional upon that
-has to run _after_ calculate_host_policy(), which in turn runs after
-intel_init(). We could add a .c_late_init hook to struct cpu_dev, but
-doing so felt like overkill for the purpose here. Plus it feels like
-that wouldn't really address your concern either.
+Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changes in v3:
+- Return early when checking memory attribute condtions
+- Replace references with refcount
+Changes in v2:
+- Improve clarity with regards to MPU inclusive regions
+- Fix code format issues
+---
+ xen/arch/arm/arm32/asm-offsets.c         |  2 +
+ xen/arch/arm/arm64/asm-offsets.c         |  2 +
+ xen/arch/arm/include/asm/arm32/mpu.h     |  2 +
+ xen/arch/arm/include/asm/arm64/mpu.h     |  2 +
+ xen/arch/arm/include/asm/mpu/regions.inc | 11 +++-
+ xen/arch/arm/mpu/mm.c                    | 73 +++++++++++++++++++-----
+ 6 files changed, 76 insertions(+), 16 deletions(-)
 
-Jan
+diff --git a/xen/arch/arm/arm32/asm-offsets.c b/xen/arch/arm/arm32/asm-offsets.c
+index c203ce269d..951f8d03f3 100644
+--- a/xen/arch/arm/arm32/asm-offsets.c
++++ b/xen/arch/arm/arm32/asm-offsets.c
+@@ -79,6 +79,8 @@ void __dummy__(void)
+ #ifdef CONFIG_MPU
+    DEFINE(XEN_MPUMAP_MASK_sizeof, sizeof(xen_mpumap_mask));
+    DEFINE(XEN_MPUMAP_sizeof, sizeof(xen_mpumap));
++   DEFINE(XEN_MPUMAP_ENTRY_SHIFT, ilog2(sizeof(pr_t)));
++   DEFINE(XEN_MPUMAP_ENTRY_ZERO_OFFSET, sizeof(prbar_t) + sizeof(prlar_t));
+    BLANK();
+ #endif
+ }
+diff --git a/xen/arch/arm/arm64/asm-offsets.c b/xen/arch/arm/arm64/asm-offsets.c
+index 320289b281..38a3894a3b 100644
+--- a/xen/arch/arm/arm64/asm-offsets.c
++++ b/xen/arch/arm/arm64/asm-offsets.c
+@@ -73,6 +73,8 @@ void __dummy__(void)
+ #ifdef CONFIG_MPU
+    DEFINE(XEN_MPUMAP_MASK_sizeof, sizeof(xen_mpumap_mask));
+    DEFINE(XEN_MPUMAP_sizeof, sizeof(xen_mpumap));
++   DEFINE(XEN_MPUMAP_ENTRY_SHIFT, ilog2(sizeof(pr_t)));
++   DEFINE(XEN_MPUMAP_ENTRY_ZERO_OFFSET, sizeof(prbar_t) + sizeof(prlar_t));
+    BLANK();
+ #endif
+ }
+diff --git a/xen/arch/arm/include/asm/arm32/mpu.h b/xen/arch/arm/include/asm/arm32/mpu.h
+index 0a6930b3a0..137022d922 100644
+--- a/xen/arch/arm/include/asm/arm32/mpu.h
++++ b/xen/arch/arm/include/asm/arm32/mpu.h
+@@ -39,6 +39,8 @@ typedef union {
+ typedef struct {
+     prbar_t prbar;
+     prlar_t prlar;
++    uint8_t refcount;
++    uint8_t pad[7];     /* Pad structure to 16 Bytes */
+ } pr_t;
+ 
+ #endif /* __ASSEMBLY__ */
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index f0ce344e78..17f62ccaf6 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -38,6 +38,8 @@ typedef union {
+ typedef struct {
+     prbar_t prbar;
+     prlar_t prlar;
++    uint8_t refcount;
++    uint8_t pad[15];    /* Pad structure to 32 Bytes */
+ } pr_t;
+ 
+ #endif /* __ASSEMBLY__ */
+diff --git a/xen/arch/arm/include/asm/mpu/regions.inc b/xen/arch/arm/include/asm/mpu/regions.inc
+index 23fead3b21..0cdbb17bc3 100644
+--- a/xen/arch/arm/include/asm/mpu/regions.inc
++++ b/xen/arch/arm/include/asm/mpu/regions.inc
+@@ -14,14 +14,12 @@
+ #define PRLAR_ELx_EN            0x1
+ 
+ #ifdef CONFIG_ARM_64
+-#define XEN_MPUMAP_ENTRY_SHIFT  0x4     /* 16 byte structure */
+ 
+ .macro store_pair reg1, reg2, dst
+     stp \reg1, \reg2, [\dst]
+ .endm
+ 
+ #else
+-#define XEN_MPUMAP_ENTRY_SHIFT  0x3     /* 8 byte structure */
+ 
+ .macro store_pair reg1, reg2, dst
+     strd  \reg1, \reg2, [\dst]
+@@ -97,6 +95,15 @@
+ 
+ 3:
+ 
++    /* Clear the rest of the xen_mpumap entry. */
++#ifdef CONFIG_ARM_64
++    stp xzr, xzr, [\base, #XEN_MPUMAP_ENTRY_ZERO_OFFSET]
++#else
++    mov \prbar, #0
++    mov \prlar, #0
++    strd \prbar, \prlar, [\base, #XEN_MPUMAP_ENTRY_ZERO_OFFSET]
++#endif
++
+     add   \sel, \sel, #1
+ 
+ 1:
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index b80edcf1ca..29dd8c4622 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -106,6 +106,7 @@ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags)
+     region = (pr_t) {
+         .prbar = prbar,
+         .prlar = prlar,
++        .refcount = 0,
+     };
+ 
+     /* Set base address and limit address. */
+@@ -170,6 +171,35 @@ int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
+     return MPUMAP_REGION_NOTFOUND;
+ }
+ 
++static bool is_mm_attr_match(pr_t *region, unsigned int attributes)
++{
++    if ( region->prbar.reg.ro != PAGE_RO_MASK(attributes) )
++    {
++        printk(XENLOG_WARNING
++               "Mismatched Access Permission attributes (%#x instead of %#x)\n",
++               region->prbar.reg.ro, PAGE_RO_MASK(attributes));
++        return false;
++    }
++
++    if ( region->prbar.reg.xn != PAGE_XN_MASK(attributes) )
++    {
++        printk(XENLOG_WARNING
++               "Mismatched Execute Never attributes (%#x instead of %#x)\n",
++               region->prbar.reg.xn, PAGE_XN_MASK(attributes));
++        return false;
++    }
++
++    if ( region->prlar.reg.ai != PAGE_AI_MASK(attributes) )
++    {
++        printk(XENLOG_WARNING
++               "Mismatched Memory Attribute Index (%#x instead of %#x)\n",
++               region->prlar.reg.ai, PAGE_AI_MASK(attributes));
++        return false;
++    }
++
++    return true;
++}
++
+ /* Map a frame table to cover physical addresses ps through pe */
+ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+ {
+@@ -284,22 +314,26 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+ 
+     flags_has_page_present = flags & _PAGE_PRESENT;
+ 
+-    /* Currently we don't support modifying an existing entry. */
++    /*
++    * Currently, we only support removing/modifying a *WHOLE* MPU memory
++    * region. Part-region removal/modification is not supported as in the worst
++    * case it will leave two/three fragments behind.
++    */
+     if ( flags_has_page_present && (rc >= MPUMAP_REGION_FOUND) )
+     {
+-        printk("Modifying an existing entry is not supported\n");
+-        return -EINVAL;
+-    }
++        if ( !is_mm_attr_match(&xen_mpumap[idx], flags) )
++        {
++            printk("Modifying an existing entry is not supported\n");
++            return -EINVAL;
++        }
+ 
+-    /*
+-     * Currently, we only support removing/modifying a *WHOLE* MPU memory
+-     * region. Part-region removal/modification is not supported as in the worst
+-     * case it will leave two/three fragments behind.
+-     */
+-    if ( rc == MPUMAP_REGION_INCLUSIVE )
+-    {
+-        printk("Part-region removal/modification is not supported\n");
+-        return -EINVAL;
++        /* Check for overflow of refcount before incrementing.  */
++        if ( xen_mpumap[idx].refcount == 0xFF )
++        {
++            printk("Cannot allocate region as it would cause refcount overflow\n");
++            return -ENOENT;
++        }
++        xen_mpumap[idx].refcount += 1;
+     }
+ 
+     /* We are inserting a mapping => Create new region. */
+@@ -323,7 +357,18 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+             return -EINVAL;
+         }
+ 
+-        disable_mpu_region_from_index(idx);
++        if ( xen_mpumap[idx].refcount == 0 )
++        {
++            if ( MPUMAP_REGION_FOUND == rc )
++                disable_mpu_region_from_index(idx);
++            else
++            {
++                printk("Cannot remove a partial region\n");
++                return -EINVAL;
++            }
++        }
++        else
++            xen_mpumap[idx].refcount -= 1;
+     }
+ 
+     return 0;
+-- 
+2.43.0
+
 
