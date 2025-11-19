@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD663CF58D3
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 19:30:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1166355.1492910 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C4CCF58D4
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Nov 2025 19:30:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1166358.1492945 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLnse-0002cf-Ks; Wed, 19 Nov 2025 19:30:16 +0000
+	id 1vLnsl-0003YA-BJ; Wed, 19 Nov 2025 19:30:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1166355.1492910; Wed, 19 Nov 2025 19:30:16 +0000
+Received: by outflank-mailman (output) from mailman id 1166358.1492945; Wed, 19 Nov 2025 19:30:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vLnse-0002cW-Fn; Wed, 19 Nov 2025 19:30:16 +0000
-Received: by outflank-mailman (input) for mailman id 1166355;
- Wed, 19 Nov 2025 19:30:16 +0000
+	id 1vLnsl-0003Y3-8W; Wed, 19 Nov 2025 19:30:23 +0000
+Received: by outflank-mailman (input) for mailman id 1166358;
+ Wed, 19 Nov 2025 19:30:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GacY=53=epam.com=grygorii_strashko@srs-se1.protection.inumbo.net>)
- id 1vLnse-0002Z9-1a
- for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 19:30:16 +0000
+ id 1vLnsj-0002Z9-6y
+ for xen-devel@lists.xenproject.org; Wed, 19 Nov 2025 19:30:21 +0000
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [2a01:111:f403:c20a::7])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2bea38ed-c57e-11f0-980a-7dc792cee155;
- Wed, 19 Nov 2025 20:30:14 +0100 (CET)
+ id 2efe187e-c57e-11f0-980a-7dc792cee155;
+ Wed, 19 Nov 2025 20:30:19 +0100 (CET)
 Received: from AM0PR03MB4594.eurprd03.prod.outlook.com (2603:10a6:208:c8::27)
  by DB9PR03MB7690.eurprd03.prod.outlook.com (2603:10a6:10:2c6::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
- 2025 19:30:08 +0000
+ 2025 19:30:10 +0000
 Received: from AM0PR03MB4594.eurprd03.prod.outlook.com
  ([fe80::5a:31d6:fee4:ccae]) by AM0PR03MB4594.eurprd03.prod.outlook.com
  ([fe80::5a:31d6:fee4:ccae%4]) with mapi id 15.20.9343.009; Wed, 19 Nov 2025
- 19:30:08 +0000
+ 19:30:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,35 +49,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bea38ed-c57e-11f0-980a-7dc792cee155
+X-Inumbo-ID: 2efe187e-c57e-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=feqDyk6P4heFKV/K+PijOozUKe2/WI65zCFcuv9xf6fvCIkHbhFBTOb1a5HfGdyz7MJWFu7puGbi8WqO26+7egh/shONoY3/ETggT+Ctyy4i7U9qAMX2H0zZpxDYrMuVI4sYNKcsoGDWl5nKrgAIKvOYn24cXme7lJ9I7JLhekXnp1sEjLdi0GKtpBoA7atS96JyEUyglT+GvdHQARg4MMMZS41SSYjd3efCJr19U/tl8Kd9/usMiijs+02oQkmMwgUXBiw2vq0vWY71yGqIjxPpfQri0HIJjaOWkSOWVl042BQtpGMtzoEvgVC7iIjDPffmsKwGU2AZ5di4L7A1Ug==
+ b=RaB2bSTix67HTsLfGfHAUWaXHzuzSuuX4ACsFgq3TL9s63UrXQ9ES+PSPfk6iX0umVLcjfYkQ89A9mkhTx8lQsQTytR2h+2fa+3rQ0R1pxui4kIYr1tdKlnmFW3NSteNvW74klYNlJQm5JcGCHXSIf0AKC+NCy0FHUDUNecT5PkqJOtrupw51sIW9ov4Y1m+EkJCTrc/Scz1KCa+Uj6QslxsCLaN3DB34h53S1B2f2nsRJS2jcIjLEqw8aD1OXB3d9e0x4FTz+S9d3ij2qs9gbuZpaI6d4+34ZXv2nKRdZMiEUyWOahXdwzm1d+IZUWoo3wxyXlGi2xIHk174w3WCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0jR9H82uqN6Pq4sjQFVnEVcGPJ2uolsJHWh6buD+pW0=;
- b=fBBfIvdAJeiLiyZAKTUZce4f/HyBz4nCYcteGZqq6f2D+upMtX7OgKHgykml4pSHEszhPQmbX22Tflg6hzuM4e60ekdcgntBUYO9qLxqYYzKCXbLTNnKeW+kuhU2XxiZYzXCnEcMdS3Mf4iJhuPEi9SxLajCTL4Kic7JwSUmbIQgmVx2TtBpVgxz52GvMqAIjl2c6xME4RHVntpgOBb4vfyKNkxhKOruI39C1YxiS9mgrNyFx8f8a9+iLjF/eLKaoeMd+2OQ+HENcj5e7NX1mtxQ39HdDNv9gL3IH+4Pblfus1LqY7avs6YdzrNE2Z5GERWRVhMXVdWUIfo6++v0+w==
+ bh=2pgeAgmuBA5/KH5sFul8K61H69AUlJ3tMBDEqpzse9k=;
+ b=hsrU32Mq3vrw8tlUWY6v2sz8lJfQuu0mFdbGstywnFQBQLdVHpXgr5qMrnybKHodaijmGAla5X3vJzckL97YZKJAt/2X8ygjIabiSSnrIwJKe27sm5ACLjpyHKfgBb8wY6BbWMmIjCtbGGMA88tJWa6OwcGlYM33S0CPmYJA8M7m4WABB4xQm3dI5hSFjQSNt6CrF7U3dJd2HnJ7JB39TICp3TuQh/ujR7h5sFRZwh8cGpV8Rrm53VAmS7X45lZRdDxqPHuaUE4/ZGxqCtWHGy/Ak1onnrtpGfTRv0suSb+/dGhcg1dZs61HNXHXFML9PDnJW7ZL/jFKsVHu7mVmPw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0jR9H82uqN6Pq4sjQFVnEVcGPJ2uolsJHWh6buD+pW0=;
- b=UDDgVCtwIfMNgkVBwQnTY+65oJ+VttF5jgbfj2hHq2ko2wFJB6RRUVXJbSbZ6mseFKOuI0Hmty92rKe7LTSr1yF28/o0ozUIFa86gPh/R8KnwgJ37RzP060uTLM4Ibd1ivpbBgrnlihQv4HTilyIkwU+0+mIUePF1CZkmy52L5xGBwSzP0+F35O/7fFbzLt9P1GC+5nsdi500M6GUUZA3XKG5fJ2gelMKc3zJXMe5zxMSHK2IVWwLNfgCGliLrxV+8lP8hB7CJqDB49LqHuYrOZqbz5bLSbEpWSCk/eXqC3X7aNk/OyOdRcwotCZJVVmm/46CBnz+whInj348RNcJQ==
+ bh=2pgeAgmuBA5/KH5sFul8K61H69AUlJ3tMBDEqpzse9k=;
+ b=OBdl6jj9/ZWXoMbDyJpuSuh+YYlIC1Zkx5i4+wBEZSLjGksD/A8JystAPa+pber2dj42/yvgRXJNWj8BAlZkRTfufuK/3jKTkHB5oP4fk2BbuCY//bJPR2VW0FXz1Sl8JlVCtIgyAeSAnXsMMkcpEG9pNc+7VyyKAL0UfFZ3O3dXyC1HcwPxjwdTS6fXe0Ehko+AEhFbBEQtT3SW36uAbt3cNDk0N2naMwLlBDhDCk5YCnv1ukqrXSgXEH+i2LVh/3Zi+GvNca6dPH0ZsPk0lFXhEsSqPlMHMRZUzh68w/RdmDr7PJZJq4aAI7KaslCJwaxnILAtM5kmJcBod/fqrg==
 From: Grygorii Strashko <grygorii_strashko@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Grygorii Strashko <grygorii_strashko@epam.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Julien
- Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN][PATCH v2 0/4] x86: pvh: allow to disable 32-bit (COMPAT)
- interface support
-Thread-Topic: [XEN][PATCH v2 0/4] x86: pvh: allow to disable 32-bit (COMPAT)
- interface support
-Thread-Index: AQHcWYrqEdLIdxgHq06iG/KRChB4+A==
-Date: Wed, 19 Nov 2025 19:30:08 +0000
-Message-ID: <20251119192916.1009549-1-grygorii_strashko@epam.com>
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Alejandro Vallejo
+	<alejandro.garciavallejo@amd.com>, Jason Andryuk <jason.andryuk@amd.com>
+Subject: [XEN][PATCH v2 4/4] x86: pvh: allow to disable 32-bit interface
+ support
+Thread-Topic: [XEN][PATCH v2 4/4] x86: pvh: allow to disable 32-bit interface
+ support
+Thread-Index: AQHcWYrr1fGFNDkTXkKtxIuHdmqCJw==
+Date: Wed, 19 Nov 2025 19:30:10 +0000
+Message-ID: <20251119192916.1009549-5-grygorii_strashko@epam.com>
+References: <20251119192916.1009549-1-grygorii_strashko@epam.com>
+In-Reply-To: <20251119192916.1009549-1-grygorii_strashko@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -86,70 +88,70 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AM0PR03MB4594:EE_|DB9PR03MB7690:EE_
-x-ms-office365-filtering-correlation-id: 7fcc194e-186d-4a31-3b06-08de27a20ccf
+x-ms-office365-filtering-correlation-id: cf1bf8b9-79a9-460f-b80d-08de27a20e29
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?irI3hVksnb9E2WANveVnzmJ+7hT/F6SDNVpVGIvJVuwK2WNAOXs7CQTZ8+?=
- =?iso-8859-1?Q?qUVzcZCB0GGQdh5wx6siyIT3xC6mqfCGjA19dHUerNeKzT16r/qSwu0E4b?=
- =?iso-8859-1?Q?t7yIlLHzkO7iD8nvrE93wZE9SIk4XJJQvuySnAZs/tYcJ8UslxBMZfkyH/?=
- =?iso-8859-1?Q?bo5SCZRO5h/ixnb2KQf9ToL/Afv+9SXlNdDiJllHn8k6Qj/VzhoA5sZlcv?=
- =?iso-8859-1?Q?vHYj8MeIX9ZjTn49maHYEGUKj9Z6//PQO4WDeaJNUZCVzGjsY3iUowgOHz?=
- =?iso-8859-1?Q?vP3gkwcHwc70OfJsJNcDRJ8dQR56OqhlnjNccl7bm5wQtdF/za/rrDJFMo?=
- =?iso-8859-1?Q?nsC48DD0wu0ea9tU3FpHbRK6rw658ncU8WzZixB62bM5nPugvYnNHYtmRV?=
- =?iso-8859-1?Q?32Su1pKnqIMrFoPGo66hO6rKXPYRn3IXsEDnvlu4k08SWuLqfLIZU8Id1y?=
- =?iso-8859-1?Q?lJGKiY4L/zK0t6dl4vALTIOLX/c0AfOx7UlXVZY44Rx0ebut2Mv5L/Wz5H?=
- =?iso-8859-1?Q?zq3rMSFPPzo7m5G7n/um+HJaZRJ+8SUUA7qVRrIgOTyxeRHD1JhypDHKLe?=
- =?iso-8859-1?Q?V/ZGzm+y76/220GdPopaGsAHcejtalzYPQOvorULD4aWO4uJqq85IQcCjp?=
- =?iso-8859-1?Q?8fPWkVJ+VF3TWBQwc8WXSUOiP9pcbBCQhOzP9b4zzLEx5aBF8zhggfySU9?=
- =?iso-8859-1?Q?0N17PXWdGss3e1U5DVo2veUxUjfsd9KHLpJjMiFSNbtKp7S76DuAdK29o6?=
- =?iso-8859-1?Q?cZWcMl/MSU/DC4zAX88ex+Hdwj/dXOsZbJrWsL5WcRN2HOoTS2hQdJMBUA?=
- =?iso-8859-1?Q?79ikd5ndPshrfDD4wUsJr/Gg5Gf4pZzrM4+Y1qbnK2Prj7E6yqfTqFfKSd?=
- =?iso-8859-1?Q?5Zzj8AktHPpIdEc/BqD4JojFkcNGgK67dUTYri9XfTMsmdcSRtmGj39OxX?=
- =?iso-8859-1?Q?1bBk4GyjLwXpkYIpJjo8fjWd2I7pjC/pgpjS4KUoCQ0cDF23tzrPcIrITC?=
- =?iso-8859-1?Q?KTke6UGXYyFvblAf4EnjakdruSXFPjNik+NH2kohIPYeF9ETKhrWdy+RbV?=
- =?iso-8859-1?Q?cjJ7SkqoClXUz7gReKnnLsx5DHPrOWbkwowA73oBbc91I8F9IZiX3S2hqA?=
- =?iso-8859-1?Q?I+V71fgy16TDAJjEgUmrCoS0QWfNkqy0kdJ+As58XR0Zeo+lZhZJWh/dfY?=
- =?iso-8859-1?Q?+bBeQFGLoltAtXPFrr9cTNp2kO1Aswol5odkqTVD/g88e9UmXIIjisZ2ba?=
- =?iso-8859-1?Q?PeelYntVdxTmTtu0P7gQGD0SSyqTAuWwt10871BCrVIQMXSVfSAU7kcNcM?=
- =?iso-8859-1?Q?htr3l9EZ9nUzUbDwbPdbjNH3Wx8u4SCohOv1Jyi09idHODzWwKrDfLmyG6?=
- =?iso-8859-1?Q?FyMtG0JYkag2XcF8tuPH+xEnVt4RGEHaXWtUpYrAZsJJZmNMLN/qc+lGC8?=
- =?iso-8859-1?Q?ffMu2Bh3oT5uL6WO8rbmRtJim4SETq3fPjHFUyt/PZYq71oReXweyu4Xld?=
- =?iso-8859-1?Q?bjEbForc52k8QYmMWcwsZABCTn3ZYbUfdiFQdoa/Fs9s9nzOyq+GLHMa4+?=
- =?iso-8859-1?Q?QwjIyHrIyLkFfrYnF5mN89JE+vJR?=
+ =?iso-8859-1?Q?/m7Vu5f7cRx5/zi34OtZGNy/1t8dG75CvHfcYQITJlQtP5Cs6SuO8dmaiF?=
+ =?iso-8859-1?Q?XIcpAX2mOGkdKtRetL/HqWC3D2eQck3IMk5MAFGxDutscx23dfBwpEOwWT?=
+ =?iso-8859-1?Q?phP0FMdrbbejw7zEdHfqiP4puvKdGO5Rc4J06EnVn+XN8Ftsr0Q5plOlwD?=
+ =?iso-8859-1?Q?9FqIQnNRVML8nFzAWnUMt++E20X4uti/kOmuKc9uUEAngnT5I7ue6rPQu7?=
+ =?iso-8859-1?Q?PMeI1BZXawf6wQhRcnqTapR/esaynbq06Z0oR3wRbC7r4ZVb7HU5B5v+tc?=
+ =?iso-8859-1?Q?GbsftW7lMTJG1notzZe36uYSiapAWFpTFhJKNO9kyrefir35YdoMfaTTu6?=
+ =?iso-8859-1?Q?HLx3r1gBpBf2JzSY24w13JXxpSgIrxj2YtYNA1ADQsCtmsC9odpDe0dkml?=
+ =?iso-8859-1?Q?+68DlzBweblYBKVbwHAa5xDf7cvQg7L16uxhxBVtCksPQ+rR2L0VqoYOru?=
+ =?iso-8859-1?Q?/CnqbZBhWV3LSfWaSWHNUmoUzjlbH2y1FSuW+DK82HAI+4yNR8Yb0l3rRQ?=
+ =?iso-8859-1?Q?aFqdulFWJKC+u6crmBh6CPCM9AaACdSjw4SBiUZ8qr4u/NcYZIYnlvEL5v?=
+ =?iso-8859-1?Q?GYcV49zQmbx6VJddEcSl05DX5cS9L3dPMpbc14dfEbe+L8QZfIhIm8v2Fs?=
+ =?iso-8859-1?Q?IV83uvVmUV0AzSMtHKhoGra9dFP+q90FwENbGA7LRk+tvjCLezCzY/YbQW?=
+ =?iso-8859-1?Q?6TjuqRZdBO2/p3rS66H+UksUoPl3iMLiZ/3IFHTkhEEOLR/vwk5iKTzYtA?=
+ =?iso-8859-1?Q?YdcKc8J/f29Q/Jp4fcns7CD2BDePyU2NUXAs/PGFabKhk7j9+Fs6Pq9JDk?=
+ =?iso-8859-1?Q?GiyhENPWvx8mBtJmSZZaygx8ZOyZTAkTgb3uw1ICy0n+PGRAYhM7p4aMKj?=
+ =?iso-8859-1?Q?ear69kqgAbsf8Jn4NjsyvHDisdmjPR/jKBDBk6Y9+RSoRYndJMs57M8CrI?=
+ =?iso-8859-1?Q?7qsKQXcDFK2p5y7pWHh463J0xKXAGuLwz+waGsg5iSRy9hVzCEAMZhWglI?=
+ =?iso-8859-1?Q?DGJOBLXns04F76DdG1IHBV6wCJRppoUQ07cW+xU64qhnzuqsyJIyVeqIJ+?=
+ =?iso-8859-1?Q?km/fu/Vjdzt+tgeLBmPjN7WLOou2r++0CC2n9YrcZU2LevnkFNWSSVLnp8?=
+ =?iso-8859-1?Q?DYRsK7lEocOa0lCOHhMAycTwSACPtEG72Sbu9Od9fsLm/dycB9HoM4gaRj?=
+ =?iso-8859-1?Q?QNu2Cpm00qsuPc/fgMYimMG0pQMZRhnr/1YnUVt1dWdn3jcAdhI4oJC5Be?=
+ =?iso-8859-1?Q?mDR+LylTnz1YPVDYf9iEVV3QuyCX9+Wm9PMqXkULS0AsZTJAjF3+5Da3j9?=
+ =?iso-8859-1?Q?Vh9uuFTIMoeBjeRx7IxFQIB93MV2A/lZ7Md1woJ6RWWMN1B+PYN79NW2pU?=
+ =?iso-8859-1?Q?nWpiGsSl2u1lwcUEL9ZPCLSaRiB1O1fol9nDOZUAs66Vhtzv8BhHaQdOtp?=
+ =?iso-8859-1?Q?xpov1yDB9y6AjhrngkiPmB9d0VPaqih+bBxclVGuJfDXNB7LbdZJY0yP6l?=
+ =?iso-8859-1?Q?egP5QCYyTvV8ZB/OTVh/gtziis6h+o++fCIzRnk8TPjrQ4wv+UkBHaCvzz?=
+ =?iso-8859-1?Q?eC3SwQfRLv81C+X8n/umKBLs3xBO?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB4594.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?wLcwTYA4UsP74oNmEw37b8GkrqWp4V4f5TSoNmzB6H3hQkvxvTeQpX1qoL?=
- =?iso-8859-1?Q?E8jWRLcHhWk0OwdGmnbyRT9L6JOpf4VjFnh6rXZR33nsWwtS5xVvuJkWPC?=
- =?iso-8859-1?Q?So/PxKMT02Y8oin8DSVfV26zIs21H5DSN9GKDwKz0NSybeS5peSLwvoFYh?=
- =?iso-8859-1?Q?N1iush+YaQw0zoEFq9W2epWUTOv//PoXpiiD0s3OtATdNm6yh5VWROWlQ+?=
- =?iso-8859-1?Q?p7iaObMZrPwWhOTsb8sMXcm+XPygJdHjW4sAWnec9AUnAsC2GQULXuRzuN?=
- =?iso-8859-1?Q?LNXXZoqYPgXHLk11S32wte5K2iR1X7ep6WqFTH0fdhdVk82WHXauIdADVB?=
- =?iso-8859-1?Q?TA6eEHRt50wnmnI7xeb5Vldqtolwf+tiMVzIv7FUj7Iz4EDQNHbUgEe3W+?=
- =?iso-8859-1?Q?Zy7qn/Q9lHdk7ywjlBAhe9pkfAVdwCFk52GGPajGBy00v3FMolIQDnQdFk?=
- =?iso-8859-1?Q?DQsODdecrT1xdCj+Gf7QoZSs/F+YjiD3I3N23wPOX3IORKT+1jUQWxuGzr?=
- =?iso-8859-1?Q?gS85HU0NKzOcBfKgkFacmD6Xjps2fU7wmPrbioHORG0YH5NTUBCGvgHK5U?=
- =?iso-8859-1?Q?xfZQQAeK5gI55mtmrNVtoEuGq/T92LXPIv6MeyuzjwMJn6RZzFAQG3Z2Ld?=
- =?iso-8859-1?Q?DYABciiAEFDa3kOiGWI65doilQfKkNjYQIL34fSLv0ZVEMBMOsh+iujyEk?=
- =?iso-8859-1?Q?4Bte2X8w8FpK+ZWbb+DjbbYZTSU27QyygASboA2uJ7/82HiEm8gILKNN9Q?=
- =?iso-8859-1?Q?yDjb7VkqrHaMkVCtZbMWDvBTNriGkyasn7Py8BuTYGNF5UKanLgGN/1my5?=
- =?iso-8859-1?Q?meonDePfm0C/pSqFSIFrGZnoikgMzp3vvtokhJr7fjm2e6FAu3/9wOyGJV?=
- =?iso-8859-1?Q?GsNCdZlK0+p8evg+2MVUbqLKXqmizuuPJoDqxtovmuB/oLMKR76Zm7TBjy?=
- =?iso-8859-1?Q?ssGLlwLURIGNZG3vQzoszB62CD6LCKckRcB8rWohAgNeIfdCqVP4Io1jk+?=
- =?iso-8859-1?Q?Fdw8r4v0vxhAbOd14ID/973oB6zBsCADxhWIcBI/C0aO3ZjOuTSW7y7cwk?=
- =?iso-8859-1?Q?Bkf7uJ+vaRw79DRI6XQUCrnkTx/GVzVKlQhmB9XvbA1O48SDUlGSdpx3eX?=
- =?iso-8859-1?Q?IEEN298r8YagPh1tV8V79UN2HJIid1BCPYDzo7lLwJm0iEv0lQaHf4kHtc?=
- =?iso-8859-1?Q?KhhkBsCiP/5KAV1DsSU/Wdquhw0VAKat6KjjUcuSLsV8zjrqnbA/qAvkBq?=
- =?iso-8859-1?Q?ZZ0Ct8GEZlEbbSbl/DydJvc6alZiakh/NOoCuWDlmKYO7JsJ71fiqU6A2i?=
- =?iso-8859-1?Q?b2j5q9DKWr8ax9xFGUWhTyax16hKZcn5N3ZnuZrOu9cRmJDZn2gLGSolOX?=
- =?iso-8859-1?Q?PBk7TpUzgUX6xZqQ++Mlo6vCUOWGjyXQh5ieAO39Dvyd1LXzeUkdIFDbEs?=
- =?iso-8859-1?Q?XLLoFaCkj2BsdS8jbKOA13lG0AUTWaSmUFmh7vzqZ8iVjsyFpcgRC97ZQn?=
- =?iso-8859-1?Q?1hm9Rs5oedh2E7TJqSKZmjntPbs2fVqLHm/1I6axUGWxB4+gS6mmh4mlW9?=
- =?iso-8859-1?Q?QXwu3dwvDv/7MDC22EtowiyLqC4eEEwexKWBKr4e9/WooTrz9GFAWRoqSS?=
- =?iso-8859-1?Q?fclueyGXZXazLSC6LLT2bwvmrG//LHRWTRtW/Knk1fqICSnlK8s2htHg?=
+ =?iso-8859-1?Q?QA4V2IK4AJKL7Kc4plrDuQLhykelSFEoUt8/JWsEHFQnaABYAtRL4RkfWq?=
+ =?iso-8859-1?Q?7k8sy6X5IDCHBRJVnXbW4eBSBZnuhfdzFPgbXzNLEjgX3iETMTFdc1fSLh?=
+ =?iso-8859-1?Q?jyIWhRI9IDu0Hk+ewHSThD5SFZuU94gjtEIEJP67mCatbUYwZNTL/uTaGk?=
+ =?iso-8859-1?Q?0/Un2AFHbCA2njyZglPhBAM+mgCk/cQ5mNTSPUMxj5EAYpD50vUPQYp6vB?=
+ =?iso-8859-1?Q?GktYpDhpM7Xx7OhV4uVf1M0dSsFfNjtVWKuwFzSTmCRjlw3jkEYobf0AWI?=
+ =?iso-8859-1?Q?Ul1wTxiJnFlkWEKqa7Sected9NE3S9coHGhO127TGxDwd+UAeofdcdm13S?=
+ =?iso-8859-1?Q?2H9lXNZSauXhCzrWjma542CK/ZjGwwM74jaiWepAIJ9JGUseXA5BU1ji4k?=
+ =?iso-8859-1?Q?RPqzNctxuJyY1ziYZK7w4ExcB2GPt0fMiVKgztF5e5JW2tu/fQYEbBU/P/?=
+ =?iso-8859-1?Q?0rfcKvq1Ga4He0EhyBDeFBzxSe+FGSdFA+qdD6An3+4aw3RYxzFixECdju?=
+ =?iso-8859-1?Q?haEkHE2umPMLJ6EK8W7JaRPB9KaqDvsRNQ5fXyp8w5abRHm4SXAPhJGDR/?=
+ =?iso-8859-1?Q?h2ZORwuYHlJUHKT9VrWkbMYlZzgIv+5wi7+LVJdA5NuZFz5eaLfKV4VqqZ?=
+ =?iso-8859-1?Q?FqsviX6AAe4Zc/fXaHJIFG0OQJTdkaof9ItmyW1SYHFkqbbM/UDf/C2KUU?=
+ =?iso-8859-1?Q?Ku5lbKoW+48FA0MKLVZBF6b2MRnUcarRiDHZl51/QZLox4QRwhs/IUwnJg?=
+ =?iso-8859-1?Q?K4P8vwXOmBYq1IeodIIGH2xk4FYb5gUxIeHW7iURstYcRUVwAOnAJ24Y2i?=
+ =?iso-8859-1?Q?0AIZCHRB6vrdJwTvUEMymH6etMqi321iiJo2Ud1hZHMwNYrCs3cQZOAQ1H?=
+ =?iso-8859-1?Q?WSzTCZ2VxVB4EfkSGvwSt52cDPodMHhYHcFnjNqoTXkkVm1nS/ZLpOVTVQ?=
+ =?iso-8859-1?Q?rynFhbsENDDbuY44WYw69d8ev0q4qDi5yfYMMFeo6vUp8izVCQ8vix3AJ+?=
+ =?iso-8859-1?Q?LB7P2QLMkfo5FckQT6db8xBUwlwWsW7kndoadmLEyGwoL9CKOnEv7cpSYb?=
+ =?iso-8859-1?Q?0mCPYi0VeOP4kMGeWasCVmOyaRxwmU0PeMPdWVmnxZj9zOjj4FeXh2Yi+K?=
+ =?iso-8859-1?Q?Ek+rXgjP1X8awXM2/phRXOLgqbRoXdRHVXKQV8s6qSSc56xOwjpDatgM+2?=
+ =?iso-8859-1?Q?WdTxwSnz5hw/sLdAMwdvlvtu9NZnQTnThhzt0UqIJF00Z4GrHHHIwAtNLr?=
+ =?iso-8859-1?Q?eK2WEzp2SJGy5sTnunE4F/bc91w4O1qQJs9yCfoLf2ntS3SE8wP795BZrh?=
+ =?iso-8859-1?Q?/L7XNh0W/fdaqOosj+tw/Sousi9NcJHP5eSL5Faxfx31S5f7JjAaIzfjSg?=
+ =?iso-8859-1?Q?CGkXTitZec08/bm6QPlB/cA8Pn/xwfZcQWGH8qrgWGSE3BDBe9MeDXauUk?=
+ =?iso-8859-1?Q?z3ROaP2h9vwaK1WGabSrQ2KFHyp+jZnD0iUlshtrL7LuQDh6gx+8p5XCrQ?=
+ =?iso-8859-1?Q?QtzI1yABeQfUXQKvvwYPcjgnuUvHHVaBqxKttFj2ASnJhDC/KPSFhdWPdE?=
+ =?iso-8859-1?Q?5xL2w3nx/v3W6Sijc7hXgjY8YGMphJMRhb8B9VGQ/XMdgMqAZYiFDoIk1N?=
+ =?iso-8859-1?Q?X56y0nhZFOLyNv4SVZa+NiIlzqCXqlMeZO6hXPwW88MD57Y5J8LEOj4g?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -157,61 +159,79 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB4594.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7fcc194e-186d-4a31-3b06-08de27a20ccf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Nov 2025 19:30:08.5844
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf1bf8b9-79a9-460f-b80d-08de27a20e29
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Nov 2025 19:30:10.1618
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: zFXxTYSuGzbwPBg6WbhPQkImVLYguyrD3Fmh5cbHedni8Y3BmsCC5hAqY7frarvaESN2/uxkckAyXnftN48ysy6wIQVwQQQ5WJUZA//X73w=
+X-MS-Exchange-CrossTenant-userprincipalname: zU89w4ffTQmie0Qdwt0ylgqRMda9CnX78+p3s5rY3dwcMBZvBfhdzVp5ahU8E9+ckxAnawvU+jxebkwXjtjH2s2W/XjycTsEAtTkzJ16L4I=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7690
 
 From: Grygorii Strashko <grygorii_strashko@epam.com>
 
-Hi
+For x86 Xen safety certification only PVH Gusts are selected to be allowed
+which are started by using direct Direct Kernel Boot only. There is also an
+assumption that x86 Guest's (OS) early boot code (which is running not in
+64-bit mode) does not access Xen interfaces (hypercalls, shared_info, ..).
 
-This series introduces possibility to disable 32-bit (COMPAT) interface sup=
-port
-in the following case:
-      - Only PVH domains are used
-      - Guests (OS) are started by using direct Direct Kernel Boot
-      - Guests (OS) are 64-bit and Guest early boot code, which is running =
-not
-        in 64-bit mode, does not access Xen interfaces
-        (hypercalls, shared_info, ..)
+In this case the Xen HVM 32-bit COMPAT interface become unused and leaves
+gaps in terms of coverage.
 
-If above criterias are met the COMPAT HVM interface become unreachable and =
-can be disabled.
-Coverage reports analyze and adding guard (debug) exceptions in hvm_hyperca=
-ll/hvm_do_multicall_call
-and hvm_latch_shinfo_size() confirm that COMPAT HVM interface is unused for=
- safety use-case.
+Hence now all prerequisite changes are in place, introduce a
+CONFIG_HVM_COMPAT option through which HVM(PVH) 32-bit interface support on
+64-bit Xen can be disabled.
 
-Changes in v2 described in each patch:
-- patch "x86: constify has_32bit_shinfo() if !CONFIG_COMPAT" squashed in pa=
-tch 2.
+By default, CONFIG_HVM_COMPAT is ("y") enabled and accessible only in
+EXPERT mode.
 
-v1:
- https://patchwork.kernel.org/project/xen-devel/cover/20251111175413.354069=
-0-1-grygorii_strashko@epam.com/
+Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+---
+changes in v2:
+- fix format and move above HVM_FEP
 
-Grygorii Strashko (4):
-  x86: hvm: dm: factor out compat code under ifdefs
-  x86: hvm: compat: introduce is_hcall_compat() helper
-  x86: hvm: factor out COMPAT code under ifdefs
-  x86: pvh: allow to disable 32-bit interface support
+ xen/arch/x86/hvm/Kconfig | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
- xen/arch/x86/hvm/Kconfig          | 19 ++++++++++++++++++-
- xen/arch/x86/hvm/dm.c             |  2 ++
- xen/arch/x86/hvm/hvm.c            | 24 ++++++++++++++++++++----
- xen/arch/x86/hvm/hypercall.c      | 22 +++++++++++++++++-----
- xen/arch/x86/hypercall.c          |  6 +-----
- xen/arch/x86/include/asm/domain.h |  9 +++++++--
- xen/common/kernel.c               |  2 +-
- xen/include/hypercall-defs.c      |  9 +++++++--
- xen/include/xen/sched.h           |  9 +++++++++
- 9 files changed, 82 insertions(+), 20 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+index c323d767e77c..88090f5b3965 100644
+--- a/xen/arch/x86/hvm/Kconfig
++++ b/xen/arch/x86/hvm/Kconfig
+@@ -2,7 +2,6 @@ menuconfig HVM
+ 	bool "HVM support"
+ 	depends on !PV_SHIM_EXCLUSIVE
+ 	default !PV_SHIM
+-	select COMPAT
+ 	select IOREQ_SERVER
+ 	select MEM_ACCESS_ALWAYS_ON
+ 	help
+@@ -35,6 +34,24 @@ config INTEL_VMX
+ 	  If your system includes a processor with Intel VT-x support, say Y.
+ 	  If in doubt, say Y.
+=20
++config HVM_COMPAT
++	bool "HVM 32-bit hypercalls interface support" if EXPERT
++	select COMPAT
++	default y
++	help
++	  The HVM 32-bit interface must be enabled for HVM domains to be able to
++	  make hypercalls in 32bit mode. Non-PVH domains unconditionally need thi=
+s
++	  option so that hvmloader may issue hypercalls in 32bit mode.
++
++	  The HVM 32-bit interface can be disabled if:
++	  - Only PVH domains are used
++	  - Guests (OS) are started by using direct Direct Kernel Boot
++	  - Guests (OS) are 64-bit and Guest early boot code, which is running no=
+t
++	    in 64-bit mode, does not access Xen interfaces
++	    (hypercalls, shared_info, ..)
++
++	  If unsure, say Y.
++
+ config HVM_FEP
+ 	bool "HVM Forced Emulation Prefix support (UNSUPPORTED)" if UNSUPPORTED
+ 	default DEBUG
 --=20
 2.34.1
 
