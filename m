@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6C9CCF857F
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Nov 2025 11:10:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1166865.1493354 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B643CF8843
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Nov 2025 11:10:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1166871.1493378 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vM2Y9-00046k-Lf; Thu, 20 Nov 2025 11:10:05 +0000
+	id 1vM2YD-0004op-2j; Thu, 20 Nov 2025 11:10:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1166865.1493354; Thu, 20 Nov 2025 11:10:05 +0000
+Received: by outflank-mailman (output) from mailman id 1166871.1493378; Thu, 20 Nov 2025 11:10:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vM2Y9-00046G-Gf; Thu, 20 Nov 2025 11:10:05 +0000
-Received: by outflank-mailman (input) for mailman id 1166865;
- Thu, 20 Nov 2025 11:10:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vM2YC-0004oA-Rp; Thu, 20 Nov 2025 11:10:08 +0000
+Received: by outflank-mailman (input) for mailman id 1166871;
+ Thu, 20 Nov 2025 11:10:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2mUT=54=bounce.vates.tech=bounce-md_30504962.691ef709.v1-c483da0948f24feab05d81858fa32721@srs-se1.protection.inumbo.net>)
- id 1vM2Y8-0001P8-0K
- for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 11:10:04 +0000
-Received: from mail180-15.suw31.mandrillapp.com
- (mail180-15.suw31.mandrillapp.com [198.2.180.15])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7557369c-c601-11f0-980a-7dc792cee155;
- Thu, 20 Nov 2025 12:10:02 +0100 (CET)
-Received: from pmta11.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail180-15.suw31.mandrillapp.com (Mailchimp) with ESMTP id
- 4dBwc91dwXzPm1CGs
- for <xen-devel@lists.xenproject.org>; Thu, 20 Nov 2025 11:10:01 +0000 (GMT)
+ <SRS0=x2SP=54=bounce.vates.tech=bounce-md_30504962.691ef70b.v1-333301a5be55468c8714a95308cc1089@srs-se1.protection.inumbo.net>)
+ id 1vM2YA-0001PI-HQ
+ for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 11:10:06 +0000
+Received: from mail128-17.atl41.mandrillapp.com
+ (mail128-17.atl41.mandrillapp.com [198.2.128.17])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 773bb9eb-c601-11f0-9d18-b5c5bf9af7f9;
+ Thu, 20 Nov 2025 12:10:05 +0100 (CET)
+Received: from pmta08.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail128-17.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4dBwcC6CBBzCf9RNt
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Nov 2025 11:10:03 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- c483da0948f24feab05d81858fa32721; Thu, 20 Nov 2025 11:10:01 +0000
+ 333301a5be55468c8714a95308cc1089; Thu, 20 Nov 2025 11:10:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,189 +45,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7557369c-c601-11f0-980a-7dc792cee155
+X-Inumbo-ID: 773bb9eb-c601-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1763637001; x=1763907001;
-	bh=qKPhb2hXtbAfqWjmWJKnX0A4SzctJuOE8fF03rvyg9I=;
+	s=mte1; t=1763637003; x=1763907003;
+	bh=OapH2MHIAp2S9SzCUt8Ia8Mv+id8AIAMINW1iJ5dAfE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=FTLge2cHpiKJnRrHDJ64MR5X79WaTt/46yLUsLJ/IkjJo6bBMcQDcr0ZJ+73JkNPx
-	 5IRHzQ1uP+dbYCgnhGrgzqxT5C0j8H7MPDfdZQSN+9cL/5Cdb/mxN2OQUAtIJ8qGcL
-	 bIsLTeVE/1DoG2lCekEmau3uGIBvSAXv+MTIHCdqVqHxHa8lPTozn/m5YKaVg4KXlD
-	 wanSpmcnN2Gsiu0jY3fwXISq/kaP3yBItQC88Ec3kk2/qDvntp0oqfWDebLA2buarW
-	 7x+Jj6ZKfHuvG9kVfXXoXPUer8l020osO3/C6f0RMfveVAEUcPv1WkkIss5oVHx2pb
-	 QRbx1L+fP4fBg==
+	b=Jp2p+1KeTvywnHXgSG0oxl/a8lGjcpFy4rFBghie0PnFIpRiZQt2WTeyhgwqzDJ6F
+	 avpDRRFEqFc/SUEyQ2wlZVj0FVpTf4RYBAtBPkcSyY6+7PdQVViToBCCwQjp0HKMJ9
+	 ePzbvESK6hKxEz27HGxiDUMVBZS+ctvcXKXFxawAY+oQB+M5USMIG8rBOaJwcnSetp
+	 cT9sAvA2wssSrckTqRaTFJQirtUhLOCIL10/2hK61Gyrt/+cVSptA/CaCvN8Wj75Zt
+	 BPekcCwXMJOWpXgrMHllpM3QBrbFKUbx3fwtGc15rmXJXZpqactD94qJnfAaM/DjJl
+	 IRsU4Zc6Ye+fQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1763637001; x=1763897501; i=teddy.astie@vates.tech;
-	bh=qKPhb2hXtbAfqWjmWJKnX0A4SzctJuOE8fF03rvyg9I=;
+	t=1763637003; x=1763897503; i=teddy.astie@vates.tech;
+	bh=OapH2MHIAp2S9SzCUt8Ia8Mv+id8AIAMINW1iJ5dAfE=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=gwmx7H9UBGXIJ+ejSPA3g9q4F97LbnTMialepsat3rAEf+1L7HHXoacLOmpAGMmWK
-	 q+ReRr1OqytsIeXklVcidxI7SV90ZIJsVoBtn165vfxUF4g+6MUasdnKrTmBOeXlAq
-	 oarzUSaRYI3bOK8p8xl6OyVWc4OId22Yk6XSBNEGtUCb4PwhDTTsjOIFzQ7C/pfANH
-	 8bbGR6t+8ylsyRlg3EGkPG5ScXrUquiw5FY/W0b8pCUIkN7wbmetNkJlboYbAsrIs9
-	 T3ilDvIpKSwPj0dU1xK2xlTplgooAmaz8KvBYlBeET5913icfBwotY0cYe8l9Bd9qe
-	 +vvcuLj3NTQQQ==
+	b=uO4O5eVg6yTsY160J+28UUzEm9nDlhADy386XkTaha/1jnjIwd6dbf6QVg9RYngng
+	 cgYD3VSNGu1Da16Va2ehHUpwl7bwUX+8wMeJ/xG3TcJnimAZ3uS0dIbmPRcIy5HItu
+	 31KGPrUZR1menlWjhGIaXOAN57oyI9rRUYDpfuNuSXnJyS6ncrXvFKr2GQ1OOsE4OV
+	 v3kwkXw6vdT+r/6YYTXMqtihg4XYfPZlHCGsO8gAB4ev5vvGZxFddhGA1y261uIorY
+	 fU7LnQe0P3aZ6WcdT6meFh8dzKLarsZkAhDv6k04j2x6rQCguwqCUS681g1ggvQTvQ
+	 A0camm/PTgl5g==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20v7=2009/14]=20iommu:=20Provide=20'X'=20debug=20key=20to=20dump=20IOMMU=20context=20infos?=
+Subject: =?utf-8?Q?[RFC=20PATCH=20v7=2011/14]=20iommu:=20Introduce=20iommu=5Fget=5Fmax=5Fiova?=
 X-Mailer: git-send-email 2.51.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1763637000187
+X-Bm-Transport-Timestamp: 1763637002749
 To: xen-devel@lists.xenproject.org
 Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Jason Andryuk" <jason.andryuk@amd.com>
-Message-Id: <6433e2b223d610ee7705abaa49bb27fc4233bf60.1763569135.git.teddy.astie@vates.tech>
+Message-Id: <a7541fa86390a281a301942487e2518262524f60.1763569135.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1763569135.git.teddy.astie@vates.tech>
 References: <cover.1763569135.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.c483da0948f24feab05d81858fa32721?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.333301a5be55468c8714a95308cc1089?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251120:md
-Date: Thu, 20 Nov 2025 11:10:01 +0000
+Date: Thu, 20 Nov 2025 11:10:03 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-It is often useful to know the state of all contexts and what devices
-are in it. It can also be used to know what device belong to which domains.
+Provide a way to know what maximum IOVA is usable for DMA.
+This will be later used by PV-IOMMU to provide limits to guest.
 
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
 v7: introduced
+---
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 15 +++++++++++++++
+ xen/drivers/passthrough/iommu.c             | 10 ++++++++++
+ xen/drivers/passthrough/vtd/iommu.c         |  8 ++++++++
+ xen/include/xen/iommu.h                     |  3 +++
+ 4 files changed, 36 insertions(+)
 
- xen/drivers/passthrough/amd/iommu_init.c | 46 ++++++++++++++++++++++++
- xen/drivers/passthrough/vtd/iommu.c      | 45 ++++++++++++++++++++++-
- 2 files changed, 90 insertions(+), 1 deletion(-)
-
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index bf32b6c718..1c38ac0369 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -1332,6 +1332,51 @@ static int __init cf_check amd_iommu_setup_device_table(
-     return 0;
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index 3d08a925d6..4185e4cd64 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -706,6 +706,20 @@ static void cf_check amd_dump_page_tables(struct domain *d)
+     }
  }
  
-+static void cf_check amd_dump_domain_iommu_contexts(struct domain *d)
++static uint64_t cf_check amd_iommu_get_max_iova(struct domain *d)
 +{
-+    unsigned int i, iommu_no;
 +    struct domain_iommu *hd = dom_iommu(d);
-+    struct iommu_context *ctx;
-+    struct pci_dev *pdev;
++    unsigned int bits = 12 + hd->arch.amd.paging_mode * 9;
 +
-+    if (d == dom_io)
-+        printk("d[IO] contexts\n");
-+    else
-+        printk("d%hu contexts\n", d->domain_id);
++    /* If paging_mode == 6, which indicates 6-level page tables,
++       we have bits == 66 while the GPA space is still 64-bits
++     */
++    if (bits >= 64)
++        return ~0LLU;
 +
-+    for (i = 0; i < (1 + hd->other_contexts.count); ++i)
-+    {
-+        if ( (ctx = iommu_get_context(d, i)) )
-+        {
-+            printk(" Context %d (%"PRI_mfn")\n", i,
-+                   mfn_x(page_to_mfn(ctx->arch.amd.root_table)));
-+
-+            for (iommu_no = 0; iommu_no < nr_amd_iommus; iommu_no++)
-+                printk("  IOMMU %u (used=%lu; did=%hu)\n", iommu_no,
-+                       ctx->arch.amd.iommu_dev_cnt[iommu_no],
-+                       ctx->arch.amd.didmap[iommu_no]);
-+
-+            list_for_each_entry(pdev, &ctx->devices, context_list)
-+            {
-+                printk("  - %pp\n", &pdev->sbdf);
-+            }
-+
-+            iommu_put_context(ctx);
-+        }
-+    }
++    return (1LLU << bits) - 1;
 +}
 +
-+static void cf_check amd_dump_iommu_contexts(unsigned char key)
+ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+     .page_sizes = PAGE_SIZE_4K | PAGE_SIZE_2M | PAGE_SIZE_1G,
+     .init = amd_iommu_domain_init,
+@@ -736,6 +750,7 @@ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+     .get_reserved_device_memory = amd_iommu_get_reserved_device_memory,
+     .dump_page_tables = amd_dump_page_tables,
+     .quiesce = amd_iommu_quiesce,
++    .get_max_iova = amd_iommu_get_max_iova,
+ };
+ 
+ static const struct iommu_init_ops __initconstrel _iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index feda2e390b..4434a9dcd0 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -1229,6 +1229,16 @@ bool iommu_has_feature(struct domain *d, enum iommu_feature feature)
+     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+ }
+ 
++uint64_t iommu_get_max_iova(struct domain *d)
 +{
-+    struct domain *d;
++    struct domain_iommu *hd = dom_iommu(d);
 +
-+    for_each_domain(d)
-+        if (is_iommu_enabled(d))
-+            amd_dump_domain_iommu_contexts(d);
++    if ( !hd->platform_ops->get_max_iova )
++        return 0;
 +
-+    amd_dump_domain_iommu_contexts(dom_io);
++    return iommu_call(hd->platform_ops, get_max_iova, d);
 +}
 +
- /* Check whether SP5100 SATA Combined mode is on */
- static bool __init amd_sp5100_erratum28(void)
- {
-@@ -1486,6 +1531,7 @@ int __init amd_iommu_init(bool xt)
-         register_keyhandler('V', &amd_iommu_dump_intremap_tables,
-                             "dump IOMMU intremap tables", 0);
- 
-+    register_keyhandler('X', amd_dump_iommu_contexts, "dump iommu contexts", 1);
-     return 0;
- 
- error_out:
+ #define MAX_EXTRA_RESERVED_RANGES 20
+ struct extra_reserved_range {
+     unsigned long start;
 diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index 3319903297..a602edd755 100644
+index a602edd755..af3c6fb178 100644
 --- a/xen/drivers/passthrough/vtd/iommu.c
 +++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1954,6 +1954,49 @@ static int __must_check init_vtd_hw(bool resume)
-     return iommu_flush_all();
+@@ -2595,6 +2595,13 @@ static int cf_check intel_iommu_remove_devfn(struct domain *d, struct pci_dev *p
+     return unapply_context_single(d, drhd->iommu, prev_ctx, pdev->bus, devfn);
  }
  
-+static void cf_check vtd_dump_domain_contexts(struct domain *d)
++static uint64_t cf_check intel_iommu_get_max_iova(struct domain *d)
 +{
-+    unsigned int i, iommu_no;
-+    struct pci_dev *pdev;
-+    struct iommu_context *ctx;
 +    struct domain_iommu *hd = dom_iommu(d);
 +
-+    if (d == dom_io)
-+        printk("d[IO] contexts\n");
-+    else
-+        printk("d%hu contexts\n", d->domain_id);
-+
-+    for (i = 0; i < (1 + hd->other_contexts.count); ++i)
-+    {
-+        if ( (ctx = iommu_get_context(d, i)) )
-+        {
-+            printk(" Context %d (%"PRIx64")\n", i, ctx->arch.vtd.pgd_maddr);
-+
-+            for (iommu_no = 0; iommu_no < nr_iommus; iommu_no++)
-+                printk("  IOMMU %u (used=%lu; did=%hu)\n", iommu_no,
-+                       ctx->arch.vtd.iommu_dev_cnt[iommu_no],
-+                       ctx->arch.vtd.didmap[iommu_no]);
-+
-+            list_for_each_entry(pdev, &ctx->devices, context_list)
-+            {
-+                printk("  - %pp\n", &pdev->sbdf);
-+            }
-+
-+            iommu_put_context(ctx);
-+        }
-+    }
++    return (1LLU << agaw_to_width(hd->arch.vtd.agaw)) - 1;
 +}
 +
-+static void cf_check vtd_dump_contexts(unsigned char key)
-+{
-+    struct domain *d;
+ static void cf_check vtd_quiesce(void)
+ {
+     const struct acpi_drhd_unit *drhd;
+@@ -2644,6 +2651,7 @@ static const struct iommu_ops __initconst_cf_clobber vtd_ops = {
+     .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
+     .dump_page_tables = vtd_dump_page_tables,
+     .quiesce = vtd_quiesce,
++    .get_max_iova = intel_iommu_get_max_iova,
+ };
+ 
+ const struct iommu_init_ops __initconstrel intel_iommu_init_ops = {
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 8c20f575ee..66951c9809 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -403,6 +403,9 @@ struct iommu_ops {
+ #endif
+     /* Inhibit all interrupt generation, to be used at shutdown. */
+     void (*quiesce)(void);
 +
-+    for_each_domain(d)
-+        if (is_iommu_enabled(d))
-+            vtd_dump_domain_contexts(d);
-+
-+    vtd_dump_domain_contexts(dom_io);
-+}
++    /* Get maximum domain device address (IOVA). */
++    uint64_t (*get_max_iova)(struct domain *d);
+ };
  
- static struct iommu_state {
-     uint32_t fectl;
-@@ -2088,7 +2131,7 @@ static int __init cf_check vtd_setup(void)
-     iommu_ops.page_sizes |= large_sizes;
- 
-     register_keyhandler('V', vtd_dump_iommu_info, "dump iommu info", 1);
--
-+    register_keyhandler('X', vtd_dump_contexts, "dump iommu contexts", 1);
-     return 0;
- 
-  error:
+ /*
 -- 
 2.51.2
 
