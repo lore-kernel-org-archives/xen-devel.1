@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 188F7CFA441
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2339ACFA443
 	for <xen-devel@archiver.kernel.org>; Thu, 20 Nov 2025 19:14:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1167744.1494017 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1167746.1494030 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMA6S-0000Ah-W9; Thu, 20 Nov 2025 19:14:01 +0000
+	id 1vMA6U-0000Pg-7P; Thu, 20 Nov 2025 19:14:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1167744.1494017; Thu, 20 Nov 2025 19:14:00 +0000
+Received: by outflank-mailman (output) from mailman id 1167746.1494030; Thu, 20 Nov 2025 19:14:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMA6S-00008c-LT; Thu, 20 Nov 2025 19:14:00 +0000
-Received: by outflank-mailman (input) for mailman id 1167744;
- Thu, 20 Nov 2025 19:13:59 +0000
+	id 1vMA6T-0000My-J5; Thu, 20 Nov 2025 19:14:01 +0000
+Received: by outflank-mailman (input) for mailman id 1167746;
+ Thu, 20 Nov 2025 19:14:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=r49+=54=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1vMA6R-0006n7-Cl
- for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 19:13:59 +0000
+ id 1vMA6S-0006n7-4J
+ for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 19:14:00 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 10513476-c645-11f0-9d18-b5c5bf9af7f9;
- Thu, 20 Nov 2025 20:13:58 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 107c47c7-c645-11f0-9d18-b5c5bf9af7f9;
+ Thu, 20 Nov 2025 20:13:59 +0100 (CET)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-93-m10SDGhuPzaFE5VhiICI4w-1; Thu,
- 20 Nov 2025 14:13:53 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-564-LvjNWB7rPgenSYGmtZdSaA-1; Thu,
+ 20 Nov 2025 14:13:52 -0500
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4DEFC1800650; Thu, 20 Nov 2025 19:13:47 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B5935195607A; Thu, 20 Nov 2025 19:13:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
  by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id EB2471955F67; Thu, 20 Nov 2025 19:13:45 +0000 (UTC)
+ id EFDEB1956045; Thu, 20 Nov 2025 19:13:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 6C27521E65DA; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
+ id 5BDDA21E66A9; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10513476-c645-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 107c47c7-c645-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1763666037;
+	s=mimecast20190719; t=1763666038;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=s+f/YPMyhiw0MODLrT/W+QVnkFDpo2Q2VNPNda433v0=;
-	b=epT6d98VlrmCWnXJprpJ/aArsiaAKhaNh789m/ge+38H/a+r4Tpcak8ESaqxR0mwasruB1
-	GE5Op6q3JJhLZgspFjDJaRV70nJmz1op8OnjvH7la1bpXR9/wQjeaOQSqfu39rVPR0LzSH
-	nqZ5K7PYK0oVv/NkWhz+zBju9pV1ksU=
-X-MC-Unique: m10SDGhuPzaFE5VhiICI4w-1
-X-Mimecast-MFC-AGG-ID: m10SDGhuPzaFE5VhiICI4w_1763666027
+	bh=qZGp8vuRR8VrNmTSQmIzBXvqSkRg69sI4h/KDVaUFuE=;
+	b=R+0i2IIDLC+vLtIZvtgSPKvt0c+tMcA/o40HYpIfFRkdJgeYqC2QGg2XXB22ed1Yx/sROP
+	rwwCmgGbsZK+ZOZHJFtY5Vr9BmE0s4X6KtdgG0+xrovlS0YyEdxfiv2SqEx6j7ONI4tL+d
+	i7hhSbHkGb0kKjRz//+fI3CwgrfkeGA=
+X-MC-Unique: LvjNWB7rPgenSYGmtZdSaA-1
+X-Mimecast-MFC-AGG-ID: LvjNWB7rPgenSYGmtZdSaA_1763666027
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com,
@@ -120,9 +120,9 @@ Cc: arei.gonglei@huawei.com,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 08/14] blkdebug: Use error_setg_file_open() for a better error message
-Date: Thu, 20 Nov 2025 20:13:33 +0100
-Message-ID: <20251120191339.756429-9-armbru@redhat.com>
+Subject: [PATCH 05/14] hw/scsi: Use error_setg_file_open() for a better error message
+Date: Thu, 20 Nov 2025 20:13:30 +0100
+Message-ID: <20251120191339.756429-6-armbru@redhat.com>
 In-Reply-To: <20251120191339.756429-1-armbru@redhat.com>
 References: <20251120191339.756429-1-armbru@redhat.com>
 MIME-Version: 1.0
@@ -131,33 +131,37 @@ X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
 The error message changes from
 
-    Could not read blkdebug config file: REASON
+    vhost-scsi: open vhost char device failed: REASON
 
 to
 
-    Could not open 'FNAME': REASON
+    Could not open '/dev/vhost-scsi': REASON
 
 I think the exact file name is more useful to know than the file's
 purpose.
 
+We could put back the "vhost-scsi: " prefix with error_prepend().  Not
+worth the bother.
+
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- block/blkdebug.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/scsi/vhost-scsi.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/block/blkdebug.c b/block/blkdebug.c
-index c54aee0c84..8a4a8cb85e 100644
---- a/block/blkdebug.c
-+++ b/block/blkdebug.c
-@@ -288,7 +288,7 @@ static int read_config(BDRVBlkdebugState *s, const char *filename,
-     if (filename) {
-         f = fopen(filename, "r");
-         if (f == NULL) {
--            error_setg_errno(errp, errno, "Could not read blkdebug config file");
-+            error_setg_file_open(errp, errno, filename);
-             return -errno;
+diff --git a/hw/scsi/vhost-scsi.c b/hw/scsi/vhost-scsi.c
+index cdf405b0f8..239138c931 100644
+--- a/hw/scsi/vhost-scsi.c
++++ b/hw/scsi/vhost-scsi.c
+@@ -245,8 +245,7 @@ static void vhost_scsi_realize(DeviceState *dev, Error **errp)
+     } else {
+         vhostfd = open("/dev/vhost-scsi", O_RDWR);
+         if (vhostfd < 0) {
+-            error_setg(errp, "vhost-scsi: open vhost char device failed: %s",
+-                       strerror(errno));
++            error_setg_file_open(errp, errno, "/dev/vhost-scsi");
+             return;
          }
- 
+     }
 -- 
 2.49.0
 
