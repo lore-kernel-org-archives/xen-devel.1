@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C856ACFA445
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F101ACFA444
 	for <xen-devel@archiver.kernel.org>; Thu, 20 Nov 2025 19:14:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1167739.1493977 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1167740.1493981 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMA6P-0007mU-UF; Thu, 20 Nov 2025 19:13:57 +0000
+	id 1vMA6Q-0007pV-8l; Thu, 20 Nov 2025 19:13:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1167739.1493977; Thu, 20 Nov 2025 19:13:57 +0000
+Received: by outflank-mailman (output) from mailman id 1167740.1493981; Thu, 20 Nov 2025 19:13:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMA6P-0007mK-RG; Thu, 20 Nov 2025 19:13:57 +0000
-Received: by outflank-mailman (input) for mailman id 1167739;
- Thu, 20 Nov 2025 19:13:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vMA6Q-0007ov-1y; Thu, 20 Nov 2025 19:13:58 +0000
+Received: by outflank-mailman (input) for mailman id 1167740;
+ Thu, 20 Nov 2025 19:13:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=r49+=54=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1vMA6O-000753-ML
- for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 19:13:56 +0000
+ id 1vMA6P-0006n7-3h
+ for xen-devel@lists.xenproject.org; Thu, 20 Nov 2025 19:13:57 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e42a204-c645-11f0-980a-7dc792cee155;
- Thu, 20 Nov 2025 20:13:55 +0100 (CET)
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0ec30d36-c645-11f0-9d18-b5c5bf9af7f9;
+ Thu, 20 Nov 2025 20:13:56 +0100 (CET)
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-399-AavvAK_sPLGzx3xXYBncyQ-1; Thu,
- 20 Nov 2025 14:13:48 -0500
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-657-jEDqh1RKOraiJsp9TZW5JQ-1; Thu,
+ 20 Nov 2025 14:13:51 -0500
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 72F7B19541AF; Thu, 20 Nov 2025 19:13:43 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id CAA1218002D0; Thu, 20 Nov 2025 19:13:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8119818004D8; Thu, 20 Nov 2025 19:13:41 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1D23C1801747; Thu, 20 Nov 2025 19:13:46 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 5665A21E66F8; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
+ id 768B121E65DF; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e42a204-c645-11f0-980a-7dc792cee155
+X-Inumbo-ID: 0ec30d36-c645-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1763666034;
+	s=mimecast20190719; t=1763666035;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=sx8qN/rQg9K32+B1nXrTKMNVKMJAAYsg2jr2Y0IDjq8=;
-	b=DFOVozpAYzD+t0FujRAcOCAfPewNE2e5it49JKz0kujGIOnyQkIErJbTP5vnujkNf5ckDw
-	6aZBJv6sO/PJDqHr6wJr3Ws4cfw7wVKw25xrVJbPfg0bXTnTxbHl9irVo2we1P5JXcPSAa
-	5pQGn2iQ7A5Njm+6yz7XgUaJNpF2tc8=
-X-MC-Unique: AavvAK_sPLGzx3xXYBncyQ-1
-X-Mimecast-MFC-AGG-ID: AavvAK_sPLGzx3xXYBncyQ_1763666024
+	bh=ECBnpLLCj16fpj21fI+h9tBul9riCpuU3pZvsycdoc0=;
+	b=GhIcUS9Ksoq7tPOnt3raW5KN7LB0CKRsfT9yvMG5cNBhVr6SZXj4H5pnkfcNF2ZOQsp6Iw
+	XvsjCQgMes8QIIJz2rSPjNEL1LnIFPm6ieP1sltkfmCh7x1S5Xgrp9mMgNT5bxlS13h4JE
+	Kx0o5N+QiZnVNeXOEQn9kHiwigCA14c=
+X-MC-Unique: jEDqh1RKOraiJsp9TZW5JQ-1
+X-Mimecast-MFC-AGG-ID: jEDqh1RKOraiJsp9TZW5JQ_1763666027
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com,
@@ -120,77 +120,40 @@ Cc: arei.gonglei@huawei.com,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 04/14] qga: Use error_setg_file_open() for better error messages
-Date: Thu, 20 Nov 2025 20:13:29 +0100
-Message-ID: <20251120191339.756429-5-armbru@redhat.com>
+Subject: [PATCH 10/14] net/slirp: Improve file open error message
+Date: Thu, 20 Nov 2025 20:13:35 +0100
+Message-ID: <20251120191339.756429-11-armbru@redhat.com>
 In-Reply-To: <20251120191339.756429-1-armbru@redhat.com>
 References: <20251120191339.756429-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-Error messages change from
-
-    open("FNAME"): REASON
-
-to
-
-    Could not open 'FNAME': REASON
+This error reports failure to create a temporary file, and
+error_setg_file_open() would probably be too terse, so merely switch
+to error_setg_errno() to add errno information.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- qga/commands-linux.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ net/slirp.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/qga/commands-linux.c b/qga/commands-linux.c
-index 4a09ddc760..5cf76ca2d9 100644
---- a/qga/commands-linux.c
-+++ b/qga/commands-linux.c
-@@ -1502,14 +1502,15 @@ static void transfer_vcpu(GuestLogicalProcessor *vcpu, bool sys2vcpu,
+diff --git a/net/slirp.c b/net/slirp.c
+index 120eef6122..5996fec512 100644
+--- a/net/slirp.c
++++ b/net/slirp.c
+@@ -1034,8 +1034,10 @@ static int slirp_smb(SlirpState* s, const char *exported_dir,
  
-     dirfd = open(dirpath, O_RDONLY | O_DIRECTORY);
-     if (dirfd == -1) {
--        error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
-+        error_setg_file_open(errp, errno, dirpath);
-         return;
-     }
- 
-     fd = openat(dirfd, fn, sys2vcpu ? O_RDONLY : O_RDWR);
-     if (fd == -1) {
-         if (errno != ENOENT) {
--            error_setg_errno(errp, errno, "open(\"%s/%s\")", dirpath, fn);
-+            error_setg_errno(errp, errno, "could not open %s/%s",
-+                             dirpath, fn);
-         } else if (sys2vcpu) {
-             vcpu->online = true;
-             vcpu->can_offline = false;
-@@ -1711,7 +1712,7 @@ static void transfer_memory_block(GuestMemoryBlock *mem_blk, bool sys2memblk,
-     dirfd = open(dirpath, O_RDONLY | O_DIRECTORY);
-     if (dirfd == -1) {
-         if (sys2memblk) {
--            error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
-+            error_setg_file_open(errp, errno, dirpath);
-         } else {
-             if (errno == ENOENT) {
-                 result->response = GUEST_MEMORY_BLOCK_RESPONSE_TYPE_NOT_FOUND;
-@@ -1936,7 +1937,7 @@ static GuestDiskStatsInfoList *guest_get_diskstats(Error **errp)
- 
-     fp = fopen(diskstats, "r");
-     if (fp  == NULL) {
--        error_setg_errno(errp, errno, "open(\"%s\")", diskstats);
-+        error_setg_file_open(errp, errno, diskstats);
-         return NULL;
-     }
- 
-@@ -2047,7 +2048,7 @@ GuestCpuStatsList *qmp_guest_get_cpustats(Error **errp)
- 
-     fp = fopen(cpustats, "r");
-     if (fp  == NULL) {
--        error_setg_errno(errp, errno, "open(\"%s\")", cpustats);
-+        error_setg_file_open(errp, errno, cpustats);
-         return NULL;
-     }
- 
+     f = fopen(smb_conf, "w");
+     if (!f) {
++        int eno = errno;
++
+         slirp_smb_cleanup(s);
+-        error_setg(errp,
++        error_setg_errno(errp, eno,
+                    "Could not create samba server configuration file '%s'",
+                     smb_conf);
+         g_free(smb_conf);
 -- 
 2.49.0
 
