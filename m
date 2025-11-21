@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1089CFA478
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 07:46:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1168253.1494307 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB603CFA478
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 07:47:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1168245.1494317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMLqG-0002iX-4U; Fri, 21 Nov 2025 07:46:04 +0000
+	id 1vMLr9-0003D5-Db; Fri, 21 Nov 2025 07:46:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1168253.1494307; Fri, 21 Nov 2025 07:46:04 +0000
+Received: by outflank-mailman (output) from mailman id 1168245.1494317; Fri, 21 Nov 2025 07:46:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMLqG-0002iQ-0i; Fri, 21 Nov 2025 07:46:04 +0000
-Received: by outflank-mailman (input) for mailman id 1168253;
- Fri, 21 Nov 2025 07:46:03 +0000
+	id 1vMLr9-0003Cy-A3; Fri, 21 Nov 2025 07:46:59 +0000
+Received: by outflank-mailman (input) for mailman id 1168245;
+ Fri, 21 Nov 2025 07:39:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8OZ7=55=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vMLqF-0002iK-A2
- for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 07:46:03 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=iaQO=55=redhat.com=kkostiuk@srs-se1.protection.inumbo.net>)
+ id 1vMLkH-0001Ph-Qp
+ for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 07:39:53 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1faa4f88-c6ae-11f0-980a-7dc792cee155;
- Fri, 21 Nov 2025 08:46:00 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b73875aa527so272195966b.3
- for <xen-devel@lists.xenproject.org>; Thu, 20 Nov 2025 23:46:00 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-645363ac96dsm3875586a12.4.2025.11.20.23.45.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 23:45:59 -0800 (PST)
+ id 43277d44-c6ad-11f0-980a-7dc792cee155;
+ Fri, 21 Nov 2025 08:39:51 +0100 (CET)
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-595-_HjfTZ-0M7GoaHdbqsabQw-1; Fri, 21 Nov 2025 02:39:48 -0500
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-88237204cc8so22370826d6.2
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Nov 2025 23:39:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,151 +46,254 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1faa4f88-c6ae-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763711160; x=1764315960; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=hSZOBRtcFrMZCu6nnoxhFFBzHIulITb66vgJSNlwRq4=;
-        b=a89Ek/5vc7oO4pV7ypwya39vL7IAeZ2zocoYoenxNvptoYXjgHdO5Q8yDY9pSkbZEC
-         rLboRvoxsg8RwvEeCrU5E6qrjQNPDXXYS3R5GEmVj/bk4Loi+Q/qTG1/P905iLC9MOvC
-         XGezz5wRh45q3PS/1ibaLOSEbV6yYQR8/jqdd+loiDosw5hEWOXPokUl4Xb5Z2FcXorG
-         cG8gsDDlVHDCfzeWN5vZ1ol7QSH4XX8nkRbNJC/tJvBRACI1eS07IbsnW/saqOg2MxM+
-         D5mEYvyvNwhwEQVU/sgZkBIdV1ArX6GYbNfbb5cu4DvrT9HlUx4TDz0A7TCgLk8ptcgG
-         rAzA==
+X-Inumbo-ID: 43277d44-c6ad-11f0-980a-7dc792cee155
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1763710790;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nsxb1+ZtH/utbUjrw5MXl9iDkbIwPjjaHwBbbnpvgnE=;
+	b=Ku2/P5Vr9zsKs9RsXibepZpY9WRFJt1a6lf4pgNGfBCdnyvSzC7dSMMUR3RL+z2tt7uTum
+	MayD/9djtiwyGUIPdmsBfINcIFgnnLXS4RcB9mqKr6eBiW84aFQFCVOyVmoUXp+IU/GWM1
+	hIWssqguv8SImD3Dgoy5NjZg5X20IKo=
+X-MC-Unique: _HjfTZ-0M7GoaHdbqsabQw-1
+X-Mimecast-MFC-AGG-ID: _HjfTZ-0M7GoaHdbqsabQw_1763710788
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763711160; x=1764315960;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1763710788; x=1764315588;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hSZOBRtcFrMZCu6nnoxhFFBzHIulITb66vgJSNlwRq4=;
-        b=Mgr4UCXYBsszdji039qkLEakkQIDdaZ6753AeWcrbV78YzuY+aBpvRWfFumyyeODev
-         raxi4ybPJW8UzQqqGN4plgH1n5uo3ZU8XQ723dQoBFAgYI/Puu3JWmNxcOlGa98uHNf4
-         qgHR6Ymvc0SGbqqrqwjpoThZCtBpdoPfC6z7C38cSKTomedteYL7p1LmdZjQHn9JzSoo
-         dM4S99iV1gH92X6Kan2o5a8CrXumREUiFYO0ZDiAN18GiXaDtwMtmQTnljE5WqZRMYvc
-         +lsUa/GknjJFdkq9izW6OJaM/Sk5+TfEwnNRGyvgTg9mi2dlcxqTHv27RsMlkAwkRzt2
-         97mw==
-X-Forwarded-Encrypted: i=1; AJvYcCVqE1ASnxSHgtkGCddDAJMpx0OW35AIIiRNJopbm8YmsHYkdZfegEk6+3A9wvbjxzERy9svVQwyT48=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwrQNifl93btaRxpSNzVEWadQ7zN6kVbNl046QZOO0zhv5qiN4n
-	Zgyyb/QZWGAwzhrPiiB6qZ5h92I81CeuqQxCZ9jBZTbd7nke+0yzFbtig/mVTQhB0w==
-X-Gm-Gg: ASbGncsNe9wGekGrIh5+ijc4l30WR0CrrORQPOer4aay4aCOfwwhUws5ok1ec7S2TvR
-	xCA6+RLrdzc0XpMNgso9T36T/ff/sMbXLn88rxLmrgbnGlTJ3B6o28wMgjg5Q4kYLVqgbuPLJTD
-	rjSu7ZV75D4Ro1x3Mn/GkNFTEzX4jQAK+oXSuVnCvHwRcyjw/P2jqeHtPU5+FjMuZYAf2paTlBj
-	T1roNGI2sYCWX+PoeeSPLXXqRUTwxb5yeuiEYQOP8VsGNSLnnMgpaVxEcVTcx1r6s7dT5mXI5lA
-	KrA5OWPtKKT7rh6erVH8l7E2nESzSSh6d9IOUAcg73rd/qk2ewTAppZsOec1Ws31iUjJ0Fbq1t6
-	f53gXtZExJ/DDdDd0K6y7yFuE2YE8woQ20l6tsP9VTcDU8udLltcrEV6uAi4YaMon1I9Jcwxy0N
-	jmI6OL04ns3Yh0DNzZF0ZQn2QbFgVoRmuvQJhZImXxNR4NT3U4GhdkTwTGtl4jIEt1xXAr0rgyv
-	ELhCFmBPBQG3A==
-X-Google-Smtp-Source: AGHT+IGS0+W4X/RQwYN6nDTJF0QZ+71jgREH4X/mWbbYI/bJlCmQy/VVlc8GRClpxk63g+FOVQEw+w==
-X-Received: by 2002:a17:907:3f24:b0:b6d:2c70:4542 with SMTP id a640c23a62f3a-b767170cc75mr120059166b.30.1763711160196;
-        Thu, 20 Nov 2025 23:46:00 -0800 (PST)
-Message-ID: <7ba92200-6249-457d-b462-e6c6226852b7@suse.com>
-Date: Fri, 21 Nov 2025 08:45:59 +0100
+        bh=nsxb1+ZtH/utbUjrw5MXl9iDkbIwPjjaHwBbbnpvgnE=;
+        b=I2twrUD8fnH6aPXJp7UBdn4b7h3A4I5p8ye4y15urVCpqINPEqy34B8cY080381E3G
+         ftIC91sMGMijR/Fcehr+ZVUOToViIuqNXtll0UDg4jNqV91PHXW5Qmm09eUEh22lrv2o
+         89/ZAK9VGqduAE0Lc+BqzwXssW543SFPy6YxsexmuAiwvtFgSFVtwj4FgVsTXOhEEe7g
+         C9hlb3B33WbcOmqOpPnf3xbSMeGKE2TtfJ+wTJIVGvhowkaV+OvAgoWV3Q+DKOWnMSjn
+         OVkU53mL2f1qzSUqAh5GKamGb69BGCaz1/2VOFmNbVRIaRVkYdF7o9u70DX7ftpgHfCN
+         9hlQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXXCkpaIyqPGnYC/JgxMAGt02hBX1/Omvp9pRUW51pGN7c0bdxOs8ZLa9ztr8n4DKHfs2hZy8UBPwA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yy1tnARBIKPls8i/eiuKtL8I1sSigs9Kz84ZidioFz+5sBhQGud
+	xXt+izM5s7CG+G0sY7oXi5nyTd/HvxrB+eneDWM0qRzP6QWwy5CnZZywO5LNx1OOu+mwiGK6guc
+	5ny8qorgn2k7ZJQUkz6ooIoa0nK7Wn7Bw1t0zfhcZOfsTqf2zOo0EW9bibrIcRBFRSvQThz1c2D
+	mNM67XkRRfutIwt4/sFEp0walFht26CbfMjnGzo1NUEZ0=
+X-Gm-Gg: ASbGnctJINntoz7gpnwb3m9ADWVsplf1Px9yrg/Dk57PLhFv1MwljtTSq+IB8U1y7Qv
+	+GbsR1FS3H2R09pNRv0jTdL4uarewxS6dhg3Zww4cS0vTEdHnsuyzWuNAT6o0695QniZUOi6ctR
+	4OFxiSyV+GrtUN73N53MN9jo4WEiZ874/zX6sQp1cN5+tEPBKfCnIkb5FnclLPFLZuOKTq
+X-Received: by 2002:a05:622a:118c:b0:4eb:a8ba:947b with SMTP id d75a77b69052e-4ee5884991amr17159851cf.24.1763710788159;
+        Thu, 20 Nov 2025 23:39:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFLyPkFkG3x0S6uI+xdlOI37nnwdMuiwb0nN0Gl6T/QJxCnm5Mh8QiLNWxZMD4XY2VbeYYHMBdVUMjbZObmN1Y=
+X-Received: by 2002:a05:622a:118c:b0:4eb:a8ba:947b with SMTP id
+ d75a77b69052e-4ee5884991amr17159341cf.24.1763710787702; Thu, 20 Nov 2025
+ 23:39:47 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] x86/MCE: restrict allocation of thermal and CMCI
- vector to BSP
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <fbc9a2f8-170a-4645-8836-c90c42ad726f@suse.com>
- <638d0954-e889-41ee-b277-282f83170c69@suse.com>
- <ed2f44ce-b28d-482f-b6bb-5ef40149f2b2@citrix.com>
- <5a476cc5-0095-4783-bde9-c84f24740372@suse.com>
- <8c55d065-c663-40ac-a2c5-f4c7d85971a1@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8c55d065-c663-40ac-a2c5-f4c7d85971a1@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20251120191339.756429-1-armbru@redhat.com> <20251120191339.756429-5-armbru@redhat.com>
+In-Reply-To: <20251120191339.756429-5-armbru@redhat.com>
+From: Kostiantyn Kostiuk <kkostiuk@redhat.com>
+Date: Fri, 21 Nov 2025 09:39:36 +0200
+X-Gm-Features: AWmQ_bkbTDRklsFcwFvNMZRSvPNhhVVXvsEkVWTHdAglGa310j_mRubzsRFOFH4
+Message-ID: <CAPMcbCrQvuCf_zqgB7HkQd+VoP3Kha73EwTXjVqKcVEqPFz1Lg@mail.gmail.com>
+Subject: Re: [PATCH 04/14] qga: Use error_setg_file_open() for better error messages
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, arei.gonglei@huawei.com, pizhenwei@bytedance.com, 
+	alistair.francis@wdc.com, stefanb@linux.vnet.ibm.com, kwolf@redhat.com, 
+	hreitz@redhat.com, sw@weilnetz.de, qemu_oss@crudebyte.com, groug@kaod.org, 
+	mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, kraxel@redhat.com, 
+	shentey@gmail.com, npiggin@gmail.com, harshpb@linux.ibm.com, 
+	sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org, 
+	edgar.iglesias@gmail.com, elena.ufimtseva@oracle.com, jag.raman@oracle.com, 
+	sgarzare@redhat.com, pbonzini@redhat.com, fam@euphon.net, philmd@linaro.org, 
+	alex@shazbot.org, clg@redhat.com, peterx@redhat.com, farosas@suse.de, 
+	lizhijian@fujitsu.com, dave@treblig.org, jasowang@redhat.com, 
+	samuel.thibault@ens-lyon.org, michael.roth@amd.com, zhao1.liu@intel.com, 
+	mtosatti@redhat.com, rathc@linux.ibm.com, palmer@dabbelt.com, 
+	liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+	marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org, 
+	xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Q2W1UOl6kEsIqrX1WCogbSHNHVBsk96CQ9tTCnwspK8_1763710788
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="000000000000fce1ef064415ea4e"
 
-On 20.11.2025 18:25, Andrew Cooper wrote:
-> On 20/11/2025 12:11 pm, Jan Beulich wrote:
->> On 20.11.2025 12:51, Andrew Cooper wrote:
->>> On 19/11/2025 10:50 am, Jan Beulich wrote:
->>>> --- a/xen/arch/x86/cpu/mcheck/mce.c
->>>> +++ b/xen/arch/x86/cpu/mcheck/mce.c
->>>> @@ -110,13 +110,13 @@ static void __init mcheck_intel_therm_in
->>>>  }
->>>>  
->>>>  /* P4/Xeon Thermal regulation detect and init */
->>>> -static void intel_init_thermal(struct cpuinfo_x86 *c)
->>>> +static void intel_init_thermal(const struct cpuinfo_x86 *c, bool bsp)
->>>>  {
->>>>      uint64_t msr_content;
->>>>      uint32_t val;
->>>>      int tm2 = 0;
->>>>      unsigned int cpu = smp_processor_id();
->>>> -    static uint8_t thermal_apic_vector;
->>>> +    static uint8_t __ro_after_init thermal_apic_vector;
->>>>  
->>>>      if ( !intel_thermal_supported(c) )
->>>>          return; /* -ENODEV */
->>>> @@ -160,7 +160,8 @@ static void intel_init_thermal(struct cp
->>>>          return; /* -EBUSY */
->>>>      }
->>>>  
->>>> -    alloc_direct_apic_vector(&thermal_apic_vector, intel_thermal_interrupt);
->>>> +    if ( bsp )
->>>> +        alloc_direct_apic_vector(&thermal_apic_vector, intel_thermal_interrupt);
->>> We really don't want both c and bsp passed in.  That can only go wrong.
->>>
->>> Furthermore, this function has 2 other examples generating bsp locally.
->>>
->>> The function is in desperate need of cleanup (MSRs, variable and
->>> constant names), but right now this makes it worse.
->>>
->>> Please either use c == &boot_cpu_data, and I'll do some cleanup later,
->>> or generate bsp = c == &boot_cpu_data and fix up all users in the function.
->> No, throughout mce/ this won't work as long as acpi/power.c:enter_state() has
->>
->>     mcheck_init(&boot_cpu_data, false);
-> 
-> How's not not already broken then?  As said, intel_init_thermal() is
-> already using c == &boot_cpu_data.
+--000000000000fce1ef064415ea4e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-That's two printk()s, so not overly severe a bug. And being fixed by "x86/MCE:
-adjust S3 resume handling" posted months ago. There I'm actually putting up
-the question whether one of the two could/should stay as is.
+Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
 
-> This patch introduces a conflicting idea of bsp in this function, and
-> that's what I really want to avoid.
-> 
-> This looks like it wants splitting properly as {bsp,percpu}_init_$FOO()
-> like we have elsewhere.
+On Thu, Nov 20, 2025 at 9:13=E2=80=AFPM Markus Armbruster <armbru@redhat.co=
+m> wrote:
 
-Without detailed checking, I'm not sure that would properly cover things.
-Right now we have three modes: BSP (boot), BSP (resume), and AP.
+> Error messages change from
+>
+>     open("FNAME"): REASON
+>
+> to
+>
+>     Could not open 'FNAME': REASON
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
+>  qga/commands-linux.c | 11 ++++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+>
+> diff --git a/qga/commands-linux.c b/qga/commands-linux.c
+> index 4a09ddc760..5cf76ca2d9 100644
+> --- a/qga/commands-linux.c
+> +++ b/qga/commands-linux.c
+> @@ -1502,14 +1502,15 @@ static void transfer_vcpu(GuestLogicalProcessor
+> *vcpu, bool sys2vcpu,
+>
+>      dirfd =3D open(dirpath, O_RDONLY | O_DIRECTORY);
+>      if (dirfd =3D=3D -1) {
+> -        error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
+> +        error_setg_file_open(errp, errno, dirpath);
+>          return;
+>      }
+>
+>      fd =3D openat(dirfd, fn, sys2vcpu ? O_RDONLY : O_RDWR);
+>      if (fd =3D=3D -1) {
+>          if (errno !=3D ENOENT) {
+> -            error_setg_errno(errp, errno, "open(\"%s/%s\")", dirpath, fn=
+);
+> +            error_setg_errno(errp, errno, "could not open %s/%s",
+> +                             dirpath, fn);
+>          } else if (sys2vcpu) {
+>              vcpu->online =3D true;
+>              vcpu->can_offline =3D false;
+> @@ -1711,7 +1712,7 @@ static void transfer_memory_block(GuestMemoryBlock
+> *mem_blk, bool sys2memblk,
+>      dirfd =3D open(dirpath, O_RDONLY | O_DIRECTORY);
+>      if (dirfd =3D=3D -1) {
+>          if (sys2memblk) {
+> -            error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
+> +            error_setg_file_open(errp, errno, dirpath);
+>          } else {
+>              if (errno =3D=3D ENOENT) {
+>                  result->response =3D
+> GUEST_MEMORY_BLOCK_RESPONSE_TYPE_NOT_FOUND;
+> @@ -1936,7 +1937,7 @@ static GuestDiskStatsInfoList
+> *guest_get_diskstats(Error **errp)
+>
+>      fp =3D fopen(diskstats, "r");
+>      if (fp  =3D=3D NULL) {
+> -        error_setg_errno(errp, errno, "open(\"%s\")", diskstats);
+> +        error_setg_file_open(errp, errno, diskstats);
+>          return NULL;
+>      }
+>
+> @@ -2047,7 +2048,7 @@ GuestCpuStatsList *qmp_guest_get_cpustats(Error
+> **errp)
+>
+>      fp =3D fopen(cpustats, "r");
+>      if (fp  =3D=3D NULL) {
+> -        error_setg_errno(errp, errno, "open(\"%s\")", cpustats);
+> +        error_setg_file_open(errp, errno, cpustats);
+>          return NULL;
+>      }
+>
+> --
+> 2.49.0
+>
+>
 
-More importantly, though: This would be more than enough content for another
-series, i.e. shouldn't block the work here (which really moves things to a
-more consistent state, within cpu/mcheck/, just like that other patch also
-aims at doing).
+--000000000000fce1ef064415ea4e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Jan
+<div dir=3D"ltr">Reviewed-by: Kostiantyn Kostiuk &lt;<a href=3D"mailto:kkos=
+tiuk@redhat.com" target=3D"_blank">kkostiuk@redhat.com</a>&gt;</div><br><di=
+v class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gma=
+il_attr">On Thu, Nov 20, 2025 at 9:13=E2=80=AFPM Markus Armbruster &lt;<a h=
+ref=3D"mailto:armbru@redhat.com">armbru@redhat.com</a>&gt; wrote:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">Error messages change fro=
+m<br>
+<br>
+=C2=A0 =C2=A0 open(&quot;FNAME&quot;): REASON<br>
+<br>
+to<br>
+<br>
+=C2=A0 =C2=A0 Could not open &#39;FNAME&#39;: REASON<br>
+<br>
+Signed-off-by: Markus Armbruster &lt;<a href=3D"mailto:armbru@redhat.com" t=
+arget=3D"_blank">armbru@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0qga/commands-linux.c | 11 ++++++-----<br>
+=C2=A01 file changed, 6 insertions(+), 5 deletions(-)<br>
+<br>
+diff --git a/qga/commands-linux.c b/qga/commands-linux.c<br>
+index 4a09ddc760..5cf76ca2d9 100644<br>
+--- a/qga/commands-linux.c<br>
++++ b/qga/commands-linux.c<br>
+@@ -1502,14 +1502,15 @@ static void transfer_vcpu(GuestLogicalProcessor *vc=
+pu, bool sys2vcpu,<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0dirfd =3D open(dirpath, O_RDONLY | O_DIRECTORY);<br>
+=C2=A0 =C2=A0 =C2=A0if (dirfd =3D=3D -1) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &quot;open(\&quo=
+t;%s\&quot;)&quot;, dirpath);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_file_open(errp, errno, dirpath);<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0fd =3D openat(dirfd, fn, sys2vcpu ? O_RDONLY : O_RDWR);=
+<br>
+=C2=A0 =C2=A0 =C2=A0if (fd =3D=3D -1) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (errno !=3D ENOENT) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &q=
+uot;open(\&quot;%s/%s\&quot;)&quot;, dirpath, fn);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &q=
+uot;could not open %s/%s&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dirpath, fn);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else if (sys2vcpu) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vcpu-&gt;online =3D true;<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vcpu-&gt;can_offline =3D fa=
+lse;<br>
+@@ -1711,7 +1712,7 @@ static void transfer_memory_block(GuestMemoryBlock *m=
+em_blk, bool sys2memblk,<br>
+=C2=A0 =C2=A0 =C2=A0dirfd =3D open(dirpath, O_RDONLY | O_DIRECTORY);<br>
+=C2=A0 =C2=A0 =C2=A0if (dirfd =3D=3D -1) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (sys2memblk) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &q=
+uot;open(\&quot;%s\&quot;)&quot;, dirpath);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_file_open(errp, errno=
+, dirpath);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (errno =3D=3D ENOENT) {<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0result-&gt;re=
+sponse =3D GUEST_MEMORY_BLOCK_RESPONSE_TYPE_NOT_FOUND;<br>
+@@ -1936,7 +1937,7 @@ static GuestDiskStatsInfoList *guest_get_diskstats(Er=
+ror **errp)<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0fp =3D fopen(diskstats, &quot;r&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0if (fp=C2=A0 =3D=3D NULL) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &quot;open(\&quo=
+t;%s\&quot;)&quot;, diskstats);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_file_open(errp, errno, diskstats);<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return NULL;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+@@ -2047,7 +2048,7 @@ GuestCpuStatsList *qmp_guest_get_cpustats(Error **err=
+p)<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0fp =3D fopen(cpustats, &quot;r&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0if (fp=C2=A0 =3D=3D NULL) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_errno(errp, errno, &quot;open(\&quo=
+t;%s\&quot;)&quot;, cpustats);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_file_open(errp, errno, cpustats);<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return NULL;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+-- <br>
+2.49.0<br>
+<br>
+</blockquote></div>
+
+--000000000000fce1ef064415ea4e--
+
 
