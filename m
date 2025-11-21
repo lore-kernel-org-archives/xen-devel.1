@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E514ECFC26E
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 12:15:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1168987.1494854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35BF6CFC267
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 12:15:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1168990.1494887 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMQ2S-0001I4-Os; Fri, 21 Nov 2025 12:14:56 +0000
+	id 1vMQ2U-00025j-PT; Fri, 21 Nov 2025 12:14:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1168987.1494854; Fri, 21 Nov 2025 12:14:56 +0000
+Received: by outflank-mailman (output) from mailman id 1168990.1494887; Fri, 21 Nov 2025 12:14:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMQ2S-0001HN-HF; Fri, 21 Nov 2025 12:14:56 +0000
-Received: by outflank-mailman (input) for mailman id 1168987;
- Fri, 21 Nov 2025 12:14:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vMQ2U-00024d-HA; Fri, 21 Nov 2025 12:14:58 +0000
+Received: by outflank-mailman (input) for mailman id 1168990;
+ Fri, 21 Nov 2025 12:14:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=VODq=55=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1vMQ2R-000110-5i
- for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 12:14:55 +0000
+ id 1vMQ2S-00010q-P7
+ for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 12:14:56 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ae9a15c8-c6d3-11f0-980a-7dc792cee155;
- Fri, 21 Nov 2025 13:14:52 +0100 (CET)
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id aff15fa7-c6d3-11f0-9d18-b5c5bf9af7f9;
+ Fri, 21 Nov 2025 13:14:55 +0100 (CET)
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-563-_S2sFyzUNkyrsijPiS4IYQ-1; Fri,
- 21 Nov 2025 07:14:48 -0500
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-159-vWwfEYL1PsCGkLjkk410QQ-1; Fri,
+ 21 Nov 2025 07:14:51 -0500
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 29D471954B11; Fri, 21 Nov 2025 12:14:43 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C573E19560A1; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.3])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 010191940E88; Fri, 21 Nov 2025 12:14:41 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id BA42430044DC; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 89C0021E6741; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
+ id A9C7321E660B; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae9a15c8-c6d3-11f0-980a-7dc792cee155
+X-Inumbo-ID: aff15fa7-c6d3-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1763727291;
+	s=mimecast20190719; t=1763727293;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ntoFJE6ZYqJ4DvoW2xAiFU9EOotBPF/P3xBSz1dTmbg=;
-	b=bOlYG1dXNZsSCeE6JNxyx3UPQSobJnD9LKSlFNeuKnGjUnRcNdmlnzvLhTVqDnH21+tMXb
-	fcjmzsuUhetXFNBSvulc7bQdArSHrydqK4DKmv6xwCzgqk66puAnUNFbflaovsQbsohvjR
-	7j63LBwekxjSa7Q1Yma8fcb73K5/Yk0=
-X-MC-Unique: _S2sFyzUNkyrsijPiS4IYQ-1
-X-Mimecast-MFC-AGG-ID: _S2sFyzUNkyrsijPiS4IYQ_1763727283
+	bh=/xtGdog7VgzIfQmeSQKWrv+vlf3j6c1d+FLveMONGz8=;
+	b=ZSkKcqxj2cPAT14EfJLUsQSHA2vqSbd6Poc1rW8ZuTgdha1sDW4qF+dZUOgEjseS0nJxaQ
+	lcHrg8L6qb9uTrkHCEQhKGr4rdxVi7KOczIKihKXkQYKHRm6SS23H+i0pUHdGWi7MwXojG
+	NP14ih9i8joTjiHIuvdm4+wMav3qEt8=
+X-MC-Unique: vWwfEYL1PsCGkLjkk410QQ-1
+X-Mimecast-MFC-AGG-ID: vWwfEYL1PsCGkLjkk410QQ_1763727287
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com,
@@ -120,47 +120,45 @@ Cc: arei.gonglei@huawei.com,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 02/15] hw/usb: Convert to qemu_create() for a better error message
-Date: Fri, 21 Nov 2025 13:14:25 +0100
-Message-ID: <20251121121438.1249498-3-armbru@redhat.com>
+Subject: [PATCH v2 07/15] hw/virtio: Use error_setg_file_open() for a better error message
+Date: Fri, 21 Nov 2025 13:14:30 +0100
+Message-ID: <20251121121438.1249498-8-armbru@redhat.com>
 In-Reply-To: <20251121121438.1249498-1-armbru@redhat.com>
 References: <20251121121438.1249498-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 
 The error message changes from
 
-    open FILENAME failed
+    vhost-vsock: failed to open vhost device: REASON
 
 to
 
-    Could not create 'FILENAME': REASON
+    Could not open '/dev/vhost-vsock': REASON
 
-where REASON is the value of strerror(errno).
+I think the exact file name is more useful to know than the file's
+purpose.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- hw/usb/bus.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ hw/virtio/vhost-vsock.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/hw/usb/bus.c b/hw/usb/bus.c
-index 8dd2ce415e..714e33989f 100644
---- a/hw/usb/bus.c
-+++ b/hw/usb/bus.c
-@@ -259,10 +259,9 @@ static void usb_qdev_realize(DeviceState *qdev, Error **errp)
-     }
- 
-     if (dev->pcap_filename) {
--        int fd = qemu_open_old(dev->pcap_filename,
--                               O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, 0666);
-+        int fd = qemu_create(dev->pcap_filename,
-+                             O_WRONLY | O_TRUNC | O_BINARY, 0666, errp);
-         if (fd < 0) {
--            error_setg(errp, "open %s failed", dev->pcap_filename);
-             usb_qdev_unrealize(qdev);
+diff --git a/hw/virtio/vhost-vsock.c b/hw/virtio/vhost-vsock.c
+index 107d88babe..7940b60d8a 100644
+--- a/hw/virtio/vhost-vsock.c
++++ b/hw/virtio/vhost-vsock.c
+@@ -153,8 +153,7 @@ static void vhost_vsock_device_realize(DeviceState *dev, Error **errp)
+     } else {
+         vhostfd = open("/dev/vhost-vsock", O_RDWR);
+         if (vhostfd < 0) {
+-            error_setg_errno(errp, errno,
+-                             "vhost-vsock: failed to open vhost device");
++            error_setg_file_open(errp, errno, "/dev/vhost-vsock");
              return;
          }
+ 
 -- 
 2.49.0
 
