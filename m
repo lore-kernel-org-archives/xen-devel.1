@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE36CFC272
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 12:15:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1168993.1494905 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18067CFC273
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 12:15:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1168995.1494928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMQ2W-0002QM-2O; Fri, 21 Nov 2025 12:15:00 +0000
+	id 1vMQ2X-0002yy-Sr; Fri, 21 Nov 2025 12:15:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1168993.1494905; Fri, 21 Nov 2025 12:15:00 +0000
+Received: by outflank-mailman (output) from mailman id 1168995.1494928; Fri, 21 Nov 2025 12:15:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMQ2V-0002Oy-QY; Fri, 21 Nov 2025 12:14:59 +0000
-Received: by outflank-mailman (input) for mailman id 1168993;
- Fri, 21 Nov 2025 12:14:57 +0000
+	id 1vMQ2X-0002wE-Ji; Fri, 21 Nov 2025 12:15:01 +0000
+Received: by outflank-mailman (input) for mailman id 1168995;
+ Fri, 21 Nov 2025 12:15:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=VODq=55=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1vMQ2T-000110-SV
- for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 12:14:57 +0000
+ id 1vMQ2V-000110-T2
+ for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 12:14:59 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ae51edf8-c6d3-11f0-980a-7dc792cee155;
- Fri, 21 Nov 2025 13:14:52 +0100 (CET)
+ id b06b9bb8-c6d3-11f0-980a-7dc792cee155;
+ Fri, 21 Nov 2025 13:14:55 +0100 (CET)
 Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-298-J3mo8o2FOba0ZJnznZes4g-1; Fri,
- 21 Nov 2025 07:14:47 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-63--Cu4SEnVN0iR9hO-VJAOfQ-1; Fri,
+ 21 Nov 2025 07:14:51 -0500
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6FF25180034A; Fri, 21 Nov 2025 12:14:43 +0000 (UTC)
+ id 9F51C1800343; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.3])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 05D4030044DC; Fri, 21 Nov 2025 12:14:41 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A8D84180047F; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 9569B21E66F8; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
+ id B3F5821E65DC; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae51edf8-c6d3-11f0-980a-7dc792cee155
+X-Inumbo-ID: b06b9bb8-c6d3-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1763727291;
+	s=mimecast20190719; t=1763727294;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=LvfjndzC9yIe2vReLTAtPHT920hAL1fUKXGYa8VIiFA=;
-	b=BJJMHGu+w5E4AN7NpeSWwrF3qWHCBJvlkDXH3QtGT90VDyZt9VyhAH4euZzldULzIlyVuv
-	tlYGc+KwV06walXr7khFsWIzWQRVM//hLDi+uQsasZA4/PfHRx/e4NIpsB7asDWxNHmFI2
-	O5bWi/Q+3HXsyMXhXfxfEv8qYCfmpxk=
-X-MC-Unique: J3mo8o2FOba0ZJnznZes4g-1
-X-Mimecast-MFC-AGG-ID: J3mo8o2FOba0ZJnznZes4g_1763727284
+	bh=s+f/YPMyhiw0MODLrT/W+QVnkFDpo2Q2VNPNda433v0=;
+	b=PVndParryEfC7OvUht/Zji1iQ+cQF1lZAIsv3LD7w/cMuaoUmPpSwOvwIKmyuXCwR46wMA
+	41pvGNtvAz3+eGWD6Qpoli4LNWUHIItEvU1MtryPdTpIFz5/3ED+Z7Jmcun8zjNsPtv0oN
+	YlBoFGpPg+BxJW92behLwJnwHaIXkTg=
+X-MC-Unique: -Cu4SEnVN0iR9hO-VJAOfQ-1
+X-Mimecast-MFC-AGG-ID: -Cu4SEnVN0iR9hO-VJAOfQ_1763727287
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com,
@@ -120,63 +120,44 @@ Cc: arei.gonglei@huawei.com,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 04/15] tap-solaris: Use error_setg_file_open() for better error messages
-Date: Fri, 21 Nov 2025 13:14:27 +0100
-Message-ID: <20251121121438.1249498-5-armbru@redhat.com>
+Subject: [PATCH v2 09/15] blkdebug: Use error_setg_file_open() for a better error message
+Date: Fri, 21 Nov 2025 13:14:32 +0100
+Message-ID: <20251121121438.1249498-10-armbru@redhat.com>
 In-Reply-To: <20251121121438.1249498-1-armbru@redhat.com>
 References: <20251121121438.1249498-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-Error messages change from
+The error message changes from
 
-    Can't open /dev/ip (actually /dev/udp)
-    Can't open /dev/tap
-    Can't open /dev/tap (2)
+    Could not read blkdebug config file: REASON
 
 to
 
-    Could not open '/dev/udp': REASON
-    Could not open '/dev/tap': REASON
+    Could not open 'FNAME': REASON
 
-where REASON is the value of strerror(errno).
+I think the exact file name is more useful to know than the file's
+purpose.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
 ---
- net/tap-solaris.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ block/blkdebug.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/net/tap-solaris.c b/net/tap-solaris.c
-index 75397e6c54..faf7922ea8 100644
---- a/net/tap-solaris.c
-+++ b/net/tap-solaris.c
-@@ -87,13 +87,13 @@ static int tap_alloc(char *dev, size_t dev_size, Error **errp)
+diff --git a/block/blkdebug.c b/block/blkdebug.c
+index c54aee0c84..8a4a8cb85e 100644
+--- a/block/blkdebug.c
++++ b/block/blkdebug.c
+@@ -288,7 +288,7 @@ static int read_config(BDRVBlkdebugState *s, const char *filename,
+     if (filename) {
+         f = fopen(filename, "r");
+         if (f == NULL) {
+-            error_setg_errno(errp, errno, "Could not read blkdebug config file");
++            error_setg_file_open(errp, errno, filename);
+             return -errno;
+         }
  
-     ip_fd = RETRY_ON_EINTR(open("/dev/udp", O_RDWR, 0));
-     if (ip_fd < 0) {
--        error_setg(errp, "Can't open /dev/ip (actually /dev/udp)");
-+        error_setg_file_open(errp, errno, "/dev/udp");
-         return -1;
-     }
- 
-     tap_fd = RETRY_ON_EINTR(open("/dev/tap", O_RDWR, 0));
-     if (tap_fd < 0) {
--        error_setg(errp, "Can't open /dev/tap");
-+        error_setg_file_open(errp, errno, "/dev/tap");
-         return -1;
-     }
- 
-@@ -107,7 +107,7 @@ static int tap_alloc(char *dev, size_t dev_size, Error **errp)
- 
-     if_fd = RETRY_ON_EINTR(open("/dev/tap", O_RDWR, 0));
-     if (if_fd < 0) {
--        error_setg(errp, "Can't open /dev/tap (2)");
-+        error_setg_file_open(errp, errno, "/dev/tap");
-         return -1;
-     }
-     if(ioctl(if_fd, I_PUSH, "ip") < 0){
 -- 
 2.49.0
 
