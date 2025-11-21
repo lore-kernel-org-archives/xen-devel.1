@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 788DECFA776
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 10:59:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1168572.1494537 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 198D0CFA76D
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Nov 2025 10:59:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1168574.1494557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMOqZ-0007TT-9D; Fri, 21 Nov 2025 10:58:35 +0000
+	id 1vMOqj-0007z1-M0; Fri, 21 Nov 2025 10:58:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1168572.1494537; Fri, 21 Nov 2025 10:58:35 +0000
+Received: by outflank-mailman (output) from mailman id 1168574.1494557; Fri, 21 Nov 2025 10:58:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vMOqZ-0007TM-5S; Fri, 21 Nov 2025 10:58:35 +0000
-Received: by outflank-mailman (input) for mailman id 1168572;
- Fri, 21 Nov 2025 10:58:33 +0000
+	id 1vMOqj-0007yq-JL; Fri, 21 Nov 2025 10:58:45 +0000
+Received: by outflank-mailman (input) for mailman id 1168574;
+ Fri, 21 Nov 2025 10:58:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1uM0=55=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1vMOqX-0007TB-CZ
- for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 10:58:33 +0000
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c110::1])
+ id 1vMOqh-0007TB-Qg
+ for xen-devel@lists.xenproject.org; Fri, 21 Nov 2025 10:58:43 +0000
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c105::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 034ccf21-c6c9-11f0-9d18-b5c5bf9af7f9;
- Fri, 21 Nov 2025 11:58:30 +0100 (CET)
-Received: from SN7PR04CA0005.namprd04.prod.outlook.com (2603:10b6:806:f2::10)
- by IA1PR12MB8190.namprd12.prod.outlook.com (2603:10b6:208:3f2::7)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 0973cfbf-c6c9-11f0-9d18-b5c5bf9af7f9;
+ Fri, 21 Nov 2025 11:58:42 +0100 (CET)
+Received: from SN7PR04CA0002.namprd04.prod.outlook.com (2603:10b6:806:f2::7)
+ by DM4PR12MB6495.namprd12.prod.outlook.com (2603:10b6:8:bc::19) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Fri, 21 Nov
- 2025 10:58:25 +0000
+ 2025 10:58:31 +0000
 Received: from SA2PEPF000015CC.namprd03.prod.outlook.com
- (2603:10b6:806:f2:cafe::2) by SN7PR04CA0005.outlook.office365.com
- (2603:10b6:806:f2::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.14 via Frontend Transport; Fri,
- 21 Nov 2025 10:58:22 +0000
+ (2603:10b6:806:f2:cafe::80) by SN7PR04CA0002.outlook.office365.com
+ (2603:10b6:806:f2::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.12 via Frontend Transport; Fri,
+ 21 Nov 2025 10:58:31 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  SA2PEPF000015CC.mail.protection.outlook.com (10.167.241.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Fri, 21 Nov 2025 10:58:24 +0000
+ 15.20.9343.9 via Frontend Transport; Fri, 21 Nov 2025 10:58:30 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Fri, 21 Nov 2025 02:58:18 -0800
+ 15.2.2562.17; Fri, 21 Nov 2025 02:58:28 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 034ccf21-c6c9-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 0973cfbf-c6c9-11f0-9d18-b5c5bf9af7f9
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gtJUTDKk8SepobQ1k2Kw+kGIdij+L4EoK5WS1PgvWNaL/0r6Lb5B4Yr+BVkfSiQw/nZ3+3CpDNMmuV/A6xNU3yVE7wgzokAztTHgE/gqOb4z4Or8TBthzRGn+2sT0IPe5woI3r1BSyhmKmTLZP1LyI+HX8AQeD9pwM5/m5Qq7QPWP52xNIP7GgUYmCDe468XMTfdAHrmVD0Zrhmzokx5QOc9YAduJETo/iQRIHR7T4dvIezEZb1/CrSvCrr67PgAewTqN/ZTK4ECJRTcikBIQ1sEuWFgLDfUd82Nec0vXIlylofTLgDNChXYIcTYVyfF40CiOVxms45j8qdzztTnjw==
+ b=rtVbDNiIPWKH3o1u3UwwgLUfiSoAS8p/K70GL1vfzftMcGzZtpkoCufQVWjk0Cna7VRFS1/z+rvZfaClOPOIYM8AlCfw6FfNPRt1oxZpUEaV1a5B65adsLOfPDhFHTtjmpl2e30bWsOa6UIjG83hq/abegngfCOP8J7J746pOx82B4uNJedND6TWFCP3m+q+65svBCHJ2RQjn090P/BS137QPn2fwuy3SAIJOgLLcMvDuxD5W20LOSsyNHKJHVpyC1vO9uI4GzQEUDimhWTbM212ps4pp8eXOjv4kcprMhZ1MpUUOaGnRRaomGNWIStNX6uaunmqwtH38Z5ms2yM6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N/ICZEYJIc/nVeFvpt8PzQMJ9pR5CWGfMKwhk5DYjg4=;
- b=u1ht+PUYjSyNo/t1MxuuisDHTUU5czsx2dOQ5OcgxouB3K0/AHdDyUrr07sRnUIZJoYrzUiCCaNWTTmGpGNQFwVGn4adZ1AydJd5C6MJCPAqcvchpb1u4HaFbz5Z0rgrspq2xusEdJaGPFCz1xXP28ag7rCSsQ3QAygm2+j32KaEiG57Fiy32kPOMNnKTB+fXBYkS0VcNgQ3s+/f4lTIzWrw8spM5lxShKYHALKvWi3LF6bS2j/WOSLxmEtUifthc2V4JwH8c4agYRguCobkJnVjXRXyfYoSon15sppVZN92SAPaTOQp/7aoeSPTjXUpKuUIGVRd1R9YS/re3X0H8Q==
+ bh=/qN6QOTfDkP9ovx5v9FOHYWiIbKZEtnqTSmaa7qbMxI=;
+ b=gUFGIMy4bsePrl2QZWPz+JA1XswnkklHudq6chtoydamUaN24wdxnh1eYTPRHzqBV8HtLoDnR9VZUA36CYNxEZZduQLdTPrwHd0Tl2lhh/m8rWqEih/9S7mybxP7jkBorb3pUa8Vk+q8K3SvIqk75WCQaofOmw7bybfLl5b8IjEUSHt6rx9gSTKqWlNFN+5EWwRiKyjVvEpM3oAR1swzSzsiIZiLCn/6UXHaGEvtg7VnvoJtIObzG/+OwDEuGqH2lhV7JTPmX0/KvcybH152xnmMVLj9y+937eImU9at5yNxhTiNxXpgOCYKdrvsCcCTvYGcZTr0eSmxwaVGB3ywFQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N/ICZEYJIc/nVeFvpt8PzQMJ9pR5CWGfMKwhk5DYjg4=;
- b=U9DtWUNZ+p4YgvaL51IyF659nsuoqlvDKBPJQAUuic3rYOMGujjRb0EwSKd++7YTNhs0M6GopLoZLlG/spZB459SaT3USBErwH1zKS3wYH8CrjWb4UxUicodj7anAdJoJJvLeXFHjj3jLSpC8GgB2FsIrYlnYwDiz3vyhkORyIE=
+ bh=/qN6QOTfDkP9ovx5v9FOHYWiIbKZEtnqTSmaa7qbMxI=;
+ b=GGLgwfgVSylCWW2EAJ68HYKb1ytbvCAb3HPaTiMVuC/WQB08JNqCQi5mUTS4oJaG1o2G+aUjfHgiaFv+KexHp/8d3JWS/QlnZMrFogm9BRIZDFBsTPuML7Fx844fAnwHbb+71qA/2uRZRZQQNLZRiiezmNtTroIBSTiHrcMYHgw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -81,28 +81,18 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>, <xen-devel@dornerworks.com>
+To: <xen-devel@lists.xenproject.org>
 CC: <ray.huang@amd.com>, <grygorii_strashko@epam.com>, Penny Zheng
-	<Penny.Zheng@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	"Jan Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Stewart Hildebrand
-	<stewart.hildebrand@amd.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	Juergen Gross <jgross@suse.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, "Connor
- Davis" <connojdavis@gmail.com>, Oleksii Kurochko
-	<oleksii.kurochko@gmail.com>, Nathan Studer <nathan.studer@dornerworks.com>,
-	Stewart Hildebrand <stewart@stew.dk>, Dario Faggioli <dfaggioli@suse.com>,
-	George Dunlap <gwd@xenproject.org>, Timothy Pearson
-	<tpearson@raptorengineering.com>, "Meng Xu" <mengxu@cis.upenn.edu>, Jason
- Andryuk <jason.andryuk@amd.com>, Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v4 00/24] Disable domctl-op via CONFIG_MGMT_HYPERCALLS
-Date: Fri, 21 Nov 2025 18:57:37 +0800
-Message-ID: <20251121105801.1251262-1-Penny.Zheng@amd.com>
+	<Penny.Zheng@amd.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Juergen
+ Gross" <jgross@suse.com>
+Subject: [PATCH v4 02/24] xen: consolidate cpuid library
+Date: Fri, 21 Nov 2025 18:57:39 +0800
+Message-ID: <20251121105801.1251262-3-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251121105801.1251262-1-Penny.Zheng@amd.com>
+References: <20251121105801.1251262-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -111,184 +101,734 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|IA1PR12MB8190:EE_
-X-MS-Office365-Filtering-Correlation-Id: e343590e-1de5-4d0e-1541-08de28ece4bb
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|DM4PR12MB6495:EE_
+X-MS-Office365-Filtering-Correlation-Id: c6925e70-7175-4225-76ab-08de28ece877
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|7416014|82310400026|376014|1800799024;
+	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?ke7Gmthyo6ow8Q4JznIIYj/nNmhpq3JenJ+b/rhqC0/wdQrSlJAF86GgkqhO?=
- =?us-ascii?Q?8H7Ch3EpAxPAdxPHNnRNuZ6ylxDbvJWbjpU1PAd4pr2sWpAge7tbRuSeZbkF?=
- =?us-ascii?Q?SfIKKX5p2WcxKF73q8+z83gE/hvMRv1MFiYBOPkkgAJPhURd9mWFJvw+mrad?=
- =?us-ascii?Q?IkGaFVelP48X/ybhM9ovGWYWVlqgPuxj2ObmZdjuRYKsgZSi2W8JCxcIURNR?=
- =?us-ascii?Q?o6qKQHK+NTfk4tOi5BRLAALLKaFG2danSYzhuwa4DEaAEtHfIg9scnwcTPED?=
- =?us-ascii?Q?KwZDGuHmc38RYbIKpE8NyhSJSRS29yuwr7hQH695HP5V4Y00/H0ggtZLmn3g?=
- =?us-ascii?Q?0M8aKDR9m9h7XYdK4qXFy/sMsjEZrfWNAaB8wvBRjddLAOHcWGVXfk4xExtE?=
- =?us-ascii?Q?6qxL9SoOo4p69LdW1MlzUVccsU249m+UPj8bZciLV8nuunaIvpDNxNh+r+fh?=
- =?us-ascii?Q?3yeXvKrUsS3pZN3A2AlptBMEDBszyJIbJQ+1ljP9wBEG+jQb9gJsPXjCZdgK?=
- =?us-ascii?Q?21QhVnitnzIFNrk11qmcxKJ2Lh5gMDl1sVPi5Nldx0yxzDSCEkv2AlJw2b+e?=
- =?us-ascii?Q?CT++rrDmNuSNq3EXMHU5BcD4Eo6DRmTPyqVHrUjywYHokJ5oDHIZUBmoiMuy?=
- =?us-ascii?Q?+X/eEKqBcbKfbDa+Ov/Cc+iUTK01xVQmScSExnTncQxsoTH4CAie3N1HbNf3?=
- =?us-ascii?Q?Lsj062fUxp0xmCUIrOIHkMynNgeEBXFB1Ojvl+Cdzqa0msMBRR8kl5UnWDP5?=
- =?us-ascii?Q?mJPo5xCHJa24ekgefEB+Ga4f+xFYtsLECT0gyONZUPI4X17Itl53e63sFXJS?=
- =?us-ascii?Q?GpZZc7gx6On33f+ri8GEqnRGcTNAKkaq/jo5soS8/YOKAH9+qTHngKH6h3YN?=
- =?us-ascii?Q?xfTQN3z4gOBLe3k6TOJDH5sBNEs5/6uGFPyvPnTBoNaanTHPklnqkKR0BA5K?=
- =?us-ascii?Q?7Enr3/GRa4lkOrOjDRRqj1NYcF1yUNT4LAuN0Ue46WP0Q/mBiF8xKIT8oJ4K?=
- =?us-ascii?Q?taugGqf+J0ijTIb61iwQx/I+FJguu0bXuJGIOdRvxkQzzpwfuZHpq5nap3Ck?=
- =?us-ascii?Q?+c968ZpfWCdvm/lHdN+bcgnb2aKT9m006GstB9K3kr7NsI0gkMxH/mLiP4Ow?=
- =?us-ascii?Q?QiFMs65b1zT8Q4cpswHy+fhVOOBxgzyjfcFjf59crtkwNN66Y26PwWCu392d?=
- =?us-ascii?Q?GdXmXDv/aGpppA4aFcuQHbgpoidwtf48PwDOJ09Q0zPyrzP2mmr3bRm7Gegm?=
- =?us-ascii?Q?bVg7lorD1x7w27UZYEVscpmwm2C/babLxRj5eUNcgHAp6UW/tIyqca/PMZ2Q?=
- =?us-ascii?Q?/lNkmDHyekmU3HtMfC55XTPGvtHeDIOk/fdnpS3+Nhs9xSQVwWUxllri7EYF?=
- =?us-ascii?Q?yCPGtpaY3T9fODwkXKss/HCALA2pibryvP7QrZsa9+MWadtN02KDx2mVRJ3g?=
- =?us-ascii?Q?XDuuLHfHh0H99UX4uLQGSEloFprXc9IPlrK6bCAPzEq9RGQs2gG9R9vXfrdV?=
- =?us-ascii?Q?PxjoVow3gbxtj5Urq7mZCbOKvX22GG7srG4teg+TSUj5ya6qDqDEekgrcISa?=
- =?us-ascii?Q?rJ1uMdq1SqtTnIAxEkQo/wfCylpXCTqRxEL69R97?=
+	=?us-ascii?Q?ENjvpS0SGpP6HAHS5E+Dj484FqS0q/ys+9leSe9fDSrzRBUj8LBHzbi/ZEyy?=
+ =?us-ascii?Q?Bi5V/GwPcaspapcNZuseF8i6uG+2b3szHHF40myooQNEqKgBNgo6kp7Be3V3?=
+ =?us-ascii?Q?+5A88pWccmR49HnpA7xv+f4w+m6DGNp2cObgj5xUv6NerLoHeTF/3HfjWX9p?=
+ =?us-ascii?Q?RO808yJeJA0B3YKn7BgmesgzyO+dPwN/ly9khVWX8Np4jrMl+3XUKy53DL/f?=
+ =?us-ascii?Q?dA5HtK4kenKY3tEhVCvH4Zo9dB/2lGgU2sTzNyebhfQJ+IReHaHuoQoXTohM?=
+ =?us-ascii?Q?AuA1ymghmgzlmTN1Mt6nEUX8yMQo/cpl7+PshF7c69+TnIpy4pavv1LlnUhj?=
+ =?us-ascii?Q?xXP3YvCTnMZdtsYLiP1D+V4TYD2JQIsKM4Be4cNohzD4OGeyIK7bPbcXyKAy?=
+ =?us-ascii?Q?oh5xhA6Jscc6vCs4VTq1akIFAGtPhpbIsYk35JgdoTEIV7bnG1NTyGgS4zB6?=
+ =?us-ascii?Q?V/7MtKdVrZTOIC0jqce4ePkIeI+iHSor3UmFA2sowIrhy/uT1yBY4oKHQDDy?=
+ =?us-ascii?Q?kowaJBLyjw2Blm6n4WVA9Vih1rTFdN3fRD12lT4CFimRr4bRCKrBd2mcAfXL?=
+ =?us-ascii?Q?U1+zTFwoOIJihH/tmNZXrsGEiqdEkHH8plQdjARwEeOPtqsqHJzfVEP5+1e3?=
+ =?us-ascii?Q?z361tw3OwLir0o8pVzO3miUnfYgk9NBI8XsrMp8y4iRwQHxN9PTVHTjBcGzP?=
+ =?us-ascii?Q?NXUv4hvNx0qCGknUpMujDMPqtgNPo6Zy1JS+zaZp7hG9QXX0RMiS5Ja+AANJ?=
+ =?us-ascii?Q?8wONhRly6b2nOohDdAchuv/Jp6cSpLaUbFg9gwBPpGFMQIlf/Onrf0xxWPK1?=
+ =?us-ascii?Q?PFeYH7IQn8rM2pW61azMruXxhDoj84eknX0bviftya4rou0aOGWrxcvY+Rj3?=
+ =?us-ascii?Q?9CW0A9TMHJF7gpMqUqDAFcLyUnK/8BeDBBQ6AQRrxSf7CIrGgej41CI3xPWP?=
+ =?us-ascii?Q?2KJD82P4N1bmQ6yuaJq2v3VOQl1zgx+dO0XJwJEWYpltcs0qM3fv6uiTWwEr?=
+ =?us-ascii?Q?7/eVlfmITSXJ4nazotTFxGslsEIE5TdhJRiffr6+bJG0mlRU6rSID2o1Okwk?=
+ =?us-ascii?Q?+eG0QSLCLEoAnDLaLXcjQO924b+KR8JN/9ckxe4X8M7THt74ciUuktnoezNL?=
+ =?us-ascii?Q?wEHwVDxrywZntGbMvyNa+dYDMC6+CYsMaQ6nYJ6nLcYPlLnLdUqo+ZITPVrS?=
+ =?us-ascii?Q?HCQE/pEUsKP1FORwaFtyWiGWcJg+aiAYDSxrddFjnQWXWgqtkLw/sA3F6LGa?=
+ =?us-ascii?Q?Gnxuz93uujN9umWwYxdihggPSqaRVbSLwSMqiHHn9FYmJkR/NxIA85Sj+8Nm?=
+ =?us-ascii?Q?/dORgnYc0EImX6Ih1iekQXlN3bn8LMC8OTR1uZQA0BDczndYVZqdbTZchHVw?=
+ =?us-ascii?Q?/P9q/rXfAIX9274YuMs+t3bpakdO0OtKPDmVpC/AyrONgqVhdZqcWjbdX8M7?=
+ =?us-ascii?Q?SgfZFYGn5osBaABlqEUzF3YIo5pJElXd9ejMkwuaOl93aXZf844wZSHHtKKx?=
+ =?us-ascii?Q?yyJ8Zav9+LvQ0IhXa3CjqwQowc+TVvIRWnawgtoehQQTe8/rl46X4C+PZgb0?=
+ =?us-ascii?Q?VYExlq/QREqX6dQfxLo=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(7416014)(82310400026)(376014)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 10:58:24.7355
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 10:58:30.9989
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e343590e-1de5-4d0e-1541-08de28ece4bb
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6925e70-7175-4225-76ab-08de28ece877
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	SA2PEPF000015CC.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8190
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6495
 
-It can be beneficial for some dom0less systems to further reduce Xen footprint
-via disabling some hypercalls handling code, which may not to be used &
-required in such systems.
-We are introducing a new single Kconfig CONFIG_MGMT_HYPERCALLS to manage
-such hypercalls.
+There are some cpuid library functions only referenced in
+XEN_DOMCTL_get{,set}_cpu_policy-case, and shall be wrapped with
+CONFIG_MGMT_HYPERCALLS later, otherwise they will become unreachable when
+MGMT_HYPERCALLS=n, and hence violate Misra 2.1
+- x86_cpu_policy_clear_out_of_range_leaves
+  - zero_leaves
+- x86_cpuid_copy_to_buffer
+  - copy_leaf_to_buffer
+- x86_cpuid_copy_from_buffer
+We seperate these functions by moving other functions to a new file named
+cpuid-generic.c, and modify related Makefile-s to retain same behavior.
 
-We are trying to disable hypercalls in the following aspects:
-- sysctl
-- domctl
-- hvm
-- physdev
-- platform
-This patch serie is only focusing on domctl-op. Different aspects will be
-covered in different patch serie.
-
-Features, like VM event, or paging log-dirty support, which fully rely on
-domctl-op, will be wrapped with CONFIG_MGMT_HYPERCALLS, to reduce Xen
-footprint as much as possible.
-
-It is derived from Stefano Stabellini's commit "xen: introduce kconfig options
-to disable hypercalls"(
-https://lore.kernel.org/xen-devel/20241219092917.3006174-1-Sergiy_Kibrik@epam.com)
+Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
 ---
-This patch serie is based on two patch serie, one is
-"[XEN][PATCH v4] xen: make VMTRACE support optional" and "
-[PATCH v3 0/7] consolidate vm event subsystem"
+v3 -> v4:
+- new commit
 ---
-Penny Zheng (24):
-  xen/xsm: remove redundant xsm_iomem_mapping()
-  xen: consolidate cpuid library
-  xen/sysctl: replace CONFIG_SYSCTL with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: make MGMT_HYPERCALLS transiently def_bool
-  xen/vm_event: make VM_EVENT depend on CONFIG_MGMT_HYPERCALLS
-  xen/domctl: consolidate domain.c with MGMT_HYPERCALLS
-  xen/mem_sharing: make memory sharing depend on MGMT_HYPERCALLS
-  xen/domctl: wrap domain_kill() with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap vcpu_affinity_domctl() with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap sched_adjust() with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap xsm_irq_permission with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap arch-specific domain_set_time_offset() with
-    CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap xsm_set_target() with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap pci-subset iommu-related domctl op with
-    CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap device-tree-subset iommu-related domctl op with
-    CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap iommu-related domctl op with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap arch_{get,set}_paging_mempool_size() with
-    CONFIG_MGMT_HYPERCALLS
-  xen/domctl: make CONFIG_X86_PSR depend on CONFIG_MGMT_HYPERCALLS
-  xen/domctl: wrap hvm_save{,load} with CONFIG_MGMT_HYPERCALLS
-  xen/x86: wrap x86-specific domctl-op with CONFIG_MGMT_HYPERCALLS
-  xen/arm: wrap arm-specific domctl-op with CONFIG_MGMT_HYPERCALLS
-  xen/domctl: domctl_lock synchronization only when MGMT_HYPERCALLS=y
-  xen/domctl: wrap common/domctl.c with CONFIG_MGMT_HYPERCALLS
-  xen: move MGMT_HYPERCALLS out of PV_SHIM_EXCLUSIVE
-
  tools/fuzz/cpu-policy/Makefile               |   2 +-
  tools/fuzz/x86_instruction_emulator/Makefile |  10 +-
  tools/libs/guest/Makefile.common             |   2 +-
  tools/tests/cpu-policy/Makefile              |   2 +-
  tools/tests/x86_emulator/Makefile            |   2 +-
- xen/Kconfig.debug                            |   3 +-
- xen/arch/arm/Kconfig                         |   2 +-
- xen/arch/arm/Makefile                        |   4 +-
- xen/arch/arm/arm32/Makefile                  |   2 +-
- xen/arch/arm/arm64/Makefile                  |   2 +-
- xen/arch/arm/domain.c                        |   3 +
- xen/arch/arm/include/asm/tee/tee.h           |   2 +
- xen/arch/arm/mmu/p2m.c                       |   8 +
- xen/arch/arm/mpu/p2m.c                       |   2 +
- xen/arch/arm/tee/ffa.c                       |   4 +
- xen/arch/arm/tee/optee.c                     |   4 +
- xen/arch/arm/tee/tee.c                       |   2 +
- xen/arch/arm/time.c                          |   2 +
- xen/arch/ppc/stubs.c                         |   2 +
- xen/arch/riscv/stubs.c                       |   8 +-
- xen/arch/x86/Kconfig                         |   3 +-
- xen/arch/x86/Makefile                        |   4 +-
- xen/arch/x86/configs/pvshim_defconfig        |   2 +-
- xen/arch/x86/domain.c                        |   2 +
- xen/arch/x86/emul-i8254.c                    |   2 +
- xen/arch/x86/hvm/Kconfig                     |   3 +-
- xen/arch/x86/hvm/hvm.c                       |   7 +-
- xen/arch/x86/hvm/pmtimer.c                   |   2 +
- xen/arch/x86/hvm/save.c                      | 154 +++++------
- xen/arch/x86/include/asm/p2m.h               |   2 +-
- xen/arch/x86/include/asm/paging.h            |   2 +-
- xen/arch/x86/mm/p2m-pod.c                    |   2 +
- xen/arch/x86/mm/p2m.c                        |   2 +
- xen/arch/x86/mm/paging.c                     |   4 +
- xen/arch/x86/psr.c                           |  18 --
- xen/arch/x86/time.c                          |   2 +
- xen/common/Kconfig                           |  28 +-
- xen/common/Makefile                          |   7 +-
- xen/common/device-tree/device-tree.c         |   2 +
- xen/common/domain.c                          | 116 ++++----
- xen/common/domctl.c                          |   2 +-
- xen/common/page_alloc.c                      |   8 +-
- xen/common/perfc.c                           |   4 +-
- xen/common/sched/arinc653.c                  |  11 +-
- xen/common/sched/core.c                      |   8 +-
- xen/common/sched/cpupool.c                   |  16 +-
- xen/common/sched/credit.c                    |  10 +-
- xen/common/sched/credit2.c                   |  10 +-
- xen/common/sched/private.h                   |  10 +-
- xen/common/sched/rt.c                        |   4 +
- xen/common/spinlock.c                        |   4 +-
- xen/drivers/char/console.c                   |   4 +-
- xen/drivers/passthrough/amd/pci_amd_iommu.c  |  20 +-
- xen/drivers/passthrough/arm/ipmmu-vmsa.c     |  26 +-
- xen/drivers/passthrough/arm/smmu-v3.c        |   4 +
- xen/drivers/passthrough/arm/smmu.c           |  55 ++--
- xen/drivers/passthrough/device_tree.c        | 108 ++++----
- xen/drivers/passthrough/iommu.c              |   2 +
- xen/drivers/passthrough/pci.c                |  52 ++--
- xen/drivers/passthrough/vtd/iommu.c          |   6 +-
- xen/drivers/vpci/header.c                    |   2 +-
- xen/include/hypercall-defs.c                 |  14 +-
- xen/include/xen/domain.h                     |   4 -
- xen/include/xsm/dummy.h                      |  29 +-
- xen/include/xsm/xsm.h                        |  60 ++--
- xen/lib/x86/Makefile                         |   7 +-
+ xen/lib/x86/Makefile                         |   1 +
  xen/lib/x86/cpuid-generic.c                  | 273 +++++++++++++++++++
  xen/lib/x86/cpuid.c                          | 260 ------------------
- xen/xsm/dummy.c                              |  21 +-
- xen/xsm/flask/hooks.c                        |  54 ++--
- 70 files changed, 812 insertions(+), 708 deletions(-)
+ 8 files changed, 283 insertions(+), 269 deletions(-)
  create mode 100644 xen/lib/x86/cpuid-generic.c
 
+diff --git a/tools/fuzz/cpu-policy/Makefile b/tools/fuzz/cpu-policy/Makefile
+index 6e7743e0aa..9d4627887b 100644
+--- a/tools/fuzz/cpu-policy/Makefile
++++ b/tools/fuzz/cpu-policy/Makefile
+@@ -22,7 +22,7 @@ CFLAGS += $(APPEND_CFLAGS) -Og
+ 
+ vpath %.c ../../../xen/lib/x86
+ 
+-afl-policy-fuzzer: afl-policy-fuzzer.o msr.o cpuid.o
++afl-policy-fuzzer: afl-policy-fuzzer.o msr.o cpuid.o cpuid-generic.o
+ 	$(CC) $(CFLAGS) $^ -o $@
+ 
+ -include $(DEPS_INCLUDE)
+diff --git a/tools/fuzz/x86_instruction_emulator/Makefile b/tools/fuzz/x86_instruction_emulator/Makefile
+index 459743f4d9..6e2363a06b 100644
+--- a/tools/fuzz/x86_instruction_emulator/Makefile
++++ b/tools/fuzz/x86_instruction_emulator/Makefile
+@@ -25,7 +25,7 @@ x86_emulate/%.h: x86_emulate ;
+ 	ln -nsf $< $@
+ 
+ CFLAGS += $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -iquote .
+-cpuid.o: CFLAGS += -iquote $(XEN_ROOT)/xen/lib/x86
++cpuid.o cpuid-generic.o: CFLAGS += -iquote $(XEN_ROOT)/xen/lib/x86
+ 
+ GCOV_FLAGS := --coverage
+ %-cov.o: %.c
+@@ -49,16 +49,16 @@ $(filter x86_emulate/%.o,$(OBJS)): x86_emulate/%.o: x86_emulate/%.c $(private.h)
+ $(patsubst %.o,%-cov.o,$(filter x86_emulate/%.o,$(OBJS))): x86_emulate/%-cov.o: x86_emulate/%.c $(private.h)
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) $(GCOV_FLAGS) -c -o $@ $< $(APPEND_CFLAGS)
+ 
+-x86-insn-fuzzer.a: $(OBJS) cpuid.o
++x86-insn-fuzzer.a: $(OBJS) cpuid.o cpuid-generic.o
+ 	$(AR) rc $@ $^
+ 
+-afl-harness: afl-harness.o $(OBJS) cpuid.o wrappers.o
++afl-harness: afl-harness.o $(OBJS) cpuid.o cpuid-generic.o wrappers.o
+ 	$(CC) $(CFLAGS) $(addprefix -Wl$(comma)--wrap=,$(WRAPPED)) $^ -o $@
+ 
+-afl-harness-cov: afl-harness-cov.o $(patsubst %.o,%-cov.o,$(OBJS)) cpuid.o wrappers.o
++afl-harness-cov: afl-harness-cov.o $(patsubst %.o,%-cov.o,$(OBJS)) cpuid.o cpuid-generic.o wrappers.o
+ 	$(CC) $(CFLAGS) $(GCOV_FLAGS) $(addprefix -Wl$(comma)--wrap=,$(WRAPPED)) $^ -o $@
+ 
+-libfuzzer-harness: $(OBJS) cpuid.o wrappers.o
++libfuzzer-harness: $(OBJS) cpuid.o cpuid-generic.o wrappers.o
+ 	$(CC) $(CFLAGS) $(LIB_FUZZING_ENGINE) -fsanitize=fuzzer $(addprefix -Wl$(comma)--wrap=,$(WRAPPED)) $^ -o $@
+ 
+ # Common targets
+diff --git a/tools/libs/guest/Makefile.common b/tools/libs/guest/Makefile.common
+index a026a2f662..da3c21e67e 100644
+--- a/tools/libs/guest/Makefile.common
++++ b/tools/libs/guest/Makefile.common
+@@ -35,7 +35,7 @@ OBJS-y += $(LIBELF_OBJS)
+ ifeq ($(CONFIG_X86),y) # Add libx86 to the build
+ vpath %.c ../../../xen/lib/x86
+ 
+-OBJS-y                 += cpuid.o msr.o policy.o
++OBJS-y                 += cpuid.o cpuid-generic.o msr.o policy.o
+ endif
+ 
+ # new domain builder
+diff --git a/tools/tests/cpu-policy/Makefile b/tools/tests/cpu-policy/Makefile
+index 24f87e2eca..2f946b8a5e 100644
+--- a/tools/tests/cpu-policy/Makefile
++++ b/tools/tests/cpu-policy/Makefile
+@@ -46,7 +46,7 @@ vpath %.c ../../../xen/lib/x86
+ 
+ %.o: Makefile
+ 
+-test-cpu-policy: test-cpu-policy.o msr.o cpuid.o policy.o
++test-cpu-policy: test-cpu-policy.o msr.o cpuid.o cpuid-generic.o policy.o
+ 	$(CC) $^ -o $@ $(LDFLAGS)
+ 
+ -include $(DEPS_INCLUDE)
+diff --git a/tools/tests/x86_emulator/Makefile b/tools/tests/x86_emulator/Makefile
+index fefa29a06c..eb79abd5b4 100644
+--- a/tools/tests/x86_emulator/Makefile
++++ b/tools/tests/x86_emulator/Makefile
+@@ -248,7 +248,7 @@ xop.h avx512f.h avx512fp16.h: simd-fma.c
+ 
+ endif # 32-bit override
+ 
+-OBJS := x86-emulate.o cpuid.o test_x86_emulator.o evex-disp8.o predicates.o wrappers.o
++OBJS := x86-emulate.o cpuid.o cpuid-generic.o test_x86_emulator.o evex-disp8.o predicates.o wrappers.o
+ OBJS += x86_emulate/0f01.o x86_emulate/0fae.o x86_emulate/0fc7.o
+ OBJS += x86_emulate/blk.o x86_emulate/decode.o x86_emulate/fpu.o x86_emulate/util.o
+ 
+diff --git a/xen/lib/x86/Makefile b/xen/lib/x86/Makefile
+index 780ea05db1..ac6d4369f3 100644
+--- a/xen/lib/x86/Makefile
++++ b/xen/lib/x86/Makefile
+@@ -1,3 +1,4 @@
+ obj-y += cpuid.o
++obj-y += cpuid-generic.o
+ obj-y += msr.o
+ obj-y += policy.o
+diff --git a/xen/lib/x86/cpuid-generic.c b/xen/lib/x86/cpuid-generic.c
+new file mode 100644
+index 0000000000..465bdee35a
+--- /dev/null
++++ b/xen/lib/x86/cpuid-generic.c
+@@ -0,0 +1,273 @@
++#include "private.h"
++
++#include <xen/lib/x86/cpu-policy.h>
++
++unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx)
++{
++    switch ( ebx )
++    {
++    case X86_VENDOR_INTEL_EBX:
++        if ( ecx == X86_VENDOR_INTEL_ECX &&
++             edx == X86_VENDOR_INTEL_EDX )
++            return X86_VENDOR_INTEL;
++        break;
++
++    case X86_VENDOR_AMD_EBX:
++        if ( ecx == X86_VENDOR_AMD_ECX &&
++             edx == X86_VENDOR_AMD_EDX )
++            return X86_VENDOR_AMD;
++        break;
++
++    case X86_VENDOR_CENTAUR_EBX:
++        if ( ecx == X86_VENDOR_CENTAUR_ECX &&
++             edx == X86_VENDOR_CENTAUR_EDX )
++            return X86_VENDOR_CENTAUR;
++        break;
++
++    case X86_VENDOR_SHANGHAI_EBX:
++        if ( ecx == X86_VENDOR_SHANGHAI_ECX &&
++             edx == X86_VENDOR_SHANGHAI_EDX )
++            return X86_VENDOR_SHANGHAI;
++        break;
++
++    case X86_VENDOR_HYGON_EBX:
++        if ( ecx == X86_VENDOR_HYGON_ECX &&
++             edx == X86_VENDOR_HYGON_EDX )
++            return X86_VENDOR_HYGON;
++        break;
++    }
++
++    return X86_VENDOR_UNKNOWN;
++}
++
++const char *x86_cpuid_vendor_to_str(unsigned int vendor)
++{
++    switch ( vendor )
++    {
++    case X86_VENDOR_INTEL:    return "Intel";
++    case X86_VENDOR_AMD:      return "AMD";
++    case X86_VENDOR_CENTAUR:  return "Centaur";
++    case X86_VENDOR_SHANGHAI: return "Shanghai";
++    case X86_VENDOR_HYGON:    return "Hygon";
++    default:                  return "Unknown";
++    }
++}
++
++void x86_cpu_policy_to_featureset(
++    const struct cpu_policy *p, uint32_t fs[FEATURESET_NR_ENTRIES])
++{
++    fs[FEATURESET_1d]        = p->basic._1d;
++    fs[FEATURESET_1c]        = p->basic._1c;
++    fs[FEATURESET_e1d]       = p->extd.e1d;
++    fs[FEATURESET_e1c]       = p->extd.e1c;
++    fs[FEATURESET_Da1]       = p->xstate.Da1;
++    fs[FEATURESET_7b0]       = p->feat._7b0;
++    fs[FEATURESET_7c0]       = p->feat._7c0;
++    fs[FEATURESET_e7d]       = p->extd.e7d;
++    fs[FEATURESET_e8b]       = p->extd.e8b;
++    fs[FEATURESET_7d0]       = p->feat._7d0;
++    fs[FEATURESET_7a1]       = p->feat._7a1;
++    fs[FEATURESET_e21a]      = p->extd.e21a;
++    fs[FEATURESET_7b1]       = p->feat._7b1;
++    fs[FEATURESET_7d2]       = p->feat._7d2;
++    fs[FEATURESET_7c1]       = p->feat._7c1;
++    fs[FEATURESET_7d1]       = p->feat._7d1;
++    fs[FEATURESET_m10Al]     = p->arch_caps.lo;
++    fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
++    fs[FEATURESET_e21c]      = p->extd.e21c;
++}
++
++void x86_cpu_featureset_to_policy(
++    const uint32_t fs[FEATURESET_NR_ENTRIES], struct cpu_policy *p)
++{
++    p->basic._1d             = fs[FEATURESET_1d];
++    p->basic._1c             = fs[FEATURESET_1c];
++    p->extd.e1d              = fs[FEATURESET_e1d];
++    p->extd.e1c              = fs[FEATURESET_e1c];
++    p->xstate.Da1            = fs[FEATURESET_Da1];
++    p->feat._7b0             = fs[FEATURESET_7b0];
++    p->feat._7c0             = fs[FEATURESET_7c0];
++    p->extd.e7d              = fs[FEATURESET_e7d];
++    p->extd.e8b              = fs[FEATURESET_e8b];
++    p->feat._7d0             = fs[FEATURESET_7d0];
++    p->feat._7a1             = fs[FEATURESET_7a1];
++    p->extd.e21a             = fs[FEATURESET_e21a];
++    p->feat._7b1             = fs[FEATURESET_7b1];
++    p->feat._7d2             = fs[FEATURESET_7d2];
++    p->feat._7c1             = fs[FEATURESET_7c1];
++    p->feat._7d1             = fs[FEATURESET_7d1];
++    p->arch_caps.lo          = fs[FEATURESET_m10Al];
++    p->arch_caps.hi          = fs[FEATURESET_m10Ah];
++    p->extd.e21c             = fs[FEATURESET_e21c];
++}
++
++void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
++{
++    p->x86_vendor = x86_cpuid_lookup_vendor(
++        p->basic.vendor_ebx, p->basic.vendor_ecx, p->basic.vendor_edx);
++}
++
++void x86_cpu_policy_fill_native(struct cpu_policy *p)
++{
++    unsigned int i;
++
++    cpuid_leaf(0, &p->basic.raw[0]);
++    for ( i = 1; i <= MIN(p->basic.max_leaf,
++                          ARRAY_SIZE(p->basic.raw) - 1); ++i )
++    {
++        switch ( i )
++        {
++        case 0x4: case 0x7: case 0xb: case 0xd:
++            /* Multi-invocation leaves.  Deferred. */
++            continue;
++        }
++
++        cpuid_leaf(i, &p->basic.raw[i]);
++    }
++
++    if ( p->basic.max_leaf >= 4 )
++    {
++        for ( i = 0; i < ARRAY_SIZE(p->cache.raw); ++i )
++        {
++            union {
++                struct cpuid_leaf l;
++                struct cpuid_cache_leaf c;
++            } u;
++
++            cpuid_count_leaf(4, i, &u.l);
++
++            if ( u.c.type == 0 )
++                break;
++
++            p->cache.subleaf[i] = u.c;
++        }
++
++        /*
++         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
++         * that it will eventually need increasing for future hardware.
++         */
++#ifdef __XEN__
++        if ( i == ARRAY_SIZE(p->cache.raw) )
++            printk(XENLOG_WARNING
++                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
++#endif
++    }
++
++    if ( p->basic.max_leaf >= 7 )
++    {
++        cpuid_count_leaf(7, 0, &p->feat.raw[0]);
++
++        for ( i = 1; i <= MIN(p->feat.max_subleaf,
++                              ARRAY_SIZE(p->feat.raw) - 1); ++i )
++            cpuid_count_leaf(7, i, &p->feat.raw[i]);
++    }
++
++    if ( p->basic.max_leaf >= 0xb )
++    {
++        union {
++            struct cpuid_leaf l;
++            struct cpuid_topo_leaf t;
++        } u;
++
++        for ( i = 0; i < ARRAY_SIZE(p->topo.raw); ++i )
++        {
++            cpuid_count_leaf(0xb, i, &u.l);
++
++            if ( u.t.type == 0 )
++                break;
++
++            p->topo.subleaf[i] = u.t;
++        }
++
++        /*
++         * The choice of CPUID_GUEST_NR_TOPO is per the manual.  It may need
++         * to grow for future hardware.
++         */
++#ifdef __XEN__
++        if ( i == ARRAY_SIZE(p->topo.raw) &&
++             (cpuid_count_leaf(0xb, i, &u.l), u.t.type != 0) )
++            printk(XENLOG_WARNING
++                   "CPUID: Insufficient Leaf 0xb space for this hardware\n");
++#endif
++    }
++
++    if ( p->basic.max_leaf >= 0xd )
++    {
++        uint64_t xstates;
++
++        cpuid_count_leaf(0xd, 0, &p->xstate.raw[0]);
++        cpuid_count_leaf(0xd, 1, &p->xstate.raw[1]);
++
++        xstates = cpu_policy_xstates(p);
++
++        /* This logic will probably need adjusting when XCR0[63] gets used. */
++        BUILD_BUG_ON(ARRAY_SIZE(p->xstate.raw) > 63);
++
++        for ( i = 2; i < min_t(unsigned int, 63,
++                               ARRAY_SIZE(p->xstate.raw)); ++i )
++        {
++            if ( xstates & (1ULL << i) )
++                cpuid_count_leaf(0xd, i, &p->xstate.raw[i]);
++        }
++    }
++
++    /* Extended leaves. */
++    cpuid_leaf(0x80000000U, &p->extd.raw[0]);
++    for ( i = 1; i <= MIN(p->extd.max_leaf & 0xffffU,
++                          ARRAY_SIZE(p->extd.raw) - 1); ++i )
++        cpuid_leaf(0x80000000U + i, &p->extd.raw[i]);
++
++    /* Don't report leaves from possible lower level hypervisor, for now. */
++    p->hv_limit = 0;
++    p->hv2_limit = 0;
++
++#ifdef __XEN__
++    /* TODO MSR_PLATFORM_INFO */
++
++    if ( p->feat.arch_caps )
++        rdmsrl(MSR_ARCH_CAPABILITIES, p->arch_caps.raw);
++#endif
++
++    x86_cpu_policy_recalc_synth(p);
++}
++
++const uint32_t *x86_cpu_policy_lookup_deep_deps(uint32_t feature)
++{
++    static const uint32_t deep_features[] = INIT_DEEP_FEATURES;
++    static const struct {
++        uint32_t feature;
++        uint32_t fs[FEATURESET_NR_ENTRIES];
++    } deep_deps[] = INIT_DEEP_DEPS;
++    unsigned int start = 0, end = ARRAY_SIZE(deep_deps);
++
++    BUILD_BUG_ON(ARRAY_SIZE(deep_deps) != NR_DEEP_DEPS);
++
++    /* Fast early exit. */
++    if ( !test_bit(feature, deep_features) )
++        return NULL;
++
++    /* deep_deps[] is sorted.  Perform a binary search. */
++    while ( start < end )
++    {
++        unsigned int mid = start + ((end - start) / 2);
++
++        if ( deep_deps[mid].feature > feature )
++            end = mid;
++        else if ( deep_deps[mid].feature < feature )
++            start = mid + 1;
++        else
++            return deep_deps[mid].fs;
++    }
++
++    return NULL;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
+index 6298d051f2..5de1e2ca74 100644
+--- a/xen/lib/x86/cpuid.c
++++ b/xen/lib/x86/cpuid.c
+@@ -9,235 +9,6 @@ static void zero_leaves(struct cpuid_leaf *l,
+         memset(&l[first], 0, sizeof(*l) * (last - first + 1));
+ }
+ 
+-unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx)
+-{
+-    switch ( ebx )
+-    {
+-    case X86_VENDOR_INTEL_EBX:
+-        if ( ecx == X86_VENDOR_INTEL_ECX &&
+-             edx == X86_VENDOR_INTEL_EDX )
+-            return X86_VENDOR_INTEL;
+-        break;
+-
+-    case X86_VENDOR_AMD_EBX:
+-        if ( ecx == X86_VENDOR_AMD_ECX &&
+-             edx == X86_VENDOR_AMD_EDX )
+-            return X86_VENDOR_AMD;
+-        break;
+-
+-    case X86_VENDOR_CENTAUR_EBX:
+-        if ( ecx == X86_VENDOR_CENTAUR_ECX &&
+-             edx == X86_VENDOR_CENTAUR_EDX )
+-            return X86_VENDOR_CENTAUR;
+-        break;
+-
+-    case X86_VENDOR_SHANGHAI_EBX:
+-        if ( ecx == X86_VENDOR_SHANGHAI_ECX &&
+-             edx == X86_VENDOR_SHANGHAI_EDX )
+-            return X86_VENDOR_SHANGHAI;
+-        break;
+-
+-    case X86_VENDOR_HYGON_EBX:
+-        if ( ecx == X86_VENDOR_HYGON_ECX &&
+-             edx == X86_VENDOR_HYGON_EDX )
+-            return X86_VENDOR_HYGON;
+-        break;
+-    }
+-
+-    return X86_VENDOR_UNKNOWN;
+-}
+-
+-const char *x86_cpuid_vendor_to_str(unsigned int vendor)
+-{
+-    switch ( vendor )
+-    {
+-    case X86_VENDOR_INTEL:    return "Intel";
+-    case X86_VENDOR_AMD:      return "AMD";
+-    case X86_VENDOR_CENTAUR:  return "Centaur";
+-    case X86_VENDOR_SHANGHAI: return "Shanghai";
+-    case X86_VENDOR_HYGON:    return "Hygon";
+-    default:                  return "Unknown";
+-    }
+-}
+-
+-void x86_cpu_policy_to_featureset(
+-    const struct cpu_policy *p, uint32_t fs[FEATURESET_NR_ENTRIES])
+-{
+-    fs[FEATURESET_1d]        = p->basic._1d;
+-    fs[FEATURESET_1c]        = p->basic._1c;
+-    fs[FEATURESET_e1d]       = p->extd.e1d;
+-    fs[FEATURESET_e1c]       = p->extd.e1c;
+-    fs[FEATURESET_Da1]       = p->xstate.Da1;
+-    fs[FEATURESET_7b0]       = p->feat._7b0;
+-    fs[FEATURESET_7c0]       = p->feat._7c0;
+-    fs[FEATURESET_e7d]       = p->extd.e7d;
+-    fs[FEATURESET_e8b]       = p->extd.e8b;
+-    fs[FEATURESET_7d0]       = p->feat._7d0;
+-    fs[FEATURESET_7a1]       = p->feat._7a1;
+-    fs[FEATURESET_e21a]      = p->extd.e21a;
+-    fs[FEATURESET_7b1]       = p->feat._7b1;
+-    fs[FEATURESET_7d2]       = p->feat._7d2;
+-    fs[FEATURESET_7c1]       = p->feat._7c1;
+-    fs[FEATURESET_7d1]       = p->feat._7d1;
+-    fs[FEATURESET_m10Al]     = p->arch_caps.lo;
+-    fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
+-    fs[FEATURESET_e21c]      = p->extd.e21c;
+-}
+-
+-void x86_cpu_featureset_to_policy(
+-    const uint32_t fs[FEATURESET_NR_ENTRIES], struct cpu_policy *p)
+-{
+-    p->basic._1d             = fs[FEATURESET_1d];
+-    p->basic._1c             = fs[FEATURESET_1c];
+-    p->extd.e1d              = fs[FEATURESET_e1d];
+-    p->extd.e1c              = fs[FEATURESET_e1c];
+-    p->xstate.Da1            = fs[FEATURESET_Da1];
+-    p->feat._7b0             = fs[FEATURESET_7b0];
+-    p->feat._7c0             = fs[FEATURESET_7c0];
+-    p->extd.e7d              = fs[FEATURESET_e7d];
+-    p->extd.e8b              = fs[FEATURESET_e8b];
+-    p->feat._7d0             = fs[FEATURESET_7d0];
+-    p->feat._7a1             = fs[FEATURESET_7a1];
+-    p->extd.e21a             = fs[FEATURESET_e21a];
+-    p->feat._7b1             = fs[FEATURESET_7b1];
+-    p->feat._7d2             = fs[FEATURESET_7d2];
+-    p->feat._7c1             = fs[FEATURESET_7c1];
+-    p->feat._7d1             = fs[FEATURESET_7d1];
+-    p->arch_caps.lo          = fs[FEATURESET_m10Al];
+-    p->arch_caps.hi          = fs[FEATURESET_m10Ah];
+-    p->extd.e21c             = fs[FEATURESET_e21c];
+-}
+-
+-void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
+-{
+-    p->x86_vendor = x86_cpuid_lookup_vendor(
+-        p->basic.vendor_ebx, p->basic.vendor_ecx, p->basic.vendor_edx);
+-}
+-
+-void x86_cpu_policy_fill_native(struct cpu_policy *p)
+-{
+-    unsigned int i;
+-
+-    cpuid_leaf(0, &p->basic.raw[0]);
+-    for ( i = 1; i <= MIN(p->basic.max_leaf,
+-                          ARRAY_SIZE(p->basic.raw) - 1); ++i )
+-    {
+-        switch ( i )
+-        {
+-        case 0x4: case 0x7: case 0xb: case 0xd:
+-            /* Multi-invocation leaves.  Deferred. */
+-            continue;
+-        }
+-
+-        cpuid_leaf(i, &p->basic.raw[i]);
+-    }
+-
+-    if ( p->basic.max_leaf >= 4 )
+-    {
+-        for ( i = 0; i < ARRAY_SIZE(p->cache.raw); ++i )
+-        {
+-            union {
+-                struct cpuid_leaf l;
+-                struct cpuid_cache_leaf c;
+-            } u;
+-
+-            cpuid_count_leaf(4, i, &u.l);
+-
+-            if ( u.c.type == 0 )
+-                break;
+-
+-            p->cache.subleaf[i] = u.c;
+-        }
+-
+-        /*
+-         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
+-         * that it will eventually need increasing for future hardware.
+-         */
+-#ifdef __XEN__
+-        if ( i == ARRAY_SIZE(p->cache.raw) )
+-            printk(XENLOG_WARNING
+-                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
+-#endif
+-    }
+-
+-    if ( p->basic.max_leaf >= 7 )
+-    {
+-        cpuid_count_leaf(7, 0, &p->feat.raw[0]);
+-
+-        for ( i = 1; i <= MIN(p->feat.max_subleaf,
+-                              ARRAY_SIZE(p->feat.raw) - 1); ++i )
+-            cpuid_count_leaf(7, i, &p->feat.raw[i]);
+-    }
+-
+-    if ( p->basic.max_leaf >= 0xb )
+-    {
+-        union {
+-            struct cpuid_leaf l;
+-            struct cpuid_topo_leaf t;
+-        } u;
+-
+-        for ( i = 0; i < ARRAY_SIZE(p->topo.raw); ++i )
+-        {
+-            cpuid_count_leaf(0xb, i, &u.l);
+-
+-            if ( u.t.type == 0 )
+-                break;
+-
+-            p->topo.subleaf[i] = u.t;
+-        }
+-
+-        /*
+-         * The choice of CPUID_GUEST_NR_TOPO is per the manual.  It may need
+-         * to grow for future hardware.
+-         */
+-#ifdef __XEN__
+-        if ( i == ARRAY_SIZE(p->topo.raw) &&
+-             (cpuid_count_leaf(0xb, i, &u.l), u.t.type != 0) )
+-            printk(XENLOG_WARNING
+-                   "CPUID: Insufficient Leaf 0xb space for this hardware\n");
+-#endif
+-    }
+-
+-    if ( p->basic.max_leaf >= 0xd )
+-    {
+-        uint64_t xstates;
+-
+-        cpuid_count_leaf(0xd, 0, &p->xstate.raw[0]);
+-        cpuid_count_leaf(0xd, 1, &p->xstate.raw[1]);
+-
+-        xstates = cpu_policy_xstates(p);
+-
+-        /* This logic will probably need adjusting when XCR0[63] gets used. */
+-        BUILD_BUG_ON(ARRAY_SIZE(p->xstate.raw) > 63);
+-
+-        for ( i = 2; i < min_t(unsigned int, 63,
+-                               ARRAY_SIZE(p->xstate.raw)); ++i )
+-        {
+-            if ( xstates & (1ULL << i) )
+-                cpuid_count_leaf(0xd, i, &p->xstate.raw[i]);
+-        }
+-    }
+-
+-    /* Extended leaves. */
+-    cpuid_leaf(0x80000000U, &p->extd.raw[0]);
+-    for ( i = 1; i <= MIN(p->extd.max_leaf & 0xffffU,
+-                          ARRAY_SIZE(p->extd.raw) - 1); ++i )
+-        cpuid_leaf(0x80000000U + i, &p->extd.raw[i]);
+-
+-    /* Don't report leaves from possible lower level hypervisor, for now. */
+-    p->hv_limit = 0;
+-    p->hv2_limit = 0;
+-
+-#ifdef __XEN__
+-    /* TODO MSR_PLATFORM_INFO */
+-
+-    if ( p->feat.arch_caps )
+-        rdmsrl(MSR_ARCH_CAPABILITIES, p->arch_caps.raw);
+-#endif
+-
+-    x86_cpu_policy_recalc_synth(p);
+-}
+-
+ void x86_cpu_policy_clear_out_of_range_leaves(struct cpu_policy *p)
+ {
+     unsigned int i;
+@@ -291,37 +62,6 @@ void x86_cpu_policy_clear_out_of_range_leaves(struct cpu_policy *p)
+                 ARRAY_SIZE(p->extd.raw) - 1);
+ }
+ 
+-const uint32_t *x86_cpu_policy_lookup_deep_deps(uint32_t feature)
+-{
+-    static const uint32_t deep_features[] = INIT_DEEP_FEATURES;
+-    static const struct {
+-        uint32_t feature;
+-        uint32_t fs[FEATURESET_NR_ENTRIES];
+-    } deep_deps[] = INIT_DEEP_DEPS;
+-    unsigned int start = 0, end = ARRAY_SIZE(deep_deps);
+-
+-    BUILD_BUG_ON(ARRAY_SIZE(deep_deps) != NR_DEEP_DEPS);
+-
+-    /* Fast early exit. */
+-    if ( !test_bit(feature, deep_features) )
+-        return NULL;
+-
+-    /* deep_deps[] is sorted.  Perform a binary search. */
+-    while ( start < end )
+-    {
+-        unsigned int mid = start + ((end - start) / 2);
+-
+-        if ( deep_deps[mid].feature > feature )
+-            end = mid;
+-        else if ( deep_deps[mid].feature < feature )
+-            start = mid + 1;
+-        else
+-            return deep_deps[mid].fs;
+-    }
+-
+-    return NULL;
+-}
+-
+ /*
+  * Copy a single cpuid_leaf into a provided xen_cpuid_leaf_t buffer,
+  * performing boundary checking against the buffer size.
 -- 
 2.34.1
 
