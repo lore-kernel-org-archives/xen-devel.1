@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2FBCCFA466
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 10:42:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170252.1495319 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3182CFA466
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 10:53:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170264.1495338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNU0q-0004SM-IK; Mon, 24 Nov 2025 10:41:40 +0000
+	id 1vNUBm-0006tp-Lp; Mon, 24 Nov 2025 10:52:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170252.1495319; Mon, 24 Nov 2025 10:41:40 +0000
+Received: by outflank-mailman (output) from mailman id 1170264.1495338; Mon, 24 Nov 2025 10:52:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNU0q-0004SF-FU; Mon, 24 Nov 2025 10:41:40 +0000
-Received: by outflank-mailman (input) for mailman id 1170252;
- Mon, 24 Nov 2025 10:41:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vNUBm-0006ti-Ii; Mon, 24 Nov 2025 10:52:58 +0000
+Received: by outflank-mailman (input) for mailman id 1170264;
+ Mon, 24 Nov 2025 10:52:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CeM5=6A=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vNU0p-0004Qk-G4
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 10:41:39 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2200d1f2-c922-11f0-9d18-b5c5bf9af7f9;
- Mon, 24 Nov 2025 11:41:28 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4775ae5684fso19258305e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 02:41:28 -0800 (PST)
+ id 1vNUBl-0006t7-6y
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 10:52:57 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bb12c3ba-c923-11f0-980a-7dc792cee155;
+ Mon, 24 Nov 2025 11:52:55 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-477ba2c1ca2so42882305e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 02:52:54 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477bf3b4c13sm187496895e9.13.2025.11.24.02.41.27
+ 5b1f17b1804b1-477bf1f365fsm191292965e9.8.2025.11.24.02.52.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 02:41:27 -0800 (PST)
+ Mon, 24 Nov 2025 02:52:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,60 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2200d1f2-c922-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: bb12c3ba-c923-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763980888; x=1764585688; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1763981574; x=1764586374; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=9zMZoLq11/KR/OzoedDUjQTXtJ+wLH8rtsk/2VPdtRA=;
-        b=XdPFsfSoi4jwnmwc8IrjW/MSs+pWsPdhd1Nyojt4kD3u8d8oTVTKvXoKweS86oyvwj
-         ep+NP6RS3hXCVqDXYVc/zoNJWiMZt/6y+eoyomqRv8tyDwGnd+zmOMXO+uDAVv68cDmn
-         bYotout3Eefb7vCnXDN1HGhoaU9vYIVdUHOt6kHa0FM3CQRQt4euhF3tRAXkZizKH7pz
-         FYpQkxHBswWzMwtDoY2NSpFJs91xe+LIuXIUJlDfCjqYDIdJGfiaHJFWCjNzgQsOWzTw
-         uW1vtbnf70U+19yJ56eJHcOfJgmgci6E4RWf4BSboDPyUWjRPaR/w7W2BnF10s9llY0k
-         ZtIg==
+        bh=EnMyMpsa3EDwflxEWCohYtKKYgNJwAtKayhparUd0k4=;
+        b=DZ47t66k1J2Loaju01twzRzZ2AzbfLeTiz72XZL44qFLt3YHIbgseffdA8TTqPszII
+         3uQZYWqgzq+BqIoQo4uePbhDpv2WcBwViJHX3zYf7LIvXtPpwklg8qO3KBbTbGVhb4qO
+         En1yUvhAd5RxueeCZewm8AHSKyfi7rB7LQGFQJh/luM6ISfZk1AH/xAOj90gnA6xtMk5
+         N6/L+AplIrw3KpY/tG7Hy/Oo85GG2BYWnGFE6gL7XRYi9vqzxXHXXTfWUa/QkD+Ruu8V
+         g80L8+NA8M24kGCDwyWf45BDDROLEA6phvNrnNtaj5zrQJsrO6mifEdiBM5MIURB6rY4
+         D1TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763980888; x=1764585688;
+        d=1e100.net; s=20230601; t=1763981574; x=1764586374;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9zMZoLq11/KR/OzoedDUjQTXtJ+wLH8rtsk/2VPdtRA=;
-        b=ptnGyTBCTpoR47ZGwZUeevo/1TnmlvE0OEzbighziXUPYgnUTY9RumQttvNqcOayBh
-         z6sVdyEZrWtEFqZnYdVL2PmVDC8evSitbzt1t2zBPtj7X2WSznmkw+G2C/rjTTdNx76r
-         +1674GKVe625c9wLSqiPa4jviYRIAV+oUJRECeaSJkN8x7Ku1zIp8DmlfaC4ftWpKJqG
-         MfH77L2H3CQIjKsG2se4wbmPi/07hl5H+t1XZH0P/UgpVsMXrnlAteYcyE4oCAcyuZJw
-         lAvQPykSu21YXnn4ncr1FnxFY8d1l4XYXSnCmi0FKfJQuEshPkaP6aspPexjLOev+t4H
-         Xlgg==
-X-Forwarded-Encrypted: i=1; AJvYcCWR6NKqIoYZqGNBd5aa0dISaq0W/Eiut553qymbZ4t8tgwhNUh+o1Oql28N4LCAqtc7LJs/cFHCIcU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz+3x4zlOu0yknMMXwRw4MdoTnHH1lGf8ZVGlzRNNZN0NztieN8
-	QokbGouunZpD///ujyE8HNpl6rktGjut/IZr5VSsBc/wxQv1O8iuurJvp2WIOwvG10kgx+UrryI
-	d5Gg=
-X-Gm-Gg: ASbGncsEdj45oAuVHniL0FoVdmkPCVj0ACV3zDVrM+lmCNQgZtiX5UxKqLMDmM9lzEs
-	fxixMqowJnSPeheBH5GmAh7vLKHfd8eXxIw3KAq9kTg3p5e6oAjY087JhqSYQDkNqqnoHzn38BW
-	+zY63DDmmfBLQqCn7BPqUspu2D5ofGdhkbcn1YOn16vLrFxZtYFdQEtyrQj6DefZdFvBb/6ebZ7
-	7W8F+8Uvp79qRMErS8ChcQSBzc4mCztP+q9U1ICNto9QIYaoaNKesEQSki3zv/WoC95wN9pYiku
-	sStZaUBLDFf7PRVFX+me+l0pC080d5L9ksOsXQRG0b/6oIEtbfD7ZBeMtEmAhgsNhKVWtF4REMy
-	c6N94JIs57pTADhiAX5Qh5Ry2GKOMSPOu2goIAZorfqQBQFCN1iYI4MtDJcUSUzs9bPuv84gAQB
-	80jJn7LVVFxQrqG98wv+reoOf9kWQNp8xyPZ4OYkq3174KF9VHOEIeZ+Gvpi/fqLhz/a3pQf/6s
-	68=
-X-Google-Smtp-Source: AGHT+IGaYEC4CCRCg8Q2Y3ZwqEUcqQOTfDpB1cB5g79Wr/oLQ+wI5zk6WLdPtDwjtFjgIwAW7+pWzQ==
-X-Received: by 2002:a05:600c:1f1a:b0:45d:f81d:eae7 with SMTP id 5b1f17b1804b1-477c114f45fmr108582765e9.28.1763980888107;
-        Mon, 24 Nov 2025 02:41:28 -0800 (PST)
-Message-ID: <d34e3e86-c51a-49b3-8b46-140526755f0f@suse.com>
-Date: Mon, 24 Nov 2025 11:41:29 +0100
+        bh=EnMyMpsa3EDwflxEWCohYtKKYgNJwAtKayhparUd0k4=;
+        b=AYARk3F/tHwyMkIQzmZftS5gxUOIviByyQuCWsJbegNXuKwPRy+YPloOy3QJnvO+Me
+         zy/62VaDKTLeICB1nMTT+ul0V0xqStU/cdSgf7LAmjMm5/3ErjUWlD6G83DFTt+WpE18
+         69JruUkTA9UL3QxE40dXTfe48C3qHfPk/zmyEIX9E9PI6w9c5+vl/ClEQlxdhSli/qHk
+         EID0p9xk3NBs2yw/kETuEmhaEo3w0OdjIdH5RaCe1EyeFQt7VpFZHGgmuuT88SMnHHz8
+         qOem+wIEZxOkAJ1B3HBsh1CtFhKO0R7C9B7x8JclEIAaOsClsi+yut+IJDzh/pjLFMuu
+         BnOA==
+X-Forwarded-Encrypted: i=1; AJvYcCUxXSLGzW6VUj4FqmZcJc1w5zyPUQTKEd2JkDVI/rCTzO2ACb5Y9yo+XdpgVRLuY3sSRNpH55U3+QY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwY/QiWO53DLntfeYQm4SCl1MzebQnkR+b4FZ9VgMG1DJIw0wOG
+	ao7QYEHz1PuuJButBQhkeB++5xBB3mNvtSMNOZkNAAHlzncnlpoemTHMyI70hJDPPQ==
+X-Gm-Gg: ASbGncvaY824gCWYHHsOVIaof/qY/5heVnHmrGjPrk2T8k6TND4EyzHvNR7Fob02S45
+	AaOR2YG68lVYZgqAIEJDgW5csKSLCTWxHnXSD4lM/gbYnWy6vJiTZXjjo9iewK64VUamuGSnvjN
+	7SHvY+ePiGKu4NKfuoEVXDxUxY4MSC+6Yo9VSRlBnVbKHJXWYymxyiAj9TyemoF+El7GnCZo0TU
+	rjCo3XrYO8v0IYsw9OfzyORZdds8d6KJyFL7zx4SBJFCMWF8jXA4T2zu0DAKu3HK/8vrH4OnOmR
+	pZuZRAZg/Y0U10artO2ZGcMIlcEGsRHMlIGGPHJw/Li/B29ce0gTJ3oUb0s8rJKHNImGbYqBa1t
+	iGHtIZTh5QSK5DMPoST5TuQhEZO+eXMFbZTPDFKVdzo+3MmHlJkdGtATmgnZUiUgcRS6hAjvKKK
+	IQ6vmMqpgHQ4EZSh5/AICwt4VIJ4fbJmONVp+uWKapD6f5bvK9bTzpx4LhxrW+VGqq4hZYMV9fU
+	74=
+X-Google-Smtp-Source: AGHT+IEBmw3ujqAFoWxvlaNNZ/FIVaUjUIFTXOho7DZbWlawoxLpT5rTKOoH+V8/df6dJ+/LazN58Q==
+X-Received: by 2002:a7b:cb81:0:b0:477:9574:d641 with SMTP id 5b1f17b1804b1-477c01be3e7mr75186815e9.22.1763981574353;
+        Mon, 24 Nov 2025 02:52:54 -0800 (PST)
+Message-ID: <52664b6f-1114-455f-a7f8-14e95372acdc@suse.com>
+Date: Mon, 24 Nov 2025 11:52:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] build: add make macro for making file from file.in
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20251121132332.23514-1-jgross@suse.com>
- <20251121132332.23514-2-jgross@suse.com>
+Subject: Re: [PATCH 08/12] x86/irq: adjust bind_irq_vector() to take a single
+ CPU as parameter
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20251120090637.25087-1-roger.pau@citrix.com>
+ <20251120095826.25782-1-roger.pau@citrix.com>
+ <20251120095826.25782-3-roger.pau@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -126,41 +123,28 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20251121132332.23514-2-jgross@suse.com>
+In-Reply-To: <20251120095826.25782-3-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 21.11.2025 14:23, Juergen Gross wrote:
-> --- a/Config.mk
-> +++ b/Config.mk
-> @@ -159,6 +159,19 @@ define move-if-changed
->  	if ! cmp -s $(1) $(2); then mv -f $(1) $(2); else rm -f $(1); fi
->  endef
->  
-> +PATH_FILES := Paths
-> +INC_FILES = $(foreach f, $(PATH_FILES), $(XEN_ROOT)/config/$(f).mk)
-> +
-> +include $(INC_FILES)
-> +
-> +BUILD_MAKE_VARS = $(foreach f, $(PATH_FILES), $(shell awk '$$2 == ":=" { print $$1; }' $(XEN_ROOT)/config/$(f).mk.in))
+On 20.11.2025 10:58, Roger Pau Monne wrote:
+> The vector will be targeting a single CPU at a time, so passing a mask is
+> not needed.  Simplify the interface and adjust callers to make use of it.
 
-Feels like my prior comments weren't really addressed. I continue to think that
-none of the above is part of what the subject says.
+Considering the two callers we have, and considering the function is __init,
+do we need the function parameter at all? Can't we uniformly use the BSP?
 
-> +# Replace @xxx@ markers in $(1).in with $(xxx) variable contents, write to $(1)
-> +define apply-build-vars
-> + $(1): $(1).in $$(INC_FILES)
+> --- a/xen/arch/x86/hpet.c
+> +++ b/xen/arch/x86/hpet.c
+> @@ -352,7 +352,7 @@ static int __init hpet_setup_msi_irq(struct hpet_event_channel *ch)
+>       * Technically we don't want to bind the IRQ to any CPU yet, but we need to
+>       * specify at least one online one here.  Use the BSP.
+>       */
+> -    ret = bind_irq_vector(ch->msi.irq, HPET_BROADCAST_VECTOR, cpumask_of(0));
+> +    ret = bind_irq_vector(ch->msi.irq, HPET_BROADCAST_VECTOR, 0);
 
-I further understood your reply to my v2 comment the way that you would drop the
-slightly odd leading blank from here.
+Irrespective of the remark above, the comment then will want re-wording some,
+too.
 
 Jan
-
-> +	sed $$(foreach v, $$(BUILD_MAKE_VARS), -e 's#@$$(v)@#$$($$(v))#g') <$$< >$$@
-> +endef
-> +
->  CFLAGS += -fno-strict-aliasing
->  
->  CFLAGS += -std=gnu99
-
 
