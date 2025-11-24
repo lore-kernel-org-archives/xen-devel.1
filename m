@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71507CFD313
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:34:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170581.1495750 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE47CFD313
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:40:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170681.1495775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVm3-0005HN-Q9; Mon, 24 Nov 2025 12:34:31 +0000
+	id 1vNVry-0002Wy-NT; Mon, 24 Nov 2025 12:40:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170581.1495750; Mon, 24 Nov 2025 12:34:31 +0000
+Received: by outflank-mailman (output) from mailman id 1170681.1495775; Mon, 24 Nov 2025 12:40:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVm3-0005EZ-3n; Mon, 24 Nov 2025 12:34:31 +0000
-Received: by outflank-mailman (input) for mailman id 1170581;
- Mon, 24 Nov 2025 12:34:28 +0000
+	id 1vNVry-0002Wr-Jy; Mon, 24 Nov 2025 12:40:38 +0000
+Received: by outflank-mailman (input) for mailman id 1170681;
+ Mon, 24 Nov 2025 12:40:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Sr25=6A=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vNVlz-0001zv-Rk
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:34:27 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ <SRS0=h9jE=6A=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1vNVrw-0002Wl-Ov
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:40:36 +0000
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c105::7])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e89166d3-c931-11f0-9d18-b5c5bf9af7f9;
- Mon, 24 Nov 2025 13:34:24 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b7697e8b01aso268226266b.2
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:34:24 -0800 (PST)
-Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7654cf0435sm1285238866b.4.2025.11.24.04.34.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 04:34:22 -0800 (PST)
+ id c590c335-c932-11f0-9d18-b5c5bf9af7f9;
+ Mon, 24 Nov 2025 13:40:35 +0100 (CET)
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SJ0PR03MB5423.namprd03.prod.outlook.com (2603:10b6:a03:28c::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
+ 2025 12:40:32 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::b334:94c2:4965:89b8]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::b334:94c2:4965:89b8%5]) with mapi id 15.20.9343.016; Mon, 24 Nov 2025
+ 12:40:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,330 +49,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e89166d3-c931-11f0-9d18-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763987663; x=1764592463; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IXqp4I0XZWh9/KhS0j7ysczQhIFrqLu1XKQnOd0ZyHw=;
-        b=A9lqi8CvY/SONcAcC58I69mHOU41xTALl38UVipz7jfQsLlo4+cXcyyUH8PDpmkFvC
-         UzXsO0gyupWVwBKUPSdq4QVEMsfBbo1LLpeaV39FMpJ0Q7TqsMH6JtGgCYT7mjYJBVr5
-         2/Rti/O0r+M55TGCk5jcuqhVMqujjRYs/YtsOUwsCITUCsc+P/4Xv73TqaCIc/P3gniL
-         KdLhcFqHdVg0plFPoROuEz9SxYYoYsny3dxtVXKZJQqGjPfTnRS3FYAukraBRrGXYuz+
-         Enw1LgexuNA7h7MUWS+ivA3wnrYhcpdsCaL3gF8kc9T+WWR+DGtcvsGuH0urufuDflpr
-         1jOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763987663; x=1764592463;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=IXqp4I0XZWh9/KhS0j7ysczQhIFrqLu1XKQnOd0ZyHw=;
-        b=Afr56uFvd9AoqQd0/TyRyBNHibKF0JfAQjkJrBDSQfHT1VH1EynSf6o6n42qGRy1iT
-         yojZDafS9J6wInt70hSjE7TBWX/U7HCWISG+0y4rXuIIwyJV/4lLV5GYd5vpmifRrZ4p
-         gjVgZ6NcMiBj4/VVA7xXuXrfRu63+ewO5jX0nfjLQjG4joR6kTobFt4TS+cPnLmYETpK
-         L2N58Pq7g2k+zR051VDQ/8NnzooLlIyQazMAblPWRUYzo8z0GyNHZBRxlTd+bPqIdDUq
-         +HJumC+frJ3CcQ8iZq5RQMsnKZ+mscxIOAxH2HxwT3GMQbNLfJHDDLV5NZJYgkHGJTLr
-         z2kQ==
-X-Gm-Message-State: AOJu0Yz66f6yKkElFvUKFkePqQ2DB80wYdjBWtoHfVn+OzeoMKk/tiGi
-	zsh4t/ZW6fDC4KlpWz9Nt7cPJwdCV0tg6IJphBNtVSV+jnLjLV6nNy1Gq7Q21jbg
-X-Gm-Gg: ASbGncuLn/omu52dleYZRdBfXfYlD5nd3cNXozqzW9TwDmyByLpaZXISm1ILEm//AV5
-	nhBDqee83uMEZVIo65shQ4/ay3y8naWuxvpw+2YOURC3gzpHBDWftUiSbIQ9qMBQ+lWCUSme9Zw
-	eklIA/ENiR3UbkLSCUtes/ijikmXd4J+A+2nrk6Op39vOqJpP1lvGZSCL5xR7hfPs66Zs6JpI1v
-	XP/uf+43M2wOiJz06vbcIGtqK777PToJlyWnRcICyQ5s5jT0dSErcCnub6YlmZK8CI8lFy1AEuH
-	MHeevZNsajuOpRqw4B1tfIAEcfkyEWijOUUkuWOeCJvFrWPoCXBP+I1NrQ36UFuaz1W3Gsgua5R
-	zROjn0dBtiAiD4yRy1UPD9R/pamrt92MbrHH2M7Ksl6Trs4fJpmQjPpFfyoRxMliP46Vd6f1XKv
-	MbS/eF5YY5mTL8ltr3IQlfBQdQwyBwCf/1iXMwrI2uUp8SjrcP6zrnhcM=
-X-Google-Smtp-Source: AGHT+IHXcNKK5ta3WIfAn0m9iuUk3YzGUqiKrj+fQUgGCkq/+Lm8UJiBiX9ehHVX40fWMWJNXGn/NQ==
-X-Received: by 2002:a17:907:b17:b0:b76:7e0e:4888 with SMTP id a640c23a62f3a-b767e0e64d2mr778174966b.6.1763987663154;
-        Mon, 24 Nov 2025 04:34:23 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 13/19] xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration
-Date: Mon, 24 Nov 2025 13:33:46 +0100
-Message-ID: <bf3b296606e932dcbd29d06b962b7ea8db392e20.1763986955.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <cover.1763986955.git.oleksii.kurochko@gmail.com>
-References: <cover.1763986955.git.oleksii.kurochko@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=all
+X-Inumbo-ID: c590c335-c932-11f0-9d18-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NiInqFaHW7OYgbTDZ6+vJkTVvytFT9TxrPniI4AOCYoPEclScVQUC2xOTSfhxHAyLJ8FBFBP7cq6rx4DkBooZlBwOuq1L82hVPmfuH/N8SrKtuwYQXWMu+E3gzWvb8da5o8BqRBd2fqYIBwvbrmqzOgnDNmgj1ZFqOhWUqzK1hXIZ1G6tTUY35murDFgDU85Dpguh9SiVq6TEbR5MnsIKswHl3grSx8OFErbBddWfe/Lp2HaBY0UVnWz8vrcSNwbsQ2fUeTmLbLqnq0cUouwVuIsz6jx3xixyQChrEUBdDuEYAZKYg0cg5yLlFrbHzq9OwptmGVS9gCT4+T+KHamRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5vclgoVwekH8F6mA/m96YPNYPYJzrndHAlHTFDeAf7g=;
+ b=RYJEqR7lYpmRqMzUPm4GNGroAeW8x27NQU/FJjf011RBVCj0wzdDi5lo84j3pAwq1prYg/tNWTdKJLcVoj2pQ4ORW95nYwqxa7PrhDW+KH3xzpoJS9QF/Yd1Boi4lkfQwPTnEMC6lyYbJDVycua8aBEn+bTsdpwACy6evEW60jRU4d1a+8qM9YT976i6fz5Y45itWjnrUybbqfrUz2oqBOaZUH5qrsTTeJGfNz/XgeAWeukTqoO7u91O3yM+m5hn6W07JtiSFq55ksmpY4q6P4bjDc2Osf+rdoRk5Y5EVSyCezw6W9nZqBz9qvkbb8Q6TWjnZl14egVRaRSO/ZgKhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5vclgoVwekH8F6mA/m96YPNYPYJzrndHAlHTFDeAf7g=;
+ b=cDdsT8GNnB3pNoIOkaybJDEwxe2iIJ60XMLzOMWZZJ2RD+iEYQs8kgfPrEZOG4SMbkkYxYzmmvLajp0hrtrHnbKuEc0wlqe/eIvjAIooM4IkEZY8KcHLUYusoSvU9OPoHe4zjOr3/5nJ+r4JUw8jD6uHqGKiSvwbL/MRteEnt+M=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <4876be02-9978-49e2-8a48-d7ca10e06843@citrix.com>
+Date: Mon, 24 Nov 2025 12:40:29 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] XEN: enable MC/DC coverage for Clang
+To: Saman Dehghan <samaan.dehghan@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Anthony PERARD
+ <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <3bb418ae6a36a9ac89c697a417fa0745fa9ac702.1763949990.git.samaan.dehghan@gmail.com>
+ <9c76a959-51c0-4eb7-9d05-ba4441318faa@citrix.com>
+ <CAHFNDNikjXNHCj2RXMoZPckqaQAy2u-xw-QyCO7nXT3pttp6Hg@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+In-Reply-To: <CAHFNDNikjXNHCj2RXMoZPckqaQAy2u-xw-QyCO7nXT3pttp6Hg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO2P265CA0291.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a5::15) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ0PR03MB5423:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ffc7af4-73b4-44e1-233d-08de2b56a827
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?QmQwK0c4Tmwrdi9mR3ZueEpvWU8xTjVmV0R0bFdnOE5ZWEtia1pwdUlHaWxP?=
+ =?utf-8?B?cXk1Z0dJQmNKYUFpaE1sT1NjTmE3Q2MvYWhsMW1haXNkSjgzazdtbW1oRmhO?=
+ =?utf-8?B?aGdla1YwOUpMSy9DdjcwODNlVEhiMzJVeXpZSWFVeVIwSnZ2U2Z0Rko4Nk5z?=
+ =?utf-8?B?TDZLaGdOMUYzZzNTdnllbjA1YUVCZjZGRHM3YzN5TzRXa2RUb0JkMTlwZ0NN?=
+ =?utf-8?B?K3FUMFhDQ0ZrM1lmcnVwUXBZdlErL3F2dVZWbUFOV2hLMjlyb2REeng3WGo0?=
+ =?utf-8?B?ODhnTkRhWDFXdG4vTUU3bkk2ODNDMEE2YitSS1ZwOGNhckVlRk9SVmNsdHY3?=
+ =?utf-8?B?cDV6ZkhrdTRGeG5kUnQ4MHlDZEdJYk9yTVJ4cnM5d2ZCdnVWbTZDblc0K28v?=
+ =?utf-8?B?cmxnY051QUNkOS9scUx3SmhuSVRCWmpsZ2VHWUwvWTJmeisrU3ZqODREWlR3?=
+ =?utf-8?B?RUYvVWhob3JRY2RBVS96cmx3ZjdiL281cWZWd1c5RFpKblVjZWQxUXB4eWw1?=
+ =?utf-8?B?eEp0dUg5bGR2aXBYU0dlaFRlK0tKeUc1SkljNXhsY2xkZzdyRGF1VTA5bW0x?=
+ =?utf-8?B?WmRraFpieFFSdEZrTXBjZFpDQVRBdzB0ODFKVDhmNUh3Z2liZ1BLcWlXakNV?=
+ =?utf-8?B?WmNrb0dSRCtrTDJIZEpQbDFBS1pjMjZlQ084Sk54dWhOU1ZWejhmM2t4SUIy?=
+ =?utf-8?B?bUF5UjZHY25YYkQ3RUowZUZJY2o5c0hUQy9HSkthMVlndU1MbXY0M0g2eGFn?=
+ =?utf-8?B?MTdNelh1aFZodTVBUmdiWUlTVko2VXRUOHhFT1hFOEg5TGZOMkozV1FIWUJF?=
+ =?utf-8?B?Nk90TjRTWCtiK1RIckZRVUtxdVgrS092bDdmc2hQZFcxcXByTXFFVjVqbHE3?=
+ =?utf-8?B?bTlyeDMwbkhKTlhnWEcxZFJBTGhNdkNFYUp0UCsvRWVzRUgxbHdVNlREVlBV?=
+ =?utf-8?B?V2ZrS2tBY2NJMmIwdTlicnpMS3g1N1R5YlpydmxZbERMaFJtNXBOdDdNelBZ?=
+ =?utf-8?B?Y2FPUjlxaDlvYkpidTkvak43QmhnME1heUhySzBEU2dJYnJhZjAxaHpsUEt5?=
+ =?utf-8?B?N0I5dEtwNy9HY3ZvVS9meDJUK1lRK3RjTWZSb1FHVFA0L1lkdWtYREhmNURp?=
+ =?utf-8?B?bE1xbEFWTHliaExGR1NNR3REYkZoN1hFaUtvZ21iUU1UYjRibmdRNFJMRkk1?=
+ =?utf-8?B?a014aFM0QkViOUhJL2dUc3cvYnNnU3ZmSEF6ZTN3NUdWdnM4OHdWYWhxUzZ6?=
+ =?utf-8?B?UVpKckZyQ1czd0FHTjM5dXRlNEFHSnhiWHQ1UWJQK2pqQ1dIOHhhaGM4OWZE?=
+ =?utf-8?B?dE51Tks0eDliZU1kQU1tZVhESVpCRk1WUUkwQzJFdkRZbHl5NmpGZjE5SWZC?=
+ =?utf-8?B?ZTQ4V1JmQUI2NDNqSmxDT29Panp1L2s5b240UFhnNHJGQW8vaFdhd3BZM3NY?=
+ =?utf-8?B?c3J5bGxGZGJHUEVuNm5ZOVlTaGtOT0Q1SDAvYS94dUpYd1pYQlN5UGFQa1hn?=
+ =?utf-8?B?WGowMzJEUW5lVkhCSzlSc0pEK1pxQ0hOMHUzckd3T0IvZ0h5dzk1YjdxN2tr?=
+ =?utf-8?B?WGs5a1VwY09pZGtFa3hIQ1FNVkVLUStOZUl4Y0JiTng0aWpCQlFuRk5CNnpo?=
+ =?utf-8?B?WGliZmF5WEZXdVBiODYwKy9sbmJEbTcrSzNrb3lyRjdTd2NwNHo1V1VrdUpi?=
+ =?utf-8?B?aGNmTFlHcGZlOUtjRmVPa1EyeDMxWi80Q2xtc1hCY3N6N3htUjRjNUIvZXpw?=
+ =?utf-8?B?TnRBUS9kNjIyUUY4RkY0ZVRoWUd1TDZJT05abnZ4VTdqK09SWTJyVkFSTklr?=
+ =?utf-8?B?dndmZEtYWWM3Z3oxQ1R4ZE5vVTV6SWpuS2FuVWQ4WHgyTld0WXgxaEtiQ2lZ?=
+ =?utf-8?B?MEp0cVNORG9iN0lnMkNsM1JPTHkybktJMUJ0Ym1nU3FrbjRiSFFvdEpyQVFS?=
+ =?utf-8?Q?ZdlrE3fX4rFnxuOslyS1+ZBDUIBE/coy?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UG5GelJkYWY1SUtpaHNBZUZXenphelB6citaZVdQb2p5WmEzTGZSMm5TZVdi?=
+ =?utf-8?B?T0oySVJUMXRYb0l4eGEyV2lLd2pIUkxuTWpvOVRpd25HdWpOeEVkZTdKYXlQ?=
+ =?utf-8?B?QUV4Q3hlOXk2NzNhUmpONWxidnBMaUc2VEtSeTM0TUhoa3NJRGh0cjkyd1FW?=
+ =?utf-8?B?OHRtaVNOajliYVFabUd1d0JDdFB2M2hGMlh6YkdQaHpXVEJCRmtUS3Zsc0o2?=
+ =?utf-8?B?YXBPeG1qN1VxN09LVFgvaE5WWTFqaGN0RjdaM0VQU0dFWnNYWTN6Ti9XVUJn?=
+ =?utf-8?B?WFRkL3EzdkswRTlac3lTMVhkWjJiN0I5ZjM0U0RnTjFST2pvTEh1RUh6dGwy?=
+ =?utf-8?B?bDVXRXBpWXE2WUhiWEtnVnNhSS9iT1hwaVBydnpGbEFmbjBqRGFoTlhlSm82?=
+ =?utf-8?B?TGNQRFpkcUFwUyttVFNLYlVUbWY1ZE9MRVVITGFzVytrYWlQbE11U3VYdW1y?=
+ =?utf-8?B?anlxNGRpenJYdWRJT0daMWYwTUMyN3IzZUVCUjJrM1QvYndxYllkeGZQRVBS?=
+ =?utf-8?B?b1VyUWRQU3JRcWJOQzBsbGVBOExSMGRVdVdRSXI3UmRpOUtHSnBSM1FtbTN4?=
+ =?utf-8?B?OW00M20vdDljUmV0ZmpHZFhxcVRsWkFSS0NRNUZ3REtLZ2lVdDJLYnZoVXZR?=
+ =?utf-8?B?R0w1REU2Rjg3TGVXVUJrMDlLNGU5ZHN1cmk1cDBLZW9IVUJuZk9hQ3VXeFFH?=
+ =?utf-8?B?MkhkdEt0MG1HaFN3Z0xEUGZRYWw5NHFiMldzL2w4OHgxWkJpOWYzR0crWllO?=
+ =?utf-8?B?ekZER1R0aDQ4NDV0NUx1M0lFYmpNVWZqOXpNRmZ0c0pzRG5qd3dqcDBhV0NG?=
+ =?utf-8?B?K2ErQnZQU1BuZVpDcVV5YUw1SEdFVGl0bGhqSDF2b3lEa2kzdEIreTNCdlpP?=
+ =?utf-8?B?SHJzQVJTakRUTE1Vd0RWUFNTZndNNzdOT09MSjlYVG1aYXlDOHFrdEN4T3l0?=
+ =?utf-8?B?Z3MvN0F6U0RvcWRRUWVYa0k4SHcyb0NvTktpM3NEUHZYNTA2clhoRXU5SFNU?=
+ =?utf-8?B?M3lZcC8xdkFuczBRQWFoQklJSkc2a2QvUUlwQWFuR2hIY2U0V2trQWJSNVZo?=
+ =?utf-8?B?MTRUcnlZL1NXRlhBY2ZOUGhBemV2N3VEbmlNWmFDWFdyTk4xTVc5TlFPL1hX?=
+ =?utf-8?B?U1lETytUdjBIKzVzZ3gxOGJLeFE2YnVaa0ViTEtvOUR6RE8xS2RFS1FpT0Np?=
+ =?utf-8?B?NE1lR25QcUwvTWRuNTZLUUh4d21iVXh1QUJ3SkJJeFhXY2wzV25kandHUyta?=
+ =?utf-8?B?SzN4RnFZQ1NkYjRKblFFYXhjaG0xdlhCQVEybVhBSzdZQ0N3V2J4L1VhSW9M?=
+ =?utf-8?B?ZnVydWg4N0xOSGdrbVN6U3lRZHBwSFlWSitUS2R5RmQ1emtzbUJOSnNLdnVQ?=
+ =?utf-8?B?UjRFZUZKcnF0WHBFU1J2UE1sMXcvdVlURG82a3NUa2kzMVNDVGwrSUNQeVJl?=
+ =?utf-8?B?SG5VL3ptZDhPb0RTTExRWFAwMzBYNzZDbjh6S1ZjWFhSVFl3cU9Gay82dG5X?=
+ =?utf-8?B?NTNNczFQdjV4S0kzL0NsNEdYYTM0TEdackN5eGRQK3MwekV3Y2tkQmRoNXM2?=
+ =?utf-8?B?YU5OYlRIUjVydFRLZTBWQms2TVNxdndqMnJGOFdmWGJmQVVNMjlDKzMyamt1?=
+ =?utf-8?B?RmxaUG4zMXAvSDgzRDJ0RkVyaUNQWlY0U1V6WXo5dHRrOU1aek5VNXRWeTlz?=
+ =?utf-8?B?SnNnNHBMUm90bnhOTUhNR2ZUSFMydzJtVTNBWkhiQUhtaWkyYlBGYXRJM1Ri?=
+ =?utf-8?B?TElmWnBqSVlnUSswL0xZM3dZM3V1N2c0YnU0TVBRVVZTT0drakw1akJseHBq?=
+ =?utf-8?B?Z2RCOEFvK1VHTzZXTm02SXU4MlU1MThSNTFnMGJTM2pTZUtvM1NiOHZ1T0kv?=
+ =?utf-8?B?YVdrSHdwL0lkYWJoWFBMMzJySG5IYkRxZWhncWMrVE1HZXlHZUkrMGhVY1VH?=
+ =?utf-8?B?LzdaN05ZTVdJRnBYL3VFRHRXVUQzRHovSk4vaWJwYnQwOXdpRWV6Y0FCaDZS?=
+ =?utf-8?B?ZkhyR2wrcHh6ZE1MMGdnQ00zaWNCK05GZ1NaVU5kWWNJd0pwQUJFZWR2Uyti?=
+ =?utf-8?B?alNXekt0KzJwZzBXUk83WjM5N3hrV3JhbGFsMk5sblloZll5ZGduRGFacjFy?=
+ =?utf-8?B?aS9aWjg3U3pndm9mYmd3UkU2dEU2dHBOL2IvL3RvOTdIbXl0M3RGZW00WWhL?=
+ =?utf-8?B?SEE9PQ==?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ffc7af4-73b4-44e1-233d-08de2b56a827
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 12:40:32.3531
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VgJf3r9+hF0T/RpyMDmm2kCBd6giy33L2A/IvaDwmP5FRmSBrvylmfeYKwRgXjujQnq6N+TMtD/T+/yLYjLJscpfz/Y4ra9Jsu5PRQ6tV2U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5423
 
-This patch adds the initial logic for constructing PTEs from MFNs in the RISC-V
-p2m subsystem. It includes:
-- Implementation of p2m_pte_from_mfn(): Generates a valid PTE using the
-  given MFN, p2m_type_t, including permission encoding and PBMT attribute
-  setup.
-- New helper p2m_set_permission(): Encodes access rights (r, w, x) into the
-  PTE based on both p2m type and access permissions.
-- p2m_set_type(): Stores the p2m type in PTE's bits. The storage of types,
-  which don't fit PTE bits, will be implemented separately later.
-- Add detection of Svade extension to properly handle a possible page-fault
-  if A and D bits aren't set.
+On 24/11/2025 12:31 pm, Saman Dehghan wrote:
+> On Mon, Nov 24, 2025 at 5:15 AM Andrew Cooper <andrew.cooper3@citrix.com> wrote:
+>> On 24/11/2025 2:18 am, Saman Dehghan wrote:
+>>> @@ -127,16 +131,25 @@ extern uint64_t __stop___llvm_prf_cnts[];
+>>>  #define END_NAMES       ((const void *)__stop___llvm_prf_names)
+>>>  #define START_COUNTERS  ((void *)__start___llvm_prf_cnts)
+>>>  #define END_COUNTERS    ((void *)__stop___llvm_prf_cnts)
+>>> +#define START_BITMAP    ((void *)__start___llvm_prf_bits)
+>>> +#define END_BITMAP      ((void *)__stop___llvm_prf_bits)
+>>>
+>>>  static void cf_check reset_counters(void)
+>>>  {
+>>>      memset(START_COUNTERS, 0, END_COUNTERS - START_COUNTERS);
+>>> +#ifdef CONFIG_CONDITION_COVERAGE
+>>> +    memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
+>>> +#endif
+>> ... this:
+>>
+>>     if ( IS_ENABLED(CONFIG_CONDITION_COVERAGE) )
+>>         memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
+>>
+>>>  }
+> Thanks Andrew.
+>
+> IS_ENABLED(CONFIG_CONDITION_COVERAGE) is not the same as #ifdef
+> CONFIG_CONDITION_COVERAGE.
+> When the option is completely undefined, IS_ENABLED() returns 1 (enabled).
+> So even with no CONFIG_CONDITION_COVERAGE defined, the code takes the
+> "enabled" path, which is not what we want here.
 
-PBMT type encoding support:
-- Introduces an enum pbmt_type_t to represent the PBMT field values.
-- Maps types like p2m_mmio_direct_dev to p2m_mmio_direct_io, others default
-  to pbmt_pma.
+What makes you think this?  (No - that's not how IS_ENABLED() works.)
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V6:
- - Drop 's' in word "nesssary" in the comment.
----
-Changes in V5:
- - Moved setting of p2m_mmio_direct_io inside (!is_table) case in p2m_pte_from_mfn().
- - Extend comment about the place of setting A/D bits with explanation
-   why it is done in this way for now.
----
-Changes in V4:
- - p2m_set_permission() updates:
-   - Update permissions for p2m_ram_rw case, make it also executable.
-   - Add pernissions setting for p2m_map_foreign_* types.
-   - Drop setting peromissions for p2m_ext_storage.
-   - Only turn off PTE_VALID bit for p2m_invalid, don't touch other bits.
- - p2m_pte_from_mfn() updates:
-   - Update ASSERT(), add a check that mfn isn't INVALID_MFN (1)
-     explicitly to avoid the case when PADDR_MASK isn't narrow enough to
-     catch the case (1).
-   - Drop unnessary check around call of p2m_set_type() as this check
-     is already included inside p2m_set_type().
- - Introduce new p2m type p2m_first_external to detect that passed type
-   is stored in external storage.
- - Add handling of PTE's A and D bits in pm2_set_permission. Also, set
-   PTE_USER bit. For this cpufeatures.{h and c} were updated to be able
-   to detect availability of Svade extension.
- - Drop grant table related code as it isn't going to be used at the moment.
----
-Changes in V3:
- - s/p2m_entry_from_mfn/p2m_pte_from_mfn.
- - s/pbmt_type_t/pbmt_type.
- - s/pbmt_max/pbmt_count.
- - s/p2m_type_radix_set/p2m_set_type.
- - Rework p2m_set_type() to handle only types which are fited into PTEs bits.
-   Other types will be covered separately.
-   Update arguments of p2m_set_type(): there is no any reason for p2m anymore.
- - p2m_set_permissions() updates:
-   - Update the code in p2m_set_permission() for cases p2m_raw_rw and
-     p2m_mmio_direct_io to set proper type permissions.
-   - Add cases for p2m_grant_map_rw and p2m_grant_map_ro.
-   - Use ASSERT_UNEACHABLE() instead of BUG() in switch cases of
-     p2m_set_permissions.
-   - Add blank lines non-fall-through case blocks in switch cases.
- - Set MFN before permissions are set in p2m_pte_from_mfn().
- - Update prototype of p2m_entry_from_mfn().
----
-Changes in V2:
- - New patch. It was a part of a big patch "xen/riscv: implement p2m mapping
-   functionality" which was splitted to smaller.
----
- xen/arch/riscv/cpufeature.c             |   1 +
- xen/arch/riscv/include/asm/cpufeature.h |   1 +
- xen/arch/riscv/include/asm/page.h       |   8 ++
- xen/arch/riscv/p2m.c                    | 112 +++++++++++++++++++++++-
- 4 files changed, 118 insertions(+), 4 deletions(-)
+IS_ENABLED() exists for the purpose given here, to turn preprocessor
+conditionals into something visible to the compiler.  Notably it allows
+for syntax checking even in the disabled code, which is why it's
+preferred wherever possible.
 
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index b846a106a3..02b68aeaa4 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -138,6 +138,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
-     RISCV_ISA_EXT_DATA(zbs),
-     RISCV_ISA_EXT_DATA(smaia),
-     RISCV_ISA_EXT_DATA(ssaia),
-+    RISCV_ISA_EXT_DATA(svade),
-     RISCV_ISA_EXT_DATA(svpbmt),
- };
- 
-diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
-index 768b84b769..5f756c76db 100644
---- a/xen/arch/riscv/include/asm/cpufeature.h
-+++ b/xen/arch/riscv/include/asm/cpufeature.h
-@@ -37,6 +37,7 @@ enum riscv_isa_ext_id {
-     RISCV_ISA_EXT_zbs,
-     RISCV_ISA_EXT_smaia,
-     RISCV_ISA_EXT_ssaia,
-+    RISCV_ISA_EXT_svade,
-     RISCV_ISA_EXT_svpbmt,
-     RISCV_ISA_EXT_MAX
- };
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index 66cb192316..c6b7acf1b7 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -73,6 +73,14 @@
- #define PTE_SMALL       BIT(10, UL)
- #define PTE_POPULATE    BIT(11, UL)
- 
-+enum pbmt_type {
-+    pbmt_pma,
-+    pbmt_nc,
-+    pbmt_io,
-+    pbmt_rsvd,
-+    pbmt_count,
-+};
-+
- #define PTE_ACCESS_MASK (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE)
- 
- #define PTE_PBMT_MASK   (PTE_PBMT_NOCACHE | PTE_PBMT_IO)
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index f8af73c9d8..8761204720 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -11,6 +11,7 @@
- #include <xen/sections.h>
- #include <xen/xvmalloc.h>
- 
-+#include <asm/cpufeature.h>
- #include <asm/csr.h>
- #include <asm/flushtlb.h>
- #include <asm/p2m.h>
-@@ -360,6 +361,18 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
-     return rc;
- }
- 
-+static int p2m_set_type(pte_t *pte, p2m_type_t t)
-+{
-+    int rc = 0;
-+
-+    if ( t > p2m_first_external )
-+        panic("unimplemeted\n");
-+    else
-+        pte->pte |= MASK_INSR(t, P2M_TYPE_PTE_BITS_MASK);
-+
-+    return rc;
-+}
-+
- static p2m_type_t p2m_get_type(const pte_t pte)
- {
-     p2m_type_t type = MASK_EXTR(pte.pte, P2M_TYPE_PTE_BITS_MASK);
-@@ -390,11 +403,102 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
-     p2m_write_pte(p, pte, clean_cache);
- }
- 
--static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t)
-+static void p2m_set_permission(pte_t *e, p2m_type_t t)
- {
--    panic("%s: hasn't been implemented yet\n", __func__);
-+    e->pte &= ~PTE_ACCESS_MASK;
-+
-+    e->pte |= PTE_USER;
-+
-+    /*
-+     * Two schemes to manage the A and D bits are defined:
-+     *   • The Svade extension: when a virtual page is accessed and the A bit
-+     *     is clear, or is written and the D bit is clear, a page-fault
-+     *     exception is raised.
-+     *   • When the Svade extension is not implemented, the following scheme
-+     *     applies.
-+     *     When a virtual page is accessed and the A bit is clear, the PTE is
-+     *     updated to set the A bit. When the virtual page is written and the
-+     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
-+     *     address translation is in use and is not Bare, the G-stage virtual
-+     *     pages may be accessed or written by implicit accesses to VS-level
-+     *     memory management data structures, such as page tables.
-+     * Thereby to avoid a page-fault in case of Svade is available, it is
-+     * necessary to set A and D bits.
-+     *
-+     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
-+     *       delegates page faults to a lower privilege mode and so OpenSBI
-+     *       isn't expect to handle page-faults occured in lower modes.
-+     *       By setting the A/D bits here, page faults that would otherwise
-+     *       be generated due to unset A/D bits will not occur in Xen.
-+     *
-+     *       Currently, Xen on RISC-V does not make use of the information
-+     *       that could be obtained from handling such page faults, which
-+     *       could otherwise be useful for several use cases such as demand
-+     *       paging, cache-flushing optimizations, memory access tracking,etc.
-+     *
-+     *       To support the more general case and the optimizations mentioned
-+     *       above, it would be better to stop setting the A/D bits here and
-+     *       instead handle page faults that occur due to unset A/D bits.
-+     */
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
-+        e->pte |= PTE_ACCESSED | PTE_DIRTY;
-+
-+    switch ( t )
-+    {
-+    case p2m_map_foreign_rw:
-+    case p2m_mmio_direct_io:
-+        e->pte |= PTE_READABLE | PTE_WRITABLE;
-+        break;
-+
-+    case p2m_ram_rw:
-+        e->pte |= PTE_ACCESS_MASK;
-+        break;
-+
-+    case p2m_invalid:
-+        e->pte &= ~PTE_VALID;
-+        break;
-+
-+    case p2m_map_foreign_ro:
-+        e->pte |= PTE_READABLE;
-+        break;
-+
-+    default:
-+        ASSERT_UNREACHABLE();
-+        break;
-+    }
-+}
-+
-+static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t, bool is_table)
-+{
-+    pte_t e = (pte_t) { PTE_VALID };
-+
-+    pte_set_mfn(&e, mfn);
-+
-+    ASSERT(!(mfn_to_maddr(mfn) & ~PADDR_MASK) || mfn_eq(mfn, INVALID_MFN));
-+
-+    if ( !is_table )
-+    {
-+        switch ( t )
-+        {
-+        case p2m_mmio_direct_io:
-+            e.pte |= PTE_PBMT_IO;
-+            break;
-+
-+        default:
-+            break;
-+        }
-+
-+        p2m_set_permission(&e, t);
-+        p2m_set_type(&e, t);
-+    }
-+    else
-+        /*
-+         * According to the spec and table "Encoding of PTE R/W/X fields":
-+         *   X=W=R=0 -> Pointer to next level of page table.
-+         */
-+        e.pte &= ~PTE_ACCESS_MASK;
- 
--    return (pte_t) { .pte = 0 };
-+    return e;
- }
- 
- #define P2M_TABLE_MAP_NONE 0
-@@ -649,7 +753,7 @@ static int p2m_set_entry(struct p2m_domain *p2m,
-         p2m_clean_pte(entry, p2m->clean_dcache);
-     else
-     {
--        pte_t pte = p2m_pte_from_mfn(mfn, t);
-+        pte_t pte = p2m_pte_from_mfn(mfn, t, false);
- 
-         p2m_write_pte(entry, pte, p2m->clean_dcache);
- 
--- 
-2.51.1
-
+~Andrew
 
