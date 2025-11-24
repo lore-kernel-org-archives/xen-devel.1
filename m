@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D747CCFA466
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170783.1495825 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF95CFD313
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:46:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170786.1495845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVwz-0006d4-Gt; Mon, 24 Nov 2025 12:45:49 +0000
+	id 1vNVxE-0007JB-W7; Mon, 24 Nov 2025 12:46:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170783.1495825; Mon, 24 Nov 2025 12:45:49 +0000
+Received: by outflank-mailman (output) from mailman id 1170786.1495845; Mon, 24 Nov 2025 12:46:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVwz-0006cx-DO; Mon, 24 Nov 2025 12:45:49 +0000
-Received: by outflank-mailman (input) for mailman id 1170783;
- Mon, 24 Nov 2025 12:45:48 +0000
+	id 1vNVxE-0007J2-TA; Mon, 24 Nov 2025 12:46:04 +0000
+Received: by outflank-mailman (input) for mailman id 1170786;
+ Mon, 24 Nov 2025 12:46:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fNsn=6A=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vNVwy-0006ch-Pn
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:45:48 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Sr25=6A=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vNVm3-0001zv-Sh
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:34:32 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7ffc9e6d-c933-11f0-9d18-b5c5bf9af7f9;
- Mon, 24 Nov 2025 13:45:47 +0100 (CET)
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-640d0ec9651so7142005a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:45:47 -0800 (PST)
-Received: from ?IPV6:2003:e5:871a:de00:dd24:7204:f00a:bf44?
- (p200300e5871ade00dd247204f00abf44.dip0.t-ipconnect.de.
- [2003:e5:871a:de00:dd24:7204:f00a:bf44])
+ id eb6e93d1-c931-11f0-9d18-b5c5bf9af7f9;
+ Mon, 24 Nov 2025 13:34:29 +0100 (CET)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-64166a57f3bso6432518a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:34:28 -0800 (PST)
+Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-64536443784sm11828410a12.28.2025.11.24.04.45.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 04:45:36 -0800 (PST)
+ a640c23a62f3a-b7654cf0435sm1285238866b.4.2025.11.24.04.34.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Nov 2025 04:34:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,276 +47,415 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ffc9e6d-c933-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: eb6e93d1-c931-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763988347; x=1764593147; darn=lists.xenproject.org;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vegomO540GgvAFXLXcwEbN1/Dy5RuZjlL/Wc3OvPm9Y=;
-        b=FIZoSj7jfz/2VWdctCZe5uBncRX2DBdWCkEVifIlkod5E7twBf94cYt4hE2/AypDMi
-         nrbExPm8yJmX1kmrnYtnCMzWgUpMHkDmCtBAe5ruMcqScnENCsKK63HIKLy7UILO3/U2
-         RgZ1GUGQDezt1CNS8FWtUfgDkus5Tlvit6fhoksX7R6IPsYW7qg/iuJN01kIcjsFra6D
-         CWgdlkFKPnaOJBRCN69hSixnp6b4HIqtX8w2gJz6kqY8MKWBx3CcLwt9pxrJ3/cLQX+S
-         tMbF2jN7fjYSiMmDp4mE3Fz5Nm0ghMMgpe13vyhFtOcB0HTekjiXmfWu3P0NJxOWVNmk
-         sQsg==
+        d=gmail.com; s=20230601; t=1763987668; x=1764592468; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1tf5y07G66yfKIys8t+ppjceci1h5NAJ62qn07uM+gc=;
+        b=htyE3W/mxxG+V91RGAZfNlN+3XdbN2Mo8j7Vd5P1TQTgQaoPXzAA/B4sKDzdEJJw2a
+         aM3sdONAOk9t0IMvK+9vwzFAAWIGyBYkhCiesFZy6zYgWscTUQqjkPO6o9uDogY6lkmt
+         A29vxaL2ALu7WBpxoLaenpB8ECMkFAX46aj6uByw8vapl5beM5eGZodXQTqpXqEfFM30
+         F0gfeEJVQdoxnj+BoQm/JujhBpJRdZrHzAp5w8KZPQmpSanIlEUyXzPzSJjJoY+/3868
+         +KpLaEdnb+MD+LSvldx9yO2to5WIVvtbLdRR8B00iuVvfdzMyR/6v6P/u0IRxQlmDuH8
+         D0eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763988347; x=1764593147;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vegomO540GgvAFXLXcwEbN1/Dy5RuZjlL/Wc3OvPm9Y=;
-        b=ftQ5aY5b+VczAh3xeE7LN1ilHSRSo6vlHoSijY2vRBGlziWV4oIbAtquA9ZlstDAyk
-         1V/31Qqjt6dw37VIM2r0vR3YMwh3pW1d3612GhMOxIJZNUdLwoUX123EGKln+pfgIUpH
-         /bA+OWlVm1S4xBOmArNuHRNvq0So6CLaMorQ3Zs3LZyduTcOh5ryLmGYdEf/DKYQVJ9J
-         iVCxrwvL+dtpAMODcNQu+hjmbA7SwbggVL7QWCyR30l2qJFk74bwKOlm4ZjLVqPF69l4
-         +8sk6bj3Lvh/0ymadaDCBDC123MsPPc6k3fSOSP2mpMTCvWWHFKssPjmiQfgKFyq6QhS
-         v63w==
-X-Forwarded-Encrypted: i=1; AJvYcCVCH25qeKa+5yjMqFmAAqAySxlRJoEGKR4EhyBvFANceEdUYPuNKepe4URxIo9JCwHaf4pzewDl2As=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzZRdpifygGQahT32SgiQGQyz9Qy9PeUTBrzN3x1USYiU/1JjWC
-	3ddxTTTYXWBce8CaxvtNy6Q20Dg8smhRfJM5JPEI0DBevTzkCIYrFnnHx0lUGGaqdl8=
-X-Gm-Gg: ASbGnctYA1SLugbC+c2j4NYaT/Puu9F93gHOgS9Jgyw7geKPbhxseaspPI16+rW55q0
-	+Ifp488j+AXJy6l020Zngv0uI+nNpWeM2mIUbZKKO0awR+v2E4OUwoGURLU40VP+1cxbygi6TFd
-	32JTA90rzL/I9L40M71pKvZexAEFAL+QpsbENuXHU/8QHxY7QWvvd6XS62mXPru2pOXq/qHJ+Fg
-	8e02itM123Ikb/cqxsOl77P0lvc8cBRUpDBKA1liQqFXI9v/XQghoQ8pMI9TjqL4IP/IOjOMqmE
-	wEK4Z609vFgnO9OViA6sgKMrFF3Z/KJyeaQSPg8BqPa/tBCK8f4DdWz6SE+qs4zaEECbBb1MF/9
-	MtyJmcPzkMuEOjATh5jJwSifSRWpI2VMMgwaDffl5yl+B+LiL4Pa21QG9KJY5UHsO0oABPd7vck
-	dHY7GtKdB9myKcc+JgWU05Y0Ctz1EbG62ePT3lP711y7A9dS3LhmLECPCO+UaehivrGIKeq0Q0d
-	Kpggjl6g6S46dtWJWRRGivUZvlkx3Y/j5f4Sso=
-X-Google-Smtp-Source: AGHT+IHuhYMAVvndKZTfju+ktbACdX8g9isNq/qP/9vWKm3adVSIG7UH/rzspuBIcDh+7pOOVKSQrQ==
-X-Received: by 2002:a05:6402:d0e:b0:640:a9b1:870b with SMTP id 4fb4d7f45d1cf-64555baa940mr10080735a12.14.1763988337277;
-        Mon, 24 Nov 2025 04:45:37 -0800 (PST)
-Message-ID: <a593e8cb-fa56-4301-a7da-ca4b51dfab9a@suse.com>
-Date: Mon, 24 Nov 2025 13:45:36 +0100
+        d=1e100.net; s=20230601; t=1763987668; x=1764592468;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=1tf5y07G66yfKIys8t+ppjceci1h5NAJ62qn07uM+gc=;
+        b=f2Az7y2oVUFeLMyK2y5g+jhI5foJt23Nur7qEWCA7rA8evxbZAPwDXtN2HBPZ6IrE2
+         6Brt/E81SgAWhI6uO5dufJ2jTbQf83rRm6ChoNOwXOXxY+RAEjAzmcVeKlJS7oQd0LiB
+         JZtY7btb0rwohyPtGMJNEv74sexfknkPlq+4Eombs9Hu5Xhxy2nxQwRARVfZPfOJv5Bg
+         EqwLToX+EdQODb7Rf0QYb4MnpzvLFekaO9BC6STTLvKjjaCxeEKAnc7CtCIgz56x/DXR
+         v0LnljwS2GBderzWGjmjQnMtpQKM0ClukPNPmV8bp6caIDOiQECp7enJMCE979vACCDN
+         ReRA==
+X-Gm-Message-State: AOJu0Yx6IvyHL1+F5kGCAxe+FKhpi9pWtuWfjVSK7DxwHqLk7Ld2T17L
+	i7ClVumkS9sON9NylURKPipzlmgNajs0HNzKyF8ZqzB7k2O0L+trC0Tq7JdMPTWa
+X-Gm-Gg: ASbGncvnKGvk85Rw4H53Q+4X8xaiVz5RlIx0kebiwfs92aN5CmQiqz8m+Cu+u73roNm
+	I4xBcH1YOV3JOw+LlW3BxqYHDW5vB3SsQr9tHrtqqgvRwaf7UpWlWCEWkd2g2Gs00YmyG9lVV8e
+	SxyLDPjmc6ti9dDJKKSc9+wmUNGQzvOCi2zPgQM5JOuPewtlTu57M4xD9igzWacWh/fGZOjQePL
+	i5QtbTP5DK10abpW5BEP57D3vCidloCVxAc9s9DwDwNY9rtIYlDDKJzF388TrjdxliPSABtQBer
+	8XUnGgdGw38qoEo4G0dbjXVYkSU+c0kUt7oKlDGLf2VmMqhBrml61AzbVKxo/ZPIpMGJBCiHt8i
+	cZEpd43ZwpTi//QFLIDwLPKJ2NiLLdDuAnsBrS64jZ7fpf0f+n5nGRGcKuoTYJ8lhcusi2I99Jp
+	wjiRy+5/QeFCrwNW0sEZ9M4kO7Sr/2BLwAXvuwOU6wT+G502JKUUXDIsUhtzAiJJ1T8g==
+X-Google-Smtp-Source: AGHT+IFf5uJB9I56FaCOR4OJFITJ+cq2dcNL5nOk1Op21qlMLVT2d/W8fMntpHHZJ+nDgZ++iGq61A==
+X-Received: by 2002:a17:907:d8f:b0:b70:ac7a:2a93 with SMTP id a640c23a62f3a-b7671865badmr1272975466b.43.1763987668044;
+        Mon, 24 Nov 2025 04:34:28 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 18/19] xen/riscv: add support of page lookup by GFN
+Date: Mon, 24 Nov 2025 13:33:51 +0100
+Message-ID: <48a58cde3de6a459885465c6d29d00d046ae4a37.1763986955.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.51.1
+In-Reply-To: <cover.1763986955.git.oleksii.kurochko@gmail.com>
+References: <cover.1763986955.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] build: add make macro for making file from file.in
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20251121132332.23514-1-jgross@suse.com>
- <20251121132332.23514-2-jgross@suse.com>
- <d34e3e86-c51a-49b3-8b46-140526755f0f@suse.com>
- <826037a5-dacf-434f-90d9-8f12e61bdd6e@suse.com>
- <0ece9df6-8a04-4ffa-bcf4-d7a3fd4bbef4@suse.com>
- <bf7e1a66-1696-477a-bdef-79b08df0b57c@suse.com>
- <bbcaf4f2-c52e-4b3e-ab6a-ca5020a8b786@suse.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <bbcaf4f2-c52e-4b3e-ab6a-ca5020a8b786@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------rnClgptvmRmrOv993EFk3d0G"
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------rnClgptvmRmrOv993EFk3d0G
-Content-Type: multipart/mixed; boundary="------------hWJkwhnAaPtL2FfiBw0dRqiN";
- protected-headers="v1"
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Message-ID: <a593e8cb-fa56-4301-a7da-ca4b51dfab9a@suse.com>
-Subject: Re: [PATCH v3 1/4] build: add make macro for making file from file.in
-References: <20251121132332.23514-1-jgross@suse.com>
- <20251121132332.23514-2-jgross@suse.com>
- <d34e3e86-c51a-49b3-8b46-140526755f0f@suse.com>
- <826037a5-dacf-434f-90d9-8f12e61bdd6e@suse.com>
- <0ece9df6-8a04-4ffa-bcf4-d7a3fd4bbef4@suse.com>
- <bf7e1a66-1696-477a-bdef-79b08df0b57c@suse.com>
- <bbcaf4f2-c52e-4b3e-ab6a-ca5020a8b786@suse.com>
-In-Reply-To: <bbcaf4f2-c52e-4b3e-ab6a-ca5020a8b786@suse.com>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+Introduce helper functions for safely querying the P2M (physical-to-machine)
+mapping:
+ - add p2m_read_lock(), p2m_read_unlock(), and p2m_is_locked() for managing
+   P2M lock state.
+ - Implement p2m_get_entry() to retrieve mapping details for a given GFN,
+   including MFN, page order, and validity.
+ - Introduce p2m_get_page_from_gfn() to convert a GFN into a page_info
+   pointer, acquiring a reference to the page if valid.
+ - Introduce get_page().
 
---------------hWJkwhnAaPtL2FfiBw0dRqiN
-Content-Type: multipart/mixed; boundary="------------ZmADpcFg0DLlpAexXdK27IJ0"
+Implementations are based on Arm's functions with some minor modifications:
+- p2m_get_entry():
+  - Reverse traversal of page tables, as RISC-V uses the opposite level
+    numbering compared to Arm.
+  - Removed the return of p2m_access_t from p2m_get_entry() since
+    mem_access_settings is not introduced for RISC-V.
+  - Updated BUILD_BUG_ON() to check using the level 0 mask, which corresponds
+    to Arm's THIRD_MASK.
+  - Replaced open-coded bit shifts with the BIT() macro.
 
---------------ZmADpcFg0DLlpAexXdK27IJ0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V6:
+ - Move if-condition with initialization up in p2m_get_page_from_gfn().
+ - Pass p2mt to the call of p2m_get_entry() inside p2m_get_page_from_gfn()
+   to avoid an issue when 't' is passed NULL. With p2mt passed to p2m_get_entry()
+   we will recieve a proper type and so the rest of the function will able to
+   continue use a proper type.
+- In check_outside_boundary() in the case when is_lower == true fill the bottom
+  bits of masked_gfn with all 1s.
+- Update code of check_outside_boundary() to return proper level in the case when
+  `level` is equal to 0.
+- Add ASSERT(p2m) in check_outside_boundary() to be sure that p2m isn't NULL as
+  P2M_LEVEL_MASK() depends on p2m value.
+---
+Changes in V5:
+ - Use introduced in earlier patches P2M_DECLARE_OFFSETS() instead of
+   DECLARE_OFFSETS().
+ - Drop blank line before check_outside_boundary().
+ - Use more readable version of if statements inside check_outside_boundary().
+ - Accumulate mask in check_outside_boundary() instead of re-writing it for
+   each page table level to have correct gfns for comparison.
+ - Set argument `t` of p2m_get_entry() to p2m_invalid by default.
+ - Drop checking of (rc == P2M_TABLE_MAP_NOMEM ) when p2m_next_level(...,false,...)
+   is called.
+ - Add ASSERT(mfn & (BIT(P2M_LEVEL_ORDER(level), UL) - 1)); in p2m_get_entry()
+   to be sure that recieved `mfn` has cleared lowest bits.
+ - Drop `valid` argument from p2m_get_entry(), it is not needed anymore.
+ - Drop p2m_lookup(), use p2m_get_entry() explicitly inside p2m_get_page_from_gfn().
+ - Update the commit message.
+---
+Changes in V4:
+ - Update prototype of p2m_is_locked() to return bool and accept pointer-to-const.
+ - Correct the comment above p2m_get_entry().
+ - Drop the check "BUILD_BUG_ON(XEN_PT_LEVEL_MAP_MASK(0) != PAGE_MASK);" inside
+   p2m_get_entry() as it is stale and it was needed to sure that 4k page(s) are
+   used on L3 (in Arm terms) what is true for RISC-V. (if not special extension
+   are used). It was another reason for Arm to have it (and I copied it to RISC-V),
+   but it isn't true for RISC-V. (some details could be found in response to the
+   patch).
+ - Style fixes.
+ - Add explanatory comment what the loop inside "gfn is higher then the highest
+   p2m mapping" does. Move this loop to separate function check_outside_boundary()
+   to cover both boundaries (lower_mapped_gfn and max_mapped_gfn).
+ - There is not need to allocate a page table as it is expected that
+   p2m_get_entry() normally would be called after a corresponding p2m_set_entry()
+   was called. So change 'true' to 'false' in a page table walking loop inside
+   p2m_get_entry().
+ - Correct handling of p2m_is_foreign case inside p2m_get_page_from_gfn().
+ - Introduce and use P2M_LEVEL_MASK instead of XEN_PT_LEVEL_MASK as it isn't take
+   into account two extra bits for root table in case of P2M.
+ - Drop stale item from "change in v3" - Add is_p2m_foreign() macro and connected stuff.
+ - Add p2m_read_(un)lock().
+---
+Changes in V3:
+ - Change struct domain *d argument of p2m_get_page_from_gfn() to
+   struct p2m_domain.
+ - Update the comment above p2m_get_entry().
+ - s/_t/p2mt for local variable in p2m_get_entry().
+ - Drop local variable addr in p2m_get_entry() and use gfn_to_gaddr(gfn)
+   to define offsets array.
+ - Code style fixes.
+ - Update a check of rc code from p2m_next_level() in p2m_get_entry()
+   and drop "else" case.
+ - Do not call p2m_get_type() if p2m_get_entry()'s t argument is NULL.
+ - Use struct p2m_domain instead of struct domain for p2m_lookup() and
+   p2m_get_page_from_gfn().
+ - Move defintion of get_page() from "xen/riscv: implement mfn_valid() and page reference, ownership handling helpers"
+---
+Changes in V2:
+ - New patch.
+---
 
-T24gMjQuMTEuMjUgMTM6MTgsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAyNC4xMS4yMDI1
-IDEyOjI3LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gT24gMjQuMTEuMjUgMTI6MTUsIEph
-biBCZXVsaWNoIHdyb3RlOg0KPj4+IE9uIDI0LjExLjIwMjUgMTI6MDUsIErDvHJnZW4gR3Jv
-w58gd3JvdGU6DQo+Pj4+IE9uIDI0LjExLjI1IDExOjQxLCBKYW4gQmV1bGljaCB3cm90ZToN
-Cj4+Pj4+IE9uIDIxLjExLjIwMjUgMTQ6MjMsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6DQo+Pj4+
-Pj4gLS0tIGEvQ29uZmlnLm1rDQo+Pj4+Pj4gKysrIGIvQ29uZmlnLm1rDQo+Pj4+Pj4gQEAg
-LTE1OSw2ICsxNTksMTkgQEAgZGVmaW5lIG1vdmUtaWYtY2hhbmdlZA0KPj4+Pj4+ICAgICAJ
-aWYgISBjbXAgLXMgJCgxKSAkKDIpOyB0aGVuIG12IC1mICQoMSkgJCgyKTsgZWxzZSBybSAt
-ZiAkKDEpOyBmaQ0KPj4+Pj4+ICAgICBlbmRlZg0KPj4+Pj4+ICAgICANCj4+Pj4+PiArUEFU
-SF9GSUxFUyA6PSBQYXRocw0KPj4+Pj4+ICtJTkNfRklMRVMgPSAkKGZvcmVhY2ggZiwgJChQ
-QVRIX0ZJTEVTKSwgJChYRU5fUk9PVCkvY29uZmlnLyQoZikubWspDQo+Pj4+Pj4gKw0KPj4+
-Pj4+ICtpbmNsdWRlICQoSU5DX0ZJTEVTKQ0KPj4+Pj4+ICsNCj4+Pj4+PiArQlVJTERfTUFL
-RV9WQVJTID0gJChmb3JlYWNoIGYsICQoUEFUSF9GSUxFUyksICQoc2hlbGwgYXdrICckJDIg
-PT0gIjo9IiB7IHByaW50ICQkMTsgfScgJChYRU5fUk9PVCkvY29uZmlnLyQoZikubWsuaW4p
-KQ0KPj4+Pj4NCj4+Pj4+IEZlZWxzIGxpa2UgbXkgcHJpb3IgY29tbWVudHMgd2VyZW4ndCBy
-ZWFsbHkgYWRkcmVzc2VkLiBJIGNvbnRpbnVlIHRvIHRoaW5rIHRoYXQNCj4+Pj4+IG5vbmUg
-b2YgdGhlIGFib3ZlIGlzIHBhcnQgb2Ygd2hhdCB0aGUgc3ViamVjdCBzYXlzLg0KPj4+Pg0K
-Pj4+PiBJIHJlYWxseSBkb24ndCB1bmRlcnN0YW5kIHlvdXIgY29uY2VybiBoZXJlLg0KPj4+
-Pg0KPj4+PiBGb3IgcmVwbGFjaW5nIHRoZSBAbWFya2Vyc0AgbWFrZSBuZWVkcyB0byBrbm93
-IHdoYXQgc2hvdWxkIGJlIHJlcGxhY2VkLg0KPj4+PiBTbyBpdCBuZWVkcyB0byBzY2FuIHRo
-ZSBmaWxlcyBjb250YWluaW5nIHRoZSBtYXJrZXJzIGFuZCBnYXRoZXIgdGhlbS4NCj4+Pj4g
-VGhpcyBpcyB3aGF0IGlzIGRvbmUgYWJvdmUuDQo+Pj4+DQo+Pj4+IEluIHRoZSBmaW5hbCBt
-YWNybyBiZWxvdyB0aGUgcmVwbGFjZW1lbnRzIGFyZSBkb25lIHRoZW4uIEhvdyB3b3VsZCB5
-b3UNCj4+Pj4gaGFuZGxlIHRoYXQ/DQo+Pj4NCj4+PiBCeSBwYXNzaW5nIChhbm90aGVyKSBh
-cmd1bWVudCB0byB0aGUgbWFjcm8sIGZvciBleGFtcGxlLiBBcyBpbmRpY2F0ZWQNCj4+PiBl
-YXJsaWVyLCBkaWZmZXJlbnQgc3ViLXRyZWVzIG1heSBoYXZlIGRpZmZlcmVudCBwbGFjZXMg
-d2hlcmUgdGhlc2UNCj4+PiBkZWZpbml0aW9ucyBsaXZlLCBhbmQgdGhleSB3b3VsZCB3YW50
-IHRvIGJlIGFibGUgdG8gcGFzcyB0aGF0IGluDQo+Pj4gKGlkZWFsbHkgd2l0aG91dCBuZWVk
-aW5nIHRvIHB1dCB0aGlzIGluIGEgY29tbW9uIHBhcnQgb2YgdGhlIHRyZWUpLg0KPj4NCj4+
-IEkgZG9uJ3QgZ2V0IHdoYXQgeW91IHdhbnQgdG8gcGFzcyBpbiBhZGRpdGlvbmFsbHkuDQo+
-Pg0KPj4gSSd2ZSBhbHJlYWR5IGNoYW5nZWQgdGhlIG1hY3JvIGFuZCB0aGUgTWFrZWZpbGVz
-IHRvIGJlIGFibGUgdG8gYWRkIGFub3RoZXINCj4+IG1hcmtlciBmaWxlIHRvIHRoZSBQQVRI
-X0ZJTEVTIHZhcmlhYmxlLiBXaGF0IGVsc2UgZG8geW91IG5lZWQ/DQo+IA0KPiBXZWxsLCB0
-aGF0J3Mgc2ltcGx5IGFuIG9kZCB3YXkgb2YgcGFzc2luZyBhIHBhcmFtZXRlci4gUGx1cywg
-dGhlIGV4dHJhIGZpbGUNCg0KV2UgZG8gdGhhdCBhbGwgdGhlIHRpbWVzLCBlLmcuIGJ5ICJP
-QkoteSArPSAuLi4iDQoNCj4gd29uJ3QgYWZmZWN0IElOQ19GSUxFUywgb3IgbW9yZSBwcmVj
-aXNlbHkgaXRzIHVzZSBpbiB0aGUgaW5jbHVkZSBkaXJlY3RpdmUNCj4gaW4gcGF0Y2ggMTog
-QXQgbGVhc3QgYWl1aSwgJChJTkNfRklMRVMpIGlzIGV4cGFuZGVkIGF0IHRoZSBwb2ludCB3
-aGVuIHRoZQ0KPiBkaXJlY3RpdmUgaXMgcHJvY2Vzc2VkLiBIZW5jZSB3aHkgeW91IG5lZWQg
-dG8gb3Blbi1jb2RlIGFub3RoZXIgaW5jbHVkZQ0KPiB0aGVyZS4NCg0KVGhlIElOQ19GSUxF
-UyB2YXJpYWJsZSBpcyBtb3N0bHkgbmVlZGVkIGZvciBzcGVjaWZ5aW5nIHRoZSBkZXBlbmRl
-bmNlIG9mDQp0aGUgZ2VuZXJhdGVkIGZpbGVzIG9uIHRoZSBmaWxlcyBtZW50aW9uZWQgaW4g
-UEFUSF9GSUxFUy4NCg0KSXQgbWlnaHQgYmUgYmV0dGVyIHRvIGp1c3QgaGF2ZSAiLWluY2x1
-ZGUgJChYRU5fUk9PVC9jb25maWcvUGF0aHMubWsiIGluDQpDb25maWcubWssIG1hdGNoaW5n
-IHRoZSBzZXR0aW5nIG9mIFBBVEhfRklMRVMgdGhlcmUuDQoNCg0KSnVlcmdlbg0K
---------------ZmADpcFg0DLlpAexXdK27IJ0
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+ xen/arch/riscv/include/asm/p2m.h |  21 ++++
+ xen/arch/riscv/mm.c              |  13 +++
+ xen/arch/riscv/p2m.c             | 183 +++++++++++++++++++++++++++++++
+ 3 files changed, 217 insertions(+)
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index b48693a2b4..f63b5dec99 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -41,6 +41,9 @@
+ 
+ #define P2M_GFN_LEVEL_SHIFT(lvl) (P2M_LEVEL_ORDER(lvl) + PAGE_SHIFT)
+ 
++#define P2M_LEVEL_MASK(p2m, lvl) \
++    (P2M_TABLE_OFFSET(p2m, lvl) << P2M_GFN_LEVEL_SHIFT(lvl))
++
+ #define paddr_bits PADDR_BITS
+ 
+ /* Get host p2m table */
+@@ -234,6 +237,24 @@ static inline bool p2m_is_write_locked(struct p2m_domain *p2m)
+ 
+ unsigned long construct_hgatp(const struct p2m_domain *p2m, uint16_t vmid);
+ 
++static inline void p2m_read_lock(struct p2m_domain *p2m)
++{
++    read_lock(&p2m->lock);
++}
++
++static inline void p2m_read_unlock(struct p2m_domain *p2m)
++{
++    read_unlock(&p2m->lock);
++}
++
++static inline bool p2m_is_locked(const struct p2m_domain *p2m)
++{
++    return rw_is_locked(&p2m->lock);
++}
++
++struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
++                                        p2m_type_t *t);
++
+ #endif /* ASM__RISCV__P2M_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index e25f995b72..e9ce182d06 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -673,3 +673,16 @@ struct domain *page_get_owner_and_reference(struct page_info *page)
+ 
+     return owner;
+ }
++
++bool get_page(struct page_info *page, const struct domain *domain)
++{
++    const struct domain *owner = page_get_owner_and_reference(page);
++
++    if ( likely(owner == domain) )
++        return true;
++
++    if ( owner != NULL )
++        put_page(page);
++
++    return false;
++}
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index b29c0a220a..c356200fc6 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -1061,3 +1061,186 @@ int map_regions_p2mt(struct domain *d,
+ 
+     return rc;
+ }
++
++/*
++ * p2m_get_entry() should always return the correct order value, even if an
++ * entry is not present (i.e. the GFN is outside the range):
++ *   [p2m->lowest_mapped_gfn, p2m->max_mapped_gfn]    (1)
++ *
++ * This ensures that callers of p2m_get_entry() can determine what range of
++ * address space would be altered by a corresponding p2m_set_entry().
++ * Also, it would help to avoid costly page walks for GFNs outside range (1).
++ *
++ * Therefore, this function returns true for GFNs outside range (1), and in
++ * that case the corresponding level is returned via the level_out argument.
++ * Otherwise, it returns false and p2m_get_entry() performs a page walk to
++ * find the proper entry.
++ */
++static bool check_outside_boundary(const struct p2m_domain *p2m, gfn_t gfn,
++                                   gfn_t boundary, bool is_lower,
++                                   unsigned int *level_out)
++{
++    unsigned int level = P2M_ROOT_LEVEL(p2m);
++    bool ret = false;
++
++    ASSERT(p2m);
++
++    if ( is_lower ? gfn_x(gfn) < gfn_x(boundary)
++                  : gfn_x(gfn) > gfn_x(boundary) )
++    {
++        unsigned long mask = 0;
++
++        for ( ; level; level-- )
++        {
++            unsigned long masked_gfn;
++
++            mask |= PFN_DOWN(P2M_LEVEL_MASK(p2m, level));
++            masked_gfn = gfn_x(gfn) & mask;
++            masked_gfn |= (is_lower * (BIT(P2M_LEVEL_ORDER(level), UL) - 1));
++
++            if ( is_lower ? masked_gfn < gfn_x(boundary)
++                          : masked_gfn > gfn_x(boundary) )
++                break;
++        }
++
++        ret = true;
++    }
++
++    if ( level_out )
++        *level_out = level;
++
++    return ret;
++}
++
++/*
++ * Get the details of a given gfn.
++ *
++ * If the entry is present, the associated MFN will be returned and the
++ * p2m type of the mapping.
++ * The page_order will correspond to the order of the mapping in the page
++ * table (i.e it could be a superpage).
++ *
++ * If the entry is not present, INVALID_MFN will be returned and the
++ * page_order will be set according to the order of the invalid range.
++ */
++static mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
++                           p2m_type_t *t,
++                           unsigned int *page_order)
++{
++    unsigned int level = 0;
++    pte_t entry, *table;
++    int rc;
++    mfn_t mfn = INVALID_MFN;
++    P2M_BUILD_LEVEL_OFFSETS(p2m, offsets, gfn_to_gaddr(gfn));
++
++    ASSERT(p2m_is_locked(p2m));
++
++    if ( t )
++        *t = p2m_invalid;
++
++    if ( check_outside_boundary(p2m, gfn, p2m->lowest_mapped_gfn, true,
++                                &level) )
++        goto out;
++
++    if ( check_outside_boundary(p2m, gfn, p2m->max_mapped_gfn, false, &level) )
++        goto out;
++
++    table = p2m_get_root_pointer(p2m, gfn);
++
++    /*
++     * The table should always be non-NULL because the gfn is below
++     * p2m->max_mapped_gfn and the root table pages are always present.
++     */
++    if ( !table )
++    {
++        ASSERT_UNREACHABLE();
++        level = P2M_ROOT_LEVEL(p2m);
++        goto out;
++    }
++
++    for ( level = P2M_ROOT_LEVEL(p2m); level; level-- )
++    {
++        rc = p2m_next_level(p2m, false, level, &table, offsets[level]);
++        if ( rc == P2M_TABLE_MAP_NONE )
++            goto out_unmap;
++
++        if ( rc != P2M_TABLE_NORMAL )
++            break;
++    }
++
++    entry = table[offsets[level]];
++
++    if ( pte_is_valid(entry) )
++    {
++        if ( t )
++            *t = p2m_get_type(entry);
++
++        mfn = pte_get_mfn(entry);
++
++        ASSERT(!(mfn_x(mfn) & (BIT(P2M_LEVEL_ORDER(level), UL) - 1)));
++
++        /*
++         * The entry may point to a superpage. Find the MFN associated
++         * to the GFN.
++         */
++        mfn = mfn_add(mfn,
++                      gfn_x(gfn) & (BIT(P2M_LEVEL_ORDER(level), UL) - 1));
++    }
++
++ out_unmap:
++    unmap_domain_page(table);
++
++ out:
++    if ( page_order )
++        *page_order = P2M_LEVEL_ORDER(level);
++
++    return mfn;
++}
++
++struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
++                                        p2m_type_t *t)
++{
++    struct page_info *page;
++    p2m_type_t p2mt;
++    mfn_t mfn;
++
++    p2m_read_lock(p2m);
++    mfn = p2m_get_entry(p2m, gfn, &p2mt, NULL);
++
++    if ( t )
++        *t = p2mt;
++
++    if ( !mfn_valid(mfn) )
++    {
++        p2m_read_unlock(p2m);
++        return NULL;
++    }
++
++    page = mfn_to_page(mfn);
++
++    /*
++     * get_page won't work on foreign mapping because the page doesn't
++     * belong to the current domain.
++     */
++    if ( unlikely(p2m_is_foreign(p2mt)) )
++    {
++        const struct domain *fdom = page_get_owner_and_reference(page);
++
++        p2m_read_unlock(p2m);
++
++        if ( fdom )
++        {
++            if ( likely(fdom != p2m->domain) )
++                return page;
++
++            ASSERT_UNREACHABLE();
++            put_page(page);
++        }
++
++        return NULL;
++    }
++
++    p2m_read_unlock(p2m);
++
++    return get_page(page, p2m->domain) ? page : NULL;
++}
+-- 
+2.51.1
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
-
---------------ZmADpcFg0DLlpAexXdK27IJ0--
-
---------------hWJkwhnAaPtL2FfiBw0dRqiN--
-
---------------rnClgptvmRmrOv993EFk3d0G
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmkkU3AFAwAAAAAACgkQsN6d1ii/Ey8A
-Twf/UfgaTjPzBNiEDKkHM5GoZcmlG/I5d9/uYnLSuL6dY/LBtGkYTjcfT4S665kOt8PCMjDgLz4o
-+OysAij2an68us2lgR+M6XGKEEqwAy7FPq9iA0q7B9gIZAgSeCsyYalqzTCZ6XFdTp6tvP6xebOg
-FYsAR7vkq5KjMmFqP4ytxhFNAHE9pvw6fgU9fashs4QgkO25y1UoB0v6oDCRYZ1E9NsqTt+udz4K
-UhvSAc/N/3LA2Uo4P329LEeA6/dR3sVs1LA9jaQs1JZmypOnD3QuskXTno4cVC5vAeQRcaFO9KCp
-Du0GT8YCKBQJmCV3dKpjPYztCxWS4XApo4i9PPJmfg==
-=OMtR
------END PGP SIGNATURE-----
-
---------------rnClgptvmRmrOv993EFk3d0G--
 
