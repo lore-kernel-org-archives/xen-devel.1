@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F328ECFA466
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:31:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170525.1495584 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DB4CFD313
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:32:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170531.1495595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVjF-0007o6-0w; Mon, 24 Nov 2025 12:31:37 +0000
+	id 1vNVjj-0008Pr-8r; Mon, 24 Nov 2025 12:32:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170525.1495584; Mon, 24 Nov 2025 12:31:37 +0000
+Received: by outflank-mailman (output) from mailman id 1170531.1495595; Mon, 24 Nov 2025 12:32:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVjE-0007nz-UJ; Mon, 24 Nov 2025 12:31:36 +0000
-Received: by outflank-mailman (input) for mailman id 1170525;
- Mon, 24 Nov 2025 12:31:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Qo8f=6A=gmail.com=samaan.dehghan@srs-se1.protection.inumbo.net>)
- id 1vNVj3-0004cg-Jp
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:31:25 +0000
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [2607:f8b0:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7d159e6a-c931-11f0-9d18-b5c5bf9af7f9;
- Mon, 24 Nov 2025 13:31:24 +0100 (CET)
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-297ef378069so37867615ad.3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:31:24 -0800 (PST)
+	id 1vNVjj-0008Pk-5Q; Mon, 24 Nov 2025 12:32:07 +0000
+Received: by outflank-mailman (input) for mailman id 1170531;
+ Mon, 24 Nov 2025 12:32:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=CeM5=6A=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vNVcn-0001k4-Mn
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:24:57 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 95c80395-c930-11f0-980a-7dc792cee155;
+ Mon, 24 Nov 2025 13:24:55 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-477563e28a3so28785215e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:24:55 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-477a9e051d8sm152580145e9.5.2025.11.24.04.24.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Nov 2025 04:24:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,201 +47,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7d159e6a-c931-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 95c80395-c930-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763987483; x=1764592283; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f8d5FCDqF8Eyi33xLvv1HZy4mmEZ4/sGV8dAZOJVn5g=;
-        b=I2WiaEtk/UyBbJ5EjMl0CwYJ7M2dWBoYd7Ret9YHvoyIcOq6vwMRUWjMjEMrQeGN1r
-         OEb2p8olWwUpFnCOJr3epspCxW9eEwPt+uuODXMSHB4mQRqEy3t+xIzySWQKRBOul2Ki
-         T/1PtvDW4CjZvsgWC3u/MVmQoU6Vi+2NSvGUcWElco2tljgUMnqDjZykJZg64mflXlVd
-         V9YDZrVCu2qKlkjE0kdJy7EPjQVaQ9QH6FWfXAl58BDWNBpP+3bJhRSiGdbdzFUS50IT
-         NqYJRMk3f8rnPldnlV81yOOAVKZw50Ba1mPRzKmNsEN9pQvRZkZ0bz5EKM7k8iVVvRqe
-         uczQ==
+        d=suse.com; s=google; t=1763987095; x=1764591895; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=1XcpEuyq7I/RcIRhR0rcpzEEX5hVnSggdYKamo6kWLA=;
+        b=X+g6dkq0B8ba7rTY3ORtLxnek7yKfMLuESCav8L/GrY+unXXmiruGR4ipp7TrYGyhO
+         +o5V1l04xrhTEpVLS5+OmqaMUjbLT0UaeiOTKHYdC5SA0tvh391XQsPX3QNNvlheY6Et
+         2ntV5h9C/w5Z7mWXqNiI8IhwaFJ0nn3iTIfYsAWdQvqtiYzmotmcZGyoA6ZrpwwmrzSR
+         BDHsRvNhs7sY5naUQvY0PQ9REGh6xzWCwKJsikUVyN5oUXaBwTWMaNdBkuqt8VhdfIsV
+         hzn9ofVSMp4TDoiO5+ZWkyf+st04b99yvFUCW0ewAZSGUSbOoOmsfLhhAyRd+F/V1xuq
+         uBBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763987483; x=1764592283;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=f8d5FCDqF8Eyi33xLvv1HZy4mmEZ4/sGV8dAZOJVn5g=;
-        b=QEG4Kzd3c1uOowb6ZWx2L5SVmSqAvyWo4xKz1grdew7C3YO59UB++giPlRT+S/9Vjj
-         RxYww59Xvje5Bg34shYfSvKIfq7w4hOSvABtLzXQ5kW3VITzYLyMsz0KFNqY8172wuhQ
-         xa22Z5WkmRFGOR3uP/XLgvszVWyYsqPQtx92KwQpa3lVpC1QjO0dJFaiP/s28Ge9/Qld
-         USbG0RqCNyBpZaIctCNgYZbJwhcCNAKcVjSEgAs4sIXZoSIYPage7mX5vzv2PVG90hZL
-         vQGYOzBJwuaPZgFbfDtCISpWe59w2jQ5bnmUEsmdB9W75Gtcqw1FoHdBeXMVWE9gP3qz
-         IdNg==
-X-Gm-Message-State: AOJu0YwkUI9s7GzRwjRyzVr3Cq7UWy6bpB6BIM0HUxJGtPyvfV9y6Vu1
-	XQ8rdXJp9WFSMMR+uGQIJVF5es5eqg8dhaXiBqP3UUEXnI804a8bq/DfNl6mRmFJsek6B65wxdP
-	x3EwV4U8rFO6XRa0oxu9QL7Gimwxnxw==
-X-Gm-Gg: ASbGncu0ufr+iXTdJmVyx2nCfGCB8qEsiJgoTYJpAcWzdzLSIhgnR8drb4Qr72V5Ow+
-	ThooYtusnTNmSx3dyjvGXZn22wEgSIEm/AHm3eXciy+P+WaTrFRFuAoCRGyVV4b6Xw9vinQimYs
-	Mtb7hd/nZ+xkITcD5djKg2P98Hy/s7Y/e3Kx8DnI8BO4j7603ZhMi/3Q9tOeR9sXY6drJSo4R4D
-	bLty/3Wz737eKJukCRn+afxoyLx/QC9Me96gTY3CA8HmmJHwa2pNQbUB+qFa3hAcZIoP7ZsJlD3
-	HswygOmQH7BRic+itA5ARY75
-X-Google-Smtp-Source: AGHT+IHQGPCuzF4kn0l3NguKNQ98NpEXDZz6EzTvD/PxRFxEpjSHQRpgj9QdIglFCYkKIVghDWgbQ1ss9MPOIPORjtc=
-X-Received: by 2002:a17:90b:5183:b0:340:7b2e:64cc with SMTP id
- 98e67ed59e1d1-34733e5c408mr11531925a91.15.1763987482923; Mon, 24 Nov 2025
- 04:31:22 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763987095; x=1764591895;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1XcpEuyq7I/RcIRhR0rcpzEEX5hVnSggdYKamo6kWLA=;
+        b=R5nGQumWbpdp7cGlKB5AJvILRKkhYCi8cxuJ1UfyaDP1a9Py04kiGpbgK6DhQaVV2h
+         kBEVhL40JfFzL/qorN4pV2598Ge5lfHnwNpzyrtYJMCROywAj5vv/YiDTC6LuIWBPMyr
+         4bi4hg2iigvyQ8wAEckYyfStKm62BjDPIC1h5LILm4hIAaylJt5V/oGUtOECcVaSdzYd
+         1V5W2hYybMRDUvfq6xhxxzVbSUNSVz83dEix+aa1MWha8wtB3pudI0e8jXcLMAXu17d2
+         H7bXsau/ydIn7qiF7+R8Hels7QmAr5hygtKAzjbkID6b+bd/x+pCoNP8XoEK6vg0Xc9i
+         BI9g==
+X-Gm-Message-State: AOJu0YzXEWRKg2uC2+EYbAaIv7qQLlsiKx3Fd+fo/GquDJUl/rEW3i2w
+	H4OT8+O84YTeLhv7g9TqC92wEG+YWrlOee6UKQoIqxwhzPOWanA2mQaWFopDZur+zEJsn1magAL
+	T1Bg=
+X-Gm-Gg: ASbGncsQCbWKdSZ1e62Y2fmZvceJSneetZcVlnWZwakiGLdThOekE9MZqA70iHBMpay
+	6N7ksfXSfHjEMSuWZFAJrKvLxdfuu50x9lKo0ASEEtHaee1DmBM3SupOb1ICpKsYK7mTSAQE+bs
+	fnxguanIwVKiHoq4YE8uxkhAyhJ3BQ8ROIGNjUobbhdFJTfRWMhVuqFIrgAPC3W/5csQmLwVJhQ
+	MeEYE2SsvVRxciyx/3eTj3+PAHycLFGAoFWeOH+h833OUdybtGzxm0eUReaFZ6ZlfzW2uP5GjXl
+	YKsppKHhmXXorNlwUAa9jxeMZ69JPxJFSxTjOsmtZdC4ntUnH0ugZE57tjF8X6WiXWP9dfK5KFk
+	ePf9/V7xNaGlWJVGumF3aaJ9KBGzj2BS/2tM+CzYaJ3ToIL5XiDWk7xnSeWW3hvX6MEc1VVzfG2
+	eb49jFU3YEOQhn5DyZcXOKFur1u27Us+avN2GMYAfPsWs1X2i/7eoKjEG9PjCINCgIqgTntjREU
+	tI=
+X-Google-Smtp-Source: AGHT+IEhoUys/5YoCehFDJB85Azw48BWOB2bzoMrzEb3G0ZMOMPXZ+CY/LZCV8vBna5lVpSUbk1MRA==
+X-Received: by 2002:a05:600c:154e:b0:46e:2815:8568 with SMTP id 5b1f17b1804b1-477c05137f4mr114025495e9.10.1763987095260;
+        Mon, 24 Nov 2025 04:24:55 -0800 (PST)
+Message-ID: <27f467a9-a507-4832-850e-190aff8c04aa@suse.com>
+Date: Mon, 24 Nov 2025 13:24:57 +0100
 MIME-Version: 1.0
-References: <3bb418ae6a36a9ac89c697a417fa0745fa9ac702.1763949990.git.samaan.dehghan@gmail.com>
- <9c76a959-51c0-4eb7-9d05-ba4441318faa@citrix.com>
-In-Reply-To: <9c76a959-51c0-4eb7-9d05-ba4441318faa@citrix.com>
-From: Saman Dehghan <samaan.dehghan@gmail.com>
-Date: Mon, 24 Nov 2025 06:31:11 -0600
-X-Gm-Features: AWmQ_blNd91GU5pYLJJWWFKElZl5a0ofnfee-szdA3_6mqWx21xOCS1jSxl-Bk8
-Message-ID: <CAHFNDNikjXNHCj2RXMoZPckqaQAy2u-xw-QyCO7nXT3pttp6Hg@mail.gmail.com>
-Subject: Re: [PATCH] XEN: enable MC/DC coverage for Clang
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>, 
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: [PATCH v2 5/6] x86/cpufreq: use host CPU policy for Turbo checking
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <f0ac75c8-5d65-43ef-aeeb-78d34f1da470@suse.com>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <f0ac75c8-5d65-43ef-aeeb-78d34f1da470@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 24, 2025 at 5:15=E2=80=AFAM Andrew Cooper <andrew.cooper3@citri=
-x.com> wrote:
->
-> On 24/11/2025 2:18 am, Saman Dehghan wrote:
-> > Clang >=3D 18 supports Modified Condition/Decision Coverage (MC/DC).
-> > This patch enables the detection and usage of this feature when
-> > compiling Xen with Clang.
-> >
-> > - Update detection logic to check for '-fcoverage-mcdc' when using Clan=
-g.
-> > - Update llvm.c to handle the profile format changes (bitmap section)
-> >   required for MC/DC.
-> > - Guard -Wno-error=3Dcoverage-too-many-conditions with CONFIG_CC_IS_GCC
-> >   to avoid passing a GCC-only warning option to Clang
-> >
-> > Signed-off-by: Saman Dehghan <samaan.dehghan@gmail.com>
-> > ---
-> >  xen/Kconfig                |  2 +-
-> >  xen/Rules.mk               |  1 +
-> >  xen/arch/x86/Makefile      |  4 +++-
-> >  xen/common/coverage/llvm.c | 24 +++++++++++++++++++++++-
-> >  4 files changed, 28 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/xen/Kconfig b/xen/Kconfig
-> > index a5e5af3b76..5508993f02 100644
-> > --- a/xen/Kconfig
-> > +++ b/xen/Kconfig
-> > @@ -53,7 +53,7 @@ config CC_HAS_ASM_GOTO_OUTPUT
-> >
-> >  # Compiler supports -fcondition-coverage aka MC/DC
->
-> While you're improving these comments, please drop -fcondition-coverage
-> (as it's no longer accurate), and expand MC/DC for the benefit of people
-> who don't know what it is.
->
-> >  config CC_HAS_MCDC
->
-> Also, # GCC >=3D 14, or Clang >=3D 18
->
-> It's important for toolchain versions to be given in comments, so we can
-> figure out what to clean up when upgrading the toolchain baselines.
->
-> > diff --git a/xen/common/coverage/llvm.c b/xen/common/coverage/llvm.c
-> > index 532889c857..a8c7e7e8d2 100644
-> > --- a/xen/common/coverage/llvm.c
-> > +++ b/xen/common/coverage/llvm.c
-> > @@ -120,6 +120,10 @@ extern const char __start___llvm_prf_names[];
-> >  extern const char __stop___llvm_prf_names[];
-> >  extern uint64_t __start___llvm_prf_cnts[];
-> >  extern uint64_t __stop___llvm_prf_cnts[];
-> > +#ifdef CONFIG_CONDITION_COVERAGE
-> > +extern const char __start___llvm_prf_bits[];
-> > +extern const char __stop___llvm_prf_bits[];
-> > +#endif
->
-> No need for these to be #ifdef'd.  In turn, it lets you do ...
->
-> >
-> >  #define START_DATA      ((const void *)__start___llvm_prf_data)
-> >  #define END_DATA        ((const void *)__stop___llvm_prf_data)
-> > @@ -127,16 +131,25 @@ extern uint64_t __stop___llvm_prf_cnts[];
-> >  #define END_NAMES       ((const void *)__stop___llvm_prf_names)
-> >  #define START_COUNTERS  ((void *)__start___llvm_prf_cnts)
-> >  #define END_COUNTERS    ((void *)__stop___llvm_prf_cnts)
-> > +#define START_BITMAP    ((void *)__start___llvm_prf_bits)
-> > +#define END_BITMAP      ((void *)__stop___llvm_prf_bits)
-> >
-> >  static void cf_check reset_counters(void)
-> >  {
-> >      memset(START_COUNTERS, 0, END_COUNTERS - START_COUNTERS);
-> > +#ifdef CONFIG_CONDITION_COVERAGE
-> > +    memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
-> > +#endif
->
-> ... this:
->
->     if ( IS_ENABLED(CONFIG_CONDITION_COVERAGE) )
->         memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
->
-> >  }
+There's no need to invoke CPUID yet another time - we assume symmetry
+anyway. With symmetry assumed, logging per-CPU also isn't very useful.
 
-Thanks Andrew.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-IS_ENABLED(CONFIG_CONDITION_COVERAGE) is not the same as #ifdef
-CONFIG_CONDITION_COVERAGE.
-When the option is completely undefined, IS_ENABLED() returns 1 (enabled).
-So even with no CONFIG_CONDITION_COVERAGE defined, the code takes the
-"enabled" path, which is not what we want here.
+--- a/xen/arch/x86/acpi/cpufreq/acpi.c
++++ b/xen/arch/x86/acpi/cpufreq/acpi.c
+@@ -220,14 +220,11 @@ static unsigned int cf_check get_cur_fre
+ 
+ void intel_feature_detect(struct cpufreq_policy *policy)
+ {
+-    unsigned int eax;
+-
+-    eax = cpuid_eax(6);
+-    if (eax & 0x2) {
++    if ( cpu_has_turbo )
++    {
+         policy->turbo = CPUFREQ_TURBO_ENABLED;
+-        if (cpufreq_verbose)
+-            printk(XENLOG_INFO "CPU%u: Turbo Mode detected and enabled\n",
+-                   smp_processor_id());
++        if ( cpufreq_verbose )
++            printk_once(XENLOG_INFO "Turbo Mode detected and enabled\n");
+     }
+ }
+ 
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -177,6 +177,7 @@ static inline bool boot_cpu_has(unsigned
+ #define cpu_has_tbm             boot_cpu_has(X86_FEATURE_TBM)
+ 
+ /* CPUID level 0x00000006.eax */
++#define cpu_has_turbo           host_cpu_policy.basic.turbo
+ #define cpu_has_arat            host_cpu_policy.basic.arat
+ 
+ /* CPUID level 0x00000006.ecx */
 
-> >
-> >  static uint32_t cf_check get_size(void)
-> >  {
-> > -    return ROUNDUP(sizeof(struct llvm_profile_header) + END_DATA - STA=
-RT_DATA +
-> > +    uint32_t size =3D ROUNDUP(sizeof(struct llvm_profile_header) + END=
-_DATA - START_DATA +
-> >                     END_COUNTERS - START_COUNTERS + END_NAMES - START_N=
-AMES, 8);
-> > +#ifdef CONFIG_CONDITION_COVERAGE
-> > +    size +=3D ROUNDUP(END_BITMAP - START_BITMAP, 8);
-> > +#endif
->
-> and similar here.
->
-> > +    return size;
-> >  }
-> >
-> >  static int cf_check dump(
-> > @@ -147,11 +160,17 @@ static int cf_check dump(
-> >          .version =3D LLVM_PROFILE_VERSION,
-> >          .num_data =3D DIV_ROUND_UP(END_DATA - START_DATA, sizeof(struc=
-t llvm_profile_data)),
-> >          .num_counters =3D DIV_ROUND_UP(END_COUNTERS - START_COUNTERS, =
-sizeof(uint64_t)),
-> > +#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >=3D 9
-> > +        .num_bitmap_bytes =3D END_BITMAP - START_BITMAP,
-> > +#endif
-> >          .names_size =3D END_NAMES - START_NAMES,
-> >  #if LLVM_PROFILE_VERSION >=3D 8
-> >          .counters_delta =3D START_COUNTERS - START_DATA,
-> >  #else
-> >          .counters_delta =3D (uintptr_t)START_COUNTERS,
-> > +#endif
-> > +#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >=3D 9
-> > +        .bitmap_delta =3D START_BITMAP - START_DATA,
-> >  #endif
-> >          .names_delta =3D (uintptr_t)START_NAMES,
-> >          .value_kind_last =3D LLVM_PROFILE_NUM_KINDS - 1,
->
-> With structure initialisation, you do not need to have the fields in
-> declaration order.  Therefore, you want to do something like this:
->
->          .value_kind_last =3D LLVM_PROFILE_NUM_KINDS - 1,
-> +#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >=3D 9
-> +        .num_bitmap_bytes =3D END_BITMAP - START_BITMAP,
-> +        .bitmap_delta =3D START_BITMAP - START_DATA,
-> +#endif
->  };
->
->
-> to keep the ifdefary more simple.
->
-> ~Andrew
 
