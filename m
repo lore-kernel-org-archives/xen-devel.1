@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 122DDCFA466
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 15:04:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1171367.1496387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E75CFA466
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 15:08:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1171389.1496396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNY6Z-0003dn-U2; Mon, 24 Nov 2025 15:03:51 +0000
+	id 1vNYBI-0004jD-KQ; Mon, 24 Nov 2025 15:08:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1171367.1496387; Mon, 24 Nov 2025 15:03:51 +0000
+Received: by outflank-mailman (output) from mailman id 1171389.1496396; Mon, 24 Nov 2025 15:08:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNY6Z-0003dg-RQ; Mon, 24 Nov 2025 15:03:51 +0000
-Received: by outflank-mailman (input) for mailman id 1171367;
- Mon, 24 Nov 2025 15:03:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CeM5=6A=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vNY2u-0005X4-QO
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 15:00:04 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 40d3d50a-c946-11f0-980a-7dc792cee155;
- Mon, 24 Nov 2025 16:00:02 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-47775fb6c56so37314335e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 07:00:02 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477bf3af0e1sm196682755e9.10.2025.11.24.07.00.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 07:00:01 -0800 (PST)
+	id 1vNYBI-0004j6-Hl; Mon, 24 Nov 2025 15:08:44 +0000
+Received: by outflank-mailman (input) for mailman id 1171389;
+ Mon, 24 Nov 2025 15:08:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HCIP=6A=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1vNYBG-0004j0-Se
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 15:08:42 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 75bdccc2-c947-11f0-9d18-b5c5bf9af7f9;
+ Mon, 24 Nov 2025 16:08:40 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-47796a837c7so28931635e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 07:08:40 -0800 (PST)
+Received: from localhost.localdomain (host-92-29-237-183.as13285.net.
+ [92.29.237.183]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-477bf3b4eb2sm199290635e9.12.2025.11.24.07.08.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Nov 2025 07:08:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,375 +47,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40d3d50a-c946-11f0-980a-7dc792cee155
+X-Inumbo-ID: 75bdccc2-c947-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763996402; x=1764601202; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=sZUWGoebn4tcYyYHKdiUe8nZOMYNv6ZDM2HTEINqTd0=;
-        b=TOpt65lwyO3QYh26zNTeTaZxsruPelTLrU+VUS84rjj/xJGi0vRMRVhIlCo02cfArz
-         C5HEDoMUzSCLKthq2M63JQ4QeaCyf/fmOqb1FIEfHNNu4QjkbG4WhdXjQ8rO2e25dlR3
-         +pUMq61O6F5KSnQa0pRf5wsIfNq/cyiUyWGTi4S61JVaR75B6qVBpZvPiBdC1yIaD+bz
-         qAVhXbinFOwjERlAZCU5oWXjzxUTKu7GmzMe3gDkid1G11br2LhloryuUi9DTr9RwRkp
-         swBWkAO797Q7l5pGk6y1Pdz3g0vBHvdNDEJ3jRTl3bSRLOW6eWUO7G39mCPI/qnicLP1
-         7OvQ==
+        d=citrix.com; s=google; t=1763996920; x=1764601720; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=FzTlUqlynUPpvUq58w3gSsgx2HPcRNAuuuB89xtRGaU=;
+        b=FvJ94kln2wlz0OlGejgKW3wu4eaC4vNx6YmgCVGmIMyGCV/f79kCkjl7SCx31QXOFk
+         gRzjhL137P6ZOW/vVsdJNXQ6yCKzTeTnhMRje6l1J2lISOI1e971yQRG88HTuVKARmBq
+         qs9gZY2jgcqu5pQW1o28k/MZ+5/CDnC7sJOzM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763996402; x=1764601202;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1763996920; x=1764601720;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sZUWGoebn4tcYyYHKdiUe8nZOMYNv6ZDM2HTEINqTd0=;
-        b=gQWiNHobRNLGuzlwuvwf9m1HGynqyrfroDfBcPnDaQ6z6rzw2sgsBG0hExY2deilEE
-         aewOiycZ7NOWX7JnhtyedNK40CBbvSx5rlf/pAMNGfayEa6QTr3b5oN2Gi89x9uWf0+s
-         Q83IS6XctXYCnrbYODttMFdkoGVhhasb7X/0JDKELb1zXoXPSSXGrWkUPKstk5vM33I1
-         MJvMPLSLJ8R27f+qIpFPHdZNEWQOZzk1WtuWBB5xctCe4vM2h2B/E2DJuIu5Y1Nd7SCX
-         uCIYJgpPIWN3hM7l7OJybWxavJ6HBlRh8NPTcIi+DTgdm8zn5gQLg3dvCd192RiHJZWM
-         1r3A==
-X-Gm-Message-State: AOJu0Yx9PGaGc+k9lmkELCyZACvC9fQLHHmlhlfxUqBiLs3ZKNc5VqvU
-	RYK1mCT/AjsP3sKkL0US2UkGzkva+dZ9BpNemDCjWTIy87dTnCBkHKdShT6xJzrKcaFBvsxDFyN
-	dGYg=
-X-Gm-Gg: ASbGncu/xS1zdoyoCHGA2e955ckDH7YvEQtYUNBGrrZEODM90+O/zFeKbSoa3X4V3bC
-	zDNLNIwffdL0GLHaUunzR4SDn+/wfJDDwutj5yev1/cLtg6UQGTgDUKFmXi3HMyBEFozpntah+C
-	CvvXkBUsPpej2nKA/mrSWazVX/6k7yStPki3yf+RtGLqur6IxGlCpMicEdgRjOde+RBc6wr8LhP
-	DITX53VlCzYiOagW7rwUOjCmtiS0DdrYB75OkpJMfyopT2Ifpv7DY0Din2AQGLpozYRnEn3stlS
-	PxIrpi3teMjHbQILRuE7ZoWsnIjFvAWFWlgkJd/BVlqVSg0Kf/PlmKHviq/beDLH1ns1UPNlo6/
-	r4hSNyWnICD6CBgNl651vobBPUDAaGkbNAEUCOBzcwOjTbD2mMBs4E5y6RrTRjSIYXVBinrMv+n
-	bQfNH07QSCc3SyeGVxhATgqOa0G+5WN/OOxM0/SH6KvURXZ5YSUGODjOqqDMBFAT7nLSSIAx9g8
-	EU=
-X-Google-Smtp-Source: AGHT+IGI+IIpF3UkbfwF+x5hDiuyQuyVZ2K9dRBHGRzhjHj7jKeSsTIeON0cebx943z2rzipKAwaOg==
-X-Received: by 2002:a05:600c:3115:b0:477:7c7d:d9b2 with SMTP id 5b1f17b1804b1-477c01f5997mr113970645e9.32.1763996401540;
-        Mon, 24 Nov 2025 07:00:01 -0800 (PST)
-Message-ID: <86fd4c01-fd01-4767-a9a1-c734eb037b5e@suse.com>
-Date: Mon, 24 Nov 2025 16:00:03 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [PATCH v9 05/10] VMX: support USER-MSR
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+        bh=FzTlUqlynUPpvUq58w3gSsgx2HPcRNAuuuB89xtRGaU=;
+        b=rlUj4MO5XQMN4Ts+zaGqHejPdKyMqGCO4D2BUC7tYl99XcBz14CjbIrA8vJnS7eta7
+         Dfi2kW+aXB/U/y3ta1tpbnwo/PSgH2vWCgEds9jQBg821LIoaCjM9VXlJ8X9LufPSdTH
+         0n7TCqHL20QbYgczvHB7JvhiCpaMjB8XWEN0DjCUgPZu+GBrwLEsKq37+7ZctBB4Irhr
+         DBP2NASF9bZ7gQWUd12YH/9vKjiu0LSR7YUQ/5E6WjPeCwUNWr1kIP+3ZinOU/986Eo5
+         lU11JwFb1it7s3rClS0gw3Z4vcU8WUNnogvFtIVQfZSSBspV2Wc1s8nTIsROV6eJlHOS
+         KP7A==
+X-Gm-Message-State: AOJu0YzjXBpd/xJm8YCaKjNbYxxnPn1hyECKa5bInk4or+0bJEXeu6os
+	romCMtWsRzbKF1xoIhhWl1L5y1Iqb2Bt/UwBOot5Vt0LMCho3GR3OAtCMemnlUAxbjcVBYrwHWx
+	t6FqkwP8=
+X-Gm-Gg: ASbGncumRbfMhcF7Q0QDatVY1ioblmUQeWRRVX9LrLEGkKipLpyoumwFP1uD7Ba/lnE
+	jWYzbs7HntHoOZ1xHQwI07yYvxqZRXUmCENyDiKnib+84Qu3+XwOyq6eZtCtrn8XM/xc9n5nZFR
+	jA8LuwS9iq94JE+0/qoBnFPfp4wlDHBvcK6FXbslDT0y9ljmxcLnJ/0/BqMijzhDPj4oCocKD2i
+	16vyGbSWO1A+RggpFEJKIkq/bQH9gI6QtZoKMHhmUPr2UB73M+IRs4oHoSrUJfbg40icGJ9jFjS
+	ymNzGeNVmDgU0Cd0OgJK1hSRTBRZO/zKmTAl2Fjc410cieulQCyV/qFnxOWZWbGDI6MhQgDRSU/
+	ka25ZMvNdtWGHKR72MdrCEhpyJjomH0RADokD4OFI5Ap0GGudyn7IqNkC2xhGJEZ7mxEumfX4Ps
+	+h3Vh8mejGCeM5TV1IZElLVBGnXKkpIcusfssX54xs0DY6CyLXGYSGxeu5gbAEBg==
+X-Google-Smtp-Source: AGHT+IHT9NWC1rgEm9qK+BPToIU5Hxm5m4NPKnzzvKzunKaS4LQyc5IA7YCwWqt6RddVSMBFMR5E/A==
+X-Received: by 2002:a05:600c:3593:b0:46e:32dd:1b1a with SMTP id 5b1f17b1804b1-477c0162f1fmr134635935e9.7.1763996919504;
+        Mon, 24 Nov 2025 07:08:39 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <926a2315-a2b7-4aad-87e6-d686c9da9e3a@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <926a2315-a2b7-4aad-87e6-d686c9da9e3a@suse.com>
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Kevin Lampis <kevin.lampis@citrix.com>
+Subject: [PATCH] x86/intel: Resync intel-family.h
+Date: Mon, 24 Nov 2025 15:08:37 +0000
+Message-Id: <20251124150837.654354-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hook up the new VM exit codes and handle guest accesses, context switch,
-and save/restore. At least for now don't allow the guest direct access
-to the control MSR; this may need changing if guests were to frequently
-access it (e.g. on their own context switch path).
-
-While there also correct a one-off in union ldt_or_tr_instr_info's
-comment.
-
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Needing to change two places in hvm.c continues to be unhelpful; I
-recall I already did forget to also adjust hvm_load_cpu_msrs() for XFD.
-Considering that MSRs typically arrive in the order the table has it,
-couldn't we incrementally look up the incoming MSR index there, falling
-back to a full lookup only when the incremental lookup failed (and thus
-not normally re-iterating through the initial part of the array)?
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Kevin Lampis <kevin.lampis@citrix.com>
 
-Said comment in union ldt_or_tr_instr_info is further odd (same for
-union gdt_or_idt_instr_info's) in that Instruction Information is only a
-32-bit field. Hence bits 32-63 aren't undefined, but simply don't exist.
-
-RFC: The wee attempt to "deal" with nested is likely wrong, but I'm
-     afraid I simply don't know where such enforcement would be done
-     properly. Returning an error there is also commented out, for
-     domain_cpu_policy_changed() returning void without "x86/xstate:
-     re-size save area when CPUID policy changes" in place.
+I'm unsure about the Intel CPU Core types, but it's probably better to keep
+them than strip them from our copy.
 ---
-v9: Use wrmsrns(). Do renames where bits are also going to be used for
-    MSR-IMM. Re-base.
-v8: Re-base.
-v5: Introduce user_msr_gpr().
-v4: New.
+ xen/arch/x86/include/asm/intel-family.h | 68 +++++++++++++++++++++----
+ 1 file changed, 57 insertions(+), 11 deletions(-)
 
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -821,6 +821,12 @@ static void __init calculate_hvm_max_pol
-          * situations until someone has cross-checked the behaviour for safety.
-          */
-         __clear_bit(X86_FEATURE_PKS, fs);
-+
-+        /*
-+         * Don't expose USER-MSR until it is known how (if at all) it is
-+         * virtualized on SVM.
-+         */
-+        __clear_bit(X86_FEATURE_USER_MSR, fs);
-     }
- 
-     if ( !cpu_has_vmx_msrlist )
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -452,6 +452,10 @@ void domain_cpu_policy_changed(struct do
-         }
-     }
- 
-+    /* Nested doesn't have the necessary processing, yet. */
-+    if ( nestedhvm_enabled(d) && p->feat.user_msr )
-+        return /* -EINVAL */;
-+
-     for_each_vcpu ( d, v )
-     {
-         cpu_policy_updated(v);
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1391,6 +1391,7 @@ static int cf_check hvm_load_cpu_xsave_s
- 
- #define HVM_CPU_MSR_SIZE(cnt) offsetof(struct hvm_msr, msr[cnt])
- static const uint32_t msrs_to_send[] = {
-+    MSR_USER_MSR_CTL,
-     MSR_SPEC_CTRL,
-     MSR_INTEL_MISC_FEATURES_ENABLES,
-     MSR_PKRS,
-@@ -1545,6 +1546,7 @@ static int cf_check hvm_load_cpu_msrs(st
-         {
-             int rc;
- 
-+        case MSR_USER_MSR_CTL:
-         case MSR_SPEC_CTRL:
-         case MSR_INTEL_MISC_FEATURES_ENABLES:
-         case MSR_PKRS:
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -696,13 +696,18 @@ static void cf_check vmx_vcpu_destroy(st
- }
- 
+diff --git a/xen/arch/x86/include/asm/intel-family.h b/xen/arch/x86/include/asm/intel-family.h
+index d8c0bcc406de..cc3fb4cc471f 100644
+--- a/xen/arch/x86/include/asm/intel-family.h
++++ b/xen/arch/x86/include/asm/intel-family.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
  /*
-- * To avoid MSR save/restore at every VM exit/entry time, we restore
-- * the x86_64 specific MSRs at domain switch time. Since these MSRs
-- * are not modified once set for para domains, we don't save them,
-- * but simply reset them to values set in percpu_traps_init().
-+ * To avoid MSR save/restore at every VM exit/entry time, we restore the
-+ * x86_64 specific MSRs at vcpu switch time. Since these MSRs are not
-+ * modified once set for para domains, we don't save them, but simply clear
-+ * them or reset them to values set in percpu_traps_init().
+  * Snapshot from Linux:
+- *   db4001f9cc32e3ef105a4e4f492d7d813b28292a
+- *   x86/cpu/vfm: Delete all the *_FAM6_ CPU #defines
++ *   89216c9051ef6635f1514f8e0d2f9cd63b37a3b6
++ *   x86/cpu: Add/fix core comments for {Panther,Nova} Lake
   */
--static void vmx_restore_host_msrs(void)
-+static void vmx_restore_host_msrs(const struct vcpu *v)
- {
-+    const struct vcpu_msrs *msrs = v->arch.msrs;
-+
-+    if ( msrs->user_msr_ctl.enable )
-+        wrmsrns(MSR_USER_MSR_CTL, 0);
-+
-     /* No PV guests?  No need to restore host SYSCALL infrastructure. */
-     if ( !IS_ENABLED(CONFIG_PV) )
-         return;
-@@ -756,6 +761,9 @@ static void vmx_restore_guest_msrs(struc
+ #ifndef _ASM_X86_INTEL_FAMILY_H
+ #define _ASM_X86_INTEL_FAMILY_H
+@@ -50,7 +50,18 @@
+ /* Wildcard match so X86_MATCH_VFM(ANY) works */
+ #define INTEL_ANY			IFM(X86_FAMILY_ANY, X86_MODEL_ANY)
  
-     if ( cp->feat.pks )
-         wrpkrs(msrs->pkrs);
++/* Family 5 */
++#define INTEL_FAM5_START		IFM(5, 0x00) /* Notational marker, also P5 A-step */
++#define INTEL_PENTIUM_75		IFM(5, 0x02) /* P54C */
++#define INTEL_PENTIUM_MMX		IFM(5, 0x04) /* P55C */
++#define INTEL_QUARK_X1000		IFM(5, 0x09) /* Quark X1000 SoC */
 +
-+    if ( msrs->user_msr_ctl.enable )
-+        wrmsrns(MSR_USER_MSR_CTL, msrs->user_msr_ctl.raw);
- }
++/* Family 6, 18, 19 */
+ #define INTEL_PENTIUM_PRO		IFM(6, 0x01)
++#define INTEL_PENTIUM_II_KLAMATH	IFM(6, 0x03)
++#define INTEL_PENTIUM_III_DESCHUTES	IFM(6, 0x05)
++#define INTEL_PENTIUM_III_TUALATIN	IFM(6, 0x0B)
++#define INTEL_PENTIUM_M_DOTHAN		IFM(6, 0x0D)
  
- void vmx_update_cpu_exec_control(struct vcpu *v)
-@@ -1199,7 +1207,7 @@ static void cf_check vmx_ctxt_switch_fro
-     if ( !v->arch.fully_eager_fpu )
-         vmx_fpu_leave(v);
-     vmx_save_guest_msrs(v);
--    vmx_restore_host_msrs();
-+    vmx_restore_host_msrs(v);
-     vmx_save_dr(v);
+ #define INTEL_CORE_YONAH		IFM(6, 0x0E)
  
-     if ( v->domain->arch.hvm.pi_ops.flags & PI_CSW_FROM )
-@@ -4245,6 +4253,14 @@ static int vmx_handle_apic_write(void)
-     return vlapic_apicv_write(current, exit_qualification & 0xfff);
- }
+@@ -115,11 +126,15 @@
  
-+static unsigned int msr_imm_gpr(void)
-+{
-+    msr_imm_instr_info_t info;
-+
-+    __vmread(VMX_INSTRUCTION_INFO, &info.raw);
-+    return info.gpr;
-+}
-+
- static void undo_nmis_unblocked_by_iret(void)
- {
-     unsigned long guest_info;
-@@ -4745,6 +4761,41 @@ void asmlinkage vmx_vmexit_handler(struc
-             hvm_inject_hw_exception(X86_EXC_GP, 0);
-         break;
+ #define INTEL_SAPPHIRERAPIDS_X		IFM(6, 0x8F) /* Golden Cove */
  
-+    case EXIT_REASON_URDMSR:
-+    {
-+        uint64_t msr_content = 0;
-+
-+        __vmread(EXIT_QUALIFICATION, &exit_qualification);
-+        switch ( hvm_msr_read_intercept(exit_qualification, &msr_content) )
-+        {
-+        case X86EMUL_OKAY:
-+            *decode_gpr(regs, msr_imm_gpr()) = msr_content;
-+            update_guest_eip(); /* Safe: URDMSR */
-+            break;
-+
-+        case X86EMUL_EXCEPTION:
-+            hvm_inject_hw_exception(X86_EXC_GP, 0);
-+            break;
-+        }
-+        break;
-+    }
-+
-+    case EXIT_REASON_UWRMSR:
-+        __vmread(EXIT_QUALIFICATION, &exit_qualification);
-+        switch ( hvm_msr_write_intercept(exit_qualification,
-+                                         *decode_gpr(regs, msr_imm_gpr()),
-+                                         true) )
-+        {
-+        case X86EMUL_OKAY:
-+            update_guest_eip(); /* Safe: UWRMSR */
-+            break;
-+
-+        case X86EMUL_EXCEPTION:
-+            hvm_inject_hw_exception(X86_EXC_GP, 0);
-+            break;
-+        }
-+        break;
-+
-     case EXIT_REASON_VMXOFF:
-     case EXIT_REASON_VMXON:
-     case EXIT_REASON_VMCLEAR:
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -203,6 +203,8 @@ static inline void pi_clear_sn(struct pi
- #define EXIT_REASON_NOTIFY              75
- #define EXIT_REASON_RDMSRLIST           78
- #define EXIT_REASON_WRMSRLIST           79
-+#define EXIT_REASON_URDMSR              80
-+#define EXIT_REASON_UWRMSR              81
- /* Remember to also update VMX_PERF_EXIT_REASON_SIZE! */
+-#define INTEL_EMERALDRAPIDS_X		IFM(6, 0xCF)
++#define INTEL_EMERALDRAPIDS_X		IFM(6, 0xCF) /* Raptor Cove */
  
- /*
-@@ -578,8 +580,18 @@ typedef union ldt_or_tr_instr_info {
-         base_reg_invalid        :1,  /* bit 27 - Base register invalid */
-         instr_identity          :1,  /* bit 28 - 0:LDT, 1:TR */
-         instr_write             :1,  /* bit 29 - 0:store, 1:load */
--                                :34; /* bits 31:63 - Undefined */
-+                                :34; /* bits 30:63 - Undefined */
-     };
- } ldt_or_tr_instr_info_t;
+-#define INTEL_GRANITERAPIDS_X		IFM(6, 0xAD)
++#define INTEL_GRANITERAPIDS_X		IFM(6, 0xAD) /* Redwood Cove */
+ #define INTEL_GRANITERAPIDS_D		IFM(6, 0xAE)
  
-+/* VM-Exit instruction info for URDMSR and UWRMSR */
-+typedef union msr_imm_instr_info {
-+    unsigned long raw;
-+    struct {
-+        unsigned int            :3,  /* Bits 0:2 - Undefined */
-+        gpr                     :4,  /* Bits 3:6 - Source/Destination register */
-+                                :25; /* bits 7:31 - Undefined */
-+    };
-+} msr_imm_instr_info_t;
++#define INTEL_DIAMONDRAPIDS_X		IFM(19, 0x01) /* Panther Cove */
 +
- #endif /* __ASM_X86_HVM_VMX_VMX_H__ */
---- a/xen/arch/x86/include/asm/guest-msr.h
-+++ b/xen/arch/x86/include/asm/guest-msr.h
-@@ -8,6 +8,20 @@
- struct vcpu_msrs
- {
-     /*
-+     * 0x0000001c - MSR_USER_MSR_CTL
-+     *
-+     * Value is guest chosen, and always loaded in vcpu context.
-+     */
-+    union {
-+        uint64_t raw;
-+        struct {
-+            bool enable:1;
-+            unsigned int :11;
-+            unsigned long bitmap:52;
-+        };
-+    } user_msr_ctl;
++#define INTEL_BARTLETTLAKE		IFM(6, 0xD7) /* Raptor Cove */
 +
-+    /*
-      * 0x00000048 - MSR_SPEC_CTRL
-      * 0xc001011f - MSR_VIRT_SPEC_CTRL (if X86_FEATURE_AMD_SSBD)
-      *
---- a/xen/arch/x86/include/asm/perfc_defn.h
-+++ b/xen/arch/x86/include/asm/perfc_defn.h
-@@ -6,7 +6,7 @@ PERFCOUNTER_ARRAY(exceptions,
+ /* "Hybrid" Processors (P-Core/E-Core) */
  
- #ifdef CONFIG_HVM
+ #define INTEL_LAKEFIELD			IFM(6, 0x8A) /* Sunny Cove / Tremont */
+@@ -131,14 +146,21 @@
+ #define INTEL_RAPTORLAKE_P		IFM(6, 0xBA)
+ #define INTEL_RAPTORLAKE_S		IFM(6, 0xBF)
  
--#define VMX_PERF_EXIT_REASON_SIZE 80
-+#define VMX_PERF_EXIT_REASON_SIZE 82
- #define VMEXIT_NPF_PERFC 143
- #define SVM_PERF_EXIT_REASON_SIZE (VMEXIT_NPF_PERFC + 1)
- PERFCOUNTER_ARRAY(vmexits,              "vmexits",
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -280,6 +280,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t
-         *val = msrs->xss.raw;
-         break;
+-#define INTEL_METEORLAKE		IFM(6, 0xAC)
++#define INTEL_METEORLAKE		IFM(6, 0xAC) /* Redwood Cove / Crestmont */
+ #define INTEL_METEORLAKE_L		IFM(6, 0xAA)
  
-+    case MSR_USER_MSR_CTL:
-+        if ( !cp->feat.user_msr )
-+            goto gp_fault;
-+        *val = msrs->user_msr_ctl.raw;
-+        break;
-+
-     case 0x40000000 ... 0x400001ff:
-         if ( is_viridian_domain(d) )
-         {
-@@ -618,6 +624,19 @@ int guest_wrmsr(struct vcpu *v, uint32_t
-         msrs->xss.raw = val;
-         break;
+-#define INTEL_ARROWLAKE_H		IFM(6, 0xC5)
++#define INTEL_ARROWLAKE_H		IFM(6, 0xC5) /* Lion Cove / Skymont */
+ #define INTEL_ARROWLAKE			IFM(6, 0xC6)
+ #define INTEL_ARROWLAKE_U		IFM(6, 0xB5)
  
-+    case MSR_USER_MSR_CTL:
-+        if ( !cp->feat.user_msr )
-+            goto gp_fault;
+-#define INTEL_LUNARLAKE_M		IFM(6, 0xBD)
++#define INTEL_LUNARLAKE_M		IFM(6, 0xBD) /* Lion Cove / Skymont */
 +
-+        if ( (val & ~(USER_MSR_ENABLE | USER_MSR_ADDR_MASK)) ||
-+             !is_canonical_address(val) )
-+            goto gp_fault;
++#define INTEL_PANTHERLAKE_L		IFM(6, 0xCC) /* Cougar Cove / Darkmont */
 +
-+        msrs->user_msr_ctl.raw = val;
-+        if ( v == curr )
-+            wrmsrns(MSR_USER_MSR_CTL, val);
-+        break;
++#define INTEL_WILDCATLAKE_L		IFM(6, 0xD5)
 +
-     case 0x40000000 ... 0x400001ff:
-         if ( is_viridian_domain(d) )
-         {
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -360,7 +360,7 @@ XEN_CPUFEATURE(AMX_COMPLEX,        15*32
- XEN_CPUFEATURE(AVX_VNNI_INT16,     15*32+10) /*A  AVX-VNNI-INT16 Instructions */
- XEN_CPUFEATURE(UTMR,               15*32+13) /*   User Timer */
- XEN_CPUFEATURE(PREFETCHI,          15*32+14) /*A  PREFETCHIT{0,1} Instructions */
--XEN_CPUFEATURE(USER_MSR,           15*32+15) /*   U{RD,WR}MSR Instructions */
-+XEN_CPUFEATURE(USER_MSR,           15*32+15) /*s  U{RD,WR}MSR Instructions */
- XEN_CPUFEATURE(UIRET_UIF,          15*32+17) /*   UIRET updates UIF */
- XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks safe to use */
- XEN_CPUFEATURE(SLSM,               15*32+24) /*   Static Lockstep Mode */
++#define INTEL_NOVALAKE			IFM(18, 0x01) /* Coyote Cove / Arctic Wolf */
++#define INTEL_NOVALAKE_L		IFM(18, 0x03) /* Coyote Cove / Arctic Wolf */
+ 
+ /* "Small Core" Processors (Atom/E-Core) */
+ 
+@@ -152,9 +174,9 @@
+ #define INTEL_ATOM_SILVERMONT		IFM(6, 0x37) /* Bay Trail, Valleyview */
+ #define INTEL_ATOM_SILVERMONT_D		IFM(6, 0x4D) /* Avaton, Rangely */
+ #define INTEL_ATOM_SILVERMONT_MID	IFM(6, 0x4A) /* Merriefield */
++#define INTEL_ATOM_SILVERMONT_MID2	IFM(6, 0x5A) /* Anniedale */
+ 
+ #define INTEL_ATOM_AIRMONT		IFM(6, 0x4C) /* Cherry Trail, Braswell */
+-#define INTEL_ATOM_AIRMONT_MID		IFM(6, 0x5A) /* Moorefield */
+ #define INTEL_ATOM_AIRMONT_NP		IFM(6, 0x75) /* Lightning Mountain */
+ 
+ #define INTEL_ATOM_GOLDMONT		IFM(6, 0x5C) /* Apollo Lake */
+@@ -179,8 +201,32 @@
+ #define INTEL_XEON_PHI_KNL		IFM(6, 0x57) /* Knights Landing */
+ #define INTEL_XEON_PHI_KNM		IFM(6, 0x85) /* Knights Mill */
+ 
+-/* Family 5 */
+-#define INTEL_FAM5_QUARK_X1000		0x09 /* Quark X1000 SoC */
+-#define INTEL_QUARK_X1000		IFM(5, 0x09) /* Quark X1000 SoC */
++/* Notational marker denoting the last Family 6 model */
++#define INTEL_FAM6_LAST			IFM(6, 0xFF)
++
++/* Family 15 - NetBurst */
++#define INTEL_P4_WILLAMETTE		IFM(15, 0x01) /* Also Xeon Foster */
++#define INTEL_P4_PRESCOTT		IFM(15, 0x03)
++#define INTEL_P4_PRESCOTT_2M		IFM(15, 0x04)
++#define INTEL_P4_CEDARMILL		IFM(15, 0x06) /* Also Xeon Dempsey */
++
++/*
++ * Intel CPU core types
++ *
++ * CPUID.1AH.EAX[31:0] uniquely identifies the microarchitecture
++ * of the core. Bits 31-24 indicates its core type (Core or Atom)
++ * and Bits [23:0] indicates the native model ID of the core.
++ * Core type and native model ID are defined in below enumerations.
++ */
++enum intel_cpu_type {
++	INTEL_CPU_TYPE_UNKNOWN,
++	INTEL_CPU_TYPE_ATOM = 0x20,
++	INTEL_CPU_TYPE_CORE = 0x40,
++};
++
++enum intel_native_id {
++	INTEL_ATOM_CMT_NATIVE_ID = 0x2,  /* Crestmont */
++	INTEL_ATOM_SKT_NATIVE_ID = 0x3,  /* Skymont */
++};
+ 
+ #endif /* _ASM_X86_INTEL_FAMILY_H */
+
+base-commit: bc23a49d13a30de06a961dfaccc4a19262fe9967
+-- 
+2.39.5
 
 
