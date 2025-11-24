@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD9CCFD313
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:34:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170572.1495704 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24CDACFD317
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:34:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170574.1495714 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVlv-0003nQ-QI; Mon, 24 Nov 2025 12:34:23 +0000
+	id 1vNVlx-00049i-HO; Mon, 24 Nov 2025 12:34:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170572.1495704; Mon, 24 Nov 2025 12:34:23 +0000
+Received: by outflank-mailman (output) from mailman id 1170574.1495714; Mon, 24 Nov 2025 12:34:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVlv-0003mh-Jv; Mon, 24 Nov 2025 12:34:23 +0000
-Received: by outflank-mailman (input) for mailman id 1170572;
- Mon, 24 Nov 2025 12:34:21 +0000
+	id 1vNVlx-00049E-A3; Mon, 24 Nov 2025 12:34:25 +0000
+Received: by outflank-mailman (input) for mailman id 1170574;
+ Mon, 24 Nov 2025 12:34:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Sr25=6A=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vNVlt-0001Xp-Ma
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:34:21 +0000
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [2a00:1450:4864:20::62d])
+ id 1vNVlv-0001Xp-Td
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:34:24 +0000
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [2a00:1450:4864:20::634])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e61152a8-c931-11f0-980a-7dc792cee155;
- Mon, 24 Nov 2025 13:34:20 +0100 (CET)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b7291af7190so619093566b.3
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:34:20 -0800 (PST)
+ id e1bc6267-c931-11f0-980a-7dc792cee155;
+ Mon, 24 Nov 2025 13:34:12 +0100 (CET)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b7636c96b9aso566346766b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:34:12 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7654cf0435sm1285238866b.4.2025.11.24.04.34.17
+ a640c23a62f3a-b7654cf0435sm1285238866b.4.2025.11.24.04.34.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 04:34:18 -0800 (PST)
+ Mon, 24 Nov 2025 04:34:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,255 +47,427 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e61152a8-c931-11f0-980a-7dc792cee155
+X-Inumbo-ID: e1bc6267-c931-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763987659; x=1764592459; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1763987652; x=1764592452; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6GD7FA95vl4zg2gCwBkL7Z4syOSlocjGh3qXHQggLeo=;
-        b=ltDQaNRh4iqc/WhqC0Kbwu/o/cCFciNvR6MGk0ltaua+u8dmU2eX88YeVR2cbUQOYh
-         lMzF+UHe6TXFS1k8Yo4JnsEVgnGybEglosGcs1RnATL9mDmypqopA/eM+MdNgmjgoOLT
-         bHDf6LDwIhl9tGZkolznWvsxX7YAhSml0sV656H/Iy8Nl0Tq7REQGdcZxv0t0kpmdEsO
-         1TolNB7qqb4b2ToQ/l5zN2dMuPZBgDILmpNb2yMXY3Oei1iVD9u7kBvawngZPDvXQhJP
-         1qDDgu3bprM9kThcvJAioHQ0ojJz/Gs+UwHLKuGziXRGpb2e4XUrN+rnsl1xgqibeyni
-         T3gA==
+        bh=Oa21otGq11ozUJodEKyP4ShNyaKJwoS+ijbz4oX2de8=;
+        b=d3TOUVselNQmMR+rQng7LvMhQ1+tg+6qxbNj8U1P72B6Nu6VpAcAP18jb2kBoG24ma
+         3tpHNGW8ZFHQQk97530s76zGfZL5etEa6LxQYLa8YxTkWHd4YARkUFJwyis4I5jshK+/
+         INsvT2ICZfLgiW/o5asDmbx3y0fmJje+YLA8olExEXmasr1ekirvYiqfKmGoU2M8yw9B
+         vtsjWpvDmwllvL0Uwpnp6N531q/Ck3za8L2HDeZ9rSNjKXxfSMLpeH2G0X5mgYYI5oDt
+         u6Jr3/2666WJ6A/i+vLZOVYza/wy+CqpOH/gL1fgSM3H7FjVQKwHoGVgqsyePiRVJHrd
+         G6Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763987659; x=1764592459;
+        d=1e100.net; s=20230601; t=1763987652; x=1764592452;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=6GD7FA95vl4zg2gCwBkL7Z4syOSlocjGh3qXHQggLeo=;
-        b=Yb/0Vztlz2vHIFQT1AxbcEIzeLHR5N11A3R0hlIcPENZ/RQDxZesmMlPbPgdj2HMNK
-         JuUioz3mhi83l33KNnpcs+NIeL62QdJHVTxKJxFDYG1tuR4oBlEzQKMwYgoZOE26xEZU
-         j98A/UA1Bskych7hNtXhhoPbhLvT6fa/qO2PxuKptwICt/6YiN+DGtdlvm3fsoXi369T
-         35LNqMszUEKrcgVwoEMyoopIZN/rEfbSINNau+kdSDbcnePCMu8sSeygf9RG2qG7aEEv
-         dGSwwE9iE0vaAXDPkt2QKkwOKPKKBFF4ST/kg0s9PRhwIpcAkgLdydP1wFVTHBzSHBqO
-         +5og==
-X-Gm-Message-State: AOJu0YwRyJ8iUra/vzYoOfDBfJFBMMnnjLDeWStWB/Bd9DiJth6LFXDv
-	EDss0SndQM94gki/W+DV7NOrgDw6PfyaWOKFpF1PiiqbjX26Aj/rfjIunlB4O2X3
-X-Gm-Gg: ASbGncsPLYIthh09Mhy+87WHYWMKpl6HO4pE33v1NgmNCLcLSAcEWama2kieIhHw2jE
-	14GGXuqvSETf2mF5oLDpw2oR/ofwpag2smBD7o0So/alodK5uCnDBfTCWFJUu38nlMH/Dkgah8C
-	JK8UNoirmEjrLoWQsydCSTX9b7cQSrpqO+jZxXwB/1V4Tp6eMfU33tl1QI9rgQoMYKW46FqR4aB
-	RhQPJJp1R/VoX1tJhAPtIlDK8DGJ2FCZA0ncje0sfCdgWxYYRx/lDEkiEtwt+YYlHPmouD02qBe
-	dMOJXKow4BM7wCxptpR8hh9jANDwhdG7cSiMXbUD7V3a8LyhsgnOAdfSKgiO5Z+BbVXMY3T8cNL
-	vE3RZ+18mHVo67M2SVWa4bC/J6gxlEmJQvDZolFHN7Gt7geNCCdS6x4VxYSzwZ+KFogzJqs+SJe
-	Or5ib/FPCcvnY7559fO6fflJviqbQnU+BTp+A2I8At7J1kcnKKDnvY0q7+Dbdo2byEGw==
-X-Google-Smtp-Source: AGHT+IEGuRyUo3PaGxSkQyOZIUOAPhl4q9SQjyiUWU3D6w3ZxvuPIT0cE/6iai/8GATh9tsmTCNGDQ==
-X-Received: by 2002:a17:906:181b:b0:b76:7fe7:ff37 with SMTP id a640c23a62f3a-b767fe8084emr757914866b.18.1763987658996;
-        Mon, 24 Nov 2025 04:34:18 -0800 (PST)
+        bh=Oa21otGq11ozUJodEKyP4ShNyaKJwoS+ijbz4oX2de8=;
+        b=L7kuc4C0Z8ougfvUe2ySh4NDm5cHiMnirAooZcGBHW/sSFCAUBH9FYezak3IRPo2WQ
+         V64p2SvjCfOSiwKdwc+9uzicEcx18AxHAl7CswFr3WM4Fe1ynAc8zWLlO1puy+JgpxW1
+         jDaQNBlL8oJ/BZS1kf7zZovDX1XxlreDFugAOS6ovnJs4geVRhCJ7xXjdQoRNL2dOaQ8
+         TH4KTgB5IWqwRy12+d83zvtcQ/ZPJy//AUrnWkBRlhJR7wgSgljv9UtnF40imW/Ujba7
+         lyNLn8ulbJ7zchZ4MwT/lc+3GADFtEYTWfUsjrzqoNur823hELbMuJHMahPBAvUYDfLY
+         tkDA==
+X-Gm-Message-State: AOJu0YwzUPKbgh3rCifjivrGiOIOG9vQU/0AXaa2I8Q5k+YFsMUE2g/t
+	CmAPdxthiBxFLta65nFs8a9fauXPBkVYLzAIDezYKmUp1neH2+G8Py4nudxLAVT9
+X-Gm-Gg: ASbGncvnlbX1YfiwSheDy61VfaNU3O7A+qqej2a2fv8opH9fQL7wUzPkMVyP129gqre
+	1Bq5NtlhtsAZ4ZXfueW23gpZSHuGiUhwdcGwY0lAubh5QbuzX4xIY5v+bHzmFHbwyewnXc7y2Fr
+	Sp8o9tkczbvPxKMsVj8uRjvmA/94RM6wLHyECjCRDCNtdkC+sflEvDO82+qUwPK10g+pVvTwDuq
+	UmVIpKc5pFEQ2+PHQOZ7xsxmp1dBjfhSPUhn4GDuiu9N3359Blf4ttpL8R3psJP2uLHni4KhxJK
+	KQ28a931xoFwAkBhERfHotJHKSWGv4g+dO+usQZCzvxG0NcCZwtZ0vSriOpyBju2vGMrVRK1Pn7
+	4d+4COtqyZiEwCoAXouhMAE3d1jpX89jQ06Xsky83QDY+7p86wHYR+D9RPWih7d6WypaqZywmMz
+	Ew7bWx+SFtyT2exWRtOB77BLFhoq2ENUkiLCtoAP5S491QRHVEvFkDeTs=
+X-Google-Smtp-Source: AGHT+IHEC4VD3aCt8e+QKbhOS0y3aEqRL/eweoz1Q2s+Dv48n2fDYUYPaTmxh9hTkYQ2sJmsswBTew==
+X-Received: by 2002:a17:907:a0e:b0:b5b:2c82:7dc6 with SMTP id a640c23a62f3a-b7671847665mr1347180366b.40.1763987651704;
+        Mon, 24 Nov 2025 04:34:11 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 10/19] xen/riscv: implement function to map memory in guest p2m
-Date: Mon, 24 Nov 2025 13:33:43 +0100
-Message-ID: <16a8aee1c204c8bef9629b8a2d7dfbc37a028362.1763986955.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v6 03/19] xen/riscv: introduce VMID allocation and manegement
+Date: Mon, 24 Nov 2025 13:33:36 +0100
+Message-ID: <7805662d530eca29c5b0d0afa05a3cd0aac963bb.1763986955.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <cover.1763986955.git.oleksii.kurochko@gmail.com>
 References: <cover.1763986955.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implement map_regions_p2mt() to map a region in the guest p2m with
-a specific p2m type. The memory attributes will be derived from the
-p2m type. This function is used in dom0less common
-code.
+Current implementation is based on x86's way to allocate VMIDs:
+  VMIDs partition the physical TLB. In the current implementation VMIDs are
+  introduced to reduce the number of TLB flushes. Each time a guest-physical
+  address space changes, instead of flushing the TLB, a new VMID is
+  assigned. This reduces the number of TLB flushes to at most 1/#VMIDs.
+  The biggest advantage is that hot parts of the hypervisor's code and data
+  retain in the TLB.
 
-To implement it, introduce:
-- p2m_write_(un)lock() to ensure safe concurrent updates to the P2M.
-  As part of this change, introduce p2m_tlb_flush_sync() and
-  p2m_force_tlb_flush_sync().
-- A stub for p2m_set_range() to map a range of GFNs to MFNs.
-- p2m_insert_mapping().
-- p2m_is_write_locked().
+  VMIDs are a hart-local resource.  As preemption of VMIDs is not possible,
+  VMIDs are assigned in a round-robin scheme. To minimize the overhead of
+  VMID invalidation, at the time of a TLB flush, VMIDs are tagged with a
+  64-bit generation. Only on a generation overflow the code needs to
+  invalidate all VMID information stored at the VCPUs with are run on the
+  specific physical processor. When this overflow appears VMID usage is
+  disabled to retain correctness.
 
-Drop guest_physmap_add_entry() and call map_regions_p2mt() directly
-from guest_physmap_add_page(), making guest_physmap_add_entry()
-unnecessary.
+Only minor changes are made compared to the x86 implementation.
+These include using RISC-V-specific terminology, adding a check to ensure
+the type used for storing the VMID has enough bits to hold VMIDLEN,
+and introducing a new function vmidlen_detect() to clarify the VMIDLEN
+value, rename stuff connected to VMID enable/disable to "VMID use
+enable/disable".
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V6:
- - Nothing changed. Only Rebase.
+ - Add information about VMID command line option to
+   docs/misc/xen-command-line.pandoc.
+ - Drop the call of local_hfence_gvma_all() from vmid_init() to avoid
+   redundancy as this function is called now in pre_gstage_init().
+   Also, update the comment in guest_mm_init() above local_hfence_gvma_all().
+ - Add __ro_after_init in declaration of g_disabled.
+ - Drop logging of function name in vmid_flush_hart() and drop full stop at
+   the end of the message.
+ - Add the check that vmid is used at the start of vmid_handle_enter().
+ - Drop parentheses around (vmid->vmid == 1) in vmid_handle_enter().
+ - Update BUILD_BUG_ON() in vmid_init as HGATP_VMID_SHIFT was dropped.
 ---
 Changes in V5:
- - Put "p2m->need_flush = false;" before TLB flush.
- - Correct the comment above p2m_write_unlock().
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Rename opt_vmid_use_enabled with opt_vmid to be in sync with command line
+   option.
+ - Invert the expression for data->used = ... and swap "dis" and "en". Also,
+   invert usage of data->used elsewhere.
+ - s/vcpu_vmid_flush_vcpu/vmid_flush_vcpu.
+ - Add prototypes to asm/vmid.h which could be used outside vmid.c.
+ - Update the comment in vmidlen_detect(): instead of Section 3.7 ->
+   Section "Physical Memory Protection".
+ - Move vmid_init() call to pre_gstage_init().
 ---
 Changes in V4:
- - Update the comment above declaration of map_regions_p2mt():
-   s/guest p2m/guest's hostp2m.
- - Add const for p2m_force_tlb_flush_sync()'s local variable `d`.
- - Stray 'w' in the comment inside p2m_write_unlock().
- - Drop p2m_insert_mapping() and leave only map_regions_p2mt() as it
-   is just re-use insert_mapping().
- - Rename p2m_force_tlb_flush_sync() to p2m_tlb_flush().
- - Update prototype of p2m_is_write_locked() to return bool instead of
-   int.
+ - s/guest's virtual/guest-physical in the comment inside vmid.c
+   and in commit message.
+ - Drop x86-related numbers in the comment about "Sketch of the Implementation".
+ - s/__read_only/__ro_after_init in declaration of opt_vmid_enabled.
+ - s/hart_vmid_generation/generation.
+ - Update vmidlen_detect() to work with unsigned int type for vmid_bits
+   variable.
+ - Drop old variable im vmdidlen_detetct, it seems like there is no any reason
+   to restore old value of hgatp with no guest running on a hart yet.
+ - Update the comment above local_hfence_gvma_all() in vmidlen_detect().
+ - s/max_availalbe_bits/max_available_bits.
+ - use BITS_PER_BYTE, instead of "<< 3".
+ - Add BUILD_BUILD_BUG_ON() instead run-time check that an amount of set bits
+   can be held in vmid_data->max_vmid.
+ - Apply changes from the patch "x86/HVM: polish hvm_asid_init() a little" here
+   (changes connected to g_disabled) with the following minor changes:
+   Update the printk() message to "VMIDs use is...".
+   Rename g_disabled to g_vmid_used.
+ - Rename member 'disabled' of vmid_data structure to used.
+ - Use gstage_mode to properly detect VMIDLEN.
 ---
-Changes in v3:
- - Introudce p2m_write_lock() and p2m_is_write_locked().
- - Introduce p2m_force_tlb_flush_sync() and p2m_flush_tlb() to flush TLBs
-   after p2m table update.
- - Change an argument of p2m_insert_mapping() from struct domain *d to
-   p2m_domain *p2m.
- - Drop guest_physmap_add_entry() and use map_regions_p2mt() to define
-   guest_physmap_add_page().
- - Add declaration of map_regions_p2mt() to asm/p2m.h.
- - Rewrite commit message and subject.
- - Drop p2m_access_t related stuff.
- - Add defintion of  p2m_is_write_locked().
+Changes in V3:
+ - Reimplemnt VMID allocation similar to what x86 has implemented.
 ---
-Changes in v2:
- - This changes were part of "xen/riscv: implement p2m mapping functionality".
-   No additional signigicant changes were done.
+Changes in V2:
+ - New patch.
 ---
- xen/arch/riscv/include/asm/p2m.h | 31 ++++++++++++-----
- xen/arch/riscv/p2m.c             | 60 ++++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+), 9 deletions(-)
+ docs/misc/xen-command-line.pandoc   |   9 ++
+ xen/arch/riscv/Makefile             |   1 +
+ xen/arch/riscv/include/asm/domain.h |   6 +
+ xen/arch/riscv/include/asm/vmid.h   |  14 +++
+ xen/arch/riscv/p2m.c                |   7 +-
+ xen/arch/riscv/vmid.c               | 170 ++++++++++++++++++++++++++++
+ 6 files changed, 205 insertions(+), 2 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/vmid.h
+ create mode 100644 xen/arch/riscv/vmid.c
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index 1c89838408..9acd6a64a8 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -128,21 +128,22 @@ static inline int guest_physmap_mark_populate_on_demand(struct domain *d,
-     return -EOPNOTSUPP;
- }
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 34004ce282..6c4bfa3603 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -3096,3 +3096,12 @@ the hypervisor was compiled with `CONFIG_XSM` enabled.
+ * `silo`: this will deny any unmediated communication channels between
+   unprivileged VMs.  To choose this, the separated option in kconfig must also
+   be enabled.
++
++### vmid (RISC-V)
++> `= <boolean>`
++
++> Default: `true`
++
++Permit Xen to use Virtual Machine Identifiers. This is an optimisation which
++tags the TLB entries with an ID per vcpu. This allows for guest TLB flushes
++to be performed without the overhead of a complete TLB flush.
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 5a6f8c115d..1098b6d926 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -17,6 +17,7 @@ obj-y += smpboot.o
+ obj-y += stubs.o
+ obj-y += time.o
+ obj-y += traps.o
++obj-y += vmid.o
+ obj-y += vm_event.o
  
--static inline int guest_physmap_add_entry(struct domain *d,
--                                          gfn_t gfn, mfn_t mfn,
--                                          unsigned long page_order,
--                                          p2m_type_t t)
--{
--    BUG_ON("unimplemented");
--    return -EINVAL;
--}
-+/*
-+ * Map a region in the guest's hostp2m p2m with a specific p2m type.
-+ * The memory attributes will be derived from the p2m type.
-+ */
-+int map_regions_p2mt(struct domain *d,
-+                     gfn_t gfn,
-+                     unsigned long nr,
-+                     mfn_t mfn,
-+                     p2m_type_t p2mt);
+ $(TARGET): $(TARGET)-syms
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index c3d965a559..aac1040658 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -5,6 +5,11 @@
+ #include <xen/xmalloc.h>
+ #include <public/hvm/params.h>
  
- /* Untyped version for RAM only, for compatibility */
- static inline int __must_check
- guest_physmap_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
-                        unsigned int page_order)
++struct vcpu_vmid {
++    uint64_t generation;
++    uint16_t vmid;
++};
++
+ struct hvm_domain
  {
--    return guest_physmap_add_entry(d, gfn, mfn, page_order, p2m_ram_rw);
-+    return map_regions_p2mt(d, gfn, BIT(page_order, UL), mfn, p2m_ram_rw);
- }
+     uint64_t              params[HVM_NR_PARAMS];
+@@ -14,6 +19,7 @@ struct arch_vcpu_io {
+ };
  
- static inline mfn_t gfn_to_mfn(struct domain *d, gfn_t gfn)
-@@ -166,6 +167,18 @@ unsigned char get_max_supported_mode(void);
+ struct arch_vcpu {
++    struct vcpu_vmid vmid;
+ };
  
- int p2m_init(struct domain *d);
- 
-+static inline void p2m_write_lock(struct p2m_domain *p2m)
-+{
-+    write_lock(&p2m->lock);
-+}
+ struct arch_domain {
+diff --git a/xen/arch/riscv/include/asm/vmid.h b/xen/arch/riscv/include/asm/vmid.h
+new file mode 100644
+index 0000000000..1c500c4aff
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/vmid.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
-+void p2m_write_unlock(struct p2m_domain *p2m);
++#ifndef ASM_RISCV_VMID_H
++#define ASM_RISCV_VMID_H
 +
-+static inline bool p2m_is_write_locked(struct p2m_domain *p2m)
-+{
-+    return rw_is_write_locked(&p2m->lock);
-+}
++struct vcpu;
++struct vcpu_vmid;
 +
- unsigned long construct_hgatp(const struct p2m_domain *p2m, uint16_t vmid);
- 
- #endif /* ASM__RISCV__P2M_H */
++void vmid_init(void);
++bool vmid_handle_vmenter(struct vcpu_vmid *vmid);
++void vmid_flush_vcpu(struct vcpu *v);
++void vmid_flush_hart(void);
++
++#endif /* ASM_RISCV_VMID_H */
 diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 7c2ce7ec18..c559cde13a 100644
+index 7bb0fc0ab4..a4c5b682ce 100644
 --- a/xen/arch/riscv/p2m.c
 +++ b/xen/arch/riscv/p2m.c
-@@ -114,6 +114,41 @@ void __init guest_mm_init(void)
-     local_hfence_gvma_all();
- }
+@@ -9,6 +9,7 @@
+ #include <asm/flushtlb.h>
+ #include <asm/p2m.h>
+ #include <asm/riscv_encoding.h>
++#include <asm/vmid.h>
  
-+/*
-+ * Force a synchronous P2M TLB flush.
-+ *
-+ * Must be called with the p2m lock held.
-+ */
-+static void p2m_tlb_flush(struct p2m_domain *p2m)
-+{
-+    const struct domain *d = p2m->domain;
-+
-+    ASSERT(p2m_is_write_locked(p2m));
-+
-+    p2m->need_flush = false;
-+
-+    sbi_remote_hfence_gvma(d->dirty_cpumask, 0, 0);
-+}
-+
-+void p2m_tlb_flush_sync(struct p2m_domain *p2m)
-+{
-+    if ( p2m->need_flush )
-+        p2m_tlb_flush(p2m);
-+}
-+
-+/* Unlock the P2M and do a P2M TLB flush if necessary */
-+void p2m_write_unlock(struct p2m_domain *p2m)
-+{
-+    /*
-+     * The final flush is done with the P2M write lock taken to avoid
-+     * someone else modifying the P2M before the TLB invalidation has
-+     * completed.
-+     */
-+    p2m_tlb_flush_sync(p2m);
-+
-+    write_unlock(&p2m->lock);
-+}
-+
- static void clear_and_clean_page(struct page_info *page, bool clean_dcache)
+ static struct gstage_mode_desc __ro_after_init max_gstage_mode = {
+     .mode = HGATP_MODE_OFF,
+@@ -72,9 +73,11 @@ void __init guest_mm_init(void)
  {
-     void *p = __map_domain_page(page);
-@@ -242,3 +277,28 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+     gstage_mode_detect();
  
-     return rc;
- }
++    vmid_init();
 +
-+static int p2m_set_range(struct p2m_domain *p2m,
-+                         gfn_t sgfn,
-+                         unsigned long nr,
-+                         mfn_t smfn,
-+                         p2m_type_t t)
+     /*
+-     * As gstage_mode_detect() is changing CSR_HGATP, it is necessary to flush
+-     * guest TLB because:
++     * As gstage_mode_detect() and vmid_init() are changing CSR_HGATP, it is
++     * necessary to flush guest TLB because:
+      *
+      * From RISC-V spec:
+      *   Speculative executions of the address-translation algorithm behave as
+diff --git a/xen/arch/riscv/vmid.c b/xen/arch/riscv/vmid.c
+new file mode 100644
+index 0000000000..dc52d91650
+--- /dev/null
++++ b/xen/arch/riscv/vmid.c
+@@ -0,0 +1,170 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/domain.h>
++#include <xen/init.h>
++#include <xen/sections.h>
++#include <xen/lib.h>
++#include <xen/param.h>
++#include <xen/percpu.h>
++
++#include <asm/atomic.h>
++#include <asm/csr.h>
++#include <asm/flushtlb.h>
++#include <asm/p2m.h>
++
++/* Xen command-line option to enable VMIDs */
++static bool __ro_after_init opt_vmid = true;
++boolean_param("vmid", opt_vmid);
++
++/*
++ * VMIDs partition the physical TLB. In the current implementation VMIDs are
++ * introduced to reduce the number of TLB flushes. Each time a guest-physical
++ * address space changes, instead of flushing the TLB, a new VMID is
++ * assigned. This reduces the number of TLB flushes to at most 1/#VMIDs.
++ * The biggest advantage is that hot parts of the hypervisor's code and data
++ * retain in the TLB.
++ *
++ * Sketch of the Implementation:
++ *
++ * VMIDs are a hart-local resource.  As preemption of VMIDs is not possible,
++ * VMIDs are assigned in a round-robin scheme. To minimize the overhead of
++ * VMID invalidation, at the time of a TLB flush, VMIDs are tagged with a
++ * 64-bit generation. Only on a generation overflow the code needs to
++ * invalidate all VMID information stored at the VCPUs with are run on the
++ * specific physical processor. When this overflow appears VMID usage is
++ * disabled to retain correctness.
++ */
++
++/* Per-Hart VMID management. */
++struct vmid_data {
++   uint64_t generation;
++   uint16_t next_vmid;
++   uint16_t max_vmid;
++   bool used;
++};
++
++static DEFINE_PER_CPU(struct vmid_data, vmid_data);
++
++static unsigned int vmidlen_detect(void)
 +{
-+    return -EOPNOTSUPP;
++    unsigned int vmid_bits;
++    unsigned char gstage_mode = get_max_supported_mode();
++
++    /*
++     * According to the RISC-V Privileged Architecture Spec:
++     *   When MODE=Bare, guest physical addresses are equal to supervisor
++     *   physical addresses, and there is no further memory protection
++     *   for a guest virtual machine beyond the physical memory protection
++     *   scheme described in Section "Physical Memory Protection".
++     *   In this case, the remaining fields in hgatp must be set to zeros.
++     * Thereby it is necessary to set gstage_mode not equal to Bare.
++     */
++    ASSERT(gstage_mode != HGATP_MODE_OFF);
++    csr_write(CSR_HGATP,
++              MASK_INSR(gstage_mode, HGATP_MODE_MASK) | HGATP_VMID_MASK);
++    vmid_bits = MASK_EXTR(csr_read(CSR_HGATP), HGATP_VMID_MASK);
++    vmid_bits = flsl(vmid_bits);
++    csr_write(CSR_HGATP, _AC(0, UL));
++
++    /* local_hfence_gvma_all() will be called at the end of pre_gstage_init. */
++
++    return vmid_bits;
 +}
 +
-+int map_regions_p2mt(struct domain *d,
-+                     gfn_t gfn,
-+                     unsigned long nr,
-+                     mfn_t mfn,
-+                     p2m_type_t p2mt)
++void vmid_init(void)
 +{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(d);
-+    int rc;
++    static int8_t __ro_after_init g_vmid_used = -1;
 +
-+    p2m_write_lock(p2m);
-+    rc = p2m_set_range(p2m, gfn, nr, mfn, p2mt);
-+    p2m_write_unlock(p2m);
++    unsigned int vmid_len = vmidlen_detect();
++    struct vmid_data *data = &this_cpu(vmid_data);
 +
-+    return rc;
++    BUILD_BUG_ON(MASK_EXTR(HGATP_VMID_MASK, HGATP_VMID_MASK) >
++                 (BIT((sizeof(data->max_vmid) * BITS_PER_BYTE), UL) - 1));
++
++    data->max_vmid = BIT(vmid_len, U) - 1;
++    data->used = opt_vmid && (vmid_len > 1);
++
++    if ( g_vmid_used < 0 )
++    {
++        g_vmid_used = data->used;
++        printk("VMIDs use is %sabled\n", data->used ? "en" : "dis");
++    }
++    else if ( g_vmid_used != data->used )
++        printk("CPU%u: VMIDs use is %sabled\n", smp_processor_id(),
++               data->used ? "en" : "dis");
++
++    /* Zero indicates 'invalid generation', so we start the count at one. */
++    data->generation = 1;
++
++    /* Zero indicates 'VMIDs use disabled', so we start the count at one. */
++    data->next_vmid = 1;
 +}
++
++void vmid_flush_vcpu(struct vcpu *v)
++{
++    write_atomic(&v->arch.vmid.generation, 0);
++}
++
++void vmid_flush_hart(void)
++{
++    struct vmid_data *data = &this_cpu(vmid_data);
++
++    if ( !data->used )
++        return;
++
++    if ( likely(++data->generation != 0) )
++        return;
++
++    /*
++     * VMID generations are 64 bit.  Overflow of generations never happens.
++     * For safety, we simply disable ASIDs, so correctness is established; it
++     * only runs a bit slower.
++     */
++    printk("VMID generation overrun. Disabling VMIDs\n");
++    data->used = false;
++}
++
++bool vmid_handle_vmenter(struct vcpu_vmid *vmid)
++{
++    struct vmid_data *data = &this_cpu(vmid_data);
++
++    if ( !data->used )
++        goto disabled;
++
++    /* Test if VCPU has valid VMID. */
++    if ( read_atomic(&vmid->generation) == data->generation )
++        return 0;
++
++    /* If there are no free VMIDs, need to go to a new generation. */
++    if ( unlikely(data->next_vmid > data->max_vmid) )
++    {
++        vmid_flush_hart();
++        data->next_vmid = 1;
++        if ( !data->used )
++            goto disabled;
++    }
++
++    /* Now guaranteed to be a free VMID. */
++    vmid->vmid = data->next_vmid++;
++    write_atomic(&vmid->generation, data->generation);
++
++    /*
++     * When we assign VMID 1, flush all TLB entries as we are starting a new
++     * generation, and all old VMID allocations are now stale.
++     */
++    return vmid->vmid == 1;
++
++ disabled:
++    vmid->vmid = 0;
++    return 0;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.51.1
 
