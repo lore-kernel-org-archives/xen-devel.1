@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E759DCFD313
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:32:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170544.1495605 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4673ACFD313
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 12:34:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170562.1495615 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVkF-0000eB-Ge; Mon, 24 Nov 2025 12:32:39 +0000
+	id 1vNVlk-0001YA-07; Mon, 24 Nov 2025 12:34:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170544.1495605; Mon, 24 Nov 2025 12:32:39 +0000
+Received: by outflank-mailman (output) from mailman id 1170562.1495615; Mon, 24 Nov 2025 12:34:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNVkF-0000e4-DP; Mon, 24 Nov 2025 12:32:39 +0000
-Received: by outflank-mailman (input) for mailman id 1170544;
- Mon, 24 Nov 2025 12:32:38 +0000
+	id 1vNVlj-0001Y3-SV; Mon, 24 Nov 2025 12:34:11 +0000
+Received: by outflank-mailman (input) for mailman id 1170562;
+ Mon, 24 Nov 2025 12:34:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CeM5=6A=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vNVd8-0001k4-S3
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:25:18 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Sr25=6A=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vNVli-0001Xp-SJ
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 12:34:10 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a23dc6ec-c930-11f0-980a-7dc792cee155;
- Mon, 24 Nov 2025 13:25:16 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-477b91680f8so33790345e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:25:16 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477bf1df392sm195782005e9.1.2025.11.24.04.25.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 04:25:15 -0800 (PST)
+ id df2204a0-c931-11f0-980a-7dc792cee155;
+ Mon, 24 Nov 2025 13:34:08 +0100 (CET)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b73545723ebso791712266b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 04:34:08 -0800 (PST)
+Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b7654cf0435sm1285238866b.4.2025.11.24.04.34.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Nov 2025 04:34:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,236 +47,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a23dc6ec-c930-11f0-980a-7dc792cee155
+X-Inumbo-ID: df2204a0-c931-11f0-980a-7dc792cee155
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1763987116; x=1764591916; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=HiOO8E0uxvBIuOYrUtu7nBmWTtZUQ4qC/F+v+mwsDJs=;
-        b=dMBHF/39TAzk+DYofAIPS8dM6e+gZpTb6bw3S0QnpvuTRTSh6p+aDZUPXjVekI+U05
-         K0o7OS33eXnhznZpTY8uu8zMMG4P/tM1owFjxodrmEovF4MqVtRFtWdqeM42M42Pqx5g
-         0bkeajs1GocyDHdNQcTatLbjE3KoWEEo4fvhBT1kVZx+nj1v41NfoaN2BGl/oU3YsQV2
-         EJ/w/hVIfldMizjhF7AB0N0HwyyCZ8kfIULrNZRDpMUiA/SC/mxyXdez+CLBNzW59H0T
-         3qnkFq2PDo9MCzzUxiBvWU/PK2JpMth4U4Du62iIowG1m5l5SMBSXzJVm/UOXKKIiZM+
-         FcAQ==
+        d=gmail.com; s=20230601; t=1763987648; x=1764592448; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+sSuYdsdwkxhTsu6a2x7f7aj3mdyYmC59jrVxhin0Uo=;
+        b=ilr5LO2Jsh3gObk2tOqXR+5Vu26Ze3EJFaRAWdIsttF1CczFz19VTytmh/V4Z5GbL3
+         2Tey5Z7cftmMscKigNfqcq7beN19fiyuMmS9q2TcicHBtDjCo5c4jPKWYmPxmFAnR650
+         HiMgeuZdfYey79J/gzNbcsuLLw88fsVLpKzBbbVIRkr54Pop4OjmHFEpGpR96JIO63ez
+         Zjvzs4I6Hh6oh+lMcKx/9JDpTGQGkE61riA83BrWcIjy5JsD5yZ6t4CMttYR78gfWatx
+         N//Ds67T9NORYNr3yg6XhznzGyRvKyCYwy9V2EkZYnRhIvOc/PExVKvMghLcvFdprU2B
+         26Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763987116; x=1764591916;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1763987648; x=1764592448;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HiOO8E0uxvBIuOYrUtu7nBmWTtZUQ4qC/F+v+mwsDJs=;
-        b=QtYpcI/cadp6Gi+qoVQHo03gMj2IgMOwZzzmzP5+mwgZUI1Tcd4skrEdSvqx7zmTfk
-         3vQ1GoN+wN2eSNqBFX74p5KnoBXP4QPS+aV927TAkUTNgBlz9gZ37sAW+temYNnblvME
-         m3MEAY+adlnMS4H2D6xb7NyoRBTQMpN6fsysDIGV7UWClh8hx5+mkMRonRbIWVz1Goku
-         IfBTdZ0HFAoxkJcgY38QXb6xb2ayyJwp3klFVrHn/NFtArknhflb7bMFxuh6IukMitXO
-         IE5j3O/bEzwXkGGCkHhEqyvXAiVpbRfVR4VZ8mJ/+LG9s7tNIEcoXdg7NDkypg+Xk0q2
-         Jadw==
-X-Gm-Message-State: AOJu0Yylchbll0PneZYxRb2HPaVt+ZZWy/CQofugJPEVgMYOkUTGWBhP
-	WMhk2TXQxhPE+qiknj8G0wiKwdq94FsFoYunk1kuoTENHQ2xX5/nYyaNdCk7wBPxNbMzKQymb2n
-	NPyM=
-X-Gm-Gg: ASbGncuoWVkPkLCnGCnDRNwLjXLcjTstTYCinE05Zq9rgl6VzudMKfPNH1qjq+1KR3r
-	8nhqc7+EzMyKfnqgdZtaeYuQcXwkBVcUlSdHNv/NFMucw8mu/kdTljXN1RBGgTigR16gO1I1+zD
-	RNjuomNOwDjZNrm7csyCAR6Fg8NxTVBp+xTeEncQxOCPJNigQOpRdkbZwhz+z8wCSPdZo+4FsN/
-	L4mpHiOexbsyMG27SqQrMThvzFBw9LzqCCJLmI14VrfrswSiHBFbaCVlnUTJf6mSPgSldv5b6do
-	/1hwzgOuliHQgIqqmmVmn+IZtgICWSO4tEDiRd69W4Ke3F7/0qC8vIumrdmVzdUEhensCpSwHj2
-	k1oFB8UOsg+ktE0nAgp14PBoB58myVo7VScGNtURA8Z69Agt2o5qjmApleiUajfP+Qd6ugMhVYk
-	h8ZNJSa0eTmdiMb7S6cwZF6pyjrZtyuz9tIi69V6lgtVxmceJuGGYiOl5VqiWFQlLbWJ/gL/LCy
-	eGYguZ2UZqiOA==
-X-Google-Smtp-Source: AGHT+IER1zqoIJny1pLILhNWvB7gTTC8sA2UNU0+uGH3XryZH002d0/wFxW7pSX4N+kLBmIsOfliSg==
-X-Received: by 2002:a05:600c:46cd:b0:475:dc5c:3a89 with SMTP id 5b1f17b1804b1-477c1136b7fmr100522755e9.34.1763987116126;
-        Mon, 24 Nov 2025 04:25:16 -0800 (PST)
-Message-ID: <bacee005-8ba3-468e-8de4-681af1cc4856@suse.com>
-Date: Mon, 24 Nov 2025 13:25:18 +0100
+        bh=+sSuYdsdwkxhTsu6a2x7f7aj3mdyYmC59jrVxhin0Uo=;
+        b=aE2e5GQOzJAS3YOCs7ys7tlbLSxFgRYxtCfsKcFQRKr9du9XS2voUdo7UZkWICYNbo
+         TUMpeVAGiinZKv4SAGMDJmiZXk4v8s0c7oJOSyKN9J/MN/0swWZJQnOlx4WyygOdJXCM
+         37FKgCyMSI0JgjBVU7/0YKV5h/iFcJ75Kn2Re3TOdyuGfMOl0Y9GF4EdbaLTGJ0oHJRt
+         Wj4m9a0nuIWtp4Ut10Q+Ne8Zy4T7roR8z2tDT/5OMrRSs0b00IBSXXekqSwjBvgSFqv8
+         zdbWqlKuh6Lh3DVNoG276UtZowQxLUhkdt9oB+76O7RNqpvWvSSJ/+o0hqtZW9My2E9m
+         oDZQ==
+X-Gm-Message-State: AOJu0YwbQ+gTkrxmTaK8hKIejjTsK1tGhvNNrBgRg3IR3fpauLtQYYV5
+	d5i3amLU94nBs1quz8+rlwRWp7HkbAS6EDW9zzNJvpanw9e3uGeGM/pPXp+JwT0a
+X-Gm-Gg: ASbGnctGvD9KUN9MXMTTSJm02Novpikeu4v1sQPwgrqGkHhTVvqm61NfKvDXzxoOMSy
+	o2/FqwxYNeYv2oI4Us/E6+QTAWApuREgnb45/Vw192VJ4zyBhqHqk0JT5vzs3N4elKubI1APVkb
+	M/qznfjCi+l89zNdRi/6w5b7nNRviFrxSdBCi1T1bC1+XA5xU/Xm6zBkWu4TSV1b4vfuUPzca7K
+	10P4zPe8p3sbuv8jMdJXfmTVWaxtQR3UWD3T553IOWKbtyw+Oi4FeFF3YeKDdkNah1eRoznDVK7
+	HzbrFmsyBEAQ0SgUpA7jEFjY6m6ETYptVkoz6klMNlg2rUlfFlcWQSSp961vLjAi6Y5dTwxUCWg
+	KgordK2eSXY7LWaJLdVYtf/DYG2Bh8Zixm7UrR0ml/24qN3N+/wxtpuqEFx5xarnqo32n1M5N+C
+	1zJmk5szsJCyIA0VshTZ6K6cD3B9Ott0TX70bA4/Eedl2Hk74adhUeWg0=
+X-Google-Smtp-Source: AGHT+IFeVvtdieypPfUUuFa98jmCPo/+NVn9t8wvxA4TkdblLsWeBbTIB7f6Iw/e9IzssQAGdXUBMg==
+X-Received: by 2002:a17:907:d05:b0:b73:6b24:14b5 with SMTP id a640c23a62f3a-b7671a47bafmr1395645166b.31.1763987647315;
+        Mon, 24 Nov 2025 04:34:07 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 00/19] xen/riscv: introduce p2m functionality
+Date: Mon, 24 Nov 2025 13:33:33 +0100
+Message-ID: <cover.1763986955.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 6/6] x86/cpufreq: use host CPU policy in HWP driver
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jason Andryuk <jason.andryuk@amd.com>
-References: <f0ac75c8-5d65-43ef-aeeb-78d34f1da470@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <f0ac75c8-5d65-43ef-aeeb-78d34f1da470@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-There's no need to invoke CPUID yet another time. This way two of the
-static booleans can also go away.
+In this patch series are introduced necessary functions to build and manage
+RISC-V guest page tables and MMIO/RAM mappings.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-v2: Introduce cpu_has_*.
+Changes in V5:
+ - Addressed comments for v4.
+ - The following patches were Acked-by:
+   - [v5 16/18] xen/riscv: implement mfn_valid() and page
+   - [v5 15/18] xen/riscv: implement put_page()
+   - [v5 14/18] xen/riscv: Implement superpage splitting for p2m mappings
+   - [v5 09/18] xen/riscv: implement function to map memory in guest p2m
+   - [v5 07/18] xen/riscv: add new p2m types and helper macros for type classification
+   - [v5 03/18] xen/riscv: introduce things necessary for p2m initialization
+---
+Changes in V4:
+ - Merged to staging:
+   - xen/riscv: introduce sbi_remote_hfence_gvma()
+   - xen/riscv: introduce sbi_remote_hfence_gvma_vmid()
+ - Drop "xen/riscv: introduce page_{get,set}_xenheap_gfn()" as grant tables aren't going to be introduced for the moment. Also, drops other parts connected to grant tables support.
+ - All other changes are patch specific.
+---
+Changes in V3:
+ - Introduce metadata table to store P2M types.
+ - Use x86's way to allocate VMID.
+ - Abstract Arm-specific p2m type name for device MMIO mappings.
+ - All other updates please look at specific patch.
+---
+Changes in V2:
+ - Merged to staging:
+   - [PATCH v1 1/6] xen/riscv: add inclusion of xen/bitops.h to asm/cmpxchg.h
+ - New patches:
+   - xen/riscv: implement sbi_remote_hfence_gvma{_vmid}().
+ - Split patch "xen/riscv: implement p2m mapping functionality" into smaller
+   one patches:
+   - xen/riscv: introduce page_set_xenheap_gfn()
+   - xen/riscv: implement guest_physmap_add_entry() for mapping GFNs to MFNs
+   - xen/riscv: implement p2m_set_entry() and __p2m_set_entry()
+   - xen/riscv: Implement p2m_free_entry() and related helpers
+   - xen/riscv: Implement superpage splitting for p2m mappings
+   - xen/riscv: implement p2m_next_level()
+   - xen/riscv: Implement p2m_entry_from_mfn() and support PBMT configuration
+ - Move root p2m table allocation to separate patch:
+   xen/riscv: add root page table allocation
+ - Drop dependency of this patch series from the patch witn an introduction of
+   SvPBMT as it was merged.
+ - Patch "[PATCH v1 4/6] xen/riscv: define pt_t and pt_walk_t structures" was
+   renamed to xen/riscv: introduce pte_{set,get}_mfn() as after dropping of
+   bitfields for PTE structure, this patch introduce only pte_{set,get}_mfn().
+ - Rename "xen/riscv: define pt_t and pt_walk_t structures" to
+   "xen/riscv: introduce pte_{set,get}_mfn()" as pt_t and pt_walk_t were
+   dropped.
+ - Introduce guest domain's VMID allocation and manegement.
+ - Add patches necessary to implement p2m lookup:
+   - xen/riscv: implement mfn_valid() and page reference, ownership handling helpers
+   - xen/riscv: add support of page lookup by GFN
+ - Re-sort patch series.
+ - All other changes are patch-specific. Please check them.
+---
 
---- a/xen/arch/x86/acpi/cpufreq/hwp.c
-+++ b/xen/arch/x86/acpi/cpufreq/hwp.c
-@@ -18,9 +18,6 @@
- 
- static bool __ro_after_init hwp_in_use;
- 
--static bool __ro_after_init feature_hwp_notification;
--static bool __ro_after_init feature_hwp_activity_window;
--
- static bool __read_mostly feature_hdc;
- 
- static bool __ro_after_init opt_cpufreq_hdc = true;
-@@ -165,8 +162,6 @@ bool hwp_active(void)
- 
- static bool __init hwp_available(void)
- {
--    unsigned int eax;
--
-     if ( boot_cpu_data.cpuid_level < CPUID_PM_LEAF )
-     {
-         hwp_verbose("cpuid_level (%#x) lacks HWP support\n",
-@@ -183,29 +178,22 @@ static bool __init hwp_available(void)
-         return false;
-     }
- 
--    eax = cpuid_eax(CPUID_PM_LEAF);
--
-     hwp_verbose("%d notify: %d act-window: %d energy-perf: %d pkg-level: %d peci: %d\n",
--                !!(eax & CPUID6_EAX_HWP),
--                !!(eax & CPUID6_EAX_HWP_NOTIFICATION),
--                !!(eax & CPUID6_EAX_HWP_ACTIVITY_WINDOW),
--                !!(eax & CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE),
--                !!(eax & CPUID6_EAX_HWP_PACKAGE_LEVEL_REQUEST),
--                !!(eax & CPUID6_EAX_HWP_PECI));
-+                cpu_has_hwp, cpu_has_hwp_notification,
-+                cpu_has_hwp_activity_window, cpu_has_hwp_epp,
-+                cpu_has_hwp_plr, cpu_has_hwp_peci);
- 
--    if ( !(eax & CPUID6_EAX_HWP) )
-+    if ( !cpu_has_hwp )
-         return false;
- 
--    if ( !(eax & CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE) )
-+    if ( !cpu_has_hwp_epp )
-     {
-         hwp_verbose("disabled: No energy/performance preference available");
- 
-         return false;
-     }
- 
--    feature_hwp_notification    = eax & CPUID6_EAX_HWP_NOTIFICATION;
--    feature_hwp_activity_window = eax & CPUID6_EAX_HWP_ACTIVITY_WINDOW;
--    feature_hdc                 = eax & CPUID6_EAX_HDC;
-+    feature_hdc = cpu_has_hdc;
- 
-     hwp_verbose("Hardware Duty Cycling (HDC) %ssupported%s\n",
-                 feature_hdc ? "" : "not ",
-@@ -213,7 +201,7 @@ static bool __init hwp_available(void)
-                             : "");
- 
-     hwp_verbose("HW_FEEDBACK %ssupported\n",
--                (eax & CPUID6_EAX_HW_FEEDBACK) ? "" : "not ");
-+                cpu_has_hw_feedback ? "" : "not ");
- 
-     hwp_in_use = true;
- 
-@@ -226,7 +214,8 @@ static int cf_check hwp_cpufreq_verify(s
- {
-     struct hwp_drv_data *data = per_cpu(hwp_drv_data, policy->cpu);
- 
--    if ( !feature_hwp_activity_window && data->activity_window )
-+    if ( !cpu_has_hwp_activity_window &&
-+         data->activity_window )
-     {
-         hwp_verbose("HWP activity window not supported\n");
- 
-@@ -268,7 +257,7 @@ static int cf_check hwp_cpufreq_target(s
-     hwp_req.max_perf = data->maximum;
-     hwp_req.desired = data->desired;
-     hwp_req.energy_perf = data->energy_perf;
--    if ( feature_hwp_activity_window )
-+    if ( cpu_has_hwp_activity_window )
-         hwp_req.activity_window = data->activity_window;
- 
-     if ( hwp_req.raw == data->curr_req.raw )
-@@ -365,7 +354,7 @@ static void cf_check hwp_init_msrs(void
-     }
- 
-     /* Ensure we don't generate interrupts */
--    if ( feature_hwp_notification )
-+    if ( cpu_has_hwp_notification )
-         wrmsr_safe(MSR_HWP_INTERRUPT, 0);
- 
-     if ( !(val & PM_ENABLE_HWP_ENABLE) )
-@@ -537,7 +526,8 @@ int get_hwp_para(unsigned int cpu,
-         return -ENODATA;
- 
-     cppc_para->features         =
--        (feature_hwp_activity_window ? XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW : 0);
-+        (cpu_has_hwp_activity_window
-+         ? XEN_SYSCTL_CPPC_FEAT_ACT_WINDOW : 0);
-     cppc_para->lowest           = data->hw.lowest;
-     cppc_para->lowest_nonlinear = data->hw.most_efficient;
-     cppc_para->nominal          = data->hw.guaranteed;
-@@ -585,7 +575,7 @@ int set_hwp_para(struct cpufreq_policy *
- 
-     /* Clear out activity window if lacking HW supported. */
-     if ( (set_cppc->set_params & XEN_SYSCTL_CPPC_SET_ACT_WINDOW) &&
--         !feature_hwp_activity_window )
-+         !cpu_has_hwp_activity_window )
-     {
-         set_cppc->set_params &= ~XEN_SYSCTL_CPPC_SET_ACT_WINDOW;
-         cleared_act_window = true;
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -115,14 +115,6 @@ static inline bool boot_cpu_has(unsigned
- }
- 
- #define CPUID_PM_LEAF                                6
--#define CPUID6_EAX_HWP                               BIT(7, U)
--#define CPUID6_EAX_HWP_NOTIFICATION                  BIT(8, U)
--#define CPUID6_EAX_HWP_ACTIVITY_WINDOW               BIT(9, U)
--#define CPUID6_EAX_HWP_ENERGY_PERFORMANCE_PREFERENCE BIT(10, U)
--#define CPUID6_EAX_HWP_PACKAGE_LEVEL_REQUEST         BIT(11, U)
--#define CPUID6_EAX_HDC                               BIT(13, U)
--#define CPUID6_EAX_HWP_PECI                          BIT(16, U)
--#define CPUID6_EAX_HW_FEEDBACK                       BIT(19, U)
- 
- /* CPUID level 0x00000001.edx */
- #define cpu_has_fpu             1
-@@ -179,6 +171,14 @@ static inline bool boot_cpu_has(unsigned
- /* CPUID level 0x00000006.eax */
- #define cpu_has_turbo           host_cpu_policy.basic.turbo
- #define cpu_has_arat            host_cpu_policy.basic.arat
-+#define cpu_has_hwp             host_cpu_policy.basic.hwp
-+#define cpu_has_hwp_notification host_cpu_policy.basic.hwp_notification
-+#define cpu_has_hwp_activity_window host_cpu_policy.basic.hwp_activity_window
-+#define cpu_has_hwp_epp        host_cpu_policy.basic.hwp_epp
-+#define cpu_has_hwp_plr        host_cpu_policy.basic.hwp_plr
-+#define cpu_has_hdc            host_cpu_policy.basic.hdc
-+#define cpu_has_hwp_peci       host_cpu_policy.basic.hwp_peci
-+#define cpu_has_hw_feedback    host_cpu_policy.basic.hw_feedback
- 
- /* CPUID level 0x00000006.ecx */
- #define cpu_has_aperfmperf      host_cpu_policy.basic.aperfmperf
+Oleksii Kurochko (19):
+  xen/riscv: avoid redundant HGATP*_MODE_SHIFT and HGATP*_VMID_SHIFT
+  xen/riscv: detect and initialize G-stage mode
+  xen/riscv: introduce VMID allocation and manegement
+  xen/riscv: introduce things necessary for p2m initialization
+  xen/riscv: construct the P2M pages pool for guests
+  xen/riscv: add root page table allocation
+  xen/riscv: introduce pte_{set,get}_mfn()
+  xen/riscv: add new p2m types and helper macros for type classification
+  xen/dom0less: abstract Arm-specific p2m type name for device MMIO
+    mappings
+  xen/riscv: implement function to map memory in guest p2m
+  xen/riscv: implement p2m_set_range()
+  xen/riscv: Implement p2m_free_subtree() and related helpers
+  xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration
+  xen/riscv: implement p2m_next_level()
+  xen/riscv: Implement superpage splitting for p2m mappings
+  xen/riscv: implement put_page()
+  xen/riscv: implement mfn_valid() and page reference, ownership
+    handling helpers
+  xen/riscv: add support of page lookup by GFN
+  xen/riscv: introduce metadata table to store P2M type
+
+ docs/misc/xen-command-line.pandoc           |    9 +
+ xen/arch/arm/include/asm/p2m.h              |    5 +
+ xen/arch/riscv/Makefile                     |    3 +
+ xen/arch/riscv/cpufeature.c                 |    1 +
+ xen/arch/riscv/include/asm/Makefile         |    1 -
+ xen/arch/riscv/include/asm/cpufeature.h     |    1 +
+ xen/arch/riscv/include/asm/domain.h         |   23 +
+ xen/arch/riscv/include/asm/flushtlb.h       |   13 +-
+ xen/arch/riscv/include/asm/mm.h             |   29 +-
+ xen/arch/riscv/include/asm/p2m.h            |  185 ++-
+ xen/arch/riscv/include/asm/page.h           |   37 +
+ xen/arch/riscv/include/asm/paging.h         |   20 +
+ xen/arch/riscv/include/asm/riscv_encoding.h |   23 +-
+ xen/arch/riscv/include/asm/vmid.h           |   14 +
+ xen/arch/riscv/mm.c                         |   69 +-
+ xen/arch/riscv/p2m.c                        | 1443 +++++++++++++++++++
+ xen/arch/riscv/paging.c                     |  139 ++
+ xen/arch/riscv/setup.c                      |    3 +
+ xen/arch/riscv/stubs.c                      |    5 -
+ xen/arch/riscv/vmid.c                       |  170 +++
+ xen/common/device-tree/dom0less-build.c     |    2 +-
+ 21 files changed, 2158 insertions(+), 37 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/paging.h
+ create mode 100644 xen/arch/riscv/include/asm/vmid.h
+ create mode 100644 xen/arch/riscv/p2m.c
+ create mode 100644 xen/arch/riscv/paging.c
+ create mode 100644 xen/arch/riscv/vmid.c
+
+-- 
+2.51.1
 
 
