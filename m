@@ -4,39 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85F4CFA466
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 13:17:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170896.1495915 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8837DCFD341
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 13:23:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170912.1495946 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNWRk-0002XW-Nl; Mon, 24 Nov 2025 13:17:36 +0000
+	id 1vNWWp-0005DK-L2; Mon, 24 Nov 2025 13:22:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170896.1495915; Mon, 24 Nov 2025 13:17:36 +0000
+Received: by outflank-mailman (output) from mailman id 1170912.1495946; Mon, 24 Nov 2025 13:22:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNWRk-0002XP-L1; Mon, 24 Nov 2025 13:17:36 +0000
-Received: by outflank-mailman (input) for mailman id 1170896;
- Mon, 24 Nov 2025 13:17:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vNWWp-0005DC-GZ; Mon, 24 Nov 2025 13:22:51 +0000
+Received: by outflank-mailman (input) for mailman id 1170912;
+ Mon, 24 Nov 2025 13:22:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Qo8f=6A=gmail.com=samaan.dehghan@srs-se1.protection.inumbo.net>)
- id 1vNWRj-0002XH-60
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 13:17:35 +0000
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [2607:f8b0:4864:20::f32])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ef507f16-c937-11f0-980a-7dc792cee155;
- Mon, 24 Nov 2025 14:17:33 +0100 (CET)
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-88043139c35so42759376d6.0
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 05:17:32 -0800 (PST)
-Received: from localhost.localdomain
- (host-154-4.mdu.ilcmifre.champaign.il.us.clients.pavlovmedia.net.
- [66.253.154.4]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8846e54e9e2sm99403716d6.31.2025.11.24.05.17.30
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 24 Nov 2025 05:17:31 -0800 (PST)
+ <SRS0=H9wV=6A=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
+ id 1vNWWo-00059t-Ol
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 13:22:50 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id abec3f76-c938-11f0-9d18-b5c5bf9af7f9;
+ Mon, 24 Nov 2025 14:22:49 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B5B121477;
+ Mon, 24 Nov 2025 05:22:40 -0800 (PST)
+Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
+ [10.1.194.54])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 120A13F73B;
+ Mon, 24 Nov 2025 05:22:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,192 +45,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ef507f16-c937-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763990251; x=1764595051; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=J1cmzrTJ50vwCC7yI8wn//dLiVisgkYIouMfBXVIbVA=;
-        b=avrHtCjjRuODN+NfYJIh8/JBW4eli56nN/2+auQA1Iw4m2VPJLOdG3k815cwRhsb9q
-         62blaAs2vbgdNHwg06AdfxE3Huv3Niv2azbL4Uh0n9296ez9sXudoE5Qt078Wg0HfTMg
-         i+EiSuqPs0cn50ZTgOWQLl/dHItPSyRMCZpfCuHZAOWelyPNGHdyv7BKlqtVDse8YUn9
-         WaNPR5R5Y8Sboj2/2G2/xDm0k2qXn2Q5D+7hljj1o+nEI9gB+Oy8iQYt+CgP4iJFh8Qk
-         GfdX3PBLiakd5MMr2nbdmNoMJ9lkCF8Kd/rSzIblp/IdYE/UjpM33wAFQFPwpreXCjtB
-         2FdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763990251; x=1764595051;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=J1cmzrTJ50vwCC7yI8wn//dLiVisgkYIouMfBXVIbVA=;
-        b=J00GTUaDhZkOI7dBi/6VaXyUcs5j1R/7vCPyCf8FgLJbnBqdF2+QWQxB0SW8HjE8OU
-         h113npAn6ybLa+94JXxDBJTHQvDB69Ft+POI/G/5GadCNZGjW1TssdkeawunlV+EjHQ2
-         XnbNgAVtgUOlsDMrnRjHmX7owdgpW8Xg0YdZP1ETb2OuavmqLt3KdMopuJJt3VG2owiR
-         iFySmEJV3ee442xCPebj2c1j9PcKOch2b1lrZnfDIZ+bPb20qEojYcy/yHjiPLQjYHuL
-         CZeM+ikgpIv+U6kBP2/h4ItFHIC2iPdp3AD/amVMgzCL0TlnygH4EFd506Hc9oUlmPhv
-         W4gg==
-X-Gm-Message-State: AOJu0YytZp6BzhHpwuLAmzER1pgJd4/o7TYNg0uvJCB0O5G3yKEt6nDL
-	Inrk1BzZ4wIVwws2kbNC2bRq9TklH9ZBQRrBPIESCaDMNd5Uo26DfGLhJivLItQ=
-X-Gm-Gg: ASbGncv4beKQ7cYzW/60uAuRJ3ILH9up9VqfGKKbwkM9KRFHlg5pvK1t7Jody7Tx0N5
-	lQtBLLvawi1RSvKsW63WAkAQNUksyWgWyUi3sJUo+ZYfh99MbvEIl0iqdgB5fAGj0KiHqzGcm8c
-	kllKAWVvojPf3qP9Eaz2CTuNEO0PyMGbvqRFI/QK6KMkNDZC0SPvXYbNXZ8MSWMqz4wm0Zlt7KL
-	5j26dvGxE+Ggg5HpkTA1G7Fl4IEazquK+l3+uHT6anWgb5d29b9EZJFtaPZHX+5PGITnjNNVLS8
-	eg95VguknObUpM69w9NugBcQuF0iuK7ql1+kM3QjJ93T3Uh8Iv/R9Saoy/5Aod12elxO2eQ1TIY
-	Sn2XoYSWuSTlK/gJp7zQFMQ+K5YtftoRgAjL2EpBTHGh8uLDH3onC00e20IaTRJnOoxaFaWHLUk
-	xgYBqgsdEDEJv0ONo1S4CyhCKI5zQ5W6Womy87M2hAeTLeHsSlNgbJhcBHB1W2LTOZRJkh15wiv
-	iCrlAOWwitur72Nb8/jWFposqQiQOwjP0ptrKivSwXi/LGMRQelTDde1h9sPoVuGP+kaUPQxys8
-	HtM=
-X-Google-Smtp-Source: AGHT+IFHNRObG6KPLTocz7VgtGSA2GbUMp3Tc8MCg/Az3NT8x2atRCr0Vuu1WHQUjTOS6NRup6GKlA==
-X-Received: by 2002:a05:622a:44:b0:4ee:1bc7:9d7b with SMTP id d75a77b69052e-4ee588cb852mr168410651cf.39.1763990251475;
-        Mon, 24 Nov 2025 05:17:31 -0800 (PST)
-From: Saman Dehghan <samaan.dehghan@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3] XEN: enable MC/DC coverage for Clang
-Date: Mon, 24 Nov 2025 07:17:24 -0600
-Message-ID: <aa144043d4e0592fbbeaf0a3d5e9cad6e9226d8a.1763989809.git.samaan.dehghan@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <52b0762ac4b5535a842a530365a75bdc81a5fe61.1763981619.git.samaan.dehghan@gmail.com>
-References: <52b0762ac4b5535a842a530365a75bdc81a5fe61.1763981619.git.samaan.dehghan@gmail.com>
+X-Inumbo-ID: abec3f76-c938-11f0-9d18-b5c5bf9af7f9
+From: Kevin Brodsky <kevin.brodsky@arm.com>
+To: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org,
+	Kevin Brodsky <kevin.brodsky@arm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Andreas Larsson <andreas@gaisler.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	David Woodhouse <dwmw2@infradead.org>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Jann Horn <jannh@google.com>,
+	Juergen Gross <jgross@suse.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Venkat Rao Bagalkote <venkat88@linux.ibm.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Will Deacon <will@kernel.org>,
+	Yeoreum Yun <yeoreum.yun@arm.com>,
+	linux-arm-kernel@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	sparclinux@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	x86@kernel.org
+Subject: [PATCH v5 01/12] powerpc/64s: Do not re-activate batched TLB flush
+Date: Mon, 24 Nov 2025 13:22:17 +0000
+Message-ID: <20251124132228.622678-2-kevin.brodsky@arm.com>
+X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251124132228.622678-1-kevin.brodsky@arm.com>
+References: <20251124132228.622678-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Clang >= 18 supports Modified Condition/Decision Coverage (MC/DC).
-This patch enables the detection and usage of this feature when
-compiling Xen with Clang.
+From: Alexander Gordeev <agordeev@linux.ibm.com>
 
-- Update detection logic in Kconfig to check for the required set of
-  Clang flags for MC/DC:
-  '-fprofile-instr-generate -fcoverage-mapping -fcoverage-mcdc'.
-  This bundle is necessary because '-fcoverage-mcdc' requires
-  '-fcoverage-mapping', which in turn requires '-fprofile-instr-generate'.
-- Update llvm.c to handle the profile format changes (bitmap section)
-  required for MC/DC.
-- Guard -Wno-error=coverage-too-many-conditions with CONFIG_CC_IS_GCC
-  to avoid passing a GCC-only warning option to Clang
+Since commit b9ef323ea168 ("powerpc/64s: Disable preemption in hash
+lazy mmu mode") a task can not be preempted while in lazy MMU mode.
+Therefore, the batch re-activation code is never called, so remove it.
 
-Signed-off-by: Saman Dehghan <samaan.dehghan@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Alexander Gordeev <agordeev@linux.ibm.com>
+Reviewed-by: David Hildenbrand <david@redhat.com>
+Reviewed-by: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+Reviewed-by: Ryan Roberts <ryan.roberts@arm.com>
+Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
 ---
- xen/Kconfig                |  9 +++++++--
- xen/Rules.mk               |  1 +
- xen/arch/x86/Makefile      |  2 +-
- xen/common/coverage/llvm.c | 18 +++++++++++++++++-
- 4 files changed, 26 insertions(+), 4 deletions(-)
+ arch/powerpc/include/asm/thread_info.h |  2 --
+ arch/powerpc/kernel/process.c          | 25 -------------------------
+ 2 files changed, 27 deletions(-)
 
-diff --git a/xen/Kconfig b/xen/Kconfig
-index a5e5af3b76..8f2cc111cd 100644
---- a/xen/Kconfig
-+++ b/xen/Kconfig
-@@ -51,9 +51,14 @@ config CC_HAS_ASM_GOTO_OUTPUT
- 	depends on !GCC_ASM_GOTO_OUTPUT_BROKEN
- 	depends on $(success,echo 'int foo(int x) { asm goto ("": "=r"(x) ::: bar); return x; bar: return 0; }' | $(CC) -x c - -c -o /dev/null)
+diff --git a/arch/powerpc/include/asm/thread_info.h b/arch/powerpc/include/asm/thread_info.h
+index b0f200aba2b3..97f35f9b1a96 100644
+--- a/arch/powerpc/include/asm/thread_info.h
++++ b/arch/powerpc/include/asm/thread_info.h
+@@ -154,12 +154,10 @@ void arch_setup_new_exec(void);
+ /* Don't move TLF_NAPPING without adjusting the code in entry_32.S */
+ #define TLF_NAPPING		0	/* idle thread enabled NAP mode */
+ #define TLF_SLEEPING		1	/* suspend code enabled SLEEP mode */
+-#define TLF_LAZY_MMU		3	/* tlb_batch is active */
+ #define TLF_RUNLATCH		4	/* Is the runlatch enabled? */
  
--# Compiler supports -fcondition-coverage aka MC/DC
-+# Compiler supports Modified Condition/Decision Coverage (MC/DC).
-+# MC/DC is a rigorous code coverage metric that requires every condition
-+# within a decision (boolean expression) to be shown to independently
-+# influence the decision's final outcome.
-+#
-+# Minimum toolchain baseline: GCC >= 14, or Clang >= 18.
- config CC_HAS_MCDC
--	def_bool $(cc-option,-fcondition-coverage)
-+	def_bool $(cc-option,-fcondition-coverage) || $(cc-option,-fprofile-instr-generate -fcoverage-mapping -fcoverage-mcdc)
+ #define _TLF_NAPPING		(1 << TLF_NAPPING)
+ #define _TLF_SLEEPING		(1 << TLF_SLEEPING)
+-#define _TLF_LAZY_MMU		(1 << TLF_LAZY_MMU)
+ #define _TLF_RUNLATCH		(1 << TLF_RUNLATCH)
  
- # Set code alignment.
- #
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 24f447b957..2b28d1ac3c 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -136,6 +136,7 @@ non-init-objects = $(filter-out %.init.o, $(obj-y) $(obj-bin-y) $(extra-y))
- 
- ifeq ($(CONFIG_CC_IS_CLANG),y)
-     cov-cflags-$(CONFIG_COVERAGE) := -fprofile-instr-generate -fcoverage-mapping
-+    cov-cflags-$(CONFIG_CONDITION_COVERAGE) += -fcoverage-mcdc
- else
-     cov-cflags-$(CONFIG_COVERAGE) := -fprofile-arcs -ftest-coverage
-     cov-cflags-$(CONFIG_CONDITION_COVERAGE) += -fcondition-coverage
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index 407571c510..6c0ff67fa8 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -98,7 +98,7 @@ $(obj)/usercopy.o: CFLAGS-y += -iquote .
- ifneq ($(CONFIG_HVM),y)
- $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
- endif
--ifeq ($(CONFIG_CONDITION_COVERAGE),y)
-+ifeq ($(CONFIG_CONDITION_COVERAGE)$(CONFIG_CC_IS_GCC),yy)
- $(obj)/x86_emulate.o: CFLAGS-y += -Wno-error=coverage-too-many-conditions
- endif
- 
-diff --git a/xen/common/coverage/llvm.c b/xen/common/coverage/llvm.c
-index 532889c857..5663fb10dd 100644
---- a/xen/common/coverage/llvm.c
-+++ b/xen/common/coverage/llvm.c
-@@ -120,6 +120,8 @@ extern const char __start___llvm_prf_names[];
- extern const char __stop___llvm_prf_names[];
- extern uint64_t __start___llvm_prf_cnts[];
- extern uint64_t __stop___llvm_prf_cnts[];
-+extern const char __start___llvm_prf_bits[];
-+extern const char __stop___llvm_prf_bits[];
- 
- #define START_DATA      ((const void *)__start___llvm_prf_data)
- #define END_DATA        ((const void *)__stop___llvm_prf_data)
-@@ -127,16 +129,23 @@ extern uint64_t __stop___llvm_prf_cnts[];
- #define END_NAMES       ((const void *)__stop___llvm_prf_names)
- #define START_COUNTERS  ((void *)__start___llvm_prf_cnts)
- #define END_COUNTERS    ((void *)__stop___llvm_prf_cnts)
-+#define START_BITMAP    ((void *)__start___llvm_prf_bits)
-+#define END_BITMAP      ((void *)__stop___llvm_prf_bits)
- 
- static void cf_check reset_counters(void)
+ #ifndef __ASSEMBLER__
+diff --git a/arch/powerpc/kernel/process.c b/arch/powerpc/kernel/process.c
+index eb23966ac0a9..9237dcbeee4a 100644
+--- a/arch/powerpc/kernel/process.c
++++ b/arch/powerpc/kernel/process.c
+@@ -1281,9 +1281,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
  {
-     memset(START_COUNTERS, 0, END_COUNTERS - START_COUNTERS);
-+    if ( IS_ENABLED(CONFIG_CONDITION_COVERAGE) )
-+        memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
- }
+ 	struct thread_struct *new_thread, *old_thread;
+ 	struct task_struct *last;
+-#ifdef CONFIG_PPC_64S_HASH_MMU
+-	struct ppc64_tlb_batch *batch;
+-#endif
  
- static uint32_t cf_check get_size(void)
- {
--    return ROUNDUP(sizeof(struct llvm_profile_header) + END_DATA - START_DATA +
-+    uint32_t size = ROUNDUP(sizeof(struct llvm_profile_header) + END_DATA - START_DATA +
-                    END_COUNTERS - START_COUNTERS + END_NAMES - START_NAMES, 8);
-+    if ( IS_ENABLED(CONFIG_CONDITION_COVERAGE) )
-+        size += ROUNDUP(END_BITMAP - START_BITMAP, 8);
-+    return size;
- }
+ 	new_thread = &new->thread;
+ 	old_thread = &current->thread;
+@@ -1291,14 +1288,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
+ 	WARN_ON(!irqs_disabled());
  
- static int cf_check dump(
-@@ -155,6 +164,10 @@ static int cf_check dump(
- #endif
-         .names_delta = (uintptr_t)START_NAMES,
-         .value_kind_last = LLVM_PROFILE_NUM_KINDS - 1,
-+#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >= 9
-+        .num_bitmap_bytes = END_BITMAP - START_BITMAP,
-+        .bitmap_delta = START_BITMAP - START_DATA,
-+#endif
-     };
-     unsigned int off = 0;
+ #ifdef CONFIG_PPC_64S_HASH_MMU
+-	batch = this_cpu_ptr(&ppc64_tlb_batch);
+-	if (batch->active) {
+-		current_thread_info()->local_flags |= _TLF_LAZY_MMU;
+-		if (batch->index)
+-			__flush_tlb_pending(batch);
+-		batch->active = 0;
+-	}
+-
+ 	/*
+ 	 * On POWER9 the copy-paste buffer can only paste into
+ 	 * foreign real addresses, so unprivileged processes can not
+@@ -1369,20 +1358,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
+ 	 */
  
-@@ -168,6 +181,9 @@ static int cf_check dump(
-     APPEND_TO_BUFFER(&header, sizeof(header));
-     APPEND_TO_BUFFER(START_DATA, END_DATA - START_DATA);
-     APPEND_TO_BUFFER(START_COUNTERS, END_COUNTERS - START_COUNTERS);
-+#if defined(CONFIG_CONDITION_COVERAGE)
-+    APPEND_TO_BUFFER(START_BITMAP, END_BITMAP - START_BITMAP);
-+#endif
-     APPEND_TO_BUFFER(START_NAMES, END_NAMES - START_NAMES);
- #undef APPEND_TO_BUFFER
- 
+ #ifdef CONFIG_PPC_BOOK3S_64
+-#ifdef CONFIG_PPC_64S_HASH_MMU
+-	/*
+-	 * This applies to a process that was context switched while inside
+-	 * arch_enter_lazy_mmu_mode(), to re-activate the batch that was
+-	 * deactivated above, before _switch(). This will never be the case
+-	 * for new tasks.
+-	 */
+-	if (current_thread_info()->local_flags & _TLF_LAZY_MMU) {
+-		current_thread_info()->local_flags &= ~_TLF_LAZY_MMU;
+-		batch = this_cpu_ptr(&ppc64_tlb_batch);
+-		batch->active = 1;
+-	}
+-#endif
+-
+ 	/*
+ 	 * Math facilities are masked out of the child MSR in copy_thread.
+ 	 * A new task does not need to restore_math because it will
 -- 
-2.49.0
+2.51.2
 
 
