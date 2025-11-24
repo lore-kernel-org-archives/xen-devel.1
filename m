@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E375FCFD317
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 10:53:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1170263.1495329 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391FDCFD313
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Nov 2025 11:05:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1170287.1495349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNUBi-0006fg-Fu; Mon, 24 Nov 2025 10:52:54 +0000
+	id 1vNUNZ-0000ok-SG; Mon, 24 Nov 2025 11:05:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1170263.1495329; Mon, 24 Nov 2025 10:52:54 +0000
+Received: by outflank-mailman (output) from mailman id 1170287.1495349; Mon, 24 Nov 2025 11:05:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vNUBi-0006fZ-CH; Mon, 24 Nov 2025 10:52:54 +0000
-Received: by outflank-mailman (input) for mailman id 1170263;
- Mon, 24 Nov 2025 10:52:53 +0000
+	id 1vNUNZ-0000od-PD; Mon, 24 Nov 2025 11:05:09 +0000
+Received: by outflank-mailman (input) for mailman id 1170287;
+ Mon, 24 Nov 2025 11:05:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Io9E=6A=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1vNUBg-0006fT-SV
- for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 10:52:52 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
+ <SRS0=Qo8f=6A=gmail.com=samaan.dehghan@srs-se1.protection.inumbo.net>)
+ id 1vNUNZ-0000oX-Bn
+ for xen-devel@lists.xenproject.org; Mon, 24 Nov 2025 11:05:09 +0000
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [2607:f8b0:4864:20::f29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8d2ddcd-c923-11f0-9d18-b5c5bf9af7f9;
- Mon, 24 Nov 2025 11:52:51 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-42b387483bbso3051167f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 02:52:51 -0800 (PST)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7ec454csm26687694f8f.0.2025.11.24.02.52.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 02:52:49 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id DC43A5F83A;
- Mon, 24 Nov 2025 10:52:48 +0000 (GMT)
+ id 6fcc9e2f-c925-11f0-9d18-b5c5bf9af7f9;
+ Mon, 24 Nov 2025 12:05:08 +0100 (CET)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-88267973e5cso25609586d6.3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Nov 2025 03:05:08 -0800 (PST)
+Received: from localhost.localdomain
+ (host-154-4.mdu.ilcmifre.champaign.il.us.clients.pavlovmedia.net.
+ [66.253.154.4]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8846e59ec1dsm98274406d6.50.2025.11.24.03.05.05
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 24 Nov 2025 03:05:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,148 +48,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8d2ddcd-c923-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 6fcc9e2f-c925-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1763981570; x=1764586370; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:user-agent
-         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1763982307; x=1764587107; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=iK/lamIa2GP8d2MmAgVK21zQ9jh5z0bwbWrJlAfHUxI=;
-        b=qP3wzciNGuCMqxl8ch7C2Si76OPQx7EzVFcNjFUz/1wIixPs2upQO4TZUqLO4kFgtg
-         PeJwkACXjfj7Ov2yJSkIsSzGrya8SB7U2ll27x7HZSdVgRJdISNkPCu5d50FqmlIjoR3
-         /gViJGWaJs1P/I7lqjaT/6nBztQot45I+VkFU5QpnC/MBA/vfCsI7o/0B6ZYKzH59U2j
-         /Mpxh2D5VyVX8xzLMLANc2r9Y/6EbCGoJbdOtmSqOmwbXEsUvSBsHmKK6A76XM9JP6oZ
-         C3mvqWHvaFWK5ngrb4QjC9Oqib1Avez58olZXmBCGf30MtUYz6dl6MZ559SRSmE6+e/Z
-         OzPA==
+        bh=8iUhRz6kyEhDHWy8rKX7at4d36jRoTEsdUQgnZ9zc8s=;
+        b=TinVxy3OYyFoJhEnGsyqj6rPc9p0h1oIn9z1JFGq3hFh1Cm0G169Z7Vgdl2wC5DEZy
+         L083Idx6LPMmlTtf7/6G7VjlmAx3G6l+vbx/N1keZAvZQ2tDWxpjKF4TdQf0tsMIVWfE
+         QVFQpL8Mp7LvICrnz7Gv/2YsVwv2He0RY/oVXxiI5ivQbzejXtQheZMMM2bcpw3oDp5o
+         swJN18grl/ktY1OAfIzhScoYeWr0e11iX/z5FY4FuiR7YRBJQbtKt3hEAcpOct/wRDFF
+         jVXB2fDU5UrEUdn/6UWi7SXj1W7mmQ6baD4DuFhUSmA5Y7bpKC8ISA8jAmDsZFO2VHrS
+         ieAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763981570; x=1764586370;
-        h=content-transfer-encoding:mime-version:message-id:date:user-agent
-         :references:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=iK/lamIa2GP8d2MmAgVK21zQ9jh5z0bwbWrJlAfHUxI=;
-        b=RKvqZggMJAt05K1IL7iEEnAH1hUxOY+xPZzSs9GuelAhFt/5+mMF3N501kB54yM4zC
-         v1nNBQEDxkYKhuhiZx6anyFIJJb2BcdHkTuitHipbqtK4nqkckOLILKCtYlY0j3kEI1Q
-         nyYBm+jkt97NyL41BwuriBV607dvTAbJ4CHEzWmIuTaOzr5se7eWSaUtR8ddBuz2Sc9J
-         kEBulIpxlrjNzoCq64V+wYJOKSN6rKCSG5Z18Qyhw/s42PS2iVO1dvOs/UIdMP6rRkoS
-         2pK1xelK4VjZkQV2CYX0ve/hz9JDQgAdhC3PIy5tkrQQNu8R8cMUBNKgyrh02yI4EH6R
-         HrSg==
-X-Forwarded-Encrypted: i=1; AJvYcCX3gaCUiL+NsHWi80IPyuPM7GgqiPixTJQSN0mx+Ek67jE7/tKgvAdLuXR8p7YwacC2bfCJdNQbw6M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxzJu5hoKAAviWnlqSomf0crPEhQkS0P/fDxZDWwM8+4qOqTEL4
-	jNHOnJpziR/qX4fTbgmuW/DxsAxLwU2arSAUAj7zkYeFLJO7JG1uNHXKBEC8Vm3wbXk=
-X-Gm-Gg: ASbGnct/jDQXC34sQqPnSnfwiHBwKPdFvjKiOv/J5PExTlo3D7AP3gzsYqhQbrRG5Yc
-	i5lYFhXdsqN9oqmVBGSzHMDhHjMAynhkA7shn6Svwn0kgV0E0Ln6983DhuJKEt7sIAOA7o/9cQm
-	VZ7HN1KkwG25knvfmTEu/LLSMKJffx9NNSnhuP2S00OvXcUqXiueHCP6+OKIUxRSCER46eTP45u
-	kEaM5qazZVy3jzeLHj40tMYIftpzKSrdyEvokByHDMpvcLh8QHxaBD1kUG/3B4v4DT1jZzSK6OZ
-	yIif/e2FAG9f1GucWRt5GLHGd4xsfMADtY1z1xxUfAWtve+f+OOqIMedMpbn+PoTnMlaWKCE/ez
-	zXutVmgJWMp1WaYXXDrc0hQBGRfbm7pqIgN8cQDVJLh5Z1NF7AQCSCg4XBCIKSpAqTTEVkKOu2X
-	utfSjGOFvXanI=
-X-Google-Smtp-Source: AGHT+IFbgBMF20woWNeceW2OLZW9UzKbeZOc7MdUEAQ6zkpQk/eNWuZtBmInvriEfIgjQNxZzNGZ7w==
-X-Received: by 2002:a05:6000:2893:b0:42b:31a5:f032 with SMTP id ffacd0b85a97d-42cc1d2d586mr13073922f8f.28.1763981570422;
-        Mon, 24 Nov 2025 02:52:50 -0800 (PST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  Paolo Bonzini <pbonzini@redhat.com>,  David
- Woodhouse <dwmw2@infradead.org>,  Paul Durrant <paul@xen.org>,  Eduardo
- Habkost <eduardo@habkost.net>,  xen-devel@lists.xenproject.org,  Anthony
- PERARD <anthony@xenproject.org>,  Stefano Stabellini
- <sstabellini@kernel.org>,  Richard Henderson
- <richard.henderson@linaro.org>,  "Michael S. Tsirkin" <mst@redhat.com>,
-  Mark Cave-Ayland <mark.caveayland@nutanix.com>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>
-Subject: Re: [PATCH] hw/i386/isapc: Remove dead Xen code
-In-Reply-To: <20251123185832.53802-1-philmd@linaro.org> ("Philippe
-	=?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Sun, 23 Nov 2025 19:58:32
- +0100")
-References: <20251123185832.53802-1-philmd@linaro.org>
-User-Agent: mu4e 1.12.14-pre3; emacs 30.1
-Date: Mon, 24 Nov 2025 10:52:48 +0000
-Message-ID: <87bjkraein.fsf@draig.linaro.org>
+        d=1e100.net; s=20230601; t=1763982307; x=1764587107;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=8iUhRz6kyEhDHWy8rKX7at4d36jRoTEsdUQgnZ9zc8s=;
+        b=Eo5sv3n3hgbf3aDAEwDsI2FU9L2EKH6DNw5csEQ27XEna1qCYjh58MwXZeYUPJCjI0
+         m99v3fup33TrUi+5kAeEyt95nWgEF0od3Cpz8zEc4frZGVBtcCYc3bWkJFah8/Yn5RZK
+         dVEmb4dVD8ywz93kpu4EKAOG2gzYjVhzUYiRcMlb8u4u8bNX15mUe0OmokYhuQgSGNSH
+         3JgDQyzJS8ywOTgMZ3ze6TcAUpwLcfU+mwn5D0aoEMh+NsVzXHFEpm7RvOaHKb8p/3m7
+         Z70ZTAisFAFBDTVKF8nT8j+SQEKCLB8JiHEOhW/jX0e+hmmy3CSANumZLB0y4zNrJ1ha
+         PPPw==
+X-Gm-Message-State: AOJu0YzlqJBJSjb4EFex83HceBRVh5Ij6xdFjIzl/80CkPg0wKqznzVT
+	Fxug5kDlGTjXvlpdy/gVWMDRq6/bE1N6tHqHIKAF+hgulmvRPiTDyPtClz+5bLs=
+X-Gm-Gg: ASbGncv2JqDtdvVXjmbdfVdkcWlE5+cOGmlD94DixpxL2oAfDg6b5fcMJpGcesrvht7
+	v558FPHKbvlDYPqi5CIJ9CyYnDUdgLftlETDA/fYf7N0H6cuxRhWN1e/s+VEJGqpb1Zcj3lV4Uu
+	sWYafmDQ7iRSUm5du97iUtZFES8vuADKhkH8Hh8FHgCpvxMlZJb1Ml7bvl7kFpbhbwkfGtbVap0
+	IgdT4vHS/o9OgoDcmB13zDd3NbIQHstzE+Aee/bK62fnVXQ55LMhLjqmd8UwrYKUVb+G2uT3MtO
+	4sdDsgR0mKSaQya8aHLkel8y43vlRqng2SldvWVgtfEO9RmhKZ8p7pj5vtoGGgCRCJMC7T3v2UA
+	KC61cjruE0tJvq2JUKkaAMnsWf41ivjSKs6hRTRWusTc3bbz2MRhABklp9e/96f5nupouYKiBwI
+	UvCyJiRcDod1oAG0cf3a75hvf3EmIQXm81VZSDhEAIBxdB7lRrWeD0zZ/frG9runJ/HSUWcqP2l
+	GBWT7ZnEjd4VwRUJQMWR3e3p9voFTM8MI7zgLSpLxd8OrEhT0+gAI0T/X4kVJP7g1RHW0MXJQ==
+X-Google-Smtp-Source: AGHT+IE7MrZHK8YEhAEADYExyNGl8yaoS9nYcML9avP0sv0QXWPR7h72lv2KyDlL84ZwOiQaghUaFw==
+X-Received: by 2002:a05:6214:40a:b0:880:53da:fcbc with SMTP id 6a1803df08f44-8847c4d2a76mr151890156d6.7.1763982306504;
+        Mon, 24 Nov 2025 03:05:06 -0800 (PST)
+From: Saman Dehghan <samaan.dehghan@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2] XEN: enable MC/DC coverage for Clang
+Date: Mon, 24 Nov 2025 05:04:34 -0600
+Message-ID: <52b0762ac4b5535a842a530365a75bdc81a5fe61.1763981619.git.samaan.dehghan@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <3bb418ae6a36a9ac89c697a417fa0745fa9ac702.1763949990.git.samaan.dehghan@gmail.com>
+References: <3bb418ae6a36a9ac89c697a417fa0745fa9ac702.1763949990.git.samaan.dehghan@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+Clang >= 18 supports Modified Condition/Decision Coverage (MC/DC).
+This patch enables the detection and usage of this feature when
+compiling Xen with Clang.
 
-> We don't use Xen on the isapc machine: let's remove
-> pointless code.
+- Update detection logic in Kconfig to check for the required set of
+  Clang flags for MC/DC:
+  '-fprofile-instr-generate -fcoverage-mapping -fcoverage-mcdc'.
+  This bundle is necessary because '-fcoverage-mcdc' requires
+  '-fcoverage-mapping', which in turn requires '-fprofile-instr-generate'.
+- Update llvm.c to handle the profile format changes (bitmap section)
+  required for MC/DC.
+- Guard -Wno-error=coverage-too-many-conditions with CONFIG_CC_IS_GCC
+  to avoid passing a GCC-only warning option to Clang
 
-Are you sure about this? The older Xen config did support:
+Signed-off-by: Saman Dehghan <samaan.dehghan@gmail.com>
+---
+ xen/Kconfig                |  2 +-
+ xen/Rules.mk               |  1 +
+ xen/arch/x86/Makefile      |  2 +-
+ xen/common/coverage/llvm.c | 24 +++++++++++++++++++++++-
+ 4 files changed, 26 insertions(+), 3 deletions(-)
 
-  isa
-      Simulate an ISA only system
+diff --git a/xen/Kconfig b/xen/Kconfig
+index a5e5af3b76..5508993f02 100644
+--- a/xen/Kconfig
++++ b/xen/Kconfig
+@@ -53,7 +53,7 @@ config CC_HAS_ASM_GOTO_OUTPUT
+ 
+ # Compiler supports -fcondition-coverage aka MC/DC
+ config CC_HAS_MCDC
+-	def_bool $(cc-option,-fcondition-coverage)
++	def_bool $(cc-option,-fcondition-coverage) || $(cc-option,-fprofile-instr-generate -fcoverage-mapping -fcoverage-mcdc)
+ 
+ # Set code alignment.
+ #
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 24f447b957..57ea664f02 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -136,6 +136,7 @@ non-init-objects = $(filter-out %.init.o, $(obj-y) $(obj-bin-y) $(extra-y))
+ 
+ ifeq ($(CONFIG_CC_IS_CLANG),y)
+     cov-cflags-$(CONFIG_COVERAGE) := -fprofile-instr-generate -fcoverage-mapping
++    cov-cflags-$(CONFIG_CONDITION_COVERAGE) +=  -fcoverage-mcdc
+ else
+     cov-cflags-$(CONFIG_COVERAGE) := -fprofile-arcs -ftest-coverage
+     cov-cflags-$(CONFIG_CONDITION_COVERAGE) += -fcondition-coverage
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 407571c510..6c0ff67fa8 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -98,7 +98,7 @@ $(obj)/usercopy.o: CFLAGS-y += -iquote .
+ ifneq ($(CONFIG_HVM),y)
+ $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+ endif
+-ifeq ($(CONFIG_CONDITION_COVERAGE),y)
++ifeq ($(CONFIG_CONDITION_COVERAGE)$(CONFIG_CC_IS_GCC),yy)
+ $(obj)/x86_emulate.o: CFLAGS-y += -Wno-error=coverage-too-many-conditions
+ endif
+ 
+diff --git a/xen/common/coverage/llvm.c b/xen/common/coverage/llvm.c
+index 532889c857..a8c7e7e8d2 100644
+--- a/xen/common/coverage/llvm.c
++++ b/xen/common/coverage/llvm.c
+@@ -120,6 +120,10 @@ extern const char __start___llvm_prf_names[];
+ extern const char __stop___llvm_prf_names[];
+ extern uint64_t __start___llvm_prf_cnts[];
+ extern uint64_t __stop___llvm_prf_cnts[];
++#ifdef CONFIG_CONDITION_COVERAGE
++extern const char __start___llvm_prf_bits[];
++extern const char __stop___llvm_prf_bits[];
++#endif
+ 
+ #define START_DATA      ((const void *)__start___llvm_prf_data)
+ #define END_DATA        ((const void *)__stop___llvm_prf_data)
+@@ -127,16 +131,25 @@ extern uint64_t __stop___llvm_prf_cnts[];
+ #define END_NAMES       ((const void *)__stop___llvm_prf_names)
+ #define START_COUNTERS  ((void *)__start___llvm_prf_cnts)
+ #define END_COUNTERS    ((void *)__stop___llvm_prf_cnts)
++#define START_BITMAP    ((void *)__start___llvm_prf_bits)
++#define END_BITMAP      ((void *)__stop___llvm_prf_bits)
+ 
+ static void cf_check reset_counters(void)
+ {
+     memset(START_COUNTERS, 0, END_COUNTERS - START_COUNTERS);
++#ifdef CONFIG_CONDITION_COVERAGE
++    memset(START_BITMAP, 0, END_BITMAP - START_BITMAP);
++#endif
+ }
+ 
+ static uint32_t cf_check get_size(void)
+ {
+-    return ROUNDUP(sizeof(struct llvm_profile_header) + END_DATA - START_DATA +
++    uint32_t size = ROUNDUP(sizeof(struct llvm_profile_header) + END_DATA - START_DATA +
+                    END_COUNTERS - START_COUNTERS + END_NAMES - START_NAMES, 8);
++#ifdef CONFIG_CONDITION_COVERAGE
++    size += ROUNDUP(END_BITMAP - START_BITMAP, 8);
++#endif
++    return size;
+ }
+ 
+ static int cf_check dump(
+@@ -147,11 +160,17 @@ static int cf_check dump(
+         .version = LLVM_PROFILE_VERSION,
+         .num_data = DIV_ROUND_UP(END_DATA - START_DATA, sizeof(struct llvm_profile_data)),
+         .num_counters = DIV_ROUND_UP(END_COUNTERS - START_COUNTERS, sizeof(uint64_t)),
++#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >= 9
++        .num_bitmap_bytes = END_BITMAP - START_BITMAP,
++#endif
+         .names_size = END_NAMES - START_NAMES,
+ #if LLVM_PROFILE_VERSION >= 8
+         .counters_delta = START_COUNTERS - START_DATA,
+ #else
+         .counters_delta = (uintptr_t)START_COUNTERS,
++#endif
++#if defined(CONFIG_CONDITION_COVERAGE) && LLVM_PROFILE_VERSION >= 9
++        .bitmap_delta = START_BITMAP - START_DATA,
+ #endif
+         .names_delta = (uintptr_t)START_NAMES,
+         .value_kind_last = LLVM_PROFILE_NUM_KINDS - 1,
+@@ -168,6 +187,9 @@ static int cf_check dump(
+     APPEND_TO_BUFFER(&header, sizeof(header));
+     APPEND_TO_BUFFER(START_DATA, END_DATA - START_DATA);
+     APPEND_TO_BUFFER(START_COUNTERS, END_COUNTERS - START_COUNTERS);
++#if defined(CONFIG_CONDITION_COVERAGE)
++    APPEND_TO_BUFFER(START_BITMAP, END_BITMAP - START_BITMAP);
++#endif
+     APPEND_TO_BUFFER(START_NAMES, END_NAMES - START_NAMES);
+ #undef APPEND_TO_BUFFER
+ 
+-- 
+2.49.0
 
-  isa (Default=3D0; Value=3D'no|yes')=20
-
-I don't know why anyone would want a ISA capable HVM machine these days
-but I would at least want to know when Xen dropped this as an option in
-the commit message.
-
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  hw/i386/isapc.c | 27 ++++-----------------------
->  1 file changed, 4 insertions(+), 23 deletions(-)
->
-> diff --git a/hw/i386/isapc.c b/hw/i386/isapc.c
-> index 1ba9ae22cc3..1e13a30c505 100644
-> --- a/hw/i386/isapc.c
-> +++ b/hw/i386/isapc.c
-> @@ -17,8 +17,6 @@
->  #include "hw/ide/ide-bus.h"
->  #include "system/kvm.h"
->  #include "hw/i386/kvm/clock.h"
-> -#include "hw/xen/xen-x86.h"
-> -#include "system/xen.h"
->  #include "hw/rtc/mc146818rtc.h"
->  #include "target/i386/cpu.h"
->=20=20
-> @@ -37,7 +35,6 @@ static void pc_init_isa(MachineState *machine)
->      ISABus *isa_bus;
->      uint32_t irq;
->      GSIState *gsi_state;
-> -    MemoryRegion *ram_memory;
->      DriveInfo *hd[MAX_IDE_BUS * MAX_IDE_DEVS];
->      int i;
->=20=20
-> @@ -77,15 +74,9 @@ static void pc_init_isa(MachineState *machine)
->      /*
->       * There is no RAM split for the isapc machine
->       */
-> -    if (xen_enabled()) {
-> -        xen_hvm_init_pc(pcms, &ram_memory);
-> -    } else {
-> -        ram_memory =3D machine->ram;
-> -
-> -        pcms->max_ram_below_4g =3D 3.5 * GiB;
-> -        x86ms->above_4g_mem_size =3D 0;
-> -        x86ms->below_4g_mem_size =3D machine->ram_size;
-> -    }
-> +    pcms->max_ram_below_4g =3D 3.5 * GiB;
-> +    x86ms->above_4g_mem_size =3D 0;
-> +    x86ms->below_4g_mem_size =3D machine->ram_size;
->=20=20
->      x86_cpus_init(x86ms, pcmc->default_cpu_version);
->=20=20
-> @@ -94,17 +85,7 @@ static void pc_init_isa(MachineState *machine)
->      }
->=20=20
->      /* allocate ram and load rom/bios */
-> -    if (!xen_enabled()) {
-> -        pc_memory_init(pcms, system_memory, system_memory, 0);
-> -    } else {
-> -        assert(machine->ram_size =3D=3D x86ms->below_4g_mem_size +
-> -                                    x86ms->above_4g_mem_size);
-> -
-> -        if (machine->kernel_filename !=3D NULL) {
-> -            /* For xen HVM direct kernel boot, load linux here */
-> -            xen_load_linux(pcms);
-> -        }
-> -    }
-> +    pc_memory_init(pcms, system_memory, system_memory, 0);
->=20=20
->      gsi_state =3D pc_gsi_create(&x86ms->gsi, false);
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
