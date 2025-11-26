@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26583D10F58
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Nov 2025 16:38:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1173097.1498182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55478D11186
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Nov 2025 16:45:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1173110.1498214 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOIWh-0006Up-BJ; Wed, 26 Nov 2025 16:37:55 +0000
+	id 1vOIdt-0000I3-6e; Wed, 26 Nov 2025 16:45:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1173097.1498182; Wed, 26 Nov 2025 16:37:55 +0000
+Received: by outflank-mailman (output) from mailman id 1173110.1498214; Wed, 26 Nov 2025 16:45:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOIWh-0006Ui-8H; Wed, 26 Nov 2025 16:37:55 +0000
-Received: by outflank-mailman (input) for mailman id 1173097;
- Wed, 26 Nov 2025 16:37:54 +0000
+	id 1vOIdt-0000GE-1R; Wed, 26 Nov 2025 16:45:21 +0000
+Received: by outflank-mailman (input) for mailman id 1173110;
+ Wed, 26 Nov 2025 16:45:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K59t=6C=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vOIWg-0006Uc-6I
- for xen-devel@lists.xenproject.org; Wed, 26 Nov 2025 16:37:54 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ <SRS0=0Gki=6C=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1vOIdr-0008EF-P1
+ for xen-devel@lists.xenproject.org; Wed, 26 Nov 2025 16:45:19 +0000
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [2a01:111:f403:c10c::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 40e409e4-cae6-11f0-9d18-b5c5bf9af7f9;
- Wed, 26 Nov 2025 17:37:53 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b739ef3f739so676149666b.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Nov 2025 08:37:53 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-71-38.play-internet.pl.
- [109.243.71.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b766d386665sm1612890266b.53.2025.11.26.08.37.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Nov 2025 08:37:51 -0800 (PST)
+ id 472dfcd6-cae7-11f0-9d18-b5c5bf9af7f9;
+ Wed, 26 Nov 2025 17:45:14 +0100 (CET)
+Received: from CH2PR16CA0020.namprd16.prod.outlook.com (2603:10b6:610:50::30)
+ by DM4PR12MB6110.namprd12.prod.outlook.com (2603:10b6:8:ad::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9343.17; Wed, 26 Nov 2025 16:45:08 +0000
+Received: from CH1PEPF0000A34C.namprd04.prod.outlook.com
+ (2603:10b6:610:50:cafe::67) by CH2PR16CA0020.outlook.office365.com
+ (2603:10b6:610:50::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.12 via Frontend Transport; Wed,
+ 26 Nov 2025 16:45:05 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000A34C.mail.protection.outlook.com (10.167.244.6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9366.7 via Frontend Transport; Wed, 26 Nov 2025 16:45:06 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 26 Nov
+ 2025 10:45:04 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,219 +58,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40e409e4-cae6-11f0-9d18-b5c5bf9af7f9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764175072; x=1764779872; darn=lists.xenproject.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tS/pKReLatHsMGWTfXEMg3NYcFBNhlBAwxjHuNsie90=;
-        b=Pd1n04knlfIU+AsGrw67XUuAS+Rnt202haLoHyGRMCCWT8tpveTe0tsYRt7jVU2Ir5
-         T5RLZesIeKsTOpkoHwltd+YhmGkB4S3V59hSZOGTVI4EAWuOSEm7wDNyrouZjQ52uPbJ
-         TEd0mQ6tVSIYzouiXCfGKnxk2j9lm+3Pm0PEJvJ2oLYSASY8GZZ7Cx8SxPrf+wZ6FIdr
-         OgKPCb1g0FvnY7GfKSBXp2G7urxVkNitV0BJ2a7extuyGJBjHY8wueMnz6J7/ozyKCiO
-         jR6Kop3eDPNkEubxQSrWiHilqpnj26i042MXU8JDh4d9QesUqzE7gVHA1inp3bhctI9k
-         Jj+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764175072; x=1764779872;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=tS/pKReLatHsMGWTfXEMg3NYcFBNhlBAwxjHuNsie90=;
-        b=wOD84ZL5L1WI0Y5Ut9djm/nMs7/fBlPqv0/Z7TEgoc4h8dEiUbdBm25t46OsFzTT9e
-         Bu8nPf902gaq7vY7hNO5a/FyywyjIF7jB3NbmmF78jkLOTQc/AdkzuIl3M7rEYakbfpR
-         huwBVSvIgNk/wYiVk82cTHWLRmAi3fEPqSjvgHlhz58y/k5zfzVc/ybrcE8as+AnNYXq
-         WGSuiQrcajJt8F7sLdRI41VZm1MEZcNeCXmiDikfdkwrRvrbyWtxbADjvAiOiZWz0vru
-         lkua/6F6YsRGFmnIOQ6oe+Ddr5hwW6hb7ArCBHReKwqZKi7Hy8wNIdRfCVxuRJF8S/Q/
-         o7Hw==
-X-Forwarded-Encrypted: i=1; AJvYcCWZW4v6kN2R0eORr0siBoBxfrLbnA9mP61Inz/Fyzy1tlpL9Sl4pdp54XWAFS+Rl0zNaqsY6xebirs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzmwVbZzvkkPkWVL64gYIWbawJvvGjlyma7zgladOtBzkbEFGlh
-	EVQ4AaGUXUcaNALt0JpaJRPTbiVaUrMUa1iFwacW7ocjhXCa9xp0ICI4
-X-Gm-Gg: ASbGncupkRcRsnhqLXPeDGbZO055Fp1kMVwyDZkvIBqrJPTWb3CgB0Mf5BDKqsvI3ao
-	9t0xc0TjgYV917j/uBK7BEnP8Wu7IcTDTKNp6Qo5pWGS9s579rCz7GVQGaue6BGdydlh/WxpV8t
-	Ujt0q7kXO37ioAdIA5mvg952COxM2vV+KIZGjQX9N+jcE9GBIWaQhCK6LT3x+QPMRkNUp+EwO5h
-	rtnqRZ8ABG2KVdFTmYLfCf/q/EFw3YWArWHSCp0ZQfsvlQBMvbo8u/R/zmd2Lcs5kaN9zfm4CX1
-	iQ3SLOola1Y2JU9zQg0fiYx8LX47riO31WcTaAfCQ/PEY0Jn/484rbsicO67FJLIETq058kAKW0
-	IHD8hM/fAHVO+vggrkrwj702TbHqZf0i3N9R9suygMCzPUUCmxySMxlwM+pETlAhgm17tonUwP/
-	ex/7GOZ/PyBdO59RNmWC1ZBY3ypio7SCF+esNJfPXx1oDbv9F7CkdmuZqXU8gRUnVm
-X-Google-Smtp-Source: AGHT+IHgenN/yaNpDODtBs7+7EYP/9LMWr/Bgg8q+gfOk7Dh7zDZHzElHm4ZtD1L2sOrsOWCAxvKZQ==
-X-Received: by 2002:a17:907:7e9e:b0:b71:1420:334b with SMTP id a640c23a62f3a-b76c546da4bmr658491566b.8.1764175072064;
-        Wed, 26 Nov 2025 08:37:52 -0800 (PST)
-Content-Type: multipart/alternative;
- boundary="------------SB5jDQiNuzlX7dmqmsAAhC70"
-Message-ID: <7c66aaa5-bcc5-4da5-872f-8b8a690c9a24@gmail.com>
-Date: Wed, 26 Nov 2025 17:37:50 +0100
+X-Inumbo-ID: 472dfcd6-cae7-11f0-9d18-b5c5bf9af7f9
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h7bLo7oo8FUPWMYvgVHDHYuUDGFcnpCGiaTWsZBg2zV1IiH9S6lY0FQsldWS8bDCUNlPHecrkiglWKziSMoVgIBGEdxL+6LrQQybPqM8K4iyPoAeevJ6f2qZTrDcvoZduN5iQMFOWhirVzn53HXBZXlJi/rZ3v4SeJzhNjGLRwVjNu6Js+8Vwj3hhk6772xEx/RYKa6/EzNRpSw6xIWoj1qr19+/CfEhm1y1Rb5K8m9q7VIvTrNDb4jtm52l/LTsexyN57Cdemu3PahOc/wSzb3Zs9AF0fi0Yha9xZTf7hx/ij2BDd4l4Wvg44Lr2Nb3SxBKhCe0wPab0JX+MWK65g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AG5qf8fjfZnqrZGtIec0mAOfLvxnAIAvkXF8a3VTY3Y=;
+ b=mOY4VHOloWM8SsQYadPRrbObs5Q4DU5vVcXmkIamkvqZsy0hf2To3Unropv1ZDrHAaKtdGTRQUlUHdzPEwySsYXtar2S4NcNRxnWouees36s1act71UPIJjqe8Ai/toE2JCCkKvMwISu+xJ1/DH2v1BWQ0SzYDpMXkZJ1lmYX4IpIUM/eMNNVLBJ5Nxb/hH438hL6biA7XFgM4t5BL7/M/GfRP1ljLggKQNUuElpjFAybKPtLRM3Z9iFnoyH3iRo8RMpgGiFVYUZNpkqjouI6Ia5C/DYa63JPnLHg3a9IkVOb1hdu+cbBb7ej306a9aSlta8cxDthRHMTx+p+awY5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AG5qf8fjfZnqrZGtIec0mAOfLvxnAIAvkXF8a3VTY3Y=;
+ b=gan758Hhq+TE35c6DO55nLm1Zdw5NnGSftHbuH0uSyv7WDN4zUpa4EAv2EDHg37348em688auYR0+nUAOmeG2qBGUBRomITO/Q9+esdQ007vktH018ArkMK5Onv0dVwaeNyKJOw9oaB/rDnIw9UMG28cXwUstXNBLGd5VE+xmJM=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
+	<jason.andryuk@amd.com>, Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
+	"Stefano Stabellini" <sstabellini@kernel.org>
+Subject: [RFC PATCH 02/11] x86: Reject CPU policies with vendors other than the host's
+Date: Wed, 26 Nov 2025 17:44:04 +0100
+Message-ID: <20251126164419.174487-3-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251126164419.174487-1-alejandro.garciavallejo@amd.com>
+References: <20251126164419.174487-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/domain: introduce generic functions for domain
- struct allocation and freeing
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
-References: <b5c703a64c616d6321f8a98cd28f0659838d41df.1764167337.git.oleksii.kurochko@gmail.com>
- <1930930f-d9a4-4ad2-b6b1-5c138227924f@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1930930f-d9a4-4ad2-b6b1-5c138227924f@suse.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34C:EE_|DM4PR12MB6110:EE_
+X-MS-Office365-Filtering-Correlation-Id: bca6ee40-6ea4-4fa8-feba-08de2d0b27cd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|82310400026|376014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?zhzLqvmQfXPb9K3PdlIfMR/SxfL7A1ttJ274goXMTXqHzwYI6PDBCi3Jz5xk?=
+ =?us-ascii?Q?13TI/pmIfpaxI7S34Ai/3EZyg2LdEwy088WaN4qnyturLhf9HV27CITWP4Db?=
+ =?us-ascii?Q?SVvdBCQM3nLll4pEexA+Oip/6dLtLmpMKfvyVZv/YcwGNfuuaux5e4RrxyJS?=
+ =?us-ascii?Q?89Z/eyLLb7W6wF7jv4h8ozgOKrXxXqqoY8ruRtnnisAq/0RPVDQCmXjae+zz?=
+ =?us-ascii?Q?5x4f8VfQEOg88iMQEhvxQM/vHSXeASDvSESu2Y+Cj/wcDEVypFmubLhVytJS?=
+ =?us-ascii?Q?9EOgCx67PC6sfU7GDytq5/afi3ODnX8Xhb80Jik8sNXyOX7ivgGEivgCPUT5?=
+ =?us-ascii?Q?id8W6shZd+5RQatyJXWdxmSKFk40FaQYCKmj7uMogR6CJBvk8mTWQDOa6nNY?=
+ =?us-ascii?Q?ZTAgGBw9rxqr/Zv5qaS+WHG7Sv9p8W4xOXlGi5y0ZOYvQHZCHix64q8zgqa6?=
+ =?us-ascii?Q?N551hSg2hd9gJ6synCwRbjQzcwQyMlWT50n/swfuACFerwnB60JTmBm6GrBg?=
+ =?us-ascii?Q?E/2i96ovWm5/VwmqoyhLgvS6XxsiEJx7cZ23u8Q/cR36hnlZjt1dlLMzKEs1?=
+ =?us-ascii?Q?7qt43cSQYD+d+bTNYSD7ReMjz3zAlviHsRA/Bwz145jJ79fy0bYOr5aLywaF?=
+ =?us-ascii?Q?Tlax/xA7mi1GoffJ102v9iwp9HsgeT/YBDkVmuglQQUq29ZQ+5vKcxcnT80w?=
+ =?us-ascii?Q?6VnnJb015dTiS56FU0tUbtCdqGUJRE5cKYPtIDc8DcndN1C29HOpuDvC/ChH?=
+ =?us-ascii?Q?5Ee325ek+qnefMbhtZ3b+FW87zDz0SEClJMx64+wYUHDSuOjExgROIgzAVou?=
+ =?us-ascii?Q?RuWqTCqxPQa3SIJItXsjtrDlcEC3lHnrBII3ggnoENopGM1qhIcwUIovP9VR?=
+ =?us-ascii?Q?L2QBwuXR2m5mue2HgjUAfH3waNEaHwZ27iXcR20Yf3NjI+6csTCbPTBIcNJp?=
+ =?us-ascii?Q?1yBxsXQPQFBlWQIiu1o7VWVqcmwG0Ck0I4sNZtskJyfEzfDvzQXFRipTPkpb?=
+ =?us-ascii?Q?y9oNArCvhqTb4mdnc55he9ZVUsnnD3KKM4HPW2d0w5j4B9Oh6GU9RJ57dlaA?=
+ =?us-ascii?Q?oTnbvwi6TzQoU//p1w+XusxKAubXPg/oQrWpec3gfH4hU+Tc2v3o4mQMNJcZ?=
+ =?us-ascii?Q?OPBzEOKRKXK1BueSh4/5978tdIVxkYFp9WYwGGmlXz0pEfGDzmS/Sfn3rUwi?=
+ =?us-ascii?Q?NKe4sixrFlvsm5kuVPWy5fuJ3BHUcsDq7vbolKVUJKvRiwROcXPtCSvMV+4w?=
+ =?us-ascii?Q?D0hV4Jh0edRbJEWKaOJWIIJMsALRAzGZhSthot4mJ/KHZ7ldQHOIAVDc0xug?=
+ =?us-ascii?Q?8Xy7Lb79cYw9+shBTgfyfIrb7rfJkUsYJsT4WDoyx5k0LF18y3r2yLEhV6Y5?=
+ =?us-ascii?Q?xRFNGMvSZ/DtBiIh0RFEZaPCu3T9Q4T5Rdf4EHPoKA1wo6cZn6C/b4XAbOQJ?=
+ =?us-ascii?Q?Kg/e1pMi/ItwuKFGAwhAYo77eVazUk2JMf78hTqjPAQbJYQDRDNqQhMHjaDb?=
+ =?us-ascii?Q?Qfn3By34e3TbwjlEc548fzEebf+c//4Mfco7UEjc7jUQBF+E1Nt8BhXbMN7u?=
+ =?us-ascii?Q?enx3FxH2bUwNrL7PvWA=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 16:45:06.8596
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bca6ee40-6ea4-4fa8-feba-08de2d0b27cd
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000A34C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6110
 
-This is a multi-part message in MIME format.
---------------SB5jDQiNuzlX7dmqmsAAhC70
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+While in principle it's possible to have a vendor virtualising another,
+this is fairly tricky in practice. Not doing so enables certain
+optimisations with regards to vendor checks in later patches.
 
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+I originally had a Kconfig option to allow cross-vendor virt and
+conditionally disable the check on policy compatibility. In practice,
+I suspect there's 0% of people that would want that, so I decided to
+simply remove it altogether. Happy to put it back if there's anyone
+interested.
+---
+ xen/lib/x86/policy.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On 11/26/25 4:19 PM, Jan Beulich wrote:
-> On 26.11.2025 15:32, Oleksii Kurochko wrote:
->> --- a/xen/arch/x86/include/asm/pv/domain.h
->> +++ b/xen/arch/x86/include/asm/pv/domain.h
->> @@ -18,6 +18,9 @@ extern int8_t opt_pv32;
->>   # define opt_pv32 false
->>   #endif
->>   
->> +unsigned int arch_alloc_domain_struct_bits(void);
->> +#define arch_alloc_domin_struct_bits arch_alloc_domain_struct_bits
-> There was an 'a' lost in the identifier.
->
->> --- a/xen/common/domain.c
->> +++ b/xen/common/domain.c
->> @@ -799,6 +799,29 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
->>       return arch_sanitise_domain_config(config);
->>   }
->>   
->> +struct domain *alloc_domain_struct(void)
->> +{
->> +    struct domain *d;
->> +    unsigned int bits = 0;
->> +
->> +#ifdef arch_alloc_domin_struct_bits
->> +    bits = arch_alloc_domin_struct_bits();
->> +#endif
-> Maybe
->
-> #ifndef arch_alloc_domain_struct_bits
-> # define arch_alloc_domain_struct_bits() 0
-> #endif
->
-> ahead of the use and then simply
->
->      unsigned int bits = arch_alloc_domain_struct_bits();
->
-> ?
->
->> +    BUILD_BUG_ON(sizeof(*d) > PAGE_SIZE);
->> +
->> +    d = alloc_xenheap_pages(0, MEMF_bits(bits));
-> I'd go a little farther and allow the arch to specify all the memflags that
-> are wanted. Then the hook name would also be less ambiguous, as "bits" can
-> mean many things. Perhaps arch_alloc_domain_struct_memflags() or, since
-> "memflags" kind of implies allocation, arch_domain_struct_memflags()?
-
-I also thought about returning memflags from the hook instead of bits. Lets
-then return memflags.
-
-I will apply all other comments too.
-
-Thanks.
-
-~ Oleksii
-
---------------SB5jDQiNuzlX7dmqmsAAhC70
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 11/26/25 4:19 PM, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:1930930f-d9a4-4ad2-b6b1-5c138227924f@suse.com">
-      <pre wrap="" class="moz-quote-pre">On 26.11.2025 15:32, Oleksii Kurochko wrote:
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">--- a/xen/arch/x86/include/asm/pv/domain.h
-+++ b/xen/arch/x86/include/asm/pv/domain.h
-@@ -18,6 +18,9 @@ extern int8_t opt_pv32;
- # define opt_pv32 false
- #endif
+diff --git a/xen/lib/x86/policy.c b/xen/lib/x86/policy.c
+index f033d22785..4c0c5386ea 100644
+--- a/xen/lib/x86/policy.c
++++ b/xen/lib/x86/policy.c
+@@ -15,7 +15,8 @@ int x86_cpu_policies_are_compatible(const struct cpu_policy *host,
+ #define FAIL_MSR(m) \
+     do { e.msr = (m); goto out; } while ( 0 )
  
-+unsigned int arch_alloc_domain_struct_bits(void);
-+#define arch_alloc_domin_struct_bits arch_alloc_domain_struct_bits
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-There was an 'a' lost in the identifier.
-
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">--- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -799,6 +799,29 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-     return arch_sanitise_domain_config(config);
- }
+-    if ( guest->basic.max_leaf > host->basic.max_leaf )
++    if ( (guest->basic.max_leaf >  host->basic.max_leaf) ||
++         (guest->x86_vendor     != host->x86_vendor) )
+         FAIL_CPUID(0, NA);
  
-+struct domain *alloc_domain_struct(void)
-+{
-+    struct domain *d;
-+    unsigned int bits = 0;
-+
-+#ifdef arch_alloc_domin_struct_bits
-+    bits = arch_alloc_domin_struct_bits();
-+#endif
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-Maybe
+     if ( guest->feat.max_subleaf > host->feat.max_subleaf )
+-- 
+2.43.0
 
-#ifndef arch_alloc_domain_struct_bits
-# define arch_alloc_domain_struct_bits() 0
-#endif
-
-ahead of the use and then simply
-
-    unsigned int bits = arch_alloc_domain_struct_bits();
-
-?
-
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">+    BUILD_BUG_ON(sizeof(*d) &gt; PAGE_SIZE);
-+
-+    d = alloc_xenheap_pages(0, MEMF_bits(bits));
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-I'd go a little farther and allow the arch to specify all the memflags that
-are wanted. Then the hook name would also be less ambiguous, as "bits" can
-mean many things. Perhaps arch_alloc_domain_struct_memflags() or, since
-"memflags" kind of implies allocation, arch_domain_struct_memflags()?</pre>
-    </blockquote>
-    <pre>I also thought about returning memflags from the hook instead of bits. Lets
-then return memflags.
-
-I will apply all other comments too.
-
-Thanks.
-
-~ Oleksii
-
-</pre>
-  </body>
-</html>
-
---------------SB5jDQiNuzlX7dmqmsAAhC70--
 
