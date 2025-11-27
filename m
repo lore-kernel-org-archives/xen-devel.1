@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC4CDCFD2F6
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Nov 2025 09:11:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1173603.1498621 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB10ECFD2F6
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Nov 2025 09:25:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1173613.1498632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOY2G-000537-L4; Thu, 27 Nov 2025 09:11:32 +0000
+	id 1vOYFI-0006za-P1; Thu, 27 Nov 2025 09:25:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1173603.1498621; Thu, 27 Nov 2025 09:11:32 +0000
+Received: by outflank-mailman (output) from mailman id 1173613.1498632; Thu, 27 Nov 2025 09:25:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOY2G-00052E-Ht; Thu, 27 Nov 2025 09:11:32 +0000
-Received: by outflank-mailman (input) for mailman id 1173603;
- Thu, 27 Nov 2025 09:11:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vOYFI-0006zT-Lm; Thu, 27 Nov 2025 09:25:00 +0000
+Received: by outflank-mailman (input) for mailman id 1173613;
+ Thu, 27 Nov 2025 09:25:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Mf1n=6D=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vOY2E-000525-Ng
- for xen-devel@lists.xenproject.org; Thu, 27 Nov 2025 09:11:30 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e72fd5f-cb71-11f0-980a-7dc792cee155;
- Thu, 27 Nov 2025 10:11:28 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47778b23f64so3297215e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Nov 2025 01:11:28 -0800 (PST)
+ id 1vOYFI-0006zL-7l
+ for xen-devel@lists.xenproject.org; Thu, 27 Nov 2025 09:25:00 +0000
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f1462620-cb72-11f0-9d18-b5c5bf9af7f9;
+ Thu, 27 Nov 2025 10:24:58 +0100 (CET)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-429c82bf86bso395465f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Nov 2025 01:24:58 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4791165b1fesm20266235e9.15.2025.11.27.01.11.24
+ ffacd0b85a97d-42e1cab9af3sm2360061f8f.41.2025.11.27.01.24.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Nov 2025 01:11:25 -0800 (PST)
+ Thu, 27 Nov 2025 01:24:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,66 +47,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e72fd5f-cb71-11f0-980a-7dc792cee155
+X-Inumbo-ID: f1462620-cb72-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1764234688; x=1764839488; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1764235498; x=1764840298; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=RxkrbZOrTNl+hjOp2sbXJ0ecd4hzqExMAY28zRo/5Oc=;
-        b=MrwjebDp8iFK00MOM3xqwD3Yhix7QjwO3Nl8FFUBN6uL1KQZfKcAFmcquPLJDwiojl
-         nkJqSnQ7J/5n5mwctzgC6BONbYgUJTjn9o/cO8FYkShEbo5XlMLMhK4VHurFmMYb3fag
-         8upGEMe5ndV8nesfhPy2O5jtd7GRadkUBJ/jvE4lVo08Z6Vl7tCdb8nCajgU9DT5aOh/
-         pco1fVmEfg712o/X/z+14yCNuhNVJ7K3OKG3bV3t7Nswi3HbiEc8FNpO2Dkd1A4WxBNY
-         xwh+GrhNxT0DuBcvZCfT5rxRTjiQOXEiV+52HyTnPp2ulVAoCcMgGgoy2o0ijn2lgGmK
-         ejQQ==
+        bh=GWwETVtIO2Lhi7EfpckxWZ2y5dVcdNLDAC+nGiG0TZo=;
+        b=WVI5ausbFfIAFXnvcQgEWfkytXZle0ZIxvIJnuwAhFfj4M+GRZSKbOg/aDtvXEM2lh
+         WlxXJ0cWXU4k0MVAfJ9LPcuQh0H/Jf4BL+0GfN8+6XRFkmSI74rTXGp9J2wsxJ+gyqXH
+         3zMlyb1OxOLnc9C5nR48AEPnL3ziyumXOlKi8zJmdKEDxT+4lvfJd5Yl0q7Wszg/CIQ8
+         Mj7u38NbuP3vNGaxHLnvEvz97bF6D5Gpk65oNsn/TQjF5p3lwEuEKwd2uro6jm0LgENq
+         JIrhJviOY9sx6o6sJlAg1Acipa+GzZC2RZterpMWGaL/GwrM8sLws6XlwNG73EYFIDvY
+         7Kkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764234688; x=1764839488;
+        d=1e100.net; s=20230601; t=1764235498; x=1764840298;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RxkrbZOrTNl+hjOp2sbXJ0ecd4hzqExMAY28zRo/5Oc=;
-        b=mkYRUSija7K9wKM1jOE3Dk6UyyHmWPEzvigu5wandyx4rrmn0SkZpASyW3tVYjxlqd
-         ytocErEhvS7RYL6xfXa+DcMcRKtqUEj46nFqvklFddMebCxKw5MCGoyHjvaRaIpvJl69
-         I2n2ck5N9tZanFtQUG/DYk9YqKqfD+n4zKtyaLO7sKbbE4Wk/jjfHjUgjGHNqlereBij
-         kKL4yA7JAPba4GKyT5C6A9Znu2LkA36HVb5NbA0i39uXqrMu4o+hBKhzNRJarxz20SGa
-         Km5LJNXWSw0eMECCO0/4ONt+DumCV1FepZowsrP6oW+bJWfNkGAhMeUdbQDBhEAwBTiM
-         fFUA==
-X-Forwarded-Encrypted: i=1; AJvYcCV5WHyezRtTRXZedaPuoJeQHDFKKtMQbAYJhNmxdLaULCClTU3VzBZNZUrwK3zg7jOEpILmMgHSUIU=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Ywj36s6gz12gNpUFFG6hXoIcGYUOmd0IIRN7Rm+nqR9BI1qqdZz
-	7aQebWN0PHH3Dtg9wQxGNRVi2rUNH9w/+5zMjqTmWhe0T2l3iZZCeYEJ2oGS60QuAg==
-X-Gm-Gg: ASbGncuoE27yZds1BNZ/P2OeqyxQBXe8OkrDPHYV2S5MGXJIdtzvvbW08jPkyei8tXD
-	C0x9SdXhNIcRW8pLkHLHHJcY5fQYM9UnyiDbmGD1ZlGKchYZ3aMjzOuaYc9mEp/+jm/YGnPUiWW
-	agm/MasEjATGJkJi9OEYYWVsk0Nv6qLdjnp8NUHbQCIBaTGdYjxlTutiDlRtb/xYzMitA740KbH
-	iwOe2tvASduXxcqu3YtptQCOnjPWXIEZTXIabybToMLYU2aNguTCSPXg4u5md+qpJsygcrACG+m
-	SS0+IorNers6kZ3/BUEbY174MP2q9Z9kU7oo7Sxi0AyVhlETNGh9lsLj5wu3wCXvvhz7G5M8vg1
-	LDw3+oDZ60RK+oyT7Wf4zZvWYy6ixNn11zaV3Fm9BOtLOPqvxv8PpqhXadyxGYGcUoQZPZsHd9f
-	UOJGZyGdIw57Xbbeg/yXo4I1qGdnZmN6aYMUNHZJdHz1/EQiim084q8ygEK2bobYBoqpGVh/u+m
-	jEFpAZ4h25Y4g==
-X-Google-Smtp-Source: AGHT+IFcQm4dqtZe5NYAJatlIxIz9NGXqtk7Br/er8kzPhO/+QoAKJNqSnZN589kaYr1Dh6WB2WZJw==
-X-Received: by 2002:a05:600c:19ca:b0:477:a978:3a7b with SMTP id 5b1f17b1804b1-477c1143073mr214542645e9.22.1764234687802;
-        Thu, 27 Nov 2025 01:11:27 -0800 (PST)
-Message-ID: <abaa055e-9ac4-4272-b348-a58f181fe719@suse.com>
-Date: Thu, 27 Nov 2025 10:11:22 +0100
+        bh=GWwETVtIO2Lhi7EfpckxWZ2y5dVcdNLDAC+nGiG0TZo=;
+        b=P0Vus2KPA/2BBMqwxRNnlIjnPT5Rej6Y3Aj1zskCfa15fIaq+KqQBdYdRvanL1+IZL
+         t1nawzq8w72W2pYEj7QWdnTH/3pK7lyXLkiqJdzOJdTgQdrBlmdWzPSGT4Yv+cSiz10D
+         WsV7rbBs4fGo+PGqWCrlWcVNwx2p4gwEb/PUUNpT/beA21n/GNknMyXTNET2dCwfEGDE
+         Khd7vIte6dgYsV4lKqjhkxDI2A6iUp0+AnL94ii5Na0g1s7BGLtPIM1L7jD0T+/9AMNK
+         oS67OP4BoKeqU6jZ1dMVV3fi4DD+oD4Np/gGqzJMEoE6Bsuf2QMpGUEKxs/AX2jWsZfC
+         Cj+g==
+X-Forwarded-Encrypted: i=1; AJvYcCUXNrTt/lynGuWBDV3u2lzfwjKDcJwiEqtzhW3Ir1da0b3HVn10iLaVQDa069oSwWHaOoJooODZnIo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw4qglAFnCwx5tk6ZIDi4B2/Aj9sWtsxLSFUnfoFF6NMNBgnxnp
+	VpSG1nUcPpwmmTuig5c978Kr1N15oFw16OnkEmx/HifGu8GKiNizA4gS7VnaNq1ezA==
+X-Gm-Gg: ASbGncsBC7ypUmlJkk26UTzR4mIwZoH9vRRGjjrUIkhQ53GF46tGgYMqvaaSXkL55pM
+	yyFP5lVjpiqKLjiErys2Klt4484ijf/3XnAnh0loCOCqicCeWQhnx0Odc6wEhFeA+2P3dvVEc9D
+	blaiENPnclPrEODIaUBn9p7Y9SKJEbr2EN2FUUGU657eIJLVN1hEpaTNnej+TmGZfFDcuvOEH3N
+	tLYbFvhyfYJmwereiA8Wx1FXGLxXhiauXF1Ner0i40q5/j6BKBxGvv1AtzjRXdzjdcsM40GpwmQ
+	XZemdAc8mQj7eticfIz8c5JYeKXY417Vfg8mwIj74XYiPtfmz+jilAkT/hfUDOQsxLjwZI3A5fP
+	reMkEBs8nWfAIfgVKhSgVdO7iXi8FlDbTaqrbOq8m0DdYiUyLJ2Uf/szKBejGFldUBazXT64+cZ
+	dfi4oKVPplAztbUPDv3z/cb2y18NXRvO13X1ZuxnbClra4upTxC/LT+nHOZ7bEB6788YCIlFV9p
+	vQ=
+X-Google-Smtp-Source: AGHT+IHG6gn7Y9um+cGpP5Rt6Aj1xWOEeiz77qEz5meD1DvXAiM1e1ncsyV9pGgKopbf+BJ+DN/FoQ==
+X-Received: by 2002:a05:6000:184d:b0:42b:2de5:251e with SMTP id ffacd0b85a97d-42cc1cbe567mr23251443f8f.26.1764235497763;
+        Thu, 27 Nov 2025 01:24:57 -0800 (PST)
+Message-ID: <04a363ea-1ab0-4028-a2bc-8bfbacafab6e@suse.com>
+Date: Thu, 27 Nov 2025 10:24:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN][PATCH] xen/x86: move d->arch.physaddr_bitsize field
- handling to pv32
-To: Grygorii Strashko <grygorii_strashko@epam.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
- <connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20251126204331.3395888-1-grygorii_strashko@epam.com>
+Subject: Re: [PATCH v3] x86: Remove x86 prefixed names from cpuinfo for
+ intel.c
+To: Kevin Lampis <kevin.lampis@citrix.com>, andrew.cooper3@citrix.com
+Cc: roger.pau@citrix.com, xen-devel@lists.xenproject.org
+References: <20251126191945.3386781-1-kevin.lampis@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,42 +121,86 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20251126204331.3395888-1-grygorii_strashko@epam.com>
+In-Reply-To: <20251126191945.3386781-1-kevin.lampis@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 26.11.2025 21:43, Grygorii Strashko wrote:
-> From: Grygorii Strashko <grygorii_strashko@epam.com>
+On 26.11.2025 20:19, Kevin Lampis wrote:
+> struct cpuinfo_x86
+>   .x86        => .family
+>   .x86_vendor => .vendor
+>   .x86_model  => .model
+>   .x86_mask   => .stepping
 > 
-> The d->arch.physaddr_bitsize field is used only by PV32 code, so:
+> No functional change.
 > 
-> - move domain_set_alloc_bitsize() function into PV32 code and clean up
-> unused domain_set_alloc_bitsize() defines from other arches
-> 
-> - move domain_clamp_alloc_bitsize() function into PV32 code,
-> rename to _domain_clamp_alloc_bitsize() and use generic
-> domain_clamp_alloc_bitsize() define instead, clean up
-> domain_clamp_alloc_bitsize() defines from !X86 arches
-> 
-> - move d->arch.physaddr_bitsize field under PV32 ifdef
-> 
-> Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
+> Signed-off-by: Kevin Lampis <kevin.lampis@citrix.com>
 > ---
->  xen/arch/arm/include/asm/mm.h     |  3 ---
->  xen/arch/ppc/include/asm/mm.h     |  3 ---
+> Changes in v2:
+> - Convert the two switch statements in probe_masking_msrs(),
+>   intel_log_freq() and check_memory_type_self_snoop_errata()
+> - Requested style changes
+> 
+> Changes in v3:
+> - Re-order the CPU model names in the switch statements
+> - Better style changes
 
-As I noticed only by getting a mail delivery failure back - please also be sure
-your submissions are up-to-date wrt ./MAINTAINERS: You meant to Cc Timothy for
-PPC, not Shawn.
+As to the latter, ...
+
+> @@ -458,7 +460,8 @@ static void Intel_errata_workarounds(struct cpuinfo_x86 *c)
+>  {
+>  	uint64_t val;
+>  
+> -	if ((c->x86 == 15) && (c->x86_model == 1) && (c->x86_mask == 1)) {
+> +	if ( c->vfm == INTEL_P4_WILLAMETTE && c->stepping == 1 )
+> +	{
+
+... this is still introducing a mix of styles (partly Linux, partly Xen). Imo
+we want to avoid this.
+
+> @@ -468,8 +471,10 @@ static void Intel_errata_workarounds(struct cpuinfo_x86 *c)
+>  		}
+>  	}
+>  
+> -	if (c->x86 == 6 && cpu_has_clflush &&
+> -	    (c->x86_model == 29 || c->x86_model == 46 || c->x86_model == 47))
+> +	if ( cpu_has_clflush &&
+> +	    ( c->vfm == INTEL_CORE2_DUNNINGTON ||
+> +	      c->vfm == INTEL_NEHALEM_EX ||
+> +	      c->vfm == INTEL_WESTMERE_EX ))
+>  		setup_force_cpu_cap(X86_BUG_CLFLUSH_MONITOR);
+
+Same here, plus in neither style there's provision for blanks immediately
+inside inner parentheses. Indentation of that opening parenthesis would
+also be off by one.
+
+> @@ -657,14 +670,16 @@ static void cf_check init_intel(struct cpuinfo_x86 *c)
+>  	/* Work around errata */
+>  	Intel_errata_workarounds(c);
+>  
+> -	if ((c->x86 == 0xf && c->x86_model >= 0x03) ||
+> -		(c->x86 == 0x6 && c->x86_model >= 0x0e))
+> +	if ( ( c->family == 15 && c->model >= 0x03 ) ||
+> +	     ( c->family == 6 && c->model >= 0x0e ) )
+
+Again undue mix of styles and undue blanks inside inner parentheses.
+
+> --- a/xen/arch/x86/include/asm/intel-family.h
+> +++ b/xen/arch/x86/include/asm/intel-family.h
+> @@ -179,6 +179,10 @@
+>  #define INTEL_XEON_PHI_KNL		IFM(6, 0x57) /* Knights Landing */
+>  #define INTEL_XEON_PHI_KNM		IFM(6, 0x85) /* Knights Mill */
+>  
+> +/* Family 15 - NetBurst */
+> +#define INTEL_P4_WILLAMETTE		IFM(15, 0x01) /* Also Xeon Foster */
+> +#define INTEL_P4_PRESCOTT		IFM(15, 0x03)
+
+Andrew, can you please get in your re-syncing patch, so this part can be
+omitted?
+
+With the style adjustments (which I can certainly do while committing if no
+other need for a v4 arises):
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
-
->  xen/arch/riscv/include/asm/mm.h   |  3 ---
->  xen/arch/x86/include/asm/domain.h |  2 +-
->  xen/arch/x86/include/asm/mm.h     | 10 +++++++---
->  xen/arch/x86/pv/dom0_build.c      |  2 ++
->  xen/arch/x86/pv/domain.c          | 21 +++++++++++++++++++++
->  xen/arch/x86/x86_64/mm.c          | 20 --------------------
->  xen/include/xen/mm.h              |  4 ++++
->  9 files changed, 35 insertions(+), 33 deletions(-)
 
