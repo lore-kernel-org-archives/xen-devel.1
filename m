@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C62BD116E2
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Nov 2025 07:11:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1173457.1498512 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A491ED10375
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Nov 2025 07:11:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1173464.1498522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOWA5-00009y-Gw; Thu, 27 Nov 2025 07:11:29 +0000
+	id 1vOWA9-0000Ym-Ts; Thu, 27 Nov 2025 07:11:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1173457.1498512; Thu, 27 Nov 2025 07:11:29 +0000
+Received: by outflank-mailman (output) from mailman id 1173464.1498522; Thu, 27 Nov 2025 07:11:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vOWA5-00009r-DW; Thu, 27 Nov 2025 07:11:29 +0000
-Received: by outflank-mailman (input) for mailman id 1173457;
- Thu, 27 Nov 2025 07:11:28 +0000
+	id 1vOWA9-0000Yf-Q5; Thu, 27 Nov 2025 07:11:33 +0000
+Received: by outflank-mailman (input) for mailman id 1173464;
+ Thu, 27 Nov 2025 07:11:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rEk/=6D=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vOW8Z-0004Ta-Dz
- for xen-devel@lists.xenproject.org; Thu, 27 Nov 2025 07:09:55 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 1vOW8w-0004Ta-Qj
+ for xen-devel@lists.xenproject.org; Thu, 27 Nov 2025 07:10:18 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [2a07:de40:b251:101:10:150:64:2])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12f11bc6-cb60-11f0-9d18-b5c5bf9af7f9;
- Thu, 27 Nov 2025 08:09:54 +0100 (CET)
+ id 20df4e12-cb60-11f0-9d18-b5c5bf9af7f9;
+ Thu, 27 Nov 2025 08:10:17 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id ED9865BCC5;
- Thu, 27 Nov 2025 07:09:53 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 748E85BCC4;
+ Thu, 27 Nov 2025 07:10:17 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6D0443EA63;
- Thu, 27 Nov 2025 07:09:53 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1B4313EA63;
+ Thu, 27 Nov 2025 07:10:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id v6URGUH5J2m6XQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 27 Nov 2025 07:09:53 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Jv5CBVn5J2nlXQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 27 Nov 2025 07:10:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,48 +54,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12f11bc6-cb60-11f0-9d18-b5c5bf9af7f9
+X-Inumbo-ID: 20df4e12-cb60-11f0-9d18-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1764227394; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1764227417; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6M6bM/80Dg6ioUTYre1M3KFDk125huuEpn1VJjZjsUQ=;
-	b=adxYPmztj2PaNB6JkvvfsTGvfrQ2IQGSsVX+97EdgQd5Ew6cp77C+Kpycd56qcRkmERaHq
-	Gb63ALjKMRYSLwV79lvAO45+ZYSPGBg5b8RScSVsoFl8XU2Ot5TobevjE45jiPxsvVp+vG
-	9tg1Rvm+MMapOSIVh2aNKxRuv93+Uuo=
+	bh=+ZD0gHfZEAZt38+vBUmam6fB85ZjKlj3yVqOSUwfE0Y=;
+	b=gWsIkR9Y7z8FVayWaep4mo1zZytSyxXgt93U6ANX/FSM+kmKiHujplZRaytePOGoCIsy2A
+	wfCpqyYgzoWf7+1PXp9jKgjYTDtbyNBVfpjKAR32x12s5Q8BhAAIqLNM314ZBfbAoy+WA/
+	N+qRNAh+6SCRHPtzLRxjSWYJ4mW7kiI=
 Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1764227393; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1764227417; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6M6bM/80Dg6ioUTYre1M3KFDk125huuEpn1VJjZjsUQ=;
-	b=QRWItfkHl6GDwBCNKT9n1AUjpQ9rGuPd+8m7E5Pp+R6cFTwG+PiEBnlC7h/BlxyggzRpNt
-	zPEUtf109xzqFxSf7FM8ife5WF5cH6iTDaZAjKytf7GTAYyUitHMsKR6yTfDSQfkeI+iTH
-	CxIaSrQ8H1L2IHJ1vNXjWVcytwa1Q3s=
+	bh=+ZD0gHfZEAZt38+vBUmam6fB85ZjKlj3yVqOSUwfE0Y=;
+	b=gWsIkR9Y7z8FVayWaep4mo1zZytSyxXgt93U6ANX/FSM+kmKiHujplZRaytePOGoCIsy2A
+	wfCpqyYgzoWf7+1PXp9jKgjYTDtbyNBVfpjKAR32x12s5Q8BhAAIqLNM314ZBfbAoy+WA/
+	N+qRNAh+6SCRHPtzLRxjSWYJ4mW7kiI=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
-	x86@kernel.org,
-	virtualization@lists.linux.dev
+	x86@kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org,
-	"Peter Zijlstra (Intel)" <peterz@infradead.org>
-Subject: [PATCH v4 11/21] x86/paravirt: Use common code for paravirt_steal_clock()
-Date: Thu, 27 Nov 2025 08:08:34 +0100
-Message-ID: <20251127070844.21919-12-jgross@suse.com>
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v4 15/21] x86/xen: Drop xen_irq_ops
+Date: Thu, 27 Nov 2025 08:08:38 +0100
+Message-ID: <20251127070844.21919-16-jgross@suse.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251127070844.21919-1-jgross@suse.com>
 References: <20251127070844.21919-1-jgross@suse.com>
@@ -109,116 +105,81 @@ X-Spamd-Result: default: False [-6.80 / 50.00];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	ARC_NA(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLfdszjqhz8kzzb9uwpzdm8png)];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_ALL(0.00)[]
 
-Remove the arch specific variant of paravirt_steal_clock() and use
-the common one instead.
+Instead of having a pre-filled array xen_irq_ops for Xen PV paravirt
+functions, drop the array and assign each element individually.
 
-With all archs supporting Xen now having been switched to the common
-variant, including paravirt.h can be dropped from drivers/xen/time.c.
+This is in preparation of reducing the paravirt include hell by
+splitting paravirt.h into multiple more fine grained header files,
+which will in turn require to split up the pv_ops vector as well.
+Dropping the pre-filled array makes life easier for objtool to
+detect missing initializers in multiple pv_ops_ arrays.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/Kconfig                | 1 +
- arch/x86/include/asm/paravirt.h | 7 -------
- arch/x86/kernel/paravirt.c      | 6 ------
- arch/x86/xen/time.c             | 1 +
- drivers/xen/time.c              | 3 ---
- 5 files changed, 2 insertions(+), 16 deletions(-)
+V2:
+- new patch
+---
+ arch/x86/xen/irq.c    | 20 +++++++-------------
+ tools/objtool/check.c |  1 -
+ 2 files changed, 7 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index aa279fec5c1f..eee6541a5765 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -795,6 +795,7 @@ if HYPERVISOR_GUEST
- config PARAVIRT
- 	bool "Enable paravirtualization code"
- 	depends on HAVE_STATIC_CALL
-+	select HAVE_PV_STEAL_CLOCK_GEN
- 	help
- 	  This changes the kernel so it can modify itself when it is run
- 	  under a hypervisor, potentially improving performance significantly
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 0ef797ea8440..766a7cee3d64 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -17,10 +17,8 @@
- #include <linux/static_call_types.h>
- #include <asm/frame.h>
- 
--u64 dummy_steal_clock(int cpu);
- u64 dummy_sched_clock(void);
- 
--DECLARE_STATIC_CALL(pv_steal_clock, dummy_steal_clock);
- DECLARE_STATIC_CALL(pv_sched_clock, dummy_sched_clock);
- 
- void paravirt_set_sched_clock(u64 (*func)(void));
-@@ -35,11 +33,6 @@ bool pv_is_native_spin_unlock(void);
- __visible bool __native_vcpu_is_preempted(long cpu);
- bool pv_is_native_vcpu_is_preempted(void);
- 
--static inline u64 paravirt_steal_clock(int cpu)
--{
--	return static_call(pv_steal_clock)(cpu);
--}
--
- #ifdef CONFIG_PARAVIRT_SPINLOCKS
- void __init paravirt_set_cap(void);
- #endif
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index a3ba4747be1c..42991d471bf3 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -60,12 +60,6 @@ void __init native_pv_lock_init(void)
- 		static_branch_enable(&virt_spin_lock_key);
+diff --git a/arch/x86/xen/irq.c b/arch/x86/xen/irq.c
+index 39982f955cfe..d8678c3d3971 100644
+--- a/arch/x86/xen/irq.c
++++ b/arch/x86/xen/irq.c
+@@ -40,20 +40,14 @@ static void xen_halt(void)
+ 		xen_safe_halt();
  }
  
--static u64 native_steal_clock(int cpu)
--{
--	return 0;
--}
+-static const typeof(pv_ops) xen_irq_ops __initconst = {
+-	.irq = {
+-		/* Initial interrupt flag handling only called while interrupts off. */
+-		.save_fl = __PV_IS_CALLEE_SAVE(paravirt_ret0),
+-		.irq_disable = __PV_IS_CALLEE_SAVE(paravirt_nop),
+-		.irq_enable = __PV_IS_CALLEE_SAVE(BUG_func),
 -
--DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
- DEFINE_STATIC_CALL(pv_sched_clock, native_sched_clock);
- 
- void paravirt_set_sched_clock(u64 (*func)(void))
-diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
-index 96521b1874ac..e4754b2fa900 100644
---- a/arch/x86/xen/time.c
-+++ b/arch/x86/xen/time.c
-@@ -16,6 +16,7 @@
- #include <linux/slab.h>
- #include <linux/pvclock_gtod.h>
- #include <linux/timekeeper_internal.h>
-+#include <linux/sched/cputime.h>
- 
- #include <asm/pvclock.h>
- #include <asm/xen/hypervisor.h>
-diff --git a/drivers/xen/time.c b/drivers/xen/time.c
-index 53b12f5ac465..0b18d8a5a2dd 100644
---- a/drivers/xen/time.c
-+++ b/drivers/xen/time.c
-@@ -10,9 +10,6 @@
- #include <linux/static_call.h>
- #include <linux/sched/cputime.h>
- 
--#ifndef CONFIG_HAVE_PV_STEAL_CLOCK_GEN
--#include <asm/paravirt.h>
--#endif
- #include <asm/xen/hypervisor.h>
- #include <asm/xen/hypercall.h>
- 
+-		.safe_halt = xen_safe_halt,
+-		.halt = xen_halt,
+-	},
+-};
+-
+ void __init xen_init_irq_ops(void)
+ {
+-	pv_ops.irq = xen_irq_ops.irq;
++	/* Initial interrupt flag handling only called while interrupts off. */
++	pv_ops.irq.save_fl = __PV_IS_CALLEE_SAVE(paravirt_ret0);
++	pv_ops.irq.irq_disable = __PV_IS_CALLEE_SAVE(paravirt_nop);
++	pv_ops.irq.irq_enable = __PV_IS_CALLEE_SAVE(BUG_func);
++	pv_ops.irq.safe_halt = xen_safe_halt;
++	pv_ops.irq.halt = xen_halt;
++
+ 	x86_init.irqs.intr_init = xen_init_IRQ;
+ }
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index 9004fbc06769..3fd551c080ee 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -594,7 +594,6 @@ static int init_pv_ops(struct objtool_file *file)
+ 	static const char *pv_ops_tables[] = {
+ 		"pv_ops",
+ 		"xen_cpu_ops",
+-		"xen_irq_ops",
+ 		"xen_mmu_ops",
+ 		NULL,
+ 	};
 -- 
 2.51.0
 
