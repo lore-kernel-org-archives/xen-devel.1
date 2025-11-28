@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F16B7D116E2
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Nov 2025 18:29:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1175073.1499980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD4ED116EA
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Nov 2025 18:48:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1175088.1500000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vP3DM-0003cH-Qy; Fri, 28 Nov 2025 18:29:04 +0000
+	id 1vP3Vm-0006wz-MZ; Fri, 28 Nov 2025 18:48:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1175073.1499980; Fri, 28 Nov 2025 18:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 1175088.1500000; Fri, 28 Nov 2025 18:48:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vP3DM-0003cA-Nf; Fri, 28 Nov 2025 18:29:04 +0000
-Received: by outflank-mailman (input) for mailman id 1175073;
- Fri, 28 Nov 2025 18:29:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vP3Vm-0006ws-Jw; Fri, 28 Nov 2025 18:48:06 +0000
+Received: by outflank-mailman (input) for mailman id 1175088;
+ Fri, 28 Nov 2025 18:48:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K8i5=6E=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1vP3DL-0003c4-3S
- for xen-devel@lists.xenproject.org; Fri, 28 Nov 2025 18:29:03 +0000
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c107::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1b11f926-cc88-11f0-980a-7dc792cee155;
- Fri, 28 Nov 2025 19:29:00 +0100 (CET)
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by DM6PR03MB5289.namprd03.prod.outlook.com (2603:10b6:5:24c::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Fri, 28 Nov
- 2025 18:22:18 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::b334:94c2:4965:89b8]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::b334:94c2:4965:89b8%5]) with mapi id 15.20.9366.012; Fri, 28 Nov 2025
- 18:22:18 +0000
+ <SRS0=61/n=6E=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1vP3Vl-0006j2-Ot
+ for xen-devel@lists.xenproject.org; Fri, 28 Nov 2025 18:48:05 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c5ca4e3f-cc8a-11f0-9d18-b5c5bf9af7f9;
+ Fri, 28 Nov 2025 19:48:04 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-477b198f4bcso14951995e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Nov 2025 10:48:05 -0800 (PST)
+Received: from localhost.localdomain (host-92-29-237-183.as13285.net.
+ [92.29.237.183]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47903c7360fsm102534325e9.0.2025.11.28.10.48.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Nov 2025 10:48:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,224 +47,339 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b11f926-cc88-11f0-980a-7dc792cee155
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ELBDc1vkraVrF1LdakwX4BfneT13B3fyODlqQ7AW5U3JQ2qh3NmsTY+/i7BChNLKeXBoH+XH1GVNyhG2nKefisaCUo2RErqvygKf4Y+Vkn9/f7x4pfbSzdKKnQ66hT0Jy8vxNVlrQMyFfIv0AdPvi1x+pkdAupmYQJrhSifhQO6CdjZLC4UfwlMSYfE3wAxUjV4THTW1V75Kz1b+tDrrGFVjJJFVoloXhgmVlBA9Vis6O5VZR5VBTmqGJhBOmNOf2KoiAV546mJdqIHfrLP+qYMQl4X5tzY7SVgnJi8+NdQlqg7ybIY8AWXCwqJFqahCbTsWQNPqPIJur/iuSipQRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aCwmK6/kJwXrl662bA8QzX2oJgJ/nrJw66NPqrjLiro=;
- b=KS6cPTYslaMx82V8CVclr5usUelgVDybX3tw1mZOYf1/Dz4ZdEhvuJjTWvNOk6Sm1lqngarBRtu2BelEneudBlXOgbbSfgpoZKM/CUQMqV6CaDXIHcXnmcWNWH73JDo9NBwLb89y7F3+K9af3XxPCSDv15yx/vPKwz7eF+G5qD2cq+ZgzBLnjwY++mfneIN6rgvN5yq3C8rC+tQod57lTx91sq+hoa4Cbl1qCNs/5BFTREV1Cn4+5UCneKIW+9nA7Z5pB6b7APc7lK0vgA9JQW9X3u4TMBBh8BIwNVyArYobj/SyjUCQHI2HdX8J9+Rpq229uUJ+0966/lbCfik41g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aCwmK6/kJwXrl662bA8QzX2oJgJ/nrJw66NPqrjLiro=;
- b=ZTI/J7nFKwXPFmkp9SZ+yvWVxhf7x9EVfnczHQBTZDDcz65OZjFNsYlSPZityFdDM3wNT7FAYZnyV8MLnMGx1na5OUJV35lmyvWLQjYqOYCA5CP1XfvfxKg4TRiiGHdnYPV+939hx1xzIev3SFViJ4sakiKbjAtarXG2RASkAbc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <ac7c40e6-70d9-4141-bcb3-407e531d17ee@citrix.com>
-Date: Fri, 28 Nov 2025 18:22:15 +0000
-User-Agent: Mozilla Thunderbird
-Cc: andrew.cooper3@citrix.com, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P . Smith" <dpsmith@apertussolutions.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH] x86/efi: Remove NX check from efi-boot.h
-To: Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
-References: <20251127143136.1598354-1-julian.vetter@vates.tech>
- <3653404b-0428-4dae-912f-18c4f8e74853@citrix.com>
- <83850159-6b76-4127-a689-e83a84c71e4f@vates.tech>
-Content-Language: en-GB
+X-Inumbo-ID: c5ca4e3f-cc8a-11f0-9d18-b5c5bf9af7f9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1764355684; x=1764960484; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=U5iN5oCUV2c9KWI51YUJ6xwnAH3DNseJ0SKRiMxlo8k=;
+        b=riTVPxRSsBFk+Xi2sSowCoamYDfwiXif08pxjvtwUlLQVB2FuTMvgTDUb1wirgoso8
+         FOOKGJ5PmvRFXtcsp35AHrD2I8s95v8/389YJmLylNrtPNYotTbrFFWDO0gLyYHHSXyw
+         085/TLLU2IDCd4SgmuEVMp3zNbyamehtdq7w0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764355684; x=1764960484;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=U5iN5oCUV2c9KWI51YUJ6xwnAH3DNseJ0SKRiMxlo8k=;
+        b=OsllQSbtpZMov3WYn6TCpQnFhtUCyQ7hA0831v0HKGAVa6Z9bzxpfQEv6Ti+msGoei
+         eYxRNzwaTzagl+mFd9eFVzdZ39Gs0pi4jVggt9Aenp9PQx5RQDUZQCyAa09uy0GRjstM
+         WBuK9ke7n5bTLNFNA7c4cizZRK8itYCGaRiJhm0qyf7PC5R9vVI/YYlgx6GW9/JaZqwa
+         Lr/ls40AZq7l0bRCsSq/lYHs3ElSykYDyclPwp9RBiFq6CAscbI/NA2jaD2Fj1duVH4t
+         wTnNdZkunyku0IgpuEASl7QW9kOQ0Y/EObD8+hDmMeO8+TM/ViOxlGCVPU7i8yjVO6xC
+         J11Q==
+X-Gm-Message-State: AOJu0Yyo1ZIEqC/1ttvOGSV7He1cDufjcl4LRQ5tSDk1N8f5x8RbnhEm
+	8+DXwaoPa+8zfbPK9nx/MaHg13m5tJ2ENL1xNKJiHxUZLTow+MQxyEDq0bfq9qfeuY/sndL74kx
+	LiFpg
+X-Gm-Gg: ASbGncsoGvyY70A+nHC9piojj7uWW58cyBgm6lUULN55WzEK9lOZF617NaDVk7/bSdR
+	Xr+PB3MIWgdpfJHywVkIYHM6dvbgNLpfymaUL99OU5MUdOc8/55w5HwMlxHXp9e94l4VCJf+zSq
+	ZftkKwicd7mKg7YPPpqyLFsND5kxyrTN6sHQJv4xdVrLVwL5V1P/ZARtyqB7CUr/ojOhcfVKlH4
+	wSQTzw6qWTgn5ejowkffVYMicOO5zsXK1KxmpmKT4HDNG4lL6oYNelmyfUQ4GjweBYmASCXLIoU
+	GnCDF7FtPXvAAgrvMvz7DnxRQL/A2+dHqEQgQ+T6NuXCf98lIh4xUcqbo/1bWCwr2eEFsnRmhTR
+	8HJ5zUU4FPdqYV3bwCDA+jIYKtkXAAnKZ9ybGD4qMO7Uq2AiewSGjqzvsKjJ9M/hsnHkz64noMu
+	adqr33r+DK59hTt3b09WyYh0V/RhZhc9QV1jn+GtPOBOHyEiiuiLLXmen1NHw/jg==
+X-Google-Smtp-Source: AGHT+IFrMtAdXOyGD52+Szr1Tqi5CBsCanS1Vxe+gywHvBkWDilkMFglrehP0IMrwmo8fJw0qL0AEA==
+X-Received: by 2002:a05:600c:1993:b0:477:9392:8557 with SMTP id 5b1f17b1804b1-477c01b495amr282532355e9.18.1764355684197;
+        Fri, 28 Nov 2025 10:48:04 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <83850159-6b76-4127-a689-e83a84c71e4f@vates.tech>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Krystian Hebel <krystian.hebel@3mdeb.com>,
+	Sergii Dmytruk <sergii.dmytruk@3mdeb.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 2/2] xen/lib: Introduce SHA-1
+Date: Fri, 28 Nov 2025 18:47:57 +0000
+Message-Id: <20251128184757.1243678-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251128184757.1243678-1-andrew.cooper3@citrix.com>
+References: <20251128184757.1243678-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P265CA0016.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2ad::10) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DM6PR03MB5289:EE_
-X-MS-Office365-Filtering-Correlation-Id: a65105fd-c5d6-4fbc-ad4a-08de2eab10ae
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?TDg3UDUwQlZGZkErVGttVEdvb2FIbm5jQytCOENvQXlXUXhZbTN4YUJhenJh?=
- =?utf-8?B?SGpkK1h2TGx5cEF0UmJrRkFjN3dTcm9hUWF0VUxSdWQ1TFdueXo0TjZxbmUv?=
- =?utf-8?B?N050TVRGZG5xK0EyOWtmd1E5QTh5dm0wMTR1cUg5YTFzOHRkZHJVeHE5OWRF?=
- =?utf-8?B?OGVERXJXY0Y1RFUrOW10ZDRNeUgycWIvWVRSVkY2NXkyVDJzOGVROGZxVUlY?=
- =?utf-8?B?eW9seGE4U1pwSEpkRU44UW1WUm1wd3NsWFhaMDlFdy9NLzQzWXIvK0QvVzZ5?=
- =?utf-8?B?b3FvblEzMWR2L25EZEJERTFwcXVOaHBXUWo0eVA4eGlRTHgzSzFMYXc3OE84?=
- =?utf-8?B?NWx2K1YyOUdidVFON2xZYzluanhhRmFobjNSOHlKSEhhc05pM0ZqakIzRy84?=
- =?utf-8?B?NHZFM3FOUTZuZUZnakttU2JLV3l0dWpjN0txY284Yk9nRXdBUndndDF5Zzll?=
- =?utf-8?B?dkJSRGQrSzdMbG9IMFFSdzdkdndCYXNmRUtKaFRWcXJkN3g5K1Q0SC8wWmd2?=
- =?utf-8?B?WFo1MVorbmlmQWx5VkVSeEdvL24rckFMa0hoTVZKdHppMjBncTlhbXVTQjdk?=
- =?utf-8?B?UlZhOEl0Wlg1dnVNTnNISW1KRFk4RzZ6c2R6NGxyKzFTekRxZ1c0SFl4a2l4?=
- =?utf-8?B?bnRWT1VjQlErMWR0L0JKOGNGWklFNndocVBpT2NySmhpSXpWdGp4L1VjTHhw?=
- =?utf-8?B?VjJSS2liYXFYRVZvVUF1dHlOa21uN1FVVlRwWnNMS3JtSHBEU21Bc1NMRzlL?=
- =?utf-8?B?OHVXN2ZIM1lLcS94TFZDN2lFWkNGeFZvb3R4c1RTam1kNW9SanV3YWVVY1FX?=
- =?utf-8?B?K3M3cG03Q2dxSHh4TDVhUHc0cmJlczFsV0lsN3d2dXYzb0hoQ0xid0lJeTQw?=
- =?utf-8?B?ZUxnbzRPSUpZM3VHRVVxdlQzeWhycFd1dThkZkFFUDRQSHVySEpCWGFPUnVX?=
- =?utf-8?B?MldtcnFpRkdnTG9HbmpseHNpTnFhcHU0TmJEUzl2Sm5wbm1xZktXZGd3bGtn?=
- =?utf-8?B?aGprTnRpaCt2YjcxOS9nbS9tcGdFRFh2UXk3WHphVXRFa1JuQzdYRTB6REc3?=
- =?utf-8?B?endQUmJ1WU5DMFhJT3NQRUVOYmtXUm1QcXIwUHZJVVJEbUdVazBmWmxQTEF6?=
- =?utf-8?B?V3FkN0lyamRGK0Q1YzRBcU9Wazd2cDYwVXh0YXhDejFDSjl1V2krcGkyUXJt?=
- =?utf-8?B?czdhWkN3L0gxMDRBbGN0MmlFRmlGY0FQbnRZaGhvUUpsWmdqR2FTL1NqTGpn?=
- =?utf-8?B?Q2lVanF3RGZYVnBKSVV0SkhvS2d0QTB0WU1VRUdaZW1iZWVmZEFVcS9KemxC?=
- =?utf-8?B?dkFyWU8wS3BLMTVWQWtvb3B6L1ZUV1hLQjNaWm4zZi9veWY3TDc2TEFEUy8z?=
- =?utf-8?B?TXlBYnZwd0pxeHY4bXMwZUJ0UEVPdjRrNFVsMjdkYk5XQWc5RFJ1QUFTMVJn?=
- =?utf-8?B?N3ZnY0duRzNSUGNWWlZMemQ2aGs1bHVXU0ZLcmhHT0VHNDBtdlkzdmZ1aUYw?=
- =?utf-8?B?UnhqWDRLbHVuczhJOUVRc21ZZVdTbjljQzhZUStnd3JCNjI5VmJabUpHZE1E?=
- =?utf-8?B?cFk3ZmpSQXVxeWFCNFJOaElvZEEySUc1a3JERnFoN3IvVEdYSVFDZUlXN0Z5?=
- =?utf-8?B?OHpRaXFWMitBTE1FeWZrWlViRC96RWZnamp1Z0Q4ZEVjN3RwM3prM0pGQWo4?=
- =?utf-8?B?NmozSXh4OFMvRjNCOWhFbEtRYUhHb3JJR2llU0tDcDFPMGJPZk5NWlQ5QWpI?=
- =?utf-8?B?UGl6MkM4ZFlJMEpCa0NTWWFjOFJqM25CMVFaWStVVHB2NDJaN0NsN0twOEFz?=
- =?utf-8?B?RkwwRjBwMzZrM3Q2aHNpaTEyS2JRbUtwV0ZOeWtUdGxuNVV5ZkFDVkxMZ2Zr?=
- =?utf-8?B?U00rVmVuQVYzQzBtR0RicEtua3NXeDhwdVNvby9YQWdJNkhGSlNCaUI0WHlt?=
- =?utf-8?B?TGorWWpIUk5QOU40QW9XMVY5SjFhL3F4dEFZL3FQdXQ1bEt0bWErSUV0M2pQ?=
- =?utf-8?B?OXNNL0hBSVVBPT0=?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UTl4SGJsMU9jTUhnaC85cjZJdzNwQ1prMGgvQ1Y0ZHlGVEsxS3NwQVhYWmxl?=
- =?utf-8?B?NmxNdlJvL1FwV0VrVHZtN3Ezc0UvTDFQZUYzbTh3OUNIU1hhQW55Rzh4eWZj?=
- =?utf-8?B?UHUvRXJ3bEx3NXU1MktOd3NBQjZQSm9WVHB2RDZzVldzWmV4amhDbUQ3bFRL?=
- =?utf-8?B?TEtoeHlZdEsrVHJCRytycHZuZkZiSXBhckZ0Si9JSlQyOXNyeFc1c293MnhP?=
- =?utf-8?B?RUpQY3R6cUVzRVVFZUxvdFBoellWR1dKS05DWjR4TjdWQlJCMzBmQlZUbmJR?=
- =?utf-8?B?aEFHeWJ0NWFvQmQ4RFhITm96VExyNWRBa3l0NEhDazZjWDVFSTVaaldSRk1x?=
- =?utf-8?B?WHZoMXlzZlE2dTVpaFBkVURRekhtUHVOcDczYVIxNTZMdUpFOGZtb1JJZHVW?=
- =?utf-8?B?WFlJMHY0UGpIdjhpQ29EdXB0NTNSQjR1dGsyRXVuUGhseWZIa2JyQUVMUTZ0?=
- =?utf-8?B?NS9ObFNOeVBLMEhXU2F4VnIydUpSV2ZWMGNWYjNidlZ6SExWYVFzVUNzbDFI?=
- =?utf-8?B?ZUw4cXFQT2tKRHJKUUZrODNoM2k5eDJoYks2SWRhSTVNM2R6c2J6b3lUZysr?=
- =?utf-8?B?aGZtMTU5YjV6c0lOWlRWV2YvaFJlSk1IWEpQcDNjNE9DeGlFYkd4WTI0YUZZ?=
- =?utf-8?B?djVOSjlkcEFHdWxpMW10TkVzM0JzenJaQjdhSENZNEJuSjNHbk1kQXk4NUt1?=
- =?utf-8?B?ZGZtazA4ZHpZRXVIOENLUkFLcGxvTzlrb0hwLzZETnZVZ2RnaE9wWFZycFcx?=
- =?utf-8?B?eFhJMmhsOXpYSUNBYS9EbmpMN2l6VGZPTDk1R2dUekR5VXBKek5NY1h5ZWdo?=
- =?utf-8?B?Q290VHdCK1l1YThZTlNzWUI5eUpiem0zL3h6TUFqVTB5ZFFiWE9kYS90d2w4?=
- =?utf-8?B?dGZjT1RtNThmdnArdGM1QWNZaGppY0VCNjNLVHlYQVFHYVRrV25IOUpVWlhj?=
- =?utf-8?B?b21VNzFlMytPaVc4dFJSbWk0RTg2Vjg0ZVZKQ005MStWT1NuVEJyeVpQL2Nu?=
- =?utf-8?B?aHRtR1J0TU1VNm5Ic3dsc0xEMDQ0a1FOV0sraVhuejE0QnlYNnRqSVNCTzYr?=
- =?utf-8?B?UExINVM5VEVvLzNObU5CNWwvdG91QnQvNGRPMXVnUlhxdVluNi9MVVE2VjNO?=
- =?utf-8?B?M29VV3hJZVNNQWRtMGZjek1uaWVPN1E2cXl3Wk1yZThhZkd6bFhEdHFzMGZ5?=
- =?utf-8?B?UDFrYW9UR0ZycFdIaVI3dnp6YTduVjhxNEJUVCs1eGtMSmVjS1hIL2hsNmZM?=
- =?utf-8?B?RE1GSVp6TFpOTFh6WUc1V0VkUXdOVEovVVMycjVtRmw3eWlyMDVldmdua1hR?=
- =?utf-8?B?YnRpNDVRb0NTSXJyQUZjT01XakVUdk9mb21CZGt1WHRnamJJVWFja21jSTl0?=
- =?utf-8?B?TUplcDVMcTdNOXQ3NUZWcGVWQmR3TlZxOGdQL1I3d28zZnUwaGZxY2pLK24x?=
- =?utf-8?B?Zm0ySjN6NnEvMUhqQktVS0ZacGF3OG1iMmM0aXpXUG5Qd0RPRVplZ04xN2pZ?=
- =?utf-8?B?YWFjYmVTVjYwZ3BOeXVuM05xR2pzcWg2YjZETUN0UVAzYU5jK040dkZkMjFD?=
- =?utf-8?B?VmpkZi90SHExMW5mRVlhWDN1UlBKUFV5V2xDbHNMVXUyT3JEWGhFYnM5VFFs?=
- =?utf-8?B?VWhST1ZjaGFlcGNsSU1Cajk1Vm5lVjlMdFVrNVZmekE3N2ovS3V3OUZ6cHZm?=
- =?utf-8?B?czIxbSt3VTZXKzI2R01SY3g4dmh2VkswQXJ6UFhNQlBPUEVWTVpsY2phc2Yz?=
- =?utf-8?B?VnNlK3ZFOG05aUhmU1Z6OU1MZ0ZJQ1ZmQzk4Y1BSbW9ESXUyaGRmNEY0OENh?=
- =?utf-8?B?RzhDZHZzQ0RQcnhnNkdBY2dqQXVYVmFHVHBXdlY4bmlyZHI4QzhCdzV6aWpZ?=
- =?utf-8?B?UDR2djZmZkxaOWZNeEJZT1NQSitUbVZBbXdTVDFmQjV2SWdObXRCRkZuZHRH?=
- =?utf-8?B?WHNMOGZjMkVhUEpoeXAzOTJmdk5BZ05waDFsbVIvdGtPUFB1OTA5VFRSRkFK?=
- =?utf-8?B?Z0RQTFFsOVdwSzZhTnhoRm9uaEZ0WHNnL2pJYy8za2EwcjF0N0Y2aGdQVDJ3?=
- =?utf-8?B?dUZNczZSSWg1K1ltUW52OEZnYmtEa2JCQVlvY1FiTktRZXFmajZ3WFVaTjBU?=
- =?utf-8?B?QlhFNG1tSXh0eU4vMVByV0hqaEhKUXcyMk55a0szNU5YS1NGOGptRTNyQmJR?=
- =?utf-8?B?Q0E9PQ==?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a65105fd-c5d6-4fbc-ad4a-08de2eab10ae
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 18:22:18.8075
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: U0UKBenWdjdB0qp4EUA6CYSR8DLZ/cbKp56BQCL0PVAJx5H0Z9x+iSZqaBkWuRw3Q2O8zV0GG3Ja289hGx2tCKLDxsW1GO27vrsZtiW5OYA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5289
 
-On 28/11/2025 1:19 pm, Julian Vetter wrote:
-> On 11/27/25 16:20, Andrew Cooper wrote:
->> On 27/11/2025 2:31 pm, Julian Vetter wrote:
->>> Currently Intel CPUs in EFI mode with the "Execute Disable Bit" disabled
->>> and the 'CONFIG_REQUIRE_NX=y' fail to boot, because this check is
->>> performed before trampoline_setup is called, which determines if NX is
->>> supported or if it's hidden by 'MSR_IA32_MISC_ENABLE[34] = 1' (if so,
->>> re-enables NX).
->>>
->>> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
->> Lovely...  This isn't the only bug; there's another one from the Vates
->> forums about AMD CPUs which I haven't gotten around to fixing yet.
->>
-> Thank you. I will have a look. I haven't seen this thread.
+From: Krystian Hebel <krystian.hebel@3mdeb.com>
 
-https://xcp-ng.org/forum/post/80714
+Future work will need to interact with the TPM, which requires calculating
+digests for all active hash banks.  Introduce an implementation in lib/,
+partially derived from Trenchboot which itself is derived from Linux.
 
-But the tl;dr is that AMD have introduced a firmware option to disable
-NX.  Unlike Intel, there's no positive way to know you've reactivated it.
+In order to be useful to other architectures, it is careful with endianness
+and misaligned accesses as well as being more MISRA friendly, but is only
+wired up for x86 in the short term.
 
-A conversation with AMD has revealed that there's no capability to
-prevent setting EFER.NXE, and that NX is always available in practice. 
-I'm pretty sure the firmware is just clearing NX in the CPUID Override MSR.
+Signed-off-by: Krystian Hebel <krystian.hebel@3mdeb.com>
+Signed-off-by: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-However, to reactivate this safely, we need to do a wrmsr_safe(), which
-means we need to delay setting NXE until exception handling is available
-which is rather later on boot.  There's also a tangle with the
-order-of-initialisation of the CPUID Override MSRs which I found
-recently while doing something else.
+ * Split out of Trenchboot series.
+ * Add selftests, adjust types
+---
+ xen/include/xen/sha1.h |  14 +++
+ xen/lib/Makefile       |   1 +
+ xen/lib/sha1.c         | 215 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 230 insertions(+)
+ create mode 100644 xen/include/xen/sha1.h
+ create mode 100644 xen/lib/sha1.c
 
-The other observation is that, even on a STRICT_NX build of Xen, we can
-boot into __start_xen() because we can't insert NX into the pagetables
-that early.  In fact it's quite late that we lock down permissions; see
-the calls to modify_xen_mappings() in __start_xen().
+diff --git a/xen/include/xen/sha1.h b/xen/include/xen/sha1.h
+new file mode 100644
+index 000000000000..d649da8ebd97
+--- /dev/null
++++ b/xen/include/xen/sha1.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * SHA1: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
++ */
++#ifndef XEN_SHA1_H
++#define XEN_SHA1_H
++
++#include <xen/types.h>
++
++#define SHA1_DIGEST_SIZE  20
++
++void sha1(uint8_t digest[SHA1_DIGEST_SIZE], const void *msg, size_t len);
++
++#endif /* XEN_SHA1_H */
+diff --git a/xen/lib/Makefile b/xen/lib/Makefile
+index 5ccb1e5241c5..fd4b9ece63fb 100644
+--- a/xen/lib/Makefile
++++ b/xen/lib/Makefile
+@@ -17,6 +17,7 @@ lib-y += memset.o
+ lib-y += muldiv64.o
+ lib-y += parse-size.o
+ lib-y += rbtree.o
++lib-$(CONFIG_X86) += sha1.o
+ lib-$(CONFIG_X86) += sha2-256.o
+ lib-y += sort.o
+ lib-y += strcasecmp.o
+diff --git a/xen/lib/sha1.c b/xen/lib/sha1.c
+new file mode 100644
+index 000000000000..eac2bdd4dfb3
+--- /dev/null
++++ b/xen/lib/sha1.c
+@@ -0,0 +1,215 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * SHA1: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
++ *
++ * Originally derived from Linux.  Modified substantially to optimise for size
++ * and Xen's expected usecases.
++ */
++#include <xen/bitops.h>
++#include <xen/sha1.h>
++#include <xen/string.h>
++#include <xen/unaligned.h>
++
++struct sha1_state {
++    size_t count; /* Byte Count. */
++    uint32_t state[SHA1_DIGEST_SIZE / sizeof(uint32_t)];
++    uint8_t buf[64];
++};
++
++static uint32_t blend(uint32_t w[16], unsigned int i)
++{
++#define W(i) w[(i) & 15]
++
++    return W(i) = rol32(W(i + 13) ^ W(i + 8) ^ W(i + 2) ^ W(i), 1);
++
++#undef W
++}
++
++static void sha1_transform(uint32_t state[5], const void *_input)
++{
++    const uint32_t *input = _input;
++    uint32_t a, b, c, d, e, t;
++    uint32_t w[16];
++    unsigned int i = 0;
++
++    a = state[0];
++    b = state[1];
++    c = state[2];
++    d = state[3];
++    e = state[4];
++
++    /* Round 1 - iterations 0-16 take their input from 'input' */
++    for ( ; i < 16; ++i )
++    {
++        t = get_unaligned_be32(&input[i]);
++        w[i] = t;
++        e += t + rol32(a, 5) + (((c ^ d) & b) ^ d) + 0x5a827999U;
++        b = ror32(b, 2);
++        t = e; e = d; d = c; c = b; b = a; a = t;
++    }
++
++    /* Round 1 tail. Input from 512-bit mixing array */
++    for ( ; i < 20; ++i )
++    {
++        t = blend(w, i);
++        e += t + rol32(a, 5) + (((c ^ d) & b) ^ d) + 0x5a827999U;
++        b = ror32(b, 2);
++        t = e; e = d; d = c; c = b; b = a; a = t;
++    }
++
++    /* Round 2 */
++    for ( ; i < 40; ++i )
++    {
++        t = blend(w, i);
++        e += t + rol32(a, 5) + (b ^ c ^ d) + 0x6ed9eba1U;
++        b = ror32(b, 2);
++        t = e; e = d; d = c; c = b; b = a; a = t;
++    }
++
++    /* Round 3 */
++    for ( ; i < 60; ++i )
++    {
++        t = blend(w, i);
++        e += t + rol32(a, 5) + ((b & c) + (d & (b ^ c))) + 0x8f1bbcdcU;
++        b = ror32(b, 2);
++        t = e; e = d; d = c; c = b; b = a; a = t;
++    }
++
++    /* Round 4 */
++    for ( ; i < 80; ++i )
++    {
++        t = blend(w, i);
++        e += t + rol32(a, 5) + (b ^ c ^ d) + 0xca62c1d6U;
++        b = ror32(b, 2);
++        t = e; e = d; d = c; c = b; b = a; a = t;
++    }
++
++    state[0] += a;
++    state[1] += b;
++    state[2] += c;
++    state[3] += d;
++    state[4] += e;
++}
++
++static void sha1_init(struct sha1_state *s)
++{
++    *s = (struct sha1_state){
++        .state = {
++            0x67452301U,
++            0xefcdab89U,
++            0x98badcfeU,
++            0x10325476U,
++            0xc3d2e1f0U,
++        },
++    };
++}
++
++static void sha1_update(struct sha1_state *s, const void *msg, size_t len)
++{
++    unsigned int partial = s->count & 63;
++
++    s->count += len;
++
++    if ( (partial + len) >= 64 )
++    {
++        if ( partial )
++        {
++            unsigned int rem = 64 - partial;
++
++            /* Fill the partial block. */
++            memcpy(s->buf + partial, msg, rem);
++            msg += rem;
++            len -= rem;
++
++            sha1_transform(s->state, s->buf);
++            partial = 0;
++        }
++
++        for ( ; len >= 64; msg += 64, len -= 64 )
++            sha1_transform(s->state, msg);
++    }
++
++    /* Remaining data becomes partial. */
++    memcpy(s->buf + partial, msg, len);
++}
++
++static void sha1_final(struct sha1_state *s, uint8_t digest[SHA1_DIGEST_SIZE])
++{
++    uint32_t *dst = (uint32_t *)digest;
++    unsigned int i, partial = s->count & 63;
++
++    /* Start padding */
++    s->buf[partial++] = 0x80;
++
++    if ( partial > 56 )
++    {
++        /* Need one extra block - pad to 64 */
++        memset(s->buf + partial, 0, 64 - partial);
++        sha1_transform(s->state, s->buf);
++        partial = 0;
++    }
++    /* Pad to 56 */
++    memset(s->buf + partial, 0x0, 56 - partial);
++
++    /* Append the bit count */
++    put_unaligned_be64((uint64_t)s->count << 3, &s->buf[56]);
++    sha1_transform(s->state, s->buf);
++
++    /* Store state in digest */
++    for ( i = 0; i < 5; i++ )
++        put_unaligned_be32(s->state[i], &dst[i]);
++}
++
++void sha1(uint8_t digest[SHA1_DIGEST_SIZE], const void *msg, size_t len)
++{
++    struct sha1_state s;
++
++    sha1_init(&s);
++    sha1_update(&s, msg, len);
++    sha1_final(&s, digest);
++}
++
++#ifdef CONFIG_SELF_TESTS
++
++#include <xen/init.h>
++#include <xen/lib.h>
++
++static const struct test {
++    const char *msg;
++    uint8_t digest[SHA1_DIGEST_SIZE];
++} tests[] __initconst = {
++    {
++        .msg = "abc",
++        .digest = {
++            0xa9, 0x99, 0x3e, 0x36, 0x47, 0x06, 0x81, 0x6a, 0xba, 0x3e,
++            0x25, 0x71, 0x78, 0x50, 0xc2, 0x6c, 0x9c, 0xd0, 0xd8, 0x9d,
++        },
++    },
++    {
++        .msg = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
++        .digest = {
++            0x84, 0x98, 0x3e, 0x44, 0x1c, 0x3b, 0xd2, 0x6e, 0xba, 0xae,
++            0x4a, 0xa1, 0xf9, 0x51, 0x29, 0xe5, 0xe5, 0x46, 0x70, 0xf1,
++        },
++    },
++};
++
++static void __init __constructor test_sha1(void)
++{
++    for ( unsigned int i = 0; i < ARRAY_SIZE(tests); ++i )
++    {
++        const struct test *t = &tests[i];
++        uint8_t res[SHA1_DIGEST_SIZE] = {};
++
++        sha1(res, t->msg, strlen(t->msg));
++
++        if ( memcmp(res, t->digest, sizeof(t->digest)) == 0 )
++            continue;
++
++        panic("%s() msg '%s' failed\n"
++              "  expected %" STR(SHA1_DIGEST_SIZE) "phN\n"
++              "       got %" STR(SHA1_DIGEST_SIZE) "phN\n",
++              __func__, t->msg, t->digest, res);
++    }
++}
++#endif /* CONFIG_SELF_TESTS */
+-- 
+2.39.5
 
-Given that we need to be this late for AMD, we can also move the Intel
-logic later (effectively reverts part of the original work; sorry
-Alejandro) which means we can also use safe accessors, and we don't need
-to worry about the divergent early paths.
-
->
->> Do you have any more information about which system looks like this?
->>
-> I'm not sure if I understand your question correctly, but I was just 
-> booting an Intel based machine newer than ~2012. I have tested this on 4 
-> different machines, on which 3 hit this code path. One was a HPE 
-> ProLiant m510 Server with a XEON CPU
-
-Broadwell.
-
-> , second was a Mini PC with Celeron CPU,
-
-Sorry, not enough information here to figure out the microarchitecture.
-
-> and third was an old Intel NUC DCCP847DYE also with a Celeron CPU. 
-
-Sandy Bridge.
-
-> The only system where I couldn't reproduce the issue was an old 
-> workstation with a Gigabyte mainboard. It has the flag in the Bios to 
-> set MSR_IA32_MISC_ENABLE, but I'm not sure if it was actually booting 
-> via UEFI.
-
-Same, not enough information here.
-
-But, it's clear that Intel's XD-disable is still honoured in EFI mode on
-a wide range of systems, and that we need a fix for UEFI.
-
->  I will verify this on monday. I booted all the 3 other systems 
-> via UEFI -> Grub -> multiboot2. My grub entry looks like this:
->
-> multiboot2 /boot/xen.gz dom0_mem=2656M,max:2656M watchdog ucode=scan 
-> dom0_max_vcpus=1-8 crashkernel=256M,below=4G console=vga vga=mode-0x0311
-> module2 boot/vmlinuz console=hvc0 console=tty0 init=/bin/sh
-> module2 boot/initrd-dom0
->
->> trampoline_setup isn't executed on all EFI boots.  I had a different fix
->> in mind, but it's a little more complicated.
-> Aha. yes, I didn't thought about other code paths.
-
-https://xenbits.xen.org/docs/latest/hypervisor-guide/x86/how-xen-boots.html
-
-Here's something I put together to cover some of these details.  But,
-most of the detail is in the source only.
-
-~Andrew
 
