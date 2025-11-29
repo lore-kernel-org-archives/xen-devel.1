@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC64D116EA
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Nov 2025 20:20:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1175121.1500029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F567CFD2F6
+	for <xen-devel@archiver.kernel.org>; Sat, 29 Nov 2025 13:45:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1175230.1500077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vP4wa-0003ge-HD; Fri, 28 Nov 2025 20:19:52 +0000
+	id 1vPLFb-0003mA-28; Sat, 29 Nov 2025 13:44:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1175121.1500029; Fri, 28 Nov 2025 20:19:52 +0000
+Received: by outflank-mailman (output) from mailman id 1175230.1500077; Sat, 29 Nov 2025 13:44:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vP4wa-0003gX-EP; Fri, 28 Nov 2025 20:19:52 +0000
-Received: by outflank-mailman (input) for mailman id 1175121;
- Fri, 28 Nov 2025 20:19:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vPLFa-0003m2-Sn; Sat, 29 Nov 2025 13:44:34 +0000
+Received: by outflank-mailman (input) for mailman id 1175230;
+ Sat, 29 Nov 2025 13:44:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=61/n=6E=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vP4wY-0003fj-EE
- for xen-devel@lists.xenproject.org; Fri, 28 Nov 2025 20:19:50 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 951e9ffb-cc97-11f0-980a-7dc792cee155;
- Fri, 28 Nov 2025 21:19:46 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-477aa218f20so14523055e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 28 Nov 2025 12:19:46 -0800 (PST)
-Received: from localhost.localdomain (host-92-29-237-183.as13285.net.
- [92.29.237.183]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-479052ec685sm98201245e9.6.2025.11.28.12.19.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 12:19:44 -0800 (PST)
+ <SRS0=66PA=6F=yandex-team.ru=vsementsov@srs-se1.protection.inumbo.net>)
+ id 1vPLFY-0003lw-In
+ for xen-devel@lists.xenproject.org; Sat, 29 Nov 2025 13:44:33 +0000
+Received: from forwardcorp1d.mail.yandex.net (forwardcorp1d.mail.yandex.net
+ [178.154.239.200]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 879beefc-cd29-11f0-9d18-b5c5bf9af7f9;
+ Sat, 29 Nov 2025 14:44:30 +0100 (CET)
+Received: from mail-nwsmtp-smtp-corp-main-56.klg.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-56.klg.yp-c.yandex.net
+ [IPv6:2a02:6b8:c42:65a0:0:640:e1de:0])
+ by forwardcorp1d.mail.yandex.net (Yandex) with ESMTPS id 7BD36807C8;
+ Sat, 29 Nov 2025 16:44:28 +0300 (MSK)
+Received: from vsementsov-lin.. (unknown [2a02:6bf:8080:891::1:b])
+ by mail-nwsmtp-smtp-corp-main-56.klg.yp-c.yandex.net (smtpcorp/Yandex) with
+ ESMTPSA id Iigm2k0FK8c0-ulXpjbz3; Sat, 29 Nov 2025 16:44:27 +0300
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,482 +46,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 951e9ffb-cc97-11f0-980a-7dc792cee155
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1764361185; x=1764965985; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=C8qjxRSKtEjOjafIorv/edcLEVgJic5CXDGXAX2YZh4=;
-        b=cFn8S90lHKHCCPglW7KIQJ/fNF8v+OBWOiy4/O0KMrhS+b2k6ndOFQ3g7l6h+JmdJU
-         vVWdC/T00ndwtYdvTrja8+6sx2HpU6GI4Ccr25+PduTK/+LEIENMpP0iBbnqAuf4Eqol
-         OxF3Nn0wptoxi1a3UJ2xZlFm9G+79bUGeKmi4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764361185; x=1764965985;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=C8qjxRSKtEjOjafIorv/edcLEVgJic5CXDGXAX2YZh4=;
-        b=bEPPaBGLz9ff3WSB+BIJlQqlCl8226ndQZ/04KNic6epZR1mhM+lsV86lGBsga6l6H
-         IMa2Mt18ETg4gL0UrRSEGhAqgJqW2/EgpwW3aJg85WEx/Y9mVc8KZBXkkdK7YCmMNJLO
-         8fMp/mY0sduca9RhXz6hyrviXoqAAcHclkI2mmtHa0dd6cj/ZMjQ5NOCC+C3E8GfcMBM
-         pxmtdB8PUsCNf12ZdppxUViBn6OH7xaZC3WLp/c4dRJ0DhTMfOqA2ZqNiAiajWJRDIkL
-         7bnjxL/52lyQaK18fqqqg6HNrMOvFek7cOlaBiCvuY/1xFizLBt8eCqHbAchh9k/rLev
-         XAqg==
-X-Gm-Message-State: AOJu0YwmGXWppmnXCrlgXk62oWBx2vxXbnwrI0sVekYEYKjN4Du7Lb3R
-	r5fIGGWEKGOL/pZ+OuQZp23SelY5k0VkKodTJbcYVS+fDm7bNBIJaS5G1orYwvoudnlBsgBC9Mq
-	MscQy
-X-Gm-Gg: ASbGnctUir+JGyW/ZQmb2jce7ArlYyvLFaG/6uL7ubtwel6s74PlQXVaYevjX87Z/Lq
-	P7JgPue68+Ir97qGJo+27wp7bj/45y+njW0oi9Jhuy62vM/uhghuxdlLDzamLXrcsKoWFTeYb40
-	gGBX8X42zISSRGzililGuMOkOZ7Gvl+MsLE2cgFXx6inL3zwCC+dCp44EX87wB1u4MUAtCGp3kZ
-	vfZ6hUnZY3nTyLfqPago8grjFOjm9ktbRhcV5HKuZBFP2rYVum/JmSXPERNBGTicoO9aX2ymzww
-	OpUDgLfeoj5vbBdXKR0GTYP8LGb4NGEvKWpMYUQhknRnh3JTS+Z1Y+0sQf7wzg9W30lCISEy0AS
-	DDFdObjgzZgCBc2R/eJWiP7eMTqn/QWOJdAoI/K++mg7NFi5MyhpxFFgZW3woI3KT2ruY/fbF9t
-	jV1b4y1Nv8equlnbC4dl1GP/84RUr6MT1sruvvtf9pW6YlCMAfTLmUh1JvX8sbvw==
-X-Google-Smtp-Source: AGHT+IGg/PlPhAodwOJqIn+DwfMLGx6kSijdZ/6WugN3bWPpIrcowRICT81Gm1elCDallSKlhuHyiw==
-X-Received: by 2002:a05:600c:1f0f:b0:471:14af:c715 with SMTP id 5b1f17b1804b1-477c0165bb8mr285786355e9.3.1764361185352;
-        Fri, 28 Nov 2025 12:19:45 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 2/3] x86/svm: Drop svmdebug.c
-Date: Fri, 28 Nov 2025 20:19:36 +0000
-Message-Id: <20251128201937.1294742-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251128201937.1294742-1-andrew.cooper3@citrix.com>
-References: <20251128201937.1294742-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 879beefc-cd29-11f0-9d18-b5c5bf9af7f9
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+	s=default; t=1764423867;
+	bh=LUCSxr52Pv2huLa0fLn9hz38EO3fAzK11cfvmV1Zx1o=;
+	h=Message-ID:Date:In-Reply-To:Cc:Subject:References:To:From;
+	b=fnN1kUpbAUIbmVpr8z4hs3eb95QPfQMSIrmtOiUfZcBCqWBA53ree1f+qm7BDIGff
+	 GMBZkItq/iHyjYMaL7UtmTwwYoW8yuJUp3W2DRqd8uy9x/L4gaQqJ6+Zf7xVuAm7rA
+	 gBJeWp/iea8yhHtgJbTB0ze8yFT+wdli48WJX+qo=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-56.klg.yp-c.yandex.net; dkim=pass header.i=@yandex-team.ru
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+To: marcandre.lureau@redhat.com
+Cc: pbonzini@redhat.com,
+	qemu-devel@nongnu.org,
+	vsementsov@yandex-team.ru,
+	d-tatianin@yandex-team.ru,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Paul Durrant <paul@xen.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
+Subject: [PATCH 6/8] chardev: introduce .chr_get_pty_name() handler
+Date: Sat, 29 Nov 2025 16:43:46 +0300
+Message-ID: <20251129134350.487839-7-vsementsov@yandex-team.ru>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20251129134350.487839-1-vsementsov@yandex-team.ru>
+References: <20251129134350.487839-1-vsementsov@yandex-team.ru>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Everything here is really VMCB functionality, so merge it into vmcb.c.  Move
-the declarations from the global svmdebug.h to the logical vmcb.h.
+Currently we do two wrong things:
 
-No functional change.
+1. Abuse s->filename to get pty_name from it
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+2. Violate layering with help of CHARDEV_IS_PTY()
+
+Let's get rid of both, and introduce correct way to get pty name in
+generic code, if available.
+
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/svm/Makefile               |   1 -
- xen/arch/x86/hvm/svm/nestedsvm.c            |   1 -
- xen/arch/x86/hvm/svm/svmdebug.c             | 181 --------------------
- xen/arch/x86/hvm/svm/vmcb.c                 | 159 +++++++++++++++++
- xen/arch/x86/hvm/svm/vmcb.h                 |   3 +
- xen/arch/x86/include/asm/hvm/svm/svmdebug.h |   3 -
- 6 files changed, 162 insertions(+), 186 deletions(-)
- delete mode 100644 xen/arch/x86/hvm/svm/svmdebug.c
+ chardev/char-pty.c     |  7 +++++++
+ chardev/char.c         | 19 +++++++++++++------
+ hw/char/xen_console.c  |  7 ++++---
+ include/chardev/char.h |  7 +++++--
+ 4 files changed, 29 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/Makefile b/xen/arch/x86/hvm/svm/Makefile
-index 760d2954da83..8a072cafd572 100644
---- a/xen/arch/x86/hvm/svm/Makefile
-+++ b/xen/arch/x86/hvm/svm/Makefile
-@@ -4,5 +4,4 @@ obj-bin-y += entry.o
- obj-y += intr.o
- obj-y += nestedsvm.o
- obj-y += svm.o
--obj-y += svmdebug.o
- obj-y += vmcb.o
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 191466755148..63ed6c86b775 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -9,7 +9,6 @@
- #include <asm/hvm/svm/svm.h>
- #include <asm/hvm/svm/vmcb.h>
- #include <asm/hvm/nestedhvm.h>
--#include <asm/hvm/svm/svmdebug.h>
- #include <asm/paging.h> /* paging_mode_hap */
- #include <asm/event.h> /* for local_event_delivery_(en|dis)able */
- #include <asm/p2m.h> /* p2m_get_pagetable, p2m_get_nestedp2m */
-diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
-deleted file mode 100644
-index bdb9ea3583ee..000000000000
---- a/xen/arch/x86/hvm/svm/svmdebug.c
-+++ /dev/null
-@@ -1,181 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * svmdebug.c: debug functions
-- * Copyright (c) 2011, Advanced Micro Devices, Inc.
-- *
-- */
--
--#include <xen/sched.h>
--#include <asm/processor.h>
--#include <asm/msr-index.h>
--#include <asm/hvm/svm/svmdebug.h>
--
--#include "vmcb.h"
--
--static void svm_dump_sel(const char *name, const struct segment_register *s)
--{
--    printk("%s: %04x %04x %08x %016"PRIx64"\n",
--           name, s->sel, s->attr, s->limit, s->base);
--}
--
--void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
--{
--    struct vcpu *curr = current;
--
--    /*
--     * If we are dumping the VMCB currently in context, some guest state may
--     * still be cached in hardware.  Retrieve it.
--     */
--    if ( vmcb == curr->arch.hvm.svm.vmcb )
--        svm_sync_vmcb(curr, vmcb_in_sync);
--
--    printk("Dumping guest's current state at %s...\n", from);
--    printk("Size of VMCB = %zu, paddr = %"PRIpaddr", vaddr = %p\n",
--           sizeof(struct vmcb_struct), virt_to_maddr(vmcb), vmcb);
--
--    printk("cr_intercepts = %#x dr_intercepts = %#x "
--           "exception_intercepts = %#x\n",
--           vmcb_get_cr_intercepts(vmcb), vmcb_get_dr_intercepts(vmcb),
--           vmcb_get_exception_intercepts(vmcb));
--    printk("general1_intercepts = %#x general2_intercepts = %#x\n",
--           vmcb_get_general1_intercepts(vmcb), vmcb_get_general2_intercepts(vmcb));
--    printk("iopm_base_pa = %#"PRIx64" msrpm_base_pa = %#"PRIx64" tsc_offset = %#"PRIx64"\n",
--           vmcb_get_iopm_base_pa(vmcb), vmcb_get_msrpm_base_pa(vmcb),
--           vmcb_get_tsc_offset(vmcb));
--    printk("tlb_control = %#x vintr = %#"PRIx64" int_stat = %#"PRIx64"\n",
--           vmcb->tlb_control, vmcb_get_vintr(vmcb).bytes,
--           vmcb->int_stat.raw);
--    printk("event_inj %016"PRIx64", valid? %d, ec? %d, type %u, vector %#x\n",
--           vmcb->event_inj.raw, vmcb->event_inj.v,
--           vmcb->event_inj.ev, vmcb->event_inj.type,
--           vmcb->event_inj.vector);
--    printk("exitcode = %#"PRIx64" exit_int_info = %#"PRIx64"\n",
--           vmcb->exitcode, vmcb->exit_int_info.raw);
--    printk("exitinfo1 = %#"PRIx64" exitinfo2 = %#"PRIx64"\n",
--           vmcb->exitinfo1, vmcb->exitinfo2);
--    printk("asid = %#x np_ctrl = %#"PRIx64":%s%s%s\n",
--           vmcb_get_asid(vmcb), vmcb_get_np_ctrl(vmcb),
--           vmcb_get_np(vmcb)     ? " NP"     : "",
--           vmcb_get_sev(vmcb)    ? " SEV"    : "",
--           vmcb_get_sev_es(vmcb) ? " SEV_ES" : "");
--    printk("virtual vmload/vmsave = %d, virt_ext = %#"PRIx64"\n",
--           vmcb->virt_ext.fields.vloadsave_enable, vmcb->virt_ext.bytes);
--    printk("cpl = %d efer = %#"PRIx64" star = %#"PRIx64" lstar = %#"PRIx64"\n",
--           vmcb_get_cpl(vmcb), vmcb_get_efer(vmcb), vmcb->star, vmcb->lstar);
--    printk("CR0 = 0x%016"PRIx64" CR2 = 0x%016"PRIx64"\n",
--           vmcb_get_cr0(vmcb), vmcb_get_cr2(vmcb));
--    printk("CR3 = 0x%016"PRIx64" CR4 = 0x%016"PRIx64"\n",
--           vmcb_get_cr3(vmcb), vmcb_get_cr4(vmcb));
--    printk("RSP = 0x%016"PRIx64"  RIP = 0x%016"PRIx64"\n",
--           vmcb->rsp, vmcb->rip);
--    printk("RAX = 0x%016"PRIx64"  RFLAGS=0x%016"PRIx64"\n",
--           vmcb->rax, vmcb->rflags);
--    printk("DR6 = 0x%016"PRIx64", DR7 = 0x%016"PRIx64"\n",
--           vmcb_get_dr6(vmcb), vmcb_get_dr7(vmcb));
--    printk("CSTAR = 0x%016"PRIx64" SFMask = 0x%016"PRIx64"\n",
--           vmcb->cstar, vmcb->sfmask);
--    printk("KernGSBase = 0x%016"PRIx64" PAT = 0x%016"PRIx64"\n",
--           vmcb->kerngsbase, vmcb_get_g_pat(vmcb));
--    printk("SSP = 0x%016"PRIx64" S_CET = 0x%016"PRIx64" ISST = 0x%016"PRIx64"\n",
--           vmcb->_ssp, vmcb->_msr_s_cet, vmcb->_msr_isst);
--    printk("H_CR3 = 0x%016"PRIx64" CleanBits = %#x\n",
--           vmcb_get_h_cr3(vmcb), vmcb->cleanbits.raw);
--
--    /* print out all the selectors */
--    printk("       sel attr  limit   base\n");
--    svm_dump_sel("  CS", &vmcb->cs);
--    svm_dump_sel("  DS", &vmcb->ds);
--    svm_dump_sel("  SS", &vmcb->ss);
--    svm_dump_sel("  ES", &vmcb->es);
--    svm_dump_sel("  FS", &vmcb->fs);
--    svm_dump_sel("  GS", &vmcb->gs);
--    svm_dump_sel("GDTR", &vmcb->gdtr);
--    svm_dump_sel("LDTR", &vmcb->ldtr);
--    svm_dump_sel("IDTR", &vmcb->idtr);
--    svm_dump_sel("  TR", &vmcb->tr);
--}
--
--bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
--                      const struct vcpu *v, bool verbose)
--{
--    bool ret = false; /* ok */
--    unsigned long cr0 = vmcb_get_cr0(vmcb);
--    unsigned long cr3 = vmcb_get_cr3(vmcb);
--    unsigned long cr4 = vmcb_get_cr4(vmcb);
--    unsigned long valid;
--    uint64_t efer = vmcb_get_efer(vmcb);
--
--#define PRINTF(fmt, args...) do { \
--    if ( !verbose ) return true; \
--    ret = true; \
--    printk(XENLOG_GUEST "%pv[%s]: " fmt, v, from, ## args); \
--} while (0)
--
--    if ( !(efer & EFER_SVME) )
--        PRINTF("EFER: SVME bit not set (%#"PRIx64")\n", efer);
--
--    if ( !(cr0 & X86_CR0_CD) && (cr0 & X86_CR0_NW) )
--        PRINTF("CR0: CD bit is zero and NW bit set (%#"PRIx64")\n", cr0);
--
--    if ( cr0 >> 32 )
--        PRINTF("CR0: bits [63:32] are not zero (%#"PRIx64")\n", cr0);
--
--    if ( (cr0 & X86_CR0_PG) &&
--         ((cr3 & 7) ||
--          ((!(cr4 & X86_CR4_PAE) || (efer & EFER_LMA)) && (cr3 & 0xfe0)) ||
--          ((efer & EFER_LMA) &&
--           (cr3 >> v->domain->arch.cpuid->extd.maxphysaddr))) )
--        PRINTF("CR3: MBZ bits are set (%#"PRIx64")\n", cr3);
--
--    valid = hvm_cr4_guest_valid_bits(v->domain);
--    if ( cr4 & ~valid )
--        PRINTF("CR4: invalid value %#lx (valid %#lx, rejected %#lx)\n",
--               cr4, valid, cr4 & ~valid);
--
--    if ( vmcb_get_dr6(vmcb) >> 32 )
--        PRINTF("DR6: bits [63:32] are not zero (%#"PRIx64")\n",
--               vmcb_get_dr6(vmcb));
--
--    if ( vmcb_get_dr7(vmcb) >> 32 )
--        PRINTF("DR7: bits [63:32] are not zero (%#"PRIx64")\n",
--               vmcb_get_dr7(vmcb));
--
--    if ( efer & ~EFER_KNOWN_MASK )
--        PRINTF("EFER: unknown bits are not zero (%#"PRIx64")\n", efer);
--
--    if ( hvm_efer_valid(v, efer, -1) )
--        PRINTF("EFER: %s (%"PRIx64")\n", hvm_efer_valid(v, efer, -1), efer);
--
--    if ( (efer & EFER_LME) && (cr0 & X86_CR0_PG) )
--    {
--        if ( !(cr4 & X86_CR4_PAE) )
--            PRINTF("EFER_LME and CR0.PG are both set and CR4.PAE is zero\n");
--        if ( !(cr0 & X86_CR0_PE) )
--            PRINTF("EFER_LME and CR0.PG are both set and CR0.PE is zero\n");
--    }
--
--    if ( (efer & EFER_LME) && (cr0 & X86_CR0_PG) && (cr4 & X86_CR4_PAE) &&
--         vmcb->cs.l && vmcb->cs.db )
--        PRINTF("EFER_LME, CR0.PG, CR4.PAE, CS.L and CS.D are all non-zero\n");
--
--    if ( !(vmcb_get_general2_intercepts(vmcb) & GENERAL2_INTERCEPT_VMRUN) )
--        PRINTF("GENERAL2_INTERCEPT: VMRUN intercept bit is clear (%#"PRIx32")\n",
--               vmcb_get_general2_intercepts(vmcb));
--
--    if ( vmcb->event_inj.resvd1 )
--        PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
--               vmcb->event_inj.raw);
--
--#undef PRINTF
--    return ret;
--}
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * tab-width: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index 44fa76bf0228..b1a79d515143 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -228,6 +228,165 @@ void svm_destroy_vmcb(struct vcpu *v)
-     svm->vmcb = NULL;
+diff --git a/chardev/char-pty.c b/chardev/char-pty.c
+index a582aa7bc7..047aade09e 100644
+--- a/chardev/char-pty.c
++++ b/chardev/char-pty.c
+@@ -387,6 +387,12 @@ static void pty_chr_parse(QemuOpts *opts, ChardevBackend *backend, Error **errp)
+     pty->path = g_strdup(path);
  }
  
-+static void svm_dump_sel(const char *name, const struct segment_register *s)
++static char *pty_chr_get_pty_name(Chardev *chr)
 +{
-+    printk("%s: %04x %04x %08x %016"PRIx64"\n",
-+           name, s->sel, s->attr, s->limit, s->base);
++    PtyChardev *s = PTY_CHARDEV(chr);
++    return g_strdup(s->pty_name);
 +}
 +
-+void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+ static void char_pty_class_init(ObjectClass *oc, const void *data)
+ {
+     ChardevClass *cc = CHARDEV_CLASS(oc);
+@@ -396,6 +402,7 @@ static void char_pty_class_init(ObjectClass *oc, const void *data)
+     cc->chr_write = pty_chr_write;
+     cc->chr_update_read_handler = pty_chr_update_read_handler;
+     cc->chr_add_watch = pty_chr_add_watch;
++    cc->chr_get_pty_name = pty_chr_get_pty_name;
+ }
+ 
+ static const TypeInfo char_pty_type_info = {
+diff --git a/chardev/char.c b/chardev/char.c
+index 44bfed3627..0dc792b88f 100644
+--- a/chardev/char.c
++++ b/chardev/char.c
+@@ -1090,9 +1090,7 @@ ChardevReturn *qmp_chardev_add(const char *id, ChardevBackend *backend,
+     }
+ 
+     ret = g_new0(ChardevReturn, 1);
+-    if (CHARDEV_IS_PTY(chr)) {
+-        ret->pty = g_strdup(chr->filename + 4);
+-    }
++    ret->pty = qemu_chr_get_pty_name(chr);
+ 
+     return ret;
+ 
+@@ -1101,6 +1099,17 @@ err:
+     return NULL;
+ }
+ 
++char *qemu_chr_get_pty_name(Chardev *chr)
 +{
-+    struct vcpu *curr = current;
++    ChardevClass *cc = CHARDEV_GET_CLASS(chr);
 +
-+    /*
-+     * If we are dumping the VMCB currently in context, some guest state may
-+     * still be cached in hardware.  Retrieve it.
-+     */
-+    if ( vmcb == curr->arch.hvm.svm.vmcb )
-+        svm_sync_vmcb(curr, vmcb_in_sync);
-+
-+    printk("Dumping guest's current state at %s...\n", from);
-+    printk("Size of VMCB = %zu, paddr = %"PRIpaddr", vaddr = %p\n",
-+           sizeof(struct vmcb_struct), virt_to_maddr(vmcb), vmcb);
-+
-+    printk("cr_intercepts = %#x dr_intercepts = %#x "
-+           "exception_intercepts = %#x\n",
-+           vmcb_get_cr_intercepts(vmcb), vmcb_get_dr_intercepts(vmcb),
-+           vmcb_get_exception_intercepts(vmcb));
-+    printk("general1_intercepts = %#x general2_intercepts = %#x\n",
-+           vmcb_get_general1_intercepts(vmcb), vmcb_get_general2_intercepts(vmcb));
-+    printk("iopm_base_pa = %#"PRIx64" msrpm_base_pa = %#"PRIx64" tsc_offset = %#"PRIx64"\n",
-+           vmcb_get_iopm_base_pa(vmcb), vmcb_get_msrpm_base_pa(vmcb),
-+           vmcb_get_tsc_offset(vmcb));
-+    printk("tlb_control = %#x vintr = %#"PRIx64" int_stat = %#"PRIx64"\n",
-+           vmcb->tlb_control, vmcb_get_vintr(vmcb).bytes,
-+           vmcb->int_stat.raw);
-+    printk("event_inj %016"PRIx64", valid? %d, ec? %d, type %u, vector %#x\n",
-+           vmcb->event_inj.raw, vmcb->event_inj.v,
-+           vmcb->event_inj.ev, vmcb->event_inj.type,
-+           vmcb->event_inj.vector);
-+    printk("exitcode = %#"PRIx64" exit_int_info = %#"PRIx64"\n",
-+           vmcb->exitcode, vmcb->exit_int_info.raw);
-+    printk("exitinfo1 = %#"PRIx64" exitinfo2 = %#"PRIx64"\n",
-+           vmcb->exitinfo1, vmcb->exitinfo2);
-+    printk("asid = %#x np_ctrl = %#"PRIx64":%s%s%s\n",
-+           vmcb_get_asid(vmcb), vmcb_get_np_ctrl(vmcb),
-+           vmcb_get_np(vmcb)     ? " NP"     : "",
-+           vmcb_get_sev(vmcb)    ? " SEV"    : "",
-+           vmcb_get_sev_es(vmcb) ? " SEV_ES" : "");
-+    printk("virtual vmload/vmsave = %d, virt_ext = %#"PRIx64"\n",
-+           vmcb->virt_ext.fields.vloadsave_enable, vmcb->virt_ext.bytes);
-+    printk("cpl = %d efer = %#"PRIx64" star = %#"PRIx64" lstar = %#"PRIx64"\n",
-+           vmcb_get_cpl(vmcb), vmcb_get_efer(vmcb), vmcb->star, vmcb->lstar);
-+    printk("CR0 = 0x%016"PRIx64" CR2 = 0x%016"PRIx64"\n",
-+           vmcb_get_cr0(vmcb), vmcb_get_cr2(vmcb));
-+    printk("CR3 = 0x%016"PRIx64" CR4 = 0x%016"PRIx64"\n",
-+           vmcb_get_cr3(vmcb), vmcb_get_cr4(vmcb));
-+    printk("RSP = 0x%016"PRIx64"  RIP = 0x%016"PRIx64"\n",
-+           vmcb->rsp, vmcb->rip);
-+    printk("RAX = 0x%016"PRIx64"  RFLAGS=0x%016"PRIx64"\n",
-+           vmcb->rax, vmcb->rflags);
-+    printk("DR6 = 0x%016"PRIx64", DR7 = 0x%016"PRIx64"\n",
-+           vmcb_get_dr6(vmcb), vmcb_get_dr7(vmcb));
-+    printk("CSTAR = 0x%016"PRIx64" SFMask = 0x%016"PRIx64"\n",
-+           vmcb->cstar, vmcb->sfmask);
-+    printk("KernGSBase = 0x%016"PRIx64" PAT = 0x%016"PRIx64"\n",
-+           vmcb->kerngsbase, vmcb_get_g_pat(vmcb));
-+    printk("SSP = 0x%016"PRIx64" S_CET = 0x%016"PRIx64" ISST = 0x%016"PRIx64"\n",
-+           vmcb->_ssp, vmcb->_msr_s_cet, vmcb->_msr_isst);
-+    printk("H_CR3 = 0x%016"PRIx64" CleanBits = %#x\n",
-+           vmcb_get_h_cr3(vmcb), vmcb->cleanbits.raw);
-+
-+    /* print out all the selectors */
-+    printk("       sel attr  limit   base\n");
-+    svm_dump_sel("  CS", &vmcb->cs);
-+    svm_dump_sel("  DS", &vmcb->ds);
-+    svm_dump_sel("  SS", &vmcb->ss);
-+    svm_dump_sel("  ES", &vmcb->es);
-+    svm_dump_sel("  FS", &vmcb->fs);
-+    svm_dump_sel("  GS", &vmcb->gs);
-+    svm_dump_sel("GDTR", &vmcb->gdtr);
-+    svm_dump_sel("LDTR", &vmcb->ldtr);
-+    svm_dump_sel("IDTR", &vmcb->idtr);
-+    svm_dump_sel("  TR", &vmcb->tr);
-+}
-+
-+bool svm_vmcb_isvalid(
-+    const char *from, const struct vmcb_struct *vmcb, const struct vcpu *v,
-+    bool verbose)
-+{
-+    bool ret = false; /* ok */
-+    unsigned long cr0 = vmcb_get_cr0(vmcb);
-+    unsigned long cr3 = vmcb_get_cr3(vmcb);
-+    unsigned long cr4 = vmcb_get_cr4(vmcb);
-+    unsigned long valid;
-+    uint64_t efer = vmcb_get_efer(vmcb);
-+
-+#define PRINTF(fmt, args...) do { \
-+    if ( !verbose ) return true; \
-+    ret = true; \
-+    printk(XENLOG_GUEST "%pv[%s]: " fmt, v, from, ## args); \
-+} while (0)
-+
-+    if ( !(efer & EFER_SVME) )
-+        PRINTF("EFER: SVME bit not set (%#"PRIx64")\n", efer);
-+
-+    if ( !(cr0 & X86_CR0_CD) && (cr0 & X86_CR0_NW) )
-+        PRINTF("CR0: CD bit is zero and NW bit set (%#"PRIx64")\n", cr0);
-+
-+    if ( cr0 >> 32 )
-+        PRINTF("CR0: bits [63:32] are not zero (%#"PRIx64")\n", cr0);
-+
-+    if ( (cr0 & X86_CR0_PG) &&
-+         ((cr3 & 7) ||
-+          ((!(cr4 & X86_CR4_PAE) || (efer & EFER_LMA)) && (cr3 & 0xfe0)) ||
-+          ((efer & EFER_LMA) &&
-+           (cr3 >> v->domain->arch.cpuid->extd.maxphysaddr))) )
-+        PRINTF("CR3: MBZ bits are set (%#"PRIx64")\n", cr3);
-+
-+    valid = hvm_cr4_guest_valid_bits(v->domain);
-+    if ( cr4 & ~valid )
-+        PRINTF("CR4: invalid value %#lx (valid %#lx, rejected %#lx)\n",
-+               cr4, valid, cr4 & ~valid);
-+
-+    if ( vmcb_get_dr6(vmcb) >> 32 )
-+        PRINTF("DR6: bits [63:32] are not zero (%#"PRIx64")\n",
-+               vmcb_get_dr6(vmcb));
-+
-+    if ( vmcb_get_dr7(vmcb) >> 32 )
-+        PRINTF("DR7: bits [63:32] are not zero (%#"PRIx64")\n",
-+               vmcb_get_dr7(vmcb));
-+
-+    if ( efer & ~EFER_KNOWN_MASK )
-+        PRINTF("EFER: unknown bits are not zero (%#"PRIx64")\n", efer);
-+
-+    if ( hvm_efer_valid(v, efer, -1) )
-+        PRINTF("EFER: %s (%"PRIx64")\n", hvm_efer_valid(v, efer, -1), efer);
-+
-+    if ( (efer & EFER_LME) && (cr0 & X86_CR0_PG) )
-+    {
-+        if ( !(cr4 & X86_CR4_PAE) )
-+            PRINTF("EFER_LME and CR0.PG are both set and CR4.PAE is zero\n");
-+        if ( !(cr0 & X86_CR0_PE) )
-+            PRINTF("EFER_LME and CR0.PG are both set and CR0.PE is zero\n");
++    if (cc->chr_get_pty_name) {
++        return cc->chr_get_pty_name(chr);
 +    }
 +
-+    if ( (efer & EFER_LME) && (cr0 & X86_CR0_PG) && (cr4 & X86_CR4_PAE) &&
-+         vmcb->cs.l && vmcb->cs.db )
-+        PRINTF("EFER_LME, CR0.PG, CR4.PAE, CS.L and CS.D are all non-zero\n");
-+
-+    if ( !(vmcb_get_general2_intercepts(vmcb) & GENERAL2_INTERCEPT_VMRUN) )
-+        PRINTF("GENERAL2_INTERCEPT: VMRUN intercept bit is clear (%#"PRIx32")\n",
-+               vmcb_get_general2_intercepts(vmcb));
-+
-+    if ( vmcb->event_inj.resvd1 )
-+        PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
-+               vmcb->event_inj.raw);
-+
-+#undef PRINTF
-+    return ret;
++    return NULL;
 +}
 +
- static void cf_check vmcb_dump(unsigned char ch)
+ ChardevReturn *qmp_chardev_change(const char *id, ChardevBackend *backend,
+                                   Error **errp)
  {
-     struct domain *d;
-diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
-index 68012948a9e3..ba554a964487 100644
---- a/xen/arch/x86/hvm/svm/vmcb.h
-+++ b/xen/arch/x86/hvm/svm/vmcb.h
-@@ -553,6 +553,9 @@ int  svm_create_vmcb(struct vcpu *v);
- void svm_destroy_vmcb(struct vcpu *v);
+@@ -1192,9 +1201,7 @@ ChardevReturn *qmp_chardev_change(const char *id, ChardevBackend *backend,
+     object_unref(OBJECT(chr_new));
  
- void setup_vmcb_dump(void);
-+void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb);
-+bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
-+                      const struct vcpu *v, bool verbose);
+     ret = g_new0(ChardevReturn, 1);
+-    if (CHARDEV_IS_PTY(chr_new)) {
+-        ret->pty = g_strdup(chr_new->filename + 4);
+-    }
++    ret->pty = qemu_chr_get_pty_name(chr_new);
  
- /*
-  * VMCB accessor functions.
-diff --git a/xen/arch/x86/include/asm/hvm/svm/svmdebug.h b/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-index 2fb76ec24c76..ede13bd34048 100644
---- a/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-@@ -12,8 +12,5 @@
- #include <asm/hvm/svm/vmcb.h>
+     return ret;
+ }
+diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
+index a639fb0b11..7502de46e4 100644
+--- a/hw/char/xen_console.c
++++ b/hw/char/xen_console.c
+@@ -418,6 +418,7 @@ static void xen_console_realize(XenDevice *xendev, Error **errp)
+     XenConsole *con = XEN_CONSOLE_DEVICE(xendev);
+     Chardev *cs = qemu_chr_fe_get_driver(&con->chr);
+     unsigned int u;
++    g_autofree char *pty_name = NULL;
  
- void svm_sync_vmcb(struct vcpu *v, enum vmcb_sync_state new_state);
--void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb);
--bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
--                      const struct vcpu *v, bool verbose);
+     if (!cs) {
+         error_setg(errp, "no backing character device");
+@@ -450,9 +451,9 @@ static void xen_console_realize(XenDevice *xendev, Error **errp)
  
- #endif /* __ASM_X86_HVM_SVM_SVMDEBUG_H__ */
+     trace_xen_console_realize(con->dev, object_get_typename(OBJECT(cs)));
+ 
+-    if (CHARDEV_IS_PTY(cs)) {
+-        /* Strip the leading 'pty:' */
+-        xen_device_frontend_printf(xendev, "tty", "%s", cs->filename + 4);
++    pty_name = qemu_chr_get_pty_name(cs);
++    if (pty_name) {
++        xen_device_frontend_printf(xendev, "tty", "%s", pty_name);
+     }
+ 
+     /* No normal PV driver initialization for the primary console under Xen */
+diff --git a/include/chardev/char.h b/include/chardev/char.h
+index 23a227dca9..d36e50b99e 100644
+--- a/include/chardev/char.h
++++ b/include/chardev/char.h
+@@ -247,8 +247,6 @@ OBJECT_DECLARE_TYPE(Chardev, ChardevClass, CHARDEV)
+ 
+ #define CHARDEV_IS_RINGBUF(chr) \
+     object_dynamic_cast(OBJECT(chr), TYPE_CHARDEV_RINGBUF)
+-#define CHARDEV_IS_PTY(chr) \
+-    object_dynamic_cast(OBJECT(chr), TYPE_CHARDEV_PTY)
+ 
+ struct ChardevClass {
+     ObjectClass parent_class;
+@@ -306,6 +304,9 @@ struct ChardevClass {
+ 
+     /* handle various events */
+     void (*chr_be_event)(Chardev *s, QEMUChrEvent event);
++
++    /* return PTY name if available */
++    char *(*chr_get_pty_name)(Chardev *s);
+ };
+ 
+ Chardev *qemu_chardev_new(const char *id, const char *typename,
+@@ -320,4 +321,6 @@ GSource *qemu_chr_timeout_add_ms(Chardev *chr, guint ms,
+ void suspend_mux_open(void);
+ void resume_mux_open(void);
+ 
++char *qemu_chr_get_pty_name(Chardev *chr);
++
+ #endif
 -- 
-2.39.5
+2.48.1
 
 
