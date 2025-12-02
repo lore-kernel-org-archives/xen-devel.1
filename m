@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165A7CFD2F6
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Dec 2025 10:10:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1176056.1500605 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0381CFD2F6
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Dec 2025 10:57:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1176070.1500620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vQNKy-0001mn-MM; Tue, 02 Dec 2025 10:10:24 +0000
+	id 1vQO4N-00079A-0q; Tue, 02 Dec 2025 10:57:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1176056.1500605; Tue, 02 Dec 2025 10:10:24 +0000
+Received: by outflank-mailman (output) from mailman id 1176070.1500620; Tue, 02 Dec 2025 10:57:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vQNKy-0001mg-JA; Tue, 02 Dec 2025 10:10:24 +0000
-Received: by outflank-mailman (input) for mailman id 1176056;
- Tue, 02 Dec 2025 10:04:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vQO4M-00078H-T5; Tue, 02 Dec 2025 10:57:18 +0000
+Received: by outflank-mailman (input) for mailman id 1176070;
+ Tue, 02 Dec 2025 10:57:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GrWF=6I=citrix.com=bernhard.kaindl@srs-se1.protection.inumbo.net>)
- id 1vQNFN-0000il-0U
- for xen-devel@lists.xenproject.org; Tue, 02 Dec 2025 10:04:37 +0000
-Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com
- [2a00:1450:4864:20::641])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4bcb8017-cf66-11f0-980a-7dc792cee155;
- Tue, 02 Dec 2025 11:04:31 +0100 (CET)
-Received: by mail-ej1-x641.google.com with SMTP id
- a640c23a62f3a-b79af62d36bso316036766b.3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Dec 2025 02:04:31 -0800 (PST)
-Received: from tbernhardk-x-u.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b76f5a4a652sm1501590066b.65.2025.12.02.02.04.29
+ <SRS0=tQLy=6I=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1vQO4M-00075j-GO
+ for xen-devel@lists.xenproject.org; Tue, 02 Dec 2025 10:57:18 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ab33504f-cf6d-11f0-9d1a-b5c5bf9af7f9;
+ Tue, 02 Dec 2025 11:57:18 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4779a4fc95aso40860875e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Dec 2025 02:57:18 -0800 (PST)
+Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
+ [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4791164d365sm289825795e9.12.2025.12.02.02.57.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Dec 2025 02:04:29 -0800 (PST)
+ Tue, 02 Dec 2025 02:57:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,135 +47,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4bcb8017-cf66-11f0-980a-7dc792cee155
+X-Inumbo-ID: ab33504f-cf6d-11f0-9d1a-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1764669871; x=1765274671; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sRghr6u8t7LZWLGIMGwRWafYIQtc04eqnIv5UNUe8E8=;
-        b=J06P0CO88RCodqVp0/JcrupaoYSjqN9CTK254RaL7+s5lo0JCLSJItEyo7duEaJXte
-         RdC9R9dMOpFPXU/BgMZpRVWPQzSM1iGunos1vw7E1+zgLsQ0rmGfeV0bPTEWM2iFjHNg
-         zh/dwP6a3Lxiu2SoqEBpoFHjXt05eOA1NVKPM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764669871; x=1765274671;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1764673037; x=1765277837; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sRghr6u8t7LZWLGIMGwRWafYIQtc04eqnIv5UNUe8E8=;
-        b=jnpzug0lDU2zcULXb3YayWUsCEk0ApDLWpY7mnq5pZgjvis+GNhB6xzSvageYoUEXT
-         2IwAslUGQsYE7T7ipEyal6VWn1D64/sP5UkVkdSIqvARFZSTdYWkdCBYrJ813XiZf63B
-         8/EwxpWyUO6Da9PpvxUHWRSlMHbEIL/lDQ3cA9xw4CwwP809giLM4698ewsUEtoy2XI/
-         c04cb19kuLkDp787qcatQybaxHp9JdJNhYQHba3q6LMjTv21DRKsz5Bhet6UDdTB3L8M
-         xLH3DvfluMd6D7Hq5ZdTfzm0jTNz+Gve7l98GA8tnsx6f8BluQg2il19oPLp9TBEtIiL
-         EjXg==
-X-Gm-Message-State: AOJu0YyCOjjf8Fd0Ph29SYeb4j6cPIzKBxuagblW0FyhMVbQ+79OGoR8
-	uh7u5/1OWFN7v0GF9GLHF3hTesMaQY0NkZmq3U8kVlQvu7yJbwMNOaia/SYB9q7NwcLBGoGE2Pu
-	Go77bFNy2Wr8JbqE=
-X-Gm-Gg: ASbGncuoHLNkwwQCqx5V+a5xDZqu2p1OmkQ/sbO/lWhi6+8cOQl79q0bIPtfNBm9Rw1
-	LdsE9Zq+IEWjaHGl3Ncr20lxxAGoTBDwP788Nemg8NKuuquiaIheRVl3suQgFFz+acoSFxhHXj+
-	uLlEWeDKSwLckNSHBGRtDmvS31RmGWPFjJFoJ4rQzBYTENQBE/dR1GwdmZOhA6wd9GkjenODyCn
-	9SDlFfqxL7MewO5hlYIxs5rwOssdRnO4znJY4qta7MYH9CJPXzBMApyJNA9bIpndfFHVaxljlUF
-	Ea+e9CoZkEpPjCiDqOMUmWXZ3CGNE9WffpVNlXjtKXd4ReYril5483w+UdxjEFQEBFt9YNZhmtm
-	T+gSdYmDZ0JyXldSYxeaCpkYUSW7I6LiEOFIai1vrHF7iEQ8bCjgM/qJaMfTXMY08u5mPd/I9/7
-	Tqbj7G0IUEV7VnKIywA8Ky40rrOTGEB9te+zS8
-X-Google-Smtp-Source: AGHT+IGot6vEvPPguBDxq3OYexLjA9/V/O8mWyyrxOAKqk22OTHGJdJCH5E0zXvXsB1ELOPdaHJPyg==
-X-Received: by 2002:a17:907:c09:b0:b79:cb08:30e with SMTP id a640c23a62f3a-b79cb0803b6mr10985066b.58.1764669870711;
-        Tue, 02 Dec 2025 02:04:30 -0800 (PST)
-From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-X-Google-Original-From: Bernhard Kaindl <bernhard.kaindl@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@cloud.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] xen/page_alloc: Much more concise domain_adjust_tot_pages()
-Date: Tue,  2 Dec 2025 11:02:37 +0100
-Message-Id: <a5adbc25d18c34eb6d46120989d379862cd721bd.1764669686.git.bernhard.kaindl@cloud.com>
-X-Mailer: git-send-email 2.34.1
+        bh=riRPJvWz61nwq2yHn5ai8Dg4B8xFn5kKgazweRThc40=;
+        b=pdil9SN85+xLiSUie1v7OahUeFgphkAk3urlAAFokdg51Q+hjQ2kW6tXjgSCGjpjmy
+         PVMop6nk7r8q6SRj8CVdzqg5zriM/MItPKklm1gnM5nDjZZ+cxK53zRR7ecXepx+IKDI
+         1FrQXqJHfdigII9UPnYnzjgpfGhz7KRW5BLM0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764673037; x=1765277837;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=riRPJvWz61nwq2yHn5ai8Dg4B8xFn5kKgazweRThc40=;
+        b=hWko3jhWImIQrddmdny/pHxJpXV9KBlB/qYyACExCRA4vDLFMsz+UUhHgFN1xlDdtI
+         KrMqKK6ezuU28GTDOO7CC24jLML4fhujDX5II1OrVeyQSRj17ujLZ5cXSiWunvXb+jlX
+         /S8nMsH/71sBr4WiD6wK1cAawKDsq5RTZSiaXo2zTQQqH14+Mm6iTAiGDdaAfvQVpxoP
+         2Kqr4HlxQEaVH6FG9Im69pq7jJHRHCoXLUACMnKtpUcCzVxE2K8eS0qYrF/GHnpXBrz3
+         ARbRcNvd2tabTj8Jp2JVTFPMxq3i6I4qkq8oL0BB/j2eFZFBlfgDzhl0Is4bjrkpAi67
+         DErA==
+X-Gm-Message-State: AOJu0Yz18E6HqETp7JQ3p0TkT4YxcCinKF6P2QGcB550jBDaVM1qmPVR
+	pwMJGuUjiiCurXt5TQs1Zh5ZgDepIRO6kdX755EjdaeaeROxAggdRsSxhrfKDx2tdiM3isbkHZV
+	nFOIW
+X-Gm-Gg: ASbGncueLH12+QchjRAyo/vWXmXfp/DtD3CTkvAiXBJovKZxZxIInayPnR20qU47xcl
+	IIdPEDxxi5JqBV+OhLJT2YZgcnfBKjNLggKHFEesZ1g4i7HJEJbLqW/Tl7lN8MvMK+i31XS+Yuv
+	nAbk7Nkpg6TiEc/VKuCYr41IdmMPrYf3ErgYm8jxGVEd806QX2THtE6mdp94GNfF5uE5kphM3rT
+	RAaUsQcDAfY9kk1y7CYXXyLj3G88tpAHiPXwDA0xxtExV8uPpzK31d3tfX8o6Jxdbdb55n0aR+t
+	TquLnPqaBVg+cdtpgyOauhyVIGS2LL0kZxyXXz0xvjar6820lKMDuULKQo+a84co2c2afR+Iw1/
+	0vM3ltkVw7jay6GWGttSq3HKA2Wkt5V5KyAINcP8s6YQtg3sTkf56GMu1hRGB4XgDm7QksnuEdp
+	wM1kDdCoUSmKhPQTIoPFydA/mD0n32wxtN4n75rpTNiZKrzC4qdcWfx08JjfKGcQ==
+X-Google-Smtp-Source: AGHT+IF8xRcUg1w/qTR4FnaeZsLwR12ATjw4zfcKNq+vdchgjluVzL8fyAnzMxYpc6oK21J/+MaZLA==
+X-Received: by 2002:a05:600c:1c9e:b0:477:9e0c:f59 with SMTP id 5b1f17b1804b1-47926f80703mr23758275e9.2.1764673037174;
+        Tue, 02 Dec 2025 02:57:17 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 3/3] x86/amd: Delay amd_init_levelling() until after fixes to the CPUID MSRs
+Date: Tue,  2 Dec 2025 10:57:10 +0000
+Message-Id: <20251202105710.1472927-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251202105710.1472927-1-andrew.cooper3@citrix.com>
+References: <20251202105710.1472927-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Non-functional change to make consuming claims more concise:
+There's no need for amd_init_levelling() to be specifically early.  In fact,
+it must be after init_amd() edits the feature MSRs, e.g. enabling TOPOEXT on
+Fam15h, or we revert the change on the next context switch.
 
-When we limit the consumption of claims to the remaining claims
-of the domain, we can make the code more concise by limiting the
-adjustment to it instead of carrying a special case for it.
+As the only action in early_init_amd(), drop the function entirely.
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@cloud.com>
-Co-authored-by: Roger Pau Monné <roger.pau@citrix.com>
-
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Changes
-- Use min_t(unsigned long, a, b) as the tool of the trade (Roger Pau Monné)
-- Reviewed by Andrew Cooper and Roger Pau Monné(Excluding comments, commit message)
-- Regression-tested and included as part of te NUMA work for XenServer 9
-- Improved comments and the commit message (non-functional change, comment cleanup)
-
-Previous reviews
-----------------
-
-Review with the requested changes to the commit message:
-- https://patchew.org/Xen/cover.1757261045.git.bernhard.kaindl@cloud.com/15ae395c6933e74da0cdd8f9d71d349a7bfad3f3.1757261045.git.bernhard.kaindl@cloud.com/
-
-Obsoleted review:
-- https://patchew.org/Xen/cover.1755341947.git.bernhard.kaindl@cloud.com/5f417fea5ca8e4da0d4b9679103c3eff4bc92900.1755341947.git.bernhard.kaindl@cloud.com/
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/common/page_alloc.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ xen/arch/x86/cpu/amd.c   | 16 ++++++----------
+ xen/arch/x86/cpu/cpu.h   |  2 +-
+ xen/arch/x86/cpu/hygon.c |  6 +++++-
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 1f67b88a89..ae2a560e0a 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -510,8 +510,11 @@ static unsigned long avail_heap_pages(
-     return free_pages;
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 73f43b0f9174..b66601b3c51e 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -224,7 +224,7 @@ static const typeof(ctxt_switch_masking) __initconst_cf_clobber __used csm =
+  * avoid this, as the accidentally-advertised features will not actually
+  * function.
+  */
+-static void __init noinline amd_init_levelling(void)
++void __init amd_init_levelling(void)
+ {
+ 	/*
+ 	 * If there's support for CpuidUserDis or CPUID faulting then
+@@ -617,14 +617,6 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
+ 		*low_mhz = amd_parse_freq(c->x86, lo);
  }
  
-+/* Adjust the tot_pages and remaining outstanding claims of the domain. */
- unsigned long domain_adjust_tot_pages(struct domain *d, long pages)
+-void cf_check early_init_amd(struct cpuinfo_x86 *c)
+-{
+-	if (c == &boot_cpu_data)
+-		amd_init_levelling();
+-
+-	ctxt_switch_levelling(NULL);
+-}
+-
+ void amd_log_freq(const struct cpuinfo_x86 *c)
  {
-+    unsigned long adjustment;
+ 	unsigned int low_mhz = 0, nom_mhz = 0, hi_mhz = 0;
+@@ -1270,10 +1262,14 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 	check_syscfg_dram_mod_en();
+ 
+ 	amd_log_freq(c);
 +
-     ASSERT(rspin_is_locked(&d->page_alloc_lock));
-     d->tot_pages += pages;
++	if (c == &boot_cpu_data)
++		amd_init_levelling(); /* After CPUID MSR adjustments. */
++
++	ctxt_switch_levelling(NULL);
+ }
  
-@@ -519,23 +522,19 @@ unsigned long domain_adjust_tot_pages(struct domain *d, long pages)
-      * can test d->outstanding_pages race-free because it can only change
-      * if d->page_alloc_lock and heap_lock are both held, see also
-      * domain_set_outstanding_pages below
-+     *
-+     * skip claims adjustment when the domain has no outstanding claims
-+     * or we unassigned pages from it.
-      */
-     if ( !d->outstanding_pages || pages <= 0 )
-         goto out;
+ const struct cpu_dev __initconst_cf_clobber amd_cpu_dev = {
+-	.c_early_init	= early_init_amd,
+ 	.c_init		= init_amd,
+ };
  
-     spin_lock(&heap_lock);
-     BUG_ON(outstanding_claims < d->outstanding_pages);
--    if ( d->outstanding_pages < pages )
--    {
--        /* `pages` exceeds the domain's outstanding count. Zero it out. */
--        outstanding_claims -= d->outstanding_pages;
--        d->outstanding_pages = 0;
--    }
--    else
--    {
--        outstanding_claims -= pages;
--        d->outstanding_pages -= pages;
--    }
-+    /* consume claims until the domain's outstanding_claims are exhausted */
-+    adjustment = min_t(unsigned long, d->outstanding_pages, pages);
-+    d->outstanding_pages -= adjustment;
-+    outstanding_claims -= adjustment;
-     spin_unlock(&heap_lock);
+diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
+index 8bed3f52490f..c05c620c29bc 100644
+--- a/xen/arch/x86/cpu/cpu.h
++++ b/xen/arch/x86/cpu/cpu.h
+@@ -22,9 +22,9 @@ extern void display_cacheinfo(struct cpuinfo_x86 *c);
+ extern void detect_ht(struct cpuinfo_x86 *c);
+ extern bool detect_extended_topology(struct cpuinfo_x86 *c);
  
- out:
+-void cf_check early_init_amd(struct cpuinfo_x86 *c);
+ void amd_log_freq(const struct cpuinfo_x86 *c);
+ void amd_init_de_cfg(const struct cpuinfo_x86 *c);
++void amd_init_levelling(void);
+ void amd_init_lfence_dispatch(void);
+ void amd_init_ssbd(const struct cpuinfo_x86 *c);
+ void amd_init_spectral_chicken(void);
+diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
+index cab915a2fcf1..51104cbaf42c 100644
+--- a/xen/arch/x86/cpu/hygon.c
++++ b/xen/arch/x86/cpu/hygon.c
+@@ -90,9 +90,13 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
+ 	}
+ 
+ 	amd_log_freq(c);
++
++	if (c == &boot_cpu_data)
++		amd_init_levelling(); /* After CPUID MSR adjustments. */
++
++	ctxt_switch_levelling(NULL);
+ }
+ 
+ const struct cpu_dev __initconst_cf_clobber hygon_cpu_dev = {
+-	.c_early_init	= early_init_amd,
+ 	.c_init		= init_hygon,
+ };
 -- 
-2.34.1
+2.39.5
 
 
