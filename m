@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA0CD116F3
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Dec 2025 08:21:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1176463.1500952 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E48ED1266D
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Dec 2025 08:50:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1176491.1500961 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vQi6v-0005QZ-I1; Wed, 03 Dec 2025 08:21:17 +0000
+	id 1vQiZ8-0001SK-Oa; Wed, 03 Dec 2025 08:50:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1176463.1500952; Wed, 03 Dec 2025 08:21:17 +0000
+Received: by outflank-mailman (output) from mailman id 1176491.1500961; Wed, 03 Dec 2025 08:50:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vQi6v-0005QR-F0; Wed, 03 Dec 2025 08:21:17 +0000
-Received: by outflank-mailman (input) for mailman id 1176463;
- Wed, 03 Dec 2025 08:21:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vQiZ8-0001SD-Ln; Wed, 03 Dec 2025 08:50:26 +0000
+Received: by outflank-mailman (input) for mailman id 1176491;
+ Wed, 03 Dec 2025 08:50:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qm2A=6J=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1vQi6u-0004Eh-Pj
- for xen-devel@lists.xenproject.org; Wed, 03 Dec 2025 08:21:16 +0000
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [2607:f8b0:4864:20::c2c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 03307dda-d021-11f0-980a-7dc792cee155;
- Wed, 03 Dec 2025 09:21:06 +0100 (CET)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-65962c714eeso419031eaf.0
- for <xen-devel@lists.xenproject.org>; Wed, 03 Dec 2025 00:21:06 -0800 (PST)
+ id 1vQiZ7-0001S4-QC
+ for xen-devel@lists.xenproject.org; Wed, 03 Dec 2025 08:50:25 +0000
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [2607:f8b0:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1b33e49d-d025-11f0-9d1a-b5c5bf9af7f9;
+ Wed, 03 Dec 2025 09:50:24 +0100 (CET)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c78d30649aso5074880a34.2
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Dec 2025 00:50:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,53 +42,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03307dda-d021-11f0-980a-7dc792cee155
+X-Inumbo-ID: 1b33e49d-d025-11f0-9d1a-b5c5bf9af7f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1764750065; x=1765354865; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1764751823; x=1765356623; darn=lists.xenproject.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8N0YgyFKdSngXQfHGPmBwD03gL16SL5yPxUgUvFtSKg=;
-        b=qX2lH8vVdr3GeikBXW4sI1KIbj2b1oWYmPgh5yyJqYQSynAznbz2GueZOKAv5lULkb
-         xVzLk5ik9JqHft3mLpXHTByuNFF8oTqnu+DDzZ8uglJT2oEg7ujl4AwjA9v3mZ7v8Hlz
-         oUXGSSc5nGXc/oIZ4qsEEtzlTjV6NhZDFt/DD2SnQaUtEUjIuYLvZ+l8IZo8bWAqPe/X
-         2kcEU99aT8YbseaGkWF4ZdNYz+qkcxbqi9QDpbRxYOmpo8o8zL18Ez+pUnmiiVbRf7nO
-         Kwy9eAeQDRIJlt1p5X8EZQRDKmIQaZvm4gcsrUJ3NezbHDDaCCYoWbsJPwGQer2vXOpM
-         vBfw==
+        bh=y14wmZu+6Hl0hy8F4Amx9+E4Gb1nA1Es5CfmvZ8UCzw=;
+        b=pRe7YVDKgYFyC6g/d8YvUe8cODsqwjhfDbJhsI+CivQ55nqzwFrg/zfG0Wu8pKvcgp
+         F5RAY8jBF14ml40/VNGTShISYrHS/J5Co+vXBMRQpS2+FZ5ByMnEMXfQD2CFNeXhTBSI
+         8kz9rS0/D6AdTQItUUq1dK0KL6amwEgBQ5I3DOpiERhJy5Vu7VwCBrqP34mRTJw4Au7r
+         y/sRHyPZWFxSgKT26hsoWr81OrRxRM+Y3RcLS8Wzibp3wRvc05IrQh5z1Yf3H0UhJMzF
+         UMeeqJ9HD+rAMGqVcGGg9bBKtW5ESOTiBLJN0lI7tZZNsR7AWM3PgEBaAiYoLkzWdcTM
+         i+7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764750065; x=1765354865;
+        d=1e100.net; s=20230601; t=1764751823; x=1765356623;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=8N0YgyFKdSngXQfHGPmBwD03gL16SL5yPxUgUvFtSKg=;
-        b=aJGEccFXaKYIvM1hZueb2bACsS/z8VOFSEd6yHmrR3mEEsXuIsXsTwDcvgoY8GTX73
-         19z/7qHgkeXDC64g9ziE+GfCW7WBZjZrSP2puYBAwukAmYFbFGax7TFDFv2Kgk38VaoS
-         n2zZNq60XuKX7AoVCIxLIOU1M7N7wiytqMCge/rT9tSjUv9A3Cx83T3pxPSIVS83RUZB
-         XGPVAEPNzD/O0B6SovzQYIE0y0s3BOw/lgVkxfFhabth5aRosibshMCDLx2ziTN9+EVW
-         EM5iB28bE9eY7Ju53xUt+dTutknVWZ2BOVE8CEXMvlOMlp44MysjAa6tjn+6i/79VKUh
-         3EFQ==
-X-Gm-Message-State: AOJu0YwOClg14gTOuPWSo1YjRxGjsTzXAV9wtkOY6GizxECAnQxXOaE4
-	J3QxMQnwhBcQrQIKHAMxTPwkduVBc5sHJ1UqLKxeAJovwXdJZxuW4vNd1MyoKXnXYkwJVqlTAKY
-	t93sB2LgPCx7eDWlmoZ+uAWAkCCoKONTsO75U70eQfA==
-X-Gm-Gg: ASbGncvYK9iqx7GWYkY0LyRKtZ45YdiYlWH2fjypnHQ2lW6z9E6lF3N1mZ6vByfwEMY
-	nzs+f8pIE4nLJ3NbQei7V249k4hT2SBS38jwL8WPArL3CI+bF10Jpq7wRWvba/xyeor/nqKVjUi
-	Z+a+tPBtj9PTANMxitIbvVjoQJRq05IALdmFoKXeRXEfpFo3xUO0qdpU0IP2/nG98RLnw75iZyH
-	x3de+eBJAgzrCZt1yvBAje4QiduSHkW+MGSjpMlYXPXonTVdJI8ViHtU0KyZ48QN/5pPCUis917
-	0bED3hpGL72qqQmvnlONtsH5Xw==
-X-Google-Smtp-Source: AGHT+IFJQ8PJKluLvDrX5br9DlFOy9pR/2tzVPh0zb3flF2drXM/2oyqegMLr3WVVrXKHNklD8dQHViugjkZZliBM5o=
-X-Received: by 2002:a05:6820:30f:b0:657:182a:a5e2 with SMTP id
- 006d021491bc7-65966caea70mr2077267eaf.4.1764750064755; Wed, 03 Dec 2025
- 00:21:04 -0800 (PST)
+        bh=y14wmZu+6Hl0hy8F4Amx9+E4Gb1nA1Es5CfmvZ8UCzw=;
+        b=ZF4q1jFI/BllBB6GeYfBvRc00dGc2jnZAom+Xg5czqepdt5nWHgYuLVQYJgdR7OjJL
+         zkMsQZFPW1ZUAu0zj7RenPSsx0I7EjWotlB1tDX3kIv0ndkzXNfQfcDC2IpvIRPH1stp
+         UwXnJhzARg9RoUnd/u1tnhP/TBsbPaAFbSDaTpD/gxhdXCHtRE94LUilqUebjuF2KvYz
+         jAADGYuhFIQ0zpJMET8cmBaWE+MQ89uMNMVMDuOR1wiBKtqQzuUnECiRzuHHjSHPTUbk
+         cy77lXzOK/BvNWXnA5niJPy8USpIYZQFnEqeRYyyNKbb34E2QXdPYi0Ey9wgglE2jlg5
+         Bf1Q==
+X-Gm-Message-State: AOJu0YxRQsxVHqjVcDvjD/187KUsihDIzmRXs5OOxDYnWDkodUDhJFDW
+	kK/UOnj//R2SiCc/XxOpSkTuupjtzL8pcuvq94cAiUsVMqni3YkpsxG2rmkwHJ00nSQxhHHAMlT
+	Ek9obCgzcIiTDjCBBQJYr16P+6VUPMKfjf38FujXxeA==
+X-Gm-Gg: ASbGncuYHMDziOp+JLMGjPt42ZZklpjyNUR7e3TnzS89+wNMXWP0pdf7/6QR43c3tzz
+	JC1qzHGQKZnGWDmFhvAbIfmGFCFIwqY5Jd/rxU4xMa61gctT2kGxIueuC7VDCxI9rIYzaNDhsrT
+	7MB2ZViq1KEtLsWdpsstsPgrxb8smx02slvLALoOo10Bx4AuFImeLt8TtiWLhRP06TqzRvvVweu
+	k2ESPh1sVgm+wWSHJjwEv+4alX/Ov9QfzIB1mvI5ko5hlfhxFutnuUWyOpyTY/8s9u2BjllTSAz
+	944fPR9/LwKrrM1Rmv9kRxCB5g==
+X-Google-Smtp-Source: AGHT+IGXQ7+R0N/6sbIzu6bXmf4uiuvI2uykiFWseqV/In2woWAVAWShZjdPiVViASBKURZ2+Lknks/uspXKB7zTA14=
+X-Received: by 2002:a05:6830:2644:b0:7c1:12c5:334e with SMTP id
+ 46e09a7af769-7c94dae71bemr1287346a34.17.1764751823125; Wed, 03 Dec 2025
+ 00:50:23 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1764254975.git.bertrand.marquis@arm.com>
- <5e66b2991340f010befcaa3a57d0f35ad18d4149.1764254975.git.bertrand.marquis@arm.com>
- <CAHUa44E1SnhBR8=ibG+r6QPN9hehcRVPa93zKpYd756OHza+=A@mail.gmail.com> <BBA18875-32B0-4CAE-91B3-160DBD1B3BB8@arm.com>
-In-Reply-To: <BBA18875-32B0-4CAE-91B3-160DBD1B3BB8@arm.com>
+ <72d6592157a9ec15d4b5de19751186e0ca1680ba.1764254975.git.bertrand.marquis@arm.com>
+ <CAHUa44Gq4L95i3wTMEVRoFNFt2PzPCKGAuF4KT3YL9mfmT2FRA@mail.gmail.com> <33EF4249-1F82-4DF5-BCCE-0BCBB0F3D157@arm.com>
+In-Reply-To: <33EF4249-1F82-4DF5-BCCE-0BCBB0F3D157@arm.com>
 From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Wed, 3 Dec 2025 09:20:53 +0100
-X-Gm-Features: AWmQ_bnCzIK1lMsusdan31d70d_Y8QvRtUxri0gam-BE64OPdJCq-vatgqoXSN4
-Message-ID: <CAHUa44Fhk=thuwPuSC3V35p8c31OVRcerC4xxLca_ob2FPyd1g@mail.gmail.com>
-Subject: Re: [PATCH 02/10] xen/arm: ffa: per-VM FFA_VERSION negotiation state
+Date: Wed, 3 Dec 2025 09:50:11 +0100
+X-Gm-Features: AWmQ_bkGgh16alJhvbLQ1dW2IMhOC3iO-PmouHfOvmdgtqaQPT-j-acTbK0wnag
+Message-ID: <CAHUa44FQ8bCo5cuVR-JW9om+jEqUA8uZAPAmic9GkwnG-OeE7A@mail.gmail.com>
+Subject: Re: [PATCH 04/10] xen/arm: ffa: rework SPMC RX/TX buffer management
 To: Bertrand Marquis <Bertrand.Marquis@arm.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
@@ -96,161 +96,69 @@ Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Bertrand,
 
-On Tue, Dec 2, 2025 at 5:26=E2=80=AFPM Bertrand Marquis
+On Tue, Dec 2, 2025 at 5:50=E2=80=AFPM Bertrand Marquis
 <Bertrand.Marquis@arm.com> wrote:
 >
 > Hi Jens,
 >
-> > On 2 Dec 2025, at 12:33, Jens Wiklander <jens.wiklander@linaro.org> wro=
+> > On 2 Dec 2025, at 15:08, Jens Wiklander <jens.wiklander@linaro.org> wro=
 te:
 > >
 > > Hi Bertrand,
 > >
-> >
 > > On Thu, Nov 27, 2025 at 4:52=E2=80=AFPM Bertrand Marquis
 > > <bertrand.marquis@arm.com> wrote:
 > >>
-> >> Track FF-A version negotiation per VM and enforce that no FF-A ABI
-> >> (other than FFA_VERSION) is processed before a guest has selected a
-> >> version.
+> >> Rework how Xen accesses the RX/TX buffers shared with the SPMC so that
+> >> ownership and locking are handled centrally.
 > >>
-> >> Each ffa_ctx gains a dedicated guest_vers_lock, a negotiated version
-> >> (guest_vers) and a guest_vers_negotiated flag. guest_vers records the
-> >> version requested by the guest so the mediator can provide data
-> >> structures compatible with older minor versions. The value returned to
-> >> the guest by FFA_VERSION is always FFA_MY_VERSION, the implementation
-> >> version, as required by FF-A.
+> >> Move the SPMC RX/TX buffer bases into ffa_rxtx.c as ffa_spmc_rx/ffa_sp=
+mc_tx,
+> >> protect them with dedicated ffa_spmc_{rx,tx}_lock spinlocks and expose
+> >> ffa_rxtx_spmc_{rx,tx}_{acquire,release}() helpers instead of the globa=
+l
+> >> ffa_rx/ffa_tx pointers and ffa_{rx,tx}_buffer_lock.
 > >>
-> >> FFA_VERSION may be issued multiple times. Negotiation becomes final
-> >> only when a non-FFA_VERSION ABI is invoked, in accordance with the
-> >> FF-A requirement that the version cannot change once any other ABI has
-> >> been used. Before this point, non-FFA_VERSION ABIs are rejected if no
-> >> valid version has been provided.
-> >>
-> >> Once negotiation completes, the context is added to the global FF-A
-> >> VM list (when VM-to-VM is enabled) and the version may not be modified
-> >> for the lifetime of the VM. All VM-to-VM paths and teardown logic are
-> >> updated to use the guest_vers_negotiated flag.
-> >>
-> >> This prevents partially initialised contexts from using the mediator
-> >> and complies with the FF-A 1.2 FFA_VERSION semantics.
+> >> The RX helpers now always issue FFA_RX_RELEASE when we are done
+> >> consuming data from the SPMC, so partition-info enumeration and shared
+> >> memory paths release the RX buffer on all exit paths. The RX/TX mappin=
+g
+> >> code is updated to use the descriptor offsets (rx_region_offs and
+> >> tx_region_offs) rather than hard-coded structure layout, and to use th=
+e
+> >> TX acquire/release helpers instead of touching the TX buffer directly.
 > >>
 > >> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 > >> ---
-> >> xen/arch/arm/tee/ffa.c         | 115 +++++++++++++++++++++++++--------
-> >> xen/arch/arm/tee/ffa_msg.c     |   2 +-
-> >> xen/arch/arm/tee/ffa_private.h |  21 ++++--
-> >> 3 files changed, 104 insertions(+), 34 deletions(-)
-> >>
-> >> diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-> >> index 2b4e24750d52..3309ca875ec4 100644
-> >> --- a/xen/arch/arm/tee/ffa.c
-> >> +++ b/xen/arch/arm/tee/ffa.c
-> >> @@ -158,40 +158,89 @@ static bool ffa_abi_supported(uint32_t id)
-> >>     return !ffa_simple_call(FFA_FEATURES, id, 0, 0, 0);
-> >> }
-> >>
-> >> -static void handle_version(struct cpu_user_regs *regs)
-> >> +static bool ffa_negotiate_version(struct cpu_user_regs *regs)
-> >> {
-> >>     struct domain *d =3D current->domain;
-> >>     struct ffa_ctx *ctx =3D d->arch.tee;
-> >> -    uint32_t vers =3D get_user_reg(regs, 1);
-> >> -    uint32_t old_vers;
-> >> +    uint32_t fid =3D get_user_reg(regs, 0);
-> >> +    uint32_t in_vers =3D get_user_reg(regs, 1);
-> >> +    uint32_t out_vers =3D FFA_MY_VERSION;
-> >>
-> >> -    /*
-> >> -     * Guest will use the version it requested if it is our major and=
- minor
-> >> -     * lower or equals to ours. If the minor is greater, our version =
-will be
-> >> -     * used.
-> >> -     * In any case return our version to the caller.
-> >> -     */
-> >> -    if ( FFA_VERSION_MAJOR(vers) =3D=3D FFA_MY_VERSION_MAJOR )
-> >> -    {
-> >> -        spin_lock(&ctx->lock);
-> >> -        old_vers =3D ctx->guest_vers;
-> >> +    spin_lock(&ctx->guest_vers_lock);
-> >>
-> >> -        if ( FFA_VERSION_MINOR(vers) > FFA_MY_VERSION_MINOR )
-> >> -            ctx->guest_vers =3D FFA_MY_VERSION;
-> >> -        else
-> >> -            ctx->guest_vers =3D vers;
-> >> -        spin_unlock(&ctx->lock);
-> >> +    /* Handle FFA_VERSION races from different vCPUs. */
-> >> +    if ( ctx->guest_vers_negotiated )
-> >> +        goto out_continue;
-> >>
-> >> -        if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) && !old_vers )
-> >> +    if ( fid !=3D FFA_VERSION )
-> >> +    {
-> >> +        if ( !ctx->guest_vers )
-> >>         {
-> >> -            /* One more VM with FF-A support available */
-> >> -            inc_ffa_vm_count();
-> >> -            write_lock(&ffa_ctx_list_rwlock);
-> >> -            list_add_tail(&ctx->ctx_list, &ffa_ctx_head);
-> >> -            write_unlock(&ffa_ctx_list_rwlock);
-> >> +            out_vers =3D 0;
-> >> +            goto out_handled;
-> >>         }
-> >> +
-> >> +        /*
-> >> +         * A successful FFA_VERSION call does not freeze negotiation.=
- Guests
-> >> +         * are allowed to issue multiple FFA_VERSION attempts (e.g. p=
-robing
-> >> +         * several minor versions). Negotiation becomes final only wh=
-en a
-> >> +         * non-VERSION ABI is invoked, as required by the FF-A specif=
-ication.
-> >> +         */
-> >> +        if ( !ctx->guest_vers_negotiated )
-> >
-> > ctx->guest_vers_negotiated is always false here, due to the check above=
-.
->
-> Absolutely, I will remove the if here so that we set version to negotiate=
-d on
-> the first pass and do not come back here after.
->
-> >
-> >> +        {
-> >> +            ctx->guest_vers_negotiated =3D true;
-> >
-> > I'm on thin ice here, but I think that barriers or some other
-> > primitives are needed to close the gap if ffa_handle_call() is called
-> > concurrently during these conditions:
-> > ctx->guest_vers_negotiated =3D=3D false
-> > CPU0 called with FFA_VERSION 1.1 -> sets ctx->guest_vers =3D 1.1
-> > CPU1 called with a valid FF-A ID !=3D FFA_VERSION -> sets
-> > ctx->guest_vers_negotiated =3D true
-> > CPU2 called with a valid FF-A ID !=3D FFA_VERSION -> guarantee is
-> > missing that CPU2 will observe the updated ctx->guest_vers if it
-> > observes the updated ctx->guest_vers_negotiated
->
-> Definitely you are right and the combination of guest_vers and
-> guest_vers_negotiated has an issue with ordering.
->
-> I think the following modification should solve this:
-> - remove guest_vers_negotiated and use guest_vers =3D 0 as test for
-> version negotiated used with ACCESS_ONCE
-> - introduced a guest_vers_tmp only accessed under the lock to store
-> the temporary agreed version until negotiation is done
-> - during negotiation done copy tmp into guest_vers with a previous
-> write barrier before and ACCESS_ONCE to ensure visibility
->
-> Tell if that sounds right :-)
+> >> xen/arch/arm/tee/ffa.c          |  22 +-----
+> >> xen/arch/arm/tee/ffa_partinfo.c |  40 +++++-----
+> >> xen/arch/arm/tee/ffa_private.h  |  18 ++---
+> >> xen/arch/arm/tee/ffa_rxtx.c     | 132 +++++++++++++++++++++++++-------
+> >> xen/arch/arm/tee/ffa_shm.c      |  26 ++++---
 
-That should work. I think we may be able to skip an explicit barrier
-or even ACCESS_ONCE since the other CPUs will either see the updated
-version or enter ffa_negotiate_version() to take the lock (which
-includes a barrier) for synchronized access.
+[snip]
+
+> >>
+> >> -void ffa_rxtx_destroy(void)
+> >> +void *ffa_rxtx_spmc_rx_acquire(void)
+> >> +{
+> >> +    ASSERT(!spin_is_locked(&ffa_spmc_rx_lock));
+> >
+> > Is it invalid for two CPUs to concurrently try to acquire the RX buffer=
+?
+>
+> No the RX buffer or the TX buffer with the SPMC should only be used by
+> one CPU at a time as there cannot be any concurrent operations using it.
+
+What if two guests call FFA_PARTITION_INFO_GET concurrently? Both can
+succeed in acquiring their RX buffer so they can call
+ffa_get_sp_partinfo() concurrently, and the assert might be triggered.
+We have a similar problem with FFA_RXTX_MAP_64 and
+ffa_rxtx_spmc_tx_acquire(). Contention on the spinlocks for the rx and
+tx buffers should be valid. If we can't allow a guest to block here,
+we should return an error and let the guest retry.
 
 Cheers,
 Jens
