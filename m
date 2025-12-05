@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3154DD2F7E4
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Dec 2025 11:51:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1178804.1502514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA7DD2F7E4
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Dec 2025 11:51:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1178805.1502524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vRULQ-0005FX-20; Fri, 05 Dec 2025 11:51:28 +0000
+	id 1vRULR-0005TV-8b; Fri, 05 Dec 2025 11:51:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1178804.1502514; Fri, 05 Dec 2025 11:51:28 +0000
+Received: by outflank-mailman (output) from mailman id 1178805.1502524; Fri, 05 Dec 2025 11:51:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vRULP-0005FO-Vd; Fri, 05 Dec 2025 11:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 1178804;
- Fri, 05 Dec 2025 11:51:26 +0000
+	id 1vRULR-0005TO-5X; Fri, 05 Dec 2025 11:51:29 +0000
+Received: by outflank-mailman (input) for mailman id 1178805;
+ Fri, 05 Dec 2025 11:51:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=itKe=6L=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1vRULO-00050w-CV
- for xen-devel@lists.xenproject.org; Fri, 05 Dec 2025 11:51:26 +0000
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c000::1])
+ id 1vRULP-00050w-Ca
+ for xen-devel@lists.xenproject.org; Fri, 05 Dec 2025 11:51:27 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b975dace-d1d0-11f0-980a-7dc792cee155;
- Fri, 05 Dec 2025 12:51:24 +0100 (CET)
-Received: from BL1PR13CA0273.namprd13.prod.outlook.com (2603:10b6:208:2bc::8)
- by DM6PR12MB4403.namprd12.prod.outlook.com (2603:10b6:5:2ab::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.12; Fri, 5 Dec
- 2025 11:51:16 +0000
-Received: from BL6PEPF0001AB58.namprd02.prod.outlook.com
- (2603:10b6:208:2bc:cafe::c8) by BL1PR13CA0273.outlook.office365.com
- (2603:10b6:208:2bc::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Fri, 5
- Dec 2025 11:51:16 +0000
+ id b2cf3960-d1d0-11f0-980a-7dc792cee155;
+ Fri, 05 Dec 2025 12:51:14 +0100 (CET)
+Received: from BLAPR05CA0019.namprd05.prod.outlook.com (2603:10b6:208:36e::24)
+ by PH7PR12MB5782.namprd12.prod.outlook.com (2603:10b6:510:1d1::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.11; Fri, 5 Dec
+ 2025 11:51:09 +0000
+Received: from BL6PEPF0001AB52.namprd02.prod.outlook.com
+ (2603:10b6:208:36e:cafe::c0) by BLAPR05CA0019.outlook.office365.com
+ (2603:10b6:208:36e::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.4 via Frontend Transport; Fri, 5
+ Dec 2025 11:51:04 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF0001AB58.mail.protection.outlook.com (10.167.241.10) with Microsoft
+ BL6PEPF0001AB52.mail.protection.outlook.com (10.167.241.4) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 11:51:16 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 11:51:07 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
- 2025 05:51:14 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
- 2025 03:51:14 -0800
+ 2025 05:51:06 -0600
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Fri, 5 Dec 2025 03:51:13 -0800
+ via Frontend Transport; Fri, 5 Dec 2025 03:51:04 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b975dace-d1d0-11f0-980a-7dc792cee155
+X-Inumbo-ID: b2cf3960-d1d0-11f0-980a-7dc792cee155
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z1t3Geh+L839kzqRFSUyrIqHedE4opebru/U9YvUzVqB/ioTAWGotq4R2cIMncet/hn9Db44BgBtCmM30AeC6+zHwx7Pi+9RlE5Lawp9vVjXN8wnC3YNjVOgOMcc6aV5RnjIWAKrzlD+ZtgLGV++FwjlHI2QpM3+MiRM1I69fhdROPPwFyTbAk4oB0DGJY0U5RwWTZL4yLAYvQT6gmuX67B5p9kV2ETrJSEQlviEeyKOJDdzLUqflqHXcYq+NjpBSxgZiOcytn9APUczvO5UQEJe89jY3tZOePDnUkm92sHwx/c3vnMfbyjKdtk4Lxx70zOoizVc7G6CdnxC2JCc+Q==
+ b=PovNNL7ENOxNMhLshTQp1mBZ49yD3LTR1PV4Wfs64ddfwuYneUwOFX2HQd9uCUzAw/83vle8eGiYdC6tL9IE3geKKDJe9Unyg4AGOYVh7kBPAOYwx26miYmMdcvGzuBawg0aBNDSuZWVpCKOfO1+qtbvC2AoxURHailhoVKFgitUXUIo6pXBSyA/5PWGiOu1QRws7zEhSl12vYhXkclQhPICkURNURRLlUAh5nBCVTDXWJbmWPqkQGFbi1TGWt27Y6kIV2xguH968NMr8FMzKI3/HQb7BQwum4qk24GcNG5PZwx3ayai1ayJkTuQ2AO0dC87Qtzc3ursislm5y3yMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o778LlsegqXMw2XoBLskVR8L7ohCMBxfZZWEkxNmn0g=;
- b=YSN8mV/ZS4VwjjCSOhN99zka9hY8CiiVW/Fu2QtnM/qMvpPOP0y7kHB8tQwgdJBc1Qwtago2f/t7taJ7qfWhk6gB5N7Rx9P2e1O4loSQiDm0pt/qS2eMi+rmZd+1719afqkBRo0+ipRF7wVN51qSZvOzAwawc3vV3/QeH4qX1TktGC/mnPJ2agw+ucjjlKudao76AkAyccubI6dbao+oGf+m70RrHr1ct5Z32vFEyF60d39Y0t+DgtWdHc0qkrqlmbv9pAB9LqiilHq+f24IAsPoDjFVfecyMoWQNwPXHcqiEfT7OuZbVtq82var3k95AMFQe02VeLHd25UKP7Vo+g==
+ bh=SrWcFpcOodMhnL9R9IbJ7Knxkk4oOZA6UEWGOpHo8O4=;
+ b=jzyoOmtDs78fAsPc2ikF26q0Vmk0UPMO1UMF6tVJ3NTL8nNoMMsmZA2AoetvWhaPv3k4dG+DyGHB9lOkKdp2vuijGL3OS7sHAmP5QgE1i5o7hYcPbhvRH+mLrTdWM9yIlFiLnsBlLg0sM8g4OwdWLsX7uDxqNL8lEO7domOn+6v6AmG4yicUYzFHNGqbyHgr9z44Sy6Sjl6cT+UQ1yUPc2m9HtjfPP+BxzFVBlbQz0tY2o841ZXEjSQVtcVlrBuJoXU4B5PAo/9B1+y1a5JOKPwJBb2AK3GHxfDFufH2HhTEegFOCfh9wniGb8iusm5PAB6e896o5SsQlo8Po5fFJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o778LlsegqXMw2XoBLskVR8L7ohCMBxfZZWEkxNmn0g=;
- b=kyyb+AC9dhNCC6B9PSIxcsBRoB3dTdJ5ZBDl0pKCDclFksFGZ1t+w3XGAmDaMDqn7T0S0Lilp9rhyp+Dv0l0WViVXbv/S/UHb2+rZi1uFqPDma6VCyoctORB0gdUjoDHn+x9RMm6oK+sfOzoZSEk4GpzzQ6t197LHNlzTChtKX4=
+ bh=SrWcFpcOodMhnL9R9IbJ7Knxkk4oOZA6UEWGOpHo8O4=;
+ b=a/nz8FTzXSdJa6EDjngkKnPcKShJJ9AqLigkIGnNYMq1o++xx9L4uXsHEtSHUJgNJLbzvba++jYEB1J4CRoi+2TTGjBrU6Zeb1NXYu8uojwnDUkjHJEIcRy8t4fj1ci+mW8KBeRrUKUMA/sy6B75/NDmLvirhsSTQHG71gy+VVM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,91 +85,88 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Juergen Gross <jgross@suse.com>
-Subject: [PATCH 3/3] xen/hypfs: Enclose HYPFS_DIR_INIT var parameter in parentheses
-Date: Fri, 5 Dec 2025 12:50:00 +0100
-Message-ID: <20251205115000.49568-4-michal.orzel@amd.com>
+CC: Michal Orzel <michal.orzel@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH 0/3] Fix MISRA regressions for new ARM64 configurations
+Date: Fri, 5 Dec 2025 12:49:57 +0100
+Message-ID: <20251205115000.49568-1-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251205115000.49568-1-michal.orzel@amd.com>
-References: <20251205115000.49568-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB58:EE_|DM6PR12MB4403:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4ee1c61c-01c2-4725-eb58-08de33f498e5
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB52:EE_|PH7PR12MB5782:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6075b5d8-8d00-46e8-7acb-08de33f49396
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
+	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?jxZvCm6X/0aalSzLW5p9thEIX2SpgPhyyiO5xBpLNMfnywhdRFbn0TCHj2v1?=
- =?us-ascii?Q?wdZhRRp+8etIJB4df8xqtcbTechJUv6IunxsBLI86j/wppNA+dYUnIghwHsa?=
- =?us-ascii?Q?dImnq00XZSaBsNc3WOWSU7N/BzZ0HuIG/WJ49+8luCCbyoSBuEyb/gK6SdPI?=
- =?us-ascii?Q?SRAcsiqlCzL3i5Qd0a6I2/psAd2CYassu2HJWY58HlIfUlrcBHuDC7+UCn63?=
- =?us-ascii?Q?Ii3prNwx4nNWgr5qakAP8MzFcen6W9jUPdk7VxE9+utpWMtJrbmtjj8dCjUS?=
- =?us-ascii?Q?L0x3WfwOnpXPoSTKCgx1v02N2F3fdSsfCZJwI6jZaHG3fnq66PVRn1UnI3hn?=
- =?us-ascii?Q?CF5iH/igzGrymBN3pcSZoI7iXkSHwQIV6I+ONFMFINdRm6DeWtdmrp8Xc+qU?=
- =?us-ascii?Q?Dg4raao+/wluI++73AWggMZPezM89L/0C7uqWDmWNjuiu4jEeR+eUtMIMib9?=
- =?us-ascii?Q?Dx9KbDNNCvCBKcQ0o0TGv9MTYBo7jIUmEeSFZqcqnCGED7BaLosF0CSkKsna?=
- =?us-ascii?Q?fhbbRW4rjoP6WPFqSjU0J0mvKREpXou5nP7Cl66sBDzxnIYY1Jf8Cpr6ekmf?=
- =?us-ascii?Q?bDA4ShY0TjVpoGd27b6OCgUg4ipyyHUaxmWWA2HMWO/H8i7vjUvhiqfWCBos?=
- =?us-ascii?Q?9vK3/rv6kDBeeY/PTbJlC7nqwYnB+gipuPu0KSXhK+WPc1WtgZKbGdj2lLvo?=
- =?us-ascii?Q?G8EU3iVNafzN39vHMqnpuF/pjWqNCAiAfp399npMEslr4DyShu6W62qvkSvT?=
- =?us-ascii?Q?4p5B5188g2jXQHqbsLbZYx6gNGckqRsalWTnm20yuphMXywaireTd22/Gcou?=
- =?us-ascii?Q?8P7KN8CpCHS7lLUcWs728APdzV9n8rr8psgKVXErPKutVwvglcHb8rSszouD?=
- =?us-ascii?Q?Rtav8wPcjUV7woHqffgS7Y0yhZ3nx0fGgOdEh+BgqMvF7NKSdfJhAKQeKW+4?=
- =?us-ascii?Q?qAinak1Mw+xlxy8RTsBWkKv0v0237EDBgnAoWrfBhk5B7LEJr44JJVLgIXZ4?=
- =?us-ascii?Q?zW+tmF04SdqnDeHZXODuIkYM7wP4PsOqalWk862qU8NmLPTzTWYPAxm+jivM?=
- =?us-ascii?Q?pUAenYIypLWs9jXU/3L0GqDqEe7pDazm/FxvpYKgsT1sHzU6zo9VgS48uPs8?=
- =?us-ascii?Q?DTuYrTsCcvpfcRie0ghNJXvClBri4Lrvk2KQPPq/mmGbOZvcj8bQPmZFVTq4?=
- =?us-ascii?Q?U8zEAuQN4snqmwcPoH8YgSGeDE5rWBScw3gauexXTcsbP3SlbeWNdP12Xn/C?=
- =?us-ascii?Q?tHHbzvRbLNGdATmMs1icXj/V+qI723EIqRrDlYQVRyzfG7I2l4KGkH5ocY3T?=
- =?us-ascii?Q?dznTBgZP+WK73Y2QKiO5Oe8Reuokeb+Do7MTDMyrGTlAcGQcsSc9L1yNu+Xo?=
- =?us-ascii?Q?/VyVa87lXgLUmjUOwhatDVN9GxRjK4tR++5xrqYuzDNk44zkPwTDrWPYrxp8?=
- =?us-ascii?Q?zYblbiW655JdlMzIqhebsHPMZzdp4m1sfhxh5wHz/BlzgOvZLTSxHzvacmoY?=
- =?us-ascii?Q?2+5mHKdCI8Y02KVNOWvIvaVWlMYoCiF63o5ngQYjYCbgcmEs0YNAq3MRKxvy?=
- =?us-ascii?Q?S9wChlKBVvkFrjlZDho=3D?=
+	=?us-ascii?Q?RvSMrzx/Kvq4Kt0ybD2pD3r/o0kwQON+Dn5Tc6ETcWtc2BrEIiWEuVDa5EHU?=
+ =?us-ascii?Q?vMsb9pizQRBlpqa7JxfF/1vMg6EgROXZmHC9SGf/Co/NVnG1VELDGoJtM61A?=
+ =?us-ascii?Q?v/Fh6FQrsoqNqjHLldLCURmIJW6aRJmBBpGouzfk+5CfRchpVBIXk4WwhKZH?=
+ =?us-ascii?Q?qajcrqtKVXixt5YrYyBJq+N9NNaEaKiv0Vo/51euyRt6y1gkbsrrt1DgBxKq?=
+ =?us-ascii?Q?jK1kFtEepSzYbMTmjCeQTk0PXVbMEQTZ1RpY9TgxjPLlzbYN6pG+ApC92TvJ?=
+ =?us-ascii?Q?v2qwNr6Zprs/fPSLCuznxbb88hNjy8q/5XgN36R9RnHGquveiEJ+2kOz7ySG?=
+ =?us-ascii?Q?tDa2jXO00iYkcBppBLxcl9shp1PzTpJxhy+lAam633MdKQ3vuynFsPTnlKVn?=
+ =?us-ascii?Q?LVJTP+/XE5nhtsGpw+3mius/qi1Zj9d0uRHMGdOmYoPi0orsYYGhhQwEzx8I?=
+ =?us-ascii?Q?vnYc0VOFWIkGZxyi8tPULRjmT/yN0Q2JiJV5RSRb9lyhgqhlnHRZf3A8KhZW?=
+ =?us-ascii?Q?LerIvdxUaX76oNkmddDvk2Sz6tiK685CUu6ThKjPzc7yop1dU92qqyaR0iS4?=
+ =?us-ascii?Q?meyj8MvszaAlBLp/gnLygMDtIFDoT/cTmTtb4KbpsFJIVzpYuTmZ7v9K1wcl?=
+ =?us-ascii?Q?IszW1BJi0lY0CAng8lVep5Bgtiws9XWiCVtWoztvfKODYsC5IZEj0drNVXfH?=
+ =?us-ascii?Q?/LiFX6SqA8xW/QIBKrvBtNOt7oRGr1MtgYxgK1VlJfbeZ6VnVMFJ1QTHaeJZ?=
+ =?us-ascii?Q?H2wSzRUaEmvGGVTnt/ZR5KzkTomE0rNm307RpbfQEZ4WIhGIsGxdA41iJYs5?=
+ =?us-ascii?Q?uZ7BpG6gBsrICgskKAJWvMQzqYrdyeAqw6l3IBeKoeaMA5F5fLjG7E28UPVq?=
+ =?us-ascii?Q?tviLwG6n4laIC0K2hFV1XSf9/bmOWw1NNQ4tprgaffx/kPppkDK6kLD7sjCV?=
+ =?us-ascii?Q?TGlgcGqY7AfgYi7VO+QAZl3m6zAmxEyjcFiZYl88sOKFZumkZQ0wDPXYQ5s3?=
+ =?us-ascii?Q?DBwWoIT/1BGQO8sR4E56FJMtVWVVdFSsTj7ccvC9aLFOsrjJLrgMDfo1Ktwj?=
+ =?us-ascii?Q?DXB7ZkRuZntCFj1uWrXKRW0i8r0Oij8Y1V69Rtt/TaUercFnpDVs2YCsrrla?=
+ =?us-ascii?Q?wR4CdpyIB+c1GAgNSUzJRcZml8ez2rNp73er2+iJcGHYogxeb2RzhCfDOPCo?=
+ =?us-ascii?Q?kZuXaGhmdIAP0j1t0UkvrqICRc2sOf7YqvwmAxenaPc/HoexRpfMYeRYWdiS?=
+ =?us-ascii?Q?y0W1ooS7aYWdxlSOyC/YrC6EIH/XeGFvjx/YUhUw1mfYRyI1CrdOLa1ryfX9?=
+ =?us-ascii?Q?4RzsSKdMWlkD8im04fI3IVCovA+Tu8aHcxBBLiUYElDNp83/t+xG4LZ6hoOV?=
+ =?us-ascii?Q?QBCq0F+yC/B0fDGdbWokJgKDUGM6uiivq4/qZn6XpGAPWxSE7WUa1jv6EO1F?=
+ =?us-ascii?Q?bDotNbb4UZki95c8avfE1TZC/XZCXzij/EnV+rUchBCnDfbXlr4AcLHDnWxS?=
+ =?us-ascii?Q?vEn+8PMFC6ChrLjLOH6BHaS2kVRqGmDuN4PROUw4k5mAzMAQLckTVeUj10rx?=
+ =?us-ascii?Q?/u+OqhwnkpUcRMDBStA=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 11:51:16.2984
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 11:51:07.3974
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ee1c61c-01c2-4725-eb58-08de33f498e5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6075b5d8-8d00-46e8-7acb-08de33f49396
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB58.namprd02.prod.outlook.com
+	BL6PEPF0001AB52.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4403
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5782
 
-The var parameter is later on expanded and referenced by LIST_HEAD_INIT
-and shall be enclosed in parentheses. This resolves MISRA C R20.7
-violation.
+After addition of new eclair scans for other configurations like defconfig,
+some regressions for clean rules were reported. This series focuses on report
+generated for ARM64 and gets rid of all the regressions.
 
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- xen/include/xen/hypfs.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Diff:
+eclair-ARM64{-testing}: was 22 regressions, now 0
+eclair-x86_64{-testing}: was 359 regressions, now 337
 
-diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index d8fcac23b46b..fef667298b21 100644
---- a/xen/include/xen/hypfs.h
-+++ b/xen/include/xen/hypfs.h
-@@ -95,9 +95,9 @@ struct hypfs_dyndir_id {
-         .e.name = (nam),                          \
-         .e.size = 0,                              \
-         .e.max_size = 0,                          \
--        .e.list = LIST_HEAD_INIT(var.e.list),     \
-+        .e.list = LIST_HEAD_INIT((var).e.list),   \
-         .e.funcs = (fn),                          \
--        .dirlist = LIST_HEAD_INIT(var.dirlist),   \
-+        .dirlist = LIST_HEAD_INIT((var).dirlist), \
-     }
- 
- #define HYPFS_DIR_INIT(var, nam)                  \
+https://gitlab.com/xen-project/people/morzel/xen/-/pipelines/2197932219
+
+Michal Orzel (3):
+  public/trace: Add U suffix to TRC_PV_HYPERCALL_V2_ARG_MASK
+  common/kernel: Rename hypfs "params" variable
+  xen/hypfs: Enclose HYPFS_DIR_INIT var parameter in parentheses
+
+ xen/common/kernel.c        | 6 +++---
+ xen/include/public/trace.h | 2 +-
+ xen/include/xen/hypfs.h    | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
 -- 
 2.43.0
 
