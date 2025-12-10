@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FED2D3E76A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85814D3E76E
 	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 18:30:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1183166.1505948 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1183170.1505986 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxH-00051L-9q; Wed, 10 Dec 2025 18:30:27 +0000
+	id 1vTOxK-0005pG-Ip; Wed, 10 Dec 2025 18:30:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1183166.1505948; Wed, 10 Dec 2025 18:30:27 +0000
+Received: by outflank-mailman (output) from mailman id 1183170.1505986; Wed, 10 Dec 2025 18:30:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxH-00051E-6z; Wed, 10 Dec 2025 18:30:27 +0000
-Received: by outflank-mailman (input) for mailman id 1183166;
- Wed, 10 Dec 2025 18:30:25 +0000
+	id 1vTOxK-0005oR-DZ; Wed, 10 Dec 2025 18:30:30 +0000
+Received: by outflank-mailman (input) for mailman id 1183170;
+ Wed, 10 Dec 2025 18:30:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=unxu=6Q=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vTOxF-0004ng-Q1
- for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:25 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1vTOxJ-0004ng-E8
+ for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:29 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b5a0a7b-d5f6-11f0-b15b-2bf370ae4941;
- Wed, 10 Dec 2025 19:30:25 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4779a4fc95aso7699205e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:25 -0800 (PST)
+ id 4d569813-d5f6-11f0-b15b-2bf370ae4941;
+ Wed, 10 Dec 2025 19:30:28 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-47a80d4a065so638245e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:28 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.23
+ 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 10:30:23 -0800 (PST)
+ Wed, 10 Dec 2025 10:30:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b5a0a7b-d5f6-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 4d569813-d5f6-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765391424; x=1765996224; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1765391428; x=1765996228; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gXlGQkwfcCxQQOprXhg3Avtbe6KMUEWZIGR1FuxDrBM=;
-        b=jWpgI23WpVKistLs/0n37uNhuTJiWeNj8nnqBp7TZwKd4cb14P4cCACxhfiSV5yd/Q
-         vU/4cXe76vAPJlax9L6rfE14OoQFzs7dgmKQ3TFezmOeW3BNkmUVupCg/KXalRCROHTb
-         d8MuBZPSOqAUx0150oTjabgptaTKq/PB1KG98=
+        bh=NS1EndFYbpf3vAxuQ4QceAjOVlxSaNZnyI0peaJbSIU=;
+        b=dyq2ATgaxwe7QbZherysmV565u7KHN01w4CystAmvsH6Qg3zWBOnZdOz5w6Vqf2QX7
+         YpnAwOJmJ2XixqzBaOWKLqDKSDCCla69OckNtdDsxJKNnKIPdrz3zDIxojy78bPDn8Wp
+         Dh8hY+1KfkJlOhrFGfiCz5rTH/8zSTpB1kfbc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765391424; x=1765996224;
+        d=1e100.net; s=20230601; t=1765391428; x=1765996228;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=gXlGQkwfcCxQQOprXhg3Avtbe6KMUEWZIGR1FuxDrBM=;
-        b=XRHubag904gUhkDTtPIA8mlcFPJ5rqLhIftr6i0OGAyVUW5YJPxke7K3qfIlgOCCfD
-         nO30FugR3juQseFERNmd6itYrusiX2WZoFRfY5Ndo6MWIVwwhQIpPvi14m9wb3/KVfeh
-         OzsFgVI4BBgNWDjX2MZrIX7q1SadYr3WJRN5MQbOMclSoXCghYXHfQ4N7z9z+sKyXat4
-         3tRixgJTkmC/gPUfSppIKo30x2b4qvEqYAD+/p61jHtDKgQdkM8WmCa+3tB7RpeMRMWY
-         VhVSQv9LifoHMnj+TAXFv5k0qElf98Lcczzk2BJNyIGamiOS5Q8NwG6Bd4poUnaPTGLp
-         2NCg==
-X-Gm-Message-State: AOJu0YzVR3Yyrerg1cJrteYYned5eCPUfbGE2SP6q3wrs7Az080YpIl0
-	PeuISky1J6G6ItaE3w//fBu4h8pOwLYQMC6iAzFdta9fHhskFIurDIjt4ulqry5+ODJmqM/05qG
-	uwdKx
-X-Gm-Gg: ASbGncu/dFDUkjsR4OuQifAFS98L+U0FW8B4swVzIMFDf3cHMGI000E6mXwvk9w8HW+
-	bRDgS2lQrhjs/6Z6nexkRoU49ZCc8/4WWLPFJXMMG18nHJ/Lh+2X2qXJn509l149ISELL2TOTRH
-	MtuMRVGTwVeXWoOh6jJPRl+ZJnTP00+EqSjR7CqQd96/KjA3gB/7grAuP/DPiZXekHx4GjxNSLg
-	rwlxFVrrZTmM/AMU85C9jxOTlxKFCxPB9UZpH3OPBcmTaaQojjmbJk+awsE6m+o6Hr+SuVzl5VK
-	SeU6WRsPZnx0TqbRmdu42dRPRGadFk1/9fZ6AEVlwQ7fAE/fyC2VY/V1EOtWW7+HWP0Gza7CdYH
-	yteg/QNx2gF0EEFRBdUmOt6Gf/v9Jwp6ovmmGn10l2wCTh9Jk/NdG1qtdJ3MXg1QOCeSHZpItgo
-	uxWucsvFlgYCgSxPHulP11vVOhHr7kL6Mdvq3aIOGjlCt7XxAQWhZ+dD0uWIfc2M087D/PdrWL
-X-Google-Smtp-Source: AGHT+IG6IxhUYRlqB9519aXljEJ/a6K9eF2sKqb96XyJ+RfzgRL02xBb1EsXo11siJK5f5VrHBFIFw==
-X-Received: by 2002:a05:600c:540f:b0:479:13e9:3d64 with SMTP id 5b1f17b1804b1-47a888cd013mr4093975e9.15.1765391424407;
-        Wed, 10 Dec 2025 10:30:24 -0800 (PST)
+        bh=NS1EndFYbpf3vAxuQ4QceAjOVlxSaNZnyI0peaJbSIU=;
+        b=oIYWTkKaP0SoUdqOTQp74a5xYMAJryNmxb8zz0WZYLt++NfjkPEYry1idnl2Reos4X
+         iWMDgC62TEfaX/BJVnY+6dDiAWBMlndB3gn6B26aYOVMbIkuBNIOzeqUe9YWGIvYKYgP
+         Dv3/33zqimRDZGR8y8fQgTNCW0/MenCWH0r6ybtNFf88zBXZgS7NoRTXPtucJMTg6b/W
+         /7v8r7Rc069DeDOfE0exzXmHsrNPFW+WjOoo1uW18jUJqbzuIzcAThieFaF25Hiz19+r
+         6HWeqpD7T1xQb8qticoZ3OJeHVTNrvupFwV2xitFqhXXXmMXYLaqM7pvItKr2t0Qs4P1
+         VXhw==
+X-Gm-Message-State: AOJu0Yz+nXxNXeDXE8ox6SWBhSgRYjMsoBD5J/j/cP+3tcyAtQTrhEqz
+	3hc51pSaIQO8m2McNHvhYBCsUOmEqPGTDqVRwOIZOvTsQRCQlglTMwtTcehH93ab61FWPt1Gcoy
+	45i7o
+X-Gm-Gg: ASbGncuQJ+X7DDiEYmmnVD2gpKCjc7BEDGBwVtEJYoKkVdWQ/Fj6kVoWeBQhAkHJW29
+	tzw/sDMLQbTYS4v6r4VzePbRWcYdYqwW47dTr5jp/PDiY7HwHdR5lbe9dLYABOWwgU1cuWiD4UX
+	CDL5V7LGXjHhvGdi+4vkpDOD4cAxezDzuXn9gmUz4rOz/Tu468sGzX5bnDzBrPov53KBjGlpBX2
+	CxWrPSdGe/GX3xciCPbiJqcZAHQCwzvRKhdILUSmNOishQ9/hPPgHvQIl0Ls0zjfc3pU8dltMRj
+	TEcFv5xg/u/AcUlpihY7K1e2GnP+VV2aKE+V6N7ahY2QRIDLlzcMPMRNUXm41za06itFlsnXi+G
+	48UZO+gzBQ2UGB9aiQqQqpOMbU1GTViZU3AzG/Xzx3z8TwvUo2X8jfGXssxitZINmpDG7d/AujZ
+	r3BM195Ov3zCXlUegsIn6f5CWyEJjis9GoVGlXnhrodoMx6hkYUlg34xfbsHNh6oLxpkUr6QvT
+X-Google-Smtp-Source: AGHT+IHD0K0/goDBgvQ0eFH4wZgG9dS6dBkYuhuXnCJuEuZJfSb+0YcfcBuj17vO+utCkeybtuqlLQ==
+X-Received: by 2002:a05:600c:c48e:b0:46e:33b2:c8da with SMTP id 5b1f17b1804b1-47a8384857cmr31691765e9.32.1765391427782;
+        Wed, 10 Dec 2025 10:30:27 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,9 +90,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 2/5] x86: Name parameters in function declarations
-Date: Wed, 10 Dec 2025 18:30:16 +0000
-Message-Id: <20251210183019.2241560-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/5] x86: Fix missing brackets in macros
+Date: Wed, 10 Dec 2025 18:30:19 +0000
+Message-Id: <20251210183019.2241560-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
 References: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
@@ -101,7 +101,8 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 With the wider testing, some more violations have been spotted.  This
-addresses violations of Rule 8.2 (parameters must be named).
+addresses violations of Rule 20.7 which requires macro parameters to be
+bracketed.
 
 No functional change.
 
@@ -113,57 +114,71 @@ CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/mm/shadow/common.c | 8 ++++----
- xen/arch/x86/pv/emul-priv-op.c  | 2 +-
- xen/include/xen/livepatch.h     | 2 +-
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/x86/mm/shadow/multi.c     | 2 +-
+ xen/arch/x86/mm/shadow/private.h   | 6 +++---
+ xen/drivers/passthrough/vtd/dmar.h | 2 +-
+ xen/include/xen/kexec.h            | 4 ++--
+ 4 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 423764a32653..f2aee5be46a7 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -69,11 +69,11 @@ const uint8_t sh_type_to_size[] = {
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 03be61e225c0..36ee6554b4c4 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -781,7 +781,7 @@ do {                                                                    \
+         (_sl1e) = _sp + _i;                                             \
+         if ( shadow_l1e_get_flags(*(_sl1e)) & _PAGE_PRESENT )           \
+             {_code}                                                     \
+-        if ( _done ) break;                                             \
++        if ( (_done) ) break;                                           \
+         increment_ptr_to_guest_entry(_gl1p);                            \
+     }                                                                   \
+     unmap_domain_page(_sp);                                             \
+diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
+index cef9dbef2e77..93834ec55c42 100644
+--- a/xen/arch/x86/mm/shadow/private.h
++++ b/xen/arch/x86/mm/shadow/private.h
+@@ -636,9 +636,9 @@ prev_pinned_shadow(struct page_info *page,
+ }
  
- DEFINE_PER_CPU(uint32_t,trace_shadow_path_flags);
+ #define foreach_pinned_shadow(dom, pos, tmp)                    \
+-    for ( pos = prev_pinned_shadow(NULL, (dom));                \
+-          pos ? (tmp = prev_pinned_shadow(pos, (dom)), 1) : 0;  \
+-          pos = tmp )
++    for ( (pos) = prev_pinned_shadow(NULL, dom);                \
++          (pos) ? (tmp = prev_pinned_shadow(pos, dom), 1) : 0;  \
++          (pos) = tmp )
  
--static int cf_check sh_enable_log_dirty(struct domain *);
--static int cf_check sh_disable_log_dirty(struct domain *);
--static void cf_check sh_clean_dirty_bitmap(struct domain *);
-+static int cf_check sh_enable_log_dirty(struct domain *d);
-+static int cf_check sh_disable_log_dirty(struct domain *d);
-+static void cf_check sh_clean_dirty_bitmap(struct domain *d);
- 
--static void cf_check shadow_update_paging_modes(struct vcpu *);
-+static void cf_check shadow_update_paging_modes(struct vcpu *v);
- 
- /* Set up the shadow-specific parts of a domain struct at start of day.
-  * Called for every domain from arch_domain_create() */
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 225d4cff03c1..08dec9990e39 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -40,7 +40,7 @@ struct priv_op_ctxt {
- };
- 
- /* I/O emulation helpers.  Use non-standard calling conventions. */
--void nocall load_guest_gprs(struct cpu_user_regs *);
-+void nocall load_guest_gprs(struct cpu_user_regs *regs);
- void nocall save_guest_gprs(void);
- 
- typedef void io_emul_stub_t(struct cpu_user_regs *);
-diff --git a/xen/include/xen/livepatch.h b/xen/include/xen/livepatch.h
-index d074a5bebecc..3f5ad01f1bdd 100644
---- a/xen/include/xen/livepatch.h
-+++ b/xen/include/xen/livepatch.h
-@@ -62,7 +62,7 @@ struct livepatch_fstate {
-     uint8_t insn_buffer[LIVEPATCH_OPAQUE_SIZE];
- };
- 
--int livepatch_op(struct xen_sysctl_livepatch_op *);
-+int livepatch_op(struct xen_sysctl_livepatch_op *op);
- void check_for_livepatch_work(void);
- unsigned long livepatch_symbols_lookup_by_name(const char *symname);
- bool is_patch(const void *addr);
+ /*
+  * Pin a shadow page: take an extra refcount, set the pin bit,
+diff --git a/xen/drivers/passthrough/vtd/dmar.h b/xen/drivers/passthrough/vtd/dmar.h
+index 0ff4f365351f..11590f71a828 100644
+--- a/xen/drivers/passthrough/vtd/dmar.h
++++ b/xen/drivers/passthrough/vtd/dmar.h
+@@ -124,7 +124,7 @@ struct acpi_atsr_unit *acpi_find_matched_atsr_unit(const struct pci_dev *);
+ do {                                                \
+     s_time_t start_time = NOW();                    \
+     while (1) {                                     \
+-        sts = op(iommu->reg, offset);               \
++        sts = op((iommu)->reg, offset);             \
+         if ( cond )                                 \
+             break;                                  \
+         if ( NOW() > start_time + DMAR_OPERATION_TIMEOUT ) {    \
+diff --git a/xen/include/xen/kexec.h b/xen/include/xen/kexec.h
+index e66eb6a8e593..5dd288d1a50e 100644
+--- a/xen/include/xen/kexec.h
++++ b/xen/include/xen/kexec.h
+@@ -66,9 +66,9 @@ void vmcoreinfo_append_str(const char *fmt, ...)
+ #define VMCOREINFO_PAGESIZE(value) \
+        vmcoreinfo_append_str("PAGESIZE=%ld\n", value)
+ #define VMCOREINFO_SYMBOL(name) \
+-       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #name, (unsigned long)&name)
++       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #name, (unsigned long)&(name))
+ #define VMCOREINFO_SYMBOL_ALIAS(alias, name) \
+-       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #alias, (unsigned long)&name)
++       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #alias, (unsigned long)&(name))
+ #define VMCOREINFO_STRUCT_SIZE(name) \
+        vmcoreinfo_append_str("SIZE(%s)=%zu\n", #name, sizeof(struct name))
+ #define VMCOREINFO_OFFSET(name, field) \
 -- 
 2.39.5
 
