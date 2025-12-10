@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85814D3E76E
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 18:30:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1183170.1505986 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF7BD3E76A
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 18:30:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1183167.1505959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxK-0005pG-Ip; Wed, 10 Dec 2025 18:30:30 +0000
+	id 1vTOxI-0005FK-Na; Wed, 10 Dec 2025 18:30:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1183170.1505986; Wed, 10 Dec 2025 18:30:30 +0000
+Received: by outflank-mailman (output) from mailman id 1183167.1505959; Wed, 10 Dec 2025 18:30:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxK-0005oR-DZ; Wed, 10 Dec 2025 18:30:30 +0000
-Received: by outflank-mailman (input) for mailman id 1183170;
- Wed, 10 Dec 2025 18:30:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vTOxI-0005FC-IJ; Wed, 10 Dec 2025 18:30:28 +0000
+Received: by outflank-mailman (input) for mailman id 1183167;
+ Wed, 10 Dec 2025 18:30:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=unxu=6Q=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vTOxJ-0004ng-E8
- for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:29 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d569813-d5f6-11f0-b15b-2bf370ae4941;
- Wed, 10 Dec 2025 19:30:28 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47a80d4a065so638245e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:28 -0800 (PST)
+ id 1vTOxG-0004rG-J6
+ for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:26 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ac86b91-d5f6-11f0-9cce-f158ae23cfc8;
+ Wed, 10 Dec 2025 19:30:24 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-47790b080e4so567385e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:24 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.26
+ 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 10:30:27 -0800 (PST)
+ Wed, 10 Dec 2025 10:30:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d569813-d5f6-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 4ac86b91-d5f6-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765391428; x=1765996228; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1765391423; x=1765996223; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NS1EndFYbpf3vAxuQ4QceAjOVlxSaNZnyI0peaJbSIU=;
-        b=dyq2ATgaxwe7QbZherysmV565u7KHN01w4CystAmvsH6Qg3zWBOnZdOz5w6Vqf2QX7
-         YpnAwOJmJ2XixqzBaOWKLqDKSDCCla69OckNtdDsxJKNnKIPdrz3zDIxojy78bPDn8Wp
-         Dh8hY+1KfkJlOhrFGfiCz5rTH/8zSTpB1kfbc=
+        bh=Ti+Hvm59056La23/HEYy2xtiFbDlfvWnYziHMb4xycg=;
+        b=rAbAuGK+pR6jmJYMG1fapUrZNKVOsnxbdrstyG5U0QLxbMhv/ml7mhFsPTXNw+UBz/
+         ztV3YPzBj2reYH3wW3SwJQpA8GU6jROue8lmix8/iPb/bkj2frt1I+7AEKvaZWlRWtvK
+         +1bSmOZ484XH5iDfRMipUGdLh4I2uGeOaYzOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765391428; x=1765996228;
+        d=1e100.net; s=20230601; t=1765391423; x=1765996223;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=NS1EndFYbpf3vAxuQ4QceAjOVlxSaNZnyI0peaJbSIU=;
-        b=oIYWTkKaP0SoUdqOTQp74a5xYMAJryNmxb8zz0WZYLt++NfjkPEYry1idnl2Reos4X
-         iWMDgC62TEfaX/BJVnY+6dDiAWBMlndB3gn6B26aYOVMbIkuBNIOzeqUe9YWGIvYKYgP
-         Dv3/33zqimRDZGR8y8fQgTNCW0/MenCWH0r6ybtNFf88zBXZgS7NoRTXPtucJMTg6b/W
-         /7v8r7Rc069DeDOfE0exzXmHsrNPFW+WjOoo1uW18jUJqbzuIzcAThieFaF25Hiz19+r
-         6HWeqpD7T1xQb8qticoZ3OJeHVTNrvupFwV2xitFqhXXXmMXYLaqM7pvItKr2t0Qs4P1
-         VXhw==
-X-Gm-Message-State: AOJu0Yz+nXxNXeDXE8ox6SWBhSgRYjMsoBD5J/j/cP+3tcyAtQTrhEqz
-	3hc51pSaIQO8m2McNHvhYBCsUOmEqPGTDqVRwOIZOvTsQRCQlglTMwtTcehH93ab61FWPt1Gcoy
-	45i7o
-X-Gm-Gg: ASbGncuQJ+X7DDiEYmmnVD2gpKCjc7BEDGBwVtEJYoKkVdWQ/Fj6kVoWeBQhAkHJW29
-	tzw/sDMLQbTYS4v6r4VzePbRWcYdYqwW47dTr5jp/PDiY7HwHdR5lbe9dLYABOWwgU1cuWiD4UX
-	CDL5V7LGXjHhvGdi+4vkpDOD4cAxezDzuXn9gmUz4rOz/Tu468sGzX5bnDzBrPov53KBjGlpBX2
-	CxWrPSdGe/GX3xciCPbiJqcZAHQCwzvRKhdILUSmNOishQ9/hPPgHvQIl0Ls0zjfc3pU8dltMRj
-	TEcFv5xg/u/AcUlpihY7K1e2GnP+VV2aKE+V6N7ahY2QRIDLlzcMPMRNUXm41za06itFlsnXi+G
-	48UZO+gzBQ2UGB9aiQqQqpOMbU1GTViZU3AzG/Xzx3z8TwvUo2X8jfGXssxitZINmpDG7d/AujZ
-	r3BM195Ov3zCXlUegsIn6f5CWyEJjis9GoVGlXnhrodoMx6hkYUlg34xfbsHNh6oLxpkUr6QvT
-X-Google-Smtp-Source: AGHT+IHD0K0/goDBgvQ0eFH4wZgG9dS6dBkYuhuXnCJuEuZJfSb+0YcfcBuj17vO+utCkeybtuqlLQ==
-X-Received: by 2002:a05:600c:c48e:b0:46e:33b2:c8da with SMTP id 5b1f17b1804b1-47a8384857cmr31691765e9.32.1765391427782;
-        Wed, 10 Dec 2025 10:30:27 -0800 (PST)
+        bh=Ti+Hvm59056La23/HEYy2xtiFbDlfvWnYziHMb4xycg=;
+        b=cKbxJf1lXFXYVG87f00v4BFcbSRIt4iRu+v+CFehjpPvCmM99DjCwAzUGVZ8IjXkio
+         Fbw7XR+F4pTvgwDErsJwbxCA2nLTGGRlxS+ng6ugCwkqqYxBedVSNxzGe+lOAqA25nN+
+         f2EIdef3aaTO4+8wSHrnYCsfwe/49QjcwGXuPuuZNH2E8MatoAGNxsHrCLQm7E/DKrum
+         /Bmw2/CZCkP4Hswum7vQ2BUqL+MMCPBqE3M4L2UGAizJmiVTu+hJVP0WNWA7hWXAm287
+         4BS51utWCJLl9fNfZQ+1i4Yon4rFB9yjuB7wmMNUG4ImN2kxcG3LaBsB24e2uCiRXz89
+         B/mA==
+X-Gm-Message-State: AOJu0Yw7d0Fh4GcU0AmFw58IiwX0S8eeYW2KnWnXfJLb7lBP7I7nB+ej
+	28czw/vrYATg8ntbGf/C1AFg9PzLhxfedHxDMSedINp193yC9vzMVFhNAkN2EKO0AcwczN0YAvl
+	3yjum
+X-Gm-Gg: ASbGncuc4n+jYkLbUos2/+jiIhPTMrLzk22cQLXnGU7fIv5I9KSXPlP9PjJ5rh+XZKk
+	2yZH8AukJdNPsARvRzJFN5rX4Kw5SZT646CTknTiC24mrCciIOUXD60eXzUQ+695t8DQeuiAty0
+	R8WejmMQ76C22Pz0GYklBal97oEFW8/GjMQp2ZlWUhmRuH5cABr+CxiwozyFEOPBuxLAqIIWfQL
+	Eg/JuotCY4w0g2Fgu8etihly5Odkk2VUljO87AehB7PwwcqXQiy7CqRCdW3xVaSydP7kcw82l9N
+	NjJLa81CZLnxP9emUUstZMv1H1v7qbI/8oAtKAYavB/CQIcu/8kxw9hxAdLnqlGo5gON+qs3gbP
+	JX14+6/6WaHPohVW58L12q8EYk2dJUCvnh3xb9gzvbcfgwYUgJJuEJjUBGmACe5H25YYr1qWHwH
+	RRapk4IMyuwH45qfLpnmmVHSal2i/+E9HM7lP/K6FaQbNQe2gvUCtSwAa/qlWJRw==
+X-Google-Smtp-Source: AGHT+IFSBGzM681v8a/IFHC4hCHLgFm92UNB1QnWymlV4pjLJLX0hFH+xN5vczoOq4b96y7TcM6aTw==
+X-Received: by 2002:a05:600c:1e24:b0:479:3a88:de5e with SMTP id 5b1f17b1804b1-47a8385368dmr24338165e9.37.1765391423515;
+        Wed, 10 Dec 2025 10:30:23 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,9 +90,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 5/5] x86: Fix missing brackets in macros
-Date: Wed, 10 Dec 2025 18:30:19 +0000
-Message-Id: <20251210183019.2241560-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/5] x86: Misra fixes for U/L suffixes
+Date: Wed, 10 Dec 2025 18:30:15 +0000
+Message-Id: <20251210183019.2241560-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
 References: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
@@ -101,8 +101,10 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 With the wider testing, some more violations have been spotted.  This
-addresses violations of Rule 20.7 which requires macro parameters to be
-bracketed.
+addresses violations of Rule 7.2 (suffixes required) and Rule 7.3 (L must be
+uppercase).
+
+For ELF64_R_TYPE(), cast to uint32_t matching the surrounding examples.
 
 No functional change.
 
@@ -114,71 +116,86 @@ CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/mm/shadow/multi.c     | 2 +-
- xen/arch/x86/mm/shadow/private.h   | 6 +++---
- xen/drivers/passthrough/vtd/dmar.h | 2 +-
- xen/include/xen/kexec.h            | 4 ++--
- 4 files changed, 7 insertions(+), 7 deletions(-)
+ xen/arch/x86/mm/shadow/common.c     | 4 ++--
+ xen/arch/x86/pv/descriptor-tables.c | 2 +-
+ xen/drivers/passthrough/vtd/iommu.h | 2 +-
+ xen/include/xen/elfstructs.h        | 2 +-
+ xen/include/xen/sizes.h             | 2 +-
+ 5 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index 03be61e225c0..36ee6554b4c4 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -781,7 +781,7 @@ do {                                                                    \
-         (_sl1e) = _sp + _i;                                             \
-         if ( shadow_l1e_get_flags(*(_sl1e)) & _PAGE_PRESENT )           \
-             {_code}                                                     \
--        if ( _done ) break;                                             \
-+        if ( (_done) ) break;                                           \
-         increment_ptr_to_guest_entry(_gl1p);                            \
-     }                                                                   \
-     unmap_domain_page(_sp);                                             \
-diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
-index cef9dbef2e77..93834ec55c42 100644
---- a/xen/arch/x86/mm/shadow/private.h
-+++ b/xen/arch/x86/mm/shadow/private.h
-@@ -636,9 +636,9 @@ prev_pinned_shadow(struct page_info *page,
- }
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 0176e33bc9c7..423764a32653 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -1961,7 +1961,7 @@ int sh_remove_write_access(struct domain *d, mfn_t gmfn,
+              /* FreeBSD 64bit: linear map 0xffff800000000000 */
+              switch ( level )
+              {
+-             case 1: GUESS(0xffff800000000000
++             case 1: GUESS(0xffff800000000000UL
+                            + ((fault_addr & VADDR_MASK) >> 9), 6); break;
+              case 2: GUESS(0xffff804000000000UL
+                            + ((fault_addr & VADDR_MASK) >> 18), 6); break;
+@@ -1969,7 +1969,7 @@ int sh_remove_write_access(struct domain *d, mfn_t gmfn,
+                            + ((fault_addr & VADDR_MASK) >> 27), 6); break;
+              }
+              /* FreeBSD 64bit: direct map at 0xffffff0000000000 */
+-             GUESS(0xffffff0000000000 + gfn_to_gaddr(gfn), 6);
++             GUESS(0xffffff0000000000UL + gfn_to_gaddr(gfn), 6);
+         }
  
- #define foreach_pinned_shadow(dom, pos, tmp)                    \
--    for ( pos = prev_pinned_shadow(NULL, (dom));                \
--          pos ? (tmp = prev_pinned_shadow(pos, (dom)), 1) : 0;  \
--          pos = tmp )
-+    for ( (pos) = prev_pinned_shadow(NULL, dom);                \
-+          (pos) ? (tmp = prev_pinned_shadow(pos, dom), 1) : 0;  \
-+          (pos) = tmp )
+ #undef GUESS
+diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
+index 02647a2c5047..26f7d18b11b5 100644
+--- a/xen/arch/x86/pv/descriptor-tables.c
++++ b/xen/arch/x86/pv/descriptor-tables.c
+@@ -216,7 +216,7 @@ static bool check_descriptor(const struct domain *dom, seg_desc_t *d)
+              * 0xf6800000. Extend these to allow access to the larger read-only
+              * M2P table available in 32on64 mode.
+              */
+-            base = (b & 0xff000000) | ((b & 0xff) << 16) | (a >> 16);
++            base = (b & 0xff000000U) | ((b & 0xff) << 16) | (a >> 16);
+ 
+             limit = (b & 0xf0000) | (a & 0xffff);
+             limit++; /* We add one because limit is inclusive. */
+diff --git a/xen/drivers/passthrough/vtd/iommu.h b/xen/drivers/passthrough/vtd/iommu.h
+index 29d350b23db6..4f41360c53c0 100644
+--- a/xen/drivers/passthrough/vtd/iommu.h
++++ b/xen/drivers/passthrough/vtd/iommu.h
+@@ -266,7 +266,7 @@ struct dma_pte {
+ #define DMA_PTE_PROT (DMA_PTE_READ | DMA_PTE_WRITE)
+ #define DMA_PTE_SP   (1 << 7)
+ #define DMA_PTE_SNP  (1 << 11)
+-#define DMA_PTE_CONTIG_MASK  (0xfull << PADDR_BITS)
++#define DMA_PTE_CONTIG_MASK  (0xfULL << PADDR_BITS)
+ #define dma_clear_pte(p)    do {(p).val = 0;} while(0)
+ #define dma_set_pte_readable(p) do {(p).val |= DMA_PTE_READ;} while(0)
+ #define dma_set_pte_writable(p) do {(p).val |= DMA_PTE_WRITE;} while(0)
+diff --git a/xen/include/xen/elfstructs.h b/xen/include/xen/elfstructs.h
+index eb6b87a823a8..8770e7454672 100644
+--- a/xen/include/xen/elfstructs.h
++++ b/xen/include/xen/elfstructs.h
+@@ -360,7 +360,7 @@ typedef struct {
+ } Elf64_Rela;
+ 
+ #define	ELF64_R_SYM(info)	((info) >> 32)
+-#define	ELF64_R_TYPE(info)	((info) & 0xFFFFFFFF)
++#define	ELF64_R_TYPE(info)	((uint32_t)(info))
+ #define ELF64_R_INFO(s,t) 	(((s) << 32) + (uint32_t)(t))
  
  /*
-  * Pin a shadow page: take an extra refcount, set the pin bit,
-diff --git a/xen/drivers/passthrough/vtd/dmar.h b/xen/drivers/passthrough/vtd/dmar.h
-index 0ff4f365351f..11590f71a828 100644
---- a/xen/drivers/passthrough/vtd/dmar.h
-+++ b/xen/drivers/passthrough/vtd/dmar.h
-@@ -124,7 +124,7 @@ struct acpi_atsr_unit *acpi_find_matched_atsr_unit(const struct pci_dev *);
- do {                                                \
-     s_time_t start_time = NOW();                    \
-     while (1) {                                     \
--        sts = op(iommu->reg, offset);               \
-+        sts = op((iommu)->reg, offset);             \
-         if ( cond )                                 \
-             break;                                  \
-         if ( NOW() > start_time + DMAR_OPERATION_TIMEOUT ) {    \
-diff --git a/xen/include/xen/kexec.h b/xen/include/xen/kexec.h
-index e66eb6a8e593..5dd288d1a50e 100644
---- a/xen/include/xen/kexec.h
-+++ b/xen/include/xen/kexec.h
-@@ -66,9 +66,9 @@ void vmcoreinfo_append_str(const char *fmt, ...)
- #define VMCOREINFO_PAGESIZE(value) \
-        vmcoreinfo_append_str("PAGESIZE=%ld\n", value)
- #define VMCOREINFO_SYMBOL(name) \
--       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #name, (unsigned long)&name)
-+       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #name, (unsigned long)&(name))
- #define VMCOREINFO_SYMBOL_ALIAS(alias, name) \
--       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #alias, (unsigned long)&name)
-+       vmcoreinfo_append_str("SYMBOL(%s)=%lx\n", #alias, (unsigned long)&(name))
- #define VMCOREINFO_STRUCT_SIZE(name) \
-        vmcoreinfo_append_str("SIZE(%s)=%zu\n", #name, sizeof(struct name))
- #define VMCOREINFO_OFFSET(name, field) \
+diff --git a/xen/include/xen/sizes.h b/xen/include/xen/sizes.h
+index f7b728ddab06..d309ebf04406 100644
+--- a/xen/include/xen/sizes.h
++++ b/xen/include/xen/sizes.h
+@@ -43,6 +43,6 @@
+ #define SZ_512M                         0x20000000
+ 
+ #define SZ_1G                           0x40000000
+-#define SZ_2G                           0x80000000
++#define SZ_2G                           0x80000000U
+ 
+ #endif /* __XEN_SIZES_H__ */
 -- 
 2.39.5
 
