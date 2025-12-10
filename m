@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25827D3E76F
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 18:30:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1183169.1505968 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49765D3E77A
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 19:57:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1183243.1505997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxJ-0005O3-7s; Wed, 10 Dec 2025 18:30:29 +0000
+	id 1vTQJJ-0000hS-Ux; Wed, 10 Dec 2025 19:57:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1183169.1505968; Wed, 10 Dec 2025 18:30:29 +0000
+Received: by outflank-mailman (output) from mailman id 1183243.1505997; Wed, 10 Dec 2025 19:57:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxJ-0005LR-3C; Wed, 10 Dec 2025 18:30:29 +0000
-Received: by outflank-mailman (input) for mailman id 1183169;
- Wed, 10 Dec 2025 18:30:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vTQJJ-0000hG-SJ; Wed, 10 Dec 2025 19:57:17 +0000
+Received: by outflank-mailman (input) for mailman id 1183243;
+ Wed, 10 Dec 2025 19:57:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=unxu=6Q=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vTOxI-0004ng-E8
- for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:28 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4cd9e046-d5f6-11f0-b15b-2bf370ae4941;
- Wed, 10 Dec 2025 19:30:27 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-47118259fd8so918205e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:27 -0800 (PST)
-Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
- [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 10:30:26 -0800 (PST)
+ <SRS0=TEw+=6Q=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1vTQJI-0000hA-S9
+ for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 19:57:17 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6bf83a53-d602-11f0-9cce-f158ae23cfc8;
+ Wed, 10 Dec 2025 20:57:14 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id A97A14EEBC5F;
+ Wed, 10 Dec 2025 20:57:12 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,154 +42,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4cd9e046-d5f6-11f0-b15b-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765391427; x=1765996227; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xUBQ+EjjlmRnrYL1o1ghPld6WT4JV9PjEtakOWMelRw=;
-        b=VKvrRrGZiOOcN1P1IfR4SgxWwv17ROavzzQ5BFF5qTSxSU2EDC8GmD5HRVrnyigqrW
-         TqJ05dyjFAHdyYz6wx9W3p6b9lWl/a/WRE+JRvdAioUcpY1Z3YYrxfbfCw6zNEQG+YSP
-         IvG6O0Ndgw/Wla+ng+2dagM7/2lavTcn/vVAI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765391427; x=1765996227;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=xUBQ+EjjlmRnrYL1o1ghPld6WT4JV9PjEtakOWMelRw=;
-        b=r+Qpgbxk9GjXAHnAHn8hpO+Ub4bHacT5v+C2q63UeuSQH1g3CSdwNKipXswj/r2W2h
-         RzG6fuhVqFd2l2f7/afy5jVXEfdxYTBfGLYt6M+2TWRZBuUaMJ9U6rmfldpMyapJw8iP
-         c9EszjUcHUQHBZyVeL9BSM+cz+iX6NzB9JVxm3bswAJ+Z/qrV42CTE+G3TQ7Q58CMpiY
-         8ydToyIOkPpk3MfXuKtW4DMS17NyMp0mf+zWKxPnh5Ltn/nriw2DZ937UUcv4ND7cG6r
-         RUGIjbfgNLcQQfVlNf44KJBJJo3ZeOpt7PANGwG9ODEx0mI9JkCUDkWmLyhQ/EBcx++N
-         OkXQ==
-X-Gm-Message-State: AOJu0YyXGMgracMHzDJurux0PngcW2S8k1eoO5Dm1+imS4OKOYTHBXOa
-	3pboGNa70cO9pSt4l0BValYMkHff6qyQrkyW/0inoTtQ+Ssm0QUo0IGj0/JTMuJPQwwyAGU+o47
-	E4LL4
-X-Gm-Gg: ASbGncsytfJVETsp4iy/DkFippag6dZdOo+x7DbWuvL9omf3mzGVOvNsCtNPEGevIAU
-	+wNN++pqpmwmRNeN6OcebQba29Uu8lyd/T0xXJXpKNZMoXwDwWJPHplzuucJy7hmfwb3FwWYPdg
-	lEjhdAUxnyyPPe19TlTk+ot5MTt4oFY/28LxodFdiVZuG9RtuWEWAQ+eDx09FKYYg3daC7zTD88
-	Su/p4vHXwwWkaqN5QvKW+bY/un6GiV1f1JDmr4tiIPMbLXVR1tzf7oIpU1D/SvFDGLdk0kE8Ucf
-	Q1Bv6cou9ozTq5BHb0KPWTiuQQMjsYK60nChN/qib8bYfRkHGuoucyWMAyzNBgEmLXPZvsQHlZD
-	yw+GhgijUn754Tql3dQul32ybjF7BxbvE+ljD+VqtJMiCJw7oyig53lU/Kxl9qyClF6fH1QLx/1
-	Z2NDP2a6oUigxTuVzfJghJnBO/Df+pOSoh3WcRriS9SzQDp+T31G+1d/xx5Z/fUw==
-X-Google-Smtp-Source: AGHT+IGHzYeimNoaPx8M3atd7epetX7tgiDEdgF73E1tDPW3yjPZvnhoUx8aBX88w2lQfEP4Yji+Qg==
-X-Received: by 2002:a05:600c:8010:b0:479:3046:6bb3 with SMTP id 5b1f17b1804b1-47a837aca24mr29805455e9.23.1765391426830;
-        Wed, 10 Dec 2025 10:30:26 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"consulting @ bugseng . com" <consulting@bugseng.com>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 4/5] x86: Fix missing breaks
-Date: Wed, 10 Dec 2025 18:30:18 +0000
-Message-Id: <20251210183019.2241560-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
-References: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 6bf83a53-d602-11f0-9cce-f158ae23cfc8
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1765396633;
+	b=lH1ezkjPm2E5jujt6/CVXJ3FRRJdtriabdTSYLdm3XxjjJ6nl0QEUp99ag/IpeiloaI0
+	 65Y2Wl8t2cemdIPYB9rPZh7K8XQJyPDzysv0X22XSNgvpz1L0QCZE8U1N5E8dnAta5Vhw
+	 Ku7o5aIrjEdltnCn9CPoFLvWxWVoMCGzG7iW7Oj4Kumdu0V+U9FgbooMxhnm1Pm/5+cbL
+	 wZl5JOm3LjAz+myQc1Ey6wwQZUL7SfrijjXgEN+BLlBNN84cjHGkTd759HjmbjKM67tAx
+	 wvAa4d8WTkMZzyiFYWjswP00fc4bCQz8lm7FIO9D4Mov+Hknz1MIB7gc7lW07hpG/HVIY
+	 GPzqCBOS8inoqLEdH8fR4uM0Nt7dJ5SvgXwFtOWPcHe9/Y3tdewA/bdPRQSF9Fc+9PFxX
+	 Cy8XSge53FyduNH8JcxcbHieaqtIMWYiMcKdLDbZUtErmdSMfNyeQdMbXIr/8f9N9c6qg
+	 dD6yyMWFToar04BZvRe0r5mYAWRrVTRjcKxMSy7pmp6KWbmgMtx66ou/R2rfqoGNTIjsb
+	 1/gGeyRAKDiFI5Clp7DMOMqQgoRMJ3GRXhbqKu3uhg08AN5aLBl6napUMCDrTF4RwbTPR
+	 QIRnzj/wtWRC8jgo3WCmF8Y0BRUBXTfhV17Vzq2BF7AJHY/O3IiGgzq0477qonQ=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1765396633;
+	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
+	 References:Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=7J6GIQn5bTLCjTeCDKUsD1gTByVSwkcqv4+C7fH0DJY=;
+	b=Lvzu7sGyCXF7sTGdfkDOyE9a8obHO3WcuwXfR95WHq1I+RGxIK1Tqzb1DsDU7aHIy0qR
+	 W4nIuGomzFswrYmrFGuXXxholZyib+4w3yBzWXU7E67v9Zptp+YZnNQ/bMk9H8DrMDWWE
+	 UP4MIErXhMJu9mj5wnFDU1vMLmxs9ZGDP9y6eQpfIHLuWG6klvCn0gMgw03bhamYdXXaj
+	 oThM/ei5dC3h5gB6E5fs6aDtURwPY2+zPJjDmLbXR9ir89RVVqLYVCvDECPaYACFfHh1G
+	 i7nUi6MjjtB0pOET0ooYHDUufc0/ta6nED80a5UxB1xpVmn4dQhBLrkDALNkIk+WIaips
+	 cxpiX82KhItiP9Tie0OH2IS98vn9EXrG+dB7Rpp3FS2VLkacGd89SYnQPkCtSLkaVo9kT
+	 nqQ1UHrchqMCowNcTJz/RRmG3c1WHGvpa4wpDEp1zMggT1JpILLI4p5DCyIuM0j/NYeJL
+	 IdjwGo+hSB/20TSaQfydOul8OxRb8efFCTfUrshdb5YOZZ7q8haCGY3tOzNz7VSEV0TN/
+	 N2cgmeE/cTrevMy7DIuYziUIreDhn33fFCfm/rlxZk8t0LrLalO1nU4xx9+GdMgOeljzr
+	 kFiB/I6tSBsp4ng88ttGYUQu9vwVUmKJAMStDYQ5C3h5k4qhKugmDaRr2SdEu+k=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1765396633; bh=eN8zEt5MfY/mWZ3uL7CkZJ2gZpIrKLlnT5UjS3fKzvU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=ThjBtr+S9I46Lm2PyFaVP34xx/L1+CceuzMxpj50uJAcqa4CRmWsRyiFjqNDRMWRT
+	 /Yg+gHdbJfZbOw6j52II/LfyxxIdkyupJmoDB3hzfaT/KqgV+O0VjcSZUkg3iX5czx
+	 ZfyJrdkSmOk5a3FnG//cKOwAt7knpZQHEReFFN8XPzT1enNzIwkOCzwKXJjslTo2wU
+	 jSk6afPG4IyacpR9397re4/IE7EnquYggPq5igxnz+qQxGwXKMz3FLTxmtzKS4zyj8
+	 wBIU/wX6AsawbCHLeb/d86PzUodQ/1VKUqTr+ysN9xKPw49bvDN+KzNRqe5eqZlvzO
+	 zD7n2+stmiaeg==
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Date: Wed, 10 Dec 2025 20:57:12 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?R?=
+ =?UTF-8?Q?oger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Bertrand Marquis
+ <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Anthony
+ PERARD <anthony.perard@vates.tech>
+Subject: Re: Current Eclair analysis
+In-Reply-To: <7744f9e7-17da-4f48-837d-8fc087899af5@citrix.com>
+References: <7744f9e7-17da-4f48-837d-8fc087899af5@citrix.com>
+Message-ID: <5becde412c1496f392d184763fe34442@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
 
-With the wider testing, some more violations have been spotted.  This
-addresses violations of Rule 16.3 which requires all case statements to be
-terminated with a break or other unconditional control flow change.
+Hi Andrew,
 
-No functional change.
+thanks for the feedback, it's very appreciated.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: consulting@bugseng.com <consulting@bugseng.com>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/x86/domain.c          | 1 +
- xen/arch/x86/mm/shadow/hvm.c   | 1 +
- xen/arch/x86/pv/emul-priv-op.c | 1 +
- xen/arch/x86/pv/emulate.c      | 1 +
- xen/common/livepatch.c         | 1 -
- xen/common/livepatch_elf.c     | 1 +
- 6 files changed, 5 insertions(+), 1 deletion(-)
+On 2025-12-10 19:14, Andrew Cooper wrote:
+> Hello,
+> 
+> The Eclair step is now the dominating aspect of wallclock time.  While
+> the recent changes were a step in the right direction, we need some
+> adjustments.
+> 
+> First, we have *-testing running in all cases, but my understanding was
+> that that was supposed to be for deploying a new version of Eclair.  
+> Can
+> we make this be generally off?
+> 
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 5e37bfbd17d6..b15120180993 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1517,6 +1517,7 @@ int arch_set_info_guest(
-         {
-         case -EINTR:
-             rc = -ERESTART;
-+            fallthrough;
-         case -ERESTART:
-             break;
-         case 0:
-diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
-index 114957a3e1ec..69334c095608 100644
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -268,6 +268,7 @@ hvm_emulate_cmpxchg(enum x86_segment seg,
-     default:
-         SHADOW_PRINTK("cmpxchg size %u is not supported\n", bytes);
-         prev = ~old;
-+        break;
-     }
- 
-     if ( prev != old )
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 08dec9990e39..fb6d57d6fbd3 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -407,6 +407,7 @@ static void _guest_io_write(unsigned int port, unsigned int bytes,
- 
-     default:
-         ASSERT_UNREACHABLE();
-+        break;
-     }
- }
- 
-diff --git a/xen/arch/x86/pv/emulate.c b/xen/arch/x86/pv/emulate.c
-index 8c44dea12330..b201ea1c6a97 100644
---- a/xen/arch/x86/pv/emulate.c
-+++ b/xen/arch/x86/pv/emulate.c
-@@ -120,6 +120,7 @@ void pv_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
-         printk(XENLOG_G_ERR "%s(%pv, 0x%08x, 0x%016"PRIx64") Bad register\n",
-                __func__, v, reg, val);
-         domain_crash(d);
-+        break;
-     }
- }
- 
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 9285f88644f4..b39f8d7bfe20 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -1924,7 +1924,6 @@ static void noinline do_livepatch_work(void)
-                             p->name);
-                     ASSERT_UNREACHABLE();
-                 }
--            default:
-                 break;
-             }
-         }
-diff --git a/xen/common/livepatch_elf.c b/xen/common/livepatch_elf.c
-index 25ce1bd5a0ad..2e82f2cb8c46 100644
---- a/xen/common/livepatch_elf.c
-+++ b/xen/common/livepatch_elf.c
-@@ -347,6 +347,7 @@ int livepatch_elf_resolve_symbols(struct livepatch_elf *elf)
-                 dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Symbol resolved: %s => %#"PRIxElfAddr" (%s)\n",
-                        elf->name, elf->sym[i].name,
-                        st_value, elf->sec[idx].name);
-+            break;
-         }
- 
-         if ( rc )
+Definitely; it was an oversight on my part when testing the patch, 
+because I used a repo/tree that was supposed to run those *-testing 
+jobs. As soon as I can find some free time to work on it, I'll 
+investigate and send a patch, unless someone beats me to it.
+
+> Next, jobs are scheduled in the order they appear in the yaml file,
+> which means the general ARM one goes ahead of the safety target.  Just
+> something to bear in mind as changes are being made.
+> 
+
+Well, but the general one should be allocated to the larger runner that 
+runs both safety and non-safety jobs, so in my opinion this is fine. 
+When the *-safety jobs start, they'll be picked up by the less powerful 
+eclair-safety-runner one at a time.
+
+> While the x86 runs are non-fatal, having them fail is still gets in the
+> way of trivially telling that the pipeline is green.
+> 
+
+See below for the consideration about clean rules, but the idea is that 
+we can get rid of most of those fairly quickly. I did glance at most of 
+those, but the time I have for preparing patches is quite scarce. I see 
+that Michal has done some work already on Arm; I did share with him a 
+few half-done patches that I have in a branch of mine [1], and I will 
+also take a look at the series you just sent.
+
+[1] 
+https://gitlab.com/xen-project/people/bugseng/xen/-/tree/eclair_pipeline?ref_type=heads
+
+> The names, -safety and no suffix are a little problematic, seeing as
+> everything here is for safety use.
+> 
+> 
+> Overall, what I think we want is something more like this:
+> 
+> Jobs named as *-all and *-amd.  After all, it's AMD's safety target
+> specifically, not necessarily someone elses.
+> 
+
+Well, depends on how you look at that: the *-safety jobs have a fixed 
+config, while the configuration for the general Arm and x86 jobs may 
+vary as Xen changes. That being said, I don't mind changing names 
+personally; I just went with what seemed more natural at the time.
+
+> The *-all targets want everything possible enabling. Ideally we want
+> something like Linux's COMPILE_TEST, but in the short term we can just
+> adjust the input Kconfig.
+> 
+
+Ack
+
+> Like we had with the common configuration and the per-arch
+> configuration, I think we want to express the clean rules as common,
+> with a wider (a.k.a stricter) set used for the *-amd target.
+> 
+> The longterm goal is to get the *-all targets as strict as the *-amd
+> targets, but right now because there are no blocking clean rules, it's
+> easier for regressions to slip in.
+> 
+
+Ack. I tried to start simpler and then iterate based on feedback. Should 
+be rather easy to craft a configuration doing that.
+
+> This brings us back to the debate about the excluded files from 
+> external
+> sources.  They still need fixing one way or another.  Do we see about
+> including them for analysis in the *-all targets, or leave them 
+> excluded
+> knowing that whomever need to unpack that can of worms needs to do a 
+> lot
+> of fixing anyway?
+> 
+
+I had debated addressing this, but in the end I opted to prioritize 
+fixes to the violations originating from Xen code. Who wants to qualify 
+Xen in the end needs to pick features/configurations, so my take is that 
+everything that is not truly kept in sync with the external source 
+(e.g., recent discussions about libelf w.r.t XSA-55) should be made 
+compliant eventually, and then it is on the downstreams to decide on 
+what to do with respect to external source dependencies in their 
+usecase. Stricly speaking, they would be subjected to MISRA compliance, 
+but the point is moot if they are not actually used.
+
+> Does this sound sensible?
+> 
+> Thanks,
+> 
+> ~Andrew
+
 -- 
-2.39.5
-
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
