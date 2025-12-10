@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF7BD3E76A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25827D3E76F
 	for <xen-devel@archiver.kernel.org>; Wed, 10 Dec 2025 18:30:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1183167.1505959 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1183169.1505968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxI-0005FK-Na; Wed, 10 Dec 2025 18:30:28 +0000
+	id 1vTOxJ-0005O3-7s; Wed, 10 Dec 2025 18:30:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1183167.1505959; Wed, 10 Dec 2025 18:30:28 +0000
+Received: by outflank-mailman (output) from mailman id 1183169.1505968; Wed, 10 Dec 2025 18:30:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTOxI-0005FC-IJ; Wed, 10 Dec 2025 18:30:28 +0000
-Received: by outflank-mailman (input) for mailman id 1183167;
- Wed, 10 Dec 2025 18:30:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vTOxJ-0005LR-3C; Wed, 10 Dec 2025 18:30:29 +0000
+Received: by outflank-mailman (input) for mailman id 1183169;
+ Wed, 10 Dec 2025 18:30:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=unxu=6Q=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vTOxG-0004rG-J6
- for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:26 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4ac86b91-d5f6-11f0-9cce-f158ae23cfc8;
- Wed, 10 Dec 2025 19:30:24 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-47790b080e4so567385e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:24 -0800 (PST)
+ id 1vTOxI-0004ng-E8
+ for xen-devel@lists.xenproject.org; Wed, 10 Dec 2025 18:30:28 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4cd9e046-d5f6-11f0-b15b-2bf370ae4941;
+ Wed, 10 Dec 2025 19:30:27 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-47118259fd8so918205e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Dec 2025 10:30:27 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.22
+ 5b1f17b1804b1-47a886affb4sm1696105e9.3.2025.12.10.10.30.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Dec 2025 10:30:23 -0800 (PST)
+ Wed, 10 Dec 2025 10:30:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ac86b91-d5f6-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 4cd9e046-d5f6-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765391423; x=1765996223; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1765391427; x=1765996227; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ti+Hvm59056La23/HEYy2xtiFbDlfvWnYziHMb4xycg=;
-        b=rAbAuGK+pR6jmJYMG1fapUrZNKVOsnxbdrstyG5U0QLxbMhv/ml7mhFsPTXNw+UBz/
-         ztV3YPzBj2reYH3wW3SwJQpA8GU6jROue8lmix8/iPb/bkj2frt1I+7AEKvaZWlRWtvK
-         +1bSmOZ484XH5iDfRMipUGdLh4I2uGeOaYzOI=
+        bh=xUBQ+EjjlmRnrYL1o1ghPld6WT4JV9PjEtakOWMelRw=;
+        b=VKvrRrGZiOOcN1P1IfR4SgxWwv17ROavzzQ5BFF5qTSxSU2EDC8GmD5HRVrnyigqrW
+         TqJ05dyjFAHdyYz6wx9W3p6b9lWl/a/WRE+JRvdAioUcpY1Z3YYrxfbfCw6zNEQG+YSP
+         IvG6O0Ndgw/Wla+ng+2dagM7/2lavTcn/vVAI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765391423; x=1765996223;
+        d=1e100.net; s=20230601; t=1765391427; x=1765996227;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Ti+Hvm59056La23/HEYy2xtiFbDlfvWnYziHMb4xycg=;
-        b=cKbxJf1lXFXYVG87f00v4BFcbSRIt4iRu+v+CFehjpPvCmM99DjCwAzUGVZ8IjXkio
-         Fbw7XR+F4pTvgwDErsJwbxCA2nLTGGRlxS+ng6ugCwkqqYxBedVSNxzGe+lOAqA25nN+
-         f2EIdef3aaTO4+8wSHrnYCsfwe/49QjcwGXuPuuZNH2E8MatoAGNxsHrCLQm7E/DKrum
-         /Bmw2/CZCkP4Hswum7vQ2BUqL+MMCPBqE3M4L2UGAizJmiVTu+hJVP0WNWA7hWXAm287
-         4BS51utWCJLl9fNfZQ+1i4Yon4rFB9yjuB7wmMNUG4ImN2kxcG3LaBsB24e2uCiRXz89
-         B/mA==
-X-Gm-Message-State: AOJu0Yw7d0Fh4GcU0AmFw58IiwX0S8eeYW2KnWnXfJLb7lBP7I7nB+ej
-	28czw/vrYATg8ntbGf/C1AFg9PzLhxfedHxDMSedINp193yC9vzMVFhNAkN2EKO0AcwczN0YAvl
-	3yjum
-X-Gm-Gg: ASbGncuc4n+jYkLbUos2/+jiIhPTMrLzk22cQLXnGU7fIv5I9KSXPlP9PjJ5rh+XZKk
-	2yZH8AukJdNPsARvRzJFN5rX4Kw5SZT646CTknTiC24mrCciIOUXD60eXzUQ+695t8DQeuiAty0
-	R8WejmMQ76C22Pz0GYklBal97oEFW8/GjMQp2ZlWUhmRuH5cABr+CxiwozyFEOPBuxLAqIIWfQL
-	Eg/JuotCY4w0g2Fgu8etihly5Odkk2VUljO87AehB7PwwcqXQiy7CqRCdW3xVaSydP7kcw82l9N
-	NjJLa81CZLnxP9emUUstZMv1H1v7qbI/8oAtKAYavB/CQIcu/8kxw9hxAdLnqlGo5gON+qs3gbP
-	JX14+6/6WaHPohVW58L12q8EYk2dJUCvnh3xb9gzvbcfgwYUgJJuEJjUBGmACe5H25YYr1qWHwH
-	RRapk4IMyuwH45qfLpnmmVHSal2i/+E9HM7lP/K6FaQbNQe2gvUCtSwAa/qlWJRw==
-X-Google-Smtp-Source: AGHT+IFSBGzM681v8a/IFHC4hCHLgFm92UNB1QnWymlV4pjLJLX0hFH+xN5vczoOq4b96y7TcM6aTw==
-X-Received: by 2002:a05:600c:1e24:b0:479:3a88:de5e with SMTP id 5b1f17b1804b1-47a8385368dmr24338165e9.37.1765391423515;
-        Wed, 10 Dec 2025 10:30:23 -0800 (PST)
+        bh=xUBQ+EjjlmRnrYL1o1ghPld6WT4JV9PjEtakOWMelRw=;
+        b=r+Qpgbxk9GjXAHnAHn8hpO+Ub4bHacT5v+C2q63UeuSQH1g3CSdwNKipXswj/r2W2h
+         RzG6fuhVqFd2l2f7/afy5jVXEfdxYTBfGLYt6M+2TWRZBuUaMJ9U6rmfldpMyapJw8iP
+         c9EszjUcHUQHBZyVeL9BSM+cz+iX6NzB9JVxm3bswAJ+Z/qrV42CTE+G3TQ7Q58CMpiY
+         8ydToyIOkPpk3MfXuKtW4DMS17NyMp0mf+zWKxPnh5Ltn/nriw2DZ937UUcv4ND7cG6r
+         RUGIjbfgNLcQQfVlNf44KJBJJo3ZeOpt7PANGwG9ODEx0mI9JkCUDkWmLyhQ/EBcx++N
+         OkXQ==
+X-Gm-Message-State: AOJu0YyXGMgracMHzDJurux0PngcW2S8k1eoO5Dm1+imS4OKOYTHBXOa
+	3pboGNa70cO9pSt4l0BValYMkHff6qyQrkyW/0inoTtQ+Ssm0QUo0IGj0/JTMuJPQwwyAGU+o47
+	E4LL4
+X-Gm-Gg: ASbGncsytfJVETsp4iy/DkFippag6dZdOo+x7DbWuvL9omf3mzGVOvNsCtNPEGevIAU
+	+wNN++pqpmwmRNeN6OcebQba29Uu8lyd/T0xXJXpKNZMoXwDwWJPHplzuucJy7hmfwb3FwWYPdg
+	lEjhdAUxnyyPPe19TlTk+ot5MTt4oFY/28LxodFdiVZuG9RtuWEWAQ+eDx09FKYYg3daC7zTD88
+	Su/p4vHXwwWkaqN5QvKW+bY/un6GiV1f1JDmr4tiIPMbLXVR1tzf7oIpU1D/SvFDGLdk0kE8Ucf
+	Q1Bv6cou9ozTq5BHb0KPWTiuQQMjsYK60nChN/qib8bYfRkHGuoucyWMAyzNBgEmLXPZvsQHlZD
+	yw+GhgijUn754Tql3dQul32ybjF7BxbvE+ljD+VqtJMiCJw7oyig53lU/Kxl9qyClF6fH1QLx/1
+	Z2NDP2a6oUigxTuVzfJghJnBO/Df+pOSoh3WcRriS9SzQDp+T31G+1d/xx5Z/fUw==
+X-Google-Smtp-Source: AGHT+IGHzYeimNoaPx8M3atd7epetX7tgiDEdgF73E1tDPW3yjPZvnhoUx8aBX88w2lQfEP4Yji+Qg==
+X-Received: by 2002:a05:600c:8010:b0:479:3046:6bb3 with SMTP id 5b1f17b1804b1-47a837aca24mr29805455e9.23.1765391426830;
+        Wed, 10 Dec 2025 10:30:26 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,9 +90,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 1/5] x86: Misra fixes for U/L suffixes
-Date: Wed, 10 Dec 2025 18:30:15 +0000
-Message-Id: <20251210183019.2241560-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/5] x86: Fix missing breaks
+Date: Wed, 10 Dec 2025 18:30:18 +0000
+Message-Id: <20251210183019.2241560-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
 References: <20251210183019.2241560-1-andrew.cooper3@citrix.com>
@@ -101,10 +101,8 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 With the wider testing, some more violations have been spotted.  This
-addresses violations of Rule 7.2 (suffixes required) and Rule 7.3 (L must be
-uppercase).
-
-For ELF64_R_TYPE(), cast to uint32_t matching the surrounding examples.
+addresses violations of Rule 16.3 which requires all case statements to be
+terminated with a break or other unconditional control flow change.
 
 No functional change.
 
@@ -116,86 +114,86 @@ CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/mm/shadow/common.c     | 4 ++--
- xen/arch/x86/pv/descriptor-tables.c | 2 +-
- xen/drivers/passthrough/vtd/iommu.h | 2 +-
- xen/include/xen/elfstructs.h        | 2 +-
- xen/include/xen/sizes.h             | 2 +-
- 5 files changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/x86/domain.c          | 1 +
+ xen/arch/x86/mm/shadow/hvm.c   | 1 +
+ xen/arch/x86/pv/emul-priv-op.c | 1 +
+ xen/arch/x86/pv/emulate.c      | 1 +
+ xen/common/livepatch.c         | 1 -
+ xen/common/livepatch_elf.c     | 1 +
+ 6 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 0176e33bc9c7..423764a32653 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -1961,7 +1961,7 @@ int sh_remove_write_access(struct domain *d, mfn_t gmfn,
-              /* FreeBSD 64bit: linear map 0xffff800000000000 */
-              switch ( level )
-              {
--             case 1: GUESS(0xffff800000000000
-+             case 1: GUESS(0xffff800000000000UL
-                            + ((fault_addr & VADDR_MASK) >> 9), 6); break;
-              case 2: GUESS(0xffff804000000000UL
-                            + ((fault_addr & VADDR_MASK) >> 18), 6); break;
-@@ -1969,7 +1969,7 @@ int sh_remove_write_access(struct domain *d, mfn_t gmfn,
-                            + ((fault_addr & VADDR_MASK) >> 27), 6); break;
-              }
-              /* FreeBSD 64bit: direct map at 0xffffff0000000000 */
--             GUESS(0xffffff0000000000 + gfn_to_gaddr(gfn), 6);
-+             GUESS(0xffffff0000000000UL + gfn_to_gaddr(gfn), 6);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 5e37bfbd17d6..b15120180993 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -1517,6 +1517,7 @@ int arch_set_info_guest(
+         {
+         case -EINTR:
+             rc = -ERESTART;
++            fallthrough;
+         case -ERESTART:
+             break;
+         case 0:
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index 114957a3e1ec..69334c095608 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -268,6 +268,7 @@ hvm_emulate_cmpxchg(enum x86_segment seg,
+     default:
+         SHADOW_PRINTK("cmpxchg size %u is not supported\n", bytes);
+         prev = ~old;
++        break;
+     }
+ 
+     if ( prev != old )
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index 08dec9990e39..fb6d57d6fbd3 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -407,6 +407,7 @@ static void _guest_io_write(unsigned int port, unsigned int bytes,
+ 
+     default:
+         ASSERT_UNREACHABLE();
++        break;
+     }
+ }
+ 
+diff --git a/xen/arch/x86/pv/emulate.c b/xen/arch/x86/pv/emulate.c
+index 8c44dea12330..b201ea1c6a97 100644
+--- a/xen/arch/x86/pv/emulate.c
++++ b/xen/arch/x86/pv/emulate.c
+@@ -120,6 +120,7 @@ void pv_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
+         printk(XENLOG_G_ERR "%s(%pv, 0x%08x, 0x%016"PRIx64") Bad register\n",
+                __func__, v, reg, val);
+         domain_crash(d);
++        break;
+     }
+ }
+ 
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 9285f88644f4..b39f8d7bfe20 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -1924,7 +1924,6 @@ static void noinline do_livepatch_work(void)
+                             p->name);
+                     ASSERT_UNREACHABLE();
+                 }
+-            default:
+                 break;
+             }
+         }
+diff --git a/xen/common/livepatch_elf.c b/xen/common/livepatch_elf.c
+index 25ce1bd5a0ad..2e82f2cb8c46 100644
+--- a/xen/common/livepatch_elf.c
++++ b/xen/common/livepatch_elf.c
+@@ -347,6 +347,7 @@ int livepatch_elf_resolve_symbols(struct livepatch_elf *elf)
+                 dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Symbol resolved: %s => %#"PRIxElfAddr" (%s)\n",
+                        elf->name, elf->sym[i].name,
+                        st_value, elf->sec[idx].name);
++            break;
          }
  
- #undef GUESS
-diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
-index 02647a2c5047..26f7d18b11b5 100644
---- a/xen/arch/x86/pv/descriptor-tables.c
-+++ b/xen/arch/x86/pv/descriptor-tables.c
-@@ -216,7 +216,7 @@ static bool check_descriptor(const struct domain *dom, seg_desc_t *d)
-              * 0xf6800000. Extend these to allow access to the larger read-only
-              * M2P table available in 32on64 mode.
-              */
--            base = (b & 0xff000000) | ((b & 0xff) << 16) | (a >> 16);
-+            base = (b & 0xff000000U) | ((b & 0xff) << 16) | (a >> 16);
- 
-             limit = (b & 0xf0000) | (a & 0xffff);
-             limit++; /* We add one because limit is inclusive. */
-diff --git a/xen/drivers/passthrough/vtd/iommu.h b/xen/drivers/passthrough/vtd/iommu.h
-index 29d350b23db6..4f41360c53c0 100644
---- a/xen/drivers/passthrough/vtd/iommu.h
-+++ b/xen/drivers/passthrough/vtd/iommu.h
-@@ -266,7 +266,7 @@ struct dma_pte {
- #define DMA_PTE_PROT (DMA_PTE_READ | DMA_PTE_WRITE)
- #define DMA_PTE_SP   (1 << 7)
- #define DMA_PTE_SNP  (1 << 11)
--#define DMA_PTE_CONTIG_MASK  (0xfull << PADDR_BITS)
-+#define DMA_PTE_CONTIG_MASK  (0xfULL << PADDR_BITS)
- #define dma_clear_pte(p)    do {(p).val = 0;} while(0)
- #define dma_set_pte_readable(p) do {(p).val |= DMA_PTE_READ;} while(0)
- #define dma_set_pte_writable(p) do {(p).val |= DMA_PTE_WRITE;} while(0)
-diff --git a/xen/include/xen/elfstructs.h b/xen/include/xen/elfstructs.h
-index eb6b87a823a8..8770e7454672 100644
---- a/xen/include/xen/elfstructs.h
-+++ b/xen/include/xen/elfstructs.h
-@@ -360,7 +360,7 @@ typedef struct {
- } Elf64_Rela;
- 
- #define	ELF64_R_SYM(info)	((info) >> 32)
--#define	ELF64_R_TYPE(info)	((info) & 0xFFFFFFFF)
-+#define	ELF64_R_TYPE(info)	((uint32_t)(info))
- #define ELF64_R_INFO(s,t) 	(((s) << 32) + (uint32_t)(t))
- 
- /*
-diff --git a/xen/include/xen/sizes.h b/xen/include/xen/sizes.h
-index f7b728ddab06..d309ebf04406 100644
---- a/xen/include/xen/sizes.h
-+++ b/xen/include/xen/sizes.h
-@@ -43,6 +43,6 @@
- #define SZ_512M                         0x20000000
- 
- #define SZ_1G                           0x40000000
--#define SZ_2G                           0x80000000
-+#define SZ_2G                           0x80000000U
- 
- #endif /* __XEN_SIZES_H__ */
+         if ( rc )
 -- 
 2.39.5
 
