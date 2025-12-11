@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78DE6D43342
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1184546.1506959 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7C8D43346
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1184556.1507051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfk-0003Lk-4s; Thu, 11 Dec 2025 18:45:52 +0000
+	id 1vTlfv-0005ic-At; Thu, 11 Dec 2025 18:46:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1184546.1506959; Thu, 11 Dec 2025 18:45:52 +0000
+Received: by outflank-mailman (output) from mailman id 1184556.1507051; Thu, 11 Dec 2025 18:46:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfk-0003LY-0Z; Thu, 11 Dec 2025 18:45:52 +0000
-Received: by outflank-mailman (input) for mailman id 1184546;
- Thu, 11 Dec 2025 18:45:50 +0000
+	id 1vTlfv-0005gO-2l; Thu, 11 Dec 2025 18:46:03 +0000
+Received: by outflank-mailman (input) for mailman id 1184556;
+ Thu, 11 Dec 2025 18:46:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QWGN=6R=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vTlfi-0003I9-Hb
- for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:50 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
+ id 1vTlfu-0003I9-Eg
+ for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:46:02 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9bcab944-d6c1-11f0-9cce-f158ae23cfc8;
- Thu, 11 Dec 2025 19:45:48 +0100 (CET)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b76b5afdf04so81056866b.1
- for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:48 -0800 (PST)
+ id a334c430-d6c1-11f0-9cce-f158ae23cfc8;
+ Thu, 11 Dec 2025 19:46:00 +0100 (CET)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-64198771a9bso828802a12.2
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:46:00 -0800 (PST)
 Received: from EPUAKYIW02F7.. (pool185-5-253-4.as6723.net. [185.5.253.4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.45
+ a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 10:45:46 -0800 (PST)
+ Thu, 11 Dec 2025 10:45:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9bcab944-d6c1-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: a334c430-d6c1-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765478747; x=1766083547; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aDNyNuv61rTQkRcvMIs1ekn0SWXLuqr0Rx/eBFoPIHY=;
-        b=fP4WAbMXo5yR4S3go4lsuZhtx2TS0SFOW/N8XF4pnZLovGy6bopu2wD5VXsIhJ98i/
-         vdHU9IA4nmhHNs+eZPw0Tfy59kHT+bL9ncnl0FRU6FpvBmpBMevONv116GErXvg0T+VM
-         c0QdOA968Qk6YQ5bvPuqMSxPH2W1NV2KCrw+XjXCIdyBl8fV5IR/9vsz6CGPzk25HHW/
-         uX8P6WTLa6saaGb7Egt7qaKY30fSo3ohJOoQRk6fxnAZbSzc8sIVOi9J3IE3wDAYEMTL
-         m8K2p82aTIkTVVJX0Ld5v5L3RstJECAZ9qMfhe6IYlyHYGZDRKpkPcW87uFOLvAt8UXv
-         CZTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765478747; x=1766083547;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1765478760; x=1766083560; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aDNyNuv61rTQkRcvMIs1ekn0SWXLuqr0Rx/eBFoPIHY=;
-        b=J9fAWJk7Ai/RtZGSqDzcA9NHDTGRzznJBvGaX5N6nhlONnxE/e/Jtc/G5uWsmje1+t
-         UrFm+FPDWikq8IPLacbIZJv6xHMCECIMgERMfO4fIMfx8LVAU5EzvktI0B9vbZ3xYg4k
-         ksbR79xVfBLEqC+AAYZ/JICNj9KgQogD6rGzBy+Q0R+i3Zs0FyE91Td9+XSqKJQn2DE0
-         lVMouXf753CeCAzdltQ1Y/8j6JYz9f3wU+qMNcWdQ692NB7A69l9/EQPW5hTo/GUvooQ
-         jiEqjzW2ho4DGYvEIuE59vg526ObP2rf1sci6nf3vJWzHEcrhjv4B/H3poyIGKjiCxmX
-         dz3A==
-X-Gm-Message-State: AOJu0YyZ97peVn4Q9ZF0TShxdmwp+HvQTsX+snwl43Rzv+T8VuOjQ2qb
-	f269Xj46J+N8kNHG7NXGwN25XpTMszQwLOIOytE7af/3BlsZINRwRCze9qNOU28v
-X-Gm-Gg: AY/fxX4hfC+KYNI4IR+pVzrYdfvE6JAnsfdC7u78jRVbJ+w9nlwa4uIay7Whokz07Fr
-	/0wh2aekHKg7FrhWsh1BsGvERMDPXaKZQJuexrdJ9hJJBZkk5hJ8jWjXAPZEfaa21BzeD+xeyG9
-	AJsH4mX4QScnVV4R+GDmPvdCDn20QX9NdXYhlVDvHXliRtK/DJSQpRmMjE4CyvVQSjqjFkGLxlQ
-	8BjIjpDu/AL0GFX7GrAhxQcNQ03Qw/vKOZI03ENH/J2KS/CBmpKAbUx1KQQHRpfRQu6yCdtuKqQ
-	UI4c5aU/r/KjBCNZpIkt+eX7dM82iEo7ZGQpGv4k22X1WFe/2N/FfyJ1v38V5KImyFB4hKL6qLg
-	ysdv0slci+Gb4dIRxohpfZZVIhG7lroMXEiQVUtgwHcOLL1dXRj1raB1xuoP2dZXgLyzsDGvbN/
-	L+QbkTrf7w5nZtMSJ8hPx9oFydohhKxZCQ4mCLs29/
-X-Google-Smtp-Source: AGHT+IFm4NeTfQ9xmDk7GfTvvFZ9mCEEJhtzChUQNcs8E9MYwMmZt5mL0u7P9Pmlmjh5XlxyPuE1Gw==
-X-Received: by 2002:a17:907:3cca:b0:b73:853d:540e with SMTP id a640c23a62f3a-b7ce841d73emr743131966b.30.1765478746840;
-        Thu, 11 Dec 2025 10:45:46 -0800 (PST)
+        bh=OaZfuWRbnwPcnW+s48rbWKO1grkPvQJtBoI9rAf5Hcg=;
+        b=C52yXMweSmOi7jHTFVsaG73CghSzs8FSjnivaGCnP3l+7OSj5weXg0khpS8ukU2zfZ
+         qW632MP+HhJ2r6lqcq4E57g3TwtjNYVdzcg1lj8PK2o/wFH0hgVU7mh/WXpaew93YKiY
+         Ie2ZbYcWO43g62MlkQuyHotyzvs0dBk0kcgG87d8iz9WIZFS3PCnnsohOtFk0ffjPTHe
+         F5gh/7xTPntknn5A/9J3u4fQ2sL5GxZKPW53Nbfog7IlH24QyJcrf+rcF3nwo3aXAd3g
+         vO3WSzMJe3QduB51qR/ceq6SWY/bSmUO790eqH/+g3TaeVtQyrSnn6j7YJvpGbSgpY4f
+         Xg9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765478760; x=1766083560;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=OaZfuWRbnwPcnW+s48rbWKO1grkPvQJtBoI9rAf5Hcg=;
+        b=d4XnlUPbEyPvZY9JUxUt+hJXd6pa+MR5zEOaoaRx9ugYn+M3vbuD3pO8wRUMMm4E59
+         EXAEXaT/sG9EyzdAdD6MNMaKp1+HDcqrTAP2WMpXkyqpIP8q3kMFKnVYxBb9zQhK4FVA
+         z5oI+6nioDiYXW+0JbTelbNpMgmadh3ok57JcFHB9Huj1MnfdKShqKNTZ3suNXggP4eG
+         qjJb3d0ISK+lQbT1MJsIfAfBzXQ4dZ77L4IYfN7LPu00fgWRaadA9upFyeZ4VVFCrghy
+         bOQl07/5/rhEbDWo70J57YI057vcT3SFSRCZlbXqXg7tTS3vX2dLo1CC3eQPqHLpgDE3
+         X6pg==
+X-Gm-Message-State: AOJu0YyoMWHl512sC4tv3c54pi+rSm7W6LtpdFA+/0f6lLXsHUGW+i5c
+	+fjiYw+hSq2q8TvCOqrXN01jwYBl7/dV+sOHGOyBg9nDOKMBv1LrAHRJpCTaQZJu
+X-Gm-Gg: AY/fxX5VyGaLQ3ufu/gDihPZIqZJaYr4pB2sA7XR1EPKeYu0GYKMe7j+R665L4JDaVo
+	IZUCjo9d4T/ezqJjwCegPgfXvxPpqk8v7YN/+5aHqPpN7IL3tv4VLwWcOUwGkHa14lQ4np9nJ0s
+	qsmx/r9L/AziSAIp7KagoUW+/havVOUG5uZSkhQ/bGWe3Ac9wif0fvJEGGKjP74qWpvMJaZzszR
+	K5SCC5R0iglHT9+QQ7zWK8xq9qDjyaunWr4N1ekUtJy8rkyC3FQeyh3il0xDucngCkzVRb8skhd
+	vqkhK2XWT+USQCToG54R+yK41qD5a1PKBWYUplkY6LawoiGpdo+XNzpsCXVjs9T+6ciecYVYqkg
+	FMNMTiLIxOgwiMzRBDEfh9l5vnIxGykyq80Yip0WazmpQA8M2vG4SpNOGTEHAfWGB95K9nHO0Dw
+	qGc+m3KveXc0zRqPN6/lzwa8OPK2dCr094lqRsg+3h
+X-Google-Smtp-Source: AGHT+IFhllThVrkjPTfuO84mpaywMKGq1Skw0Lhon1pOtwVx4+wXl4IJijzRncp8fHZyY+VLi8RDGQ==
+X-Received: by 2002:a17:907:940e:b0:b71:29f7:47dd with SMTP id a640c23a62f3a-b7ce8476094mr829779766b.46.1765478759399;
+        Thu, 11 Dec 2025 10:45:59 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -92,116 +93,239 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v7 00/12] Add initial Xen Suspend-to-RAM support on ARM64 
-Date: Thu, 11 Dec 2025 20:43:24 +0200
-Message-ID: <cover.1765472890.git.mykola_kvach@epam.com>
+	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
+	Mykyta Poturai <mykyta_poturai@epam.com>
+Subject: [PATCH v7 10/12] xen/arm: Save/restore context on suspend/resume
+Date: Thu, 11 Dec 2025 20:43:34 +0200
+Message-ID: <0dd3c42e1801674e19d2b3b3ca834b7bab62ca3f.1765472890.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1765472890.git.mykola_kvach@epam.com>
+References: <cover.1765472890.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-This is part 2 of version 7 of the ARM Xen system suspend/resume patch
-series, based on earlier work by Mirela Simonovic and Mykyta Poturai.
+The context of CPU general purpose and system control registers must be
+saved on suspend and restored on resume. This is implemented in
+prepare_resume_ctx and before the return from the hyp_resume function.
+The prepare_resume_ctx must be invoked just before the PSCI system suspend
+call is issued to the ATF. The prepare_resume_ctx must return a non-zero
+value so that the calling 'if' statement evaluates to true, causing the
+system suspend to be invoked. Upon resume, the context saved on suspend
+will be restored, including the link register. Therefore, after
+restoring the context, the control flow will return to the address
+pointed to by the saved link register, which is the place from which
+prepare_resume_ctx was called. To ensure that the calling 'if' statement
+does not again evaluate to true and initiate system suspend, hyp_resume
+must return a zero value after restoring the context.
 
-The first part is here:
-https://patchew.org/Xen/cover.1764755558.git.xakep.amatop@gmail.com/
+Note that the order of saving register context into cpu_context structure
+must match the order of restoring.
 
-NOTE: Most of the code is guarded by CONFIG_SYSTEM_SUSPEND, which can
-currently only be selected when UNSUPPORTED is set, and thus the
-functionality is neither enabled by default nor even built.
+Support for ARM32 is not implemented. Instead, compilation fails with a
+build-time error if suspend is enabled for ARM32.
 
-This version is ported to Xen master and includes extensive improvements
-based on reviewer feedback. The patch series restructures code to improve
-robustness, maintainability, and implements system Suspend-to-RAM support
-on ARM64 hardware/control domains.
-
-Key updates in this series:
- - Introduced architecture-specific suspend/resume infrastructure
- - Integrated GICv2/GICv3 suspend and resume, including memory-backed context
-   save/restore with error handling
- - Added time and IRQ suspend/resume hooks, ensuring correct timer/interrupt
-   state across suspend cycles
- - Implemented proper PSCI SYSTEM_SUSPEND invocation and version checks
- - Improved state management and recovery in error cases during suspend/resume
- - Added support for IPMMU-VMSA/SMMUv3 context save/restore
- - Added support for GICv3 eSPI registers context save/restore
- - Added support for ITS registers context save/restore
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-
-TODOs:
- - Enable "xl suspend" support on ARM
- - Properly disable Xen timer watchdog from relevant services (only init.d left)
- - Add suspend/resume CI test for ARM (QEMU if feasible)
----
-
-Detailed changelogs can be found in each patch.
-
 Changes in v7:
-- Timer helper renamed/clarified; virtual/hyper/phys handling documented.
-- GICv2 uses one context block; restore saved CTLR; panic on alloc failure.
-- GICv3/eSPI/ITS always suspend/resume; restore LPI/eSPI; rdist timeout.
-- IPMMU suspend context allocated before PCI setup.
-- System suspend: control domain drives host suspend.
-- Dropped v6 IRQ descriptor restore patches; use setup_irq and re-register
-  local IRQs on resume instead.
-
-For earlier changelogs, please refer to the previous cover letters.
-
-Mirela Simonovic (6):
-  xen/arm: Add suspend and resume timer helpers
-  xen/arm: gic-v2: Implement GIC suspend/resume functions
-  xen/arm: Resume memory management on Xen resume
-  xen/arm: Save/restore context on suspend/resume
-  xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
-  xen/arm: Add support for system suspend triggered by control domain
-
-Mykola Kvach (5):
-  xen/arm: gic-v3: Implement GICv3 suspend/resume functions
-  xen/arm: gic-v3: add ITS suspend/resume support
-  xen/arm: tee: keep init_tee_secondary() for hotplug and resume
-  xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
-  arm/smmu-v3: add suspend/resume handlers
-
-Oleksandr Tyshchenko (1):
-  iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-
- xen/arch/arm/Kconfig                     |   1 +
- xen/arch/arm/Makefile                    |   1 +
- xen/arch/arm/arm64/head.S                | 112 ++++++++
- xen/arch/arm/gic-v2.c                    | 126 +++++++++
- xen/arch/arm/gic-v3-its.c                |  91 +++++++
- xen/arch/arm/gic-v3-lpi.c                |   3 +
- xen/arch/arm/gic-v3.c                    | 332 ++++++++++++++++++++++-
- xen/arch/arm/gic.c                       |  29 ++
- xen/arch/arm/include/asm/gic.h           |  12 +
- xen/arch/arm/include/asm/gic_v3_defs.h   |   1 +
- xen/arch/arm/include/asm/gic_v3_its.h    |  23 ++
- xen/arch/arm/include/asm/mm.h            |   2 +
- xen/arch/arm/include/asm/psci.h          |   1 +
- xen/arch/arm/include/asm/suspend.h       |  31 +++
- xen/arch/arm/include/asm/time.h          |   5 +
- xen/arch/arm/mmu/smpboot.c               |   2 +-
- xen/arch/arm/psci.c                      |  23 +-
- xen/arch/arm/suspend.c                   | 153 +++++++++++
- xen/arch/arm/tee/ffa_notif.c             |  63 ++++-
- xen/arch/arm/tee/tee.c                   |   2 +-
- xen/arch/arm/time.c                      |  44 ++-
- xen/arch/arm/vpsci.c                     |  12 +-
- xen/common/Kconfig                       |   5 +
- xen/common/domain.c                      |   7 +-
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 305 ++++++++++++++++++++-
- xen/drivers/passthrough/arm/smmu-v3.c    | 170 +++++++++---
- xen/drivers/passthrough/arm/smmu.c       |  10 +
- xen/include/xen/list.h                   |  14 +
- 28 files changed, 1507 insertions(+), 73 deletions(-)
+- no changes
+---
+ xen/arch/arm/Makefile              |  1 +
+ xen/arch/arm/arm64/head.S          | 90 +++++++++++++++++++++++++++++-
+ xen/arch/arm/include/asm/suspend.h | 26 +++++++++
+ xen/arch/arm/suspend.c             | 14 +++++
+ 4 files changed, 130 insertions(+), 1 deletion(-)
  create mode 100644 xen/arch/arm/suspend.c
 
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 7494a0f926..4a549a1ac0 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -51,6 +51,7 @@ obj-y += setup.o
+ obj-y += shutdown.o
+ obj-y += smp.o
+ obj-y += smpboot.o
++obj-$(CONFIG_SYSTEM_SUSPEND) += suspend.o
+ obj-$(CONFIG_SYSCTL) += sysctl.o
+ obj-y += time.o
+ obj-y += traps.o
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 596e960152..c6594c0bdd 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -562,6 +562,52 @@ END(efi_xen_start)
+ #endif /* CONFIG_ARM_EFI */
+ 
+ #ifdef CONFIG_SYSTEM_SUSPEND
++/*
++ * int prepare_resume_ctx(struct cpu_context *ptr)
++ *
++ * x0 - pointer to the storage where callee's context will be saved
++ *
++ * CPU context saved here will be restored on resume in hyp_resume function.
++ * prepare_resume_ctx shall return a non-zero value. Upon restoring context
++ * hyp_resume shall return value zero instead. From C code that invokes
++ * prepare_resume_ctx, the return value is interpreted to determine whether
++ * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
++ */
++FUNC(prepare_resume_ctx)
++        /* Store callee-saved registers */
++        stp     x19, x20, [x0], #16
++        stp     x21, x22, [x0], #16
++        stp     x23, x24, [x0], #16
++        stp     x25, x26, [x0], #16
++        stp     x27, x28, [x0], #16
++        stp     x29, lr, [x0], #16
++
++        /* Store stack-pointer */
++        mov     x2, sp
++        str     x2, [x0], #8
++
++        /* Store system control registers */
++        mrs     x2, VBAR_EL2
++        str     x2, [x0], #8
++        mrs     x2, VTCR_EL2
++        str     x2, [x0], #8
++        mrs     x2, VTTBR_EL2
++        str     x2, [x0], #8
++        mrs     x2, TPIDR_EL2
++        str     x2, [x0], #8
++        mrs     x2, MDCR_EL2
++        str     x2, [x0], #8
++        mrs     x2, HSTR_EL2
++        str     x2, [x0], #8
++        mrs     x2, CPTR_EL2
++        str     x2, [x0], #8
++        mrs     x2, HCR_EL2
++        str     x2, [x0], #8
++
++        /* prepare_resume_ctx must return a non-zero value */
++        mov     x0, #1
++        ret
++END(prepare_resume_ctx)
+ 
+ FUNC(hyp_resume)
+         /* Initialize the UART if earlyprintk has been enabled. */
+@@ -580,7 +626,49 @@ FUNC(hyp_resume)
+         b     enable_secondary_cpu_mm
+ 
+ mmu_resumed:
+-        b .
++        /* Now we can access the cpu_context, so restore the context here */
++        ldr     x0, =cpu_context
++
++        /* Restore callee-saved registers */
++        ldp     x19, x20, [x0], #16
++        ldp     x21, x22, [x0], #16
++        ldp     x23, x24, [x0], #16
++        ldp     x25, x26, [x0], #16
++        ldp     x27, x28, [x0], #16
++        ldp     x29, lr, [x0], #16
++
++        /* Restore stack pointer */
++        ldr     x2, [x0], #8
++        mov     sp, x2
++
++        /* Restore system control registers */
++        ldr     x2, [x0], #8
++        msr     VBAR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     VTCR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     VTTBR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     TPIDR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     MDCR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     HSTR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     CPTR_EL2, x2
++        ldr     x2, [x0], #8
++        msr     HCR_EL2, x2
++        isb
++
++        /*
++         * Since context is restored return from this function will appear
++         * as return from prepare_resume_ctx. To distinguish a return from
++         * prepare_resume_ctx which is called upon finalizing the suspend,
++         * as opposed to return from this function which executes on resume,
++         * we need to return zero value here.
++         */
++        mov x0, #0
++        ret
+ END(hyp_resume)
+ 
+ #endif /* CONFIG_SYSTEM_SUSPEND */
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+index 313d03ea59..d3a88ea979 100644
+--- a/xen/arch/arm/include/asm/suspend.h
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -3,6 +3,8 @@
+ #ifndef ARM_SUSPEND_H
+ #define ARM_SUSPEND_H
+ 
++#include <asm/types.h>
++
+ struct domain;
+ struct vcpu;
+ 
+@@ -14,6 +16,30 @@ struct resume_info {
+ 
+ int arch_domain_resume(struct domain *d);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++#ifdef CONFIG_ARM_64
++struct cpu_context {
++    register_t callee_regs[12];
++    register_t sp;
++    register_t vbar_el2;
++    register_t vtcr_el2;
++    register_t vttbr_el2;
++    register_t tpidr_el2;
++    register_t mdcr_el2;
++    register_t hstr_el2;
++    register_t cptr_el2;
++    register_t hcr_el2;
++} __aligned(16);
++#else
++#error "Define cpu_context structure for arm32"
++#endif
++
++extern struct cpu_context cpu_context;
++
++int prepare_resume_ctx(struct cpu_context *ptr);
++void hyp_resume(void);
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ #endif /* ARM_SUSPEND_H */
+ 
+ /*
+diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+new file mode 100644
+index 0000000000..e38566b0b7
+--- /dev/null
++++ b/xen/arch/arm/suspend.c
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <asm/suspend.h>
++
++struct cpu_context cpu_context = {};
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
+
 
