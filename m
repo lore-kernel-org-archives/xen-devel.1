@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BAD2D41C24
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0816D43342
 	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1184547.1506967 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1184551.1507010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfk-0003R0-HL; Thu, 11 Dec 2025 18:45:52 +0000
+	id 1vTlfq-0004aO-7M; Thu, 11 Dec 2025 18:45:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1184547.1506967; Thu, 11 Dec 2025 18:45:52 +0000
+Received: by outflank-mailman (output) from mailman id 1184551.1507010; Thu, 11 Dec 2025 18:45:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfk-0003QY-AU; Thu, 11 Dec 2025 18:45:52 +0000
-Received: by outflank-mailman (input) for mailman id 1184547;
- Thu, 11 Dec 2025 18:45:51 +0000
+	id 1vTlfq-0004Yl-0K; Thu, 11 Dec 2025 18:45:58 +0000
+Received: by outflank-mailman (input) for mailman id 1184551;
+ Thu, 11 Dec 2025 18:45:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QWGN=6R=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vTlfj-0003I8-9j
- for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:51 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
+ id 1vTlfo-0003I8-4x
+ for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:56 +0000
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [2a00:1450:4864:20::52d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9d4f3a67-d6c1-11f0-b15b-2bf370ae4941;
- Thu, 11 Dec 2025 19:45:50 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b727f452fffso71489766b.1
- for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:50 -0800 (PST)
+ id a01b52bc-d6c1-11f0-b15b-2bf370ae4941;
+ Thu, 11 Dec 2025 19:45:55 +0100 (CET)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-64198771a9bso828655a12.2
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:55 -0800 (PST)
 Received: from EPUAKYIW02F7.. (pool185-5-253-4.as6723.net. [185.5.253.4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.48
+ a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 10:45:48 -0800 (PST)
+ Thu, 11 Dec 2025 10:45:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,310 +47,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d4f3a67-d6c1-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: a01b52bc-d6c1-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765478750; x=1766083550; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1765478754; x=1766083554; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MRsGxV9gXG/ZC0I4AbwNbd/2+lrn7b0mKg3wOgq8N30=;
-        b=dixB5wl8ej22SEtNyazYU6wLrQaeyrDU9pmwBv8+s2mMJn3zCFWSkBL955w7JWR8R+
-         rlUyN5RuxzEqoeyxL2PztYgl03jTFX/RG0ldrBQJ3xoWKAlNT8zg1C4cxfckLBF123CQ
-         wldsMInItTSgpv9F9ocDZOl5rBhSz1poZaS6XieZ7OGOVQUWOAFv2owEEmQvOnPL6r64
-         XsrMP0o0LrXXqUFNsrDB+2O1854iwSM/dtUmvvoAoNHsV5VLyypoUQdpdHQe6/FJal3m
-         V3MhktAPWSAX/bFSK/+zZI3O+MCyo+P5bYLZYmy6IQPjtjCsePT0YEXOgz3C/pSGH09u
-         cwDg==
+        bh=rz0HDghJ0IsRbhxCGz59UWa71x4c1jNbwB3bP+NDcUo=;
+        b=KWAP0RRJySseb9OVoG9E0sONatv2MyeoRDoINiWn5kEZFyOflwwtu+K24cGS/JGwvf
+         cB8xYP4HD2EOYzynuOHeaH8kiaGE2IdFCM2e5wLBiK6aiGdL1c+DBCkmJWJPykI9c3+G
+         UcMZBC+hp6K/wQKLiBiC9vz2ao0fc3zGUUK3BChJAAtS3Iclc9Ev10yHV8wZijQrWEgM
+         O8D6KTkrvLytYSXbpFNYOZGQwOnj/IkfWcMhGf5Xck9SJYfZdxwvXF4uq38daF0dGiWn
+         5VwB8ty8FJGzSqxuxPCnVYxQYP2r+U3SSMekclraC7LahhbOU6080hh9sW1nhKnSQt+0
+         Lm+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765478750; x=1766083550;
+        d=1e100.net; s=20230601; t=1765478754; x=1766083554;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=MRsGxV9gXG/ZC0I4AbwNbd/2+lrn7b0mKg3wOgq8N30=;
-        b=LIkIyKn5D/1TLxcP80nmN0lzQ24DHvdtKaizuxofkYEJGoQD1zsthTZym1olzMBVMD
-         sEscO4+p3AsgqoRwM/E1ED1WjI2zV1ZMKfj6pfVqUmEhgFd1wJD67ucpG6ogMOOTGvYt
-         Q0AacwTL4+AkDILQcA1O9fDB2EvrjDgNPYmKn+yeEhBxBfLHQuyn7JbwqCT0z3hMUEdX
-         npvxJCX0tWFZw0LF42S/t8ohDE6GaETbaRBLxkr5mGhT59N4XSPAuoBDLcLKWRtILTyX
-         2TQMcm++VyaAGWzP4Wnpb3pDNGGGBPABoxRaYUuTIBhgLEJ5WdX47BVuW2s1isRjNm9S
-         FC+g==
-X-Gm-Message-State: AOJu0YwiUoMxaB2MtLzabWCFgcU1BnlFCeQObcpbFHQOXkDYKXJZmq9p
-	TF+rVER4Yt7WfWb/ijtiSaYP+abqXq5HzDhkiYJyAQa3+yNXyqasu/HIH5n/8IfP
-X-Gm-Gg: AY/fxX5GFBNYeoSEZgHcIzkVwTlQ+Xb6JHOpoTeofgnUSrPdsTF9NcgLCsTxe0WhAXH
-	VH26eO46JJbQtRw6yR1TERGeI6VVK69pTj4auY6+Y23cIPdvbrSLFapHhyjjgO6qzdLbcgB5fSs
-	kCDP0ZcDKXzDa1fZq9KTZXezwevnpNIephvImt7EtKGI604Suh1u1hJoefia9xJGQID7coB7C8Q
-	k0G38eYwUeOdZD/1ggc1/HGRHz4MO2jmQyju0qjDEpebaOWJhnAyX5g7mfJ7KPZIoT1hlQtLc/1
-	6vWuudZrj6iaUAcgZ+fIZ30b2x9CKKhpc0OdQlKC4hLhNiAy0N3Y7V5QFXWFOi4tRedWXxDV5of
-	BTF9mFniKEp8igGqzYegYVoNG2nXl+CLqaMTEiBH+BWBSUCbCnJOxAypjBkLCVdhyMq3sMQJj5e
-	fuwHhc5i5DBLClOoI0kKg19/hxIviwZt8hBEwdl6OZ
-X-Google-Smtp-Source: AGHT+IEAHYkNBQOlPEi8KqOjFKwI0oh4hz5zxz+lP2CuRzm2gBo3f1ff4xjR6uEUqdSIRULlHee29Q==
-X-Received: by 2002:a17:907:1c91:b0:b7a:71b7:2409 with SMTP id a640c23a62f3a-b7d02ae0bb0mr393064966b.15.1765478749417;
-        Thu, 11 Dec 2025 10:45:49 -0800 (PST)
+        bh=rz0HDghJ0IsRbhxCGz59UWa71x4c1jNbwB3bP+NDcUo=;
+        b=mv/CYCTkYF9jRrfWz+mg5DrFKpbUa4utNb4yYurniQy6KS6xe3p3fu1Tn/BhSjeoO8
+         hPuekvHJBta5NOwEpym5VtjUvwXZaO6Pya8ZA9uBUuVv2HRjBMT7YFCeRshAk8nrBm8f
+         ILYjpjYMmttNYJ9NLZo8AdOy/5d0OimgDu9O7+ZGdEX4g0LtTCQRPrIilgAlVj7iyuaM
+         d6kSBChLRk5WFFktDJVNSNcT9iaZa4KvoYq7OYjBknsHX5qhMBAHCgBJ6JQmwjdCcX36
+         VeTl/YRNGIh82gAcZSQaz1ZfeBoMEMuoTHZAgaiBWEtQm8S5EuxwB27BE7C3VLGqkGyq
+         PSMQ==
+X-Gm-Message-State: AOJu0YzlWglAbmOLPGN6BCgVRHFkvRcJKSI75FU/eet+SPubCddsXWsq
+	kYtkSrULFN+JEs/IBbY2iCv9hrmzAlqYkhRVdxkY+1IJauf5q8f4dUCEdj2BNOnG
+X-Gm-Gg: AY/fxX4NhdNTr/e3Zgc7eNMFQOFtW8aNvrISRLSMFpBOgYNiBOy8Mtx+yJDGfOaPDk5
+	gowerT8pXLspaPhdfAp3eVqx3c845Fgbhd7LpaCrnxlXolNjT9iSCRq6371Q7nAl5h+tKXDFulI
+	9rh2CXQHeZ8cYwfGllARLcopXcKH9pRS23xWtYegrLC+AtSipkrAyLCW3ZPCyTYJY8VTOztnKLX
+	AuHnO2365P1dlHVoyZ+/A9CfVQNkyE2z6ikLABRejusviHeSCG51ANFU9eY7H6KSzsqF0zcpZnb
+	klkcZ9oKUmH6saCMa/H9kRv9rjGh60KUHCNED9mP7dYA/Qy037mL3rRvpodJiHjjd+/3T6zuR3t
+	mYLcZkz5yuVxZOe9vslkBN3q/pgt9LTIv7VUWdRI6cK6Z6Tf8mr9CErSa8u44mYZlPv62RMpd2R
+	+qmoSAQzpFaP7n7u3wBgIbVUVFl7TyGJGOj7gb+Yst
+X-Google-Smtp-Source: AGHT+IFl62FZ0FgJSyr4XEZouQeIWhJVM6kfXy3OW7rtGR1k5t90f62MNqwbncILJbOinFyLpJdUeA==
+X-Received: by 2002:a17:907:d10:b0:b73:210a:44e with SMTP id a640c23a62f3a-b7ce8414319mr770611666b.30.1765478754270;
+        Thu, 11 Dec 2025 10:45:54 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Subject: [PATCH v7 02/12] xen/arm: gic-v2: Implement GIC suspend/resume functions
-Date: Thu, 11 Dec 2025 20:43:26 +0200
-Message-ID: <fe8b4d92a8dfd7b4c40429d10233637a339ae8e6.1765472890.git.mykola_kvach@epam.com>
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v7 06/12] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
+Date: Thu, 11 Dec 2025 20:43:30 +0200
+Message-ID: <d08aa453e3302105648fd4b4f5872ee88f16c660.1765472890.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1765472890.git.mykola_kvach@epam.com>
 References: <cover.1765472890.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-System suspend may lead to a state where GIC would be powered down.
-Therefore, Xen should save/restore the context of GIC on suspend/resume.
+The FF-A notification SRI interrupt handler was not correctly tied to
+CPU hotplug and suspend/resume. As a result, CPUs going offline and
+back online could end up with stale or missing handlers, breaking
+delivery of FF-A notifications.
 
-Note that the context consists of states of registers which are
-controlled by the hypervisor. Other GIC registers which are accessible
-by guests are saved/restored on context switch.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in V7:
-- Allocate one contiguous memory block for the GICv2 dist suspend context.
-- gicv2_resume() no longer unconditionally re-enables the distributor/CPU interface;
-  it now writes back the saved CTLR values as-is.
-- gicv2_alloc_context() now returns 0 on success and panics on failure, since
-  suspend context allocation is not recoverable.
----
- xen/arch/arm/gic-v2.c          | 126 +++++++++++++++++++++++++++++++++
- xen/arch/arm/gic.c             |  29 ++++++++
- xen/arch/arm/include/asm/gic.h |  12 ++++
- 3 files changed, 167 insertions(+)
+ xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
+ 1 file changed, 50 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index b23e72a3d0..0b2f7b3862 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1098,6 +1098,123 @@ static int gicv2_iomem_deny_access(struct domain *d)
-     return iomem_deny_access(d, mfn, mfn + nr);
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index 86bef6b3b2..84f5c6b43b 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -359,10 +359,28 @@ static int32_t ffa_notification_bitmap_destroy(uint16_t vm_id)
+     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0, 0);
  }
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
+-void ffa_notif_init_interrupt(void)
++static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
 +
-+/* This struct represent block of 32 IRQs */
-+struct irq_block {
-+    uint32_t icfgr[2]; /* 2 registers of 16 IRQs each */
-+    uint32_t ipriorityr[8];
-+    uint32_t isenabler;
-+    uint32_t isactiver;
-+    uint32_t itargetsr[8];
-+};
-+
-+/* GICv2 registers to be saved/restored on system suspend/resume */
-+struct gicv2_context {
-+    /* GICC context */
-+    struct cpu_ctx {
-+        uint32_t ctlr;
-+        uint32_t pmr;
-+        uint32_t bpr;
-+    } cpu;
-+
-+    /* GICD context */
-+    struct dist_ctx {
-+        uint32_t ctlr;
-+        struct irq_block *irqs;
-+    } dist;
-+};
-+
-+static struct gicv2_context gic_ctx;
-+
-+static int gicv2_suspend(void)
-+{
-+    unsigned int i, blocks = DIV_ROUND_UP(gicv2_info.nr_lines, 32);
-+
-+    /* Save GICC configuration */
-+    gic_ctx.cpu.ctlr = readl_gicc(GICC_CTLR);
-+    gic_ctx.cpu.pmr = readl_gicc(GICC_PMR);
-+    gic_ctx.cpu.bpr = readl_gicc(GICC_BPR);
-+
-+    /* Save GICD configuration */
-+    gic_ctx.dist.ctlr = readl_gicd(GICD_CTLR);
-+
-+    for ( i = 0; i < blocks; i++ )
-+    {
-+        struct irq_block *irqs = gic_ctx.dist.irqs + i;
-+        size_t j, off = i * sizeof(irqs->isenabler);
-+
-+        irqs->isenabler = readl_gicd(GICD_ISENABLER + off);
-+        irqs->isactiver = readl_gicd(GICD_ISACTIVER + off);
-+
-+        off = i * sizeof(irqs->ipriorityr);
-+        for ( j = 0; j < ARRAY_SIZE(irqs->ipriorityr); j++ )
-+        {
-+            irqs->ipriorityr[j] = readl_gicd(GICD_IPRIORITYR + off + j * 4);
-+            irqs->itargetsr[j] = readl_gicd(GICD_ITARGETSR + off + j * 4);
-+        }
-+
-+        off = i * sizeof(irqs->icfgr);
-+        for ( j = 0; j < ARRAY_SIZE(irqs->icfgr); j++ )
-+            irqs->icfgr[j] = readl_gicd(GICD_ICFGR + off + j * 4);
-+    }
-+
-+    return 0;
-+}
-+
-+static void gicv2_resume(void)
-+{
-+    unsigned int i, blocks = DIV_ROUND_UP(gicv2_info.nr_lines, 32);
-+
-+    gicv2_cpu_disable();
-+    /* Disable distributor */
-+    writel_gicd(0, GICD_CTLR);
-+
-+    for ( i = 0; i < blocks; i++ )
-+    {
-+        struct irq_block *irqs = gic_ctx.dist.irqs + i;
-+        size_t j, off = i * sizeof(irqs->isenabler);
-+
-+        writel_gicd(0xffffffffU, GICD_ICENABLER + off);
-+        writel_gicd(irqs->isenabler, GICD_ISENABLER + off);
-+
-+        writel_gicd(0xffffffffU, GICD_ICACTIVER + off);
-+        writel_gicd(irqs->isactiver, GICD_ISACTIVER + off);
-+
-+        off = i * sizeof(irqs->ipriorityr);
-+        for ( j = 0; j < ARRAY_SIZE(irqs->ipriorityr); j++ )
-+        {
-+            writel_gicd(irqs->ipriorityr[j], GICD_IPRIORITYR + off + j * 4);
-+            writel_gicd(irqs->itargetsr[j], GICD_ITARGETSR + off + j * 4);
-+        }
-+
-+        off = i * sizeof(irqs->icfgr);
-+        for ( j = 0; j < ARRAY_SIZE(irqs->icfgr); j++ )
-+            writel_gicd(irqs->icfgr[j], GICD_ICFGR + off + j * 4);
-+    }
-+
-+    /* Make sure all registers are restored and enable distributor */
-+    writel_gicd(gic_ctx.dist.ctlr, GICD_CTLR);
-+
-+    /* Restore GIC CPU interface configuration */
-+    writel_gicc(gic_ctx.cpu.pmr, GICC_PMR);
-+    writel_gicc(gic_ctx.cpu.bpr, GICC_BPR);
-+
-+    /* Enable GIC CPU interface */
-+    writel_gicc(gic_ctx.cpu.ctlr, GICC_CTLR);
-+}
-+
-+static void __init gicv2_alloc_context(void)
-+{
-+    uint32_t blocks = DIV_ROUND_UP(gicv2_info.nr_lines, 32);
-+
-+    gic_ctx.dist.irqs = xzalloc_array(struct irq_block, blocks);
-+    if ( !gic_ctx.dist.irqs )
-+        panic("Failed to allocate memory for GICv2 suspend context\n");
-+}
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- #ifdef CONFIG_ACPI
- static unsigned long gicv2_get_hwdom_extra_madt_size(const struct domain *d)
++static int request_sri_irq(void)
  {
-@@ -1302,6 +1419,11 @@ static int __init gicv2_init(void)
- 
-     spin_unlock(&gicv2.lock);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    /* Allocate memory to be used for saving GIC context during the suspend */
-+    gicv2_alloc_context();
-+#endif /* CONFIG_SYSTEM_SUSPEND */
+     int ret;
++    struct irqaction *sri_action = &this_cpu(sri_irq);
 +
-     return 0;
- }
- 
-@@ -1345,6 +1467,10 @@ static const struct gic_hw_operations gicv2_ops = {
-     .map_hwdom_extra_mappings = gicv2_map_hwdom_extra_mappings,
-     .iomem_deny_access   = gicv2_iomem_deny_access,
-     .do_LPI              = gicv2_do_LPI,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend             = gicv2_suspend,
-+    .resume              = gicv2_resume,
-+#endif /* CONFIG_SYSTEM_SUSPEND */
- };
- 
- /* Set up the GIC */
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index ee75258fc3..7727ffed5a 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -432,6 +432,35 @@ int gic_iomem_deny_access(struct domain *d)
-     return gic_hw_ops->iomem_deny_access(d);
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
++    sri_action->name = "FF-A notif";
++    sri_action->handler = notif_irq_handler;
++    sri_action->dev_id = NULL;
++    sri_action->free_on_release = 0;
 +
-+int gic_suspend(void)
-+{
-+    /* Must be called by boot CPU#0 with interrupts disabled */
-+    ASSERT(!local_irq_is_enabled());
-+    ASSERT(!smp_processor_id());
-+
-+    if ( !gic_hw_ops->suspend || !gic_hw_ops->resume )
-+        return -ENOSYS;
-+
-+    return gic_hw_ops->suspend();
++    ret = setup_irq(notif_sri_irq, 0, sri_action);
++    if ( ret )
++        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
++               notif_sri_irq, ret);
+ 
++    return ret;
 +}
 +
-+void gic_resume(void)
++void ffa_notif_init_interrupt(void)
 +{
-+    /*
-+     * Must be called by boot CPU#0 with interrupts disabled after gic_suspend
-+     * has returned successfully.
-+     */
-+    ASSERT(!local_irq_is_enabled());
-+    ASSERT(!smp_processor_id());
-+    ASSERT(gic_hw_ops->resume);
-+
-+    gic_hw_ops->resume();
+     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+     {
+         /*
+@@ -375,14 +393,36 @@ void ffa_notif_init_interrupt(void)
+          * pending, while the SPMC in the secure world will not notice that
+          * the interrupt was lost.
+          */
+-        ret = request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A notif",
+-                          NULL);
+-        if ( ret )
+-            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-                   notif_sri_irq, ret);
++        request_sri_irq();
+     }
+ }
+ 
++static void deinit_ffa_notif_interrupt(void)
++{
++    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
++        release_irq(notif_sri_irq, NULL);
 +}
 +
-+#endif /* CONFIG_SYSTEM_SUSPEND */
++static int cpu_ffa_notif_callback(struct notifier_block *nfb,
++                             unsigned long action,
++                             void *hcpu)
++{
++    switch ( action )
++    {
++    case CPU_DYING:
++        deinit_ffa_notif_interrupt();
++        break;
++    default:
++        break;
++    }
 +
- static int cpu_gic_callback(struct notifier_block *nfb,
-                             unsigned long action,
-                             void *hcpu)
-diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
-index 8e713aa477..8e8f4ac4c5 100644
---- a/xen/arch/arm/include/asm/gic.h
-+++ b/xen/arch/arm/include/asm/gic.h
-@@ -280,6 +280,12 @@ extern int gicv_setup(struct domain *d);
- extern void gic_save_state(struct vcpu *v);
- extern void gic_restore_state(struct vcpu *v);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+/* Suspend/resume */
-+extern int gic_suspend(void);
-+extern void gic_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
++    return NOTIFY_DONE;
++}
 +
- /* SGI (AKA IPIs) */
- enum gic_sgi {
-     GIC_SGI_EVENT_CHECK,
-@@ -423,6 +429,12 @@ struct gic_hw_operations {
-     int (*iomem_deny_access)(struct domain *d);
-     /* Handle LPIs, which require special handling */
-     void (*do_LPI)(unsigned int lpi);
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    /* Save GIC configuration due to the system suspend */
-+    int (*suspend)(void);
-+    /* Restore GIC configuration due to the system resume */
-+    void (*resume)(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
- };
++static struct notifier_block cpu_ffa_notif_nfb = {
++    .notifier_call = cpu_ffa_notif_callback,
++};
++
+ void ffa_notif_init(void)
+ {
+     const struct arm_smccc_1_2_regs arg = {
+@@ -391,7 +431,6 @@ void ffa_notif_init(void)
+     };
+     struct arm_smccc_1_2_regs resp;
+     unsigned int irq;
+-    int ret;
  
- extern const struct gic_hw_operations *gic_hw_ops;
+     /* Only enable fw notification if all ABIs we need are supported */
+     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+@@ -407,13 +446,11 @@ void ffa_notif_init(void)
+         notif_sri_irq = irq;
+         if ( irq >= NR_GIC_SGI )
+             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
+-        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
+-        if ( ret )
+-        {
+-            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
+-                   irq, ret);
++
++        if ( request_sri_irq() )
+             return;
+-        }
++
++        register_cpu_notifier(&cpu_ffa_notif_nfb);
+         fw_notif_enabled = true;
+     }
+ }
 -- 
 2.43.0
 
