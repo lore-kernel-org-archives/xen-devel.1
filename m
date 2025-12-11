@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A7AD43343
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1184555.1507037 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78DE6D43342
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1184546.1506959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlft-0005In-OC; Thu, 11 Dec 2025 18:46:01 +0000
+	id 1vTlfk-0003Lk-4s; Thu, 11 Dec 2025 18:45:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1184555.1507037; Thu, 11 Dec 2025 18:46:01 +0000
+Received: by outflank-mailman (output) from mailman id 1184546.1506959; Thu, 11 Dec 2025 18:45:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlft-0005GH-Ey; Thu, 11 Dec 2025 18:46:01 +0000
-Received: by outflank-mailman (input) for mailman id 1184555;
- Thu, 11 Dec 2025 18:45:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vTlfk-0003LY-0Z; Thu, 11 Dec 2025 18:45:52 +0000
+Received: by outflank-mailman (input) for mailman id 1184546;
+ Thu, 11 Dec 2025 18:45:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QWGN=6R=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vTlfr-0003I8-Of
- for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:59 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a24f9c8a-d6c1-11f0-b15b-2bf370ae4941;
- Thu, 11 Dec 2025 19:45:59 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-640c6577120so745990a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:59 -0800 (PST)
+ id 1vTlfi-0003I9-Hb
+ for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:50 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9bcab944-d6c1-11f0-9cce-f158ae23cfc8;
+ Thu, 11 Dec 2025 19:45:48 +0100 (CET)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b76b5afdf04so81056866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:48 -0800 (PST)
 Received: from EPUAKYIW02F7.. (pool185-5-253-4.as6723.net. [185.5.253.4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.57
+ a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 10:45:57 -0800 (PST)
+ Thu, 11 Dec 2025 10:45:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a24f9c8a-d6c1-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 9bcab944-d6c1-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765478758; x=1766083558; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Wn2YE/N1073l2aBvkRQ/5nSVLZsSRqqVHeilL+wTO7s=;
-        b=U2K1rrkP8HrRAsKbYGydTyb4MHfxJJMX2vqC62fUA0rEjBSDoPe3hP/Lw2ysqUn+Pb
-         vlP/MgWQTsYAivoBfIP+3Ly25bW4QKD0aCoA1hkzFcoWLBcDkFZUaPRrk6Ufajo04is8
-         C2N0MyubzOkCVMIaTe1d/PDGIRm9CGJOu6/vlRRGKRIoJeBwZkh3sz6hLc4q89q825SO
-         h3IOjKDisWq/jutw+glsa8IZ14MB89eEsHOWdeh+BY1K4EKMUP5he1NgUCe0VcCQ80fk
-         apgqG7RtiMb4b8wtKMp8R9SjiG8oHr6lA3dC5LmhPi7xbuHRugRbWdJ17E9BMc5F9nLe
-         RggQ==
+        d=gmail.com; s=20230601; t=1765478747; x=1766083547; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aDNyNuv61rTQkRcvMIs1ekn0SWXLuqr0Rx/eBFoPIHY=;
+        b=fP4WAbMXo5yR4S3go4lsuZhtx2TS0SFOW/N8XF4pnZLovGy6bopu2wD5VXsIhJ98i/
+         vdHU9IA4nmhHNs+eZPw0Tfy59kHT+bL9ncnl0FRU6FpvBmpBMevONv116GErXvg0T+VM
+         c0QdOA968Qk6YQ5bvPuqMSxPH2W1NV2KCrw+XjXCIdyBl8fV5IR/9vsz6CGPzk25HHW/
+         uX8P6WTLa6saaGb7Egt7qaKY30fSo3ohJOoQRk6fxnAZbSzc8sIVOi9J3IE3wDAYEMTL
+         m8K2p82aTIkTVVJX0Ld5v5L3RstJECAZ9qMfhe6IYlyHYGZDRKpkPcW87uFOLvAt8UXv
+         CZTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765478758; x=1766083558;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Wn2YE/N1073l2aBvkRQ/5nSVLZsSRqqVHeilL+wTO7s=;
-        b=UxIW7P/YKIBLnJhn8cSehbj0mdQPpNy3B0O87EDoLMq5ngMYFloL65ZHcefuDP+Nri
-         VFOBAqpjj6IdREzODk8FA4gxG9yVRlmbttv2AZB1ToH47tU97Z2cpiCBcokUP7q+jEWG
-         qgm4oBAczrweZ0W7KkSOX2XJmXcZvcIeOaVcsw9QMDWJOAm6PYS3yDWkSYINsSYZuV2G
-         dseqCcHbzwI8Bm64TuOxp1VHmm84j172X9CT+2KwWXSy8ZO2r8wJCuuyBttEmTNZVUfa
-         OTeVo/Z6kwgpdHsUbvn9MnDdSj4clA+gi2+RMH3a61D8zIPauSlt4dZmf6z4gJUIw81x
-         Juvw==
-X-Gm-Message-State: AOJu0YxJ/86zoUuTO2PEe7N5iI8tqDwFSfJAuOrOJCsZjDuWZXK3GUVc
-	yYFMIsCo4SW9k8HsG75E4nHZrMG6G7ANv9/ahRtS23fAjSXmSFPh4DymvQoS5BW0
-X-Gm-Gg: AY/fxX5n77E9gqy2P20dmhlv55tB6jVKiOW3Qd6ewAkanOvgTy8frZbRaozvctTySaq
-	zNHsEviaQyUvhngx+WhmGKm0ZZAVmjl40xyikW0KQsnOCMvxDSzwH+xploUKo8YgeyUgKKLwvxV
-	R+Din+y/82CVd/75h50eYSjOP3dW8Hp3S3dN6jk1POO8DkjC7+QxCAOcAm+x9yUdLXskYu+952M
-	9TwFlkgWIAkniooDbM1sUxKiQwHYfLQNzBGGPjmhFKEGReU7WUJCn7XWTKcPl9KtIIHCJjXf/He
-	JTTYjPpvTpPGR2wV8brVRC6SMS4+ZbhjOYIK7oVvlref0b+guzIdEx5GaGNpFIMiCCjZnDLkKnR
-	GM2svAZNONoEi80W8f7kycSO2uG2cDqfinKxprSgu1AhlL+Y5+8+dufx7ggr/JryoL+Pjvx2WrQ
-	obrZjFQWQ+pyeJK9nY5DoGCEFnp4iXynvoXSC6zJ1l
-X-Google-Smtp-Source: AGHT+IG/6t+gwx01s3fl4EBu4KpU0cbUis+6SFVAgfqdG0pLbcu3Q3IeGyxpzSPn7jghoibq6b4loQ==
-X-Received: by 2002:a17:907:7f04:b0:b7a:2ba7:18be with SMTP id a640c23a62f3a-b7ce84cc764mr748318866b.62.1765478758172;
-        Thu, 11 Dec 2025 10:45:58 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765478747; x=1766083547;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aDNyNuv61rTQkRcvMIs1ekn0SWXLuqr0Rx/eBFoPIHY=;
+        b=J9fAWJk7Ai/RtZGSqDzcA9NHDTGRzznJBvGaX5N6nhlONnxE/e/Jtc/G5uWsmje1+t
+         UrFm+FPDWikq8IPLacbIZJv6xHMCECIMgERMfO4fIMfx8LVAU5EzvktI0B9vbZ3xYg4k
+         ksbR79xVfBLEqC+AAYZ/JICNj9KgQogD6rGzBy+Q0R+i3Zs0FyE91Td9+XSqKJQn2DE0
+         lVMouXf753CeCAzdltQ1Y/8j6JYz9f3wU+qMNcWdQ692NB7A69l9/EQPW5hTo/GUvooQ
+         jiEqjzW2ho4DGYvEIuE59vg526ObP2rf1sci6nf3vJWzHEcrhjv4B/H3poyIGKjiCxmX
+         dz3A==
+X-Gm-Message-State: AOJu0YyZ97peVn4Q9ZF0TShxdmwp+HvQTsX+snwl43Rzv+T8VuOjQ2qb
+	f269Xj46J+N8kNHG7NXGwN25XpTMszQwLOIOytE7af/3BlsZINRwRCze9qNOU28v
+X-Gm-Gg: AY/fxX4hfC+KYNI4IR+pVzrYdfvE6JAnsfdC7u78jRVbJ+w9nlwa4uIay7Whokz07Fr
+	/0wh2aekHKg7FrhWsh1BsGvERMDPXaKZQJuexrdJ9hJJBZkk5hJ8jWjXAPZEfaa21BzeD+xeyG9
+	AJsH4mX4QScnVV4R+GDmPvdCDn20QX9NdXYhlVDvHXliRtK/DJSQpRmMjE4CyvVQSjqjFkGLxlQ
+	8BjIjpDu/AL0GFX7GrAhxQcNQ03Qw/vKOZI03ENH/J2KS/CBmpKAbUx1KQQHRpfRQu6yCdtuKqQ
+	UI4c5aU/r/KjBCNZpIkt+eX7dM82iEo7ZGQpGv4k22X1WFe/2N/FfyJ1v38V5KImyFB4hKL6qLg
+	ysdv0slci+Gb4dIRxohpfZZVIhG7lroMXEiQVUtgwHcOLL1dXRj1raB1xuoP2dZXgLyzsDGvbN/
+	L+QbkTrf7w5nZtMSJ8hPx9oFydohhKxZCQ4mCLs29/
+X-Google-Smtp-Source: AGHT+IFm4NeTfQ9xmDk7GfTvvFZ9mCEEJhtzChUQNcs8E9MYwMmZt5mL0u7P9Pmlmjh5XlxyPuE1Gw==
+X-Received: by 2002:a17:907:3cca:b0:b73:853d:540e with SMTP id a640c23a62f3a-b7ce841d73emr743131966b.30.1765478746840;
+        Thu, 11 Dec 2025 10:45:46 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -93,74 +92,116 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Subject: [PATCH v7 09/12] xen/arm: Resume memory management on Xen resume
-Date: Thu, 11 Dec 2025 20:43:33 +0200
-Message-ID: <b6c823f9c6a678018ab8790c419b8462838115d5.1765472890.git.mykola_kvach@epam.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v7 00/12] Add initial Xen Suspend-to-RAM support on ARM64 
+Date: Thu, 11 Dec 2025 20:43:24 +0200
+Message-ID: <cover.1765472890.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1765472890.git.mykola_kvach@epam.com>
-References: <cover.1765472890.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-The MMU must be enabled during the resume path before restoring context,
-as virtual addresses are used to access the saved context data.
+This is part 2 of version 7 of the ARM Xen system suspend/resume patch
+series, based on earlier work by Mirela Simonovic and Mykyta Poturai.
 
-This patch adds MMU setup during resume by reusing the existing
-enable_secondary_cpu_mm function, which enables data cache and the MMU.
-Before the MMU is enabled, the content of TTBR0_EL2 is changed to point
-to init_ttbr (page tables used at runtime).
+The first part is here:
+https://patchew.org/Xen/cover.1764755558.git.xakep.amatop@gmail.com/
 
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+NOTE: Most of the code is guarded by CONFIG_SYSTEM_SUSPEND, which can
+currently only be selected when UNSUPPORTED is set, and thus the
+functionality is neither enabled by default nor even built.
+
+This version is ported to Xen master and includes extensive improvements
+based on reviewer feedback. The patch series restructures code to improve
+robustness, maintainability, and implements system Suspend-to-RAM support
+on ARM64 hardware/control domains.
+
+Key updates in this series:
+ - Introduced architecture-specific suspend/resume infrastructure
+ - Integrated GICv2/GICv3 suspend and resume, including memory-backed context
+   save/restore with error handling
+ - Added time and IRQ suspend/resume hooks, ensuring correct timer/interrupt
+   state across suspend cycles
+ - Implemented proper PSCI SYSTEM_SUSPEND invocation and version checks
+ - Improved state management and recovery in error cases during suspend/resume
+ - Added support for IPMMU-VMSA/SMMUv3 context save/restore
+ - Added support for GICv3 eSPI registers context save/restore
+ - Added support for ITS registers context save/restore
 ---
+
+TODOs:
+ - Enable "xl suspend" support on ARM
+ - Properly disable Xen timer watchdog from relevant services (only init.d left)
+ - Add suspend/resume CI test for ARM (QEMU if feasible)
+---
+
+Detailed changelogs can be found in each patch.
+
 Changes in v7:
-- no functional changes, just moved commit
----
- xen/arch/arm/arm64/head.S | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+- Timer helper renamed/clarified; virtual/hyper/phys handling documented.
+- GICv2 uses one context block; restore saved CTLR; panic on alloc failure.
+- GICv3/eSPI/ITS always suspend/resume; restore LPI/eSPI; rdist timeout.
+- IPMMU suspend context allocated before PCI setup.
+- System suspend: control domain drives host suspend.
+- Dropped v6 IRQ descriptor restore patches; use setup_irq and re-register
+  local IRQs on resume instead.
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 72c7b24498..596e960152 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -561,6 +561,30 @@ END(efi_xen_start)
- 
- #endif /* CONFIG_ARM_EFI */
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+FUNC(hyp_resume)
-+        /* Initialize the UART if earlyprintk has been enabled. */
-+#ifdef CONFIG_EARLY_PRINTK
-+        bl    init_uart
-+#endif
-+        PRINT_ID("- Xen resuming -\r\n")
-+
-+        bl    check_cpu_mode
-+        bl    cpu_init
-+
-+        ldr   x0, =start
-+        adr   x20, start             /* x20 := paddr (start) */
-+        sub   x20, x20, x0           /* x20 := phys-offset */
-+        ldr   lr, =mmu_resumed
-+        b     enable_secondary_cpu_mm
-+
-+mmu_resumed:
-+        b .
-+END(hyp_resume)
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- /*
-  * Local variables:
-  * mode: ASM
+For earlier changelogs, please refer to the previous cover letters.
+
+Mirela Simonovic (6):
+  xen/arm: Add suspend and resume timer helpers
+  xen/arm: gic-v2: Implement GIC suspend/resume functions
+  xen/arm: Resume memory management on Xen resume
+  xen/arm: Save/restore context on suspend/resume
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
+  xen/arm: Add support for system suspend triggered by control domain
+
+Mykola Kvach (5):
+  xen/arm: gic-v3: Implement GICv3 suspend/resume functions
+  xen/arm: gic-v3: add ITS suspend/resume support
+  xen/arm: tee: keep init_tee_secondary() for hotplug and resume
+  xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
+  arm/smmu-v3: add suspend/resume handlers
+
+Oleksandr Tyshchenko (1):
+  iommu/ipmmu-vmsa: Implement suspend/resume callbacks
+
+ xen/arch/arm/Kconfig                     |   1 +
+ xen/arch/arm/Makefile                    |   1 +
+ xen/arch/arm/arm64/head.S                | 112 ++++++++
+ xen/arch/arm/gic-v2.c                    | 126 +++++++++
+ xen/arch/arm/gic-v3-its.c                |  91 +++++++
+ xen/arch/arm/gic-v3-lpi.c                |   3 +
+ xen/arch/arm/gic-v3.c                    | 332 ++++++++++++++++++++++-
+ xen/arch/arm/gic.c                       |  29 ++
+ xen/arch/arm/include/asm/gic.h           |  12 +
+ xen/arch/arm/include/asm/gic_v3_defs.h   |   1 +
+ xen/arch/arm/include/asm/gic_v3_its.h    |  23 ++
+ xen/arch/arm/include/asm/mm.h            |   2 +
+ xen/arch/arm/include/asm/psci.h          |   1 +
+ xen/arch/arm/include/asm/suspend.h       |  31 +++
+ xen/arch/arm/include/asm/time.h          |   5 +
+ xen/arch/arm/mmu/smpboot.c               |   2 +-
+ xen/arch/arm/psci.c                      |  23 +-
+ xen/arch/arm/suspend.c                   | 153 +++++++++++
+ xen/arch/arm/tee/ffa_notif.c             |  63 ++++-
+ xen/arch/arm/tee/tee.c                   |   2 +-
+ xen/arch/arm/time.c                      |  44 ++-
+ xen/arch/arm/vpsci.c                     |  12 +-
+ xen/common/Kconfig                       |   5 +
+ xen/common/domain.c                      |   7 +-
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 305 ++++++++++++++++++++-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 170 +++++++++---
+ xen/drivers/passthrough/arm/smmu.c       |  10 +
+ xen/include/xen/list.h                   |  14 +
+ 28 files changed, 1507 insertions(+), 73 deletions(-)
+ create mode 100644 xen/arch/arm/suspend.c
+
 -- 
 2.43.0
-
 
