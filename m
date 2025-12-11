@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7C8D43346
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1184556.1507051 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14179D43344
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Dec 2025 18:46:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1184552.1507024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfv-0005ic-At; Thu, 11 Dec 2025 18:46:03 +0000
+	id 1vTlfs-00052j-EQ; Thu, 11 Dec 2025 18:46:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1184556.1507051; Thu, 11 Dec 2025 18:46:03 +0000
+Received: by outflank-mailman (output) from mailman id 1184552.1507024; Thu, 11 Dec 2025 18:46:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTlfv-0005gO-2l; Thu, 11 Dec 2025 18:46:03 +0000
-Received: by outflank-mailman (input) for mailman id 1184556;
- Thu, 11 Dec 2025 18:46:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vTlfs-00052Y-9j; Thu, 11 Dec 2025 18:46:00 +0000
+Received: by outflank-mailman (input) for mailman id 1184552;
+ Thu, 11 Dec 2025 18:45:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QWGN=6R=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vTlfu-0003I9-Eg
- for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:46:02 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a334c430-d6c1-11f0-9cce-f158ae23cfc8;
- Thu, 11 Dec 2025 19:46:00 +0100 (CET)
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-64198771a9bso828802a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:46:00 -0800 (PST)
+ id 1vTlfq-0003I8-OZ
+ for xen-devel@lists.xenproject.org; Thu, 11 Dec 2025 18:45:58 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a1a96d36-d6c1-11f0-b15b-2bf370ae4941;
+ Thu, 11 Dec 2025 19:45:57 +0100 (CET)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b734fcbf1e3so90814766b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Dec 2025 10:45:58 -0800 (PST)
 Received: from EPUAKYIW02F7.. (pool185-5-253-4.as6723.net. [185.5.253.4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.58
+ a640c23a62f3a-b7cfa5d0b0dsm345870466b.67.2025.12.11.10.45.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 10:45:58 -0800 (PST)
+ Thu, 11 Dec 2025 10:45:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,284 +47,342 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a334c430-d6c1-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: a1a96d36-d6c1-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765478760; x=1766083560; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1765478757; x=1766083557; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OaZfuWRbnwPcnW+s48rbWKO1grkPvQJtBoI9rAf5Hcg=;
-        b=C52yXMweSmOi7jHTFVsaG73CghSzs8FSjnivaGCnP3l+7OSj5weXg0khpS8ukU2zfZ
-         qW632MP+HhJ2r6lqcq4E57g3TwtjNYVdzcg1lj8PK2o/wFH0hgVU7mh/WXpaew93YKiY
-         Ie2ZbYcWO43g62MlkQuyHotyzvs0dBk0kcgG87d8iz9WIZFS3PCnnsohOtFk0ffjPTHe
-         F5gh/7xTPntknn5A/9J3u4fQ2sL5GxZKPW53Nbfog7IlH24QyJcrf+rcF3nwo3aXAd3g
-         vO3WSzMJe3QduB51qR/ceq6SWY/bSmUO790eqH/+g3TaeVtQyrSnn6j7YJvpGbSgpY4f
-         Xg9g==
+        bh=YyX+DKhss3Tir9n7VoBzOtKgYwwNvTr5WMzP0cAUYTo=;
+        b=SeqabM84oMlxwqvC9qGw216lkj/k6KV2LnAvS0TPSvHsyRLEN/t2xMUrxPRl8qqYnK
+         o1hzMP15Q2yDfptcZKqlFrqVPiSNnyShUcryIaKEmqEsQZTImE3HgfQWMh4FbIuADwlK
+         VynWznj/G9dqfOWi9DTiAVM76ItI21u1+dDa64zmEd/mGIuMg+X/HPppdNJWs8yaQctx
+         OAoy69Hq+kEp87Ub/0kqNQQKm3TBk5sm3yNm0QFaisBE2sleRBSbNhmEySnP6fgKQaxB
+         hq4CtStARO8ACsbW27XHsbkku3zm0O/71jywK6WT0hWkUBuWoEpLusFnt7yRlktkVIZ2
+         1lGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765478760; x=1766083560;
+        d=1e100.net; s=20230601; t=1765478757; x=1766083557;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=OaZfuWRbnwPcnW+s48rbWKO1grkPvQJtBoI9rAf5Hcg=;
-        b=d4XnlUPbEyPvZY9JUxUt+hJXd6pa+MR5zEOaoaRx9ugYn+M3vbuD3pO8wRUMMm4E59
-         EXAEXaT/sG9EyzdAdD6MNMaKp1+HDcqrTAP2WMpXkyqpIP8q3kMFKnVYxBb9zQhK4FVA
-         z5oI+6nioDiYXW+0JbTelbNpMgmadh3ok57JcFHB9Huj1MnfdKShqKNTZ3suNXggP4eG
-         qjJb3d0ISK+lQbT1MJsIfAfBzXQ4dZ77L4IYfN7LPu00fgWRaadA9upFyeZ4VVFCrghy
-         bOQl07/5/rhEbDWo70J57YI057vcT3SFSRCZlbXqXg7tTS3vX2dLo1CC3eQPqHLpgDE3
-         X6pg==
-X-Gm-Message-State: AOJu0YyoMWHl512sC4tv3c54pi+rSm7W6LtpdFA+/0f6lLXsHUGW+i5c
-	+fjiYw+hSq2q8TvCOqrXN01jwYBl7/dV+sOHGOyBg9nDOKMBv1LrAHRJpCTaQZJu
-X-Gm-Gg: AY/fxX5VyGaLQ3ufu/gDihPZIqZJaYr4pB2sA7XR1EPKeYu0GYKMe7j+R665L4JDaVo
-	IZUCjo9d4T/ezqJjwCegPgfXvxPpqk8v7YN/+5aHqPpN7IL3tv4VLwWcOUwGkHa14lQ4np9nJ0s
-	qsmx/r9L/AziSAIp7KagoUW+/havVOUG5uZSkhQ/bGWe3Ac9wif0fvJEGGKjP74qWpvMJaZzszR
-	K5SCC5R0iglHT9+QQ7zWK8xq9qDjyaunWr4N1ekUtJy8rkyC3FQeyh3il0xDucngCkzVRb8skhd
-	vqkhK2XWT+USQCToG54R+yK41qD5a1PKBWYUplkY6LawoiGpdo+XNzpsCXVjs9T+6ciecYVYqkg
-	FMNMTiLIxOgwiMzRBDEfh9l5vnIxGykyq80Yip0WazmpQA8M2vG4SpNOGTEHAfWGB95K9nHO0Dw
-	qGc+m3KveXc0zRqPN6/lzwa8OPK2dCr094lqRsg+3h
-X-Google-Smtp-Source: AGHT+IFhllThVrkjPTfuO84mpaywMKGq1Skw0Lhon1pOtwVx4+wXl4IJijzRncp8fHZyY+VLi8RDGQ==
-X-Received: by 2002:a17:907:940e:b0:b71:29f7:47dd with SMTP id a640c23a62f3a-b7ce8476094mr829779766b.46.1765478759399;
-        Thu, 11 Dec 2025 10:45:59 -0800 (PST)
+        bh=YyX+DKhss3Tir9n7VoBzOtKgYwwNvTr5WMzP0cAUYTo=;
+        b=bb3ayGURspc+VaQNkBWEp5NQbkBdElX37swNx56XOe41UMlVoBWwl3KmagthXQtqRc
+         zxvVewya7kspU/ly2blIoHACz61CHQqkxv/SmZH/bk/Yg5PNEc/uHMyDB5g5bixUCN3+
+         4ODA0KqkQ8sPJdlSAryzNNVGvjH59D/jAYTvbGGUbryrBY3oOR4PhOJexpY3I6XeKQkR
+         VFHT5qKCZOPwcgQzlHz0LrRuLBIMF9G44kojDrV3eIIqJAj+I9pK1GoWl27601E3OdN6
+         T15FepqEPxp0pV0KBTYFnUS5YC9yg2CyXNJYQVPufM2FBvr9rhFT30wITEpFyrqDo3iZ
+         9wDQ==
+X-Gm-Message-State: AOJu0Yw9FNZwarjCXykUs1z4rZla+CjgaSezchPNPpP5xxM1Ocw70/uj
+	pWtNBMjZnSjtTaSbGAPKTkqsSij+Y7FJriaX8vhIqfZMqJeaoPkGRxMCp0cmF5P4
+X-Gm-Gg: AY/fxX5S3XQ9XxJ6wT/ztpgsEdWea2B38IJ/7aUdQkpYicv3disAl2aZLuHOna4e4by
+	Fl5sWNHDLPVJnSlfp7WeMH1unMrE2NX1DmNnwac34criY3HeAQ/l6nU7yikr6qIXKen5rXeiW+b
+	4pY2thGg7BUTZufzav042/m+OUn+7H1JgwafvbCaJXjDhEMnsKZUnvwJbdvGgCcSZyH+7lEA8Kj
+	xLAQBvPVaSMUFBFJc8GYnAG5slwyZm7ULz/UOZfqVyPYf95rCpJMJgOJcOroM0KGjkzqZZeJpsO
+	T1B1+82rgCpsTyIt5f5QzIfFGNcnIKu0pV+hrFsUSn2HFXVucCbqgjxax9psyTH4ES4uSe1Kj6o
+	RR03HnDoTnUGeN/1xd5hUZ24OE7yhGE1q9+EbEwQIBkrJNCJKwco+XmbWHZvpoSifXfOgcM2H55
+	16QuQVox02Z1uAQ31kBDKEVy0jXBqgk5679Prc1DVE
+X-Google-Smtp-Source: AGHT+IHqZwnZeJZ9SiPy9sMGvjH5yQTECZVUy2zQSTwn/fCCIricEV1JkHIoYJqUXa8UozBVjbaDgw==
+X-Received: by 2002:a17:907:6ea7:b0:b73:5c12:3f8a with SMTP id a640c23a62f3a-b7ce826e8b7mr710504466b.18.1765478756907;
+        Thu, 11 Dec 2025 10:45:56 -0800 (PST)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Mykola Kvach <xakep.amatop@gmail.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Rahul Singh <rahul.singh@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Saeed Nowshadi <saeed.nowshadi@xilinx.com>,
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Subject: [PATCH v7 10/12] xen/arm: Save/restore context on suspend/resume
-Date: Thu, 11 Dec 2025 20:43:34 +0200
-Message-ID: <0dd3c42e1801674e19d2b3b3ca834b7bab62ca3f.1765472890.git.mykola_kvach@epam.com>
+	Pranjal Shrivastava <praan@google.com>
+Subject: [PATCH v7 08/12] arm/smmu-v3: add suspend/resume handlers
+Date: Thu, 11 Dec 2025 20:43:32 +0200
+Message-ID: <58c1873d355f5ea9b5182349895905d25cb57256.1765472890.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1765472890.git.mykola_kvach@epam.com>
 References: <cover.1765472890.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-The context of CPU general purpose and system control registers must be
-saved on suspend and restored on resume. This is implemented in
-prepare_resume_ctx and before the return from the hyp_resume function.
-The prepare_resume_ctx must be invoked just before the PSCI system suspend
-call is issued to the ATF. The prepare_resume_ctx must return a non-zero
-value so that the calling 'if' statement evaluates to true, causing the
-system suspend to be invoked. Upon resume, the context saved on suspend
-will be restored, including the link register. Therefore, after
-restoring the context, the control flow will return to the address
-pointed to by the saved link register, which is the place from which
-prepare_resume_ctx was called. To ensure that the calling 'if' statement
-does not again evaluate to true and initiate system suspend, hyp_resume
-must return a zero value after restoring the context.
+Before we suspend SMMU, we want to ensure that all commands (especially
+ATC_INV) have been flushed by the CMDQ, i.e. the CMDQs are empty.
 
-Note that the order of saving register context into cpu_context structure
-must match the order of restoring.
+The suspend callback configures the SMMU to abort new transactions,
+disables the main translation unit and then drains the command queue
+to ensure completion of any in-flight commands.
 
-Support for ARM32 is not implemented. Instead, compilation fails with a
-build-time error if suspend is enabled for ARM32.
+The resume callback performs a full device reset via 'arm_smmu_device_reset'
+to bring the SMMU back to an operational state.
 
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+Link: https://lore.kernel.org/linux-iommu/20251117191433.3360130-1-praan@google.com	/
+Based-on-patch-by: Pranjal Shrivastava <praan@google.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in v7:
-- no changes
----
- xen/arch/arm/Makefile              |  1 +
- xen/arch/arm/arm64/head.S          | 90 +++++++++++++++++++++++++++++-
- xen/arch/arm/include/asm/suspend.h | 26 +++++++++
- xen/arch/arm/suspend.c             | 14 +++++
- 4 files changed, 130 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/arm/suspend.c
+ xen/drivers/passthrough/arm/smmu-v3.c | 170 ++++++++++++++++++++------
+ 1 file changed, 134 insertions(+), 36 deletions(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 7494a0f926..4a549a1ac0 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -51,6 +51,7 @@ obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
- obj-y += smpboot.o
-+obj-$(CONFIG_SYSTEM_SUSPEND) += suspend.o
- obj-$(CONFIG_SYSCTL) += sysctl.o
- obj-y += time.o
- obj-y += traps.o
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 596e960152..c6594c0bdd 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -562,6 +562,52 @@ END(efi_xen_start)
- #endif /* CONFIG_ARM_EFI */
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index bf153227db..10c4c5dee0 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -1814,8 +1814,7 @@ static int arm_smmu_write_reg_sync(struct arm_smmu_device *smmu, u32 val,
+ }
  
- #ifdef CONFIG_SYSTEM_SUSPEND
-+/*
-+ * int prepare_resume_ctx(struct cpu_context *ptr)
-+ *
-+ * x0 - pointer to the storage where callee's context will be saved
-+ *
-+ * CPU context saved here will be restored on resume in hyp_resume function.
-+ * prepare_resume_ctx shall return a non-zero value. Upon restoring context
-+ * hyp_resume shall return value zero instead. From C code that invokes
-+ * prepare_resume_ctx, the return value is interpreted to determine whether
-+ * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
-+ */
-+FUNC(prepare_resume_ctx)
-+        /* Store callee-saved registers */
-+        stp     x19, x20, [x0], #16
-+        stp     x21, x22, [x0], #16
-+        stp     x23, x24, [x0], #16
-+        stp     x25, x26, [x0], #16
-+        stp     x27, x28, [x0], #16
-+        stp     x29, lr, [x0], #16
-+
-+        /* Store stack-pointer */
-+        mov     x2, sp
-+        str     x2, [x0], #8
-+
-+        /* Store system control registers */
-+        mrs     x2, VBAR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, VTCR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, VTTBR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, TPIDR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, MDCR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, HSTR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, CPTR_EL2
-+        str     x2, [x0], #8
-+        mrs     x2, HCR_EL2
-+        str     x2, [x0], #8
-+
-+        /* prepare_resume_ctx must return a non-zero value */
-+        mov     x0, #1
-+        ret
-+END(prepare_resume_ctx)
+ /* GBPA is "special" */
+-static int __init arm_smmu_update_gbpa(struct arm_smmu_device *smmu,
+-                                       u32 set, u32 clr)
++static int arm_smmu_update_gbpa(struct arm_smmu_device *smmu, u32 set, u32 clr)
+ {
+ 	int ret;
+ 	u32 reg, __iomem *gbpa = smmu->base + ARM_SMMU_GBPA;
+@@ -1995,10 +1994,29 @@ err_free_evtq_irq:
+ 	return ret;
+ }
  
- FUNC(hyp_resume)
-         /* Initialize the UART if earlyprintk has been enabled. */
-@@ -580,7 +626,49 @@ FUNC(hyp_resume)
-         b     enable_secondary_cpu_mm
- 
- mmu_resumed:
--        b .
-+        /* Now we can access the cpu_context, so restore the context here */
-+        ldr     x0, =cpu_context
++static int arm_smmu_enable_irqs(struct arm_smmu_device *smmu)
++{
++	int ret;
++	u32 irqen_flags = IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
 +
-+        /* Restore callee-saved registers */
-+        ldp     x19, x20, [x0], #16
-+        ldp     x21, x22, [x0], #16
-+        ldp     x23, x24, [x0], #16
-+        ldp     x25, x26, [x0], #16
-+        ldp     x27, x28, [x0], #16
-+        ldp     x29, lr, [x0], #16
++	if ( smmu->features & ARM_SMMU_FEAT_PRI )
++		irqen_flags |= IRQ_CTRL_PRIQ_IRQEN;
 +
-+        /* Restore stack pointer */
-+        ldr     x2, [x0], #8
-+        mov     sp, x2
++	/* Enable interrupt generation on the SMMU */
++	ret = arm_smmu_write_reg_sync(smmu, irqen_flags,
++				      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
++	if ( ret )
++	{
++		dev_warn(smmu->dev, "failed to enable irqs\n");
++		return ret;
++	}
 +
-+        /* Restore system control registers */
-+        ldr     x2, [x0], #8
-+        msr     VBAR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     VTCR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     VTTBR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     TPIDR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     MDCR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     HSTR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     CPTR_EL2, x2
-+        ldr     x2, [x0], #8
-+        msr     HCR_EL2, x2
-+        isb
++	return 0;
++}
 +
-+        /*
-+         * Since context is restored return from this function will appear
-+         * as return from prepare_resume_ctx. To distinguish a return from
-+         * prepare_resume_ctx which is called upon finalizing the suspend,
-+         * as opposed to return from this function which executes on resume,
-+         * we need to return zero value here.
-+         */
-+        mov x0, #0
-+        ret
- END(hyp_resume)
+ static int __init arm_smmu_setup_irqs(struct arm_smmu_device *smmu)
+ {
+ 	int ret, irq;
+-	u32 irqen_flags = IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
  
- #endif /* CONFIG_SYSTEM_SUSPEND */
-diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-index 313d03ea59..d3a88ea979 100644
---- a/xen/arch/arm/include/asm/suspend.h
-+++ b/xen/arch/arm/include/asm/suspend.h
-@@ -3,6 +3,8 @@
- #ifndef ARM_SUSPEND_H
- #define ARM_SUSPEND_H
+ 	/* Disable IRQs first */
+ 	ret = arm_smmu_write_reg_sync(smmu, 0, ARM_SMMU_IRQ_CTRL,
+@@ -2028,22 +2046,7 @@ static int __init arm_smmu_setup_irqs(struct arm_smmu_device *smmu)
+ 		}
+ 	}
  
-+#include <asm/types.h>
+-	if (smmu->features & ARM_SMMU_FEAT_PRI)
+-		irqen_flags |= IRQ_CTRL_PRIQ_IRQEN;
+-
+-	/* Enable interrupt generation on the SMMU */
+-	ret = arm_smmu_write_reg_sync(smmu, irqen_flags,
+-				      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
+-	if (ret) {
+-		dev_warn(smmu->dev, "failed to enable irqs\n");
+-		goto err_free_irqs;
+-	}
+-
+ 	return 0;
+-
+-err_free_irqs:
+-	arm_smmu_free_irqs(smmu);
+-	return ret;
+ }
+ 
+ static int arm_smmu_device_disable(struct arm_smmu_device *smmu)
+@@ -2057,7 +2060,7 @@ static int arm_smmu_device_disable(struct arm_smmu_device *smmu)
+ 	return ret;
+ }
+ 
+-static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
++static int arm_smmu_device_reset(struct arm_smmu_device *smmu)
+ {
+ 	int ret;
+ 	u32 reg, enables;
+@@ -2163,17 +2166,9 @@ static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
+ 		}
+ 	}
+ 
+-	ret = arm_smmu_setup_irqs(smmu);
+-	if (ret) {
+-		dev_err(smmu->dev, "failed to setup irqs\n");
++	ret = arm_smmu_enable_irqs(smmu);
++	if ( ret )
+ 		return ret;
+-	}
+-
+-	/* Initialize tasklets for threaded IRQs*/
+-	tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
+-	tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
+-	tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet,
+-				 smmu);
+ 
+ 	/* Enable the SMMU interface, or ensure bypass */
+ 	if (disable_bypass) {
+@@ -2181,20 +2176,16 @@ static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
+ 	} else {
+ 		ret = arm_smmu_update_gbpa(smmu, 0, GBPA_ABORT);
+ 		if (ret)
+-			goto err_free_irqs;
++			return ret;
+ 	}
+ 	ret = arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
+ 				      ARM_SMMU_CR0ACK);
+ 	if (ret) {
+ 		dev_err(smmu->dev, "failed to enable SMMU interface\n");
+-		goto err_free_irqs;
++		return ret;
+ 	}
+ 
+ 	return 0;
+-
+-err_free_irqs:
+-	arm_smmu_free_irqs(smmu);
+-	return ret;
+ }
+ 
+ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
+@@ -2558,10 +2549,23 @@ static int __init arm_smmu_device_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		goto out_free;
+ 
++	ret = arm_smmu_setup_irqs(smmu);
++	if ( ret )
++	{
++		dev_err(smmu->dev, "failed to setup irqs\n");
++		goto out_free;
++	}
 +
- struct domain;
- struct vcpu;
++	/* Initialize tasklets for threaded IRQs*/
++	tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
++	tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
++	tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet,
++				smmu);
++
+ 	/* Reset the device */
+ 	ret = arm_smmu_device_reset(smmu);
+ 	if (ret)
+-		goto out_free;
++		goto out_free_irqs;
  
-@@ -14,6 +16,30 @@ struct resume_info {
+ 	/*
+ 	 * Keep a list of all probed devices. This will be used to query
+@@ -2575,6 +2579,8 @@ static int __init arm_smmu_device_probe(struct platform_device *pdev)
  
- int arch_domain_resume(struct domain *d);
+ 	return 0;
+ 
++out_free_irqs:
++	arm_smmu_free_irqs(smmu);
+ 
+ out_free:
+ 	arm_smmu_free_structures(smmu);
+@@ -2855,6 +2861,94 @@ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
+ 	xfree(xen_domain);
+ }
  
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+#ifdef CONFIG_ARM_64
-+struct cpu_context {
-+    register_t callee_regs[12];
-+    register_t sp;
-+    register_t vbar_el2;
-+    register_t vtcr_el2;
-+    register_t vttbr_el2;
-+    register_t tpidr_el2;
-+    register_t mdcr_el2;
-+    register_t hstr_el2;
-+    register_t cptr_el2;
-+    register_t hcr_el2;
-+} __aligned(16);
-+#else
-+#error "Define cpu_context structure for arm32"
++
++static int arm_smmu_suspend(void)
++{
++	struct arm_smmu_device *smmu;
++	int ret = 0;
++
++	list_for_each_entry(smmu, &arm_smmu_devices, devices)
++	{
++		/* Abort all transactions before disable to avoid spurious bypass */
++		ret = arm_smmu_update_gbpa(smmu, GBPA_ABORT, 0);
++		if ( ret )
++			goto fail;
++
++		/* Disable the SMMU via CR0.EN and all queues except CMDQ */
++		ret = arm_smmu_write_reg_sync(smmu, CR0_CMDQEN, ARM_SMMU_CR0,
++					ARM_SMMU_CR0ACK);
++		if ( ret )
++		{
++			dev_err(smmu->dev, "Timed-out while disabling smmu\n");
++			goto fail;
++		}
++
++		/*
++		 * At this point the SMMU is completely disabled and won't access
++		 * any translation/config structures, even speculative accesses
++		 * aren't performed as per the IHI0070 spec (section 6.3.9.6).
++		 */
++
++		/* Wait for the CMDQs to be drained to flush any pending commands */
++		ret = queue_poll_cons(&smmu->cmdq.q, true, 0);
++		if ( ret )
++		{
++			dev_err(smmu->dev, "Draining queues timed-out\n");
++			goto fail;
++		}
++
++		/* Disable everything */
++		ret = arm_smmu_device_disable(smmu);
++		if ( ret )
++			goto fail;
++
++		dev_dbg(smmu->dev, "Suspended smmu\n");
++	}
++
++	return 0;
++
++ fail:
++	{
++		int rc;
++
++		/* Reset the device that failed as well as any already-suspended ones. */
++		rc = arm_smmu_device_reset(smmu);
++		if ( rc )
++			dev_err(smmu->dev, "Failed to reset during resume operation: %d\n", rc);
++
++		list_for_each_entry_continue_reverse(smmu, &arm_smmu_devices, devices)
++		{
++			rc = arm_smmu_device_reset(smmu);
++			if ( rc )
++				dev_err(smmu->dev, "Failed to reset during resume operation: %d\n", rc);
++		}
++	}
++
++	return ret;
++}
++
++static void arm_smmu_resume(void)
++{
++	int ret;
++	struct arm_smmu_device *smmu;
++
++	list_for_each_entry(smmu, &arm_smmu_devices, devices)
++	{
++		dev_dbg(smmu->dev, "Resuming device\n");
++
++		/*
++		* The reset will re-initialize all the base addresses, queues,
++		* prod and cons maintained within struct arm_smmu_device as well as
++		* re-enable the interrupts.
++		*/
++		ret = arm_smmu_device_reset(smmu);
++		if ( ret )
++			dev_err(smmu->dev, "Failed to reset during resume operation: %d\n", ret);
++	}
++}
 +#endif
 +
-+extern struct cpu_context cpu_context;
-+
-+int prepare_resume_ctx(struct cpu_context *ptr);
-+void hyp_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- #endif /* ARM_SUSPEND_H */
+ static const struct iommu_ops arm_smmu_iommu_ops = {
+ 	.page_sizes		= PAGE_SIZE_4K,
+ 	.init			= arm_smmu_iommu_xen_domain_init,
+@@ -2867,6 +2961,10 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
+ 	.unmap_page		= arm_iommu_unmap_page,
+ 	.dt_xlate		= arm_smmu_dt_xlate,
+ 	.add_device		= arm_smmu_add_device,
++#ifdef CONFIG_SYSTEM_SUSPEND
++	.suspend		= arm_smmu_suspend,
++	.resume			= arm_smmu_resume,
++#endif
+ };
  
- /*
-diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-new file mode 100644
-index 0000000000..e38566b0b7
---- /dev/null
-+++ b/xen/arch/arm/suspend.c
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <asm/suspend.h>
-+
-+struct cpu_context cpu_context = {};
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ static __init int arm_smmu_dt_init(struct dt_device_node *dev,
 -- 
 2.43.0
 
