@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE86D4336E
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 04:07:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1184936.1507296 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF13AD4336C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 04:07:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1184952.1507312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTuR7-00042R-23; Fri, 12 Dec 2025 04:07:21 +0000
+	id 1vTuRA-0004nO-SM; Fri, 12 Dec 2025 04:07:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1184936.1507296; Fri, 12 Dec 2025 04:07:21 +0000
+Received: by outflank-mailman (output) from mailman id 1184952.1507312; Fri, 12 Dec 2025 04:07:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTuR6-00040M-Tf; Fri, 12 Dec 2025 04:07:20 +0000
-Received: by outflank-mailman (input) for mailman id 1184936;
- Fri, 12 Dec 2025 04:07:18 +0000
+	id 1vTuRA-0004n7-M5; Fri, 12 Dec 2025 04:07:24 +0000
+Received: by outflank-mailman (input) for mailman id 1184952;
+ Fri, 12 Dec 2025 04:07:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oKBw=6S=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1vTuR3-0007Dl-Hn
- for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 04:07:17 +0000
+ id 1vTuQv-0007Dl-8y
+ for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 04:07:09 +0000
 Received: from SN4PR0501CU005.outbound.protection.outlook.com
  (mail-southcentralusazlp170110003.outbound.protection.outlook.com
  [2a01:111:f403:c10d::3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0a16e5a8-d710-11f0-b15b-2bf370ae4941;
- Fri, 12 Dec 2025 05:07:15 +0100 (CET)
-Received: from MN2PR18CA0028.namprd18.prod.outlook.com (2603:10b6:208:23c::33)
- by LV2PR12MB5967.namprd12.prod.outlook.com (2603:10b6:408:170::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.10; Fri, 12 Dec
- 2025 04:07:08 +0000
-Received: from BL02EPF0002992B.namprd02.prod.outlook.com
- (2603:10b6:208:23c:cafe::cd) by MN2PR18CA0028.outlook.office365.com
- (2603:10b6:208:23c::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.16 via Frontend Transport; Fri,
- 12 Dec 2025 04:06:26 +0000
+ id 05557dea-d710-11f0-b15b-2bf370ae4941;
+ Fri, 12 Dec 2025 05:07:06 +0100 (CET)
+Received: from BL6PEPF00013E03.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:22e:400:0:1001:0:1b) by DS0PR12MB7584.namprd12.prod.outlook.com
+ (2603:10b6:8:13b::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.9; Fri, 12 Dec
+ 2025 04:07:02 +0000
+Received: from BL02EPF0002992D.namprd02.prod.outlook.com
+ (2a01:111:f403:f901::7) by BL6PEPF00013E03.outlook.office365.com
+ (2603:1036:903:4::4) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.6 via Frontend Transport; Fri,
+ 12 Dec 2025 04:07:02 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF0002992B.mail.protection.outlook.com (10.167.249.56) with Microsoft
+ BL02EPF0002992D.mail.protection.outlook.com (10.167.249.58) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 04:07:08 +0000
+ 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 04:07:02 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Thu, 11 Dec 2025 22:07:04 -0600
+ 15.2.2562.17; Thu, 11 Dec 2025 22:06:56 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0a16e5a8-d710-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 05557dea-d710-11f0-b15b-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gsNyCEzohz8CMJNuL4TOZkuIiofjscEIcwtI5iziUnUXi8D4x95qvGyd5M8J3VMoBiQXmia/cQ4S4MeRD7r8HluNQ5opTUgX1LK3jB9xvfIICBcHAljLefZp2j5gEKHxBhgkJ/u55Gs+fRM6YYh13LTsGE4XvuzL2UL183c8/ec4MMzafJcaZV0YgBqxrlGvg1pZkcbsBahlS5Xk1eir2LCNDrOeabkLjrE2uetiC1H35/qkX+j65kXn1TnFPDOoaU3e6P8M715+4w1TgFRS3dzELWSk+4q3XjByWNp0bfnytmqPVZ2cdT7SrK8Qri/HwpAFA4heqqaXLC8RztakYA==
+ b=ULoZrgPWshFwCo6OOQyEa0aQRZE/nkE8TFL2gsqqBd/h/IqJLlKYtnQeOLnIldbEeoHt3nS65/bGIYM3qdtw6AUb7/moehVAsr2R82at+ditstBHPGhYtjZLpJBmHfXf/AL+nuIpxC5mYmTXV7JVpNH0kZW3cVdYlz6LySVPLQ47QXwlKjHcU/OuB9hKvJFZctMEg8uVCh0DFrJIUna2ur6qDNxdcsDhBlhYsXYflhmPzkLThg0lyukE8CjLYyx6or1OQhm37hWGqWmmx0i79o2MSR87BLmRwKz/ToVkVE7H1Virobj1zabkwIciCzECyk2ZJ9mmx0vZEN9tKm7tuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cNBo7HSAOiqoWr9Mm1NZh1/tC7tfzjVGKDQZ3VmVKG8=;
- b=bMrTH1W+vNCL0oR3vOw7g0f80gqUhDIE0KS7oGzOOnbSrLDjrr6IV6jxro8GmepPID3+1ByHaWpLOT3FKQDV2sy08vRYe7VVQf0MBrxfrrhiqh3N0PS+hToa2pPhbMqhX4ASxDXvD1+o/ErgXyR0dhuGTdyyh0yP21Z3dGHtkTxnnkTQgUiwvMxIHy+tItLK59nhm2lnPdBJtHIYOJ/0MkesBfkq3O66/0JOPqrHfEeR2sJVafc7NeUXNj0c8MkNrQqHLFYRjODNJN22hGMPz5StKcoc8p+/s6/OPrPt9VYA32C/x7Z6AYqU/Y/6wbYU9Feu69gswe3L7SRj6VLrSw==
+ bh=4hSsMPp+Gwf1XzRD1dfz9efboZW2JkZdEhihPPv5904=;
+ b=EXdvIzbXbPVbF8gjLe3Why7kHaO0q/Sv8khXRBsh1mDGe0zfmiwyaGk8jLhDB3kSNtb28MnuHyxOI5ZRhOPvln8iLUdiBJIEBz54j7WoWPYpbs8eDUk5Sz/mAP6Be0TgPF+P+fwSOOT2aCJ5ksTysCySU8rUzSwtl5N9WmYB0JqYAGO40cG5odlqc5BkeOJrFN05rQxoDaDZ1MRsE/VBKjiO0M0xD+F6LxKe3DZNn2DEZ7Ai6Ynj8uuhL3zut/tV4N3cExLk7XMrCO0phObY/xAL+aPYQ6vSbKVo3GhxLDXqD0zqm4t2RyAHivA1IHaplZPJF/uIilMWpzfksc+yPw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cNBo7HSAOiqoWr9Mm1NZh1/tC7tfzjVGKDQZ3VmVKG8=;
- b=aARwx1DW+p38jQJvCTMnMb+TKB6+7okiUek6yMJFp1TqQs6GJ7rdCXl3sbObPS8Rsph/ufMQDf5l8L2JYZ4FKdoR3hixliBAVkDz5lqA4CHVMURhH0XS4wu+zyQZIfLJFviRM7EEDQ24VBW+1JGxxqnSnLpnF1uX5UyPP4nmFZQ=
+ bh=4hSsMPp+Gwf1XzRD1dfz9efboZW2JkZdEhihPPv5904=;
+ b=PauBnWC7ULFfbbZDHXHlmt9iWR1LQDV2M0y9Vx7pmhXzl6xYrFOxuSxaioHykfrvREzkv5Ua1/u+00YvNNe80DB1d0m92w5qPh18zPxeTv3CEq2+owOblk1cuUXQuoJcAoXY59SGf1rUrLgu+wtIgeGt4WQyQNZTaNAU+C7VMUs=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,12 +86,14 @@ CC: <ray.huang@amd.com>, <grygorii_strashko@epam.com>, Penny Zheng
 	<Penny.Zheng@amd.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
  Grall" <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Michal
  Orzel" <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>, Jan Beulich
-	<jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v5 16/24] xen/domctl: wrap device-tree-subset iommu-related domctl op with CONFIG_MGMT_HYPERCALLS
-Date: Fri, 12 Dec 2025 12:02:01 +0800
-Message-ID: <20251212040209.1970553-17-Penny.Zheng@amd.com>
+	<Volodymyr_Babchuk@epam.com>, Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>,
+	"Oleksii Kurochko" <oleksii.kurochko@gmail.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 13/24] xen/domctl: wrap arch-specific domain_set_time_offset() with CONFIG_MGMT_HYPERCALLS
+Date: Fri, 12 Dec 2025 12:01:58 +0800
+Message-ID: <20251212040209.1970553-14-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251212040209.1970553-1-Penny.Zheng@amd.com>
 References: <20251212040209.1970553-1-Penny.Zheng@amd.com>
@@ -103,610 +105,133 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992B:EE_|LV2PR12MB5967:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4a1d4b4d-448c-459b-8195-08de3933eaf0
+X-MS-TrafficTypeDiagnostic: BL02EPF0002992D:EE_|DS0PR12MB7584:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1039f12a-7642-4c66-3cff-08de3933e77a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|7416014|36860700013;
+	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026|7416014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?5lGE+8orBaQ8sgNMHsWNFAbX0o0vp8qN6cWsynigwHhj9v7oAvw90N4sC51C?=
- =?us-ascii?Q?f6Yh/MOHkZmCCuppwAyciunQa+AU2ui5BoU8zqYhLsbAhrRFjLdW7JWt04yA?=
- =?us-ascii?Q?YnDf6L+ULYde3kJR8aM5FXhGyei3xFr8fbqaC7zIRa3BAu0Ts3BvYCNg8XSy?=
- =?us-ascii?Q?XoqSKBnwZ9Y/rH9k+1yWpmo15+JFicxrOsa7ll0J5zVRxb/otNwV3WIgptQr?=
- =?us-ascii?Q?lgMWdc15APjre0KLmY7kJchLwwBkwln/UQ5Wn1Czk7PsHe6DHiWQP+oPDaYv?=
- =?us-ascii?Q?PC108mVHWSo6tJFjCnLkpxdOXmz64Wt04VKt3rBJQ+636nZYZKb4w+q9y6bH?=
- =?us-ascii?Q?h3lRwrMTQD3KSDiuGFGKhOJuUZHzxYo8S93nzsqc09W/wyi2Mz151AcR3zeK?=
- =?us-ascii?Q?mIy7Aar7cmkBbwvyQsPnvX/UNrvB08rrFdFGVdb5RTZWl4rKIo0z+CiLeG8E?=
- =?us-ascii?Q?gq2jEfdAXcqP4HO1/ajIH2T5tzDeaZpd5l0kPD+wdgl8ZKm8wY2PikY+czfT?=
- =?us-ascii?Q?7NLY/lh4sRFDUMIyE8+/H0axdEGBTh+4YE5aXtgxrspTd2pHhRjMqoKxPQuf?=
- =?us-ascii?Q?Y2O2XGkRqdvsXfEqoyMGkWgjSSkOaFNL8dQlVCKX+mlzU16h8GYl2V4GurEf?=
- =?us-ascii?Q?3CcXfKGIGbkcPzl46p5vyyDBKt1MGlcZ8hoHZyv/66JZtosYBcFyosjATRlm?=
- =?us-ascii?Q?dHbuqWJNZQHtqxAfPOcXN3c63XmU67erZtVf3PURn+DpyTLakiTn0V7uI92x?=
- =?us-ascii?Q?jbNpGs6Pa3Ath8Km7qDV9UWQ9DiPcp1U5VLFHiUk/Ms/YRXu5DEMBG0Vrs09?=
- =?us-ascii?Q?0pS8ueLY7P6AaWrAjIn2JjMvx76Lpcl4k3ZPdP3Q52wKVfclnsM9ZSMFjNJw?=
- =?us-ascii?Q?07z7FDJdW/0m+SrQMEklrciXyiujIPuBWMI3138Uf7cZ9yqb2uGe2keHo/JH?=
- =?us-ascii?Q?oj8J2CpvUMiT76DB65DU+thDqGefBHjGmioFBxMymnoeJbAZtVrkyVJmtoNb?=
- =?us-ascii?Q?G5y7wmOs3DvIvbOrNiLGFjBq7G13k0kl3G8TZ6FuXAsVbjtS3ZolKzMN6h39?=
- =?us-ascii?Q?MjF5jwG0QDbErKywc3WDx/f0nPPSXndWhRx5DJCOaVrph9hsM138YINjdzlL?=
- =?us-ascii?Q?pEd1m0hj1fvktZq4UwoMW0kUYC4RyYkEMcQSLkFkb9DLnXYRRCxWmiUrUNV5?=
- =?us-ascii?Q?n+ueCM8AbRklt0+0mWVxmutcM0LX/VWhEgjwE90NuqLbOTf03L5W5E6vxLo9?=
- =?us-ascii?Q?hTZqAjAfHFl7CrE+iQhg/0ZccDynduPsam1NsVyTHyVK16KdYhek0xUb/WwA?=
- =?us-ascii?Q?2o9PUxU7wDIm4Imjzwk9LJXU/UAAN3mmPE5ptsdc/Ox+YgJDnfmADGBJdUe+?=
- =?us-ascii?Q?RNn0X6KSqGRCd06OJoEPdYpAHsja2OiulBykR8sPRyL70RrsjOlDBGewQSvZ?=
- =?us-ascii?Q?nbMN3xMijA7tMLOxxEZxRIB7iyjMrYL5fiT39uTkRIKlnQYwa1rK590CuXaa?=
- =?us-ascii?Q?yOWCN0+S7MxYtqAAGIk+Awio79HhRjEQWGxuxOZjn0M0c+tbML86b9VWGG08?=
- =?us-ascii?Q?FR6fk6glZNC228aMzGs=3D?=
+	=?us-ascii?Q?3vP0vjNDnEG0Z5iKSakAYxSdaUel/3wafOwfiyLrcQBFOm3SbT1Aw0x3CyQJ?=
+ =?us-ascii?Q?Ogh1JnPm3/Uv4nJOKyCSrW+UpRtqNZdA8lywBPAqzIMc6DYkWVXRYCNQC/kc?=
+ =?us-ascii?Q?od5gMLM9WZMEjRkFYGKo266qRQVTRvn0JQzQ15r6RcNjStA3IRDGJuO/fRmv?=
+ =?us-ascii?Q?2FeD4ncUqERq840Zi88ZbTRtJ+HQxuolG9gjENtOonqtCdXUWxwl3/vKxpQZ?=
+ =?us-ascii?Q?yc2g/g5hw9H/NqJ/nUrQgqEClyfMopDzvCpI4PdIjL+tFNBFuTvUI/qXG0Bp?=
+ =?us-ascii?Q?dR08PU/9PTi9J0v4pm6h3jtdhGHlpqbZPgS3nVzIOtOg0BwjqpyyW55P9ewD?=
+ =?us-ascii?Q?h2F1EIXqSjmSc2YzXwgdzwtkn1Nxr1+s1TFCqvldrQFNytMPbk0qWhV6TfNH?=
+ =?us-ascii?Q?6mtqG1wh1Ee91EyXmADRwGvEFLijgbgnj3oQh6+oNSZ5scPSEK/rB6es/F8j?=
+ =?us-ascii?Q?5ZL2H7mV2pCReQC1jkk7ANnAf+xlsEN4uqrMj0H0YVKCht4nSJibepmF9YsB?=
+ =?us-ascii?Q?TnrXt45aAVNDVPH0jjuxWYX+skyrNNvyyu07L9Q7MpytjUWoqrzHBBxOSEkl?=
+ =?us-ascii?Q?n4Gfia93+okn+Q+JVpp3pzLzo77928KfYQLrorOrjl0VQp3JTehOnenLYFNl?=
+ =?us-ascii?Q?5V6Kv88HtJcefwYXV92ALICnE604dEKuMtIcCz6R8VipF83qGtAwoYAcgNtg?=
+ =?us-ascii?Q?Oib1SislO8jNjg3+V7P/hEDcMGAZXjsqU5dR1AayIEWDEyJhTLcmAaK7zZay?=
+ =?us-ascii?Q?6gWtickPqOPjdrSkAqzd9K6IosMdtIE6bfVQ2iNNwXSncFRsoLznuvBpQfZZ?=
+ =?us-ascii?Q?Exid2ONlWEZmJ1rD6GSmG7MMuAakNmfZnxS/6bHWsBfgi2eHeXdvhIg0klUa?=
+ =?us-ascii?Q?2oAVUMMI3JL/frG8hhr+mzKhdS/FB3qiT8jAuzPtLLDMs8ZpWIlr+YBE9/yT?=
+ =?us-ascii?Q?B4ZOE3bMhw1ZBrlOu8Mh55sJKJO6ZCbF5AVK/wgbudFwm9q1jDD+rMGUkZxn?=
+ =?us-ascii?Q?wHeg58wxkQiDT6c+0VphnHGzG49mKvERTRrl6GHP3Dp4pRrv8aW64vrLjyXc?=
+ =?us-ascii?Q?b6qU9U1p/Wb43Si7zOqMzsDSFQ7/Hf9rY2+iV9AureqVIV8YvYHtK2oGTbit?=
+ =?us-ascii?Q?qi32InTggpVehnOU3eQFX9qq2Xdg+cPpYl41R/tqklDz9FrtHH2gcytYYHKa?=
+ =?us-ascii?Q?hTQT8p7g/Uk5GVntgcaNb1eaajdogz9FIBH4sbd7vsYtYl3gnkHQ+AQhZJLO?=
+ =?us-ascii?Q?RzXueJLQz3UqM+wDz/yV+uVARAoLtEBiHhJWbCFxWG4hnQBGA/5vNnhCmRW9?=
+ =?us-ascii?Q?Ilvge8cpGUZIXl8DloJMhm5PCD0KQxxSexUjimGN5dJAF0V9oJN/1KoJbnqT?=
+ =?us-ascii?Q?UjW2VcZVLhBCAVweHRAZsPL8qco0/cL+MxuTZ2RKnvcdQkt6NJoy77P1oP8i?=
+ =?us-ascii?Q?tjmYBsTmKJF4p+9NlMc3Bpfghxd7wTocRG5i+nlfyNonDtCZk4S3qwEHP1rD?=
+ =?us-ascii?Q?HUV7kNA+AANkAZdYOBFwTHA2bn3osX+o5ZYH+5QdnXkMtJ3NvB8l5wWYfHNu?=
+ =?us-ascii?Q?K7BVc/F45JTEG3cmyAI=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(7416014)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(7416014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 04:07:08.0565
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 04:07:02.2425
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4a1d4b4d-448c-459b-8195-08de3933eaf0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1039f12a-7642-4c66-3cff-08de3933e77a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0002992B.namprd02.prod.outlook.com
+	BL02EPF0002992D.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5967
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7584
 
-Function iommu_do_dt_domctl() is the main entry for all device-tree-subset
-iommu-related domctl-op, and shall be wrapped with CONFIG_MGMT_HYPERCALLS.
-Tracking its calling chain, the following functions shall all be wrapped
-with CONFIG_MGMT_HYPERCALLS:
-- make PCI_PASSTHROUGH depend on MGMT_HYPERCALLS
-- iommu_do_dt_domctl
-  - xsm_assign_dtdevice
-  - xsm_deassign_dtdevice
-  - iommu_deassign_dt_device
-    - arm_smmu_reassign_dev
-      - arm_smmu_deassign_dev
-        - arm_smmu_detach_dev
-          - arm_smmu_domain_remove_master
-    - ipmmu_reassign_device
-      - ipmmu_deassign_device
-        - ipmmu_detach_device
-  - iommu_remove_dt_device
-    - iommu_dt_device_is_assigned_locked
-  - dt_find_node_by_gpath
-Otherwise all the functions will become unreachable when MGMT_HYPERCALLS=n,
-and hence violating Misra rule 2.1
-Move codes closer to avoid scattering #ifdef
+Arch-specific domain_set_time_offset() is responisble for
+XEN_DOMCTL_settimeoffset domctl-op, and shall be wrapped with
+CONFIG_MGMT_HYPERCALLS. Otherwise it will become unreachable when
+MGMT_HYPERCALLS=n, and hence violating Misra rule 2.1.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Jan Beulich <jbeulich@suse.com> # x86
 ---
-v3 -> v4
-- split into PCI related subset and DT subset
-- Move codes closer to avoid scattering #ifdef
+v1 -> v2:
+- adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
+- wrap XEN_DOMCTL_settimeoffset-case transiently
 ---
-v4 -> v5:
-- wrap arm_smmu_deassign_dev() declaration with MGMT_HYPERCALLS
-- zap the hooks in xen/iommu.h right away
+v2 -> v3:
+- add back stub wrapping for riscv
+- address "violating Misra rule 2.1" in commit message
+- remove transient wrapping around XEN_DOMCTL_settimeoffset-case
 ---
- xen/arch/arm/Kconfig                     |   2 +-
- xen/drivers/passthrough/arm/ipmmu-vmsa.c |  26 +++---
- xen/drivers/passthrough/arm/smmu-v3.c    |   6 ++
- xen/drivers/passthrough/arm/smmu.c       |  55 ++++++------
- xen/drivers/passthrough/device_tree.c    | 108 ++++++++++++-----------
- xen/include/xen/iommu.h                  |   2 +-
- xen/include/xsm/dummy.h                  |   6 +-
- xen/include/xsm/xsm.h                    |  12 +--
- xen/xsm/dummy.c                          |   6 +-
- xen/xsm/flask/hooks.c                    |  12 +--
- 10 files changed, 127 insertions(+), 108 deletions(-)
+ xen/arch/arm/time.c    | 2 ++
+ xen/arch/riscv/stubs.c | 2 ++
+ xen/arch/x86/time.c    | 2 ++
+ 3 files changed, 6 insertions(+)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index cf6af68299..5a5d7810c8 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -270,7 +270,7 @@ source "arch/arm/firmware/Kconfig"
- 
- config PCI_PASSTHROUGH
- 	bool "PCI passthrough" if EXPERT
--	depends on ARM_64 && HAS_PASSTHROUGH
-+	depends on ARM_64 && HAS_PASSTHROUGH && MGMT_HYPERCALLS
- 	help
- 	  This option enables PCI device passthrough
- 
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index ea9fa9ddf3..b1fc14bc32 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -739,16 +739,6 @@ static int ipmmu_attach_device(struct ipmmu_vmsa_domain *domain,
-     return 0;
- }
- 
--static void ipmmu_detach_device(struct ipmmu_vmsa_domain *domain,
--                                struct device *dev)
--{
--    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
--    unsigned int i;
--
--    for ( i = 0; i < fwspec->num_ids; ++i )
--        ipmmu_utlb_disable(domain, fwspec->ids[i]);
--}
--
- static int ipmmu_init_platform_device(struct device *dev,
-                                       const struct dt_phandle_args *args)
- {
-@@ -1138,7 +1128,9 @@ static void ipmmu_free_root_domain(struct ipmmu_vmsa_domain *domain)
-     xfree(domain);
+diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+index 3710eab109..a40b233f9d 100644
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -378,12 +378,14 @@ void force_update_vcpu_system_time(struct vcpu *v)
+     update_vcpu_system_time(v);
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- static int ipmmu_deassign_device(struct domain *d, struct device *dev);
-+#endif
- 
- static int ipmmu_assign_device(struct domain *d, u8 devfn, struct device *dev,
-                                uint32_t flag)
-@@ -1254,6 +1246,17 @@ out:
-     return ret;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
-+static void ipmmu_detach_device(struct ipmmu_vmsa_domain *domain,
-+                                struct device *dev)
-+{
-+    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+    unsigned int i;
-+
-+    for ( i = 0; i < fwspec->num_ids; ++i )
-+        ipmmu_utlb_disable(domain, fwspec->ids[i]);
-+}
-+
- static int ipmmu_deassign_device(struct domain *d, struct device *dev)
+ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
  {
-     struct ipmmu_vmsa_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
-@@ -1309,6 +1312,7 @@ static int ipmmu_reassign_device(struct domain *s, struct domain *t,
- 
-     return 0;
+     d->time_offset.seconds = time_offset_seconds;
+     d->time_offset.set = true;
+     /* XXX update guest visible wallclock time */
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- static int ipmmu_dt_xlate(struct device *dev,
-                           const struct dt_phandle_args *spec)
-@@ -1487,7 +1491,9 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .teardown        = ipmmu_iommu_domain_teardown,
-     .iotlb_flush     = ipmmu_iotlb_flush,
-     .assign_device   = ipmmu_assign_device,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = ipmmu_reassign_device,
-+#endif
-     .map_page        = arm_iommu_map_page,
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index bf153227db..1d85341e72 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1490,8 +1490,10 @@ static bool arm_smmu_sid_in_range(struct arm_smmu_device *smmu, u32 sid)
- static struct arm_smmu_device *arm_smmu_get_by_dev(const struct device *dev);
- static int arm_smmu_assign_dev(struct domain *d, u8 devfn, struct device *dev,
- 			       u32 flag);
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev);
-+#endif
- 
- static int arm_smmu_add_device(u8 devfn, struct device *dev)
- {
-@@ -2759,6 +2761,7 @@ out:
- 	return ret;
+ static int cpu_time_callback(struct notifier_block *nfb,
+                              unsigned long action,
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index c2e6af2c43..a8a0b4156a 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -31,10 +31,12 @@ void send_timer_event(struct vcpu *v)
+     BUG_ON("unimplemented");
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn, struct device *dev)
+ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
  {
- 	struct iommu_domain *io_domain = arm_smmu_get_domain(d, dev);
-@@ -2826,6 +2829,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
- 
- 	return 0;
+     BUG_ON("unimplemented");
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- static int arm_smmu_iommu_xen_domain_init(struct domain *d)
- {
-@@ -2862,7 +2866,9 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
- 	.teardown		= arm_smmu_iommu_xen_domain_teardown,
- 	.iotlb_flush		= arm_smmu_iotlb_flush,
- 	.assign_device		= arm_smmu_assign_dev,
-+#ifdef CONFIG_MGMT_HYPERCALLS
- 	.reassign_device	= arm_smmu_reassign_dev,
-+#endif
- 	.map_page		= arm_iommu_map_page,
- 	.unmap_page		= arm_iommu_unmap_page,
- 	.dt_xlate		= arm_smmu_dt_xlate,
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 22d306d0cb..a75ec08633 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -894,8 +894,10 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
- /* Forward declaration */
- static int arm_smmu_assign_dev(struct domain *d, u8 devfn,
- 			       struct device *dev, u32 flag);
-+#ifdef CONFIG_MGMT_HYPERCALLS
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev);
-+#endif
+ /* domctl.c */
  
- /*
-  * The driver which supports generic IOMMU DT bindings must have this
-@@ -1699,21 +1701,6 @@ static int arm_smmu_domain_add_master(struct arm_smmu_domain *smmu_domain,
- 	return 0;
- }
- 
--static void arm_smmu_domain_remove_master(
--				const struct arm_smmu_domain *smmu_domain,
--				struct arm_smmu_master_cfg *cfg)
--{
--	uint32_t i, idx;
--	struct arm_smmu_device *smmu = smmu_domain->smmu;
--	struct arm_smmu_s2cr *s2cr = smmu->s2crs;
--	const struct iommu_fwspec *fwspec = arm_smmu_get_fwspec(cfg);
--
--	for_each_cfg_sme(cfg, i, idx, fwspec->num_ids) {
--		s2cr[idx] = s2cr_init_val;
--		arm_smmu_write_s2cr(smmu, idx);
--	}
--}
--
- static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
- {
- 	int ret;
-@@ -1761,16 +1748,6 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
- 	return arm_smmu_domain_add_master(smmu_domain, cfg);
- }
- 
--static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
--{
--	struct arm_smmu_domain *smmu_domain = domain->priv;
--	struct arm_smmu_master_cfg *cfg = find_smmu_master_cfg(dev);
--
--	if (cfg)
--		arm_smmu_domain_remove_master(smmu_domain, cfg);
--
--}
--
- #if 0 /*
-        * Xen: The page table is shared with the processor, therefore
-        * helpers to implement separate is not necessary.
-@@ -2849,6 +2826,31 @@ out:
- 	return ret;
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index ece9ae0b34..8ba2dd9395 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -1841,6 +1841,7 @@ static void update_domain_rtc(void)
+     rcu_read_unlock(&domlist_read_lock);
  }
  
 +#ifdef CONFIG_MGMT_HYPERCALLS
-+static void arm_smmu_domain_remove_master(
-+                                const struct arm_smmu_domain *smmu_domain,
-+                                struct arm_smmu_master_cfg *cfg)
-+{
-+        uint32_t i, idx;
-+        struct arm_smmu_device *smmu = smmu_domain->smmu;
-+        struct arm_smmu_s2cr *s2cr = smmu->s2crs;
-+        const struct iommu_fwspec *fwspec = arm_smmu_get_fwspec(cfg);
-+
-+        for_each_cfg_sme(cfg, i, idx, fwspec->num_ids) {
-+                s2cr[idx] = s2cr_init_val;
-+                arm_smmu_write_s2cr(smmu, idx);
-+        }
-+}
-+
-+static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
-+{
-+        struct arm_smmu_domain *smmu_domain = domain->priv;
-+        struct arm_smmu_master_cfg *cfg = find_smmu_master_cfg(dev);
-+
-+        if (cfg)
-+                arm_smmu_domain_remove_master(smmu_domain, cfg);
-+
-+}
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev)
+ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
  {
-@@ -2918,6 +2920,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
- 
- 	return 0;
+     d->time_offset.seconds = time_offset_seconds;
+@@ -1849,6 +1850,7 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
+         rtc_update_clock(d);
+     update_domain_wallclock_time(d);
  }
 +#endif /* CONFIG_MGMT_HYPERCALLS */
  
- static int arm_smmu_iommu_domain_init(struct domain *d)
+ int cpu_frequency_change(u64 freq)
  {
-@@ -2956,7 +2959,9 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
-     .teardown = arm_smmu_iommu_domain_teardown,
-     .iotlb_flush = arm_smmu_iotlb_flush,
-     .assign_device = arm_smmu_assign_dev,
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     .reassign_device = arm_smmu_reassign_dev,
-+#endif
-     .map_page = arm_iommu_map_page,
-     .unmap_page = arm_iommu_unmap_page,
-     .dt_xlate = arm_smmu_dt_xlate_generic,
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index bdbae0f8bf..bcc4f44a71 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -60,6 +60,14 @@ fail:
-     return rc;
- }
- 
-+int iommu_dt_domain_init(struct domain *d)
-+{
-+    INIT_LIST_HEAD(&dom_iommu(d)->dt_devices);
-+
-+    return 0;
-+}
-+
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_deassign_dt_device(struct domain *d, struct dt_device_node *dev)
- {
-     const struct domain_iommu *hd = dom_iommu(d);
-@@ -102,14 +110,6 @@ static bool iommu_dt_device_is_assigned_locked(const struct dt_device_node *dev)
-     return assigned;
- }
- 
--int iommu_dt_domain_init(struct domain *d)
--{
--    INIT_LIST_HEAD(&dom_iommu(d)->dt_devices);
--
--    return 0;
--}
--
--#ifdef CONFIG_MGMT_HYPERCALLS
- int iommu_release_dt_devices(struct domain *d)
- {
-     const struct domain_iommu *hd = dom_iommu(d);
-@@ -213,51 +213,6 @@ int iommu_add_dt_pci_sideband_ids(struct pci_dev *pdev)
- }
- #endif /* CONFIG_HAS_PCI */
- 
--int iommu_remove_dt_device(struct dt_device_node *np)
--{
--    const struct iommu_ops *ops = iommu_get_ops();
--    struct device *dev = dt_to_dev(np);
--    int rc;
--
--    ASSERT(rw_is_locked(&dt_host_lock));
--
--    if ( !iommu_enabled )
--        return 1;
--
--    if ( !ops )
--        return -EOPNOTSUPP;
--
--    spin_lock(&dtdevs_lock);
--
--    if ( iommu_dt_device_is_assigned_locked(np) )
--    {
--        rc = -EBUSY;
--        goto fail;
--    }
--
--    if ( !ops->remove_device )
--    {
--        rc = -EOPNOTSUPP;
--        goto fail;
--    }
--
--    /*
--     * De-register the device from the IOMMU driver.
--     * The driver is responsible for removing is_protected flag.
--     */
--    rc = ops->remove_device(0, dev);
--
--    if ( !rc )
--    {
--        ASSERT(!dt_device_is_protected(np));
--        iommu_fwspec_free(dev);
--    }
--
-- fail:
--    spin_unlock(&dtdevs_lock);
--    return rc;
--}
--
- int iommu_add_dt_device(struct dt_device_node *np)
- {
-     const struct iommu_ops *ops = iommu_get_ops();
-@@ -321,6 +276,52 @@ int iommu_add_dt_device(struct dt_device_node *np)
-     return rc;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
-+int iommu_remove_dt_device(struct dt_device_node *np)
-+{
-+    const struct iommu_ops *ops = iommu_get_ops();
-+    struct device *dev = dt_to_dev(np);
-+    int rc;
-+
-+    ASSERT(rw_is_locked(&dt_host_lock));
-+
-+    if ( !iommu_enabled )
-+        return 1;
-+
-+    if ( !ops )
-+        return -EOPNOTSUPP;
-+
-+    spin_lock(&dtdevs_lock);
-+
-+    if ( iommu_dt_device_is_assigned_locked(np) )
-+    {
-+        rc = -EBUSY;
-+        goto fail;
-+    }
-+
-+    if ( !ops->remove_device )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto fail;
-+    }
-+
-+    /*
-+     * De-register the device from the IOMMU driver.
-+     * The driver is responsible for removing is_protected flag.
-+     */
-+    rc = ops->remove_device(0, dev);
-+
-+    if ( !rc )
-+    {
-+        ASSERT(!dt_device_is_protected(np));
-+        iommu_fwspec_free(dev);
-+    }
-+
-+ fail:
-+    spin_unlock(&dtdevs_lock);
-+    return rc;
-+}
-+
- /*
-  * dt_find_node_by_gpath - Same as dt_find_node_by_path but retrieve the
-  * path from the guest
-@@ -459,3 +460,4 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
- 
-     return ret;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 6ca4190eb9..e5e9f98201 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -331,9 +331,9 @@ struct iommu_ops {
-     int (*remove_device)(uint8_t devfn, device_t *dev);
-     int (*assign_device)(struct domain *d, uint8_t devfn, device_t *dev,
-                          uint32_t flag);
-+#ifdef CONFIG_MGMT_HYPERCALLS
-     int (*reassign_device)(struct domain *s, struct domain *t,
-                            uint8_t devfn, device_t *dev);
--#ifdef CONFIG_MGMT_HYPERCALLS
- #ifdef CONFIG_HAS_PCI
-     int (*get_device_group_id)(uint16_t seg, uint8_t bus, uint8_t devfn);
- #endif /* HAS_PCI */
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index 07d69e3725..90fe741fb4 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -431,9 +431,8 @@ static XSM_INLINE int cf_check xsm_deassign_device(
- }
- 
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static XSM_INLINE int cf_check xsm_assign_dtdevice(
-     XSM_DEFAULT_ARG struct domain *d, const char *dtpath)
- {
-@@ -448,7 +447,8 @@ static XSM_INLINE int cf_check xsm_deassign_dtdevice(
-     return xsm_default_action(action, current->domain, d);
- }
- 
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
- static XSM_INLINE int cf_check xsm_resource_plug_core(XSM_DEFAULT_VOID)
- {
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index b331e81f9d..90349d02c2 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -131,12 +131,12 @@ struct xsm_ops {
-     int (*assign_device)(struct domain *d, uint32_t machine_bdf);
-     int (*deassign_device)(struct domain *d, uint32_t machine_bdf);
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     int (*assign_dtdevice)(struct domain *d, const char *dtpath);
-     int (*deassign_dtdevice)(struct domain *d, const char *dtpath);
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
-     int (*resource_plug_core)(void);
-     int (*resource_unplug_core)(void);
-@@ -553,9 +553,8 @@ static inline int xsm_deassign_device(
-     return alternative_call(xsm_ops.deassign_device, d, machine_bdf);
- }
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static inline int xsm_assign_dtdevice(
-     xsm_default_t def, struct domain *d, const char *dtpath)
- {
-@@ -568,7 +567,8 @@ static inline int xsm_deassign_dtdevice(
-     return alternative_call(xsm_ops.deassign_dtdevice, d, dtpath);
- }
- 
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
- static inline int xsm_resource_plug_pci(xsm_default_t def, uint32_t machine_bdf)
- {
-diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index c693e77a7d..1ac4f719ad 100644
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -87,12 +87,12 @@ static const struct xsm_ops __initconst_cf_clobber dummy_ops = {
-     .assign_device                 = xsm_assign_device,
-     .deassign_device               = xsm_deassign_device,
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     .assign_dtdevice               = xsm_assign_dtdevice,
-     .deassign_dtdevice             = xsm_deassign_dtdevice,
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
-     .resource_plug_core            = xsm_resource_plug_core,
-     .resource_unplug_core          = xsm_resource_unplug_core,
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index c772f79e16..9c800b574e 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -1461,9 +1461,8 @@ static int cf_check flask_deassign_device(
-     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__REMOVE_DEVICE, NULL);
- }
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
- static int flask_test_assign_dtdevice(const char *dtpath)
- {
-     uint32_t rsid;
-@@ -1524,7 +1523,8 @@ static int cf_check flask_deassign_dtdevice(
-     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__REMOVE_DEVICE,
-                                 NULL);
- }
--#endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
- static int cf_check flask_platform_op(uint32_t op)
- {
-@@ -1996,12 +1996,12 @@ static const struct xsm_ops __initconst_cf_clobber flask_ops = {
-     .assign_device = flask_assign_device,
-     .deassign_device = flask_deassign_device,
- #endif /* CONFIG_HAS_PCI */
--#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
--#if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE_DISCOVERY)
-+#ifdef CONFIG_HAS_DEVICE_TREE_DISCOVERY
-     .assign_dtdevice = flask_assign_dtdevice,
-     .deassign_dtdevice = flask_deassign_dtdevice,
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE_DISCOVERY */
-+#endif /* HAS_PASSTHROUGH && MGMT_HYPERCALLS */
- 
-     .platform_op = flask_platform_op,
- #ifdef CONFIG_X86
 -- 
 2.34.1
 
