@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26653D59F54
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D59ED59F52
 	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 22:20:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1185896.1507831 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1185898.1507852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vUBV9-0004OT-ST; Fri, 12 Dec 2025 22:20:39 +0000
+	id 1vUBVB-0004pv-I6; Fri, 12 Dec 2025 22:20:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1185896.1507831; Fri, 12 Dec 2025 22:20:39 +0000
+Received: by outflank-mailman (output) from mailman id 1185898.1507852; Fri, 12 Dec 2025 22:20:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vUBV9-0004OM-Ok; Fri, 12 Dec 2025 22:20:39 +0000
-Received: by outflank-mailman (input) for mailman id 1185896;
- Fri, 12 Dec 2025 22:20:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vUBVB-0004pn-ER; Fri, 12 Dec 2025 22:20:41 +0000
+Received: by outflank-mailman (input) for mailman id 1185898;
+ Fri, 12 Dec 2025 22:20:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SbWK=6S=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vUBV8-0004B7-U8
- for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 22:20:38 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c88f7c69-d7a8-11f0-9cce-f158ae23cfc8;
- Fri, 12 Dec 2025 23:20:36 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-477619f8ae5so13255675e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 12 Dec 2025 14:20:36 -0800 (PST)
+ id 1vUBV9-0004Ar-T6
+ for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 22:20:39 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c994d10b-d7a8-11f0-b15b-2bf370ae4941;
+ Fri, 12 Dec 2025 23:20:38 +0100 (CET)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-42b47f662a0so944756f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Dec 2025 14:20:38 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42fb38a977esm6314350f8f.12.2025.12.12.14.20.34
+ ffacd0b85a97d-42fb38a977esm6314350f8f.12.2025.12.12.14.20.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 14:20:35 -0800 (PST)
+ Fri, 12 Dec 2025 14:20:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c88f7c69-d7a8-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: c994d10b-d7a8-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765578036; x=1766182836; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1765578038; x=1766182838; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lk1vumcas+/1y9PUhtuUtgDptTJz0Re2iVdDmKM7JLI=;
-        b=IrjQIX+y9N6iCmPqQyOMBTsT+t+qkmIQDEGVrqdDOGXuCJzhEyz8TH/80dZh3lKwe2
-         Foqt8maa90hqS54Yiq6B0/jiFnG6u3oCkC+3vYzTTa88WUUpfkTFi4KYTZP+Cw50puWw
-         H4rs37U58dsqkchc3+durPA6Yrk/BbV7lmcTg=
+        bh=OyZGG1ygUMUNjDL5OLP0NhL/jpu/4gZZc2fwoRc5MXU=;
+        b=u1mps+EnvP7auSoNtrTmBX76G4QcGPBLsxbSDde9BQC3JJ3kxBiHxUHGFQVoZ1c3m9
+         rU8XkZj5/mHHzyjuALzcsBHp2z3/43pFSmq/Po3I+dJD59FsTEuwfCRwXTf5ZhiIBFL5
+         Flm5jNW3ES5C9LExzBizYK0YZgQfON/0W2L8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765578036; x=1766182836;
+        d=1e100.net; s=20230601; t=1765578038; x=1766182838;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=lk1vumcas+/1y9PUhtuUtgDptTJz0Re2iVdDmKM7JLI=;
-        b=cwlpxCk02kdZiFySXDyU/W5AqxhWQufZ3GDE2dKk14mZ/e7O65V0W1u9Io+Oegm6C/
-         Y2WIrRanxKThbEGMxWCz3tExfTOgCUj8FMXqwvT/w0BbCWvy3tko31XQA11g0HCKNVvr
-         YawLMd03Obp3AUIxoGOQoI8g8t5wBkHAFTOf3vDZzIOcDhkJebgbfRd/Jx9ZWboOJ8UT
-         1+zGmAaBUIoLVzow+PAH1WL9OBbcVbe3IvDhMYgVEFtfv3/GDypPIw9ZLRFj+kR0JvQN
-         deDjURYZQHAPQv85MtMrX0Ngo+0waZyqQYdnSTLPcAJ6DNDVQPNlheMZJRr11SW+S5hd
-         ElZg==
-X-Gm-Message-State: AOJu0YzYR/NwO6/p7xA8F5oijrzEeUHaeINOn0+1fFtxTyJYtXtaMNcj
-	GUBDCJYgd+e9Sh65h0r1zoFN++AosH/DqvmHBdbZfWluBVDCYz0c6cUCtcCgQjv3A0gRdhBBcGZ
-	PfVBS
-X-Gm-Gg: AY/fxX6wCt5c4dmFqLw6fKnyz1q8yAVbv/yhp1UTyao85fIBlODIl198QcaOovAjyKL
-	FnJ5FFwCJw+908vHhg8RJZPhPoH2IbqRYallHqz1XzKfmlBmo148bCZSfDQR2y/1ITryFntN2nO
-	V06/CTOfmcyezkUvnKPKLAkDq/UcMWi+Kqlx3NJZXffHh749vccz0Ld1icSqgXUM9VrnfteMD6r
-	QBePYFdW+n8vRka2YrRbaVAuOWLLDDVoZzYHDMT74gFYjX5vygD5aESc4Cb5flHWDrU3TaouOc+
-	Vr8OxRLA8N6Qw+DSdyiy0FGYkQKCl6wzII8JVBLQ4JBZ4EMQASdO1hfIN1SWz/VUVgAYCk6kAac
-	0MyJ23b/VX5Q1/qZZgpn5shnWhWptzDfER3eOp58zurE1VabVlWPWycPIfIHx8zMmRyzgHOc50L
-	OyuaTwKsfoAaxkjG47Y24E+ItMEdmdVi9AbcbaS89z6HZKtsHO+aOyCBYMWqEgFyP5APJ3BYpc
-X-Google-Smtp-Source: AGHT+IHALu6Z7/VnodTlATGTGQ18GFcE3sMMz9/GJ9gae0SF9SorA1BzU5rp+fHqfAF+ylxPSIeSxA==
-X-Received: by 2002:a05:600c:444a:b0:479:3876:22a8 with SMTP id 5b1f17b1804b1-47a8f8c2e5cmr41340905e9.16.1765578035380;
-        Fri, 12 Dec 2025 14:20:35 -0800 (PST)
+        bh=OyZGG1ygUMUNjDL5OLP0NhL/jpu/4gZZc2fwoRc5MXU=;
+        b=LL3tPG1453s2cvJI1/UFRKNN6n2u41Zv71JrBeDXtg8iUGqNJwQ3lsdDjTCDewpA4z
+         cRCJD9cPj6DXvza4SF3ITz9pNjGU5ej2ezn/Gzq1iW2KGoQhEoOylS1FmQXwE1a6rO4C
+         Qj0TtAClKsb9tWtZeZBoWWTy4hBD29LE3CNgZN+hm3Hb0uK8/WBHdkXdqz2Psh6CG3+o
+         yiRBDT5kagr8PScTYmdVtgetyyKcozac12nFuZOU0Oto+q44n+hiR46CklmrOU/zCmPz
+         k7JQYBrikExVX8/EFIY5m08m3Y9KVFoq/c8aQeNUHtF7yhnmc7BjCv0qpwUsCPzcCXAL
+         mMdQ==
+X-Gm-Message-State: AOJu0Yx8YWZgBozPSwi+JTdGdquzRn7c1oekFHyIGc3mgY0c24bMBPoy
+	cjA6YmAkZiRrP1z1GteMk2XCFPOgAQ/FlxZYnwwLkOoImgYSDl8MHsn3vlh5YTnmagW70+eEev4
+	M9C+/
+X-Gm-Gg: AY/fxX7CHElMNz04rhxsllb6t3uQLsJXHLGeMsNK4SKCme8jqoRzLLVpu2P9micfyda
+	7g5Cw/EBZXeltH5pMANKQKKPJb6QApqYZRP+/FX7Yxgg/PW7557X9uQ6lM4kevrVG+ndrlveaCi
+	LM0/Eev9vrH7rUBYhPqN6cFuK2TzpnQOshh0xJzCifh0cBeJw8SOJTU3rJgDbpydvu8oYuzYPaS
+	N3atoIYHh/64gcoq6koo3cejxtFb7NVIYT4PFDBLQp2H0wpTxYXJpKu4sOCpCZ542vnqN5p/UnI
+	Yri+mdWnACCBMtE5obsgnjRMWdrA/+GKqxfCDvGPH7UZJa7I5vojopQ954y41/BP3Xtmt+aqDbU
+	i7Z2P61ZxpMJlbPZTtB9xwSB4jW7YZq9Py07kWD1tikwuvFQIrMHNYEbzXoLN+rSyFyQq8zuHoj
+	huTNgWn9WzQ+z99hC8YTy50jMFGlNmhnMab6d2Tnm23wqNL6KLgSM9yx2ddD0J9g==
+X-Google-Smtp-Source: AGHT+IEZaNzPYFn3TDq7ikgSgUJ4bznYDpM+vmENe+1Wa9S5DEc+y3RDl3/Lc8P+ud530mgQw3Zj+Q==
+X-Received: by 2002:a5d:64c3:0:b0:429:eb80:11f5 with SMTP id ffacd0b85a97d-42fab27d472mr7902693f8f.26.1765578037746;
+        Fri, 12 Dec 2025 14:20:37 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -90,9 +90,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 1/5] x86/pv: Address MISRA C:2012 Rule 4.1
-Date: Fri, 12 Dec 2025 22:20:28 +0000
-Message-Id: <20251212222032.2640580-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/5] x86: Address MIRSA R8.4 (declaration visibility) issues
+Date: Fri, 12 Dec 2025 22:20:31 +0000
+Message-Id: <20251212222032.2640580-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251212222032.2640580-1-andrew.cooper3@citrix.com>
 References: <20251212222032.2640580-1-andrew.cooper3@citrix.com>
@@ -100,9 +100,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-MISRA doesn't like mixing hexadecimal escape sequences with ASCII text.  Use
-the same workaround as in commit cd5048353725 ("xen: address MISRA C:2012 Rule
-4.1").
+set_guest_*_trapbounce() are only called from assembly so gain asmlinkage to
+identify them.
+
+xen_msr_s_cet_value() is called by assembly and C, so asmlinkage isn't
+appropriate.  Make the declaration unconditional, which silences the
+complaint.
 
 No functional change.
 
@@ -114,22 +117,54 @@ CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/pv/emul-inv-op.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/x86/pv/traps.c | 4 ++--
+ xen/arch/x86/setup.c    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/pv/emul-inv-op.c b/xen/arch/x86/pv/emul-inv-op.c
-index 314ebd01cb34..346ac1124d7b 100644
---- a/xen/arch/x86/pv/emul-inv-op.c
-+++ b/xen/arch/x86/pv/emul-inv-op.c
-@@ -26,7 +26,7 @@ static int emulate_forced_invalid_op(struct cpu_user_regs *regs)
-         pv_inject_page_fault(0, eip + sizeof(sig) - rc);
-         return EXCRET_fault_fixed;
-     }
--    if ( memcmp(sig, "\xf\xbxen", sizeof(sig)) )
-+    if ( memcmp(sig, "\xf\xb" "xen", sizeof(sig)) )
-         return 0;
-     eip += sizeof(sig);
+diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
+index c3c0976c440f..26a468108a77 100644
+--- a/xen/arch/x86/pv/traps.c
++++ b/xen/arch/x86/pv/traps.c
+@@ -99,7 +99,7 @@ void pv_inject_event(const struct x86_event *event)
+  * Called from asm to set up the MCE trapbounce info.
+  * Returns false no callback is set up, else true.
+  */
+-bool set_guest_machinecheck_trapbounce(void)
++bool asmlinkage set_guest_machinecheck_trapbounce(void)
+ {
+     struct vcpu *curr = current;
+     struct trap_bounce *tb = &curr->arch.pv.trap_bounce;
+@@ -114,7 +114,7 @@ bool set_guest_machinecheck_trapbounce(void)
+  * Called from asm to set up the NMI trapbounce info.
+  * Returns false if no callback is set up, else true.
+  */
+-bool set_guest_nmi_trapbounce(void)
++bool asmlinkage set_guest_nmi_trapbounce(void)
+ {
+     struct vcpu *curr = current;
+     struct trap_bounce *tb = &curr->arch.pv.trap_bounce;
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 44da5efa1d20..27c63d1d97c9 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -877,6 +877,8 @@ static void noreturn init_done(void)
+     startup_cpu_idle_loop();
+ }
  
++unsigned int xen_msr_s_cet_value(void); /* To avoid ifdefary, and placate MISRA */
++
+ #if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
+ /*
+  * Used by AP and S3 asm code to calcualte the appropriate MSR_S_CET setting.
+@@ -888,8 +890,6 @@ unsigned int xen_msr_s_cet_value(void)
+     return ((cpu_has_xen_shstk ? CET_SHSTK_EN | CET_WRSS_EN : 0) |
+             (cpu_has_xen_ibt   ? CET_ENDBR_EN : 0));
+ }
+-#else
+-unsigned int xen_msr_s_cet_value(void); /* To avoid ifdefary */
+ #endif
+ 
+ /* Reinitalise all state referring to the old virtual address of the stack. */
 -- 
 2.39.5
 
