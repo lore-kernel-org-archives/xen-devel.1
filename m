@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F28D59D9C
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 21:34:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1185863.1507811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB74D59F44
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 22:20:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1185895.1507822 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vUAmI-0004a3-AV; Fri, 12 Dec 2025 21:34:18 +0000
+	id 1vUBV8-0004B4-Lm; Fri, 12 Dec 2025 22:20:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1185863.1507811; Fri, 12 Dec 2025 21:34:18 +0000
+Received: by outflank-mailman (output) from mailman id 1185895.1507822; Fri, 12 Dec 2025 22:20:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vUAmI-0004Zw-7Z; Fri, 12 Dec 2025 21:34:18 +0000
-Received: by outflank-mailman (input) for mailman id 1185863;
- Fri, 12 Dec 2025 21:34:17 +0000
+	id 1vUBV8-0004Ax-IM; Fri, 12 Dec 2025 22:20:38 +0000
+Received: by outflank-mailman (input) for mailman id 1185895;
+ Fri, 12 Dec 2025 22:20:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vPyE=6S=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1vUAmH-0004Zq-0K
- for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 21:34:17 +0000
-Received: from fout-b7-smtp.messagingengine.com
- (fout-b7-smtp.messagingengine.com [202.12.124.150])
+ <SRS0=SbWK=6S=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1vUBV8-0004Ar-80
+ for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 22:20:38 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4e84ea0d-d7a2-11f0-b15b-2bf370ae4941;
- Fri, 12 Dec 2025 22:34:15 +0100 (CET)
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfout.stl.internal (Postfix) with ESMTP id B0D351D0001D;
- Fri, 12 Dec 2025 16:34:14 -0500 (EST)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Fri, 12 Dec 2025 16:34:14 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 12 Dec 2025 16:34:13 -0500 (EST)
+ id c8a54e1b-d7a8-11f0-b15b-2bf370ae4941;
+ Fri, 12 Dec 2025 23:20:37 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4777771ed1aso13726785e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Dec 2025 14:20:37 -0800 (PST)
+Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
+ [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42fb38a977esm6314350f8f.12.2025.12.12.14.20.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Dec 2025 14:20:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,143 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e84ea0d-d7a2-11f0-b15b-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1765575254;
-	 x=1765661654; bh=2+YzOw1U5rJDpRAuNhuLJtLfCR/ST+UE/HlgIi/6LxU=; b=
-	ohd4LqndH+u44ivtlPFshgkg1MMqXG9E4x3gSFxQHOtgnhFybPK+yxI+2LmHNnPQ
-	16UOM/FW9Xptb31ks0ZuzgCSwhUyu9YzZDcB87SokR5t7MoH9VSpNy2T7+s5Gcke
-	KWZ3QXcUnyo68ro+RTJs0aGF89S/hZQBjWmOubS1OFGJzIQmXZ4mSkCWR67qAkFi
-	IeW3bRlpCtFLG8zqn4Bp3DqCXOa3Zbmlz3yP19H3+DFPHUOR+3Mj5PvEwTxTBIBj
-	0frdaeZN8QqYRM1WkcIQKDMbOkssAujsy4R8FVPuYbBwIytHSmUwn3Tm4u1RrpuV
-	g1l+6iU9nXE0ko8eOswYug==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1765575254; x=1765661654; bh=2+YzOw1U5rJDpRAuNhuLJtLfCR/ST+UE/Hl
-	gIi/6LxU=; b=jJm9xSMbxK77UHy4sTkOte7Kpl29DGyfn8gsc48Ve0Hcwp5VS4m
-	vGaUIHgaIYoCptmexrSymNDmPYw7HCnINRlmlJzI+UdNnYq47Llce7kYP4COi96X
-	/Q/K0lY4byUyO439vHVd2CpLT1LYjFK38c0tnXS2BZkZ9fo2RQ09hjplwdP6leC9
-	63zajC/TKSk0pIflX8dreiNa8lwkFyDa+uxgGxoz1TsJlsxBaZOCPdvwexsulkd+
-	GcjXXGVmW2kv8LD2fSnfrWZwDUP576CjwHxvXm1GXNW+OcUNCSScha3XnJbAd+OO
-	6U/bpdInsHihuoK4GmeDxXSeXrqaXlNXJpA==
-X-ME-Sender: <xms:Voo8aWxhP7WKLS0kTbmjsKEIXy1BYAEAbOD-2PeyCwUJsxooMhUmjA>
-    <xme:Voo8aZRDQvjSk4T6g45AatZCbkH7rPxH2ZPD_4e7sVR1B_eXkqdo48BMPRreX5Q-A
-    5HhXUWrExngpJED4p5mHsPZq5Sqo8lvUaTCNoOjwHGUVoX9cA>
-X-ME-Received: <xmr:Voo8adXLR09nGY3bLpZAPQZq8TAesOSprGNawVKH8d7ijcRNIwbPznlDAL_PMM_G-Gui_Jv8-dz9YHh85XG1QgRBamFE-LFG1R0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddvledvjecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghkucfo
-    rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
-    hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgudelteef
-    vefhfeehieetleeihfejhfeludevteetkeevtedtvdegueetfeejudenucevlhhushhtvg
-    hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhn
-    vhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeegpdhmoh
-    guvgepshhmthhpohhuthdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghi
-    thhrihigrdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnh
-    hprhhojhgvtghtrdhorhhgpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhn
-    vghlrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrdgtohhm
-X-ME-Proxy: <xmx:Voo8abY1L7oNqzIv-S4V2DN6E0ln7H9mIz0ruNV-2fwRdV_a6cNBdw>
-    <xmx:Voo8aT2YZLVV8LDdRxHxyUuPLhUR8fvILW8WJV0wg6jfEa3h9M_E3g>
-    <xmx:Voo8adjtbSnu2r71dLL53ObjSH2QGnJKN2Zd3ztooDer87w9ASk94Q>
-    <xmx:Voo8aXZoiYIj5txYLEn8Wf0Y1aWIhoEoEwgwAB5NlKRxh14sgQjjDg>
-    <xmx:Voo8aZq7sXf_OlhQTJOdbTFdNzQawCobD3jB0OSch7d5IadN4JEs1T_0>
-Feedback-ID: i1568416f:Fastmail
-Date: Fri, 12 Dec 2025 22:34:11 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org,
+X-Inumbo-ID: c8a54e1b-d7a8-11f0-b15b-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1765578036; x=1766182836; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=F3V4XDxkbSr0Ri1dePMHKcN9nqU1osBYWUXVUX5x7JY=;
+        b=VwqSdAFF8r/XsSv8x9La1UigKqTwKVtAo3RBoX4XUkYLZXEAnq1WW4I0pkSsBxQbEP
+         GivZDn12ktjteTtu2goG4l0eTYwcrfOtYivn2cRhzcPWxg1DOCR8i9jfALjRneNDRz5X
+         9MhdWVzNskhzdd50xZrNoqbeIU+3/HCct1O5A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765578036; x=1766182836;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=F3V4XDxkbSr0Ri1dePMHKcN9nqU1osBYWUXVUX5x7JY=;
+        b=d8DlOjfOgOJWu27OsHGSqNRt57rbWh31zZUEOO8GJ/kSfI5VY8RBGK3kxztN5p6XN5
+         2JYlns8rNB8gg9H46cjfI5G4553bj8aNUo/Pt0m89P3OYjL4z9o/zgR/LJnNBi0EMvsD
+         1RpEF5QYa+rh7Mbgl1GMOFjlKNorZbbiqgxPXniNObI7bG1X5c1ENgBJVJlcIk511aDt
+         Q+DnrTqnjspL2K0+4/8jGK6sb9CBnObu7d++q4zqCiGws/j9eUKZUaWdfyHttNeGtvAi
+         iLPBnnv3+QnMg6R581XDNEsiwX/xOQBTZznIZ8tnMo3krCF0Mrqtxdo66wWTOkFygA/l
+         En0Q==
+X-Gm-Message-State: AOJu0YyMGQImAAtpera07aVmEQzq8QZtNyfJrL1xZw7OWu9d/rE5AlOE
+	s6hpurugg4ylshyGeQOO9VMGt8ECZLLaDx5O479kgz/tUo9elnLXvzKIpWUx/GSc4W40njxbVlB
+	JD4VL
+X-Gm-Gg: AY/fxX4iN4aeKGM8Y2Z5S0b90SPUf0Qshxg7u2eTzZR20DMWk6IDokd+lsslA7ifyiP
+	M7Ba9nort8ziK0mavVKelOfKonWOpMiA9d9Pwk8DemT6aWkRWCExGFEbif1BYw8falw8fpw2bsA
+	lm39RARdYoDPa3jn66T2cYrVfAhOpMJbHVnOGaNlT0WJ0Y2V3LjoEneHwW9+3ayrun5SnoOwCu2
+	bvBYotrkzcJsMzhR161lPkS+3QRs4cQ5BnQ86Aws5PyHKkW/mUWwZGkw0SM61ljYvIUp88ZCCLH
+	xhdr/PqaxZEEwHLYgwERcJ/eYQNvNOSgW33Pm2ogfifVS/wg2gCsOA+KaH3En1sRmxBcFccLq7M
+	ceqGot1rm/0UzxKc7EawpYYM/qIeyDFXJSW0M2jofBdjYyttP+0It24Wie9F3H49ccV43CM5stB
+	49voY4NXzQv7m+h9ZA056HfLD6rW2apta8e6BrV4tweAtsKXeT8RPqQjlzwjy6Bw==
+X-Google-Smtp-Source: AGHT+IGy3sxQvwG5V1weoi6H6NHr3oODD+Ye2meubDsh3LN/IRVDmCJMkKKdO37X3muwaN49CuEqjw==
+X-Received: by 2002:a05:6000:2f81:b0:42b:3062:c647 with SMTP id ffacd0b85a97d-42fb44b7718mr3433452f8f.21.1765578036153;
+        Fri, 12 Dec 2025 14:20:36 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 02/12] Switch Linux builds to use Alpine 3.22 container
-Message-ID: <aTyKU-KyOhMuvvuf@mail-itl>
-References: <cover.fb9bd2be49ef9017f3552508f8c59849b8c0086f.1764866136.git-series.marmarek@invisiblethingslab.com>
- <b1d58190ac7e2b65f80542685191944b83338960.1764866136.git-series.marmarek@invisiblethingslab.com>
- <f79a31b6-9153-47c1-b1c9-21f5aa5c5a8f@citrix.com>
+	"consulting @ bugseng . com" <consulting@bugseng.com>,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>
+Subject: [PATCH 2/5] x86/pv: Change type of do_update_descriptor()'s desc parameter
+Date: Fri, 12 Dec 2025 22:20:29 +0000
+Message-Id: <20251212222032.2640580-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251212222032.2640580-1-andrew.cooper3@citrix.com>
+References: <20251212222032.2640580-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Hdu4f8EpiRufg3m4"
-Content-Disposition: inline
-In-Reply-To: <f79a31b6-9153-47c1-b1c9-21f5aa5c5a8f@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+The automatically generated hypercall dispatch logic looks like:
 
---Hdu4f8EpiRufg3m4
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 12 Dec 2025 22:34:11 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 02/12] Switch Linux builds to use Alpine 3.22 container
+    case __HYPERVISOR_update_descriptor: \
+        ret = do_update_descriptor((uint64_t)(a1), (seg_desc_t)(a2)); \
+        break; \
 
-On Fri, Dec 12, 2025 at 09:15:34PM +0000, Andrew Cooper wrote:
-> On 04/12/2025 4:37 pm, Marek Marczykowski-G=C3=B3recki wrote:
-> > Slowly phase out 3.18 one.
-> >
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
-> >  .gitlab-ci.yml | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > index 17d25ce..36622c7 100644
-> > --- a/.gitlab-ci.yml
-> > +++ b/.gitlab-ci.yml
-> > @@ -21,14 +21,14 @@ stages:
-> >    tags:
-> >      - arm64
-> >    variables:
-> > -    CONTAINER: alpine:3.18-arm64-build
-> > +    CONTAINER: alpine:3.22-arm64-build
-> > =20
-> >  .x86_64-artifacts:
-> >    extends: .artifacts
-> >    tags:
-> >      - x86_64
-> >    variables:
-> > -    CONTAINER: alpine:3.18-x86_64-build
-> > +    CONTAINER: alpine:3.22-x86_64-build
-> > =20
-> >  #
-> >  # ARM64 artifacts
->=20
-> Just to double check.=C2=A0 This should be safe because it gets us a newer
-> build environment for Linux, but the resulting kernel and modules are
-> not tied the alpine runtime.
+but seg_desc_t is a union and Eclair considers this to be a violation of MISRA
+Rule 1.1.  There's also a Rule 8.3 violation for the parameter name mismatch.
 
-Yes, they shouldn't be specific to alpine runtime, and I'm pretty sure
-we already mix Alpine and Debian here without issues.
+Instead of playing games trying to change seg_desc_t to be a struct, or to
+alter the AWK generator to know that seg_desc_t is magic and needs braces
+rather than brackets, just switch the type to be a plain uint64_t.
 
-> i.e. I can commit this to test-artefacts and it won't break Xen's CI ?
+The size is fixed by the x86 architecture, so it is never going to change.
+This even lets us simplify compat_update_descriptor() a little.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+No functional change.
 
---Hdu4f8EpiRufg3m4
-Content-Type: application/pgp-signature; name=signature.asc
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: consulting@bugseng.com <consulting@bugseng.com>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ xen/arch/x86/pv/descriptor-tables.c | 10 ++++------
+ xen/include/hypercall-defs.c        |  2 +-
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
+index 26f7d18b11b5..8a32b9ae5ced 100644
+--- a/xen/arch/x86/pv/descriptor-tables.c
++++ b/xen/arch/x86/pv/descriptor-tables.c
+@@ -179,11 +179,8 @@ int compat_set_gdt(
+ int compat_update_descriptor(
+     uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi)
+ {
+-    seg_desc_t d;
+-
+-    d.raw = ((uint64_t)desc_hi << 32) | desc_lo;
+-
+-    return do_update_descriptor(pa_lo | ((uint64_t)pa_hi << 32), d);
++    return do_update_descriptor(pa_lo | ((uint64_t)pa_hi << 32),
++                                desc_lo | ((uint64_t)desc_hi << 32));
+ }
+ 
+ #endif /* CONFIG_PV32 */
+@@ -288,9 +285,10 @@ int validate_segdesc_page(struct page_info *page)
+     return i == 512 ? 0 : -EINVAL;
+ }
+ 
+-long do_update_descriptor(uint64_t gaddr, seg_desc_t d)
++long do_update_descriptor(uint64_t gaddr, uint64_t desc)
+ {
+     struct domain *currd = current->domain;
++    seg_desc_t d = { .raw = desc };
+     gfn_t gfn = gaddr_to_gfn(gaddr);
+     mfn_t mfn;
+     seg_desc_t *entry;
+diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
+index cef08eeec1b8..5782cdfd1496 100644
+--- a/xen/include/hypercall-defs.c
++++ b/xen/include/hypercall-defs.c
+@@ -184,7 +184,7 @@ mca(xen_mc_t *u_xen_mc)
+ set_trap_table(const_trap_info_t *traps)
+ set_gdt(xen_ulong_t *frame_list, unsigned int entries)
+ set_callbacks(unsigned long event_address, unsigned long failsafe_address, unsigned long syscall_address)
+-update_descriptor(uint64_t gaddr, seg_desc_t desc)
++update_descriptor(uint64_t gaddr, uint64_t desc)
+ update_va_mapping(unsigned long va, uint64_t val64, unsigned long flags)
+ update_va_mapping_otherdomain(unsigned long va, uint64_t val64, unsigned long flags, domid_t domid)
+ #endif
+-- 
+2.39.5
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmk8ilMACgkQ24/THMrX
-1yx6pAgAiF/mE+3d3tFQZ5VFlIDm/gPYUV/K/0fYDvc96EnVoPZKShv7i84C9jAX
-ve4kN4ahq+HmvXWA7T6ZfCHmHt1A7cLbvlcKRmrSWLZHkR17vKRG9WK6KUNaOdh1
-T5GAz8awhsBfMObbtP/UkuLctugTpfZxqnWxCFA5n5+AUXZ68x20aXBrSSsP06EI
-FmSNQLsrA4iHflUBfFaOidvd1+U9fanlJXMdeApwkur9IeJbIGcENZHRy/WMATvP
-bCWo1G4rP5WFrPukwRu4+3G5iD7fdYD2zQLwVZPzbdmFUM4L8pCU4nfAXELaUqHW
-up8CRN4TWsCOHknyTH8niI+U6bGDvA==
-=8/la
------END PGP SIGNATURE-----
-
---Hdu4f8EpiRufg3m4--
 
