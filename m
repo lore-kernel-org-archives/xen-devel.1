@@ -4,38 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D45D59D82
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 19:00:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1185682.1507732 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6904D59D8D
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 19:10:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1185742.1507753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vU8NW-0002cl-0Y; Fri, 12 Dec 2025 19:00:34 +0000
+	id 1vU8Wz-0006V4-45; Fri, 12 Dec 2025 19:10:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1185682.1507732; Fri, 12 Dec 2025 19:00:33 +0000
+Received: by outflank-mailman (output) from mailman id 1185742.1507753; Fri, 12 Dec 2025 19:10:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vU8NV-0002cU-T7; Fri, 12 Dec 2025 19:00:33 +0000
-Received: by outflank-mailman (input) for mailman id 1185682;
- Fri, 12 Dec 2025 19:00:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vU8Wy-0006Ux-Vw; Fri, 12 Dec 2025 19:10:20 +0000
+Received: by outflank-mailman (input) for mailman id 1185742;
+ Fri, 12 Dec 2025 19:10:19 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SbWK=6S=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vU8NT-0001RM-Tp
- for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 19:00:31 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1c553f4-d78c-11f0-9cce-f158ae23cfc8;
- Fri, 12 Dec 2025 20:00:26 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-477aa218f20so10887735e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 12 Dec 2025 11:00:26 -0800 (PST)
-Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
- [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47a8f4af065sm16863975e9.6.2025.12.12.11.00.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 11:00:25 -0800 (PST)
+ <SRS0=tg47=6S=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
+ id 1vU8Wx-0006Gb-Li
+ for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 19:10:19 +0000
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [2a01:111:f403:c005::5])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2f3c2ba0-d78e-11f0-b15b-2bf370ae4941;
+ Fri, 12 Dec 2025 20:10:13 +0100 (CET)
+Received: from BN9PR03CA0801.namprd03.prod.outlook.com (2603:10b6:408:13f::26)
+ by SJ2PR12MB9116.namprd12.prod.outlook.com (2603:10b6:a03:557::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.11; Fri, 12 Dec
+ 2025 19:10:07 +0000
+Received: from BN2PEPF000055DE.namprd21.prod.outlook.com
+ (2603:10b6:408:13f:cafe::57) by BN9PR03CA0801.outlook.office365.com
+ (2603:10b6:408:13f::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.11 via Frontend Transport; Fri,
+ 12 Dec 2025 19:10:07 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF000055DE.mail.protection.outlook.com (10.167.245.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9434.0 via Frontend Transport; Fri, 12 Dec 2025 19:10:07 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 12 Dec
+ 2025 13:10:07 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 12 Dec
+ 2025 13:10:06 -0600
+Received: from xsjvictlira01-ubuntu-0.mshome.net (10.180.168.240) by
+ satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17 via Frontend Transport; Fri, 12 Dec 2025 11:10:06 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,234 +66,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1c553f4-d78c-11f0-9cce-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1765566025; x=1766170825; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ps58niqN4uMF+QvTxFnqL3rpQIPJOM5Dbdsk2f6ndKM=;
-        b=rQXKKXrnffc6Em9tBU9yy6CYBh7ISw/GtOIjhTsmK353I9psGFLgQ2UQNqlGlqxyNM
-         Ejov3SUypcYXuxPFYA3tr9gi+FSp5BA3lEb0H2SVUCB2P7MRef7zFZYoaCnLSO12WrkD
-         XtRJDwzCojFzlxhz8cdoSWcvh7ViNlvU7VPGo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765566025; x=1766170825;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ps58niqN4uMF+QvTxFnqL3rpQIPJOM5Dbdsk2f6ndKM=;
-        b=IM/yqLOmfYxhWfu7qgeG3s9zZ5fgqqdoNVYKQHZHKD8kEQbYVyD0Vu6ntNI6EjUE0h
-         Y+qAIhDMK6VCjeeAUrHvkhNF9X+uE40ssRnYAGfR5uAfmCAeLCHixQKTu/Ks6tMhzC8Y
-         oUZZOZzoeyHo1yr5oZnpX8e0hCeKkCLqt5I/hyrp/RZYreAIQtblz6pxsW/P9L4uFomK
-         BB3x24ZrtyIoV3y7g4vFt9/W5+IyknaVMJpMy1latkmPljDwZ6ROfjF/90IwbNXIjWe7
-         FQUbDLpXrnFPyMFI52M4kBB0wi7VjycdtP0tTqX/AKOD8zIxz7zkwf+GfLTVZMuVINCg
-         k/0Q==
-X-Gm-Message-State: AOJu0Yx0DLKMfddJkXJOrhQUsHJapgkyVJxi1zVRzAuiTEqVrMqeX3g0
-	UBidWjj2AiiePmLyDBp28/bYDUlkWGJWtqW1Qmh8AE4lrQwU1URwGvNYc0CLQAUiWsc7nrhC6JZ
-	WnQaJ
-X-Gm-Gg: AY/fxX4EQgBWlrQ3Pwt80A3VCWoksBeBzXmWICHvsJchdZqcKa1FTTe/2s1qvMQpncn
-	ydIgkyzGLCMx+xvVudmOGHimL2k5vK+k1l1RnwDshGH2dWYAc/9xRN4OxtzvxHdjf55pWctnECI
-	h7y3JGpfd9kL3Y2TCIFKtwzvwIcPFimp2c9z6VwvOka1+bklwpP5dzhp4LrFlcG9XED9T0dTtud
-	pktuWdbgWBEhiEO2pHXJqcTrtOxNhwJkQlNBFEJfTAOs0gECKagSVlAJ0q7Dz64EDvSy8U5ZsWZ
-	TA4/+XI4Kxfv5JM4jhtNbpWELGsy3oAq2LZWzl1JiT6P/1BqqJyW0ehZ1TBfMPiTQeDoVE1cjaq
-	eXz1Olcsx6CoVO0rLIpvmcFhwvXdVvqHyOEsP0pyxrX37eP4PdYCM6VYK6AHjSzlU1weIGrSUDJ
-	Srojgc9uLIMQtecpJpFLfV46PXxqC/bLNIJl6rH9Y4O7XmYVngJQpaBJSrJHwIwh8z6F5rL86i
-X-Google-Smtp-Source: AGHT+IF2qe996kPERecRDoM8QDX/3zB5zvYJGrTiyLOU8tcL3/NKmQ859lEMGlquUYzV+H9OAcEtvA==
-X-Received: by 2002:a05:600c:3e1a:b0:477:afc5:fb02 with SMTP id 5b1f17b1804b1-47a8f9051c4mr34560195e9.21.1765566025573;
-        Fri, 12 Dec 2025 11:00:25 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 4/5] x86/svm: Merge nestedsvm.h into svm-types.h
-Date: Fri, 12 Dec 2025 19:00:19 +0000
-Message-Id: <20251212190020.2570076-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251212190020.2570076-1-andrew.cooper3@citrix.com>
-References: <20251212190020.2570076-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 2f3c2ba0-d78e-11f0-b15b-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SzapfaXFRGmbGGMwqm67bzxY/yWUYVUh03KW3aAt/qYiW2v04G3IZFDUjg9x2zyGaFQd1pFH3YJOsk8KHp6d6sI7qnL2hEIT/AhSw0rA9pD9DHwrA98ZMX6eu6FFOA/ixSn4VImfv+/6m/kO0lOmCMA2PEecO4eFiJ2qEs5kit7L71PFHBGd3m+lSnctaOcWWYCZ05R5HllcnGSaTKdAgKy1X/Y1o9EpTACck1TqAVBGiHacL42ZIz+DG74GsGsi09csPCABWgxHB32JLilDr37QpD2Y17P9PmrjaVv21aza7gSwZrh8gIpH33unv6y5VR4bxk8IZKSa5rIqEbHiwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=i5tuI9cTDNV2ao972PUUR5cIDDmH4wbVtD/kZ/f3hR4=;
+ b=rGkpBCAeAP3o8IBmSusxvWFlrIv68S8U0MlqE1jItbNvSnITKp2HWoPk8MzgkfSlEncnA+tEgyZmfDywPvCbp44WS/+jfFOdOyW7TwUISBKg/zxmbDFEE3GSgZtEyJeCFbfE/houtJ2mHeOn1AYN45Zykdp6xzcJwffLReiaFImVYhF3tiXgdBpkzjZxS3KE5sUG50q5vth5Lzaa3kiU9c2NguxrxlWHoo1eAfxM3AffQmyLI9OYaZnrGzhjcqUUtsxvWcGIZjni08arJQK/W5KB548rr5hCHApp0PbORy3ZWR+2l4OacKwtMssmqdCHRSwCY50SH8zgWrZE1fc5wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=i5tuI9cTDNV2ao972PUUR5cIDDmH4wbVtD/kZ/f3hR4=;
+ b=f+z1T0y6brIe4vpgLLZk/SwyXgwCGlA2b72kDoEwGFFQtIVYSYQUMoQ19WUySq/ozsuGeFMqJUEfCTjh0mHhPRxF1DPq3KLEC2AxfFcfzmWFJZ1ItY02byEsYph3Fsf7D0xuTVGEafb2Q8IisRm/hb9xPt3HWBkZ97HxSPs0CCc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Victor Lira <victorm.lira@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Victor Lira <victorm.lira@amd.com>, Nicola Vetrini
+	<nicola.vetrini@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>
+Subject: [XEN PATCH v1] automation: prevent eclair-ARM64-amd from running by mistake
+Date: Fri, 12 Dec 2025 19:08:49 +0000
+Message-ID: <20251212190850.1357779-1-victorm.lira@amd.com>
+X-Mailer: git-send-email 2.51.GIT
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: victorm.lira@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DE:EE_|SJ2PR12MB9116:EE_
+X-MS-Office365-Filtering-Correlation-Id: b38e9510-0f75-4f2d-fa7e-08de39b21046
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?TDo30LIlwOWNHMhTgQPRO646Jsp8FxRwj4g80W99/cN3ipWTDek+fJy+FpHo?=
+ =?us-ascii?Q?256YkPouGPvH4NAZLTHBNlqyBw3heHCkuTQz9Lt0zPS3HtrVEIZIzF2swEwO?=
+ =?us-ascii?Q?CJKr+HZkual7+8E6D2ZETMA/yzXErWkIIKqTm5DZNoj6JDkG3PT5JRX5hRPE?=
+ =?us-ascii?Q?4GxvkZco5RWwQaO/N6/dFFnKRUqtdZHCqkIwkZR2OHaKmx2xyEJ4WVOBroSH?=
+ =?us-ascii?Q?mvIcIPEFQklEi50NM+o/owyPGW6r/n8oeNRz+3HW+Zc+8OS80lX70Ui7colI?=
+ =?us-ascii?Q?HMjELaMxg3N4Ca0ZYHVOzOphWiWH3yslxxNlLxa/3bHrYWSSeoDAtF+O10Y+?=
+ =?us-ascii?Q?Hj+EsgdniOZwp8c7Lq4ICTMSLgTYFAWnn0l86gFM1oLl2pX9Q30S5ZgQaqOr?=
+ =?us-ascii?Q?lYNE7nD8IjlBCCpa4C5ybYMSdIvTS63cuSZaGd2jESM7IrQvAYh+jFx8vFU4?=
+ =?us-ascii?Q?Wm3TcJiSpZBNr4Nkx88M7pWSY5oxOaC37LZ5MnRqVoLFbPu/CN95ihKiyzg0?=
+ =?us-ascii?Q?nSVXve8ly+0LCnZKV8zntaIy6oTEjv86NjIBOGIbr2BM57njbDvJdsfvJpNa?=
+ =?us-ascii?Q?omApmXcrwO2/qwueUVT0eXkIFX88z6hCznnGNVI1AdptJFZE/rF8US9ypmFm?=
+ =?us-ascii?Q?/+9yU7U6PCax1OwfvrSDGuU7CllMggf2h5pI8RkUSUx/czcKaqO47KeHDwAW?=
+ =?us-ascii?Q?YYtE8eXvBGI+2euOLX2wvRYjI3Jr/+kIX4XF5mqiYkaqR5W5J4pmO6VEObMZ?=
+ =?us-ascii?Q?4bSADsIK0xp+7YMhGc+q6z1kR3LodhnSkikKz4W3LKH8U6BsWteuZ58uufrT?=
+ =?us-ascii?Q?bYClKBFyjtieZh7Vr2M0QpimgTRBG4+a0t0Qd/5FYiunbsBobWqFMDcMoMc5?=
+ =?us-ascii?Q?51IwlEqnaradZu8sIscHHL0+YAI1MBxZUe5yIZSjdbYoyoh8l03Ym4nXUFG8?=
+ =?us-ascii?Q?GIEJlJUrS3jezhB6Lfenn+dsz+XWOaHKJYzFq1N+W1PwKqWIPHIm4Vqr8so6?=
+ =?us-ascii?Q?LOy1lTBYdC72c5QsOiO2Y9RUXmZmZxsKm2t6f5lzMr0WqP8+7/ku5mZU2HLG?=
+ =?us-ascii?Q?SQ9HLtIES03yg6CNE2hPhNpHn9NgPCYKD4DDlXTpZQcl7ihZwNW9cA7OeC7w?=
+ =?us-ascii?Q?9qBKvCU8PUIkbijya63cOiY1toqhDNPtlzAxKk2qTgN+SAd6XD05igsPfkCK?=
+ =?us-ascii?Q?Pt9BsfFs/mVnmAIj9S3bHpcwhzSKiindpWGYvxLfYkJtkGtDyEc5dhSdwj2w?=
+ =?us-ascii?Q?Po2Lu/Kov2S5uOJlfnyoRIGg35epe3AFqQlIo1Lvu+p1pJvvz1dBI0qYhSZT?=
+ =?us-ascii?Q?DUK5UBTJLRYjJORkAOQJ3vPcN/LM1Dbxy8p3mDWYB+1pcp/fvSVytqAV/6yv?=
+ =?us-ascii?Q?R44l8XhMKmEO0h9pEyRC477JqW5z0bQth/kBJiLRFUNmOiVozRzxO0HBQ06W?=
+ =?us-ascii?Q?/hOgv1W6I3/S4WutsI9ORJ2rnzWsaYfCVY/1WGg0Dd7diwfJVTZlyo1nhoPl?=
+ =?us-ascii?Q?wl42ZZ8hIU2aemqPPC5dxMoiEAkdgGKto4ocuPQBm9gsjXs4/dwUCep3fj8J?=
+ =?us-ascii?Q?ppOXCqWZBmCgG93OyeU=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 19:10:07.2812
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b38e9510-0f75-4f2d-fa7e-08de39b21046
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF000055DE.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9116
 
-While doing so, move the ns_gif field to beside ns_hap_enabled to remove 7
-padding bytes, and make some style fixes to comments/etc.
+It seems unintentional that this job references .eclair-analysis
+instead of .eclair-analysis:triggered which does not apply the rules
+from that template. One effect is that it runs always instead of
+manually in my xen-project/people repo.
 
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Victor Lira <victorm.lira@amd.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/x86/include/asm/hvm/svm-types.h     | 66 +++++++++++++++-
- xen/arch/x86/include/asm/hvm/svm/nestedsvm.h | 79 --------------------
- 2 files changed, 65 insertions(+), 80 deletions(-)
- delete mode 100644 xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+ automation/gitlab-ci/analyze.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
-index 1c26daa981a7..637b94fa37da 100644
---- a/xen/arch/x86/include/asm/hvm/svm-types.h
-+++ b/xen/arch/x86/include/asm/hvm/svm-types.h
-@@ -5,7 +5,71 @@
- #ifndef X86_SVM_TYPES_H
- #define X86_SVM_TYPES_H
- 
-+#include <xen/types.h>
-+
- #include <asm/hvm/svm/vmcb.h>
--#include <asm/hvm/svm/nestedsvm.h>
-+
-+struct nestedsvm {
-+    uint64_t ns_msr_hsavepa; /* MSR HSAVE_PA value */
-+
-+    /*
-+     * l1 guest physical address of virtual vmcb used by prior VMRUN.  Needed
-+     * for VMCB Cleanbit emulation.
-+     */
-+    uint64_t ns_ovvmcb_pa;
-+
-+    /* Cached real intercepts of the l2 guest */
-+    uint32_t ns_cr_intercepts;
-+    uint32_t ns_dr_intercepts;
-+    uint32_t ns_exception_intercepts;
-+    uint32_t ns_general1_intercepts;
-+    uint32_t ns_general2_intercepts;
-+
-+    /* Cached real MSR permission bitmaps of the l2 guest */
-+    unsigned long *ns_cached_msrpm;
-+    /* Merged MSR permission bitmap */
-+    unsigned long *ns_merged_msrpm;
-+
-+    /* guest physical address of virtual io permission map */
-+    paddr_t ns_iomap_pa, ns_oiomap_pa;
-+    /* Shadow io permission map */
-+    unsigned long *ns_iomap;
-+
-+     /*
-+      * Cached guest_cr[0] of l1 guest while l2 guest runs.  Needed to handle
-+      * FPU context switching.
-+      */
-+    uint64_t ns_cr0;
-+
-+    /*
-+     * Cache guest cr3/host cr3 the guest sets up for the l2 guest.
-+     * Used by Shadow-on-Shadow and Nested-on-Nested.
-+     * ns_vmcb_guestcr3: in l2 guest physical address space and points to
-+     *     the l2 guest page table
-+     * ns_vmcb_hostcr3: in l1 guest physical address space and points to
-+     *     the l1 guest nested page table
-+     */
-+    uint64_t ns_vmcb_guestcr3, ns_vmcb_hostcr3;
-+    uint32_t ns_asid;
-+
-+    bool ns_gif;
-+    bool ns_hap_enabled;
-+
-+    /* Only meaningful when vmexit_pending flag is set */
-+    struct {
-+        uint64_t exitcode;  /* native exitcode to inject into l1 guest */
-+        uint64_t exitinfo1; /* additional information to the exitcode */
-+        uint64_t exitinfo2; /* additional information to the exitcode */
-+    } ns_vmexit;
-+
-+    union {
-+        uint32_t bytes;
-+        struct {
-+            uint32_t rflagsif:1;
-+            uint32_t vintrmask:1;
-+            uint32_t reserved:30;
-+        } fields;
-+    } ns_hostflags;
-+};
- 
- #endif /* X86_SVM_TYPES_H */
-diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-deleted file mode 100644
-index 205989e80095..000000000000
---- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-+++ /dev/null
-@@ -1,79 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * nestedsvm.h: Nested Virtualization
-- * Copyright (c) 2011, Advanced Micro Devices, Inc
-- *
-- */
--#ifndef __ASM_X86_HVM_SVM_NESTEDSVM_H__
--#define __ASM_X86_HVM_SVM_NESTEDSVM_H__
--
--#include <xen/types.h>
--
--struct nestedsvm {
--    bool ns_gif;
--    uint64_t ns_msr_hsavepa; /* MSR HSAVE_PA value */
--
--    /* l1 guest physical address of virtual vmcb used by prior VMRUN.
--     * Needed for VMCB Cleanbit emulation.
--     */
--    uint64_t ns_ovvmcb_pa;
--
--    /* Cached real intercepts of the l2 guest */
--    uint32_t ns_cr_intercepts;
--    uint32_t ns_dr_intercepts;
--    uint32_t ns_exception_intercepts;
--    uint32_t ns_general1_intercepts;
--    uint32_t ns_general2_intercepts;
--
--    /* Cached real MSR permission bitmaps of the l2 guest */
--    unsigned long *ns_cached_msrpm;
--    /* Merged MSR permission bitmap */
--    unsigned long *ns_merged_msrpm;
--
--    /* guest physical address of virtual io permission map */
--    paddr_t ns_iomap_pa, ns_oiomap_pa;
--    /* Shadow io permission map */
--    unsigned long *ns_iomap;
--
--    uint64_t ns_cr0; /* Cached guest_cr[0] of l1 guest while l2 guest runs.
--                      * Needed to handle FPU context switching */
--
--    /* Cache guest cr3/host cr3 the guest sets up for the l2 guest.
--     * Used by Shadow-on-Shadow and Nested-on-Nested.
--     * ns_vmcb_guestcr3: in l2 guest physical address space and points to
--     *     the l2 guest page table
--     * ns_vmcb_hostcr3: in l1 guest physical address space and points to
--     *     the l1 guest nested page table
--     */
--    uint64_t ns_vmcb_guestcr3, ns_vmcb_hostcr3;
--    uint32_t ns_asid;
--
--    bool ns_hap_enabled;
--
--    /* Only meaningful when vmexit_pending flag is set */
--    struct {
--        uint64_t exitcode;  /* native exitcode to inject into l1 guest */
--        uint64_t exitinfo1; /* additional information to the exitcode */
--        uint64_t exitinfo2; /* additional information to the exitcode */
--    } ns_vmexit;
--    union {
--        uint32_t bytes;
--        struct {
--            uint32_t rflagsif: 1;
--            uint32_t vintrmask: 1;
--            uint32_t reserved: 30;
--        } fields;
--    } ns_hostflags;
--};
--
--#endif /* ASM_X86_HVM_SVM_NESTEDSVM_H__ */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * tab-width: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
--- 
-2.39.5
+diff --git a/automation/gitlab-ci/analyze.yaml b/automation/gitlab-ci/analyze.yaml
+index 286faffeb3..e9a8f9d544 100644
+--- a/automation/gitlab-ci/analyze.yaml
++++ b/automation/gitlab-ci/analyze.yaml
+@@ -165,7 +165,7 @@ eclair-ARM64-amd:
+   rules:
+     - if: $ECLAIR_SAFETY
+       when: always
+-    - !reference [.eclair-analysis, rules]
++    - !reference [.eclair-analysis:triggered, rules]
 
+ .eclair-analysis:on-schedule:
+   extends: .eclair-analysis
+--
+2.51.GIT
 
