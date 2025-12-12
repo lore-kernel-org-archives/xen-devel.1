@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F07D4336B
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 04:18:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1185030.1507362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40FF8D4336B
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Dec 2025 04:19:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1185062.1507372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTubU-0001su-HY; Fri, 12 Dec 2025 04:18:04 +0000
+	id 1vTuch-0002zW-QU; Fri, 12 Dec 2025 04:19:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1185030.1507362; Fri, 12 Dec 2025 04:18:04 +0000
+Received: by outflank-mailman (output) from mailman id 1185062.1507372; Fri, 12 Dec 2025 04:19:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vTubU-0001sn-Dg; Fri, 12 Dec 2025 04:18:04 +0000
-Received: by outflank-mailman (input) for mailman id 1185030;
- Fri, 12 Dec 2025 04:18:03 +0000
+	id 1vTuch-0002zP-NM; Fri, 12 Dec 2025 04:19:19 +0000
+Received: by outflank-mailman (input) for mailman id 1185062;
+ Fri, 12 Dec 2025 04:19:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oKBw=6S=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1vTuR5-0007SS-2S
- for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 04:07:19 +0000
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c105::1])
+ id 1vTuRE-0007SS-0U
+ for xen-devel@lists.xenproject.org; Fri, 12 Dec 2025 04:07:28 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0bc92d6a-d710-11f0-9cce-f158ae23cfc8;
- Fri, 12 Dec 2025 05:07:17 +0100 (CET)
-Received: from MN2PR13CA0019.namprd13.prod.outlook.com (2603:10b6:208:160::32)
- by IA1PR12MB6433.namprd12.prod.outlook.com (2603:10b6:208:3af::11)
+ id 1066ae0a-d710-11f0-9cce-f158ae23cfc8;
+ Fri, 12 Dec 2025 05:07:25 +0100 (CET)
+Received: from MN0PR04CA0007.namprd04.prod.outlook.com (2603:10b6:208:52d::12)
+ by MW4PR12MB7215.namprd12.prod.outlook.com (2603:10b6:303:228::8)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.11; Fri, 12 Dec
- 2025 04:07:13 +0000
-Received: from BL02EPF0002992E.namprd02.prod.outlook.com
- (2603:10b6:208:160:cafe::3d) by MN2PR13CA0019.outlook.office365.com
- (2603:10b6:208:160::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.5 via Frontend Transport; Fri,
- 12 Dec 2025 04:07:12 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.7; Fri, 12 Dec
+ 2025 04:07:21 +0000
+Received: from BL02EPF00029927.namprd02.prod.outlook.com
+ (2603:10b6:208:52d:cafe::39) by MN0PR04CA0007.outlook.office365.com
+ (2603:10b6:208:52d::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.10 via Frontend Transport; Fri,
+ 12 Dec 2025 04:07:16 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF0002992E.mail.protection.outlook.com (10.167.249.59) with Microsoft
+ BL02EPF00029927.mail.protection.outlook.com (10.167.249.52) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 04:07:13 +0000
+ 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 04:07:20 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Thu, 11 Dec 2025 22:07:10 -0600
+ 15.2.2562.17; Thu, 11 Dec 2025 22:07:18 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0bc92d6a-d710-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 1066ae0a-d710-11f0-9cce-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l7LOjONY4qCNiahorfmtjP0XCQF6vZrEmf+CX1qJjQ2vkUdbSJrFFnvemCYLXyKUKCAXXsgr3ew401BZesTL+bmQcTSoimFmfjtp+XfAQwbN2hENL6N9T+2Y5H4YwWBmEZrQKRLaPeJivIwbaZcGDubX6EG+kB0+WT2MbzTdO6/65Ct+r9QJUoSY+rwD8TcWlRExbPudThQx+rHTg2ivqePYOeAeMPTUbH8rrg+VQ9ODBp32oGxO9CKDsR2AKjj53KSqiJJ2ph6v2Gs9u+Wb0wZCXccZ2QR6UlPWMOnZu3nmXrYnjy+s30Wop29qYpMl/NPYaxUYSldYoLVBngwQRA==
+ b=F63U58GLzrSm2svauWHsgSCeWYaKea507E/O+sXglWb6LoH+6Pe8wOEuVOTTsP7pM9TQnVRU9yU128/KcNac0WIbX9W0lPJecD14lumlRkHTCG2A4SL6Co4grOl3z1cSI8mEOSQCNfs+wEoU6XrmwHUP4gRQtGB8Snyy4geaqDQOmKspVw0YnI+/mW8okyXWwqoQqYRfarkLCN9m7czPUGSK6mBjGPQPamw18oPtsxZLtxFd2gMnrY1VrVyUueGIu8DD6II29ArJ5CuP/Lr8ekbMqeCXArxaKwsXMEkF1pWmcS4mcUdtrUG3ugiQXxJViKkd7kOz8HbuqGxjD/JmqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KWivIiaybYPw5jJB/DQbmVNl+SgpVQga3F7RYOvVWbg=;
- b=wBbOaIVxSbPMJOkpVNWYqRTzlv1KNP4fyl33Te5mezJzJBgwdUQGOuz6ojSB61pMwKUTD3F5TKtpgim9MGcJLJUTpuORXW+Wf7xfrhQPt9E5ufL5PWGm7e5hlbAqmy9uoRh8VTCLKxdsEVD5cLm/duYI2ck2GsIluifJarE2/zLG9uA6QNN7PTSDV+Jr6xrzWKzquSa0wKdWn4JISuy9KMEqHKcOJ67RRysIHaFt3KHqlgypTYpMyOzKqpcKo32ASqLmX78/BsB14xo2W3btjprkXPZJMA9Xe/qOrbKlp8Zbp9c925KD3TJ4K/He+F8anG0koHkpVemRba/WxJMKlg==
+ bh=csNyOjSkFIvdqjgNPlKK9D9XWEr0x478Jq7b5iigMd0=;
+ b=Dwsyj7xoy083IjYLAOKtf8GWarVQqFJoCRFlQ2U97pltRpVU242bvw4hFSUz+D5NsZ9NceazQd5y2zyDuSytKmc+yIc7jQOvu/ovVCsAHbybSrEnx2fI7Dga7JP0KolCb122v5tb/EW6NqNFdrUAGzr14mab3O87WtYdisb9akUwARuDNCL8SAcmpACFfT8z8JMzDq7gxjk8H9TgXgn70EgoT09QsNS++rX8y9sHW3p76lmWNvQbJldwJBEYOfbc+RCskWBaHG8Zh7Ok73II9Oz0uXTdkj07KQYHn9tdcXrH4ech113hUhPvq7+jiF3YJKT5dqj1cZgL2N/IioT/2A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KWivIiaybYPw5jJB/DQbmVNl+SgpVQga3F7RYOvVWbg=;
- b=axOPZe+729JHE4Ru9hz5LCC49PSmleOo/4SNcGB2YWA18YsrVeYHUOob5LzVvUHUj3RV8rBZNFEzeOjVv7H/JPX/IxweT5+gZvNSHJrZvsQmxl+vnYD2dvsxBYR2TP8VVW6yBd11FvrqKA05DtT2RxOEQwYtAs6aFV2QMfiCaFg=
+ bh=csNyOjSkFIvdqjgNPlKK9D9XWEr0x478Jq7b5iigMd0=;
+ b=jB3hcoMn3ErSlfRVBJtgJabk0WKG/ALH86Sc2OWJXqUYRN/hs4wbCsH1zElFGU9/95M7RlkhfZqY2faZmP2Z8sYow1SBMc+g5jwUHvYiqihxxXxoYWEBgdI91XCwcQwp6zUmFXGjIoQtc/a38XktLwEevXtVdX8UsOwBibvSoI0=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,13 +85,10 @@ To: <xen-devel@lists.xenproject.org>
 CC: <ray.huang@amd.com>, <grygorii_strashko@epam.com>, Penny Zheng
 	<Penny.Zheng@amd.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
  Grall" <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Michal
- Orzel" <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>
-Subject: [PATCH v5 18/24] xen/domctl: wrap arch_{get,set}_paging_mempool_size() with CONFIG_MGMT_HYPERCALLS
-Date: Fri, 12 Dec 2025 12:02:03 +0800
-Message-ID: <20251212040209.1970553-19-Penny.Zheng@amd.com>
+ Orzel" <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v5 21/24] xen/arm: wrap arm-specific domctl-op with CONFIG_MGMT_HYPERCALLS
+Date: Fri, 12 Dec 2025 12:02:06 +0800
+Message-ID: <20251212040209.1970553-22-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251212040209.1970553-1-Penny.Zheng@amd.com>
 References: <20251212040209.1970553-1-Penny.Zheng@amd.com>
@@ -103,130 +100,109 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992E:EE_|IA1PR12MB6433:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e96c102-530e-48e3-6435-08de3933edea
+X-MS-TrafficTypeDiagnostic: BL02EPF00029927:EE_|MW4PR12MB7215:EE_
+X-MS-Office365-Filtering-Correlation-Id: 281e453a-6b7b-4635-b539-08de3933f2a0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
+	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?DcrRkvywtYBRp4zrTmFAaqy4gazQVJwM9qHe8YDM7bDHYqEJhAWlqZ5ZyYXl?=
- =?us-ascii?Q?cH/fCdc8r8Wq/dUyU8ykVNY+2zyRLjIGM4uTMHJFbgvGxKptTRn0kik/DK72?=
- =?us-ascii?Q?uzm0PKdhLWrz8GlNuBHK1z9lIRM5JkyV7Y7PLErc14g99O7O3G9K0yAapmKs?=
- =?us-ascii?Q?EXi/gwVTbhiEzutkk8u+7mCOWGZQ9RIsTU4MfubPReRa+Eu2eW+hXuwQ4eP2?=
- =?us-ascii?Q?Njx2P8IUkMVHXQ3tjFVruiZR/yHnipIPgiJyfJXUXkKCDgmcoPAR2tXYxcaB?=
- =?us-ascii?Q?YqptIRGOSMXTEF0A08uj4i7pKjsSPKtcwqqMxwva/Z6ZWg78kb9mm8J01uyr?=
- =?us-ascii?Q?ytfyNH89jCAVL2sbWQ01TPErW26l70XREk2weDcJo/QfYflnKTksb64bqQzQ?=
- =?us-ascii?Q?ZYHiBckcmRG4zCTXJXfYMQJWjdwcTKkQMENupfoW509uXBno5xTeNGpjDkG+?=
- =?us-ascii?Q?fc8Mo4LmcjZWgNPu7Lqv2ari+72kHOOJNlC6z6dkQkwN+a5RI6lKTUlcYJHO?=
- =?us-ascii?Q?0yDsbQSjj+t+X0p7IiEEnpq71kvN/aCHKiDeEac7w+51jy+Hx377nRSHKFMc?=
- =?us-ascii?Q?C2XFc6+3JZ0NPDiPN3DxPi4CJYv4G6w3he7vbidpSGMFWetpyoU58kljI0Jf?=
- =?us-ascii?Q?rgJ2aZzEGDCzMQdJYFW9/8GqDBtMJYh7ZiGcQtXCkVGB9g5KTMyxSONz+ACA?=
- =?us-ascii?Q?1wvA+ybFmI+EOjUOFr9n3n/uIkd5aTdkJjw1QSKWYTsZq31DPusuavg9HT6J?=
- =?us-ascii?Q?NaPZhquCEnncEkpalecmSZ8eYY4moR4AaOcPQ96e8qBq1AFiRc+gDJbISPXJ?=
- =?us-ascii?Q?oJGO21TlUam54F6btKGycd22Q254ZDYbH77h8sM4tOXoZIt1urNQQ5NKv9V9?=
- =?us-ascii?Q?UDHAUM8HjXd7pBBNU29bGw6QXQzgy8W9YcnDq6Ty7naw6OLgmKscaf/+73jM?=
- =?us-ascii?Q?kIOXk/qmG3/GdknJ+klorn6lMCTe6O3cKxxJiAUDe+lzVQZGzF6Xx7BL4l4p?=
- =?us-ascii?Q?oUovR30S9IgK242R+1fiwThG+ZvlYjXrWBfrJmz2zbs2dQl+0vcQRTyLBWir?=
- =?us-ascii?Q?9Fr4lJw69aXIgPoDWN0EVH8fheKqmLXC+87GPn25BNu2GJ85Q/goHwWlVgEV?=
- =?us-ascii?Q?lwF97DKEp4+WzOFM7IICtf45qFdDCTgAOVnCQ41nWFyz2XgNNBfnAUdTIdFG?=
- =?us-ascii?Q?4ElFnh6SFSR5T3DuAMn6zqPfDuXrLEOjv23jniAStqsjWCQrpGHwWVwrWgig?=
- =?us-ascii?Q?YBF7Ngphd9FfjWG2iH3Y7FjQjC7fEWrCwBNTT/77Gaa0iJ+OZtYfiTXzwwZ4?=
- =?us-ascii?Q?N5IiXfsdJp31I6u8jmSshk4tyglUJhCg18rzD1TIA7tvsr+eykIodaBlYSMz?=
- =?us-ascii?Q?j2ZaRxJam8G6vdMBGOoq5OFbs231SZVQ1EFN2xWyT/S3Nfekdm7uVz55D+q4?=
- =?us-ascii?Q?yWYTCBG8pv782UqZ2aV0Kmabt1FpFUV6i+iZXYeiEj+AS5c9VScw2f4L1wLc?=
- =?us-ascii?Q?H5g8Y78NoHRw3KinzwI9OxiQFWRkpTMegz8ePCHKeADzzquRF4iHZjB8jeks?=
- =?us-ascii?Q?FIrEz40B9vGsmWhsDTE=3D?=
+	=?us-ascii?Q?r/qOcL7v8Hm9P3PdLZFYd+gNEfgS7g9XS5PEtgCXOgbLqdziGlshv+4IZQPP?=
+ =?us-ascii?Q?IY3jSJbEDsmGzLHQvYNcTx0WrXqtcY1qp2h/nwU/Db3loARoLI0cDrG6kkcB?=
+ =?us-ascii?Q?PdtSPjtFv0lzxmkkGm510vAGHF3oJMpx/0ZlTpKzdXe3QDs8UjTEgCYq16Ya?=
+ =?us-ascii?Q?pUx3ufN5i3IRcfyyVZvfvPsnYUdbPScRiCAgDrHoY3AlxxodP7uQiiF8jLJD?=
+ =?us-ascii?Q?5OKoPk6CXeYcOqvTXqxEvLaDOyVecg1jt27iu0Koiw7chCP9D39v2uyrib/k?=
+ =?us-ascii?Q?mhpKvLzFb2Icw5QpP1iEAxcSPBsAzQjI/ugEkPSzTKywCOODIVbgH+6ZfBhG?=
+ =?us-ascii?Q?sPNDjf4XGkola4+yn/bQvPe0l4FqDdS7JKfGINYSZMucK1OpYAFjGVEQ+Oy1?=
+ =?us-ascii?Q?tRWvY0pTSTz/5luK0KnV24kIdT95kGa/tEqtEsw0Gv7JORjSz3OigIVedkyx?=
+ =?us-ascii?Q?qc3/egDGw0aDB4YC+iXfIrJZ8ithL1bfUXdVxnOW8xCAzkPeqI8+B63rseYQ?=
+ =?us-ascii?Q?8hPmya2cFx2D7nV1S7+OIEzFZ+gLEdpyiYlY0ux3qoNbZ3rLkzwPKZCwsBS2?=
+ =?us-ascii?Q?9naNOF6Kz95W0OLcCe2pWnBKqNpgyF/4xLqsK9NXsl6aFNHmfd3biRSyuXbN?=
+ =?us-ascii?Q?6Rl0xKXRPfNXErDGa5x3UKswn3QmTLzhXEVjWKHe9T7m2H5+iXf0aZmDaABu?=
+ =?us-ascii?Q?uh3H6BAW1XtNmblV70rBXUxPnr52l/ritZ9fiAixvIqnGR+3RZR3ss4XhsKM?=
+ =?us-ascii?Q?24C974xPSHcnav21ItmuRo1LHlBYiJolUkQdsoDvdHZ4988iCJNPJXyfiqEQ?=
+ =?us-ascii?Q?RfVJLa6zPGdBaZohN4THrNhkbdB3joFtPsZRGA8QEOiOiQeichENQ8c3+QLh?=
+ =?us-ascii?Q?0oh6oiMN1vZzTTz/zdvNI1sRfB4OsGscbTaqT6nU5snAeZ4qdN0uRncfoq79?=
+ =?us-ascii?Q?pELXHqpRqqu7VXj0qM/8wMxzTThL8ySW3drz55qsBTCbPm7iC9x9dScyiNDr?=
+ =?us-ascii?Q?MYQ75luJuCiyE2/BMI6MNMJG5luPKfmmYnjHOOZCBMAPaGVXDnJhZiW3shIr?=
+ =?us-ascii?Q?/sB9uYSDrAUFc9yQzqohOC/6osaPrxFi+0G7IA/3EepaFJ0b8tvQYqKMDEoH?=
+ =?us-ascii?Q?s1MvOf8xvwzt43KIolS0SnJOFOYdV6bI06wUvyXRvT9i++UirrBcRMfbuVOe?=
+ =?us-ascii?Q?XMKXtRwpiesk612+gK4Uy0MVdzgdS0oq3IQzQ3WxEVNwfu4LiXfS/zjgdsZ2?=
+ =?us-ascii?Q?jxE7Px7sIFhIqP0iJbAU0I2BSOyBEj9UtjEc0KPSFjP42YGMNxmZxWSfUsPl?=
+ =?us-ascii?Q?bNGdXwUKFUPt1Ox8o88vjtsumEaZDAFLB+802o7cBT/p/79znttHNhQX5v9J?=
+ =?us-ascii?Q?6dlq3ywq2NAYLU4/lykVZXtnZhAYcaD/jYosrtccnExpv2K7R/H/jxS2mooN?=
+ =?us-ascii?Q?WbUkW3oCzWMHD5aA1MV1OKgwYbElIDa3NuNa741xGOV8IpLy3JSuhs2w2Va+?=
+ =?us-ascii?Q?7b1yqN8WvDLF5LFF5RtiIvhRDWHeKsPceFXQHpQmAd1l3Dw29JlGRTQkp10H?=
+ =?us-ascii?Q?Z6yqXyW2q5T6d1wWYIw=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 04:07:13.0491
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 04:07:20.9563
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e96c102-530e-48e3-6435-08de3933edea
+X-MS-Exchange-CrossTenant-Network-Message-Id: 281e453a-6b7b-4635-b539-08de3933f2a0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0002992E.namprd02.prod.outlook.com
+	BL02EPF00029927.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6433
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7215
 
-Arch-specific arch_{get,set}_paging_mempool_size() is responsible for
-XEN_DOMCTL_{get,set}_paging_mempool_size domctl-op, and shall be wrapped
-with CONFIG_MGMT_HYPERCALLS. Otherwise it will become unreachable codes when
-MGMT_HYPERCALLS=n, and hence violating Misra 2.1.
+Function arch_do_domctl() is responsible for arch-specific domctl-op,
+and shall be wrapped with CONFIG_MGMT_HYPERCALLS
+Guard arm-specific domctl.o compilation with CONFIG_MGMT_HYPERCALLS. Otherwise
+the whole file will become unreachable when MGMT_HYPERCALLS=n, and hence
+violating Misra Rule 2.1.
 
 Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Acked-by: Jan Beulich <jbeulich@suse.com> # x86
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-v1 -> v2:
-- adapt to changes of "unify DOMCTL to MGMT_HYPERCALLS"
-- wrap XEN_DOMCTL_{get,set}_paging_mempool_size-case transiently
+v3 -> v4:
+- split arch-specific domctl-op into x86 and arm
 ---
-v2 -> v3
-- address "violating Misra rule 2.1" in commit message
-- remove transient wrapping around XEN_DOMCTL_{get,set}_paging_mempool_size-case
----
- xen/arch/arm/mmu/p2m.c   | 4 ++++
- xen/arch/x86/mm/paging.c | 2 ++
- 2 files changed, 6 insertions(+)
+ xen/arch/arm/Makefile       | 2 +-
+ xen/arch/arm/arm32/Makefile | 2 +-
+ xen/arch/arm/arm64/Makefile | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 30d6071e91..4caa5844e4 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -58,12 +58,14 @@ static void p2m_free_page(struct domain *d, struct page_info *pg)
-     }
- }
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 069e2c532e..91ac4d6e32 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -20,7 +20,7 @@ obj-$(CONFIG_IOREQ_SERVER) += dm.o
+ obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-build.init.o
+ obj-y += domain.o
+ obj-y += domain_build.init.o
+-obj-y += domctl.o
++obj-$(CONFIG_MGMT_HYPERCALLS) += domctl.o
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-y += efi/
+ obj-y += gic.o
+diff --git a/xen/arch/arm/arm32/Makefile b/xen/arch/arm/arm32/Makefile
+index 531168f58a..f8cbf14211 100644
+--- a/xen/arch/arm/arm32/Makefile
++++ b/xen/arch/arm/arm32/Makefile
+@@ -4,7 +4,7 @@ obj-$(CONFIG_MPU) += mpu/
  
-+#ifdef CONFIG_MGMT_HYPERCALLS
- /* Return the size of the pool, in bytes. */
- int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
- {
-     *size = (uint64_t)ACCESS_ONCE(d->arch.paging.p2m_total_pages) << PAGE_SHIFT;
-     return 0;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /*
-  * Set the pool of pages to the required number of pages.
-@@ -122,6 +124,7 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
-     return 0;
- }
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
- {
-     unsigned long pages = size >> PAGE_SHIFT;
-@@ -140,6 +143,7 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
- 
-     return rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- int p2m_teardown_allocation(struct domain *d)
- {
-diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-index 116389d4e9..c6e3996093 100644
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -949,6 +949,7 @@ int __init paging_set_allocation(struct domain *d, unsigned int pages,
- }
- #endif
- 
-+#ifdef CONFIG_MGMT_HYPERCALLS
- int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
- {
-     unsigned long pages;
-@@ -991,6 +992,7 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
- 
-     return preempted ? -ERESTART : rc;
- }
-+#endif /* CONFIG_MGMT_HYPERCALLS */
- 
- /*
-  * Local variables:
+ obj-y += cache.o
+ obj-$(CONFIG_EARLY_PRINTK) += debug.o
+-obj-y += domctl.o
++obj-$(CONFIG_MGMT_HYPERCALLS) += domctl.o
+ obj-y += domain.o
+ obj-y += entry.o
+ obj-y += head.o
+diff --git a/xen/arch/arm/arm64/Makefile b/xen/arch/arm/arm64/Makefile
+index 6491c5350b..6b77a15abe 100644
+--- a/xen/arch/arm/arm64/Makefile
++++ b/xen/arch/arm/arm64/Makefile
+@@ -6,7 +6,7 @@ obj-y += cache.o
+ obj-y += cpufeature.o
+ obj-$(CONFIG_HARDEN_BRANCH_PREDICTOR) += bpi.o
+ obj-$(CONFIG_EARLY_PRINTK) += debug.o
+-obj-y += domctl.o
++obj-$(CONFIG_MGMT_HYPERCALLS) += domctl.o
+ obj-y += domain.o
+ obj-y += entry.o
+ obj-y += head.o
 -- 
 2.34.1
 
