@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D71AD5B172
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 14:50:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1187132.1508583 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6780FD5B172
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 14:50:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1187137.1508613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vV9tm-0004sH-Vf; Mon, 15 Dec 2025 14:50:06 +0000
+	id 1vV9tq-0005qy-07; Mon, 15 Dec 2025 14:50:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1187132.1508583; Mon, 15 Dec 2025 14:50:06 +0000
+Received: by outflank-mailman (output) from mailman id 1187137.1508613; Mon, 15 Dec 2025 14:50:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vV9tm-0004rp-QV; Mon, 15 Dec 2025 14:50:06 +0000
-Received: by outflank-mailman (input) for mailman id 1187132;
- Mon, 15 Dec 2025 14:50:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vV9tp-0005qb-SE; Mon, 15 Dec 2025 14:50:09 +0000
+Received: by outflank-mailman (input) for mailman id 1187137;
+ Mon, 15 Dec 2025 14:50:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pAKg=6V=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1vV9tl-00038W-1G
- for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 14:50:05 +0000
+ id 1vV9tn-0003Ov-KL
+ for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 14:50:07 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 564167ba-d9c5-11f0-9cce-f158ae23cfc8;
- Mon, 15 Dec 2025 15:50:03 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 58ac9a9d-d9c5-11f0-b15b-2bf370ae4941;
+ Mon, 15 Dec 2025 15:50:07 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2711F497;
- Mon, 15 Dec 2025 06:49:55 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4B70C1655;
+ Mon, 15 Dec 2025 06:49:59 -0800 (PST)
 Received: from C3HXLD123V.arm.com (unknown [10.57.46.206])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 33BD23F694;
- Mon, 15 Dec 2025 06:50:01 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5BB703F694;
+ Mon, 15 Dec 2025 06:50:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 564167ba-d9c5-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 58ac9a9d-d9c5-11f0-b15b-2bf370ae4941
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: jens.wiklander@linaro.org,
@@ -52,229 +52,266 @@ Cc: jens.wiklander@linaro.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v2 04/12] xen/arm: ffa: harden RX/TX mapping
-Date: Mon, 15 Dec 2025 15:49:21 +0100
-Message-ID: <5c8d22e3c3db0a62aa14f000fe4867614bc78456.1765807707.git.bertrand.marquis@arm.com>
+Subject: [PATCH v2 07/12] xen/arm: ffa: use signed 32-bit status codes
+Date: Mon, 15 Dec 2025 15:49:24 +0100
+Message-ID: <fa64cec364a243fd43326665ebeac5e5a795958b.1765807707.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <cover.1765807707.git.bertrand.marquis@arm.com>
 References: <cover.1765807707.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Harden the RX/TX mapping paths and keep signed FF-A return codes
-end-to-end.
+The FF-A spec defines return status values as signed 32-bit integers.
+Align the Xen mediator with this requirement by:
 
-Reject zero-length mappings and insist on page-aligned RX/TX buffer
-addresses before touching the P2M. The unmap plumbing is switched to
-use the same signed helpers so dispatcher error handling is consistent
-across map and unmap operations.
+- switching the FF-A helpers (ffa_handle_mem_reclaim(), partition info
+  init, notification ops, dispatcher glue, etc.) to int32_t return types
+  so callers cannot silently truncate negative values
+- masking SMCCC responses/exits in ffa_get_version(),
+  ffa_get_ret_code() and ffa_set_regs_error() to 32 bits before storing
+  them in guest registers
+- updating notifier, shared-memory reclaim, partition-info and
+  dispatcher call sites to use the new prototypes so the entire FF-A
+  path propagates spec-compliant 32-bit signed error codes
 
-This avoids partially mapped or silently truncated buffers and makes the
-mediator behaviour match the FF-A error model more closely.
+While there, tidy up the FF-A notification helpers by using GENMASK(15, 0)
+for endpoint extraction and fix the secure-endpoint check in
+ffa_handle_notification_set() to apply the mask to the endpoint ID before
+calling FFA_ID_IS_SECURE(), instead of testing the wrong halfword of
+src_dst.
 
-Prevent concurrent usage of rx or tx buffer during map or unmap by
-holding the rx_lock and tx_lock.
-
-While there also introduce a domain_rxtx_init to properly initialize the
-rxtx buffers spinlocks.
-
+Fixes: 911b305e7bdab ("xen/arm: ffa: Enable VM to VM without firmware")
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
 Changes in v2:
-- add Jens R-b
+- no changes
 Changes in v1:
-- take the rx_lock and tx_lock during rxtx_map and rxtx_unmap to prevent
-  concurrent calls using the rx or tx buffer during mapping.
-- properly clean rx/tx buffer related context entries during domain_init
+- add Jens R-b
 ---
- xen/arch/arm/tee/ffa.c         |  4 ++
- xen/arch/arm/tee/ffa_private.h |  5 ++-
- xen/arch/arm/tee/ffa_rxtx.c    | 68 +++++++++++++++++++++++++++-------
- 3 files changed, 62 insertions(+), 15 deletions(-)
+ xen/arch/arm/tee/ffa.c          | 12 +++++++-----
+ xen/arch/arm/tee/ffa_notif.c    | 14 +++++++-------
+ xen/arch/arm/tee/ffa_partinfo.c |  4 ++--
+ xen/arch/arm/tee/ffa_private.h  | 21 +++++++++++----------
+ xen/arch/arm/tee/ffa_shm.c      |  4 ++--
+ 5 files changed, 29 insertions(+), 26 deletions(-)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 0f6f837378cc..497ada8264e0 100644
+index 69a5e1e876ce..2c09d10ae6a1 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -451,6 +451,10 @@ static int ffa_domain_init(struct domain *d)
-     if ( ret )
-         return ret;
+@@ -129,12 +129,14 @@ static bool ffa_get_version(uint32_t *vers)
+         .a1 = FFA_MY_VERSION,
+     };
+     struct arm_smccc_1_2_regs resp;
++    int32_t ret;
  
-+    ret = ffa_rxtx_domain_init(d);
-+    if ( ret )
-+        return ret;
-+
-     return ffa_notif_domain_init(d);
+     arm_smccc_1_2_smc(&arg, &resp);
+-    if ( resp.a0 == FFA_RET_NOT_SUPPORTED )
++    ret = resp.a0 & GENMASK_ULL(31, 0);
++    if ( ret == FFA_RET_NOT_SUPPORTED )
+         return false;
+ 
+-    *vers = resp.a0;
++    *vers = resp.a0 & GENMASK_ULL(31, 0);
+ 
+     return true;
  }
- 
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 96794ecebe4b..0bb5a84553ce 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -439,10 +439,11 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs);
- 
- bool ffa_rxtx_init(void);
- void ffa_rxtx_destroy(void);
-+int32_t ffa_rxtx_domain_init(struct domain *d);
- void ffa_rxtx_domain_destroy(struct domain *d);
--uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
-+int32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
- 			     register_t rx_addr, uint32_t page_count);
--uint32_t ffa_handle_rxtx_unmap(void);
-+int32_t ffa_handle_rxtx_unmap(void);
- int32_t ffa_rx_acquire(struct domain *d);
- int32_t ffa_rx_release(struct domain *d);
- 
-diff --git a/xen/arch/arm/tee/ffa_rxtx.c b/xen/arch/arm/tee/ffa_rxtx.c
-index a40e5b32e3a5..5776693bb3f0 100644
---- a/xen/arch/arm/tee/ffa_rxtx.c
-+++ b/xen/arch/arm/tee/ffa_rxtx.c
-@@ -41,10 +41,10 @@ static int32_t ffa_rxtx_unmap(uint16_t id)
-     return ffa_simple_call(FFA_RXTX_UNMAP, ((uint64_t)id) << 16, 0, 0, 0);
- }
- 
--uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
-+int32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
- 			     register_t rx_addr, uint32_t page_count)
- {
--    uint32_t ret = FFA_RET_INVALID_PARAMETERS;
-+    int32_t ret = FFA_RET_INVALID_PARAMETERS;
+@@ -310,7 +312,7 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+     uint32_t fid = get_user_reg(regs, 0);
      struct domain *d = current->domain;
      struct ffa_ctx *ctx = d->arch.tee;
-     struct page_info *tx_pg;
-@@ -66,20 +66,30 @@ uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
-         rx_addr &= UINT32_MAX;
-     }
- 
--    if ( page_count > FFA_MAX_RXTX_PAGE_COUNT )
-+    if ( page_count > FFA_MAX_RXTX_PAGE_COUNT || !page_count )
-     {
-         printk(XENLOG_ERR "ffa: RXTX_MAP: error: %u pages requested (limit %u)\n",
-                page_count, FFA_MAX_RXTX_PAGE_COUNT);
-         return FFA_RET_INVALID_PARAMETERS;
-     }
- 
-+    if ( !IS_ALIGNED(tx_addr, FFA_PAGE_SIZE) ||
-+         !IS_ALIGNED(rx_addr, FFA_PAGE_SIZE) )
-+        return FFA_RET_INVALID_PARAMETERS;
-+
-+    spin_lock(&ctx->rx_lock);
-+    spin_lock(&ctx->tx_lock);
-+
-     /* Already mapped */
-     if ( ctx->rx )
--        return FFA_RET_DENIED;
-+    {
-+        ret = FFA_RET_DENIED;
-+        goto err_unlock_rxtx;
-+    }
- 
-     tx_pg = get_page_from_gfn(d, gfn_x(gaddr_to_gfn(tx_addr)), &t, P2M_ALLOC);
-     if ( !tx_pg )
--        return FFA_RET_INVALID_PARAMETERS;
-+        goto err_unlock_rxtx;
- 
-     /* Only normal RW RAM for now */
-     if ( t != p2m_ram_rw )
-@@ -167,6 +177,10 @@ uint32_t ffa_handle_rxtx_map(uint32_t fid, register_t tx_addr,
-     ctx->tx_pg = tx_pg;
-     ctx->page_count = page_count;
-     ctx->rx_is_free = true;
-+
-+    spin_unlock(&ctx->tx_lock);
-+    spin_unlock(&ctx->rx_lock);
-+
-     return FFA_RET_OK;
- 
- err_unmap_rx:
-@@ -177,24 +191,32 @@ err_put_rx_pg:
-     put_page(rx_pg);
- err_put_tx_pg:
-     put_page(tx_pg);
-+err_unlock_rxtx:
-+    spin_unlock(&ctx->tx_lock);
-+    spin_unlock(&ctx->rx_lock);
- 
-     return ret;
- }
- 
--static uint32_t  rxtx_unmap(struct domain *d)
-+static int32_t rxtx_unmap(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
-+    int32_t ret = FFA_RET_OK;
-+
-+    spin_lock(&ctx->rx_lock);
-+    spin_lock(&ctx->tx_lock);
- 
-     if ( !ctx->page_count )
--        return FFA_RET_INVALID_PARAMETERS;
-+    {
-+        ret = FFA_RET_INVALID_PARAMETERS;
-+        goto err_unlock_rxtx;
-+    }
- 
-     if ( ffa_fw_supports_fid(FFA_RX_ACQUIRE) )
-     {
--        uint32_t ret;
--
-         ret = ffa_rxtx_unmap(ffa_get_vm_id(d));
-         if ( ret != FFA_RET_OK )
--            return ret;
-+            goto err_unlock_rxtx;
-     }
- 
-     unmap_domain_page_global(ctx->rx);
-@@ -208,10 +230,14 @@ static uint32_t  rxtx_unmap(struct domain *d)
-     ctx->page_count = 0;
-     ctx->rx_is_free = false;
- 
--    return FFA_RET_OK;
-+err_unlock_rxtx:
-+    spin_unlock(&ctx->tx_lock);
-+    spin_unlock(&ctx->rx_lock);
-+
-+    return ret;
- }
- 
--uint32_t ffa_handle_rxtx_unmap(void)
-+int32_t ffa_handle_rxtx_unmap(void)
- {
-     return rxtx_unmap(current->domain);
- }
-@@ -272,6 +298,22 @@ out:
-     return ret;
- }
- 
-+int32_t ffa_rxtx_domain_init(struct domain *d)
-+{
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-+    spin_lock_init(&ctx->rx_lock);
-+    spin_lock_init(&ctx->tx_lock);
-+    ctx->rx = NULL;
-+    ctx->tx = NULL;
-+    ctx->rx_pg = NULL;
-+    ctx->tx_pg = NULL;
-+    ctx->page_count = 0;
-+    ctx->rx_is_free = false;
-+
-+    return 0;
-+}
-+
- void ffa_rxtx_domain_destroy(struct domain *d)
- {
-     rxtx_unmap(d);
-@@ -298,7 +340,7 @@ void ffa_rxtx_destroy(void)
- 
- bool ffa_rxtx_init(void)
- {
 -    int e;
 +    int32_t e;
  
-     /* Firmware not there or not supporting */
-     if ( !ffa_fw_supports_fid(FFA_RXTX_MAP_64) )
+     if ( !ctx )
+         return false;
+@@ -382,8 +384,8 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+ 
+     default:
+         gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
+-        ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
+-        return true;
++        e = FFA_RET_NOT_SUPPORTED;
++        break;
+     }
+ 
+     if ( e )
+diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
+index 86bef6b3b2ab..37b05747cd21 100644
+--- a/xen/arch/arm/tee/ffa_notif.c
++++ b/xen/arch/arm/tee/ffa_notif.c
+@@ -19,7 +19,7 @@
+ static bool __ro_after_init fw_notif_enabled;
+ static unsigned int __ro_after_init notif_sri_irq;
+ 
+-int ffa_handle_notification_bind(struct cpu_user_regs *regs)
++int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
+     uint32_t src_dst = get_user_reg(regs, 1);
+@@ -27,7 +27,7 @@ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
++    if ( (src_dst & GENMASK(15, 0)) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+     if ( flags )    /* Only global notifications are supported */
+@@ -40,14 +40,14 @@ int ffa_handle_notification_bind(struct cpu_user_regs *regs)
+     return FFA_RET_NOT_SUPPORTED;
+ }
+ 
+-int ffa_handle_notification_unbind(struct cpu_user_regs *regs)
++int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
+     uint32_t src_dst = get_user_reg(regs, 1);
+     uint32_t bitmap_lo = get_user_reg(regs, 3);
+     uint32_t bitmap_hi = get_user_reg(regs, 4);
+ 
+-    if ( (src_dst & 0xFFFFU) != ffa_get_vm_id(d) )
++    if ( (src_dst & GENMASK(15, 0)) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+     if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
+@@ -106,7 +106,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    if ( (recv & 0xFFFFU) != ffa_get_vm_id(d) )
++    if ( (recv & GENMASK(15, 0)) != ffa_get_vm_id(d) )
+     {
+         ffa_set_regs_error(regs, FFA_RET_INVALID_PARAMETERS);
+         return;
+@@ -162,7 +162,7 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
+     ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
+ }
+ 
+-int ffa_handle_notification_set(struct cpu_user_regs *regs)
++int32_t ffa_handle_notification_set(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
+     uint32_t src_dst = get_user_reg(regs, 1);
+@@ -173,7 +173,7 @@ int ffa_handle_notification_set(struct cpu_user_regs *regs)
+     if ( (src_dst >> 16) != ffa_get_vm_id(d) )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+-    if ( FFA_ID_IS_SECURE(src_dst >> 16) && fw_notif_enabled )
++    if ( FFA_ID_IS_SECURE(src_dst & GENMASK(15, 0)) && fw_notif_enabled )
+         return ffa_simple_call(FFA_NOTIFICATION_SET, src_dst, flags, bitmap_lo,
+                                bitmap_hi);
+ 
+diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
+index 16c905cb12b8..c9faf5415853 100644
+--- a/xen/arch/arm/tee/ffa_partinfo.c
++++ b/xen/arch/arm/tee/ffa_partinfo.c
+@@ -448,7 +448,7 @@ bool ffa_partinfo_init(void)
+     bool ret = false;
+     uint32_t fpi_size;
+     uint32_t count;
+-    int e;
++    int32_t e;
+     void *spmc_rx;
+ 
+     if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) ||
+@@ -515,7 +515,7 @@ static void vm_destroy_bitmap_init(struct ffa_ctx *ctx,
+     }
+ }
+ 
+-int ffa_partinfo_domain_init(struct domain *d)
++int32_t ffa_partinfo_domain_init(struct domain *d)
+ {
+     unsigned int count = BITS_TO_LONGS(subscr_vm_destroyed_count);
+     struct ffa_ctx *ctx = d->arch.tee;
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index 904ad1df733b..c274177029de 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -31,9 +31,9 @@
+ 
+ /* FFA_VERSION helpers */
+ #define FFA_VERSION_MAJOR_SHIFT         16U
+-#define FFA_VERSION_MAJOR_MASK          0x7FFFU
++#define FFA_VERSION_MAJOR_MASK          GENMASK(14, 0)
+ #define FFA_VERSION_MINOR_SHIFT         0U
+-#define FFA_VERSION_MINOR_MASK          0xFFFFU
++#define FFA_VERSION_MINOR_MASK          GENMASK(15, 0)
+ #define MAKE_FFA_VERSION(major, minor)  \
+         ((((major) & FFA_VERSION_MAJOR_MASK) << FFA_VERSION_MAJOR_SHIFT) | \
+          ((minor) & FFA_VERSION_MINOR_MASK))
+@@ -426,10 +426,10 @@ extern atomic_t ffa_vm_count;
+ 
+ bool ffa_shm_domain_destroy(struct domain *d);
+ void ffa_handle_mem_share(struct cpu_user_regs *regs);
+-int ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags);
++int32_t ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags);
+ 
+ bool ffa_partinfo_init(void);
+-int ffa_partinfo_domain_init(struct domain *d);
++int32_t ffa_partinfo_domain_init(struct domain *d);
+ bool ffa_partinfo_domain_destroy(struct domain *d);
+ void ffa_handle_partition_info_get(struct cpu_user_regs *regs);
+ 
+@@ -455,11 +455,11 @@ void ffa_notif_init_interrupt(void);
+ int ffa_notif_domain_init(struct domain *d);
+ void ffa_notif_domain_destroy(struct domain *d);
+ 
+-int ffa_handle_notification_bind(struct cpu_user_regs *regs);
+-int ffa_handle_notification_unbind(struct cpu_user_regs *regs);
++int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs);
++int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs);
+ void ffa_handle_notification_info_get(struct cpu_user_regs *regs);
+ void ffa_handle_notification_get(struct cpu_user_regs *regs);
+-int ffa_handle_notification_set(struct cpu_user_regs *regs);
++int32_t ffa_handle_notification_set(struct cpu_user_regs *regs);
+ 
+ #ifdef CONFIG_FFA_VM_TO_VM
+ void ffa_raise_rx_buffer_full(struct domain *d);
+@@ -525,9 +525,10 @@ static inline void ffa_set_regs(struct cpu_user_regs *regs, register_t v0,
+ }
+ 
+ static inline void ffa_set_regs_error(struct cpu_user_regs *regs,
+-                                      uint32_t error_code)
++                                      int32_t error_code)
+ {
+-    ffa_set_regs(regs, FFA_ERROR, 0, error_code, 0, 0, 0, 0, 0);
++    ffa_set_regs(regs, FFA_ERROR, 0, error_code & GENMASK_ULL(31, 0), 0, 0, 0,
++                 0, 0);
+ }
+ 
+ static inline void ffa_set_regs_success(struct cpu_user_regs *regs,
+@@ -542,7 +543,7 @@ static inline int32_t ffa_get_ret_code(const struct arm_smccc_1_2_regs *resp)
+     {
+     case FFA_ERROR:
+         if ( resp->a2 )
+-            return resp->a2;
++            return resp->a2 & GENMASK_ULL(31, 0);
+         else
+             return FFA_RET_NOT_SUPPORTED;
+     case FFA_SUCCESS_32:
+diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+index b862578c553c..8282bacf85d3 100644
+--- a/xen/arch/arm/tee/ffa_shm.c
++++ b/xen/arch/arm/tee/ffa_shm.c
+@@ -626,14 +626,14 @@ static struct ffa_shm_mem *find_shm_mem(struct ffa_ctx *ctx, uint64_t handle)
+     return NULL;
+ }
+ 
+-int ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags)
++int32_t ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags)
+ {
+     struct domain *d = current->domain;
+     struct ffa_ctx *ctx = d->arch.tee;
+     struct ffa_shm_mem *shm;
+     register_t handle_hi;
+     register_t handle_lo;
+-    int ret;
++    int32_t ret;
+ 
+     if ( !ffa_fw_supports_fid(FFA_MEM_RECLAIM) )
+         return FFA_RET_NOT_SUPPORTED;
 -- 
 2.51.2
 
