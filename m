@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162D0D5B17C
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 14:58:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1187242.1508665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D248FD5B17C
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 15:03:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1187267.1508684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVA1v-0002En-JO; Mon, 15 Dec 2025 14:58:31 +0000
+	id 1vVA6z-00045x-E1; Mon, 15 Dec 2025 15:03:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1187242.1508665; Mon, 15 Dec 2025 14:58:31 +0000
+Received: by outflank-mailman (output) from mailman id 1187267.1508684; Mon, 15 Dec 2025 15:03:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVA1v-0002Eg-Cv; Mon, 15 Dec 2025 14:58:31 +0000
-Received: by outflank-mailman (input) for mailman id 1187242;
- Mon, 15 Dec 2025 14:58:30 +0000
+	id 1vVA6z-00045m-A2; Mon, 15 Dec 2025 15:03:45 +0000
+Received: by outflank-mailman (input) for mailman id 1187267;
+ Mon, 15 Dec 2025 15:03:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pAKg=6V=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1vV9tt-0003Ov-9Q
- for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 14:50:13 +0000
+ <SRS0=lpeD=6V=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
+ id 1vVA6y-0003s4-IA
+ for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 15:03:44 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 5bff03ce-d9c5-11f0-b15b-2bf370ae4941;
- Mon, 15 Dec 2025 15:50:12 +0100 (CET)
+ id 3f78f34e-d9c7-11f0-b15b-2bf370ae4941;
+ Mon, 15 Dec 2025 16:03:43 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C8A6D1684;
- Mon, 15 Dec 2025 06:50:04 -0800 (PST)
-Received: from C3HXLD123V.arm.com (unknown [10.57.46.206])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DFF4B3F694;
- Mon, 15 Dec 2025 06:50:10 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E12E5FEC;
+ Mon, 15 Dec 2025 07:03:35 -0800 (PST)
+Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
+ [10.1.194.54])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C274B3F73B;
+ Mon, 15 Dec 2025 07:03:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,146 +45,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5bff03ce-d9c5-11f0-b15b-2bf370ae4941
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: jens.wiklander@linaro.org,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v2 11/12] xen/arm: ffa: add MSG_SEND_DIRECT_REQ2 support
-Date: Mon, 15 Dec 2025 15:49:28 +0100
-Message-ID: <41e25208492954f7e74cb8aaae0eed7b53af8b64.1765807707.git.bertrand.marquis@arm.com>
+X-Inumbo-ID: 3f78f34e-d9c7-11f0-b15b-2bf370ae4941
+From: Kevin Brodsky <kevin.brodsky@arm.com>
+To: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org,
+	Kevin Brodsky <kevin.brodsky@arm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Andreas Larsson <andreas@gaisler.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	David Woodhouse <dwmw2@infradead.org>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Jann Horn <jannh@google.com>,
+	Juergen Gross <jgross@suse.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Venkat Rao Bagalkote <venkat88@linux.ibm.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Will Deacon <will@kernel.org>,
+	Yeoreum Yun <yeoreum.yun@arm.com>,
+	linux-arm-kernel@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org,
+	sparclinux@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	x86@kernel.org
+Subject: [PATCH v6 01/14] powerpc/64s: Do not re-activate batched TLB flush
+Date: Mon, 15 Dec 2025 15:03:10 +0000
+Message-ID: <20251215150323.2218608-2-kevin.brodsky@arm.com>
 X-Mailer: git-send-email 2.51.2
-In-Reply-To: <cover.1765807707.git.bertrand.marquis@arm.com>
-References: <cover.1765807707.git.bertrand.marquis@arm.com>
+In-Reply-To: <20251215150323.2218608-1-kevin.brodsky@arm.com>
+References: <20251215150323.2218608-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Extend the direct-request path so FF-A v1.2 guests can issue
-FFA_MSG_SEND_DIRECT_REQ2 and receive the matching RESP2.
+From: Alexander Gordeev <agordeev@linux.ibm.com>
 
-The handler now marshals registers x8–x17, and
-ffa_finish_direct_req_run() copies back the 17-register response used by
-FFA_MSG_SEND_DIRECT_RESP2. The new opcode is exposed via FFA_FEATURES
-and gated on guests that negotiated v1.2.
+Since commit b9ef323ea168 ("powerpc/64s: Disable preemption in hash
+lazy mmu mode") a task can not be preempted while in lazy MMU mode.
+Therefore, the batch re-activation code is never called, so remove it.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Alexander Gordeev <agordeev@linux.ibm.com>
+Reviewed-by: David Hildenbrand <david@redhat.com>
+Reviewed-by: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+Reviewed-by: Ryan Roberts <ryan.roberts@arm.com>
+Tested-by: Venkat Rao Bagalkote <venkat88@linux.ibm.com>
+Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
 ---
-Changes in v2:
-- add Jens R-b
-Changes in v1:
-- use ACCESS_ONCE to read guest_vers
----
- xen/arch/arm/tee/ffa.c     | 20 +++++++++++++++++++
- xen/arch/arm/tee/ffa_msg.c | 39 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 59 insertions(+)
+ arch/powerpc/include/asm/thread_info.h |  2 --
+ arch/powerpc/kernel/process.c          | 25 -------------------------
+ 2 files changed, 27 deletions(-)
 
-diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 0f07efe5a7b3..2c6443a7f6a4 100644
---- a/xen/arch/arm/tee/ffa.c
-+++ b/xen/arch/arm/tee/ffa.c
-@@ -237,6 +237,8 @@ out_continue:
- static void handle_features(struct cpu_user_regs *regs)
+diff --git a/arch/powerpc/include/asm/thread_info.h b/arch/powerpc/include/asm/thread_info.h
+index b0f200aba2b3..97f35f9b1a96 100644
+--- a/arch/powerpc/include/asm/thread_info.h
++++ b/arch/powerpc/include/asm/thread_info.h
+@@ -154,12 +154,10 @@ void arch_setup_new_exec(void);
+ /* Don't move TLF_NAPPING without adjusting the code in entry_32.S */
+ #define TLF_NAPPING		0	/* idle thread enabled NAP mode */
+ #define TLF_SLEEPING		1	/* suspend code enabled SLEEP mode */
+-#define TLF_LAZY_MMU		3	/* tlb_batch is active */
+ #define TLF_RUNLATCH		4	/* Is the runlatch enabled? */
+ 
+ #define _TLF_NAPPING		(1 << TLF_NAPPING)
+ #define _TLF_SLEEPING		(1 << TLF_SLEEPING)
+-#define _TLF_LAZY_MMU		(1 << TLF_LAZY_MMU)
+ #define _TLF_RUNLATCH		(1 << TLF_RUNLATCH)
+ 
+ #ifndef __ASSEMBLER__
+diff --git a/arch/powerpc/kernel/process.c b/arch/powerpc/kernel/process.c
+index a45fe147868b..a15d0b619b1f 100644
+--- a/arch/powerpc/kernel/process.c
++++ b/arch/powerpc/kernel/process.c
+@@ -1281,9 +1281,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
  {
-     uint32_t a1 = get_user_reg(regs, 1);
-+    struct domain *d = current->domain;
-+    struct ffa_ctx *ctx = d->arch.tee;
-     unsigned int n;
+ 	struct thread_struct *new_thread, *old_thread;
+ 	struct task_struct *last;
+-#ifdef CONFIG_PPC_64S_HASH_MMU
+-	struct ppc64_tlb_batch *batch;
+-#endif
  
-     for ( n = 2; n <= 7; n++ )
-@@ -268,6 +270,16 @@ static void handle_features(struct cpu_user_regs *regs)
-     case FFA_MSG_YIELD:
-         ffa_set_regs_success(regs, 0, 0);
-         break;
-+    case FFA_MSG_SEND_DIRECT_REQ2:
-+        if ( ACCESS_ONCE(ctx->guest_vers) >= FFA_VERSION_1_2 )
-+        {
-+            ffa_set_regs_success(regs, 0, 0);
-+        }
-+        else
-+        {
-+            ffa_set_regs_error(regs, FFA_RET_NOT_SUPPORTED);
-+        }
-+        break;
-     case FFA_MEM_SHARE_64:
-     case FFA_MEM_SHARE_32:
-         /*
-@@ -353,6 +365,14 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     case FFA_MSG_SEND_DIRECT_REQ_64:
-         ffa_handle_msg_send_direct_req(regs, fid);
-         return true;
-+    case FFA_MSG_SEND_DIRECT_REQ2:
-+        if ( ACCESS_ONCE(ctx->guest_vers) >= FFA_VERSION_1_2 )
-+        {
-+            ffa_handle_msg_send_direct_req(regs, fid);
-+            return true;
-+        }
-+        e = FFA_RET_NOT_SUPPORTED;
-+        break;
-     case FFA_RUN:
-         ffa_handle_run(regs, fid);
-         return true;
-diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
-index c3552a3ae36d..4e26596461a9 100644
---- a/xen/arch/arm/tee/ffa_msg.c
-+++ b/xen/arch/arm/tee/ffa_msg.c
-@@ -49,6 +49,30 @@ static void ffa_finish_direct_req_run(struct cpu_user_regs *regs,
-     case FFA_MSG_YIELD:
-     case FFA_INTERRUPT:
-         break;
-+    case FFA_MSG_SEND_DIRECT_RESP2:
-+        /*
-+         * REQ2 / RESP2 use a 17-register payload (x1–x17). Copy all of them
-+         * back to the guest context.
-+         */
-+        set_user_reg(regs, 0, resp.a0);
-+        set_user_reg(regs, 1, resp.a1);
-+        set_user_reg(regs, 2, resp.a2);
-+        set_user_reg(regs, 3, resp.a3);
-+        set_user_reg(regs, 4, resp.a4);
-+        set_user_reg(regs, 5, resp.a5);
-+        set_user_reg(regs, 6, resp.a6);
-+        set_user_reg(regs, 7, resp.a7);
-+        set_user_reg(regs, 8, resp.a8);
-+        set_user_reg(regs, 9, resp.a9);
-+        set_user_reg(regs, 10, resp.a10);
-+        set_user_reg(regs, 11, resp.a11);
-+        set_user_reg(regs, 12, resp.a12);
-+        set_user_reg(regs, 13, resp.a13);
-+        set_user_reg(regs, 14, resp.a14);
-+        set_user_reg(regs, 15, resp.a15);
-+        set_user_reg(regs, 16, resp.a16);
-+        set_user_reg(regs, 17, resp.a17);
-+        return;
-     default:
-         /* Bad fid, report back to the caller. */
-         ffa_set_regs_error(regs, FFA_RET_ABORTED);
-@@ -107,6 +131,21 @@ void ffa_handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
-     arg.a6 = get_user_reg(regs, 6) & mask;
-     arg.a7 = get_user_reg(regs, 7) & mask;
+ 	new_thread = &new->thread;
+ 	old_thread = &current->thread;
+@@ -1291,14 +1288,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
+ 	WARN_ON(!irqs_disabled());
  
-+    if ( fid == FFA_MSG_SEND_DIRECT_REQ2 )
-+    {
-+        /* 17 registers are used for REQ2 */
-+        arg.a8 = get_user_reg(regs, 8);
-+        arg.a9 = get_user_reg(regs, 9);
-+        arg.a10 = get_user_reg(regs, 10);
-+        arg.a11 = get_user_reg(regs, 11);
-+        arg.a12 = get_user_reg(regs, 12);
-+        arg.a13 = get_user_reg(regs, 13);
-+        arg.a14 = get_user_reg(regs, 14);
-+        arg.a15 = get_user_reg(regs, 15);
-+        arg.a16 = get_user_reg(regs, 16);
-+        arg.a17 = get_user_reg(regs, 17);
-+    }
-+
-     ffa_finish_direct_req_run(regs, &arg);
-     return;
+ #ifdef CONFIG_PPC_64S_HASH_MMU
+-	batch = this_cpu_ptr(&ppc64_tlb_batch);
+-	if (batch->active) {
+-		current_thread_info()->local_flags |= _TLF_LAZY_MMU;
+-		if (batch->index)
+-			__flush_tlb_pending(batch);
+-		batch->active = 0;
+-	}
+-
+ 	/*
+ 	 * On POWER9 the copy-paste buffer can only paste into
+ 	 * foreign real addresses, so unprivileged processes can not
+@@ -1369,20 +1358,6 @@ struct task_struct *__switch_to(struct task_struct *prev,
+ 	 */
  
+ #ifdef CONFIG_PPC_BOOK3S_64
+-#ifdef CONFIG_PPC_64S_HASH_MMU
+-	/*
+-	 * This applies to a process that was context switched while inside
+-	 * arch_enter_lazy_mmu_mode(), to re-activate the batch that was
+-	 * deactivated above, before _switch(). This will never be the case
+-	 * for new tasks.
+-	 */
+-	if (current_thread_info()->local_flags & _TLF_LAZY_MMU) {
+-		current_thread_info()->local_flags &= ~_TLF_LAZY_MMU;
+-		batch = this_cpu_ptr(&ppc64_tlb_batch);
+-		batch->active = 1;
+-	}
+-#endif
+-
+ 	/*
+ 	 * Math facilities are masked out of the child MSR in copy_thread.
+ 	 * A new task does not need to restore_math because it will
 -- 
 2.51.2
 
