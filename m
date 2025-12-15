@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2813CD5B17D
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 15:07:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1187326.1508771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77546D5B175
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Dec 2025 15:07:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1187325.1508764 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVAAT-0000C3-2s; Mon, 15 Dec 2025 15:07:21 +0000
+	id 1vVAAS-00008f-PN; Mon, 15 Dec 2025 15:07:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1187326.1508771; Mon, 15 Dec 2025 15:07:21 +0000
+Received: by outflank-mailman (output) from mailman id 1187325.1508764; Mon, 15 Dec 2025 15:07:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVAAS-0000BG-SM; Mon, 15 Dec 2025 15:07:20 +0000
-Received: by outflank-mailman (input) for mailman id 1187326;
- Mon, 15 Dec 2025 15:07:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vVAAS-00008Y-Lo; Mon, 15 Dec 2025 15:07:20 +0000
+Received: by outflank-mailman (input) for mailman id 1187325;
+ Mon, 15 Dec 2025 15:07:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lpeD=6V=arm.com=kevin.brodsky@srs-se1.protection.inumbo.net>)
- id 1vVA8A-0003s4-30
- for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 15:04:58 +0000
+ id 1vVA7o-0004yw-GH
+ for xen-devel@lists.xenproject.org; Mon, 15 Dec 2025 15:04:36 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 6b45298b-d9c7-11f0-b15b-2bf370ae4941;
- Mon, 15 Dec 2025 16:04:57 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 5dcfa142-d9c7-11f0-9cce-f158ae23cfc8;
+ Mon, 15 Dec 2025 16:04:34 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 62D991713;
- Mon, 15 Dec 2025 07:04:49 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BB8BF169E;
+ Mon, 15 Dec 2025 07:04:26 -0800 (PST)
 Received: from e123572-lin.arm.com (e123572-lin.cambridge.arm.com
  [10.1.194.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 41F803F73B;
- Mon, 15 Dec 2025 07:04:51 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7E8EC3F73B;
+ Mon, 15 Dec 2025 07:04:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b45298b-d9c7-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 5dcfa142-d9c7-11f0-9cce-f158ae23cfc8
 From: Kevin Brodsky <kevin.brodsky@arm.com>
 To: linux-mm@kvack.org
 Cc: linux-kernel@vger.kernel.org,
@@ -86,137 +86,91 @@ Cc: linux-kernel@vger.kernel.org,
 	linuxppc-dev@lists.ozlabs.org,
 	sparclinux@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
-	x86@kernel.org
-Subject: [PATCH v6 14/14] mm: Add basic tests for lazy_mmu
-Date: Mon, 15 Dec 2025 15:03:23 +0000
-Message-ID: <20251215150323.2218608-15-kevin.brodsky@arm.com>
+	x86@kernel.org,
+	"David Hildenbrand (Red Hat)" <david@kernel.org>
+Subject: [PATCH v6 10/14] arm64: mm: replace TIF_LAZY_MMU with is_lazy_mmu_mode_active()
+Date: Mon, 15 Dec 2025 15:03:19 +0000
+Message-ID: <20251215150323.2218608-11-kevin.brodsky@arm.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251215150323.2218608-1-kevin.brodsky@arm.com>
 References: <20251215150323.2218608-1-kevin.brodsky@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add basic KUnit tests for the generic aspects of the lazy MMU mode:
-ensure that it appears active when it should, depending on how
-enable/disable and pause/resume pairs are nested.
+The generic lazy_mmu layer now tracks whether a task is in lazy MMU
+mode. As a result we no longer need a TIF flag for that purpose -
+let's use the new is_lazy_mmu_mode_active() helper instead.
 
+The explicit check for in_interrupt() is no longer necessary either
+as is_lazy_mmu_mode_active() always returns false in interrupt
+context.
+
+Acked-by: David Hildenbrand (Red Hat) <david@kernel.org>
+Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
 Signed-off-by: Kevin Brodsky <kevin.brodsky@arm.com>
 ---
- mm/Kconfig                     | 12 ++++++
- mm/Makefile                    |  1 +
- mm/tests/lazy_mmu_mode_kunit.c | 71 ++++++++++++++++++++++++++++++++++
- 3 files changed, 84 insertions(+)
- create mode 100644 mm/tests/lazy_mmu_mode_kunit.c
+ arch/arm64/include/asm/pgtable.h     | 19 +++----------------
+ arch/arm64/include/asm/thread_info.h |  3 +--
+ 2 files changed, 4 insertions(+), 18 deletions(-)
 
-diff --git a/mm/Kconfig b/mm/Kconfig
-index 62073bd61544..ac48deb44884 100644
---- a/mm/Kconfig
-+++ b/mm/Kconfig
-@@ -1471,6 +1471,18 @@ config ARCH_HAS_LAZY_MMU_MODE
- 	  MMU-related architectural state to be deferred until the mode is
- 	  exited. See <linux/pgtable.h> for details.
+diff --git a/arch/arm64/include/asm/pgtable.h b/arch/arm64/include/asm/pgtable.h
+index 7f528c36d53c..445e18e92221 100644
+--- a/arch/arm64/include/asm/pgtable.h
++++ b/arch/arm64/include/asm/pgtable.h
+@@ -62,28 +62,16 @@ static inline void emit_pte_barriers(void)
  
-+config LAZY_MMU_MODE_KUNIT_TEST
-+	tristate "KUnit tests for the lazy MMU mode" if !KUNIT_ALL_TESTS
-+	depends on ARCH_HAS_LAZY_MMU_MODE
-+	depends on KUNIT
-+	default KUNIT_ALL_TESTS
-+	help
-+	  Enable this option to check that the lazy MMU mode interface behaves
-+	  as expected. Only tests for the generic interface are included (not
-+	  architecture-specific behaviours).
-+
-+	  If unsure, say N.
-+
- source "mm/damon/Kconfig"
+ static inline void queue_pte_barriers(void)
+ {
+-	unsigned long flags;
+-
+-	if (in_interrupt()) {
+-		emit_pte_barriers();
+-		return;
+-	}
+-
+-	flags = read_thread_flags();
+-
+-	if (flags & BIT(TIF_LAZY_MMU)) {
++	if (is_lazy_mmu_mode_active()) {
+ 		/* Avoid the atomic op if already set. */
+-		if (!(flags & BIT(TIF_LAZY_MMU_PENDING)))
++		if (!test_thread_flag(TIF_LAZY_MMU_PENDING))
+ 			set_thread_flag(TIF_LAZY_MMU_PENDING);
+ 	} else {
+ 		emit_pte_barriers();
+ 	}
+ }
  
- endmenu
-diff --git a/mm/Makefile b/mm/Makefile
-index 2d0570a16e5b..9175f8cc6565 100644
---- a/mm/Makefile
-+++ b/mm/Makefile
-@@ -147,3 +147,4 @@ obj-$(CONFIG_SHRINKER_DEBUG) += shrinker_debug.o
- obj-$(CONFIG_EXECMEM) += execmem.o
- obj-$(CONFIG_TMPFS_QUOTA) += shmem_quota.o
- obj-$(CONFIG_PT_RECLAIM) += pt_reclaim.o
-+obj-$(CONFIG_LAZY_MMU_MODE_KUNIT_TEST) += tests/lazy_mmu_mode_kunit.o
-diff --git a/mm/tests/lazy_mmu_mode_kunit.c b/mm/tests/lazy_mmu_mode_kunit.c
-new file mode 100644
-index 000000000000..2720eb995714
---- /dev/null
-+++ b/mm/tests/lazy_mmu_mode_kunit.c
-@@ -0,0 +1,71 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+#include <kunit/test.h>
-+#include <linux/pgtable.h>
-+
-+static void expect_not_active(struct kunit *test)
-+{
-+	KUNIT_EXPECT_FALSE(test, is_lazy_mmu_mode_active());
-+}
-+
-+static void expect_active(struct kunit *test)
-+{
-+	KUNIT_EXPECT_TRUE(test, is_lazy_mmu_mode_active());
-+}
-+
-+static void lazy_mmu_mode_active(struct kunit *test)
-+{
-+	expect_not_active(test);
-+
-+	lazy_mmu_mode_enable();
-+	expect_active(test);
-+
-+	{
-+		/* Nested section */
-+		lazy_mmu_mode_enable();
-+		expect_active(test);
-+
-+		lazy_mmu_mode_disable();
-+		expect_active(test);
-+	}
-+
-+	{
-+		/* Paused section */
-+		lazy_mmu_mode_pause();
-+		expect_not_active(test);
-+
-+		{
-+			/* No effect (paused) */
-+			lazy_mmu_mode_enable();
-+			expect_not_active(test);
-+
-+			lazy_mmu_mode_disable();
-+			expect_not_active(test);
-+
-+			lazy_mmu_mode_pause();
-+			expect_not_active(test);
-+
-+			lazy_mmu_mode_resume();
-+			expect_not_active(test);
-+		}
-+
-+		lazy_mmu_mode_resume();
-+		expect_active(test);
-+	}
-+
-+	lazy_mmu_mode_disable();
-+	expect_not_active(test);
-+}
-+
-+static struct kunit_case lazy_mmu_mode_test_cases[] = {
-+	KUNIT_CASE(lazy_mmu_mode_active),
-+	{}
-+};
-+
-+static struct kunit_suite lazy_mmu_mode_test_suite = {
-+	.name = "lazy_mmu_mode",
-+	.test_cases = lazy_mmu_mode_test_cases,
-+};
-+kunit_test_suite(lazy_mmu_mode_test_suite);
-+
-+MODULE_DESCRIPTION("Tests for the lazy MMU mode");
-+MODULE_LICENSE("GPL");
+-static inline void arch_enter_lazy_mmu_mode(void)
+-{
+-	set_thread_flag(TIF_LAZY_MMU);
+-}
++static inline void arch_enter_lazy_mmu_mode(void) {}
+ 
+ static inline void arch_flush_lazy_mmu_mode(void)
+ {
+@@ -94,7 +82,6 @@ static inline void arch_flush_lazy_mmu_mode(void)
+ static inline void arch_leave_lazy_mmu_mode(void)
+ {
+ 	arch_flush_lazy_mmu_mode();
+-	clear_thread_flag(TIF_LAZY_MMU);
+ }
+ 
+ #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+diff --git a/arch/arm64/include/asm/thread_info.h b/arch/arm64/include/asm/thread_info.h
+index a803b887b0b4..e7cd017b07c8 100644
+--- a/arch/arm64/include/asm/thread_info.h
++++ b/arch/arm64/include/asm/thread_info.h
+@@ -84,8 +84,7 @@ void arch_setup_new_exec(void);
+ #define TIF_SME_VL_INHERIT	28	/* Inherit SME vl_onexec across exec */
+ #define TIF_KERNEL_FPSTATE	29	/* Task is in a kernel mode FPSIMD section */
+ #define TIF_TSC_SIGSEGV		30	/* SIGSEGV on counter-timer access */
+-#define TIF_LAZY_MMU		31	/* Task in lazy mmu mode */
+-#define TIF_LAZY_MMU_PENDING	32	/* Ops pending for lazy mmu mode exit */
++#define TIF_LAZY_MMU_PENDING	31	/* Ops pending for lazy mmu mode exit */
+ 
+ #define _TIF_SIGPENDING		(1 << TIF_SIGPENDING)
+ #define _TIF_NEED_RESCHED	(1 << TIF_NEED_RESCHED)
 -- 
 2.51.2
 
