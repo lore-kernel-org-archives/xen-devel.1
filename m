@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45859D609D2
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Dec 2025 16:56:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1188152.1509467 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA61D609D3
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Dec 2025 16:56:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1188147.1509423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVYL5-0000GE-AW; Tue, 16 Dec 2025 16:55:55 +0000
+	id 1vVYL0-0007c5-U5; Tue, 16 Dec 2025 16:55:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1188152.1509467; Tue, 16 Dec 2025 16:55:55 +0000
+Received: by outflank-mailman (output) from mailman id 1188147.1509423; Tue, 16 Dec 2025 16:55:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVYL5-0000Ed-4O; Tue, 16 Dec 2025 16:55:55 +0000
-Received: by outflank-mailman (input) for mailman id 1188152;
- Tue, 16 Dec 2025 16:55:54 +0000
+	id 1vVYL0-0007bU-OR; Tue, 16 Dec 2025 16:55:50 +0000
+Received: by outflank-mailman (input) for mailman id 1188147;
+ Tue, 16 Dec 2025 16:55:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wcum=6W=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vVYL4-0006ge-EN
- for xen-devel@lists.xenproject.org; Tue, 16 Dec 2025 16:55:54 +0000
+ id 1vVYKz-0006ge-9o
+ for xen-devel@lists.xenproject.org; Tue, 16 Dec 2025 16:55:49 +0000
 Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
  [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14fb0af9-daa0-11f0-b15b-2bf370ae4941;
- Tue, 16 Dec 2025 17:55:53 +0100 (CET)
+ id 11ec58b1-daa0-11f0-b15b-2bf370ae4941;
+ Tue, 16 Dec 2025 17:55:48 +0100 (CET)
 Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b735b89501fso638996266b.0
- for <xen-devel@lists.xenproject.org>; Tue, 16 Dec 2025 08:55:53 -0800 (PST)
+ a640c23a62f3a-b728a43e410so760435866b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Dec 2025 08:55:48 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8003cb349csm63169766b.68.2025.12.16.08.55.51
+ a640c23a62f3a-b8003cb349csm63169766b.68.2025.12.16.08.55.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Dec 2025 08:55:51 -0800 (PST)
+ Tue, 16 Dec 2025 08:55:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14fb0af9-daa0-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 11ec58b1-daa0-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765904152; x=1766508952; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1765904147; x=1766508947; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HDq9vUFOiqlkKEaA7GchoJPdBrT6DIpxx5bLeX6C9F4=;
-        b=VhTrBMfLJQjlRcJH1kEXrQGBX7CJpMPtlrSbxky2qTRVISxpD70zh3qQrBBvMeQA0H
-         Jcr5oIqLqf07PZkszGX10vRwplHkwRa/XTqMOYr29rsjq74OqilmSoSSNWXml5LOKT1N
-         nLKDVt9ThbXS310UpwCqqPsIoLs/JmOi3ffoZMS3Ll2Df8kuRT94uPFCke1kSJHRdrfC
-         MV2+VPBahXN2oDq2OWaTIV6aaIDZYgKzOOMrLLEoGoSKCHefC1Zrxtklxocmku1BNjOW
-         tN2L+j69jeLeqqXWu6HKjAdXnZUFnGSXNM0gUrXckw1sb+q7vMrT1PSW4x6JTegm7iEm
-         kdBw==
+        bh=ZAlzbD25BXnCB3gE5uZFAAgIUm6hFsJVl38bDzl5fA4=;
+        b=QbEIgvy3FqTtBB1nH8fkQTE5o2Gef/WtlCaqm2sNkEqhZKp0lFI2zvVhYinpYVPhcd
+         n4I36ftPcRnhCxQmaa5AfG/H+ZRft6HQxawXMuC+Wzw1tfCFbEF+XMF8dMWYFnJQ9JZx
+         xNvwG6XWPTrd+nv0+lR2s9hTwohL8swodwNgee7XGOvptcvXR6gVvtgwovuCei0FGLa5
+         J7ugzy/YTytqRzoWeG6tsW2S6Q3LRZpJdy3ylZtJVJ2QzJNv2CgIWDDDhHDwKg3EfIYp
+         JeRVgvkDtp4vgtMT+JkxuF4BJ14DLtoUBjHlahAWXor3eBXC/UGpvJCKhstX9lg41A6H
+         nMoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765904152; x=1766508952;
+        d=1e100.net; s=20230601; t=1765904147; x=1766508947;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=HDq9vUFOiqlkKEaA7GchoJPdBrT6DIpxx5bLeX6C9F4=;
-        b=C1tzSqnEVeV7a2x5irxsF/71whwscqYMrR+meXy9bDP4AKwSl25L9LF6omQQJGUNIu
-         BW18HkAF0ceCBUXyl1PgMFMzRsqFvM8UdHHA6C0FI333zATx+ELG9fdRBBFn16jokH8G
-         eak1Ks7sv2zLutjMVwl1BlHwmZxvb4kV/jq9FDwH/TZ89VgTvvazZvOmJEw2Cdf2G7yv
-         H8jBEJZCqeiJPlBllihOuYpY2f/9dJVBuQuZDgj1Omow4p5DjMehqRWT49ul+JqC+iaS
-         XpBRy/sb+eBZpaxwpbsqvoSQ17Fo3vnJZQjjzIMmy/buimFWPvGswIvXPyJwLwplKoKf
-         G6cw==
-X-Gm-Message-State: AOJu0YxIOlI5F3+NquxsAChHMD5fEnKekVY7v0eaUisDTzS+Q6Fr2m2J
-	rlpZKaGt/xH6pg3eHPmmYAJD/jjgGWZFTqyQiirkGbIG17jog5Jb8Q5lnKzt0A==
-X-Gm-Gg: AY/fxX7NfAQE+Wk/zuZ9OC5L6p2WHy7qRRwmtlR4cf6gIJ/ou2ZzgfvWdS3tg56MymZ
-	BLADcYFe+vBqG5Lts8dK2YppokfMT9j34r/I5bk4Q54uNa6CgF5A+vKglC9KxOyLM5O0NR+GEFp
-	vI2Aa4xcLITTv7bVRwtAiPwxWb9HMHTRFX+Fao8ZWfNBbp4pTGGidwPZlzIIxyzpTdUneY4/9mY
-	H9tdPzF06VH7OerPzRb2h8gP/W0GjV4X3BHwsye2jA6GZS5iRSnArhx/PJqzPzB/xElwP1PGCRi
-	bY8xPvvnPpnZSrzx4PDz3eA11rgoV6Rwsi813bKLjfs0mGS9wAuE73tO9vRQLVYEHeb3n44RPVJ
-	wakw37BH/N1vXNdWtC2SZ5tarZWCNggf+Lg87aCXxkTjH7tU4k89jUyy8wDJPUM3KfCKCxC1i4h
-	urf07ivkFOlxwU2P7zUg8NRPiZKUTo2wZW05yNR66BNZF+NLDQa2U=
-X-Google-Smtp-Source: AGHT+IHijtz5q0fKiQPMiRV62n5mZDk/gqbfLdoQ+Ckt+7qROo6Nd23mvM/HPZopcr5mtb7PpQqhyw==
-X-Received: by 2002:a17:907:3c91:b0:b72:d001:7653 with SMTP id a640c23a62f3a-b7d236674a6mr1358671966b.19.1765904151983;
-        Tue, 16 Dec 2025 08:55:51 -0800 (PST)
+        bh=ZAlzbD25BXnCB3gE5uZFAAgIUm6hFsJVl38bDzl5fA4=;
+        b=KIh2AhNlTJHwpED0c2ElY1RPXMNFwYizp7YfD3/QEt5BLWw3eSaZVjY1c/nw2jq97w
+         w4PJ1/Y7axPTstB+Kq5q4bO0VVDC2tbeV9RrfXdBmjq7tPfFN5xXtCAYurfp+Ril7woh
+         PI8iV+94Kp2m/zXoRCm3wGaXIH2Ugxjrngo+GSO7BXUaYJQf0icEURj9vaC2U6Qfnbp8
+         68S4x5pHtAk2tmi2DJBKaO3dkPPIKxLKoB1GOWY6KCMPGmC+oEkTcJ7p8d9kwa6w3d85
+         PsDXJI2D+dp471yioGjcFBpYufgIpX49ymJj2DshVEk77qvQZm+3X59EVEcE2NCTTLVu
+         0Iyg==
+X-Gm-Message-State: AOJu0Yz54WKNcdrkMmXOJGMPibqfSIF4WUY7eJU+jU1JKLNL10ka9qiA
+	nJzOh+qCC9AgSelLw2UUyshdstkf/sqzw/XlHqEZXcEZUqnOkUnUUiEWzOMgnQ==
+X-Gm-Gg: AY/fxX5irQ/ppDQ5QzgdSyTdCTaneGxSt+bCGnCqIh1s0WbwqJ6nJLNPQwHCiFWjgNk
+	OhHRJykQtS1svhd+Cry1BI4wsDJooO/K79E010Ai7riYQ30qqFn2OOxu1seN5TTygMy+afQu4Hx
+	yZht/T0FQHABctjoWfvVU17iDm8LF8YHk/2w8Mi5H6uPzxJsL0CWuW/cUIWQfFnnQomhNLKc6BC
+	hqFkBRN/sVjiE+WkSSs/OAfNB6mqrjhmNMzSsEv1ZoCULwIAu0c+103vFdMAHANNCNxaOPvAb82
+	bQjLWkmdi5u1qiG477jK6fch2/VzIe7Gsrc5qIq4U8tyDalz/Lv4wwgQ1Eem1gWrS960j1ieK/i
+	9niRyvxY2nFdBQCGgn/Av4vwiq5nID06F26f6QeOScwbno+s1hLzcISmrurKNKThr1ajvdkZz6f
+	44dxiGNhSPh2B2lzdV/gP3pbqtZ0bJQdLR8FXBDIU1PfYbNxfEQEVZgg4=
+X-Google-Smtp-Source: AGHT+IHext64KZYUqN0pgZ0xmQB8T2vwcDj1tUi+kPOWn43y4yCxM5M6jfNckcF0n9xq8tHKpJIIAQ==
+X-Received: by 2002:a17:907:7f27:b0:b79:c879:fe71 with SMTP id a640c23a62f3a-b7d23a47753mr1536967366b.19.1765904146727;
+        Tue, 16 Dec 2025 08:55:46 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -97,9 +97,9 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v7 10/19] xen/riscv: implement p2m_set_range()
-Date: Tue, 16 Dec 2025 17:55:20 +0100
-Message-ID: <b28fb57f251b0d07f31a0c6f6863c9816d91691a.1765879052.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 05/19] xen/riscv: add root page table allocation
+Date: Tue, 16 Dec 2025 17:55:15 +0100
+Message-ID: <0c85ea3e9e00ee1f00d6e143a15f118d714d128f.1765879052.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1765879052.git.oleksii.kurochko@gmail.com>
 References: <cover.1765879052.git.oleksii.kurochko@gmail.com>
@@ -107,598 +107,500 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This patch introduces p2m_set_range() and its core helper p2m_set_entry() for
-RISC-V, based loosely on the Arm implementation, with several RISC-V-specific
-modifications.
+Introduce support for allocating and initializing the root page table
+required for RISC-V stage-2 address translation.
 
-The main changes are:
-- Simplification of Break-Before-Make (BBM) approach as according to RISC-V
-  spec:
-    It is permitted for multiple address-translation cache entries to co-exist
-    for the same address. This represents the fact that in a conventional
-    TLB hierarchy, it is possible for multiple entries to match a single
-    address if, for example, a page is upgraded to a superpage without first
-    clearing the original non-leaf PTE’s valid bit and executing an SFENCE.VMA
-    with rs1=x0, or if multiple TLBs exist in parallel at a given level of the
-    hierarchy. In this case, just as if an SFENCE.VMA is not executed between
-    a write to the memory-management tables and subsequent implicit read of the
-    same address: it is unpredictable whether the old non-leaf PTE or the new
-    leaf PTE is used, but the behavior is otherwise well defined.
-  In contrast to the Arm architecture, where BBM is mandatory and failing to
-  use it in some cases can lead to CPU instability, RISC-V guarantees
-  stability, and the behavior remains safe — though unpredictable in terms of
-  which translation will be used.
-- Unlike Arm, the valid bit is not repurposed for other uses in this
-  implementation. Instead, entry validity is determined based solely on P2M
-  PTE's valid bit.
-
-The main functionality is in p2m_set_entry(), which handles mappings aligned
-to page table block entries (e.g., 1GB, 2MB, or 4KB with 4KB granularity).
-
-p2m_set_range() breaks a region down into block-aligned mappings and calls
-p2m_set_entry() accordingly.
-
-Stub implementations (to be completed later) include:
-- p2m_free_subtree()
-- p2m_next_level()
-- p2m_pte_from_mfn()
-
-Note: Support for shattering block entries is not implemented in this
-patch and will be added separately.
-
-Additionally, some straightforward helper functions are now implemented:
-- p2m_write_pte()
-- p2m_remove_pte()
-- p2m_get_root_pointer()
+To implement root page table allocation the following is introduced:
+- p2m_get_clean_page() and p2m_alloc_root_table(), p2m_allocate_root()
+  helpers to allocate and zero a 16 KiB root page table, as mandated
+  by the RISC-V privileged specification for Sv32x4/Sv39x4/Sv48x4/Sv57x4
+  modes.
+- Update p2m_init() to inititialize p2m_root_order.
+- Add maddr_to_page() and page_to_maddr() macros for easier address
+  manipulation.
+- Introduce paging_ret_to_domheap() to return some pages before
+  allocate 16 KiB pages for root page table.
+- Allocate root p2m table after p2m pool is initialized.
+- Add construct_hgatp() to construct the hgatp register value based on
+  p2m->root, p2m->hgatp_mode and VMID.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V7:
- - Drop initializer of var[0] inside P2M_BUILD_LEVEL_OFFSETS().
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in V6:
- - Drop the last paragraph in the comment above P2M_LEVEL_ORDER().
- - Update prototype of calc_offset(..., vaddr_t va) to
-   calc_offset(..., paddr_t gpa).
- - Rename root_table_indx to idx.
- - s/clean_pte/clean_cache.
- - Fix identations.
- - Introduce P2M_MAX_SUPPORTED_LEVEL_MAPPING to use it instead of magic constant.
- - Rename GFN_MASK to P2M_TABLE_OFFSET
- - Update the implementation of calc_offset() and get_root_pointer().
- - s/P2M_DECLARE_OFFSETS/P2M_BUILD_LEVEL_OFFSETS.
- - Add BUG_ON() inside P2M_BUILD_LEVEL_OFFSETS() to be sure that
-   actual root level isn't higer then maximum possible.
- - Move gstage_mode and gstage_level inside p2m_domain structure.
+ - Clean the memory page instead of frame_table[] in clear_and_clean_page().
+ – Remove full stops from log messages in paging.c and start the messages
+   with a lowercase letter.
+ - s/paging_ret_page_to_domheap/_paging_ret_to_domheap
+ - s/paging_add_page_to_freelist/_paging_add_to_freelist
+ - Introduce gstage_mode and initialize it.
 ---
 Changes in V5:
- - Update the comment above p2m_get_root_pointer().
- - Fix an identation for p2m_set_entry()'s arguments.
- - Update the comment in p2m_set_entry() where lookup is happening.
- - Drop part of the comment above p2m_set_entry() as it is not really
-   needed anymore.
- - Introduce P2M_DECLARE_OFFSETS() to use it insetead of
-   DECLARE_OFFSETS() as the latter could have an issue with P2M code.
- - Update p2m_get_root_pointer() to work only with P2M root properties.
- - Update the comment inside in p2m_set_entry() for the case when
-   p2m_next_level() returns P2M_TABLE_MAP_{NONE,NOMEM}.
- - Simplify a little bit a condition when p2m_free_subtree() by removing
-   a case when removing && mfn(0) are checked explicitly.
+ - Update proto of construct_hgatp(): make first argument pointer-to-const.
+ - Code style fixes.
+ - s/paging_ret_pages_to_freelist/paging_refill_from_domheap.
+ - s/paging_ret_pages_to_domheap/paging_ret_to_domheap.
+ - s/paging_ret_page_to_freelist/paging_add_page_to_freelist.
+ - Drop ACCESS_ONCE() as all the cases where it is used are used under spinlock() hence ACCESS_ONCE() is redundant.
 ---
 Changes in V4:
- - Introduce gstage_root_level and use it for defintion of P2M_ROOT_LEVEL.
- - Introduce P2M_LEVEL_ORDER() macros and P2M_PAGETABLE_ENTRIES().
- - Add the TODO comment in p2m_write_pte() about possible perfomance
-   optimization.
- - Use compound literal for `pte` variable inside p2m_clean_pte().
- - Fix the comment above p2m_next_level().
- - Update ASSERT() inside p2m_set_entry() and leave only a check of a
-   target as p2m_mapping_order() that page_order will be correctly
-   aligned.
- - Update the comment above declaration of `removing_mapping` in
-   p2m_set_entry().
- - Stray blanks.
- - Handle possibly overflow of an amount of unmapped GFNs in case of
-   some failute in p2m_set_range().
- - Handle a case when MFN is 0 and removing of such MFN is happening in
-   p2m_set_entry.
- - Fix p2m_get_root_pointer() to return correct pointer to root page table.
+ - Drop hgatp_mode from p2m_domain as gstage_mode was introduced and
+   initlialized earlier patch. So use gstage_mode instead.
+ - s/GUEST_ROOT_PAGE_TABLE_SIZE/GSTAGE_ROOT_PAGE_TABLE_SIZE.
+ - Drop p2m_root_order and re-define P2M_ROOT_ORDER:
+     #define P2M_ROOT_ORDER  (ilog2(GSTAGE_ROOT_PAGE_TABLE_SIZE) - PAGE_SHIFT)
+ - Update implementation of construct_hgatp(): use introduced gstage_mode
+   and use MASK_INSRT() to construct ppn value.
+ - Drop nr_root_pages variable inside p2m_alloc_root_table().
+ - Update the printk's message inside paging_ret_pages_to_domheap().
+ - Add an introduction of clean_pte member of p2m_domain structure to this
+   patch as it is started to be used here.
+   Rename clean_pte to clean_dcache.
+ - Drop p2m_allocate_root() function as it is going to be used only in one
+   place.
+ - Propogate rc from p2m_alloc_root_table() in p2m_set_allocation().
+ - Return P2M_ROOT_PAGES to freelist in case of allocation of root page
+   table failed.
+ - Add allocated root tables pages to p2m->pages pool so a usage of pages
+   could be properly taken into account.
 ---
-Changes in V3:
- - Drop p2m_access_t connected stuff as it isn't going to be used, at least
-   now.
- - Move defintion of P2M_ROOT_ORDER and P2M_ROOT_PAGES to earlier patches.
- - Update the comment above lowest_mapped_gfn declaration.
- - Update the comment above p2m_get_root_pointer(): s/"...ofset of the root
-   table"/"...ofset into root table".
- - s/p2m_remove_pte/p2m_clean_pte.
- - Use plain 0 instead of 0x00 in p2m_clean_pte().
- - s/p2m_entry_from_mfn/p2m_pte_from_mfn.
- - s/GUEST_TABLE_*/P2M_TABLE_*.
- - Update the comment above p2m_next_level(): "GFN entry" -> "corresponding
-   the entry corresponding to the GFN".
- - s/__p2m_set_entry/_p2m_set_entry.
- - drop "s" for sgfn and smfn prefixes of _p2m_set_entry()'s arguments
-   as this function work only with one GFN and one MFN.
- - Return correct return code when p2m_next_level() faild in _p2m_set_entry(),
-   also drop "else" and just handle case (rc != P2M_TABLE_NORMAL) separately.
- - Code style fixes.
- - Use unsigned int for "order" in p2m_set_entry().
- - s/p2m_set_entry/p2m_free_subtree.
- - Update ASSERT() in __p2m_set_enty() to check that page_order is propertly
-   aligned.
- - Return -EACCES instead of -ENOMEM in the chase when domain is dying and
-   someone called p2m_set_entry.
- - s/p2m_set_entry/p2m_set_range.
- - s/__p2m_set_entry/p2m_set_entry
- - s/p2me_is_valid/p2m_is_valid()
- - Return a number of successfully mapped GFNs in case if not all were mapped
-   in p2m_set_range().
- - Use BIT(order, UL) instead of 1 << order.
- - Drop IOMMU flushing code from p2m_set_entry().
- - set p2m->need_flush=true when entry in p2m_set_entry() is changed.
- - Introduce p2m_mapping_order() to support superpages.
- - Drop p2m_is_valid() and use pte_is_valid() instead as there is no tricks
-   with copying of valid bit anymore.
- - Update p2m_pte_from_mfn() prototype: drop p2m argument.
+Changes in v3:
+ - Drop insterting of p2m->vmid in hgatp_from_page() as now vmid is allocated
+   per-CPU, not per-domain, so it will be inserted later somewhere in
+   context_switch or before returning control to a guest.
+ - use BIT() to init nr_pages in p2m_allocate_root() instead of open-code
+   BIT() macros.
+ - Fix order in clear_and_clean_page().
+ - s/panic("Specify more xen,domain-p2m-mem-mb\n")/return NULL.
+ - Use lock around a procedure of returning back pages necessary for p2m
+   root table.
+ - Update the comment about allocation of page for root page table.
+ - Update an argument of hgatp_from_page() to "struct page_info *p2m_root_page"
+   to be consistent with the  function name.
+ - Use p2m_get_hostp2m(d) instead of open-coding it.
+ - Update the comment above the call of p2m_alloc_root_table().
+ - Update the comments in p2m_allocate_root().
+ - Move part which returns some page to domheap before root page table allocation
+   to paging.c.
+ - Pass p2m_domain * instead of struct domain * for p2m_alloc_root_table().
+ - Introduce construct_hgatp() instead of hgatp_from_page().
+ - Add vmid and hgatp_mode member of struct p2m_domain.
+ - Add explanatory comment above clean_dcache_va_range() in
+   clear_and_clean_page().
+ - Introduce P2M_ROOT_ORDER and P2M_ROOT_PAGES.
+ - Drop vmid member from p2m_domain as now we are using per-pCPU
+   VMID allocation.
+ - Update a declaration of construct_hgatp() to recieve VMID as it
+   isn't per-VM anymore.
+ - Drop hgatp member of p2m_domain struct as with the new VMID scheme
+   allocation construction of hgatp will be needed more often.
+ - Drop is_hardware_domain() case in p2m_allocate_root(), just always
+   allocate root using p2m pool pages.
+ - Refactor p2m_alloc_root_table() and p2m_alloc_table().
 ---
-Changes in V2:
- - New patch. It was a part of a big patch "xen/riscv: implement p2m mapping
-   functionality" which was splitted to smaller.
- - Update the way when p2m TLB is flushed:
- - RISC-V does't require BBM so there is no need to remove PTE before making
-   new so drop 'if /*pte_is_valid(orig_pte) */' and remove PTE only removing
-   has been requested.
- - Drop p2m->need_flush |= !!pte_is_valid(orig_pte); for the case when
-   PTE's removing is happening as RISC-V could cache invalid PTE and thereby
-   it requires to do a flush each time and it doesn't matter if PTE is valid
-   or not at the moment when PTE removing is happening.
- - Drop a check if PTE is valid in case of PTE is modified as it was mentioned
-   above as BBM isn't required so TLB flushing could be defered and there is
-   no need to do it before modifying of PTE.
- - Drop p2m->need_flush as it seems like it will be always true.
- - Drop foreign mapping things as it isn't necessary for RISC-V right now.
- - s/p2m_is_valid/p2me_is_valid.
- - Move definition and initalization of p2m->{max_mapped_gfn,lowest_mapped_gfn}
-   to this patch.
+Changes in v2:
+ - This patch was created from "xen/riscv: introduce things necessary for p2m
+   initialization" with the following changes:
+   - [clear_and_clean_page()] Add missed call of clean_dcache_va_range().
+   - Drop p2m_get_clean_page() as it is going to be used only once to allocate
+     root page table. Open-code it explicittly in p2m_allocate_root(). Also,
+     it will help avoid duplication of the code connected to order and nr_pages
+     of p2m root page table.
+   - Instead of using order 2 for alloc_domheap_pages(), use
+     get_order_from_bytes(KB(16)).
+   - Clear and clean a proper amount of allocated pages in p2m_allocate_root().
+   - Drop _info from the function name hgatp_from_page_info() and its argument
+     page_info.
+   - Introduce HGATP_MODE_MASK and use MASK_INSR() instead of shift to calculate
+     value of hgatp.
+   - Drop unnecessary parentheses in definition of page_to_maddr().
+   - Add support of VMID.
+   - Drop TLB flushing in p2m_alloc_root_table() and do that once when VMID
+     is re-used. [Look at p2m_alloc_vmid()]
+   - Allocate p2m root table after p2m pool is fully initialized: first
+     return pages to p2m pool them allocate p2m root table.
 ---
- xen/arch/riscv/include/asm/p2m.h |  38 ++++
- xen/arch/riscv/p2m.c             | 326 ++++++++++++++++++++++++++++++-
- 2 files changed, 363 insertions(+), 1 deletion(-)
+ xen/arch/riscv/include/asm/mm.h             |   4 +
+ xen/arch/riscv/include/asm/p2m.h            |  17 +++
+ xen/arch/riscv/include/asm/paging.h         |   3 +
+ xen/arch/riscv/include/asm/riscv_encoding.h |   2 +
+ xen/arch/riscv/p2m.c                        |  99 +++++++++++++++++-
+ xen/arch/riscv/paging.c                     | 110 +++++++++++++++-----
+ 6 files changed, 206 insertions(+), 29 deletions(-)
 
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index e5ea91fa4d..2f7927e6f4 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -167,6 +167,10 @@ extern struct page_info *frametable_virt_start;
+ #define mfn_to_page(mfn)    (frametable_virt_start + mfn_x(mfn))
+ #define page_to_mfn(pg)     _mfn((pg) - frametable_virt_start)
+ 
++/* Convert between machine addresses and page-info structures. */
++#define maddr_to_page(ma) mfn_to_page(maddr_to_mfn(ma))
++#define page_to_maddr(pg) mfn_to_maddr(page_to_mfn(pg))
++
+ static inline void *page_to_virt(const struct page_info *pg)
+ {
+     return mfn_to_virt(mfn_x(page_to_mfn(pg)));
 diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index 9acd6a64a8..fa55d8a3bc 100644
+index 239f90622e..c9aa19ad43 100644
 --- a/xen/arch/riscv/include/asm/p2m.h
 +++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -8,10 +8,38 @@
- #include <xen/rwlock.h>
- #include <xen/types.h>
+@@ -2,6 +2,7 @@
+ #ifndef ASM__RISCV__P2M_H
+ #define ASM__RISCV__P2M_H
  
-+#include <asm/page.h>
++#include <xen/bitops.h>
+ #include <xen/errno.h>
+ #include <xen/mm.h>
+ #include <xen/rwlock.h>
+@@ -9,6 +10,9 @@
+ 
  #include <asm/page-bits.h>
  
- #define P2M_ROOT_ORDER  (ilog2(GSTAGE_ROOT_PAGE_TABLE_SIZE) - PAGE_SHIFT)
- #define P2M_ROOT_PAGES  BIT(P2M_ROOT_ORDER, U)
-+#define P2M_ROOT_LEVEL(p2m) ((p2m)->mode.paging_levels)
++#define P2M_ROOT_ORDER  (ilog2(GSTAGE_ROOT_PAGE_TABLE_SIZE) - PAGE_SHIFT)
++#define P2M_ROOT_PAGES  BIT(P2M_ROOT_ORDER, U)
 +
-+/*
-+ * According to the RISC-V spec:
-+ *   When hgatp.MODE specifies a translation scheme of Sv32x4, Sv39x4, Sv48x4,
-+ *   or Sv57x4, G-stage address translation is a variation on the usual
-+ *   page-based virtual address translation scheme of Sv32, Sv39, Sv48, or
-+ *   Sv57, respectively. In each case, the size of the incoming address is
-+ *   widened by 2 bits (to 34, 41, 50, or 59 bits).
-+ *
-+ * P2M_LEVEL_ORDER(lvl) defines the bit position in the GFN from which
-+ * the index for this level of the P2M page table starts. The extra 2
-+ * bits added by the "x4" schemes only affect the root page table width.
-+ *
-+ * Therefore, this macro can safely reuse XEN_PT_LEVEL_ORDER() for all
-+ * levels: the extra 2 bits do not change the indices of lower levels.
-+ */
-+#define P2M_LEVEL_ORDER(lvl) XEN_PT_LEVEL_ORDER(lvl)
-+
-+#define P2M_ROOT_EXTRA_BITS(p2m, lvl) (2 * ((lvl) == P2M_ROOT_LEVEL(p2m)))
-+
-+#define P2M_PAGETABLE_ENTRIES(p2m, lvl) \
-+    (BIT(PAGETABLE_ORDER + P2M_ROOT_EXTRA_BITS(p2m, lvl), UL))
-+
-+#define P2M_TABLE_OFFSET(p2m, lvl) (P2M_PAGETABLE_ENTRIES(p2m, lvl) - 1UL)
-+
-+#define P2M_GFN_LEVEL_SHIFT(lvl) (P2M_LEVEL_ORDER(lvl) + PAGE_SHIFT)
- 
  #define paddr_bits PADDR_BITS
  
-@@ -58,6 +86,16 @@ struct p2m_domain {
-      * when a page is needed to be fully cleared and cleaned.
-      */
-     bool clean_dcache;
+ /* Get host p2m table */
+@@ -30,6 +34,11 @@ struct p2m_domain {
+     /* Pages used to construct the p2m */
+     struct page_list_head pages;
+ 
++    /* The root of the p2m tree. May be concatenated */
++    struct page_info *root;
 +
-+    /* Highest guest frame that's ever been mapped in the p2m */
-+    gfn_t max_mapped_gfn;
++    struct gstage_mode_desc mode;
++
+     /* Back pointer to domain */
+     struct domain *domain;
+ 
+@@ -43,6 +52,12 @@ struct p2m_domain {
+      * shattered), call p2m_tlb_flush_sync().
+      */
+     bool need_flush;
 +
 +    /*
-+     * Lowest mapped gfn in the p2m. When releasing mapped gfn's in a
-+     * preemptible manner this is updated to track where to resume
-+     * the search. Apart from during teardown this can only decrease.
++     * Indicate if it is required to clean the cache when writing an entry or
++     * when a page is needed to be fully cleared and cleaned.
 +     */
-+    gfn_t lowest_mapped_gfn;
++    bool clean_dcache;
  };
  
  /*
+@@ -130,6 +145,8 @@ unsigned char get_max_supported_mode(void);
+ 
+ int p2m_init(struct domain *d);
+ 
++unsigned long construct_hgatp(const struct p2m_domain *p2m, uint16_t vmid);
++
+ #endif /* ASM__RISCV__P2M_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index 98d8b06d45..01be45528f 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -10,4 +10,7 @@ int paging_domain_init(struct domain *d);
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+                            bool *preempted);
+ 
++int paging_ret_to_domheap(struct domain *d, unsigned int nr_pages);
++int paging_refill_from_domheap(struct domain *d, unsigned int nr_pages);
++
+ #endif /* ASM_RISCV_PAGING_H */
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+index e0a5e8b58b..1f7e612366 100644
+--- a/xen/arch/riscv/include/asm/riscv_encoding.h
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -180,6 +180,8 @@
+ #define HGATP_MODE_MASK			HGATP32_MODE_MASK
+ #endif
+ 
++#define GSTAGE_ROOT_PAGE_TABLE_SIZE	KB(16)
++
+ #define TOPI_IID_SHIFT			16
+ #define TOPI_IID_MASK			0xfff
+ #define TOPI_IPRIO_MASK		0xff
 diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 8bb197f9b3..c23926933f 100644
+index 39c84f1a3b..d14757331f 100644
 --- a/xen/arch/riscv/p2m.c
 +++ b/xen/arch/riscv/p2m.c
-@@ -9,6 +9,7 @@
+@@ -3,6 +3,7 @@
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/macros.h>
++#include <xen/domain_page.h>
+ #include <xen/mm.h>
+ #include <xen/paging.h>
  #include <xen/rwlock.h>
- #include <xen/sched.h>
- #include <xen/sections.h>
-+#include <xen/xvmalloc.h>
- 
- #include <asm/csr.h>
- #include <asm/flushtlb.h>
-@@ -17,6 +18,13 @@
- #include <asm/riscv_encoding.h>
- #include <asm/vmid.h>
- 
-+/*
-+ * At the moment, only 4K, 2M, and 1G mappings are supported for G-stage
-+ * translation. Therefore, the maximum supported page-table level is 2,
-+ * which corresponds to 1G mappings.
-+ */
-+#define P2M_MAX_SUPPORTED_LEVEL_MAPPING _AC(2, U)
-+
- static struct gstage_mode_desc __ro_after_init max_gstage_mode = {
-     .mode = HGATP_MODE_OFF,
-     .paging_levels = 0,
-@@ -28,6 +36,77 @@ unsigned char get_max_supported_mode(void)
-     return max_gstage_mode.mode;
+@@ -109,6 +110,74 @@ void __init guest_mm_init(void)
+     local_hfence_gvma_all();
  }
  
-+static inline unsigned int calc_offset(const struct p2m_domain *p2m,
-+                                       const unsigned int lvl,
-+                                       const paddr_t gpa)
++static void clear_and_clean_page(struct page_info *page, bool clean_dcache)
 +{
-+    unsigned int off = (gpa >> P2M_GFN_LEVEL_SHIFT(lvl)) &
-+                       P2M_TABLE_OFFSET(p2m, lvl);
++    void *p = __map_domain_page(page);
++
++    clear_page(p);
 +
 +    /*
-+     * For P2M_ROOT_LEVEL, `offset` ranges from 0 to 2047, since the root
-+     * page table spans 4 consecutive 4KB pages.
-+     * We want to return an index within one of these 4 pages.
-+     * The specific page to use is determined by `p2m_get_root_pointer()`.
-+     *
-+     * Example: if `offset == 512`:
-+     *  - A single 4KB page holds 512 entries.
-+     *  - Therefore, entry 512 corresponds to index 0 of the second page.
-+     *
-+     * At all other levels, only one page is allocated, and `offset` is
-+     * always in the range 0 to 511, since the VPN is 9 bits long.
++     * If the IOMMU doesn't support coherent walks and the p2m tables are
++     * shared between the CPU and IOMMU, it is necessary to clean the
++     * d-cache.
 +     */
-+    return off & (PAGETABLE_ENTRIES - 1);
++    if ( clean_dcache )
++        clean_dcache_va_range(p, PAGE_SIZE);
++
++    unmap_domain_page(p);
 +}
 +
-+#define P2M_MAX_ROOT_LEVEL 5
-+
-+#define P2M_BUILD_LEVEL_OFFSETS(p2m, var, addr) \
-+    unsigned int var[P2M_MAX_ROOT_LEVEL]; \
-+    BUG_ON(P2M_ROOT_LEVEL(p2m) >= P2M_MAX_ROOT_LEVEL); \
-+    for ( unsigned int i = 0; i <= P2M_ROOT_LEVEL(p2m); i++ ) \
-+        var[i] = calc_offset(p2m, i, addr);
-+
-+/*
-+ * Map one of the four root pages of the P2M root page table.
-+ *
-+ * The P2M root page table is larger than normal (16KB instead of 4KB),
-+ * so it is allocated as four consecutive 4KB pages. This function selects
-+ * the appropriate 4KB page based on the given GFN and returns a mapping
-+ * to it.
-+ *
-+ * The caller is responsible for unmapping the page after use.
-+ *
-+ * Returns NULL if the calculated offset into the root table is invalid.
-+ */
-+static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
++unsigned long construct_hgatp(const struct p2m_domain *p2m, uint16_t vmid)
 +{
-+    unsigned long idx;
-+    unsigned long root_level = P2M_ROOT_LEVEL(p2m);
++    return MASK_INSR(mfn_x(page_to_mfn(p2m->root)), HGATP_PPN_MASK) |
++           MASK_INSR(p2m->mode.mode, HGATP_MODE_MASK) |
++           MASK_INSR(vmid, HGATP_VMID_MASK);
++}
 +
-+    idx = gfn_x(gfn) >> P2M_LEVEL_ORDER(root_level);
-+    if ( idx >= P2M_PAGETABLE_ENTRIES(p2m, root_level) )
-+        return NULL;
++static int p2m_alloc_root_table(struct p2m_domain *p2m)
++{
++    struct domain *d = p2m->domain;
++    struct page_info *page;
++    int rc;
 +
 +    /*
-+     * The P2M root page table is extended by 2 bits, making its size 16KB
-+     * (instead of 4KB for non-root page tables). Therefore, p2m->root is
-+     * allocated as four consecutive 4KB pages (since alloc_domheap_pages()
-+     * only allocates 4KB pages).
-+     *
-+     * Initially, `idx` is derived directly from `gfn`.
-+     * To locate the correct entry within a single 4KB page,
-+     * we rescale the offset so it falls within one of the 4 pages.
-+     *
-+     * Example: if `idx == 512`
-+     * - A 4KB page holds 512 entries.
-+     * - Thus, entry 512 corresponds to index 0 of the second page.
++     * Return back P2M_ROOT_PAGES to assure the root table memory is also
++     * accounted against the P2M pool of the domain.
 +     */
-+    idx /= PAGETABLE_ENTRIES;
++    if ( (rc = paging_ret_to_domheap(d, P2M_ROOT_PAGES)) )
++        return rc;
 +
-+    return __map_domain_page(p2m->root + idx);
++    /*
++     * As mentioned in the Priviliged Architecture Spec (version 20240411)
++     * in Section 18.5.1, for the paged virtual-memory schemes  (Sv32x4,
++     * Sv39x4, Sv48x4, and Sv57x4), the root page table is 16 KiB and must
++     * be aligned to a 16-KiB boundary.
++     */
++    page = alloc_domheap_pages(d, P2M_ROOT_ORDER, MEMF_no_owner);
++    if ( !page )
++    {
++        /*
++         * If allocation of root table pages fails, the pages acquired above
++         * must be returned to the freelist to maintain proper freelist
++         * balance.
++         */
++        paging_refill_from_domheap(d, P2M_ROOT_PAGES);
++
++        return -ENOMEM;
++    }
++
++    for ( unsigned int i = 0; i < P2M_ROOT_PAGES; i++ )
++    {
++        clear_and_clean_page(page + i, p2m->clean_dcache);
++
++        page_list_add(page + i, &p2m->pages);
++    }
++
++    p2m->root = page;
++
++    return 0;
 +}
 +
- static void __init gstage_mode_detect(void)
+ int p2m_init(struct domain *d)
  {
-     static const struct gstage_mode_desc modes[] __initconst = {
-@@ -228,6 +307,9 @@ int p2m_init(struct domain *d)
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+@@ -124,6 +193,24 @@ int p2m_init(struct domain *d)
      rwlock_init(&p2m->lock);
      INIT_PAGE_LIST_HEAD(&p2m->pages);
  
-+    p2m->max_mapped_gfn = _gfn(0);
-+    p2m->lowest_mapped_gfn = _gfn(ULONG_MAX);
-+
-     /*
-      * Currently, the infrastructure required to enable CONFIG_HAS_PASSTHROUGH
-      * is not ready for RISC-V support.
-@@ -274,13 +356,255 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
-     return rc;
- }
- 
-+static inline void p2m_write_pte(pte_t *p, pte_t pte, bool clean_cache)
-+{
-+    write_pte(p, pte);
-+
-+    /*
-+     * TODO: if multiple adjacent PTEs are written without releasing
-+     *       the lock, this then redundant cache flushing can be a
-+     *       performance issue.
-+     */
-+    if ( clean_cache )
-+        clean_dcache_va_range(p, sizeof(*p));
-+}
-+
-+static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
-+{
-+    pte_t pte = { .pte = 0 };
-+
-+    p2m_write_pte(p, pte, clean_cache);
-+}
-+
-+static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t)
-+{
-+    panic("%s: hasn't been implemented yet\n", __func__);
-+
-+    return (pte_t) { .pte = 0 };
-+}
-+
-+#define P2M_TABLE_MAP_NONE 0
-+#define P2M_TABLE_MAP_NOMEM 1
-+#define P2M_TABLE_SUPER_PAGE 2
-+#define P2M_TABLE_NORMAL 3
-+
-+/*
-+ * Take the currently mapped table, find the entry corresponding to the GFN,
-+ * and map the next-level table if available. The previous table will be
-+ * unmapped if the next level was mapped (e.g., when P2M_TABLE_NORMAL is
-+ * returned).
-+ *
-+ * `alloc_tbl` parameter indicates whether intermediate tables should
-+ * be allocated when not present.
-+ *
-+ * Return values:
-+ *  P2M_TABLE_MAP_NONE: a table allocation isn't permitted.
-+ *  P2M_TABLE_MAP_NOMEM: allocating a new page failed.
-+ *  P2M_TABLE_SUPER_PAGE: next level or leaf mapped normally.
-+ *  P2M_TABLE_NORMAL: The next entry points to a superpage.
-+ */
-+static int p2m_next_level(struct p2m_domain *p2m, bool alloc_tbl,
-+                          unsigned int level, pte_t **table,
-+                          unsigned int offset)
-+{
-+    panic("%s: hasn't been implemented yet\n", __func__);
-+
-+    return P2M_TABLE_MAP_NONE;
-+}
-+
-+/* Free pte sub-tree behind an entry */
-+static void p2m_free_subtree(struct p2m_domain *p2m,
-+                             pte_t entry, unsigned int level)
-+{
-+    panic("%s: hasn't been implemented yet\n", __func__);
-+}
-+
-+/* Insert an entry in the p2m */
-+static int p2m_set_entry(struct p2m_domain *p2m,
-+                         gfn_t gfn,
-+                         unsigned long page_order,
-+                         mfn_t mfn,
-+                         p2m_type_t t)
-+{
-+    unsigned int level;
-+    unsigned int target = page_order / PAGETABLE_ORDER;
-+    pte_t *entry, *table, orig_pte;
-+    int rc;
-+    /*
-+     * A mapping is removed only if the MFN is explicitly set to INVALID_MFN.
-+     * Other MFNs that are considered invalid by mfn_valid() (e.g., MMIO)
-+     * are still allowed.
-+     */
-+    bool removing_mapping = mfn_eq(mfn, INVALID_MFN);
-+    P2M_BUILD_LEVEL_OFFSETS(p2m, offsets, gfn_to_gaddr(gfn));
-+
-+    ASSERT(p2m_is_write_locked(p2m));
-+
-+    /*
-+     * Check if the level target is valid: we only support
-+     * 4K - 2M - 1G mapping.
-+     */
-+    ASSERT(target <= P2M_MAX_SUPPORTED_LEVEL_MAPPING);
-+
-+    table = p2m_get_root_pointer(p2m, gfn);
-+    if ( !table )
-+        return -EINVAL;
-+
-+    for ( level = P2M_ROOT_LEVEL(p2m); level > target; level-- )
-+    {
-+        /*
-+         * Don't try to allocate intermediate page table if the mapping
-+         * is about to be removed.
-+         */
-+        rc = p2m_next_level(p2m, !removing_mapping,
-+                            level, &table, offsets[level]);
-+        if ( (rc == P2M_TABLE_MAP_NONE) || (rc == P2M_TABLE_MAP_NOMEM) )
-+        {
-+            rc = (rc == P2M_TABLE_MAP_NONE) ? -ENOENT : -ENOMEM;
-+            /*
-+             * We are here because p2m_next_level has failed to map
-+             * the intermediate page table (e.g the table does not exist
-+             * and none should be allocated). It is a valid case
-+             * when removing a mapping as it may not exist in the
-+             * page table. In this case, just ignore lookup failure.
-+             */
-+            rc = removing_mapping ? 0 : rc;
-+            goto out;
-+        }
-+
-+        if ( rc != P2M_TABLE_NORMAL )
-+            break;
-+    }
-+
-+    entry = table + offsets[level];
-+
-+    /*
-+     * If we are here with level > target, we must be at a leaf node,
-+     * and we need to break up the superpage.
-+     */
-+    if ( level > target )
-+    {
-+        panic("Shattering isn't implemented\n");
-+    }
-+
-+    /*
-+     * We should always be there with the correct level because all the
-+     * intermediate tables have been installed if necessary.
-+     */
-+    ASSERT(level == target);
-+
-+    orig_pte = *entry;
-+
-+    if ( removing_mapping )
-+        p2m_clean_pte(entry, p2m->clean_dcache);
-+    else
-+    {
-+        pte_t pte = p2m_pte_from_mfn(mfn, t);
-+
-+        p2m_write_pte(entry, pte, p2m->clean_dcache);
-+
-+        p2m->max_mapped_gfn = gfn_max(p2m->max_mapped_gfn,
-+                                      gfn_add(gfn, BIT(page_order, UL) - 1));
-+        p2m->lowest_mapped_gfn = gfn_min(p2m->lowest_mapped_gfn, gfn);
-+    }
-+
-+    p2m->need_flush = true;
-+
 +    /*
 +     * Currently, the infrastructure required to enable CONFIG_HAS_PASSTHROUGH
 +     * is not ready for RISC-V support.
 +     *
-+     * When CONFIG_HAS_PASSTHROUGH=y, iommu_iotlb_flush() should be done
-+     * here.
++     * When CONFIG_HAS_PASSTHROUGH=y, p2m->clean_dcache must be properly
++     * initialized.
++     * At the moment, it defaults to false because the p2m structure is
++     * zero-initialized.
 +     */
 +#ifdef CONFIG_HAS_PASSTHROUGH
-+#   error "add code to flush IOMMU TLB"
++#   error "Add init of p2m->clean_dcache"
 +#endif
 +
-+    rc = 0;
++    /* TODO: don't hardcode used for a domain g-stage mode. */
++    p2m->mode.mode = HGATP_MODE_SV39X4;
++    p2m->mode.paging_levels = 2;
++    safe_strcpy(p2m->mode.name, "Sv39x4");
 +
-+    /*
-+     * In case of a VALID -> INVALID transition, the original PTE should
-+     * always be freed.
-+     *
-+     * In case of a VALID -> VALID transition, the original PTE should be
-+     * freed only if the MFNs are different. If the MFNs are the same
-+     * (i.e., only permissions differ), there is no need to free the
-+     * original PTE.
-+     */
-+    if ( pte_is_valid(orig_pte) &&
-+         (!pte_is_valid(*entry) ||
-+          !mfn_eq(pte_get_mfn(*entry), pte_get_mfn(orig_pte))) )
-+        p2m_free_subtree(p2m, orig_pte, level);
-+
-+ out:
-+    unmap_domain_page(table);
-+
-+    return rc;
-+}
-+
-+/* Return mapping order for given gfn, mfn and nr */
-+static unsigned long p2m_mapping_order(const struct p2m_domain *p2m, gfn_t gfn,
-+                                       mfn_t mfn, unsigned long nr)
-+{
-+    unsigned long mask;
-+    /* 1gb, 2mb, 4k mappings are supported */
-+    unsigned int level = min(P2M_ROOT_LEVEL(p2m), P2M_MAX_SUPPORTED_LEVEL_MAPPING);
-+    unsigned long order = 0;
-+
-+    mask = !mfn_eq(mfn, INVALID_MFN) ? mfn_x(mfn) : 0;
-+    mask |= gfn_x(gfn);
-+
-+    for ( ; level != 0; level-- )
-+    {
-+        if ( !(mask & (BIT(P2M_LEVEL_ORDER(level), UL) - 1)) &&
-+             (nr >= BIT(P2M_LEVEL_ORDER(level), UL)) )
-+        {
-+            order = P2M_LEVEL_ORDER(level);
-+            break;
-+        }
-+    }
-+
-+    return order;
-+}
-+
- static int p2m_set_range(struct p2m_domain *p2m,
-                          gfn_t sgfn,
-                          unsigned long nr,
-                          mfn_t smfn,
-                          p2m_type_t t)
- {
--    return -EOPNOTSUPP;
-+    int rc = 0;
-+    unsigned long left = nr;
-+
-+    /*
-+     * Any reference taken by the P2M mappings (e.g. foreign mapping) will
-+     * be dropped in relinquish_p2m_mapping(). As the P2M will still
-+     * be accessible after, we need to prevent mapping to be added when the
-+     * domain is dying.
-+     */
-+    if ( unlikely(p2m->domain->is_dying) )
-+        return -EACCES;
-+
-+    while ( left )
-+    {
-+        unsigned long order = p2m_mapping_order(p2m, sgfn, smfn, left);
-+
-+        rc = p2m_set_entry(p2m, sgfn, order, smfn, t);
-+        if ( rc )
-+            break;
-+
-+        sgfn = gfn_add(sgfn, BIT(order, UL));
-+        if ( !mfn_eq(smfn, INVALID_MFN) )
-+            smfn = mfn_add(smfn, BIT(order, UL));
-+
-+        left -= BIT(order, UL);
-+    }
-+
-+    if ( left > INT_MAX )
-+        rc = -EOVERFLOW;
-+
-+    return !left ? rc : left;
+     return 0;
  }
  
- int map_regions_p2mt(struct domain *d,
+@@ -134,10 +221,20 @@ int p2m_init(struct domain *d)
+  */
+ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ {
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc;
+ 
+     if ( (rc = paging_freelist_adjust(d, pages, preempted)) )
+         return rc;
+ 
+-    return 0;
++    /*
++     * First, initialize p2m pool. Then allocate the root
++     * table so that the necessary pages can be returned from the p2m pool,
++     * since the root table must be allocated using alloc_domheap_pages(...)
++     * to meet its specific requirements.
++     */
++    if ( !p2m->root )
++        rc = p2m_alloc_root_table(p2m);
++
++    return rc;
+ }
+diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+index 2df8de033b..d401ddc34e 100644
+--- a/xen/arch/riscv/paging.c
++++ b/xen/arch/riscv/paging.c
+@@ -4,46 +4,67 @@
+ #include <xen/sched.h>
+ #include <xen/spinlock.h>
+ 
++static int _paging_ret_to_domheap(struct domain *d)
++{
++    struct page_info *page;
++
++    ASSERT(spin_is_locked(&d->arch.paging.lock));
++
++    /* Return memory to domheap. */
++    page = page_list_remove_head(&d->arch.paging.freelist);
++    if( page )
++    {
++        d->arch.paging.total_pages--;
++        free_domheap_page(page);
++    }
++    else
++    {
++        printk(XENLOG_ERR
++               "failed to free pages, P2M freelist is empty\n");
++        return -ENOMEM;
++    }
++
++    return 0;
++}
++
++static int _paging_add_to_freelist(struct domain *d)
++{
++    struct page_info *page;
++
++    ASSERT(spin_is_locked(&d->arch.paging.lock));
++
++    /* Need to allocate more memory from domheap */
++    page = alloc_domheap_page(d, MEMF_no_owner);
++    if ( page == NULL )
++    {
++        printk(XENLOG_ERR "failed to allocate pages\n");
++        return -ENOMEM;
++    }
++    d->arch.paging.total_pages++;
++    page_list_add_tail(page, &d->arch.paging.freelist);
++
++    return 0;
++}
++
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+                            bool *preempted)
+ {
+-    struct page_info *pg;
+-
+     ASSERT(spin_is_locked(&d->arch.paging.lock));
+ 
+     for ( ; ; )
+     {
++        int rc = 0;
++
+         if ( d->arch.paging.total_pages < pages )
+-        {
+-            /* Need to allocate more memory from domheap */
+-            pg = alloc_domheap_page(d, MEMF_no_owner);
+-            if ( pg == NULL )
+-            {
+-                printk(XENLOG_ERR "Failed to allocate pages.\n");
+-                return -ENOMEM;
+-            }
+-            ACCESS_ONCE(d->arch.paging.total_pages)++;
+-            page_list_add_tail(pg, &d->arch.paging.freelist);
+-        }
++            rc = _paging_add_to_freelist(d);
+         else if ( d->arch.paging.total_pages > pages )
+-        {
+-            /* Need to return memory to domheap */
+-            pg = page_list_remove_head(&d->arch.paging.freelist);
+-            if ( pg )
+-            {
+-                ACCESS_ONCE(d->arch.paging.total_pages)--;
+-                free_domheap_page(pg);
+-            }
+-            else
+-            {
+-                printk(XENLOG_ERR
+-                       "Failed to free pages, freelist is empty.\n");
+-                return -ENOMEM;
+-            }
+-        }
++            rc = _paging_ret_to_domheap(d);
+         else
+             break;
+ 
++        if ( rc )
++            return rc;
++
+         /* Check to see if we need to yield and try again */
+         if ( preempted && general_preempt_check() )
+         {
+@@ -55,6 +76,39 @@ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+     return 0;
+ }
+ 
++int paging_refill_from_domheap(struct domain *d, unsigned int nr_pages)
++{
++    ASSERT(spin_is_locked(&d->arch.paging.lock));
++
++    for ( unsigned int i = 0; i < nr_pages; i++ )
++    {
++        int rc = _paging_add_to_freelist(d);
++
++        if ( rc )
++            return rc;
++    }
++
++    return 0;
++}
++
++int paging_ret_to_domheap(struct domain *d, unsigned int nr_pages)
++{
++    ASSERT(spin_is_locked(&d->arch.paging.lock));
++
++    if ( d->arch.paging.total_pages < nr_pages )
++        return false;
++
++    for ( unsigned int i = 0; i < nr_pages; i++ )
++    {
++        int rc = _paging_ret_to_domheap(d);
++
++        if ( rc )
++            return rc;
++    }
++
++    return 0;
++}
++
+ /* Domain paging struct initialization. */
+ int paging_domain_init(struct domain *d)
+ {
 -- 
 2.52.0
 
