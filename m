@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91367D64076
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Dec 2025 06:03:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1188397.1509688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 323DCD64084
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Dec 2025 07:13:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1188563.1509698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVkca-0006bw-PX; Wed, 17 Dec 2025 06:02:48 +0000
+	id 1vVlii-0006nK-MU; Wed, 17 Dec 2025 07:13:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1188397.1509688; Wed, 17 Dec 2025 06:02:48 +0000
+Received: by outflank-mailman (output) from mailman id 1188563.1509698; Wed, 17 Dec 2025 07:13:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vVkca-0006bp-MV; Wed, 17 Dec 2025 06:02:48 +0000
-Received: by outflank-mailman (input) for mailman id 1188397;
- Tue, 16 Dec 2025 19:59:18 +0000
+	id 1vVlii-0006nD-IX; Wed, 17 Dec 2025 07:13:12 +0000
+Received: by outflank-mailman (input) for mailman id 1188563;
+ Wed, 17 Dec 2025 07:13:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Tw9=6W=gmail.com=david.laight.linux@srs-se1.protection.inumbo.net>)
- id 1vVbCY-0001NB-Hg
- for xen-devel@lists.xenproject.org; Tue, 16 Dec 2025 19:59:18 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ <SRS0=MzDs=6X=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1vVlih-0006n6-8z
+ for xen-devel@lists.xenproject.org; Wed, 17 Dec 2025 07:13:11 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b2e2fff8-dab9-11f0-9cce-f158ae23cfc8;
- Tue, 16 Dec 2025 20:59:16 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4779aa4f928so61206425e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 16 Dec 2025 11:59:15 -0800 (PST)
-Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4310ade7c3fsm779077f8f.26.2025.12.16.11.59.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Dec 2025 11:59:14 -0800 (PST)
+ id d6ad5263-db17-11f0-9cce-f158ae23cfc8;
+ Wed, 17 Dec 2025 08:13:08 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 113824EE8115;
+ Wed, 17 Dec 2025 08:13:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,123 +42,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2e2fff8-dab9-11f0-9cce-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765915155; x=1766519955; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GjniS35+gFl94KgDPsESP+GSizMKZS5/qxbShY9gflU=;
-        b=VRS67tdnTlTP1NEZZ7pi/wc3kfoOQ5J4IJSp333vb3IT2HWfopMWtZBlWmReVJZkIo
-         /pIZpOhzgo8t7qbsMIaKn3N6ZuJ0Usfp3TnjJ+6OQuWSt30IjLGF9k8seifyJeGVZdD1
-         psyVcNd8Es4gHjkKVNeMkIJ0Dy4bbF5UmKidIEiqCQZWC0eCJFdpVu2KlqamXYWSOIyB
-         EC2PNTpepkUpJhfNxHczilvhoPMdf6RqTulillsMlIdIDS3P0Rz1PpoGQZWDCZfixvdD
-         4C2Ft9keDA3f/UUqZVD+UeZPhVuYc0U3rhd4zbKFq+GsZd4avTTJsiyANeXKYABGDBOI
-         3f+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765915155; x=1766519955;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=GjniS35+gFl94KgDPsESP+GSizMKZS5/qxbShY9gflU=;
-        b=VWGPr8IQ6pQwjtgu2bBvSRuewu9D5RfI+IUooAf0DdNTCWP/6+M4HX5iptmPuw1pRE
-         xDTtig4vRU5U4kbxprgtobNm34SoiEPaV91c8ZHnI3Q3MfqFp473vaMiNzyghFm38oVU
-         bAdPbRu/LvNShKQgTVh0HKCEwKiuKCA6YA+azrqtLf7lncSaZNUc+BC35Hj77CxvOKgs
-         kvGYn62H+MWGcOxoF9vvntBxoGep3Ryvc5vpONVBSmYgEFt0yiW3Kpv2T3NsIMGajQAc
-         NM/Ja28vbduwUVRWTeqRU/ARWw8pifZeEXCkLZ6lAcwt9v/vecA222wzrdT4vvxCujXK
-         7cSQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXEYWgZ8pm0LmsHyovWGm7d9sdgn4B8O2HCCoqeT7n+Fmvx7KXl4OEuJRVqALMn3IdQcoK54LlP3TQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzElvdsE1w6EEaPBaTynF3dYsgDINYkMb28mEFS6jNDJmIsCIFA
-	vf9KiCPAdu6Ugu2UNJnqd6pA7sHkL6gzUonMz+Ll5TBdFtdUkhJqurYB
-X-Gm-Gg: AY/fxX5qQFil6M3QMeV5xN3Nut9Pz67afNzKHhDimy8ax/F5B3I9z7BRhCUNohp1wVB
-	U0DYcf19vHwixBdMHfGV7MayyAQ8OulfnVlxb5FkXCuxwxc9D8Mt6tlmrh7Ykvres8bdVVjTqFt
-	XSFrh1rKollFU4B7t3k4u7qbWI1GlTtVnBf58lYZH3gXBwYb2lvidbtTHJyGAgIvFdSYTR0tPxc
-	3k+5/dcUu/WOQ2bwdfMIQfhKirNl8pHX3+4Z4BWHYWgmIGyTCdhcLOwSml/8HXrMvt7UMwbrvHv
-	ZLhgShUSfbDBrihFp3fVd2zboCE0QNkb9+lakz6dafzZA1Bd0pS0ZlzfLRRvG80Nt+ecwlsC43M
-	IzJZulDnL1rkXQRGa4YIVl9o8k+H4SZSbnxFBHX9nvwu4RD8AV+75j4Sw0g14F/jVndjTMCs+cz
-	E7WJB4I2Dig8Rm5AJ7Q1y9Kq3GNohNRPh/npN++KOKKsjbBYhlRkp6hsJ57WuBfPY=
-X-Google-Smtp-Source: AGHT+IGkMCP0kONGgG89SYNUeIIN6orwCVUUHEl6uObTm3wydLwUSISgvgOvaVGUZQxtmSBHQ8CSsQ==
-X-Received: by 2002:a05:600c:4595:b0:479:3a87:2092 with SMTP id 5b1f17b1804b1-47a8f9145edmr152180075e9.36.1765915154784;
-        Tue, 16 Dec 2025 11:59:14 -0800 (PST)
-Date: Tue, 16 Dec 2025 19:59:12 +0000
-From: David Laight <david.laight.linux@gmail.com>
-To: "H. Peter Anvin" <hpa@zytor.com>
-Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, Ingo Molnar
- <mingo@kernel.org>, linux-kernel@vger.kernel.org, x86@kernel.org,
- virtualization@lists.linux.dev, kvm@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-block@vger.kernel.org, Thomas Gleixner
- <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
- <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, Ajay Kaher
- <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Boris
- Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org,
- Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, Denis
- Efremov <efremov@linux.com>, Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH 0/5] x86: Cleanups around slow_down_io()
-Message-ID: <20251216195912.0727cc0d@pumpkin>
-In-Reply-To: <14EF14B1-8889-4037-8E7B-C8446299B1E9@zytor.com>
-References: <20251126162018.5676-1-jgross@suse.com>
-	<aT5vtaefuHwLVsqy@gmail.com>
-	<bff8626d-161e-4470-9cbd-7bbda6852ec3@suse.com>
-	<aUFjRDqbfWMsXvvS@gmail.com>
-	<b969cff5-be11-4fd3-8356-95185ea5de4c@suse.com>
-	<14EF14B1-8889-4037-8E7B-C8446299B1E9@zytor.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
+X-Inumbo-ID: d6ad5263-db17-11f0-9cce-f158ae23cfc8
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1765955587;
+	b=XztZ07DshC46hMxW2TRelkpnfjD51mjqZ5vuJfzAgJD0Wh8Kc3ajBCnyMDzkhEqOtJEe
+	 WN+gZ7pXkyNdqrW5h8vo6iaVzFqk7vj3jEGWvq+FXpDISc8+Hk8/gQ6Px9Q3+MxTEC8GF
+	 gJyz/r+7zCpWJga8U108KmLJMqwbYa6FIgEJW0dCSzKWwYnpwtjwDyYpWJfJ8gOoRkAoI
+	 v0dtEAitNYfQ/3p1Sj8p2kpLsoXTZvLXaY3iz+szOJfpzUrW/R5eC8DXZM2pNCiAWwChL
+	 PV5mOG4UJcfYHRWb4R+kvDbYFso2E0rIBwF97mubgOOyFBip8SoEwyH8CbPj/aR8WCHZ+
+	 zzI2tx7GFQfi/3Y38YjT4KvY58dhQSNWmEXSiLtMoglz3BSw5VTf2TJ9ZdSOBDHSGqJfu
+	 C6q+mAHXoelR0xbsGOTkP9JYdrXxYHOXj4r5RXtS85LKJ7XBXOBtSDSNQKMshspoQxBHO
+	 aE5rJ6O0vy11CGuV2nMv1AwzoQ6fVwfgCqXwb1LqSZ5SPazP45yhYImpKgCGSxrW8oHLw
+	 KVRmtRHb9l4wDMVAztlyLrOU1Tjj8c3FjM6UhS4nO5cFVvg+xu0+aVN72XUzwXyaF4yZU
+	 v9xIuv/pPvJG3llIvFujlXeyzkfEJkhen6/m5Hd3P/seDzn46TvwI0U1ZXYYh1I=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1765955587;
+	h=DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:
+	 References:Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=pw0b2YO3MQkDiuw98EIZPlj7kSMv6vIlDUKJwghSvqY=;
+	b=r0IDoVAXc1U+q/iwkmOrD5EsXRGG6Lulqqf3JKPlA1EGbeo2Aw9aGpST7q4CgrPE7ap2
+	 N32NyTuMfKjxeIQcyGr4MOf1JP0q4uuw3iw8DFroD2l4e6vg6oJwmggZsBpR9GzCXLtc8
+	 juJhAeWg4GRJiCQXwKFzpCXmENlezyOBvudYf2QdFnwsG9P7Ef1lxk21phPebUqWCXj9f
+	 1ud9q1WPo2muwyf/qLpomouYYvFf6RFLVf7Nkl2Bf6DzQikv8FlO8L1O6AxVBc7wjSnAD
+	 4LIB9oWha4PWSDmFDSH55c97pSm1NKSd0LzUxyVaqpmt+5dZJLHXL2MF/SPN/uxPVeggf
+	 7wib7IVxGAX9D8onxeAyE0EJ7cU2y+DnsIwHXm2zOaMt0Jg+t4qY8ElmNRs/cNmg9YdBy
+	 qSDvvq3rUaptRF77a0HHc1xDO8uy7D03GP68VIIeVp7jsPr/Hm/HN1xmL8sBOCb69zKqs
+	 JArQzAGP5vm2OpgNsGYgEHefc3Nfe2bHn5h9TwMqQdZ2RowooK+Mp1nBuJ1fuI/Q9OnnO
+	 jRZXmzkdog4u1QFQOeRfGa+EvBodK3eEzuD5Mr8ySz8MlMKPVsL4btfrcQQaz7fN1ZNM9
+	 usSU5p+IuPBtoO/x0dLrJV9M9IXw9XrabKO/4OH49SorKUPhRmX5un27Xha8kT0=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=bugseng.com; s=mail;
+	t=1765955587; bh=feF1XL/GkuRiJMs7+2Kpyxeh6JUzcUkNCwD8kiOSbJY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=CB1Cf3yQzjHnZgj6jhxmYyhDG9Ox3LUo/lbMM6JR7xsqcgTOSTlKFOxWZkLLc5Iia
+	 j6rzHfBFyAzK7JET4r/skko6xzfaoDuCW1orqfUFkKLbMBp5TSL2qSzgSthZFA+h83
+	 jr0U9FBFYCWYU3G9hAXE9ZeHH55kWh2oQ3vDq6HLPiP6xKQIAF9ZWljfmJtWeGptXN
+	 mg3GHl1ecOpAoOgMEhpsmzKSIg3igEIlr51MzzzPEOb/WeijSRiQ7IbT4WAAqk2D2h
+	 bkwVQTHVjgYg5qI8KjPuAZLyva6lKJQYjTSdxznO1XADdvl9pImiFk7V8UosZDb+QD
+	 i8EWHl4/2aeDQ==
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Date: Wed, 17 Dec 2025 08:13:06 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Grygorii Strashko <grygorii_strashko@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel@lists.xenproject.org
+Subject: Re: X86: build failure
+In-Reply-To: <0066dae8-a05b-488e-8dfb-0685e1e9f700@epam.com>
+References: <8ee2e801-9a3a-414d-9df9-113f419e02e9@epam.com>
+ <63b6f29f-29ca-458e-8d6f-3408e84173e9@citrix.com>
+ <0066dae8-a05b-488e-8dfb-0685e1e9f700@epam.com>
+Message-ID: <709d7c2552828a68d40b93ba4211ae81@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, 16 Dec 2025 07:32:09 -0800
-"H. Peter Anvin" <hpa@zytor.com> wrote:
+On 2025-12-17 01:12, Grygorii Strashko wrote:
+> Hi Andrew,
+> 
+> On 17.12.25 01:54, Andrew Cooper wrote:
+>> On 16/12/2025 11:35 pm, Grygorii Strashko wrote:
+>>> Hi All,
+>>> 
+>>> I experience build failure with following Kconfig combination:
+>>>   CONFIG_DEBUG=n and CONFIG_XEN_IBT=n
+>>> 
+>>> with gcc:
+>>>   gcc --version
+>>>   gcc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
+>>>   Copyright (C) 2021 Free Software Foundation, Inc.
+>>>   This is free software; see the source for copying conditions.  
+>>> There
+>>> is NO
+>>>   warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+>>> PURPOSE.
+>>> 
+>>> Is this known issue?
+>>> 
+>>> ====== log ===============
+>>>    CC      arch/x86/x86_emulate.o
+>>> In file included from arch/x86/x86_emulate.c:27:
+>>> arch/x86/x86_emulate/x86_emulate.c: In function ‘x86_emulate’:
+>>> arch/x86/x86_emulate/x86_emulate.c:70:36: error: writing 1 byte into 
+>>> a
+>>> region of size 0 [-Werror=stringop-overflow=]
+>>>     70 |     gcc11_wrap(ptr)[0 - PFX_BYTES] = ext < ext_8f08 ? 0xc4 :
+>>> 0x8f; \
+>>> arch/x86/x86_emulate/x86_emulate.c:78:9: note: in expansion of macro
+>>> ‘copy_VEX’
+>>>     78 |         copy_VEX(ptr, vex); \
+>>>        |         ^~~~~~~~
+>>> arch/x86/x86_emulate/x86_emulate.c:8140:13: note: in expansion of
+>>> macro ‘copy_REX_VEX’
+>>>   8140 |             copy_REX_VEX(opc, rex_prefix, vex);
+>>>        |             ^~~~~~~~~~~~
+>>> In file included from arch/x86/x86_emulate/x86_emulate.c:11,
+>>>                   from arch/x86/x86_emulate.c:27:
+>>> arch/x86/x86_emulate/private.h:691:17: note: at offset [0, 4095] into
+>>> destination object of size [0, 9223372036854775807] allocated by
+>>> ‘map_domain_page’
+>>>    691 |     (stb).ptr = map_domain_page(_mfn(this_cpu(stubs.mfn))) + 
+>>> \
+>>>        |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>> arch/x86/x86_emulate/x86_emulate.c:60:21: note: in expansion of macro
+>>> ‘get_stub’
+>>>     60 |     uint8_t *buf_ = get_stub(stub); \
+>>>        |                     ^~~~~~~~
+>>> arch/x86/x86_emulate/x86_emulate.c:3354:15: note: in expansion of
+>>> macro ‘init_prefixes’
+>>>   3354 |         opc = init_prefixes(stub);
+>>>        |               ^~~~~~~~~~~~~
+>>> arch/x86/x86_emulate/private.h:691:17: note: at offset [1, 4096] into
+>>> destination object of size [0, 9223372036854775807] allocated by
+>>> ‘map_domain_page’
+>>>    691 |     (stb).ptr = map_domain_page(_mfn(this_cpu(stubs.mfn))) + 
+>>> \
+>>>        |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>> arch/x86/x86_emulate/x86_emulate.c:94:21: note: in expansion of macro
+>>> ‘get_stub’
+>>>     94 |     uint8_t *buf_ = get_stub(stub); \
+>>>        |                     ^~~~~~~~
+>>> arch/x86/x86_emulate/x86_emulate.c:3402:15: note: in expansion of
+>>> macro ‘init_evex’
+>>>   3402 |         opc = init_evex(stub);
+>>> [...]
+>>> 
+>> 
+>> Hmm - that looks like more of the GCC 11 bounds bugs, but that's what
+>> the gcc11_wrap() visible at the top is supposed to be fixing.
+>> 
+>> Neither of those CONFIG options ought to be relevant.
+>> 
+>> Which Ubuntu is this?  Is it something local, or from one of our CI
+>> containers?  Is this on staging, or local?
+> 
+> Local. Nothing special - "Ubuntu 22.04.5 LTS"
+> 
+> ======== apt show gcc
+> Package: gcc
+> Version: 4:11.2.0-1ubuntu1
 
-> On December 16, 2025 5:55:54 AM PST, "J=C3=BCrgen Gro=C3=9F" <jgross@suse=
-.com> wrote:
-> >On 16.12.25 14:48, Ingo Molnar wrote: =20
-> >>=20
-> >> * J=C3=BCrgen Gro=C3=9F <jgross@suse.com> wrote:
-> >>  =20
-> >>>> CPUs anymore. Should it cause any regressions, it's easy to bisect t=
-o.
-> >>>> There's been enough changes around all these facilities that the
-> >>>> original timings are probably way off already, so we've just been
-> >>>> cargo-cult porting these to newer kernels essentially. =20
-> >>>=20
-> >>> Fine with me.
-> >>>=20
-> >>> Which path to removal of io_delay would you (and others) prefer?
-> >>>=20
-> >>> 1. Ripping it out immediately. =20
-> >>=20
-> >> I'd just rip it out immediately, and see who complains. :-) =20
-> >
-> >I figured this might be a little bit too evil. :-)
-> >
-> >I've just sent V2 defaulting to have no delay, so anyone hit by that
-> >can still fix it by applying the "io_delay" boot parameter.
-> >
-> >I'll do the ripping out for kernel 6.21 (or whatever it will be called).
-> >
-> >
-> >Juergen =20
->=20
-> Ok, I'm going to veto ripping it out from the real-mode init code,
-> because I actually know why it is there :) ...
+The minimum gcc version is 5.1 on staging, perhaps this is due to that
 
-Pray tell.
-One thing I can think of is the delay allows time for a level-sensitive
-IRQ line to de-assert before an ISR exits.
-Or, maybe more obscure, to avoid back to back accesses to some register
-breaking the 'inter-cycle recovery time' for the device.
-That was a good way to 'break' the Zilog SCC and the 8259 interrupt
-controller (eg on any reference board with a '286 cpu).
+> Priority: optional
+> Build-Essential: yes
+> Section: devel
+> Source: gcc-defaults (1.193ubuntu1)
+> Origin: Ubuntu
+> Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+> Original-Maintainer: Debian GCC Maintainers 
+> <debian-gcc@lists.debian.org>
+> Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+> Installed-Size: 51,2 kB
+> Provides: c-compiler, gcc-x86-64-linux-gnu (= 4:11.2.0-1ubuntu1)
+> Depends: cpp (= 4:11.2.0-1ubuntu1), gcc-11 (>= 11.2.0-1~)
+> Recommends: libc6-dev | libc-dev
+> Suggests: gcc-multilib, make, manpages-dev, autoconf, automake, 
+> libtool, flex, bison, gdb, gcc-doc
+> Conflicts: gcc-doc (<< 1:2.95.3)
+> Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, 
+> ubuntu-mate-desktop
+> Download-Size: 5 112 B
+> APT-Manual-Installed: yes
+> APT-Sources: http://ua.archive.ubuntu.com/ubuntu jammy/main amd64 
+> Packages
+> Description: GNU C compiler
+>  This is the GNU C compiler, a fairly portable optimizing compiler for 
+> C.
+>  .
+>  This is a dependency package providing the default GNU C compiler.
 
-	David
-
-> and that code is pre-UEFI legacy these days anyway.
->=20
-> Other places... I don't care :)
->=20
-
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
