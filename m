@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1C1D6E2BF
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Dec 2025 17:28:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1190022.1510684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7887D6E2B1
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Dec 2025 17:28:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1190023.1510694 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWHna-0002Uo-No; Thu, 18 Dec 2025 17:28:22 +0000
+	id 1vWHnd-0002jK-VA; Thu, 18 Dec 2025 17:28:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1190022.1510684; Thu, 18 Dec 2025 17:28:22 +0000
+Received: by outflank-mailman (output) from mailman id 1190023.1510694; Thu, 18 Dec 2025 17:28:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWHna-0002Uh-Kv; Thu, 18 Dec 2025 17:28:22 +0000
-Received: by outflank-mailman (input) for mailman id 1190022;
- Thu, 18 Dec 2025 17:28:22 +0000
+	id 1vWHnd-0002jE-Rx; Thu, 18 Dec 2025 17:28:25 +0000
+Received: by outflank-mailman (input) for mailman id 1190023;
+ Thu, 18 Dec 2025 17:28:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YG3a=6Y=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vWHna-0002UZ-6K
- for xen-devel@lists.xenproject.org; Thu, 18 Dec 2025 17:28:22 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
+ id 1vWHnc-0002UZ-N3
+ for xen-devel@lists.xenproject.org; Thu, 18 Dec 2025 17:28:24 +0000
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [2a00:1450:4864:20::531])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f2f839be-dc36-11f0-b15b-2bf370ae4941;
- Thu, 18 Dec 2025 18:28:21 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-64175dfc338so1676982a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 18 Dec 2025 09:28:21 -0800 (PST)
+ id f48b0c0a-dc36-11f0-b15b-2bf370ae4941;
+ Thu, 18 Dec 2025 18:28:23 +0100 (CET)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6419aaced59so1351388a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Dec 2025 09:28:23 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-64b585b53c1sm3209423a12.5.2025.12.18.09.28.19
+ 4fb4d7f45d1cf-64b585b53c1sm3209423a12.5.2025.12.18.09.28.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Dec 2025 09:28:19 -0800 (PST)
+ Thu, 18 Dec 2025 09:28:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2f839be-dc36-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: f48b0c0a-dc36-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766078900; x=1766683700; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tvtRY9zMhGFYrUi8ZWXK2j7PbU+9ofe0PtgkUeWeJTA=;
-        b=csKMPgdnBHhrY1A9T8AUjaSXtBdYhLH/wZ36/OS+8B1ZHMLfzMzt64XgtwIQIP6GWj
-         AGvS0BXeXJvc0jK9sr2m+AmvBIHQJbPF8skJpXheIeJZNc7MDKdmx+qRGJmPFfAIcYEC
-         z1BwBr6j+72Q/9qfEZrolkwdNKBwKU40TOngcV11z2+3qHCEk9g9RP9PiGE9Or3N0leU
-         t4BJogZ88yGR4LIBA+a8i0CFEuYCFTksV6d+d39uUUMHon/tVS+p4sIPm69oqH/FqcVc
-         Uv1UprT3pzqMgjQ38CKNBoDrXaadZpv+ObQKW9JAOkFAYKsbz5WiJhELC2enMTm5nFN5
-         yucw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766078900; x=1766683700;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1766078903; x=1766683703; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tvtRY9zMhGFYrUi8ZWXK2j7PbU+9ofe0PtgkUeWeJTA=;
-        b=AY8eIULmGA1djtiAnFxX1rGN4sEwFlZkcHnWKceOXOoJ5mXJitQnY5muCv/kbcjG+G
-         IJpKFB+bzMzsoNaLm3QFD8W6EGHL8QZBggZ7GcyUtrt+jf0AOfkJE9pU9sRBN3xB3sgz
-         XmfNRuxjKwHoTeU81I78hEOAgQo/xnI7l5U27zVBN0KQmD/+eDtoh5UI8oD2c7CBeHpe
-         zUvVdo71SabnGd26lL1PPOzPIZS+R5dPQFCHsx8GDwLmApsjNsQeK3bMfHwWSKpBhU0Y
-         z6f/RNQW69sXEOAYWT01xH40n2aTDICziWU332PTmoJ9XkNxdbP9jbI3cK3C+uCQlKij
-         Ny6w==
-X-Gm-Message-State: AOJu0YxWJJSpJoKAUbzhD/y0ls7sEzlRHSEuf6N2Daw9pqYPrtr/21xu
-	1bWNl/NL4zc2zWF/k0W880jE1PybyYhqqc9BdwrzoUbjyGDInqgu9uP4T28aOA==
-X-Gm-Gg: AY/fxX6km4eYs//jj0yd1gzTL8X+Om8FSDhQ/git9XLjkPnpWeDNwMobil9sucDXnPa
-	oh3Bww0Qh69cEjQ3B7u/NG/72BSD0jSF1cJRlZirbr4YjHbWvYxmsSwV0gCm0bAp9Nx45Zd6RHj
-	bUkAkvvuF80kiUz0NvsQoyz7IGdfJjWCZ9SvnQGtMwShPWdORqp/3Ka93cqZ11DLx0y+IpR93EY
-	WsGB9/p6AfEF+3XOiJFdc/BByEu9GBab+yQQ9mdG+XwEbm5f7aaLvt2AneG8w2MXh6wXzVyz/Io
-	OScUrsqbZoHkuv+gM7IngIN8dqlNmUq/Uy+VS0+lWmzR7I+uleYzFZwO5Zp0XfC3Ov+vZSw3zo0
-	ti0Wajjh4trRfq/wCyay83pBn0cNi+qcnahRZ0nDPs7kP6DYHpqXZVOQOdPBRJVhP3AOJa7OfJ9
-	PU1FUMSFMuIHMAH5IxlOd5U7FSf2kRsoXn5j0zndraPRyL/JHqHlb3q08=
-X-Google-Smtp-Source: AGHT+IGPD+oDnTKpEVZLFDRg0kkPGbJ+eCYF3xJoE326ho4SiUlAggTqnnw4hrNZQjAjI0fp6KEJhg==
-X-Received: by 2002:a05:6402:146f:b0:64b:7ab2:9f83 with SMTP id 4fb4d7f45d1cf-64b8edb758emr123995a12.31.1766078900141;
-        Thu, 18 Dec 2025 09:28:20 -0800 (PST)
+        bh=hgML6elZQJ93D5kRikMc+0qH5Xjev/s0exSbE8XMmAU=;
+        b=CAi+D753uVSo8vlvO9fHbwwQn2qKpoF4SIx6p/MZnZU23JhaE4Cv2ry97xWZgNswN9
+         UxG+Cs3Zz4Q4ST6Q8+oaqeYYjWFH0sbSOoTc4cfz4OxeyJxTpH3OYom8Hhn/dExC7SmI
+         USwEwN2XIg3qKVbxImSM6IbYY0YVZl2oyipAs24Mv8nKP0U8zwvujtaDcflDaE9mmsxE
+         xGIVAmQi+KfgYKDpA7vODouH4aQGMrdHXwfUit1oEaPsfv1O90sn/vMmBMSmLvGnnZGh
+         ivuhOQXaaHJ+ftU/iMFsL6jQoaZ6DLdwlof3wBpI3q/YcgByWFjAUhxXkwuXMbZ4yOd1
+         xIvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766078903; x=1766683703;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=hgML6elZQJ93D5kRikMc+0qH5Xjev/s0exSbE8XMmAU=;
+        b=i2lqhAvRnI43gt1uAMJN0lxLE9doVaEEh0knBPzeU0A0fz6Az8UtQMPz59n/LlhlIf
+         /fW2wryrYkD75MaDjlMs1XkAamX90mQC3xYgsF92UX8VrOcVwbdZCKMM2kfQPh891+h5
+         jeGZKdzVE/8fNVhqNEWRFCt0YV0EeiAUDyME5pXyjDjjkPiJ8soTxOHCO34d0Py7roIS
+         PVAXdIz8VYgFfs/xqNpRD1oJGg772fq0jCymQOikEKoP5xDdmQLOBlzMCcAlDMNEAbA/
+         JLIdaChuwhW8WhoA59HvgPlTaK9g+2kyjBh03dPsDXNsxvqxbP6nTmA7rkqwOZh0/IOD
+         gelQ==
+X-Gm-Message-State: AOJu0YwKgbj5Dw33KQaBvIq7Ye70la8xWKTVWI8suLbONTLmThf76m7Q
+	Xy3B6q/OoFnuWGzR3XGUbA8JGzcweejP1gZNwgPsKN48z0azSgCA+FJXTpYSag==
+X-Gm-Gg: AY/fxX7LR6QQXTy/KWDRjCjcEXrgwaaUTGecjbI0UjqOB2Ye6fB5EDCjNPeI8YpffOO
+	7XYOSwViMnLSyjVH2cmR66+9FpMTGijNhRFzrfTncI3PHtgWnlS4APl+6AbF6g5VHODiyu5au4V
+	hjRjPC+Hf9vHbQb8jBZhtJ5i/qSWNj1m12LwHILSjAtrG01+eJIGyUZkHqkO0NwC6rH6ie1FAOU
+	NEMoY5WqcAPW4plbpsFI1o3zvRF85esWvK6b4CyK/E7ihiXyUnU+llAMJ3ru8G/PJ9aIM3r91dD
+	JankQlux01MwOQTDgyNnD/fHd6bK+gbP7lV9YmHnlSg/beDyQpzF3gRBUxSSPAicQKT5XASdSkW
+	h0SPRTjwzjKH9hjtJfU5K5nrWKcEslkTcZMWWP3T/DSFTa4imd7j1DP322jmvi72PiGnU9XJXlR
+	moY+2riUekoyf7eArmYD430TEZ6J1cS7py7OU86IdvMCmD9FOQn15SbjI=
+X-Google-Smtp-Source: AGHT+IHUFzaTlWeEsfxKKTDyxE1ri/OL1XU+Ws6Fg1It0P9MKq6FAG4PnEL9q9QmSW8Ji9jWyBNx9g==
+X-Received: by 2002:a05:6402:2553:b0:649:9f05:68ce with SMTP id 4fb4d7f45d1cf-64b8ea4b9a4mr178499a12.14.1766078902938;
+        Thu, 18 Dec 2025 09:28:22 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -99,63 +100,230 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 0/4] Move alloc/free_vcpu_struct() to common code
-Date: Thu, 18 Dec 2025 18:28:05 +0100
-Message-ID: <cover.1766053253.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 3/4] xen: move alloc/free_vcpu_struct() to common code
+Date: Thu, 18 Dec 2025 18:28:08 +0100
+Message-ID: <099753603c18bbba0db702746d394c2e77e15a4d.1766053253.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1766053253.git.oleksii.kurochko@gmail.com>
+References: <cover.1766053253.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As it was suggested in [1] it would be better to allocate one page for struct
-vcpu for all arch-es. To do that it is needed to align Arm code to allocate
-one page (as there is a case(when CONFIG_NEW_VGIC=y) when Arm64 will require
-to allocate two pages). As a result, the following patches for Arm have been
-introduced:
- - [PATCH v2 1/4] xen/arm: optimize the size of struct vcpu
- - [PATCH v2 2/4] xen/arm: drop MAX_PAGES_PER_VCPU
+alloc_vcpu_struct() and free_vcpu_struct() contain little
+architecture-specific logic and are suitable for sharing across
+architectures. Move both helpers to common code.
 
-This patches are dependency for:
- - [PATCH v2 3/4] xen: move alloc/free_vcpu_struct() to common code
+To support the remaining architectural differences, introduce
+arch_vcpu_struct_memflags(), allowing architectures to override the
+memory flags passed to alloc_xenheap_pages(). This is currently needed
+by x86, which may require MEMF_bits(32) for HVM guests using shadow
+paging.
 
-Also, as a part of this patch series another clean up is done which makes
-{alloc,free}_domain_struct() static.
+The ARM implementation of alloc/free_vcpu_struct() is removed and
+replaced by the common version. Stub implementations are also dropped
+from PPC and RISC-V.
 
-[1] https://lore.kernel.org/xen-devel/f8a9be3a-a0c6-496a-806f-40760dca5aee@suse.com/T/#m275dfcbdccef0461fa9a8acef072403f18091768
+Finally, make alloc_vcpu_struct() and free_vcpu_struct() static to
+common/domain.c, as they are no longer used outside common code.
 
+No functional changes.
+
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v2:
- - Introduce new patches for Arm:
-     - [PATCH v2 1/4] xen/arm: optimize the size of struct vcpu
-     - [PATCH v2 2/4] xen/arm: drop MAX_PAGES_PER_VCPU
-    to allocate one page for struct vcpu in common code for all the arch-es.
- - Introduce patch to clean up xen/domain.h a little bit:
-     - [PATCH v2 4/4] xen/common: make {alloc,free}_domain_struct() static
- - Address the comments from v1:
-     - [PATCH v2 3/4] xen: move alloc/free_vcpu_struct() to common code
+ - Rework alloc/free_vcpu_struct() to work with only one page.
+ - Return back the comment about the restriction inside x86's
+   arch_vcpu_struct_memflags().
+ - Drop MAX_PAGES_PER_VCPU.
 ---
+ xen/arch/arm/domain.c             | 17 -----------------
+ xen/arch/ppc/stubs.c              | 10 ----------
+ xen/arch/riscv/stubs.c            | 10 ----------
+ xen/arch/x86/domain.c             | 17 ++---------------
+ xen/arch/x86/include/asm/domain.h |  3 +++
+ xen/common/domain.c               | 20 ++++++++++++++++++++
+ xen/include/xen/domain.h          |  4 ----
+ 7 files changed, 25 insertions(+), 56 deletions(-)
 
-Oleksii Kurochko (4):
-  xen/arm: optimize the size of struct vcpu
-  xen/arm: drop MAX_PAGES_PER_VCPU
-  xen: move alloc/free_vcpu_struct() to common code
-  xen/common: make {alloc,free}_domain_struct() static
-
- xen/arch/arm/domain.c             | 32 --------------
- xen/arch/arm/gic-vgic.c           | 48 ++++++++++-----------
- xen/arch/arm/include/asm/domain.h |  2 +-
- xen/arch/arm/vgic-v3.c            | 34 +++++++--------
- xen/arch/arm/vgic.c               | 72 +++++++++++++++++--------------
- xen/arch/arm/vgic/vgic-init.c     | 10 ++++-
- xen/arch/arm/vgic/vgic-v2.c       |  4 +-
- xen/arch/arm/vgic/vgic.c          | 50 ++++++++++-----------
- xen/arch/ppc/stubs.c              | 10 -----
- xen/arch/riscv/stubs.c            | 10 -----
- xen/arch/x86/domain.c             | 17 +-------
- xen/arch/x86/include/asm/domain.h |  3 ++
- xen/common/domain.c               | 26 ++++++++++-
- xen/include/xen/domain.h          |  8 ----
- 14 files changed, 145 insertions(+), 181 deletions(-)
-
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index e566023340..507df807ed 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -473,23 +473,6 @@ void dump_pageframe_info(struct domain *d)
+ 
+ }
+ 
+-struct vcpu *alloc_vcpu_struct(const struct domain *d)
+-{
+-    struct vcpu *v;
+-
+-    BUILD_BUG_ON(sizeof(*v) > PAGE_SIZE);
+-    v = alloc_xenheap_pages(0, 0);
+-    if ( v )
+-        clear_page(v);
+-
+-    return v;
+-}
+-
+-void free_vcpu_struct(struct vcpu *v)
+-{
+-    free_xenheap_page(v);
+-}
+-
+ int arch_vcpu_create(struct vcpu *v)
+ {
+     int rc = 0;
+diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
+index 9953ea1c6c..f7f6e7ed97 100644
+--- a/xen/arch/ppc/stubs.c
++++ b/xen/arch/ppc/stubs.c
+@@ -152,11 +152,6 @@ void dump_pageframe_info(struct domain *d)
+     BUG_ON("unimplemented");
+ }
+ 
+-void free_vcpu_struct(struct vcpu *v)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ int arch_vcpu_create(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+@@ -264,11 +259,6 @@ void vcpu_kick(struct vcpu *v)
+     BUG_ON("unimplemented");
+ }
+ 
+-struct vcpu *alloc_vcpu_struct(const struct domain *d)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ unsigned long
+ hypercall_create_continuation(unsigned int op, const char *format, ...)
+ {
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index fe7d85ee1d..579c4215c8 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -126,11 +126,6 @@ void dump_pageframe_info(struct domain *d)
+     BUG_ON("unimplemented");
+ }
+ 
+-void free_vcpu_struct(struct vcpu *v)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ int arch_vcpu_create(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+@@ -238,11 +233,6 @@ void vcpu_kick(struct vcpu *v)
+     BUG_ON("unimplemented");
+ }
+ 
+-struct vcpu *alloc_vcpu_struct(const struct domain *d)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ unsigned long
+ hypercall_create_continuation(unsigned int op, const char *format, ...)
+ {
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 7632d5e2d6..68c7503eda 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -493,28 +493,15 @@ unsigned int arch_domain_struct_memflags(void)
+     return MEMF_bits(bits);
+ }
+ 
+-struct vcpu *alloc_vcpu_struct(const struct domain *d)
++unsigned int arch_vcpu_struct_memflags(const struct domain *d)
+ {
+-    struct vcpu *v;
+     /*
+      * This structure contains embedded PAE PDPTEs, used when an HVM guest
+      * runs on shadow pagetables outside of 64-bit mode. In this case the CPU
+      * may require that the shadow CR3 points below 4GB, and hence the whole
+      * structure must satisfy this restriction. Thus we specify MEMF_bits(32).
+      */
+-    unsigned int memflags =
+-        (is_hvm_domain(d) && paging_mode_shadow(d)) ? MEMF_bits(32) : 0;
+-
+-    BUILD_BUG_ON(sizeof(*v) > PAGE_SIZE);
+-    v = alloc_xenheap_pages(0, memflags);
+-    if ( v != NULL )
+-        clear_page(v);
+-    return v;
+-}
+-
+-void free_vcpu_struct(struct vcpu *v)
+-{
+-    free_xenheap_page(v);
++    return (is_hvm_domain(d) && paging_mode_shadow(d)) ? MEMF_bits(32) : 0;
+ }
+ 
+ /* Initialise various registers to their architectural INIT/RESET state. */
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 7e5cbd11a4..576f9202b4 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -15,6 +15,9 @@
+ unsigned int arch_domain_struct_memflags(void);
+ #define arch_domain_struct_memflags arch_domain_struct_memflags
+ 
++unsigned int arch_vcpu_struct_memflags(const struct domain *d);
++#define arch_vcpu_struct_memflags arch_vcpu_struct_memflags
++
+ #define has_32bit_shinfo(d)    ((d)->arch.has_32bit_shinfo)
+ 
+ /*
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 93c71bc766..92fc0684fc 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -392,6 +392,26 @@ static int vcpu_teardown(struct vcpu *v)
+     return 0;
+ }
+ 
++static struct vcpu *alloc_vcpu_struct(const struct domain *d)
++{
++#ifndef arch_vcpu_struct_memflags
++# define arch_vcpu_struct_memflags(d) 0
++#endif
++    struct vcpu *v;
++
++    BUILD_BUG_ON(sizeof(*v) > PAGE_SIZE);
++    v = alloc_xenheap_pages(0, arch_vcpu_struct_memflags(d));
++    if ( v )
++        clear_page(v);
++
++    return v;
++}
++
++static void free_vcpu_struct(struct vcpu *v)
++{
++    free_xenheap_page(v);
++}
++
+ /*
+  * Destoy a vcpu once all references to it have been dropped.  Used either
+  * from domain_destroy()'s RCU path, or from the vcpu_create() error path
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 8aab05ae93..644f5ac3f2 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -70,10 +70,6 @@ void domid_free(domid_t domid);
+ struct domain *alloc_domain_struct(void);
+ void free_domain_struct(struct domain *d);
+ 
+-/* Allocate/free a VCPU structure. */
+-struct vcpu *alloc_vcpu_struct(const struct domain *d);
+-void free_vcpu_struct(struct vcpu *v);
+-
+ /* Allocate/free a PIRQ structure. */
+ #ifndef alloc_pirq_struct
+ struct pirq *alloc_pirq_struct(struct domain *d);
 -- 
 2.52.0
 
