@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E165D78792
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:42:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1190778.1511066 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F322D7878C
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:42:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1190775.1511035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWccb-0007Lu-2z; Fri, 19 Dec 2025 15:42:25 +0000
+	id 1vWccZ-0006h7-25; Fri, 19 Dec 2025 15:42:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1190778.1511066; Fri, 19 Dec 2025 15:42:25 +0000
+Received: by outflank-mailman (output) from mailman id 1190775.1511035; Fri, 19 Dec 2025 15:42:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWcca-0007Lm-Vt; Fri, 19 Dec 2025 15:42:24 +0000
-Received: by outflank-mailman (input) for mailman id 1190778;
- Fri, 19 Dec 2025 15:42:23 +0000
+	id 1vWccY-0006h0-Vo; Fri, 19 Dec 2025 15:42:22 +0000
+Received: by outflank-mailman (input) for mailman id 1190775;
+ Fri, 19 Dec 2025 15:42:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iSaV=6Z=bounce.vates.tech=bounce-md_30504962.69457259.v1-4c58b2a4835640a0bbfaf06e01e56b5f@srs-se1.protection.inumbo.net>)
- id 1vWccZ-0006gj-Ar
- for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:42:23 +0000
+ <SRS0=YPPR=6Z=bounce.vates.tech=bounce-md_30504962.69457259.v1-6501ec1ec5004e07b4e02c10b996350d@srs-se1.protection.inumbo.net>)
+ id 1vWccX-0006gj-5B
+ for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:42:21 +0000
 Received: from mail179-28.suw41.mandrillapp.com
  (mail179-28.suw41.mandrillapp.com [198.2.179.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4f4a5d33-dcf1-11f0-b15b-2bf370ae4941;
- Fri, 19 Dec 2025 16:42:22 +0100 (CET)
+ id 4cab848e-dcf1-11f0-b15b-2bf370ae4941;
+ Fri, 19 Dec 2025 16:42:18 +0100 (CET)
 Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
  by mail179-28.suw41.mandrillapp.com (Mailchimp) with ESMTP id
- 4dXsGx64BNzMQxZx2
+ 4dXsGx2hmczMQxZx7
  for <xen-devel@lists.xenproject.org>; Fri, 19 Dec 2025 15:42:17 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 4c58b2a4835640a0bbfaf06e01e56b5f; Fri, 19 Dec 2025 15:42:17 +0000
+ 6501ec1ec5004e07b4e02c10b996350d; Fri, 19 Dec 2025 15:42:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,44 +45,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f4a5d33-dcf1-11f0-b15b-2bf370ae4941
+X-Inumbo-ID: 4cab848e-dcf1-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
 	s=mte1; t=1766158937; x=1766428937;
-	bh=7xVUdRF8zsjQLBrOasgnpmrVwohD/+GH3wtuo62wSW8=;
+	bh=OMQbs0phcyzMgJGF4jAxHSlsn32hgTTfBxA1a6JNmEI=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=MHqxFPjgXgRIZmOtgpLR78SHHIbeAOIj5REB0rBJPby7vez+QD340FC7nPQHNr4pP
-	 ReaoV2mxTapgs3E0HVnykgPnhf7DFmh8TWOFY68vGRUDnZdhC5BNnCJOaUNn8B+oOo
-	 IF9wwxEfbvvUYRB34/iGC9LY/J9ThylhsFKi0UuIpArN+O21919ZjENJU+J7KFSKgM
-	 DSjooQqEHjyh906zZwGEgAFvGAhyPn0k7iJBIoOpwuZyWkJGnMuM+b42gycFris67N
-	 qHrCso8qA3oFDkeohtxnho/2KnRkKjdeuHVnhXvvy1YPplVWc3aTe58nktzdTZM9pC
-	 a9l/sIjVcS11g==
+	b=AEGYHczNriwe7wFs2mo2XB+6QoP/f6f0xaXg5ueZKbHucUK9T15JOpNlZnenzYgme
+	 fDOXAb/tIu+H5hEVuABpA8amuGxEvdGk4+LyCc/TcKZQhQn02UhpBdmQ+XozFQQrUN
+	 Bk4MfWaDT6VfMP04BdktRQYgIZ4AB8Tunc6AA9tPZKwj25fogW0w2AhOujpLMKaz2q
+	 Qf+X58RnZl/SzK2edpgJKwI3YGDXxKehtdZ1pfPNVT+99Ng8IKRRsNoyfgKIjXFwMl
+	 RGJ7sIo/Ti3qA1VZSyxHPeNaNK84G+Bv2q+wGFVrTCWR+CRdzKbDY8GYJ/v62Gj7YZ
+	 sp9O/1nRVCvUg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
 	t=1766158937; x=1766419437; i=teddy.astie@vates.tech;
-	bh=7xVUdRF8zsjQLBrOasgnpmrVwohD/+GH3wtuo62wSW8=;
+	bh=OMQbs0phcyzMgJGF4jAxHSlsn32hgTTfBxA1a6JNmEI=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=Y1Kd2SnzQmQ4quLZBXIsusqYcHsWt4eEwtwU2SkxgdBnC1kHGnbPyX+q/F7rfQ8GO
-	 Am8gIVs/RRhLpXTCzOFXd+4n754jdIMfRPKa8KqMZmeUlbxRgy3TkJLFs+J/FKwO+O
-	 vD9KdqrCgG8ci84NjpLSfDkB29NQnLPa+n8MKPUnfrPgoYfQcNKBIHtojoJRl2FuOv
-	 f3y0enRtnLqF6D4I1RnHh2CW7sl/l77J1emPL9eU8DFKDcbKcWKXgwmBB38h+vzuLL
-	 TC1vVwg2ysNI7UZUTzX05Zck7m7CItUKqkh0O13JFNOZAjl/pblM/pPGfUD33B83H6
-	 t9xOz3LBMuWKA==
+	b=eup5Lex/LkI9FmzQD5vh3zOy+PMltjt77ZBJTPEcdUrQ/DmAnAWMEpkWf9omaaNpg
+	 N8JwfxU0wPmmm6b+PVzprAyDdMdKPdx2ykThxyN7Q6yFbqzSZG3fAGuCQ6EGws21Rg
+	 EmyijPzkAFEYUpJDh4z7hnQtsyZE+SWrtIz12qndi9ha4S++Qyhtg3I3qDb1nMGoKR
+	 FWyehgJuIOU2984FgAdBp+zXyjYwvFlncATNnYQgjylHcv4lxM8qq6/taUdctdO4sn
+	 5cwMfOljlUgqozc2i+YNIBAJbWPFDwtZ3D6NnrUADiyuLQc7+BDWtyXslxDkCAK+DT
+	 OIZHwGuPLUGvw==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v4=203/4]=20x86/platform:=20Expose=20DTS=20sensors=20MSR?=
+Subject: =?utf-8?Q?[PATCH=20v4=202/4]=20xenpm:=20Don't=20build=20outside=20of=20x86?=
 X-Mailer: git-send-email 2.51.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1766158936882
+X-Bm-Transport-Timestamp: 1766158936552
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <829177fefa7b2e2edeb8121357b5b3372ad1c092.1766158766.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Anthony PERARD" <anthony.perard@vates.tech>, "Jan Beulich" <jbeulich@suse.com>
+Message-Id: <77dc07c4b4431fb53aa5b226d302f437e4314d8c.1766158766.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1766158766.git.teddy.astie@vates.tech>
 References: <cover.1766158766.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.4c58b2a4835640a0bbfaf06e01e56b5f?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.6501ec1ec5004e07b4e02c10b996350d?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251219:md
 Date: Fri, 19 Dec 2025 15:42:17 +0000
@@ -90,70 +90,49 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Intel provide CPU sensors through "DTS" MSRs. As these MSR are core-specific
-(or package-specific), we can't reliably fetch them from Dom0 directly.
-Expose these MSR (if supported) through XENPF_resource_op so that it is
-accessible through hypercall.
+xenpm doesn't provide any interesting usable features outside of x86,
+skip building it if we are not x86.
 
 Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/include/asm/msr-index.h | 3 +++
- xen/arch/x86/platform_hypercall.c    | 6 ++++++
- xen/include/xen/lib/x86/cpu-policy.h | 2 +-
- 3 files changed, 10 insertions(+), 1 deletion(-)
+ CHANGELOG.md        | 3 +++
+ tools/misc/Makefile | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index df52587c85..b92a278611 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -115,6 +115,9 @@
- #define  MCU_OPT_CTRL_GDS_MIT_DIS           (_AC(1, ULL) <<  4)
- #define  MCU_OPT_CTRL_GDS_MIT_LOCK          (_AC(1, ULL) <<  5)
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 3aaf598623..1fa58ce848 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+      deprecated in Xen 4.7 and noted not to work correctly with AMD CPUs from
+      2011 onwards.
  
-+#define MSR_TEMPERATURE_TARGET              0x000001a2
-+#define MSR_PACKAGE_THERM_STATUS            0x000001b1
++ - Removed xenpm on non-x86 platforms as it doesn't actually provide anything
++   useful outside of x86.
 +
- #define MSR_FRED_RSP_SL0                    0x000001cc
- #define MSR_FRED_RSP_SL1                    0x000001cd
- #define MSR_FRED_RSP_SL2                    0x000001ce
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 79bb99e0b6..2f84494759 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -27,6 +27,7 @@
- #include <asm/current.h>
- #include <public/platform.h>
- #include <acpi/cpufreq/processor_perf.h>
-+#include <asm/cpu-policy.h>
- #include <asm/edd.h>
- #include <asm/microcode.h>
- #include <asm/mtrr.h>
-@@ -86,6 +87,11 @@ static bool msr_read_allowed(unsigned int msr)
+ ## [4.21.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.21.0) - 2025-11-19
  
-     case MSR_MCU_OPT_CTRL:
-         return cpu_has_srbds_ctrl;
-+    
-+    case MSR_IA32_THERM_STATUS:
-+    case MSR_TEMPERATURE_TARGET:
-+    case MSR_PACKAGE_THERM_STATUS:
-+        return host_cpu_policy.basic.dts;
-     }
- 
-     if ( ppin_msr && msr == ppin_msr )
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index 8772ef80e3..0362f1cb24 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -123,7 +123,7 @@ struct cpu_policy
-             uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
- 
-             /* Leaf 0x6 - Therm/Perf. */
--            bool :1,
-+            bool dts:1,
-                 turbo:1,
-                 arat:1,
-                 :1,
+ ### Changed
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index c26e544e83..672df02c3b 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -23,13 +23,13 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mceinj
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-memshare
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
++INSTALL_SBIN-$(CONFIG_X86)     += xenpm
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-vmtrace
+ INSTALL_SBIN                   += xencov
+ INSTALL_SBIN                   += xenhypfs
+ INSTALL_SBIN                   += xenlockprof
+ INSTALL_SBIN                   += xenperf
+-INSTALL_SBIN                   += xenpm
+ INSTALL_SBIN                   += xenwatchdogd
+ INSTALL_SBIN                   += xen-access
+ INSTALL_SBIN                   += xen-livepatch
 -- 
 2.51.2
 
