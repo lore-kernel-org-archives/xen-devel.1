@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CE2D78783
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:30:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1190761.1511026 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF00D7878C
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:42:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1190779.1511072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWcQe-0004hF-3h; Fri, 19 Dec 2025 15:30:04 +0000
+	id 1vWccb-0007PD-EC; Fri, 19 Dec 2025 15:42:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1190761.1511026; Fri, 19 Dec 2025 15:30:04 +0000
+Received: by outflank-mailman (output) from mailman id 1190779.1511072; Fri, 19 Dec 2025 15:42:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWcQe-0004gt-04; Fri, 19 Dec 2025 15:30:04 +0000
-Received: by outflank-mailman (input) for mailman id 1190761;
- Fri, 19 Dec 2025 15:30:02 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1vWcQc-0004Pg-NK
- for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:30:02 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vWcQb-0000Po-0h;
- Fri, 19 Dec 2025 15:30:01 +0000
-Received: from [2a02:8012:3a1:0:95e7:8e47:abb2:3b42]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vWcQb-00EIyP-0b;
- Fri, 19 Dec 2025 15:30:01 +0000
+	id 1vWccb-0007OG-7U; Fri, 19 Dec 2025 15:42:25 +0000
+Received: by outflank-mailman (input) for mailman id 1190779;
+ Fri, 19 Dec 2025 15:42:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Twhv=6Z=bounce.vates.tech=bounce-md_30504962.69457259.v1-09a0b611dd5446099d0793746429beb8@srs-se1.protection.inumbo.net>)
+ id 1vWccZ-0006gp-Op
+ for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:42:23 +0000
+Received: from mail179-28.suw41.mandrillapp.com
+ (mail179-28.suw41.mandrillapp.com [198.2.179.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4caa9cfe-dcf1-11f0-9cce-f158ae23cfc8;
+ Fri, 19 Dec 2025 16:42:18 +0100 (CET)
+Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail179-28.suw41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4dXsGx0phBzMQxZwl
+ for <xen-devel@lists.xenproject.org>; Fri, 19 Dec 2025 15:42:17 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 09a0b611dd5446099d0793746429beb8; Fri, 19 Dec 2025 15:42:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,80 +45,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=aN+HWSIKnpLs5ZpvMVRHCHtVAG9kyx3KSXmrayZykww=; b=x9o9jjlLhevEHYZq0EHlOedNb3
-	26jq1Ov6tF2iE7cGPlc+gL/5MiKjNnrUEW8+VfiT23Npe/0l2k75MWin6M9UfFlVR3Uz9Yr9726ci
-	WYC+SuP3mei8VA/d2JViIBI1EWmJNtlG1slfFplPWRxH1ZtOwxxhHmGsQTV9KRSFZKUY=;
-Message-ID: <98aa56bf-11bf-4585-be92-1603238826b6@xen.org>
-Date: Fri, 19 Dec 2025 15:29:59 +0000
+X-Inumbo-ID: 4caa9cfe-dcf1-11f0-9cce-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1766158937; x=1766428937;
+	bh=EDhYIftkVJKhg5aQNHcgY2YjTEfUugXGsd0ObHTK3Xw=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=vDXECE+MK8Kom/1/s9ReIpPR8xqOrZ2YxsbC152JTcLTiwNR9kS5JahPQqnY3j3eQ
+	 g3+l4bYaQgTRskb6Ydr9+5OA7XHxdTgwTU4ZTD3NC9psxRsgOte+XsCYB5f7jpfy6x
+	 O22r3YI11ax+keBGGjY9i6d3jwt9N6c+hNNNw3nPmF+KBN2E7U3ur9rvRv0xXNVGnm
+	 XbqZzQqcODCvgQfkpJDe20eBxWV/uitCL2zV5W3CQaQSi0FiIhuKHndH6Di9um558j
+	 QFChuNgunmiPQF/W2ueDGRciVf4YpJ0I9pwXtOoNBFRjqQXL76YlKqSVtOXOXq4jbn
+	 +GKBaT6px+PmA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1766158937; x=1766419437; i=teddy.astie@vates.tech;
+	bh=EDhYIftkVJKhg5aQNHcgY2YjTEfUugXGsd0ObHTK3Xw=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=h+aH68cqw1OlH3mZrzVvHHq4s6hllU94c1MnTvuWmRFVZkT2n0nLsJz/zeQof8EqV
+	 iZ1+oxTrS2kTBCRZTRWoiHMS4qXoK1LSV9HHEejG0wvxXQcPJQIXTZz4eppe3w3Wl6
+	 3IUliInyN9Ru8cx4C1tqlPJ/DoHkWRsK2Z3utJSQnDF5G1p3akFshWcZR0/qP5J0cT
+	 KXuSGzVStHnri8Da6n1yQ+oQvkEvHPAnQ2ZBj6D8PvXLRR92xNw4pNvrhcWOnClP2K
+	 QtBBmjoH68YfxJhOMLgRe3sA8md4D4D2L2Ld3aB91iruT5qyYnO3XYFXA3273FpHVC
+	 imugzjincqAMw==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v4=201/4]=20x86/cpu-policy:=20define=20bits=20of=20leaf=206?=
+X-Mailer: git-send-email 2.51.2
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1766158936226
+To: xen-devel@lists.xenproject.org
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Teddy Astie" <teddy.astie@vates.tech>
+Message-Id: <8a4adb89e6b6152fca074f2bb9091b42af936630.1766158766.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1766158766.git.teddy.astie@vates.tech>
+References: <cover.1766158766.git.teddy.astie@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.09a0b611dd5446099d0793746429beb8?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20251219:md
+Date: Fri, 19 Dec 2025 15:42:17 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] xen/arm: optimize the size of struct vcpu
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1766053253.git.oleksii.kurochko@gmail.com>
- <946a1c2cfaf4157074470a653bba5baa8561ebbf.1766053253.git.oleksii.kurochko@gmail.com>
- <ea01af72-c94e-4203-90c4-eaf68174b576@citrix.com>
-Content-Language: en-US
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <ea01af72-c94e-4203-90c4-eaf68174b576@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Hi Andrew,
+From: Jan Beulich <jbeulich@suse.com>
 
-On 18/12/2025 18:15, Andrew Cooper wrote:
->> diff --git a/xen/arch/arm/vgic/vgic-init.c b/xen/arch/arm/vgic/vgic-init.c
->> index f8d7d3a226..67f297797f 100644
->> --- a/xen/arch/arm/vgic/vgic-init.c
->> +++ b/xen/arch/arm/vgic/vgic-init.c
->> @@ -241,10 +245,12 @@ void domain_vgic_free(struct domain *d)
->>   
->>   int vcpu_vgic_free(struct vcpu *v)
->>   {
->> -    struct vgic_cpu *vgic_cpu = &v->arch.vgic;
->> +    struct vgic_cpu *vgic_cpu = v->arch.vgic;
->>   
->>       INIT_LIST_HEAD(&vgic_cpu->ap_list_head);
->>   
->> +    xfree(vgic_cpu);
->> +
->>       return 0;
->>   }
-> 
-> Not in your part of the change, but this is bogus.  It's not remotely
-> safe to init the list head like that.
-> 
-> The list is either already empty, in which case it's a no-op, or it
-> corrupts the list.  It appears that the list mixes entries from other
-> vCPUs, and from the domain.
-> 
-> I think this is further proof that NEW_VGIC should be deleted
-> wholesale.  It's clearly not in a good state, and I get the impression
-> that a badly timed evtchn sent to a domain in the middle of being
-> cleaned up will cause Xen to trip over the corrupted list.
+... as far as we presently use them in the codebase.
 
-I am probably missing something. What other issues are in the NEW_VGIC?
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+I don't know to which extend Reviewed-by applies as I only applied Andrew's
+proposal.
 
-But note, if we delete the NEW_VGIC then we are back to a situation 
-where the vGIC implementation we have is not even remotely spec 
-compliant (no level support, not pending/active clear/set support) and 
-from previous discussion it was not possible to rework the default vGIC 
-implementation to make it compliant.
+ xen/include/xen/lib/x86/cpu-policy.h | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
-I was going to say that the NEW_VGIC is meant to be experimental. But I 
-see, it can selected without EXPERT :(. Thankfully it is marked as not 
-security supported at least in the Kconfig doc.
-
-Cheers,
-
+diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
+index f94f23e159..8772ef80e3 100644
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -121,7 +121,32 @@ struct cpu_policy
+             uint64_t :64, :64; /* Leaf 0x3 - PSN. */
+             uint64_t :64, :64; /* Leaf 0x4 - Structured Cache. */
+             uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
+-            uint64_t :64, :64; /* Leaf 0x6 - Therm/Perf. */
++
++            /* Leaf 0x6 - Therm/Perf. */
++            bool :1,
++                turbo:1,
++                arat:1,
++                :1,
++                :1,
++                :1,
++                :1,
++                hwp:1,
++                hwp_notification:1,
++                hwp_activity_window:1,
++                hwp_epp:1,
++                hwp_plr:1,
++                :1,
++                hdc:1,
++                :1,
++                :1,
++                hwp_peci:1,
++                :1,
++                :1,
++                hw_feedback:1;
++            uint32_t :32; /* b */
++            bool aperfmperf:1;
++            uint32_t :32; /* d */
++
+             uint64_t :64, :64; /* Leaf 0x7 - Structured Features. */
+             uint64_t :64, :64; /* Leaf 0x8 - rsvd */
+             uint64_t :64, :64; /* Leaf 0x9 - DCA */
 -- 
-Julien Grall
+2.51.2
+
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
