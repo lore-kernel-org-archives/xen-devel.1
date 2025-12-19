@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF00D7878C
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:42:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1190779.1511072 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 682F9D7878C
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Dec 2025 15:42:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1190776.1511041 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWccb-0007PD-EC; Fri, 19 Dec 2025 15:42:25 +0000
+	id 1vWccZ-0006jY-Bt; Fri, 19 Dec 2025 15:42:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1190779.1511072; Fri, 19 Dec 2025 15:42:25 +0000
+Received: by outflank-mailman (output) from mailman id 1190776.1511041; Fri, 19 Dec 2025 15:42:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vWccb-0007OG-7U; Fri, 19 Dec 2025 15:42:25 +0000
-Received: by outflank-mailman (input) for mailman id 1190779;
- Fri, 19 Dec 2025 15:42:23 +0000
+	id 1vWccZ-0006iV-6C; Fri, 19 Dec 2025 15:42:23 +0000
+Received: by outflank-mailman (input) for mailman id 1190776;
+ Fri, 19 Dec 2025 15:42:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Twhv=6Z=bounce.vates.tech=bounce-md_30504962.69457259.v1-09a0b611dd5446099d0793746429beb8@srs-se1.protection.inumbo.net>)
- id 1vWccZ-0006gp-Op
- for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:42:23 +0000
-Received: from mail179-28.suw41.mandrillapp.com
- (mail179-28.suw41.mandrillapp.com [198.2.179.28])
+ <SRS0=JKhq=6Z=bounce.vates.tech=bounce-md_30504962.69457259.v1-236ed50d70b14781a2be88b03c755e16@srs-se1.protection.inumbo.net>)
+ id 1vWccY-0006gp-04
+ for xen-devel@lists.xenproject.org; Fri, 19 Dec 2025 15:42:22 +0000
+Received: from mail137-31.atl71.mandrillapp.com
+ (mail137-31.atl71.mandrillapp.com [198.2.137.31])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4caa9cfe-dcf1-11f0-9cce-f158ae23cfc8;
- Fri, 19 Dec 2025 16:42:18 +0100 (CET)
-Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-28.suw41.mandrillapp.com (Mailchimp) with ESMTP id
- 4dXsGx0phBzMQxZwl
+ id 4ce89c10-dcf1-11f0-9cce-f158ae23cfc8;
+ Fri, 19 Dec 2025 16:42:19 +0100 (CET)
+Received: from pmta07.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail137-31.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4dXsGx1fX7z7lmVWh
  for <xen-devel@lists.xenproject.org>; Fri, 19 Dec 2025 15:42:17 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 09a0b611dd5446099d0793746429beb8; Fri, 19 Dec 2025 15:42:17 +0000
+ 236ed50d70b14781a2be88b03c755e16; Fri, 19 Dec 2025 15:42:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,44 +45,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4caa9cfe-dcf1-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 4ce89c10-dcf1-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
 	s=mte1; t=1766158937; x=1766428937;
-	bh=EDhYIftkVJKhg5aQNHcgY2YjTEfUugXGsd0ObHTK3Xw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=vDXECE+MK8Kom/1/s9ReIpPR8xqOrZ2YxsbC152JTcLTiwNR9kS5JahPQqnY3j3eQ
-	 g3+l4bYaQgTRskb6Ydr9+5OA7XHxdTgwTU4ZTD3NC9psxRsgOte+XsCYB5f7jpfy6x
-	 O22r3YI11ax+keBGGjY9i6d3jwt9N6c+hNNNw3nPmF+KBN2E7U3ur9rvRv0xXNVGnm
-	 XbqZzQqcODCvgQfkpJDe20eBxWV/uitCL2zV5W3CQaQSi0FiIhuKHndH6Di9um558j
-	 QFChuNgunmiPQF/W2ueDGRciVf4YpJ0I9pwXtOoNBFRjqQXL76YlKqSVtOXOXq4jbn
-	 +GKBaT6px+PmA==
+	bh=rMGk7VgKAqCBAtbYbYA7r6RbALS0kbfzdXHv7qhvnIQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=i5REmgtKGkjywx93jpjlaRT6o0ohOEuyi4YvOYDmLFN3R9tESv6rnU8hVTzwPcIWx
+	 EaxOxnvRzpcwQ/je7HpaNYlASwA5z9Z9TplnsET3yO5U9RZeFfB/iXXc0UwAQGO37t
+	 6NpGBQtQNhh0nZC5aABUV6tX+iHouj+ncRDaVBqGXi121Ba8Yx/V5WFRBaSXb28hxH
+	 qNvC7Gj0KIDONf8MmBJMcR5EsjGIww5KPFlDbtXIfvab3W484FvuGawjCNnnhnNtIi
+	 ucjeveYSoqnT4l4NMAvUUqNWBrBZSC23YoOAwSRdixAZtQ4AjngUoRZ9dc+lOBhpy5
+	 yb/iDXiSp28pg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
 	t=1766158937; x=1766419437; i=teddy.astie@vates.tech;
-	bh=EDhYIftkVJKhg5aQNHcgY2YjTEfUugXGsd0ObHTK3Xw=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=h+aH68cqw1OlH3mZrzVvHHq4s6hllU94c1MnTvuWmRFVZkT2n0nLsJz/zeQof8EqV
-	 iZ1+oxTrS2kTBCRZTRWoiHMS4qXoK1LSV9HHEejG0wvxXQcPJQIXTZz4eppe3w3Wl6
-	 3IUliInyN9Ru8cx4C1tqlPJ/DoHkWRsK2Z3utJSQnDF5G1p3akFshWcZR0/qP5J0cT
-	 KXuSGzVStHnri8Da6n1yQ+oQvkEvHPAnQ2ZBj6D8PvXLRR92xNw4pNvrhcWOnClP2K
-	 QtBBmjoH68YfxJhOMLgRe3sA8md4D4D2L2Ld3aB91iruT5qyYnO3XYFXA3273FpHVC
-	 imugzjincqAMw==
+	bh=rMGk7VgKAqCBAtbYbYA7r6RbALS0kbfzdXHv7qhvnIQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=yh/7Q0yObO9oQiHK55HlvSoGZjofdpp74wl0tM3V1yKXst3A5zD8EfG0ArQcl8juS
+	 kUhlc3vfcHHLRgtXPdo2Fkz9AdBkz3t+vDQnQAlR5k2Ayo3zYCYd1gaL3zbjlpVczd
+	 YK3lh5+ihf06nixngJ6/UJ8IABeRkS/TPtQawlWvrG7z2ShsoAOddbYhLrMg6VTUJ8
+	 yQHgiAgl9Exp2v1pWD0bUHzlE4oMt/GBPbIz6EwVjmSau976PmdF+tDOTgCH+xg7hL
+	 5rz16CuI+2kdjatRs8sRLfs7s2z0HmYAEPLV1dOzfz7G1a/fVIBagRruv+UlejNLMt
+	 tZwbGMTpRku2w==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v4=201/4]=20x86/cpu-policy:=20define=20bits=20of=20leaf=206?=
+Subject: =?utf-8?Q?[PATCH=20v4=200/4]=20Support=20for=20Intel=20temperature=20sensors=20(DTS)?=
 X-Mailer: git-send-email 2.51.2
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1766158936226
+X-Bm-Transport-Timestamp: 1766158935717
 To: xen-devel@lists.xenproject.org
-Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Teddy Astie" <teddy.astie@vates.tech>
-Message-Id: <8a4adb89e6b6152fca074f2bb9091b42af936630.1766158766.git.teddy.astie@vates.tech>
-In-Reply-To: <cover.1766158766.git.teddy.astie@vates.tech>
-References: <cover.1766158766.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Anthony PERARD" <anthony.perard@vates.tech>
+Message-Id: <cover.1766158766.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.09a0b611dd5446099d0793746429beb8?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.236ed50d70b14781a2be88b03c755e16?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20251219:md
 Date: Fri, 19 Dec 2025 15:42:17 +0000
@@ -90,57 +86,40 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-From: Jan Beulich <jbeulich@suse.com>
+The idea here is to expose the DTS sensors through XENPF_resource_op
+and expose it for the user through xenpm.
 
-... as far as we presently use them in the codebase.
+v4:
+ - reuse original cpu-policy patch
+ - remove xenpm building on non-x86
+ - add changelog notes
+ - reviewed xc_resource_op return code handling
+ - only print missing MSR_TEMPERATURE_TARGET message once
+ - formatting changes
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
-I don't know to which extend Reviewed-by applies as I only applied Andrew's
-proposal.
+v3:
+ - use msr-index.h instead of adding defines to MSRs in xenpm
 
- xen/include/xen/lib/x86/cpu-policy.h | 27 ++++++++++++++++++++++++++-
- 1 file changed, 26 insertions(+), 1 deletion(-)
+v2:
+ - moved userland part to xenpm
+ - use cpu policy infrastructure instead of inline cpuid_*
+ 
+Jan Beulich (1):
+  x86/cpu-policy: define bits of leaf 6
 
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index f94f23e159..8772ef80e3 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -121,7 +121,32 @@ struct cpu_policy
-             uint64_t :64, :64; /* Leaf 0x3 - PSN. */
-             uint64_t :64, :64; /* Leaf 0x4 - Structured Cache. */
-             uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
--            uint64_t :64, :64; /* Leaf 0x6 - Therm/Perf. */
-+
-+            /* Leaf 0x6 - Therm/Perf. */
-+            bool :1,
-+                turbo:1,
-+                arat:1,
-+                :1,
-+                :1,
-+                :1,
-+                :1,
-+                hwp:1,
-+                hwp_notification:1,
-+                hwp_activity_window:1,
-+                hwp_epp:1,
-+                hwp_plr:1,
-+                :1,
-+                hdc:1,
-+                :1,
-+                :1,
-+                hwp_peci:1,
-+                :1,
-+                :1,
-+                hw_feedback:1;
-+            uint32_t :32; /* b */
-+            bool aperfmperf:1;
-+            uint32_t :32; /* d */
-+
-             uint64_t :64, :64; /* Leaf 0x7 - Structured Features. */
-             uint64_t :64, :64; /* Leaf 0x8 - rsvd */
-             uint64_t :64, :64; /* Leaf 0x9 - DCA */
+Teddy Astie (3):
+  xenpm: Don't build outside of x86
+  x86/platform: Expose DTS sensors MSR
+  xenpm: Add get-intel-temp subcommand
+
+ CHANGELOG.md                         |   6 ++
+ tools/misc/Makefile                  |   2 +-
+ tools/misc/xenpm.c                   | 113 ++++++++++++++++++++++++++-
+ xen/arch/x86/include/asm/msr-index.h |   3 +
+ xen/arch/x86/platform_hypercall.c    |   6 ++
+ xen/include/xen/lib/x86/cpu-policy.h |  27 ++++++-
+ 6 files changed, 154 insertions(+), 3 deletions(-)
+
 -- 
 2.51.2
 
