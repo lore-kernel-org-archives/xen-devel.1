@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6311EE677F2
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Dec 2025 16:37:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1192148.1511477 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05A3E677F2
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Dec 2025 16:37:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1192150.1511489 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vXiuf-0008Mc-IC; Mon, 22 Dec 2025 16:37:37 +0000
+	id 1vXiuo-0000ST-Qs; Mon, 22 Dec 2025 16:37:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1192148.1511477; Mon, 22 Dec 2025 16:37:37 +0000
+Received: by outflank-mailman (output) from mailman id 1192150.1511489; Mon, 22 Dec 2025 16:37:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vXiuf-0008MV-CM; Mon, 22 Dec 2025 16:37:37 +0000
-Received: by outflank-mailman (input) for mailman id 1192148;
- Mon, 22 Dec 2025 16:37:36 +0000
+	id 1vXiuo-0000SK-OQ; Mon, 22 Dec 2025 16:37:46 +0000
+Received: by outflank-mailman (input) for mailman id 1192150;
+ Mon, 22 Dec 2025 16:37:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ACBk=64=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vXiud-00085h-VX
- for xen-devel@lists.xenproject.org; Mon, 22 Dec 2025 16:37:35 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
+ id 1vXiun-00085h-C6
+ for xen-devel@lists.xenproject.org; Mon, 22 Dec 2025 16:37:45 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 843eda7d-df54-11f0-9cce-f158ae23cfc8;
- Mon, 22 Dec 2025 17:37:33 +0100 (CET)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-64d0d41404cso2993940a12.0
- for <xen-devel@lists.xenproject.org>; Mon, 22 Dec 2025 08:37:33 -0800 (PST)
+ id 8302be99-df54-11f0-9cce-f158ae23cfc8;
+ Mon, 22 Dec 2025 17:37:31 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b7355f6ef12so743214166b.3
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Dec 2025 08:37:31 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-64b9105655asm10977819a12.9.2025.12.22.08.37.31
+ 4fb4d7f45d1cf-64b9105655asm10977819a12.9.2025.12.22.08.37.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 08:37:32 -0800 (PST)
+ Mon, 22 Dec 2025 08:37:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 843eda7d-df54-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 8302be99-df54-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766421453; x=1767026253; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2rKcl3RMTLtuAlPIfvhLTYtcdM8WDD2kedJ0JOBzWzo=;
-        b=J8g1nQLX9XXt9/Tcgf6qFUEBlnPhmV2JpVVLLsUYMlRkbDQKkksTdChw4HDgTxoH9/
-         Cwc4Ug4iV2TkLQLAkGkARXHSdG1x7uAadx4oLME5tDJSOadYm0DH9pzkIbID4tXeF9oW
-         xL/9iHSz10vDt6cztPatlfpuSZ8R/9EUah2jWm71Gvxsx1ZvefYfziAAzPkX7L86G1mT
-         TzBz9skHDaGiW8QlD65OPlVQ9rjxFkgoL780iT96zJ2K63e9a2fJOzYg3rgLkgcRzZT5
-         v7DO91WKwM86uhEIPYy8+RROIfhyN+jfN1pfa9M+NUH5KhKkBhU2Kx21MUuRdavJPhFQ
-         JXLA==
+        d=gmail.com; s=20230601; t=1766421451; x=1767026251; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UfaMQVt71vudvZ+6o553qPxHKZsQhzxz3nxmG/7MgzY=;
+        b=gZwGr8xWzT02772LM4V8/wExtqXsEkVx7g3K3RZdMfe4RR8jt7hHgVmacgXl8Lp/tQ
+         4haysiOCJg6msOQb4vJ7Trd4Wcdx09wt7yzqE8++/vgZd+IT78uoTDZ0vtXbftUGsSMm
+         5aJeqd5HXX0MBYG0sYyAjTtY/divf4tJXR/OpUxiSG9RPPFiAq3xmajeixKc79wSWkUN
+         k3Z3rMtzdy94qk7eMb65t9hOgypDTl/CjRYBgA12w7T372nSJl3Rl9XzOZtXW9XtA9Do
+         TrEg6M6eHLmYrhwi8inkzosw9AG1Ev3cmi8egfV4GmHq9f16+kZDNBU7E+NTRXA412WM
+         bYdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766421453; x=1767026253;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=2rKcl3RMTLtuAlPIfvhLTYtcdM8WDD2kedJ0JOBzWzo=;
-        b=TgAZbOthGh6WaMmkS8HeNXzQL1zRPwi8y2+fpzjhjSfdT+XxjxjjRVIFT5KSmMW6YN
-         4g/12I4rSD5nFIU81vp/qwz3KZQ1HomNmRyuw1aNH2/x1Gb9bReNL5/ugmgPG+KtYLQY
-         AYkGpRliGEZu+ck3K1mdqCoCgmqCzWfDzVsWkBBJcckoncSi/QwgzvF5EzntPFpQ4xk8
-         5npkv4IF3I5BCdv+Xy7CvhvLcoYPKsfIGi+++gGHXWyy6WUDIx9dJu8KXPJqWCD5hEET
-         C1c2OfRafL+Dv6x9x7vyOcf1wNsPHAZp7sAkXwCgbCD7wkKXnTePdCb5FMAMazEHM6ku
-         HD6w==
-X-Gm-Message-State: AOJu0YygFzRLsEW8Moc2LbqWt2eAwmjji+vh3XsanpAdNUT8OLfovGyy
-	KxV56CuIWRbbDl0WEEOsWRTF5+vy6Lrml2W+S5YfIEcpbsGspMxG5SpZhdDdEQ==
-X-Gm-Gg: AY/fxX4NsFFec/9a8QWFBrnWYfFOog+oqoByYahip7rvyK9BoaTUNqcpAyCwvnnmaw/
-	sjzRw+lLZjP+Tbh4koEPcD96yL3gZKkeMnQ5IAxg42dvGQ0pE71ojbMH4+IEP5z7MvAlenLaFHU
-	KLSr6qyxhnYtkU+lfRrpQ835BiGYi0OJzVYcSRkUmC6NNs9FT++quRp9pXUhMdSB72DtE5tWLBL
-	JcTqWx8ZUZWlpCHnMDqfYsbC0yMeTxuZ1D5WJeOenxyD9SmuuU08AOqT+SeQvRmVRam8UqJHP5x
-	HqhmloVIVwqllwXAUGVHtKjCfL6NB+5dHe8F8Y/VFh44oMl1qwHckhZs1u0JD6MX7oHsI3VjvE4
-	S98kRtNMJXwb7tNDQ3w5RdjncKEYrVnFS8t6WvkFubbxgAuftYKzgcnAaqA8aC5HGjO3u313LA/
-	tPgPp6SR1YKktx01S1zaq+2VDxZMr79aPSWUJAxCR4e+df7H67xQ4l7SQ=
-X-Google-Smtp-Source: AGHT+IGPf73v97oueoSNdWbJxBDcUT+vi+tzYguW3tnDofwvUiMHekiIbwqEyjqbVeRfAjbk2WiGpQ==
-X-Received: by 2002:a05:6402:510d:b0:649:cb54:b7a9 with SMTP id 4fb4d7f45d1cf-64b8ec6c534mr9436702a12.21.1766421452828;
-        Mon, 22 Dec 2025 08:37:32 -0800 (PST)
+        d=1e100.net; s=20230601; t=1766421451; x=1767026251;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UfaMQVt71vudvZ+6o553qPxHKZsQhzxz3nxmG/7MgzY=;
+        b=l0jOfGS8nhQX0GkFdkxMUdPzvUmn6hzDDEMEtCOAJxkefiIyJZqKzHe6Oq2jFGi83N
+         s1OUzoPYkZsD6LnnrM63OqnniscYRjR4r8AxzDHZQ9cjv3ZPAmVH1BNkzAzh1Epb2h2g
+         QEuBo28HVtLSDYI0n6ObwWmOX/IYglIcJgHtRTaF20b1Eg8CrsFGh/0pWVgzUf/OzIiD
+         nKHyqXhVmsYMvFuEiiY914LL9WDgKhUbOaaQQU7loKhrxOHCH1NuMMnKrnEiZi+6CMHQ
+         /Gpo66jndwZQGgSFWUH2Vg+Zl79x8E0A+Os9p/0GfCrHclXYROAVojPR/mDmhv1kEjAO
+         XdYg==
+X-Gm-Message-State: AOJu0Yxaj3vYuYptZPTCecvZ6Yhc7zcPJJsUSdnILM5qY/aLU/Qi45sr
+	42fr/nJW5FDlgLzeM9gl7+ngH1ClNl4zWmBOXPj1Hy9YcF4ITCJy3+VTdOCbag==
+X-Gm-Gg: AY/fxX6cIJ/aYV4oAsAuCr2coCrfjH+EthZTnVSGi2g4rtRFeYUnVS3ge3HSlGxZ5nm
+	0oIAVVEqE5ckSQOmMnvf6bMqj5Sh3w1MGnARCfkMSrdBd1ComhqpcT5Z9JnSP1fQGrEP+6OWQZR
+	BWBNsyOlBp4MvfLhTOd+/iCikx/D/1MXKh/N/q3YCNOFPozmi7ZT8LlSqQfGuBpewNMuQrCOtOt
+	Ni6/BGTdsbGh4n/caEqaRAI5h+hcOmxYfAuz2VA92i3rA0xra2/fjlgKz7hLsF3QyNvsrwNQNtD
+	t5EIifpaBPwa+RKGQHVXVnBPx8ZK8sAYLz+gmqI4lzAXzjH+kfIauFGJmI/IjBS7SgQ2XX74EJd
+	SotWwGAlnEI1zw16vW+BdWENz/5MkiZynffDn9UWMRvl0MuDWlQm6eCYIDRxzudSS1xuuoL2lfE
+	bvl2b5c4EmZaTom+4ArGzfMBGDN/hsYFimPO7pRkS/3Tkq8kwa+5x+PQA=
+X-Google-Smtp-Source: AGHT+IGvXT3pTP0j8wqYblo4WAN9/SFFYARSVhXay+MvpV+gtEzGYzertZngk3eBbBhQ73TrTRc30Q==
+X-Received: by 2002:a17:906:730f:b0:b73:9937:e96b with SMTP id a640c23a62f3a-b8037183903mr1275110066b.52.1766421450688;
+        Mon, 22 Dec 2025 08:37:30 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -97,156 +96,60 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 2/3] xen/riscv: add RISC-V legacy SBI extension support for guests
-Date: Mon, 22 Dec 2025 17:37:20 +0100
-Message-ID: <f4225d3134ec12a392a2e5d91414bfdf9d0665a1.1766399205.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 0/3] RISC-V: Introduce vSBI framework
+Date: Mon, 22 Dec 2025 17:37:18 +0100
+Message-ID: <cover.1766399205.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1766399205.git.oleksii.kurochko@gmail.com>
-References: <cover.1766399205.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This commit adds support for legacy SBI extensions (version 0.1) in Xen
-for guest domains.
+Introduce the vSBI framework to handle extension ecall instruction calls
+from a guest.
 
-The changes include:
-1. Define all legacy SBI extension IDs (0x0 to 0x8) for better clarity and
-   completeness.
-2. Implement handling of legacy SBI extensions, starting with support for
-   SBI_EXT_0_1_CONSOLE_PUTCHAR. SBI_EXT_0_1_CONSOLE_GETCHAR is marked as
-   not supported as legacy SBI console related stuff is expected to be used
-   only for early debugging of guest.
+In this patch series, support is added for only a few extensions and FIDs,
+just enough to boot the first guest domains and obtain logs from them. This
+keeps the patch series independent from other ongoing work.
 
-The implementation uses the existing virtual SBI framework to handle legacy
-SBI ecalls, ensuring compatibility with older SBI specifications in
-RISC-V guests.
+It was decided to start with support for the Legacy Extension, as it is still
+supported by Linux (so we may need it anyway), and because some of its FIDs
+require less functionality to implement at this stage compared to the more
+modern extensions.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2228014400
+
 ---
 Changes in v3:
- - s/vsbi_print_line/vsbi_print_char.
- - s/cd/currd in vsbi_print_char().
- - Drop a cast of regs->a0 when vsbi_print_line() is called.
- - Use current instead of `vcpu` argument as it was dropped from
-   vsbi_base_ecall_handler() prototype.
+ - Address a comments from v2.
 ---
 Changes in v2:
- - s/vsbi-legacy-extension.*/legacy-extension.*
- - Correct padding for SBI_EXT_0_1_* macros.
- - Set ret = SBI_ERR_NOT_SUPPORTED; in the case of vsbi_legacy_ecall_handler()
-   instead of regs->a0 = ... as regs->a0 will be overwritten in
-   vsbi_handle_ecall().
- - Use domain_crash() instead of panic() in vsbi_legacy_ecall_handler() and
-   add TODO.
- - Use newly introduced VSBI_EXT macros instead of VSBI_EXT_{START,END}.
- - Introduce vsbi_print_line() and use it instead of plain printk() in the
-   handler of SBI_EXT_0_1_CONSOLE_PUTCHAR.
+ - Address a comments from v1.
 ---
- xen/arch/riscv/include/asm/sbi.h       | 11 ++++-
- xen/arch/riscv/vsbi/Makefile           |  1 +
- xen/arch/riscv/vsbi/legacy-extension.c | 64 ++++++++++++++++++++++++++
- 3 files changed, 74 insertions(+), 2 deletions(-)
+
+Oleksii Kurochko (3):
+  xen/riscv: introduce vSBI extension framework
+  xen/riscv: add RISC-V legacy SBI extension support for guests
+  xen/riscv: add RISC-V virtual SBI base extension support for guests
+
+ xen/arch/riscv/Makefile                |  1 +
+ xen/arch/riscv/entry.S                 |  6 ++
+ xen/arch/riscv/include/asm/processor.h |  1 +
+ xen/arch/riscv/include/asm/sbi.h       | 21 ++++++-
+ xen/arch/riscv/include/asm/vsbi.h      | 31 ++++++++++
+ xen/arch/riscv/riscv64/asm-offsets.c   |  1 +
+ xen/arch/riscv/setup.c                 |  3 +
+ xen/arch/riscv/traps.c                 |  8 +++
+ xen/arch/riscv/vsbi/Makefile           |  3 +
+ xen/arch/riscv/vsbi/base-extension.c   | 78 ++++++++++++++++++++++++++
+ xen/arch/riscv/vsbi/core.c             | 57 +++++++++++++++++++
+ xen/arch/riscv/vsbi/legacy-extension.c | 64 +++++++++++++++++++++
+ xen/arch/riscv/xen.lds.S               |  7 +++
+ 13 files changed, 279 insertions(+), 2 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/vsbi.h
+ create mode 100644 xen/arch/riscv/vsbi/Makefile
+ create mode 100644 xen/arch/riscv/vsbi/base-extension.c
+ create mode 100644 xen/arch/riscv/vsbi/core.c
  create mode 100644 xen/arch/riscv/vsbi/legacy-extension.c
 
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index ade24a572d..751bae6d66 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -14,8 +14,15 @@
- 
- #include <xen/cpumask.h>
- 
--#define SBI_EXT_0_1_CONSOLE_PUTCHAR		0x1
--#define SBI_EXT_0_1_SHUTDOWN			0x8
-+#define SBI_EXT_0_1_SET_TIMER               0x0
-+#define SBI_EXT_0_1_CONSOLE_PUTCHAR         0x1
-+#define SBI_EXT_0_1_CONSOLE_GETCHAR         0x2
-+#define SBI_EXT_0_1_CLEAR_IPI               0x3
-+#define SBI_EXT_0_1_SEND_IPI                0x4
-+#define SBI_EXT_0_1_REMOTE_FENCE_I          0x5
-+#define SBI_EXT_0_1_REMOTE_SFENCE_VMA       0x6
-+#define SBI_EXT_0_1_REMOTE_SFENCE_VMA_ASID  0x7
-+#define SBI_EXT_0_1_SHUTDOWN                0x8
- 
- #define SBI_EXT_BASE                    0x10
- #define SBI_EXT_RFENCE                  0x52464E43
-diff --git a/xen/arch/riscv/vsbi/Makefile b/xen/arch/riscv/vsbi/Makefile
-index 820eb10ac2..bc5755cb13 100644
---- a/xen/arch/riscv/vsbi/Makefile
-+++ b/xen/arch/riscv/vsbi/Makefile
-@@ -1 +1,2 @@
- obj-y += core.o
-+obj-y += legacy-extension.o
-diff --git a/xen/arch/riscv/vsbi/legacy-extension.c b/xen/arch/riscv/vsbi/legacy-extension.c
-new file mode 100644
-index 0000000000..ca869942d6
---- /dev/null
-+++ b/xen/arch/riscv/vsbi/legacy-extension.c
-@@ -0,0 +1,64 @@
-+
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/console.h>
-+#include <xen/lib.h>
-+#include <xen/sched.h>
-+
-+#include <asm/processor.h>
-+#include <asm/vsbi.h>
-+
-+static void vsbi_print_char(char c)
-+{
-+    struct domain *currd = current->domain;
-+    struct domain_console *cons = currd->console;
-+
-+    if ( !is_console_printable(c) )
-+        return;
-+
-+    spin_lock(&cons->lock);
-+    ASSERT(cons->idx < ARRAY_SIZE(cons->buf));
-+    if ( c != '\n' )
-+        cons->buf[cons->idx++] = c;
-+    if ( (cons->idx == (ARRAY_SIZE(cons->buf) - 1)) || (c == '\n') )
-+    {
-+        cons->buf[cons->idx] = '\0';
-+        guest_printk(currd, XENLOG_G_DEBUG "%s\n", cons->buf);
-+        cons->idx = 0;
-+    }
-+    spin_unlock(&cons->lock);
-+}
-+
-+static int vsbi_legacy_ecall_handler(unsigned long eid, unsigned long fid,
-+                                     struct cpu_user_regs *regs)
-+{
-+    int ret = 0;
-+
-+    switch ( eid )
-+    {
-+    case SBI_EXT_0_1_CONSOLE_PUTCHAR:
-+        vsbi_print_char(regs->a0);
-+        break;
-+
-+    case SBI_EXT_0_1_CONSOLE_GETCHAR:
-+        ret = SBI_ERR_NOT_SUPPORTED;
-+        break;
-+
-+    default:
-+        /*
-+         * TODO: domain_crash() is acceptable here while things are still under
-+         * development.
-+         * It shouldn't stay like this in the end though: guests should not
-+         * be punished like this for something Xen hasn't implemented.
-+         */
-+        domain_crash(current->domain,
-+                     "%s: Unsupported ecall: FID: #%lx, EID: #%lx\n",
-+                     __func__, fid, eid);
-+        break;
-+    }
-+
-+    return ret;
-+}
-+
-+VSBI_EXT(legacy, SBI_EXT_0_1_SET_TIMER, SBI_EXT_0_1_SHUTDOWN,
-+         vsbi_legacy_ecall_handler);
 -- 
 2.52.0
 
