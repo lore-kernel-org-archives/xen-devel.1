@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E33F3E677F2
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Dec 2025 16:40:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1192200.1511571 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9887AE67801
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Dec 2025 16:53:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1192289.1511590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vXixV-0005RR-Ah; Mon, 22 Dec 2025 16:40:33 +0000
+	id 1vXj9C-0000kx-SW; Mon, 22 Dec 2025 16:52:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1192200.1511571; Mon, 22 Dec 2025 16:40:33 +0000
+Received: by outflank-mailman (output) from mailman id 1192289.1511590; Mon, 22 Dec 2025 16:52:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vXixV-0005RI-61; Mon, 22 Dec 2025 16:40:33 +0000
-Received: by outflank-mailman (input) for mailman id 1192200;
- Mon, 22 Dec 2025 16:40:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ACBk=64=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vXixT-0004kh-En
- for xen-devel@lists.xenproject.org; Mon, 22 Dec 2025 16:40:31 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eb469f45-df54-11f0-9cce-f158ae23cfc8;
- Mon, 22 Dec 2025 17:40:26 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b72b495aa81so685659666b.2
- for <xen-devel@lists.xenproject.org>; Mon, 22 Dec 2025 08:40:26 -0800 (PST)
-Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8037f3e271sm1137038366b.60.2025.12.22.08.40.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Dec 2025 08:40:25 -0800 (PST)
+	id 1vXj9C-0000kq-P2; Mon, 22 Dec 2025 16:52:38 +0000
+Received: by outflank-mailman (input) for mailman id 1192289;
+ Mon, 22 Dec 2025 16:52:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ezST=64=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vXj9B-0000ki-VY
+ for xen-devel@lists.xenproject.org; Mon, 22 Dec 2025 16:52:37 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9dd89c6c-df56-11f0-b15b-2bf370ae4941;
+ Mon, 22 Dec 2025 17:52:35 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-47a95efd2ceso35942155e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Dec 2025 08:52:35 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4325b6bfe88sm14545653f8f.19.2025.12.22.08.52.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 22 Dec 2025 08:52:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,122 +47,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb469f45-df54-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 9dd89c6c-df56-11f0-b15b-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766421626; x=1767026426; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=J0lqSF3LowgT5w/o27SncoJ4nvC1Ks9j0BUdu4U/rs8=;
-        b=lP2Sxj+43kxTvOZ2Ea3v53wU8JQi2xk9GzG21Qh5ooSPGRCIxKfgtBjvjYCZEvAqJp
-         NP8V7pF7q9BSWlyyrN4bzf8SVhKpwmu1mo5okepAilwe2BBd6pSHts8yBfbadQdeSm/5
-         QWSAbsk8e7A4RjM2qWpNWO/b4Eu1wpTEd/znzVTWrxjhcwFoIiN0We5oNlaFu8Fhcuj5
-         pF1/mh9gAr95zp82zfnEt+P2S3x0Jq+fhbV6F5L7YfgPA4Xd8mSIk52uZxNKur/Am2B6
-         fSyqU5mCy1+kaWu11A0all/1IOqe/4PbZkUPTPEIuTthb8q7KeQeXQ1aKhDNU530nKMG
-         c2Pw==
+        d=suse.com; s=google; t=1766422355; x=1767027155; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=y1ZTWe3P/Q2TMsShYIxlFEL/3fCtojbqDNSi0VAhKuk=;
+        b=biu802qaG16xwC8BOm5Ej/MGA2wTeRBtvuqBdgO+/BezM20wUDanj44OJIwmpYeO7Z
+         go12ib4r0fi47QPu8gl3T5Tq3TsUQ9asMv52harSVIWwdhrWE5gtlzQbEZUfF2CrmBaq
+         eg87pNvSvNeMEzUjM2kc9FOrFefV6yTUm+e72wxh54Eyg4AujTM3TVw/Vi/CkKrXU7tE
+         i5yzdjAUV804+fQSaEFgKeMElDIvFjttsjuldVxLCCQ52e7rrCcGpOxItX3APY4URRTl
+         szF55e2TFFrMK+T7fqHCfdCu/C8DRYnvwqkvzvfXfXHPUl9w384RLxmSpcMUsYmDJIgg
+         IRQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766421626; x=1767026426;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=J0lqSF3LowgT5w/o27SncoJ4nvC1Ks9j0BUdu4U/rs8=;
-        b=FJIQRyfewq57D9i9BmvVMThMs6JNDn/i0deiGqXQLKdyOXYTlepo0Sp6kLHTwmsqbA
-         xQDTD5ZRPo7VGrte8AF/3QdbbL2oX/eZHOvXoNUCIYXVmsuHKNX0/kcD5abzzLX2u2sH
-         1nnNadetAEMZMjevpxT5owlqhZBA/Ecp6WF3wPf+3AlbvlucgcaRnUSgMnV99WVQ5m4y
-         G3eAVezIn1m12dYh71h2XxQauw6IA4y6HH1qYmvUhLQiKdvREIMieCM8vuCrcRLlvouf
-         oetTSzlBkmCJ0xTPAv6ceu/izTJO8ndhClR4ZEyZDLQ3Xs9hgsxFGGygyq0znWlVh2fd
-         6RWA==
-X-Gm-Message-State: AOJu0Yy3QtpxRjjuGbXoJ+zxOomj0Oa4b6Lgx523OsJ+yMNd255m62XM
-	08CCPskxhfgaqKXKZNxNAsgnUvryR1BVBis1rPwLmn3alr9xNMZ+tF19eSKtqA==
-X-Gm-Gg: AY/fxX6j6m79eDIGXS9aXO9lk7XUptViIIF8hlpJ6UGLIkzIOC/bZPlTRvaz7WtEoFi
-	5ak/cbHCaHXED96BYCXGbouReCfF8hNQIy/3sFrdq+Jl9kbCRco5Zb1gDtQXAYtovaNxJzuMPTz
-	pTa1xco5sD//XkGJ/frhl2Dno7XJGVe56KVLhn9k9svYhicved3o7nBrN2hPm88myp5iwnsg20R
-	1XI4i85H5vGdW5SuAAmzGSykBsMbZEGh5PSjOfe3XXgwvXMYjPBtpBDXFTgkXmoSohTJo4+YXWu
-	lpCjtyjxammgT+rOXzPdrKYz5qa8Awztw585HeDkh+5VgHFeARivYBeOIT6OVteeDKxqHV+47E3
-	Y/6GlV2FixZslmyK9NzcrUMr0ubJgauI9ObsxmZSNPXfl2Hj7DXRWvEpwtXrojOlrmfpcD5WS0x
-	zf2wR/DVeflM/O2qYdLNXH9ylHIxjj6sfCMUspEw1rRMjzbKwMETBbRF8=
-X-Google-Smtp-Source: AGHT+IE4wbMk7NpxqruoqWKvwE6nd5qAk0AkJrXo/d8jlSh2VoFnM+PpWVLdVGSwT30cAtRhGDHavw==
-X-Received: by 2002:a17:906:dc90:b0:b73:21af:99d4 with SMTP id a640c23a62f3a-b8036f96725mr1170033566b.24.1766421625743;
-        Mon, 22 Dec 2025 08:40:25 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v3 0/4] Move alloc/free_vcpu_struct() to common code
-Date: Mon, 22 Dec 2025 17:40:10 +0100
-Message-ID: <cover.1766404618.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1766422355; x=1767027155;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=y1ZTWe3P/Q2TMsShYIxlFEL/3fCtojbqDNSi0VAhKuk=;
+        b=aR80m4FGOdtK6P79gkRy7tDL/RXSvJSOg468humB+Mxnp9taXfwvcbASopNyBr1Lcg
+         ZFsb1Ch+cRyZZ4GG12I6zfiFMHMeEV0Cgf6d39hKryHm6drQwlIOQgZ3RXCm9ShnGWVL
+         XDiaAqdYjUSFhsPuR0wo0hb3HweK3smUU+uzo0vdOHgiq9aJ9oykkNC7hwHu5qScXO6n
+         HmMUG/FjnQru4VBnCiBmACPyPJ48LzLxrAfBhpUhFQYXN8D8qWEJgSr81bFOcmSYF6El
+         cIzo9kvX40HT+emREYvCnd0dxCKvMgtK8zBFw5S6ajtgEJ4cjQ9AbJ50ah5+MvwJhqBc
+         381Q==
+X-Gm-Message-State: AOJu0Yy8KUzEKzU+AB3SCBwxDqSc/94Eo6KIwwt/TeaihQyQz84gk61A
+	EHx7ntwT0fI+epGP5o/LYXEMyy14VIaO9t889gTpMjCgEV9qAS36UxE34wXzX67rMdDkJYIVvc5
+	GVjU=
+X-Gm-Gg: AY/fxX5IRZRgXt5YPs2JOZ61nKXSjagY5Kn9RwtmMmHqR1Y0VJIHsYSFG1kyBivPqxK
+	Xj0ATonSGb/G1uOxpp0uIygGL2+71vHdBnWiuJMba6ro25NRbOJSx8MNWLaA0Xp8n1Joq8b956N
+	EfL+Q1E10B26nPOSjHU4l7iW7giYslbMi5E+Dk59PD0JVrBVO/tQmWedCce7SQwxKGkOaYXubxo
+	EAZ8Hurg6amTxUil+MDQoZf8KQ7kthoHmzXgqi7x4rCC7tYQRQ8E+oTnSUU8qUNucgxfCvuuBFb
+	oLFrcLTmHUByW4Djo7gUz/9J6u5KQqP+UgRxhrPjOnOYUu6Fd6phG2xTvcgKOWxIGSXVnraBfqr
+	lzTZI/4KfaVbquUjF0sO8BPJjw49ycDa6CfhjSrgTx/JBwr/M6ujQMHSHbOKVPN180h1PasuJZH
+	xzCvd/MUih82kKrOhzZr5f5NM3sKYhzifm3Bdhs96fRIiT+ElXGybpXtEfIv0otSYgxu7yMMvKx
+	tY=
+X-Google-Smtp-Source: AGHT+IHdCCcB3LExmrVHoBYjpsa0+9snoj75elBu8FbI8DtjAJ2NMszEYqDtIPGXbt/RIPsdUsAOgw==
+X-Received: by 2002:a05:6000:2881:b0:430:fbe1:382a with SMTP id ffacd0b85a97d-4324e702010mr14202451f8f.54.1766422355270;
+        Mon, 22 Dec 2025 08:52:35 -0800 (PST)
+Message-ID: <4a8f06b9-8210-487f-9dd7-e0221e2df9db@suse.com>
+Date: Mon, 22 Dec 2025 17:52:37 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 0/2] x86/cpu-policy: librarify copy-in/-out
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-As it was suggested in [1] it would be better to allocate one page for struct
-vcpu for all arch-es. To do that it is needed to align Arm code to allocate
-one page (as there is a case(when CONFIG_NEW_VGIC=y) when Arm64 will require
-to allocate two pages). As a result, the following patches for Arm have been
-introduced:
- - [PATCH v2 1/4] xen/arm: optimize the size of struct vcpu
- - [PATCH v2 2/4] xen/arm: drop MAX_PAGES_PER_VCPU
+The 1st patch is largely unrelated, but helps demonstrate that the component
+isn't being (silently) broken by the adjustments made.
 
-This patches are dependency for:
- - [PATCH v2 3/4] xen: move alloc/free_vcpu_struct() to common code
+1: enable build of fuzzing harness by default
+2: move copy-in/-out functions to arch library
 
-Also, as a part of this patch series another clean up is done which makes
-{alloc,free}_domain_struct() static.
-
-[1] https://lore.kernel.org/xen-devel/f8a9be3a-a0c6-496a-806f-40760dca5aee@suse.com/T/#m275dfcbdccef0461fa9a8acef072403f18091768
-
-CI: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2228022495
-
----
-Changes in v3:
- - Come up with a different way to optimize struct vcpu for Arm.
- - Merge patches "[PATCH v2 2/4] xen/arm: drop MAX_PAGES_PER_VCPU]" and
-   "[PATCH v2 4/4] xen/common: make {alloc,free}_domain_struct() static"
-   together.
- - Clean up vcpu_vgic_free() a little bit.
----
-Changes in v2:
- - Introduce new patches for Arm:
-     - [PATCH v2 1/4] xen/arm: optimize the size of struct vcpu
-     - [PATCH v2 2/4] xen/arm: drop MAX_PAGES_PER_VCPU
-    to allocate one page for struct vcpu in common code for all the arch-es.
- - Introduce patch to clean up xen/domain.h a little bit:
-     - [PATCH v2 4/4] xen/common: make {alloc,free}_domain_struct() static
- - Address the comments from v1:
-     - [PATCH v2 3/4] xen: move alloc/free_vcpu_struct() to common code
----
-
-Oleksii Kurochko (4):
-  xen/arm: vcpu_vgic_free() updates
-  xen/arm: optimize the size of struct vcpu
-  xen: move alloc/free_vcpu_struct() to common code
-  xen/common: make {alloc,free}_domain_struct() static
-
- xen/arch/arm/domain.c               | 32 ---------------
- xen/arch/arm/include/asm/new_vgic.h |  2 +-
- xen/arch/arm/include/asm/vgic.h     |  2 +-
- xen/arch/arm/vgic.c                 |  5 +--
- xen/arch/arm/vgic/vgic-init.c       |  9 ++++-
- xen/arch/ppc/stubs.c                | 10 -----
- xen/arch/riscv/stubs.c              | 10 -----
- xen/arch/x86/domain.c               | 24 -----------
- xen/arch/x86/include/asm/domain.h   | 12 ++++++
- xen/common/domain.c                 | 62 +++++++++++++++++++----------
- xen/include/xen/domain.h            |  8 ----
- 11 files changed, 64 insertions(+), 112 deletions(-)
-
--- 
-2.52.0
-
+Jan
 
