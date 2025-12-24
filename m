@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36E5E77361
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Dec 2025 15:06:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1192926.1511946 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACAAE776F0
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Dec 2025 17:04:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1192951.1511982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYQR9-0005Lh-R4; Wed, 24 Dec 2025 15:06:03 +0000
+	id 1vYSH1-0003hF-Mo; Wed, 24 Dec 2025 17:03:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1192926.1511946; Wed, 24 Dec 2025 15:06:03 +0000
+Received: by outflank-mailman (output) from mailman id 1192951.1511982; Wed, 24 Dec 2025 17:03:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYQR9-0005La-Nx; Wed, 24 Dec 2025 15:06:03 +0000
-Received: by outflank-mailman (input) for mailman id 1192926;
- Wed, 24 Dec 2025 15:06:02 +0000
+	id 1vYSH1-0003gu-H6; Wed, 24 Dec 2025 17:03:43 +0000
+Received: by outflank-mailman (input) for mailman id 1192951;
+ Wed, 24 Dec 2025 17:03:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DYbN=66=suse.com=marco.crivellari@srs-se1.protection.inumbo.net>)
- id 1vYQR8-0005LU-8w
- for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 15:06:02 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
+ <SRS0=jcWU=66=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vYSH0-0003CV-Ph
+ for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 17:03:42 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0edc2140-e0da-11f0-b15c-2bf370ae4941;
- Wed, 24 Dec 2025 16:06:00 +0100 (CET)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5942bac322dso6664023e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 07:06:00 -0800 (PST)
+ id 7fc64ca4-e0ea-11f0-b15c-2bf370ae4941;
+ Wed, 24 Dec 2025 18:03:42 +0100 (CET)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6418b55f86dso8317203a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 09:03:42 -0800 (PST)
+Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8037ab7f7bsm1798927766b.18.2025.12.24.09.03.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Dec 2025 09:03:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,79 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0edc2140-e0da-11f0-b15c-2bf370ae4941
+X-Inumbo-ID: 7fc64ca4-e0ea-11f0-b15c-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1766588760; x=1767193560; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1766595821; x=1767200621; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7AxcJ++mDjVdg2vkVJXskNfABxiuOiTbK8B4BuH1PAo=;
-        b=CdOoTDt9HymXaqk7oRgskgJysBSs/gKFCDOze+m36desJE6nDlvFbqQNPnWdKFeA/y
-         borNQBAF0+w9Us4Qv9CCzrKA6kH7wEGI4lwJF9yraYGCg4afuEP8J/itWCJmtws+02fE
-         VoWdv1mimrtyK2ReHCC21yjHtuAWoT/sWER++Yks/qUDtdMx1d5ZdWUE699L3g5HW7C0
-         baSmjrNO+eAdqs0vvQodimsI3baP2PEiIqgwNLQOKVGvCybvXp6/8nHSDDkubSDPh9UV
-         Wns3wKIyBVLX+fP050O+e6VGxPMPNb4N+3L9XY9zfMzc5lXYxGkkHOGOvehHmPAJDzKU
-         KxnQ==
+        bh=v3trXYiveaHvhlgyXDqsatKIS2roH4Y0Sc6KIceNuMI=;
+        b=NuV3PMpskygdAPgT8ca6gM4FGYNEOL3TKCj404/GxHKDeiH6+xIRwXBQonRl2KmNx3
+         cyn/dK4qp4TM/pGn8xV+Fnj6e58zaKbCmdZBklcW0jPeAff0NSsytKajO2uHM3YEhyMp
+         RFWeAdPLWAkK1amuVZZ0F0X3d1DzSiYQuJJ806f6Cl0EpC2ayISMxMPa1T972+h8J9Yr
+         ANnHmhVPJwnjAEoBGvxqEM5QhWvFEp8uJU2wtsOHoSusE2hG8gJCwuF8EVtiRCit/tfm
+         QklVcf9jT1C1zgL+P+5nZCdqZYJjsz0wQ14/ecYTEA3Hk1GQfUNLotK+DKUy/jN0KgTI
+         L2cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766588760; x=1767193560;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20230601; t=1766595821; x=1767200621;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=7AxcJ++mDjVdg2vkVJXskNfABxiuOiTbK8B4BuH1PAo=;
-        b=EXokm6AwlmvRYQLAAy0zv/9oTpkm/NQSzJmy/o91sQofuF6XZgFiRpAogg6k7/B8A/
-         pEQy+FFw8p177lhjjfFXbyMHfAE6NMQC3KkTWghcZZfAru8e2rP+vVkxdomykPC+wElT
-         JlqihfBzj90rEoUzTmkflKq5gZVjNb8gqjGQxHWZ/a8Vxt5b/rnaR5TBtjGsFg9Hpje6
-         YE1c0HLWg6qMueqprWDTunwfgyJ1Sue5WJUfQx+xfJtHxIKUWNeU+eB8bYHi7ufMFv3E
-         Fa7T+YeEceagzX3yVxzi/1P/8VtmU0JNlbdD65cSQhehKYUxxEnWsOlf4u5L4vvjBwSd
-         uIMw==
-X-Forwarded-Encrypted: i=1; AJvYcCWGjg5zFjQnXctriuqHRahBRLaZx8hjNX6+WhHsKrRvbRzU47q3R1Gb+RvM7R3T+Cm7xQpc4XffYR4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwEcNV1dvjKIacXNlVAQ3fMmsDNw2O5NWjrJ+aZOS79r3c3DQg2
-	uHjBTTNbuXZF5lD7kLA/XVNzRXtl0GD7GPJBo9UoTogblUwPhtNDw8Nl4oM7+X/XtMD8QWfj3bm
-	vGnXUcUbXRXh4FKkVNTcnI1p+Hyxy2B70/y6whJGuqg==
-X-Gm-Gg: AY/fxX6HwbHV8zbKMrxCOtansX3L5XmFuEKXiScQj8L326ytgdTbQ61FWUe/f5RpTHL
-	qjwhUPdZ4IkeeBIMJa6G9ImGWqvs6EPqHbwM53KsUDUrxAWSnVBNzBoOmAjlc46snnzbwcRABfx
-	3T6X2dePu4XFj0w/+n7gPQYWusJll9eCE1DMEEPQ0tQp80g+0TpMz6u/d+1j9DOqnyPLMr0O3Lo
-	czfCkbLMfqkK2OR6cdXB7icMQwVHDZDO6m06/UiXu593/rKRliFrSQqz2b/YwTzQxseVe0rf57v
-	A80qBvU017XguPZlToA64OqOhP59JGiOEsFzZm8=
-X-Google-Smtp-Source: AGHT+IHVMuch2kTut9aphBozo1dC5IDPtF6bAMCdul3HMtqOKgey6ooHrpGe08sKt7YgR/cYTyIecO5t303sGEVu1JE=
-X-Received: by 2002:a05:6512:2211:b0:59a:115f:5b86 with SMTP id
- 2adb3069b0e04-59a17d08f04mr6718124e87.12.1766588760030; Wed, 24 Dec 2025
- 07:06:00 -0800 (PST)
+        bh=v3trXYiveaHvhlgyXDqsatKIS2roH4Y0Sc6KIceNuMI=;
+        b=u3h2bllInSCYIRgZujb4p94MrP7v7KRY6oUiQDjKUxL96HC+H4sMBF+pFyeAphI2+i
+         sLTp2zJKW18yWz50zaXAJQQiNTZ5QI7JQorUgAP/tY9Pt4otmNKbY945xOtF7+gkEr42
+         o10NFUVS6Ggm3bt+CEPXZ8CCZzkIVFHBLavERGiqisYawnu8aMo1PbeY9TeWkDTIbZs/
+         6Syz77KgORnATAVP0pESXTCJRrQxQmsdxSNbMAzNzTUgVCFR9m8Hr2f2a6/mNPxbg+DY
+         AKyp/ngEhk1rjilt/sU5G5tCVQG/dopeUIBXP5MfAbLfsGxkWCMOROZ9iqfImz47NXH9
+         8PyQ==
+X-Gm-Message-State: AOJu0YwOgzV6Msd1pURVVK1eQIGkjDZ/FHgv40h6cS+6IojoxcJjoHwh
+	sgKKRFdJ6it0loI0MykIGp1CM15nVcscA9luYYC824wQf0BWAXPX4qL3Kaclmg==
+X-Gm-Gg: AY/fxX7jeHF3KC/p+nekFjV6mGaP/+PjxB/aPJFwYJlQlfYHqioZ9WhGQGJXo22LAo0
+	lbzH6AWrew0BlvDRHBsj6R5sApqqnw/Nsf2fbukGuKqx8Vd5QDfNHd88mP17cz5HyM5o61sK9w5
+	pQjVdJdCdOfdL9oi6oeX65o/OC607sGn8N0hQS7KPh8ZabPxZ+40yVNp39tIVHfMeY3tFBMMA8z
+	HzxIVf2InEF1CGRG61I6lWvLoIccG6WF6BiJJF5EE4sWwNNAICOTLbCq9wtzuopTigoQp6/zPT1
+	JRQuh0KoigQFqbQP2HJhpEB+XCW0jM+VhV+vV5M9DwkwGBLtxvTpKNavZo4RfuALpVegzDu7+Gc
+	U6tsJHvLAGvEXFjbOvskEaiI8u4GtWOG4mOgfpSI1pXkSNj7YoUYNJKqUvT06Y7y5iNBYwBOO5D
+	2UWztLxc1MO0XaBP+oVaTjGHAtcEAPl1yY+UYpnz6nBz2bfscf3vcvITA=
+X-Google-Smtp-Source: AGHT+IF9OfLAnUg/4nt8QKZLGFjhUX1TmmbLlZPfFQKnsGxPFkAGTeLHlwNnhCdhFUm6gHPgOXbSRA==
+X-Received: by 2002:a17:907:1de2:b0:b80:4117:b6b3 with SMTP id a640c23a62f3a-b804117f48bmr1194562666b.10.1766595821194;
+        Wed, 24 Dec 2025 09:03:41 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 05/15] xen/riscv: implement stub for smp_send_event_check_mask()
+Date: Wed, 24 Dec 2025 18:03:18 +0100
+Message-ID: <837c863f5995cc4371e82b481211b053656ec7e7.1766595589.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1766595589.git.oleksii.kurochko@gmail.com>
+References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-References: <20251106155831.306248-1-marco.crivellari@suse.com>
-In-Reply-To: <20251106155831.306248-1-marco.crivellari@suse.com>
-From: Marco Crivellari <marco.crivellari@suse.com>
-Date: Wed, 24 Dec 2025 16:05:49 +0100
-X-Gm-Features: AQt7F2o93fZnlXnIb_xtPnoUbRnCKdtLBd5hClRrFTCRxTDzaZg28FIXeuTcS4s
-Message-ID: <CAAofZF4JXeLpXHNLeKXSY=Xz18XcOwA6FFvnX=0+NbKMh3rYrQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] replace system_wq with system_percpu_wq, add
- WQ_PERCPU to alloc_workqueue
-To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
-Cc: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>, 
-	Frederic Weisbecker <frederic@kernel.org>, Sebastian Andrzej Siewior <bigeasy@linutronix.de>, 
-	Michal Hocko <mhocko@suse.com>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 6, 2025 at 4:58=E2=80=AFPM Marco Crivellari
-<marco.crivellari@suse.com> wrote:
->  [...]
->   xen/events: replace use of system_wq with system_percpu_wq
->   xen: privcmd: WQ_PERCPU added to alloc_workqueue users
->
->  drivers/xen/events/events_base.c | 6 +++---
->  drivers/xen/privcmd.c            | 3 ++-
->  2 files changed, 5 insertions(+), 4 deletions(-)
+Since SMP is not yet supported, it is acceptable to implement
+smp_send_event_check_mask() as a stub.
 
-Gentle ping.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/smp.c   | 8 ++++++++
+ xen/arch/riscv/stubs.c | 5 -----
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-Thanks!
+diff --git a/xen/arch/riscv/smp.c b/xen/arch/riscv/smp.c
+index 4ca6a4e89200..e727fdb09612 100644
+--- a/xen/arch/riscv/smp.c
++++ b/xen/arch/riscv/smp.c
+@@ -1,3 +1,4 @@
++#include <xen/cpumask.h>
+ #include <xen/smp.h>
+ 
+ /*
+@@ -13,3 +14,10 @@
+ struct pcpu_info pcpu_info[NR_CPUS] = { [0 ... NR_CPUS - 1] = {
+     .processor_id = NR_CPUS,
+ }};
++
++void smp_send_event_check_mask(const cpumask_t *mask)
++{
++#if CONFIG_NR_CPUS > 1
++# error "smp_send_event_check_mask() unimplemented"
++#endif
++}
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index eab826e8c3ae..6ebb5139de69 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -65,11 +65,6 @@ int arch_monitor_domctl_event(struct domain *d,
+ 
+ /* smp.c */
+ 
+-void smp_send_event_check_mask(const cpumask_t *mask)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ void smp_send_call_function_mask(const cpumask_t *mask)
+ {
+     BUG_ON("unimplemented");
+-- 
+2.52.0
 
---=20
-
-Marco Crivellari
-
-L3 Support Engineer
 
