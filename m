@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09290E78488
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 722C1E776F0
 	for <xen-devel@archiver.kernel.org>; Wed, 24 Dec 2025 17:04:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1192950.1511976 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1192948.1511955 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYSH1-0003dq-CT; Wed, 24 Dec 2025 17:03:43 +0000
+	id 1vYSGy-0003Cn-TW; Wed, 24 Dec 2025 17:03:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1192950.1511976; Wed, 24 Dec 2025 17:03:43 +0000
+Received: by outflank-mailman (output) from mailman id 1192948.1511955; Wed, 24 Dec 2025 17:03:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYSH1-0003dj-95; Wed, 24 Dec 2025 17:03:43 +0000
-Received: by outflank-mailman (input) for mailman id 1192950;
- Wed, 24 Dec 2025 17:03:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vYSGy-0003Cg-Ql; Wed, 24 Dec 2025 17:03:40 +0000
+Received: by outflank-mailman (input) for mailman id 1192948;
+ Wed, 24 Dec 2025 17:03:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jcWU=66=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vYSH0-0003b7-9u
- for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 17:03:42 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7eb2c3c4-e0ea-11f0-9cce-f158ae23cfc8;
- Wed, 24 Dec 2025 18:03:40 +0100 (CET)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b73a9592fb8so1149468466b.1
- for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 09:03:40 -0800 (PST)
+ id 1vYSGw-0003CV-UR
+ for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 17:03:39 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7d646a97-e0ea-11f0-b15c-2bf370ae4941;
+ Wed, 24 Dec 2025 18:03:38 +0100 (CET)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b734fcbf1e3so1217307366b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 09:03:38 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8037ab7f7bsm1798927766b.18.2025.12.24.09.03.38
+ a640c23a62f3a-b8037ab7f7bsm1798927766b.18.2025.12.24.09.03.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Dec 2025 09:03:38 -0800 (PST)
+ Wed, 24 Dec 2025 09:03:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7eb2c3c4-e0ea-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 7d646a97-e0ea-11f0-b15c-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766595819; x=1767200619; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1766595817; x=1767200617; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eYGyfRUWi6/uVVhXroMlu9Z8bL0jkMCNXbGuPR68cNM=;
-        b=A5WHCck/eKEbkoPJFUqyonrxJpV/dU0mZpjhYrHB9cuNLTU8I2OG6eFj6//lf5JJz6
-         DIJOZCs4bmSGP1UTV7LeMsSW1XEp5H+mPAB56NC1ksB74Cq4b1E3zyuMNrQgp5rzBD7b
-         2OtT22u2v/Wg3fHd58yw2+bD5E/8/YkIrs8H+m4IVu1dGOufyX0n4oxLCQ0sHzLkABip
-         +gCbz6EhpfCkKghssBNEYfG6rnO7yAd9Foz7m2kEhFZ50YbVtuH32XaqcORWBWMpZU+k
-         QU6TrdGDThLDauqe1EldA1ef94h3YdyT2s7JxW8FpyRdb+OYG3ExOW2sHunZuEhMG6LV
-         nuIA==
+        bh=wpMnoBhXlHEbQcv+4CcUZ/GWflidq/CRvs1qhabX/PA=;
+        b=G9pcf8rlJ11GmoH/zo4K3aolXbeoCsyXum94q4bVwUbKf0QT5vjesdVZUjjg0isMZE
+         TDJsGkKmA4qrG1mxMogeVEN10wJqks8CnSJFhvQzpYh1WFbDZgst2KqDDTBxjF3F9tan
+         62VA/L7m3D9mZbaYU2A/6Oe/Wcb1W5tUcuHIjqMmPJu/UrhPDw/jxl5OsUfWIpkDUgft
+         RfJ54hdhHbsQ4y1CJ6sRmR0aQKwXdkvWuJDVZDfq931p9T1iabOXLwzskzBIPgGU8gYk
+         PlM2acAO3mrJb9cJ+yI79QYDTCgmZuX58QXaoBjciBgW0cDlfgH1A6reYOHZVZEcbXa5
+         qZOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766595819; x=1767200619;
+        d=1e100.net; s=20230601; t=1766595817; x=1767200617;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=eYGyfRUWi6/uVVhXroMlu9Z8bL0jkMCNXbGuPR68cNM=;
-        b=FMSY0ZIHsiDBJ4uUfy3nkbhkmAo9qkkGCjl6dRqSf4WlaainKZczRO8QV0xmqlmvUL
-         jtwPvjbD0GWWb2c3qABXhIIt4eMBtoS4ElLUH8IQopYWj1knyen63Bb8/MrPS7yB3zDh
-         k5ri6Qn1gWk94Ese3+hwXI3/4lx+p29dMAVNn7KhN/yZBByCyIiA6KHbQ/MSLjx8aDZp
-         vKn/zfcrCTsfOt/uKFMv3bTOlAY1cVJX+6XIE9w3lkoUFv6g69TJmKuAAxBGq7/3QWX6
-         4Bjty4go2DpRFuuQXghNkMQBhrS9aitslUNDzRGNqJHCHj9uVZ5Bv5DG8pC9IJvHn9kd
-         wE4w==
-X-Gm-Message-State: AOJu0YzGI+/sYFPcKzNt1S/y1mprhqU7pqDjQKzSzM64EYMMLfupv7fi
-	parZV/JoSBEKPX4qXwZEkLVKVgOrBEIJvGtBjHg0WV2zaONtCV7p5GaWru7qQw==
-X-Gm-Gg: AY/fxX4jyE4749i5Lo7GfnHVjVyocMOKKtkC0cm9OjCINrAV7r/hI1n4WTFMbgMjwzr
-	mFzUff0nWd894gz4MxRObk2kurp+fVioYvmqiUVQV52HBolVCT38eZueDqJ2rfNDIN6QFhVa5zv
-	ftefum2dYbBFRA29DyuKKVmHjgAgb50DFhscrL8jWW/7gw35WB0gtztbqTlooOW4l13E+bqvBFc
-	N3qOQOlBRGoWfggKKufMPd04FKp6NluDo0aV/0S45Nyt9zPvb+v2zdlzpWaRtbg17d5BLAuBIrc
-	egDnx1V0p+AJt0dRjIvsEuTiggCFsCv5VRLfWfBGlfzD8FgLGo3mGje+Hs4iqHytB/rUwPUJMfr
-	xBnZF9FdEYsQXvPg4DIKFqwkdSCN/D4fBPpXRjG1gA8jFce2tB9AfeXEShW//1IbGwQ6+P3XC6O
-	LpdSpVil5evk9KwHLN5KEriqKpNAAJYfjWoQBeMbs7Blg0LSNNeyBAZ5bvxb+SQEDVJw==
-X-Google-Smtp-Source: AGHT+IGUckCWnWYOyuXH1beDmWPjVW2NAXJIsIoFW1Mos5tgYOhXiz+lRYQn8/fskyhC+hA73E/MOA==
-X-Received: by 2002:a17:907:602f:b0:b83:1341:b656 with SMTP id a640c23a62f3a-b831341b7f3mr161394466b.22.1766595819157;
-        Wed, 24 Dec 2025 09:03:39 -0800 (PST)
+        bh=wpMnoBhXlHEbQcv+4CcUZ/GWflidq/CRvs1qhabX/PA=;
+        b=VB7wog8KxkkodcztIlpg3sMV8M1F+w5GrYANATkHqRNhet4gyGbW58EXQ/9Nx6p0sg
+         p8kghPCCn23RFXW6pUoDUJOj97qrl61Q58HhC26gBIw2+yQXdwR6j+vHWYUGqxaJkwze
+         5/AICg9h+bOHljtH3CEuxYsoWlFLY5SiiuR3ic27InGpwRPO67ZVzpOZ6oe/pMqqzD48
+         DGF8QZMCoI+cv9jCj9vHMWhSaEo2wKQc3FHLyuSIeTsBP3GYTXoD2oB0WWlG5eGuHNvy
+         GQ/BphQHzgvb6R4ZEX1/7Qu59gO/7b+0PDbuuC7OIpoOSKoRgbo/EoF0fpghoXW7e2nR
+         Vb+A==
+X-Gm-Message-State: AOJu0YxCRrr3SXAN9V2Q13yfF8yWbdBDjj60GV9YPNxUzTvWItSxntrX
+	Kg2s/jfNnXW5htHrGSs/WkR1h0GEQsoWsHWIvthMTOY/D3iZiLEZ/374nMGEfA==
+X-Gm-Gg: AY/fxX5QqjLhE0cyJZ9v5CY4t04PXMwbhHMIx/72QfXAzYQEkHODPr9QIdJZEBdk8kY
+	TnrRG3Eu0T/fkydAwf3/UDOoAUJIzjXPq5uqQF75TPgIqu2zud0v683n85kri/jvDA0vrkaYae7
+	uX1IVxaGB2xm0sWnx/g2uLddXdEuLfUa5h60kp/RKH4tii+NQ1WwY5RkAppoTcj/bUDXilcR8pq
+	Kwbcos58yohcGzbD1DpeuLvMG6tUDFQRUQWOqaEY6dJsSHLX44rWcVbkh48zQ9NDsRTPbk4jfIq
+	S2j7HjEJEa7PmRyLVAr+gz62Puprh6Adb4yXCQoAbllUM4Bk8KcaFccXFy0ab7sMCGWVxoOvMC0
+	m94GsDQ8XOj+a8pvVnFcdW0tq7RDYykuJwfbKgRzQ818Vgx7xC+HjuuN+A6kf5ckI91MmGGH59c
+	hpyeh6dwehc+nxnzpuszA3rqDhSTYyIelt4omicjhRghm1jucicorYHHY=
+X-Google-Smtp-Source: AGHT+IFGQXiCGFZ8YkznAaepnlm3r06T108zPJKrH4/O/E2AgvWDQNvAco8SXKUUx+l0Bwryvt9Q1w==
+X-Received: by 2002:a17:907:7245:b0:b83:13ee:5875 with SMTP id a640c23a62f3a-b8313ee5957mr212455666b.50.1766595817168;
+        Wed, 24 Dec 2025 09:03:37 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -97,150 +97,92 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 03/15] xen/riscv: implement vcpu_csr_init()
-Date: Wed, 24 Dec 2025 18:03:16 +0100
-Message-ID: <bf617d77bb9e75bbd2930614bb86ff83b80adcfc.1766595589.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 01/15] xen/riscv: introduce struct arch_vcpu
+Date: Wed, 24 Dec 2025 18:03:14 +0100
+Message-ID: <3b531dff3755da010664111cf7d936ccba7c1f5d.1766595589.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1766595589.git.oleksii.kurochko@gmail.com>
 References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implement function to initialize VCPU's CSR registers to delegate handling
-of some traps to VS-mode ( guest ), enable vstimecmp for VS-mode, and
-allow some AIA-related register (thier vs* copies ) for VS-mode.
-
-Add detection of Smstateen extension to properly initialize hstateen0 to
-allow guest to access AIA-added state.
-
-Add call of vcpu_csr_init() in arch_vcpu_create().
+Introduce structure with VCPU's registers which describes its state.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/cpufeature.c                 |  1 +
- xen/arch/riscv/domain.c                     | 63 +++++++++++++++++++++
- xen/arch/riscv/include/asm/cpufeature.h     |  1 +
- xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
- 4 files changed, 67 insertions(+)
+ xen/arch/riscv/include/asm/domain.h | 58 ++++++++++++++++++++++++++++-
+ 1 file changed, 56 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index 02b68aeaa49f..03e27b037be0 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -137,6 +137,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
-     RISCV_ISA_EXT_DATA(zbb),
-     RISCV_ISA_EXT_DATA(zbs),
-     RISCV_ISA_EXT_DATA(smaia),
-+    RISCV_ISA_EXT_DATA(smstateen),
-     RISCV_ISA_EXT_DATA(ssaia),
-     RISCV_ISA_EXT_DATA(svade),
-     RISCV_ISA_EXT_DATA(svpbmt),
-diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index e5fda1af4ee9..44387d056546 100644
---- a/xen/arch/riscv/domain.c
-+++ b/xen/arch/riscv/domain.c
-@@ -3,6 +3,67 @@
- #include <xen/mm.h>
- #include <xen/sched.h>
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 316e7c6c8448..639cafdade99 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -22,9 +22,63 @@ struct hvm_domain
+ struct arch_vcpu_io {
+ };
  
-+#include <asm/cpufeature.h>
-+#include <asm/csr.h>
-+#include <asm/riscv_encoding.h>
-+
-+static void vcpu_csr_init(struct vcpu *v)
+-struct arch_vcpu {
++struct arch_vcpu
 +{
-+    unsigned long hedeleg, hideleg, hstatus;
+     struct vcpu_vmid vmid;
+-};
 +
-+    hedeleg = 0;
-+    hedeleg |= (1U << CAUSE_MISALIGNED_FETCH);
-+    hedeleg |= (1U << CAUSE_FETCH_ACCESS);
-+    hedeleg |= (1U << CAUSE_ILLEGAL_INSTRUCTION);
-+    hedeleg |= (1U << CAUSE_MISALIGNED_LOAD);
-+    hedeleg |= (1U << CAUSE_LOAD_ACCESS);
-+    hedeleg |= (1U << CAUSE_MISALIGNED_STORE);
-+    hedeleg |= (1U << CAUSE_STORE_ACCESS);
-+    hedeleg |= (1U << CAUSE_BREAKPOINT);
-+    hedeleg |= (1U << CAUSE_USER_ECALL);
-+    hedeleg |= (1U << CAUSE_FETCH_PAGE_FAULT);
-+    hedeleg |= (1U << CAUSE_LOAD_PAGE_FAULT);
-+    hedeleg |= (1U << CAUSE_STORE_PAGE_FAULT);
-+    v->arch.hedeleg = hedeleg;
-+
-+    hstatus = HSTATUS_SPV | HSTATUS_SPVP;
-+    v->arch.hstatus = hstatus;
-+
-+    hideleg = MIP_VSTIP |  MIP_VSEIP | MIP_VSSIP;
-+    v->arch.hideleg = hideleg;
-+
-+    /*
-+     * VS should access only the time counter directly.
-+     * Everything else should trap.
-+     */
-+    v->arch.hcounteren |= HCOUNTEREN_TM;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svpbmt) )
-+        v->arch.henvcfg |= ENVCFG_PBMTE;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
++    /* Xen's state: Callee-saved registers and tp, gp, ra */
++    struct
 +    {
-+        /*
-+         * If the hypervisor extension is implemented, the same three bitsare
-+         * defined also in hypervisor CSR hstateen0 but concern only the state
-+         * potentially accessible to a virtual machine executing in privilege
-+         * modes VS and VU:
-+         *      bit 60 CSRs siselect and sireg (really vsiselect and vsireg)
-+         *      bit 59 CSRs siph and sieh (RV32 only) and stopi (really vsiph,
-+         *             vsieh, and vstopi)
-+         *      bit 58 all state of IMSIC guest interrupt files, including CSR
-+         *             stopei (really vstopei)
-+         * If one of these bits is zero in hstateen0, and the same bit is one
-+         * in mstateen0, then an attempt to access the corresponding state from
-+         * VS or VU-mode raises a virtual instruction exception.
-+        */
-+        v->arch.hstateen0 = SMSTATEEN0_AIA | SMSTATEEN0_IMSIC | SMSTATEEN0_SVSLCT;
++        register_t s0;
++        register_t s1;
++        register_t s2;
++        register_t s3;
++        register_t s4;
++        register_t s5;
++        register_t s6;
++        register_t s7;
++        register_t s8;
++        register_t s9;
++        register_t s10;
++        register_t s11;
 +
-+        /* Allow guest to access CSR_ENVCFG */
-+        v->arch.hstateen0 |= SMSTATEEN0_HSENVCFG;
-+    }
-+}
++        register_t sp;
++        register_t gp;
 +
- static void continue_new_vcpu(struct vcpu *prev)
- {
-     BUG_ON("unimplemented\n");
-@@ -30,6 +91,8 @@ int arch_vcpu_create(struct vcpu *v)
-            v->arch.xen_saved_context.sp, v->arch.xen_saved_context.ra,
-            (unsigned long)v->arch.cpu_info);
++        /* ra is used to jump to guest when creating new vcpu */
++        register_t ra;
++    } xen_saved_context;
++
++    /* CSRs */
++    register_t hstatus;
++    register_t hedeleg;
++    register_t hideleg;
++    register_t hvip;
++    register_t hip;
++    register_t hie;
++    register_t hgeie;
++    register_t henvcfg;
++    register_t hcounteren;
++    register_t htimedelta;
++    register_t htval;
++    register_t htinst;
++    register_t hstateen0;
++#ifdef CONFIG_RISCV_32
++    register_t henvcfgh;
++    register_t htimedeltah;
++#endif
++
++    /* VCSRs */
++    register_t vsstatus;
++    register_t vsip;
++    register_t vsie;
++    register_t vstvec;
++    register_t vsscratch;
++    register_t vscause;
++    register_t vstval;
++    register_t vsatp;
++    register_t vsepc;
++}  __cacheline_aligned;
  
-+    vcpu_csr_init(v);
-+
-     /* Idle VCPUs don't need the rest of this setup */
-     if ( is_idle_vcpu(v) )
-         return rc;
-diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
-index b69616038888..ef02a3e26d2c 100644
---- a/xen/arch/riscv/include/asm/cpufeature.h
-+++ b/xen/arch/riscv/include/asm/cpufeature.h
-@@ -36,6 +36,7 @@ enum riscv_isa_ext_id {
-     RISCV_ISA_EXT_zbb,
-     RISCV_ISA_EXT_zbs,
-     RISCV_ISA_EXT_smaia,
-+    RISCV_ISA_EXT_smstateen,
-     RISCV_ISA_EXT_ssaia,
-     RISCV_ISA_EXT_svade,
-     RISCV_ISA_EXT_svpbmt,
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index 1f7e612366f8..dd15731a86fa 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -228,6 +228,8 @@
- #define ENVCFG_CBIE_INV			_UL(0x3)
- #define ENVCFG_FIOM			_UL(0x1)
- 
-+#define HCOUNTEREN_TM BIT(1, U)
-+
- /* ===== User-level CSRs ===== */
- 
- /* User Trap Setup (N-extension) */
+ struct paging_domain {
+     spinlock_t lock;
 -- 
 2.52.0
 
