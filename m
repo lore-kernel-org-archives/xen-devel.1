@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A67FDE776FA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8276E7848A
 	for <xen-devel@archiver.kernel.org>; Wed, 24 Dec 2025 17:04:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1192952.1511996 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1192964.1512085 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYSH3-00045z-1g; Wed, 24 Dec 2025 17:03:45 +0000
+	id 1vYSHC-0006Tm-UV; Wed, 24 Dec 2025 17:03:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1192952.1511996; Wed, 24 Dec 2025 17:03:45 +0000
+Received: by outflank-mailman (output) from mailman id 1192964.1512085; Wed, 24 Dec 2025 17:03:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vYSH2-00045q-TN; Wed, 24 Dec 2025 17:03:44 +0000
-Received: by outflank-mailman (input) for mailman id 1192952;
- Wed, 24 Dec 2025 17:03:43 +0000
+	id 1vYSHC-0006TO-O8; Wed, 24 Dec 2025 17:03:54 +0000
+Received: by outflank-mailman (input) for mailman id 1192964;
+ Wed, 24 Dec 2025 17:03:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jcWU=66=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vYSH0-0003b7-VP
- for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 17:03:42 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ id 1vYSHA-0003b7-BD
+ for xen-devel@lists.xenproject.org; Wed, 24 Dec 2025 17:03:52 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7f4a175e-e0ea-11f0-9cce-f158ae23cfc8;
- Wed, 24 Dec 2025 18:03:41 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b7a6e56193cso998928766b.3
- for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 09:03:41 -0800 (PST)
+ id 84fad15a-e0ea-11f0-9cce-f158ae23cfc8;
+ Wed, 24 Dec 2025 18:03:50 +0100 (CET)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-64b7a38f07eso7666681a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Dec 2025 09:03:50 -0800 (PST)
 Received: from fedora (user-109-243-71-38.play-internet.pl. [109.243.71.38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8037ab7f7bsm1798927766b.18.2025.12.24.09.03.39
+ a640c23a62f3a-b8037ab7f7bsm1798927766b.18.2025.12.24.09.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Dec 2025 09:03:39 -0800 (PST)
+ Wed, 24 Dec 2025 09:03:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f4a175e-e0ea-11f0-9cce-f158ae23cfc8
+X-Inumbo-ID: 84fad15a-e0ea-11f0-9cce-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766595820; x=1767200620; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1766595830; x=1767200630; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=g8XzwJhnCm5wKitCTTX5wDHC/h0G6FAP9bDwWltV38M=;
-        b=nfgR1hChQELx+mxttjRdYhOFXOR1RF4K7nrL6wgUmEgNw3EKUYlPwi+XBrl/dnM2ME
-         4vX0tuxnVVBQKKt465vlcY58VH6SqQByeDwgPS+rpOnCLtAvG9lnEtqysEBa4TJT3Bgo
-         ITKm0bjs1Fc5wmT4IvfHAGI/RBlE5xSKNb/AJaiU+b7LI6+xJGLMb8YB2OG70ouOUklT
-         kl/foLM1hRmEcwYd5ZACcE4/UjuTOLG6P8Vh7MbI73x3OYTzgXbXM2IToIvEglbcF0HY
-         nArl3PzdqYlSeurj9cOZYDKT1cWri2/n32dUfdI2Fe14ZjbBCY0+9BEikKQUy/N/MBlq
-         1Kew==
+        bh=xHV6F5htLdht8yZyJ/VwtJxiGcps1XdDoDnEGPAzWMU=;
+        b=VYo6zE9bFqe4p5SdBZZ5wLqzpeT98++7+dfo3SZStcT0P5PnWsoegw0dxpZwtmLGW+
+         275CsL0O5VIdPqYHt4DKMRW/LFDBepqg+Rz9ZQvbP3FWI/d+CydD33IcHwtYfrFBeRsb
+         hODY3nOlkLT2ES5/wDbSz8NqZjhwoGJH8XYSNRSDkUCdKJcTcYNxsydczEwKUa2dKvFy
+         oK0KEWfzE28cowcAkYWLUqRP5L++VhpZl8iOOPhyTE2jtBJB+Oz26Z7prT6S3kUaYrm/
+         tMlt4iQ/BTzqA5L0Hk6Q5/jMvlZITDxA0jJW3lC6Qknb8OB9InCdZm5GgPUIW7pPBpNa
+         NRXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766595820; x=1767200620;
+        d=1e100.net; s=20230601; t=1766595830; x=1767200630;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=g8XzwJhnCm5wKitCTTX5wDHC/h0G6FAP9bDwWltV38M=;
-        b=qyhwnoB/5tayQGys97/Dx6fs/FtQaBEypYUvKOFaLItSlZ7jWfDA7w4jvYovEOoa6b
-         JCB15pg5MNM0nFtoNljLYUrZA4KW329osYZcbLeFIwRC8GxQYqQxE8+75Yj2HNaHyBBM
-         ehIqfmstzCNuTU5WtXgJqaN3FTVMphPecTZucVTiu+olNJIG/8Dc/GYsgREY2/3RDOD9
-         psjUyEBZJoKkWKYUq+k8FzrnkBZ1VmZJ/A+tejuNEx4gCZWgiYhDECK1J5veYoeHNiQX
-         zxVCYZEy2lbMhFwxgTgYHdH2H7Cvs0s6j3j1slx+7c9jQEavE9zoY8BmInatIQRuw39Z
-         jp7w==
-X-Gm-Message-State: AOJu0YzhyFnMeeb2NrbUJra8j6baXJNSpGvDJXEGW6Lx39edHfYApBjZ
-	wvpG9LbBYGitFamwHy6pb6aoOtH2vaXXjjoIOxLueurrwTJgWM3UVEqRcksemQ==
-X-Gm-Gg: AY/fxX6Ipj8/Uoz6RxN6XFizFGQ8OozhgMWIBp6szchNqDkdDdxBkU8MVweYTcoE5cZ
-	bGm1CU6oOhEZxJR9mbdcUGWSSVF4GbfPoRP/S1sGCefuAoYO1IxDHe5kekrJ+TFjlXDFkoYtcPn
-	3hSKKa3ga9KquoqeJDZwfsR8+8asJrRYLwW8oYrEentZYHLqbkknvmm/B418Y4x+rLzNrmjIM0J
-	Pz0B+aklR90TMgofG2JCdlJGMa2Yz3gu9/wjDH4H1k0h4UIsLAgi1bWoMFG8bUQ7of8dVbKCRwW
-	/wmu/cacys820Pcgjqc1iMVj5/7n4Q3a9Qhy0WrJahWsvFto6RQB81B2Wup63dAoOqfpz7rwCQ3
-	zj3BVbc9jDGyFU9fXINZZ8zpIL01TKa1snLVpRLf461kH87lFaS4qYwlK97Tb6IZHeFw6/+ga2C
-	JvNOEEedBG4SNW8sRJxGI0xR+Wu/OZrRciZMbLdmlkDZDFpuFzw6EuQdUzGWMPaxBo4A==
-X-Google-Smtp-Source: AGHT+IH6Bhd0noBuZdsNvUD5oseP8WhloVgyS5FPCVJYVoTkO6Qd/swFoYV/yyKbBks3zpi7Qwzu6g==
-X-Received: by 2002:a17:907:7e85:b0:b7c:eb19:2094 with SMTP id a640c23a62f3a-b8037257589mr1663597366b.48.1766595820172;
-        Wed, 24 Dec 2025 09:03:40 -0800 (PST)
+        bh=xHV6F5htLdht8yZyJ/VwtJxiGcps1XdDoDnEGPAzWMU=;
+        b=Yu9e0h6S3P8n/tW0dDW2UHuH8j0RsqEw6Q8dSlisjpojbFN0B/MXI0VE3qLNdrxdK/
+         bT1UJnzGS2zi7lGI8Yt2uCgeYbwT3+mjhhbo/o5HAt0yDF5Ut84Am8qd65SlqGrzQOQ1
+         bfjU+4t3dEwHPO4M0GP1xox3YDH29NhXpgs0CpHEpzonlxfRNM6uFBwGuupfpF31BmPU
+         hrVNxsF1oYO1/nnH9+yVH6GcjpibtUKBGveS1wYJg1UlJSjPnOwhitajI1+OPYUt3Tag
+         SGMcHkkbmgrXjiP7Y7Mw51m3HafCywqpONbwkpUigmbgGQiFjgko4takBC+NfZ0hZ9jq
+         n3jA==
+X-Gm-Message-State: AOJu0YyYDs1iC65wRuuWMD1OBTox8qGp2fd6xRpn3H2/73XSRmvgxtrR
+	tvUHyEM3Z9HAqUuVBLhnmTwgfI5nyimkwAzc8EUsugaF98lZY5ZN3Sspy7mKzg==
+X-Gm-Gg: AY/fxX4mLv7aa6IXJlYQO2RF1df4gNxn8ROYo+YJajzEcF2iPSQYANAbI1z3FPOUSvS
+	c30uPqdwt4atMeCRuTYI22RnmABCu1bJo/C38/0ksqxKA4FQdgf+2Q3f/CI38pySwyrksiv6i3/
+	hqKxElESUK76OHDftPuSBo9/KqZUzF5chPCAXTe0kyYWD0N+/yUor9uhT56xGenU/bcR+xRAyzg
+	mjX0BILplc96V8FkgXMTtavCxVrNS6aZC1ksaNVYUd6vmVqvw26Khy7UJA3QycSZUDcyoAxcnm8
+	Y06hTmF5g6LvkRqKPsajVx/gaLAs7F4XRd4cle56qGq7O63NicKtz94Nz792WhvGrJ3oAst9TFM
+	nisH4aRNyF+GoBDgfCviShEKHWPT9pyG2qYTubnLRXNj2uo1XpJDotOTBzMFoWvKWyqtmCegKsP
+	5NEM5Yj616T1+GvSHt2u+nXFA2yO/v+w1CsEauGaMH/Vd+yzbTUzOsjJo=
+X-Google-Smtp-Source: AGHT+IGCPZmbf6qTvckKYI4m1PncXD0B+3c5MgjqTyQZjgApVhhOZGr5y4+53c6unhHJQPTgfm0J4Q==
+X-Received: by 2002:a17:907:97c5:b0:b6d:3fc9:e60c with SMTP id a640c23a62f3a-b8036f10dc8mr1977178266b.20.1766595829888;
+        Wed, 24 Dec 2025 09:03:49 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -97,173 +97,66 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 04/15] xen/riscv: introduce vtimer
-Date: Wed, 24 Dec 2025 18:03:17 +0100
-Message-ID: <94ffc70d3050e532290126560355dc548161f466.1766595589.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 14/15] xen/riscv: handle hypervisor timer interrupts
+Date: Wed, 24 Dec 2025 18:03:27 +0100
+Message-ID: <c63eef564d0d350f009e253b24b567488e47eb13.1766595589.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1766595589.git.oleksii.kurochko@gmail.com>
 References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a virtual timer structure along with functions to initialize
-and destroy the virtual timer.
+Introduce timer_interrupt() to process IRQ_S_TIMER interrupts.
+The handler disables further timer interrupts by clearing
+SIE.STIE and raises TIMER_SOFTIRQ so the generic timer subsystem
+can perform its processing.
 
-Add a vtimer_expired() function and implement it as a stub, as the timer
-and tasklet subsystems are not functional at this stage.
-
-Call vcpu_vtimer_init() in arch_vcpu_create().
+Update do_trap() to dispatch IRQ_S_TIMER to this new handler.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/Makefile             |  1 +
- xen/arch/riscv/domain.c             |  8 ++++--
- xen/arch/riscv/include/asm/domain.h |  4 +++
- xen/arch/riscv/include/asm/vtimer.h | 25 ++++++++++++++++++
- xen/arch/riscv/vtimer.c             | 39 +++++++++++++++++++++++++++++
- 5 files changed, 75 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/vtimer.h
- create mode 100644 xen/arch/riscv/vtimer.c
+ xen/arch/riscv/traps.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 8863d4b15605..5bd180130165 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -22,6 +22,7 @@ obj-y += traps.o
- obj-y += vmid.o
- obj-y += vm_event.o
- obj-y += vsbi/
-+obj-y += vtimer.o
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index e9c967786312..5fd12b1b21c3 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -10,6 +10,7 @@
+ #include <xen/lib.h>
+ #include <xen/nospec.h>
+ #include <xen/sched.h>
++#include <xen/softirq.h>
  
- $(TARGET): $(TARGET)-syms
- 	$(OBJCOPY) -O binary -S $< $@
-diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 44387d056546..dd3c237d163d 100644
---- a/xen/arch/riscv/domain.c
-+++ b/xen/arch/riscv/domain.c
-@@ -6,6 +6,7 @@
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
- #include <asm/riscv_encoding.h>
-+#include <asm/vtimer.h>
+ #include <asm/intc.h>
+ #include <asm/processor.h>
+@@ -108,6 +109,15 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
+     die();
+ }
  
- static void vcpu_csr_init(struct vcpu *v)
++static void timer_interrupt(unsigned long cause)
++{
++    /* Disable the timer to avoid more interrupts */
++    csr_clear(CSR_SIE, BIT(IRQ_S_TIMER, UL));
++
++    /* Signal the generic timer code to do its work */
++    raise_softirq(TIMER_SOFTIRQ);
++}
++
+ void do_trap(struct cpu_user_regs *cpu_regs)
  {
-@@ -97,11 +98,14 @@ int arch_vcpu_create(struct vcpu *v)
-     if ( is_idle_vcpu(v) )
-         return rc;
+     register_t pc = cpu_regs->sepc;
+@@ -148,6 +158,10 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+                 intc_handle_external_irqs(cpu_regs);
+                 break;
  
-+    if ( (rc = vcpu_vtimer_init(v)) )
-+        goto fail;
++            case IRQ_S_TIMER:
++                timer_interrupt(cause);
++                break;
 +
-     /*
--     * As the vtimer and interrupt controller (IC) are not yet implemented,
-+     * As interrupt controller (IC) is not yet implemented,
-      * return an error.
-      *
--     * TODO: Drop this once the vtimer and IC are implemented.
-+     * TODO: Drop this once IC is implemented.
-      */
-     rc = -EOPNOTSUPP;
-     goto fail;
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index a0ffbbc09c6f..be7ddaff30e7 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -8,6 +8,7 @@
- #include <public/hvm/params.h>
- 
- #include <asm/p2m.h>
-+#include <asm/vtimer.h>
- 
- struct vcpu_vmid {
-     uint64_t generation;
-@@ -52,6 +53,9 @@ struct arch_vcpu
-     struct cpu_info *cpu_info;
-     void *stack;
- 
-+    struct vtimer vtimer;
-+    bool vtimer_initialized;
-+
-     /* CSRs */
-     register_t hstatus;
-     register_t hedeleg;
-diff --git a/xen/arch/riscv/include/asm/vtimer.h b/xen/arch/riscv/include/asm/vtimer.h
-new file mode 100644
-index 000000000000..a2ca704cf0cc
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/vtimer.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * (c) 2023-2024 Vates
-+ */
-+
-+#ifndef ASM__RISCV__VTIMER_H
-+#define ASM__RISCV__VTIMER_H
-+
-+#include <xen/timer.h>
-+
-+struct domain;
-+struct vcpu;
-+struct xen_arch_domainconfig;
-+
-+struct vtimer {
-+    struct vcpu *v;
-+    struct timer timer;
-+};
-+
-+int vcpu_vtimer_init(struct vcpu *v);
-+void vcpu_timer_destroy(struct vcpu *v);
-+
-+int domain_vtimer_init(struct domain *d, struct xen_arch_domainconfig *config);
-+
-+#endif /* ASM__RISCV__VTIMER_H */
-diff --git a/xen/arch/riscv/vtimer.c b/xen/arch/riscv/vtimer.c
-new file mode 100644
-index 000000000000..5ba533690bc2
---- /dev/null
-+++ b/xen/arch/riscv/vtimer.c
-@@ -0,0 +1,39 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/sched.h>
-+
-+#include <public/xen.h>
-+
-+#include <asm/vtimer.h>
-+
-+int domain_vtimer_init(struct domain *d, struct xen_arch_domainconfig *config)
-+{
-+    /* Nothing to do at the moment */
-+
-+    return 0;
-+}
-+
-+static void vtimer_expired(void *data)
-+{
-+    panic("%s: TBD\n", __func__);
-+}
-+
-+int vcpu_vtimer_init(struct vcpu *v)
-+{
-+    struct vtimer *t = &v->arch.vtimer;
-+
-+    t->v = v;
-+    init_timer(&t->timer, vtimer_expired, t, v->processor);
-+
-+    v->arch.vtimer_initialized = true;
-+
-+    return 0;
-+}
-+
-+void vcpu_timer_destroy(struct vcpu *v)
-+{
-+    if ( !v->arch.vtimer_initialized )
-+        return;
-+
-+    kill_timer(&v->arch.vtimer.timer);
-+}
+             default:
+                 break;
+             }
 -- 
 2.52.0
 
