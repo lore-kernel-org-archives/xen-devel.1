@@ -4,38 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68888E92717
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Dec 2025 14:23:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1193524.1512226 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86984E8FDCC
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Dec 2025 14:23:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1193399.1512286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC6-0007OC-UH; Sat, 27 Dec 2025 14:22:58 +0000
+	id 1vZVCG-0000sY-HB; Sat, 27 Dec 2025 14:23:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1193524.1512226; Sat, 27 Dec 2025 14:22:58 +0000
+Received: by outflank-mailman (output) from mailman id 1193399.1512286; Sat, 27 Dec 2025 14:23:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC6-0007Li-JX; Sat, 27 Dec 2025 14:22:58 +0000
-Received: by outflank-mailman (input) for mailman id 1193524;
- Fri, 26 Dec 2025 22:54:07 +0000
+	id 1vZVCG-0000sK-DA; Sat, 27 Dec 2025 14:23:08 +0000
+Received: by outflank-mailman (input) for mailman id 1193399;
+ Thu, 25 Dec 2025 23:33:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=z/ld=7A=gmail.com=21cnbao@srs-se1.protection.inumbo.net>)
- id 1vZGhD-0005LS-4R
- for xen-devel@lists.xenproject.org; Fri, 26 Dec 2025 22:54:07 +0000
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [2607:f8b0:4864:20::102a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c781b412-e2ad-11f0-b15c-2bf370ae4941;
- Fri, 26 Dec 2025 23:54:06 +0100 (CET)
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-34ccbf37205so5620298a91.2
- for <xen-devel@lists.xenproject.org>; Fri, 26 Dec 2025 14:54:06 -0800 (PST)
-Received: from barry-desktop.hub ([47.72.129.29])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34e772ac1acsm9981428a91.9.2025.12.26.14.53.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 14:54:03 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=J6E+=67=proton.me=milky_way_303030@srs-se1.protection.inumbo.net>)
+ id 1vYupP-0001bd-BD
+ for xen-devel@lists.xenproject.org; Thu, 25 Dec 2025 23:33:08 +0000
+Received: from mail-106104.protonmail.ch (mail-106104.protonmail.ch
+ [79.135.106.104]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0ede55c1-e1ea-11f0-b15c-2bf370ae4941;
+ Fri, 26 Dec 2025 00:33:03 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,248 +38,739 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c781b412-e2ad-11f0-b15c-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766789645; x=1767394445; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pcGdIc/9DJZ3V/5WVf7vUUbl5wTlCyMzFQWvUiTQ7kw=;
-        b=WU9Q8GH05agHSbpliYDlixm9kYzc2GJD5b+CNpwHkuD9RkdM7ZEDeqwOjJzLTi9Cqk
-         VUG6Mv/20juTkabkrzKq6gfUJFQQ9umTrnge3PGasPe8PIszDGmp9VADCaJFeG7QtI6S
-         uqCrmXJTcyMDZ4KhUn9h8VNxzeBYmo1sao2JmWpBYXsC1i4FhHklDFs1m9AjePRNogkJ
-         ErP7LszBf0PMskExJjTK03HN4rI4JzyZpuO2IpS8tFIpEW+PbfnWe/6wiK4BrDMsQqLi
-         sMziLQVQiRpZ6JOm4iqZ4Tr58Y+bONY2Ywq1AzOrcdu5HesGKCfsONFt3VVDHkhuaMR1
-         zuXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766789645; x=1767394445;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=pcGdIc/9DJZ3V/5WVf7vUUbl5wTlCyMzFQWvUiTQ7kw=;
-        b=hdQW4oYsCkkk2yG6IGZs5LVFzekNWzkcX+MnO4+63e9+Sqo9pFyk/EdNVzeg9PefF1
-         I9XjQeBnXva+iz1eYKITcdSpYosRePSjcPhvOyVsPCniQvJ0hmLJQfbsPM8wKcdlVFun
-         1fWiQ+Dcb2uxwLdPGmZA7/cwWgaOS4jV9EcAjGbXdv613wKvIBNnbW9F4lnkZf/V4mlv
-         lNAhwfho7tt10DtwllKPpj24PMhbXppkOJNjGRpddtp4c9ZTUcO+paaARQKJ4Lli+/DJ
-         H+gzIP7Ru0VSqeBgSz3vr6qg0nPzJBW2KJ4fGh1xPd/jNRP8Mp96mH/8eckEwnCsIZCF
-         NU9w==
-X-Forwarded-Encrypted: i=1; AJvYcCVhPYkL7GlgcIaUNedRs4J6ctrvPirGvn+Oa46ktJyJ2ItGzbwsphrgnvfVhr6RpRIybKgjEhKnbHs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyLMqyi06bIp9pW1nGwg/WeosihDVWw8w+XHC3pFbq3auQ473p2
-	drImO8ewk3G8wJd6szolKMcTSo6KVKMRKQ4MX5BDuhmuAAPVzQSlu3Hk
-X-Gm-Gg: AY/fxX51h9wc4dq/xOTTRXbv0CTlujdIMp/deX6EGViXuj9X8Xke9gYohJvoMUCJlAU
-	f6Wd4f/h3AaDBQEihMrvH4tYWSbJVT8hWh7eSugzh04QLt27cLlOj7DCyPLz0kIe24LNcwj0/E/
-	q6BnN56EVldqC2HnS/cDT1ux9nNOOBY3OJKrrVWSq+mzbsitkAlRR1uGBCsHVcLfl5g/AnBwwnd
-	rKxee1rxQfevl0eVFPFqgVwvpl14RCW1PKL3Eu5J4OIp9Jt5DKhqdHKXkIgz/w19Mw8ep0GuZ90
-	HBeepZuaRiiKkwfBoyswoU89sOF1t1l3OhEvWYRbDh4wTy3Pq+jn3PZ9SOfMKNMNm/KOQT9TRSI
-	mV1xNBB6Ez8JiG69mumw6+sx+pyE65ZmcdOmdVY1ZmlPP777SB0tHfQZXeHGPnd5YR28w8C4LEd
-	O684jQ+d74z9Sw
-X-Google-Smtp-Source: AGHT+IE+oJ1Ft1XOQ1XU6OeA4rerw4thrh1Pz4yYg+rxMS7HW6pD48/QipbV6W5OVknyxXIG+nvg1w==
-X-Received: by 2002:a17:90b:5804:b0:34a:b459:bd10 with SMTP id 98e67ed59e1d1-34e921bf172mr21139744a91.24.1766789644533;
-        Fri, 26 Dec 2025 14:54:04 -0800 (PST)
-From: Barry Song <21cnbao@gmail.com>
-To: catalin.marinas@arm.com,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	will@kernel.org,
-	iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	Barry Song <baohua@kernel.org>,
-	Leon Romanovsky <leon@kernel.org>,
-	Ada Couprie Diaz <ada.coupriediaz@arm.com>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Anshuman Khandual <anshuman.khandual@arm.com>,
-	Ryan Roberts <ryan.roberts@arm.com>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Tangquan Zheng <zhengtangquan@oppo.com>
-Subject: [PATCH v2 6/8] dma-mapping: Support batch mode for dma_direct_{map,unmap}_sg
-Date: Sat, 27 Dec 2025 11:52:46 +1300
-Message-ID: <20251226225254.46197-7-21cnbao@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20251226225254.46197-1-21cnbao@gmail.com>
-References: <20251226225254.46197-1-21cnbao@gmail.com>
+X-Inumbo-ID: 0ede55c1-e1ea-11f0-b15c-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=slzr66k5hffu7elgtpaepuwix4.protonmail; t=1766705581; x=1766964781;
+	bh=7Tr239WhC1bzyzqRw3XyA3F9p1RiddyF6W1+H8Z5Fkk=;
+	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=QSN7NCk+nUwtlg6yd3lBANLLVMihIpBb1QFKmB2hMMqUlfjEQhYgQG8WO+zBgmesX
+	 Sp4XZ+Nu3aq8EfFZORcWeckw9oBcyUQkqLWHSO/bfVfrgmc1UhnrEXn7/DHEpsgEQs
+	 WP+31s0rG8moXzQZv2iuKHrDuaKwakzjojmDKgsFuZi9KPNtdTFai9T7pka/zbr/kZ
+	 oamE0en/IbtXXyUoN8ISv+kom9848aCWl3/lFjrWNwDd7r8mJfR/PAjJuCuh90P9GJ
+	 kOjBrIIkGdu0YmHec66mZATc/yyD5iTCckN+WKsQNUybgPS2uxvZyMo/AVHyoHtRqu
+	 6+qwOCq8XT05w==
+Date: Thu, 25 Dec 2025 23:32:58 +0000
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+From: Milky <milky_way_303030@proton.me>
+Subject: Cpufreq drivers not working on T480S
+Message-ID: <dg8zeLW4X3RWRJt-1jas5pAqHft5GbxYxS5mNwc4ONE8tDEruL1-5a_e-vQu1RdOUWsMXxKe_Igcewy2zcbnOfkaGVG7y6hXLcLd78HI1po=@proton.me>
+Feedback-ID: 171106842:user:proton
+X-Pm-Message-ID: 16091d719555f62d4e5abfb781897edd66943b48
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Barry Song <baohua@kernel.org>
+System is T480s with i5-8250U and Libreboot, booting Qubes R4.2 with Xen 4.=
+17.5.
 
-Leon suggested extending a flush argument to
-dma_direct_unmap_phys(), dma_direct_map_phys(), and
-dma_direct_sync_single_for_cpu(). For single-buffer cases, this
-would use flush=true, while for SG cases flush=false would be
-used, followed by a single flush after all cache operations are
-issued in dma_direct_{map,unmap}_sg().
+I=E2=80=99ve tested the following configurations:
 
-This ultimately benefits dma_map_sg() and dma_unmap_sg().
+1. `GRUB_CMDLINE_XEN_DEFAULT=3D"cpufreq=3Dxen:performance"` as per [the xen=
+ docs](https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html#cpu=
+freq)
+2. `GRUB_CMDLINE_XEN_DEFAULT=3D"cpufreq=3Ddom0-kernel dom0_vcpus_pin"` as p=
+er [the xen wiki](http://wiki.xenproject.org/wiki/Xen_power_management#Doma=
+in0_based_cpufreq); tho I suspect this option might be deprecated.
+3. `GRUB_CMDLINE_XEN_DEFAULT=3D"cpufreq=3Dxen:hwp"`, which should have acti=
+vated [this patch from the Qubes team](https://github.com/QubesOS/qubes-vmm=
+-xen/pull/158).
 
-Cc: Leon Romanovsky <leon@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Robin Murphy <robin.murphy@arm.com>
-Cc: Ada Couprie Diaz <ada.coupriediaz@arm.com>
-Cc: Ard Biesheuvel <ardb@kernel.org>
-Cc: Marc Zyngier <maz@kernel.org>
-Cc: Anshuman Khandual <anshuman.khandual@arm.com>
-Cc: Ryan Roberts <ryan.roberts@arm.com>
-Cc: Suren Baghdasaryan <surenb@google.com>
-Cc: Tangquan Zheng <zhengtangquan@oppo.com>
-Signed-off-by: Barry Song <baohua@kernel.org>
----
- kernel/dma/direct.c  | 17 +++++++++++++----
- kernel/dma/direct.h  | 16 ++++++++++------
- kernel/dma/mapping.c |  6 +++---
- 3 files changed, 26 insertions(+), 13 deletions(-)
+In all cases, `cat /proc/cpuinfo` reports the fixed value `cpu Mhz: 1800`, =
+confirmed also using `dmidecode`. `sysbench` in an AppVM with max vcpus con=
+sistently reports about 1600 events per second, while the dom0 CPU stats in=
+ the previous commands remain unchanged. `xenpm start 10 | grep 'Avg freq'`=
+ reports bizarre values, like `609350368 KHz`.
 
-diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-index 98bacf562ca1..550a1a13148d 100644
---- a/kernel/dma/direct.c
-+++ b/kernel/dma/direct.c
-@@ -447,14 +447,19 @@ void dma_direct_unmap_sg(struct device *dev, struct scatterlist *sgl,
- {
- 	struct scatterlist *sg;
- 	int i;
-+	bool need_sync = false;
- 
- 	for_each_sg(sgl,  sg, nents, i) {
--		if (sg_dma_is_bus_address(sg))
-+		if (sg_dma_is_bus_address(sg)) {
- 			sg_dma_unmark_bus_address(sg);
--		else
-+		} else {
-+			need_sync = true;
- 			dma_direct_unmap_phys(dev, sg->dma_address,
--					      sg_dma_len(sg), dir, attrs);
-+					      sg_dma_len(sg), dir, attrs, false);
-+		}
- 	}
-+	if (need_sync && !dev_is_dma_coherent(dev))
-+		arch_sync_dma_flush();
- }
- #endif
- 
-@@ -464,6 +469,7 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
- 	struct pci_p2pdma_map_state p2pdma_state = {};
- 	struct scatterlist *sg;
- 	int i, ret;
-+	bool need_sync = false;
- 
- 	for_each_sg(sgl, sg, nents, i) {
- 		switch (pci_p2pdma_state(&p2pdma_state, dev, sg_page(sg))) {
-@@ -475,8 +481,9 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
- 			 */
- 			break;
- 		case PCI_P2PDMA_MAP_NONE:
-+			need_sync = true;
- 			sg->dma_address = dma_direct_map_phys(dev, sg_phys(sg),
--					sg->length, dir, attrs);
-+					sg->length, dir, attrs, false);
- 			if (sg->dma_address == DMA_MAPPING_ERROR) {
- 				ret = -EIO;
- 				goto out_unmap;
-@@ -495,6 +502,8 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
- 		sg_dma_len(sg) = sg->length;
- 	}
- 
-+	if (need_sync && !dev_is_dma_coherent(dev))
-+		arch_sync_dma_flush();
- 	return nents;
- 
- out_unmap:
-diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
-index a69326eed266..d4ad79828090 100644
---- a/kernel/dma/direct.h
-+++ b/kernel/dma/direct.h
-@@ -67,13 +67,15 @@ static inline void dma_direct_sync_single_for_device(struct device *dev,
- }
- 
- static inline void dma_direct_sync_single_for_cpu(struct device *dev,
--		dma_addr_t addr, size_t size, enum dma_data_direction dir)
-+		dma_addr_t addr, size_t size, enum dma_data_direction dir,
-+		bool flush)
- {
- 	phys_addr_t paddr = dma_to_phys(dev, addr);
- 
- 	if (!dev_is_dma_coherent(dev)) {
- 		arch_sync_dma_for_cpu(paddr, size, dir);
--		arch_sync_dma_flush();
-+		if (flush)
-+			arch_sync_dma_flush();
- 		arch_sync_dma_for_cpu_all();
- 	}
- 
-@@ -85,7 +87,7 @@ static inline void dma_direct_sync_single_for_cpu(struct device *dev,
- 
- static inline dma_addr_t dma_direct_map_phys(struct device *dev,
- 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
--		unsigned long attrs)
-+		unsigned long attrs, bool flush)
- {
- 	dma_addr_t dma_addr;
- 
-@@ -114,7 +116,8 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
- 	if (!dev_is_dma_coherent(dev) &&
- 	    !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO))) {
- 		arch_sync_dma_for_device(phys, size, dir);
--		arch_sync_dma_flush();
-+		if (flush)
-+			arch_sync_dma_flush();
- 	}
- 	return dma_addr;
- 
-@@ -127,7 +130,8 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
- }
- 
- static inline void dma_direct_unmap_phys(struct device *dev, dma_addr_t addr,
--		size_t size, enum dma_data_direction dir, unsigned long attrs)
-+		size_t size, enum dma_data_direction dir, unsigned long attrs,
-+		bool flush)
- {
- 	phys_addr_t phys;
- 
-@@ -137,7 +141,7 @@ static inline void dma_direct_unmap_phys(struct device *dev, dma_addr_t addr,
- 
- 	phys = dma_to_phys(dev, addr);
- 	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC))
--		dma_direct_sync_single_for_cpu(dev, addr, size, dir);
-+		dma_direct_sync_single_for_cpu(dev, addr, size, dir, flush);
- 
- 	swiotlb_tbl_unmap_single(dev, phys, size, dir,
- 					 attrs | DMA_ATTR_SKIP_CPU_SYNC);
-diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
-index 37163eb49f9f..d8cfa56a3cbb 100644
---- a/kernel/dma/mapping.c
-+++ b/kernel/dma/mapping.c
-@@ -166,7 +166,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
- 
- 	if (dma_map_direct(dev, ops) ||
- 	    (!is_mmio && arch_dma_map_phys_direct(dev, phys + size)))
--		addr = dma_direct_map_phys(dev, phys, size, dir, attrs);
-+		addr = dma_direct_map_phys(dev, phys, size, dir, attrs, true);
- 	else if (use_dma_iommu(dev))
- 		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
- 	else if (ops->map_phys)
-@@ -207,7 +207,7 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
- 	BUG_ON(!valid_dma_direction(dir));
- 	if (dma_map_direct(dev, ops) ||
- 	    (!is_mmio && arch_dma_unmap_phys_direct(dev, addr + size)))
--		dma_direct_unmap_phys(dev, addr, size, dir, attrs);
-+		dma_direct_unmap_phys(dev, addr, size, dir, attrs, true);
- 	else if (use_dma_iommu(dev))
- 		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
- 	else if (ops->unmap_phys)
-@@ -373,7 +373,7 @@ void __dma_sync_single_for_cpu(struct device *dev, dma_addr_t addr, size_t size,
- 
- 	BUG_ON(!valid_dma_direction(dir));
- 	if (dma_map_direct(dev, ops))
--		dma_direct_sync_single_for_cpu(dev, addr, size, dir);
-+		dma_direct_sync_single_for_cpu(dev, addr, size, dir, true);
- 	else if (use_dma_iommu(dev))
- 		iommu_dma_sync_single_for_cpu(dev, addr, size, dir);
- 	else if (ops->sync_single_for_cpu)
--- 
-2.43.0
+The following commands were also checked:
 
+```
+$ xenpm get-cpufreq-para
+[CPU0] failed to get cpufreq parameter
+<...>
+
+$ xenpm get-cpufreq-states
+<no output>
+
+$ lsmod | grep 'xen_acpi_processor'
+<no output>
+
+$ modprobe xen_acpi_processor
+modprobe: ERROR: could not insert 'xen_acpi_processor': No such device
+```
+
+Based on (this Xen mailing list message)[https://old-list-archives.xen.org/=
+archives/html/xen-devel/2020-01/msg02588.html], the `xen-acpi-processor` mo=
+dule is what enables dom0 to pass critical information to Xen. Thus, it see=
+ms a big part of the problem is that `xen-acpi-processor` is refusing to lo=
+ad. =C2=A0
+
+To rule out causes independent of Xen/Qubes, I booted using a Debian Live i=
+mage. `sysbench` consistently reported 4000 events per second, while `/sys/=
+cpuinfo` reliably showed a jump from 900Mhz to 3.4GHz.
+
+In conclusion, only under Qubes/Xen, something seems to block the scaling d=
+rivers from working on this system.
+
+For each of the configurations above, I am pasting the complete output of `=
+xl dmesg`. Let me know if there is anything else I should do.
+
+```
+########################################################################
+# `cpufreq=3Dxen:performance`
+
+(XEN) Built-in command line: ept=3Dexec-sp spec-ctrl=3Dunpriv-mmio
+=C2=A0Xen 4.17.5
+(XEN) Xen version 4.17.5 (mockbuild@[unknown]) (gcc (GCC) 12.3.1 20230508 (=
+Red Hat 12.3.1-1)) debug=3Dn Fri Aug 22 16:12:56 CEST 2025
+(XEN) Latest ChangeSet:
+(XEN) build-id: d2dd0684651dcc833d35869ad2259cb6f0ba1d19
+(XEN) Bootloader: GRUB 2.13
+(XEN) Command line: placeholder cpufreq=3Dxen:performance,verbose loglvl=3D=
+all dom0_mem=3Dmin:1024M dom0_mem=3Dmax:4096M ucode=3Dscan smt=3Doff gnttab=
+_max_frames=3D2048 gnttab_max_maptrack_frames=3D4096 no-real-mode edd=3Doff
+(XEN) Xen image load base address: 0x79200000
+(XEN) Video information:
+(XEN) =C2=A0VGA is text mode 80x25, font 8x16
+(XEN) Disc information:
+(XEN) =C2=A0Found 0 MBR signatures
+(XEN) =C2=A0Found 0 EDD information structures
+(XEN) CPU Vendor: Intel, Family 6 (0x6), Model 142 (0x8e), Stepping 10 (raw=
+ 000806ea)
+(XEN) Multiboot-e820 RAM map:
+(XEN) =C2=A0[0000000000000000, 0000000000000fff] (reserved)
+(XEN) =C2=A0[0000000000001000, 000000000009ffff] (usable)
+(XEN) =C2=A0[00000000000a0000, 00000000000fffff] (reserved)
+(XEN) =C2=A0[0000000000100000, 000000007aa06fff] (usable)
+(XEN) =C2=A0[000000007aa07000, 000000007fffffff] (reserved)
+(XEN) =C2=A0[00000000e0000000, 00000000efffffff] (reserved)
+(XEN) =C2=A0[00000000fd000000, 00000000fe00ffff] (reserved)
+(XEN) =C2=A0[00000000fed10000, 00000000fed19fff] (reserved)
+(XEN) =C2=A0[00000000fed80000, 00000000fed84fff] (reserved)
+(XEN) =C2=A0[00000000fed90000, 00000000fed91fff] (reserved)
+(XEN) =C2=A0[0000000100000000, 0000000a7fffffff] (usable)
+(XEN) ACPI: RSDP 000F6010, 0024 (r2 COREv4)
+(XEN) ACPI: XSDT 7AA0F0E0, 0064 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: FACP 7AA13020, 0114 (r6 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DSDT 7AA0F280, 3D98 (r2 COREv4 COREBOOT 20110725 INTL 20241212)
+(XEN) ACPI: FACS 7AA0F240, 0040
+(XEN) ACPI: SSDT 7AA13140, 08EA (r2 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: MCFG 7AA13A30, 003C (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: LPIT 7AA13A70, 0094 (r0 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: APIC 7AA13B10, 0072 (r3 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: SPCR 7AA13B90, 0058 (r4 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DMAR 7AA13BF0, 0088 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: HPET 7AA13C80, 0038 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) System RAM: 40873MB (41854616kB)
+(XEN) No NUMA configuration found
+(XEN) Faking a node at 0000000000000000-0000000a80000000
+(XEN) Domain heap initialised
+(XEN) SMBIOS 3.0 present.
+(XEN) Using APIC driver default
+(XEN) ACPI: PM-Timer IO Port: 0x1808 (24 bits)
+(XEN) ACPI: v5 SLEEP INFO: control[0:0], status[0:0]
+(XEN) ACPI: SLEEP INFO: pm1x_cnt[1:1804,1:0], pm1x_evt[1:1800,1:0]
+(XEN) ACPI: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 wakeup_vec[7aa0f24c],=
+ vec_size[20]
+(XEN) ACPI: Local APIC address 0xfee00000
+(XEN) ACPI: IOAPIC (id[0x00] address[0xfec00000] gsi_base[0])
+(XEN) IOAPIC[0]: apic_id 0, version 32, address 0xfec00000, GSI 0-119
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 high edge)
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+(XEN) ACPI: IRQ0 used by override.
+(XEN) ACPI: IRQ2 used by override.
+(XEN) ACPI: IRQ9 used by override.
+(XEN) ACPI: HPET id: 0x8086a701 base: 0xfed00000
+(XEN) PCI: MCFG configuration 0: base e0000000 segment 0000 buses 00 - ff
+(XEN) PCI: MCFG area at e0000000 reserved in E820
+(XEN) PCI: Using MCFG for segment 0000 bus 00-ff
+(XEN) Using ACPI (MADT) for SMP configuration information
+(XEN) SMP: Allowing 4 CPUs (0 hotplug CPUs)
+(XEN) IRQ limits: 120 GSI, 840 MSI/MSI-X
+(XEN) Switched to APIC driver x2apic_mixed
+(XEN) BSP microcode revision: 0x000000f6
+(XEN) FIRMWARE BUG: CPU 06-8e-0a, ucode 0x000000f6: RTM_ALWAYS_ABORT vs RTM=
+ mismatch
+(XEN) CPU0: TSC: ratio: 150 / 2
+(XEN) CPU0: bus: 100 MHz base: 1800 MHz max: 3400 MHz
+(XEN) CPU0: 400 ... 1800 MHz
+(XEN) xstate: size: 0x440 and states: 0x1f
+(XEN) CPU0: Intel machine check reporting enabled
+(XEN) Speculative mitigation facilities:
+(XEN) =C2=A0 Hardware hints: RSBA RFDS_NO
+(XEN) =C2=A0 Hardware features: IBPB IBRS STIBP SSBD L1D_FLUSH MD_CLEAR SRB=
+DS_CTRL GDS_CTRL
+(XEN) =C2=A0 Compiled-in support: INDIRECT_THUNK RETURN_THUNK HARDEN_ARRAY =
+HARDEN_BRANCH HARDEN_GUEST_ACCESS HARDEN_LOCK
+(XEN) =C2=A0 Xen settings: BTI-Thunk: JMP, SPEC_CTRL: IBRS+ STIBP+ SSBD-, O=
+ther: SRB_LOCK+ IBPB-ctxt L1D_FLUSH VERW BRANCH_HARDEN
+(XEN) =C2=A0 L1TF: believed vulnerable, maxphysaddr L1D 46, CPUID 39, Safe =
+address 8000000000
+(XEN) =C2=A0 Support for HVM VMs: MSR_SPEC_CTRL MSR_VIRT_SPEC_CTRL RSB EAGE=
+R_FPU
+(XEN) =C2=A0 Support for PV VMs: MSR_SPEC_CTRL EAGER_FPU VERW
+(XEN) =C2=A0 XPTI (64-bit PV only): Dom0 enabled, DomU enabled (with PCID)
+(XEN) =C2=A0 PV L1TF shadowing: Dom0 disabled, DomU enabled
+(XEN) Using scheduler: SMP Credit Scheduler rev2 (credit2)
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Disabling HPET for being unreliable
+(XEN) Platform timer is 3.580MHz ACPI PM Timer
+(XEN) Detected 1799.989 MHz processor.
+(XEN) Freed 1024kB unused BSS memory
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) cpu0: spurious 8259A interrupt: IRQ7
+(XEN) Intel VT-d iommu 0 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d iommu 1 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d Snoop Control not enabled.
+(XEN) Intel VT-d Dom0 DMA Passthrough not enabled.
+(XEN) Intel VT-d Queued Invalidation enabled.
+(XEN) Intel VT-d Interrupt Remapping enabled.
+(XEN) Intel VT-d Posted Interrupt not enabled.
+(XEN) Intel VT-d Shared EPT tables enabled.
+(XEN) I/O virtualisation enabled
+(XEN) =C2=A0- Dom0 mode: Relaxed
+(XEN) Interrupt remapping enabled
+(XEN) nr_sockets: 1
+(XEN) Enabled directed EOI with ioapic_ack_old on!
+(XEN) Enabling APIC mode. =C2=A0Using 1 I/O APICs
+(XEN) ENABLING IO-APIC IRQs
+(XEN) =C2=A0-> Using old ACK method
+(XEN) ..TIMER: vector=3D0xF0 apic1=3D0 pin1=3D2 apic2=3D0 pin2=3D0
+(XEN) TSC deadline timer enabled
+(XEN) Allocated console ring of 32 KiB.
+(XEN) HWP: 1 notify: 1 act-window: 1 energy-perf: 1 pkg-level: 0 peci: 0
+(XEN) HWP: Hardware Duty Cycling (HDC) supported, enabled
+(XEN) HWP: HW_FEEDBACK not supported
+(XEN) Using HWP for cpufreq
+(XEN) mwait-idle: MWAIT substates: 0x11142120
+(XEN) mwait-idle: v0.4.1 model 0x8e
+(XEN) mwait-idle: lapic_timer_reliable_states 0xffffffff
+(XEN) VMX: Supported advanced features:
+(XEN) =C2=A0- APIC MMIO access virtualisation
+(XEN) =C2=A0- APIC TPR shadow
+(XEN) =C2=A0- Extended Page Tables (EPT)
+(XEN) =C2=A0- Virtual-Processor Identifiers (VPID)
+(XEN) =C2=A0- Virtual NMI
+(XEN) =C2=A0- MSR direct-access bitmap
+(XEN) =C2=A0- Unrestricted Guest
+(XEN) =C2=A0- VM Functions
+(XEN) =C2=A0- Virtualisation Exceptions
+(XEN) =C2=A0- Page Modification Logging
+(XEN) HVM: ASIDs enabled.
+(XEN) HVM: VMX enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) detected
+(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) Brought up 4 CPUs
+(XEN) Scheduling granularity: cpu, 1 CPU per sched-resource
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Adding cpu 0 to runqueue 0
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 1 to runqueue 0
+(XEN) Adding cpu 2 to runqueue 1
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 3 to runqueue 1
+(XEN) mcheck_poll: Machine check polling timer started.
+(XEN) NX (Execute Disable) protection active
+(XEN) d0 has maximum 744 PIRQs
+(XEN) *** Building a PV Dom0 ***
+(XEN) =C2=A0Xen =C2=A0kernel: 64-bit, lsb
+(XEN) =C2=A0Dom0 kernel: 64-bit, PAE, lsb, paddr 0x200000 -> 0x3c00000
+(XEN) PHYSICAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Dom0 alloc.: =C2=A0 0000000a58000000->0000000a5c000000 (1022144=
+ pages to be allocated)
+(XEN) =C2=A0Init. ramdisk: 0000000a7d8c0000->0000000a7ffff5b7
+(XEN) VIRTUAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Loaded kernel: ffffffff80200000->ffffffff83c00000
+(XEN) =C2=A0Phys-Mach map: 0000008000000000->0000008000800000
+(XEN) =C2=A0Start info: =C2=A0 =C2=A0ffffffff83c00000->ffffffff83c004b8
+(XEN) =C2=A0Page tables: =C2=A0 ffffffff83c01000->ffffffff83c24000
+(XEN) =C2=A0Boot stack: =C2=A0 =C2=A0ffffffff83c24000->ffffffff83c25000
+(XEN) =C2=A0TOTAL: =C2=A0 =C2=A0 =C2=A0 =C2=A0 ffffffff80000000->ffffffff84=
+000000
+(XEN) =C2=A0ENTRY ADDRESS: ffffffff82b0de00
+(XEN) Dom0 has maximum 4 VCPUs
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+(XEN) Scrubbing Free RAM in background
+(XEN) Std. Loglevel: All
+(XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
+(XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
+(XEN) Freed 668kB init memory
+(XEN) PCI add device 0000:00:00.0
+(XEN) PCI add device 0000:00:02.0
+(XEN) PCI add device 0000:00:04.0
+(XEN) PCI add device 0000:00:14.0
+(XEN) PCI add device 0000:00:14.2
+(XEN) PCI add device 0000:00:1c.0
+(XEN) PCI add device 0000:00:1c.6
+(XEN) PCI add device 0000:00:1d.0
+(XEN) PCI add device 0000:00:1f.0
+(XEN) PCI add device 0000:00:1f.2
+(XEN) PCI add device 0000:00:1f.3
+(XEN) PCI add device 0000:00:1f.6
+(XEN) PCI add device 0000:02:00.0
+(XEN) PCI add device 0000:03:00.0
+(XEN) PCI add device 0000:00:1f.1
+(XEN) PCI remove device 0000:00:1f.1
+
+########################################################################
+# `cpufreq=3Ddom0-kernel dom0_vcpus_pin`
+
+(XEN) Built-in command line: ept=3Dexec-sp spec-ctrl=3Dunpriv-mmio
+=C2=A0Xen 4.17.5
+(XEN) Xen version 4.17.5 (mockbuild@[unknown]) (gcc (GCC) 12.3.1 20230508 (=
+Red Hat 12.3.1-1)) debug=3Dn Fri Aug 22 16:12:56 CEST 2025
+(XEN) Latest ChangeSet:
+(XEN) build-id: d2dd0684651dcc833d35869ad2259cb6f0ba1d19
+(XEN) Bootloader: GRUB 2.13
+(XEN) Command line: placeholder cpufreq=3Ddom0-kernel,verbose dom0_vcpus_pi=
+n loglvl=3Dall dom0_mem=3Dmin:1024M dom0_mem=3Dmax:4096M ucode=3Dscan smt=
+=3Doff gnttab_max_frames=3D2048 gnttab_max_maptrack_frames=3D4096 no-real-m=
+ode edd=3Doff
+(XEN) Xen image load base address: 0x79200000
+(XEN) Video information:
+(XEN) =C2=A0VGA is text mode 80x25, font 8x16
+(XEN) Disc information:
+(XEN) =C2=A0Found 0 MBR signatures
+(XEN) =C2=A0Found 0 EDD information structures
+(XEN) CPU Vendor: Intel, Family 6 (0x6), Model 142 (0x8e), Stepping 10 (raw=
+ 000806ea)
+(XEN) Multiboot-e820 RAM map:
+(XEN) =C2=A0[0000000000000000, 0000000000000fff] (reserved)
+(XEN) =C2=A0[0000000000001000, 000000000009ffff] (usable)
+(XEN) =C2=A0[00000000000a0000, 00000000000fffff] (reserved)
+(XEN) =C2=A0[0000000000100000, 000000007aa06fff] (usable)
+(XEN) =C2=A0[000000007aa07000, 000000007fffffff] (reserved)
+(XEN) =C2=A0[00000000e0000000, 00000000efffffff] (reserved)
+(XEN) =C2=A0[00000000fd000000, 00000000fe00ffff] (reserved)
+(XEN) =C2=A0[00000000fed10000, 00000000fed19fff] (reserved)
+(XEN) =C2=A0[00000000fed80000, 00000000fed84fff] (reserved)
+(XEN) =C2=A0[00000000fed90000, 00000000fed91fff] (reserved)
+(XEN) =C2=A0[0000000100000000, 0000000a7fffffff] (usable)
+(XEN) ACPI: RSDP 000F6010, 0024 (r2 COREv4)
+(XEN) ACPI: XSDT 7AA0F0E0, 0064 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: FACP 7AA13020, 0114 (r6 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DSDT 7AA0F280, 3D98 (r2 COREv4 COREBOOT 20110725 INTL 20241212)
+(XEN) ACPI: FACS 7AA0F240, 0040
+(XEN) ACPI: SSDT 7AA13140, 08EA (r2 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: MCFG 7AA13A30, 003C (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: LPIT 7AA13A70, 0094 (r0 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: APIC 7AA13B10, 0072 (r3 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: SPCR 7AA13B90, 0058 (r4 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DMAR 7AA13BF0, 0088 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: HPET 7AA13C80, 0038 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) System RAM: 40873MB (41854616kB)
+(XEN) No NUMA configuration found
+(XEN) Faking a node at 0000000000000000-0000000a80000000
+(XEN) Domain heap initialised
+(XEN) SMBIOS 3.0 present.
+(XEN) Using APIC driver default
+(XEN) ACPI: PM-Timer IO Port: 0x1808 (24 bits)
+(XEN) ACPI: v5 SLEEP INFO: control[0:0], status[0:0]
+(XEN) ACPI: SLEEP INFO: pm1x_cnt[1:1804,1:0], pm1x_evt[1:1800,1:0]
+(XEN) ACPI: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 wakeup_vec[7aa0f24c],=
+ vec_size[20]
+(XEN) ACPI: Local APIC address 0xfee00000
+(XEN) ACPI: IOAPIC (id[0x00] address[0xfec00000] gsi_base[0])
+(XEN) IOAPIC[0]: apic_id 0, version 32, address 0xfec00000, GSI 0-119
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 high edge)
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+(XEN) ACPI: IRQ0 used by override.
+(XEN) ACPI: IRQ2 used by override.
+(XEN) ACPI: IRQ9 used by override.
+(XEN) ACPI: HPET id: 0x8086a701 base: 0xfed00000
+(XEN) PCI: MCFG configuration 0: base e0000000 segment 0000 buses 00 - ff
+(XEN) PCI: MCFG area at e0000000 reserved in E820
+(XEN) PCI: Using MCFG for segment 0000 bus 00-ff
+(XEN) Using ACPI (MADT) for SMP configuration information
+(XEN) SMP: Allowing 4 CPUs (0 hotplug CPUs)
+(XEN) IRQ limits: 120 GSI, 840 MSI/MSI-X
+(XEN) Switched to APIC driver x2apic_mixed
+(XEN) BSP microcode revision: 0x000000f6
+(XEN) FIRMWARE BUG: CPU 06-8e-0a, ucode 0x000000f6: RTM_ALWAYS_ABORT vs RTM=
+ mismatch
+(XEN) CPU0: TSC: ratio: 150 / 2
+(XEN) CPU0: bus: 100 MHz base: 1800 MHz max: 3400 MHz
+(XEN) CPU0: 400 ... 1800 MHz
+(XEN) xstate: size: 0x440 and states: 0x1f
+(XEN) CPU0: Intel machine check reporting enabled
+(XEN) Speculative mitigation facilities:
+(XEN) =C2=A0 Hardware hints: RSBA RFDS_NO
+(XEN) =C2=A0 Hardware features: IBPB IBRS STIBP SSBD L1D_FLUSH MD_CLEAR SRB=
+DS_CTRL GDS_CTRL
+(XEN) =C2=A0 Compiled-in support: INDIRECT_THUNK RETURN_THUNK HARDEN_ARRAY =
+HARDEN_BRANCH HARDEN_GUEST_ACCESS HARDEN_LOCK
+(XEN) =C2=A0 Xen settings: BTI-Thunk: JMP, SPEC_CTRL: IBRS+ STIBP+ SSBD-, O=
+ther: SRB_LOCK+ IBPB-ctxt L1D_FLUSH VERW BRANCH_HARDEN
+(XEN) =C2=A0 L1TF: believed vulnerable, maxphysaddr L1D 46, CPUID 39, Safe =
+address 8000000000
+(XEN) =C2=A0 Support for HVM VMs: MSR_SPEC_CTRL MSR_VIRT_SPEC_CTRL RSB EAGE=
+R_FPU
+(XEN) =C2=A0 Support for PV VMs: MSR_SPEC_CTRL EAGER_FPU VERW
+(XEN) =C2=A0 XPTI (64-bit PV only): Dom0 enabled, DomU enabled (with PCID)
+(XEN) =C2=A0 PV L1TF shadowing: Dom0 disabled, DomU enabled
+(XEN) Using scheduler: SMP Credit Scheduler rev2 (credit2)
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Disabling HPET for being unreliable
+(XEN) Platform timer is 3.580MHz ACPI PM Timer
+(XEN) Detected 1800.002 MHz processor.
+(XEN) Freed 1024kB unused BSS memory
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) cpu0: spurious 8259A interrupt: IRQ7
+(XEN) Intel VT-d iommu 0 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d iommu 1 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d Snoop Control not enabled.
+(XEN) Intel VT-d Dom0 DMA Passthrough not enabled.
+(XEN) Intel VT-d Queued Invalidation enabled.
+(XEN) Intel VT-d Interrupt Remapping enabled.
+(XEN) Intel VT-d Posted Interrupt not enabled.
+(XEN) Intel VT-d Shared EPT tables enabled.
+(XEN) I/O virtualisation enabled
+(XEN) =C2=A0- Dom0 mode: Relaxed
+(XEN) Interrupt remapping enabled
+(XEN) nr_sockets: 1
+(XEN) Enabled directed EOI with ioapic_ack_old on!
+(XEN) Enabling APIC mode. =C2=A0Using 1 I/O APICs
+(XEN) ENABLING IO-APIC IRQs
+(XEN) =C2=A0-> Using old ACK method
+(XEN) ..TIMER: vector=3D0xF0 apic1=3D0 pin1=3D2 apic2=3D0 pin2=3D0
+(XEN) TSC deadline timer enabled
+(XEN) Allocated console ring of 32 KiB.
+(XEN) mwait-idle: MWAIT substates: 0x11142120
+(XEN) mwait-idle: v0.4.1 model 0x8e
+(XEN) mwait-idle: lapic_timer_reliable_states 0xffffffff
+(XEN) VMX: Supported advanced features:
+(XEN) =C2=A0- APIC MMIO access virtualisation
+(XEN) =C2=A0- APIC TPR shadow
+(XEN) =C2=A0- Extended Page Tables (EPT)
+(XEN) =C2=A0- Virtual-Processor Identifiers (VPID)
+(XEN) =C2=A0- Virtual NMI
+(XEN) =C2=A0- MSR direct-access bitmap
+(XEN) =C2=A0- Unrestricted Guest
+(XEN) =C2=A0- VM Functions
+(XEN) =C2=A0- Virtualisation Exceptions
+(XEN) =C2=A0- Page Modification Logging
+(XEN) HVM: ASIDs enabled.
+(XEN) HVM: VMX enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) detected
+(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) Brought up 4 CPUs
+(XEN) Scheduling granularity: cpu, 1 CPU per sched-resource
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Adding cpu 0 to runqueue 0
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 1 to runqueue 0
+(XEN) Adding cpu 2 to runqueue 1
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 3 to runqueue 1
+(XEN) mcheck_poll: Machine check polling timer started.
+(XEN) NX (Execute Disable) protection active
+(XEN) d0 has maximum 744 PIRQs
+(XEN) *** Building a PV Dom0 ***
+(XEN) =C2=A0Xen =C2=A0kernel: 64-bit, lsb
+(XEN) =C2=A0Dom0 kernel: 64-bit, PAE, lsb, paddr 0x200000 -> 0x3c00000
+(XEN) PHYSICAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Dom0 alloc.: =C2=A0 0000000a58000000->0000000a5c000000 (1022144=
+ pages to be allocated)
+(XEN) =C2=A0Init. ramdisk: 0000000a7d8c0000->0000000a7ffff5b7
+(XEN) VIRTUAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Loaded kernel: ffffffff80200000->ffffffff83c00000
+(XEN) =C2=A0Phys-Mach map: 0000008000000000->0000008000800000
+(XEN) =C2=A0Start info: =C2=A0 =C2=A0ffffffff83c00000->ffffffff83c004b8
+(XEN) =C2=A0Page tables: =C2=A0 ffffffff83c01000->ffffffff83c24000
+(XEN) =C2=A0Boot stack: =C2=A0 =C2=A0ffffffff83c24000->ffffffff83c25000
+(XEN) =C2=A0TOTAL: =C2=A0 =C2=A0 =C2=A0 =C2=A0 ffffffff80000000->ffffffff84=
+000000
+(XEN) =C2=A0ENTRY ADDRESS: ffffffff82b0de00
+(XEN) Dom0 has maximum 4 VCPUs
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+(XEN) Scrubbing Free RAM in background
+(XEN) Std. Loglevel: All
+(XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
+(XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
+(XEN) Freed 668kB init memory
+(XEN) PCI add device 0000:00:00.0
+(XEN) PCI add device 0000:00:02.0
+(XEN) PCI add device 0000:00:04.0
+(XEN) PCI add device 0000:00:14.0
+(XEN) PCI add device 0000:00:14.2
+(XEN) PCI add device 0000:00:1c.0
+(XEN) PCI add device 0000:00:1c.6
+(XEN) PCI add device 0000:00:1d.0
+(XEN) PCI add device 0000:00:1f.0
+(XEN) PCI add device 0000:00:1f.2
+(XEN) PCI add device 0000:00:1f.3
+(XEN) PCI add device 0000:00:1f.6
+(XEN) PCI add device 0000:02:00.0
+(XEN) PCI add device 0000:03:00.0
+(XEN) PCI add device 0000:00:1f.1
+(XEN) PCI remove device 0000:00:1f.1
+
+########################################################################
+# `cpufreq=3Dxen:hwp`
+
+(XEN) Built-in command line: ept=3Dexec-sp spec-ctrl=3Dunpriv-mmio
+=C2=A0Xen 4.17.5
+(XEN) Xen version 4.17.5 (mockbuild@[unknown]) (gcc (GCC) 12.3.1 20230508 (=
+Red Hat 12.3.1-1)) debug=3Dn Fri Aug 22 16:12:56 CEST 2025
+(XEN) Latest ChangeSet:
+(XEN) build-id: d2dd0684651dcc833d35869ad2259cb6f0ba1d19
+(XEN) Bootloader: GRUB 2.13
+(XEN) Command line: placeholder cpufreq=3Dxen:hwp,verbose loglvl=3Dall dom0=
+_mem=3Dmin:1024M dom0_mem=3Dmax:4096M ucode=3Dscan smt=3Doff gnttab_max_fra=
+mes=3D2048 gnttab_max_maptrack_frames=3D4096 no-real-mode edd=3Doff
+(XEN) Xen image load base address: 0x79200000
+(XEN) Video information:
+(XEN) =C2=A0VGA is text mode 80x25, font 8x16
+(XEN) Disc information:
+(XEN) =C2=A0Found 0 MBR signatures
+(XEN) =C2=A0Found 0 EDD information structures
+(XEN) CPU Vendor: Intel, Family 6 (0x6), Model 142 (0x8e), Stepping 10 (raw=
+ 000806ea)
+(XEN) Multiboot-e820 RAM map:
+(XEN) =C2=A0[0000000000000000, 0000000000000fff] (reserved)
+(XEN) =C2=A0[0000000000001000, 000000000009ffff] (usable)
+(XEN) =C2=A0[00000000000a0000, 00000000000fffff] (reserved)
+(XEN) =C2=A0[0000000000100000, 000000007aa06fff] (usable)
+(XEN) =C2=A0[000000007aa07000, 000000007fffffff] (reserved)
+(XEN) =C2=A0[00000000e0000000, 00000000efffffff] (reserved)
+(XEN) =C2=A0[00000000fd000000, 00000000fe00ffff] (reserved)
+(XEN) =C2=A0[00000000fed10000, 00000000fed19fff] (reserved)
+(XEN) =C2=A0[00000000fed80000, 00000000fed84fff] (reserved)
+(XEN) =C2=A0[00000000fed90000, 00000000fed91fff] (reserved)
+(XEN) =C2=A0[0000000100000000, 0000000a7fffffff] (usable)
+(XEN) ACPI: RSDP 000F6010, 0024 (r2 COREv4)
+(XEN) ACPI: XSDT 7AA0F0E0, 0064 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: FACP 7AA13020, 0114 (r6 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DSDT 7AA0F280, 3D98 (r2 COREv4 COREBOOT 20110725 INTL 20241212)
+(XEN) ACPI: FACS 7AA0F240, 0040
+(XEN) ACPI: SSDT 7AA13140, 08EA (r2 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: MCFG 7AA13A30, 003C (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: LPIT 7AA13A70, 0094 (r0 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: APIC 7AA13B10, 0072 (r3 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: SPCR 7AA13B90, 0058 (r4 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: DMAR 7AA13BF0, 0088 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) ACPI: HPET 7AA13C80, 0038 (r1 COREv4 COREBOOT =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00 CORE 20241212)
+(XEN) System RAM: 40873MB (41854616kB)
+(XEN) No NUMA configuration found
+(XEN) Faking a node at 0000000000000000-0000000a80000000
+(XEN) Domain heap initialised
+(XEN) SMBIOS 3.0 present.
+(XEN) Using APIC driver default
+(XEN) ACPI: PM-Timer IO Port: 0x1808 (24 bits)
+(XEN) ACPI: v5 SLEEP INFO: control[0:0], status[0:0]
+(XEN) ACPI: SLEEP INFO: pm1x_cnt[1:1804,1:0], pm1x_evt[1:1800,1:0]
+(XEN) ACPI: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 wakeup_vec[7aa0f24c],=
+ vec_size[20]
+(XEN) ACPI: Local APIC address 0xfee00000
+(XEN) ACPI: IOAPIC (id[0x00] address[0xfec00000] gsi_base[0])
+(XEN) IOAPIC[0]: apic_id 0, version 32, address 0xfec00000, GSI 0-119
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 high edge)
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+(XEN) ACPI: IRQ0 used by override.
+(XEN) ACPI: IRQ2 used by override.
+(XEN) ACPI: IRQ9 used by override.
+(XEN) ACPI: HPET id: 0x8086a701 base: 0xfed00000
+(XEN) PCI: MCFG configuration 0: base e0000000 segment 0000 buses 00 - ff
+(XEN) PCI: MCFG area at e0000000 reserved in E820
+(XEN) PCI: Using MCFG for segment 0000 bus 00-ff
+(XEN) Using ACPI (MADT) for SMP configuration information
+(XEN) SMP: Allowing 4 CPUs (0 hotplug CPUs)
+(XEN) IRQ limits: 120 GSI, 840 MSI/MSI-X
+(XEN) Switched to APIC driver x2apic_mixed
+(XEN) BSP microcode revision: 0x000000f6
+(XEN) FIRMWARE BUG: CPU 06-8e-0a, ucode 0x000000f6: RTM_ALWAYS_ABORT vs RTM=
+ mismatch
+(XEN) CPU0: TSC: ratio: 150 / 2
+(XEN) CPU0: bus: 100 MHz base: 1800 MHz max: 3400 MHz
+(XEN) CPU0: 400 ... 1800 MHz
+(XEN) xstate: size: 0x440 and states: 0x1f
+(XEN) CPU0: Intel machine check reporting enabled
+(XEN) Speculative mitigation facilities:
+(XEN) =C2=A0 Hardware hints: RSBA RFDS_NO
+(XEN) =C2=A0 Hardware features: IBPB IBRS STIBP SSBD L1D_FLUSH MD_CLEAR SRB=
+DS_CTRL GDS_CTRL
+(XEN) =C2=A0 Compiled-in support: INDIRECT_THUNK RETURN_THUNK HARDEN_ARRAY =
+HARDEN_BRANCH HARDEN_GUEST_ACCESS HARDEN_LOCK
+(XEN) =C2=A0 Xen settings: BTI-Thunk: JMP, SPEC_CTRL: IBRS+ STIBP+ SSBD-, O=
+ther: SRB_LOCK+ IBPB-ctxt L1D_FLUSH VERW BRANCH_HARDEN
+(XEN) =C2=A0 L1TF: believed vulnerable, maxphysaddr L1D 46, CPUID 39, Safe =
+address 8000000000
+(XEN) =C2=A0 Support for HVM VMs: MSR_SPEC_CTRL MSR_VIRT_SPEC_CTRL RSB EAGE=
+R_FPU
+(XEN) =C2=A0 Support for PV VMs: MSR_SPEC_CTRL EAGER_FPU VERW
+(XEN) =C2=A0 XPTI (64-bit PV only): Dom0 enabled, DomU enabled (with PCID)
+(XEN) =C2=A0 PV L1TF shadowing: Dom0 disabled, DomU enabled
+(XEN) Using scheduler: SMP Credit Scheduler rev2 (credit2)
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Disabling HPET for being unreliable
+(XEN) Platform timer is 3.580MHz ACPI PM Timer
+(XEN) Detected 1799.993 MHz processor.
+(XEN) Freed 1024kB unused BSS memory
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) cpu0: spurious 8259A interrupt: IRQ7
+(XEN) Intel VT-d iommu 0 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d iommu 1 supported page sizes: 4kB, 2MB, 1GB
+(XEN) Intel VT-d Snoop Control not enabled.
+(XEN) Intel VT-d Dom0 DMA Passthrough not enabled.
+(XEN) Intel VT-d Queued Invalidation enabled.
+(XEN) Intel VT-d Interrupt Remapping enabled.
+(XEN) Intel VT-d Posted Interrupt not enabled.
+(XEN) Intel VT-d Shared EPT tables enabled.
+(XEN) I/O virtualisation enabled
+(XEN) =C2=A0- Dom0 mode: Relaxed
+(XEN) Interrupt remapping enabled
+(XEN) nr_sockets: 1
+(XEN) Enabled directed EOI with ioapic_ack_old on!
+(XEN) Enabling APIC mode. =C2=A0Using 1 I/O APICs
+(XEN) ENABLING IO-APIC IRQs
+(XEN) =C2=A0-> Using old ACK method
+(XEN) ..TIMER: vector=3D0xF0 apic1=3D0 pin1=3D2 apic2=3D0 pin2=3D0
+(XEN) TSC deadline timer enabled
+(XEN) Allocated console ring of 32 KiB.
+(XEN) HWP: 1 notify: 1 act-window: 1 energy-perf: 1 pkg-level: 0 peci: 0
+(XEN) HWP: Hardware Duty Cycling (HDC) supported, enabled
+(XEN) HWP: HW_FEEDBACK not supported
+(XEN) Using HWP for cpufreq
+(XEN) mwait-idle: MWAIT substates: 0x11142120
+(XEN) mwait-idle: v0.4.1 model 0x8e
+(XEN) mwait-idle: lapic_timer_reliable_states 0xffffffff
+(XEN) VMX: Supported advanced features:
+(XEN) =C2=A0- APIC MMIO access virtualisation
+(XEN) =C2=A0- APIC TPR shadow
+(XEN) =C2=A0- Extended Page Tables (EPT)
+(XEN) =C2=A0- Virtual-Processor Identifiers (VPID)
+(XEN) =C2=A0- Virtual NMI
+(XEN) =C2=A0- MSR direct-access bitmap
+(XEN) =C2=A0- Unrestricted Guest
+(XEN) =C2=A0- VM Functions
+(XEN) =C2=A0- Virtualisation Exceptions
+(XEN) =C2=A0- Page Modification Logging
+(XEN) HVM: ASIDs enabled.
+(XEN) HVM: VMX enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) detected
+(XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
+(XEN) alt table ffff82d04042bf70 -> ffff82d04043b3f2
+(XEN) Brought up 4 CPUs
+(XEN) Scheduling granularity: cpu, 1 CPU per sched-resource
+(XEN) Initializing Credit2 scheduler
+(XEN) =C2=A0load_precision_shift: 18
+(XEN) =C2=A0load_window_shift: 30
+(XEN) =C2=A0underload_balance_tolerance: 0
+(XEN) =C2=A0overload_balance_tolerance: -3
+(XEN) =C2=A0runqueues arrangement: socket
+(XEN) =C2=A0cap enforcement granularity: 10ms
+(XEN) load tracking window length 1073741824 ns
+(XEN) Adding cpu 0 to runqueue 0
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 1 to runqueue 0
+(XEN) Adding cpu 2 to runqueue 1
+(XEN) =C2=A0First cpu on runqueue, activating
+(XEN) Adding cpu 3 to runqueue 1
+(XEN) mcheck_poll: Machine check polling timer started.
+(XEN) NX (Execute Disable) protection active
+(XEN) d0 has maximum 744 PIRQs
+(XEN) *** Building a PV Dom0 ***
+(XEN) =C2=A0Xen =C2=A0kernel: 64-bit, lsb
+(XEN) =C2=A0Dom0 kernel: 64-bit, PAE, lsb, paddr 0x200000 -> 0x3c00000
+(XEN) PHYSICAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Dom0 alloc.: =C2=A0 0000000a58000000->0000000a5c000000 (1022144=
+ pages to be allocated)
+(XEN) =C2=A0Init. ramdisk: 0000000a7d8c0000->0000000a7ffff5b7
+(XEN) VIRTUAL MEMORY ARRANGEMENT:
+(XEN) =C2=A0Loaded kernel: ffffffff80200000->ffffffff83c00000
+(XEN) =C2=A0Phys-Mach map: 0000008000000000->0000008000800000
+(XEN) =C2=A0Start info: =C2=A0 =C2=A0ffffffff83c00000->ffffffff83c004b8
+(XEN) =C2=A0Page tables: =C2=A0 ffffffff83c01000->ffffffff83c24000
+(XEN) =C2=A0Boot stack: =C2=A0 =C2=A0ffffffff83c24000->ffffffff83c25000
+(XEN) =C2=A0TOTAL: =C2=A0 =C2=A0 =C2=A0 =C2=A0 ffffffff80000000->ffffffff84=
+000000
+(XEN) =C2=A0ENTRY ADDRESS: ffffffff82b0de00
+(XEN) Dom0 has maximum 4 VCPUs
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+(XEN) Scrubbing Free RAM in background
+(XEN) Std. Loglevel: All
+(XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
+(XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
+(XEN) Freed 668kB init memory
+(XEN) PCI add device 0000:00:00.0
+(XEN) PCI add device 0000:00:02.0
+(XEN) PCI add device 0000:00:04.0
+(XEN) PCI add device 0000:00:14.0
+(XEN) PCI add device 0000:00:14.2
+(XEN) PCI add device 0000:00:1c.0
+(XEN) PCI add device 0000:00:1c.6
+(XEN) PCI add device 0000:00:1d.0
+(XEN) PCI add device 0000:00:1f.0
+(XEN) PCI add device 0000:00:1f.2
+(XEN) PCI add device 0000:00:1f.3
+(XEN) PCI add device 0000:00:1f.6
+(XEN) PCI add device 0000:02:00.0
+(XEN) PCI add device 0000:03:00.0
+(XEN) PCI add device 0000:00:1f.1
+(XEN) PCI remove device 0000:00:1f.1
+```
 
