@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C41BE92718
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68888E92717
 	for <xen-devel@archiver.kernel.org>; Sat, 27 Dec 2025 14:23:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1193528.1512238 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1193524.1512226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC7-0007af-F0; Sat, 27 Dec 2025 14:22:59 +0000
+	id 1vZVC6-0007OC-UH; Sat, 27 Dec 2025 14:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1193528.1512238; Sat, 27 Dec 2025 14:22:59 +0000
+Received: by outflank-mailman (output) from mailman id 1193524.1512226; Sat, 27 Dec 2025 14:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC7-0007Xk-44; Sat, 27 Dec 2025 14:22:59 +0000
-Received: by outflank-mailman (input) for mailman id 1193528;
- Fri, 26 Dec 2025 22:54:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vZVC6-0007Li-JX; Sat, 27 Dec 2025 14:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 1193524;
+ Fri, 26 Dec 2025 22:54:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=z/ld=7A=gmail.com=21cnbao@srs-se1.protection.inumbo.net>)
- id 1vZGhS-0005PO-Lm
- for xen-devel@lists.xenproject.org; Fri, 26 Dec 2025 22:54:22 +0000
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [2607:f8b0:4864:20::102b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d04d09cc-e2ad-11f0-9ccf-f158ae23cfc8;
- Fri, 26 Dec 2025 23:54:21 +0100 (CET)
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-34c27d14559so5934637a91.2
- for <xen-devel@lists.xenproject.org>; Fri, 26 Dec 2025 14:54:20 -0800 (PST)
+ id 1vZGhD-0005LS-4R
+ for xen-devel@lists.xenproject.org; Fri, 26 Dec 2025 22:54:07 +0000
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [2607:f8b0:4864:20::102a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c781b412-e2ad-11f0-b15c-2bf370ae4941;
+ Fri, 26 Dec 2025 23:54:06 +0100 (CET)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-34ccbf37205so5620298a91.2
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Dec 2025 14:54:06 -0800 (PST)
 Received: from barry-desktop.hub ([47.72.129.29])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34e772ac1acsm9981428a91.9.2025.12.26.14.54.12
+ 98e67ed59e1d1-34e772ac1acsm9981428a91.9.2025.12.26.14.53.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 14:54:18 -0800 (PST)
+ Fri, 26 Dec 2025 14:54:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,44 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d04d09cc-e2ad-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: c781b412-e2ad-11f0-b15c-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766789659; x=1767394459; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1766789645; x=1767394445; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=beONI3EcXYpecg+Q1bsEm+B77vz1JdIzHQgAsq5N5yU=;
-        b=Bi+d2Xe6EpYxalXODCZaNgz1pxYc+/9EgXuB1brz7fM+MjinuVIIO8zW0xOQnN3a3P
-         4JO8+ZLoIKPuitnMaSxsmZ5daFpXV/r3zXdLXJ1EQ0kz/1GfCiXbxbLdbtEAofT9czIV
-         3DPwNecDjBHeA7QMMIkLpG3Q8bpMrfNb/Ecqoi4XKUwJ4doU4iZdkOi4XgfLiezht/i4
-         4m5INJ02Hn6wnb1O09G4MbYS3v+hEaODE28mlJgXBS7Y42FZetQAowA7NYhLrc4wIqUP
-         70OW3KOG6ObB/DiFmeASK557lu/jW8XLHsEB88QJvHgXrfwB9T2VMIWZa0/suuOUckas
-         nVOw==
+        bh=pcGdIc/9DJZ3V/5WVf7vUUbl5wTlCyMzFQWvUiTQ7kw=;
+        b=WU9Q8GH05agHSbpliYDlixm9kYzc2GJD5b+CNpwHkuD9RkdM7ZEDeqwOjJzLTi9Cqk
+         VUG6Mv/20juTkabkrzKq6gfUJFQQ9umTrnge3PGasPe8PIszDGmp9VADCaJFeG7QtI6S
+         uqCrmXJTcyMDZ4KhUn9h8VNxzeBYmo1sao2JmWpBYXsC1i4FhHklDFs1m9AjePRNogkJ
+         ErP7LszBf0PMskExJjTK03HN4rI4JzyZpuO2IpS8tFIpEW+PbfnWe/6wiK4BrDMsQqLi
+         sMziLQVQiRpZ6JOm4iqZ4Tr58Y+bONY2Ywq1AzOrcdu5HesGKCfsONFt3VVDHkhuaMR1
+         zuXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766789659; x=1767394459;
+        d=1e100.net; s=20230601; t=1766789645; x=1767394445;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=beONI3EcXYpecg+Q1bsEm+B77vz1JdIzHQgAsq5N5yU=;
-        b=hWUvpnfuf0G91bIS53viuycXK+nT6P0eKLs7Q8f3eGLZmKg4+vuativTThgoX7K1OZ
-         9rWmOxpLl1GGshPuev5qAzs5XTNX7DQTGgkl8vlmXzqTxHCMHPouNbPePexQUVIebakW
-         GIC07FPKKd61Ja7jg3R8nuPnsTyoHHmH6vcxSf8KCS/sto1bdrGU8fqmx/XzypQ/fF4c
-         KaB3Q+YxQW6ze5zdN0ehKLOlXRghyNM1NNpg8cjfq1gD1OVNLBKSXEeqzv+vk6HSPcdy
-         sQYSZ3XF7gfJb2KMUrKGExVv/8QXZjX8Uxo5u/GEAPZ3eQvWOKEfJRjqk/Ll+RKEXrzk
-         VApA==
-X-Forwarded-Encrypted: i=1; AJvYcCWCdj1ThwzaO8YgkVF5xD61AfUfZ2pJfF6tSG61ONAGcyblinzMFnLKUOCkkVMEOClroswzRlXKm8k=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxKy3Phzog8acydMw94lQYXT3bt0MDC03DLhRJL3HJ/S23QvPnc
-	xNUa5maNcjrTsDNLtG3cHWfCuyNjjZq6v7FX/bjvWUpfSZTe4vuDkAS4
-X-Gm-Gg: AY/fxX5OEfhNguJ920YDimAphHQTYlCBvexY21xzxlUGsd7w7MMU0P+qoule5XIhmWd
-	OolVKYUk4l1P/h73jPfd/+obAnO9jrLYg0DKloDS3MUaSu7VKtJq8KQv1LEs96AGdEpD6XRwGoq
-	CeUOmAUu09GesIuUKBBuxtf10+f5ogTsWIIt3exyxN0V+VAgN04kEOMIkdtu/Xg1gVYQwsSa73C
-	tomTSjyap4kKn3Pp9SFlP94BRTIaAlI9bZOSSvYtTWvindr2/iJ24owVuuaBSpR8ztTkA4SG/PX
-	5Fo3HcdzHDrGhKe3YG5Ip4yn3Qtbbcbk7pkvbzCW5070jWx/y1h6Rnp2RXB/3LZNZct1nhWXhrh
-	MtMYXXT9vM/JXCMvdk+Ec03kf3Z3vF3scyfNRa3aRLySqpF4eDyBMQIhQMEQ+DJvcIjPzdw4js1
-	2QCtOSxHsCsmPU
-X-Google-Smtp-Source: AGHT+IF3FBOgnhAE+C4yK80l6tVlXmB4Rfi7fJf1frV3RXQh1+Ry7oysljXY9g9IJMnKqHJpP4IhrA==
-X-Received: by 2002:a17:90b:2787:b0:33b:cbb2:31ed with SMTP id 98e67ed59e1d1-34e91f6398cmr20025228a91.0.1766789659345;
-        Fri, 26 Dec 2025 14:54:19 -0800 (PST)
+        bh=pcGdIc/9DJZ3V/5WVf7vUUbl5wTlCyMzFQWvUiTQ7kw=;
+        b=hdQW4oYsCkkk2yG6IGZs5LVFzekNWzkcX+MnO4+63e9+Sqo9pFyk/EdNVzeg9PefF1
+         I9XjQeBnXva+iz1eYKITcdSpYosRePSjcPhvOyVsPCniQvJ0hmLJQfbsPM8wKcdlVFun
+         1fWiQ+Dcb2uxwLdPGmZA7/cwWgaOS4jV9EcAjGbXdv613wKvIBNnbW9F4lnkZf/V4mlv
+         lNAhwfho7tt10DtwllKPpj24PMhbXppkOJNjGRpddtp4c9ZTUcO+paaARQKJ4Lli+/DJ
+         H+gzIP7Ru0VSqeBgSz3vr6qg0nPzJBW2KJ4fGh1xPd/jNRP8Mp96mH/8eckEwnCsIZCF
+         NU9w==
+X-Forwarded-Encrypted: i=1; AJvYcCVhPYkL7GlgcIaUNedRs4J6ctrvPirGvn+Oa46ktJyJ2ItGzbwsphrgnvfVhr6RpRIybKgjEhKnbHs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyLMqyi06bIp9pW1nGwg/WeosihDVWw8w+XHC3pFbq3auQ473p2
+	drImO8ewk3G8wJd6szolKMcTSo6KVKMRKQ4MX5BDuhmuAAPVzQSlu3Hk
+X-Gm-Gg: AY/fxX51h9wc4dq/xOTTRXbv0CTlujdIMp/deX6EGViXuj9X8Xke9gYohJvoMUCJlAU
+	f6Wd4f/h3AaDBQEihMrvH4tYWSbJVT8hWh7eSugzh04QLt27cLlOj7DCyPLz0kIe24LNcwj0/E/
+	q6BnN56EVldqC2HnS/cDT1ux9nNOOBY3OJKrrVWSq+mzbsitkAlRR1uGBCsHVcLfl5g/AnBwwnd
+	rKxee1rxQfevl0eVFPFqgVwvpl14RCW1PKL3Eu5J4OIp9Jt5DKhqdHKXkIgz/w19Mw8ep0GuZ90
+	HBeepZuaRiiKkwfBoyswoU89sOF1t1l3OhEvWYRbDh4wTy3Pq+jn3PZ9SOfMKNMNm/KOQT9TRSI
+	mV1xNBB6Ez8JiG69mumw6+sx+pyE65ZmcdOmdVY1ZmlPP777SB0tHfQZXeHGPnd5YR28w8C4LEd
+	O684jQ+d74z9Sw
+X-Google-Smtp-Source: AGHT+IE+oJ1Ft1XOQ1XU6OeA4rerw4thrh1Pz4yYg+rxMS7HW6pD48/QipbV6W5OVknyxXIG+nvg1w==
+X-Received: by 2002:a17:90b:5804:b0:34a:b459:bd10 with SMTP id 98e67ed59e1d1-34e921bf172mr21139744a91.24.1766789644533;
+        Fri, 26 Dec 2025 14:54:04 -0800 (PST)
 From: Barry Song <21cnbao@gmail.com>
 To: catalin.marinas@arm.com,
 	m.szyprowski@samsung.com,
@@ -102,11 +102,10 @@ Cc: linux-kernel@vger.kernel.org,
 	Anshuman Khandual <anshuman.khandual@arm.com>,
 	Ryan Roberts <ryan.roberts@arm.com>,
 	Suren Baghdasaryan <surenb@google.com>,
-	Joerg Roedel <joro@8bytes.org>,
 	Tangquan Zheng <zhengtangquan@oppo.com>
-Subject: [PATCH RFC v2 8/8] dma-iommu: Support DMA sync batch mode for iommu_dma_sync_sg_for_{cpu, device}
-Date: Sat, 27 Dec 2025 11:52:48 +1300
-Message-ID: <20251226225254.46197-9-21cnbao@gmail.com>
+Subject: [PATCH v2 6/8] dma-mapping: Support batch mode for dma_direct_{map,unmap}_sg
+Date: Sat, 27 Dec 2025 11:52:46 +1300
+Message-ID: <20251226225254.46197-7-21cnbao@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20251226225254.46197-1-21cnbao@gmail.com>
 References: <20251226225254.46197-1-21cnbao@gmail.com>
@@ -115,70 +114,180 @@ Content-Transfer-Encoding: 8bit
 
 From: Barry Song <baohua@kernel.org>
 
-Apply batched DMA synchronization to iommu_dma_sync_sg_for_cpu() and
-iommu_dma_sync_sg_for_device(). For all buffers in an SG list, only
-a single flush operation is needed.
+Leon suggested extending a flush argument to
+dma_direct_unmap_phys(), dma_direct_map_phys(), and
+dma_direct_sync_single_for_cpu(). For single-buffer cases, this
+would use flush=true, while for SG cases flush=false would be
+used, followed by a single flush after all cache operations are
+issued in dma_direct_{map,unmap}_sg().
 
-I do not have the hardware to test this, so the patch is marked as
-RFC. I would greatly appreciate any testing feedback.
+This ultimately benefits dma_map_sg() and dma_unmap_sg().
 
 Cc: Leon Romanovsky <leon@kernel.org>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Catalin Marinas <catalin.marinas@arm.com>
 Cc: Will Deacon <will@kernel.org>
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Robin Murphy <robin.murphy@arm.com>
 Cc: Ada Couprie Diaz <ada.coupriediaz@arm.com>
 Cc: Ard Biesheuvel <ardb@kernel.org>
 Cc: Marc Zyngier <maz@kernel.org>
 Cc: Anshuman Khandual <anshuman.khandual@arm.com>
 Cc: Ryan Roberts <ryan.roberts@arm.com>
 Cc: Suren Baghdasaryan <surenb@google.com>
-Cc: Robin Murphy <robin.murphy@arm.com>
-Cc: Joerg Roedel <joro@8bytes.org>
 Cc: Tangquan Zheng <zhengtangquan@oppo.com>
 Signed-off-by: Barry Song <baohua@kernel.org>
 ---
- drivers/iommu/dma-iommu.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ kernel/dma/direct.c  | 17 +++++++++++++----
+ kernel/dma/direct.h  | 16 ++++++++++------
+ kernel/dma/mapping.c |  6 +++---
+ 3 files changed, 26 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
-index ffa940bdbbaf..b68dbfcb7846 100644
---- a/drivers/iommu/dma-iommu.c
-+++ b/drivers/iommu/dma-iommu.c
-@@ -1131,10 +1131,9 @@ void iommu_dma_sync_sg_for_cpu(struct device *dev, struct scatterlist *sgl,
- 			iommu_dma_sync_single_for_cpu(dev, sg_dma_address(sg),
- 						      sg->length, dir);
- 	} else if (!dev_is_dma_coherent(dev)) {
--		for_each_sg(sgl, sg, nelems, i) {
-+		for_each_sg(sgl, sg, nelems, i)
- 			arch_sync_dma_for_cpu(sg_phys(sg), sg->length, dir);
--			arch_sync_dma_flush();
--		}
-+		arch_sync_dma_flush();
- 	}
- }
- 
-@@ -1144,16 +1143,16 @@ void iommu_dma_sync_sg_for_device(struct device *dev, struct scatterlist *sgl,
+diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
+index 98bacf562ca1..550a1a13148d 100644
+--- a/kernel/dma/direct.c
++++ b/kernel/dma/direct.c
+@@ -447,14 +447,19 @@ void dma_direct_unmap_sg(struct device *dev, struct scatterlist *sgl,
+ {
  	struct scatterlist *sg;
  	int i;
++	bool need_sync = false;
  
--	if (sg_dma_is_swiotlb(sgl))
-+	if (sg_dma_is_swiotlb(sgl)) {
- 		for_each_sg(sgl, sg, nelems, i)
- 			iommu_dma_sync_single_for_device(dev,
- 							 sg_dma_address(sg),
- 							 sg->length, dir);
--	else if (!dev_is_dma_coherent(dev))
--		for_each_sg(sgl, sg, nelems, i) {
-+	} else if (!dev_is_dma_coherent(dev)) {
-+		for_each_sg(sgl, sg, nelems, i)
- 			arch_sync_dma_for_device(sg_phys(sg), sg->length, dir);
--			arch_sync_dma_flush();
--		}
+ 	for_each_sg(sgl,  sg, nents, i) {
+-		if (sg_dma_is_bus_address(sg))
++		if (sg_dma_is_bus_address(sg)) {
+ 			sg_dma_unmark_bus_address(sg);
+-		else
++		} else {
++			need_sync = true;
+ 			dma_direct_unmap_phys(dev, sg->dma_address,
+-					      sg_dma_len(sg), dir, attrs);
++					      sg_dma_len(sg), dir, attrs, false);
++		}
+ 	}
++	if (need_sync && !dev_is_dma_coherent(dev))
 +		arch_sync_dma_flush();
-+	}
+ }
+ #endif
+ 
+@@ -464,6 +469,7 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
+ 	struct pci_p2pdma_map_state p2pdma_state = {};
+ 	struct scatterlist *sg;
+ 	int i, ret;
++	bool need_sync = false;
+ 
+ 	for_each_sg(sgl, sg, nents, i) {
+ 		switch (pci_p2pdma_state(&p2pdma_state, dev, sg_page(sg))) {
+@@ -475,8 +481,9 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
+ 			 */
+ 			break;
+ 		case PCI_P2PDMA_MAP_NONE:
++			need_sync = true;
+ 			sg->dma_address = dma_direct_map_phys(dev, sg_phys(sg),
+-					sg->length, dir, attrs);
++					sg->length, dir, attrs, false);
+ 			if (sg->dma_address == DMA_MAPPING_ERROR) {
+ 				ret = -EIO;
+ 				goto out_unmap;
+@@ -495,6 +502,8 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
+ 		sg_dma_len(sg) = sg->length;
+ 	}
+ 
++	if (need_sync && !dev_is_dma_coherent(dev))
++		arch_sync_dma_flush();
+ 	return nents;
+ 
+ out_unmap:
+diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
+index a69326eed266..d4ad79828090 100644
+--- a/kernel/dma/direct.h
++++ b/kernel/dma/direct.h
+@@ -67,13 +67,15 @@ static inline void dma_direct_sync_single_for_device(struct device *dev,
  }
  
- static phys_addr_t iommu_dma_map_swiotlb(struct device *dev, phys_addr_t phys,
+ static inline void dma_direct_sync_single_for_cpu(struct device *dev,
+-		dma_addr_t addr, size_t size, enum dma_data_direction dir)
++		dma_addr_t addr, size_t size, enum dma_data_direction dir,
++		bool flush)
+ {
+ 	phys_addr_t paddr = dma_to_phys(dev, addr);
+ 
+ 	if (!dev_is_dma_coherent(dev)) {
+ 		arch_sync_dma_for_cpu(paddr, size, dir);
+-		arch_sync_dma_flush();
++		if (flush)
++			arch_sync_dma_flush();
+ 		arch_sync_dma_for_cpu_all();
+ 	}
+ 
+@@ -85,7 +87,7 @@ static inline void dma_direct_sync_single_for_cpu(struct device *dev,
+ 
+ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+ 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
+-		unsigned long attrs)
++		unsigned long attrs, bool flush)
+ {
+ 	dma_addr_t dma_addr;
+ 
+@@ -114,7 +116,8 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+ 	if (!dev_is_dma_coherent(dev) &&
+ 	    !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO))) {
+ 		arch_sync_dma_for_device(phys, size, dir);
+-		arch_sync_dma_flush();
++		if (flush)
++			arch_sync_dma_flush();
+ 	}
+ 	return dma_addr;
+ 
+@@ -127,7 +130,8 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+ }
+ 
+ static inline void dma_direct_unmap_phys(struct device *dev, dma_addr_t addr,
+-		size_t size, enum dma_data_direction dir, unsigned long attrs)
++		size_t size, enum dma_data_direction dir, unsigned long attrs,
++		bool flush)
+ {
+ 	phys_addr_t phys;
+ 
+@@ -137,7 +141,7 @@ static inline void dma_direct_unmap_phys(struct device *dev, dma_addr_t addr,
+ 
+ 	phys = dma_to_phys(dev, addr);
+ 	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC))
+-		dma_direct_sync_single_for_cpu(dev, addr, size, dir);
++		dma_direct_sync_single_for_cpu(dev, addr, size, dir, flush);
+ 
+ 	swiotlb_tbl_unmap_single(dev, phys, size, dir,
+ 					 attrs | DMA_ATTR_SKIP_CPU_SYNC);
+diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
+index 37163eb49f9f..d8cfa56a3cbb 100644
+--- a/kernel/dma/mapping.c
++++ b/kernel/dma/mapping.c
+@@ -166,7 +166,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ 
+ 	if (dma_map_direct(dev, ops) ||
+ 	    (!is_mmio && arch_dma_map_phys_direct(dev, phys + size)))
+-		addr = dma_direct_map_phys(dev, phys, size, dir, attrs);
++		addr = dma_direct_map_phys(dev, phys, size, dir, attrs, true);
+ 	else if (use_dma_iommu(dev))
+ 		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
+ 	else if (ops->map_phys)
+@@ -207,7 +207,7 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
+ 	BUG_ON(!valid_dma_direction(dir));
+ 	if (dma_map_direct(dev, ops) ||
+ 	    (!is_mmio && arch_dma_unmap_phys_direct(dev, addr + size)))
+-		dma_direct_unmap_phys(dev, addr, size, dir, attrs);
++		dma_direct_unmap_phys(dev, addr, size, dir, attrs, true);
+ 	else if (use_dma_iommu(dev))
+ 		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
+ 	else if (ops->unmap_phys)
+@@ -373,7 +373,7 @@ void __dma_sync_single_for_cpu(struct device *dev, dma_addr_t addr, size_t size,
+ 
+ 	BUG_ON(!valid_dma_direction(dir));
+ 	if (dma_map_direct(dev, ops))
+-		dma_direct_sync_single_for_cpu(dev, addr, size, dir);
++		dma_direct_sync_single_for_cpu(dev, addr, size, dir, true);
+ 	else if (use_dma_iommu(dev))
+ 		iommu_dma_sync_single_for_cpu(dev, addr, size, dir);
+ 	else if (ops->sync_single_for_cpu)
 -- 
 2.43.0
 
