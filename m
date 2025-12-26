@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F6F2E92716
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Dec 2025 14:23:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1193516.1512198 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1982E92715
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Dec 2025 14:23:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1193526.1512230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC5-00072m-N6; Sat, 27 Dec 2025 14:22:57 +0000
+	id 1vZVC7-0007Si-7N; Sat, 27 Dec 2025 14:22:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1193516.1512198; Sat, 27 Dec 2025 14:22:57 +0000
+Received: by outflank-mailman (output) from mailman id 1193526.1512230; Sat, 27 Dec 2025 14:22:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vZVC5-00071v-J2; Sat, 27 Dec 2025 14:22:57 +0000
-Received: by outflank-mailman (input) for mailman id 1193516;
- Fri, 26 Dec 2025 22:53:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vZVC6-0007Rl-QA; Sat, 27 Dec 2025 14:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 1193526;
+ Fri, 26 Dec 2025 22:54:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=z/ld=7A=gmail.com=21cnbao@srs-se1.protection.inumbo.net>)
- id 1vZGgh-0005LS-Ed
- for xen-devel@lists.xenproject.org; Fri, 26 Dec 2025 22:53:35 +0000
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [2607:f8b0:4864:20::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b4a835ac-e2ad-11f0-b15c-2bf370ae4941;
- Fri, 26 Dec 2025 23:53:34 +0100 (CET)
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2a0eaf55d58so49804625ad.1
- for <xen-devel@lists.xenproject.org>; Fri, 26 Dec 2025 14:53:34 -0800 (PST)
+ id 1vZGhL-0005PO-LN
+ for xen-devel@lists.xenproject.org; Fri, 26 Dec 2025 22:54:15 +0000
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [2607:f8b0:4864:20::631])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cbe7e2de-e2ad-11f0-9ccf-f158ae23cfc8;
+ Fri, 26 Dec 2025 23:54:13 +0100 (CET)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2a0c20ee83dso95951645ad.2
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Dec 2025 14:54:13 -0800 (PST)
 Received: from barry-desktop.hub ([47.72.129.29])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-34e772ac1acsm9981428a91.9.2025.12.26.14.53.25
+ 98e67ed59e1d1-34e772ac1acsm9981428a91.9.2025.12.26.14.54.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Dec 2025 14:53:32 -0800 (PST)
+ Fri, 26 Dec 2025 14:54:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,44 +47,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4a835ac-e2ad-11f0-b15c-2bf370ae4941
+X-Inumbo-ID: cbe7e2de-e2ad-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766789613; x=1767394413; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1766789652; x=1767394452; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ietD9HqJ7J3E+f0491dnZq0rlaTb/buis2UihkMu59I=;
-        b=i+E7Eio6v+/1w81qhPQ1izZ67OWB0thOdDH8tGOAjtv/3g74RUFmUh5+16EGuVPYq+
-         GDkOJS61rlmpGu6QYm6d7jNYwNtminXUQClteqJGvNlqJhzHjJwyU4BIKG9qHKb9R3Z2
-         EeOluRM80IKjuZWrOZs2ukQgNK0Vh1yQFael+0nMhv6VElCD5Nzip4cssPoTakWydzTe
-         DG0SCtDS5/A1ngtwiAcPUdVMECrcu/GEACSVeTd+9Pkyn4S4KTDrUxeoTJ8x7ZUWH2fO
-         L3UE0tfQC+TVJ4+9sIiIiM93PjglcAbpxtEQtk5SNHROYnZcB4gBhKlY93aqXvvHgqU8
-         xlSA==
+        bh=9mp0y7L70LQWZn3MNrpl8AtI1agZhiyYjI11ja2HdtI=;
+        b=iA9Z0ynNspOq4hSJCu4fV9+mYnLJtXYyW25dkUhEREUlxdQeFDubAKvcFB6pcDa2E3
+         /EAXklbQWBf+MdkAyHuU5PbvSYeWjt9HWs8MEC8P/Oyh+qN/YFAKtYxevwZFdAstBre7
+         NgvmY38+VuorWIQmppWX3GQjAUCTXoypzbUPt/hOU2C0XkUPrzZwgZUNy4R3aE/KL9s8
+         xb8tfn9VekjPmtsK/e+ES+mLR4XJ+pacbAy8nv0yVH37O7SVbi3HDA8t9XRi6bGB3Kk+
+         rjfkFVvJSi2zgq4w6HxIOqTzMby49TVSRWjcD8tOQhvSojiZjpxTFWGi/7Nu2wb+ynL7
+         mPng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766789613; x=1767394413;
+        d=1e100.net; s=20230601; t=1766789652; x=1767394452;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ietD9HqJ7J3E+f0491dnZq0rlaTb/buis2UihkMu59I=;
-        b=imkrCSLKUuMIg3AmbbAdO1yl89DpPWg/ezTWKeBLxy5V/npPFNckcPSSmueH2N7Qv6
-         oKBcFSUZZDUNOvweyzRzr8EK9F905yeSh1n3Nv4KJl9Gf2Fpk5ZWUVRP3rhueZfxuGHh
-         60jS1kaacx1F4tHIbKeSaHSHqorfDglHU9dSy+aMHmgo+Zw26ktIR/2iYvrYmFEss+96
-         W5kGDK3iGHfK1uUOJ/jLuq8kHyQDfOCYe5CJnyEy2g50YDLfWAgND49O6fKDnmQptOm+
-         2qYvVlWdQ1SkXczrgvaQN5xdZ2ERVBGFLLrGJXKpgufyPkVAeTa1fPEZBmSWU6DDP+ky
-         ObFw==
-X-Forwarded-Encrypted: i=1; AJvYcCUr2iCVuOT6iCVWkME3X6uP8a+AbTAVVR5bw2DS4tBXE5ZY75gsKtZ6WN58NSFgKniLUMOtDbZrh+8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzX5uisfBVZdsQdzkmeL29+rxmboIdZWcjZxjPCGMQUm3MeDref
-	vsz8hnzY0iwvLK1SNmmWaXFcAAOEhty7nneobY3qUNCvy0HDYy3iCPUP
-X-Gm-Gg: AY/fxX6Gu2v7WSHesOWAL3tW/oPt2EHFhvP8jMvvmiRLQO+ezKEGPO9FWVr79l2Na4t
-	lVXN0LwTWU9oc4Y3kRds+ecQLkvRRyaOGk4zNHfeQhHpY1hpX6amDuwVyHWX3Gis/MsltfVmyNL
-	cKD75oA3AK+g0wiJLwkghkE55HSXlCCeBlkgIyouE/TZ6mdef4s95Jm1gQWDydCCWouEO/X4Kxm
-	75oUXeqw68q2YdVPlZkw6qICOGjII9iD/GLX8OzRFOLB88o9qU+KJp0pDRmgfjBrgIXy1kyydDL
-	KkFodjNStTU/snOE6atpbdyW3sytuBNgPVo7OIOBMrsJ3HNLSCiLrw29KgW9/aNkKesaddPJoCp
-	NhuUWuCBH3sNGI3HeBeZ1Wc7fJgg93j29U6q7ebNNEg9njxIG/CJ9VJV5Ujl4QYAlpyDO8UQ5MN
-	wNCW5m8iS+v9X/
-X-Google-Smtp-Source: AGHT+IE9oZQXckIJDcXvuEcMulX/ZaTRdgyK2lgHN5sr4Zh2/8KW3byPESPfAHlQDRzMXfnr9Ddibw==
-X-Received: by 2002:a17:90b:2b46:b0:34a:be93:72ee with SMTP id 98e67ed59e1d1-34e90d6d322mr21171859a91.8.1766789612867;
-        Fri, 26 Dec 2025 14:53:32 -0800 (PST)
+        bh=9mp0y7L70LQWZn3MNrpl8AtI1agZhiyYjI11ja2HdtI=;
+        b=P5ogKQGIHLxywtvHmQVO1q1kMLes/9h1IjUnQrjfTi9oHb7RWpe+D9V3mmN7kZa1yd
+         ySFGowo2XcKDd5is5Br3No68PFIupoRkcPk5TqUw6O/Ua1dGcN8I/0CB2nfIDkxixOxO
+         xgdsn9SOBsK9dCb3v3MijKFfUAahoOouJ9mnp5BL3ZF6Xg5hF119jGTrKQAjUJ1F5JcM
+         7M2m6Oah7x+c9rSL8liVTgUwowFrTe9oggT/IaQJoV9N7Jvgq5TWgPoyrMXRhC5lY1py
+         Qerm8eNeuDRa/i8LAMpqfV5QZ8/yolgBz+5cPnhFoETbWP9cOYS162bTMBj69iKZywfC
+         XxOA==
+X-Forwarded-Encrypted: i=1; AJvYcCXugTLxCNTCQHdWretT6O5e+xMC8tGq28s6z/vD7RifRRmNPhhPRN+e2hMDobPNOnObVrjgq1XVMS4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyh4b6Zuhbhe4MlDyyv7XCn9AoFuoRV7wdGIwObRCdLY2u9Iy4F
+	irPmQdgqpWZrjIhr/lfahKQMNVmM3e+GdCUvdBg2Vr31f5APFPwk2Nq1
+X-Gm-Gg: AY/fxX6iHU+qnMqSezYHR543BpwV4/g7h2SyT1fkdrlgfvWH5/pnK8C0u3itiY9VwO7
+	uhPIi60XFz/SViMiHgLLs+tTHmiNoR7VMJrJG76/XpH+8D5v1ym9OGto6dgEbmg8jVQftlbnfQk
+	nMFu66DN41DFO++unmB8AtC8nzq5eqo74DoBzdly37/GVQ9JmXZiXi3XuoqBlyz3SuPAootMKzK
+	HmqudFhQLa7DLi4SOzAZPjeCmOUHa+o6BRzbxfYvRhOvse/Wpp8/ETULDhopwMTV4dUveQ3/ieo
+	9eyPx1J/WrRQq1nFz/C5tTLtqp/dfLwIwipcrRIf7NvVABizg5kxMrY2FF5am+BeX2zZQHS5b8Q
+	WzLeOeq/CqCXwx5YXNeQZpFp2Ff0eQXMcCckKHghFnXcP0fYOwxEBz0gUqZQXy4e08Z0ppnZA8D
+	q6LJkkERrrcIOx
+X-Google-Smtp-Source: AGHT+IH3Qyivahvz1Re89nhjkOGapFSbuTfRVGKZtZJZOQKn2pFT9vJfuh0AHXHFbf1hI+2p00nHuQ==
+X-Received: by 2002:a17:902:f607:b0:2a1:4c31:335 with SMTP id d9443c01a7336-2a2f2717b88mr227808145ad.26.1766789652012;
+        Fri, 26 Dec 2025 14:54:12 -0800 (PST)
 From: Barry Song <21cnbao@gmail.com>
 To: catalin.marinas@arm.com,
 	m.szyprowski@samsung.com,
@@ -102,10 +102,11 @@ Cc: linux-kernel@vger.kernel.org,
 	Anshuman Khandual <anshuman.khandual@arm.com>,
 	Ryan Roberts <ryan.roberts@arm.com>,
 	Suren Baghdasaryan <surenb@google.com>,
+	Joerg Roedel <joro@8bytes.org>,
 	Tangquan Zheng <zhengtangquan@oppo.com>
-Subject: [PATCH v2 2/8] arm64: Provide dcache_clean_poc_nosync helper
-Date: Sat, 27 Dec 2025 11:52:42 +1300
-Message-ID: <20251226225254.46197-3-21cnbao@gmail.com>
+Subject: [PATCH RFC v2 7/8] dma-iommu: Support DMA sync batch mode for IOVA link and unlink
+Date: Sat, 27 Dec 2025 11:52:47 +1300
+Message-ID: <20251226225254.46197-8-21cnbao@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20251226225254.46197-1-21cnbao@gmail.com>
 References: <20251226225254.46197-1-21cnbao@gmail.com>
@@ -114,66 +115,89 @@ Content-Transfer-Encoding: 8bit
 
 From: Barry Song <baohua@kernel.org>
 
-dcache_clean_poc_nosync does not wait for the data cache clean to
-complete. Later, we wait for completion of all scatter-gather entries
-together.
+Apply batched DMA synchronization to __dma_iova_link() and
+iommu_dma_iova_unlink_range_slow(). For multiple
+sync_dma_for_device() and sync_dma_for_cpu() calls, we only
+need to wait once for the completion of all sync operations,
+rather than waiting for each one individually.
 
+I do not have the hardware to test this, so it is marked as
+RFC. I would greatly appreciate it if someone could test it.
+
+Suggested-by: Marek Szyprowski <m.szyprowski@samsung.com>
 Cc: Leon Romanovsky <leon@kernel.org>
 Cc: Catalin Marinas <catalin.marinas@arm.com>
 Cc: Will Deacon <will@kernel.org>
 Cc: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Robin Murphy <robin.murphy@arm.com>
 Cc: Ada Couprie Diaz <ada.coupriediaz@arm.com>
 Cc: Ard Biesheuvel <ardb@kernel.org>
 Cc: Marc Zyngier <maz@kernel.org>
 Cc: Anshuman Khandual <anshuman.khandual@arm.com>
 Cc: Ryan Roberts <ryan.roberts@arm.com>
 Cc: Suren Baghdasaryan <surenb@google.com>
+Cc: Robin Murphy <robin.murphy@arm.com>
+Cc: Joerg Roedel <joro@8bytes.org>
 Cc: Tangquan Zheng <zhengtangquan@oppo.com>
 Signed-off-by: Barry Song <baohua@kernel.org>
 ---
- arch/arm64/include/asm/cacheflush.h |  1 +
- arch/arm64/mm/cache.S               | 15 +++++++++++++++
- 2 files changed, 16 insertions(+)
+ drivers/iommu/dma-iommu.c | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm64/include/asm/cacheflush.h b/arch/arm64/include/asm/cacheflush.h
-index 28ab96e808ef..9b6d0a62cf3d 100644
---- a/arch/arm64/include/asm/cacheflush.h
-+++ b/arch/arm64/include/asm/cacheflush.h
-@@ -74,6 +74,7 @@ extern void icache_inval_pou(unsigned long start, unsigned long end);
- extern void dcache_clean_inval_poc(unsigned long start, unsigned long end);
- extern void dcache_inval_poc(unsigned long start, unsigned long end);
- extern void dcache_clean_poc(unsigned long start, unsigned long end);
-+extern void dcache_clean_poc_nosync(unsigned long start, unsigned long end);
- extern void dcache_clean_pop(unsigned long start, unsigned long end);
- extern void dcache_clean_pou(unsigned long start, unsigned long end);
- extern long caches_clean_inval_user_pou(unsigned long start, unsigned long end);
-diff --git a/arch/arm64/mm/cache.S b/arch/arm64/mm/cache.S
-index 503567c864fd..4a7c7e03785d 100644
---- a/arch/arm64/mm/cache.S
-+++ b/arch/arm64/mm/cache.S
-@@ -178,6 +178,21 @@ SYM_FUNC_START(__pi_dcache_clean_poc)
- SYM_FUNC_END(__pi_dcache_clean_poc)
- SYM_FUNC_ALIAS(dcache_clean_poc, __pi_dcache_clean_poc)
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index 6827763a3877..ffa940bdbbaf 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -1849,10 +1849,8 @@ static int __dma_iova_link(struct device *dev, dma_addr_t addr,
+ 	bool coherent = dev_is_dma_coherent(dev);
+ 	int prot = dma_info_to_prot(dir, coherent, attrs);
  
-+/*
-+ *	dcache_clean_poc_nosync(start, end)
-+ *
-+ * 	Issue the instructions of D-cache lines for the interval [start, end).
-+ * 	not necessarily cleaned to the PoC till an explicit dsb sy afterward.
-+ *
-+ *	- start   - virtual start address of region
-+ *	- end     - virtual end address of region
-+ */
-+SYM_FUNC_START(__pi_dcache_clean_poc_nosync)
-+	dcache_by_line_op_nosync cvac, x0, x1, x2, x3
-+	ret
-+SYM_FUNC_END(__pi_dcache_clean_poc_nosync)
-+SYM_FUNC_ALIAS(dcache_clean_poc_nosync, __pi_dcache_clean_poc_nosync)
+-	if (!coherent && !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO))) {
++	if (!coherent && !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO)))
+ 		arch_sync_dma_for_device(phys, size, dir);
+-		arch_sync_dma_flush();
+-	}
+ 
+ 	return iommu_map_nosync(iommu_get_dma_domain(dev), addr, phys, size,
+ 			prot, GFP_ATOMIC);
+@@ -1995,6 +1993,8 @@ int dma_iova_sync(struct device *dev, struct dma_iova_state *state,
+ 	dma_addr_t addr = state->addr + offset;
+ 	size_t iova_start_pad = iova_offset(iovad, addr);
+ 
++	if (!dev_is_dma_coherent(dev))
++		arch_sync_dma_flush();
+ 	return iommu_sync_map(domain, addr - iova_start_pad,
+ 		      iova_align(iovad, size + iova_start_pad));
+ }
+@@ -2008,6 +2008,8 @@ static void iommu_dma_iova_unlink_range_slow(struct device *dev,
+ 	struct iommu_dma_cookie *cookie = domain->iova_cookie;
+ 	struct iova_domain *iovad = &cookie->iovad;
+ 	size_t iova_start_pad = iova_offset(iovad, addr);
++	bool need_sync_dma = !dev_is_dma_coherent(dev) &&
++			!(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO));
+ 	dma_addr_t end = addr + size;
+ 
+ 	do {
+@@ -2023,16 +2025,17 @@ static void iommu_dma_iova_unlink_range_slow(struct device *dev,
+ 			end - addr, iovad->granule - iova_start_pad);
+ 
+ 		if (!dev_is_dma_coherent(dev) &&
+-		    !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO))) {
++		    !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO)))
+ 			arch_sync_dma_for_cpu(phys, len, dir);
+-			arch_sync_dma_flush();
+-		}
+ 
+ 		swiotlb_tbl_unmap_single(dev, phys, len, dir, attrs);
+ 
+ 		addr += len;
+ 		iova_start_pad = 0;
+ 	} while (addr < end);
 +
- /*
-  *	dcache_clean_pop(start, end)
-  *
++	if (need_sync_dma)
++		arch_sync_dma_flush();
+ }
+ 
+ static void __iommu_dma_iova_unlink(struct device *dev,
 -- 
 2.43.0
 
