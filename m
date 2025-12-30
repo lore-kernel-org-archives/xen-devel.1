@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C323E95A8C
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Dec 2025 13:51:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1194180.1512642 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FF8E95A8C
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Dec 2025 13:51:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1194177.1512623 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vaa7q-00054j-BC; Tue, 30 Dec 2025 13:51:02 +0000
+	id 1vaa7o-0004jz-Tp; Tue, 30 Dec 2025 13:51:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1194180.1512642; Tue, 30 Dec 2025 13:51:02 +0000
+Received: by outflank-mailman (output) from mailman id 1194177.1512623; Tue, 30 Dec 2025 13:51:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vaa7q-00052P-39; Tue, 30 Dec 2025 13:51:02 +0000
-Received: by outflank-mailman (input) for mailman id 1194180;
- Tue, 30 Dec 2025 13:51:00 +0000
+	id 1vaa7o-0004jG-QF; Tue, 30 Dec 2025 13:51:00 +0000
+Received: by outflank-mailman (input) for mailman id 1194177;
+ Tue, 30 Dec 2025 13:50:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=owPK=7E=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vaa7o-0004Hp-QZ
- for xen-devel@lists.xenproject.org; Tue, 30 Dec 2025 13:51:00 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1vaa7n-0004Hp-2X
+ for xen-devel@lists.xenproject.org; Tue, 30 Dec 2025 13:50:59 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 92899115-e586-11f0-b15c-2bf370ae4941;
- Tue, 30 Dec 2025 14:50:59 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-477a219dbcaso80801895e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Dec 2025 05:50:59 -0800 (PST)
+ id 91bc9c58-e586-11f0-b15c-2bf370ae4941;
+ Tue, 30 Dec 2025 14:50:58 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4779adb38d3so65504725e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Dec 2025 05:50:58 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47d193d4f09sm609436115e9.12.2025.12.30.05.50.58
+ 5b1f17b1804b1-47d193d4f09sm609436115e9.12.2025.12.30.05.50.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Dec 2025 05:50:58 -0800 (PST)
+ Tue, 30 Dec 2025 05:50:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92899115-e586-11f0-b15c-2bf370ae4941
+X-Inumbo-ID: 91bc9c58-e586-11f0-b15c-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1767102659; x=1767707459; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1767102657; x=1767707457; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ksrdaSIqpwx0gSdwMJzQe6JesX3RHk4cyQkoMRTQARM=;
-        b=bMMYNXN/EGK0xjrft53fh6BnE1Fx+Wcx9W4XVLGsqmU659IAc0hy5RFvxbfYgCLW2o
-         uLIWI0gIqm1evIigzD6KK26cFoYQz7D8nwtoQY+62nWdX8ITxsZ9FIgB3tSJkCaY4/U/
-         I68XYWwA/uRkTYmH/a5a0OF5jvxp4zOgkGEGE=
+        bh=Nd20J3v7uhZuwD0WalGtR1GIlt9QmVuIoVXjLZvsMiU=;
+        b=YKzEsi9AZ9awpWfhpN5LaKGr3wHEoS72QftTJYnIwliSfHBj/2cAsV1PDeuh5Dm5QE
+         PGgrhRTzGE0775NU+qciVzBy8+sRfyKS84YfIFUHxsHLTw4zqOPiCx9IR5/Q/yj87J/C
+         k46KWRaQuRQF4pqiqhG1bO+V+MczrmOZMkVVQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767102659; x=1767707459;
+        d=1e100.net; s=20230601; t=1767102657; x=1767707457;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ksrdaSIqpwx0gSdwMJzQe6JesX3RHk4cyQkoMRTQARM=;
-        b=qiq/EbfjaFe0Xb6LP41jKOkRPBiPeRrt6ifdny40TJkVZmcdhwgQw1R7CYIKWMblrL
-         HZ9sWplHDwZAWCH7i9+pBmU3Ny5HRegJIaRrbxPWTht0KwXGHqY0pCciIUXPgfER2vWu
-         BjcU2qjT1IgxhM6ywMYJ/IaLFnjXuFEUo+kXwK6di9w3u0OEmpdbD2aaMKaQHER3gc6P
-         kgs13oyaKq+XdhOZbs8gSWOGr0tVawA5F+skv8A67dPPVhmWCwkHdPchb0ifD6yJ4Gux
-         6b2z9l6e733PBqK01rBx//JLar1fPzQoLoAzI5kawuNBFYo1aP/HVZJ1J9246EvCyvIX
-         v5ZQ==
-X-Gm-Message-State: AOJu0Yx50b0jx8eJEJcFDVhloeBcc3zqjv6TYSQN37dAtW7xX4VTpQtq
-	02AO9tXn/r38BUrxfdysXRuNEaATocSMB1Jc/+dpMYwBDQNsv83hGg4as9GVautaSVkeQ07kETU
-	xenAF
-X-Gm-Gg: AY/fxX5HQ19Y0dLv47WOmpCqghbuSHSPLHYyHiNLZPnkeCAU3OuPeeyoP9K3ct0xiHS
-	hGO138xMcSLXcR6K5ScXRQmv+X1sxxJrVJfh1y+i0JYbqEP8O+RE9nahIqJWZqHgoYXUyy2b3e5
-	P0y0FTVV0dsweRp02siXsGytGbM5KpMlZO0tZ73bn/Ewu6rId7cZ9NkaSN9IERrQUOMoKRGvnwW
-	vVrsvrTvkPmOtowz2hw54EE5vWEv3cgbKWgbwrQ4YsfAbV5VuAQtsYrWuzbw5CcYYe590qo26bk
-	WwTYKeD+GBCADcGIEMzBEdDF/hSWgFlxPhsG0XtubA2zQzPRtqnJm/ZT4n3bsjYz4cZRcNQVWmt
-	IZRRiBG0uHbqu8PV2tN4apBNvIgzkKWCqBQgZk0Qly/XStKxlxeuuQpQpXiI9OaOJohluO/M46b
-	/WL72OJ5qN127C9Qmj2SkJ8DDJDcAfB+LMaUDLzBiwDBcnwoiDykkcKzzyasisC8lW1GhCd9wK
-X-Google-Smtp-Source: AGHT+IFAEAT50mQmYWs22sCfPa37f8gLLjVlGYupZVaAxHbVUmEJjNhoe4o1wd6cNKhK2hePrh8pkA==
-X-Received: by 2002:a05:600c:6812:b0:477:63b5:7148 with SMTP id 5b1f17b1804b1-47d1955b97cmr412637705e9.6.1767102658924;
-        Tue, 30 Dec 2025 05:50:58 -0800 (PST)
+        bh=Nd20J3v7uhZuwD0WalGtR1GIlt9QmVuIoVXjLZvsMiU=;
+        b=gEq/t9BctY9K1wUjzYIy1WPbEKqJg69oVXe0NGYBHIJm+xxqz578TqdgceShxeLoc/
+         NpfhRvInkrY/xSqO7Hd8cJrZBOyp+EKhG/NByUTpedhxz7oXJSrLv8ID/b2cUDtQzNyk
+         qYs+CP/2Z7Map5boYRcJ3xIxgMgU+kcN/jvirKTvzRSeHsgyXu5uFwpP9M1BHqCtH4GG
+         KdFztd4HA0EIP3K47jx6EjZ3mO/Ikn5Xr9F9JS9M3xK7smfM9Z4v5xrODwKgY7/y33nL
+         sIDtWQAtBqgpin+LuksZiPs+xnTVp6YSaF6Pk9+KLJidJQHyqkKznppn/P/8DThqzGwa
+         Eb9Q==
+X-Gm-Message-State: AOJu0YyG6fOancUeHv72yhZo0Zkhxm9fWkWlCbg2WzsZ0CZwBCkFNEcD
+	oyHIPmdpas4N0TRp5lR8hCrDzi2anA22irmX02KXwyopOKeg69T+iKrQfIxAINHbyHj1aEdnZWn
+	6bPQZ
+X-Gm-Gg: AY/fxX5eTVrooJToFBZCV6rD+C9XlJe0EmDWjYsOY6rfw8Q3DsYwOGI3qYK2TNdF7ed
+	E4hd3PR9K4DIDHXSuai9CZHzsDUWX/AHtYbDiem28oSrv4cqt6O+tTKIvbdBvMYqrCAHGeBYYDL
+	0t4fXe0E7+dSj+sgXwtGZkNQ3o2a840D0egbsyfeADCjUVYC3ylNX9Ggp+m4F08iNZ2QG/xa046
+	oqsxsKu9k5uwProSVWN0zA+e3W4kLxuF6roln7ysmizDXi4MV/Hx7Zwdt/KNscFmZH9mbhDnEVY
+	J20W8gW0XVpAc0YBD0b2HVKniBgYi2muUDuD7omnjPFDPt12oROPaRCkibH/8DZS7jBMu5ljYUr
+	8Nke1i+Zs9W0/a2BmsIl77WIAfkGj4v+IGpOAcXD2nop5ZmHYfmQsGsaCg2Go+zE1GW/p6Oe4Hz
+	UaXZ5i3a+K+EjIs9WGfOBV+OwJi8PifQf2fU0PW88YkOpx7GI1R8zr10Q4Bukptg==
+X-Google-Smtp-Source: AGHT+IEIrik/fSPnMFz32DPXSX6e7Ax0GK/XGex1e8Y/JwbScl0g+FWVTaUY/mmvFyW9YrfmzedVog==
+X-Received: by 2002:a05:600c:1991:b0:479:3a86:dc1d with SMTP id 5b1f17b1804b1-47d195a63b0mr355075415e9.37.1767102657490;
+        Tue, 30 Dec 2025 05:50:57 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -93,9 +93,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 5/5] xen: Move x86-ism out of muldiv64.c
-Date: Tue, 30 Dec 2025 13:50:50 +0000
-Message-Id: <20251230135050.188191-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/5] x86/time: Sort headers
+Date: Tue, 30 Dec 2025 13:50:48 +0000
+Message-Id: <20251230135050.188191-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251230135050.188191-1-andrew.cooper3@citrix.com>
 References: <20251230135050.188191-1-andrew.cooper3@citrix.com>
@@ -103,10 +103,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Having an #ifdef CONFIG_X86 section in a common library is rude.
+... in preparation for a logical change.
 
-Furthermore, for x86 the main logic is 6 bytes, meaning it's ripe for
-inlining.  Create an x86-specific asm/muldiv.h implementing arch_muldiv64().
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -118,103 +117,106 @@ CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Bertrand Marquis <bertrand.marquis@arm.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-bloat-o-meter results:
-
-  add/remove: 0/1 grow/shrink: 1/2 up/down: 10/-39 (-29)
-  Function                                     old     new   delta
-  get_count                                    240     250     +10
-  calibrate_apic_timer                         211     203      -8
-  calibrate_tsc                                190     177     -13
-  muldiv64                                      18       -     -18
-
-The increase in get_count is from different register scheduling.
 ---
- xen/arch/x86/include/asm/muldiv.h | 20 ++++++++++++++++++++
- xen/include/xen/muldiv.h          |  8 ++++++++
- xen/lib/muldiv64.c                |  8 --------
- 3 files changed, 28 insertions(+), 8 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/muldiv.h
+ xen/arch/x86/emul-i8254.c | 12 +++++------
+ xen/arch/x86/time.c       | 42 ++++++++++++++++++++-------------------
+ 2 files changed, 28 insertions(+), 26 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/muldiv.h b/xen/arch/x86/include/asm/muldiv.h
-new file mode 100644
-index 000000000000..563cab0564da
---- /dev/null
-+++ b/xen/arch/x86/include/asm/muldiv.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef X86_MULDIV_H
-+#define X86_MULDIV_H
-+
-+#include <xen/stdint.h>
-+
-+static inline uint64_t attr_const arch_muldiv64(uint64_t a, uint32_t b, uint32_t c)
-+{
-+    asm_inline (
-+        "mulq %[b]\n\t"
-+        "divq %[c]"
-+        : "+a" (a)
-+        : [b] "rm" ((uint64_t)b), [c] "rm" ((uint64_t)c)
-+        : "rdx" );
-+
-+    return a;
-+}
-+#define arch_muldiv64 arch_muldiv64
-+
-+#endif /* X86_MULDIV_H */
-diff --git a/xen/include/xen/muldiv.h b/xen/include/xen/muldiv.h
-index 8ed2c68caf84..e7f8fdcf01ea 100644
---- a/xen/include/xen/muldiv.h
-+++ b/xen/include/xen/muldiv.h
-@@ -4,6 +4,10 @@
- 
- #include <xen/stdint.h>
- 
-+#if __has_include(<asm/muldiv.h>)
-+# include <asm/muldiv.h>
-+#endif
-+
- uint64_t attr_const generic_muldiv64(uint64_t a, uint32_t b, uint32_t c);
- 
- /*
-@@ -12,7 +16,11 @@ uint64_t attr_const generic_muldiv64(uint64_t a, uint32_t b, uint32_t c);
+diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
+index 144aa168a3f0..c16ed0bead87 100644
+--- a/xen/arch/x86/emul-i8254.c
++++ b/xen/arch/x86/emul-i8254.c
+@@ -24,19 +24,19 @@
+  * IN THE SOFTWARE.
   */
- static inline uint64_t attr_const muldiv64(uint64_t a, uint32_t b, uint32_t c)
- {
-+#ifdef arch_muldiv64
-+    return arch_muldiv64(a, b, c);
-+#else
-     return generic_muldiv64(a, b, c);
-+#endif
- }
  
- #endif /* XEN_MULDIV_H */
-diff --git a/xen/lib/muldiv64.c b/xen/lib/muldiv64.c
-index 5e6db1b2f4d2..6ee86d124a21 100644
---- a/xen/lib/muldiv64.c
-+++ b/xen/lib/muldiv64.c
-@@ -2,13 +2,6 @@
+-#include <xen/types.h>
+-#include <xen/mm.h>
+-#include <xen/xmalloc.h>
+-#include <xen/lib.h>
+ #include <xen/errno.h>
++#include <xen/lib.h>
++#include <xen/mm.h>
+ #include <xen/sched.h>
+ #include <xen/trace.h>
+-#include <asm/time.h>
++#include <xen/xmalloc.h>
++
++#include <asm/current.h>
+ #include <asm/hvm/hvm.h>
+ #include <asm/hvm/io.h>
+ #include <asm/hvm/save.h>
+ #include <asm/hvm/vpt.h>
+-#include <asm/current.h>
++#include <asm/time.h>
  
- uint64_t generic_muldiv64(uint64_t a, uint32_t b, uint32_t c)
- {
--#ifdef CONFIG_X86
--    asm ( "mulq %1; divq %2" : "+a" (a)
--                             : "rm" ((uint64_t)b), "rm" ((uint64_t)c)
--                             : "rdx" );
--
--    return a;
--#else
-     union {
-         uint64_t ll;
-         struct {
-@@ -31,7 +24,6 @@ uint64_t generic_muldiv64(uint64_t a, uint32_t b, uint32_t c)
-     res.l.low = (((rh % c) << 32) + (uint32_t)rl) / c;
+ #define domain_vpit(x) (&(x)->arch.vpit)
+ #define vcpu_vpit(x)   (domain_vpit((x)->domain))
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index ece9ae0b342e..1aeb144c837a 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -9,38 +9,40 @@
+  * Copyright (c) 1991, 1992, 1995  Linus Torvalds
+  */
  
-     return res.ll;
--#endif
- }
++#include <xen/cpuidle.h>
++#include <xen/efi.h>
+ #include <xen/errno.h>
+ #include <xen/event.h>
+-#include <xen/sched.h>
+-#include <xen/lib.h>
++#include <xen/guest_access.h>
+ #include <xen/init.h>
+-#include <xen/param.h>
+-#include <xen/time.h>
+-#include <xen/timer.h>
+-#include <xen/smp.h>
+ #include <xen/irq.h>
++#include <xen/keyhandler.h>
++#include <xen/lib.h>
++#include <xen/param.h>
+ #include <xen/pci_ids.h>
++#include <xen/sched.h>
++#include <xen/smp.h>
+ #include <xen/softirq.h>
+-#include <xen/efi.h>
+-#include <xen/cpuidle.h>
+ #include <xen/symbols.h>
+-#include <xen/keyhandler.h>
+-#include <xen/guest_access.h>
++#include <xen/time.h>
++#include <xen/timer.h>
++
++#include <asm/acpi.h>
+ #include <asm/apic.h>
+-#include <asm/io.h>
+-#include <asm/iocap.h>
+-#include <asm/msr.h>
+-#include <asm/mpspec.h>
+-#include <asm/processor.h>
++#include <asm/div64.h>
+ #include <asm/fixmap.h>
+ #include <asm/guest.h>
+-#include <asm/mc146818rtc.h>
+-#include <asm/mwait.h>
+-#include <asm/div64.h>
+-#include <asm/acpi.h>
+ #include <asm/hpet.h>
+ #include <asm/io-ports.h>
+-#include <asm/setup.h> /* for early_time_init */
++#include <asm/io.h>
++#include <asm/iocap.h>
++#include <asm/mc146818rtc.h>
++#include <asm/mpspec.h>
++#include <asm/msr.h>
++#include <asm/mwait.h>
++#include <asm/processor.h>
++#include <asm/setup.h>
++
+ #include <public/arch-x86/cpuid.h>
  
- /*
+ /* opt_clocksource: Force clocksource to one of: pit, hpet, acpi. */
 -- 
 2.39.5
 
