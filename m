@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20C89D5B160
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 11:36:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1195268.1513273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF84C2A09B
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 11:36:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1195266.1513249 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcisP-0005Fw-F5; Mon, 05 Jan 2026 11:35:57 +0000
+	id 1vcisN-0004cj-KU; Mon, 05 Jan 2026 11:35:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1195268.1513273; Mon, 05 Jan 2026 11:35:57 +0000
+Received: by outflank-mailman (output) from mailman id 1195266.1513249; Mon, 05 Jan 2026 11:35:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcisP-0005F9-8B; Mon, 05 Jan 2026 11:35:57 +0000
-Received: by outflank-mailman (input) for mailman id 1195268;
- Mon, 05 Jan 2026 11:35:56 +0000
+	id 1vcisN-0004bm-Dn; Mon, 05 Jan 2026 11:35:55 +0000
+Received: by outflank-mailman (input) for mailman id 1195266;
+ Mon, 05 Jan 2026 11:35:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lUuJ=7K=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
- id 1vcisO-00047I-Bb
- for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 11:35:56 +0000
+ id 1vcisL-00047I-Oq
+ for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 11:35:53 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id b2a8ba1d-ea2a-11f0-b15e-2bf370ae4941;
- Mon, 05 Jan 2026 12:35:55 +0100 (CET)
+ id b0f8bc5c-ea2a-11f0-b15e-2bf370ae4941;
+ Mon, 05 Jan 2026 12:35:53 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 488CC497;
- Mon,  5 Jan 2026 03:35:48 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4DCEB497;
+ Mon,  5 Jan 2026 03:35:45 -0800 (PST)
 Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C65AF3F5A1;
- Mon,  5 Jan 2026 03:35:53 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B24C83F5A1;
+ Mon,  5 Jan 2026 03:35:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2a8ba1d-ea2a-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: b0f8bc5c-ea2a-11f0-b15e-2bf370ae4941
 From: Harry Ramsey <harry.ramsey@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
@@ -56,10 +56,11 @@ Cc: Luca.Fancellu@arm.com,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>,
-	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v2 5/6] arm: Use secure hypervisor timer in MPU system
-Date: Mon,  5 Jan 2026 11:35:02 +0000
-Message-ID: <20260105113503.2674777-6-harry.ramsey@arm.com>
+	Luca Fancellu <luca.fancellu@arm.com>,
+	Hari Limaye <hari.limaye@arm.com>
+Subject: [PATCH v2 3/6] arm/mpu: Implement free_init_memory for MPU systems
+Date: Mon,  5 Jan 2026 11:35:00 +0000
+Message-ID: <20260105113503.2674777-4-harry.ramsey@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260105113503.2674777-1-harry.ramsey@arm.com>
 References: <20260105113503.2674777-1-harry.ramsey@arm.com>
@@ -68,43 +69,218 @@ Content-Transfer-Encoding: 8bit
 
 From: Penny Zheng <Penny.Zheng@arm.com>
 
-As MPU systems only have one secure state, we have to use secure EL2
-hypervisor timer for Xen in secure EL2.
+Implement the function `free_init_memory` for MPU systems. In order to
+support this, the function `modify_xen_mappings` is implemented.
+
+On MPU systems, we map the init text and init data sections using
+separate MPU memory regions. Therefore these are removed separately in
+`free_init_memory`.
+
+Additionally remove warning messages from `is_mm_attr_match` as some
+permissions can now be updated by `xen_mpumap_update_entry`.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
 Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
 ---
 v2:
-- Remove unncessary kconfig attribute.
-- Remove unncessary hypervisor timer macro.
+- Refactor `is_mm_attr_match` to return logical values regarding the
+  permission mismatch.
+- Improve code documentation.
 ---
- xen/arch/arm/include/asm/arm64/sysregs.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ xen/arch/arm/include/asm/mpu/mm.h |   6 +-
+ xen/arch/arm/include/asm/setup.h  |   2 +
+ xen/arch/arm/mpu/mm.c             | 113 +++++++++++++++++++++++-------
+ 3 files changed, 95 insertions(+), 26 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
-index 7dfd20414d..19d409d3eb 100644
---- a/xen/arch/arm/include/asm/arm64/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-@@ -462,6 +462,17 @@
- #define ZCR_ELx_LEN_SIZE             9
- #define ZCR_ELx_LEN_MASK             0x1ff
+diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
+index 1b5ffa5b64..f0941de295 100644
+--- a/xen/arch/arm/include/asm/mpu/mm.h
++++ b/xen/arch/arm/include/asm/mpu/mm.h
+@@ -15,7 +15,11 @@
+ #define MPUMAP_REGION_FOUND         1
+ #define MPUMAP_REGION_INCLUSIVE     2
  
-+#ifdef CONFIG_MPU
-+/*
-+ * The Armv8-R AArch64 architecture always executes code in Secure
-+ * state with EL2 as the highest exception level.
-+ *
-+ * Hypervisor timer registers for Secure EL2.
-+ */
-+#define CNTHP_CTL_EL2   CNTHPS_CTL_EL2
-+#define CNTHP_CVAL_EL2  CNTHPS_CVAL_EL2
-+#endif
+-#define INVALID_REGION_IDX     0xFFU
++#define MPU_ATTR_RO_MISMATCH     -1
++#define MPU_ATTR_XN_MISMATCH     -2
++#define MPU_ATTR_AI_MISMATCH     -3
 +
- #define REGION_TEXT_PRBAR       0x38    /* SH=11 AP=10 XN=00 */
- #define REGION_RO_PRBAR         0x3A    /* SH=11 AP=10 XN=10 */
- #define REGION_DATA_PRBAR       0x32    /* SH=11 AP=00 XN=10 */
++#define INVALID_REGION_IDX    0xFFU
+ 
+ extern struct page_info *frame_table;
+ 
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 1eaf13bd66..005cf7be59 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -65,6 +65,8 @@ int map_irq_to_domain(struct domain *d, unsigned int irq,
+ int map_range_to_domain(const struct dt_device_node *dev,
+                         uint64_t addr, uint64_t len, void *data);
+ 
++extern const char __init_data_begin[], __bss_start[], __bss_end[];
++
+ struct init_info
+ {
+     /* Pointer to the stack, used by head.S when entering in C */
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 207e8d2d91..4194d4fefd 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -171,33 +171,18 @@ int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
+     return MPUMAP_REGION_NOTFOUND;
+ }
+ 
+-static bool is_mm_attr_match(pr_t *region, unsigned int attributes)
++static int is_mm_attr_match(pr_t *region, unsigned int attributes)
+ {
+     if ( region->prbar.reg.ro != PAGE_RO_MASK(attributes) )
+-    {
+-        printk(XENLOG_WARNING
+-               "Mismatched Access Permission attributes (%#x instead of %#x)\n",
+-               region->prbar.reg.ro, PAGE_RO_MASK(attributes));
+-        return false;
+-    }
++        return MPU_ATTR_RO_MISMATCH;
+ 
+     if ( region->prbar.reg.xn != PAGE_XN_MASK(attributes) )
+-    {
+-        printk(XENLOG_WARNING
+-               "Mismatched Execute Never attributes (%#x instead of %#x)\n",
+-               region->prbar.reg.xn, PAGE_XN_MASK(attributes));
+-        return false;
+-    }
++        return MPU_ATTR_XN_MISMATCH;
+ 
+     if ( region->prlar.reg.ai != PAGE_AI_MASK(attributes) )
+-    {
+-        printk(XENLOG_WARNING
+-               "Mismatched Memory Attribute Index (%#x instead of %#x)\n",
+-               region->prlar.reg.ai, PAGE_AI_MASK(attributes));
+-        return false;
+-    }
++        return MPU_ATTR_AI_MISMATCH;
+ 
+-    return true;
++    return 0;
+ }
+ 
+ /* Map a frame table to cover physical addresses ps through pe */
+@@ -357,12 +342,45 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+     */
+     if ( flags_has_page_present && (rc >= MPUMAP_REGION_FOUND) )
+     {
+-        if ( !is_mm_attr_match(&xen_mpumap[idx], flags) )
++        int attr_match = is_mm_attr_match(&xen_mpumap[idx], flags);
++
++        /* We do not support modifying AI attribute. */
++        if ( MPU_ATTR_AI_MISMATCH == attr_match )
+         {
+-            printk("Modifying an existing entry is not supported\n");
++            printk(XENLOG_ERR
++                   "Modifying memory attribute is not supported\n");
+             return -EINVAL;
+         }
+ 
++        /*
++         * Permissions RO and XN can be changed only by the full region.
++         * Permissions that match can continue and just increment refcount.
++         */
++        if ( MPU_ATTR_RO_MISMATCH == attr_match ||
++             MPU_ATTR_XN_MISMATCH == attr_match )
++        {
++            if ( rc == MPUMAP_REGION_INCLUSIVE )
++            {
++                printk(XENLOG_ERR
++                       "Cannot modify partial region permissions\n");
++                return -EINVAL;
++            }
++
++            if ( xen_mpumap[idx].refcount != 0 )
++            {
++                printk(XENLOG_ERR
++                       "Cannot modify memory permissions for a region mapped multiple times\n");
++                return -EINVAL;
++            }
++
++            /* Set new permission */
++            xen_mpumap[idx].prbar.reg.ro = PAGE_RO_MASK(flags);
++            xen_mpumap[idx].prbar.reg.xn = PAGE_XN_MASK(flags);
++
++            write_protection_region(&xen_mpumap[idx], idx);
++            return 0;
++        }
++
+         /* Check for overflow of refcount before incrementing.  */
+         if ( xen_mpumap[idx].refcount == 0xFF )
+         {
+@@ -506,8 +524,7 @@ void __init setup_mm_helper(void)
+ 
+ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+ {
+-    BUG_ON("unimplemented");
+-    return -EINVAL;
++    return xen_mpumap_update(s, e, nf);
+ }
+ 
+ void dump_hyp_walk(vaddr_t addr)
+@@ -518,7 +535,53 @@ void dump_hyp_walk(vaddr_t addr)
+ /* Release all __init and __initdata ranges to be reused */
+ void free_init_memory(void)
+ {
+-    BUG_ON("unimplemented");
++    unsigned long inittext_end = (unsigned long)__init_data_begin;
++    unsigned long len = __init_end - __init_begin;
++    uint8_t idx;
++    int rc;
++
++    /* Modify inittext region to be read/write instead of read/execute. */
++    rc = modify_xen_mappings((unsigned long)__init_begin, inittext_end,
++                             PAGE_HYPERVISOR_RW);
++    if ( rc )
++        panic("Unable to map RW the init text section (rc = %d)\n", rc);
++
++    /*
++     * From now on, init will not be used for execution anymore,
++     * so nuke the instruction cache to remove entries related to init.
++     */
++    invalidate_icache_local();
++
++    /*
++     * The initdata region already has read/write permissions so it can just be
++     * zeroed out.
++     */
++    memset(__init_begin, 0, len);
++
++    rc = destroy_xen_mappings((unsigned long)__init_begin, inittext_end);
++    if ( rc )
++        panic("Unable to remove init text section (rc = %d)\n", rc);
++
++    /*
++     * The initdata and bss sections are mapped using a single MPU region, so
++     * modify the start of this region to remove the initdata section.
++     */
++    spin_lock(&xen_mpumap_lock);
++
++    rc = mpumap_contains_region(xen_mpumap, max_mpu_regions,
++                                (unsigned long)__init_data_begin,
++                                (unsigned long)__bss_end,
++                                &idx);
++    if ( rc < MPUMAP_REGION_FOUND )
++        panic("Unable to find bss data section (rc = %d)\n", rc);
++
++    /* bss data section is shrunk and now starts from __bss_start */
++    pr_set_base(&xen_mpumap[idx], (unsigned long)__bss_start);
++
++    write_protection_region(&xen_mpumap[idx], idx);
++    context_sync_mpu();
++
++    spin_unlock(&xen_mpumap_lock);
+ }
+ 
+ void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int flags)
 -- 
 2.43.0
 
