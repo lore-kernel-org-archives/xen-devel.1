@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE4DC2A09D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 11:36:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1195265.1513243 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF81FA3724
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 11:36:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1195269.1513283 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcisN-0004aE-AS; Mon, 05 Jan 2026 11:35:55 +0000
+	id 1vcisS-0005dB-NZ; Mon, 05 Jan 2026 11:36:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1195265.1513243; Mon, 05 Jan 2026 11:35:55 +0000
+Received: by outflank-mailman (output) from mailman id 1195269.1513283; Mon, 05 Jan 2026 11:36:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcisN-0004Zy-7X; Mon, 05 Jan 2026 11:35:55 +0000
-Received: by outflank-mailman (input) for mailman id 1195265;
- Mon, 05 Jan 2026 11:35:53 +0000
+	id 1vcisS-0005d1-Jq; Mon, 05 Jan 2026 11:36:00 +0000
+Received: by outflank-mailman (input) for mailman id 1195269;
+ Mon, 05 Jan 2026 11:35:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lUuJ=7K=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
- id 1vcisL-0004YP-Gt
- for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 11:35:53 +0000
+ id 1vcisQ-0004YP-Ty
+ for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 11:35:58 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id afe15c3e-ea2a-11f0-9ccf-f158ae23cfc8;
- Mon, 05 Jan 2026 12:35:51 +0100 (CET)
+ id b3955a49-ea2a-11f0-9ccf-f158ae23cfc8;
+ Mon, 05 Jan 2026 12:35:57 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9AB03339;
- Mon,  5 Jan 2026 03:35:43 -0800 (PST)
-Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6F6E13F5A1;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DC96B339;
  Mon,  5 Jan 2026 03:35:49 -0800 (PST)
+Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 633843F5A1;
+ Mon,  5 Jan 2026 03:35:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,204 +44,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afe15c3e-ea2a-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: b3955a49-ea2a-11f0-9ccf-f158ae23cfc8
 From: Harry Ramsey <harry.ramsey@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
-	Luca Fancellu <luca.fancellu@arm.com>,
+	Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 2/6] arm/mpu: Implement vmap functions for MPU
-Date: Mon,  5 Jan 2026 11:34:59 +0000
-Message-ID: <20260105113503.2674777-3-harry.ramsey@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>,
+	Luca Fancellu <luca.fancellu@arm.com>
+Subject: [PATCH v2 6/6] arm/mpu: Map domain page in AArch64 MPU systems
+Date: Mon,  5 Jan 2026 11:35:03 +0000
+Message-ID: <20260105113503.2674777-7-harry.ramsey@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260105113503.2674777-1-harry.ramsey@arm.com>
 References: <20260105113503.2674777-1-harry.ramsey@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Fancellu <luca.fancellu@arm.com>
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-HAS_VMAP is not enabled on MPU systems, but the vmap functions are used
-in places across common code. In order to keep the existing code and
-maintain correct functionality, implement the `vmap_contig` and `vunmap`
-functions for MPU systems.
+In MPU systems, we implement map_domain_page()/unmap_domain_page()
+through mapping the domain page with a MPU region on demand.
 
-Introduce a helper function `destroy_xen_mapping_containing` to aid with
-unmapping an entire region when only the start address is known.
-
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
 ---
 v2:
-- Rename `destroy_entire_xen_mapping` to `destroy_xen_mapping_containing`
-- Improve code documentation.
-- Refactor nested code.
-- Fix ignored rc error code in `destroy_xen_mapping_containing`.
+- No changes
 ---
- xen/arch/arm/include/asm/mpu/mm.h | 10 +++++
- xen/arch/arm/mpu/mm.c             | 74 ++++++++++++++++++++++++++-----
- xen/arch/arm/mpu/vmap.c           | 14 ++++--
- 3 files changed, 83 insertions(+), 15 deletions(-)
+ xen/arch/arm/Kconfig           |  1 +
+ xen/arch/arm/mpu/Makefile      |  1 +
+ xen/arch/arm/mpu/domain-page.c | 53 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 55 insertions(+)
+ create mode 100644 xen/arch/arm/mpu/domain-page.c
 
-diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index e1ded6521d..1b5ffa5b64 100644
---- a/xen/arch/arm/include/asm/mpu/mm.h
-+++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -111,6 +111,16 @@ pr_t pr_of_addr(paddr_t base, paddr_t limit, unsigned int flags);
- int mpumap_contains_region(pr_t *table, uint8_t nr_regions, paddr_t base,
-                            paddr_t limit, uint8_t *index);
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index cf6af68299..baa6c4cf15 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -91,6 +91,7 @@ config MMU
  
+ config MPU
+ 	bool "MPU" if UNSUPPORTED
++	select ARCH_MAP_DOMAIN_PAGE if ARM_64
+ 	select STATIC_MEMORY
+ 	help
+ 	  Memory Protection Unit (MPU). Select if you plan to run Xen on ARMv8-R
+diff --git a/xen/arch/arm/mpu/Makefile b/xen/arch/arm/mpu/Makefile
+index 4963c8b550..940297af3f 100644
+--- a/xen/arch/arm/mpu/Makefile
++++ b/xen/arch/arm/mpu/Makefile
+@@ -1,5 +1,6 @@
+ obj-$(CONFIG_ARM_32) += arm32/
+ obj-$(CONFIG_ARM_64) += arm64/
++obj-$(CONFIG_ARM_64) += domain-page.o
+ obj-y += mm.o
+ obj-y += p2m.o
+ obj-y += setup.init.o
+diff --git a/xen/arch/arm/mpu/domain-page.c b/xen/arch/arm/mpu/domain-page.c
+new file mode 100644
+index 0000000000..1b43bf82a6
+--- /dev/null
++++ b/xen/arch/arm/mpu/domain-page.c
+@@ -0,0 +1,53 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
-+/*
-+ * Destroys and frees (if reference count is 0) an entire xen mapping on MPU
-+ * systems where only the start address is known.
-+ *
-+ * @param s     Start address of memory region to be destroyed.
-+ * @return:     0 on success, negative on error.
-+ */
-+int destroy_xen_mapping_containing(paddr_t s);
-+
- #endif /* __ARM_MPU_MM_H__ */
- 
- /*
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 687dec3bc6..207e8d2d91 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -290,6 +290,42 @@ static void disable_mpu_region_from_index(uint8_t index)
-         write_protection_region(&xen_mpumap[index], index);
- }
- 
-+/*
-+ * Free a xen_mpumap entry given the index. A mpu region is actually disabled
-+ * when the refcount is 0 and the region type is MPUMAP_REGION_FOUND.
-+ *
-+ * @param idx                   Index of the mpumap entry.
-+ * @param region_found_type     MPUMAP_REGION_* value.
-+ * @return                      0 on success, otherwise negative on error.
-+ */
-+static int xen_mpumap_free_entry(uint8_t idx, int region_found_type)
-+{
-+    ASSERT(spin_is_locked(&xen_mpumap_lock));
-+    ASSERT(idx != INVALID_REGION_IDX);
-+
-+    if ( MPUMAP_REGION_OVERLAP == region_found_type )
-+    {
-+        printk(XENLOG_ERR "Cannot remove an overlapping region\n");
-+        return -EINVAL;
-+    }
-+
-+    if ( xen_mpumap[idx].refcount )
-+    {
-+        xen_mpumap[idx].refcount -= 1;
-+        return 0;
-+    }
-+
-+    if ( MPUMAP_REGION_FOUND == region_found_type )
-+        disable_mpu_region_from_index(idx);
-+    else
-+    {
-+        printk(XENLOG_ERR "Cannot remove a partial region\n");
-+        return -EINVAL;
-+    }
-+
-+    return 0;
-+}
-+
- /*
-  * Update the entry in the MPU memory region mapping table (xen_mpumap) for the
-  * given memory range and flags, creating one if none exists.
-@@ -357,18 +393,7 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
-             return -EINVAL;
-         }
- 
--        if ( xen_mpumap[idx].refcount == 0 )
--        {
--            if ( MPUMAP_REGION_FOUND == rc )
--                disable_mpu_region_from_index(idx);
--            else
--            {
--                printk("Cannot remove a partial region\n");
--                return -EINVAL;
--            }
--        }
--        else
--            xen_mpumap[idx].refcount -= 1;
-+        return xen_mpumap_free_entry(idx, rc);
-     }
- 
-     return 0;
-@@ -418,6 +443,31 @@ int destroy_xen_mappings(unsigned long s, unsigned long e)
-     return xen_mpumap_update(s, e, 0);
- }
- 
-+int destroy_xen_mapping_containing(paddr_t s)
-+{
-+    int rc;
-+    uint8_t idx;
-+
-+    ASSERT(IS_ALIGNED(s, PAGE_SIZE));
-+
-+    spin_lock(&xen_mpumap_lock);
-+
-+    rc = mpumap_contains_region(xen_mpumap, max_mpu_regions, s, s + PAGE_SIZE,
-+                                &idx);
-+    if ( rc == MPUMAP_REGION_NOTFOUND )
-+    {
-+        printk(XENLOG_ERR "Cannot remove entry that does not exist");
-+        return -EINVAL;
-+    }
-+
-+    /* As we are unmapping entire region use MPUMAP_REGION_FOUND instead */
-+    rc = xen_mpumap_free_entry(idx, MPUMAP_REGION_FOUND);
-+
-+    spin_unlock(&xen_mpumap_lock);
-+
-+    return rc;
-+}
-+
- int map_pages_to_xen(unsigned long virt, mfn_t mfn, unsigned long nr_mfns,
-                      unsigned int flags)
- {
-diff --git a/xen/arch/arm/mpu/vmap.c b/xen/arch/arm/mpu/vmap.c
-index f977b79cd4..54d949e7ce 100644
---- a/xen/arch/arm/mpu/vmap.c
-+++ b/xen/arch/arm/mpu/vmap.c
-@@ -1,19 +1,27 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
- #include <xen/bug.h>
++#include <xen/bug.h>
++#include <xen/domain_page.h>
 +#include <xen/mm.h>
- #include <xen/mm-frame.h>
- #include <xen/types.h>
- #include <xen/vmap.h>
- 
- void *vmap_contig(mfn_t mfn, unsigned int nr)
- {
--    BUG_ON("unimplemented");
--    return NULL;
-+    paddr_t base = mfn_to_maddr(mfn);
++#include <xen/mm-frame.h>
++#include <xen/types.h>
 +
-+    if ( map_pages_to_xen(base, mfn, nr, PAGE_HYPERVISOR ) )
++void *map_domain_page_global(mfn_t mfn)
++{
++    BUG_ON("unimplemented");
++    return NULL;
++}
++
++/* Map a page of domheap memory */
++void *map_domain_page(mfn_t mfn)
++{
++    paddr_t pa = mfn_to_maddr(mfn);
++
++    if ( map_pages_to_xen((unsigned long)pa, mfn, 1, PAGE_HYPERVISOR_RW) )
 +        return NULL;
 +
-+    return maddr_to_virt(base);
- }
- 
- void vunmap(const void *va)
- {
--    BUG_ON("unimplemented");
-+    paddr_t base = virt_to_maddr(va);
++    return maddr_to_virt(pa);
++}
++
++/* Release a mapping taken with map_domain_page() */
++void unmap_domain_page(const void *ptr)
++{
++    paddr_t base = virt_to_maddr(ptr);
 +
 +    if ( destroy_xen_mapping_containing(base) )
-+        panic("Failed to vunmap region\n");
- }
- 
- /*
++        panic("Failed to unmap domain page\n");
++}
++
++mfn_t domain_page_map_to_mfn(const void *ptr)
++{
++    BUG_ON("unimplemented");
++    return INVALID_MFN;
++}
++
++void unmap_domain_page_global(const void *va)
++{
++    BUG_ON("unimplemented");
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.43.0
 
