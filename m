@@ -4,54 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0A4C2A072
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 09:17:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1195138.1513113 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF19DC2A074
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jan 2026 11:05:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1195151.1513133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcghW-000719-Rh; Mon, 05 Jan 2026 09:16:34 +0000
+	id 1vciP4-0003cL-Iq; Mon, 05 Jan 2026 11:05:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1195138.1513113; Mon, 05 Jan 2026 09:16:34 +0000
+Received: by outflank-mailman (output) from mailman id 1195151.1513133; Mon, 05 Jan 2026 11:05:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vcghW-000712-OX; Mon, 05 Jan 2026 09:16:34 +0000
-Received: by outflank-mailman (input) for mailman id 1195138;
- Mon, 05 Jan 2026 09:16:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bdeF=7K=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
- id 1vcghU-00070w-Ls
- for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 09:16:32 +0000
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [2a01:111:f403:c20f::7])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 384709cf-ea17-11f0-b15e-2bf370ae4941;
- Mon, 05 Jan 2026 10:16:30 +0100 (CET)
-Received: from DUZPR01CA0040.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:468::18) by PAVPR08MB9185.eurprd08.prod.outlook.com
- (2603:10a6:102:30d::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 09:16:23 +0000
-Received: from DB5PEPF00014B98.eurprd02.prod.outlook.com
- (2603:10a6:10:468:cafe::2b) by DUZPR01CA0040.outlook.office365.com
- (2603:10a6:10:468::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Mon, 5
- Jan 2026 09:16:39 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB5PEPF00014B98.mail.protection.outlook.com (10.167.8.165) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.1
- via Frontend Transport; Mon, 5 Jan 2026 09:16:22 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
- by MRWPR08MB11828.eurprd08.prod.outlook.com (2603:10a6:501:9a::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 09:15:17 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323]) by DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323%6]) with mapi id 15.20.9478.004; Mon, 5 Jan 2026
- 09:15:17 +0000
+	id 1vciP4-0003cC-Fw; Mon, 05 Jan 2026 11:05:38 +0000
+Received: by outflank-mailman (input) for mailman id 1195151;
+ Mon, 05 Jan 2026 11:05:37 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=l/Gm=7K=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1vciP3-0003bi-FL
+ for xen-devel@lists.xenproject.org; Mon, 05 Jan 2026 11:05:37 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7497c5c7-ea26-11f0-9ccf-f158ae23cfc8;
+ Mon, 05 Jan 2026 12:05:33 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 8E1CA5BE34;
+ Mon,  5 Jan 2026 11:05:32 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C299213964;
+ Mon,  5 Jan 2026 11:05:31 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Uq/KLfuaW2n0WQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 05 Jan 2026 11:05:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,184 +53,313 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 384709cf-ea17-11f0-b15e-2bf370ae4941
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=HFHtk6Xfwx7tFlVt2IdlxMlTLAmnSjq9bsoFg3FVcURS+lDjbRK4XWQryRgdCspiOe1B8puRtMAHIJ8SzQOqfdxVEDctnp4NiRbDKrPowBaPeNjvMD++ES9fVXuWBIsE4va4/+nUiAjhQTuc3OmoAE9sVyu0kpIGV/CboU29gFNHdHyiJz1qMyr7i+lqLI5sh79P1VAcT+lQDjad3IaPoiQ+47gf6ljPNtXzJJeDCMAeAYBh7iMoUpHuSW/OdNULkQiXU24lQeoaHa6iR7u1tlgPKUBqU8iT1iFwKHAZ5lSkaa16O+nZRIQHBJfGjieYtEFVaCxgLBzD6ouCb3XPKg==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HOJU0ZwIPPkllI4+3caktRw115EKGzLiBmLFkOAAD00=;
- b=Oc72TmBe0qX52I9yMggK52yh2E0LZ3oMmAIHlQcc0PNIk52F7vWTa/Z2fpNOchp0LrO8ISm4yWR9evH2uQP6jxQPxQlr2OvloTYOSkqDh34BRBDXHhLi4kziosyl9KV3GbdgGTXksGvSGHBbPW3w+8jhDpUa0IwZ0X/YYASNm+esL44ZVW9tVIj1F5R1/I/k+wxrsNNeqdNKfB+tdeLRMCTGYp3cO9DNqZdkfeOcNuLZvDKyzkSYuEMFCll10EMIn3Nv1j3Vmr4W49nBuz06jlZ/WVckvRXxijQUOLgi7Buhlq6IJO5X0Yz7+v51rCeAMutGVHcQrsjfSqEVuBbF5A==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HOJU0ZwIPPkllI4+3caktRw115EKGzLiBmLFkOAAD00=;
- b=EtzLvFHIm3PeF13yqg1mKVkKlbCTTU5L6JiILq4f4QbLOs0kKeFDVTQW3xWtR/prMgTxCuxFMsvfqBaebVERK6nwjjb6pu6yjszUlXp7sSma5jhSdIh5LLCo004d9TEbrvgsRfuh14lW1EAls8VyLPyOzEiUTGKVC7h/MQc8TKw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L5KsgNWCF6IKl3zEy/I6XS2EM1/x6vUGFWvx/USQzSVXZ01F0Z01yptYSdWNFhq9qKexbiijViKr1RY0qQjzBaM6Hq3lSFbr3VJsKYvY3VIJF/KGEFRf9OAWXHsky7Lm+irkxxokVls161sdZwd7MPtPrvW4HT/mHW2ynWq5FhjvA2JaCeAR3m9kd+VYmF7QePRoH7fyqnZ+gw1VT7fafOK3S1jbD4zRy+uns3ycZ+JXXr27EFgWxd9kkfXwXXYct0Ll6GnXzXoJQ93znzPguWmq2SklgtObsCHxUQAYky0si30ys754yO4evfu9amAA17LfdIQ0HyhLaRE48IkTLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HOJU0ZwIPPkllI4+3caktRw115EKGzLiBmLFkOAAD00=;
- b=jWFaH2b3WKFgaaA80TdIPH1w6OrLFvYORHdHge61Xs06RZ3a5of57w/wWe2CXLDkGtL6yhJaXmRbpeLvg1aJm3Ppy5/5cDIS+qQVGR25xt+wrlQJ4q6ozIwZUi1ZLobti/nML+sMFzr/cCbqtLA/APP7Cf8QDPiZQ5biYqLDHuWT/UewVAzbQzNHhEyjkFRje5pbHdY+VPAXUwDpdxQjxgGqvmJJOBAJDOgmFSjCYRR87DHEGqBzURBOD1BkMGVU2J5HAfPzDtEwCRGVUmuMyeKUtiX7tlBYM6E5h/pMwZEkweKmK2so+hF/66e0HBUiNXzSr4djCpdmPeURpnrjxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HOJU0ZwIPPkllI4+3caktRw115EKGzLiBmLFkOAAD00=;
- b=EtzLvFHIm3PeF13yqg1mKVkKlbCTTU5L6JiILq4f4QbLOs0kKeFDVTQW3xWtR/prMgTxCuxFMsvfqBaebVERK6nwjjb6pu6yjszUlXp7sSma5jhSdIh5LLCo004d9TEbrvgsRfuh14lW1EAls8VyLPyOzEiUTGKVC7h/MQc8TKw=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Michal
- Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH] xen/arm: Set ThumbEE as not present in PFR0
-Thread-Topic: [PATCH] xen/arm: Set ThumbEE as not present in PFR0
-Thread-Index: AQHcfiO80ZeGSKmclk2/0HK7x9tq5A==
-Date: Mon, 5 Jan 2026 09:15:17 +0000
-Message-ID: <A6F1798A-BDAD-4FCF-A473-EE9B8DBACF9A@arm.com>
-References:
- <b9e9ec4a393b34b8872a87335db2bde707973c0c.1765276607.git.bertrand.marquis@arm.com>
-In-Reply-To:
- <b9e9ec4a393b34b8872a87335db2bde707973c0c.1765276607.git.bertrand.marquis@arm.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3826.700.81)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	DU2PR08MB7272:EE_|MRWPR08MB11828:EE_|DB5PEPF00014B98:EE_|PAVPR08MB9185:EE_
-X-MS-Office365-Filtering-Correlation-Id: e2372975-7704-4028-610f-08de4c3b180d
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
-X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?JOalNdXt64IkkmEgKThr0UbuXJ4b1ZY9E6r3iPR+gAmMveXxtNt2wbYm/AGT?=
- =?us-ascii?Q?+1Jc2ILBvoQdyOKOsjGv83Ty9zq5R42QHnrVmvoevTcD0AIL5hlqGv680MhR?=
- =?us-ascii?Q?LFihNcsWxv6tv4uKhGJ9HJVTZgzOgf9DhcvXyTYej4NHkOKHr/UeliHhPmYA?=
- =?us-ascii?Q?4a+pD4hVIpwyoS3drIJraxFIEOARFMJqs/jHwR8szdhTJafriJNFcG2GxBxr?=
- =?us-ascii?Q?82NnFAzHyi9v75k0S8tK0SsvC6itDbflF9hI8IKg/2AHkWhsobAcOt8ws2YS?=
- =?us-ascii?Q?qjuTCUKjhQQM/YLFAJzk9DDwVs8vhJnq+jAGH83CrFW8PwuQxZSf0ryz1P3o?=
- =?us-ascii?Q?W1659SdKBCt0fodvlLd1HOWv/eFJBeLWoIOjNcJtWU9DRPCVJIgwKJ4Vt4oc?=
- =?us-ascii?Q?LxeAEx3X7aeshZASJyFvrJfXkxUPPQ7/D8epBQUZ45IgwkHq2rE7TpmnlUFA?=
- =?us-ascii?Q?SqcvFlUhkJKiHA/lZmaLSwouNW0KMXf+foi56dc9GWmffN7beSPquworSNoj?=
- =?us-ascii?Q?Y3IemTXYg6SvJ0Dyk6UIAcUDXJUCX70XRWqW3IZxzQ3k7Mi/8khOGS3Crr1R?=
- =?us-ascii?Q?X2Bvhhp3jjK8T30UYvJDqI+9B4EPp9U6y2j5OaZ0uywK7hLMm9SfWtSuJQUM?=
- =?us-ascii?Q?PbAudeUwLp8eWg1lxB8Qt1aoOhe+jJRxh/h7f0w9ctjciE1vjdkDT69TX3gD?=
- =?us-ascii?Q?ArOWwy9Qnle4blX5fNLNt/nvg0+RST6Fg5tL4KQRr+8FSAABbFTjEzsJbGW3?=
- =?us-ascii?Q?H1PyyLPBbY6tjB8wqsxVlelexL4l+SdSxjp3qTf4+48sACDzunBlbad3CQJ+?=
- =?us-ascii?Q?wBV8CSG3Wv+/69W7GyIaQv0SC2XwZhzkZLHOIM+059425IyTp/gpcYfL3J+O?=
- =?us-ascii?Q?0CHXlCiulZuL7WoNygWIg+6JxOylQz4h+ltN2CvaRVuYHEhw9oWclv19CMkt?=
- =?us-ascii?Q?j2KiB//zB9D/njamC82/u1C4oMHbfvFBbenb69RRb30h01LvHRXRzFdFi4HM?=
- =?us-ascii?Q?SYaQfSXUcvzWAlisLZllIOzmKfD1ccOE4GMG9gkVZnFiKcC7rz/HQ9/mewTX?=
- =?us-ascii?Q?rfUTNKvvMUERtH8WwwSaX5VgBtzfgIQji0ZGReQ5bd8yNoZOvnkdo0ATn8aT?=
- =?us-ascii?Q?Xia1dJIhzuc969Nk4sDA5v2B6e0vVqg2xk4VS5EN2pEg1b6DHQeidL4jk3kC?=
- =?us-ascii?Q?GIMJTPdUJAGJSToq3ZoqLl0tzZHsCRSGeAp4DUGocU+9xs+YRpnkqsP17g4n?=
- =?us-ascii?Q?9TVjNZsTjQ7ZEglgZHR+IM7YAsh4ATI1ybm5MxgTsXhabAxZWRH+JIEpTPs6?=
- =?us-ascii?Q?sFskRMcB2ftNDtC/DvLsinHsKFZzQCLjbzSlryenBuXvtJrNXj6dw8PFns1F?=
- =?us-ascii?Q?4xBVRDINKXycbsbitvv/6haC8BM1+9sTS17WFW4hhEsOpCZfa0+Fj9kGF81J?=
- =?us-ascii?Q?w2JgAGzuh/amtmZc2cXzwtj37ACJ5AMN6PuSgtraN+NUKZN4EAvqgFf4Foxa?=
- =?us-ascii?Q?2qJVSy3Vrxk0TwiiaH364l2VPf9WzaQudV6D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <8F9D7965CA59A448B72CD21A356F8FC5@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 7497c5c7-ea26-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1767611133; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d7kz22UVoMzVOoVceTJa5D3QW6nnJWeqh52qRHMmxyM=;
+	b=D+hNut3y0sEIHOfNimoEEIzc8JDdM0ipyZKf6Oor1G05pOhArTT2PqQObAwGKyqPvd0eaQ
+	zBXF6vXudtWE7VijoF5embZ/WS/e8MHXGPQDYlB7RpCa4fVz/EgXGDfUqy0Ib6h+zqWEtK
+	+A3ogIuG8iwllDvNYQZ4ZcpijOKxyws=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1767611132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d7kz22UVoMzVOoVceTJa5D3QW6nnJWeqh52qRHMmxyM=;
+	b=PQVwouCVc7nGDB1qdgE830ofCVoKADTLcrFqXrmg3S4GjIR2ZlxCGc0yA2KOklpz6Wcxfq
+	FVKxwC+Eq9e9UlSz0mA8FDm5JR2if9kLDGVOWm4WgVerdfDitqlLmYQ+Nx2hiUY4k4ithT
+	XDjGJBzSNza1xccmoLx/qct3gm2bzk0=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	linux-hyperv@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Will Deacon <will@kernel.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Waiman Long <longman@redhat.com>,
+	Jiri Kosina <jikos@kernel.org>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v5 01/21] x86/paravirt: Remove not needed includes of paravirt.h
+Date: Mon,  5 Jan 2026 12:05:00 +0100
+Message-ID: <20260105110520.21356-2-jgross@suse.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260105110520.21356-1-jgross@suse.com>
+References: <20260105110520.21356-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRWPR08MB11828
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5PEPF00014B98.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	6709afd2-bce3-47e1-a6b1-08de4c3af15a
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|35042699022|14060799003|82310400026|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?YvXBA0PPcxjRBJr98zUI9Hox55AyjKW0wG0w4YMRMyp+4GoV+FCVbbhxEhOK?=
- =?us-ascii?Q?Yy4RRciykuXc6UA0wAGJ5CqOdQDnkcVHXFwvjLZtGCyZUuIJ7kiCKsFHSuEp?=
- =?us-ascii?Q?BF+eNJwQuGUZa8JEWL16R2hYdYUG9qCYBzqFCbXMfIp32OrOpDHFTsMv429l?=
- =?us-ascii?Q?yPLcEznDRGJMjYBGbv/bz02O9K3fSM9KKXxHVtFpu4naTTzhI6DQJ/AHOm7J?=
- =?us-ascii?Q?86pHl/cfVzluJlaP6seozwnMJm5v9wqwJts4Ww4lWjvQrUlFH8BBlpTtbxvo?=
- =?us-ascii?Q?cTORvaCsZzgUaBo+xoz451YzYzDlGaQOEUwqiyBd1Ie5puSyzTfnjwFfbJTb?=
- =?us-ascii?Q?G4P5gjaryxVdwNFWB3X0OIKu8JR0x2cUUWE/xwzs5Wlm0d/5x+re7w4YIrsp?=
- =?us-ascii?Q?njiGTqBrmKdIjPnpcVaRgrjaf8nJ6fFWgYuDxfkaLcUuchln2DqbL1wTitJn?=
- =?us-ascii?Q?zIhvA7G79JStkUDjy4q3TaRR2j6E7adtP0nNBbmITpk7d2DgM0tk0uRwd53n?=
- =?us-ascii?Q?Yd478eddpwgEQFIpYS6zLHPBgHMBUzHCrpYGmc+fyryVbmo11YUlJl0MgJHx?=
- =?us-ascii?Q?Gb1679YlHUZvIt2233UTw7vhsMiv/dxlLkeSc1KnGSrUg4qGzt5qQeT17Gym?=
- =?us-ascii?Q?UtqjbttMN0j53bE83dmpMEFHEfHC2B7ZnJ7jbHuvxqa6QlD3ao92/Kwlimyp?=
- =?us-ascii?Q?J7eVS3SHYf9cnDggSbQhA/VSPvn/I6orHN1SxAJzP1X42TeRFA6+tJ73TpUh?=
- =?us-ascii?Q?W4veEU1g/+ALi1YOMLiHavEPCuTQ6M5cV/RHS4wQpJZXmOXcA6BqGq9E5LTN?=
- =?us-ascii?Q?I/rDBZIIevnZBFP3R97J8YwNsAt+ysuuTHNjq6d96FwVjyhU3Sfjan98FKtf?=
- =?us-ascii?Q?rKBNrel87qlKyFIKy/pDA/3eQgQNVX+9Bo3noVkiV8GZq+/yQJkAMT7cbYdE?=
- =?us-ascii?Q?k8fbcgIIRp5YOrLIsjqq52IA2909Tp8ugmovy2Kw8aHrzHGoSZstLXcvru0l?=
- =?us-ascii?Q?aJvPe3i+3w2YUHQ8E2zqU8Rm5UJdYsU6692apHjWAlg0/MaZqWgD73EfbRVr?=
- =?us-ascii?Q?KLAleBFm+60ImcCq3ld+o7GynZmZWQ1Ooi8NnBh2OmjoCOTJblvgW0xSLjQQ?=
- =?us-ascii?Q?j6OedjVP1YD3JfiJsTXtvcRkyWD5jEl95UxPvV4vTzKaPi8Te3ZU42qhUiMp?=
- =?us-ascii?Q?ZXXtKdHGlcyAxmATBKhdEwmXFwx62aIW6uHM1WfHzHCkqi4q5lBMwINOwYA8?=
- =?us-ascii?Q?dvPDkEIX/De1LBD5xOvcy0BDLS71wVMmtgYS7+if4yvhIxDepZw8pXPozj5+?=
- =?us-ascii?Q?i5GccCI8CIBN4f6Ceekt1PPcbj9Gdq1ZGIkBp0jxYZJH+CxRAtLdBZ90BJx5?=
- =?us-ascii?Q?VAE3HxWlvDhDFuDi9OrzJvwCAkIr96355BfSvutJfAPCdA2Xpd4uXW06nFCi?=
- =?us-ascii?Q?Mccm/eAjSVRXefSKzAw3anY9/LXQ3IxeQydMv91MlLHPxkjL8tuar0e4LjVA?=
- =?us-ascii?Q?zBmh9JDmfFnL4GCz+WukB7kgcTIo4TNr+h1TaJxSROnb4p+D/7W/E5k6woX0?=
- =?us-ascii?Q?7UTbSKyo8A0ZzoVqhsA=3D?=
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(35042699022)(14060799003)(82310400026)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 09:16:22.2445
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2372975-7704-4028-610f-08de4c3b180d
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5PEPF00014B98.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9185
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-5.30 / 50.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[];
+	FREEMAIL_CC(0.00)[suse.com,kernel.org,linutronix.de,redhat.com,alien8.de,linux.intel.com,zytor.com,microsoft.com,infradead.org,gmail.com,oracle.com,lists.xenproject.org];
+	RCVD_TLS_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com]
 
-Hi all,
+In some places asm/paravirt.h is included without really being needed.
 
-> On 9 Dec 2025, at 10:37, Bertrand Marquis <bertrand.marquis@arm.com> wrot=
-e:
->=20
-> Force ThumbEE support to not available in the version of the PFR0
-> register value we present to guest.
-> Xen does not support ThumbEE and will trap all access to ThumbEE
-> registers so do not report it being supported if the hardware supports
-> it.
->=20
-> Fixes: 5bbe1fe413f9 ("ARM: Drop ThumbEE support")
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-> Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-> Tested-by: Luca Fancellu <luca.fancellu@arm.com>
-> ---
+Remove the related #include statements.
 
-just a follow up on this one, the QEMU bug preventing PFR0 to be trapped at=
- EL2 on
-Arm v7a will be fixed when these pathes will be merged:
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+---
+V3:
+- reinstate the include in mmu_context.h (kernel test robot)
+V4:
+- reinstate the include in arch/x86/kernel/x86_init.c (Boris Petkov)
+---
+ arch/x86/entry/entry_64.S             | 1 -
+ arch/x86/entry/vsyscall/vsyscall_64.c | 1 -
+ arch/x86/hyperv/hv_spinlock.c         | 1 -
+ arch/x86/include/asm/apic.h           | 4 ----
+ arch/x86/include/asm/highmem.h        | 1 -
+ arch/x86/include/asm/mshyperv.h       | 1 -
+ arch/x86/include/asm/pgtable_32.h     | 1 -
+ arch/x86/include/asm/spinlock.h       | 1 -
+ arch/x86/include/asm/tlbflush.h       | 4 ----
+ arch/x86/kernel/apm_32.c              | 1 -
+ arch/x86/kernel/callthunks.c          | 1 -
+ arch/x86/kernel/cpu/bugs.c            | 1 -
+ arch/x86/kernel/vsmp_64.c             | 1 -
+ arch/x86/lib/cache-smp.c              | 1 -
+ arch/x86/mm/init.c                    | 1 -
+ arch/x86/xen/spinlock.c               | 1 -
+ 16 files changed, 22 deletions(-)
 
-https://patchew.org/QEMU/20251231170858.254594-1-peter.maydell@linaro.org/
-
-Cheers,
-Luca
-
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index f9983a1907bf..42447b1e1dff 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -31,7 +31,6 @@
+ #include <asm/hw_irq.h>
+ #include <asm/page_types.h>
+ #include <asm/irqflags.h>
+-#include <asm/paravirt.h>
+ #include <asm/percpu.h>
+ #include <asm/asm.h>
+ #include <asm/smap.h>
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index 6e6c0a740837..4bd1e271bb22 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -37,7 +37,6 @@
+ #include <asm/unistd.h>
+ #include <asm/fixmap.h>
+ #include <asm/traps.h>
+-#include <asm/paravirt.h>
+ 
+ #define CREATE_TRACE_POINTS
+ #include "vsyscall_trace.h"
+diff --git a/arch/x86/hyperv/hv_spinlock.c b/arch/x86/hyperv/hv_spinlock.c
+index 81b006601370..2a3c2afb0154 100644
+--- a/arch/x86/hyperv/hv_spinlock.c
++++ b/arch/x86/hyperv/hv_spinlock.c
+@@ -13,7 +13,6 @@
+ #include <linux/spinlock.h>
+ 
+ #include <asm/mshyperv.h>
+-#include <asm/paravirt.h>
+ #include <asm/apic.h>
+ #include <asm/msr.h>
+ 
+diff --git a/arch/x86/include/asm/apic.h b/arch/x86/include/asm/apic.h
+index a26e66d66444..9cd493d467d4 100644
+--- a/arch/x86/include/asm/apic.h
++++ b/arch/x86/include/asm/apic.h
+@@ -90,10 +90,6 @@ static inline bool apic_from_smp_config(void)
+ /*
+  * Basic functions accessing APICs.
+  */
+-#ifdef CONFIG_PARAVIRT
+-#include <asm/paravirt.h>
+-#endif
+-
+ static inline void native_apic_mem_write(u32 reg, u32 v)
+ {
+ 	volatile u32 *addr = (volatile u32 *)(APIC_BASE + reg);
+diff --git a/arch/x86/include/asm/highmem.h b/arch/x86/include/asm/highmem.h
+index 585bdadba47d..decfaaf52326 100644
+--- a/arch/x86/include/asm/highmem.h
++++ b/arch/x86/include/asm/highmem.h
+@@ -24,7 +24,6 @@
+ #include <linux/interrupt.h>
+ #include <linux/threads.h>
+ #include <asm/tlbflush.h>
+-#include <asm/paravirt.h>
+ #include <asm/fixmap.h>
+ #include <asm/pgtable_areas.h>
+ 
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index eef4c3a5ba28..f64393e853ee 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -8,7 +8,6 @@
+ #include <linux/io.h>
+ #include <linux/static_call.h>
+ #include <asm/nospec-branch.h>
+-#include <asm/paravirt.h>
+ #include <asm/msr.h>
+ #include <hyperv/hvhdk.h>
+ #include <asm/fpu/types.h>
+diff --git a/arch/x86/include/asm/pgtable_32.h b/arch/x86/include/asm/pgtable_32.h
+index b612cc57a4d3..acea0cfa2460 100644
+--- a/arch/x86/include/asm/pgtable_32.h
++++ b/arch/x86/include/asm/pgtable_32.h
+@@ -16,7 +16,6 @@
+ #ifndef __ASSEMBLER__
+ #include <asm/processor.h>
+ #include <linux/threads.h>
+-#include <asm/paravirt.h>
+ 
+ #include <linux/bitops.h>
+ #include <linux/list.h>
+diff --git a/arch/x86/include/asm/spinlock.h b/arch/x86/include/asm/spinlock.h
+index 5b6bc7016c22..934632b78d09 100644
+--- a/arch/x86/include/asm/spinlock.h
++++ b/arch/x86/include/asm/spinlock.h
+@@ -7,7 +7,6 @@
+ #include <asm/page.h>
+ #include <asm/processor.h>
+ #include <linux/compiler.h>
+-#include <asm/paravirt.h>
+ #include <asm/bitops.h>
+ 
+ /*
+diff --git a/arch/x86/include/asm/tlbflush.h b/arch/x86/include/asm/tlbflush.h
+index 00daedfefc1b..238a6b807da5 100644
+--- a/arch/x86/include/asm/tlbflush.h
++++ b/arch/x86/include/asm/tlbflush.h
+@@ -300,10 +300,6 @@ static inline void mm_clear_asid_transition(struct mm_struct *mm) { }
+ static inline bool mm_in_asid_transition(struct mm_struct *mm) { return false; }
+ #endif /* CONFIG_BROADCAST_TLB_FLUSH */
+ 
+-#ifdef CONFIG_PARAVIRT
+-#include <asm/paravirt.h>
+-#endif
+-
+ #define flush_tlb_mm(mm)						\
+ 		flush_tlb_mm_range(mm, 0UL, TLB_FLUSH_ALL, 0UL, true)
+ 
+diff --git a/arch/x86/kernel/apm_32.c b/arch/x86/kernel/apm_32.c
+index b37ab1095707..3175d7c134e9 100644
+--- a/arch/x86/kernel/apm_32.c
++++ b/arch/x86/kernel/apm_32.c
+@@ -229,7 +229,6 @@
+ #include <linux/uaccess.h>
+ #include <asm/desc.h>
+ #include <asm/olpc.h>
+-#include <asm/paravirt.h>
+ #include <asm/reboot.h>
+ #include <asm/nospec-branch.h>
+ #include <asm/ibt.h>
+diff --git a/arch/x86/kernel/callthunks.c b/arch/x86/kernel/callthunks.c
+index a951333c5995..e37728f70322 100644
+--- a/arch/x86/kernel/callthunks.c
++++ b/arch/x86/kernel/callthunks.c
+@@ -15,7 +15,6 @@
+ #include <asm/insn.h>
+ #include <asm/kexec.h>
+ #include <asm/nospec-branch.h>
+-#include <asm/paravirt.h>
+ #include <asm/sections.h>
+ #include <asm/switch_to.h>
+ #include <asm/sync_core.h>
+diff --git a/arch/x86/kernel/cpu/bugs.c b/arch/x86/kernel/cpu/bugs.c
+index d0a2847a4bb0..83f51cab0b1e 100644
+--- a/arch/x86/kernel/cpu/bugs.c
++++ b/arch/x86/kernel/cpu/bugs.c
+@@ -26,7 +26,6 @@
+ #include <asm/fpu/api.h>
+ #include <asm/msr.h>
+ #include <asm/vmx.h>
+-#include <asm/paravirt.h>
+ #include <asm/cpu_device_id.h>
+ #include <asm/e820/api.h>
+ #include <asm/hypervisor.h>
+diff --git a/arch/x86/kernel/vsmp_64.c b/arch/x86/kernel/vsmp_64.c
+index 73511332bb67..25625e3fc183 100644
+--- a/arch/x86/kernel/vsmp_64.c
++++ b/arch/x86/kernel/vsmp_64.c
+@@ -18,7 +18,6 @@
+ #include <asm/apic.h>
+ #include <asm/pci-direct.h>
+ #include <asm/io.h>
+-#include <asm/paravirt.h>
+ #include <asm/setup.h>
+ 
+ #define TOPOLOGY_REGISTER_OFFSET 0x10
+diff --git a/arch/x86/lib/cache-smp.c b/arch/x86/lib/cache-smp.c
+index 824664c0ecbd..7d3edd6deb6b 100644
+--- a/arch/x86/lib/cache-smp.c
++++ b/arch/x86/lib/cache-smp.c
+@@ -1,5 +1,4 @@
+ // SPDX-License-Identifier: GPL-2.0
+-#include <asm/paravirt.h>
+ #include <linux/smp.h>
+ #include <linux/export.h>
+ #include <linux/kvm_types.h>
+diff --git a/arch/x86/mm/init.c b/arch/x86/mm/init.c
+index 8bf6ad4b9400..76537d40493c 100644
+--- a/arch/x86/mm/init.c
++++ b/arch/x86/mm/init.c
+@@ -27,7 +27,6 @@
+ #include <asm/pti.h>
+ #include <asm/text-patching.h>
+ #include <asm/memtype.h>
+-#include <asm/paravirt.h>
+ #include <asm/mmu_context.h>
+ 
+ /*
+diff --git a/arch/x86/xen/spinlock.c b/arch/x86/xen/spinlock.c
+index 8e4efe0fb6f9..fe56646d6919 100644
+--- a/arch/x86/xen/spinlock.c
++++ b/arch/x86/xen/spinlock.c
+@@ -8,7 +8,6 @@
+ #include <linux/slab.h>
+ #include <linux/atomic.h>
+ 
+-#include <asm/paravirt.h>
+ #include <asm/qspinlock.h>
+ 
+ #include <xen/events.h>
+-- 
+2.51.0
 
 
