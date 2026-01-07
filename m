@@ -4,29 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B817BD0D16D
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jan 2026 20:02:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1197192.1514796 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6224DD0D171
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jan 2026 20:33:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1197224.1514829 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vdZjk-00038u-Rx; Wed, 07 Jan 2026 20:02:32 +0000
+	id 1vdaDk-0007q2-Jj; Wed, 07 Jan 2026 20:33:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1197192.1514796; Wed, 07 Jan 2026 20:02:32 +0000
+Received: by outflank-mailman (output) from mailman id 1197224.1514829; Wed, 07 Jan 2026 20:33:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vdZjk-00038n-Oy; Wed, 07 Jan 2026 20:02:32 +0000
-Received: by outflank-mailman (input) for mailman id 1197192;
- Wed, 07 Jan 2026 20:02:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vdaDk-0007pv-G7; Wed, 07 Jan 2026 20:33:32 +0000
+Received: by outflank-mailman (input) for mailman id 1197224;
+ Wed, 07 Jan 2026 20:33:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xjqK=7M=proton.me=milky_way_303030@srs-se1.protection.inumbo.net>)
- id 1vdZjh-00038h-Ip
- for xen-devel@lists.xenproject.org; Wed, 07 Jan 2026 20:02:31 +0000
-Received: from mail-4319.protonmail.ch (mail-4319.protonmail.ch [185.70.43.19])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c9a57512-ec03-11f0-9ccf-f158ae23cfc8;
- Wed, 07 Jan 2026 21:02:26 +0100 (CET)
+ <SRS0=PFOO=7M=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1vdaDi-0007pJ-Sw
+ for xen-devel@lists.xenproject.org; Wed, 07 Jan 2026 20:33:30 +0000
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c105::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1fe9c79b-ec08-11f0-b15e-2bf370ae4941;
+ Wed, 07 Jan 2026 21:33:30 +0100 (CET)
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
+ by DS1PR03MB7845.namprd03.prod.outlook.com (2603:10b6:8:21c::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Wed, 7 Jan
+ 2026 20:33:26 +0000
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9499.002; Wed, 7 Jan 2026
+ 20:33:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,109 +49,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c9a57512-ec03-11f0-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1767816144; x=1768075344;
-	bh=x/Ic/i0CEktQ5Yo7F7Ko7SDsLFKzmOEy8wDcpfg0JUE=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=EHjdW1vJwtSWFPJ9XrJ1iCZoX3hnNoz99Vnw2y5lPxJKy4rVE10h6oadO8/eihtgr
-	 iutPv86Ra2WBYqZMFaflctqAnnwvKkkC2NCz9wbvyv0IO+oohNhDQYoIaNAOUsMVln
-	 aGbJInb30rbnV1jwnCZxFYieO5YWL38Fx+mVsJsug7kuricV3pcoSVuSzZDDAZqyOb
-	 Xu/zd6kFbT/Hlrq519BxIU4FeaTq1Cht4KImcXPWeDSr6ZEEt6VyN3CXKbVkvyLYYy
-	 +i+pVy7lETKq1bDNb/uy8E58/gtYtEKmafjSHxDrc09583S//yHjCIbREgaoVedSN/
-	 W3KHgZu0e/xUA==
-Date: Wed, 07 Jan 2026 20:02:19 +0000
-To: Jason Andryuk <jandryuk@gmail.com>
-From: Milky <milky_way_303030@proton.me>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: Cpufreq drivers not working on T480S
-Message-ID: <unRhWiUKUGc3G4yBmJJ2Pc0JOSbM4HC0b-fTBaf1f0RYJEi_aIHV3-il1EafrSE9c77-tZNUV386xdg3UANDdeonG_zecEVq7HrG2COheJ8=@proton.me>
-In-Reply-To: <CAKf6xptg+0KrsjrmLD1iZFuT411S+7Pz9-HSX8L-KwQFR8o3Nw@mail.gmail.com>
-References: <dg8zeLW4X3RWRJt-1jas5pAqHft5GbxYxS5mNwc4ONE8tDEruL1-5a_e-vQu1RdOUWsMXxKe_Igcewy2zcbnOfkaGVG7y6hXLcLd78HI1po=@proton.me> <CAKf6xpsN_RnY2dHnXKj_-UySf1z0auye2qy=KHOEhcBbZ1un9A@mail.gmail.com> <NqFx_tXl0Zmx2ft7YVNGodkDcUFK7nA8KWUQMjOmD0y4T5W3-sTcGxCt7ViSRObUeJog3069xTY0ODZIG5hrX-Th2MvE95dSze13MGQ2tOY=@proton.me> <CAKf6xpvtF_cE7vMb9JfsVLkYH1XRXZG3nj+QO_72-zKJ3Cxh9w@mail.gmail.com> <DkXw78UBxXYCLNKCoThGPM1kde5JwARo3NhWtlBBrrFtLFVTnwNlwDlZYzuNlSdAs9XzE0aDPqgt9dri9YKJULULBXwJLEcEgbLOgzkVSVU=@proton.me> <CAKf6xptg+0KrsjrmLD1iZFuT411S+7Pz9-HSX8L-KwQFR8o3Nw@mail.gmail.com>
-Feedback-ID: 171106842:user:proton
-X-Pm-Message-ID: 725be580148ccd17904489e21fd4fbbb99e08fa5
+X-Inumbo-ID: 1fe9c79b-ec08-11f0-b15e-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZgUtDQ9oUgampNK88UBgjvEnAuAoGR/5iE+ZJ2B+oJMDf5nD2Qi3WKBXas4GVYjTHaB6b4HevMLST1ImnBhwqnofDJQX9Y/n4fYebq+Vd7P2pfGwTYhIijJsAzWuQquBYpsymufQmUVmnvz/wkGagi3s2UTTUYdZYl45En/bxACqcljptU3g3faNCveu6f0wUB2OPkODsjAbwCFfU4X/0wYhwOaxpo/7XdJdynSj81y96oIg/544ijsT8xFpbnvf92ak1+CUAsoRwy3Q7NhpW25f7Xp6UxQNJA2rTAENeRupLYIXENp4xxKyyMPTIfKq37/BrXLoJqa/R1RF20yCZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S3BJtMRKxVuXEnoIV9FOzi+tgLxVenbBPFNkP9YtRQ0=;
+ b=cW4+NsxCGEnDvWLRPx4uENGf9mfHawSqk8xgy5yo/y24afsYHYlTyqQZ9tDZqKQmT1I7Inls95k8T1J27vkGAIrfmBTLCyCkpXH+zvCNuwueY8RtXOrSId8gDct40xtubNGvpwHN0TZAXm5hffIvz2Lc5Spi16V2YJ2Q1PMZfrYPG6znPYt5Y4ynJSkQljL+c4Uf9YfjPKwjtm5hP4rmthyU/ae71NkZmXua1ppVLDEpOCqzBzr7vOuHEKYaCt9dmbVr4Z2Jn3yMH6XtYjD4hoNt1KLGu1wO5OBoNP19Gar6uGL1me5N9NqqSsCMR0x//POh28gba1aUPTBbOWThPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S3BJtMRKxVuXEnoIV9FOzi+tgLxVenbBPFNkP9YtRQ0=;
+ b=uzhGOkREnWooUfyjSfFF3weBScj23LtUvJcETSORL0XHbNMkDNLSvrhaPJNyM1bdh1TPB157FLAaqSC/BTQvdbREEhzThmHHzi4yBFTo7MbrLl4c3MSSCH53Gy8E2Ajs4GbMPloU6biFOjp3r2jnB/7f1uwajGq42sg9vfoIbcc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2] x86/hvm: be more strict with XENMAPSPACE_gmfn source types
+Date: Wed,  7 Jan 2026 21:32:59 +0100
+Message-ID: <20260107203259.59369-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.51.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PA7P264CA0315.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:395::13) To CH7PR03MB7860.namprd03.prod.outlook.com
+ (2603:10b6:610:24e::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DS1PR03MB7845:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68644b76-69d4-4b1f-f371-08de4e2c02b2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?QUJaQTBpVFRHMnN5NXlUa3dnVEVMc1hrcTg2RmRudW5VRjNtaEZueUMxaWNz?=
+ =?utf-8?B?TnpvbFlBNnlyb2JPZ255MW9UL0hBeXJDTnJZZWJQQ2VvTVJIWlZEV3A3VHIz?=
+ =?utf-8?B?ZUQzSEtRcStrSjRXcExqeFIvOTVvNlB0OXVoTFNxR3lDWTd6WFgrdTJsTGw2?=
+ =?utf-8?B?TFdKSUphRHhPak9wbUlmTXM5NFZPRkNNL3RmM1A0NVdKR3ZPR29HclV5aURo?=
+ =?utf-8?B?bWN4dDFTN1JBYXo3bHJScy9FbElDYTF6NndrbzVHcHBhRWVIZDMwZ3Jralox?=
+ =?utf-8?B?WXFsVGM3U3krckd2VndxbXVicit4NVcxc0FzcHF3ckl2ZWZhcmgwVUdaNUND?=
+ =?utf-8?B?b3FqZzRxUjE4WVpOTzhzM0RwS3ZGLzRVTGdrcUEwMGJzTVorUndpWjFwbWpr?=
+ =?utf-8?B?dzRibVlDb3ZoQldGZTFvVDlrb056VGkvR3k5dXJacG9DQ0U2dENHd29xa1du?=
+ =?utf-8?B?dng3OUg0dVJXMGFxTHNEbUd2NGhEdytVWVJvWERuUzhmdTVoOU40aE9BQjI3?=
+ =?utf-8?B?Q0pnVGs3djBudlRuVytLdzltOXJ0MXVoWGdSbWRmOGVha1YwVTFjV2xyU2FL?=
+ =?utf-8?B?VXdWWXJudGV4QnJRaXYyOGg0YUlzTkpvZnViVFpzNkdjQzlhNWtjSVpKeFI4?=
+ =?utf-8?B?YVI5Szl1N2E2VU5WYzkvRm1Bd2srV2R4R1Y4SkxTN1lSS3RxcXAyNDNGOWpy?=
+ =?utf-8?B?eVlDWDZqcVR2cDNoakovaFc0VjdIUzE2dkFZVDE0ajZ3THhnWHlOQUxuQUJk?=
+ =?utf-8?B?RkNTbWpEUnJDNmQ5MkZjSTNCUlcvNjhjeEpMNW5uV2F1MUd1bFE0SWhoUTZR?=
+ =?utf-8?B?bnphQ2I2VHdtbk9GU1ZiSmdZRzBqVXN0enp0QXpTQWplSThlQ0p0ZFVFcW5Q?=
+ =?utf-8?B?MUVjTytObVFLa0kwU0IrQkR0L2wvRE9MOFJtR0NSeWVOWXJtcEhKZU9GOHZH?=
+ =?utf-8?B?TmtyRW9JT1dybzJDT3hDTWZweER1Rk5SK3VFc1cvd1FXSVdHVnlzN2JlSGcv?=
+ =?utf-8?B?Y0xNcFZvSC95MEYwVWphbUhia2xrdTNuSjAyRHRLQjFIYlVBSVhvZlJTS1VR?=
+ =?utf-8?B?aWFuVnhSVEExZWg5dk4zV0RSNG02RVFPOS80d0IzTkM5aWltc2RjWThmUGlN?=
+ =?utf-8?B?bnVWaWhTMjhxTjlVbmVsZFB6bWtGT0t3bXRBUWNKVWg1c1dQM1NVUHhLRXNW?=
+ =?utf-8?B?VVpRSE5YMGFQZ0JjWitIUmFEdGV6Q0pqek80SnNWRWVLVkY2d1dVRFFsVHJw?=
+ =?utf-8?B?NFh3czJTQzk2NlkrMVJ3ZjBESitXSEVFenFMTDhKazFuZFR3eHY4U0Y4ZGNP?=
+ =?utf-8?B?RVlpakRzMWdrUTJJZjBuYXFKRGZrRXpRdzkyeDhQaVYxK0VteWpTRVRVdWlh?=
+ =?utf-8?B?UThjNDZiWk53Q29wcWc0Z0txTmJZMXkxZ0xSRDdkcEdicktlVWZaUWthRjR4?=
+ =?utf-8?B?TjdFN1NoMFV4S3BzSVNiN1lmamdHZjI0bGFIODdvQWRNbzEzbHFGZktrTjVJ?=
+ =?utf-8?B?RTd3bUJFTXRHamU1eXFBalhyU0N3R3VyTGw3TjZ2NFppc0dWWGRaazFoak9H?=
+ =?utf-8?B?MTRkNUk0KzBtTVRXQURlS29ZWjAzcFdySGQ0YXpUNFJsa09YSEFnZHd1RFFv?=
+ =?utf-8?B?d0VrbXRqN05kOUo0YmlXT3p6Q05wWE8yNnpBeFZEYUhLem1ERitaaGxHcU5u?=
+ =?utf-8?B?MmNXb2UyYWtybFFzYlpFdzNMOTRVbHNhZlplN0Q5dUZTamU5cGtGakFTb1Rx?=
+ =?utf-8?B?T1QyV0xlK0JzZ2Z0NEJCdTVGclRtcFR5K0FmR3liRmRNdEovZktjY1ovVmlM?=
+ =?utf-8?B?VnkxVVVIQlZDUnBvMkViZ3lDSEhkRTQxaEgyak5iVExBMEEvemovSkE2Mkkr?=
+ =?utf-8?B?dFFmSVZYcTBvanZiVzdHNkVuYjFEbDgzckZhUE9Ba1Vyc0R0TmdCN01oMkJP?=
+ =?utf-8?Q?zXI5MNzcGcCUSziEyGwJwiJAEkm6ni8X?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?YXpuWHd5V25BNG10cGJTUG1IVnhQemw4aTZTUS80a1hOemx0MmNUb1FqYkxz?=
+ =?utf-8?B?MlBRWWQ2TytBeFZodXBadTdpdEMzUGRWeFRPcWh2bUVIZGMrMTFZWWRRd2NF?=
+ =?utf-8?B?QXc0RUhUb0l6SERnejZZcVFHUVd6djRxSlFOMmZwbFU1NlhOMTRHb1d3dFI1?=
+ =?utf-8?B?KzBMbTRNZXVrOTB1VlZmVy9wWmRVcFF1UTl4U2l2Q1crclpoR2RlR1FybzJJ?=
+ =?utf-8?B?SjZwa1Qzdml2MXJwUFUxRVJRQ0tMQllqZGRyazBEeEY2WHRUZWt6cGlhenZq?=
+ =?utf-8?B?SkhvRFFUV2I2Q2h0bkRVVnZibDNNNVk2ZG1nVlZpVmltNVNqZVJPa01QQzdx?=
+ =?utf-8?B?bTlsUk1tWnZ2clExeFBSR2RHelQxbXFJQ2Y0U0pHL2hseFhxdXlTSTlhN1Nq?=
+ =?utf-8?B?SmpBek5wRXJmWTFrWDJqNHE2WVQyN0I5QTFaNVNIQjNoS2lCUmM5aVdkL1U5?=
+ =?utf-8?B?QjF3VEpLYzdjeTdtbjJLWERoTHpnVEVWYk9nUi9OV08vYjdYdHdqcjF2YVB6?=
+ =?utf-8?B?dVRrL3ZweVozcmUxaTF3OTBPSzFHRFJKdmdPVHFIYm1wQ1FOTDJHeklNaUxa?=
+ =?utf-8?B?UW55eEpzZHYxbU5Xc2I3RWNzazVqSlZmSjUzM0t2dm1oNlBBM2g3Z1k5YjU2?=
+ =?utf-8?B?NVpmZ1JjbDl6bGN3UWt2bktNZDJhaDNsdWhIM3l5QXdDWm9kY1RsazZBeFpS?=
+ =?utf-8?B?cURoTGZNczdlQnRZWGlwMHZlMGw4Rm54TEJSVWxOa1BWcnJWV3RnREQxSDVh?=
+ =?utf-8?B?Y094eG90SlFxalBNdDNpUmxPdHJPaHNLYVhWL1BaUWJNSWNCL1lxc1pmK3p3?=
+ =?utf-8?B?RnFtNmtxc1pTSXlQQUEwbWJVQk1zeTRlVExCallCZnBoanplOE9iUkFnd2tO?=
+ =?utf-8?B?TmRJaVFRVE9lRHUrTm1zV1ZjUUJPZno3ekdlbCs0R1h6U09qVk5zblZmdDBm?=
+ =?utf-8?B?a3VGZzRoOXR5MXRjSGpadjFOVHUzWWZqRGpxRDlxWGNkMFNoaXhGdHFKZkta?=
+ =?utf-8?B?WlVnQ25Nb1F5d1BrMkxXQzIxQXhZV1hTenQ0YlJIWGNGWUpBV2lpRm9KVE5N?=
+ =?utf-8?B?ekI5d3ZHZHdkSVZVZUpNMkg0QVRjVlZzTUEyNkxwL0c2NDdRR0VZTTBHeG93?=
+ =?utf-8?B?dmQreHh3SUdoY242aDRYbnQwVk41WDdWOTJzYWNuT0VLdU1vcXhUMUxDVDQ5?=
+ =?utf-8?B?OE13VEVubXJINDlrWDh5aStJWWQ3L1AxOTVJSHVkUUZzYVNWRnhRbkV5ckdJ?=
+ =?utf-8?B?SHdDTzZXM1pPWDlnUHpoaW85TDVaMElFdmRnR0t2b1FydzJBZEt1bmh4a0gy?=
+ =?utf-8?B?SnB2dHVna1Q2bkFNdnJmOWh2RC9WTHRnbzdBZFN2YXBMRnh5V3g4Vy9Yd2FZ?=
+ =?utf-8?B?dnlDaUJNQ002S3JyUnJlbzh4Vk5mK1VDNHZ0U2JwY0tpY0pHM1FCQ1c4aDB5?=
+ =?utf-8?B?YTNhQThjNlBxS25nOURyT04vYTRHUVdoQXZBQkZLS29aaVNUZ3R4Ly9QcURm?=
+ =?utf-8?B?a010MXZUU3Q5K25lTWFHdVZNTUhEK3A5VzJDMExpZFJtc0tCRXY0ZnNWZ3dP?=
+ =?utf-8?B?N3hyYTRXSGFyTXlQTHNqWCtOQ2VXc0JkRTA1ZGI5UEhxaU5BQ05rc1k2Q0tL?=
+ =?utf-8?B?T01vd2prT0NaY3VnRlowdEhtSGhmQXpOYmpRNmtvUHNsbUpDb09NZEhyZlU1?=
+ =?utf-8?B?Y3Q4WVNEQ1d6bnpSR1RzNmZiVEtXWEtTaDBkUkpGenBIby8xY1dUQWlmbHND?=
+ =?utf-8?B?N1dUeWNJZ1o5TEVNaS9SR1QyZ1FFQnNNT3l6VkRJQXlWTldQWitFOE1GR3N2?=
+ =?utf-8?B?WlJDY255RUxTd2V5ZDRuV2Ntc09VVjUxc0JlNjIreEhLKzRjaDBPa2l1ZU4y?=
+ =?utf-8?B?ckx4UWM3QzBSUVRmcEs1U3U4YWVUUE5COXZmNEVQMkFBVkNvcFBSa0JRNGVt?=
+ =?utf-8?B?NmVqbE5jZFR2YWJwQlJNWUtkMW5BK1Z5dndGWDRaZ0Q4WlVOWUd0Y0hYTm1q?=
+ =?utf-8?B?VFBldWIvOGJXTXo5c0JRVDFPK3RTblZBcUozUzBsS0t6YThodUZINU5sYXRp?=
+ =?utf-8?B?RCtKZVM1TGEzVVRpV3N4RG9FTFlHWmRqcXZrMFlNUEIxQ3lNeFppdFpqZFZS?=
+ =?utf-8?B?d1YvMUlVNDlGV3h0TElKRldqK2RDZmpMa3hnNkVIWlVZd28vUjhuaHUrL09j?=
+ =?utf-8?B?T09JUXpwY0kxQU1Bd1NwUk5HOTlCUDRaNStNcjVFUVlqeDgzS3A1WjhlREox?=
+ =?utf-8?B?WldTTzBPVHVwY1VzWVNsd3hVbkY2S2c5THdTSXh3aFBESU1sd0tLRGd3OFJo?=
+ =?utf-8?B?Mm5VUHRsQjJVV01BZHVORXNQc0ZOUWNEeTZpaGxHRk9NeWhyZHpOdz09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68644b76-69d4-4b1f-f371-08de4e2c02b2
+X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2026 20:33:26.5822
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D2KihEAulngqxtET99SonT3y6akNEmPfkw8klGA4wis4BYRwpGcZErOhbu5guW3WFNr+/njSrRUFOUTN3BDAhw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS1PR03MB7845
 
+XENMAPSPACE_gmfn{_range} allows moving gfn around the guest p2m: the mfn
+behind the source gfn is zapped from the origin and mapped at the
+requested destination gfn.  The destination p2m entries are always created
+with type p2m_ram_rw.
 
-On Tuesday, January 6th, 2026 at 1:06 AM, Jason Andryuk <jandryuk@gmail.com=
-> wrote:
+With the current checking done in xenmem_add_to_physmap_one() it's possible
+to use XENMAPSPACE_gmfn{_range} to change the type of a p2m entry.  The
+source gfn is only checked to be not shared, and that the underlying page
+is owned by the domain.
 
-> > As suggested, I added the debug parameters to the dom0 kernel. Before o=
-r
-> > after `modprobe xen-acpi-processor dyndbg=3D=3Dpmf`, there is no useful
-> > debug information that I could find, apart from the
-> > `xen_acpi_processor:get_max_acpi_id` message as seen below.
-> >=20
-> > ```
-> > # sudo dmesg | grep xen.acpi
-> > [ 2.282851] Kernel command line: placeholder root=3D/dev/mapper/qubes_d=
-om0-root ro rd.luks.uuid=3D<...> rd.lvm.lv=3Dqubes_dom0/root rd.lvm.lv=3Dqu=
-bes_dom0/swap plymouth.ignore-serial-consoles 6.6.77-1.qubes.fc37.x86_64 x8=
-6_64 rhgb loglevel=3D9 "dyndbg=3Dmodule xen_acpi_processor +p" "xen_acpi_pr=
-ocessor.dyndbg=3Dfunc * +p" rd.qubes.hide_all_usb
-> > [ 5.224092] xen_acpi_processor: Max ACPI ID: 6
->=20
->=20
-> You successfully turned on dyndbg to get that output, but there is no
-> further output. This makes me think something else is wrong and
-> xen-acpi-processor doesn't upload anything.
->=20
-> The call here https://elixir.bootlin.com/linux/v6.18.2/source/drivers/xen=
-/xen-acpi-processor.c#L557
-> to
-> https://elixir.bootlin.com/linux/v6.18.2/source/drivers/acpi/processor_pe=
-rflib.c#L421
-> goes into some acpi code. Maybe there are other messages in dmesg
-> around the same time? Maybe you'd have to turn on more debugging to
-> get them.
+Make the source checks more strict, by checking that the source gfn is of
+type read/write RAM or logdirty.  That prevents the operation from
+inadvertently changing the type as part of the move.
 
-I'm dumping below a few more entries from the same dmesg log.=20
+Fixes: 3e50af3d8776 ('New XENMAPSPACE_gmfn parameter for XENMEM_add_to_physmap.')
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes since v1:
+ - Also handle logdirty types.
+ - Return -ENOMEM on failure to unshare.
+---
+ xen/arch/x86/mm/p2m.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-```
-[    5.175506] xen:xen_evtchn: Event-channel device installed
-[    5.208487] xen_pciback: backend is vpci
-[    5.215060] xen_acpi_processor: Max ACPI ID: 6
-[    5.721955] pciback 0000:00:14.0: xen_pciback: seizing device
-[    5.722265] xen: registering gsi 16 triggering 0 polarity 1
-[    5.722288] Already setup the GSI :16
-[    5.723125] pciback 0000:00:1f.6: xen_pciback: seizing device
-[    5.723389] xen: registering gsi 16 triggering 0 polarity 1
-[    5.723408] Already setup the GSI :16
-[    5.829865] pciback 0000:02:00.0: xen_pciback: seizing device
-[    5.832192] xen: registering gsi 18 triggering 0 polarity 1
-[    5.832214] Already setup the GSI :18
-[    7.476065] nvme nvme0: pci function 0000:03:00.0
-[    7.476438] xen: registering gsi 16 triggering 0 polarity 1
-[    7.476459] Already setup the GSI :16
-[    7.486102] nvme nvme0: 4/0/0 default/read/poll queues
-[    7.489856]  nvme0n1: p1 p2
-[    8.877791] xen: registering gsi 16 triggering 0 polarity 1
-[    8.877823] Already setup the GSI :16
-[    8.877910] i915 0000:00:02.0: [drm] Found KABYLAKE (device ID 5917) dis=
-play version 9.00 stepping C0
-```
-
-> You could de-compile the ACPI tables and see if they have CPU info.
-> Something like:
-> mkdir acpi-tables
-> cd acpi-tables
-> cp /sys/firmware/acpi/tables/* .
-> iasl -d *
-> grep -r -e _PCT -e _PPC -e _PSS *.dsl
->=20
-> That could help confirm the tables are missing.
-
-Unfortunately it would appear so. Grepping doesn't return any results.=20
-
-The same is also true under Debian Live; does it mean that frequency scalin=
-g, since it seems to be working under Debian Live, doesn't always rely on t=
-his?
-
-I'm currently trying to find someone else with a librebooted T480S to check=
- their ACPI tables, since I'm wondering if I botched my libreboot build.
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 2433230ac71c..759f3273d3d8 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -2015,11 +2015,17 @@ int xenmem_add_to_physmap_one(
+     {
+         gmfn = idx;
+         mfn = get_gfn_unshare(d, gmfn, &p2mt);
+-        /* If the page is still shared, exit early */
+-        if ( p2m_is_shared(p2mt) )
++        /*
++         * The entry at the destination gfn will be created as type p2m_ram_rw.
++         * Only allow moving source gfns with read/write or logdirty RAM types
++         * to avoid unexpected p2m type changes as a result of the operation.
++         * Note that for logdirty source type we rely on p2m_add_page() marking
++         * the destination gfn as dirty.
++         */
++        if ( p2mt != p2m_ram_rw && p2mt != p2m_ram_logdirty )
+         {
+             put_gfn(d, gmfn);
+-            return -ENOMEM;
++            return p2m_is_shared(p2mt) ? -ENOMEM : -EACCES;
+         }
+         page = get_page_from_mfn(mfn, d);
+         if ( unlikely(!page) )
+-- 
+2.51.0
 
 
