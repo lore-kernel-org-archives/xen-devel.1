@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98156D0D155
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jan 2026 18:02:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1197104.1514757 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25120D0D151
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jan 2026 18:08:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1197123.1514766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vdXrE-00041y-Te; Wed, 07 Jan 2026 18:02:08 +0000
+	id 1vdXx1-0004nu-KR; Wed, 07 Jan 2026 18:08:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1197104.1514757; Wed, 07 Jan 2026 18:02:08 +0000
+Received: by outflank-mailman (output) from mailman id 1197123.1514766; Wed, 07 Jan 2026 18:08:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vdXrE-00041r-R2; Wed, 07 Jan 2026 18:02:08 +0000
-Received: by outflank-mailman (input) for mailman id 1197104;
- Wed, 07 Jan 2026 18:02:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vdXx1-0004nn-Hn; Wed, 07 Jan 2026 18:08:07 +0000
+Received: by outflank-mailman (input) for mailman id 1197123;
+ Wed, 07 Jan 2026 18:08:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PFOO=7M=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vdXrD-00041l-Pe
- for xen-devel@lists.xenproject.org; Wed, 07 Jan 2026 18:02:07 +0000
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [2a01:111:f403:c105::5])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f74701aa-ebf2-11f0-9ccf-f158ae23cfc8;
- Wed, 07 Jan 2026 19:02:02 +0100 (CET)
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by LV5PR03MB8411.namprd03.prod.outlook.com (2603:10b6:408:360::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Wed, 7 Jan
- 2026 18:01:59 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9499.002; Wed, 7 Jan 2026
- 18:01:59 +0000
+ <SRS0=wtGs=7M=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1vdXx0-0004nR-Jt
+ for xen-devel@lists.xenproject.org; Wed, 07 Jan 2026 18:08:06 +0000
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [2a01:111:f403:c101::7])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d00d5d43-ebf3-11f0-b15e-2bf370ae4941;
+ Wed, 07 Jan 2026 19:08:05 +0100 (CET)
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by DS4PR03MB8400.namprd03.prod.outlook.com (2603:10b6:8:32a::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Wed, 7 Jan
+ 2026 18:08:00 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.20.9499.002; Wed, 7 Jan 2026
+ 18:08:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,289 +49,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f74701aa-ebf2-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: d00d5d43-ebf3-11f0-b15e-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vSdaQrPPas3r4DmDVsYDPbpWld91majtERyOWjFJuLHvCdDSPQ1mtSj7rNJsiEUnBqdnXbOl5HmFdBi1jUBGUZL4LQOftsTwfT8ahFfnp5pQdxopVIFObXwRKyaN+SEj1uLkJgH+9T/xq7msPhfK5YJ+bMuBKUBEpDCspHXGPBZmJV6mRSAVi9kZGs8V7/b4hy+SsSNkECt3qcFxa0h8f81XjltRultuV7flN02r+wsMhFSvsFKORpEnuWsuK089zL0/IQ3H33bluBpgFXZTtwlcpnbhT/kWo+YJlZtynISm0OJD6joBdz4j3m5rnCLIuE02EB+qf9mjn8Cbvda7yQ==
+ b=IxaZB/LiURLxp4fFfcMp/6C2db8ozNwC6f8BfuAH0/mS5VSOl+HJH9QM2fpX8Ftx71aP8A1iovIhzx9CBbFfZwC1TbaubX8cKz10HWdbKlrJWSBc+YJKDq8NmuethxJUANtSzwyj0mDJJYyR/lZ5ulprSH3Ns6PoVqdlspACB8wolYxts2tvFqJsIuTd+gy/yUMCB0w44/EjEJLr3ucvYafGzr+3cEm626xWkX1TUeU+aKWdG9g02lrIson95eksmhwweZLY9Tb2yFXVGc+Qi9Lf2QctKdPlkCyx2Ej3vNpOGcgUBzUITMI2ZAzKvqA9a2rqN/vH0DXGJJ2ZpLD0lQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YHsCGsnpSWYt16lVqmzOOp06AU35khhTb5siHQs4e94=;
- b=pdJ/N5UGyG2zu4XebiJouXqJC4iWzyOusF0R80rXAwOEAH9ylqomDP3gULks+W4wC7p4dbMK4zqKk1pp3evs+saFK7oQX3HeaWYi4fgEDrtGRAZ/gqHaTizCasRJulZ2jSlfU7xm82vBL42QsQztSNclcAX8uVO2DymAuo98ho0BbX5OWV5cE5vjQ28eKsNjYocyAfImcVZ+RAycVvS1VYrB9Ff8SuXvCVFGA2MREJyGV8SF2uPSU5liCWsmYoEEpTj85tz3UEQFH+M3AabF+Pzu2fVUNwaojrLQxCXayd9ZyWh+mBrZeWOQWA8Ygk/Zw9BkW9cRbRAY2FLbjaSfiA==
+ bh=gUniAz9j09liMw8KdzdGqULjOflNM1Bt11OQ/cpWik0=;
+ b=voCeBUYXk/D9wapRf1BdzD08vT6W4C4Y+oprf0CB9knRyA3fZPczKOrbsRvbytLXDY7MCea+fMus2lkQkv7Gjs/O1ZuIaTzctwBol49UbQLPlP02k5wl9koRZVPTBXC/+Gn/y3iPPhEJmM7xbV6td/tGIuGwXpSiDnL+v95qsUhBXWZPSzCrm0fpEquAvpf7skLnAeEEhF/5n/GmT1l4yXhtCUS5xq6V5rKtlc1Npp6Cc6wgo3BdUGIBLmH5yCp/IC0gSHI4ZLaRxBIQjNBVHU2Q16e2Lyddpk04t8WkwC3J6Kllee2mWWZ8+iHQ65s+iRP1DQD9OT19Rp3pnp8VZg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YHsCGsnpSWYt16lVqmzOOp06AU35khhTb5siHQs4e94=;
- b=Xe03Lo6IV5WjF6E3pvQfBB/pAGmX/0hxfUaSQa+i6TKFDHFjYqDirdvq32aaVIbytryGsLz5uJkHVHPfdu74kAuEB1dlFlRmR24sX+6UPTdt0bcOJGeluCPl0y1fJ22sN3orYvlbj/JyOeo3pvLsDwTnJgVrGnDFDAUE7dWV6hA=
+ bh=gUniAz9j09liMw8KdzdGqULjOflNM1Bt11OQ/cpWik0=;
+ b=0pxY5t7bFxrgmmNpqoeIsbQbK7xicnxtEVkx0imeiLvaYh1B2BAOUpw3fOznTILpAL3KpliVNJCG1D2jKBxNhgY82bKDRSJ1MP4JMvLbjzkXaawJP9u93t9rD7FHqN1lXr53osnfLPGinmovQGtMbfjxOkE5CgjBrdyx592UQAI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3] xen/mm: move adjustment of claimed pages counters on allocation
-Date: Wed,  7 Jan 2026 18:56:05 +0100
-Message-ID: <20260107175605.56617-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.51.0
+Message-ID: <61ca5e49-787f-4d99-b2cc-5e95d8160c39@citrix.com>
+Date: Wed, 7 Jan 2026 18:07:56 +0000
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH v1 0/2] x86/pci: MMCFG improvements and always use it if
+ available
+To: Teddy Astie <teddy.astie@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <cover.1767804090.git.teddy.astie@vates.tech>
+ <aV6WPQlni-gkRCVo@Mac.lan> <104d15d0-9f58-403b-ac61-dc02f4a2e097@vates.tech>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+In-Reply-To: <104d15d0-9f58-403b-ac61-dc02f4a2e097@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR1P264CA0046.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:2cb::17) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+X-ClientProxiedBy: LO4P123CA0333.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18c::14) To IA1PR03MB8288.namprd03.prod.outlook.com
+ (2603:10b6:208:59e::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|LV5PR03MB8411:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef52875f-0bbe-4490-f82a-08de4e16da15
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DS4PR03MB8400:EE_
+X-MS-Office365-Filtering-Correlation-Id: 797d7a03-5e6a-4911-337f-08de4e17b12c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?WWNOZWtTaEhEL3BxTWNwRG5LbHNuOHRvTVJmTXZ4SW13N3U1cHl3eTNXTkIx?=
- =?utf-8?B?L3JUMzR0S21WNVJwajRodjlZamxuQ2tnaG1yaWloLzBmR2Q0OE9TM25uNGJ1?=
- =?utf-8?B?aWVWa3QrMUpVWHBlcWJHSDY1Ulc5d3NwUU82eTh5MSszQlUzZ0U2N3BDMjMr?=
- =?utf-8?B?aVIrUkErTks0SHRGR1RuMTBrMDMxd3AyVFBCRXBReVp6UCsybTNEWGxKaFd3?=
- =?utf-8?B?TkE1c2NpU1ZiK0dsMFpBZDEyNURUclBGT2hhZk9FcjdzbUYzcXJwY1V6ejFr?=
- =?utf-8?B?dHpBWW5hRnA5MHJ4TlYwcTN6SWJsSlhOT1JpSkU5WlR3cUhqdGV6UG43SDIw?=
- =?utf-8?B?TUQ2U1BZMDFjZ2dsUjBWeVNPemFidE5rSTN2N0FjNHY5M1F1ZUVwb3lzUFZS?=
- =?utf-8?B?WWtXT1pFYmdTTkFmWURQR1pOTGxXWml0MDRPaWlpWVBPb3gxdUJzcCtCdlpP?=
- =?utf-8?B?NVdnSFplNThBbHRyaDNPNmg0RXdES0NBZW5Sb2liVjcrUUJSNlRFdisvelVy?=
- =?utf-8?B?QWkxUldydDVWN2d1MVZvcHovc3NmN3NkVW1iY2NGTzJ1Q2E5cldMOHVaN0Rp?=
- =?utf-8?B?dkJtZ01EZVBLR3gxbi80RGo1SXl4L003ZmVZdExyYzUzdXIzckdGdmFOSWhH?=
- =?utf-8?B?R2lBQjhIK1FXd1JRbjVuTitMZGc5WHl6N3g2TEdSVmVMckkrYnpTdXVnUXVi?=
- =?utf-8?B?cTdiMVNEaTNZcS9nV3F2TTBwVHVOZjhsNU00SHRSd0cxSE8rZ3lNSlRkSHNE?=
- =?utf-8?B?aW5peFlaNkdrWHNmWUsrY3Q5MjF6SGMybWE1MzViQzNrMjJlcjd1K05HTExK?=
- =?utf-8?B?NWxZSlp6Qm01N0pZbXdmQ3Z1TnlzSUFUeEpBNzJBNjJjM2JTV2QrTmZxM0N4?=
- =?utf-8?B?NU02SjZ6VVV0eTFiUmRUTWlTWHQ0Y0VHVm11cUROZkdsUFgrYjM1Si9ybG1v?=
- =?utf-8?B?QUtGaktZVlUxVWU5YTNDM1ZOdWlFaWVyOHB0SVV1MXZRSWMzSit5S08vaDZC?=
- =?utf-8?B?OFJpKzlUYi9nL1M5eFk1cEdsbTVTODJwZ1lmd0dFZVMra0hIRmlvUHVDTjhM?=
- =?utf-8?B?L1R0bGdaa1M1b2tuZUNNbEZJTWw4b0g0eG1Kdng4NFMxT1VhTXpmMzFta2s2?=
- =?utf-8?B?MWdNNkJGZFlzaWtIMWhzbFNwRE9CQ0VQbis2MVVlOGNoU3ZtdGw4eFI5MjVm?=
- =?utf-8?B?blp1UFkxQVBVZENZNmcrTkxQY3BNTjB2aThOeWtsUm10OHlhd0FPeVV5cjEy?=
- =?utf-8?B?Wjczb3Z1Qk9PVGZoNTlmbytFUzEzelhlQS9LNWJTOEQ2aUhhMXFsd3o4SHFs?=
- =?utf-8?B?ZE15blMvMmZ2S2ZmeCswU0MwZmpFZ0tRVzBMMGMvcHpwc1duY3pIcVhaV3Fa?=
- =?utf-8?B?VjlvRXhvN1cwOUNlQlI1ZGRqK21nMm0wbW5STWlQQk1GdmkxUHpqODNaNVFV?=
- =?utf-8?B?VUE4N01Sd3FDU3BEZmh2MmJtdlFJd3RCKzh0L1g4QTR3OWNQcjJRamU2dlF6?=
- =?utf-8?B?am1UL1libFNZSGNBZVZmZVBubDUzc0wzVHNkUkJudW0zaEU5OGJyalN3WkdS?=
- =?utf-8?B?c09jMS90VFhwaE9CM0hwYlZ1TVhxWmRxT3RKNXdGTjJib3pJV3NxNFlzRlFa?=
- =?utf-8?B?NkVxaXgzVjRHUFg1dWNJL0syNVIzZWV0akdFTTZlUndBdU05U2V4aU42Z2pJ?=
- =?utf-8?B?N3ZTQUtOWnVLd1k5ek5mOVNxczdxLzN2ZmNMSXZ5a1l2Nm5YTTdsdVVsYTNw?=
- =?utf-8?B?enRCeDZNYm9VVzd0UnRLYmc2WkQ4UmdqUThqTXNhUmZqL2pJeHZLM0xzZEZ5?=
- =?utf-8?B?cDlSMEdLb3lDejVkcjluN0Y5SWJjVWk0VzF2NjRPaDY4Z3kzc1pVVG1Qc0hm?=
- =?utf-8?B?UDM0b3p5dlpoNVBxZ0xhL3dGbTJ6Y2NXMlExWXRxQXZGNGNOcW5yRkRocU1q?=
- =?utf-8?Q?TEOADmeDieeFi1KGG5YTH83FX5QuzNc0?=
+	=?utf-8?B?RXhUdFdKUklwNHA3SlBhQkw2QVkwUGZzNTJuSkhuRTVnSzlqT0ptNzltMFh2?=
+ =?utf-8?B?Vlp6Y1RDTkFqd1FxTWxuK00xRy9aekJRbTBrYkZtT1lmTGIzb3pub2NvNnlL?=
+ =?utf-8?B?a0RpYm5PSHpWcjBSODYvQnQ2MU51QVYrR0VVVHFpMDhqZmRGV0YySlRjR3Uz?=
+ =?utf-8?B?dlVXWWR0Ym9SZG9OQ0lZd2hKei8xeUFDQ2pGN1hMZTJGVUV0TXdxcm1SSHJx?=
+ =?utf-8?B?WTR5RzUwS1BkVS9xQ2RjOENNcEFXWFlLbjViUUhDOWlHbGd0empDQlE5UXNS?=
+ =?utf-8?B?UTdRdjhWaFU4MXU2and0RVRTZjhYa3NMWVk2YW1qMk85SXhTbFFFVGZuWUQ3?=
+ =?utf-8?B?ckQrcncxZEZ4M2YvYVRyMURSNC9XRFFyWWlSZitEREdlQ1JHeUNZSjZUeko3?=
+ =?utf-8?B?dGRWUWYzd0dWNS9od3p2ODJuaStMZk5oMGsrRXIwZDlMRDNGOUhCRU8zWDd1?=
+ =?utf-8?B?QitLNlFCVWEwNjdweGNhN3ptTVhPNS9pRERsNWNQclhORGhZd0oxWDJtM2h6?=
+ =?utf-8?B?Y20yZFRLVzQyOS9sMGEvQmpHOXgzTGl1Tm8xbFdsSlFnQWRhR1ZZTlQ1dkQ5?=
+ =?utf-8?B?NldrRTZBRk5haXYvTjJZWFJOWElwQzk5Vm9RTmd6MjhySWpzOVZvNWVMQXRY?=
+ =?utf-8?B?U2ZQZ1NEQWJpbnQ0N3ljc0NqU2dkOW1tc3Y5aE1GL3cxaEhvTHZMaEswcHNQ?=
+ =?utf-8?B?N1dGRVBoSjYvNSswSWxCRVQ4VDFhdnhHRVN4QlZ5VStGYzV0dnM3a2h6bm90?=
+ =?utf-8?B?ekV5THNDSlhyaHd2S0VUUEhyNFVKMGk2OE1mMUhDTnBhTk02SHJFMVNyckZR?=
+ =?utf-8?B?d0ljakJEd1dqUTlUYitHQ3A5bldtSnd0RVVvdWNTNVdpM0NiLzV5ZXRJbzRG?=
+ =?utf-8?B?SENwT096bFFqQ25Sam42T0xuUGJlWDNHTEorbE1mQ2RkQkpHRE5FejJDYnBp?=
+ =?utf-8?B?VWJlak5hNUZ2RmJLU1R4cVYzWE4zdjBkN0xqc1IrMFR2MldCby9LalJtYXpN?=
+ =?utf-8?B?RUt2MGlKUzUxeExWc2hlR2NYSW9seVl2a0ZiOGhSUEdyQlN2dTlMd3U5VFpq?=
+ =?utf-8?B?V2FQU1NqajJrQVk4RmdmNWphZnNvWDAyNloyTGZvUDdxNnRVd3plOFEzeVNh?=
+ =?utf-8?B?czlLUmtPaERhWWgrWERONWpRSnk4blo4NWRwWXhlVGUxMlh5R3pZSC96WHJm?=
+ =?utf-8?B?R3YwVW1ZZzNnTzFlSGg0SGhiT3kveGlrUjhPSm5pS3MvNFBBM2RjTmgwU2xR?=
+ =?utf-8?B?KzkwRUZTSmJQL2hEQ3pheVNEdGFzOWlJNGpDdEVyb2REUmJQT1lMMlNSWnZC?=
+ =?utf-8?B?ZWU2SzljbHI5WTR1OEUxNDN0M0t3ZXhMWmI4VE1qRklxc1FqeHlmdTkxSU1M?=
+ =?utf-8?B?WUpTNFNnRGJvbXhJY0taVEVwb1VjQys4dTBVTEZkY3Bhcit3MlpiYmd2R0VC?=
+ =?utf-8?B?WEIxbEVNOFR4anN5OGpKRWU5eXh4a01YckQ3QmlPYjROZ0Z0Uk1kRXZaRDFa?=
+ =?utf-8?B?MjFZQUd1ZFZkK3d2Z2ZsMkIveUU2b05hS2QrN2Vja29pcFdDVUJMSklqcXRG?=
+ =?utf-8?B?bHgzSXBzRlA5aHJWbHN4K0R4cVJOaTNrZ01sV1prTndBYlV5Y0cvVGRxY256?=
+ =?utf-8?B?SzVHa0I0ZjBVdmE2K3pSK2NJek9yalNveWNqTldHUTc3MzB4b2p4bGd6S05z?=
+ =?utf-8?B?SkEwTG9vSmppRGh6T3JRZ0ZPeVJRSlI3RnQ5Y2VzQ01md1ZQNmRhUWdDNHNJ?=
+ =?utf-8?B?Z3dnZ1lnRnhJcDgzbjBWbVQvU2hnaUZ6OVlzTWRzNEVjZUtDcHhWYW92QUpX?=
+ =?utf-8?B?SjM2VG5mU0tCKytMNEpqWG9McG1DR2RXNWRjVVhYMFhTWVNQeWtFVjl6c2Uy?=
+ =?utf-8?B?OGlHZjRSVzVMQ2s0SVBPUDVQZ1NqTmlVRkJOUDVTbXlubzNYMGVMaEVvU1M4?=
+ =?utf-8?B?ZDZsdGZWMlgvRitQdStNaXFmbG80aHZhZGJSVnQwTWNUb3ZvdTVZc040M3ZF?=
+ =?utf-8?B?eUcwdDZyQzBRPT0=?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?OTBQK1Q1M00wWW02VWlFaE9vYmR2dStQbEc3RGpZQ05IVlZCR1dTUE5oT29u?=
- =?utf-8?B?S09uSWRlVDJHNXVTRlppR0dRTm9XNFRJbXQ0Z21QTU56ZGtWV08rRmpLTUI4?=
- =?utf-8?B?UzhrMWx4VEp0bXRlRFJYMW1MdDNrWllpc2FtclprRW5QVWFoK1M2dEpUWDda?=
- =?utf-8?B?SFhvOHNxZGtqUGpHbHdjZzV2TGV6d1NxMjdlbGwrL3RIU0t5QWhoT0hQRjZU?=
- =?utf-8?B?THRqWkFUaGY0YlAvVWVkZDZ6VVY0UlBNSlBMdmhVdUY1TldUOENzaVZCMktW?=
- =?utf-8?B?dzhIeWlZL0tzVTdsVERjd0Y2YnpPVEhyTWtPbTJtbW01WUFCcTNZaW1YdU5P?=
- =?utf-8?B?Y01sUUQ1U1c5clhmMXVPYWVTZ3BtcjdLa2tqcWtrSHBEcHpNSGpVTSs2cVRF?=
- =?utf-8?B?RUJKaHMrM2NOS1RrUys0TWc0MzRxZGhBOTYvbmxUS0owNVZpdSs2MGFYZGdI?=
- =?utf-8?B?Y0Y1QmhWU0Rqa3pwb1JyaDVmMHlhSW5FMlh5aXpYMkp0VktybHJyd0t0ZU1S?=
- =?utf-8?B?dVlxdDJtSU92RVBRNnB6MlJTU1lzQ3lIaXRpaHl2N1ExRllabElDUC9Bbkpz?=
- =?utf-8?B?LzNtTHRnWDV5R2ZSdlpFQ2doRWRxTGJxZHpIUmQ1ZmQ1MkxYNGZ4Q0RFR0xv?=
- =?utf-8?B?U3lFb1hLVXk4d1ZPZEhWTTVleFJyZmNDM1NsY211ZXB5NG51N0RtWjNLaDE5?=
- =?utf-8?B?dk1YdVdqMlVTUGtzOUpOcVJqMjQ5QWJDUkZ4NmM1TWd5dHp4NkZmWGlhdG9u?=
- =?utf-8?B?RFc3aWdhNlRxL1RoYTd2anFhbXhHRXA5SVhuWUEzQ3VHVnAzMVdmRVZXRXpD?=
- =?utf-8?B?VWxhZjB0VjMxdWZxOWVSbmxzck1KTjNSR2ZMYVo5UWp0OCtUL1VSY1FCaXZB?=
- =?utf-8?B?WThrRVIwckt6R1Zkdlo3cXBZbEl1SmJ5V1k4N0YyTUJDWE95ODRtSnkzeFA0?=
- =?utf-8?B?eHl0UnBKRmFxRHRJUWc4a0lWcXNIQVNvWktNVnNKQUdMU0xucFlLbTRjb1cx?=
- =?utf-8?B?UDRtekRHV2xiMTByazErb0t2dms5U1BWcmQrTk9oTlJpZ0oyek5tL2FkNG5q?=
- =?utf-8?B?RC9Sa2pDSjl1SUVPdVlnak56bU8wUVVwQVFRUUUra1ZMTGozQjFubnE5NGlm?=
- =?utf-8?B?UlRQNzRuR3FyVkQrcHhNb0l6c0F4SnpGNjhueFVPRTU5bk1oY1FMb1kvWkda?=
- =?utf-8?B?RFo5YlNUcVFsc3RvOEYvWmptdER4cXBDaHh2MTdKRk02UXhWcWV3ajVEREcy?=
- =?utf-8?B?d2M0TnpEelJHakdmN3h3KzdPMk9sR2c0VUJqRVVZdDR6alA4L2lPZnhPR2k1?=
- =?utf-8?B?cGhoOEk0aFdpMU9UdkhHLzlXSHhBVjRLNmhETmMyamdnWDRscjlVdTRsK2Fw?=
- =?utf-8?B?Yk44WGZoOWRPTjVwci9wRGQveGRsdkpLeEhqRHpzaFZmbXlDR3NrZkNKM2da?=
- =?utf-8?B?dk5QSHBZMHRkTVJUZTNPbklSQkNRRUdTWWROYXc0eHp4MmMyNE9qMGRkbFJv?=
- =?utf-8?B?OTYzaHh3b2lLRmRyc3N2SGZaVGcvNFJPdkxrQngzS3JyRVQ3ZTR1ZzREV1pN?=
- =?utf-8?B?U1I2dDRmOS9kczB3Z1ZVOWVYdHo5SytXUjZKZktOcThjdFdmay9GS0Y4SnBt?=
- =?utf-8?B?ZU5OOTc5MEo0ZmNUd0tOQ1A4dmtwZmVaTDhuaWxzTDhpZzJ3aXd6cGNaTXd3?=
- =?utf-8?B?S1U0YklXT0hlV1h6V3daNGgrcnBYR0dCTHBsNTN4KzV4bjRiMFFUK0hjK0c0?=
- =?utf-8?B?TWIvVDBIYVF4SGV5aE1OWUVUR2dmMWF2aE1wY1paUmRaUjEwcGJjZVU2VURz?=
- =?utf-8?B?MnZQN0s0cEIxaDlvbmdLaXJkYkpPNUZzMDBvU2IxczVsNGprYXVobHczd1Ni?=
- =?utf-8?B?NG9EZldNTDl0aUErQ1Z2YXl5TFEwS3pseUFrZTZnM0hySmRrMVZsNW12dGUz?=
- =?utf-8?B?MTFhOXpqd25URlFMcTl3Z0dMTGMvZFVIMDFvQ3FHRms4SVJVc3RFOFRGdUxL?=
- =?utf-8?B?blJIb3A1eUJJVkdKeVh4T3VGeEptT0VhL3FhNjRpRmFqdURxNk92U2FITzJr?=
- =?utf-8?B?RTMwbkEyTmhsNndSa1Vrd3NBZDNEVjB1ck9WNXlEbEo3ZWROYnZEK0w0MEEr?=
- =?utf-8?B?NFNtQ0x3N3dTNEtaSU01am5lWjExZ1cyL0RCSzJHeUJSNDVrU3NIY2dQUXRE?=
- =?utf-8?B?YnVwd2ZtZG52MGptRHJxSXhMU01VWmJGUTZZZzZ1ZTVoc1IyQzlBSlNQcWIw?=
- =?utf-8?B?NkwrT0FtQVpkZWI2NnV3NlBHZGcxTS9CaFVVb0FaYTI4cGUvYTB4c1ovc0ow?=
- =?utf-8?B?T1JnUWw5V1lDcWxPK0dhdmJqQ2FHTnZraDVpOHltRFFVaTgxN0ZtUT09?=
+	=?utf-8?B?K1FwYyttZVVHbGcxLzNZWDZiY0JCeHFuMDB6S3RaRlZDOW9KYmNyUE1iVmRj?=
+ =?utf-8?B?T1YwdlBoMkhxOVN0cVp3ZXBrZk9vT2xTcXhPOTB3WXpWbEF4Qlg1Zjc3MzZ3?=
+ =?utf-8?B?WHVpWFY0R1R0djV6bVllanNCazR6UDJpZkNmdTNZUXR5VitVMHBETlYrTDNJ?=
+ =?utf-8?B?VmkwL05rRlhtQ3l1TTIySG10bWdQdTZIcFNJZXZidC85Y0N0aGhTb0FwWTdN?=
+ =?utf-8?B?aDZPRDBFMDBJckpuMTFxNUhRakwvWVhhZk5GMTk3bjRMN2NoK0didlBuM1h3?=
+ =?utf-8?B?MFZka2x0ZWdxR1JoNjFscklLb3VxbmRQbEpjeTR4bmtGN1U2YlJrMG1nUVlk?=
+ =?utf-8?B?SXNwMG1CMVFVbWVPWnkzMGZCNThETVVSM2c4TVBGdm9FMVdpc1JDVEhLWXp3?=
+ =?utf-8?B?ZXZPY25SQjVsNUxrZnRZdFVCR01Nclk1SlJqMkgzZFhYUmhuL3lxN05vVTMr?=
+ =?utf-8?B?Mmx3SWhSblJtdEJUaisrTGZ1OERVWm9qVzJITFFzNlplMjRDMFJNODU0Z2ZB?=
+ =?utf-8?B?b1AvaTBCUStjTitsdU5jazloTW83UWowbTVMclBjcUZyODJzUGlwd2oxWDFE?=
+ =?utf-8?B?ZEcvUU41cWdPdkp1SEpJQ2lXWXJNU1MrTXdxN2VhYW55Z0h3RVI2Zjk4RnNp?=
+ =?utf-8?B?Z244eGpsV0tjTjY4WWVONGNIMHNZbjBrTW4wNEJReDVnUFAzL1Y0RVk0cTl4?=
+ =?utf-8?B?dmZZWE1jekFpSjRRenFISW5TQytJRGlrZWtneWJycWNCNWwwZmlZRjAzTWxi?=
+ =?utf-8?B?ckp6dHdCeTZac1AwNmd3elNnQXZMTTljNXRBbDVabjlBUEpYcE0vbGlUNFZ0?=
+ =?utf-8?B?SHFpL3ZwT2M0VWNENWJmelQrR2hwZGtmZDVoWlBId25SMU1uQ0F1NkNsNDBG?=
+ =?utf-8?B?QjZaMFplZTFQcUp1WDJqRS9rYkh5T1pzdlVIMjZiQkVFQnJDekx2bXBKcjMy?=
+ =?utf-8?B?SFdKb3pkVHpCUy9XeTFXOVpWb1VZOGZwZGJMakZtbUx1YzR5Y3N1RE1zMEgy?=
+ =?utf-8?B?VXpWb09rYVlNcFdBZWlGRTNKbXBlRjlvc0tMRkR4Wm5rOUc4OHEyRWNXM3dS?=
+ =?utf-8?B?cHRIMUNaSDB0QUUrZ3J0NThaVS9hSjE5aTN4ME5vZTlzMHJSVkE0MzRrQkZH?=
+ =?utf-8?B?YlREd1BGQStEalNSM1daSjdiUWQxQlordUtXN1VTb3NqdlFBb0JPY3VVbnNY?=
+ =?utf-8?B?SjduUEtzVkJvbDNnS2tvcHV6RmtBT1pJeDBTVkcxb2NzanBza3QxdnlPSG9D?=
+ =?utf-8?B?THYzQlJTTllZcTU0bHZkeWNTamRtTFlmRWQ4WVlaUDM5MFkrb2FFUWg4S1JZ?=
+ =?utf-8?B?bWZSZFYwUGxGS252Nk93VGpZVGFKVDM1L0dwWGFZSUUxVFptT05mamFNbkNH?=
+ =?utf-8?B?WjVtdDcxRlpuYmhxNjE1U0VCWitncytMelRyWjJOVXFQd3pLdjdmU0NmakNp?=
+ =?utf-8?B?blhhWnhsZDd4cFhrS3pCcTYvZ2g1L2hTeDYxbHlSUGJPa0VjZ0NIZWVrRGJL?=
+ =?utf-8?B?Y1IwQXl5Wi94TnJXY0lFMzI1SlRGem9vTTl4Qm0rY0diS3FhcEpnT0szN2E5?=
+ =?utf-8?B?d2dXempSUXpwMHlodGQzUnhvaEFROTc1Vm10N2JyZDJPUUo2VjYyQ3ZBVVFS?=
+ =?utf-8?B?eXhscFhVMzE3dUJLTWQ1Yk1zWXY4TlF4WTFsekREeXFhTWlzZmEzYjkvNlBU?=
+ =?utf-8?B?SHpyRDVUak81QVVuaFRzUDY1czBuN3YvdVBsYjJ1ZnkwY1ZRU08rejVVZ2Fj?=
+ =?utf-8?B?MzdubEpBQjRuRlIvdzh1c3NhRmRqRHdkNnZYRDZnbW43cXF5bUhENHhKU2ln?=
+ =?utf-8?B?OTNRc0VsaEE0RzFHamFpS1BpOGw0VXJRbytSK2Ftbjk0NHRQek9OZnArcGpu?=
+ =?utf-8?B?RlJXLytrQXQ5WXRyWC9STkZWQmpaeVh5QXk3SDZ1L08wZVc1NFZ5L1htazA2?=
+ =?utf-8?B?bUxFaHg1aW1pNmtNTnRXaW5VVEw1bXJrWm5xdGtJN1RaRUpTWjlneDZhMWVj?=
+ =?utf-8?B?dE9mZk5PcWY1VXFBRFNzYmtZWXY1VVJ3VzVOSFYzOFlpQ3QrUi9NUWlwVk5K?=
+ =?utf-8?B?MysyNnR6YjI4aVZLeGs2UXkyZ3krNXBmNUNoa0loTFdMSEtmK1FreXJFM25O?=
+ =?utf-8?B?YVBFall2NjdWQTFxWEhXTFlMbnh4UkpFcFNVZlMrL1A2bU9QLzZZeFRjcFho?=
+ =?utf-8?B?ODh0aERNdXh1clo2OEkxL0wxTytLdzhMcnFGcU5IbVNaWktXaFBwaVlxc2pm?=
+ =?utf-8?B?eW5tS1dSdzhrdFBUbDFGTVJrSDJ5ZWdhaHllWXFzbmFiNjE0QW5TK3AvRnU0?=
+ =?utf-8?B?b0RJUXh0cWRwYUc5eVJOU1M2dUkycUlkdXA0OVh4cHc4Ly9hQVJUZlN3VGor?=
+ =?utf-8?Q?1MIrm/HtwN2TXwjc=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef52875f-0bbe-4490-f82a-08de4e16da15
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 797d7a03-5e6a-4911-337f-08de4e17b12c
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2026 18:01:59.0222
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2026 18:08:00.1842
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aizouMNBN+qSS0YOimmBlCd0PorY1dDp/+Fxr1bRp/RVbWefa3Hm9nPP/LVEKhfj+DtxXQH9zs1bGU/H6GGS3Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR03MB8411
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0hfZ1F1Js/IldCLotuUY89UNUo/wATPXLioWhCcsR5Jr+W5QvpRwV4T1zkCrtPJRCn8pMi7sSHAjSOi/f3SfWDh4jIcAzI6nHg5Am2br01g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR03MB8400
 
-The current logic splits the update of the amount of available memory in
-the system (total_avail_pages) and pending claims into two separately
-locked regions.  This leads to a window between counters adjustments where
-the result of total_avail_pages - outstanding_claims doesn't reflect the
-real amount of free memory available, and can return a negative value due
-to total_avail_pages having been updated ahead of outstanding_claims.
+On 07/01/2026 5:58 pm, Teddy Astie wrote:
+> Le 07/01/2026 à 18:25, Roger Pau Monné a écrit :
+>> On Wed, Jan 07, 2026 at 04:54:55PM +0000, Teddy Astie wrote:
+>>> Currently, Xen uses legacy method to access the configuration space unless the
+>>> access cannot be made with it, where Xen fallbacks to MMCFG. This is not really
+>>> great, as MMCFG is more flexible and doesn't require a dedicated lock, so it would
+>>> be preferable to use it whenever possible.
+>>>
+>>> Teddy Astie (2):
+>>>    x86/pci: Improve pci_mmcfg_{read,write} error handling
+>>>    x86/pci: Prefer using mmcfg for accessing configuration space
+>> AFAICT Linux is using the same approach as Xen to perform PCI
+>> accesses.
 
-Fix by adjusting outstanding_claims and d->outstanding_pages in the same
-place where total_avail_pages is updated.  Note that accesses to
-d->outstanding_pages is protected by the global heap_lock, just like
-total_avail_pages or outstanding_claims.  Add a comment to the field
-declaration, and also adjust the comment at the top of
-domain_set_outstanding_pages() to be clearer in that regard.
+I think you mean "Xen inherited it's PCI code from Linux". :)
 
-Note that failures in assign_pages() causes the claimed amount that has
-been allocated to be lost, as the amount is not added back to the domain
-quota once pages are freed.  Given the intended usage of claims is limited
-to initial physmap populate, and the current failure paths in
-assign_pages() would lead to the domain being destroyed anyway, don't
-add extra logic to recover the claimed amount on failure - it's just adding
-complexity for no real benefit.
+>>   Registers below 256 on segment 0 are accessed using the
+>> legacy method (IO ports), while the extended space is accessed using
+>> MMCFG.  Do you know the reason for this?  I fear there might be
+>> legacy devices/bridges (or root complexes?) where MMCFG is not
+>> working as expected?
+>>
+> There is apparently a errata on some K8 chipset according to FreeBSD 
+> code that uses MMCFG whenever possible.
+>
+> https://github.com/freebsd/freebsd-src/blob/main/sys/amd64/pci/pci_cfgreg.c#L261-L277
 
-Fixes: 65c9792df600 ("mmu: Introduce XENMEM_claim_pages (subop of memory ops)")
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - Revert back to the approach in v1.
- - Add extra comments and justification in commit message.
+Using MMCFG is *far* more efficient than IO ports, not least because we
+can avoid serialising accesses across the system.
 
-Changes since v1:
- - Regain the claim if allocated page cannot be assigned to the domain.
- - Adjust comments regarding d->outstanding_pages being protected by the
-   heap_lock (instead of the d->page_alloc_lock).
----
- xen/common/page_alloc.c | 59 ++++++++++++++++++++++-------------------
- xen/include/xen/sched.h |  3 ++-
- 2 files changed, 33 insertions(+), 29 deletions(-)
+If it really is only some K8's which were the problem then lets go the
+FreeBSD way.  Both Linux and Xen both talk about AMD Fam10h issues,
+which is the fact that early AMD CPUs only allow MMCFG accesses for
+MOV-EAX instructions.
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 1f67b88a8933..49ca70334458 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -515,30 +515,6 @@ unsigned long domain_adjust_tot_pages(struct domain *d, long pages)
-     ASSERT(rspin_is_locked(&d->page_alloc_lock));
-     d->tot_pages += pages;
- 
--    /*
--     * can test d->outstanding_pages race-free because it can only change
--     * if d->page_alloc_lock and heap_lock are both held, see also
--     * domain_set_outstanding_pages below
--     */
--    if ( !d->outstanding_pages || pages <= 0 )
--        goto out;
--
--    spin_lock(&heap_lock);
--    BUG_ON(outstanding_claims < d->outstanding_pages);
--    if ( d->outstanding_pages < pages )
--    {
--        /* `pages` exceeds the domain's outstanding count. Zero it out. */
--        outstanding_claims -= d->outstanding_pages;
--        d->outstanding_pages = 0;
--    }
--    else
--    {
--        outstanding_claims -= pages;
--        d->outstanding_pages -= pages;
--    }
--    spin_unlock(&heap_lock);
--
--out:
-     return d->tot_pages;
- }
- 
-@@ -548,9 +524,10 @@ int domain_set_outstanding_pages(struct domain *d, unsigned long pages)
-     unsigned long claim, avail_pages;
- 
-     /*
--     * take the domain's page_alloc_lock, else all d->tot_page adjustments
--     * must always take the global heap_lock rather than only in the much
--     * rarer case that d->outstanding_pages is non-zero
-+     * Two locks are needed here:
-+     *  - d->page_alloc_lock: protects accesses to d->{tot,max,extra}_pages.
-+     *  - heap_lock: protects accesses to d->outstanding_pages, total_avail_pages
-+     *    and outstanding_claims.
-      */
-     nrspin_lock(&d->page_alloc_lock);
-     spin_lock(&heap_lock);
-@@ -999,7 +976,7 @@ static struct page_info *alloc_heap_pages(
- {
-     nodeid_t node;
-     unsigned int i, buddy_order, zone, first_dirty;
--    unsigned long request = 1UL << order;
-+    unsigned int request = 1UL << order;
-     struct page_info *pg;
-     bool need_tlbflush = false;
-     uint32_t tlbflush_timestamp = 0;
-@@ -1008,6 +985,8 @@ static struct page_info *alloc_heap_pages(
- 
-     /* Make sure there are enough bits in memflags for nodeID. */
-     BUILD_BUG_ON((_MEMF_bits - _MEMF_node) < (8 * sizeof(nodeid_t)));
-+    /* Make sure max order doesn't overflow the local storage type. */
-+    BUILD_BUG_ON(MAX_ORDER >= sizeof(request) * 8);
- 
-     ASSERT(zone_lo <= zone_hi);
-     ASSERT(zone_hi < NR_ZONES);
-@@ -1071,6 +1050,30 @@ static struct page_info *alloc_heap_pages(
-     total_avail_pages -= request;
-     ASSERT(total_avail_pages >= 0);
- 
-+    if ( d && d->outstanding_pages && !(memflags & MEMF_no_refcount) )
-+    {
-+        /*
-+         * Adjust claims in the same locked region where total_avail_pages is
-+         * adjusted, not doing so would lead to a window where the amount of
-+         * free memory (avail - claimed) would be incorrect.
-+         *
-+         * Note that by adjusting the claimed amount here it's possible for
-+         * pages to fail to be assigned to the claiming domain while already
-+         * having been subtracted from d->outstanding_pages.  Such claimed
-+         * amount is then lost, as the pages that fail to be assigned to the
-+         * domain are freed without replenishing the claim.  This is fine given
-+         * claims are only to be used during physmap population as part of
-+         * domain build, and any failure in assign_pages() there will result in
-+         * the domain being destroyed before creation is finished.  Losing part
-+         * of the claim makes no difference.
-+         */
-+        unsigned int outstanding = min(d->outstanding_pages, request);
-+
-+        outstanding_claims -= outstanding;
-+        BUG_ON(outstanding > d->outstanding_pages);
-+        d->outstanding_pages -= outstanding;
-+    }
-+
-     check_low_mem_virq();
- 
-     if ( d != NULL )
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 1f77e0869b5d..d922c908c29f 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -413,7 +413,8 @@ struct domain
-     unsigned int     tot_pages;
- 
-     unsigned int     xenheap_pages;     /* pages allocated from Xen heap */
--    unsigned int     outstanding_pages; /* pages claimed but not possessed */
-+    /* Pages claimed but not possessed, protected by global heap_lock. */
-+    unsigned int     outstanding_pages;
-     unsigned int     max_pages;         /* maximum value for domain_tot_pages() */
-     unsigned int     extra_pages;       /* pages not included in domain_tot_pages() */
- 
--- 
-2.51.0
+There's also loads of code improvements to be had.  The current APIs are
+inefficient to use, and I did some cleanup for them for Trenchboot where
+there is a 64k limit.  (But this can strictly come later).
 
+~Andrew
 
