@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CE9D277D0
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Jan 2026 04:00:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1199325.1515870 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6304D25030
+	for <xen-devel@archiver.kernel.org>; Sun, 11 Jan 2026 04:12:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1199669.1515901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1veQ9Q-0002Ea-W1; Sat, 10 Jan 2026 04:00:32 +0000
+	id 1vemo6-0004pg-1h; Sun, 11 Jan 2026 04:12:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1199325.1515870; Sat, 10 Jan 2026 04:00:32 +0000
+Received: by outflank-mailman (output) from mailman id 1199669.1515901; Sun, 11 Jan 2026 04:12:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1veQ9Q-0002ET-T8; Sat, 10 Jan 2026 04:00:32 +0000
-Received: by outflank-mailman (input) for mailman id 1199325;
- Sat, 10 Jan 2026 04:00:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3gC3=7P=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
- id 1veQ9O-0002ED-Ve
- for xen-devel@lists.xenproject.org; Sat, 10 Jan 2026 04:00:31 +0000
-Received: from out28-77.mail.aliyun.com (out28-77.mail.aliyun.com
- [115.124.28.77]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e39f1a0b-edd8-11f0-9ccf-f158ae23cfc8;
- Sat, 10 Jan 2026 05:00:26 +0100 (CET)
-Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
- fp:SMTPD_---.g2udv12_1768017621 cluster:ay29) by smtp.aliyun-inc.com;
- Sat, 10 Jan 2026 12:00:21 +0800
+	id 1vemo5-0004ny-RZ; Sun, 11 Jan 2026 04:12:01 +0000
+Received: by outflank-mailman (input) for mailman id 1199669;
+ Sun, 11 Jan 2026 04:12:01 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <dmukhin@xen.org>) id 1vemo5-0004eg-53
+ for xen-devel@lists.xenproject.org; Sun, 11 Jan 2026 04:12:01 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <dmukhin@xen.org>) id 1vemo4-001xp8-1k;
+ Sun, 11 Jan 2026 04:12:00 +0000
+Received: from [19.12.91.86] (helo=localhost)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <dmukhin@xen.org>) id 1vemo4-000Y6C-1v;
+ Sun, 11 Jan 2026 04:12:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,70 +41,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e39f1a0b-edd8-11f0-9ccf-f158ae23cfc8
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=antgroup.com; s=default;
-	t=1768017623; h=From:To:Subject:Date:Message-Id:MIME-Version;
-	bh=A6dPHnR7FvaayZTlFNBJHodwAg7ZKvD60GtSZKVizUI=;
-	b=kr0oejG0VHA98SVlNkPKz0CRuH2liazdL+MHNYTI2m4bKCXgyalJlsILGigcPXmIgmlOJ1Dc/n838lcuHVggu5PcpxTvN1ZvEKs+CghsCam3xNV578Ksg0j7Ig1OvCa+uGIxFB+9we7TUCGO8Ki6RGqN56At+yAXXzerzCnVN5s=
-From: Hou Wenlong <houwenlong.hwl@antgroup.com>
-To: linux-kernel@vger.kernel.org
-Cc: Hou Wenlong <houwenlong.hwl@antgroup.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH RESEND v2] x86/xen/pvh: Enable PAE mode for 32-bit guest only when CONFIG_X86_PAE is set
-Date: Sat, 10 Jan 2026 12:00:08 +0800
-Message-Id: <d09ce9a134eb9cbc16928a5b316969f8ba606b81.1768017442.git.houwenlong.hwl@antgroup.com>
-X-Mailer: git-send-email 2.31.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=I1QkihUJOTF7JtgRUB5yX7oCjGpry5xRBIdICxe+gYk=; b=MxyA8O4DxFbU3PEJIfevcftBz+
+	Rzphjx6t27+g4MdrzScdGOpFv+c3gLxD9h/a2cZUjSFv+qvYVfLkd0+1LqtkJO0DGhOI0AVVjFYFV
+	NAI2/NpQk2PfSOuT104fQRvc5YqiSmChOylympOMKQoQGCUippF+bDSQwudQqkCqiAdI=;
+From: dmukhin@xen.org
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	jbeulich@suse.com,
+	julien@xen.org,
+	michal.orzel@amd.com,
+	roger.pau@citrix.com,
+	sstabellini@kernel.org,
+	dmukhin@ford.com
+Subject: [PATCH v2 3/4] tests: use unit test fragment in PDX test
+Date: Sat, 10 Jan 2026 20:11:44 -0800
+Message-ID: <20260111041145.553673-4-dmukhin@ford.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260111041145.553673-1-dmukhin@ford.com>
+References: <20260111041145.553673-1-dmukhin@ford.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The PVH entry is available for 32-bit KVM guests, and 32-bit KVM guests
-do not depend on CONFIG_X86_PAE. However, mk_early_pgtbl_32() builds
-different pagetables depending on whether CONFIG_X86_PAE is set.
-Therefore, enabling PAE mode for 32-bit KVM guests without
-CONFIG_X86_PAE being set would result in a boot failure during CR3
-loading.
+From: Denis Mukhin <dmukhin@ford.com> 
 
-Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Use the new make fragment to generate test harness code for the PDX unit test.
+
+Move <xen/bitops.h> earlier in xen/common/pdx.c to ensure harness.h is
+included before triggering the #ifndef MAX_PFN_RANGES check when building a
+unit test.
+
+Additionally, use real <xen/pdx.h> in harness.h instead of a locally
+copied version.
+
+Update .gitignore to exclude generated test build-time dependencies.
+
+Not a functional change.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-I resend this because I encountered the 32-bit KVM guest PVH booting failure again. I
-hope this can be fixed.
-original v2:
-https://lore.kernel.org/all/0469c27833be58aa66471920aa77922489d86c63.1713873613.git.houwenlong.hwl@antgroup.com
+Changes since v1:
+- new patch
 ---
- arch/x86/platform/pvh/head.S | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/tests/pdx/.gitignore |  2 +-
+ tools/tests/pdx/Makefile   | 55 +++++++++-----------------------------
+ tools/tests/pdx/harness.h  |  2 +-
+ tools/tests/pdx/test-pdx.c |  2 --
+ xen/common/pdx.c           |  3 ++-
+ 5 files changed, 16 insertions(+), 48 deletions(-)
 
-diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
-index 344030c1a81d..53ee2d53fcf8 100644
---- a/arch/x86/platform/pvh/head.S
-+++ b/arch/x86/platform/pvh/head.S
-@@ -91,10 +91,12 @@ SYM_CODE_START(pvh_start_xen)
+diff --git a/tools/tests/pdx/.gitignore b/tools/tests/pdx/.gitignore
+index 1202a531a7fd..1bf9c05985c4 100644
+--- a/tools/tests/pdx/.gitignore
++++ b/tools/tests/pdx/.gitignore
+@@ -1,3 +1,3 @@
+-/pdx.h
++/generated
+ /test-pdx-mask
+ /test-pdx-offset
+diff --git a/tools/tests/pdx/Makefile b/tools/tests/pdx/Makefile
+index 3c431d7c7822..178b451cb611 100644
+--- a/tools/tests/pdx/Makefile
++++ b/tools/tests/pdx/Makefile
+@@ -1,50 +1,19 @@
+-XEN_ROOT=$(CURDIR)/../../..
+-include $(XEN_ROOT)/tools/Rules.mk
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# Unit tests for PDX (Page inDeX).
++#
  
- 	leal rva(early_stack_end)(%ebp), %esp
+-TARGETS := test-pdx-mask test-pdx-offset
++TESTS := test-pdx-mask test-pdx-offset
  
-+#if defined(CONFIG_X86_64) || defined(CONFIG_X86_PAE)
- 	/* Enable PAE mode. */
- 	mov %cr4, %eax
- 	orl $X86_CR4_PAE, %eax
- 	mov %eax, %cr4
-+#endif
+-.PHONY: all
+-all: $(TARGETS)
++XEN_ROOT = $(CURDIR)/../../..
  
- #ifdef CONFIG_X86_64
- 	/* Enable Long mode. */
-
-base-commit: b7dccac786071bba98b0d834c517fd44a22c50f9
-prerequisite-patch-id: 590fa7e96c6bb8e0b9d15017cfa5ce1eb314957a
+-.PHONY: run
+-run: $(TARGETS)
+-ifeq ($(CC),$(HOSTCC))
+-	set -e;             \
+-	for test in $? ; do \
+-		./$$test ;  \
+-	done
+-else
+-	$(warning HOSTCC != CC, will not run test)
+-endif
++CFLAGS += -DCONFIG_PDX_MASK_COMPRESSION
+ 
+-.PHONY: clean
+-clean:
+-	$(RM) -- *.o $(TARGETS) $(DEPS_RM) pdx.h
++include $(XEN_ROOT)/tools/tests/Rules.mk
+ 
+-.PHONY: distclean
+-distclean: clean
+-	$(RM) -- *~
++CFLAGS += -I $(XEN_ROOT)/xen/include/
+ 
+-.PHONY: install
+-install: all
+-	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
+-	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests
++$(eval $(call vpath-with-harness-deps,pdx.c,$(XEN_ROOT)/xen/common/))
+ 
+-.PHONY: uninstall
+-uninstall:
+-	$(RM) -- $(patsubst %,$(DESTDIR)$(LIBEXEC)/tests/%,$(TARGETS))
+-
+-pdx.h: $(XEN_ROOT)/xen/include/xen/pdx.h
+-	sed -e '/^#[[:space:]]*include/d' <$< >$@
+-
+-CFLAGS += -D__XEN_TOOLS__
+-CFLAGS += $(APPEND_CFLAGS)
+-CFLAGS += $(CFLAGS_xeninclude)
+-
+-test-pdx-mask: CFLAGS += -DCONFIG_PDX_MASK_COMPRESSION
+-test-pdx-offset: CFLAGS += -DCONFIG_PDX_OFFSET_COMPRESSION
+-
+-test-pdx-%: test-pdx.c pdx.h
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) -o $@ $< $(APPEND_CFLAGS)
+-
+--include $(DEPS_INCLUDE)
++test-pdx-%: test-pdx.o pdx.o
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+diff --git a/tools/tests/pdx/harness.h b/tools/tests/pdx/harness.h
+index e49d6bcf92c2..4cdda931feb2 100644
+--- a/tools/tests/pdx/harness.h
++++ b/tools/tests/pdx/harness.h
+@@ -84,7 +84,7 @@ typedef uint64_t paddr_t;
+     qsort(elem, nr, size, cmp);                                         \
+ })
+ 
+-#include "pdx.h"
++#include <xen/pdx.h>
+ 
+ #endif
+ 
+diff --git a/tools/tests/pdx/test-pdx.c b/tools/tests/pdx/test-pdx.c
+index eefd54c76815..3633c231abaa 100644
+--- a/tools/tests/pdx/test-pdx.c
++++ b/tools/tests/pdx/test-pdx.c
+@@ -7,8 +7,6 @@
+ 
+ #include "harness.h"
+ 
+-#include "../../xen/common/pdx.c"
+-
+ struct range {
+     /* Ranges are defined as [start, end). */
+     unsigned long start, end;
+diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+index 7e070ff962e8..068a2098b41b 100644
+--- a/xen/common/pdx.c
++++ b/xen/common/pdx.c
+@@ -15,11 +15,12 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <xen/bitops.h>
++
+ /* Trim content when built for the test harness. */
+ #ifdef __XEN__
+ #include <xen/init.h>
+ #include <xen/mm.h>
+-#include <xen/bitops.h>
+ #include <xen/nospec.h>
+ #include <xen/param.h>
+ #include <xen/pfn.h>
 -- 
-2.31.1
+2.52.0
 
 
