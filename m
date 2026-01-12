@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E02BDD29DCC
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 06:10:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201014.1516787 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB15D29DD1
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 06:11:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201012.1516784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfXbz-0004t5-Sr; Tue, 13 Jan 2026 06:10:39 +0000
+	id 1vfXbz-0004rX-NH; Tue, 13 Jan 2026 06:10:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201014.1516787; Tue, 13 Jan 2026 06:10:39 +0000
+Received: by outflank-mailman (output) from mailman id 1201012.1516784; Tue, 13 Jan 2026 06:10:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfXbz-0004rx-PB; Tue, 13 Jan 2026 06:10:39 +0000
-Received: by outflank-mailman (input) for mailman id 1201014;
- Mon, 12 Jan 2026 22:45:18 +0000
+	id 1vfXbz-0004rO-IQ; Tue, 13 Jan 2026 06:10:39 +0000
+Received: by outflank-mailman (input) for mailman id 1201012;
+ Mon, 12 Jan 2026 22:44:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=O4l3=7R=deutnet.info=agriveaux@srs-se1.protection.inumbo.net>)
- id 1vfQf0-0002f2-3N
- for xen-devel@lists.xenproject.org; Mon, 12 Jan 2026 22:45:18 +0000
+ id 1vfQeQ-0002eS-LS
+ for xen-devel@lists.xenproject.org; Mon, 12 Jan 2026 22:44:42 +0000
 Received: from srv1.deutnet.info (srv1.deutnet.info [2a01:4f8:c2c:6846::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5d0feeac-f008-11f0-9ccf-f158ae23cfc8;
- Mon, 12 Jan 2026 23:45:16 +0100 (CET)
+ id 4579850c-f008-11f0-9ccf-f158ae23cfc8;
+ Mon, 12 Jan 2026 23:44:37 +0100 (CET)
 Received: from agriveaux by srv1.deutnet.info with local (Exim 4.98.2)
- (envelope-from <agriveaux@deutnet.info>) id 1vfQex-00000003wqR-0nRg;
- Mon, 12 Jan 2026 23:45:15 +0100
+ (envelope-from <agriveaux@deutnet.info>) id 1vfQeJ-00000003wpx-1VY7;
+ Mon, 12 Jan 2026 23:44:35 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,54 +41,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d0feeac-f008-11f0-9ccf-f158ae23cfc8
-Date: Mon, 12 Jan 2026 23:45:15 +0100
+X-Inumbo-ID: 4579850c-f008-11f0-9ccf-f158ae23cfc8
+Date: Mon, 12 Jan 2026 23:44:35 +0100
 From: Alexandre GRIVEAUX <agriveaux@deutnet.info>
 To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>, agriveaux@deutnet.info
-Subject: [PATCH XEN] tools: Update HVM example whith AHCI, stdvga, tablet and
- UEFI.
-Message-ID: <aWV5e1kIRkCecPcm@deutnet.info>
+Subject: [PATCH XEN] tools: Update files examples PV&PVH with pygrub.
+Message-ID: <aWV5U1hgOYqDBIk2@deutnet.info>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Update HVM example file whith options:
-- AHCI
-- stdvga
-- tablet
-- UEFI
+Update files exemples PV&PVH for non direct kernel boot with pygrub.
 
 Signed-off-by: Alexandre GRIVEAUX <agriveaux@deutnet.info>
 ---
- tools/examples/xlexample.hvm | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ tools/examples/xlexample.pvhlinux | 3 +++
+ tools/examples/xlexample.pvlinux  | 3 +++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/tools/examples/xlexample.hvm b/tools/examples/xlexample.hvm
-index df9fe07653..8b615edb5c 100644
---- a/tools/examples/xlexample.hvm
-+++ b/tools/examples/xlexample.hvm
-@@ -41,7 +41,20 @@ vif = [ '' ]
- # A list of `diskspec' entries as described in
- # docs/misc/xl-disk-configuration.txt
- disk = [ '/dev/vg/guest-volume,raw,xvda,rw' ]
-+# Enable to use an AHCI emulated disk instead of IDE
-+# (AHCI via emulated ich9 disk controller)
-+#hdtype=ahci
-+
-+# Enable standard vga card for resolution better than 1280x1024 at 32bpp.
-+#vga="stdvga"
+diff --git a/tools/examples/xlexample.pvhlinux b/tools/examples/xlexample.pvhlinux
+index 18305b80af..2bdd43c2c5 100644
+--- a/tools/examples/xlexample.pvhlinux
++++ b/tools/examples/xlexample.pvhlinux
+@@ -25,6 +25,9 @@ kernel = "/boot/vmlinuz"
+ # Kernel command line options
+ extra = "root=/dev/xvda1"
  
- # Guest VGA console configuration, either SDL or VNC
- sdl = 1
- #vnc = 1
++# Enable to use a grub2 emulation inside guest instead of direct kernel boot.
++#bootloader="pygrub"
 +
-+# Enable to use a pointer device using absolute coordinates
-+# (VNC work better in this mode).
-+#usbdevice=['tablet']
+ # Initial memory allocation (MB)
+ memory = 512
+ 
+diff --git a/tools/examples/xlexample.pvlinux b/tools/examples/xlexample.pvlinux
+index bb5996b29f..1a6b91fb47 100644
+--- a/tools/examples/xlexample.pvlinux
++++ b/tools/examples/xlexample.pvlinux
+@@ -22,6 +22,9 @@ kernel = "/boot/vmlinuz"
+ # Kernel command line options
+ extra = "root=/dev/xvda1"
+ 
++# Enable to use a grub2 emulation inside guest instead of direct kernel boot.
++#bootloader="pygrub"
 +
-+# Enable UEFI via ovmf firmware.
-+#firmware="ovmf"
+ # Initial memory allocation (MB)
+ memory = 128
+ 
 -- 
 2.47.3
 
