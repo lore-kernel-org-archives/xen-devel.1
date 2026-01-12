@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F9BC9EC94
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jan 2026 15:46:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1200617.1516483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72B9C9EC94
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jan 2026 15:54:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1200629.1516493 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfK7R-0004N0-T0; Mon, 12 Jan 2026 15:46:13 +0000
+	id 1vfKFB-0006In-K6; Mon, 12 Jan 2026 15:54:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1200617.1516483; Mon, 12 Jan 2026 15:46:13 +0000
+Received: by outflank-mailman (output) from mailman id 1200629.1516493; Mon, 12 Jan 2026 15:54:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfK7R-0004Mt-Q5; Mon, 12 Jan 2026 15:46:13 +0000
-Received: by outflank-mailman (input) for mailman id 1200617;
- Mon, 12 Jan 2026 15:46:12 +0000
+	id 1vfKFB-0006Ig-HF; Mon, 12 Jan 2026 15:54:13 +0000
+Received: by outflank-mailman (input) for mailman id 1200629;
+ Mon, 12 Jan 2026 15:54:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=g/6n=7R=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vfK7Q-0004Mm-5Y
- for xen-devel@lists.xenproject.org; Mon, 12 Jan 2026 15:46:12 +0000
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [2a00:1450:4864:20::532])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Qluw=7R=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vfKFA-0006IZ-1g
+ for xen-devel@lists.xenproject.org; Mon, 12 Jan 2026 15:54:12 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d1472330-efcd-11f0-b15e-2bf370ae4941;
- Mon, 12 Jan 2026 16:46:10 +0100 (CET)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6505d141d02so10526435a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Jan 2026 07:46:10 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
- [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8701e1d467sm599212066b.70.2026.01.12.07.46.09
+ id ef1b6b91-efce-11f0-b15e-2bf370ae4941;
+ Mon, 12 Jan 2026 16:54:10 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-477ba2c1ca2so72210835e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Jan 2026 07:54:10 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-432d286cdecsm25599921f8f.7.2026.01.12.07.54.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Jan 2026 07:46:09 -0800 (PST)
+ Mon, 12 Jan 2026 07:54:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1472330-efcd-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: ef1b6b91-efce-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768232770; x=1768837570; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ikEEWpfdYkg+GHrVMJZ0H5ltKeP8OLweL9QsXVCaoDs=;
-        b=m5aTI7sJYGMLq4l0v9Ejlu+EWLuMM2VS4+S5UnI2ObGkmr4XZkmpDJFSn32BghchqO
-         ZknSJft8nmjQmmHFrch+LXCdao48sjRo4lRA9ZZEUFK9EmJQ9qaPXa6SDOhxhRzasbyJ
-         2WtbfYJp75I5hv9slVo0fiOgdP2XX5PkaNb3NvwWXDNVfPCBJto3WxL+dd/zQLYQrH4f
-         4PBRvcd/wEP42aKdqoEcAPUVNDRdqz4H6lPgxTRjTsnENw1lf2XizIj152azWl21yXoM
-         SH2M3ooLhuWROFfU5pGEReMtYE+nHFULRoH17ueXownDKlOC1EjLQ7t5io3FwJpozIWg
-         bUsQ==
+        d=suse.com; s=google; t=1768233250; x=1768838050; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=OI2oT5If4p3Fzj5mygStk/l4C9+d9IsfmYyxvoHmGNw=;
+        b=bLBlvFJjU6dcQ3FK8gsok0HYFQorGZe0QU8YqeNEOka5DhsO9LUoE181FH5zimXcIA
+         drNSLfjvDJ2YqRUaF6XziLofcfu2DOejVGJ/8wZ+0OBGLmMcTlMFws1urowRdyv5SUQn
+         LQsTY3Av9TD1D3qMsrgLIcA+GMfcxUhn9h4CiyquYnldmfLD5sLo2GHsxnMGFxMam+eL
+         KtpulA2bSTUyzVvzO1bFtkLneEwuXo4xfs3Pb1BFGu7fcwH9yuQ0HxhEoqt5/gRQJLP3
+         eh0IOnlxq2aep8HataUMV0gx09Ny4otG04+rUl3z4QmtUH4VfBv6lWZ+eOPnslP+BSrN
+         xRHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768232770; x=1768837570;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ikEEWpfdYkg+GHrVMJZ0H5ltKeP8OLweL9QsXVCaoDs=;
-        b=uFjvjU0/e0/9PSuY6Ekh/uiDog7KUgnpAGIQjg2bG5ruVUHlcVOBstIssURSTS+SFt
-         /Yz8K5trUTcKwkws4I/oXN1XSkJdJ2r+3smWrGC8VrF8G+P71maFDrgOGaV5RBWJZTny
-         Sr4oCgQQBNy5OIwgjLhPvhmZ4QkCFIo7MHgN5PUWysNE430xaj3/jj5luLmL30S8gdEC
-         e6pRE9V4hOVTqK8WIfCzhDvpDyBiBjQkxNGsLFyNUEvbhjfuyOetYYWZhjCpCvdePYj5
-         vLlTplxmOUAyKdAIRSLs+pOvB1jpk7KnqLRNuj7g0UFcQTeTwmwFq4Kmq3rFkQI2PS1h
-         Z/DA==
-X-Forwarded-Encrypted: i=1; AJvYcCXddYSzJZCLX+eTJWNSTpMJd4igd2YIa2Btbn3XijBKjNfjWlviz7vg5j2nHI2Q6lXO4/lUSMOAtPI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwM5sB3XI4/we1K3qpgXnKBSqWJzoU+HObwIWdKsC3Xrg5YJr9z
-	4PUT2tjNKmI2Ku2cN8I4cwixj+vPppQ/C4WOANcCKaxUbJR/vFAn+4QP
-X-Gm-Gg: AY/fxX6hXh5kunvSar3ss+D7BtNEqC3WK1QM4av+ZN0NcnT+8gkter4ozBCXIOOyUkW
-	kT6bjS0TlJfBf0PManzm+F3+xvnENGxlADj4E7Pd+hWHtMD5e9tw1cgHXOZZgB9MMuJRT4ywbkt
-	S0aFn3cVjf8pLOe1Gq5o7ihQSaoy9VBbrARWodFpRQaDZcWXJHB/VEu3GzfhJ9ijf/0+khtNii8
-	BXQwuoKZ/2CPmVE/JgGCAXv1k1MCoDQz/0wgqTwr372m5rlEaBqP0/0cGuzGyUMrU+nl7ZRf7vs
-	2HvhX5MKDCD7uZX13Xrv9ysbU2/LOqgx02ecfCQ5ngiC23LhWd0Y/AOXWOl/tDDe14zhKrjs6iq
-	vk6FE4cM9HWxHMDLdbaFowT7CosOgVUNywLsCx57iClPjyR0eGYqO2rSf7bVU0ENYPaktxg9YGa
-	AaXatjb+BEpKXTYAiaLXXnZmEtrdQS/KFkU50X5nPew/WHrl3rjM7swGmxb4l6fj0=
-X-Google-Smtp-Source: AGHT+IFlPxsMhO4uxy4cfaJlR6l6ZRYJlp94VG4eZlAASC2wRDVSMJsH3wWUMgI0XYBttQ4HtgFiEg==
-X-Received: by 2002:a17:906:fe42:b0:b72:a899:169f with SMTP id a640c23a62f3a-b8444c3fad9mr1941439666b.4.1768232769967;
-        Mon, 12 Jan 2026 07:46:09 -0800 (PST)
-Message-ID: <988ba581-5503-45d4-a621-18cdc3b14cab@gmail.com>
-Date: Mon, 12 Jan 2026 16:46:08 +0100
+        d=1e100.net; s=20230601; t=1768233250; x=1768838050;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OI2oT5If4p3Fzj5mygStk/l4C9+d9IsfmYyxvoHmGNw=;
+        b=Dn0PsWQ8qnm7uTL64LBa7lttZcQAlv2tkeFhWJvT8RhijUeuy4eAOGGW8vrYsMiuIC
+         s3HLoV52YttArxTbk3e16WIrtEGby871x9COvCVJRucpNJ/Ana4Bu/d66Jyl0lZFS+MH
+         oS5jjp+olXMy59huvQukEABu5sUZ+VvEcq4vQU9B7qNZCxz3DhVw3ec+pZke5RPEbg/j
+         lJi4WhGlZFWCktANxKylpxGY+lsHa1FhoLnTMexRKHck9mIyWSUjTxfb5+O02gx9/FQ4
+         2taHz+JLCXSw+kG3v08U+NSK4CmQeBDhoNClpxRbSfSt+KB+DBGvgO+J4O3SG8rU4gWy
+         azHw==
+X-Forwarded-Encrypted: i=1; AJvYcCU7DUOF59U0/qvh2nGEyREpMxPybeX/v7MmGlNAwX9qOASQD0zkFZPD8M/w20A6eQkV817EiAyZIHQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yxqeg8r5Yn2M7iRsQKu8GSs5yPYk+BOnn1EiF9x3BSsBxvZNpAF
+	m9116mTiXGX8xNRzUkmHpayWpDM5FsqbskjT7XtTRrqyt0o7vzvr6tBXmLLc6rtCEA==
+X-Gm-Gg: AY/fxX5eVK34w1JGI00KsfQom0cR1k/CQBK0z5y2VUdkaBGlq5PmWgf6ujMqG10pT5A
+	O+TxdoVu1+ANgviPRzmT9MzNlsVdrXZHCLaxkMbZBVHaTFeJ+9OkCdIcGQwHhyFc525Tx55sUfX
+	XXLoOrRFoB4fcDSwftX4d9PfRw2meGgagS5q/YS1VkkadCHwI3EviBLxuyK4urCQaq5a7etB7/F
+	m2wak6ue+B6LMYCfvFGH1PqRHqdsaYX7GJWIorPVaIBG4CrXCxSlIijXsNFekr5nq6UBno8a1vn
+	CsrPnHyA2s7uug5vfY56+I56LITy5dwY/Lif3BdF4svJi10qDUyTGbOL3lKmnPjtWbQp0zYjZ+p
+	Xl9wuK5NewwBjQ9UfmZ4SCOI+L8ihaf3FN00KrOpLXRTojoZteGke3DIxProQMCm2ryCMrA3XsU
+	uAM4Lk0HmH9aeOsgw4myV13ShpXSm8Z/mOJzbsPwuOs4uQ3d699A+8ZeBGtMgzq16S9NqtXgzfT
+	Ic=
+X-Google-Smtp-Source: AGHT+IHXzMZAx2KYU922PSm7rsAkuOAnOO+mOurxfNz9YH6YXM3rP5FVQxBzWPx+d/eeNtRC//wJxw==
+X-Received: by 2002:a05:600c:a48:b0:477:9eb8:97d2 with SMTP id 5b1f17b1804b1-47d84b08652mr217833285e9.8.1768233249768;
+        Mon, 12 Jan 2026 07:54:09 -0800 (PST)
+Message-ID: <30dbd0b0-2a2b-4064-b39c-4dfa438af15b@suse.com>
+Date: Mon, 12 Jan 2026 16:54:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 03/15] xen/riscv: implement vcpu_csr_init()
-To: Jan Beulich <jbeulich@suse.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
  <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -104,70 +105,98 @@ References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
  <dc24a8ea-9041-4097-bbe2-459c668e9e64@suse.com>
  <7ba4bcfe-59d3-43f3-adb4-207424dc1713@gmail.com>
  <f1beef63-1995-4e8d-bbdb-3be406ac414c@suse.com>
+ <988ba581-5503-45d4-a621-18cdc3b14cab@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f1beef63-1995-4e8d-bbdb-3be406ac414c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <988ba581-5503-45d4-a621-18cdc3b14cab@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+On 12.01.2026 16:46, Oleksii Kurochko wrote:
+> On 1/12/26 3:28 PM, Jan Beulich wrote:
+>> On 12.01.2026 13:59, Oleksii Kurochko wrote:
+>>> On 1/7/26 9:46 AM, Jan Beulich wrote:
+>>>> Also, wouldn't you better keep internal state in line with what hardware
+>>>> actually supports? CSRIND may be read-only-zero in the real register, in
+>>>> which case having the bit set in the "cached" copy can be misleading.
+>>> [...]
+>>>
+>>>> (This may similarly apply to at least hedeleg and hideleg, btw.)
+>>> Regarding the previous bits, I can understand that it would be an issue:
+>>> if SSAIA isn’t supported, then it is incorrect to update the corresponding
+>>> bits of|hstateen0|.
+>>>
+>>> However, I’m not really sure I understand what the issue is with|h{i,e}deleg|.
+>>> All writable bits there don’t depend on hardware support. Am I missing something?
+>> My reading of the doc was that any of the bits can be r/o 0, with - yes -
+>> no dependencies on particular extensions.
+> 
+> Just to be sure that I get your idea correctly.
+> 
+> Based on the priv. spec:
+>    Each bit of hedeleg shall be either writable or read-only zero. Many bits of
+>    hedeleg are required specifically to be writable or zero, as enumerated in
+>    Table 29.
+> 
+> Now let’s take hedeleg.bit1, which is marked as writable according to Table 29.
+> Your point is that even though hedeleg.bit1 is defined as writable, it could still
+> be read-only zero, right?
+> 
+> In general, I agree with that. It is possible that M-mode software decides, for
+> some reason (for example, because the implementation does not support delegation
+> of bit1 to a lower mode), not to delegate medeleg.bit1 to HS-mode. In that case,
+> hedeleg.bit1 would always be read-only zero.
+> 
+>>   In which case you'd need to do
+>> the delegation in software. For which it might be helpful to know what
+>> the two registers are actually set to in hardware (i.e. the cached values
+>> wanting to match the real ones).
+> 
+> Does it make sense then to have the following
+>    	...
+> 	v->arch.hedeleg = hedeleg;
+>    	vcpu->arch.hedeleg = csr_read(CSR_HEDELEG);
+> in arch_vcpu_create()?
 
-On 1/12/26 3:28 PM, Jan Beulich wrote:
-> On 12.01.2026 13:59, Oleksii Kurochko wrote:
->> On 1/7/26 9:46 AM, Jan Beulich wrote:
->>> Also, wouldn't you better keep internal state in line with what hardware
->>> actually supports? CSRIND may be read-only-zero in the real register, in
->>> which case having the bit set in the "cached" copy can be misleading.
->> [...]
->>
->>> (This may similarly apply to at least hedeleg and hideleg, btw.)
->> Regarding the previous bits, I can understand that it would be an issue:
->> if SSAIA isn’t supported, then it is incorrect to update the corresponding
->> bits of|hstateen0|.
->>
->> However, I’m not really sure I understand what the issue is with|h{i,e}deleg|.
->> All writable bits there don’t depend on hardware support. Am I missing something?
-> My reading of the doc was that any of the bits can be r/o 0, with - yes -
-> no dependencies on particular extensions.
+The above makes no sense to me, with or without s/vcpu/v/.
 
-Just to be sure that I get your idea correctly.
+> Or I can just add the comment that it will be sync-ed with the corresponding
+> hardware CSR later as ,actually, there is some h{i,e}deleg synchronization
+> happening during context_switch() (this code is at the moment in downstream),
+> because restore_csr_regs() is executed and re-reads CSR_H{I,E}DELEG:
+>    static void restore_csr_regs(struct vcpu *vcpu)
+>    {
+>        csr_write(CSR_HEDELEG, vcpu->arch.hedeleg);
+>        csr_write(CSR_HIDELEG, vcpu->arch.hideleg);
+>        ...
+> As a result, vcpu->arch.h{I,E}deleg is kept in sync with the corresponding
+> hardware CSR.
 
-Based on the priv. spec:
-   Each bit of hedeleg shall be either writable or read-only zero. Many bits of
-   hedeleg are required specifically to be writable or zero, as enumerated in
-   Table 29.
+No, the r/o bits will continue to be out-of-sync between the hw register and
+the struct arch_vcpu field.
 
-Now let’s take hedeleg.bit1, which is marked as writable according to Table 29.
-Your point is that even though hedeleg.bit1 is defined as writable, it could still
-be read-only zero, right?
-
-In general, I agree with that. It is possible that M-mode software decides, for
-some reason (for example, because the implementation does not support delegation
-of bit1 to a lower mode), not to delegate medeleg.bit1 to HS-mode. In that case,
-hedeleg.bit1 would always be read-only zero.
-
->   In which case you'd need to do
-> the delegation in software. For which it might be helpful to know what
-> the two registers are actually set to in hardware (i.e. the cached values
-> wanting to match the real ones).
-
-Does it make sense then to have the following
-   	...
-	v->arch.hedeleg = hedeleg;
-   	vcpu->arch.hedeleg = csr_read(CSR_HEDELEG);
-in arch_vcpu_create()?
-
-Or I can just add the comment that it will be sync-ed with the corresponding
-hardware CSR later as ,actually, there is some h{i,e}deleg synchronization
-happening during context_switch() (this code is at the moment in downstream),
-because restore_csr_regs() is executed and re-reads CSR_H{I,E}DELEG:
-   static void restore_csr_regs(struct vcpu *vcpu)
-   {
-       csr_write(CSR_HEDELEG, vcpu->arch.hedeleg);
-       csr_write(CSR_HIDELEG, vcpu->arch.hideleg);
-       ...
-As a result, vcpu->arch.h{I,E}deleg is kept in sync with the corresponding
-hardware CSR.
-
-~ Oleksii
-
+Jan
 
