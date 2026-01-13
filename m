@@ -4,46 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA73D29DE0
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 08:10:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201187.1516863 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F108D29DE2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 08:45:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201204.1516879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfZTi-0007AC-VC; Tue, 13 Jan 2026 08:10:14 +0000
+	id 1vfa21-0003Eo-PG; Tue, 13 Jan 2026 08:45:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201187.1516863; Tue, 13 Jan 2026 08:10:14 +0000
+Received: by outflank-mailman (output) from mailman id 1201204.1516879; Tue, 13 Jan 2026 08:45:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfZTi-0007A5-Sa; Tue, 13 Jan 2026 08:10:14 +0000
-Received: by outflank-mailman (input) for mailman id 1201187;
- Tue, 13 Jan 2026 08:10:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0+o2=7S=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vfZTg-00079z-Q6
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 08:10:12 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [2a07:de40:b251:101:10:150:64:2])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4722a92b-f057-11f0-b15e-2bf370ae4941;
- Tue, 13 Jan 2026 09:10:09 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 09B6D5BCCC;
- Tue, 13 Jan 2026 08:10:09 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D72443EA63;
- Tue, 13 Jan 2026 08:10:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id NerRMuD9ZWkyZQAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 13 Jan 2026 08:10:08 +0000
+	id 1vfa21-0003Ds-Kq; Tue, 13 Jan 2026 08:45:41 +0000
+Received: by outflank-mailman (input) for mailman id 1201204;
+ Tue, 13 Jan 2026 08:45:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=kCXa=7S=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
+ id 1vfa20-0003C7-Jw
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 08:45:40 +0000
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c20a::7])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3c5d379f-f05c-11f0-9ccf-f158ae23cfc8;
+ Tue, 13 Jan 2026 09:45:39 +0100 (CET)
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by GV1PR03MB8709.eurprd03.prod.outlook.com
+ (2603:10a6:150:93::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Tue, 13 Jan
+ 2026 08:45:34 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9499.005; Tue, 13 Jan 2026
+ 08:45:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,216 +49,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4722a92b-f057-11f0-b15e-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1768291809; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=iSeTos3KFRAw0G/tPHi4AxnXfVlaq9WlMN4TeOYpOUI=;
-	b=kc+/3uPO6ILoGCnTuV+2chJEoRr0ghJ0js5ytV6EVoFPn3ggprPs/FIe9tDmMlM5RMfCtL
-	2w+Cji1PBA7DlGhtwHtQYr5cwwLGbiiL1eIQu5/KlePv67IEI881UvYF37WYKsxDJwGBNw
-	JvmuygvGSRTdyVm/4lSiMVFixD1W2q8=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b="kc+/3uPO"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1768291809; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=iSeTos3KFRAw0G/tPHi4AxnXfVlaq9WlMN4TeOYpOUI=;
-	b=kc+/3uPO6ILoGCnTuV+2chJEoRr0ghJ0js5ytV6EVoFPn3ggprPs/FIe9tDmMlM5RMfCtL
-	2w+Cji1PBA7DlGhtwHtQYr5cwwLGbiiL1eIQu5/KlePv67IEI881UvYF37WYKsxDJwGBNw
-	JvmuygvGSRTdyVm/4lSiMVFixD1W2q8=
-Message-ID: <4f22683f-8fd4-4db6-ac74-83c6f6460924@suse.com>
-Date: Tue, 13 Jan 2026 09:10:08 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen: introduce xen_console_io option
-From: Juergen Gross <jgross@suse.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: oleksandr_tyshchenko@epam.com, xen-devel@lists.xenproject.org
-References: <alpine.DEB.2.22.394.2601121624450.992863@ubuntu-linux-20-04-desktop>
- <a42c18c8-9bff-4d85-bb7a-4fbb2c43ad00@suse.com>
+X-Inumbo-ID: 3c5d379f-f05c-11f0-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ypizxbr9KlA+Zq9DFI2qYw89EvG7F2bIF5rKWMqP3VidpxpqSkyYSoCtJC3szlLISU7BicAKzUab+6cqAVrKiHBzGGlmpoul9L0pngoSfD2vDg59+gj7HBpWzJJRUpHAz9n2Vx2iHOxDQTdeb/4m3giEG86spbaTZmOS8JX+1ypr7GpjdYbiLoE5dmY72wEmJtBgX/FfuYiSZV/0AtoBliyhZyeO0NuEFUfrJ525FkT3sYRNJVaYG7VoFn1j7pPPqLSHE9jLp45ORfFggIMcfYVYv7LwGuB7LODr22bSp8FpY6OpNc+TS7O7hgGHuQsBKnB+vt9pIG+Z9KAJCSxIfQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7iajnySkeHDY98iHHfq/Pdiht495trLBHcrNlpd8yI4=;
+ b=D/1L+154ZlsVkafhb1gryXt8XBN9Ssmfa6DkTLhU3Z5+FPDSHQiG8o9LKSGKYFumDghYNz9wXbRUvdHYWplEtDN7cmYP/xcojy203tMNuwQRpDqYT0V99zxJFZ0zBKzdjdeEH3vtg29WRYdj2J8EBUcNFYIqvBNn/v2t+C4LJMCl7ZLOjyu5ejZrziTYf7MWqaNqpKCMckuT4PVfZaoVYimnz33sLyhqRDnx3eTlUy6V0fbCBh4NEcraVzncI6EoKAGtXTiQai+x3xBoed/SR+msg4Wlka2thKXGRUjq0NQKfOsshHgazvq5I/OaqzhqxJH+XhPUUMUr3b4de25qGw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7iajnySkeHDY98iHHfq/Pdiht495trLBHcrNlpd8yI4=;
+ b=Fzd4Dit2PzwL85jpwEjL6jIv+EX60T6acR3HJXZb3Cl5mM3ZzvKf+X4/NnuZC7RraK9CnIHOa7qBICRQnvPVXOhjhBOOAdsNXaiMn/BYPgvZMHxbVZBKnWlAtWqSAAv7r4hQitpY+E/52uSqguRUFGUrdWu7qJnN72p/f92PdS6a6Pw46cBzPfAFHQ+rq7Dom0v7zEKIPjxDblraNuTMvGXYjdIfNF5u0rSNJGt3qTAVWpKP21+s1o9PA84djUsMHYgx71rvSlbEtyFyHds7lsQnbOP7fEgFr1BSsF/uugj5pKofpE24jDIUfn92TtQnUhJrkLNSQavUks8WjzlcEw==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v5 1/5] arm/irq: Keep track of irq affinities
+Thread-Topic: [PATCH v5 1/5] arm/irq: Keep track of irq affinities
+Thread-Index: AQHchGj7DB4SczePiEuTZHuufPnk+w==
+Date: Tue, 13 Jan 2026 08:45:34 +0000
+Message-ID:
+ <2991ec1845868940488c912c5dd34798a58bbf87.1768293759.git.mykyta_poturai@epam.com>
+References: <cover.1768293759.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1768293759.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
 Content-Language: en-US
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <a42c18c8-9bff-4d85-bb7a-4fbb2c43ad00@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------SK2LT5FgRd0nxkYYjvEEjAKK"
-X-Spamd-Result: default: False [-6.41 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_UNKNOWN(0.10)[application/pgp-keys];
-	MX_GOOD(-0.01)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	HAS_ATTACHMENT(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:mid,suse.com:dkim,suse.com:email]
-X-Rspamd-Queue-Id: 09B6D5BCCC
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------SK2LT5FgRd0nxkYYjvEEjAKK
-Content-Type: multipart/mixed; boundary="------------eF3WZ57hKAMerFmIO00Wiraz";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: oleksandr_tyshchenko@epam.com, xen-devel@lists.xenproject.org
-Message-ID: <4f22683f-8fd4-4db6-ac74-83c6f6460924@suse.com>
-Subject: Re: [PATCH v2] xen: introduce xen_console_io option
-References: <alpine.DEB.2.22.394.2601121624450.992863@ubuntu-linux-20-04-desktop>
- <a42c18c8-9bff-4d85-bb7a-4fbb2c43ad00@suse.com>
-In-Reply-To: <a42c18c8-9bff-4d85-bb7a-4fbb2c43ad00@suse.com>
-
---------------eF3WZ57hKAMerFmIO00Wiraz
-Content-Type: multipart/mixed; boundary="------------u7P0oc2qk9EcIVU0mKi4wxpP"
-
---------------u7P0oc2qk9EcIVU0mKi4wxpP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-T24gMTMuMDEuMjYgMDg6NTcsIErDvHJnZW4gR3Jvw58gd3JvdGU6DQo+IE9uIDEzLjAxLjI2
-IDAxOjI0LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6DQo+PiBYZW4gY2FuIHN1cHBvcnQg
-Y29uc29sZV9pbyBoeXBlcmNhbGxzIGZvciBhbnkgZG9tYWlucywgbm90IGp1c3QgZG9tMCwN
-Cj4+IGRlcGVuZGluZyBvbiBERUJVRyBhbmQgWFNNIHBvbGljaWVzLiBUaGVzZSBoeXBlcmNh
-bGxzIGNhbiBiZSB2ZXJ5IHVzZWZ1bA0KPj4gZm9yIGRldmVsb3BtZW50IGFuZCBkZWJ1Z2dp
-bmcuDQo+Pg0KPj4gSW50cm9kdWNlIGEga2VybmVsIGNvbW1hbmQgbGluZSBvcHRpb24geGVu
-X2NvbnNvbGVfaW8gdG8gZW5hYmxlIHRoZQ0KPj4gdXNhZ2Ugb2YgY29uc29sZV9pbyBoeXBl
-cmNhbGxzIGZvciBhbnkgZG9tYWluIHVwb24gcmVxdWVzdC4gV2hlbg0KPj4geGVuX2NvbnNv
-bGVfaW8gaXMgbm90IHNwZWNpZmllZCwgdGhlIGN1cnJlbnQgYmVoYXZpb3IgaXMgcmV0YWlu
-ZWQuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5v
-LnN0YWJlbGxpbmlAYW1kLmNvbT4NCj4gDQo+IFJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+DQoNClNvcnJ5LCBJIG5lZWQgdG8gcmV2b2tlIG15IFItYi4N
-Cg0KSSBnZXQ6DQoNCldBUk5JTkc6IG1vZHBvc3Q6IHZtbGludXg6IHNlY3Rpb24gbWlzbWF0
-Y2ggaW4gcmVmZXJlbmNlOiB4ZW5fY29uc19pbml0KzB4MCANCihzZWN0aW9uOiAudGV4dCkg
-LT4gb3B0X2NvbnNvbGVfaW8gKHNlY3Rpb246IC5pbml0LmRhdGEpDQoNCkkgdGhpbmsgeGVu
-X2NvbnNfaW5pdCgpIHNob3VsZCBiZSBfX2luaXQsIHRvby4NCg0KDQpKdWVyZ2VuDQo=
---------------u7P0oc2qk9EcIVU0mKi4wxpP
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|GV1PR03MB8709:EE_
+x-ms-office365-filtering-correlation-id: 8aa5e9b3-9ad2-41fe-2c23-08de52801ded
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?4Uts1prxA9ysJmAl9V6XCt3l8Z49AyI0qks4R+CS856C87dBsy8tYUtzJG?=
+ =?iso-8859-1?Q?hrNkRJdfThMe3GuJTJc/Z5ryYIgrQemhkXZb+Gvo36m0G9KISUsgr8YABB?=
+ =?iso-8859-1?Q?Orp+iSPbriO1s3dbifQxs/qZw/4rmRbqXwLC5sHowidhFz95WZN7KeCw1c?=
+ =?iso-8859-1?Q?Tlo578XNwspEpuHjR52sLK7QxPHGZ9zuEmnQW6i1qBnpz12b8xaEuzPkUH?=
+ =?iso-8859-1?Q?5JIIrMljmeKo3bO4aH3R9G4MP80SdvZSUif4CKp88fb3tTjkFrimbOed7V?=
+ =?iso-8859-1?Q?ALGMYgIvrm7jOStqsSEkXHKkK/KJKzWyP6M3HaxmvbhgoXffSAkTDJgYm+?=
+ =?iso-8859-1?Q?8bziGP3JHRUerkBwQfIoR9Vz3H+Q2oxmDb9K6L5FeILc/td/zrfS/PhN2F?=
+ =?iso-8859-1?Q?93GrszqdwqCPXbCicdL9+CQw78//KglvXGAwW3Gy87lJvm6PPKEZIX7eZY?=
+ =?iso-8859-1?Q?JjTDyIzMmrIouITXjfhEtY98lPLJ4amCXvL9Z1K8JoKZZFH8a5WSMQ4U4n?=
+ =?iso-8859-1?Q?Jm/kArSzjaFiT8q5CWBUlKQfYaDlxroIk1n5rWlheBiE/R0TlTN5GtzVFs?=
+ =?iso-8859-1?Q?nO/FGidKK4yNPSoDIh1a4mbmTDfUTElCKNofjqG4D0ewCkNOT9vLB0orkX?=
+ =?iso-8859-1?Q?0nbfQ3IHtp6Ax/ihkD/Mm2YUNxYrQYKZPXdS+uts58fVqA8UGKZ/GbrkrK?=
+ =?iso-8859-1?Q?RhLq4cWON5u53SojWn4Zu4eLubd2MIE3tk55JfdldeHXqPhsqQefyP9CUj?=
+ =?iso-8859-1?Q?qWG48VncCabBZBpxoqzSN2mC8YgZlkYVFt0ByzM8z0BXoJtFtEbl90LDMK?=
+ =?iso-8859-1?Q?jWrTIrIcS1q6hpYOvlQxO79+iK1KlfPFK5Fu7S8k4+teoOq8c6gzjUZxtH?=
+ =?iso-8859-1?Q?K4zM05yxqUHz1Zhdf5uZh5aGqwYIziAsCIxFRa3B5hH7dTib3DlypAzR70?=
+ =?iso-8859-1?Q?ha1SwrCFE+Sh2dJFEWSl5SzokiZnCtB4v/35BGYJkgIuMeA5i2J1ahZgo3?=
+ =?iso-8859-1?Q?ZPfTqF8XDJsd0WcnYl+SAIyQ1TIvm5V1qjdQT97UAsoy8KRmMCpov/1fg9?=
+ =?iso-8859-1?Q?H2YSOT//wGDLY+WwylFTLUaqRYpg4K/K587ELs8yaT5xLHzHs+Mges8Jfv?=
+ =?iso-8859-1?Q?LEWEVl7bl8V2xugskctQ4ABrm91FzLi260jliUIAPjd0El+lr+SFEaHd3X?=
+ =?iso-8859-1?Q?+FgapLSwBgcRlb1OCYzFbrEekuCoe1G4PNiqQP7BQH1cj77MY4PIM1rQgT?=
+ =?iso-8859-1?Q?K2r7j+K9tO3TOe/kZmyImTrvLey++7b+711AixnvAoBADGJUe4x47/2t7P?=
+ =?iso-8859-1?Q?Z6sUTTyzhCu9Z7SZQ/iq9tsFq5cXlJGVBwnmAvAqpU8cRzlpp+ubyDnfz+?=
+ =?iso-8859-1?Q?ZuRnSqEd62hy4uov8f1QEh9z6To2GrCXgHnbpbYRrjss5doPlYr2mUbpxC?=
+ =?iso-8859-1?Q?jr3qvP2PDjbXNZIeJskBMMAFyY62cPTHODVUpHLFkeBEkefNC7YhDpJcn9?=
+ =?iso-8859-1?Q?BTB1M2Vut6tIEIHdTES0bvVFrFVplpdWnjz5HrSg5rutb6kbKF877tuaWm?=
+ =?iso-8859-1?Q?n4+y36xiqW9MHRgnwRn4Xejdt13/?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?jozKfmSJ2acrxFlm63e3XX8zV1Aq+FSD3PHn1dLi2ip1frcirDui2yiMxx?=
+ =?iso-8859-1?Q?6avmpdNYF4rWPdlLblFp93dbum5u/IHIktw6wLeHDH/e6bSahb1ypyM0Kh?=
+ =?iso-8859-1?Q?SN/VPGu3GqgK1aeU7YQkCb303RLTFOEnYT2C0U49ivLCFbTGQQ0zkemL+L?=
+ =?iso-8859-1?Q?s6P32Cx7sTrEzJjCgT73Tm6kTKsubkrIypd5anc1IN2yIkNi1bibZXS7l2?=
+ =?iso-8859-1?Q?3qVflnOuXxVbpmXkkET5cHCWgR8u88pegHZlXeV9dQkvZrpqdoYkdqhrI3?=
+ =?iso-8859-1?Q?KUnwmLeIi06sxeicx32RGEq1b3U/bECilYetXcCnUTwP+CfJjNCckDR13x?=
+ =?iso-8859-1?Q?qRE8yqUz53dQn5cqDKlPfziqA6UmF9SAnRhkmTMGCOeN5MEFjHvydX91iC?=
+ =?iso-8859-1?Q?c1k6RFQqNWrTXwG0buipazgFKU0HY0cgz3kt0I+uZXDm4WdAVlrAgywXi9?=
+ =?iso-8859-1?Q?gx293IZ2x6TOI02PFovkQf0W1niv8qQ8h7YtVHu6zYyusC787I257QQPpj?=
+ =?iso-8859-1?Q?i46GWKYGDPHsThcx2XilbSzSTahYWQ0n9BM13wJ+EC8lfQwkKAK10ycS05?=
+ =?iso-8859-1?Q?OuQoRzzUdMWQygqZYw2d8G4F69ipdXqhyEhtHb3lKzRrDGqfeEBJe9IxPW?=
+ =?iso-8859-1?Q?o5R/RQp4bbFJi5ycoG+hIgwbApqGd2Y/myGWaqFpw6NlJBtV35q/nwsyTM?=
+ =?iso-8859-1?Q?yIKFMMw8JW15bJMiZiPYJWd6QGVaCEbLS24eLbC63Fcictpy0Nq1jT5ZB4?=
+ =?iso-8859-1?Q?ICwcasvcfwrFYjvRJnoVpXIu0+BPT7PWfyGmFkEfUtWZ0mFGsMF67eBDZd?=
+ =?iso-8859-1?Q?dKZH9ArrqKIlGMx8x0HefhhpbYIZEfv2k5EzBGmpC7UDd8LyaiAQ3N/stT?=
+ =?iso-8859-1?Q?YDDOJF3QfOtdZV1RbjOVt8XEtmRE8lycMoXIsHcxIGtvw+TMpJj433pYOa?=
+ =?iso-8859-1?Q?XGpJKvXP64UyMTJe/MWqfOBrpRvXtNIwfzRT5WIBlaugTeElz3P+uUaje6?=
+ =?iso-8859-1?Q?lBNqaRfZSvraGiCQQAIYZnyHsDCUGgQL8v/YGX6kQ/izH1h/yws1OX0RPt?=
+ =?iso-8859-1?Q?otn+u9AzNH2Uvx5+3imKPlKIhbw/8c4OeXjMqUWsTa5kVrq+t/2Kq+85vD?=
+ =?iso-8859-1?Q?PwKWuQc8gkmQ2eTb3lIoiNQptdtCcu/Es5E4LbhOsv9epP+GyDu9ch/uDK?=
+ =?iso-8859-1?Q?n4YVYioanVlYKlZlneGysQHj1e7XgiLM75Xh0DaDfYYjedDCxLrnA1YNRl?=
+ =?iso-8859-1?Q?G2jH7JsVFdfglBoTp+wLNjQVGK6Pswss+XaBkU6DyIxkzwuATrizAt42jy?=
+ =?iso-8859-1?Q?NWuwPG6PVMNT62fkY0S7HrFpkekoqBbGsU/bj7c5gGi2TQFoc8at9+ApfZ?=
+ =?iso-8859-1?Q?MrAL+rp5OJI4qERu6Qvd5MqmB9MCeehVoVPqNj2HNfzM6iqQfg3X5Cuz35?=
+ =?iso-8859-1?Q?ONMb3JaCUSVcJ68nE3tvjwG8bqYW/+EqI3cbvk1sU6oQzXj6nPMfRVK9mR?=
+ =?iso-8859-1?Q?rfncCm3A+4RE8OuilDCztQOnWqoG/+8pUMTgT67MbjFVlesuxjHCwpSjBB?=
+ =?iso-8859-1?Q?cHjIswqjLn6X3YG6AxptSLMTaLTdJJFgaX+8QhyIT7g8t5mmPEK8v/Bu7b?=
+ =?iso-8859-1?Q?tHfpNkwUKxynvsVl8cSiJvmJk8lJqil01XaAh8lVpr5N69kBSkeQcnKiby?=
+ =?iso-8859-1?Q?3eOt/QCFELz/YgJTbpq7CP4tzmf5P/ED3uhmHzWCz4FIaNjKwFOMOSCmBm?=
+ =?iso-8859-1?Q?4vkM3DNpI4kq9mgH4Y+c2rfIdpt14pC8sq+QNh4EZtm0jGLqpxd3uANvmy?=
+ =?iso-8859-1?Q?ovsx78EDLk+e61Qij10o140gsNzdXQU=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8aa5e9b3-9ad2-41fe-2c23-08de52801ded
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jan 2026 08:45:34.3555
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: d7thUQ5nrObzP7dVDPKtRu3izYidJjTv86goA+9IUE4yt6oO9TOKckV+rCzsKHWPuX2GgVr+Gzl+VVQX55oqnw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB8709
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Currently on Arm the desc->affinity mask of an irq is never updated,
+which makes it hard to know the actual affinity of an interrupt.
 
-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
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
+Fix this by updating the field in irq_set_affinity.
 
---------------u7P0oc2qk9EcIVU0mKi4wxpP--
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
---------------eF3WZ57hKAMerFmIO00Wiraz--
+---
+v4->v5:
+* add locking
 
---------------SK2LT5FgRd0nxkYYjvEEjAKK
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+v3->v4:
+* patch introduced
+---
+ xen/arch/arm/gic-vgic.c |  2 ++
+ xen/arch/arm/irq.c      |  9 +++++++--
+ xen/arch/arm/vgic.c     | 14 ++++++++++++--
+ 3 files changed, 21 insertions(+), 4 deletions(-)
 
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmll/eAFAwAAAAAACgkQsN6d1ii/Ey9U
-Owf/RmMXh97idPBwpjiMFdfXjSRtrcD+Oznt0kifMOiqXca5BYtDPts+RTfM64JiEcTsGig9JZFP
-vGicKEtKYh4UI6BbIL0jyy4jzyOVSLu7lg160vwT/JDiR6ciBsg1JBL7A2qtadW51naC9o6T9NXD
-VAS1W11rmja1j3hZwMHP5My8qINSEg6c9s+1DmHo2NNlefOtsMNP90hl9HRtNqXOmAvNBAO2Lk5E
-h0e7MJFBvEvTqTvQhx0VvARQumaJFoAmznt67aSxviLsOtWA7rEQUFdMyo8aRUcGkhc3myrHAde8
-XCHpNn4yvSx/MWjH8756Dd5Z5NdpRQqJr7An738+5g==
-=XgKh
------END PGP SIGNATURE-----
-
---------------SK2LT5FgRd0nxkYYjvEEjAKK--
+diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+index ea48c5375a..5253caf002 100644
+--- a/xen/arch/arm/gic-vgic.c
++++ b/xen/arch/arm/gic-vgic.c
+@@ -232,7 +232,9 @@ static void gic_update_one_lr(struct vcpu *v, int i)
+             if ( test_bit(GIC_IRQ_GUEST_MIGRATING, &p->status) )
+             {
+                 struct vcpu *v_target =3D vgic_get_target_vcpu(v, irq);
++                spin_lock(&p->desc->lock);
+                 irq_set_affinity(p->desc, cpumask_of(v_target->processor))=
+;
++                spin_unlock(&p->desc->lock);
+                 clear_bit(GIC_IRQ_GUEST_MIGRATING, &p->status);
+             }
+         }
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index 73e58a5108..7204bc2b68 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -216,10 +216,15 @@ static inline struct domain *irq_get_domain(struct ir=
+q_desc *desc)
+     return irq_get_guest_info(desc)->d;
+ }
+=20
++/* Must be called with desc->lock held */
+ void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
+ {
+-    if ( desc !=3D NULL )
+-        desc->handler->set_affinity(desc, mask);
++    if ( desc =3D=3D NULL )
++        return;
++
++    ASSERT(spin_is_locked(&desc->lock));
++    cpumask_copy(desc->affinity, mask);
++    desc->handler->set_affinity(desc, mask);
+ }
+=20
+ int request_irq(unsigned int irq, unsigned int irqflags,
+diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+index 6647071ad4..c59f6873db 100644
+--- a/xen/arch/arm/vgic.c
++++ b/xen/arch/arm/vgic.c
+@@ -445,7 +445,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
+w, unsigned int irq)
+=20
+     if ( list_empty(&p->inflight) )
+     {
++        spin_lock(&p->desc->lock);
+         irq_set_affinity(p->desc, cpumask_of(new->processor));
++        spin_unlock(&p->desc->lock);
+         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
+         return true;
+     }
+@@ -453,7 +455,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
+w, unsigned int irq)
+     if ( !list_empty(&p->lr_queue) )
+     {
+         vgic_remove_irq_from_queues(old, p);
++        spin_lock(&p->desc->lock);
+         irq_set_affinity(p->desc, cpumask_of(new->processor));
++        spin_unlock(&p->desc->lock);
+         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
+         vgic_inject_irq(new->domain, new, irq, true);
+         return true;
+@@ -473,6 +477,7 @@ void arch_move_irqs(struct vcpu *v)
+     struct domain *d =3D v->domain;
+     struct pending_irq *p;
+     struct vcpu *v_target;
++    unsigned long flags;
+     int i;
+=20
+     /*
+@@ -494,7 +499,13 @@ void arch_move_irqs(struct vcpu *v)
+         p =3D irq_to_pending(v_target, virq);
+=20
+         if ( v_target =3D=3D v && !test_bit(GIC_IRQ_GUEST_MIGRATING, &p->s=
+tatus) )
++        {
++            if ( !p->desc )
++                continue;
++            spin_lock_irqsave(&p->desc->lock, flags);
+             irq_set_affinity(p->desc, cpu_mask);
++            spin_unlock_irqrestore(&p->desc->lock, flags);
++        }
+     }
+ }
+=20
+@@ -574,8 +585,8 @@ void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsig=
+ned int n)
+         spin_unlock_irqrestore(&v_target->arch.vgic.lock, flags);
+         if ( p->desc !=3D NULL )
+         {
+-            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
+             spin_lock_irqsave(&p->desc->lock, flags);
++            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
+             /*
+              * The irq cannot be a PPI, we only support delivery of SPIs
+              * to guests.
+@@ -944,4 +955,3 @@ void vgic_check_inflight_irqs_pending(struct vcpu *v, u=
+nsigned int rank, uint32_
+  * indent-tabs-mode: nil
+  * End:
+  */
+-
+--=20
+2.51.2
 
