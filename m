@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E57DBD2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:10:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201564.1517159 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3929D2D0E2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201588.1517184 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdED-0002j8-Lv; Tue, 13 Jan 2026 12:10:29 +0000
+	id 1vfdP2-0004pW-Tj; Tue, 13 Jan 2026 12:21:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201564.1517159; Tue, 13 Jan 2026 12:10:29 +0000
+Received: by outflank-mailman (output) from mailman id 1201588.1517184; Tue, 13 Jan 2026 12:21:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdED-0002j1-IR; Tue, 13 Jan 2026 12:10:29 +0000
-Received: by outflank-mailman (input) for mailman id 1201564;
- Tue, 13 Jan 2026 12:10:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vfdP2-0004pL-Qt; Tue, 13 Jan 2026 12:21:40 +0000
+Received: by outflank-mailman (input) for mailman id 1201588;
+ Tue, 13 Jan 2026 12:21:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YaIX=7S=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vfdEC-0001lv-F5
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:10:28 +0000
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [2a01:111:f403:c101::7])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d79e5570-f078-11f0-9ccf-f158ae23cfc8;
- Tue, 13 Jan 2026 13:10:26 +0100 (CET)
-Received: from BL1PR13CA0210.namprd13.prod.outlook.com (2603:10b6:208:2be::35)
- by LV2PR12MB5991.namprd12.prod.outlook.com (2603:10b6:408:14f::9)
+ id 1vfdP2-0004bu-Cb
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:40 +0000
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [2a01:111:f403:c005::5])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 68bf6443-f07a-11f0-b15e-2bf370ae4941;
+ Tue, 13 Jan 2026 13:21:39 +0100 (CET)
+Received: from MN2PR16CA0054.namprd16.prod.outlook.com (2603:10b6:208:234::23)
+ by BY5PR12MB4308.namprd12.prod.outlook.com (2603:10b6:a03:20a::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
- 2026 12:10:19 +0000
-Received: from BL02EPF0001A103.namprd05.prod.outlook.com
- (2603:10b6:208:2be:cafe::af) by BL1PR13CA0210.outlook.office365.com
- (2603:10b6:208:2be::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Tue,
- 13 Jan 2026 12:10:02 +0000
+ 2026 12:21:34 +0000
+Received: from BL6PEPF0001AB53.namprd02.prod.outlook.com
+ (2603:10b6:208:234:cafe::66) by MN2PR16CA0054.outlook.office365.com
+ (2603:10b6:208:234::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Tue,
+ 13 Jan 2026 12:21:34 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF0001A103.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ BL6PEPF0001AB53.mail.protection.outlook.com (10.167.241.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:10:19 +0000
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:33 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 13 Jan
- 2026 06:10:18 -0600
+ 2026 06:21:31 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d79e5570-f078-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 68bf6443-f07a-11f0-b15e-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=c/ChUGSV9ysFJ1ovKnGrhf3STPsmSrsyOZLJYxTPlHkTqDScLszvVtSlSUCa43Q+ByAM43zUZCpRi+r5Z9jCeJYGv3/57D5h2IyIAetHb1Hyd/2GdYr4MfCMK2fVXdXYj9pX0WF9Xyt6pblldgTsdMBNehB6CDf040K2iSu5f65CfDFgBk900CVzjNTsBTnCQdlwsDQ4GSHLUAbFNUiXezXC77yP5XDS70lQHKP+vEG6SGo0nHZ5++xeRjsDombO+PJr9FQsW605WQwpysy5P8hwYriWeX1ww+QAOBBFg5Epeh39xGRov+OiIU8K/f5NU6cSx7qRrp16A9RMn6YYhw==
+ b=ZOE3n/ylmwFo8M3Ifm/7N8YuOhlkaZULvGMtnIAuEF8b2nxzsENWMBIlf4cfcOzhS1DrdzI/cc0d16y3fnDEwOcKibqfiMcVMT6o/ju/PRYc61y1RJe/vLED/jCa10w+95f5OVCakGHzTej5FDHceAJK8rWyY+dR3bqcTxlrGRbR2lwDD1tMmJyAENVXmxkdaVzg62vRps03JK3ankVkfhNbz/11zkdkG7aCEs/1fphSr2JYcnegbM+9WDqXx+2BwPUlj+Vu4TACpTa+fpirUVNR/R519Fy62gFrgn8x3getEjHscq0AKR5r8V7Mp2Bnm9lfIfBeJ9WtrJwJV6/VpQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hjNoEE2GthoCnN8zbgJAlOqjqa6jb2XEHOuLDiKN3Jg=;
- b=d1Op28cd8AmL7ONOMsQUmpxFqPXVIgxmnN+Ev3793EUBg2sT3WHRrsL9SsWClnfpY1ajYb+yIBssuneJyeoTbYXt3+dPmnQTPlE/b0cHWFesjoAP4Esrw1kKsGmhKlB3A05NRKB4WeZtdcpfU0++NQ0/UMmNKMLJMo0TNCzZsGRRdC5zZB8XIZ4SnvvPhQMYcjT/aOVUiXWVdFM0uLT7Mlo+KYAdG5f2FExI3XadQZVnCL5utARFZgEUoXQdb3VY+NxKAki24FUdLLPwojudb2SbuuPuiZ2hWx+tb97j1My8gFD+ntMLjNzjjcVsKlyoIHNKNkRSN3lpVz/xLBAw1Q==
+ bh=Hd63tS65+pkJnhvg7m7v40+QJW9Mib6yuJizuBKbNkQ=;
+ b=ijx2UEsvn33k4IPrEd/jUoNVzSMZLjhK8U9kRhLmKTPcWF0j+gONgfNKGxfygp1P13ojOiikHFNBeJ/+giKPnZAqoAvIg1j13o8MdFSfu9JKcK6vzbuCa+I6ckpeFqG/OSzV0yA5sUEJhAjgpncASF82gChVzvOw5HcJnxikXhBM/P7zDTQaCf2ZaiNhfCwfv1W9dnfeCKu3nkoG+mdmlQSpUDXY1sb6KcdGQPz6csWbuaY6IVXm4SxQSrFPM7okNG9HfNOvdEXAF/rHqzRDckS2eJwhS/6Yo2+bTkUs5yM3lYgaB18X+n0h3U59jRIAsR701FVBkX1ajI5Q6dYtqQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hjNoEE2GthoCnN8zbgJAlOqjqa6jb2XEHOuLDiKN3Jg=;
- b=eKUCt0/qUM1ZnKVNjbpeOCdvDKAMJrIELy6IcOHlcMJW43QuKy2A7kfCmny2slWQDANTTObZKIDo3ciqxbhZuPgNWAyRvT9Pq598LM7fD8grV8iOL8s0w4ePhFZ/NXqE7zhSJqyEVFQrfmaQiVnpmikxkM6o8wYaPEh3g0HaDDE=
+ bh=Hd63tS65+pkJnhvg7m7v40+QJW9Mib6yuJizuBKbNkQ=;
+ b=OI5L4QVjCi13eqvStaGifek5WQ8sJjD6d59dhCm6HASs7sUN/XcvNmUxD57GBm5XGX6a6LuPhWwhq5jOrAScr3wKaFgvfjavQFZhluqlNcpvbkntzTrYBl6ivbxCn6WKeraBRZLJk90z/mxHecU8xmhwlXTXMblI2gKqgMz1NlA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,111 +85,110 @@ To: <xen-devel@lists.xenproject.org>
 CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2] x86: Use 32-bit counter for TLB clock on debug builds
-Date: Tue, 13 Jan 2026 13:09:58 +0100
-Message-ID: <20260113120959.55156-1-alejandro.garciavallejo@amd.com>
+Subject: [PATCH v3 1/4] x86/ucode: Fix typo s/mitigiated/mitigated/
+Date: Tue, 13 Jan 2026 13:21:01 +0100
+Message-ID: <20260113122109.62399-2-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
+References: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A103:EE_|LV2PR12MB5991:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2abb9a0b-7d02-4e75-9347-08de529cb878
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB53:EE_|BY5PR12MB4308:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45976c8d-4da6-417a-120b-08de529e4a20
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024|13003099007;
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?RVgyaSzUUaZgwNR2Urra/zXWDCWYqEKRVq4BAA8raPpkbdgkgQyYwcXX8NXQ?=
- =?us-ascii?Q?5zyT8zmE5Pq6+wFaFquJDazWYHBSGj6KDXn404xN0rIqNFR7k+PaosUgk1XI?=
- =?us-ascii?Q?RPTPWqh8nuKROf3EAFDC6DqUkXrhCa4FPDLBJpertXqi/Yu5RCNZoNl6A0VM?=
- =?us-ascii?Q?KSXxqKSBU0iOGwrW7c1xbQPid/ZhxuUKHFGzLDYk83PQUxk8HhqvgShEgfcd?=
- =?us-ascii?Q?U3O1UTyaQzBuUY26HUYkYS1wujsJPux0ryqMOStRq7gnznK0pKXJZKIl+vkn?=
- =?us-ascii?Q?ZdeWpoGutlKL8fP3D4wJiV9dq/cEye/v0b7k8+n93oGaUFL8lLj7yCYr7u0v?=
- =?us-ascii?Q?QT60vCt6s6j1pcgVp3tokQGJB0n0O5Qb1fq5YmRJ0whLU7JrPB3Io7DxHo1k?=
- =?us-ascii?Q?6+49bW7hXpjtLNo8f/2JfmT7iUnZG3MOQIDfU3H6xDa1q5bdcfx3kuEpRz/x?=
- =?us-ascii?Q?/6qfh42seIB7Bd4zhDiHYFcLaTPmGx4qPoOGZ/Q5fEnKxvA2vtYXrtdUvpTl?=
- =?us-ascii?Q?aEPWtcfY/c5mD17SxY2ykZF8qqukIqspS69Z6usXnLDmAJWDXPx+DBfddHOe?=
- =?us-ascii?Q?S6nFLB/rX+dACGxLT1ewToh5KnloDtX8tWmZfWcRw0j+oNA3a84ITssIcJxc?=
- =?us-ascii?Q?Y9VqDt4vGNhMGOjydlDb7xFVwFzpvlJ12vgUTiaiyK7ev91Ln5SYvHdIOmmR?=
- =?us-ascii?Q?3Gmcnb0iSfizvApySQ+wKjThuWLmaoOE7L2aDiLGfixy6opVQW582/eaq7yV?=
- =?us-ascii?Q?fdkvikfCJr95H0bdDrUNtc6WxQ5ywefBEI/eixTJr2U/hqa1Iz17BTASaTmU?=
- =?us-ascii?Q?WS9VIO4f/0TBecZSf+/J7RuejqMwLZLQSIlmBbvN2nukrPEweRsyI86JBs14?=
- =?us-ascii?Q?faN6vQyVm4LvF3lUKb9nbppBQno2+ktMz3o/V+5Baz+/NgPqu9TXWMNalcxf?=
- =?us-ascii?Q?dHKFLIkua7nhMG/787I4XJV+B++H83RQUHGTbxD97zGtQZUVfCMCN8ME0crf?=
- =?us-ascii?Q?ecehWnNdnM3MDAV4gUJgpluLlaFuIkKS2kqmGQyUmdKzCo82ONmv9p4ftWqw?=
- =?us-ascii?Q?wzot4+rwpVIFJX1MzyAKl/Srb8xDHWxBBN69T63k2AwlJHfFmYwVwdOVlYdl?=
- =?us-ascii?Q?cJtOYq6q+YnO11i5K/LeyLIbU/UwnHzKifZi0+AnTJ56EvS6YaJGkq8f2R3r?=
- =?us-ascii?Q?F17K9YozLokokJjqlCVEwqJFZjIoUhJh6maqJ3Yf+dUGHiL9NTjvTPBZxtoV?=
- =?us-ascii?Q?uu9uPSapWYBeSjXxdrk1IxnjLK84JqL8QSaDenMLm38/ceqTiD7qh44uMkj6?=
- =?us-ascii?Q?gysUiCrDmZ86PUvXZ/G/h4SlMcrXheIuZgSzWX0ym8K2ej/o5lx60YvqPPyf?=
- =?us-ascii?Q?ufpTtCELIwWmzfaaIb3BPuovYQ4P1mAk5FvqiL7fJSb83lL1gPlKOiX1d/xu?=
- =?us-ascii?Q?nlQ+pUc2zOp390nLIBa8PXUR4eTgIeGlzlqxcRxteJV3CKQ7MA4xY4j1eRgC?=
- =?us-ascii?Q?SJfGfE9FYQQI4dhn21jF65vUgKK0y5YA6Y/+oBGZwfkYztoexHSU+HfODL0F?=
- =?us-ascii?Q?wg3W2e9lO8lTJhR4Pec=3D?=
+	=?us-ascii?Q?Tg1GfHx9uB9ef6jLwB7zQUV3q0AB7tdwL+vMt1ypWdn7do+rJJ7FlkTzU/Qv?=
+ =?us-ascii?Q?RT4CoL2VXSxGBR5ekPSdAN3FInxjbtrGNWtb0KLZTCcC3RgEl9dXn89LnXkF?=
+ =?us-ascii?Q?9aS1SPHMA42cVkCRj7V+mGXI+rRiCWdFCYdd1FpMYLmR5/sdAV4dIDFdONBY?=
+ =?us-ascii?Q?8VJ+zXUryniIGS7HxZtDlmPorJD2tbDTZHwS2G/WU5BgmJeSFvnib6bhH3M3?=
+ =?us-ascii?Q?lHJRwFwOax+B7NDa61mDPvLr56MbH1X2+SMYlbE4dTXi8O9SP7kqgN06P0Jd?=
+ =?us-ascii?Q?pZjH9MNtfT0dXC3JHhcVjmmVh9ayPfgDdFRykPhF3P8DviPakQRfI+91wlQf?=
+ =?us-ascii?Q?Dam3OUb/BgGxRPURlKW/9eo3sGVGTt9GIWKali6KQgBQhStmPY09Z7h3lhAK?=
+ =?us-ascii?Q?i8vZS+heifbuAai21tolG80FffzxxWOVEiQT+hzEwhmk/P8JxrhEQ6X6Nrgh?=
+ =?us-ascii?Q?xRGK5KBORA6RmzmxP8Cw8+9RSX98VTL7m3s0S0cVw1YQXLN1ZirACAMmww+O?=
+ =?us-ascii?Q?MNYpvVXwy+yOuwhlsaYjOViMWdZomgdNYSOcIAhQ+ZAvhH4qf2jCYquxdZcZ?=
+ =?us-ascii?Q?TIfWhc363pCvtZ13qD+3D4R0JTW/274ui2TsmBY9lJMRAR2QbTeTyArz+22q?=
+ =?us-ascii?Q?/2k8K3uvg2oOUfHt157cHsqd0FVjzdTrLh7n06FhfpwuA8LOfzoEKKVhQJjB?=
+ =?us-ascii?Q?u7IEPrwoixb+GUmV+EM0fxVQYv73hSKbhUhwRsuFP8JDM3aORl7f1fHxWUyL?=
+ =?us-ascii?Q?i3MbqKZLjCd8+dg/iaIRqDN9CkAaGcYBLA5ymP6RuZTkUhCQ4Vih+expqA3E?=
+ =?us-ascii?Q?+Kbr0qSXyKaUyLrxaaPqjOTogn3JMxsHif7DVuEoXhyDEZ8QjrHuGSXsd2mC?=
+ =?us-ascii?Q?BZhRqa6zzYNFqDpM/GjLGZSF1tUoGfa1QnKJMN/gQ94Krrd86gQuWLE4Xnvr?=
+ =?us-ascii?Q?22h11E+eM+23HR4DYyC1nPmgjDfiABGyZRazRa/d4FYVKrLKAf8ZdBm+RCJk?=
+ =?us-ascii?Q?DfjquSP3hddrhwaNUdlgVEr7Mu2tCyOPrWMlX9iaiXN1J9qZO05+fsQkQ/bJ?=
+ =?us-ascii?Q?2ljo0+Y5qA0z6oGn89WL7t0YWgqeWRfgLMH5hibllyD1sQFxYcXHpWaaWyig?=
+ =?us-ascii?Q?bnX04vFXSxYpgdJyZu1W4dxbCdhRHszB7HqNog1okkYHeh2FXh+MtClZNbnr?=
+ =?us-ascii?Q?E3A/ydMoBvl4gXqpc+1hD+oxpkUBM3eshSRPImyOD85i8MpNmMVIl9HK7LhG?=
+ =?us-ascii?Q?z9JEOEvhZNmmQg9OMBrSwuoihm5nVw2X+qdK2JkwWYpIA2CGFBiQo2DlMaDc?=
+ =?us-ascii?Q?w71sAQX6gmqCyl097W7t1S3Q+1Ye3Ts/5ZKHhjC8b+qmFPPFnGPfvl5oLwBA?=
+ =?us-ascii?Q?8IOJDOlxf/M+2FhOImdzwOfag4H00K1/5iS9c23tGEw+DkY7WdeX1Vjttn08?=
+ =?us-ascii?Q?4FDDnbb84WkUiVgYGS/E/UHwlEcrey4IAntEFMtLAtY9PjkqCPvgUmB3zg26?=
+ =?us-ascii?Q?FYs7qj4uctozXG0bHzLSps/wVPY8l+EMYB2tkjEI8gEGQORAYsnXJ/OqbHS7?=
+ =?us-ascii?Q?ux5WXe6zLPN7DLNSbk8=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:10:19.6118
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:33.4664
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2abb9a0b-7d02-4e75-9347-08de529cb878
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45976c8d-4da6-417a-120b-08de529e4a20
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0001A103.namprd05.prod.outlook.com
+	BL6PEPF0001AB53.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5991
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4308
 
-Debug builds traditionally ship with a 10-bit counter for the TLB
-clock. This forces global TLB shootdowns with high frequency, making
-debug builds unsuitable for any form of real time testing.
-
-Remove this quirk, unifying release and debug under a wide counter.
+Not a functional change.
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-v1: https://lore.kernel.org/xen-devel/20260112140851.55590-1-alejandro.garciavallejo@amd.com/
-v2:
-  * Remove WRAP_MASK instead.
-  * Commit message/title rewrites.
+v3:
+  * No changes
 ---
- xen/arch/x86/flushtlb.c | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ xen/arch/x86/cpu/microcode/amd.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
-index 09e676c151..23721bb52c 100644
---- a/xen/arch/x86/flushtlb.c
-+++ b/xen/arch/x86/flushtlb.c
-@@ -19,13 +19,6 @@
- #include <asm/pv/domain.h>
- #include <asm/spec_ctrl.h>
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index 2760ace921..71b041c84b 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -101,7 +101,7 @@ static const struct patch_digest {
+ } patch_digests[] = {
+ #include "amd-patch-digests.c"
+ };
+-static bool __ro_after_init entrysign_mitigiated_in_firmware;
++static bool __ro_after_init entrysign_mitigated_in_firmware;
  
--/* Debug builds: Wrap frequently to stress-test the wrap logic. */
--#ifdef NDEBUG
--#define WRAP_MASK (0xFFFFFFFFU)
--#else
--#define WRAP_MASK (0x000003FFU)
--#endif
--
- #ifndef CONFIG_PV
- # undef X86_CR4_PCIDE
- # define X86_CR4_PCIDE 0
-@@ -55,7 +48,7 @@ static u32 pre_flush(void)
-         /* Clock wrapped: someone else is leading a global TLB shootdown. */
-         if ( unlikely(t1 == 0) )
-             goto skip_clocktick;
--        t2 = (t + 1) & WRAP_MASK;
-+        t2 = t + 1;
+ static int cf_check cmp_patch_id(const void *key, const void *elem)
+ {
+@@ -127,7 +127,7 @@ static bool check_digest(const struct container_microcode *mc)
+      * the digest of the patch against a list of known provenance.
+      */
+     if ( boot_cpu_data.family < 0x17 || boot_cpu_data.family > 0x1a ||
+-         entrysign_mitigiated_in_firmware || !opt_digest_check )
++         entrysign_mitigated_in_firmware || !opt_digest_check )
+         return true;
+ 
+     pd = bsearch(&patch->patch_id, patch_digests, ARRAY_SIZE(patch_digests),
+@@ -676,7 +676,7 @@ void __init amd_check_entrysign(void)
+      */
+     if ( (uint8_t)curr_rev >= fixed_rev )
+     {
+-        entrysign_mitigiated_in_firmware = true;
++        entrysign_mitigated_in_firmware = true;
+         return;
      }
-     while ( unlikely((t = cmpxchg(&tlbflush_clock, t1, t2)) != t1) );
  
-
-base-commit: a2a34d76643e49ccc949296c9a45888034e50b55
 -- 
 2.43.0
 
