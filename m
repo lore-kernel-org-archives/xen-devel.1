@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B819D2D0E5
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201589.1517194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C81D2D0E6
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201587.1517174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP6-00055Y-9x; Tue, 13 Jan 2026 12:21:44 +0000
+	id 1vfdP1-0004c7-NV; Tue, 13 Jan 2026 12:21:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201589.1517194; Tue, 13 Jan 2026 12:21:44 +0000
+Received: by outflank-mailman (output) from mailman id 1201587.1517174; Tue, 13 Jan 2026 12:21:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP6-00055Q-64; Tue, 13 Jan 2026 12:21:44 +0000
-Received: by outflank-mailman (input) for mailman id 1201589;
- Tue, 13 Jan 2026 12:21:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vfdP1-0004c0-K1; Tue, 13 Jan 2026 12:21:39 +0000
+Received: by outflank-mailman (input) for mailman id 1201587;
+ Tue, 13 Jan 2026 12:21:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YaIX=7S=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vfdP5-0004bR-EI
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:43 +0000
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [2a01:111:f403:c111::9])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 69ffe719-f07a-11f0-9ccf-f158ae23cfc8;
- Tue, 13 Jan 2026 13:21:41 +0100 (CET)
-Received: from MN2PR16CA0055.namprd16.prod.outlook.com (2603:10b6:208:234::24)
- by DM4PR12MB6181.namprd12.prod.outlook.com (2603:10b6:8:a9::22) with
- Microsoft SMTP Server (version=TLS1_2,
+ id 1vfdP1-0004bu-12
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:39 +0000
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [2a01:111:f403:c107::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 67fa6e01-f07a-11f0-b15e-2bf370ae4941;
+ Tue, 13 Jan 2026 13:21:37 +0100 (CET)
+Received: from BL1PR13CA0398.namprd13.prod.outlook.com (2603:10b6:208:2c2::13)
+ by SJ0PR12MB7065.namprd12.prod.outlook.com (2603:10b6:a03:4ae::19)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
- 2026 12:21:37 +0000
-Received: from BL6PEPF0001AB53.namprd02.prod.outlook.com
- (2603:10b6:208:234:cafe::a6) by MN2PR16CA0055.outlook.office365.com
- (2603:10b6:208:234::24) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 12:21:32 +0000
+Received: from BL6PEPF0001AB54.namprd02.prod.outlook.com
+ (2603:10b6:208:2c2:cafe::f5) by BL1PR13CA0398.outlook.office365.com
+ (2603:10b6:208:2c2::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Tue,
- 13 Jan 2026 12:21:37 +0000
+ 13 Jan 2026 12:21:06 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF0001AB53.mail.protection.outlook.com (10.167.241.5) with Microsoft
+ BL6PEPF0001AB54.mail.protection.outlook.com (10.167.241.6) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:37 +0000
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:32 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 13 Jan
- 2026 06:21:34 -0600
+ 2026 06:21:29 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69ffe719-f07a-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 67fa6e01-f07a-11f0-b15e-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r4x9Bz3kINVh/FeVvZq08z/WtS2Uktnn25zZ9RiRErV8A7wa3Wo3DtL5TLJBcfot63psUnvu3MKHetqkecPzGbVM1A3mSshJhx2y9DNg0mVh+89JfDpeeeSUG1RW8FrZCKQaIKoQfei/PnpQ5t7CDY/fzl1uj+laKeLff9zgH78mSTIYzohZ7UX1ko89Qy1i6ICHzf+CUK4oUugHYCH8esnS2kHE5RO4swKbigo+V2yeLO9WWDwFVTyIpKO8abMlvRdTuzH1o7FPJ1v2MBEdZt2FxDmojgr2fyVSVFvdPv6JVpUZtuc0iRJFQWBj3h/JOXg3ozyD1mibZ2TmhaQG/Q==
+ b=hCZSdt+g+kk8uxu/+8pUhFO39A+9o+G0nyKFbsT7hxMKr8+4PPh1jYtyWB1QXQe272IHw2Zc3seK7GhWn7OT0NO9TS7fC9eGcko44SW0iRJqO58SqtHIyqiSV42Vn1XdphHSLcmQIVsVWak8fTIYyHZyJ/6tAOs9MLrFYDQCHOKKtJ/Toqk7QFgUZAGdnH6e7TU26Cd8co/xFsJJSLy9eVwQHJOP1d3FosKLM7ax8n/wV62+zitTKtn6RP6Oyuq7P8rmRsNuxVpTRjI9FURIiSOZ0H2e++dTNrjN8fldfoXymBZr3qjBW1Rd6fhL1jhZ2ydn12qYNI3CSYgwSERecQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dWp8DZG/eGZsi9jg+Gber251xIS5sXUS7XbDSzbTugk=;
- b=hSFQi6IgwB6RDyrPiVD3eYdxgilO4x/SDOj4avI+YYKo0Ue+ZpXU6WEHu9wkUaC5KEjWK3iSX6rci1RulvCB8+Y/mVbVfO1lR7zXh8J4Sl++NLx7kRulh39DuhLaYS2jMjiMWXEHtrWOn6tj0/DOGAZ4HdIU1hNb+OhSkgtbWgd0Ydi2nE0hIVYzv/94+LA4W1k3e9Zn5+0bNbYGGq2FGlKnQNTOCyi+WHHHhsFpuTgINQYvNwBtFTFv59XAb6PXvDBn4Kjifz93yxRiaEffuuZLV4bROkKjfcna1U+u6Qh3DOOAgAK72U6sC0ahHXtW9CZ9MenMAEVgIBd04jC5tw==
+ bh=+m1iPvZUmvo84mbHL/Cn+u0RykzSub1/cEsen6YwdAU=;
+ b=vfeQcB7l6Azna4EVGFtAiSbgaygh4OMLElwrJXGDCiLkr0rOELKYeBx9SVWsvlt7GJ2kkvSEncFU7UBVKQln5Ymd8ezYgtGlor2d1ls8lUe402VKExvsxU/wRS6K8soPpxK7WALGVqHqfnm4K6fz9ymiBaFqJaNzBiCRy5gKWOXl7G+MtRtLq0PNqq2fjo4dlX0Fcym6TGPcvFbCnd2hwhnGcDjcv7bryvVkZdAtJug/nXQ2XWjqUZ9NLsmyiqvFkx+BNGgkg98kEqTEgZWBFTxhTJ2q0kmWq7Gw14smqXHIWZLft2vGD8J9YsGjko7B7ldvwvHq6aCEcXpUv0f5HA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dWp8DZG/eGZsi9jg+Gber251xIS5sXUS7XbDSzbTugk=;
- b=0ycaEQaKymNtbrIpawnq5xhJjJyGJ4c83KIBvnRfi4FdfehMjP42075+Ww3xFGS3Ye9NOfpXKYOy8d/BLwqidJM4OJI/IG62XJd//ifW+ebFQigS0jbp0yOn9Dt5T7e+Xenr0E1NYo7Po4X3ClVYxcrG1CVothNYK0aet1CTxbM=
+ bh=+m1iPvZUmvo84mbHL/Cn+u0RykzSub1/cEsen6YwdAU=;
+ b=jisB1GYUHNT/SivInIsEt1L1zT/G3xcytHlbClIy5hfB79XmotP8Kfa0MIJ68IMfsJPlEmeRtTmvWybEYAk0RQ3kDbHIX+vKQLJRrHHYfR+NjuPF9MU+QMQET7x2q0I2tX1RPWyuS0msII8UXAexZ3jVVCb8HTyt9Qd2isvXpvE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,17 +82,18 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 3/4] earlycpio: lib-ify earlycpio.c
-Date: Tue, 13 Jan 2026 13:21:03 +0100
-Message-ID: <20260113122109.62399-4-alejandro.garciavallejo@amd.com>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Doug Goldstein
+	<cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, "Anthony
+ PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>
+Subject: [PATCH v3 0/4] Add Kconfig option to remove microcode loading support
+Date: Tue, 13 Jan 2026 13:21:00 +0100
+Message-ID: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
-References: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -101,126 +102,92 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB53:EE_|DM4PR12MB6181:EE_
-X-MS-Office365-Filtering-Correlation-Id: d21156ef-730a-4c7c-0e6c-08de529e4c76
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB54:EE_|SJ0PR12MB7065:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7c5f678-d020-4cd4-a60d-08de529e494a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|7416014|376014|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Ilzf2mVMOrVafu8e4YNN1uKRfS7jZhfexCu/OEhHt3ZtiIzPRRk5V/Ssjzn7?=
- =?us-ascii?Q?zei7IBltip60vblZEpfBAWcuW7i4olE+9MOAuLhXdxXLoSR2CK/TrHeuN1FR?=
- =?us-ascii?Q?Loz3yQ3kcAKyEO84cp+vjB07T8LA1I3sxJsLlxzOG7MVee99Ek4zydSWIDcb?=
- =?us-ascii?Q?N/nVVFU4X+N1xaY6yAUreYYTMqvfB6KBxLQ2Aot0JYmU5XeksUrnTqEblYAH?=
- =?us-ascii?Q?mCdI/ECSg13lsVpiNbqpbvX6uvNY/wYRjAwtddobKhvRC5el8xG9KcvSzdc+?=
- =?us-ascii?Q?gDhkeOAQs7D71dIJnfpfafAEZdY6NTfsKwLKW662vBcgYY8XncTo8YlDY4Wh?=
- =?us-ascii?Q?a48vITU0DNse1HM9vkmPQ1EU/EbJ+ehWfNiiT8rlxefbxFjPFml2S1I+Jlq0?=
- =?us-ascii?Q?0ojw/8m+ejOOaE97bY9CC3kCav7m9KC1v7ID4I8jspzfuY+YsOJwm11GwEtW?=
- =?us-ascii?Q?tV2To9DpzTBWDSomIuDhMinIBKTUo2fpakuu3UJA67RB4Tuni7udePebn22F?=
- =?us-ascii?Q?NvaknS9CGua8U5PIop7pZCQaWcmDRuQr6JgKo+qUNt6dS1gGwd1M88/YU9OP?=
- =?us-ascii?Q?8dur5zLzsP3E1JAzf9dh5TcJmpgufjICrzOTdsXrRi1PSlhXYVTpds55/dGv?=
- =?us-ascii?Q?bghz8iDxggGDlAoLZZ7VttfSVP19P4srSIlGzdyTsGlAc0DkfsGwNxPvg506?=
- =?us-ascii?Q?A9n2iUiDUvi/up8HlAkYI8k7NcRSbzTRKKFmN0axxxBb+2asYlCwUvAnU+DV?=
- =?us-ascii?Q?/zp4pz49ra7WnEGhV//NlfS5tkBN9BJ5b9B6wmokUBxkERXfxGX0ZYJYWHnQ?=
- =?us-ascii?Q?EtNKDZiHGMwu3GLWMqm5FsBgeREAwDuKbKy95XBpv61NOmzZnRIcvuTINwEu?=
- =?us-ascii?Q?zayhVDQMF1VOlsUfHXOtSH7UW7cDwQMnySAdpN8uizqBltMy4jkqL7GC9jsy?=
- =?us-ascii?Q?hg+HupKdh7mDVKR/tyCaQUpcURMbhF5wBx8t5g0tUWs2t8Ye4DN+CBASVpMb?=
- =?us-ascii?Q?CeRe5hR783cD5VlPJXUNL0bARSAfGl17VixEWMEXpxy712iIKNlKHpU4VD79?=
- =?us-ascii?Q?HL037okEqntYwafNnHRwTZ4MeYsoiEX1xdj5Z2x90rj7iynJN7UgX3etPBnP?=
- =?us-ascii?Q?lHmXBclJTdUV4yp1nCrOz8sXD1ZnGeHHAwuMl0CtbA6KSiIK/7YI6AL41ORv?=
- =?us-ascii?Q?EcEodlRax5tmKVu9IqQOH4eHqWDufmcFhx/QW98lhtz0V1/XaU/xAJ4TjkSV?=
- =?us-ascii?Q?R7sfBolqwVc33gGFV9FjnqJq+aeOn5rzOWIX7M4cY6cHZaRR67OeoYN/fzWM?=
- =?us-ascii?Q?pPv4miW9OX/u8IBlt9rnnTkWPS9zgp8lm7umIhH5zBMT3FzKjTan57vDXigm?=
- =?us-ascii?Q?ZlTt+MDMN0NGg9G8Em6llbHE9qOGgFSjRzqMrGp0esYBrLN+062bLGnFrEzY?=
- =?us-ascii?Q?rNPXMf9Cmwz7wmfXdrn7tRuxVD2ctzV5cgPvapHKGzt+Feyom/hN0Z1dwEaI?=
- =?us-ascii?Q?n1/a8wKxeazXMDxBldarHrq8EGcu8NWTgutQq+asPFJ0IIGBltUoUOWN6L/2?=
- =?us-ascii?Q?S7/MvMayGuW6gMblPaI=3D?=
+	=?us-ascii?Q?kaVKAmd3DzcSu0dJlGmeHl2O/mNtzZ3Q+HMPJzLOJYZTtJv0dU3/NPHBGTn9?=
+ =?us-ascii?Q?gtRndF0yqZXfS61vMunQuEzV6BdnTfuLunhifl/kASokJ90kUCIEWTKNV9gQ?=
+ =?us-ascii?Q?llA+U2mhhF44QWK6GBK2PrtUvzPJxFj9AYnad0k8OzklKpyIc1v9N+r8Lkk+?=
+ =?us-ascii?Q?KphzTjsh2VzvSxmqS6ZURmgIseDsIYW+QzWBcqNQiQvMSbb6fAadG2leGSRu?=
+ =?us-ascii?Q?oSsNQh8xP6rhRHA7atxNT3FjGart72XTRgSu5Hez7SbZFDlYfhToIpWY/uuY?=
+ =?us-ascii?Q?0W2w8arVLZ2MYO2Uv67NRyKEKqAE8K+yYJNkay5kvrh8PPpdj3Lkkfe3pO+Z?=
+ =?us-ascii?Q?1xtr2GYtilaj6F8BA7norzvXPrs+qQZWgSZyRcsvbK76tTg/0gx1O7rKtF2e?=
+ =?us-ascii?Q?oyb1akk4whgtyryvM2LuF2zP8/9w9dvU5t3DvMxqeibCYpAACmoBrJ0OO+Xr?=
+ =?us-ascii?Q?6kozCppmAeHuqePXC2M/eG4DxnBHYMA3E3ELigKa2JqNvEZY2xcw3MDr0S/B?=
+ =?us-ascii?Q?YxtAQY0Nno9+TOaHaYrxJ50OuWHqaYW2Y7uGfGUDoIBvy0J5bPihcAdAbbbJ?=
+ =?us-ascii?Q?ZPIOKBOT5V+24nf1wkj0TuCCRFpqn9/E0rFaoWUdXsfVuUiB6VoF0AvkPUQn?=
+ =?us-ascii?Q?xTqOT1+cV7D4E9mtmN8c67VkctmrPH5Z66WGXz+BCKXPZf5JA7aZXZB5K67f?=
+ =?us-ascii?Q?E2jF2mdAfExsp1a31Pjx+55mWCYEk/Szg3ZCBSgOPhCus0rZmoU2rHcNXaFg?=
+ =?us-ascii?Q?x45IpZBOabiz8dm8idCULoSn+XWp4bR8A4u6K5t8R9cL56XX81FatmXMe9FT?=
+ =?us-ascii?Q?EyPP71ulyGQsIEBlgyJgf/7p9d+c5bROMlZdVO1CbasJs+vp7WY3IpujAUSv?=
+ =?us-ascii?Q?aU7UzED9qYjBLHMWQyu9KDVUEUhSE8VNshPbBoDn54XJHYF5xyIrY4vRZdCw?=
+ =?us-ascii?Q?e0/0QCpC7BQUiatMA173Jx8ZIHASv9rGJAlD+aL10qsHFkdQCo7b/utpPlzl?=
+ =?us-ascii?Q?toGPDgJHNObS8qb6Bju2FdFqA2zrmIaZvAiunrv11FjZTMOZqdVDwZCCebmw?=
+ =?us-ascii?Q?kgBxWHVOu3rWiC2wmLCuzy5qXvr/G8iYKEL1jXLnBSUm38jefyAL8ec2ZYvC?=
+ =?us-ascii?Q?CRI0BVHRCfmyTNh1yhFAmxETvhi3TQxQeb30l2pWlD/6EaeCKBvrIG8bs7Hx?=
+ =?us-ascii?Q?vMZ0+3qm0BDFB+5xRd1gX3OR+wMb/IwHobWxl1rK8rAJfiPw7cvVTIK/sD5E?=
+ =?us-ascii?Q?vtzfvwqE34sloxQxiHGsFvME/PuImpBYUrD21hlDp9lo1wxoHRWKlIOdhqhj?=
+ =?us-ascii?Q?cXXY65p3nv/+bW+cSATAuViWE1jMx7XaNSd/V8H9KtBD48KCFqhvmx/GE2Fi?=
+ =?us-ascii?Q?lP23gQKtHgVjwY6UoQ8GUv978EAXdwvPYGHMhFWEzMhCTVUcQCB79m0+wWUH?=
+ =?us-ascii?Q?Cl3S3SCvatSGeQfRv/fUlekuom8Ijnp2R/6XkuzAO5z+9v0eBxCt2BCB3eWs?=
+ =?us-ascii?Q?sNIjPuuolOYTpPVhLAugF7whOsNrTzskgj0L7iJ30pab1ArG7hrpUYE3J9Jl?=
+ =?us-ascii?Q?sm4Mj8Nrk1h+PiBOKAk5eVpFI7PbpKfM56G5dJle?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(7416014)(376014)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:37.3367
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:32.0700
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d21156ef-730a-4c7c-0e6c-08de529e4c76
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7c5f678-d020-4cd4-a60d-08de529e494a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB53.namprd02.prod.outlook.com
+	BL6PEPF0001AB54.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6181
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7065
 
-It's only used for microcode loading on x86. By lib-ifying it we can make
-it go away automatically when microcode loading becomes an optional
-feature in follow-up patches.
+Hi,
 
-Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
----
-v3:
-  * New patch. Subsumes earlier conditionalisation of earlycpio.c on
-    CONFIG_MICROCODE_LOADING.
----
- docs/misra/exclude-list.json    | 8 ++++----
- xen/common/Makefile             | 2 +-
- xen/lib/Makefile                | 1 +
- xen/{common => lib}/earlycpio.c | 0
- 4 files changed, 6 insertions(+), 5 deletions(-)
+One more day, one more revision. Same as v2 with feedback addressed.
+
+v1: https://lore.kernel.org/xen-devel/20251112162219.226075-1-alejandro.garciavallejo@amd.com/
+v2: https://lore.kernel.org/xen-devel/20260112150259.74535-1-alejandro.garciavallejo@amd.com/
+pipeline (green):
+    https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2260019646
+
+Cheers,
+Alejandro
+
+Alejandro Vallejo (4):
+  x86/ucode: Fix typo s/mitigiated/mitigated/
+  x86/ucode: Rename UCODE_SCAN_DEFAULT to MICROCODE_SCAN_DEFAULT
+  earlycpio: lib-ify earlycpio.c
+  x86/ucode: Add Kconfig option to remove microcode loading
+
+ automation/gitlab-ci/build.yaml        |  2 +-
+ docs/admin-guide/microcode-loading.rst |  2 ++
+ docs/misc/efi.pandoc                   |  2 ++
+ docs/misc/xen-command-line.pandoc      |  4 ++--
+ docs/misra/exclude-list.json           |  8 ++++----
+ xen/arch/x86/Kconfig                   | 16 +++++++++++++++-
+ xen/arch/x86/cpu/microcode/amd.c       | 22 ++++++++++++----------
+ xen/arch/x86/cpu/microcode/core.c      | 17 +++++++++++++----
+ xen/arch/x86/cpu/microcode/intel.c     | 11 +++++++----
+ xen/arch/x86/cpu/microcode/private.h   |  2 ++
+ xen/arch/x86/efi/efi-boot.h            |  3 ++-
+ xen/arch/x86/platform_hypercall.c      | 22 +++++++++++++++-------
+ xen/common/Makefile                    |  2 +-
+ xen/lib/Makefile                       |  1 +
+ xen/{common => lib}/earlycpio.c        |  0
+ 15 files changed, 79 insertions(+), 35 deletions(-)
  rename xen/{common => lib}/earlycpio.c (100%)
 
-diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
-index 388397dd3b..2b874dfd3b 100644
---- a/docs/misra/exclude-list.json
-+++ b/docs/misra/exclude-list.json
-@@ -121,10 +121,6 @@
-             "rel_path": "common/bunzip2.c",
-             "comment": "Imported from Linux, ignore for now"
-         },
--        {
--            "rel_path": "common/earlycpio.c",
--            "comment": "Imported from Linux, ignore for now"
--        },
-         {
-             "rel_path": "common/gzip/*",
-             "comment": "Imported from Linux, ignore for now"
-@@ -225,6 +221,10 @@
-             "rel_path": "include/xen/decompress.h",
-             "comment": "Imported from Linux, ignore for now"
-         },
-+        {
-+            "rel_path": "lib/earlycpio.c",
-+            "comment": "Imported from Linux, ignore for now"
-+        },
-         {
-             "rel_path": "lib/find-next-bit.c",
-             "comment": "Imported from Linux, ignore for now"
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 92c97d641e..4fc0c15088 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -65,7 +65,7 @@ obj-y += wait.o
- obj-bin-y += warning.init.o
- obj-y += xmalloc_tlsf.o
- 
--obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd earlycpio,$(n).init.o)
-+obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd,$(n).init.o)
- 
- obj-$(CONFIG_COMPAT) += $(addprefix compat/,domain.o memory.o multicall.o xlat.o)
- 
-diff --git a/xen/lib/Makefile b/xen/lib/Makefile
-index efca830d92..60cfda4dfc 100644
---- a/xen/lib/Makefile
-+++ b/xen/lib/Makefile
-@@ -3,6 +3,7 @@ obj-$(CONFIG_X86) += x86/
- lib-y += bsearch.o
- lib-y += ctors.o
- lib-y += ctype.o
-+lib-y += earlycpio.o
- lib-y += find-next-bit.o
- lib-y += generic-ffsl.o
- lib-y += generic-flsl.o
-diff --git a/xen/common/earlycpio.c b/xen/lib/earlycpio.c
-similarity index 100%
-rename from xen/common/earlycpio.c
-rename to xen/lib/earlycpio.c
+
+base-commit: a2a34d76643e49ccc949296c9a45888034e50b55
 -- 
 2.43.0
 
