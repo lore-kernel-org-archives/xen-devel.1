@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F108D29DE2
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 08:45:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201204.1516879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9988FD29DEC
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 08:46:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201207.1516914 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfa21-0003Eo-PG; Tue, 13 Jan 2026 08:45:41 +0000
+	id 1vfa25-00045q-II; Tue, 13 Jan 2026 08:45:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201204.1516879; Tue, 13 Jan 2026 08:45:41 +0000
+Received: by outflank-mailman (output) from mailman id 1201207.1516914; Tue, 13 Jan 2026 08:45:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfa21-0003Ds-Kq; Tue, 13 Jan 2026 08:45:41 +0000
-Received: by outflank-mailman (input) for mailman id 1201204;
- Tue, 13 Jan 2026 08:45:40 +0000
+	id 1vfa25-00045h-FC; Tue, 13 Jan 2026 08:45:45 +0000
+Received: by outflank-mailman (input) for mailman id 1201207;
+ Tue, 13 Jan 2026 08:45:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kCXa=7S=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1vfa20-0003C7-Jw
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 08:45:40 +0000
+ id 1vfa24-0003C7-4B
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 08:45:44 +0000
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [2a01:111:f403:c20a::7])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c5d379f-f05c-11f0-9ccf-f158ae23cfc8;
- Tue, 13 Jan 2026 09:45:39 +0100 (CET)
+ id 3e547a47-f05c-11f0-9ccf-f158ae23cfc8;
+ Tue, 13 Jan 2026 09:45:42 +0100 (CET)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by GV1PR03MB8709.eurprd03.prod.outlook.com
  (2603:10a6:150:93::10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Tue, 13 Jan
- 2026 08:45:34 +0000
+ 2026 08:45:36 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%7]) with mapi id 15.20.9499.005; Tue, 13 Jan 2026
- 08:45:34 +0000
+ 08:45:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,33 +49,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c5d379f-f05c-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 3e547a47-f05c-11f0-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ypizxbr9KlA+Zq9DFI2qYw89EvG7F2bIF5rKWMqP3VidpxpqSkyYSoCtJC3szlLISU7BicAKzUab+6cqAVrKiHBzGGlmpoul9L0pngoSfD2vDg59+gj7HBpWzJJRUpHAz9n2Vx2iHOxDQTdeb/4m3giEG86spbaTZmOS8JX+1ypr7GpjdYbiLoE5dmY72wEmJtBgX/FfuYiSZV/0AtoBliyhZyeO0NuEFUfrJ525FkT3sYRNJVaYG7VoFn1j7pPPqLSHE9jLp45ORfFggIMcfYVYv7LwGuB7LODr22bSp8FpY6OpNc+TS7O7hgGHuQsBKnB+vt9pIG+Z9KAJCSxIfQ==
+ b=u/mxvbTpXmvssP/xamsf6nFj8YFrKjM/YGdvy5MuNF6oqO4nyn6CkjPKBECdwusCdcO3AoL202JXaDSyaB7R17cm7h+v++waIrAiiBZyKKTp+LxJiTz2Zfmp0i4+SSoGk6AJJ8GFpPZH9YwIAI9vOJJ5MWaM1JhkwGvPkAQhWqNqGKSUFqxo7alGdVcX/fftIFWKnzGlW+WyyXg+XG+CcbTwP0XaruJBSK1T151mr+erGtCBqjA/CIcFU6KDuwEkZQ6sWHN/+ZvJyMA7JYAYS9sgjjq2W2R+oOrpN6ZpI8Q/WjCfeh4PKxuSuMXUFfZtsD6bo9Lo8c34tvvFXBjL+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7iajnySkeHDY98iHHfq/Pdiht495trLBHcrNlpd8yI4=;
- b=D/1L+154ZlsVkafhb1gryXt8XBN9Ssmfa6DkTLhU3Z5+FPDSHQiG8o9LKSGKYFumDghYNz9wXbRUvdHYWplEtDN7cmYP/xcojy203tMNuwQRpDqYT0V99zxJFZ0zBKzdjdeEH3vtg29WRYdj2J8EBUcNFYIqvBNn/v2t+C4LJMCl7ZLOjyu5ejZrziTYf7MWqaNqpKCMckuT4PVfZaoVYimnz33sLyhqRDnx3eTlUy6V0fbCBh4NEcraVzncI6EoKAGtXTiQai+x3xBoed/SR+msg4Wlka2thKXGRUjq0NQKfOsshHgazvq5I/OaqzhqxJH+XhPUUMUr3b4de25qGw==
+ bh=VvckS9ldcLzbpoTF9qv6Ooqf4GkybykL0RagTPbQCLg=;
+ b=WaWnDoMZYm+QPNgMNHlXzW7+KE8Q/we/zHlsLAgZYjIRRTIUBHMoLFcHOxMscRlsyLPeojFL3omZZeC6aGdB6NiCO1aLOAHEixkt3g613fFFtA05Xspnyy39Vmd1/W55s64gK7iE1rb/ymzi8TPHvjF6PMDPNokE8dymXCBS/a8RSg2cr9ZVVw9AEh3c+0lwIjOPf3UhESkmL7uM2r3ERxZl9+vDaJS9KQgQBYg5GVBH9kMm8UqJod/fpucRQIoN8N3OqIGwX49aZRMdSM0Ut3QJzaIDCHWi9ss/4x588lMSOmZMgENTZPAO024cSfS90Z3olMhew/6VrtQC2vgB5w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7iajnySkeHDY98iHHfq/Pdiht495trLBHcrNlpd8yI4=;
- b=Fzd4Dit2PzwL85jpwEjL6jIv+EX60T6acR3HJXZb3Cl5mM3ZzvKf+X4/NnuZC7RraK9CnIHOa7qBICRQnvPVXOhjhBOOAdsNXaiMn/BYPgvZMHxbVZBKnWlAtWqSAAv7r4hQitpY+E/52uSqguRUFGUrdWu7qJnN72p/f92PdS6a6Pw46cBzPfAFHQ+rq7Dom0v7zEKIPjxDblraNuTMvGXYjdIfNF5u0rSNJGt3qTAVWpKP21+s1o9PA84djUsMHYgx71rvSlbEtyFyHds7lsQnbOP7fEgFr1BSsF/uugj5pKofpE24jDIUfn92TtQnUhJrkLNSQavUks8WjzlcEw==
+ bh=VvckS9ldcLzbpoTF9qv6Ooqf4GkybykL0RagTPbQCLg=;
+ b=jdwAqGXriNZPP4m+j+oLz8TYsGij2ay7vKex8xHUbceTDNtR5J+lXwC1Hvtg9e1Fo+MZhAaEqhs3w/OLSo1TLT1kqyW7cJIdw1DMP6KoxeACeClmuRw+Gl8UDqar1CrX9qTrwZ8YHfGunuUQ/xBo08V7+bgclsQzHeBCyDRqDto/lYMURtYoDs3byGaStM8l5dliSRfjQHOusrNXvDO+4GEibRZSav94duPl/iTHd2LcTKACxmYx6qh9QiksmsLcnsyeMM0gbVTgutB9d1bdVVymwqcqAOFnyZVHtZT9cz4xOiWhFYzp8LKowq5Cv5t0MK5AtCdP8ekSiTG0aHbdZg==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 1/5] arm/irq: Keep track of irq affinities
-Thread-Topic: [PATCH v5 1/5] arm/irq: Keep track of irq affinities
-Thread-Index: AQHchGj7DB4SczePiEuTZHuufPnk+w==
-Date: Tue, 13 Jan 2026 08:45:34 +0000
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Jan
+ Beulich <jbeulich@suse.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>, Timothy Pearson <tpearson@raptorengineering.com>,
+	Alistair Francis <alistair.francis@wdc.com>, Connor Davis
+	<connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v5 3/5] arm/sysctl: Implement cpu hotplug ops
+Thread-Topic: [PATCH v5 3/5] arm/sysctl: Implement cpu hotplug ops
+Thread-Index: AQHchGj873UPBMyph02N0fqNmGIWEw==
+Date: Tue, 13 Jan 2026 08:45:35 +0000
 Message-ID:
- <2991ec1845868940488c912c5dd34798a58bbf87.1768293759.git.mykyta_poturai@epam.com>
+ <54a015e0e47ea311471bad7f13fbf21e14389ef3.1768293759.git.mykyta_poturai@epam.com>
 References: <cover.1768293759.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1768293759.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -86,211 +92,443 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|GV1PR03MB8709:EE_
-x-ms-office365-filtering-correlation-id: 8aa5e9b3-9ad2-41fe-2c23-08de52801ded
+x-ms-office365-filtering-correlation-id: 37387cb5-5ce1-4d97-c16d-08de52801f37
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|376014|366016|1800799024|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?4Uts1prxA9ysJmAl9V6XCt3l8Z49AyI0qks4R+CS856C87dBsy8tYUtzJG?=
- =?iso-8859-1?Q?hrNkRJdfThMe3GuJTJc/Z5ryYIgrQemhkXZb+Gvo36m0G9KISUsgr8YABB?=
- =?iso-8859-1?Q?Orp+iSPbriO1s3dbifQxs/qZw/4rmRbqXwLC5sHowidhFz95WZN7KeCw1c?=
- =?iso-8859-1?Q?Tlo578XNwspEpuHjR52sLK7QxPHGZ9zuEmnQW6i1qBnpz12b8xaEuzPkUH?=
- =?iso-8859-1?Q?5JIIrMljmeKo3bO4aH3R9G4MP80SdvZSUif4CKp88fb3tTjkFrimbOed7V?=
- =?iso-8859-1?Q?ALGMYgIvrm7jOStqsSEkXHKkK/KJKzWyP6M3HaxmvbhgoXffSAkTDJgYm+?=
- =?iso-8859-1?Q?8bziGP3JHRUerkBwQfIoR9Vz3H+Q2oxmDb9K6L5FeILc/td/zrfS/PhN2F?=
- =?iso-8859-1?Q?93GrszqdwqCPXbCicdL9+CQw78//KglvXGAwW3Gy87lJvm6PPKEZIX7eZY?=
- =?iso-8859-1?Q?JjTDyIzMmrIouITXjfhEtY98lPLJ4amCXvL9Z1K8JoKZZFH8a5WSMQ4U4n?=
- =?iso-8859-1?Q?Jm/kArSzjaFiT8q5CWBUlKQfYaDlxroIk1n5rWlheBiE/R0TlTN5GtzVFs?=
- =?iso-8859-1?Q?nO/FGidKK4yNPSoDIh1a4mbmTDfUTElCKNofjqG4D0ewCkNOT9vLB0orkX?=
- =?iso-8859-1?Q?0nbfQ3IHtp6Ax/ihkD/Mm2YUNxYrQYKZPXdS+uts58fVqA8UGKZ/GbrkrK?=
- =?iso-8859-1?Q?RhLq4cWON5u53SojWn4Zu4eLubd2MIE3tk55JfdldeHXqPhsqQefyP9CUj?=
- =?iso-8859-1?Q?qWG48VncCabBZBpxoqzSN2mC8YgZlkYVFt0ByzM8z0BXoJtFtEbl90LDMK?=
- =?iso-8859-1?Q?jWrTIrIcS1q6hpYOvlQxO79+iK1KlfPFK5Fu7S8k4+teoOq8c6gzjUZxtH?=
- =?iso-8859-1?Q?K4zM05yxqUHz1Zhdf5uZh5aGqwYIziAsCIxFRa3B5hH7dTib3DlypAzR70?=
- =?iso-8859-1?Q?ha1SwrCFE+Sh2dJFEWSl5SzokiZnCtB4v/35BGYJkgIuMeA5i2J1ahZgo3?=
- =?iso-8859-1?Q?ZPfTqF8XDJsd0WcnYl+SAIyQ1TIvm5V1qjdQT97UAsoy8KRmMCpov/1fg9?=
- =?iso-8859-1?Q?H2YSOT//wGDLY+WwylFTLUaqRYpg4K/K587ELs8yaT5xLHzHs+Mges8Jfv?=
- =?iso-8859-1?Q?LEWEVl7bl8V2xugskctQ4ABrm91FzLi260jliUIAPjd0El+lr+SFEaHd3X?=
- =?iso-8859-1?Q?+FgapLSwBgcRlb1OCYzFbrEekuCoe1G4PNiqQP7BQH1cj77MY4PIM1rQgT?=
- =?iso-8859-1?Q?K2r7j+K9tO3TOe/kZmyImTrvLey++7b+711AixnvAoBADGJUe4x47/2t7P?=
- =?iso-8859-1?Q?Z6sUTTyzhCu9Z7SZQ/iq9tsFq5cXlJGVBwnmAvAqpU8cRzlpp+ubyDnfz+?=
- =?iso-8859-1?Q?ZuRnSqEd62hy4uov8f1QEh9z6To2GrCXgHnbpbYRrjss5doPlYr2mUbpxC?=
- =?iso-8859-1?Q?jr3qvP2PDjbXNZIeJskBMMAFyY62cPTHODVUpHLFkeBEkefNC7YhDpJcn9?=
- =?iso-8859-1?Q?BTB1M2Vut6tIEIHdTES0bvVFrFVplpdWnjz5HrSg5rutb6kbKF877tuaWm?=
- =?iso-8859-1?Q?n4+y36xiqW9MHRgnwRn4Xejdt13/?=
+ =?iso-8859-1?Q?0UZfJUcgAzywTLUphRNrJEDfqBwdpK4V4jx8HWtYdXB5ygAYgBPF/mHn6d?=
+ =?iso-8859-1?Q?lnFPDNKXYcAbpPoZRjevHcz+j9mqUask2rVzprZBKrxD0NNdbS72FLcCmu?=
+ =?iso-8859-1?Q?BiCtAN5SsGJMbsxiKFBhy8BXmmAe93UbMPZ52NKQEMu9Q3drVnXUi3wn4l?=
+ =?iso-8859-1?Q?2PPwMW3OEKeRFokDqtHAsaTKRUGuF1T4ToxaasMqEVmoIzQerHo90zfV5i?=
+ =?iso-8859-1?Q?6KTcpOiqYUTJW5+Q8Hy6knbKX28sgoxIEOR8vHcx3q0Hw1XN/Ay4F8uqZn?=
+ =?iso-8859-1?Q?Ja3e3NimFYotMhJAPwIV/bYKAcECXohdGbqvOOcDqDfdngXk5nARLa2y5T?=
+ =?iso-8859-1?Q?P/xaId2Lf5leMeQYr52OXxRnbAhVuL4tWdinIW5yxmS/8JRrGd6J6RlP/m?=
+ =?iso-8859-1?Q?SFT6NZVdpY/Mz5Iz80BD8Mi1eSkqXe7ET429tXbxuE+4peJd74SEFH/g6I?=
+ =?iso-8859-1?Q?4zH0WI7KFeYI4u8aRdjQH4Yumx9UD82TBMjAD57c9SYwTkJpUSyWcKiQ+l?=
+ =?iso-8859-1?Q?dV0Zh5GNY7Yo3Zw4sXSkCbd79XZdO0nq8wVl6bDfKJgpIZuBVsJ5EIoMSk?=
+ =?iso-8859-1?Q?GtMWhsV6g3YuG04QFwDTWiPCG4HLF83oG1NsiqcYiJz0cFP0kJX3daNFUf?=
+ =?iso-8859-1?Q?wyAwp4rAEyqGbkBJO+vhJmT+CtPfQAvdBIDbJVuKHIHhv1Ncm/VeSKwM+8?=
+ =?iso-8859-1?Q?vs9rCz5UFYp7sPXYPiemIGyEysD5DZLg9m+Vl5k7geSfPXQT3t/p6yr9Ev?=
+ =?iso-8859-1?Q?T3B81KDzOXPKAeIY2KobvNxE/rTGWryrrFGpkuw304oS57KX+lLq051wDK?=
+ =?iso-8859-1?Q?wECuQ0qHHQyoraH8yaLtgecunqtqJDHtdKA63f5R50pKe9Bud1qMs0+jSI?=
+ =?iso-8859-1?Q?lKSqTbN5uQ6P+rxdBKjTOn+41NYOn9a8dsp/CKuyZWSMCfTHu3TiMdQqwm?=
+ =?iso-8859-1?Q?TO5dWPzyw+APi/YteR8DgrfcVmSQLosZbtYAYXeYVQdzUVEsT9ze5sIXdA?=
+ =?iso-8859-1?Q?XGHD5f8MbRHcFFMOi4zbsdzqYG5pE4GvA18UJ4ViBKnK5DyDXdrYxLqBzn?=
+ =?iso-8859-1?Q?W8GHaSPTXccmcXMx7pYvqlHQ8Q1XTPx6PfAMZEP4rP70p4vFh/pNlJckx2?=
+ =?iso-8859-1?Q?2BzXfx7OMbi1IENINp+bKIZWnxoFK9zu0KPVBqf59CFhuVWi+WRaM9TNUP?=
+ =?iso-8859-1?Q?Mdb7viZRRdTlYn4nts2XDv2U7eI1Ujw7k4C5bJvgeATfl7OPt9Wsi+BR5+?=
+ =?iso-8859-1?Q?5x5pZkqKDMkNx7ZqWElGNAp08R3ej17LG8QSzgagkNb5H2QeeS2n2/qUfz?=
+ =?iso-8859-1?Q?WCC/nX42QRwQqwqCMYxxJ5vKG/HtMyOJI8i3ao7t9sc4Uw6iUQJ5oy4ZhU?=
+ =?iso-8859-1?Q?yXtKcFuIeYeHiwQa6zFdD+oRbwq9xtlXgcC4Qnx1EX8XzvF8tVIio7OFY5?=
+ =?iso-8859-1?Q?ee50x4e3LMbj0wGh+73B0TBUslMktLklePqflLOirzMnphomrN+pa4hmkM?=
+ =?iso-8859-1?Q?kkQOBFc1umhRiTCtsrGP1DnTMwP9soaVV3U+hgi+nCrBtYTxb+uY3b89Wa?=
+ =?iso-8859-1?Q?6e/7kc5XvpA65pcAfggUvj8/qRup?=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?jozKfmSJ2acrxFlm63e3XX8zV1Aq+FSD3PHn1dLi2ip1frcirDui2yiMxx?=
- =?iso-8859-1?Q?6avmpdNYF4rWPdlLblFp93dbum5u/IHIktw6wLeHDH/e6bSahb1ypyM0Kh?=
- =?iso-8859-1?Q?SN/VPGu3GqgK1aeU7YQkCb303RLTFOEnYT2C0U49ivLCFbTGQQ0zkemL+L?=
- =?iso-8859-1?Q?s6P32Cx7sTrEzJjCgT73Tm6kTKsubkrIypd5anc1IN2yIkNi1bibZXS7l2?=
- =?iso-8859-1?Q?3qVflnOuXxVbpmXkkET5cHCWgR8u88pegHZlXeV9dQkvZrpqdoYkdqhrI3?=
- =?iso-8859-1?Q?KUnwmLeIi06sxeicx32RGEq1b3U/bECilYetXcCnUTwP+CfJjNCckDR13x?=
- =?iso-8859-1?Q?qRE8yqUz53dQn5cqDKlPfziqA6UmF9SAnRhkmTMGCOeN5MEFjHvydX91iC?=
- =?iso-8859-1?Q?c1k6RFQqNWrTXwG0buipazgFKU0HY0cgz3kt0I+uZXDm4WdAVlrAgywXi9?=
- =?iso-8859-1?Q?gx293IZ2x6TOI02PFovkQf0W1niv8qQ8h7YtVHu6zYyusC787I257QQPpj?=
- =?iso-8859-1?Q?i46GWKYGDPHsThcx2XilbSzSTahYWQ0n9BM13wJ+EC8lfQwkKAK10ycS05?=
- =?iso-8859-1?Q?OuQoRzzUdMWQygqZYw2d8G4F69ipdXqhyEhtHb3lKzRrDGqfeEBJe9IxPW?=
- =?iso-8859-1?Q?o5R/RQp4bbFJi5ycoG+hIgwbApqGd2Y/myGWaqFpw6NlJBtV35q/nwsyTM?=
- =?iso-8859-1?Q?yIKFMMw8JW15bJMiZiPYJWd6QGVaCEbLS24eLbC63Fcictpy0Nq1jT5ZB4?=
- =?iso-8859-1?Q?ICwcasvcfwrFYjvRJnoVpXIu0+BPT7PWfyGmFkEfUtWZ0mFGsMF67eBDZd?=
- =?iso-8859-1?Q?dKZH9ArrqKIlGMx8x0HefhhpbYIZEfv2k5EzBGmpC7UDd8LyaiAQ3N/stT?=
- =?iso-8859-1?Q?YDDOJF3QfOtdZV1RbjOVt8XEtmRE8lycMoXIsHcxIGtvw+TMpJj433pYOa?=
- =?iso-8859-1?Q?XGpJKvXP64UyMTJe/MWqfOBrpRvXtNIwfzRT5WIBlaugTeElz3P+uUaje6?=
- =?iso-8859-1?Q?lBNqaRfZSvraGiCQQAIYZnyHsDCUGgQL8v/YGX6kQ/izH1h/yws1OX0RPt?=
- =?iso-8859-1?Q?otn+u9AzNH2Uvx5+3imKPlKIhbw/8c4OeXjMqUWsTa5kVrq+t/2Kq+85vD?=
- =?iso-8859-1?Q?PwKWuQc8gkmQ2eTb3lIoiNQptdtCcu/Es5E4LbhOsv9epP+GyDu9ch/uDK?=
- =?iso-8859-1?Q?n4YVYioanVlYKlZlneGysQHj1e7XgiLM75Xh0DaDfYYjedDCxLrnA1YNRl?=
- =?iso-8859-1?Q?G2jH7JsVFdfglBoTp+wLNjQVGK6Pswss+XaBkU6DyIxkzwuATrizAt42jy?=
- =?iso-8859-1?Q?NWuwPG6PVMNT62fkY0S7HrFpkekoqBbGsU/bj7c5gGi2TQFoc8at9+ApfZ?=
- =?iso-8859-1?Q?MrAL+rp5OJI4qERu6Qvd5MqmB9MCeehVoVPqNj2HNfzM6iqQfg3X5Cuz35?=
- =?iso-8859-1?Q?ONMb3JaCUSVcJ68nE3tvjwG8bqYW/+EqI3cbvk1sU6oQzXj6nPMfRVK9mR?=
- =?iso-8859-1?Q?rfncCm3A+4RE8OuilDCztQOnWqoG/+8pUMTgT67MbjFVlesuxjHCwpSjBB?=
- =?iso-8859-1?Q?cHjIswqjLn6X3YG6AxptSLMTaLTdJJFgaX+8QhyIT7g8t5mmPEK8v/Bu7b?=
- =?iso-8859-1?Q?tHfpNkwUKxynvsVl8cSiJvmJk8lJqil01XaAh8lVpr5N69kBSkeQcnKiby?=
- =?iso-8859-1?Q?3eOt/QCFELz/YgJTbpq7CP4tzmf5P/ED3uhmHzWCz4FIaNjKwFOMOSCmBm?=
- =?iso-8859-1?Q?4vkM3DNpI4kq9mgH4Y+c2rfIdpt14pC8sq+QNh4EZtm0jGLqpxd3uANvmy?=
- =?iso-8859-1?Q?ovsx78EDLk+e61Qij10o140gsNzdXQU=3D?=
+ =?iso-8859-1?Q?+hwyT5IKQGVgEONCUUNB5CFiErum5Zk0pTJElJLX4OegAxeVvyJu698RFl?=
+ =?iso-8859-1?Q?4AB4AmtwqMotnHC3wLbK36TfUCqFSqfHQuZ38h4F6qQgqFcbUaRMtkLx5M?=
+ =?iso-8859-1?Q?nANR0bKmR4IHCW9WnmwlazT6+T8VFxbnmupGH8ibOC8B793vUa7Oh+pRv1?=
+ =?iso-8859-1?Q?lUmiTh+OgWSr5NEVXvR00rLzwX89yXHwC9R1tiozPwsOZP2iNhok7CShUN?=
+ =?iso-8859-1?Q?qwVx+dwo9RHd+bajKqyxgfkCMUczqK9D29ntdpZggRfHeKdL+jqh1TJ1Og?=
+ =?iso-8859-1?Q?Xf8mTHZfAWfdfp07futGIeSWwCJJnIwd5zJBScI2HuMIfxe53IEV9LYf4A?=
+ =?iso-8859-1?Q?TTxh2E+dyqpXxhlVKhEqn5SXZyiH67UXI4/LCYHj5dKaXW+D4T73nNPyXl?=
+ =?iso-8859-1?Q?w3h2ksUf0q6MEGY7bUVEwL71XFpzpFEqakD7JFzWwTIr/S6k9YKG2Wc4qX?=
+ =?iso-8859-1?Q?FKnSte2oGLeHpOlN32zC7h9tm6XpceKLfwibNAhiNP9o38uKivAGEoP3M+?=
+ =?iso-8859-1?Q?rcHlKvwP2cOjsnb7QRgpncxDZVGWn194WnKHHXvTsHHuekSgxGc/fsfjtF?=
+ =?iso-8859-1?Q?MOeZ4LKZVJzvzdHdD/7y0e22S54t1SFj0rVmkkW3Y2+9KSpWtx+XqeHnkI?=
+ =?iso-8859-1?Q?N78hJtRrPsuP9ME6gZlGueLyoxKnGjkBHNIk8qhSJzDQ6+jPPJ48OahiHU?=
+ =?iso-8859-1?Q?IOLBCKjS3tAlSBeKzUp5tNsKYk27eMTRtkzbuY8SibD2IhcYbhXHIf0d8z?=
+ =?iso-8859-1?Q?qAvBvAHk38YLZqa3MsP/kdQ3QLsxfZCRytqc4CqJSuWH+9tWxQU+WwaySd?=
+ =?iso-8859-1?Q?02FuHRtWDqqIlerqSKaLWRGv0ogAZcRJGToSwQLuy0W6ISSC+EuGmj8SfX?=
+ =?iso-8859-1?Q?v1/4W4pGMn6kyn774n1vn2o2xQ7JWUHQDAcO913fJDw9i9BrvkNIo2MUFE?=
+ =?iso-8859-1?Q?zKNruv5A8Bp5eJwipKfeI/tjlKUQ8v/AeQG3c0iXvSpb1YTB+x1bb4nSXM?=
+ =?iso-8859-1?Q?i6OVkdTfDe8dOlFA1ldQoyVsiqmtTtt4AWPF55r9prvV9ZN1NuOD0fo+h2?=
+ =?iso-8859-1?Q?iBE4jSoYGYTysOVwIg3HxsSBCTXPLh9aqhQfkLsKwWfwVeELCQaRMSxHdL?=
+ =?iso-8859-1?Q?m3Yhhp0rFKemfINrtUArPBv4aet9AVwsXvqUD17m2KcVEwd7Ue6oazfUiB?=
+ =?iso-8859-1?Q?g3ABQJt7pqHK+4gnSYnLKdmVCnC47+xjITLkUbNEEGgPmu0c2XYPWKHBkt?=
+ =?iso-8859-1?Q?RbauFWRPeSpIRtQQS6dUOHTlecwdjhaVROFwQqXp5MZDfOhKi3rG+2y1mR?=
+ =?iso-8859-1?Q?Cgth4Q+OvyGe6HKN/JUioKq7P/sSJTC24nYpvclFMSxvgmQtn/v0G0welN?=
+ =?iso-8859-1?Q?vCS+hKN9IBy3Ued0LgnhcfWSPTDKHVUXrN0jY+3dNQPH1X/TJJj5AkXWI0?=
+ =?iso-8859-1?Q?/EC+tZbZSIUBqrUMB6eRFpeLy7ytnzBSkWoz2r0Zxzwo4bK1BcM4+t1Bba?=
+ =?iso-8859-1?Q?KLWGJXHuM65PjD7GO6sgdDffLHZqcIxIiw3uXO0dQdhMC2HTCmgUaMMmww?=
+ =?iso-8859-1?Q?varlCckxSTiVM3U/abPy+7lutytQUcjUCY2dMvUGg0G8xO/n6muJMjixMi?=
+ =?iso-8859-1?Q?Zo1pPltM7V+CioyDzGWrBuKmnBGK0pttMiC6BKZxD5t6rYYAVdbzRQQEI/?=
+ =?iso-8859-1?Q?VpiMQdbuRNQ0fToUS94M+3h+rYxXWAzB2pp4nuzQHcCbKbn47QunFvzauv?=
+ =?iso-8859-1?Q?Mg9Sne7ncIp2Zdx5nBXYrfsDzMTcdohzguJdw3TCweXZLmVaV9N3XDz8sy?=
+ =?iso-8859-1?Q?C6P/QApG+jC5lhkKc+pDjvZuZ1VNdx8=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8aa5e9b3-9ad2-41fe-2c23-08de52801ded
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jan 2026 08:45:34.3555
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37387cb5-5ce1-4d97-c16d-08de52801f37
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jan 2026 08:45:35.4309
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: d7thUQ5nrObzP7dVDPKtRu3izYidJjTv86goA+9IUE4yt6oO9TOKckV+rCzsKHWPuX2GgVr+Gzl+VVQX55oqnw==
+X-MS-Exchange-CrossTenant-userprincipalname: XN2qRR6qbPali77jrImMAOdCMj8KPfou41+bWhRqKlJSpC96ofElcJBY35+Q0ogbLOj8A/L17d3kFH3ez2YhAQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB8709
 
-Currently on Arm the desc->affinity mask of an irq is never updated,
-which makes it hard to know the actual affinity of an interrupt.
+Move XEN_SYSCTL_CPU_HOTPLUG_{ONLINE,OFFLINE} handlers to common code to
+allow for enabling/disabling CPU cores in runtime on Arm64.
 
-Fix this by updating the field in irq_set_affinity.
+SMT-disable enforcement check is moved into a separate
+architecture-specific function.
+
+For now this operations only support Arm64. For proper Arm32 support,
+there needs to be a mechanism to free per-cpu page tables, allocated in
+init_domheap_mappings.  Also, hotplug is not supported if ITS, FFA, or
+TEE is enabled, as they use non-static IRQ actions.
+
+Create a Kconfig option CPU_HOTPLUG that reflects this
+constraints. On X86 the option is enabled unconditionally.
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
 ---
 v4->v5:
-* add locking
+* move handling to common code
+* rename config to CPU_HOTPUG
+* merge with "smp: Move cpu_up/down helpers to common code"
 
 v3->v4:
-* patch introduced
----
- xen/arch/arm/gic-vgic.c |  2 ++
- xen/arch/arm/irq.c      |  9 +++++++--
- xen/arch/arm/vgic.c     | 14 ++++++++++++--
- 3 files changed, 21 insertions(+), 4 deletions(-)
+* don't reimplement cpu_up/down helpers
+* add Kconfig option
+* fixup formatting
 
-diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
-index ea48c5375a..5253caf002 100644
---- a/xen/arch/arm/gic-vgic.c
-+++ b/xen/arch/arm/gic-vgic.c
-@@ -232,7 +232,9 @@ static void gic_update_one_lr(struct vcpu *v, int i)
-             if ( test_bit(GIC_IRQ_GUEST_MIGRATING, &p->status) )
-             {
-                 struct vcpu *v_target =3D vgic_get_target_vcpu(v, irq);
-+                spin_lock(&p->desc->lock);
-                 irq_set_affinity(p->desc, cpumask_of(v_target->processor))=
-;
-+                spin_unlock(&p->desc->lock);
-                 clear_bit(GIC_IRQ_GUEST_MIGRATING, &p->status);
-             }
-         }
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 73e58a5108..7204bc2b68 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -216,10 +216,15 @@ static inline struct domain *irq_get_domain(struct ir=
-q_desc *desc)
-     return irq_get_guest_info(desc)->d;
+v2->v3:
+* no changes
+
+v1->v2:
+* remove SMT ops
+* remove cpu =3D=3D 0 checks
+* add XSM hooks
+* only implement for 64bit Arm
+---
+ xen/arch/arm/Kconfig           |  1 +
+ xen/arch/arm/smp.c             |  9 +++++++
+ xen/arch/ppc/stubs.c           |  4 +++
+ xen/arch/riscv/stubs.c         |  5 ++++
+ xen/arch/x86/Kconfig           |  1 +
+ xen/arch/x86/include/asm/smp.h |  3 ---
+ xen/arch/x86/smp.c             | 33 +++----------------------
+ xen/arch/x86/sysctl.c          | 12 +++------
+ xen/common/Kconfig             |  3 +++
+ xen/common/smp.c               | 34 +++++++++++++++++++++++++
+ xen/common/sysctl.c            | 45 ++++++++++++++++++++++++++++++++++
+ xen/include/xen/smp.h          |  4 +++
+ 12 files changed, 112 insertions(+), 42 deletions(-)
+
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index cf6af68299..5144e9c8d5 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -7,6 +7,7 @@ config ARM_64
+ 	def_bool y
+ 	depends on !ARM_32
+ 	select 64BIT
++	select CPU_HOTPLUG if !TEE && !FFA && !HAS_ITS
+ 	select HAS_FAST_MULTIPLY
+ 	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
+=20
+diff --git a/xen/arch/arm/smp.c b/xen/arch/arm/smp.c
+index b372472188..075da9aeb3 100644
+--- a/xen/arch/arm/smp.c
++++ b/xen/arch/arm/smp.c
+@@ -44,6 +44,15 @@ void smp_send_call_function_mask(const cpumask_t *mask)
+     }
  }
 =20
-+/* Must be called with desc->lock held */
- void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
- {
--    if ( desc !=3D NULL )
--        desc->handler->set_affinity(desc, mask);
-+    if ( desc =3D=3D NULL )
-+        return;
++/*
++ * We currently don't support SMT on ARM so we don't need any special logi=
+c for
++ * CPU disabling
++ */
++bool arch_smt_cpu_disable(unsigned int cpu)
++{
++    return false;
++}
 +
-+    ASSERT(spin_is_locked(&desc->lock));
-+    cpumask_copy(desc->affinity, mask);
-+    desc->handler->set_affinity(desc, mask);
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
+index f7f6e7ed97..ed75d06dd9 100644
+--- a/xen/arch/ppc/stubs.c
++++ b/xen/arch/ppc/stubs.c
+@@ -101,6 +101,10 @@ void smp_send_call_function_mask(const cpumask_t *mask=
+)
+     BUG_ON("unimplemented");
  }
 =20
- int request_irq(unsigned int irq, unsigned int irqflags,
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index 6647071ad4..c59f6873db 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -445,7 +445,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
++bool arch_smt_cpu_disable(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
+ /* irq.c */
 =20
-     if ( list_empty(&p->inflight) )
-     {
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         return true;
-     }
-@@ -453,7 +455,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
-     if ( !list_empty(&p->lr_queue) )
-     {
-         vgic_remove_irq_from_queues(old, p);
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         vgic_inject_irq(new->domain, new, irq, true);
-         return true;
-@@ -473,6 +477,7 @@ void arch_move_irqs(struct vcpu *v)
-     struct domain *d =3D v->domain;
-     struct pending_irq *p;
-     struct vcpu *v_target;
-+    unsigned long flags;
-     int i;
-=20
-     /*
-@@ -494,7 +499,13 @@ void arch_move_irqs(struct vcpu *v)
-         p =3D irq_to_pending(v_target, virq);
-=20
-         if ( v_target =3D=3D v && !test_bit(GIC_IRQ_GUEST_MIGRATING, &p->s=
-tatus) )
-+        {
-+            if ( !p->desc )
-+                continue;
-+            spin_lock_irqsave(&p->desc->lock, flags);
-             irq_set_affinity(p->desc, cpu_mask);
-+            spin_unlock_irqrestore(&p->desc->lock, flags);
-+        }
-     }
+ void irq_ack_none(struct irq_desc *desc)
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 29bdb65afb..8a9503ec94 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -75,6 +75,11 @@ void smp_send_call_function_mask(const cpumask_t *mask)
+     BUG_ON("unimplemented");
  }
 =20
-@@ -574,8 +585,8 @@ void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsig=
-ned int n)
-         spin_unlock_irqrestore(&v_target->arch.vgic.lock, flags);
-         if ( p->desc !=3D NULL )
-         {
--            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             spin_lock_irqsave(&p->desc->lock, flags);
-+            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             /*
-              * The irq cannot be a PPI, we only support delivery of SPIs
-              * to guests.
-@@ -944,4 +955,3 @@ void vgic_check_inflight_irqs_pending(struct vcpu *v, u=
-nsigned int rank, uint32_
-  * indent-tabs-mode: nil
-  * End:
-  */
++bool arch_smt_cpu_disable(unsigned int cpu)
++{
++    BUG_ON("unimplemented");
++}
++
+ /* irq.c */
+=20
+ void irq_ack_none(struct irq_desc *desc)
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index c808c989fc..826aa2512d 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -12,6 +12,7 @@ config X86
+ 	select ARCH_PAGING_MEMPOOL
+ 	select ARCH_SUPPORTS_INT128
+ 	imply CORE_PARKING
++	select CPU_HOTPLUG
+ 	select FUNCTION_ALIGNMENT_16B
+ 	select GENERIC_BUG_FRAME
+ 	select HAS_ALTERNATIVE
+diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.=
+h
+index 3f16e62696..cb3e0fed19 100644
+--- a/xen/arch/x86/include/asm/smp.h
++++ b/xen/arch/x86/include/asm/smp.h
+@@ -50,9 +50,6 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t =
+pxm);
+=20
+ void __stop_this_cpu(void);
+=20
+-long cf_check cpu_up_helper(void *data);
+-long cf_check cpu_down_helper(void *data);
 -
+ long cf_check core_parking_helper(void *data);
+ bool core_parking_remove(unsigned int cpu);
+ uint32_t get_cur_idle_nums(void);
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index 7936294f5f..d64b533cc0 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -418,35 +418,8 @@ void cf_check call_function_interrupt(void)
+     smp_call_function_interrupt();
+ }
+=20
+-long cf_check cpu_up_helper(void *data)
++bool arch_smt_cpu_disable(unsigned int cpu)
+ {
+-    unsigned int cpu =3D (unsigned long)data;
+-    int ret =3D cpu_up(cpu);
+-
+-    /* Have one more go on EBUSY. */
+-    if ( ret =3D=3D -EBUSY )
+-        ret =3D cpu_up(cpu);
+-
+-    if ( !ret && !opt_smt &&
+-         cpu_data[cpu].compute_unit_id =3D=3D INVALID_CUID &&
+-         cpumask_weight(per_cpu(cpu_sibling_mask, cpu)) > 1 )
+-    {
+-        ret =3D cpu_down_helper(data);
+-        if ( ret )
+-            printk("Could not re-offline CPU%u (%d)\n", cpu, ret);
+-        else
+-            ret =3D -EPERM;
+-    }
+-
+-    return ret;
+-}
+-
+-long cf_check cpu_down_helper(void *data)
+-{
+-    int cpu =3D (unsigned long)data;
+-    int ret =3D cpu_down(cpu);
+-    /* Have one more go on EBUSY. */
+-    if ( ret =3D=3D -EBUSY )
+-        ret =3D cpu_down(cpu);
+-    return ret;
++    return !opt_smt && cpu_data[cpu].compute_unit_id =3D=3D INVALID_CUID &=
+&
++           cpumask_weight(per_cpu(cpu_sibling_mask, cpu)) > 1;
+ }
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index 1b04947516..87a4b7ac63 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -115,7 +115,6 @@ long arch_do_sysctl(
+=20
+     case XEN_SYSCTL_cpu_hotplug:
+     {
+-        unsigned int cpu =3D sysctl->u.cpu_hotplug.cpu;
+         unsigned int op  =3D sysctl->u.cpu_hotplug.op;
+         bool plug;
+         long (*fn)(void *data);
+@@ -124,15 +123,10 @@ long arch_do_sysctl(
+         switch ( op )
+         {
+         case XEN_SYSCTL_CPU_HOTPLUG_ONLINE:
+-            plug =3D true;
+-            fn =3D cpu_up_helper;
+-            hcpu =3D _p(cpu);
+-            break;
+-
+         case XEN_SYSCTL_CPU_HOTPLUG_OFFLINE:
+-            plug =3D false;
+-            fn =3D cpu_down_helper;
+-            hcpu =3D _p(cpu);
++            /* Handled by common code */
++            ASSERT_UNREACHABLE();
++            ret =3D -EOPNOTSUPP;
+             break;
+=20
+         case XEN_SYSCTL_CPU_HOTPLUG_SMT_ENABLE:
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 38320b248a..1a28c2dafe 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -176,6 +176,9 @@ config LIBFDT
+ config MEM_ACCESS_ALWAYS_ON
+ 	bool
+=20
++config CPU_HOTPLUG
++    bool
++
+ config VM_EVENT
+ 	def_bool MEM_ACCESS_ALWAYS_ON
+ 	prompt "Memory Access and VM events" if !MEM_ACCESS_ALWAYS_ON
+diff --git a/xen/common/smp.c b/xen/common/smp.c
+index a011f541f1..8ff81197cb 100644
+--- a/xen/common/smp.c
++++ b/xen/common/smp.c
+@@ -16,6 +16,7 @@
+  * GNU General Public License for more details.
+  */
+=20
++#include <xen/cpu.h>
+ #include <asm/hardirq.h>
+ #include <asm/processor.h>
+ #include <xen/spinlock.h>
+@@ -104,6 +105,39 @@ void smp_call_function_interrupt(void)
+     irq_exit();
+ }
+=20
++#ifdef CONFIG_CPU_HOTPLUG
++long cf_check cpu_up_helper(void *data)
++{
++    unsigned int cpu =3D (unsigned long)data;
++    int ret =3D cpu_up(cpu);
++
++    /* Have one more go on EBUSY. */
++    if ( ret =3D=3D -EBUSY )
++        ret =3D cpu_up(cpu);
++
++    if ( !ret && arch_smt_cpu_disable(cpu) )
++    {
++        ret =3D cpu_down_helper(data);
++        if ( ret )
++            printk("Could not re-offline CPU%u (%d)\n", cpu, ret);
++        else
++            ret =3D -EPERM;
++    }
++
++    return ret;
++}
++
++long cf_check cpu_down_helper(void *data)
++{
++    int cpu =3D (unsigned long)data;
++    int ret =3D cpu_down(cpu);
++    /* Have one more go on EBUSY. */
++    if ( ret =3D=3D -EBUSY )
++        ret =3D cpu_down(cpu);
++    return ret;
++}
++#endif /* CONFIG_CPU_HOTPLUG */
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index 5207664252..2acf47723d 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -483,6 +483,51 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_=
+sysctl)
+             copyback =3D 1;
+         break;
+=20
++#ifdef CONFIG_CPU_HOTPLUG
++    case XEN_SYSCTL_cpu_hotplug:
++    {
++        unsigned int cpu =3D op->u.cpu_hotplug.cpu;
++        unsigned int hp_op =3D op->u.cpu_hotplug.op;
++        bool plug;
++        long (*fn)(void *data);
++        void *hcpu;
++
++        switch ( hp_op )
++        {
++        case XEN_SYSCTL_CPU_HOTPLUG_ONLINE:
++            plug =3D true;
++            fn =3D cpu_up_helper;
++            hcpu =3D _p(cpu);
++            break;
++
++        case XEN_SYSCTL_CPU_HOTPLUG_OFFLINE:
++            plug =3D false;
++            fn =3D cpu_down_helper;
++            hcpu =3D _p(cpu);
++            break;
++
++        case XEN_SYSCTL_CPU_HOTPLUG_SMT_ENABLE:
++        case XEN_SYSCTL_CPU_HOTPLUG_SMT_DISABLE:
++            /* Use arch specific handlers as SMT is very arch-dependent */
++            ret =3D arch_do_sysctl(op, u_sysctl);
++            copyback =3D 0;
++            goto out;
++
++        default:
++            ret =3D -EOPNOTSUPP;
++            break;
++        }
++
++        if ( !ret )
++            ret =3D plug ? xsm_resource_plug_core(XSM_HOOK)
++                       : xsm_resource_unplug_core(XSM_HOOK);
++
++        if ( !ret )
++            ret =3D continue_hypercall_on_cpu(0, fn, hcpu);
++        break;
++    }
++#endif
++
+     default:
+         ret =3D arch_do_sysctl(op, u_sysctl);
+         copyback =3D 0;
+diff --git a/xen/include/xen/smp.h b/xen/include/xen/smp.h
+index 2ca9ff1bfc..c734033bfb 100644
+--- a/xen/include/xen/smp.h
++++ b/xen/include/xen/smp.h
+@@ -76,4 +76,8 @@ extern void *stack_base[NR_CPUS];
+ void initialize_cpu_data(unsigned int cpu);
+ int setup_cpu_root_pgt(unsigned int cpu);
+=20
++bool arch_smt_cpu_disable(unsigned int cpu);
++long cf_check cpu_up_helper(void *data);
++long cf_check cpu_down_helper(void *data);
++
+ #endif /* __XEN_SMP_H__ */
 --=20
 2.51.2
 
