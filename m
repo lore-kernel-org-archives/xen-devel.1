@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D5DD2F340
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 16:23:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1202068.1517703 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F138D2F33D
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 16:34:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1202151.1517789 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfhB1-0003hR-Dy; Tue, 13 Jan 2026 16:23:27 +0000
+	id 1vfhL0-0008Nk-PX; Tue, 13 Jan 2026 16:33:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1202068.1517703; Tue, 13 Jan 2026 16:23:27 +0000
+Received: by outflank-mailman (output) from mailman id 1202151.1517789; Tue, 13 Jan 2026 16:33:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfhB1-0003hH-9K; Tue, 13 Jan 2026 16:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 1202068;
- Tue, 13 Jan 2026 16:23:25 +0000
+	id 1vfhL0-0008Nd-Le; Tue, 13 Jan 2026 16:33:46 +0000
+Received: by outflank-mailman (input) for mailman id 1202151;
+ Tue, 13 Jan 2026 16:33:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=b0e4=7S=arm.com=harry.ramsey@srs-se1.protection.inumbo.net>)
- id 1vfhAz-0003EQ-T1
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 16:23:25 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 2f457747-f09c-11f0-b15e-2bf370ae4941;
- Tue, 13 Jan 2026 17:23:25 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8D92E15A1;
- Tue, 13 Jan 2026 08:23:17 -0800 (PST)
-Received: from e134099.cambridge.arm.com (e134099.arm.com [10.1.198.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A47B3F59E;
- Tue, 13 Jan 2026 08:23:23 -0800 (PST)
+ <SRS0=i8AK=7S=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vfhKz-0008NX-IL
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 16:33:45 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a0aa63d9-f09d-11f0-b15e-2bf370ae4941;
+ Tue, 13 Jan 2026 17:33:44 +0100 (CET)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b874c00a39fso96876066b.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Jan 2026 08:33:44 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b871b5e60dasm630149866b.63.2026.01.13.08.33.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Jan 2026 08:33:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,207 +47,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f457747-f09c-11f0-b15e-2bf370ae4941
-From: Harry Ramsey <harry.ramsey@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Luca.Fancellu@arm.com,
-	Luca Fancellu <luca.fancellu@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Hari Limaye <hari.limaye@arm.com>
-Subject: [PATCH v3 4/6] arm/mpu: Introduce modify_after_init_mappings
-Date: Tue, 13 Jan 2026 16:23:07 +0000
-Message-ID: <20260113162309.6766-5-harry.ramsey@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260113162309.6766-1-harry.ramsey@arm.com>
-References: <20260113162309.6766-1-harry.ramsey@arm.com>
+X-Inumbo-ID: a0aa63d9-f09d-11f0-b15e-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768322024; x=1768926824; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=UUlhDfD+5kJ3y3bTAFKu0Qryexyh4VkeiASI0Y9BHnc=;
+        b=kPGESVAcApXehNze1qV6AsXHGrZq6BlSjJ6fzSx3UEJYiFGIrCVRmBs768tdHvIYp0
+         Mf3ToDWKkkY/wo7munPSPma1/TV5YEq4g+wUSp4Ui9RAiLpxLG9VMGR+Kl+4qA/YCszZ
+         ksSvk0W7WwE092/H4QrRawua4qkp8Rche48/oT6mL7IVjlKSUe0/T4Gl7BSg044cGmdK
+         V8eAIawl+dT+DLtaFwrrOcAGDreGo2jqujnCdOdHdyFUziP1AbMYb5Lmowcu1iEI8S7c
+         9T8HEopdnvFBOCVO2InvExU+67VKE/fJ4QJV/AxaxprbC3NrOVbLB4pmBDmiLBTez2Ql
+         2NPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768322024; x=1768926824;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UUlhDfD+5kJ3y3bTAFKu0Qryexyh4VkeiASI0Y9BHnc=;
+        b=D22ATOUSjpPPdZtM6PV/WMJqkSRwmzU1MOOWj7EQYBp4f8OfXnUeZOajRtjgRw97r7
+         MCtj+LpJ/pU6MgSofb6K2O2fzshjfgeFphhFnzaMkFhk/A3BCY3m3MeJMOxMXDFEPCw4
+         9MDV4Env+EZORS1QdJVPFG8pNrsb3L2Fjo9sTN88fiISlZeYCSeksUPyiPYIwEnc7sFt
+         mDrbnQvkMP88f0xHz89vzeKlO2srL7jyPh0gBjmGs7MPQRF4tJ5Lo6TOmk9AZK5OciTM
+         XYBPVcJGVu83ZB0VyTJU/w7ie2A4gbL+m7/Tzj29pX6W3wB4uXIFfXyKDPe0ji2z17pk
+         PiRg==
+X-Forwarded-Encrypted: i=1; AJvYcCVbQogxYWujj5iocr40J0bdkWPYiwOQM/oeySGwh9eB8D0SHBfu40HT5rh2uVQd8QwSEKJdCKWFKks=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzK+5UHioIlfmY9o1rKytDhDjDE/qtqP/qPQao4UCU6eP5dQREn
+	o8Td2grUm/eggWEjpx8PYL5H0qHosW4BqSoUWoSM7eq/sUFJK2XMvZZx
+X-Gm-Gg: AY/fxX4EqcB2u49Qi1fvg8mxLNPorJHxVJZeWRy27jGHBcnpS0gVL12ff2bXofUgWog
+	1ig1MXJiLBq8WAnCKcR7eoplXZMMdIPBW1ddfJPBS98Y6cb0akbnhad3jZULabFc9iDg2Mj1FMw
+	2OQFvmxUy1KqB3hSFNmGji0RiIve5PLFr2uoV8BzPzutc8x8r0xIy8tJENgQ1fpdvHY4kv04I5s
+	Jo2nnhyxxbNDk1OxJk59kbSXWK0yKup3dWqPt/LkdaYaLv1lNdLe8iTwQdFB/i+g/UJBVyXsxwG
+	P3OzTFS2q5osqeB//BDZ+kqsnUr56csNiaosbjpneF3HhnfMd4rOyA2gor8m8z2abEVu0GojwHJ
+	Kt9ueVumu4LQzvsz7G4Nc9KWjRvsob1Q8gZt3ZFkTBrcqKTmfDhJ2DbHcifdanFYd94MlBRgxZ9
+	RAJBXx8KY3LD7Q5DR1MpvVTtZ6QdanJtna6B6ksM/nWo0e6dm5rMfGPrRivJZcGtc=
+X-Google-Smtp-Source: AGHT+IH/G0244y9OuKNun+CMAHAvQ1guMab8G9IMZZ5hsqp4Fvwl3y/XTCXI4nXTJwKMa5VRO86Szw==
+X-Received: by 2002:a17:907:2887:b0:b87:59a8:4c8 with SMTP id a640c23a62f3a-b8759a805b3mr41562966b.5.1768322023537;
+        Tue, 13 Jan 2026 08:33:43 -0800 (PST)
+Message-ID: <5f658f5b-1c22-4bd7-9f25-f89576d5003e@gmail.com>
+Date: Tue, 13 Jan 2026 17:33:42 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 12/15] xen/riscv: introduce sbi_set_timer()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
+ <84cf8fb2331614c6d0cc6e9030571f42bfc6d928.1766595589.git.oleksii.kurochko@gmail.com>
+ <de975e5d-4df7-4dee-9edf-400e5287cc82@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <de975e5d-4df7-4dee-9edf-400e5287cc82@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Luca Fancellu <luca.fancellu@arm.com>
 
-During `init_done`, Xen sets the permissions of all symbols marked with
-__ro_after_init to be read-only. This does not work on MPU systems at
-present because part-region modification is not supported.
+On 1/12/26 4:12 PM, Jan Beulich wrote:
+> On 24.12.2025 18:03, Oleksii Kurochko wrote:
+>> Introduce pointer to function which points to a specific sbi_set_timer()
+>> implementation. It is done in this way as different OpenSBI version can
+>> have different Extenion ID and/or funcion ID for TIME extension.
+>>
+>> sbi_set_time() programs the clock for next event after stime_value
+>> time. This function also clears the pending timer interrupt bit.
+>>
+>> Introduce extension ID and SBI function ID for TIME extension.
+>>
+>> Implement only sbi_set_timer_v02() as there is not to much sense
+>> to support earlier version and, at the moment, Xen supports only v02.
+> Besides this somewhat contradicting the use of a function pointer: What
+> about the legacy extension's equivalent?
 
-Therefore introduce the function `modify_after_init_mappings` for MMU
-and MPU, to handle the divergent approaches to setting permissions of
-__ro_after_init symbols.
+I think this is not really needed, and the same implementation can be used for
+both the Legacy and TIME extensions, since the API is identical and the only
+difference is that|sbi_set_timer()| was moved into a separate extension.
 
-For MPU systems `modify_xen_mappings` will shrink the RW mapping on one
-side and extend the RO mapping on the other. This approach prevents
-wasting an additional region between RW and RO mappings.
+Since Xen reports to the guest that it supports SBI v0.2, it is up to the guest
+implementation to decide why it is still using|sbi_set_timer()| from the
+Legacy extension instead of the TIME extension.
 
-As the new function is marked with __init, it needs to be called before
-`free_init_memory`.
+I think that I can add Legacy extension equivalent but considering that we are
+using OpenSBI v0.2 for which Time extension is available it seems for me it is
+enough to define sbi_set_timer to sbi_set_timer_v02() for now.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Signed-off-by: Hari Limaye <hari.limaye@arm.com>
-Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-v3:
-- Add Michal R-by
-v2:
-- No changes
----
- xen/arch/arm/include/asm/setup.h |  3 +++
- xen/arch/arm/mmu/setup.c         | 15 ++++++++++++
- xen/arch/arm/mpu/mm.c            |  2 +-
- xen/arch/arm/mpu/setup.c         | 40 ++++++++++++++++++++++++++++++++
- xen/arch/arm/setup.c             | 15 ++----------
- 5 files changed, 61 insertions(+), 14 deletions(-)
+>
+>> --- a/xen/arch/riscv/include/asm/sbi.h
+>> +++ b/xen/arch/riscv/include/asm/sbi.h
+>> @@ -33,6 +33,7 @@
+>>   
+>>   #define SBI_EXT_BASE                    0x10
+>>   #define SBI_EXT_RFENCE                  0x52464E43
+>> +#define SBI_EXT_TIME                    0x54494D45
+>>   
+>>   /* SBI function IDs for BASE extension */
+>>   #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+>> @@ -65,6 +66,9 @@
+>>   
+>>   #define SBI_SPEC_VERSION_DEFAULT 0x1
+>>   
+>> +/* SBI function IDs for TIME extension */
+>> +#define SBI_EXT_TIME_SET_TIMER  0x0
+> Move up besides the other SBI_EXT_* and use the same amount of padding?
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 005cf7be59..899e33925c 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -78,6 +78,9 @@ struct init_info
- paddr_t consider_modules(paddr_t s, paddr_t e, uint32_t size, paddr_t align,
-                          int first_mod);
- 
-+/* Modify some mappings after the init is done */
-+void modify_after_init_mappings(void);
-+
- #endif
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index 9b874f8ab2..d042f73597 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -213,6 +213,21 @@ void __init remove_early_mappings(void)
-     BUG_ON(rc);
- }
- 
-+void __init modify_after_init_mappings(void)
-+{
-+    /*
-+     * We have finished booting. Mark the section .data.ro_after_init
-+     * read-only.
-+     */
-+    int rc = modify_xen_mappings((unsigned long)&__ro_after_init_start,
-+                                 (unsigned long)&__ro_after_init_end,
-+                                 PAGE_HYPERVISOR_RO);
-+
-+    if ( rc )
-+        panic("Unable to mark the .data.ro_after_init section read-only (rc = %d)\n",
-+              rc);
-+}
-+
- /*
-  * After boot, Xen page-tables should not contain mapping that are both
-  * Writable and eXecutables.
-diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 5633c1c4c5..eb00acb9a9 100644
---- a/xen/arch/arm/mpu/mm.c
-+++ b/xen/arch/arm/mpu/mm.c
-@@ -35,7 +35,7 @@ DECLARE_BITMAP(xen_mpumap_mask, MAX_MPU_REGION_NR) \
- /* EL2 Xen MPU memory region mapping table. */
- pr_t __cacheline_aligned __section(".data") xen_mpumap[MAX_MPU_REGION_NR];
- 
--static DEFINE_SPINLOCK(xen_mpumap_lock);
-+DEFINE_SPINLOCK(xen_mpumap_lock);
- 
- static void __init __maybe_unused build_assertions(void)
- {
-diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
-index ec264f54f2..55317ee318 100644
---- a/xen/arch/arm/mpu/setup.c
-+++ b/xen/arch/arm/mpu/setup.c
-@@ -8,11 +8,14 @@
- #include <xen/pfn.h>
- #include <xen/types.h>
- #include <xen/sizes.h>
-+#include <xen/spinlock.h>
- #include <asm/setup.h>
- 
- static paddr_t __initdata mapped_fdt_base = INVALID_PADDR;
- static paddr_t __initdata mapped_fdt_limit = INVALID_PADDR;
- 
-+extern spinlock_t xen_mpumap_lock;
-+
- void __init setup_pagetables(void) {}
- 
- void * __init early_fdt_map(paddr_t fdt_paddr)
-@@ -106,6 +109,43 @@ void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
-         panic("Unable to unmap range for copy_from_paddr\n");
- }
- 
-+void __init modify_after_init_mappings(void)
-+{
-+    int rc;
-+    uint8_t idx_rodata;
-+    uint8_t idx_rwdata;
-+
-+    spin_lock(&xen_mpumap_lock);
-+
-+    rc = mpumap_contains_region(xen_mpumap, max_mpu_regions,
-+                                (unsigned long)_srodata,
-+                                (unsigned long)_erodata,
-+                                &idx_rodata);
-+
-+    if ( rc < MPUMAP_REGION_FOUND )
-+        panic("Unable to find rodata section (rc = %d)\n", rc);
-+
-+    rc = mpumap_contains_region(xen_mpumap, max_mpu_regions,
-+                                (unsigned long)__ro_after_init_start,
-+                                (unsigned long)__init_begin,
-+                                &idx_rwdata);
-+
-+    if ( rc < MPUMAP_REGION_FOUND )
-+        panic("Unable to find rwdata section (rc = %d)\n", rc);
-+
-+    /* Shrink rwdata section to begin at __ro_after_init_end */
-+    pr_set_base(&xen_mpumap[idx_rwdata], (unsigned long)__ro_after_init_end);
-+
-+    /* Extend rodata section to end at __ro_after_init_end */
-+    pr_set_limit(&xen_mpumap[idx_rodata], (unsigned long)__ro_after_init_end);
-+
-+    write_protection_region(&xen_mpumap[idx_rwdata], idx_rwdata);
-+    write_protection_region(&xen_mpumap[idx_rodata], idx_rodata);
-+    context_sync_mpu();
-+
-+    spin_unlock(&xen_mpumap_lock);
-+}
-+
- void __init remove_early_mappings(void)
- {
-     int rc = destroy_xen_mappings(round_pgdown(mapped_fdt_base),
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 7ad870e382..6310a47d68 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -66,23 +66,12 @@ domid_t __read_mostly max_init_domid;
- 
- static __used void noreturn init_done(void)
- {
--    int rc;
--
-     /* Must be done past setting system_state. */
-     unregister_init_virtual_region();
- 
--    free_init_memory();
-+    modify_after_init_mappings();
- 
--    /*
--     * We have finished booting. Mark the section .data.ro_after_init
--     * read-only.
--     */
--    rc = modify_xen_mappings((unsigned long)&__ro_after_init_start,
--                             (unsigned long)&__ro_after_init_end,
--                             PAGE_HYPERVISOR_RO);
--    if ( rc )
--        panic("Unable to mark the .data.ro_after_init section read-only (rc = %d)\n",
--              rc);
-+    free_init_memory();
- 
-     startup_cpu_idle_loop();
- }
--- 
-2.43.0
+Sure, I will do that.
+
+>
+>> @@ -138,6 +142,19 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+>>   int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+>>                                   size_t size, unsigned long vmid);
+>>   
+>> +/*
+>> + * Programs the clock for next event after stime_value time. This function also
+>> + * clears the pending timer interrupt bit.
+>> + * If the supervisor wishes to clear the timer interrupt without scheduling the
+>> + * next timer event, it can either request a timer interrupt infinitely far
+>> + * into the future (i.e., (uint64_t)-1), or it can instead mask the timer
+>> + * interrupt by clearing sie.STIE CSR bit.
+>> + *
+>> + * This SBI call returns 0 upon success or an implementation specific negative
+>> + * error code.
+>> + */
+>> +extern int (*sbi_set_timer)(uint64_t stime_value);
+> Despite the pretty extensive comment, the granularity of the value to be passed
+> isn't mentioned.
+
+I update the comment with the following then:
+   The stime_value parameter represents absolute time measured in ticks.
+
+
+>
+>> --- a/xen/arch/riscv/sbi.c
+>> +++ b/xen/arch/riscv/sbi.c
+>> @@ -249,6 +249,26 @@ static int (* __ro_after_init sbi_rfence)(unsigned long fid,
+>>                                             unsigned long arg4,
+>>                                             unsigned long arg5);
+>>   
+>> +static int cf_check sbi_set_timer_v02(uint64_t stime_value)
+>> +{
+>> +    struct sbiret ret;
+>> +
+>> +#ifdef CONFIG_RISCV_64
+>> +    ret = sbi_ecall(SBI_EXT_TIME, SBI_EXT_TIME_SET_TIMER, stime_value, 0,
+>> +                    0, 0, 0, 0);
+>> +#else
+>> +    ret = sbi_ecall(SBI_EXT_TIME, SBI_EXT_TIME_SET_TIMER, stime_value,
+>> +                    stime_value >> 32, 0, 0, 0, 0);
+>> +#endif
+> How about
+>
+>      ret = sbi_ecall(SBI_EXT_TIME, SBI_EXT_TIME_SET_TIMER, stime_value,
+> #ifdef CONFIG_RISCV_64
+>                      0,
+> #else
+>                      stime_value >> 32,
+> #endif
+>                      0, 0, 0, 0);
+>
+> ? Granted some may say this looks a little m ore clumsy, but it's surely
+> less redundancy.
+>
+> Also I'd suggest to use CONFIG_RISCV_32 with the #ifdef, as then the "else"
+> covers both RV64 and RV128.
+
+Makes sense, I will update the function in mentioned way.
+
+>
+>> +    if ( ret.error )
+>> +        return sbi_err_map_xen_errno(ret.error);
+>> +    else
+>> +        return 0;
+>> +}
+> While I understand this is being debated, I continue to think that this
+> kind of use of if/else isn't very helpful. Function's main return
+> statements imo benefit from being unconditional.
+
+Considering what returns sbi_err_map_xen_errno() we can just drop if/else
+and have only:
+   return sbi_err_map_xen_errno(ret.error);
+as if ret.error == SBI_SUCCESS(0) then sbi_err_map_xen_errno() will
+return 0.
+
+Thanks.
+
+~ Oleksii
 
 
