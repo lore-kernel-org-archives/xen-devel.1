@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3929D2D0E2
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201588.1517184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B819D2D0E5
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201589.1517194 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP2-0004pW-Tj; Tue, 13 Jan 2026 12:21:40 +0000
+	id 1vfdP6-00055Y-9x; Tue, 13 Jan 2026 12:21:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201588.1517184; Tue, 13 Jan 2026 12:21:40 +0000
+Received: by outflank-mailman (output) from mailman id 1201589.1517194; Tue, 13 Jan 2026 12:21:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP2-0004pL-Qt; Tue, 13 Jan 2026 12:21:40 +0000
-Received: by outflank-mailman (input) for mailman id 1201588;
- Tue, 13 Jan 2026 12:21:40 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vfdP6-00055Q-64; Tue, 13 Jan 2026 12:21:44 +0000
+Received: by outflank-mailman (input) for mailman id 1201589;
+ Tue, 13 Jan 2026 12:21:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YaIX=7S=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vfdP2-0004bu-Cb
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:40 +0000
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [2a01:111:f403:c005::5])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 68bf6443-f07a-11f0-b15e-2bf370ae4941;
- Tue, 13 Jan 2026 13:21:39 +0100 (CET)
-Received: from MN2PR16CA0054.namprd16.prod.outlook.com (2603:10b6:208:234::23)
- by BY5PR12MB4308.namprd12.prod.outlook.com (2603:10b6:a03:20a::9)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 1vfdP5-0004bR-EI
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:43 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 69ffe719-f07a-11f0-9ccf-f158ae23cfc8;
+ Tue, 13 Jan 2026 13:21:41 +0100 (CET)
+Received: from MN2PR16CA0055.namprd16.prod.outlook.com (2603:10b6:208:234::24)
+ by DM4PR12MB6181.namprd12.prod.outlook.com (2603:10b6:8:a9::22) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
- 2026 12:21:34 +0000
+ 2026 12:21:37 +0000
 Received: from BL6PEPF0001AB53.namprd02.prod.outlook.com
- (2603:10b6:208:234:cafe::66) by MN2PR16CA0054.outlook.office365.com
- (2603:10b6:208:234::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Tue,
- 13 Jan 2026 12:21:34 +0000
+ (2603:10b6:208:234:cafe::a6) by MN2PR16CA0055.outlook.office365.com
+ (2603:10b6:208:234::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Tue,
+ 13 Jan 2026 12:21:37 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  BL6PEPF0001AB53.mail.protection.outlook.com (10.167.241.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:33 +0000
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:37 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 13 Jan
- 2026 06:21:31 -0600
+ 2026 06:21:34 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68bf6443-f07a-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: 69ffe719-f07a-11f0-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZOE3n/ylmwFo8M3Ifm/7N8YuOhlkaZULvGMtnIAuEF8b2nxzsENWMBIlf4cfcOzhS1DrdzI/cc0d16y3fnDEwOcKibqfiMcVMT6o/ju/PRYc61y1RJe/vLED/jCa10w+95f5OVCakGHzTej5FDHceAJK8rWyY+dR3bqcTxlrGRbR2lwDD1tMmJyAENVXmxkdaVzg62vRps03JK3ankVkfhNbz/11zkdkG7aCEs/1fphSr2JYcnegbM+9WDqXx+2BwPUlj+Vu4TACpTa+fpirUVNR/R519Fy62gFrgn8x3getEjHscq0AKR5r8V7Mp2Bnm9lfIfBeJ9WtrJwJV6/VpQ==
+ b=r4x9Bz3kINVh/FeVvZq08z/WtS2Uktnn25zZ9RiRErV8A7wa3Wo3DtL5TLJBcfot63psUnvu3MKHetqkecPzGbVM1A3mSshJhx2y9DNg0mVh+89JfDpeeeSUG1RW8FrZCKQaIKoQfei/PnpQ5t7CDY/fzl1uj+laKeLff9zgH78mSTIYzohZ7UX1ko89Qy1i6ICHzf+CUK4oUugHYCH8esnS2kHE5RO4swKbigo+V2yeLO9WWDwFVTyIpKO8abMlvRdTuzH1o7FPJ1v2MBEdZt2FxDmojgr2fyVSVFvdPv6JVpUZtuc0iRJFQWBj3h/JOXg3ozyD1mibZ2TmhaQG/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hd63tS65+pkJnhvg7m7v40+QJW9Mib6yuJizuBKbNkQ=;
- b=ijx2UEsvn33k4IPrEd/jUoNVzSMZLjhK8U9kRhLmKTPcWF0j+gONgfNKGxfygp1P13ojOiikHFNBeJ/+giKPnZAqoAvIg1j13o8MdFSfu9JKcK6vzbuCa+I6ckpeFqG/OSzV0yA5sUEJhAjgpncASF82gChVzvOw5HcJnxikXhBM/P7zDTQaCf2ZaiNhfCwfv1W9dnfeCKu3nkoG+mdmlQSpUDXY1sb6KcdGQPz6csWbuaY6IVXm4SxQSrFPM7okNG9HfNOvdEXAF/rHqzRDckS2eJwhS/6Yo2+bTkUs5yM3lYgaB18X+n0h3U59jRIAsR701FVBkX1ajI5Q6dYtqQ==
+ bh=dWp8DZG/eGZsi9jg+Gber251xIS5sXUS7XbDSzbTugk=;
+ b=hSFQi6IgwB6RDyrPiVD3eYdxgilO4x/SDOj4avI+YYKo0Ue+ZpXU6WEHu9wkUaC5KEjWK3iSX6rci1RulvCB8+Y/mVbVfO1lR7zXh8J4Sl++NLx7kRulh39DuhLaYS2jMjiMWXEHtrWOn6tj0/DOGAZ4HdIU1hNb+OhSkgtbWgd0Ydi2nE0hIVYzv/94+LA4W1k3e9Zn5+0bNbYGGq2FGlKnQNTOCyi+WHHHhsFpuTgINQYvNwBtFTFv59XAb6PXvDBn4Kjifz93yxRiaEffuuZLV4bROkKjfcna1U+u6Qh3DOOAgAK72U6sC0ahHXtW9CZ9MenMAEVgIBd04jC5tw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hd63tS65+pkJnhvg7m7v40+QJW9Mib6yuJizuBKbNkQ=;
- b=OI5L4QVjCi13eqvStaGifek5WQ8sJjD6d59dhCm6HASs7sUN/XcvNmUxD57GBm5XGX6a6LuPhWwhq5jOrAScr3wKaFgvfjavQFZhluqlNcpvbkntzTrYBl6ivbxCn6WKeraBRZLJk90z/mxHecU8xmhwlXTXMblI2gKqgMz1NlA=
+ bh=dWp8DZG/eGZsi9jg+Gber251xIS5sXUS7XbDSzbTugk=;
+ b=0ycaEQaKymNtbrIpawnq5xhJjJyGJ4c83KIBvnRfi4FdfehMjP42075+Ww3xFGS3Ye9NOfpXKYOy8d/BLwqidJM4OJI/IG62XJd//ifW+ebFQigS0jbp0yOn9Dt5T7e+Xenr0E1NYo7Po4X3ClVYxcrG1CVothNYK0aet1CTxbM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,12 +82,14 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 1/4] x86/ucode: Fix typo s/mitigiated/mitigated/
-Date: Tue, 13 Jan 2026 13:21:01 +0100
-Message-ID: <20260113122109.62399-2-alejandro.garciavallejo@amd.com>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 3/4] earlycpio: lib-ify earlycpio.c
+Date: Tue, 13 Jan 2026 13:21:03 +0100
+Message-ID: <20260113122109.62399-4-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
 References: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
@@ -99,96 +101,126 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB53:EE_|BY5PR12MB4308:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45976c8d-4da6-417a-120b-08de529e4a20
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB53:EE_|DM4PR12MB6181:EE_
+X-MS-Office365-Filtering-Correlation-Id: d21156ef-730a-4c7c-0e6c-08de529e4c76
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|376014;
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Tg1GfHx9uB9ef6jLwB7zQUV3q0AB7tdwL+vMt1ypWdn7do+rJJ7FlkTzU/Qv?=
- =?us-ascii?Q?RT4CoL2VXSxGBR5ekPSdAN3FInxjbtrGNWtb0KLZTCcC3RgEl9dXn89LnXkF?=
- =?us-ascii?Q?9aS1SPHMA42cVkCRj7V+mGXI+rRiCWdFCYdd1FpMYLmR5/sdAV4dIDFdONBY?=
- =?us-ascii?Q?8VJ+zXUryniIGS7HxZtDlmPorJD2tbDTZHwS2G/WU5BgmJeSFvnib6bhH3M3?=
- =?us-ascii?Q?lHJRwFwOax+B7NDa61mDPvLr56MbH1X2+SMYlbE4dTXi8O9SP7kqgN06P0Jd?=
- =?us-ascii?Q?pZjH9MNtfT0dXC3JHhcVjmmVh9ayPfgDdFRykPhF3P8DviPakQRfI+91wlQf?=
- =?us-ascii?Q?Dam3OUb/BgGxRPURlKW/9eo3sGVGTt9GIWKali6KQgBQhStmPY09Z7h3lhAK?=
- =?us-ascii?Q?i8vZS+heifbuAai21tolG80FffzxxWOVEiQT+hzEwhmk/P8JxrhEQ6X6Nrgh?=
- =?us-ascii?Q?xRGK5KBORA6RmzmxP8Cw8+9RSX98VTL7m3s0S0cVw1YQXLN1ZirACAMmww+O?=
- =?us-ascii?Q?MNYpvVXwy+yOuwhlsaYjOViMWdZomgdNYSOcIAhQ+ZAvhH4qf2jCYquxdZcZ?=
- =?us-ascii?Q?TIfWhc363pCvtZ13qD+3D4R0JTW/274ui2TsmBY9lJMRAR2QbTeTyArz+22q?=
- =?us-ascii?Q?/2k8K3uvg2oOUfHt157cHsqd0FVjzdTrLh7n06FhfpwuA8LOfzoEKKVhQJjB?=
- =?us-ascii?Q?u7IEPrwoixb+GUmV+EM0fxVQYv73hSKbhUhwRsuFP8JDM3aORl7f1fHxWUyL?=
- =?us-ascii?Q?i3MbqKZLjCd8+dg/iaIRqDN9CkAaGcYBLA5ymP6RuZTkUhCQ4Vih+expqA3E?=
- =?us-ascii?Q?+Kbr0qSXyKaUyLrxaaPqjOTogn3JMxsHif7DVuEoXhyDEZ8QjrHuGSXsd2mC?=
- =?us-ascii?Q?BZhRqa6zzYNFqDpM/GjLGZSF1tUoGfa1QnKJMN/gQ94Krrd86gQuWLE4Xnvr?=
- =?us-ascii?Q?22h11E+eM+23HR4DYyC1nPmgjDfiABGyZRazRa/d4FYVKrLKAf8ZdBm+RCJk?=
- =?us-ascii?Q?DfjquSP3hddrhwaNUdlgVEr7Mu2tCyOPrWMlX9iaiXN1J9qZO05+fsQkQ/bJ?=
- =?us-ascii?Q?2ljo0+Y5qA0z6oGn89WL7t0YWgqeWRfgLMH5hibllyD1sQFxYcXHpWaaWyig?=
- =?us-ascii?Q?bnX04vFXSxYpgdJyZu1W4dxbCdhRHszB7HqNog1okkYHeh2FXh+MtClZNbnr?=
- =?us-ascii?Q?E3A/ydMoBvl4gXqpc+1hD+oxpkUBM3eshSRPImyOD85i8MpNmMVIl9HK7LhG?=
- =?us-ascii?Q?z9JEOEvhZNmmQg9OMBrSwuoihm5nVw2X+qdK2JkwWYpIA2CGFBiQo2DlMaDc?=
- =?us-ascii?Q?w71sAQX6gmqCyl097W7t1S3Q+1Ye3Ts/5ZKHhjC8b+qmFPPFnGPfvl5oLwBA?=
- =?us-ascii?Q?8IOJDOlxf/M+2FhOImdzwOfag4H00K1/5iS9c23tGEw+DkY7WdeX1Vjttn08?=
- =?us-ascii?Q?4FDDnbb84WkUiVgYGS/E/UHwlEcrey4IAntEFMtLAtY9PjkqCPvgUmB3zg26?=
- =?us-ascii?Q?FYs7qj4uctozXG0bHzLSps/wVPY8l+EMYB2tkjEI8gEGQORAYsnXJ/OqbHS7?=
- =?us-ascii?Q?ux5WXe6zLPN7DLNSbk8=3D?=
+	=?us-ascii?Q?Ilzf2mVMOrVafu8e4YNN1uKRfS7jZhfexCu/OEhHt3ZtiIzPRRk5V/Ssjzn7?=
+ =?us-ascii?Q?zei7IBltip60vblZEpfBAWcuW7i4olE+9MOAuLhXdxXLoSR2CK/TrHeuN1FR?=
+ =?us-ascii?Q?Loz3yQ3kcAKyEO84cp+vjB07T8LA1I3sxJsLlxzOG7MVee99Ek4zydSWIDcb?=
+ =?us-ascii?Q?N/nVVFU4X+N1xaY6yAUreYYTMqvfB6KBxLQ2Aot0JYmU5XeksUrnTqEblYAH?=
+ =?us-ascii?Q?mCdI/ECSg13lsVpiNbqpbvX6uvNY/wYRjAwtddobKhvRC5el8xG9KcvSzdc+?=
+ =?us-ascii?Q?gDhkeOAQs7D71dIJnfpfafAEZdY6NTfsKwLKW662vBcgYY8XncTo8YlDY4Wh?=
+ =?us-ascii?Q?a48vITU0DNse1HM9vkmPQ1EU/EbJ+ehWfNiiT8rlxefbxFjPFml2S1I+Jlq0?=
+ =?us-ascii?Q?0ojw/8m+ejOOaE97bY9CC3kCav7m9KC1v7ID4I8jspzfuY+YsOJwm11GwEtW?=
+ =?us-ascii?Q?tV2To9DpzTBWDSomIuDhMinIBKTUo2fpakuu3UJA67RB4Tuni7udePebn22F?=
+ =?us-ascii?Q?NvaknS9CGua8U5PIop7pZCQaWcmDRuQr6JgKo+qUNt6dS1gGwd1M88/YU9OP?=
+ =?us-ascii?Q?8dur5zLzsP3E1JAzf9dh5TcJmpgufjICrzOTdsXrRi1PSlhXYVTpds55/dGv?=
+ =?us-ascii?Q?bghz8iDxggGDlAoLZZ7VttfSVP19P4srSIlGzdyTsGlAc0DkfsGwNxPvg506?=
+ =?us-ascii?Q?A9n2iUiDUvi/up8HlAkYI8k7NcRSbzTRKKFmN0axxxBb+2asYlCwUvAnU+DV?=
+ =?us-ascii?Q?/zp4pz49ra7WnEGhV//NlfS5tkBN9BJ5b9B6wmokUBxkERXfxGX0ZYJYWHnQ?=
+ =?us-ascii?Q?EtNKDZiHGMwu3GLWMqm5FsBgeREAwDuKbKy95XBpv61NOmzZnRIcvuTINwEu?=
+ =?us-ascii?Q?zayhVDQMF1VOlsUfHXOtSH7UW7cDwQMnySAdpN8uizqBltMy4jkqL7GC9jsy?=
+ =?us-ascii?Q?hg+HupKdh7mDVKR/tyCaQUpcURMbhF5wBx8t5g0tUWs2t8Ye4DN+CBASVpMb?=
+ =?us-ascii?Q?CeRe5hR783cD5VlPJXUNL0bARSAfGl17VixEWMEXpxy712iIKNlKHpU4VD79?=
+ =?us-ascii?Q?HL037okEqntYwafNnHRwTZ4MeYsoiEX1xdj5Z2x90rj7iynJN7UgX3etPBnP?=
+ =?us-ascii?Q?lHmXBclJTdUV4yp1nCrOz8sXD1ZnGeHHAwuMl0CtbA6KSiIK/7YI6AL41ORv?=
+ =?us-ascii?Q?EcEodlRax5tmKVu9IqQOH4eHqWDufmcFhx/QW98lhtz0V1/XaU/xAJ4TjkSV?=
+ =?us-ascii?Q?R7sfBolqwVc33gGFV9FjnqJq+aeOn5rzOWIX7M4cY6cHZaRR67OeoYN/fzWM?=
+ =?us-ascii?Q?pPv4miW9OX/u8IBlt9rnnTkWPS9zgp8lm7umIhH5zBMT3FzKjTan57vDXigm?=
+ =?us-ascii?Q?ZlTt+MDMN0NGg9G8Em6llbHE9qOGgFSjRzqMrGp0esYBrLN+062bLGnFrEzY?=
+ =?us-ascii?Q?rNPXMf9Cmwz7wmfXdrn7tRuxVD2ctzV5cgPvapHKGzt+Feyom/hN0Z1dwEaI?=
+ =?us-ascii?Q?n1/a8wKxeazXMDxBldarHrq8EGcu8NWTgutQq+asPFJ0IIGBltUoUOWN6L/2?=
+ =?us-ascii?Q?S7/MvMayGuW6gMblPaI=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:33.4664
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:37.3367
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45976c8d-4da6-417a-120b-08de529e4a20
+X-MS-Exchange-CrossTenant-Network-Message-Id: d21156ef-730a-4c7c-0e6c-08de529e4c76
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	BL6PEPF0001AB53.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4308
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6181
 
-Not a functional change.
+It's only used for microcode loading on x86. By lib-ifying it we can make
+it go away automatically when microcode loading becomes an optional
+feature in follow-up patches.
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 v3:
-  * No changes
+  * New patch. Subsumes earlier conditionalisation of earlycpio.c on
+    CONFIG_MICROCODE_LOADING.
 ---
- xen/arch/x86/cpu/microcode/amd.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ docs/misra/exclude-list.json    | 8 ++++----
+ xen/common/Makefile             | 2 +-
+ xen/lib/Makefile                | 1 +
+ xen/{common => lib}/earlycpio.c | 0
+ 4 files changed, 6 insertions(+), 5 deletions(-)
+ rename xen/{common => lib}/earlycpio.c (100%)
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 2760ace921..71b041c84b 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -101,7 +101,7 @@ static const struct patch_digest {
- } patch_digests[] = {
- #include "amd-patch-digests.c"
- };
--static bool __ro_after_init entrysign_mitigiated_in_firmware;
-+static bool __ro_after_init entrysign_mitigated_in_firmware;
+diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
+index 388397dd3b..2b874dfd3b 100644
+--- a/docs/misra/exclude-list.json
++++ b/docs/misra/exclude-list.json
+@@ -121,10 +121,6 @@
+             "rel_path": "common/bunzip2.c",
+             "comment": "Imported from Linux, ignore for now"
+         },
+-        {
+-            "rel_path": "common/earlycpio.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+         {
+             "rel_path": "common/gzip/*",
+             "comment": "Imported from Linux, ignore for now"
+@@ -225,6 +221,10 @@
+             "rel_path": "include/xen/decompress.h",
+             "comment": "Imported from Linux, ignore for now"
+         },
++        {
++            "rel_path": "lib/earlycpio.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
+         {
+             "rel_path": "lib/find-next-bit.c",
+             "comment": "Imported from Linux, ignore for now"
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 92c97d641e..4fc0c15088 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -65,7 +65,7 @@ obj-y += wait.o
+ obj-bin-y += warning.init.o
+ obj-y += xmalloc_tlsf.o
  
- static int cf_check cmp_patch_id(const void *key, const void *elem)
- {
-@@ -127,7 +127,7 @@ static bool check_digest(const struct container_microcode *mc)
-      * the digest of the patch against a list of known provenance.
-      */
-     if ( boot_cpu_data.family < 0x17 || boot_cpu_data.family > 0x1a ||
--         entrysign_mitigiated_in_firmware || !opt_digest_check )
-+         entrysign_mitigated_in_firmware || !opt_digest_check )
-         return true;
+-obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd earlycpio,$(n).init.o)
++obj-bin-$(CONFIG_X86) += $(foreach n,decompress bunzip2 unxz unlzma lzo unlzo unlz4 unzstd,$(n).init.o)
  
-     pd = bsearch(&patch->patch_id, patch_digests, ARRAY_SIZE(patch_digests),
-@@ -676,7 +676,7 @@ void __init amd_check_entrysign(void)
-      */
-     if ( (uint8_t)curr_rev >= fixed_rev )
-     {
--        entrysign_mitigiated_in_firmware = true;
-+        entrysign_mitigated_in_firmware = true;
-         return;
-     }
+ obj-$(CONFIG_COMPAT) += $(addprefix compat/,domain.o memory.o multicall.o xlat.o)
  
+diff --git a/xen/lib/Makefile b/xen/lib/Makefile
+index efca830d92..60cfda4dfc 100644
+--- a/xen/lib/Makefile
++++ b/xen/lib/Makefile
+@@ -3,6 +3,7 @@ obj-$(CONFIG_X86) += x86/
+ lib-y += bsearch.o
+ lib-y += ctors.o
+ lib-y += ctype.o
++lib-y += earlycpio.o
+ lib-y += find-next-bit.o
+ lib-y += generic-ffsl.o
+ lib-y += generic-flsl.o
+diff --git a/xen/common/earlycpio.c b/xen/lib/earlycpio.c
+similarity index 100%
+rename from xen/common/earlycpio.c
+rename to xen/lib/earlycpio.c
 -- 
 2.43.0
 
