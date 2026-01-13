@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C81D2D0E6
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1201587.1517174 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E967D2D0E2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jan 2026 12:21:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1201590.1517203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP1-0004c7-NV; Tue, 13 Jan 2026 12:21:39 +0000
+	id 1vfdP7-0005KZ-Hj; Tue, 13 Jan 2026 12:21:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1201587.1517174; Tue, 13 Jan 2026 12:21:39 +0000
+Received: by outflank-mailman (output) from mailman id 1201590.1517203; Tue, 13 Jan 2026 12:21:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vfdP1-0004c0-K1; Tue, 13 Jan 2026 12:21:39 +0000
-Received: by outflank-mailman (input) for mailman id 1201587;
- Tue, 13 Jan 2026 12:21:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vfdP7-0005KQ-EV; Tue, 13 Jan 2026 12:21:45 +0000
+Received: by outflank-mailman (input) for mailman id 1201590;
+ Tue, 13 Jan 2026 12:21:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YaIX=7S=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vfdP1-0004bu-12
- for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:39 +0000
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [2a01:111:f403:c107::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 67fa6e01-f07a-11f0-b15e-2bf370ae4941;
- Tue, 13 Jan 2026 13:21:37 +0100 (CET)
-Received: from BL1PR13CA0398.namprd13.prod.outlook.com (2603:10b6:208:2c2::13)
- by SJ0PR12MB7065.namprd12.prod.outlook.com (2603:10b6:a03:4ae::19)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 1vfdP6-0004bR-EP
+ for xen-devel@lists.xenproject.org; Tue, 13 Jan 2026 12:21:44 +0000
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c112::7])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6a4f0484-f07a-11f0-9ccf-f158ae23cfc8;
+ Tue, 13 Jan 2026 13:21:42 +0100 (CET)
+Received: from MN2PR16CA0043.namprd16.prod.outlook.com (2603:10b6:208:234::12)
+ by DS7PR12MB9042.namprd12.prod.outlook.com (2603:10b6:8:ed::14) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Tue, 13 Jan
- 2026 12:21:32 +0000
-Received: from BL6PEPF0001AB54.namprd02.prod.outlook.com
- (2603:10b6:208:2c2:cafe::f5) by BL1PR13CA0398.outlook.office365.com
- (2603:10b6:208:2c2::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Tue,
- 13 Jan 2026 12:21:06 +0000
+ 2026 12:21:35 +0000
+Received: from BL6PEPF0001AB53.namprd02.prod.outlook.com
+ (2603:10b6:208:234:cafe::41) by MN2PR16CA0043.outlook.office365.com
+ (2603:10b6:208:234::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.7 via Frontend Transport; Tue,
+ 13 Jan 2026 12:21:35 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF0001AB54.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ BL6PEPF0001AB53.mail.protection.outlook.com (10.167.241.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:32 +0000
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 12:21:35 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 13 Jan
- 2026 06:21:29 -0600
+ 2026 06:21:32 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67fa6e01-f07a-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: 6a4f0484-f07a-11f0-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hCZSdt+g+kk8uxu/+8pUhFO39A+9o+G0nyKFbsT7hxMKr8+4PPh1jYtyWB1QXQe272IHw2Zc3seK7GhWn7OT0NO9TS7fC9eGcko44SW0iRJqO58SqtHIyqiSV42Vn1XdphHSLcmQIVsVWak8fTIYyHZyJ/6tAOs9MLrFYDQCHOKKtJ/Toqk7QFgUZAGdnH6e7TU26Cd8co/xFsJJSLy9eVwQHJOP1d3FosKLM7ax8n/wV62+zitTKtn6RP6Oyuq7P8rmRsNuxVpTRjI9FURIiSOZ0H2e++dTNrjN8fldfoXymBZr3qjBW1Rd6fhL1jhZ2ydn12qYNI3CSYgwSERecQ==
+ b=AilEAogS4ja1pODbCOBOKMS4Cx1w8bFan3u0bIkw+CeuDjNuLz+93FmT+Wyks7M83Hp6sHE9Qc4c7cEIJB3t2KPqC9Cj9XnNs2j3yhbdHlbbYu2l/VJsvN3FbtV3Ib+W+fRiP9gHmwpNhjbdgSt2xq1M+uIhDgyUNtOo7tOg0eB+lGTc6R9BOBW9PzkJ04ADfYPm3qCDN6Xe4UGTeK8cTavtAzUzPBgIq5Dkz+Ki+Gio5YrVx9djkl+CFrDk5EldeFbOdQQwwiSihuRjBf47Pg1AugbZFike4GZK6ZtVWM5ZGBI9anC0pNCEqjkYuXQeURALpnLVp03lloKrdp6psQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+m1iPvZUmvo84mbHL/Cn+u0RykzSub1/cEsen6YwdAU=;
- b=vfeQcB7l6Azna4EVGFtAiSbgaygh4OMLElwrJXGDCiLkr0rOELKYeBx9SVWsvlt7GJ2kkvSEncFU7UBVKQln5Ymd8ezYgtGlor2d1ls8lUe402VKExvsxU/wRS6K8soPpxK7WALGVqHqfnm4K6fz9ymiBaFqJaNzBiCRy5gKWOXl7G+MtRtLq0PNqq2fjo4dlX0Fcym6TGPcvFbCnd2hwhnGcDjcv7bryvVkZdAtJug/nXQ2XWjqUZ9NLsmyiqvFkx+BNGgkg98kEqTEgZWBFTxhTJ2q0kmWq7Gw14smqXHIWZLft2vGD8J9YsGjko7B7ldvwvHq6aCEcXpUv0f5HA==
+ bh=hUv6GaP4ZnzcennMc/wtXjho6dE/fymYbH5erIs2GIc=;
+ b=wTJxP/jFTcvfxGh1ey4vOeQztLdcGYWjDxkZbRCs6mTXP8Lx9AFtg1w74AoZAOd+TfRoDHSyEVrTkATPl0snOxFwAuy7aw2cIUSPq02EzqRhozUcqpCh7vrDSe+5cmKatsc1BXFa47mv2jKqYOa5oCMxYUebTFqM/qAPyiy0eOMF5kR4ytS4LsZwiYS+3tuNmKlqcHWDrl8jyLlNGkgWV15yR6Lpu2rYS5+lodtGdpZgztyTGNwS8zxK9c+Iz7N/UK6HjwZMBGYgAC1nDab80Nzoi4LbkHK0oQ8s3wEPvK5bvKBnyyOyWVmGlnG01fWXgfAwMzfuNLuN05TKI06Kmw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+m1iPvZUmvo84mbHL/Cn+u0RykzSub1/cEsen6YwdAU=;
- b=jisB1GYUHNT/SivInIsEt1L1zT/G3xcytHlbClIy5hfB79XmotP8Kfa0MIJ68IMfsJPlEmeRtTmvWybEYAk0RQ3kDbHIX+vKQLJRrHHYfR+NjuPF9MU+QMQET7x2q0I2tX1RPWyuS0msII8UXAexZ3jVVCb8HTyt9Qd2isvXpvE=
+ bh=hUv6GaP4ZnzcennMc/wtXjho6dE/fymYbH5erIs2GIc=;
+ b=H9aZxTLL/1TTsBN1TPAIUjwj8T8C2bmsTW+NDrtrDiiB7FyP+MI8Y0ju01HzJ7M5dCm2Q8kpmiKVO/q6l4MvbgU+ivOI5GxrU+8eb5TdYziv58wf6Kz72993dApjq+J96p7yY0fcHBBOTxjVf/2PcEnKUeBtqwxDW3DaF6fEnOY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,18 +82,18 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Doug Goldstein
-	<cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>
-Subject: [PATCH v3 0/4] Add Kconfig option to remove microcode loading support
-Date: Tue, 13 Jan 2026 13:21:00 +0100
-Message-ID: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Doug Goldstein
+	<cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 2/4] x86/ucode: Rename UCODE_SCAN_DEFAULT to MICROCODE_SCAN_DEFAULT
+Date: Tue, 13 Jan 2026 13:21:02 +0100
+Message-ID: <20260113122109.62399-3-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
+References: <20260113122109.62399-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -102,92 +102,122 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB54:EE_|SJ0PR12MB7065:EE_
-X-MS-Office365-Filtering-Correlation-Id: a7c5f678-d020-4cd4-a60d-08de529e494a
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB53:EE_|DS7PR12MB9042:EE_
+X-MS-Office365-Filtering-Correlation-Id: 337c51fb-67f2-4f78-dbbd-08de529e4b64
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|7416014|376014|13003099007;
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?kaVKAmd3DzcSu0dJlGmeHl2O/mNtzZ3Q+HMPJzLOJYZTtJv0dU3/NPHBGTn9?=
- =?us-ascii?Q?gtRndF0yqZXfS61vMunQuEzV6BdnTfuLunhifl/kASokJ90kUCIEWTKNV9gQ?=
- =?us-ascii?Q?llA+U2mhhF44QWK6GBK2PrtUvzPJxFj9AYnad0k8OzklKpyIc1v9N+r8Lkk+?=
- =?us-ascii?Q?KphzTjsh2VzvSxmqS6ZURmgIseDsIYW+QzWBcqNQiQvMSbb6fAadG2leGSRu?=
- =?us-ascii?Q?oSsNQh8xP6rhRHA7atxNT3FjGart72XTRgSu5Hez7SbZFDlYfhToIpWY/uuY?=
- =?us-ascii?Q?0W2w8arVLZ2MYO2Uv67NRyKEKqAE8K+yYJNkay5kvrh8PPpdj3Lkkfe3pO+Z?=
- =?us-ascii?Q?1xtr2GYtilaj6F8BA7norzvXPrs+qQZWgSZyRcsvbK76tTg/0gx1O7rKtF2e?=
- =?us-ascii?Q?oyb1akk4whgtyryvM2LuF2zP8/9w9dvU5t3DvMxqeibCYpAACmoBrJ0OO+Xr?=
- =?us-ascii?Q?6kozCppmAeHuqePXC2M/eG4DxnBHYMA3E3ELigKa2JqNvEZY2xcw3MDr0S/B?=
- =?us-ascii?Q?YxtAQY0Nno9+TOaHaYrxJ50OuWHqaYW2Y7uGfGUDoIBvy0J5bPihcAdAbbbJ?=
- =?us-ascii?Q?ZPIOKBOT5V+24nf1wkj0TuCCRFpqn9/E0rFaoWUdXsfVuUiB6VoF0AvkPUQn?=
- =?us-ascii?Q?xTqOT1+cV7D4E9mtmN8c67VkctmrPH5Z66WGXz+BCKXPZf5JA7aZXZB5K67f?=
- =?us-ascii?Q?E2jF2mdAfExsp1a31Pjx+55mWCYEk/Szg3ZCBSgOPhCus0rZmoU2rHcNXaFg?=
- =?us-ascii?Q?x45IpZBOabiz8dm8idCULoSn+XWp4bR8A4u6K5t8R9cL56XX81FatmXMe9FT?=
- =?us-ascii?Q?EyPP71ulyGQsIEBlgyJgf/7p9d+c5bROMlZdVO1CbasJs+vp7WY3IpujAUSv?=
- =?us-ascii?Q?aU7UzED9qYjBLHMWQyu9KDVUEUhSE8VNshPbBoDn54XJHYF5xyIrY4vRZdCw?=
- =?us-ascii?Q?e0/0QCpC7BQUiatMA173Jx8ZIHASv9rGJAlD+aL10qsHFkdQCo7b/utpPlzl?=
- =?us-ascii?Q?toGPDgJHNObS8qb6Bju2FdFqA2zrmIaZvAiunrv11FjZTMOZqdVDwZCCebmw?=
- =?us-ascii?Q?kgBxWHVOu3rWiC2wmLCuzy5qXvr/G8iYKEL1jXLnBSUm38jefyAL8ec2ZYvC?=
- =?us-ascii?Q?CRI0BVHRCfmyTNh1yhFAmxETvhi3TQxQeb30l2pWlD/6EaeCKBvrIG8bs7Hx?=
- =?us-ascii?Q?vMZ0+3qm0BDFB+5xRd1gX3OR+wMb/IwHobWxl1rK8rAJfiPw7cvVTIK/sD5E?=
- =?us-ascii?Q?vtzfvwqE34sloxQxiHGsFvME/PuImpBYUrD21hlDp9lo1wxoHRWKlIOdhqhj?=
- =?us-ascii?Q?cXXY65p3nv/+bW+cSATAuViWE1jMx7XaNSd/V8H9KtBD48KCFqhvmx/GE2Fi?=
- =?us-ascii?Q?lP23gQKtHgVjwY6UoQ8GUv978EAXdwvPYGHMhFWEzMhCTVUcQCB79m0+wWUH?=
- =?us-ascii?Q?Cl3S3SCvatSGeQfRv/fUlekuom8Ijnp2R/6XkuzAO5z+9v0eBxCt2BCB3eWs?=
- =?us-ascii?Q?sNIjPuuolOYTpPVhLAugF7whOsNrTzskgj0L7iJ30pab1ArG7hrpUYE3J9Jl?=
- =?us-ascii?Q?sm4Mj8Nrk1h+PiBOKAk5eVpFI7PbpKfM56G5dJle?=
+	=?us-ascii?Q?YUcsi54qLmSMqVSpk5TKbCSNEg5ZQLpc7p6jYsQZACCm9I6C2pMVULJB6gUA?=
+ =?us-ascii?Q?5xaeirQiJVAggZPrY6hV2mdeZjuIr3Uj6eu+he92/UGCFzbVLn1WrvF7g2nS?=
+ =?us-ascii?Q?tAmPAjedSFieTB3hmw5tFytk1Hp65GcNkKkySBbtZEL8W5Bz57GY+rcUXFZN?=
+ =?us-ascii?Q?9o+0sTlZmP3sv5Q6XWuOt9pHr4zcJTn6eiM/TZZTF+umC2J0wg8qOxSfZjS5?=
+ =?us-ascii?Q?lMXOQeXZr3uacKw0gvPIK1Y1IFXm93cKNAHhPxd+ukiPeGErjCxuIzaY8N/A?=
+ =?us-ascii?Q?dknx+neE0CGjPBt3jmFW2EJtKkQSbcgJ+826hJpY1M3M1gqrLpyEuPUdiGkM?=
+ =?us-ascii?Q?+//oqLCsSRFmAMAMVzJi1ZweT/ztqOMkaZcg406pYsz7dDP656lYL8HhJom1?=
+ =?us-ascii?Q?ELZANx/Mi56efk7XSq+OzkDwMTyWPBpx5avBcJO9SXXOzsd6O1QOZCJwg8Pa?=
+ =?us-ascii?Q?5+nCnMKJmHNRCHvVhWhSZ7N4nqfS0jnsDO8CWPCa7yUJcsjaogbFcPBqdzwJ?=
+ =?us-ascii?Q?ERtWnJBZT8SFkMsDnL4jm2vEMaSIrpL1Jzp7RBl6ZIASo0RvDXjpRn08xj+Q?=
+ =?us-ascii?Q?3PoVSbpHC5W/714s/Utp5vzHHsVkS94Z8kgLGfHi9jM7HILIxGSx9tNRb5MV?=
+ =?us-ascii?Q?lEOmeRRVKBoVOUVNAjerXShIOm1vNUu7IQmwW+DegcuQ2Y7cfpcYtHcIK2yW?=
+ =?us-ascii?Q?/SYMzK8bmDxW001bCFvDV9VUZDaxRXQ4EuJ+LWZlhcPcvUEFSP13HhHhWV49?=
+ =?us-ascii?Q?SQu8r0vUiEwkx192IT+JedRT1sOcNLSchcw5icIKgtkQbgIy4x98BSq32dFx?=
+ =?us-ascii?Q?gLWUbJ+WunK4pEdlKPrXttQn1ZinSc/uLALGMxQmQNZBD0QNtf5MrbLlDsAT?=
+ =?us-ascii?Q?rMiAkQ/tbuGeTB+y8lHuX64hlw6kFTQMgx+Bhcd6SPW3x51fK+LrWy00TsbQ?=
+ =?us-ascii?Q?W9/1XJTHKaHzJ6iT43Cn6bLkt7VZl8HB469XFSvsOu961KJnWPP4DKsWk3br?=
+ =?us-ascii?Q?ZC8GK8aQlPVK2Ymxs4jx5lOoHNWx6DoDoERemxBInmC1RUSluuMM37ODsf+F?=
+ =?us-ascii?Q?9arjnqCPhAeAVWI1HEkZncXxTnDcZHV9ZneozhspSRPQoznbKdaB4WDEuR8d?=
+ =?us-ascii?Q?t4Evwnr59EPCU52RzK2MuObDYzJxxn5uCmRoPo5GzwtmtuQznvApYjRgD0Tx?=
+ =?us-ascii?Q?1OFTe/NKehlK3ZPzi915uC43A/vkoo2ouxxieTr2/ugs6zUySwryyohf83GR?=
+ =?us-ascii?Q?KLjOusdh+/mVEs9ww3wfPHNb1rUy0R43Ze4L13nivnx/EvCLhMxfLLWG4zqa?=
+ =?us-ascii?Q?qjiyX4DwfNlBNcHM745BOzkafCQjtjl0ty66JT6YJe/xu2fBW3dIdXANerP0?=
+ =?us-ascii?Q?af6/wDsIZiLgfo9RYHO96tMWwof0FNpGBWarUz9XqsZMBnlwoNEY4o91HeOr?=
+ =?us-ascii?Q?vIZ6VOeSnc2zGi0XBIGir8+H2P1WtoHHB2oki9BXWrfczKSQ/Awwc8CNVnlZ?=
+ =?us-ascii?Q?LhoYhNgb67jmLgcrWW1iXvOwL9H4xZNH1nuxb42ZZaQLPoDBUmD/dd9Nyjbu?=
+ =?us-ascii?Q?AVjMRi+g1JoveSLgrSA=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(7416014)(376014)(13003099007);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:32.0700
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 12:21:35.5954
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7c5f678-d020-4cd4-a60d-08de529e494a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 337c51fb-67f2-4f78-dbbd-08de529e4b64
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF0001AB54.namprd02.prod.outlook.com
+	BL6PEPF0001AB53.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7065
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB9042
 
-Hi,
+We'd rather have the full spelling in Kconfig. Adjusts every other
+reference to the name too.
 
-One more day, one more revision. Same as v2 with feedback addressed.
+Not a functional change.
 
-v1: https://lore.kernel.org/xen-devel/20251112162219.226075-1-alejandro.garciavallejo@amd.com/
-v2: https://lore.kernel.org/xen-devel/20260112150259.74535-1-alejandro.garciavallejo@amd.com/
-pipeline (green):
-    https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2260019646
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+v3:
+  * New patch. Previously integrated in larger patch.
+---
+ automation/gitlab-ci/build.yaml   | 2 +-
+ docs/misc/xen-command-line.pandoc | 2 +-
+ xen/arch/x86/Kconfig              | 2 +-
+ xen/arch/x86/cpu/microcode/core.c | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-Cheers,
-Alejandro
-
-Alejandro Vallejo (4):
-  x86/ucode: Fix typo s/mitigiated/mitigated/
-  x86/ucode: Rename UCODE_SCAN_DEFAULT to MICROCODE_SCAN_DEFAULT
-  earlycpio: lib-ify earlycpio.c
-  x86/ucode: Add Kconfig option to remove microcode loading
-
- automation/gitlab-ci/build.yaml        |  2 +-
- docs/admin-guide/microcode-loading.rst |  2 ++
- docs/misc/efi.pandoc                   |  2 ++
- docs/misc/xen-command-line.pandoc      |  4 ++--
- docs/misra/exclude-list.json           |  8 ++++----
- xen/arch/x86/Kconfig                   | 16 +++++++++++++++-
- xen/arch/x86/cpu/microcode/amd.c       | 22 ++++++++++++----------
- xen/arch/x86/cpu/microcode/core.c      | 17 +++++++++++++----
- xen/arch/x86/cpu/microcode/intel.c     | 11 +++++++----
- xen/arch/x86/cpu/microcode/private.h   |  2 ++
- xen/arch/x86/efi/efi-boot.h            |  3 ++-
- xen/arch/x86/platform_hypercall.c      | 22 +++++++++++++++-------
- xen/common/Makefile                    |  2 +-
- xen/lib/Makefile                       |  1 +
- xen/{common => lib}/earlycpio.c        |  0
- 15 files changed, 79 insertions(+), 35 deletions(-)
- rename xen/{common => lib}/earlycpio.c (100%)
-
-
-base-commit: a2a34d76643e49ccc949296c9a45888034e50b55
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index a6fc55c2d5..b69bad9202 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -310,7 +310,7 @@ alpine-3.18-gcc-debug:
+       CONFIG_ARGO=y
+       CONFIG_UBSAN=y
+       CONFIG_UBSAN_FATAL=y
+-      CONFIG_UCODE_SCAN_DEFAULT=y
++      CONFIG_MICROCODE_SCAN_DEFAULT=y
+       CONFIG_XHCI=y
+ 
+ debian-13-x86_64-gcc-debug:
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 50d7edb248..15f7a315a4 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -2773,7 +2773,7 @@ microcode in the cpio name space must be:
+   - on AMD  : kernel/x86/microcode/AuthenticAMD.bin
+ When using xen.efi, the `ucode=<filename>` config file setting takes
+ precedence over `scan`. The default value for `scan` is set with
+-`CONFIG_UCODE_SCAN_DEFAULT`.
++`CONFIG_MICROCODE_SCAN_DEFAULT`.
+ 
+ 'nmi' determines late loading is performed in NMI handler or just in
+ stop_machine context. In NMI handler, even NMIs are blocked, which is
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index c808c989fc..d5705e4bff 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -331,7 +331,7 @@ config REQUIRE_NX
+ 	  was unavailable. However, if enabled, Xen will no longer boot on
+ 	  any CPU which is lacking NX support.
+ 
+-config UCODE_SCAN_DEFAULT
++config MICROCODE_SCAN_DEFAULT
+ 	bool "Scan for microcode by default"
+ 	help
+ 	  During boot, Xen can scan the multiboot images for a CPIO archive
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index fe47c3a6c1..dabdb95b4c 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -101,7 +101,7 @@ static struct microcode_patch *microcode_cache;
+  * location we require that they are not both active together.
+  */
+ static int __initdata opt_mod_idx;
+-static bool __initdata opt_scan = IS_ENABLED(CONFIG_UCODE_SCAN_DEFAULT);
++static bool __initdata opt_scan = IS_ENABLED(CONFIG_MICROCODE_SCAN_DEFAULT);
+ bool __ro_after_init opt_digest_check = true;
+ 
+ /*
 -- 
 2.43.0
 
