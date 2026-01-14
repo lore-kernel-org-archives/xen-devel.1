@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D60DD37E37
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jan 2026 13:47:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1203141.1518440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB68D37E37
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jan 2026 14:03:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1203176.1518450 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vg1DV-0004fB-J9; Wed, 14 Jan 2026 13:47:21 +0000
+	id 1vg1T8-0007qh-SK; Wed, 14 Jan 2026 14:03:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1203141.1518440; Wed, 14 Jan 2026 13:47:21 +0000
+Received: by outflank-mailman (output) from mailman id 1203176.1518450; Wed, 14 Jan 2026 14:03:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vg1DV-0004f1-FL; Wed, 14 Jan 2026 13:47:21 +0000
-Received: by outflank-mailman (input) for mailman id 1203141;
- Wed, 14 Jan 2026 13:47:20 +0000
+	id 1vg1T8-0007qa-PO; Wed, 14 Jan 2026 14:03:30 +0000
+Received: by outflank-mailman (input) for mailman id 1203176;
+ Wed, 14 Jan 2026 14:03:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=81wl=7T=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vg1BV-0001vr-Qe
- for xen-devel@lists.xenproject.org; Wed, 14 Jan 2026 13:45:17 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
+ id 1vg1T7-0007qU-D1
+ for xen-devel@lists.xenproject.org; Wed, 14 Jan 2026 14:03:29 +0000
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [2a00:1450:4864:20::442])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 42529160-f14f-11f0-b15e-2bf370ae4941;
- Wed, 14 Jan 2026 14:45:16 +0100 (CET)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-47ee301a06aso8479145e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Jan 2026 05:45:17 -0800 (PST)
+ id cb789862-f151-11f0-b15e-2bf370ae4941;
+ Wed, 14 Jan 2026 15:03:26 +0100 (CET)
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-42fbc3056afso5110931f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Jan 2026 06:03:26 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47ee119aa2asm22125615e9.4.2026.01.14.05.45.16
+ ffacd0b85a97d-432bd0dacc5sm50125688f8f.5.2026.01.14.06.03.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Jan 2026 05:45:16 -0800 (PST)
+ Wed, 14 Jan 2026 06:03:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42529160-f14f-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: cb789862-f151-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1768398316; x=1769003116; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=ShrMN6y1f3Pp4MjOmW8owsNUITc4IfDLUGq6mur2Md0=;
-        b=WRUsMAEQ24+uZq5stpEjAJLj4Zy4PImKVyFloe2w+43veGxlyNenK/iSAylovGiztr
-         bQfQMF1FQ1ESONm+7Hn0vFkgHZG6iD6v03p2ZDY52rKd1ytrBi0D/5Upb89Bvtd71dLF
-         FrfFNjjgBjymGWwRB9gktmEmsz3oeTr++t1m2+hn1BuxMsR5Xv2R8B2Su4YV/fmw2YGv
-         TBoLPddK1++nTiNN1k6iUkDbNaLcW3d+t9r5ySSD1P+301P+I98AkudIe0HrZlE4dYVw
-         EPuD6ZIPLoFG776DmWwkgKI3zvt1TraES2dgtSA+CtuJO/6aocSZEkMKLbDj3TetCC7M
-         i38g==
+        d=suse.com; s=google; t=1768399405; x=1769004205; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uDgFbJTg+T7n3yCT1y6vxNtm9qhtDEu+7IPLP3E06qI=;
+        b=Uy6896eBhIhaDOMoYhLytsXXiA39LkZPWyyiNXOKwGf0EpfY3uUw046M2J1YLJHmzI
+         DlUZcbASQpxv9jDybRbU5FEiK2tIbKUY+IM1bRzZtxT3DstVMOUsKVS/QajXTH3aAGSu
+         BVVBM+nSE3G7fE+DQ6k8wr5T6OYA9aLKMYHZ9X2TGW8s8CT/KqB8tH+HzwodRCfp6Vyv
+         WsMQxQQ/AFPeLth3yZ7hnc2xVP6ycA6U3ayXsk9IbOIQW1eqVbdahrML3pOxZM9Lphz1
+         W2YsrfcpYRhThEq8zlVFd8g1l3F2P0GgGYjZK8WnGc7KeSHi5qU+H0TxqMz4Csr8JpfK
+         shJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768398316; x=1769003116;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ShrMN6y1f3Pp4MjOmW8owsNUITc4IfDLUGq6mur2Md0=;
-        b=cuF5XHnd7accBGArKNilQg7yLKfVywetaaIaTuKkLTsTHSPY6GW81b7HcZG2mHML5G
-         CQSLBPko4FYLxdmF6Wrz87gXWolNe526Tt0FkLK/2IjflRIu2G9XEcbjb96y07BM1EBj
-         xxRA2o5QuVWh7cWIh9+wSIb25CbR93W3acw5MK/4wFvDPKW4Ap/QgpSzCPbl+TO4fvmM
-         EvMdVfDV5Dp4eTQtTNpvnrmw/Hl/4oHB1Q2WGANAIKz97kzKxOPn0T3m8mWVD49qEbnQ
-         rqEPWG7bpxX/bZz/aN/F7xN7vGpAPpl/fpqR1ss1atIx+QPa2TXaDnpqFinJnI3mVhM4
-         g9jw==
-X-Gm-Message-State: AOJu0Ywq1TtT7bOYMtZWnG59qLrRCuA45VC8FX8LNXu31PYJxnqB+LhB
-	aJrt9Qm4qknZZvrNACNRpokVUi4bYMvhFVN2R1HOL2XSMJbQ3ISYvX/xmaT1qkXGo5TFOB0ZBlZ
-	dA6Q=
-X-Gm-Gg: AY/fxX69gz/xiLn/G8uenB/Nn2jIsSNEn+pZUFpqCAv2EhlrVssrS3aEL1GIDunzhzs
-	V3XE+nuNPFVmkx0TlhtrGlGPN07QIFfHVGUIjcWZ1PFxqgUDXypNblpz1b3is58/QLzf+rkEG0G
-	ZHk8cvlnjF16SL1tLhclY6tb2oJn2N7ljAW6BNEoWb/MOOtWAPz8n5moRsSaUAfpelzshLJCHHP
-	IcfgZQZputUBma98ldtQF+oGT2xhZgKrFAqI1BYBsd5Vs18XIIrGr87gArDKB4ATDwTFDcIYkbz
-	MCnSuOIkqHDLogoYyUi3Df43C4t+dLIbi2apLO2Xe6HrQRmW2VlRxAVjtamH4agqR+9FeobZ1d6
-	89dVf1OZcSbswEGsjmNHwkhSIw72R0+LMSHKdgmX1l2ev+i7pcuIAAsZcELzTAkbaFT7E4qeChL
-	u/NLpRUo6OyX47QtB1cbd98p9kowWKsiuzRUhbWQdZvojzamf2v3wlRjxAKGKxdOye/b0Ek5yJp
-	xdpE9PIwVjxng==
-X-Received: by 2002:a05:600c:c8d:b0:46e:59bd:f7d3 with SMTP id 5b1f17b1804b1-47ee33768c9mr30700245e9.20.1768398316425;
-        Wed, 14 Jan 2026 05:45:16 -0800 (PST)
-Message-ID: <cbd64113-621a-409a-ab05-f593999e67a9@suse.com>
-Date: Wed, 14 Jan 2026 14:45:16 +0100
+        d=1e100.net; s=20230601; t=1768399405; x=1769004205;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uDgFbJTg+T7n3yCT1y6vxNtm9qhtDEu+7IPLP3E06qI=;
+        b=H+DXu0h3hqIMXS9Du8CInumdQIkrO2pItiQ86vS0bT+3Y2/nEAFldfR8clvrcUK3b9
+         kKAanei9FSD2eKJzTvdcEX5DU1Ni767gRHwmRjm+Mr4AU4s+SbOM6s4AiZN6y9qXvnEm
+         QuaMIj0sjaTEeXpqMW6hVTCxCugCk76QUWEq8RuoITNdOT9LNUS34+pDrokhHz7HIXxG
+         kw5TTn3AnwEtWOt1fmtOIde70dlSeSDPmKoO+e8WaZ/7NweMcwlMJCMHN3RrLNZURr3T
+         xhvBoGatdBPA2eZN7bIPDPnl4y+EUns54knmKLmk1MLgnlNFpQPVBz99zz0P8JZk8UUw
+         ChgQ==
+X-Gm-Message-State: AOJu0YzRRg5rnFJh6BULF4T6UHJhJKkPPpa3VxqTBqeKOahkp6mqln4g
+	k4tuF6wr6vF/74XJD/+8n35wpCKpKnHTlYl8TEAJPRuYAWOm06UwJ/3hM/nxxodrGlVgm4zir8o
+	1YIA=
+X-Gm-Gg: AY/fxX7EO17KXx2+z7JVHvfU+7C4EAWoCSAAXz5m4+9eP4BokQFV4KVDCwBOtaNZ873
+	HuTZV3L0GQK8R5S42NawkTg68zNE3S4Q2pGE4YAPk0PErhnE1Vc7PQPLM+VYSk8Igs5RKcMrD1p
+	+NoiNzMdC7enq1mmyoBNmqe+w4JoP3nhcms44S36JngMmWsyWfEwTQEROegzE7KyWMZ9eTFzMFI
+	kv9TLutQ+1XQ0cnHK1sDtJHP5gygyKe+fM7x/bzGcdjrq+cvdknDqbMd3CWKRJEexNmuS0uEq6A
+	sSUr5h9uz7dCAj8dpndGIrDJWCczF+u0aycmPM9MOr0ToWSJOIB6c8KGR7ShJt1fLTDWS4Xd0hm
+	G40ITHyY27PUR1EGvNGbwEM3/qcDWeBVizGZIWfCJAEn6/dDdLJnL1EDarHXfxoX36aPGZ1I2Do
+	mv2BBNMh92G+LjS0Q/xk/oAsbVtrdjan7Gn+lPHh460Oa6I3WaPvBzGCEVW4E3V/BuflEIDbdaE
+	b4=
+X-Received: by 2002:a5d:584e:0:b0:432:4c01:db00 with SMTP id ffacd0b85a97d-4342c504ff2mr3629568f8f.27.1768399405467;
+        Wed, 14 Jan 2026 06:03:25 -0800 (PST)
+Message-ID: <ab8a6f18-522c-4493-b46e-0f51c4350bc2@suse.com>
+Date: Wed, 14 Jan 2026 15:03:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v3 4/6] x86/Intel: use host CPU policy for ARAT checking
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-References: <4d3a3576-2d3c-42ec-8551-18f1f0982e17@suse.com>
 Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Juergen Gross <jgross@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] build: avoid Paths.mk in hypervisor build
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -120,85 +121,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <4d3a3576-2d3c-42ec-8551-18f1f0982e17@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-There's no need to invoke CPUID yet another time. However, as the host CPU
-policy is set up only shortly after init_intel() ran on the BSP, defer the
-logic to a pre-SMP initcall. This can't be (a new) one in cpu/intel.c
-though, as that's linked after acpi/cpu_idle.c (which is where we already
-need the feature set). Since opt_arat is local to the cpu/ subtree,
-introduce a new Intel-specific helper to hold the code needed.
+Its inclusion placed where it is, it affects the hypervisor build as well.
+The hypervisor build, in its _install rule, uses $(DEBUG_DIR), first in
 
-Further, as we assume symmetry anyway, use setup_force_cpu_cap() and hence
-limit the checking to the boot CPU.
+	[ -d "$(D)$(DEBUG_DIR)" ] || $(INSTALL_DIR) $(D)$(DEBUG_DIR)
 
+$(D) is an absolute directory (shorthand for $(DESTDIR)). $(DEBUG_DIR) as
+set by Paths.mk is, too. Both point into the build tree. The two simply
+shouldn't be glued together.
+
+Note that the earlier
+
+	[ -d $(D)$(BOOT_DIR) ] || $(INSTALL_DIR) $(D)$(BOOT_DIR)
+
+continues to be working fine, as BOOT_DIR continues to be controlled by
+config/StdGNU.mk. Its DEBUG_DIR isn't taking effect anymore, when for the
+hypervisor build it should.
+
+And of course behavior now differs between building xen/ in a tree where
+tools/ was built before vs in an otherwise clean tree.
+
+Fixes: 82b9cc04a7c7 ("build: add make macro for making file from file.in")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-The need to move where cpu_has_arat is checked would go away if we did
-away with opt_arat (as mentioned in the previous patch), and hence could
-use cpu_has_arat directly where right now XEN_ARAT is checked.
----
-v3: Re-base over naming changes.
+This is clumsy, but I can't think of anything better. Suggestions anyone?
 
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -1666,6 +1666,9 @@ static int __init cf_check cpuidle_presm
- {
-     void *cpu = (void *)(long)smp_processor_id();
+--- a/Config.mk
++++ b/Config.mk
+@@ -162,7 +162,9 @@ endef
+ PATH_FILES := Paths.mk
+ INC_FILES = $(foreach f, $(PATH_FILES), $(XEN_ROOT)/config/$(f))
  
-+    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL )
-+        intel_init_arat();
-+
-     if ( !xen_cpuidle )
-         return 0;
++ifndef XEN_FULLVERSION
+ -include $(INC_FILES)
++endif
  
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -665,10 +665,6 @@ static void cf_check init_intel(struct c
- 		__set_bit(X86_FEATURE_NONSTOP_TSC, c->x86_capability);
- 		__set_bit(X86_FEATURE_TSC_RELIABLE, c->x86_capability);
- 	}
--	if ( opt_arat &&
--	     ( c->cpuid_level >= 0x00000006 ) &&
--	     ( cpuid_eax(0x00000006) & (1u<<2) ) )
--		__set_bit(X86_FEATURE_XEN_ARAT, c->x86_capability);
+ BUILD_MAKE_VARS = $(foreach f, $(PATH_FILES), $(shell awk '$$2 == ":=" { print $$1; }' $(XEN_ROOT)/config/$(f).in))
  
- 	if ((opt_cpu_info && !(c->apicid & (c->x86_num_siblings - 1))) ||
- 	    c == &boot_cpu_data )
-@@ -693,3 +689,9 @@ const struct cpu_dev __initconst_cf_clob
- 	.c_early_init	= early_init_intel,
- 	.c_init		= init_intel,
- };
-+
-+void __init intel_init_arat(void)
-+{
-+    if ( opt_arat && cpu_has_arat )
-+        setup_force_cpu_cap(X86_FEATURE_XEN_ARAT);
-+}
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -176,6 +176,9 @@ static inline bool boot_cpu_has(unsigned
- #define cpu_has_fma4            boot_cpu_has(X86_FEATURE_FMA4)
- #define cpu_has_tbm             boot_cpu_has(X86_FEATURE_TBM)
- 
-+/* CPUID level 0x00000006.eax */
-+#define cpu_has_arat            host_cpu_policy.basic.arat
-+
- /* CPUID level 0x00000006.ecx */
- #define cpu_has_hw_feedback_cap host_cpu_policy.basic.hw_feedback_cap
- 
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -102,6 +102,7 @@ extern void setup_force_cpu_cap(unsigned
- extern bool is_forced_cpu_cap(unsigned int cap);
- extern void print_cpu_info(unsigned int cpu);
- extern void init_intel_cacheinfo(struct cpuinfo_x86 *c);
-+extern void intel_init_arat(void);
- 
- #define cpu_to_core(_cpu)   (cpu_data[_cpu].cpu_core_id)
- #define cpu_to_socket(_cpu) (cpu_data[_cpu].phys_proc_id)
-
 
