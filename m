@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 320ABD44C67
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 15:34:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1205360.1519651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46769D44C69
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 15:39:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1205387.1519670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgPMM-0005g1-E5; Thu, 15 Jan 2026 15:34:06 +0000
+	id 1vgPRN-000715-9f; Thu, 15 Jan 2026 15:39:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1205360.1519651; Thu, 15 Jan 2026 15:34:06 +0000
+Received: by outflank-mailman (output) from mailman id 1205387.1519670; Thu, 15 Jan 2026 15:39:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgPMM-0005fu-Af; Thu, 15 Jan 2026 15:34:06 +0000
-Received: by outflank-mailman (input) for mailman id 1205360;
- Thu, 15 Jan 2026 15:34:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vgPRN-00070y-6m; Thu, 15 Jan 2026 15:39:17 +0000
+Received: by outflank-mailman (input) for mailman id 1205387;
+ Thu, 15 Jan 2026 15:39:15 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=6aKL=7U=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vgPMK-0005fo-CW
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 15:34:04 +0000
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [2a00:1450:4864:20::341])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9e37c8b3-f227-11f0-9ccf-f158ae23cfc8;
- Thu, 15 Jan 2026 16:34:02 +0100 (CET)
-Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-47f5c2283b6so6734265e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 07:34:02 -0800 (PST)
+ id 1vgPRL-00070s-MK
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 15:39:15 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 580f6593-f228-11f0-b15e-2bf370ae4941;
+ Thu, 15 Jan 2026 16:39:14 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4801bc32725so3899485e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 07:39:14 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47f428acd0csm52404385e9.6.2026.01.15.07.34.00
+ ffacd0b85a97d-434af6e1b7bsm6546085f8f.34.2026.01.15.07.39.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Jan 2026 07:34:00 -0800 (PST)
+ Thu, 15 Jan 2026 07:39:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,66 +47,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e37c8b3-f227-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 580f6593-f228-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1768491241; x=1769096041; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1768491553; x=1769096353; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=NbpdJ4oz/23kVurwARU+dvJPq+baPgP/RkY7VRdYnyw=;
-        b=VxXN2THvrH8/Hpaw9EPbTsdWnlgUDa+sKxZkBpG1wBdABgnI0c+/KL2PxMv+ZMgzQK
-         /5Kq7M84fk+pPVTjkb9/BEQw2hsbcaGq3s6pIJlfFxn2kV1tYbMfC1an3YSJrmz1JC9Z
-         avuiH/SU/13Qj86st2nJvV1VFRkM8GJzSPqz84Jr0dE4G65RWM0eK3zioDhaPNFiwOOw
-         sKz4RdJ4avSkvCM5Ls7i3H/2e7Kn9tCZUrwR09tNXJpEWBNGCbkIAdfVMZivuCQSnasH
-         FSmtbFER6SosRhoRh2H6YKObV55IJBWuWtRuJT2vvNMma9LexbLdHgBgiZqwvaxMrdj2
-         2i7g==
+        bh=JidgEfI3Auog5+NvBHtFBi7soVJjFhRg70GZ295ltJY=;
+        b=VYRUgIokBSiG0pl2iJzeeb5pJRyVKZsITbkL1Diy7bpczlkG/gpesCAA7HLpIIirvb
+         +9QQNF1NEj/5cfWZcL1XR9cujnegsOpIK8Jk9euT/H4AmvXlz+wFN4LTFNsd4wEinL2r
+         qlg6OLSXSPFlWczWdqLXtbq3hwtXNYa4aOFedYooE4imMeFPPnc0oX6Md1XDiRjmFPUR
+         pSbqZ4sSuwgM7MCbFxqYMgItwLMf8k8SGvCke3WdTOJFMSzLQjwmVRDFMMn0dJhfK/pn
+         jSDP/U8Tp71RWuxUWYpHm6ue16lLyyfQ2fpqq2jnf++d6GGpNarFjVl+tIGoRjA1wvFk
+         7/yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768491241; x=1769096041;
+        d=1e100.net; s=20230601; t=1768491553; x=1769096353;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NbpdJ4oz/23kVurwARU+dvJPq+baPgP/RkY7VRdYnyw=;
-        b=P/Mvd3WrdkBOYm8alJv1P8RdWNCUZYTtvZg/UrVPqZGGo2BQta1WzMlWNmK7bzCrm/
-         uMlop+ZGxvGMEpaR1YuOe83Pusy+18ycJy6/vmowQ1LwvebNUOqx3Z7taIAP53eTqKw7
-         IRe2yEGpKdVVwhMDbiiPol7CLpWJyjbyg2hpNlK5jPX79d6Re1BRlRh+/S2yFtZExN+Y
-         tpwpdke5nwEms20P5cZDpm8jCxy+zSg/V1ZcAMSXzOZMDZDltm8Etnm2SY4UseNq6IQh
-         UCU96MGo4F4aKWGmAiEQrOpi5boJJxK0fT78w9bsy44XJ7o4VCkSvCZaOrH/+oFVmNd4
-         m5CQ==
-X-Gm-Message-State: AOJu0YylI/t0axxK6Whj2iiLsS73BlWUzSbeSGOnV2084gzlIAMrURJO
-	dmMXTBZj6w0O5btM2CGvF+jFVtKIaJrXmbB59Dr6CYtMWDciY+F9GXKgayJsYK1Hyg==
-X-Gm-Gg: AY/fxX650Xsl7NXvde1okftIcluezdAxek5eRQuR1zU5ldpNJqScPTtMMm5JLMfKo6V
-	AX4004uf0OC/atBHOexKDFYbSbnDz+AKUec1uIpxZ/lhvlLT1f7WqUKGvuogQQFWf1rKTykD0W0
-	cFk+tyOfm6wJIUJKMhfHw0lPoAL2dOHs5y1s9O0gdsvMVLEemnmoXdfkPoZXwmUO/7SE0IlNyb9
-	iR6SFFTEH4cxjxir0yP7Fs3JxqA9cAhPa/37keXWn4k/qmFBfL5A35pcWYVyY+0Vc9Arc8hEKME
-	jLzkV8T+HKiAHzWSKGVjPPQA9c7coODk1mdooroYUYer+oAm6BuFCSJejRitQXIhDl+0rD1EzLo
-	AhUxyvem2UZnNIsVXFKXfWtWhJp8V3EJeS2hvF75rcowZHG/gQoFM+06Oc+JGxS4Ahaj/PYiVHt
-	mQuhbzC39jhEmMwFElWTB7errW1PC15LqgL4aAsNFzU9fJJyq1sTtpLNV8EcAoB73mIUPja3W2V
-	WE=
-X-Received: by 2002:a05:600c:3e14:b0:47a:9560:ec28 with SMTP id 5b1f17b1804b1-4801e30b8ffmr2183025e9.13.1768491241530;
-        Thu, 15 Jan 2026 07:34:01 -0800 (PST)
-Message-ID: <d237b414-eec7-4cf2-bf1c-0c12b0f9f364@suse.com>
-Date: Thu, 15 Jan 2026 16:33:59 +0100
+        bh=JidgEfI3Auog5+NvBHtFBi7soVJjFhRg70GZ295ltJY=;
+        b=rawSHCwwnXm7vxi7qdvxtdhQXrM9dNcjWAb2ttJnT4J66+ub5IC0dKrb306LDfC+0I
+         AYZev6mit5OSaV6pXRMJvvMb0bUd96gZvG6YBP3LGIcNeY90UeByJIB6oFel5Aw8I8Ac
+         7XvSJCfPO5ICUvgnigimM/MPBk9cCMD11WDzlX6rw5nKg3OsUHYpwaiB0DFbYW8OSF8z
+         Yz9zj0SGTJiPd8sGEZ3/FpMtE6l/US5wkPaWEiic9bCRoW2u5BxrTAYbvZDOd8daJM6R
+         Nv/kHn3rWFdoyF3/WoxI5t0XUVJCXY2QizoxzPP4D05n4FgsYx/CVR3O389oNFjdnE2j
+         adxg==
+X-Forwarded-Encrypted: i=1; AJvYcCWeJHYws5mXRpu3C+BKz/DptVDujL6guK4BXPQ87xcJoao/5uNgZFpi8bTXOAAx+a9stULofJUhBfg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxWLICrhCRaNPQuStcSlDhWJ+ssJVfZM5zlLMsBPrdaO4py1YpQ
+	n4/PMQFP5baJeTNscDn3qea0q3bk/zWsPLctrT3au0YyU5vHcnqRjJhEyo/fFSS3cQ==
+X-Gm-Gg: AY/fxX5ibRTwSXEs2wKLMWjGMXNTRhSKi9vQVULU8BNbr7UWOv6Gj6nkjOj7BXHjsGi
+	pkY/a8OMxo5oOeereGzY5wQCP/Y0ZvWzLhK1FuUzvOxaEDKboCJtR4eT7Pm6OApqeMpHzft48vy
+	aTixaT3XR7Qelbt9s+LD/cJNe1ojakB6dL6jm0dmjBjOToW4TH9020qCqfxpyh1B0byIlxjYFoU
+	McvqtzDWXLidJ8iF407rwTm3GctL3/Sgqj/YRSb8joiMUZ+yCDbuvsF8PoO/wxJaDASOockeH+W
+	JotsvuG+smJqt9RtcvvskJn3n8LxtnZMuweDFDz9A2frwFXQOp8JtpA0F2cWwKFrxfEiq5EzKW8
+	RhP14b+Z/qsFwBA/fRnm0gANF5qVIIgGgQaNRkZi9D46bYadKuGcRWuBiNW4TZH9C7UUPqpoWRQ
+	poPSJjVObEiuBYySTDPAcMqa/xz/bIdbOMP3hqc2PWSzEmT/6rRdtMQ+djjazWVjqIv039TruyH
+	cvCGgCBIdOfJQ==
+X-Received: by 2002:a05:600c:8b8c:b0:480:1c10:5633 with SMTP id 5b1f17b1804b1-4801e341a87mr2178615e9.26.1768491553475;
+        Thu, 15 Jan 2026 07:39:13 -0800 (PST)
+Message-ID: <2703684c-4ad5-44e2-a8fc-4d5b40de2d3d@suse.com>
+Date: Thu, 15 Jan 2026 16:39:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Strange symbols_lookup() behaviour in test-symbols on arm64 CI
-To: Mykola Kvach <xakep.amatop@gmail.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <CAGeoDV_YS8hV2+FXVgXxvHLw=MQOAoJZwrP1Ypw8+ZUjKB9GSA@mail.gmail.com>
- <a5361a51-128d-47e0-b5ed-58bfd0d9e8ad@suse.com>
- <CAGeoDV-vfiKECmvWzJ4dnzicXDL7XJDxwEy_Z737k+234Gkzpg@mail.gmail.com>
- <CAGeoDV8VZ1m6CQAkKK-9UDz4npXm2V+Up+BBo=+NyzgLJMW+3g@mail.gmail.com>
- <b4013cae-f27a-4c69-b136-d33db2d22725@suse.com>
- <CAGeoDV91W24tu6MOuM6a9B1jDjJ_8oNdsMYaxNA-ehbxn3xLoA@mail.gmail.com>
- <10aaed6d-6cb1-4bed-aa8c-5f9761f04fde@suse.com>
- <CAGeoDV_bTFNMS_XbEyfB0xNmpi=Yhr5VzszDBPTS5yYtjo1hnQ@mail.gmail.com>
- <e38c24dd-1acc-4d9a-b6f6-5e1964753840@suse.com>
- <CAGeoDV8QDBeqTPv30hcbd2giGRJp_1h+JgeGuTodhP3m8qHpHQ@mail.gmail.com>
- <b30ecffe-f696-4777-8e85-2fe30407534d@suse.com>
- <CAGeoDV8US=pPHN-jYCKDLJpjJGwLg7jm2FaBCRwv-zmQ3rUUkw@mail.gmail.com>
- <35819233-07ba-4e00-8939-74b2f4454250@suse.com>
- <CAGeoDV_fN84JPxLJfE0uWujYfeb+7t5HnFhK-up1Oymk0VT2MQ@mail.gmail.com>
+Subject: Re: [PATCH v7 3/5] lib/arm: Add I/O memory copy helpers
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Juergen Gross
+ <jgross@suse.com>, Julien Grall <julien@xen.org>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Grygorii Strashko <grygorii_strashko@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1768415200.git.oleksii_moisieiev@epam.com>
+ <d166348530b9229673e1a6e3b29ff4ee9123ab2f.1768415200.git.oleksii_moisieiev@epam.com>
+ <bf3e38f1-d88a-445a-b55b-a13d401dba80@suse.com>
+ <8539bed5-280f-4dcc-a63d-4c0ee3b7cff7@suse.com>
+ <c1f9885a-3e0a-4964-acfc-95f4c86aef06@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,39 +131,162 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAGeoDV_fN84JPxLJfE0uWujYfeb+7t5HnFhK-up1Oymk0VT2MQ@mail.gmail.com>
+In-Reply-To: <c1f9885a-3e0a-4964-acfc-95f4c86aef06@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 14.01.2026 07:00, Mykola Kvach wrote:
-> On Mon, Dec 15, 2025 at 1:27 PM Jan Beulich <jbeulich@suse.com> wrote:
->> On 15.12.2025 12:00, Mykola Kvach wrote:
->>> On Thu, Dec 11, 2025 at 6:40 PM Jan Beulich <jbeulich@suse.com> wrote:
->>>> On 11.12.2025 17:30, Mykola Kvach wrote:
->>>>> I have now attached the corresponding build log.
->>>>
->>>> Okay, so indeed not a table size change issue here. Then I fear some instrumenting
->>>> will be needed to at least know what exactly is going wrong. Alternatively you could
->>>> arrange for the intermediate binaries to not be deleted, and make them available
->>>> somehow / somewhere for me to see whether by inspection I can gain some clue.
+On 15.01.2026 16:34, Oleksii Moisieiev wrote:
+> On 15/01/2026 13:59, Jan Beulich wrote:
+>> On 15.01.2026 10:26, Jan Beulich wrote:
+>>> On 14.01.2026 19:29, Oleksii Moisieiev wrote:
+>>>> --- /dev/null
+>>>> +++ b/xen/lib/arm/memcpy_fromio.c
+>>>> @@ -0,0 +1,48 @@
+>>>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>>>> +#include <asm/io.h>
+>>>> +#include <xen/lib/io.h>
+>>>> +
+>>>> +/*
+>>>> + * Use 32-bit raw IO operations for portability across ARM32/ARM64 where
+>>>> + * 64-bit accessors may not be atomic and some devices only support 32-bit
+>>>> + * aligned accesses.
+>>>> + */
+>>>> +
+>>>> +void memcpy_fromio(void *to, const volatile void __iomem *from,
+>>>> +		   size_t count)
+>>>> +{
+>>>> +	while ( count && (!IS_ALIGNED((unsigned long)from, 4) ||
+>>>> +			  !IS_ALIGNED((unsigned long)to, 4)) )
+>>> Nit: Xen style indentation (no hard tabs) please throughout.
 >>>
->>> I prepared a small patch to keep the intermediate artifacts instead of
->>> deleting them.
->>>
->>> It removes two cleanup commands:
->>>     xen/arch/arm/Makefile: drops rm -f $(@D)/.$(@F).[0-9]* (keeps
->>> .xen-syms.* intermediates)
+>>>> +	{
+>>>> +		*(uint8_t *)to = __raw_readb(from);
+>>>> +		from++;
+>>>> +		to++;
+>>>> +		count--;
+>>>> +	}
+>>>> +
+>>>> +	while ( count >= 4 )
+>>>> +	{
+>>>> +		*(uint32_t *)to = __raw_readl(from);
+>>>> +		from += 4;
+>>>> +		to += 4;
+>>>> +		count -= 4;
+>>>> +	}
+>>>> +
+>>>> +	while ( count )
+>>>> +	{
+>>>> +		*(uint8_t *)to = __raw_readb(from);
+>>>> +		from++;
+>>>> +		to++;
+>>>> +		count--;
+>>>> +	}
+>>>> +}
+>>> Barrier requirements on Arm aren't quite clear to me here: Is it really correct
+>>> to use __raw_read{b,w,l}() here, rather than read{b,w,l}()? If it was, wouldn't
+>>> a barrier then be needed at the end of the function?
+>> Thinking about it, as the order of MMIO accesses needs to be guaranteed
+>> (unless you have extra information about the area's properties, like it
+>> being a video frame buffer), I'm pretty sure now that read{b,w,l}() needs
+>> using here. In fact the comment in the header says that it would handle
+>> "Memory ordering and barriers" when it doesn't look as if it did.
 >>
->> This alone should be sufficient.
+>> Note how Linux looks to have grown multiple flavors: Besides
+>> memcpy_fromio() I can also spot at least fb_memcpy_fromio() and
+>> sdio_memcpy_fromio().
+>>
+>>> And then, if it was read{b,w,l}() that is to be used here, what about all of
+>>> this would then still be Arm-specific? Hmm, I guess the IS_ALIGNED() on "to" is,
+>>> but that's Arm32-specific, with Arm64 not needing it? Plus then it's again not
+>>> exactly Arm-specific, but specific to all architectures where misaligned
+>>> accesses may fault.
+>> There's a bigger issue here, with access granularity (despite the header
+>> claiming "Implement alignment handling for devices requiring specific
+>> access sizes"). MMIO can behave in interesting ways. The header comment
+>> says nothing as to restrictions, i.e. when these functions may not be
+>> used. Yet consider a device registers of which must be accessed in 32-bit
+>> chunks. As long as the other pointer is suitably aligned, all would be
+>> fine. But you handle the case where it isn't, and hence that case then
+>> also needs to function correctly. At the same time accesses to a devices
+>> requiring 16- or 64bit granularity wouldn't work at all, which for
+>> required 8-bit granularity it would again only work partly.
+>>
+>> How much of the above requires code adjustments and how much should be
+>> dealt with by updating commentary I don't know, as I know nothing about
+>> your particular use case, nor about possible future ones.
+>>
+>> Also note that the header comment still references the ..._relaxed()
+>> functions, when then implementation doesn't use those anymore.
+>>
+>> Jan
+> Hi Jan,
 > 
-> Understood. I have rerun the build with the cleanup line removed
-> so the intermediate .xen-syms.* files are kept.
+> Thank you very much for your valuable input and involvement.
 > 
-> The build artifacts are available here:
-> https://gitlab.com/xen-project/people/mykola_kvach/xen/-/jobs/12707528457/artifacts/browse/xen/
+> After further research and reconsidering all the points you raised, I 
+> have decided
+> to switch to using the ordered MMIO accessors (readb/readl and 
+> writeb/writel).
+> 
+> Here is my reasoning:
+> 
+> The concern you mentioned was valid: the use of __raw_read*/__raw_write* 
+> in the
+> helpers did not provide the ordering guarantees expected for MMIO 
+> copies, and the
+> header still referenced *_relaxed, even though the implementation no 
+> longer used
+> them. This could allow reordering around the copy and misrepresent the 
+> intended
+> semantics.
+> 
+> A few additional thoughts regarding your other questions:
+> 
+> Is it still Arm-specific?
+> Functionally, the logic could work on any architecture that supports 
+> 8/32-bit MMIO
+> accesses and uses the same accessor semantics. However, this implementation
+> relies on Arm’s read*/write* ordering guarantees, as well as the 
+> Arm-specific
+> IS_ALIGNED check to avoid misaligned faults. Therefore, it remains 
+> Arm-specific
+> as written; other architectures would need their own implementations if they
+> have different alignment or granularity requirements.
+> 
+> Ordered accessors vs. raw accessors + trailing barrier:
+> I chose to use ordered accessors instead of raw accessors with a 
+> trailing barrier
+> because readb/readl and writeb/writel already provide the required 
+> device ordering
+> and barrier semantics, making an additional barrier unnecessary and 
+> solving potential
+> ordering issues.
+> 
+> Use for register access:
+> These helpers are suitable for MMIO buffers, shared memory, and 
+> registers that
+> tolerate 8-/32-bit accesses. They are not appropriate for registers that
+> require 16- or 64-bit accesses, or where side effects depend on the exact
+> access width. I'll update the header to document this limitation; 
+> drivers needing strict
+> register semantics should continue to use readl/writel
+> (or readw/writew/readq/writeq) directly, rather than memcpy_*io().
+> 
+> Summary:
+> 
+> I have made the following changes to the helper functions:
+> 
+> - switched to ordered accessors to address the ordering and barrier 
+> concerns.
+> - updated the documentation to match the implementation and explicitly state
+> the supported access sizes and granularity.
+> 
+> If this approach sounds good to you, I will proceed with the fix and 
+> submit a new version.
 
-Apart from the intermediate files there's a file named xen there, but xen-syms
-is missing. I'll see what I can do without that.
+At the first glance it looks okay, but please allow Arm folks to give their
+opinion. And of course my final take will be available only once I see the
+next version.
 
 Jan
 
