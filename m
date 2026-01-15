@@ -4,53 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA374D3CC8C
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 00:27:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1203960.1518868 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C91D3CC8C
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 00:29:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1203983.1518889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgBD3-0005De-FR; Thu, 15 Jan 2026 00:27:33 +0000
+	id 1vgBEe-0006Io-4x; Thu, 15 Jan 2026 00:29:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1203960.1518868; Thu, 15 Jan 2026 00:27:33 +0000
+Received: by outflank-mailman (output) from mailman id 1203983.1518889; Thu, 15 Jan 2026 00:29:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgBD3-0005DX-Ci; Thu, 15 Jan 2026 00:27:33 +0000
-Received: by outflank-mailman (input) for mailman id 1203960;
- Thu, 15 Jan 2026 00:27:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vgBEe-0006Ih-19; Thu, 15 Jan 2026 00:29:12 +0000
+Received: by outflank-mailman (input) for mailman id 1203983;
+ Thu, 15 Jan 2026 00:29:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YAhB=7U=amd.com=VictorM.Lira@srs-se1.protection.inumbo.net>)
- id 1vgBD1-0005DR-QO
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 00:27:31 +0000
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [2a01:111:f403:c111::9])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f87d75d2-f1a8-11f0-9ccf-f158ae23cfc8;
- Thu, 15 Jan 2026 01:27:28 +0100 (CET)
-Received: from SJ0PR05CA0048.namprd05.prod.outlook.com (2603:10b6:a03:33f::23)
- by SN7PR12MB6910.namprd12.prod.outlook.com (2603:10b6:806:262::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Thu, 15 Jan
- 2026 00:27:23 +0000
-Received: from SJ1PEPF000023CE.namprd02.prod.outlook.com
- (2603:10b6:a03:33f:cafe::65) by SJ0PR05CA0048.outlook.office365.com
- (2603:10b6:a03:33f::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.2 via Frontend Transport; Thu,
- 15 Jan 2026 00:26:57 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000023CE.mail.protection.outlook.com (10.167.244.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Thu, 15 Jan 2026 00:27:21 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 14 Jan
- 2026 18:27:21 -0600
-Received: from xsjvictlira01-ubuntu-0.tail79467d.ts.net (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17 via Frontend Transport; Wed, 14 Jan 2026 16:27:21 -0800
+ <SRS0=by25=7U=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1vgBEc-0006IZ-Kw
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 00:29:10 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 34592784-f1a9-11f0-b15e-2bf370ae4941;
+ Thu, 15 Jan 2026 01:29:08 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2E6C343258;
+ Thu, 15 Jan 2026 00:29:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 499BDC4CEF7;
+ Thu, 15 Jan 2026 00:29:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,113 +43,300 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f87d75d2-f1a8-11f0-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jdGanimCwDJYNPrc/WRiKLXwosKB/b3JH2PGkBKXpOt6YCCYD59RawV85Zc3RyWEkUwU7EYE+z02jPk9h7zkLyNhC8Q8oEnGZ9blM09u1AyVKdW+Sm971Mejv71IP0vJNu5+mFSRtf25eVehgZ4xAbNT/mkjA7PEjOvdU/QmC9p5b4uI3X7UUpvts2+ix9I6cKULOj0yvYogp5i9WcMvXnFTtBaegGK2sKXJwcJ6v2Zg+Whw2zCEw21zND8UAVNwd2vo6zYbD6V1+G/6iCrFb9QRM4KzXm6zZo3avKLBtmVAnxLpYVKTpH4/akIsutTeDCjT/pIKYoZzQFBl0m09Lg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jZ5n/e7VN4IhVHwvH03BwDAA+krGDXIA0x/6VQiU8ZU=;
- b=KxcqPyiicKooUL0K8C/bZ65C6o+Has7EsXFsHaRTiyTUTgJk2fzDasSejrBo7YbMhllC64a0I0/PRvHrsoY8VyXPspQbCLmGIfHeOjziWWWrAE+k6DzvimW9mUzsBXwQR61PxE7GbMJiXdLBMmnvMujw8AoklmbsB9UdRwIKNoN/PneGAP8Iu897DcSCdLHNJ1UimP0whukp1+fxeag+5mEwOuw6Kw3R9OnlqNGd30GgZf/3hQ0CmxPgKOsxLjvI8z1xxgQdLsvtYt1Fhn+n6y595JZSzquGUD9uGb9bQ1rpb9AYNhJiWj44EFXhyvQb3rVl67w3YQt0nAD+HqRiLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jZ5n/e7VN4IhVHwvH03BwDAA+krGDXIA0x/6VQiU8ZU=;
- b=zSf67CZAe+RxVkidBt4QNwE7BpRnt3sg5VCO7R2j3907mBdjFQED+mgUWdPdsoKrN6UmQvd/W4hAoxDan4VYxORv1snY6bzHPNwHwqgWq/eXkw7tRHGKO3rlAFB3sF3RtR5jxmLhw1UyH3MLxNRTMh8pZPvvui78QX+rIRPFWs0=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Victor Lira <victorm.lira@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Alejandro Vallejo <Alejandro.GarciaVallejo@amd.com>
-Subject: [XEN PATCH v1 0/1] x86/vlapic: match broadcasts for logical destination mode
-Date: Wed, 14 Jan 2026 23:55:47 +0000
-Message-ID: <20260114235548.626696-1-victorm.lira@amd.com>
-X-Mailer: git-send-email 2.51.GIT
+X-Inumbo-ID: 34592784-f1a9-11f0-b15e-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768436947;
+	bh=4aKe4OAPA0op+l26oHzSgj0yVQfWdRKuWfz5OopJ588=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Dfuwk3RQshcp0qDEw8rKI9v16E8Jof9oMOarA7qvm8VWKY8UV31ID5FaoUE+7GHjj
+	 H5rxdPvNbFjjamATT8wXc2FyIwHvHvkU5aspFi/m0jTrbePTLm8aw9WSM5P1DuX0XW
+	 fodX8K/HrUEUlYMhVBowxdlEnPsljRgK055WuU30opg/U54NXfKmJ7D9bDBSUf9xJU
+	 5Dw2ySjLyZNuygrV9YADZiK75DsRhLpk7DAZebkFs0YiMuZewaa7k/g/HKtPj0apOB
+	 gkSpVYxUHO0soLMSxmnsn2c6c1rK9VdZKX7FQ3nvJ7oMQYITB35sNC8ZvPjw1o9jpm
+	 93B+XOrhudefA==
+Date: Wed, 14 Jan 2026 16:28:58 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Jan Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>, 
+    Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Grygorii Strashko <grygorii_strashko@epam.com>
+Subject: Re: [PATCH v7 3/5] lib/arm: Add I/O memory copy helpers
+In-Reply-To: <d166348530b9229673e1a6e3b29ff4ee9123ab2f.1768415200.git.oleksii_moisieiev@epam.com>
+Message-ID: <alpine.DEB.2.22.394.2601141628300.72558@ubuntu-linux-20-04-desktop>
+References: <cover.1768415200.git.oleksii_moisieiev@epam.com> <d166348530b9229673e1a6e3b29ff4ee9123ab2f.1768415200.git.oleksii_moisieiev@epam.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CE:EE_|SN7PR12MB6910:EE_
-X-MS-Office365-Filtering-Correlation-Id: d048247d-8d86-4b50-836b-08de53ccd978
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?5JozR4eUCoPkhcfMpWLoWgfnKVyiCD8kvaKqxPC4sGfsJTgwFGJG8H21lh27?=
- =?us-ascii?Q?xFkuk1B0KMXV3uLGreYjd8UFnYShx2Pnxeknk8n1U1UphBAOnvXjjVT6k53M?=
- =?us-ascii?Q?lC6qxbcwVG2v3vQZaL2DnbBVEjpQooGO2hpCyuA2C8rN9JtBWdO68mb19b9/?=
- =?us-ascii?Q?QTo7YWIfSayA2eqI6mlk7ktHqXp9Uja5nmKWIjpiz7UFYIjQkNRRel3IZofN?=
- =?us-ascii?Q?AbJH4+yenw9E+amoVIZ175WSbkZNn5a5JnkAFxFGIn1KMw6ZP/POmW7OTBAI?=
- =?us-ascii?Q?vUL/ePdOVL3D9UTi8Ka8V/I6UN0EfVJVG7idtQ7drYvrNH5xMh6H4v7rWGz8?=
- =?us-ascii?Q?zxoMAW3mzdZGhUMfre0WAalCZZicd7D7izY8BX3F1F6u8cvJSMUQjrke/WHM?=
- =?us-ascii?Q?WFGLGS8N7gaZyn7pkyA+qVJ/D4Zt/TWliapcbaFMDWcfvoT9xk+bDzhTgtE5?=
- =?us-ascii?Q?LPiziUh2pnT5M1/ekFZXN4y3aY0st2hhqlItON52RswvMgOldVvJY04BeAy/?=
- =?us-ascii?Q?SSpW3eEGoLNcZ8a1l7STUX5dZazUML0aiLpLCwvE5VJREdkcIM1BPZKBnHH1?=
- =?us-ascii?Q?j4aKIbfag130z2WaIZohBCNKPRdTdle1/aNyfNRi0/FbNiqxDeF54m2KGymn?=
- =?us-ascii?Q?DRRaRXsQ9wK5MQCcXyhn+JbOUBEzaCcmkcIQkMOSRL57AUxQwdD+neRQLHfQ?=
- =?us-ascii?Q?9BinsCDeOyupIxA0gJJJDKc2U5VvSHx965y86ns3LHm5Gac8I3fIV/cNZx9D?=
- =?us-ascii?Q?6s0uM70oJs95HejYv/HUy5TzDMCPJgj/eMzKKw90EgmRLLw+7cSa5rzYs6k0?=
- =?us-ascii?Q?ivt2D14qWguoQt8pmCdTI0jtMxU3ADndlXIzrtyvL8sWEL0RRJHhsI5mDAim?=
- =?us-ascii?Q?kIxL6VFMIq0p4ubzqXTBA/X+nFW0DzEAOfQBCi6x2MYh6P22a4VcJWS/lTXv?=
- =?us-ascii?Q?X6aP9JN5dDmq6t6r1CipuPmdUgTLjxikU1SUurAzsL/clb3cl0lySYwLFNpk?=
- =?us-ascii?Q?0lsVjBkU57WBfODHOIquJ2kebtxcL4if6fGTNgXOex30Qya5ASxwU5ZnAGHH?=
- =?us-ascii?Q?PIpZzW3FOVuk/9/l4xd1TBpOc4TEp/zgkNnJrnybkkdu+R+Bv0mVR4mBXDn+?=
- =?us-ascii?Q?tSCPDqJGjbi9oLKT1yEFOX8Gce+FhWQOUxjL1605b0Nj/+cdmOeqFdd1TrEN?=
- =?us-ascii?Q?meV0lzSHwol22QfZkGAVJgUKWY9aFojyphOKfUX9yh3U2rC/FG/yiv7LCM1u?=
- =?us-ascii?Q?YITNX6lXMyHf2DmXhlS9fdkiWMlW0QaH7VHv73c0ZA1K3bbBMi4UmwNw9h3a?=
- =?us-ascii?Q?dmr9VJ53p9XT8JDtS2WTFaaBlpMsOsPRw+3YUNiYXBO4R+hPDJpRajU0mpzk?=
- =?us-ascii?Q?9S0e/30kdLXjiXb+rPGNmywAsk2vg6Qs0jOrR+MgEl2/FJ/OT4I9Ke96XaRf?=
- =?us-ascii?Q?EY3o1D9EFga+yZ9QL9vg5IXEpzdQKEqLAXidim31RvOh5PPL0NjdZZOqByHy?=
- =?us-ascii?Q?J8Rzn3HiyaC6XQf0DmPXNiwmNx4EobkcYPv4kjT+DPeKJFH2dW7hVlByovJV?=
- =?us-ascii?Q?1H5xVHA1WcsjqJYlZFOz+SEbzpUwKlVIsIf8MrB21Ay7H6nnC2vSe3i+s4hO?=
- =?us-ascii?Q?lrycTHdCxjxkYNh1WFyLKMIeUI0+nEqOxsEhwzNEqraJyFuaywvZk9u8NQ9E?=
- =?us-ascii?Q?Vf4WOg=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 00:27:21.8810
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d048247d-8d86-4b50-836b-08de53ccd978
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023CE.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6910
+Content-Type: text/plain; charset=US-ASCII
 
-Hello,
+On Wed, 14 Jan 2026, Oleksii Moisieiev wrote:
+> This commit introduces two helper functions, `memcpy_fromio` and
+> `memcpy_toio`, to provide a robust mechanism for copying data between
+> standard memory and memory-mapped I/O (MMIO) space for the ARM
+> architecture.
+> 
+> These helpers handle alignment safely by using byte accesses for any
+> leading/trailing unaligned bytes and 32-bit raw accesses for the aligned
+> bulk transfer. Using `__raw_readb/__raw_readl` and
+> `__raw_writeb/__raw_writel` avoids unintended endianness conversion while
+> remaining safe across ARM32/ARM64 devices that only support 32-bit
+> accesses.
+> 
+> The interface lives in the generic header so other architectures can
+> provide their own implementations (as macros or functions). The ARM
+> implementation is split into separate compilation units and added to the
+> architecture-specific lib Makefile.
+> 
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 
-I came across something that is out of spec behavior in the domain APIC.
-Sent IPI's with broadcast destination are broadcast for physical mode but not
-for logical mode.
+From an ARM point of view:
 
-Please give it a check because in 7429bfd50dd7 it seems that it was intentional
-to crash the domain if the command was lowest priority + logical + broadcast
-dest but it got removed.
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-relevant commits:
-  e03ad58f0b8c
-  8a02f12b7751
-  7429bfd50dd7
 
-Victor Lira (1):
-  x86/vlapic: match broadcasts for logical destination mode
+Thanks Jan for the good feedback on the previous version which has now
+been addressed
 
- xen/arch/x86/hvm/vlapic.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
---
-2.51.GIT
+> ---
+> 
+> Changes in v7:
+> - x86 guidance: removed the speculative note; header now just says
+>   each arch supplies its own implementation or macro.
+> - name spacing: dropped the double-underscore; the helpers are now
+>   memcpy_fromio / memcpy_toio. The header also explicitly allows an
+>   arch to define these as macros before including it.
+> - updated io.c to keep 32-bit transfers safe on arm32
+> - moved to __raw_read*/__raw_write* accessors to avoid endianness conversion.
+> - split the helpers into separate compilation units
+> 
+> Changes in v6:
+> - sorted objs in Makefile alhabetically
+> - added newline at the end of Makefile
+> - used uint{N}_t intead of u{N}
+> - add comment about why 32 bit IO operations were used
+> - updated cast opertaions to avoid dropping constness which is wrong
+> - move function definitions to generic place so the could be reused by
+> other arch
+> - add SPDX tag to io.c
+> 
+> Changes in v5:
+> - move memcpy_toio/fromio to the generic place
+> 
+>  xen/include/xen/lib/io.h    | 65 +++++++++++++++++++++++++++++++++++++
+>  xen/lib/Makefile            |  1 +
+>  xen/lib/arm/Makefile        |  1 +
+>  xen/lib/arm/memcpy_fromio.c | 48 +++++++++++++++++++++++++++
+>  xen/lib/arm/memcpy_toio.c   | 48 +++++++++++++++++++++++++++
+>  5 files changed, 163 insertions(+)
+>  create mode 100644 xen/include/xen/lib/io.h
+>  create mode 100644 xen/lib/arm/Makefile
+>  create mode 100644 xen/lib/arm/memcpy_fromio.c
+>  create mode 100644 xen/lib/arm/memcpy_toio.c
+> 
+> diff --git a/xen/include/xen/lib/io.h b/xen/include/xen/lib/io.h
+> new file mode 100644
+> index 0000000000..cd2b6680d5
+> --- /dev/null
+> +++ b/xen/include/xen/lib/io.h
+> @@ -0,0 +1,65 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Generic I/O memory copy function prototypes.
+> + *
+> + * These functions provide low-level implementation for copying data between
+> + * regular memory and I/O memory regions. Each architecture must provide its
+> + * own implementation based on the specific requirements of the architecture's
+> + * memory model and I/O access patterns. An architecture may supply these as
+> + * functions or as macros in its own headers before including this file.
+> + *
+> + * Architecture-specific implementations:
+> + * =====================================
+> + * Each architecture should implement these functions in xen/lib/<arch>/io.c
+> + * (or define them as macros) based on their hardware requirements. See
+> + * xen/lib/arm/io.c for an example using explicit I/O accessors.
+> + */
+> +
+> +#ifndef _XEN_LIB_IO_H
+> +#define _XEN_LIB_IO_H
+> +
+> +#include <xen/types.h>
+> +
+> +/*
+> + * memcpy_fromio - Copy data from I/O memory space to regular memory
+> + * @to: Destination buffer in regular memory
+> + * @from: Source address in I/O memory space (must be marked __iomem)
+> + * @count: Number of bytes to copy
+> + *
+> + * This function handles copying from memory-mapped I/O regions using
+> + * architecture-appropriate I/O accessor functions. It ensures proper:
+> + * - Memory ordering and barriers
+> + * - Alignment requirements
+> + * - Hardware-specific access semantics
+> + *
+> + * Each architecture provides its own implementation that may:
+> + * - Use special I/O accessor functions (ARM: readl_relaxed, readb_relaxed)
+> + * - Implement alignment handling for devices requiring specific access sizes
+> + * - Add memory barriers to ensure ordering with other I/O operations
+> + * - Or simply map to memcpy() if the architecture allows direct I/O access
+> + */
+> +extern void memcpy_fromio(void *to, const volatile void __iomem *from,
+> +                          size_t count);
+> +
+> +/*
+> + * memcpy_toio - Copy data from regular memory to I/O memory space
+> + * @to: Destination address in I/O memory space (must be marked __iomem)
+> + * @from: Source buffer in regular memory
+> + * @count: Number of bytes to copy
+> + *
+> + * This function handles copying to memory-mapped I/O regions using
+> + * architecture-appropriate I/O accessor functions. It ensures proper:
+> + * - Memory ordering and barriers
+> + * - Alignment requirements
+> + * - Hardware-specific access semantics
+> + *
+> + * Each architecture provides its own implementation that may:
+> + * - Use special I/O accessor functions (ARM: writel_relaxed, writeb_relaxed)
+> + * - Implement alignment handling for devices requiring specific access sizes
+> + * - Add memory barriers to ensure ordering with other I/O operations
+> + * - Or simply map to memcpy() if the architecture allows direct I/O access
+> + */
+> +extern void memcpy_toio(volatile void __iomem *to, const void *from,
+> +                        size_t count);
+> +
+> +#endif /* _XEN_LIB_IO_H */
+> diff --git a/xen/lib/Makefile b/xen/lib/Makefile
+> index 5ccb1e5241..6bb0491d89 100644
+> --- a/xen/lib/Makefile
+> +++ b/xen/lib/Makefile
+> @@ -1,3 +1,4 @@
+> +obj-$(CONFIG_ARM) += arm/
+>  obj-$(CONFIG_X86) += x86/
+>  
+>  lib-y += bsearch.o
+> diff --git a/xen/lib/arm/Makefile b/xen/lib/arm/Makefile
+> new file mode 100644
+> index 0000000000..0bb1a825ce
+> --- /dev/null
+> +++ b/xen/lib/arm/Makefile
+> @@ -0,0 +1 @@
+> +obj-y += memcpy_fromio.o memcpy_toio.o
+> diff --git a/xen/lib/arm/memcpy_fromio.c b/xen/lib/arm/memcpy_fromio.c
+> new file mode 100644
+> index 0000000000..342a28cb49
+> --- /dev/null
+> +++ b/xen/lib/arm/memcpy_fromio.c
+> @@ -0,0 +1,48 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#include <asm/io.h>
+> +#include <xen/lib/io.h>
+> +
+> +/*
+> + * Use 32-bit raw IO operations for portability across ARM32/ARM64 where
+> + * 64-bit accessors may not be atomic and some devices only support 32-bit
+> + * aligned accesses.
+> + */
+> +
+> +void memcpy_fromio(void *to, const volatile void __iomem *from,
+> +		   size_t count)
+> +{
+> +	while ( count && (!IS_ALIGNED((unsigned long)from, 4) ||
+> +			  !IS_ALIGNED((unsigned long)to, 4)) )
+> +	{
+> +		*(uint8_t *)to = __raw_readb(from);
+> +		from++;
+> +		to++;
+> +		count--;
+> +	}
+> +
+> +	while ( count >= 4 )
+> +	{
+> +		*(uint32_t *)to = __raw_readl(from);
+> +		from += 4;
+> +		to += 4;
+> +		count -= 4;
+> +	}
+> +
+> +	while ( count )
+> +	{
+> +		*(uint8_t *)to = __raw_readb(from);
+> +		from++;
+> +		to++;
+> +		count--;
+> +	}
+> +}
+> +
+> +/*
+> + * Local variables:
+> + * mode: C
+> + * c-file-style: "BSD"
+> + * c-basic-offset: 8
+> + * tab-width: 8
+> + * indent-tabs-mode: t
+> + * End:
+> + */
+> diff --git a/xen/lib/arm/memcpy_toio.c b/xen/lib/arm/memcpy_toio.c
+> new file mode 100644
+> index 0000000000..e543c49124
+> --- /dev/null
+> +++ b/xen/lib/arm/memcpy_toio.c
+> @@ -0,0 +1,48 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#include <asm/io.h>
+> +#include <xen/lib/io.h>
+> +
+> +/*
+> + * Use 32-bit raw IO operations for portability across ARM32/ARM64 where
+> + * 64-bit accessors may not be atomic and some devices only support 32-bit
+> + * aligned accesses.
+> + */
+> +
+> +void memcpy_toio(volatile void __iomem *to, const void *from,
+> +	       size_t count)
+> +{
+> +	while ( count && (!IS_ALIGNED((unsigned long)to, 4) ||
+> +			  !IS_ALIGNED((unsigned long)from, 4)) )
+> +	{
+> +		__raw_writeb(*(const uint8_t *)from, to);
+> +		from++;
+> +		to++;
+> +		count--;
+> +	}
+> +
+> +	while ( count >= 4 )
+> +	{
+> +		__raw_writel(*(const uint32_t *)from, to);
+> +		from += 4;
+> +		to += 4;
+> +		count -= 4;
+> +	}
+> +
+> +	while ( count )
+> +	{
+> +		__raw_writeb(*(const uint8_t *)from, to);
+> +		from++;
+> +		to++;
+> +		count--;
+> +	}
+> +}
+> +
+> +/*
+> + * Local variables:
+> + * mode: C
+> + * c-file-style: "BSD"
+> + * c-basic-offset: 8
+> + * tab-width: 8
+> + * indent-tabs-mode: t
+> + * End:
+> + */
+> -- 
+> 2.34.1
+> 
 
