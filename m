@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04E9D4114B
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 09:29:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1204488.1519169 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B442D41149
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 09:33:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1204526.1519179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgJfa-0000S4-Jd; Thu, 15 Jan 2026 09:29:34 +0000
+	id 1vgJja-0002yK-2k; Thu, 15 Jan 2026 09:33:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1204488.1519169; Thu, 15 Jan 2026 09:29:34 +0000
+Received: by outflank-mailman (output) from mailman id 1204526.1519179; Thu, 15 Jan 2026 09:33:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgJfa-0000Rr-GC; Thu, 15 Jan 2026 09:29:34 +0000
-Received: by outflank-mailman (input) for mailman id 1204488;
- Thu, 15 Jan 2026 09:29:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7XDq=7U=amd.com=penny.zheng@srs-se1.protection.inumbo.net>)
- id 1vgJfZ-0007JZ-9H
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 09:29:33 +0000
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c110::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id af1afdc4-f1f4-11f0-b15e-2bf370ae4941;
- Thu, 15 Jan 2026 10:29:26 +0100 (CET)
-Received: from CH0PR03CA0356.namprd03.prod.outlook.com (2603:10b6:610:11a::34)
- by CH1PPF84B7B0C96.namprd12.prod.outlook.com
- (2603:10b6:61f:fc00::618) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Thu, 15 Jan
- 2026 09:29:20 +0000
-Received: from DS3PEPF000099DD.namprd04.prod.outlook.com
- (2603:10b6:610:11a:cafe::c6) by CH0PR03CA0356.outlook.office365.com
- (2603:10b6:610:11a::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.6 via Frontend Transport; Thu,
- 15 Jan 2026 09:29:19 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- DS3PEPF000099DD.mail.protection.outlook.com (10.167.17.199) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9520.1 via Frontend Transport; Thu, 15 Jan 2026 09:29:20 +0000
-Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Thu, 15 Jan 2026 03:29:10 -0600
+	id 1vgJjZ-0002yD-WA; Thu, 15 Jan 2026 09:33:41 +0000
+Received: by outflank-mailman (input) for mailman id 1204526;
+ Thu, 15 Jan 2026 09:33:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=6aKL=7U=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vgJjY-0002y7-UC
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 09:33:40 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 459a920f-f1f5-11f0-9ccf-f158ae23cfc8;
+ Thu, 15 Jan 2026 10:33:38 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4801c314c84so1417895e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 01:33:38 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-434af6fca57sm4532916f8f.42.2026.01.15.01.33.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Jan 2026 01:33:37 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,253 +47,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af1afdc4-f1f4-11f0-b15e-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TUwyQG/MzpCq57QuIse3ioF5fEqCNYy6NziViD1vEKLEj55X/36Ejz9igbZMhWY9DMKt+f+7va9DdCMC2baotU/3/a1/H8AQ7gPkmzVRRYIpGdXW90fKYsgxv/EHqnaYGCLpJqyH4hZ838hZH5SDo/bnS9uQRNBlpsKwz2Z8QVhg7XT3tH3CoN6bVNlwTgw2WlTPba63xMBVjY3UFl80BqJXL8DVcnBmVnR4zO/xJAkdWNVEU1+TVuCcVazUFACQO4nZjjYce2ex6k9lkSgcwvWyYg47lgZBiAVJHORwVc1vbERgQ7CVw7nW+4P7exrkG0DjEnrZJwdzPjp8q0vD5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ABCXVSHV2eH9kGiJIwIF6xx3zPKKoyzY2uDyJj9ALZk=;
- b=k9Nx07YjyUDc3fJHsoaOn71T1173iRzLQ0vZ/BttaVdf38pbxAkvdJEu0iGZiAwxagDZDrLMvzqJCpa79oO7n6DeOZU+3gWRvavlIaUQlz3f8FgxwBjvGtgyP/JDI7h+fQcqM1onjAIbgcPxcIUptp33VV+vQTitvboEL90VNgJMWbIHIHsx74Znz11qs/4uV64E9rgodI5EhIqtqPLxsln3FwcLE6w0pJA51psgOFGSbSwhYO5VktfedFRC+7Jj54ekyD7TnDGo6MD/+m/thQVoJcEYlh0/vCK6oNo5gtgXdyJZfyJyyd2sQyyWQJqW8DEG8waTXyDd3fG6I+q4pQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ABCXVSHV2eH9kGiJIwIF6xx3zPKKoyzY2uDyJj9ALZk=;
- b=TmQkQ33u+dWTd9tRWmD/MeIS3jOf/r3CxL9lauYgQieAO3TAiks6rJbZWuWhlnAyP0SoUoz7gFE365NE2yOsiOTRQVFayMsMhkjBLCJ/3c/M19F+k38MwL+6wQxKcLtLUjgvr1fTxWNcIBWG6pLyUqimiD022QE1gk3Loe9Dpvs=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Penny Zheng <Penny.Zheng@amd.com>
-To: <xen-devel@lists.xenproject.org>, <jason.andryuk@amd.com>
-CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Tamas K Lengyel
-	<tamas@tklengyel.com>, Alexandru Isaila <aisaila@bitdefender.com>, "Petre
- Pircalabu" <ppircalabu@bitdefender.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 4/6] xen/p2m: move xenmem_access_to_p2m_access() to common p2m.c
-Date: Thu, 15 Jan 2026 17:28:39 +0800
-Message-ID: <20260115092841.2651224-5-Penny.Zheng@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260115092841.2651224-1-Penny.Zheng@amd.com>
-References: <20260115092841.2651224-1-Penny.Zheng@amd.com>
+X-Inumbo-ID: 459a920f-f1f5-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1768469618; x=1769074418; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=/99ddwQSI5EW2LBegFhid5W2imJC03ePbUzWYJ3u+OI=;
+        b=UzrEXd6CtkKZ0unA+60rrEsP0xg6K5nojVePl4vqIsM9QDe46k5nv/XWrlDyv2EA3B
+         +Pdz2Hq8ZnXVM1EPs0YM0T9q1jegYi7OF3ZEBG3PpLODv1cBysqEtSRnksF8Pw4ctBEm
+         szsQ23oDmEkgluZrTZ31pAZvjgVXg6SD0239kF4h6t1cYplEI4M0RPQES/GNVUBSzooO
+         VZxNBALQ01L+sWBbbtOWXP1lFoDUz8AkGqpehg9DiNsqA0UeaAEICcwhxjQZt0lEIPyb
+         gjzI65d8+WyoxHyi7Ipyy5Bw8Gz2uy6a4dADhcja+phBEj+kLgn0jodyd/ZE+eUPF1vT
+         W4wA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768469618; x=1769074418;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/99ddwQSI5EW2LBegFhid5W2imJC03ePbUzWYJ3u+OI=;
+        b=Rn/xWB5bMthTJf1NudzkfBRDOXykBppT7eNQQ1WaK97ywdPkVgER1CJriu9ldd729g
+         Y8QceKJ8Oe6pufCGKjyjNpnxi+iejBt50rEtG+sxinulsWL0HBd8UEjD8hyiBmPHy1Oo
+         hDuszCLJ5IoK3e+fvn82qQ5j6qnelWkC/XW++G+eY1nOC/ILxMkIyl/araupvjHL5Q4W
+         GkMqyAj0jKdVM9Opf/NW56GXwCKZeYjHLy0iATqcC4zKOeLgsT88FEEu0co5p7BUJ55v
+         AMDE2u8iJeUyJ5N+D5ACTae3BvWeEkkaR7rJbCZir2gtCKXHKaCb0Yn+NeA3K8FTURoR
+         peVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUaaMTq7CSfgkfby/ABBC/cqTA2jss608jMwZgziCsoinF7OLd3Uz7C3EPJUdQo5wpGOL6zanoG0Gs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwHE0GSPFBkYH0M8pgLNWdRkQt0bJ8DdnL4ke0hg5+d4+bzGSuv
+	jiSghi3jnQOQiav2dqVhO2ymglWYWGFYLPIW+G3T/MKac54iUIHakH1VO4BqJJgBXg==
+X-Gm-Gg: AY/fxX7K/eBgd7jZ6I0sZVk6VYqel84mRw00DEXdeLKIMMaR4qhX7fLUOSlk4+LHSyO
+	YyVXqtNqsqoWWRfNxQr2+3lqZP9SaZgb/iV8LlRjeYaxXmsi4XQl76ZlLj+3AODPS5jUjFPpzJn
+	XDOJiRxGsn80yE487mJxQqZx8LYNHSqZGZG2qHJfYG4JX2pb1RHBj+1TD4VG5zIPogGTBzU9N/D
+	D++dbcwfbk7paliGJ1DfZswUH3xhQ97GMhlYiN72CbGJOtNpn+yFBda1R1sMz0YOVNObe0kX9L7
+	XeKOXQ7hCyDWHIT2HW9nOGx7YPzHlXOuea6uTeygdJZKlMt1iyqbPD0/ruK4rNWsZwU84EX8VLC
+	aTwUfaV7znipWlAbbSmuUOc7ryFp05G3ZA0sdSlqwF0HLDLvtXzUz6xF0cnfYqxXtZCZE3eWYXL
+	jAG7LMeHjX0Rs5I/JMWiuT1S9aJqafvSg2+NOSeigToMkZzHFfIQhZ2940mlhab+PQKd7ZBTHRB
+	H8=
+X-Received: by 2002:a05:600c:8217:b0:477:7bd2:693f with SMTP id 5b1f17b1804b1-47ee3317131mr61238015e9.6.1768469618114;
+        Thu, 15 Jan 2026 01:33:38 -0800 (PST)
+Message-ID: <29c2d1dc-23fb-403e-bb03-d8c2f32424e6@suse.com>
+Date: Thu, 15 Jan 2026 10:33:37 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DD:EE_|CH1PPF84B7B0C96:EE_
-X-MS-Office365-Filtering-Correlation-Id: 38dd6108-a5fe-4e78-d322-08de54188fff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?A/7NW45hdC/CbRpFxgQ14gZtUnzX27oQLgJJ9tlCEI7rnc0VnM15Z2TTgXhX?=
- =?us-ascii?Q?lyRcE36oLy6AV53ZXPAp7G84q9wtBKCHQU+Ex7xsmcxWYJCMep9SRMVk48mX?=
- =?us-ascii?Q?7YL2CEcs5vAwlq0FrrKfCh2hb02cH+HuHQezthiCY2B+DTKn+vl5n8ZytC8x?=
- =?us-ascii?Q?XdZFSfVMVrF2QZu0ULGk7K7a+wcsR+wz2iKkzt38CBeYwDVjyJlIieMVLQXp?=
- =?us-ascii?Q?Hq6HOM8/sRVef3nEVdl/qCCI+C3kR4iIYnSZL0WGwQGmKEHJjbflL2OmI/1w?=
- =?us-ascii?Q?VpLkjZJJusdPDzGMpNE8eym9s3ZJbRX6pevw60jhinsxb7ZxtYBUsjOzbFfB?=
- =?us-ascii?Q?M/eDGz33qXvbtsAvSYQynuHiAyGCdy1XaeZFPKY+0Z0tWWNo311IPBbAQwBt?=
- =?us-ascii?Q?S/7grTOtJAvs/BBEgO4sjApYTu7Kb5HrFyS1tPa5vRQa5gLNscZl4VmRkZyp?=
- =?us-ascii?Q?UaOoVojM62SdZSlwhnWoFq8D/W4mU3idF9CPkFKXBmXtjlNyrcuSpwjKRfQ4?=
- =?us-ascii?Q?NTsHZ1HjP7uH2CkdBUhz5h+a7O+E8eETLDjfZViYb//9qKOGMxt1DcJG5Inu?=
- =?us-ascii?Q?W9Lv0boGQ7wn7/79SEEx+UBehUcq5yLit7WgEOrszcRc057HwXZBoiq35RMS?=
- =?us-ascii?Q?W8StyyySY+45PAA1SSDfOb+9QpOPfogH7AfrhAsEIz6tfczjjA3PsJEo+tN3?=
- =?us-ascii?Q?u27LNHlTqC0zoIFkDYKZKayKUd8hQGtA9YmvYzd30Byrc9VeGeHNHMROYlqq?=
- =?us-ascii?Q?nPFDJptAfa9zMhtTIBhMXA2Oih1m2UqRWXfiCMWqcvNfMe0/bu75BNrjNwoU?=
- =?us-ascii?Q?iZ+vggRj96Y0yBWIZp8Sq3UdTXWGlfplLbk5pxskYQh0ZyKzKldQXVW1J4B9?=
- =?us-ascii?Q?/vYZTo3uEZmA2wNM4GtVGe0aZfGCoOlikny1PLSzzVpdVx02ro4rPKrqGC7l?=
- =?us-ascii?Q?5iOhIU1F65YifYSh5VWa3eIaK8ZalDzCyrNgACeUkNTsbaLjb39P1znx63Z/?=
- =?us-ascii?Q?EoAvlW12F4rMuX4ljcBdFOtrYFa+8MqWSlLaNkoRRb1gpMVU3g1qJIZ07vrQ?=
- =?us-ascii?Q?oKyoDvF/mA/b/BXMPm8odn9kBb+AZQE86K8AGJFH70uVn8dUzCcZf/n9e4VJ?=
- =?us-ascii?Q?aOgCZ59G7pu0R6NYA0WnsiwB92nW4aHKSaPMBBqZtA9WyjqAjlO3Oqr84HAp?=
- =?us-ascii?Q?/kl8DaARTD0o6A1uSUQ9z258VQBtPTfPIyDixt0+zTTzGnhIqiox3xnOsG/K?=
- =?us-ascii?Q?ZochSCts0zeDhzzaByt12zF2x+DyG5XLFJlanZwJ6EqAIgz962TTTXhyXN1a?=
- =?us-ascii?Q?tGLShNZGQeTHPOKdb6chqviEv+9OPgUSKfgFo1pEWz0oPfTxBBUwx5rj26H2?=
- =?us-ascii?Q?LeM9hbnOtUneTez728ytsnwcTyHeLcur/cmHDmqLEukMhc2PQt5JaDmouhHt?=
- =?us-ascii?Q?Zt6AOWuzAf2iiTEu7+t+KZEylfWpz/pzjBIr4VqR1B7YW2uXybdvN96fhoAf?=
- =?us-ascii?Q?VNvB3osEKMpATx+Ev6fgQ4aqQdbRHZynPXPb2vV8GzkPWjmq0UYrcEvMYFl+?=
- =?us-ascii?Q?eu57ABAQQKyYvHrhEsWHo4c2EqZYdtv/CGnqiac4olHdTffhvZFGyGhhxNER?=
- =?us-ascii?Q?KLfJPbknEl5Z9R5Stnm9vLadDiJCNxMM6kPxYhluSzVJJgyFHhdoO3RGissr?=
- =?us-ascii?Q?itwR1A=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(7416014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 09:29:20.4242
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 38dd6108-a5fe-4e78-d322-08de54188fff
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF000099DD.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF84B7B0C96
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/5] xen/arm: scmi: introduce SCI SCMI SMC multi-agent
+ driver
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Juergen Gross
+ <jgross@suse.com>, Julien Grall <julien@xen.org>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Grygorii Strashko <grygorii_strashko@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1768415200.git.oleksii_moisieiev@epam.com>
+ <ee4995bf385f0ec691151fb797e14acdb5419c6b.1768415200.git.oleksii_moisieiev@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ee4995bf385f0ec691151fb797e14acdb5419c6b.1768415200.git.oleksii_moisieiev@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Memory access and ALTP2M are two seperate features, while both depending on
-helper xenmem_access_to_p2m_access(). So it betters lives in common p2m.c,
-other than mem_access.c which will be compiled out when VM_EVENT=n && ALTP2M=y.
-Guard xenmem_access_to_p2m_access() with VM_EVENT || ALTP2M, otherwise it
-will become unreachable when both VM_EVENT=n and ALTP2M=n, and hence
-violating Misra rule 2.1
-We also need to move declaration from mem_access.h to p2m-common.h
-An extra blank line is inserted after each case-block to correct coding
-style at the same time.
+On 14.01.2026 19:29, Oleksii Moisieiev wrote:
+> @@ -1107,6 +1115,15 @@ affinities to prefer but be not limited to the specified node(s).
+>  
+>  Pin dom0 vcpus to their respective pcpus
+>  
+> +### scmi-smc-passthrough (ARM)
+> +> `= <boolean>`
+> +
+> +The option is available when `CONFIG_SCMI_SMC` is compiled in, and allows to
+> +enable SCMI SMC single agent interface for any, but only one guest domain,
+> +which serves as Driver domain. The SCMI will be disabled for Dom0/hwdom and
+> +SCMI nodes removed from Dom0/hwdom device tree.
+> +(for example, thin Dom0 with Driver domain use-case).
+> +
+>  ### dtuart (ARM)
+>  > `= path [:options]`
 
-Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-v1 -> v3:
-- Guard xenmem_access_to_p2m_access() with VM_EVENT || ALTP2M
-- Move declaration from mem_access.h to p2m-common.h
-- refine commit message
----
- xen/arch/x86/mm/mem_access.c | 36 --------------------------------
- xen/arch/x86/mm/p2m.c        | 40 ++++++++++++++++++++++++++++++++++++
- xen/include/xen/mem_access.h |  5 -----
- xen/include/xen/p2m-common.h |  3 +++
- 4 files changed, 43 insertions(+), 41 deletions(-)
+I appreciate missing doc for a pre-existing cmdline option to be introduced,
+but: Why here (in two ways)? First, why in this patch, without it even being
+mentioned in the description? And why in the middle of options starting with
+'d', when the entire file means to be sorted?
 
-diff --git a/xen/arch/x86/mm/mem_access.c b/xen/arch/x86/mm/mem_access.c
-index e6b609064c..e55e53f44c 100644
---- a/xen/arch/x86/mm/mem_access.c
-+++ b/xen/arch/x86/mm/mem_access.c
-@@ -298,42 +298,6 @@ static int set_mem_access(struct domain *d, struct p2m_domain *p2m,
-     return rc;
- }
- 
--bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
--                                 xenmem_access_t xaccess,
--                                 p2m_access_t *paccess)
--{
--    static const p2m_access_t memaccess[] = {
--#define ACCESS(ac) [XENMEM_access_##ac] = p2m_access_##ac
--        ACCESS(n),
--        ACCESS(r),
--        ACCESS(w),
--        ACCESS(rw),
--        ACCESS(x),
--        ACCESS(rx),
--        ACCESS(wx),
--        ACCESS(rwx),
--        ACCESS(rx2rw),
--        ACCESS(n2rwx),
--        ACCESS(r_pw),
--#undef ACCESS
--    };
--
--    switch ( xaccess )
--    {
--    case 0 ... ARRAY_SIZE(memaccess) - 1:
--        xaccess = array_index_nospec(xaccess, ARRAY_SIZE(memaccess));
--        *paccess = memaccess[xaccess];
--        break;
--    case XENMEM_access_default:
--        *paccess = p2m->default_access;
--        break;
--    default:
--        return false;
--    }
--
--    return true;
--}
--
- /*
-  * Set access type for a region of gfns.
-  * If gfn == INVALID_GFN, sets the default access type.
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index 759f3273d3..8d34357bcb 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -2203,6 +2203,46 @@ void p2m_log_dirty_range(struct domain *d, unsigned long begin_pfn,
-     guest_flush_tlb_mask(d, d->dirty_cpumask);
- }
- 
-+#if defined(CONFIG_VM_EVENT) || defined(CONFIG_ALTP2M)
-+bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
-+                                 xenmem_access_t xaccess,
-+                                 p2m_access_t *paccess)
-+{
-+    static const p2m_access_t memaccess[] = {
-+#define ACCESS(ac) [XENMEM_access_##ac] = p2m_access_##ac
-+        ACCESS(n),
-+        ACCESS(r),
-+        ACCESS(w),
-+        ACCESS(rw),
-+        ACCESS(x),
-+        ACCESS(rx),
-+        ACCESS(wx),
-+        ACCESS(rwx),
-+        ACCESS(rx2rw),
-+        ACCESS(n2rwx),
-+        ACCESS(r_pw),
-+#undef ACCESS
-+    };
-+
-+    switch ( xaccess )
-+    {
-+    case 0 ... ARRAY_SIZE(memaccess) - 1:
-+        xaccess = array_index_nospec(xaccess, ARRAY_SIZE(memaccess));
-+        *paccess = memaccess[xaccess];
-+        break;
-+
-+    case XENMEM_access_default:
-+        *paccess = p2m->default_access;
-+        break;
-+
-+    default:
-+        return false;
-+    }
-+
-+    return true;
-+}
-+#endif /* VM_EVENT || ALTP2M */
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/mem_access.h b/xen/include/xen/mem_access.h
-index 4de651038d..8e7d9ea2e3 100644
---- a/xen/include/xen/mem_access.h
-+++ b/xen/include/xen/mem_access.h
-@@ -73,11 +73,6 @@ typedef enum {
-     /* NOTE: Assumed to be only 4 bits right now on x86. */
- } p2m_access_t;
- 
--struct p2m_domain;
--bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
--                                 xenmem_access_t xaccess,
--                                 p2m_access_t *paccess);
--
- /*
-  * Set access type for a region of gfns.
-  * If gfn == INVALID_GFN, sets the default access type.
-diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
-index f0bd9a6b98..bd4169caee 100644
---- a/xen/include/xen/p2m-common.h
-+++ b/xen/include/xen/p2m-common.h
-@@ -43,5 +43,8 @@ int __must_check check_get_page_from_gfn(struct domain *d, gfn_t gfn,
-                                          bool readonly, p2m_type_t *p2mt_p,
-                                          struct page_info **page_p);
- 
-+bool xenmem_access_to_p2m_access(const struct p2m_domain *p2m,
-+                                 xenmem_access_t xaccess,
-+                                 p2m_access_t *paccess);
- 
- #endif /* _XEN_P2M_COMMON_H */
--- 
-2.34.1
-
+Jan
 
