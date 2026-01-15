@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CDBD41149
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 09:37:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1204541.1519189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6E2D4114C
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 09:37:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1204543.1519199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgJn9-0003cO-KD; Thu, 15 Jan 2026 09:37:23 +0000
+	id 1vgJnE-0003vw-Qd; Thu, 15 Jan 2026 09:37:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1204541.1519189; Thu, 15 Jan 2026 09:37:23 +0000
+Received: by outflank-mailman (output) from mailman id 1204543.1519199; Thu, 15 Jan 2026 09:37:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgJn9-0003cH-HF; Thu, 15 Jan 2026 09:37:23 +0000
-Received: by outflank-mailman (input) for mailman id 1204541;
- Thu, 15 Jan 2026 09:37:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6aKL=7U=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vgJn8-0003as-A7
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 09:37:22 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c971b441-f1f5-11f0-9ccf-f158ae23cfc8;
- Thu, 15 Jan 2026 10:37:20 +0100 (CET)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-430f3ef2d37so530494f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 01:37:20 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-434af6b2c76sm4739552f8f.26.2026.01.15.01.37.18
+	id 1vgJnE-0003vp-NI; Thu, 15 Jan 2026 09:37:28 +0000
+Received: by outflank-mailman (input) for mailman id 1204543;
+ Thu, 15 Jan 2026 09:37:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ba0k=7U=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vgJgT-0007JZ-VF
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 09:30:29 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d49c5a28-f1f4-11f0-b15e-2bf370ae4941;
+ Thu, 15 Jan 2026 10:30:29 +0100 (CET)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6505cac9879so1079101a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 01:30:29 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b876b6865desm369905966b.12.2026.01.15.01.30.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Jan 2026 01:37:18 -0800 (PST)
+ Thu, 15 Jan 2026 01:30:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,110 +47,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c971b441-f1f5-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: d49c5a28-f1f4-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1768469839; x=1769074639; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=/+tVhBx5vAnKgWDp6CS4Wex3Nh93uNmjlZLHEUL/zTY=;
-        b=C1SgRQ3NAQnNgFgs2IbSNwtnUqZiYEylMBHuFbbFp5hc0pmPrJnvNjCr8f3JF/n7Di
-         lHaQQh50RvZrzZp9C4X7OYydHf6bX2TbAh6OiVFpbyBW4oGSjy1RdO2r4/JEXIUsOgZY
-         uYqCrdWdn9NB8ftavlyu9K56uEn35066WDmpZ0PpS6yz0MVXTez3Z9p6Ffy0kpMrrDjB
-         BUWyI/1fIbJ6awMz8dm+tNrKJNGPK1zMK9d6i2KyiWk0jQUFXjYjK22dLAx0jejEh9Hq
-         aezEu4p3j3AFAxhbiYgeGJ/lupYeuidPH9zySa3Hy3SQlZ1J9puGu8jhgrblKKWX3akC
-         mmzw==
+        d=gmail.com; s=20230601; t=1768469428; x=1769074228; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=T7lH+Zu9fWG8FmlF6j1ldxjuSpIosPg1695HWnwC8qg=;
+        b=NaaTHTgiRKgY6EA9HxbTDNfAgIR6hHtWLmLyv0lRz6tRJJypHausRf+jq50fVZ7gHA
+         P9xWXpLlEHfrc/G5Sinzp6GrqukiSpPvuJzjtt1cxDRYn5094/Xhc/Dd8hE5pTBHfATC
+         /E0ueVWpcINxs4erHSpAjz1jv007He1+UwbRZsQVA5y1TEnG47YhSkQ4iUIsZcr5MEpu
+         4+ghVdVeLYj6FKoEE4hvvegr3G/maNGNui++b0RHtl4MHJ7yw3BrUtjUD1wsJ94Ozk5h
+         Sd9MJcrXUWxjSjkWgLrAoAvczgU7ok4QJNSfxEyfK5my3nybWHD7hBO1cg2DRVwVlfkv
+         XQtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768469839; x=1769074639;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/+tVhBx5vAnKgWDp6CS4Wex3Nh93uNmjlZLHEUL/zTY=;
-        b=juoS11t/Z7bpEnwzMC3zxLaV8N824oXcYGbM+DrpmNxIygeTnQ0m0mJVy32FCMFSSv
-         RRIMBgmzw8M0Q6b9ZFwcqC2wbnJZU7njUSv/jtWEErw7eSM7ySN7t8lFO7KWeJNPPEH0
-         iPD6YntV4LtAShQd3O+5hlcriy+kpjXRSL4alKQnR387vaKE+OJwt0dDp+KBME0rsIyA
-         Xfy44Y6O32OdhRF0rE6tJvPRM/eR/0MOAtnhVJV/e5WSkfiidFcY2uhLA/WvxemYvhhh
-         0Wj3bmVp6EaCiQgdU1S7LqJwAoQ3JVIlhQEFB9kHoD2tAaPA6Kxrv8rq12PcDq5emZdc
-         p4Vg==
-X-Forwarded-Encrypted: i=1; AJvYcCXCIZrsfoRjyfHvycTfcMxU9ZKCPYHEOX5nYBldFt8SRH4kaPzXEo+ek/ZeHbAUhfyD3rO/Wj6jd/M=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzMvzZh0AyCOcGD4AG9WREu52DXGgdnArZZz4o5lY99ZRCDVrg2
-	RKJl0Iv0zFYXImT48rh3NxB5+4FxBVsQVDhUZ/VW0kqgvFeMYRZ2fFfbFjdGY5ebYA==
-X-Gm-Gg: AY/fxX5biyA57hyHCZ/damO/WEd0c7y/HgdYB/hhbUBUTdeP2yyg+XR1INLy+uRfZ4o
-	bfN4uE6E3jRnUwbiz0RC5bIa9mpP6R7ceML4z7JgcJJumW+a3XtuSEt6gqJZaP0aFjqdF5xo38/
-	1V4uIFuKivTvOqn912FnOqYP0gpUgymlbU8vBLBSQeuvx9sQU5uo6vbQ4+YZBYIcFgmfz0FfrHb
-	veYbbHL2xugMBZmDf6Zt/J2RNojPKBNI4Xh54BywvkB3dWJii+ii2ZkokDLAo1Rk3Gpag1W+iFL
-	wDr5dl2gfiiY2fh8j2w2Gn30WqbBZsVHpenGkmVWd7jms4gdkV7O9XZC+JJ6RlkmKqvsYfjUwCt
-	90fpqj4DpLNyRyPzhqwP9nNSGYFnZDzejoaNLTKGhnWLJ8ioI4HGWfjfKeSBvsZjxFeA3xFx/Fi
-	VQN1gHFre1+cDsLQH6zBvPjtzXiTvWTyBk12yykwot70oEmQ/9E8PpiePYGDAeINYxjOWpyXjDm
-	oMkZ9w7au6fyA==
-X-Received: by 2002:a05:6000:40dd:b0:42b:2dfd:5350 with SMTP id ffacd0b85a97d-4342c570dffmr7850209f8f.56.1768469839292;
-        Thu, 15 Jan 2026 01:37:19 -0800 (PST)
-Message-ID: <7d67f3a8-eec3-4942-ba4d-88e7ca35e201@suse.com>
-Date: Thu, 15 Jan 2026 10:37:18 +0100
+        d=1e100.net; s=20230601; t=1768469428; x=1769074228;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=T7lH+Zu9fWG8FmlF6j1ldxjuSpIosPg1695HWnwC8qg=;
+        b=f2WuwoaR3PStnc+PPGL0Ki5T2yMvP5O1SiBXJ3Dh4sf5lDipasxjW21Adr3TKppJAY
+         +FwwfMvKHd6vg5mLZZn+vk4DnA4mL+TQm7yPQfjnkNtqcH9vNBTzZfzLUFme5mCjIzzi
+         yViQ7rakaCmgz7kaQm+YBunMlBeASRsbevM+l0tbPiLAaJ+vT9wSW79Hu/zwFfHUEA8N
+         v2whenZtNOsWFGYsDeTxvYPlNt3B+BiRTcKlc/1zseH/7O3HPNTwMG+QEhJlsgosODcT
+         vpSTQ20DMAT7ylrgadwtoidCNsK6i/ZZSRnQkJNNvLEy3YZhvuMhLoQ0gcqzXAl60F66
+         3b6Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUabwvkavFN50YKOtACGaMagH6GFswf1pWPfaRYPr6a4UdMuZjFbW313wH66Q+6pASa6RI+98Iz8AI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxoJefSnwbrzn1ydTDFMVXwGaT0BlMRSQ7o3JMKEyPzNaqhtRJ3
+	MyjrgoybMfiZYdvLN3UaEBENgdlUU291n7/dcBQ6EX4CN3RGZoCduIbL
+X-Gm-Gg: AY/fxX4tLDtpzuzvGd7RS6sToJrJHKASotxwp+M1OydxjvtlmiZU3B9OFvdso7/+H7X
+	O4ih+u+wQQjGJlGqmPAZ4mQV+aM7Uak+WyDiXhXJmR/FFkDgY5QqFNwI5dIiwWxPPv/lH7TlV+M
+	6/97W98hjW4b3BeDDRBWZu6SfDVy64cH5HZX1E80NdxN66Bzeovfi9svYWqTN/lzk1tBUeyflRq
+	3lRKoDCqcP4L8+XxC3YrNEdyaGu1WrBq78Q17TZwfSy3BU7/zXGdbSHNEphcHvIdN45aMDlIqat
+	Dr2m0uIybokDw711z0Ikd77fXP/HMn2FI3OxLIz8EXWaC0Pg0efg5ApJO68IwXPSG92Nu5smdaj
+	iVxeLMdL4+hXcuvN0erS1AjYROpTA8fEp1PHPrCO8nIazcPjmY6vyMO5z1RVEB/7Pg5bYc5ZdCP
+	49Op+EY6DXnluT5MpdzLmEYEB44Qt5I9yagtLhuPE98P/TqCQortxSqEPbZY/lyCM=
+X-Received: by 2002:a17:907:6d27:b0:b83:3716:cd52 with SMTP id a640c23a62f3a-b87676a6a4bmr421703266b.24.1768469428162;
+        Thu, 15 Jan 2026 01:30:28 -0800 (PST)
+Message-ID: <477dfa23-7b64-4e2b-9896-9af389e33ceb@gmail.com>
+Date: Thu, 15 Jan 2026 10:30:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/6] xen/x86: move declaration from mem_access.h to
- altp2m.h
-To: Penny Zheng <Penny.Zheng@amd.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Cc: ray.huang@amd.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v1 08/15] xen/riscv: introduce vtimer_set_timer() and
+ vtimer_expired()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis
+ <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>,
- xen-devel@lists.xenproject.org, jason.andryuk@amd.com
-References: <20260115092841.2651224-1-Penny.Zheng@amd.com>
- <20260115092841.2651224-2-Penny.Zheng@amd.com>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1766595589.git.oleksii.kurochko@gmail.com>
+ <8cd3efa488b3da2a6751c92d20bbfeb87b3ba39a.1766595589.git.oleksii.kurochko@gmail.com>
+ <f8808dd1-d571-49ea-8739-ed06dd6c79d1@suse.com>
+ <4e18e4fc-de62-44fc-8ea0-517f6c7ef47f@gmail.com>
+ <f7a47af4-6523-4d92-9beb-0daf639f2f36@suse.com>
+ <b0131e35-3c1b-4e42-9f80-07d246a5df69@gmail.com>
+ <62c22b34-cbad-40f2-a367-ba5fd8d11b51@suse.com>
+ <5c6eff93-0db7-4382-8365-6b32b17f5f4d@gmail.com>
+ <8fa84e68-72b6-4578-9c3b-70d85d268c53@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260115092841.2651224-2-Penny.Zheng@amd.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <8fa84e68-72b6-4578-9c3b-70d85d268c53@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 15.01.2026 10:28, Penny Zheng wrote:
-> Memory access and ALTP2M are two seperate features, and each could be
-> controlled via VM_EVENT or ALTP2M. In order to avoid implicit declaration
-> when ALTP2M=y and VM_EVENT=n on compiling hvm.o/altp2m.o, we move declaration
-> of the following functions from <asm/mem_access.h> to <asm/altp2m.h>:
-> - p2m_set_suppress_ve
-> - p2m_set_suppress_ve_multi
-> - p2m_get_suppress_ve
-> Potential error on altp2m.c also breaks Misra Rule 8.4.
-> 
-> Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
-> ---
->  xen/arch/x86/include/asm/altp2m.h     | 10 ++++++++++
->  xen/arch/x86/include/asm/mem_access.h | 10 ----------
->  2 files changed, 10 insertions(+), 10 deletions(-)
 
-Tamas - can we please get an ack here? I guess I'll time out on waiting for
-one in a day or two.
+On 1/15/26 8:52 AM, Jan Beulich wrote:
+> On 14.01.2026 16:59, Oleksii Kurochko wrote:
+>> On 1/14/26 3:57 PM, Jan Beulich wrote:
+>>> On 14.01.2026 13:27, Oleksii Kurochko wrote:
+>>>> On 1/13/26 4:12 PM, Jan Beulich wrote:
+>>>>> On 13.01.2026 15:44, Oleksii Kurochko wrote:
+>>>>>> On 1/8/26 11:28 AM, Jan Beulich wrote:
+>>>>>>> On 24.12.2025 18:03, Oleksii Kurochko wrote:
+>>>>>>>> +    {
+>>>>>>>> +        stop_timer(&t->timer);
+>>>>>>>> +
+>>>>>>>> +        return;
+>>>>>>>> +    }
+>>>>>>>> +
+>>>>>>>> +    set_timer(&t->timer, expires);
+>>>>>>> See the handling of VCPUOP_set_singleshot_timer for what you may want to
+>>>>>>> do if the expiry asked for is (perhaps just very slightly) into the past.
+>>>>>> I got an idea why we want to check if "expires" already expired, but ...
+>>>>>>
+>>>>>>> There you'll also find a use of migrate_timer(), which you will want to
+>>>>>>> at least consider using here as well.
+>>>>>> ... I don't get why we want to migrate timer before set_timer() here.
+>>>>>> Could you please explain that?
+>>>>> Didn't I see you use migrate_timer() in other patches (making me assume
+>>>>> you understand)? Having the timer tied to the pCPU where the vCPU runs
+>>>>> means the signalling to that vCPU will (commonly) be cheaper.
+>>>> I thought that migrate_timer() is needed only when a vCPU changes the pCPU
+>>>> it is running on to ensure that it is running on correct pCPU after migrations,
+>>>> hotplug events, or scheduling changes. That is why I placed it in
+>>>> vtimer_restore(), as there is no guarantee that the vCPU will run on the
+>>>> same pCPU it was running on previously.
+>>>>
+>>>> So that is why ...
+>>>>
+>>>>> Whether
+>>>>> that actually matters depends on what vtimer_expired() will eventually
+>>>>> contain. Hence why I said "consider using".
+>>>> ... I didn't get why I might need vtimer_expired() in vtimer_set_timer()
+>>>> before set_timer().
+>>>>
+>>>> vtimer_expired() will only notify the vCPU that a timer interrupt has
+>>>> occurred by setting bit in irqs_pending bitmap which then will be synced
+>>>> with vcpu->hvip, but I still do not understand whether migrate_timer()
+>>>> is needed before calling set_timer() here.
+>>> Just to repeat - it's not needed. It may be wanted.
+>>>
+>>>> Considering that vtimer_set_timer() is called from the vCPU while it is
+>>>> running on the current pCPU, and assuming no pCPU rescheduling has
+>>>> occurred for this vCPU, we are already on the correct pCPU.
+>>>> If pCPU rescheduling for the vCPU did occur, then migrate_timer() would
+>>>> have been called in context_switch(),
+>>> Even if the timer wasn't active?
+>> Yes, migrate_timer() is called unconditionally in vtimer_restore() called
+>> from context_switch(). migrate_timer() will activate the timer.
+> Which is wrong?
 
-Penny - may I remind you that it is on you to chase missing acks?
+I don't know, based on the comment above migrate_timer():
+   /* Migrate a timer to a different CPU. The timer may be currently active. */
 
-Jan
+it doesn't mention that it shouldn't be called if the timer wasn't active.
+All around other cases where migrate_timer() is used I don't see also that
+anyone checks if a timer is active or not.
+
+~ Oleksii
+
 
