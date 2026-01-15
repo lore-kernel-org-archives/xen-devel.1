@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C34D41153
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 10:01:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1204652.1519269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF3CD41157
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 10:04:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1204663.1519280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgKAS-0003xe-2Q; Thu, 15 Jan 2026 10:01:28 +0000
+	id 1vgKDU-0004X0-Ih; Thu, 15 Jan 2026 10:04:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1204652.1519269; Thu, 15 Jan 2026 10:01:28 +0000
+Received: by outflank-mailman (output) from mailman id 1204663.1519280; Thu, 15 Jan 2026 10:04:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgKAR-0003xV-VC; Thu, 15 Jan 2026 10:01:27 +0000
-Received: by outflank-mailman (input) for mailman id 1204652;
- Thu, 15 Jan 2026 10:01:27 +0000
+	id 1vgKDU-0004Ws-DH; Thu, 15 Jan 2026 10:04:36 +0000
+Received: by outflank-mailman (input) for mailman id 1204663;
+ Thu, 15 Jan 2026 10:04:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KgiG=7U=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vgKAR-0003P4-9i
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 10:01:27 +0000
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [2a00:1450:4864:20::232])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=6aKL=7U=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vgKDT-0004Wm-Cs
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 10:04:35 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 27c6e6fc-f1f9-11f0-b15e-2bf370ae4941;
- Thu, 15 Jan 2026 11:01:26 +0100 (CET)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-37fd6e91990so6606301fa.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 02:01:26 -0800 (PST)
+ id 978aa261-f1f9-11f0-b15e-2bf370ae4941;
+ Thu, 15 Jan 2026 11:04:34 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-477a219dbcaso5775625e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 02:04:34 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47fb73762cfsm14685615e9.4.2026.01.15.02.04.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Jan 2026 02:04:33 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,127 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27c6e6fc-f1f9-11f0-b15e-2bf370ae4941
+X-Inumbo-ID: 978aa261-f1f9-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768471286; x=1769076086; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/NUq6ZuohHWwa1bqjnFzQy2W23gyUBmH+kKcLMdDFmA=;
-        b=ITxaynnU1T4dTGqIzAr9EwK7f28wPO1+gNqk81v+rqmbKQKhGD4KZ9g1MHoxrjwoG5
-         KtJuuq1JsZI6vOnvVR6fFQ6KN59h5ADiL3ZzbUZOqRHNvO8md2tKHrAxOect5u8bRjNa
-         uHJE3tlZdVANG3FYjsZU3zl6Dh9mK5ASxNAYy0yBUQsB8S2giJBgZUD1775EX7MF6a1z
-         g0Dqx8yzNSXmvnH1w2Q1yH4/X/QA0BBL+MloM047t7Vj4ggOu1mxqVSqaFrSy7PYQynh
-         YwAmUpWj78KvnvaX1o7aX9h4zFIyV/L66iMpsrvE7pbECUsAlWcb/HoutqnCN+r/Ac5G
-         2CKw==
+        d=suse.com; s=google; t=1768471473; x=1769076273; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=fErsITdv1QreScvG162N8masb9sIgtLt4SqV0gAJwg4=;
+        b=bUDSBzAnKAdKKogAdoyFFy4p8XqY1mmo+IpgCU3QQC2s5D2dulkjCpoKY/Hpq47AP+
+         QN1Tra1fG+Uvv1cBb3AynwrdfBepSYgqz/FnEsjgeaDEL+XWix/obi/Oe0bJmoHkJVma
+         UMvELJoXVFf7l4nWX/9SSSdzfUppJ/R0z/sEKcSDPrG7EYslZOjOEOQK23Wj7MfF0ntd
+         G3UcvooJe2GFRy48Y587kOscChkV6BjyOQHZ0d/3D88kx+HE+qZZsceIM3BMVrIvfVHx
+         MffbzxORo+jQvx0O4/XwlGEMMoNfZ2/Xz5ekXvJqyrztoys5ngqHSRNqvVakga2NjiQp
+         Q1Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768471286; x=1769076086;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=/NUq6ZuohHWwa1bqjnFzQy2W23gyUBmH+kKcLMdDFmA=;
-        b=ja2JgHgyyVDLr7SvperoUUxXpPjVDX4RQg8WZwoRTsEjAeCh3a+0T6tWX9zRoxQhuK
-         Dje8qXDZBEtIZGFKDQtX4K7BOj10dxY6D+e5ki3J9Mdt2XRKzBmtlwyn171J842M757Y
-         nEnwv7DZxL5Hlphs8/1ZiOqOwi4eQuuzpYAsytNsypxOQSzH6DUAVQmkRPngn7Zz8QLO
-         DXWH8TKnBG1gZt72RxZYrTvUO9Ceorpf8kwF/ihC+jlGmYTfNOD841S4H4tvJ90dFxI5
-         lZJYBowL7fRok2L4QoLofvDn3C/oaPEtkmfyhdd0Hv4jKFW4pDtHoWe9J+SywYs96eT8
-         qH9w==
-X-Forwarded-Encrypted: i=1; AJvYcCVvxwBdPm7vUDbvg6bn+d0V8b/uYiRZ5aEHvlTcX5zL0dLCSKSl/uOItxwZ9oKkclyZ466geJGrSqw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yyz3POxJeHQx2+RwV0cakunsd59EJ4w7zD8MFZG+VixJc5+u4Z4
-	Sx4fnPDimjOEkY7KLSz8bNaA6ecs/cBx27Zejd5QOHLh5F2Im0k0m9Xf6tGW62LdR/hgeTEoY19
-	GFDrbOMpAOu0yh28S0+PBQ+K5BlrzpwM=
-X-Gm-Gg: AY/fxX5TOMd8+0LLpwk9TS8wxuTZTeyFQd7I6GpX0hufWLSgGFj7tfDJsvIczlHsdNU
-	6x8Vdx9fJLd3umHjVzeOfWyMMdAKI9mi0MCMA/shYurjKLTIvEBgooyuKAdnnNy7memFpRZ/B7g
-	RzKu5ivgkABpCXK3tAYv99DhhYoAaPwHZDEZOr1QXIbbP7UgDVUGMTFxQBZaajVOxZXmRWi+NW5
-	jBxqdela6B6DIxVoAo4YYug5jy3enPiAUizACJYjV+gcDOOKyFQ0cTanpG3aHeB2JFKXmblWqxU
-	7HB2JQcevX/ctkFDjTuRZatS
-X-Received: by 2002:a2e:be28:0:b0:372:8e26:a4d4 with SMTP id
- 38308e7fff4ca-383608260dfmr17319671fa.42.1768471285606; Thu, 15 Jan 2026
- 02:01:25 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768471473; x=1769076273;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fErsITdv1QreScvG162N8masb9sIgtLt4SqV0gAJwg4=;
+        b=CWkJx5gFCGErN1wquSCFAyEOAuQMpqeQKRT+E3OyceWDUlHrEGAPt8dCKzf1Bh/6pQ
+         B1XyndFtWqCRaM9DcddOyUrGren5fvGDu0ajj1Pi9H8o1hNu+rXe+vwOf5DZKxsnhftz
+         LnKxW1RUdmPDGEQwjwhDdFS15d8upR55GYY/Y1Syb3ovx8hLPy0wiTNytSy0oSrUjbp9
+         pHoHrM3BtsiounTPVVzlqUFFeYTbkApNACzTs40An5ti7SjYHAfFIw0YTnYbHji7wd5q
+         rZpDZtWKu83CprOOzbQC/lXgIE04khG+SYshcQxQf8njduwL0mk8WKEvEXryqGwZfME8
+         i6QQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVOAUjlAcks6wMbLEqGp/apPwNgr+K8rzGnhoc6gh1DS3053ZuTXKG3Llvfh7+6I0IOdLSehPkUnwg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxMEoN7amJXcnKXVhAxqZ58dfNTPZZQZOpCx3G8ajkDf82PmABJ
+	cRUEJbpmL3lH/1SMymu+sMStRkQGOMkeChD1zsgAD7prZ6Qxk9YZtIQc8Wl23biDpg==
+X-Gm-Gg: AY/fxX5GOsV9N4KeYlU5ovOIpBdazTgfenHFxydH9IGvtWk664RDdSSETSPQ+B8xWp7
+	2wVX/kk964RTLsJ9UxjfBY6RIXOkEcPnF1P1N9iku6QrWmGeSRXFDNHXDuUiL53cpYnxFJWIG2I
+	ERKmkiOvv/MXBEMzL7IXFjNSByDSpVrQqbVJDEate3OPFigxXGoyofq6O89O4JZh6Hyco6oncsU
+	NfGuSMr7P9AyZdGNukiPPSN+k0TqEztEyHKT3gQprML+gfWXcq90vyXdET/yBiHVhrejO7KTylk
+	6v8LZh8pNbNzXGwoYq618xrY+pZG/5PpEkoiWkLg/c322eYNcWJ+NTI9OOeZwUswcUu/JVyZ+ol
+	S/Ys7wzzTSPLUVswrtyLjsbVaQgiL8OA+Ay78aB6aOxy5iU9tLjgqgZJ4wDlTzEpmYVtnxtCYpl
+	lF8rpx3YIeqFW/erJp54/VW0tRSsFwm4yDfB34m/z+HUJNHDUgy6XlNJ+73AtNNeZuug8jlDCZQ
+	Is=
+X-Received: by 2002:a05:600c:674a:b0:477:b734:8c52 with SMTP id 5b1f17b1804b1-47ee47ca2d4mr56006605e9.14.1768471473507;
+        Thu, 15 Jan 2026 02:04:33 -0800 (PST)
+Message-ID: <128f0e07-05cc-49c3-80f2-303f6a0c75c3@suse.com>
+Date: Thu, 15 Jan 2026 11:04:32 +0100
 MIME-Version: 1.0
-References: <cover.1765472890.git.mykola_kvach@epam.com> <2fade2b96128053fbe3ed59f1d5e3444b32b96c3.1765472890.git.mykola_kvach@epam.com>
- <59fc7f4c-b3f9-4a5e-b438-7989c4cd7c02@suse.com>
-In-Reply-To: <59fc7f4c-b3f9-4a5e-b438-7989c4cd7c02@suse.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 15 Jan 2026 12:00:00 +0200
-X-Gm-Features: AZwV_Qjkeref5iCREf7ie5Selhq0tqavbcVGGwCNSuylaxNVrC_iBERfc4grQN8
-Message-ID: <CAGeoDV9LSSk9joqp=YuRtfMr9afixeep0B5Nu+Y11YQXM8zu_w@mail.gmail.com>
-Subject: Re: [PATCH v7 04/12] xen/arm: gic-v3: add ITS suspend/resume support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, 
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/time: Drop unused parameter from soft_rdtsc()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260115095047.1201825-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260115095047.1201825-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Jan,
+On 15.01.2026 10:50, Andrew Cooper wrote:
+> Fixes: a6ed4543222a ("x86/time: pv_soft_rdtsc() is PV-only")
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Thank you for the review.
+Why Fixes: without you calling out what bug it is that is being fixed (and
+that was introduced by said commit)? That's really where I think Amends: is
+to be used, but yes, I know you dislike that new tag.
 
-On Mon, Dec 15, 2025 at 1:39=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 11.12.2025 19:43, Mykola Kvach wrote:
-> > --- a/xen/include/xen/list.h
-> > +++ b/xen/include/xen/list.h
-> > @@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_he=
-ad *list,
-> >           &(pos)->member !=3D (head);                                  =
-      \
-> >           (pos) =3D list_entry((pos)->member.next, typeof(*(pos)), memb=
-er))
-> >
-> > +/**
-> > + * list_for_each_entry_continue_reverse - iterate backwards from the g=
-iven point
-> > + * @pos:    the type * to use as a loop cursor.
-> > + * @head:   the head for your list.
-> > + * @member: the name of the list_head within the struct.
-> > + *
-> > + * Start to iterate over list of given type backwards, continuing afte=
-r
-> > + * the current position.
-> > + */
-> > +#define list_for_each_entry_continue_reverse(pos, head, member)       =
-    \
-> > +    for ((pos) =3D list_entry((pos)->member.prev, typeof(*(pos)), memb=
-er);  \
-> > +         &(pos)->member !=3D (head);                                  =
-      \
-> > +         (pos) =3D list_entry((pos)->member.prev, typeof(*(pos)), memb=
-er))
-> > +
-> >  /**
-> >   * list_for_each_entry_from - iterate over list of given type from the
-> >   *                            current point
->
-> While not said so anywhere, I understand this is taken from Linux. Maybe =
-we
-> should indeed take it verbatim (as far as possible, i.e. without the use =
-of
-> list_entry_is_head() which we don't have yet), but I'd like to point out
-> that in the comment "continuing after the current position" is ambiguous.
-> In list order, what is meant is "before the current position"; "after" is
-> correct only when considering iteration direction. Personally I would muc=
-h
-> prefer if this was disambiguated.
+The Misra rule 2.2 (dead code) violation was pre-existing to the named commit.
+Plus that rule isn't among the accepted ones, i.e. while we should strive to
+not have violations, having ones isn't quite a "bug" (yet).
 
-Got it. I=E2=80=99ll disambiguate the wording while keeping it close to the
-Linux text, e.g.:
+But yes - I probably could / should have noticed this and done the change
+right while moving the function.
 
-=E2=80=9CStart to iterate over list of given type backwards, continuing wit=
-h the
-entry preceding the current position (i.e. starting from pos->member.prev).=
-=E2=80=9D
+Without the tag, or with it changed to Amends:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Best regards,
-Mykola
-
-
-
->
-> Jan
+Jan
 
