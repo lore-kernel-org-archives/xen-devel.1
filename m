@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A64AD44C56
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 14:50:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1205249.1519601 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A56BFD44C61
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jan 2026 15:17:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1205291.1519611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgOgG-0006LK-CH; Thu, 15 Jan 2026 14:50:36 +0000
+	id 1vgP62-00019s-DT; Thu, 15 Jan 2026 15:17:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1205249.1519601; Thu, 15 Jan 2026 14:50:36 +0000
+Received: by outflank-mailman (output) from mailman id 1205291.1519611; Thu, 15 Jan 2026 15:17:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgOgG-0006LD-9p; Thu, 15 Jan 2026 14:50:36 +0000
-Received: by outflank-mailman (input) for mailman id 1205249;
- Thu, 15 Jan 2026 14:50:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vgP62-00019l-AR; Thu, 15 Jan 2026 15:17:14 +0000
+Received: by outflank-mailman (input) for mailman id 1205291;
+ Thu, 15 Jan 2026 15:17:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ba0k=7U=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vgOgF-0006L7-Rz
- for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 14:50:35 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8be149a4-f221-11f0-b15e-2bf370ae4941;
- Thu, 15 Jan 2026 15:50:34 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b86ed375d37so134970566b.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 06:50:34 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
- [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b842a27cc6bsm2814906366b.23.2026.01.15.06.50.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Jan 2026 06:50:32 -0800 (PST)
+ <SRS0=rpt9=7U=bounce.vates.tech=bounce-md_30504962.696904f1.v1-cc88d528486c4ba3b4af9c7aaf14be2a@srs-se1.protection.inumbo.net>)
+ id 1vgP61-00019f-9H
+ for xen-devel@lists.xenproject.org; Thu, 15 Jan 2026 15:17:13 +0000
+Received: from mail14.wdc04.mandrillapp.com (mail14.wdc04.mandrillapp.com
+ [205.201.139.14]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 40a15334-f225-11f0-9ccf-f158ae23cfc8;
+ Thu, 15 Jan 2026 16:17:06 +0100 (CET)
+Received: from pmta16.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail14.wdc04.mandrillapp.com (Mailchimp) with ESMTP id 4dsRRP2W5Zz8XRwLR
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jan 2026 15:17:05 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ cc88d528486c4ba3b4af9c7aaf14be2a; Thu, 15 Jan 2026 15:17:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,197 +43,286 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8be149a4-f221-11f0-b15e-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768488634; x=1769093434; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=16eX45xSUfz4pCxpxfVOREW80XWq4NETUSWgOvDD4hY=;
-        b=WpnWo/QuD5ul7ZoTeH3Uup5k6wC8u+Jeu4Mi6inAI9ayOWH1Bg2Xjrbd6Z9y2CjN/5
-         4Jhk+oc0PjpYviDlwG3vhMnb5NsrNdiYLfyr8uQmyH9cbUKddjOARUJGwEKvnNfu1IeP
-         zYmfJW9+BLrccqRMrStbI9qbelor8hwIiANYGhqmZq+IiAOFDDRV8ikRehANK8PvPdOg
-         vm3GYunHHirfJAvxzziBLOI5N/X4HUMIojmseQs0o/tzuNX6mkiVjKeIyZK181mNRsNQ
-         SQ4i6oEiRNuhD3C+D1CYi3B7nvhmuW6WW7Oyr/mjGk0t0mwbYaFEPUUukiEdTLw9P0F1
-         H3gQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768488634; x=1769093434;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=16eX45xSUfz4pCxpxfVOREW80XWq4NETUSWgOvDD4hY=;
-        b=VDELMopaOp5eQC1cYrg/sMZUAwpV4eIZ/g5t5Q25FLTN8LaqMXePPSSEY9//cRF7vZ
-         OKxypg1MMhnX5mvEE11TyJBmvmqAuzPjQ9cCWwT7HK3x2sGp/UNCDXeNCjFNPFh0wjxD
-         ovefhndQOonUuZlHK2jCyUz2eJMhyau+Q3Q8jhjTblDZBAhpCGS9N58/H+C4oDRjOMWP
-         mmClDEdTQXj9nHNO2fukw2dOxOdI5V1EEGeYc+kh4wLIUxASlrOMqdDFVIhGK6NWRhuN
-         vsEM/meNKCUf9BuT3iTzfS5AV0f7ka0bqCS/6I6t4TyEHpFGu2caTUucDTVklV8GjTKg
-         Wa/g==
-X-Forwarded-Encrypted: i=1; AJvYcCVvV1y21ubHoLHth96GoAcaHlQnhEnByMmSQmTAQy/Ak0/nZYsc50+HWO1pbWMIp84SNT+H1LclhY8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxWTReXhV2MrgMBKj96au00zYKEDij3fWjQhxWwbsaQ16/x4Utx
-	iY/mEjTjxv5alhcboQJ7JfEMo6o3L/HiiYUJ4QlzbRtm86mLIKi618G0
-X-Gm-Gg: AY/fxX5F6heCTvqqxIp3QrbM+NSVl3WKmRZPe72MS2OehANKCjceIbzDbgtIVDyxoHK
-	7D0PlQ1NqUJfi1aGAUeKoq2jFihZpqbpMFsebAp+E4YoXuV5HV7KuObH04k7zbOe7FDquay2jnL
-	SDQ5FCVh3UdaIERumGs6l3Yo3fKlgK1oBgaur3HdVKhjuqJdB+/1/pimPd0e+DUYKJjS4lb91P4
-	pOVxJtVRd+XKxmWllGFX6P/SgPHPqE6bQnqYh2UnWB9u3BaUxJS0L5T8AdCLZv5ylAFNpv92G2X
-	lTWhEM26LbqFRDWn9c3ts+QIFXewI+xsHHDxIWCqp0aNzQDSGfMh7bJZmE33aXCm8DRaBrrMeg8
-	J4LcxaG0kA7l75tPQexlo9OOniEfahiA2p9mb8JSn0448I0b9kj9rxGaYNinX7Z/EH5ManYPtnf
-	rXEWZKOYLodRCHtNEJhDosUI/VNoSAF1MbB+ycG+2q+kbpDqvgQSMAZQavY4JDSTc=
-X-Received: by 2002:a17:907:75c7:b0:b87:6f58:a848 with SMTP id a640c23a62f3a-b876f58b96cmr300906766b.51.1768488633420;
-        Thu, 15 Jan 2026 06:50:33 -0800 (PST)
-Message-ID: <4e94f7f5-2cf2-4695-873b-5d269f10ddac@gmail.com>
-Date: Thu, 15 Jan 2026 15:50:32 +0100
+X-Inumbo-ID: 40a15334-f225-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1768490225; x=1768760225;
+	bh=E4u2qur7qFOqEXURQqrbQx6Ra8vsG2nE9Sz9kh4hOSQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=kxbSX9UIvzX0Nbna5a+R+b6UE1bLk1Ffez+ROzGGxkLnO2yzWNoawy+Um6PgC4Q/H
+	 ZTVT+n9UAeFWumA5fbphYi0oleWhk6DzdKm+Fp4g/wMjzv13Ls2sR3QV88eE8a5HH2
+	 cV8fSULVjdFFNkB9F52qVjiUd0COj4JGIdSCj16atss00AhP0T7599RoX8BF01H0O+
+	 UE8AUbqIzQLSqpdhzDmOxWjnHpjYb8hYf/SG3SW2BMeEjMPj9FWCtYI2ealZOGl41J
+	 lO30T7cf0e9BKIrZrlp2PbokROv2SyZ47Jnh4oj5rYqCgDYuM38CywiUctFmF+MGtU
+	 Nnva2MJdtgGTA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1768490225; x=1768750725; i=julian.vetter@vates.tech;
+	bh=E4u2qur7qFOqEXURQqrbQx6Ra8vsG2nE9Sz9kh4hOSQ=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=HbS7nfScM3qXoSz7E1wNpMx2rgzPnlNKNSibgG6QN2uSVUtuNkNKvMaQo53dSHnXu
+	 kHJXsTyp/Oz263SUQKmFiwJuG15xe3Q78VUV9PQZieeEJZea2i9Zb9n/1g+/4Rz3sI
+	 dVcoXVAIEWtP2RCUGgoM4FoTmNXZNNL/+z8dWOc74Ph4ndnx5d0PuQV1TGUfS/6uyZ
+	 5gM6GwYlFUvCuelkWEaoOkNMULVeJd22E3JT7xDGEU1Lit13kMQW9XGyWj07NVQwRa
+	 k4mDKCpsjWwM6fT6q/lefTP2zGu4w0VVaT/BXiOXNLKsBuCZc1cRa+FPsnm3l1QjdL
+	 vvGW8+U6ekVBw==
+From: "Julian Vetter" <julian.vetter@vates.tech>
+Subject: =?utf-8?Q?[PATCH]=20xen:=20Move=20NX=20handling=20to=20a=20dedicated=20place?=
+X-Mailer: git-send-email 2.51.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1768490223908
+To: xen-devel@lists.xenproject.org
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Daniel P . Smith" <dpsmith@apertussolutions.com>, "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>, "Julian Vetter" <julian.vetter@vates.tech>
+Message-Id: <20260115151658.3725784-1-julian.vetter@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.cc88d528486c4ba3b4af9c7aaf14be2a?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260115:md
+Date: Thu, 15 Jan 2026 15:17:05 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/riscv: dump CSRs on unexpected traps
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260115125601.70834-1-oleksii.kurochko@gmail.com>
- <8377bdc2-d92d-4c3f-893b-19c842cad3a7@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <8377bdc2-d92d-4c3f-893b-19c842cad3a7@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
+Currently the CONFIG_REQUIRE_NX prevents booting XEN, if NX is disabled
+in the BIOS. AMD doesn't have a software-accessible MSR to re-enable it,
+so there is nothing we can do. The system is going to die anyway. But on
+Intel NX might just be hidden via IA32_MISC_ENABLE.XD_DISABLE. But the
+function to re-enable it is called after the check + panic in
+efi_arch_cpu. So, this patch removes the early check and moves the
+entire NX handling into a dedicated place.
 
-On 1/15/26 2:12 PM, Jan Beulich wrote:
-> On 15.01.2026 13:56, Oleksii Kurochko wrote:
->> --- a/xen/arch/riscv/traps.c
->> +++ b/xen/arch/riscv/traps.c
->> @@ -17,6 +17,10 @@
->>   #include <asm/traps.h>
->>   #include <asm/vsbi.h>
->>   
->> +#define print_csr(csr) do { \
->> +    printk("\t" #csr ": %#02lx\n", csr_read(csr)); \
-> Why the 02 in the format? If you wanted to align things, you'd use %016lx. (I
-> also don't think the 0x prefixes are overly useful in such dumping, but others
-> may disagree.) As an aside, the width of 2 would be fully consumed by your use
-> of #, except for zero which would (oddly) be printed as 00 afaict.
+Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+---
+ xen/arch/x86/boot/head.S         | 56 --------------------------------
+ xen/arch/x86/boot/trampoline.S   |  5 ++-
+ xen/arch/x86/cpu/intel.c         |  4 ---
+ xen/arch/x86/efi/efi-boot.h      | 12 -------
+ xen/arch/x86/include/asm/setup.h |  2 ++
+ xen/arch/x86/setup.c             | 46 ++++++++++++++++++++++++++
+ 6 files changed, 50 insertions(+), 75 deletions(-)
 
-I used before 0x%02lx and after switch to %# don't think that 02 would fully consumed
-by #.
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index 77bb7a9e21..7fb7fb1351 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -133,7 +133,6 @@ multiboot2_header:
+ .Lbad_ldr_nbs: .asciz "ERR: Bootloader shutdown EFI x64 boot services!"
+ .Lbad_efi_msg: .asciz "ERR: EFI IA-32 platforms are not supported!"
+ .Lbag_alg_msg: .asciz "ERR: Xen must be loaded at a 2Mb boundary!"
+-.Lno_nx_msg:   .asciz "ERR: Not an NX-capable CPU!"
+ 
+         .section .init.data, "aw", @progbits
+         .subsection 1 /* Put data here after the page tables (in x86_64.S). */
+@@ -165,11 +164,6 @@ early_error: /* Here to improve the disassembly. */
+ .Lnot_aligned:
+         mov     $sym_offs(.Lbag_alg_msg), %ecx
+         jmp     .Lget_vtb
+-#ifdef CONFIG_REQUIRE_NX
+-.Lno_nx:
+-        mov     $sym_offs(.Lno_nx_msg), %ecx
+-        jmp     .Lget_vtb
+-#endif
+ .Lmb2_no_bs:
+         /*
+          * Ditto. Additionally, here there is a chance that Xen was started
+@@ -547,56 +541,6 @@ trampoline_setup:
+         bt      $cpufeat_bit(X86_FEATURE_LM),%edx
+         jnc     .Lbad_cpu
+ 
+-        /*
+-         * Check for NX
+-         *   - If Xen was compiled requiring it simply assert it's
+-         *     supported. The trampoline already has the right constant.
+-         *   - Otherwise, update the trampoline EFER mask accordingly.
+-         */
+-        bt      $cpufeat_bit(X86_FEATURE_NX), %edx
+-        jc     .Lgot_nx
+-
+-        /*
+-         * NX appears to be unsupported, but it might be hidden.
+-         *
+-         * The feature is part of the AMD64 spec, but the very first Intel
+-         * 64bit CPUs lacked the feature, and thereafter there was a
+-         * firmware knob to disable the feature. Undo the disable if
+-         * possible.
+-         *
+-         * All 64bit Intel CPUs support this MSR. If virtualised, expect
+-         * the hypervisor to either emulate the MSR or give us NX.
+-         */
+-        xor     %eax, %eax
+-        cpuid
+-        cmp     $X86_VENDOR_INTEL_EBX, %ebx
+-        jnz     .Lno_nx
+-        cmp     $X86_VENDOR_INTEL_EDX, %edx
+-        jnz     .Lno_nx
+-        cmp     $X86_VENDOR_INTEL_ECX, %ecx
+-        jnz     .Lno_nx
+-
+-        /* Clear the XD_DISABLE bit */
+-        mov     $MSR_IA32_MISC_ENABLE, %ecx
+-        rdmsr
+-        btr     $2, %edx
+-        jnc     .Lno_nx
+-        wrmsr
+-        orb     $MSR_IA32_MISC_ENABLE_XD_DISABLE >> 32, 4 + sym_esi(trampoline_misc_enable_off)
+-
+-        /* Check again for NX */
+-        mov     $0x80000001, %eax
+-        cpuid
+-        bt      $cpufeat_bit(X86_FEATURE_NX), %edx
+-        jnc     .Lno_nx
+-
+-.Lgot_nx:
+-#ifndef CONFIG_REQUIRE_NX
+-        /* Adjust EFER given that NX is present */
+-        orb     $EFER_NXE >> 8, 1 + sym_esi(trampoline_efer)
+-.Lno_nx:
+-#endif
+-
+         /* Stash TSC to calculate a good approximation of time-since-boot */
+         rdtsc
+         mov     %eax,     sym_esi(boot_tsc_stamp)
+diff --git a/xen/arch/x86/boot/trampoline.S b/xen/arch/x86/boot/trampoline.S
+index a92e399fbe..8e8d50cbdf 100644
+--- a/xen/arch/x86/boot/trampoline.S
++++ b/xen/arch/x86/boot/trampoline.S
+@@ -144,10 +144,9 @@ gdt_48:
+ GLOBAL(trampoline_misc_enable_off)
+         .quad   0
+ 
+-/* EFER OR-mask for boot paths.  SCE conditional on PV support, NX added when available. */
++/* EFER OR-mask for boot paths.  SCE conditional on PV support. */
+ GLOBAL(trampoline_efer)
+-        .long   EFER_LME | (EFER_SCE * IS_ENABLED(CONFIG_PV)) | \
+-                (EFER_NXE * IS_ENABLED(CONFIG_REQUIRE_NX))
++        .long   EFER_LME | (EFER_SCE * IS_ENABLED(CONFIG_PV))
+ 
+ GLOBAL(trampoline_xen_phys_start)
+         .long   0
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index b76797cb9a..e8cf51e853 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -351,10 +351,6 @@ static void cf_check early_init_intel(struct cpuinfo_x86 *c)
+ 	if (c->x86 == 15 && c->x86_cache_alignment == 64)
+ 		c->x86_cache_alignment = 128;
+ 
+-	if (c == &boot_cpu_data &&
+-	    bootsym(trampoline_misc_enable_off) & MSR_IA32_MISC_ENABLE_XD_DISABLE)
+-		printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
+-
+ 	intel_unlock_cpuid_leaves(c);
+ 
+ 	/* CPUID workaround for Intel 0F33/0F34 CPU */
+diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
+index 0194720003..8dfd549f12 100644
+--- a/xen/arch/x86/efi/efi-boot.h
++++ b/xen/arch/x86/efi/efi-boot.h
+@@ -748,18 +748,6 @@ static void __init efi_arch_cpu(void)
+     if ( (eax >> 16) == 0x8000 && eax > 0x80000000U )
+     {
+         caps[FEATURESET_e1d] = cpuid_edx(0x80000001U);
+-
+-        /*
+-         * This check purposefully doesn't use cpu_has_nx because
+-         * cpu_has_nx bypasses the boot_cpu_data read if Xen was compiled
+-         * with CONFIG_REQUIRE_NX
+-         */
+-        if ( IS_ENABLED(CONFIG_REQUIRE_NX) &&
+-             !boot_cpu_has(X86_FEATURE_NX) )
+-            blexit(L"This build of Xen requires NX support");
+-
+-        if ( cpu_has_nx )
+-            trampoline_efer |= EFER_NXE;
+     }
+ }
+ 
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index b01e83a8ed..16f53725ca 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -70,4 +70,6 @@ extern bool opt_dom0_msr_relaxed;
+ 
+ #define max_init_domid (0)
+ 
++void nx_init(void);
++
+ #endif
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 27c63d1d97..608720b717 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1119,6 +1119,50 @@ static struct domain *__init create_dom0(struct boot_info *bi)
+     return d;
+ }
+ 
++void __init nx_init(void)
++{
++    uint64_t misc_enable;
++    uint32_t eax, ebx, ecx, edx;
++
++    if ( !boot_cpu_has(X86_FEATURE_NX) )
++    {
++        /* Intel: try to unhide NX by clearing XD_DISABLE */
++        cpuid(0, &eax, &ebx, &ecx, &edx);
++        if ( ebx == X86_VENDOR_INTEL_EBX &&
++             ecx == X86_VENDOR_INTEL_ECX &&
++             edx == X86_VENDOR_INTEL_EDX )
++        {
++            rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
++            if ( misc_enable & MSR_IA32_MISC_ENABLE_XD_DISABLE )
++            {
++                misc_enable &= ~MSR_IA32_MISC_ENABLE_XD_DISABLE;
++                wrmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
++
++                /* Re-read CPUID after having cleared XD_DISABLE */
++                boot_cpu_data.x86_capability[FEATURESET_e1d] = cpuid_edx(0x80000001U);
++
++                /* Adjust misc_enable_off for secondary startup and wakeup code */
++                bootsym(trampoline_misc_enable_off) |= MSR_IA32_MISC_ENABLE_XD_DISABLE;
++                printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
++            }
++        }
++        /* AMD: nothing we can do - NX must be enabled in BIOS */
++    }
++
++    /* Enable EFER.NXE only if NX is available */
++    if ( boot_cpu_has(X86_FEATURE_NX) )
++    {
++        if ( !(read_efer() & EFER_NXE) )
++            write_efer(read_efer() | EFER_NXE);
++
++        /* Adjust trampoline_efer for secondary startup and wakeup code */
++        bootsym(trampoline_efer) |= EFER_NXE;
++    }
++
++    if ( IS_ENABLED(CONFIG_REQUIRE_NX) && !boot_cpu_has(X86_FEATURE_NX) )
++        panic("This build of Xen requires NX support\n");
++}
++
+ /* How much of the directmap is prebuilt at compile time. */
+ #define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
+ 
+@@ -1159,6 +1203,8 @@ void asmlinkage __init noreturn __start_xen(void)
+     rdmsrl(MSR_EFER, this_cpu(efer));
+     asm volatile ( "mov %%cr4,%0" : "=r" (info->cr4) );
+ 
++    nx_init();
++
+     /* Enable NMIs.  Our loader (e.g. Tboot) may have left them disabled. */
+     enable_nmis();
+ 
+-- 
+2.51.0
 
-I am okay to use just %lx.
-
->
->> +} while ( 0 )
-> Why the do/while wrapping, btw?
-
-Added it automatically, there is no really to have it here. I'll drop.
 
 
->
->> @@ -99,12 +103,63 @@ static const char *decode_cause(unsigned long cause)
->>       return decode_trap_cause(cause);
->>   }
->>   
->> +static void dump_csrs(unsigned long cause)
->> +{
->> +    unsigned long hstatus;
->> +    bool gva;
->> +
->> +    printk("\nDumping CSRs...\n");
->> +
->> +    printk("Supervisor CSRs\n");
->> +    print_csr(CSR_STVEC);
->> +    print_csr(CSR_SATP);
->> +    print_csr(CSR_SEPC);
->> +
->> +    hstatus = csr_read(CSR_HSTATUS);
->> +    gva = !!(hstatus & HSTATUS_GVA);
-> No need for !! when the lhs type is bool. Question is whether gva is useful
-> to have as a local in the first place, when ...
->
->> +    printk("\tCSR_STVAL: %#02lx%s\n", csr_read(CSR_STVAL),
->> +           gva ? ", (guest virtual address)" : "");
-> ...  this it's sole use (you don't use where you could further down).
+--
+Julian Vetter | Vates Hypervisor & Kernel Developer
 
-Agree, with such usage there is no really necessity for it.
+XCP-ng & Xen Orchestra - Vates solutions
 
->
->> +    printk("\tCSR_SCAUSE: %#02lx\n", cause);
->> +    printk("\t\tDescription: %s\n", decode_cause(cause));
->> +    print_csr(CSR_SSTATUS);
->> +
->> +    printk("\nVirtual Supervisor CSRs\n");
->> +    print_csr(CSR_VSTVEC);
->> +    print_csr(CSR_VSATP);
->> +    print_csr(CSR_VSEPC);
->> +    print_csr(CSR_VSTVAL);
->> +    cause = csr_read(CSR_VSCAUSE);
->> +    printk("\tCSR_VSCAUSE: %#02lx\n", cause);
->> +    printk("\t\tDescription: %s\n", decode_cause(cause));
->> +    print_csr(CSR_VSSTATUS);
-> Everything below I understand wants dumping, but for much of the above
-> that's less clear to me. Why would guest's values be relevant when we
-> have a hypervisor problem?
-
-It could be useful when we jump to guest, something wasn't configured
-correctly and so lets say an illegal instruction in guest happen and
-so it would be useful to at least understand what is this instruction
-based on VSEPC or VSTVAL.
-
-All others probaly there is no need to have printed, I don't remember
-that I used them during debug.
-
-
->
->> +    printk("\nHypervisor CSRs\n");
->> +
->> +    print_csr(CSR_HSTATUS);
-> Above you special-case VSCAUSE, but here you re-read HSTATUS.
-
-Because above I re-used 'cause' then for decode_cause().
-
->
->> +    printk("\t\thstatus.VTSR=%d\n", !!(hstatus & HSTATUS_VTSR));
->> +    printk("\t\thstatus.VTVM=%d\n", !!(hstatus & HSTATUS_VTVM));
->> +    printk("\t\thstatus.HU=%d\n", !!(hstatus & HSTATUS_HU));
->> +    printk("\t\thstatus.SPVP=%d\n", !!(hstatus & HSTATUS_SPVP));
->> +    printk("\t\thstatus.SPV=%d\n", !!(hstatus & HSTATUS_SPV));
->> +    printk("\t\thstatus.GVA=%d\n", !!(hstatus & HSTATUS_GVA));
-> Might these better be put on a single line, e.g. in the form
->
->    [VTSR SPVP SPV]
->
-> i.e. enumerating the (interesting) set bits textually?
-
-Agree, visually it would be better.
-
->
->> +    print_csr(CSR_HGATP);
->> +    print_csr(CSR_HTVAL);
->> +    print_csr(CSR_HTINST);
->> +    print_csr(CSR_HEDELEG);
->> +    print_csr(CSR_HIDELEG);
->> +    print_csr(CSR_HSTATEEN0);
->> +}
->> +
->>   static void do_unexpected_trap(const struct cpu_user_regs *regs)
->>   {
->>       unsigned long cause = csr_read(CSR_SCAUSE);
->>   
->>       printk("Unhandled exception: %s\n", decode_cause(cause));
->>   
->> +    dump_csrs(cause);
->> +
->>       die();
->>   }
-> Apart from CSRs, how about also dumping GPRs?
-
-Maybe, it is a good idea and it would be nice to add them.
-
-I just almost never needed them for debugging so I am not printing
-them.
-
-~ Oleksii
+web: https://vates.tech
 
 
