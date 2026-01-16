@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1DC0D4A5EE
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 03:09:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1206069.1519826 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B45CD4A5FB
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 04:35:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1206119.1519846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgaD3-00031V-Vo; Fri, 16 Jan 2026 03:09:13 +0000
+	id 1vgbYC-0005Rc-Ba; Fri, 16 Jan 2026 04:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1206069.1519826; Fri, 16 Jan 2026 03:09:13 +0000
+Received: by outflank-mailman (output) from mailman id 1206119.1519846; Fri, 16 Jan 2026 04:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgaD3-00031O-Sa; Fri, 16 Jan 2026 03:09:13 +0000
-Received: by outflank-mailman (input) for mailman id 1206069;
- Fri, 16 Jan 2026 03:09:12 +0000
+	id 1vgbYC-0005RV-8p; Fri, 16 Jan 2026 04:35:08 +0000
+Received: by outflank-mailman (input) for mailman id 1206119;
+ Fri, 16 Jan 2026 04:35:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1vgaD2-00031I-A8
- for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 03:09:12 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbYA-0005E6-Pc
+ for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 04:35:06 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgaD0-006BCR-16;
- Fri, 16 Jan 2026 03:09:10 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbYA-006Cye-1i;
+ Fri, 16 Jan 2026 04:35:06 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgaCz-005Mm8-2F;
- Fri, 16 Jan 2026 03:09:09 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbY9-005RC1-2y;
+ Fri, 16 Jan 2026 04:35:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,11 +42,11 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
-	Subject:Cc:To:From; bh=SbEWkPeAnSslQvi8YgwfbD8xqGWKRn1zKia3IHWmxB0=; b=WbvKjR
-	Cl7ShQp+RVf+wi4jj0fQzYtTPRZMeMWLUwd1+xDrbaB9D0I7Ua6kjFqQpKTBEF1FPBSsCiKHBA5Cw
-	D60HNcFVZfMympJqxg/XCoI+TYBjTB8PkpY2/ySGTQVferByqK1XZDl1uSeZitQPuaoHqpwphUCYF
-	gjnzKf3TtnU=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=kh21T0kKV5XodX2DHwO7OSuhQ97nSlNN542UIGS2Vhw=; b=Afvnp0XjZ2mG+CkbS9x0iACoZK
+	PrjKPb+/yXNdGNStzyPTn2w4WngrnRlVenv07LA9PZnmeYOC1UHdWiHHO4xPuAPrY1oMX8AaXOm4K
+	TPiU4fBJWOH/hm847E7n+bq+Sa70rAyccAXyYkF0KANFxIDaLckjrfPXoV4QhEkDd6Eo=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,46 +57,271 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v2] INSTALL: remove unsupported XEN_CONFIG_EXPERT from documentation
-Date: Thu, 15 Jan 2026 19:08:43 -0800
-Message-ID: <20260116030842.415583-2-dmukhin@ford.com>
+Subject: [PATCH v1 1/4] scripts/config: import Kconfig manipulation tool from Linux
+Date: Thu, 15 Jan 2026 20:34:55 -0800
+Message-ID: <20260116043458.730728-2-dmukhin@ford.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260116043458.730728-1-dmukhin@ford.com>
+References: <20260116043458.730728-1-dmukhin@ford.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Amends: 37339ba9ef46 ("automation: Remove XEN_CONFIG_EXPERT leftovers")
+Manipulating Kconfig settings is often required when preparing a custom
+Xen build using an external build system (e.g., a Yocto-based workflow).
+
+Import the Kconfig manipulation tool from the Linux kernel
+(commit 0f61b1860cc3, Linux v6.19-rc5) to support this use case.
+
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-Changes since v1:
-- rephrased a note about EXPERT features
-- Link to v1: https://lore.kernel.org/xen-devel/20260108141641.506534-2-dmukhin@ford.com/
----
- INSTALL | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ xen/scripts/config | 236 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 236 insertions(+)
+ create mode 100755 xen/scripts/config
 
-diff --git a/INSTALL b/INSTALL
-index c2e756bf4b2b..919e1c04891b 100644
---- a/INSTALL
-+++ b/INSTALL
-@@ -33,11 +33,11 @@ small subset of the options.  Attempts to change other options will be
- silently overridden.  The only way to find which configuration options
- are available is to run `make menuconfig' or the like.
- 
--You can counter-override this behaviour by setting XEN_CONFIG_EXPERT=y
--in your environment.  However, doing this is not supported and the
--resulting configurations do not receive security support.  If you set
--this variable there is nothing stopping you setting dangerously
--experimental combinations of features - not even any warnings.
-+This behavior can be overridden by enabling "Configure EXPERT features"
-+in Kconfig (CONFIG_EXPERT). However, resulting configurations do not
-+receive security support. In addition, CONFIG_EXPERT permits the
-+selection of experimental and potentially unsafe feature combinations
-+without generating configuration warnings.
- 
- Options recognized by configure
- ===============================
+diff --git a/xen/scripts/config b/xen/scripts/config
+new file mode 100755
+index 000000000000..ea475c07de28
+--- /dev/null
++++ b/xen/scripts/config
+@@ -0,0 +1,236 @@
++#!/usr/bin/env bash
++# SPDX-License-Identifier: GPL-2.0
++# Manipulate options in a .config file from the command line
++
++myname=${0##*/}
++
++# If no prefix forced, use the default CONFIG_
++CONFIG_="${CONFIG_-CONFIG_}"
++
++# We use an uncommon delimiter for sed substitutions
++SED_DELIM=$(echo -en "\001")
++
++usage() {
++	cat >&2 <<EOL
++Manipulate options in a .config file from the command line.
++Usage:
++$myname options command ...
++commands:
++	--enable|-e option   Enable option
++	--disable|-d option  Disable option
++	--module|-m option   Turn option into a module
++	--set-str option string
++	                     Set option to "string"
++	--set-val option value
++	                     Set option to value
++	--undefine|-u option Undefine option
++	--state|-s option    Print state of option (n,y,m,undef)
++
++	--enable-after|-E beforeopt option
++                             Enable option directly after other option
++	--disable-after|-D beforeopt option
++                             Disable option directly after other option
++	--module-after|-M beforeopt option
++                             Turn option into module directly after other option
++	--refresh            Refresh the config using old settings
++
++	commands can be repeated multiple times
++
++options:
++	--file config-file   .config file to change (default .config)
++	--keep-case|-k       Keep next symbols' case (dont' upper-case it)
++
++$myname doesn't check the validity of the .config file. This is done at next
++make time.
++
++By default, $myname will upper-case the given symbol. Use --keep-case to keep
++the case of all following symbols unchanged.
++
++$myname uses 'CONFIG_' as the default symbol prefix. Set the environment
++variable CONFIG_ to the prefix to use. Eg.: CONFIG_="FOO_" $myname ...
++EOL
++	exit 1
++}
++
++checkarg() {
++	ARG="$1"
++	if [ "$ARG" = "" ] ; then
++		usage
++	fi
++	case "$ARG" in
++	${CONFIG_}*)
++		ARG="${ARG/${CONFIG_}/}"
++		;;
++	esac
++	if [ "$MUNGE_CASE" = "yes" ] ; then
++		ARG="`echo $ARG | tr a-z A-Z`"
++	fi
++}
++
++txt_append() {
++	local anchor="$1"
++	local insert="$2"
++	local infile="$3"
++	local tmpfile="$infile.swp"
++
++	# sed append cmd: 'a\' + newline + text + newline
++	cmd="$(printf "a\\%b$insert" "\n")"
++
++	sed -e "/$anchor/$cmd" "$infile" >"$tmpfile"
++	# replace original file with the edited one
++	mv "$tmpfile" "$infile"
++}
++
++txt_subst() {
++	local before="$1"
++	local after="$2"
++	local infile="$3"
++	local tmpfile="$infile.swp"
++
++	sed -e "s$SED_DELIM$before$SED_DELIM$after$SED_DELIM" "$infile" >"$tmpfile"
++	# replace original file with the edited one
++	mv "$tmpfile" "$infile"
++}
++
++txt_delete() {
++	local text="$1"
++	local infile="$2"
++	local tmpfile="$infile.swp"
++
++	sed -e "/$text/d" "$infile" >"$tmpfile"
++	# replace original file with the edited one
++	mv "$tmpfile" "$infile"
++}
++
++set_var() {
++	local name=$1 new=$2 before=$3
++
++	name_re="^($name=|# $name is not set)"
++	before_re="^($before=|# $before is not set)"
++	if test -n "$before" && grep -Eq "$before_re" "$FN"; then
++		txt_append "^$before=" "$new" "$FN"
++		txt_append "^# $before is not set" "$new" "$FN"
++	elif grep -Eq "$name_re" "$FN"; then
++		txt_subst "^$name=.*" "$new" "$FN"
++		txt_subst "^# $name is not set" "$new" "$FN"
++	else
++		echo "$new" >>"$FN"
++	fi
++}
++
++undef_var() {
++	local name=$1
++
++	txt_delete "^$name=" "$FN"
++	txt_delete "^# $name is not set" "$FN"
++}
++
++FN=.config
++CMDS=()
++while [[ $# -gt 0 ]]; do
++	if [ "$1" = "--file" ]; then
++		if [ "$2" = "" ]; then
++			usage
++		fi
++		FN="$2"
++		shift 2
++	else
++		CMDS+=("$1")
++		shift
++	fi
++done
++
++set -- "${CMDS[@]}"
++if [ "$1" = "" ] ; then
++	usage
++fi
++
++MUNGE_CASE=yes
++while [ "$1" != "" ] ; do
++	CMD="$1"
++	shift
++	case "$CMD" in
++	--keep-case|-k)
++		MUNGE_CASE=no
++		continue
++		;;
++	--refresh)
++		;;
++	--*-after|-E|-D|-M)
++		checkarg "$1"
++		A=$ARG
++		checkarg "$2"
++		B=$ARG
++		shift 2
++		;;
++	-*)
++		checkarg "$1"
++		shift
++		;;
++	esac
++	case "$CMD" in
++	--enable|-e)
++		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=y"
++		;;
++
++	--disable|-d)
++		set_var "${CONFIG_}$ARG" "# ${CONFIG_}$ARG is not set"
++		;;
++
++	--module|-m)
++		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=m"
++		;;
++
++	--set-str)
++		# sed swallows one level of escaping, so we need double-escaping
++		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=\"${1//\"/\\\\\"}\""
++		shift
++		;;
++
++	--set-val)
++		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=$1"
++		shift
++		;;
++	--undefine|-u)
++		undef_var "${CONFIG_}$ARG"
++		;;
++
++	--state|-s)
++		if grep -q "# ${CONFIG_}$ARG is not set" $FN ; then
++			echo n
++		else
++			V="$(grep "^${CONFIG_}$ARG=" $FN)"
++			if [ $? != 0 ] ; then
++				echo undef
++			else
++				V="${V/#${CONFIG_}$ARG=/}"
++				V="${V/#\"/}"
++				V="${V/%\"/}"
++				V="${V//\\\"/\"}"
++				echo "${V}"
++			fi
++		fi
++		;;
++
++	--enable-after|-E)
++		set_var "${CONFIG_}$B" "${CONFIG_}$B=y" "${CONFIG_}$A"
++		;;
++
++	--disable-after|-D)
++		set_var "${CONFIG_}$B" "# ${CONFIG_}$B is not set" "${CONFIG_}$A"
++		;;
++
++	--module-after|-M)
++		set_var "${CONFIG_}$B" "${CONFIG_}$B=m" "${CONFIG_}$A"
++		;;
++
++	--refresh)
++		yes "" | make oldconfig KCONFIG_CONFIG=$FN
++		;;
++
++	*)
++		echo "bad command: $CMD" >&2
++		usage
++		;;
++	esac
++done
 -- 
 2.52.0
 
