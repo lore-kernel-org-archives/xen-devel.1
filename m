@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE05D4A5FE
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 04:35:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1206118.1519836 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 198C7D4A5FB
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 04:35:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1206120.1519853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgbYB-0005EJ-4G; Fri, 16 Jan 2026 04:35:07 +0000
+	id 1vgbYC-0005Ue-Lc; Fri, 16 Jan 2026 04:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1206118.1519836; Fri, 16 Jan 2026 04:35:07 +0000
+Received: by outflank-mailman (output) from mailman id 1206120.1519853; Fri, 16 Jan 2026 04:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgbYB-0005EC-1W; Fri, 16 Jan 2026 04:35:07 +0000
-Received: by outflank-mailman (input) for mailman id 1206118;
- Fri, 16 Jan 2026 04:35:05 +0000
+	id 1vgbYC-0005Tk-FI; Fri, 16 Jan 2026 04:35:08 +0000
+Received: by outflank-mailman (input) for mailman id 1206120;
+ Fri, 16 Jan 2026 04:35:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1vgbY9-0005E0-NW
- for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 04:35:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbYB-0005MO-JA
+ for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 04:35:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgbY9-006CyY-1Z;
- Fri, 16 Jan 2026 04:35:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbYB-006Cyn-1p;
+ Fri, 16 Jan 2026 04:35:07 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgbY8-005RBx-2j;
- Fri, 16 Jan 2026 04:35:05 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbYA-005RC5-3D;
+ Fri, 16 Jan 2026 04:35:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,11 +42,11 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
-	Subject:Cc:To:From; bh=g09Ig48jUKT3edah76oufAL+kURNVPKdk9sZlJC36mU=; b=WKQ3ic
-	ENbdioXeYd1Oh74oCPROMz67JIEfOI6aadXFgK9I0Gx4/H/fNOOxsFBcPlrBR/3QgTT+rGRl7wBzF
-	WHtYn9rJJIRLIpG1BWmgSmfTIbym5NXlhVnL1wQyq7z1XJS84lNEOWcQkhbTpCoeuvDbPUSAw9md6
-	yIVcaaQ867c=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=vQ+i0Se3Q6gtbukAXmyZwLdyrtEvtzopHHyFl1Djo1M=; b=CrTbsrOnyAz9/uMEjxsjNsTQMx
+	HjJgrENTOYUKVFIS5klb19G8jo1F/ReyqC/PSdocVSGqUR3a0UlLF1DwDPVIkpOUJLzrdgGykQP3h
+	oDrKZYuaYsdON0scIrWVxhT4lGcR8wyox+UNAb/Ento25iQzchV0zIk3H41W/L86FOqY=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,44 +57,68 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v1 0/4] introduce xen/scripts/config
-Date: Thu, 15 Jan 2026 20:34:54 -0800
-Message-ID: <20260116043458.730728-1-dmukhin@ford.com>
+Subject: [PATCH v1 2/4] scripts/config: drop modules support
+Date: Thu, 15 Jan 2026 20:34:56 -0800
+Message-ID: <20260116043458.730728-3-dmukhin@ford.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260116043458.730728-1-dmukhin@ford.com>
+References: <20260116043458.730728-1-dmukhin@ford.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There is currently no in-tree tool to manipulate Kconfig settings in a
-non-interactive way similar to the Linux scripts/config utility [1].
-Such tooling is useful when building Xen via external build systems (e.g.,
-Yocto) and can also simplify custom CI configuration.
+From: Denis Mukhin <dmukhin@ford.com> 
 
-This series imports the Linux scripts/config helper and integrates it
-into an existing Xen automation script.
+Drop the --module (-m) and --module-after (-M) options, as Xen
+does not support loadable modules, so options are not applicable.
 
-Example of usage:
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+ xen/scripts/config | 11 -----------
+ 1 file changed, 11 deletions(-)
 
-  ./xen/scripts/config --file xen/.config -y FOO -n BAR -y BAZ
-
-Patch 1 imports scripts/config from Linux (based on v6.19-rc5) [1].
-Patch 2 drops the -m option, since Xen does not support modules.
-Patch 3 adds convenience flags -y (set to yes) and -n (set to no).
-Patch 4 performs minimal integration into existing Xen build system.
-
-[1] https://github.com/torvalds/linux/blob/master/scripts/config
-[2] https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/2266369021
-
-Denis Mukhin (4):
-  scripts/config: import Kconfig manipulation tool from Linux
-  scripts/config: drop modules support
-  scripts/config: add -y|-n flags
-  scripts/config: hook to automation build script
-
- automation/scripts/build |   2 +-
- xen/scripts/config       | 225 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 226 insertions(+), 1 deletion(-)
- create mode 100755 xen/scripts/config
-
+diff --git a/xen/scripts/config b/xen/scripts/config
+index ea475c07de28..1050812aae8d 100755
+--- a/xen/scripts/config
++++ b/xen/scripts/config
+@@ -18,7 +18,6 @@ $myname options command ...
+ commands:
+ 	--enable|-e option   Enable option
+ 	--disable|-d option  Disable option
+-	--module|-m option   Turn option into a module
+ 	--set-str option string
+ 	                     Set option to "string"
+ 	--set-val option value
+@@ -30,8 +29,6 @@ commands:
+                              Enable option directly after other option
+ 	--disable-after|-D beforeopt option
+                              Disable option directly after other option
+-	--module-after|-M beforeopt option
+-                             Turn option into module directly after other option
+ 	--refresh            Refresh the config using old settings
+ 
+ 	commands can be repeated multiple times
+@@ -177,10 +174,6 @@ while [ "$1" != "" ] ; do
+ 		set_var "${CONFIG_}$ARG" "# ${CONFIG_}$ARG is not set"
+ 		;;
+ 
+-	--module|-m)
+-		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=m"
+-		;;
+-
+ 	--set-str)
+ 		# sed swallows one level of escaping, so we need double-escaping
+ 		set_var "${CONFIG_}$ARG" "${CONFIG_}$ARG=\"${1//\"/\\\\\"}\""
+@@ -220,10 +213,6 @@ while [ "$1" != "" ] ; do
+ 		set_var "${CONFIG_}$B" "# ${CONFIG_}$B is not set" "${CONFIG_}$A"
+ 		;;
+ 
+-	--module-after|-M)
+-		set_var "${CONFIG_}$B" "${CONFIG_}$B=m" "${CONFIG_}$A"
+-		;;
+-
+ 	--refresh)
+ 		yes "" | make oldconfig KCONFIG_CONFIG=$FN
+ 		;;
 -- 
 2.52.0
 
