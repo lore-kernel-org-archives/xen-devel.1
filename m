@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D26ACD4A5F6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE05D4A5FE
 	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 04:35:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1206122.1519877 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1206118.1519836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgbYG-000680-2N; Fri, 16 Jan 2026 04:35:12 +0000
+	id 1vgbYB-0005EJ-4G; Fri, 16 Jan 2026 04:35:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1206122.1519877; Fri, 16 Jan 2026 04:35:12 +0000
+Received: by outflank-mailman (output) from mailman id 1206118.1519836; Fri, 16 Jan 2026 04:35:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgbYF-00067m-Ue; Fri, 16 Jan 2026 04:35:11 +0000
-Received: by outflank-mailman (input) for mailman id 1206122;
- Fri, 16 Jan 2026 04:35:11 +0000
+	id 1vgbYB-0005EC-1W; Fri, 16 Jan 2026 04:35:07 +0000
+Received: by outflank-mailman (input) for mailman id 1206118;
+ Fri, 16 Jan 2026 04:35:05 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@xen.org>) id 1vgbYF-00065r-M6
- for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 04:35:11 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbY9-0005E0-NW
+ for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 04:35:05 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgbYD-006D19-2T;
- Fri, 16 Jan 2026 04:35:09 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbY9-006CyY-1Z;
+ Fri, 16 Jan 2026 04:35:05 +0000
 Received: from [19.12.91.86] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <dmukhin@xen.org>) id 1vgbYD-005RCF-0d;
- Fri, 16 Jan 2026 04:35:09 +0000
+ (envelope-from <dmukhin@xen.org>) id 1vgbY8-005RBx-2j;
+ Fri, 16 Jan 2026 04:35:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,11 +42,11 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=cGX7QRPQV6chtt4Q4JiEAoLE9EjWPAngRkAOki5ArhA=; b=MTGsgyktOaUhTGAEmFmeY3oPtO
-	v3DoCqpYE/umcFF5b65tq+71/Er3rsdyOQ8vOO8rO6JyU55vax5sq2ysCadb+fL7SQQ2xtuUd9lf+
-	tp2JatXcsb3ogvFK2j3ixrXHnKMgtZzq6yFGsS6xlP3zEVSlzyD2qNZQ5E3LM6gQQ1vw=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+	Subject:Cc:To:From; bh=g09Ig48jUKT3edah76oufAL+kURNVPKdk9sZlJC36mU=; b=WKQ3ic
+	ENbdioXeYd1Oh74oCPROMz67JIEfOI6aadXFgK9I0Gx4/H/fNOOxsFBcPlrBR/3QgTT+rGRl7wBzF
+	WHtYn9rJJIRLIpG1BWmgSmfTIbym5NXlhVnL1wQyq7z1XJS84lNEOWcQkhbTpCoeuvDbPUSAw9md6
+	yIVcaaQ867c=;
 From: dmukhin@xen.org
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -57,38 +57,44 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	dmukhin@ford.com
-Subject: [PATCH v1 4/4] scripts/config: hook to automation build script
-Date: Thu, 15 Jan 2026 20:34:58 -0800
-Message-ID: <20260116043458.730728-5-dmukhin@ford.com>
+Subject: [PATCH v1 0/4] introduce xen/scripts/config
+Date: Thu, 15 Jan 2026 20:34:54 -0800
+Message-ID: <20260116043458.730728-1-dmukhin@ford.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260116043458.730728-1-dmukhin@ford.com>
-References: <20260116043458.730728-1-dmukhin@ford.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Denis Mukhin <dmukhin@ford.com> 
+There is currently no in-tree tool to manipulate Kconfig settings in a
+non-interactive way similar to the Linux scripts/config utility [1].
+Such tooling is useful when building Xen via external build systems (e.g.,
+Yocto) and can also simplify custom CI configuration.
 
-Use the new .config manipulation tool to toggle CONFIG_DEBUG in the
-Xen automation build script.
+This series imports the Linux scripts/config helper and integrates it
+into an existing Xen automation script.
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
- automation/scripts/build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Example of usage:
 
-diff --git a/automation/scripts/build b/automation/scripts/build
-index 7a81d229decd..ee1127c53dc5 100755
---- a/automation/scripts/build
-+++ b/automation/scripts/build
-@@ -27,7 +27,7 @@ else
-     # Start off with arch's defconfig
-     make -C xen defconfig
- 
--    echo "CONFIG_DEBUG=${debug}" >> xen/.config
-+    xen/scripts/config --file xen/.config -${debug} DEBUG
- 
-     if [[ -n "${EXTRA_XEN_CONFIG}" ]]; then
-         echo "${EXTRA_XEN_CONFIG}" >> xen/.config
+  ./xen/scripts/config --file xen/.config -y FOO -n BAR -y BAZ
+
+Patch 1 imports scripts/config from Linux (based on v6.19-rc5) [1].
+Patch 2 drops the -m option, since Xen does not support modules.
+Patch 3 adds convenience flags -y (set to yes) and -n (set to no).
+Patch 4 performs minimal integration into existing Xen build system.
+
+[1] https://github.com/torvalds/linux/blob/master/scripts/config
+[2] https://gitlab.com/xen-project/people/dmukhin/xen/-/pipelines/2266369021
+
+Denis Mukhin (4):
+  scripts/config: import Kconfig manipulation tool from Linux
+  scripts/config: drop modules support
+  scripts/config: add -y|-n flags
+  scripts/config: hook to automation build script
+
+ automation/scripts/build |   2 +-
+ xen/scripts/config       | 225 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 226 insertions(+), 1 deletion(-)
+ create mode 100755 xen/scripts/config
+
 -- 
 2.52.0
 
