@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1063FC98306
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jan 2026 23:21:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1207124.1520162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471EFD4A5F4
+	for <xen-devel@archiver.kernel.org>; Sun, 18 Jan 2026 13:34:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1207809.1520173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgt7f-00075v-1h; Fri, 16 Jan 2026 23:20:55 +0000
+	id 1vhSul-0003pS-L1; Sun, 18 Jan 2026 13:33:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1207124.1520162; Fri, 16 Jan 2026 23:20:55 +0000
+Received: by outflank-mailman (output) from mailman id 1207809.1520173; Sun, 18 Jan 2026 13:33:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vgt7e-00075o-Uv; Fri, 16 Jan 2026 23:20:54 +0000
-Received: by outflank-mailman (input) for mailman id 1207124;
- Fri, 16 Jan 2026 23:20:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vhSul-0003pJ-Ep; Sun, 18 Jan 2026 13:33:59 +0000
+Received: by outflank-mailman (input) for mailman id 1207809;
+ Sun, 18 Jan 2026 13:33:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wHEn=7V=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
- id 1vgt7e-0005RK-1r
- for xen-devel@lists.xenproject.org; Fri, 16 Jan 2026 23:20:54 +0000
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ff744436-f331-11f0-b15e-2bf370ae4941;
- Sat, 17 Jan 2026 00:20:52 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1768605648057100.37824651156598;
- Fri, 16 Jan 2026 15:20:48 -0800 (PST)
-Received: by mail-oo1-f47.google.com with SMTP id
- 006d021491bc7-65f66d72b3fso1718726eaf.3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Jan 2026 15:20:47 -0800 (PST)
+ <SRS0=lTiv=7X=gmail.com=haseebashraf091@srs-se1.protection.inumbo.net>)
+ id 1vhSuk-0003p9-1c
+ for xen-devel@lists.xenproject.org; Sun, 18 Jan 2026 13:33:58 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5417a52e-f472-11f0-9ccf-f158ae23cfc8;
+ Sun, 18 Jan 2026 14:33:54 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-64b921d9e67so5818392a12.3
+ for <xen-devel@lists.xenproject.org>; Sun, 18 Jan 2026 05:33:52 -0800 (PST)
+Received: from PKL-HASEEBA-LT.. ([39.37.230.99])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-65452cdab55sm7683163a12.10.2026.01.18.05.33.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Jan 2026 05:33:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,123 +47,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff744436-f331-11f0-b15e-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; t=1768605649; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=Un8is00hNzVntpxcDK4/ddu+5be/GO5xL2T3YfGmhwK0J1hAHmUZn4exi5V516ocbBK66Q0K5ZJy34+sSGqBozD0vXm/IJUdL4/tzTnqtGsfAXmM/2kd0hzvToZU85uyCVouUWBs5+mC5RFVelRx4GiYttaZdd/c/YhE6k5Spog=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1768605649; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=TKtiMH8oBdrfkRfa3Gcqh/WpBKYSshT5TbDes+EMBp0=; 
-	b=DxHsd30+UCmB5fQFmKOD0cyOe2kqXDkvsd3aNDuUzSVLm9KzrHQrLPfUpf0HnoV4I04Ra5C8d9Peu/edIvZuLKvhj6nidC3Y0gs3BYy+8xKKEdvNXRlh7X0w5/3TwWMHuJVzIDMX9j9uq0QRNKjgtP/IVumHjU+jWT35vmap0nk=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=tklengyel.com;
-	spf=pass  smtp.mailfrom=tamas@tklengyel.com;
-	dmarc=pass header.from=<tamas@tklengyel.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1768605649;
-	s=zmail; d=tklengyel.com; i=tamas@tklengyel.com;
-	h=MIME-Version:References:In-Reply-To:From:From:Date:Date:Message-ID:Subject:Subject:To:To:Cc:Cc:Content-Type:Message-Id:Reply-To;
-	bh=TKtiMH8oBdrfkRfa3Gcqh/WpBKYSshT5TbDes+EMBp0=;
-	b=PE96VqBV9EdMdNAto5TGq+lpilsaUFi4pmmmF5OCrctHTa5LPIxlTc+H16cpu87p
-	nUIE+HKFmQld+OSPqswfgyWUkPavVVGAgU95TAQdc5eFrNfYrwFzH8YZBDXVZBGuBDX
-	OWFnIl4ThCmsDxmA0RlXu6F1AZOwEMHpwLvI0S5o=
-X-Forwarded-Encrypted: i=1; AJvYcCXKDVvd2r4IkxmMnEIIezmui9LSW2e51ZaNDxSrN02SKyrZx/zyJu9xZoq55P1mBD0XD+NitEYJ6oA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyZx/+xtwgh8Aph6n9z5bp4xDaPy2/quvuiroSOwjBGVn2dUFPU
-	dbHAhpPxftD1wph30SpGbYGTBSbtkzI1InIA3z01JYoZBmkkrXMyRW/2+g2m4FVQKePz9JQnipj
-	RRpP6LTDAe31yTVVZesHi2MQe1KliKTM=
-X-Received: by 2002:a05:6820:1c97:b0:659:9a49:904d with SMTP id
- 006d021491bc7-6611795a29cmr1849712eaf.24.1768605647446; Fri, 16 Jan 2026
- 15:20:47 -0800 (PST)
+X-Inumbo-ID: 5417a52e-f472-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768743231; x=1769348031; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9yfRH+v8o1fMcD7nIgwoL2ojGo+xNx8nkGSixxBQ19g=;
+        b=Ep5NgPaj1b74b9VAFCFvCQEDHgRo3jj3jdj/mGancLWRoqfNdsTIJ2iYYdRw8c5jtd
+         TR0ovftcbmdoLf8X4raUrtUX9mn+8jnaWBy9ZrdbSvGqizvEZtWW4gbsd8TCR/HTWycX
+         UMTasm/flLMCr2xLM5xWllqRnA3ca6Ty86NEgkj8RTCJJnQp/57+5xk59oSOtBHkYCZI
+         OEhl/nZzFyce5OhILb9A7jI+hmiOGubAyUiYs33wxzM1k1pKfnr3rH55WPZngo/8LyRs
+         MPGlp9Gki/eFz4WsOUlIu6mTgt2RmgMEPIpYH8oDB9W2Vb9CdV38wD1YGtf0WuNTG4+J
+         1cWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768743231; x=1769348031;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9yfRH+v8o1fMcD7nIgwoL2ojGo+xNx8nkGSixxBQ19g=;
+        b=iDXfFu9WLsBopzgHaOo3sYg6bvc8dfJ2aOODKFnkc88TYh0GyXDK1U1ptjsNZCGvvh
+         lqIgArLbQ+O46vdnIs76O/Pyj3syWZC2OvnjmdjvlQRroKtchxmcVO4JzKpBpr8aiklj
+         ZnkPsvaXRrvSFphbI5kpXP9gu7MNsae1Sujyuc4yYvtyPDi+pkN0JMXgZhIIAMvU5dcV
+         jexSwHbzBzOnUhI5zWSyhSLY76RXo9cKqOT7XRKgVgL8ZClpBdO19wR9VCci8v2ne1+U
+         pkWoUGSRy30ABu8NF5gN6kOoNTL7B26qcpeyIDRwKJ/LVdMXmPo4dXdHODgq3NK3GZc/
+         s9DA==
+X-Gm-Message-State: AOJu0Yz/RRE13w+FY5XiURIxwTCTZWgqUjob19DzSo0IR2WhoOfMHwof
+	bGnUZmTfx/yBhzaDF3kPuEuEaivfkxDS1p/Mf+wjBLWb7bNJXKiR2Djk+HS8cw==
+X-Gm-Gg: AY/fxX5RxaKdmdTW2CqeRpGpsrkWZGCE8QAN94dkffUepUy+aSJcL5BlHMljvD11DjL
+	eOLPq9mIg5fBcLiKahowC2jEn9Umo9fcv4P8YFPpGGlt1qmGbUWUPTsT1pnTQgymj4QDONzE72s
+	7ZE8ShCS7YVriCbVtHCgcTjF5OZdibL3qfVaghP2WRCV4SuIxeWxiMLQtkH1SzaD9tNtKstDmxE
+	KsBwe1vIASFvLtXfvbQaw/SYKgV8ItpOmDvtvuEpDwLDc80XKh4POMY5ptcjwgRKzC4sEDJaZpA
+	lzJdaM1H2C/9YsboSVXTWbjhlXG7niT2rR7qcMBIVQz+ADhXAmxK8jDyW6UI/iFsxSeI86jbtiw
+	nLJ74sOfBgNLtZzREubbtrd7mj4ZFH9oCGtP/2soGLF4F9wAl/I37VvWv66HkC9gtCL1KDvYER5
+	KKE7hLxZoZ6fYLAKnQLBToPKnuwGsEcvwbLBenPCJeoxwM5qZ16g==
+X-Received: by 2002:a05:6402:1466:b0:640:aae4:b84e with SMTP id 4fb4d7f45d1cf-654b955d67bmr6344710a12.13.1768743231135;
+        Sun, 18 Jan 2026 05:33:51 -0800 (PST)
+From: Haseeb Ashraf <haseebashraf091@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Haseeb Ashraf <haseeb.ashraf@siemens.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v3 0/3] xen/arm{32,64}: perform IPA-based TLBI when IPA is known
+Date: Sun, 18 Jan 2026 18:33:26 +0500
+Message-ID: <cover.1765197209.git.haseeb.ashraf@siemens.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260115092841.2651224-1-Penny.Zheng@amd.com> <20260115092841.2651224-6-Penny.Zheng@amd.com>
- <84943630-0f68-4097-a5a4-4aba17c0fb86@amd.com>
-In-Reply-To: <84943630-0f68-4097-a5a4-4aba17c0fb86@amd.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Fri, 16 Jan 2026 18:19:00 -0500
-X-Gmail-Original-Message-ID: <CABfawh=zW-MvDLGC84zhhcPhiqg04RgzLVbugoRKP64cZWktiA@mail.gmail.com>
-X-Gm-Features: AZwV_QjIVHKJlvK2mzsmXj03m5Q7EZzX2_PGu0SBNmdrc9rM8GVfPhFFaWzy13Y
-Message-ID: <CABfawh=zW-MvDLGC84zhhcPhiqg04RgzLVbugoRKP64cZWktiA@mail.gmail.com>
-Subject: Re: [PATCH v4 5/6] xen/mem_access: wrap memory access when VM_EVENT=n
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: Penny Zheng <Penny.Zheng@amd.com>, xen-devel@lists.xenproject.org, ray.huang@amd.com, 
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Alexandru Isaila <aisaila@bitdefender.com>, Petre Pircalabu <ppircalabu@bitdefender.com>
-Content-Type: multipart/alternative; boundary="0000000000005d2994064889977b"
+Content-Transfer-Encoding: 8bit
+Message-ID: <20260118133326.ssx04LcGo2FJpvGDDQwBHacJ1FvuSE4J97n7Y-RiyUM@z>
 
---0000000000005d2994064889977b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 
-On Thu, Jan 15, 2026 at 10:21=E2=80=AFAM Jason Andryuk <jason.andryuk@amd.c=
-om>
-wrote:
+This patch series addresses a major issue for running Xen on KVM i.e.
+costly emulation of VMALLS12E1IS which becomes worse when this TLBI
+is invoked too many times. There are mainly two places where this is
+problematic:
+(a) When vCPUs switch on a pCPU or pCPUs
+(b) When domu mapped pages onto dom0, are to be unmapped, then each
+    page being removed by XENMEM_remove_from_physmap has its TLBs
+    invalidated by the TLBI variant that flushes the whole range.
 
-> On 2026-01-15 04:28, Penny Zheng wrote:
-> > Feature memory access is based on vm event subsystem, and it could be
-> disabled
-> > in the future. So a few switch-blocks in do_altp2m_op() need
-> > vm_event_is_enabled() condition check to pass compilation when ALTP2M=
-=3Dy
-> and
-> > VM_EVENT=3Dn(, hence MEM_ACCESS=3Dn), like HVMOP_altp2m_set_mem_access,=
- etc.
-> > Function p2m_mem_access_check() still needs stub when VM_EVENT=3Dn to
-> > pass compilation.
-> > Although local variable "req_ptr" still remains NULL throughout its
-> lifetime,
-> > with the change of NULL assignment, we will face runtime undefined erro=
-r
-> only
-> > when CONFIG_USBAN is on. So we strengthen the condition check via addin=
-g
-> > vm_event_is_enabled() for the special case.
-> >
-> > Signed-off-by: Penny Zheng <Penny.Zheng@amd.com>
-> > Acked-by: Jan Beulich <jbeulich@suse.com>
->
-> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
->
+This patch series prefers usage of IPA-based TLBIs wherever possible
+instead of complete flushing of TLBs every time.
 
-Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
+It consists of three patches where the first one address the issue
+being discussed for Arm64. Second patch further optimizes the
+combined stage-1,2 TLB flushes by leveraging FEAT_nTLBPA. Third patch
+introduces IPA-based TLBI for Arm32 in presence of FEAT_nTLBPA.
 
---0000000000005d2994064889977b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Haseeb Ashraf (3):
+  xen/arm/p2m: perform IPA-based TLBI when IPA is known
+  xen/arm: optimize stage-1,2 combined TLBI in presence of FEAT_nTLBPA
+  xen/arm32: add CPU capability for IPA-based TLBI
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 15,=
- 2026 at 10:21=E2=80=AFAM Jason Andryuk &lt;<a href=3D"mailto:jason.andryuk=
-@amd.com">jason.andryuk@amd.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">On 2026-01-15 04:28, Penny Zheng wrote:<br=
->
-&gt; Feature memory access is based on vm event subsystem, and it could be =
-disabled<br>
-&gt; in the future. So a few switch-blocks in do_altp2m_op() need<br>
-&gt; vm_event_is_enabled() condition check to pass compilation when ALTP2M=
-=3Dy and<br>
-&gt; VM_EVENT=3Dn(, hence MEM_ACCESS=3Dn), like HVMOP_altp2m_set_mem_access=
-, etc.<br>
-&gt; Function p2m_mem_access_check() still needs stub when VM_EVENT=3Dn to<=
-br>
-&gt; pass compilation.<br>
-&gt; Although local variable &quot;req_ptr&quot; still remains NULL through=
-out its lifetime,<br>
-&gt; with the change of NULL assignment, we will face runtime undefined err=
-or only<br>
-&gt; when CONFIG_USBAN is on. So we strengthen the condition check via addi=
-ng<br>
-&gt; vm_event_is_enabled() for the special case.<br>
-&gt; <br>
-&gt; Signed-off-by: Penny Zheng &lt;<a href=3D"mailto:Penny.Zheng@amd.com" =
-target=3D"_blank">Penny.Zheng@amd.com</a>&gt;<br>
-&gt; Acked-by: Jan Beulich &lt;<a href=3D"mailto:jbeulich@suse.com" target=
-=3D"_blank">jbeulich@suse.com</a>&gt;<br>
-<br>
-Reviewed-by: Jason Andryuk &lt;<a href=3D"mailto:jason.andryuk@amd.com" tar=
-get=3D"_blank">jason.andryuk@amd.com</a>&gt;<br></blockquote><div><br></div=
-><div>Acked-by: Tamas K Lengyel &lt;<a href=3D"mailto:tamas@tklengyel.com">=
-tamas@tklengyel.com</a>&gt;=C2=A0</div></div></div>
+Changes in v3:
+- Mainly the handling of repeat TLBI workaround with IPA-based TLBI,
+  so that the extra TLBI and DSB are repeated only for the final TLBI
+  and DSB of the whole sequence.
+- Updated code comments as per feedback. Further details are
+  available in each commit's changelog.
+- Minor updates to code as per feedback. Further details are
+  available in each commit's changelog.
 
---0000000000005d2994064889977b--
+Changes in v2:
+- Split up the commit in 3 commits. First commit implements the
+  baseline implementation without any addition of new CPU
+  capabilities. Implemented new CPU caps in separate features to
+  emphasize how each of it optimizes the TLB invalidation.
+- Moved ARM32 and ARM64 specific implementations of TLBIs to
+  architecture specific flushtlb.h.
+- Added references of ARM ARM in code comments.
+- Evaluated and added a threshold to select between IPA-based TLB
+  invalidation vs fallback to full stage TLB invalidation above
+  the threshold.
+- Introduced ARM_HAS_NTLBPA CPU capability which leverages
+  FEAT_nTLBPA for arm32 as well as arm64.
+- Introduced ARM_HAS_TLB_IPA CPU capability for IPA-based TLBI
+  for arm32.
+
+Haseeb Ashraf (3):
+  xen/arm/p2m: perform IPA-based TLBI when IPA is known
+  xen/arm: optimize stage-1,2 combined TLBI in presence of FEAT_nTLBPA
+  xen/arm32: add CPU capability for IPA-based TLBI
+
+ xen/arch/arm/cpufeature.c                 | 31 ++++++++
+ xen/arch/arm/include/asm/arm32/flushtlb.h | 87 +++++++++++++++++++++
+ xen/arch/arm/include/asm/arm64/flushtlb.h | 77 +++++++++++++++++++
+ xen/arch/arm/include/asm/cpregs.h         |  4 +
+ xen/arch/arm/include/asm/cpufeature.h     | 27 ++++++-
+ xen/arch/arm/include/asm/mmu/p2m.h        |  2 +
+ xen/arch/arm/include/asm/processor.h      | 10 +++
+ xen/arch/arm/mmu/p2m.c                    | 92 +++++++++++++++++------
+ 8 files changed, 302 insertions(+), 28 deletions(-)
+
+-- 
+2.43.0
+
 
