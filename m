@@ -4,49 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5555DD2ED0F
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jan 2026 09:54:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1208563.1520716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E71D2ED0F
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jan 2026 09:57:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1208594.1520746 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vi8RF-0006Yw-06; Tue, 20 Jan 2026 09:54:17 +0000
+	id 1vi8U6-00088z-VR; Tue, 20 Jan 2026 09:57:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1208563.1520716; Tue, 20 Jan 2026 09:54:16 +0000
+Received: by outflank-mailman (output) from mailman id 1208594.1520746; Tue, 20 Jan 2026 09:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vi8RE-0006Yp-TL; Tue, 20 Jan 2026 09:54:16 +0000
-Received: by outflank-mailman (input) for mailman id 1208563;
- Tue, 20 Jan 2026 09:54:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vi8U6-00088s-Si; Tue, 20 Jan 2026 09:57:14 +0000
+Received: by outflank-mailman (input) for mailman id 1208594;
+ Tue, 20 Jan 2026 09:57:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Fwra=7Z=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vi8RE-0006Yj-5X
- for xen-devel@lists.xenproject.org; Tue, 20 Jan 2026 09:54:16 +0000
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [2a01:111:f403:c105::5])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f9fa09fc-f5e5-11f0-b15e-2bf370ae4941;
- Tue, 20 Jan 2026 10:54:14 +0100 (CET)
-Received: from PH8PR02CA0039.namprd02.prod.outlook.com (2603:10b6:510:2da::26)
- by IA0PR12MB8929.namprd12.prod.outlook.com (2603:10b6:208:484::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Tue, 20 Jan
- 2026 09:54:10 +0000
-Received: from CO1PEPF000044F7.namprd21.prod.outlook.com
- (2603:10b6:510:2da:cafe::7b) by PH8PR02CA0039.outlook.office365.com
- (2603:10b6:510:2da::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.9 via Frontend Transport; Tue,
- 20 Jan 2026 09:54:10 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF000044F7.mail.protection.outlook.com (10.167.241.197) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.0 via Frontend Transport; Tue, 20 Jan 2026 09:54:09 +0000
-Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 20 Jan
- 2026 03:54:04 -0600
+ <SRS0=DmLw=7Z=bounce.vates.tech=bounce-md_30504962.696f516f.v1-70b618fda82a4fdbb498f2bbe6cc4cfc@srs-se1.protection.inumbo.net>)
+ id 1vi8U6-00088f-Ac
+ for xen-devel@lists.xenproject.org; Tue, 20 Jan 2026 09:57:14 +0000
+Received: from mail187-33.suw11.mandrillapp.com
+ (mail187-33.suw11.mandrillapp.com [198.2.187.33])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5fb9e75d-f5e6-11f0-9ccf-f158ae23cfc8;
+ Tue, 20 Jan 2026 10:57:05 +0100 (CET)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-33.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4dwN5q75QmzBsThRd
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jan 2026 09:57:03 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 70b618fda82a4fdbb498f2bbe6cc4cfc; Tue, 20 Jan 2026 09:57:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,118 +45,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9fa09fc-f5e5-11f0-b15e-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R/wkJMHnP+Fkb0e0iqE4EcWJ/cTDCDF5FTaePn09G7bcX7zOMxGOSpeGi1PKkcfS0Wm+Pn3T8yXpfCRtPW9holcuKATnHqSGmqRWSUd9I0k9pfpkQkkomMKfCE9IRdNQ9HyV1MD0CUq/CiEHm6Z0hl/1Fv2S7Ll6OUQqRLL9jsop69IET4clp5g6K90dRFeCll3bYfeHVW1ytMkhWalTezpR320ILkWk99AN3Pg7RkPAB89VFBLiAI2z3CRdksm9JOv29NETrs0kCR9ghb/d9ZvGg9F2T91rHjG7py0+ZzdMBZL17wOziccyYcZN3VOU/NXm9LSJ5zUVnUnnGmFp1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xuIeWzyGiCnRAm9Kg6QG1cEl7K4jzzok7IMZLtDUxEs=;
- b=Wh7rF8J0LRGXxcGfKBRj9r5nhlXSnAwdlZEaRjo8IIcuGBkLnBBBOq1kSdKSGYOjIhNQDB/czShAVSMtwkbEgqpqsgb1WDCSxiYkRVD3r8yYa6IMpS5deEV6sSXu4kAGWAaHJcHg6SG8SKMSbAQ2w4FK1d8EL0Gk+HB5y5lCNA9s7lnWgpNgq3GavKsBvHdyvmLcmMoC92UXcpyS89KCl03ZCAedbt/shKmHtIHnm3ucIT9oUQ2LCgLIcBQhzkkX44ovLNXV0naAKrwCmMrD+nH6umP2EHoJWwCQjN6DZm75OPfdR4qblHp30P7lyZdpjlDMcGorFK20jCI+utcIQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xuIeWzyGiCnRAm9Kg6QG1cEl7K4jzzok7IMZLtDUxEs=;
- b=XGCd6L7KUQrNEuyY8ctW47KP39S2QXwsZzOnTVP6D16Tpd5dOSpU319Idv0HcQpIFQtZz8vluL8G0+/Xrxxw+af0FrY/Wy9511fbvQCVePEO2MMPGuqRxn43CgmceLYIP0YzXbkTd23gXpoG76kLGHDJHzy4frSP3uOWPdJ7b5c=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
-	<jason.andryuk@amd.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/2] x86/svm: Add support for Bus Lock Threshold
-Date: Tue, 20 Jan 2026 10:53:48 +0100
-Message-ID: <20260120095353.2778-1-alejandro.garciavallejo@amd.com>
-X-Mailer: git-send-email 2.43.0
+X-Inumbo-ID: 5fb9e75d-f5e6-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1768903024; x=1769173024;
+	bh=Td0Zid5VRB//BT4blpV+a0Bp1YjYVTUOReb8gVRMSpo=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=Zxm2CT2jenf+t5q/lL9QnFFTk5hSJDke2hTTltjYub+smaxnDOTckFYAPFL47KGFD
+	 NE1kl/IwtA0RXqXwwLX2fi3DwBjP2YWUQ0I6M48nQULcomCUc+04vsao7+zxDAosS6
+	 KWIGopjEelFz2rvotypGKW7+x0HomrU1x21jZyfiVQnlX2dyGOhlD9QcosL4nawKsx
+	 0JccFGN9ahmdXfTRZY2/ioOBmduiZzp2L2tjLghCwcE7CAl7gLGenlLts4Flbi8P4l
+	 R0evcjQkW8cFq96PhT6K7ZdLLs3GfCTqlakq08mAFCSxN97V+KisR2NEmOyOhKLNKa
+	 u9cn04BsncwNA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1768903024; x=1769163524; i=ngoc-tu.dinh@vates.tech;
+	bh=Td0Zid5VRB//BT4blpV+a0Bp1YjYVTUOReb8gVRMSpo=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=hM/YMPOs/d79kosY60VD4H9o52ivNVHz/EU/RxQXO9JhGOXZmY/nH1UxsPRcfaNSw
+	 GyiYkx6sJgjiL5U+ZLDqnTg/E2Waw0KsRoQmdAfd4NRvPtStFO2NfuqB7R4J98uVFz
+	 pZ7vWjxVhME9dB6COqS3kxifo2E9uJfNpvOpmlY1xuv9ejdMmvj1eDxU0rMzjiTR/7
+	 OoDahEsyjGcY5tAbcAkvD1tfX7l8bk0JQg/3Sl33U2FbGFyFpUC41FNtNXtuJNEwUs
+	 SFSdrW2Sh5/PGjmPGFKTp1pO4YOuXHOUBkH2/6jkMgAjoISjzyU9R6wBQmEGQwdvaY
+	 rVa8RcjGb3TJQ==
+From: "Tu Dinh" <ngoc-tu.dinh@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v2]=20xen:=20Expose=20time=5Foffset=20in=20struct=20arch=5Fshared=5Finfo?=
+X-Mailer: git-send-email 2.51.2.windows.1
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1768903022467
+To: xen-devel@lists.xenproject.org
+Cc: "Tu Dinh" <ngoc-tu.dinh@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Michal Orzel" <michal.orzel@amd.com>, "Jan Beulich" <jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Bertrand Marquis" <bertrand.marquis@arm.com>, "Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>
+Message-Id: <20260120095657.237-1-ngoc-tu.dinh@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.70b618fda82a4fdbb498f2bbe6cc4cfc?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260120:md
+Date: Tue, 20 Jan 2026 09:57:03 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F7:EE_|IA0PR12MB8929:EE_
-X-MS-Office365-Filtering-Correlation-Id: ab145094-6bd8-47af-eb4c-08de5809dba3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?GNdxnLScYsYsDwYBaRVy8z/kzd/Ltp/xnwK8CcQyLJVk0pIy1sa6S8whskqk?=
- =?us-ascii?Q?0oWzfE7VYVtA7uXtbGRAJE3KTFIFI7+A2aMewe9T89/t39v0+1/iVngUGNOE?=
- =?us-ascii?Q?gINjGNwHBrAkMyx+55sWPS4to0OnpPF6QkTOji14BpP1B4gv8dFbJ3lvxtLo?=
- =?us-ascii?Q?3EDZSxXCigwhfGf7e7BewtpAkMONPcJ0njbdY30SCVZrml4NLA/N9Y6IPHeg?=
- =?us-ascii?Q?cVD4iEbREoFWBmPx7dLEODOt4tmzzicdAC6bteXNKeQYXBUDVNANiQK7U6M3?=
- =?us-ascii?Q?S1jbCNUHOBPY6O+zyX9FA1JytwYPrahVJTB5dHir50mWI1YOYxtQ82vMuST2?=
- =?us-ascii?Q?5tmQIqzwzxLCKT1V2fofa8Kl07T28bZADEhQ6x/OBNZbwOgR+KQo4Bf2NWsE?=
- =?us-ascii?Q?0RMEfho1DQb5XBo+8unmXpUoERRHzJwct6C5w/mKfK0x09lDITf4xd8amxa0?=
- =?us-ascii?Q?wc1LTAenlYH20+sJZE+IwYEUM/r8jzWrZEuLgJ7jAm15RxTsZCypHqX6fgiD?=
- =?us-ascii?Q?g9JMPtw11U9xcIiHkfhI+r8068QZMylcM052FNYrHU0Y6nPWc/+uuPHSkmww?=
- =?us-ascii?Q?zQeWRKyfy/6gJbGql2Xet83nsJhimcWJ3Wn2frj6eOSDQ9516wEXfG7xfjIx?=
- =?us-ascii?Q?ouxL89hBJZ8eeHbPxtszdxLksQUwU5Tg1a7OMIy6Uf7yt47gFJ/R0JckXdyK?=
- =?us-ascii?Q?gbVK8OQvbXy6riExln+4OBJ0fb17Xjr08bkPRArsL3+bNz6fA4bhdE6HTeJr?=
- =?us-ascii?Q?/w+0tP2ydf/7WRKdGnhJXRJ96Q9n+HOGfBLs+9RbCByMuvd5G0Z7+J5E4WxH?=
- =?us-ascii?Q?1FduS6baTh5v3CbhHFFlM74a0HolgKwpBgMaTjFF/ooSFDNHQ3O8mRv2kywo?=
- =?us-ascii?Q?5tHInOrQXMwaOuQ30bFQBvPBJ1u1DzldWc5pN3cGVBtWU5ASdaVU3OZANUDs?=
- =?us-ascii?Q?cgTpqZmTbyfJWuZ8JE9yqW22BmY9U2z/G2i5M8gxgfXWLwvWADubqCqg9S+P?=
- =?us-ascii?Q?HOtsbSKhhbPGGGKnwYXtXkttIxWnfELER2yAB0D9Dq3m9obFARHIr4S6eNXb?=
- =?us-ascii?Q?dz/4fW4tMxMrRruwbGo08NtswsIj5fO8fuZbFb6g/170ti26QKw0L63e1CFI?=
- =?us-ascii?Q?OCqaMUkt86DNpRwKX3mA3UQikWcEC3RjBjtqh/SuE2cd3Twnl4K2EKPyfS6M?=
- =?us-ascii?Q?gvo5Kwi1dn0FO7kUjWIonpv7C4LZfeTYwhIM0Xl4dbC4akPZ6hov6ATjG+rW?=
- =?us-ascii?Q?B65ChcPEuRMYU04Mxg2xtKwwSHyQCR4pWHJIZAXC00gf2CPJhuxZ3XVu6zpO?=
- =?us-ascii?Q?ILiqZAHU64dZy3Mzmh2VUObxoPshKMoP1UjRVo+qu9+tUZprzR1eIj//h95k?=
- =?us-ascii?Q?AfzhTTI0rgpXHiATAYPu5PbyC4OAzplR4ymkfDDCdvJGjLHuVluVoxOZn+sk?=
- =?us-ascii?Q?1bObL4x+i5y6aNhYkQGLJtmWGF++HxIqgbuU+Q7XWcthyrYWQl+UXOzac3mK?=
- =?us-ascii?Q?p7tmaBUfDolp58HAzDLtpvVT56NhGD5QBrnW6AaNJzxCR4MC7zlvtKLnK/NE?=
- =?us-ascii?Q?maCfsQIk+/aoWidlDaL736bxkl0ebVcnf/NOKFBHzxIRYiKyqrBhS+EhJLLc?=
- =?us-ascii?Q?xS/DSTfAGXftMtreWu1F8vg=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 09:54:09.5293
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab145094-6bd8-47af-eb4c-08de5809dba3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000044F7.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8929
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Bus Locks are very costly and a VM left unchecked spamming instructions that
-lock the memory bus (e.g: unaligned atomic CAS) makes system perf take a
-nosedive. This patch is similar to BLD of VMX, but for SVM. It configures all
-VMRUNs so they automatically exit at the first encounter of a buslock event,
-effectively rate-limiting them.
+time_offset is currently always added to wc_sec. This means that without
+the actual value of time_offset, guests have no way of knowing what's
+the actual host clock. Once the guest clock drifts beyond 1 second,
+updates to the guest RTC would themselves change time_offset and make it
+impossible to resync guest time to host time.
 
-Cheers,
-Alejandro
+Since there's no way to add more fields to struct shared_info, the
+addition has to be done through struct arch_shared_info instead. Add two
+fields in arch_shared_info representing time_offset's low and high
+32-bit halves.
 
-Alejandro Vallejo (2):
-  x86/svm: Add infrastructure for Bus Lock Threshold
-  x86/svm: Intercept Bus Locks for HVM guests
+Provide a new feature bit XENFEAT_shared_info_time_offset for this
+functionality.
 
- xen/arch/x86/hvm/svm/svm.c            |  5 +++++
- xen/arch/x86/hvm/svm/vmcb.c           |  6 ++++++
- xen/arch/x86/hvm/svm/vmcb.h           | 15 +++++++++++++--
- xen/arch/x86/include/asm/hvm/svm.h    |  2 ++
- xen/arch/x86/include/asm/perfc_defn.h |  2 +-
- 5 files changed, 27 insertions(+), 3 deletions(-)
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+---
+v2: Remove unnecessary casts.
+---
+ tools/include/xen-foreign/reference.size | 5 ++---
+ xen/common/kernel.c                      | 3 ++-
+ xen/common/time.c                        | 5 +++++
+ xen/include/public/arch-arm.h            | 2 ++
+ xen/include/public/arch-ppc.h            | 3 +++
+ xen/include/public/arch-riscv.h          | 3 ++-
+ xen/include/public/arch-x86/xen.h        | 3 +++
+ xen/include/public/features.h            | 5 +++++
+ 8 files changed, 24 insertions(+), 5 deletions(-)
 
-
-base-commit: 7b3e1b4e848d34c9a5b6634009959a7b9dd42104
+diff --git a/tools/include/xen-foreign/reference.size b/tools/include/xen-foreign/reference.size
+index 11a06a7a43..38e799617a 100644
+--- a/tools/include/xen-foreign/reference.size
++++ b/tools/include/xen-foreign/reference.size
+@@ -9,6 +9,5 @@ vcpu_guest_context        |     352     352    2800    5168
+ arch_vcpu_info            |       0       0      24      16
+ vcpu_time_info            |      32      32      32      32
+ vcpu_info                 |      48      48      64      64
+-arch_shared_info          |       0       0      28      48
+-shared_info               |    1088    1088    2344    3136
+-
++arch_shared_info          |       8       8      36      56
++shared_info               |    1096    1096    2352    3144
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index fb45f81399..44af6f8f04 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -676,7 +676,8 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ #ifdef CONFIG_X86
+                         (1U << XENFEAT_vcpu_time_phys_area) |
+ #endif
+-                        (1U << XENFEAT_runstate_phys_area);
++                        (1U << XENFEAT_runstate_phys_area) |
++                        (1U << XENFEAT_shared_info_time_offset);
+             if ( VM_ASSIST(d, pae_extended_cr3) )
+                 fi.submap |= (1U << XENFEAT_pae_pgdir_above_4gb);
+             if ( paging_mode_translate(d) )
+diff --git a/xen/common/time.c b/xen/common/time.c
+index c873b5731b..6f1a8a11c2 100644
+--- a/xen/common/time.c
++++ b/xen/common/time.c
+@@ -118,6 +118,11 @@ void update_domain_wallclock_time(struct domain *d)
+     shared_info(d, wc_sec_hi) = sec >> 32;
+ #endif
+ 
++    shared_info(d, arch.time_offset) =
++        (uint32_t)d->time_offset.seconds;
++    shared_info(d, arch.time_offset_hi) =
++        (uint32_t)(d->time_offset.seconds >> 32);
++
+     smp_wmb();
+     *wc_version = version_update_end(*wc_version);
+ 
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index cd563cf706..4360f9835b 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -363,6 +363,8 @@ struct arch_vcpu_info {
+ typedef struct arch_vcpu_info arch_vcpu_info_t;
+ 
+ struct arch_shared_info {
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ typedef uint64_t xen_callback_t;
+diff --git a/xen/include/public/arch-ppc.h b/xen/include/public/arch-ppc.h
+index b5e1a940a5..42ade11171 100644
+--- a/xen/include/public/arch-ppc.h
++++ b/xen/include/public/arch-ppc.h
+@@ -92,6 +92,9 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ 
+ struct arch_shared_info {
+     uint64_t boot_timebase;
++
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ 
+ struct arch_vcpu_info {
+diff --git a/xen/include/public/arch-riscv.h b/xen/include/public/arch-riscv.h
+index 360d8e6871..286bf92473 100644
+--- a/xen/include/public/arch-riscv.h
++++ b/xen/include/public/arch-riscv.h
+@@ -65,8 +65,9 @@ struct arch_vcpu_info {
+ };
+ typedef struct arch_vcpu_info arch_vcpu_info_t;
+ 
+-/* TODO:  add a placeholder entry if no real ones surface */
+ struct arch_shared_info {
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ 
+diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
+index a7bf046ee0..401583383c 100644
+--- a/xen/include/public/arch-x86/xen.h
++++ b/xen/include/public/arch-x86/xen.h
+@@ -263,6 +263,9 @@ struct arch_shared_info {
+     /* There's no room for this field in the generic structure. */
+     uint32_t wc_sec_hi;
+ #endif
++
++    uint32_t time_offset;
++    uint32_t time_offset_hi;
+ };
+ typedef struct arch_shared_info arch_shared_info_t;
+ 
+diff --git a/xen/include/public/features.h b/xen/include/public/features.h
+index 8801930947..b48591c17a 100644
+--- a/xen/include/public/features.h
++++ b/xen/include/public/features.h
+@@ -128,6 +128,11 @@
+  */
+ #define XENFEAT_dm_msix_all_writes        20
+ 
++/*
++ * arch_shared_info provides time_offset and time_offset_hi
++ */
++#define XENFEAT_shared_info_time_offset   21
++
+ #define XENFEAT_NR_SUBMAPS 1
+ 
+ #endif /* __XEN_PUBLIC_FEATURES_H__ */
 -- 
 2.43.0
+
+
+
+--
+Ngoc Tu Dinh | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
