@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C3E4D262AF
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Jan 2026 01:20:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1209400.1521418 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB27C44501
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Jan 2026 08:31:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1209436.1521428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1viMst-000062-AT; Wed, 21 Jan 2026 01:19:47 +0000
+	id 1viTcP-00089N-Pj; Wed, 21 Jan 2026 08:31:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1209400.1521418; Wed, 21 Jan 2026 01:19:47 +0000
+Received: by outflank-mailman (output) from mailman id 1209436.1521428; Wed, 21 Jan 2026 08:31:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1viMst-00005u-5e; Wed, 21 Jan 2026 01:19:47 +0000
-Received: by outflank-mailman (input) for mailman id 1209400;
- Wed, 21 Jan 2026 01:19:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1viTcP-00089G-Ms; Wed, 21 Jan 2026 08:31:13 +0000
+Received: by outflank-mailman (input) for mailman id 1209436;
+ Wed, 21 Jan 2026 08:26:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=M5F9=72=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1viMsr-00005o-Qa
- for xen-devel@lists.xenproject.org; Wed, 21 Jan 2026 01:19:45 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [2600:3c04:e001:324:0:1991:8:25])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 434a2b10-f667-11f0-9ccf-f158ae23cfc8;
- Wed, 21 Jan 2026 02:19:42 +0100 (CET)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4E1ED60051;
- Wed, 21 Jan 2026 01:19:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E6F4C16AAE;
- Wed, 21 Jan 2026 01:19:39 +0000 (UTC)
+ <SRS0=Yo3L=72=gmail.com=mmyangfl@srs-se1.protection.inumbo.net>)
+ id 1viTXW-000789-7Z
+ for xen-devel@lists.xenproject.org; Wed, 21 Jan 2026 08:26:10 +0000
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [2607:f8b0:4864:20::62a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d553e3e0-f6a2-11f0-b15e-2bf370ae4941;
+ Wed, 21 Jan 2026 09:26:08 +0100 (CET)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2a79998d35aso4250965ad.0
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Jan 2026 00:26:08 -0800 (PST)
+Received: from d.home.mmyangfl.tk ([2001:19f0:8001:1644:5400:5ff:fe3e:12b1])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2a7190d14cfsm147637005ad.38.2026.01.21.00.26.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jan 2026 00:26:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,89 +47,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 434a2b10-f667-11f0-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768958381;
-	bh=gyRuce2gAMFd7Kf+AIbt/VKe3z2siCjHdmIEWBGHDgY=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=BXChK3/hFw7xNsDxiEk+a6VD0tDY6aeS23lbOl9HWy+9TN1Q++GayE3hlidcd43Aj
-	 b473UShyLOVs1ExKIaO3kGxPJRriVEpjwW7UuDWqYZrb0zH4NQIiaRAaBxxA/2bmSW
-	 rkcseWZcbKYVbJbodBlT+h4L274jTjT72skMY7z47fWHLbiAEGyC0KR9fo/f1nyENe
-	 Ka/4FPEvDxnVWjWEqAx88w5yX4KNARd1t7u5liyiLBuonviEZxr+rPEJ5svogmdHdE
-	 KEGojP09//roEsQJfRHCAhs4k/hhYfU/PqTUhr5rHCnfoC+I93EAQtVP+BtRZ6mCjX
-	 dphN7EFAcJ4yQ==
-Date: Tue, 20 Jan 2026 17:19:38 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-cc: Jan Beulich <jbeulich@suse.com>, 
-    Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
-    Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Alistair Francis <alistair.francis@wdc.com>, 
-    Connor Davis <connojdavis@gmail.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    Anthony PERARD <anthony.perard@vates.tech>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [Arm] Re: [PATCH v1 11/15] xen/riscv: introduce ns_to_ticks()
-In-Reply-To: <87bjin6cgd.fsf@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2601201718460.7192@ubuntu-linux-20-04-desktop>
-References: <cover.1766595589.git.oleksii.kurochko@gmail.com> <e4e36ed2d02b760c925014db986041b82fd9b943.1766595589.git.oleksii.kurochko@gmail.com> <369eb1d7-864e-4432-9729-57786d0c191f@suse.com> <87bjin6cgd.fsf@epam.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: d553e3e0-f6a2-11f0-b15e-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768983966; x=1769588766; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pOfh991Nf5x6cbHEyitGr4ECnygIc5lXslxo+H2b9a0=;
+        b=iIHjYIW8ExwXFwlPRkAudkl7I+1lSaKNkXmOJF5466GmpMZH0jqFzU4DMYW4jvXcr6
+         3SuAMOeMg7G53Qmk4ABhyQE172ne35AUns8rTnRYVjoIMwPXtUmc1ZQPUeVwYURs/7ej
+         s+Qiq0RNByLheOSwMfB0N3MNoiM0kupd+5Q+CcrpqRz+L+sv62g2uSHz/Aa2JqW3JsBJ
+         ZSJKEpoh4LoOWBcg1Ihd1viN1XUq59MQfj076iHGVobqhvjCqfGa+NUKN438rxP3tjpW
+         n/OauMlPgjKgzfTXJ973Tqe1TGYZKcKrdB49bnrheBVYwjg72fJBZnPQWLSZnS/0qz08
+         DILg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768983966; x=1769588766;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pOfh991Nf5x6cbHEyitGr4ECnygIc5lXslxo+H2b9a0=;
+        b=UWG5pDcLb37f64PVzm1eZi1PlX8eLywPRp3oNF7gMjtoTlKbnm2Vg9uleNOWq3uEtz
+         3+iwJ54JHLU5Ff3iBCnhEzY7DRozZIWMXoN339qB3ss03/FSAbxggO1gx7e66Vu/MBbD
+         QjK3/mPgv90NcBQ1+ewVxYFDt1y7V4BP9Y32HEyzhyL/F25H4uATAS4LxK0ZxhsSVlOf
+         gHnF8immIL2Xo5tBX35nqeMFwCWu2hNroPkmJlfCqcb7OVhntXwIH2oCK/vPB2ks/ILW
+         7BJIOYF7K52lbCH9HbLKiS70JRw5s0pXwVqUMm5iWXdPGxw6vQC+euM3/bwlwLjB1il2
+         re5g==
+X-Forwarded-Encrypted: i=1; AJvYcCWec4VErRlIKOzGzMVmDeHOuU7lvEOWJK+14qbAxEy/G0Ak9Ap8TGLcKtXJp/D58GgscWB/MkYEy4g=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzROORnaLeLpHidK/6cVkeysCi5Nm+sDXyiPShkiSeBqTsFiPWf
+	wQnYez7SOmBGN4uKd0R63qMpGmnKHX4ihrR/ILCrh6zwYZehIAX0TSqsAlXocg==
+X-Gm-Gg: AZuq6aJGzT4GunRCqyUlFjdL1jKtRLKoer6/kjpZ6hLRMAQIVbAGT4K3W/0bA7e/EFM
+	z980qSDL08YOVroxYl/9Wun2EQffJFRHlgnSySSDwjM/UJyYgyWueYzvGMpi1a/KJLlsUnR2cn8
+	2eYOVESrd4/H3AUrLBoB4yHWLgvU0czuvnG8n8pp1LP4hkfqMzWx4CDOpnQM2PbZsjAQFyDa+Pc
+	HE1lv0hUztrwHp+1yP3ZkO/KvWvaISDHPlarOimAmBPp1WZ3oHzkSMGuXYebgJ8ywt5adCcLOoi
+	UoqMhf7E0wDhCx8Kd7b4mivWpXuAywVcC/d2Bd+wocNjaRFMg1Uw5rdEm2M2BVbGI5PsPMhDYyB
+	eArGS0Tt3f58okGTR5bcWtQp2W12kMUv6De4vibFAZKvzQXa24wTUBlgK9h1R/DY0/Wn5mVhxiN
+	DxD3DNG1wAhKeSmZA9FPC1BdmY7UbaNbgxqfidSRwmQQ0PMT4lzGP6gA==
+X-Received: by 2002:a17:903:1110:b0:271:479d:3dcb with SMTP id d9443c01a7336-2a717518996mr161853105ad.6.1768983966532;
+        Wed, 21 Jan 2026 00:26:06 -0800 (PST)
+From: David Yang <mmyangfl@gmail.com>
+To: netdev@vger.kernel.org
+Cc: David Yang <mmyangfl@gmail.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH net-next] xen/netfront: Use u64_stats_t with u64_stats_sync properly
+Date: Wed, 21 Jan 2026 16:25:46 +0800
+Message-ID: <20260121082550.2389249-1-mmyangfl@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 
-On Wed, 21 Jan 2026, Volodymyr Babchuk wrote:
-> > On 24.12.2025 18:03, Oleksii Kurochko wrote:
-> >> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> >> ---
-> >>  xen/arch/riscv/include/asm/time.h | 5 +++++
-> >>  1 file changed, 5 insertions(+)
-> >
-> > Looks okay and read to go in as is (no dependencies on earlier patches afaics),
-> > but:
-> >
-> >> --- a/xen/arch/riscv/include/asm/time.h
-> >> +++ b/xen/arch/riscv/include/asm/time.h
-> >> @@ -29,6 +29,11 @@ static inline s_time_t ticks_to_ns(uint64_t ticks)
-> >>      return muldiv64(ticks, MILLISECS(1), cpu_khz);
-> >>  }
-> >>  
-> >> +static inline uint64_t ns_to_ticks(s_time_t ns)
-> >> +{
-> >> +    return muldiv64(ns, cpu_khz, MILLISECS(1));
-> >> +}
-> >
-> > It's hard to see what's arch-dependent about this or ticks_to_ns(). They're
-> > similar but not identical to Arm's version, and I actually wonder why that
-> > difference exists. Questions to Arm people:
-> > 1) Why are they out-of-line functions there?
-> 
-> That's interesting question. According to git blame this is how it was
-> introduced in 2012 and after that no one touched this part. Original
-> patch had cntfrq defined as `static`, this explains why these functions
-> were declared out-of-line.
-> 
-> > 2) Why the involvement of the constant 1000 there? 1000 * cpu_khz can
-> >    actually overflow in 32 bits. The forms above aren't prone to such an
-> >    issue.
-> 
-> Patch "xen: move XEN_SYSCTL_physinfo, XEN_SYSCTL_numainfo and
-> XEN_SYSCTL_topologyinfo to common code" (096578b4e48) changed hz to
-> khz. This added that 1000 multiplication. Also this patch removed
-> `static` qualifier from the counter variable.
-> 
-> Anyways, latest ARM ARM suggests that timer frequency should be fixed at
-> 1GHz, which is shy of 32-bit overflow. So most new platforms will be
-> fine. And older platforms had much lower frequencies.
-> 
-> > If the delta isn't justified, I think we'd better put RISC-V's functions in
-> > common code (xen/time.h). They're not presently needed by x86, but as
-> > inline functions they also shouldn't do any harm.
-> 
-> I'm mere reviewer, but I agree that proposed approach is better and more
-> resilient.
+On 64bit arches, struct u64_stats_sync is empty and provides no help
+against load/store tearing. Convert to u64_stats_t to ensure atomic
+operations.
 
-Yes I agree too.
+Signed-off-by: David Yang <mmyangfl@gmail.com>
+---
+ drivers/net/xen-netfront.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index 7c2220366623..0969d5c9f6b7 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -97,8 +97,8 @@ struct netfront_cb {
+ static DECLARE_WAIT_QUEUE_HEAD(module_wq);
+ 
+ struct netfront_stats {
+-	u64			packets;
+-	u64			bytes;
++	u64_stats_t		packets;
++	u64_stats_t		bytes;
+ 	struct u64_stats_sync	syncp;
+ };
+ 
+@@ -634,8 +634,8 @@ static int xennet_xdp_xmit_one(struct net_device *dev,
+ 		notify_remote_via_irq(queue->tx_irq);
+ 
+ 	u64_stats_update_begin(&tx_stats->syncp);
+-	tx_stats->bytes += xdpf->len;
+-	tx_stats->packets++;
++	u64_stats_add(&tx_stats->bytes, xdpf->len);
++	u64_stats_inc(&tx_stats->packets);
+ 	u64_stats_update_end(&tx_stats->syncp);
+ 
+ 	return 0;
+@@ -843,8 +843,8 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 		notify_remote_via_irq(queue->tx_irq);
+ 
+ 	u64_stats_update_begin(&tx_stats->syncp);
+-	tx_stats->bytes += skb->len;
+-	tx_stats->packets++;
++	u64_stats_add(&tx_stats->bytes, skb->len);
++	u64_stats_inc(&tx_stats->packets);
+ 	u64_stats_update_end(&tx_stats->syncp);
+ 
+ 	if (!netfront_tx_slot_available(queue))
+@@ -1249,8 +1249,8 @@ static int handle_incoming_queue(struct netfront_queue *queue,
+ 		}
+ 
+ 		u64_stats_update_begin(&rx_stats->syncp);
+-		rx_stats->packets++;
+-		rx_stats->bytes += skb->len;
++		u64_stats_inc(&rx_stats->packets);
++		u64_stats_add(&rx_stats->bytes, skb->len);
+ 		u64_stats_update_end(&rx_stats->syncp);
+ 
+ 		/* Pass it up. */
+@@ -1400,14 +1400,14 @@ static void xennet_get_stats64(struct net_device *dev,
+ 
+ 		do {
+ 			start = u64_stats_fetch_begin(&tx_stats->syncp);
+-			tx_packets = tx_stats->packets;
+-			tx_bytes = tx_stats->bytes;
++			tx_packets = u64_stats_read(&tx_stats->packets);
++			tx_bytes = u64_stats_read(&tx_stats->bytes);
+ 		} while (u64_stats_fetch_retry(&tx_stats->syncp, start));
+ 
+ 		do {
+ 			start = u64_stats_fetch_begin(&rx_stats->syncp);
+-			rx_packets = rx_stats->packets;
+-			rx_bytes = rx_stats->bytes;
++			rx_packets = u64_stats_read(&rx_stats->packets);
++			rx_bytes = u64_stats_read(&rx_stats->bytes);
+ 		} while (u64_stats_fetch_retry(&rx_stats->syncp, start));
+ 
+ 		tot->rx_packets += rx_packets;
+-- 
+2.51.0
+
 
