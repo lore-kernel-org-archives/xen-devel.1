@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2DBD3EE92
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:48:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1211354.1522955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB585D3EE95
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:48:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1211355.1522971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixqc-0000jd-MM; Thu, 22 Jan 2026 16:47:54 +0000
+	id 1vixqe-00018n-7T; Thu, 22 Jan 2026 16:47:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1211354.1522955; Thu, 22 Jan 2026 16:47:54 +0000
+Received: by outflank-mailman (output) from mailman id 1211355.1522971; Thu, 22 Jan 2026 16:47:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixqc-0000is-9I; Thu, 22 Jan 2026 16:47:54 +0000
-Received: by outflank-mailman (input) for mailman id 1211354;
- Thu, 22 Jan 2026 16:47:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vixqd-00016a-M5; Thu, 22 Jan 2026 16:47:55 +0000
+Received: by outflank-mailman (input) for mailman id 1211355;
+ Thu, 22 Jan 2026 16:47:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcaL=73=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vixqb-0007Ij-39
- for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:47:53 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1718468b-f7b2-11f0-9ccf-f158ae23cfc8;
- Thu, 22 Jan 2026 17:47:51 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b876f3f603eso174720766b.0
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:51 -0800 (PST)
+ id 1vixqc-0007Id-1p
+ for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:47:54 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 18716147-f7b2-11f0-b15e-2bf370ae4941;
+ Thu, 22 Jan 2026 17:47:53 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8707005183so195855266b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:53 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.49
+ a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 08:47:49 -0800 (PST)
+ Thu, 22 Jan 2026 08:47:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1718468b-f7b2-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 18716147-f7b2-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769100470; x=1769705270; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1769100473; x=1769705273; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+bOmIXS7ukX07+v1FZwQcpO5Pv22L8b7W5Nzbqzk3MM=;
-        b=Z56vXmNe0vZFGbiPjeQexcThGbP8NxeeLpnxV6YndwGnLUxx9Q46EDgVFU9Z8M8e7s
-         HynSDVdmefqwWa18Y+n9yfTSAliiSRU35bu9kGc1iGQdo06xiB6jjWoQnHRhtyN+iAvw
-         ny3I4pWBT0EIsKmWypu1rL4XjTclOrM/mvGehOS+Vzv+VvtlkPOSlR7p1mnLJrNOrv14
-         1UjM/ozgmm2j4one+o5LiI+KtMewX5U3RlvBA7VpXLdmrtQCRzwusQjo9/xXXgUhtUZU
-         08lQNDK5RW+Pi9gSGGn/6npbyH5jEDfGZup1QNskSV0CiLDCnKio2Ju82qtHA+/jMSB6
-         Y94A==
+        bh=yFNz2eINTf9rVU++UNSQJpwAORPoMimHJyiwu4QoyIk=;
+        b=B39nKBiuAKmmI+eUiNNlVTEPXbQ12gOBTMtFDuNLQJ5/mvfGEJuCm2B5DCNwtg1GVc
+         1lvvlKIV7sLpLNKDQlnkBypxYCWQ/1HuIQdUcGfYSZ5C9conPZybhk0ceR1f+OiiqThz
+         YWKRV8tV/PL+CTy9AkZmHuslYND5RIs9KLN+AVgRS7OnVcoG44VIdykx9Jr8JKZE3fXi
+         I87TyyJDnZzhoNODZNLG7Fy/bAs3DESXYRafUjp8zxUX+PxobPeQwtkP0Fyd8pRFr4N+
+         hkNVxnFSCiYdsPjRzXueyXEQTpHe30YvwT9PMvpe7xVKyN3hceeSJJcVZLeq/a6Av2kv
+         teJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769100470; x=1769705270;
+        d=1e100.net; s=20230601; t=1769100473; x=1769705273;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=+bOmIXS7ukX07+v1FZwQcpO5Pv22L8b7W5Nzbqzk3MM=;
-        b=hoxYf7+WKNChiix5c00LemQyNKebb51flxfOXlgfU64bDAN+uGDxxjZs9V1Q6zmeTN
-         4ZMxP5tG20bfta5RQM80hdC+Kb0+mFHMcvNyIdSV4s649HjftRrTOsD47sxIvoKLnmM/
-         f2D77zSLf/dcmTCEwjTO2tUFlqqFOt1UsFR4x+AbPECoWZXZCPTeZ40G2RqNCqM0buiD
-         UeRnaqsv9TwahYrR1URiOjHUn+JUoFpuEdi+ewvyjzhjZe3P6Yg34olTYwZYOrrj+I+s
-         WDBPo456RA7oR2kOb+o2bwsv5JozjF3iHGlotrevoGqMCaoT25kHvt7ZME7hiDtKLkwQ
-         yrGA==
-X-Gm-Message-State: AOJu0Yzd+GE3oMnbSFsrUK3shf1YN+mY1RbtwLEj9GDpCxFFhxz6CR5X
-	f1AOMCf74aPUHUqmJB0dP0UpWMlWHLuYbYE1WuzgwRsIYUl+6EXFakG147me9A==
-X-Gm-Gg: AZuq6aLnnmsXDCvKpq0IwcHYvjVJER95U8YgkDPQFajN9JPLDgAG7cS7Jt6uecnb50L
-	P19CuGZSbqyXC1DTN3sIa843rpOTcUtEQkkrQKpXXFFrWVj6zoQ9Anmbni8wltATDqjqhaAxxjf
-	HgENvcTyg5UjExuNBrMPkjVirzXrKiJ926jRZdW6B7wKikAGvJDq25VYxZPIX/WvV7QuXiKrhC/
-	54BhzMb1Pmf3HrGHjnSkZ5mJtVP9S/Plcn4otzFbBvCyHPKvbPHDHNeB0w63KV0/HBeDoQX1IW8
-	0OcF7CyttVKeY1PHRt2DuObjrj/rH2zSbl3MkqwR0CXdAfomEqxrGtch24eULmgLc9n5yUk34ci
-	Nb2pWCWR6rSXImrhx8O4U/nmcqqZ82J5PXJvwmYJlou/LC3fT6kFx3/y827aFF3gd3fM1CGEnVW
-	URixcGCFGtG4xu+LGpgQRk7CNyLP5JD1QtSmofzByIW3LRBdxUY5I8Bw==
-X-Received: by 2002:a17:907:8dc3:b0:b88:587f:f594 with SMTP id a640c23a62f3a-b88587ffb0cmr29524266b.18.1769100470277;
-        Thu, 22 Jan 2026 08:47:50 -0800 (PST)
+        bh=yFNz2eINTf9rVU++UNSQJpwAORPoMimHJyiwu4QoyIk=;
+        b=lqmCTUe5TfUSnK1Bu2NVpEMAIXt6yKeCjFsL2ZYTPjhf1BpXIRLKmeTWiGFm8cqbkc
+         fG6FEIq0D6olP/U2bUHIWmRDCPLdJc5D7bshuhGWdNuqKI+Z3NN9i2Ed7zob7wDNcR2Y
+         PpylVGECn4H/HhptWnklarHDhuazzCCS74iVTMBKrElnSLuKL/8QJYUVy/AQtvH7Lnah
+         MJK7dC1FriSdxvYBRAmQmzR9sMP9uaDQQs0UYfPPsssVpTJG5lgoGnvKVW/Aq4etLGX4
+         qaMWxE8mw4YiKiUZrVPcD9IKPx8EndbSJfv5JM2anXkVv1jB20mUgfMmbX6FWbM6E5sA
+         LkVw==
+X-Gm-Message-State: AOJu0Yzp3mStcLV3m5ACHpGazRmxwb/qvxAjUaQp+Xc9C/++d6WyRDYI
+	QtTL7P2jwSVvxiYlkwAkZ8W5MhVlWaDblUIDtqwzhORHP1xzGwAmkYaBye8anQ==
+X-Gm-Gg: AZuq6aII4n9OtrDtGADr8gZeUN+c9TqpK31qmZPkk+lym1dcBuOUpjroEmNny2SEPJM
+	k24r5KhlcjUwfbfq5/0NY6kFWQgi42Mj9GRv+qSNjI0FwsrGy8JqE/BM9iGUSZL5DMj0xak1qIS
+	7UWihf3xQRUlFMQg7KIes5jCRUrmDVHfPFzJHJv6EFqmp9MLn4iZI8wrz5sTxCYT1xD0cEUSlGz
+	1IAWuaVfwa0CELRzHmFcTOH8EMqm3f+mn09BmY8RPO4i0isXZlavNQhz4s7+gOQIdpnv+cGytDM
+	nt5R1M1yd1vSP2cWgOFmXhwrWJ9yLB4yaEcslRAfinQaNKD9s3cEMkggcnnkQVMs46P5E5emIuN
+	KM4lnm+0Oo6MleJkPwT3dzoK025AI6QwgJ0zAKbtr50jVWFo4cVTTlwfWxdRNMoCr+foyHNdSDd
+	QDnUZJ7H49pMLX5DtABkmY/8h0Kqyopxj7B6B/EfJce5Ii/INpQKYvGKnfGNj8NJF1
+X-Received: by 2002:a17:907:7256:b0:b84:40d3:43e6 with SMTP id a640c23a62f3a-b8792e0b88fmr1732932566b.6.1769100472698;
+        Thu, 22 Jan 2026 08:47:52 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,22 +96,22 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v2 09/16] xen/riscv: introduce vcpu_kick() implementation
-Date: Thu, 22 Jan 2026 17:47:24 +0100
-Message-ID: <0335a7db0343d81ce4256482a464e7ba5df1c204.1769099885.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 11/16] xen/riscv: implement SBI legacy SET_TIMER support for guests
+Date: Thu, 22 Jan 2026 17:47:26 +0100
+Message-ID: <0cca5db24ac772b1d1145e189b26ace63ef9a58d.1769099885.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1769099883.git.oleksii.kurochko@gmail.com>
 References: <cover.1769099883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add a RISC-V implementation of vcpu_kick(), which unblocks the target
-vCPU and sends an event check IPI if the vCPU was running on another
-processor. This mirrors the behavior of Arm and enables proper vCPU
-wakeup handling on RISC-V.
+Add handling of the SBI_EXT_0_1_SET_TIMER function ID to the legacy
+extension ecall handler. The handler now programs the vCPU’s virtual
+timer via vtimer_set_timer() and returns SBI_SUCCESS.
 
-Remove the stub implementation from stubs.c, as it is now provided by
-arch/riscv/domain.c.
+This enables guests using the legacy SBI timer interface to schedule
+timer events correctly.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
@@ -119,57 +119,33 @@ Acked-by: Jan Beulich <jbeulich@suse.com>
 Changes in v2:
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
- xen/arch/riscv/domain.c | 14 ++++++++++++++
- xen/arch/riscv/stubs.c  |  5 -----
- 2 files changed, 14 insertions(+), 5 deletions(-)
+ xen/arch/riscv/vsbi/legacy-extension.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index e38c0db62cac..13ac384c4b76 100644
---- a/xen/arch/riscv/domain.c
-+++ b/xen/arch/riscv/domain.c
-@@ -1,8 +1,10 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
+diff --git a/xen/arch/riscv/vsbi/legacy-extension.c b/xen/arch/riscv/vsbi/legacy-extension.c
+index 2e8df191c295..090c23440cea 100644
+--- a/xen/arch/riscv/vsbi/legacy-extension.c
++++ b/xen/arch/riscv/vsbi/legacy-extension.c
+@@ -7,6 +7,7 @@
  
-+#include <xen/cpumask.h>
- #include <xen/init.h>
- #include <xen/mm.h>
- #include <xen/sched.h>
-+#include <xen/smp.h>
- #include <xen/vmap.h>
+ #include <asm/processor.h>
+ #include <asm/vsbi.h>
++#include <asm/vtimer.h>
  
- #include <asm/bitops.h>
-@@ -240,3 +242,15 @@ void vcpu_sync_interrupts(struct vcpu *v)
- #   error "Update vsieh"
- #endif
- }
-+
-+void vcpu_kick(struct vcpu *v)
-+{
-+    bool running = v->is_running;
-+
-+    vcpu_unblock(v);
-+    if ( running && v != current )
-+    {
-+        perfc_incr(vcpu_kick);
-+        smp_send_event_check_mask(cpumask_of(v->processor));
-+    }
-+}
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index c5784a436574..1f0add97b361 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -208,11 +208,6 @@ void vcpu_block_unless_event_pending(struct vcpu *v)
-     BUG_ON("unimplemented");
- }
- 
--void vcpu_kick(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
--
- unsigned long
- hypercall_create_continuation(unsigned int op, const char *format, ...)
+ static void vsbi_print_char(char c)
  {
+@@ -44,6 +45,11 @@ static int vsbi_legacy_ecall_handler(unsigned long eid, unsigned long fid,
+         ret = SBI_ERR_NOT_SUPPORTED;
+         break;
+ 
++    case SBI_EXT_0_1_SET_TIMER:
++        vtimer_set_timer(&current->arch.vtimer, regs->a0);
++        regs->a0 = SBI_SUCCESS;
++        break;
++
+     default:
+         /*
+          * TODO: domain_crash() is acceptable here while things are still under
 -- 
 2.52.0
 
