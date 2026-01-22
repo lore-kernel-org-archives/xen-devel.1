@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4982D3EE89
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:41:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1211332.1522866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E15ED3EE8A
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:47:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1211346.1522891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixkH-0006ad-7l; Thu, 22 Jan 2026 16:41:21 +0000
+	id 1vixqV-0007XY-DT; Thu, 22 Jan 2026 16:47:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1211332.1522866; Thu, 22 Jan 2026 16:41:21 +0000
+Received: by outflank-mailman (output) from mailman id 1211346.1522891; Thu, 22 Jan 2026 16:47:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixkH-0006aW-4i; Thu, 22 Jan 2026 16:41:21 +0000
-Received: by outflank-mailman (input) for mailman id 1211332;
- Thu, 22 Jan 2026 16:41:20 +0000
+	id 1vixqV-0007Ww-5y; Thu, 22 Jan 2026 16:47:47 +0000
+Received: by outflank-mailman (input) for mailman id 1211346;
+ Thu, 22 Jan 2026 16:47:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7Jsu=73=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vixkG-0006aP-5S
- for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:41:20 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HcaL=73=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vixqT-0007Ij-JI
+ for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:47:45 +0000
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [2a00:1450:4864:20::52e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29ccbf42-f7b1-11f0-9ccf-f158ae23cfc8;
- Thu, 22 Jan 2026 17:41:13 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-47ee2715254so6691285e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:41:13 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4804ce3274csm506665e9.0.2026.01.22.08.41.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Jan 2026 08:41:12 -0800 (PST)
+ id 123f9bb3-f7b2-11f0-9ccf-f158ae23cfc8;
+ Thu, 22 Jan 2026 17:47:43 +0100 (CET)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-652fdd043f9so2075721a12.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:43 -0800 (PST)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jan 2026 08:47:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,151 +47,245 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29ccbf42-f7b1-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 123f9bb3-f7b2-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1769100073; x=1769704873; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=fXdUIoK+UHr9m/hbfvjoIUCGRpiigaqs5cY9PvbeFq8=;
-        b=TMOfgNlGORiPLV7HgIfO3O1GozQ6ht9X4RoGc01e0tuBSucIPazDEvrvf6bmCI6s1H
-         3B+MM8/Rj/hBVnS6QEZaIc+rXBgCVMcXgQBk2hmEiXGKD3SnPyEL2dCoklC9vIk7PVN2
-         /dtxyqYMh028W7IVhU1RXddXDe/b0Y6mYzuTfW4BwYqLMlHMauvOKgJecFRAh6k1+qje
-         OTN71QxvYgfcrnhlbrwnrpY3qYm4xXIVMCwtpt0kYq83wl9MaH2o9Qh2S69czsop0ZXn
-         KrQF362VJ1sH3rIuVNc+tTraeAnc/NBWol7L9/WfnzX3ZXHbzGPRZJfENiWV/0mRbMh5
-         g3NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769100073; x=1769704873;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1769100462; x=1769705262; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fXdUIoK+UHr9m/hbfvjoIUCGRpiigaqs5cY9PvbeFq8=;
-        b=DZnLYvNV8tcGCZ3PRUGrmV2+dL9qXud2BXFK3edfPiCo7qU5NHPr1KQ/tcBh6U7xav
-         LcbLQR8vysCWMzI0XlTBqfzqyQ8i63aByh3SloF5TI4IGm22bBPzYJkfxKXVOdXGIyae
-         G1dTlywLKooZYEvp/NxS0Uprnzs2hTEiTA8HyKP81xNKqbdQkkmhdvE0evtqEQy3Ph2w
-         hn1awwkf20hSVmSD3sk37H+KAhzVAENjaHhhmP2FtNBEoKZ4Q/kJ1t1AGk3XBnhyp8/R
-         eUNBvl5m4O4i1yJrG8NBPuZgDjxVcR7Ho0/PtkTMTwqSEbOuWKdHISdcdrbbt8fmI6el
-         Qxvg==
-X-Forwarded-Encrypted: i=1; AJvYcCXJFDSMaNqFaRYCE92EEEr9GV0WYYROUMULggXhwDlX4rfxcuSm4JRsqaOtfVuo9vzF9MY4VUpYrRY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyRC9lELUzmhLwfd67SfAyuY9tPPU6SO6TknjNoZgWh75104up2
-	KQPWX05IWifurO79g9MDomFQHsb5ZeQto4Ykryy0/iBupUAXTw/kf0XtCHC/c7YQnw==
-X-Gm-Gg: AZuq6aITDAYPTxG6kIXCU1MSfSAmyl5gHWlsQWIM+uVpbxytvqsjNFpdZwxxxQpSaPX
-	9FyBBytj33xm8wpIaHh5G+CF803iEhkfr0XO3XM1RmTF9bA2RqH3ZspxTgSXPFRdNzBQYPWq7EB
-	Fj1vaqU+moAJdQXrKtQmBL1m2teyFvgkO7Du9saVnLtbYXK9v0r8q4s+yOZaoUAtd3F+WR6ETo2
-	FdRVcLQ9wvtKIMrOytDW6OS36mDmHdVPlVDh1aMWJM7sOBPmep00h4lkftyM8OrkFc9bG47aRCR
-	tb00xicZkBEThRVix9z8vUv5GHxYCcXbb0Q7D4twtxRCAXdcdZfjlhs2jQ8LEFpRqrD8XrJP2Tn
-	cYcR6OLMx0eEA8DOgxoXnE04Kc6hJwoaPLz9gB6wUxfSir/Ov8C85d8NC4SGAxOPAjJJ69WwbOf
-	FZWCSD8QuBkkSAjkrRhwT29dva59i3IyACPzaSUSjbLQ7QOChP+LGug4IkUFSAgDRPHobqqMUle
-	0g=
-X-Received: by 2002:a05:600c:3e10:b0:477:9814:6882 with SMTP id 5b1f17b1804b1-4804c947a33mr3966605e9.5.1769100072666;
-        Thu, 22 Jan 2026 08:41:12 -0800 (PST)
-Message-ID: <e88825f2-2055-4dae-a15f-d0b94cec51c4@suse.com>
-Date: Thu, 22 Jan 2026 17:41:10 +0100
+        bh=Xs+SAk+ck32r+yVPkjsZQLd/gIzJLULQhlXaIyvjgE4=;
+        b=irLUHRdrFHl4hUrYUNLBQvgcZvUHl/W6AhVMuC+92akbisiP7xieXVhHbHPqbGAopM
+         0XK9bCgoIZq0PRT4o5xchKmCKQXXwwTN8Pu7YhjtnD9c85D47LDPtZ+SB/E5n1LXSG8E
+         /LLcpPwvw7pVp8NfNM91VM/TCYrCqyJt34+aN0AxJcOcmklEqDzho6rm27nVYfDsN3qg
+         3Cqt8/2z24elMWbi+1F4lyQFi1g65Uf8JtD+seRZBQ1CaglqBkV+ntSbfVD9CCsyctk5
+         NGwLapD54aGL21E6bPkfH9XnJOEfmnNdSOtu9uq3hWB0vYPBV4vinxHGzpc/8w6oeXQu
+         6R0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769100462; x=1769705262;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Xs+SAk+ck32r+yVPkjsZQLd/gIzJLULQhlXaIyvjgE4=;
+        b=dtIJVq21uX872/HMxE9g+UMMcB/NHVgWxZ+EPai7+74Vm89EIFULXxVrFuVZBgaRHc
+         Gr4jMAXFsLniLycSJHgcXZJpCEKgVDwLX7alRCExl/+Qc8yn73p6v6OGfNo4HlYaj+dK
+         a99RlOeT619dGas4Yvd1y7NIvLmTKQpDGxgKRjxrzzONZLcEhQ2SqcD/z6jQXKa6TjMe
+         Bxj9K3YbbXbxv2OAGTqIC65LEINSqrkH53YXHqSpd0BqXgO6+sFQOaPSpCxPtB3ZzDCS
+         Z/3C78fuBmAhZuZsnfmA16Zm4xh9vMYlRiKJJWbsiPoJcc6c4fMUTQFC8ZgVIXIVysFG
+         SefA==
+X-Gm-Message-State: AOJu0YzJGNthqEhoOd230vNQzaXw4VLVMqTSHL+Vzr5VYD2Rggp/dUmD
+	SPHqaoWf7e4/uFeYVbBmqJ5alyBmj0IzsvclibRU+1IxgyLZWnnEObWXmJzMEw==
+X-Gm-Gg: AZuq6aLag382gogFX7hOA+u1MfDAKPmqsBXczLow8HmUTilL42uMMgxzNKNJ/bnEY1/
+	xFdyu/DVab6UNOiA1PwvkKE0btcxhCrHdn22vAQUXuYiSnBwgPCoNu9bwmuKdtXDoAk3+r1++VW
+	okTwYJeTbBWsifDVDLsL8tHvv5qQ8RXn9hdQwypoHpvzR97TpFKzKjDe0/mrenS3q1VcSRQLCSF
+	ayzoxrzPevc+81oO4Q+Mbc+7iIhCvnOhOInt2CGm7mq+7HjxYHyX3tqwONyqVFxBNPd8XPMMKcq
+	b/R8WlHhlB6TJmzDN+OOOd2O8PbJKGXzyxLIvx3Goq6Okuq8lLWvjJOgower/xFIWhnpBbzsM4T
+	i6pnoJzQ/O8mPbBBO2MBC1yACXPgoH9DovftnLnQ9bMApjXeSm4o1Hf4cCNxqvMYLLUm62Oaljx
+	kUPuHGYahtDL8dzok9imAaJfBJJDa553anUP3ngs3QSK1mgGSAr88hkA==
+X-Received: by 2002:a17:907:26c8:b0:b7c:e320:5228 with SMTP id a640c23a62f3a-b8792e0e967mr1833140566b.22.1769100462166;
+        Thu, 22 Jan 2026 08:47:42 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Romain Caritey <Romain.Caritey@microchip.com>
+Subject: [PATCH v2 02/16] xen/riscv: implement arch_vcpu_{create,destroy}()
+Date: Thu, 22 Jan 2026 17:47:17 +0100
+Message-ID: <08b582179ebc4241140000972d89209c84c90fa4.1769099885.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1769099883.git.oleksii.kurochko@gmail.com>
+References: <cover.1769099883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 15/22] x86/smpboot.c: TXT AP bringup
-To: Sergii Dmytruk <sergii.dmytruk@3mdeb.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Ross Philipson <ross.philipson@oracle.com>,
- trenchboot-devel@googlegroups.com, xen-devel@lists.xenproject.org
-References: <cover.1748611041.git.sergii.dmytruk@3mdeb.com>
- <bca9943d4ffb37531ec8facac09e85996bc2acb7.1748611041.git.sergii.dmytruk@3mdeb.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <bca9943d4ffb37531ec8facac09e85996bc2acb7.1748611041.git.sergii.dmytruk@3mdeb.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 30.05.2025 15:17, Sergii Dmytruk wrote:
-> @@ -154,6 +164,13 @@ gdt_48:
->          .quad   0x00cf93000000ffff /* 0x0018: ring 0 data */
->          .quad   0x00009b000000ffff /* 0x0020: real-mode code @ BOOT_TRAMPOLINE */
->          .quad   0x000093000000ffff /* 0x0028: real-mode data @ BOOT_TRAMPOLINE */
-> +        /*
-> +         * Intel TXT requires these two in exact order. This isn't compatible
-> +         * with order required by syscall, so we have duplicated entries...
-> +         * If order ever changes, update selector numbers in asm/intel-txt.h.
-> +         */
-> +        .quad   0x00cf9b000000ffff /* 0x0030: ring 0 code, 32-bit mode */
-> +        .quad   0x00cf93000000ffff /* 0x0038: ring 0 data */
+Introduce architecture-specific functions to create and destroy VCPUs.
+Note that arch_vcpu_create() currently returns -EOPNOTSUPP, as the virtual
+timer and interrupt controller are not yet implemented.
 
-Especially since the corresponding #define-s sit ...
+As part of this change, add continue_new_vcpu(), which will be used after
+the first context_switch() of a new vCPU. Since this functionality is not
+yet implemented, continue_new_vcpu() is currently provided as a stub.
 
-> --- a/xen/arch/x86/include/asm/intel-txt.h
-> +++ b/xen/arch/x86/include/asm/intel-txt.h
-> @@ -91,6 +91,9 @@
->  
->  #define SLAUNCH_BOOTLOADER_MAGIC             0x4c534254
->  
-> +#define TXT_AP_BOOT_CS                  0x0030
-> +#define TXT_AP_BOOT_DS                  0x0038
+Update the STACK_SIZE definition and introduce STACK_ORDER (to align with
+other architectures) for allocating the vCPU stack.
 
-... entirely elsewhere, I think at least the comments above want to mention
-these names. (Even better would be to not hard-code these numbers, or to
-use the numbers to establish the offsets in trampoline_gdt.)
+Introduce struct cpu_info to store per-vCPU state that lives at the top
+of the vCPU's stack.
 
-> @@ -321,6 +323,29 @@ void asmlinkage start_secondary(void)
->      struct cpu_info *info = get_cpu_info();
->      unsigned int cpu = smp_processor_id();
->  
-> +    if ( ap_boot_method == AP_BOOT_TXT ) {
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in v2:
+ - Drop BUILD_BUG_ON() in arch_vcpu_create() as a check isn't very useful.
+ - Use vzalloc() instead of alloc_xenheap_page() to use the larger domheap to
+   allocate vCPU's stack.
+ - Drop printk() inside arch_vcpu_create() to not have potential big noise
+   in console as it could be that an amount of vCPUs is pretty big.
+ - Use XVFREE() instead of free_xenheap_pages() as vCPU's stack allocation
+   happens with a usage of vzalloc() now.
+ - Drop stack field as it is enough to have only cpu_info as stack pointer
+   could be calculated based on cpu_info.
+ - Drop cast when v.arch.cpu_info is inialized as it is not necessary
+        to have it.
+ - Drop memset() for arch.cpu_info() as it is enough to have vzalloc().
+---
+ xen/arch/riscv/Makefile              |  1 +
+ xen/arch/riscv/domain.c              | 59 ++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/config.h  |  3 +-
+ xen/arch/riscv/include/asm/current.h |  6 +++
+ xen/arch/riscv/include/asm/domain.h  |  2 +
+ xen/arch/riscv/stubs.c               | 10 -----
+ 6 files changed, 70 insertions(+), 11 deletions(-)
+ create mode 100644 xen/arch/riscv/domain.c
 
-Style nit (also again later): Brace on its own line please.
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 87c1148b0010..8863d4b15605 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -1,5 +1,6 @@
+ obj-y += aplic.o
+ obj-y += cpufeature.o
++obj-y += domain.o
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-y += entry.o
+ obj-y += imsic.o
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+new file mode 100644
+index 000000000000..9c546267881b
+--- /dev/null
++++ b/xen/arch/riscv/domain.c
+@@ -0,0 +1,59 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/init.h>
++#include <xen/mm.h>
++#include <xen/sched.h>
++#include <xen/vmap.h>
++
++static void continue_new_vcpu(struct vcpu *prev)
++{
++    BUG_ON("unimplemented\n");
++}
++
++static void __init __maybe_unused build_assertions(void)
++{
++    /*
++     * Enforce the requirement documented in struct cpu_info that
++     * guest_cpu_user_regs must be the first field.
++     */
++    BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs) != 0);
++}
++
++int arch_vcpu_create(struct vcpu *v)
++{
++    int rc = 0;
++    void *stack = vzalloc(STACK_SIZE);
++
++    if ( !stack )
++        return -ENOMEM;
++
++    v->arch.cpu_info = stack + STACK_SIZE - sizeof(struct cpu_info);
++    memset(v->arch.cpu_info, 0, sizeof(*v->arch.cpu_info));
++
++    v->arch.xen_saved_context.sp = (register_t)v->arch.cpu_info;
++    v->arch.xen_saved_context.ra = (register_t)continue_new_vcpu;
++
++    /* Idle VCPUs don't need the rest of this setup */
++    if ( is_idle_vcpu(v) )
++        return rc;
++
++    /*
++     * As the vtimer and interrupt controller (IC) are not yet implemented,
++     * return an error.
++     *
++     * TODO: Drop this once the vtimer and IC are implemented.
++     */
++    rc = -EOPNOTSUPP;
++    goto fail;
++
++    return rc;
++
++ fail:
++    arch_vcpu_destroy(v);
++    return rc;
++}
++
++void arch_vcpu_destroy(struct vcpu *v)
++{
++    vfree((char *)v->arch.cpu_info + sizeof(struct cpu_info));
++}
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 1e08d3bf78be..86a95df018b5 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -143,7 +143,8 @@
+ 
+ #define SMP_CACHE_BYTES (1 << 6)
+ 
+-#define STACK_SIZE PAGE_SIZE
++#define STACK_ORDER 3
++#define STACK_SIZE (PAGE_SIZE << STACK_ORDER)
+ 
+ #define IDENT_AREA_SIZE 64
+ 
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index 0c3ea70c2ec8..58c9f1506b7c 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -21,6 +21,12 @@ struct pcpu_info {
+ /* tp points to one of these */
+ extern struct pcpu_info pcpu_info[NR_CPUS];
+ 
++/* Per-VCPU state that lives at the top of the stack */
++struct cpu_info {
++    /* This should be the first member. */
++    struct cpu_user_regs guest_cpu_user_regs;
++};
++
+ #define set_processor_id(id)    do { \
+     tp->processor_id = (id);         \
+ } while (0)
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 0d9b4c4b525e..ec7786c76199 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -49,6 +49,8 @@ struct arch_vcpu
+         register_t ra;
+     } xen_saved_context;
+ 
++    struct cpu_info *cpu_info;
++
+     /* CSRs */
+     register_t hedeleg;
+     register_t hideleg;
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index 29bdb65afbdf..9e30a9a3b50b 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -121,16 +121,6 @@ void dump_pageframe_info(struct domain *d)
+     BUG_ON("unimplemented");
+ }
+ 
+-int arch_vcpu_create(struct vcpu *v)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+-void arch_vcpu_destroy(struct vcpu *v)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ void vcpu_switch_to_aarch64_mode(struct vcpu *v)
+ {
+     BUG_ON("unimplemented");
+-- 
+2.52.0
 
-> +        uint64_t misc_enable;
-> +        uint32_t my_apicid;
-> +        struct txt_sinit_mle_data *sinit_mle =
-> +              txt_sinit_mle_data_start(__va(txt_read(TXTCR_HEAP_BASE)));
-> +
-> +        /* TXT released us with MONITOR disabled in IA32_MISC_ENABLE. */
-> +        rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
-> +        wrmsrl(MSR_IA32_MISC_ENABLE,
-> +               misc_enable | MSR_IA32_MISC_ENABLE_MONITOR_ENABLE);
-> +
-> +        /* get_apic_id() reads from x2APIC if it thinks it is enabled. */
-> +        x2apic_ap_setup();
-> +        my_apicid = get_apic_id();
-
-Despite the comment putting the call to x2apic_ap_setup() here looks rather
-arbitrary. Also you do nothing about the other call from smp_callin(). Surely
-the function better wouldn't be called twice?
-
-> +        while ( my_apicid != x86_cpu_to_apicid[cpu] ) {
-> +            asm volatile ("monitor; xor %0,%0; mwait"
-> +                          :: "a"(__va(sinit_mle->rlp_wakeup_addr)), "c"(0),
-
-You alter %0, so it can't be just an input.
-
-> +                          "d"(0) : "memory");
-> +            cpu = smp_processor_id();
-
-What purpose does this serve?
-
-Jan
 
