@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 362A3D3EE67
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 14:19:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1211142.1522668 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C61D3EE67
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 14:22:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1211156.1522683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vivWp-00052t-JR; Thu, 22 Jan 2026 14:19:19 +0000
+	id 1vivZR-0006cv-6s; Thu, 22 Jan 2026 14:22:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1211142.1522668; Thu, 22 Jan 2026 14:19:19 +0000
+Received: by outflank-mailman (output) from mailman id 1211156.1522683; Thu, 22 Jan 2026 14:22:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vivWp-00052m-FC; Thu, 22 Jan 2026 14:19:19 +0000
-Received: by outflank-mailman (input) for mailman id 1211142;
- Thu, 22 Jan 2026 14:19:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vivZR-0006cC-27; Thu, 22 Jan 2026 14:22:01 +0000
+Received: by outflank-mailman (input) for mailman id 1211156;
+ Thu, 22 Jan 2026 14:21:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7Jsu=73=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vivWn-0004qM-Rq
- for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 14:19:17 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55373f6f-f79d-11f0-9ccf-f158ae23cfc8;
- Thu, 22 Jan 2026 15:19:16 +0100 (CET)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-43284ed32a0so674895f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 06:19:16 -0800 (PST)
+ id 1vivZP-0006ZI-Pf
+ for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 14:21:59 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b5e3d227-f79d-11f0-b15e-2bf370ae4941;
+ Thu, 22 Jan 2026 15:21:58 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4801d24d91bso10981425e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 06:21:58 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4356996dadbsm44443000f8f.21.2026.01.22.06.19.14
+ 5b1f17b1804b1-4804704b712sm68649175e9.8.2026.01.22.06.21.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Jan 2026 06:19:15 -0800 (PST)
+ Thu, 22 Jan 2026 06:21:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,59 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55373f6f-f79d-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: b5e3d227-f79d-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1769091555; x=1769696355; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1769091718; x=1769696518; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=3V4F2HUnuMCGUe57Is6YggIZWzIe5UpHKoR6Mo845WI=;
-        b=ZmPFw+nUucpuLXEBcr6P1GVQjL3PzAqM4efFUNu49gMvZqhDvnNbohxdJQ5fhcV1Cp
-         CvWa9XP384Fxr7ZpPQIooTpaZSZ+n3lPHvm8pW+t+P6K2ADdYum3AwWSzRiChEhYsCpK
-         BV7AQ8eARtK81jzPVkgm1xab9vrB4Hfc1FXl+BVrcFz+7ZY2NGzE2xORg6/A3gE4XbXU
-         OaWsQmJMABlbl9Ym69RVKXDcQiElVcUQd/zLhSsrU52U+t4VB1prthD4CUvLIqxC5o4j
-         izeVzX6uvFRDuKIclmyS5SAlJUjOR4pT9Jx/NWy13qWKSvK1uhFjpBXkkM3me64b9tFg
-         5snQ==
+        bh=KWBtxKj07s4HLwGJTh9AK3keI4THEAKode/ZcAbQeyE=;
+        b=Qrqni8+dwRr+VhF2fN/ihloAr9hAL54AOIIB5WgxwGLtYbfMgny60JhMq0VYTgPqgN
+         mldeyAB4ecNX8uCaHzy5Qr+Y1gnyCVs5oz6mcR6p4c9GDAL5NkmjsyFmi/qv4ptzzbYQ
+         ki1JXSZESdjYnn597WQG5fWkcwbY+3VJGB9jCOYTF8GidHxuot0eUjvxYixgGn9jpvGh
+         2x+xPb6KP5zsm24Eac0kk6uuVdaIwLJjG/h6MUnkaStyu94mbN0Huwgx5WTgD+xalOEm
+         c/26Vm5g6FnHnK6+lhtlvgxxoK+3QGMubAzwMwsRbUzy6z8PyDTpJcYduiYOUQjX9pzI
+         KYCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769091555; x=1769696355;
+        d=1e100.net; s=20230601; t=1769091718; x=1769696518;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3V4F2HUnuMCGUe57Is6YggIZWzIe5UpHKoR6Mo845WI=;
-        b=TDl4bUz4hnt59k1az3f3vvltKObfJYlx9XIlPR/H3l5Y9Qyn+BstHhdkYQL1y0DsmK
-         mP1dV5U+aGXnYehqBnfWuGJ2Aiaa73v1IP2k60XNrMYIZH5TkR0ji6r4T+Uhq6gTOWR8
-         Skx6S9LhiNMaht6CtHAzhJArtMyadlevm79lODuT9/6vA8r/rbebayf7UcWedcytAPLN
-         XnP6cGRzyLMja48tforEq5O7c+ynojM+SHFJr8q+nCqo6NaT7Gl/cQVx7q/krgvXOfQb
-         jmHr9CEWDWKuaLtPibQ/CTpJRDHUOv21ow9hlUrTEQ/ubiRgwbn18vDZIVq+8rQLKCv7
-         WIzw==
-X-Forwarded-Encrypted: i=1; AJvYcCXyIXnyp1+LHMY0HB1tJYlVqNfftW8Ji9OiZQRDot31d7YTLlW3OwpdXMitp2Jk3qFZFSnyFgYMKlE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxP0wawHdzzQKcFHGfjksVWhfaOlQpzoyT9nL3HIB9AQr7/bwd8
-	VitpRorHvQ8oq3d9Qf6xoCOXsnc1qc80GyLUJ4Kat3IBIJpUhaVME1c3oY3B2MuNzA==
-X-Gm-Gg: AZuq6aIj43B5Y+uxVFiOaqDfC66Y9IbK1TlegAZrBZPzalC85c0XSbaL5Ph2fEpphYT
-	+tKRPAiRUbr08AmqjWfYFwWx+UsBs+tJ5HFc49Rjk2b7QweqynbytomBOVZxNCKlJ4mMKRjjAnz
-	6YQaNQ2nVsf4NfXj7bQLd7/WeJo/LjkKqqtLYxpKN9xPIAqktxMt8PuAK5aANTZz9VvaOg6q46W
-	5Lbt3b2aAYQuc3jkwtH9scReJZULtGuxR3069T5FPWepvf8eKoT5PldPHig6gJLcX6nyZlLZvzn
-	0w21qCGPJRYxirvk08lhpcjgC4lqDGSGi6moCEjyYrfR4p7s0ZkhDw/xtuygVpppO51pu3ZfcHK
-	BkGMQMTaHF7/I4cs4OEXy1kcEXEpRAtKG0J6pdMZEtaE0at80H9e9bq3vKrNJISRBgGqASNVe0S
-	9uqBQXh5KYHBPb8QbCztsNnklIhljkVifsMfwajo/TA5yPOUvgl7ZORKSgXINNoFgAHxftZVnVY
-	FQ=
-X-Received: by 2002:a05:6000:4287:b0:432:84ef:756c with SMTP id ffacd0b85a97d-43569bc7422mr30253138f8f.50.1769091555547;
-        Thu, 22 Jan 2026 06:19:15 -0800 (PST)
-Message-ID: <c4819093-ae7f-4606-8a7c-dc5afefe3cfa@suse.com>
-Date: Thu, 22 Jan 2026 15:19:12 +0100
+        bh=KWBtxKj07s4HLwGJTh9AK3keI4THEAKode/ZcAbQeyE=;
+        b=wWvbBPFFrazDGK5ZMkNuFZtexqMP8PjezqA3iYvvXkSIa9NEshWWJQkYFXHNH+aDN0
+         1qT8UMetJzaQeE/7lTTaHY/0Hj7uCGi61iQh9m8Gw0z7+A0UIg+4nt7hdmFsROvWyNRl
+         KxjGSUmn3W6FtPYO+LH+SO2Gb12RWmSZV5xOX7IYriCKFU45xGONZSKwfM8GwBDSrAzr
+         60Ok+uImtuBCzyarf9hjiP5s7LuicHLqCX9WEmkjB9M6lkwDGsGDO6gBP6HgQ6lp12e8
+         s/ujgvDu42/SnRSOl38OGsUL2Y+fBr14UJqet5jR5R5t5dxPdYNxnMGb9rh0c+YDew0T
+         d0cQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUmTeRAFh/9r3Rg+mkWndhNaj9sGuy11gjBQsmGPocWEEapd8X5Z7OVD3FlWH7Dn2gaI0OiFnTqDjY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyDmZwd9LuAaHUKfyYW0a+CqaGhP2GHNVJEcqVH+aRBcxGOWx9V
+	KAa0ZfGKuVXhl1o2KlqEHpyweZn4RAllYixaFTlVyYDGk5msLR3kyCUcj0wl8VMiKjRc+WL2VZr
+	Wlf4=
+X-Gm-Gg: AZuq6aKTAryTDHqGTsvhl5z8cYqlX819t983NUpZjQAir1WJUj7PLyBmni2YBX+YODD
+	hwrrcrzfjJr0B9SCmQ7IYNNJvxgh6M8nRnkjppHdewx7RUXpopHGQMMpwGuhPs9M4XfHXmz7h80
+	964on38cjQ9bQH5uyHN0ExpPTIngmVpQHYoIYodzY2IViyR3IU9jNawUmB6T+ksyXmVH89l98/W
+	wWeQAbGLZabh34RDR0KRgeiYazHkuXdkvVCcDCAqYbdOHyT2I5jiqlPG0I6Lyuwk967eHMrq7gG
+	fNvr3LXx9/m4Ye6WqhRddPzzSK2Svjda5mfwIjIvRH7xHtIjyEPkDhQ+Q7GoaZ+OBmaa/rB2fNd
+	dxqJUY3WBOXqOm7gfCdai0YcVj4ISte8qdnMt/RhogpBXslXUoNPy08EnkrkX0pXTCuTZWfVCoF
+	xYOZgsYOdbIpsu2swaXYxpjRAvg0s2zIiYW4BYMbs/EguvHgjcS42rhFlUfRZ+0iTzS+qtJI6h0
+	rc=
+X-Received: by 2002:a05:600c:1990:b0:480:3b26:82c3 with SMTP id 5b1f17b1804b1-4803e7e819dmr135375095e9.20.1769091717597;
+        Thu, 22 Jan 2026 06:21:57 -0800 (PST)
+Message-ID: <17b237ae-d3c8-4491-8eb5-6ebb4a25a8fc@suse.com>
+Date: Thu, 22 Jan 2026 15:21:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: remove Alexandru Isaila and Petre Pircalabu
- as vm_event reviewers
-To: =?UTF-8?Q?Mihai_Don=C8=9Bu?= <mdontu@bitdefender.com>
-Cc: alexandru.isaila@gmail.com, petrepircalabu@yahoo.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <43ab3051082a2f9a0291752ace7104738c1156fb.1769089923.git.mdontu@bitdefender.com>
+Subject: Re: [PATCH] xen/mcelog: simplify MCE_GETCLEAR_FLAGS using xchg()
+To: Uros Bizjak <ubizjak@gmail.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+References: <20260122141754.116129-1-ubizjak@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -125,19 +123,36 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <43ab3051082a2f9a0291752ace7104738c1156fb.1769089923.git.mdontu@bitdefender.com>
+In-Reply-To: <20260122141754.116129-1-ubizjak@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 22.01.2026 15:11, Mihai Donțu wrote:
-> Alexandru and Petre are no longer with Bitdefender.
+On 22.01.2026 15:17, Uros Bizjak wrote:
+> The MCE_GETCLEAR_FLAGS ioctl retrieves xen_mcelog.flags while
+> atomically clearing it. This was previously implemented using a
+> cmpxchg() loop.
 > 
-> Signed-off-by: Mihai Donțu <mdontu@bitdefender.com>
+> Replace the cmpxchg() loop with a single xchg(), which provides the
+> same atomic get-and-clear semantics, avoids retry spinning under
+> contention, and simplifies the code.
+> 
+> The code on x86_64 improves from:
+> 
+>     186:	8b 15 00 00 00 00    	mov    0x0(%rip),%edx
+>     18c:	89 d0                	mov    %edx,%eax
+>     18e:	f0 0f b1 0d 00 00 00 	lock cmpxchg %ecx,0x0(%rip)
+>     195:	00
+>     196:	39 c2                	cmp    %eax,%edx
+>     198:	75 ec                	jne    186 <...>
+> 
+> to just:
+> 
+>     186:	87 05 00 00 00 00    	xchg   %eax,0x0(%rip)
+> 
+> No functional change intended.
+> 
+> Signed-off-by: Uros Bizjak <ubizjak@gmail.com>
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-I did observe their email addresses bouncing, and just earlier today I had
-fired off an email to Razvan, trying to figure out their status.
-
-Jan
 
