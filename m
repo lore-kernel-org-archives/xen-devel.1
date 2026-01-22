@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E15ED3EE8A
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:47:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1211346.1522891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9428CD3EE92
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 16:48:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1211347.1522895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixqV-0007XY-DT; Thu, 22 Jan 2026 16:47:47 +0000
+	id 1vixqV-0007fE-MJ; Thu, 22 Jan 2026 16:47:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1211346.1522891; Thu, 22 Jan 2026 16:47:47 +0000
+Received: by outflank-mailman (output) from mailman id 1211347.1522895; Thu, 22 Jan 2026 16:47:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vixqV-0007Ww-5y; Thu, 22 Jan 2026 16:47:47 +0000
-Received: by outflank-mailman (input) for mailman id 1211346;
- Thu, 22 Jan 2026 16:47:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vixqV-0007cV-ID; Thu, 22 Jan 2026 16:47:47 +0000
+Received: by outflank-mailman (input) for mailman id 1211347;
+ Thu, 22 Jan 2026 16:47:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcaL=73=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vixqT-0007Ij-JI
- for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:47:45 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 123f9bb3-f7b2-11f0-9ccf-f158ae23cfc8;
- Thu, 22 Jan 2026 17:47:43 +0100 (CET)
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-652fdd043f9so2075721a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:43 -0800 (PST)
+ id 1vixqU-0007Id-Vj
+ for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:47:46 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 142313d6-f7b2-11f0-b15e-2bf370ae4941;
+ Thu, 22 Jan 2026 17:47:46 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8838339fc6so177815366b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:46 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.41
+ a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 08:47:41 -0800 (PST)
+ Thu, 22 Jan 2026 08:47:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 123f9bb3-f7b2-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 142313d6-f7b2-11f0-b15e-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769100462; x=1769705262; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1769100466; x=1769705266; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Xs+SAk+ck32r+yVPkjsZQLd/gIzJLULQhlXaIyvjgE4=;
-        b=irLUHRdrFHl4hUrYUNLBQvgcZvUHl/W6AhVMuC+92akbisiP7xieXVhHbHPqbGAopM
-         0XK9bCgoIZq0PRT4o5xchKmCKQXXwwTN8Pu7YhjtnD9c85D47LDPtZ+SB/E5n1LXSG8E
-         /LLcpPwvw7pVp8NfNM91VM/TCYrCqyJt34+aN0AxJcOcmklEqDzho6rm27nVYfDsN3qg
-         3Cqt8/2z24elMWbi+1F4lyQFi1g65Uf8JtD+seRZBQ1CaglqBkV+ntSbfVD9CCsyctk5
-         NGwLapD54aGL21E6bPkfH9XnJOEfmnNdSOtu9uq3hWB0vYPBV4vinxHGzpc/8w6oeXQu
-         6R0A==
+        bh=XPAdNKHF5EjavsXAwjuKNGFWuBxYMr4iJeXH7Q9PsSE=;
+        b=D4DReNfAPDbKDfXZ9/zF05gQc9KT9hisuLnKY2ogQ3YXLLlpaedpE3RzuwlC0oM/ij
+         leONacPy+wcBeT3IMrn6aU6WiSyiZNZl2V6StbWiXJq78sSA3A3mPF8ILfcDIxqgK596
+         U5D7/C+sQL3niabL9BaXxFPK5ZtVVTbo4JwlfasICzVlrdBKn3GsduMiSH1RczU9Yf2z
+         iMFRIxSmcEFUURSWQ5Wwx4W+jXKoIvnB+/m46mkcPjPCt75MHpBz0Os4EpUFm8ck8me2
+         gKZPe5aah3G7rT6axasNVKnBfMLiLLJcD45ySE6KVIEpyEWpI/rTcudja61EeRpgmPL+
+         8RTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769100462; x=1769705262;
+        d=1e100.net; s=20230601; t=1769100466; x=1769705266;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Xs+SAk+ck32r+yVPkjsZQLd/gIzJLULQhlXaIyvjgE4=;
-        b=dtIJVq21uX872/HMxE9g+UMMcB/NHVgWxZ+EPai7+74Vm89EIFULXxVrFuVZBgaRHc
-         Gr4jMAXFsLniLycSJHgcXZJpCEKgVDwLX7alRCExl/+Qc8yn73p6v6OGfNo4HlYaj+dK
-         a99RlOeT619dGas4Yvd1y7NIvLmTKQpDGxgKRjxrzzONZLcEhQ2SqcD/z6jQXKa6TjMe
-         Bxj9K3YbbXbxv2OAGTqIC65LEINSqrkH53YXHqSpd0BqXgO6+sFQOaPSpCxPtB3ZzDCS
-         Z/3C78fuBmAhZuZsnfmA16Zm4xh9vMYlRiKJJWbsiPoJcc6c4fMUTQFC8ZgVIXIVysFG
-         SefA==
-X-Gm-Message-State: AOJu0YzJGNthqEhoOd230vNQzaXw4VLVMqTSHL+Vzr5VYD2Rggp/dUmD
-	SPHqaoWf7e4/uFeYVbBmqJ5alyBmj0IzsvclibRU+1IxgyLZWnnEObWXmJzMEw==
-X-Gm-Gg: AZuq6aLag382gogFX7hOA+u1MfDAKPmqsBXczLow8HmUTilL42uMMgxzNKNJ/bnEY1/
-	xFdyu/DVab6UNOiA1PwvkKE0btcxhCrHdn22vAQUXuYiSnBwgPCoNu9bwmuKdtXDoAk3+r1++VW
-	okTwYJeTbBWsifDVDLsL8tHvv5qQ8RXn9hdQwypoHpvzR97TpFKzKjDe0/mrenS3q1VcSRQLCSF
-	ayzoxrzPevc+81oO4Q+Mbc+7iIhCvnOhOInt2CGm7mq+7HjxYHyX3tqwONyqVFxBNPd8XPMMKcq
-	b/R8WlHhlB6TJmzDN+OOOd2O8PbJKGXzyxLIvx3Goq6Okuq8lLWvjJOgower/xFIWhnpBbzsM4T
-	i6pnoJzQ/O8mPbBBO2MBC1yACXPgoH9DovftnLnQ9bMApjXeSm4o1Hf4cCNxqvMYLLUm62Oaljx
-	kUPuHGYahtDL8dzok9imAaJfBJJDa553anUP3ngs3QSK1mgGSAr88hkA==
-X-Received: by 2002:a17:907:26c8:b0:b7c:e320:5228 with SMTP id a640c23a62f3a-b8792e0e967mr1833140566b.22.1769100462166;
-        Thu, 22 Jan 2026 08:47:42 -0800 (PST)
+        bh=XPAdNKHF5EjavsXAwjuKNGFWuBxYMr4iJeXH7Q9PsSE=;
+        b=kDVC/+Ls/xf9Cz3W2N9dIKAgIRnANQI4MCsESBuZAATw2diLaSURtsWcajl+3ix2Dd
+         BdJTz6ASnW3PQnTZGRIBlTpcIgoGFL4zf8AGLm/P2gwjo4yPJw3ubtMh5awwr4N52/A2
+         /sVYiX3utcz3uZYTdrWFvrX1PV2GwcJSzxaAmkzYH84RiIqtDyV+IUMKK/RUa9LXzgIE
+         z5xWo6iE0lo6BGmP0wRuP8Z+Ran5MLmUo/8ROHI1xWn2QUyQ599kOHmaBFHTt/aCX1pd
+         HoU7p5ANhE8UjvCyl8qqfNKq1AKuUQ9aL86dwmQ0kYAs5uLBdUCtI6Zr/tM18x0mPXii
+         vBtw==
+X-Gm-Message-State: AOJu0YwBWNwuBW0KM2OuxK98jgNSRwpYz/TsVcNrfkvegRrYDTTzMI7Z
+	5OXrmMv6KWWh21brppvTLTmfCQFfZL3E/lduJOJiu4rrd7Z0WOcN92I35DYxkA==
+X-Gm-Gg: AZuq6aLdmR/A2xgQ6qh2HJbQ08E/ZCcy/2SFYtme0iuRsOYXPKiLECXqeY5Fi3Tux23
+	xRhxhbOjrvP7Eb1uxn0um2Rlsh+TUWD/DOP6Qe1OifaHYdQSU8tUntZFQ9KQr/JToRwERYjrZOW
+	GSj6oDAEsSCzWdJ/ujbZqU1YJvGdTBrBiBnlcgPCJvgkXKtzPcF7LFGOP+cOVfSUyjuengPgqwQ
+	Jjcrn9TbAn3uRpiALwSxURmHV3cBwuv134rrNX6lPM47kAXDKUWAldqF4pu0vZdO43IENXrIxs0
+	EA7Kx1penMkq2vGZG+32quUw4QmmN80sReod48RfBOYf8oN9uLYzUlccUsdAmWYmWMXfLoGaGAy
+	WFO/D7s7E86uqYBq+IR5xnlXr1ED/MKAlfsX27XWKcrJVX6oLa26rQbN+HlpuzwWX5225hpo9sN
+	sHFOhCxmOR7Cv61dHHqcx4v6yp61+hQCUtCKuCDnOLshnC1+NzHaxaSrGA8BB5uWCz
+X-Received: by 2002:a17:907:9803:b0:b87:7430:d5d7 with SMTP id a640c23a62f3a-b8831b40942mr252088866b.9.1769100465342;
+        Thu, 22 Jan 2026 08:47:45 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -96,195 +96,177 @@ Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v2 02/16] xen/riscv: implement arch_vcpu_{create,destroy}()
-Date: Thu, 22 Jan 2026 17:47:17 +0100
-Message-ID: <08b582179ebc4241140000972d89209c84c90fa4.1769099885.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 05/16] xen/riscv: introduce tracking of pending vCPU interrupts, part 2
+Date: Thu, 22 Jan 2026 17:47:20 +0100
+Message-ID: <58a7723ec48d84b91fd4730fe3ae653f55a0fd99.1769099885.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1769099883.git.oleksii.kurochko@gmail.com>
 References: <cover.1769099883.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce architecture-specific functions to create and destroy VCPUs.
-Note that arch_vcpu_create() currently returns -EOPNOTSUPP, as the virtual
-timer and interrupt controller are not yet implemented.
+This patch is based on Linux kernel 6.16.0.
 
-As part of this change, add continue_new_vcpu(), which will be used after
-the first context_switch() of a new vCPU. Since this functionality is not
-yet implemented, continue_new_vcpu() is currently provided as a stub.
+Add the consumer side (vcpu_flush_interrupts()) of the lockless pending
+interrupt tracking introduced in part 1 (for producers). According, to the
+design only one consumer is possible, and it is vCPU itself.
+vcpu_flush_interrupts() is expected to be ran (as guests aren't ran now due
+to the lack of functionality) before the hypervisor returns control to the
+guest.
 
-Update the STACK_SIZE definition and introduce STACK_ORDER (to align with
-other architectures) for allocating the vCPU stack.
+Producers may set bits in irqs_pending_mask without a lock. Clearing bits in
+irqs_pending_mask is performed only by the consumer via xchg() (with aquire &
+release semantics). The consumer must not write to irqs_pending and must not
+act on bits that are not set in the mask. Otherwise, extra synchronization
+should be provided.
+The worst thing which could happen with such approach is that a new pending
+bit will be set to irqs_pending bitmap during update of hvip variable in
+vcpu_flush_interrupt() but it isn't problem as the new pending bit won't
+be lost and just be proceded during the next flush.
 
-Introduce struct cpu_info to store per-vCPU state that lives at the top
-of the vCPU's stack.
+It is possible a guest could have pending bit not result in the hardware
+register without to be marked pending in irq_pending bitmap as:
+  According to the RISC-V ISA specification:
+    Bits hip.VSSIP and hie.VSSIE are the interrupt-pending and
+    interrupt-enable  bits for VS-level software interrupts. VSSIP in hip
+    is an alias (writable) of the same bit in hvip.
+  Additionally:
+    When bit 2 of hideleg is zero, vsip.SSIP and vsie.SSIE are read-only
+    zeros. Else, vsip.SSIP and vsie.SSIE are aliases of hip.VSSIP and
+    hie.VSSIE.
+This means the guest may modify vsip.SSIP, which implicitly updates
+hip.VSSIP and the bit being writable with 1 would also trigger an interrupt
+as according to the RISC-V spec:
+  These conditions for an interrupt trap to occur must be evaluated in a
+  bounded   amount of time from when an interrupt becomes, or ceases to be,
+  pending in sip,  and must also be evaluated immediately following the
+  execution of an SRET  instruction or an explicit write to a CSR on which
+  these interrupt trap conditions expressly depend (including sip, sie and
+  sstatus).
+What means that IRQ_VS_SOFT must be synchronized separately, what is done
+in vcpu_sync_interrupts(). Note, also, that IRQ_PMU_OVF would want to be
+synced for the similar reason as IRQ_VS_SOFT, but isn't sync-ed now as
+PMU isn't supported now.
+
+For the remaining VS-level interrupt types (IRQ_VS_TIMER and
+IRQ_VS_EXT), the specification states they cannot be modified by the guest
+and are read-only:
+  Bits hip.VSEIP and hie.VSEIE are the interrupt-pending and interrupt-enable
+  bits for VS-level external interrupts. VSEIP is read-only in hip, and is
+  the logical-OR of these interrupt sources:
+    • bit VSEIP of hvip;
+    • the bit of hgeip selected by hstatus.VGEIN; and
+    • any other platform-specific external interrupt signal directed to
+      VS-level.
+  Bits hip.VSTIP and hie.VSTIE are the interrupt-pending and interrupt-enable
+  bits for VS-level timer interrupts. VSTIP is read-only in hip, and is the
+  logical-OR of hvip.VSTIP and any other platform-specific timer interrupt
+  signal directed to VS-level.
+Thus, for these interrupt types, it is sufficient to use vcpu_set_interrupt()
+and vcpu_unset_interrupt(), and flush them during the call of
+vcpu_flush_interrupts().
+
+As AIA specs introduced hviph register which would want to be updated when
+guest related AIA code will be introduced vcpu_update_hvip() is introduced
+instead of just open-code it in vcpu_flush_interrupts().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v2:
- - Drop BUILD_BUG_ON() in arch_vcpu_create() as a check isn't very useful.
- - Use vzalloc() instead of alloc_xenheap_page() to use the larger domheap to
-   allocate vCPU's stack.
- - Drop printk() inside arch_vcpu_create() to not have potential big noise
-   in console as it could be that an amount of vCPUs is pretty big.
- - Use XVFREE() instead of free_xenheap_pages() as vCPU's stack allocation
-   happens with a usage of vzalloc() now.
- - Drop stack field as it is enough to have only cpu_info as stack pointer
-   could be calculated based on cpu_info.
- - Drop cast when v.arch.cpu_info is inialized as it is not necessary
-        to have it.
- - Drop memset() for arch.cpu_info() as it is enough to have vzalloc().
+ - New patch.
 ---
- xen/arch/riscv/Makefile              |  1 +
- xen/arch/riscv/domain.c              | 59 ++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/config.h  |  3 +-
- xen/arch/riscv/include/asm/current.h |  6 +++
- xen/arch/riscv/include/asm/domain.h  |  2 +
- xen/arch/riscv/stubs.c               | 10 -----
- 6 files changed, 70 insertions(+), 11 deletions(-)
- create mode 100644 xen/arch/riscv/domain.c
+ xen/arch/riscv/domain.c             | 65 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h |  3 ++
+ 2 files changed, 68 insertions(+)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 87c1148b0010..8863d4b15605 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -1,5 +1,6 @@
- obj-y += aplic.o
- obj-y += cpufeature.o
-+obj-y += domain.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
- obj-y += entry.o
- obj-y += imsic.o
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-new file mode 100644
-index 000000000000..9c546267881b
---- /dev/null
+index 3777888f34ea..c078d595df9c 100644
+--- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -0,0 +1,59 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
+@@ -171,3 +171,68 @@ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq)
+ 
+     return 0;
+ }
 +
-+#include <xen/init.h>
-+#include <xen/mm.h>
-+#include <xen/sched.h>
-+#include <xen/vmap.h>
-+
-+static void continue_new_vcpu(struct vcpu *prev)
++static void vcpu_update_hvip(struct vcpu *v)
 +{
-+    BUG_ON("unimplemented\n");
++    csr_write(CSR_HVIP, v->arch.hvip);
 +}
 +
-+static void __init __maybe_unused build_assertions(void)
++void vcpu_flush_interrupts(struct vcpu *v)
 +{
-+    /*
-+     * Enforce the requirement documented in struct cpu_info that
-+     * guest_cpu_user_regs must be the first field.
-+     */
-+    BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs) != 0);
-+}
++    register_t *hvip = &v->arch.hvip;
 +
-+int arch_vcpu_create(struct vcpu *v)
-+{
-+    int rc = 0;
-+    void *stack = vzalloc(STACK_SIZE);
++    unsigned long mask, val;
 +
-+    if ( !stack )
-+        return -ENOMEM;
++    if ( ACCESS_ONCE(v->arch.irqs_pending_mask[0]) )
++    {
++        mask = xchg(&v->arch.irqs_pending_mask[0], 0UL);
++        val = ACCESS_ONCE(v->arch.irqs_pending[0]) & mask;
 +
-+    v->arch.cpu_info = stack + STACK_SIZE - sizeof(struct cpu_info);
-+    memset(v->arch.cpu_info, 0, sizeof(*v->arch.cpu_info));
-+
-+    v->arch.xen_saved_context.sp = (register_t)v->arch.cpu_info;
-+    v->arch.xen_saved_context.ra = (register_t)continue_new_vcpu;
-+
-+    /* Idle VCPUs don't need the rest of this setup */
-+    if ( is_idle_vcpu(v) )
-+        return rc;
++        *hvip &= ~mask;
++        *hvip |= val;
++    }
 +
 +    /*
-+     * As the vtimer and interrupt controller (IC) are not yet implemented,
-+     * return an error.
++     * Flush AIA high interrupts.
 +     *
-+     * TODO: Drop this once the vtimer and IC are implemented.
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't supported
++     * now.
 +     */
-+    rc = -EOPNOTSUPP;
-+    goto fail;
++#ifdef CONFIG_RISCV_32
++#   error "Update hviph"
++#endif
 +
-+    return rc;
-+
-+ fail:
-+    arch_vcpu_destroy(v);
-+    return rc;
++    vcpu_update_hvip(v);
 +}
 +
-+void arch_vcpu_destroy(struct vcpu *v)
++void vcpu_sync_interrupts(struct vcpu *v)
 +{
-+    vfree((char *)v->arch.cpu_info + sizeof(struct cpu_info));
-+}
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 1e08d3bf78be..86a95df018b5 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -143,7 +143,8 @@
- 
- #define SMP_CACHE_BYTES (1 << 6)
- 
--#define STACK_SIZE PAGE_SIZE
-+#define STACK_ORDER 3
-+#define STACK_SIZE (PAGE_SIZE << STACK_ORDER)
- 
- #define IDENT_AREA_SIZE 64
- 
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index 0c3ea70c2ec8..58c9f1506b7c 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -21,6 +21,12 @@ struct pcpu_info {
- /* tp points to one of these */
- extern struct pcpu_info pcpu_info[NR_CPUS];
- 
-+/* Per-VCPU state that lives at the top of the stack */
-+struct cpu_info {
-+    /* This should be the first member. */
-+    struct cpu_user_regs guest_cpu_user_regs;
-+};
++    unsigned long hvip;
 +
- #define set_processor_id(id)    do { \
-     tp->processor_id = (id);         \
- } while (0)
++    /* Read current HVIP and VSIE CSRs */
++    v->arch.vsie = csr_read(CSR_VSIE);
++
++    /* Sync-up HVIP.VSSIP bit changes does by Guest */
++    hvip = csr_read(CSR_HVIP);
++    if ( (v->arch.hvip ^ hvip) & BIT(IRQ_VS_SOFT, UL) )
++    {
++        if ( !test_and_set_bit(IRQ_VS_SOFT,
++                               &v->arch.irqs_pending_mask) )
++        {
++            if ( hvip & BIT(IRQ_VS_SOFT, UL) )
++                set_bit(IRQ_VS_SOFT, &v->arch.irqs_pending);
++            else
++                clear_bit(IRQ_VS_SOFT, &v->arch.irqs_pending);
++        }
++    }
++
++    /*
++     * Sync-up AIA high interrupts.
++     *
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't supported
++     * now.
++     */
++#ifdef CONFIG_RISCV_32
++#   error "Update vsieh"
++#endif
++}
 diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 0d9b4c4b525e..ec7786c76199 100644
+index b8178447c68f..fa083094b43e 100644
 --- a/xen/arch/riscv/include/asm/domain.h
 +++ b/xen/arch/riscv/include/asm/domain.h
-@@ -49,6 +49,8 @@ struct arch_vcpu
-         register_t ra;
-     } xen_saved_context;
+@@ -136,6 +136,9 @@ static inline void arch_vcpu_block(struct vcpu *v) {}
+ int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
+ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
  
-+    struct cpu_info *cpu_info;
++void vcpu_flush_interrupts(struct vcpu *v);
++void vcpu_sync_interrupts(struct vcpu *v);
 +
-     /* CSRs */
-     register_t hedeleg;
-     register_t hideleg;
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index 29bdb65afbdf..9e30a9a3b50b 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -121,16 +121,6 @@ void dump_pageframe_info(struct domain *d)
-     BUG_ON("unimplemented");
- }
+ #endif /* ASM__RISCV__DOMAIN_H */
  
--int arch_vcpu_create(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
--
--void arch_vcpu_destroy(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
--
- void vcpu_switch_to_aarch64_mode(struct vcpu *v)
- {
-     BUG_ON("unimplemented");
+ /*
 -- 
 2.52.0
 
