@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058D6D3EE98
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 17:00:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1211577.1523095 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8480BD3EE92
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jan 2026 17:04:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1211600.1523105 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1viy2X-0004kG-IM; Thu, 22 Jan 2026 17:00:13 +0000
+	id 1viy6K-0005V4-4b; Thu, 22 Jan 2026 17:04:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1211577.1523095; Thu, 22 Jan 2026 17:00:13 +0000
+Received: by outflank-mailman (output) from mailman id 1211600.1523105; Thu, 22 Jan 2026 17:04:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1viy2X-0004k9-FO; Thu, 22 Jan 2026 17:00:13 +0000
-Received: by outflank-mailman (input) for mailman id 1211577;
- Thu, 22 Jan 2026 17:00:12 +0000
+	id 1viy6K-0005Ux-0v; Thu, 22 Jan 2026 17:04:08 +0000
+Received: by outflank-mailman (input) for mailman id 1211600;
+ Thu, 22 Jan 2026 17:04:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HcaL=73=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vixqn-0007Ij-52
- for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 16:48:05 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
+ <SRS0=XQsG=73=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1viy6I-0005Up-FU
+ for xen-devel@lists.xenproject.org; Thu, 22 Jan 2026 17:04:06 +0000
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [2a01:111:f403:c005::5])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1bd9100b-f7b2-11f0-9ccf-f158ae23cfc8;
- Thu, 22 Jan 2026 17:47:59 +0100 (CET)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b8842e5a2a1so115010166b.2
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jan 2026 08:47:59 -0800 (PST)
-Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b879513e951sm1686014966b.7.2026.01.22.08.47.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jan 2026 08:47:57 -0800 (PST)
+ id 59f9ff25-f7b4-11f0-9ccf-f158ae23cfc8;
+ Thu, 22 Jan 2026 18:04:03 +0100 (CET)
+Received: from BY3PR04CA0002.namprd04.prod.outlook.com (2603:10b6:a03:217::7)
+ by CY5PR12MB6598.namprd12.prod.outlook.com (2603:10b6:930:42::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.8; Thu, 22 Jan
+ 2026 17:03:55 +0000
+Received: from BY1PEPF0001AE17.namprd04.prod.outlook.com
+ (2603:10b6:a03:217:cafe::81) by BY3PR04CA0002.outlook.office365.com
+ (2603:10b6:a03:217::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.11 via Frontend Transport; Thu,
+ 22 Jan 2026 17:03:37 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BY1PEPF0001AE17.mail.protection.outlook.com (10.167.242.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9564.3 via Frontend Transport; Thu, 22 Jan 2026 17:03:51 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 22 Jan
+ 2026 11:03:51 -0600
+Received: from [172.23.120.160] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Thu, 22 Jan 2026 11:03:50 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,121 +61,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bd9100b-f7b2-11f0-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769100478; x=1769705278; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KZA8ihisriROMO2vLm1yqQjETNpKnWgnKN9uanVzkRc=;
-        b=aJ88qnAjcU9/TFsl0BVagsFiu/yKfXwVrWIV5Cc8TNUlkJPICwLSgHHKSk12fupVz4
-         zz1N5BKosEX3p01vjZaBvf7bJVWp0NZqEE75SOk7o5/otBl1XNlrME4nw5Ji+f8nSvH5
-         UJsuYGkdDVwnBVhLL0RQZO1uVNLhShwGapLZiqf5c4+2DThwnUVmxF+YSev1zvBXGkQy
-         wQcDyGrhReFQ15WOxEeREYvS6IqrDWcd0rn0tZTPulnIX3wn5mE8kpiwis/b+gLb0E/S
-         SzMjA2xNI3yabvvvREQEj5U/24S6mQKEsWHmZ3+pZGVr7efag8pGMPFVXOxaisSYL+qo
-         nczg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769100478; x=1769705278;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=KZA8ihisriROMO2vLm1yqQjETNpKnWgnKN9uanVzkRc=;
-        b=o0zQcqXvTt51qEL82S5Mh3EOn8x5/KuP6bx4qJptw/c2GnW31r2FAdjYsOJNJEY9ka
-         cDghZfRsFdFT5TW4XolCO+Kg+41DdZb8H6nL56M057drRs9VB/Et7qcDfuczGTn//tcJ
-         d2UDCQilJL/AOckZHAFPeOtDiSrYXyCKaOSflCL40nWsvv5CFr8ALu269QbSYNRduVrN
-         fW/vwyjGneLdRNac5aN4Wo2g9woHr2uQl5IdZM8/Vpd77EOy85b1gH6++6Nt6H+tp5S/
-         1S/ydyc8k7A93T0ylm2sBvonbqhRot6jV8KSQL+kHkOxqpjdC2LOe+0HPAdPzquGj/KN
-         7pSA==
-X-Gm-Message-State: AOJu0YwjnBUABx5VZLu883FougsdWlGcKnpidxEBARb9BpgGBXa6hZ3g
-	4ifUVZfG0rNUhSCgyprX8NE8lf5VU93pROg4UqGvnoEAcvulsIKDB69BMLcbDg==
-X-Gm-Gg: AZuq6aLNYu9ixBVRsPuspUkIASzQyM1dObG7HDVMrc7gofsq3Oe2Hde1ROmCz2uQUwm
-	+9+RUaxLReUHYnv4FJa7AuabIJ+gBRJY6I4bpOgcJNgult6HK86QKzQFu0gAaXtlS0hEA8EZCf4
-	Dl0fcH7Pn8fTy7xNr6Lu18l4mxlxfygqmVb1Ii/6LCi0AMZPSPcnZqiojM/lZPcap6biF+SLndF
-	vaOlSiBLT5KsfR79N87HEmLQVgVqDztPJQRpHRl8i1ivsK7XYtvCObPiCXEA7Zx5PtsCSzU5gPY
-	Ma76zj4uO8M4z2Np7X3EvH0HLANfACyC45pfpXvfnSIDFpuZRyloYvGbRI0ZL64Of3K7EVeeqnZ
-	shMQMGvgZSK0aCPbyp+xi4bF8jV/ypQuGNoKRfda4r1eyUaKT6RK0zH8wToKeIPffiPewniatd2
-	/8ga/N9N1diE24l5viwneK0k9bhWwAThA1C7X4M+/sMisAHmXqsLozNg==
-X-Received: by 2002:a17:907:84e:b0:b73:667e:bb29 with SMTP id a640c23a62f3a-b8792d3be61mr1668682466b.8.1769100478306;
-        Thu, 22 Jan 2026 08:47:58 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Romain Caritey <Romain.Caritey@microchip.com>
-Subject: [PATCH v2 16/16] xen/riscv: implement sync_vcpu_execstate()
-Date: Thu, 22 Jan 2026 17:47:31 +0100
-Message-ID: <eb254f5a49d01712f9b3745e420dd37a4a9ba0bc.1769099885.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1769099883.git.oleksii.kurochko@gmail.com>
-References: <cover.1769099883.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 59f9ff25-f7b4-11f0-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ohvXfhrQC2VdVKxyVNAix/KsOmxd8/ZIwQkpU4pPaV7yXiSwa21rJOYD4RMP9Fm5DFsZ31C8FYb2+nnfNrKcoQquZzg+9OL6nJ9a7pUfWOOUmrimS0e9kCuI5YvjFnyyq6cTxMoGoQu7j4a+RYLlOAiUfvBeGljDKi58gYEQ5GjK0vNbr0iyWBY2XrPhFP+qucgYfetmxwWNPL3ivWU9Hdzj/z7qP0ZOYD4tASJSVJrxaUSNRq7nkfU6p2rMbweAJSI3QcuxxaOG/pVZBfZjFZ0awDkY0oBPuUTaDpxM254t1b17EumEq7cmk9/YdXOB4HmeieI9x5E53CitpaSUcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YXIK/3D4yTLUJgAeKxFe8bdxIid2/wGTCuYP5+LSRUk=;
+ b=Fja7NWduJ2Kk8aAzF1ARFmM8F3p+Uif1lshVjAzzUzNZAXPzD7b0KUzJAADqAnofSWtkUIiIOzAV+sHHmYGHDmtfEKzbrjUQsy7yFOlabWXREfgqZJsv1OgQXemmik9sR6+yyLC2wYvcvfX0rUwUuZ1hOf30FhApFRVEsINKCp+NFENRaA8LS68RHBs3Ly32xyG9iJXnVA8INpicbr4+o7oAER3zwLVazO+Gt5b9yrh93nt4M4+BqpLtCBkVfK9KvQ7Xq4Axg10MYKIr6QotkxvyrtyFEALsUXAc/OfcdFQJRiUGF1Kfd61jTO50mDNe4x4CcSg9d8qoDngMxEOp8Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YXIK/3D4yTLUJgAeKxFe8bdxIid2/wGTCuYP5+LSRUk=;
+ b=sJ/FHh4/whQrtbB5cfmYnbN6fOIcYhJnqBgk09+qbWLHiGEvWe6yf9owH304KOktfvVbxrhgEy7zCLF9142Bqet4vkj5SUcerPYiukj9xJRHFB6zMO4d+qjsAjvdetoUDQNgpPf740wcVWMQvkrri9LIRA1xQibzNeJq6nEwB9s=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <1357dda0-bb5d-4f59-a53c-d584099bf65c@amd.com>
+Date: Thu, 22 Jan 2026 12:03:47 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Partial revert "x86/xen: fix balloon target
+ initialization for PVH dom0"
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>, James
+ Dingwall <james@dingwall.me.uk>, Juergen Gross <jgross@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko
+	<oleksandr_tyshchenko@epam.com>
+References: <20260120140648.25977-1-roger.pau@citrix.com>
+ <b515af46-87f9-49eb-9d05-08315b25eb96@amd.com> <aXC1sFjIRUEB7qOW@Mac.lan>
+ <d6e91265-b045-4257-8a41-6cb77a785924@amd.com> <aXERjdPS3KlcD3C-@Mac.lan>
+ <a72553d1-3d79-4314-aa41-11a09dc60089@amd.com> <aXJW-9Ken2pbkCsm@Mac.lan>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <aXJW-9Ken2pbkCsm@Mac.lan>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE17:EE_|CY5PR12MB6598:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb57eabf-221a-40ca-f1c1-08de59d837da
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RnhTVW5LR0RheWpEb0M0UVA4TW1IckJxdzBLQ0k1aU9wVmJmdGJSVHdJZ0ww?=
+ =?utf-8?B?b1p5WGN0aFVaclEwY2gxcDhTTDBkTEQrSFN6dEVzUWowdVdMOERjemJPNGxK?=
+ =?utf-8?B?bkZyRCtkeTBicEdYeGRsZmJQTlVTdkp3b3pBMGFrUEdDWVV5MVJnMmx3eDZa?=
+ =?utf-8?B?YXlOODNrWjdXNkFhQTI4dlNQM1AxTHMwaktCVzQxb0lVWkhnMzBWa09lSDF0?=
+ =?utf-8?B?SmJlQlIrU2l6L1ZiTytya0tvb0J6ZG1QY1hjYXlmR1hSRG5ZMzBZNndsandi?=
+ =?utf-8?B?dVFpbVNFTHNwbHZvcFh6eWxBTW9pQThSYnN5dExjSFZya01ZKzhuc1NFTEVh?=
+ =?utf-8?B?ZHVZeTFhcjdCNDBibllnNm0vQUpvMUlKRmU0Zk5lYWs2NEtuaW4zKzkvSXVq?=
+ =?utf-8?B?dnFZVk0wcitkQmwrZFpoL2lCcVp4TW5JTk1JN0Y3ZFJDbVFnWTduTGt6dW5O?=
+ =?utf-8?B?NmpmUEYyNU5tTHVtMGNvVGtTOXJ3MzJWRDN1bDhoeGhUUUVleGVhcjhoWFVD?=
+ =?utf-8?B?VlBsMkUxZWVVRVFMTi9TNFZTQWtaUXZkWWNaVGtXZUpsb3ZIRVE1dWZZbWhu?=
+ =?utf-8?B?ekswWldDZ1lKYlc5czc5Y09MLzV0UGdUN1JKSmlTM3dLSFZsUEpDM1ZYdnVG?=
+ =?utf-8?B?UmMrZDBhTTkrcjRoTlZsT3A3VVFCcTN6R0FJTGJwdmxhQjkvcHlGOWRXTXRM?=
+ =?utf-8?B?cC9oVnNOaEgxM1ErdWZtOVBMa1ZzeTRkSTlNWkkySDF0SGhhT3oxQzFNTTIz?=
+ =?utf-8?B?WVVvSGFIL3hFS3BtWHNPWCtQalZNZnhQUGE1Wm5mM200QkFPTy9IYmkrcUx3?=
+ =?utf-8?B?QUdlYnFpb3RaOUxLMHZuTHRLbmxnQ1A4YUR3WDl4UDR1UWU0VG9JTVFEbmJy?=
+ =?utf-8?B?bVU4U3VoTFFaUG5Td1IzSGtobU9ockZQZVNoNytpbXZmVldkV0FVK1ZFVHlu?=
+ =?utf-8?B?cjZWS0pIR0JTa3I2dDBtY2d3YURNc0M2NGd3S21NSDFrRWNhRkRJOWRYbEFk?=
+ =?utf-8?B?aW05WnNaa0V3Zzl6SHZ6LzJXeXROZCtYS3F4Q1BZaEZYOU80S0V5RWM0MHlx?=
+ =?utf-8?B?K21YRWc5N09DS2ZkS3RSbUpDRnpIYURsS3J4MlNmRzh3ZHdmcVoxVjQ3Ry9r?=
+ =?utf-8?B?Wmo3RCtpaklIN0F0ZDg3c0NabWZpd1pYYUp6Zzd2aU9TVllKb3FvUEtXRWdF?=
+ =?utf-8?B?d2hJUjViMDVwMUFLdVBUTnJwUXkvek1xdEY4NnF6bFBsQUVxM0VFb3NOTGtY?=
+ =?utf-8?B?QjA5S21zWWcvb0hmZ1U2bUpsa0ZCdzdVWkhiYWprYXA2dVY4TFRoV2hBTmVL?=
+ =?utf-8?B?QVo5RE1DTXBQZTFyaWxRYzZmcDlUVHN4aHJyTitKb20wMjB3NXd2NHhETlhq?=
+ =?utf-8?B?V1RmUmttVW9QVXN6MWV4OHFvOTZrZ3JBYi92YmF3d3JRVVh5RVp1R2FacE01?=
+ =?utf-8?B?NDJSK3Flb1ZPemkyaU4vOUZGYzVXKzF6c3FVNU1zY1cwYUpvKzhLL1M0bmNl?=
+ =?utf-8?B?bmg5eWVaSVZiTTRxMlNvdFJ0SzdkR1U0dGcrZW4zNnRsODNwMWR0ZU4wYnlD?=
+ =?utf-8?B?Q2Ntb2pEZTRCMnFFWmtFakllL0tMZ2lGcWFTQkV3bU9Vc2t1eG1WOGJ6MDlj?=
+ =?utf-8?B?cHJ5L1ExalpoTHN6Ti9BYWd3STlEQTZHL013N0Z4VGlTaDAweEF4VDdRdEFL?=
+ =?utf-8?B?Y3NIaVBVdnBLeUtrUW5lU0swbGhnelFYT3RvS0dUSHYwNXdtdCtpWHdTbTRL?=
+ =?utf-8?B?Z21Tb1NVMUJFTlRodzJxK3RNY2tOYm5iczdwSTF1dXlBZ0VWRUpoWTJTcUdt?=
+ =?utf-8?B?cytjb1pZZzltT05hN0FMNmVFUjFtdi9MSm93cFVpUmcyOVdmazRFYlkrQnEw?=
+ =?utf-8?B?U2k5alIrcTF3WUNPWldtZHJMa2VXeTFkdzR4OW5qY0pSRXJ1TlBlS28wZEh1?=
+ =?utf-8?B?b0paK0JNenMrOTFIdmQ4clkzaHJpSzlsZnJ3RkVoNDlNZ1JQKzZTajM2UHly?=
+ =?utf-8?B?VFk2WUVRY0hqSFNKc09QUVlCMkVlSW80VW44LzFqNjZQdE4rMGM1cFhKaVdE?=
+ =?utf-8?B?TjlhZW5rWGhobG9ORGdEZ2hhbHZNeEorbUR1T2FUTEZTVjV0OHhBL1VPeU1a?=
+ =?utf-8?B?ODh5enRsRnBkK2dUL2VCcmxuM0E3aE4yNnN4aTRqeHI5eDNDWkdEQ2dHTDEr?=
+ =?utf-8?B?V2Y0SFUzb0lyQ25wUUpGOGZFMEhMT3ZmZlZoNUpyT0dUY2R6NUVoOVJVZStT?=
+ =?utf-8?B?dmYydmpramdqMjNRTVVaOGRhTllBPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2026 17:03:51.7012
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb57eabf-221a-40ca-f1c1-08de59d837da
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF0001AE17.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6598
 
-The scheduler may call this function to force synchronization of given
-vCPU's state. Although RISC-V does not support lazy context switching,
-a full memory barrier is still required to order observation of the
-saved context correctly.
+On 2026-01-22 11:57, Roger Pau Monné wrote:
+> On Thu, Jan 22, 2026 at 09:40:01AM -0500, Jason Andryuk wrote:
+>> On 2026-01-21 12:49, Roger Pau Monné wrote:
+>>> I haven't tested it yet to see whether that's OK to do on PV, I would
+>>> think PV and PVH would be the same here, since the setting of the
+>>> xenstore target value is based in the return of
+>>> XENMEM_current_reservation for both.
+>>
+>> On a system with 32GB and dom0=pvh dom0_mem=7G:
+>>
+>> [    0.295201] xen:balloon: current_pages: 1835007 get_num_physpages 8220126
+>> xen_released_pages 6385120
+>> [    0.295201] ------------[ cut here ]------------
+>> [    0.295201] Released pages underflow current target
+>>
+>> 8220126 - 6385120 = 1835006
+>>
+>> And also for PV:
+>>
+>> [    1.406923] xen:balloon: current_pages: 1835008 get_num_physpages 8220127
+>> xen_released_pages 6385120
+>> [    1.406928] ------------[ cut here ]------------
+>> [    1.406931] Released pages underflow current target
+>>
+>>
+>> So we don't want to subtract xen_released_pages for dom0.  Is
+>> xen_released_pages expected to be non-zero for a domU?
+> 
+> Oh, yes.  In fact I think the patch here is wrong for PV dom0, as it
+> shouldn't subtract xen_released_pages from xen_start_info->nr_pages.
+> I will need to send v2.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - New patch.
----
- xen/arch/riscv/domain.c | 18 ++++++++++++++++++
- xen/arch/riscv/stubs.c  |  5 -----
- 2 files changed, 18 insertions(+), 5 deletions(-)
+To be clear, the numbers and warning are from the follow on 
+current_reservation patch.
 
-diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 1458902aff82..48ba7584acaa 100644
---- a/xen/arch/riscv/domain.c
-+++ b/xen/arch/riscv/domain.c
-@@ -259,3 +259,21 @@ void sync_local_execstate(void)
- {
-     /* Nothing to do -- no lazy switching */
- }
-+
-+void sync_vcpu_execstate(struct vcpu *v)
-+{
-+    /*
-+     * We don't support lazy switching.
-+     *
-+     * However the context may have been saved from a remote pCPU so we
-+     * need a barrier to ensure it is observed before continuing.
-+     *
-+     * Per vcpu_context_saved(), the context can be observed when
-+     * v->is_running is false (the caller should check it before calling
-+     * this function).
-+     *
-+     * Note this is a full barrier to also prevent update of the context
-+     * to happen before it was observed.
-+     */
-+    smp_mb();
-+}
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index c912d46f1e42..26434166acc6 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -91,11 +91,6 @@ void continue_running(struct vcpu *same)
-     BUG_ON("unimplemented");
- }
- 
--void sync_vcpu_execstate(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
--
- void startup_cpu_idle_loop(void)
- {
-     BUG_ON("unimplemented");
--- 
-2.52.0
-
+Regards,
+Jason
 
