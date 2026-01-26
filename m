@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F23FD19511
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15F7D19514
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213842.1524389 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1213828.1524264 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmr-0007Dj-2m; Mon, 26 Jan 2026 17:54:05 +0000
+	id 1vkQmg-0004I4-P6; Mon, 26 Jan 2026 17:53:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213842.1524389; Mon, 26 Jan 2026 17:54:04 +0000
+Received: by outflank-mailman (output) from mailman id 1213828.1524264; Mon, 26 Jan 2026 17:53:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmq-0007BU-Lw; Mon, 26 Jan 2026 17:54:04 +0000
-Received: by outflank-mailman (input) for mailman id 1213842;
- Mon, 26 Jan 2026 17:54:01 +0000
+	id 1vkQmg-0004Hw-Kq; Mon, 26 Jan 2026 17:53:54 +0000
+Received: by outflank-mailman (input) for mailman id 1213828;
+ Mon, 26 Jan 2026 17:53:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQmn-0004HW-KA
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:54:01 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
+ id 1vkQme-0004HW-Uq
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:53 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fe79a932-fadf-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 18:54:00 +0100 (CET)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-47ee937ecf2so40779595e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:54:00 -0800 (PST)
+ id f91711f2-fadf-11f0-b15f-2bf370ae4941;
+ Mon, 26 Jan 2026 18:53:51 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-47ee76e8656so70423015e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:51 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.59
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:59 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fe79a932-fadf-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: f91711f2-fadf-11f0-b15f-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450039; x=1770054839; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450030; x=1770054830; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c1ONjoPKEWiY2hmWsIYX5khT8mAnFR/6SGFmL+oGZ7U=;
-        b=k6N3qPTTsWg85Hzq1f4mG5dmYFyb9igbxl6SpLLIXkiQCs9KWqjUa/C7mJdrFwTHCM
-         yCs+VTc4Mo6Ln0J7C6Vs+l6xJhFc9YSkJ+7bMYMUwaDMLplktd0SfUSGkYwrGDqRiaPQ
-         Qq1+cJhF2pzD+YQkJ1hwHoHSuNG7HIGo08U9k=
+        bh=0xq1gxDlmDZY+78ggsqSHcLd3bC7dQoTKGaHnAMx1Ws=;
+        b=PfisyyokdKc3ZaO2tC/0omKdYFa2G0kjAUIgx1c76VumZt1OxLX/OlOJiqmIS+QFbb
+         6GuJvf3NSkaLz8kJXkY1JJOq7+qGing23xT4/8X8dKeBopp1LkqSwS/XJwctE0QcjXDj
+         gKa4I4Rge1582jpjC6VEywT6bqgxnW6zYjS2Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450039; x=1770054839;
+        d=1e100.net; s=20230601; t=1769450030; x=1770054830;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=c1ONjoPKEWiY2hmWsIYX5khT8mAnFR/6SGFmL+oGZ7U=;
-        b=CdlBNAJL/JbURbn1qVHdAB/CL7vXbDvdJ/PBMMXIRRe7eh07NBJzZwr6r4rMri4/D+
-         VzwGlbnMLiKVjq6z+ehsZL8fxcKtcMJsCjHK1jD7XuNacGRHRset3H+xiiEhYzhSH+Jf
-         Ejxso6l60Su8/T5hkDiSIa8qf1+TvFBkKkBV5wcRgsYG8x4Omk7n09cuoYhRu/OV0fYp
-         LnMvhTVV0QimzYGa6+fTavRKLFoixTttPbDn4rrzRG6P//cHw6Y6H0b3UEWq8K4u6smc
-         21+g1GT6ScIJTB+w72D6/ArSsm8CY2Qkrf9iBlVjUgz95OY2yo5omk348Qa2euQfeDIO
-         evOA==
-X-Gm-Message-State: AOJu0YwA3tgUSuuGJWKzD/Ac2LhngBGK9NYaETSq94bEGS67FhT+1N3+
-	oMklAFEI6xQvI9zGhynmThzgcI475vZRSF/DYmKYHT1d/D4jCfOYkGBK13M84zVXL5GH2boSNlg
-	/aM8J
-X-Gm-Gg: AZuq6aIRqpuijwD0bf/qvENC9XdTyFB/ZE+Q0Ak3xo9K4GIAvOXcuXjMhLU6XHTmx4/
-	H0sRaHozAlvbo2zMB9Ba3F6SNU0jP4LZ3JPNiLm9yZW+WwmmxWXaujCcbebuUzB5L+/lsXBTdql
-	UIsg4f16JVxKlFyrhSpzXLjMBW73J4JHp/XoqBEBfFcpmn8GbnOVgsbgLNxn+P8PyH5GIDf8F6H
-	ri1zqEnTdCHshmZ1zjBfP1lSsEcA56F5EIQqbyc3gdMX8wyOgXs99QY/TACS/SDlejNbpcpp4EW
-	ZxFwOqMd3VmwH+PwEAh47enK/vwR+6oc8ClvmFCBve5AaNejE6VC0rLPAdTyTmNXmQRwsOrGEwO
-	li7jwlENQe/XoJPNwHJbEbpssP3pxI5LLcG54B+S1YOupc8R0Xr71NHTqjekurKa6V8Q7InVGn+
-	Y2J0V//OmqViNCZgGRdaF/rYzecXX2zHSf8jIcXLu3loVGtazGdK8zQhKhpz+1+T60m4W6wnPR
-X-Received: by 2002:a05:600c:5297:b0:477:a289:d854 with SMTP id 5b1f17b1804b1-4805cd2026amr94916305e9.5.1769450039455;
-        Mon, 26 Jan 2026 09:53:59 -0800 (PST)
+        bh=0xq1gxDlmDZY+78ggsqSHcLd3bC7dQoTKGaHnAMx1Ws=;
+        b=CDe30j+cAJ5ZhM9h/AwnmafSbCHPKDuyhW7LkF8+qSk25LMlGxwSdqxWpEK83TdNDu
+         scpC5YMXYOmLIzns550sE0VRiiqqPeq9QQuZusxqZ0ciH5kxtWDznHjAB+VTUoNYxep3
+         KCPbEaA5QJ7UaQLdT+m/l1hZkAs91MehcGE1duUjwFijknjlYGgZCqkKWHFxTitw0Fdn
+         kedq3itj7adE3NaocxfwIfhlocnmTvN76aIpqzaPSS5HA/M7BhTg+Q0cm3QzONocL86s
+         6JhmMeUT89DLqr6R6MOzOtuliGxbmTMymRYSbjV7o0rFKwnpjJTFJL3n69YREbkUGmg9
+         DAAw==
+X-Gm-Message-State: AOJu0YwtwcGsQwBf2IQyAesMrFxcKt1g+OP+M1HTJq8o5nUNZxS6Sx/m
+	My2VoFEFSGLXvkbSKr7gFbPcgBjImNL8+of170bdvKvJUXsloYWUhU2ukgsgMaaTMWtCY5vzE9o
+	ccgCF
+X-Gm-Gg: AZuq6aJoEWn49qyku+sHuOOok/XvSp+XzSvIHYWZ58Z6aXLIwQnChlYnrc6pYs6kfDM
+	2Np6sy4WT+lHGYOGNYzjIlMgQA30FEzlSTNRDI1rADQ/By13KxiP7F5inihMeydnA8daf5YKSJz
+	SB5bW+4BSr0FD7Ck448BeruZKHaUxDcvb0muL6AxQ93UOjqaRdX3oo9ztrf3HyG32pxikH2ACcf
+	uLkWd/bsigpUxTOUktkHJhsRR8GWyT+IRST/Q28ROnKJ5j5120qkhpkz1/YelvAZytX0tw7b2eV
+	EkolpHzPs9r0Y2XKjpbsWAfp1jNK6q8yGE9DxgshsZjDm5xRNU0h1wBVWUhIMmpZ0TbfG6UJCKo
+	Y3/0r1hlqWQM3ji1QOwL0ktK2cHYA5XMPZpbGC9cwPIOCjC55zq8I8sSXn4cT4yUYGGj+ehq/Z8
+	kVkNIgwb35tTLSUzSdkaPbpo/DiW3WtJyC6j5o3afy+GgxXrQdimAeTsMDakmgjQ==
+X-Received: by 2002:a05:600c:1993:b0:47e:e076:c7a2 with SMTP id 5b1f17b1804b1-4805ce4dd37mr88984935e9.15.1769450029713;
+        Mon, 26 Jan 2026 09:53:49 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 14/16] x86/cpu: Drop default_init() and default_cpu
-Date: Mon, 26 Jan 2026 17:53:43 +0000
-Message-Id: <20260126175345.2078371-15-andrew.cooper3@citrix.com>
+Subject: [PATCH 01/16] x86/cpu: Fix boot time cache flushing
+Date: Mon, 26 Jan 2026 17:53:30 +0000
+Message-Id: <20260126175345.2078371-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,9 +98,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-While the comment is reasonable, clearing SEP as the only action for an
-unknown CPU is useless.  Drop the infrastructure.
+All 64-bit CPUs have CLFLUSH.  AMD introduced it in the K8, Intel in the P4
+Willamette core prior to 64-bit support, and VIA/Centaur in the Isaiah.
+Furthermore, the reported cacheline size is 64 on all CPUs to date.
 
+Arguably changeset 19435c10abf7 ("x86: consolidate/enhance TLB flushing
+interface", 2007) should have initialised c->x86_clflush_size earlier, but
+even at the time of changeset 3330013e6739 ("VT-d / x86: re-arrange cache
+syncing", 2022), early_cpu_init() had CLFLUSH-parsing logic but simply failed
+to record the size.
+
+By removing get_cache_line_size() and assuming 16 bytes, the practical
+consequence for early IOMMU initialisation of SandyBridge era systems is to
+flush every cacheline 4 times (a pipeline stall too, as those CPUs could only
+have one flush in flight at a single time).
+
+Record c->x86_clflush_size in early_cpu_init(), and panic() if CLFLUSH isn't
+found.  Drop the redundant initialisation of c->x86_cache_alignment.
+
+Remove the fallback to 16 bytes in cache_{flush,writeback}(), opting instead
+for an ASSERT() to confirm that the logic hasn't been re-arranged too early.
+
+Fixes: 3330013e6739 ("VT-d / x86: re-arrange cache syncing")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
@@ -108,37 +127,88 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/common.c | 10 ----------
- 1 file changed, 10 deletions(-)
+ xen/arch/x86/cpu/common.c |  7 ++++---
+ xen/arch/x86/flushtlb.c   | 19 +++++++------------
+ 2 files changed, 11 insertions(+), 15 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 7674cca1ba93..bab2193e9ba3 100644
+index ebe2baf8b98a..f8c80db6eb1d 100644
 --- a/xen/arch/x86/cpu/common.c
 +++ b/xen/arch/x86/cpu/common.c
-@@ -100,15 +100,6 @@ bool __init is_forced_cpu_cap(unsigned int cap)
- 	return test_bit(cap, forced_caps) || test_bit(cap, cleared_caps);
- }
+@@ -319,8 +319,6 @@ void __init early_cpu_init(bool verbose)
+ 	uint64_t val;
+ 	u32 eax, ebx, ecx, edx;
  
--static void cf_check default_init(struct cpuinfo_x86 * c)
--{
--	/* Not much we can do here... */
--	__clear_bit(X86_FEATURE_SEP, c->x86_capability);
--}
+-	c->x86_cache_alignment = 32;
 -
--static const struct cpu_dev __initconst_cf_clobber __used default_cpu = {
--	.c_init	= default_init,
--};
- static struct cpu_dev __ro_after_init actual_cpu;
+ 	/* Get vendor name */
+ 	cpuid(0x00000000, &c->cpuid_level, &ebx, &ecx, &edx);
+ 	*(u32 *)&c->x86_vendor_id[0] = ebx;
+@@ -352,6 +350,7 @@ void __init early_cpu_init(bool verbose)
+ 	if (edx & cpufeat_mask(X86_FEATURE_CLFLUSH)) {
+ 		unsigned int size = ((ebx >> 8) & 0xff) * 8;
  
- static DEFINE_PER_CPU(uint64_t, msr_misc_features);
-@@ -375,7 +366,6 @@ void __init early_cpu_init(bool verbose)
- 	case X86_VENDOR_SHANGHAI: actual_cpu = shanghai_cpu_dev; break;
- 	case X86_VENDOR_HYGON:    actual_cpu = hygon_cpu_dev;    break;
- 	default:
--		actual_cpu = default_cpu;
- 		if (!verbose)
- 			break;
- 		printk(XENLOG_ERR
++		c->x86_clflush_size = size;
+ 		c->x86_cache_alignment = size;
+ 
+ 		/*
+@@ -380,7 +379,9 @@ void __init early_cpu_init(bool verbose)
+ 		}
+ 		else
+ 			setup_clear_cpu_cap(X86_FEATURE_CLZERO);
+-	}
++	} else
++		panic("CLFLUSH information not available\n");
++
+ 	/* Leaf 0x1 capabilities filled in early for Xen. */
+ 	c->x86_capability[FEATURESET_1d] = edx;
+ 	c->x86_capability[FEATURESET_1c] = ecx;
+diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
+index 23721bb52c90..1f8877dcab23 100644
+--- a/xen/arch/x86/flushtlb.c
++++ b/xen/arch/x86/flushtlb.c
+@@ -234,8 +234,7 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+ 
+         if ( (!(flags & (FLUSH_TLB|FLUSH_TLB_GLOBAL)) ||
+               (flags & FLUSH_VA_VALID)) &&
+-             c->x86_clflush_size && c->x86_cache_size && sz &&
+-             ((sz >> 10) < c->x86_cache_size) )
++             c->x86_cache_size && sz && ((sz >> 10) < c->x86_cache_size) )
+         {
+             if ( flags & FLUSH_CACHE_EVICT )
+                 cache_flush(va, sz);
+@@ -264,13 +263,11 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+  */
+ void cache_flush(const void *addr, unsigned int size)
+ {
+-    /*
+-     * This function may be called before current_cpu_data is established.
+-     * Hence a fallback is needed to prevent the loop below becoming infinite.
+-     */
+-    unsigned int clflush_size = current_cpu_data.x86_clflush_size ?: 16;
++    unsigned int clflush_size = current_cpu_data.x86_clflush_size;
+     const void *end = addr + size;
+ 
++    ASSERT(clflush_size);
++
+     alternative("", "mfence", X86_BUG_CLFLUSH_MFENCE);
+ 
+     addr -= (unsigned long)addr & (clflush_size - 1);
+@@ -301,11 +298,9 @@ void cache_writeback(const void *addr, unsigned int size)
+     if ( !boot_cpu_has(X86_FEATURE_CLWB) )
+         return cache_flush(addr, size);
+ 
+-    /*
+-     * This function may be called before current_cpu_data is established.
+-     * Hence a fallback is needed to prevent the loop below becoming infinite.
+-     */
+-    clflush_size = current_cpu_data.x86_clflush_size ?: 16;
++    clflush_size = current_cpu_data.x86_clflush_size;
++    ASSERT(clflush_size);
++
+     addr -= (unsigned long)addr & (clflush_size - 1);
+     for ( ; addr < end; addr += clflush_size )
+         clwb(addr);
 -- 
 2.39.5
 
