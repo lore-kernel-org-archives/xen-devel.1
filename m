@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD27CF65D6
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 10:44:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213552.1524014 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E56CF65DB
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 10:47:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1213567.1524024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkK4o-0008Oz-Un; Mon, 26 Jan 2026 10:44:10 +0000
+	id 1vkK7o-0000ZE-F8; Mon, 26 Jan 2026 10:47:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213552.1524014; Mon, 26 Jan 2026 10:44:10 +0000
+Received: by outflank-mailman (output) from mailman id 1213567.1524024; Mon, 26 Jan 2026 10:47:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkK4o-0008Os-Rq; Mon, 26 Jan 2026 10:44:10 +0000
-Received: by outflank-mailman (input) for mailman id 1213552;
- Mon, 26 Jan 2026 10:44:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zrcg=77=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vkK4n-0008Om-9u
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 10:44:09 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eb96ea96-faa3-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 11:43:59 +0100 (CET)
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-65813e3bdaaso7507674a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 02:43:58 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
- [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6584b3e08a6sm4821910a12.6.2026.01.26.02.43.57
+	id 1vkK7o-0000Z7-B4; Mon, 26 Jan 2026 10:47:16 +0000
+Received: by outflank-mailman (input) for mailman id 1213567;
+ Mon, 26 Jan 2026 10:47:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=fT7M=77=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vkK7n-0000Yw-5s
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 10:47:15 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5f4c2f2e-faa4-11f0-9ccf-f158ae23cfc8;
+ Mon, 26 Jan 2026 11:47:13 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-47ee807a4c5so45764345e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 02:47:13 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4804d8bebfasm308650875e9.14.2026.01.26.02.47.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Jan 2026 02:43:57 -0800 (PST)
+ Mon, 26 Jan 2026 02:47:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb96ea96-faa3-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: 5f4c2f2e-faa4-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769424238; x=1770029038; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=7lNXKcYdnQ1/qSUu8FaqbTuOxIFbGYXxJIUnr6BKoBU=;
-        b=a8C88b6VY0+3iBZlaFCE8CjkzJ9YCCq6SONtRurkbarRr14bdkxbkKH5f2Q9pKO1pp
-         Otl27i2S4RiqiwvcaE3Hrk/DDPAMsKmbiHyF92Ge/LGUSLYCFoE1XTF/U6g1EnehKKv3
-         tgRDRbWyK+swrYlz2nPHYSCPw91LI0J4rIBlZqUzTYeRiURF4bhSSJ7S42gPSgieedSD
-         7peoh2NX7BKmCYNCsIyQ47UfHLSSWDbfO/WhZHoJMwv1ObD05mvLjnDTqqR7vP8D/bFi
-         pwtBvLiixM/5JY3Pck3OnY3AKWJXWSfkU+S1RAT1OTwdIJFu8xTzqi09M0D3BQBQ7svg
-         a7nw==
+        d=suse.com; s=google; t=1769424432; x=1770029232; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=tD4v2anhJcga48XigqYXAbpz+irs7hDzKUZljjovD8M=;
+        b=adRm99MArSGajuwxZaZrLhCJvr3rxXBU/OMY0R3uAI2hvLSZt/dmM/UOk0w6AVkD1E
+         uKx909NR/U+J5UnCh3vpEimpMCPTh71u1o/Qfr+yM62IKsIi/0Xo+r4w6DjsdxEngLe+
+         TII3E1b2lXiuLLdxnFI8WiJvcD9PQP+DNMFODKO2IdbWr1UgVEa0anm2bQkKYIHR5pve
+         cI1Bl0l1jVTO6FjSNmGdA5jlpVWMjC5heGq0piSC2DKCPyt9DRE6ANSFsGkOCATs2tA1
+         +mqAoOc/fIqbMPLAIk/he+fKtPXHMVnp27IQ9vbsgV86+hZQHnp0F3oPTlxAf2ClDB8b
+         fL3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769424238; x=1770029038;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7lNXKcYdnQ1/qSUu8FaqbTuOxIFbGYXxJIUnr6BKoBU=;
-        b=ZPBGiWCRlP3mEF9U0VVerLgrPnQ134c0Ss/TLTi/yihVwc890wSHaku12zPtaO4Tja
-         5pX7t8FNbAG7ZATFuWvZCXhMMf56b7N5EGsC63AizcAzGU38jQwykS9uJfwads337UEX
-         TVGHSkAxjB0jciGJWWe4WMVY6fHZvjjonISBT1B/rlLuWtfK/yt5yfQNljmANLafPeDD
-         j82XJdZ6ba76CSX4zoQDR4yoVLN/A/HzoODWHN6wZdo8ls218LYuJtMjsSryjAIRONtX
-         1ebWqxc1w/MwjqP9M1MFvT8vE3pwNT212AiYUu+iv/wqHGhDHV8YIaie+0BDru4LSYRM
-         4/Mg==
-X-Forwarded-Encrypted: i=1; AJvYcCV3qEaMFjt065vmZim64jXP/0NxmEy6UTpJ2ef5pWtiPC5By5aDKXyHw6Y194W4hvuLr9F7kSMhU6o=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzUE6MVFaIcX+B3iB8C+QTcqZxW1R5Zs5qsIAmSPgMZCF/lXFnw
-	xo3SVg2yq+juzgqf6trDqyoA6IstbLZw3jThG9XXTXDiLQqfobuoiBGN
-X-Gm-Gg: AZuq6aKXmxE9RMgMmn0ES93S6tWqxzl3ewQjoHjluvd2MX8yylqHOswcII9azS5IEKs
-	8EyMaIxJYTmSNWy8NY9ZvUtJy1Iee5TwsZ/zbxyqy6EtsYmMOr/4jU+zEXv1+ipmHFyXUfQolCE
-	0jYRCWXIs++1WfZkHw4pKlCfzrIae5TEiRWn27KN8Rj8ADEpd2HO9fzRA27OSIQQ7kc0MIc8gKi
-	PyAHk0fzvChc+NupoZB1o+CLwwy1S7gIquMy0KyrEZ3d/yJ7rxjsiW8n6PeZju/oHTE9BemR6AA
-	2AiYuOPuPgU6yTVNYgVDQFEGjGPklpYTpI/bl1EA5ADr9ksIDAFYvszzbuwpup8yatJ3STZ5Wh5
-	F69+Swk39bkv8c75dg+w+jFTG4y1kLRQVcSRmIO5J5jNgxf4pHPliJOipb+tchPiSv57CrMxw67
-	ZDSjRggmTQqurbSAvw4DXGxlIIoSDfnOIg/fIXqllKzS1VKYTjZPAYeSYSqNonzV7bXLKXT8COL
-	A==
-X-Received: by 2002:a05:6402:4306:b0:658:1224:3d5b with SMTP id 4fb4d7f45d1cf-658709c0267mr2987332a12.1.1769424237992;
-        Mon, 26 Jan 2026 02:43:57 -0800 (PST)
-Message-ID: <5e3cd0da-d8d0-4232-9612-14ea70bd66e4@gmail.com>
-Date: Mon, 26 Jan 2026 11:43:56 +0100
+        d=1e100.net; s=20230601; t=1769424432; x=1770029232;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tD4v2anhJcga48XigqYXAbpz+irs7hDzKUZljjovD8M=;
+        b=bt4JbRoMinmy6+c0sCpkBULtqt2RW+mKNXFEQ0S21kyzUxvhEy4UTqAGr5uiKilRr/
+         LVF3PebBXxwBMDw5PlA1lL3OkYln/5ZQcVlxXbBOi8ACrRhpAxWTaoj4PSruV9/LBqxS
+         cr0ZZ0elY7V0dGMax4dN9Tp3RuKsjDsaNuilVSxxIwa6PR3D1u1vVn2QMXAM+qvk4f0k
+         t8qbTfUdiaKchUkD7j4ajRkdyTxpdFxSnczGumdhyEohNANrr3gGuZ9zQ3qBau67nF91
+         rJbEvIcIh8SfWBD2rUr6eAGGXeZWG4uN5zMBeehcZZu3K1R54I0RKVbRxIMEhPx87Mw+
+         fnLw==
+X-Forwarded-Encrypted: i=1; AJvYcCWOLWLzOmuoE3ObAPmZRHSMUqfjuyy+nr9r7JUyeXXxpQXJaEneaInFjrLNifE2okDF5iLHY62q5SE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz68+Z1GatVlpiYbZHSEuEDoaUN/Y0QKOOsjm0ze0tSq/VRndSQ
+	9JjmEsFVae7L5y+cjJGWEq8R7Dm68RIRkKtpPIsvAqGk8DnGW2mdcgyUEL33bSUCxQ==
+X-Gm-Gg: AZuq6aLEHt5YOMcgVMJtRTqvJMTCVbgXA8jQg75dqZA9W5PFg8JFgI1P0C5dlW82m9V
+	57xLlHKwao0T2yqND7n5QIqVWah8GGIfp9wrXGp99+nVw7d3ZR5SWyjK4aiDDcPClpuaWLwTVyb
+	mHG967gTqOHtIHAVj/1pA7g3dTKH7+ZNcb+J7KQmE0I5yxEUQ+vYcb5xnte9FHrqQsmCHdrUfIa
+	tBRJ6WbzyCmX7iS8wSecbgtGsCc6gN6FDwETSXlxVf+vgOb+RirUt2onL0lCW/L/6lh6QqHaSIK
+	oJbrlSfMbzx0N8Qym6HFvk2TubKfR0lciVs/X04WqvDw88YJh/b8KljMr7DUFfnO957I4Qvs3Xs
+	G60Cn/1QxGdlwi1LXFHpgUVZ2hLTyppW95P6aVqOyevux/3RdW6V4jslTOT+jez4UB+EMAQP5TB
+	UfGVJKPJnmygnAzmFza3bevDIWad+qTwxjXLnLmSGjqf4giPaJ93AOapFtaXx89FbE7riqD5aAw
+	QxT4GUEKZFmig==
+X-Received: by 2002:a05:600c:4f86:b0:475:dd89:acb with SMTP id 5b1f17b1804b1-4805cf6749bmr57091305e9.22.1769424432325;
+        Mon, 26 Jan 2026 02:47:12 -0800 (PST)
+Message-ID: <ff2d0edb-6c98-4f92-97e2-a2aa843b0ebe@suse.com>
+Date: Mon, 26 Jan 2026 11:47:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3] xen/riscv: dump GPRs and CSRs on unexpected traps
-To: Jan Beulich <jbeulich@suse.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
@@ -102,136 +102,54 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <0b57db49d40b336429dd4fd63faf18f6bb17ac1a.1769179393.git.oleksii.kurochko@gmail.com>
  <9a68c272-1c76-4f1f-89ff-ff86d5181bcc@suse.com>
+ <5e3cd0da-d8d0-4232-9612-14ea70bd66e4@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <9a68c272-1c76-4f1f-89ff-ff86d5181bcc@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <5e3cd0da-d8d0-4232-9612-14ea70bd66e4@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+On 26.01.2026 11:43, Oleksii Kurochko wrote:
+> On 1/26/26 11:09 AM, Jan Beulich wrote:
+>> On 26.01.2026 09:38, Oleksii Kurochko wrote:
+>>> +#define X(name, csr, fmt, ...) \
+>>> +do { \
+>>> +    unsigned long v = csr_read(csr); \
+>>> +    printk("\t %-10s: %016lx" fmt, #name, v, ##__VA_ARGS__); \
+>>> +} while (0);
+>>> +
+>>> +    CSR_LIST
+>> Same remarks here as above. The issue is actually worse here, as CSR_LIST
+>> uses "v" which it isn't passed.
+> 
+> I will declare local variable v in dump_csrs() and use it. Considering that
+> this macros is declared and used only inside this function I think I can
+> not pass it to X macro.
 
-On 1/26/26 11:09 AM, Jan Beulich wrote:
-> On 26.01.2026 09:38, Oleksii Kurochko wrote:
->> --- a/xen/arch/riscv/traps.c
->> +++ b/xen/arch/riscv/traps.c
->> @@ -99,12 +99,81 @@ static const char *decode_cause(unsigned long cause)
->>       return decode_trap_cause(cause);
->>   }
->>   
->> +static void dump_general_regs(const struct cpu_user_regs *regs)
->> +{
->> +#define GPR_LIST \
->> +    X(regs, ra, " ") X(regs, sp, "\n") \
->> +    X(regs, gp, " ") X(regs, tp, "\n") \
->> +    X(regs, t0, " ") X(regs, t1, "\n") \
->> +    X(regs, t2, " ") X(regs, s0, "\n") \
->> +    X(regs, s1, " ") X(regs, a0, "\n") \
->> +    X(regs, a1, " ") X(regs, a2, "\n") \
->> +    X(regs, a3, " ") X(regs, a4, "\n") \
->> +    X(regs, a5, " ") X(regs, a6, "\n") \
->> +    X(regs, a7, " ") X(regs, s2, "\n") \
->> +    X(regs, s3, " ") X(regs, s4, "\n") \
->> +    X(regs, s5, " ") X(regs, s6, "\n") \
->> +    X(regs, s7, " ") X(regs, s8, "\n") \
->> +    X(regs, s9, " ") X(regs, s10, "\n") \
->> +    X(regs, s11, " ") X(regs, t3, "\n") \
->> +    X(regs, t4, " ") X(regs, t4, "\n")
->> +
->> +#define X(regs, name, delim) \
->> +    printk("\t %-4s: %016lx" delim, #name, (regs)->name);
-> No semicolon here please; that should be supplied at the use sites of
-> such a macro.
+Yes, that should indeed be fine.
 
-I thought about this option, but decided it would be fine to do in this
-way as it is a local marco and isn't expected to be used anywhere else,
-so it will help to avoid a bunch of semicolons where X macro used now.
-Anyway, I am okay to rework that.
-
->
-> As to the format string: If past the leading tab you want an extra
-> padding blank, why not "\t%-5s ..."? Question however is why this deep
-> indentation is wanted in the first place. I'd suggest to omit the tab
-> in particular.
-
-I will check how it will look, probably we could really just drop \t and
-use only "%-4s".
-
-
->
->> +    GPR_LIST
-> What use is this macro? All it does is hamper readability, by requiring
-> the line-continuation backslashes in its definition.
-
-Agree, it doesn't really useful to have GPR_LIST. I will just leave X macro
-and open-coded what is now in GPR_LIST instead.
-
->
->> +#undef X
->> +#undef GPR_LIST
->> +}
->> +
->> +static void dump_csrs(unsigned long cause)
->> +{
->> +#define CSR_LIST \
->> +    X(stvec, CSR_STVEC, " ") X(vstvec, CSR_VSTVEC, "\n") \
->> +    X(sepc, CSR_SEPC, " ") X(vsepc, CSR_VSEPC, "\n") \
->> +    X(stval, CSR_STVAL, " ") X(vstval, CSR_VSTVAL, "\n") \
->> +    X(status, CSR_SSTATUS, " ") X(vsstatus, CSR_VSSTATUS, "\n") \
->> +    X(satp, CSR_SATP, "\n") \
->> +    X(scause, CSR_SCAUSE, " [%s]\n", \
->> +      decode_cause(v)) \
->> +    X(vscause, CSR_VSCAUSE, " [%s]\n\n", \
->> +      decode_cause(v)) \
-> Anything that can help save space (as indicated, output may go to a limited size
-> screen) should imo be leveraged. IOW better no double newline here, nor ...
-
-For it could be useful visually separate group of hypervisor-related registers.
-
->
->> +    X(hstatus, CSR_HSTATUS, " [%s%s%s%s%s%s ]\n", \
->> +      (v & HSTATUS_VTSR) ? " VTSR" : "", \
->> +      (v & HSTATUS_VTVM) ? " VTVM" : "", \
->> +      (v & HSTATUS_HU)   ? " HU"   : "", \
->> +      (v & HSTATUS_SPVP) ? " SPVP" : "", \
->> +      (v & HSTATUS_SPV)  ? " SPV"  : "", \
->> +      (v & HSTATUS_GVA)  ? " GVA"  : "") \
->> +    X(hgatp, CSR_HGATP, "\n") \
->> +    X(htval, CSR_HTVAL, "\n") \
->> +    X(htinst, CSR_HTINST, "\n") \
->> +    X(hedeleg, CSR_HEDELEG, "\n") \
->> +    X(hideleg, CSR_HIDELEG, "\n") \
->> +    X(hstateen0, CSR_HSTATEEN0, "\n\n")
-> ... here. In this latter case it's questionable anyway, as apparently you
-> have this here to separate from the GPRs being logged subsequently. Just
-> that right here you don't know whether your caller actually means to do
-> so.
-
-With this one, I agree that it is not the best one place for double newline.
-It was necessary to avoid printk("\n") before GPRs dumping.
-
-In general, I am fine with dropping the double newline and using a single
-newline, as this separation is probably only useful to me.
-
->
-> As to grouping: How about further putting hedeleg and hideleg on a single
-> line? Maybe also htval and htinst?
-
-Good point. I will apply theses suggestions.
-
->
->> +#define X(name, csr, fmt, ...) \
->> +do { \
->> +    unsigned long v = csr_read(csr); \
->> +    printk("\t %-10s: %016lx" fmt, #name, v, ##__VA_ARGS__); \
->> +} while (0);
->> +
->> +    CSR_LIST
-> Same remarks here as above. The issue is actually worse here, as CSR_LIST
-> uses "v" which it isn't passed.
-
-I will declare local variable v in dump_csrs() and use it. Considering that
-this macros is declared and used only inside this function I think I can
-not pass it to X macro.
-
-~ Oleksii
-
+Jan
 
