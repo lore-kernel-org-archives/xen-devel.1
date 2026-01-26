@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71BBD19519
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213831.1524282 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB83D1951B
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1213838.1524361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmh-0004Xf-Ij; Mon, 26 Jan 2026 17:53:55 +0000
+	id 1vkQmn-0006SW-M3; Mon, 26 Jan 2026 17:54:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213831.1524282; Mon, 26 Jan 2026 17:53:55 +0000
+Received: by outflank-mailman (output) from mailman id 1213838.1524361; Mon, 26 Jan 2026 17:54:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmh-0004Tl-Bs; Mon, 26 Jan 2026 17:53:55 +0000
-Received: by outflank-mailman (input) for mailman id 1213831;
- Mon, 26 Jan 2026 17:53:53 +0000
+	id 1vkQmn-0006RK-Aw; Mon, 26 Jan 2026 17:54:01 +0000
+Received: by outflank-mailman (input) for mailman id 1213838;
+ Mon, 26 Jan 2026 17:53:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQmf-0004HW-Mq
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:53 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+ id 1vkQml-0004HW-Je
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:59 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fa6536aa-fadf-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 18:53:53 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-47ee301a06aso55313495e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:53 -0800 (PST)
+ id fd1c4f0e-fadf-11f0-b15f-2bf370ae4941;
+ Mon, 26 Jan 2026 18:53:58 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-47f5c2283b6so36405185e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:57 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.51
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:52 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa6536aa-fadf-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: fd1c4f0e-fadf-11f0-b15f-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450032; x=1770054832; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450037; x=1770054837; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SVFZKPX+rQ8GQmkwaOmVq1QfQ8v/dwJRo6+jPX9Dkm8=;
-        b=P5S1xDUJCNyQG6IbahEYbDcJgsxRGwxBQ6SKXjhtDSpPesxnWhaY4T00BJQtND38Mk
-         E5uDTW5eDbo2BNhmyD7EvTdGrOHHdrKLITE+3UAH8mGCAVOCxSp/K8Ncf8JrRE1mJQ/H
-         r2hCebZoFt88ndlyphl/ZNjPYFrkMDpRPRF7M=
+        bh=Try1cZQOOfQY5RdnyC25WW3N+d8l3jQHbsgtA/sxQ94=;
+        b=HVQtNFLMzT3MI1HTrdXNhNxM93FlCY3vWD4OHRGyCzMPCOYLu+cNMZ9P5ZjMPS5pPx
+         9ALF4sC9wDw73TNafQkX8tIIrQlfMfsJ2tBR2qVl9PlPXYwQXl+Bp76BsuGt/W3bqpNq
+         3zKSw9xPArmfRDI2LYV0acQcZRtpf/3G8RUjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450032; x=1770054832;
+        d=1e100.net; s=20230601; t=1769450037; x=1770054837;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=SVFZKPX+rQ8GQmkwaOmVq1QfQ8v/dwJRo6+jPX9Dkm8=;
-        b=BOGTLRcph9WgxQqQk3o5MjcsVx8HIKWbdCOVfDf+0x50JkOr4CZuBO1LkLL+SfPz94
-         g3QG7yAFsfq992ShOd1AuVpjtxEJ6K7TT47ljFgDwnSfqTzGobYaOoTtjuIJ7sfSZG5b
-         8/he8eBfIYLeH9PjAGBSu8nnYz6op90cJ/A+QVrxf8xnYvwSw4EYPi0kzUSGrUChtkI6
-         ZPP5IvAeb2dBv5OtcIIIfiZXlZZpG70QUXr/rHqCPXh/3iXrvCjrMUGqI6SJIvqRfidX
-         Jrly2E9hT5WDNRbLBKTYvmOZ1QErVv+jwn0yS0n9wxXPr7ZeQjsSxsBkd6ZB5jvzn4xr
-         qOVw==
-X-Gm-Message-State: AOJu0Yw+QEvZy9w2bsrF4U/5vlXsAQE12I8p+Ln+FojK+E6oNJFsvWkK
-	O37qipBNkCljwbpNlm26rJjWS3T+xZvXlTMLbWJj++ESSlS3OdHVJv9jtpVoTzFkHVa1+13K0w1
-	jR1Nq
-X-Gm-Gg: AZuq6aLImjM8Uae1dH94byu1ln6wTch/kOKuD+hR2ZK64fktNy7d3a3mXuxtzh2zJzE
-	w1hc5ST+U0AzJfZse3VcAlAj+S3g3/ys2ZsyUTxoVe+d1TEqs97JN5NQUeiJDtPMOQxPiFJKhYf
-	tcwh7Js2Pp5ezzNI+p4/zpXl56te1uWwAVWGtVvCerEa/BJewYNw+xc3GntnnyBTOXv2N6Fhrmt
-	JNymRnmmj6wv4hR3GAztg/RushXEHYe4Rbjx6GpRfMT5Q3y/q+3AilHAfRX6wY5nb9h2VDLitS2
-	ALcHpgn4dBviFFUE2zkJTcXHQ6TlWo53BF1wuqtHxJGqymXtU08bK2G5UTeQJ9yJHVg1oHPmT8l
-	MSxXWxlLDt9mSuqj7rSkhvTNpOrWUiKY5DDdFyi1u9L2WxvjWiXwlDOFlAkj4hYVLV9t9Xp+R69
-	z1x4g4fBa5Rb1FdfIQjPuYy4BW2EEJdYKRArk088Pood/KCoPp82Fv34YVrPtjfQ==
-X-Received: by 2002:a05:600c:35ce:b0:47d:3ead:7440 with SMTP id 5b1f17b1804b1-4805d06c428mr85483385e9.32.1769450032374;
-        Mon, 26 Jan 2026 09:53:52 -0800 (PST)
+        bh=Try1cZQOOfQY5RdnyC25WW3N+d8l3jQHbsgtA/sxQ94=;
+        b=GFkc8i4eGlP+oCd+yYIGnTxABKTO7CKnAqJFcK9sko5Z+XxUXoBuy0K2uJrw9+Bc2w
+         LxQmT01k+rzXlFj+DM3xIITXEyRwRy2Z2aVy7xv1rUaBChtIwFNwJUa6coXoXXf46A+J
+         uZpKa/wTvH/+GbDA7O2mABdmV+imuE18xMwLHKbKetrilHEmCIOtvNcOXV6DxEs43TUg
+         5UUsC3c4VPOqeOsF44+k4ANAFX5tpx//e91vHWgE0l6Mm1FUsA+qQ/C8mq86N5yl5AdL
+         U8zmoz+gj111sz/yfpKpDAqFyqGdi9YtAEo5zWsYIchwuvc3SZC8yDjyIt5lNMfYEUGE
+         2N5g==
+X-Gm-Message-State: AOJu0YwaMqzyQ1K1uYlBevcjeJpM+JgwHcQpOVmxKpqWZzvJoGMO0klj
+	ghiQM4AdcoEz4sV2X/03BARN4qZ9wLLMKz+g8hdPeXwO0+p88dMXXMpYdupF9XEL5BCT6y7AwVB
+	RCVW9
+X-Gm-Gg: AZuq6aL25VX8sRYzQSuvtOCrR6bsdqqGC8+5ms5Z3GF+f5QCzkh65sN4mAbNU/qtNQj
+	J+R4bUMB3mXXbhoZq7ele5129HZc95xXn2Om9gGINrI3xnKW2M4I9Yk0UMhsJq0QwB7gcZ+fsCl
+	5kN8i9JqFUzi7WvsRE+oErOghd1ygNvOnQiv4Nc5DuD9VgGGGOl22fygPKhwnTXuLWAU8NUKeYM
+	ndnvL4kVnJ3rziyL8QcrDTKbatqRtRJL4i94dvJXacfakYYgt1xm5hRmE686VuFfVj55Ou1L042
+	RZG9peTrV73UD+1PNAmX3zss2ywNg9YCklneYOVDuHUP0qCB3giBpAD67ADY8x36w/3LFNFY8un
+	GM+nA/O9UAnoggWkaypowhxkPnjsJ6RmoZ5fZE3SC7ahOIjejBRjjsb0V/4Nf7OkqL8g9xRW7Jf
+	tJhdoL/ZTS1YkFNPczURjRHC7LisLNRrAtJMZj6juutvYIoD/XAJHCF9OGTZ3fKA==
+X-Received: by 2002:a05:600c:c087:b0:477:6374:6347 with SMTP id 5b1f17b1804b1-4805d95d3e1mr64802295e9.22.1769450037164;
+        Mon, 26 Jan 2026 09:53:57 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 05/16] x86/cpu: Move per-CPU actions out of the vendor early_init() hook
-Date: Mon, 26 Jan 2026 17:53:34 +0000
-Message-Id: <20260126175345.2078371-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 11/16] x86/amd: Fix re-activation of TopoExt on Fam15h CPUs
+Date: Mon, 26 Jan 2026 17:53:40 +0000
+Message-Id: <20260126175345.2078371-12-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,17 +98,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-cpu_dev.c_early_init() and .c_init() is a spilt we inherited from Linux.
+init_amd() tries to re-activate TOPOEXT on certain systems, but only after
+amd_init_levelling() has calculated the levelling defaults, meaning that the
+re-activation will be lost on the next context switch.
 
-In Xen, these are called moments apart in identify_cpu().  The only logic
-between the two calls is filling part of c->x86_capability[] and collecting
-the the long model name.
-
-We are going to want to repurpose .c_early_init() somewhat, so move the logic
-wanting running on all CPUs to the .c_init() hook, which is only marginally
-later.
-
-No functional change.
+Move the logic into early_init_amd() so it takes effect before calculating the
+levelling defaults.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -117,83 +112,69 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/amd.c   |  4 ++--
- xen/arch/x86/cpu/hygon.c |  2 ++
- xen/arch/x86/cpu/intel.c | 12 ++++++------
- 3 files changed, 10 insertions(+), 8 deletions(-)
+ xen/arch/x86/cpu/amd.c | 40 ++++++++++++++++++++++++----------------
+ 1 file changed, 24 insertions(+), 16 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index fc496dc43e08..970cb42e9e0b 100644
+index e8daf7415bb0..a14a12fb1d60 100644
 --- a/xen/arch/x86/cpu/amd.c
 +++ b/xen/arch/x86/cpu/amd.c
-@@ -621,8 +621,6 @@ void cf_check early_init_amd(struct cpuinfo_x86 *c)
+@@ -620,9 +620,32 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
+ 		*low_mhz = amd_parse_freq(c->x86, lo);
+ }
+ 
++static void amd_early_adjust_cpuid_extd(void)
++{
++    struct cpuinfo_x86 *c = &boot_cpu_data;
++    uint64_t val;
++
++    /* Re-enable TopologyExtensions if switched off by BIOS */
++    if ( c->family == 0x15 && c->model >= 0x10 && c->model <= 0x1f &&
++         !boot_cpu_has(X86_FEATURE_TOPOEXT) &&
++         !rdmsr_safe(MSR_K8_EXT_FEATURE_MASK, &val) )
++    {
++        val |= 1ULL << 54;
++        wrmsr_safe(MSR_K8_EXT_FEATURE_MASK, val);
++        val = rdmsr(MSR_K8_EXT_FEATURE_MASK);
++        if ( val & (1ULL << 54) )
++        {
++            __set_bit(X86_FEATURE_TOPOEXT, c->x86_capability);
++            printk(XENLOG_INFO "CPU: Re-enabling disabled Topology Extensions Support\n");
++        }
++    }
++}
++
+ void __init cf_check early_init_amd(void)
  {
- 	if (c == &boot_cpu_data)
- 		amd_init_levelling();
--
--	ctxt_switch_levelling(NULL);
+-    amd_init_levelling();
++    amd_early_adjust_cpuid_extd();
++
++    amd_init_levelling(); /* Capture defaults after early CPUID adjustments */
  }
  
  void amd_log_freq(const struct cpuinfo_x86 *c)
-@@ -1018,6 +1016,8 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
- 	u32 l, h;
- 	uint64_t value;
- 
-+	ctxt_switch_levelling(NULL);
-+
- 	amd_init_de_cfg(c);
- 
- 	if (c == &boot_cpu_data)
-diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
-index b99d83ed4d75..bb1624882499 100644
---- a/xen/arch/x86/cpu/hygon.c
-+++ b/xen/arch/x86/cpu/hygon.c
-@@ -32,6 +32,8 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
- {
- 	unsigned long long value;
- 
-+	ctxt_switch_levelling(NULL);
-+
- 	amd_init_de_cfg(c);
- 
- 	if (c == &boot_cpu_data)
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index eec6ee763040..141dc2368143 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -327,10 +327,6 @@ void __init intel_unlock_cpuid_leaves(struct cpuinfo_x86 *c)
- 
- static void cf_check early_init_intel(struct cpuinfo_x86 *c)
- {
--	/* Netburst reports 64 bytes clflush size, but does IO in 128 bytes */
--	if (c->x86 == 15 && c->x86_cache_alignment == 64)
--		c->x86_cache_alignment = 128;
--
- 	if (c == &boot_cpu_data &&
- 	    bootsym(trampoline_misc_enable_off) & MSR_IA32_MISC_ENABLE_XD_DISABLE)
- 		printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
-@@ -350,8 +346,6 @@ static void cf_check early_init_intel(struct cpuinfo_x86 *c)
- 
- 		intel_init_levelling();
+@@ -1145,21 +1168,6 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 		}
  	}
+ 
+-	/* re-enable TopologyExtensions if switched off by BIOS */
+-	if ((c->x86 == 0x15) &&
+-	    (c->x86_model >= 0x10) && (c->x86_model <= 0x1f) &&
+-	    !cpu_has(c, X86_FEATURE_TOPOEXT) &&
+-	    !rdmsr_safe(MSR_K8_EXT_FEATURE_MASK, &value)) {
+-		value |= 1ULL << 54;
+-		wrmsr_safe(MSR_K8_EXT_FEATURE_MASK, value);
+-		rdmsrl(MSR_K8_EXT_FEATURE_MASK, value);
+-		if (value & (1ULL << 54)) {
+-			__set_bit(X86_FEATURE_TOPOEXT, c->x86_capability);
+-			printk(KERN_INFO "CPU: Re-enabling disabled "
+-			       "Topology Extensions Support\n");
+-		}
+-	}
 -
--	ctxt_switch_levelling(NULL);
- }
- 
- /*
-@@ -615,6 +609,12 @@ static void init_intel_perf(struct cpuinfo_x86 *c)
- 
- static void cf_check init_intel(struct cpuinfo_x86 *c)
- {
-+	/* Netburst reports 64 bytes clflush size, but does IO in 128 bytes */
-+	if (c->x86 == 15 && c->x86_cache_alignment == 64)
-+		c->x86_cache_alignment = 128;
-+
-+	ctxt_switch_levelling(NULL);
-+
- 	/* Detect the extended topology information if available */
- 	detect_extended_topology(c);
- 
+ 	/*
+ 	 * The way access filter has a performance penalty on some workloads.
+ 	 * Disable it on the affected CPUs.
 -- 
 2.39.5
 
