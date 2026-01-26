@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54844D19511
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213834.1524321 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4CBD1951A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1213830.1524277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmj-0005Rm-Qr; Mon, 26 Jan 2026 17:53:57 +0000
+	id 1vkQmh-0004RQ-AJ; Mon, 26 Jan 2026 17:53:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213834.1524321; Mon, 26 Jan 2026 17:53:57 +0000
+Received: by outflank-mailman (output) from mailman id 1213830.1524277; Mon, 26 Jan 2026 17:53:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmj-0005Pv-Ib; Mon, 26 Jan 2026 17:53:57 +0000
-Received: by outflank-mailman (input) for mailman id 1213834;
- Mon, 26 Jan 2026 17:53:56 +0000
+	id 1vkQmh-0004Qj-3e; Mon, 26 Jan 2026 17:53:55 +0000
+Received: by outflank-mailman (input) for mailman id 1213830;
+ Mon, 26 Jan 2026 17:53:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQmi-0004HX-Ja
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:56 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1vkQmf-0004HX-JH
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:53 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fada5a50-fadf-11f0-9ccf-f158ae23cfc8;
- Mon, 26 Jan 2026 18:53:54 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-47ff94b46afso41469725e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:54 -0800 (PST)
+ id f95da1ba-fadf-11f0-9ccf-f158ae23cfc8;
+ Mon, 26 Jan 2026 18:53:51 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-47ee301a06aso55313185e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:51 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.52
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:52 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fada5a50-fadf-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: f95da1ba-fadf-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450033; x=1770054833; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450031; x=1770054831; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=t6MpUKLCLKO3nERYaHJXRPiOdgAVGABSBDex8VMPnrc=;
-        b=n+em5QK2h2wfDH+FC5a1Nfxh5YXfsF6upNPqqPXfCiculxY0HY7ZkJW5kfpOHNeecp
-         QMv8RFxBCu4jcd6T14gt+5Oild1shHzTGBszYW28PWIsCLoI/VYtQ6USxIwMAq67I6Fb
-         /5yOs6xmWOl8NGmban23vGZ0MmJBkcpEza7Xg=
+        bh=FPbCiqCcqf0/NbE9zeJiJem+K34lkoRlbsFPYopIEac=;
+        b=uKXW59LQ+j6pC//HqjWHvCbuP2qjKwXraAW7xOlMuOCZIJrrj3m3FEdcVN/3+o9YML
+         BSRDecAih92Sf8W+IL0CHtXVK3sgxM69+eRPUn3wuIJM4r2nINEp+P8ez7dYUb9daqBz
+         TYgXIPsXZyCbxYD+JkrJ9i+YCyjEKLgSx2RbU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450033; x=1770054833;
+        d=1e100.net; s=20230601; t=1769450031; x=1770054831;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=t6MpUKLCLKO3nERYaHJXRPiOdgAVGABSBDex8VMPnrc=;
-        b=HNG+/xsMCg8QCR2RWAZaFWEVUgCfQl1fApPfWJmOts31ld1pPfOL2Gvtr5U2diMV73
-         AjmkTrmXrJpC5PbGbqUzT1/HY5I1G0LdZykCC5Ae7YUN2eiy64Ks9rlBSaTSJXK0+Ko+
-         XrrGri50CWYSBurNZnMDDc05ZncQtu2qJaBPwtSpyXD6aKEi2JxRFyJif81uUqbapqzi
-         7foDANcv9ylKPT/ggFP1XZljpdab+xpCEfzPoIiKUPT7DAbhdvVZDz9d6kj85d6anFKC
-         MbPmrLBDxVQZAUJpn/WwbtvdGZ+K5n5KTjezqMH5m+Cl13VF2WvlKweC+5fY6KUpn2Xq
-         gSig==
-X-Gm-Message-State: AOJu0Yz1DLzH92NhP3FKYDmkhHr4TJ4VZPXrjM1dPbYggVWLQsoZ98XJ
-	Y4JmkqnAjRPhodrld0AwPOckmQ8T/TDO9FFt7p+YadgIIM5i/Xm3h9gUW9OAQ2bQZB+BpPvCyE+
-	8wJAu
-X-Gm-Gg: AZuq6aLwAEzn6DySUzm17FzeMdD09MPBlb1bBl3sKpOokZvr//yRUoOoEH+7bWdb/ah
-	WPeI7igxPgQwY9q4sJPbuj9rbh8c721JFlj5a8czPEZqX+LxpYI8feSTtbr268raVkQ2bWBUA4y
-	u960h5pasSnmBbHvDEXBT+IyMh8YS0wkwjAl7G2ZxRc1FoRajbFdu2o7SK/TXFbSirAQ+7dSxVg
-	9y8jJDKstidXfrUNrjfamW83LNwuKTgAsGmxIhtr8q5AAdQDp2e11/4LteKtWGNtOnUd/X+mdPf
-	uhma9opxuiajaTxDXNjz2yB/GBK851lKBPxVWkccfGiMlSMlQrZyGYuY9KnUiAXi0j6gvlW+W6v
-	9N5pwyFT+EyhiORK26ajnYfXlJ6GojEoUjuwd2reFNBvEfFwNeBpfZE1Ojh+FGXKtUHVkGZ2sqh
-	eqIwQ6m8KM7Y/RtA7M8TP+x8x9JiXVXIr52F3Ic4V7cHGF2jy/kI0o8HdwqHgyLQ==
-X-Received: by 2002:a05:600c:681b:b0:47b:deb9:163d with SMTP id 5b1f17b1804b1-4805dd41a1cmr77379775e9.7.1769450033429;
-        Mon, 26 Jan 2026 09:53:53 -0800 (PST)
+        bh=FPbCiqCcqf0/NbE9zeJiJem+K34lkoRlbsFPYopIEac=;
+        b=Cqv2cQzygRi/xZdgCjteKk3385jSajPtRHYU+2mwrz1sYp/nzSYtPrrvx0CXhIEFet
+         MgN7DDQjCXBzZmrn3tVvJpmwZjLPSMVTWstjyMDj2N5fr1F5vrEYLJo5a7P7HoJ2//BQ
+         Fah1sLkza91nOUvs8v2K49Tl8Io/u9ebrY/8/awRaBPctC8JwWEhMRCn9WAWmYGktEMt
+         5T0Qn23mrpgdWIt+iW6kj3FFev2tSP0Q958cvbqdSNZ+ZF3e75aZl5LbIll9jkgn6B27
+         DCkML4t0CELVF++e65fyk3b9pTSILF4ftN40sgbbzaOOHiP63YQRbLrXp9Apc/6OU2Qq
+         6Z3Q==
+X-Gm-Message-State: AOJu0YwZ8tfzxiQ0uAaxY0qaN51Q3a+/Eq2Sg527MZu3T7lEMh6sAOfs
+	+coc14dyxS7WxSVlzrvK095l1WwcRvKHauhVuzswCMkVsuNPHgVMMQR6flBtcc05UlmLraqJrBr
+	urReF
+X-Gm-Gg: AZuq6aL3ohplvANNSvzSYoD8NdqTfJvrIw2RtPeonE+Z624sxeX7kIrHjQjCnpPd2v7
+	XUJgryDlnA0n+AuFj5leTYfCu2TBOVEowEgZrxkgCdUZP8j0boGQQEcrUJYLWh5gmjfTeOjaMpD
+	p1EOgiAysmfZLxKRULWwPnW1XXwKkfQEAf4R4AK+yGvtybv6IrwZDyLgznYszTEvsQSEpz9uhZW
+	wf2JEvUbywuqObmNx4zXBtmYBZ9yzwo74RHnwURUTzYQ41i6C5Gigluvyd0cy/pqkYXfI8JQ38x
+	GdP/YbxseLeGndrVeASFYGehZponJgOpJChocO5iiMALq8d81merU2pOzYoLRtLk0+rbqzuc/on
+	T/jZwxRhQPi9BrtWS5WBF3LnbkPfJGKz44IwRgF7hV0LRPkCK2ymAzFalde54zGHditCW34FI31
+	0mVBO4tF2YfV47VgSnGhxHujOkVBsBDOz4CePbwXE2o/0V5fRk/DZ/ZgQV3yq+rA==
+X-Received: by 2002:a05:600c:444c:b0:47e:e779:36e with SMTP id 5b1f17b1804b1-4805cf67274mr86300515e9.19.1769450030306;
+        Mon, 26 Jan 2026 09:53:50 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 06/16] x86/cpu: Rework the vendor early_init() hooks to be __init
-Date: Mon, 26 Jan 2026 17:53:35 +0000
-Message-Id: <20260126175345.2078371-7-andrew.cooper3@citrix.com>
+Subject: [PATCH 02/16] x86/cpu: Drop cpuid_level adjustment from generic_identify()
+Date: Mon, 26 Jan 2026 17:53:31 +0000
+Message-Id: <20260126175345.2078371-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,16 +98,19 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All interior actions are now conditional on c == &boot_cpu_data, so rearrange
-it to the caller in identify_cpu() and drop the hook parameter.
+early_cpu_init() calls intel_unlock_cpuid_leaves(), which arranges for the
+boot trampoline to make the adjustment for all APs, meaning the call from
+early_init_intel() is a no-op.  Drop it, allowing intel_unlock_cpuid_leaves()
+to become __init code.
 
-This allows early_init_$VENDOR() to become __init, which in turn allows
-$VENDOR_init_levelling() to cease being noinline.
+In turn, the adjustments in generic_identify() were a no-op too.  Nothing in
+the c_early_init() hooks modifies the 1c/1d features, so their values in
+c->x86_capability[] are still good from just above.
 
-Reposition the early_init_intel() function simply to make diff legible.
+The ebx variable used to calculate c->x86_clflush_size is still good too, but
+move the logic earlier so it's more obviously correct.
 
-No functional change.
-
+Fixes: fa4d026737a4 ("x86/Intel: unlock CPUID earlier for the BSP")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
@@ -115,142 +118,60 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/amd.c    |  7 +++----
- xen/arch/x86/cpu/common.c |  4 ++--
- xen/arch/x86/cpu/cpu.h    |  4 ++--
- xen/arch/x86/cpu/intel.c  | 42 +++++++++++++++++----------------------
- 4 files changed, 25 insertions(+), 32 deletions(-)
+ xen/arch/x86/cpu/common.c | 10 +---------
+ xen/arch/x86/cpu/intel.c  |  4 +---
+ 2 files changed, 2 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 970cb42e9e0b..36fea2e0a299 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -224,7 +224,7 @@ static const typeof(ctxt_switch_masking) __initconst_cf_clobber __used csm =
-  * avoid this, as the accidentally-advertised features will not actually
-  * function.
-  */
--static void __init noinline amd_init_levelling(void)
-+static void __init amd_init_levelling(void)
- {
- 	/*
- 	 * If there's support for CpuidUserDis or CPUID faulting then
-@@ -617,10 +617,9 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
- 		*low_mhz = amd_parse_freq(c->x86, lo);
- }
- 
--void cf_check early_init_amd(struct cpuinfo_x86 *c)
-+void __init cf_check early_init_amd(void)
- {
--	if (c == &boot_cpu_data)
--		amd_init_levelling();
-+    amd_init_levelling();
- }
- 
- void amd_log_freq(const struct cpuinfo_x86 *c)
 diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 89b58e6182b9..39e64f3a5f88 100644
+index f8c80db6eb1d..dda0d5d39c92 100644
 --- a/xen/arch/x86/cpu/common.c
 +++ b/xen/arch/x86/cpu/common.c
-@@ -503,8 +503,8 @@ void identify_cpu(struct cpuinfo_x86 *c)
- 	if (c->extended_cpuid_level >= 0x80000021)
- 		c->x86_capability[FEATURESET_e21a] = cpuid_eax(0x80000021);
+@@ -479,6 +479,7 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 	cpuid(1, &eax, &ebx, &ecx, &edx);
+ 	c->x86 = get_cpu_family(eax, &c->x86_model, &c->x86_mask);
+ 	c->apicid = phys_pkg_id((ebx >> 24) & 0xFF, 0);
++	c->x86_clflush_size = ((ebx >> 8) & 0xff) * 8;
+ 	c->phys_proc_id = c->apicid;
  
--	if (actual_cpu.c_early_init)
--		alternative_vcall(actual_cpu.c_early_init, c);
-+	if (c == &boot_cpu_data && actual_cpu.c_early_init)
-+		alternative_vcall(actual_cpu.c_early_init);
+ 	/*
+@@ -502,15 +503,6 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 	if (actual_cpu.c_early_init)
+ 		alternative_vcall(actual_cpu.c_early_init, c);
  
+-	/* c_early_init() may have adjusted cpuid levels/features.  Reread. */
+-	c->cpuid_level = cpuid_eax(0);
+-	cpuid(1, &eax, &ebx,
+-	      &c->x86_capability[FEATURESET_1c],
+-	      &c->x86_capability[FEATURESET_1d]);
+-
+-	if ( cpu_has(c, X86_FEATURE_CLFLUSH) )
+-		c->x86_clflush_size = ((ebx >> 8) & 0xff) * 8;
+-
  	/* AMD-defined flags: level 0x80000001 */
  	if (c->extended_cpuid_level >= 0x80000001)
-diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
-index bbede57ab00d..0fc6370edb13 100644
---- a/xen/arch/x86/cpu/cpu.h
-+++ b/xen/arch/x86/cpu/cpu.h
-@@ -4,7 +4,7 @@
- #define X86_CPU_H
- 
- struct cpu_dev {
--	void		(*c_early_init)(struct cpuinfo_x86 *c);
-+	void		(*c_early_init)(void);
- 	void		(*c_init)(struct cpuinfo_x86 * c);
- };
- 
-@@ -19,7 +19,7 @@ extern void display_cacheinfo(struct cpuinfo_x86 *c);
- extern void detect_ht(struct cpuinfo_x86 *c);
- extern bool detect_extended_topology(struct cpuinfo_x86 *c);
- 
--void cf_check early_init_amd(struct cpuinfo_x86 *c);
-+void cf_check early_init_amd(void);
- void amd_log_freq(const struct cpuinfo_x86 *c);
- void amd_init_de_cfg(const struct cpuinfo_x86 *c);
- void amd_init_lfence_dispatch(void);
+ 		cpuid(0x80000001, &tmp, &tmp,
 diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index 141dc2368143..2aeeb2f5bf55 100644
+index 584588e406f2..d585161dd32f 100644
 --- a/xen/arch/x86/cpu/intel.c
 +++ b/xen/arch/x86/cpu/intel.c
-@@ -251,7 +251,7 @@ static const typeof(ctxt_switch_masking) __initconst_cf_clobber __used csm =
-     intel_ctxt_switch_masking;
- #endif
+@@ -310,7 +310,7 @@ static void __init noinline intel_init_levelling(void)
+ }
  
--static void __init noinline intel_init_levelling(void)
-+static void __init intel_init_levelling(void)
+ /* Unmask CPUID levels if masked. */
+-void intel_unlock_cpuid_leaves(struct cpuinfo_x86 *c)
++void __init intel_unlock_cpuid_leaves(struct cpuinfo_x86 *c)
  {
- 	uint32_t eax, ecx, edx, tmp;
+ 	uint64_t misc_enable, disable;
  
-@@ -325,29 +325,6 @@ void __init intel_unlock_cpuid_leaves(struct cpuinfo_x86 *c)
- 	}
- }
+@@ -335,8 +335,6 @@ static void cf_check early_init_intel(struct cpuinfo_x86 *c)
+ 	    bootsym(trampoline_misc_enable_off) & MSR_IA32_MISC_ENABLE_XD_DISABLE)
+ 		printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
  
--static void cf_check early_init_intel(struct cpuinfo_x86 *c)
--{
--	if (c == &boot_cpu_data &&
--	    bootsym(trampoline_misc_enable_off) & MSR_IA32_MISC_ENABLE_XD_DISABLE)
--		printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
+-	intel_unlock_cpuid_leaves(c);
 -
--	if (c == &boot_cpu_data) {
--		uint64_t misc_enable;
--
--		check_memory_type_self_snoop_errata();
--
--		/*
--		 * If fast string is not enabled in IA32_MISC_ENABLE for any reason,
--		 * clear the enhanced fast string CPU capability.
--		 */
--		rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
--		if (!(misc_enable & MSR_IA32_MISC_ENABLE_FAST_STRING))
--			setup_clear_cpu_cap(X86_FEATURE_ERMS);
--
--		intel_init_levelling();
--	}
--}
--
- /*
-  * Errata BA80, AAK120, AAM108, AAO67, BD59, AAY54: Rapid Core C3/C6 Transition
-  * May Cause Unpredictable System Behavior
-@@ -413,6 +390,23 @@ static void __init probe_mwait_errata(void)
-     }
- }
- 
-+static void __init cf_check early_init_intel(void)
-+{
-+    if ( bootsym(trampoline_misc_enable_off) & MSR_IA32_MISC_ENABLE_XD_DISABLE )
-+        printk(KERN_INFO "re-enabled NX (Execute Disable) protection\n");
-+
-+    check_memory_type_self_snoop_errata();
-+
-+    /*
-+     * If fast string is not enabled in IA32_MISC_ENABLE for any reason,
-+     * clear the enhanced fast string CPU capability.
-+     */
-+    if ( !(rdmsr(MSR_IA32_MISC_ENABLE) & MSR_IA32_MISC_ENABLE_FAST_STRING) )
-+        setup_clear_cpu_cap(X86_FEATURE_ERMS);
-+
-+    intel_init_levelling();
-+}
-+
- /*
-  * P4 Xeon errata 037 workaround.
-  * Hardware prefetcher may cause stale data to be loaded into the cache.
+ 	/* CPUID workaround for Intel 0F33/0F34 CPU */
+ 	if (boot_cpu_data.x86 == 0xF && boot_cpu_data.x86_model == 3 &&
+ 	    (boot_cpu_data.x86_mask == 3 || boot_cpu_data.x86_mask == 4))
 -- 
 2.39.5
 
