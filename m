@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB83D1951B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7908AD1951C
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213838.1524361 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1213843.1524398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmn-0006SW-M3; Mon, 26 Jan 2026 17:54:01 +0000
+	id 1vkQms-0007Sj-JT; Mon, 26 Jan 2026 17:54:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213838.1524361; Mon, 26 Jan 2026 17:54:01 +0000
+Received: by outflank-mailman (output) from mailman id 1213843.1524398; Mon, 26 Jan 2026 17:54:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmn-0006RK-Aw; Mon, 26 Jan 2026 17:54:01 +0000
-Received: by outflank-mailman (input) for mailman id 1213838;
- Mon, 26 Jan 2026 17:53:59 +0000
+	id 1vkQmr-0007OB-OR; Mon, 26 Jan 2026 17:54:05 +0000
+Received: by outflank-mailman (input) for mailman id 1213843;
+ Mon, 26 Jan 2026 17:54:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQml-0004HW-Je
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:59 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1vkQmo-0004HW-KW
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:54:02 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fd1c4f0e-fadf-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 18:53:58 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47f5c2283b6so36405185e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:57 -0800 (PST)
+ id fec40fdb-fadf-11f0-b15f-2bf370ae4941;
+ Mon, 26 Jan 2026 18:54:00 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4805ef35864so11603905e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:54:00 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.56
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:56 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd1c4f0e-fadf-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: fec40fdb-fadf-11f0-b15f-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450037; x=1770054837; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450040; x=1770054840; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Try1cZQOOfQY5RdnyC25WW3N+d8l3jQHbsgtA/sxQ94=;
-        b=HVQtNFLMzT3MI1HTrdXNhNxM93FlCY3vWD4OHRGyCzMPCOYLu+cNMZ9P5ZjMPS5pPx
-         9ALF4sC9wDw73TNafQkX8tIIrQlfMfsJ2tBR2qVl9PlPXYwQXl+Bp76BsuGt/W3bqpNq
-         3zKSw9xPArmfRDI2LYV0acQcZRtpf/3G8RUjg=
+        bh=oCtWZ5jsIOSUx1eQSxD4nCRKX4JQJ1b+ozb5fk5XF6E=;
+        b=Hxh1cCQHWBqWBiwzUbkftqMBtcyLrl0t8N/iMtZQYEKDxP1e5biIgvFMoxCU6uu0R/
+         TiRYZzV9qOl1xEszYskDPdn4F0X8cDIdVbZi9VMcaeJZ4PNUjNdNOWOg42Vt5kM0XSG+
+         raSdmamK8Vv/XgnBpEwCPeenP7PuaL60CGRlM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450037; x=1770054837;
+        d=1e100.net; s=20230601; t=1769450040; x=1770054840;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Try1cZQOOfQY5RdnyC25WW3N+d8l3jQHbsgtA/sxQ94=;
-        b=GFkc8i4eGlP+oCd+yYIGnTxABKTO7CKnAqJFcK9sko5Z+XxUXoBuy0K2uJrw9+Bc2w
-         LxQmT01k+rzXlFj+DM3xIITXEyRwRy2Z2aVy7xv1rUaBChtIwFNwJUa6coXoXXf46A+J
-         uZpKa/wTvH/+GbDA7O2mABdmV+imuE18xMwLHKbKetrilHEmCIOtvNcOXV6DxEs43TUg
-         5UUsC3c4VPOqeOsF44+k4ANAFX5tpx//e91vHWgE0l6Mm1FUsA+qQ/C8mq86N5yl5AdL
-         U8zmoz+gj111sz/yfpKpDAqFyqGdi9YtAEo5zWsYIchwuvc3SZC8yDjyIt5lNMfYEUGE
-         2N5g==
-X-Gm-Message-State: AOJu0YwaMqzyQ1K1uYlBevcjeJpM+JgwHcQpOVmxKpqWZzvJoGMO0klj
-	ghiQM4AdcoEz4sV2X/03BARN4qZ9wLLMKz+g8hdPeXwO0+p88dMXXMpYdupF9XEL5BCT6y7AwVB
-	RCVW9
-X-Gm-Gg: AZuq6aL25VX8sRYzQSuvtOCrR6bsdqqGC8+5ms5Z3GF+f5QCzkh65sN4mAbNU/qtNQj
-	J+R4bUMB3mXXbhoZq7ele5129HZc95xXn2Om9gGINrI3xnKW2M4I9Yk0UMhsJq0QwB7gcZ+fsCl
-	5kN8i9JqFUzi7WvsRE+oErOghd1ygNvOnQiv4Nc5DuD9VgGGGOl22fygPKhwnTXuLWAU8NUKeYM
-	ndnvL4kVnJ3rziyL8QcrDTKbatqRtRJL4i94dvJXacfakYYgt1xm5hRmE686VuFfVj55Ou1L042
-	RZG9peTrV73UD+1PNAmX3zss2ywNg9YCklneYOVDuHUP0qCB3giBpAD67ADY8x36w/3LFNFY8un
-	GM+nA/O9UAnoggWkaypowhxkPnjsJ6RmoZ5fZE3SC7ahOIjejBRjjsb0V/4Nf7OkqL8g9xRW7Jf
-	tJhdoL/ZTS1YkFNPczURjRHC7LisLNRrAtJMZj6juutvYIoD/XAJHCF9OGTZ3fKA==
-X-Received: by 2002:a05:600c:c087:b0:477:6374:6347 with SMTP id 5b1f17b1804b1-4805d95d3e1mr64802295e9.22.1769450037164;
-        Mon, 26 Jan 2026 09:53:57 -0800 (PST)
+        bh=oCtWZ5jsIOSUx1eQSxD4nCRKX4JQJ1b+ozb5fk5XF6E=;
+        b=a0IYXUnbTdaczKnhuzBZ+/vW2uJhSsw95UnDZ3MJ7aAcWgI99J9oHVZz/EJU7rGkCs
+         4o3OKRdn6X4EA/GrPwIY7exEHR8cCrhnCavTV45wKQOP098zF6KZqGmJet9ulOFNMRdB
+         IVZP7EWQgvbpaWklpWSY143KNS6pooKHcdOKp1+f3myW0xUitgvUFEWkaed3WFaiQ7j2
+         hi+fxTaWHPz9e6xHGx2H8iAXfQIibaWk2loRcXIZKVqAvnXvp1nHm1soyv18LilokZfj
+         hwnNBL+pJC7lGFeLzn1DC+L8x9heArEoGS93oPKXW1FYcfNIYvLJbbEoZM+sksI0yJZH
+         RmiA==
+X-Gm-Message-State: AOJu0YyO7D2CfSk88BlTjTIajfKNNauREt71mQtNJvJDgQl6lhHxKedQ
+	dN5TOVkBrrFgiOLc1N2zMO3/laMtLOZuAcjE1fKylU3z3h7BuPTDWptStspca37aYe7Qo11GknB
+	Z4VAb
+X-Gm-Gg: AZuq6aK85J3u/zTw2d4XrPg9pMahaPUojx2hhWFpGgMMP1IDQjPdmKs7DKOjTSgFEwQ
+	h9E9L5vWkdHgU1nDxY7NSXDw3DlZKdyaDxIo1r7Ztj/isOvcDUy2Ii2XDfQg9nNpDtSE7Wd43ma
+	L4nypfBAM1DamRLDTq7WTDCbmpwF1DbmtuaXAOQkyaCaT5JTMCt/Bry8vgCq1iG6cEvRUQt7lYb
+	CYvtUqGK2qiciY8t51gwdANkwi7uwkVEvLDGAeG5/GkqPjSDUgYESwiolbsMPcl/JXWnfqOaTsC
+	5k1JArskuWdVescYuRB2yLpXzQsUcZTHRtiH9n/BAqaRljYj9EEEfJ5eObbxITnzR4YGUJSVRQg
+	qbnkg4SIiY038lFwrQ07KmvHNDUMlGPFr3720HaUKAuxUxIpILgoIhhnX5LBP+KpvrZkodycFMY
+	7KsljQOTEpoh3Q73EhK8HdNkcIz0qYa03saF5klaXCYEn+zuUVfahCe54hRzslcw==
+X-Received: by 2002:a05:600c:b96:b0:480:1e8f:d15f with SMTP id 5b1f17b1804b1-4805cd40a06mr82761325e9.2.1769450039908;
+        Mon, 26 Jan 2026 09:53:59 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 11/16] x86/amd: Fix re-activation of TopoExt on Fam15h CPUs
-Date: Mon, 26 Jan 2026 17:53:40 +0000
-Message-Id: <20260126175345.2078371-12-andrew.cooper3@citrix.com>
+Subject: [PATCH 15/16] x86/cpu: Clean up use of LCAP_* constants
+Date: Mon, 26 Jan 2026 17:53:44 +0000
+Message-Id: <20260126175345.2078371-16-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,12 +98,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-init_amd() tries to re-activate TOPOEXT on certain systems, but only after
-amd_init_levelling() has calculated the levelling defaults, meaning that the
-re-activation will be lost on the next context switch.
+Now that the LCAP_* constants are single bits, we can simplify the expressions
+using them.
 
-Move the logic into early_init_amd() so it takes effect before calculating the
-levelling defaults.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -112,69 +110,117 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/amd.c | 40 ++++++++++++++++++++++++----------------
- 1 file changed, 24 insertions(+), 16 deletions(-)
+ xen/arch/x86/cpu/amd.c | 12 ++++++------
+ xen/arch/x86/domain.c  | 10 +++++-----
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index e8daf7415bb0..a14a12fb1d60 100644
+index 06646fc1af93..f259a2112a16 100644
 --- a/xen/arch/x86/cpu/amd.c
 +++ b/xen/arch/x86/cpu/amd.c
-@@ -620,9 +620,32 @@ void amd_process_freq(const struct cpuinfo_x86 *c,
- 		*low_mhz = amd_parse_freq(c->x86, lo);
- }
+@@ -171,7 +171,7 @@ void cf_check amd_ctxt_switch_masking(const struct vcpu *next)
+ 		(nextd && is_pv_domain(nextd) && nextd->arch.pv.cpuidmasks)
+ 		? nextd->arch.pv.cpuidmasks : &cpuidmask_defaults;
  
-+static void amd_early_adjust_cpuid_extd(void)
-+{
-+    struct cpuinfo_x86 *c = &boot_cpu_data;
-+    uint64_t val;
-+
-+    /* Re-enable TopologyExtensions if switched off by BIOS */
-+    if ( c->family == 0x15 && c->model >= 0x10 && c->model <= 0x1f &&
-+         !boot_cpu_has(X86_FEATURE_TOPOEXT) &&
-+         !rdmsr_safe(MSR_K8_EXT_FEATURE_MASK, &val) )
-+    {
-+        val |= 1ULL << 54;
-+        wrmsr_safe(MSR_K8_EXT_FEATURE_MASK, val);
-+        val = rdmsr(MSR_K8_EXT_FEATURE_MASK);
-+        if ( val & (1ULL << 54) )
-+        {
-+            __set_bit(X86_FEATURE_TOPOEXT, c->x86_capability);
-+            printk(XENLOG_INFO "CPU: Re-enabling disabled Topology Extensions Support\n");
-+        }
-+    }
-+}
-+
- void __init cf_check early_init_amd(void)
- {
--    amd_init_levelling();
-+    amd_early_adjust_cpuid_extd();
-+
-+    amd_init_levelling(); /* Capture defaults after early CPUID adjustments */
- }
+-	if ((levelling_caps & LCAP_1cd) == LCAP_1cd) {
++	if (levelling_caps & LCAP_1cd) {
+ 		uint64_t val = masks->_1cd;
  
- void amd_log_freq(const struct cpuinfo_x86 *c)
-@@ -1145,21 +1168,6 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
- 		}
+ 		/*
+@@ -192,7 +192,7 @@ void cf_check amd_ctxt_switch_masking(const struct vcpu *next)
+ #define LAZY(cap, msr, field)						\
+ 	({								\
+ 		if (unlikely(these_masks->field != masks->field) &&	\
+-		    ((levelling_caps & cap) == cap))			\
++		    (levelling_caps & cap))				\
+ 		{							\
+ 			wrmsr_amd(msr, masks->field);			\
+ 			these_masks->field = masks->field;		\
+@@ -251,7 +251,7 @@ static void __init amd_init_levelling(void)
+ 	 */
+ 	probe_masking_msrs();
+ 
+-	if ((levelling_caps & LCAP_1cd) == LCAP_1cd) {
++	if (levelling_caps & LCAP_1cd) {
+ 		uint32_t ecx, edx, tmp;
+ 
+ 		cpuid(0x00000001, &tmp, &tmp, &ecx, &edx);
+@@ -264,7 +264,7 @@ static void __init amd_init_levelling(void)
+ 		cpuidmask_defaults._1cd = ((uint64_t)ecx << 32) | edx;
  	}
  
--	/* re-enable TopologyExtensions if switched off by BIOS */
--	if ((c->x86 == 0x15) &&
--	    (c->x86_model >= 0x10) && (c->x86_model <= 0x1f) &&
--	    !cpu_has(c, X86_FEATURE_TOPOEXT) &&
--	    !rdmsr_safe(MSR_K8_EXT_FEATURE_MASK, &value)) {
--		value |= 1ULL << 54;
--		wrmsr_safe(MSR_K8_EXT_FEATURE_MASK, value);
--		rdmsrl(MSR_K8_EXT_FEATURE_MASK, value);
--		if (value & (1ULL << 54)) {
--			__set_bit(X86_FEATURE_TOPOEXT, c->x86_capability);
--			printk(KERN_INFO "CPU: Re-enabling disabled "
--			       "Topology Extensions Support\n");
--		}
--	}
--
- 	/*
- 	 * The way access filter has a performance penalty on some workloads.
- 	 * Disable it on the affected CPUs.
+-	if ((levelling_caps & LCAP_e1cd) == LCAP_e1cd) {
++	if (levelling_caps & LCAP_e1cd) {
+ 		uint32_t ecx, edx, tmp;
+ 
+ 		cpuid(0x80000001, &tmp, &tmp, &ecx, &edx);
+@@ -275,7 +275,7 @@ static void __init amd_init_levelling(void)
+ 		cpuidmask_defaults.e1cd = ((uint64_t)ecx << 32) | edx;
+ 	}
+ 
+-	if ((levelling_caps & LCAP_7ab0) == LCAP_7ab0) {
++	if (levelling_caps & LCAP_7ab0) {
+ 		uint32_t eax, ebx, tmp;
+ 
+ 		cpuid(0x00000007, &eax, &ebx, &tmp, &tmp);
+@@ -283,7 +283,7 @@ static void __init amd_init_levelling(void)
+ 		cpuidmask_defaults._7ab0 &= ((uint64_t)eax << 32) | ebx;
+ 	}
+ 
+-	if ((levelling_caps & LCAP_6c) == LCAP_6c) {
++	if (levelling_caps & LCAP_6c) {
+ 		uint32_t ecx = cpuid_ecx(6);
+ 
+ 		cpuidmask_defaults._6c &= (~0ULL << 32) | ecx;
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index c29a6b0decee..441f99e92088 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -303,7 +303,7 @@ void domain_cpu_policy_changed(struct domain *d)
+ 
+     if ( is_pv_domain(d) )
+     {
+-        if ( ((levelling_caps & LCAP_1cd) == LCAP_1cd) )
++        if ( levelling_caps & LCAP_1cd )
+         {
+             uint64_t mask = cpuidmask_defaults._1cd;
+             uint32_t ecx = p->basic._1c;
+@@ -368,7 +368,7 @@ void domain_cpu_policy_changed(struct domain *d)
+             d->arch.pv.cpuidmasks->_1cd = mask;
+         }
+ 
+-        if ( ((levelling_caps & LCAP_6c) == LCAP_6c) )
++        if ( levelling_caps & LCAP_6c )
+         {
+             uint64_t mask = cpuidmask_defaults._6c;
+ 
+@@ -378,7 +378,7 @@ void domain_cpu_policy_changed(struct domain *d)
+             d->arch.pv.cpuidmasks->_6c = mask;
+         }
+ 
+-        if ( ((levelling_caps & LCAP_7ab0) == LCAP_7ab0) )
++        if ( levelling_caps & LCAP_7ab0 )
+         {
+             uint64_t mask = cpuidmask_defaults._7ab0;
+ 
+@@ -395,7 +395,7 @@ void domain_cpu_policy_changed(struct domain *d)
+             d->arch.pv.cpuidmasks->_7ab0 = mask;
+         }
+ 
+-        if ( ((levelling_caps & LCAP_Da1) == LCAP_Da1) )
++        if ( levelling_caps & LCAP_Da1 )
+         {
+             uint64_t mask = cpuidmask_defaults.Da1;
+             uint32_t eax = p->xstate.Da1;
+@@ -406,7 +406,7 @@ void domain_cpu_policy_changed(struct domain *d)
+             d->arch.pv.cpuidmasks->Da1 = mask;
+         }
+ 
+-        if ( ((levelling_caps & LCAP_e1cd) == LCAP_e1cd) )
++        if ( levelling_caps & LCAP_e1cd )
+         {
+             uint64_t mask = cpuidmask_defaults.e1cd;
+             uint32_t ecx = p->extd.e1c;
 -- 
 2.39.5
 
