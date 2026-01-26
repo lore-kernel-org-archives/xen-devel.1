@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15F7D19514
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C10BED19502
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213828.1524264 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1213833.1524300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmg-0004I4-P6; Mon, 26 Jan 2026 17:53:54 +0000
+	id 1vkQmi-0004qw-Hq; Mon, 26 Jan 2026 17:53:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213828.1524264; Mon, 26 Jan 2026 17:53:54 +0000
+Received: by outflank-mailman (output) from mailman id 1213833.1524300; Mon, 26 Jan 2026 17:53:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmg-0004Hw-Kq; Mon, 26 Jan 2026 17:53:54 +0000
-Received: by outflank-mailman (input) for mailman id 1213828;
- Mon, 26 Jan 2026 17:53:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vkQmi-0004pK-8k; Mon, 26 Jan 2026 17:53:56 +0000
+Received: by outflank-mailman (input) for mailman id 1213833;
+ Mon, 26 Jan 2026 17:53:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQme-0004HW-Uq
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:53 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f91711f2-fadf-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 18:53:51 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-47ee76e8656so70423015e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:51 -0800 (PST)
+ id 1vkQmh-0004HX-JX
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:55 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fa3b9054-fadf-11f0-9ccf-f158ae23cfc8;
+ Mon, 26 Jan 2026 18:53:53 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4801c1ad878so53447625e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:53 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.49
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:49 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f91711f2-fadf-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: fa3b9054-fadf-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450030; x=1770054830; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450032; x=1770054832; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0xq1gxDlmDZY+78ggsqSHcLd3bC7dQoTKGaHnAMx1Ws=;
-        b=PfisyyokdKc3ZaO2tC/0omKdYFa2G0kjAUIgx1c76VumZt1OxLX/OlOJiqmIS+QFbb
-         6GuJvf3NSkaLz8kJXkY1JJOq7+qGing23xT4/8X8dKeBopp1LkqSwS/XJwctE0QcjXDj
-         gKa4I4Rge1582jpjC6VEywT6bqgxnW6zYjS2Q=
+        bh=wsIV3GSMS2OCjsSf5BdBf2D2nbqVVoqe/FAvijXoOlA=;
+        b=Dimz2o6IP30qbChwn9FSVKkJRXwqn6l5pEezSjPIhlB0rsHPYWtsKC9ZQbDfxD2RKr
+         kAlviDslBgwal05Fl+4aVoCnhQRJv6D55PVh/Rxt2cDA/flOO59Suu5fbLwHI1JpRi4O
+         21U8llMdBZrWHBRI4ROphIbJhhHRUCquR+uFo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450030; x=1770054830;
+        d=1e100.net; s=20230601; t=1769450032; x=1770054832;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=0xq1gxDlmDZY+78ggsqSHcLd3bC7dQoTKGaHnAMx1Ws=;
-        b=CDe30j+cAJ5ZhM9h/AwnmafSbCHPKDuyhW7LkF8+qSk25LMlGxwSdqxWpEK83TdNDu
-         scpC5YMXYOmLIzns550sE0VRiiqqPeq9QQuZusxqZ0ciH5kxtWDznHjAB+VTUoNYxep3
-         KCPbEaA5QJ7UaQLdT+m/l1hZkAs91MehcGE1duUjwFijknjlYGgZCqkKWHFxTitw0Fdn
-         kedq3itj7adE3NaocxfwIfhlocnmTvN76aIpqzaPSS5HA/M7BhTg+Q0cm3QzONocL86s
-         6JhmMeUT89DLqr6R6MOzOtuliGxbmTMymRYSbjV7o0rFKwnpjJTFJL3n69YREbkUGmg9
-         DAAw==
-X-Gm-Message-State: AOJu0YwtwcGsQwBf2IQyAesMrFxcKt1g+OP+M1HTJq8o5nUNZxS6Sx/m
-	My2VoFEFSGLXvkbSKr7gFbPcgBjImNL8+of170bdvKvJUXsloYWUhU2ukgsgMaaTMWtCY5vzE9o
-	ccgCF
-X-Gm-Gg: AZuq6aJoEWn49qyku+sHuOOok/XvSp+XzSvIHYWZ58Z6aXLIwQnChlYnrc6pYs6kfDM
-	2Np6sy4WT+lHGYOGNYzjIlMgQA30FEzlSTNRDI1rADQ/By13KxiP7F5inihMeydnA8daf5YKSJz
-	SB5bW+4BSr0FD7Ck448BeruZKHaUxDcvb0muL6AxQ93UOjqaRdX3oo9ztrf3HyG32pxikH2ACcf
-	uLkWd/bsigpUxTOUktkHJhsRR8GWyT+IRST/Q28ROnKJ5j5120qkhpkz1/YelvAZytX0tw7b2eV
-	EkolpHzPs9r0Y2XKjpbsWAfp1jNK6q8yGE9DxgshsZjDm5xRNU0h1wBVWUhIMmpZ0TbfG6UJCKo
-	Y3/0r1hlqWQM3ji1QOwL0ktK2cHYA5XMPZpbGC9cwPIOCjC55zq8I8sSXn4cT4yUYGGj+ehq/Z8
-	kVkNIgwb35tTLSUzSdkaPbpo/DiW3WtJyC6j5o3afy+GgxXrQdimAeTsMDakmgjQ==
-X-Received: by 2002:a05:600c:1993:b0:47e:e076:c7a2 with SMTP id 5b1f17b1804b1-4805ce4dd37mr88984935e9.15.1769450029713;
-        Mon, 26 Jan 2026 09:53:49 -0800 (PST)
+        bh=wsIV3GSMS2OCjsSf5BdBf2D2nbqVVoqe/FAvijXoOlA=;
+        b=FxsPntkiUvKBqE+/2fWKst5GJYbeItDhTEAhMJoYODmqcC6GqrcXv9DyJ5GQD34dFX
+         lUTRf1tT47c6m+5sBRhA9s9zf/QbL47DBXm3KUOSQ7IrGDccyUEGj6YxQ4x0AzRw9++u
+         V25ictWw6Xb1NV7lgDka5qhRhvz0VsUksCoduPLAh8UAz2arR1Epp+1IwdLYXETD9I12
+         3acg1vTfS5TikGgH+jBfc0BnywRUIHpu9Lvu7Ohiu7tObn+2GPWLefzoNtknsf534EGC
+         WQZoBxKe6q1FhHQGgvSaylZ75FXKLkbDqNcj+xM1WqCzAJ4d9hzUwiZR7hywEzSwmPOT
+         KGeQ==
+X-Gm-Message-State: AOJu0YwK0/QhksK3FHwy0KBX3l4FG8Avgtska0sKWNAEn7FFf4TEDejl
+	iQZ62507S1XEeWOQdgdVnYLuL3m2Z5Xlmg/JfE8idhZ/dn9uWRbhiraWwKwH6F9OMsd74S5Zx+F
+	olb5y
+X-Gm-Gg: AZuq6aKr7K04PYbwrZJ9pnbunzAad3oWhlBZvathkl/wuxsh+AWOYku3mfnutgnwJyd
+	Vp8CV59VQowAyYwdqy/HYz1uSdOwAj3Z75zG2M+u/AOpDiqIkTLZ0FvhJb5jE6oFnmD4Vbm/6qS
+	10oPhqUuDzt0vGZle7lPAtTHmjAYG9bowYfFO/dtFsUkhQs+Z+ynJneS/UKzVEXL5VPlRXHL05L
+	ELQ/kSI+EAAl3nrtI7m9SXaK8u+Dfsxdt4ExPxHSupFbZIpODh/fWtO9VWaRMkJM49TxDQf0nvn
+	Ie5Au6Afvi+VBAJ4UfssD8ZAhKyrra5UvJahPhPidjBoEQfJyCG1XFYuCtOfaqGWqYA6mYe7gXX
+	a5BYwZHS8+n5TNk3B3Inj8ZZZ1Sd0gwV1AWIcXeYz/Oh+93yYc+fboG77gggHkmk0pQEKaukkGp
+	nItEj7xfTFdy2a/O4tkNsHCr8ia4z68il065UfSElP4TDcDl0fM7JnJnSkPTW7Pw==
+X-Received: by 2002:a05:600c:b95:b0:477:58:7cf4 with SMTP id 5b1f17b1804b1-4805ce3fccamr78919025e9.4.1769450031770;
+        Mon, 26 Jan 2026 09:53:51 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 01/16] x86/cpu: Fix boot time cache flushing
-Date: Mon, 26 Jan 2026 17:53:30 +0000
-Message-Id: <20260126175345.2078371-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 04/16] x86/cpu: Fold generic_identify() into its single caller
+Date: Mon, 26 Jan 2026 17:53:33 +0000
+Message-Id: <20260126175345.2078371-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,28 +98,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-All 64-bit CPUs have CLFLUSH.  AMD introduced it in the K8, Intel in the P4
-Willamette core prior to 64-bit support, and VIA/Centaur in the Isaiah.
-Furthermore, the reported cacheline size is 64 on all CPUs to date.
+This makes the correctness of future changes more obvious.
 
-Arguably changeset 19435c10abf7 ("x86: consolidate/enhance TLB flushing
-interface", 2007) should have initialised c->x86_clflush_size earlier, but
-even at the time of changeset 3330013e6739 ("VT-d / x86: re-arrange cache
-syncing", 2022), early_cpu_init() had CLFLUSH-parsing logic but simply failed
-to record the size.
+No functional change.
 
-By removing get_cache_line_size() and assuming 16 bytes, the practical
-consequence for early IOMMU initialisation of SandyBridge era systems is to
-flush every cacheline 4 times (a pipeline stall too, as those CPUs could only
-have one flush in flight at a single time).
-
-Record c->x86_clflush_size in early_cpu_init(), and panic() if CLFLUSH isn't
-found.  Drop the redundant initialisation of c->x86_cache_alignment.
-
-Remove the fallback to 16 bytes in cache_{flush,writeback}(), opting instead
-for an ASSERT() to confirm that the logic hasn't been re-arranged too early.
-
-Fixes: 3330013e6739 ("VT-d / x86: re-arrange cache syncing")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
@@ -127,88 +109,46 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/common.c |  7 ++++---
- xen/arch/x86/flushtlb.c   | 19 +++++++------------
- 2 files changed, 11 insertions(+), 15 deletions(-)
+ xen/arch/x86/cpu/common.c | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index ebe2baf8b98a..f8c80db6eb1d 100644
+index dda0d5d39c92..89b58e6182b9 100644
 --- a/xen/arch/x86/cpu/common.c
 +++ b/xen/arch/x86/cpu/common.c
-@@ -319,8 +319,6 @@ void __init early_cpu_init(bool verbose)
- 	uint64_t val;
- 	u32 eax, ebx, ecx, edx;
+@@ -455,10 +455,13 @@ void reset_cpuinfo(struct cpuinfo_x86 *c, bool keep_basic)
+     CPU_DATA_INIT((*c));
+ }
  
--	c->x86_cache_alignment = 32;
--
- 	/* Get vendor name */
- 	cpuid(0x00000000, &c->cpuid_level, &ebx, &ecx, &edx);
- 	*(u32 *)&c->x86_vendor_id[0] = ebx;
-@@ -352,6 +350,7 @@ void __init early_cpu_init(bool verbose)
- 	if (edx & cpufeat_mask(X86_FEATURE_CLFLUSH)) {
- 		unsigned int size = ((ebx >> 8) & 0xff) * 8;
- 
-+		c->x86_clflush_size = size;
- 		c->x86_cache_alignment = size;
- 
- 		/*
-@@ -380,7 +379,9 @@ void __init early_cpu_init(bool verbose)
- 		}
- 		else
- 			setup_clear_cpu_cap(X86_FEATURE_CLZERO);
--	}
-+	} else
-+		panic("CLFLUSH information not available\n");
-+
- 	/* Leaf 0x1 capabilities filled in early for Xen. */
- 	c->x86_capability[FEATURESET_1d] = edx;
- 	c->x86_capability[FEATURESET_1c] = ecx;
-diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
-index 23721bb52c90..1f8877dcab23 100644
---- a/xen/arch/x86/flushtlb.c
-+++ b/xen/arch/x86/flushtlb.c
-@@ -234,8 +234,7 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
- 
-         if ( (!(flags & (FLUSH_TLB|FLUSH_TLB_GLOBAL)) ||
-               (flags & FLUSH_VA_VALID)) &&
--             c->x86_clflush_size && c->x86_cache_size && sz &&
--             ((sz >> 10) < c->x86_cache_size) )
-+             c->x86_cache_size && sz && ((sz >> 10) < c->x86_cache_size) )
-         {
-             if ( flags & FLUSH_CACHE_EVICT )
-                 cache_flush(va, sz);
-@@ -264,13 +263,11 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
-  */
- void cache_flush(const void *addr, unsigned int size)
+-static void generic_identify(struct cpuinfo_x86 *c)
++void identify_cpu(struct cpuinfo_x86 *c)
  {
--    /*
--     * This function may be called before current_cpu_data is established.
--     * Hence a fallback is needed to prevent the loop below becoming infinite.
--     */
--    unsigned int clflush_size = current_cpu_data.x86_clflush_size ?: 16;
-+    unsigned int clflush_size = current_cpu_data.x86_clflush_size;
-     const void *end = addr + size;
- 
-+    ASSERT(clflush_size);
+ 	uint64_t val;
+ 	u32 eax, ebx, ecx, edx, tmp;
++	int i;
 +
-     alternative("", "mfence", X86_BUG_CLFLUSH_MFENCE);
++	reset_cpuinfo(c, false);
  
-     addr -= (unsigned long)addr & (clflush_size - 1);
-@@ -301,11 +298,9 @@ void cache_writeback(const void *addr, unsigned int size)
-     if ( !boot_cpu_has(X86_FEATURE_CLWB) )
-         return cache_flush(addr, size);
+ 	/* Get vendor name */
+ 	cpuid(0, &c->cpuid_level, &ebx, &ecx, &edx);
+@@ -550,17 +553,6 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 		c->x86_capability[FEATURESET_m10Al] = val;
+ 		c->x86_capability[FEATURESET_m10Ah] = val >> 32;
+ 	}
+-}
+-
+-/*
+- * This does the hard work of actually picking apart the CPU stuff...
+- */
+-void identify_cpu(struct cpuinfo_x86 *c)
+-{
+-	int i;
+-
+-	reset_cpuinfo(c, false);
+-	generic_identify(c);
  
--    /*
--     * This function may be called before current_cpu_data is established.
--     * Hence a fallback is needed to prevent the loop below becoming infinite.
--     */
--    clflush_size = current_cpu_data.x86_clflush_size ?: 16;
-+    clflush_size = current_cpu_data.x86_clflush_size;
-+    ASSERT(clflush_size);
-+
-     addr -= (unsigned long)addr & (clflush_size - 1);
-     for ( ; addr < end; addr += clflush_size )
-         clwb(addr);
+ #ifdef NOISY_CAPS
+ 	printk(KERN_DEBUG "CPU: After vendor identify, caps:");
 -- 
 2.39.5
 
