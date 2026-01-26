@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C4D4D1950F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F23FD19511
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213840.1524370 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1213842.1524389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmo-0006hr-S4; Mon, 26 Jan 2026 17:54:02 +0000
+	id 1vkQmr-0007Dj-2m; Mon, 26 Jan 2026 17:54:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213840.1524370; Mon, 26 Jan 2026 17:54:02 +0000
+Received: by outflank-mailman (output) from mailman id 1213842.1524389; Mon, 26 Jan 2026 17:54:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmo-0006f0-Fg; Mon, 26 Jan 2026 17:54:02 +0000
-Received: by outflank-mailman (input) for mailman id 1213840;
- Mon, 26 Jan 2026 17:54:00 +0000
+	id 1vkQmq-0007BU-Lw; Mon, 26 Jan 2026 17:54:04 +0000
+Received: by outflank-mailman (input) for mailman id 1213842;
+ Mon, 26 Jan 2026 17:54:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQmm-0004HW-Jw
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:54:00 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1vkQmn-0004HW-KA
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:54:01 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fdb13772-fadf-11f0-b15f-2bf370ae4941;
- Mon, 26 Jan 2026 18:53:59 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4801d21c411so25259695e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:58 -0800 (PST)
+ id fe79a932-fadf-11f0-b15f-2bf370ae4941;
+ Mon, 26 Jan 2026 18:54:00 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-47ee937ecf2so40779595e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:54:00 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.57
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:57 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fdb13772-fadf-11f0-b15f-2bf370ae4941
+X-Inumbo-ID: fe79a932-fadf-11f0-b15f-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450038; x=1770054838; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450039; x=1770054839; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vQsr194qP7u179I9/onbBLntD3BMN8iVc8+MjUid8Kk=;
-        b=UeTu1bgLfMuHVfScFR4BoTAufg0+dynixuDGwoqQ83Ch4D9sYSg/MXDQpHhG7DxjdR
-         jIjia8oTgYzxiZSMHvgdW4XBJB9VfjcbcBeMLFfT+Oy5fCh9p0OQm+VY21KQqXsVhGeZ
-         WQAcoBoBFXjK/QnNKBBQdBH6c32p5Ezasv0gY=
+        bh=c1ONjoPKEWiY2hmWsIYX5khT8mAnFR/6SGFmL+oGZ7U=;
+        b=k6N3qPTTsWg85Hzq1f4mG5dmYFyb9igbxl6SpLLIXkiQCs9KWqjUa/C7mJdrFwTHCM
+         yCs+VTc4Mo6Ln0J7C6Vs+l6xJhFc9YSkJ+7bMYMUwaDMLplktd0SfUSGkYwrGDqRiaPQ
+         Qq1+cJhF2pzD+YQkJ1hwHoHSuNG7HIGo08U9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450038; x=1770054838;
+        d=1e100.net; s=20230601; t=1769450039; x=1770054839;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=vQsr194qP7u179I9/onbBLntD3BMN8iVc8+MjUid8Kk=;
-        b=WuykrlqS3YFXsA/bh5ee92SLQRtA5ysvzs76bA7wzaf4W7yKFJsin9QCDePiUql6uL
-         TaWulqY1+hrCoJyDT3HRnQoZ9PGRAOEaA610GUa0EZf9+Ro/dcD+BfHDf5F7oFkNEbef
-         TDJdd8/ewpSJyDTpD/sDSdcN19DapXCGrRF1x/cNF+q0+6f1ez+OtP4vaMJ+8p3YgBOI
-         gZ3zzFNyttvmdxH99+u1U2JsYkl/IzKsGwAS9vzelA3zu7zAValcjS4KEZN8HRcS8KXy
-         e1K6ZvANIFfGIq+KG6hDl2aiEZ2nN7Tg0ti3djG4UJzpng7IVsADiqiF41LzAaZrkX02
-         XKgQ==
-X-Gm-Message-State: AOJu0Yyha93gNc1u1dNXohdZByIP5DrWNHyuaCwn3V+1/YxGZOP31QrV
-	V1zwR9U8l+b27dtJXp8MRNa/XecQOhsiSqgK+4iZ/TU1BIpbEI9efpUlggOyt1FHgJzRAwAEUFl
-	uGd5/
-X-Gm-Gg: AZuq6aKSofk1fzTXpUSbTNSOm1u3Ddsk6BwztvWqd5r566YfsQnsLPuJwSKZ2XtKtyU
-	Q5AsQobgOwgAy4jPJZhGSspgMKU+grteQtLEQwuHqGwVHEGsIRw+QBODrgmqhL3oLheDj8VEe4h
-	qTh8/NY+gKebW2sHRyCkNWSniwp1Ij3bb3asylggb/zfiyk8I7cq9EkV7reVuUW869sd6bfLTNw
-	qoj0HAySBnxBn3FnW8BZjOqB71YeGTDwznevIXjhZHvQtWWqrtRKRbuv2NbRvME+vyOLAOI1DZQ
-	AAy1YIxRKRZ5JI7Y1nG/bfD2EjhrtlPZYjO5LrS33OqJYSyFAz53jG5d3YBISIQJShYqf+gZMXL
-	9DqcHU4QoKhgA9ezKRETOLnByxL2xoxEKGDzcO1jVczGIkkyiQ1FNU6WHzK40ro7U1SFSFInDx9
-	o4e4ZqBMXmhW0Kd/Z46skOtT9hE2qjNiPhvAWXkOXWrbUqS0YgvejiGPFEtIyJuq4whAnr0lTA
-X-Received: by 2002:a05:600c:528a:b0:480:4a8f:2d5c with SMTP id 5b1f17b1804b1-4805cf6c405mr81861005e9.29.1769450038094;
-        Mon, 26 Jan 2026 09:53:58 -0800 (PST)
+        bh=c1ONjoPKEWiY2hmWsIYX5khT8mAnFR/6SGFmL+oGZ7U=;
+        b=CdlBNAJL/JbURbn1qVHdAB/CL7vXbDvdJ/PBMMXIRRe7eh07NBJzZwr6r4rMri4/D+
+         VzwGlbnMLiKVjq6z+ehsZL8fxcKtcMJsCjHK1jD7XuNacGRHRset3H+xiiEhYzhSH+Jf
+         Ejxso6l60Su8/T5hkDiSIa8qf1+TvFBkKkBV5wcRgsYG8x4Omk7n09cuoYhRu/OV0fYp
+         LnMvhTVV0QimzYGa6+fTavRKLFoixTttPbDn4rrzRG6P//cHw6Y6H0b3UEWq8K4u6smc
+         21+g1GT6ScIJTB+w72D6/ArSsm8CY2Qkrf9iBlVjUgz95OY2yo5omk348Qa2euQfeDIO
+         evOA==
+X-Gm-Message-State: AOJu0YwA3tgUSuuGJWKzD/Ac2LhngBGK9NYaETSq94bEGS67FhT+1N3+
+	oMklAFEI6xQvI9zGhynmThzgcI475vZRSF/DYmKYHT1d/D4jCfOYkGBK13M84zVXL5GH2boSNlg
+	/aM8J
+X-Gm-Gg: AZuq6aIRqpuijwD0bf/qvENC9XdTyFB/ZE+Q0Ak3xo9K4GIAvOXcuXjMhLU6XHTmx4/
+	H0sRaHozAlvbo2zMB9Ba3F6SNU0jP4LZ3JPNiLm9yZW+WwmmxWXaujCcbebuUzB5L+/lsXBTdql
+	UIsg4f16JVxKlFyrhSpzXLjMBW73J4JHp/XoqBEBfFcpmn8GbnOVgsbgLNxn+P8PyH5GIDf8F6H
+	ri1zqEnTdCHshmZ1zjBfP1lSsEcA56F5EIQqbyc3gdMX8wyOgXs99QY/TACS/SDlejNbpcpp4EW
+	ZxFwOqMd3VmwH+PwEAh47enK/vwR+6oc8ClvmFCBve5AaNejE6VC0rLPAdTyTmNXmQRwsOrGEwO
+	li7jwlENQe/XoJPNwHJbEbpssP3pxI5LLcG54B+S1YOupc8R0Xr71NHTqjekurKa6V8Q7InVGn+
+	Y2J0V//OmqViNCZgGRdaF/rYzecXX2zHSf8jIcXLu3loVGtazGdK8zQhKhpz+1+T60m4W6wnPR
+X-Received: by 2002:a05:600c:5297:b0:477:a289:d854 with SMTP id 5b1f17b1804b1-4805cd2026amr94916305e9.5.1769450039455;
+        Mon, 26 Jan 2026 09:53:59 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 12/16] x86/amd: Probe for NX support and re-activate if possible
-Date: Mon, 26 Jan 2026 17:53:41 +0000
-Message-Id: <20260126175345.2078371-13-andrew.cooper3@citrix.com>
+Subject: [PATCH 14/16] x86/cpu: Drop default_init() and default_cpu
+Date: Mon, 26 Jan 2026 17:53:43 +0000
+Message-Id: <20260126175345.2078371-15-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,77 +98,47 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-An AMD Ryzen system has been found with a firmware option to disable NX.  Like
-we do on Intel systems, try to detect and undo this stupidity.
+While the comment is reasonable, clearing SEP as the only action for an
+unknown CPU is useless.  Drop the infrastructure.
 
-Link: https://xcp-ng.org/forum/post/80714
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
-
-Somewhat RFC.  I don't particularly like the double handling of
-MSR_K8_EXT_FEATURE_MASK in this function, but I can't find any way of making
-the logic legible while trying to dedup the MSR accesses.
 ---
- xen/arch/x86/cpu/amd.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ xen/arch/x86/cpu/common.c | 10 ----------
+ 1 file changed, 10 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index a14a12fb1d60..06646fc1af93 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -17,6 +17,7 @@
- #include <asm/msr.h>
- #include <asm/processor.h>
- #include <asm/spec_ctrl.h>
-+#include <asm/trampoline.h>
- 
- #include "cpu.h"
- 
-@@ -639,6 +640,40 @@ static void amd_early_adjust_cpuid_extd(void)
-             printk(XENLOG_INFO "CPU: Re-enabling disabled Topology Extensions Support\n");
-         }
-     }
-+
-+    /*
-+     * Probe for NX support if it appears to be unavailable.  All 64-bit
-+     * capable AMD CPUs support it, but some firmwares have an option to hide
-+     * it in CPUID, apparently for "feature parity" with Intel platforms.
-+     *
-+     * Unlike Intel, there's no active indication that this has been done.  A
-+     * conversation with AMD suggests that if we can set EFER.NXE, then NX
-+     * will work.  Use this as a heuristic to probe for support, coping with
-+     * the fact that a hypervisor might have really disabled and blocked NX,
-+     * and not emulate the mask MSRs either.
-+     */
-+    if ( !boot_cpu_has(X86_FEATURE_NX) )
-+    {
-+        uint64_t *this_efer = &this_cpu(efer);
-+
-+        if ( wrmsr_safe(MSR_EFER, *this_efer | EFER_NXE) == 0 )
-+        {
-+            *this_efer |= EFER_NXE;
-+
-+            if ( !rdmsr_safe(MSR_K8_EXT_FEATURE_MASK, &val) )
-+            {
-+                val |= 1ULL << cpufeat_bit(X86_FEATURE_NX);
-+                wrmsr_safe(MSR_K8_EXT_FEATURE_MASK, val);
-+                val = rdmsr(MSR_K8_EXT_FEATURE_MASK);
-+                if ( val & (1ULL << cpufeat_bit(X86_FEATURE_NX)) )
-+                {
-+                    __set_bit(X86_FEATURE_NX, c->x86_capability);
-+                    printk(XENLOG_INFO "re-enabled NX protection\n");
-+                    bootsym(trampoline_efer) |= EFER_NXE;
-+                }
-+            }
-+        }
-+    }
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 7674cca1ba93..bab2193e9ba3 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -100,15 +100,6 @@ bool __init is_forced_cpu_cap(unsigned int cap)
+ 	return test_bit(cap, forced_caps) || test_bit(cap, cleared_caps);
  }
  
- void __init cf_check early_init_amd(void)
+-static void cf_check default_init(struct cpuinfo_x86 * c)
+-{
+-	/* Not much we can do here... */
+-	__clear_bit(X86_FEATURE_SEP, c->x86_capability);
+-}
+-
+-static const struct cpu_dev __initconst_cf_clobber __used default_cpu = {
+-	.c_init	= default_init,
+-};
+ static struct cpu_dev __ro_after_init actual_cpu;
+ 
+ static DEFINE_PER_CPU(uint64_t, msr_misc_features);
+@@ -375,7 +366,6 @@ void __init early_cpu_init(bool verbose)
+ 	case X86_VENDOR_SHANGHAI: actual_cpu = shanghai_cpu_dev; break;
+ 	case X86_VENDOR_HYGON:    actual_cpu = hygon_cpu_dev;    break;
+ 	default:
+-		actual_cpu = default_cpu;
+ 		if (!verbose)
+ 			break;
+ 		printk(XENLOG_ERR
 -- 
 2.39.5
 
