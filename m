@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C10BED19502
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB71D19512
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213833.1524300 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1213839.1524367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmi-0004qw-Hq; Mon, 26 Jan 2026 17:53:56 +0000
+	id 1vkQmo-0006YT-Fr; Mon, 26 Jan 2026 17:54:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213833.1524300; Mon, 26 Jan 2026 17:53:56 +0000
+Received: by outflank-mailman (output) from mailman id 1213839.1524367; Mon, 26 Jan 2026 17:54:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmi-0004pK-8k; Mon, 26 Jan 2026 17:53:56 +0000
-Received: by outflank-mailman (input) for mailman id 1213833;
- Mon, 26 Jan 2026 17:53:55 +0000
+	id 1vkQmn-0006Wp-UD; Mon, 26 Jan 2026 17:54:01 +0000
+Received: by outflank-mailman (input) for mailman id 1213839;
+ Mon, 26 Jan 2026 17:53:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQmh-0004HX-JX
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:55 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1vkQml-0004HX-RH
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:59 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fa3b9054-fadf-11f0-9ccf-f158ae23cfc8;
- Mon, 26 Jan 2026 18:53:53 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4801c1ad878so53447625e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:53 -0800 (PST)
+ id fd21385e-fadf-11f0-9ccf-f158ae23cfc8;
+ Mon, 26 Jan 2026 18:53:58 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4801c1ad878so53448725e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:58 -0800 (PST)
 Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
  [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.50
+ 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:51 -0800 (PST)
+ Mon, 26 Jan 2026 09:53:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa3b9054-fadf-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: fd21385e-fadf-11f0-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450032; x=1770054832; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1769450037; x=1770054837; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wsIV3GSMS2OCjsSf5BdBf2D2nbqVVoqe/FAvijXoOlA=;
-        b=Dimz2o6IP30qbChwn9FSVKkJRXwqn6l5pEezSjPIhlB0rsHPYWtsKC9ZQbDfxD2RKr
-         kAlviDslBgwal05Fl+4aVoCnhQRJv6D55PVh/Rxt2cDA/flOO59Suu5fbLwHI1JpRi4O
-         21U8llMdBZrWHBRI4ROphIbJhhHRUCquR+uFo=
+        bh=DXHoMP2m1S668fp9KXBejADon30ms3RX1/2RyOl2CwM=;
+        b=WuQQ57ZEGI+gtoEiAaalhftBAy7Ivd9p3IShdzs65a0YwgV4vZwM939Fkw8IDDyDKx
+         RZB6zbkUqc94dB1hcu77FZo0gwAvGLTB/i8QHCJzT/xtI4I4Ni6KgKY2YDHCGZgzwSC2
+         EkAjB8jFEu4dBHzgAzxYwmh0/n8jvbYr685o4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450032; x=1770054832;
+        d=1e100.net; s=20230601; t=1769450037; x=1770054837;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=wsIV3GSMS2OCjsSf5BdBf2D2nbqVVoqe/FAvijXoOlA=;
-        b=FxsPntkiUvKBqE+/2fWKst5GJYbeItDhTEAhMJoYODmqcC6GqrcXv9DyJ5GQD34dFX
-         lUTRf1tT47c6m+5sBRhA9s9zf/QbL47DBXm3KUOSQ7IrGDccyUEGj6YxQ4x0AzRw9++u
-         V25ictWw6Xb1NV7lgDka5qhRhvz0VsUksCoduPLAh8UAz2arR1Epp+1IwdLYXETD9I12
-         3acg1vTfS5TikGgH+jBfc0BnywRUIHpu9Lvu7Ohiu7tObn+2GPWLefzoNtknsf534EGC
-         WQZoBxKe6q1FhHQGgvSaylZ75FXKLkbDqNcj+xM1WqCzAJ4d9hzUwiZR7hywEzSwmPOT
-         KGeQ==
-X-Gm-Message-State: AOJu0YwK0/QhksK3FHwy0KBX3l4FG8Avgtska0sKWNAEn7FFf4TEDejl
-	iQZ62507S1XEeWOQdgdVnYLuL3m2Z5Xlmg/JfE8idhZ/dn9uWRbhiraWwKwH6F9OMsd74S5Zx+F
-	olb5y
-X-Gm-Gg: AZuq6aKr7K04PYbwrZJ9pnbunzAad3oWhlBZvathkl/wuxsh+AWOYku3mfnutgnwJyd
-	Vp8CV59VQowAyYwdqy/HYz1uSdOwAj3Z75zG2M+u/AOpDiqIkTLZ0FvhJb5jE6oFnmD4Vbm/6qS
-	10oPhqUuDzt0vGZle7lPAtTHmjAYG9bowYfFO/dtFsUkhQs+Z+ynJneS/UKzVEXL5VPlRXHL05L
-	ELQ/kSI+EAAl3nrtI7m9SXaK8u+Dfsxdt4ExPxHSupFbZIpODh/fWtO9VWaRMkJM49TxDQf0nvn
-	Ie5Au6Afvi+VBAJ4UfssD8ZAhKyrra5UvJahPhPidjBoEQfJyCG1XFYuCtOfaqGWqYA6mYe7gXX
-	a5BYwZHS8+n5TNk3B3Inj8ZZZ1Sd0gwV1AWIcXeYz/Oh+93yYc+fboG77gggHkmk0pQEKaukkGp
-	nItEj7xfTFdy2a/O4tkNsHCr8ia4z68il065UfSElP4TDcDl0fM7JnJnSkPTW7Pw==
-X-Received: by 2002:a05:600c:b95:b0:477:58:7cf4 with SMTP id 5b1f17b1804b1-4805ce3fccamr78919025e9.4.1769450031770;
-        Mon, 26 Jan 2026 09:53:51 -0800 (PST)
+        bh=DXHoMP2m1S668fp9KXBejADon30ms3RX1/2RyOl2CwM=;
+        b=ZVekbiz02nGMJca2TRH2nUfX+YKVDe227yVCzdPORt4tCEgYJh/06LI9yO0HtWsGkr
+         tgLqe7nWcDBWUxM+X1b6YCzI+8Qd4b7w1cGJ5j/bwYQNzMOgwcYQkZV6DHfqWYeV52ng
+         869jsfVaB5ekASlUxutib6Lo1hh+lywKFEYkzDRPpQqPmuc0cePsY3w/TOiXUmnT8twe
+         dzwRUP9kTAZP9xdAVjaRcTSr/jwghZEAa7AUCdp1gl+NHr1pL64qRsmlhJSbl1KZcJC6
+         Om5VhtoRvbRzS4I4A/RMA/w5BcPZhs90IoAkhhZ5nQbv1TxXkKN8mCRRhabveUX8imTk
+         UsFg==
+X-Gm-Message-State: AOJu0Yy0DuIZhwfurOMA1NDSzK5bpXwrOgJdBfUSgf1BO74M2YUugnwU
+	cRyUyE9O7/8xuzUHEHAAXW+MC1DXnzWsN0xsoz2PnBdj4MD4hUk1MaO1F/gJdL7dBPr/6Z7aWjw
+	GJ+xG
+X-Gm-Gg: AZuq6aLIvFLlUER7duZOKDm5woiEijXcWUEYCeYlftby026ryEg6W+jpMo9Ux2G90+k
+	ZmT6lrRFVaXoe8rv3n6IRViq1N9NGu8QwUa1ir0z0B3KuDgMNfE5zwS2yc8WoCAfSi5k9fjK6IM
+	GRm/Aory82vL1lIGR3Mt+2lkT2A6Z9x4xP+dlQnFvzK7JfhH/GI7f1rPn2KRje587+trjkIVHjh
+	G0u0jlbkbH14jemr3z7vmjTpTzEs1bguXNnoUaMUBGajR3zUUVPo2n3YSYy5Mrh8U7FnHUghlfo
+	anOUt8n07rgjpc45CY6QsL5ptKA5TPTX73MOXoOBXoJ8BxnzD5XV3bdMEO1cVtbGyfT4vFLuHxR
+	6Kw7nPQRAzV6fd9UiZhAWHYCv0Bt2rHAZuZ1C4hyt9tc+WjJF0skZ37IMLGWtsXzq8FZ85nrQkK
+	3rrEbb1QC0CflF/h/Pn+87hZQujZ6XQcYN5pGXizX822Tv8RT4TN2pHPuHtmDi7A==
+X-Received: by 2002:a05:600c:c4a5:b0:477:9cdb:e32e with SMTP id 5b1f17b1804b1-4805ce4e578mr91498405e9.9.1769450036624;
+        Mon, 26 Jan 2026 09:53:56 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -88,9 +88,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julian Vetter <julian.vetter@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 04/16] x86/cpu: Fold generic_identify() into its single caller
-Date: Mon, 26 Jan 2026 17:53:33 +0000
-Message-Id: <20260126175345.2078371-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 10/16] x86/amd: Always probe and configure the masking MSRs
+Date: Mon, 26 Jan 2026 17:53:39 +0000
+Message-Id: <20260126175345.2078371-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
 References: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
@@ -98,9 +98,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This makes the correctness of future changes more obvious.
+This allows the infrastructure to reused for system-wide quirk/errata
+adjustments.
 
-No functional change.
+Replace the call to ctxt_switch_levelling() with amd_ctxt_switch_masking()
+instead.  The CPUID Faulting aspect is not interesting at this point in boot,
+and we want to explicitly propagate the masking MSR defaults into APs.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -109,46 +112,85 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Julian Vetter <julian.vetter@vates.tech>
 CC: Teddy Astie <teddy.astie@vates.tech>
 ---
- xen/arch/x86/cpu/common.c | 16 ++++------------
- 1 file changed, 4 insertions(+), 12 deletions(-)
+ xen/arch/x86/cpu/amd.c   | 15 +++++++++++----
+ xen/arch/x86/cpu/cpu.h   |  1 +
+ xen/arch/x86/cpu/hygon.c |  2 +-
+ 3 files changed, 13 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index dda0d5d39c92..89b58e6182b9 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -455,10 +455,13 @@ void reset_cpuinfo(struct cpuinfo_x86 *c, bool keep_basic)
-     CPU_DATA_INIT((*c));
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index 36fea2e0a299..e8daf7415bb0 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -162,7 +162,7 @@ static void __init noinline probe_masking_msrs(void)
+  * parameter of NULL is used to context switch to the default host state (by
+  * the cpu bringup-code, crash path, etc).
+  */
+-static void cf_check amd_ctxt_switch_masking(const struct vcpu *next)
++void cf_check amd_ctxt_switch_masking(const struct vcpu *next)
+ {
+ 	struct cpuidmasks *these_masks = &this_cpu(cpuidmasks);
+ 	const struct domain *nextd = next ? next->domain : NULL;
+@@ -242,9 +242,12 @@ static void __init amd_init_levelling(void)
+ 	    boot_cpu_has(X86_FEATURE_CPUID_USER_DIS)) {
+ 		expected_levelling_cap |= LCAP_faulting;
+ 		levelling_caps |= LCAP_faulting;
+-		return;
+ 	}
+ 
++	/*
++	 * Always probe for the MSRs too.  We reuse the infrastruture for
++	 * quirks/errata/etc during boot.
++	 */
+ 	probe_masking_msrs();
+ 
+ 	if ((levelling_caps & LCAP_1cd) == LCAP_1cd) {
+@@ -299,7 +302,7 @@ static void __init amd_init_levelling(void)
+ 		       (uint32_t)cpuidmask_defaults._6c);
+ 	}
+ 
+-	if (levelling_caps)
++	if (levelling_caps && !(levelling_caps & LCAP_faulting))
+ 		ctxt_switch_masking = amd_ctxt_switch_masking;
  }
  
--static void generic_identify(struct cpuinfo_x86 *c)
-+void identify_cpu(struct cpuinfo_x86 *c)
+@@ -1015,7 +1018,11 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
+ 	u32 l, h;
+ 	uint64_t value;
+ 
+-	ctxt_switch_levelling(NULL);
++	/*
++	 * Reuse amd_ctxt_switch_masking() explicitly.  This propagates
++	 * quirk/errata adjustments made duing early_init_amd() into the APs.
++	 */
++	amd_ctxt_switch_masking(NULL);
+ 
+ 	amd_init_de_cfg(c);
+ 
+diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
+index d2d37d1d5eec..cd93e51755af 100644
+--- a/xen/arch/x86/cpu/cpu.h
++++ b/xen/arch/x86/cpu/cpu.h
+@@ -20,6 +20,7 @@ extern void detect_ht(struct cpuinfo_x86 *c);
+ extern bool detect_extended_topology(struct cpuinfo_x86 *c);
+ 
+ void cf_check early_init_amd(void);
++void cf_check amd_ctxt_switch_masking(const struct vcpu *next);
+ void amd_log_freq(const struct cpuinfo_x86 *c);
+ void amd_init_de_cfg(const struct cpuinfo_x86 *c);
+ void amd_init_lfence_dispatch(void);
+diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
+index bb1624882499..3a04efef5028 100644
+--- a/xen/arch/x86/cpu/hygon.c
++++ b/xen/arch/x86/cpu/hygon.c
+@@ -32,7 +32,7 @@ static void cf_check init_hygon(struct cpuinfo_x86 *c)
  {
- 	uint64_t val;
- 	u32 eax, ebx, ecx, edx, tmp;
-+	int i;
-+
-+	reset_cpuinfo(c, false);
+ 	unsigned long long value;
  
- 	/* Get vendor name */
- 	cpuid(0, &c->cpuid_level, &ebx, &ecx, &edx);
-@@ -550,17 +553,6 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 		c->x86_capability[FEATURESET_m10Al] = val;
- 		c->x86_capability[FEATURESET_m10Ah] = val >> 32;
- 	}
--}
--
--/*
-- * This does the hard work of actually picking apart the CPU stuff...
-- */
--void identify_cpu(struct cpuinfo_x86 *c)
--{
--	int i;
--
--	reset_cpuinfo(c, false);
--	generic_identify(c);
+-	ctxt_switch_levelling(NULL);
++	amd_ctxt_switch_masking(NULL);
  
- #ifdef NOISY_CAPS
- 	printk(KERN_DEBUG "CPU: After vendor identify, caps:");
+ 	amd_init_de_cfg(c);
+ 
 -- 
 2.39.5
 
