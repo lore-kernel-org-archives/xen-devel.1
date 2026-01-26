@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62F37D19514
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 17:54:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1213829.1524269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF64D19510
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jan 2026 19:31:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1214005.1524433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmg-0004KO-Uu; Mon, 26 Jan 2026 17:53:54 +0000
+	id 1vkSIx-00016e-TO; Mon, 26 Jan 2026 19:31:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1213829.1524269; Mon, 26 Jan 2026 17:53:54 +0000
+Received: by outflank-mailman (output) from mailman id 1214005.1524433; Mon, 26 Jan 2026 19:31:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vkQmg-0004JZ-Rf; Mon, 26 Jan 2026 17:53:54 +0000
-Received: by outflank-mailman (input) for mailman id 1213829;
- Mon, 26 Jan 2026 17:53:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0tkY=77=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vkQme-0004HX-VD
- for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 17:53:53 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f85dbad8-fadf-11f0-9ccf-f158ae23cfc8;
- Mon, 26 Jan 2026 18:53:50 +0100 (CET)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-47ee07570deso36981765e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jan 2026 09:53:50 -0800 (PST)
-Received: from localhost.localdomain (host-92-26-102-188.as13285.net.
- [92.26.102.188]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48066c10dbasm3896455e9.15.2026.01.26.09.53.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jan 2026 09:53:48 -0800 (PST)
+	id 1vkSIx-00016X-Qo; Mon, 26 Jan 2026 19:31:19 +0000
+Received: by outflank-mailman (input) for mailman id 1214005;
+ Mon, 26 Jan 2026 19:31:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ejK3=77=zytor.com=hpa@srs-se1.protection.inumbo.net>)
+ id 1vkSIv-00016R-Na
+ for xen-devel@lists.xenproject.org; Mon, 26 Jan 2026 19:31:17 +0000
+Received: from mail.zytor.com (terminus.zytor.com [2607:7c80:54:3::136])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 93b1ae3f-faed-11f0-b15f-2bf370ae4941;
+ Mon, 26 Jan 2026 20:31:15 +0100 (CET)
+Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net
+ [76.133.66.138]) (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 60QJUX0M3230378
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Mon, 26 Jan 2026 11:30:34 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,117 +43,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f85dbad8-fadf-11f0-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1769450029; x=1770054829; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=J8VDeI6bdSJ/iIx6zRivtSWpVfW+Hibh8P9MaDiN7nc=;
-        b=Vso1FJiWysmX9CNsr/3mH5PkZ6ouqE4ttITR90AruxQEsmSMfEuVbIMXhcKvhrex0P
-         m9LmMGQ1s2LzxOml885zXwFEVzz03MFZ0ALI97FBftEOIU6uYIkCP5WktA/x/n1TM1j5
-         ynVPg3QnZ8sVcU6wlEuAKL5Tlg4txOiKmhYbA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769450029; x=1770054829;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=J8VDeI6bdSJ/iIx6zRivtSWpVfW+Hibh8P9MaDiN7nc=;
-        b=htKnKH14cTpbwLBvrou7RBEHe9G4tDdFVcTe1MlzbuvEmN1LEQ9q1KPPXkKe90EPSg
-         3iS5Fhbk8XqZ9VjlLS6we4Z2rENebVIWNGRv4idtOLVYKATXbt6pOJG/y+s9TC6f/D+F
-         DUacryNoFXZ+ib2Ox/GZV+awgLUPqVrTDlMKqA4dckdNyd9QMw99GVCr6Nw0A/4q1+Ww
-         uRPINZ+PzV9/9dfyZ2pcQlK1jPjGDa+u6qBuzC+jZQ68IMDwttu3uHdF5HPANl6qC0pU
-         Rfv89dMQf9yx3ZOFpUNnCksk1r7McBo6TVzkmUz5rNZnbWJJUtKT5Syau9ibrQS4YOoZ
-         GWHw==
-X-Gm-Message-State: AOJu0YynBsMizj5a/1OB5dXJH78Y88mA0M+FpBVY17ZeKgxKlfE8IWYZ
-	pNkCCasx1ITv0yvJ6K5ykL5K1hfusYbeu12QP9VGcb8bpRsMKTdbCmS3c0Y0L1X2pwcHVDAa/Jj
-	WtMOK
-X-Gm-Gg: AZuq6aJTDun3tVt+89HQ3KQDFbMMEZ944HmX0v4miY8gHWM3VuHy3BozPsd2fF1HO0W
-	LBw0Zx599F2NYm4afSgFO5MqhnrDx3KRFAX0PeONUSWyK3LmKtiVyof8AHqwVfiopi0W7Wrlu8z
-	+ad9zHk63T6KSfz/O7LQnMIKPKWAeH8wJ1d4b0UpxtnSmDrFIE5ETKYM9cbUvrTIkY97daj2L0c
-	pw9e4hWbfFFt8MeNZnk0C0oqfOkWsbHV/PXxBNbjAKPOBbF+kMi7K5jxpDNrELir0icmINFL2/0
-	0Is7/XtPq3uhk3QPXpi75p98aVIKq9ZQvkXrPHYXEicdEoth967KyYoIsEvbeeJ/l3wQu9OdkiY
-	IqZrrLb6sSG/GsXGJp7RMWfZWITq4b4qa94SvXJQ68gvo9gmGJpGOqtyhLhiZDopdtyJ9QG/vrD
-	e/VbkK96FSfTPwBq4yIEozjkZf/Yk1HSWo2wM+O6MnqEZ+3vKuDw7K5525ZuvxzA==
-X-Received: by 2002:a05:600c:468f:b0:477:9b35:3e49 with SMTP id 5b1f17b1804b1-4805cd407d7mr83464515e9.3.1769450029219;
-        Mon, 26 Jan 2026 09:53:49 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julian Vetter <julian.vetter@vates.tech>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 00/16] x86/cpu: Cleanup for NX adjustments
-Date: Mon, 26 Jan 2026 17:53:29 +0000
-Message-Id: <20260126175345.2078371-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: 93b1ae3f-faed-11f0-b15f-2bf370ae4941
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 60QJUX0M3230378
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026012301; t=1769455836;
+	bh=F8FFTbCNA0IjhSYw8p1wkH57XCUpK2L9SYc1+fWEBrQ=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=YqYTbZVJKC/Aw/m2Br3dv5p78b8CchhKHUqaJmxvV9P1lEj6jc6Qw3uSR8WFDmhSl
+	 gL98Fl8W2D/XHGdNGF5RyFUOtIdjWU5SAwNTbmi+JzElQeIb6xEayZNU6xYYoxFNbu
+	 WaGILQBpkwzRKeveYmOiEB3aBLnZQ2KvKijhAWTZIS+L9PnqmUm5eZrcce50ik3rp8
+	 FbnKe9k3RY3h55u6l3zwOB+S6Ql3WYZeJEV4E9XYFTGlafTCPnFA8xJIPDnmE5bgB3
+	 fM1OI2FeLoO9sVAtoi4qvcU5WLb/fRDW3qpJRKFGMWOsoTsvgRYmO8DUEltOB5Cag8
+	 uMMTU4u5/7+SA==
+Date: Mon, 26 Jan 2026 11:30:28 -0800
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: Hou Wenlong <houwenlong.hwl@antgroup.com>, linux-kernel@vger.kernel.org
+CC: Lai Jiangshan <jiangshan.ljs@antgroup.com>,
+        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Juergen Gross <jgross@suse.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        =?ISO-8859-1?Q?Thomas_Wei=DFschuh?= <linux@weissschuh.net>,
+        Brian Gerst <brgerst@gmail.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexander Graf <graf@amazon.com>,
+        Joel Granados <joel.granados@kernel.org>,
+        Thomas Huth <thuth@redhat.com>, Uros Bizjak <ubizjak@gmail.com>,
+        Kiryl Shutsemau <kas@kernel.org>,
+        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+        Guenter Roeck <linux@roeck-us.net>, "Xin Li (Intel)" <xin@zytor.com>,
+        =?ISO-8859-1?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        xen-devel@lists.xenproject.org
+Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH_0/5=5D_x86/boot=3A_Allow_to_perfor?=
+ =?US-ASCII?Q?m_randomization_for_uncompressed_kernel_image?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <cover.1769434279.git.houwenlong.hwl@antgroup.com>
+References: <cover.1769434279.git.houwenlong.hwl@antgroup.com>
+Message-ID: <7716B334-004D-4CBB-9237-E8AE5CE696CE@zytor.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-I was hoping this to be a patch or two, but it got out of hand...
+On January 26, 2026 5:33:50 AM PST, Hou Wenlong <houwenlong=2Ehwl@antgroup=
+=2Ecom> wrote:
+>Hi all,
+>
+>This RFC patch series introduces relocatable uncompressed kernel image,
+>which is allowed to perform kerenl image virtual address randomization
+>in 64-bit booting entry instead of decompression phase=2E
+>
+>- Background
+>
+>Currently, kernel image virtual address randomization is only performed
+>during the decompression phase=2E However, in certain scenarios, such as
+>secure container environments (e=2Eg=2E, Kata Containers), to speed up th=
+e
+>boot process, the system may boot directly from an uncompressed kernel
+>image=2E In such cases, virtual address randomization cannot be executed=
+=2E
+>Although the security enhancement provided by KASLR is limited, there is
+>still a potential demand to allow uncompressed kernel images to perform
+>virtual address randomization (for example, future support for x86 PIE)=
+=2E
+>
+>- Approaches
+>
+>Currently, the x86 kernel uses static compilation, but it retains
+>relocation information through the '--emit-relocs' option, which is then
+>simplified into a relocation table using 'relocs' tool=2E To enable
+>virtual address randomization for uncompressed kernel images, relocation
+>information is required, and there are several possible approaches:
+>
+>1) Who will perform the randomization:
+>
+>VMM: The VMM reads vmlinux=2Erelocs after loading vmlinux to perform
+>randomization=2E This would require additional modifications to the VMM,
+>and vmlinux=2Erelocs needs to be packaged when shipping=2E
+>
+>Kernel: The kernel performs randomization itself at the kernel
+>entry point, requiring no modifications to the VMM=2E
+>
+>2) relocation information format:
+>
+>vmlinux=2Erelocs: It only contains the necessary relocation entries and i=
+s
+>simplified, making it small enough=2E However, it is a format defined
+>within the kernel that was previously used only internally and is not
+>part of the ABI=2E
+>
+>rela=2E* sections: It is the standard ELF ABI, but
+>it contains RIP-relative relocation entries, which are more common in
+>kernel, causing the kernel image to be larger=2E
+>
+>- Implementation
+>
+>The final implementation of this plan extends the 'relocs' tool to allow
+>the insertion of relocation information into a reserved section of the
+>kernel (referencing the MIPS implementation)=2E This enables the reading
+>of that information and subsequent execution of relocations when booting
+>directly from an uncompressed kernel=2E Currently, this implementation is
+>only available for 64-bit and has been tested with both PVH entry
+>booting and standard 64-bit Linux entry=2E And the default reserve size i=
+s
+>1MB for now, which is enough for defconfig=2E
+>
+>- TODO
+>
+>Clean up the decompression KASLR code to allow it to be shared with the
+>booting phase=2E
+>
+>
+>Thanks!
+>
+>Hou Wenlong (5):
+>  x86/relocs: Cleanup cmdline options
+>  x86/relocs: Insert relocations into input file
+>  x86: Allow to build relocatable uncompressed kernel binary
+>  x86/boot: Perform virtual address relocation in kernel entry
+>  x86/boot: Use '=2Edata=2Erelocs' section for performing relocations dur=
+ing
+>    decompression
+>
+> arch/x86/Kconfig                  |  20 ++++++
+> arch/x86/Makefile=2Epostlink        |  33 +++++++++
+> arch/x86/boot/compressed/Makefile |   6 +-
+> arch/x86/boot/compressed/misc=2Ec   |   8 +++
+> arch/x86/boot/startup/Makefile    |   1 +
+> arch/x86/boot/startup/kaslr=2Ec     | 116 ++++++++++++++++++++++++++++++
+> arch/x86/include/asm/setup=2Eh      |   1 +
+> arch/x86/kernel/head_64=2ES         |   7 ++
+> arch/x86/kernel/vmlinux=2Elds=2ES     |  20 ++++++
+> arch/x86/lib/cmdline=2Ec            |   6 ++
+> arch/x86/lib/kaslr=2Ec              |   5 ++
+> arch/x86/platform/pvh/head=2ES      |  15 +++-
+> arch/x86/tools/relocs=2Ec           |  64 ++++++++++++++---
+> arch/x86/tools/relocs=2Eh           |  15 ++--
+> arch/x86/tools/relocs_common=2Ec    |  24 ++++---
+> 15 files changed, 309 insertions(+), 32 deletions(-)
+> create mode 100644 arch/x86/Makefile=2Epostlink
+> create mode 100644 arch/x86/boot/startup/kaslr=2Ec
+>
+>--
+>2=2E31=2E1
+>
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2287078891
-https://gitlab.com/xen-project/hardware/xen-staging/-/commits/andrew/nx
+Hi!
 
-The branch has one extra patch to fake up the firmware settings being set to
-Gitlab CI, not included in this series.
+At a very quick glance this seems like a very reasonable thing to me, but =
+since the intent is reduced boot latency (a very worthwhile goal!) do you p=
+erhaps have any measurements to show how much improvement we are talking ab=
+out? That would be really useful=2E=20
 
-Julien: This ought to suitable to rebase your cleanup on to.  In the end, I
-did the AMD adjustment mostly because I needed it to test the correctness of
-the prior cleanup.
-
-The final 4 patches are tangential cleanup which I've kept out of the prior
-work in case we wish to backport it.  Everything prior is relevant to
-untangling, and mostly for the benefit of the AMD side.
-
-The early patches are hopefully non-controvertial.  Later patches are a little
-more RFC, and in need of further testing.
-
-Andrew Cooper (16):
-  x86/cpu: Fix boot time cache flushing
-  x86/cpu: Drop cpuid_level adjustment from generic_identify()
-  x86/intel: Drop the paddr_bits workaround for P4 Nocona/Prescott CPUs
-  x86/cpu: Fold generic_identify() into its single caller
-  x86/cpu: Move per-CPU actions out of the vendor early_init() hook
-  x86/cpu: Rework the vendor early_init() hooks to be __init
-  x86/cpu: Call the vendor early_init() hook in early_cpu_init()
-  xen/sysctl: Drop XEN_SYSCTL_get_cpu_levelling_caps
-  x86/intel: Always check MSR_MISC_ENABLE on all CPUs
-  x86/amd: Always probe and configure the masking MSRs
-  x86/amd: Fix re-activation of TopoExt on Fam15h CPUs
-  x86/amd: Probe for NX support and re-activate if possible
-  x86/cpu: Drop NOISY_CAPS
-  x86/cpu: Drop default_init() and default_cpu
-  x86/cpu: Clean up use of LCAP_* constants
-  x86/cpuid: Drop the include of public/sysctl.h
-
- CHANGELOG.md                          |   2 +
- tools/flask/policy/modules/dom0.te    |   1 -
- tools/include/xenguest.h              |   1 -
- tools/libs/guest/xg_cpuid_x86.c       |  14 ---
- xen/arch/x86/boot/head.S              |   1 -
- xen/arch/x86/boot/trampoline.S        |  29 +++---
- xen/arch/x86/boot/wakeup.S            |  27 +++---
- xen/arch/x86/cpu/amd.c                | 107 ++++++++++++++------
- xen/arch/x86/cpu/common.c             | 135 +++++++++++++-------------
- xen/arch/x86/cpu/cpu.h                |   7 +-
- xen/arch/x86/cpu/hygon.c              |   2 +
- xen/arch/x86/cpu/intel.c              |  74 ++++----------
- xen/arch/x86/domain.c                 |  10 +-
- xen/arch/x86/flushtlb.c               |  19 ++--
- xen/arch/x86/include/asm/cpuid.h      |  17 ++--
- xen/arch/x86/include/asm/hvm/hvm.h    |   2 +
- xen/arch/x86/include/asm/hvm/vlapic.h |   2 +
- xen/arch/x86/include/asm/hvm/vpt.h    |   2 +
- xen/arch/x86/include/asm/trampoline.h |   7 +-
- xen/arch/x86/sysctl.c                 |   6 --
- xen/include/public/sysctl.h           |  22 +----
- xen/xsm/flask/hooks.c                 |   4 -
- xen/xsm/flask/policy/access_vectors   |   2 -
- 23 files changed, 238 insertions(+), 255 deletions(-)
-
--- 
-2.39.5
-
+Thanks!=20
 
