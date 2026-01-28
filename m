@@ -4,32 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 894C4D46C0A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Jan 2026 21:57:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1215994.1526004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A6CD46C0A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Jan 2026 22:07:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1216004.1526014 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlDXC-0000EQ-EV; Wed, 28 Jan 2026 21:57:10 +0000
+	id 1vlDgu-0001uF-BD; Wed, 28 Jan 2026 22:07:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1215994.1526004; Wed, 28 Jan 2026 21:57:10 +0000
+Received: by outflank-mailman (output) from mailman id 1216004.1526014; Wed, 28 Jan 2026 22:07:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlDXC-0000EA-Bx; Wed, 28 Jan 2026 21:57:10 +0000
-Received: by outflank-mailman (input) for mailman id 1215994;
- Wed, 28 Jan 2026 21:57:09 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1vlDXB-0000E4-RR
- for xen-devel@lists.xenproject.org; Wed, 28 Jan 2026 21:57:09 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vlDXA-0084oG-2J;
- Wed, 28 Jan 2026 21:57:08 +0000
-Received: from [2a02:8012:3a1:0:2517:2769:8ea2:3b28]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vlDXA-006Sga-07;
- Wed, 28 Jan 2026 21:57:08 +0000
+	id 1vlDgu-0001u8-8A; Wed, 28 Jan 2026 22:07:12 +0000
+Received: by outflank-mailman (input) for mailman id 1216004;
+ Wed, 28 Jan 2026 22:07:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=748o=AB=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1vlDgt-0001tx-0E
+ for xen-devel@lists.xenproject.org; Wed, 28 Jan 2026 22:07:11 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id afd85fd1-fc95-11f0-9ccf-f158ae23cfc8;
+ Wed, 28 Jan 2026 23:07:08 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 5A0126001A;
+ Wed, 28 Jan 2026 22:07:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5D1FC4CEF1;
+ Wed, 28 Jan 2026 22:07:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,53 +43,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=mI461cVXawa2nwdZipyyAU3NwrqZhkFsQBf35LG8M+I=; b=UeScH7pUfQ2t34Rwd5Df3iHL2s
-	7ovNmwELMir1InQVLZktZQ8YjobErF4ZRdGV/h0B4RQOh1lqSOIOehp+tdVMbpEUESfcWT3SnmfoU
-	j6JtPfNCdMlmxH4YYw2Himh38AlPUQ4peRtOju334T+tzIEdFCgo19lEgF0eSz5Oj9UI=;
-Message-ID: <9740163b-5f0f-45b6-8d2f-df4b4756e272@xen.org>
-Date: Wed, 28 Jan 2026 21:57:06 +0000
+X-Inumbo-ID: afd85fd1-fc95-11f0-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1769638027;
+	bh=YGsOYJdydoUe71PjMAXiotEPugEwkr/DpoU7elN+plU=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=hbcQhHWkaE5ktDti0LKw95eZw2U27IW/uTrOOKKw3l5PqCw1p0Z8pUmdEZznwaejp
+	 dTubQraYUQKqZe28xyBKGTZY3YUIlTnY3wAsTXa0/PsXV6HokwtPmE4KR9Tr1kQ+9W
+	 gNe2wOKu8wtB6uvq0Ua9+L1OqNd2EPaLDFsxddl2GR3Au3NPuwO135hQBOWNJWkVbj
+	 intaCQ1g8AU+F5sNSmv6VFFJLR/Hq47KWGYjPQz3Gk1Pdd7AfOpqHpQDB2N+C+omHh
+	 C9UU6DO4xt1BWqLaY8oqoB0WYuS8fsMZqr57qQe5PMIHWsnEc4sBVtxltof3Cr0stX
+	 jYaCaDMhIOFQg==
+Date: Wed, 28 Jan 2026 14:07:04 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org
+Subject: Re: [RFC PATCH] CODING_STYLE: Establish a policy with regards to
+ copyright notices
+In-Reply-To: <DG06TMTPTXUR.79SR3GGH8OHW@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2601281356460.7192@ubuntu-linux-20-04-desktop>
+References: <20260127182403.141459-1-alejandro.garciavallejo@amd.com> <b42af5a5-6237-47d2-9b74-0154ef8c2020@suse.com> <DG03S6HP7OIO.18ACUNFC24X1Y@amd.com> <ace6c97f-aeeb-40c9-9c0b-d6ad45fe09d6@suse.com> <DG06TMTPTXUR.79SR3GGH8OHW@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Kconfig: Fix XEN_START_ADDRESS input prompt
-Content-Language: en-GB
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Jan Beulich <jbeulich@suse.com>
-References: <20260127131923.123294-1-michal.orzel@amd.com>
- <FAFAA9D7-DD69-4C6E-BEE3-424B8F9008F4@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <FAFAA9D7-DD69-4C6E-BEE3-424B8F9008F4@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
 
-Hi,
-
-On 27/01/2026 14:00, Bertrand Marquis wrote:
+On Wed, 28 Jan 2026, Alejandro Vallejo wrote:
+> On Wed Jan 28, 2026 at 11:45 AM CET, Jan Beulich wrote:
+> > On 28.01.2026 10:09, Alejandro Vallejo wrote:
+> >> The refinement also applies to the second bullet point, so I can add it as a
+> >> separate paragraph stating existing notices are to never be modified and only
+> >> removed with the express consent of the current holder(s).
+> >
+> > That's interesting, as it may be getting increasingly difficult in practice.
+> > Often you can't get hold of the holder(s), to the degree that - as we're all
+> > growing older - at some point they may not be there at all anymore. Yet if
+> > not having such notices is going to be a goal of the project, retaining some
+> > indefinitely can't be the intention either.
 > 
+> Sorry, I missed this part. Many things are unavoidable non-intentions, I'm
+> afraid. A file might have a notice indefinitely, but that doesn't mean the project
+> _must_ keep that file indefinitely.
 > 
->> On 27 Jan 2026, at 14:19, Michal Orzel <michal.orzel@amd.com> wrote:
->>
->> Remove the part about platform defined address which is not true. The
->> help text is correct i.e. 0xFFFFFFFF is used as default value to indicate
->> that user has not customized this address.
->>
->> Amends: d736b6eb451b ("xen/arm: mpu: Define Xen start address for MPU systems")
->> Reported-by: Jan Beulich <jbeulich@suse.com>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+> I'd definitely prefer to drop them all. Alas, I don't feel confident enough you
+> (nor anyone) can legally commit such changes without the holders' approval.
+> Unless we were to base the rationale on "the notice is already in git history"
+> or some such. At that point it becomes mandatory to ship the full git tree as
+> part of a release, which is incompatible with tarball releases. This might
+> affect downstreams more than upstream, but it's a consideration nonetheless.
 > 
-> Acked-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> It is true that having some already in, with new ones severely restricted
+> creates asymmetry with prior contributions, but I argue this asymmetry already
+> exists with banners present for some original contributors, when folks (e.g:
+> you) have been heavily modifying those files for well over 10y and not added
+> their name. And if everyone were to add their name we'd have to scroll hundreds
+> of lines on each file before seeing the first #include.
 
-I have queued the patch for staging.
+From an engineering perspective I understand the intention of this
+patch and I myself suggested something similar a while back.
 
-Cheers,
+However, I later found out that legal systems differ across countries,
+and copyright law does not function in exactly the same way in the
+US, UK and the EU. For example, it is not a good idea to remove
+copyright notices or discourage their use because they carry legal
+significance in certain jurisdictions, particularly in Europe. Given
+this, I think we should leave things as they are.
 
--- 
-Julien Grall
 
+Let me clarify what I mean by "copyright notice". For instance, the
+following:
+
+ * Copyright (C) 2000 - 2007, R. Byron Moore
+ * All rights reserved.
+
+On the other hand, the boilerplate such as:
+
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+
+etc. etc. can be removed and replaced with the SPDX tag. There is no
+controversy there. The SPDX tag refers to the licenses under LICENSES
+which contain exactly the same text.
 
