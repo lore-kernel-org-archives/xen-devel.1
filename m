@@ -4,38 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C1CD61018
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jan 2026 14:27:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1216636.1526578 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40662D6101C
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jan 2026 14:27:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1216637.1526589 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlSzl-0005zt-B7; Thu, 29 Jan 2026 14:27:41 +0000
+	id 1vlSzt-0006H5-Kh; Thu, 29 Jan 2026 14:27:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1216636.1526578; Thu, 29 Jan 2026 14:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 1216637.1526589; Thu, 29 Jan 2026 14:27:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlSzl-0005zm-8e; Thu, 29 Jan 2026 14:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 1216636;
- Thu, 29 Jan 2026 14:27:40 +0000
+	id 1vlSzt-0006Gy-GW; Thu, 29 Jan 2026 14:27:49 +0000
+Received: by outflank-mailman (input) for mailman id 1216637;
+ Thu, 29 Jan 2026 14:27:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=g1vo=AC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vlSq9-0000f7-KD
- for xen-devel@lists.xenproject.org; Thu, 29 Jan 2026 14:17:45 +0000
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
- [2a00:1450:4864:20::543])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 46a934fd-fd1d-11f0-9ccf-f158ae23cfc8;
- Thu, 29 Jan 2026 15:17:43 +0100 (CET)
-Received: by mail-ed1-x543.google.com with SMTP id
- 4fb4d7f45d1cf-658cc45847cso1367317a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 29 Jan 2026 06:17:43 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8dbf1c5b23sm261841866b.57.2026.01.29.06.17.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Jan 2026 06:17:42 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ICVe=AC=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1vlSzs-0005x4-0V
+ for xen-devel@lists.xenproject.org; Thu, 29 Jan 2026 14:27:48 +0000
+Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
+ [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id acfd4d5f-fd1e-11f0-9ccf-f158ae23cfc8;
+ Thu, 29 Jan 2026 15:27:45 +0100 (CET)
+Received: by mx.zohomail.com with SMTPS id 1769696848567136.48743967324322;
+ Thu, 29 Jan 2026 06:27:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,146 +40,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46a934fd-fd1d-11f0-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1769696262; x=1770301062; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=RN73keMBdn5sF5YAcK29ak1jpV6CD23sxnl8yLJ4dIQ=;
-        b=B8ZirNpHWiW5QoOzJhoygVkHSiV1mlfo0a6glZNPX44bJFeauDIVBTEK0zG+StB+jy
-         IcDUGAa2nJMP9oF9qmCLCSDSMb233g6+IK8wVpV94usU7RAZkPeV2s95AFuyTQ/b31T0
-         1r/UdOnk0FtH1/5jSLfQXJTHWnE+jOeXl5Vr/BNlTbnBAw3KW5Dxu+UqoyfMXaWT4MuQ
-         DqXs+ReHSvX1nDJI1pcCttBzCx+hqNILMb64x8iXJ+ID0stWqAeGYyFdk5X6OrgAgtBc
-         1+2H12HqltSf7XtBU2/a0J3CAZcolP1RPVOifakBIlIDeq9ub9W4hs0bWDLHoM6AIRaa
-         kS/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769696262; x=1770301062;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RN73keMBdn5sF5YAcK29ak1jpV6CD23sxnl8yLJ4dIQ=;
-        b=HZ1PM8yzZTGWhaVanUH21OI90TDNtfx6RkgzbOToUtF8z0Dm0ZrQdlScEY6ie9kCb0
-         EyRS52dzBPDv/3QU82JOmctAiQl05WToXrbF9mbUZR8zPPJsY5Br/DvfjUfBWHXeEUe+
-         tKQNCCO0y2NkMRTTG/mi+NBwM9Ak1X3bS5kbKydts2q0lkxv8u+0FLaG4dHxgtzs8gik
-         2kSPXaiTNUEgeVULpTFbo+8/Qz0VBjoWZ4YyNC5hwl6/0lJ7QiW1WIm5Inh86hfgqkYC
-         wQOiFUItz4Bofahevj7L6HZIK6UgzyclLWKIncGiz2k0JZYToiK7xdp365h961gu1YSW
-         Fmow==
-X-Gm-Message-State: AOJu0YwbUMMobRAhRoQDXLCWQLsPgA5HrfpkohRH0Zv/1TwbMDBgTz0t
-	vc+OUE8D1pBQZMUN8BlhiSQiSyPYEL1sYjcATHSALDSyIABAOyKIAZsq5xSd0Ax0xw==
-X-Gm-Gg: AZuq6aI39nVmD5IjydhQxyGwkxLk8SOI+dIzLjmVRy2QjLr39CxTEN6puQm+c7mGp5h
-	R1oIp2aJslvBY4Dfkt+S7N1oKVVNJ8trVeZEtrNG/UzZrbFl3tiVhLmZjBlGn9A5MU73URU8ELP
-	u3FchxZZPrqrpJgNkI9Isvy1Wn14HOHcWETWVIAV6SjiZBxkygBm4APq6H0qqmyPo2dyqPMEC2v
-	s73GZb5xVY6BFCXuKuokrbuCZ44BLwxKs8q1J16AaFX6qA3K3XGesp9V6DrrK6eJG//ADlAOlgJ
-	uuyJf6org9qeHZAHcvW2EvWS+q7c1QXWFhWHN8s39Ez/FiE4PyNhO+rZLCwqIHgDmAYsVWZuV/w
-	GFMQLd3xKq95vafbxgGoacdBcyd712hkLjqeXBcDcTCXD6QuP39c81RTcim78b7wkES4VejxSZM
-	EmzJGohBDwVNsmQ5rREHwN3M/79FOaImPJAtTMbZl71oPpX0rCL3DId9GryzXZTjqhwQhyHG3ro
-	c8=
-X-Received: by 2002:a17:907:3c87:b0:b88:3b3a:42b6 with SMTP id a640c23a62f3a-b8dab2fe030mr563791366b.37.1769696262410;
-        Thu, 29 Jan 2026 06:17:42 -0800 (PST)
-Message-ID: <45640da8-9e9f-4b9e-83a0-3bfe701cf5d4@suse.com>
-Date: Thu, 29 Jan 2026 15:17:39 +0100
+X-Inumbo-ID: acfd4d5f-fd1e-11f0-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; t=1769696852; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=RmRZrQhgTnx8pI0Vt/7hDJuJAkvazWPBtKFQWS/Q04u5dda1jYh92a0l/943939Q2Q+XmaWG12jLCZBtrregbmXwiNWeMZ46FF3Fxg0beWjvSRYCkMDtIRzo9R9EyxdPSGAiQVrStY5xkYAkp18QHZB2JgjiuZbohEqdtc7NVX8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1769696852; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Csi40rQ6fKyJbiyM0FXQWkQQah5ioh+4oM6lP9s5imQ=; 
+	b=LQgjpzY6DnPvLX0MNQEJ7kbTqt0x3B6oft645cD4yBkeVoplE3l+jRG+uEI/u6w+iCChC99CebVctB9WIidW1G8Q63tpxvGUPhLbnxghjrZNU2/NNh30c5RPV/TAbcgJiIKXukfwmFaCFRjZtByW0UV9Hdfqe9wC5zhYviPdPZ0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769696852;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=Csi40rQ6fKyJbiyM0FXQWkQQah5ioh+4oM6lP9s5imQ=;
+	b=cdonrx28oM4RGm/3ytQKpagvsam3hs3ZEjPCK+z10ymkZzbYCs9FRjjlZdUN32CA
+	1QdfFsP94ULp5bAWTgcOyeGp53pHMCmbBneO8tn3OeC9aFj5r2HGoFr+/sDH9KSEAK9
+	YMG2Z+eLHTQukclzVAGWHJM0ycathaGcM9WMccno=
+Message-ID: <24f75da5-116d-4955-a999-04366ec3146b@apertussolutions.com>
+Date: Thu, 29 Jan 2026 09:27:28 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] PCI: determine whether a device has extended
- config space
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>
-References: <a67e69b8-c1e9-4448-adbd-17a19dfe13de@suse.com>
- <99d45a27-ce67-4f10-9883-dba96f055285@suse.com> <aXtqBEyhPgFSmvZA@Mac.lan>
+Subject: Re: [PATCH v7 1/2] xen/console: handle multiple domains using
+ console_io hypercalls
+To: Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
+ grygorii_strashko@epam.com, anthony.perard@vates.tech, michal.orzel@amd.com,
+ julien@xen.org, roger.pau@citrix.com, jason.andryuk@amd.com,
+ victorm.lira@amd.com, andrew.cooper3@citrix.com,
+ xen-devel@lists.xenproject.org
+References: <alpine.DEB.2.22.394.2601221704110.7192@ubuntu-linux-20-04-desktop>
+ <20260123010640.1194863-1-stefano.stabellini@amd.com>
+ <ebc50459-b6f8-4827-b326-edda5f0f67d7@suse.com>
+ <alpine.DEB.2.22.394.2601281807290.2238666@ubuntu-linux-20-04-desktop>
+ <2044f927-6d9f-4c7f-9e47-6e4c6dbb2fcd@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aXtqBEyhPgFSmvZA@Mac.lan>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <2044f927-6d9f-4c7f-9e47-6e4c6dbb2fcd@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-On 29.01.2026 15:09, Roger Pau Monné wrote:
-> On Thu, Jan 29, 2026 at 02:08:27PM +0100, Jan Beulich wrote:
->> Legacy PCI devices don't have any extended config space. Reading any part
->> thereof may return all ones or other arbitrary data, e.g. in some cases
->> base config space contents repeatedly.
+On 1/29/26 3:24 AM, Jan Beulich wrote:
+> On 29.01.2026 03:42, Stefano Stabellini wrote:
+>> On Wed, 28 Jan 2026, Jan Beulich wrote:
+>>> On 23.01.2026 02:06, Stefano Stabellini wrote:
+>>>> @@ -742,17 +758,36 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+>>>>           if ( copy_from_guest(kbuf, buffer, kcount) )
+>>>>               return -EFAULT;
+>>>>   
+>>>> -        if ( is_hardware_domain(cd) )
+>>>> +        /*
+>>>> +         * Take both cons->lock and console_lock:
+>>>> +         * - cons->lock protects cons->buf and cons->idx
+>>>> +         * - console_lock protects console_send and is_focus_domain
+>>>> +         *   checks
+>>>> +         *
+>>>> +         * The order must be respected. guest_printk takes the
+>>>> +         * console_lock so it is important that cons->lock is taken
+>>>> +         * first.
+>>>> +         */
+>>>> +        spin_lock(&cons->lock);
+>>>> +        nrspin_lock_irq(&console_lock);
+>>>> +        if ( is_focus_domain(cd) )
+>>>
+>>> Why would any of the domains possibly being permitted to be "focus" suddenly
+>>> gain direct access here? Full access in do_console_io() is still prevented by
+>>> the XSM check there, afaict. Cc-ing Daniel, as it's not quite clear to me
+>>> whether to introduce another XSM check here, whether to check ->is_console
+>>> directly, or yet something else.
 >>
->> Logic follows Linux 6.19-rc's pci_cfg_space_size(), albeit leveraging our
->> determination of device type; in particular some comments are taken
->> verbatim from there. Like with Linux'es CONFIG_PCI_QUIRKS, only the alias
->> detection logic is covered by the new "pci=no-quirks". The singular access
->> at PCI_CFG_SPACE_SIZE is left unconditional.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
->> ---
->> The warning near the bottom of pci_check_extcfg() may be issued multiple
->> times for a single device now. Should we try to avoid that?
->>
->> Note that no vPCI adjustments are done here, but they're going to be
->> needed: Whatever requires extended capabilities will need re-
->> evaluating / newly establishing / tearing down in case an invocation of
->> PHYSDEVOP_pci_mmcfg_reserved alters global state.
->> ---
->> v3: Add command line (sub-)option.
->> v2: Major re-work to also check upon PHYSDEVOP_pci_mmcfg_reserved
->>     invocation.
->>
->> --- a/docs/misc/xen-command-line.pandoc
->> +++ b/docs/misc/xen-command-line.pandoc
->> @@ -2009,12 +2009,21 @@ Only effective if CONFIG_PARTIAL_EMULATI
->>  behavior.**
->>  
->>  ### pci
->> -    = List of [ serr=<bool>, perr=<bool> ]
->> +    = List of [ serr=<bool>, perr=<bool>, quirks=<bool> ]
->> +
->> +* `serr` and `perr`
->>  
->>      Default: Signaling left as set by firmware.
->>  
->> -Override the firmware settings, and explicitly enable or disable the
->> -signalling of PCI System and Parity errors.
->> +  Override the firmware settings, and explicitly enable or disable the
->> +  signalling of PCI System and Parity errors.
->> +
->> +* `quirks`
->> +
->> +    Default: `on`
->> +
->> +  In its negative form, allows to suppress certain quirk workarounds, in case
->> +  they cause issues.
+>> The XSM check still happens first in do_console_io() via
+>> xsm_console_io(XSM_OTHER, current->domain, cmd), which validates that
+>> the domain has permission to use console_io hypercalls. The focus check
+>> is an additional restriction that only allows reading when the domain
+>> has focus: it doesn't grant new permissions. Dom0less domains with
+>> input_allowed = true are already permitted by XSM policy to use
+>> console_io;
 > 
-> Not that I oppose to this, but I've assumed that you would introduce
-> an option to fallback to the previous behavior where Xen would just
-> assume extended space to be accessible.
+> Are they? I don't see any XSM or Flask code checking that flag. What the
+> dummy xsm_console_io() checks is ->is_console.
 
-But that would be wrong. It didn't even occur to me that you could have
-wanted that.
+Unless I am misunderstanding what you are asking here, I don't see why 
+XSM would be concerned with this check. The `is_focus_domain()` 
+conditional is not an access decision but a decision whether write to 
+the console or buffer the write.
 
-Jan
+
+> However, what indeed I didn't pay attention to when writing the original
+> comment is that guest_console_write() has only a single caller,
+> do_console_io(). So there's no concern in this regard here as long as no
+> new caller appears.
+
+
+Correct, the `xsm_console_io()` hook is the access check if the guest is 
+allowed to read/write to the console. Any paths to this function should 
+be guarded by a call to this hook.
+
+v/r,
+dps
 
