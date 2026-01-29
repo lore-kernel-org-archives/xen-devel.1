@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA6AD6101A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jan 2026 14:14:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1216545.1526470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05CAFD6101C
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jan 2026 14:17:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1216559.1526481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlSma-0008Vv-L0; Thu, 29 Jan 2026 14:14:04 +0000
+	id 1vlSpY-0000fK-4v; Thu, 29 Jan 2026 14:17:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1216545.1526470; Thu, 29 Jan 2026 14:14:04 +0000
+Received: by outflank-mailman (output) from mailman id 1216559.1526481; Thu, 29 Jan 2026 14:17:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vlSma-0008Vo-Hw; Thu, 29 Jan 2026 14:14:04 +0000
-Received: by outflank-mailman (input) for mailman id 1216545;
- Thu, 29 Jan 2026 14:14:03 +0000
+	id 1vlSpY-0000fD-1Y; Thu, 29 Jan 2026 14:17:08 +0000
+Received: by outflank-mailman (input) for mailman id 1216559;
+ Thu, 29 Jan 2026 14:17:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XEJ3=AC=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vlSmZ-0008Tl-Eo
- for xen-devel@lists.xenproject.org; Thu, 29 Jan 2026 14:14:03 +0000
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [2a01:111:f403:c105::7])
+ <SRS0=fLTt=AC=epam.com=Oleksii_Moisieiev@srs-se1.protection.inumbo.net>)
+ id 1vlSpV-0000f7-SD
+ for xen-devel@lists.xenproject.org; Thu, 29 Jan 2026 14:17:06 +0000
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c200::3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c05e0597-fd1c-11f0-9ccf-f158ae23cfc8;
- Thu, 29 Jan 2026 15:13:58 +0100 (CET)
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by PH0PR03MB6541.namprd03.prod.outlook.com (2603:10b6:510:ba::17)
+ id 2f16c8c6-fd1d-11f0-9ccf-f158ae23cfc8;
+ Thu, 29 Jan 2026 15:17:03 +0100 (CET)
+Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
+ by VI1PR03MB10078.eurprd03.prod.outlook.com (2603:10a6:800:1ca::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.16; Thu, 29 Jan
- 2026 14:13:53 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9564.008; Thu, 29 Jan 2026
- 14:13:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Thu, 29 Jan
+ 2026 14:16:55 +0000
+Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
+ ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
+ ([fe80::f12d:7394:bbe3:dfc%4]) with mapi id 15.20.9564.008; Thu, 29 Jan 2026
+ 14:16:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,153 +49,384 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c05e0597-fd1c-11f0-9ccf-f158ae23cfc8
+X-Inumbo-ID: 2f16c8c6-fd1d-11f0-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vlRTtnW9iEwlVtBe1+KLnnb1kK4fWOPM7kh+353MqROwGkASVnIw10a53y/gGyGQoODMh+FkjohgnKKfCkDac3zZHxBCdTlIkm3zxrzli+5n0NQxZ2bR+YpQa6xzfkukxD6gGbFoBwsN9PRr1Ppi3Lt+go7PRIXb00ug3P4ajkVtXZ5VQVjZaz2SdgQqcqknr/hATvRrbCUrrMWao8Qxmaz+oSP0NMzA4jEo/VK0tADJlbSpVcNog3TtsERzmSZVub57hJ0mAeaaMMzfuoSUVJjoMDnAozhqecw+boI0sYAAzERBtRhIVn0gjkcLxU6AQzPtXa9Roe4xGe16xbgCXg==
+ b=BQeIYo0HpcmXtgYzVD0dXlLQRYA5imUdsEfAGQCiquiKoYVssJ1EJx+fiZObzmd9vSEJy6Q++ZO+Pg/1ZBSKl+tsukH6bBqF+EMnFMmTw1yb0ogzeTPX1iWilDSA27NKmT0g+EP3Ql92M3j1qRHg0p9nP57GfaFJ7ee6He2mg3kxaxFFdVOk4FoUL808cQRokjwoHdEK9Pxom83nbRJcQKmCgVDSL+dQysxIh+cQPKRcyqDH6+UAxvFwOF46vBhi+pMIktKP0pkgUOz3mfHqLh2K60fGbyKAR5jtVHT7rCsqTw/ErPAko4nX0r5iP6YNIDxAPxmMlPRYdgtWh+288g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y10wekK9zkyAtRMtkqQVbrQmf01sAz6zb5Z4qr9KuTk=;
- b=TQeVZgfJIqtZxg7attFV7/NC1mtXL/m4xWO4YnUrGnwve1Yz8FAMzOO+Puh1llZwM9aZ1xmMUTh1d8ONzJw2npdfxG7FxR2Z2bPB0zRu9nOg1Q4PTxJDFowcFEHEHOtuNtXk1d7+6UARyLIQSKjixzGnEkTENdLow+9+LSA4MtBXvnWbXXDinhY1UfPF+xn4tR8bTytZYU0qpzHFsrxHHKaCzzIzoZCVOZumfzmMSgivbXZatQ961ai41eN1IroU2t0zIIW/jeGlAL/0XrT/+l3/RDSShdiqnuyp3I7Mj2kxUzvL8Oj2RCMbJ4iA4VamsvrOBGDzeQ6LwVRstog9AA==
+ bh=ibKaJmnmVsKkCLLiwRUvv6w33HYLnTMURDRsiOZQ5ic=;
+ b=ZyU9AthvX59qCeDD8OUrSCFk9+P4v/ZqrLOm5TPGtJfTXM13NxjPXjXq4PXeYrlNsHWZiD4Zi2+cZro4pA9VUS71CXMuut/p2XVMKmib9/xVnwLYt4TvSOwr+1wQ9UftosLovyYK1tTroLd4noXrn4N/mr43YYl1W/+STUn4dHR5zl/2gsEwUV5iLmIlJ/OFE78d83jIczY9Lls8E9FQwVKlg4w7b2t+XSqazLee+VttjLNk2JOp4RrV3YrEKqlp63XjXs1/EUA1RHaOAejYkufkKmnH4Ez4RHerkO8ySlDG48CQjt1OPdm5+5izNfrSDS/IouPOKlx3C92y28gqnQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y10wekK9zkyAtRMtkqQVbrQmf01sAz6zb5Z4qr9KuTk=;
- b=HuaP7j0xROUebzLy+E/ZahccN2PfndM1bFMVJoCbdQMBzvMVFRUV5npOv3Uk/yqCrOlqGBvfSn2eS6OSOvg2RLy4n5B6xW1YXFj9Nj1M0qDO7qvq3rpArmDkSQqfXs7sS1Hkoaq4kqGy2KGkiwSHVgzUsrvzUYgVqbiSHp1IQRo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Thu, 29 Jan 2026 15:13:50 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Stewart Hildebrand <stewart.hildebrand@amd.com>
-Subject: Re: [PATCH v3 4/6] vPCI: really no ext-caps without extended config
- space
-Message-ID: <aXtrHszjdhVsaRLZ@Mac.lan>
-References: <a67e69b8-c1e9-4448-adbd-17a19dfe13de@suse.com>
- <d7ef6302-9034-45da-97d7-25c76204b2fd@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <d7ef6302-9034-45da-97d7-25c76204b2fd@suse.com>
-X-ClientProxiedBy: MA3P292CA0019.ESPP292.PROD.OUTLOOK.COM
- (2603:10a6:250:47::9) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+ bh=ibKaJmnmVsKkCLLiwRUvv6w33HYLnTMURDRsiOZQ5ic=;
+ b=Qa3SWFKfKoWKS2PzD9HUwkHqFtiIuQ8Y3nDYcrZGRh5HfmrRf/+GA7nAuTxdQafPi4LajVD+7RlIwNky1d+yUq8ThkrIvh1VSMMEENLflO1MMGmPSViQGNSI6Z0Wqv6AWi5gilGdhbfNNDxZncjfWHqM5Ij4Vv70ZquEy0gOf7RRuf13nbSO5jQYr39CGGvS3rzrR6CE0/o3hpHZSbN+ZJvuvEUEpjW/JBc1LNo+OgKE/UO4Oijk4OEHHh++7dWa4JERqcnW4iboaAwPbYJipN6tXoTd4n8kgZeWh5a/po5EcgAhv2/jfJHUxkd8QTJNJSP+57Yt/6WMiFzxJWFZhA==
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>, Jan
+ Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>, Julien Grall
+	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Oleksii Moisieiev
+	<Oleksii_Moisieiev@epam.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
+	<grygorii_strashko@epam.com>
+Subject: [PATCH v9 3/5] lib/arm: Add I/O memory copy helpers
+Thread-Topic: [PATCH v9 3/5] lib/arm: Add I/O memory copy helpers
+Thread-Index: AQHckSnrjR8vkz+RAkaYhf4MP0G0mA==
+Date: Thu, 29 Jan 2026 14:16:55 +0000
+Message-ID:
+ <c1d8b28fffd3380bdf914526f6934a444be5e75c.1769696107.git.oleksii_moisieiev@epam.com>
+References: <cover.1769696107.git.oleksii_moisieiev@epam.com>
+In-Reply-To: <cover.1769696107.git.oleksii_moisieiev@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|VI1PR03MB10078:EE_
+x-ms-office365-filtering-correlation-id: 9886b90f-f9a8-423b-a641-08de5f410e68
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|366016|376014|7416014|1800799024|38070700021;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?bZsip0kioMtZoAqzNqHfKxUTF8VIv042ENscfHpfi1U7jSFomrS1ISwLd3?=
+ =?iso-8859-1?Q?MXML5AbHhYaxSu9jt7XKxxwpdcsiEeQSmCqj8NRxZQ4BWz/i95VRGZY712?=
+ =?iso-8859-1?Q?4ZBO6k1Xb2vYD/dnOViQSo1pDX2vTCHDaJ7+KoeWmxHCW+AMLbc5zeKNBM?=
+ =?iso-8859-1?Q?vPPqaZ6nY+vwlYUU4IOklqrZMdFf/jfveDTbbcjsJl6X++j/buuwdWvfQI?=
+ =?iso-8859-1?Q?UxSpOpHrOF9Y6/HB7q5Z6sJykG2Fs++u8aiG6PjWC+lXkXt9zTCbGlt8fX?=
+ =?iso-8859-1?Q?AqBhXDBLdPP3+JwzGZFrPn6EX4slkEfCY7ctirm6V9O+OlcA5SDVCZW45n?=
+ =?iso-8859-1?Q?bqNlguO46HeEoITRpi1KikN7PCItwRSk4dbmUcSwJZr5OQ+9AX4jLPeIhE?=
+ =?iso-8859-1?Q?rHyaaRCHg/en6aByRwzEJd3Q7Ujs3zbReO+NtKnlH9cNkOOXTgjS5wNWij?=
+ =?iso-8859-1?Q?YEaOU/Slh6kZDWNDrNZ7lhC58ULt5L1exwEiA9fnagLLuhKaqb7ddRwtmx?=
+ =?iso-8859-1?Q?rex92hl01MQmFPZHVYpTCUVQarAicr43Ysfxrf1p05SjBPEiLduS7y32ig?=
+ =?iso-8859-1?Q?ji1rFO6CdtIuicumqXi7FXPxFeIpx6POR6Y1cjtQk34l2sQItBClZgmDO9?=
+ =?iso-8859-1?Q?oCklKwKNONCR5MwQxFv64spz3VJEpXBA3DQXJw/tNPIfHW6al2uNmIUDP+?=
+ =?iso-8859-1?Q?OVUTLafZWZZ7SgoS1XseswHdav1ZLxXL+cMDSSoe1tBYu7oaYwVu6kz/re?=
+ =?iso-8859-1?Q?nMukYQEy1IItp8DoLmoMLZ+mpImVzohn27oBw20/WklOk2WhYKD85anP7f?=
+ =?iso-8859-1?Q?p4ij0Byrw9L1eHk2Va/HX+4QahPxN3CHT38qEKCYovcyDGA/rH+d/q7t+M?=
+ =?iso-8859-1?Q?aJG5DrRucIcQiJtbQrZf3braRuSIEouS2oG3dp9Nx9nb34LbxrPAT4xwS9?=
+ =?iso-8859-1?Q?o0TGwn33oNUENtuXGxWHCFsWnHSNmmYFVegZObTty4r/OeuLThMrsFT2Wg?=
+ =?iso-8859-1?Q?vTOfsA+1onu7WImHkPsnsXmYQsGL2AWokq75X6U6MQxfhojkN+URZ6GpEm?=
+ =?iso-8859-1?Q?KAEfOHWOpusfTqalp4f8JTVOE/5qxr0MdUhm3g5AqOTyBep61RqE7KIBBI?=
+ =?iso-8859-1?Q?w6jn1TmzOHTvqDUNV5xwrTgS1bGGL92IPi+79JFsAfncqyrXLpB8pEExvl?=
+ =?iso-8859-1?Q?Xl9AtZfNwAwRQskL6DUDY3IClsjbpLa/1iEr4pVZSThpaT+Tpk6J4UuJvV?=
+ =?iso-8859-1?Q?mhzWkuVSkN7hezb6p92TQBPXLoHDPxAzvfijWUhl5a9NI7rLOpCpBsF4hG?=
+ =?iso-8859-1?Q?vQhyOpSFNDSQ/pLnB7v7W6u8l0oJix9X0xvuUYM9WTTz7tbYbB9xu2RVp0?=
+ =?iso-8859-1?Q?dtVpGL5gvKmXSHen5Sol7kXPa4WUWgbY1eyStc6o8/kKYmlrdinOeHS+69?=
+ =?iso-8859-1?Q?riqC9Kexs68YqXneUJIjh0V0hjioRurI+YbTwI+UP2tkZRLlwb4ljEFWd/?=
+ =?iso-8859-1?Q?pbJ4HsINzrUYOBwscRXxQHL9kZrUCYxcFgf50KyyjR6cYetojL+wDov96Y?=
+ =?iso-8859-1?Q?giPNkrXrd1UCCP85a2fI0k2GjdHQwE2SDhp9b76cjE4JLawrGDMF2HhsSc?=
+ =?iso-8859-1?Q?1irm/M7hAv/Dt538Sj7R73HijOc7mbKu2FZcAxVM6t9qJ5O7U5irDZo2cw?=
+ =?iso-8859-1?Q?rKpc4giIzooWBlVOTgY=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB8946.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?zxb6TRv95WUUJCJquFhSJHEzn4MRvnndBWcGPn2SU3TqDp3yxc1pt1hpKB?=
+ =?iso-8859-1?Q?BahcX07j5x18NUdEH5e/koR3Na60VuN4eIEUXJ55QK2yuaphBuHfjS3shz?=
+ =?iso-8859-1?Q?xR2a4gXOMI4E6LynFGDXvGJJY+0XLdhHMz9YUlX/Iis8tXKBdGcksCHKbU?=
+ =?iso-8859-1?Q?H9M5sjZYU5phQwqfzouv5ItxUIVZq4zD6VBGfdfSbBsMxvTtxk/4ubjXRB?=
+ =?iso-8859-1?Q?6eTqe84cJGw0EXvYYWeOqU/KtnfYye8H7d2FDG4z5G3w8RnqaZ5LqlLo4t?=
+ =?iso-8859-1?Q?fT/J6XJBjrMAfLtHoMkNcNxWf7s6EiH2IyDbd+9sqT1SHI6W1bjmVdhycd?=
+ =?iso-8859-1?Q?KbblFHUenkRnWMdLoW+1IrMSER8QjOQE6k1Ppa7IXv+tn6isxNkSJGeZtB?=
+ =?iso-8859-1?Q?TMExO0kVAsaHzHxtU6D8bfreW3XyBDs6pqa7OiKZ9PYh4hoa+IsLsaEenf?=
+ =?iso-8859-1?Q?Cvpo1Xe7kugoy7US9p8iK6TfUn1m27nvXn/9k/12J35m7kADEx5W06pfUi?=
+ =?iso-8859-1?Q?WQ4JI4ALbMxEOKJoqRGYiXJMoeX06RPzx3GS3jB0lJEo9rYHpgwLxk9huS?=
+ =?iso-8859-1?Q?KIkP+8p21PYNMmOUb16b7Gu0mIF1tf90Z43jPQsYPOf5N+KHw67MPvtT8i?=
+ =?iso-8859-1?Q?KE2Q9uqThHFO/7Aw3jq9cii52Q8Qt1yZV9uQOXPpPE8eLPosnP4rMrBvL9?=
+ =?iso-8859-1?Q?P860HyXVsg/4t1o+d1rK3TFUoFjS6v2X3vslAmc9y6sYr1bg/KFY8D2oYd?=
+ =?iso-8859-1?Q?fxqYA/z3FsyWHRVNhHjT11FoPFqDlX5mofyYElc1j5j4LQhdEMA+GxsYma?=
+ =?iso-8859-1?Q?gZznuXjH/bzseK+GcUD+iOpmc0TiBopnV5aMb/myruvL+N099GWzxddsUy?=
+ =?iso-8859-1?Q?58tDeoHjk3AZl/87ke6flyui+PQaGTxDvTYUFq3bi7dMRb5wKOLqJWzA3/?=
+ =?iso-8859-1?Q?4Qp4I1J20ftXP+78wIxwqE9KqmpSe0iTfR6H2L0+1sDe/aVkm9pJqLarUN?=
+ =?iso-8859-1?Q?p7owHPsb+SOMw479B/drlT0F4DMOlhsKy/TB+/PoqJdUPecYYtmkln83jN?=
+ =?iso-8859-1?Q?t93fBJI2x1QOHao7eypmFHQk9czhKcfCxpr14wvjyTmrI276jwZhU/qTm+?=
+ =?iso-8859-1?Q?AqEJ5n8Tf5TJHgAm5BOuyP2RTOxQfCf4QDHTMGbXEZQaqWiRljmsAPqCXX?=
+ =?iso-8859-1?Q?Ezoc1d2Cf4cTs6m/5sGOM3n/txVMqMeQWLEgt2oO4LSrx5M55aJ72g26OV?=
+ =?iso-8859-1?Q?EaXsB7obS1+DkcznlDv8UfNVg351rOHlGWPvdJhLDQaesfRBaki5Ue+Xiq?=
+ =?iso-8859-1?Q?iwE800CIYjVaG+UYEHpeN8gG6NGVn5vxGoo5zjN9nugal/nQaz4OyoTatA?=
+ =?iso-8859-1?Q?EGciozw0+PLYufX/qceACLR4XuLZa+kglV8dH/4WlBq2NL+Z8pXaCSyviY?=
+ =?iso-8859-1?Q?VYZk4u+Ps6bhQ1+BNbPnTGtzreQsEiQB+GhYFBn8x8OqmALtx6RGsSO9uw?=
+ =?iso-8859-1?Q?uBcPVNuqFJuQwjQ+sppR1i56Y32A5eI/C+GfMYjSj3zPHEaaZqd1NLHIXd?=
+ =?iso-8859-1?Q?zTpVV9pK6bS9EgWuoqf3uWXdSsS6ym0qP8A+ab2xAXTJKSbks41Xup7S4y?=
+ =?iso-8859-1?Q?inET58jWEBUvbHD1mPFM9pgbPxbD1IlX9qBzpgGPKUMf/2nk+0RkNRPUhG?=
+ =?iso-8859-1?Q?RTXNzeG7vzayvb6P4x8IhWBV0zBbyEhxo7oHzvj9IwZW4g7El8ZAacX9FI?=
+ =?iso-8859-1?Q?/ZRHgc+XKwSpNNQ9LfQHSdETj4M7oXZ0csblPeKCSvGRXzPRQzxqiZZH4+?=
+ =?iso-8859-1?Q?W5cUWcblxbU50OADGiuqEUghWm+/Kgw=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|PH0PR03MB6541:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2e2549d-fe8d-4aae-ac52-08de5f40a1cf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?RkRVbVA0TVhlM0o4djQwRHlabkplUEpFcU9tN0ZiWWU3aDF2MDBaQWkyWHY1?=
- =?utf-8?B?alBXUFJwV1VvemdJMHBTT3JPdjZQeXFtcC9rMUM2d2x4MXVhSUhyYjFaWEVm?=
- =?utf-8?B?VXk2MXlGdHRSR0tzVWpuUkZVSVJVMG1iRFdkNXlFYzRqUnd3UUFwMUFIdVRL?=
- =?utf-8?B?TC8rU3QwSW81TTdDaS9KYmw5OGRiVmF0RzBBaWtXbDBwZ0gvMHJ3WlZ6Tmd3?=
- =?utf-8?B?RmIyaFZCWVZ5QUtmeXFXd3pQaHdIL2NZWVdsTXZPcEtSS2FHbHJ3UU00VnRY?=
- =?utf-8?B?cVN1K2NtbDI1YU9QNEQyVjRxSHNLQlUyMnNIbnJLVTF4NXVSYm9DQlhCdDVo?=
- =?utf-8?B?WmVpM2MvSE00dGRNZHhrQzAzZVRhaWxZak5YVUV6dnZoaTJRbGxCQ2FvcEdX?=
- =?utf-8?B?NC9Ec3VrMWt6U2tGZUlwc1hXc1RCbXZPVEs1WG1PSThMUWF0ODhtLzREOWho?=
- =?utf-8?B?QkdZeVFpYkh0ek9sNXcrNnEzSHNKRENCdko4RDkyYUJuK3hrWkN2NG42VWVM?=
- =?utf-8?B?S3JnbFZpODJaeithR3hSdDFRcUIxUlpmM0tDNjFqb1FoanMrN29UdEJ0aWJD?=
- =?utf-8?B?NVdXMkFzaFFYbzUyNDFiVzE5bkZjTG5hN2VqUzd4cHIzcEFGMVN6R1h6RUpv?=
- =?utf-8?B?ZFFmVTJ5cFdpbXRkdTlDOXJmdTc3V3pyazVPTkFhNXFQeks5ZmF5NEtkTXZG?=
- =?utf-8?B?V0V0dnkyNUF6dnVic2NhVitid0dFSU9zbzk5amcrZ05YaUhZREN3WDF0Yi85?=
- =?utf-8?B?OTFCTDZDNEJJS0JkNk02YlpheHFCUXRDbzJSVGkrSzVXdExUcWhjUTYrVzZD?=
- =?utf-8?B?b1NVNUZGTHcwcWw2UmZpcHBBVENLbzd5aDBGRGFUU3Y3VXZlOXc3anM2dXV3?=
- =?utf-8?B?SkVaSTFvR2hRMUJZSmdxdTRtclhZVGE2OXVVMm5ZRnIrM0ZiZTJDdFVmVmxh?=
- =?utf-8?B?NmJjMlJMdkViQzRNL0FWU1RxWmFKUDdYRXBBb1hnQks2cytIcUpqc1M2ZXBs?=
- =?utf-8?B?S0wrcTdnZG9RRjZ0aUdQTFROU29NakwwVWxuYlpxcGxiYVR2OENJQmZqRjF3?=
- =?utf-8?B?Rm5PMnVMbThZdUJTbTUxMFUrTkp3bEgvMFBrSUtvSEVOeTVrNUt6K1hQR3Nw?=
- =?utf-8?B?YmhnRTZucUp2Z25tU1VGSDNvTW9tU2VYS3ZveThGQllTUlpsYng2Qmx0S3hi?=
- =?utf-8?B?Tjc3aG1VbWNDL3E5KzlOVlNVMzl6dVdJZnIvSmxiRVVjQUpiY0Z2Q3JqVjFu?=
- =?utf-8?B?YnNXbU9odDRrZmN6c3BYWURnVG1DUXpVMzk1L0YyMGg0NGgyeWZDMkZZZTNS?=
- =?utf-8?B?SjdlaXM1SkVPc3ZUNnlpbUlRaXBVVVJSSytvRkVGWE9VQ2tEYW00OXgxODc4?=
- =?utf-8?B?Z3orb1NvRnprbHUvQkE2bU85YU5QcVJxUS9pNjdSdTI1ekVJUUlvcUlPNTFD?=
- =?utf-8?B?QXBWN3kreFZkUWRJb3NPOHgyYi9jN3hISzNPNTlyeVN5b0o1QnB1MHFmWTdQ?=
- =?utf-8?B?aDM4MmE1dWtOWk1sNXFPS2hLMXdkNGhuaXhkdHd3bUIzSnJaWFo3cThQb2o1?=
- =?utf-8?B?MGF5R2JtUmJSUFhMcVpkM1NSZ1R6KzcwQkcwT21BTFBaZWNxenBUN2JtYmI0?=
- =?utf-8?B?Mk80dG9UWlNPRmVMekRHeXdQQTRYNTV6YndFajhDTGZmS1dmNVFNbTk2WjJC?=
- =?utf-8?B?a1A4Y1FmWE5nQXhPRWVhUWd5TWZ1N1Q3SmNBK0w2UkxESlVFUG9Lc01hSUhH?=
- =?utf-8?B?eVlMeFhWb0Mvc09QMHFJVWFkUGxZTWE4b2hyNWxxMm4xVUR2ZzZmKzJaL2s5?=
- =?utf-8?B?LzQvTGFSajQ4TmpHdGl6cm5uUy9LQ2xpTWlzY3NER0p6bUt4cnpHUkJzcVlM?=
- =?utf-8?B?ZmQwUFQwQ3Z3SXdIOXR5WTVTTG45UGgreGVEdGhyUkdDL1R6NkFOQXVWdGFw?=
- =?utf-8?B?OHlXLzkrMmxGSDJuVHNVREV0bVRLYlkwakUzY0JNMmdJdDZjTXMrQzNuTlRv?=
- =?utf-8?B?a2FacXdtR3o4UzdRMFRXa1VEVjl2WTVTVlNTcWV1RmluSklIRUtic3NoMG1W?=
- =?utf-8?B?dmxwVWxyaHRwMm1EZlljcjFiZXZONm16V1B0emtNeGFrQVlTMWdZM0YwaXJW?=
- =?utf-8?Q?vcQ0=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dmVnN09lLzRPSkI2UHNzN2FWL3l2ZCtzc2w0dTZHNk51RzUyK3ZhVU9vQWVS?=
- =?utf-8?B?cDh6VnJqeHlnTGE3V2U2TlNKNWxNcEdhc2duSDlGejIzSE5UTHNrUUYzSjJu?=
- =?utf-8?B?anRiT2RDeE5jVnBaRndGRUJVbzJNMUp6c2NsUDczTWI0MEpYa0FQRUtKWXlZ?=
- =?utf-8?B?bEQ5d2FUUEtzNlNtTUEvT1B0SGtZaEtLemk2YXFGRkRsMmZSWE9VazZ4QXlx?=
- =?utf-8?B?dkg2TlVndHYvVk04U0dRMWN6M0U4dW95bEJwankzbUgxcTUxVTR6eGFqYjFD?=
- =?utf-8?B?cElOWTVDc2x4QTBWNFJVbjl3cTdVWmdnNnlVYVp1MWswOFB3TlNId0w4TzBy?=
- =?utf-8?B?TnlOc0d3dS9pL0hqd3VSRzF5eW0rdjF1dEdGZUZrZ0QxM1A3U2toVGdaZkxE?=
- =?utf-8?B?YXNxVWJ4TkUyUVFjY241aE92WHM0cjkydDBzQ05DQ3doVUY0Q09ldE9vbHVl?=
- =?utf-8?B?a0xMTjczUWt2NU96amt6RXFuSUE5TjZmVXM1Y0dKSEdNbGZBZU5HS0dUdlZK?=
- =?utf-8?B?bE9obUIxd21TNVM4QmFPSlBBVXVESFRNY2xqRjA2NEhocXdNY3ROV3hnZnFF?=
- =?utf-8?B?WmN2RWtCU1orYXVBNFMzN2JkTXFJSEEzRWZNdXAvYUl4a0pNdThBV0J1RjV6?=
- =?utf-8?B?Wmtoait2Z3FzVzJaYkdOcUhaTjJyQ0FvWFhPR1dXUHd6T0dwQnN0b1RxaGRB?=
- =?utf-8?B?VGk1OU1lVDVVakE5VHhXL0k3OHVZMTRFTWFyYnlnU2N0Qlg0N2l1dXJUbG5W?=
- =?utf-8?B?d1k1YVg1aXNub1lERnNNZmpqenhkM2RzUW5EeTdEcUxBcnZDQ0Y0ZlRIVWtO?=
- =?utf-8?B?czBPck1lZVFUTmNBbFAzWDVNTzEyL3hNdXh5RFlpZmZkOGxCS1crdXdVZzV6?=
- =?utf-8?B?Ui9ycWhkRVJ5Q1pJcTRWRW5sZ0U4R0lOcEQ1QWI1bWdSVE1rYzVveC9oalk0?=
- =?utf-8?B?L0IvdWhrZ0xGVENmVW9oMDFaVzY4eGVNeDI4bDFWeGxVQ0JIbVIwUUFxdEJp?=
- =?utf-8?B?RVcveGFQZmNxNFlNZUdwUnF5MVhNNjUyUUsxcHJMbVA5ZU5iN0lHbyt3eTZO?=
- =?utf-8?B?ZmJJeHNTU3BiOTFlMDNmL002Sk1wcG9PSlF3azR3MG5iRjlzOFY4QlFiZWZE?=
- =?utf-8?B?b1o2UXRDQWd2bDh1UG1sd0pjZnNOYSsyWWFzSmlONjRDMlNMRVBXYUtJbnE0?=
- =?utf-8?B?UlhuaDQxWWxxZTBOQ28ySzRNK0dkbDQ3V3dIZnhhSDBqV200ZGw5OEFvU1JM?=
- =?utf-8?B?a21vS3o3T2h5QktRK3ZpcmRxaUJHcUlOTnpHaDl1QUIwRi9mM1RlVDZvUVRr?=
- =?utf-8?B?S2NrazUzU3pySTY2cTlzc2RrK3dHUk9Tck1MTjFpSWhQaXVuZWhZempQZGpC?=
- =?utf-8?B?b21sUWxJQjRWUkx0WlpGRUdBM0l5Y0QyZ1AyNk5mL0RWdytmMjArdUZRZG5i?=
- =?utf-8?B?SXA2MzJCZnNrU3BhbzREOTN2OWhrd3FYNzQrc21abmpJZHY1STNLdlBnVlo1?=
- =?utf-8?B?S2NRMXRJZm0xaWlFUlp6SlBqU0VNQ1dEM0N5ZFRYbEh3cXVCdzFpdXExZUw2?=
- =?utf-8?B?UnBhU2tTLzVJYTJ2eE9JMVpSUHpIaFJMbmkrcWprQ0duS2ltcFQrY2NFYThs?=
- =?utf-8?B?bWVCaUZCWUpRc09obDd0Y2F4RjBOeVQ1UFl2eFlZUXcvMFV6ZWNkQUJTLzNG?=
- =?utf-8?B?UHpaK0dmOXR0VUlxRU9tM1NGK2Fnd2NmYlRndlVTYzg3QkQ4WkpIMEZoWENS?=
- =?utf-8?B?UTZJVlZqVlZyRWh5WmVZMmIwNlpaSlM2RGFYZ2FhOUZQYU9KeFpJc1BqSDFl?=
- =?utf-8?B?VVJkVXlSOUZOSjFHV2hGeDBZLzNTdjFNS0YwNWhIcEo1YWQ4SFVLTy9ldUlI?=
- =?utf-8?B?R3A2ZXZvclQveTdzN0FaMmwrelBuU2tIVXZtbmN6d3ZQTmlGRFo1Z1RLMy9G?=
- =?utf-8?B?V2oxZW16K2lVS3RNRkVzZ3RRYzhtVDRsdU9sTXR6aVFFeTFLV2g2aEdxUEtO?=
- =?utf-8?B?YU9zaFYzRkN4OE82RnlCQjBRRWdyczZnVTNMbytMbVQ5ZjdjMitEUy9idDdK?=
- =?utf-8?B?dG1kNmVXLzRnVGtjMHlVNlhuUGhpbEIwMHduQTl0Z0p0Uk5jd1o3d3hoWEdl?=
- =?utf-8?B?UjlGV3F0bHdHWnFzUzVXN3IzUEpzaWZlc0dZd1RqZDZDMEVNcXVwOFZrVHBh?=
- =?utf-8?B?TW54VzEyTGlLNWFmV3hLQTBUV0c0SHU2dkNTNnZ0QXM4QnIyVWJKZkVqcnB6?=
- =?utf-8?B?VUJIdUVsYUhrRTc3N05zOFVVdmVBL3lReDM2Z2FSRmg1N3BRbjMvS0txN2t1?=
- =?utf-8?B?ckZOUHpNbmVleU0vS1ZmeXZMSm9na29jdGNXTVZ1M0YvQUxGaVVyUT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2e2549d-fe8d-4aae-ac52-08de5f40a1cf
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
+X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2026 14:13:53.1439
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9886b90f-f9a8-423b-a641-08de5f410e68
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jan 2026 14:16:55.1260
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7iYrr35wwzb9LWSaqA1PhlqDDkTW8vdWAVC2w6vZisGQXV9oBe0FnN9iAhh+hc8DQVL3j+1XaPD5/gEmucZ64g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6541
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DaEC6+0FsO3E7IJYQrYriTeAVJSeXBAYGDYZrQA2X2dWBa21cR6ulLdyrDSGNA7jzz35keNCrGOeqeEH+MP+6carC/MRlrCrx+PLor/28EE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB10078
 
-On Thu, Jan 29, 2026 at 02:09:27PM +0100, Jan Beulich wrote:
-> For DomU-s, whether to emulate accesses to the first 32 bits of extended
-> config space as read-as-zero or read-as-all-ones depends on whether a
-> device actually has extended config space. If it doesn't, read-as-zero
-> isn't correct; not getting this right may confuse functions like Linux
-> 6.19-rc's pci_ext_cfg_is_aliased().
-> 
-> For Dom0 this then simply allows dropping a later conditional.
-> 
-> Fixes: a845b50c12f3 ("vpci/header: Emulate extended capability list for dom0")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Introduce memcpy_fromio() and memcpy_toio() helpers to copy between
+regular memory and MMIO space on Arm. The generic prototypes live in
+io.h so other architectures can provide their own implementations.
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+These helpers handle alignment safely by using ordered byte accesses for
+any leading/trailing unaligned bytes and ordered 32-bit accesses for the
+aligned bulk transfer. Using the ordered `readb/readl` and
+`writeb/writel` accessors avoids unintended endianness conversion while
+respecting device ordering requirements on ARM32/ARM64 hardware that may
+not support 64-bit MMIO atomically.
 
-Thanks, Roger.
+The interface lives in the generic header so other architectures can
+provide their own implementations (as macros or functions). The ARM
+implementation is placed under `arch/arm/lib/` (mirroring the x86
+reference layout) and is split into separate compilation units added via
+the architecture-specific lib Makefile.
+
+Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+---
+
+Changes in v9:
+- reword commit description to refer to memcpy_fromio and memcpy_toio
+- ordering obj-y in Makefile
+- rename ALL_LIBS to ARCH_LIBS
+- drop io.h and move definitions to the common header, fix comments to
+be arch neutral
+- update comments for memcpy_{from/to}io implementation
+
+Changes in v8:
+- switched to ordered accessors to address the ordering and barrier
+concerns.
+- updated the documentation to match the implementation and explicitly
+state the supported access sizes and granularity.
+- rename memcpy_* implementation files to memcpu-* to follow naming
+convension
+- fix indentation to match Xen style
+- fix intendation to match Xen style
+- move memcpy-{from/to}io to more convenient library place
+
+Changes in v7:
+- x86 guidance: removed the speculative note; header now just says
+  each arch supplies its own implementation or macro.
+- name spacing: dropped the double-underscore; the helpers are now
+  memcpy_fromio / memcpy_toio. The header also explicitly allows an
+  arch to define these as macros before including it.
+- updated io.c to keep 32-bit transfers safe on arm32
+- moved to __raw_read*/__raw_write* accessors to avoid endianness conversio=
+n.
+- split the helpers into separate compilation units
+
+Changes in v6:
+- sorted objs in Makefile alhabetically
+- added newline at the end of Makefile
+- used uint{N}_t intead of u{N}
+- add comment about why 32 bit IO operations were used
+- updated cast opertaions to avoid dropping constness which is wrong
+- move function definitions to generic place so the could be reused by
+other arch
+- add SPDX tag to io.c
+
+Changes in v5:
+- move memcpy_toio/fromio to the generic place
+
+ xen/arch/arm/Makefile            |  1 +
+ xen/arch/arm/arch.mk             |  1 +
+ xen/arch/arm/lib/Makefile        |  2 ++
+ xen/arch/arm/lib/memcpy-fromio.c | 56 ++++++++++++++++++++++++++++++++
+ xen/arch/arm/lib/memcpy-toio.c   | 56 ++++++++++++++++++++++++++++++++
+ xen/include/xen/io.h             | 10 ++++++
+ 6 files changed, 126 insertions(+)
+ create mode 100644 xen/arch/arm/lib/Makefile
+ create mode 100644 xen/arch/arm/lib/memcpy-fromio.c
+ create mode 100644 xen/arch/arm/lib/memcpy-toio.c
+
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 7494a0f926..5b8e170e01 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -8,6 +8,7 @@ ifneq ($(CONFIG_NO_PLAT),y)
+ obj-y +=3D platforms/
+ endif
+ obj-y +=3D firmware/
++obj-y +=3D lib/
+ obj-$(CONFIG_TEE) +=3D tee/
+ obj-$(CONFIG_HAS_VPCI) +=3D vpci.o
+=20
+diff --git a/xen/arch/arm/arch.mk b/xen/arch/arm/arch.mk
+index dea8dbd18a..009bb22c45 100644
+--- a/xen/arch/arm/arch.mk
++++ b/xen/arch/arm/arch.mk
+@@ -2,6 +2,7 @@
+ # arm-specific definitions
+=20
+ ARCH_LIBS-y +=3D arch/arm/$(ARCH)/lib/lib.a
++ARCH_LIBS-y +=3D arch/arm/lib/lib.a
+=20
+ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ $(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+diff --git a/xen/arch/arm/lib/Makefile b/xen/arch/arm/lib/Makefile
+new file mode 100644
+index 0000000000..07a0d9186c
+--- /dev/null
++++ b/xen/arch/arm/lib/Makefile
+@@ -0,0 +1,2 @@
++lib-y +=3D memcpy-fromio.o
++lib-y +=3D memcpy-toio.o
+diff --git a/xen/arch/arm/lib/memcpy-fromio.c b/xen/arch/arm/lib/memcpy-fro=
+mio.c
+new file mode 100644
+index 0000000000..1b13cf5ff8
+--- /dev/null
++++ b/xen/arch/arm/lib/memcpy-fromio.c
+@@ -0,0 +1,56 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/io.h>
++
++#include <asm/io.h>
++
++/*
++ * Arm implementation notes / limitations:
++ * - Uses ordered 8-bit for leading/trailing unaligned bytes and ordered
++ *   32-bit accesses for the aligned bulk; no wider accesses are issued.
++ * - Only suitable for devices that tolerate 8-bit and 32-bit accesses;
++ *   do not use with devices requiring strictly 16-bit or 64-bit accesses.
++ * - MMIO must be mapped with appropriate device attributes to preserve
++ *   ordering; no extra barriers beyond the ordered accessors are added.
++ * - If source or destination is misaligned, leading bytes are copied
++ *   byte-by-byte until both sides are 32-bit aligned, then bulk copy uses
++ *   32-bit accesses.
++ */
++
++void memcpy_fromio(void *to, const volatile void __iomem *from,
++                   size_t count)
++{
++    while ( count && (!IS_ALIGNED((unsigned long)from, 4) ||
++                      !IS_ALIGNED((unsigned long)to, 4)) )
++    {
++        *(uint8_t *)to =3D readb(from);
++        from++;
++        to++;
++        count--;
++    }
++
++    while ( count >=3D 4 )
++    {
++        *(uint32_t *)to =3D readl(from);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
++
++    while ( count )
++    {
++        *(uint8_t *)to =3D readb(from);
++        from++;
++        to++;
++        count--;
++    }
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 8
++ * tab-width: 8
++ * indent-tabs-mode: t
++ * End:
++ */
+diff --git a/xen/arch/arm/lib/memcpy-toio.c b/xen/arch/arm/lib/memcpy-toio.=
+c
+new file mode 100644
+index 0000000000..2554ac3efc
+--- /dev/null
++++ b/xen/arch/arm/lib/memcpy-toio.c
+@@ -0,0 +1,56 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/io.h>
++
++#include <asm/io.h>
++
++/*
++ * Arm implementation notes / limitations:
++ * - Uses ordered 8-bit for leading/trailing unaligned bytes and ordered
++ *   32-bit accesses for the aligned bulk; no wider accesses are issued.
++ * - Only suitable for devices that tolerate 8-bit and 32-bit accesses;
++ *   do not use with devices requiring strictly 16-bit or 64-bit accesses.
++ * - MMIO must be mapped with appropriate device attributes to preserve
++ *   ordering; no extra barriers beyond the ordered accessors are added.
++ * - If source or destination is misaligned, leading bytes are copied
++ *   byte-by-byte until both sides are 32-bit aligned, then bulk copy uses
++ *   32-bit accesses.
++ */
++
++void memcpy_toio(volatile void __iomem *to, const void *from,
++                 size_t count)
++{
++    while ( count && (!IS_ALIGNED((unsigned long)to, 4) ||
++                      !IS_ALIGNED((unsigned long)from, 4)) )
++    {
++        writeb(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
++
++    while ( count >=3D 4 )
++    {
++        writel(*(const uint32_t *)from, to);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
++
++    while ( count )
++    {
++        writeb(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 8
++ * tab-width: 8
++ * indent-tabs-mode: t
++ * End:
++ */
+diff --git a/xen/include/xen/io.h b/xen/include/xen/io.h
+index 164a20c5d7..1bb164b6ef 100644
+--- a/xen/include/xen/io.h
++++ b/xen/include/xen/io.h
+@@ -67,4 +67,14 @@ static inline bool write_mmio(volatile void __iomem *mem=
+, unsigned long data,
+     return true;
+ }
+=20
++/*
++ * Copy between regular memory and MMIO space.  Implementations are
++ * architecture-specific and must use appropriate MMIO accessors for
++ * their memory and I/O models.
++ */
++void memcpy_fromio(void *to, const volatile void __iomem *from,
++                   size_t count);
++void memcpy_toio(volatile void __iomem *to, const void *from,
++                 size_t count);
++
+ #endif /* XEN_IO_H */
+--=20
+2.34.1
 
