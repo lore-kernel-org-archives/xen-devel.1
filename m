@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B68E7DEFE
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:14:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1218796.1527700 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00756E7DEFB
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:14:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1218795.1527696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwZb-0001xJ-Sx; Mon, 02 Feb 2026 16:14:47 +0000
+	id 1vmwZb-0001tB-HN; Mon, 02 Feb 2026 16:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1218796.1527700; Mon, 02 Feb 2026 16:14:47 +0000
+Received: by outflank-mailman (output) from mailman id 1218795.1527696; Mon, 02 Feb 2026 16:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwZb-0001w4-Ni; Mon, 02 Feb 2026 16:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 1218796;
- Mon, 02 Feb 2026 16:14:46 +0000
+	id 1vmwZb-0001ss-Dh; Mon, 02 Feb 2026 16:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 1218795;
+ Mon, 02 Feb 2026 16:14:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hK3N=AG=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1vmwZa-0000fY-1G
- for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:14:46 +0000
+ id 1vmwZZ-0000fY-1G
+ for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:14:45 +0000
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [2a01:111:f403:c201::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4810d5eb-0052-11f1-b161-2bf370ae4941;
- Mon, 02 Feb 2026 17:14:42 +0100 (CET)
+ id 47b44db1-0052-11f1-b161-2bf370ae4941;
+ Mon, 02 Feb 2026 17:14:41 +0100 (CET)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by AMBPR03MB11643.eurprd03.prod.outlook.com
  (2603:10a6:20b:731::7) with Microsoft SMTP Server (version=TLS1_2,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4810d5eb-0052-11f1-b161-2bf370ae4941
+X-Inumbo-ID: 47b44db1-0052-11f1-b161-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uo2hE3MQhU8Y/+6mnxplSpwliCr6Yv+j7bBXbsy3c51B/PAG9AS4vPBufm5CznAAtHXbrLLHJeagO2K52Ci/IetI1R/RFLwWzOGiKsq2NiMoFD7BRBcGJbpESiXEZm0hBEsUrxGd6cvZqsuKm2IURnHkKH7uQmVMCDPpAa4XSTMKFG5MtvQyqIUTeZvYmJIhrLAVEOzkvfNyy4wIlvQ/nHh5nqlsUlzhMONjxzLUYEt/EaNxxRdMzfz/MQmguGjeax+JjhTa49o1+OJogCan29fv6CiFt1I7kJwpcl7TCDzdKHzicSTkp/X22K0fgSAO9iotCZYLEhNbhpX8MbSRDA==
+ b=Erbisb+Of+SlMSdxM72a2OwcpAzZU303H66E5pwuV2nddPckGsF0KjnEETALJUai2jcGQB5pWf8znDlgtM7enkOFqePYJgj9I+MS1EhaKaqjYo9BOmDlAMPf5bX4zJ5gyUplFXbRRqybv8uPu8Du8c7DTFocHC6RTTqFdRCGru+6fwIllsRVjWSoIP9V6FBSFcxBVh/rCXBqUIwaMS1uJROsR4ZUZtArqacuGaY4fwBU7FA+PoJQqk6F5FJSQiMQzBNBUsD/WDjZtyRuJqAd/aI7v+rHfNkVXbsiRJRFufX/7G8lG7IJ9hUH6RBZET/eF9te0/2XBe0tYPh5q/6sSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GTPHXMX3fipHD7hAp9lN3f/0Zh89SWFqMLQN0ky9Opw=;
- b=so9teKL6xQBct73mBjzgbH839UQbaJ0SuLlTkDbkj6OLUq25272p2Bx7U31aOvv2R/to5WuDj7p+CNXu9tA5on3OaqhxazsZyeNURjlmD+Eh1KT8zrZyw4pRj0xQt/qtisB1aWAOTxsEZs8eVjciUh/AjPm30SOl3y0NbFgWJ6BmlZRnovgoile/n0RGLKERW0KFlY8vl6s0PME2BZdtmudtC6CaOqVpDN2Lsj06E31XnEFeXhu0vHKD/BLjVIfYaeLoI+qq6NCDxbWSaaGcJK5a7kJum/qSRw2B98v7+g+MaTZlOdtRe5aD1irR84uIXSBamHNbly3q9lkxqrRDDw==
+ bh=W1pz7vCFYxpX9MTz+b8Eqe1m9onDCDzvD7qLN1X6f4M=;
+ b=q3lr3ApVth3VcNLXK8GyHLUCcNwlkpgQPgYm9GEl85vcB9FHjlCpaeX8CGnVPX9FbHLdXtZGPq2wNG3h591UJQ1ODIVTSIs6dRPMXovF0Q6Xim2Cjo/49Lc1G6qBHHO8U3trAOgm905wLC5+JHJabotIEmS84EQA5xuJXqdm08mHtZsDKaqo5OG2GaXXTdO3HP8FIwfVCVOfJ7ChpM5/+I47tR5DBXpw83kpcRhF6l88vkDdep3abMTrmr8y2KtoV58JO8X8WQio7eLcFL6A0u3XPzdmCQ9bjWR04b4U2Mwm807ABh+dsnaUQ6eZCj2DglnR5lpY0PFYj0Z830dnSg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GTPHXMX3fipHD7hAp9lN3f/0Zh89SWFqMLQN0ky9Opw=;
- b=shmU30LNwwAJU7LjepflUy+GXLcaP7yfnhmDuKhwZPavbORnUYYa4/+J7ZnvvIwwrwwiW7l80OcQlLXXoXCFXEDZFz1LQX79uUOK1MFTn6wm8hSMGjychXMVNxKptVIpUvgNdSN4XTplng6q6GF9hY7/BeAPGymrWe4b/RmuNzmAoA187lNw0YtcdfuGu16RD7s8utm8aYljMUAOuemrJ4SN6bgomzQ4bQ3EZRZqh5KuSheq92cRZDuT7yzGr6o6VTYrDNIpm8h4Gd5l0hl11f03xgWYvwyTbIDULAvf/oaYiDvt3ayblAj6Un8qaSWmFZ2mHfXIvZMFUVL5Me4+1w==
+ bh=W1pz7vCFYxpX9MTz+b8Eqe1m9onDCDzvD7qLN1X6f4M=;
+ b=sOAxwG8iNc/ha0SnPilfqyrl3KkDbLt56L0Fa045YBPZCiC9Ef60Z13oWbJFX3VemN4SIbqz18BzDspH6zpBZa47rFjBnUJPhluFLQ7vYUdtFQ8PPHTK1TIBz+KMg1xpXFbA2amoyc0riGvlMTBKa6+7Uonipn3J9bpZZZufEjQkcn0OGfAw8kc/UdehVpCvrrTctaA43zOcJ5kRCgd1pfecK+1E7838Vlx4uTAjT7tl1enfW5LNdu7ex9/GCGbOH6duU/ZOi4QJc5EU8EWOEQYrrRmx5qAWRVsMg7GgMe4vdOLGD1BCgwkHjTURiX7Dd8CdNiTILCpan4nlbRL7UQ==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: "xakep.amatop@gmail.com" <xakep.amatop@gmail.com>, Mykyta Poturai
@@ -71,12 +71,12 @@ CC: "xakep.amatop@gmail.com" <xakep.amatop@gmail.com>, Mykyta Poturai
 	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 06/19] arm/gicv4-its: Add VLPI map/unmap operations
-Thread-Topic: [RFC PATCH 06/19] arm/gicv4-its: Add VLPI map/unmap operations
-Thread-Index: AQHclF8I6+NnH8ugx0O4CpyExrWGFQ==
+Subject: [RFC PATCH 05/19] arm/irq: Add hw flag to pending_irq
+Thread-Topic: [RFC PATCH 05/19] arm/irq: Add hw flag to pending_irq
+Thread-Index: AQHclF8IAwxlbrsSsEO8DhPwxpUVpw==
 Date: Mon, 2 Feb 2026 16:14:39 +0000
 Message-ID:
- <a821c49c7ba01f777546b0f7ab161d969a653b8b.1770046465.git.mykyta_poturai@epam.com>
+ <5d63b3b4c9c7b43e7cd8afdecbcf0b2c77f51d13.1770046465.git.mykyta_poturai@epam.com>
 References: <cover.1770046465.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1770046465.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -87,647 +87,229 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|AMBPR03MB11643:EE_
-x-ms-office365-filtering-correlation-id: dda4a3ec-6969-4f7d-f260-08de62762ac3
+x-ms-office365-filtering-correlation-id: 895c550e-c48f-45b5-6e73-08de62762a8a
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?EC1wxpwNhlBNHT5dY52Gb/hwIq6bkGSY+Yh/4qg+pkO42i3AiWdoatBLg2?=
- =?iso-8859-1?Q?oPhM1FFJ5Kng65/rip9weKrcx7ePVaF2ApNJ5rgd4exlu8K8Ik6vi51HgN?=
- =?iso-8859-1?Q?ABtwSigH2GVowsI9Bx9gWD9WMLMwUueuz/u6flRQLgvGyTdZl3AqjgFeEa?=
- =?iso-8859-1?Q?NWv8hNl/c0zmx3CcW6lcKaH0cqfUn975oPoKdZkhhpqaUj4+QYZnGC+1Kv?=
- =?iso-8859-1?Q?p82TZ0Z3UejKTXVBLzaK6pwYu/NpMJz3Mgy/WvF42RMuMByB+D24ZilIJj?=
- =?iso-8859-1?Q?WOPAA3IIULp6iySdaL7LQhWojLXdsViZsSNeFdxni2XXJVupj1Tz5y0/NX?=
- =?iso-8859-1?Q?lg8+vznlLJe7Bd0pistUu3X5ct/SB15uXoPwTIEDzTZ1RPUvf3wzBO5jg2?=
- =?iso-8859-1?Q?61fOTa+NQHQPBuL1Gd58JICiVRUwoDa3Q/kYEwIEPdMqd8StV4CNmuzQhj?=
- =?iso-8859-1?Q?DKk9yUPQWIE4qKRwuAOjgxmKl42jFK46Ger86MmSRiNpCinlgUtasgg05G?=
- =?iso-8859-1?Q?X+34PhMD+J9iE0CJOk2qBsPg/LZ2gMTnP30xudptWpUWdKN0PsWKrtaDqN?=
- =?iso-8859-1?Q?HBd9Oi4I4TEUZ8RGmWNDTA0CjaKP2Lnu8ebAkmOlA3ckd6OPt+3gL+aZxQ?=
- =?iso-8859-1?Q?9HAjDU7+K+EbaJuZVhbZOgZ07Z6ERJ4cLH3E3KdegEJmwqQMdQptoHbvTI?=
- =?iso-8859-1?Q?Hhkd/WfYLcBn8hWz7Dskp80FfMtqKS1erzulofw/coWww8qb46ampeY+Cz?=
- =?iso-8859-1?Q?JRKxf/c4AwpsmYM469cqEkM2vqoFGQt0X38VML1ONWybT5g2SaXnYh8L+g?=
- =?iso-8859-1?Q?bf8lH6O+cXmOrm9pq/AW8alsc9aZoZvyQy3iLV5l0RIILtkDCYv6Eptkam?=
- =?iso-8859-1?Q?xzAYeRGV6bZ3qGf1VLfgRqx0kFijwyk9Bf1KhF60j3vQIJqkKpChp2eE/e?=
- =?iso-8859-1?Q?4uCXw/ReleypwUPA6AwgFGVgMgb6vqGTTyL614faQVUtmcE+IYmoq8PjC5?=
- =?iso-8859-1?Q?27Wr2MzF703PePt/aAxdwtqvETzjnb5Xn0FukkFXtna0A6GXl20S/YyX5w?=
- =?iso-8859-1?Q?NSPDtwxxkJjBLR+ZtJUK4Ol7AP9W8CDB13YhGN1Tu7flQFpw9SoNgAwzdC?=
- =?iso-8859-1?Q?G69mqS29yIwHOeervHyKGHbaEOoJn/DkLH5P9wYgDjum8iUWkhw50CQlcY?=
- =?iso-8859-1?Q?nLgKKm7ZWwclOw6fjCA25GLT8TA+2z1nGmeqygGTJjZjyh8Ptjf4x817NB?=
- =?iso-8859-1?Q?++U1iET/JEQXn2ZyBX0BTil1iRywspfFvRnaVP3tuc20fQZQm7JnANzXGm?=
- =?iso-8859-1?Q?0QAnisMWRSIUx04dsL1G7/TIppMXk6rNTvd2Kcfnef+Y9AXkHiKkMDhQkE?=
- =?iso-8859-1?Q?Qczr6ESs32pea1rb2j18fkdSzDhgQh8cf64YiaBtE/xwGE8JH9rhcwv1B6?=
- =?iso-8859-1?Q?vUdIFjy2KwRRqcyqGSpA2nK+F7vSLJ9N0iFHEMSyvIS9WWxUANEfTeoHAm?=
- =?iso-8859-1?Q?51utlxQllrM4IZk2v6PfMJY0lprQIdwkhXPYPRkk4gix9D7M0QlmJrW1DS?=
- =?iso-8859-1?Q?hRByEu7ZlYsGgXZzO+99zBQ21lJ2uYLRAjy5IAmCofUBUMH/Nc2ZDuckpk?=
- =?iso-8859-1?Q?MtraQtoNh0kd3dlVPU633QXFvXjEKxW24aGvg8xzR0QQ47lLIIEZp4TJGN?=
- =?iso-8859-1?Q?xl0jh2/tDkcOS5sE/O0=3D?=
+ =?iso-8859-1?Q?+YFxjRX6cW5YnTOVwX9rfJF4ANjYhwdBIzBs4E2XeLMno0PhuF56bHd3kB?=
+ =?iso-8859-1?Q?vfJpZPH5JjKsRmKpg78AVZBaHao+hIpiYUJW2U2ihHWPslzImDQV7+Bhzs?=
+ =?iso-8859-1?Q?NVa4g2OVWUXVuyYj+3h6fU4Mtysd83c6haNh5O+UdXJqput4PA5MfgdBHs?=
+ =?iso-8859-1?Q?xErl+T5AGIdrtdxuWgfVq3PP6Cjcp5/lIQ3oELv2VnFmLIdpWV7VLLkTxl?=
+ =?iso-8859-1?Q?eU5sURUDyZzqxdsTBnheYi/F3ZMGNortcKy2L7+cw/x5lI5cPGpULhbVCV?=
+ =?iso-8859-1?Q?OuffD9XRiNh8OnDbUsoHJD6D14ydPgK26Nh7cAhJM96qK06TUl0sOQgLcl?=
+ =?iso-8859-1?Q?ywbxh2S4mG/whoRNKur+9qjel7tue+SpCede5IN2y+xDGWdn7Vp6d4n7JJ?=
+ =?iso-8859-1?Q?OIAcLKIPno6i/J030GTWu7OP7DeoS/zkMgHOSkeAcoCKZxNxxHwWPNOa+Y?=
+ =?iso-8859-1?Q?WfNDkuND80WYPP2P0urVxmnF0hdk8W71P84jHbXRdJGtnUiSEpI+pzVJ8N?=
+ =?iso-8859-1?Q?P9jVC1Mnd2TNO6kNn20vk8FlnJr0aBTulwBqExR0CsxJA/xu4srpGWxkmz?=
+ =?iso-8859-1?Q?dnOsoJiH8buuhHOBJo/SBopGOdAWbUrBbdCyCNgflwcSxmDvccJb0F3ea4?=
+ =?iso-8859-1?Q?p7iqvXmZAqe7QVf+t0Y+eGx1QCgxWcSTNC5ArDkLQbDlV2XP0FgLZTafgq?=
+ =?iso-8859-1?Q?CHQ1Mvft/pQdMKQ4xZkHJY/XdBeyRWTNGGRkQYVJaZXwESmIfh86Yu+yN5?=
+ =?iso-8859-1?Q?u5RprkDhmgH1ZMJqoQNcZWpkzI67YCa6Wf5OQtIINUD/qS1vxvV4qHYN5r?=
+ =?iso-8859-1?Q?kNjplVusG6TTlh8gSMvZzhQZHZfAwr0pF+c6K6P0MFFMht54eDGNvLIkYJ?=
+ =?iso-8859-1?Q?PWIjy2HAERftvM8cWsG6Dz98jXCXh/YNRxuHeZ/82nahH1wadkrM5B2PPk?=
+ =?iso-8859-1?Q?W6zyQleod8BEBbA2MOoOVYdTDq24+NLpUjCzz4GioyufAIK0cGXLWRS53R?=
+ =?iso-8859-1?Q?203lvH4QltfOBfIiDPJXww+Ob9q3FujBmfT+9MyBsU33o+bU/YlAdp7R8C?=
+ =?iso-8859-1?Q?+WNNEup/s64Xh1Yg4Q8Nca8s0EPu/7cfd7wlC9AVaVMhblAh6nNmQiNJPk?=
+ =?iso-8859-1?Q?Dd29cH0d+0XRqNz4AG/F6Nnchh62+GGYDFt3P5gavCWeSgfI7o+4D6wSlJ?=
+ =?iso-8859-1?Q?tQkz4DQbd8ojLIM8pEsWyWgY/PtQtz9avRwkdQ0PVP3zC5pcbOFzlOZLcA?=
+ =?iso-8859-1?Q?RboC8SgqYHan3+loyU6z34mvfCPa7Ep9+/FLyn3OpBi4GgMyL3Rth9u47B?=
+ =?iso-8859-1?Q?Hn6LvZjos0AMa5o+fqRxmNH00UR7CqC5sHPFmHm9FPCNjEoomW7bFd0O+p?=
+ =?iso-8859-1?Q?2xevZaWi8kutGqBa1SMtgh+Au8gQSY5eJwk5XWyy/xkZPrkLDH48O11A3A?=
+ =?iso-8859-1?Q?yPq9ISz+WKba1yxaulGXIzyv6ZDe8Ikc5TFKK4/ULCTjwouW8EVUHA+0in?=
+ =?iso-8859-1?Q?Lk8pdovxMTISdaFqinktupSuAWjTzx6mTICjFeoVEF9xKyIirVt4x867j5?=
+ =?iso-8859-1?Q?RKrIQKZCuTo/EsjEubpGVlQwHSGCiHK1xx0Di0WTNYb6bjGwcqViK+rsDg?=
+ =?iso-8859-1?Q?AvyE02bPzTYteDj4c0p/cTKPYhImoXfdcYri+0ipSABlw5m6G1eZITeLyp?=
+ =?iso-8859-1?Q?uD9TwrJQoyi7LQHO934=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?K6hWoTP76894LqB/xRhftcMZEhUIzIae0bqsj3VAOyVdN8yzxOlb76iTPQ?=
- =?iso-8859-1?Q?LzbsM3NgqC84qeaNJNNQaJYo/vXXHjNq9wCznfbDdYbfJBOoY48KTvuNeF?=
- =?iso-8859-1?Q?jHc5Xr7Nb53l1OHlBLH//U+3QtVlNUIy5Cj2Y3UuJ8MPSBkYgvgVT5evo5?=
- =?iso-8859-1?Q?q3fdiaeYVxtyzXVHpjAZtVWRKyJKBL2Ks6lQf2q+1lx1rn5dBQiba7eoJt?=
- =?iso-8859-1?Q?BVP/7jHjGRP13TTyNsMOrms3Opwz2R8wgsTCflLuOt2TGYE0KphrRkFGTq?=
- =?iso-8859-1?Q?caNzE7IgSGuJrmTH0CQstmszNJl0lQ+z1S7iGzk2iEGIv/sjyqFT4G0/tM?=
- =?iso-8859-1?Q?2Yb2SyQAsLWvwmNQaUXXW6SRkYwFW2Ui2U9kSGDx8GFwUueD/ODgYaM3Yx?=
- =?iso-8859-1?Q?t8DNTZgGrqGgxtwCveyf1IUh69MV1gh5hu9HGygTupP3Q+QzuM5tKkvs1Z?=
- =?iso-8859-1?Q?4ynlj9DAlryYQBlZ/a3HF43/tlykTMpgK3Me5mBPNl63/t2FUYnJGZK9zg?=
- =?iso-8859-1?Q?UjHO/jkQL/zAqrHCQKxm8dHVqzvD+6WGGmcZX+kqS8JCtSMRHBOLlNA4UU?=
- =?iso-8859-1?Q?hjY+aMdZPDtGiZdzrWY83K9tDEG2MnaNW4ZNn1JhCU9Zf/gEemELf8jU5f?=
- =?iso-8859-1?Q?bxtrzxPKAqHnMk/ogZJt9gI2EKU+mRexqqjGLtuoublctmCP2a4CS5yHkm?=
- =?iso-8859-1?Q?R6jqGS9LmvTW3dA0cUV8Jp7UMu5gaX5H4FL5tg/mYtZLLAMdB6YzbCKbV1?=
- =?iso-8859-1?Q?Rpvrf77BFnHAyD/m7huZuDTS+fn6aX1xJzpzt0OFZ7HELu/HAJK4zL2u9b?=
- =?iso-8859-1?Q?Hnq3NGPsu9NamsDfJbC04wqntUkV1CykzFFA6yLIxM9YRPny9V2Lo2c0mu?=
- =?iso-8859-1?Q?tIM4WWwBVwHpK0siCEDx6zZFrtWRkkFgT93RWfnPfGk0aCZlhOvRd7D52P?=
- =?iso-8859-1?Q?4d4HquAEzKMI9xg1wEIs8ARobHzter0Ms2/doH0eE7erCQOAoM7go475lS?=
- =?iso-8859-1?Q?RSx1h3hwv7zKzk3OGB0SPhxctkme2ZYCmjI201eJrni59Nz35TU5aHqDEQ?=
- =?iso-8859-1?Q?KhUYPkJ3ofcoKfqoDjbAbXuxpb0AGQe28P0Izjd52YLVPdmnfBObSxWGbH?=
- =?iso-8859-1?Q?yd5H8cCMDncuxHMd8FN7rtykv3DzgJgtJrRA3eljGT0rnj0BT3NxBa+IV0?=
- =?iso-8859-1?Q?zZnetBWygt6V3NUiE3arsshOkLBU13ePY14H/G7ykWfOMQz84iGfJaK+FI?=
- =?iso-8859-1?Q?/UtAZSQA5Jm5hBmEq42hkqP8k4vGU4a8TpLhVur5Xvn0VZ7/SvGGAAP/Lo?=
- =?iso-8859-1?Q?D/SUTjloezvXf48pj7e1Lz0gT5WFImVvJNdO1Y9/NNw1sAGQB+eYBpv74H?=
- =?iso-8859-1?Q?PjnEQ8rxpVdVerN0rwXGeS+KVUpX96YC6nuSkUZk9uZZcFFt/imxsiuZzc?=
- =?iso-8859-1?Q?kTXwEiNesD7VNn+UYgpYtJeAzVFOnJU5sm20EtKXTKXkg0kSGyfxcBZceW?=
- =?iso-8859-1?Q?miQo2zxVOGaCdtT9tla2p6UClWB7KOADwEVOjWsUZsvHXZQ6ja7bWLXoHM?=
- =?iso-8859-1?Q?FuNHveJFsv5XyajN9BtoSS7AL79n6i60Sqg6AXiBV5fS3INqlry/6PL2sr?=
- =?iso-8859-1?Q?AIiAvbfEnV2UAfPhZVvPRh5IEsGgWc/bQFqVjfpzxsITC9K6Tx72y3DU3g?=
- =?iso-8859-1?Q?VMt1r1UyOzmbxoGkDOCeqlnBHP/N+RxXqiG16OkK1EioLDofZpgMmZh6Vy?=
- =?iso-8859-1?Q?oN/7Epz0LczmHZUCAf7x/YOIpLe6vzmSSvKs92pNYe4H03Ak2BcN01Ocls?=
- =?iso-8859-1?Q?MmPOuNUaTgkGI6lTgdQxuLd30kSl8a0=3D?=
+ =?iso-8859-1?Q?fpQsk3Q9v17BnWAuFXt/nokrqeT/dhkWGo0TE167OSuzQQ6yZjcKZprXd2?=
+ =?iso-8859-1?Q?A+MV8hz66gCrMDJnBB5deE5ZiLfWjspY13wW8p2RjkPBnkoSbZIymuuIDi?=
+ =?iso-8859-1?Q?wkPJT0mB6dLIxyWu2vx49hFPEgDdk/rcem3k1R0GItsRaVC6jarFMfaNNr?=
+ =?iso-8859-1?Q?XXA3Bb34bsBn0Y5yY9K0sLRSSsc9kQUvoTmebrBm+4yowF8xbVqHvqc1ju?=
+ =?iso-8859-1?Q?CyaAu/YEufVVU67W080u41Xo2uiAnyCX9fqgugCplMN/5RVX172DzhxzWu?=
+ =?iso-8859-1?Q?p+zodqXzakLJVp3R/FrxcFOHync9Q5jKrezdf1FJjAxsOwlZCb5vNS80jB?=
+ =?iso-8859-1?Q?NeGlmkEK9rhz/H3rJPYvk266DRmLIzsunz7FTg4L1yJw518rYaPAMNEvBj?=
+ =?iso-8859-1?Q?AQeMK7VIJnht9L/wZweB0bSZpEzZyGTk1YxnmA1xycyc7eB+DuBn+yjhUp?=
+ =?iso-8859-1?Q?s56JM7BLkjrVAie6w9CuV0EUzkPOzZXvrVpGM8B5JqUrzvVVnidn7MOqpk?=
+ =?iso-8859-1?Q?tUx1kGribyWie5CGj3RwdQv2cR8paWIkwAhm2QkOPF/M1KU75xRkUbHY6v?=
+ =?iso-8859-1?Q?oENf9bEfEtpPE+XdsrQD7qQskyaM040aJMCwJnfCjFU+9osxyZqmTspCNO?=
+ =?iso-8859-1?Q?qdAG+vnsIaMagLNJg+1NROXDf2GirDivscGz/e3Ey9zZJ6bIa14WkCCUY+?=
+ =?iso-8859-1?Q?qoxMulnyKbmIVj1m6vWPwdxQC9MHbXWtsdp9h3VUt8f31HH0bvtKI0b21B?=
+ =?iso-8859-1?Q?B1jzUWqd3VId6AVexUhQsK2fDsmFI9f8gOFs6yPUfdjS8SYkQAVQt4tmus?=
+ =?iso-8859-1?Q?KgQYRDzKDeJfoCs7ae7KkCFHArJqvmn/h4PVzDBWvHG0lYTzLNQLZFAKal?=
+ =?iso-8859-1?Q?DNx29upCuhjbAHrNbkW78R1xvwh2UeZhQBfzQKZuy0DJHrFA4B39q0UmRg?=
+ =?iso-8859-1?Q?bZMXX9orf8d8yz7CMmpIogjMF2mtpf5XqUf3+6GyKNMB7oR11J+rpkYTv3?=
+ =?iso-8859-1?Q?uGhhOs/8+x8+e1rCG4h3mBs1WyUC9hmdifOObLFb/u0J6hizKmdFINxbiY?=
+ =?iso-8859-1?Q?mn3zKxh6dluSpwrTj6N3zYS0jX+KmZ9RsOM/eHpYmKwZQcy52IidCy0pPn?=
+ =?iso-8859-1?Q?4y6Qvcf9uKT1h7uta62szB5RAN4GnbpjXRgphPtQQv9hOzBJ3PCjPZNyPY?=
+ =?iso-8859-1?Q?8hdn7KfKPeXcLTreH5MHyvW0zln0UPK4VHuzV980X56UDlvhHtHXM6wpXN?=
+ =?iso-8859-1?Q?jW1VsST4nVJN2mSX/6linX/mYAXgxXopZg5aJg8VP40HYPFEJWn7eIda2h?=
+ =?iso-8859-1?Q?PW8L7Kn+mE8O5ji/5W6NtM0lDz2F92lJ5eny3cGZM3oxnYp1LUznunSf59?=
+ =?iso-8859-1?Q?Zlu5/lCMC3EP7G6H5658Kl3hY2F3SFYPP9seheBynIrXvF5t0+mHfixrL4?=
+ =?iso-8859-1?Q?gUQVbo9FDwNAqFt6XeJARz6mgNQgM5HLAdKBCsGvN6JFwbIfQUSB2Wq4AF?=
+ =?iso-8859-1?Q?uYfPJyqumHY3x5DvDmy3KDhnh4Fm3i2nBSz99HpfnjA4Fvj+VesjpuJZ42?=
+ =?iso-8859-1?Q?1z0Q51DEQUaY3YPo9MvsoyicTnV03/+Xnmfcfyl6EIyBp41HlHS8g/uTsv?=
+ =?iso-8859-1?Q?iUnXRLuR/RcaTw9vwhC2BzGaMxb/nx6j+AbSOhpLhgMnvtTTNqW+wXinc+?=
+ =?iso-8859-1?Q?LfW1gXFXVJkd1HxhOP6ZpljXq9fFHtk0uivJRFVNlcZTbjxUEXxPue/bzF?=
+ =?iso-8859-1?Q?JdyF+y72yJQGeFimMi7rYGHSErlZYNljCWVENIGoEZYv13WVfYLVa1ZUxo?=
+ =?iso-8859-1?Q?/QMnYrQwohpUeG9zz+tyAsMWbjFGkJU=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dda4a3ec-6969-4f7d-f260-08de62762ac3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2026 16:14:39.6030
+X-MS-Exchange-CrossTenant-Network-Message-Id: 895c550e-c48f-45b5-6e73-08de62762a8a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2026 16:14:39.2434
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aazgJq0TTbF/EnamPFW34rY0hS57enu2SGrW5/cIwQlkSvKD0Mbxh3WTPoOWa8whBRP2Cd6An3rY+L6iZOQRKw==
+X-MS-Exchange-CrossTenant-userprincipalname: JXwwlmfxxG7ZsUUcxaQHvqiFUQpNvhKMdIy/f2xQ4FSCLGChlRqbjpvhj/NfN2X7cMLBcuwh2/Jm9P2H3X2iSg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR03MB11643
 
-For VLPI to be injected into a guest, it needs to be mapped or moved to
-a corresponding VPE first. Add a struct to handle the info about the
-VLPI mapping and a flag indicating whether the IRQ is tied to a HW one.
-
-Implement mapping/unmapping of VLPIs to VPEs, also handle moving. Tie
-them to emulated MAPTI/MOVI/DISCARD commands.
-
-Add GIC_IRQ_GUEST_FORWARDED IRQ status flag to keep track of which LPIs
-are mapped to virtual ones.
+Add a new flag to vgic_init_pending_irq() so that we can record
+whether a virtual interrupt is tied to a hardware one. The ITS code sets
+the flag when mapping an LPI on GICv4 systems and the cleanup path skips
+removing such IRQs from the virtual queues to avoid interfering with
+hardware-backed injections.
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/gic-v3-its.c             |  14 ++
- xen/arch/arm/gic-v4-its.c             | 292 ++++++++++++++++++++++++++
- xen/arch/arm/include/asm/gic_v3_its.h |  20 ++
- xen/arch/arm/include/asm/gic_v4_its.h |  20 ++
- xen/arch/arm/include/asm/vgic.h       |   5 +
- xen/arch/arm/vgic-v3-its.c            |  42 +++-
- 6 files changed, 387 insertions(+), 6 deletions(-)
- create mode 100644 xen/arch/arm/gic-v4-its.c
+ xen/arch/arm/include/asm/vgic.h | 15 ++++++++++++++-
+ xen/arch/arm/vgic-v3-its.c      |  4 ++--
+ xen/arch/arm/vgic.c             | 10 ++++++----
+ 3 files changed, 22 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 25c07eb861..25889445f5 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -315,6 +315,20 @@ int its_send_cmd_inv(struct host_its *its,
-     return its_send_command(its, cmd);
- }
-=20
-+int its_send_cmd_discard(struct host_its *its, struct its_device *dev,
-+                         uint32_t eventid)
-+{
-+    uint64_t cmd[4];
-+    uint32_t deviceid =3D dev->host_devid;
-+
-+    cmd[0] =3D GITS_CMD_DISCARD | ((uint64_t)deviceid << 32);
-+    cmd[1] =3D (uint64_t)eventid;
-+    cmd[2] =3D 0x00;
-+    cmd[3] =3D 0x00;
-+
-+    return its_send_command(its, cmd);
-+}
-+
- /* Set up the (1:1) collection mapping for the given host CPU. */
- int gicv3_its_setup_collection(unsigned int cpu)
- {
-diff --git a/xen/arch/arm/gic-v4-its.c b/xen/arch/arm/gic-v4-its.c
-new file mode 100644
-index 0000000000..9bbd0d96b7
---- /dev/null
-+++ b/xen/arch/arm/gic-v4-its.c
-@@ -0,0 +1,292 @@
-+/*
-+ * xen/arch/arm/gic-v4-its.c
-+ *
-+ * ARM Generic Interrupt Controller support v4 version
-+ * based on xen/arch/arm/gic-v3-its.c and kernel GICv4 driver
-+ *
-+ * Copyright (C) 2023 - ARM Ltd
-+ * Penny Zheng <penny.zheng@arm.com>, ARM Ltd ported to Xen
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+
-+#include <xen/errno.h>
-+#include <xen/sched.h>
-+#include <xen/spinlock.h>
-+#include <asm/gic_v3_defs.h>
-+#include <asm/gic_v3_its.h>
-+#include <asm/gic_v4_its.h>
-+#include <asm/vgic.h>
-+
-+
-+static int its_send_cmd_vsync(struct host_its *its, uint16_t vpeid)
-+{
-+    uint64_t cmd[4];
-+
-+    cmd[0] =3D GITS_CMD_VSYNC;
-+    cmd[1] =3D (uint64_t)vpeid << 32;
-+    cmd[2] =3D 0x00;
-+    cmd[3] =3D 0x00;
-+
-+    return its_send_command(its, cmd);
-+}
-+
-+static int its_send_cmd_vmapti(struct host_its *its, struct its_device *de=
-v,
-+                               uint32_t eventid)
-+{
-+    uint64_t cmd[4];
-+    uint32_t deviceid =3D dev->host_devid;
-+    struct its_vlpi_map *map =3D &dev->event_map.vlpi_maps[eventid];
-+    uint16_t vpeid =3D map->vm->vpes[map->vpe_idx]->vpe_id;
-+    uint32_t vintid =3D map->vintid;
-+    uint32_t db_pintid;
-+
-+    if ( map->db_enabled )
-+        db_pintid =3D map->vm->vpes[map->vpe_idx]->vpe_db_lpi;
-+    else
-+        db_pintid =3D INVALID_LPI;
-+
-+    cmd[0] =3D GITS_CMD_VMAPTI | ((uint64_t)deviceid << 32);
-+    cmd[1] =3D eventid | ((uint64_t)vpeid << 32);
-+    cmd[2] =3D vintid | ((uint64_t)db_pintid << 32);
-+    cmd[3] =3D 0x00;
-+
-+    return its_send_command(its, cmd);
-+}
-+
-+static bool pirq_is_forwarded_to_vcpu(struct pending_irq *pirq)
-+{
-+    ASSERT(pirq);
-+    return test_bit(GIC_IRQ_GUEST_FORWARDED, &pirq->status);
-+}
-+
-+bool event_is_forwarded_to_vcpu(struct its_device *dev, uint32_t eventid)
-+{
-+    struct pending_irq *pirq;
-+
-+    /* No vlpi maps at all ? */
-+    if ( !dev->event_map.vlpi_maps)
-+        return false;
-+
-+    pirq =3D dev->event_map.vlpi_maps[eventid].pirq;
-+    return pirq_is_forwarded_to_vcpu(pirq);
-+}
-+
-+static int its_send_cmd_vmovi(struct host_its *its, struct its_vlpi_map *m=
-ap)
-+{
-+    uint64_t cmd[4];
-+    struct its_device *dev =3D map->dev;
-+    uint32_t eventid =3D map->eventid;
-+    uint32_t deviceid =3D dev->host_devid;
-+    uint16_t vpeid =3D map->vm->vpes[map->vpe_idx]->vpe_id;
-+    uint32_t db_pintid;
-+
-+    if ( map->db_enabled )
-+        db_pintid =3D map->vm->vpes[map->vpe_idx]->vpe_db_lpi;
-+    else
-+        db_pintid =3D INVALID_IRQ;
-+
-+    cmd[0] =3D GITS_CMD_VMOVI | ((uint64_t)deviceid << 32);
-+    cmd[1] =3D eventid | ((uint64_t)vpeid << 32);
-+    cmd[2] =3D (map->db_enabled ? 1UL : 0UL) | ((uint64_t)db_pintid << 32)=
-;
-+    cmd[3] =3D 0x00;
-+
-+    return its_send_command(its, cmd);
-+}
-+
-+static int gicv4_its_vlpi_map(struct its_vlpi_map *map)
-+{
-+    struct its_device *dev;
-+    struct host_its *its;
-+    uint32_t eventid;
-+    int ret;
-+
-+    if ( !map )
-+        return -EINVAL;
-+    dev =3D map->dev;
-+    its =3D map->dev->hw_its;
-+    eventid =3D map->eventid;
-+
-+    spin_lock(&dev->event_map.vlpi_lock);
-+
-+    if ( !dev->event_map.vm )
-+    {
-+        struct its_vlpi_map *maps;
-+
-+        maps =3D xzalloc_array(struct its_vlpi_map, dev->event_map.nr_lpis=
-);
-+        if ( !maps )
-+        {
-+            ret =3D -ENOMEM;
-+            goto err;
-+        }
-+
-+        dev->event_map.vm =3D map->vm;
-+        dev->event_map.vlpi_maps =3D maps;
-+    }
-+    else if ( dev->event_map.vm !=3D map->vm )
-+    {
-+        ret =3D -EINVAL;
-+        goto err;
-+    }
-+
-+    /* Get our private copy of the mapping information */
-+    dev->event_map.vlpi_maps[eventid] =3D *map;
-+
-+    if ( pirq_is_forwarded_to_vcpu(map->pirq) )
-+    {
-+        struct its_vlpi_map *old =3D &dev->event_map.vlpi_maps[eventid];
-+        uint32_t old_vpeid =3D old->vm->vpes[old->vpe_idx]->vpe_id;
-+
-+        /* Already mapped, move it around */
-+        ret =3D its_send_cmd_vmovi(dev->hw_its, map);
-+        if ( ret )
-+            goto err;
-+
-+        /*
-+         * ARM spec says that If, after using VMOVI to move an interrupt f=
-rom
-+         * vPE A to vPE B, software moves the same interrupt again, a VSYN=
-C
-+         * command must be issued to vPE A between the moves to ensure cor=
-rect
-+         * behavior.
-+         * So each time we issue VMOVI, we VSYNC the old VPE for good meas=
-ure.
-+         */
-+        ret =3D its_send_cmd_vsync(dev->hw_its, old_vpeid);
-+    }
-+    else
-+    {
-+        /* Drop the original physical mapping firstly */
-+        ret =3D its_send_cmd_discard(its, dev, eventid);
-+        if ( ret )
-+            goto err;
-+
-+        /* Then install the virtual one */
-+        ret =3D its_send_cmd_vmapti(its, dev, eventid);
-+        if ( ret )
-+            goto err;
-+
-+        /* Increment the number of VLPIs */
-+        dev->event_map.nr_vlpis++;
-+    }
-+
-+    goto out;
-+
-+ err:
-+    xfree(dev->event_map.vlpi_maps);
-+ out:
-+    spin_unlock(&dev->event_map.vlpi_lock);
-+    return ret;
-+}
-+int gicv4_its_vlpi_unmap(struct pending_irq *pirq)
-+{
-+    struct its_vlpi_map *map =3D pirq->vlpi_map;
-+    struct its_device *dev =3D map->dev;
-+    int ret;
-+    uint32_t host_lpi;
-+
-+    spin_lock(&dev->event_map.vlpi_lock);
-+
-+    if ( !dev->event_map.vm || !pirq_is_tied_to_hw(pirq) )
-+    {
-+        ret =3D -EINVAL;
-+        goto out;
-+    }
-+
-+    /* Drop the virtual mapping */
-+    ret =3D its_send_cmd_discard(dev->hw_its, dev, map->eventid);
-+    if ( ret )
-+        goto out;
-+
-+    /* Restore the physical one */
-+    clear_bit(GIC_IRQ_GUEST_FORWARDED, &pirq->status);
-+    host_lpi =3D dev->host_lpi_blocks[map->eventid / LPI_BLOCK] +
-+               (map->eventid % LPI_BLOCK);
-+    /* Map every host LPI to host CPU 0 */
-+    ret =3D its_send_cmd_mapti(dev->hw_its, dev->host_devid, map->eventid,
-+                             host_lpi, 0);
-+    if ( ret )
-+        goto out;
-+
-+    lpi_write_config(lpi_data.lpi_property, host_lpi, 0xff, LPI_PROP_ENABL=
-ED);
-+
-+    ret =3D its_inv_lpi(dev->hw_its, dev, map->eventid, 0);
-+    if ( ret )
-+        goto out;
-+
-+    xfree(map);
-+    /*
-+     * Drop the refcount and make the device available again if
-+     * this was the last VLPI.
-+     */
-+    if ( !--dev->event_map.nr_vlpis )
-+    {
-+        dev->event_map.vm =3D NULL;
-+        xfree(dev->event_map.vlpi_maps);
-+    }
-+
-+out:
-+    spin_unlock(&dev->event_map.vlpi_lock);
-+    return ret;
-+}
-+
-+int gicv4_assign_guest_event(struct domain *d, paddr_t vdoorbell_address,
-+                             uint32_t vdevid, uint32_t eventid,
-+                             struct pending_irq *pirq)
-+
-+{
-+    int ret =3D ENODEV;
-+    struct its_vm *vm =3D d->arch.vgic.its_vm;
-+    struct its_vlpi_map *map;
-+    struct its_device *dev;
-+
-+    spin_lock(&d->arch.vgic.its_devices_lock);
-+    dev =3D get_its_device(d, vdoorbell_address, vdevid);
-+    if ( dev && eventid < dev->eventids )
-+    {
-+        /* Prepare the vlpi mapping info */
-+        map =3D xzalloc(struct its_vlpi_map);
-+        if ( !map )
-+            goto out;
-+        map->vm =3D vm;
-+        map->vintid =3D pirq->irq;
-+        map->db_enabled =3D true;
-+        map->vpe_idx =3D pirq->lpi_vcpu_id;
-+        map->properties =3D pirq->lpi_priority |
-+                          (test_bit(GIC_IRQ_GUEST_ENABLED, &pirq->status) =
-?
-+                          LPI_PROP_ENABLED : 0);
-+        map->pirq =3D pirq;
-+        map->dev =3D dev;
-+        map->eventid =3D eventid;
-+
-+        ret =3D gicv4_its_vlpi_map(map);
-+        if ( ret )
-+        {
-+            xfree(map);
-+            goto out;
-+        }
-+
-+        pirq->vlpi_map =3D map;
-+    }
-+
-+ out:
-+    spin_unlock(&d->arch.vgic.its_devices_lock);
-+    return ret;
-+}
-+
-+int gicv4_its_vlpi_move(struct pending_irq *pirq, struct vcpu *vcpu)
-+{
-+    struct its_vlpi_map *map =3D pirq->vlpi_map;
-+    struct its_device *dev =3D map->dev;
-+
-+    if ( !dev->event_map.vm || !map )
-+        return -EINVAL;
-+
-+    map->vpe_idx =3D vcpu->vcpu_id;
-+    return gicv4_its_vlpi_map(map);
-+}
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/a=
-sm/gic_v3_its.h
-index 9f0ea9ccb1..75c91c0426 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -116,6 +116,9 @@
- /* We allocate LPIs on the hosts in chunks of 32 to reduce handling overhe=
-ad. */
- #define LPI_BLOCK                       32U
-=20
-+#ifdef CONFIG_GICV4
-+#include <asm/gic_v4_its.h>
-+#endif
- /*
-  * Describes a device which is using the ITS and is used by a guest.
-  * Since device IDs are per ITS (in contrast to vLPIs, which are per
-@@ -135,6 +138,9 @@ struct its_device {
-     uint32_t eventids;                  /* Number of event IDs (MSIs) */
-     uint32_t *host_lpi_blocks;          /* Which LPIs are used on the host=
- */
-     struct pending_irq *pend_irqs;      /* One struct per event */
-+#ifdef CONFIG_GICV4
-+    struct event_vlpi_map event_map;
-+#endif
- };
-=20
- /* data structure for each hardware ITS */
-@@ -184,6 +190,8 @@ extern struct __lpi_data lpi_data;
-=20
- extern struct list_head host_its_list;
-=20
-+int its_send_cmd_discard(struct host_its *its, struct its_device *dev,
-+                         uint32_t eventid);
- int its_send_cmd_inv(struct host_its *its, uint32_t deviceid, uint32_t eve=
-ntid);
- int its_send_cmd_clear(struct host_its *its, uint32_t deviceid, uint32_t e=
-ventid);
- int its_send_cmd_mapti(struct host_its *its, uint32_t deviceid,
-@@ -254,6 +262,18 @@ int its_send_command(struct host_its *hw_its, const vo=
-id *its_cmd);
-=20
- struct its_device *get_its_device(struct domain *d, paddr_t vdoorbell,
-                                   uint32_t vdevid);
-+/* GICv4 functions */
-+int gicv4_assign_guest_event(struct domain *d, paddr_t vdoorbell_address,
-+                             uint32_t vdevid, uint32_t eventid,
-+                             struct pending_irq *pirq);
-+int gicv4_its_vlpi_move(struct pending_irq *pirq, struct vcpu *vcpu);
-+#ifndef CONFIG_GICV4
-+#define event_is_forwarded_to_vcpu(dev, eventid) ((void)dev, (void)eventid=
-, false)
-+#else
-+bool event_is_forwarded_to_vcpu(struct its_device *dev, uint32_t eventid);
-+void its_vpe_mask_db(struct its_vpe *vpe);
-+#endif
-+int gicv4_its_vlpi_unmap(struct pending_irq *pirq);
-=20
- /* ITS quirks handling. */
- uint64_t gicv3_its_get_cacheability(void);
-diff --git a/xen/arch/arm/include/asm/gic_v4_its.h b/xen/arch/arm/include/a=
-sm/gic_v4_its.h
-index f48eae60ad..722247ec60 100644
---- a/xen/arch/arm/include/asm/gic_v4_its.h
-+++ b/xen/arch/arm/include/asm/gic_v4_its.h
-@@ -29,6 +29,26 @@
- #define GITS_CMD_VINVALL                 0x2d
- #define GITS_CMD_INVDB                   0x2e
-=20
-+/* Describes the mapping of a VLPI */
-+struct its_vlpi_map {
-+    struct its_vm       *vm;
-+    unsigned int        vpe_idx;    /* Index of the VPE */
-+    uint32_t            vintid;     /* Virtual LPI number */
-+    bool                db_enabled; /* Is the VPE doorbell to be generated=
-? */
-+    uint8_t             properties;
-+    struct pending_irq  *pirq;
-+    struct its_device   *dev;
-+    uint32_t            eventid;
-+};
-+
-+struct event_vlpi_map {
-+    unsigned int            nr_lpis;
-+    spinlock_t              vlpi_lock;
-+    struct its_vm           *vm;
-+    struct its_vlpi_map     *vlpi_maps;
-+    unsigned int            nr_vlpis;
-+};
-+
- #endif
-=20
- /*
 diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgi=
 c.h
-index 77323b2584..360f8a968e 100644
+index a874a02d70..77323b2584 100644
 --- a/xen/arch/arm/include/asm/vgic.h
 +++ b/xen/arch/arm/include/asm/vgic.h
-@@ -70,6 +70,7 @@ struct pending_irq
-      * LPI with the same number in an LR must be from an older LPI, which
-      * has been unmapped before.
-      *
-+     * GIC_IRQ_GUEST_FORWARDED: the IRQ is forwarded to a VCPU(GICv4 only)
-      */
- #define GIC_IRQ_GUEST_QUEUED   0
- #define GIC_IRQ_GUEST_ACTIVE   1
-@@ -77,6 +78,7 @@ struct pending_irq
- #define GIC_IRQ_GUEST_ENABLED  3
- #define GIC_IRQ_GUEST_MIGRATING   4
- #define GIC_IRQ_GUEST_PRISTINE_LPI  5
-+#define GIC_IRQ_GUEST_FORWARDED     6
-     unsigned long status;
-     struct irq_desc *desc; /* only set if the irq corresponds to a physica=
-l irq */
-     unsigned int irq;
-@@ -95,6 +97,9 @@ struct pending_irq
+@@ -94,11 +94,23 @@ struct pending_irq
+      * TODO: when implementing irq migration, taking only the current
       * vgic lock is not going to be enough. */
      struct list_head lr_queue;
-     bool hw;                    /* Tied to HW IRQ */
-+#ifdef CONFIG_GICV4
-+    struct its_vlpi_map *vlpi_map;
-+#endif
++    bool hw;                    /* Tied to HW IRQ */
  };
 =20
  #define NR_INTERRUPT_PER_RANK   32
+ #define INTERRUPT_RANK_MASK (NR_INTERRUPT_PER_RANK - 1)
+=20
++#ifdef CONFIG_GICV4
++static inline bool pirq_is_tied_to_hw(struct pending_irq *pirq)
++{
++    ASSERT(pirq);
++    return pirq->hw;
++}
++
++#else
++#define pirq_is_tied_to_hw(pirq) ((void)pirq, false)
++#endif
++
+ /* Represents state corresponding to a block of 32 interrupts */
+ struct vgic_irq_rank {
+     spinlock_t lock; /* Covers access to all other members of this struct =
+*/
+@@ -360,7 +372,8 @@ static inline paddr_t vgic_dist_base(const struct vgic_=
+dist *vgic)
+ extern struct vcpu *vgic_get_target_vcpu(struct vcpu *v, unsigned int virq=
+);
+ extern void vgic_remove_irq_from_queues(struct vcpu *v, struct pending_irq=
+ *p);
+ extern void gic_remove_from_lr_pending(struct vcpu *v, struct pending_irq =
+*p);
+-extern void vgic_init_pending_irq(struct pending_irq *p, unsigned int virq=
+);
++extern void vgic_init_pending_irq(struct pending_irq *p, unsigned int virq=
+,
++                                  bool hw);
+ extern struct pending_irq *irq_to_pending(struct vcpu *v, unsigned int irq=
+);
+ extern struct pending_irq *spi_to_pending(struct domain *d, unsigned int i=
+rq);
+ extern struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v,
 diff --git a/xen/arch/arm/vgic-v3-its.c b/xen/arch/arm/vgic-v3-its.c
-index 576e7fd4b0..94f7dd7d90 100644
+index bc738614bb..576e7fd4b0 100644
 --- a/xen/arch/arm/vgic-v3-its.c
 +++ b/xen/arch/arm/vgic-v3-its.c
-@@ -589,6 +589,14 @@ static int its_discard_event(struct virt_its *its,
-     if ( vlpi =3D=3D INVALID_LPI )
-         return -ENOENT;
+@@ -610,7 +610,7 @@ static int its_discard_event(struct virt_its *its,
 =20
-+    p =3D gicv3_its_get_event_pending_irq(its->d, its->doorbell_address,
-+                                        vdevid, vevid);
-+    if ( unlikely(!p) )
-+        return -EINVAL;
-+
-+    if ( pirq_is_tied_to_hw(p) )
-+        if ( gicv4_its_vlpi_unmap(p) )
-+            return -EINVAL;
-     /*
-      * TODO: This relies on the VCPU being correct in the ITS tables.
-      * This can be fixed by either using a per-IRQ lock or by using
-@@ -751,6 +759,27 @@ static int its_handle_mapti(struct virt_its *its, uint=
-64_t *cmdptr)
+     /* Cleanup the pending_irq and disconnect it from the LPI. */
+     vgic_remove_irq_from_queues(vcpu, p);
+-    vgic_init_pending_irq(p, INVALID_LPI);
++    vgic_init_pending_irq(p, INVALID_LPI, false);
 =20
-     vgic_init_pending_irq(pirq, intid, gic_is_gicv4());
+     spin_unlock_irqrestore(&vcpu->arch.vgic.lock, flags);
 =20
-+    pirq->lpi_vcpu_id =3D vcpu->vcpu_id;
-+
-+    if ( pirq_is_tied_to_hw(pirq) )
-+        /*
-+         * If on GICv4, we could let the VLPI being directly injected
-+         * to the guest. To achieve that, the VLPI must be mapped using
-+         * the VMAPTI command.
-+         */
-+        if ( gicv4_assign_guest_event(its->d, its->doorbell_address, devid=
-,
-+                                      eventid, pirq) )
-+            goto out_remove_mapping;
-+
-+    if ( pirq_is_tied_to_hw(pirq) )
-+        set_bit(GIC_IRQ_GUEST_FORWARDED, &pirq->status);
-+    else
-+        /*
-+         * Mark this LPI as new, so any older (now unmapped) LPI in any LR
-+         * can be easily recognised as such.
-+         */
-+        set_bit(GIC_IRQ_GUEST_PRISTINE_LPI, &pirq->status);
-+
+@@ -749,7 +749,7 @@ static int its_handle_mapti(struct virt_its *its, uint6=
+4_t *cmdptr)
+     if ( !pirq )
+         goto out_remove_mapping;
+=20
+-    vgic_init_pending_irq(pirq, intid);
++    vgic_init_pending_irq(pirq, intid, gic_is_gicv4());
+=20
      /*
       * Now read the guest's property table to initialize our cached state.
-      * We don't need the VGIC VCPU lock here, because the pending_irq isn'=
-t
-@@ -761,12 +790,6 @@ static int its_handle_mapti(struct virt_its *its, uint=
-64_t *cmdptr)
-         goto out_remove_host_entry;
+diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+index 6647071ad4..0da8c1a425 100644
+--- a/xen/arch/arm/vgic.c
++++ b/xen/arch/arm/vgic.c
+@@ -112,7 +112,7 @@ struct vgic_irq_rank *vgic_rank_irq(struct vcpu *v, uns=
+igned int irq)
+     return vgic_get_rank(v, rank);
+ }
 =20
-     pirq->lpi_vcpu_id =3D vcpu->vcpu_id;
--    /*
--     * Mark this LPI as new, so any older (now unmapped) LPI in any LR
--     * can be easily recognised as such.
--     */
--    set_bit(GIC_IRQ_GUEST_PRISTINE_LPI, &pirq->status);
--
-     /*
-      * Now insert the pending_irq into the domain's LPI tree, so that
-      * it becomes live.
-@@ -824,6 +847,13 @@ static int its_handle_movi(struct virt_its *its, uint6=
-4_t *cmdptr)
-     if ( unlikely(!p) )
-         goto out_unlock;
+-void vgic_init_pending_irq(struct pending_irq *p, unsigned int virq)
++void vgic_init_pending_irq(struct pending_irq *p, unsigned int virq, bool =
+hw)
+ {
+     /* The lpi_vcpu_id field must be big enough to hold a VCPU ID. */
+     BUILD_BUG_ON(BIT(sizeof(p->lpi_vcpu_id) * 8, UL) < MAX_VIRT_CPUS);
+@@ -122,6 +122,8 @@ void vgic_init_pending_irq(struct pending_irq *p, unsig=
+ned int virq)
+     INIT_LIST_HEAD(&p->lr_queue);
+     p->irq =3D virq;
+     p->lpi_vcpu_id =3D INVALID_VCPU_ID;
++    /* Whether virtual irq is tied to a HW one. */
++    p->hw =3D hw;
+ }
 =20
-+    if ( pirq_is_tied_to_hw(p) )
-+    {
-+        ret =3D gicv4_its_vlpi_move(p, nvcpu);
-+        if ( ret )
-+            goto out_unlock;
-+    }
-+
-     /*
-      * TODO: This relies on the VCPU being correct in the ITS tables.
-      * This can be fixed by either using a per-IRQ lock or by using
+ static void vgic_rank_init(struct vgic_irq_rank *rank, uint8_t index,
+@@ -202,7 +204,7 @@ static int init_vgic_espi(struct domain *d)
+     for ( i =3D d->arch.vgic.nr_spis, idx =3D 0;
+           i < vgic_num_spi_lines(d); i++, idx++ )
+         vgic_init_pending_irq(&d->arch.vgic.pending_irqs[i],
+-                              espi_idx_to_intid(idx));
++                              espi_idx_to_intid(idx), false);
+=20
+     for ( i =3D 0; i < DOMAIN_NR_EXT_RANKS(d); i++ )
+         vgic_rank_init(&d->arch.vgic.ext_shared_irqs[i],
+@@ -304,7 +306,7 @@ int domain_vgic_init(struct domain *d, unsigned int nr_=
+spis)
+         return -ENOMEM;
+=20
+     for (i=3D0; i<d->arch.vgic.nr_spis; i++)
+-        vgic_init_pending_irq(&d->arch.vgic.pending_irqs[i], i + 32);
++        vgic_init_pending_irq(&d->arch.vgic.pending_irqs[i], i + 32, false=
+);
+=20
+     /* SPIs are routed to VCPU0 by default */
+     for ( i =3D 0; i < DOMAIN_NR_RANKS(d); i++ )
+@@ -381,7 +383,7 @@ int vcpu_vgic_init(struct vcpu *v)
+=20
+     memset(&v->arch.vgic.pending_irqs, 0, sizeof(v->arch.vgic.pending_irqs=
+));
+     for (i =3D 0; i < 32; i++)
+-        vgic_init_pending_irq(&v->arch.vgic.pending_irqs[i], i);
++        vgic_init_pending_irq(&v->arch.vgic.pending_irqs[i], i, false);
+=20
+     INIT_LIST_HEAD(&v->arch.vgic.inflight_irqs);
+     INIT_LIST_HEAD(&v->arch.vgic.lr_pending);
 --=20
 2.51.2
 
