@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B2A5E7314F
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 09:30:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1218449.1527191 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44889E73151
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 09:57:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1218463.1527212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmqGN-0006dI-BG; Mon, 02 Feb 2026 09:30:31 +0000
+	id 1vmqgU-0001eN-6u; Mon, 02 Feb 2026 09:57:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1218449.1527191; Mon, 02 Feb 2026 09:30:31 +0000
+Received: by outflank-mailman (output) from mailman id 1218463.1527212; Mon, 02 Feb 2026 09:57:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmqGN-0006dB-76; Mon, 02 Feb 2026 09:30:31 +0000
-Received: by outflank-mailman (input) for mailman id 1218449;
- Mon, 02 Feb 2026 09:30:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Bi8a=AG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vmqGM-0006d5-Mr
- for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 09:30:30 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cff76c17-0019-11f1-b161-2bf370ae4941;
- Mon, 02 Feb 2026 10:30:29 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-47ee3a63300so46483685e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 02 Feb 2026 01:30:29 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4806cddffc0sm437701485e9.5.2026.02.02.01.30.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Feb 2026 01:30:27 -0800 (PST)
+	id 1vmqgU-0001cy-08; Mon, 02 Feb 2026 09:57:30 +0000
+Received: by outflank-mailman (input) for mailman id 1218463;
+ Mon, 02 Feb 2026 09:52:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=IGL7=AG=sony.com=shashank.mahadasyam@srs-se1.protection.inumbo.net>)
+ id 1vmqbE-0001Il-Va
+ for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 09:52:04 +0000
+Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp
+ [2001:cf8:ace:41::4]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d2cc2a73-001c-11f1-9ccf-f158ae23cfc8;
+ Mon, 02 Feb 2026 10:52:02 +0100 (CET)
+Received: from unknown (HELO jpmta-ob1.noc.sony.co.jp)
+ ([IPv6:2001:cf8:0:6e7::6])
+ by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Feb 2026 18:51:38 +0900
+Received: from unknown (HELO [127.0.1.1])
+ ([IPv6:2001:cf8:1:573:0:dddd:6b3e:119e])
+ by jpmta-ob1.noc.sony.co.jp with ESMTP; 02 Feb 2026 18:51:38 +0900
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,176 +45,262 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cff76c17-0019-11f1-b161-2bf370ae4941
+X-Inumbo-ID: d2cc2a73-001c-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770024628; x=1770629428; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=T28K2QmfD4zyIgF8sXByuh95R5TkyNmgYqzdeBXOrwE=;
-        b=gTlynRSt7wqG7P2362x/v1ONhAdcNbM3PeaPWr8jfn3g4n/nQHhDm5+uUC2fsOUBAG
-         2r0VEtWAzKmrB6IS8H9m7T9IF+rBC5MR7niyHptN6s6wtcq0Otej6EQ90Be0pdx9dLQR
-         CokMoqNkeBgxvy/04oauJsHiVlw+NzymyN8ueMfHe6tDScB10Vj4zzaNSN5fkNQmNDX7
-         4c/1pdJeU8vZjyQpOYBPxSnrMICKwuZQx5XDuczTUYiTJfPBh+IOdGEtiiATgFGP+VGf
-         Dv+1D7yZMDgYUGGsNhwmrrtCQsCnqmdeeZ1+iIdGGKzC6+PlAxqyEITHj9UmdDpIFduJ
-         r1aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770024628; x=1770629428;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=T28K2QmfD4zyIgF8sXByuh95R5TkyNmgYqzdeBXOrwE=;
-        b=eZLEY9sJDQlI4cfsvltLgspU8mglFyeQ0im0HTv4c+JmCLderMuCfGMNtmogCjJ5Fd
-         V3waQPttZY1gYXvp+ij+L1Si2Jr5NFKBv6IxoaDiW1Fz+dA98qjsLBGKoaVWYJ60X8xa
-         H1KthsILo2L3ZZGr57yQli3OlKKQqpF+5mB9mavekY9BKsJ5PVq9vV5xL5j/8Y3F0o3Y
-         57Hsg5Gfocpq03+Mc51MYrECYiCALEufEtNXTVUWIfbT2yXgpCIeVqK2MVa8NGm529c0
-         dMKHqnjx9YRAWC2KJUHVvb0KlQGbpJvUUCTdrzGgvEGhVlqG3Rs8ug2RlkCER9LypEbD
-         1kSA==
-X-Gm-Message-State: AOJu0YzLENpAbA9OxxwJJVXNMfycdApTNXkflSdwyAbFaT91yHlHyO7f
-	CTU6frYEULyfB3ouZ4er7zbQjRQsWTOAg8AL2td+ltl2cgb0x8d8wl7PJgWWc/G/Jw==
-X-Gm-Gg: AZuq6aIDqFYonzluodyyziwJOwqKlTMixbVABCDKfaTQ9OGv2kErZ7bDtgUs21mjyYD
-	RyINA8L67fwbcSFlswWaHhB6fzOD1+lonzO29qHAKuwAoamM0HFn9RYomu/sc15B3TPiGrhfowp
-	6EE4ozTwoc2kPZH/K1pnNFLS1JABPJOgRKZi56GJYwJG14ZXBwAxHh0pZwsY+PitEFArNym3CDh
-	AyJRNNOg+tROZ80yPsdLgoYfQeptQ+8ByXfukWAaQgfI1GuHkfdk4Z/HmIaaYE2eemxuQddaXld
-	TZ1zw4TtHqyWsxbXDquTWmlmqSi73pXrjWd3PiPbFCxMsRNd3BDXdp7dbe/XDuiCf0D2x3gfn5c
-	GL2JuFP+JKK6u/E/CQc45hvvDwytqdTkAUgVk1nYlLrweYquy6PrKj15EwojBbyzOeT6QAFde9x
-	YR20ZNTH4fkltkTAY4bo12pIQWvd5FsdTjmer0f6Ksjdf1Ys9gDEZhg2g/671+v6a6nbmEkQOWK
-	oM=
-X-Received: by 2002:a05:600c:6814:b0:480:699c:abe9 with SMTP id 5b1f17b1804b1-482db4b21c6mr112875325e9.37.1770024628377;
-        Mon, 02 Feb 2026 01:30:28 -0800 (PST)
-Message-ID: <1bcdd2dd-9b2b-4eb2-a569-e28b03c1e1fb@suse.com>
-Date: Mon, 2 Feb 2026 10:30:29 +0100
+  d=sony.com; s=s1jp; t=1770025922; x=1801561922;
+  h=from:date:subject:mime-version:content-transfer-encoding:
+   message-id:references:in-reply-to:to:cc;
+  bh=UGbV0HlypAsqDyqCwF4KKZshjhbYqkotn40a85H3Q7U=;
+  b=Fsk8atP8nOli3A/kdU1FTFujNMxydunfy/0QabsYe7jNJhGm6H88rUTl
+   inKAlL/r973SUJg9eT/QLvQ6XUQ5Z1zzVR3WfUx82Bh/+OVteJj5i9c0c
+   i9g8QYmd1M2Fj6GWZ0zQGLNBVz7vA8wVOPX0KiVqO3vhAXRtayG1s6aam
+   JyXxACjk15x5b0CeL9dCyap3V5e5y9+P4V5uVk2lZ9ONogp1rfsnTlbDL
+   nFVA8cTmEmXDW5zHMNTWZ8HLFoZDQMYuHpAsQWRS6QQZHtlDkpL+jif+G
+   i+LoAuD8joUkr/+y1Qm+QfGxsdGCUdd3H8PsWEFMyX0QDGANlaggsztfq
+   w==;
+X-IronPort-AV: E=Sophos;i="6.21,268,1763391600"; 
+   d="scan'208";a="607384938"
+From: Shashank Balaji <shashank.mahadasyam@sony.com>
+Date: Mon, 02 Feb 2026 18:51:04 +0900
+Subject: [PATCH 3/3] x86/virt: rename x2apic_available to
+ x2apic_without_ir_available
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/6] x86/PCI: avoid re-evaluation of extended config
- space accessibility
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>
-References: <a67e69b8-c1e9-4448-adbd-17a19dfe13de@suse.com>
- <a0b10d39-daae-4fc0-af42-a3794a96f9f5@suse.com>
- <b63b0f9e-93cd-4b55-a7c0-f8eab9df1947@suse.com> <aYBq2EoeP_TGv_sK@Mac.lan>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aYBq2EoeP_TGv_sK@Mac.lan>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260202-x2apic-fix-v1-3-71c8f488a88b@sony.com>
+References: <20260202-x2apic-fix-v1-0-71c8f488a88b@sony.com>
+In-Reply-To: <20260202-x2apic-fix-v1-0-71c8f488a88b@sony.com>
+To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ Suresh Siddha <suresh.b.siddha@intel.com>, 
+ "K. Y. Srinivasan" <kys@microsoft.com>, 
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+ Ajay Kaher <ajay.kaher@broadcom.com>, 
+ Alexey Makhalov <alexey.makhalov@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Ingo Molnar <mingo@elte.hu>, linux-kernel@vger.kernel.org, 
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev, 
+ jailhouse-dev@googlegroups.com, kvm@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, Rahul Bukte <rahul.bukte@sony.com>, 
+ Shashank Balaji <shashank.mahadasyam@sony.com>, 
+ Daniel Palmer <daniel.palmer@sony.com>, Tim Bird <tim.bird@sony.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8661;
+ i=shashank.mahadasyam@sony.com; h=from:subject:message-id;
+ bh=40ywH2ksTo16iKGC5c7aKcdzHSb3M0fEznHdLx5ChZY=;
+ b=owGbwMvMwCU2bX1+URVTXyjjabUkhsyG4pV73BSkW2t+bFj8lP/axHMSXQ/nLg+dcOZBrWq1l
+ IycyNnlHaUsDGJcDLJiiiylStW/9q4IWtJz5rUizBxWJpAhDFycAjAR/UqGn4xiaRxyy02Nn4be
+ 9Xesdnx9Matg+r2d2y7WH5tzzWHmuTSG/4lN6178i2r5JLaG8/tKKYYCxeYn2uGibz7WxSq6yev
+ mMAAA
+X-Developer-Key: i=shashank.mahadasyam@sony.com; a=openpgp;
+ fpr=75227BFABDA852A48CCCEB2196AF6F727A028E55
 
-On 02.02.2026 10:14, Roger Pau Monné wrote:
-> On Mon, Feb 02, 2026 at 09:51:18AM +0100, Jan Beulich wrote:
->> On 29.01.2026 14:10, Jan Beulich wrote:
->>> @@ -160,10 +161,13 @@ int pci_mmcfg_arch_enable(unsigned int i
->>>      return 0;
->>>  }
->>>  
->>> -void pci_mmcfg_arch_disable(unsigned int idx)
->>> +int pci_mmcfg_arch_disable(unsigned int idx)
->>>  {
->>>      const typeof(pci_mmcfg_config[0]) *cfg = pci_mmcfg_virt[idx].cfg;
->>>  
->>> +    if ( !pci_mmcfg_virt[idx].virt )
->>> +        return 1;
->>
->> Afaict this is what causes CI (adl-*) to say no here:
->>
->> (XEN) [    4.132689] PCI: Using MCFG for segment 0000 bus 00-ff
->> (XEN) [    4.132697] ----[ Xen-4.22-unstable  x86_64  debug=y ubsan=y  Not tainted ]----
->> (XEN) [    4.132700] CPU:    12
->> (XEN) [    4.132702] RIP:    e008:[<ffff82d0405779bd>] pci_mmcfg_read+0x19e/0x1c7
->> (XEN) [    4.132708] RFLAGS: 0000000000010286   CONTEXT: hypervisor (d0v0)
->> (XEN) [    4.132711] rax: 0000000000300000   rbx: ffff808000300100   rcx: 0000000000000000
->> (XEN) [    4.132714] rdx: ffff808000300100   rsi: 0000000000000000   rdi: ffff8304959ffcec
->> (XEN) [    4.132716] rbp: ffff8304959ffd18   rsp: ffff8304959ffce8   r8:  0000000000000004
->> (XEN) [    4.132718] r9:  ffff8304959ffd2c   r10: 0000000000000000   r11: 0000000000000000
->> (XEN) [    4.132720] r12: 0000000000000100   r13: 0000000000000004   r14: ffff8304959ffd2c
->> (XEN) [    4.132723] r15: ffff808000000000   cr0: 0000000080050033   cr4: 0000000000b526e0
->> (XEN) [    4.132725] cr3: 0000000492a30000   cr2: ffff808000300100
->> (XEN) [    4.132727] fsb: 0000000000000000   gsb: ffff8881b9a00000   gss: 0000000000000000
->> (XEN) [    4.132729] ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e010   cs: e008
->> (XEN) [    4.132733] Xen code around <ffff82d0405779bd> (pci_mmcfg_read+0x19e/0x1c7):
->> (XEN) [    4.132734]  48 39 d3 72 ea 4c 01 e3 <8b> 03 89 c3 4d 85 f6 74 0d 41 89 1e b8 00 00 00
->> (XEN) [    4.132744] Xen stack trace from rsp=ffff8304959ffce8:
->> (XEN) [    4.132745]    0000000300000286 ffff830495bd8010 0000000000000003 ffff830495bd8010
->> (XEN) [    4.132749]    ffff8304959ffdd0 ffff82d0405fa7ef ffff8304959ffd30 ffff82d040576877
->> (XEN) [    4.132753]    000000000000000c ffff8304959ffd58 ffff82d04039b81d ffff8304959ffe28
->> (XEN) [    4.132756]    0000000000000003 ffff830495bd8010 ffff8304959ffd80 ffff82d0405fa90b
->> (XEN) [    4.132760]    ffff8304959ffdc8 ffff830495bd8010 ffff830498019650 ffff8304959ffdb8
->> (XEN) [    4.132764]    ffff82d0403983e0 ffff830498019650 ffff8304959ffe28 ffff82d0405fa7ef
->> (XEN) [    4.132767]    0000000000000018 ffffc9004002b900 ffff8304959ffdf8 ffff82d04039feba
->> (XEN) [    4.132771]    ffff82d0405fa7ef ffff8304959ffe28 0000000000000000 ffffc9004002b900
->> (XEN) [    4.132774]    0000000000000000 ffff8304959bb000 ffff8304959ffe78 ffff82d0405ff666
->> (XEN) [    4.132778]    ffff82d0405713b8 00000000ffffffff 00a0fb0081f456e0 ffff8304959b3010
->> (XEN) [    4.132782]    00000000c0000000 00000001ff000000 ffff8304959fff08 0000000000000040
->> (XEN) [    4.132785]    000000ec00000001 ffff8304959fff08 ffff8304959a4000 0000000000000021
->> (XEN) [    4.132789]    0000000000000000 ffffc9004002b900 ffff8304959ffef8 ffff82d0405711b2
->> (XEN) [    4.132792]    0000000000000000 ffff888100456938 ffff8881001470b8 0000000000000018
->> (XEN) [    4.132795]    0000000000000000 ffff8304959ffef8 ffff82d0406213f9 ffff8304959a4000
->> (XEN) [    4.132799]    0000000000000000 ffff8304959a4000 0000000000000000 0000000000000000
->> (XEN) [    4.132802]    ffff8304959fffff 0000000000000000 00007cfb6a6000d7 ffff82d0402012d3
->> (XEN) [    4.132806]    0000000000000000 00000000ffffffff ffff8881001470b8 ffff888100b88900
->> (XEN) [    4.132809]    ffffc9004002b900 ffff8881001470b8 0000000000000283 ffff888100456938
->> (XEN) [    4.132813]    ffff888100065410 0000000000000000 0000000000000021 ffffffff81f7842a
->> (XEN) [    4.132816] Xen call trace:
->> (XEN) [    4.132819]    [<ffff82d0405779bd>] R pci_mmcfg_read+0x19e/0x1c7
->> (XEN) [    4.132822]    [<ffff82d040576877>] F pci_conf_read32+0x55/0x5e
->> (XEN) [    4.132826]    [<ffff82d04039b81d>] F pci_check_extcfg+0xb1/0x13b
->> (XEN) [    4.132831]    [<ffff82d0405fa90b>] F physdev_check_pci_extcfg+0x11c/0x121
->> (XEN) [    4.132833]    [<ffff82d0403983e0>] F drivers/passthrough/pci.c#iterate_all+0xa2/0xe2
->> (XEN) [    4.132836]    [<ffff82d04039feba>] F pci_segment_iterate+0x4e/0x74
->> (XEN) [    4.132839]    [<ffff82d0405ff666>] F do_physdev_op+0x362a/0x4161
->> (XEN) [    4.132842]    [<ffff82d0405711b2>] F pv_hypercall+0x6be/0x838
->> (XEN) [    4.132845]    [<ffff82d0402012d3>] F lstar_enter+0x143/0x148
->> (XEN) [    4.132847] 
->> (XEN) [    4.132848] Pagetable walk from ffff808000300100:
->> (XEN) [    4.132851]  L4[0x101] = 0000000000000000 ffffffffffffffff
->>
->> There is an important comment in pci_mmcfg_arch_disable():
->>
->>     /*
->>      * Don't use destroy_xen_mappings() here, or make sure that at least
->>      * the necessary L4 entries get populated (so that they get properly
->>      * propagated to guest domains' page tables).
->>      */
->>
->> Hence it is wrong to bypass
->>
->>     mcfg_ioremap(cfg, idx, 0);
-> 
-> Hm, I see.  The L4 slot must be unconditionally populated before we
-> clone the idle page-table, otherwise the mappings won't propagate.
-> 
-> What about unconditionally populating the L4 slot in
-> subarch_init_memory()?  That seems less fragile than doing it in
-> pci_mmcfg_arch_disable().
+No functional change.
 
-Less fragile - perhaps. Yet I don't see why we should populate the field if
-we wouldn't ever need it. Of course with violating layering some, we could
-know in subarch_init_memory(), as pci_setup() runs earlier.
+x86_init.hyper.x2apic_available is used only in try_to_enable_x2apic to check if
+x2apic needs to be disabled if interrupt remapping support isn't present. But
+the name x2apic_available doesn't reflect that usage.
 
-Jan
+This is what x2apic_available is set to for various hypervisors:
+
+	acrn		boot_cpu_has(X86_FEATURE_X2APIC)
+	mshyperv	boot_cpu_has(X86_FEATURE_X2APIC)
+	xen		boot_cpu_has(X86_FEATURE_X2APIC) or false
+	vmware		vmware_legacy_x2apic_available
+	kvm		kvm_cpuid_base() != 0
+	jailhouse	x2apic_enabled()
+	bhyve		true
+	default		false
+
+Bare metal and vmware correctly check if x2apic is available without interrupt
+remapping. The rest of them check if x2apic is enabled/supported, and kvm just
+checks if the kernel is running on kvm. The other hypervisors may have to have
+their checks audited.
+
+Also fix the backwards pr_info message printed on disabling x2apic because of
+lack of irq remapping support.
+
+Compile tested with all the hypervisor guest support enabled.
+
+Co-developed-by: Rahul Bukte <rahul.bukte@sony.com>
+Signed-off-by: Rahul Bukte <rahul.bukte@sony.com>
+Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
+---
+ arch/x86/include/asm/x86_init.h |  4 ++--
+ arch/x86/kernel/apic/apic.c     |  4 ++--
+ arch/x86/kernel/cpu/acrn.c      |  2 +-
+ arch/x86/kernel/cpu/bhyve.c     |  2 +-
+ arch/x86/kernel/cpu/mshyperv.c  |  2 +-
+ arch/x86/kernel/cpu/vmware.c    |  2 +-
+ arch/x86/kernel/jailhouse.c     |  2 +-
+ arch/x86/kernel/kvm.c           |  2 +-
+ arch/x86/kernel/x86_init.c      | 12 ++++++------
+ arch/x86/xen/enlighten_hvm.c    |  4 ++--
+ 10 files changed, 18 insertions(+), 18 deletions(-)
+
+diff --git a/arch/x86/include/asm/x86_init.h b/arch/x86/include/asm/x86_init.h
+index 6c8a6ead84f6..b270d9eed755 100644
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -116,7 +116,7 @@ struct x86_init_pci {
+  * struct x86_hyper_init - x86 hypervisor init functions
+  * @init_platform:		platform setup
+  * @guest_late_init:		guest late init
+- * @x2apic_available:		X2APIC detection
++ * @x2apic_without_ir_available: is x2apic available without irq remap?
+  * @msi_ext_dest_id:		MSI supports 15-bit APIC IDs
+  * @init_mem_mapping:		setup early mappings during init_mem_mapping()
+  * @init_after_bootmem:		guest init after boot allocator is finished
+@@ -124,7 +124,7 @@ struct x86_init_pci {
+ struct x86_hyper_init {
+ 	void (*init_platform)(void);
+ 	void (*guest_late_init)(void);
+-	bool (*x2apic_available)(void);
++	bool (*x2apic_without_ir_available)(void);
+ 	bool (*msi_ext_dest_id)(void);
+ 	void (*init_mem_mapping)(void);
+ 	void (*init_after_bootmem)(void);
+diff --git a/arch/x86/kernel/apic/apic.c b/arch/x86/kernel/apic/apic.c
+index cc64d61f82cf..8820b631f8a2 100644
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -1836,8 +1836,8 @@ static __init void try_to_enable_x2apic(int remap_mode)
+ 		 * Using X2APIC without IR is not architecturally supported
+ 		 * on bare metal but may be supported in guests.
+ 		 */
+-		if (!x86_init.hyper.x2apic_available()) {
+-			pr_info("x2apic: IRQ remapping doesn't support X2APIC mode\n");
++		if (!x86_init.hyper.x2apic_without_ir_available()) {
++			pr_info("x2apic: Not supported without IRQ remapping\n");
+ 			x2apic_disable();
+ 			return;
+ 		}
+diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
+index 2c5b51aad91a..9204b98d4786 100644
+--- a/arch/x86/kernel/cpu/acrn.c
++++ b/arch/x86/kernel/cpu/acrn.c
+@@ -77,5 +77,5 @@ const __initconst struct hypervisor_x86 x86_hyper_acrn = {
+ 	.detect                 = acrn_detect,
+ 	.type			= X86_HYPER_ACRN,
+ 	.init.init_platform     = acrn_init_platform,
+-	.init.x2apic_available  = acrn_x2apic_available,
++	.init.x2apic_without_ir_available = acrn_x2apic_available,
+ };
+diff --git a/arch/x86/kernel/cpu/bhyve.c b/arch/x86/kernel/cpu/bhyve.c
+index f1a8ca3dd1ed..91a90a7459ce 100644
+--- a/arch/x86/kernel/cpu/bhyve.c
++++ b/arch/x86/kernel/cpu/bhyve.c
+@@ -61,6 +61,6 @@ const struct hypervisor_x86 x86_hyper_bhyve __refconst = {
+ 	.name			= "Bhyve",
+ 	.detect			= bhyve_detect,
+ 	.init.init_platform	= x86_init_noop,
+-	.init.x2apic_available	= bhyve_x2apic_available,
++	.init.x2apic_without_ir_available = bhyve_x2apic_available,
+ 	.init.msi_ext_dest_id	= bhyve_ext_dest_id,
+ };
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index 579fb2c64cfd..61458855094a 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -760,7 +760,7 @@ const __initconst struct hypervisor_x86 x86_hyper_ms_hyperv = {
+ 	.name			= "Microsoft Hyper-V",
+ 	.detect			= ms_hyperv_platform,
+ 	.type			= X86_HYPER_MS_HYPERV,
+-	.init.x2apic_available	= ms_hyperv_x2apic_available,
++	.init.x2apic_without_ir_available = ms_hyperv_x2apic_available,
+ 	.init.msi_ext_dest_id	= ms_hyperv_msi_ext_dest_id,
+ 	.init.init_platform	= ms_hyperv_init_platform,
+ 	.init.guest_late_init	= ms_hyperv_late_init,
+diff --git a/arch/x86/kernel/cpu/vmware.c b/arch/x86/kernel/cpu/vmware.c
+index cb3f900c46fc..46d325818797 100644
+--- a/arch/x86/kernel/cpu/vmware.c
++++ b/arch/x86/kernel/cpu/vmware.c
+@@ -585,7 +585,7 @@ const __initconst struct hypervisor_x86 x86_hyper_vmware = {
+ 	.detect				= vmware_platform,
+ 	.type				= X86_HYPER_VMWARE,
+ 	.init.init_platform		= vmware_platform_setup,
+-	.init.x2apic_available		= vmware_legacy_x2apic_available,
++	.init.x2apic_without_ir_available = vmware_legacy_x2apic_available,
+ #ifdef CONFIG_AMD_MEM_ENCRYPT
+ 	.runtime.sev_es_hcall_prepare	= vmware_sev_es_hcall_prepare,
+ 	.runtime.sev_es_hcall_finish	= vmware_sev_es_hcall_finish,
+diff --git a/arch/x86/kernel/jailhouse.c b/arch/x86/kernel/jailhouse.c
+index 9e9a591a5fec..84a0bbe15989 100644
+--- a/arch/x86/kernel/jailhouse.c
++++ b/arch/x86/kernel/jailhouse.c
+@@ -291,6 +291,6 @@ const struct hypervisor_x86 x86_hyper_jailhouse __refconst = {
+ 	.name			= "Jailhouse",
+ 	.detect			= jailhouse_detect,
+ 	.init.init_platform	= jailhouse_init_platform,
+-	.init.x2apic_available	= jailhouse_x2apic_available,
++	.init.x2apic_without_ir_available = jailhouse_x2apic_available,
+ 	.ignore_nopv		= true,
+ };
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 37dc8465e0f5..709eba87d58e 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -1042,7 +1042,7 @@ const __initconst struct hypervisor_x86 x86_hyper_kvm = {
+ 	.detect				= kvm_detect,
+ 	.type				= X86_HYPER_KVM,
+ 	.init.guest_late_init		= kvm_guest_init,
+-	.init.x2apic_available		= kvm_para_available,
++	.init.x2apic_without_ir_available = kvm_para_available,
+ 	.init.msi_ext_dest_id		= kvm_msi_ext_dest_id,
+ 	.init.init_platform		= kvm_init_platform,
+ #if defined(CONFIG_AMD_MEM_ENCRYPT)
+diff --git a/arch/x86/kernel/x86_init.c b/arch/x86/kernel/x86_init.c
+index ebefb77c37bb..9ddf8c901ac6 100644
+--- a/arch/x86/kernel/x86_init.c
++++ b/arch/x86/kernel/x86_init.c
+@@ -112,12 +112,12 @@ struct x86_init_ops x86_init __initdata = {
+ 	},
+ 
+ 	.hyper = {
+-		.init_platform		= x86_init_noop,
+-		.guest_late_init	= x86_init_noop,
+-		.x2apic_available	= bool_x86_init_noop,
+-		.msi_ext_dest_id	= bool_x86_init_noop,
+-		.init_mem_mapping	= x86_init_noop,
+-		.init_after_bootmem	= x86_init_noop,
++		.init_platform			= x86_init_noop,
++		.guest_late_init		= x86_init_noop,
++		.x2apic_without_ir_available	= bool_x86_init_noop,
++		.msi_ext_dest_id		= bool_x86_init_noop,
++		.init_mem_mapping		= x86_init_noop,
++		.init_after_bootmem		= x86_init_noop,
+ 	},
+ 
+ 	.acpi = {
+diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
+index fe57ff85d004..42f3d21f313d 100644
+--- a/arch/x86/xen/enlighten_hvm.c
++++ b/arch/x86/xen/enlighten_hvm.c
+@@ -311,7 +311,7 @@ static uint32_t __init xen_platform_hvm(void)
+ 		 * detect PVH and panic there.
+ 		 */
+ 		h->init_platform = x86_init_noop;
+-		h->x2apic_available = bool_x86_init_noop;
++		h->x2apic_without_ir_available = bool_x86_init_noop;
+ 		h->init_mem_mapping = x86_init_noop;
+ 		h->init_after_bootmem = x86_init_noop;
+ 		h->guest_late_init = xen_hvm_guest_late_init;
+@@ -325,7 +325,7 @@ struct hypervisor_x86 x86_hyper_xen_hvm __initdata = {
+ 	.detect                 = xen_platform_hvm,
+ 	.type			= X86_HYPER_XEN_HVM,
+ 	.init.init_platform     = xen_hvm_guest_init,
+-	.init.x2apic_available  = xen_x2apic_available,
++	.init.x2apic_without_ir_available = xen_x2apic_available,
+ 	.init.init_mem_mapping	= xen_hvm_init_mem_mapping,
+ 	.init.guest_late_init	= xen_hvm_guest_late_init,
+ 	.init.msi_ext_dest_id   = msi_ext_dest_id,
+
+-- 
+2.43.0
+
 
