@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D9EE7DEEE
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 14:43:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1218649.1527484 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E23E7DEF1
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 14:45:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1218659.1527494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmv8u-0006VW-2O; Mon, 02 Feb 2026 14:43:08 +0000
+	id 1vmvBM-00073R-Eo; Mon, 02 Feb 2026 14:45:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1218649.1527484; Mon, 02 Feb 2026 14:43:08 +0000
+Received: by outflank-mailman (output) from mailman id 1218659.1527494; Mon, 02 Feb 2026 14:45:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmv8t-0006VP-Vq; Mon, 02 Feb 2026 14:43:07 +0000
-Received: by outflank-mailman (input) for mailman id 1218649;
- Mon, 02 Feb 2026 14:43:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vmvBM-00073K-Bx; Mon, 02 Feb 2026 14:45:40 +0000
+Received: by outflank-mailman (input) for mailman id 1218659;
+ Mon, 02 Feb 2026 14:45:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Bi8a=AG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vmv8s-0006VJ-WD
- for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 14:43:07 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7bcc2db1-0045-11f1-b161-2bf370ae4941;
- Mon, 02 Feb 2026 15:43:05 +0100 (CET)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-480142406b3so33520685e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 02 Feb 2026 06:43:05 -0800 (PST)
+ id 1vmvBL-00073E-Hj
+ for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 14:45:39 +0000
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [2a00:1450:4864:20::341])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d634295d-0045-11f1-9ccf-f158ae23cfc8;
+ Mon, 02 Feb 2026 15:45:37 +0100 (CET)
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-481188b7760so29782395e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Feb 2026 06:45:37 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-482f748a9b8sm126634195e9.8.2026.02.02.06.43.04
+ 5b1f17b1804b1-4806cdd79c7sm420044665e9.2.2026.02.02.06.45.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Feb 2026 06:43:04 -0800 (PST)
+ Mon, 02 Feb 2026 06:45:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,57 +47,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7bcc2db1-0045-11f1-b161-2bf370ae4941
+X-Inumbo-ID: d634295d-0045-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770043385; x=1770648185; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1770043537; x=1770648337; darn=lists.xenproject.org;
         h=content-transfer-encoding:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1ZujxPggRInMxlIdEnZPiAkfac72H5gL48apRNHkCVI=;
-        b=abwf2LaXgD8WmIyeh7OgCPTrc0y7QQoH1v69lzq1PUxPLhl9f3uR1es2arrPKQ78B2
-         dcwXFSSQxPaTvAwEVu+ugpC0sqvTNJaxzvzSnPducxL8lF2TOnZFJRBv+sdYqtFZc0Cx
-         LMPtrg290yWuge90lv8vxuWxY/ClFAOR3ZrqDGOrC7FFn2/8emvUXvBoieBPKNLbRBTo
-         crWqtleD86nbhLhUg+Jrqcfi6b7rL52icnRf8pMEx2L3H29WLC/kg8Mo/fe9naJZS3hK
-         Fru/ao9u+73TC9ctXHdQHq5JudtCiNM4j9Ker2u/lKfs0Sqg4TpkhZayI/34WwYnonSL
-         DCIg==
+        bh=2nGr+7R2b2rHqV5T/fNM944XxuEAEmcna2uqJ574g+A=;
+        b=EKGgy4B6D+lctw8RKWgKfZRy3NFzKd85MObMXbfhC3bWp7DHR9Mvqj8mHlMMcb7yvn
+         1zXNtD0fNVL60taLRXqygQSdMupdgEfCU18F7WxkBNl6cayLf5io47dNytWHoSZFxUpo
+         6A5D/AoA6vGN7imQSUvQSCZJzdQ6xHM4PKDVbKGUkxuMrSenn5FF7whbKpQXYNViJznq
+         gD+2CWa2n6PKdyGRX216jbtxBSrvBB+cmMowvJK//s2YGTVHsoYRKhX1Xxq6JmJRVJ3G
+         zJdpY4yFpK8The62RH4lgl1CTWfY3iU2E4l+Ur3luWpIKztU1/fjTsEHWDp2YUxLurJF
+         dPDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770043385; x=1770648185;
+        d=1e100.net; s=20230601; t=1770043537; x=1770648337;
         h=content-transfer-encoding:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=1ZujxPggRInMxlIdEnZPiAkfac72H5gL48apRNHkCVI=;
-        b=orQQ2Wufz7N4Sa3Olv5Big6PDJmzmfEyZ/wDdURLrRY3HbD7OYduDu4XEQB7MBt6JL
-         Fg3ND6w1aDwil8i8Spm8JxfKybYH3UFqniRrHv3MNt+p5NJ4HH0lU5IlTANqRT/01B+o
-         oXHzf+jZIbar/GNl1q5jld72M38zoJHP4YQ0GLM5OAwTdPernkjdzuxdxK+OrPbxRFzh
-         s+dCZwYgQTPATY1IAibvg/vg49b2JoU3Gz0733f+YIBs0u1bMR17VtotxVkIHuiRR4ql
-         G2xzTPjlu5ELFn9hHSx/khPKXF+Wyp6oxE7I6q/yLJug9vgzBRUNKcrIZJrf0SFzRVgN
-         ECtA==
-X-Gm-Message-State: AOJu0Yx3JGxdjzZJUe4aTbq7TrlEEpz7JwDgX9T0Q0+0qyTc84+A+yhh
-	w6u1QK+pOno9GPRDjdRN2veZiNxf0LazZLlY+BvUFFfee1mnKETOWM0a2er5PrEDFFnxlB6jj5l
-	d7x8=
-X-Gm-Gg: AZuq6aJejlrzb7YvOkdP4e3/EmLuxtZiaEdwT6v6npEqgq5N/x35jk+PtHqjsFWCOtF
-	9tTjrfYzrkonu/mIXhOBcedLsvysmO0CSxFYmVXK8zM+x0Q8UoEh+oAIFLH5ZoILyJorjk0lr3T
-	8CLWCdRAxVlTHM3dC8Z1Da0DlqSlxxKAKOv4390p1jh7WO7a6GnA1CJAp36Mc3xtn95zkUbAOrn
-	I/6gSjNb4BvOw+XaMmULB/wq8k68Cs5Sh1kHYzts5YgtxKIMYfQ0eYq5zAAH+80ho4hSoSnXDZh
-	/heOD3oRy1QWi6HMZOfAJNMU8EoPrYPUR7eRtmIM0xpyOctBVvCwlKhrUDP66PMJxWkwb15APo+
-	vRFfu7/fEUZHDV5RpgrwKBr+l1lUJsPrYdcZspiHUehHNoNuTtpCyt3ue58vFIIzfMtjiU79sS1
-	SNwirIkptgH6d3lia8zncjYDkApDj8stD1MabRXvlLHT8cgieNXx/4Lu+wlbCNzRElLcy5BMww9
-	Zo=
-X-Received: by 2002:a05:600c:a30c:b0:480:4a8f:2d5c with SMTP id 5b1f17b1804b1-482db62305emr106744815e9.29.1770043385084;
-        Mon, 02 Feb 2026 06:43:05 -0800 (PST)
-Message-ID: <f9b84a18-c968-4dfc-8e5b-6c97e7d3a04e@suse.com>
-Date: Mon, 2 Feb 2026 15:43:05 +0100
+        bh=2nGr+7R2b2rHqV5T/fNM944XxuEAEmcna2uqJ574g+A=;
+        b=Ey10rmelqKuqZ9dad4uqdvTSSL56Y9lyqekbDxM/0iFmUOomxH2iiBSW02d6HmZOxJ
+         Qfg0bwoBkq9gGWlAMX1WiWs4ufFabymydhQGHFiCflW9Y5lucFsAKJOkYmWDBKv2Qki5
+         RY6uxYpeJlXDvH3R2IXfFCVo7qcocomC8fhMgCPOqIabJs8pWx4Uu8mkOCb++0IeGlA1
+         uS5sj6y/drjmOGhor6bPbovzk3SYLhw7TAgrbZ4TDiicl4WgO5Vm4xrGZAMg60h1LlG/
+         H83+0QTD55aB3qq/ZtL+LEPt2DgtS4Fn9Ln8C4lgaX0zHw0+bo0NiZS/O1N3hcgoFeKP
+         pKpA==
+X-Gm-Message-State: AOJu0Ywim+vakrWe11sVZ+qlLc8IUGF8rQdb1IS3exsQZBjgwux4MqXL
+	NDueXqFX87c+ZflxCkB2+rAMufnSdzNfrHgUOnwulVO/g4r+/DVtMnjWkLSWMX20/uXALUEmsBE
+	gWVnLZA==
+X-Gm-Gg: AZuq6aJedB6dL4tmWkL8lfzJbZjssa/SghmUIiVujNEw1nIAl1I7AmuKBMKFhGTqoiW
+	jfiDqH1I8wusasdWzZnNrNm+rvu+sO7KYFR57nA51uOxR28cGdlZYVMSGUfPFxpa80Jhd5YRJkv
+	bzJWaqMMYhT50tSuxxhWZehCtuZssGOaRfdbvvuwN/fbq9z/bwUCFftBDq0FN5tzPorMj8mSlc/
+	UZlorafAwb+CqwXbOFZkVc87U2UIOZ4TIwNrGIhAx/XFOu9pYln4Mjh4YJS+y5/ee+qGBxbMF84
+	pUbjOi/AiUpMA4S6Cv3w15Wdn9iZLvafUvC6HSTVqs78H8NWRaiDMOW+3khabcYqvLVoHHPJRwo
+	zh4oofUY+jFzaJh1N3oilz9VNxlrxQGicTXBuy5NnBt0RJXIO6+l0pHz4LtHCMHNfzjAuro1UTJ
+	wMAr7StTpupPKB8Ck4NfLbMkYx56D2gT7j8v4TktrwjDfWjiZrfYH82hlhg2vDAvx9YQeSSl6yT
+	8I=
+X-Received: by 2002:a05:600c:1da8:b0:480:3a71:92b2 with SMTP id 5b1f17b1804b1-482db498227mr143291735e9.26.1770043536551;
+        Mon, 02 Feb 2026 06:45:36 -0800 (PST)
+Message-ID: <b61b7054-b27f-47fc-b268-f1dae3f1980d@suse.com>
+Date: Mon, 2 Feb 2026 15:45:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Timothy Pearson <tpearson@raptorengineering.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] PCI/regs: minimal adjustments for Misra rule 7.2
+Subject: [PATCH] non-x86/symbols: check table sizes don't change between
+ linking passes 2 and 3
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -124,42 +128,39 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-As was recently noticed with PCI_X_STATUS_533MHZ, leaving presently unused
-#define-s in non-Misra-compliant shape (7.2 is "A `u' or `U' suffix shall
-be applied to all integer constants that are represented in an unsigned
-type") is putting new code actually using any of the constants at risk of
-then causing Misra scan failures in CI. Adjust those few constants which
-strictly require a suffix.
+Extend commit 1df11ccceb1a ("symbols: check table sizes don't change
+between linking passes 2 and 3") to other ports as well.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/include/xen/pci_regs.h
-+++ b/xen/include/xen/pci_regs.h
-@@ -272,7 +272,7 @@
- #define PCI_AGP_VERSION		2	/* BCD version number */
- #define PCI_AGP_RFU		3	/* Rest of capability flags */
- #define PCI_AGP_STATUS		4	/* Status register */
--#define  PCI_AGP_STATUS_RQ_MASK	0xff000000	/* Maximum number of requests - 1 */
-+#define  PCI_AGP_STATUS_RQ_MASK	0xff000000U /* Maximum number of requests - 1 */
- #define  PCI_AGP_STATUS_SBA	0x0200	/* Sideband addressing supported */
- #define  PCI_AGP_STATUS_64BIT	0x0020	/* 64-bit addressing supported */
- #define  PCI_AGP_STATUS_FW	0x0010	/* FW transfers supported */
-@@ -280,7 +280,7 @@
- #define  PCI_AGP_STATUS_RATE2	0x0002	/* 2x transfer rate supported */
- #define  PCI_AGP_STATUS_RATE1	0x0001	/* 1x transfer rate supported */
- #define PCI_AGP_COMMAND		8	/* Control register */
--#define  PCI_AGP_COMMAND_RQ_MASK 0xff000000  /* Master: Maximum number of requests */
-+#define  PCI_AGP_COMMAND_RQ_MASK 0xff000000U /* Master: Maximum number of requests */
- #define  PCI_AGP_COMMAND_SBA	0x0200	/* Sideband addressing enabled */
- #define  PCI_AGP_COMMAND_AGP	0x0100	/* Allow processing of AGP transactions */
- #define  PCI_AGP_COMMAND_64BIT	0x0020 	/* Allow processing of 64-bit addresses */
-@@ -582,7 +582,7 @@
- #define  HT_MSI_FLAGS_FIXED	0x2		/* Fixed mapping only */
- #define  HT_MSI_FIXED_ADDR	0x00000000FEE00000ULL	/* Fixed addr */
- #define  HT_MSI_ADDR_LO		0x04		/* Offset to low addr bits */
--#define  HT_MSI_ADDR_LO_MASK	0xFFF00000	/* Low address bit mask */
-+#define  HT_MSI_ADDR_LO_MASK	0xFFF00000U	/* Low address bit mask */
- #define  HT_MSI_ADDR_HI		0x08		/* Offset to high addr bits */
- #define HT_CAPTYPE_DIRECT_ROUTE	0xB0	/* Direct routing configuration */
- #define HT_CAPTYPE_VCSET	0xB8	/* Virtual Channel configuration */
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -99,6 +99,7 @@ $(TARGET)-syms: $(objtree)/prelink.o $(o
+ 		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+ 		> $(dot-target).2.S
+ 	$(MAKE) $(build)=$(@D) $(dot-target).2.o
++	$(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o)
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
+ 	    $(dot-target).2.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+--- a/xen/arch/ppc/Makefile
++++ b/xen/arch/ppc/Makefile
+@@ -26,6 +26,7 @@ $(TARGET)-syms: $(objtree)/prelink.o $(o
+ 		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+ 		> $(dot-target).2.S
+ 	$(MAKE) $(build)=$(@D) $(dot-target).2.o
++	$(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o)
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
+ 	    $(dot-target).2.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -40,6 +40,7 @@ $(TARGET)-syms: $(objtree)/prelink.o $(o
+ 		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+ 		> $(dot-target).2.S
+ 	$(MAKE) $(build)=$(@D) $(dot-target).2.o
++	$(call compare-symbol-tables, $(dot-target).1.o, $(dot-target).2.o)
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds $< $(build_id_linker) \
+ 	    $(dot-target).2.o -o $@
+ 	$(NM) -pa --format=sysv $@ \
 
