@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754E2E7DEFD
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:19:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1218944.1527836 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60EEBE7DEFD
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:20:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1218961.1527846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwdd-0002d4-Gb; Mon, 02 Feb 2026 16:18:57 +0000
+	id 1vmwfQ-0004KV-Ru; Mon, 02 Feb 2026 16:20:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1218944.1527836; Mon, 02 Feb 2026 16:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 1218961.1527846; Mon, 02 Feb 2026 16:20:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwdd-0002cx-Dc; Mon, 02 Feb 2026 16:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 1218944;
- Mon, 02 Feb 2026 16:18:56 +0000
+	id 1vmwfQ-0004KO-OI; Mon, 02 Feb 2026 16:20:48 +0000
+Received: by outflank-mailman (input) for mailman id 1218961;
+ Mon, 02 Feb 2026 16:20:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hK3N=AG=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1vmwZg-0000fY-2R
- for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:14:52 +0000
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c201::1])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Bi8a=AG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vmwfO-0004K8-Nn
+ for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:20:46 +0000
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [2a00:1450:4864:20::332])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4a3211a8-0052-11f1-b161-2bf370ae4941;
- Mon, 02 Feb 2026 17:14:45 +0100 (CET)
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by AMBPR03MB11643.eurprd03.prod.outlook.com
- (2603:10a6:20b:731::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Mon, 2 Feb
- 2026 16:14:42 +0000
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.20.9564.016; Mon, 2 Feb 2026
- 16:14:42 +0000
+ id 20793d4f-0053-11f1-b161-2bf370ae4941;
+ Mon, 02 Feb 2026 17:20:45 +0100 (CET)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4806ce0f97bso39687785e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Feb 2026 08:20:45 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-482e2e3bf18sm99615685e9.19.2026.02.02.08.20.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Feb 2026 08:20:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,194 +47,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a3211a8-0052-11f1-b161-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fpz7bDgc4WpWayg0CN6YFq+dyCiQcmhU36F7t0G/HB+04OdgZHXfPZ1BjqQ200TCTX6OYYTucD4yzW//VspSvB33k7B/PX3RDkopgJKtwECqL0Ja4k856n9PZTDdb4xUw5xGGQfHNXneD4WC7/yMcdWh96ymmGlX2k3kfMF/J2niTUJwByroidVIdZ1PGcuThYPz02sPGH3AZ4YmcbGEoLOrCwp0oSHwGG2tLJHE2Gxc1HyLYGC9oX6zhosZJRrm9v61Ptf8j8v9ZfXWg+mtiBwEyuiyW0+Tba6icvNqHUv07TBW0p4OMhD64LHq8eSL7al1MGhvy2IaxXumF/HtUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uSB60wtIseXpEOBJ7I2DHvvHn5SQhFmvHE/+vrRCLY4=;
- b=dimiqiAOYns2b3Ua02S2KFdewYepAPlTHMHXFuIHbDTGeJLrEUzqkb3J3qmwrm63PUb/UNXwZZ2tigA1c3CaDyqpgpoYbdS880+UEiWtSJ0sGWwrLfgoiiDUhmAIn0GR5J7oI3TK7w6bQQF1G0+St7sW+j15L6eDCFE9mryT1WEhC9yK4Q7jTv4GbldTO+zc3DK+JZslJSdiG3vNtFakCKeYtr+9nRVmtLw72d3MldY2rglVErNpNiZt3ODQRkbO1Scd7F8S5LDfkEwWMXxGsab2Y9bTjwL5hSDzYTSFM4EF/1CQWpxo3ccQ9ew9+Ye21iVSUkR1IdQp06uyl3gH0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uSB60wtIseXpEOBJ7I2DHvvHn5SQhFmvHE/+vrRCLY4=;
- b=nFyi0S8S1eE2zuzV0NnC18eZOpaEIKmUzX+Njr5bRTjxXc8VK15HJhHnyF9M1GtXrHgMeZjF6/tzAqiS2lZ/Rf1sNSmM1+jI/J8kTntA25tY4Xo4zhNOtG4Oy/FZpTRbe8rUUiQp/tcxyy+iqz4kzhIxv0XqriwfRgFWt10oh7oZP900oHAAyRGLDDGG6m+nzHcos6+JZz9UVDgjc3AhkeBNDYkq6QvYv9mVDJ4cm9zI+FypXTitn2vteNUP6w3frmXhcJkx/gxsGKHnvqt8v3R5WUTUI4lJ2qBmnQoQMxVGO0Fm/BVfH9pxm+0BlI7sYJpLiDq1/qOoZcdhVhtpuA==
-From: Mykyta Poturai <Mykyta_Poturai@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: "xakep.amatop@gmail.com" <xakep.amatop@gmail.com>, Mykyta Poturai
-	<Mykyta_Poturai@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 12/19] arm/gic: Add VPENDBASER/VPROPBASER accessors
-Thread-Topic: [RFC PATCH 12/19] arm/gic: Add VPENDBASER/VPROPBASER accessors
-Thread-Index: AQHclF8JYkeRiWQD1Em9PXuDXFnTeQ==
-Date: Mon, 2 Feb 2026 16:14:42 +0000
-Message-ID:
- <b15ec6f42418d7c0669d551e42be1d1b75839df8.1770046465.git.mykyta_poturai@epam.com>
-References: <cover.1770046465.git.mykyta_poturai@epam.com>
-In-Reply-To: <cover.1770046465.git.mykyta_poturai@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|AMBPR03MB11643:EE_
-x-ms-office365-filtering-correlation-id: bbca65a2-2351-4be3-25fa-08de62762c37
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
-x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?GiO84A7sCEuKmQteepO07iqxVNrjKBASy1P5OdS+VxaFy3uCRaFR+VcXDZ?=
- =?iso-8859-1?Q?w7JjEIlXAyTseuJjbdpqCnGdR+MgXCe/hb8ckyN2203cFdLycIgA+b8bkq?=
- =?iso-8859-1?Q?tdr9dj1R9ceo1ZG/bgMuMH3VCPAdj+YDe62UF5uR14l0GgyVKvs9Wd6V7+?=
- =?iso-8859-1?Q?V3xAl+9sEaynp7A2vc+appmiv+ccupx4hjCtau0CYHbGrtuupEUoamk9l4?=
- =?iso-8859-1?Q?b4Zv6Z+iTLDfpQAW9JgPCGCWL//aPYwuoyr/FKZzMDAy0dtQTUGamoMgjt?=
- =?iso-8859-1?Q?SPVXHjZQ0JRjVrN6lNP0nfT7MS9+Ird+VGDHjisvDTyDVM0jp0OM9r8EBE?=
- =?iso-8859-1?Q?G34FubRi+Vv2dDzBPe69OlhKluZGJDha4sOlr6SUHAJ5b0oI84/rGVuSvO?=
- =?iso-8859-1?Q?BtIkLouznljS6P/rF4GD8Kw3u/KARbowSNs0BfXb8jiy5P45zYfgS2Tu97?=
- =?iso-8859-1?Q?abQE7e/Xgtm3YNvw/2Crio2b0d7AFnSIezHX7DI+6GA37uBynWoexdqHZZ?=
- =?iso-8859-1?Q?wdoiAG/nBnM+2HFfemRVgBvwiNEclNs1cgJ8sJcuqVb3iyJkDyAacQkHgY?=
- =?iso-8859-1?Q?N/cQsSHmS/bBnsJehezmUhZkeWz+U64PRzgS2dqizwDbzEMuP3VkOO422f?=
- =?iso-8859-1?Q?TVa3L2GaSnsTPkMHiCV7bvcmvPSAbidXMVikJiy9tBy1uvI4Zh8wHL3A2H?=
- =?iso-8859-1?Q?TqMrilMRG+3xMgTpmd8KtXlRI5pDNhYb9uPPWoFbpYT2UMNuGQeghPzFGo?=
- =?iso-8859-1?Q?gBW+/BTc+0re0nd7hOPXv8Lw2XtCjrp8Q+0gwg1Bhlkt87lshlMYpbEGYo?=
- =?iso-8859-1?Q?HCV0AZNLy/5kViSooLicr58sjoM4rt4345pOuQuEkclC/5qqojvIGkw5tS?=
- =?iso-8859-1?Q?EZU3uSlodDUVsCRpvRBvB8zSL7923fcYu3H84gotYRr+e2u3Yu1kEWpmlR?=
- =?iso-8859-1?Q?Dlfp3MUP8NZ/AHAFkvq47Yuc2+9nlEa1SkrxliSfOU0zTIyKSmkNQv5RnY?=
- =?iso-8859-1?Q?Jhb8FAuJ+yqrqVYokxSK7VDl0XB2pOlzel6DPjmnGaWzwFhX165zvrrPOE?=
- =?iso-8859-1?Q?NC1s/NYiLtw+SvvhNHyHbOB75p8QpymcdIbyl/MNVT731HgopmOGjmeXFv?=
- =?iso-8859-1?Q?gFQQMfKNSzoGMD1Q8WBWmtrgQk9m97CAtvL7uioWSFy/vbt9GHNTA+PbB0?=
- =?iso-8859-1?Q?xpwBXkPZtiLEdhqgB/yzQfhvK2WEmIYofb9jkgMaPRgKDq58xkie2moYIB?=
- =?iso-8859-1?Q?hogxQlSzTpqKqbEU+HdWHT9eDV3zwaEPDgpzY5Taja63wlHjuYxYewESNg?=
- =?iso-8859-1?Q?8pvAeqznvmqSuryraDvb4wyQ/9uaXUfk7s5NsH22fH8h58zdPaOf/ATVPq?=
- =?iso-8859-1?Q?nFmRjquvnY/Yg/QQGSyOn4q5oH5ji+zc4RcB9lwESpyoeqVdV6c/Tta276?=
- =?iso-8859-1?Q?nT5ITRM14AVmAcq43PLMNSe1ZKfC6OnR2+HE4riN+DI1Uux/Y4scGviE8k?=
- =?iso-8859-1?Q?ABsaBjBc+DbRvYHWKrugshz5XUw2ku9zcWjjEarDx2j8hG7BBtu/Nxd856?=
- =?iso-8859-1?Q?FLB3stECS5FASfzlf5Y7Lk2230sHAHRM03ZaniWAvkhIg9CqE8r+G3fNku?=
- =?iso-8859-1?Q?KDsoTXAIX7CIUdMQvP6t/TR7v0OLVN0IogpYkPiJr/eNbsoqiEY6W/gBFI?=
- =?iso-8859-1?Q?SGEQLt5VD8EVSLsC0VM=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?aGYKjMAljCyl/sqS506FdNk3f8xekyglwAol9TrH1lD92Taekfhe8IGuAS?=
- =?iso-8859-1?Q?FAZN/WoBt9/ZzS4CpgLyyG04/zV5ZP4aOI5HPqNmlItpC0ixefaawCtmRy?=
- =?iso-8859-1?Q?I2DRIdorIiOxiHCdsSbRiGn+3cNJay9pJEV3L1dmVDEfsKyr1IWj77PndC?=
- =?iso-8859-1?Q?WtzWAgofq7dFg/bGtneFmgPYZeLkVt2+/cTT7iBReYqaUHtIQJNsb73bMa?=
- =?iso-8859-1?Q?xXZAqu//DIx1T6f3vARYJnKYIKsA9KwCk7LYghfXFVU1fEVXhY4rqeWlnG?=
- =?iso-8859-1?Q?6qwIjcvI3K62XPVdrTceJBos1uWMfimnEbWlcCbA7/Cp9bzNtmch4cdRXE?=
- =?iso-8859-1?Q?EV4Wr9RCd2j6cE36b6N0+kn5GnOz45Vr6VBziLB4EakdSoenYPfV8TlvjH?=
- =?iso-8859-1?Q?/8t0YjIF9ouHJ1coIM0E+SxLxZPSe8Y8MevmpKWANss+7SNbpMl1aX8FlQ?=
- =?iso-8859-1?Q?H2SgOi0UTmiryfclY8KiV/TosBVcGpbXRxUv+pE5MkAhX2de2W1knkEiub?=
- =?iso-8859-1?Q?TssUCUZmnz4cdW3806KvWw91yPX/F7EmDGJXVZce18mWmrVpnjCDzVa1FC?=
- =?iso-8859-1?Q?XwKg15xBw0uS8Gb2XMwFG1PlKhCXiiHD+Hk8t1Av4U6TNec70q1zX0c24p?=
- =?iso-8859-1?Q?uJ0lP6I+L6K08kqZQCuu6tJ0owzerjg9cWGo9ykiEALdo+ynIHoxv84285?=
- =?iso-8859-1?Q?rbnpv85Bhp5AfCLOOsFr1WPwqJHMTytuTkhedNorU8QgEWz5ZvG8FXQC3B?=
- =?iso-8859-1?Q?oi8EdzxJ5O3c8FW26TACXl2hUv5pNCopsl2YlnD9EJg3pnqGdZdebSq96z?=
- =?iso-8859-1?Q?payKap6Q/MPIJLSbjDIz3KWSLdX9T6WKUJ89vvkZC6u0IKmTynyNtpe27t?=
- =?iso-8859-1?Q?J1kPsA/KlfGVEEz+NraZD59i73H1XOBuzEiMyrx8NaKfla7R66S3T6UIix?=
- =?iso-8859-1?Q?0oqw7/O9L9fX4zOAjeK0X+9qKRyoSbygjFvXdjYKXURIFrbW40JFD7hqsc?=
- =?iso-8859-1?Q?F1a0cL3LnuO791bakKvbl3DAqyBWovUQzEKMtiUeoKp1ANmSTtKl8riivg?=
- =?iso-8859-1?Q?bljdeVUdCmiZxCXrX2/nJBqV439KP2FqSM++FdHjtjoZeE5PTXkxzc24H3?=
- =?iso-8859-1?Q?KdYWaGQ2Mqi/YUF+5X7U+8sy+1pKVNIfFJKYNu3VwZcxBdjhXN/KoSUWDg?=
- =?iso-8859-1?Q?fQcEPi1qr2+pegR3YEONO+IRc91fwhjKliB4Guraxd8inQYGxislcY5n8t?=
- =?iso-8859-1?Q?edJfE3S9HKnpkwdpahsSmFzZ9nqdOZ1NClrffI3XQh99foz5iCWQ6GLNKz?=
- =?iso-8859-1?Q?Otcl8GWbxqm9yOVBnkno3A/vV7Q3iEYbuQmx54ji5LZvOYDyCxp87gq5N7?=
- =?iso-8859-1?Q?jbZG8FecLVF1N6+LcgmT8i8AzhKaeRqh98697DGOU11m40ftI3lBcxTy5j?=
- =?iso-8859-1?Q?fm6UbllRibCHJMnyLl9j2p9djkKTAtarv/Yf3Q6C1aSrunIl9NRmPMjkBQ?=
- =?iso-8859-1?Q?ZFNSiZ0Xh9/HMUUeIfRvJ5uqz/AeIPQtNEowPu9qQsKZn+LrD4uxILh/m3?=
- =?iso-8859-1?Q?tQfwHes/+AIbSdE8QpNkzKypjVfUig4n49UI2gWAR6Jrix7Ry+QUKmkPjk?=
- =?iso-8859-1?Q?MtHWkSjq7Q4vKwI4JAIraL7wHMB210JEzacpzoVR3uEeQxZClXIfqWX+wc?=
- =?iso-8859-1?Q?1tU35I/G/HxTmavMmzTfmZbu62n/YdKytbMSHLP5rH6U/tzfgF/CGiKij4?=
- =?iso-8859-1?Q?AwjK2zzAE91Z+FePzEYpQG0pbCY+IwVmrtHYUnaIV/C0dmeEEQ74rk/FXR?=
- =?iso-8859-1?Q?RcM3TE2QBsZAiJXiahlma2X7VoIsyNw=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 20793d4f-0053-11f1-b161-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1770049245; x=1770654045; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=FFDbJjK9AOCC9J39bKSLHR59+MqWiOKp8jEBvlZ0yJY=;
+        b=Yztx77CXNu+8LYJqEhYMT2sogT8Ah1qhgElt1IB1TlBfdVoY/d0ux2prELuoc9Fy+F
+         U8FRL57K5JNPfSKZnnZ5pEugNuZKjPcecqgrDS/9ZG2vSMVj34MckjZYSgemMmsog6B4
+         nLwiHnS/EbEd8X8xyVWEGOubMg+Jcz9WDRa+biYDmJwjszKy69tKQ2IWyAGGMuk/8tEh
+         VP5mAqvo+baX3i4rqZ5aEtJoQ0MV29btkFuVDqkR22gf2WNXnGkWUcT+zOPHG4wsL3zK
+         WyWNM6Mcd0qDRVbMCcbt2e8kxfqoCuIXdLCXXQkZPMI3PF4/d5A04l5RrwMUefnJKi8T
+         cNgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770049245; x=1770654045;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FFDbJjK9AOCC9J39bKSLHR59+MqWiOKp8jEBvlZ0yJY=;
+        b=igGJboRy8QolqG9bDn1A5Y4qeCJxQNP0PwKq842JZKGpsUSooUU1GWKmCFt+zTA9oJ
+         5C6A1nZkZCZPdMdYHW2VSmXQ42qd7vXuhfRmxr8y4GRsYR9oz31PEljBLe7gjYZcCpAj
+         7tZI44/lnzxJcrWuLixnuJmkwWKW65FDt+CBNvbbqkecDJEONgfyX7w4XRR/gOFoA7D/
+         5XF4hzLOPJ0kcc5ac1v66IJ9EL0nyGpXWOMHu6i6yJb8E3zaMogJ6MPHfv8cjHoIUZC+
+         sAC53jKh0zkIPPtaRAVx43VT228PpI8tb16bzjgoV5i+qWdG9aeWH2r7qe2IgkRjqT21
+         2CpQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU+HwpmOVoiOXZLPtaLiiZLqQ8ON+O/viPrBr7onzdyktWKjIrFK+NSuVSbLI1tC4B/zb1eJgcJ+QU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzF0xNODxyrIaJAG/Q5RM5w3o3F0KlmV2T7X+6TZvQDdxcSjbyX
+	qKkxMoaAeRecgi0Lcql6MAOFlIsaxHeoCGwGhueMIlTzltL0KrTnpoP9BbUeVtQ3/g==
+X-Gm-Gg: AZuq6aJRp7rmAtn99QPf4zlfEKil/Mgl0m5UUo+cViAjNHcb9vlAw56rZoZYpz9wXzb
+	mBb/6Dpip//dcAM//KkzcdPTcDVZdHfbBKDy2THmcvCVcEvkVYtpTNtsaadT/4gR4R4rKzWNGzw
+	9n6/iBQdN4mZyGtZrsOF9Js80XriAYkX6n00Qb6UDrdWMi2KOhwgr/C4YWDqqZk8gsfuUJC/e8P
+	+ZGidXNmDZXldZBzDXTaMXeeec8GcxFsgg4ouqtAiJ4WbApQay5Q9jLxwAwfxRZ9hjpELedNqjU
+	aio/AfGzhsiORpgW9nAN6XWC1BU+21OOhKA7akpvJUys15jtqY6ulT7rgUGYmyxobPzj3kuhVwR
+	xVpCPrMXC6hS8sKeSv4gHuMNN5s++DP/HE88Q+BSdS1XXbnWJCkqyCqdymWR8uoMeO6J9t40woY
+	PfsJmTnXauxgonOGThYyXi5PFNIujkdZYZIeqMi2jG3C9G+K5lVym7wM8sqsfxtlMrvgIDt9nah
+	BU=
+X-Received: by 2002:a05:600c:4e56:b0:477:a9e:859a with SMTP id 5b1f17b1804b1-482db47cf2dmr173772065e9.22.1770049244840;
+        Mon, 02 Feb 2026 08:20:44 -0800 (PST)
+Message-ID: <27eefb94-ae13-469c-9b1e-f730a27ab22d@suse.com>
+Date: Mon, 2 Feb 2026 17:20:45 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bbca65a2-2351-4be3-25fa-08de62762c37
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2026 16:14:42.0533
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: nXocrPXq/w2x2PyglV+fh8ncdKOYZ5IUoWaxcBR09ifZliZ4z5eK4c+Vk7JKqy4Q/DkCSLOvIPQfh5/vNpTBAQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR03MB11643
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86: calculate number of synthetic feature and bug
+ enumerators
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <70fe3986-ad89-4b42-b158-7e7b2b24ec1e@suse.com>
+ <5f42ae1e-7f3f-4e95-a6c3-5a7f39623971@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <5f42ae1e-7f3f-4e95-a6c3-5a7f39623971@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Implement accessors for GICv4 registers VPENDBASER and VPROPBASER.
-VPENDBASER access needs special handling to clear the Valid bit before
-writing a new value.
+On 02.02.2026 16:56, Andrew Cooper wrote:
+> On 19/01/2026 3:30 pm, Jan Beulich wrote:
+>> Rather than spelling out their amounts (requiring updates when multiples
+>> of 32 are crossed), introduce a sentinel each and calculate the two
+>> numbers from those.
+>>
+>> No difference in generated code, albeit debug info size grows quite a bit.
+> 
+> Presumably because of the substantial increase in preprocessed output?
 
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
----
- xen/arch/arm/include/asm/gic_v4_its.h | 38 +++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+I wouldn't expect that to matter. My suspicion was that de-duplication might
+not work very well there. But I didn't go check, as debug info size really
+isn't a primary concern to me.
 
-diff --git a/xen/arch/arm/include/asm/gic_v4_its.h b/xen/arch/arm/include/a=
-sm/gic_v4_its.h
-index fb0ef37bbe..ba81b25bde 100644
---- a/xen/arch/arm/include/asm/gic_v4_its.h
-+++ b/xen/arch/arm/include/asm/gic_v4_its.h
-@@ -17,6 +17,8 @@
-  * along with this program; If not, see <http://www.gnu.org/licenses/>.
-  */
-=20
-+#include <asm/arm64/io.h>
-+
- #ifndef __ASM_ARM_GICV4_ITS_H__
- #define __ASM_ARM_GICV4_ITS_H__
-=20
-@@ -50,6 +52,42 @@ struct event_vlpi_map {
- };
-=20
- void gicv4_its_vpeid_allocator_init(void);
-+
-+#define GICR_VPROPBASER                              0x0070
-+#define GICR_VPENDBASER                              0x0078
-+
-+#define GICR_VPENDBASER_Dirty                   (1UL << 60)
-+#define GICR_VPENDBASER_PendingLast             (1UL << 61)
-+#define GICR_VPENDBASER_IDAI                    (1UL << 62)
-+#define GICR_VPENDBASER_Valid                   (1UL << 63)
-+
-+#define GICR_VPENDBASER_OUTER_CACHEABILITY_SHIFT         56
-+#define GICR_VPENDBASER_SHAREABILITY_SHIFT               10
-+#define GICR_VPENDBASER_INNER_CACHEABILITY_SHIFT          7
-+
-+#define gits_read_vpropbaser(c)         readq_relaxed(c)
-+#define gits_write_vpropbaser(v, c)     {writeq_relaxed(v, c);}
-+
-+/*
-+ * GICR_VPENDBASER - the Valid bit must be cleared before changing
-+ * anything else.
-+ */
-+static inline void gits_write_vpendbaser(uint64_t val, void __iomem *addr)
-+{
-+    uint64_t tmp;
-+
-+    tmp =3D readq_relaxed(addr);
-+    while ( tmp & GICR_VPENDBASER_Valid )
-+    {
-+        tmp &=3D ~GICR_VPENDBASER_Valid;
-+        writeq_relaxed(tmp, addr);
-+        tmp =3D readq_relaxed(addr);
-+    }
-+
-+    writeq_relaxed(val, addr);
-+}
-+#define gits_read_vpendbaser(c)     readq_relaxed(c)
-+
- #endif
-=20
- /*
---=20
-2.51.2
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> This is an alternative to "x86: guard synthetic feature and bug
+>> enumerators", bulding upon the expectation that when adding to the end of
+>> either list people will notice the sentinel and not forget to update it.
+> 
+> The extra preprocessing overhead is not ideal, but it's certainly
+> preferable to the first version.
+> 
+> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+Thanks.
+
+Jan
 
