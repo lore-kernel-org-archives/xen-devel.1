@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72830E7DEFC
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:14:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1218793.1527676 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF278E7DEFC
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Feb 2026 16:14:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1218797.1527708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwZY-0001Mg-Q1; Mon, 02 Feb 2026 16:14:44 +0000
+	id 1vmwZc-000262-N4; Mon, 02 Feb 2026 16:14:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1218793.1527676; Mon, 02 Feb 2026 16:14:44 +0000
+Received: by outflank-mailman (output) from mailman id 1218797.1527708; Mon, 02 Feb 2026 16:14:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vmwZY-0001LO-LQ; Mon, 02 Feb 2026 16:14:44 +0000
-Received: by outflank-mailman (input) for mailman id 1218793;
- Mon, 02 Feb 2026 16:14:43 +0000
+	id 1vmwZc-00025J-BF; Mon, 02 Feb 2026 16:14:48 +0000
+Received: by outflank-mailman (input) for mailman id 1218797;
+ Mon, 02 Feb 2026 16:14:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hK3N=AG=epam.com=Mykyta_Poturai@srs-se1.protection.inumbo.net>)
- id 1vmwZX-0000fY-0v
- for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:14:43 +0000
+ id 1vmwZb-0000fY-1a
+ for xen-devel@lists.xenproject.org; Mon, 02 Feb 2026 16:14:47 +0000
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [2a01:111:f403:c201::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 47287423-0052-11f1-b161-2bf370ae4941;
- Mon, 02 Feb 2026 17:14:40 +0100 (CET)
+ id 4889f7fa-0052-11f1-b161-2bf370ae4941;
+ Mon, 02 Feb 2026 17:14:42 +0100 (CET)
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  (2603:10a6:102:30d::12) by AMBPR03MB11643.eurprd03.prod.outlook.com
  (2603:10a6:20b:731::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Mon, 2 Feb
- 2026 16:14:38 +0000
+ 2026 16:14:40 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.20.9564.016; Mon, 2 Feb 2026
- 16:14:38 +0000
+ 16:14:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,34 +49,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47287423-0052-11f1-b161-2bf370ae4941
+X-Inumbo-ID: 4889f7fa-0052-11f1-b161-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O2irMBLf38WWpd/dgjudEA19VynaRhlINTjNU5Evo9bOMNNgN6n6ZiZYXeyZHgX2OJOGc1sjB2lhL/Tz5xx20vWgNGmSjhQxbN6vAyGdEMogspkHBLa1Efkd6oKvRAh9ooZPy1Gjd7bHGSfAauvePf3cabUFtMt5Nu9kT3kzacdUyqUdfRlJO1OPkf+5htdpwVvZ5E9ArC5QZqXwH7MZGxtNG0rjiYVCW5wM8A6IHwhs33KJv6uxVXv5l50H2bDqJtQOK9yFSN3hQZUYVs4HnBaif3bUgl6ZNYEh0jHJYJnsXYEQxvBEWbQvDsOYBmB0xCpGXRINKABtd6Icyey2ZQ==
+ b=Q450fKKkg4LSlSJSytyfbtUyZNCuCpzAS3FDSOJQjwX3vtU5qUJasUbho55zCwDeJkqB10zPe6JqDRj9q5dY9E33nJ1J/dhkcQLXP6HeuHXY2pM+hyUPHJY/cuO4w1Q35svkAiCSBLHCjjp2RubGPUyflEzw7C03vr4enF5Cro8vnI4dxEFzLP/bqIFEo+d7ztH7cm2jt7rhVrHY9SPJgSomcn/vLMVnjj6cLWF+7n26XnsUvzyW1Enh0M33ap7GQXy6s8owhYghV8WtoQcya9TRvzTrkk0FC/Om9VhiVu0vgLr4w01AU2g/oIt4pol0uAuVx+mxCL/d2cIc6kMo+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iUKC8PxXATJx7SpqIhLHzMIKs4Vp6o1Q57Ysq2ayrD4=;
- b=QWrZ0E3W7NFk5TD3xtQweDgR+YPYaEc44SiYChevCkYEofNCW8Ls3VPpSiPyPieIBujKMnvDY7n9/FI/xLsy2wMfaGSnoPGBKPVtOUQKGLQtM7bkDtIEaWmG7qTqDHJNT6Ea2K74R65vBFNfxI3L4LDRReJUsn9JKGW4/rT5wtDo/KhR/3RfV1Ldqc4Ee121o+s+iRuPpW+bL1J7oxzN3aifj0DOUYIU3QKhnUFKes989hjH4BBSR25y+39WV04zXWCvpgfPZEEvrkcnvELYBsMIeeKSVT6QFiQjSxNLFz2vSkihyTlOVStJMnSjBYY2Z8Y6IbB4JvwMeihQTn5PFw==
+ bh=WrajxwpLkTzUo5qZ0TpducYW59HMKLxEeoenAEYJQaI=;
+ b=JKK6VO/tulvUEQ0y6VVjTWSV1Z21Gci4+ZiPI/CDr4YSWQgxBFiRZa/CzLMoU6ZrzXJZgy4hxswI70tFb1PFo5O+wHSnjbdU2Cw5jwTZbuH5n4d2Aroa6Vu8Gzc2Sw3y2EJUejnEjihsDIUBuVP/Q3MwHxb18V1l6Y7E7vpvZCmStTUNin6IiTMl8XZAJGwmGsAuMOuBWq4Do3JlK6QCT5F5TBDFIAht1k8RIROUJ1Z0kDxFZoxGNyO0kGtjygCGwhJhTthtZ32UGqb4ds2JvawuQbozuj6gdImBT8j8IgY9wnswiFbdqEluEdl4EDY8wkunQNd+qj1TA60VMo1lSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iUKC8PxXATJx7SpqIhLHzMIKs4Vp6o1Q57Ysq2ayrD4=;
- b=OybhA8M8XwL8cqibmAw1d+dE2G+U/bjrXcU0UwOx18aNopQIMpaY4GE+A6KdAHhQ7oiuQrzhkZzkeq+W1f8xNkbyO5UHoHKsL8t6hwLAg8SGjJqV33xtdD6HO/EDp4igkNp58GenqStfRP3xfw79DICEiwPBQh5VFktvEy28K/Jpum3oMAlATlWChPpP/ptUX75VPFUOQ4jAZGqCd1RU4/DnXFihWQxJnuSvLWevece4nRRmRfuM5OzBDT7wLrvc/1EfjoAAcM6b00uU7MOo41g+VrSWLU7/+wAiHvxhtlyEU8ebK/JSaIBmXxp5q29giieEhoB6aZsE5mRyA0vOGg==
+ bh=WrajxwpLkTzUo5qZ0TpducYW59HMKLxEeoenAEYJQaI=;
+ b=S7bpXBSla6IQIpe+8Mr9nx3S4H5jdhqK/NsrnPjhc3CYCZo9CRb6CgObiFn3gYQpgZCgAw91i9RUOQYjR/pDUtroN2lRVoJ44ThsU/R80+aIYRoxJwi0msRGjDEySDF27rNv6fMCgksOz59PgIza9ZQ8gXFSPk8oSutL9oXBgaDYmXt+CedVz59Db6E+hvHQhp2ITUpm0OikdVgEIx58zbxM6f06fvkpzfdeMwzPlsqggQECmCf4dXQThKBsJDiiv+TaIQmOr8SDDqwfEXrvkxYxZd6pBNYUtv76bC1yRvSZsZPjBbgTyIs8zDtKcNGtUWaf/ygRDT4EJIfHmjC7Pg==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: "xakep.amatop@gmail.com" <xakep.amatop@gmail.com>, Mykyta Poturai
-	<Mykyta_Poturai@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 03/19] arm/its: Export struct its_device
-Thread-Topic: [RFC PATCH 03/19] arm/its: Export struct its_device
-Thread-Index: AQHclF8HcsGkFxai5E6CQapzQPG17A==
-Date: Mon, 2 Feb 2026 16:14:38 +0000
+	<Mykyta_Poturai@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Anthony
+ PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Jan
+ Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: [RFC PATCH 07/19] xen/domain: Alloc enough pages for VCPU struct
+Thread-Topic: [RFC PATCH 07/19] xen/domain: Alloc enough pages for VCPU struct
+Thread-Index: AQHclF8IVNXzRYHYv0KDWbwmI64RGA==
+Date: Mon, 2 Feb 2026 16:14:39 +0000
 Message-ID:
- <cecdd9e18733c63f36f29c1043b249cf431d8a01.1770046465.git.mykyta_poturai@epam.com>
+ <a34c89037c29728943d0a15168e7c87e2ed50630.1770046465.git.mykyta_poturai@epam.com>
 References: <cover.1770046465.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1770046465.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -87,241 +88,141 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|AMBPR03MB11643:EE_
-x-ms-office365-filtering-correlation-id: 0d63e815-d2ec-4e10-9f97-08de62762a19
+x-ms-office365-filtering-correlation-id: e2363123-0f4c-4f69-26b3-08de62762b05
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?j3x1Euh471pR+ixsPWpURI3ZddfnIAd0QK7LliKvwnBIqtZuN+jaa/4AjY?=
- =?iso-8859-1?Q?H3FssNo96zOnuvhey5RrnDALFm+X2OCiMiHMsZLSaalaFekqKYjVdeisaP?=
- =?iso-8859-1?Q?NSjz2aBBfv/f7od4v2xe4xIscIErza80fNeecZ4MbZ/PG/gwCf80PmwRUS?=
- =?iso-8859-1?Q?kovVhlJ2tZeAOML2MUTQjld7/hwWmK7aRZ+bCD+x+zxW/pDv47aTSySnBa?=
- =?iso-8859-1?Q?vfZsHCtko5xNXW72pK5zp4udWjvx6GoDHZo3CzcKZtGFT24b0p/L/YOIJw?=
- =?iso-8859-1?Q?8Cinetcv2pQa1Bb0sf4Ix6P3pRzw8eaUTPiPK5/w/uXJztqnXCrDFirAgW?=
- =?iso-8859-1?Q?kVOBdIYuqIOUsnSUfUuYCKFne93oelscg9lBSAiBYd3ZHlZYIJzHgqQ6O5?=
- =?iso-8859-1?Q?T1pvPktc2WGBNfrU9xMos7jL0cs4iyxRdi/N9uxEQc/vBT//KSFtBqV2/R?=
- =?iso-8859-1?Q?uH4BGRdNPavR9S59Abb0m0OpgqgXfC+8ac70vN3OhPmoXSDXO4iZinGoLI?=
- =?iso-8859-1?Q?2ZjdHHELwEbx33S9YkSug9jM+BzQEhbd5oFAuEHq+aI5Bll/qBPiETVplh?=
- =?iso-8859-1?Q?ETCDUGy0GYHpVgNVn3lzkSLT2daPxnj18qpgyki4/fhBlqEJ06286YsVU+?=
- =?iso-8859-1?Q?Oeg9CNxpuF/ebUma5WNQw4lz6NZerP4iy2xzq4gTUQX8PKHm8hMSboeJ2L?=
- =?iso-8859-1?Q?8PDDm4HgKzyUJos44esw7+cuWdp6RBsUsW+TAzqkAx3GWUbwCmx1PQu3Dx?=
- =?iso-8859-1?Q?keCVww6J01/PbNDR6PCXldKUFNzVp/scLPW1M4yUFM4qZ2GYHvNPr+oP8x?=
- =?iso-8859-1?Q?trTsSedPmPMemJ6X1lpB68cNu+qIIDERtBu+FOfSFPfpEFsUnmkE4+4PH0?=
- =?iso-8859-1?Q?xhRd5v4ZjMh9bESnVQyqcjkxL6g91r1Zn5rGurG9lpidCsaLfhCJVd8XkR?=
- =?iso-8859-1?Q?rn/2IxihkQmaB64Brygf6RaAlrECi3+JUz8l7OksAGmNcBwM8lPbbCUznW?=
- =?iso-8859-1?Q?vC3FAt8vqZDhjb5Q+f525FPTBG6OFbLITCnJGcSlw7N5tUTli61dMtxRuJ?=
- =?iso-8859-1?Q?vmF5a6AKT9tKrbKRRnqT1m1c+Qi6DClIyAbFosOzDYvKU/F4WzUgEoIbPt?=
- =?iso-8859-1?Q?Q9Hj/NxziVqsA3G+Rs1J7uzCk48emoBrAZmRXDZmwWEN4aIXiyK3FDOt5Q?=
- =?iso-8859-1?Q?mbkda8o2Jq60GcKu+G/f8TWSqTmzaJYUymDcmLEItBN5WVg4ERAzde/O5L?=
- =?iso-8859-1?Q?LOQnPIwY9Dgpl7DNKK5qWxpkdaNa6QwPcLH/p4RDgMKwCvuINjpVbj6uST?=
- =?iso-8859-1?Q?yaDRE2bdYSf+pIFXUuHZMcKiJ8hTMEbA9W8SkDDhICImxXPBLV3mjLTzoj?=
- =?iso-8859-1?Q?AdKcJdWjsN1+TqD2Kba6FQAqRrGEYJKJKvwG3T6w602q+krmZf/UfxNZiK?=
- =?iso-8859-1?Q?TV5A8GjaP9AHVwDTe313F8RL4/J05zvvEwH7COAu4vLA4TZ0rHha5FR1ag?=
- =?iso-8859-1?Q?yt2MahdJT2kZIiVaUdyYbT1OTTddwwRAB/sSEuxUL5jLZxruQ8JpZYKah0?=
- =?iso-8859-1?Q?/r7uPPYpdgDtzUPNTnwguAaRyVFEILeTpEI1y5Q1Dx1TxgKXJzZu8oNP8q?=
- =?iso-8859-1?Q?ZR9rr+J5Ta+NCrRoemqG5T4VZFZ0oxJrIpMBN/wyq7WaoomnpBE9YJDV8s?=
- =?iso-8859-1?Q?/TaLvBSWhMNyg8wFs24=3D?=
+ =?iso-8859-1?Q?HhRGTW30olY7AahcpalqXteC807MuCBY+FdTcAG6E2O9PQ2gtPZms0DIWZ?=
+ =?iso-8859-1?Q?w1+PgfJJuKgliQLrR6wo5N8er479xZIXVGjeVbBQCaZxqG21caI2elHtq6?=
+ =?iso-8859-1?Q?QT8cWtUo1gWgugFCfdfvMXmeZOYkOabcyjGzPoc08TumhhGZqTHbW7eMkc?=
+ =?iso-8859-1?Q?JEFR2k2gqqgXIfGh3aiPaJ4oQxxDlVUtMGreJrAqqNUrEhC+YnEUUBy9KL?=
+ =?iso-8859-1?Q?fNik5glgsh39uMcONECvlQQuzvU4at0YNFRx1AIwTFLuXMM63MWbLB75ih?=
+ =?iso-8859-1?Q?zfWQM4IKkg1UeuBIDC9Jmw1yrqHGAezzkfzQnj5VJEcjiAu9LlvMdZYXVD?=
+ =?iso-8859-1?Q?oCDvtHsOZYUygsK60MdXQ/FuyruttYhToYgB/f/qEQpdmatREFTZxRQcBX?=
+ =?iso-8859-1?Q?YHT89uC+vl4S/zxQQcZC1tynztxq6QslzAtzczdgHRJEjc4xFQRiSuZR1d?=
+ =?iso-8859-1?Q?MLbMNV4mxanqc8GJmblXd/g5gYbV3ffwayqbSVJLgRev0/PVVYtfb0UfL+?=
+ =?iso-8859-1?Q?dKLx0kRRbLxMxU48+tbGQayRp7yoHxerc6MctbnToX2yw6bT4H47AQfpT/?=
+ =?iso-8859-1?Q?Fedrz1jEKGhFRPBhj86Q40udDjXnWjcv9bhzft2tz+Zpi4i1WHSHpOSmlb?=
+ =?iso-8859-1?Q?P7JQ4unc+YUgSJaLLSK7ox5KnsqGiel4Ysl91prvUsqKLcrjXNFXXMQN5F?=
+ =?iso-8859-1?Q?iX7VgY45PFXK4OAlqHvqu9KkkR7X8FS4fXcIurbcsyS4FItuVIOGekdIBg?=
+ =?iso-8859-1?Q?MZi0WFyHxsPhHkfbUB6g1Y0INpYst0r6f7Mh05qx/5I8q7IpcJ3hyHX/IK?=
+ =?iso-8859-1?Q?znbqeCkSw8aq2lbfuiSvZkWYMrL2yOd4JiozLUMTmqkCL5NZyyXN7VLaIb?=
+ =?iso-8859-1?Q?qGm5+PwdwJXty5s+O1Z9xytYsERszyMeM7Uns3S/KPZvdUJhiE5DDFC7Vx?=
+ =?iso-8859-1?Q?I8tNvKRylVpWfHsPu+6r6zrhe4CUOuXNMRWRHafg6wdXKTccuxds/4bctL?=
+ =?iso-8859-1?Q?0fo55bobKBl+qBOhiXZYYAKaEWfMHP9QoxkBnoVrOLF21AfrWDRCUpPwQq?=
+ =?iso-8859-1?Q?Yz9sY+0kCmOob99vaXMWyGSRH9QGvt6DCnxTRSSPFYMTw26s7+M5BMp6No?=
+ =?iso-8859-1?Q?QWqKuMKYTAp2jn2QOwlSnPXlwwkQr5h84arSQJSCOPex+j27o43hJ/YXfQ?=
+ =?iso-8859-1?Q?6hZuzgl0WgJx3NP4WIcQTdOy24xIQWtopO87MSi18wURsK1b9lQ68fSIUX?=
+ =?iso-8859-1?Q?w1pqglfLa8KwnBkV3EXVavjiG2G39bHrUqbnSOKWs87s8vXI+mt2f81+5V?=
+ =?iso-8859-1?Q?Ol6Md+mN1Z+j+CFigdEXDbi9CWpKZP1JUAS9rS9s3OTVM1963FnAy/Qn86?=
+ =?iso-8859-1?Q?9kKfYcId/+n7X7NjRMXG4KvCpwb+FqQlUM1sTKt3YfEYKNDO6J3SKjo98d?=
+ =?iso-8859-1?Q?kKx5J5n/1jDe2AkkwFvN9p6JkNh0UJa1xh+bqJNe6haDTjIGwJ9x5qG0Gu?=
+ =?iso-8859-1?Q?xWZqlBCEM5obWqeu0CN8vBVSMTb1lEaPjj2Ho6nENqjclPP92Z2YROxl0R?=
+ =?iso-8859-1?Q?8YDaOinNjGNf2jdTUJcjB+xRhLao8I18pa4igmVVElzMLaG+DwThirmyi/?=
+ =?iso-8859-1?Q?k/cH/EJGRUyJ9FOC2gJnX31dWMd04MA5Mmbdn4x98bYxQns+jQR80DY/Xh?=
+ =?iso-8859-1?Q?SOhRSD23ZOkqkk8HxCI=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?aKdz+449kl414CdQuR/4h2NE5DZL7Ae87FadQs8eq/bwYLj0wECKhkCjm1?=
- =?iso-8859-1?Q?mDSZFYI01Vf4oQen4y3rP7BVVCEyfRjE9nZKfcNyKH8t3Dz8rwZF7f2vNm?=
- =?iso-8859-1?Q?OX33tRJZSo6yDjOKTenI/6HOmIZHMl/Cm47g8W+Dh94wZugJFO5GZ3ygsO?=
- =?iso-8859-1?Q?lEbA+dm++u2621zNhA3inTUibGnyLlRRdyMXuwzsbxDcHvBCAjmRIJIiOq?=
- =?iso-8859-1?Q?FUmIW34PtYj2vLmLjCgfy2rB5ChuYYxfuEqQZuS2XUtgFUhQn0fY8jgA+s?=
- =?iso-8859-1?Q?1w+kxfzfTp6pDN0sg+10SpkyJNFoZOj2UDn1QtDk4Po3IpmGpmJ/0pQzEW?=
- =?iso-8859-1?Q?z9EYI+oRg3cb2yFynRQvyFnqmzd+kvL/1xE+C/Fs050LcCkPufd5SKM+/a?=
- =?iso-8859-1?Q?Z5kRXgk7xPEDY8vB7gKR4ELbKbOs/3smD5DlxwI7jEvj7F3VadYfG/FI8R?=
- =?iso-8859-1?Q?/FNjJ8mn7Lxp1ybXRsNStXuiL+xZWLIqCWBwSDQsMeKccrWKPIJs3krWLq?=
- =?iso-8859-1?Q?QCyo3OBSugRRT538rOlvxWEnXm7X/xFqPJoL7RnO2maatQEakAFljK4r0M?=
- =?iso-8859-1?Q?LGiKAezmRiwbOmR3d0ZIyG5/7URclYMP6QGUxgDQ4+/jUdPZEQRg5XsLcV?=
- =?iso-8859-1?Q?+oYKNZ+Kud75ISi+9HisR8yBf3vS5+znoCYJsrWC/sk3FbtivIXalPglij?=
- =?iso-8859-1?Q?3pBzCqOjluyT+pOC3X+A5bfvhmNhP+WuoepH/uhmCJ93YW36wrIysDnzC4?=
- =?iso-8859-1?Q?6YVSVaRyFdGHxuMns4oR5fCso5VB/03XqXlGWY3zjZaz+7GxUYNjzkc4fL?=
- =?iso-8859-1?Q?swxDQ85qAFJklzcGnS/RB7JqnH+33EthDdxcvhWkPSBR/OPcXvSPtY2uX5?=
- =?iso-8859-1?Q?ZbisBXyc7eK38rN15DQa4Ni5p7o7LThWH/o7NBcK3O6N7CKXWDF0fBPerK?=
- =?iso-8859-1?Q?VgPPuYQ/wQIV3W3Ol5BvuadkSezFGIK8uhOaJZpnSXekRlBP6XnGdGEOhq?=
- =?iso-8859-1?Q?IIF9Ce2RCt0mDOFYRvCW89RqIwc+oYdJiyBdtI2cnddxhuQAKT28qW4ybx?=
- =?iso-8859-1?Q?ornbslOEpDRDjvFTCSJTAve2aA2mwYQo8ZmS/NiXP8FKuQ/1aiLB2alppq?=
- =?iso-8859-1?Q?cEpj8rmf27gbIexeF58nC7oLQiMpladDIOqbN/wt2BthLkqIUs9DSHBaTh?=
- =?iso-8859-1?Q?1hoenqfTtwHTmX9tE6hXubvg0/UMBUAi6w7y6vemedoZQtO8oUWIB0JZFX?=
- =?iso-8859-1?Q?GztRUvXAI8Qt64rX5DT/3sWnLcIGL2b7hiIhGXQ8PCgWHh2VI3x5E7QpVi?=
- =?iso-8859-1?Q?oAb2lR9oUIlpmm3CD2BHou7KhMN1MRkkdXbxkuQjLDG+kOt1KCDYL/uKxq?=
- =?iso-8859-1?Q?d6vqa5L/FNmlopAwtNZrhoo1v8WxU01nZcEqm24J/WfeV/47ctkA5hap+1?=
- =?iso-8859-1?Q?M6tKtEKQrFWKlk0x1gEQ1B7iUO8KeKGozOsRXblCdroGNTX9mBkkkU+xow?=
- =?iso-8859-1?Q?0mamiQma5+lIFsYvYRZfaC8sQwxjoUs9yoEe0CGI8Jsyz8pf+LMHuFlqJo?=
- =?iso-8859-1?Q?zkKCWuUsgFmNcOXt6stBl6SCEVR0ZcGV8AUE/K1NYUsG5ebhiDznUH8WaU?=
- =?iso-8859-1?Q?K8PgEuapefhbiLhJQV/Ua2YVVWPNiReMPdtVQzd9I2q1CVPNaIX3iwUoVw?=
- =?iso-8859-1?Q?pQez2pz01lBZfl+aOVY+/IVOruk8WTUjm4QA694aq6i27Usxh1SYDxLVTV?=
- =?iso-8859-1?Q?5i0Rb4ZdhaptLxXUaiJzi8M7xgoAANxbKO1fcnPjpE3i+Yn5wkFHxojj2J?=
- =?iso-8859-1?Q?UAsQJjXS5UbobSjO5gTFa+QCkPi3+eQ=3D?=
+ =?iso-8859-1?Q?tDp2khFUQNCp/cmexPs8VxIiN1S/bGFDG60Yp96AyDyGMZCTggMkl+9+1u?=
+ =?iso-8859-1?Q?kiMpJPEvBsHgOYd+GYSgwxGHC8TgR9SwWu1LeTfek8nhCl5NzYMFXTDK6U?=
+ =?iso-8859-1?Q?1zJ52nqOsJ5H4CBaLoRtIApGFPl5vXj7vVS+xhPotgt6fZyp7ORCeWSfIL?=
+ =?iso-8859-1?Q?ekSnXS1xiM24ktf4awBzFIqApVXdpLf4B68GzwNWqb1/X/E7AmiXF+dwa/?=
+ =?iso-8859-1?Q?7+LB4lnDkhxAPv13Ge9cFYHeZUikG+GgOuAVRIm/ZQ2GglybCf4zdDl2hp?=
+ =?iso-8859-1?Q?Tg5lkJ7pQ9FESXbLR1HD9dx68rq/HlE+YMrUOZCC7ttKOroB8pWO58DCHh?=
+ =?iso-8859-1?Q?YX9qi7AkMHqoX2E2VxqQQbKweZTjOze7DAHRlnqRtDaMTtt9SABQnqjKpv?=
+ =?iso-8859-1?Q?auD9teJgc8w/GEVyuIhCgkTR4g0Pf+qcu/T5PvGHIFUEMU9sHchzZaPnOY?=
+ =?iso-8859-1?Q?9VcfEzU9GSRahgBj5E1d8lHJOqrwXJLnDOZEytJrmBN7AxUTFOh2kWu58o?=
+ =?iso-8859-1?Q?QhP8UeJRl+UQletthfklA0fO9Zc+kYt4zsNILYbCwMuChIm2dT7O3B4ePp?=
+ =?iso-8859-1?Q?3ucaOYGdWeh6EQC7Ody4mnPpJBs6LDjBnutVWmr0Fv/HRYKMKXnc09suiZ?=
+ =?iso-8859-1?Q?fEB7uuZeK7VD4LD+G7ESm0o6euTQQT/jeHbMkmg+1BajkU15+d5iIyIwSV?=
+ =?iso-8859-1?Q?6OGNTgsQNieynhx2VWjIrDf+YP5Hlr4F7KEQ/nunEnhC3uHf2PT0gYHVTg?=
+ =?iso-8859-1?Q?nYE25BUv4udFVF1TGHdXt455R6HInHoFepO7SbZTa6leih0TBaqyixq66R?=
+ =?iso-8859-1?Q?NQNa8gw8raMJi0qLz47p5llNdpJf0vN98PpbnHszsgOkOUTzt52VG9Cx4A?=
+ =?iso-8859-1?Q?jmV1CJ9zyJ7XDVmq6Koz18QfC8HpNVenTNSCKT9Sg1bl5J/0FOhx0/0ap+?=
+ =?iso-8859-1?Q?l7hP0Bmk/muaAYXUEXyxaZliQMceH6JP/xrcxev5ZR7Y1QoF7lX0mDcP4x?=
+ =?iso-8859-1?Q?i3rnRjp3UXusqyEWr/SSa964yRS7eKeyzQRVHh9IZ1r7vt5YmqUOfzZRoE?=
+ =?iso-8859-1?Q?bE12/VS8qjGCswaaGqWLKSDZTifU0Qfn4uEbmDmGDkhpqLa32RCvr6p6XR?=
+ =?iso-8859-1?Q?vpS9K3G5hSLimxuvc2xnsD4lVntCSmCZBlzjCcadVyxuZENRRx7rzxZU5M?=
+ =?iso-8859-1?Q?YJ61MosZBrXa117pmd3kwzGXsRYkmm3Meo3+UqTwzc1KD2KkHAoXwSw8qB?=
+ =?iso-8859-1?Q?j7ivutQZ0lwMUCKdriPxIkLynw5DAUMvBj77s4NHy3yjrZbgSvDaX0QoyX?=
+ =?iso-8859-1?Q?OHb2phUbU5No1ZVAiz/x2hmWuGaX/4bOhSWY9KDMHLXeZnkV1Hs1RMvcg3?=
+ =?iso-8859-1?Q?SapCWBa0zt3D6tFFEtJeMvTwwKyGasNx+ov2GLA4Vz+hYMgqPWB61sJM67?=
+ =?iso-8859-1?Q?EXLKYm/yM6s3b10JMYMsEAf4U6TXmOrLY8WP0AhZKGQLSYuoMwMFQWb+OV?=
+ =?iso-8859-1?Q?aHLc3jjXAplo3mBOt+NGi2YaSCDb7UrH9usBphvQzi0aRgCqnhiRc3dyXo?=
+ =?iso-8859-1?Q?WKxMDaf9/qfS6efJ9FiHW20zaZbRafoHAlv7cZPemAF4AUeGMDh2G8k1e/?=
+ =?iso-8859-1?Q?T8KHBGroEyTaq3KVaowoVVcFheDR4JMLSOmJnxt+g2wWGScBIy65MZgRQp?=
+ =?iso-8859-1?Q?1zZfN5NeYKjn0O1vIgqH63aU5ID+KKgngA+c4b0gbgLyO1FHRgjvsaiGZA?=
+ =?iso-8859-1?Q?ZipFiDXM4SV0sL6rdU2WQ0ZTTmHuyU1PhuaKSQIYQFeACL6MAocUMgakYj?=
+ =?iso-8859-1?Q?vptP5a0/iw0pP7IExVJYJiG2m5WtfU0=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0d63e815-d2ec-4e10-9f97-08de62762a19
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2026 16:14:38.5061
+X-MS-Exchange-CrossTenant-Network-Message-Id: e2363123-0f4c-4f69-26b3-08de62762b05
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2026 16:14:39.9917
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 5F71G833OERRta/JCzqHTQNxuHXsP0F/tDRlw9VysD6uy7dySJnn3C9SLXFMkEXw+UhAdLFLYtaGwsUtgjC7LA==
+X-MS-Exchange-CrossTenant-userprincipalname: Wu0KAP3jH3N2OAa7PO/65z0iRG8jeTglU4fY1NIRD0BleoMcBljWSRwN0t879yB0ZPrD6o4x3v6/VbqHdfaHMA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR03MB11643
 
-Make struct its_device and its commands sending methods publicly
-available so they can be used by GICv4 implementation.
+With introduction of GICv4 the size of struct vcpu can again be more
+than one page. Modify struct vcpu allocation to request enough pages
+again.
+
+Don't reintroduce the MAX_PAGES_PER_VCPU check.
+As per commit b77d774d8274183c2252f5fbc9fa3b3b7022ba06
+> It turns out that beyond efficiency, maybe, there is no real technical
+> reason this struct has to fit in one page
+
+Since there is no technical reason to limit struct vcpu size to one page,
+there also seems to be little reason the fiddle with 1 or 2 page limits.
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
- xen/arch/arm/gic-v3-its.c             | 30 +++++----------------------
- xen/arch/arm/include/asm/gic_v3_its.h | 29 ++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+), 25 deletions(-)
+ xen/common/domain.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 34833166ad..25c07eb861 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -30,26 +30,6 @@
-  */
- LIST_HEAD(host_its_list);
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 376351b528..c791fb5033 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -342,18 +342,24 @@ static struct vcpu *alloc_vcpu_struct(const struct do=
+main *d)
+ # define arch_vcpu_struct_memflags(d) ((void)(d), 0)
+ #endif
+     struct vcpu *v;
++    unsigned int order =3D get_order_from_bytes(sizeof(*v));
 =20
--/*
-- * Describes a device which is using the ITS and is used by a guest.
-- * Since device IDs are per ITS (in contrast to vLPIs, which are per
-- * guest), we have to differentiate between different virtual ITSes.
-- * We use the doorbell address here, since this is a nice architectural
-- * property of MSIs in general and we can easily get to the base address
-- * of the ITS and look that up.
-- */
--struct its_device {
--    struct rb_node rbnode;
--    struct host_its *hw_its;
--    void *itt_addr;
--    unsigned int itt_order;
--    paddr_t guest_doorbell;             /* Identifies the virtual ITS */
--    uint32_t host_devid;
--    uint32_t guest_devid;
--    uint32_t eventids;                  /* Number of event IDs (MSIs) */
--    uint32_t *host_lpi_blocks;          /* Which LPIs are used on the host=
- */
--    struct pending_irq *pend_irqs;      /* One struct per event */
--};
-=20
- /*
-  * It is unlikely that a platform implements ITSes with different quirks,
-@@ -155,7 +135,7 @@ bool gicv3_its_host_has_its(void)
- }
-=20
- #define BUFPTR_MASK                     GENMASK(19, 5)
--static int its_send_command(struct host_its *hw_its, const void *its_cmd)
-+int its_send_command(struct host_its *hw_its, const void *its_cmd)
- {
-     /*
-      * The command queue should actually never become full, if it does any=
-way
-@@ -258,7 +238,7 @@ static uint64_t encode_rdbase(struct host_its *hw_its, =
-unsigned int cpu,
-     return reg;
- }
-=20
--static int its_send_cmd_sync(struct host_its *its, unsigned int cpu)
-+int its_send_cmd_sync(struct host_its *its, unsigned int cpu)
- {
-     uint64_t cmd[4];
-=20
-@@ -270,7 +250,7 @@ static int its_send_cmd_sync(struct host_its *its, unsi=
-gned int cpu)
-     return its_send_command(its, cmd);
- }
-=20
--static int its_send_cmd_mapti(struct host_its *its,
-+int its_send_cmd_mapti(struct host_its *its,
-                               uint32_t deviceid, uint32_t eventid,
-                               uint32_t pintid, uint16_t icid)
- {
-@@ -322,7 +302,7 @@ static int its_send_cmd_mapd(struct host_its *its, uint=
-32_t deviceid,
-     return its_send_command(its, cmd);
- }
-=20
--static int its_send_cmd_inv(struct host_its *its,
-+int its_send_cmd_inv(struct host_its *its,
-                             uint32_t deviceid, uint32_t eventid)
- {
-     uint64_t cmd[4];
-@@ -897,7 +877,7 @@ out:
- }
-=20
- /* Must be called with the its_device_lock held. */
--static struct its_device *get_its_device(struct domain *d, paddr_t vdoorbe=
-ll,
-+struct its_device *get_its_device(struct domain *d, paddr_t vdoorbell,
-                                          uint32_t vdevid)
- {
-     struct rb_node *node =3D d->arch.vgic.its_devices.rb_node;
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/a=
-sm/gic_v3_its.h
-index fc5a84892c..aa54e9a364 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -116,6 +116,27 @@
- /* We allocate LPIs on the hosts in chunks of 32 to reduce handling overhe=
-ad. */
- #define LPI_BLOCK                       32U
-=20
-+/*
-+ * Describes a device which is using the ITS and is used by a guest.
-+ * Since device IDs are per ITS (in contrast to vLPIs, which are per
-+ * guest), we have to differentiate between different virtual ITSes.
-+ * We use the doorbell address here, since this is a nice architectural
-+ * property of MSIs in general and we can easily get to the base address
-+ * of the ITS and look that up.
-+ */
-+struct its_device {
-+    struct rb_node rbnode;
-+    struct host_its *hw_its;
-+    unsigned int itt_order;
-+    void *itt_addr;
-+    paddr_t guest_doorbell;             /* Identifies the virtual ITS */
-+    uint32_t host_devid;
-+    uint32_t guest_devid;
-+    uint32_t eventids;                  /* Number of event IDs (MSIs) */
-+    uint32_t *host_lpi_blocks;          /* Which LPIs are used on the host=
- */
-+    struct pending_irq *pend_irqs;      /* One struct per event */
-+};
+-    BUILD_BUG_ON(sizeof(*v) > PAGE_SIZE);
+-    v =3D alloc_xenheap_pages(0, arch_vcpu_struct_memflags(d));
++    v =3D alloc_xenheap_pages(order, arch_vcpu_struct_memflags(d));
+     if ( v )
+-        clear_page(v);
++    {
++        unsigned int i;
 +
- /* data structure for each hardware ITS */
- struct host_its {
-     struct list_head entry;
-@@ -138,6 +159,10 @@ int gicv3_its_setup_collection(unsigned int cpu);
++        for ( i =3D 0; i < DIV_ROUND_UP(sizeof(*v), PAGE_SIZE); i++ )
++            clear_page((void *)v + i * PAGE_SIZE);
++    }
 =20
- extern struct list_head host_its_list;
+     return v;
+ }
 =20
-+int its_send_cmd_inv(struct host_its *its, uint32_t deviceid, uint32_t eve=
-ntid);
-+int its_send_cmd_clear(struct host_its *its, uint32_t deviceid, uint32_t e=
-ventid);
-+int its_send_cmd_mapti(struct host_its *its, uint32_t deviceid,
-+                       uint32_t eventid, uint32_t pintid, uint16_t icid);
- #ifdef CONFIG_ACPI
- unsigned long gicv3_its_make_hwdom_madt(const struct domain *d,
-                                         void *base_ptr);
-@@ -198,6 +223,10 @@ struct pending_irq *gicv3_assign_guest_event(struct do=
-main *d,
-                                              uint32_t virt_lpi);
- void gicv3_lpi_update_host_entry(uint32_t host_lpi, int domain_id,
-                                  uint32_t virt_lpi);
-+int its_send_command(struct host_its *hw_its, const void *its_cmd);
-+
-+struct its_device *get_its_device(struct domain *d, paddr_t vdoorbell,
-+                                  uint32_t vdevid);
+ static void free_vcpu_struct(struct vcpu *v)
+ {
+-    free_xenheap_page(v);
++    unsigned int order =3D get_order_from_bytes(sizeof(*v));
++    free_xenheap_pages(v, order);
+ }
 =20
- /* ITS quirks handling. */
- uint64_t gicv3_its_get_cacheability(void);
+ static void vmtrace_free_buffer(struct vcpu *v)
 --=20
 2.51.2
 
