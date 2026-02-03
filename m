@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B31E8B381
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 23:08:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1219745.1528626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 181B0E8B37E
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 23:08:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1219749.1528656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnPVF-0008Rg-6S; Tue, 03 Feb 2026 23:08:13 +0000
+	id 1vnPVI-0000jn-59; Tue, 03 Feb 2026 23:08:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1219745.1528626; Tue, 03 Feb 2026 23:08:13 +0000
+Received: by outflank-mailman (output) from mailman id 1219749.1528656; Tue, 03 Feb 2026 23:08:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnPVF-0008RT-3p; Tue, 03 Feb 2026 23:08:13 +0000
-Received: by outflank-mailman (input) for mailman id 1219745;
- Tue, 03 Feb 2026 23:08:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vnPVI-0000jc-10; Tue, 03 Feb 2026 23:08:16 +0000
+Received: by outflank-mailman (input) for mailman id 1219749;
+ Tue, 03 Feb 2026 23:08:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aUNd=AH=amd.com=stefano.stabellini@srs-se1.protection.inumbo.net>)
- id 1vnPVD-00088F-8f
- for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 23:08:11 +0000
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c107::3])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 34cf5839-0155-11f1-b161-2bf370ae4941;
- Wed, 04 Feb 2026 00:08:10 +0100 (CET)
-Received: from CH0PR03CA0272.namprd03.prod.outlook.com (2603:10b6:610:e6::7)
- by IA1PR12MB6482.namprd12.prod.outlook.com (2603:10b6:208:3a9::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Tue, 3 Feb
- 2026 23:08:01 +0000
-Received: from DS3PEPF000099DD.namprd04.prod.outlook.com
- (2603:10b6:610:e6:cafe::f9) by CH0PR03CA0272.outlook.office365.com
- (2603:10b6:610:e6::7) with Microsoft SMTP Server (version=TLS1_3,
+ id 1vnPVG-0008QC-59
+ for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 23:08:14 +0000
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [2a01:111:f403:c10c::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3546e282-0155-11f1-9ccf-f158ae23cfc8;
+ Wed, 04 Feb 2026 00:08:11 +0100 (CET)
+Received: from CH5P223CA0004.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:1f3::24)
+ by MN6PR12MB8591.namprd12.prod.outlook.com (2603:10b6:208:471::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.12; Tue, 3 Feb
+ 2026 23:08:03 +0000
+Received: from CH1PEPF0000A345.namprd04.prod.outlook.com
+ (2603:10b6:610:1f3:cafe::a4) by CH5P223CA0004.outlook.office365.com
+ (2603:10b6:610:1f3::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
- 3 Feb 2026 23:07:55 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS3PEPF000099DD.mail.protection.outlook.com (10.167.17.199) with Microsoft
+ 3 Feb 2026 23:08:02 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000A345.mail.protection.outlook.com (10.167.244.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 23:08:00 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 23:08:03 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 3 Feb
- 2026 17:08:00 -0600
+ 2026 17:08:02 -0600
 Received: from SATLEXMB04.amd.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Tue, 3 Feb 2026 17:07:59 -0600
+ Transport; Tue, 3 Feb 2026 17:08:01 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,28 +61,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34cf5839-0155-11f1-b161-2bf370ae4941
+X-Inumbo-ID: 3546e282-0155-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bX/dXpJu5OZ0eIu51neos4M3tXM7wYXB/QmnVUJPnjlYiVr0u/YFEZml5CgQZQUOjNhzCBgyUlPasxvWbOCOmncVs9GpOujra5B86lt/RMW0IU9GLBWyGi1HnnqPi6h3W30Sll7Q/vOm+cNsDNz6fuvQwnJpawMEhK1RiPAs4rBVVutFR/oXBKFEfQijjM7/la6gJjzgrbgcGSC+xw33oon1Br+Mx0/FssW5O3kaAxsQauL6b4vsNV2/Spq7w1cBW4xyIGYzyFs/qI2yA5XHrlPieaR6+c2jBEM7d6/4SQ/WIsPbsyJq8vHt7Guv1dyFodYFZfu/VRnFe1m6iT8Jhw==
+ b=QWFaNA2GQGIvz2nm9OO3SABCG6VidESFW2wUGsWtVA76i0Un81tXxupCXtNPQ5cFVVZXi/yJ0NCNmwLfB2N0fJAQsiedkwZQRNg/K7wh8jHTJC96HiKqcKc6+xftxRlgZfWi6g1dbzjrkRfhZwxKD6jcvmOomopxo0nkeBq45xuVa3y5JELXbiXZTT3+dju4R5+q+qMBF/gRXSlMtj/TsB9NSXHfelSjw85XXOGT/Rnr2O/eiV/BjQCUAVH7ratJCIpuBFfmXl71dcsv2nRuvdvGYZ09s7lz+lEEvKudmVtLzOJLJh6VtiJXJB0jWOV6kwCvPX+NiryMWfVWmAWn2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RGuhRgy80JmJPp5zr7235mr+Lh7xOYWvGliDQSZ3vn8=;
- b=O/FAjKLYEdnS8L6lQVGRmA2XpwdMzlPIUj6bavIn5j3qosRYb8VFEnBehCkF9bHs5AKebqG1XghgeMviMx4TA8f1jOiRtdEDJ3MoG0DKd+nh8jvMl6b5VHozuwDoaiibTv+8oN0LupJo6+T6gbhSDTV51NC+FcADZNS+jmpz3AuefGS13bUWMoq3iBBqALnTxDitpuD2jdCrEa62xUVkfDNO2nv6AvoUJYBiZLzucEpki7RdAW3+Jyw/uxSAhCObX2Is37djHkc7R6lS2bthxKn4pksY4yViZ9GU915iGVC/OSMBzY5J4iBFB80w2JVFOt5K1mwGgUUYqqKYfqPK3w==
+ bh=ldlEhyuj2S9L/CGueqaFFNeQSo5XY7pcNO609Q+D5BQ=;
+ b=BrWGJYqISBT4xImDKzm9RU/C0I46yExjBHG19XD9ooQNGv0cz0wb2oOZ3yPmto28L2f7CBqA62SHOVRoY/UIuwsrcLFYKtG5xSx7CpJ9uxAOJ32AyoYJqrn336o/L6eWf5Oqxoa8houO+jFz8bYkIos3q6zewRv9yhtYriqlj78OAqRHQDzP9hTh+xipU3+/FLJ0eW5X9UEDj4LrZF4DG2ujgNLd1BRiTg/0YLKy2EG1fcCoWRXZ8RS0TysgH/bGUNRWvAx8R6ZvIIuAFGBsK4LgMfniZ0mDut7Qh6724aqxT+ZsF5igSooE9cSSrcjl6m2IQxtshjT8BzQLcATuBw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RGuhRgy80JmJPp5zr7235mr+Lh7xOYWvGliDQSZ3vn8=;
- b=d1L0QWG3U2X6xLT9me1lhJG9wSNNJ0Ma4UMvqjNpjY1xnbClzgpYlS8Fp9mPXMm9i1m5SYMZXtta8DCg6mmqulMpIX1IxMiQPFLC66d67393RLTUXEGv5GD0QUwD+4e3u/EOkb8baV03K2wa1jRXqnlWkt7xYln7HyaiXkOFKUU=
+ bh=ldlEhyuj2S9L/CGueqaFFNeQSo5XY7pcNO609Q+D5BQ=;
+ b=GN9nurzHHhuqarAgljU6RZxQ9zNOl50fvZN/5Jgk8jjld+T7vjEdrDu5YdtNHTGmzz+ApwKbA6ibQC3as9H7jWESvO0oGLGPbaSnLh4OoPTIgbHg7w/6Ws4HOBZvdoONQ3VrtIO6exTMxYjjUY7JLqGG8QUnkz4DFnZyD9SOSmc=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Stefano Stabellini <stefano.stabellini@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <grygorii_strashko@epam.com>, <anthony.perard@vates.tech>,
@@ -90,9 +90,9 @@ CC: <grygorii_strashko@epam.com>, <anthony.perard@vates.tech>,
 	<jason.andryuk@amd.com>, <victorm.lira@amd.com>, <andrew.cooper3@citrix.com>,
 	<jbeulich@suse.com>, <sstabellini@kernel.org>, Stefano Stabellini
 	<stefano.stabellini@amd.com>
-Subject: [PATCH v9 1/4] xen/console: use ACCESS_ONCE for console_rx
-Date: Tue, 3 Feb 2026 15:07:54 -0800
-Message-ID: <20260203230757.3224547-1-stefano.stabellini@amd.com>
+Subject: [PATCH v9 3/4] xen/console: handle multiple domains using console_io hypercalls
+Date: Tue, 3 Feb 2026 15:07:56 -0800
+Message-ID: <20260203230757.3224547-3-stefano.stabellini@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <alpine.DEB.2.22.394.2602031502240.3175371@ubuntu-linux-20-04-desktop>
 References: <alpine.DEB.2.22.394.2602031502240.3175371@ubuntu-linux-20-04-desktop>
@@ -101,132 +101,273 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DD:EE_|IA1PR12MB6482:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4d101a7b-5d22-4436-7c14-08de637913d7
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A345:EE_|MN6PR12MB8591:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fd9c07a-a6ba-47df-c2a1-08de6379155e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?tm2dD4oAaFvm9/KqxTTkKTI1F95WJyhfaT4ALueHWgMqyF/rzUXTrEYBJRR9?=
- =?us-ascii?Q?ylMBNgoMp9JAlSX+X4WEuSG8eV4s+Q1YuZqoscZmEG8txPePGkr2kP6DqEW4?=
- =?us-ascii?Q?+ISx5g4hJZjS50ZpZDJ2pkHGom1oOyTxrqd0ucIzwYAD6l0zD45U921KzB7m?=
- =?us-ascii?Q?m3jB37xXXFJLuN8hWFJnifjcAAk8ICHPx0qTa7sbIO7k9v+EAER8Dc+KLqCY?=
- =?us-ascii?Q?VIjpmdkOdIF/zb6vOk98jiFtSRWfpr6lsQjKPAOvBRdW8Jy/PdcOQu88B27U?=
- =?us-ascii?Q?NmUT32OlSgza3Xof2ulMs6b8Smna2KoxcN994OLKedvbVqYf4BNkOPBIYn0Y?=
- =?us-ascii?Q?yVpFrwiGeBG1MeSLc4GChhabN8x/7pSoNXgFpYvUzdtyPIIN8M6saO5lvDGP?=
- =?us-ascii?Q?PxfP0/WiBhyWg04EJAKDqziKvGwHvxyREyjicDFvDVhmBbUKOSWWWu5pyQfz?=
- =?us-ascii?Q?r1mjaHX28oOqGPxG7ysxkM5o4ob2roAvJqgGpYnx3FzAHwxPkxVo1jw72coj?=
- =?us-ascii?Q?45UBNMeeLMQ/cedJ3o4N580CcKi6EKvDYPwjqEEHeb5u21X/M+Dr5xMtDK1v?=
- =?us-ascii?Q?VNTyG9gUDktDTdk8vnVGVScjtokKPNMblVoUmidpgi6w+Clfp1Uja5yq58Ej?=
- =?us-ascii?Q?xSvBMO1yjq/eF2ojWxLWmxUc4QmYoQpAjrzxDLOhIRBq+pbWcUuEAl/oWuHI?=
- =?us-ascii?Q?JfpvdYs3lBCnVxjFKBLvTIDj9kcU7X1LYSU5NK15dZFjr7EYcfc6I9I7Q+Z8?=
- =?us-ascii?Q?vvcT3Ux350GLj2xgkM/oYtzud3dHfrc5tcgi9PjA1XsCxD0XzuuasbhONJGH?=
- =?us-ascii?Q?sBQBBbp0wK7quVBwfQtZEBl7VYnObedFSXnDsZW9/0XsDn5qrNWaL8kVCJgo?=
- =?us-ascii?Q?goS4cwJuVMNYYzDffIzyQlNALk6AYh3rzULD3bOoJ7dTyoBP2u2LjvkD3rK2?=
- =?us-ascii?Q?7vJvhZPJzFG4uBZ6vjMROTe1rwvM1av6nHuAIzHglBxMZ2kWoEUG+HoIh9vJ?=
- =?us-ascii?Q?E/uUggLiNuKCv7WJWDUQnjc63wDQ4pDer5atwRVOE749SqfXWExphd9m5XbA?=
- =?us-ascii?Q?6QGOZdiKox6qjRWPReQ0TepgELpZIDhSO9GmtdG2m2URok0VbTjXDYRjrqUW?=
- =?us-ascii?Q?CQ3gROZZqSAqnbmAnYa38YvY9fWgaQlKuurK/xT+PErq5Tyv+ea5ClzWHCMl?=
- =?us-ascii?Q?VJf5de7ipGUnPcWJNZnS4iixyF/Kv1vXzV0kBjvjExQa1YDIbn8y9WA35ySI?=
- =?us-ascii?Q?0IZ68DC+KNTJ+NwjR/1OM6n0Jewc/TnkMBFJ1Ec9EHawndBgY3nHtCfYQXJv?=
- =?us-ascii?Q?y5PV3PVvzHtEhv49ZVdHhBKck6kRD6/WuvEbA2+KidASE7sE3dzjmuTV8Kzl?=
- =?us-ascii?Q?OS2n1wJMRl2OeQhCv5d5caQcl3YCxS8h17s6BVA2xMdjogrSSi9LHD1tRmRH?=
- =?us-ascii?Q?BXEqbIos4XeN7jnaW2+gdHIHWHeK34TX4BwWWxWQ65mZ9e1GlbV8LE+GJ9ls?=
- =?us-ascii?Q?HCtOOyE9moXAqItH8wVgYjy2+WE4/GJKexLEswbmrtRz/+uXtbGCHUyYUX2W?=
- =?us-ascii?Q?KTMbjXRAy5rB+TVRm1mdGTw4bSVMyHOY4v7AMqzKiN9lzuAVW4PXlQBmYNWU?=
- =?us-ascii?Q?f3gydDCbBfyJH2ZPJ63XFNPdyADYAPFP60l2eVlhgm6cEMO9uc3JeJNJpkSg?=
- =?us-ascii?Q?VNDDKg=3D=3D?=
+	=?us-ascii?Q?vqYy73CN+zomQCQHpoknKaKoqkrbydagsDsESB3+SxCScMyS/nVuXasQhEbJ?=
+ =?us-ascii?Q?TK5h6oirbBmVsPbNC9UHX1IYlXJWc3FF64uMo/ZFIfyfrLq7dusKAXuPH3gM?=
+ =?us-ascii?Q?nmT0FeIZWO9KirZ8/Zpp+TM7KYf3z+4xoZLz8CFusN2AysWt/GstDhxutMBf?=
+ =?us-ascii?Q?lRCr1/CIxw7QIWHauWImAvgupcE5RRIrezjQqu6yYcWwY2OjrYWJvV6/UWUu?=
+ =?us-ascii?Q?0S3C+9kJ3WezNu3Iqp3EZeCPii2mI4eMT7YUUbssTb7j7b3i4L7giUKrhBh+?=
+ =?us-ascii?Q?eJaR/FQ96gFpms+QE/KgT3Bc1K8dkEVDqV+ksOpHLaQzQ7Bl+ZCjGN+BwKwh?=
+ =?us-ascii?Q?fWkwikoU1M3QT+vd1c3EOPHuuoY7ZBRHnxXQbj/QepKwaXp8Iivuk62XIkYt?=
+ =?us-ascii?Q?+R4NwdPzgTI5c9mtx8Vqb5FQxb0qYDLEeBx8AdrvVzHUNoY5SjP7DxyizZ/2?=
+ =?us-ascii?Q?P6wh6H78+YFbcDXU3k/0kNoUChGirEcGTHWEFK+Rhwdyre2vnBsi9Qc37Jqk?=
+ =?us-ascii?Q?ldZ40I6kSRgIrFoGI+30rpMEvA4iD1jDULEjL0B/jjpozw5nBRu8YBNvW2Bn?=
+ =?us-ascii?Q?G7IcqGb/CeBVSaJ0bhSahb+VIQSYKEPgA5RaKKHKbpb9brnMzjm+SwaHpHJd?=
+ =?us-ascii?Q?k+kfRz5dcpn8GJgc7PaT66wwcTQo4E+AFdX/9sXFFlup6pTV+9mADLEzkehw?=
+ =?us-ascii?Q?c3PRZ5RJouOY2JFRkphqfwEC+vdEu5pmNrK7nDPJU23/20rHyQAhA1yECtCW?=
+ =?us-ascii?Q?VL5agWRJAJpKzUacdaHmhMZfGM3Io6LUgyp4HmhMoeQbAXaKZpf++I9AqXgz?=
+ =?us-ascii?Q?2XmNOrdIDxfhUf4BT3C0DHFcZSRCwow8zJduTo2nRRlAVJzGhnmqKuWx1B+l?=
+ =?us-ascii?Q?YvhJkWl/xB2JJd1lid51yooq5jhDxi5W+lxwlm17ja11WHMBSVjbPD+SxkcF?=
+ =?us-ascii?Q?jPeQvZKMwc3yFZxSgBEhqbIaJ/4aKZZDFFlPQx3YvmDN0RKw9/oC87/5pzOo?=
+ =?us-ascii?Q?SPAKH68grj7nwnXdwZf1KJ8Nez68UnjVCRbw0/NWNe6543bPzY7zaKS3zZp7?=
+ =?us-ascii?Q?61NLbo5igAqvARHO/vY6UOL8p4gHF/n/M7YRIec2eGxpSUFEBM0l10KZr47d?=
+ =?us-ascii?Q?E+3wYc+SEaAv3Jh/M/cCZtMxUga//ceGnGdsNZKP8mUbdcxcM8zcaSUdpSi9?=
+ =?us-ascii?Q?YYZsJ/SbZrJ2X7yJZnxZm/rBmWzAr41zmWsQ3KBJJlRdvFvrUnWhw0nauAsx?=
+ =?us-ascii?Q?HWAXgyX3TQ+OHyJtgUkaXK3FL7PItuMseEYOMPJ8jKB5pN8AO0uluKB+hrjN?=
+ =?us-ascii?Q?VyUpyIkNCZkYJHMToHQHp4GpT15bjUKAhkFO50CW/FdEMhfbj/WztwaFDdaM?=
+ =?us-ascii?Q?Gb8jvL8KWylk0esK8iS6WLH+Ji8saDjEr/e5V78xhV+SKjexML4+N0FloO/q?=
+ =?us-ascii?Q?d6dgVVitHOvCJYR4tBeOYyIc5qPhwfACY+LRHuoU/LdOD359KEDrJ5JKCSi5?=
+ =?us-ascii?Q?0TnwZbcHNAO0B3buGEc8BrwqqC8qV2iNVhnc4nULtgDWKa7VefXO7DnN4oyH?=
+ =?us-ascii?Q?WEvjEaPo4kB+IIBLRIxTTnAkXGkD450Wg7u1/Qm9EbZzB8lKjR85bhVFIg0K?=
+ =?us-ascii?Q?D51aAqPaYOflpkmK9PCFAplCY3MqtO3RvlmK5TpX3ReSTbq0brkh6MbZ2Azt?=
+ =?us-ascii?Q?vxrGIA=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	aqN/Xc2/LbKDGL4XFN9Jg2SCy4gkMDJ51y6dNucdJdjjHele8yh8LA0Lc5GA1zk/PwVVew/FStN+6s/cYjrxEbnm//hxHArHMGmw7F1YrxIJQTj5MuYe2obmkNHuqMQsjYhdQRijJY+g+D9VR7vHg1B2fuW65x2jpMIqrgcY3NWGsLLY0bmcV6hR83IPPmBZXMDhLHBkxmQ2b+kh+foBDSuqV7qOH7dQqn13sdBGUOEnj+GNSwmBtakrj9TULOMZNKq9GiJmljC5tVmwPbjbrEe7cM5LRBXEvoE13U1zS+RqLdgUp4EUCHoTho99BxF68tuTTgfIefKR9dF4cJaID692sHwaeYjS97rKtSH2f8TRX/g/3DPvFZ+lSHYs/Adn5WbAbHqYLCqazxamsBtUS543BW3PTgYafpWMoDwYh0wR6k/BvQ8S81SaMN9iVR9i
+	I3eQZeyKB6ADKkcS9qNwCmnAhdX+28JFqdeB6nfC0ceNP5OUyfSsIq+jDETY6XAkwtIp58g6qhHvur7F3EAkk4+ctG2xRjqx6svTeTbjofjVjKL3N/S3GoUV/Xq/Vh4/0Xz+CEThPUmaI9eiMMx8vx5l1VzOKA1IhU2oAetZvNwduLNaX6atIy7iVa4jKOs3SJ8Xr46K3euiRDiWRkk0nQUaA39+qz5bRAQe71QR/nnRxFVuWnHUWfEHeSmbYa/yFoIY6XGfcsCtuH3y8aWZpMMo3zQGj2sej7owWA5ToLxgFDMv+38EWDJxlBlrWVn/cKtlZ1NuUDLNVQHk+UZFZD32IKz2w67Voo/OuKH2HPx/ptNDlHRnQE+ByKI7FoFF2vOhIjFI51UNvm2P00zez2nM7rlNaSooqLrQZ4d9oA/oWlTXMDEzupOo48cEArAS
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 23:08:00.7772
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 23:08:03.3310
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d101a7b-5d22-4436-7c14-08de637913d7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fd9c07a-a6ba-47df-c2a1-08de6379155e
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DS3PEPF000099DD.namprd04.prod.outlook.com
+	CH1PEPF0000A345.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6482
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8591
 
-There can be concurrent reads and writes to the console_rx variable so
-it is prudent to use ACCESS_ONCE.
+Allow multiple dom0less domains to use the console_io hypercalls to
+print to the console. Handle them in a similar way to vpl011: only the
+domain which has focus can read from the console. All domains can write
+to the console but the ones without focus have a prefix. In this case
+the prefix is applied by using guest_printk instead of printk or
+console_puts which is what the original code was already doing.
+
+When switching focus using Ctrl-AAA, discard any unread data in the
+input buffer. Input is read quickly and the user would be aware of it
+being slow or stuck as they use Ctrl-AAA to switch focus domain.
+In that situation, it is to be expected that the unread input is lost.
+
+The domain writes are buffered when the domain is not in focus. Push out
+the buffer after the domain enters focus on the first guest write.
+
+Locking updates:
+
+- Guard every mutation of serial_rx_cons/prod with console_lock and
+discard unread input under the lock when switching focus (including when
+returning to Xen) so that cross-domain reads can't see stale data
+
+- Require is_focus_domain() callers to hold console_lock, and take that
+lock around the entire CONSOLEIO_read loop, re-checking focus after each
+chunk so a focus change simply stops further copies without duplicating
+or leaking input
+
+- Hold cons->lock while flushing buffered writes in the focus path
+so the direct-write fast path does not race buffered guests or HVM
+debug output
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 ---
- xen/drivers/char/console.c | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+Changes in v9:
+- use irqsave/irqrestore in console_switch_input
+- update in-code comment
+- blank lines
+- local copy of serial_rx_ring
+---
+ xen/drivers/char/console.c | 78 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 68 insertions(+), 10 deletions(-)
 
 diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 2bdb4d5fb4..35f541ca8e 100644
+index fbc89ca2a4..b59ebdeddb 100644
 --- a/xen/drivers/char/console.c
 +++ b/xen/drivers/char/console.c
-@@ -518,11 +518,12 @@ static unsigned int __read_mostly console_rx = 0;
- struct domain *console_get_domain(void)
- {
-     struct domain *d;
-+    unsigned int rx = ACCESS_ONCE(console_rx);
+@@ -541,6 +541,12 @@ void console_put_domain(struct domain *d)
+         rcu_unlock_domain(d);
+ }
  
--    if ( console_rx == 0 )
--            return NULL;
-+    if ( rx == 0 )
-+        return NULL;
- 
--    d = rcu_lock_domain_by_id(console_rx - 1);
-+    d = rcu_lock_domain_by_id(rx - 1);
-     if ( !d )
-         return NULL;
- 
-@@ -542,7 +543,7 @@ void console_put_domain(struct domain *d)
- 
++static bool is_focus_domain(const struct domain *d)
++{
++    ASSERT(rspin_is_locked(&console_lock));
++    return d != NULL && d->domain_id == console_rx - 1;
++}
++
  static void console_switch_input(void)
  {
--    unsigned int next_rx = console_rx;
-+    unsigned int next_rx = ACCESS_ONCE(console_rx);
- 
-     /*
-      * Rotate among Xen, dom0 and boot-time created domUs while skipping
-@@ -555,7 +556,7 @@ static void console_switch_input(void)
+     unsigned int next_rx = ACCESS_ONCE(console_rx);
+@@ -553,10 +559,14 @@ static void console_switch_input(void)
+     {
+         domid_t domid;
+         struct domain *d;
++        unsigned long flags;
  
          if ( next_rx++ >= max_console_rx )
          {
--            console_rx = 0;
-+            ACCESS_ONCE(console_rx) = 0;
++            nrspin_lock_irqsave(&console_lock, flags);
+             ACCESS_ONCE(console_rx) = 0;
++            serial_rx_cons = serial_rx_prod;
++            nrspin_unlock_irqrestore(&console_lock, flags);
              printk("*** Serial input to Xen");
              break;
          }
-@@ -575,7 +576,7 @@ static void console_switch_input(void)
+@@ -576,7 +586,11 @@ static void console_switch_input(void)
  
              rcu_unlock_domain(d);
  
--            console_rx = next_rx;
-+            ACCESS_ONCE(console_rx) = next_rx;
++            nrspin_lock_irqsave(&console_lock, flags);
+             ACCESS_ONCE(console_rx) = next_rx;
++            /* Don't let the next dom read the previous dom's unread data. */
++            serial_rx_cons = serial_rx_prod;
++            nrspin_unlock_irqrestore(&console_lock, flags);
              printk("*** Serial input to DOM%u", domid);
              break;
          }
-@@ -592,7 +593,7 @@ static void __serial_rx(char c)
-     struct domain *d;
-     int rc = 0;
+@@ -602,12 +616,16 @@ static void __serial_rx(char c)
  
--    if ( console_rx == 0 )
-+    if ( ACCESS_ONCE(console_rx) == 0 )
-         return handle_keypress(c, false);
+     if ( is_hardware_domain(d) )
+     {
++        unsigned long flags;
++
+         /*
+-         * Deliver input to the hardware domain buffer, unless it is
++         * Deliver input to the focus domain buffer, unless it is
+          * already full.
+          */
++        nrspin_lock_irqsave(&console_lock, flags);
+         if ( (serial_rx_prod - serial_rx_cons) != SERIAL_RX_SIZE )
+             serial_rx_ring[SERIAL_RX_MASK(serial_rx_prod++)] = c;
++        nrspin_unlock_irqrestore(&console_lock, flags);
  
-     d = console_get_domain();
-@@ -1193,7 +1194,7 @@ void __init console_endboot(void)
-      * a useful 'how to switch' message.
-      */
-     if ( opt_conswitch[1] == 'x' )
--        console_rx = max_console_rx;
-+        ACCESS_ONCE(console_rx) = max_console_rx;
+         /*
+          * Always notify the hardware domain: prevents receive path from
+@@ -731,6 +749,7 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+     unsigned int flags = opt_console_to_ring
+                          ? CONSOLE_ALL : CONSOLE_DEFAULT;
+     struct domain *cd = current->domain;
++    struct domain_console *cons = cd->console;
  
-     register_keyhandler('w', conring_dump_keyhandler,
-                         "synchronously dump console ring buffer (dmesg)", 0);
+     while ( count > 0 )
+     {
+@@ -743,17 +762,36 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+         if ( copy_from_guest(kbuf, buffer, kcount) )
+             return -EFAULT;
+ 
+-        if ( is_hardware_domain(cd) )
++        /*
++         * Take both cons->lock and console_lock:
++         * - cons->lock protects cons->buf and cons->idx
++         * - console_lock protects console_send() and is_focus_domain()
++         *   checks
++         *
++         * The order must be respected. guest_printk() takes the
++         * console_lock and it is called with cons->lock held. It is
++         * important that cons->lock is taken first.
++         */
++        spin_lock(&cons->lock);
++        nrspin_lock_irq(&console_lock);
++        if ( is_focus_domain(cd) )
+         {
++            if ( cons->idx )
++            {
++                console_send(cons->buf, cons->idx, flags);
++                cons->idx = 0;
++            }
++            spin_unlock(&cons->lock);
++
+             /* Use direct console output as it could be interactive */
+-            nrspin_lock_irq(&console_lock);
+             console_send(kbuf, kcount, flags);
+             nrspin_unlock_irq(&console_lock);
+         }
+         else
+         {
+             char *kin = kbuf, *kout = kbuf, c;
+-            struct domain_console *cons = cd->console;
++
++            nrspin_unlock_irq(&console_lock);
+ 
+             /* Strip non-printable characters */
+             do
+@@ -766,7 +804,6 @@ static long guest_console_write(XEN_GUEST_HANDLE_PARAM(char) buffer,
+             } while ( --kcount > 0 );
+ 
+             *kout = '\0';
+-            spin_lock(&cons->lock);
+             kcount = kin - kbuf;
+             if ( c != '\n' &&
+                  (cons->idx + (kout - kbuf) < (ARRAY_SIZE(cons->buf) - 1)) )
+@@ -796,6 +833,7 @@ long do_console_io(
+ {
+     long rc;
+     unsigned int idx, len;
++    char kbuf[SERIAL_RX_SIZE];
+ 
+     rc = xsm_console_io(XSM_OTHER, current->domain, cmd);
+     if ( rc )
+@@ -817,6 +855,9 @@ long do_console_io(
+             break;
+ 
+         rc = 0;
++        nrspin_lock_irq(&console_lock);
++        if ( !is_focus_domain(current->domain) )
++            count = 0;
+         while ( (serial_rx_cons != serial_rx_prod) && (rc < count) )
+         {
+             idx = SERIAL_RX_MASK(serial_rx_cons);
+@@ -825,14 +866,31 @@ long do_console_io(
+                 len = SERIAL_RX_SIZE - idx;
+             if ( (rc + len) > count )
+                 len = count - rc;
+-            if ( copy_to_guest_offset(buffer, rc, &serial_rx_ring[idx], len) )
+-            {
+-                rc = -EFAULT;
+-                break;
+-            }
++            memcpy(kbuf, &serial_rx_ring[idx], len);
++ 
++            nrspin_unlock_irq(&console_lock);
++
++            if ( copy_to_guest_offset(buffer, rc, kbuf, len) )
++               return -EFAULT;
+             rc += len;
++
++            /*
++             * First get console_lock again, then check is_focus_domain().
++             * It is possible that we switched focus domain during
++             * copy_to_guest_offset(). In that case, serial_rx_cons and
++             * serial_rx_prod have been reset so it would be wrong to
++             * update serial_rx_cons here. Get out of the loop instead.
++             *
++             * rc is updated regardless to provide the correct return
++             * value to the VM as the data has been copied.
++             */
++            nrspin_lock_irq(&console_lock);
++            if ( !is_focus_domain(current->domain) )
++                break;
++
+             serial_rx_cons += len;
+         }
++        nrspin_unlock_irq(&console_lock);
+         break;
+     default:
+         rc = -ENOSYS;
 -- 
 2.25.1
 
