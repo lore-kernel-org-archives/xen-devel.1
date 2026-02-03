@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F929E83062
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 08:53:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1219149.1528083 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD1EE8305D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 09:06:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1219161.1528091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnC90-0003JI-6F; Tue, 03 Feb 2026 08:52:22 +0000
+	id 1vnCM8-00057V-9G; Tue, 03 Feb 2026 09:05:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1219149.1528083; Tue, 03 Feb 2026 08:52:22 +0000
+Received: by outflank-mailman (output) from mailman id 1219161.1528091; Tue, 03 Feb 2026 09:05:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnC90-0003JB-2a; Tue, 03 Feb 2026 08:52:22 +0000
-Received: by outflank-mailman (input) for mailman id 1219149;
- Tue, 03 Feb 2026 08:52:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vnCM8-00057O-62; Tue, 03 Feb 2026 09:05:56 +0000
+Received: by outflank-mailman (input) for mailman id 1219161;
+ Tue, 03 Feb 2026 09:05:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qAHx=AH=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vnC8z-0003J5-1U
- for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 08:52:21 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a57cc44f-00dd-11f1-b161-2bf370ae4941;
- Tue, 03 Feb 2026 09:52:19 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso4053795e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Feb 2026 00:52:19 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
- [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4830512e0edsm51215485e9.7.2026.02.03.00.52.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Feb 2026 00:52:17 -0800 (PST)
+ <SRS0=NbdA=AH=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1vnCM7-00057I-6h
+ for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 09:05:55 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 88365f25-00df-11f1-9ccf-f158ae23cfc8;
+ Tue, 03 Feb 2026 10:05:49 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EB006339;
+ Tue,  3 Feb 2026 01:05:41 -0800 (PST)
+Received: from C3HXLD123V.arm.com (unknown [10.57.54.130])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A53863F632;
+ Tue,  3 Feb 2026 01:05:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,153 +44,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a57cc44f-00dd-11f1-b161-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770108738; x=1770713538; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=QAGfZkbffxOOgsUsGUNz4+gz5ensEn9F2e4yPKGBSQg=;
-        b=DLu2xRmBjNH7VWActuPgN17Gz+hI28lfAdTCEA7f5MZPF+WD984N06Xzv6f19itloy
-         w6RrxG28dAVxzR2qNNpphzP5izcOnyrUJX/NxxggzyGTBIm6z9iNV/THlndZQn2drpkh
-         lrB4imYfi+lULqUmuhbEiB6aFriSdFZaQAUyPjPmsf8iCPSKZW3u5Kwg+nLui2FGmqjn
-         EXyH78AgBFScL+c+aNqJt/aMpQ9XzgwRfsmqiuCbHEqHRHmAabNz1xggDHlgD35Sx8HE
-         iGXt8UR/wAKVSPSk+Y7ooxip/j+WOdjdcfVD27Nw7ISX6B2p4xmODpDpDoGY3lzM6tU/
-         Ecvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770108738; x=1770713538;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QAGfZkbffxOOgsUsGUNz4+gz5ensEn9F2e4yPKGBSQg=;
-        b=qEQP8qB66u2/6sMgb8IjUIhiCscG1hJhtKsp4SsEpWKjVI/cq0fzqHE8lPYKUKIgTy
-         3ZfriAIHCP4pxvbTr7au2IZ9IvisjcS7rb3P8otUdwDKjvEJXhl8XSn7N2UiZ1G1yN0J
-         ddrtEqbJ00SQrVmfJXNC2xZr0REANv2yJKKTqBtA6tgSSksd+B4A9Bw+3Jkm9szXbWvs
-         NaP6MqW2EYyOVaLKflpqPsICetdk9qvr2RXiD3TgqXH9E+8wTjAqgXg/Q+cbXTH/v+nq
-         iH1lWAwpeCPZKIsrFscNvVR7mqAkJ/9fhZjeoPLZzkr4snNMjWbiYCj6KR6djCUdAgwE
-         PQsQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUWVbkHj7wWzj8EBcC0i0evXW5VmG1iOf8sTPvGIrlq1Wb3GODjW+1SFLkkqc+IIRfMZxdS7aF/8fo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxM7uIuTGMCeL2s7ABBSYNoo/VZiRoyJnsbo6lQZV2yHBrC4Fvx
-	mtauChkl8S6cP26IneLXgwfGsg5a15FewcuDOBlKybP0EXHIb2chwBX2
-X-Gm-Gg: AZuq6aI8vpWSxthYlmcgKSQtcGwF3SyJQfiVVOR2XW1+ox4D7fLxalaI46BSVuREbSn
-	Nx9/JVXGBYvukc5uOoDBT8k1kG381BezmyZpNJGQhNQKPwUBqcEdccvhI98+XuikE0MjUAxufk+
-	8rIkZnNUmg52EAoGbjzS7dG3ZKfIQ0D4vFNBnCJP5CpIMzjE5z8k1Y3A0rqAIRBRxq233y12zUj
-	BsYUIIbIfze3Yw96KitCc7B1vUfCEy7NDTPHxZhbE9b67HBrXDLto6r0WbYJeT5WUZvtUhsPSu8
-	QOJbKbaEUDv+a29C11mc7nDXJo1eULvnWJ/HyNlUofq2db9gy1bCAn9fGbY9fhbhCqmP+kwoNw5
-	cEcgPMtpvzEQ7E54dga+c7wQD7gsn4BDB3BAsTsZkbJMaaYAaYlRM6DJskYhhNSUVdklDHiwoKH
-	GQxOJRU7p7jCOEpsWobZ5rMsstfwA1+l5ifZ3chcpw9V2KMjvzNSqbWopAnhYy/tt+brOKQIaBP
-	Q==
-X-Received: by 2002:a05:600c:6303:b0:47e:e59c:67c5 with SMTP id 5b1f17b1804b1-4830513aed8mr37686575e9.8.1770108738194;
-        Tue, 03 Feb 2026 00:52:18 -0800 (PST)
-Message-ID: <404d5f05-99e4-41a6-971f-a2b18c4147b0@gmail.com>
-Date: Tue, 3 Feb 2026 09:52:16 +0100
+X-Inumbo-ID: 88365f25-00df-11f1-9ccf-f158ae23cfc8
+From: Bertrand Marquis <bertrand.marquis@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: jens.wiklander@linaro.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH] MAINTAINERS: Add Jens as arm TEE reviewer
+Date: Tue,  3 Feb 2026 10:05:34 +0100
+Message-ID: <1f545f1fc56c8e5f898cff688434b6f38fb16ed4.1770109450.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/3] xen/riscv: introduce struct arch_vcpu
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1770036584.git.oleksii.kurochko@gmail.com>
- <98214488c67fac866ba519c368aef697da2d2bb6.1770036584.git.oleksii.kurochko@gmail.com>
- <f0773662-808c-44d2-b4c7-8858fb8d365c@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f0773662-808c-44d2-b4c7-8858fb8d365c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+Add Jens as arm TEE reviewers so that he is informed of changes in FF-A
+or OPTEE changes in Xen and can review them.
 
-On 2/2/26 3:08 PM, Jan Beulich wrote:
-> On 02.02.2026 13:57, Oleksii Kurochko wrote:
->> --- a/xen/arch/riscv/include/asm/domain.h
->> +++ b/xen/arch/riscv/include/asm/domain.h
->> @@ -24,6 +24,55 @@ struct arch_vcpu_io {
->>   
->>   struct arch_vcpu {
->>       struct vcpu_vmid vmid;
-> Nit: This being already here contradicts the title saying "introduce".
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-I'll update then the commit message.
-
->
->> +
->> +    /*
->> +     * Callee saved registers for Xen's state used to switch from
->> +     * prev's stack to the next's stack during context switch.
->> +     */
->> +    struct
->> +    {
->> +        register_t s0;
->> +        register_t s1;
->> +        register_t s2;
->> +        register_t s3;
->> +        register_t s4;
->> +        register_t s5;
->> +        register_t s6;
->> +        register_t s7;
->> +        register_t s8;
->> +        register_t s9;
->> +        register_t s10;
->> +        register_t s11;
->> +        register_t sp;
->> +        register_t ra;
->> +    } xen_saved_context;
->> +
->> +    register_t hedeleg;
->> +    register_t hideleg;
->> +    register_t hvip;
->> +    register_t hip;
->> +    register_t hie;
->> +    register_t hgeie;
->> +    register_t henvcfg;
->> +    register_t hcounteren;
->> +    register_t htimedelta;
->> +    register_t htval;
->> +    register_t htinst;
->> +    register_t hstateen0;
->> +#ifdef CONFIG_RISCV_32
->> +    register_t henvcfgh;
->> +    register_t htimedeltah;
->> +#endif
-> When you add these right away, any reason other high-half registers aren't added
-> as well? HVIP (above) and VSIE / VSIP at the very least have such counterparts,
-> iirc.
-
-No specific reason. It was added early in the RISC-V port when I was considering
-supporting RV32, but as you know I later decided to focus only on RV64, at least
-for now. Therefore, it seems better to drop this `#ifdef` from the `arch_vcpu`
-structure and re-introduce when RV32 support will be added.
-
->
->> +    register_t vsstatus;
->> +    register_t vsip;
->> +    register_t vsie;
->> +    register_t vstvec;
->> +    register_t vsscratch;
->> +    register_t vscause;
->> +    register_t vstval;
->> +    register_t vsatp;
->> +    register_t vsepc;
->>   };
-> What I'm generally concerned of: With the registers all being put here in one go,
-> without any of them actually being used in this patch, it'll likely be harder to
-> track that they're saved / restored / initialized correctly (once uses appear).
-
-Then if it will really better I'll introduce in this patch series only vsatp register
-as it is used in the further patches. (or even will just introduce vsatp in Patch 3)
-
-I will keep the patch [1] separately in the patch series with introduction of vtimer
-things and drop only an introduction of vsatp there.
-
-[1] https://lore.kernel.org/xen-devel/cover.1769099883.git.oleksii.kurochko@gmail.com/T/#ma33af3ff4b2b033f86aa964902ebcab8705fd114
-
-~ Oleksii
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0ceb4bba21cd..ccc25a0e55dc 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -547,6 +547,7 @@ F:	stubdom/
+ TEE MEDIATORS
+ M:	Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+ M:	Bertrand Marquis <bertrand.marquis@arm.com>
++R:	Jens Wiklander <jens.wiklander@linaro.org>
+ S:	Supported
+ F:	xen/arch/arm/include/asm/tee/
+ F:	xen/arch/arm/tee/
+-- 
+2.51.2
 
 
