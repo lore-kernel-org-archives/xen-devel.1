@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BD0E87842
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 16:49:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1219416.1528291 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF55E87842
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 16:50:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1219421.1528301 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnJav-0004ja-JS; Tue, 03 Feb 2026 16:49:41 +0000
+	id 1vnJbF-0005AG-Pi; Tue, 03 Feb 2026 16:50:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1219416.1528291; Tue, 03 Feb 2026 16:49:41 +0000
+Received: by outflank-mailman (output) from mailman id 1219421.1528301; Tue, 03 Feb 2026 16:50:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnJav-0004jT-Gq; Tue, 03 Feb 2026 16:49:41 +0000
-Received: by outflank-mailman (input) for mailman id 1219416;
- Tue, 03 Feb 2026 16:49:40 +0000
+	id 1vnJbF-00059k-N9; Tue, 03 Feb 2026 16:50:01 +0000
+Received: by outflank-mailman (input) for mailman id 1219421;
+ Tue, 03 Feb 2026 16:49:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J8X4=AH=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vnJau-0004jK-1f
- for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 16:49:40 +0000
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
- [2a00:1450:4864:20::343])
+ id 1vnJbD-0004jK-Oq
+ for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 16:49:59 +0000
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [2a00:1450:4864:20::42d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5394b2a4-0120-11f1-9ccf-f158ae23cfc8;
- Tue, 03 Feb 2026 17:49:38 +0100 (CET)
-Received: by mail-wm1-x343.google.com with SMTP id
- 5b1f17b1804b1-4801bc32725so45340605e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Feb 2026 08:49:38 -0800 (PST)
+ id 5f6c0bc4-0120-11f1-9ccf-f158ae23cfc8;
+ Tue, 03 Feb 2026 17:49:57 +0100 (CET)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-435a517be33so3521246f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Feb 2026 08:49:57 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4830512e61dsm73209105e9.8.2026.02.03.08.49.36
+ ffacd0b85a97d-4360ef9e804sm11082497f8f.41.2026.02.03.08.49.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Feb 2026 08:49:37 -0800 (PST)
+ Tue, 03 Feb 2026 08:49:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5394b2a4-0120-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 5f6c0bc4-0120-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770137377; x=1770742177; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1770137397; x=1770742197; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=hsihNRRAUO9irjyqUmGl+lYbNZkIHXJWPrKLzjEl7yk=;
-        b=d27/gVMW0dgCW5fycMRRMONDxt5VtrUc+jYbcyrvU3GpbWgLvNVJQziC/NIdy4Hkmj
-         XWnKj4hl+HahwnUIoa/tWA1ALHnf04I4EIVAPReRU0y4lpGRmp3CvJsrqF0o8OLARtk7
-         52+S3qeMKmI6fTsk5zkptCQkrq9B1ZFE6rXGvXzSY2QjV035zf5qxJ7VsMScc0NxiNnm
-         Ii2yY3XO8ERDQHCfC5EScMx8dTk0GMPBwAQ3uSeoS8mRH3WirXrUIlV3oO0qkI1wKpbH
-         /MXnJs4oMJRYmTxXGE2nMSpXNk4DRi+G+khHdON5Vh3pqXtpyiW2Rp7Tn1ewnntCw+YJ
-         LZBg==
+        bh=jSrVgJ47FbXZI7U0CKTH4UTDBJca7s7Dks5/LglLXeg=;
+        b=UczrCBv7BqVf1fbPOPppPBJ1enWYryDi8T132BjsyGBVeu/HnK85ZIqCcKKD2aonod
+         mjv0/OJBOx8tF/rLlDnYIsJO6XxR+Enp0mZ3TW9J6tOCsxKtegdkTTGFRFgixLVKTSVV
+         GNHuQsGdg44iVuv7qckZS6Dk5GJua/hkHPU47JuCYRI6rU+mvjKAczh1WUIw8YyKBGsy
+         zOKoQwsdR+hojTkdlOMa8e7A7BPfe9xsO18Qiuy5jwqqmy1grq48tsn5C442FQs5kEkh
+         hV/Mp+xDBex9FnaS1/1RkPbx6rDnO7qk15YO7lIDSPSvv9LAtzH0hxEGKWCkzDUc34ZR
+         OYwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770137377; x=1770742177;
+        d=1e100.net; s=20230601; t=1770137397; x=1770742197;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :references:cc:to:from:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hsihNRRAUO9irjyqUmGl+lYbNZkIHXJWPrKLzjEl7yk=;
-        b=dZlNSU50ABndHyyalHo1vWQEUWWYY4u5Z7KRlWBAB+AWXxtqYPQoaZxmQt/jD8xuOL
-         Beny4Ezg+Iyl4SOhIN/acXDO6pDZUts1/j442PjWALg9TcJCZhXggd35luvsOiGk+/Fl
-         mSTxeRfvyJq+rMRtcj3Yztjy96tNtIIyUesab4OkTu/uCQXqQKCi1EcI8AZDCfzbNZoA
-         21itmqcVww6n9tVgQDs9oITFaH0qYAh6OGM4BTd5bGJHmx2RlmLjsNwPF7x+OiYFeTaH
-         WHj4477H/8PDOPtGk3ggFTXJnV4kvYGk1AnCiyMl/1oyzPf8nBmeY5hjY9pj9UIxhDDf
-         17PA==
-X-Gm-Message-State: AOJu0YzpOllN2h78BuReqjWnxbfdmTgEukkM9eOvO99Ea+1SFFs2KdnU
-	y/ESPQfXCr1qYW5z7LiQE94FiZPHb0CV1pjNBKlMNcftfcw69JDIY+hPKV/1E7VPLh1wP8uhM0E
-	D1PYtRg==
-X-Gm-Gg: AZuq6aIt1W2BXxlURoNO8yUUvZZM8vIifbYBeCpUngMcckJjYLicj7NM0Wg7gsQiljC
-	QJkaYgpyRxQgBxN6+VokPG/ws3f362nR4b3RdI3tz2+sQIwQetMrroPfrB9HYN0H2uGaGpvmtLZ
-	k7QaUJCxPxq4wxq4XTbB5FFtat4JPxIyPClLufNc73Kr10nAyC4vhiPBCeRqzNRjjECR+Ib2suy
-	qmT3lv285oPX18SO4klGvoRsUls0jCVG13uCYwZvNz4isI7YhRsDoN5mxoff1263TDoQgkEr94c
-	7raEKzH2B2JFW/XQ1SemPMu91qZKKyPv4CVAu9CHdy1RuMAdh91LXnRFvjNPM/FLRHvt9xplwaS
-	7aQK0ceBfaIfEbr2w5Vp9ukC/GxLeoQeXDF/MJbDfQWiL6p0Lk0mmjozeoaviqGVZHH0AZAl9HK
-	Yx0P3OYha2wbjJR5oO7vV0HDhqSPD4X6ctY20nBf/HFsIdtGM1mQD6r47BK19xKxE5F1/Zc0gag
-	1HyxThvcLMNTg==
-X-Received: by 2002:a05:600c:1f08:b0:480:6941:d38b with SMTP id 5b1f17b1804b1-4830e991a8emr3540515e9.30.1770137377374;
-        Tue, 03 Feb 2026 08:49:37 -0800 (PST)
-Message-ID: <c6aa40de-11b2-4725-b18c-8a982e43f0f0@suse.com>
-Date: Tue, 3 Feb 2026 17:49:35 +0100
+        bh=jSrVgJ47FbXZI7U0CKTH4UTDBJca7s7Dks5/LglLXeg=;
+        b=Nu76lesIZeEbRiDDdFkkDZtPWJMyF8IQ4LDfmEUcer8HtOz2M3Vg7ZA2g6YvOlOkTS
+         Mk1Udt+n0IGcXvDgs8CzQvvXp47udqgty/Rg3433kbqR8hoUJm7lcpmQx9xYTDcdIJr6
+         829eON7pif51iZDL2YqL+q1+6oQ4wtUTa3510dHY+1+HTDvETbSPiUMoW549LoJHRJNg
+         ulcVxJy70cfPMbFQcvL8yCIoWGbyEQk2ZrdyJN5DiK1bwoFvgLj1IlkRwIDVAuu7IDsR
+         eNWWYEPvtoHxDHM00TTQOLxrrqdkSESs1JgQyRXcbGKEKIJwRSP7RNa/c23UAFsZo2aH
+         4Nzg==
+X-Gm-Message-State: AOJu0YzDXDg+FdgrTP0AOv/3X1uUWiXILWxYDEekWoWmvzEEpZhCcLmZ
+	HpauZiTNTI8xHeh139qnljLaXq/GxqDs5NVHm8j0sdDjt/NohNvxRraDm+sdVgGQe3y1ukRXo4v
+	FcHw=
+X-Gm-Gg: AZuq6aL8hWYSN0HtBIvCdCeww/TTm5um0Nw2LIQO6BuPqEC8xl0L/NLnwPS0/t8uamu
+	ioldUAN/1AuPKws63FfDGOT+HAbXLFmy5cCeDjc6lN80UUaanfAiR4QGsNsXKfcC4j3gx0zwxS/
+	0hu8p3nXHDl7/tLGNctJrv3BY6WClicDnQpF7ZZUJdN0h1dj9OwbC8qesTfurjJBMA3BF2lAzqf
+	ghjnCafJ05qnvXUXBHElGj3/uCO1Pw9yBROCPR/kNh8bBiT0s0cGkFkzRI7de8kVYuLhaNhSSs3
+	C+s366d1fD5SJTCpc+xZODFVJrtwhqKAdQ8VJMp8tvDqRPjXFX4XfhnUKO/lJ2o97icuzeHyOVD
+	MJvVbkTfFN3/TLz2ecChFZYrjNm8jYWRLNlbh9h4ETw5nJhlquiMvLilaWfPCJ2hKnemz+SaIwi
+	WTFkepIOA1VzkbNoIg0DGMHoh6pEAjEpdrezDfMmNzX122AEYAbVU2+0p/1pB3BwLYXblalOCbw
+	I0=
+X-Received: by 2002:a05:6000:290b:b0:436:14fa:a3f3 with SMTP id ffacd0b85a97d-43614faa467mr3339071f8f.21.1770137397143;
+        Tue, 03 Feb 2026 08:49:57 -0800 (PST)
+Message-ID: <8559db88-5f1d-4ced-980c-e71c4e229c7c@suse.com>
+Date: Tue, 3 Feb 2026 17:49:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/3] x86/shadow: unlock P2M slightly earlier in
- shadow_track_dirty_vram()
+Subject: [PATCH 2/3] x86/shadow: VRAM last_dirty tagging
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -125,30 +124,81 @@ In-Reply-To: <5149ab32-7d03-4ae5-9af0-e62dd5836329@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-There's no need to call vfree() with the lock still held.
+->last_dirty holding a valid value (one other than -1) is solely an
+indication of the bitmap being entirely clean. (The opposite isn't true,
+because of _sh_propagate() setting the field to a valid value without
+setting a bit in the bitmap.) As a consequence
+- setting the field to a valid value right after having allocated zero-
+  filled space is pointless,
+- copying the the all empty bitmap to the output array is pointless; with
+  the output array also having been allocated zero-filled, not even a
+  memset() is needed there,
+- after restoring bitmap contents when dealing with copy_to_guest() having
+  failed, the field needs setting to a valid value again.
+
+Furthermore invoking NOW() in perhaps many loop iterations of the main
+loop is wasteful, too. Record whether any bit was set, and record a new
+->last_dirty only once, after the loop. Then use the same NOW() value also
+for the subsequent check.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-In fact for the purposes of the function the P2M lock could really be
-obtained merely in read mode, and it could be dropped immediately in both
-the main "if()" and its "else if()". If only there wasn't the error
-handling after copy_to_guest(): Dropping the paging lock ahead of that
-call, we rely solely on the P2M lock to also guard the changing of
-d->arch.hvm.dirty_vram.sh and what it points to. Question is why dropping
-the paging lock (but continuing to hold the P2M lock) is necessary there
-in the first place.
 
 --- a/xen/arch/x86/mm/shadow/hvm.c
 +++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -1219,8 +1219,8 @@ int shadow_track_dirty_vram(struct domai
+@@ -1087,18 +1087,18 @@ int shadow_track_dirty_vram(struct domai
+         if ( (dirty_vram->dirty_bitmap = xzalloc_array(uint8_t, dirty_size)) == NULL )
+             goto out_sl1ma;
+ 
+-        dirty_vram->last_dirty = NOW();
++        dirty_vram->last_dirty = -1;
+ 
+         /* Tell the caller that this time we could not track dirty bits. */
+         rc = -ENODATA;
+     }
+-    else if ( dirty_vram->last_dirty == -1 )
+-        /* still completely clean, just copy our empty bitmap */
+-        memcpy(dirty_bitmap, dirty_vram->dirty_bitmap, dirty_size);
+-    else
++    /* Nothing to do when the bitmap is still completely clean. */
++    else if ( dirty_vram->last_dirty != -1 )
+     {
+         mfn_t map_mfn = INVALID_MFN;
+         void *map_sl1p = NULL;
++        bool any_dirty = false;
++        s_time_t now;
+ 
+         /* Iterate over VRAM to track dirty bits. */
+         for ( i = 0; i < nr_frames; i++ )
+@@ -1174,16 +1174,20 @@ int shadow_track_dirty_vram(struct domai
+             if ( dirty )
+             {
+                 dirty_vram->dirty_bitmap[i / 8] |= 1 << (i % 8);
+-                dirty_vram->last_dirty = NOW();
++                any_dirty = true;
+             }
+         }
+ 
++        now = NOW();
++        if ( any_dirty )
++            dirty_vram->last_dirty = now;
++
+         if ( map_sl1p )
+             unmap_domain_page(map_sl1p);
+ 
+         memcpy(dirty_bitmap, dirty_vram->dirty_bitmap, dirty_size);
+         memset(dirty_vram->dirty_bitmap, 0, dirty_size);
+-        if ( dirty_vram->last_dirty + SECONDS(2) < NOW() )
++        if ( dirty_vram->last_dirty + SECONDS(2) < now )
+         {
+             /*
+              * Was clean for more than two seconds, try to disable guest
+@@ -1216,6 +1220,7 @@ int shadow_track_dirty_vram(struct domai
+         paging_lock(d);
+         for ( i = 0; i < dirty_size; i++ )
+             dirty_vram->dirty_bitmap[i] |= dirty_bitmap[i];
++        dirty_vram->last_dirty = NOW();
          paging_unlock(d);
          rc = -EFAULT;
      }
--    vfree(dirty_bitmap);
-     p2m_unlock(p2m_get_hostp2m(d));
-+    vfree(dirty_bitmap);
-     return rc;
- }
- 
 
 
