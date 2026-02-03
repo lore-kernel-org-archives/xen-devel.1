@@ -4,40 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1927E8784E
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 17:19:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1219512.1528382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F253E8784C
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Feb 2026 17:38:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1219539.1528423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnK3W-0005PC-En; Tue, 03 Feb 2026 17:19:14 +0000
+	id 1vnKMT-0001B3-Mn; Tue, 03 Feb 2026 17:38:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1219512.1528382; Tue, 03 Feb 2026 17:19:14 +0000
+Received: by outflank-mailman (output) from mailman id 1219539.1528423; Tue, 03 Feb 2026 17:38:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnK3W-0005P5-Bz; Tue, 03 Feb 2026 17:19:14 +0000
-Received: by outflank-mailman (input) for mailman id 1219512;
- Tue, 03 Feb 2026 17:19:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vnKMT-0001Au-Gp; Tue, 03 Feb 2026 17:38:49 +0000
+Received: by outflank-mailman (input) for mailman id 1219539;
+ Tue, 03 Feb 2026 17:38:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1Q51=AH=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vnK3V-0005Or-Qe
- for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 17:19:13 +0000
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [2a01:111:f403:c112::7])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7444a36f-0124-11f1-b161-2bf370ae4941;
- Tue, 03 Feb 2026 18:19:11 +0100 (CET)
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by DS4PR03MB8374.namprd03.prod.outlook.com (2603:10b6:8:329::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Tue, 3 Feb
- 2026 17:19:08 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
- 17:19:07 +0000
+ <SRS0=NbdA=AH=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1vnKMR-0000Zt-Ow
+ for xen-devel@lists.xenproject.org; Tue, 03 Feb 2026 17:38:47 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 3082c8e9-0127-11f1-9ccf-f158ae23cfc8;
+ Tue, 03 Feb 2026 18:38:45 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A181C1063;
+ Tue,  3 Feb 2026 09:38:38 -0800 (PST)
+Received: from C3HXLD123V.arm.com (unknown [10.57.54.220])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DE5CF3F632;
+ Tue,  3 Feb 2026 09:38:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,198 +44,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7444a36f-0124-11f1-b161-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kBEib5t9FvKNwC6zWyQcxrvyFzeyHDvNZrierkEkJW7wm2Fl95svsrem5MH7PZ/P27MpUwZxaXxEJGHa3zZkob1x4EITX2oIsfE1ga3BInG90FLskdYBtVoZzU9bVSBHire35gSQ7KLhmk8cmc50BAIiOz1NBAxnf/F7T+E4HjIoT2HQfIeuFdQ8C4nP2awtaiumE3Qjc3leytLrfuXzhTxhmsm3j2dYuMA+9AZ8z4BfcLNtup+EkH5S3vpx3WgjshN7VOgkXkwe8KvGzLtHXcwsTdGIs317x/Yd7MYJ5SAcWxpw1JIYkGQl6PZ5HSot1vvUxcG1BupiPP55GUhCqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5KKguGCm0m/c0z83/a0cONcteUbXEG5AiIiGnVyiGzc=;
- b=MlLXQ+4jxYzdD+6rorU5ySfWf5aMriXQzBi2x2DOLcZAUTT8TY0ruaKZUvUf0Hj9hWsWTTM0G0/8yNP/DmRWSTlvUrRkHb27/FtDSeW19eRq/KA/R7g+RBgPELGIDlOQZLWBR4kqG7o4fwcIj/i+frLGg69dh4cN4SxgDS82iYnWk3Gk+BDiJ3OUIIgJ7Xw1rdYCwlMrHrukX4sUUapSuXMhK+lgMT+K/Apo+G8oA8MgV+wmO/pnVTCxZxDg42A+1DWVBsgrctSlOt4gFW3tDbSK6eHAFf2f2SKALdiSq5pE7UDq5OPHchCVgmfc3qG4pJpdSEmQrgUfPcAwSYLgig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5KKguGCm0m/c0z83/a0cONcteUbXEG5AiIiGnVyiGzc=;
- b=Vv+TRdb7U6e+Pl8v+Kx3ZICx9W7AARaW70n+Y8n0AzQth9gBs/lZDOXAg7GnaOqAvK0EfVzjJg6vwC93YrGA2lSYmlqVHXrdr+mEyxlrFNyiSsdTRKCvNP5tfsRkDIsC32y4wNjCIoF1bxGyR4MP8ZpOuVL3U45abms/bYsYGXA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Tue, 3 Feb 2026 18:19:03 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stewart Hildebrand <stewart.hildebrand@amd.com>
-Subject: Re: [PATCH v3 5/6] x86/PCI: avoid re-evaluation of extended config
- space accessibility
-Message-ID: <aYIuB96SYzVwGfmj@Mac.lan>
-References: <a67e69b8-c1e9-4448-adbd-17a19dfe13de@suse.com>
- <a0b10d39-daae-4fc0-af42-a3794a96f9f5@suse.com>
- <b63b0f9e-93cd-4b55-a7c0-f8eab9df1947@suse.com>
- <aYBq2EoeP_TGv_sK@Mac.lan>
- <1bcdd2dd-9b2b-4eb2-a569-e28b03c1e1fb@suse.com>
- <aYB4z8CSA590Ytpo@Mac.lan>
- <da490e92-c8b1-40b3-83ca-ad77dc2defe8@suse.com>
- <aYDAUCVdk_2qGa-r@Mac.lan>
- <4913d9b3-03ec-443e-b908-a1531dca6699@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <4913d9b3-03ec-443e-b908-a1531dca6699@suse.com>
-X-ClientProxiedBy: MR2P264CA0168.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:1::31) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+X-Inumbo-ID: 3082c8e9-0127-11f1-9ccf-f158ae23cfc8
+From: Bertrand Marquis <bertrand.marquis@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH 03/12] xen/arm: ffa: Harden shm page parsing
+Date: Tue,  3 Feb 2026 18:37:58 +0100
+Message-ID: <97a064c81ee5ea26774c189538f9f1e37dd3eebc.1770115302.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.51.2
+In-Reply-To: <cover.1770115301.git.bertrand.marquis@arm.com>
+References: <cover.1770115301.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DS4PR03MB8374:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c338bdc-e154-4374-daaf-08de63485649
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?U0dGZUZYTUlFcmU0ZzFtYVVmYlZqSzV0Ulo2TTlnRjBTeE4wbjlRZk96VDla?=
- =?utf-8?B?a2FwZzYxLzNIV0d1dkc2U0pjZnRrbW44VVJVZDY5dVE5bTA2R2ZuS0dndnFY?=
- =?utf-8?B?QkkxYUdOVTVKcTFBdlBxOEw2bkVXQnpMdDBIbnFTRm4xUEFxZjFQbDJiaWFY?=
- =?utf-8?B?V3RZRGZtMWM2YzV6UnlMa1pVdnJQWmJiR2J5SlZSL01TeFBCWmF4Y2Nja2Fw?=
- =?utf-8?B?bUFVRWZnS0NVbk5YaWxxUStvbEhlOHVSQ0EwZHBmdXBBSXVLcG83Vko0SDdp?=
- =?utf-8?B?ZmR2ZTVrOXlZcGVtYllQc0Ivc0c2WGxwRzY5NkNLUjYzOEZqQTZ1ZTZra2Jz?=
- =?utf-8?B?TGdpaDNJcWt2Z0VVaGdSZXJ4M2ZJeWd0VjVDcFIvMHQ4eGNGaXk0aGpHamdy?=
- =?utf-8?B?ZlRaM3JMTVJ4M2lTQUowbSt1Z2RzK0hsTFh6N1RzZHJkdDFXZXFNZ2RYYStm?=
- =?utf-8?B?ZGFhRHlUUmVWa2dXQ0JTSlpSc0VtQlp5SkJZRUxUbUhuN2J4UHlZL2NSWEdM?=
- =?utf-8?B?ZlFoT0ZselNUNDV2V2p3SUo1aWhRTVVWK25nWUJaTnpQdnVvdERES3A1eEZn?=
- =?utf-8?B?RHNVL3N6b0oyZjI4SkdXZ2s4Rnppc3ZyMkNJcHBpMDdNUFVGWmh6WW5oUk15?=
- =?utf-8?B?aUY5WjYzZFVKNXdmelkwS3k1RVkzNHh1dDFhbGJGSm45enY5cE1kV0VlRk5D?=
- =?utf-8?B?Q1FRT3k0RXl3N0x1TDdEbzdTRGY5TDVwTlNqalpseklzR3pLVisrYXhLOEVQ?=
- =?utf-8?B?U1RCcmtpR1dYSm5Rd1JsWEdzOE54MU1nY0N1TDBUZ29aMTF4dUZuTGZhVjV3?=
- =?utf-8?B?WVlRYXFHMzVDOGJqQXFWOHgvaEkxRlJBbDd6YnRxeFZqdHlSNGlZQWVPTUo0?=
- =?utf-8?B?Snl6VzlKZzRNR0Z3R3VlZzZxVDdJeGx4WlNtUUZKck5UV0F2RnA5ZWJQc3Fn?=
- =?utf-8?B?eENubzM5eHo2c3BPeWEwTXpVdnZDMFdlRGdwaUxSdTBOWTNqeWFmaHh3K2E4?=
- =?utf-8?B?TklrNnJkemtaVWRDOFNRcmxmdGMyMW9kQTl2YTI1NFNqUVcvYkpzTDlCd28x?=
- =?utf-8?B?c1h5NmE1cDBUREVqZnRWQ0FqTXlmQnU1aTArNFFCNXpUeVFPVW1RZks1SWNK?=
- =?utf-8?B?MTZtb1lIMXVHME1QeHdtY0w3TGVBZUJXLzlxczQraDVXSW9ScHNnVllyNE13?=
- =?utf-8?B?dHpNdlhVMTJBMWZzQnVjTEZkUUJDR3dOdTJ4Nk8xUzRMVGd2Z1owSzVoOFRJ?=
- =?utf-8?B?S21NZ01ybFJqMjZ5Z2hDYVE3MVpOVlBJaVc1M1FFbVBhelBWa3daczNQYmFn?=
- =?utf-8?B?dlhCaGdRQlJ1ZkFoZjFMZ0xpSVo2V01tVDJQeGtGRGkzNjg1VEVXc3RoN2lF?=
- =?utf-8?B?NkxFYURjTEdoVVM2dXhnaVBRZUw1dmwyZTNobnl3bzVuS1EwdmI1a0pEa1JO?=
- =?utf-8?B?ZzRSalI5ajVZb2pBMUIwY1hJZjd6ZWg5M2hyUXQ5STdoSTBzbVd1bkxVcEhQ?=
- =?utf-8?B?MUJsNjFZSXdIbDFhcy9tcXoxWHM3SEd1SHA0OU54SFd2WDFmdDVaUlhCN29N?=
- =?utf-8?B?MzF6eWpYcXJicVA2WTd6SStKbU9NZDdFWGwwWXRXbVQ0cXdiS05uVFVVeUFu?=
- =?utf-8?B?cWZnL3NscWJ1em5QamRNQ2dxaUxXdzVFK1hPUm5wRGdNRW1TM2IrdllSOTlE?=
- =?utf-8?B?cDYzNGRubzFEYkROT1FmUTlWSjMyeFRlV1h5VXJUYWVxUUVHTTN3cEs1WFFO?=
- =?utf-8?B?S0Z1RVcvaTVPakU4RzJiSE1VMHRYSkZFTDNnR2hhZi9aVXQ4VTYzbXN1Y0ZL?=
- =?utf-8?B?MUIxdnZXTlg0VVVUaXg5Qm9lb0xUU0FQMk9OU1VUODRyMjFXVUp3bjU0SHFj?=
- =?utf-8?B?VDJsaURiUGVvc3lxaFovSElCaHEvQ1pwN2lEd2RPaDFhekxoNlViMEU5Q0NC?=
- =?utf-8?B?ZnVvNU1QK3hleXJuOFlqV1pkRDg1eWVoanIzMHhJQk1mbndoZVVTS0Q3cjVs?=
- =?utf-8?B?WWVBOEl0OGk0Mld5WGdJMS85VWt4Mkt1RFpzTTdXYS8yMXB5aTQ0dGdQeXNV?=
- =?utf-8?B?VVBPTmNwZzAweC9UbkR4YlBwRXJoWlRrWTRrZG5yNElWa1BzQWRiVzlsa0Zm?=
- =?utf-8?Q?zSjw=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WGFiSDY4YWc1QWFmRFZjVlhadEZOalNFalp4a0VLaXhnY2lYYkNMK3h0czlP?=
- =?utf-8?B?UWpUQ2w4RTEyOUhwTU9wdk9LbXJTNW93eTZCcFlMTEtYbmVvTUpkV3laSUtN?=
- =?utf-8?B?cjlNSXdReGFRamQ1ZC9Fc1RBUlRNd0xkemEwYlA2eUhPVC9nKzN3TnpmejJY?=
- =?utf-8?B?UGlNV2ErV05Vb28wK20wVmdCam1Bb1l3Z09SSzVmVm5xYWVYVytKanM4QWVr?=
- =?utf-8?B?aGRuU3RhS0o4dnJzdUNGaHFhd3VlSUEraFE0UGhBRFNNZGdmdUdUaGNibkh1?=
- =?utf-8?B?SjIrTkN6ODhyZDJXcWI2dW0vTnJMQmEwV0pBZ2MyYW4vNkV0UkhMei9jNE1M?=
- =?utf-8?B?bDMvbGdMS3VnWXcrci93L0R3QjEwdFFCMnpJOEx5b1hWSWlVdUFkWUpzdFdQ?=
- =?utf-8?B?bVJ4YW1rTi83VUlOeEoxSk9yZWtRc1VJTzlZTGdKWlBxdU9YcXg2MmIwUzNv?=
- =?utf-8?B?S0ZXRjV3NUlReTlCWEhkem96Sk8vMjZDUEpJbjZ5YVkxOVJ5T0c1dVJQY2tw?=
- =?utf-8?B?MloxQjdmRklXREpodXRFYjF1M1pSVWRTaEtKQ2QrdDF3Qlo2NXpycjRMZGhV?=
- =?utf-8?B?aGZGWnRHb2t2ZXBPbjU1ak5zWFJTbHd0YjJVUzRNcENTNUtEcW56ZzIwWDIx?=
- =?utf-8?B?ZC9ON0E0SWVjdTJnTTQxRWJ6ZHYxdGE0cHdJWS8xSEt6NTZ2NkdFVy9tNzBP?=
- =?utf-8?B?S0NMQURSb0R2Uy8vMDJ3RnhYUlJxSTFVYlRCKzFCb2x3QjlNckpPSmVMM2Jp?=
- =?utf-8?B?Y2NpTjlzNUpudXlPTW1FYzJTNkRlcWhsRmlWN0lnUURVeElaUEx0WVl4TmZ6?=
- =?utf-8?B?REQ3Ylp5aHFCb0lmbUN1dmIvNVJ2NXY0eUFkU1JIUmkvVE9STEtJaCs4Y2FT?=
- =?utf-8?B?Rmp2a1lUakZkc1U4YTd4WGJEM2dZMGsyRzlSU0w0d0hualVzVThYaEhGZVJh?=
- =?utf-8?B?cWdpdGphRUwrU3RSUnAxQlpEWFlDU2ZRWThpYk5UbTU0VXhvV1hLTmNZU0pl?=
- =?utf-8?B?K3o4VG5vdUVkRWtpZXBrOC80T2pibzJzcGZ0VGxJUnhrYTFlaktEbnd1UVR4?=
- =?utf-8?B?N2tQVGY0ZXlybjBnYkk2U0dkbncxa1NHK1VYcCswc3llYmVZUmhHVnFBeGZ0?=
- =?utf-8?B?RTY3YzZQZk5xTzYzZGlteDJzNVkrZUxLZ3ZmcjdXVE93U1d3cGhyb3V3US85?=
- =?utf-8?B?MXZhamFQUHBJZmdaQm5pMzdCa1pTVG9Wdit5VnFxeUFzZUxXN1c0eU9DU0kv?=
- =?utf-8?B?SkVuNElBUGdSL1lFUFNmMGtKSUpzdzlhSzlXeDJpL1BDcHYyYmpMM3llUlpC?=
- =?utf-8?B?RkFOTDFpZENZWDl6VmdZWXlNVkJ4cnRnVmNNaitKY2Z2dHVsNnpMTkJoanNk?=
- =?utf-8?B?RXo4eG5SSGxqaXpOVUx1cWVUd21jaDF0ZXpMa3NiL25vbWNtdjNSeFZ3YVR0?=
- =?utf-8?B?WXBYY0JzQStxTmpTUTdZRlFvR2xPUUZTdUVlVDFOTVAwSUlITjBRcXlaei9k?=
- =?utf-8?B?UWZPZ3h1aGZKTWNjKzltZFNMdzVKR1NPclpIbFB4MHBTbk41REdZZzg4VWRS?=
- =?utf-8?B?SCttd2JsK3FrZE5LSTJVWE9HY2dRaHZXbFVRSTB6S091WnczTFFxYU1PRkZu?=
- =?utf-8?B?ODBVS0RrU0cxR1lBV0hjTlVCWTBLalVxcXBEQWtyZXZUQ253Ui9ZRktQWVZ2?=
- =?utf-8?B?YXMvZFI2ZW9aNHorODR3SkJQaDIyK09EeDFrdk5qSHQ0aHZOTSsvaG5TVE5L?=
- =?utf-8?B?UENQYlM3c25sdWtneWFZMEtSUUlRNkNnM3QzeDlweUE4MS9acGUrU2puWnUw?=
- =?utf-8?B?TW4zS2p2ZUNuVi9JdnBqNU1CcnMycmpxaVQrOVU4eU1MckR0d2x5cWN4NmxD?=
- =?utf-8?B?WXJKVk1jWXZXQkppVE9wdlUvMVQyUHVKR3dXcDdRT3dsczQwSTloOHF3aURT?=
- =?utf-8?B?bFd4d0kzMXJYcUxJQ0g5b1hBbG9JbmpSTTd0L1dwaWhUSSswUU90MWI4YXJy?=
- =?utf-8?B?OStpQXNkUkJVLy9XdStlc2s2SVN0WENqWnFMZk1SWXV5S1RQd1ZxRTBha0Ri?=
- =?utf-8?B?TFdVWEZBUllNSjVaTEU0Y2huUVdSeWc5eVBZTm5qMUZCQXEzMnE5ZFg4bUZx?=
- =?utf-8?B?VFFsVkMxQnRvOGV2cVZEcWIyUTlWYS9rMFh3R2FtRXp0bVpZQ2ZBVVpCRUJP?=
- =?utf-8?B?dzFXcWovUjNWaDZKSFMzbWVjZ2JFazJsQTNZQkd1VmNVLzJWRnpnTUFEeEF2?=
- =?utf-8?B?ZjJaK3NleDVDcmZxNEJwNm5ZSmpEVDZSYmd5K1puNmd2alBTdlBKQlhiQ28w?=
- =?utf-8?B?aXEyT0kxc1IxK2R6UmNNMkxWNTRPS3JkWVJVWDhsT1NtVDZGV2Q1UT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c338bdc-e154-4374-daaf-08de63485649
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 17:19:07.1395
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 94r1H5OFdcJDBN+BhRQSloZvX+TsxY1eUkQUueqi0JrjUQmL9mWsBeBb7C2d1qCHBFQKEmdkZ+XtJS1laybo0A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR03MB8374
+Content-Transfer-Encoding: 8bit
 
-On Tue, Feb 03, 2026 at 03:48:52PM +0100, Jan Beulich wrote:
-> On 02.02.2026 16:18, Roger Pau Monné wrote:
-> > My copy of the PCI Firmware Spec v3.3 contains:
-> > 
-> > "4.1.2. MCFG Table Description
-> > 
-> > The MCFG table is an ACPI table that is used to communicate the base
-> > addresses corresponding to the non-hot removable PCI Segment Groups
-> > range within a PCI Segment Group available to the operating system at
-> > boot.
-> > 
-> > [...]
-> > 
-> > 4.1.3. The _CBA Method
-> > 
-> > Some systems may support hot plug of host bridges that introduce
-> > either a range of buses within an existing PCI Segment Group or
-> > introduce a new PCI Segment Group. For example, each I/O chip in a
-> > multi-chip PCI Express root complex implementation could start a new
-> > PCI Segment Group."
-> > 
-> > Together with this:
-> > 
-> > "The MCFG table format allows for more than one memory mapped base
-> > address entry provided each entry (memory mapped configuration space
-> > base address allocation structure) corresponds to a unique PCI Segment
-> > Group consisting of 256 PCI buses. Multiple entries corresponding to a
-> > single PCI Segment Group is not allowed."
-> > 
-> > Given that each segment group can only appear once in the MCFG, and
-> > that the _CBA method can introduce new segment groups, it would seem
-> > to me the spec does allow for new segments appearing exclusively as
-> > the return of _CBA method?  It does read as if hot-removable segment
-> > groups must not appear in the MCFG table.  I'm not finding any clear
-> > statement in the spec that says that ECAM areas must previously appear
-> > in the MCFG table.
-> > 
-> > I'm not sure how common that is, but it doesn't seem impossible given
-> > my reading of the spec.
-> 
-> Hmm, that'll be a bit of work then, as Dom0 will also need to propagate
-> the necessary data into Xen.
+get_shm_pages() uses unchecked address arithmetic and does not enforce
+alignment, so malformed descriptors can cause overflow or slip through
+validation. The reclaim path also repeats handle-to-shm-mem conversion
+in multiple places, duplicating error handling.
 
-TBH this is what the spec says, but I've never encountered such a
-system.  In fact I've never tested hotplug of a PCI host bridge.
+Harden page parsing and reclaim handling:
+- add ffa_safe_addr_add() and use it to detect address overflows
+- enforce alignment checks in get_shm_pages() and return FF-A errors
+- introduce ffa_secure_reclaim() and use it for MEM_RECLAIM and teardown
+- simplify ffa_mem_share() argument handling and allow max page count
 
-Not sure this can be simulated with QEMU so that we could at least
-test whatever fixes we plan to do in that area?  I guess we could
-"fake" a bodge where Xen ignores the MCFG completely and only becomes
-aware of the ECAM areas from what the hardware domain reports back.
+Functional impact: invalid or misaligned memory ranges now fail earlier
+with proper error codes; behavior for valid descriptors is unchanged.
 
-Thanks, Roger.
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ xen/arch/arm/tee/ffa_private.h | 11 +++++++
+ xen/arch/arm/tee/ffa_shm.c     | 57 +++++++++++++++++-----------------
+ 2 files changed, 40 insertions(+), 28 deletions(-)
+
+diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
+index b625f1c72914..58562d8e733c 100644
+--- a/xen/arch/arm/tee/ffa_private.h
++++ b/xen/arch/arm/tee/ffa_private.h
+@@ -632,4 +632,15 @@ static inline void ffa_uuid_set(struct ffa_uuid *id, uint32_t val0,
+     id->val[1] = ((uint64_t)val3 << 32U) | val2;
+ }
+ 
++/*
++ * Common overflow-safe helper to verify that adding a number of pages to an
++ * address will not wrap around.
++ */
++static inline bool ffa_safe_addr_add(uint64_t addr, uint64_t pages)
++{
++    uint64_t off = pages * FFA_PAGE_SIZE;
++
++    return (off / FFA_PAGE_SIZE) == pages && addr <= UINT64_MAX - off;
++}
++
+ #endif /*__FFA_PRIVATE_H__*/
+diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+index 90800e44a86a..4c0b45cde6ee 100644
+--- a/xen/arch/arm/tee/ffa_shm.c
++++ b/xen/arch/arm/tee/ffa_shm.c
+@@ -96,16 +96,14 @@ struct ffa_shm_mem {
+     struct page_info *pages[];
+ };
+ 
+-static int32_t ffa_mem_share(uint32_t tot_len, uint32_t frag_len,
+-                             register_t addr, uint32_t pg_count,
+-                             uint64_t *handle)
++static int32_t ffa_mem_share(uint32_t tot_len, uint64_t *handle)
+ {
+     struct arm_smccc_1_2_regs arg = {
+         .a0 = FFA_MEM_SHARE_64,
+         .a1 = tot_len,
+-        .a2 = frag_len,
+-        .a3 = addr,
+-        .a4 = pg_count,
++        .a2 = tot_len,
++        .a3 = 0,
++        .a4 = 0,
+     };
+     struct arm_smccc_1_2_regs resp;
+ 
+@@ -131,12 +129,16 @@ static int32_t ffa_mem_share(uint32_t tot_len, uint32_t frag_len,
+     }
+ }
+ 
+-static int32_t ffa_mem_reclaim(uint32_t handle_lo, uint32_t handle_hi,
+-                               uint32_t flags)
++static int32_t ffa_secure_reclaim(struct ffa_shm_mem *shm, uint32_t flags)
+ {
++    register_t handle_hi;
++    register_t handle_lo;
++
+     if ( !ffa_fw_supports_fid(FFA_MEM_RECLAIM) )
+         return FFA_RET_NOT_SUPPORTED;
+ 
++    uint64_to_regpair(&handle_hi, &handle_lo, shm->handle);
++
+     return ffa_simple_call(FFA_MEM_RECLAIM, handle_lo, handle_hi, flags, 0);
+ }
+ 
+@@ -145,7 +147,7 @@ static int32_t ffa_mem_reclaim(uint32_t handle_lo, uint32_t handle_hi,
+  * this function fails then the caller is still expected to call
+  * put_shm_pages() as a cleanup.
+  */
+-static int get_shm_pages(struct domain *d, struct ffa_shm_mem *shm,
++static int32_t get_shm_pages(struct domain *d, struct ffa_shm_mem *shm,
+                          const struct ffa_address_range *range,
+                          uint32_t range_count)
+ {
+@@ -156,17 +158,26 @@ static int get_shm_pages(struct domain *d, struct ffa_shm_mem *shm,
+     p2m_type_t t;
+     uint64_t addr;
+     uint64_t page_count;
++    uint64_t gaddr;
+ 
+     for ( n = 0; n < range_count; n++ )
+     {
+         page_count = ACCESS_ONCE(range[n].page_count);
+         addr = ACCESS_ONCE(range[n].address);
++
++        if ( !IS_ALIGNED(addr, FFA_PAGE_SIZE) )
++            return FFA_RET_INVALID_PARAMETERS;
++
+         for ( m = 0; m < page_count; m++ )
+         {
+             if ( pg_idx >= shm->page_count )
+                 return FFA_RET_INVALID_PARAMETERS;
+ 
+-            gfn = gaddr_to_gfn(addr + m * FFA_PAGE_SIZE);
++            if ( !ffa_safe_addr_add(addr, m) )
++                return FFA_RET_INVALID_PARAMETERS;
++
++            gaddr = addr + m * FFA_PAGE_SIZE;
++            gfn = gaddr_to_gfn(gaddr);
+             shm->pages[pg_idx] = get_page_from_gfn(d, gfn_x(gfn), &t,
+ 						   P2M_ALLOC);
+             if ( !shm->pages[pg_idx] )
+@@ -180,7 +191,7 @@ static int get_shm_pages(struct domain *d, struct ffa_shm_mem *shm,
+ 
+     /* The ranges must add up */
+     if ( pg_idx < shm->page_count )
+-            return FFA_RET_INVALID_PARAMETERS;
++        return FFA_RET_INVALID_PARAMETERS;
+ 
+     return FFA_RET_OK;
+ }
+@@ -198,15 +209,11 @@ static void put_shm_pages(struct ffa_shm_mem *shm)
+ 
+ static bool inc_ctx_shm_count(struct domain *d, struct ffa_ctx *ctx)
+ {
+-    bool ret = true;
++    bool ret = false;
+ 
+     spin_lock(&ctx->lock);
+ 
+-    if ( ctx->shm_count >= FFA_MAX_SHM_COUNT )
+-    {
+-        ret = false;
+-    }
+-    else
++    if ( ctx->shm_count < FFA_MAX_SHM_COUNT )
+     {
+         /*
+          * If this is the first shm added, increase the domain reference
+@@ -217,6 +224,7 @@ static bool inc_ctx_shm_count(struct domain *d, struct ffa_ctx *ctx)
+             get_knownalive_domain(d);
+ 
+         ctx->shm_count++;
++        ret = true;
+     }
+ 
+     spin_unlock(&ctx->lock);
+@@ -251,7 +259,7 @@ static struct ffa_shm_mem *alloc_ffa_shm_mem(struct domain *d,
+     struct ffa_ctx *ctx = d->arch.tee;
+     struct ffa_shm_mem *shm;
+ 
+-    if ( page_count >= FFA_MAX_SHM_PAGE_COUNT )
++    if ( page_count > FFA_MAX_SHM_PAGE_COUNT )
+         return NULL;
+     if ( !inc_ctx_shm_count(d, ctx) )
+         return NULL;
+@@ -367,7 +375,7 @@ static int share_shm(struct ffa_shm_mem *shm)
+         init_range(addr_range, pa);
+     }
+ 
+-    ret = ffa_mem_share(tot_len, frag_len, 0, 0, &shm->handle);
++    ret = ffa_mem_share(tot_len, &shm->handle);
+ 
+ out:
+     ffa_rxtx_spmc_tx_release();
+@@ -637,8 +645,6 @@ int32_t ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags)
+     struct domain *d = current->domain;
+     struct ffa_ctx *ctx = d->arch.tee;
+     struct ffa_shm_mem *shm;
+-    register_t handle_hi;
+-    register_t handle_lo;
+     int32_t ret;
+ 
+     if ( !ffa_fw_supports_fid(FFA_MEM_RECLAIM) )
+@@ -652,8 +658,7 @@ int32_t ffa_handle_mem_reclaim(uint64_t handle, uint32_t flags)
+     if ( !shm )
+         return FFA_RET_INVALID_PARAMETERS;
+ 
+-    uint64_to_regpair(&handle_hi, &handle_lo, handle);
+-    ret = ffa_mem_reclaim(handle_lo, handle_hi, flags);
++    ret = ffa_secure_reclaim(shm, flags);
+ 
+     if ( ret )
+     {
+@@ -677,11 +682,7 @@ bool ffa_shm_domain_destroy(struct domain *d)
+ 
+     list_for_each_entry_safe(shm, tmp, &ctx->shm_list, list)
+     {
+-        register_t handle_hi;
+-        register_t handle_lo;
+-
+-        uint64_to_regpair(&handle_hi, &handle_lo, shm->handle);
+-        res = ffa_mem_reclaim(handle_lo, handle_hi, 0);
++        res = ffa_secure_reclaim(shm, 0);
+         switch ( res ) {
+         case FFA_RET_OK:
+             printk(XENLOG_G_DEBUG "%pd: ffa: Reclaimed handle %#lx\n",
+-- 
+2.50.1 (Apple Git-155)
+
 
