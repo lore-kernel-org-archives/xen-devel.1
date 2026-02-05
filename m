@@ -4,40 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4348DECD98C
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Feb 2026 17:07:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1222271.1530265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886E1ECD98C
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Feb 2026 17:10:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1222283.1530282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vo2pB-0002jo-8L; Thu, 05 Feb 2026 17:07:25 +0000
+	id 1vo2rk-0003u2-5B; Thu, 05 Feb 2026 17:10:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1222271.1530265; Thu, 05 Feb 2026 17:07:25 +0000
+Received: by outflank-mailman (output) from mailman id 1222283.1530282; Thu, 05 Feb 2026 17:10:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vo2pB-0002jh-4M; Thu, 05 Feb 2026 17:07:25 +0000
-Received: by outflank-mailman (input) for mailman id 1222271;
- Thu, 05 Feb 2026 17:07:23 +0000
+	id 1vo2rj-0003s9-Uu; Thu, 05 Feb 2026 17:10:03 +0000
+Received: by outflank-mailman (input) for mailman id 1222283;
+ Thu, 05 Feb 2026 17:10:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aqXU=AJ=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vo2p9-0002jb-G7
- for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 17:07:23 +0000
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [2a01:111:f403:c001::2])
+ <SRS0=eiMP=AJ=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1vo2ri-0003It-Nu
+ for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 17:10:02 +0000
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [2a01:111:f403:c007::2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ca27532-02b5-11f1-9ccf-f158ae23cfc8;
- Thu, 05 Feb 2026 18:07:13 +0100 (CET)
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by DM4PR03MB5981.namprd03.prod.outlook.com (2603:10b6:5:388::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Thu, 5 Feb
- 2026 17:07:02 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9587.013; Thu, 5 Feb 2026
- 17:07:02 +0000
+ id 808cf9f1-02b5-11f1-9ccf-f158ae23cfc8;
+ Thu, 05 Feb 2026 18:10:00 +0100 (CET)
+Received: from BN9PR03CA0457.namprd03.prod.outlook.com (2603:10b6:408:139::12)
+ by DM4PR12MB6010.namprd12.prod.outlook.com (2603:10b6:8:6a::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.13; Thu, 5 Feb 2026 17:09:52 +0000
+Received: from BN3PEPF0000B370.namprd21.prod.outlook.com
+ (2603:10b6:408:139:cafe::36) by BN9PR03CA0457.outlook.office365.com
+ (2603:10b6:408:139::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.14 via Frontend Transport; Thu,
+ 5 Feb 2026 17:09:48 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN3PEPF0000B370.mail.protection.outlook.com (10.167.243.167) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.0 via Frontend Transport; Thu, 5 Feb 2026 17:09:52 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 5 Feb
+ 2026 11:09:50 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,270 +58,264 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ca27532-02b5-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 808cf9f1-02b5-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=unDFw0e1gKno2sC/nGqDTVEP4RYSzF7ofLaIUqdgb3ZJH5hDGE0n6wTCzgYoa3vTnmSAHO3Q6WwYDpYRB3s3E+D5m3ltLt3jVbnyQBonTyZkeK/Zel2MIXKDcE/mfqcSetx/UrkS5uzgXM66Etm5vbYirmYxF9owMgsTWcsQyHOTRBVuTov3GpoGRnzNSfUoiFBq2bQIGhaOMtME1F6koWhmp1QJR/MVnncuDXFxu8xJ58C9QGavmsYIe3N0Mo73DKPPt1++3vDUb3nu6P4mcOEPgxUsLq0TDBTsey1+spB0s++B3NW0emZOPNkKKFF37pYB2Tp0McN8l44/zfd9JQ==
+ b=kAO+Wd9NweWWzOfASMGBmsPmgVlSuCr8f4Ot6U+rBY0QaoAQHuBghGCNLQsHcWTWyI9ZaF3MdGUDdqOVuDe8hing94uwKeStP/71nw6xV/yhuoDG5LfCfZyU5QkqMzxFW+5bcUKuQctpDJjsyIhSzH2t9++Co0zprFCO0ti45ew+7o7TJvbonSRnywDEzdeSQhH0qGNJYuSV7aLw5O3JszoMPHrkBQeNvWEXTE5m5HKHoV+swedI/SAD8Sj+DGaxubxyrTArGjByfPYXrEeZXeahFEuKEpAPEckMyQgbbWivq7NvhWNg3poySAinHZmP3PCpE7Bl/5hVsrcZOFjlEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rFe9E+J28HPWXB1sL4ayUNH0zJUfEmo73nL+XIVOAaU=;
- b=jYQnhJaNlLxpyhhmNt/xMuZMS8lUgc+BVLso1RbGp/qMJqlUzA/dN3ZQgJnGtJerPz7W0pb6tGPBoypxPZHOahiysRtpYLfWtDxWnDynQoKT7BSeinboiSX9NVz80gixPjau/m4mxXlg0VgD4nsPSG/3sW9r8F1+ZwoNAjTTzUPPaueJNDgieq5TDuEUUpNimgMWOhdWW+cnUUFKdn3t/72cj34UX0cU3/2E54b7HzRAzFLF+foer2Too0vu65fHRD23u0lNUp+a3w0Yx94g9RkL6zRee3k8ty1XAqUjzRnwuDMb4pIMQ5RGl11TJKjCFIWomO9AfW5VTnMzv0Xakg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ bh=E4FKeqmCM9a2ErEXn6Kh0b9mOhoAFlSSuBV0vP6kKFk=;
+ b=lpzewu1hyHLymkyEkPC+N+sBNhl7cRHUIQPCwSJhJh/5BzJv+Yaeze7MS+TZ11HZSW1Z7WqY9dUDhc4oR46SB6DMLvtWij7Xw4NNrgeFRBK/07WH2tPJY9qNQo3fNQwa6/j9kiQVCz0AjLZJG9SnfkkfEagUhI6lBgAy7Nvfn2PPvGKJGT1aeVDYezL9w9F/teDLshY8sEffkr0Tl3DbOPm87PGpd1VVYSQjZDrS8I4ZkCtaQoerXNVNeBjhSZNml1yCICIDVUUH/02WOF5/T75zR8IW6wURGEunH0LS2fC3l9rSLbDaFFS8061PjuVdW/bD1bsXH1/F3b7VM2KMbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rFe9E+J28HPWXB1sL4ayUNH0zJUfEmo73nL+XIVOAaU=;
- b=TxRBcZssxPocN5LKxr7HnA24Eqv2i1recLttx54v/NxaQtpTVbCjodMSVq3dbRGxk2QsBJPwIpe30IKWTENK1JkSTvjKRC8QTnnDaZ4KBqqEPr8ED52Igs6T54gs4U8vkO5tW9hudgN+ENk9EYlOkVfvMM0KYoLC3l4pE7+EngM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Thu, 5 Feb 2026 18:07:00 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2] xen: Add macOS hypervisor build configuration
-Message-ID: <aYTONBslOYwyrFqM@Mac.lan>
-References: <d30deb8fa22291beb64eb179e8e2d55d13ef27dd.1770291000.git.bertrand.marquis@arm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <d30deb8fa22291beb64eb179e8e2d55d13ef27dd.1770291000.git.bertrand.marquis@arm.com>
-X-ClientProxiedBy: MA2P292CA0005.ESPP292.PROD.OUTLOOK.COM (2603:10a6:250:1::8)
- To CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
+ bh=E4FKeqmCM9a2ErEXn6Kh0b9mOhoAFlSSuBV0vP6kKFk=;
+ b=PEKn78Xl2QBq+omHbs3iFpua/u55cCbXz4A2J8fpQ3i5JcZpCH3Ajp7fpZMsVS3Vo4ZQz3qdpfwmJ2f2QXDWZSq57aX3UCMfiRQLQrhiM2yDkmGyFA5DPqgk4Clf1UIBeBEmktTu9SeaOilXSjiFgh0h/vdoM2tLvqWvgUqY54k=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
+	<jason.andryuk@amd.com>
+Subject: [PATCH v2 2/4] x86/hvm: Disable cross-vendor handling in #UD handler
+Date: Thu, 5 Feb 2026 18:09:20 +0100
+Message-ID: <20260205170923.38425-3-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260205170923.38425-1-alejandro.garciavallejo@amd.com>
+References: <20260205170923.38425-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DM4PR03MB5981:EE_
-X-MS-Office365-Filtering-Correlation-Id: bda05559-9ee6-4b64-3437-08de64d8fb4a
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B370:EE_|DM4PR12MB6010:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0f89cbd7-9528-4d3e-d118-08de64d96073
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|7053199007|7142099003;
+	BCL:0;ARA:13230040|1800799024|376014|36860700013|82310400026;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?d3lwbkhOeHVSTUJ6TXA0U2ZJenNEYXdVekNyMnZTOXRFVUp2aDQ4c0VyZmZv?=
- =?utf-8?B?REt1eEhLVjZpaHpyTDdEUG5sWG5Kbk8xRlR4ZTlUR0tnVzhiZVdYdnhVM2Yv?=
- =?utf-8?B?R3VEMmxZM3FBOFg5M1ZnazV5RnBuVmw2SWVydGhMWkpqajJEL05OUUlwNFVy?=
- =?utf-8?B?akhJdVBnT2p1SkJzRVVuM1kxYytwOWs4Qnd0VVB3aXNZa2lLdFUxb0tCQXlG?=
- =?utf-8?B?MnVtc2hyOWVVZG1PTWlpNUFFbUpUVlROa0JrdXRiL3dVZ0UwUGwwdjZzdmRW?=
- =?utf-8?B?UEtCbEQvbk9XYUl5c1orUmhETU1CT0xTUW1FMHhGQTJRRFh6cUdNTWF5Tlh1?=
- =?utf-8?B?SVNIaytab1lDUjBRQThJQzlrdmNVZG5zMUFYMHlrZjkyZ013MVo0bjNkNlp5?=
- =?utf-8?B?ZkhhaVVOdFhNS3pYTzNTNkV1NEJZSTVGNWZ0ZkJkWUdXbnJxS1VMeUlDZ2lN?=
- =?utf-8?B?ekRLNkpIbTJmQ05ORUVBcDg0U21TN0FlN05yVy9UNVlRcGlLbFVIb3NUbGVU?=
- =?utf-8?B?TjVCV0hlUktmREdmSUpjQjVZdjhEMWtoVUE2TGJuWi9OdlRFQktTQ1FOU0FM?=
- =?utf-8?B?NEsrdnpHSVduWElFMU1GcmpqL2gzQ2dtTjNSNithQ3ZOTUlBSnhsa0xoNVBI?=
- =?utf-8?B?TVJ5T0N0bm12V042UnpkSjVSdGx2QlpmaE1FcGRiejA2NDRHT3IvTXdmbUVZ?=
- =?utf-8?B?ZDkwOTFBTWpXdWtuYWwxckZLa3VvSHBQcFF2WnpyQmd6UE0vV3VCQjFwcjJ3?=
- =?utf-8?B?emc3WWt3OVJqOXRiODZXT2lqUkp3ZDc0MC9qUitBRHlqVkhXQm8yQVZrSnVU?=
- =?utf-8?B?SzVpMW5TVnA3RXZpS3pqWU96QnJCdWZReVJsT3FWdjluMUlQT015ZTEzNUdC?=
- =?utf-8?B?cUhGVWtBL3daS2RxVGJHMGRLSytPRHZwSFBEZi9LazZMTWdZa1FucGZRV0JP?=
- =?utf-8?B?c3M5OFJMNHRnQTNvTTlhN2dINlluVU1JLzlhNXJpeElSL2pkc0dMaWFHYlFW?=
- =?utf-8?B?QW1BUThUN1NucGx3T1FWcWVxWnFQdm5UcmhybkczSzJEZ0xWUW1TMVVRdFA5?=
- =?utf-8?B?blBDMmdicWdVR01vWC9KUTdkWlhDOFowTElOZVRhTER5eWNvVWxLS2hwRXhn?=
- =?utf-8?B?V0pGT0Q1aVBFeTM0RWZaejR1VUxuWFVmMHZIU2xLa2RTUllFaUxLbjZ1akh6?=
- =?utf-8?B?a1I5ekIvenRkQW0rdEhudldoUVIvK25meXNPNUZ5WFkrUUpoMzJINzJ2c20w?=
- =?utf-8?B?b1psUTcrSkhOUGMvZ3lwYmxkUStjK3dVQWoxbEk0Qy94TG5aSU9tRkxGTHEy?=
- =?utf-8?B?T3JmcGNvU2ttMkVkdUE1V3lnZWIxcmxqUHA2M1c0eGU4eG5rVkFpNStGbDJF?=
- =?utf-8?B?bXMreHVWRjF2YVRCek5zYWQ0U043ZDEvRktWaHpwRldScGF5REtNL1o5aE9Z?=
- =?utf-8?B?V094WHF1dXRWM296WFVhdWgxVm1EeDR3U216bHpkUlVlamJDZlFyaFh0RkZZ?=
- =?utf-8?B?dllmNXA3VFg1REZSeGRqYUNaTys4RHNBTDRPYXdsWE9rNXk3L3hEby9xOThC?=
- =?utf-8?B?bkE1N05ORUh3Zzd0Y2FpOFpDM0ZFMHF4YzRnVllOMStBZi8vYVhuTWRjVU1z?=
- =?utf-8?B?ZjBLZUZxeU5LYm1vQUtieEV2Yk1pMFptNkhxdDMxdExCTS9SbzZjRDYzWHM3?=
- =?utf-8?B?RjU4NFZlRnlETWdHUmpwMWp3UWpBQUg3MUNDNmIyd21iRmFKRENWNXVFRlVt?=
- =?utf-8?B?ZmlTVkFGb0dIOXJvV2RxcjRXbEp4UTE5L2tqdXlOaDJ3am83dVVucnJ1cHZj?=
- =?utf-8?B?MGEzblUzN1VScTJRUHVQWjdOdWVCdjZocUhuNDEwU2U0NTZiTWdsRG1qTzFj?=
- =?utf-8?B?dlIvSEJ5R1pTLytJMUVmeWMwcktLciszWTNESENpVS9Hc2tZU3BvWnliaFZ1?=
- =?utf-8?B?cFRJRW9HT3FqVW1ra05qUFlEMWwrQ0JxS2I5d1pubU0zZm0yU0Q3U2ZxR3pV?=
- =?utf-8?B?V2FMRFU4UW1XeHBJeGJZVkpuUHJsbHVtZFRDM3pYQ1hYK3B5aU9ablpZb0Ns?=
- =?utf-8?B?UUlJK0FBbDNjdnJubnFGQWp5QVpxaTdIMU1XdFY4VDYzSTd1K3ZpS1NDQmtV?=
- =?utf-8?Q?9n48=3D?=
+	=?us-ascii?Q?G9I8i8Ew1CbZ5mtRMJjgB85h47SCty2b+rsbG1/ZyFV5839zd47heBpZb5FZ?=
+ =?us-ascii?Q?aArGit6UdCd9/dcuGJT41zWSksq93BSJKDi22F/rNeBGmbW6Wgiu1TXV9VWJ?=
+ =?us-ascii?Q?DYQX/d4v3f/s+aXwttXwYNf13KFRZJpMl7PcXmhawWOmYlc3GcmSnuIFlQke?=
+ =?us-ascii?Q?jqJ2wVKh8F1VhCyqjfln3fUoeVKs8JAc6FeNgIezuKGrR5DkpYnz//rHljY8?=
+ =?us-ascii?Q?h1c74Lkq94tzt2D/ytXrs1jdoB4lwXHF7njcRvo8neyt8+25iwhuQrCMeNLJ?=
+ =?us-ascii?Q?RI/Rztx1z18RanENBOb2HdhQrv6BqtiHNsER4w4MsGv8Q2gGqUhjyX2e7mdJ?=
+ =?us-ascii?Q?AF9Fxwn82D/lMhdSm40GTDo+7uFpFG8r0OteynvBq+WXHu85QY9vMWZfNGXc?=
+ =?us-ascii?Q?+Jw79z43ELcUi+a5mntEZjVjmpOG44Q/VMLf3dXdW7KDyOIwxw7a+225Sx1+?=
+ =?us-ascii?Q?nf6Rtoywp3vnJVYNSHypAESydFJWud2Tt5SbVUF/3+rkFQemjwlEQRaJaE5g?=
+ =?us-ascii?Q?yIMGGKcmSLEdFPLiPo9HV3P0T3o8LRlJtOgZsb+5UM8T7MAPFB5lZhT4tdIh?=
+ =?us-ascii?Q?vW0pfCXRJAAhcmy9YUK/weQlVKVVqL8cdqz2qj+Wao71pAZZfbPua6a8tBkV?=
+ =?us-ascii?Q?Tsl3MMClURGPZffZ7Z6W+PMTbjBbtTWQtj2ywH7NjK52rZEkIf3Lws9KApT1?=
+ =?us-ascii?Q?8Ng7gZioyydOdiTuPCYj4d5qcOmdMYIBg7NXPNxfUx6PEJ/JxCFweUaXRFmm?=
+ =?us-ascii?Q?qv6DbDvgWeV6H9wwxRuHBgaqWutwy6KpC5jJ63gjkstcqyZMvepNBoGWyoOi?=
+ =?us-ascii?Q?KNRJaudR4EngDlOKuK7CO5IjJK/2OC9XYIkNI5TthQPPBJjArNC7B09WJvDw?=
+ =?us-ascii?Q?Ca3aQZ26NB6LEdHE2htJBOs0zJOaojLDWROQayn578Q7gJADgTztteDtNNwK?=
+ =?us-ascii?Q?izc0/FPhO9GTIqy1H/RQVk3C+kP3AQTkSvQ1Z6+1tEr+eFazmpB89zI0KoRo?=
+ =?us-ascii?Q?sov+It00QkgMSTzfl4s8SY84V3YgH0E7dsRXRj8vzPN02Ol130f6U9TgD6V8?=
+ =?us-ascii?Q?t8QX26oPlHsRJ1BI2rQ7pAP8sQgNbyeeAdUMvblmyY2Xc9cGuJ7VQGRXwpSI?=
+ =?us-ascii?Q?a0GxfyODmmnqfIapDcseLGxfHsDT+r8rHyj99BNYqw7s6N/xyAH/F3Xcp+Zg?=
+ =?us-ascii?Q?9LJY/TFCS+UsZvvjo2aErDqvwFwrYTAWMTqozVsRaY7sDLEIYRT8v9NPqlSc?=
+ =?us-ascii?Q?aIoz7PL4hZyTtEwoar/aZVuWpdLu7Diop81wvBBvGa05cAKZXEE4yaCh2cTf?=
+ =?us-ascii?Q?s3Vxezto0KszeGch17Pu+msl4OhfeyPuEEpRYVzcbeuH0kgnLiPMuY/GSlGU?=
+ =?us-ascii?Q?J13yj25gaUDhnHxX6PQ76Xxr0eM0bl0XGWl2wm1FnCHTAUjrVkK2jEQNAsXA?=
+ =?us-ascii?Q?PPiyTHg8NQNRTlEp7rpkeOzqvficqXTT1Em2rbdW1NkkawfNH+p5Ls3MH2eX?=
+ =?us-ascii?Q?+9J+DPHJwsJb2dvq+eW+UOrDYjbZnOVCDeHj0u8bg9Knb65O50YmYdKcs4Hp?=
+ =?us-ascii?Q?oFMbOGgilkcGVfKNCfdNHu0swmNo8RlbQm+g+8qwnHQXMxVm5AuLfcfspRy7?=
+ =?us-ascii?Q?7Y0j2goARDXfPz9rAnHb2sM=3D?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7053199007)(7142099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?TFc2RG9iWktQNjZsS3UxSE1tQUV5MjZrOXhpcGdYc3NISEI1d0RISk90eDBG?=
- =?utf-8?B?NjZ4NEhsM0ltUzhoQ1NnSDc5d1NUTjlId2dFbW5zNVAvRHU5bGNub3h5WkNu?=
- =?utf-8?B?WHgvOEV5NSs5elh5TUNEcE5RYk85MHRBcU1DV09yTGVwWE9Zb1BhdXdYSllk?=
- =?utf-8?B?c0tIVDBiWFVxSGM2eGEwSWNTMk5DelhrUy9GSGNCY3VTZ3JrNWJCY3U0VjJq?=
- =?utf-8?B?TzdvRHZLYkdzcXkwcE1QZ1RObXhabmxnWnp1azRRdm5aaVUzdWJDWHMvNXMx?=
- =?utf-8?B?dHFrTFhoTDl2dnJSUWFMQkh0dlZSNkhGRlhlenphTk05bWlpeGpBMnN1c01t?=
- =?utf-8?B?Z09NQjNHNk9LSXNxQXNjbjZ0dTc0bU52MGVaTGdDNUYvTElJMWR2cVI2aUE0?=
- =?utf-8?B?aStrNjdlbW9PMjlJeUFEbkR5Z3V0V2lSTXpIR3BoeHFNNzFhcmVTQnhqb0Ri?=
- =?utf-8?B?dW9pVS9sTmg5bWdjZnRiSEpQOXFhWCsyWm53NVJUOVYybXhCa3UveFU4ZHRH?=
- =?utf-8?B?d29jOXBqTkNXWW1CbE9oT2V1Y3B2cCtWOTVObFJsVjV4M3RYOTVoTnJROUVa?=
- =?utf-8?B?enhQMnlpWXlNQWRISFZDRDI3U2kxa2VCSE5TaWJORzd0S0N0KzkxbW52SHRs?=
- =?utf-8?B?RUd6RDZxeWY5L2l6eHVzdmxpQm5YQnhXTkU1SXlFTzlEMmFYMFJyNk1VVU0w?=
- =?utf-8?B?a09NSThJY3luREwzamNpdm5sNU9yMmhIZVY2UVdxYkZzVEp5N2VZY0ZMcTRK?=
- =?utf-8?B?ZEUyajhYcjJrOUlRMVUzSGpXcEFzemI0YTQ4RTduU3dUdUdiUU1DZlBFaHFx?=
- =?utf-8?B?N29HTzF0WlBCMnh3S1RNMDU3RDEwQlRRRnZkd2ZlUWJNeThWZmlmSTcxbENp?=
- =?utf-8?B?QU1aWm80TmVVSm8yV1ZpaE5ieFlzRDFBS29WUnEvZFZ1RTJRVlNoUGEyWkFk?=
- =?utf-8?B?WW9WeWVMNUJ2VHZobUh0OHN6STFHRFFHYTBJSE80UHpMQVlIRERXUzJFNElv?=
- =?utf-8?B?U0pPVnBFdWFFdlFiMkdUSTRzMms3NUt6eWc3NEp2S2dsZGhGcUsvVWdBdjBE?=
- =?utf-8?B?Z1VVWmx4ZmEzY2U1WkhjZlhKcXZBVEZ0S2ZHQkg0ZzNpczdnSWJxQ2JRaTcr?=
- =?utf-8?B?dEZzby9naU41aXFHVWlnV1F2NndFRXp6czlVeEhKcjlFUks3dE53dHd0R0My?=
- =?utf-8?B?clZaeXJGcEhNVmJMbGlpV1ZnZm1LSW1XZEZqU3dmWU8yTUh2LzJWZGdFbXBF?=
- =?utf-8?B?WlUyVll0eE9wall0YXJXYjg3NU5kMUR0eE92dWRmVnl1Z0pPYm1BbUFzc2du?=
- =?utf-8?B?MUNobG5tdkpLMmFiOUJwUHkyOVZxOHllQ2syaWpDMWs5T05vQlp4TTErT29u?=
- =?utf-8?B?ZUxqUDlHZFdpd1RrYi9hLzFvUE9aR2NzbEpCRUxXeGx6REdZclJYYzZ2MVNx?=
- =?utf-8?B?dDVKMzlBVWYxMWtsQmlGTFFtNnhQLzUzVVM1b05mbGRKOUptZVFJem9NT2hj?=
- =?utf-8?B?azhhM00rRXB1eHVDamVZS2pzT01QZnAvRVdQNjJyZUNtL2QvNkhGL2hnZDlC?=
- =?utf-8?B?dVh2NG1VaVJ4Y01xaXZkQkdRVEdPMzZ5THVVMFFTRHRZWWdOczFsWVlGSlAx?=
- =?utf-8?B?anVsV1QyRjVrMWhpT2NlSFFWSVpuM25kMk9PZnZteEVGaUNjelVpMmdKWktl?=
- =?utf-8?B?MmFiRDhlbEcxSGdFNC81MzdlWnRuQUh0WUxra2l4cDBrMGpRZjRxb25pRHhX?=
- =?utf-8?B?WHlwSkUyaFBYb1Q5VGZndUd3RStkRFJnVGh4WmsybGM3dSsrTFpNZ3M5M1Q3?=
- =?utf-8?B?S1NPeFc0QmxvdTljUmQ3cUxSVkVHZTNBUnVRRHZvM2FON3RwOTgyRTl1Tlpp?=
- =?utf-8?B?alVBcWdzRjQwK1RuWjhrMDNXKy9RM1pYNXpCZGVmY0hmek0rdGxtVlFsbVZl?=
- =?utf-8?B?OEZTcHkxSERoZXF0Zko5QS9mazRkc1dEVUU4V245ZGtna21XZWdxZ2lhMk95?=
- =?utf-8?B?dmVwQzlHVnBqSm05Ni81eHFSS0tidEhKS0x6Q25rQkw2Y0NVZzl3WEU0K0Mw?=
- =?utf-8?B?OU1uWis0bkFFUkI3WjJIVzVIVlJlZlpLRGl1RnhNL3YzVjN2QU5PZVpmd2l3?=
- =?utf-8?B?aUNZZDR1MjhoK0JDZVY5Z1djV1JWWE1EemFvSWkraGhHZDFBN0tJaURsRHA2?=
- =?utf-8?B?RWJSMjVhY2V6SlhhS1RSQ04wWnRFbWIyNWphMHpyK3BMaUxXVHNyaWU5Zk52?=
- =?utf-8?B?TVM4dm9jdHY5ZXQ0OFEySzlvSmtST1Y0SThyT0JPKzQ1Q1MzQ3dWRVBDV05r?=
- =?utf-8?B?RFpwZEZ2dzh5L3NLSGF6MzRHbjd1dGcwVm1Wb29MRXFuVjMvOXl2dz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bda05559-9ee6-4b64-3437-08de64d8fb4a
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 17:07:02.6473
+	ED1LGKZOE2uzilZVIHgf6KW3iDGdDV/D3d850EdZdijVbVqIe81Y3DjFjr/1gQjJ7qxqHeSZ7KpYhWwL20izEkHv4+MjF/DgBPeA7vzuJ2JXhG2om0oCdphGN1d7oPXKA3PCtcUR4EW2CFiJpYBQR2aRbaDmoaNgnqg+h08SnxMr7G7m8xxTx8A4KjtguDCBVhdRhWmLcmtW3ayHxK/JC9JTaTTJH06HgDOP4sf8p6zZpAnFkQ8RnMJEs5RJmxoVgFN7XMc03KVyva1aaHCGgxnUHOtnPLY1+vmTa8B83ky6PeX3BeaVxTW86sJ+qdo5307iyQad2iMdNBvbUUwlheJfxEzFFB2w2UfuKoX6wuTvhWkTWaXkXb0qhL8InfBdblx+rfV94AOcgGjHwn4LkmtmEzopIv8GGZQKb2BZvzr1+J2JOrtKZJRXHoH0FmQ4
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 17:09:52.1660
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3idosuqGmsq2ZZ7lHMDE/j0QZ+N5qeVB+q+Wdm3b9MmVN3ISYJIqMcScsE8koudgf1WfaBWLBBn1hcs7sKD1gA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB5981
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f89cbd7-9528-4d3e-d118-08de64d96073
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B370.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6010
 
-On Thu, Feb 05, 2026 at 12:33:54PM +0100, Bertrand Marquis wrote:
-> Xen does not currently document how to build the hypervisor on macOS, and
-> there is no Darwin configuration for selecting a Homebrew-based GNU
-> toolchain. Native builds are not supported; the hypervisor must be
-> cross-built with a GNU toolchain and GNU make/sed.
-> 
-> Add a minimal Darwin.mk which selects the GNU tool definitions used by
-> the macOS workflow and point to the build guide for required tools and
-> setup. Document the Homebrew cross toolchain and GNU tools needed to
-> build the hypervisor on macOS.
-> 
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> ---
->  config/Darwin.mk            |  6 ++++
->  docs/misc/build-on-macos.md | 66 +++++++++++++++++++++++++++++++++++++
->  2 files changed, 72 insertions(+)
->  create mode 100644 config/Darwin.mk
->  create mode 100644 docs/misc/build-on-macos.md
-> 
-> diff --git a/config/Darwin.mk b/config/Darwin.mk
-> new file mode 100644
-> index 000000000000..a4e3efa81842
-> --- /dev/null
-> +++ b/config/Darwin.mk
-> @@ -0,0 +1,6 @@
-> +# Use GNU tool definitions; the macOS workflow relies on Homebrew GNU tools.
-> +# See docs/misc/build-on-macos.md for required tools and setup.
-> +include $(XEN_ROOT)/config/StdGNU.mk
-> +
-> +# We are always cross compiling so fake COMPILE_ARCH
-> +XEN_COMPILE_ARCH = Darwin
-> diff --git a/docs/misc/build-on-macos.md b/docs/misc/build-on-macos.md
-> new file mode 100644
-> index 000000000000..6b56cd8eccab
-> --- /dev/null
-> +++ b/docs/misc/build-on-macos.md
-> @@ -0,0 +1,66 @@
-> +# Building Xen Hypervisor on macOS
-> +
-> +This guide explains how to cross-compile the Xen hypervisor (xen
-> +subdirectory only) on macOS. This does **not** build the tools.
+Remove cross-vendor support now that VMs can no longer have a different
+vendor than the host.
 
-More on this below, I'm not sure I would call it a "cross-compile".
-Only when doing so from a x86 silicon Mac?
+While at it, refactor the function to exit early and skip initialising
+the emulation context when FEP is not enabled.
 
-> +## Prerequisites
-> +
-> +Install the following packages using Homebrew:
-> +
-> +```bash
-> +# Cross-compilation toolchain for ARM64
-> +brew install aarch64-elf-gcc
-> +
-> +# GNU tools (required for compatibility)
-> +brew install make gnu-sed
-> +```
+No functional change intended.
 
-Installing make / sed are not strictly needed.
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+The diff is annoying, but keeping prior logic is silly when it can be
+simplified and the emulation context initialisation removed on the
+overwhelming majority of cases.
 
-> +
-> +Homebrew installs under `/opt/homebrew` on Apple Silicon and `/usr/local` on
-> +Intel Macs. Adjust paths below accordingly.
-> +
-> +### Verification
-> +
-> +Verify your installation:
-> +
-> +```bash
-> +# Check cross compiler
-> +aarch64-elf-gcc --version
-> +
-> +# Check GNU make (adjust prefix if needed)
-> +/opt/homebrew/opt/make/libexec/gnubin/make --version
-> +
-> +# Check GNU sed (adjust prefix if needed)
-> +/opt/homebrew/opt/gnu-sed/libexec/gnubin/sed --version
-> +```
+v2:
+  * Fix bug introduced in v1: Don't emulate instructions when they
+    shouldn't be emulated.
+  * Refactor the function so it's simpler.
+---
+ xen/arch/x86/hvm/hvm.c     | 77 +++++++++++++++-----------------------
+ xen/arch/x86/hvm/svm/svm.c |  3 +-
+ xen/arch/x86/hvm/vmx/vmx.c |  3 +-
+ 3 files changed, 32 insertions(+), 51 deletions(-)
 
-Checking for make / sed can be removed.
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 4d37a93c57..8708af9425 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -3832,69 +3832,47 @@ int hvm_descriptor_access_intercept(uint64_t exit_info,
+     return X86EMUL_OKAY;
+ }
+ 
+-static bool cf_check is_cross_vendor(
+-    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
+-{
+-    switch ( ctxt->opcode )
+-    {
+-    case X86EMUL_OPC(0x0f, 0x05): /* syscall */
+-    case X86EMUL_OPC(0x0f, 0x34): /* sysenter */
+-    case X86EMUL_OPC(0x0f, 0x35): /* sysexit */
+-        return true;
+-    }
+-
+-    return false;
+-}
+-
+ void hvm_ud_intercept(struct cpu_user_regs *regs)
+ {
+     struct vcpu *cur = current;
+-    bool should_emulate =
+-        cur->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor;
+     struct hvm_emulate_ctxt ctxt;
++    const struct segment_register *cs = &ctxt.seg_reg[x86_seg_cs];
++    uint32_t walk = PFEC_insn_fetch;
++    unsigned long addr;
++    char sig[5]; /* ud2; .ascii "xen" */
+ 
+-    hvm_emulate_init_once(&ctxt, opt_hvm_fep ? NULL : is_cross_vendor, regs);
++    if ( !opt_hvm_fep )
++        goto reinject;
+ 
+-    if ( opt_hvm_fep )
+-    {
+-        const struct segment_register *cs = &ctxt.seg_reg[x86_seg_cs];
+-        uint32_t walk = ((ctxt.seg_reg[x86_seg_ss].dpl == 3)
+-                         ? PFEC_user_mode : 0) | PFEC_insn_fetch;
+-        unsigned long addr;
+-        char sig[5]; /* ud2; .ascii "xen" */
+-
+-        if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
+-                                        sizeof(sig), hvm_access_insn_fetch,
+-                                        cs, &addr) &&
+-             (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
+-                                         walk, NULL) == HVMTRANS_okay) &&
+-             (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) == 0) )
+-        {
+-            regs->rip += sizeof(sig);
+-            regs->eflags &= ~X86_EFLAGS_RF;
++    hvm_emulate_init_once(&ctxt, NULL, regs);
+ 
+-            /* Zero the upper 32 bits of %rip if not in 64bit mode. */
+-            if ( !(hvm_long_mode_active(cur) && cs->l) )
+-                regs->rip = (uint32_t)regs->rip;
++    if ( ctxt.seg_reg[x86_seg_ss].dpl == 3 )
++        walk |= PFEC_user_mode;
+ 
+-            add_taint(TAINT_HVM_FEP);
++    if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
++                                    sizeof(sig), hvm_access_insn_fetch,
++                                    cs, &addr) &&
++         (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
++                                     walk, NULL) == HVMTRANS_okay) &&
++         (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) == 0) )
++    {
++        regs->rip += sizeof(sig);
++        regs->eflags &= ~X86_EFLAGS_RF;
+ 
+-            should_emulate = true;
+-        }
+-    }
++        /* Zero the upper 32 bits of %rip if not in 64bit mode. */
++        if ( !(hvm_long_mode_active(cur) && cs->l) )
++            regs->rip = (uint32_t)regs->rip;
+ 
+-    if ( !should_emulate )
+-    {
+-        hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
+-        return;
++        add_taint(TAINT_HVM_FEP);
+     }
++    else
++        goto reinject;
+ 
+     switch ( hvm_emulate_one(&ctxt, VIO_no_completion) )
+     {
+     case X86EMUL_UNHANDLEABLE:
+     case X86EMUL_UNIMPLEMENTED:
+-        hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
+-        break;
++        goto reinject;
+     case X86EMUL_EXCEPTION:
+         hvm_inject_event(&ctxt.ctxt.event);
+         /* fall through */
+@@ -3902,6 +3880,11 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
+         hvm_emulate_writeback(&ctxt);
+         break;
+     }
++
++    return;
++
++ reinject:
++    hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
+ }
+ 
+ enum hvm_intblk hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack)
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 18ba837738..10d1bf350c 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -589,8 +589,7 @@ static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
+     const struct cpu_policy *cp = v->domain->arch.cpu_policy;
+     u32 bitmap = vmcb_get_exception_intercepts(vmcb);
+ 
+-    if ( opt_hvm_fep ||
+-         (v->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor) )
++    if ( opt_hvm_fep )
+         bitmap |= (1U << X86_EXC_UD);
+     else
+         bitmap &= ~(1U << X86_EXC_UD);
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 82c55f49ae..eda99e268d 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -803,8 +803,7 @@ static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
+     const struct cpu_policy *cp = v->domain->arch.cpu_policy;
+     int rc = 0;
+ 
+-    if ( opt_hvm_fep ||
+-         (v->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor) )
++    if ( opt_hvm_fep )
+         v->arch.hvm.vmx.exception_bitmap |= (1U << X86_EXC_UD);
+     else
+         v->arch.hvm.vmx.exception_bitmap &= ~(1U << X86_EXC_UD);
+-- 
+2.43.0
 
-> +
-> +## Building the Hypervisor
-> +
-> +Set up GNU tools in PATH and build:
-> +
-> +```bash
-> +# Set up GNU tools in PATH (adjust prefix if needed)
-> +export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/opt/homebrew/opt/make/libexec/gnubin:$PATH"
-
-Do you really need the gnubin?  I think this was only for sed / make,
-which is not really needed.
-
-> +
-> +# Build Xen hypervisor only (in-tree)
-> +cd xen/
-> +make XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-elf- HOSTCC=gcc
-> +
-> +# Optional: out-of-tree build directory
-> +# make XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-elf- HOSTCC=gcc O=$PWD/build-mac
-> +```
-> +
-> +## Architecture Support
-> +
-> +Currently supported architectures:
-> +
-> +- **ARM64** (`arm64`) - Default, uses `aarch64-elf-gcc`
-
-It could possibly also use the llvm package from homebrew, but I can
-add later if I get some time to test.
-
-> +
-> +Other targets may work if the corresponding cross toolchain is installed,
-> +but this guide has only been tested on ARM64.
-> +
-> +## Limitations
-> +
-> +- **Hypervisor only**: This only builds the Xen hypervisor, not the tools
-> +- **Cross-compilation only**: Native builds are not supported
-
-Probably a more philosophical question, but is it really a cross
-compilation if I'm building an arm64 Xen on Apple arm64 silicon?
-
-Sure, it might use a different toolchain from native, but it's still a
-"native" build from an architectural perspective?
-
-> +- **macOS-specific**: Instructions optimized for macOS with Homebrew
-> +- **GNU tools required**: Native BSD tools are not compatible
-
-That last item can be removed.
-
-Thanks, Roger.
 
