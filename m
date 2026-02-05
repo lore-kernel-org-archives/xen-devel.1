@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7758E9128C
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Feb 2026 08:30:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1221597.1529775 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 810EAE91291
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Feb 2026 08:36:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1221607.1529786 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnukV-0001Sp-31; Thu, 05 Feb 2026 08:30:03 +0000
+	id 1vnuqm-0002h8-Ni; Thu, 05 Feb 2026 08:36:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1221597.1529775; Thu, 05 Feb 2026 08:30:03 +0000
+Received: by outflank-mailman (output) from mailman id 1221607.1529786; Thu, 05 Feb 2026 08:36:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vnukU-0001SF-Vt; Thu, 05 Feb 2026 08:30:02 +0000
-Received: by outflank-mailman (input) for mailman id 1221597;
- Thu, 05 Feb 2026 08:30:02 +0000
+	id 1vnuqm-0002h1-Ko; Thu, 05 Feb 2026 08:36:32 +0000
+Received: by outflank-mailman (input) for mailman id 1221607;
+ Thu, 05 Feb 2026 08:36:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=DyEx=AJ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vnukU-0001DR-5t
- for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 08:30:02 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
+ id 1vnuqm-0002gu-3E
+ for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 08:36:32 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id da4f611d-026c-11f1-9ccf-f158ae23cfc8;
- Thu, 05 Feb 2026 09:29:56 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-47ee3a63300so6749715e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Feb 2026 00:29:56 -0800 (PST)
+ id c4350f89-026d-11f1-9ccf-f158ae23cfc8;
+ Thu, 05 Feb 2026 09:36:29 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-47ff94b46afso6666675e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Feb 2026 00:36:29 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48317d3eee4sm40937725e9.8.2026.02.05.00.29.55
+ 5b1f17b1804b1-483179d7346sm54145265e9.0.2026.02.05.00.36.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Feb 2026 00:29:55 -0800 (PST)
+ Thu, 05 Feb 2026 00:36:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,59 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da4f611d-026c-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c4350f89-026d-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770280196; x=1770884996; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1770280589; x=1770885389; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=3VQEk6lFXF1gghrs7fL7UQiboQuDLN4HxDlL1UWK25Y=;
-        b=JFugXloMxR4UW8P7LX9b65dVXw0sn/4mt7RkwDNmAh9J/gmJFNM3etD58GRa9DvnbY
-         jZZl49NdUsSfyE4MEbNUpMe+JvZHTCaLhIeCtJVJANSaxKXnw32nutCk/8ybM2fKRYQA
-         KSQMjYsSMmNA1HRq5zRkLQsU5c3i9F3Ey6capqLaMEtk0oTeS7n68oERS5l258J3w7YI
-         64Y6aX/ZRaShLcrE2ne5WnFdWaWQxiN+GF8Z3ki1eUrbansSqWmKcMmbAOaZBtNjX/MZ
-         Eo1iUn2SQFRUI+zwsZ8CJKC8iWkKKwFC0H4DZ1ODlCjVTCdM75v4e4HImbaACu77FvD3
-         vGKQ==
+        bh=NWu9I34hkUQGwz+y0rftURk8xs5tDjpX+OFqhQ2TI6o=;
+        b=NuSFwDLLliCo7E+4xWhkuqNdn8XK6ky1H/qafKtUj4OnFmKZ4OQf/RzdU4VJxiDkDL
+         GOA4OqBYWL6nmPHau8YQWOXVcTEbrKkwRbox6NTsSF8dfG3psB7/8OWfk96Ok8TnFC8o
+         1GZMsYTUmyRw4CAlBEo0eDYHjz7lO5dHZaG3Zi7YBy4gZbBl6HjMMCK7xyMbLOg2gJjk
+         ALC4Xd72ZYUPseZKEYwaM7oStefxGf5HvjtNZl76bjnW+13fJBpu5dwAwnZW14mLtt6d
+         zNObzd5is3Yo5wyrwLWwsYYB0TpQUbDn/1AazhPwjloHEeaXGqWoTtxqIEqKQsDuS+px
+         mEBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770280196; x=1770884996;
+        d=1e100.net; s=20230601; t=1770280589; x=1770885389;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3VQEk6lFXF1gghrs7fL7UQiboQuDLN4HxDlL1UWK25Y=;
-        b=q3mIzpJj78N45LxWDjyLaH8Dv2stpEkmHDJPoEiorcQm+n7BA79PQYfmoKHgFI3nEB
-         u8zb0gcA5pbqt8B0OQW392GceRlgQtLal6bDnZ7cJVgm5pMk5uXhVyvO4GI1IgZ1PX+h
-         CYE/GtYA/3F6GCvH3akm/ibxqlW4v/CalYwB04FZnbdTpuBPnuEd4Dc9iRXaAeeRHCm5
-         7524YmpSQHhSkhBIWcBgVRObOYnjpbEag76mMlySJ1FopYmJoqIx5aY+slEtQujkzbni
-         ZLnjhpUGl4i1poQkEuo1z7tqrdSNRNuevtC37FRFKrReBm9BkoftV+l+wkZSXgiJwsYF
-         Lc0A==
-X-Forwarded-Encrypted: i=1; AJvYcCW9T93NGrtUzwMMfBrs5b6J5eMkQutKkYz/UzQBuP0mZU4CBw6h4/+7XZxNsJ0M6sq5VEIw4cyrZj0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzdb0P/u8snUm0VkNQHtvOBY2xbzkTzU0xRyljfHOl9wPycde1o
-	kpRH4BJLb13CGHMo7aF7q/rnDfWFCUf2PyTzSvpPevYhfzv+5WhawLCVHbbRKrxqCg==
-X-Gm-Gg: AZuq6aJdQ9bvrKqJ1UGTenDBWv4YeS4ZfJ9n9loU7gPCqMW5rDYUbIJLYySfxZkc8Lx
-	x9wLFaOyKqQjRiBiTYkepfMdoh/9wrQ5zKUdPT4aK4Ub2vYEhxRUiTuupFzFdPWI5dF/CMdi/Ll
-	SZgcrMSxSqAIev4Wjgp0KUYfTEcP5kawJh/iF4KZGgb+dB6C7xC/bgJQA76cfEvibwgcsohCzL0
-	qPdgnc5YU5TTIlm7NSqQ+yxCZsJjtlTqvWgKC7vsGtPaxG6hFSACITGB6TmQFjqeyVkXnIFkap+
-	qRSfsOEAglzlsRgnku+7rxMpKzcZtfYQ80PPxe3fb8sUmDbDzE8DFL1H9LGkAADIEmFF0uoDmR0
-	jkVMsqLrKtpQyu2fHixPc600Jx6klMXfd3cr4gEd6SNmoEtTKh7R/Ju/kUA8D34LG36pZNBu8Lb
-	mGcjbymi4u2MxEs8MdFMa9AvB9JWBGvLqYjsHMKHiJrJLO2W1JPSebGuBVZX6K9FzHXjocMpXmH
-	KY=
-X-Received: by 2002:a05:600c:800f:b0:477:79c7:8994 with SMTP id 5b1f17b1804b1-4830e9713d6mr73445615e9.30.1770280196251;
-        Thu, 05 Feb 2026 00:29:56 -0800 (PST)
-Message-ID: <5bd55bef-f30c-475d-9831-382406f699fb@suse.com>
-Date: Thu, 5 Feb 2026 09:29:53 +0100
+        bh=NWu9I34hkUQGwz+y0rftURk8xs5tDjpX+OFqhQ2TI6o=;
+        b=Hpil+bpKew+I5NGSpe97PJ3bbAI8a6heFBNghqJZIcHJBaaw/vex8Xhb+ZNa/Vz60m
+         yfg4MNCEphC5R/FVNSm5ATKNu4bTuzgXq8oEEphAbNrH7PXYwK9rYg02t4ytm9LOqAzU
+         IFdqbKKsOuOnVy0b5ihv5FHn1ppMtBqapZ3S5spFo9sfebp9k05DiGCT3sbuOCgA5Nn+
+         7JCRbp0rRZ5FF/WZkTx+pq1rFWb27CqIqEyO4tQYD5+ZwfrWvfx0qDh63ckT+bmqgllf
+         mNsKbtCyN1ZDwmNGWYnBTfzLOm+jWZ+gbieUN1YJIhBXUtAJCawz7YvQWg4v5JV2hZIG
+         7/lw==
+X-Forwarded-Encrypted: i=1; AJvYcCVvcE14j+NDd2iM+AVkvPBXkv3QtIen44GYX9WVyo3jowHcAyeyybqZuLz3+WZx4z0S6jjr6tPWYdI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwLGGub/RZE+/BvS0FKc9/wyuGoCY9gqneTgykrUD4WwtI4jAo7
+	WulvYVbQeTcqz0cLVJiDG5OhaqrKsblDDWDoYEqtdoVrxoOgSNabCym4bWy3OdFDFQ==
+X-Gm-Gg: AZuq6aIDIoHfkyryvnE6s3fBnK+hUR5aEeagKyt/WTyvkJtCe2aljPN+1lUo68Z2fNG
+	BhPk45D1PdvhPHW7pRju/nOpexJ91Jx8WJwS3vhylFLeN158Vr2wvGTrIzVOOteqLqvmP6KIyAk
+	eduHzQAU6LbmFjP+mN48WdKZ48bpOeBjBW5nDiyzUktL3Vu2Szw36d3b4v16XXoJTU8iCJ4lKnU
+	pziteY3Ps0ia38n5ARt16Xs55Y6Gb2kpwa21r52XDf4RcN9p8YCHKvN4FcO6FAdnwF1FCAPjHHh
+	X7uTX1aWO35Zc2lVAhkymcJmW61g+lzJL/sP+iITWrKcG2WY87tQLU7wc7741zrxh0k5liUZq3y
+	n+JOIJaFqTZmrsITuQRjIW/KUxjAvALcM3x296mV8ET1k49GTuJW1VsasYJsAVn92LYvEqwKoWq
+	s6l2KPOaXjtNXfDwPpLwdbGMT3b/XuECCIBUXz6ZWHALr5WWMefd/+HWWsdejcwlKOReW+XBJpE
+	A8=
+X-Received: by 2002:a05:600c:19cc:b0:47d:6c36:a125 with SMTP id 5b1f17b1804b1-483179dbd52mr28509115e9.17.1770280588734;
+        Thu, 05 Feb 2026 00:36:28 -0800 (PST)
+Message-ID: <5aaee345-5ace-42b7-a436-ae6ce57cb9fc@suse.com>
+Date: Thu, 5 Feb 2026 09:36:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/domain: adjust limitation on shared_info
+Subject: Re: [PATCH v3] x86/domain: adjust limitation on shared_info
  allocation below 4G
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260204122553.75711-1-roger.pau@citrix.com>
- <82540f88-ffcd-46a9-9813-ebe42ef0b0ec@suse.com> <aYNdJ6sb4GPaSEyY@Mac.lan>
- <3f9b4337-3e0a-4693-b97f-46505bc1349a@suse.com> <aYN30KD0jsJ2_H_z@Mac.lan>
+References: <20260205080308.91057-1-roger.pau@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -125,68 +123,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aYN30KD0jsJ2_H_z@Mac.lan>
+In-Reply-To: <20260205080308.91057-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 04.02.2026 17:46, Roger Pau Monné wrote:
-> On Wed, Feb 04, 2026 at 04:08:21PM +0100, Jan Beulich wrote:
->> On 04.02.2026 15:52, Roger Pau Monné wrote:
->>> On Wed, Feb 04, 2026 at 03:06:52PM +0100, Jan Beulich wrote:
->>>> On 04.02.2026 13:25, Roger Pau Monne wrote:
->>>>> The limitation of shared_info being allocated below 4G to fit in the
->>>>> start_info field only applies to 32bit PV guests.  On 64bit PV guests the
->>>>> start_info field is 64bits wide.  HVM guests don't use start_info at all.
->>>>>
->>>>> Drop the restriction in arch_domain_create() and instead free and
->>>>> re-allocate the page from memory below 4G if needed in switch_compat(),
->>>>> when the guest is set to run in 32bit PV mode.
->>>>>
->>>>> Fixes: 3cadc0469d5c ("x86_64: shared_info must be allocated below 4GB as it is advertised to 32-bit guests via a 32-bit machine address field in start_info.")
->>>>
->>>> The tag is here because there is the (largely theoretical?) possibility for
->>>> a system to have no memory at all left below 4Gb, in which case creation of
->>>> a PV64 or non-shadow HVM guest would needlessly fail?
->>>
->>> It's kid of an issue we discovered when using strict domain NUMA node
->>> placement.  At that point the toolstack would exhaust all memory on
->>> node 0 and by doing that inadvertently consume all memory below 4G.
->>
->> Right, and hence also my "memory: arrange to conserve on DMA reservation",
->> where I'm still fighting with myself as to what to do with the comments you
->> gave there.
-> 
-> Better fighting with yourself rather than fighting with me I guess ;).
-> 
-> That change would be controversial with what we currently do on
-> XenServer, because we don't (yet) special case the memory below 4G to
-> not account for it in the per node free amount of memory.
-> 
-> What would happen when you append the MEMF_no_dma flag as proposed in
-> your commit, but the caller is also passing MEMF_exact_node with
-> target node 0?  AFAICT the allocation would still refuse to use the
-> low 4G pool.
+On 05.02.2026 09:03, Roger Pau Monne wrote:
+> --- a/xen/arch/x86/pv/domain.c
+> +++ b/xen/arch/x86/pv/domain.c
+> @@ -247,6 +247,34 @@ int switch_compat(struct domain *d)
+>      d->arch.has_32bit_shinfo = 1;
+>      d->arch.pv.is_32bit = true;
+>  
+> +    /*
+> +     * For 32bit PV guests the shared_info machine address must fit in a 32-bit
+> +     * field within the guest's start_info structure.  We might need to free
+> +     * the current page and allocate a new one that fulfills this requirement.
+> +     */
+> +    if ( virt_to_maddr(d->shared_info) >> 32 )
+> +    {
+> +        shared_info_t *prev = d->shared_info;
+> +
+> +        d->shared_info = alloc_xenheap_pages(0, MEMF_bits(32));
+> +        if ( !d->shared_info )
+> +        {
+> +            d->shared_info = prev;
+> +            rc = -ENOMEM;
+> +            goto undo_and_fail;
+> +        }
+> +        put_page(virt_to_page(prev));
+> +        clear_page(d->shared_info);
+> +        share_xen_page_with_guest(virt_to_page(d->shared_info), d, SHARE_rw);
+> +        /*
+> +         * Ensure all pointers to the old shared_info page are replaced.  vCPUs
+> +         * below XEN_LEGACY_MAX_VCPUS will stash a pointer to
+> +         * shared_info->vcpu_info[id].
+> +         */
 
-Yes, DMA-ability is intended to take higher priority than exact-node
-requests. Another node would then need choosing by the toolstack.
-
-> Also, your commit should also be expanded to avoid staking claims that
-> would drain the DMA pool, as then populate_physmap() won't be able to
-> allocate from there?
-
-Except that upstream claims aren't node-specific, yet, so could be
-fulfilled my taking memory from other nodes? Aiui the problem would
-only occur if that DAM-able memory was the only memory left in the
-system.
+To cope with the toolstack-dependent ordering of actions, may I suggest "... may
+have stashed ..." instead?
 
 Jan
 
->  It would be weird for the toolstack to have
-> successfully made a claim, and then populate_physmap() returning
-> -ENOMEM because (part of) the claim has been made against the DMA
-> pool, which populate_physmap() would explicitly forbidden to allocate
-> from.
-> 
-> Thanks, Roger.
-
+> +        for_each_vcpu ( d, v )
+> +            vcpu_info_reset(v);
+> +    }
+> +
+>      for_each_vcpu( d, v )
+>      {
+>          if ( (rc = setup_compat_arg_xlat(v)) ||
 
