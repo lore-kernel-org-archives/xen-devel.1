@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC9EECD991
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE458ECD98C
 	for <xen-devel@archiver.kernel.org>; Thu,  5 Feb 2026 17:10:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1222282.1530275 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1222284.1530287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vo2rj-0003lx-MR; Thu, 05 Feb 2026 17:10:03 +0000
+	id 1vo2rk-0003yt-FV; Thu, 05 Feb 2026 17:10:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1222282.1530275; Thu, 05 Feb 2026 17:10:03 +0000
+Received: by outflank-mailman (output) from mailman id 1222284.1530287; Thu, 05 Feb 2026 17:10:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vo2rj-0003lU-HU; Thu, 05 Feb 2026 17:10:03 +0000
-Received: by outflank-mailman (input) for mailman id 1222282;
- Thu, 05 Feb 2026 17:10:01 +0000
+	id 1vo2rk-0003x2-8T; Thu, 05 Feb 2026 17:10:04 +0000
+Received: by outflank-mailman (input) for mailman id 1222284;
+ Thu, 05 Feb 2026 17:10:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eiMP=AJ=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vo2rh-0003It-Ge
- for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 17:10:01 +0000
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [2a01:111:f403:c10c::1])
+ id 1vo2rj-0003It-4o
+ for xen-devel@lists.xenproject.org; Thu, 05 Feb 2026 17:10:03 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7e0c27d5-02b5-11f1-9ccf-f158ae23cfc8;
- Thu, 05 Feb 2026 18:09:56 +0100 (CET)
-Received: from BLAPR03CA0146.namprd03.prod.outlook.com (2603:10b6:208:32e::31)
- by CH8PR12MB9741.namprd12.prod.outlook.com (2603:10b6:610:27a::21)
+ id 80e8bfec-02b5-11f1-9ccf-f158ae23cfc8;
+ Thu, 05 Feb 2026 18:10:01 +0100 (CET)
+Received: from BLAPR03CA0125.namprd03.prod.outlook.com (2603:10b6:208:32e::10)
+ by CH2PR12MB4325.namprd12.prod.outlook.com (2603:10b6:610:a9::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Thu, 5 Feb
- 2026 17:09:50 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Thu, 5 Feb
+ 2026 17:09:55 +0000
 Received: from BN3PEPF0000B372.namprd21.prod.outlook.com
- (2603:10b6:208:32e:cafe::ad) by BLAPR03CA0146.outlook.office365.com
- (2603:10b6:208:32e::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.16 via Frontend Transport; Thu,
- 5 Feb 2026 17:09:41 +0000
+ (2603:10b6:208:32e:cafe::16) by BLAPR03CA0125.outlook.office365.com
+ (2603:10b6:208:32e::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.15 via Frontend Transport; Thu,
+ 5 Feb 2026 17:09:42 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  BN3PEPF0000B372.mail.protection.outlook.com (10.167.243.169) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.0 via Frontend Transport; Thu, 5 Feb 2026 17:09:49 +0000
+ 15.20.9611.0 via Frontend Transport; Thu, 5 Feb 2026 17:09:54 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 5 Feb
- 2026 11:09:47 -0600
+ 2026 11:09:53 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7e0c27d5-02b5-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 80e8bfec-02b5-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rEWs45gzZRNRlwD0QyJpaUTOMobc4HSmq/MW04+YIjtx6eYlrGJQiPrUx+arc8P0b41hmfsNkewvyWueU4249g7f3Md03F1GSXFGDYtL1ertKDkagwC3nS45fC/znpkott2c7CS9GTewwg8QktnB4d9lsQgEFiSKrbhryUrSojxsh1SygOZhk+VYY23WMZsFNAhJ/X25wL5OK3KjeqFx7UPiq+47vSw/kiImrWTakKF0AZU6j+z6Wv6W5b53DCgOsKtCpQ7PtSVAiEtoRUdC1NyWCBBfr3Q6Oma+dLZSeaj/xUkgBHb3OUBbUk8+xiAC3svLMIYdkCVGeuvWEYZxMg==
+ b=JXgBWqyV+84jOfyo/IWJmSC8UNj9MDRpz6aOT/Ssecm82I+ejC/chcj/2borBmEw/+5jlRCCvUDQLoiBGun36Gu8HviLz1IQxphuvQpDJrEqQsRviXEWM4r1+uQ47OtM2iF/W9h46BTzgxdUBJQuYZcUikJ9OOwSDL1f5+MXH7N5tV8rVeFFQm3tf04B1lS6Y4B37bUAehONkXmh50TxD0tGyEs4TcuKw5j1w3OqYNUjIZ92uO6OeJI+8VO3IDL4hJAEBf03igN9EZNcKuwI7t7iifm4xYHsU1OFt8Vd2sdhYeR6FzYgOdqksCKWjaTd7cvie+28Ad5o13cKJ1thZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wav6Z2ioA7k2G+/mHojpKLayWyPe4WxqQKYqIs0jsWQ=;
- b=fOlbwhDoC+XApz5O702GIlEv4iKhwEh13rMcJz/zqSsDDIy/2Cz2UqTds0r072wz4TulMoXnfT71YODLiUNXwNu5CUfet3ZYzvkm/Mh/CusRVucz5+WOSGK9iYUDHEGfqP7n/Nrtfc8BXtjVQY0AI0PWRH4VsdFw8ibo1d/QimDwMFANx9qqt3/iSEZz4zt8+NzsGRdesyjDjyssXqQ+6ZzIZsWt9LvVt/zx698HX+LYHLxY5dCss1AoCnKkObhEoq9Lrs0eTcYiO5xt+OVWSQ0QjzoIYbxvCPVBOBF7bPTnF7JJVrHGvITuVQfYXw23i+JY7Tn6bFaUFVl919cvGw==
+ bh=HcmMhNrUvdJLDtdj//oBMXNGmJweY+Izab2C0gA4R0Y=;
+ b=TqQmm/cpDUC4sCr8TaSHt18y13spQqWA4sdTy5s67nzcZbMmZjJ+gRS33V2Ghk3g0Km3Ei7XAs41JRmS6P7xGgqbQcyVzqQxUxXFyJ/oUupiFN9E8PcsxFvbY4tsitqFb5H5gYCRmOrbZr8JQOZ+KIFxxm5zZmbHEaSfL1bz829cLcutI9sYcENHaTEUxteNukdmCiF2qZIlJaCp/bWtGmiP70cayWuqXX3didADsVJ4kJZPQn9JgNY5zAjdQ6Vv43Jif3oGCVUtCMBa0RTf+8dX1a5SkDkJcjEK/AvUuTebA2bC5hahJ8NXHrCbb7hh5XzcV2iPl6JXvtoxgcloUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wav6Z2ioA7k2G+/mHojpKLayWyPe4WxqQKYqIs0jsWQ=;
- b=5e+94Ak9RAIs61eCw4JSkHBxH9G8/kcNRixORQ9qwPa48C6LtVHTCBmHOUEJE9Ejl1iEPaFBiEudief7/gOqwfvlhixXwuBOaC47crJCjCE6slF7UhuKMzhPV96PivELhf3kecNfvK96a0U8iprtQ59RcgHhecNCg21nkZiPoV4=
+ bh=HcmMhNrUvdJLDtdj//oBMXNGmJweY+Izab2C0gA4R0Y=;
+ b=14eiHhnJl9pULr0BQ3Qfq5w3pO4LKCixlbNRkFIE8/yckARPwg/EwPXDb6Um0OX2Erbb5LhhBoRLZgnIdOkVhWQyHCXfOCTxUVFKW85/a8R0YUIMklVv+69ymvMMVJxM+F+ZxRgmURtwNGRTZckRoZ4tfHhCoDBExu50AzkpI0E=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -82,15 +82,16 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Oleksii Kurochko
-	<oleksii.kurochko@gmail.com>, Community Manager
-	<community.manager@xenproject.org>, Jan Beulich <jbeulich@suse.com>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH v2 0/4] x86: Drop cross-vendor support
-Date: Thu, 5 Feb 2026 18:09:18 +0100
-Message-ID: <20260205170923.38425-1-alejandro.garciavallejo@amd.com>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
+	<jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v2 4/4] x86/svm: Drop emulation of Intel's SYSENTER behaviour on AMD systems
+Date: Thu, 5 Feb 2026 18:09:22 +0100
+Message-ID: <20260205170923.38425-5-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260205170923.38425-1-alejandro.garciavallejo@amd.com>
+References: <20260205170923.38425-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -99,100 +100,227 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B372:EE_|CH8PR12MB9741:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9fff9e1-8052-415d-9835-08de64d95ed4
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B372:EE_|CH2PR12MB4325:EE_
+X-MS-Office365-Filtering-Correlation-Id: 444c8db9-69dd-4f62-60ef-08de64d96224
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024|13003099007;
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?CaP5o+v6r9T+XhnMqPmOCuvIm7ocaqd97CSwsdQOoNjvu2qyabiKnWWCnujV?=
- =?us-ascii?Q?zwOjiPSwP40bv5MW6IBwaJZNycgjLqdOXKha/Aqd8SKpPkqeC5/myVjXAkzz?=
- =?us-ascii?Q?WXPruXizih5GVGQR7YaYf7HzppspNNh6YAgk4H1kNgOadmBP30dGqXcPNgZK?=
- =?us-ascii?Q?epYldGq4P0Vr3X4Enu7Egi1USQqz5FIYJ0aXfTdLJShpWtJX5ijChltCer8F?=
- =?us-ascii?Q?3O2EwJ2fMlxNpz3kkfkg4rejUcLcHqXpkwRUWTjx4qr3iClrPuIzqWIvax+A?=
- =?us-ascii?Q?kFS8H9fSY9rqLaj6mryUuh819DJQHDsZMiDzx7p+8P+UJGCkDzfwNuGFyDYK?=
- =?us-ascii?Q?7+bIP4Hfxky1laiMO+CSILGx6ZGk9r0a9jDYuE2UgOLNUHVLsbFep5lL81KX?=
- =?us-ascii?Q?5BSNF1MHwOJ7tTzdC8kD3jIxXQI0PH5oaunhZcZICRF4eSAdL+8K4gSOYLPP?=
- =?us-ascii?Q?lfIu6F5BzgqKP6PC1ldJ8MZOThts43LorcuCOkEQSnjHLgTrb8y4nDni1blD?=
- =?us-ascii?Q?YzfnRHMLy/PKUHKM80qATnK1iizgd41nhdgVlcbYgM3MZk/4FAK9LTuSvHzM?=
- =?us-ascii?Q?ym0XEwU3BXwayy4CgVcMKog3OqexJkySbq7grCGRk95lAwqREK5wWOpgbazs?=
- =?us-ascii?Q?C7GCYb+hCIeKQZCh/Kwn8gc46xc0CNEPNGZtoFF+3J2qcVXUoSI1sQ3pRIPJ?=
- =?us-ascii?Q?glO0xfQznECa2ZiFd1lbQQmLQDXKLWKtQwxQZj9WEw1LencqRN+Og1ONHRAL?=
- =?us-ascii?Q?QyQOcEW2CYjrTd3YeIvaV7ZkdS0AJDCtUTDZvXYvbrYesSABpFQcHXoUzK9s?=
- =?us-ascii?Q?0c3kwwQvDswFzv8z1C8+jWUMD77h49Xo92xd1D0ees2PuYVBA3+iCTteXQkp?=
- =?us-ascii?Q?AD7zL/V9CoGq581g81w555KvQNOYBv1xs0di99virYRQ0wQtyAO3/yoDFKjg?=
- =?us-ascii?Q?k938PV6iRtOVZoMhhdZXpRXDzJIKDRB/NQXGdw2YFsrDgi9v3veT3boo0jRk?=
- =?us-ascii?Q?mjQ7NupnDMLMHrASS4CWXaWJmdzIBV6o0bIVz3qGpk5NvRqnah9uas8044sV?=
- =?us-ascii?Q?XUTvIG+AIA89U8X9Y2GepwXUJZl5Mcr2s/JvAhiV9s6BRLGfG4NWTT6rt0sD?=
- =?us-ascii?Q?JBDCXEY/aXWDtL3X/2h0qL2skDtgsGRqHOGBAB3ryJMmoK74zeH9X7c5NbDP?=
- =?us-ascii?Q?W2bDWaQoafXltdd2LbBZfvtnbIFrYa0Qvie7NUVNhio8SMuEopj1W6f7IOMv?=
- =?us-ascii?Q?FcRAI76U+vDNJq2pNdc9+Te7OExg5O0EfBVya6PI6Vz9sy50zoty0eJQQny9?=
- =?us-ascii?Q?KocgsZUA11RgpZztgr/S0cqbndiQbu94d5d5qaRaHy8R3EVCn38rqWhoH1Hx?=
- =?us-ascii?Q?IUBO9MNBT3QF9YvWenkLjjz146thQmlg8YeHh9X8iVrUJHqCVDrn2e0tjwRg?=
- =?us-ascii?Q?PrYbA/xdG9qxbjnyaqw2GAb5HsABXWKNUnVu+iIkPRZ4e4mwpyyQ0yIQ8mIh?=
- =?us-ascii?Q?USr4hvBiEMU/Fc9+p80MQ5xoRtlbudTlyQq5qQwV/qbrNDu9U0vKCrbqiKYi?=
- =?us-ascii?Q?qTScQLBrNFBbm6vtWlNQZVNXMrWPVPLjOJleCU6T26VhENOF4dbRe8fWK75M?=
- =?us-ascii?Q?fieaVW+3ByIteaUQO/GNAciBp7UaJFXgJnmLTUCifusY?=
+	=?us-ascii?Q?RhIvZhNZYjXfcfj5qm4+eMPXDhrzwS4slTdbiAAGdYKYrfOf7a5briSm3qdn?=
+ =?us-ascii?Q?xcg/08FPb4OnCLHQHJwT8HLYra0uTZXliC58Z62d+WVvid24e3lw+ruCPtg+?=
+ =?us-ascii?Q?VGwju1gERA8FKvCCUJPnycbJzOTbvG5aMfIO2x/Dzd5WNZ/dE2tZ8A9c4/kD?=
+ =?us-ascii?Q?VQgazdYqeWH/g6+lSY7AJNO4MzWS1Zg9tV1btlZiYUi+Lz6VpV0Y0ZRBjC6P?=
+ =?us-ascii?Q?1wHRMdA+n5OeIFvCcb+odJodQbUZjQbOK6K5DVe7XZ/Z3alMlKYRcpg7eELG?=
+ =?us-ascii?Q?aaMqIWFRnYnKOpTd4TYXvZneJCmPBhhcs+VlBo5fpJp5mRLY6X4N4QKXFe+B?=
+ =?us-ascii?Q?jb7Tqkvu7nBNJls3G8i2Q8PnySemKXsPuxvaX4qvZ2ni06LYx2IweIZY4qhV?=
+ =?us-ascii?Q?Ni8owPmXHCEkZ3IHoEDhsSpcs/rFBc2OjQnb7/yl2yG7Vgy3BFdptPKys6mS?=
+ =?us-ascii?Q?lSqpddR3GX1Dj2C1A8+3XFNmU9DcRRZuIFhrZ0w5IAezQrGgX6lDl6KyG1TV?=
+ =?us-ascii?Q?dIVFtaSelP31A3K+jXFhyNru6sw409pIfT1TDnT0dZVnJTw2YRmm8Vmd1Qhw?=
+ =?us-ascii?Q?GkHM9GGG8XO4T0SGTgnv1do0CwLtkjm0X1pd5BpTNlsxZEJ3Gt4/L/y2tBr3?=
+ =?us-ascii?Q?KLPDQ+KVhSCq5sw72KcQiWqJnSO9eNdFlnVJb1AS5/EQO9LtSNT38n1KkEZs?=
+ =?us-ascii?Q?e99BFSZJXIoJu1+AsSCGm/i2g8Dz/NzERXCLLdzs++pCEpx6gqT4xwQWgI72?=
+ =?us-ascii?Q?iCUqTVAgseS404BrRj4ignxILHeDt3zqnWh1Tay/A64gg1Im41z4Cs5w1DqI?=
+ =?us-ascii?Q?i+3bs71e06ezKmjaLcg4CArU9b19fBpfFWcqXRgmKKF24K3fq8pLSXwVS708?=
+ =?us-ascii?Q?EVaU6B0K6zrEK8Zu+zFLTjpnUJcicKWd2rKUQoBIc4Tf0T7cYJjuWmS22fvo?=
+ =?us-ascii?Q?SAISTQgh9F6JH4SLiuaHPM2Lr9zaaIOxml+doLqAeP1Esx1JnUW6X+/vQWIn?=
+ =?us-ascii?Q?g2RqLuBcx0vS/JgSJXUWkstNBfbDYhbCGP+fcjL60LKo5VlsMFbzioC3niTQ?=
+ =?us-ascii?Q?xiyyc74QsFdo/gJBQ+vbjRW8BLxuAnfEBRPyjaYzqkgG6CduRuC1CLPtKxhC?=
+ =?us-ascii?Q?lPPjoKGV8hnfDvv8WdBDG9Q/6hiLN/+SLF4CI6sGkLB87EOZXRQwddZow4ul?=
+ =?us-ascii?Q?awRO1lYqgmjYPTw+O/GELKXr2HklMbSZC7uV5JvpmiiDcLKZ363e8e3ZYFix?=
+ =?us-ascii?Q?P3gO42ugcE+DZAfx6/1psExWGDc1P71oZfkGjXfQD37Wc+nxktzP4OC1hQ1k?=
+ =?us-ascii?Q?PVkgA0lgjGegKz7pQlmRo2d95rjobgEyt6UqMb3upH/i2aRCAhApWJy3zEfB?=
+ =?us-ascii?Q?N9D3FdBXJXGnoh8do/yTZXkLavzlIwYHOxrh9fNbw1THu9ElvxRLFtvZisoI?=
+ =?us-ascii?Q?SZ0amg8MfgUvek0heWdqEYYHLTIeckja+sqPoz94bn6JmeGz70ZeJS0POfY6?=
+ =?us-ascii?Q?CIYJHOjugTUfp6c2E6EZyiMuc0Bnu0ZJWTH9HaRi/lD8CsKW9zcXteoF727b?=
+ =?us-ascii?Q?DgDNcb/5zGJGJXaaVCh4QjfBPCRna6fqNYNivpWVR8BwuBuGXMrtvVlCN7H5?=
+ =?us-ascii?Q?Hg=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	dO28t8M9V8E1CYc69p+Y+HlmOe+WF+tDfgPWPStXid/h9hRvDOgXE6GpGyzbo4TYKpeiEZdE1pkhvYFSllRKcluy1Lqgrb4H7QFKiUSJB2kbJX2XpH/h9BIj4Ga45GIgqG1/KKIp0YeB4l5nYvOafajMnIlemLN09JBJVAjHbcAQtS79Rei+cUY3SdDs1jk5i/dVs+edXOxliWeR2tfs3Ba7hc+tLqE1cf0CdZiD8pSwtgds88aGcYXDnp/SICbQ6ulGf3mqlRLPDx6n/agb5h34hSvxJyZhHieVGTnGYfJsRpyDdG9E/HGZVbaYNm6KwVqVSN7zyjVOV/PA3Czy5eCaD+2A8BEU1idLB6F8NOW7G4YIrEM4gvXh7fKOIdNOCXpRqs5m3H4IC3TEHwTwkuc03IO7P6OWvU8WMPBOrDJZbfnaKGUSZtTvDTBIihHN
+	04LEIklg/Z/DxOBv2rLvrWw9cE7eyA7oUuhcPJcrEAo5HumaeM7rKQG58vn2fWdRa8nOpGrNmNnoL/+a0kOYpMZIkvZcUR1CS3oE7nv8tjdJfXlB6vJw25WTWNL+jjCm3BErDpeRHnztBtn7s3oI2BhKVyyNUcJbEXxTxEdSbJt2gq+ASoXR6qfL7pHbVdtwP5GibEu8Xz8p2sHRu1sEu2y4abyiX82ADbOdXxXyCmp+EgumTzZYOCcGrRi3UIrMDqZ6MNDp+LRitnPKOWoKDR7TLWP27wzXazfJ+A4UrHVkagmdUZz7MKbhDtvQNCVUgIKyAvLHY3euSmJt+XjI/ifg4nZ6eFXcEaNdam6RUR3jVX6x3ki7ePLZZZ/28r9YHqEeRIu3GTGSqecJjRxGJwC8IgnzhjR1O9Ou/ash6eKw9mqDS47bIZKKoFkCxeRz
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 17:09:49.4431
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 17:09:54.9996
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9fff9e1-8052-415d-9835-08de64d95ed4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 444c8db9-69dd-4f62-60ef-08de64d96224
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	BN3PEPF0000B372.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR12MB9741
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4325
 
-Hi,
+With cross-vendor support gone, it's no longer needed.
 
-I got rid of the HVM_FEP condition on the #UD handler.
+AMD CPUs ignore the top 32 bits of the SYSENTER/SYSEXIT MSRs, which is
+not how this emulation worked due to the need for cross-vendor support.
+Any AMD VMs storing state in the top 32bits of the SEP MSRs will lose
+it.
 
-v1: https://lore.kernel.org/xen-devel/20260122164943.20691-1-alejandro.garciavallejo@amd.com/
-pipeline: https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2308391515
+It's very unlikely to affect any production VM because having 64bit width
+just isn't how real AMD CPUs behave.
 
-Original cover letter:
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Reviewed-by: Teddy Astie <teddy.astie@vates.tech>
+---
+v2:
+  * Reworded commit message to mention the loss of the top dword for
+    any VM stupid enough to use it.
+---
+ xen/arch/x86/hvm/svm/svm.c               | 42 +++++++++++-------------
+ xen/arch/x86/hvm/svm/vmcb.c              |  3 ++
+ xen/arch/x86/include/asm/hvm/svm-types.h | 10 ------
+ 3 files changed, 22 insertions(+), 33 deletions(-)
 
-As discussed in a prior RFC (https://lore.kernel.org/xen-devel/dc68b9ce-38aa-4949-b3e7-a7c0a7ee9a25@citrix.com/)
-this series drops cross-vendor support. It includes the policy check that
-was there and adds this on top:
-
-  * Eliminates #UD handler when HVM_FEP is disabled.
-  * Removes the cross-vendor checks from MSR handlers.
-  * Eliminate Intel-behaviour hacks for SYSENTER on AMD handlers and drop
-    intercept for SYSENTER.
-
-Open question unrelated to the series: Does it make sense to conditionalise the
-MSR handlers for non intercepted MSRs on HVM_FEP?
-
-Cheers,
-Alejandro
-
-Alejandro Vallejo (4):
-  x86: Reject CPU policies with vendors other than the host's
-  x86/hvm: Disable cross-vendor handling in #UD handler
-  x86/hvm: Remove cross-vendor checks from MSR handlers.
-  x86/svm: Drop emulation of Intel's SYSENTER behaviour on AMD systems
-
- CHANGELOG.md                             |  5 ++
- xen/arch/x86/hvm/hvm.c                   | 77 +++++++++---------------
- xen/arch/x86/hvm/svm/svm.c               | 45 ++++++--------
- xen/arch/x86/hvm/svm/vmcb.c              |  3 +
- xen/arch/x86/hvm/vmx/vmx.c               |  3 +-
- xen/arch/x86/include/asm/hvm/svm-types.h | 10 ---
- xen/arch/x86/msr.c                       |  8 +--
- xen/lib/x86/policy.c                     |  3 +-
- 8 files changed, 64 insertions(+), 90 deletions(-)
-
-
-base-commit: 3d11d55e19b749697ea7c3799c264b83f5a57a80
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 10d1bf350c..329c4446e9 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -401,10 +401,6 @@ static int svm_vmcb_save(struct vcpu *v, struct hvm_hw_cpu *c)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+ 
+-    c->sysenter_cs = v->arch.hvm.svm.guest_sysenter_cs;
+-    c->sysenter_esp = v->arch.hvm.svm.guest_sysenter_esp;
+-    c->sysenter_eip = v->arch.hvm.svm.guest_sysenter_eip;
+-
+     if ( vmcb->event_inj.v &&
+          hvm_event_needs_reinjection(vmcb->event_inj.type,
+                                      vmcb->event_inj.vector) )
+@@ -468,11 +464,6 @@ static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
+     svm_update_guest_cr(v, 0, 0);
+     svm_update_guest_cr(v, 4, 0);
+ 
+-    /* Load sysenter MSRs into both VMCB save area and VCPU fields. */
+-    vmcb->sysenter_cs = v->arch.hvm.svm.guest_sysenter_cs = c->sysenter_cs;
+-    vmcb->sysenter_esp = v->arch.hvm.svm.guest_sysenter_esp = c->sysenter_esp;
+-    vmcb->sysenter_eip = v->arch.hvm.svm.guest_sysenter_eip = c->sysenter_eip;
+-
+     if ( paging_mode_hap(v->domain) )
+     {
+         vmcb_set_np(vmcb, true);
+@@ -501,6 +492,9 @@ static void svm_save_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+ 
++    data->sysenter_cs      = vmcb->sysenter_cs;
++    data->sysenter_esp     = vmcb->sysenter_esp;
++    data->sysenter_eip     = vmcb->sysenter_eip;
+     data->shadow_gs        = vmcb->kerngsbase;
+     data->msr_lstar        = vmcb->lstar;
+     data->msr_star         = vmcb->star;
+@@ -512,11 +506,14 @@ static void svm_load_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+ 
+-    vmcb->kerngsbase = data->shadow_gs;
+-    vmcb->lstar      = data->msr_lstar;
+-    vmcb->star       = data->msr_star;
+-    vmcb->cstar      = data->msr_cstar;
+-    vmcb->sfmask     = data->msr_syscall_mask;
++    vmcb->sysenter_cs  = data->sysenter_cs;
++    vmcb->sysenter_esp = data->sysenter_esp;
++    vmcb->sysenter_eip = data->sysenter_eip;
++    vmcb->kerngsbase   = data->shadow_gs;
++    vmcb->lstar        = data->msr_lstar;
++    vmcb->star         = data->msr_star;
++    vmcb->cstar        = data->msr_cstar;
++    vmcb->sfmask       = data->msr_syscall_mask;
+     v->arch.hvm.guest_efer = data->msr_efer;
+     svm_update_guest_efer(v);
+ }
+@@ -1720,12 +1717,9 @@ static int cf_check svm_msr_read_intercept(
+ 
+     switch ( msr )
+     {
+-        /*
+-         * Sync not needed while the cross-vendor logic is in unilateral effect.
+     case MSR_IA32_SYSENTER_CS:
+     case MSR_IA32_SYSENTER_ESP:
+     case MSR_IA32_SYSENTER_EIP:
+-         */
+     case MSR_STAR:
+     case MSR_LSTAR:
+     case MSR_CSTAR:
+@@ -1740,13 +1734,15 @@ static int cf_check svm_msr_read_intercept(
+     switch ( msr )
+     {
+     case MSR_IA32_SYSENTER_CS:
+-        *msr_content = v->arch.hvm.svm.guest_sysenter_cs;
++        *msr_content = vmcb->sysenter_cs;
+         break;
++
+     case MSR_IA32_SYSENTER_ESP:
+-        *msr_content = v->arch.hvm.svm.guest_sysenter_esp;
++        *msr_content = vmcb->sysenter_esp;
+         break;
++
+     case MSR_IA32_SYSENTER_EIP:
+-        *msr_content = v->arch.hvm.svm.guest_sysenter_eip;
++        *msr_content = vmcb->sysenter_eip;
+         break;
+ 
+     case MSR_STAR:
+@@ -1940,11 +1936,11 @@ static int cf_check svm_msr_write_intercept(
+         switch ( msr )
+         {
+         case MSR_IA32_SYSENTER_ESP:
+-            vmcb->sysenter_esp = v->arch.hvm.svm.guest_sysenter_esp = msr_content;
++            vmcb->sysenter_esp = msr_content;
+             break;
+ 
+         case MSR_IA32_SYSENTER_EIP:
+-            vmcb->sysenter_eip = v->arch.hvm.svm.guest_sysenter_eip = msr_content;
++            vmcb->sysenter_eip = msr_content;
+             break;
+ 
+         case MSR_LSTAR:
+@@ -1970,7 +1966,7 @@ static int cf_check svm_msr_write_intercept(
+         break;
+ 
+     case MSR_IA32_SYSENTER_CS:
+-        vmcb->sysenter_cs = v->arch.hvm.svm.guest_sysenter_cs = msr_content;
++        vmcb->sysenter_cs = msr_content;
+         break;
+ 
+     case MSR_STAR:
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index e583ef8548..76fcaf15c2 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -97,6 +97,9 @@ static int construct_vmcb(struct vcpu *v)
+     svm_disable_intercept_for_msr(v, MSR_LSTAR);
+     svm_disable_intercept_for_msr(v, MSR_STAR);
+     svm_disable_intercept_for_msr(v, MSR_SYSCALL_MASK);
++    svm_disable_intercept_for_msr(v, MSR_IA32_SYSENTER_CS);
++    svm_disable_intercept_for_msr(v, MSR_IA32_SYSENTER_EIP);
++    svm_disable_intercept_for_msr(v, MSR_IA32_SYSENTER_ESP);
+ 
+     vmcb->_msrpm_base_pa = virt_to_maddr(svm->msrpm);
+     vmcb->_iopm_base_pa = __pa(v->domain->arch.hvm.io_bitmap);
+diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
+index 051b235d8f..aaee91b4b6 100644
+--- a/xen/arch/x86/include/asm/hvm/svm-types.h
++++ b/xen/arch/x86/include/asm/hvm/svm-types.h
+@@ -27,16 +27,6 @@ struct svm_vcpu {
+ 
+     /* VMCB has a cached instruction from #PF/#NPF Decode Assist? */
+     uint8_t cached_insn_len; /* Zero if no cached instruction. */
+-
+-    /*
+-     * Upper four bytes are undefined in the VMCB, therefore we can't use the
+-     * fields in the VMCB. Write a 64bit value and then read a 64bit value is
+-     * fine unless there's a VMRUN/VMEXIT in between which clears the upper
+-     * four bytes.
+-     */
+-    uint64_t guest_sysenter_cs;
+-    uint64_t guest_sysenter_esp;
+-    uint64_t guest_sysenter_eip;
+ };
+ 
+ struct nestedsvm {
 -- 
 2.43.0
 
