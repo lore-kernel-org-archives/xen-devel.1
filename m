@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79ABEE20B7
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:16:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223517.1531024 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2570BEE20B5
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:16:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223513.1530993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOVJ-0007MB-3b; Fri, 06 Feb 2026 16:16:21 +0000
+	id 1voOVD-0006Mw-90; Fri, 06 Feb 2026 16:16:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223517.1531024; Fri, 06 Feb 2026 16:16:21 +0000
+Received: by outflank-mailman (output) from mailman id 1223513.1530993; Fri, 06 Feb 2026 16:16:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOVI-0007Lq-VH; Fri, 06 Feb 2026 16:16:20 +0000
-Received: by outflank-mailman (input) for mailman id 1223517;
- Fri, 06 Feb 2026 16:16:20 +0000
+	id 1voOVD-0006Mk-25; Fri, 06 Feb 2026 16:16:15 +0000
+Received: by outflank-mailman (input) for mailman id 1223513;
+ Fri, 06 Feb 2026 16:16:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lgBG=AK=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1voOVI-0005HU-Ew
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:16:20 +0000
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c10d::3])
+ id 1voOVB-0005HU-7T
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:16:13 +0000
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [2a01:111:f403:c107::3])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2ac786d0-0377-11f1-9ccf-f158ae23cfc8;
- Fri, 06 Feb 2026 17:16:19 +0100 (CET)
-Received: from PH7PR10CA0018.namprd10.prod.outlook.com (2603:10b6:510:23d::15)
- by PH7PR12MB6489.namprd12.prod.outlook.com (2603:10b6:510:1f7::21)
+ id 25279c69-0377-11f1-9ccf-f158ae23cfc8;
+ Fri, 06 Feb 2026 17:16:09 +0100 (CET)
+Received: from SA1PR04CA0019.namprd04.prod.outlook.com (2603:10b6:806:2ce::26)
+ by IA1PR12MB7592.namprd12.prod.outlook.com (2603:10b6:208:428::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.14; Fri, 6 Feb
- 2026 16:16:15 +0000
-Received: from SN1PEPF00036F42.namprd05.prod.outlook.com
- (2603:10b6:510:23d:cafe::9c) by PH7PR10CA0018.outlook.office365.com
- (2603:10b6:510:23d::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
- 6 Feb 2026 16:16:08 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.16; Fri, 6 Feb
+ 2026 16:16:03 +0000
+Received: from SN1PEPF00036F3E.namprd05.prod.outlook.com
+ (2603:10b6:806:2ce:cafe::b4) by SA1PR04CA0019.outlook.office365.com
+ (2603:10b6:806:2ce::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Fri,
+ 6 Feb 2026 16:16:01 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF00036F42.mail.protection.outlook.com (10.167.248.26) with Microsoft
+ SN1PEPF00036F3E.mail.protection.outlook.com (10.167.248.22) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 16:16:14 +0000
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 16:16:02 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 6 Feb
- 2026 10:16:07 -0600
+ 2026 10:16:01 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ac786d0-0377-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 25279c69-0377-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G1KGCckWNilrQm4RVGaI03hP1mulUcxcFZILjkXzmV+rHb4q5ioMybYP1r5ZHvL8hXc4MUi3bBhmN/fz5KAEg9t4mMytkTDS6SmVwqFh21GKNM4s61YHKjCYJIFMTRaZRJ6zmD9DiCQM3GHVj3RWKBX5yESeEeZN1niLRwrHUjVGHIxmKTdz18BA+MOGhNbtOk8D+YifQ6dHhxyBayM5WB/Ym402xSzi863RckFYGTutqLyDI2lmY/P8bEk/j5ZZYDFkzRl8d6xMhguohT9L2xDkbZWnt8HgJOH5H67PwfnwSXjzaqNSwi1gnoRn4ozRn2GayA894DygtjpHswR+EQ==
+ b=Darwn6Xe8Zm+HyJG9J0XxvNTqFTQwD6NdUiQ0l4F4oY/3EL6L6WJ6UXakfAFfS2vGR5qzQv4mgGxueYw/B4Iky8C/JWw0YoJy3FtXO6dwvOcVK2FyLsT8FSZ7nVG8GiaWCMUFXaI7L9Crqx0is0A07plQXUrQpfaXyfuzjCQzaHM3Z5r01hM87gXo6/vsDsVeufQpX2lgDai3lXFFppu8PgF9Kyvx7Oh+AjfC4ZZHZA0A23EUDZNBzN0RxP0KLMyzjNO3oOKW5U8KKO1oGmtkcJnQtTdg5nnPCWiSPW6C1qETSxZYo4HJuYEcZDlOBNj8q5Hn2t2rNIlxBO8d50JqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MyC8/f2nPCFmUAAOBRxbvkfjjyjt5TErAPO2zi2zHVU=;
- b=JDipnWztcSch+OwxLIdWCgYD6M16lCmQ+SxQA9NCAPCQIs4GGeIQ8lzXDhtG8HL+DCdtlxfYCHjFF54HuwTWOfq1v1IRAbunp/42PVV6GkxbA67njtO8w2UKYdgCt+je3oHaHLY7xUtDJEqbZ5ZE7UmNi2nglGfEnxkRuHwVi+sP3Bdb0FPSRsjH6XHyb0W7k+zGnomVAanrnG7jPlxueiXrmndP8UVXS24Np/9XkGTwKfCLtMOnpfu7tW4El5dB3hw6bhOZ97P0C54IaSt0dvk7/kLhCBzRi3l2Ihhq8fMYhrKa7YhU1mQUwhNVuCaEqVt95921OrLvFft9+uEyWA==
+ bh=/WzEwx3Opaugl9/DnwYYjCuWFXIdaNBvH15zMid2uSM=;
+ b=cWDxe7tyvFLFW4R7UdO+pwvn68cAn4rooQofcExx56e+PijCJijaWHnnxUxvsWS2mwek0ywHyOJrtur+Ba9Vc/W9f96UY+2B/1m7jPEjc/HaymHDz6sc/Rb6gloFsU7Q9roj0z0PKBPPS4FgOVvN5Fb3TISkoaUKouv8L1mU0y/Ydi33KjOs7aji5hB7lhFKCi5EeFa//wNEw3WMA4s8RzZgrlwOWN4pmAPf5Aps5hTdp/bbHKKgKOKJeNwEjVffhsTn1nXRKi1pFZnwZxX+tspFsLkh0G+R/eZVFeEq8ite9urDBoOtYFPkxQLG5Lik94OqnoELFAHHhwDT8z11Bg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MyC8/f2nPCFmUAAOBRxbvkfjjyjt5TErAPO2zi2zHVU=;
- b=0FmnseOIWwSIrtCV77BdzPTJXFE3giUkSaYYRtrnIwaOqeNMFuALXxAlX2bTY335QV3rWfsSMWdK2TC2clKQHNq79AcITXc7zjo1D6HiVUfkDUCwgL8rhTHOIFgTR/oBUR1NfS+yLevZSRmNQ4MsQ79hGTOcNiu7eVhUhXTKmT0=
+ bh=/WzEwx3Opaugl9/DnwYYjCuWFXIdaNBvH15zMid2uSM=;
+ b=MR4dMm/OXboALYquRCkfWxkq1xrS8XhKPUCBcl43AHwN72nXwMEDvD+GD2VSW/AkJng/t2miXqRrdp9nZ3tiw5yN08ZnKcZsDDn5U3z7bNNmmFPAfZCxpICkOfjMwUXVj8gKVgpRApBetfQI3kZTh66RSYOvonXBTvcROrFnVXI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,9 +86,9 @@ CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
 	<jason.andryuk@amd.com>
-Subject: [PATCH 08/12] x86/acpi: Migrate vendor checks to cpu_vendor()
-Date: Fri, 6 Feb 2026 17:15:31 +0100
-Message-ID: <20260206161539.209922-10-alejandro.garciavallejo@amd.com>
+Subject: [PATCH 04/12] x86: Migrate MSR handler vendor checks to cpu_vendor()
+Date: Fri, 6 Feb 2026 17:15:26 +0100
+Message-ID: <20260206161539.209922-5-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
 References: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
@@ -100,157 +100,206 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F42:EE_|PH7PR12MB6489:EE_
-X-MS-Office365-Filtering-Correlation-Id: 24ff0173-367a-4829-443f-08de659b0d31
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3E:EE_|IA1PR12MB7592:EE_
+X-MS-Office365-Filtering-Correlation-Id: 352d51fa-d1a8-419c-378c-08de659b0614
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?QG6d2kZYWehmAi8WsAKvhZsqzItvDq+a/czCUFGLV7ggBmFXlc4qt6WPYx5p?=
- =?us-ascii?Q?IzrqIH70Y5r6c/X3eUtYC13aeMbEzTcxQahasDIYnwC0AZvc+T2CG6UT5cI1?=
- =?us-ascii?Q?Pmt01xLfYrnmFalOSHbOAd79oZxWAXnuJ5p5vg6zU3/PsGmdUvMwnkJaIEz2?=
- =?us-ascii?Q?ERDcZYJT6w+6xPsrLShBvWg9Zx1LKaBPHYg/F13BfUMGMQjFAEMf1/dkNPCk?=
- =?us-ascii?Q?dLfXlqcHltctOIDbOlI5oYtWti5NzzXB8Z00Flt4v90YjcaLwgDDC1EPJv8T?=
- =?us-ascii?Q?yxBX73thl5tlSek/UMCJILKXZQK/zzUK2ajVZ+pcpoNnTyGLTZYPgtrESx92?=
- =?us-ascii?Q?3/j630RQVq9VyBp3AYPYaz/omxnaMf2PM+bggpW+LF88jZvOBsxoDYww6VRW?=
- =?us-ascii?Q?6TyuXbsNkt+SEWxr56ENIIHn3yJynKCQ0WJ279FllojaBo+e81emeJMfxR7A?=
- =?us-ascii?Q?uqsJemaPRz4SH2eetxAZU6R660d14iHhJbcnPWsZ4xhA80rHk9cqECD91p2a?=
- =?us-ascii?Q?AhlU1fCvAv4eRVpjgVvbPypmRPulPtZRalkG6GJzVsfzSbcyuEZ/QZaHeTg3?=
- =?us-ascii?Q?QLC2nUzf3szHqBlzFrulHIAb2soUB49uN7hREec1CBPxxDiT3BO0YL9FFV8q?=
- =?us-ascii?Q?e3KlfjtyrfHpPocOjGctFa+LQLtEHrbEGGWNQDlOTuptVnvwl6gbk9t16ciu?=
- =?us-ascii?Q?ocEevujc7+r4qA6mUO4RJQtjd0jh9tN6hYecuSIYJODxXJGuptFiBe0hijAr?=
- =?us-ascii?Q?NzBuM0tgJULFuPhvd77Kti0P25bql7IO6+jTJNHSJOqLPFYsUDu6APWUQ4KA?=
- =?us-ascii?Q?ul8TqqvkxwiV+DMdVeT4X1FLQ4aOKBo1BFvjuSi5e3/BLrpAwJeg06dYgxrM?=
- =?us-ascii?Q?PfcsSUakUhlKsFma9dvffv4SaijjWEl3g+FEfdr6j3Zkf2YZ+FjnEXxWsNSd?=
- =?us-ascii?Q?Gw+6CNXJ5n1Fhf+cKWRsOqmLvr7z45k/rqw4aUk6lk5Z7lL/I5145jgS/7T6?=
- =?us-ascii?Q?oR1fnW0p7DjQabNI64fvc7QdMXSRdC80eUdmIe7fgk9xUGwMEyhoMsAg/bBP?=
- =?us-ascii?Q?7dCNKJr+s+2jtW/BpysDPZZPG8wEpI3JPdaRw3ehQ1IxE3yNIW5Sfb7jhF6Q?=
- =?us-ascii?Q?64iO3nEIpLxFo7U8045Sjh4YKYaWyiUVjF4Nvu6QM/Yee6c4xUE71E/euZdD?=
- =?us-ascii?Q?pgPrna/fLvokHFkwqvQHVf7RK9XPGxFASmMJ+WYcoLf8ARB6to3+udKEx/T3?=
- =?us-ascii?Q?riS8KMCzX+4iJLg2eMhYm+MHYJYevIdzLoij782pE1aAEhsaI6iJccFZ34ZR?=
- =?us-ascii?Q?JshuhMoptDKeXOh0AHlqyVgo/9xW8OGmWaPr37avBRHFfXKH3OF3sbYs4PW/?=
- =?us-ascii?Q?aL7Bwi1enRCCyEPdWYcFLsF2h6D1e04mLJRJ3PcSx9yoXbHRxM4OEcmusg/A?=
- =?us-ascii?Q?bbpTUw+6smXSGlMJy8BqE4UYlrkIcL0SwiGecLfxLT90S1Sd/SupNcHw9UqZ?=
- =?us-ascii?Q?F87tVVSZZs9VCbqvaJuXh7W22zBFIIxR3j/mJB7na9IeuqTk9qKh5bRL7zGj?=
- =?us-ascii?Q?TNcdZjWR4gI2MfPbzHB9PlZFjT3cf9voK6I2wy9Dx/EeORReuCAEIxX2b7Qo?=
- =?us-ascii?Q?O52842iLtO0FDPmbDH19TGOQr9tps1x+EwPhdD8if6r7oTpNuCZlACi0F9dp?=
- =?us-ascii?Q?Im7MMQ=3D=3D?=
+	=?us-ascii?Q?mWI2C8ZbBmEMqHFMe4usMFfd1oUOWKAQujrwjc2TFRruSrJlWE+1JKTN4XdS?=
+ =?us-ascii?Q?WguFtGGYUTLvAIj2UqH4RGQYVxezC9MmZqKKrjDIVgUpqxgBFGTkYs41l7Is?=
+ =?us-ascii?Q?2rxyfpJ0gKLw6DPiyFiaC4xjeG0c9aQPwOb4xv19/GI+2MlhaPI//Lycnumh?=
+ =?us-ascii?Q?wyIdipnHv0T6o6DO5Xo7jWbFABaKEjQL8KiQnP5+fc9QIH5OhoMItidvxlhA?=
+ =?us-ascii?Q?jQIuYiyli/U7D5inGPLTt04Zhk41fmhNH1LVzEF0uN3RBehAjjnRQq/Wajf+?=
+ =?us-ascii?Q?QVkAhQDVaN92rPJ65fdeQ6KVfz1q/m7nsMqrkBFS0KHkKqs1DckXPoPbta1f?=
+ =?us-ascii?Q?Fp7ioxFC2rZSL8tl5DHkWCI4+jvublKzzav7gzykL1wMEPEcXd2oc4GY1osC?=
+ =?us-ascii?Q?R21iZrFAsi8wjTgpHxs9hBwA0UBRoGJaNFWU9oaxMKErutN5K9kNq1Zqsrb5?=
+ =?us-ascii?Q?zY4iwWRQF5qoD/C1n3ouP9h6EW+zfrGl/cCbf8uQtGdbBIcOOLx8oDwpe+ok?=
+ =?us-ascii?Q?wzRTvYTPBad4IoRl9O7TsWXXIVImKFqu5+2yjJnYvAHu/oLWNZF65vd1pGu3?=
+ =?us-ascii?Q?eW46wAgL1hVaOVmFteUo9sxcU06C6biyHgIQwyoCYyVrg4bFJzwZHWsPbs/O?=
+ =?us-ascii?Q?Q2Ve79SDDSKd6nzYG7d5D4ukonewBDKJ2n4u7PB3OEs3BdzRHd91hWUDyDeS?=
+ =?us-ascii?Q?H2Us/D7JLcTUZ3k4Jy5C6UqiGCnmR0Y8yhigNAZKCFaC8mkxJUNEvAb1w3cT?=
+ =?us-ascii?Q?T2uy++GjkpZXe0BWOUO0lxdwI95608pfzi/mY4Tnzirh94x0rJG2gO7nsRtW?=
+ =?us-ascii?Q?Jc1wJyv7rFEBoZXE7Z/hif4mZXe5i9RIaLumz+4rbbeBcsS2quGdzJ7VF2ez?=
+ =?us-ascii?Q?Ybb0LytaChLvhGT0Uc9O/+ueHtooX0TGJKGjaPaOJx9lCGhB1RnXgjVzN+rs?=
+ =?us-ascii?Q?wJKKzAf+s9LVJDEq0xV3/hwIzRdq/zF4uagVVmNFY41RQxomegjkMNykt0r2?=
+ =?us-ascii?Q?3Gj0kA0XJddVJkNUREj+WALFgepfLs0kmXcEo+nepnHSFSxNoqlKQiOvdssq?=
+ =?us-ascii?Q?LNnv/xPyXSNbYKgW+sgMdge8Arsz6RlOBHvL+v+qpeFzKn/0KAyvHECYdTbI?=
+ =?us-ascii?Q?TWk2CvmU1S6bZD9PbLDxWftmS4GqCopg6wo+d43jWWxyJPuQ8RqjjHK4QNj8?=
+ =?us-ascii?Q?aHpgAq+1zEZJ3YTC2V+8al226+6+01DUMG+7TK8+Wrel2LU0FW5OkWM4qDst?=
+ =?us-ascii?Q?cgQUQfE/R5akHGtg6Xygxfokkvj7Zq+a+KBBTPisT8ax1egPE3CCFouKwYAO?=
+ =?us-ascii?Q?S/hduRJT00h/nu9z2SUGtBueo5qO3DMUzfiRoc6MYQe2Yx4OeIGVHWk6GL1e?=
+ =?us-ascii?Q?ka+ui9/aKWveksGDClzSJJsboPmQ1pUTHvaOZ4BsCHUQWYr+eCTJUdrCbzWi?=
+ =?us-ascii?Q?ilf/xdH/zOD/G61Dv16Ha0aqz4hyw6auldQsmMjwm9sjhuhy3aibuT1x9rOu?=
+ =?us-ascii?Q?+Y/6ghNSpLQBU9pn6CM0To3Cu5MnsUVuxB7+dUEutN9ihk2rQLKYQ0Sbsl4C?=
+ =?us-ascii?Q?gWqyrXxOg+yBAU0YQwHAhVqwwvm4DsN5vVfuG8TLD0+F5bJCN3C2HdUE1GTw?=
+ =?us-ascii?Q?C3KzD2zcLECUgrQd3jA1xMxhH5oGK876uCk0nvH9h86+csaEIJxa0DmocDgL?=
+ =?us-ascii?Q?vw+CRQ=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	idIp1cbIE7EaO73ieWsyVyhSx0ETrPq//IgIaaIupINO8eL5QkdzltnJ0Hq7BfR5/if4sQxHHsz21QhGRk8qmPu9WMvkcWXRYaRZL0rSdSnynFagnYEnI8Wc/9ytb3OLu1yhxHHbbo3laUBrGaqhYI4t6OmRJvObCwuGC63F08FOG0uh1wDDhViVffCBr7ufBo4U4GfQgzFXJoWX6sQ56VzMlrB4HX1kyg4cxhpd6DBo5FRQYuMI/zN8tuhA79ohDkN218hOUdi6+i/AGTO5ZJnIyO0zZFG2/6BZ/gwjel16yblWcfYWJtF/hQpiJErd+Gb1yH9kj5QUX4WOQuCibLiOVtKnNg94i+iF499H2t4H3z68jEdfKLfRL216MZ6Punxe8E7DadmyTdY3RQYRGMNFnQQlt/bBWL/2rKPqQO7O/PesL75ZW/NUvm5er2gU
+	M73vfP6zUQ6/q5afN4sd86CguFxwGltSgeXE771V8kufxzV7Tc+pw3G1GZi8oCBcTcBvoYcv1PnKEO0C7FhVxMHD+KKwiHmvy7fIHRZKi7jfXWvHi0MIqrNIMzy7q1VqopN/3rxe0MTeI70FZMYZKD+4v22KpUXpOdGSls31vtVSTHDhbBJJ+9wz78JNbZp+/gKzY3Hf3NPjN/9a5EEEZgkW2f7WMogbiU+02MVbSQLsFPUB1x5jzoYop3KdTCwGupVuNZxzUaVUb+roWCzzzVYKlgqToKyarl6mWdzh2altffTqhM0ruDT+lHwSbM4YSFCjVk7GJ1dIHfd7r9H1RU4kgKVlOHEpC5NuY5sdy2wtOp2kybGh7u8jeXu4c09PYqeVdlristXe12Yr62aZHX+WhwnACkswkwI4np3E5L2boynuavO+JZ15vUI7gYng
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 16:16:14.8060
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 16:16:02.8807
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 24ff0173-367a-4829-443f-08de659b0d31
+X-MS-Exchange-CrossTenant-Network-Message-Id: 352d51fa-d1a8-419c-378c-08de659b0614
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF00036F42.namprd05.prod.outlook.com
+	SN1PEPF00036F3E.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6489
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7592
+
+Many handlers are vendor-specific and are currently gated on runtime
+checks. If we migrate those to cpu_vendor() they will effectively
+cause the ellision of handling code for CPU vendors not compiled in.
 
 Not a functional change.
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
- xen/arch/x86/acpi/cpu_idle.c        | 16 +++++++---------
- xen/arch/x86/acpi/cpufreq/acpi.c    |  2 +-
- xen/arch/x86/acpi/cpufreq/cpufreq.c |  3 +--
- 3 files changed, 9 insertions(+), 12 deletions(-)
+ xen/arch/x86/msr.c | 35 +++++++++++++++--------------------
+ 1 file changed, 15 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index 0b3d0631dd..0a49b2730b 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -178,7 +178,7 @@ static void cf_check do_get_hw_residencies(void *arg)
-     struct cpuinfo_x86 *c = &current_cpu_data;
-     struct hw_residencies *hw_res = arg;
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index ad75a2e108..34033c1982 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -157,8 +157,8 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+          * The MSR has existed on all Intel parts since before the 64bit days,
+          * and is implemented by other vendors.
+          */
+-        if ( !(cp->x86_vendor & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR |
+-                                 X86_VENDOR_SHANGHAI)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR |
++                               X86_VENDOR_SHANGHAI)) )
+             goto gp_fault;
  
--    if ( c->x86_vendor != X86_VENDOR_INTEL || c->x86 != 6 )
-+    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || c->x86 != 6 )
-         return;
- 
-     switch ( c->x86_model )
-@@ -915,8 +915,7 @@ void cf_check acpi_dead_idle(void)
-             mwait(cx->address, 0);
-         }
-     }
--    else if ( (current_cpu_data.x86_vendor &
--               (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
-+    else if ( cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON) &&
-               cx->entry_method == ACPI_CSTATE_EM_SYSIO )
-     {
-         /* Intel prefers not to use SYSIO */
-@@ -1042,8 +1041,8 @@ static void acpi_processor_power_init_bm_check(struct acpi_processor_flags *flag
-     flags->bm_check = 0;
-     if ( num_online_cpus() == 1 )
-         flags->bm_check = 1;
--    else if ( (c->x86_vendor == X86_VENDOR_INTEL) ||
--              ((c->x86_vendor == X86_VENDOR_AMD) && (c->x86 == 0x15)) )
-+    else if ( (cpu_vendor() & X86_VENDOR_INTEL) ||
-+              ((cpu_vendor() & X86_VENDOR_AMD) && c->x86 == 0x15) )
-     {
-         /*
-          * Today all MP CPUs that support C3 share cache.
-@@ -1059,7 +1058,7 @@ static void acpi_processor_power_init_bm_check(struct acpi_processor_flags *flag
-      * is not required while entering C3 type state on
-      * P4, Core and beyond CPUs
-      */
--    if ( c->x86_vendor == X86_VENDOR_INTEL &&
-+    if ( (cpu_vendor() & X86_VENDOR_INTEL) &&
-         (c->x86 > 0x6 || (c->x86 == 6 && c->x86_model >= 14)) )
-             flags->bm_control = 0;
- }
-@@ -1421,7 +1420,7 @@ static void amd_cpuidle_init(struct acpi_processor_power *power)
-     case 0x1a:
-     case 0x19:
-     case 0x18:
--        if ( boot_cpu_data.x86_vendor != X86_VENDOR_HYGON )
-+        if ( !(cpu_vendor() & X86_VENDOR_HYGON) )
-         {
-     default:
-             vendor_override = -1;
-@@ -1648,8 +1647,7 @@ static int cf_check cpu_callback(
+         *val = IA32_FEATURE_CONTROL_LOCK;
+@@ -169,8 +169,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
          break;
  
-     case CPU_ONLINE:
--        if ( (boot_cpu_data.x86_vendor &
--              (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
-+        if ( cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON) &&
-              processor_powers[cpu] )
-             amd_cpuidle_init(processor_powers[cpu]);
+     case MSR_IA32_PLATFORM_ID:
+-        if ( !(cp->x86_vendor & X86_VENDOR_INTEL) ||
+-             !(boot_cpu_data.x86_vendor & X86_VENDOR_INTEL) )
++        if ( !(cpu_vendor() & X86_VENDOR_INTEL) )
+             goto gp_fault;
+         rdmsrl(MSR_IA32_PLATFORM_ID, *val);
          break;
-diff --git a/xen/arch/x86/acpi/cpufreq/acpi.c b/xen/arch/x86/acpi/cpufreq/acpi.c
-index d0ca660db1..a5e5c223b3 100644
---- a/xen/arch/x86/acpi/cpufreq/acpi.c
-+++ b/xen/arch/x86/acpi/cpufreq/acpi.c
-@@ -454,7 +454,7 @@ static int cf_check acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
+@@ -189,9 +188,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+          * from Xen's last microcode load, which can be forwarded straight to
+          * the guest.
+          */
+-        if ( !(cp->x86_vendor & (X86_VENDOR_INTEL | X86_VENDOR_AMD)) ||
+-             !(boot_cpu_data.x86_vendor &
+-               (X86_VENDOR_INTEL | X86_VENDOR_AMD)) ||
++        if ( !(cpu_vendor() & (X86_VENDOR_INTEL | X86_VENDOR_AMD)) ||
+              rdmsr_safe(MSR_AMD_PATCHLEVEL, val) )
+             goto gp_fault;
+         break;
+@@ -236,7 +233,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+          */
+     case MSR_IA32_PERF_STATUS:
+     case MSR_IA32_PERF_CTL:
+-        if ( !(cp->x86_vendor & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR)) )
+             goto gp_fault;
  
-     /* Check for APERF/MPERF support in hardware
-      * also check for boost support */
--    if (c->x86_vendor == X86_VENDOR_INTEL && c->cpuid_level >= 6)
-+    if ((cpu_vendor() & X86_VENDOR_INTEL) && c->cpuid_level >= 6)
-         on_selected_cpus(cpumask_of(cpu), feature_detect, policy, 1);
+         *val = 0;
+@@ -245,7 +242,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+         goto gp_fault;
  
-     /*
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 4ee03ecc65..d731a21644 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -246,8 +246,7 @@ __initcall(cpufreq_driver_late_init);
- int cpufreq_cpu_init(unsigned int cpu)
- {
-     /* Currently we only handle Intel, AMD and Hygon processor */
--    if ( boot_cpu_data.x86_vendor &
--         (X86_VENDOR_INTEL | X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-+    if ( cpu_vendor() & (X86_VENDOR_INTEL | X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-         return cpufreq_add_cpu(cpu);
+     case MSR_IA32_THERM_STATUS:
+-        if ( cp->x86_vendor != X86_VENDOR_INTEL )
++        if ( !(cpu_vendor() & X86_VENDOR_INTEL) )
+             goto gp_fault;
+         *val = 0;
+         break;
+@@ -302,7 +299,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+     case MSR_K8_IORR_MASK1:
+     case MSR_K8_TSEG_BASE:
+     case MSR_K8_TSEG_MASK:
+-        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+             goto gp_fault;
+         if ( !is_hardware_domain(d) )
+             return X86EMUL_UNHANDLEABLE;
+@@ -314,14 +311,14 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+         break;
  
-     return -EOPNOTSUPP;
+     case MSR_K8_HWCR:
+-        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+             goto gp_fault;
+         *val = 0;
+         break;
+ 
+     case MSR_FAM10H_MMIO_CONF_BASE:
+         if ( !is_hardware_domain(d) ||
+-             !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
++             !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
+              rdmsr_safe(msr, val) )
+             goto gp_fault;
+ 
+@@ -338,7 +335,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+         break;
+ 
+     case MSR_AMD64_DE_CFG:
+-        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+             goto gp_fault;
+         *val = AMD64_DE_CFG_LFENCE_SERIALISE;
+         break;
+@@ -461,7 +458,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+          * for backwards compatiblity, the OS should write 0 to it before
+          * trying to access the current microcode version.
+          */
+-        if ( cp->x86_vendor != X86_VENDOR_INTEL || val != 0 )
++        if ( !(cpu_vendor() & X86_VENDOR_INTEL) || val != 0 )
+             goto gp_fault;
+         break;
+ 
+@@ -470,8 +467,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+          * See note on MSR_IA32_UCODE_WRITE below, which may or may not apply
+          * to AMD CPUs as well (at least the architectural/CPUID part does).
+          */
+-        if ( is_pv_domain(d) ||
+-             cp->x86_vendor != X86_VENDOR_AMD )
++        if ( is_pv_domain(d) || !(cpu_vendor() & X86_VENDOR_AMD) )
+             goto gp_fault;
+         break;
+ 
+@@ -482,8 +478,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+          * for such attempts. Also the MSR is architectural and not qualified
+          * by any CPUID bit.
+          */
+-        if ( is_pv_domain(d) ||
+-             cp->x86_vendor != X86_VENDOR_INTEL )
++        if ( is_pv_domain(d) || !(cpu_vendor() & X86_VENDOR_INTEL) )
+             goto gp_fault;
+         break;
+ 
+@@ -553,7 +548,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+          * a cpufreq controller dom0 which has full access.
+          */
+     case MSR_IA32_PERF_CTL:
+-        if ( !(cp->x86_vendor & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_INTEL | X86_VENDOR_CENTAUR)) )
+             goto gp_fault;
+ 
+         if ( likely(!is_cpufreq_controller(d)) || wrmsr_safe(msr, val) == 0 )
+@@ -663,7 +658,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+          * OpenBSD 6.7 will panic if writing to DE_CFG triggers a #GP:
+          * https://www.illumos.org/issues/12998 - drop writes.
+          */
+-        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++        if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+             goto gp_fault;
+         break;
+ 
 -- 
 2.43.0
 
