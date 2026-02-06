@@ -4,30 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46285EE20B4
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 15:56:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223381.1530930 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF6AEE20B5
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:16:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223511.1530974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOC7-0000tw-99; Fri, 06 Feb 2026 15:56:31 +0000
+	id 1voOVB-0005y9-Lf; Fri, 06 Feb 2026 16:16:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223381.1530930; Fri, 06 Feb 2026 15:56:31 +0000
+Received: by outflank-mailman (output) from mailman id 1223511.1530974; Fri, 06 Feb 2026 16:16:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOC7-0000tD-3v; Fri, 06 Feb 2026 15:56:31 +0000
-Received: by outflank-mailman (input) for mailman id 1223381;
- Fri, 06 Feb 2026 15:56:30 +0000
+	id 1voOVB-0005y2-II; Fri, 06 Feb 2026 16:16:13 +0000
+Received: by outflank-mailman (input) for mailman id 1223511;
+ Fri, 06 Feb 2026 16:16:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) id 1voOC6-0000M4-5g
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 15:56:30 +0000
-Received: from na1pdmzitismtp01.tibco.com (na1pdmzitismtp01.tibco.com
- [160.101.131.8]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6582475d-0374-11f1-9ccf-f158ae23cfc8;
- Fri, 06 Feb 2026 16:56:28 +0100 (CET)
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id A444942B940E;
- Fri,  6 Feb 2026 10:56:16 -0500 (EST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=lgBG=AK=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1voOV9-0005HU-Pd
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:16:11 +0000
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c110::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 239fb4e2-0377-11f1-9ccf-f158ae23cfc8;
+ Fri, 06 Feb 2026 17:16:06 +0100 (CET)
+Received: from SA1PR04CA0005.namprd04.prod.outlook.com (2603:10b6:806:2ce::14)
+ by LV3PR12MB9093.namprd12.prod.outlook.com (2603:10b6:408:19d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.14; Fri, 6 Feb
+ 2026 16:16:02 +0000
+Received: from SN1PEPF00036F3E.namprd05.prod.outlook.com
+ (2603:10b6:806:2ce:cafe::34) by SA1PR04CA0005.outlook.office365.com
+ (2603:10b6:806:2ce::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
+ 6 Feb 2026 16:16:02 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SN1PEPF00036F3E.mail.protection.outlook.com (10.167.248.22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 16:16:01 +0000
+Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 6 Feb
+ 2026 10:16:00 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,214 +58,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6582475d-0374-11f1-9ccf-f158ae23cfc8
-From: Abdelkareem@tibco.com, Abdelsaamad@tibco.com,
-	abdelkareem.abdelsaamad@citrix.com
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH 3/3] svm/vnmi: Add support for the SVM Virtual NMI
-Date: Fri,  6 Feb 2026 15:53:17 +0000
-Message-ID: <51fb085801706c082de4061181381d6cb9449d77.1770389605.git.abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1770389605.git.abdelkareem.abdelsaamad@citrix.com>
-References: <cover.1770389605.git.abdelkareem.abdelsaamad@citrix.com>
+X-Inumbo-ID: 239fb4e2-0377-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aRxQ6yAe1818+J4I+sHXFyvZzfwUyY66oinUDS4T9DpKe2gkHtYXncbbaIuKX6F7kmbuyAtF4IdclZuUkwwJme36D0/KhM5FA6rWX5FQgDw7mpINWuK8NYAFmsI/3/P72gfDbXFgGJgzqoAEELduEyYbzG+XcYqOrbS3LwBylNNTdpvi1pfXFA+B5Vx0xM4R+qdNVuzVWVWqmtoSrromM+geD7oU2xKuoUzt+86SIk2C2kxCWJ+xfLGFMakaUgWD2Evn8DDtpQ4HzdlC19c2L+xmWxTxkxPPRa6a4Ne2zB8c4DkNeRl9ewnj86w8YRuUWsmSqWm3mWtMQm30E2Xaag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3XqRfkRYraueuo3h0D16mjrku9u0GK6eRvjfilF9NFM=;
+ b=ELk9Hu02OLTU6CxxZ+0kfq8vUHhPGEJHUd4p4UyI5oZ6k0+L/F8TtgDQy7UuNvZ70KrlE/41OExBqpA3D+bg9FNeeZu1AsjOFpRXBsgGT5fJTHPLlYv9Lodtu32d4LHqaujLpRaCcX6Q6hA/jUv+lZuLIokkupau7z9WjcSSQY66gE3pR+jqI3/I+3NkjYEM+aPlTY4ybvKbz0LzmqkLUAFHrYkPPAh1wYEglh7D1BHg1SG6eMeCIS2zf9mRiv9Q2usWiK59SpYeuUVq60HEJwGYwNCYqTGd4UmCrzRG8c1f7cPXzK8hY4mC5tRMuAEL7LJXfFvlYYUpOMCysbxsPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3XqRfkRYraueuo3h0D16mjrku9u0GK6eRvjfilF9NFM=;
+ b=zYJ/eu6LSpsz6bl43V+uQ+9hDGo9pTCiN9cOxquqm8ASrOH68yGVf2hNGEJTSH1ZKhct8ogetR9NpUv6ym5LJFE9QUqlPRpfUN5206qMcBsqhGH4W2FsahzxtGpgv6R84MiUfVlL1iR0ya0ZRp4dCoRegG8N+DuFSHyGHPIjqLM=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
+	<jason.andryuk@amd.com>
+Subject: [PATCH 03/12] x86: Add cpu_vendor() as a wrapper for the host's CPU vendor
+Date: Fri, 6 Feb 2026 17:15:25 +0100
+Message-ID: <20260206161539.209922-4-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
+References: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3E:EE_|LV3PR12MB9093:EE_
+X-MS-Office365-Filtering-Correlation-Id: 17db9e9f-2f58-4aae-6f9e-08de659b0583
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?18fERMQhuiiD/6WQBkxfyvj+1suLtedGR2BlGQcTn33+IUtevwEBQ501UM6e?=
+ =?us-ascii?Q?HoWdlaOJSonptG5yU4fuZizmgvguzhkmFAuZrRMchEY5I5+3eUgF3Xff2uXR?=
+ =?us-ascii?Q?+9y31dLoc+XNJrB9DuaUUIzogDT0E7hykk3c4mrqKRtoj6hHsLxhIYnDCE4O?=
+ =?us-ascii?Q?pMPPg1Uywx7iPgy5oTYdNXtqiu4SAe3tFVtIwknE31lykvoFjj3S/62vof15?=
+ =?us-ascii?Q?ZARhOebDCdCFwifYyCweHejnr8qyBCyUKoK9AHk2XfRQ5+szD1k7N7E+bAOJ?=
+ =?us-ascii?Q?Il/S0TQf3CcJPI3lYR4xeQ15fTn3rm1IKkXYxHrLPRksKYHiFJmQYB1PCDh5?=
+ =?us-ascii?Q?1SgyfhE2TR7SBdzhvzoJBGDK99Z6kc96LX5BhekWa61Zz+yJu2590+XC9jAb?=
+ =?us-ascii?Q?idOYNEVx4U7AUFJUFQYC25agYA/G8ZF+yWg5xwcZzZQw76MbII60XCG4aGMB?=
+ =?us-ascii?Q?Xi+mOjFr7ZEfDA+nnCQbCVqaf53MWLAsJXo4YlYVPUwcJB45pOcP//l9tVJ3?=
+ =?us-ascii?Q?utJEfLWa0x2wLYdR6Goc2UA+iv3F+R02ZAHcu1Y4S3KFAIqGMCK+OWqpwA98?=
+ =?us-ascii?Q?2NdBniD2HQixHtgC8R7NSPbtznDnYu2U507h66CVwHxtc/6ObV5g6oKTYhUD?=
+ =?us-ascii?Q?Ib3zZYXJmP8lWLUThqo++Z3+P+ycRWS36aoyqoGqlR3w471gQZJEvPgGrEkr?=
+ =?us-ascii?Q?GW/aTtE8NCPa8AJ2Ou2n4vwnJNe5V8dYSwkfnaky4wvQ0e0CIMUvWWhOGzXv?=
+ =?us-ascii?Q?ZEaCol4AYIuUOdikEZ3CLVYMZxO7Ljr9P/LXsx5xYMFFKXaLD4KJ8uhPgiC3?=
+ =?us-ascii?Q?JIPCJ5Ng7C7zmBzPRpyK7D7HrbKhIibaGjUWXw3lfTjmA7TfcJNjEzfVDXv2?=
+ =?us-ascii?Q?a9QL/2yxiMl0mOxBfBf7lpdbJWQEXLa0Dt86qUTyjNpeRx4q6czIJ9Nbw+n/?=
+ =?us-ascii?Q?8KFIXW+7JxdIAUY2Om+EMndT4VJPlsgzUHEx3PzWZDFL7TLdUAXv/8tvEJ/H?=
+ =?us-ascii?Q?tjm29CF5A0sksSqnEpcOIlgAfnr1iO1t9NZ/X9/0STbmCWqt5F/ppHg4iEVQ?=
+ =?us-ascii?Q?OuOC1rXB+mDR7GdJt63nO9xpoDqxvV2zJEKs88PcaxW0aDSmEN1FFnVbaFmL?=
+ =?us-ascii?Q?J0AJUppiadoWVKr6BbTfBONQ1+v4lN3/FUwE5Qt24WGBpg5tWsJnM9XEyhmm?=
+ =?us-ascii?Q?mWYNO4d4UFgKW1xElqmtwMPciR+HFzV4lCkHu6/uOd8YlCmGjKlbnfGN+8ks?=
+ =?us-ascii?Q?kNCMkg0OfpFkzePU3dItokoqzShGBm+SJis9PuHlVtnMX58Q0A4CcSIX6LiY?=
+ =?us-ascii?Q?HgV24BNJpj+Ip7dAFlk4E59iGkHpAevG9Bs9xVLfiyHQwRNRDEmfmG2B7XEh?=
+ =?us-ascii?Q?QsibPnJILilek5CU1tTTmLwVkVItoSevSzxjhzcRvrgP3GRGEPMjyXX6pxEh?=
+ =?us-ascii?Q?fEGlkvXGKdInUi5DhSoKepjIQAprRwxoiPF7su9g8wh2DjoWDUo7hVON9p8t?=
+ =?us-ascii?Q?KdOINbJ4TMUyfjEZwVhd+od+c+PMghvr/ZMjg55zhIIN9mf5X81ryJUfpWL6?=
+ =?us-ascii?Q?cmufzbg3bZmK9lVjGWbI2aav6zmN08J6KkwtyzYyJxaEj1xn3ktfoLz5flGP?=
+ =?us-ascii?Q?fLsRMZFN0lHE2+wQvvYR+Qds4A4cxDIk8Wfa2NgdmagY2HxqV71lSOE4yG5p?=
+ =?us-ascii?Q?kYqXOw=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	mZAyRuj5TFPP0OU1r5Y+bt0SyYxuwGmzx5X7vGzc0qfiXyaDPOdORLRyo87TI5fFviM0j5zxAyApYJUoUXbikSZfeVxpJie1Ykofrpbwk4N49jgEk4YGgpl/zhusZ0XZxXr6N2WWTPWtTrxMLutc2Mihy3Sv6n6yo5ejbj//h/pdNmS7DyOGeLKC19EbTY6/GEAPZHyGrmtBVvRxP3jkDeiTz/D3Ok9792sRi1Lg0HluqMqAU7B+9Oi5+KZaz5kv9Co0gzdVYrcQOHG8C7fL+9cjshIFav2NcVv3RITqk/WhyqzUBPR215uSYoP0lKqDmGEL6rr2iQmF3R19NF8pTzYPi5FwseCvm/6KnjgnfHFQKPfIDxNhC8CSNmsAKbOd65+mtNQ+3zsBLwW4LmYC4mFONzd8l4kDYpKYQvA//XYYgBbE71S6tq+CdOdUw2gt
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 16:16:01.9325
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 17db9e9f-2f58-4aae-6f9e-08de659b0583
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF00036F3E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9093
 
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Introduces various optimisations that rely on constant folding, Value
+Range Propagation (VRP), and Dead Code Elimination (DCE) to aggressively
+eliminate code surrounding the uses of the function.
 
-With vNMI, the pending NMI is simply stuffed into the VMCB and handed off
-to the hardware. This means that Xen needs to be able to set a vNMI pending
-on-demand, and also query if a vNMI is pending, e.g. to honor the "at most
-one NMI pending" rule and to preserve all NMIs across save and restore.
+  * For single-vendor+no-unknown-vendor builds returns a compile-time
+    constant.
+  * For all other cases it ANDs the result with the mask of compiled
+    vendors, with the effect of performing DCE in switch cases, removing
+    dead conditionals, etc.
 
-Introduce two new hvm_function_table callbacks to support the SVM's vNMI to
-allow the Xen hypervisor to query if a vNMI is pending and to set VMCB's
-_vintr pending flag so the NMIs are serviced by hardware if/when the virtual
-NMIs become unblocked.
+It's difficult to reason about codegen in general in a project this big,
+but in this case the ANDed constant combines with the values typically
+checked against, folding into a comparison against zero. Thus, it's better
+for codegen to AND its result with the desired compared-against vendor,
+rather than using (in)equality operators. That way the comparison is
+always against zero.
 
-Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+  "cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)"
+
+turns into (cpu_vendor() & X86_VENDOR_AMD) in AMD-only builds (AND +
+cmp with zero). Whereas this...
+
+  "cpu_vendor() == X86_VENDOR_AMD"
+
+forces cpu_vendor() to be ANDed and then compared to a non-zero value.
+
+Later patches take the opportunity and make this refactor as cpu_vendor()
+is introduced throughout the tree.
+
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
- xen/arch/x86/hvm/hvm.c             | 29 +++++++++++++++++++++--------
- xen/arch/x86/hvm/svm/intr.c        | 16 ++++++++++++++--
- xen/arch/x86/hvm/svm/svm.c         | 23 ++++++++++++++++++++++-
- xen/arch/x86/hvm/svm/vmcb.c        |  3 +++
- xen/arch/x86/include/asm/hvm/hvm.h |  8 ++++++++
- 5 files changed, 68 insertions(+), 11 deletions(-)
+ xen/arch/x86/cpu/common.c             |  6 +++++-
+ xen/arch/x86/guest/xen/xen.c          |  4 ++++
+ xen/arch/x86/include/asm/cpufeature.h | 27 +++++++++++++++++++++++++++
+ 3 files changed, 36 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4d37a93c57..3117ef8f2f 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3904,10 +3904,29 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index ebe2baf8b9..6f4e723172 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -328,7 +328,11 @@ void __init early_cpu_init(bool verbose)
+ 	*(u32 *)&c->x86_vendor_id[4] = edx;
+ 
+ 	c->x86_vendor = x86_cpuid_lookup_vendor(ebx, ecx, edx);
+-	switch (c->x86_vendor) {
++	if ( c->x86_vendor != cpu_vendor() )
++		panic("CPU vendor not compiled-in: %s",
++		      x86_cpuid_vendor_to_str(c->x86_vendor));
++
++	switch (cpu_vendor()) {
+ 	case X86_VENDOR_INTEL:    intel_unlock_cpuid_leaves(c);
+ 				  actual_cpu = intel_cpu_dev;    break;
+ 	case X86_VENDOR_AMD:      actual_cpu = amd_cpu_dev;      break;
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index 77a3a8742a..ec558bcbdb 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -57,6 +57,10 @@ void asmlinkage __init early_hypercall_setup(void)
+         cpuid(0, &eax, &ebx, &ecx, &edx);
+ 
+         boot_cpu_data.x86_vendor = x86_cpuid_lookup_vendor(ebx, ecx, edx);
++
++        if ( cpu_vendor() != boot_cpu_data.x86_vendor )
++            panic("CPU vendor not compiled-in: %s",
++                  x86_cpuid_vendor_to_str(boot_cpu_data.x86_vendor));
      }
- }
  
--enum hvm_intblk hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack)
-+static enum hvm_intblk hvm_nmi_blocked(struct vcpu *v)
- {
-     unsigned long intr_shadow;
- 
-+    if (hvm_funcs.caps.vNMI)
-+    {
-+        if (!hvm_funcs.is_vnmi_pending(v))
-+            return hvm_intblk_none;
-+
-+        return hvm_intblk_vnmi;
-+    }
-+
-+    intr_shadow = alternative_call(hvm_funcs.get_interrupt_shadow, v);
-+
-+    if ( intr_shadow & (HVM_INTR_SHADOW_STI|HVM_INTR_SHADOW_MOV_SS) )
-+        return hvm_intblk_shadow;
-+
-+    return ((intr_shadow & HVM_INTR_SHADOW_NMI) ?
-+            hvm_intblk_nmi_iret : hvm_intblk_none);
-+}
-+
-+enum hvm_intblk hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack)
-+{
-     ASSERT(v == current);
- 
-     if ( nestedhvm_enabled(v->domain) ) {
-@@ -3922,14 +3941,8 @@ enum hvm_intblk hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack)
-          !(guest_cpu_user_regs()->eflags & X86_EFLAGS_IF) )
-         return hvm_intblk_rflags_ie;
- 
--    intr_shadow = alternative_call(hvm_funcs.get_interrupt_shadow, v);
--
--    if ( intr_shadow & (HVM_INTR_SHADOW_STI|HVM_INTR_SHADOW_MOV_SS) )
--        return hvm_intblk_shadow;
--
-     if ( intack.source == hvm_intsrc_nmi )
--        return ((intr_shadow & HVM_INTR_SHADOW_NMI) ?
--                hvm_intblk_nmi_iret : hvm_intblk_none);
-+        return hvm_nmi_blocked(v);
- 
-     if ( intack.source == hvm_intsrc_lapic )
-     {
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 6453a46b85..c54298c402 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -29,10 +29,19 @@
- 
- static void svm_inject_nmi(struct vcpu *v)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
--    u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-+    struct vmcb_struct *vmcb;
-+    u32 general1_intercepts;
-     intinfo_t event;
- 
-+    if (hvm_funcs.caps.vNMI)
-+    {
-+        hvm_funcs.set_vnmi_pending(v);
-+        return;
-+    }
-+
-+    vmcb = v->arch.hvm.svm.vmcb;
-+    general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-+
-     event.raw = 0;
-     event.v = true;
-     event.type = X86_ET_NMI;
-@@ -176,6 +185,9 @@ void asmlinkage svm_intr_assist(void)
-             }
-         }
- 
-+        // vNMI is currently serviced in progress.
-+        if (unlikely(intblk == hvm_intblk_vnmi)) return;
-+
-         /*
-          * Pending IRQs must be delayed if:
-          * 1. An event is already pending. This is despite the fact that SVM
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index e451937b04..f67869353b 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -297,6 +297,26 @@ void svm_intercept_msr(struct vcpu *v, uint32_t msr, int flags)
-         __clear_bit(msr * 2 + 1, msr_bit);
- }
- 
-+static bool cf_check svm_is_vnmi_pending(struct vcpu *vcpu)
-+{
-+    if (!hvm_funcs.caps.vNMI)
-+        return false;
-+
-+    return (vcpu->arch.hvm.svm.vmcb->_vintr.fields.vnmi_blocking);
-+}
-+
-+static bool cf_check svm_set_vnmi_pending(struct vcpu *vcpu)
-+{
-+    if (!hvm_funcs.caps.vNMI)
-+        return false;
-+
-+    if (vcpu->arch.hvm.svm.vmcb->_vintr.fields.vnmi_pending)
-+        return false;
-+
-+    vcpu->arch.hvm.svm.vmcb->_vintr.fields.vnmi_pending = 1;
-+    return true;
-+}
-+
- #ifdef CONFIG_VM_EVENT
- static void cf_check svm_enable_msr_interception(struct domain *d, uint32_t msr)
- {
-@@ -2464,7 +2484,8 @@ static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
+     switch ( boot_cpu_data.x86_vendor )
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index dcd223d84f..10309e40b6 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -14,6 +14,7 @@
+ #include <asm/cpu-policy.h>
+ #include <asm/cpuid.h>
+ #include <xen/lib/x86/cpu-policy.h>
++#include <asm/x86-vendors.h>
+ #else
+ #include <asm/cpufeatureset.h>
  #endif
-     .set_rdtsc_exiting    = svm_set_rdtsc_exiting,
-     .get_insn_bytes       = svm_get_insn_bytes,
--
-+    .is_vnmi_pending = svm_is_vnmi_pending,
-+    .set_vnmi_pending = svm_set_vnmi_pending,
-     .nhvm_vcpu_initialise = nsvm_vcpu_initialise,
-     .nhvm_vcpu_destroy = nsvm_vcpu_destroy,
-     .nhvm_vcpu_reset = nsvm_vcpu_reset,
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index e583ef8548..5069789f6c 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -184,6 +184,9 @@ static int construct_vmcb(struct vcpu *v)
-     if ( default_xen_spec_ctrl == SPEC_CTRL_STIBP )
-         v->arch.msrs->spec_ctrl.raw = SPEC_CTRL_STIBP;
+@@ -116,6 +117,32 @@ static inline bool boot_cpu_has(unsigned int feat)
  
-+    if (hvm_funcs.caps.vNMI)
-+        vmcb->_vintr.fields.vnmi_enable = 1;
+ #define CPUID_PM_LEAF                                6
+ 
++#define X86_ENABLED_VENDORS \
++    ((IS_ENABLED(CONFIG_INTEL)    ? X86_VENDOR_INTEL    : 0) | \
++     (IS_ENABLED(CONFIG_AMD)      ? X86_VENDOR_AMD      : 0) | \
++     (IS_ENABLED(CONFIG_CENTAUR)  ? X86_VENDOR_CENTAUR  : 0) | \
++     (IS_ENABLED(CONFIG_SHANGHAI) ? X86_VENDOR_SHANGHAI : 0) | \
++     (IS_ENABLED(CONFIG_HYGON)    ? X86_VENDOR_HYGON    : 0))
 +
-     return 0;
- }
- 
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index ad17ea73e9..d7f439d41b 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -67,6 +67,7 @@ enum hvm_intblk {
-     hvm_intblk_rflags_ie, /* RFLAGS.IE == 0 */
-     hvm_intblk_tpr,       /* LAPIC TPR too high */
-     hvm_intblk_nmi_iret,  /* NMI blocked until IRET */
-+    hvm_intblk_vnmi,      /* vNMI is currently blocked*/
-     hvm_intblk_arch,      /* SVM/VMX specific reason */
- };
- 
-@@ -224,6 +225,13 @@ struct hvm_function_table {
-     int (*pi_update_irte)(const struct vcpu *v, const struct pirq *pirq,
-                           uint8_t gvec);
-     void (*update_vlapic_mode)(struct vcpu *v);
-+    /* Whether or not a virtual NMI is pending in hardware. */
-+    bool (*is_vnmi_pending)(struct vcpu *vcpu);
++static always_inline uint8_t cpu_vendor(void)
++{
++    uint8_t vendor = boot_cpu_data.vendor;
++
 +    /*
-+     * Attempt to pend a virtual NMI in harware.
-+     * Returns %true on success
++     * const-ify the CPU vendor if we compiled for a single vendor and there's
++     * no boot path for an unknown vendor.
 +     */
-+    bool (*set_vnmi_pending)(struct vcpu *vcpu);
- 
-     /*Walk nested p2m  */
-     int (*nhvm_hap_walk_L1_p2m)(struct vcpu *v, paddr_t L2_gpa,
++    if ( !IS_ENABLED(CONFIG_UNKNOWN_CPU_VENDOR) &&
++         (ISOLATE_LSB(X86_ENABLED_VENDORS) == X86_ENABLED_VENDORS) )
++        return X86_ENABLED_VENDORS;
++
++    /*
++     * This allows the compiler to know more in its VRP pass about the valid
++     * range of `vendor`. It enhances DCE by eliminating impossible vendors.
++     */
++    return vendor & X86_ENABLED_VENDORS;
++}
++
+ /* CPUID level 0x00000001.edx */
+ #define cpu_has_fpu             1
+ #define cpu_has_de              1
 -- 
-2.52.0
+2.43.0
 
 
