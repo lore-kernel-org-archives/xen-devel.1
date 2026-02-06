@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C560EE2084
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 12:05:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223163.1530768 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9AD4EE209E
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 12:58:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223189.1530778 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voKZu-00082q-7e; Fri, 06 Feb 2026 12:04:50 +0000
+	id 1voLPL-0006P6-Ub; Fri, 06 Feb 2026 12:57:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223163.1530768; Fri, 06 Feb 2026 12:04:50 +0000
+Received: by outflank-mailman (output) from mailman id 1223189.1530778; Fri, 06 Feb 2026 12:57:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voKZu-00082j-4Q; Fri, 06 Feb 2026 12:04:50 +0000
-Received: by outflank-mailman (input) for mailman id 1223163;
- Fri, 06 Feb 2026 12:04:48 +0000
+	id 1voLPL-0006Oy-S4; Fri, 06 Feb 2026 12:57:59 +0000
+Received: by outflank-mailman (input) for mailman id 1223189;
+ Fri, 06 Feb 2026 12:57:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=C95x=AK=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1voKZs-00082d-GT
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 12:04:48 +0000
-Received: from fout-b1-smtp.messagingengine.com
- (fout-b1-smtp.messagingengine.com [202.12.124.144])
+ <SRS0=RA+/=AK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1voLPK-0006Os-GW
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 12:57:58 +0000
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [2a00:1450:4864:20::62b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0537be4c-0354-11f1-b161-2bf370ae4941;
- Fri, 06 Feb 2026 13:04:43 +0100 (CET)
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.stl.internal (Postfix) with ESMTP id DF4411D0013D;
- Fri,  6 Feb 2026 07:04:41 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Fri, 06 Feb 2026 07:04:42 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 6 Feb 2026 07:04:39 -0500 (EST)
+ id 757dbe33-035b-11f1-b161-2bf370ae4941;
+ Fri, 06 Feb 2026 13:57:57 +0100 (CET)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8ea3d15580so87374466b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Feb 2026 04:57:57 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8edacb18d0sm79499466b.40.2026.02.06.04.57.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Feb 2026 04:57:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,128 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0537be4c-0354-11f1-b161-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1770379481;
-	 x=1770465881; bh=RpwilhNWGcU20VgC4fNtVXpo08Rs6aa7wHosmip5EVQ=; b=
-	XI7cDEnbaS4a910RPsaP63/uYfF16p07shE0ZjP6DuqyPNzB49pQ4Sr3Ql9ERa6X
-	03w2OMsVUaaN5UnWC9D3wG3j4aL78dr1ViUQOLlSOZn7bvuGEyC4Ot0OSdzr+gwm
-	aQDnZ8v6WVpxow04hqVYp0c8tL7eSj+FwL571desm2uKUnRomUwo5tGNig8KbKTa
-	likbhwTUElsaVQUPIw5/Z3KWcvP6q6qlcaQjseMe6id3TBvb6LQutIw9fhjJBJTu
-	u/5qNqXv/OGkv1TR12r6e9qEbICWADDdFbOZy6PXdbEcn5mDNdpdjCe17KsQXyPF
-	PKdASFHE323WH7RRAZ2pew==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1770379481; x=1770465881; bh=RpwilhNWGcU20VgC4fNtVXpo08Rs6aa7wHo
-	smip5EVQ=; b=l2hq+XDyXo4RDYa2tyFjUddxjcFVn3zQsOhNo2mQ/hxzyVjopfP
-	UykzOD/uqR3MoOMMg1N81JdRnfSOurTeVDEbAiF+qYrblTs2NZqb/TXQvmCVOyiy
-	MxuVMAAxnxRI8qtnnS7SSbWJnTgxHTZt6TGPpygmmk+VO/pwHGWzYp+lITYNrKKP
-	L62cbSMVDsSQvhSIMKVTjGig3+8bHUoZ8Qs9136m0jE80VhRSHE4QoQ2elCAOvRk
-	IWdGX2PG+PXJkD+twI3KhYVnRSmUwE5Lp4dD+YoSnkkpCd3nPrPn2TWwyfazJ5Uw
-	ItM4WLOX1Mgad3ejglRUWklpzwjQCwinTWQ==
-X-ME-Sender: <xms:2diFaeoXj69JmIBh8bn4Q5R6W0yIaj5SVDcd-HCCvDyHJDA2ajxs-A>
-    <xme:2diFaZNR7b7Rc4sI9YkQa4bQM5tnjexduwJH302-IrMtPZwDVAq_nxpMA0MdUj1Dl
-    4VZt1Qjm_EonE2xHm3sdiSd5Enggs2belbLbMJoXTyjEDlHbA>
-X-ME-Received: <xmr:2diFaXoGgKM3-ELfG2PA5fLARx7yQzeK5anpIZ7od3-a8uj2SmQWDGsBwIQTxqczLKYFOJcDTuT978F3wItajlDCqUfqwD5KfH8>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddukeekuddvucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfduleet
-    feevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluhhsth
-    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepuddtpd
-    hmohguvgepshhmthhpohhuthdprhgtphhtthhopehjsggvuhhlihgthhesshhushgvrdgt
-    ohhmpdhrtghpthhtohepthgvugguhidrrghsthhivgesvhgrthgvshdrthgvtghhpdhrtg
-    hpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphht
-    thhopegrnhhthhhonhihrdhpvghrrghrugesvhgrthgvshdrthgvtghhpdhrtghpthhtoh
-    epmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepjhhulhhivghn
-    seigvghnrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrdgtoh
-    hmpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghp
-    thhtohepughpshhmihhthhesrghpvghrthhushhsohhluhhtihhonhhsrdgtohhm
-X-ME-Proxy: <xmx:2diFaUtfQZjwR-ZhRBo-eh9bdvDbBYCgwqdUcHvXSGbxHhbpEZC4ew>
-    <xmx:2diFae3MtM7E6DTWTSRwJivMzbxVyvxHUWHsW1neZSkNQvissn0pNQ>
-    <xmx:2diFaXGmlrzt7_WqE6PZzfZmRCAjgCOTFXoqj0S4IBQ26-n_aqz40g>
-    <xmx:2diFaRvNmqfmF2VKuK3PQ9VYFPhlWFkhPQ-YhQJkannpfxs2F4ZegA>
-    <xmx:2diFaVTCNju2rwTdjXCqOrQJc6oGZrUzvhfC8moURRP9aczcFijuup9p>
-Feedback-ID: i1568416f:Fastmail
-Date: Fri, 6 Feb 2026 13:04:38 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] efi: Enable EFI_SET_VIRTUAL_ADDRESS_MAP by default
-Message-ID: <aYXY1iLWmoBzTb5M@mail-itl>
-References: <82dfede43d81c2072f90b01d12fe5ef18c80fc24.1770312308.git.teddy.astie@vates.tech>
- <be09e51c-5201-4837-9921-5ac0d8cae582@suse.com>
- <aYXV8o4LjGLQ0VaE@mail-itl>
+X-Inumbo-ID: 757dbe33-035b-11f1-b161-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770382677; x=1770987477; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=BBgIkJRx76QyS8sZ0e4NRUt9O0kSm6br4RWWPw5x1C8=;
+        b=iIeJtz5SuJeZhJ8lak7bgIEQ6Sc5fpoBTtT48HIL3LliSc3oimeBDm978mgkhELyGM
+         N4FDzLvgYoVWvzTaia10NN0HtpyZi09EI/VcevXd+LHNarf7dFUVzlccNsehy01v3gpQ
+         cQ3CJqL5YJipjvH+QaIQ44nJeEg7Q146Lpw4dDqAuZ+unZtF7X9YhvQGzuA+v3lAo1iX
+         eKOYc26z5mp8dyIzuV4ZVMrXzPHuVYPQnqhK5T/cDQjGuDajW9m7hc1HOGeCuR9bRVmX
+         ijF8KbixLmBT6oQ5i9R73xIFIQURTo3qD0ynBxDTVu77qTdWKAOnL2ZLriZUZyjpcmDB
+         +JNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770382677; x=1770987477;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BBgIkJRx76QyS8sZ0e4NRUt9O0kSm6br4RWWPw5x1C8=;
+        b=dMlymiLuT1YtJY7+Hb5DIrZlcFfPlq2dFlM0Txl4325y0JtJz6a1BBgmCIg9zjeWzo
+         lYhwKdYVvl986KqsBanlI8qH2EvG+Ux7CUfsN7FUAP6EzltJIjH5BTM0bMsHiyZQv8EU
+         su2iK8tLv05n9jzK+3C8evlLQNHdU+MIZaEFxSOj1P1R5Wl+C+5G7upQPoT78Ue5RITW
+         Zx/rkYpUbyt87x7EugVM6RJpxEiBEDh9bb+dFlO5O2AEx64qdsSpV4pwscmnPZbuYKWX
+         GpLp5/3KFEgwt4oCk/Ar7rudMxXSFCS46JY8hzDPIM40I5u6n9sdzeAfjM1INUfSFPFA
+         LC/w==
+X-Forwarded-Encrypted: i=1; AJvYcCWhHrUbj4gte/v/y4d1U9WZAtonTzE92dRjaMpDPD9k7wJ7UyaX4HU2lzuOAlxkpXhw5RPWy06BLKk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw3FHhdZcKzldIyRsJfunsSyWGjqsF3pGLDSabdLzY0eCb3Uel3
+	NDAVk9m3gAib2gbdV4o3ocpYC92V0D4Hx9YBXYU9aWoyStyX+BPZ+tuN
+X-Gm-Gg: AZuq6aInBDru+4uUIwSmsdNNS9z2D/Yq3pMvhkX9ci1EYUiDpqdZinxesGTXKhCWW+W
+	b6go+9Q/4ImoeiOuHzW3MM7FgIvpaNXnX3DbBlLe1hMVsQbCbPJGMZxQxBrW6FRUn2D0+6umseF
+	F+z78y7i4M78EuhLRFnKcI4BfBVlPi1q0cPyql/xInn09e1r6o+IWV1SFXkqyGrcvSmtVdT5yHy
+	tMyYbThp2igvfPYJ6M5pIewihhO5xTe8/SCMJvwozA6irla6CFc4iKBj2zmHgX7U/RqJxetp3xS
+	q/cv+Wbz7aJRm18vkAsCQVH0LLHRkdd+eOR0Kzj6x2oXYn0PwMgeqjRJZipvhG7aoRkjR760ySf
+	VockPh3TBA6KbZZDIrzkuVejTZtkzLurUwthqgoa8EFUfGMSx0NbmSJ2X4XBix8mduJtz6iBG1l
+	GctuAokKtgc4Svlk4IUw1uWFiEsXZEi5XcRwnZHwmBercQFODzjis5iin4FAmDIRg=
+X-Received: by 2002:a17:907:a05:b0:b87:756b:cfab with SMTP id a640c23a62f3a-b8edf2faa52mr155963466b.36.1770382676601;
+        Fri, 06 Feb 2026 04:57:56 -0800 (PST)
+Message-ID: <1beb7c04-5c21-4ba2-a74e-467f659224e5@gmail.com>
+Date: Fri, 6 Feb 2026 13:57:55 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="6fIOSKi6fkyCQFPu"
-Content-Disposition: inline
-In-Reply-To: <aYXV8o4LjGLQ0VaE@mail-itl>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sched: move vCPU exec state barriers
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>, Juergen Gross <jgross@suse.com>,
+ Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>
+References: <1e2df446-b116-4861-a396-b87895a96c67@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1e2df446-b116-4861-a396-b87895a96c67@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
---6fIOSKi6fkyCQFPu
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 6 Feb 2026 13:04:38 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] efi: Enable EFI_SET_VIRTUAL_ADDRESS_MAP by default
+On 2/5/26 12:33 PM, Jan Beulich wrote:
+> The barrier in vcpu_context_saved() is specifically about the clearing of
+> ->is_running. It isn't needed when we don't clear the flag.
+>
+> Furthermore, one side of the barrier being in common code, the other would
+> better be, too. This way, all architectures are covered (beyond any
+> specific needs they may have).
 
-On Fri, Feb 06, 2026 at 12:52:18PM +0100, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> On Fri, Feb 06, 2026 at 07:29:49AM +0100, Jan Beulich wrote:
-> > I further wonder whether the EXPERT dependency of the prompt wouldn't
-> > better be dropped when flipping the default.
->=20
-> IMO the EXPERT dependency is still relevant. This option is basically
-> "break Xen on a large number of UEFI systems".
+Don't we want then move ...
 
-To be clear: I mean disabling the option (changing the new default)
-should be IMHO hidden behind EXPERT.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>
+> --- a/xen/arch/arm/domain.c
+> +++ b/xen/arch/arm/domain.c
+> @@ -333,17 +333,7 @@ void sync_local_execstate(void)
+>   
+>   void sync_vcpu_execstate(struct vcpu *v)
+>   {
+> -    /*
+> -     * We don't support lazy switching.
+> -     *
+> -     * However the context may have been saved from a remote pCPU so we
+> -     * need a barrier to ensure it is observed before continuing.
+> -     *
+> -     * Per vcpu_context_saved(), the context can be observed when
+> -     * v->is_running is false (the caller should check it before calling
+> -     * this function).
+> -     */
+> -    smp_rmb();
+> +    /* Nothing to do -- no lazy switching */
+>   }
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+... to common code with ability to re-define sync_vcpu_execstate() by arch
+as only x86 does something inside this function?
 
---6fIOSKi6fkyCQFPu
-Content-Type: application/pgp-signature; name=signature.asc
+~ Oleksii
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmmF2NYACgkQ24/THMrX
-1yytngf/edaIsV+0DngPXnzmL9xsuPT3k0V7h4WSgth5ouF4gv02DFYC3p3FhLoU
-yqEACmeQ8D11URuS5Lyol4V2sztydtiIYbxNjr1/J/MQOocD4NMEWQziYljbdlNT
-nH+POiDeIfGXNiUKq+Jk8Vc6Lb0Glwumq5DbAjcQnIY9CgVEPgkXVZjY74kfzEQd
-vRSwhjStcPnnrNAqjtyeCHCD79qQf5ryE510oidv0pyQs4afh5pAr9W75JRwzwtB
-ztuVpvxZUiyXDmFdTtHWTYnvjh30/3uNDZMti85bdYEtNc5JUccxi6Z1olows3YQ
-LsiBiUb6UybCn+vMXSA3rKawFdZamA==
-=1uHT
------END PGP SIGNATURE-----
-
---6fIOSKi6fkyCQFPu--
 
