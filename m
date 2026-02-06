@@ -4,63 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49BD8EE6B4D
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 20:25:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223853.1531250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07F02EE6B60
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 20:52:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223929.1531284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voSNn-0000Nv-4a; Fri, 06 Feb 2026 20:24:51 +0000
+	id 1voSoX-0008N0-6C; Fri, 06 Feb 2026 20:52:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223853.1531250; Fri, 06 Feb 2026 20:24:51 +0000
+Received: by outflank-mailman (output) from mailman id 1223929.1531284; Fri, 06 Feb 2026 20:52:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voSNm-0000Mr-UN; Fri, 06 Feb 2026 20:24:50 +0000
-Received: by outflank-mailman (input) for mailman id 1223853;
- Fri, 06 Feb 2026 20:24:48 +0000
+	id 1voSoX-0008Mt-3X; Fri, 06 Feb 2026 20:52:29 +0000
+Received: by outflank-mailman (input) for mailman id 1223929;
+ Fri, 06 Feb 2026 20:52:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=FjYH=AK=ford.com=dmukhin@srs-se1.protection.inumbo.net>)
- id 1voSNk-0007sX-Fa
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 20:24:48 +0000
-Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
- [148.163.146.23]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e0382352-0399-11f1-b161-2bf370ae4941;
- Fri, 06 Feb 2026 21:24:46 +0100 (CET)
-Received: from pps.filterd (m0482516.ppops.net [127.0.0.1])
- by m0482516.ppops.net (8.18.1.2/8.18.1.2) with ESMTP id 616IONkg008154
- for <xen-devel@lists.xenproject.org>; Fri, 6 Feb 2026 12:24:44 -0800
-Received: from sn4pr2101cu001.outbound.protection.outlook.com
- (mail-southcentralusazon11012024.outbound.protection.outlook.com
- [40.93.195.24])
- by m0482516.ppops.net (PPS) with ESMTPS id 4c4v83dr0n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Fri, 06 Feb 2026 12:24:44 -0800 (PST)
-Received: from CH0PR04CA0113.namprd04.prod.outlook.com (2603:10b6:610:75::28)
- by SA1PR16MB7004.namprd16.prod.outlook.com (2603:10b6:806:4b3::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.14; Fri, 6 Feb
- 2026 20:24:40 +0000
-Received: from CH2PEPF0000013C.namprd02.prod.outlook.com
- (2603:10b6:610:75:cafe::19) by CH0PR04CA0113.outlook.office365.com
- (2603:10b6:610:75::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.15 via Frontend Transport; Fri,
- 6 Feb 2026 20:24:36 +0000
-Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- CH2PEPF0000013C.mail.protection.outlook.com (10.167.244.73) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.10
- via Frontend Transport; Fri, 6 Feb 2026 20:24:39 +0000
-Received: from pps.filterd (m0426317.ppops.net [127.0.0.1])
- by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 616HcMQ53490164
- for <xen-devel@lists.xenproject.org>; Fri, 6 Feb 2026 15:24:38 -0500
-Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
- [34.209.42.160])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4c21pupgxw-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Fri, 06 Feb 2026 15:24:38 -0500 (EST)
-Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
- id oSNYvS87kFVH0oSNYvli5r; Fri, 06 Feb 2026 20:24:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LUBK=AK=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1voSoV-0008Hz-ID
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 20:52:27 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bd7845b0-039d-11f1-b161-2bf370ae4941;
+ Fri, 06 Feb 2026 21:52:26 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 245A643910;
+ Fri,  6 Feb 2026 20:52:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13D8BC116C6;
+ Fri,  6 Feb 2026 20:52:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -72,259 +43,460 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0382352-0399-11f1-b161-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppford; bh=iG5
-	bdruXvwjOkGeq9u+92H+E2bXW726qNCD/5wDXq9c=; b=WXB38UuqsV6dh4sruYz
-	LqzBDLspW+0WZhSABHEOywPNC/AVVwP8QuLKxGYvKezYLbMbZVPwCh43rhNgkeUM
-	AQpcKKLUiuQ9WKFWl3w3rKbjwKPUQUMvJ1JU20LtG3+H3ZzhoqlrSGegrrd+VVoN
-	MicrPZwYetBtn/vRZSnded+B36Wv5AFMOQFaImx3AuAATt2E00lFJ6vSs4kRL8GL
-	Gk7ShWfDWUnxagJpBjix+/Uxj7jIVUSxoV0NntTu0zFnYWzr70He3vERpUJuxgJZ
-	uVX+D82ZowTmVGZ/D+k1H0riOLhBZiHnmCx5bzE+Hsu8wNzuRuZn/yGPBffBibqS
-	ogA==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=elbmEeoOEO7Tn+r7I2VAPJx/h4Qx9oANUnyNbVYq131zY/RFOCwMxFYNlaeNCXS7kptxb2LJWfmlCCqfndWso9s8kZIzD924vG3wOz1M7DwY9iNzS/a/IHeZSBdNgRvQETtnoAFNwroA5iAFD9bc+LWmPOzyCDPDs8BOavwo7CNqqR3umo4xyQYHZiQ8RBkeSs3pJmcjcJwISNiixCEqgHrRqIEC0L4uEjG//WAE+Y5r11FprCIdGb4T6NxEarMJQh/J+5Klz16SMNVmQQoaSMd3SBmue6TDihtgswvz2rIYCTxpXlknmFUByGL++SYN45D6HiwNo2cvwAtGqGkIDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iG5bdruXvwjOkGeq9u+92H+E2bXW726qNCD/5wDXq9c=;
- b=HMODNjtLbZ2AUyWb91UJLBz/bxKxgwscLQnvR06G7dkI5u7ULQ7/GRAxyyXaIxtgfj2x198Bxa8D2m0OgD3RBUV5y3gwpk90aYwGhYTIs7MzsxK2EG+fN9G4oUVms43jKZyxEAXmI4hB8Cc3JMmGEI4fomTiCeYrEJrEcYAHTNurMNhDj1VWWK8tzOxsYyjI/E2M3T+4Em71MLZb+YEyMhKL0p9/Q6DDAJ55YY4LRBowFh/pLuwiLZ16kluSuGJlW2pNxE8+7Nthvk4svTZecFizn9LUFMGDVgFS4isE+XFzoehES7xMYn4kVn4R1XlY2VEhGVOUP5HYPvdO8zPjOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com; dkim=pass (signature was verified)
- header.d=ford.com; arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iG5bdruXvwjOkGeq9u+92H+E2bXW726qNCD/5wDXq9c=;
- b=GdvxsNCrKQcNqh13MuLB1hmHUYYODtpmVHMHuhumvK4oR0sVFpHIHfESfIf0TWxBcbQN8KKBCikZ+Wxqu2xEhI6oyxQ7RxvEtWE1CuznoXWtqNEp9C3kCMdBAQlCiqYN0TGHY3ZwZUZFwwf6g5ILvp0LTWeCQFV8jw86ZH94BmI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
- smtp.mailfrom=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com;dkim=pass (signature was verified)
- header.d=ford.com;dmarc=pass action=none header.from=ford.com;
-Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
- client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	ppserprodsaar; bh=iG5bdruXvwjOkGeq9u+92H+E2bXW726qNCD/5wDXq9c=; b=
-	oxHt6FogF7g2sC7QjSDnyinOERA3m4iub1UKsOpNaRUrKQl9qwW4vbohj6GJZ7WI
-	i3n3PXPeZB5blvUgDkkkzO/UaolRD3Azlxzh2C7hwl2PdvVFUXLhpPu1PpO0JwJA
-	QlEf3cl3vpCdQ+dT5njcisqNtR6qqG+Xd6J67I0rRYId7JG9pILrWTC6hFySApKy
-	EGdcIOc1Oiqb+aT8JGlAd6HHNd3sL4MXkrkHaMnx4IL2Za198sn6M85GfjrhJfXb
-	dzsSAA7ku9pR6OgxAQAkmpu6cooHF8r1H5Y1bZHTFmwnujMwQ3ksibS9FD+JtZqz
-	txg3IQvEqu3JMNTMwLha3Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=ppfserpocford; bh=iG5bdru
-	XvwjOkGeq9u+92H+E2bXW726qNCD/5wDXq9c=; b=TSi5W+jEESQF/Kk9YhMwNoe
-	ENzCGqIiYX32gI04tqyQyYtVkkggnWCOI18dhuZdm7pJj4jauJuegeIP9fqGYbkr
-	jkWhyQz/t8NygDPFO1qTDy0iWKKY2q/gaoOGxpAzbMtDbxhAjSyR0jB1fpkp4O8m
-	e8InB6Mo9w6iaxnkbQdYd0lrUeVJJ02/TmC3RpEfSWDbFqV4edHy6AboR8DoXBKO
-	MY7cAm0CgT6vy9r8TH2B7Os5t3EMojRlGcrmD79OZj7CJI+WuvkvP+3eXcaMrG2I
-	vAG+YDjLnucL89YLiMLvWJgZi9NWga5ML9Uz5JCJhS20Ry1ZRkHVAdmOx2tjJjQ=
-	=
-X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: oSNYvS87kFVH0oSNYvli5r
-X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
-From: dmukhin@ford.com
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
-        julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
-        sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v2 4/7] xen/console: add run-time rate-limiting controls
-Date: Fri,  6 Feb 2026 12:24:21 -0800
-Message-ID: <20260206202424.2054758-5-dmukhin@ford.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260206202424.2054758-1-dmukhin@ford.com>
-References: <20260206202424.2054758-1-dmukhin@ford.com>
+X-Inumbo-ID: bd7845b0-039d-11f1-b161-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770411144;
+	bh=uo8ze5SVM4HHEzRgguecAUZD/G9nCX+zUnK5PcRTjZs=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=tBhc9u81VkaMbZnuFknF8cq09oEyuF9T2+lkaOpUdsd5QLojBXtqmf4FcEnLRRkbv
+	 szGJaYptOpCYeo0/rkrPjAMjN8N01Qs18rrU5sCKbg16JVjtkyi32hROfjK4suE+tL
+	 17SvfOlEnvoKS0LUXQVk84MnOC2NJQruWk4M7yRhjY0J+wzHytE7yosHSbDbDPhPpg
+	 q70f95fnjjF4OC+xb+PZQPt23xEq0W0zUDwugN2qLRxRn143NYv1YIySn9Lx6KWy/E
+	 s9vfQ7+u+Rr/Xy2JPppRy3smg8gSF9sv2Hrk2oqCVLULT6my5gG6eeKtLOSQSGiYgU
+	 0Vkh8xWSjGudg==
+Date: Fri, 6 Feb 2026 12:52:19 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+cc: Stefano Stabellini <stefano.stabellini@amd.com>, 
+    xen-devel@lists.xenproject.org, jbeulich@suse.com, 
+    andrew.cooper3@citrix.com, jason.andryuk@amd.com, 
+    alejandro.garciavallejo@amd.com
+Subject: Re: [PATCH] x86/hvm: Add Kconfig option to disable nested
+ virtualization
+In-Reply-To: <aYWjB-fxIzdk0K6_@Mac.lan>
+Message-ID: <alpine.DEB.2.22.394.2602061250560.3668128@ubuntu-linux-20-04-desktop>
+References: <20260206015032.4159672-1-stefano.stabellini@amd.com> <aYWjB-fxIzdk0K6_@Mac.lan>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-PSER-M365-App: SER-APP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-06_05,2026-02-05_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- bulkscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
- definitions=main-2602060151
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000013C:EE_|SA1PR16MB7004:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e0a38e86-d5e5-4257-c1d5-08de65bdc11a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?dOnV3vQS8yXHP7nbUF//OJXzKcHDDDA38rCbML5OC0RL1YuDFGv7DhlYaUjJ?=
- =?us-ascii?Q?XNCQcUdBQGCEsBtcXsDgBKycB6T6Ik+cb5Mdg5FCbVCXsuSiB3pZ5IsgAKeV?=
- =?us-ascii?Q?4+hMcydm1DksFgA9XxLMqN46RJV5k233V4LAc6X8bNqcaLjCB9pEsYoJETT2?=
- =?us-ascii?Q?kPc3O3yJ83ByIi2k4heyARFCMNWzhBBRP/HpCajbTkX52dcvSF/9ZzvbQSvr?=
- =?us-ascii?Q?qH0pgGy0J4Z3i5EGF8JT0Qps51sLbZhh4Sh5+f/YH4dz4ZOIHCpb3UwoKVHG?=
- =?us-ascii?Q?scXXbK2qkurMqBIpameVCFV3r6MIhK5IUnZyQyV+VA93UgHx1pnpSfWpFYf4?=
- =?us-ascii?Q?CXnuWeVRgHe1Lz5q87BSGP7JPmmnd9KxFWz+uS/BcQUe2L8+klPcuO5VyuP5?=
- =?us-ascii?Q?g3iPqHusSkDD2A5JKymfP/YCWdxHGtCmNMZfio+vdkgFyrMKtGFopvBU1UAz?=
- =?us-ascii?Q?ISMzDJU3EvlDZNLPUwts09BjyrWEcT/2MsYZctjzBwUj6wqoBQVTUQUdfrUl?=
- =?us-ascii?Q?QhP+QjQL5zyEf43LNh/19RvbYCUnWDZERUEOtVFzQC5CfX4+V4qlwzVxlLfu?=
- =?us-ascii?Q?iTYwRGq753Y6ED6cr/r0oMd1WdTpMV0xMHa8NkHQPDRoXvr2ocpfqJ45Zvw9?=
- =?us-ascii?Q?dhIZdpez1hciTQ/v13ef38Jm6By/Ul6l8V/J7X0qLpE7bAz1upJJIMxal+/P?=
- =?us-ascii?Q?wjJObI2HK+V9cwuURpu3zVJWr56XuiLMyutTn3Q6h3OsXN67sFJiR55p6M6i?=
- =?us-ascii?Q?rQlrc+I9+HmsyYBw/scDVaELwaIjb8MJ3mkZcZlmLcjeo3r5W7TzJ8E6Hxky?=
- =?us-ascii?Q?3scTg9GLaBQ8B6TLMQcFtM8XTm4lLrJD5mGbNV83LAtEWdDcFnBQE5Qwt9g4?=
- =?us-ascii?Q?LVYCyz+LdIQcG1lQYHyJJemI2zyhevcx9hPxW+Q9gSLZ96aFJpnCyH6MAPVS?=
- =?us-ascii?Q?acZgF+H7LHM/anEuSTvUU44u//vVgYHkJ7C5JvWbkY7RDe0IwYjTv36D3DU3?=
- =?us-ascii?Q?KNvUO/4OEadXlCfxs99LT5h7T1o57If991eUERQXigtHrR4pApxFbI+a6ZLQ?=
- =?us-ascii?Q?LnOY5EhmMjGoAwIRowITExKpGuyaaSK7kDwq0bqhvnwKfDl546WrTdx5D8Nk?=
- =?us-ascii?Q?UUNElBX14FHiVsVGczfxmjojS/bhB6RcuCNY68jLiX5Kb+BxqjgoysPckXoo?=
- =?us-ascii?Q?UlNPfkgysli3hJk0xUmO1JQTv6TBkWEhUilbmMhhKdeiorE/sp7hqfSXZaDK?=
- =?us-ascii?Q?z+trJIM61/cJ0cOhAe38gMEgckGbiflrr1ze0NGyOeElYOGtvs5qszxV2r/G?=
- =?us-ascii?Q?H6rEvYrT2bhuIF4hFOLBNYC0uYx9eEw3BMMfpo75vS+2GgISGCDPAHNXbItw?=
- =?us-ascii?Q?BWDAMDTyPHVoXWvqVa7ThHypLa8AQPjcrzjZ2Xwir/guCsEMoIUUN5ZT0/Ds?=
- =?us-ascii?Q?xnsKz8M11Is9eGtZstDZVKsKgHerfTuLuusMwCo1XHCELsI1lOX0kng5BjHE?=
- =?us-ascii?Q?/n2eGKvsGtckhTRAdznsGT7ThsOSED762s5ZjCpB35xb4z/GENqLMkOXS61a?=
- =?us-ascii?Q?lAfcjFbyFUJkaGVwJdVTvqed2JjHEjonrkttwFqiM0U3Jirmf4DQ4GmweIhc?=
- =?us-ascii?Q?AK1HQGF/fEvyhD1QIPiWnlzhAXigFFzY0hKYM9EYGxz898xWBKv1p+BIMCkb?=
- =?us-ascii?Q?bFwffA=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	lx4rEcX+KnEvOnRmLK1+jEy3PVqzvL1Zfnhr2EOxNEObftZTAFKxBkriIFZQkeNKFHQP6RUuvDxo9qCQWEGuIthDNKYHgzaBme/F98/RaFBsxD1N75mD2SZUsdQl0lJ+r7vfqPey5kEtPUTIIttbmd3xXcxPzK92pHcyC1ayjcESqQfPBdFXQDaLRuK5K+Gb3TGKwAwS7fs7NUqLBRefSpfktacfvIAvv5a1bjSHt4Cx9ECpGNnpNO9V+muYqPGBVX/ofa7Q1bdSHQalco11mwYySjKpOY4wxFU3wOjS4yvLVtmeKWlVR8UfiEKC17RPX1+8GCBRDFz2k8jDSPlURrbacnyIdEb1vUBcQHYB1lqsgU2GFKAnOUoNS9N6COanbThWqMlFjw/xZXymlrDx3U0DKCSAp7Xsw2LDN3NRgp29U9slwk+AzyYIpQXsbd12
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	dydQMUVoRL0+R3PaFTo92m8hrV/xAwaGlv2brqmcwjaU2E90/th1wsuOZYgdl+1p6fQiouBpiT33XeyRwPM0XIpC+d3ZIkmSdmIP59HNgoo3/1E5PcDqHnV8M01EZV2Tj/LiBfIE2Q4yaZZxbaCXgzZViwnyUOtPExSW+CUAaGYDtY362Y9Mxeowaa25TuzasTdbV+zNFs6TUCd+EwIFCXw2MNPw54AZLh4blyCSQXyeXJif17HCBuhckiN49ekzPTsf4NHhK+AfpTAOOsVKWrCFF6KbP6mhoN15yaoASYhHWtajPuZ/SCJb5A1ovtkNZzyI9WspDZ1V0EcdahWexcWslSUHz0/rLl/lUTDpo4vmnwQjnG/8RXoiMJXKPe6ooAGOxuq59IiwCa+OSSOaeFkjk/pXl+rjjgfEh1yo815xGM1TUX/FzRQWrwwJLBc0ADHI/Et0yQ6F6g0TYhTK0bKdA7khIgvMrcrV8WLZ9Lw634HDr0Zu01us5huvwyowcYNPhutwdv6/wGu/iCxawkkUGlLETYl1qYer05Zid9UHrnopeAn/Ya2s68+uWxyC89BqNxNPnlko9HJkm5x3ffov84R3fIjt4mM7RF1cEzvZVHrtSso/XQljfjiZIHIk
-X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 20:24:39.3855
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0a38e86-d5e5-4257-c1d5-08de65bdc11a
-X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF0000013C.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR16MB7004
-X-Proofpoint-ORIG-GUID: SgaySis_AniU5FKlz2K0c3uzrqCe1G7o
-X-Proofpoint-GUID: SgaySis_AniU5FKlz2K0c3uzrqCe1G7o
-X-Authority-Analysis: v=2.4 cv=IqwTsb/g c=1 sm=1 tr=0 ts=69864e0c cx=c_pps a=j0vpRZT92jK8pnwqK8unXQ==:117 a=lOEMawUel/sSvQipkIvNbg==:17 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=HzLeVaNsDn8A:10 a=3PXLN80vpJUA:10 a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=cbNQJ9GKAAAA:8 a=-8YlOinzr_Rz_bKtHYAA:9 a=P0bj-C3X3jJDpopQwM1U:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjA2MDE1MSBTYWx0ZWRfX6WjdqgUyTRNV xKYqNUtI28ZausfeqZkCBGdtKAqaVLZKjjol3fhJxAMRnu8xEkCqw9Ghd8g0NWzmSpyBRE8xH26 1D+86CUffm1X+pIWagIVsI8Te5sYvgO3vsZy0t6q5Apm2kl1OFwTlZsGkjOEHTt03YmNV16Gzt9
- UMQyUYzTn1fl12GKiXbt+uhIrfxr2Yny2GdvoXa3fwNXpRR5bSXfLvMqza3MwdLlTVEov2vya8i 3f6WXSE/vPqXI5N7QusG3k3u+MdPFQd2h+L3DkPKffIV+4tIb2d8ATFvvkvJDpzVA23HJM6d3Aa 0ieJg92qr8GZWYMah8C15M10gTJX7cZXXVgBv0lueMitGYd2OoAVdfJMpF0rbe9uh276Q2dH+Nk
- qrMtiZ30BQpJFpqjMTVrer8ff07zdcpLNq4OAnBIIkVcsS20hMs9dHPWi4GXUMLQ+xoGhi+dlpo TT1RfKS6MYIJxLLvKGw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-06_05,2026-02-05_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 spamscore=0 phishscore=0
- clxscore=1015 bulkscore=0 adultscore=0 impostorscore=0 malwarescore=0
- lowpriorityscore=0 priorityscore=1501 classifier=typeunknown authscore=0
- authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2601150000 definitions=main-2602060151
+Content-Type: multipart/mixed; BOUNDARY="8323329-1050394070-1770411124=:3668128"
+Content-ID: <alpine.DEB.2.22.394.2602061252160.3668128@ubuntu-linux-20-04-desktop>
 
-From: Denis Mukhin <dmukhin@ford.com> 
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Add new "printk_ratelimit_ms" and "printk_ratelimit_burst" command line
-parameters for global rate-limiting controls.
+--8323329-1050394070-1770411124=:3668128
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.22.394.2602061252161.3668128@ubuntu-linux-20-04-desktop>
 
-Drop `const` and add `__read_mostly` for both global parameters
-printk_ratelimit_{ms,burst}.
+On Fri, 5 Feb 2026, Roger Pau Monné wrote:
+> On Thu, Feb 05, 2026 at 05:50:32PM -0800, Stefano Stabellini wrote:
+> > Introduce CONFIG_NESTED_VIRT (default y, requires EXPERT to disable)
+> > to allow nested virtualization support to be disabled at build time.
+> > This is useful for embedded or safety-focused deployments where
+> > nested virtualization is not needed, reducing code size and attack
+> > surface.
+> > 
+> > When CONFIG_NESTED_VIRT=n, the following source files are excluded:
+> > - arch/x86/hvm/nestedhvm.c
+> > - arch/x86/hvm/svm/nestedsvm.c
+> > - arch/x86/hvm/vmx/vvmx.c
+> > - arch/x86/mm/nested.c
+> > - arch/x86/mm/hap/nested_hap.c
+> > - arch/x86/mm/hap/nested_ept.c
+> > 
+> > Add inline stubs where needed in headers.
+> > 
+> > No functional change when CONFIG_NESTED_VIRT=y.
+> 
+> You also need to adjust arch_sanitise_domain_config() so it refuses to
+> create domains with the XEN_DOMCTL_CDF_nested_virt flag set when
+> CONFIG_NESTED_VIRT=n. 
 
-Update command line documentation.
+Sounds good
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
-Changes since v1:
-- new patch
----
- docs/misc/xen-command-line.pandoc | 27 +++++++++++++++++++++++++++
- xen/drivers/char/console.c        | 22 ++++++++++++++--------
- 2 files changed, 41 insertions(+), 8 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index c1f2def9f99c..5505644d1c0f 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -2077,6 +2077,33 @@ compression is selected at build time from Kconfig.
- This is a mask of C-states which are to be used preferably.  This option is
- applicable only on hardware were certain C-states are exclusive of one another.
- 
-+### printk_ratelimit_ms
-+> `= <integer>`
-+
-+> Default: `CONFIG_PRINTK_RATELIMIT_MS`
-+
-+Specifies the time window, in milliseconds, for rate-limited printk messages.
-+No more than `CONFIG_PRINTK_RATELIMIT_BURST` messages will be printed within
-+this window.
-+
-+Setting this value to 0 disables rate-limiting entirely.
-+
-+Rate-limited messages are those controlled by the `loglvl` and `guest_loglvl`
-+command-line parameters.
-+
-+### printk_ratelimit_burst
-+> `= <integer>`
-+
-+> Default: `CONFIG_PRINTK_RATELIMIT_BURST`
-+
-+Defines the maximum number of rate-limited printk messages that may be printed
-+within each `CONFIG_PRINTK_RATELIMIT_MS` time window.
-+
-+Setting this value to 0 disables rate-limiting entirely.
-+
-+Rate-limited messages are those controlled by the `loglvl` and `guest_loglvl`
-+command-line parameters.
-+
- ### probe-port-aliases (x86)
- > `= <boolean>`
- 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index ec87ecb3e5a0..f607e8f84d7a 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -344,6 +344,20 @@ static void cf_check do_dec_thresh(unsigned char key, bool unused)
-     do_adj_thresh(key);
- }
- 
-+/*
-+ * Global rate-limiting controls for printk().
-+ */
-+
-+/* Minimum time in ms between messages */
-+static unsigned int __read_mostly printk_ratelimit_ms =
-+    CONFIG_PRINTK_RATELIMIT_MS;
-+integer_param("printk_ratelimit_ms", printk_ratelimit_ms);
-+
-+/* Number of messages we send before ratelimiting */
-+static unsigned int __read_mostly printk_ratelimit_burst =
-+    CONFIG_PRINTK_RATELIMIT_BURST;
-+integer_param("printk_ratelimit_burst", printk_ratelimit_burst);
-+
- /*
-  * ********************************************************
-  * *************** ACCESS TO CONSOLE RING *****************
-@@ -1320,14 +1334,6 @@ static bool do_printk_ratelimit(unsigned int ratelimit_ms,
-     return false;
- }
- 
--/* Minimum time in ms between messages */
--static const unsigned int printk_ratelimit_ms =
--    CONFIG_PRINTK_RATELIMIT_MS;
--
--/* Number of messages we send before ratelimiting */
--static const unsigned int printk_ratelimit_burst =
--    CONFIG_PRINTK_RATELIMIT_BURST;
--
- bool printk_ratelimit(void)
- {
-     return do_printk_ratelimit(printk_ratelimit_ms, printk_ratelimit_burst);
--- 
-2.52.0
+> If you do that I think a bunch of the dummy
+> helpers that you add when CONFIG_NESTED_VIRT=n should also gain an
+> ASSERT_UNREACHABLE().
 
+OK
+
+
+> And IMO you will also need to add a new XEN_SYSCTL_PHYSCAP_nestedhvm
+> (or alike) to signal the toolstack whether the nested HVM feature is
+> available.  Much like we do for HAP/Shadow/gnttab availability.
+
+yeah good point
+
+
+> > Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+> > ---
+> >  xen/arch/x86/hvm/Kconfig                 | 10 ++++++
+> >  xen/arch/x86/hvm/Makefile                |  2 +-
+> >  xen/arch/x86/hvm/svm/Makefile            |  2 +-
+> >  xen/arch/x86/hvm/svm/nestedhvm.h         | 44 +++++++++++++++++++++---
+> >  xen/arch/x86/hvm/svm/svm.c               |  6 ++++
+> >  xen/arch/x86/hvm/vmx/Makefile            |  2 +-
+> >  xen/arch/x86/hvm/vmx/vmx.c               | 10 ++++--
+> >  xen/arch/x86/include/asm/hvm/nestedhvm.h | 41 +++++++++++++++++-----
+> >  xen/arch/x86/include/asm/hvm/vmx/vvmx.h  | 30 ++++++++++++++++
+> >  xen/arch/x86/mm/Makefile                 |  2 +-
+> >  xen/arch/x86/mm/hap/Makefile             |  4 +--
+> >  xen/arch/x86/mm/p2m.h                    |  6 ++++
+> >  12 files changed, 137 insertions(+), 22 deletions(-)
+> > 
+> > diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
+> > index f32bf5cbb7..12b5df4710 100644
+> > --- a/xen/arch/x86/hvm/Kconfig
+> > +++ b/xen/arch/x86/hvm/Kconfig
+> > @@ -92,4 +92,14 @@ config MEM_SHARING
+> >  	bool "Xen memory sharing support (UNSUPPORTED)" if UNSUPPORTED
+> >  	depends on INTEL_VMX
+> >  
+> > +config NESTED_VIRT
+> > +	bool "Nested virtualization support" if EXPERT
+> > +	depends on AMD_SVM || INTEL_VMX
+> > +	default y
+> > +	help
+> > +	  Enable nested virtualization, allowing guests to run their own
+> > +	  hypervisors. This requires hardware support.
+> > +
+> > +	  If unsure, say Y.
+> 
+> If we go that route, I think nested virt should become off by default.
+> It's not security supported, and known to be broken in many areas.
+> 
+> I'm also unsure about whether this wants to be gated under EXPERT.
+> But I'm not sure I'm any good at knowing whether something should be
+> under EXPERT or not.
+
+I am happy either way and I'll others decide on the default. I did it
+this way to avoid changes over the current baseline. In case there is
+disagreement, I am also happy if it gets changed on commit based on the
+latest preference.
+
+
+> > +
+> >  endif
+> > diff --git a/xen/arch/x86/hvm/Makefile b/xen/arch/x86/hvm/Makefile
+> > index f34fb03934..b8a0a68624 100644
+> > --- a/xen/arch/x86/hvm/Makefile
+> > +++ b/xen/arch/x86/hvm/Makefile
+> > @@ -18,7 +18,7 @@ obj-y += irq.o
+> >  obj-y += mmio.o
+> >  obj-$(CONFIG_VM_EVENT) += monitor.o
+> >  obj-y += mtrr.o
+> > -obj-y += nestedhvm.o
+> > +obj-$(CONFIG_NESTED_VIRT) += nestedhvm.o
+> >  obj-y += pmtimer.o
+> >  obj-y += quirks.o
+> >  obj-y += rtc.o
+> > diff --git a/xen/arch/x86/hvm/svm/Makefile b/xen/arch/x86/hvm/svm/Makefile
+> > index 8a072cafd5..92418e3444 100644
+> > --- a/xen/arch/x86/hvm/svm/Makefile
+> > +++ b/xen/arch/x86/hvm/svm/Makefile
+> > @@ -2,6 +2,6 @@ obj-y += asid.o
+> >  obj-y += emulate.o
+> >  obj-bin-y += entry.o
+> >  obj-y += intr.o
+> > -obj-y += nestedsvm.o
+> > +obj-$(CONFIG_NESTED_VIRT) += nestedsvm.o
+> >  obj-y += svm.o
+> >  obj-y += vmcb.o
+> > diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
+> > index 9bfed5ffd7..a102c076ea 100644
+> > --- a/xen/arch/x86/hvm/svm/nestedhvm.h
+> > +++ b/xen/arch/x86/hvm/svm/nestedhvm.h
+> > @@ -26,6 +26,13 @@
+> >  #define nsvm_efer_svm_enabled(v) \
+> >      (!!((v)->arch.hvm.guest_efer & EFER_SVME))
+> >  
+> > +#define NSVM_INTR_NOTHANDLED     3
+> > +#define NSVM_INTR_NOTINTERCEPTED 2
+> > +#define NSVM_INTR_FORCEVMEXIT    1
+> > +#define NSVM_INTR_MASKED         0
+> > +
+> > +#ifdef CONFIG_NESTED_VIRT
+> > +
+> >  int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr);
+> >  void nestedsvm_vmexit_defer(struct vcpu *v,
+> >      uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2);
+> > @@ -57,13 +64,40 @@ int cf_check nsvm_hap_walk_L1_p2m(
+> >      struct vcpu *v, paddr_t L2_gpa, paddr_t *L1_gpa, unsigned int *page_order,
+> >      uint8_t *p2m_acc, struct npfec npfec);
+> >  
+> > -#define NSVM_INTR_NOTHANDLED     3
+> > -#define NSVM_INTR_NOTINTERCEPTED 2
+> > -#define NSVM_INTR_FORCEVMEXIT    1
+> > -#define NSVM_INTR_MASKED         0
+> > -
+> >  int nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack);
+> >  
+> > +#else /* !CONFIG_NESTED_VIRT */
+> > +
+> > +static inline int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr)
+> > +{
+> > +    return 0;
+> > +}
+> > +static inline void nestedsvm_vmexit_defer(struct vcpu *v,
+> > +    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2) { }
+> > +static inline enum nestedhvm_vmexits nestedsvm_vmexit_n2n1(struct vcpu *v,
+> > +    struct cpu_user_regs *regs)
+> > +{
+> > +    return NESTEDHVM_VMEXIT_ERROR;
+> > +}
+> > +static inline enum nestedhvm_vmexits nestedsvm_check_intercepts(struct vcpu *v,
+> > +    struct cpu_user_regs *regs, uint64_t exitcode)
+> > +{
+> > +    return NESTEDHVM_VMEXIT_ERROR;
+> > +}
+> > +static inline void svm_nested_features_on_efer_update(struct vcpu *v) { }
+> > +static inline void svm_vmexit_do_clgi(struct cpu_user_regs *regs,
+> > +                                      struct vcpu *v) { }
+> > +static inline void svm_vmexit_do_stgi(struct cpu_user_regs *regs,
+> > +                                       struct vcpu *v) { }
+> > +static inline bool nestedsvm_gif_isset(struct vcpu *v) { return true; }
+> > +static inline int nestedsvm_vcpu_interrupt(struct vcpu *v,
+> > +                                           const struct hvm_intack intack)
+> > +{
+> > +    return NSVM_INTR_NOTINTERCEPTED;
+> > +}
+> > +
+> > +#endif /* CONFIG_NESTED_VIRT */
+> > +
+> >  #endif /* __X86_HVM_SVM_NESTEDHVM_PRIV_H__ */
+> >  
+> >  /*
+> > diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+> > index 18ba837738..0234b57afb 100644
+> > --- a/xen/arch/x86/hvm/svm/svm.c
+> > +++ b/xen/arch/x86/hvm/svm/svm.c
+> > @@ -46,6 +46,10 @@
+> >  
+> >  void noreturn svm_asm_do_resume(void);
+> >  
+> > +#ifndef CONFIG_NESTED_VIRT
+> > +void asmlinkage nsvm_vcpu_switch(void) { }
+> > +#endif
+> > +
+> >  u32 svm_feature_flags;
+> >  
+> >  /*
+> > @@ -2465,6 +2469,7 @@ static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
+> >      .set_rdtsc_exiting    = svm_set_rdtsc_exiting,
+> >      .get_insn_bytes       = svm_get_insn_bytes,
+> >  
+> > +#ifdef CONFIG_NESTED_VIRT
+> >      .nhvm_vcpu_initialise = nsvm_vcpu_initialise,
+> >      .nhvm_vcpu_destroy = nsvm_vcpu_destroy,
+> >      .nhvm_vcpu_reset = nsvm_vcpu_reset,
+> > @@ -2474,6 +2479,7 @@ static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
+> >      .nhvm_vmcx_hap_enabled = nsvm_vmcb_hap_enabled,
+> >      .nhvm_intr_blocked = nsvm_intr_blocked,
+> >      .nhvm_hap_walk_L1_p2m = nsvm_hap_walk_L1_p2m,
+> > +#endif
+> >  
+> >      .get_reg = svm_get_reg,
+> >      .set_reg = svm_set_reg,
+> > diff --git a/xen/arch/x86/hvm/vmx/Makefile b/xen/arch/x86/hvm/vmx/Makefile
+> > index 04a29ce59d..902564b3e2 100644
+> > --- a/xen/arch/x86/hvm/vmx/Makefile
+> > +++ b/xen/arch/x86/hvm/vmx/Makefile
+> > @@ -3,4 +3,4 @@ obj-y += intr.o
+> >  obj-y += realmode.o
+> >  obj-y += vmcs.o
+> >  obj-y += vmx.o
+> > -obj-y += vvmx.o
+> > +obj-$(CONFIG_NESTED_VIRT) += vvmx.o
+> > diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+> > index 82c55f49ae..252f27322b 100644
+> > --- a/xen/arch/x86/hvm/vmx/vmx.c
+> > +++ b/xen/arch/x86/hvm/vmx/vmx.c
+> > @@ -55,6 +55,10 @@
+> >  #include <public/hvm/save.h>
+> >  #include <public/sched.h>
+> >  
+> > +#ifndef CONFIG_NESTED_VIRT
+> > +void asmlinkage nvmx_switch_guest(void) { }
+> > +#endif
+> > +
+> >  static bool __initdata opt_force_ept;
+> >  boolean_param("force-ept", opt_force_ept);
+> >  
+> > @@ -2033,7 +2037,7 @@ static void nvmx_enqueue_n2_exceptions(struct vcpu *v,
+> >                   nvmx->intr.intr_info, nvmx->intr.error_code);
+> >  }
+> >  
+> > -static int cf_check nvmx_vmexit_event(
+> > +static int cf_check __maybe_unused nvmx_vmexit_event(
+> >      struct vcpu *v, const struct x86_event *event)
+> >  {
+> >      nvmx_enqueue_n2_exceptions(v, event->vector, event->error_code,
+> > @@ -2933,6 +2937,7 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
+> >      .handle_cd            = vmx_handle_cd,
+> >      .set_info_guest       = vmx_set_info_guest,
+> >      .set_rdtsc_exiting    = vmx_set_rdtsc_exiting,
+> > +#ifdef CONFIG_NESTED_VIRT
+> >      .nhvm_vcpu_initialise = nvmx_vcpu_initialise,
+> >      .nhvm_vcpu_destroy    = nvmx_vcpu_destroy,
+> >      .nhvm_vcpu_reset      = nvmx_vcpu_reset,
+> > @@ -2942,8 +2947,9 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
+> >      .nhvm_vcpu_vmexit_event = nvmx_vmexit_event,
+> >      .nhvm_intr_blocked    = nvmx_intr_blocked,
+> >      .nhvm_domain_relinquish_resources = nvmx_domain_relinquish_resources,
+> > -    .update_vlapic_mode = vmx_vlapic_msr_changed,
+> >      .nhvm_hap_walk_L1_p2m = nvmx_hap_walk_L1_p2m,
+> > +#endif
+> > +    .update_vlapic_mode = vmx_vlapic_msr_changed,
+> >  #ifdef CONFIG_VM_EVENT
+> >      .enable_msr_interception = vmx_enable_msr_interception,
+> >  #endif
+> > diff --git a/xen/arch/x86/include/asm/hvm/nestedhvm.h b/xen/arch/x86/include/asm/hvm/nestedhvm.h
+> > index ea2c1bc328..0372974b24 100644
+> > --- a/xen/arch/x86/include/asm/hvm/nestedhvm.h
+> > +++ b/xen/arch/x86/include/asm/hvm/nestedhvm.h
+> > @@ -25,9 +25,21 @@ enum nestedhvm_vmexits {
+> >  /* Nested HVM on/off per domain */
+> >  static inline bool nestedhvm_enabled(const struct domain *d)
+> >  {
+> > -    return IS_ENABLED(CONFIG_HVM) && (d->options & XEN_DOMCTL_CDF_nested_virt);
+> > +    return IS_ENABLED(CONFIG_NESTED_VIRT) &&
+> > +           (d->options & XEN_DOMCTL_CDF_nested_virt);
+> >  }
+> >  
+> > +/* Nested paging */
+> > +#define NESTEDHVM_PAGEFAULT_DONE       0
+> > +#define NESTEDHVM_PAGEFAULT_INJECT     1
+> > +#define NESTEDHVM_PAGEFAULT_L1_ERROR   2
+> > +#define NESTEDHVM_PAGEFAULT_L0_ERROR   3
+> > +#define NESTEDHVM_PAGEFAULT_MMIO       4
+> > +#define NESTEDHVM_PAGEFAULT_RETRY      5
+> > +#define NESTEDHVM_PAGEFAULT_DIRECT_MMIO 6
+> > +
+> > +#ifdef CONFIG_NESTED_VIRT
+> > +
+> >  /* Nested VCPU */
+> >  int nestedhvm_vcpu_initialise(struct vcpu *v);
+> >  void nestedhvm_vcpu_destroy(struct vcpu *v);
+> > @@ -38,14 +50,6 @@ bool nestedhvm_vcpu_in_guestmode(struct vcpu *v);
+> >  #define nestedhvm_vcpu_exit_guestmode(v)  \
+> >      vcpu_nestedhvm(v).nv_guestmode = 0
+> >  
+> > -/* Nested paging */
+> > -#define NESTEDHVM_PAGEFAULT_DONE       0
+> > -#define NESTEDHVM_PAGEFAULT_INJECT     1
+> > -#define NESTEDHVM_PAGEFAULT_L1_ERROR   2
+> > -#define NESTEDHVM_PAGEFAULT_L0_ERROR   3
+> > -#define NESTEDHVM_PAGEFAULT_MMIO       4
+> > -#define NESTEDHVM_PAGEFAULT_RETRY      5
+> > -#define NESTEDHVM_PAGEFAULT_DIRECT_MMIO 6
+> >  int nestedhvm_hap_nested_page_fault(struct vcpu *v, paddr_t *L2_gpa,
+> >                                      struct npfec npfec);
+> >  
+> > @@ -59,6 +63,25 @@ unsigned long *nestedhvm_vcpu_iomap_get(bool ioport_80, bool ioport_ed);
+> >  
+> >  void nestedhvm_vmcx_flushtlb(struct p2m_domain *p2m);
+> >  
+> > +#else /* !CONFIG_NESTED_VIRT */
+> > +
+> > +static inline int nestedhvm_vcpu_initialise(struct vcpu *v) { return 0; }
+> > +static inline void nestedhvm_vcpu_destroy(struct vcpu *v) { }
+> > +static inline void nestedhvm_vcpu_reset(struct vcpu *v) { }
+> > +static inline bool nestedhvm_vcpu_in_guestmode(struct vcpu *v) { return false; }
+> > +static inline int nestedhvm_hap_nested_page_fault(struct vcpu *v, paddr_t *L2_gpa,
+> > +                                                  struct npfec npfec)
+> > +{
+> > +    return NESTEDHVM_PAGEFAULT_L0_ERROR;
+> > +}
+> > +#define nestedhvm_vcpu_enter_guestmode(v) do { } while (0)
+> > +#define nestedhvm_vcpu_exit_guestmode(v)  do { } while (0)
+> > +#define nestedhvm_paging_mode_hap(v) false
+> > +#define nestedhvm_vmswitch_in_progress(v) false
+> > +static inline void nestedhvm_vmcx_flushtlb(struct p2m_domain *p2m) { }
+> > +
+> > +#endif /* CONFIG_NESTED_VIRT */
+> > +
+> >  static inline bool nestedhvm_is_n2(struct vcpu *v)
+> >  {
+> >      if ( !nestedhvm_enabled(v->domain) ||
+> > diff --git a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+> > index da10d3fa96..8dc876a4c2 100644
+> > --- a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+> > +++ b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+> > @@ -73,6 +73,8 @@ union vmx_inst_info {
+> >      u32 word;
+> >  };
+> >  
+> > +#ifdef CONFIG_NESTED_VIRT
+> > +
+> >  int cf_check nvmx_vcpu_initialise(struct vcpu *v);
+> >  void cf_check nvmx_vcpu_destroy(struct vcpu *v);
+> >  int cf_check nvmx_vcpu_reset(struct vcpu *v);
+> > @@ -199,5 +201,33 @@ int nept_translate_l2ga(struct vcpu *v, paddr_t l2ga,
+> >                          uint64_t *exit_qual, uint32_t *exit_reason);
+> >  int nvmx_cpu_up_prepare(unsigned int cpu);
+> >  void nvmx_cpu_dead(unsigned int cpu);
+> > +
+> > +#else /* !CONFIG_NESTED_VIRT */
+> > +
+> > +static inline void nvmx_update_exec_control(struct vcpu *v, u32 value) { }
+> > +static inline void nvmx_update_secondary_exec_control(struct vcpu *v,
+> > +                                                      unsigned long value) { }
+> > +static inline void nvmx_update_exception_bitmap(struct vcpu *v,
+> > +                                                unsigned long value) { }
+> > +static inline u64 nvmx_get_tsc_offset(struct vcpu *v) { return 0; }
+> > +static inline void nvmx_set_cr_read_shadow(struct vcpu *v, unsigned int cr) { }
+> > +static inline bool nvmx_intercepts_exception(struct vcpu *v, unsigned int vector,
+> > +                                             int error_code) { return false; }
+> > +static inline int nvmx_n2_vmexit_handler(struct cpu_user_regs *regs,
+> > +                                         unsigned int exit_reason) { return 0; }
+> > +static inline void nvmx_idtv_handling(void) { }
+> > +static inline int nvmx_msr_read_intercept(unsigned int msr, u64 *msr_content)
+> > +{
+> > +    return 0;
+> > +}
+> > +static inline int nvmx_handle_vmx_insn(struct cpu_user_regs *regs,
+> > +                                       unsigned int exit_reason) { return 0; }
+> > +static inline int nvmx_cpu_up_prepare(unsigned int cpu) { return 0; }
+> > +static inline void nvmx_cpu_dead(unsigned int cpu) { }
+> > +
+> > +#define get_vvmcs(vcpu, encoding) 0
+> > +
+> > +#endif /* CONFIG_NESTED_VIRT */
+> > +
+> >  #endif /* __ASM_X86_HVM_VVMX_H__ */
+> >  
+> > diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
+> > index 960f6e8409..aa15811c2e 100644
+> > --- a/xen/arch/x86/mm/Makefile
+> > +++ b/xen/arch/x86/mm/Makefile
+> > @@ -7,7 +7,7 @@ obj-$(CONFIG_SHADOW_PAGING) += guest_walk_4.o
+> >  obj-$(CONFIG_VM_EVENT) += mem_access.o
+> >  obj-$(CONFIG_MEM_PAGING) += mem_paging.o
+> >  obj-$(CONFIG_MEM_SHARING) += mem_sharing.o
+> > -obj-$(CONFIG_HVM) += nested.o
+> > +obj-$(CONFIG_NESTED_VIRT) += nested.o
+> >  obj-$(CONFIG_HVM) += p2m.o
+> >  obj-y += p2m-basic.o
+> >  obj-$(CONFIG_INTEL_VMX) += p2m-ept.o
+> > diff --git a/xen/arch/x86/mm/hap/Makefile b/xen/arch/x86/mm/hap/Makefile
+> > index 67c29b2162..de1bb3abde 100644
+> > --- a/xen/arch/x86/mm/hap/Makefile
+> > +++ b/xen/arch/x86/mm/hap/Makefile
+> > @@ -2,5 +2,5 @@ obj-y += hap.o
+> >  obj-y += guest_walk_2.o
+> >  obj-y += guest_walk_3.o
+> >  obj-y += guest_walk_4.o
+> > -obj-y += nested_hap.o
+> > -obj-$(CONFIG_INTEL_VMX) += nested_ept.o
+> > +obj-$(CONFIG_NESTED_VIRT) += nested_hap.o
+> > +obj-$(CONFIG_NESTED_VIRT) += nested_ept.o
+> 
+> With this change nested_ept.o is no longer gated explicitly on
+> CONFIG_INTEL_VMX, which could cause build issues if you have a Kconfig
+> like:
+> 
+> CONFIG_INTEL_VMX=n
+> CONFIG_AMD_SVM=y
+> CONFIG_NESTED_VIRT=y
+> 
+> Does the code in nested_ept.o have dependencies on other files gated
+> by CONFIG_INTEL_VMX, and hence would fail at the linking stage?  And
+> even if it builds, the code in nested_ept.o would be unreachable I
+> expect.
+
+It does build, but you are right. I'll improve this.
+--8323329-1050394070-1770411124=:3668128--
 
