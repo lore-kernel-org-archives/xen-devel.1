@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA4B1EE20B5
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:22:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223624.1531094 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA5DEE20B5
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:37:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223644.1531104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOag-0006AU-7b; Fri, 06 Feb 2026 16:21:54 +0000
+	id 1voOpE-0000At-By; Fri, 06 Feb 2026 16:36:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223624.1531094; Fri, 06 Feb 2026 16:21:54 +0000
+Received: by outflank-mailman (output) from mailman id 1223644.1531104; Fri, 06 Feb 2026 16:36:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOag-0006AN-3o; Fri, 06 Feb 2026 16:21:54 +0000
-Received: by outflank-mailman (input) for mailman id 1223624;
- Fri, 06 Feb 2026 16:21:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1voOpE-0000Am-9P; Fri, 06 Feb 2026 16:36:56 +0000
+Received: by outflank-mailman (input) for mailman id 1223644;
+ Fri, 06 Feb 2026 16:36:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qUCI=AK=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1voOaf-0006AB-4w
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:21:53 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id f1e6e323-0377-11f1-b161-2bf370ae4941;
- Fri, 06 Feb 2026 17:21:52 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 316EC339;
- Fri,  6 Feb 2026 08:21:45 -0800 (PST)
-Received: from C3HXLD123V.arm.com (unknown [10.57.55.24])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CBD193F632;
- Fri,  6 Feb 2026 08:21:49 -0800 (PST)
+ <SRS0=RA+/=AK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1voOpC-0000Ag-E5
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:36:54 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0a7f5404-037a-11f1-9ccf-f158ae23cfc8;
+ Fri, 06 Feb 2026 17:36:52 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4806ce0f97bso21047305e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Feb 2026 08:36:52 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43629754c62sm6410513f8f.38.2026.02.06.08.36.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Feb 2026 08:36:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,71 +47,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1e6e323-0377-11f1-b161-2bf370ae4941
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4] xen: Add Darwin.mk for GNU toolchains
-Date: Fri,  6 Feb 2026 17:21:44 +0100
-Message-ID: <ff14a313c6ec9b487263e8f823c96533bb70fe1d.1770394705.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.52.0
+X-Inumbo-ID: 0a7f5404-037a-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770395811; x=1771000611; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3iKjscCOfwDt9D3tqFrpxr7mrqRlHECUuBkOTLEFi14=;
+        b=XyvzeglVqNEyeEIxI1Kn6htrcsjnzK/knDqAq0sqS1Tlg7zwjRIYbuHNmR11VyUud9
+         wUvSatq/le2Z2H5+omF9SyG9K/CFu+nlGUU9BKbRl4QcfrS8qP26u2rstzPsvQZS2pGX
+         H6vZzKnB6y1EbF5MZ4njy6ILmpplPKps3NJKwybo1R5w4WdB8qtQnH1UpTA5yutT/A5u
+         WESCDpg8QeeNupMEavelwufDRKopquVJXi3RzuOm2catsfDP9JtoMGRmWNE246UkjuzS
+         TU7EP9uZ72dJvKlIIZ2u4KYpRWvsrq+RNeP1/EnqcJOYYL/KH+1RfaV4xhx6iWfmlkBw
+         fE5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770395811; x=1771000611;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3iKjscCOfwDt9D3tqFrpxr7mrqRlHECUuBkOTLEFi14=;
+        b=OZrlEKJecx8Lux9Gr2gyuTiytWHIO5Ml43hmTArhgayUd68sFCABSWO8P6sfnbyVRt
+         b/TXYRKDqRWirBXvEnE12zyMQ3KCjMAn6KHBJBxG2MekIZqRTqnivtdFvldX+WbXngsg
+         oC6ji1UOdSIHfaVkz/TAQ13pab2Gf+2tgrhew1kyrRcez7A1C+LAckesMXS5XItPQp9G
+         FW/CoBznTsmfYewTsac7efBGqOPJY3BGDNKla110Y61rHr0l7eY8nXHYKMsfrhA6lR6+
+         mWApa2Bdh6V6KhXqFgEytytypnbGpjWEqtZL4BKjohA7J8nRJJsTjXcM8cNd3o5tsavX
+         qG6Q==
+X-Gm-Message-State: AOJu0YyiILGiZm1XNYQRATNC2W8j7pIOvTWHBDIhFKDegbpYdiGHsX4G
+	q75TKG+ZjTb2Cncbp4vYLhFAYjyULKWyfiozMEZxqO2e5yMhSk7JFcorMTQdtA==
+X-Gm-Gg: AZuq6aJtk1Tbv+fIAdzJPsr+C9We3N4oVCZ+jrzPYaRj2I2lEVPort5sG7tcu5dfK6x
+	O9XEyxqLo0B2Ajc1zY9u5txPxJ5dtGzpPFE09fwkJag1TJgLOfbQOFvV/FQq3Ti5/5jOJX6JjJq
+	4ateFLsEFbHSUdoRcncSeAqJbFLLfArZES9uI4UdNtSjF8F13D+Zq0xORH8X2UEEcGAMo6m979Q
+	GMuzaQzBwaWkJyYse9YlBv0shF/bJL+yDac/q5PGvKIVnkYKvnh8/DAV1YKjSJgT5WJymsRod/X
+	imt+Lj/yS8kFfcfu/uT7AY4YL3oeLig3l+omknA2IAmyxoJ52A0Z28ovJBsNq1ulbkahe2d8n8w
+	t0RV0KV2mWA+jMICShre84caV0TE5mX0zCuYxxgHWaQzEzM8AlVrg/cNaPNxRml9anYvcjpWxb6
+	rjw0xORXwb3ujb9xI+MbcSma5SXwZExt+Hdln42kTiNJZIL03IkAMur/wJHIVN7V0=
+X-Received: by 2002:a05:600c:3b23:b0:47f:8c05:786b with SMTP id 5b1f17b1804b1-4832021eae9mr49223655e9.28.1770395811199;
+        Fri, 06 Feb 2026 08:36:51 -0800 (PST)
+Message-ID: <14d19350-0de8-4496-99e5-0ba76e421684@gmail.com>
+Date: Fri, 6 Feb 2026 17:36:49 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/16] xen/riscv: introduce vcpu_kick() implementation
+To: xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Romain Caritey <Romain.Caritey@microchip.com>
+References: <cover.1769099883.git.oleksii.kurochko@gmail.com>
+ <0335a7db0343d81ce4256482a464e7ba5df1c204.1769099885.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <0335a7db0343d81ce4256482a464e7ba5df1c204.1769099885.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Xen does not provide a Darwin build configuration for selecting
-GNU tool definitions. On macOS, the tools we use are either GNU
-compatible or we only rely on features supported by Mac OS, so
-using the GNU tool definitions is appropriate.
 
-Add config/Darwin.mk to include StdGNU.mk and force
-XEN_COMPILE_ARCH=unknown, ensuring Darwin builds always follow
-the cross-compile path as we depend on the Linux ABI so compiling
-on Mac OS is always a cross compilation case.
+On 1/22/26 5:47 PM, Oleksii Kurochko wrote:
+> Add a RISC-V implementation of vcpu_kick(), which unblocks the target
+> vCPU and sends an event check IPI if the vCPU was running on another
+> processor. This mirrors the behavior of Arm and enables proper vCPU
+> wakeup handling on RISC-V.
+>
+> Remove the stub implementation from stubs.c, as it is now provided by
+> arch/riscv/domain.c.
+>
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Changes in v2:
+>   - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+> ---
+>   xen/arch/riscv/domain.c | 14 ++++++++++++++
+>   xen/arch/riscv/stubs.c  |  5 -----
+>   2 files changed, 14 insertions(+), 5 deletions(-)
+>
+> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+> index e38c0db62cac..13ac384c4b76 100644
+> --- a/xen/arch/riscv/domain.c
+> +++ b/xen/arch/riscv/domain.c
+> @@ -1,8 +1,10 @@
+>   /* SPDX-License-Identifier: GPL-2.0-only */
+>   
+> +#include <xen/cpumask.h>
+>   #include <xen/init.h>
+>   #include <xen/mm.h>
+>   #include <xen/sched.h>
+> +#include <xen/smp.h>
+>   #include <xen/vmap.h>
+>   
+>   #include <asm/bitops.h>
+> @@ -240,3 +242,15 @@ void vcpu_sync_interrupts(struct vcpu *v)
+>   #   error "Update vsieh"
+>   #endif
+>   }
+> +
+> +void vcpu_kick(struct vcpu *v)
+> +{
+> +    bool running = v->is_running;
+> +
+> +    vcpu_unblock(v);
+> +    if ( running && v != current )
+> +    {
+> +        perfc_incr(vcpu_kick);
 
-An example of how to build the hypervisor for arm64 on Mac OS
-(tools cannot be build for now) using a toolchain from brew:
-- brew install aarch64-elf-gcc aarch64-elf-binutils
-- cd xen
-- make XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-elf- HOSTCC=clang
+Because of this it is needed to introduce:
+   PERFCOUNTER(vcpu_kick, "vcpu: notify other vcpu")
+Otherwise randconfig build will fail when CONFIG_PERF_COUNTERS=y.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
-Changes since v3:
-- set XEN_COMPILE_ARCH to unknown instead of Darwin
-- list binutils as a dependency to install in brew in commit message
+I would like to ask if it would be okay to add it xen/include/xen/perfc_defn.h
+just after PERFCOUNTER(need_flush_tlb_flush,...) or would it be better to have
+it in arch specific perfc_defn.h?
 
-Changes since v2:
-- Subject was "xen: Add macOS hypervisor build configuration"
-- Update Darwin.mk comments to more accurate versions (Jan)
-- Remove the build-on-macos help as we have no dependency on anything
-  coming from brew anymore and the toolchain can be retrieved by lots of
-  other solutions than brew on mac os. Switch to a simple doc in the
-  commit message instead
----
- config/Darwin.mk | 7 +++++++
- 1 file changed, 7 insertions(+)
- create mode 100644 config/Darwin.mk
-
-diff --git a/config/Darwin.mk b/config/Darwin.mk
-new file mode 100644
-index 000000000000..176b27eac676
---- /dev/null
-+++ b/config/Darwin.mk
-@@ -0,0 +1,7 @@
-+# Use GNU tool definitions as the tools we are using are either GNU compatible
-+# or we only use features which are supported on Mac OS.
-+include $(XEN_ROOT)/config/StdGNU.mk
-+
-+# Xen uses Linux'es ABI so we are cross compiling on Mac OS.
-+# Force COMPILE_ARCH to a fake value to make sure it is always the case.
-+XEN_COMPILE_ARCH = unknown
--- 
-2.52.0
+~ Oleksii
 
 
