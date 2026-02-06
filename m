@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF6AEE20B5
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:16:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1223511.1530974 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF25EE20B7
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Feb 2026 16:16:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1223510.1530959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOVB-0005y9-Lf; Fri, 06 Feb 2026 16:16:13 +0000
+	id 1voOVA-0005YI-Be; Fri, 06 Feb 2026 16:16:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1223511.1530974; Fri, 06 Feb 2026 16:16:13 +0000
+Received: by outflank-mailman (output) from mailman id 1223510.1530959; Fri, 06 Feb 2026 16:16:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1voOVB-0005y2-II; Fri, 06 Feb 2026 16:16:13 +0000
-Received: by outflank-mailman (input) for mailman id 1223511;
- Fri, 06 Feb 2026 16:16:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1voOVA-0005Xt-4y; Fri, 06 Feb 2026 16:16:12 +0000
+Received: by outflank-mailman (input) for mailman id 1223510;
+ Fri, 06 Feb 2026 16:16:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lgBG=AK=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1voOV9-0005HU-Pd
- for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:16:11 +0000
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c110::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 239fb4e2-0377-11f1-9ccf-f158ae23cfc8;
- Fri, 06 Feb 2026 17:16:06 +0100 (CET)
-Received: from SA1PR04CA0005.namprd04.prod.outlook.com (2603:10b6:806:2ce::14)
- by LV3PR12MB9093.namprd12.prod.outlook.com (2603:10b6:408:19d::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.14; Fri, 6 Feb
- 2026 16:16:02 +0000
+ id 1voOV8-0005HV-Ac
+ for xen-devel@lists.xenproject.org; Fri, 06 Feb 2026 16:16:10 +0000
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [2a01:111:f403:c100::f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 25aefbdc-0377-11f1-b161-2bf370ae4941;
+ Fri, 06 Feb 2026 17:16:09 +0100 (CET)
+Received: from SA1PR04CA0011.namprd04.prod.outlook.com (2603:10b6:806:2ce::18)
+ by DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
+ 2026 16:16:04 +0000
 Received: from SN1PEPF00036F3E.namprd05.prod.outlook.com
- (2603:10b6:806:2ce:cafe::34) by SA1PR04CA0005.outlook.office365.com
- (2603:10b6:806:2ce::14) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:806:2ce:cafe::d6) by SA1PR04CA0011.outlook.office365.com
+ (2603:10b6:806:2ce::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
- 6 Feb 2026 16:16:02 +0000
+ 6 Feb 2026 16:16:04 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  SN1PEPF00036F3E.mail.protection.outlook.com (10.167.248.22) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 16:16:01 +0000
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 16:16:04 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 6 Feb
- 2026 10:16:00 -0600
+ 2026 10:16:02 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 239fb4e2-0377-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 25aefbdc-0377-11f1-b161-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aRxQ6yAe1818+J4I+sHXFyvZzfwUyY66oinUDS4T9DpKe2gkHtYXncbbaIuKX6F7kmbuyAtF4IdclZuUkwwJme36D0/KhM5FA6rWX5FQgDw7mpINWuK8NYAFmsI/3/P72gfDbXFgGJgzqoAEELduEyYbzG+XcYqOrbS3LwBylNNTdpvi1pfXFA+B5Vx0xM4R+qdNVuzVWVWqmtoSrromM+geD7oU2xKuoUzt+86SIk2C2kxCWJ+xfLGFMakaUgWD2Evn8DDtpQ4HzdlC19c2L+xmWxTxkxPPRa6a4Ne2zB8c4DkNeRl9ewnj86w8YRuUWsmSqWm3mWtMQm30E2Xaag==
+ b=aFPY+Yq2iuGVCGcFbOJuvZxJKLYGvnkyKu68D+b+vvLOCysMYFzx/5i1T7HjP4snkEAVIUBvtGuUHtzGNk8F5NK+jZjhjt8s5R5lxSd6w9x/Cb8NAUdG/1XU92/FLSylmGJul9uguBFJmcFlt28KgjqKLhIz8xvPGfQNo+xZ/hhAVfGU60iBETa7gSm3Z0WI38R8Z8vKPCo8GwWhBDHfXD5aTflcRVDyKh+pEkvoNl6N0v93MzWQJKwKUhe4yiDQDoqI1+xGN1PjbZnq2Fc38mfa/E/8+SfBCA+HLoktSusw1jtkXFmZR0mKec4J4FcIo7R1eDpmbycDRbWh9TnL4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3XqRfkRYraueuo3h0D16mjrku9u0GK6eRvjfilF9NFM=;
- b=ELk9Hu02OLTU6CxxZ+0kfq8vUHhPGEJHUd4p4UyI5oZ6k0+L/F8TtgDQy7UuNvZ70KrlE/41OExBqpA3D+bg9FNeeZu1AsjOFpRXBsgGT5fJTHPLlYv9Lodtu32d4LHqaujLpRaCcX6Q6hA/jUv+lZuLIokkupau7z9WjcSSQY66gE3pR+jqI3/I+3NkjYEM+aPlTY4ybvKbz0LzmqkLUAFHrYkPPAh1wYEglh7D1BHg1SG6eMeCIS2zf9mRiv9Q2usWiK59SpYeuUVq60HEJwGYwNCYqTGd4UmCrzRG8c1f7cPXzK8hY4mC5tRMuAEL7LJXfFvlYYUpOMCysbxsPQ==
+ bh=YP+tIwhw5jxaGWVsbf50GL1A5iL5JpmAlXqycfYObto=;
+ b=LhTWEkJh8xyDTS/LnbtrUYh8I0s0s28pRZ0owrd250r68bHEcTvdEIGAUBvilwYVm/JxKTJ071O6J4EL3vw6CZfwP3h1YzTaWHZn5m8pliSRh33RcSrk1Lfq4ajN8WMprwsFtvFIlPZ53am4PDt4W5dvAvwONxCiGsSl3G6kFCiOXAWHi6xtvOgJ+MeEP6OzjPzs3SkBn1qsrAAxX10KZfbUL3YUPyoDIkyV3Ll4qI7mw1kO6m+yX5USbI+FEjvbN4MVz/x7NObNmPRd1Cpv7z9L0G8zh3/K8PvfPhUmYcB4sR7npcoshV4r/HaOvbaupUuDJrbaeQuc8NdBM4MVtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3XqRfkRYraueuo3h0D16mjrku9u0GK6eRvjfilF9NFM=;
- b=zYJ/eu6LSpsz6bl43V+uQ+9hDGo9pTCiN9cOxquqm8ASrOH68yGVf2hNGEJTSH1ZKhct8ogetR9NpUv6ym5LJFE9QUqlPRpfUN5206qMcBsqhGH4W2FsahzxtGpgv6R84MiUfVlL1iR0ya0ZRp4dCoRegG8N+DuFSHyGHPIjqLM=
+ bh=YP+tIwhw5jxaGWVsbf50GL1A5iL5JpmAlXqycfYObto=;
+ b=hy7KN+A9z15EfVPw8vx/K1qQ8AhP84qr7X0Dc6aSdpOoFVsp5yNgxzxfkhSQ0M5oe+qs5E4RRh4lHoTgNe4y1WwImqW0QTOBCMi+S/AFHLqIzjZbWnyo8oa+jij8TXGBUKBeF5CDiIi4y4SlM5kfUSXvv9PXv/j5FiBxK6f9RkM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,9 +86,9 @@ CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
 	<jason.andryuk@amd.com>
-Subject: [PATCH 03/12] x86: Add cpu_vendor() as a wrapper for the host's CPU vendor
-Date: Fri, 6 Feb 2026 17:15:25 +0100
-Message-ID: <20260206161539.209922-4-alejandro.garciavallejo@amd.com>
+Subject: [PATCH 05/12] x86: Migrate spec_ctrl vendor checks to cpu_vendor()
+Date: Fri, 6 Feb 2026 17:15:27 +0100
+Message-ID: <20260206161539.209922-6-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
 References: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
@@ -100,172 +100,239 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3E:EE_|LV3PR12MB9093:EE_
-X-MS-Office365-Filtering-Correlation-Id: 17db9e9f-2f58-4aae-6f9e-08de659b0583
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3E:EE_|DS0PR12MB7726:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4c72a1d6-961c-4d98-fe78-08de659b06c5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700013;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?18fERMQhuiiD/6WQBkxfyvj+1suLtedGR2BlGQcTn33+IUtevwEBQ501UM6e?=
- =?us-ascii?Q?HoWdlaOJSonptG5yU4fuZizmgvguzhkmFAuZrRMchEY5I5+3eUgF3Xff2uXR?=
- =?us-ascii?Q?+9y31dLoc+XNJrB9DuaUUIzogDT0E7hykk3c4mrqKRtoj6hHsLxhIYnDCE4O?=
- =?us-ascii?Q?pMPPg1Uywx7iPgy5oTYdNXtqiu4SAe3tFVtIwknE31lykvoFjj3S/62vof15?=
- =?us-ascii?Q?ZARhOebDCdCFwifYyCweHejnr8qyBCyUKoK9AHk2XfRQ5+szD1k7N7E+bAOJ?=
- =?us-ascii?Q?Il/S0TQf3CcJPI3lYR4xeQ15fTn3rm1IKkXYxHrLPRksKYHiFJmQYB1PCDh5?=
- =?us-ascii?Q?1SgyfhE2TR7SBdzhvzoJBGDK99Z6kc96LX5BhekWa61Zz+yJu2590+XC9jAb?=
- =?us-ascii?Q?idOYNEVx4U7AUFJUFQYC25agYA/G8ZF+yWg5xwcZzZQw76MbII60XCG4aGMB?=
- =?us-ascii?Q?Xi+mOjFr7ZEfDA+nnCQbCVqaf53MWLAsJXo4YlYVPUwcJB45pOcP//l9tVJ3?=
- =?us-ascii?Q?utJEfLWa0x2wLYdR6Goc2UA+iv3F+R02ZAHcu1Y4S3KFAIqGMCK+OWqpwA98?=
- =?us-ascii?Q?2NdBniD2HQixHtgC8R7NSPbtznDnYu2U507h66CVwHxtc/6ObV5g6oKTYhUD?=
- =?us-ascii?Q?Ib3zZYXJmP8lWLUThqo++Z3+P+ycRWS36aoyqoGqlR3w471gQZJEvPgGrEkr?=
- =?us-ascii?Q?GW/aTtE8NCPa8AJ2Ou2n4vwnJNe5V8dYSwkfnaky4wvQ0e0CIMUvWWhOGzXv?=
- =?us-ascii?Q?ZEaCol4AYIuUOdikEZ3CLVYMZxO7Ljr9P/LXsx5xYMFFKXaLD4KJ8uhPgiC3?=
- =?us-ascii?Q?JIPCJ5Ng7C7zmBzPRpyK7D7HrbKhIibaGjUWXw3lfTjmA7TfcJNjEzfVDXv2?=
- =?us-ascii?Q?a9QL/2yxiMl0mOxBfBf7lpdbJWQEXLa0Dt86qUTyjNpeRx4q6czIJ9Nbw+n/?=
- =?us-ascii?Q?8KFIXW+7JxdIAUY2Om+EMndT4VJPlsgzUHEx3PzWZDFL7TLdUAXv/8tvEJ/H?=
- =?us-ascii?Q?tjm29CF5A0sksSqnEpcOIlgAfnr1iO1t9NZ/X9/0STbmCWqt5F/ppHg4iEVQ?=
- =?us-ascii?Q?OuOC1rXB+mDR7GdJt63nO9xpoDqxvV2zJEKs88PcaxW0aDSmEN1FFnVbaFmL?=
- =?us-ascii?Q?J0AJUppiadoWVKr6BbTfBONQ1+v4lN3/FUwE5Qt24WGBpg5tWsJnM9XEyhmm?=
- =?us-ascii?Q?mWYNO4d4UFgKW1xElqmtwMPciR+HFzV4lCkHu6/uOd8YlCmGjKlbnfGN+8ks?=
- =?us-ascii?Q?kNCMkg0OfpFkzePU3dItokoqzShGBm+SJis9PuHlVtnMX58Q0A4CcSIX6LiY?=
- =?us-ascii?Q?HgV24BNJpj+Ip7dAFlk4E59iGkHpAevG9Bs9xVLfiyHQwRNRDEmfmG2B7XEh?=
- =?us-ascii?Q?QsibPnJILilek5CU1tTTmLwVkVItoSevSzxjhzcRvrgP3GRGEPMjyXX6pxEh?=
- =?us-ascii?Q?fEGlkvXGKdInUi5DhSoKepjIQAprRwxoiPF7su9g8wh2DjoWDUo7hVON9p8t?=
- =?us-ascii?Q?KdOINbJ4TMUyfjEZwVhd+od+c+PMghvr/ZMjg55zhIIN9mf5X81ryJUfpWL6?=
- =?us-ascii?Q?cmufzbg3bZmK9lVjGWbI2aav6zmN08J6KkwtyzYyJxaEj1xn3ktfoLz5flGP?=
- =?us-ascii?Q?fLsRMZFN0lHE2+wQvvYR+Qds4A4cxDIk8Wfa2NgdmagY2HxqV71lSOE4yG5p?=
- =?us-ascii?Q?kYqXOw=3D=3D?=
+	=?us-ascii?Q?XwxmNnIoYzGPImCyyC+6VqnvgczSz/ktuISLVf6Ouz/iWn1TD8i1wBkN9DLq?=
+ =?us-ascii?Q?MQbJka8jnmCliLuUGb0Lo9StNv6aRx9R2rG1PCm6b9GcsDA64e4G/mfjSBD3?=
+ =?us-ascii?Q?dzWwQg6z1B5ZHqLhnEggj+2DDbGSWywproXQ7II0ur1/7EPXXVz8OnxV4WSz?=
+ =?us-ascii?Q?FTxS63Sz8YE/MsckXFHG42bqm3zEZ+btl9EgLKb2xt/SWhzT8PkUSgi3+MLy?=
+ =?us-ascii?Q?kkaAhDt8nmk7o4O/pYeSVdqg38WbwU74fXTOuBh2eYDI0KXgMkDIz7KiQEFM?=
+ =?us-ascii?Q?sHPlX3/8rNJPdOdTPusez3U+g2pyEfjMndoQD3Zq1lW6QPyx4VR0yPGSNs3D?=
+ =?us-ascii?Q?efrRmAQTB8+m8UHXP+UImcjCqve4OMgfbxO/sD40XpOLYN/2BlUb5f99qvbo?=
+ =?us-ascii?Q?9VaDSj2eTAOLqCF2JbhvYCLapWid0Xeo8JkspGR5bXuBckZBGBo783dGnHGn?=
+ =?us-ascii?Q?1VJdXXPRZ8rXjXcHkv45CV93Hgdy6+O0+C5voPz1dMWhOqjb+Iy43+wQjFz1?=
+ =?us-ascii?Q?iAFNq3XwCj6J6Ra5SEfYe391RJxZua7DcDBsaOinbUh2s7arC++ADb/32PTy?=
+ =?us-ascii?Q?gmBTpBAcNGdlq+RALJG6bUv4qCGTgWyM2xE2oNFXOs946BomUbjlKqYyUzwk?=
+ =?us-ascii?Q?9eVezztFnq+nwmMQYLpvOc0Pllh1cZBGfsterDn8RVZOJvpCPIex0k80RTDF?=
+ =?us-ascii?Q?sn6GCjTehGL4ZjnW1Aacm9+kDQsbsy3d2a7kPQR/9HK5U9vdsO2kKqfDw8X+?=
+ =?us-ascii?Q?hOAv8olp7WsTexdwb+RQeJHu80opXywuPZQqNjc2Uy+mNYPG7KMN74aqOXii?=
+ =?us-ascii?Q?a7OhnJryTGIjJSQo7eAwbnfQ98AJ+xESRB0vKuXgGYGGZ9B5NZOEV+bBhrVB?=
+ =?us-ascii?Q?dEfmx9moPe6GiBhPDsTugqYl3kIUvT/og44XSXClyu8ZngTk1r6O2S68zkPq?=
+ =?us-ascii?Q?7pf+Hkh1dSgvyD6N8LkIIrtDB3b09uXJe0sI0f4/G/ZhMWlvV04Y6ftUl5m8?=
+ =?us-ascii?Q?Uc17vymN+2lV+z/vQVAqEOuS/oi5CBwbTuuCoOUTO4Y453kAR7C9zjlM513j?=
+ =?us-ascii?Q?O/Cir9Jvs7uD1EL1PhpWLD4yeGEcNZ8EuP+QabnF9fhPjFHQgWDAEeGCe1Ee?=
+ =?us-ascii?Q?d4+8gxMlNv+m41HwsgdoN9McJf6Uqki30Z2ep31vS5fDjBQ+gJiGrfAPvif0?=
+ =?us-ascii?Q?oZxv9GgiEBKk3Cwy370mMXWfzL1xdeL/PhwfLf+/A4qlasHNrqg62/FCg8rX?=
+ =?us-ascii?Q?5FeCA52RE/huV7E0W0Lw0pTmrnqEfRRys5oYd0qN6jAVOMzjjWMsHANQT/XZ?=
+ =?us-ascii?Q?ODicbSpb2JfEyeGxTuurX7TUgTTt8PbmXRGIxKk0HY0Im8IQqWgzjWQYQ43Z?=
+ =?us-ascii?Q?A+BCLfSFnXaR2y23TXEf1dFtbsuXBVhQzT8+8EJaDFuRcK34OSrdeoAMouHU?=
+ =?us-ascii?Q?R/9DcCMU3BWbAkIXIKF8yn8xcCvxNWu1YGa7QQGBmi9xY72b/Ks0kwhf5Xdl?=
+ =?us-ascii?Q?1rUACWDq7m1tuqSAMBJmoSt8y+g6954GlgbbR0NSIn/aUPfZLoucsmFE2Sud?=
+ =?us-ascii?Q?pYp7N+Sq7fNZoZl1lTawV3CpTmhlgvMLFXd8oPd+8rdiBzOuIQkhUX0AMozv?=
+ =?us-ascii?Q?5dpzWBQmaRyBwFi6hq8yrWMycrhiA/89xE2K/uqqnUjUC6jqC9azLjMZQs6I?=
+ =?us-ascii?Q?t9/ZjA=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	mZAyRuj5TFPP0OU1r5Y+bt0SyYxuwGmzx5X7vGzc0qfiXyaDPOdORLRyo87TI5fFviM0j5zxAyApYJUoUXbikSZfeVxpJie1Ykofrpbwk4N49jgEk4YGgpl/zhusZ0XZxXr6N2WWTPWtTrxMLutc2Mihy3Sv6n6yo5ejbj//h/pdNmS7DyOGeLKC19EbTY6/GEAPZHyGrmtBVvRxP3jkDeiTz/D3Ok9792sRi1Lg0HluqMqAU7B+9Oi5+KZaz5kv9Co0gzdVYrcQOHG8C7fL+9cjshIFav2NcVv3RITqk/WhyqzUBPR215uSYoP0lKqDmGEL6rr2iQmF3R19NF8pTzYPi5FwseCvm/6KnjgnfHFQKPfIDxNhC8CSNmsAKbOd65+mtNQ+3zsBLwW4LmYC4mFONzd8l4kDYpKYQvA//XYYgBbE71S6tq+CdOdUw2gt
+	mq8xoaZmAGblaIWjy9T6IzYe0RdEQVSP/o6xT6+StldA+OfQw30jYq7Hixz6X4mjYLBOONJmU70iOr75/G9sqc9Trfkl9/Z9NsD/JhD/nk3m3r09ORsBFMyf8rI1vJ82EcZcoCPIBifZUDKdYBMtm7FCUILgBQIrpcfGhJfCM7Noca/Kgnxzl80+ASs8Eg26a+YZKXYSHRGx7H0DPfCNtOS+8YdmeEQDLiJ9a2q5vUZK9QY8P7ywYbqO8NkvtNk01e/ciPOtkin4su3zsNkBOY6aJdRCxKfqwyfnbQAzFDrL0fXLqiUGXw2I/D4pBrkg/9SGCHOQ9hGZUg1iWWXNHeJWiPD7LYxRClbj5I1UrQxUBL0Sxr4aU+vigGga5WRSK93gzqmXlzEK8gHStqe9P4F9Z2wZeHAx60mA6lQEX7mP/8+izds2hTB66LuCp47h
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 16:16:01.9325
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 16:16:04.0467
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17db9e9f-2f58-4aae-6f9e-08de659b0583
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c72a1d6-961c-4d98-fe78-08de659b06c5
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	SN1PEPF00036F3E.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9093
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7726
 
-Introduces various optimisations that rely on constant folding, Value
-Range Propagation (VRP), and Dead Code Elimination (DCE) to aggressively
-eliminate code surrounding the uses of the function.
+This is the file with the most dramatic effect in terms of DCE, so
+single it out here.
 
-  * For single-vendor+no-unknown-vendor builds returns a compile-time
-    constant.
-  * For all other cases it ANDs the result with the mask of compiled
-    vendors, with the effect of performing DCE in switch cases, removing
-    dead conditionals, etc.
+On an AMD-only build:
 
-It's difficult to reason about codegen in general in a project this big,
-but in this case the ANDed constant combines with the values typically
-checked against, folding into a comparison against zero. Thus, it's better
-for codegen to AND its result with the desired compared-against vendor,
-rather than using (in)equality operators. That way the comparison is
-always against zero.
-
-  "cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)"
-
-turns into (cpu_vendor() & X86_VENDOR_AMD) in AMD-only builds (AND +
-cmp with zero). Whereas this...
-
-  "cpu_vendor() == X86_VENDOR_AMD"
-
-forces cpu_vendor() to be ANDed and then compared to a non-zero value.
-
-Later patches take the opportunity and make this refactor as cpu_vendor()
-is introduced throughout the tree.
+  add/remove: 0/1 grow/shrink: 0/5 up/down: 0/-2968 (-2968)
+  Function                                     old     new   delta
+  opt_gds_mit                                    1       -      -1
+  symbols_offsets                            30776   30772      -4
+  symbols_sorted_offsets                     60712   60704      -8
+  parse_spec_ctrl                             2321    2307     -14
+  symbols_names                             108031  108016     -15
+  init_speculation_mitigations                9714    6788   -2926
+  Total: Before=3876849, After=3873881, chg -0.08%
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
- xen/arch/x86/cpu/common.c             |  6 +++++-
- xen/arch/x86/guest/xen/xen.c          |  4 ++++
- xen/arch/x86/include/asm/cpufeature.h | 27 +++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+), 1 deletion(-)
+ xen/arch/x86/spec_ctrl.c | 42 ++++++++++++++++------------------------
+ 1 file changed, 17 insertions(+), 25 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index ebe2baf8b9..6f4e723172 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -328,7 +328,11 @@ void __init early_cpu_init(bool verbose)
- 	*(u32 *)&c->x86_vendor_id[4] = edx;
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index dd0413e1fc..246d8895f1 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -388,7 +388,7 @@ int8_t __ro_after_init opt_xpti_domu = -1;
  
- 	c->x86_vendor = x86_cpuid_lookup_vendor(ebx, ecx, edx);
--	switch (c->x86_vendor) {
-+	if ( c->x86_vendor != cpu_vendor() )
-+		panic("CPU vendor not compiled-in: %s",
-+		      x86_cpuid_vendor_to_str(c->x86_vendor));
-+
-+	switch (cpu_vendor()) {
- 	case X86_VENDOR_INTEL:    intel_unlock_cpuid_leaves(c);
- 				  actual_cpu = intel_cpu_dev;    break;
- 	case X86_VENDOR_AMD:      actual_cpu = amd_cpu_dev;      break;
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index 77a3a8742a..ec558bcbdb 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -57,6 +57,10 @@ void asmlinkage __init early_hypercall_setup(void)
-         cpuid(0, &eax, &ebx, &ecx, &edx);
+ static __init void xpti_init_default(void)
+ {
+-    if ( (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
++    if ( (cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
+          cpu_has_rdcl_no )
+     {
+         if ( opt_xpti_hwdom < 0 )
+@@ -712,7 +712,7 @@ static bool __init check_smt_enabled(void)
+      * At the time of writing, it is almost completely undocumented, so isn't
+      * virtualised reliably.
+      */
+-    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL &&
++    if ( (cpu_vendor() & X86_VENDOR_INTEL) &&
+          boot_cpu_data.family != 0xf && !cpu_has_hypervisor &&
+          !rdmsr_safe(MSR_INTEL_CORE_THREAD_COUNT, &val) )
+         return (MASK_EXTR(val, MSR_CTC_CORE_MASK) !=
+@@ -738,11 +738,10 @@ static bool __init retpoline_calculations(void)
+     unsigned int ucode_rev = this_cpu(cpu_sig).rev;
+     bool safe = false;
  
-         boot_cpu_data.x86_vendor = x86_cpuid_lookup_vendor(ebx, ecx, edx);
-+
-+        if ( cpu_vendor() != boot_cpu_data.x86_vendor )
-+            panic("CPU vendor not compiled-in: %s",
-+                  x86_cpuid_vendor_to_str(boot_cpu_data.x86_vendor));
+-    if ( boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
++    if ( cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+         return true;
+ 
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return false;
+ 
+     /*
+@@ -938,8 +937,7 @@ static bool __init retpoline_calculations(void)
+  */
+ static bool __init rsb_is_full_width(void)
+ {
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return true;
+ 
+     switch ( boot_cpu_data.model )
+@@ -966,8 +964,7 @@ static bool __init should_use_eager_fpu(void)
+      * Assume all unrecognised processors are ok.  This is only known to
+      * affect Intel Family 6 processors.
+      */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return false;
+ 
+     switch ( boot_cpu_data.model )
+@@ -1033,7 +1030,7 @@ static bool __init should_use_eager_fpu(void)
+  */
+ static void __init srso_calculations(bool hw_smt_enabled)
+ {
+-    if ( !(boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++    if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+         return;
+ 
+     /*
+@@ -1099,7 +1096,7 @@ static void __init srso_calculations(bool hw_smt_enabled)
+  */
+ static bool __init has_div_vuln(void)
+ {
+-    if ( !(boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++    if ( !(cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
+         return false;
+ 
+     if ( boot_cpu_data.family != 0x17 && boot_cpu_data.family != 0x18 )
+@@ -1137,7 +1134,7 @@ static void __init ibpb_calculations(void)
+         return;
      }
  
-     switch ( boot_cpu_data.x86_vendor )
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index dcd223d84f..10309e40b6 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -14,6 +14,7 @@
- #include <asm/cpu-policy.h>
- #include <asm/cpuid.h>
- #include <xen/lib/x86/cpu-policy.h>
-+#include <asm/x86-vendors.h>
- #else
- #include <asm/cpufeatureset.h>
- #endif
-@@ -116,6 +117,32 @@ static inline bool boot_cpu_has(unsigned int feat)
+-    if ( boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
++    if ( cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+     {
+         /*
+          * AMD/Hygon CPUs to date (June 2022) don't flush the RAS.  Future
+@@ -1222,8 +1219,7 @@ static __init void l1tf_calculations(void)
+     l1d_maxphysaddr = paddr_bits;
  
- #define CPUID_PM_LEAF                                6
+     /* L1TF is only known to affect Intel Family 6 processors at this time. */
+-    if ( boot_cpu_data.vendor == X86_VENDOR_INTEL &&
+-         boot_cpu_data.family == 6 )
++    if ( (cpu_vendor() & X86_VENDOR_INTEL) && boot_cpu_data.family == 6 )
+     {
+         switch ( boot_cpu_data.model )
+         {
+@@ -1358,8 +1354,7 @@ static __init void l1tf_calculations(void)
+ static __init void mds_calculations(void)
+ {
+     /* MDS is only known to affect Intel Family 6 processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return;
  
-+#define X86_ENABLED_VENDORS \
-+    ((IS_ENABLED(CONFIG_INTEL)    ? X86_VENDOR_INTEL    : 0) | \
-+     (IS_ENABLED(CONFIG_AMD)      ? X86_VENDOR_AMD      : 0) | \
-+     (IS_ENABLED(CONFIG_CENTAUR)  ? X86_VENDOR_CENTAUR  : 0) | \
-+     (IS_ENABLED(CONFIG_SHANGHAI) ? X86_VENDOR_SHANGHAI : 0) | \
-+     (IS_ENABLED(CONFIG_HYGON)    ? X86_VENDOR_HYGON    : 0))
-+
-+static always_inline uint8_t cpu_vendor(void)
-+{
-+    uint8_t vendor = boot_cpu_data.vendor;
-+
-+    /*
-+     * const-ify the CPU vendor if we compiled for a single vendor and there's
-+     * no boot path for an unknown vendor.
-+     */
-+    if ( !IS_ENABLED(CONFIG_UNKNOWN_CPU_VENDOR) &&
-+         (ISOLATE_LSB(X86_ENABLED_VENDORS) == X86_ENABLED_VENDORS) )
-+        return X86_ENABLED_VENDORS;
-+
-+    /*
-+     * This allows the compiler to know more in its VRP pass about the valid
-+     * range of `vendor`. It enhances DCE by eliminating impossible vendors.
-+     */
-+    return vendor & X86_ENABLED_VENDORS;
-+}
-+
- /* CPUID level 0x00000001.edx */
- #define cpu_has_fpu             1
- #define cpu_has_de              1
+     /* Any processor advertising MDS_NO should be not vulnerable to MDS. */
+@@ -1469,8 +1464,7 @@ static __init void mds_calculations(void)
+ static void __init rfds_calculations(void)
+ {
+     /* RFDS is only known to affect Intel Family 6 processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return;
+ 
+     /*
+@@ -1535,7 +1529,7 @@ static void __init tsa_calculations(void)
+     unsigned int curr_rev, min_rev;
+ 
+     /* TSA is only known to affect AMD processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_AMD )
++    if ( !(cpu_vendor() & X86_VENDOR_AMD) )
+         return;
+ 
+     /* If we're virtualised, don't attempt to synthesise anything. */
+@@ -1659,8 +1653,7 @@ static void __init gds_calculations(void)
+     bool cpu_has_bug_gds, mitigated = false;
+ 
+     /* GDS is only known to affect Intel Family 6 processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return;
+ 
+     cpu_has_bug_gds = cpu_has_gds();
+@@ -1754,8 +1747,7 @@ static void __init gds_calculations(void)
+ static bool __init cpu_has_bug_bhi(void)
+ {
+     /* BHI is only known to affect Intel Family 6 processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL ||
+-         boot_cpu_data.family != 6 )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family != 6 )
+         return false;
+ 
+     if ( boot_cpu_has(X86_FEATURE_BHI_NO) )
+@@ -1878,7 +1870,7 @@ static void __init its_calculations(void)
+         return;
+ 
+     /* ITS is only known to affect Intel processors at this time. */
+-    if ( boot_cpu_data.vendor != X86_VENDOR_INTEL )
++    if ( !(cpu_vendor() & X86_VENDOR_INTEL) )
+         return;
+ 
+     /*
+@@ -2181,7 +2173,7 @@ void __init init_speculation_mitigations(void)
+          * before going idle is less overhead than flushing on PV entry.
+          */
+         if ( !opt_rsb_pv && hw_smt_enabled &&
+-             (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
++             (cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
+              (boot_cpu_data.family == 0x17 || boot_cpu_data.family == 0x18) )
+             setup_force_cpu_cap(X86_FEATURE_SC_RSB_IDLE);
+     }
 -- 
 2.43.0
 
