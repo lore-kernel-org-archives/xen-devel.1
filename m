@@ -4,40 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB53E81BDC
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 15:56:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225641.1532187 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F814E81BD3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 15:59:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225652.1532206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpTcK-0006iZ-KE; Mon, 09 Feb 2026 15:56:04 +0000
+	id 1vpTfM-0007vg-82; Mon, 09 Feb 2026 15:59:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225641.1532187; Mon, 09 Feb 2026 15:56:04 +0000
+Received: by outflank-mailman (output) from mailman id 1225652.1532206; Mon, 09 Feb 2026 15:59:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpTcK-0006iS-Fm; Mon, 09 Feb 2026 15:56:04 +0000
-Received: by outflank-mailman (input) for mailman id 1225641;
- Mon, 09 Feb 2026 15:56:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vpTfM-0007vZ-4K; Mon, 09 Feb 2026 15:59:12 +0000
+Received: by outflank-mailman (input) for mailman id 1225652;
+ Mon, 09 Feb 2026 15:59:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gJZC=AN=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
- id 1vpTcJ-0006iM-Gl
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 15:56:03 +0000
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [2a01:111:f403:c105::5])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d26b1d8e-05cf-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 16:55:58 +0100 (CET)
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by CH8PR03MB8299.namprd03.prod.outlook.com (2603:10b6:610:2b9::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.11; Mon, 9 Feb
- 2026 15:55:55 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9587.017; Mon, 9 Feb 2026
- 15:55:55 +0000
+ <SRS0=8Y/H=AN=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1vpTfK-0007vT-M9
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 15:59:10 +0000
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [2001:4860:4864:20::33])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3fb9b7fd-05d0-11f1-b162-2bf370ae4941;
+ Mon, 09 Feb 2026 16:59:01 +0100 (CET)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-409470ad5bbso1090178fac.0
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 07:59:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,233 +42,437 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d26b1d8e-05cf-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UBznJWuB3bZr3MC8jsZtGvwAmvXIsFcyYYYEIIqlLxgiHoXdN79Tf0BV8nJPh4TvPGLk0KD8MHB9SZcePfTpu9sFV3qCfoaFE36LysLCygwPICzrhnEFenEN5e2FC/vrGL/TDp2BL1Q6VQDEYS/cWZls9vJlvYDi94q+VBH5Kd8L77bQ+bzaeVuKLh5K2KwPaiBZyT5XKntNCOfgZVbUglVrhXcYvrQvMRg3XnCy6crAuL5o2mKIrHnynVtSRkQ4/wO2BX6uv34G93y+h318kUQ06hG7h4A+9WFzmuEYfRKtSNM4cFrItPWLV5ibCNZQBNnANJBTEM/CR0zDJVegOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DUmUtqrFJl+6Lblsrb1Y7o/JDSK7vz8OWMK0YmbnBGo=;
- b=DXR1Rk3loJPjsqvBHUbBdeX/w+iKtnzLzAkmZpdTSR56hYS1Nbpr1YZEegr2dW5THAX5iu+IQYwdi82tY8LMI5qP6cocUFvYUe7QMOGbwFHdNFDp4VdYg6H781jj9PjbegCQbiezBtnVhGZDZdLzQRNTIEGduAasPBUDovX/KFxbq/nuuPDrGxeE6xmwY3b2GrYZmMGsk2AXtcAhYuDsTm5LIzNx45S/LejgjJXa1jRpwxGSh913wHG9W33qg1oqly1cR4wbYIRN2cl9/Qpx2nf+UEKc1U5EwLIISF7zRUULgZxIz0FY+ZfS4ZdWUJw8lu7B3BfmbC44ZQHALOf2Bw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DUmUtqrFJl+6Lblsrb1Y7o/JDSK7vz8OWMK0YmbnBGo=;
- b=pVmPFg5JynuJkHyZNp8FWo7DNjEI8OhLJglfo5uSU0rhUZI4RnYpeMnNymyhepyOseeHMBt6mI5AXg9tLm/ujmKWAAtk70kXeU+1Y0FfjaAS7vCAxgYdlhQeJCUcp2OCzSGq/30K1wpYIPRfDYY3RBgT0HSPFaTG1QNanvRoJSM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Mon, 9 Feb 2026 16:55:52 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>
-Subject: Re: [PATCH] x86/shadow: Delete the none.c dummy file
-Message-ID: <aYoDiDiJ4rRLxhmw@Mac.lan>
-References: <20260209104104.7840-1-alejandro.garciavallejo@amd.com>
- <aYnyY2MArv4vTXsY@Mac.lan>
- <DGAJI3UYR98J.FU94VABOFZ5N@amd.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <DGAJI3UYR98J.FU94VABOFZ5N@amd.com>
-X-ClientProxiedBy: MA2P292CA0016.ESPP292.PROD.OUTLOOK.COM (2603:10a6:250::14)
- To CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
+X-Inumbo-ID: 3fb9b7fd-05d0-11f1-b162-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; t=1770652740; cv=none;
+        d=google.com; s=arc-20240605;
+        b=cyVKPXdEdRmzombBCoPJcwFJrnpWkUru4dciuEkuYJHeG2ZSBORCu5gX4ithBTwppS
+         FOf/yPBRe7JuZp9TIB7DE8uRw1zfAkM5Dq/YftAeEDMOHC5XRWpdfeB/YJXNZTAZDhFg
+         gF2BAOKZIzvEbhm5zRNg+niM9wokohktMmNs3JG4rhAQNIoNY2ANdzcFuUdh41uQ7uko
+         0hEsDsSoy1nXKJPYzzi+vpeJtUjuKqvAM4XAYQs9FjN4JFSJhtjH8POlgEAHcGXqKKXq
+         /tOPE43CW5e3dIz5bdFA8qKC7I/kWyCfeILwxxOgxf5UD6jaOI4D6w/wJ+WTyl5gcQc2
+         eTwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=cSa/Wv7wZ4Hlv0Oe1UZ8HrxPfw35imhD2B4tJvjAK6U=;
+        fh=wB0f5JGUSpWYejuxtnrl8SDqvqyWrEsEaWvC32LbdiU=;
+        b=KrhpBrIay2DDr7uU8c5JXJmTu/4lqKgtH6+e92F0GdxTaYzT3+Cbf8mCX0nFOE827p
+         0OUV1Btl3nEgE0q9LuJL8Qjp0etmkG5RXoXix+M/2FA4HhkYTXN6vKTTMoXf2Yim94o7
+         lex19Ozq0E1NhJIT2aFpR3AHgvZjXLyn0gf4JIP0NC3KCFlh8Y9pcH1R4HiUGiyAOxf0
+         ik0t3vXdXN3Gmx3iHgFVnhF1Jyd+RxtVGzhCmDJsvsxNNcL8Cw+Wh0nWROflz1tTAn2i
+         Y+MNp0190iClJAofALXam3zGAwTI3XeEOyQnfkNaIbLqikhoEsXs6fzmd0Nvgl5mP7BV
+         olZA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1770652740; x=1771257540; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cSa/Wv7wZ4Hlv0Oe1UZ8HrxPfw35imhD2B4tJvjAK6U=;
+        b=eXIIqx1gNADwmoComEbjP1gGZgWLIDsMV8uXnfyc0KFvQYO4BEGZ+sFt5Crq6By3r9
+         wAwfQ3c7rE6EBCedQe/xuLpJJwxyUZKE1LzG/NFwOw25PNO/UWNCPBDWPmgN0j089oEI
+         Hb244mxlFYYp3l+VQj7G8KffjLzwqQFFHT5Z8NgFYh5C7jSZ9xiyPFcClUPhymTNcYIn
+         Yb8feJxmWBmRa29H8K2l5rC/BYRpLkq/Kfaa7bs8wqlK+sNB7Kqwf6zoagXjfn6qYCJ3
+         iHzKeQdh+fegjWKFd1VfVAyyUtjTf284XncgYhew5I3/15xBqbYLW6uzKLlZYdvBzL2n
+         BvXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770652740; x=1771257540;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=cSa/Wv7wZ4Hlv0Oe1UZ8HrxPfw35imhD2B4tJvjAK6U=;
+        b=uKWgerMRb1dAERQI45D9OQMIQtXAPOXTHqfie6IXhS/lAO7L+eWE9TcXf5itkrOYa/
+         eiuVcgUVnS/hzRSw9f99ec5SF+SY68x9Fpe8wYrJuXBoZDYKdgZd8WxyIm4K5hKQUp1w
+         GQDu7cPNSEtVI1te6ct8pmbLacLjKP66QY3Gf/8OwDeRqeJp5MnQKYEx9jSRrmEiBYNn
+         bHH3v0Qv7LuUioRDOfN3Xpk8TcJxHqt3iHjRcGX3uh2JSWqNGaoLGJz2i2q5j9KzR9gx
+         jA2g5IvNgk4hJYFyNxqGMSL2tirVclm75vXbHtV2Ipp4uA11WXvzutVNCXQwGHyiKVop
+         /5Dg==
+X-Gm-Message-State: AOJu0YyMQ+lKayIIFyQNLsNzpQwOpsk21Pv0UmDK/X9d4fYCzRZz3YAk
+	dkJJ4GtAkB109UHUz0+XAMnhRCFPJ3RqmMIS2i6a0rL2KdF3CZh4pYsaK0XfHHCnw9GT6rtR24u
+	8xDmJWyQiH+n6oPnwrrnGYZY5ruYK8mLhahtjQ0zBfw==
+X-Gm-Gg: AZuq6aIkIj6jf4D/9mg/8piv53YM+vNSAXiTezQQJE4C2qqCZdwTcCYYTOrwtusRVwx
+	P+6MJe2LMi4mtlVGOTOeKOMWsPzlgshQfTCArBaG5K4frY5FOal+S3HtZlAIQSSt4sM2OgeGlkv
+	LPGfY4LygsvGo6XMGJ9HFgR/xkrh3g+z9MP9OLlcYLSJ2GhunMBW8diFlq7N/xgrQj+DqLhGPjm
+	zXxh6nLqXI4ZLWvmDwxJGdddgzd/X4h+twJU9mjLl643eYd0P6SaO2JPvqGsAabE+QRuNaj6mn0
+	m7vuxWOCGdhD1tK3bjevpQX47A==
+X-Received: by 2002:a05:6870:fb8f:b0:3ec:9c0c:283a with SMTP id
+ 586e51a60fabf-40a96cddaacmr6056897fac.24.1770652739582; Mon, 09 Feb 2026
+ 07:58:59 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|CH8PR03MB8299:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1c644381-f4e0-41d2-7205-08de67f3b548
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?clAzdTNqLy9QN2dvNEY5ZEc5ZlFTZFZmSmJGZFhOQmo2OCtwM3pkMXkrdUw5?=
- =?utf-8?B?NnRGQzBvbTlkaXQ4anVCQStDTm1yejVPZEZXdHpjdnpzSGt6UWxPS3ptY0Rz?=
- =?utf-8?B?UTR5MGd1MkdQQVh2SUVVeE1ibXNTVjR0ck1yUFVObzBVS2RvbUJsb1gxZVRp?=
- =?utf-8?B?UHVCbWg5bmxIT01UQnA4dGY0dmwzVVdkZ2RsRk9sMFNNRHBEOTUrU0xqODdn?=
- =?utf-8?B?TEdGeWRjQjkrRUpUdGlpci9zS3VJS0xKSkg0cjJEOXVqNTZLalF2cXZUWEEz?=
- =?utf-8?B?Y3U4NmZzdC9pbEtJWnBNMmhYMnhxdzZxM053OU0yUEtoVmxsMERSTXd6eWhh?=
- =?utf-8?B?a25veDh2ekZpejlQMnBnYzBXSFlMTVVZcyt2NCtTUjI3Q3ZRcGZnTmJXUjEz?=
- =?utf-8?B?bDRqQzJtclpkTHkvbnV5WnU0dEVCajRXejkzdHBMOEY3d0pmeTRPKy9oaFNw?=
- =?utf-8?B?RmVjUmJjRDhjaDJJcTFtR3F3Z2ZQSVIwOTJkYUkvdSsxTml2NTVIUHZmOFNB?=
- =?utf-8?B?dzZtSVYxNmFKUGQ4RnlZaG9xTDNmTWo0NFhuUFI4S1hhcVUzRjBGaXNTZnFZ?=
- =?utf-8?B?bFVkWHRRK1ZmYkQrOURUaFdQTGc1UHc1SmVwQVpnUE5MOUE5TDZOR2xzMStv?=
- =?utf-8?B?SXNYamxKODZmOExrRVU4SWJhQWNmdmRtRlNRZFY2TGVNdmxXbTVUS0dTTTNB?=
- =?utf-8?B?ekRZOCt6aDJtWnhNRkpWUzNyaXJwUDdQNjIrOEdQcVJPdTdrb1NUbXNaVFNH?=
- =?utf-8?B?d2dLeEJVZC9BeWNYNTlGZCsxZXF6RVViU1ZLbytyNWJBbVJtTE9WKyt6Zk0w?=
- =?utf-8?B?MlV3SnpUMHJ4OUtaZDlZMnZndjRycHBuelZrcHdZcmswNGRaMVNxelNGSmQ1?=
- =?utf-8?B?c25ZNHU3NFliOXVjcTc2anBvcXNLVDdUd3E2NkN6SUFvQ3lOUnM3QmZhQXUv?=
- =?utf-8?B?SW1jaWRNWlZxZVZBK3k5K2pPWnd2YmJYL1N5azdhVzg0aGw5cjEzd2loN05Y?=
- =?utf-8?B?ejJ1ajM1ajZCejNESW8wTmZ3VGRpTFJzdUVUOVc1Rmhxek5BeDg1ckttRFVE?=
- =?utf-8?B?amtuRnJaOHNWR2dtVVZoR2tHTWhCanBsMWVya1BvQzlMZUN0dTVyT3NhbTd6?=
- =?utf-8?B?S28zZXhzUEtxaG5rdFJ2b0tMMUhWM2FmSzZrckE1SDVkb2cxTFVlQ3A2bStj?=
- =?utf-8?B?bDY5UFFCWTBneUZLbE04S09YQVYzRmRCNE43ZGdib0lNTHAvdWY2VGRyMDBB?=
- =?utf-8?B?cS8yWWZaQzdBU0grRFRYVUJSK3h4Nkx4ajZUbDNHR1AzbEY0NGlKOEs1cHJD?=
- =?utf-8?B?RGx2Uk5kWGdNT3NEOTVkcnhMNWNqRnUwYXNPRURBdnZoZVBrRFFOWmhBV3po?=
- =?utf-8?B?bjVIellUNms3eDBvM0VycWd1UDZIOWxvWkxkcm5oaFN2VFhLd2p6RkZyOTNm?=
- =?utf-8?B?aUlEeVhxOVIrWmoveWs0ZHlJTTVOcm1tNkRhVVh3akcwWUxRckxKTEk5azRp?=
- =?utf-8?B?c2pSRXlUc1ZaYnJIeE9USnNDR05sYzRoRCswRHF5bUdvQ0JRMUhGMnVEeDVK?=
- =?utf-8?B?ajZEZDRIdlkzaW1ENklPRGZxVjBzc0JRd0tFWEdza0tqWjZLcGNyaUxPN3pF?=
- =?utf-8?B?NEdtU0NUK3NxL3g2VDEwYWxwY1ZRR0tXUXhYUjZWMmt0R3VjNFFzRnJhTmpY?=
- =?utf-8?B?WGJRcW5GdWlCUVhYZ2FMMmFHU3JDMHNVWGdZL3hyNk14ZVFqMGpIcHRNMDBN?=
- =?utf-8?B?OGFaRzJFdWJNWE5yTHRmYlBUZTNHY3RReU5PVTB1RllPZVdvTnd3WkJ0Znpk?=
- =?utf-8?B?MjVoYVN2c1Y0NzhVcUloRldTRmlQKzA1a2JOVDFPYTduVEk5bHlCLzlTMDFL?=
- =?utf-8?B?Qk9kRGoyVzhBR2FiNnRTV3QrdWlvYVc0OUNqL0ROOEk0czJoN0VZUSs4c2Zs?=
- =?utf-8?B?UFRzTU5RclBWNXMwY2pkNlJ4dy9VZURSa0JIWlkrcVVrcXFXakRvak9CRnBa?=
- =?utf-8?B?TGJhY3d0ckN3MDZRbHZNaEdkNDZjVmFoODZtTzJsUFJTc0hUcVNvQnpuNHhq?=
- =?utf-8?B?U1ltZTJpMjY2V1lqcGVrNlR4YVY1dWlrNHJEb2tDWmlwT3hzNEk0STBIN0FM?=
- =?utf-8?Q?DlGs=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UTVmNmtEQjh2b1BiQXJFc1BxUk1ySHoxeHZuTHFZN1pEeFh6Q2ZBK2lLL0pN?=
- =?utf-8?B?YUR2R3BPRXpvNjYxbGZBVFhjditHQTMvbDdWQmpoNTVxbGh5aWV2U00zK3BK?=
- =?utf-8?B?cTJZL3RjdVBBT0orRjBNSFJ6dkNidnhJaDBleDg1OWkxMXlRZXhQNzM3REZD?=
- =?utf-8?B?aXd2TC9XRFI2SGwrQUx6czB6ekx2SG1BT3QxaEdHcFJsbXlmdGFOblFBWGxG?=
- =?utf-8?B?dVc5aFpQK1ovMUhtUWRaaUMralJ5ZmpIR1JVZm9hQVFVaHZkTWxhaDE0VEpL?=
- =?utf-8?B?bHRyaENwOUdrRkpDV1RSZVRVaVZSaWJVOTlNUllVUXdoZjV0WXN3OEtwNGFw?=
- =?utf-8?B?WFF3VGZEcm5mSG9iOTNzM3JackplK0NSazlBbXVJNGhpWXB0ZmdEcDlJTEpM?=
- =?utf-8?B?bnltaS82YXJETytDa2xQOVNmemp2VFVSdnlQbG83NkJoQ3VrT3hqY29jcWo4?=
- =?utf-8?B?aktMajFjY3VKaCthemlteHNQYU1YdkxsRjFocFNzM01XQUFXd2t3VjQ3RWpF?=
- =?utf-8?B?UTNrangyb1VqendrRkJNOVlKVGpGNWZBNWJ0M2lLOWI2bjhoMTE3VGczRk1i?=
- =?utf-8?B?TW5pZy93d2FlL3NncU9zMkUxcHdubVRzT1RJMWw5WTZIR1BxTVVWYUpRRGdj?=
- =?utf-8?B?NWhaYVJheEZvZFFrTTZ1cnlaOVJsVFhzMzB1UHRLY2VPandhVXJmbHFqQTky?=
- =?utf-8?B?Ukp4K2VuR1FEOW1VRllKRnA4Qm5BMHBnUnFYbFplTzRKUHRQcFZWeHNRZGVs?=
- =?utf-8?B?RkxPRWw5Z2ZxS3VOR3piSFRzdDBoZk9KRWNFMHhhYzJ0a1JYUlRjTUlMZitH?=
- =?utf-8?B?ZHdXUEtmcHd5NnJWc1dmeDdYMjdMTUVWN0RpTm8zREVONjZyM1ZOcVgyQjQ1?=
- =?utf-8?B?ZWh2VW1BUnZISXdycnVNKzVndlREYk9MeHdNZ1pVTzdocnlDODN5TnNwSC9U?=
- =?utf-8?B?a0FZMmlydXNjcTlzTDVLalViZDQrN21DNzJndGgzZCs0R2lRTDVDMzZYR0hZ?=
- =?utf-8?B?NzFXKzZ3S3ZJTnhrMjVSRUxWUXgxZlpiaS83T0Y3TDFKVzkxV0Q0ZHovUG1l?=
- =?utf-8?B?YmtjWXpXVCtyRElhdThmWnNBWTg5a0Zzb21iMXFjL1ZiOTlGUHlta25uaEw4?=
- =?utf-8?B?cnYrMHM4ajUvUTYrRHBQMWVlb2hqUVBhVkYweTJ1UCtKajgrelhVcVJtVC8z?=
- =?utf-8?B?U3ZGd0t1VFpyZTdVb2hzRGt6Q3B4OWxQOVg4U2VGSjJGSm9JWFNFT3Z6N0l2?=
- =?utf-8?B?em1Za1JxZmdzZkJ1U1hxb09KZ1FMNkNCL1ZvTHRGZTJrL0pEaldGSkhURXVT?=
- =?utf-8?B?YjN1MGZjeE1lcWZMdmhIUS90WHhFQTdXUGo0U25NTm9zZzJYV0RMQmhBVXVu?=
- =?utf-8?B?eFF1cWZENlpTTklWa091aiswRXhkd291UXVqdDBjU2dSbEllNEpPaHBEV0tC?=
- =?utf-8?B?VDJacVdNRHNYRFNETGFkNEpxRnllMWYvS1JFWUxjQ0svTURvamc4TFJYOFlz?=
- =?utf-8?B?ait3TkFjWVZScXZvSmd3ZWMrZks0V25zbzVrMHRURGNET2dxeUIvdnMvS3pE?=
- =?utf-8?B?b3pCTFE2RDJ4TUVRQjZXQ2pJL0hPTlJqYlRGb1FodHpIYVMxT0c1Nm9OeUtV?=
- =?utf-8?B?azNHOWxwbmNjTnlDTHlrS0FmcmwxUDRSTGE0NUp2eHQ3U2RWOWN3ZUQ5V2tM?=
- =?utf-8?B?Tm9Nb0V4WXBzQTkrZG9HMWdxaW5yNEFhN1RtUlN2QXVidmE3RHQ2d3I3VTNS?=
- =?utf-8?B?b0t1bGVxZWVIVDkxZ3lJbEhpZ1lYVWt4RS9KUlF1K1UwbXlrUW9WWTRCUGVF?=
- =?utf-8?B?ZTRubVJKcGdTRTAxcUdlayswTVd4d2EweXhtNW5YRVZMWEsraUtCcjQ5VzFt?=
- =?utf-8?B?VkRJUTdBTXMzYzhkRkZldFhrMWZXSEF0SHZwQUxMZDNYbTBFWjlwTlB3K3pa?=
- =?utf-8?B?eEF6YmJSK0xjK1Zhbkk4QUt3UkJhVjVldTVsTlRPdzc5SzRDOVhKc2RSZlVV?=
- =?utf-8?B?eXdNejh0a3NzbzM4S2JZS29BSFJzM3Z1NURqaEkwTE0wNjlBblhqQU5hWmM0?=
- =?utf-8?B?amU3SXljRk43RDRlTnJ2RE85VFJYcFBLY05pRmlJSDhZTE9QM0Jha09NSG5v?=
- =?utf-8?B?ZzNCUnJwRmlYekdaTGVFWGJvTC9yV3FCMDZDWnZWTzNkSUZxWW9Fb0ZOOGxP?=
- =?utf-8?B?NkhlTlJIeWpjM0dndi91Mm16U2VkZlUweElsZGNOQ0ZkbDNXK1FsQ29KR3hv?=
- =?utf-8?B?ZjI4THVpUUlaWnpPN09PV2JNTU5GY3pYWTlTY2VubEZqTzRVaHFldDBDM2dP?=
- =?utf-8?B?aDBtUG81UXdzS1FGWWhlOGFNUVR3YnkxNW1IOUYxcmxSYWlvVVhvZz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c644381-f4e0-41d2-7205-08de67f3b548
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2026 15:55:55.2850
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: iX12jkt2lcL90StL+iLRgjHcGjRQKGelXaE1b7YWJlDDBtGswurO3+g7ywO+FCF6w3FtErgnW7ONL4aEHNH1wA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR03MB8299
+References: <cover.1770115301.git.bertrand.marquis@arm.com>
+ <a8d316dbdbd00a7980c6d527038f9046bb895c69.1770115302.git.bertrand.marquis@arm.com>
+ <CAHUa44HZ59JC2X1p0GWGN1TVAoGo9K1emVPrBQon4V0VT960YA@mail.gmail.com> <1A922065-D0DC-4930-806C-6C202B5A6957@arm.com>
+In-Reply-To: <1A922065-D0DC-4930-806C-6C202B5A6957@arm.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Mon, 9 Feb 2026 16:58:48 +0100
+X-Gm-Features: AZwV_Qhc75scEaEIUlr-5KEopBKl8tD2-FV-XKlqVTAhyFrwLnljNOG3GWxGjn4
+Message-ID: <CAHUa44E3zv0rNSv68vSkzzV7LQRfgHLq41YdOD5ZZXf+bhJoZQ@mail.gmail.com>
+Subject: Re: [PATCH 04/12] xen/arm: ffa: Add FF-A 1.2 endpoint memory access descriptors
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 09, 2026 at 04:35:04PM +0100, Alejandro Vallejo wrote:
-> On Mon Feb 9, 2026 at 3:42 PM CET, Roger Pau Monné wrote:
-> > On Mon, Feb 09, 2026 at 11:41:02AM +0100, Alejandro Vallejo wrote:
-> >> It only has 2 callers, both of which can be conditionally removed.
-> >> 
-> >> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-> >> ---
-> >> I'd be ok conditionalising the else branch on...
-> >> 
-> >>     IS_ENABLED(CONFIG_SHADOW_PAGING )|| IS_ENABLED(CONFIG_LOG_DIRTY)
-> >> 
-> >> logdirty patch: https://lore.kernel.org/xen-devel/20260209103118.5885-1-alejandro.garciavallejo@amd.com
-> >> 
-> >> ... to avoid the danger of stale pointers, with required changes elsewhere so
-> >> none.c is only compiled out in that case.
-> >> 
-> >> I'm not sure how much it matters seeing how they are all unreachable.
-> >> ---
-> >>  xen/arch/x86/mm/Makefile        |  2 +-
-> >>  xen/arch/x86/mm/paging.c        |  4 +-
-> >>  xen/arch/x86/mm/shadow/Makefile |  4 --
-> >>  xen/arch/x86/mm/shadow/none.c   | 77 ---------------------------------
-> >>  4 files changed, 3 insertions(+), 84 deletions(-)
-> >>  delete mode 100644 xen/arch/x86/mm/shadow/none.c
-> >> 
-> >> diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
-> >> index 960f6e8409..066c4caff3 100644
-> >> --- a/xen/arch/x86/mm/Makefile
-> >> +++ b/xen/arch/x86/mm/Makefile
-> >> @@ -1,4 +1,4 @@
-> >> -obj-y += shadow/
-> >> +obj-$(CONFIG_SHADOW_PAGING) += shadow/
-> >>  obj-$(CONFIG_HVM) += hap/
-> >>  
-> >>  obj-$(CONFIG_ALTP2M) += altp2m.o
-> >> diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-> >> index 2396f81ad5..5f70254cec 100644
-> >> --- a/xen/arch/x86/mm/paging.c
-> >> +++ b/xen/arch/x86/mm/paging.c
-> >> @@ -634,7 +634,7 @@ int paging_domain_init(struct domain *d)
-> >>       */
-> >>      if ( hap_enabled(d) )
-> >>          hap_domain_init(d);
-> >> -    else
-> >> +    else if ( IS_ENABLED(CONFIG_SHADOW_PAGING) )
-> >>          rc = shadow_domain_init(d);
+Hi Bertrand,
+
+On Mon, Feb 9, 2026 at 3:50=E2=80=AFPM Bertrand Marquis
+<Bertrand.Marquis@arm.com> wrote:
+>
+> Hi Jens,
+>
+> > On 9 Feb 2026, at 11:57, Jens Wiklander <jens.wiklander@linaro.org> wro=
+te:
 > >
-> > If you want to go this route you will need to set rc = -EOPNOTSUPP;
-> > prior to the `if ... else if` on the HVM case.
-> 
-> Maybe this instead
-> 
->     else
->         rc = IS_ENABLED(PV) ? shadow_domain_init(d) : -EOPNOTSUPP;
-
-But even for the PV case we cannot call shadow_domain_init() if shadow
-is compiled out?  I think you want:
-
-    if ( hap_enabled(d) )
-        hap_domain_init(d);
-    else if ( IS_ENABLED(CONFIG_SHADOW_PAGING) )
-        rc = shadow_domain_init(d);
-    else
-        rc = is_hvm_domain(d) ? -EOPNOTSUPP : 0;
-
-> And gate none.c on PV && !SHADOW_PAGING, which seems to be the only use.
-> 
-> It's a lot easier to see the safety on the HVM-only case, particularly with...
-> 
-> > is compiled out, and the toolstack has not specified the HAP flag at
-> > domain creation you will end up with a domain that doesn't have the
-> > paging operations initialized as paging_domain_init() would return 0
-> > with neither HAP nor shadow having been setup.  That's likely to
-> > trigger NULL pointer dereferences inside of Xen.
+> > Hi Bertrand,
 > >
-> > Also, seeing the code in arch_sanitise_domain_config() we possibly
-> > want to return an error at that point if toolstack attempts to create
-> > an HVM guest without HAP enabled, and shadow is build time disabled.
-> > I've sent a patch to that end.
-> 
-> ... this patch you meantion. Thanks.
-> 
-> I'm guessing it's still a hot potato in for non-shadow PV, which strongly hints
-> at our being better off leaving it in that case. On HVM-only configurations it
-> seems rather silly.
+> > On Tue, Feb 3, 2026 at 6:38=E2=80=AFPM Bertrand Marquis
+> > <bertrand.marquis@arm.com> wrote:
+> >>
+> >> FF-A 1.2 extends the endpoint memory access descriptor (EMAD) from
+> >> 16 to 32 bytes, adding implementation-defined (IMPDEF) fields and
+> >> reserved space. The MEM_SHARE path currently assumes the 1.1 EMAD
+> >> size and rejects the 1.2 layout.
+> >>
+> >> Add FF-A 1.2 EMAD support to MEM_SHARE:
+> >> - define ffa_mem_access_1_2 and store IMPDEF payload in ffa_shm_mem
+> >> - emit 1.2 EMADs to the SPMC for FF-A 1.2 guests, forwarding IMPDEF
+> >> - refactor header parsing into read_mem_transaction() for 1.0/1.1+
+> >> - detect EMAD format by mem_access_size to allow 1.1 on 1.2 guests
+> >>
+> >> Functional impact: MEM_SHARE supports FF-A 1.2 EMADs.
+> >>
+> >> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> >> ---
+> >> xen/arch/arm/tee/ffa_shm.c | 108 +++++++++++++++++++++++++++++--------
+> >> 1 file changed, 86 insertions(+), 22 deletions(-)
+> >>
+> >> diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
+> >> index 4c0b45cde6ee..905a64e3db01 100644
+> >> --- a/xen/arch/arm/tee/ffa_shm.c
+> >> +++ b/xen/arch/arm/tee/ffa_shm.c
+> >> @@ -30,6 +30,14 @@ struct ffa_mem_access {
+> >>     uint64_t reserved;
+> >> };
+> >>
+> >> +/* Endpoint memory access descriptor (FF-A 1.2) */
+> >> +struct ffa_mem_access_1_2 {
+> >> +    struct ffa_mem_access_perm access_perm;
+> >> +    uint32_t region_offs;
+> >> +    uint8_t impdef[16];
+> >> +    uint8_t reserved[8];
+> >> +};
+> >> +
+> >> /* Lend, donate or share memory transaction descriptor */
+> >> struct ffa_mem_transaction_1_0 {
+> >>     uint16_t sender_id;
+> >> @@ -73,7 +81,7 @@ struct ffa_mem_transaction_1_1 {
+> >> /*
+> >>  * The parts needed from struct ffa_mem_transaction_1_0 or struct
+> >>  * ffa_mem_transaction_1_1, used to provide an abstraction of differen=
+ce in
+> >> - * data structures between version 1.0 and 1.1. This is just an inter=
+nal
+> >> + * data structures between version 1.0 and 1.2. This is just an inter=
+nal
+> >>  * interface and can be changed without changing any ABI.
+> >>  */
+> >> struct ffa_mem_transaction_int {
+> >> @@ -92,6 +100,8 @@ struct ffa_shm_mem {
+> >>     uint16_t sender_id;
+> >>     uint16_t ep_id;     /* endpoint, the one lending */
+> >>     uint64_t handle;    /* FFA_HANDLE_INVALID if not set yet */
+> >> +    /* Endpoint memory access descriptor IMPDEF value (FF-A 1.2). */
+> >> +    uint64_t impdef[2];
+> >>     unsigned int page_count;
+> >>     struct page_info *pages[];
+> >> };
+> >> @@ -297,17 +307,21 @@ static void init_range(struct ffa_address_range =
+*addr_range,
+> >>  * This function uses the ffa_spmc tx buffer to transmit the memory tr=
+ansaction
+> >>  * descriptor.
+> >>  */
+> >> -static int share_shm(struct ffa_shm_mem *shm)
+> >> +static int share_shm(struct ffa_shm_mem *shm, uint32_t ffa_vers)
+> >> {
+> >>     const uint32_t max_frag_len =3D FFA_RXTX_PAGE_COUNT * FFA_PAGE_SIZ=
+E;
+> >>     struct ffa_mem_access *mem_access_array;
+> >> +    struct ffa_mem_access_1_2 *mem_access_array_1_2;
+> >>     struct ffa_mem_transaction_1_1 *descr;
+> >>     struct ffa_address_range *addr_range;
+> >>     struct ffa_mem_region *region_descr;
+> >> -    const unsigned int region_count =3D 1;
+> >>     uint32_t frag_len;
+> >>     uint32_t tot_len;
+> >> +    uint32_t mem_access_size;
+> >> +    uint32_t mem_access_offs;
+> >> +    uint32_t region_offs;
+> >>     paddr_t last_pa;
+> >> +    uint32_t range_count;
+> >>     unsigned int n;
+> >>     paddr_t pa;
+> >>     int32_t ret;
+> >> @@ -326,16 +340,35 @@ static int share_shm(struct ffa_shm_mem *shm)
+> >>     descr->handle =3D shm->handle;
+> >>     descr->mem_reg_attr =3D FFA_NORMAL_MEM_REG_ATTR;
+> >>     descr->mem_access_count =3D 1;
+> >> -    descr->mem_access_size =3D sizeof(*mem_access_array);
+> >> -    descr->mem_access_offs =3D MEM_ACCESS_OFFSET(0);
+> >> +    if ( ffa_vers >=3D FFA_VERSION_1_2 )
+> >> +        mem_access_size =3D sizeof(struct ffa_mem_access_1_2);
+> >> +    else
+> >> +        mem_access_size =3D sizeof(struct ffa_mem_access);
+> >> +    mem_access_offs =3D sizeof(struct ffa_mem_transaction_1_1);
+> >> +    region_offs =3D mem_access_offs + mem_access_size;
+> >> +    descr->mem_access_size =3D mem_access_size;
+> >> +    descr->mem_access_offs =3D mem_access_offs;
+> >>
+> >> -    mem_access_array =3D buf + descr->mem_access_offs;
+> >> -    memset(mem_access_array, 0, sizeof(*mem_access_array));
+> >> -    mem_access_array[0].access_perm.endpoint_id =3D shm->ep_id;
+> >> -    mem_access_array[0].access_perm.perm =3D FFA_MEM_ACC_RW;
+> >> -    mem_access_array[0].region_offs =3D REGION_OFFSET(descr->mem_acce=
+ss_count, 0);
+> >> +    if ( ffa_vers >=3D FFA_VERSION_1_2 )
+> >> +    {
+> >> +        mem_access_array_1_2 =3D buf + mem_access_offs;
+> >> +        memset(mem_access_array_1_2, 0, sizeof(*mem_access_array_1_2)=
+);
+> >> +        mem_access_array_1_2[0].access_perm.endpoint_id =3D shm->ep_i=
+d;
+> >> +        mem_access_array_1_2[0].access_perm.perm =3D FFA_MEM_ACC_RW;
+> >> +        mem_access_array_1_2[0].region_offs =3D region_offs;
+> >> +        memcpy(mem_access_array_1_2[0].impdef, shm->impdef,
+> >> +               sizeof(mem_access_array_1_2[0].impdef));
+> >> +    }
+> >> +    else
+> >> +    {
+> >> +        mem_access_array =3D buf + mem_access_offs;
+> >> +        memset(mem_access_array, 0, sizeof(*mem_access_array));
+> >> +        mem_access_array[0].access_perm.endpoint_id =3D shm->ep_id;
+> >> +        mem_access_array[0].access_perm.perm =3D FFA_MEM_ACC_RW;
+> >> +        mem_access_array[0].region_offs =3D region_offs;
+> >> +    }
+> >>
+> >> -    region_descr =3D buf + mem_access_array[0].region_offs;
+> >> +    region_descr =3D buf + region_offs;
+> >>     memset(region_descr, 0, sizeof(*region_descr));
+> >>     region_descr->total_page_count =3D shm->page_count;
+> >>
+> >> @@ -349,8 +382,9 @@ static int share_shm(struct ffa_shm_mem *shm)
+> >>         region_descr->address_range_count++;
+> >>     }
+> >>
+> >> -    tot_len =3D ADDR_RANGE_OFFSET(descr->mem_access_count, region_cou=
+nt,
+> >> -                                region_descr->address_range_count);
+> >
+> > Please remove the unused ADDR_RANGE_OFFSET() macro and friends, as
+> > they're no longer accurate.
+>
+> Very true, will remove them in v2.
+>
+> >
+> >> +    range_count =3D region_descr->address_range_count;
+> >> +    tot_len =3D region_offs + sizeof(*region_descr) +
+> >> +              range_count * sizeof(struct ffa_address_range);
+> >>     if ( tot_len > max_frag_len )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> @@ -358,7 +392,7 @@ static int share_shm(struct ffa_shm_mem *shm)
+> >>     }
+> >>
+> >>     addr_range =3D region_descr->address_range_array;
+> >> -    frag_len =3D ADDR_RANGE_OFFSET(descr->mem_access_count, region_co=
+unt, 1);
+> >> +    frag_len =3D region_offs + sizeof(*region_descr) + sizeof(*addr_r=
+ange);
+> >>     last_pa =3D page_to_maddr(shm->pages[0]);
+> >>     init_range(addr_range, last_pa);
+> >>     for ( n =3D 1; n < shm->page_count; last_pa =3D pa, n++ )
+> >> @@ -448,6 +482,12 @@ static int read_mem_transaction(uint32_t ffa_vers=
+, const void *buf, size_t blen,
+> >>     if ( size * count + offs > blen )
+> >>         return FFA_RET_INVALID_PARAMETERS;
+> >>
+> >> +    if ( size < sizeof(struct ffa_mem_access) )
+> >> +        return FFA_RET_INVALID_PARAMETERS;
+> >
+> > Implicitly, size should also be a multiple of 16. Don't you agree?
+>
+> The spec is giving some constraints on the offset but there is nothing ex=
+plicit for the
+> per mem access size. As we have no 64bit fields in it, I am not really se=
+eing any
+> implicit multiple of 16.
 
-I'm not sure I follow exactly what you mean.  Some rants below which
-might or might not be along the lines of what you suggest.
+I was perhaps assuming too much. The offset is required to be a
+multiple of 16, so it would make sense for all elements in the array
+to be at a 16-byte aligned offset.
 
-PV needs shadow for migration.  HVM can use shadow or HAP, and our
-default is HAP.  For HVM only builds it could be possible to not
-recommend enabling shadow.  Even for deployments where only dom0 is
-using PV mode, it does still make sense to possible recommend not
-enabling shadow for attack surface reduction.
+>
+> I am checking the offset because it is enforced by the spec but for the s=
+ize i would
+> rather not put something as who knows what might be added in the future.
 
-Thanks, Roger.
+It's not important right now, since we only accept a single EMAD. But
+once we accept more than one, the second EMAD might be accessed from
+an unaligned address if we're not careful.
+
+>
+> >
+> >> +
+> >> +    if ( offs & 0xF )
+> >> +        return FFA_RET_INVALID_PARAMETERS;
+> >> +
+> >>     trans->mem_reg_attr =3D mem_reg_attr;
+> >>     trans->flags =3D flags;
+> >>     trans->mem_access_size =3D size;
+> >> @@ -464,7 +504,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *re=
+gs)
+> >>     uint64_t addr =3D get_user_reg(regs, 3);
+> >>     uint32_t page_count =3D get_user_reg(regs, 4);
+> >>     const struct ffa_mem_region *region_descr;
+> >> -    const struct ffa_mem_access *mem_access;
+> >> +    const struct ffa_mem_access_1_2 *mem_access;
+> >>     struct ffa_mem_transaction_int trans;
+> >>     struct domain *d =3D current->domain;
+> >>     struct ffa_ctx *ctx =3D d->arch.tee;
+> >> @@ -474,9 +514,12 @@ void ffa_handle_mem_share(struct cpu_user_regs *r=
+egs)
+> >>     register_t handle_hi =3D 0;
+> >>     register_t handle_lo =3D 0;
+> >>     int ret =3D FFA_RET_DENIED;
+> >> +    uint32_t ffa_vers;
+> >>     uint32_t range_count;
+> >>     uint32_t region_offs;
+> >>     uint16_t dst_id;
+> >> +    uint8_t perm;
+> >> +    uint64_t impdef[2];
+> >>
+> >>     if ( !ffa_fw_supports_fid(FFA_MEM_SHARE_64) )
+> >>     {
+> >> @@ -515,8 +558,8 @@ void ffa_handle_mem_share(struct cpu_user_regs *re=
+gs)
+> >>     if ( frag_len > tx_size )
+> >>         goto out_unlock;
+> >>
+> >> -    ret =3D read_mem_transaction(ACCESS_ONCE(ctx->guest_vers), tx_buf=
+,
+> >> -                               frag_len, &trans);
+> >> +    ffa_vers =3D ACCESS_ONCE(ctx->guest_vers);
+> >> +    ret =3D read_mem_transaction(ffa_vers, tx_buf, frag_len, &trans);
+> >>     if ( ret )
+> >>         goto out_unlock;
+> >>
+> >> @@ -545,13 +588,35 @@ void ffa_handle_mem_share(struct cpu_user_regs *=
+regs)
+> >>         goto out_unlock;
+> >>     }
+> >>
+> >> +    if ( trans.mem_access_size < sizeof(struct ffa_mem_access) )
+> >> +    {
+> >> +        ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        goto out_unlock;
+> >> +    }
+> >> +
+> >>     /* Check that it fits in the supplied data */
+> >>     if ( trans.mem_access_offs + trans.mem_access_size > frag_len )
+> >>         goto out_unlock;
+> >>
+> >>     mem_access =3D tx_buf + trans.mem_access_offs;
+> >> -
+> >>     dst_id =3D ACCESS_ONCE(mem_access->access_perm.endpoint_id);
+> >> +    perm =3D ACCESS_ONCE(mem_access->access_perm.perm);
+> >> +    region_offs =3D ACCESS_ONCE(mem_access->region_offs);
+> >> +
+> >> +    /*
+> >> +     * FF-A 1.2 introduced an extended mem_access descriptor with imp=
+def
+> >> +     * fields, but guests can still use the 1.1 format if they don't =
+need
+> >> +     * implementation-defined data. Detect which format is used based=
+ on
+> >> +     * the mem_access_size field rather than the negotiated FF-A vers=
+ion.
+> >> +     */
+> >> +    if ( trans.mem_access_size >=3D sizeof(struct ffa_mem_access_1_2)=
+ )
+> >> +        memcpy(impdef, mem_access->impdef, sizeof(impdef));
+> >> +    else
+> >> +    {
+> >> +        impdef[0] =3D 0;
+> >> +        impdef[1] =3D 0;
+> >> +    }
+> >> +
+> >>     if ( !FFA_ID_IS_SECURE(dst_id) )
+> >>     {
+> >>         /* we do not support sharing with VMs */
+> >> @@ -559,13 +624,11 @@ void ffa_handle_mem_share(struct cpu_user_regs *=
+regs)
+> >>         goto out_unlock;
+> >>     }
+> >>
+> >> -    if ( ACCESS_ONCE(mem_access->access_perm.perm) !=3D FFA_MEM_ACC_R=
+W )
+> >> +    if ( perm !=3D FFA_MEM_ACC_RW )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >>         goto out_unlock;
+> >>     }
+> >> -
+> >> -    region_offs =3D ACCESS_ONCE(mem_access->region_offs);
+> >>     if ( sizeof(*region_descr) + region_offs > frag_len )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> @@ -590,6 +653,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *re=
+gs)
+> >>     }
+> >>     shm->sender_id =3D trans.sender_id;
+> >>     shm->ep_id =3D dst_id;
+> >> +    memcpy(shm->impdef, impdef, sizeof(shm->impdef));
+> >>
+> >>     /*
+> >>      * Check that the Composite memory region descriptor fits.
+> >> @@ -605,7 +669,7 @@ void ffa_handle_mem_share(struct cpu_user_regs *re=
+gs)
+> >>     if ( ret )
+> >>         goto out;
+> >>
+> >> -    ret =3D share_shm(shm);
+> >> +    ret =3D share_shm(shm, ffa_vers);
+> >
+> > Shouldn't we rather use ffa_fw_version?
+>
+> Definitely yes.
+>
+> In fact i have done this in a follow up patch and i need to export the fw=
+ version to be able to
+> do that but I will bring that forward and do it here, that makes a lot mo=
+re sense.
+
+Sounds good.
+
+Cheers,
+Jens
+
+>
+> Cheers
+> Bertrand
+>
+> >
+> > Cheers,
+> > Jens
+> >
+> >>     if ( ret )
+> >>         goto out;
+> >>
+> >> --
+> >> 2.50.1 (Apple Git-155)
+>
+>
 
