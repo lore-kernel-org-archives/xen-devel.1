@@ -4,41 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2EA9E7E0BB
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 10:20:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225146.1531618 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA14E7E0BB
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 10:22:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225154.1531627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpONB-000179-9x; Mon, 09 Feb 2026 10:20:05 +0000
+	id 1vpOP1-0001mk-Kd; Mon, 09 Feb 2026 10:21:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225146.1531618; Mon, 09 Feb 2026 10:20:05 +0000
+Received: by outflank-mailman (output) from mailman id 1225154.1531627; Mon, 09 Feb 2026 10:21:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpONB-00016g-6k; Mon, 09 Feb 2026 10:20:05 +0000
-Received: by outflank-mailman (input) for mailman id 1225146;
- Mon, 09 Feb 2026 10:20:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mr8m=AN=alien8.de=bp@srs-se1.protection.inumbo.net>)
- id 1vpON9-0000nj-UK
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 10:20:03 +0000
-Received: from mail.alien8.de (mail.alien8.de [2a01:4f9:3051:3f93::2])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e2b51e57-05a0-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 11:19:58 +0100 (CET)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id ACEAC40E02E5; 
- Mon,  9 Feb 2026 10:19:55 +0000 (UTC)
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 4C9Q5WVVx173; Mon,  9 Feb 2026 10:19:50 +0000 (UTC)
-Received: from zn.tnic (pd95306e3.dip0.t-ipconnect.de [217.83.6.227])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with UTF8SMTPSA id
- 917DA40E0326; Mon,  9 Feb 2026 10:19:30 +0000 (UTC)
+	id 1vpOP1-0001md-Hc; Mon, 09 Feb 2026 10:21:59 +0000
+Received: by outflank-mailman (input) for mailman id 1225154;
+ Mon, 09 Feb 2026 10:21:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zC3u=AN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vpOOz-0001mV-Jo
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 10:21:57 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2924fdc7-05a1-11f1-b162-2bf370ae4941;
+ Mon, 09 Feb 2026 11:21:56 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-48039fdc8aeso26130455e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 02:21:56 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4832041f1a3sm111178465e9.7.2026.02.09.02.21.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Feb 2026 02:21:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,70 +47,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2b51e57-05a0-11f1-9ccf-f158ae23cfc8
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=fail (4096-bit key)
-	reason="fail (body has been altered)" header.d=alien8.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1770632389; bh=qEUrs9aV2UevLern7cWNO8zzbe1KAW/M2x98IuKSaBo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=L7SgNe1HGQWJrNNPxIw1k6KgoWfev2wqz1jZbCcdXa3N+r4Sl/iSwK3+WgzxAFLP8
-	 QDIumwRX6KDqKNsBiOjqrW8IUFJtEx9sgCqb/bAzmbANjrv039vpmzj4gjo9THzeU+
-	 YSeKDxKiC0bvOQQrRgAmB1w4YLy5TCWky0ssa46YJD12Zf3DncxHeqLZnCEyiDvmok
-	 ImdQ26bRkjFZie01PrBcG6QN7TlXcb7KBJhmBUxPdA+piF7m7xZKSZWgb7o4p/oBoW
-	 65Eq70rBCFjVlN2eomT3o1+/ySJUpqMssMZEfzXq/CyGEHZVfOrzEhVna54KL/dc4S
-	 7ZeL+vs8Y7GtRdbrr9C4RHiMxtgKQPEoyMTb//9gb0Y2+3+7wDLh1B9yHuqbWjz+Kr
-	 Yb/Ws3PqB19EwD6aoi/Tt1w25wr/ScLec10clV/Mjn/qpU5jib/sg2vHOJVaaKm4Sh
-	 oDhL5LGnFq1wjriJrXcmG4Vw3VjwohtUAQmP5GMIB5HnkpO6y85vAK8EPWtn6A4K9+
-	 TJ9NGVpHZA3Fht96JrON+2jvKS3NfRstQvYDeF17seJMrMjba69iIQPkiaMVYjiH5s
-	 0ihBjjGUpmtKls4QpuZphm5tynBcgqWNyCG4hiKuLtwqpBtWM+74IOdgKLcwwzTB+v
-	 5v/tPeD19u9TgLlvgaBntID4=
-Date: Mon, 9 Feb 2026 11:19:18 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, x86@kernel.org,
-	virtualization@lists.linux.dev, kvm@vger.kernel.org,
-	linux-block@vger.kernel.org, Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org, Denis Efremov <efremov@linux.com>,
-	Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH v4 0/6] x86: Cleanups around slow_down_io()
-Message-ID: <20260209101918.GAaYm0plbeXIBr8p9a@fat_crate.local>
-References: <20260119182632.596369-1-jgross@suse.com>
- <6ee93510-1f43-4cd2-952e-8ed3ce7ba0e5@suse.com>
+X-Inumbo-ID: 2924fdc7-05a1-11f1-b162-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770632516; x=1771237316; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=s+X4NaFjYOwIFCTiACW2xzPhIQxgMm0W4k8O5HtiGy4=;
+        b=IEqHupu8vAgQpkwLe3/3ZAGSH0lrys8jhFHyiL+8qVZ1VRBUpeEytwJF1Kq8p3cuIt
+         YWT5ra0wZyjchnnTHeUYyg/EBlvbXNjixRADHPmfUAVu7xrIuga9lh/5fKaOPY32wZsY
+         CmPFCsZc4NZ+HkbaFVdHAyKRnBDJbdsMnpmoRe3t/ol69hb1shPXUwj4fPV419Bo/6Sl
+         KKYoTMT6dNy4vcDdIZYDssimut5gx5/TZInYpV4EkmW3FRgf1jN72KS7AsnwkDctm0xx
+         AAgYq1z7DKqFV2ZMXrs9A66alNoKNoFmkcIdiX6ZTn2br4ye/Rn23TLtQ6s7jNBAOBB7
+         jUGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770632516; x=1771237316;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=s+X4NaFjYOwIFCTiACW2xzPhIQxgMm0W4k8O5HtiGy4=;
+        b=JKovAkKGafWPO9jLgmZnVHJp/RISddcm+hnys+SKOCpGNw1MAaAfrI+jJbmNCbYj6P
+         eS6V3/9SEECK03iCzJ/k59TfJSwh0UxXSG7wD0a4E4za4l0W3U0afq0RiQgCItSKiysR
+         oETT6gLumqef11+6rZ8MQNw4nppXQhGtz3YEh59YurUxKos2r1jKK8K/vi3yeijzJ0Ul
+         vMaOG9N0QthRT6n0pez6cFdfiLXKYjjvSAdBqwMVUqlj8pjDTGv+/LzaQCn5vsjlGGo9
+         htKY9PDlTk2rpzUaV/9x66VzkMu7rDpf4A8+UGP9yknl0sxz3wsaGV8MIsKeGY1BdDQz
+         G9uQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU6ucxpbsxKVeHF1eJJB9+NRnJIzt7wDl/Cp3WRDc4RWqMNNEjRelc+kOqkgsse+wS2xuaVsdqIzRg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyqDZVkA25DxD7gUqh6tTwiCxYKTWva7mX06Xs0YKlIsdA6LcUy
+	4jBO1mI/b4nuTYH8LMSkvPxDhwoIqw/tVFoxu1PvWJo5picZJ3FlTjrg
+X-Gm-Gg: AZuq6aKjmJFslPmfaP9WmJpMQEbSVM+Sqi+0dSCl4vtm92eLH2HASROAASx3mp1ytCX
+	hUM6kMwBWr51LFcrWiYSBxx39xMB2IYP78D0hNKi/amRAkmbiUDinzR+crj3qNtn6J2XF4OzrPd
+	zfEW6GnbaE4YSk6WNzN5/5ECEVoimbbR1+VSSq2NTaOAYRTaguQt4ovxPwJEOFGdna32DulCl/h
+	URtQAPfdWuky1N2OQ3BlAOeCUoOSpgMoPPrI1BTcylR1jFVqV9bBaT5/iHCY1GjWN0jtHvNV8GM
+	OHZppPKaVKtGDpV1PWmPR6ryq2rRAhjQsT+nORW2PRy9SpMl5zjqdBNmk5vwgQ2btaorxqPk1OP
+	s0Z7YcWSHm9i6DQ1HbkjkQd6hHYPNd/pZpuV2iDtIVt1p0OZHRtiQu1zYPzIfM+5qVyGN0/FY6y
+	G8TgbzkdcUYNTWNAh7QMsTy+23SWbw3PzUAQW4VY4v7OgsRQxtIqZqnRvVuATFK2E=
+X-Received: by 2002:a05:600c:468b:b0:479:3a86:dc1c with SMTP id 5b1f17b1804b1-48320229cf1mr167334165e9.36.1770632515438;
+        Mon, 09 Feb 2026 02:21:55 -0800 (PST)
+Message-ID: <0574673e-0ca8-4a65-bb5e-89d475676631@gmail.com>
+Date: Mon, 9 Feb 2026 11:21:54 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <6ee93510-1f43-4cd2-952e-8ed3ce7ba0e5@suse.com>
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/3] xen/riscv: add support for local guest TLB flush
+ using HFENCE.VVMA
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1770036584.git.oleksii.kurochko@gmail.com>
+ <89f50ab2c1a1c79abea4db3a53393f974bb9a473.1770036584.git.oleksii.kurochko@gmail.com>
+ <309e4e0d-c2a3-4f56-ab6f-f648da313bb6@suse.com>
+ <060f4338-d6ac-41a1-8036-ab506cd54bf4@gmail.com>
+Content-Language: en-US
+In-Reply-To: <060f4338-d6ac-41a1-8036-ab506cd54bf4@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 09, 2026 at 10:11:49AM +0100, Juergen Gross wrote:
-> PING?
->=20
-> Now 3 weeks without any reaction...
 
-J=C3=BCrgen, there are other patchsets that need review too. And we have =
-merge
-window right now so no reviewing anyway.
+On 2/5/26 9:56 AM, Oleksii Kurochko wrote:
+>
+> On 2/4/26 12:09 PM, Jan Beulich wrote:
+>> On 02.02.2026 13:57, Oleksii Kurochko wrote:
+>>> @@ -14,6 +15,12 @@ static inline void local_hfence_gvma_all(void)
+>>>       asm volatile ( "hfence.gvma zero, zero" ::: "memory" );
+>>>   }
+>>>   +/* Flush VS-stage TLB for current hart. */
+>>> +static inline void flush_tlb_guest_local(void)
+>>> +{
+>>> +    HFENCE_VVMA(0, 0);
+>> For this use, ...
+>>
+>>> --- /dev/null
+>>> +++ b/xen/arch/riscv/include/asm/insn-defs.h
+>>> @@ -0,0 +1,10 @@
+>>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>>> +
+>>> +#ifndef ASM_RISCV_INSN_DEFS_H
+>>> +#define ASM_RISCV_INSN_DEFS_H
+>>> +
+>>> +#define HFENCE_VVMA(vaddr, asid) \
+>>> +    asm volatile ("hfence.vvma %0, %1" \
+>>> +                  :: "r"(vaddr), "r"(asid) : "memory")
+>> ... don't you want to use "rJ" as the constraints here?
+>
+> Even without "rJ" it is using x0 when argument 0 is passed. Just to be 
+> on a
+> safe side I don't mind to add "J".
 
-And you know all that damn well!
+When "J" is used compiler is trying to use integer 0 (what I misread when read
+about J) but hfence.vvma expects two registers (zero register in this case), so
+"J" can't be really used here.
 
-How about you help us out and you start reviewing x86 patches instead of
-pinging every week?
+~ Oleksii
 
-Thx.
-
---=20
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
 
