@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B32E81BCD
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 14:25:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225462.1531966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E79E81BD0
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 14:26:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225468.1531976 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpSCB-0007Ys-T0; Mon, 09 Feb 2026 14:24:59 +0000
+	id 1vpSDn-00084M-6W; Mon, 09 Feb 2026 14:26:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225462.1531966; Mon, 09 Feb 2026 14:24:59 +0000
+Received: by outflank-mailman (output) from mailman id 1225468.1531976; Mon, 09 Feb 2026 14:26:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpSCB-0007Yl-Pk; Mon, 09 Feb 2026 14:24:59 +0000
-Received: by outflank-mailman (input) for mailman id 1225462;
- Mon, 09 Feb 2026 14:24:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8Y/H=AN=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1vpSCA-0007Yd-HA
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 14:24:58 +0000
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [2607:f8b0:4864:20::229])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 18f78b53-05c3-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 15:24:52 +0100 (CET)
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-45f126d47b8so1985101b6e.2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 06:24:52 -0800 (PST)
+	id 1vpSDn-00084F-3Y; Mon, 09 Feb 2026 14:26:39 +0000
+Received: by outflank-mailman (input) for mailman id 1225468;
+ Mon, 09 Feb 2026 14:26:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bBDp=AN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vpSDl-000843-ML
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 14:26:37 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 570ef9d5-05c3-11f1-b162-2bf370ae4941;
+ Mon, 09 Feb 2026 15:26:36 +0100 (CET)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-435f177a8f7so3105426f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 06:26:36 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-436297462a8sm25230877f8f.30.2026.02.09.06.26.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Feb 2026 06:26:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,235 +47,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18f78b53-05c3-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; t=1770647091; cv=none;
-        d=google.com; s=arc-20240605;
-        b=SNlOEs9l884q8jDn6zvMkEVdKxkSn/QKqbyCHxtd/4jlvlpHJV9YzkeSHvHpuLzED4
-         kYlQqojVPOGdS6ACxlCk8SZvYHv8FOyEocc4KddeXfke8WFrAS3vqEAUOrlAV2kZtIe4
-         2aPwiRa12ZOsLM0YZ3u+NONsol+WgnWPyzP8lMTM81ueWJNlxiA+VPuqckNAkGByYzrg
-         j8y5PCOsFvjvOVQet1+3v1dk8E0ITgEn80+DzT4KjO98tLIWfGZ2pYcEwP07drXyO/1L
-         ++1/TX9OM9XHwmvKcndvj9P6t9SaeBysXpMmIEt8FfL8StaIEGc5thxmwKwOsVFi7Qzn
-         GjQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=OR3MJ1p16CrcUYxK9iWZWDF0oa/huSemMt4e/B8BbsY=;
-        fh=wNLC6Hyb5Ukz/ErppBRQBwv8vwa/OMsdh6R8bnNsiPU=;
-        b=c0jqvRyDKUiAqlCf6T6pVTaTdndC21oTrMQ1MtOABhOVG5zDjdMvIGtHMhYFB+V8W7
-         63XjuXhpclw+vXg2+A/tS6PaiyYFi3Ya7SyKyD/ZZlupQpZACusHEQUWw538Xtx/AIwK
-         WhkN8TqL+HqfmgnViAm02H1VBuP+VNymRfBoPTq+GMPzcfUndHMt1j14JXF8j7jRZdhE
-         LwkGlEi4a1Ep7hNpECg6bLHEwB+S305cslp8cW3FCduOoWbns43/TAAQc7BY/2Adkva/
-         GbD0rWlZNgvjJ8OuCKZLI1G2PK9vME3QrBGtkTAHaWzuH98GC9mtcyUk4wnlNVIPAtUU
-         4k4g==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Inumbo-ID: 570ef9d5-05c3-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1770647091; x=1771251891; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OR3MJ1p16CrcUYxK9iWZWDF0oa/huSemMt4e/B8BbsY=;
-        b=TNO1IpnX2oSL/JQhUOiB60PeYvE0PC+4lzJptZbV9RojykDq9UUYdbuV47nhAaeGwd
-         XTBa3WU1zhIlicO04e6h1fEPQMke7x8sMu/WI1i/SCaNKWpVKZnAR4+j3Cj8iv9cCD82
-         S5yvd0ijnBDfVi0cQLIRoFYckBBJkFGDt9eK5wPy8vcCpzbpEvcp/eB3xPC/ZJcu5FXd
-         gJZMEGEIwrkrNqrHbKeVrjWGCmg1KfyrWXMEwe4huv8wuq/i+M0M5srWwhY7vjSXqKYX
-         Lynev+iXJEgpJ2y6oqFWbSWQS0x0OmpupwK8+EVL7rLqi7Bufv2oW0u60zqEL2C61kc9
-         KO4w==
+        d=suse.com; s=google; t=1770647196; x=1771251996; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=D7qzzO3aEWggHR41H2FO35b1jRA7tl46snHtmS7OYp4=;
+        b=Gk4TbE8YCUk+Iq4eR2+eyqSksxD72vJW29kMVxNTnqaFEdNh8MQqqRwJ9Lo0CYcdtb
+         osmkqVd5pHfC3pkip8fFDmJowkKl+4vu17sjbdFi/o1C0pYlTg+GTmxKo941Egr5lrXq
+         6N/AzE0GLF59yzxwV3Rr8R1hN+kISZZVDDBtF0HodPSKGpHZ6q83/b5wrgqfB6i53REu
+         2x2f0N71HnzeryAv0eVUZ7S+dSYn2O8e62z8PCG/CHQGhxiPW4HumKVtl8NjUoqrsq9a
+         Jka9i8KySSkCBXkUAd52+5grhlbyKRTZ821varl6ZPF8vxP9+d/cwEM2gx2OjE3gHIn9
+         xyVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770647091; x=1771251891;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=OR3MJ1p16CrcUYxK9iWZWDF0oa/huSemMt4e/B8BbsY=;
-        b=IAhIj5/Lrib/5SEB4NNoE30lcVnJMbd85pNcj+DEffNBZJshiRh4Z1SeLNlPFbXbJe
-         vslKkXs/ppeLSGxHGTooiozwt1xXFiBLcLROzw4aM67Ow7Do3e5KM5Bbqk23VWuwvHae
-         +vx+Xq8BSEHtsjFvun8jRWl+1UbvhyniKTL58Z9EYBnTyb//FdnMbNkIZcj5XGEOhX8D
-         27va8KyKwEa6pXVGJZzhUpCbEszb2LdI3DyJJdRiSteOznLs6zgrWZyfJMAQJoNuTaRj
-         uUW+Vyk/s9EMxZrv/cifCfrL/GO8ZQKu2XCMBljYrQKUwiRsmOFR82WVV6lu9nUmBvLN
-         22cQ==
-X-Gm-Message-State: AOJu0YwvyWnAiksviakn8SX3JOrUYU/MbqMMIh8nmFdauZmUAfdjd1EU
-	0ecTyvkI0K4wpxbgBNlyC/IaEJhe7xDTq7n5rw3I+CjsVzYcm4DrIt2RwQfqu7rEf2aY6OOAbH3
-	Bnj7b2mp09XGgz+fHCo+CF018hGaA+q5uJqCkHrGw3Q==
-X-Gm-Gg: AZuq6aLn+UsKsvgT4Ma6VkzcPjw1RJ9bSgG4MbO6vFHrhZbS+19zH0auBOtZlwTa2pp
-	ppcunsULKext2oPsPZBJIva/qe/v/hstqtelA2IWeLbLirZkUiqzIiwfbfNlLtimN7llBaQ7ocu
-	YJXwEr8o2GW9aShM/sWZPRDfnYbsk05FVc1tgGzUHPirPBbgOcoDpZ7mRu63dIIDXM3LJhNjUwA
-	gRRThUtOUrvUJngH+HXTs4Ugg28uGSi5AcGtBW+81ZPF4mluV84WfG0fULxA3gYXV50HfcjMKxo
-	oB+PcFSXrhAzdeI9LsRxNjWpPU7eDdVFfjV2
-X-Received: by 2002:a05:6808:c181:b0:45f:4498:35d with SMTP id
- 5614622812f47-462fca55091mr5958422b6e.7.1770647091383; Mon, 09 Feb 2026
- 06:24:51 -0800 (PST)
+        d=1e100.net; s=20230601; t=1770647196; x=1771251996;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=D7qzzO3aEWggHR41H2FO35b1jRA7tl46snHtmS7OYp4=;
+        b=MX+f8w1FCNcVqoQ+HWTskzF6YTksKNdp8iI6v89H8RyMtu4kX26G7YjEs73STiSjF7
+         /C34p0pFIJrpnj3OXgmsCoSeL8qI/+DLIQBufXsRP0s5Fp+j/umWv1GF8tQBHxeOzUB4
+         Y3eyrURITSQjIjBwlO8lM4S9UAuu3lP077v0psvQx19pwUFwgDuSNalUdauZO9jiYec/
+         6lk/DkZLHE2BYUU1gfPirwiGLapi47zwJkVGS4DW5tHsXavqCVrrslzzYlykmFwlEm9D
+         CU8eAKSYe47zmCNwEC6Dtou6kHhgMLgUe+bhEIHQToltSgw25y/onvwCPL5laUID9R5N
+         CHNA==
+X-Forwarded-Encrypted: i=1; AJvYcCUANCPMBrKZY/gw+YGUCVuX3gyNT7WMZQS483T3mQlSQdF/D7radS01fv0P8o0w1f942/4fqhOXYMA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxAYfYf+64/w2CczFyDd4jSLVjWfHmu+mXOH36v2mU/+YEtunMC
+	9cTsBjM1ucY9XQtmVAqk08Vde5mZ2ld4+ep5XBvaxzZCQSOlTnRPvGkvTKzNcIs0ow==
+X-Gm-Gg: AZuq6aLqMM/MFUvFDgou0uCGddT0QF5dZCuRj5GFTgrjAeP3J0VvyJizq0DaMXyYrPU
+	qlYIKx1Xkl+PJYCAt4OOCCMXApUsUJbIOmfMzGiSDddM6lHhb6WXPxLK6elxbCYfP/FaAwFLmkP
+	ys1gKf573b8DWCuTMt6oO3joKd8FI7/AR+J4OTPysI2yp38iobtjjFOcXVVrFiO1GTzPfmzDA7r
+	kL5uRHMb82tmlPwsxAyJmOokFlVHhMVbzPIpOLE8a8VYS1fLFNzwYJcmgQAISO2c0JC2XBka3WX
+	F1F5ODs5iVB9DcjrTiiDibA+bxMeYUHfRGSLWnK6w6XOp0e8VW32bYtem2crA1T2ehv/ePf4UDL
+	efb6kDCWXoi/bQq0ERxbg37D9m4eBRncdXusGcohvLXtiGH/bQuhOB0ZM3zCNdbarn1W/QNjEC9
+	ood7iWZQ6qtHP/SsEFexIt02Z5Zn+nnSOjG97mtFZcswPbFqVlS+MnW/60GnZ9FfwUGIoI9MKA5
+	aQ=
+X-Received: by 2002:a05:6000:240e:b0:436:1517:aeca with SMTP id ffacd0b85a97d-43629341e78mr18713364f8f.15.1770647195744;
+        Mon, 09 Feb 2026 06:26:35 -0800 (PST)
+Message-ID: <6779b2e3-c324-481b-ae20-20a40fb1eac4@suse.com>
+Date: Mon, 9 Feb 2026 15:26:37 +0100
 MIME-Version: 1.0
-References: <cover.1770115301.git.bertrand.marquis@arm.com> <2cb24d49d7c72bf15a101cc3be62b3cccbfce3d5.1770115302.git.bertrand.marquis@arm.com>
-In-Reply-To: <2cb24d49d7c72bf15a101cc3be62b3cccbfce3d5.1770115302.git.bertrand.marquis@arm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Mon, 9 Feb 2026 15:24:39 +0100
-X-Gm-Features: AZwV_Qiyots_TwQKHnPPMI96XR5-4WDBnP74SYNudQ9AyNmV8hCzP66RP8dg1fM
-Message-ID: <CAHUa44G7ThfytBBQ=1DRju1z6DY_s+gbndNZOHLCUwf66V+Umg@mail.gmail.com>
-Subject: Re: [PATCH 05/12] xen/arm: ffa: Fix PARTINFO RX release errors
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/kconfig: Reflow the SHADOW help message
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20260209103339.6466-1-alejandro.garciavallejo@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260209103339.6466-1-alejandro.garciavallejo@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Bertrand,
+On 09.02.2026 11:33, Alejandro Vallejo wrote:
+> Wasn't following the tab+2 spaces convention throughout the rest of the file.
+> 
+> Not a functional change.
+> 
+> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 
-On Tue, Feb 3, 2026 at 6:38=E2=80=AFPM Bertrand Marquis
-<bertrand.marquis@arm.com> wrote:
->
-> On PARTITION_INFO_GET error paths, Xen unconditionally called
-> FFA_RX_RELEASE for the SPMC RX buffer. If the SPMC didn't grant RX
-> ownership (i.e., the call failed early), this issues a spurious release
-> that returns DENIED and produces warnings.
->
-> Modify ffa_rxtx_spmc_rx_release() to return the release status and let
-> callers choose whether to log it. Only issue FFA_RX_RELEASE after a
-> successful PARTINFO SMC, while always releasing the local RX lock to
-> avoid deadlocks.
->
-> Update handle_partition_info_get() to only release the SPMC RX buffer
-> after successful fw_ret checks, and ignore release errors during the
-> error path.
->
-> Functional impact: eliminates spurious FFA_RX_RELEASE calls and
-> associated DENIED warnings when PARTITION_INFO_GET fails before
-> obtaining SPMC RX buffer ownership.
->
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> ---
->  xen/arch/arm/tee/ffa_partinfo.c | 14 ++++++++++++--
->  xen/arch/arm/tee/ffa_private.h  |  2 +-
->  xen/arch/arm/tee/ffa_rxtx.c     | 14 +++++++++-----
->  3 files changed, 22 insertions(+), 8 deletions(-)
->
-> diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_parti=
-nfo.c
-> index bf906ed0c88f..6b01c4abe915 100644
-> --- a/xen/arch/arm/tee/ffa_partinfo.c
-> +++ b/xen/arch/arm/tee/ffa_partinfo.c
-> @@ -92,9 +92,11 @@ static int32_t ffa_get_sp_partinfo(struct ffa_uuid uui=
-d, uint32_t *sp_count,
->                                     uint32_t dst_size)
->  {
->      int32_t ret;
-> +    int32_t release_ret;
->      uint32_t src_size, real_sp_count;
->      void *src_buf;
->      uint32_t count =3D 0;
-> +    bool spmc_ok =3D false;
+Largely:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Wouldn't notify_fw be clearer, and the same in ffa_partinfo_init()?
+> --- a/xen/arch/x86/Kconfig
+> +++ b/xen/arch/x86/Kconfig
+> @@ -148,20 +148,17 @@ config SHADOW_PAGING
+>  	default !PV_SHIM_EXCLUSIVE
+>  	depends on PV || HVM
+>  	help
+> +	  Shadow paging is a software alternative to hardware paging support
+> +	  (Intel EPT, AMD NPT).
+>  
+> -          Shadow paging is a software alternative to hardware paging support
+> -          (Intel EPT, AMD NPT).
+> +	  It is required for:
+> +	  * Running HVM guests on hardware lacking hardware paging support
+> +	    (First-generation Intel VT-x or AMD SVM).
+> +	  * Live migration of PV guests.
+> +	  * L1TF sidechannel mitigation for PV guests.
+>  
+> -          It is required for:
+> -            * Running HVM guests on hardware lacking hardware paging support
+> -              (First-generation Intel VT-x or AMD SVM).
+> -            * Live migration of PV guests.
+> -            * L1TF sidechannel mitigation for PV guests.
+> -
+> -          Under a small number of specific workloads, shadow paging may be
+> -          deliberately used as a performance optimisation.
+> -
+> -          If unsure, say Y.
 
-Either way, please add:
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+I'm trying to establish (among the committers) whether we're indeed meaning
+to drop this sentence from Kconfig help texts that we touch. If I wouldn't
+get conclusive feedback, I'd likely put it back in.
 
-Cheers,
-Jens
+Jan
 
->
->      /* We need to use the RX buffer to receive the list */
->      src_buf =3D ffa_rxtx_spmc_rx_acquire();
-> @@ -104,6 +106,7 @@ static int32_t ffa_get_sp_partinfo(struct ffa_uuid uu=
-id, uint32_t *sp_count,
->      ret =3D ffa_partition_info_get(uuid, 0, &real_sp_count, &src_size);
->      if ( ret )
->          goto out;
-> +    spmc_ok =3D true;
->
->      /* Validate the src_size we got */
->      if ( src_size < sizeof(struct ffa_partition_info_1_0) ||
-> @@ -157,7 +160,10 @@ static int32_t ffa_get_sp_partinfo(struct ffa_uuid u=
-uid, uint32_t *sp_count,
->      *sp_count =3D count;
->
->  out:
-> -    ffa_rxtx_spmc_rx_release();
-> +    release_ret =3D ffa_rxtx_spmc_rx_release(spmc_ok);
-> +    if ( release_ret )
-> +        gprintk(XENLOG_WARNING,
-> +                "ffa: Error releasing SPMC RX buffer: %d\n", release_ret=
-);
->      return ret;
->  }
->
-> @@ -507,6 +513,7 @@ bool ffa_partinfo_init(void)
->      int32_t e;
->      void *spmc_rx;
->      struct ffa_uuid nil_uuid =3D { .val =3D { 0ULL, 0ULL } };
-> +    bool spmc_ok =3D false;
->
->      if ( !ffa_fw_supports_fid(FFA_PARTITION_INFO_GET) ||
->           !ffa_fw_supports_fid(FFA_MSG_SEND_DIRECT_REQ_32))
-> @@ -522,6 +529,7 @@ bool ffa_partinfo_init(void)
->          printk(XENLOG_ERR "ffa: Failed to get list of SPs: %d\n", e);
->          goto out;
->      }
-> +    spmc_ok =3D true;
->
->      if ( count >=3D FFA_MAX_NUM_SP )
->      {
-> @@ -533,7 +541,9 @@ bool ffa_partinfo_init(void)
->      ret =3D init_subscribers(spmc_rx, count, fpi_size);
->
->  out:
-> -    ffa_rxtx_spmc_rx_release();
-> +    e =3D ffa_rxtx_spmc_rx_release(spmc_ok);
-> +    if ( e )
-> +        printk(XENLOG_WARNING "ffa: Error releasing SPMC RX buffer: %d\n=
-", e);
->      return ret;
->  }
->
-> diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_privat=
-e.h
-> index 58562d8e733c..461e87f6f9c4 100644
-> --- a/xen/arch/arm/tee/ffa_private.h
-> +++ b/xen/arch/arm/tee/ffa_private.h
-> @@ -458,7 +458,7 @@ int32_t ffa_endpoint_domain_lookup(uint16_t endpoint_=
-id, struct domain **d_out,
->  bool ffa_rxtx_spmc_init(void);
->  void ffa_rxtx_spmc_destroy(void);
->  void *ffa_rxtx_spmc_rx_acquire(void);
-> -void ffa_rxtx_spmc_rx_release(void);
-> +int32_t ffa_rxtx_spmc_rx_release(bool notify_fw);
->  void *ffa_rxtx_spmc_tx_acquire(void);
->  void ffa_rxtx_spmc_tx_release(void);
->
-> diff --git a/xen/arch/arm/tee/ffa_rxtx.c b/xen/arch/arm/tee/ffa_rxtx.c
-> index 7d8bb4f4d031..50758fb57cdf 100644
-> --- a/xen/arch/arm/tee/ffa_rxtx.c
-> +++ b/xen/arch/arm/tee/ffa_rxtx.c
-> @@ -375,18 +375,22 @@ void *ffa_rxtx_spmc_rx_acquire(void)
->      return NULL;
->  }
->
-> -void ffa_rxtx_spmc_rx_release(void)
-> +int32_t ffa_rxtx_spmc_rx_release(bool notify_fw)
->  {
->      int32_t ret;
->
->      ASSERT(spin_is_locked(&ffa_spmc_rx_lock));
->
-> -    /* Inform the SPMC that we are done with our RX buffer */
-> -    ret =3D ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
-> -    if ( ret !=3D FFA_RET_OK )
-> -        printk(XENLOG_DEBUG "Error releasing SPMC RX buffer: %d\n", ret)=
-;
-> +    if ( notify_fw )
-> +    {
-> +        /* Inform the SPMC that we are done with our RX buffer */
-> +        ret =3D ffa_simple_call(FFA_RX_RELEASE, 0, 0, 0, 0);
-> +    }
-> +    else
-> +        ret =3D FFA_RET_OK;
->
->      spin_unlock(&ffa_spmc_rx_lock);
-> +    return ret;
->  }
->
->  void *ffa_rxtx_spmc_tx_acquire(void)
-> --
-> 2.50.1 (Apple Git-155)
->
+> +	  Under a small number of specific workloads, shadow paging may be
+> +	  deliberately used as a performance optimisation.
+>  
+>  config PAGING
+>  	def_bool HVM || SHADOW_PAGING
+> 
+> base-commit: 1ee8b11c1106dca6b8fe0d54c0e79146bb6545f0
+
 
