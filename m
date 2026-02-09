@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE8FE81BDF
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:56:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225866.1532507 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F66AE7E0CD
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:57:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225878.1532516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUYz-0006p2-ED; Mon, 09 Feb 2026 16:56:41 +0000
+	id 1vpUZs-0007TC-LU; Mon, 09 Feb 2026 16:57:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225866.1532507; Mon, 09 Feb 2026 16:56:41 +0000
+Received: by outflank-mailman (output) from mailman id 1225878.1532516; Mon, 09 Feb 2026 16:57:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUYz-0006ov-9g; Mon, 09 Feb 2026 16:56:41 +0000
-Received: by outflank-mailman (input) for mailman id 1225866;
- Mon, 09 Feb 2026 16:56:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=bBDp=AN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vpUYy-0006op-4C
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:56:40 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4c368811-05d8-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 17:56:37 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-47edd9024b1so40269025e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:56:37 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d5e1a8esm1585715e9.5.2026.02.09.08.56.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Feb 2026 08:56:36 -0800 (PST)
+	id 1vpUZs-0007T5-IJ; Mon, 09 Feb 2026 16:57:36 +0000
+Received: by outflank-mailman (input) for mailman id 1225878;
+ Mon, 09 Feb 2026 16:57:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zC3u=AN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vpUVL-0007Zo-3Y
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:52:55 +0000
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [2a00:1450:4864:20::532])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c6c7ab38-05d7-11f1-b162-2bf370ae4941;
+ Mon, 09 Feb 2026 17:52:53 +0100 (CET)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-65815ec51d3so4896157a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:52:53 -0800 (PST)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8edacf1564sm415776866b.52.2026.02.09.08.52.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Feb 2026 08:52:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,118 +47,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c368811-05d8-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c6c7ab38-05d7-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770656197; x=1771260997; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=X15l9HnPsTBSttFTrabWCg4OqYezi+YSqBk5OWjvacs=;
-        b=W8Rr4eh7moFC8rqlKGRmAQUv7W0opwbAoj5FygCn/Qt0BE5dEN0QpTuZZ2J6vwqI4R
-         FGXXwCZ0aqcDYioXV8otbQ3FjXJS0B3iXvVcJ4qFoz0mO40pDoteLy5m73pqnWaV1w5v
-         NJrS4MjjU0R30Wd6RjrC8Hbbou9LjVZI92TKttfoIgcD+ow7sNI9VDDpMGOUMR56vCgr
-         bl9ZVec8SfGbp71nBXOFYkhy6kuXFKDLFFP8t0yaz1K5IVx49byUyiJ1ak+pEfJx8Azg
-         vfH6o7uRUdCK+osiavFgaiODqcSriFR/eSOMFQgb9PjmmeeEaogk96S/2JuG1VWlcRV2
-         2r1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770656197; x=1771260997;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1770655973; x=1771260773; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=X15l9HnPsTBSttFTrabWCg4OqYezi+YSqBk5OWjvacs=;
-        b=aO1l1LKgNPTLbyp1MOmcxN9/jhpM1F1wSUk2h55ESzjrt9PFXst2wYX5ubhdREG3x1
-         QpjwQPn75Kf0WyL+KcANewV0b89//XnB7bl2azjeFaNR5+EJw+syVYyp1COlRaCOYAi4
-         YcuSS+76MLOeU1gBJIMnmxSXyNFvR8Ewe+lzPN+Eizd4+rYUFVAGHgRXlbhvpKiprNuB
-         DADvvIvs8cMUl9EaEU/uSs3FoKAzAaYgg/MCWcP1449jP5JzbOQOece1SMksQp2j0EKA
-         SqO9oLxpIBjU3hViFgMfiC4eN7+Os1qJ3tDTv3Z4fm5DMeeCbQW7pJbAlvdPF3A/W1z3
-         Bbqg==
-X-Forwarded-Encrypted: i=1; AJvYcCXzP82SXEksluQ/ZS0jgUv1r0hFq8GWhBjSRFmvM8NYdrHHivFtoUmveUXQ15qOgRo7nB0K6Wvl71Y=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzydspV7Hhj6WW2Kk0X8gKtV2DqzorT0JGzMfPexUF6dLCBFCET
-	gSWXeair94CfZdYqrhXbm8WcBvOdViWRzAhW96Vw4GZeBveGA+oe6FL/dWhJT+UIaA==
-X-Gm-Gg: AZuq6aJpuwjwQ5Fo4KY6/+/qfk9B8ObRy+SAHmvAoBf1r1sQXLdJA0cjH0nr+aTojhv
-	JZI7Sj6SRMxiCU3KyYPNVy3ZsbcfwzZZ9zxAJSxLRdDmVrJSiCm4IPxUx67h5Ai9Jp1ThCwV9/7
-	+ulctbj90ajc8OFs446e90u34oF3MZ1lPf3fW6NMg2n3Y5xW673hwIHyGFeS7TWkGxUjklR/MuX
-	piQ7b/U4VJZ3PDdDru5gHRcapmZiyzh6IEWSIIDbdN+OOA/Kf5UZUs+r8TearRBTsVOV6cbCcb/
-	So1y66lpPwX32iYMgWn+1VMsDTqBkSmoFJ4dxO5CrkkuiEwsZbiyGm6IZtWpK0w0XMWFab9qa8h
-	yr3kwqjRzQ/Ztz6vtg3Cgg3SrK6HDd8qw0EpiN0TwOYbP3mRzf3FH21blhVFE+/Ex/0V7lCHlMz
-	DAI3zwBTLy24ltgxdZzXkLKUnnFAGX/koZ3+oZWqV+Upm/m4QqPIYWyUB13y481391WnIJCAx3J
-	5U=
-X-Received: by 2002:a05:600c:8116:b0:480:1c10:5633 with SMTP id 5b1f17b1804b1-4832021c74cmr179417865e9.26.1770656197019;
-        Mon, 09 Feb 2026 08:56:37 -0800 (PST)
-Message-ID: <7e8669d4-d1b6-47c7-ad08-da14f14fb4a4@suse.com>
-Date: Mon, 9 Feb 2026 17:56:38 +0100
+        bh=imBk95+i3lrNZl16Fz7LHP6T5cVPwdF19P0a+Yv8HIE=;
+        b=BiCJhWGliJdA44LISFmZOUGXwVeR5m2VhAPwWpOYct+tygrQbhJ40YsW3VQ5ShbhBE
+         3P8SznbEmhCOIQcQKHHyntnT3DbXG9j5PLi53sG/tEZFp8MrgQpaaHco3ZWPgYvyWrGZ
+         zLqlHygHR88oMjOQYWyfe0qD8O2KDQ7jGV564BwxOzhAH7rqUt0Wo3VGBpupMoyhTVws
+         aVzPztwTlJuP82mzKUGWlrSRNwkmdRrHtzthdo8sSuCcKSZLEIrrO6IQ9zu5Jou4P0ZC
+         JwWXayWhI+TMGfRWDbjFXFGilF7KdEm2HZk1BXDldJOtupsSmJOdKltpG8d35IYd4Xdk
+         V+Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770655973; x=1771260773;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=imBk95+i3lrNZl16Fz7LHP6T5cVPwdF19P0a+Yv8HIE=;
+        b=XQPV4nkgkCmUHlvl5imlSELlKgzNiqqxqcRNl5zMcyyEs/Bs8f3gRjkTgu/TemsDAI
+         JpubQYQSe0uUaRZqqrJ0mG3NIGZMilYDHFOGcxVOrGY4rjJg53YpsR7G2JIZp/sRfsn9
+         MLfv1RxGRdO8+lV7rqYtEOjxx+AJREUW4JlULTPah3LLBparsXgBnUATKLUDiNzUd30E
+         azvgc7nzfn5BEeifIchSi9kyFqgBNSQnciw4RlQlcThxcJzyoW33q5yF6Fj1on8qJ/3H
+         oOJDCUWG7w2qsdyA3ITj0u2KWvWRV/Bgq1g7fQC+tKVwssJFFF97k5t2K7VaRQDkBrx9
+         UXGQ==
+X-Gm-Message-State: AOJu0YwvlAfIWOfmf/UfzXeUyDQSnqCb5UY4qKAGeW4KY8g8zpsFeZ2Z
+	u++9tNY6mYIeODNyeyx8ZD+mYsiJCfPA3IhDSMTJ/1XFD4byO5LOrsEkGIHf06DN
+X-Gm-Gg: AZuq6aLVFPz2lsPPDbTQdk6eZDiKcrlPfqdk3HPUivL5tnAWNMEXmIJzbAIn44SgqVO
+	c1dJdZxXACtX23R/OIG2DbY405EecEEyBAwH5+qwaSU3PfwRkcHXQxcDVG6H6h58+wFeKogUzYi
+	IWNoRE7Olflf3MWjzI1xjlgOGjRZP0Mko5Fk9wpuZ2uvRofXQOCGyP7OG8KWnu2m3fc5D1/dlzL
+	xFCNoDj5hNGALYTYwqMWQfaU/yga4TwuE4xz0WxnAXZW0UKTepE0dRMSYUatm61ITDWrXSkG1uz
+	3bAI530CToG7ko2sINPf7Lynj5tXRCNRWn5GkKIOubrkm8UsXLkUtSuxyM0tHlJwsa65qib+NsP
+	Bv48I+AWE2bKbzNq4mMpEXcEouUCblicoSWb3I5QJNKjXgeDBuaDJWWwNAm5Z6dEGkepKWiP64S
+	EFWCEGSBEcRQBbpaH8TyD52P/iR5v0ukO2bZT8qVG/xrfEwd1Pa3rc+Y5hprKUnF0u
+X-Received: by 2002:a17:907:9449:b0:b88:5ef6:17f9 with SMTP id a640c23a62f3a-b8edf15f695mr675946466b.7.1770655972552;
+        Mon, 09 Feb 2026 08:52:52 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 14/16] xen/riscv: handle hypervisor timer interrupts
+Date: Mon,  9 Feb 2026 17:52:27 +0100
+Message-ID: <4658719da8639b382b122bd79124381235d27aaf.1770650552.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1770650552.git.oleksii.kurochko@gmail.com>
+References: <cover.1770650552.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/6] xen/console: use memcpy() in console_init_ring()
-To: dmukhin@xen.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, julien@xen.org,
- michal.orzel@amd.com, roger.pau@citrix.com, sstabellini@kernel.org,
- dmukhin@ford.com, xen-devel@lists.xenproject.org
-References: <20260205013606.3384798-1-dmukhin@ford.com>
- <20260205013606.3384798-5-dmukhin@ford.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260205013606.3384798-5-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 05.02.2026 02:36, dmukhin@xen.org wrote:
-> @@ -479,11 +479,23 @@ void __init console_init_ring(void)
->      opt_conring_size = PAGE_SIZE << order;
->  
->      nrspin_lock_irqsave(&console_lock, flags);
-> -    for ( i = conringc ; i != conringp; i++ )
-> -        ring[i & (opt_conring_size - 1)] = conring[i & (conring_size - 1)];
-> +
-> +    start = conringc & (conring_size - 1);
-> +    size = min(conringp - conringc, conring_size);
+Introduce timer_interrupt() to process IRQ_S_TIMER interrupts.
+The handler disables further timer interrupts by clearing
+SIE.STIE and raises TIMER_SOFTIRQ so the generic timer subsystem
+can perform its processing.
 
-Is this correct when the ring size actually shrinks? In such a case you want
-to copy the tail of the ring if not all of the original contents fits in the
-new one. But ...
+Update do_trap() to dispatch IRQ_S_TIMER to this new handler.
 
-> +    chunk = min(size, conring_size - start);
-> +
-> +    memcpy(&ring[0], &conring[start], chunk);
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in v3:
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>.
+---
+Changes in v2:
+ - Drop cause argument of timer_interrupt() as it isn't used inside
+   the function and anyway it is pretty clear what is the cause inside
+   timer_interrupt().
+---
+ xen/arch/riscv/traps.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-... you start at its head.
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 676a2da55811..e8d9ca902d9c 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -10,6 +10,7 @@
+ #include <xen/lib.h>
+ #include <xen/nospec.h>
+ #include <xen/sched.h>
++#include <xen/softirq.h>
+ 
+ #include <asm/cpufeature.h>
+ #include <asm/intc.h>
+@@ -176,6 +177,15 @@ static void check_for_pcpu_work(void)
+     vcpu_flush_interrupts(current);
+ }
+ 
++static void timer_interrupt(void)
++{
++    /* Disable the timer to avoid more interrupts */
++    csr_clear(CSR_SIE, BIT(IRQ_S_TIMER, UL));
++
++    /* Signal the generic timer code to do its work */
++    raise_softirq(TIMER_SOFTIRQ);
++}
++
+ void do_trap(struct cpu_user_regs *cpu_regs)
+ {
+     register_t pc = cpu_regs->sepc;
+@@ -217,6 +227,10 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+                 intc_handle_external_irqs(cpu_regs);
+                 break;
+ 
++            case IRQ_S_TIMER:
++                timer_interrupt();
++                break;
++
+             default:
+                 intr_handled = false;
+                 break;
+-- 
+2.52.0
 
-> +    if ( size > chunk )
-> +        memcpy(&ring[chunk], &conring[0], size - chunk);
-> +
-> +    /* Data is moved to [0..size), re-position conring pointers. */
-> +    conringc = 0;
-> +    conringp = size;
-
-Why this unrelated change, which the description also doesn't mention? Since
-this is in an __init function, there's no race with read_console_ring(), but
-a static analysis tool may still (validly) spot one. Yet then there's also
-conring_flush(), which doesn't look to be using any locking either. Have you
-excluded that this function can run in a racing manner?
-
-Jan
 
