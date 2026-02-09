@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C177E7E0D0
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:53:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225791.1532426 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A106E7E0D2
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:53:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225799.1532478 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUVF-0000lk-H3; Mon, 09 Feb 2026 16:52:49 +0000
+	id 1vpUVL-00029y-RB; Mon, 09 Feb 2026 16:52:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225791.1532426; Mon, 09 Feb 2026 16:52:49 +0000
+Received: by outflank-mailman (output) from mailman id 1225799.1532478; Mon, 09 Feb 2026 16:52:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUVF-0000ki-BC; Mon, 09 Feb 2026 16:52:49 +0000
-Received: by outflank-mailman (input) for mailman id 1225791;
- Mon, 09 Feb 2026 16:52:47 +0000
+	id 1vpUVL-00027E-Fa; Mon, 09 Feb 2026 16:52:55 +0000
+Received: by outflank-mailman (input) for mailman id 1225799;
+ Mon, 09 Feb 2026 16:52:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zC3u=AN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vpUVD-0007Zd-NA
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:52:47 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
+ id 1vpUVJ-0007Zd-9A
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:52:53 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2443fb1-05d7-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 17:52:46 +0100 (CET)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b7cf4a975d2so626648566b.2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:52:46 -0800 (PST)
+ id c579a60a-05d7-11f1-9ccf-f158ae23cfc8;
+ Mon, 09 Feb 2026 17:52:51 +0100 (CET)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6505cac9879so6220421a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:52:51 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8edacf1564sm415776866b.52.2026.02.09.08.52.44
+ a640c23a62f3a-b8edacf1564sm415776866b.52.2026.02.09.08.52.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 08:52:45 -0800 (PST)
+ Mon, 09 Feb 2026 08:52:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,227 +47,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2443fb1-05d7-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c579a60a-05d7-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770655965; x=1771260765; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1770655971; x=1771260771; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=rogtIGkdjsiYuHIg+cB4eDpb8GAwkYYPz5C7nze5IWY=;
-        b=Z/MCfMErKNZxhDZA1lKjhPNZsFYniq/YhHahD0zI5qnH/nwVER4+/pJm/XN8Mo1UGd
-         ixA3Vx7JJPQXymj2aUTzEYJr+sH23RzIeJXRkHM5//27kLf6z6IA4VSz3EwiWRlZfBFY
-         Zpoe372MGc8NVnjre9RemZ4Hw3NPqQT2cj+vnT+o2tZ3WxaL6v5/sB+mJAqVqvbDDuij
-         coiiqZigAGbD3T5uXQuJAiLm2BdzIsErMdPXTir2te+mrRRYMn0re0/HGzp0BhoqfP4T
-         P6IJwbfVcWXSqbDf0z40r+oNZCHtDr1t9rBTtlZxA7zhff3ObKP3kie2pV3T0KdiqDDj
-         4sHA==
+        bh=rzoW6oI1pZTCczygZ2TeNSQR2mfIOIpFjPwj3JLnlaQ=;
+        b=Hk+aZ0J3Jv4UOB6n36pTG71ju2agjyMRptihvIzxvER5KUv91tmXMRUM3htgcbHsGW
+         Czjfin2/dxlM7/Px+IR4RRtX8On15tszrZZ2aBz4ll0b0w3SJxcjrRtyyD2srHiXrdqY
+         iRVFbZbYnRWpJxgPoCfRoB28B1HCHcizGYn0j6l9xAOu8eXkO65/hum8eItjK+TADMYH
+         8EzCALWx3LaU1gK0S6TPiESpaO/BhpeYt1YsP2PhOqycojMURTtFzvSIJPLd7aQBQ6se
+         /ckyVg28sX55OErJZFwMDl9yoSU92wZ/w33FK68TlkpoKGEF8js+6hEh2yirvZZasR+N
+         Robg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770655965; x=1771260765;
+        d=1e100.net; s=20230601; t=1770655971; x=1771260771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=rogtIGkdjsiYuHIg+cB4eDpb8GAwkYYPz5C7nze5IWY=;
-        b=cU7QNVXpcC6caKbTsCHYWupMJyR8mzm3LYLYB7KtmQu/5AXE0m+7B4z7MkjdxnggpW
-         /ttpweImYOq/2Whv+2BA6V5ji/nV0DlOxdL5r8gqDl3d7AxnjRIXY63A7/TkPv8r3p1N
-         1P17wcF52pdwoAMtORrEbm/FJbmMXWwZgusg64LBNfFS73KS5VLXEssljjJwoflEc3CP
-         twgz+lA/k9clG5SqcxssoE4cIk6QyjscQ8HMcLnQ36HAWZlcIcnzK5/xBBdrkPpW7/Ij
-         wLiFkn4FgdN/14EypmQ4sPw+ysCwoXSMVeKT8n1/GDANbYXdd/gvEkVwoj+6eLdELQfG
-         Aeyg==
-X-Gm-Message-State: AOJu0Yz0zP8n9RrjSfXhVy4et2ZXTCAEOYY4EPt6ZGSURmgIf9FoWJBT
-	N+qn1MN5wQ2G16vcCZFWIk+vnyFiBt4o9QK6o0936Deyy8kp8Cl/JMBQqBPK+Hmq
-X-Gm-Gg: AZuq6aJB9N9XtBpdK1zm9Y9dwx00tACIqvmyaHBYkuxl3M9GiIPE/nS65qiHhDWhKVM
-	EOzA9L20D1eA2ue/iZW5XeLMjai1f5fy2RbyBNAvi0lo3njsp7GDncIWvFo7P8nDQ/DxxDypjpw
-	rq4QE5FnE0uuOJwMS7yRyhzvMa0h+p9PS4cgxJTVKv1WBI8/XPmFBfRwpk0iRRmymGKpTz27qx0
-	uRvsyzfsa4Ky5rXgdDctvdLnxUs2r9JVHL0cCKNps0K7JWMbhhxEEPR3RtXqfYzs9jZr7CI4R3J
-	d0z74a9GQ0nnLkbpcuNR0BFVlaW3pMmb7ZjeXIHxXeyNtsTRYy066YRAw7XgV9Q8QqJ2XDT5cgs
-	0+YeopvF2F4WCqcyT3gBusMgfI7FwHUE1/l6j8WiC7DEMmeMOVz9Uexco1DTdJ7bg/UJyszAiF9
-	OuBPd+kqyRKmRKJm/36EDmAqS7Y2U7aPJrK0/JqHo4fbabme1OLn/lYOIIk86KwPK3
-X-Received: by 2002:a17:907:849:b0:b87:720c:f182 with SMTP id a640c23a62f3a-b8edf173b94mr602939866b.9.1770655965308;
-        Mon, 09 Feb 2026 08:52:45 -0800 (PST)
+        bh=rzoW6oI1pZTCczygZ2TeNSQR2mfIOIpFjPwj3JLnlaQ=;
+        b=i26V5HqftEpkWMnjuJrIn+hXuf3nBZRkZyQnDO+lMDUWKVQ53A0F1aKACoT5P7fd/8
+         g8s/je7Oq24UO/MzVmvCbN0dVx1/J7nVSUb+eP1VVmar4MuMz5khKbrhAoEO1/61yBbA
+         nnx8ukq/sJK3N8yQsjfFsC8cuT+wNDpdtH2T4BvGgl2M9TkrfkXqNt9iRPhkM6Fu0eOa
+         SOj/jzRMX/qAjVbwt/xSmJaA/RCNJFGXvaqjNjYczcjx5oMaeWUuCexwdyf9y/nBYtOo
+         iorPCENyBp6u5/0/sC64McnmwoeUdFRxeczvDmCiUTOPemuMctdUYsPjnHhSWbNaHRDs
+         jKXw==
+X-Gm-Message-State: AOJu0Ywod3471JMLq/BUO3hDOJ+eQIuEi4DXVW1+UCco7m8aNDI4C650
+	DthJ9XqmwF75ziDlG6ZQOMOQuhXviyBI5dUw5ckVlOuv2EQU1wkOop6a9VSiQJCP
+X-Gm-Gg: AZuq6aJbOCDP5UfWDk1JjLcTfUP+G+lexZcVbPkFB71wA7GXrAx0OKF9GF4K20giPKD
+	mEgBxB3s3PLZXMOEIFe2iePlJmy1nX03XvGLEVQeJ7phDAky+9OK4v+DY5uIA1bodPIXoSVWW89
+	5hWSDMzyNXCtvsi5LV1wAR1PZitHAwWnxwmDbEDnRtllv6Googg10KGSReTekbjUCcvtW3n67JM
+	+vAj2ts5pXcGJ30XbiwseuTSdqcK5Yqm7BBqK+XgHQ8wXK1nVUTYhAUhdgkBJKl1CktqnNImX8a
+	etmJj3t7vrALTLwGjyfQV/ncHGOL6ciYCM6eQ/AWVxqY3YOLIIDmTC8JXozsyxfYoFrqGoovdL6
+	S1xZwb5lR1Y0agEw9mSYBgVWMoQXvYpJ9ssqSJOZ6qNRYJdr3rzRimv9fLKd237pcci1Ev34V6l
+	nE6+YDqudn9mELB/tlo44x2P1LO9Ry41lcnW/a2nyYgHTMlayzyCVyGw==
+X-Received: by 2002:a17:907:3dac:b0:b86:fed0:2b with SMTP id a640c23a62f3a-b8edf307a5emr669724566b.32.1770655970541;
+        Mon, 09 Feb 2026 08:52:50 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v3 07/16] xen/time: move ticks<->ns helpers to common code
-Date: Mon,  9 Feb 2026 17:52:20 +0100
-Message-ID: <5c9644065978daa7d227713b2e2f83ee39b18a64.1770650552.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 12/16] xen/riscv: introduce sbi_set_timer()
+Date: Mon,  9 Feb 2026 17:52:25 +0100
+Message-ID: <3b102fd2267c629e8505631277efc2eeae5a1a6a.1770650552.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770650552.git.oleksii.kurochko@gmail.com>
 References: <cover.1770650552.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-ticks_to_ns() and ns_to_ticks() are not architecture-specific, so provide a
-common implementation that is more resilient to overflow than the historical
-Arm version. This is not a practical issue for Arm, as the latest ARM ARM
-that timer frequency should be fixed at 1 GHz and older platforms used much
-lower rates, which is shy of 32-bit overflow. As the helpers are declared
-as static inline, they should not affect x86, which does not use them.
+Introduce a function pointer for sbi_set_timer(), since different OpenSBI
+versions may implement the TIME extension with different extension IDs
+and/or function IDs.
 
-On Arm, these helpers were historically implemented as out-of-line functions
-because the counter frequency was originally defined as static and unavailable
-to headers [1]. Later changes [2] removed this restriction, but the helpers
-remained unchanged. Now they can be implemented as static inline without any
-issues.
+If the TIME extension is not available, fall back to the legacy timer
+mechanism. This is useful when Xen runs as a guest under another Xen,
+because the TIME extension is not currently virtualised and therefore
+will not appear as available.
+Despite of the fact that sbi_set_timer_v01 is introduced and used as
+fall back, SBI v0.1 still isn't fully supported (with the current SBI
+calls usage, sbi_rfence_v01 should be introduced too), so panic()
+in sbi_init() isn't removed.
 
-Centralising the helpers avoids duplication and removes subtle differences
-between architectures while keeping the implementation simple.
+The sbi_set_timer() pointer will be used by reprogram_timer() to program
+Xen’s physical timer as without SSTC extension there is no any other
+option except SBI call to do that as only M-timer is available for us.
 
-Drop redundant <asm/time.h> includes where <xen/time.h> already pulls it in.
+Use dprintk() for all the cases to print that a speicifc SBI extension
+is available as it isn't really necessary in case of release builds.
 
-No functional change is intended.
-
-[1] ddee56dc2994 arm: driver for the generic timer for ARMv7
-[2] 096578b4e489 xen: move XEN_SYSCTL_physinfo, XEN_SYSCTL_numainfo and
-                      XEN_SYSCTL_topologyinfo to common code
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+ - Init sbi_set_timer with sbi_set_timer_v01 as fallback value.
+ - Sort SBI IDs in the same way as SBI EXT IDs are declared.
+ - Add __ro_after_init for sbi_set_timer variable.
+ - use dprintk instead of printk to print information if SBI ext is available.
 ---
 Changes in v2:
- - Move ns_to_ticks() and ticks_to_ns() to common code.
+ - Move up defintion of SBI_EXT_TIME_SET_TIMER and use the same padding as
+   defintions around it.
+ - Add an extra comment about stime_value granuality above declaration of
+   sbi_set_timer function pointer.
+ - Refactor implemetation of sbi_set_timer_v02().
+ - Provide fallback for sbi_set_timer_v01().
+ - Update the commit message.
 ---
- xen/arch/arm/include/asm/time.h   |  3 ---
- xen/arch/arm/time.c               | 11 -----------
- xen/arch/arm/vtimer.c             |  2 +-
- xen/arch/riscv/include/asm/time.h |  5 -----
- xen/arch/riscv/time.c             |  1 +
- xen/include/xen/time.h            | 11 +++++++++++
- 6 files changed, 13 insertions(+), 20 deletions(-)
+ xen/arch/riscv/include/asm/sbi.h | 18 ++++++++++++++
+ xen/arch/riscv/sbi.c             | 40 +++++++++++++++++++++++++++++++-
+ 2 files changed, 57 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
-index 49ad8c1a6d47..c194dbb9f52d 100644
---- a/xen/arch/arm/include/asm/time.h
-+++ b/xen/arch/arm/include/asm/time.h
-@@ -101,9 +101,6 @@ extern void init_timer_interrupt(void);
- /* Counter value at boot time */
- extern uint64_t boot_count;
+diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
+index 79f7ff5c5501..a237f8b1393c 100644
+--- a/xen/arch/riscv/include/asm/sbi.h
++++ b/xen/arch/riscv/include/asm/sbi.h
+@@ -29,6 +29,7 @@
  
--extern s_time_t ticks_to_ns(uint64_t ticks);
--extern uint64_t ns_to_ticks(s_time_t ns);
--
- void preinit_xen_time(void);
+ #define SBI_EXT_BASE                    0x10
+ #define SBI_EXT_RFENCE                  0x52464E43
++#define SBI_EXT_TIME                    0x54494D45
  
- void force_update_vcpu_system_time(struct vcpu *v);
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index cc3fcf47b66a..a12912a106a0 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -27,7 +27,6 @@
- #include <asm/cpufeature.h>
- #include <asm/platform.h>
- #include <asm/system.h>
--#include <asm/time.h>
- #include <asm/vgic.h>
+ /* SBI function IDs for BASE extension */
+ #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+@@ -48,6 +49,9 @@
+ #define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA       0x5
+ #define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID  0x6
  
- uint64_t __read_mostly boot_count;
-@@ -47,16 +46,6 @@ unsigned int timer_get_irq(enum timer_ppi ppi)
-     return timer_irq[ppi];
- }
++/* SBI function IDs for TIME extension */
++#define SBI_EXT_TIME_SET_TIMER          0x0
++
+ #define SBI_SPEC_VERSION_MAJOR_MASK     0x7f000000
+ #define SBI_SPEC_VERSION_MINOR_MASK     0x00ffffff
  
--/*static inline*/ s_time_t ticks_to_ns(uint64_t ticks)
--{
--    return muldiv64(ticks, SECONDS(1), 1000 * cpu_khz);
--}
--
--/*static inline*/ uint64_t ns_to_ticks(s_time_t ns)
--{
--    return muldiv64(ns, 1000 * cpu_khz, SECONDS(1));
--}
--
- static __initdata struct dt_device_node *timer;
+@@ -134,6 +138,20 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+ int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+                                 size_t size, unsigned long vmid);
  
- #ifdef CONFIG_ACPI
-diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
-index d2124b175521..2e85ff2b6e62 100644
---- a/xen/arch/arm/vtimer.c
-+++ b/xen/arch/arm/vtimer.c
-@@ -12,13 +12,13 @@
- #include <xen/lib.h>
- #include <xen/perfc.h>
- #include <xen/sched.h>
-+#include <xen/time.h>
- #include <xen/timer.h>
++/*
++ * Programs the clock for next event after stime_value time. This function also
++ * clears the pending timer interrupt bit.
++ * If the supervisor wishes to clear the timer interrupt without scheduling the
++ * next timer event, it can either request a timer interrupt infinitely far
++ * into the future (i.e., (uint64_t)-1), or it can instead mask the timer
++ * interrupt by clearing sie.STIE CSR bit.
++ * The stime_value parameter represents absolute time measured in ticks.
++ *
++ * This SBI call returns 0 upon success or an implementation specific negative
++ * error code.
++ */
++extern int (* __ro_after_init sbi_set_timer)(uint64_t stime_value);
++
+ /*
+  * Initialize SBI library
+  *
+diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
+index 425dce44c679..b4a7ae6940c1 100644
+--- a/xen/arch/riscv/sbi.c
++++ b/xen/arch/riscv/sbi.c
+@@ -249,6 +249,38 @@ static int (* __ro_after_init sbi_rfence)(unsigned long fid,
+                                           unsigned long arg4,
+                                           unsigned long arg5);
  
- #include <asm/cpregs.h>
- #include <asm/div64.h>
- #include <asm/irq.h>
- #include <asm/regs.h>
--#include <asm/time.h>
- #include <asm/vgic.h>
- #include <asm/vreg.h>
- #include <asm/vtimer.h>
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-index 1e7801e2ea0e..be3875b9984e 100644
---- a/xen/arch/riscv/include/asm/time.h
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -24,11 +24,6 @@ static inline cycles_t get_cycles(void)
-     return csr_read(CSR_TIME);
- }
- 
--static inline s_time_t ticks_to_ns(uint64_t ticks)
--{
--    return muldiv64(ticks, MILLISECS(1), cpu_khz);
--}
--
- void preinit_xen_time(void);
- 
- #endif /* ASM__RISCV__TIME_H */
-diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
-index e962f8518d78..2c7af0a5d63b 100644
---- a/xen/arch/riscv/time.c
-+++ b/xen/arch/riscv/time.c
-@@ -4,6 +4,7 @@
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/sections.h>
-+#include <xen/time.h>
- #include <xen/types.h>
- 
- unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index fe0d7a578a99..2185dd26a439 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -8,6 +8,7 @@
- #ifndef __XEN_TIME_H__
- #define __XEN_TIME_H__
- 
-+#include <xen/muldiv64.h>
- #include <xen/types.h>
- #include <public/xen.h>
- 
-@@ -75,6 +76,16 @@ extern void send_timer_event(struct vcpu *v);
- 
- void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds);
- 
-+static inline s_time_t ticks_to_ns(uint64_t ticks)
++static int cf_check sbi_set_timer_v02(uint64_t stime_value)
 +{
-+    return muldiv64(ticks, MILLISECS(1), cpu_khz);
++    struct sbiret ret;
++
++    ret = sbi_ecall(SBI_EXT_TIME, SBI_EXT_TIME_SET_TIMER, stime_value,
++#ifdef CONFIG_RISCV_32
++                    stime_value >> 32,
++#else
++                    0,
++#endif
++                    0, 0, 0, 0);
++
++    return sbi_err_map_xen_errno(ret.error);
 +}
 +
-+static inline uint64_t ns_to_ticks(s_time_t ns)
++static int cf_check sbi_set_timer_v01(uint64_t stime_value)
 +{
-+    return muldiv64(ns, cpu_khz, MILLISECS(1));
++    struct sbiret ret;
++
++    ret = sbi_ecall(SBI_EXT_0_1_SET_TIMER, 0, stime_value,
++#ifdef CONFIG_RISCV_32
++                    stime_value >> 32,
++#else
++                    0,
++#endif
++                    0, 0, 0, 0);
++
++    return sbi_err_map_xen_errno(ret.error);
 +}
 +
- #include <asm/time.h>
- 
- #endif /* __XEN_TIME_H__ */
++int (* __ro_after_init sbi_set_timer)(uint64_t stime_value) = sbi_set_timer_v01;
++
+ int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
+                           size_t size)
+ {
+@@ -324,7 +356,13 @@ int __init sbi_init(void)
+         if ( sbi_probe_extension(SBI_EXT_RFENCE) > 0 )
+         {
+             sbi_rfence = sbi_rfence_v02;
+-            printk("SBI v0.2 RFENCE extension detected\n");
++            dprintk(XENLOG_INFO, "SBI v0.2 RFENCE extension detected\n");
++        }
++
++        if ( sbi_probe_extension(SBI_EXT_TIME) > 0 )
++        {
++            sbi_set_timer = sbi_set_timer_v02;
++            dprintk(XENLOG_INFO, "SBI v0.2 TIME extension detected\n");
+         }
+     }
+     else
 -- 
 2.52.0
 
