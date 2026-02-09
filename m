@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A106E7E0D2
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:53:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1225799.1532478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66407E7E0D3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Feb 2026 16:53:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1225789.1532406 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUVL-00029y-RB; Mon, 09 Feb 2026 16:52:55 +0000
+	id 1vpUVD-0000IQ-Jd; Mon, 09 Feb 2026 16:52:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1225799.1532478; Mon, 09 Feb 2026 16:52:55 +0000
+Received: by outflank-mailman (output) from mailman id 1225789.1532406; Mon, 09 Feb 2026 16:52:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpUVL-00027E-Fa; Mon, 09 Feb 2026 16:52:55 +0000
-Received: by outflank-mailman (input) for mailman id 1225799;
- Mon, 09 Feb 2026 16:52:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vpUVD-0000IA-Et; Mon, 09 Feb 2026 16:52:47 +0000
+Received: by outflank-mailman (input) for mailman id 1225789;
+ Mon, 09 Feb 2026 16:52:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zC3u=AN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vpUVJ-0007Zd-9A
- for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:52:53 +0000
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [2a00:1450:4864:20::52b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c579a60a-05d7-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Feb 2026 17:52:51 +0100 (CET)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-6505cac9879so6220421a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:52:51 -0800 (PST)
+ id 1vpUVB-0007Zo-RU
+ for xen-devel@lists.xenproject.org; Mon, 09 Feb 2026 16:52:45 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c1bcfd39-05d7-11f1-b162-2bf370ae4941;
+ Mon, 09 Feb 2026 17:52:45 +0100 (CET)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b8871718b05so750097466b.2
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Feb 2026 08:52:45 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b8edacf1564sm415776866b.52.2026.02.09.08.52.49
+ a640c23a62f3a-b8edacf1564sm415776866b.52.2026.02.09.08.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 08:52:50 -0800 (PST)
+ Mon, 09 Feb 2026 08:52:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c579a60a-05d7-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c1bcfd39-05d7-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770655971; x=1771260771; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1770655964; x=1771260764; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=rzoW6oI1pZTCczygZ2TeNSQR2mfIOIpFjPwj3JLnlaQ=;
-        b=Hk+aZ0J3Jv4UOB6n36pTG71ju2agjyMRptihvIzxvER5KUv91tmXMRUM3htgcbHsGW
-         Czjfin2/dxlM7/Px+IR4RRtX8On15tszrZZ2aBz4ll0b0w3SJxcjrRtyyD2srHiXrdqY
-         iRVFbZbYnRWpJxgPoCfRoB28B1HCHcizGYn0j6l9xAOu8eXkO65/hum8eItjK+TADMYH
-         8EzCALWx3LaU1gK0S6TPiESpaO/BhpeYt1YsP2PhOqycojMURTtFzvSIJPLd7aQBQ6se
-         /ckyVg28sX55OErJZFwMDl9yoSU92wZ/w33FK68TlkpoKGEF8js+6hEh2yirvZZasR+N
-         Robg==
+        bh=Y3eDIzczLgQjn9FFXjHOFuYc8YqhLVGUUTFDMX/MKvY=;
+        b=F73EzOUl3QVOu6ZynsmuNdlkdZCBZ5WDsmxfdMhr/PMW++kfraRBFEfNaDN33N20tJ
+         sD2xgLA2pRnyz6x1PaRmb4aBo/YilpbLFkQo5fdhkZqgmMyjw9NWupP2cckch8LaLRGV
+         8aOUOUjR6Uk3D/yNsBNuL/ljUwRCZmJB63qlHxPJe6vRRiAUvp+16TmkZXByYQvI8UFr
+         HHYX/EO7ePtBRCwCT5BLsQTCaQc0IljUDOFCEtq8zCIe6FZ0rdqinqe7d159V48NpSNl
+         J3Bra+JzIMMUSAL4zlIaiFBJu2fdGVBq0BA8XOZd7OrK4WWWtEbfAc8cY6gkYtilKI+d
+         e1cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770655971; x=1771260771;
+        d=1e100.net; s=20230601; t=1770655964; x=1771260764;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=rzoW6oI1pZTCczygZ2TeNSQR2mfIOIpFjPwj3JLnlaQ=;
-        b=i26V5HqftEpkWMnjuJrIn+hXuf3nBZRkZyQnDO+lMDUWKVQ53A0F1aKACoT5P7fd/8
-         g8s/je7Oq24UO/MzVmvCbN0dVx1/J7nVSUb+eP1VVmar4MuMz5khKbrhAoEO1/61yBbA
-         nnx8ukq/sJK3N8yQsjfFsC8cuT+wNDpdtH2T4BvGgl2M9TkrfkXqNt9iRPhkM6Fu0eOa
-         SOj/jzRMX/qAjVbwt/xSmJaA/RCNJFGXvaqjNjYczcjx5oMaeWUuCexwdyf9y/nBYtOo
-         iorPCENyBp6u5/0/sC64McnmwoeUdFRxeczvDmCiUTOPemuMctdUYsPjnHhSWbNaHRDs
-         jKXw==
-X-Gm-Message-State: AOJu0Ywod3471JMLq/BUO3hDOJ+eQIuEi4DXVW1+UCco7m8aNDI4C650
-	DthJ9XqmwF75ziDlG6ZQOMOQuhXviyBI5dUw5ckVlOuv2EQU1wkOop6a9VSiQJCP
-X-Gm-Gg: AZuq6aJbOCDP5UfWDk1JjLcTfUP+G+lexZcVbPkFB71wA7GXrAx0OKF9GF4K20giPKD
-	mEgBxB3s3PLZXMOEIFe2iePlJmy1nX03XvGLEVQeJ7phDAky+9OK4v+DY5uIA1bodPIXoSVWW89
-	5hWSDMzyNXCtvsi5LV1wAR1PZitHAwWnxwmDbEDnRtllv6Googg10KGSReTekbjUCcvtW3n67JM
-	+vAj2ts5pXcGJ30XbiwseuTSdqcK5Yqm7BBqK+XgHQ8wXK1nVUTYhAUhdgkBJKl1CktqnNImX8a
-	etmJj3t7vrALTLwGjyfQV/ncHGOL6ciYCM6eQ/AWVxqY3YOLIIDmTC8JXozsyxfYoFrqGoovdL6
-	S1xZwb5lR1Y0agEw9mSYBgVWMoQXvYpJ9ssqSJOZ6qNRYJdr3rzRimv9fLKd237pcci1Ev34V6l
-	nE6+YDqudn9mELB/tlo44x2P1LO9Ry41lcnW/a2nyYgHTMlayzyCVyGw==
-X-Received: by 2002:a17:907:3dac:b0:b86:fed0:2b with SMTP id a640c23a62f3a-b8edf307a5emr669724566b.32.1770655970541;
-        Mon, 09 Feb 2026 08:52:50 -0800 (PST)
+        bh=Y3eDIzczLgQjn9FFXjHOFuYc8YqhLVGUUTFDMX/MKvY=;
+        b=ON2ZK2z/VvEE1/z6FM3hMMvJ6dO807Ja1Xn4CRY4ics1ZOPkQwYsB+zWg/EGhb8HzE
+         WiJujV/pAjfJQJc9SNEr9LRRwwuJ125kJ8+bQ4CPWSLiL7F/eo4UrfErd3sFZNAKVol9
+         etNBDjgStP68wVrx5Co0tksIfx5np+YDp/TYsr8hBod566W9YGXGpsFsEZ201qebH6LO
+         z6IxWjqUslawdakK988NmKXhz1IZbt5bEbzrmCiWem1SigxDBUFyTj/Ak4jafYso4bja
+         5EW8M89MqWGltqPsW3gUJroKmINviC39UsrXxxq4VDbg83H6eaNi1xTPy4kwcRmTIakL
+         cRug==
+X-Gm-Message-State: AOJu0YxszFQ04loNBQit7bPERO1XV+hhKKT0beCTFC/avtfX5q68WxAz
+	BWsRf7D/Led18G9D50AqOg5NBG834K2fLs09ArEkIq+nuT49WshJ7pNO8J1SBPmg
+X-Gm-Gg: AZuq6aJlwpxdmqfA+LZHNEHfoyAUe3ERkzZgzpsZuQ+zojHfiw7aB+LsWDBkFoNOm6I
+	wcB0U4q63NRvYKK3QPPTTnlAS8ngPidfMg4FVSxSIOCoCQvwr6JiDFawftI+3eU2SlsNlzc6JQH
+	CEVaeSV+L1PEcsgf2pBw4K7FtBNOuh3qgg1jc2TuVR8+6a133O9bwxyUWX3vdwX3UT082O3ot2T
+	M6DZQLGKLj8UjDYro8FOCV3GzNEvqMGG2vM1gSpqK4NN1ZxzZR/kX/o6DXagZF8mB1MmvSj/s/W
+	NlAGpUvTpEQ9k0uf/g5mRL1PkUEg8rUo1TDxnZIrJc+AKb7+hgtWZvpSVc6kPEIIymKHT5qswp4
+	I7YagQ/2y07Euvn7DEfAIpCzMZmF8xm/SleTNGkBemgZZp+hVqPCoaYQGUkQBV80KKf8DDAE9bi
+	VQcGfAX3UmAkK34gksFsd7tcgaPr1PcX0vnfhg8h+a5iQY8mW4NuDmpA==
+X-Received: by 2002:a17:907:1c9e:b0:b87:bb45:bd5c with SMTP id a640c23a62f3a-b8edf42c682mr810413966b.58.1770655964157;
+        Mon, 09 Feb 2026 08:52:44 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,158 +96,121 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 12/16] xen/riscv: introduce sbi_set_timer()
-Date: Mon,  9 Feb 2026 17:52:25 +0100
-Message-ID: <3b102fd2267c629e8505631277efc2eeae5a1a6a.1770650552.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 06/16] xen/riscv: introduce tracking of pending vCPU interrupts, part 2
+Date: Mon,  9 Feb 2026 17:52:19 +0100
+Message-ID: <a81d2873c901c825a08f817d962a8cef09167447.1770650552.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770650552.git.oleksii.kurochko@gmail.com>
 References: <cover.1770650552.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce a function pointer for sbi_set_timer(), since different OpenSBI
-versions may implement the TIME extension with different extension IDs
-and/or function IDs.
+This patch is based on Linux kernel 6.16.0.
 
-If the TIME extension is not available, fall back to the legacy timer
-mechanism. This is useful when Xen runs as a guest under another Xen,
-because the TIME extension is not currently virtualised and therefore
-will not appear as available.
-Despite of the fact that sbi_set_timer_v01 is introduced and used as
-fall back, SBI v0.1 still isn't fully supported (with the current SBI
-calls usage, sbi_rfence_v01 should be introduced too), so panic()
-in sbi_init() isn't removed.
+Add the consumer side (vcpu_flush_interrupts()) of the lockless pending
+interrupt tracking introduced in part 1 (for producers). According, to the
+design only one consumer is possible, and it is vCPU itself.
+vcpu_flush_interrupts() is expected to be ran (as guests aren't ran now due
+to the lack of functionality) before the hypervisor returns control to the
+guest.
 
-The sbi_set_timer() pointer will be used by reprogram_timer() to program
-Xen’s physical timer as without SSTC extension there is no any other
-option except SBI call to do that as only M-timer is available for us.
+Producers may set bits in irqs_pending_mask without a lock. Clearing bits in
+irqs_pending_mask is performed only by the consumer via xchg() (with aquire &
+release semantics). The consumer must not write to irqs_pending and must not
+act on bits that are not set in the mask. Otherwise, extra synchronization
+should be provided.
+The worst thing which could happen with such approach is that a new pending
+bit will be set to irqs_pending bitmap during update of hvip variable in
+vcpu_flush_interrupt() but it isn't problem as the new pending bit won't
+be lost and just be proceded during the next flush.
 
-Use dprintk() for all the cases to print that a speicifc SBI extension
-is available as it isn't really necessary in case of release builds.
+As AIA specs introduced hviph register which would want to be updated when
+guest related AIA code vcpu_update_hvip() is introduced instead of just
+open-code it in vcpu_flush_interrupts().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - Init sbi_set_timer with sbi_set_timer_v01 as fallback value.
- - Sort SBI IDs in the same way as SBI EXT IDs are declared.
- - Add __ro_after_init for sbi_set_timer variable.
- - use dprintk instead of printk to print information if SBI ext is available.
+ - Update the error message in case of RV32 from "hviph" to v->arch.hviph.
+ - Make const argument of vcpu_update_hvip.
+ - Move local variables mask and val inside if() in vcpu_flush_interrupts().
+ - Call vcpu_flush_interrupts() in check_pcpu_work().
+ - Move vcpu_update_hvip() inside if() in vcpu_flush_interrupts().
 ---
 Changes in v2:
- - Move up defintion of SBI_EXT_TIME_SET_TIMER and use the same padding as
-   defintions around it.
- - Add an extra comment about stime_value granuality above declaration of
-   sbi_set_timer function pointer.
- - Refactor implemetation of sbi_set_timer_v02().
- - Provide fallback for sbi_set_timer_v01().
- - Update the commit message.
+ - New patch.
 ---
- xen/arch/riscv/include/asm/sbi.h | 18 ++++++++++++++
- xen/arch/riscv/sbi.c             | 40 +++++++++++++++++++++++++++++++-
- 2 files changed, 57 insertions(+), 1 deletion(-)
+ xen/arch/riscv/domain.c             | 33 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h |  1 +
+ xen/arch/riscv/traps.c              |  2 ++
+ 3 files changed, 36 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index 79f7ff5c5501..a237f8b1393c 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -29,6 +29,7 @@
- 
- #define SBI_EXT_BASE                    0x10
- #define SBI_EXT_RFENCE                  0x52464E43
-+#define SBI_EXT_TIME                    0x54494D45
- 
- /* SBI function IDs for BASE extension */
- #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
-@@ -48,6 +49,9 @@
- #define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA       0x5
- #define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID  0x6
- 
-+/* SBI function IDs for TIME extension */
-+#define SBI_EXT_TIME_SET_TIMER          0x0
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 4513f778cdc4..67437912605a 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -194,3 +194,36 @@ void vcpu_sync_interrupts(struct vcpu *v)
+ #   error "Update v->arch.vsieh"
+ #endif
+ }
 +
- #define SBI_SPEC_VERSION_MAJOR_MASK     0x7f000000
- #define SBI_SPEC_VERSION_MINOR_MASK     0x00ffffff
- 
-@@ -134,6 +138,20 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
- int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
-                                 size_t size, unsigned long vmid);
- 
-+/*
-+ * Programs the clock for next event after stime_value time. This function also
-+ * clears the pending timer interrupt bit.
-+ * If the supervisor wishes to clear the timer interrupt without scheduling the
-+ * next timer event, it can either request a timer interrupt infinitely far
-+ * into the future (i.e., (uint64_t)-1), or it can instead mask the timer
-+ * interrupt by clearing sie.STIE CSR bit.
-+ * The stime_value parameter represents absolute time measured in ticks.
-+ *
-+ * This SBI call returns 0 upon success or an implementation specific negative
-+ * error code.
-+ */
-+extern int (* __ro_after_init sbi_set_timer)(uint64_t stime_value);
-+
- /*
-  * Initialize SBI library
-  *
-diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
-index 425dce44c679..b4a7ae6940c1 100644
---- a/xen/arch/riscv/sbi.c
-+++ b/xen/arch/riscv/sbi.c
-@@ -249,6 +249,38 @@ static int (* __ro_after_init sbi_rfence)(unsigned long fid,
-                                           unsigned long arg4,
-                                           unsigned long arg5);
- 
-+static int cf_check sbi_set_timer_v02(uint64_t stime_value)
++static void vcpu_update_hvip(const struct vcpu *v)
 +{
-+    struct sbiret ret;
-+
-+    ret = sbi_ecall(SBI_EXT_TIME, SBI_EXT_TIME_SET_TIMER, stime_value,
-+#ifdef CONFIG_RISCV_32
-+                    stime_value >> 32,
-+#else
-+                    0,
-+#endif
-+                    0, 0, 0, 0);
-+
-+    return sbi_err_map_xen_errno(ret.error);
++    csr_write(CSR_HVIP, v->arch.hvip);
 +}
 +
-+static int cf_check sbi_set_timer_v01(uint64_t stime_value)
++void vcpu_flush_interrupts(struct vcpu *v)
 +{
-+    struct sbiret ret;
++    register_t *hvip = &v->arch.hvip;
 +
-+    ret = sbi_ecall(SBI_EXT_0_1_SET_TIMER, 0, stime_value,
++    if ( ACCESS_ONCE(v->arch.irqs_pending_mask[0]) )
++    {
++        unsigned long mask, val;
++
++        mask = xchg(&v->arch.irqs_pending_mask[0], 0UL);
++        val = ACCESS_ONCE(v->arch.irqs_pending[0]) & mask;
++
++        *hvip &= ~mask;
++        *hvip |= val;
++
++        /*
++         * Flush AIA high interrupts.
++         *
++         * It is necessary to do only for CONFIG_RISCV_32 which isn't
++         * supported now.
++         */
 +#ifdef CONFIG_RISCV_32
-+                    stime_value >> 32,
-+#else
-+                    0,
++        #   error "Update v->arch.hviph"
 +#endif
-+                    0, 0, 0, 0);
 +
-+    return sbi_err_map_xen_errno(ret.error);
++        vcpu_update_hvip(v);
++    }
 +}
-+
-+int (* __ro_after_init sbi_set_timer)(uint64_t stime_value) = sbi_set_timer_v01;
-+
- int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
-                           size_t size)
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 8d9432ec5a8b..de5aecb862b5 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -115,6 +115,7 @@ int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
+ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
+ 
+ void vcpu_sync_interrupts(struct vcpu *v);
++void vcpu_flush_interrupts(struct vcpu *v);
+ 
+ #endif /* ASM__RISCV__DOMAIN_H */
+ 
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 82e1dc59cdea..676a2da55811 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -172,6 +172,8 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
+ static void check_for_pcpu_work(void)
  {
-@@ -324,7 +356,13 @@ int __init sbi_init(void)
-         if ( sbi_probe_extension(SBI_EXT_RFENCE) > 0 )
-         {
-             sbi_rfence = sbi_rfence_v02;
--            printk("SBI v0.2 RFENCE extension detected\n");
-+            dprintk(XENLOG_INFO, "SBI v0.2 RFENCE extension detected\n");
-+        }
+     vcpu_sync_interrupts(current);
 +
-+        if ( sbi_probe_extension(SBI_EXT_TIME) > 0 )
-+        {
-+            sbi_set_timer = sbi_set_timer_v02;
-+            dprintk(XENLOG_INFO, "SBI v0.2 TIME extension detected\n");
-         }
-     }
-     else
++    vcpu_flush_interrupts(current);
+ }
+ 
+ void do_trap(struct cpu_user_regs *cpu_regs)
 -- 
 2.52.0
 
