@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCECEB26EB
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Feb 2026 16:37:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1226684.1533189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7305EB26E8
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Feb 2026 16:40:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1226709.1533218 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpqjP-000132-RC; Tue, 10 Feb 2026 16:36:55 +0000
+	id 1vpqmY-0003yI-P6; Tue, 10 Feb 2026 16:40:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1226684.1533189; Tue, 10 Feb 2026 16:36:55 +0000
+Received: by outflank-mailman (output) from mailman id 1226709.1533218; Tue, 10 Feb 2026 16:40:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vpqjP-00012v-O5; Tue, 10 Feb 2026 16:36:55 +0000
-Received: by outflank-mailman (input) for mailman id 1226684;
- Tue, 10 Feb 2026 16:36:54 +0000
+	id 1vpqmY-0003yB-MT; Tue, 10 Feb 2026 16:40:10 +0000
+Received: by outflank-mailman (input) for mailman id 1226709;
+ Tue, 10 Feb 2026 16:40:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WUYk=AO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vpqjO-00012i-ID
- for xen-devel@lists.xenproject.org; Tue, 10 Feb 2026 16:36:54 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
+ id 1vpqmX-0003y5-HF
+ for xen-devel@lists.xenproject.org; Tue, 10 Feb 2026 16:40:09 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b448e335-069e-11f1-9ccf-f158ae23cfc8;
- Tue, 10 Feb 2026 17:36:52 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-47edd6111b4so85424775e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 10 Feb 2026 08:36:52 -0800 (PST)
-Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d5e11f5sm64803255e9.4.2026.02.10.08.36.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 08:36:51 -0800 (PST)
+ id 26743446-069f-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Feb 2026 17:40:04 +0100 (CET)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-43591b55727so3842821f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Feb 2026 08:40:04 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43629756bc3sm32676169f8f.39.2026.02.10.08.40.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Feb 2026 08:40:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,95 +47,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b448e335-069e-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 26743446-069f-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770741412; x=1771346212; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ITsNzAFyOLMTMbt81OFpd5kCMwIAwHqAlWstam1L7pc=;
-        b=k0/dkwoOBvrVVf4sgbRrLBLGpNU8VuTcMcKKS5yF/g2Pyg00XWl6vDsMHP7wHFu63M
-         mprfBkV6Tc1LAoYLPIZKbI52/mnMwbmHqUCTkDwAOxyiaZ5EyccAcfeohKU5pT5n2p2L
-         XMWt75ypSEuYN+Ie0ePyJvDNTo50H5zq6I/KgqlxI72nngKTlu59tBYJrXJ7tSyzem6p
-         FUDkwgVDUaIBLXnIKie3kThxt+e7sGPBJFaxl1LCSojdvSlG89BJCTcPeA4bYlJbET6n
-         xvJtpPhWeEbyctUebEUSSEKpXVQvUtCCswlu2RuvmatYnuBnT8VFXc9dKbx3Qxy9HGeC
-         wdQg==
+        d=gmail.com; s=20230601; t=1770741603; x=1771346403; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=COrjMK8OEYgsjTwS51atPufdJANAHpQy+jQ5A3f66oI=;
+        b=Dr/TkF3KeCn2okThI/iCowURGhgss0Imyre2Hr76Llf3NGDm4XcO01tTyNfn1mvwZ5
+         nRFS012++cTcoe/9xdxotAGKLmhbSP+o2hpUANX5U63wAP0cKW42/SmIlvqMFpK/5tWd
+         K5xHxSmcWfMO7XAgpCB24skEK3DYoIxeGG8NZ17xx9wr4cHkQQA8tJTh4elL01RGuNvV
+         KXLTgk9bEB/mMPwlWQcnzlnXYSyt2mo7d2DG522lF2UaXZRiGQpkhThecBCidOhVGM+i
+         BHf2DDWwC7FUYCms98n5ThCUcInw8pY7aO13zH2sXJARAAHobvzi0z371WkgRuhMhUt0
+         CM4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770741412; x=1771346212;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ITsNzAFyOLMTMbt81OFpd5kCMwIAwHqAlWstam1L7pc=;
-        b=B2l0rWOX3Iu4gctFg9BLySl/+nhmJJ3GWNyEMyIPmI+AJCXGBjlDDJUdNVCqgCyymC
-         azjehiPptZbtfWM2LgRI/FFFSA52sPWNSDWOyXkihz5xqKt5fIC+1+SZP9E7xmfOSJvW
-         SW9AOSIiqc7xIfeWsGs36rs340UYPhCFPL6LIUarlyxPmvEf+2EB3O2ZqQbSdE4BUNoK
-         rhl2MGExDA2y/pipTsCMqGoAYRvvm6DdQaJd+IUAtrkhOuVAutC8ofuke9fCyH5fPimw
-         IVzbonFV4StBrTKhmYjOTkbZ9Zbx6EWJ9nhHvvC5COUEQy9sMt1PMKJY6UFQjYrEKXVR
-         E0JQ==
-X-Gm-Message-State: AOJu0Yx9aeHVuNItov8BIPET27twIaWbxr7sQfkTmW4GJXQSK8YAaUOk
-	/DNSkDGRrNd5UQzgfDHQjfPpvh8SEHt0UKghFHEAd6UTbfu1/LOiOSsDs2t5g5io
-X-Gm-Gg: AZuq6aJ16O1i+I+X0SQGy0GIkj+HobUs3BFE1CoJyHr8OtiUMZYXDI6hazzNGSdmQsE
-	A8Bp/bXMhq/6WWYk9umKt1GcOsPn/IY4Zs3WMcfxxG8hr6CcFkRAq5ywbAA2Ak/gZSonwgZYu+n
-	zv3Vc2a0HIZBqS7isguBdQt23DM2mm+Pp+q4Sw3tillWbFDWMXSrE+uY7iEcDUALhQHu312UCmR
-	ku9i2GJlhePzHsEWmS5edu3YeAl3nrK70182RiPwKzr+I2XwEAbevmoy7J/lsylyF5BgCfWAQzK
-	nGCcUihxr+O1aILeYkjKmim6EEOeY9UDg2g9Zli/urcBUm1bra2grZUYRPcqgvBHdrr7ytIE+u5
-	DAWSVOiM6fNYiy9QdEEQ0raxjBzjsEmFJf1X0KYwf85KZ1DLUywPzfFB2YbI2n6tOw5eYkQxun5
-	gA4dWRXbFEnhlGZM9bfH1GJNeycYoCVoB4/YovevIbG2h9xHNkOa9YNVjpoGqcWcqCTDy1fw==
-X-Received: by 2002:a05:600c:3487:b0:477:b0b9:3129 with SMTP id 5b1f17b1804b1-483507cff88mr40714345e9.3.1770741411577;
-        Tue, 10 Feb 2026 08:36:51 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/2] RISC-V: p2m context switch
-Date: Tue, 10 Feb 2026 17:36:39 +0100
-Message-ID: <cover.1770739000.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1770741603; x=1771346403;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=COrjMK8OEYgsjTwS51atPufdJANAHpQy+jQ5A3f66oI=;
+        b=Cf+eAIpZp4oqD/H2ZyxtDAZ2hhN6XlHvVU6btUY9ziwW+NXX3IoLBCrKDUwGHcQGCJ
+         yNf2qJsF+LMqpczquTx6vIHRozXGL+mX6FFNtuS8jErrhr7mQYJ8KzFvjGdvRpexUWMR
+         9Tb+3gj7zqryEoRYp5eMI5664ccTZK6/yweFxJMdcZESWJpL/HBoFjByEVQsLRXcq5mp
+         UcEMGTcyqHdiotJo4vAjowaHmMfltMhf2uIgBzKggVwf/e6vb/3y3hILjcqdZ6y8oUm5
+         Mvdpw/X5WwpaFt7lrlA/a+jbmh9jcXe3s+pvPvtB78c+WGjMiz8L8mj+CN4HmtP9BUgz
+         cZdQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXU2e10TGKPXQLNpRnLPeVwuRCYH2VTWGZ4JTlUf2YAhFSLiKIuJ7Gj1T+XvvftY4Fdu7QAsj64emQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxZZRJ1X+/iCb+RCM09zpZgN/B/UHxBiikRRGNO/8+Qsm8ukic1
+	ZyYq3QUVOrU1PDzUJCqfyn8ZJN/u0YJ64pTmCLsCd/avtD6Gva0Rshwh
+X-Gm-Gg: AZuq6aKEv46FCReVWdRod35I0EaJM8/GRjtCCDOFsdth3745fAK38G64LojVBRSsTYX
+	kRG8r6ElUHFW5YR4644I9lqq8NiqJGmaDXhyquXhPl6zpyEqCuSrpmz+F8p4RhMCA/9M9d0AFiz
+	6qJezOKMqzMOveH4AuRg2Lxylxd9ZwrOPmE9T9wNX2ZvqWMNkTBEvBToMmv7pxrbBpSytR6/21G
+	3RGep228pyqrWsht7EO/0h3s+79LQdBYTdlobyq/gzjB51+j5kjgVNG7NPEjtVAUQ74+gFPbheu
+	LZrnwNezTDmuDU1wfgMHRXt0vNallxlTth2OVJNH6bPs/gw5hAFmX2nQOYhQ7cuPqEeTYOmxl9n
+	xBrgT66jltHaayNHCf/DK2X3Pc7cq7JdZ1jUbBBwQ65/c64krRhNJc/Jx3WTHWJ1Ng861tBmxib
+	4kb6HoHTO9bNgCOoIlVSErv699kQ8Dxn/vKR/QvJ6zCO2JqxzOpgX9RhXKA4BB5OwlXtorlO0SC
+	cA=
+X-Received: by 2002:a5d:64c3:0:b0:437:677d:42d with SMTP id ffacd0b85a97d-437677d05edmr15758012f8f.63.1770741603380;
+        Tue, 10 Feb 2026 08:40:03 -0800 (PST)
+Message-ID: <9cfd188d-b515-4d5e-8268-3ad51ee6b7e4@gmail.com>
+Date: Tue, 10 Feb 2026 17:40:02 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen: Strip vcpu_switch_to_aarch64_mode() from PPC and
+ RISC-V stubs
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20260210163445.2796291-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20260210163445.2796291-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Introduce functions required to perform a p2m context switch during a vCPU
-context switch.
 
-Although this patch series is technically independent of [1], some merge
-conflicts are still possible depending on which series is applied first.
-For now, the series has been rebased on top of [1] but can go without [1].
+On 2/10/26 5:34 PM, Andrew Cooper wrote:
+> This is absolutely too much copy&paste from ARM.  All other stubs look
+> somewhat reasonable.
+>
+> No functional change.
+>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> CC: Timothy Pearson <tpearson@raptorengineering.com>
+> CC: Anthony PERARD <anthony.perard@vates.tech>
+> CC: Michal Orzel <michal.orzel@amd.com>
+> CC: Jan Beulich <jbeulich@suse.com>
+> CC: Julien Grall <julien@xen.org>
+> CC: Roger Pau Monné <roger.pau@citrix.com>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> ---
+>   xen/arch/ppc/stubs.c   | 5 -----
+>   xen/arch/riscv/stubs.c | 5 -----
+>   2 files changed, 10 deletions(-)
+>
+> diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
+> index f7f6e7ed97af..a333f06119a0 100644
+> --- a/xen/arch/ppc/stubs.c
+> +++ b/xen/arch/ppc/stubs.c
+> @@ -162,11 +162,6 @@ void arch_vcpu_destroy(struct vcpu *v)
+>       BUG_ON("unimplemented");
+>   }
+>   
+> -void vcpu_switch_to_aarch64_mode(struct vcpu *v)
+> -{
+> -    BUG_ON("unimplemented");
+> -}
+> -
+>   int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+>   {
+>       BUG_ON("unimplemented");
+> diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+> index acbfde79b5a7..d071c8b86d07 100644
+> --- a/xen/arch/riscv/stubs.c
+> +++ b/xen/arch/riscv/stubs.c
+> @@ -126,11 +126,6 @@ void arch_vcpu_destroy(struct vcpu *v)
+>       BUG_ON("unimplemented");
+>   }
+>   
+> -void vcpu_switch_to_aarch64_mode(struct vcpu *v)
+> -{
+> -    BUG_ON("unimplemented");
+> -}
+> -
 
-[1] https://lore.kernel.org/xen-devel/cover.1770650552.git.oleksii.kurochko@gmail.com/T/#m5d8de24e5ee0eaf6f35f9f1437a00096e3574684
+These changes looks good to me:
+  Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
----
-Changes in v2:
- - Drop patch "xen/riscv: introduce struct arch_vcpu", took only declaration of
-   vsatp and squash it with the patch:
-     xen/riscv: implement p2m_ctx_switch_{to,from}_state()
- - Other changes please look at specific patch.
- - CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2317277592
----
+Thanks for cleaning it up.
 
-
-Oleksii Kurochko (2):
-  xen/riscv: add support for local guest TLB flush using HFENCE.VVMA
-  xen/riscv: add p2m context switch handling for VSATP and HGATP
-
- xen/arch/riscv/include/asm/domain.h    |   1 +
- xen/arch/riscv/include/asm/flushtlb.h  |   7 ++
- xen/arch/riscv/include/asm/insn-defs.h |  10 ++
- xen/arch/riscv/include/asm/p2m.h       |  11 +++
- xen/arch/riscv/p2m.c                   | 123 +++++++++++++++++++++++++
- xen/arch/riscv/traps.c                 |   2 +
- 6 files changed, 154 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/insn-defs.h
-
--- 
-2.52.0
+~ Oleksii
 
 
