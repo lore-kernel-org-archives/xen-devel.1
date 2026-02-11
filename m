@@ -4,45 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22ADAE9E2FF
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 12:39:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1227568.1533982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03FDDE9E302
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 13:07:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1227604.1533992 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9VD-0001Vh-Nx; Wed, 11 Feb 2026 12:39:31 +0000
+	id 1vq9w8-0000KX-Q7; Wed, 11 Feb 2026 13:07:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1227568.1533982; Wed, 11 Feb 2026 12:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 1227604.1533992; Wed, 11 Feb 2026 13:07:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9VD-0001VY-L1; Wed, 11 Feb 2026 12:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 1227568;
- Wed, 11 Feb 2026 12:39:30 +0000
+	id 1vq9w8-0000KQ-NE; Wed, 11 Feb 2026 13:07:20 +0000
+Received: by outflank-mailman (input) for mailman id 1227604;
+ Wed, 11 Feb 2026 13:07:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UZeC=AP=redhat.com=marcandre.lureau@srs-se1.protection.inumbo.net>)
- id 1vq9Nc-00016c-Eb
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 12:31:40 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=0Hh8=AP=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vq9w6-0000KK-Uu
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 13:07:18 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9a39f093-0745-11f1-9ccf-f158ae23cfc8;
- Wed, 11 Feb 2026 13:31:35 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-676-FYZ-7oebMfKy2oSzbnuHug-1; Wed,
- 11 Feb 2026 07:31:31 -0500
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 69E491800282; Wed, 11 Feb 2026 12:31:29 +0000 (UTC)
-Received: from localhost (unknown [10.45.242.6])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 6BED718003F6; Wed, 11 Feb 2026 12:31:27 +0000 (UTC)
+ id 96af9854-074a-11f1-9ccf-f158ae23cfc8;
+ Wed, 11 Feb 2026 14:07:16 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso19113015e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 05:07:16 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4835d99e194sm35334155e9.8.2026.02.11.05.07.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Feb 2026 05:07:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,91 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a39f093-0745-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770813094;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jM55cKZhaLYd8jeB1eDli6p7CvLSuDmkHDqz2KhxR1g=;
-	b=Z7IMSXpWHfPCAklRvbAXDGpqlE3WPHcKlTdLoAdhMGVjXTC5vuf0Skqeco+9BFVteyDHIj
-	l3MRUVOWEcF+q7274Wwckr5uWAizJl0dliCbrCWYfLSh0xyGZUsXWYWxd7xUiEVVkppFUn
-	FXPqVzBDCWDe/es0zo3diq3X5X+awb4=
-X-MC-Unique: FYZ-7oebMfKy2oSzbnuHug-1
-X-Mimecast-MFC-AGG-ID: FYZ-7oebMfKy2oSzbnuHug_1770813089
-From: marcandre.lureau@redhat.com
-To: qemu-devel@nongnu.org
-Cc: Eduardo Habkost <eduardo@habkost.net>,
-	xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Eric Blake <eblake@redhat.com>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Subject: [PULL 13/14] error-report: make real_time_iso8601() public
-Date: Wed, 11 Feb 2026 16:30:00 +0400
-Message-ID: <20260211123007.3569932-14-marcandre.lureau@redhat.com>
-In-Reply-To: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
-References: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
+X-Inumbo-ID: 96af9854-074a-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1770815236; x=1771420036; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=eSHBXr8GkYYfTsEYs/TG8FluGNQdUJqEV4XOmrLk/ws=;
+        b=g6Y5QgqSwmvb6gLGS8Zg9VPUnVSo2KaTR+qVdkdYm47/qc1Ixz4xpHkBxtg9iHaLIJ
+         nY52BToFDXiN0GmBXGJMR2whp8YcBK9dMr/FKizPibx8fVeh52uUVDg0wXbBEBZYTb5M
+         xtrWa1TVdVlY9SdeUSsqD4GQa2S1znNTALCym8hrRw22v8j0WiWqTVZAeQ5uEKTPOLpK
+         jj6wVSdu6hBbnM7HRf9uPxrMcHHceOBMOTLXPg5CXPeR2mPfI4FWQU16dklfjUAizNr/
+         a4kYpQhluS/TybN8t9iHItk0vLfowILWRW2Rsl60ETPeQ/LuusqACLpSanfmz9ni53Dl
+         yiiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770815236; x=1771420036;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eSHBXr8GkYYfTsEYs/TG8FluGNQdUJqEV4XOmrLk/ws=;
+        b=kp5i3KTDnjLK28qxfTU8wwZOXl+TYeU31x5l+lqKJPBcoNc4OhzSXGCAdP4obBtAJZ
+         6QombjvKCOzpgm8fzlo5/us1c0EzsZNGP9ufLZqSI67Qfgd959JEGFL8zDI0fAz2uEmZ
+         O5cdbnlIqtvGVmXzvZCob1QdxsFA7YA72xfsHbvynYC4q9gYNjx6Dd6oG6vYRj0yttXj
+         koNfs9Y1Ux1T8/UQ0knnpSqzo26Xm90JjSUkiEDJ5S1f/hLX/saw2rbnhxK4AiyJ0WA0
+         58PHuyZNmkLiytV+RSYQZLQzApfl7n5K6+rKrEDKQWG9cErPKJX6vITugkLXNDslrnOe
+         M+mA==
+X-Forwarded-Encrypted: i=1; AJvYcCXqK9yqJETNCpiUlJ+Ofi8AyCDtC05C0CSx+HjjfXDaDIPK+Hgnnb5yFqf4ClH0ZQEAt4k8aPlJJJM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzyGYDpfzZjvduzhlUeuSsyIq/nMuMGAjkHgf0s5z/u2op3Z7rz
+	mwccPD6PBKRqW+PbkykOfTrOcQsbYcoOjKXVQmTWjXCM+APX4yNiTza0fcCkNSbfXQ==
+X-Gm-Gg: AZuq6aJKcVRDN8c74Fb3d2NIt3FDoy4IxoaeVAuWjFUlSChr4l0t7p/DvP967iFokmN
+	H9pQoTQMJq+3voQ6ThPrTcUy2/ZkBbo60+ec0wephLRWmMYxfKjWgU/CMY20+0ofupPRfn69epR
+	Mfshg7Xw2vb/qXsd+JBD2Xe9aR1cXQqmv9LoI4QHDc84MvVI4QuMzx5v3lPrDE7+n5phaiWlQNX
+	lEs5Nwh2H+kbYk4W+Ok499fQmid7KVrCKt3kfO2YmiaDzz/nqCB4E5groKVjyttgTfMafcyzhO8
+	gI1zFBlE2sVpwxovEMdvbF7SK8Hum4j/E7qSgf6WKmUifw3FcKgB+Gyz8YN/PLvBO+72vtvoHE4
+	bH2IDD+UuDLvspYHZd7T0EqZsl8Gaah5fq2T8a20lpyQ2+3GTzXOQNc+cabQnmFPddnmsW2csHL
+	Mh2ooJf1FDbX7fmXQKXMrFse6isHzTD5YXkss1L6Ud1/ZHbIUOUVejjl0Xoo4ORXhdP2wG+aF9X
+	PqncWWKLnKBweY=
+X-Received: by 2002:a05:600c:3b23:b0:47f:8c05:786b with SMTP id 5b1f17b1804b1-4832021eae9mr256478535e9.28.1770815235550;
+        Wed, 11 Feb 2026 05:07:15 -0800 (PST)
+Message-ID: <3f1e043f-2cd1-43a3-9ec9-9323c133d8d1@suse.com>
+Date: Wed, 11 Feb 2026 14:07:13 +0100
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: A5TDt3lip-DGrywrDOD_YuOtJw35bjfLameypk1uEFI_1770813089
-X-Mimecast-Originator: redhat.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] xen/tools: remove usages of `stat -s` in
+ check-endbr.sh
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, xen-devel@lists.xenproject.org
+References: <20260211104638.7938-1-roger.pau@citrix.com>
+ <20260211104638.7938-3-roger.pau@citrix.com>
+ <35bdb10b-d39d-4e67-9ed8-c0b85ca5bd54@suse.com> <aYx064WIMMNmLAza@Mac.lan>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <aYx064WIMMNmLAza@Mac.lan>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+On 11.02.2026 13:24, Roger Pau Monné wrote:
+> On Wed, Feb 11, 2026 at 12:40:58PM +0100, Jan Beulich wrote:
+>> On 11.02.2026 11:46, Roger Pau Monne wrote:
+>>> --- a/xen/tools/check-endbr.sh
+>>> +++ b/xen/tools/check-endbr.sh
+>>> @@ -92,14 +92,15 @@ ${OBJDUMP} -j .text $1 -d -w | grep '	endbr64 *$' | cut -f 1 -d ':' > $VALID &
+>>>  #    check nevertheless.
+>>>  #
+>>>  eval $(${OBJDUMP} -j .text $1 -h |
+>>> -    $AWK '$2 == ".text" {printf "vma_hi=%s\nvma_lo=%s\n", substr($4, 1, 9), substr($4, 10, 16)}')
+>>> +    $AWK '$2 == ".text" {printf "bin_sz=%s\nvma_hi=%s\nvma_lo=%s\n", "0x" $3, substr($4, 1, 9), substr($4, 10, 16)}')
+>>>  
+>>> -${OBJCOPY} -j .text $1 -O binary $TEXT_BIN
+>>> -
+>>> -bin_sz=$(stat -c '%s' $TEXT_BIN)
+>>> +# Convert objdump hex reported .text size to decimal
+>>> +bin_sz=$(printf %u $bin_sz)
+>>
+>> (Alternatively without this line, but ...
+>>
+>>>  [ "$bin_sz" -ge $(((1 << 28) - $vma_lo)) ] &&
+>>
+>> [ "$(($bin_sz))" -ge $(((1 << 28) - $vma_lo)) ] &&
+>>
+>> ?)
+> 
+> Isn't that bash-specific functionality?  The script interpreter is set
+> as /bin/sh.
 
-To be reused in the following commit.
+I, too, would have thought so, but then the rhs of the -ge already used $((...)).
 
-Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Message-ID: <20260201173633.413934-3-vsementsov@yandex-team.ru>
----
- include/qemu/error-report.h | 6 ++++++
- util/error-report.c         | 3 +--
- 2 files changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/include/qemu/error-report.h b/include/qemu/error-report.h
-index 3ae2357fda5..dc423d36071 100644
---- a/include/qemu/error-report.h
-+++ b/include/qemu/error-report.h
-@@ -74,4 +74,10 @@ extern bool message_with_timestamp;
- extern bool error_with_guestname;
- extern const char *error_guest_name;
- 
-+/*
-+ * Return current datetime in ISO 8601 format.
-+ * Caller is responsible to g_free() the returned string.
-+ */
-+char *real_time_iso8601(void);
-+
- #endif
-diff --git a/util/error-report.c b/util/error-report.c
-index 1b17c11de19..d6b7448183a 100644
---- a/util/error-report.c
-+++ b/util/error-report.c
-@@ -169,8 +169,7 @@ static void print_loc(void)
-     }
- }
- 
--static char *
--real_time_iso8601(void)
-+char *real_time_iso8601(void)
- {
-     g_autoptr(GDateTime) dt = g_date_time_new_now_utc();
-     return g_date_time_format_iso8601(dt);
--- 
-2.52.0
-
+Jan
 
