@@ -4,45 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 687F3E9E2FF
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 12:39:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1227541.1533962 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD84E9E300
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 12:39:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1227555.1533973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9Uj-0008LW-8q; Wed, 11 Feb 2026 12:39:01 +0000
+	id 1vq9Uy-0000l2-Ir; Wed, 11 Feb 2026 12:39:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1227541.1533962; Wed, 11 Feb 2026 12:39:01 +0000
+Received: by outflank-mailman (output) from mailman id 1227555.1533973; Wed, 11 Feb 2026 12:39:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9Uj-0008LN-5C; Wed, 11 Feb 2026 12:39:01 +0000
-Received: by outflank-mailman (input) for mailman id 1227541;
- Wed, 11 Feb 2026 12:39:00 +0000
+	id 1vq9Uy-0000kt-D6; Wed, 11 Feb 2026 12:39:16 +0000
+Received: by outflank-mailman (input) for mailman id 1227555;
+ Wed, 11 Feb 2026 12:39:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UZeC=AP=redhat.com=marcandre.lureau@srs-se1.protection.inumbo.net>)
- id 1vq9NJ-0001nh-7Y
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 12:31:21 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=DopK=AP=kernel.org=sashal@srs-se1.protection.inumbo.net>)
+ id 1vq9No-0001nh-6p
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 12:31:52 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90f832f3-0745-11f1-b162-2bf370ae4941;
- Wed, 11 Feb 2026 13:31:20 +0100 (CET)
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-27-vuGe2ZcvOIGOm3x7YZ09mA-1; Wed,
- 11 Feb 2026 07:31:15 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CCC011800454; Wed, 11 Feb 2026 12:31:13 +0000 (UTC)
-Received: from localhost (unknown [10.45.242.6])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 738A330001A8; Wed, 11 Feb 2026 12:31:12 +0000 (UTC)
+ id a3036b3f-0745-11f1-b162-2bf370ae4941;
+ Wed, 11 Feb 2026 13:31:50 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 99D1D40299;
+ Wed, 11 Feb 2026 12:31:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C97BBC19421;
+ Wed, 11 Feb 2026 12:31:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,302 +43,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90f832f3-0745-11f1-b162-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770813078;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NawPSV0+R7Z6iBTNYDG41PH3COFdnG/VW+iZ15ECL/g=;
-	b=JZK+gZdIa7y5dr69Q073QF37R/hEdLi4fSXYoQcPO1Pc15qw3QNmqBjZCu7XufmwNLMsO2
-	dRmvFtvEwU+FQJg8EnBYvCwGpxkMUn/KkTtg4gNjE0F7bbPF9QcPtWkSFs1L19PKwhN0QG
-	grcnVbkQRyQcpqYvCAbcd1YXanuMRws=
-X-MC-Unique: vuGe2ZcvOIGOm3x7YZ09mA-1
-X-Mimecast-MFC-AGG-ID: vuGe2ZcvOIGOm3x7YZ09mA_1770813074
-From: marcandre.lureau@redhat.com
-To: qemu-devel@nongnu.org
-Cc: Eduardo Habkost <eduardo@habkost.net>,
-	xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Eric Blake <eblake@redhat.com>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Subject: [PULL 10/14] chardev: rework filename handling
-Date: Wed, 11 Feb 2026 16:29:57 +0400
-Message-ID: <20260211123007.3569932-11-marcandre.lureau@redhat.com>
-In-Reply-To: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
-References: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
+X-Inumbo-ID: a3036b3f-0745-11f1-b162-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770813108;
+	bh=W8TRYpIoLHSafIBZHOcM/I2GuwyMlNQIh5ra5DvldiQ=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=Cb7kHJkpaJ+oF+1f0CI3Mnyrqme7h5dxui+DjsIxmnEZW7mTlF/jmxrWKSvqSB8bk
+	 lm+UbBPnB/JSpWjVMpSA2B0R+LDMFuttB3WUSlm01BXlrJgo2otYjbK4Qrr068GnE/
+	 bfyZybUW5fYfuhOS2tuKFjIW7ZwvE6/D8ExH+b55IJPMyILuCWwJNYa8ZRIRx+gB7t
+	 7edcfcwwlWRh/ykHE2Hnm1NXwNxIozHhx8W5ulpXzaTs+8sOfoh7T1V2o4iUVqOh4i
+	 arUg5WZuG2eChvLuYEf+kb7lXO8sz//PyK8vgEuWcHyP51ejBWQgJC62hNGZTIBusb
+	 8C0+5IHM0A1IA==
+From: Sasha Levin <sashal@kernel.org>
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Cc: Hou Wenlong <houwenlong.hwl@antgroup.com>,
+	Juergen Gross <jgross@suse.com>,
+	Sasha Levin <sashal@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH AUTOSEL 6.19-5.10] x86/xen/pvh: Enable PAE mode for 32-bit guest only when CONFIG_X86_PAE is set
+Date: Wed, 11 Feb 2026 07:30:28 -0500
+Message-ID: <20260211123112.1330287-18-sashal@kernel.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260211123112.1330287-1-sashal@kernel.org>
+References: <20260211123112.1330287-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: c-_Sek1T2OdFJX7Kp4aPVImd5YgfiBwkExksSBCdhrc_1770813074
-X-Mimecast-Originator: redhat.com
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.19
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+From: Hou Wenlong <houwenlong.hwl@antgroup.com>
 
-Instead of checking, did backend set the filename state or not, let's
-be stateless: filename is needed rarely, so, let's just have a generic
-function (with optional implementation by backends) to get it.
+[ Upstream commit db9aded979b491a24871e1621cd4e8822dbca859 ]
 
-Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-[ Marc-André - fix leak in ivshmem-pci.c ]
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Message-Id: <20260115144606.233252-10-vsementsov@yandex-team.ru>
+The PVH entry is available for 32-bit KVM guests, and 32-bit KVM guests
+do not depend on CONFIG_X86_PAE. However, mk_early_pgtbl_32() builds
+different pagetables depending on whether CONFIG_X86_PAE is set.
+Therefore, enabling PAE mode for 32-bit KVM guests without
+CONFIG_X86_PAE being set would result in a boot failure during CR3
+loading.
+
+Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Message-ID: <d09ce9a134eb9cbc16928a5b316969f8ba606b81.1768017442.git.houwenlong.hwl@antgroup.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- include/chardev/char.h |  5 ++++-
- chardev/char-pty.c     |  8 +++++++-
- chardev/char-socket.c  | 31 ++++++++++++-------------------
- chardev/char.c         | 21 +++++++++++++++------
- hw/misc/ivshmem-pci.c  |  7 ++++---
- 5 files changed, 42 insertions(+), 30 deletions(-)
 
-diff --git a/include/chardev/char.h b/include/chardev/char.h
-index ada5529fa6c..81bc0cbdf2a 100644
---- a/include/chardev/char.h
-+++ b/include/chardev/char.h
-@@ -62,7 +62,6 @@ struct Chardev {
-     QemuMutex chr_write_lock;
-     CharFrontend *fe;
-     char *label;
--    char *filename;
-     int logfd;
-     int be_open;
-     /* used to coordinate the chardev-change special-case: */
-@@ -309,6 +308,9 @@ struct ChardevClass {
+LLM Generated explanations, may be completely bogus:
+
+Now I have all the information needed for a complete analysis.
+
+---
+
+## Detailed Analysis
+
+### 1. Commit Message Analysis
+
+The subject clearly states the problem: PAE mode is being
+unconditionally enabled for all PVH guests, but for 32-bit guests it
+should only be enabled when `CONFIG_X86_PAE` is set. The commit message
+explicitly describes a **boot failure** scenario: loading CR3 fails when
+the page table format doesn't match the CPU's paging mode expectation.
+
+The commit is:
+- Reviewed by Juergen Gross (Xen subsystem maintainer)
+- Signed off by Juergen Gross (subsystem maintainer sign-off)
+
+### 2. Code Change Analysis
+
+**The Bug Mechanism:**
+
+The PVH entry path in `arch/x86/platform/pvh/head.S` is the boot entry
+point for PVH (Para-Virtualized Hardware) guests, used by Xen and KVM.
+The flow is:
+
+1. **Line 94-97** (before fix): PAE mode is unconditionally enabled in
+   CR4:
+
+```94:97:arch/x86/platform/pvh/head.S
+        /* Enable PAE mode. */
+        mov %cr4, %eax
+        orl $X86_CR4_PAE, %eax
+        mov %eax, %cr4
+```
+
+2. For **64-bit** guests (`CONFIG_X86_64`), this is correct — PAE is
+   always needed as a prerequisite for long mode (line 99-104).
+
+3. For **32-bit** guests (the `#else` path starting at line 196), the
+   code calls `mk_early_pgtbl_32()` to build early page tables:
+
+```196:205:arch/x86/platform/pvh/head.S
+#else /* CONFIG_X86_64 */
+
+        call mk_early_pgtbl_32
+
+        mov $_pa(initial_page_table), %eax
+        mov %eax, %cr3
+
+        mov %cr0, %eax
+        or $(X86_CR0_PG | X86_CR0_PE), %eax
+        mov %eax, %cr0
+```
+
+4. `mk_early_pgtbl_32()` in `arch/x86/kernel/head32.c` builds
+   **fundamentally different** page table structures depending on
+   `CONFIG_X86_PAE`:
+
+```95:103:arch/x86/kernel/head32.c
+#ifdef CONFIG_X86_PAE
+typedef pmd_t                   pl2_t;
+#define pl2_base                initial_pg_pmd
+#define SET_PL2(val)            { .pmd = (val), }
+#else
+typedef pgd_t                   pl2_t;
+#define pl2_base                initial_page_table
+#define SET_PL2(val)            { .pgd = (val), }
+#endif
+```
+
+   - With `CONFIG_X86_PAE`: Builds **3-level PAE page tables**
+     (PGDIR_SHIFT=30, uses PMDs + PDPTEs)
+   - Without `CONFIG_X86_PAE`: Builds **2-level non-PAE page tables**
+     (PGDIR_SHIFT=22, uses PGDs directly)
+
+**The crash**: When PAE is enabled in CR4 but non-PAE page tables are
+loaded into CR3, the CPU interprets the 2-level page directory as a PAE
+PDPT (Page Directory Pointer Table). When paging is activated
+(CR0.PG=1), the processor tries to load the PDPTE entries from the
+address in CR3. The non-PAE page directory entries are completely
+incompatible with PAE PDPTE format, causing a **#GP fault or triple
+fault**, resulting in an immediate boot failure.
+
+**The Fix:** Simply wrapping the PAE enablement with proper `#ifdef`
+guards:
+
+```asm
+#if defined(CONFIG_X86_64) || defined(CONFIG_X86_PAE)
+        /* Enable PAE mode. */
+        mov %cr4, %eax
+        orl $X86_CR4_PAE, %eax
+        mov %eax, %cr4
+#endif
+```
+
+This ensures PAE is only enabled when:
+- `CONFIG_X86_64` is set (64-bit always needs PAE for long mode), or
+- `CONFIG_X86_PAE` is set (32-bit with PAE — page tables match)
+
+Note that the 32-bit path at lines 212-220 already has code to disable
+PAE before jumping to `startup_32`, which confirms the original author
+was aware that PAE and non-PAE modes exist, but the initial enablement
+was not properly guarded.
+
+### 3. Classification
+
+This is a **boot failure fix**. It's not a feature, cleanup, or
+optimization. It fixes a configuration where a 32-bit PVH guest without
+`CONFIG_X86_PAE` completely fails to boot.
+
+### 4. Scope and Risk Assessment
+
+- **Lines changed**: 2 lines added (`#if defined(...)` and `#endif`), 0
+  lines removed
+- **Files touched**: 1 (`arch/x86/platform/pvh/head.S`)
+- **Complexity**: Minimal — conditional compilation guard
+- **Risk**: Extremely low
+  - For `CONFIG_X86_64`: No change (the `#if` is always true)
+  - For `CONFIG_X86_32` with `CONFIG_X86_PAE`: No change (the `#if` is
+    true)
+  - For `CONFIG_X86_32` without `CONFIG_X86_PAE`: PAE is no longer
+    enabled, matching the page table format — this is the bug fix
+- **Regression potential**: Near zero. The only behavioral change is for
+  the broken configuration that currently crashes.
+
+### 5. User Impact
+
+- **Who is affected**: Anyone running a 32-bit kernel without PAE as a
+  PVH/KVM guest. This is a legitimate configuration since `config PVH`
+  has no dependency on `CONFIG_X86_PAE` or `CONFIG_X86_64`.
+- **Severity**: Complete boot failure — the system cannot boot at all
+- **Workaround**: Users must enable `CONFIG_X86_PAE` for 32-bit PVH
+  guests, which may not be obvious and adds unnecessary configuration
+  constraints
+
+### 6. Stability Indicators
+
+- **Reviewed-by**: Juergen Gross (Xen subsystem maintainer) — very
+  strong indicator
+- **Signed-off-by**: Juergen Gross (accepted through the Xen tree)
+- The fix is trivially correct by inspection — when `CONFIG_X86_PAE` is
+  not set, enabling PAE in CR4 is wrong because the page tables aren't
+  in PAE format
+
+### 7. Dependency Check
+
+- **No dependencies** on other patches — this is a completely self-
+  contained fix
+- The affected code (`pvh_start_xen` with the unconditional PAE
+  enablement) exists in **all current stable trees** (confirmed present
+  from v5.4 through v6.12)
+- The fix context is slightly different in older stable trees (e.g.,
+  `rep\n       movsl` vs `rep movsl`, PIC vs absolute addressing), so
+  minor backport adjustments may be needed for older trees, but the fix
+  itself (adding `#if`/`#endif` around the PAE lines) is trivial to
+  adapt
+
+### 8. Conclusion
+
+This is a textbook stable kernel fix:
+- **Fixes a real, severe bug**: Complete boot failure for a valid kernel
+  configuration
+- **Obviously correct**: The fix is a 2-line conditional compilation
+  guard that makes PAE enablement match page table format
+- **Small and contained**: 2 lines added to 1 file
+- **No new features**: Just correctness fix
+- **No risk of regression**: Only changes behavior for the currently-
+  broken configuration
+- **Present in all stable trees**: The bug has existed since the
+  original PVH commit (v4.11, 2017)
+- **Reviewed by subsystem maintainer**: Juergen Gross
+
+**YES**
+
+ arch/x86/platform/pvh/head.S | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
+index 344030c1a81d4..53ee2d53fcf8e 100644
+--- a/arch/x86/platform/pvh/head.S
++++ b/arch/x86/platform/pvh/head.S
+@@ -91,10 +91,12 @@ SYM_CODE_START(pvh_start_xen)
  
-     /* return PTY name if available */
-     char *(*chr_get_pty_name)(Chardev *s);
-+
-+    /* get filename for reporting */
-+    char *(*chr_get_filename)(Chardev *s);
- };
+ 	leal rva(early_stack_end)(%ebp), %esp
  
- Chardev *qemu_chardev_new(const char *id, const char *typename,
-@@ -324,5 +326,6 @@ void suspend_mux_open(void);
- void resume_mux_open(void);
++#if defined(CONFIG_X86_64) || defined(CONFIG_X86_PAE)
+ 	/* Enable PAE mode. */
+ 	mov %cr4, %eax
+ 	orl $X86_CR4_PAE, %eax
+ 	mov %eax, %cr4
++#endif
  
- char *qemu_chr_get_pty_name(Chardev *chr);
-+char *qemu_chr_get_filename(Chardev *chr);
- 
- #endif
-diff --git a/chardev/char-pty.c b/chardev/char-pty.c
-index 047aade09e5..7e95132cdbb 100644
---- a/chardev/char-pty.c
-+++ b/chardev/char-pty.c
-@@ -351,7 +351,6 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
-         return false;
-     }
- 
--    chr->filename = g_strdup_printf("pty:%s", s->pty_name);
-     qemu_printf("char device redirected to %s (label %s)\n",
-                 s->pty_name, chr->label);
- 
-@@ -393,6 +392,12 @@ static char *pty_chr_get_pty_name(Chardev *chr)
-     return g_strdup(s->pty_name);
- }
- 
-+static char *pty_chr_get_filename(Chardev *chr)
-+{
-+    PtyChardev *s = PTY_CHARDEV(chr);
-+    return g_strdup_printf("pty:%s", s->pty_name);
-+}
-+
- static void char_pty_class_init(ObjectClass *oc, const void *data)
- {
-     ChardevClass *cc = CHARDEV_CLASS(oc);
-@@ -403,6 +408,7 @@ static void char_pty_class_init(ObjectClass *oc, const void *data)
-     cc->chr_update_read_handler = pty_chr_update_read_handler;
-     cc->chr_add_watch = pty_chr_add_watch;
-     cc->chr_get_pty_name = pty_chr_get_pty_name;
-+    cc->chr_get_filename = pty_chr_get_filename;
- }
- 
- static const TypeInfo char_pty_type_info = {
-diff --git a/chardev/char-socket.c b/chardev/char-socket.c
-index 908bbdbc124..5adeb908659 100644
---- a/chardev/char-socket.c
-+++ b/chardev/char-socket.c
-@@ -40,6 +40,7 @@
- 
- static gboolean socket_reconnect_timeout(gpointer opaque);
- static void tcp_chr_telnet_init(Chardev *chr);
-+static char *qemu_chr_compute_filename(SocketChardev *s);
- 
- static void tcp_chr_change_state(SocketChardev *s, TCPChardevState state)
- {
-@@ -384,8 +385,6 @@ static void tcp_chr_free_connection(Chardev *chr)
-     s->sioc = NULL;
-     object_unref(OBJECT(s->ioc));
-     s->ioc = NULL;
--    g_free(chr->filename);
--    chr->filename = NULL;
-     tcp_chr_change_state(s, TCP_CHARDEV_STATE_DISCONNECTED);
- }
- 
-@@ -439,16 +438,17 @@ static char *qemu_chr_socket_address(SocketChardev *s, const char *prefix)
-     }
- }
- 
--static void update_disconnected_filename(SocketChardev *s)
-+static char *tcp_chr_get_filename(Chardev *chr)
- {
--    Chardev *chr = CHARDEV(s);
-+    SocketChardev *s = SOCKET_CHARDEV(chr);
- 
--    g_free(chr->filename);
--    if (s->addr) {
--        chr->filename = qemu_chr_socket_address(s, "disconnected:");
--    } else {
--        chr->filename = g_strdup("disconnected:socket");
-+    if (s->state == TCP_CHARDEV_STATE_CONNECTED) {
-+        return qemu_chr_compute_filename(s);
-+    } else if (s->addr) {
-+        return qemu_chr_socket_address(s, "disconnected:");
-     }
-+
-+    return g_strdup("disconnected:socket");
- }
- 
- /* NB may be called even if tcp_chr_connect has not been
-@@ -468,7 +468,6 @@ static void tcp_chr_disconnect_locked(Chardev *chr)
-         qio_net_listener_set_client_func_full(s->listener, tcp_chr_accept,
-                                               chr, NULL, chr->gcontext);
-     }
--    update_disconnected_filename(s);
-     if (emit_close) {
-         qemu_chr_be_event(chr, CHR_EVENT_CLOSED);
-     }
-@@ -639,9 +638,6 @@ static void tcp_chr_connect(void *opaque)
-     Chardev *chr = CHARDEV(opaque);
-     SocketChardev *s = SOCKET_CHARDEV(opaque);
- 
--    g_free(chr->filename);
--    chr->filename = qemu_chr_compute_filename(s);
--
-     tcp_chr_change_state(s, TCP_CHARDEV_STATE_CONNECTED);
-     update_ioc_handlers(s);
-     qemu_chr_be_event(chr, CHR_EVENT_OPENED);
-@@ -1000,8 +996,8 @@ static void tcp_chr_accept_server_sync(Chardev *chr)
- {
-     SocketChardev *s = SOCKET_CHARDEV(chr);
-     QIOChannelSocket *sioc;
--    info_report("QEMU waiting for connection on: %s",
--                chr->filename);
-+    g_autofree char *filename = qemu_chr_get_filename(chr);
-+    info_report("QEMU waiting for connection on: %s", filename);
-     tcp_chr_change_state(s, TCP_CHARDEV_STATE_CONNECTING);
-     sioc = qio_net_listener_wait_client(s->listener);
-     tcp_chr_set_client_ioc_name(chr, sioc);
-@@ -1258,8 +1254,6 @@ static int qmp_chardev_open_socket_server(Chardev *chr,
-     s->addr = qio_net_listener_get_local_address(s->listener, 0, errp);
- 
- skip_listen:
--    update_disconnected_filename(s);
--
-     if (is_waitconnect) {
-         tcp_chr_accept_server_sync(chr);
-     } else {
-@@ -1436,8 +1430,6 @@ static bool tcp_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
-     }
-     s->registered_yank = true;
- 
--    update_disconnected_filename(s);
--
-     if (s->is_listen) {
-         if (qmp_chardev_open_socket_server(chr, is_telnet || is_tn3270,
-                                            is_waitconnect, errp) < 0) {
-@@ -1593,6 +1585,7 @@ static void char_socket_class_init(ObjectClass *oc, const void *data)
-     cc->chr_add_watch = tcp_chr_add_watch;
-     cc->chr_update_read_handler = tcp_chr_update_read_handler;
-     cc->chr_listener_cleanup = tcp_chr_listener_cleanup;
-+    cc->chr_get_filename = tcp_chr_get_filename;
- 
-     object_class_property_add(oc, "addr", "SocketAddress",
-                               char_socket_get_addr, NULL,
-diff --git a/chardev/char.c b/chardev/char.c
-index 0dc792b88f7..3373c9b61f8 100644
---- a/chardev/char.c
-+++ b/chardev/char.c
-@@ -309,7 +309,6 @@ static void char_finalize(Object *obj)
-     if (chr->fe) {
-         chr->fe->chr = NULL;
-     }
--    g_free(chr->filename);
-     g_free(chr->label);
-     if (chr->logfd != -1) {
-         close(chr->logfd);
-@@ -796,7 +795,7 @@ static int qmp_query_chardev_foreach(Object *obj, void *data)
-     ChardevInfo *value = g_malloc0(sizeof(*value));
- 
-     value->label = g_strdup(chr->label);
--    value->filename = g_strdup(chr->filename);
-+    value->filename = qemu_chr_get_filename(chr);
-     value->frontend_open = chr->fe && chr->fe->fe_is_open;
- 
-     QAPI_LIST_PREPEND(*list, value);
-@@ -1025,10 +1024,6 @@ static Chardev *chardev_new(const char *id, const char *typename,
-         return NULL;
-     }
- 
--    if (!chr->filename) {
--        chr->filename = g_strdup(typename + 8);
--    }
--
-     return chr;
- }
- 
-@@ -1110,6 +1105,20 @@ char *qemu_chr_get_pty_name(Chardev *chr)
-     return NULL;
- }
- 
-+char *qemu_chr_get_filename(Chardev *chr)
-+{
-+    ChardevClass *cc = CHARDEV_GET_CLASS(chr);
-+    const char *typename;
-+
-+    if (cc->chr_get_filename) {
-+        return cc->chr_get_filename(chr);
-+    }
-+
-+    typename = object_get_typename(OBJECT(chr));
-+    assert(g_str_has_prefix(typename, "chardev-"));
-+    return g_strdup(typename + 8);
-+}
-+
- ChardevReturn *qmp_chardev_change(const char *id, ChardevBackend *backend,
-                                   Error **errp)
- {
-diff --git a/hw/misc/ivshmem-pci.c b/hw/misc/ivshmem-pci.c
-index b9162589a02..a3a43f53bd1 100644
---- a/hw/misc/ivshmem-pci.c
-+++ b/hw/misc/ivshmem-pci.c
-@@ -873,10 +873,11 @@ static void ivshmem_common_realize(PCIDevice *dev, Error **errp)
-         host_memory_backend_set_mapped(s->hostmem, true);
-     } else {
-         Chardev *chr = qemu_chr_fe_get_driver(&s->server_chr);
--        assert(chr);
-+        g_autofree char *filename = NULL;
- 
--        IVSHMEM_DPRINTF("using shared memory server (socket = %s)\n",
--                        chr->filename);
-+        assert(chr);
-+        filename = qemu_chr_get_filename(chr);
-+        IVSHMEM_DPRINTF("using shared memory server (socket = %s)\n", filename);
- 
-         /* we allocate enough space for 16 peers and grow as needed */
-         resize_peers(s, 16);
+ #ifdef CONFIG_X86_64
+ 	/* Enable Long mode. */
 -- 
-2.52.0
+2.51.0
 
 
