@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13881E9E2FF
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 12:38:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1227526.1533932 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B4EEE9E300
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 12:39:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1227533.1533951 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9UT-0007C7-8d; Wed, 11 Feb 2026 12:38:45 +0000
+	id 1vq9Ub-0007px-Oz; Wed, 11 Feb 2026 12:38:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1227526.1533932; Wed, 11 Feb 2026 12:38:45 +0000
+Received: by outflank-mailman (output) from mailman id 1227533.1533951; Wed, 11 Feb 2026 12:38:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vq9UT-0007C0-63; Wed, 11 Feb 2026 12:38:45 +0000
-Received: by outflank-mailman (input) for mailman id 1227526;
- Wed, 11 Feb 2026 12:38:44 +0000
+	id 1vq9Ub-0007pm-M0; Wed, 11 Feb 2026 12:38:53 +0000
+Received: by outflank-mailman (input) for mailman id 1227533;
+ Wed, 11 Feb 2026 12:38:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UZeC=AP=redhat.com=marcandre.lureau@srs-se1.protection.inumbo.net>)
- id 1vq9N7-0001nh-F2
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 12:31:09 +0000
+ id 1vq9Nd-0001nh-NG
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 12:31:41 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8a39594c-0745-11f1-b162-2bf370ae4941;
- Wed, 11 Feb 2026 13:31:08 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 9d4dced9-0745-11f1-b162-2bf370ae4941;
+ Wed, 11 Feb 2026 13:31:41 +0100 (CET)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-45-pzo26kLgOTqOlnqtBd77Iw-1; Wed,
- 11 Feb 2026 07:31:04 -0500
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-68-WIujemrANsyyw5L1QkdvYg-1; Wed,
+ 11 Feb 2026 07:31:36 -0500
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D4B261800282; Wed, 11 Feb 2026 12:31:01 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C10951955F27; Wed, 11 Feb 2026 12:31:34 +0000 (UTC)
 Received: from localhost (unknown [10.45.242.6])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 5A08C1956056; Wed, 11 Feb 2026 12:30:59 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 7D7B130001BF; Wed, 11 Feb 2026 12:31:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a39594c-0745-11f1-b162-2bf370ae4941
+X-Inumbo-ID: 9d4dced9-0745-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770813067;
+	s=mimecast20190719; t=1770813099;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=47+h7KsUk4pIeVRSrl5x3R/+mYPfTcUJPXIJdzZh/Nw=;
-	b=MFaYlZbAwjD3Wk5zykf1DRFQ3U3spCBoJv+qMv9A7nwWIJR/q8TFqxVYtsbcOAn2giBMqN
-	rRBtNIrO0yZEQ7qc/zukPoOZBAf+9MOHmn4Pa3pTK+DluZ2K2EPVxrwYHAa5y9U6j/GmCI
-	995Z6fm+sOu6AYSz1HT8/3xjU/wJqjI=
-X-MC-Unique: pzo26kLgOTqOlnqtBd77Iw-1
-X-Mimecast-MFC-AGG-ID: pzo26kLgOTqOlnqtBd77Iw_1770813062
+	bh=oafPsMhhX2LYktt1mZytvPrd7reHuMI6cpisN3UVjHk=;
+	b=aj445UeDgTtmkriiBG7dMmAJdELD6NkG3uNoUrYCkXLQeRhs/lu2oggiW//LVwmuDYX8yX
+	s2uVXbaRM27ZmXdwLVlJWoxOBC+YZ2h2GJ3mTqXfwoQg/+fncAq2fneyq1de2EX0h0EVMQ
+	B0L70j63ZFcaaIbKdoIWj0aQfzmc5iE=
+X-MC-Unique: WIujemrANsyyw5L1QkdvYg-1
+X-Mimecast-MFC-AGG-ID: WIujemrANsyyw5L1QkdvYg_1770813094
 From: marcandre.lureau@redhat.com
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>,
@@ -84,101 +84,178 @@ Cc: Eduardo Habkost <eduardo@habkost.net>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Paul Durrant <paul@xen.org>,
 	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Subject: [PULL 08/14] chardev/char-pty: store pty_name into PtyChardev state
-Date: Wed, 11 Feb 2026 16:29:55 +0400
-Message-ID: <20260211123007.3569932-9-marcandre.lureau@redhat.com>
+Subject: [PULL 14/14] chardev: add logtimestamp option
+Date: Wed, 11 Feb 2026 16:30:01 +0400
+Message-ID: <20260211123007.3569932-15-marcandre.lureau@redhat.com>
 In-Reply-To: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
 References: <20260211123007.3569932-1-marcandre.lureau@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: vuGF1DX707vTfxUNMgM81DAZPeUC5vI5eVuXPjFZLEo_1770813062
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: dZjaz2DoEH78eRcqwCgXQ2BHDfDWB1jtulChYzIupms_1770813094
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-We'll use it in following commit.
-
-Note the bonus: stop use blind strcpy().
+Add an option to inject timestamps into serial log file.
+That simplifies debugging a lot, when you can simply compare
+QEMU logs with guest console logs.
 
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Acked-by: Markus Armbruster <armbru@redhat.com>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Message-Id: <20260115144606.233252-8-vsementsov@yandex-team.ru>
+Message-ID: <20260201173633.413934-4-vsementsov@yandex-team.ru>
 ---
- chardev/char-pty.c | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
+ qapi/char.json         |  6 +++-
+ include/chardev/char.h |  2 ++
+ chardev/char.c         | 63 ++++++++++++++++++++++++++++++++++++++----
+ 3 files changed, 65 insertions(+), 6 deletions(-)
 
-diff --git a/chardev/char-pty.c b/chardev/char-pty.c
-index 9e26e97baf5..a582aa7bc73 100644
---- a/chardev/char-pty.c
-+++ b/chardev/char-pty.c
-@@ -43,6 +43,7 @@ struct PtyChardev {
-     int connected;
-     GSource *timer_src;
-     char *path;
-+    char *pty_name;
- };
- typedef struct PtyChardev PtyChardev;
+diff --git a/qapi/char.json b/qapi/char.json
+index 140614f82c3..a4abafa6803 100644
+--- a/qapi/char.json
++++ b/qapi/char.json
+@@ -197,11 +197,15 @@
+ # @logappend: true to append instead of truncate (default to false to
+ #     truncate)
+ #
++# @logtimestamp: true to insert timestamps into logfile
++#     (default false) (since 11.0)
++#
+ # Since: 2.6
+ ##
+ { 'struct': 'ChardevCommon',
+   'data': { '*logfile': 'str',
+-            '*logappend': 'bool' } }
++            '*logappend': 'bool',
++            '*logtimestamp': 'bool' } }
  
-@@ -303,7 +304,7 @@ static void cfmakeraw (struct termios *termios_p)
- #endif
- 
- /* like openpty() but also makes it raw; return master fd */
--static int qemu_openpty_raw(int *aslave, char *pty_name)
-+static int qemu_openpty_raw(int *aslave, char **pty_name)
- {
-     int amaster;
-     struct termios tty;
-@@ -324,9 +325,7 @@ static int qemu_openpty_raw(int *aslave, char *pty_name)
-     cfmakeraw(&tty);
-     tcsetattr(*aslave, TCSAFLUSH, &tty);
- 
--    if (pty_name) {
--        strcpy(pty_name, q_ptsname(amaster));
--    }
-+    *pty_name = g_strdup(q_ptsname(amaster));
- 
-     return amaster;
+ ##
+ # @ChardevFile:
+diff --git a/include/chardev/char.h b/include/chardev/char.h
+index 81bc0cbdf2a..c2c42e4b7a3 100644
+--- a/include/chardev/char.h
++++ b/include/chardev/char.h
+@@ -63,6 +63,8 @@ struct Chardev {
+     CharFrontend *fe;
+     char *label;
+     int logfd;
++    bool logtimestamp;
++    bool log_line_start;
+     int be_open;
+     /* used to coordinate the chardev-change special-case: */
+     bool handover_yank_instance;
+diff --git a/chardev/char.c b/chardev/char.c
+index 4b285baf029..48b326d57b9 100644
+--- a/chardev/char.c
++++ b/chardev/char.c
+@@ -82,12 +82,8 @@ void qemu_chr_be_event(Chardev *s, QEMUChrEvent event)
+     CHARDEV_GET_CLASS(s)->chr_be_event(s, event);
  }
-@@ -335,11 +334,12 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+ 
+-static void qemu_chr_write_log(Chardev *s, const uint8_t *buf, size_t len)
++static void do_write_log(Chardev *s, const uint8_t *buf, size_t len)
  {
-     PtyChardev *s;
-     int master_fd, slave_fd;
--    char pty_name[PATH_MAX];
-     char *name;
-     char *path = backend->u.pty.data->path;
- 
--    master_fd = qemu_openpty_raw(&slave_fd, pty_name);
-+    s = PTY_CHARDEV(chr);
-+
-+    master_fd = qemu_openpty_raw(&slave_fd, &s->pty_name);
-     if (master_fd < 0) {
-         error_setg_errno(errp, errno, "Failed to create PTY");
-         return false;
-@@ -351,11 +351,10 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
-         return false;
+-    if (s->logfd < 0) {
+-        return;
+-    }
+-
+     if (qemu_write_full(s->logfd, buf, len) < len) {
+         /*
+          * qemu_write_full() is defined with G_GNUC_WARN_UNUSED_RESULT,
+@@ -96,6 +92,55 @@ static void qemu_chr_write_log(Chardev *s, const uint8_t *buf, size_t len)
      }
+ }
  
--    chr->filename = g_strdup_printf("pty:%s", pty_name);
-+    chr->filename = g_strdup_printf("pty:%s", s->pty_name);
-     qemu_printf("char device redirected to %s (label %s)\n",
--                pty_name, chr->label);
-+                s->pty_name, chr->label);
++static void do_write_log_timestamps(Chardev *s, const uint8_t *buf, size_t len)
++{
++    g_autofree char *timestr = NULL;
++
++    while (len) {
++        size_t i;
++
++        if (s->log_line_start) {
++            if (!timestr) {
++                timestr = real_time_iso8601();
++            }
++            do_write_log(s, (const uint8_t *)timestr, strlen(timestr));
++            do_write_log(s, (const uint8_t *)" ", 1);
++            s->log_line_start = false;
++        }
++
++        for (i = 0; i < len; i++) {
++            if (buf[i] == '\n') {
++                break;
++            }
++        }
++
++        if (i == len) {
++            /* not found \n */
++            do_write_log(s, buf, len);
++            return;
++        }
++
++        i += 1;
++        do_write_log(s, buf, i);
++        buf += i;
++        len -= i;
++        s->log_line_start = true;
++    }
++}
++
++static void qemu_chr_write_log(Chardev *s, const uint8_t *buf, size_t len)
++{
++    if (s->logfd < 0) {
++        return;
++    }
++
++    if (s->logtimestamp) {
++        do_write_log_timestamps(s, buf, len);
++    } else {
++        do_write_log(s, buf, len);
++    }
++}
++
+ static int qemu_chr_write_buffer(Chardev *s,
+                                  const uint8_t *buf, int len,
+                                  int *offset, bool write_all)
+@@ -248,6 +293,7 @@ static bool qemu_char_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+         } else {
+             flags |= O_TRUNC;
+         }
++        chr->logtimestamp = common->has_logtimestamp && common->logtimestamp;
+         chr->logfd = qemu_create(common->logfile, flags, 0666, errp);
+         if (chr->logfd < 0) {
+             return false;
+@@ -267,6 +313,7 @@ static void char_init(Object *obj)
  
--    s = PTY_CHARDEV(chr);
-     s->ioc = QIO_CHANNEL(qio_channel_file_new_fd(master_fd));
-     name = g_strdup_printf("chardev-pty-%s", chr->label);
-     qio_channel_set_name(s->ioc, name);
-@@ -364,7 +363,7 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+     chr->handover_yank_instance = false;
+     chr->logfd = -1;
++    chr->log_line_start = true;
+     qemu_mutex_init(&chr->chr_write_lock);
  
-     /* create symbolic link */
-     if (path) {
--        int res = symlink(pty_name, path);
-+        int res = symlink(s->pty_name, path);
+     /*
+@@ -505,6 +552,9 @@ void qemu_chr_parse_common(QemuOpts *opts, ChardevCommon *backend)
+     backend->logfile = g_strdup(logfile);
+     backend->has_logappend = true;
+     backend->logappend = qemu_opt_get_bool(opts, "logappend", false);
++
++    backend->has_logtimestamp = true;
++    backend->logtimestamp = qemu_opt_get_bool(opts, "logtimestamp", false);
+ }
  
-         if (res != 0) {
-             error_setg_errno(errp, errno, "Failed to create PTY symlink");
+ static const ChardevClass *char_get_class(const char *driver, Error **errp)
+@@ -956,6 +1006,9 @@ QemuOptsList qemu_chardev_opts = {
+         },{
+             .name = "logappend",
+             .type = QEMU_OPT_BOOL,
++        },{
++            .name = "logtimestamp",
++            .type = QEMU_OPT_BOOL,
+         },{
+             .name = "mouse",
+             .type = QEMU_OPT_BOOL,
 -- 
 2.52.0
 
