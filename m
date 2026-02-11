@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BD49E9E305
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 13:34:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1227642.1534068 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70B7FE9E305
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 13:37:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1227653.1534078 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqAMY-0000iy-Nn; Wed, 11 Feb 2026 13:34:38 +0000
+	id 1vqAOm-0001Yq-3z; Wed, 11 Feb 2026 13:36:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1227642.1534068; Wed, 11 Feb 2026 13:34:38 +0000
+Received: by outflank-mailman (output) from mailman id 1227653.1534078; Wed, 11 Feb 2026 13:36:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqAMY-0000ir-LC; Wed, 11 Feb 2026 13:34:38 +0000
-Received: by outflank-mailman (input) for mailman id 1227642;
- Wed, 11 Feb 2026 13:34:37 +0000
+	id 1vqAOm-0001Yj-0e; Wed, 11 Feb 2026 13:36:56 +0000
+Received: by outflank-mailman (input) for mailman id 1227653;
+ Wed, 11 Feb 2026 13:36:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wgMA=AP=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1vqAMX-0000iM-Dv
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 13:34:37 +0000
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [2001:4860:4864:20::30])
+ id 1vqAOk-0001Yd-Qn
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 13:36:54 +0000
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [2607:f8b0:4864:20::22e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 62ab86c9-074e-11f1-b162-2bf370ae4941;
- Wed, 11 Feb 2026 14:34:28 +0100 (CET)
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-40438a46d7cso3736076fac.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 05:34:27 -0800 (PST)
+ id b9a59951-074e-11f1-b162-2bf370ae4941;
+ Wed, 11 Feb 2026 14:36:53 +0100 (CET)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-45f053b7b90so1221067b6e.0
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 05:36:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,73 +42,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62ab86c9-074e-11f1-b162-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; t=1770816866; cv=none;
+X-Inumbo-ID: b9a59951-074e-11f1-b162-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; t=1770817012; cv=none;
         d=google.com; s=arc-20240605;
-        b=Yighlu7npQni3HJx2ETBbsHQ+S2S/tUDLtKWutXvwcvRIDrUCaFvGDkHjwEhk5uY9g
-         UGMPVMeT7rr4koFQ+YJR/NkTgrIIjDCczhBTH7/YX5bRTxL07WG/5I065rDYARLSvU/T
-         RqPD2oqptFaWPsJMfixY+IzpM8MgGCMYcj4UI74wCUE9yaTNOuKY5Mg4wEY+IeUtIKTp
-         KMddQYh0b12m1pzorzXqDkCrvYuqZiTjJRXYJbmV0Avw5+ACBaEl+8PGzfG5d8SQVp8f
-         lQqTC9pUI53GOmERzZSQpXDUmiJZuA2Jw4eSsan0qZjZdKqJtB6kQawxCyEYXWTErEYu
-         yKgw==
+        b=LULxaERMAmUdM5Ppw621PJuE+DuIfAXonx3OppHFidrvMVcsNhXO/A/T2W1stkRbQB
+         Vls8C3SMlAyF9/gNSY6JMUcn81xSiBnfQr0ZtjVTeorD0FCyMaI9WmiGBA2/CN5WC5wM
+         H//rEApvWveLtN/Q2q38hrtwcvabM6cXkyES4lXg2e6MXIimARw4jtfrkXGh73OIbAWp
+         Ymar8BP1+mfCKlH8Ks8gm1fqS/HaN/e/Vdu+iaj3SZNiBb4c6Vep40/PvrqiDusiOZWJ
+         3XF3QJ1avsfsnsygzljF+9pFlO0L3AX5AjW4Hw8AsBos0eJL/WANZeV35F44bypB2Y4p
+         EvMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=Hgfd289/zgx6Zl5oglKYDFkbsqT/nQ39bBDEtorQe1s=;
+        bh=bG9WsPv8wYxty0mQK/aZ5QkAuSixG25/fMBeMnhcRH8=;
         fh=wB0f5JGUSpWYejuxtnrl8SDqvqyWrEsEaWvC32LbdiU=;
-        b=hUv0OqVLuKeum+Y9rCojBA8StnXHhMt1r9drv9m3VYLnTzfFh2QLBx/E5I5Rxn14ZV
-         6QtwD24ZX/hGu3tmo/SPS58USMkGl98S3ShnYbwEcBy7jR0TXibu72CmQ89qmAVJdFJp
-         a1gmUEja08wydcnHwJHbGvfzobJViAVmElmMN20dBBKqVXbGQOwH/EIf1SrSuWof9w2I
-         mawaHPNg0LaR1xi6VZ4fO6UKMgH85QxxkxD8A1y/s044Z5inRHo5i9tJT/ZKDhpx6pVJ
-         Or49TfunPg8aj3WPXoQRGZ81UDBWWMKQG4f401wHEx/TT12rfDWUf4L3YX4QcmovR1Qj
-         QbZA==;
+        b=Id+oxA3yGQ+8kllKZC5i76DWrnXvWM/MnN8SYADvaDxYHAL2y6J365ydoyZ1/9hKeZ
+         uXTYDKrIw77yPV/GICVBSiYpNJiuyRYlWAoi1k70St2XGTrHX4Tf8fA6e5I0DIBonE6a
+         HEtynqERF8Hs4id8I77bXTuFrucvWB6WC4xnLevrd48dfc1TiYS9SfTaXACbNp1WwYy4
+         VDBw0XJdXQN5ziHSTTO0ERwYgdiFGEc+ha12rTdiwIXPtKYn5Fgxg+gWgBCaiy86iNyD
+         au45TSJLs28yRKco+y093gCJFpmKmAOPYFwtin4CHNl3iS7O43s0cMtNoQpvPjefcMvb
+         jJTw==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1770816866; x=1771421666; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1770817012; x=1771421812; darn=lists.xenproject.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Hgfd289/zgx6Zl5oglKYDFkbsqT/nQ39bBDEtorQe1s=;
-        b=dnqSSkMWndIXZ2XdQHeaCwpAwDMOrvr019W0ea5/E8+4sgVOE7zC32eEdBdKrhTNP1
-         ix1ayNDfhsHMHDSxkZFaOKYWrIVlk8Uxefamqhf2qomiXn93Z7NVKqlF2uUDSFwpnPOm
-         7tWYBPGgWZKAf0qOky0EAYWkDO9PAxrKCKKPQSuaRB7kGLQReAwR8Sq1Jmlh9eBJl9YL
-         jsIbozEjyvjBB0Qbie9y0eswizYHXka8YaxfwIusfMAX4nABaR2/+HXSEYV9jZ6TI7+n
-         LbycJ5LkddtalLvDY5EsmbtnB4r3pZ/3Ec4VRrGCQKdcFHPWYdKDSCJh8QsmHHfBFbFn
-         /56A==
+        bh=bG9WsPv8wYxty0mQK/aZ5QkAuSixG25/fMBeMnhcRH8=;
+        b=JgzgeUeOH/3HEXqPvuhkwsABFN7trajSq3wx6GBlRJ22xrNSfmZFCZpo/z1uhnYUn5
+         Q+TKObzgGN32t7k5/eKTEVyfO/Fp3NbG6hr6MbfVaq57lM3zuO1Jyb0oELGYT3+0VMRC
+         vfZhHmnba/XrkHQCfkjUTR8Pp+CvS5yAQ5m/J1nFN5WUpY1JQvLmiqU/cACMQnumHj8/
+         QKN0SRMaEPzeK/gVrvsHbCze5BQBrpreCnx7muSJdxM0SNaJdZB4flkTs/DOeLwhPf8L
+         Cq/p7S3ClibUk8Vn1YaUyz5qdL1RDcI30dtuG69PVSWRto59xg0Ju7L96vO9XRYyoaHV
+         /2ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770816866; x=1771421666;
+        d=1e100.net; s=20230601; t=1770817012; x=1771421812;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Hgfd289/zgx6Zl5oglKYDFkbsqT/nQ39bBDEtorQe1s=;
-        b=OeKCG7UlwKTFckyHwJ9Ni6hV7Ry3lfq3Xtn3ap87wUsjgYfFQtI1QegGSkc0e7/tLK
-         EGZlUiLDFU4h617GOtkkfFjBVEk3ggNXRXnsfGGFjxRJqNK6P6igBYbg70sWdqN5nYOs
-         HtszedNhxQlUndRLZXTZyo+3ZBsZm+dAh9RCeogda3A84zjdh+YX20XjjGoXSmfm2Rpy
-         LusIppDzhu84/BQ0XhsBXotpUimXoKn5T+UgFltXJtwk11qeCvhWHT5H1/HnTUjdevFi
-         lv2GWo6LDarmSGxjs87neXVbFPjQn4BprEkc53eMR/Bp5J6jtr8tKbND4y63m23FHMEg
-         9ZQQ==
-X-Gm-Message-State: AOJu0Yy4Q5wKAFPhJjX+gqOvyUJ/ykxZb3jNPajWH8MC0jwGmLdVtotv
-	DCGOg8fGZbd/5bhfr1aZ1oTOHfyUnyd+NiKmgInYXpPO9CqN1fB8AiPj6Kf28OFyoh7Mr5r6Ogn
-	lPqCZC0lw4jLCgndkF/8Oq5coNI3XkcgGrCmhTzQbNg==
-X-Gm-Gg: AZuq6aLMSIoAasj/oy184uBVfNqBF7/56NLucKUbwXlc2mpDMWII7yVvPOsChLsECu5
-	A2Sl+r5ErB/c4FBKrNV/KxiUGkZbygmsSd9h2hxXnEeWMocqrZikyLHpRi6JDJPstcKvtG6OShP
-	GWaQI+Op+141LXaugQwFMdu55QpvFleS4ARIVFwLXueN6eiV9yJp/D6g80hJuCUEzP83IUa4gSG
-	YuOJqLDe1W++5gWOPJAhAsCVceFe3LUM5PKlkko6z1fmqsYpILTRJgdGWtpOlk20YoitnTNA0b3
-	3HPZ3ORfzFyYPs8PD30kknbMNHSF5vI368WyTg==
-X-Received: by 2002:a05:6871:1d6:b0:3e8:9747:f8f8 with SMTP id
- 586e51a60fabf-40ea96535c0mr1675351fac.51.1770816866237; Wed, 11 Feb 2026
- 05:34:26 -0800 (PST)
+        bh=bG9WsPv8wYxty0mQK/aZ5QkAuSixG25/fMBeMnhcRH8=;
+        b=eUAiCh2l3x2B1OOzVnL9BKHIqIwX7fivVM7qlwJlIprk2V1Fxr8HdxrM9ikaHiuzPx
+         ZZ1ENfevt02oN781DcUj6OX29zXBYAzAPvgXmPAEkoJqc9bau9GBl4flGNzVVB19cAhe
+         jlidp75YOrFcsbqgCOWlM9aPdKO8Rvwq+wEdnCzQ1R9Qv6HWkcXtkNtYW6ecFyuD8+MP
+         fxaqnzH9EjLNUH56dg0CMAnAEmxw+KQbwElyl/uYW6N9NNCqXiB+hYN7BE5DICOVKqvJ
+         a9Y2vCYnxGr8Gl9gCFblY+gnsSV+E0q2OG1ceODZX0N7UeqrQUzVKFvtqR857OTb8tzy
+         tAQw==
+X-Gm-Message-State: AOJu0Yw2sMY+OSqHr8zs/yO4UKSl95AaKJv88X78ktmBSrCHemWigQ3B
+	ZnSjXGyf7zCXnj8oYKDzCTMaUeXc6hJOAU8T39XESjkvrNbBef17c55LeqN0wEeFJ5O33sTEvWT
+	amXECHyeEVpFi62W9TRbdCaaQsx6HakDKZ2TAJ09p8w==
+X-Gm-Gg: AZuq6aK6hmDwompYMJjjFnUB/quIlCJ1DYJEdbRSf2e2Iiyt3FzWLQRm1MFi3SjUpSr
+	L5HXnfx23mLt1S+tYkjU78iF8K7KPjQvuG4rG20kHQZ9xrssGTyJuqc3QYuUJnBH7087a2OlGy7
+	NbzABgR0QozazEM6aBYNoZoH/0WYza9jF7w3BNDq7uZVzD9KwcllhsS1z7Cy8KOyjvjikh4Bl82
+	MKS27j5L5gIdkOjR6v7Z4cw3VRgfIOmyMzuDBA37vEbEJVnTeCZSeJotgp8Bwls77xgHpHqt/P5
+	850FCH45AU+uArJDqnVmuRVTyOoKOkAscGUtDA==
+X-Received: by 2002:a05:6808:c2ac:b0:459:b48b:d51e with SMTP id
+ 5614622812f47-462fcb63e03mr10677212b6e.24.1770817012145; Wed, 11 Feb 2026
+ 05:36:52 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1770115301.git.bertrand.marquis@arm.com>
- <5331b33343441028d10c290b21b82acce295fff0.1770115302.git.bertrand.marquis@arm.com>
- <CAHUa44FWRepyAakwXLjObbA=8O_LMBR5jk0-WEAXZdgsQCsHOw@mail.gmail.com> <26A3747F-0313-437F-B461-F5C70CE1A4F1@arm.com>
-In-Reply-To: <26A3747F-0313-437F-B461-F5C70CE1A4F1@arm.com>
+ <209e5474e236737dd13e0f7ff8120b05cdb7eabe.1770115302.git.bertrand.marquis@arm.com>
+ <CAHUa44Ebe03R2nTzUW9tDx5hPC6trZCWOdr94ApawFs20chdWw@mail.gmail.com> <7B367F9A-37E3-4157-A7B2-3EA21EE9FE52@arm.com>
+In-Reply-To: <7B367F9A-37E3-4157-A7B2-3EA21EE9FE52@arm.com>
 From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Wed, 11 Feb 2026 14:34:14 +0100
-X-Gm-Features: AZwV_Qh6FQSYvVJe-MQ-Zkout2bZDAegCvLXVbX6lQe7lBf9TNxTcIBHsJ7pfv8
-Message-ID: <CAHUa44E9OUhmyGw-897RzgJmrxXMtg5RXrWKXHQueqY7zJ-dkA@mail.gmail.com>
-Subject: Re: [PATCH 08/12] xen/arm: ffa: Fix FFA_FEATURES validation
+Date: Wed, 11 Feb 2026 14:36:40 +0100
+X-Gm-Features: AZwV_Qi1rarmLvovzI2gLCqmihj3DmnYP9NcRgKmqame8ZhWjjrETnPKLOweg5M
+Message-ID: <CAHUa44HAtC=vwepiYg=gSvdr_xkwjSaBzS8FL_hnF_dF9RHi0w@mail.gmail.com>
+Subject: Re: [PATCH 12/12] xen/arm: ffa: Add message parameter diagnostics
 To: Bertrand Marquis <Bertrand.Marquis@arm.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
 	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
@@ -118,12 +118,12 @@ Content-Transfer-Encoding: quoted-printable
 
 Hi Bertrand,
 
-On Wed, Feb 11, 2026 at 12:27=E2=80=AFPM Bertrand Marquis
+On Wed, Feb 11, 2026 at 12:48=E2=80=AFPM Bertrand Marquis
 <Bertrand.Marquis@arm.com> wrote:
 >
 > Hi Jens,
 >
-> > On 11 Feb 2026, at 09:17, Jens Wiklander <jens.wiklander@linaro.org> wr=
+> > On 11 Feb 2026, at 11:16, Jens Wiklander <jens.wiklander@linaro.org> wr=
 ote:
 > >
 > > Hi Bertrand,
@@ -131,112 +131,238 @@ ote:
 > > On Tue, Feb 3, 2026 at 6:38=E2=80=AFPM Bertrand Marquis
 > > <bertrand.marquis@arm.com> wrote:
 > >>
-> >> FFA_FEATURES currently accepts non-zero input properties (w2-w7) from
-> >> guests and advertises several ABIs unconditionally, even when firmware
-> >> support is missing or when the ABI is physical-instance-only. This can
-> >> mislead guests about what Xen can actually provide and violates FF-A
-> >> calling conventions. Some SPMCs (Hafnium v2.14 or earlier) also fail t=
-o
-> >> report FFA_RX_ACQUIRE despite supporting it.
+> >> MSG_SEND2 and direct request validation failures are silent, making it
+> >> hard to diagnose invalid IDs, oversized messages, or unsupported
+> >> destination types.
 > >>
-> >> Update FFA_FEATURES validation to match spec and firmware support:
-> >> - reject non-zero w2-w7 input properties with INVALID_PARAMETERS
-> >> - reject 64-bit calling conventions from 32-bit guests with NOT_SUPPOR=
-TED
-> >> - return NOT_SUPPORTED for physical-instance-only ABIs
-> >> (FFA_NOTIFICATION_BITMAP_{CREATE,DESTROY}, FFA_RX_ACQUIRE)
-> >> - advertise FFA_INTERRUPT as supported
-> >> - gate message ABIs on firmware support:
-> >> - FFA_MSG_SEND_DIRECT_REQ_{32,64}
-> >> - FFA_MSG_SEND_DIRECT_REQ2 (also requires FF-A 1.2 negotiation)
-> >> - FFA_MSG_SEND2 (or VM-to-VM enabled)
-> >> - report MEM_SHARE_{32,64} only when FFA_MEM_SHARE_64 is supported
-> >> - stop advertising FFA_MSG_YIELD (not implemented)
+> >> Add debug logs for parameter validation failures:
+> >> - invalid endpoint IDs
+> >> - oversized messages
+> >> - unsupported destination types
+> >> - invalid sender/receiver combinations
+> >> - ratelimit MSG_SEND2 busy failures to avoid log flooding
 > >>
-> >> Update firmware probing: drop FFA_MEM_SHARE_32 checks (deprecated) and
-> >> add FFA_RX_ACQUIRE to the probed set. If FFA_MSG_SEND2 is reported but
-> >> FFA_RX_ACQUIRE is not, assume RX_ACQUIRE support and warn to work
-> >> around the Hafnium bug.
-> >>
-> >> Functional impact: guests now see ABI support that reflects firmware
-> >> capabilities and Xen implementation status. When SEND2 is present but
-> >> RX_ACQUIRE is not reported, Xen assumes RX_ACQUIRE support.
+> >> No functional changes.
 > >>
 > >> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 > >> ---
-> >> xen/arch/arm/tee/ffa.c | 62 +++++++++++++++++++++++++++++++++++++-----
-> >> 1 file changed, 55 insertions(+), 7 deletions(-)
+> >> xen/arch/arm/tee/ffa_msg.c | 45 ++++++++++++++++++++++++++++++++++++++
+> >> 1 file changed, 45 insertions(+)
 > >>
-> >> diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-> >> index 6de2b9f8ac8e..e9e020bb0cb3 100644
-> >> --- a/xen/arch/arm/tee/ffa.c
-> >> +++ b/xen/arch/arm/tee/ffa.c
-> >> @@ -91,10 +91,10 @@ static const struct ffa_fw_abi ffa_fw_abi_needed[]=
- =3D {
-> >>     FW_ABI(FFA_PARTITION_INFO_GET),
-> >>     FW_ABI(FFA_NOTIFICATION_INFO_GET_64),
-> >>     FW_ABI(FFA_NOTIFICATION_GET),
-> >> +    FW_ABI(FFA_RX_ACQUIRE),
-> >>     FW_ABI(FFA_RX_RELEASE),
-> >>     FW_ABI(FFA_RXTX_MAP_64),
-> >>     FW_ABI(FFA_RXTX_UNMAP),
-> >> -    FW_ABI(FFA_MEM_SHARE_32),
-> >>     FW_ABI(FFA_MEM_SHARE_64),
-> >>     FW_ABI(FFA_MEM_RECLAIM),
-> >>     FW_ABI(FFA_MSG_SEND_DIRECT_REQ_32),
-> >> @@ -240,19 +240,39 @@ static void handle_features(struct cpu_user_regs=
- *regs)
-> >>     struct ffa_ctx *ctx =3D d->arch.tee;
-> >>     unsigned int n;
+> >> diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
+> >> index 928f269f6c3a..cc273c9a8e80 100644
+> >> --- a/xen/arch/arm/tee/ffa_msg.c
+> >> +++ b/xen/arch/arm/tee/ffa_msg.c
+> >> @@ -4,6 +4,7 @@
+> >>  */
 > >>
-> >> +    /*
-> >> +     * Xen does not accept any non-zero FFA_FEATURES input properties=
- from
-> >> +     * VMs. The spec only defines w2 input properties for FFA_MEM_RET=
-RIEVE_REQ
-> >> +     * (NS-bit negotiation for SP/SPMC) and FFA_RXTX_MAP (buffer size=
- and
-> >> +     * alignment), so w2 must be MBZ for our callers.
-> >> +     */
+> >> #include <xen/const.h>
+> >> +#include <xen/lib.h>
+> >> #include <xen/sizes.h>
+> >> #include <xen/types.h>
+> >>
+> >> @@ -100,6 +101,7 @@ void ffa_handle_msg_send_direct_req(struct cpu_use=
+r_regs *regs, uint32_t fid)
+> >>     if ( !ffa_fw_supports_fid(fid) )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> +        gdprintk(XENLOG_DEBUG, "ffa: direct req fid %#x not supported=
+\n", fid);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -108,6 +110,9 @@ void ffa_handle_msg_send_direct_req(struct cpu_use=
+r_regs *regs, uint32_t fid)
+> >>          (src_dst & GENMASK(15,0)) =3D=3D ffa_get_vm_id(d) )
+> >>     {
+> >>         ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: direct req invalid src/dst %#x\n",
+> >> +                 (uint32_t)src_dst);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -115,6 +120,9 @@ void ffa_handle_msg_send_direct_req(struct cpu_use=
+r_regs *regs, uint32_t fid)
+> >>     if ( !FFA_ID_IS_SECURE(src_dst & GENMASK(15,0)) )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: direct req to non-secure dst %#x\n",
+> >> +                 (uint32_t)(src_dst & GENMASK(15, 0)));
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -166,7 +174,12 @@ static int32_t ffa_msg_send2_vm(uint16_t dst_id, =
+const void *src_buf,
+> >>     /* This is also checking that dest is not src */
+> >>     ret =3D ffa_endpoint_domain_lookup(dst_id, &dst_d, &dst_ctx);
+> >>     if ( ret )
+> >> +    {
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 lookup failed: dst %#x ret %d\n",
+> >> +                 dst_id, ret);
+> >>         return ret;
+> >> +    }
+> >>
+> >>     /* This also checks that destination has set a Rx buffer */
+> >>     ret =3D ffa_rx_acquire(dst_ctx , &rx_buf, &rx_size);
+> >> @@ -199,6 +212,12 @@ static int32_t ffa_msg_send2_vm(uint16_t dst_id, =
+const void *src_buf,
+> >>     /* receiver rx buffer will be released by the receiver*/
+> >>
+> >> out_unlock:
+> >> +    if ( ret )
+> >> +    {
+> >> +        if ( ret !=3D FFA_RET_BUSY || printk_ratelimit() )
 > >
-> > The spec (version 1.2) lists them as SBZ, except for w2, which is MBZ,
-> > for Feature IDs.
+> > Shouldn't this be && ?
 >
-> Very true, this should only check w2 which is anyway defined as MBZ when
-> not used.
-> w3-w7 were MBZ in previous versions of FF-A but are in fact SBZ in 1.2 so
-> we should ignore them
+> The intent here is to log all non BUSY errors but only log BUSY when rate=
+limit allows
+> to reduce the amount of logs in case of someone polling when the receiver=
+ RX buffer
+> is busy.
 >
-> > However, if we're to return an error, invalid parameters is a better ch=
-oice.
->
-> In fact the spec is actually saying the following:
-> If the FF-A interface or feature that was queried is not implemented or i=
-nvalid,
-> the callee completes this call with an invocation of the FFA_ERROR interf=
-ace
-> with the NOT_SUPPORTED error code.
->
-> So there is no case for INVALID_PARAMETER.
+> Maybe I should add a comment to make that clearer ?
 
-You're right.
-
->
-> So in fact i should:
-> - return NOT_SUPPORTED if w2 is not 0
-> - ignore w3-w7
->
-> Can you confirm that you have the same reading of the spec than me ?
-
-The 1.2 spec only says this w2 is MBZ for Feature IDs, and that w2 is
-SBZ for FFA_RXTX_MAP. The 1.3 spec says the same, except that in Table
-13.14: Feature IDs and properties table, it lists w2 as SBZ.
-
-Note that FFA_MEM_RETRIEVE_REQ has bits defined in w2, and the unknown
-bits are SBZ.
-
-Based on that, I'm inclined to keep it simple and ignore w2-w7.
+Yes, please.
 
 Cheers,
 Jens
+
+>
+> Cheers
+> Bertrand
+>
+> >
+> > Cheers,
+> > Jens
+> >
+> >> +            gdprintk(XENLOG_DEBUG, "ffa: msg_send2 to %#x failed: %d\=
+n",
+> >> +                     dst_id, ret);
+> >> +    }
+> >>     rcu_unlock_domain(dst_d);
+> >>     if ( !ret )
+> >>         ffa_raise_rx_buffer_full(dst_d);
+> >> @@ -226,7 +245,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs=
+ *regs)
+> >>
+> >>     ret =3D ffa_tx_acquire(src_ctx, &tx_buf, &tx_size);
+> >>     if ( ret !=3D FFA_RET_OK )
+> >> +    {
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 TX acquire failed: %d\n", ret);
+> >>         return ret;
+> >> +    }
+> >>
+> >>     /* create a copy of the message header */
+> >>     memcpy(&src_msg, tx_buf, sizeof(src_msg));
+> >> @@ -238,6 +261,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>          dst_id =3D=3D ffa_get_vm_id(src_d) )
+> >>     {
+> >>         ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 invalid src/dst src %#x dst %#x\n",
+> >> +                 src_id, dst_id);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -246,6 +272,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>         if (src_msg.msg_offset < sizeof(struct ffa_part_msg_rxtx_1_1))
+> >>         {
+> >>             ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +            gdprintk(XENLOG_DEBUG,
+> >> +                     "ffa: msg_send2 invalid msg_offset %u (v1.1)\n",
+> >> +                     src_msg.msg_offset);
+> >>             goto out;
+> >>         }
+> >>         /* Set uuid to Nil UUID for v1.1 guests */
+> >> @@ -255,6 +284,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>     else if ( src_msg.msg_offset < sizeof(struct ffa_part_msg_rxtx_1_2=
+) )
+> >>     {
+> >>         ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 invalid msg_offset %u (v1.2)\n",
+> >> +                 src_msg.msg_offset);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -263,6 +295,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>             src_msg.msg_size > (tx_size - src_msg.msg_offset) )
+> >>     {
+> >>         ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 invalid msg_size %u offset %u tx %zu=
+\n",
+> >> +                 src_msg.msg_size, src_msg.msg_offset, tx_size);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -272,6 +307,8 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>         if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
+> >>         {
+> >>             ret =3D FFA_RET_NOT_SUPPORTED;
+> >> +            gdprintk(XENLOG_DEBUG,
+> >> +                     "ffa: msg_send2 to SP not supported\n");
+> >>             goto out;
+> >>         }
+> >>         /*
+> >> @@ -288,6 +325,8 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs =
+*regs)
+> >>
+> >>         ret =3D ffa_simple_call(FFA_MSG_SEND2,
+> >>                               ((uint32_t)ffa_get_vm_id(src_d)) << 16, =
+0, 0, 0);
+> >> +        if ( ret )
+> >> +            gdprintk(XENLOG_DEBUG, "ffa: msg_send2 to SP failed: %d\n=
+", ret);
+> >>     }
+> >>     else if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
+> >>     {
+> >> @@ -295,7 +334,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs=
+ *regs)
+> >>         ret =3D ffa_msg_send2_vm(dst_id, tx_buf, &src_msg);
+> >>     }
+> >>     else
+> >> +    {
+> >>         ret =3D FFA_RET_INVALID_PARAMETERS;
+> >> +        gdprintk(XENLOG_DEBUG,
+> >> +                 "ffa: msg_send2 to VM disabled (dst %#x)\n", dst_id)=
+;
+> >> +    }
+> >>
+> >> out:
+> >>     ffa_tx_release(src_ctx);
+> >> @@ -311,6 +354,7 @@ void ffa_handle_run(struct cpu_user_regs *regs, ui=
+nt32_t fid)
+> >>     if ( !ffa_fw_supports_fid(fid) )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> +        gdprintk(XENLOG_DEBUG, "ffa: run fid %#x not supported\n", fi=
+d);
+> >>         goto out;
+> >>     }
+> >>
+> >> @@ -322,6 +366,7 @@ void ffa_handle_run(struct cpu_user_regs *regs, ui=
+nt32_t fid)
+> >>     if ( !FFA_ID_IS_SECURE(dst >> 16) )
+> >>     {
+> >>         ret =3D FFA_RET_NOT_SUPPORTED;
+> >> +        gdprintk(XENLOG_DEBUG, "ffa: run to non-secure dst %#x\n", ds=
+t);
+> >>         goto out;
+> >>     }
+> >>
+> >> --
+> >> 2.50.1 (Apple Git-155)
+> >>
+>
 
