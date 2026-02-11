@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8AAEECD6CC
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 17:17:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1228066.1534456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE15BECD6C1
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 17:30:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1228109.1534475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqDqD-0001hZ-0C; Wed, 11 Feb 2026 17:17:29 +0000
+	id 1vqE2a-0005Ou-AG; Wed, 11 Feb 2026 17:30:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1228066.1534456; Wed, 11 Feb 2026 17:17:28 +0000
+Received: by outflank-mailman (output) from mailman id 1228109.1534475; Wed, 11 Feb 2026 17:30:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqDqC-0001hS-SP; Wed, 11 Feb 2026 17:17:28 +0000
-Received: by outflank-mailman (input) for mailman id 1228066;
- Wed, 11 Feb 2026 17:17:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vqE2a-0005On-7j; Wed, 11 Feb 2026 17:30:16 +0000
+Received: by outflank-mailman (input) for mailman id 1228109;
+ Wed, 11 Feb 2026 17:30:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cvfN=AP=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1vqDp1-0004tt-Lr
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 17:16:15 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 5d6d71a8-076d-11f1-b162-2bf370ae4941;
- Wed, 11 Feb 2026 18:16:12 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BA4F0339;
- Wed, 11 Feb 2026 09:16:05 -0800 (PST)
-Received: from C3HXLD123V.arm.com (unknown [10.57.53.46])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 12D563F63F;
- Wed, 11 Feb 2026 09:16:10 -0800 (PST)
+ <SRS0=7Yav=AP=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
+ id 1vqE2Y-0004Qt-Mz
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 17:30:14 +0000
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [2a01:111:f403:c007::2])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4fa98f40-076f-11f1-9ccf-f158ae23cfc8;
+ Wed, 11 Feb 2026 18:30:09 +0100 (CET)
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SJ2PR03MB7110.namprd03.prod.outlook.com (2603:10b6:a03:4fd::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Wed, 11 Feb
+ 2026 17:30:05 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.20.9611.008; Wed, 11 Feb 2026
+ 17:30:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,136 +49,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d6d71a8-076d-11f1-b162-2bf370ae4941
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v2 11/12] xen/arm: ffa: Add MEM_SHARE page diagnostics
-Date: Wed, 11 Feb 2026 18:15:35 +0100
-Message-ID: <4fa6736cbe35b060cf34b2978bbf9b3481d9266a.1770826406.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1770826406.git.bertrand.marquis@arm.com>
-References: <cover.1770826406.git.bertrand.marquis@arm.com>
-MIME-Version: 1.0
+X-Inumbo-ID: 4fa98f40-076f-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=V6UTkI0D9ta533DQr0MbijxhH1QbeVV8i3TLvWwtSJpI0QjxsfR6LLwHkNLOYJFy/ClSWb3CE/xIQAHMczp6rX2rr0d8K2GWfdB8yqOZNL1D7VVfd0EeiV+KuRosY+GPggtxeQWeDFtp9tFfW7glGaOBMoSINPJ3w7iDb4hHX0kfeYKneWPzkI9AsyFPBrsOu1Z/SRmso95ljRJI1sJvgS2Fw5DdhgNZsPPWZ2Y5VWCRGjVK+xiRSwJEOvM5M9WsneAHIJxRPvb2Ye/p3X3RkV3brFKaq5uj0tP2OQ2FSbkEbSCYICbQLT2o0ryrld2p73DCAlUXNtSjcEUeF3us0g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bvRxHCINeB4XDe+8d5WxbCNOUpRrpeTIRs5E9YuaGlI=;
+ b=ibN4zLMo50C2fMWNOOtWg3kyR6LAOLdKouCjJTaS2YiFewWg60n5q9kZ9L8ZULUg/PAG2ONrjXdDEar0VMTOsqFUoIu8dKFPnja3xcMOpaiKVVPa4aUk0atKrYfok/E8F+70AcbcS1fm4Scm1ghMqCP6KDy3I8O373OskXLft7Y0LsSh8Y+ckl/QSE4J4O6ozgkCfJ/I5YTvmPPrg0K27LA7z/pLGNCtAMxz1wQLLH90iW56AB6QWT5cIAkgIv9FXvpNESDO9oRDsDbUnzin2+k7ci/RmEo/PnjEbyzQDU8kTTwhB/MzRvLL0y30+aAdHQEuvQhk9QVKnt42gVcUgg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bvRxHCINeB4XDe+8d5WxbCNOUpRrpeTIRs5E9YuaGlI=;
+ b=DomNuV7O1QLHlXsRnVHrcB7QHMQuKr+X/ro2Uoi0SW8MjztlWeGlwx6Nwh5wfUcUMIqSou3j7Jo2/9BFFjK83tMiLbZ8c+gxsePfgssJMOPa1wkSf6GTp8gEkYDMYjhrD+476JY+mFFJIXBlEeFvr7YTQbVQLhw+vPTg4QNCnf8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <73bf621d-0795-4fbe-b926-71be3525b4c7@citrix.com>
+Date: Wed, 11 Feb 2026 17:30:02 +0000
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen: Put wait.c behind CONFIG_WAIT
+To: Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
+References: <20260211170118.109946-1-jason.andryuk@amd.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+In-Reply-To: <20260211170118.109946-1-jason.andryuk@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0351.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18d::14) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ2PR03MB7110:EE_
+X-MS-Office365-Filtering-Correlation-Id: b8c93250-fb78-4d63-b36f-08de69933213
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?N09Kb01LMzh3OHNqajlCclhmNlNTdDAzdzJaN1RhSk1XYUlkeE8zVTB5Q0M0?=
+ =?utf-8?B?U2JyNDFhNzlLVEFHZHRZMzVFRVhmRGtoNTRWNDEwNzBnc01iUFJZOFZQVThw?=
+ =?utf-8?B?L0J6SUhIamgzNjBuLzhlb3Nnd1dtRXRvM3R2UDN4M1JYcnNsNlZnSlhyNXU0?=
+ =?utf-8?B?UllPL1ZZR2trMGlhUkJwT0RRejcxUFdiL0dqNHA1aG1mU2QxVDE3WW1DbU1Q?=
+ =?utf-8?B?MnhKdGJvTnhBRHpIcHNpYmVEbVNjeDlzbXQxeTVFVklhTGJXVis0ZFNTeXVy?=
+ =?utf-8?B?WjAvZ1V1UFlyK2JWSG5Gck1MVGZhbXFLRTBSZU03bkRjakJDODl6cWZDM3hR?=
+ =?utf-8?B?NHVmMWorYkFPWjVHS3lzUHF4QUhWeXZFc2lUL1VKUnFxa3VLSnp2VVRkamsr?=
+ =?utf-8?B?Q1FyOEZ1WFhZeWdGV0VDbE9iZXJ5RE04aklBU0krT3l5RFNON0NHaCtaMGRI?=
+ =?utf-8?B?QXdBeWIrdW8zSmZMUDlzb2xlQnhIV29zeFoxc0JRUUlpUTRkM2QwZDRwTDJY?=
+ =?utf-8?B?MEM3eEE3N3lOMjFiN2FTRUgwdFVHNXVHbkFHMFdLbFdVdXJROWdvaXBmeGt4?=
+ =?utf-8?B?RmplZ0p5MWF0dURmVVlLaCtjcDYyV1p2RytRMjMvU0NTR05sVjRYMUZSS3Js?=
+ =?utf-8?B?REhPWURWMUpMa3NxZU1xUWxOL1BDTXRzUllMcDM2ako3YzhBTjZpUk5ib2pW?=
+ =?utf-8?B?SUlyblJGUnA5dG0xR3dqZmppa1F4QlNmWUJFTlJjTEcxREpDdWJDc1ArblZ4?=
+ =?utf-8?B?Um8zdGVISms1UTZiTFAzc0g2eE44NUM1TXlWZmV5NmtjS1NGMU5mdUJPVWhi?=
+ =?utf-8?B?MWdjZk9xUllNUy9HY1p3Y29INndvL05pNU1aYjZmMGFBVVdLN1BVMzZBc08z?=
+ =?utf-8?B?a0Y4WXkzR05WVlJXNlBoK1Y3ckJVd1daMitmRHpDNGpUS2taZnhneWYvWUcv?=
+ =?utf-8?B?bWt0TnZaRlZmVkhPTFY4dHdaMG9LK2ZnYWE1NVVrNS9MUFJkOExjMVV1ZVJ1?=
+ =?utf-8?B?MTAvYVA0VHNwRXp3UmVSU1ZmSlJuNVJoR2tEL3JSeFZydE94bDVYS1VlMUl4?=
+ =?utf-8?B?TTA4U3EzTVZhVXNDM0pNeXRqNDlFdzFPNVdadHNZS2M3bENsVDJHakFIdHhJ?=
+ =?utf-8?B?bGNsNzVPOFQxcEdQY3lIek9TY2NSYy9lNjRGd2QzWk9YblcvZUc5ZUF1K0xQ?=
+ =?utf-8?B?YzBXd2xnU3BvNWlpZk1CTVlnaEVHK0ZhZk9yc0w2SkpOZzJTblJKb0hhSmxr?=
+ =?utf-8?B?MjVRZm5kdDduSUo0bUc0SE1qMFVaT0NjdjhKdVVGSHVsdU9RUW14NDEyVWpm?=
+ =?utf-8?B?RWtYWUNPOWdEV2pWZTNwVXlXMFA3WmJ4T20xejREV3YxS1lzd0tJUnZ3c3Rs?=
+ =?utf-8?B?R2NhS1dNQXBBVGVLcVlIWk9YNDh6ODlEbm9IeVF2ZklNOGhZdGVLRUdiV0kx?=
+ =?utf-8?B?Y2VDTnNtTjFPcWtCRFNzMFk3Q2hhU0Y1bTI4WWRXam5JZUltcDhXcmp5TmZI?=
+ =?utf-8?B?OVFDUFBIYzkxc3drUVVLZ3NGU05LaUxxNm9kVmZPQmkzN0ZoVEdmcUtLQk5U?=
+ =?utf-8?B?QjM0MDdhd2dnWFAvdDlGeEhkZHBNc2xZSndVdGMrR0lrSUcrT25oY0Yvc3dM?=
+ =?utf-8?B?VTNXcFRudUFwVDZnQ1pHdVE3V0o2ZUpsK05JaEdJOTBueVlGS3ZCbHltWDFQ?=
+ =?utf-8?B?Y2phUVVlY0lodnhpWVEyQ0pmK0FnRmZrMlE1OEhjVzF5ejJhM1p4Z0pqYXd5?=
+ =?utf-8?B?cnEvZDBIbEZLTmpoR3B3cm51dWlVV2dsZUgvRzY1cG91bHNEMENaTEV3Nmcx?=
+ =?utf-8?B?NUNySXhQWFQzb0VNSWNYL01QbitOb0FXbzU0amluTjdmUmF1RzJFaTc2VEkx?=
+ =?utf-8?B?ekpUY2NubC9aOTIwd0dPRUVLNGxqVGNCc3FvSTAwTjFWaDY5UDRHYTIyYXFQ?=
+ =?utf-8?B?T3hFN3F1SXExQVlhQUZSbzRoZCtDaGE0dnluTUJSUVFCTFk4VlpMT0k0UlNw?=
+ =?utf-8?B?RlAyak0yWUJBSGRwaGlvQ0daY2NUYWQxVTFjSDA3U1l0N0xyV2VmMjFVT1R4?=
+ =?utf-8?B?ZWpXbjJSRW5lMjJicHJDT1ZybFQ5VTVyM3hDc1piczNqVWZJRTZZM0drRlhW?=
+ =?utf-8?Q?c5Gw=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MnU1RHZlclZjMDRkQkFmRURHaElQKzlaSGRtWWZrYitZK0xQUlRwQ2xsdWJD?=
+ =?utf-8?B?b1c5OU1pMDRhN2puNTZDMWEwbkZvVXFMMU12VDBMVllXbzU4aXFNSzM1V2Ju?=
+ =?utf-8?B?b29PUWdlSE1aeHBEeDVSbjdpS0t5V25vUExobzlDNk1VRzNYK2VKZHEvUDk4?=
+ =?utf-8?B?eDlzY2RYK2hKZU9HVk5qZHJVSDNIdzdOeDdRNURnYU1RbGVGUEcwVWJZY3JS?=
+ =?utf-8?B?VnB3eDhWM0IwMHc3QWovd3o3VG5ZYUFBY1Q4Zk4xUVcwUmU3YUppR0xXZkxj?=
+ =?utf-8?B?b3d0T0hCakFNMlpFdDNxcUVpYktSTUR2UHFXaFMyV2U4cS80S0pzMDgxR01w?=
+ =?utf-8?B?b09kang5U1JObHNpaE5CQkR1ODNlaGZTUTEyblJ2ZkVJd1NYUTE3QlZDOUJN?=
+ =?utf-8?B?VmNJSnFKUnNsV0RFMm5rUTlvUkNucUxaVTBMRFNrc0F6OTQyOXhtODhXSjY4?=
+ =?utf-8?B?cnE0b3F2bzZJdy91VDdtb0VTaUZsWWRrYWtBNCtHVVNxOHFDV0pIOG1XbUFG?=
+ =?utf-8?B?b2xhOTFnMDFpVk0wdHlpcmRQUnBJcko2cDhsbDRzYjV5blp6SS9LUEJwOUly?=
+ =?utf-8?B?dTJwZVFCTWpxeTNUM3l2eUV1RlphakNWTXBIWkRlNTYrb3ozb0RVLy9pbXk1?=
+ =?utf-8?B?Y1hlWi91RmcveWQ5YityZFVGMUkwd2tnOGYwa1B4YUVxaWNndEZxSnNPUkFl?=
+ =?utf-8?B?UW43c0lGa2lSYVIybHFHRmw3MUZpRXl2OXV5MzFYQ1IvNko5bnFFek1tQ3hC?=
+ =?utf-8?B?Vjl6K0hER1I1bHk3eVd6TE1EVHEvQzhEelg2NFVWZzR4eE80anVScXBnSXFs?=
+ =?utf-8?B?WFhEbmEvbE9HUXcwVFpod1loanhpdjFRUFJ6T1R5em4wV3Y0OHFQdTJlR2dM?=
+ =?utf-8?B?QU5kTUg2VXZTTFZCZU5XM0lPeTM3dkhqVjZFYUhncTdyQjRUQjRNTTQ3azJ3?=
+ =?utf-8?B?YytRM09hU2RYelRxN0dpdys0TjBST2RhbC92SzNRam1JUGZHTnNZU0o4Z3Nu?=
+ =?utf-8?B?QllUU1JYZ21xZkplZkg3dXNqdDd4bmlNWnRaUmw3Y1hPNWpSTXNiREhFTnRD?=
+ =?utf-8?B?a2V1Q0VaNTdjR1FqbmpZc1FUek5EWXJHUmFUYUZpcVRhM2tTZlU5NXJpSlVB?=
+ =?utf-8?B?dDMxZDlBWi91eXN6TmZqQzJOL2FMWVdNRlhqSlU0NzNydlUveUtBWjRETERr?=
+ =?utf-8?B?Sm4xeUp5Q0phb1JMN0ozUnZQTlFnZk9TYVBLZm5UMXJuYmdKVFIrMGgxR3Bm?=
+ =?utf-8?B?VHRIazBCdW1zSU5FZDl0Y0VIU04wUDlta2tiVjBxcU95c2ZyS29oZXpyVThI?=
+ =?utf-8?B?UERXaERsZkgwNGdNL1FSZG91b1lYOGFwaFNmUVNFSGlVK0U3TnVNWUl2aWFw?=
+ =?utf-8?B?NFMwWDJSNDgzMGNpWGc3Q2lHQnVOYXFhVjJFRHBOK29FUEVDbzFRSE10RFQ5?=
+ =?utf-8?B?amZkbElhQXQ2Rms4alBxZncyT1ZzRXdaa0t6NmVjKzBmUUFEY2tucUEvSTR1?=
+ =?utf-8?B?ak5JS0VUWE9PWjcyeVdqRzliVmM0aDdsL1JFU1RCMzZINDNvVmxwTG1oVTBk?=
+ =?utf-8?B?alJBUVFudHp3TzJhNEluRm9pWUtOZTZ1ZGl5SFUrUUE1ZlNzUGVUdFcwVGN5?=
+ =?utf-8?B?ZS9nZEpXQ0trTFJSMXp1ZldSdmFsbTdrVjB3MVJUYy9rdEgySlk1TEpxeW5J?=
+ =?utf-8?B?ZDFWUm14NEhrVlRXSDVKU1NSN1FNNDdXdGJRSzZVZk5hN1k4YmRoR3pERlBQ?=
+ =?utf-8?B?QWNOVkFIZzVhdVZHZE50T1hvNzJxTTFCay81WldoTE5hT0JvbXJTYllVYkJS?=
+ =?utf-8?B?SkdtR3AvbXlkR3cwMTNhUkJ5ank1R2toM2xTZWEwdHM0aDJYK2RuVXNXdkNl?=
+ =?utf-8?B?NEhEYi9KNVpqMFgwajlOTG9VZzJWdWl5QnB3dzV1RFY5djNFTHBjWXlDbHRR?=
+ =?utf-8?B?cjVkdmV6aUJaMy9IdWNXVTBqeTQ0c2hnU3A3eXVWUDEyZHN5bWNxUk9zQmRQ?=
+ =?utf-8?B?ZkROSXRQcWxlNWVnSW1WRWdtZEx0c0NjT0d1MUNlL2lMTFRDa2FNQWx4VkRL?=
+ =?utf-8?B?K05UTzV6bWw0QjBJMU8yOW5EaW80WktCeHJTUFV3WjR5a3l4K1d2MlAxWDhj?=
+ =?utf-8?B?OWI2eXh6ZWR6STUxUURZQmY2MmFLcGdsZjB2cTlGVGJaSzgxRGd4SzdJbE5U?=
+ =?utf-8?B?SVl6UFR0RWF5MVpId1pvRlFFazRVL1RrV1RJWjdZUzM3SkdEUVlwVmhSbDRL?=
+ =?utf-8?B?ZjdsUkk3dk1qQW5LMjBVZ3JDSGZVdXJhbjJ5S2lkK2E1SFlLaHJ2TGxhM2tl?=
+ =?utf-8?B?YmJGd2lxMTBBdi9Tc1ZOeWFjYTIzcUVZZDVNZW8zait5OURLcmtPZz09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8c93250-fb78-4d63-b36f-08de69933213
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 17:30:05.5382
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bZLyZ08V7vIzFvGDBnZ4a45PcWH25wUGFpVTAop0B9dnVQYXwOhyxyPorK4nObqtfleRbcPMEE7ossbm1FzZKv9EVD6hK9ZuI+yRitVzaEA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7110
 
-MEM_SHARE failures in get_shm_pages() are silent, which makes malformed
-ranges and page mapping failures hard to diagnose.
+On 11/02/2026 5:01 pm, Jason Andryuk wrote:
+> wait.c is only used by vm_event.c.  Make CONFIG_VM_EVENT select
+> CONFIG_WAIT, and use CONFIG_WAIT to control building it.
+>
+> Provide stubs of functions called from common code.  entry.S needs an
+> ifdef to hide the symbol from the assembly.
+>
+> Also conditionalize .waitqueue_vcpu in struct vcpu to save space.
+>
+> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 
-Add debug logging for page validation failures:
-- descriptor validation failures (unaligned, range short/overflow)
-- per-page mapping failures (unmapped GFN, wrong p2m type)
-- address overflow detection in range walks
+I'd really rather see the API/ABI changes required to purge wait.c
+entirely, but I guess this will do in the short term.
 
-Ratelimit temporary reclaim failures and log permanent reclaim failures
-as errors.
+Two things want further thought.
 
-No functional changes.
+First, because ARM uses per-vCPU stacks not per-pCPU stacks, it doesn't
+need this infrastructure in the first place, but it looks like it's
+still compiled in and half wired up.  I suppose you don't notice because
+you compile out VM_EVENT on ARM too?
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
-Changes since v1:
-- use one print per error case instead of the previous system using
-  variables to classify and a single print site.
----
- xen/arch/arm/tee/ffa_shm.c | 39 +++++++++++++++++++++++++++++++++++---
- 1 file changed, 36 insertions(+), 3 deletions(-)
+Second CONFIG_WAIT isn't great name because there are many things it
+could be.  I'd be tempted to just reuse CONFIG_VM_EVENT and go without
+CONFIG_WAIT.  I do not want to see any new users of wait.c, and it will
+disappear at some point.
 
-diff --git a/xen/arch/arm/tee/ffa_shm.c b/xen/arch/arm/tee/ffa_shm.c
-index 070babce9627..3d61caaeba78 100644
---- a/xen/arch/arm/tee/ffa_shm.c
-+++ b/xen/arch/arm/tee/ffa_shm.c
-@@ -161,32 +161,62 @@ static int32_t get_shm_pages(struct domain *d, struct ffa_shm_mem *shm,
-         addr = ACCESS_ONCE(range[n].address);
- 
-         if ( !IS_ALIGNED(addr, FFA_PAGE_SIZE) )
-+        {
-+            gdprintk(XENLOG_DEBUG,
-+                     "ffa: mem share pages invalid: unaligned range %u address %#lx\n",
-+                     n, (unsigned long)addr);
-             return FFA_RET_INVALID_PARAMETERS;
-+        }
- 
-         for ( m = 0; m < page_count; m++ )
-         {
-             if ( pg_idx >= shm->page_count )
-+            {
-+                gdprintk(XENLOG_DEBUG,
-+                         "ffa: mem share pages invalid: range overflow rg %u pg %u\n",
-+                         n, m);
-                 return FFA_RET_INVALID_PARAMETERS;
-+            }
- 
-             if ( !ffa_safe_addr_add(addr, m) )
-+            {
-+                gdprintk(XENLOG_DEBUG,
-+                         "ffa: mem share pages invalid: addr overflow rg %u pg %u base %#lx\n",
-+                         n, m, (unsigned long)addr);
-                 return FFA_RET_INVALID_PARAMETERS;
-+            }
- 
-             gaddr = addr + m * FFA_PAGE_SIZE;
-             gfn = gaddr_to_gfn(gaddr);
-             shm->pages[pg_idx] = get_page_from_gfn(d, gfn_x(gfn), &t,
- 						   P2M_ALLOC);
-             if ( !shm->pages[pg_idx] )
-+            {
-+                gdprintk(XENLOG_DEBUG,
-+                         "ffa: mem share pages invalid: gfn unmapped rg %u pg %u addr %#lx\n",
-+                         n, m, (unsigned long)gaddr);
-                 return FFA_RET_DENIED;
-+            }
-             /* Only normal RW RAM for now */
-             if ( t != p2m_ram_rw )
-+            {
-+                gdprintk(XENLOG_DEBUG,
-+                         "ffa: mem share pages invalid: p2m type %u rg %u pg %u addr %#lx\n",
-+                         t, n, m, (unsigned long)gaddr);
-                 return FFA_RET_DENIED;
-+            }
-             pg_idx++;
-         }
-     }
- 
-     /* The ranges must add up */
-     if ( pg_idx < shm->page_count )
-+    {
-+        gdprintk(XENLOG_DEBUG,
-+                 "ffa: mem share pages invalid: range short pg %u\n",
-+                 pg_idx);
-         return FFA_RET_INVALID_PARAMETERS;
-+    }
- 
-     return FFA_RET_OK;
- }
-@@ -741,8 +771,10 @@ bool ffa_shm_domain_destroy(struct domain *d)
-              * A temporary error that may get resolved a bit later, it's
-              * worth retrying.
-              */
--            printk(XENLOG_G_INFO "%pd: ffa: Failed to reclaim handle %#lx : %d\n",
--                   d, shm->handle, res);
-+            if ( printk_ratelimit() )
-+                printk(XENLOG_G_WARNING
-+                       "%pd: ffa: Failed to reclaim handle %#lx : %d\n",
-+                       d, shm->handle, res);
-             break; /* We will retry later */
-         default:
-             /*
-@@ -754,7 +786,8 @@ bool ffa_shm_domain_destroy(struct domain *d)
-              * FFA_RET_NO_MEMORY might be a temporary error as it it could
-              * succeed if retried later, but treat it as permanent for now.
-              */
--            printk(XENLOG_G_INFO "%pd: ffa: Permanent failure to reclaim handle %#lx : %d\n",
-+            printk(XENLOG_G_ERR
-+                   "%pd: ffa: Permanent failure to reclaim handle %#lx : %d\n",
-                    d, shm->handle, res);
- 
-             /*
--- 
-2.52.0
-
+~Andrew
 
