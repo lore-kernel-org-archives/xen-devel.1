@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CCEE9E31E
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 14:53:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1227761.1534187 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BFDE9E311
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Feb 2026 15:04:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1227773.1534196 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqBb7-0000qu-Pj; Wed, 11 Feb 2026 14:53:45 +0000
+	id 1vqBkp-0003Vi-Km; Wed, 11 Feb 2026 15:03:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1227761.1534187; Wed, 11 Feb 2026 14:53:45 +0000
+Received: by outflank-mailman (output) from mailman id 1227773.1534196; Wed, 11 Feb 2026 15:03:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqBb7-0000qn-L9; Wed, 11 Feb 2026 14:53:45 +0000
-Received: by outflank-mailman (input) for mailman id 1227761;
- Wed, 11 Feb 2026 14:53:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vqBkp-0003Vb-HQ; Wed, 11 Feb 2026 15:03:47 +0000
+Received: by outflank-mailman (input) for mailman id 1227773;
+ Wed, 11 Feb 2026 15:03:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=0Hh8=AP=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vqBb6-0000qh-NT
- for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 14:53:44 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 75c885d8-0759-11f1-b162-2bf370ae4941;
- Wed, 11 Feb 2026 15:53:43 +0100 (CET)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-4359a316d89so1799705f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 06:53:43 -0800 (PST)
+ id 1vqBko-0003VP-AO
+ for xen-devel@lists.xenproject.org; Wed, 11 Feb 2026 15:03:46 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id dadf2cf5-075a-11f1-9ccf-f158ae23cfc8;
+ Wed, 11 Feb 2026 16:03:42 +0100 (CET)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-436234ef0f0so4174019f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 07:03:42 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43783dfc54csm5114630f8f.25.2026.02.11.06.53.42
+ ffacd0b85a97d-43783d310c6sm5737724f8f.2.2026.02.11.07.03.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Feb 2026 06:53:42 -0800 (PST)
+ Wed, 11 Feb 2026 07:03:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,52 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75c885d8-0759-11f1-b162-2bf370ae4941
+X-Inumbo-ID: dadf2cf5-075a-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770821623; x=1771426423; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=PVLB1q7EISviKkx7eVoIwrYqQArt16a7JSdeDujZ43I=;
-        b=cXdfrWH7LXF1ROgNAaWFvpe7HN0nfxhL2wlZCy6xg0dLpMCi0WY3jfR9cuLirgh7KA
-         BDkZ5DZodBo9r1+ejA+z9t6bafpASUb2r5HXxA2b6LTFl/uaESYsIx+Qz1LZIglT4ojf
-         IWtDU/fOtsnffk4jxjScLPQKbiIBzCYVsBVY6iL+YBOw+cZLIF5Y4ZnZz9AnQRAMCb9l
-         QwJKfP45u88WXzghfDejxQJpmGFxwKy8D1gVzQDGkCAVI7brIdYWhqmPzY2SLTVPQ7Gb
-         0/Q3PKNB3MQuhTLO3MdkUu1+WXJ6Ry4RkT0IBVfQ6k5/2eF2EePwb0DSMMHXMuQQ3wJb
-         ZK+A==
+        d=suse.com; s=google; t=1770822222; x=1771427022; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ee64gM6DKzd1fjGKdjCsKO3cini/KSX8Hd367lvqUsg=;
+        b=eRcje/UPVfcHOfF2oHI+Q2M6t6ZB97Lim6wzbcg3JeEElmOqdCWjA1axt4gT7LC1vE
+         yAF/V6VduUDuA3GMoJ97ZLwNOWiLfiTOCvw7sHYYqeOE50kqeqSc14rEwi271EEZOpKd
+         TtSgrPij1K97QeZZSVSlcDCErPKJMph9TuwkWN+iKYMq58qQ3LTUrXAeg9s5nZ8Twh8J
+         uhPepLuuomnXt/7sSFSft9VOHn1WklNefD80r+hvJSzxS8QK0UAevyJMs4GOhp+MDuuM
+         fz/00lKFHLQT+DdiCayISfQd9ya8YIpJ6FX8l/wTp6PqAMnIanXZS3FnVcSwh8SeAdlx
+         0oqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770821623; x=1771426423;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1770822222; x=1771427022;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=PVLB1q7EISviKkx7eVoIwrYqQArt16a7JSdeDujZ43I=;
-        b=jmM32TiXt6Sn+k6CxAqOdGWCtd+gHu4ljOx+HgmUF0arEvLTjU6cxWYooc8CriNuyO
-         aTSzSJ8/O2wWThSKniq4uci3Jotue+jBIamk6aYp/N/BphEwiMxU8JZ9tdrtgxYSMPKv
-         KmcR5bLaqzhQ2RaSg7wngnL559ZxrgCHC2MhIB3Ze0CI5bLOOy0Z/CfOUg3J1rFJ6mOj
-         8mYXP07RNt8zblTHxZHQ93DWXkJ8UvYBQgWY4UtwD25ycE54c4cMTDn8pBHPUfdO7w+X
-         2asJjHIk5Sj2UE1Q0C+Qw5zY7dRIj2trP0z+btwYlaS1DlU4z7eQy4eAtzHN8iJwekCy
-         iGVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXfdzc4DzaNZWTsGKofU7HGEMpuOqZ0c0Hb6l+UQeOj2gX7+bNMmu+pVoKnX04IT5MNHxN6usseWnw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzmoxsSFY4HG9hXWsu66VepNO/o0eqZMmQPsy3IxgpoyBqaXw2j
-	dqTltFaLvuPKFlVu2sXY1Ky+6yB8jgP3z6f9t58OGkBOHxGAaTJQs+OfxY4O2Ua5Yg==
-X-Gm-Gg: AZuq6aJM+KUkypfpdYsK69ZLLXr7cEDsWm80UN0EdPFgbWexLMCMy6PFQDWJwF3OpjC
-	pHfPj6iz00Z4+5Lnm8h66W5EJrToOndu1K/TrLn7J+MrdnqfVcfawr6afQjJ480QSNZGRUzlrq8
-	+tNV9++s3ABqjkrhtM2NWQ2FvuKxAp+bQ1f+pwbFng/fhrKNCPQKrwAg5v2S+a5AaLoqaPa/fvL
-	L7NaHiNSxlrqBj/HKcttSCDaRn1xY5sKg6r48EoqyJTKdyuuNWQzsjEyXcICM1xh7jOxdQrLOEr
-	AOduWRRHeHTrveqKJM3/u0MvD5x4YFGXOOjZG/o8W+W3Aw7oxiULUOETEXiy/jdeIhpN1dThqfG
-	NgBwjA+vQ+rplThvzL89ggLidftxcCsVThmeHm2ML41PMTbhsWZueeDWv1XBJUEyLQs4AjCNMU2
-	1EBAvYPEASVnNK7lumwX90wLM9obsKoe/eCZf6LA5C/gRiwR02Ja20APsw/N28+F5LuXsCuVbfK
-	au+igfW7WnEXaI=
-X-Received: by 2002:a05:6000:24ca:b0:437:6806:994f with SMTP id ffacd0b85a97d-43768069f85mr20510678f8f.12.1770821623054;
-        Wed, 11 Feb 2026 06:53:43 -0800 (PST)
-Message-ID: <5d108b61-f46e-404d-ad03-18a0405fe44d@suse.com>
-Date: Wed, 11 Feb 2026 15:53:41 +0100
+        bh=ee64gM6DKzd1fjGKdjCsKO3cini/KSX8Hd367lvqUsg=;
+        b=UtdCZnzeNRX+EsDLWmbZCsizPGU4RVrYZSpDbBFL8lsIji16q7/ZHFAnT7ZOe5M+iC
+         yR1yZS/cLXfl3iAprZgs7Psmkx80xVpw3XiJfCRBrcGiDYieuJYm8jbNdsT46iwsjw7P
+         BpJzeOc3zGxZpbsub3zcfPtn69JHP1BqaHZTxWgOjZG+pPPJpQurl6MxKV+MSTBP+QyL
+         PYaE0ZCTol0BTC6nJHBk7Uke8gs2mcBY+6IvXGEEbXsJXmRml7js3dtBcaM6bIlM1IFg
+         jYjX8mnUbJhnkXO8TC9VZKd1qsbgA+d5Nd72Dot6XP7zqMRBrK0xP6KnCqf1Hrd1tdK3
+         7hJw==
+X-Forwarded-Encrypted: i=1; AJvYcCUqnzxuOgrnwjugiRyXbzSZ4NuOI2V0etR9WHTsm7zBVORyjt6SklpOdIUBznyf0JFe0dpgnsBIMt8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyuiQE3/qkjPH1+u/Gvrf7/Aaoa6TGfA9WahqOa3svOeJzCrXfW
+	3wBGoEI/pjfwzSFgiFKhradeqxZtCmKPttrLHNnIaJ2wOghg4iiOj9eAxTGNpEAUqA==
+X-Gm-Gg: AZuq6aIY6FpPR3eLozfuVHoy6svzcnkFVlzyDYBGLDqxHX8XfU60omQkHbTvZ8Ed4rk
+	nATdMcBHovfUw4SCGppxKBQlWZ7nuq7kGBA2iVZvt4Xf1Xx0HbZsmeY0bp19yMb3478vJ5tuRSO
+	QED8e4w7Ww976mtJraWJtJdWNyrwGx031wLmhbAKN+Xit8KmuJ5v1HaHkUtZ7ZI79xbptYFu1Ku
+	btCKIKA4sQx0TRIoCWwHJhSVsUo4nVya8duYsskilo8WQNHcUBG/eUKgtpUUJou12pREs/jWg89
+	Nnj/W76Vsb4rVabiR5F+P/0ax65tnPxxskkVtaCUvKSbtUPBXXHQ+pSQ8itEWDodzJ69bay2358
+	Ch+xD5FI4mROGe6qq7ADfXgYOUuPpxnXbcC4DJJFabylijkIr4hmu9ysd/Ok1L2vpjvktUskv/P
+	bPpoeV9t8ON7rCDk42CeO22fiqx8Sdwbk1RHI3zXbj0vGZPTRxiy+i8qEkqjzH98PLtt0HDP+Sc
+	7MXkpMql+ZHrdI=
+X-Received: by 2002:a05:6000:2c08:b0:437:67b5:9bab with SMTP id ffacd0b85a97d-437845b39ddmr3759433f8f.56.1770822222071;
+        Wed, 11 Feb 2026 07:03:42 -0800 (PST)
+Message-ID: <4304e4a5-c820-4673-8ff7-bbfdea54edf6@suse.com>
+Date: Wed, 11 Feb 2026 16:03:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 05/16] xen/riscv: introduce tracking of pending vCPU
- interrupts, part 1
-From: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH v3 12/16] xen/riscv: introduce sbi_set_timer()
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -103,9 +101,9 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1770650552.git.oleksii.kurochko@gmail.com>
- <ced640968434a67c150eff90437f83d3b460a36c.1770650552.git.oleksii.kurochko@gmail.com>
- <d73424e2-84f4-497b-a1f4-f3eea5cdeeb3@suse.com>
+ <3b102fd2267c629e8505631277efc2eeae5a1a6a.1770650552.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -129,41 +127,49 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <d73424e2-84f4-497b-a1f4-f3eea5cdeeb3@suse.com>
+In-Reply-To: <3b102fd2267c629e8505631277efc2eeae5a1a6a.1770650552.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 11.02.2026 15:16, Jan Beulich wrote:
-> On 09.02.2026 17:52, Oleksii Kurochko wrote:
->> @@ -124,3 +125,72 @@ void arch_vcpu_destroy(struct vcpu *v)
->>  {
->>      vfree((char *)v->arch.cpu_info + sizeof(struct cpu_info) - STACK_SIZE);
->>  }
->> +
->> +int vcpu_set_interrupt(struct vcpu *v, unsigned int irq)
->> +{
->> +    /*
->> +     * We only allow VS-mode software, timer, and external
->> +     * interrupts when irq is one of the local interrupts
->> +     * defined by RISC-V privilege specification.
->> +     */
+On 09.02.2026 17:52, Oleksii Kurochko wrote:
+> Introduce a function pointer for sbi_set_timer(), since different OpenSBI
+> versions may implement the TIME extension with different extension IDs
+> and/or function IDs.
 > 
-> What is "when irq is one ..." intended to be telling me? There's no ...
+> If the TIME extension is not available, fall back to the legacy timer
+> mechanism. This is useful when Xen runs as a guest under another Xen,
+> because the TIME extension is not currently virtualised and therefore
+> will not appear as available.
+> Despite of the fact that sbi_set_timer_v01 is introduced and used as
+> fall back, SBI v0.1 still isn't fully supported (with the current SBI
+> calls usage, sbi_rfence_v01 should be introduced too), so panic()
+> in sbi_init() isn't removed.
 > 
->> +    if ( irq != IRQ_VS_SOFT &&
->> +         irq != IRQ_VS_TIMER &&
->> +         irq != IRQ_VS_EXT )
->> +        return -EINVAL;
+> The sbi_set_timer() pointer will be used by reprogram_timer() to program
+> Xen’s physical timer as without SSTC extension there is no any other
+> option except SBI call to do that as only M-timer is available for us.
 > 
-> ... corresponding code (anymore), afaict.
+> Use dprintk() for all the cases to print that a speicifc SBI extension
+> is available as it isn't really necessary in case of release builds.
 > 
-> Further, who are the prospected callers of this function and its sibling
-> below? If they're all internal (i.e. not reachable via hypercalls or
-> emulation on behalf of the guest), this may want to be assertions.
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Having seen a use in patch 08, I should clarify the "reachable" part here:
-It's not the "reachable" alone, but whether the guest has control over the
-"irq" value passed. For the example in patch 08 this isn't the case.
+Acked-by: Jan Beulich <jbeulich@suse.com>
+with one further request:
+
+> @@ -134,6 +138,20 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+>  int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+>                                  size_t size, unsigned long vmid);
+>  
+> +/*
+> + * Programs the clock for next event after stime_value time. This function also
+> + * clears the pending timer interrupt bit.
+
+"after stime_value time" reads as if this was a relative input, stime_value units
+of time need to pass until the event. Iirc values passed are absolute, though.
+Furthermore it was my understanding that the interrupt being raised is dependent
+upon clock >= value, not clock > value (where the latter is what "after" means
+when taken to apply to an absolute value).
 
 Jan
 
