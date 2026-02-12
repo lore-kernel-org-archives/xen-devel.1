@@ -4,45 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D065AEB48F1
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 09:54:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1228593.1534735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B39EB48F2
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 10:00:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1228608.1534745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqTP9-0008Ke-Nc; Thu, 12 Feb 2026 09:54:35 +0000
+	id 1vqTV2-0001o2-E3; Thu, 12 Feb 2026 10:00:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1228593.1534735; Thu, 12 Feb 2026 09:54:35 +0000
+Received: by outflank-mailman (output) from mailman id 1228608.1534745; Thu, 12 Feb 2026 10:00:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqTP9-0008KX-Kw; Thu, 12 Feb 2026 09:54:35 +0000
-Received: by outflank-mailman (input) for mailman id 1228593;
- Thu, 12 Feb 2026 09:54:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqTV2-0001nv-BF; Thu, 12 Feb 2026 10:00:40 +0000
+Received: by outflank-mailman (input) for mailman id 1228608;
+ Thu, 12 Feb 2026 10:00:39 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lKKS=AQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vqTP7-0008KQ-UE
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 09:54:33 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3fbcfd0-07f8-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 10:54:31 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id ED0A43E715;
- Thu, 12 Feb 2026 09:54:30 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C0AC13EA62;
- Thu, 12 Feb 2026 09:54:30 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id /jLiLVajjWmdfwAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 12 Feb 2026 09:54:30 +0000
+ (envelope-from <julien@xen.org>) id 1vqTV1-0001np-Gj
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 10:00:39 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1vqTV0-00582X-0d;
+ Thu, 12 Feb 2026 10:00:38 +0000
+Received: from [2a02:8012:3a1:0:d806:4714:c0a1:503]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1vqTUz-004Zzw-1p;
+ Thu, 12 Feb 2026 10:00:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,163 +41,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3fbcfd0-07f8-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1770890071; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=LxtsReFboMwCCMbjgL/hhFV3riAXKanj5BA7Uy+zhpg=;
-	b=OOr0cC+XJGEuuIfgEy5BMDZ6STxBtSoworJyUPlmRlmjRGcPRxrFzGdIDG0I+trzSJbwbJ
-	DofxZZLrmZDgdJVX7jruqpymOB7eS1q30vFOdgJ+EH9AwIanOKTHgITa50TlQh7lU4nCL4
-	rNOPD42yLkPRNi/27DwYSJpV0Wb4M5M=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=gvaVZe6t
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1770890070; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=LxtsReFboMwCCMbjgL/hhFV3riAXKanj5BA7Uy+zhpg=;
-	b=gvaVZe6tODZ2wr19weMpOjL3cUzDZPhSg+4Dw2HqKQ72yLXSTYScpmH9VGYqon8TMff13q
-	u8rZ7qv+wBf4R36Y66bARP9gQLY6pNWWCj7KvUxe3llJ8ui67yVaJUrGgvy3JEDf/+DTnJ
-	AxN0ja5a8HsbSnRT4jr5rcGqF2jtYd8=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH] tools/xenstored: fix live update
-Date: Thu, 12 Feb 2026 10:54:27 +0100
-Message-ID: <20260212095427.143177-1-jgross@suse.com>
-X-Mailer: git-send-email 2.53.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=LAraM9FbaqgpzVLu/F2xQuDHOm+Kipv9M4WRzVzuWL0=; b=jUVqgnCDl06dM6joor4HOpFwQ0
+	25guDIgnWY40UUtuiFMBIaUXfQvPkMSu7vyV+1VR2Ha1N/kTgpGNaSVWEM65jHCyoO5s3Yskmec/N
+	I9KHfjkp+txJk7tZf2HpHtS9OJuds5ITbHJ218reJHTghUf49z0UA/eaFw2Uwn/bYEsM=;
+Message-ID: <eacaca01-e43c-4ee0-8c7c-8225ff98f59a@xen.org>
+Date: Thu, 12 Feb 2026 10:00:34 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:mid,suse.com:dkim,suse.com:email];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns]
-X-Rspamd-Queue-Id: ED0A43E715
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sched: move vCPU exec state barriers
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>, Juergen Gross <jgross@suse.com>,
+ Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>
+References: <1e2df446-b116-4861-a396-b87895a96c67@suse.com>
+Content-Language: en-US
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <1e2df446-b116-4861-a396-b87895a96c67@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Commit e5b0a940557 ("tools/xenstored: Auto-introduce domains") broke
-xenstored live update, as init_domains() will be skipped when live
-update is detected to have happened. This will leave priv_domid and
-store_domid set as invalid.
+Hi Jan,
 
-Fix that by calling init_domains() in live update case, too. In case
-of live update skip introducing any found domains, as this will be done
-when reading the live update state.
+On 05/02/2026 11:33, Jan Beulich wrote:
+> The barrier in vcpu_context_saved() is specifically about the clearing of
+> ->is_running. It isn't needed when we don't clear the flag.
+> 
+> Furthermore, one side of the barrier being in common code, the other would
+> better be, too. This way, all architectures are covered (beyond any
+> specific needs they may have).
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Fixes: e5b0a940557 ("tools/xenstored: Auto-introduce domains")
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/xenstored/core.c   |  3 ++-
- tools/xenstored/domain.c | 20 +++++++++++++-------
- tools/xenstored/domain.h |  2 +-
- 3 files changed, 16 insertions(+), 9 deletions(-)
+Acked-by: Julien Grall <julien@xen.org>
 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index 64c478a801..d509736c32 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -2763,7 +2763,7 @@ int main(int argc, char *argv[])
- 	/* Listen to hypervisor. */
- 	if (!live_update) {
- 		domain_init(-1);
--		init_domains();
-+		init_domains(false);
- 	}
- 
- 	/* redirect to /dev/null now we're ready to accept connections */
-@@ -3109,6 +3109,7 @@ void read_state_global(const void *ctx, const void *state)
- 	set_socket_fd(glb->socket_fd);
- 
- 	domain_init(glb->evtchn_fd);
-+	init_domains(true);
- }
- 
- static void add_buffered_data(struct buffered_data *bdata,
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 10ac1c1a8f..e453b3061f 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -1344,7 +1344,7 @@ static bool init_domain(unsigned int domid)
- 
- 	return true;
- }
--void init_domains(void)
-+void init_domains(bool live_update)
- {
- 	unsigned int *domids = NULL;
- 	unsigned int nr_domids = 0;
-@@ -1356,12 +1356,15 @@ void init_domains(void)
- 
- 	while (!xenmanage_poll_changed_domain(xm_handle, &domid, &state, &caps,
- 					      &unique_id)) {
--		nr_domids++;
--		domids = talloc_realloc(NULL, domids, unsigned int, nr_domids);
--		if (!domids)
--			barf_perror("Failed to reallocate domids");
--
--		domids[nr_domids - 1] = domid;
-+		if (!live_update) {
-+			nr_domids++;
-+			domids = talloc_realloc(NULL, domids,
-+						unsigned int, nr_domids);
-+			if (!domids)
-+				barf_perror("Failed to reallocate domids");
-+
-+			domids[nr_domids - 1] = domid;
-+		}
- 
- 		if (caps & XENMANAGE_GETDOMSTATE_CAP_CONTROL) {
- 			/*
-@@ -1397,6 +1400,9 @@ void init_domains(void)
- 	snprintf(store_domain_path, sizeof(store_domain_path),
- 		 "/local/domain/%u", store_domid);
- 
-+	if (live_update)
-+		return;
-+
- 	/*
- 	 * Privileged domid must be first to setup structures for firing the
- 	 * special watches.
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index 3b1fce74cf..28186ccac0 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -92,7 +92,7 @@ int do_set_feature(const void *ctx, struct connection *conn,
- 
- void domain_early_init(void);
- void domain_init(int evtfd);
--void init_domains(void);
-+void init_domains(bool live_update);
- void stubdom_init(bool live_update);
- void domain_deinit(void);
- void ignore_connection(struct connection *conn, unsigned int err);
+Cheers,
+
 -- 
-2.53.0
+Julien Grall
 
 
