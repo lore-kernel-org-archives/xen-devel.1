@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27A15EE3695
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:21:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1229473.1535422 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07090EE3698
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:21:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1229475.1535433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRQ-0006GG-TA; Thu, 12 Feb 2026 16:21:20 +0000
+	id 1vqZRR-0006MV-EP; Thu, 12 Feb 2026 16:21:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1229473.1535422; Thu, 12 Feb 2026 16:21:20 +0000
+Received: by outflank-mailman (output) from mailman id 1229475.1535433; Thu, 12 Feb 2026 16:21:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRQ-0006G8-OE; Thu, 12 Feb 2026 16:21:20 +0000
-Received: by outflank-mailman (input) for mailman id 1229473;
- Thu, 12 Feb 2026 16:21:18 +0000
+	id 1vqZRR-0006Ku-60; Thu, 12 Feb 2026 16:21:21 +0000
+Received: by outflank-mailman (input) for mailman id 1229475;
+ Thu, 12 Feb 2026 16:21:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XV9D=AQ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vqZRO-0006Fi-O2
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:21:18 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ id 1vqZRQ-0006Fi-Kf
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:21:20 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id db408425-082e-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 17:21:16 +0100 (CET)
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-4376acce52eso35131f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 08:21:16 -0800 (PST)
+ id dc8a1bbe-082e-11f1-9ccf-f158ae23cfc8;
+ Thu, 12 Feb 2026 17:21:18 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4834826e5a0so32425e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 08:21:18 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43783e5c635sm13938426f8f.37.2026.02.12.08.21.14
+ ffacd0b85a97d-43783e5c635sm13938426f8f.37.2026.02.12.08.21.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 08:21:15 -0800 (PST)
+ Thu, 12 Feb 2026 08:21:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db408425-082e-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: dc8a1bbe-082e-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770913276; x=1771518076; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=S+RDwcZ52Pc0XIKzkhWeYooteWh5Au4849rOoBLYTrs=;
-        b=RSugHp3Ra4Vd+t/5xMcevkKQbme2DFy3/CweYTAyoMJm15CpzT1QyTOS39fbR+scch
-         R1YyVMpBsW5zdfRy78zvyxb8ve3EZCegPJZxijCSkIsJn4syJdOfyhY1NtG61VqeXxRT
-         ttabVgr1Q/N3HRwbBL5ZrTTi2pkXDrkh6S9uS1ZRGvPDLPJtUbwauK+Su8JlsRhUi8vz
-         AnzEFzgBaVolHiKN9UL+ZKNZVhIDaHdSk+pGJeLC3QRGMq8RmmaZ8+6oLmi2kLd/GrsW
-         zzC2XGU/WMOGz9xLAPK63s+zJtubSMw9//VYRcd2HGx4ZU/bwlhZ8U3NypcHh32aoE8D
-         u+Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770913276; x=1771518076;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1770913278; x=1771518078; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=S+RDwcZ52Pc0XIKzkhWeYooteWh5Au4849rOoBLYTrs=;
-        b=ZSsPtdlQlrS34Ca0ogShYBPg62pywoFCxl2YzxFhKcrpkK2UF7/kFxuHqLIRi0sSLD
-         MR3z1dtGrlg+4Qh69PYNuNtY4UV8DdsixuSxua3GW1cSqQYFHihgbSyFZ0IW1/S96YN0
-         MQfmbpmzLzLZvlAYTtRTHGeGhRZCDTJgR2pqLZ5Qvs3zQ5mZ2wPlOiQrswvCiax73JQU
-         JZlQfZ01lpzossvmAyG85zK1TmyfI7flNH5L1QgSi1p+VxEtvxLrh1n6yKfHspn/FozT
-         bJ7jM8C/Ih1teh1NqhDnou5TNIrvnNhUBsIb4t6n4Lk255Zh0lNGndjbjmsswNRXoXoV
-         9gQQ==
-X-Gm-Message-State: AOJu0Yx262THOM0W1EGHYdXJN9D8eacvJk/GVXiG85OQBvaIA4/6D76V
-	C73AOExEyAjTfsNCyA46W9LcnuZ4fiS9AoB1vRsxAyZxVAAW16Y37uywYmW0qVdk
-X-Gm-Gg: AZuq6aIS52vL0GunvUByEUzEO6TFxVlKIkVSgQxjhzqEVe8s6HIO3J5etLtdURIdKcx
-	Xfk0+JLJWR7w5kdy/mQb36nZaXIWPNDxvrK3ifx+tUV1yxZDKbqwBdIwsHVBnssAKmQc4Uksjya
-	pbi7Wgdh3KrI+tFpoA2ws6MkWc43QRXo7MeiBeS/jFPF5eBRg5EhdjX4sNhgy8oBGMhcrgxby6T
-	f3Rws7abhDte+uQ2wrAEk7siahwt/HXSk3D7oANwztAmPoRHL01wVN2hI2Gk7ylcWltjAOThwOQ
-	JvutAWjXEHG+V3AWzXxcAVecffnNhvqZTiJk7fOrCPJbyg6A2N+l9BAqS58U4SYS1MpGkhGeHrn
-	kpr3K6kIWKFbMlAE6BJS6yyOPtTgvS4DDlftfCIFT6EWVVwmfaV7PXcS9L6gaiHlousmu7GLIya
-	L/XgsUfXMPB5Wh242Y1DGKvnDtbDGfe9OIdO/xMfdBtYpUOkCiogGw/vwK1laf8akKJg==
-X-Received: by 2002:a05:6000:220d:b0:430:fd84:3175 with SMTP id ffacd0b85a97d-4378f165d49mr5348442f8f.38.1770913275672;
-        Thu, 12 Feb 2026 08:21:15 -0800 (PST)
+        bh=PELzgBrkYoFU28QGxSaV7T34+uk+b3op31q7VDuVJfM=;
+        b=N4TqEt1QE/B8pYIP+hQ+7eFD2X+6KEctSsdPp4P8HWs9uKANviylSh3QnWZDkBUFfm
+         afd2WRuCFtrCcqsvvB2n6tE7PbKWuTjxWnk6EnfKWQIMlY/5OpAUIAnU+FydfGCZWGII
+         hmN3fHWqWey4cvex2Wubsea/fog+ol6bNGaIk/PfgEYfhbiFrbONdMOZ1D4PJ8ICv14Y
+         lOyK1a8ifrEZu3ZDqwmlDZAgP5a9ewIptJSKBaroFAvji2j4Kv5YdwPcHpePJxYRXlWT
+         wUtK7r3JQfHw/30+9WdeT7E9adgXS+UZrAoa6GtaAWs6M6/5aHM7E9XIOQe2klKfe8/d
+         PSnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770913278; x=1771518078;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=PELzgBrkYoFU28QGxSaV7T34+uk+b3op31q7VDuVJfM=;
+        b=CIGbO3TRJmSlurtGHefyM8a5rdM2TGgbN3taVDDm/LQjfq59k/fDJmVzljtikWfXRu
+         8CuChyWVZudA+MJ7ETjWKndhnHkIHWtGxEoF2p+AJrShLrm/uF2Z2uzNHe6nH87Hp2xV
+         0oJo14A4t6WreIIFBghGa9W1SclSeDeLD0MWetY/eHQ0KLlditiskUzAItOeB7eIv0lL
+         HK2V9cPYl5awAWcjSpMa02NMTbMrt4wTQJm7H1NEGqGz//Y+NNiA3CJftj7zG3I16GyD
+         GV1f93GvMLB+bZl7V+8w65Zv7Z0ED0TDhzwAWXE7cSIvZfDuT29q2gnSGsiqmYuzRvx0
+         IUVQ==
+X-Gm-Message-State: AOJu0Yya6P0ZF14serfLv2+UOZlz56avLDldAV4mKd7ipseQynNmo6qt
+	k2LJrj6G/0tQsYvcb5pHZLhAfeoykiXw130GjZ7wr6FrWkVsFlsqovODcH/oOfqZ
+X-Gm-Gg: AZuq6aJ7ueKKyTx+ng3EdeawZgbtqANs6uC3sw0z9+QMNe+q3Hlacau/GKpwjPEbrBz
+	1kgKHtThonjWnftSNy2gVsh/ISvJgpAmIX0PMyoskjj7/QgJYNtTki/E2Dn251nNcAfJ+gZN8tb
+	mGjk69m2KTLw/dXWeu/qTgtvtaSuBgmcPEhPRRl1k+xQE901loBl+ZflMcVTQsZLLbfJUoGA0X0
+	8I+BzskUO40f4QbFzYQ59RDUn55cGLFpjqqljSCLuBygAiUJOKVio6uxJhX2059c8J81t5JW9Vu
+	GIXC/+ZtPMTOd+sSZGQyCPzHY/kNDeDmA9X3kgfLN/iBCLYiDNqiV2lwxAnB990OHIxeRUbZt0d
+	8Qq3aq0ntPduqNc3jMmPBZbIlGXdnucIBAjmGbi9xQvlC5gdDct2s7dJEHnJ6YurM9+e+0xkJtc
+	g5cOyPrKkeWBQ93K8+c+94NGtRq+umuMJRYjY7gTqE3qG1boYD5plPCG1fAWE057bDtA==
+X-Received: by 2002:a05:600c:6285:b0:482:eec4:76d with SMTP id 5b1f17b1804b1-4836715979emr46166525e9.17.1770913277874;
+        Thu, 12 Feb 2026 08:21:17 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -94,52 +95,191 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 0/6] RISCV: enable DOMAIN_BUILD_HELPERS
-Date: Thu, 12 Feb 2026 17:21:01 +0100
-Message-ID: <cover.1770821989.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 2/6] xen/riscv: implement copy_to_guest_phys()
+Date: Thu, 12 Feb 2026 17:21:03 +0100
+Message-ID: <cb50d76c627cb666317b23ae136ca43bfbfd04c5.1770821989.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1770821989.git.oleksii.kurochko@gmail.com>
+References: <cover.1770821989.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce necessary things to enable DOMAIN_BUILD_HELPERS config for RISC-V.
+Introduce copy_to_guest_phys() for RISC-V, based on the Arm implementation.
 
-Generally it is indepenent patch series from [1] and [2] but depends on which
-patches will go first it could be some merge conflicts.
+Add a generic copy_guest() helper for copying to and from guest physical
+(and potentially virtual addresses in the future), and implement
+translate_get_page() to translate a guest physical address into a struct
+page_info via the domain p2m.
 
-At the moment, patch series is rebased on top of [2]:
-  staging -> [1] -> [2] -> current patch series.
+Compared to the Arm code:
+- Drop COPY_flush_dcache(), as no such use cases exist on RISC-V.
+- Do not implement the linear mapping case, which is currently unused.
+- Use PAGE_OFFSET() to initialize the local offset variable in copy_guest().
 
-[1] https://lore.kernel.org/xen-devel/cover.1770650552.git.oleksii.kurochko@gmail.com/T/#t
-[2] https://lore.kernel.org/xen-devel/cover.1770739000.git.oleksii.kurochko@gmail.com/T/#t
-
-Oleksii Kurochko (6):
-  xen/riscv: implement get_page_from_gfn()
-  xen/riscv: implement copy_to_guest_phys()
-  xen/riscv: add zImage kernel loading support
-  xen: move declaration of fw_unreserved_regions() to common header
-  xen: move domain_use_host_layout() to common header
-  xen/riscv: enable DOMAIN_BUILD_HELPERS
-
- xen/arch/arm/include/asm/domain.h         |  14 --
- xen/arch/arm/include/asm/setup.h          |   3 -
- xen/arch/riscv/Kconfig                    |   1 +
- xen/arch/riscv/Makefile                   |   2 +
- xen/arch/riscv/guestcopy.c                | 112 ++++++++++++++++
- xen/arch/riscv/include/asm/config.h       |  13 ++
- xen/arch/riscv/include/asm/guest_access.h |   7 +
- xen/arch/riscv/include/asm/p2m.h          |  11 +-
- xen/arch/riscv/kernel.c                   | 156 ++++++++++++++++++++++
- xen/arch/riscv/p2m.c                      |  34 +++++
- xen/include/public/arch-riscv.h           |   8 ++
- xen/include/xen/bootinfo.h                |   4 +
- xen/include/xen/domain.h                  |  16 +++
- 13 files changed, 358 insertions(+), 23 deletions(-)
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/Makefile                   |   1 +
+ xen/arch/riscv/guestcopy.c                | 112 ++++++++++++++++++++++
+ xen/arch/riscv/include/asm/guest_access.h |   7 ++
+ 3 files changed, 120 insertions(+)
  create mode 100644 xen/arch/riscv/guestcopy.c
- create mode 100644 xen/arch/riscv/kernel.c
 
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 7439d029cc45..90210799e038 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -3,6 +3,7 @@ obj-y += cpufeature.o
+ obj-y += domain.o
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-y += entry.o
++obj-y += guestcopy.o
+ obj-y += imsic.o
+ obj-y += intc.o
+ obj-y += irq.o
+diff --git a/xen/arch/riscv/guestcopy.c b/xen/arch/riscv/guestcopy.c
+new file mode 100644
+index 000000000000..19b681c30b1b
+--- /dev/null
++++ b/xen/arch/riscv/guestcopy.c
+@@ -0,0 +1,112 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/domain_page.h>
++#include <xen/page-size.h>
++#include <xen/sched.h>
++#include <xen/string.h>
++
++#include <asm/guest_access.h>
++
++#define COPY_from_guest     (0U << 0)
++#define COPY_to_guest       (1U << 0)
++#define COPY_ipa            (0U << 1)
++#define COPY_linear         (1U << 1)
++
++typedef union
++{
++    struct
++    {
++        struct vcpu *v;
++    } gva;
++
++    struct
++    {
++        struct domain *d;
++    } gpa;
++} copy_info_t;
++
++#define GVA_INFO(vcpu) ((copy_info_t) { .gva = { vcpu } })
++#define GPA_INFO(domain) ((copy_info_t) { .gpa = { domain } })
++
++static struct page_info *translate_get_page(copy_info_t info, uint64_t addr,
++                                            bool linear, bool write)
++{
++    p2m_type_t p2mt;
++    struct page_info *page;
++
++    if ( linear )
++        BUG_ON("unimplemeted\n");
++
++    page = get_page_from_gfn(info.gpa.d, paddr_to_pfn(addr), &p2mt, P2M_ALLOC);
++
++    if ( !page )
++        return NULL;
++
++    if ( !p2m_is_ram(p2mt) )
++    {
++        put_page(page);
++        return NULL;
++    }
++
++    return page;
++}
++
++static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
++                                copy_info_t info, unsigned int flags)
++{
++    unsigned int offset = PAGE_OFFSET(addr);
++
++    BUILD_BUG_ON((sizeof(addr)) < sizeof(vaddr_t));
++    BUILD_BUG_ON((sizeof(addr)) < sizeof(paddr_t));
++
++    while ( len )
++    {
++        void *p;
++        unsigned int size = min(len, (unsigned int)PAGE_SIZE - offset);
++        struct page_info *page;
++
++        page = translate_get_page(info, addr, flags & COPY_linear,
++                                  flags & COPY_to_guest);
++        if ( page == NULL )
++            return len;
++
++        p = __map_domain_page(page);
++        p += offset;
++        if ( flags & COPY_to_guest )
++        {
++            /*
++             * buf will be NULL when the caller request to zero the
++             * guest memory.
++             */
++            if ( buf )
++                memcpy(p, buf, size);
++            else
++                memset(p, 0, size);
++        }
++        else
++            memcpy(buf, p, size);
++
++        unmap_domain_page(p - offset);
++        put_page(page);
++        len -= size;
++        buf += size;
++        addr += size;
++
++        /*
++         * After the first iteration, guest virtual address is correctly
++         * aligned to PAGE_SIZE.
++         */
++        offset = 0;
++    }
++
++    return 0;
++}
++
++unsigned long copy_to_guest_phys(struct domain *d,
++                                 paddr_t gpa,
++                                 void *buf,
++                                 unsigned int len)
++{
++    return copy_guest(buf, gpa, len, GPA_INFO(d),
++                      COPY_to_guest | COPY_ipa);
++}
+diff --git a/xen/arch/riscv/include/asm/guest_access.h b/xen/arch/riscv/include/asm/guest_access.h
+index 7cd51fbbdead..024e29b4c9f9 100644
+--- a/xen/arch/riscv/include/asm/guest_access.h
++++ b/xen/arch/riscv/include/asm/guest_access.h
+@@ -2,6 +2,10 @@
+ #ifndef ASM__RISCV__GUEST_ACCESS_H
+ #define ASM__RISCV__GUEST_ACCESS_H
+ 
++#include <xen/types.h>
++
++struct domain;
++
+ unsigned long raw_copy_to_guest(void *to, const void *from, unsigned len);
+ unsigned long raw_copy_from_guest(void *to, const void *from, unsigned len);
+ unsigned long raw_clear_guest(void *to, unsigned int len);
+@@ -18,6 +22,9 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
+ #define guest_handle_okay(hnd, nr) (1)
+ #define guest_handle_subrange_okay(hnd, first, last) (1)
+ 
++unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
++                                 unsigned int len);
++
+ #endif /* ASM__RISCV__GUEST_ACCESS_H */
+ /*
+  * Local variables:
 -- 
 2.52.0
 
