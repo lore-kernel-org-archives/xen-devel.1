@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9119BEE3695
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:21:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1229474.1535427 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA40EE369E
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:21:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1229476.1535450 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRR-0006ID-4V; Thu, 12 Feb 2026 16:21:21 +0000
+	id 1vqZRS-0006rv-In; Thu, 12 Feb 2026 16:21:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1229474.1535427; Thu, 12 Feb 2026 16:21:21 +0000
+Received: by outflank-mailman (output) from mailman id 1229476.1535450; Thu, 12 Feb 2026 16:21:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRQ-0006Gx-Vf; Thu, 12 Feb 2026 16:21:20 +0000
-Received: by outflank-mailman (input) for mailman id 1229474;
- Thu, 12 Feb 2026 16:21:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqZRS-0006pv-FD; Thu, 12 Feb 2026 16:21:22 +0000
+Received: by outflank-mailman (input) for mailman id 1229476;
+ Thu, 12 Feb 2026 16:21:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XV9D=AQ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vqZRP-0006Fi-Dy
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:21:19 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dbe61651-082e-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 17:21:17 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-4359108fd24so27355f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 08:21:17 -0800 (PST)
+ id 1vqZRQ-0005jV-PO
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:21:20 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dd4090f0-082e-11f1-b162-2bf370ae4941;
+ Thu, 12 Feb 2026 17:21:20 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-483337aa225so23765e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 08:21:20 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43783e5c635sm13938426f8f.37.2026.02.12.08.21.15
+ ffacd0b85a97d-43783e5c635sm13938426f8f.37.2026.02.12.08.21.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 08:21:16 -0800 (PST)
+ Thu, 12 Feb 2026 08:21:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbe61651-082e-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: dd4090f0-082e-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770913277; x=1771518077; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1770913279; x=1771518079; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=756p0sgqElUf/O7m5v8k7wVt+/PfhKAVifuQ4bDjN4Q=;
-        b=kyw34+E7slAVZfUbtJhcKV+vlYckGky3hgXGk2+r+fa15vnfFxxoUl6VdeUNGqrii7
-         XVmVl/nWvrjEkObDUjimkpaawuEBtrMSyEVuln09OGMH8ENlBMsny/DRIr4UOejFmC8U
-         +Mnn6GAppPExM4RAZXZbE3/6kiGvPGIQ9DaeJcuzslRarpvqFUY25MeCd1qPc6s9dmva
-         L6nGXctZqNZxTLyxfqfU+/3GL8VTcaTIjbnyJgeIB8QNz+292PfW2rWeqwHceY/zj9Iq
-         OYsMORPKiD4+vTBqjf+qWkEJE17D+tpj62AB2FE/M+1COnIIY9T4dKsOICDOefyHmu7J
-         +bOg==
+        bh=uZVTmyjQ+cfxWV4H5phu2iSv8MlikEWciPmm+cING7w=;
+        b=mGB4J1ukpJXKn/SE8tfC/OH2RlYPGzz3CgXzDysajvgU7PFByVsBppUYMmvbydeHRE
+         QUtU0tRlSLqo3r8mdmeA+o2qmfHChj06KZLy5mgP8cFTEs8J77PiWb8H5iipFC/5HyG6
+         OfZp4nGbd6nRRaWTH9wie7cBaBhzIrXrhjEIbaEftHmWZYIBo+wJSLOaOC8gnNXZsbQU
+         5afFTUqyGPSgGYJ0Oj5FxP0ky9v3xbEiadf4ygbi64fBoSaUOhZ3V16P9JwMo872wy9P
+         IUKLM6sO59JuQ73BUYVMIucP0bXgYnGUSQZHqvboYWoPLOOSIaGfiebUnaYh21AzfYL7
+         CFIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770913277; x=1771518077;
+        d=1e100.net; s=20230601; t=1770913279; x=1771518079;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=756p0sgqElUf/O7m5v8k7wVt+/PfhKAVifuQ4bDjN4Q=;
-        b=cJPcuKFBnEqtZnKLmr8R2v2G8d/4AG6De4twy7uL29w3Clg9Xefl/ZWMSULJ6IyVZc
-         VXEDSQoiEZ4dSN5Ot6WVVwRCofwSNTnY92R4DVgLdmApSyEkCBXLAv4zhz7bghpXeFY3
-         6J0bnvGrkkV63M2FO7HblZqMmvqU4YCJF5Mq8fWA7OUa7xjKbANn6Xdzm4MZ3UjWxwtW
-         zF/rsVmJDGELOjW445w4aH6/R1yDrx4pU0HYC/m7NEMMc/oSM7fcURq+j8B4n13J/JB8
-         TixyqUzqsgmTrs6a1Y6jJB5TH/P/kXvrJT8WFYp1cKRFQr0A/frZadPvehT/vd96uR0Q
-         AwMQ==
-X-Gm-Message-State: AOJu0YyWUsIZTcroBztzcIrbuXABGp8+gWMZwWt9ISd9W6U1C2uCvnj+
-	oeb5V1kQtQAnsogVx5OmHkd07TcW4aa1YtnagkZe/wOZT+mFwh64P9E9P6nACDWW
-X-Gm-Gg: AZuq6aKMkIlVn1fLdHrq9ZLmUXZC2u1lCktekrkchfrXd0ddE+s3YHE6KSIZDIBoq14
-	g8KavzYmEuGGGk3uLpg9vg0wblmsLLkel3E/JcW0UUMSxXLy4N9jmZhhFeJw2f4CF93c8BHnUyV
-	a4ZHV6nNtY7fIGB9pG3aYJfgXxPSJnF3Li5cHgJrl2CHVzaDMKzbpAyS7SF3L/RumAb2V0VzqdM
-	tHwIZSWZFoOJl78HQJNFTZX0sRicyuAVxiUzMfDwx5aMz7zMW4Z5rkqGJccocjgiAudJQFzF42p
-	uXFdmb4AGhGAPDHhbBP471lsFAK/3HbvIPVBC2FgKrk9aerYlWM9bs4HxfM0OYg0/RSS/w39Ndi
-	oqFyIhTBs+lb8bx06QZKg6a6FYV1f+f2L5WpbRuulsQS+RZlhDtjFrMcNnSbRxbJdw+aMScgFgI
-	zgPuA/mKhVWpBoB3lt5lSEWvaS+i5d9krfpMm6d5bKYvM7CsOTDppUofhqYsO1xvYnAiBHfTWrH
-	J6hKE3b
-X-Received: by 2002:a5d:5f55:0:b0:437:712a:fac9 with SMTP id ffacd0b85a97d-4378aa04146mr6020186f8f.23.1770913276791;
-        Thu, 12 Feb 2026 08:21:16 -0800 (PST)
+        bh=uZVTmyjQ+cfxWV4H5phu2iSv8MlikEWciPmm+cING7w=;
+        b=jawL4XaYggIpdgV4D6NGdVQU4H+lcjkbXA7zrfQUNfp5tpyAZnM2VFrExc3e3QeQx1
+         UJto1/42m6odPQo+2L8NGfopL3QgvBRCYLlC0ijiwGj7QFza/OmNHmgX/1fr5wVm8gVU
+         IfKFgg3AD9MxpZIypsrB+pC5HK2Wy7Z+4qYM3D1y+ZixaEgoh+D4bBKFC/f3/zC/pMQ8
+         VwF1VW60oX1W3kQrdezu69F+Xr71tfOkRzZZc/7wt8Lyuz+2KTVcjTgWVk7jEI4jvJy1
+         g//lwuMEQVKVjPAxosJVBpZee7Bk3CbNwv+RcCJeDTPL3UsDsWtJvCipNwEA3sav1/X9
+         7ciA==
+X-Gm-Message-State: AOJu0YwsrVtfL+OTIzeXfoJjayExBR8pvLF3SWL1ZUhP4CEOwN6IVX5Q
+	iSCSkrxxtKzlzFkxhxvTIMjRdKvb+CUqkbWqa9VNoVuOFLqS0KUsvWZqDRlNpQar
+X-Gm-Gg: AZuq6aILfi1pU5GfgQPqhYe7ivUxDdKMewDnW3rT4PzKBbjbcPtmCZyDvAFbpPZ2UxJ
+	d6tQAlxfmWbiLsHh7YQyVEZyAZyNlulLm2lThOHUqhCxq91Qx5kbGBwOkDbRgQnuZqSuEXLh9Y6
+	cpwDw5f4Zmfg0+Muxn1Dizwv5N7pHG0wguvvJcpSyPBWuT/0awzuS0ZfJy+z25rUIpuAOwg9jiP
+	aA7kCQAisI9WY/i4bb2FzUJCMscGDN19K+tGK1kBuIoTbQdkZrsH3n/INdoE1feFjHKFAcCiCGS
+	D4mPquzmSd6P2D5dQarOyEB2xqideO69elpXAPIgOahDMcyhgKvWp7j6u7EErbk9P2Ss3op5HIt
+	892zxT6iil8BnwnKGdOl0JXkPAW5loKdwKBhVB3BCJN99c5yfBasVjjKGxfKiiHLD542mDO6U4N
+	qa3ESSk7FTzp2sc9hCIys/eanR0mOYnnk0fAjVWPuMKUW/WvGH1In0t0EebFH7oGNwVA==
+X-Received: by 2002:a05:600c:83c8:b0:46e:4a13:e6c6 with SMTP id 5b1f17b1804b1-4836570ec0cmr40317005e9.19.1770913278999;
+        Thu, 12 Feb 2026 08:21:18 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -97,124 +96,231 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/6] xen/riscv: implement get_page_from_gfn()
-Date: Thu, 12 Feb 2026 17:21:02 +0100
-Message-ID: <04eee3ae5e8aadf8c7f0b873ba24ce38220e8fa2.1770821989.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 3/6] xen/riscv: add zImage kernel loading support
+Date: Thu, 12 Feb 2026 17:21:04 +0100
+Message-ID: <308c5bc1de15b23c643d48f975799739f44dde8d.1770821989.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770821989.git.oleksii.kurochko@gmail.com>
 References: <cover.1770821989.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide a RISC-V implementation of get_page_from_gfn(), matching the
-semantics used by other architectures.
+Introduce support for loading a Linux zImage kernel on RISC-V.
 
-For translated guests, this is implemented as a wrapper around
-p2m_get_page_from_gfn(). For DOMID_XEN, which is not auto-translated,
-provide a 1:1 RAM/MMIO mapping and perform the required validation and
-reference counting.
+Note that if panic() is used instead of returning an error as common code
+doesn't expect to have return code and it is something that should be
+done separately.
 
-The function is implemented out-of-line rather than as a static inline,
-to avoid header ordering issues where struct domain is incomplete when
-asm/p2m.h is included, leading to build failures:
-  In file included from ./arch/riscv/include/asm/domain.h:10,
-                   from ./include/xen/domain.h:16,
-                   from ./include/xen/sched.h:11,
-                   from ./include/xen/event.h:12,
-                   from common/cpu.c:3:
-  ./arch/riscv/include/asm/p2m.h: In function 'get_page_from_gfn':
-  ./arch/riscv/include/asm/p2m.h:50:33: error: invalid use of undefined type 'struct domain'
-     50 | #define p2m_get_hostp2m(d) (&(d)->arch.p2m)
-        |                                 ^~
-  ./arch/riscv/include/asm/p2m.h:180:38: note: in expansion of macro 'p2m_get_hostp2m'
-    180 |         return p2m_get_page_from_gfn(p2m_get_hostp2m(d), _gfn(gfn), t);
-        |                                      ^~~~~~~~~~~~~~~
-  make[2]: *** [Rules.mk:253: common/cpu.o] Error 1
-  make[1]: *** [build.mk:72: common] Error 2
-  make: *** [Makefile:623: xen] Error 2
+This prepares the RISC-V port for booting Linux guests using the common
+domain build infrastructure.
+
+The code is based on Xen Arm code.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Does it make sense to make this function almost fully generic?
+ xen/arch/riscv/Makefile             |   1 +
+ xen/arch/riscv/include/asm/config.h |  13 +++
+ xen/arch/riscv/kernel.c             | 156 ++++++++++++++++++++++++++++
+ 3 files changed, 170 insertions(+)
+ create mode 100644 xen/arch/riscv/kernel.c
 
-It looks like most of the logic here is architecture-independent and identical
-across architectures, except for the following points:
-
-1. ```
-   if ( likely(d != dom_xen) )
-   ```
-
-   This could be made generic by introducing paging_mode_translate() for ARM
-   and defining it as `(d != dom_xen)` there.
-
-2. ```
-   if ( t )
-       *t = likely(d != dom_io) ? p2m_ram_rw : p2m_mmio_direct_io;
-   ```
-
-   Here, only `p2m_mmio_direct_io` appears to be architecture-specific. This
-   could be abstracted via a helper such as `dom_io_p2m_type()` and used here
-   instead.
----
----
- xen/arch/riscv/include/asm/p2m.h |  8 ++------
- xen/arch/riscv/p2m.c             | 28 ++++++++++++++++++++++++++++
- 2 files changed, 30 insertions(+), 6 deletions(-)
-
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index 0cdd3dc44683..c68494593fd9 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -171,12 +171,8 @@ typedef unsigned int p2m_query_t;
- #define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
- #define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 90210799e038..2e15f894fdd4 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -7,6 +7,7 @@ obj-y += guestcopy.o
+ obj-y += imsic.o
+ obj-y += intc.o
+ obj-y += irq.o
++obj-y += kernel.o
+ obj-y += mm.o
+ obj-y += p2m.o
+ obj-y += paging.o
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 86a95df018b5..d24b54d656b8 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -152,6 +152,19 @@
+ extern unsigned long phys_offset; /* = load_start - XEN_VIRT_START */
+ #endif
  
--static inline struct page_info *get_page_from_gfn(
--    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
--{
--    BUG_ON("unimplemented");
--    return NULL;
--}
-+struct page_info *get_page_from_gfn(struct domain *d, unsigned long gfn,
-+                                    p2m_type_t *t, p2m_query_t q);
- 
- static inline void memory_type_changed(struct domain *d)
- {
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 275c38020ae2..f5b03e1e3264 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -1557,3 +1557,31 @@ void p2m_handle_vmenter(void)
-         flush_tlb_guest_local();
-     }
- }
++/*
++ * KERNEL_LOAD_ADDR_ALIGNMENT is defined based on paragraph of
++ * "Kernel location" of boot.rst:
++ * https://docs.kernel.org/arch/riscv/boot.html#kernel-location
++ */
++#if defined(CONFIG_RISCV_32)
++#define KERNEL_LOAD_ADDR_ALIGNMENT MB(4)
++#elif defined(CONFIG_RISCV_64)
++#define KERNEL_LOAD_ADDR_ALIGNMENT MB(2)
++#else
++#error "Define KERNEL_LOAD_ADDR_ALIGNMENT"
++#endif
 +
-+struct page_info *get_page_from_gfn(struct domain *d, unsigned long gfn,
-+                                    p2m_type_t *t, p2m_query_t q)
+ #endif /* ASM__RISCV__CONFIG_H */
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/kernel.c b/xen/arch/riscv/kernel.c
+new file mode 100644
+index 000000000000..f91e9ada8a9c
+--- /dev/null
++++ b/xen/arch/riscv/kernel.c
+@@ -0,0 +1,156 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include <xen/bug.h>
++#include <xen/compiler.h>
++#include <xen/errno.h>
++#include <xen/fdt-kernel.h>
++#include <xen/guest_access.h>
++#include <xen/init.h>
++#include <xen/libfdt/libfdt.h>
++#include <xen/mm.h>
++#include <xen/types.h>
++#include <xen/vmap.h>
++
++#include <asm/setup.h>
++
++#define ZIMAGE64_MAGIC_V2 0x05435352 /* Magic number 2, le, "RSC\x05" */
++
++static void __init place_modules(struct kernel_info *info, paddr_t kernbase,
++                                 paddr_t kernend)
 +{
-+    struct page_info *page;
++    const struct boot_module *mod = info->bd.initrd;
++
++    const paddr_t initrd_len = ROUNDUP(mod ? mod->size : 0, MB(2));
++    const paddr_t dtb_len = ROUNDUP(fdt_totalsize(info->fdt), MB(2));
++    const paddr_t modsize = initrd_len + dtb_len;
++
++    const paddr_t ramsize = info->mem.bank[0].size;
++    const paddr_t kernsize = ROUNDUP(kernend, MB(2)) - kernbase;
++
++    if ( modsize + kernsize > ramsize )
++        panic("Not enough memory in the first bank for the kernel+dtb+initrd\n");
++
++    info->dtb_paddr = ROUNDUP(kernend, MB(2));
++
++    info->initrd_paddr = info->dtb_paddr + dtb_len;
++}
++
++static paddr_t __init kernel_zimage_place(struct kernel_info *info)
++{
++    paddr_t load_addr;
 +
 +    /*
-+     * Special case for DOMID_XEN as it is the only domain so far that is
-+     * not auto-translated.
++     * At the moment, RISC-V's Linux kernel should be always position
++     * independent based on "Per-MMU execution" of boot.rst:
++     *   https://docs.kernel.org/arch/riscv/boot.html#pre-mmu-execution
++     *
++     * But just for the case when RISC-V's Linux kernel isn't position
++     * indepenet it is needed to take load address from
++     * info->zimage.start.
++     *
++     * If `start` is zero, the zImage is position independent. */
++    if ( likely(!info->zimage.start) )
++        /*
++         * According to boot.rst kernel load address should be properly
++         * aligned:
++         *   https://docs.kernel.org/arch/riscv/boot.html#kernel-location
++         */
++        load_addr = ROUNDUP(info->mem.bank[0].start, KERNEL_LOAD_ADDR_ALIGNMENT);
++    else
++        load_addr = info->zimage.start;
++
++    return load_addr;
++}
++
++static void __init kernel_zimage_load(struct kernel_info *info)
++{
++    int rc;
++    paddr_t load_addr = kernel_zimage_place(info);
++    paddr_t paddr = info->zimage.kernel_addr;
++    paddr_t len = info->zimage.len;
++    void *kernel;
++
++    info->entry = load_addr;
++
++    place_modules(info, load_addr, load_addr + len);
++
++    printk("Loading zImage from %"PRIpaddr" to %"PRIpaddr"-%"PRIpaddr"\n",
++            paddr, load_addr, load_addr + len);
++
++    kernel = ioremap_wc(paddr, len);
++
++    if ( !kernel )
++        panic("Unable to map kernel\n");
++
++    /* Move kernel to proper location in guest phys map */
++    rc = copy_to_guest_phys(info->bd.d, load_addr, kernel, len);
++
++    if ( rc )
++        panic("Unable to copy kernel to proper guest location\n");
++
++    iounmap(kernel);
++}
++
++/* Check if the image is a 64-bit Image */
++static int __init kernel_zimage64_probe(struct kernel_info *info,
++                                        paddr_t addr, paddr_t size)
++{
++    /* riscv/boot-image-header.rst */
++    struct {
++        u32 code0;		  /* Executable code */
++        u32 code1;		  /* Executable code */
++        u64 text_offset;  /* Image load offset, little endian */
++        u64 image_size;	  /* Effective Image size, little endian */
++        u64 flags;		  /* kernel flags, little endian */
++        u32 version;	  /* Version of this header */
++        u32 res1;		  /* Reserved */
++        u64 res2;		  /* Reserved */
++        u64 magic;        /* Deprecated: Magic number, little endian, "RISCV" */
++        u32 magic2;       /* Magic number 2, little endian, "RSC\x05" */
++        u32 res3;		  /* Reserved for PE COFF offset */
++    } zimage;
++    uint64_t start, end;
++
++    if ( size < sizeof(zimage) )
++        return -EINVAL;
++
++    copy_from_paddr(&zimage, addr, sizeof(zimage));
++
++    /* Magic v1 is deprecated and may be removed.  Only use v2 */
++    if ( zimage.magic2 != ZIMAGE64_MAGIC_V2 )
++        return -EINVAL;
++
++    /* Currently there is no length in the header, so just use the size */
++    start = 0;
++    end = size;
++
++    /*
++     * Given the above this check is a bit pointless, but leave it
++     * here in case someone adds a length field in the future.
 +     */
-+    if ( likely(d != dom_xen) )
-+        return p2m_get_page_from_gfn(p2m_get_hostp2m(d), _gfn(gfn), t);
++    if ( (end - start) > size )
++        return -EINVAL;
 +
-+    /* Non-translated guests see 1-1 RAM / MMIO mappings everywhere */
++    info->zimage.kernel_addr = addr;
++    info->zimage.len = end - start;
++    info->zimage.text_offset = zimage.text_offset;
++    info->zimage.start = 0;
 +
-+    if ( t )
-+        *t = p2m_invalid;
++    info->load = kernel_zimage_load;
 +
-+    page = mfn_to_page(_mfn(gfn));
++    return 0;
++}
 +
-+    if ( !mfn_valid(_mfn(gfn)) || !get_page(page, d) )
-+        return NULL;
++int __init kernel_zimage_probe(struct kernel_info *info, paddr_t addr,
++                               paddr_t size)
++{
++    int rc;
 +
-+    if ( t )
-+        *t = likely(d != dom_io) ? p2m_ram_rw : p2m_mmio_direct_io;
++#ifdef CONFIG_RISCV_64
++    rc = kernel_zimage64_probe(info, addr, size);
++    if (rc < 0)
++#endif
++        panic("only RISC-V 64 is supported\n");
 +
-+    return page;
++    return rc;
 +}
 -- 
 2.52.0
