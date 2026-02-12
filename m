@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3121CEE3695
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:21:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1229477.1535462 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84191EE3698
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 16:22:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1229520.1535492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRU-0007DA-8q; Thu, 12 Feb 2026 16:21:24 +0000
+	id 1vqZSk-0001LS-8v; Thu, 12 Feb 2026 16:22:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1229477.1535462; Thu, 12 Feb 2026 16:21:24 +0000
+Received: by outflank-mailman (output) from mailman id 1229520.1535492; Thu, 12 Feb 2026 16:22:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqZRU-0007D3-3K; Thu, 12 Feb 2026 16:21:24 +0000
-Received: by outflank-mailman (input) for mailman id 1229477;
- Thu, 12 Feb 2026 16:21:21 +0000
+	id 1vqZSk-0001LL-5E; Thu, 12 Feb 2026 16:22:42 +0000
+Received: by outflank-mailman (input) for mailman id 1229520;
+ Thu, 12 Feb 2026 16:22:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XV9D=AQ=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vqZRR-0005jV-QO
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:21:21 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
+ <SRS0=BHzL=AQ=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1vqZSi-0001Kw-Or
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 16:22:40 +0000
+Received: from fhigh-b4-smtp.messagingengine.com
+ (fhigh-b4-smtp.messagingengine.com [202.12.124.155])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dded50a9-082e-11f1-b162-2bf370ae4941;
- Thu, 12 Feb 2026 17:21:21 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-4376de3f128so41886f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 08:21:21 -0800 (PST)
-Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43783e5c635sm13938426f8f.37.2026.02.12.08.21.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 08:21:20 -0800 (PST)
+ id 0bf0cd58-082f-11f1-b162-2bf370ae4941;
+ Thu, 12 Feb 2026 17:22:39 +0100 (CET)
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id A688E7A0141;
+ Thu, 12 Feb 2026 11:22:37 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-02.internal (MEProxy); Thu, 12 Feb 2026 11:22:37 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 12 Feb 2026 11:22:36 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,101 +46,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dded50a9-082e-11f1-b162-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770913280; x=1771518080; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CRkNJBibaLYU3bMR9lUWo949I9MQDI6fqJ8QTLnRMOI=;
-        b=S9rG2hX1diD8RiAFb4TVsRd/ECXYFtnsrWHKlTPZOfkcz2QXMIx70WwlLFKz8PNw7a
-         Fs4+sYYT/qKvC3QPxDLYbTPNyNNjlulrmz+YLxP7iZ2V2jdsDlBH3ljWxEqDDq05+IZf
-         Jv9TLzM8cr5eFid15PzzifW03olMo0lMkLIljGEELXmiK6/Gj3GtyqZGMptQzIx5wz+f
-         iVQqI0K0CETuCPssekfDp7reblKtdrhummCrBOeZ7aFP6fc2V0uLJKRi1wcJkl954JX0
-         CxN52jWBDkdMGhX6IB+C7S/Nki7FmVlEVK1rtyee5mA3Rqgs8C14ydh0QaVDJ8+PT6A8
-         P6dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770913280; x=1771518080;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=CRkNJBibaLYU3bMR9lUWo949I9MQDI6fqJ8QTLnRMOI=;
-        b=THcZ9rXfS/RiFrAT0wqjxU8IY5s/YJDulKJYeya8xHI25zft0uaQzg1OIVOv7WqRj9
-         CoCdtcx2akhTUo3Ah2zpC7PzLs3C6vhFwh66wInmpdAvmKhltWarVsrt9yeWraPi1I/N
-         4kcmJZhoKT0YJ6+IQp52Yu2Ldg3dCIkotdbiXtncOTyE06O4BIOS8FN2LLtbzRNdU43t
-         Avfh/U1M853wzxR176syBK76PpPvTIoFBT2g+y/ydQzR6Wr3uCjQEwYiHHPR6Krm8RXh
-         idQBjFdmxEVihWWo6s4kt+ZUFnt8CGqBELlWp8JM1/N8zSckmiS9On8U8UHAEmsF/ZUH
-         ESPA==
-X-Gm-Message-State: AOJu0YzGYtNTYUuiCzJHsv/tdJ/osyczivxJdeJeQV/EQdM5Nj/JJJvG
-	Q+vh+XEagOSjzyWODnm29qurgxvRBLKhhrLG4p/BmD+V9qRSrDdblYobxdBKm3Qp
-X-Gm-Gg: AZuq6aJPOT2Dbdkr8t45E3gma04b+HJacSOtnc4uHQA4wEf0lISapcvUyCTPJmINY6L
-	+A4lMzgNZnr353GpOiz5yCM525m54vevBmVXJ+8sARehum5OYC9AwpTP3wKQc0Sw9ZHcxhxvnmr
-	bvz1bEWB3sKczZ0JH5MYuAnkJXN8Tm/QuIMMV7/s4xzPWj9TSGg3AoV9QjbaT4DCF+G/JX4HW9z
-	Am+0VVwHThBrK8kyn/33ADIU6FuzX/EWZNED5r5MiXkgnH9LFZVdO8uvAweA8gT/VZ+rfXTJ//o
-	4m74N4MggyIh5SE52mrB0NSILGb7iAI4IiI2VuPeLo3n4G3dSAA2+8bAqFdzbjrqgGd2HR41RbI
-	6ZOriJlJtNOYs2ysSd8HiQD4raHVjnCThyFP3h1oNhAd8CNZXw4VxuBmdrc3CuJ30jWduunuzx6
-	ThHxA9J/zNE7hgIoibjCZjkRKhm+fBsd06ZHMHdec+ItoDj7wsroXdynCKGSW++qA7WQ==
-X-Received: by 2002:a05:6000:1acb:b0:437:681e:cbc3 with SMTP id ffacd0b85a97d-4378ac92470mr6296018f8f.13.1770913280269;
-        Thu, 12 Feb 2026 08:21:20 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v1 4/6] xen: move declaration of fw_unreserved_regions() to common header
-Date: Thu, 12 Feb 2026 17:21:05 +0100
-Message-ID: <bbc6731f40adec155249ac32f8b87af72f9eef51.1770821989.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1770821989.git.oleksii.kurochko@gmail.com>
-References: <cover.1770821989.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 0bf0cd58-082f-11f1-b162-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1770913357;
+	 x=1770999757; bh=H9S1pcMvMufgeBBtWQu0pbw6BL9Wiszq/p8h/oHXstg=; b=
+	O1QSHMbFFcbUhIzmS4TfzwmG2mM2eKs2OCt61diAXvDglb+pCQrvywEKUxEo5pnD
+	J7ZSh/TwDBn9ixxSW1XyL1ZqQQuxucbtY6tCoy2E1A8HoPoWicba5Zekt8zO+zGG
+	GlDGYCVTOD9gltcrx218Y+paDw1kft16B8YXAMyQF89d9ZGi3ne1nzanPzGJlHG2
+	KQc1RT6ZAKVV/jrlHoXJuFTzylPfFZXjJEyU200Qz0BMiEriWvwNZ+0UjhzItBTi
+	jUBJh1y57z9FaY6lg4+QclY9sG7CtvTLOnNyC43QCK1GVYkvuLhW8uQUzbpCZVDl
+	RavbKXtIcR7XFcCPBHPzfQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+	1770913357; x=1770999757; bh=H9S1pcMvMufgeBBtWQu0pbw6BL9Wiszq/p8
+	h/oHXstg=; b=Y8YHu7SDI1SHVhK2t8WVwKVWc7K9W27/sWPE9jAR13k4y6d9G1H
+	BLpdC2N2hjWIKcGr9UV1FQWbYJ9IRoCZRdmxkVeATUsenb/F5LuHu2Fbmo4KGofv
+	wyvmPEvjAAN/TmLqOfTLX6CQOUC+6Z08O33iNHITz8S9ZCexDd+crNCAfZw+llDz
+	0orndii4MSw/0vYK0Bl+WPHxMhA5Z1o6VkyoyMWgDv65DTfzj+4hBeEx+tDcz7h6
+	4Nxn8QYRhopXHnh57N1AZ7otmFhhA3KixnzJLXKl6AMzgOwhtaGAwU8YwI47/PZF
+	ZfspqI6FH6M3lTAeqK0OVKBVvQUXXZWufJA==
+X-ME-Sender: <xms:Tf6NaTjTTpwdFbARAnwe9Z-sRe3F0kNVj_Na5jDL5rEfXdJjuZea_Q>
+    <xme:Tf6NaXzCvo-YEzZ9ZpzQx8UvhBJb141EMJcQdkkLi0nYZmlX6AlU-FMhPgz6pHxuu
+    1RvyRoaiho9cs29HbdWD7CDEhcQYC-z9f3YSYwaZPmOPzlK3A>
+X-ME-Received: <xmr:Tf6NaWKypdPi4yqtd-uK0EANWwCpkZXygvukWEMmPyPr3ZQ7ig9yZ1BArns0WnQmwtpOEKCydH1-3nb2TIOT_sPwgEMPYjjRu1g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddvtdehkeegucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
+    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfduleet
+    feevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluhhsth
+    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
+    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepfedpmh
+    houggvpehsmhhtphhouhhtpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihig
+    rdgtohhmpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojh
+    gvtghtrdhorhhgpdhrtghpthhtohepihhnthgvlhdqgigvsehlihhsthhsrdhfrhgvvggu
+    vghskhhtohhprdhorhhg
+X-ME-Proxy: <xmx:Tf6NaeSAunQ_o63VFXOaoOPYYvFtNpM5EJ8YSH64wXf2AmsxhZSWdA>
+    <xmx:Tf6NaerCODtp3qkPOrUNno-XAc81ETB9ZdjpHqWrbG1iCUM4GB5kYQ>
+    <xmx:Tf6NaTr6LzU_cLIkcgdKqmUgte3D0y8aFdHl7yH3WTtFQZPRUI6MaA>
+    <xmx:Tf6NaYO0nyeeGlCk_hhSh17HNhp8l4FVQEZEGiiuTKahF_2rcBmZmg>
+    <xmx:Tf6NaV1O8CsYsr0XQSWu0wZ-KPmwxdk-3KrIPKI5jgbWtiD6NrtbmKOI>
+Feedback-ID: i1568416f:Fastmail
+Date: Thu, 12 Feb 2026 17:22:34 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+	intel-xe@lists.freedesktop.org
+Subject: Re: Graphical glitches (not refreshing?) with Linux's xe driver +
+ Xen 4.19
+Message-ID: <aY3-Shto7px4M1RK@mail-itl>
+References: <aYtznP_tT6xNPwf-@mail-itl>
+ <aY3ttvtxGCPTNgsj@Mac.lan>
+ <aY3yqOTn9EQfO4rF@mail-itl>
+ <aY387XuhCEZ0JNTN@Mac.lan>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="jRRBc1ZgOtYQSbU+"
+Content-Disposition: inline
+In-Reply-To: <aY387XuhCEZ0JNTN@Mac.lan>
 
-Since the implementation of fw_unreserved_regions() is in common code, move
-its declaration to xen/bootinfo.h.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/arm/include/asm/setup.h | 3 ---
- xen/include/xen/bootinfo.h       | 4 ++++
- 2 files changed, 4 insertions(+), 3 deletions(-)
+--jRRBc1ZgOtYQSbU+
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 12 Feb 2026 17:22:34 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+	intel-xe@lists.freedesktop.org
+Subject: Re: Graphical glitches (not refreshing?) with Linux's xe driver +
+ Xen 4.19
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 899e33925ca4..0d29b46ea52b 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -43,9 +43,6 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
- void create_dom0(void);
- 
- void discard_initial_modules(void);
--void fw_unreserved_regions(paddr_t s, paddr_t e,
--                           void (*cb)(paddr_t ps, paddr_t pe),
--                           unsigned int first);
- 
- void init_pdx(void);
- void setup_mm(void);
-diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
-index f834f1957155..dbf492c2e36e 100644
---- a/xen/include/xen/bootinfo.h
-+++ b/xen/include/xen/bootinfo.h
-@@ -210,4 +210,8 @@ static inline struct membanks *membanks_xzalloc(unsigned int nr,
-     return banks;
- }
- 
-+void fw_unreserved_regions(paddr_t s, paddr_t e,
-+                           void (*cb)(paddr_t ps, paddr_t pe),
-+                           unsigned int first);
-+
- #endif /* XEN_BOOTINFO_H */
--- 
-2.52.0
+On Thu, Feb 12, 2026 at 05:16:45PM +0100, Roger Pau Monn=C3=A9 wrote:
+> On Thu, Feb 12, 2026 at 04:32:56PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Thu, Feb 12, 2026 at 04:11:50PM +0100, Roger Pau Monn=C3=A9 wrote:
+> > > On Tue, Feb 10, 2026 at 07:06:20PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > Hi,
+> > > >=20
+> > > > Recently I started testing compatibility with Intel Lunar Lake. Thi=
+s is
+> > > > the first one that uses "xe" instead of "i915" Linux driver for iGP=
+U.
+> > > > I test it with Qubes OS 4.3, which uses Xen 4.19.4 and PV dom0 runn=
+ing
+> > > > Linux 6.17.9 in this test.
+> > >=20
+> > > Not sure it's going to help a lot, but does using a PVH dom0 make any
+> > > difference?
+> >=20
+> > Yes, it makes a difference. I end up with black screen as soon as dom0
+> > starts... And due to unrelated bug (in xhci console code?), I don't have
+> > kernel messages :/
+>=20
+> Hm, that's ... very helpful.  We should fix the xhci stuff so we know
+> what's going on there.  Is the xhci bug also PVH only, or PV is
+> equally affected?
 
+XHCI console works just fine with PV dom0. But I just noticed I had
+older Xen binary there today, will re-test on the same 4.19.4 again. And
+then will submit separate bug report (even if that's likely be me fixing
+it anyway).
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--jRRBc1ZgOtYQSbU+
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmmN/koACgkQ24/THMrX
+1yx49wf+NBy2A+DagwA6RfHlLXBvuP5r2FQy2upo0kdOI6l/8Tr45/jVBb0i7QNj
+UBqM2W+itJigC+a8e/2CsOZZOH8KzEB6zesumNG64EMvP8p4a64Y2x/yqRxj3/My
+Hvuq27dKpCSoLNsKHDr+kuXPGni0TbZxA/Hp2+qjhzlMy9GhKhl4GmwtWyFVKWD3
+k5X9TDN2G51ajwcGLDV100UqYqhg0VH1uWPNS4Z2OzZRahv0uWHyf1Xzm4P04lrP
+yvQsgL7SEDCxr1H6hodnIblaERsyu3AhERIMqJ8jl7IeYOjDE2Xsd7hWGt65FZhI
+Vim+as2uFZmL2+Lp9GIoIa8c85NeOQ==
+=zQiG
+-----END PGP SIGNATURE-----
+
+--jRRBc1ZgOtYQSbU+--
 
