@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2636EB5955
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 08:38:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1228478.1534635 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2ADEB2719
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 08:39:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1228480.1534656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqSDZ-0001nx-83; Thu, 12 Feb 2026 08:38:33 +0000
+	id 1vqSDi-0002HU-M5; Thu, 12 Feb 2026 08:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1228478.1534635; Thu, 12 Feb 2026 08:38:33 +0000
+Received: by outflank-mailman (output) from mailman id 1228480.1534656; Thu, 12 Feb 2026 08:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqSDZ-0001nq-5J; Thu, 12 Feb 2026 08:38:33 +0000
-Received: by outflank-mailman (input) for mailman id 1228478;
- Thu, 12 Feb 2026 08:38:31 +0000
+	id 1vqSDi-0002HN-Ii; Thu, 12 Feb 2026 08:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 1228480;
+ Thu, 12 Feb 2026 08:38:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lKKS=AQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vqSDX-0001nf-93
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 08:38:31 +0000
+ id 1vqSDh-0001nf-Gy
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 08:38:41 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 34f07b7a-07ee-11f1-b162-2bf370ae4941;
- Thu, 12 Feb 2026 09:38:29 +0100 (CET)
+ id 3b9505da-07ee-11f1-b162-2bf370ae4941;
+ Thu, 12 Feb 2026 09:38:41 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 633153E6C2;
- Thu, 12 Feb 2026 08:38:29 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 914313E712;
+ Thu, 12 Feb 2026 08:38:40 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E95C63EA62;
- Thu, 12 Feb 2026 08:38:28 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5BC243EA62;
+ Thu, 12 Feb 2026 08:38:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id I/3JN4SRjWkRMgAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 12 Feb 2026 08:38:28 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id C1VBFZCRjWkDNQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 12 Feb 2026 08:38:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,92 +53,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34f07b7a-07ee-11f1-b162-2bf370ae4941
+X-Inumbo-ID: 3b9505da-07ee-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1770885509; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1770885520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Cg0lfHNLzOa86C9goVRT4Xy+ihFyb7RvSBqibZQ3pAc=;
-	b=lzyphsLO0wfPGC/c7CNXE8WJNAh+YzVpYhWXqpX5zPZGahN1cMVeBrhCH0LRCxj4NOqlws
-	7TIYX5K+G0U2OjVHhxkXh1GDuPcV84YGSPTJZm7CXOXH+JX4+dcToQgqFH2SIzfFev7u68
-	SkWA3wJSFbnKiYDvU5Txh8Go5e5z3oE=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1mlAVWzzcX0ZcZSFFrXG692dbDlkJVV7Kxyt0Z92TRw=;
+	b=BN0UQfcyL7Zi3637xHsF1/JE1ZOSjUDVXc71w6UrBirRWa93yd39XKuXPoU0cOccDiHE5z
+	okzWaPeZUp0d6SUGz9agL10B9OPnHNnjaE3rWihiwxXFqaatNO84VIcbUssc+hpsNcfFbg
+	LpDmohx9iJiyaj7nTeUjVp3wL893mns=
 Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1770885509; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1770885520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Cg0lfHNLzOa86C9goVRT4Xy+ihFyb7RvSBqibZQ3pAc=;
-	b=lzyphsLO0wfPGC/c7CNXE8WJNAh+YzVpYhWXqpX5zPZGahN1cMVeBrhCH0LRCxj4NOqlws
-	7TIYX5K+G0U2OjVHhxkXh1GDuPcV84YGSPTJZm7CXOXH+JX4+dcToQgqFH2SIzfFev7u68
-	SkWA3wJSFbnKiYDvU5Txh8Go5e5z3oE=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1mlAVWzzcX0ZcZSFFrXG692dbDlkJVV7Kxyt0Z92TRw=;
+	b=BN0UQfcyL7Zi3637xHsF1/JE1ZOSjUDVXc71w6UrBirRWa93yd39XKuXPoU0cOccDiHE5z
+	okzWaPeZUp0d6SUGz9agL10B9OPnHNnjaE3rWihiwxXFqaatNO84VIcbUssc+hpsNcfFbg
+	LpDmohx9iJiyaj7nTeUjVp3wL893mns=
 From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-pci@vger.kernel.org,
-	linux-scsi@vger.kernel.org
+To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 0/2] xen/xenbus: better handle backend crash
-Date: Thu, 12 Feb 2026 09:38:24 +0100
-Message-ID: <20260212083826.136221-1-jgross@suse.com>
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH 2/2] xen/xenbus: better handle backend crash
+Date: Thu, 12 Feb 2026 09:38:26 +0100
+Message-ID: <20260212083826.136221-3-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260212083826.136221-1-jgross@suse.com>
+References: <20260212083826.136221-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.80 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-7.30 / 50.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:helo,invisiblethingslab.com:email,suse.com:mid,suse.com:email,info.dev:url];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_ALL(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,imap1.dmz-prg2.suse.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email]
 
-This small series fixes PV-device frontend side handling in case the
-backend crashed and has come up again.
+When the backend domain crashes, coordinated device cleanup is not
+possible (as it involves waiting for the backend state change). In that
+case, toolstack forcefully removes frontend xenstore entries.
+xenbus_dev_changed() handles this case, and triggers device cleanup.
+It's possible that toolstack manages to connect new device in that
+place, before xenbus_dev_changed() notices the old one is missing. If
+that happens, new one won't be probed and will forever remain in
+XenbusStateInitialising.
 
-The old device will be discarded and the replacement can be used
-instead. 
+Fix this by checking the frontend's state in Xenstore. In case it has
+been reset to XenbusStateInitialising by Xen tools, consider this
+being the result of an unplug+plug operation.
 
-Juergen Gross (2):
-  xenbus: add xenbus_device parameter to xenbus_read_driver_state()
-  xen/xenbus: better handle backend crash
+It's important that cleanup on such unplug doesn't modify Xenstore
+entries (especially the "state" key) as it belong to the new device
+to be probed - changing it would derail establishing connection to the
+new backend (most likely, closing the device before it was even
+connected). Handle this case by setting new xenbus_device->vanished
+flag to true, and check it before changing state entry.
 
- drivers/net/xen-netfront.c                 | 34 +++++++++---------
- drivers/pci/xen-pcifront.c                 |  8 ++---
- drivers/scsi/xen-scsifront.c               |  2 +-
- drivers/xen/xen-pciback/xenbus.c           | 10 +++---
- drivers/xen/xenbus/xenbus_client.c         | 16 +++++++--
- drivers/xen/xenbus/xenbus_probe.c          | 42 ++++++++++++++++++++--
- drivers/xen/xenbus/xenbus_probe_frontend.c |  2 +-
- include/xen/xenbus.h                       |  4 ++-
- 8 files changed, 83 insertions(+), 35 deletions(-)
+And even if xenbus_dev_changed() correctly detects the device was
+forcefully removed, the cleanup handling is still racy. Since this whole
+handling doesn't happened in a single Xenstore transaction, it's possible
+that toolstack might put a new device there already. Avoid re-creating
+the state key (which in the case of loosing the race would actually
+close newly attached device).
 
+The problem does not apply to frontend domain crash, as this case
+involves coordinated cleanup.
+
+Problem originally reported at
+https://lore.kernel.org/xen-devel/aOZvivyZ9YhVWDLN@mail-itl/T/#t,
+including reproduction steps.
+
+Based-on-patch-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ drivers/xen/xenbus/xenbus_client.c | 13 +++++++++--
+ drivers/xen/xenbus/xenbus_probe.c  | 36 ++++++++++++++++++++++++++++++
+ include/xen/xenbus.h               |  1 +
+ 3 files changed, 48 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 6ed0cd8e9676..00ee8f62c28c 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -226,8 +226,9 @@ __xenbus_switch_state(struct xenbus_device *dev,
+ 	struct xenbus_transaction xbt;
+ 	int current_state;
+ 	int err, abort;
++	bool vanished = false;
+ 
+-	if (state == dev->state)
++	if (state == dev->state || dev->vanished)
+ 		return 0;
+ 
+ again:
+@@ -242,6 +243,10 @@ __xenbus_switch_state(struct xenbus_device *dev,
+ 	err = xenbus_scanf(xbt, dev->nodename, "state", "%d", &current_state);
+ 	if (err != 1)
+ 		goto abort;
++	if (current_state != dev->state && current_state == XenbusStateInitialising) {
++		vanished = true;
++		goto abort;
++	}
+ 
+ 	err = xenbus_printf(xbt, dev->nodename, "state", "%d", state);
+ 	if (err) {
+@@ -256,7 +261,7 @@ __xenbus_switch_state(struct xenbus_device *dev,
+ 		if (err == -EAGAIN && !abort)
+ 			goto again;
+ 		xenbus_switch_fatal(dev, depth, err, "ending transaction");
+-	} else
++	} else if (!vanished)
+ 		dev->state = state;
+ 
+ 	return 0;
+@@ -940,6 +945,10 @@ enum xenbus_state xenbus_read_driver_state(const struct xenbus_device *dev,
+ 					   const char *path)
+ {
+ 	enum xenbus_state result;
++
++	if (dev && dev->vanished)
++		return XenbusStateUnknown;
++
+ 	int err = xenbus_gather(XBT_NIL, path, "state", "%d", &result, NULL);
+ 	if (err)
+ 		result = XenbusStateUnknown;
+diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
+index 2eed06ba5d38..eb260eceb4d2 100644
+--- a/drivers/xen/xenbus/xenbus_probe.c
++++ b/drivers/xen/xenbus/xenbus_probe.c
+@@ -444,6 +444,9 @@ static void xenbus_cleanup_devices(const char *path, struct bus_type *bus)
+ 		info.dev = NULL;
+ 		bus_for_each_dev(bus, NULL, &info, cleanup_dev);
+ 		if (info.dev) {
++			dev_warn(&info.dev->dev,
++				 "device forcefully removed from xenstore\n");
++			info.dev->vanished = true;
+ 			device_unregister(&info.dev->dev);
+ 			put_device(&info.dev->dev);
+ 		}
+@@ -659,6 +662,39 @@ void xenbus_dev_changed(const char *node, struct xen_bus_type *bus)
+ 		return;
+ 
+ 	dev = xenbus_device_find(root, &bus->bus);
++	/*
++	 * Backend domain crash results in not coordinated frontend removal,
++	 * without going through XenbusStateClosing. If this is a new instance
++	 * of the same device Xen tools will have reset the state to
++	 * XenbusStateInitializing.
++	 * It might be that the backend crashed early during the init phase of
++	 * device setup, in which case the known state would have been
++	 * XenbusStateInitializing. So test the backend domid to match the
++	 * saved one. In case the new backend happens to have the same domid as
++	 * the old one, we can just carry on, as there is no inconsistency
++	 * resulting in this case.
++	 */
++	if (dev && !strcmp(bus->root, "device")) {
++		enum xenbus_state state = xenbus_read_driver_state(dev, dev->nodename);
++		unsigned int backend = xenbus_read_unsigned(root, "backend-id",
++							    dev->otherend_id);
++
++		if (state == XenbusStateInitialising &&
++		    (state != dev->state || backend != dev->otherend_id)) {
++			/*
++			 * State has been reset, assume the old one vanished
++			 * and new one needs to be probed.
++			 */
++			dev_warn(&dev->dev,
++				 "state reset occurred, reconnecting\n");
++			dev->vanished = true;
++		}
++		if (dev->vanished) {
++			device_unregister(&dev->dev);
++			put_device(&dev->dev);
++			dev = NULL;
++		}
++	}
+ 	if (!dev)
+ 		xenbus_probe_node(bus, type, root);
+ 	else
+diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
+index 15319da65b7f..8ca15743af7f 100644
+--- a/include/xen/xenbus.h
++++ b/include/xen/xenbus.h
+@@ -80,6 +80,7 @@ struct xenbus_device {
+ 	const char *devicetype;
+ 	const char *nodename;
+ 	const char *otherend;
++	bool vanished;
+ 	int otherend_id;
+ 	struct xenbus_watch otherend_watch;
+ 	struct device dev;
 -- 
 2.53.0
 
