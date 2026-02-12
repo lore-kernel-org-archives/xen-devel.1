@@ -4,33 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02373EE3691
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 14:46:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1229155.1535189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF3FFEE368C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 14:56:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1229227.1535220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqXxn-0004OO-Bz; Thu, 12 Feb 2026 14:46:39 +0000
+	id 1vqY6z-00006c-VA; Thu, 12 Feb 2026 14:56:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1229155.1535189; Thu, 12 Feb 2026 14:46:39 +0000
+Received: by outflank-mailman (output) from mailman id 1229227.1535220; Thu, 12 Feb 2026 14:56:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqXxn-0004OF-8F; Thu, 12 Feb 2026 14:46:39 +0000
-Received: by outflank-mailman (input) for mailman id 1229155;
- Thu, 12 Feb 2026 14:46:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqY6z-00006V-Rc; Thu, 12 Feb 2026 14:56:09 +0000
+Received: by outflank-mailman (input) for mailman id 1229227;
+ Thu, 12 Feb 2026 14:56:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Yal/=AQ=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1vqXxl-0002nh-IF
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 14:46:37 +0000
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [2607:f8b0:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a0b02eb6-0821-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 15:46:35 +0100 (CET)
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7d44b2df00aso3284567a34.3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 06:46:35 -0800 (PST)
+ <SRS0=zRx/=AQ=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1vqY6y-00006I-6s
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 14:56:08 +0000
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [2a01:111:f403:c111::9])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f433b533-0822-11f1-b162-2bf370ae4941;
+ Thu, 12 Feb 2026 15:56:05 +0100 (CET)
+Received: from PH7PR10CA0023.namprd10.prod.outlook.com (2603:10b6:510:23d::21)
+ by MN2PR12MB4079.namprd12.prod.outlook.com (2603:10b6:208:1d5::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Thu, 12 Feb
+ 2026 14:56:01 +0000
+Received: from CY4PEPF0000EE3E.namprd03.prod.outlook.com
+ (2603:10b6:510:23d:cafe::28) by PH7PR10CA0023.outlook.office365.com
+ (2603:10b6:510:23d::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.12 via Frontend Transport; Thu,
+ 12 Feb 2026 14:55:57 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3E.mail.protection.outlook.com (10.167.242.16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Thu, 12 Feb 2026 14:56:00 +0000
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 12 Feb
+ 2026 08:55:59 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,301 +58,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0b02eb6-0821-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; t=1770907594; cv=none;
-        d=google.com; s=arc-20240605;
-        b=a5w+epA7rWy4VBQNuzfm34M+2iVslC7X7Sx3Jjw/OC8CY0TCOPNN/xZOBYzAK6BA3x
-         ZbSSw04XRAw5KEUYW2zTin+8igwuOx7EzIOEf8XL+MrDu6sNVnfMODJFwQKR9t2CeDkf
-         h0HM6y0IuVh79AQ4BcFLmy+LLCZhsyXEScZuo+CZoRL5Gh9e9o7E/uJPfglYFPeMDvXH
-         BD7FIv3ufn7eQju9IepK7ao334j9fJ7qfA+rjMKtYV/cn9xFKej7CRBmxGTyUKYnZ5Jm
-         jbhf6BlkpNEXWOI/8K1X7235EciEXvZp/6eRCPs7h3TgVedKwOzAHAPjeFhpCxQ6NPBY
-         c7mg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=zrDF7xqizXAwJ8veOYffIQY4VqbAAu4CVWWB5hv0DxI=;
-        fh=wNLC6Hyb5Ukz/ErppBRQBwv8vwa/OMsdh6R8bnNsiPU=;
-        b=LzBSGUd83wYmLKaMRl0rSCnFjZNkly6+a8MF6Y4SGtaANW0DYKhK0822VE5QflxOaC
-         J2POG3A2KvfCD5hsPLwmrshytgwJBA2sHVUr3CQOGUg3fmXr385zHZ2n3Riap+8VfDQq
-         R4Wclz+vrJ8GjcEiFp2dnmulJeR/HpuMKq2jE7fQp3UYTGckRrkRKU46gne8KfTgU/be
-         VPOrxkI2v+9dvuNdnmalpuqmb09QAVqj2kqTqojFaI74nyecuCVYDb3nkMA+3Zj60ikN
-         e6qDUTtouhaDAWDx2/b03JnYYvFx1sCxbG1N3ZW+KinbqNCjWPwpoDl2j8O6BnshFmN4
-         7m6Q==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1770907594; x=1771512394; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zrDF7xqizXAwJ8veOYffIQY4VqbAAu4CVWWB5hv0DxI=;
-        b=RMSObuzXuDcNLNN1w6OejAXZOFf1LLbycXAf4gAtO7c4WfJdKRLssPC4P6JQTd9gZa
-         0qsWh/fCqxRXCLK/fA49Z3xofujpGGbMhK1WP61kw1ShmDbvTSBwk6JpPQ48lAp3wNzf
-         f0qtp7A9lb1k117S/dwsNZX0SO8MIfuVrd4jPCWbFxKgxLgIu+XM2ZdsGbQM1JAE4P+2
-         N3+Fw8aH0bXuTBDQo7S+V5PMjCr/xHe7mlcW+AicfeMF/8YwnpBqAFH2SiDpJ46RrjCB
-         xco2Z8I7mDMAvWEUMgnpEM6eTthjgUPOrcW5hUOnWmq9w6lYIlOIqMFc7GNCVGnmXtXe
-         mZmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770907594; x=1771512394;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zrDF7xqizXAwJ8veOYffIQY4VqbAAu4CVWWB5hv0DxI=;
-        b=V28XsRipNWHErQ3noAN/x8OEX2CUkzf4aTTqs2154JAZVqiVibd8BjbvxYoULdwmM0
-         swz7ZOey1eY7AbUsBMemAPOM1qKaK2GYzbfJl40e3Op686Jwr37lZGuSvRX8DSXIPMgY
-         uxmxaiSlCH5d5seh+jvBpMdyOXKxs5u5RkXQfTccn8HPSjILr6l+jQIdwttnoYtUYqub
-         Nz9RLYZP/hrAQxYPwCbXv83zgNoVIqJMexHmujnCew/JC33EMYL+dOWV/yjyhaw6A4py
-         Bh9zhahw5Com5AF7xXKnkkVNR8MQj2IaytT2lJtOYCP1oLOu/c2EQgyIDB3seH5G/NdE
-         6awg==
-X-Gm-Message-State: AOJu0YzEHGQ1s9dULmvZ/HqXNnHt2Em9HeFG1SUEJgfd7/E/uSznPWpm
-	y3VixL9piazfZtlBYynxksAcv5tnZQD8+lHeqlEfI1fUbEwh7OYDAZSrD9PET5IqAt0S0h/VPBD
-	w/K77BstQWjKR5ZbwOYJp4BfQpAHTsKXTGe+SYbvgnA==
-X-Gm-Gg: AZuq6aIz6yAFRWyvWvrE2TcQ1DogViTXI6iGAZdtQHFx3GbyMXPlfmREw/KSx3pKrwW
-	1I+2PL7bSewUaG62Mq61qEV481hbRz/l391pM1LK7k6mEEx3k0hp1Qw2gbQdB0gW7Npjyd3rfSY
-	oplyQ1NfBSAb/bf9VxMdy8N7k1nqsXVslkZYFbayrXVXFVouaZD0Uq+CERBphrntCDB1VRAwoVf
-	QWOyxOpKRA5DNWsZ1K6yINLfnrAjaq7cVmpMJz00CxnQtFiXPgtPhYpGy0yIOk7zYiNbv6vKOXN
-	nE3Q9GIy4nfFPcotmAU3+HuOSMweZrCWtp4LtQ==
-X-Received: by 2002:a05:6820:1ca5:b0:66e:7aaa:be64 with SMTP id
- 006d021491bc7-6759b9b445amr1400449eaf.55.1770907593967; Thu, 12 Feb 2026
- 06:46:33 -0800 (PST)
+X-Inumbo-ID: f433b533-0822-11f1-b162-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TxaBUmsUjy8eBAu5zQH4FfeaHyyBTGHkwjqWAAqOo9mbMbwnRMJCK/VIBhe+wvoqsb+zhgTeIouyiixDprgTh1gG+Fv22CH0gMYAZ0wmqvZ1kmkS1/0a0lLhaYQ3D9ma/fS/gAdOvW8+7AQfqYRX0AiMobhnWDBPIDXI276hcrdMuqAjN5PyG0bbPINPKD1fc9LhS61+RYY76zWV4CR867/qCmxRKacZyZK/jMh7MBUFibPfzixJdYYWlWvAG3KdgOwU9sixDpjSXU3bUtg1CROY7+7LwQ6oO0Idv1wbk94TFOr4hzU4Zsw+scib7418SW4vtgWGFqKWUpvqdp6Dow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=upTvwB/xKG0YJKqZ73mCz/e9Bc+WguMxroxZZwUkvk4=;
+ b=pSYccwNqDsxdA6LABsXfUGhBJpMDN+FlhoaXh6EhkB2ltRjXFZwhIhLpTMfSl6yoQLYFdArbcVtyP11ss0zfueELLjQKd8WpE+yoGnNBTVtjRPFSsmJtLTgTlr0Pqpga+KFiNAhftyVG52xJbWb5A4APLWcwERDo8uuyZ0ZYnllq+vsGO+vP6sGlXYG1IylifjhJKv2TjPy/RAVv3UakNzyQOxEl5jEPlDNXEowqB2vNqYdB2+wjkV94nG8o9piEmFmhvXmTfLrLtf9PPF8eO8NDUxU8yaHrwNYgf2iECcMJG5EoN2tUEU7pQ9Tpre/+sGtaUAWjFWIYG6bEXnzQOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=upTvwB/xKG0YJKqZ73mCz/e9Bc+WguMxroxZZwUkvk4=;
+ b=ShhRNZ9/A4ZL9T5Q+bErEbpnx/yaIS5LvtQNPqx3DBGAAIIOUu1ghmJdiSP4y09vXIgOxcxx5cwM7o8iqsoIKoC9YuONYGzAtEkFdjw4onE3UHvb7tR8husNZV/btHukpe0ULuLk0fX4fbTJb4cuBctSDw45T1SwHRPZWJZRmO0=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 MIME-Version: 1.0
-References: <cover.1770826406.git.bertrand.marquis@arm.com> <ee4ae1ba137aca30b9e6e53e6a2a07f84fac9c56.1770826406.git.bertrand.marquis@arm.com>
-In-Reply-To: <ee4ae1ba137aca30b9e6e53e6a2a07f84fac9c56.1770826406.git.bertrand.marquis@arm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Thu, 12 Feb 2026 15:46:21 +0100
-X-Gm-Features: AZwV_QjEdI2-za8UIiLcMsNddFXfzchzJxx4MlgMROAMdBQ_0PUzMzl7tXN62_8
-Message-ID: <CAHUa44F2fAwg+bUUTaYNjBMtvnT1z3xAeDAN9wjcYLdb9dUpYQ@mail.gmail.com>
-Subject: Re: [PATCH v2 12/12] xen/arm: ffa: Add message parameter diagnostics
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 12 Feb 2026 15:55:58 +0100
+Message-ID: <DGD2JSOV312K.1NZML3WGZBQ58@amd.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
+	<jason.andryuk@amd.com>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH 05/12] x86: Migrate spec_ctrl vendor checks to
+ cpu_vendor()
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: Jan Beulich <jbeulich@suse.com>
+X-Mailer: aerc 0.20.1
+References: <20260206161539.209922-1-alejandro.garciavallejo@amd.com>
+ <20260206161539.209922-6-alejandro.garciavallejo@amd.com>
+ <109c3379-7066-4ad9-93aa-57e87deba81f@suse.com>
+In-Reply-To: <109c3379-7066-4ad9-93aa-57e87deba81f@suse.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3E:EE_|MN2PR12MB4079:EE_
+X-MS-Office365-Filtering-Correlation-Id: 66037592-3c73-4911-98c2-08de6a46d61c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?Y1NyeE9IRDkxZ3lwVUl6c1c1Q3BIR3NIVTgvYy9hUW5nQXBMNTE2dlRuM1VV?=
+ =?utf-8?B?Rmx0N3hrL3JlNmd2cVBDSkNaTzZ5ejJIQmw4ZTgwcEs4ZjBGb2hPTEd3d3Vy?=
+ =?utf-8?B?US9ka2ovVzk1WWtLbjVST1FXSkhZOUhTRmE5SFFKL0MxclhhRFpVZzdTSlM4?=
+ =?utf-8?B?NVM5ZlhtbkE2dlplRUtSZytwaHlQOUJjUDIrcDI5QUZpSUliNGRvYXptaHhx?=
+ =?utf-8?B?Zk9NZWFYK2tPelN2UzNZdEM0QmQ5WHBoUWZOaUhqVUJSdEpJWWNuNkhmQ01n?=
+ =?utf-8?B?YUhCU2lXRGc3MzB1OGhKZHczOEpLYXdndy9DN0hPMUFJeURTQ25TaHJhSDhK?=
+ =?utf-8?B?Q29xc0FRc0VIbHVCVGt0NnFtSXJXa3VlRHR4OEFDTndKVmM0cUl2WHduMWN1?=
+ =?utf-8?B?TXpyU1V5S2JVamlDd2FiREZhVHFtTFFTeXZ3eEYrSEd3ZW53TVg3VmhZRWFz?=
+ =?utf-8?B?dFhRWDFWOFNscHE3MmdFeTlBWkVPbFpEUHQ5N2FYRTZ2U0w0eWhOVkkyenU1?=
+ =?utf-8?B?dFV4alRDRmtpaFNNUkZhYlptTG1YUDlrdEJ4dDltYXVONFlwQnErZDhjZlA1?=
+ =?utf-8?B?bTFjYjl1NVBZTnpJQjAxbFhCb202Q2RXZUhpYmlsbmtjT3UyYVlHQWZiRW1Y?=
+ =?utf-8?B?TCtGZnVaWW9QM0JxTmxtbnJPdFdJTXFpKzJ2K2ovOXdsdXdkU3QwbjNSVzJ5?=
+ =?utf-8?B?OWk1a0tXdzNhcW1ra3dHRllRZm9rcnp0UEpiSkt6Sk9qR2lKeWMzeEl5YlFK?=
+ =?utf-8?B?UUlpZnVjQmpVdUxZWCtRUkpXanNxT1Urc3hTb1RUTmRqcWNJdTJIdE5TdGZq?=
+ =?utf-8?B?bDBBRGxnVnNNSVFkL0pzWlhXZHBocWUzOGhrcmt4d0tiVW9NTkplQ1AwVHJL?=
+ =?utf-8?B?RnNaY1RUcVlRRHRxSU9PZTEyei8wYTRwekR0aStoOVRkNW1YTVlmRyt1MzJW?=
+ =?utf-8?B?NTZJaE5QNUxwSys3NUU2Y1Z1UWxnNHlySGNST3BKaElZYzBHeUthZEZLMlpw?=
+ =?utf-8?B?NitZbC9xVWJ5emtSUkl0TnNpQzdxMmZIV3pQeTcwWDRobTJ2R0QzdTE3TU81?=
+ =?utf-8?B?WDNFR3NCYklaK05GY0pZWnJ5Skc4VmFTejc5K0NmRUxLc3VxOVA5SUZlU2do?=
+ =?utf-8?B?T3dyYk9pWm1tVXM0akE2czZsZFpPYW8xMkZVMkRQWU5uNjZnQ2JYWEQ5bkMy?=
+ =?utf-8?B?WjlUYm5pWnRnMzJhRHJNUkw3NkFFdDhrdnZFSmhpUHlGYlFuS3VnakJVUll2?=
+ =?utf-8?B?YUl0UEhpeXovcGdlU1pRdGFFbEorWU1SSG1EZFU5dFFiTVJsb0t5bTE2ckVQ?=
+ =?utf-8?B?eEFaL3J0NWdFT2hqWkJ1dTEzZVVpbU9ybTFKLzZMdVJROEkwV3pLVFlxazcz?=
+ =?utf-8?B?a0hnSVVhTXlrWDVxcW5hZ0FFOU5qVmNaalZYaEk0dHplOU9oTXVLeDh1VzZZ?=
+ =?utf-8?B?bW9Wb2M0YTdQc1VpQWhXWEdLaWZvNjVkRDNOdEpYUnQyZVkrZldROTBCM0x6?=
+ =?utf-8?B?OTY4aUkwcEY0bXMraTVNc1ZBMEpHS0lGSmZINkVKSEJGbVJzb3JxV3RXUEpm?=
+ =?utf-8?B?SWl6U3pOcUsrenIyK2IxQ0owMkwyOENTVkl5b3pWNmdsUlFuQURtTmE5enZ2?=
+ =?utf-8?B?Q2x0aHhFdTAvajZJSGJjQXVaazJQYmdhb3NDY1E3dmo1cVRyWGtlcGZaU0Z0?=
+ =?utf-8?B?N3RMOUVsZnJCMXl2U1dqcmlheHhSdGlRNTBXWmttVFRSSU9UZmhXUDdWNlhV?=
+ =?utf-8?B?d1lyNjR1a1RHSkw2a3V2QldQZEtMeE1MZjlVQ2V4Sk8ranVyemphb3Vjc2Rn?=
+ =?utf-8?B?TXplY3lZK1REQVJCaVJPc3p4eGRwRE1EVVhYZUtSNmR6cUF3SHpLaTZ2M1hl?=
+ =?utf-8?B?THBGbUVtSFpDYXNUemNBVlUxZ1QrK0Q0c0YxaENHbEhmbDZZMzBrcElQNGpC?=
+ =?utf-8?B?R09QaXRUcGMvL21uQ3NBeWZJdjczT0VTR0NVYyswZW1FaG5HbGowa3JEa09F?=
+ =?utf-8?B?Wm8wYmlySzY0SDJRcmo5RG1iR0djbFV1T0dqRmh0MUtZSVNoclJSOXJCcUVh?=
+ =?utf-8?B?K1lJOGZlcEZ6c0hTWjB5WWdQbmdxeUl2WVdPaDZZYXhkSEdmYjFCdEJuS2Qv?=
+ =?utf-8?B?bnZOT042OHQ5eWlBMk5qQWt5cTNHMjdpVkk5ZUdrN1E4aXNLN0NFczlzWG0w?=
+ =?utf-8?B?eEErNjRFZTMxY3RET1VlZHlnZEFZd3NJQUdaSEdhcUFmNEFPMjRmRGRNazVn?=
+ =?utf-8?B?aGc5SVY3c3RkcVQ4WGpQMU5VNEtnPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	rDiotymAFtt/W5dC/iqt+paUAHGjcz/j4Bg5UTnAsXcNZPgeKrvWUjL1g3D09UeeUuOErWo96VT0vf/9aBe9roS2t2/w7Ub/+TZmZPYu3JQYe+OH1XHzEd8/KA3xcaAdWrC/ko6iz6KW0zwfAvi/LZQxsduMNTeJYKLF9axoRb+q6Lx1JrCrepvyccQKKy7nsCE5d+IADn9BdXF+jeRLkkjSA/F9/hMGkmyq5EoAPjf0hyaQT1DN6rX8FgNgJ3/ndy5/R+2ufaH6LSF785Pgmdq8N9kWw4uyTwaGPoo4OQf+5WZelcED5y7Z6rhVQ7Q/ud3UerOUod4QeZBzU2+yL86Dpcg6VsSjkWnE1WnPx4n0M/H7eB8XECZwkye3dU2kVxSC+36+RrEWS+131Mfz+EVhcy2AF8gARIyZT0JTbxy7DqTnj3aYutG5TjZY78qE
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 14:56:00.5006
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66037592-3c73-4911-98c2-08de6a46d61c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000EE3E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4079
 
-Hi Bertrand,
+On Thu Feb 12, 2026 at 11:49 AM CET, Jan Beulich wrote:
+> On 06.02.2026 17:15, Alejandro Vallejo wrote:
+>> @@ -738,11 +738,10 @@ static bool __init retpoline_calculations(void)
+>>      unsigned int ucode_rev =3D this_cpu(cpu_sig).rev;
+>>      bool safe =3D false;
+>> =20
+>> -    if ( boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+>> +    if ( cpu_vendor() & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+>>          return true;
+>> =20
+>> -    if ( boot_cpu_data.vendor !=3D X86_VENDOR_INTEL ||
+>> -         boot_cpu_data.family !=3D 6 )
+>> +    if ( !(cpu_vendor() & X86_VENDOR_INTEL) || boot_cpu_data.family !=
+=3D 6 )
+>>          return false;
+>
+> At the example of this (applies throughout this patch): With the panic() =
+in
+> patch 03 the transformation looks correct. Without that panic(), or witho=
+ut
+> being explicitly aware of it, this gives the impression of explicitly doi=
+ng
+> an unsafe thing:
 
-On Wed, Feb 11, 2026 at 6:16=E2=80=AFPM Bertrand Marquis
-<bertrand.marquis@arm.com> wrote:
->
-> MSG_SEND2 and direct request validation failures are silent, making it
-> hard to diagnose invalid IDs, oversized messages, or unsupported
-> destination types.
->
-> Add debug logs for parameter validation failures:
-> - invalid endpoint IDs
-> - oversized messages
-> - unsupported destination types
-> - invalid sender/receiver combinations
-> - ratelimit MSG_SEND2 busy failures to avoid log flooding
->
-> No functional changes.
->
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> ---
-> Changes since v1:
-> - add a comment to explain ratelimit for BUSY in send2
-> ---
->  xen/arch/arm/tee/ffa_msg.c | 49 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 49 insertions(+)
+These patches wouldn't be functional changes without the X86_ENABLED_VENDOR=
+S
+mask at cpu_vendor() or the single-vendor optimisation. I could split it th=
+at
+way. Introduce the cpu_vendor() macro early. Transform the entire tree, and=
+ then
+apply the optimisations.
 
-Looks good:
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+> being explicitly aware of it, this gives the impression of explicitly doi=
+ng
+> an unsafe thing:
+
+Without the panic, it'd indeed be (intentionally) doing an unsafe thing.
+Removing the panic can't be safe, it's not just a matter of features missin=
+g.
+It'd imply printing a banner saying the current configuration is unsupporte=
+d.
+
+> Even though by way of boot_cpu_data.vendor we know what
+> vendor's CPU we're on, we're acting as if we didn't know.
+
+Not with the panic in place, which is partially why I put it there.
+
+> I'm really
+> uncertain whether such changes are worth it with the mere goal of reducin=
+g
+> code size.
+
+It is unreachable code, and in a safety context every line of unreachable c=
+ode
+must be either removed or justified. And justifications cost time, effort a=
+nd
+are difficult to maintain.
+
+> Even beyond the concern raised, this feels like it might be
+> increasing the risk of introducing subtle bugs.
+
+I would've agreed with you with x86_vendor_is(), which is why for v1 I took=
+ a
+step back to make cpu_vendor(). That macro was complex. Too complex and it =
+took
+many trial and errors to fine tune it. cpu_vendor() is comparatively trivia=
+l and
+relies on the compiler doing the heavy lifting. In the single-vendor case i=
+t's
+a constant and it's hopefully uncontroversially fine to remove unreachable =
+code
+then.
+
+In the multivendor case, the complexity amounts to a mask of available vend=
+ors.
+
+I don't think there's an inherent danger in removing unreachable code, so l=
+ong
+as we can prove at boot time the reachability preconditions can't be met.
+
+>
+> I wonder what Andrew and Roger think in this regard.
+
++1
 
 Cheers,
-Jens
-
->
-> diff --git a/xen/arch/arm/tee/ffa_msg.c b/xen/arch/arm/tee/ffa_msg.c
-> index 928f269f6c3a..1eadc62870f2 100644
-> --- a/xen/arch/arm/tee/ffa_msg.c
-> +++ b/xen/arch/arm/tee/ffa_msg.c
-> @@ -4,6 +4,7 @@
->   */
->
->  #include <xen/const.h>
-> +#include <xen/lib.h>
->  #include <xen/sizes.h>
->  #include <xen/types.h>
->
-> @@ -100,6 +101,7 @@ void ffa_handle_msg_send_direct_req(struct cpu_user_r=
-egs *regs, uint32_t fid)
->      if ( !ffa_fw_supports_fid(fid) )
->      {
->          ret =3D FFA_RET_NOT_SUPPORTED;
-> +        gdprintk(XENLOG_DEBUG, "ffa: direct req fid %#x not supported\n"=
-, fid);
->          goto out;
->      }
->
-> @@ -108,6 +110,9 @@ void ffa_handle_msg_send_direct_req(struct cpu_user_r=
-egs *regs, uint32_t fid)
->           (src_dst & GENMASK(15,0)) =3D=3D ffa_get_vm_id(d) )
->      {
->          ret =3D FFA_RET_INVALID_PARAMETERS;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: direct req invalid src/dst %#x\n",
-> +                 (uint32_t)src_dst);
->          goto out;
->      }
->
-> @@ -115,6 +120,9 @@ void ffa_handle_msg_send_direct_req(struct cpu_user_r=
-egs *regs, uint32_t fid)
->      if ( !FFA_ID_IS_SECURE(src_dst & GENMASK(15,0)) )
->      {
->          ret =3D FFA_RET_NOT_SUPPORTED;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: direct req to non-secure dst %#x\n",
-> +                 (uint32_t)(src_dst & GENMASK(15, 0)));
->          goto out;
->      }
->
-> @@ -166,7 +174,12 @@ static int32_t ffa_msg_send2_vm(uint16_t dst_id, con=
-st void *src_buf,
->      /* This is also checking that dest is not src */
->      ret =3D ffa_endpoint_domain_lookup(dst_id, &dst_d, &dst_ctx);
->      if ( ret )
-> +    {
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 lookup failed: dst %#x ret %d\n",
-> +                 dst_id, ret);
->          return ret;
-> +    }
->
->      /* This also checks that destination has set a Rx buffer */
->      ret =3D ffa_rx_acquire(dst_ctx , &rx_buf, &rx_size);
-> @@ -199,6 +212,16 @@ static int32_t ffa_msg_send2_vm(uint16_t dst_id, con=
-st void *src_buf,
->      /* receiver rx buffer will be released by the receiver*/
->
->  out_unlock:
-> +    if ( ret )
-> +    {
-> +        /**
-> +         * Always print other errors than BUSY but ratelimit BUSY prints
-> +         * to prevent large number of prints when sender retries on BUSY=
-.
-> +         */
-> +        if ( ret !=3D FFA_RET_BUSY || printk_ratelimit() )
-> +            gdprintk(XENLOG_DEBUG, "ffa: msg_send2 to %#x failed: %d\n",
-> +                     dst_id, ret);
-> +    }
->      rcu_unlock_domain(dst_d);
->      if ( !ret )
->          ffa_raise_rx_buffer_full(dst_d);
-> @@ -226,7 +249,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *r=
-egs)
->
->      ret =3D ffa_tx_acquire(src_ctx, &tx_buf, &tx_size);
->      if ( ret !=3D FFA_RET_OK )
-> +    {
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 TX acquire failed: %d\n", ret);
->          return ret;
-> +    }
->
->      /* create a copy of the message header */
->      memcpy(&src_msg, tx_buf, sizeof(src_msg));
-> @@ -238,6 +265,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->           dst_id =3D=3D ffa_get_vm_id(src_d) )
->      {
->          ret =3D FFA_RET_INVALID_PARAMETERS;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 invalid src/dst src %#x dst %#x\n",
-> +                 src_id, dst_id);
->          goto out;
->      }
->
-> @@ -246,6 +276,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->          if (src_msg.msg_offset < sizeof(struct ffa_part_msg_rxtx_1_1))
->          {
->              ret =3D FFA_RET_INVALID_PARAMETERS;
-> +            gdprintk(XENLOG_DEBUG,
-> +                     "ffa: msg_send2 invalid msg_offset %u (v1.1)\n",
-> +                     src_msg.msg_offset);
->              goto out;
->          }
->          /* Set uuid to Nil UUID for v1.1 guests */
-> @@ -255,6 +288,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->      else if ( src_msg.msg_offset < sizeof(struct ffa_part_msg_rxtx_1_2) =
-)
->      {
->          ret =3D FFA_RET_INVALID_PARAMETERS;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 invalid msg_offset %u (v1.2)\n",
-> +                 src_msg.msg_offset);
->          goto out;
->      }
->
-> @@ -263,6 +299,9 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->              src_msg.msg_size > (tx_size - src_msg.msg_offset) )
->      {
->          ret =3D FFA_RET_INVALID_PARAMETERS;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 invalid msg_size %u offset %u tx %zu\n"=
-,
-> +                 src_msg.msg_size, src_msg.msg_offset, tx_size);
->          goto out;
->      }
->
-> @@ -272,6 +311,8 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->          if ( !ffa_fw_supports_fid(FFA_MSG_SEND2) )
->          {
->              ret =3D FFA_RET_NOT_SUPPORTED;
-> +            gdprintk(XENLOG_DEBUG,
-> +                     "ffa: msg_send2 to SP not supported\n");
->              goto out;
->          }
->          /*
-> @@ -288,6 +329,8 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *re=
-gs)
->
->          ret =3D ffa_simple_call(FFA_MSG_SEND2,
->                                ((uint32_t)ffa_get_vm_id(src_d)) << 16, 0,=
- 0, 0);
-> +        if ( ret )
-> +            gdprintk(XENLOG_DEBUG, "ffa: msg_send2 to SP failed: %d\n", =
-ret);
->      }
->      else if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
->      {
-> @@ -295,7 +338,11 @@ int32_t ffa_handle_msg_send2(struct cpu_user_regs *r=
-egs)
->          ret =3D ffa_msg_send2_vm(dst_id, tx_buf, &src_msg);
->      }
->      else
-> +    {
->          ret =3D FFA_RET_INVALID_PARAMETERS;
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "ffa: msg_send2 to VM disabled (dst %#x)\n", dst_id);
-> +    }
->
->  out:
->      ffa_tx_release(src_ctx);
-> @@ -311,6 +358,7 @@ void ffa_handle_run(struct cpu_user_regs *regs, uint3=
-2_t fid)
->      if ( !ffa_fw_supports_fid(fid) )
->      {
->          ret =3D FFA_RET_NOT_SUPPORTED;
-> +        gdprintk(XENLOG_DEBUG, "ffa: run fid %#x not supported\n", fid);
->          goto out;
->      }
->
-> @@ -322,6 +370,7 @@ void ffa_handle_run(struct cpu_user_regs *regs, uint3=
-2_t fid)
->      if ( !FFA_ID_IS_SECURE(dst >> 16) )
->      {
->          ret =3D FFA_RET_NOT_SUPPORTED;
-> +        gdprintk(XENLOG_DEBUG, "ffa: run to non-secure dst %#x\n", dst);
->          goto out;
->      }
->
-> --
-> 2.52.0
->
+Alejandro
 
