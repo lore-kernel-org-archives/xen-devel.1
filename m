@@ -4,33 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755BCEDF04C
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 07:53:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1228446.1534625 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B15F2EDF05F
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 08:38:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1228479.1534646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqRVN-00044o-Fi; Thu, 12 Feb 2026 07:52:53 +0000
+	id 1vqSDf-00022C-Ev; Thu, 12 Feb 2026 08:38:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1228446.1534625; Thu, 12 Feb 2026 07:52:53 +0000
+Received: by outflank-mailman (output) from mailman id 1228479.1534646; Thu, 12 Feb 2026 08:38:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqRVN-00044h-Ci; Thu, 12 Feb 2026 07:52:53 +0000
-Received: by outflank-mailman (input) for mailman id 1228446;
- Thu, 12 Feb 2026 07:52:52 +0000
+	id 1vqSDf-000225-C0; Thu, 12 Feb 2026 08:38:39 +0000
+Received: by outflank-mailman (input) for mailman id 1228479;
+ Thu, 12 Feb 2026 08:38:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5O3t=AQ=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
- id 1vqRVM-00044Z-9T
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 07:52:52 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lKKS=AQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1vqSDe-00021U-05
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 08:38:38 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3d5aa62-07e7-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 08:52:49 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-59e64657f0cso574264e87.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Feb 2026 23:52:49 -0800 (PST)
+ id 385a8e97-07ee-11f1-9ccf-f158ae23cfc8;
+ Thu, 12 Feb 2026 09:38:35 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1B1C33E6E8;
+ Thu, 12 Feb 2026 08:38:35 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A551A3EA62;
+ Thu, 12 Feb 2026 08:38:34 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id +qE3J4qRjWmJMwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 12 Feb 2026 08:38:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,264 +53,339 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3d5aa62-07e7-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; t=1770882769; cv=none;
-        d=google.com; s=arc-20240605;
-        b=JIZRc7EjkkJhuJrKKGkoHo5+0omaGK/JA9HCZuQyb21K7Hd9XKcb2vPJHMMSD2v9Xg
-         ArvsExScxGC0/CI7x9DamJOOTLtugUbcAV1sJ32rJ/Quj5WUXTuMoJs7jAhYIr/IBy89
-         VIBkS/43rEufoRtb7R5lnsvkPPmUIMCzZ93y2vu7ett70vI4rlOpJvMBxtVuWzr/2Lzx
-         6GKqYWztSF+hIGOVX7i+wApUmFUus7a/OqIUuYrDHJe9kPnLT1qFlnHGdw3efDZ6s6Uu
-         6tdiHci8LfJvyszHisT9yG+g4ZvMNQwuMor2Nl1fPIlU5tJF+MdydBkRuAV36KLkaXWK
-         wS1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=oQxLgOT+6uVtcmlP+XfYaCm8tOIv/Xb7o58kWfnpXUU=;
-        fh=S1TgsMYO/ju21WOcmYTQxMlAU8ImCjuw50drwKkfBt8=;
-        b=Itj1XXeX6jLjq63lcek01cu9MAJwT8D63ICldf/7xgdDxC2QG7fYAmSa/YHnrA9jk0
-         LlmMWjkyNM1vG+B+q6AT6BP33zNEW/BC0mG71NYz2SvI/ICAP2e69yWUeNICAWaZa1ux
-         1hZbTmYuZ8WEKIwxOfTgsYRQeu+8Vx5ST6dBg83Li5CgftxhPOD/h+wlPSNJd5EbAJG7
-         fMou9u2ITc27pANvTNhPM6OHoiT9wIUSiHKsKzhYIb4yxbAoryiwcBH55qMCUyskSvM1
-         U2pYwTGdAC3/GhN5MV2pqklDdmQXHXSwLN+q6wWCnDsToDw8/Xuj5H+k+/aU9wAiWx+J
-         oyZA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770882769; x=1771487569; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oQxLgOT+6uVtcmlP+XfYaCm8tOIv/Xb7o58kWfnpXUU=;
-        b=EP30ggJ3sAmOHLxIxRgCyysy419YHDfFG92Ba78bkYiV/A0hA798wxee/nMudOyVBz
-         wu4zTweos4BVdldS2gkJubLkslMpxCgzFfyLmZnEL1uI/4Cwq5SZVNW7GZZqATO+8IGK
-         DfdHE8vuHyiOFPcpjHLSl37b8CDMgOA1hYgESakKY1l9pucztclmrrD6tExkzQAxU06m
-         jc9J9eJmI4RzOAW1owLXTKwyO32IBJhwbPPmt7qAE26MqJ2ue59OSiUa6vKuCiOqdSOP
-         EgdvD4jq50NMrUmOhXyMeKQn8wU1dBGeb30zCX6oTCxzwLErnTH+Eoa33UM+V5wG7z4L
-         9tuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770882769; x=1771487569;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=oQxLgOT+6uVtcmlP+XfYaCm8tOIv/Xb7o58kWfnpXUU=;
-        b=RbLjnl6KmI/T9e0b5B0qBtp/je5omXoyTjlLJClZlH9NBudhVURjWQPx/ODZPZH8nf
-         coJHsvluY65Al3lUCRvTRt16BQ4O253GqTaWcatAy/OAj+ofaoShzybGEUvMTO1rHxd/
-         4k/gLEXwL6ZGpM1dnfuFsCstZaEH0qIn0O2Pa+kpM48V20S+ns8otmhwC00oo+ZtlLAS
-         Cjxqqe6s6AjADcjFj2eVNrp+2T7gg3NXETXil+ii42UYSi38XcKQfFQDnL8m1wp4U8K+
-         WLNe4oXYqUNxH3IAb0e3/aJBGmPP5rV6xQLU7nohLuRfJvDyjbKGUtJI9ZweCAhTzLWd
-         S89Q==
-X-Gm-Message-State: AOJu0YxHMgNwlVIzJWbnPPUll7amZbU8X11WoMCkeWydLO09Qk01F8X6
-	pO9M6la5+lIp8lnRh2bQHBWd4HJfV60XtBvBWXy8yBaxo4igXpDSFxgLd81p3QHOvTzfbwetMw6
-	/L60OunEbkFBI29zDJBTd2Cpr/T734xU=
-X-Gm-Gg: AZuq6aIlOC+/o/spZSUnHkYWld5+V7OWMWBESbvzcUXagNfrZoHUVL0ouyUnZGZ3PNF
-	TxFSfQ1ZFGTMgwwCuXR39NMqfVf1kceFntb5ABIIGn8H0c0n5VJ0gbtO/aFNT1d8rL6/jSWQeFN
-	q+X7tCRCl75PF3g2ua8nUZg4h/UXiueyzp4cnevv1QWwKt+Ro8aKioQyvmD9SeUG0SxcSYhuEJE
-	vuvzMYIXJh/m4ueirLXJinWhU1L86j9CyJBJv/ARDgWom25V5LzbGZLtWUICd0hk1Ae8kg0a40I
-	qEbMVQ==
-X-Received: by 2002:a05:6512:1590:b0:59d:dd44:37ee with SMTP id
- 2adb3069b0e04-59e64149382mr656626e87.43.1770882768928; Wed, 11 Feb 2026
- 23:52:48 -0800 (PST)
+X-Inumbo-ID: 385a8e97-07ee-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1770885515; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/ASzH9qE0mBRibU9uWHl4KojtE+mVdpgEGiVGmw5TkI=;
+	b=Gn6GWT0tpFD4Wj0aIBXIADPNbMyqxnarB7G6+MOUb7r55zoH19ifoS/6oYN98O3iKcRraw
+	9/gjSCt246xTx4r9GkhCsE063MzrrvxyeGrIY20vFRLxt6LIR4BvoDSJ0VCcO4dLRLaU/Z
+	kwxe3FAh1YLhI3NjeVZLnZSoQpjmJsc=
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1770885515; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/ASzH9qE0mBRibU9uWHl4KojtE+mVdpgEGiVGmw5TkI=;
+	b=Gn6GWT0tpFD4Wj0aIBXIADPNbMyqxnarB7G6+MOUb7r55zoH19ifoS/6oYN98O3iKcRraw
+	9/gjSCt246xTx4r9GkhCsE063MzrrvxyeGrIY20vFRLxt6LIR4BvoDSJ0VCcO4dLRLaU/Z
+	kwxe3FAh1YLhI3NjeVZLnZSoQpjmJsc=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-scsi@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH 1/2] xenbus: add xenbus_device parameter to xenbus_read_driver_state()
+Date: Thu, 12 Feb 2026 09:38:25 +0100
+Message-ID: <20260212083826.136221-2-jgross@suse.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260212083826.136221-1-jgross@suse.com>
+References: <20260212083826.136221-1-jgross@suse.com>
 MIME-Version: 1.0
-References: <cover.1770046465.git.mykyta_poturai@epam.com> <cc8390af73d86c72d5274e6cc3c314fe018a2c8d.1770046465.git.mykyta_poturai@epam.com>
-In-Reply-To: <cc8390af73d86c72d5274e6cc3c314fe018a2c8d.1770046465.git.mykyta_poturai@epam.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 12 Feb 2026 09:52:37 +0200
-X-Gm-Features: AZwV_QhdvtBl7ySu8yV3DEgJhAblkdhJSLqMQafMSzc0Ci4YFtmE13DSegyI3uE
-Message-ID: <CAGeoDV8OeCcEvMhqJhoRMAu8AQpwtFgRLPf_NE9eFyezLqKHtw@mail.gmail.com>
-Subject: Re: [RFC PATCH 10/19] arm/its: Keep track of BASER regs
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-5.80 / 50.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	URIBL_BLOCKED(0.00)[invisiblethingslab.com:email,imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[netdev];
+	R_RATELIMIT(0.00)[to_ip_from(RLsote1drt81dzioaq3931x19g)];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo]
 
-On Mon, Feb 2, 2026 at 6:14=E2=80=AFPM Mykyta Poturai <Mykyta_Poturai@epam.=
-com> wrote:
->
-> Keep all the info about BASER regs in host_its structure to be able to ea=
-sily
-> access it later.
->
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> ---
->  xen/arch/arm/gic-v3-its.c             | 36 +++++++++++++++++++++------
->  xen/arch/arm/include/asm/gic_v3_its.h | 14 +++++++++++
->  2 files changed, 43 insertions(+), 7 deletions(-)
->
-> diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-> index c628959f42..2328595a85 100644
-> --- a/xen/arch/arm/gic-v3-its.c
-> +++ b/xen/arch/arm/gic-v3-its.c
-> @@ -430,16 +430,32 @@ static void *its_map_cbaser(struct host_its *its)
->  /* The ITS BASE registers work with page sizes of 4K, 16K or 64K. */
->  #define BASER_PAGE_BITS(sz) ((sz) * 2 + 12)
->
-> +struct its_baser *its_get_baser(struct host_its *hw_its, uint32_t type)
-> +{
-> +    unsigned int i;
-> +
-> +    for ( i =3D 0; i < GITS_BASER_NR_REGS; i++ )
-> +    {
-> +        if (GITS_BASER_TYPE(hw_its->tables[i].val) =3D=3D type)
-> +            return &hw_its->tables[i];
-> +    }
-> +
-> +    return NULL;
-> +}
-> +
->  static int its_map_baser(void __iomem *basereg, uint64_t regc,
-> -                         unsigned int nr_items)
-> +                         unsigned int nr_items, struct its_baser *baser)
->  {
->      uint64_t attr, reg;
->      unsigned int entry_size =3D GITS_BASER_ENTRY_SIZE(regc);
-> -    unsigned int pagesz =3D 2;    /* try 64K pages first, then go down. =
-*/
-> +    unsigned int page_size[4] =3D {SZ_4K, SZ_16K, SZ_64K, SZ_64K};
-> +    unsigned int pagesz =3D 0;    /* try 64K pages first, then go down. =
-*/
+In order to prepare checking the xenbus device status in
+xenbus_read_driver_state(), add the pointer to struct xenbus_device
+as a parameter.
 
-pagesz=3D0 looks like test leftover
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ drivers/net/xen-netfront.c                 | 34 +++++++++++-----------
+ drivers/pci/xen-pcifront.c                 |  8 ++---
+ drivers/scsi/xen-scsifront.c               |  2 +-
+ drivers/xen/xen-pciback/xenbus.c           | 10 +++----
+ drivers/xen/xenbus/xenbus_client.c         |  3 +-
+ drivers/xen/xenbus/xenbus_probe.c          |  6 ++--
+ drivers/xen/xenbus/xenbus_probe_frontend.c |  2 +-
+ include/xen/xenbus.h                       |  3 +-
+ 8 files changed, 35 insertions(+), 33 deletions(-)
 
->      unsigned int table_size;
->      unsigned int order;
->      void *buffer;
-> +    uint32_t type;
->
-> +    type =3D GITS_BASER_TYPE(regc);
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index 0969d5c9f6b7..2c414b77dd0f 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -1646,7 +1646,7 @@ static int xennet_xdp_set(struct net_device *dev, struct bpf_prog *prog,
+ 
+ 	/* avoid the race with XDP headroom adjustment */
+ 	wait_event(module_wq,
+-		   xenbus_read_driver_state(np->xbdev->otherend) ==
++		   xenbus_read_driver_state(np->xbdev, np->xbdev->otherend) ==
+ 		   XenbusStateReconfigured);
+ 	np->netfront_xdp_enabled = true;
+ 
+@@ -1764,9 +1764,9 @@ static struct net_device *xennet_create_dev(struct xenbus_device *dev)
+ 	do {
+ 		xenbus_switch_state(dev, XenbusStateInitialising);
+ 		err = wait_event_timeout(module_wq,
+-				 xenbus_read_driver_state(dev->otherend) !=
++				 xenbus_read_driver_state(dev, dev->otherend) !=
+ 				 XenbusStateClosed &&
+-				 xenbus_read_driver_state(dev->otherend) !=
++				 xenbus_read_driver_state(dev, dev->otherend) !=
+ 				 XenbusStateUnknown, XENNET_TIMEOUT);
+ 	} while (!err);
+ 
+@@ -2627,31 +2627,31 @@ static void xennet_bus_close(struct xenbus_device *dev)
+ {
+ 	int ret;
+ 
+-	if (xenbus_read_driver_state(dev->otherend) == XenbusStateClosed)
++	if (xenbus_read_driver_state(dev, dev->otherend) == XenbusStateClosed)
+ 		return;
+ 	do {
+ 		xenbus_switch_state(dev, XenbusStateClosing);
+ 		ret = wait_event_timeout(module_wq,
+-				   xenbus_read_driver_state(dev->otherend) ==
+-				   XenbusStateClosing ||
+-				   xenbus_read_driver_state(dev->otherend) ==
+-				   XenbusStateClosed ||
+-				   xenbus_read_driver_state(dev->otherend) ==
+-				   XenbusStateUnknown,
+-				   XENNET_TIMEOUT);
++				xenbus_read_driver_state(dev, dev->otherend) ==
++				XenbusStateClosing ||
++				xenbus_read_driver_state(dev, dev->otherend) ==
++				XenbusStateClosed ||
++				xenbus_read_driver_state(dev, dev->otherend) ==
++				XenbusStateUnknown,
++				XENNET_TIMEOUT);
+ 	} while (!ret);
+ 
+-	if (xenbus_read_driver_state(dev->otherend) == XenbusStateClosed)
++	if (xenbus_read_driver_state(dev, dev->otherend) == XenbusStateClosed)
+ 		return;
+ 
+ 	do {
+ 		xenbus_switch_state(dev, XenbusStateClosed);
+ 		ret = wait_event_timeout(module_wq,
+-				   xenbus_read_driver_state(dev->otherend) ==
+-				   XenbusStateClosed ||
+-				   xenbus_read_driver_state(dev->otherend) ==
+-				   XenbusStateUnknown,
+-				   XENNET_TIMEOUT);
++				xenbus_read_driver_state(dev, dev->otherend) ==
++				XenbusStateClosed ||
++				xenbus_read_driver_state(dev, dev->otherend) ==
++				XenbusStateUnknown,
++				XENNET_TIMEOUT);
+ 	} while (!ret);
+ }
+ 
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index 11636634ae51..cd22bf984024 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -856,7 +856,7 @@ static void pcifront_try_connect(struct pcifront_device *pdev)
+ 	int err;
+ 
+ 	/* Only connect once */
+-	if (xenbus_read_driver_state(pdev->xdev->nodename) !=
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename) !=
+ 	    XenbusStateInitialised)
+ 		return;
+ 
+@@ -876,7 +876,7 @@ static int pcifront_try_disconnect(struct pcifront_device *pdev)
+ 	enum xenbus_state prev_state;
+ 
+ 
+-	prev_state = xenbus_read_driver_state(pdev->xdev->nodename);
++	prev_state = xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename);
+ 
+ 	if (prev_state >= XenbusStateClosing)
+ 		goto out;
+@@ -895,7 +895,7 @@ static int pcifront_try_disconnect(struct pcifront_device *pdev)
+ 
+ static void pcifront_attach_devices(struct pcifront_device *pdev)
+ {
+-	if (xenbus_read_driver_state(pdev->xdev->nodename) ==
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename) ==
+ 	    XenbusStateReconfiguring)
+ 		pcifront_connect(pdev);
+ }
+@@ -909,7 +909,7 @@ static int pcifront_detach_devices(struct pcifront_device *pdev)
+ 	struct pci_dev *pci_dev;
+ 	char str[64];
+ 
+-	state = xenbus_read_driver_state(pdev->xdev->nodename);
++	state = xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename);
+ 	if (state == XenbusStateInitialised) {
+ 		dev_dbg(&pdev->xdev->dev, "Handle skipped connect.\n");
+ 		/* We missed Connected and need to initialize. */
+diff --git a/drivers/scsi/xen-scsifront.c b/drivers/scsi/xen-scsifront.c
+index 924025305753..ef74d4da5ab0 100644
+--- a/drivers/scsi/xen-scsifront.c
++++ b/drivers/scsi/xen-scsifront.c
+@@ -1175,7 +1175,7 @@ static void scsifront_backend_changed(struct xenbus_device *dev,
+ 			return;
+ 		}
+ 
+-		if (xenbus_read_driver_state(dev->nodename) ==
++		if (xenbus_read_driver_state(dev, dev->nodename) ==
+ 		    XenbusStateInitialised)
+ 			scsifront_do_lun_hotplug(info, VSCSIFRONT_OP_ADD_LUN);
+ 
+diff --git a/drivers/xen/xen-pciback/xenbus.c b/drivers/xen/xen-pciback/xenbus.c
+index b11e401f1b1e..4bd1c7a8957e 100644
+--- a/drivers/xen/xen-pciback/xenbus.c
++++ b/drivers/xen/xen-pciback/xenbus.c
+@@ -149,12 +149,12 @@ static int xen_pcibk_attach(struct xen_pcibk_device *pdev)
+ 
+ 	mutex_lock(&pdev->dev_lock);
+ 	/* Make sure we only do this setup once */
+-	if (xenbus_read_driver_state(pdev->xdev->nodename) !=
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename) !=
+ 	    XenbusStateInitialised)
+ 		goto out;
+ 
+ 	/* Wait for frontend to state that it has published the configuration */
+-	if (xenbus_read_driver_state(pdev->xdev->otherend) !=
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->otherend) !=
+ 	    XenbusStateInitialised)
+ 		goto out;
+ 
+@@ -374,7 +374,7 @@ static int xen_pcibk_reconfigure(struct xen_pcibk_device *pdev,
+ 	dev_dbg(&pdev->xdev->dev, "Reconfiguring device ...\n");
+ 
+ 	mutex_lock(&pdev->dev_lock);
+-	if (xenbus_read_driver_state(pdev->xdev->nodename) != state)
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename) != state)
+ 		goto out;
+ 
+ 	err = xenbus_scanf(XBT_NIL, pdev->xdev->nodename, "num_devs", "%d",
+@@ -572,7 +572,7 @@ static int xen_pcibk_setup_backend(struct xen_pcibk_device *pdev)
+ 	/* It's possible we could get the call to setup twice, so make sure
+ 	 * we're not already connected.
+ 	 */
+-	if (xenbus_read_driver_state(pdev->xdev->nodename) !=
++	if (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename) !=
+ 	    XenbusStateInitWait)
+ 		goto out;
+ 
+@@ -662,7 +662,7 @@ static void xen_pcibk_be_watch(struct xenbus_watch *watch,
+ 	struct xen_pcibk_device *pdev =
+ 	    container_of(watch, struct xen_pcibk_device, be_watch);
+ 
+-	switch (xenbus_read_driver_state(pdev->xdev->nodename)) {
++	switch (xenbus_read_driver_state(pdev->xdev, pdev->xdev->nodename)) {
+ 	case XenbusStateInitWait:
+ 		xen_pcibk_setup_backend(pdev);
+ 		break;
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 2dc874fb5506..6ed0cd8e9676 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -936,7 +936,8 @@ static int xenbus_unmap_ring_hvm(struct xenbus_device *dev, void *vaddr)
+  * Returns: the state of the driver rooted at the given store path, or
+  * XenbusStateUnknown if no state can be read.
+  */
+-enum xenbus_state xenbus_read_driver_state(const char *path)
++enum xenbus_state xenbus_read_driver_state(const struct xenbus_device *dev,
++					   const char *path)
+ {
+ 	enum xenbus_state result;
+ 	int err = xenbus_gather(XBT_NIL, path, "state", "%d", &result, NULL);
+diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
+index 9f9011cd7447..2eed06ba5d38 100644
+--- a/drivers/xen/xenbus/xenbus_probe.c
++++ b/drivers/xen/xenbus/xenbus_probe.c
+@@ -191,7 +191,7 @@ void xenbus_otherend_changed(struct xenbus_watch *watch,
+ 		return;
+ 	}
+ 
+-	state = xenbus_read_driver_state(dev->otherend);
++	state = xenbus_read_driver_state(dev, dev->otherend);
+ 
+ 	dev_dbg(&dev->dev, "state is %d, (%s), %s, %s\n",
+ 		state, xenbus_strstate(state), dev->otherend_watch.node, path);
+@@ -364,7 +364,7 @@ void xenbus_dev_remove(struct device *_dev)
+ 	 * closed.
+ 	 */
+ 	if (!drv->allow_rebind ||
+-	    xenbus_read_driver_state(dev->nodename) == XenbusStateClosing)
++	    xenbus_read_driver_state(dev, dev->nodename) == XenbusStateClosing)
+ 		xenbus_switch_state(dev, XenbusStateClosed);
+ }
+ EXPORT_SYMBOL_GPL(xenbus_dev_remove);
+@@ -514,7 +514,7 @@ int xenbus_probe_node(struct xen_bus_type *bus,
+ 	size_t stringlen;
+ 	char *tmpstring;
+ 
+-	enum xenbus_state state = xenbus_read_driver_state(nodename);
++	enum xenbus_state state = xenbus_read_driver_state(NULL, nodename);
+ 
+ 	if (state != XenbusStateInitialising) {
+ 		/* Device is not new, so ignore it.  This can happen if a
+diff --git a/drivers/xen/xenbus/xenbus_probe_frontend.c b/drivers/xen/xenbus/xenbus_probe_frontend.c
+index f04707d1f667..ca04609730df 100644
+--- a/drivers/xen/xenbus/xenbus_probe_frontend.c
++++ b/drivers/xen/xenbus/xenbus_probe_frontend.c
+@@ -253,7 +253,7 @@ static int print_device_status(struct device *dev, void *data)
+ 	} else if (xendev->state < XenbusStateConnected) {
+ 		enum xenbus_state rstate = XenbusStateUnknown;
+ 		if (xendev->otherend)
+-			rstate = xenbus_read_driver_state(xendev->otherend);
++			rstate = xenbus_read_driver_state(xendev, xendev->otherend);
+ 		pr_warn("Timeout connecting to device: %s (local state %d, remote state %d)\n",
+ 			xendev->nodename, xendev->state, rstate);
+ 	}
+diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
+index c94caf852aea..15319da65b7f 100644
+--- a/include/xen/xenbus.h
++++ b/include/xen/xenbus.h
+@@ -228,7 +228,8 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr);
+ int xenbus_alloc_evtchn(struct xenbus_device *dev, evtchn_port_t *port);
+ int xenbus_free_evtchn(struct xenbus_device *dev, evtchn_port_t port);
+ 
+-enum xenbus_state xenbus_read_driver_state(const char *path);
++enum xenbus_state xenbus_read_driver_state(const struct xenbus_device *dev,
++					   const char *path);
+ 
+ __printf(3, 4)
+ void xenbus_dev_error(struct xenbus_device *dev, int err, const char *fmt, ...);
+-- 
+2.53.0
 
-nit: unused
-
->      attr  =3D gicv3_its_get_shareability() << GITS_BASER_SHAREABILITY_SH=
-IFT;
->      attr |=3D GIC_BASER_CACHE_SameAsInner << GITS_BASER_OUTER_CACHEABILI=
-TY_SHIFT;
->      attr |=3D gicv3_its_get_cacheability() << GITS_BASER_INNER_CACHEABIL=
-ITY_SHIFT;
-> @@ -479,6 +495,11 @@ retry:
->      writeq_relaxed(reg, basereg);
->      regc =3D readq_relaxed(basereg);
->
-> +    baser->val =3D regc;
-> +    baser->base =3D buffer;
-> +    baser->table_size =3D table_size;
-> +    baser->pagesz =3D page_size[pagesz];
-> +
->      /* The host didn't like our attributes, just use what it returned. *=
-/
->      if ( (regc & BASER_ATTR_MASK) !=3D attr )
->      {
-> @@ -490,7 +511,7 @@ retry:
->          }
->          attr =3D regc & BASER_ATTR_MASK;
->      }
-> -    if ( (regc & GITS_BASER_INNER_CACHEABILITY_MASK) <=3D GIC_BASER_CACH=
-E_nC )
-> +    if ( gicv3_its_get_cacheability() <=3D GIC_BASER_CACHE_nC )
->          clean_and_invalidate_dcache_va_range(buffer, table_size);
->
->      /* If the host accepted our page size, we are done. */
-> @@ -568,26 +589,27 @@ static int gicv3_its_init_single_its(struct host_it=
-s *hw_its)
->      {
->          void __iomem *basereg =3D hw_its->its_base + GITS_BASER0 + i * 8=
-;
->          unsigned int type;
-> +        struct its_baser *baser =3D hw_its->tables + i;
->
->          reg =3D readq_relaxed(basereg);
-> -        type =3D (reg & GITS_BASER_TYPE_MASK) >> GITS_BASER_TYPE_SHIFT;
-> +        type =3D GITS_BASER_TYPE(reg);
->          switch ( type )
->          {
->          case GITS_BASER_TYPE_NONE:
->              continue;
->          case GITS_BASER_TYPE_DEVICE:
-> -            ret =3D its_map_baser(basereg, reg, BIT(hw_its->devid_bits, =
-UL));
-> +            ret =3D its_map_baser(basereg, reg, BIT(hw_its->devid_bits, =
-UL), baser);
->              if ( ret )
->                  return ret;
->              break;
->          case GITS_BASER_TYPE_COLLECTION:
-> -            ret =3D its_map_baser(basereg, reg, num_possible_cpus());
-> +            ret =3D its_map_baser(basereg, reg, num_possible_cpus(), bas=
-er);
->              if ( ret )
->                  return ret;
->              break;
->          /* In case this is a GICv4, provide a (dummy) vPE table as well.=
- */
->          case GITS_BASER_TYPE_VCPU:
-> -            ret =3D its_map_baser(basereg, reg, 1);
-> +            ret =3D its_map_baser(basereg, reg, 32, baser);
-
-Since MAX_VPEID is introduced later in the series, could you use it here
-instead of the hardcoded 32 (or reorder the patches so it=E2=80=99s availab=
-le)?
-
-Also, if the BASER ends up indirect, the L1 sizing should be recalculated
-from MAX_VPEID.
-
-
-Best regards,
-Mykola
-
->              if ( ret )
->                  return ret;
->              break;
-> diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include=
-/asm/gic_v3_its.h
-> index 973ca6acdd..bd2696f354 100644
-> --- a/xen/arch/arm/include/asm/gic_v3_its.h
-> +++ b/xen/arch/arm/include/asm/gic_v3_its.h
-> @@ -64,6 +64,7 @@
->  #define GITS_BASER_INNER_CACHEABILITY_SHIFT        59
->  #define GITS_BASER_TYPE_SHIFT           56
->  #define GITS_BASER_TYPE_MASK            (7ULL << GITS_BASER_TYPE_SHIFT)
-> +#define GITS_BASER_TYPE(reg)            ((reg & GITS_BASER_TYPE_MASK) >>=
- GITS_BASER_TYPE_SHIFT)
->  #define GITS_BASER_OUTER_CACHEABILITY_SHIFT        53
->  #define GITS_BASER_TYPE_NONE            0UL
->  #define GITS_BASER_TYPE_DEVICE          1UL
-> @@ -143,6 +144,17 @@ struct its_device {
->  #endif
->  };
->
-> +/*
-> + * The ITS_BASER structure - contains memory information, cached
-> + * value of BASER register configuration.
-> + */
-> +struct its_baser {
-> +    void            *base;
-> +    uint64_t        val;
-> +    unsigned int    table_size;
-> +    unsigned int    pagesz;
-> +};
-> +
->  /* data structure for each hardware ITS */
->  struct host_its {
->      struct list_head entry;
-> @@ -156,6 +168,7 @@ struct host_its {
->      spinlock_t cmd_lock;
->      void *cmd_buf;
->      unsigned int flags;
-> +    struct its_baser tables[GITS_BASER_NR_REGS];
->  };
->
->  /* Map a collection for this host CPU to each host ITS. */
-> @@ -259,6 +272,7 @@ struct pending_irq *gicv3_assign_guest_event(struct d=
-omain *d,
->                                               uint32_t virt_lpi);
->  void gicv3_lpi_update_host_entry(uint32_t host_lpi, int domain_id,
->                                   uint32_t virt_lpi);
-> +struct its_baser *its_get_baser(struct host_its *hw_its, uint32_t type);
->  void lpi_write_config(uint8_t *prop_table, uint32_t lpi, uint8_t clr,
->                        uint8_t set);
->  int its_send_command(struct host_its *hw_its, const void *its_cmd);
-> --
-> 2.51.2
 
