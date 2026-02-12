@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 652FAEB48EC
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 09:25:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1228523.1534665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF1EEB48EC
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Feb 2026 09:27:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1228533.1534675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqSwS-0000vI-6H; Thu, 12 Feb 2026 09:24:56 +0000
+	id 1vqSyX-0001QV-Gs; Thu, 12 Feb 2026 09:27:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1228523.1534665; Thu, 12 Feb 2026 09:24:56 +0000
+Received: by outflank-mailman (output) from mailman id 1228533.1534675; Thu, 12 Feb 2026 09:27:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqSwS-0000vB-3f; Thu, 12 Feb 2026 09:24:56 +0000
-Received: by outflank-mailman (input) for mailman id 1228523;
- Thu, 12 Feb 2026 09:24:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqSyX-0001QO-E5; Thu, 12 Feb 2026 09:27:05 +0000
+Received: by outflank-mailman (input) for mailman id 1228533;
+ Thu, 12 Feb 2026 09:27:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=x+We=AQ=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vqSwQ-0000uP-LK
- for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 09:24:54 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id afa38f32-07f4-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Feb 2026 10:24:52 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4834826e5a0so30378795e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 01:24:52 -0800 (PST)
+ id 1vqSyW-0001QG-61
+ for xen-devel@lists.xenproject.org; Thu, 12 Feb 2026 09:27:04 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fd1f6fee-07f4-11f1-b162-2bf370ae4941;
+ Thu, 12 Feb 2026 10:27:02 +0100 (CET)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-43622089851so2727617f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 01:27:02 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4835d99e194sm83196165e9.8.2026.02.12.01.24.51
+ ffacd0b85a97d-43783d30d9csm10083373f8f.1.2026.02.12.01.27.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Feb 2026 01:24:51 -0800 (PST)
+ Thu, 12 Feb 2026 01:27:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afa38f32-07f4-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: fd1f6fee-07f4-11f1-b162-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1770888292; x=1771493092; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=84uSx/VQGm/ibGpJzOmVAPW2ZtBCAufv5feK/NjWluM=;
-        b=IhxwwS20IwaLCPaJvUqAsOMQQqjzfJrBcX2YvGh6AAN8Ydy3rppSV74WSNEnMjshn9
-         dQ6vFBUW+nQ6M/eT65Jyp8PVhgOoLLKh7rGvajdDCupdoQMJ8QDpGB5xq5n5U9OPddNA
-         jYBJESBRUiJV2vCCqarpEIqoPGx95wJYwsDvv6ggfB8sfW+kFunIBdQUc+kJ2Srp65ls
-         mNZg1gc+I4MFfonk3plOnXieB9LWOj1/TERip5xak3Cd7eqQI0UC2xvYWow4D9j7MZ+O
-         63bV8g8v/PSKndVbIZPU77qKnvc5xegALqRGgAm8Qi09enSns/FiW3rBztZv9Qnh7Dhu
-         3hdw==
+        d=suse.com; s=google; t=1770888422; x=1771493222; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=MHDrVncJbhMbEdu5PTplUAZkgHCPM4SFU7nH7X5cza0=;
+        b=ThxHT9r7wS0jkLU6cZ0Eoazz+HyWo5POo4vQgkDCy0+sDbI/n80p33u1lNEaTNhLph
+         6KP+fGL3U9LPAMSKhqWBXOaG55L9x7tm9HzHjLdrftqYNFgyZ05/8YNSKgNhsZQ62lxQ
+         +RXoSq1ua/BSdzLG1iYs01695OIg8NLbZNeCXW8zDS9O4AQACSL7vDiyM2RUo1qiVRNg
+         MgDNzKIdNtIplJzsjs2aiFcTdo1+1JaTZBhOzm1TJqSLfx08Z+uqRpjVIqDmzdNyII3m
+         n7mmF6pgXeT6xFgm2d5hEOZtLY6ep5sVSikKkDEJIqbGLm60Y/Cm7y7dlncwstVVldxa
+         7cJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770888292; x=1771493092;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+        d=1e100.net; s=20230601; t=1770888422; x=1771493222;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=84uSx/VQGm/ibGpJzOmVAPW2ZtBCAufv5feK/NjWluM=;
-        b=qHK2m9d/wxPSFHYQLWKYqTjmx7B2YkOi0UJVEUJJbhmva6WXTRqUzVQqqZb7dKUUQQ
-         4JHleT/F649W/y7aXPYhhs/bG0Al+DaVk9LPWPm/rRY2R82guSw6YUGj6i78T4kLojNt
-         0t9GAL3F5t0exuY1JFSnekOsyA9kycjoflRq1nRGV9g/UwYhNBoO+gcSWUzJN9GLlPq7
-         hShJYXkaEOlb+feonDl1iExIS+HOjuHJJNgdgPxvVeA5XtS1t7/ilagP247EhqYZVcyc
-         s/EUXeZivijXUZQidZMc48q9Gaa5uH34+Q/3eMLjNefHg4w62ybGkypplVxxNCC8TXpN
-         ulNw==
-X-Gm-Message-State: AOJu0YwaC3VlUcpGHTNmhJoHfj8YfYQ2e76EWWbwR9Ltq9jbJug6TOOe
-	kK9+uf2ihOcn9+sqrbwVREfsb1zIn1FKE/Zxk5MLwb6tN46Yqpy3wUw/S/KxSoUcR+m8O7q25JL
-	FbiA=
-X-Gm-Gg: AZuq6aJs+IOZN6Dk/vHNNmalcgLwjMlfxczCsJAe14UhdJdtEHfJ1JiYkZTsYs8EeHB
-	Lb17R1wiqSR9H8Zlhh2o3tzj19xWJzBJRAca72GDTUqJ+NBb4REDGmNw67BRIV2D9QKXC6mAJWA
-	ZoeEI0hdHy/tYVQU6D9uyzb3TZMxZPC6DiDDY2zMDRItAVZCQBVe//kkY+eZ4u5/6k7CAyXWZ29
-	Ve1MgO6/nc1hjMn5v1993Yurb17auWo2sQi/x35ru+CRAXQlDmZPSthoziMr8y9kGZg/hkCWs9u
-	CrrkgzHNQCKRFS4/xfLOBTa/BGxh9t59WYue4TqaEiDt6DSSs2QpbzK6zbzW/LlgONJuacBDgZq
-	eZBe7rcgLjGhaxgq/vyfzzdXBnMwk0OJPh2xuZl4JDAP5MM70ChAUd6zjWK3mBPo8UNFfddYlTP
-	maGW/fMpfjl7TVVv59z/7ahsXTR0wsfwCN5bhBSWn8dbWCpW5QtXPA3FCz5/9LgIUN66uOrB3CJ
-	X1ebg3N9C/TPxY=
-X-Received: by 2002:a05:600c:34d0:b0:471:13dd:bae7 with SMTP id 5b1f17b1804b1-48367162f3cmr22104965e9.30.1770888292011;
-        Thu, 12 Feb 2026 01:24:52 -0800 (PST)
-Message-ID: <96f8028e-bdc1-4d8e-9fa8-55f209a5c7b9@suse.com>
-Date: Thu, 12 Feb 2026 10:24:49 +0100
+        bh=MHDrVncJbhMbEdu5PTplUAZkgHCPM4SFU7nH7X5cza0=;
+        b=l5oufv/ve/rZhlgpEiI+1LgFUIcVpRKPt5lKu0pgDHOiCocamXTJzIJiNUf5mOLqMw
+         t7NvYaxePfsix5Q5GjD9iH4zsZn528kx5FQur2jTjpdTU1wNCWCSxo8qOz4R8XXBBMEZ
+         8+bfAugPKc29Iai1MlsnLGkiLBV1Q69LrmgBDQkNzAyJuH4+pi2iEz1qX/0aSSNK2pal
+         JmOpbH9N+Te0/2DkfbLwctv2TiZsM8VBWz4xwZv+hQ9RH9kLFuU+yE+iZmetbeIlcLTA
+         6j0xyv+GTuFF+xsaO2jvmCIEBTNqqnTFCEMyq9MolRhV+tAT8Bfv2N4OzSV5BmLkEo5d
+         XtJA==
+X-Gm-Message-State: AOJu0YzSJlUhWN9QqNWxTyIU9p3FREwW2dC74CkEKC15fLvVzXvxdzK9
+	GGHRCvX5FWI42dZhShSEcVGv3v4CsuZy7+yM8TS/ExrsIONWfxCyDqtMjA9KELDs+jx8+Z5KlDI
+	L6hE=
+X-Gm-Gg: AZuq6aKkiSO3MQ+tjA0xUZb5E5zDThEOjK0bCnefKH5lUhAca6PkMzaoCbrT+DDS1lN
+	D/0V5285CKMYGFaF+OViIDaO5G+Mrb9Ow1eE9nJyAqJ9ZmHuvCtrKUyJN9g/yadM/zD9s6k1i7K
+	SmMyPBVpwclqcjEqbjPGEqNrPvHExQMXD87fbcngRND//cAZfXaiP2cB+QVKissYdrkJwarejm5
+	sG6+chG0AGryvRR5jt3vht6qtP9LuZKs7hqHstpkbiGLOW32om0Mhb6EKAOQoCbvRYPGyAMISwz
+	SJG8lZAmp5Is+FAwdC04QowTojZCtTByJ1qiAIKsphwYieKZbyunyzjIWh9FrVFXUdoBkkhUy6D
+	T/zYy5ISvKxO53jaqfI/G8aLU4OeXO3uyQir92P6fIESJJgK1hztIKgEYeF6nFrLMk5KwbvurC4
+	ugXHrSS08fEl/kYlY34FJuTeZvUl/eh4lPts3O2DWh+WiCteoCGvggY21yaeLzv8qAd20Wudplb
+	D/f/T/j3QRDiR0=
+X-Received: by 2002:a05:6000:220d:b0:436:216:98d8 with SMTP id ffacd0b85a97d-4378f1051aamr2510327f8f.12.1770888422002;
+        Thu, 12 Feb 2026 01:27:02 -0800 (PST)
+Message-ID: <b2d6108d-0035-4187-b83e-b63519d5cbac@suse.com>
+Date: Thu, 12 Feb 2026 10:26:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH for-4.20] SUPPORT.md: extend "lifetime"
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: "community.manager@xenproject.org" <community.manager@xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
@@ -97,8 +98,7 @@ Cc: "community.manager@xenproject.org" <community.manager@xenproject.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH for-4.21] SUPPORT.md: extend "lifetime"
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -137,13 +137,13 @@ mail may still be stuck in moderation there.
 +++ b/SUPPORT.md
 @@ -11,8 +11,8 @@
  
-     Xen-Version: 4.21
-     Initial-Release: 2025-11-19
--    Supported-Until: 2027-05-19
--    Security-Support-Until: 2028-11-19
-+    Supported-Until: 2028-11-19
-+    Security-Support-Until: 2030-11-19
+     Xen-Version: 4.20
+     Initial-Release: 2025-03-05
+-    Supported-Until: 2026-09-05
+-    Security-Support-Until: 2028-03-05
++    Supported-Until: 2028-03-05
++    Security-Support-Until: 2030-03-05
  
  Release Notes
- : <a href="https://wiki.xenproject.org/wiki/Xen_Project_4.21_Release_Notes">RN</a>
+ : <a href="https://wiki.xenproject.org/wiki/Xen_Project_4.20_Release_Notes">RN</a>
 
