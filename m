@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0754EDF148
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 11:37:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230653.1536081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3DFEDF148
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 11:37:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230657.1536119 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqrU0-0001i1-OQ; Fri, 13 Feb 2026 11:37:12 +0000
+	id 1vqrU4-0002WM-Ne; Fri, 13 Feb 2026 11:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230653.1536081; Fri, 13 Feb 2026 11:37:12 +0000
+Received: by outflank-mailman (output) from mailman id 1230657.1536119; Fri, 13 Feb 2026 11:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqrU0-0001hu-Lh; Fri, 13 Feb 2026 11:37:12 +0000
-Received: by outflank-mailman (input) for mailman id 1230653;
- Fri, 13 Feb 2026 11:37:10 +0000
+	id 1vqrU4-0002W6-Ct; Fri, 13 Feb 2026 11:37:16 +0000
+Received: by outflank-mailman (input) for mailman id 1230657;
+ Fri, 13 Feb 2026 11:37:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VfN9=AR=epam.com=Oleksii_Moisieiev@srs-se1.protection.inumbo.net>)
- id 1vqrTy-0001fQ-AQ
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 11:37:10 +0000
+ id 1vqrU2-0001fQ-BR
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 11:37:14 +0000
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [2a01:111:f403:c201::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 54f0cb9b-08d0-11f1-b163-2bf370ae4941;
- Fri, 13 Feb 2026 12:37:09 +0100 (CET)
+ id 574288de-08d0-11f1-b163-2bf370ae4941;
+ Fri, 13 Feb 2026 12:37:13 +0100 (CET)
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
  by DB9PR03MB7615.eurprd03.prod.outlook.com (2603:10a6:10:2ce::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Fri, 13 Feb
- 2026 11:37:04 +0000
+ 2026 11:37:06 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::98:900e:f8e2:716f]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::98:900e:f8e2:716f%5]) with mapi id 15.20.9611.012; Fri, 13 Feb 2026
- 11:37:04 +0000
+ 11:37:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54f0cb9b-08d0-11f1-b163-2bf370ae4941
+X-Inumbo-ID: 574288de-08d0-11f1-b163-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H+sb+QlIoFGZZgMUxHr9efipNWjZDLA+5LdXXCUg6mCvcjiCGb/qHJSXiIApY0/pWQqa3m1nkKm4zSt3KiRoCrzHHYfMKAQeZR7JU48cwcaTDZVo9ZfY945jAt+WARv/WtJeo/PB+BnRBoPbyZIX7N91lmqQMVE2fDuRbdSEMhbYoT/DYVkZNbbOy8nEJ2YP1br1HxeQVyNNDIEDJ24+4O0p5PL6JsHujT7Z9s4XI7BPSYNY7Dg85xkn39juRbwxAt00HhEFlcMCeBoFrStiKwlll96wvVvKgrLwdFWBtSYsDzCQS918JTnreHeKJZqunkhaTHFVU9TdU1I784IzBw==
+ b=voFYj/fI+dv2/gDbLLOZU8tn0PFwxmwh6Zu6409JKMOOqkf8XY7g6sPIx/xB830kzrl2P8o9ZOlXLj+bqDWhjQzwmeED5laDmGfEuZCTxml/Ky3KChTN7td5VC8qkaMmwy1k1I9WaARPDa5BN5oY9aB5bKpKDqqj1JQmbG2cXtfNZSt1E2yUjFqm997LoDDV1yTx+nDktwmVrZabOkeo/O44NJzLKT+OhvWN5NaUJkCGt4sddlhjFCZ8p+IkzW7n6oHnZzxZZmYJapNb2ar0UtPGThMcdB9Cdy3FLi6RlyuwAlp8+TK2gwVtQoEyVczXagZHJqRMNiish1M7KG4HoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7Nk1CN+j4B/Mq/rCvZP0747CGWDJEwdX0Pe1Pu44Qbs=;
- b=Y5avRrt0HgX41VyW3Dy5s80lMAG9nmJC/5cIeplF5HsvRNgEE/GbXuC69iJ+StR9ndzg/XNdlCEVo4h9fCgAg4NBVV2fR5/CqbpCtjftOgwGCKCyYDEC+JdzD6cMoKCL2HCxObZN8LpFzieU/YnuWWP3JA0vY5jzqj+1szdDCFBJZeRhBgckRiBVy5p6kdIpuo1QQ5KjePSdjWNetmUyYbYkRdAXAtWtNYEV+XVdb8tZV4bU8oCWKPuyGSJ78nYYUn7tXB+maQau1v1u9bi+qwnhD9D6xvKdteU+cYplGnlc122uhnymW2Ysc9EQUMvT8sE4gdGDjMclygBk6Nmz2A==
+ bh=Mgaqa/c01imoHfkCt8+vCDciT8+gmUNtf4qlSh39+Go=;
+ b=BvI1D59x0e2s067rSfVPdtYvR5S/0Z+v8ZIecVMDMWQZIe1xvD07xgtsSPk/lsLfaNZ0makLPEalDT607rKjYsfb8ITZ3iZur/dWdXM+MZ1f/Kcs9B6PjaTe3Z6Nl/qUrsacZP6/+PM57VJboAGXqOoJFrucROSq/bmabmI21moD6hjcbucpk4cottXcqUfsWdUbKuBXhYd5QBl36xl65zj1HS/kymkSRdKOlovAxAIa67LSdsH9SWqs/0TvGKitBLhLPdfqYqsA15tYowMJ6YVDmU8UuLH6ScgJx9Xt7eH2CaPLZ8YZQTwRhX+qjYcktgL9XgNLmqKj38KxeoDVqA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7Nk1CN+j4B/Mq/rCvZP0747CGWDJEwdX0Pe1Pu44Qbs=;
- b=Pxfr4Zv+n5eAEb74m3Z4vafG8lsjdB8Ln4pB6agglxRgSaHqJ2YXCAbP+GnBurjjUy7fnGSteVC+QA0GGru/agJqLjremTgQqNqM+VdZ2WosVSrdUi7T73pmgjvUisophNdGleJlrGe0ezpE/iGvWnfz89p0RBAabFHjRwmPGgfCkbbHjSL5Vn3ldRcWa8Yr2dHDcoxyujcK93TZyfwbKBLgKbosKhUiUbnW7btZ3r3sBLRdc6ZLa5WKJvod84jjXNdP2zRt1dS7shgUDvUG4icvCRyqKKskVyK5IfVgGQW0koTKici5uwoqWNSroraWC5fyhoc2zrY4MGhir5gq4g==
+ bh=Mgaqa/c01imoHfkCt8+vCDciT8+gmUNtf4qlSh39+Go=;
+ b=EFjOLo2K51eiVE/TWKM9x1MdKVAr2Jgzo0bCaqy0ihgcQYJqqx1arabugW82G6N1VfEEzpMGGmm8JtccEJwrRGwwPNvIF3AIZAyePWmIIsyMjx5Mx1zT0dNmk+UZ3I5vsS302GBXhfQ0jVUuugF3GcM/9q8JMF4WdtAYGEX0X9NbLb1YTkJqYoHYXrkBwQhXRbWhAXm3Z3M3ZyS00a/smjlLhXDD4U4eqkn/3sAqNLA325JSWxg2O847cIoT7OgM99+Hwd+tPH09Cr4uAu9lvKdeeEGGRexvfPjVHGDbixpiBh2lBryvg5ioeNJTYg4IswhoAIJmPXC9/xjXQJycXA==
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
@@ -74,13 +74,14 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
 	<grygorii_strashko@epam.com>
-Subject: [PATCH v10 2/6] xen: arm: smccc: add INVALID_PARAMETER error code
-Thread-Topic: [PATCH v10 2/6] xen: arm: smccc: add INVALID_PARAMETER error
- code
-Thread-Index: AQHcnN0ThbUhqTNjT0mv3PupYnT1Yw==
-Date: Fri, 13 Feb 2026 11:37:04 +0000
+Subject: [PATCH v10 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
+ configuration
+Thread-Topic: [PATCH v10 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
+ configuration
+Thread-Index: AQHcnN0UQQ2Rybdd30qyWy1uKJ9HWQ==
+Date: Fri, 13 Feb 2026 11:37:05 +0000
 Message-ID:
- <541be1f41d07d9819390e522fb7298c95413ad1d.1770982468.git.oleksii_moisieiev@epam.com>
+ <4ed96ed7bbb04c02b09eed63730702398b00b83f.1770982468.git.oleksii_moisieiev@epam.com>
 References: <cover.1770982468.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1770982468.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -91,120 +92,212 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DB9PR03MB7615:EE_
-x-ms-office365-filtering-correlation-id: 4d4f8e32-550c-467a-1a23-08de6af43637
+x-ms-office365-filtering-correlation-id: 6091f36a-e073-4df0-b31b-08de6af436f9
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|7416014|376014|1800799024|366016|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?9lg8BNIOYw/tE5M1C5hPkCcDAqOJHNk/GXoB9o8T8w06Mp7DDFfEiy/8E6?=
- =?iso-8859-1?Q?SJgr70U3lwxLnVgjLrz7r23HEiIZfs07ZVCMNLaGN74y+LTx6V6ep23gX4?=
- =?iso-8859-1?Q?j4Gzo0UcdOm2ysAGbHk85PDI1YRQq4uqqmjtnr5kSb2eof2ZIB5jTcq2z6?=
- =?iso-8859-1?Q?WBCdYL4OHYbP36IpE59M+cYsy+L99xLVa3/bApyeBh8cKwDeGIS562F0R8?=
- =?iso-8859-1?Q?nz6zHh8xJgMxJcfC2JoU65wokLSQHCX6iDUvuvcZT2cl/4zV1lmpgmfWUc?=
- =?iso-8859-1?Q?5VGDD+3c3PwyekpYEUgiuAsYafq5ZmSdo7YlgWt5slMAqTmlZvKvbqFNSS?=
- =?iso-8859-1?Q?4iOK+uXoj+EfZM9PLgTZV7uMM1tfrymu9fj6WvRMzLkAlD5BWTUbIOZcbx?=
- =?iso-8859-1?Q?UxFa4tb9SyuDEPFUlybuXXvcDgtbzqBQK7WPoQn5oXjS8PbrTJaL/CAa/+?=
- =?iso-8859-1?Q?LJ95rsqvxO313YaPos1E4EMJw2wlXd1Az3xx29OqP1VeHUzQ17ZG5E+a2i?=
- =?iso-8859-1?Q?I02LoCAFW3CYJY0G+0OtmB5QU2FpAS0fNvARJN52ngIELzmZDS+ebU5lBq?=
- =?iso-8859-1?Q?HJyDj5f5u6b5gm4Sm7dJC/GXsIJ7s7hSgzMLiKp6ndTtAiq+5EeWfmRUZH?=
- =?iso-8859-1?Q?9lgEU3ysyhO9hmu3Gd5U8DIxQmfiyjLGIe8jtxV0/xGayquy09XF27j0oP?=
- =?iso-8859-1?Q?4mn2c0ClPS9qJNPJGjWhRkUeugh/uFiQ0fQ3rI5P85azXHP7V+ppoeu3tS?=
- =?iso-8859-1?Q?o+B6W3c/McxUQnyQcq4fxeuBcEVpHyS0g7hBaJ/g+BFImOZXz25ufogw0p?=
- =?iso-8859-1?Q?7o3/zM/Ghs8Y4rel9j3H9nSKeEd216o0KigRhdllbE6jld6fVSE7+L5y7+?=
- =?iso-8859-1?Q?liBEWZOf8GJOH1DgiWz+sNjXxt2CBXhT2bO/FVymNM25xOncZsPNoRKP2N?=
- =?iso-8859-1?Q?rNMcb9WE2+e1btM6BDL1mmkh7sbE4GRO1hIbcpMWy1107Pn+vHZm6bX1wI?=
- =?iso-8859-1?Q?lXEHULXk89h6zexie8MZrVbg6vWZOfxlFh5VS2rF6VJAo0qf7mHMlNAp6p?=
- =?iso-8859-1?Q?aqVmGy8ygEJKmuiNNWMsb6ZlVQ5YKGwv3v5mGy1X2OdjmEebydig5+Wxd7?=
- =?iso-8859-1?Q?0lgktlINweU0mwDmJmLKJ0o+Rnvs8U5fUCxtmGUBnnZCiXaanqOvgSbm8I?=
- =?iso-8859-1?Q?wX/yeqz1nU1RgOSJngGbyPjNcS40ICTEt6VVn3/etkD0Ar4u/8Siv2gign?=
- =?iso-8859-1?Q?cTs2Dob7e4vLWr4WLMXzdmQaZEyYlch3PNEactkJeb8uWxVWo42Bq55mYP?=
- =?iso-8859-1?Q?ithcblXpL07d7lsMjE58GSsuwkPvOgj57uno/KQLUdUh8jHXFpzC8lbME+?=
- =?iso-8859-1?Q?3X1jdQ9itPGKnUadWW+ZjZuT5hPBCx5t3uxMTG6ObCABIKthbA8YmrsY/P?=
- =?iso-8859-1?Q?h2FRvK+h5QaRWKM0d2t8LlDSdr5uYoQugpx1AMI9qB/RomWYyvfDlua4dQ?=
- =?iso-8859-1?Q?MAt/IAwYcC35vxcmkcP+k35KEprJ0jroLLP0ruVavHyc3HjzSR7jB1OzxN?=
- =?iso-8859-1?Q?YJ7D6EsDcGJ2hssbUSq0jqxMbGOW6GNfskQdxkbCWVXhIygcN7bu/LsYjU?=
- =?iso-8859-1?Q?MkI48jCW5L71lFGxd/KXiIRVOEwutbc6yTp0FzqFgmbZuHi0vnvBVKzo3h?=
- =?iso-8859-1?Q?ELwmxJpLweHz3SXWYbc=3D?=
+ =?iso-8859-1?Q?hdkahDW7wQgpPdP2C/sjFTFS0UlBUPHMyZ2AXVAhNSPQ7/Qn+vmlBqWzdI?=
+ =?iso-8859-1?Q?EEUf8Doln+cA7yeFyXpToUn7ONGCtjE2ccUXW66//P6MWbjBeTXgOVsXqH?=
+ =?iso-8859-1?Q?q6bkk59ssydK4gF83+oo+9fPgbkP3CVsaUa2OrCg6TNzAMbOgP8q/epPB8?=
+ =?iso-8859-1?Q?GnLKOCzjoSt9DPKYrXe3CUALbWzkoL5XfV9RMAsrTlftxhWLwOXju8XwkG?=
+ =?iso-8859-1?Q?K57zjJ5WTasxQ8SP9l3UGwy7TYV2eFSH5Ds5sbjaBuhRQAC5ur15E5Y3/N?=
+ =?iso-8859-1?Q?vVHmwOyoaHAFTIoNMdJBFfRCjrdr/qTo4nfiqp+uxU1G8Dt1ou4baYjsZz?=
+ =?iso-8859-1?Q?RA6gXTZfifRTTVsxkEZQ31VjeQrRM1ukhdzSATDzbirG+bVJCgogsS8tlK?=
+ =?iso-8859-1?Q?g0YlKqXUeN6wHJ+RRcktxL+MGYw+R9mpfjf17HTiyAkwtbEB18YPTIf4uz?=
+ =?iso-8859-1?Q?rjGrrTPgv1zSxEX+R+wNvl8XMnQpGEWphTIMLW850I/KrdS33eOoOvN4dx?=
+ =?iso-8859-1?Q?fH87UfBWTMWyBrePEC8x/yeLd2DS5c49srRqgOArkxw8uSJv2a0n6psZYA?=
+ =?iso-8859-1?Q?RhLPs6VyiBZu+pjt9bvyfgi4gIdW54lddIXAqyiAob5ucp6oHbipChnmU3?=
+ =?iso-8859-1?Q?3ZT5vdCTG3emcNyDLX9LrIzH9SMQaSAgobZWpj5E+9pe1eJ3QkTbQBCfSS?=
+ =?iso-8859-1?Q?9NvQG2JeA5LvAKDz4tqEewFnW7w7e0iLrogxK9e2mPBZYddw4WRa3qKb5c?=
+ =?iso-8859-1?Q?5gcRdJS6G8QtzAE/C4FEylRQ2GXFFi+Eeg7Op8sAB0dNSkmp6AB0aN2E7n?=
+ =?iso-8859-1?Q?irrmFvJvTh32y+Tm+2y3GxRzZ3FBXzW79XINmTnui+uUJ3k+tBBvcGBV+T?=
+ =?iso-8859-1?Q?T7wEkSzoy6f6IdUfanXyk7iZq51JH4PzNcrk6btegmSBJi3u+wHqX3f4bJ?=
+ =?iso-8859-1?Q?HDMvhSRWpXF0pEQMP1qQqzEmjb/u3+6aXAFagpP6dCrdV5oxlQTVUCTEEY?=
+ =?iso-8859-1?Q?VHEZqp8gKGhZ7IC/DMKXpfQeYo7zU/ZJtzDMh7qef7HQAHd3Eac2fVMyHx?=
+ =?iso-8859-1?Q?gTZrIUE2dBnYCmjdIiGjbANE2qlEclXY1hpxwjQaFRJChtcgCcwPVv57Kf?=
+ =?iso-8859-1?Q?aDY5E1zlDsAgPTDXrdxlOZE0KqmISAEZa5QL4v3VItEn6GtE8h5N9L3Fw5?=
+ =?iso-8859-1?Q?U7Z+Uf6gvgqzfoZTr5cJpzHg6mqAbyEZDtVMwjxoJHKlor2rGU2pgDBkVe?=
+ =?iso-8859-1?Q?mzhIFAoCsxk3LwH1RUBAPP5ErOmlrgDkfmeJky7PAPIokjdqk+EFwgtN25?=
+ =?iso-8859-1?Q?RPxV0FWhrl3yJxVRmFKIGxN4Ftht0vxAdzSBEX1QfiXEycSWroNZCezoht?=
+ =?iso-8859-1?Q?Tl2+Z63qf+Mg6h4BbJBUvuzhvvJbeBrB5cUUjL36jFDUR6xlgULQoh3fdb?=
+ =?iso-8859-1?Q?1kZsGduJDVE/GJDekM7kXlOUGxWDn1jUyOESB5Cry/XhLF3B0GPb5WJgsX?=
+ =?iso-8859-1?Q?UhoglWyeN8pkJXtiou80OxeTjZm+borkPaEJoRqlEObNN380PPhFPlqO1N?=
+ =?iso-8859-1?Q?RF3PqpYYu2K1wcooeE3byoxtevTbEOpHIF7G6lvos37G30K81rupmfmKcC?=
+ =?iso-8859-1?Q?Xx4OSVw/n0o/WcOaRSRnfPbyGh5gem8woA1w37J3ejM6xKl4o0RsLeb9l+?=
+ =?iso-8859-1?Q?X1lb/Qec/M4d1azyLt4=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB8946.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?LKUso9dUo20Nb6MW+aucIq1Fr5CdZ//LExhj0WSef1HXUsNsKi0qrm3twa?=
- =?iso-8859-1?Q?qSWwCq7IpVj0ID2wOLMApp9XKR+HH5/OLsFBDjW93YF4o1Fc9t9lZOutsu?=
- =?iso-8859-1?Q?62pUDQs0WQR9QsJCz7Cf1OVATD8t2IHYaJ05CGALypGV8WCF1mh1glxNgh?=
- =?iso-8859-1?Q?O0PdTxv/BH4pKPTcJiau/i0eTCSBcvmqwfPNPUqcATXsEt9qOd0Hk5LaJ/?=
- =?iso-8859-1?Q?UHPdUK4MrXp4gzkEM9NssRyLpWMlKmsEYvfg0NsHC8oUwTvOfmKoIlyFec?=
- =?iso-8859-1?Q?n6cDNa9+tvxt0JmQBKNAUuxntmG8xk1wWNIP3RKAaADdAWxadxswG7NbPA?=
- =?iso-8859-1?Q?FwJ/lmodv1oiRP4dhuwUQA/sN4MDsiWWf2Vg1jn3BjkMHkQtTfL7XWGnFB?=
- =?iso-8859-1?Q?plyrS+BVjU02vmtas3kGfuSkdrlrtBCLL9no27Dd5Hx7QCNlkym80fuiGG?=
- =?iso-8859-1?Q?cMsxs7qNiY6IWxj2cNIuvgb7gz5uaOmFuWDAQ7JBgprxvvoLFcRxdPetD8?=
- =?iso-8859-1?Q?EjS+stLviC+AxcLwhGETtJyntE/DYBOK6L3CE4jkcxTeFYP0nDdF5dT/Ul?=
- =?iso-8859-1?Q?a69QHL/VHUpRxDOQj8PaPG3bNSgMNkoLy1mb1wrR4xK0QRpP7kHFOqNl2F?=
- =?iso-8859-1?Q?i9R20taQctWTz+kKMiXtSR9rkCBrjgQUV9BjFN+VygLbr3YPgCio80L6Wm?=
- =?iso-8859-1?Q?5UfCMrZZln48b0iCFp7IINNRlDH6L6wLOwBo//k9t6Zu6lQfoTH4fLA6tb?=
- =?iso-8859-1?Q?jPc3HKy6209fu6W/R52ZElNkyOqcAdVCCQK4D2sKF5uB/n+XuUKiWHrWUN?=
- =?iso-8859-1?Q?VwB2v7l1cdq9c0BLjnovvfxxzt7S96W0soPBP1TR5YAPFllm/+S9bVK9tr?=
- =?iso-8859-1?Q?KpzZ4YU8J/AAM+BV17P69D9ygvAPGZYghmP6dJ5R8VoQqk9ziMd05Zp25z?=
- =?iso-8859-1?Q?2+piR2XZwORg3dFhZ8SgPv4miie3kKidf0awM0GNpcSFjJWoWOZ0TtszfQ?=
- =?iso-8859-1?Q?QeTZT29/74VRdEowgLC23RMiKZA58PcTTW0eBFYUAoAjP3CJdjmfYRhYl6?=
- =?iso-8859-1?Q?NIcgdbzbJPcN8KXkvOSk21YdNM8VHvY2rZyJNmx+302IarmDxehv58KkNa?=
- =?iso-8859-1?Q?Fmf91WO+++7X6BVd1SLX1N3+iMMQ/h4dSVrfsXmq4kk5gmDXi4OJ+mx6rF?=
- =?iso-8859-1?Q?RUT30iYwjRzZkmKAMl+UhjZtpem1fNcYvAb3B8clYv0qoQOq0j1e9MPOo9?=
- =?iso-8859-1?Q?WK289bNctRuPb3pyK+ICm0R+1SPckGtA1Dh6ZDz/ZifAnXmUcSQovY++xI?=
- =?iso-8859-1?Q?N26NdbYFm4BhRa68dwV0pOTxwemPVMZkgsBYS35KyWXD/gOoFwmrvdqQjr?=
- =?iso-8859-1?Q?E7u3+smVipvZLDLNQlA3lGAbIzefaoNsE91aRFp84olwXRJDhMe+J7APR5?=
- =?iso-8859-1?Q?zpUNqw29VSPx0OQT16Gtx7WKiVFjpdf2MNfTjHj1xlzo1+2n1A/s/MSAKN?=
- =?iso-8859-1?Q?cjf09YwvpEM3feDaSzcqyCxRJPLaJo+Vbc//39520JoJDsxalOWiOfJ8vI?=
- =?iso-8859-1?Q?mpF8HuYX91s7mjo/qtl9eDwR90UpQZrVtaz7huImqBETfSKjVCdVVN+PJh?=
- =?iso-8859-1?Q?lW+yEBEFo4MAkEeP7OMZ+Er0CuxquXMNH4q7k1v7yulT7bMVkLLX06jEZF?=
- =?iso-8859-1?Q?H9bI6/AKea1+2OXM0dtnCG0tQ9sRoFSHD9WxQd+npagWvOQSMl/hvNqnWm?=
- =?iso-8859-1?Q?KsHUOdQFnVh9eRtQPn+PJxwlPi7/uKBTHcaDl/CJmExV7JXN8XBF88J1dE?=
- =?iso-8859-1?Q?6+NtcdqPvkzPqcKmcjXJ4ynabJ+VmLs=3D?=
+ =?iso-8859-1?Q?XcaR6JCwaEo9Uu1f62TAFOZpWT8sJDAWjDODHnpHf3KUIF8AOf+l0oaStC?=
+ =?iso-8859-1?Q?DmMGvN+JFvOAsuNLbUzK3e48tvEhA+iBJoZkAzs61i6RrQMRADE5EWYifS?=
+ =?iso-8859-1?Q?OvvB89kXr5Xj1YMSi5m1ter/WTvmYCuCze3PCfdJm5MZmCTR8ldaOdpxfE?=
+ =?iso-8859-1?Q?IfdoLmdy0NX960gIpta+aXUqUw8wk+NB8hMpcEmT5ZO94wQiueOC00+0g9?=
+ =?iso-8859-1?Q?ZJVq7ZApjpPU2DFM1KRPTQtqrTJkk5mOlKCHcsEyfBIaAs7W/GhF9FZ7ig?=
+ =?iso-8859-1?Q?HDucfxBIEVCcIABllWLI1IK6yrhnBzB0x33ej6KmVLYQuvQYxgjFYnm/Y5?=
+ =?iso-8859-1?Q?Dls6T2aD3jGTPFTcFbNPBWOpO41ClcUFe6II0jnQzyMmLJ03XGjL+Kox0B?=
+ =?iso-8859-1?Q?scqAmrgDWZunS8Vaqn1p1T0UQHWMLeL35hP6HQx8nk1/zYH5ekpEE6KROW?=
+ =?iso-8859-1?Q?uIFpeNT5h13CJFari2HuhCHjj8CVJ1K31sjHRDM+LnLHNUKbKwQbnZuWaZ?=
+ =?iso-8859-1?Q?Hm+RP2lye9URkayfbpY8W5364jlRJGDGJxcYS+hxmsD6aOHfqPB8chelr8?=
+ =?iso-8859-1?Q?13SxRf9FVJ+hWSS+If2OxRkxIyXxkr11y5OdBIAKGFUXmI5tI9iKvOppRW?=
+ =?iso-8859-1?Q?IJf5PVTJRXAkqECa86ErRrRyAi3XX8+NeKiGSg1lYO/QT6qcc9jNUaBhzV?=
+ =?iso-8859-1?Q?onn/zMY5gPrp9LS3LjmP9umUUR7Xb0ueb8NUmim+malF6iuwq/MiSMwtUI?=
+ =?iso-8859-1?Q?eao/J/JPRvlOSoT781piRMUCjbZwsH3bwfcZmSlBYqeE9aFahUosivDuvk?=
+ =?iso-8859-1?Q?THq5FjuICpnppHIQVAnsLGFr5xAsf1A2t2uXyozjAn16NSf1JOVEYkv9lB?=
+ =?iso-8859-1?Q?ZQZISzx7FKmI+pQYpK5Y/O0xc6XRE2E5AS3A3zjYNVVUZ0GSTSE6l3LKj4?=
+ =?iso-8859-1?Q?NMarT0aPWvymPahOfIRcitJVB7vt/KnZnToLwt1zYDb/tQPHXoADxuqATL?=
+ =?iso-8859-1?Q?PsyVWMh7k2+DxVduBDs9iqxVpsu0fR7t1BkHVE1P1ux8t0zPxf3kVFeOHl?=
+ =?iso-8859-1?Q?FraFSuO8gGroMNJrgmMrvMDukWhcMlhH3EmoaaNslPQOjpTnR5nPI7izI6?=
+ =?iso-8859-1?Q?KtjO0Xr/JCtMBiQfhquX4hBS0pjl9QLJYXN48jHJIiHPAT1EzcL5x2ZJwc?=
+ =?iso-8859-1?Q?SjUEyjrgwbEu2xcw9eBtMCWJLsU+rl3F88b6kDvvMrHjKZrEfONjViJam7?=
+ =?iso-8859-1?Q?DnNgqVC+ZGWf3v2keH5yqo5hUX34RfvwVAIxYuEhnu8aVMJtpApgBV3oB6?=
+ =?iso-8859-1?Q?bC317txbkOtPCNU8ciRogvNK6hejmtgbYmf0t+jcTiQ1gK3kba9aok6IZs?=
+ =?iso-8859-1?Q?th8sEkZFKq1V2KIf2AHrE8m8PCb6pZbKCYJ2PApAGTZtcS8Fp3s6+X98PM?=
+ =?iso-8859-1?Q?rZ9JGr+PxIkFFbcj+SC87H8M/n+pgw7TSSqTAG5h4khoutawK/79e12Hj7?=
+ =?iso-8859-1?Q?C5xccorcl+fQ4UlPsc3GRY8EEGK3lnDSJRDjPi6V0cZnwTEr65iEj1HFdl?=
+ =?iso-8859-1?Q?Ll8H/2HkM272l+88MGc2yWyfa70HE4szEzr8sjQDX4dx8M74Rd3mcN11ej?=
+ =?iso-8859-1?Q?BQ97OYCS30FnUWtyiQO7/SPlbEcPr1o6QAtE9PhlqJmk9EW3t+XxS8aN4t?=
+ =?iso-8859-1?Q?XQvuev+a3YZafB86YpWbtxLMtuSrZHTEkLc9m6/spfwTT+v0fF46qAU4d6?=
+ =?iso-8859-1?Q?UmtHDv1dRk/tA6oDM0p2lR4bgXc6oME29GQuCJ8Ex87A5DyMFcH1KzZKBM?=
+ =?iso-8859-1?Q?eS5BijMkjIs3/WaKbAkCNQn4ILo4Li8=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d4f8e32-550c-467a-1a23-08de6af43637
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2026 11:37:04.6804
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6091f36a-e073-4df0-b31b-08de6af436f9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2026 11:37:05.8148
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fgnW42zm1c5rxDMBuiGTXvPpyYX1N0Mj+SjZtGFiSnZwjL30WFnC6pjda2nY8V7JRJC4cKZQwa+yoOITF/5sadn9K4EwYIgCukk8/P8g3L0=
+X-MS-Exchange-CrossTenant-userprincipalname: ZAxnx82svNW82ONmef+8fir3LIiirSmMkEM2utTSXEoZ/s8MMqQWTM2v1DZyGxMV2cG7kxt9c0i5yJ7K5+YrFo/kq+ehnvIpjH1jZkmIoYM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7615
 
-According to the "7.1 Return Codes" section of DEN0028 [1]
-INVALID_PARAMETER code (-3) is returned when one of the call
-parameters has a non-supported value.
-Adding this error code to the common smccc header file.
+Plumb the SCMI SMC multi-agent type through the toolstack:
 
-[1]: https://documentation-service.arm.com/static/5f8edaeff86e16515cdbe4c6
+- Extend libxl_arm_sci_type enumeration with scmi_smc_multiagent (value 2)
+- Add agent_id field to libxl_arm_sci structure for per-domain agent assign=
+ment
+- Update libxl_arm.c to translate libxl config to XEN_DOMCTL_CONFIG_ARM_SCI=
+_SCMI_SMC_MA
+  and pass agent_id to the hypervisor via xen_domctl_createdomain
+- Add xl.cfg parsing for arm_sci=3D"type=3Dscmi_smc_multiagent,agent_id=3DN=
+"
+- Document the new xl.cfg options in xl.cfg.5.pod.in
 
+This completes the userspace side of multi-agent SCMI, allowing xl create
+and dom0less configurations to assign unique agent_id values to domains.
+
+Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 ---
 
+Changes in v10:
+- Split hypervisor and toolstack changes into separate commits
 
+ docs/man/xl.cfg.5.pod.in         | 14 ++++++++++++++
+ tools/libs/light/libxl_arm.c     |  4 ++++
+ tools/libs/light/libxl_types.idl |  4 +++-
+ tools/xl/xl_parse.c              | 12 ++++++++++++
+ 4 files changed, 33 insertions(+), 1 deletion(-)
 
- xen/arch/arm/include/asm/smccc.h | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/sm=
-ccc.h
-index 441b3ab65d..478444fb09 100644
---- a/xen/arch/arm/include/asm/smccc.h
-+++ b/xen/arch/arm/include/asm/smccc.h
-@@ -381,6 +381,7 @@ void arm_smccc_1_2_smc(const struct arm_smccc_1_2_regs =
-*args,
-                        0x3FFF)
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 27c455210b..e7f8af6156 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -3156,8 +3156,22 @@ single SCMI OSPM agent support.
+ Should be used together with B<scmi-smc-passthrough> Xen command line
+ option.
 =20
- /* SMCCC error codes */
-+#define ARM_SMCCC_INVALID_PARAMETER     (-3)
- #define ARM_SMCCC_NOT_REQUIRED          (-2)
- #define ARM_SMCCC_ERR_UNKNOWN_FUNCTION  (-1)
- #define ARM_SMCCC_NOT_SUPPORTED         (-1)
++=3Ditem B<scmi_smc_multiagent>
++
++Enables ARM SCMI SMC multi-agent support for the guest by enabling SCMI ov=
+er
++SMC calls forwarding from domain to the EL3 firmware (like Trusted Firmwar=
+e-A)
++with a multi SCMI OSPM agent support. The SCMI B<agent_id> should be
++specified for the guest.
++
+ =3Dback
+=20
++=3Ditem B<agent_id=3DNUMBER>
++
++Specifies a non-zero ARM SCI agent id for the guest. This option is mandat=
+ory
++if the SCMI SMC support is enabled for the guest. The agent ids of domains
++existing on a single host must be unique and in the range [0..254]. UINT8_=
+MAX
++(255) is treated as invalid.
++
+ =3Dback
+=20
+ =3Dback
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index e4407d6e3f..be0e6263ae 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -240,6 +240,10 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+     case LIBXL_ARM_SCI_TYPE_SCMI_SMC:
+         config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC;
+         break;
++    case LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT:
++        config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_M=
+A;
++        config->arch.arm_sci_agent_id =3D d_config->b_info.arch_arm.arm_sc=
+i.agent_id;
++        break;
+     default:
+         LOG(ERROR, "Unknown ARM_SCI type %d",
+             d_config->b_info.arch_arm.arm_sci.type);
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_type=
+s.idl
+index 4a958f69f4..9bfbf09145 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -554,11 +554,13 @@ libxl_sve_type =3D Enumeration("sve_type", [
+=20
+ libxl_arm_sci_type =3D Enumeration("arm_sci_type", [
+     (0, "none"),
+-    (1, "scmi_smc")
++    (1, "scmi_smc"),
++    (2, "scmi_smc_multiagent")
+     ], init_val =3D "LIBXL_ARM_SCI_TYPE_NONE")
+=20
+ libxl_arm_sci =3D Struct("arm_sci", [
+     ("type", libxl_arm_sci_type),
++    ("agent_id", uint8)
+     ])
+=20
+ libxl_rdm_reserve =3D Struct("rdm_reserve", [
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 1cc41f1bff..2f1b475022 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1306,6 +1306,18 @@ static int parse_arm_sci_config(XLU_Config *cfg, lib=
+xl_arm_sci *arm_sci,
+             }
+         }
+=20
++        if (MATCH_OPTION("agent_id", ptr, oparg)) {
++            unsigned long val =3D parse_ulong(oparg);
++
++            if ( val >=3D UINT8_MAX ) {
++                fprintf(stderr, "An invalid ARM_SCI agent_id specified (%l=
+u). Valid range [0..254]\n",
++                        val);
++                ret =3D ERROR_INVAL;
++                goto out;
++            }
++            arm_sci->agent_id =3D val;
++        }
++
+         ptr =3D strtok(NULL, ",");
+     }
+=20
 --=20
 2.34.1
 
