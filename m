@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE42EEA860
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 09:50:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230436.1535941 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F58AEEA870
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 09:57:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230483.1535982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqpoi-0004c6-QY; Fri, 13 Feb 2026 09:50:28 +0000
+	id 1vqpvY-00078X-HT; Fri, 13 Feb 2026 09:57:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230436.1535941; Fri, 13 Feb 2026 09:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 1230483.1535982; Fri, 13 Feb 2026 09:57:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqpoi-0004bN-NQ; Fri, 13 Feb 2026 09:50:28 +0000
-Received: by outflank-mailman (input) for mailman id 1230436;
- Fri, 13 Feb 2026 09:50:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vqpvY-00078N-Eo; Fri, 13 Feb 2026 09:57:32 +0000
+Received: by outflank-mailman (input) for mailman id 1230483;
+ Fri, 13 Feb 2026 09:57:30 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Bqff=AR=redhat.com=marcandre.lureau@srs-se1.protection.inumbo.net>)
- id 1vqpoh-0001Na-EI
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 09:50:27 +0000
+ id 1vqpog-0001Ng-Bm
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 09:50:26 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6b54863f-08c1-11f1-b163-2bf370ae4941;
- Fri, 13 Feb 2026 10:50:25 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 68947748-08c1-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Feb 2026 10:50:21 +0100 (CET)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-124-v2J-xh5zMnCpIbMpJcyfKg-1; Fri,
- 13 Feb 2026 04:50:21 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-36-txG-vcI2NLC0ek1FXKCV6A-1; Fri,
+ 13 Feb 2026 04:50:15 -0500
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 757F1180057E; Fri, 13 Feb 2026 09:50:18 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4D33B18ADBC0; Fri, 13 Feb 2026 09:50:10 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.41])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id E00863000225; Fri, 13 Feb 2026 09:50:17 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 51E2419560B9; Fri, 13 Feb 2026 09:50:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b54863f-08c1-11f1-b163-2bf370ae4941
+X-Inumbo-ID: 68947748-08c1-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770976224;
+	s=mimecast20190719; t=1770976219;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=4feRG+PIqLPyCpVStJ7uIxka6xWW9klU080X9xA3hKo=;
-	b=ZtYvv9lRqrfvms3O2pnTmSTd3GaLHIMimzX4B+mycX+G/DG48o95urPreWUOxEJ3SodZrz
-	CnCYZdz1C+aKFjj1KXSFE4FdczXVaWwQ2qGSUNnJDAPGoI/w6GvJC3FVn6GxDGWAXaXL+4
-	UnLEVdwuLBWRVrG+dExu52ittsePetQ=
-X-MC-Unique: v2J-xh5zMnCpIbMpJcyfKg-1
-X-Mimecast-MFC-AGG-ID: v2J-xh5zMnCpIbMpJcyfKg_1770976218
+	bh=47+h7KsUk4pIeVRSrl5x3R/+mYPfTcUJPXIJdzZh/Nw=;
+	b=Gmrwr6LovzbEz24zQ/+0phBuxED7DWZGdMryrf7D1jFzzdc4hvv0mE7KBkYXzKAsp99n/S
+	OIDFYqABl09F6bB3UlMCdiEX1hQ2KGLzyk3KxgBBiMcDrXcx2gXzxsGYlmi+ncRd8FLDVT
+	aMYVOQTWSzlagpUOHt7TbjW0ITpSxvk=
+X-MC-Unique: txG-vcI2NLC0ek1FXKCV6A-1
+X-Mimecast-MFC-AGG-ID: txG-vcI2NLC0ek1FXKCV6A_1770976213
 From: marcandre.lureau@redhat.com
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -84,82 +84,101 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Samuel Thibault <samuel.thibault@ens-lyon.org>,
 	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Subject: [PULL v2 11/15] chardev/char: qemu_char_open(): add return value
-Date: Fri, 13 Feb 2026 10:49:30 +0100
-Message-ID: <20260213094938.4074478-12-marcandre.lureau@redhat.com>
+Subject: [PULL v2 08/15] chardev/char-pty: store pty_name into PtyChardev state
+Date: Fri, 13 Feb 2026 10:49:27 +0100
+Message-ID: <20260213094938.4074478-9-marcandre.lureau@redhat.com>
 In-Reply-To: <20260213094938.4074478-1-marcandre.lureau@redhat.com>
 References: <20260213094938.4074478-1-marcandre.lureau@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: _Q4kEXEFw4oxyI3z4g7l1GiV77eou9QjTH3cW5J-Ubk_1770976218
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: Y8-80kxtKYmgd9d1QoiaeAHp1_MGiqZ_VzPITehyhrQ_1770976213
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-Accordingly with recommendations in include/qapi/error.h accompany
-errp by boolean return value and get rid of error propagation.
+We'll use it in following commit.
+
+Note the bonus: stop use blind strcpy().
 
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Message-Id: <20260115144606.233252-11-vsementsov@yandex-team.ru>
+Message-Id: <20260115144606.233252-8-vsementsov@yandex-team.ru>
 ---
- chardev/char.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ chardev/char-pty.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/chardev/char.c b/chardev/char.c
-index 3373c9b61f8..5d00cac2f31 100644
---- a/chardev/char.c
-+++ b/chardev/char.c
-@@ -246,7 +246,7 @@ int qemu_chr_add_client(Chardev *s, int fd)
-         CHARDEV_GET_CLASS(s)->chr_add_client(s, fd) : -1;
- }
+diff --git a/chardev/char-pty.c b/chardev/char-pty.c
+index 9e26e97baf5..a582aa7bc73 100644
+--- a/chardev/char-pty.c
++++ b/chardev/char-pty.c
+@@ -43,6 +43,7 @@ struct PtyChardev {
+     int connected;
+     GSource *timer_src;
+     char *path;
++    char *pty_name;
+ };
+ typedef struct PtyChardev PtyChardev;
  
--static void qemu_char_open(Chardev *chr, ChardevBackend *backend, Error **errp)
-+static bool qemu_char_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+@@ -303,7 +304,7 @@ static void cfmakeraw (struct termios *termios_p)
+ #endif
+ 
+ /* like openpty() but also makes it raw; return master fd */
+-static int qemu_openpty_raw(int *aslave, char *pty_name)
++static int qemu_openpty_raw(int *aslave, char **pty_name)
  {
-     ChardevClass *cc = CHARDEV_GET_CLASS(chr);
-     /* Any ChardevCommon member would work */
-@@ -262,13 +262,15 @@ static void qemu_char_open(Chardev *chr, ChardevBackend *backend, Error **errp)
-         }
-         chr->logfd = qemu_create(common->logfile, flags, 0666, errp);
-         if (chr->logfd < 0) {
--            return;
-+            return false;
-         }
-     }
+     int amaster;
+     struct termios tty;
+@@ -324,9 +325,7 @@ static int qemu_openpty_raw(int *aslave, char *pty_name)
+     cfmakeraw(&tty);
+     tcsetattr(*aslave, TCSAFLUSH, &tty);
  
--    if (cc->chr_open) {
--        cc->chr_open(chr, backend, errp);
-+    if (!cc->chr_open) {
-+        return true;
-     }
+-    if (pty_name) {
+-        strcpy(pty_name, q_ptsname(amaster));
+-    }
++    *pty_name = g_strdup(q_ptsname(amaster));
+ 
+     return amaster;
+ }
+@@ -335,11 +334,12 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+ {
+     PtyChardev *s;
+     int master_fd, slave_fd;
+-    char pty_name[PATH_MAX];
+     char *name;
+     char *path = backend->u.pty.data->path;
+ 
+-    master_fd = qemu_openpty_raw(&slave_fd, pty_name);
++    s = PTY_CHARDEV(chr);
 +
-+    return cc->chr_open(chr, backend, errp);
- }
- 
- static void char_init(Object *obj)
-@@ -1006,7 +1008,6 @@ static Chardev *chardev_new(const char *id, const char *typename,
- {
-     Object *obj;
-     Chardev *chr = NULL;
--    Error *local_err = NULL;
- 
-     assert(g_str_has_prefix(typename, "chardev-"));
-     assert(id);
-@@ -1017,9 +1018,7 @@ static Chardev *chardev_new(const char *id, const char *typename,
-     chr->label = g_strdup(id);
-     chr->gcontext = gcontext;
- 
--    qemu_char_open(chr, backend, &local_err);
--    if (local_err) {
--        error_propagate(errp, local_err);
-+    if (!qemu_char_open(chr, backend, errp)) {
-         object_unref(obj);
-         return NULL;
++    master_fd = qemu_openpty_raw(&slave_fd, &s->pty_name);
+     if (master_fd < 0) {
+         error_setg_errno(errp, errno, "Failed to create PTY");
+         return false;
+@@ -351,11 +351,10 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+         return false;
      }
+ 
+-    chr->filename = g_strdup_printf("pty:%s", pty_name);
++    chr->filename = g_strdup_printf("pty:%s", s->pty_name);
+     qemu_printf("char device redirected to %s (label %s)\n",
+-                pty_name, chr->label);
++                s->pty_name, chr->label);
+ 
+-    s = PTY_CHARDEV(chr);
+     s->ioc = QIO_CHANNEL(qio_channel_file_new_fd(master_fd));
+     name = g_strdup_printf("chardev-pty-%s", chr->label);
+     qio_channel_set_name(s->ioc, name);
+@@ -364,7 +363,7 @@ static bool pty_chr_open(Chardev *chr, ChardevBackend *backend, Error **errp)
+ 
+     /* create symbolic link */
+     if (path) {
+-        int res = symlink(pty_name, path);
++        int res = symlink(s->pty_name, path);
+ 
+         if (res != 0) {
+             error_setg_errno(errp, errno, "Failed to create PTY symlink");
 -- 
 2.52.0
 
