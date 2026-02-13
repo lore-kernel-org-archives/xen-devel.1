@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4025CEDF15B
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 13:38:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230932.1536306 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABAAEDF163
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 13:38:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230930.1536292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqtMw-0001iF-Hn; Fri, 13 Feb 2026 13:38:02 +0000
+	id 1vqtMu-0001RV-1d; Fri, 13 Feb 2026 13:38:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230932.1536306; Fri, 13 Feb 2026 13:38:02 +0000
+Received: by outflank-mailman (output) from mailman id 1230930.1536292; Fri, 13 Feb 2026 13:38:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqtMw-0001hh-DX; Fri, 13 Feb 2026 13:38:02 +0000
-Received: by outflank-mailman (input) for mailman id 1230932;
- Fri, 13 Feb 2026 13:38:01 +0000
+	id 1vqtMt-0001RO-U1; Fri, 13 Feb 2026 13:37:59 +0000
+Received: by outflank-mailman (input) for mailman id 1230930;
+ Fri, 13 Feb 2026 13:37:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FeGe=AR=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1vqtMv-0001RI-5F
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 13:38:01 +0000
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [2a01:111:f403:c100::f])
+ id 1vqtMt-0001RI-AW
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 13:37:59 +0000
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [2a01:111:f403:c105::5])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 35fbde7a-08e1-11f1-b163-2bf370ae4941;
- Fri, 13 Feb 2026 14:37:59 +0100 (CET)
-Received: from SJ2PR07CA0015.namprd07.prod.outlook.com (2603:10b6:a03:505::28)
- by BN5PR12MB9509.namprd12.prod.outlook.com (2603:10b6:408:2a8::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.14; Fri, 13 Feb
- 2026 13:37:54 +0000
-Received: from MWH0EPF000A6732.namprd04.prod.outlook.com
- (2603:10b6:a03:505:cafe::5b) by SJ2PR07CA0015.outlook.office365.com
- (2603:10b6:a03:505::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.13 via Frontend Transport; Fri,
- 13 Feb 2026 13:37:51 +0000
+ id 346642a2-08e1-11f1-b163-2bf370ae4941;
+ Fri, 13 Feb 2026 14:37:57 +0100 (CET)
+Received: from BYAPR07CA0061.namprd07.prod.outlook.com (2603:10b6:a03:60::38)
+ by SJ5PPF75EAF8F39.namprd12.prod.outlook.com
+ (2603:10b6:a0f:fc02::999) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Fri, 13 Feb
+ 2026 13:37:51 +0000
+Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
+ (2603:10b6:a03:60:cafe::19) by BYAPR07CA0061.outlook.office365.com
+ (2603:10b6:a03:60::38) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.10 via Frontend Transport; Fri,
+ 13 Feb 2026 13:37:50 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- MWH0EPF000A6732.mail.protection.outlook.com (10.167.249.24) with Microsoft
+ MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Fri, 13 Feb 2026 13:37:53 +0000
+ 15.20.9611.8 via Frontend Transport; Fri, 13 Feb 2026 13:37:50 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Feb
- 2026 07:37:51 -0600
+ 2026 07:37:47 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35fbde7a-08e1-11f1-b163-2bf370ae4941
+X-Inumbo-ID: 346642a2-08e1-11f1-b163-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HQPLxOJuhKQ7jUkh9Fuv9rYSW1w6j/89ldl2VoudQl/bMyUY+GSnCsY59R8pe7X4Tfw7Tbh3FcuVawlveTd+NC/Amvuxr8X6AXcVDrp7DUNWdZ3exiU9lNygkQJFygN1N3S7IgO05pZvnXeA7t+xVzG98DZqRTIP1ysBQiG1s0o0ToNUzFRSaAOxZ/psb5qBUh3b19Xs+P9qm8lgUqV4iDt5wGkuGXNEMsVtFs0kGi7PnOqCitj04oHIMoGz76XQR+IQKPmYneSvoRAaRUNrS20e6aCH4maNt8R6fqzZwJzPkKxwEU5TnZ/h+dEIO88fA9ptZFU4wBCzEpU9MmOFvg==
+ b=GfH9F4KEwR9d+zlAcqyl1TV048nACurqWUtOYIwIZhL2sS+gN87zGzkhv/HGPc7EjOP6UrEQ0IOxonFHmSRLUd89UAXpSnmPEI5IGDlhUbvs1uXERi3N7yo7n07CzbbF1r2n+jCcgByDi99BXGso3Fjxy1F6AShEuFZ+E3nzq6PZiw8igGCOWIbThVyszdRNCYeal9LfHz4y4MFv/0eDZ+YmDk4fDmfA00Gky+CotYvtJvGnJYfGuQGBjzcWxjFhZMQDzYtzX2cwAIhd2kTsP+9vEjp72/CABevs6hSrrnFRqJSECCIu4kEJu25eTTuUJImpDyE2kOrDNEmdCg/JVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nspe1jSCdTmM5bqpafVLqgeaSP53cHPgBiEN8kytCmM=;
- b=BfR6L+R02Vyhdoo7dzt4S+OacaGdUtYjSCJ92oXWNFfYhPgPeU0AhW6CUlyqMdyttBK1BxpqTRSvX7d5A6dl9JvR9WRF5wqiUfvAz8jYLJD40ltth94pg46ux92mhhem4Sf9ZRHiyOjgh9H+fjMOh9jOzNHXtf6RHbLrRgs8V++mLduzvBWf79spHLhqmS+cCjl1q6p4pRAh4QELNAIvPZRsn/E2fjLlDvqzxYqMGX0ImZCf5FyNi0766iqMIAeJHL9gpqzhJB6yInkTB9PtPgsZ45EzBxWS2tneOp9+WgJHnUM8u0lZE2HCgMPz7oh48NWT01ny3HbIgSFW+C982A==
+ bh=KVHDnfeZ9Qwy5x2KVw60dxyfthggzrmiIZebDLtKY80=;
+ b=kC/L1LAtE1V1yUCivo2NM5juEGwdlOSYyXyGRJ6vEKP+3oXFR135WFYKq+F4nxMbbDmKQAEgDd48B2go2yCqD2+idCt7GrPRAI17F3xnsCu7dccZ3FvNGbkKMBVJhttdXiJLAZp203oOTWzhMkIAdSJ5wUm8bH90rK3QC3IS0eh2678cgvJhz6E5bEy/qS7QHdfINSzabu2a0l8dar66Bk+9lT8km1f2qpe8sSjlijSZfDcSr0SLy4YE/gC9yKaQ9KxpnEvKUv+ajcftUjPVNRysqUOSR3bKytMIunTLikjqrGiZmwKysu2v3atbSpIsSop3tfADs2s95FPo2zFptg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nspe1jSCdTmM5bqpafVLqgeaSP53cHPgBiEN8kytCmM=;
- b=jroQIRs4SK1PrIdN2QRsTy4XMETmOdygUCEjrLvOJPeuA7BiOYCcUWE6QRzC7hIfS/uoItciXw+09HYWucz6A+tzx6re1ALclN/J0x+lvixjUgO4sTb0bRSTD5VvCOyfcKc+zh3U6AfvTxb2/HFxAhsqQH78oTXeVOUtjpX2gYs=
+ bh=KVHDnfeZ9Qwy5x2KVw60dxyfthggzrmiIZebDLtKY80=;
+ b=qWI3fDJ2DPCyBjT5DFFJsRIZi2gWy0+UCnrNFgXZCeIwosGk43geQW6pv+6VAe+35AhU7dM5u0pS7yGkyuK2rp3FThDvp78dilYai3TFnIBJORp8tyv4gbkMUQtmIr8La6fPac3XdStw/cbwFLgaxpGvNrMRg5ldU8CUVgoCPSU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -87,12 +87,10 @@ CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
 	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
  Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 2/2] x86: Force HAP to be enabled when PV and shadow paging are compiled out
-Date: Fri, 13 Feb 2026 14:37:30 +0100
-Message-ID: <20260213133732.132326-3-alejandro.garciavallejo@amd.com>
+Subject: [PATCH 0/2] x86: Const-ify hvm_enabled and hap_enabled() when possible
+Date: Fri, 13 Feb 2026 14:37:28 +0100
+Message-ID: <20260213133732.132326-1-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260213133732.132326-1-alejandro.garciavallejo@amd.com>
-References: <20260213133732.132326-1-alejandro.garciavallejo@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -101,235 +99,88 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A6732:EE_|BN5PR12MB9509:EE_
-X-MS-Office365-Filtering-Correlation-Id: d520c7f8-647e-4c30-cc99-08de6b051703
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|SJ5PPF75EAF8F39:EE_
+X-MS-Office365-Filtering-Correlation-Id: 46e6a1c4-ecc3-4e83-8227-08de6b0514d0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|30052699003|82310400026;
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?BAp2tle0LRkosgeWQnm+HJWnyaq/hvBRdhVc3MwoGEpA+lWqZfG/OvGmQV/I?=
- =?us-ascii?Q?XO7f6jFvExtnN8ppdK+VTcoHNUaE+HwFLEtha+R61ZUK4y1J1FcPu3ehW+IE?=
- =?us-ascii?Q?nOST1z3N1dFnJ0gHpVclCYzasm7ZVpVvqx49mwpZrACLtHJYp/ydrnKcX0SM?=
- =?us-ascii?Q?e4Nv5hsEunFjpgSud6GG7Brtlf/ddOlhAxi4LcoykRMVTXRSeJQcocMOUDQt?=
- =?us-ascii?Q?1DqwmSWJGuBw+YLeFXVsDTCLr0CXyGpo5xxdrfALlTz7FsfuoyjQjumdaFYY?=
- =?us-ascii?Q?orLP8ksfbIdPMkiuCtm4Hxho1aC1HWTCpGJT/1QdPH5SBRRul3aCmGStKyMH?=
- =?us-ascii?Q?yHTIJwRNIM759M5QukWMcLxhLp063o2D7r1xeB1AEu9wQPHcmT6BhTUtH3lt?=
- =?us-ascii?Q?JqUb/HeDrUU4ZeFeK1FZXQkb3WcAVHJrSO04Dx2Fq7+4h3DQzIyMkB67N9iw?=
- =?us-ascii?Q?T8wX5ilmd+lJNwI3x3xS3Q7vbx5misThhioc2OhGnfJ/IBDOFCQNZ0aod38F?=
- =?us-ascii?Q?+R27lW18/htTrparI/SWa5MCuaCKCP4P1c6S7iKefeX3DrV30scq6+OQaSBx?=
- =?us-ascii?Q?+zQgFpYIP/RqBuIf94om/rBbgTGzZWTwBBWCghofJsjMZEl0TgE8zP731MVb?=
- =?us-ascii?Q?a/7VacoSrikYbsfi1qJRdmCI0cxIxX/c+LtdUyjvFAuklKZHQXstmqGnzSdX?=
- =?us-ascii?Q?c1xv+9TyKne98pcKUt4AcMMH+71oHS3lZuwRhVroq/Pu2l97bomoTFz33t1j?=
- =?us-ascii?Q?wQSfnNxBsY3YjwbMCJ8fOK+n/vvH+WLEAfvgPL0M92Q6VVyZktK5WbRhpSUp?=
- =?us-ascii?Q?CBt9QANIVi3drT9+Fl/jViZYdCBSg0xWQJJW+IbZOuWsZ0NXIRkDW/2Rme5S?=
- =?us-ascii?Q?CVLPjKTINcyAbjvsIubcLaLic2CaCS1oDb9H5sUCu8wjW2TLqfqaL2TzSNIW?=
- =?us-ascii?Q?fb3mYTRecp3ou9KKp3+yq+h7gseA1BQZZIcMatSquN9qS95nRZqeFIGaAwUR?=
- =?us-ascii?Q?DaL7fWHRK7u5mU6ZWfAkYXaOItu8hqoBoiVbcCcNCO5B7/XXoBeWE6BFuxZs?=
- =?us-ascii?Q?qghHXsKxVDxPq0xdikW1Xd5EdFCxPKj/U1RhUz5V29os4b5bKhjPXB7s1nPL?=
- =?us-ascii?Q?kSyrtT5LX1LODmZVT/gMviZxNIS2Dm2KpkmKUrRBjuzHDOQxhuXziO1lowdc?=
- =?us-ascii?Q?rS86faYjp1OkyWjfSLMh3rUW+591q/q3Ow6A4n9FDUIznqH86doC2x0EwrMZ?=
- =?us-ascii?Q?frA0WFCEqjzGPgfOrFFY37VfDusrAJS7aR3n+B02S6hrYol/wBam+p534tl9?=
- =?us-ascii?Q?NlNTRC3xObtr7SMhc5QpNsupvbyFTBNjvzHvBx7e/UBfuV2N1xQmr4jVWZkv?=
- =?us-ascii?Q?+tk1Q+33Sdcq8gZqh8NP7kx4Q94lDgNj/lYF0TBF8H1uBH0vqpeUf79GEWHc?=
- =?us-ascii?Q?x4ub4F/gtbXjE+5rAafqIFORCGAHjdWRFIYtwaM5k3RNJyKUmLwPx74aUBIJ?=
- =?us-ascii?Q?k8kr+fpkSspjjMfnBZDU3qWWEcuPOjhfRgYQuGCn6gp+X7ZLVyf4e+dZbg8/?=
- =?us-ascii?Q?o8R/VKU2JiPLW2usqjggSE8WFMN8MmmzjfAahZvALaqfQDr12z60FQkUfNay?=
- =?us-ascii?Q?HtMR1q36RPICRStFfDZYHUZyWMx2YkD14XMm1EANCDlTzcBUCCltyejXBVTb?=
- =?us-ascii?Q?8D4fcA=3D=3D?=
+	=?us-ascii?Q?3QnERybjnL/qTeR6n5PxKsEhnAFAvjfiv+j+BWRgBOuPkYH0RFTeKwQ4JqLi?=
+ =?us-ascii?Q?eYPaeb73zHzrg/wvoC5m4NG33+W13QIH7cTQU8BoEDG71uhBJRli2Qw4ZaG/?=
+ =?us-ascii?Q?KU9XSuJCKgOmBw3u7914Vn2p/aflWa0Uc5EFESyZRepnf47lh2lF4icA80DS?=
+ =?us-ascii?Q?sF3mNJ6u5eq9lE26VcXfKpdE7q7bpEpr4eYwaoBaFwXjtIb7o3P81D4B1HBn?=
+ =?us-ascii?Q?/EimUNOXY1qU1zHQdUlLO1mXXIJIq/4ST1zyj+qbWbH9IlNTwURF78zbeiBK?=
+ =?us-ascii?Q?iyB7OSjzDMgSX+B6f8Xf/hW+91yHhXW3HwiI+4OrWhlYu9AC0KIs5K8IsmYW?=
+ =?us-ascii?Q?OzS61PHfv6pAFwEsu7fMdMGEFELyDLDm6Rh0VWv/s0eyN614yK4eGrY8gyg/?=
+ =?us-ascii?Q?JQmyqLf23KwaqvNVrSuo7txHm4JMEMrwRpPnfHUjFKu80DGkXYvGwS1P7zuN?=
+ =?us-ascii?Q?A+392a1KQzENSdZjTPztrGBVk96pcMI9UrGMtrb4ZkByEnMhk6Bx9SanxLdL?=
+ =?us-ascii?Q?3l9xVwTMVdQylG3SY4O8Od+rhCZLkuuIBtC7Y62TULBi3gs9vRyY/MnjnXL+?=
+ =?us-ascii?Q?OZuRfnQ8YUnGPsFtqUVWajyHToj/jfetOCeTuI9m8GbCdnMLYimkCxY0sMLT?=
+ =?us-ascii?Q?Yfyk1f/E742K7BgLVt3eoTZp5L9+he5TNIn5wZXXrKGnSSN1m83flsI2LBb1?=
+ =?us-ascii?Q?M6xLWwAWAhEOaVzqLH2xclaDNfMaRyqcXb1/5EqnrqNZLuzAsJScxcYYG7Es?=
+ =?us-ascii?Q?N21Z030NcZVEDplfEo3vazskUkR1XaKLf67yOy9MndVp+TDzMh9vSWr5pXqU?=
+ =?us-ascii?Q?Qs+U1nQyJH8SZifA3PDAeDamenj7InpPDv93yWUwYhNnKIyuHokb9fauCDXN?=
+ =?us-ascii?Q?Jto7oLhTrsdV/ekWlwfkr49cJ4Je7V2dT5baxPuCFzVbTOEfkvTaYjSGMEO5?=
+ =?us-ascii?Q?oyZ/5ohgCxz26qpmunRgB0M8gvodNjA/Vjy+r7Wvyn3W/na4qDqcjLeQ+9yV?=
+ =?us-ascii?Q?6HlClOanwKIfd4An+XQzufmi3bJ9NcYxYcNPchukYzJf/RKpoOuXXqyEIb5r?=
+ =?us-ascii?Q?wK6S+3gGxcnTydGj/2AIPhZqAfXMu+KkhMMWgbF/j0iuK59WHInt/PNd/ewu?=
+ =?us-ascii?Q?IDTW9jeDsEcitHMhfcDMpGCc+aZLPnnUr8ok7NV+PHYNdHStiC/ecv6PJhh/?=
+ =?us-ascii?Q?c13SbSw6tCFBxcBKU9UFRx+5H2n/fyuM/rjCOfXlBfZkfb1HnWR9IN9CwHiX?=
+ =?us-ascii?Q?SPZklmdwweu5pdz7q+PZwWjRB5PpHEyjK6sW8DZGJ00YN40WLPj+qFzOvWkE?=
+ =?us-ascii?Q?b9nq/Yp+ugPy/Tl5O0jw5mAraJGCUCrUZnJnAWaNoOVmor8UpqejeSONc4qL?=
+ =?us-ascii?Q?4EuvOYmS3oe+dHqwx+1kKxHX/xhvQbKEq620dd9TWG1/6ksnEGjqH9Vg1Gco?=
+ =?us-ascii?Q?I8i3kigoI2V+fh9peMurX12Zz3epIE0RfqiIJ8eBeXwrsO9XcEi5AH+xTn1b?=
+ =?us-ascii?Q?ph58+bbgX+Ac/JuOTQ+F3hpA1HeVy5tJuEduKN26zQE8I7L4N3SnuOs+GFhH?=
+ =?us-ascii?Q?6NLC18E5yCMg/YAmPbFVsohTvd1zq1jd/4NAlraKZzcRFmsUFsfkFcgN/8wV?=
+ =?us-ascii?Q?gRidOYFGckZt6WjkuOUhPtAaiks41mJkbF1k0FrPYjwQEJjLBB1ddRKJlrA6?=
+ =?us-ascii?Q?cn4Ucw=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(30052699003)(82310400026);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	YISXS2N8a2LybbW4zUTOiSZZvJvDYwMTRuLcGGPqqWiu8bkSLXMKyKzKHokULjHEn5c0jjnG2jPr0tXkFZEW8iAhauP7U9By4B6eaG08MOJYCQEpky+7io4UWG0jRHNiC2T3+aPIh/9LclZhMpRRTofB9/vz2xryzeLDhnHemCFHVLLFkPu36ukMhuGb7z3BS6N8hgaFErRX0Us1JoWwFLRqfWO3dJhFlEpGRwYyDkmQpvheMDxRsg46WEI76cZRU62XxglCYDl4ujW2wf7hky6eMyaktJt+Y5I6al647F22W8UqnDZkZPo9YFModrQrrxoMFmS51K0NcRokMyBG+8d+7ZbmEUOuhviz3Ym6m2zZunS/zbD6OFWPTt7VHT4sItnw86fNPLrL7Nf2fFyqnZyFzMoktDxANB0k0MiS5FClbLGaawbwAz6rM92cA9KS
+	JoJL2cYJNyx+sjagYbDqxWmh8lL3UhwOy+vrLuAmXYPaZONheBq3YljbM1TjO7BKS5dG2cFHPyJO++rqWnVSZb2AW7N/LCW0C5v3/z/hcczOgTRzhAxxmZZvYLMeE0Yh5T9ULGosmKI+4n4B11ZhmJYJeADMdDwJ+Lt/8KAHMMQMPbInM6oyRX7zUE7O8BUpWrv2RUyBAGHXpNQX8ii1gGtfkg+Jxt42Cpjd7DtuD39qdOGcOelMju57N8WWYP9VMBtOcoXcazSHAgk3NMekeM3yY8ByjBvd9jRJf8jsjqabQHH0fGoY/EA9c6WJmJrYM2odtzrh7eAYU/9lt3XQLEZ7XC7PPYqrrcVLPekgHJ31U3MSYPe1livbCxGG4uXqL6WrtPH6A7sSG1tW7aifuc0MVim6oMxdlkr90oP6nNVjEnHwYFgKTpDKpdmgdDGG
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 13:37:53.6990
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 13:37:50.0068
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d520c7f8-647e-4c30-cc99-08de6b051703
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46e6a1c4-ecc3-4e83-8227-08de6b0514d0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000A6732.namprd04.prod.outlook.com
+	MWH0EPF000A672F.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9509
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF75EAF8F39
 
-Makes hap_enabled() a compile-time constant. This removes a number
-of hooks that normally go reach onto shadow paging code, clears
-many branches in a number of places and generally improves codegen
-throughout.
+Hi,
 
-Take the chance to fully remove the shadow/ folder as it's now fully
-compiled out.
+pipeline (green): https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2324325987
 
-Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
----
-bloat-o-meter against prior commit (defconfig:-pv,-shadow on both):
+hvm_enabled is already a constant in PV-only builds. Patch 1 makes it so it's
+also a constant in HVM-only builds (with a compile-time panic if HVM support
+is lacking in HW). Patch 2 makes it so HVM-only shadowless builds mandate HAP
+at boot, thus const-ifying hap_enabled() too and removing that pesky shadow/
+folder.
 
-  add/remove: 0/12 grow/shrink: 2/31 up/down: 67/-1609 (-1542)
-  Function                                     old     new   delta
-  unmap_mmio_regions                          1340    1374     +34
-  map_mmio_regions                             211     244     +33
-  opt_hap_enabled                                1       -      -1
-  shadow_vcpu_init                               2       -      -2
-  __setup_str_opt_hap_enabled                    4       -      -4
-  _update_paging_modes                           6       -      -6
-  _toggle_log_dirty                              6       -      -6
-  _clean_dirty_bitmap                            6       -      -6
-  cpuid_viridian_leaves                        728     714     -14
-  iommu_domain_init                            291     276     -15
-  p2m_pt_change_entry_type_global              214     198     -16
-  paging_teardown                               91      74     -17
-  paging_set_allocation                        384     367     -17
-  paging_enable                                 76      59     -17
-  p2m_init_one                                 295     278     -17
-  ept_sync_domain                              201     184     -17
-  arch_set_paging_mempool_size                 437     420     -17
-  p2m_free_one                                  78      59     -19
-  paging_vcpu_teardown                          36      15     -21
-  p2m_pt_init                                  125     104     -21
-  p2m_pt_change_entry_type_range               218     197     -21
-  arch_do_physinfo                              76      53     -23
-  sh_none_ops                                   24       -     -24
-  paging_final_teardown                        134     110     -24
-  __setup_opt_hap_enabled                       24       -     -24
-  paging_vcpu_init                              41      15     -26
-  paging_domain_init                           167     141     -26
-  p2m_mem_access_sanity_check                   71      42     -29
-  hvm_enable                                   449     419     -30
-  init_guest_cpu_policies                     1247    1213     -34
-  paging_domctl                               3357    3318     -39
-  __start_xen                                 9456    9416     -40
-  arch_sanitise_domain_config                  794     747     -47
-  symbols_offsets                            29636   29588     -48
-  p2m_set_entry                                305     247     -58
-  guest_cpuid                                 1919    1858     -61
-  ept_dump_p2m_table                           817     751     -66
-  recalculate_cpuid_policy                     874     806     -68
-  shadow_domain_init                            71       -     -71
-  mmio_order                                    73       -     -73
-  hvm_shadow_max_featuremask                    76       -     -76
-  hvm_shadow_def_featuremask                    76       -     -76
-  dm_op                                       3594    3510     -84
-  symbols_sorted_offsets                     58464   58368     -96
-  symbols_names                             103425  103213    -212
-  Total: Before=3644618, After=3643076, chg -0.04%
----
- xen/arch/x86/Kconfig               | 2 ++
- xen/arch/x86/hvm/Kconfig           | 3 +++
- xen/arch/x86/hvm/hvm.c             | 8 ++++++++
- xen/arch/x86/include/asm/hvm/hvm.h | 2 +-
- xen/arch/x86/mm/Makefile           | 2 +-
- xen/include/xen/sched.h            | 3 +++
- 6 files changed, 18 insertions(+), 2 deletions(-)
+Cheers,
+Alejandro
 
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 2ce4747f6e..190f419720 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -67,6 +67,7 @@ source "arch/Kconfig"
- config PV
- 	def_bool y
- 	prompt "PV support"
-+	select OPT_HAP
- 	help
- 	  Interfaces to support PV domains. These require guest kernel support
- 	  to run as a PV guest, but don't require any specific hardware support.
-@@ -147,6 +148,7 @@ config SHADOW_PAGING
- 	bool "Shadow Paging"
- 	default !PV_SHIM_EXCLUSIVE
- 	depends on PV || HVM
-+	select OPT_HAP
- 	help
- 	  Shadow paging is a software alternative to hardware paging support
- 	  (Intel EPT, AMD NPT).
-diff --git a/xen/arch/x86/hvm/Kconfig b/xen/arch/x86/hvm/Kconfig
-index f32bf5cbb7..310e09847b 100644
---- a/xen/arch/x86/hvm/Kconfig
-+++ b/xen/arch/x86/hvm/Kconfig
-@@ -92,4 +92,7 @@ config MEM_SHARING
- 	bool "Xen memory sharing support (UNSUPPORTED)" if UNSUPPORTED
- 	depends on INTEL_VMX
- 
-+config OPT_HAP
-+	bool
-+
- endif
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index da56944e74..ce58632b02 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -91,9 +91,11 @@ struct hvm_function_table __ro_after_init hvm_funcs;
- unsigned long __section(".bss.page_aligned") __aligned(PAGE_SIZE)
-     hvm_io_bitmap[HVM_IOBITMAP_SIZE / BYTES_PER_LONG];
- 
-+#ifdef CONFIG_OPT_HAP
- /* Xen command-line option to enable HAP */
- static bool __initdata opt_hap_enabled = true;
- boolean_param("hap", opt_hap_enabled);
-+#endif /* CONFIG_OPT_HAP */
- 
- #ifndef opt_hvm_fep
- /* Permit use of the Forced Emulation Prefix in HVM guests */
-@@ -144,15 +146,21 @@ static bool __init hap_supported(struct hvm_function_table *fns)
-     if ( !fns->caps.hap )
-     {
-         printk("HVM: Hardware Assisted Paging (HAP) not detected\n");
-+
-+        if ( !IS_ENABLED(CONFIG_OPT_HAP) )
-+            panic("HAP is compile-time mandatory\n");
-+
-         return false;
-     }
- 
-+#ifdef CONFIG_OPT_HAP
-     if ( !opt_hap_enabled )
-     {
-         fns->caps.hap = false;
-         printk("HVM: Hardware Assisted Paging (HAP) detected but disabled\n");
-         return false;
-     }
-+#endif /* CONFIG_OPT_HAP */
- 
-     return true;
- }
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index dc609bf4cb..b330d65d6d 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -703,7 +703,7 @@ static inline bool hvm_is_singlestep_supported(void)
- 
- static inline bool hvm_hap_supported(void)
- {
--    return hvm_funcs.caps.hap;
-+    return !IS_ENABLED(CONFIG_OPT_HAP) ?: hvm_funcs.caps.hap;
- }
- 
- /* returns true if hardware supports alternate p2m's */
-diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
-index 960f6e8409..64fde82c50 100644
---- a/xen/arch/x86/mm/Makefile
-+++ b/xen/arch/x86/mm/Makefile
-@@ -1,4 +1,4 @@
--obj-y += shadow/
-+obj-$(CONFIG_OPT_HAP) += shadow/
- obj-$(CONFIG_HVM) += hap/
- 
- obj-$(CONFIG_ALTP2M) += altp2m.o
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 1268632344..0e317504f7 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1220,6 +1220,9 @@ static always_inline bool is_hvm_vcpu(const struct vcpu *v)
- 
- static always_inline bool hap_enabled(const struct domain *d)
- {
-+    if ( !IS_ENABLED(CONFIG_OPT_HAP) )
-+        return true;
-+
-     /* sanitise_domain_config() rejects HAP && !HVM */
-     return IS_ENABLED(CONFIG_HVM) &&
-         evaluate_nospec(d->options & XEN_DOMCTL_CDF_hap);
+Alejandro Vallejo (2):
+  x86: Make hvm_enabled a constant unless both PV and HVM are both
+    compiled
+  x86: Force HAP to be enabled when PV and shadow paging are compiled
+    out
+
+ xen/arch/x86/Kconfig               |  2 ++
+ xen/arch/x86/hvm/Kconfig           |  3 +++
+ xen/arch/x86/hvm/hvm.c             | 17 ++++++++++++++++
+ xen/arch/x86/include/asm/hvm/hvm.h | 32 +++++++++++++++---------------
+ xen/arch/x86/mm/Makefile           |  2 +-
+ xen/include/xen/sched.h            |  3 +++
+ 6 files changed, 42 insertions(+), 17 deletions(-)
+
+
+base-commit: 1f4f85b64d393be1aa8dc8170201f4fbfe9c7222
 -- 
 2.43.0
 
