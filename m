@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D5AEEA84E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 16:38:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1231444.1536641 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE2C5EEA84E
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 16:38:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1231445.1536651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqwAx-0006aE-8h; Fri, 13 Feb 2026 16:37:51 +0000
+	id 1vqwAz-0006pO-Fd; Fri, 13 Feb 2026 16:37:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1231444.1536641; Fri, 13 Feb 2026 16:37:51 +0000
+Received: by outflank-mailman (output) from mailman id 1231445.1536651; Fri, 13 Feb 2026 16:37:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqwAx-0006a7-5f; Fri, 13 Feb 2026 16:37:51 +0000
-Received: by outflank-mailman (input) for mailman id 1231444;
- Fri, 13 Feb 2026 16:37:50 +0000
+	id 1vqwAz-0006pH-CO; Fri, 13 Feb 2026 16:37:53 +0000
+Received: by outflank-mailman (input) for mailman id 1231445;
+ Fri, 13 Feb 2026 16:37:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HtAj=AR=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vqw3M-0005Wn-8K
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 16:30:00 +0000
+ id 1vqw2s-0005Wn-B7
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 16:29:30 +0000
 Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
  [2a00:1450:4864:20::32b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3ccbb68f-08f9-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Feb 2026 17:29:58 +0100 (CET)
+ id 2a88587e-08f9-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Feb 2026 17:29:28 +0100 (CET)
 Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4836e3288cdso6978215e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Feb 2026 08:29:58 -0800 (PST)
+ 5b1f17b1804b1-48069a48629so10260255e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Feb 2026 08:29:27 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4835dd0deeasm189438325e9.12.2026.02.13.08.29.56
+ 5b1f17b1804b1-4834d5ebd1bsm303288185e9.6.2026.02.13.08.29.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 08:29:57 -0800 (PST)
+ Fri, 13 Feb 2026 08:29:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ccbb68f-08f9-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 2a88587e-08f9-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771000198; x=1771604998; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BLmM/PlB9z/B4eiJQnmz92BO4QQBKRzX8FQ6b7JAWPA=;
-        b=Xrkn4xyLvNsIQUXyAWxYn6dNTJEDMZRecE94YrQ6VZTIaViCcsoA36HD0q6tjz/zWh
-         9+BaIUOd1PghNoZzNq2JZsp+/Mnc9vC3aMohslBZxZwPqhPEY5AUlCxVwPvEmCWHhtAh
-         DCTHbC5+5N6itV6aoau3SzqR3z9LPaKIePkSKs1jJ5Cj/PBWM8WJ29l2f0oY+k6+jLvn
-         dUrsUvTAEH5NP+qULOX+2sYEBUkobCh11lsIloUg7e+noz174mQGNVF5PieRle1Fd0px
-         Db7LuDNEZddCGUtpLdQHZzfmMzsSa6vh2+EpAE6vM7uYK5F38ePWJADaDon8jWM3dJW7
-         VcbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771000198; x=1771604998;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1771000167; x=1771604967; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BLmM/PlB9z/B4eiJQnmz92BO4QQBKRzX8FQ6b7JAWPA=;
-        b=PW5xqTZ7VE8Xrenmp45VurPvXVxuykWiK0U3LXqEC91R1hoAvo33b3sgYU21x/kJzZ
-         +7G4C+0tZpaSHNCP//D/iSn+iPFCqMHJHzNimL8xQLoKMyXcGwk7UQ7dGU8mreSAcab6
-         bnidy4I1HezMnMXCch/BktPWSibifDwg9zA2B5g4Kd332QwJB6hpUo23z5gLsK/md1S1
-         Fz8fnuYpk0TEVKOUpIP0jWpnUIPeE5Ht5QFNrG8JKu6Yb4z/ch6kqT/hBfo/ZUZ6FFoG
-         VZmTAQEA7hPh8wvu2CEFLjhk5T7427E1GS9cRbKOffkEEn+ByK4m6wjJTRAX16z/S6xg
-         5ahw==
-X-Gm-Message-State: AOJu0Yx/2hQA3A6GsIPV2+gyAIKt8Hv/cZTHA26tkdYxE9lGVoFsb0e2
-	fxQD5R+im5rpc0gjvOYp6FSSVHccryh753bDrv703jWFcJqyZ+8JFaHzp0jccei9
-X-Gm-Gg: AZuq6aI8t2GneaaOElB2oR95JAI518wKyp7qX5TGusY0lpNHq0OvumTaegugRpL9bHE
-	kM65LoRf8qvaOQ26mx1rwrFDsa45got1hIeWPM4831OvI109eZ9Fyi5X7f51vzsM3rAn07qputi
-	GaYn6d+rF31PUUG4Y1rP+o2Z96uINaJxhLEwzmxrgZTq9AEQQuGBtmiEmfG7tTgNHK/EetE3jLx
-	pZXZsldktYFxY1wV1i9HsbwXIK+L9x26Q2CGz3nSNTx2UKhA5ktGCPcOubnl6HndK5tBx9KuVZS
-	u4LZQDVJkGSSloQZWL/95WHJZvTO3cYwP13AEBAjXBEQVCusniOfRsnj/bPk68MzHHVBs6/kAgl
-	uLIYvqEqt7IghP+8nXyA0WEtYsg1sgqiIzaB0Onp6tyRGmLCgyTuroZ7ktMGVQWcWNJDin0MIM3
-	/BHBZ/84qdm3141FuxdDcUSCjdPwQfW02c2ON3uBTkCZC/o4zIIu81hYMI+5PfVSm0tLOM5JkiP
-	faU
-X-Received: by 2002:a05:600c:8285:b0:46f:a2ba:581f with SMTP id 5b1f17b1804b1-48378daa075mr11488265e9.16.1771000197631;
-        Fri, 13 Feb 2026 08:29:57 -0800 (PST)
+        bh=4f8nWiqSAdQ3ihvLKp54Tg1Gj2dyPRa9lPHwnTHLKUI=;
+        b=hRVKykmP+1eW6FLGVDZFos+sRgUPV8M/N4S8hCTBzj9/kqLogBIRAh9etNbH/AwNzy
+         +X9ENVSD4rWhMKrrOvmBL+vhIpb9gnobyy9RdsxQBR6cZg8020rKcmm7IbAmnJVZ6Ps6
+         C4HWQyjU6kabX0/y+9A2HbgjHHtAvjLStKloLQ3EGPdfMtzlSuS1JPCpOMyDUpRy38/R
+         QkG/94kv8xWLYzL6UoRlQsTfUWybYq0noU/QHK3ki3Mz26cWV7paLrjSj/EiWtY8kh5I
+         M1qvBYMvVc8M/k/ylzWDYq/gok4568IGRcusbbKAdpIXMvzgN+XIaSPSVm/i+jgJFCT2
+         lMgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771000167; x=1771604967;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4f8nWiqSAdQ3ihvLKp54Tg1Gj2dyPRa9lPHwnTHLKUI=;
+        b=IrxqFbPQc35waE/Y8DXoX0JE7bQ+kAjKgTu7r75wbDQJidlf8SK1IwHY9vTvQ6v7iF
+         Vn154xgdCWlIXi2IfC3Bvo2ifc3mi8dBdAqjLBAr3txT4wXx9BMwtmXH0BTuUDzrOkXh
+         AumqSebiWqoSTBpLYzNdZh2K5xX7v86w2as7pPNdLaqXHBm3f+YlkuxGni+VWDz/zgEw
+         TfJEk/EjHSOphMzyg8c6Fpf5QEi7t/cW4tEE2UmQPt+jqqeQDn1rsqXH+xz7vozm7w4e
+         H0tn6meXv0oLOrtd2VWhVqM3Bs4LdpSeJSR0gKzGU25E4wqj4UA9E5KQ5PZ5xLshWGLL
+         REvA==
+X-Gm-Message-State: AOJu0Yzv5E5RvxInVkMNTl9NuaB+oZdZ7YGE7CHXZzIPN3gAe0ircawx
+	I11ltVYzj1HWPic5sDRNdfUrD2vPhtqKHGmfUlYVwhI7HrjZW/K7vvBM6vWnh37F
+X-Gm-Gg: AZuq6aLUPlkqdC2fvnNF2S9YQErenCPiL4Q7dpQzjo993EE9M+seaPCHlWoE5v3FpXO
+	28OjXnvvwtRkdV4D7YjLSRFlqmrX7hxB9BsJf7TmLVujE+9kM/741KJoVTf3/Zu0gdgpshft+5y
+	FSbI5iPu1qcFFOfvHVehXhGb44lyDOclRsxzhmL0I6sEq5jPnFyDt5OEuOU1z9iKNqirDogFd5i
+	p4kT931lgXZ2qPRwq+kx4qAVJwAtM+LD4XHf9aokHC5VPnY6+NvTpSucVOI29lxm7ItSgon0EqC
+	5ugy/gtHLre0hPTJ7AZAE6+4Zo5IHysCV3wyZAvUHx3SU9iXNq93UqvPXtL1BolEtHA0yG7cbas
+	zaXpe5UxgUSC4gxhcnQz3uOzpPxDUz2FSeroAiqB4Duj9kxxhccFo8+ER7MS6zDkaedqAG+05ZO
+	ShMJu4QK3d9DqToLGyf42RG5X76i+omVRefDNJk5wILwcyxcdz419D8GrHlpXVkqqpUw==
+X-Received: by 2002:a05:600c:3e87:b0:480:32da:f338 with SMTP id 5b1f17b1804b1-48373a0f961mr38476305e9.14.1771000167050;
+        Fri, 13 Feb 2026 08:29:27 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,184 +96,79 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3] xen/riscv: add p2m context switch handling for VSATP and HGATP
-Date: Fri, 13 Feb 2026 17:29:45 +0100
-Message-ID: <be3d3793e78b8cfebfdd02361064bf7321b5f2ef.1770999879.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 15/16] xen/riscv: init tasklet subsystem
+Date: Fri, 13 Feb 2026 17:29:01 +0100
+Message-ID: <3da393474a5a8e8cb8b3760ccdd134196f3f0b14.1770999383.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1770999383.git.oleksii.kurochko@gmail.com>
+References: <cover.1770999383.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce helpers to manage VS-stage and G-stage translation state during
-vCPU context switches.
-
-As VSATP and HGATP cannot be updated atomically, clear VSATP on context
-switch-out to prevent speculative VS-stage translations from being associated
-with an incorrect VMID. On context switch-in, restore HGATP and VSATP in the
-required order.
-
-Add p2m_handle_vmenter() to perform VMID management and issue TLB flushes
-only when required (e.g. on VMID reuse or generation change).
-
-This provides the necessary infrastructure for correct p2m context switching
-on RISC-V.
+As the tasklet subsystem is now initialized, it is necessary to implement
+sync_local_execstate(), since it is invoked when something calls
+tasklet_softirq_action(), which is registered in tasklet_subsys_init().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in v4:
+ - Nothing changed. Only rebase.
 ---
 Changes in v3:
- - Add comment above p2m_ctxt_switch_{to, from}().
- - Code style fixes.
- - Refactor p2m_ctxt_switch_to().
- - Update the comment at the end of p2m_ctxt_switch_from().
- - Refactor the code of p2m_handle_vmenter().
+ - add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v2:
- - Add vsatp field declaration to arch_vcpu.
- - s/p2m_ctx_switch_{from,to}/p2m_ctxt_switch_{from,to}.
- - Introduce p2m_handle_vmenter() for proper handling of VMID,
-   hgatp and vsatp updates.
- - Introduce is_p2m_switch_finished and init it inisde
-   p2m_ctx_switch_to() for furhter handling in p2m_handle_vmenter().
- - Code style fixes.
- - Add is_idle_vcpu() check in p2m_ctxt_switch_from().
- - use csr_swap() in p2m_ctxt_switch_from().
- - move flush_tlb_guest_local() to the end if p2m_handle_vmenter() and
-   drop unnessary anymore comments.
- - Correct printk()'s arguments in p2m_handle_vmenter().
+ - Update the commit message.
+ - Move implementation of sync_vcpu_execstate() to separate commit
+   as it doesn't connect to tasklet subsystem.
 ---
- xen/arch/riscv/include/asm/domain.h |  1 +
- xen/arch/riscv/include/asm/p2m.h    |  4 ++
- xen/arch/riscv/p2m.c                | 79 +++++++++++++++++++++++++++++
- xen/arch/riscv/traps.c              |  2 +
- 4 files changed, 86 insertions(+)
+ xen/arch/riscv/setup.c |  3 +++
+ xen/arch/riscv/stubs.c | 10 ----------
+ 2 files changed, 3 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 3da2387cb197..42bb678fcbf9 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -59,6 +59,7 @@ struct arch_vcpu {
-     register_t hstateen0;
-     register_t hvip;
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index dc469b49623f..5843609350aa 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -12,6 +12,7 @@
+ #include <xen/serial.h>
+ #include <xen/shutdown.h>
+ #include <xen/smp.h>
++#include <xen/tasklet.h>
+ #include <xen/timer.h>
+ #include <xen/vmap.h>
+ #include <xen/xvmalloc.h>
+@@ -152,6 +153,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+         panic("Booting using ACPI isn't supported\n");
+     }
  
-+    register_t vsatp;
-     register_t vsie;
++    tasklet_subsys_init();
++
+     init_IRQ();
  
-     /*
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index f63b5dec99b1..60f27f9b347e 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -255,6 +255,10 @@ static inline bool p2m_is_locked(const struct p2m_domain *p2m)
- struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
-                                         p2m_type_t *t);
- 
-+void p2m_ctxt_switch_from(struct vcpu *p);
-+void p2m_ctxt_switch_to(struct vcpu *n);
-+void p2m_handle_vmenter(void);
-+
- #endif /* ASM__RISCV__P2M_H */
- 
- /*
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 0abeb374c110..7ae854707174 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -1434,3 +1434,82 @@ struct page_info *p2m_get_page_from_gfn(struct p2m_domain *p2m, gfn_t gfn,
- 
-     return get_page(page, p2m->domain) ? page : NULL;
- }
-+
-+/* Should be called before other CSRs are stored to avoid speculation */
-+void p2m_ctxt_switch_from(struct vcpu *p)
-+{
-+    if ( is_idle_vcpu(p) )
-+        return;
-+
-+    /*
-+     * No mechanism is provided to atomically change vsatp and hgatp
-+     * together. Hence, to prevent speculative execution causing one
-+     * guest’s VS-stage translations to be cached under another guest’s
-+     * VMID, world-switch code should zero vsatp, then swap hgatp, then
-+     * finally write the new vsatp value what will be done in
-+     * p2m_handle_vmenter().
-+     */
-+    p->arch.vsatp = csr_swap(CSR_VSATP, 0);
-+
-+    /*
-+     * Nothing to do with HGATP as it will be update in p2m_ctxt_switch_to()
-+     * or/and in p2m_handle_vmenter().
-+     */
-+}
-+
-+/* Should be called after other CSRs are restored to avoid speculation */
-+void p2m_ctxt_switch_to(struct vcpu *n)
-+{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(n->domain);
-+
-+    if ( is_idle_vcpu(n) )
-+        return;
-+
-+    csr_write(CSR_HGATP, construct_hgatp(p2m, n->arch.vmid.vmid));
-+    /*
-+     * As VMID is unique per vCPU and just re-used here thereby there is no
-+     * need for G-stage TLB flush here.
-+     */
-+
-+    csr_write(CSR_VSATP, n->arch.vsatp);
-+    /*
-+     * As at the start of context switch VSATP were set to 0, so no speculation
-+     * could happen thereby there is no need for VS TLB flush here.
-+     */
-+}
-+
-+void p2m_handle_vmenter(void)
-+{
-+    struct vcpu *c = current;
-+    struct p2m_domain *p2m = p2m_get_hostp2m(c->domain);
-+    struct vcpu_vmid *p_vmid = &c->arch.vmid;
-+    uint16_t old_vmid, new_vmid;
-+    bool need_flush;
-+
-+    BUG_ON(is_idle_vcpu(current));
-+
-+    old_vmid = p_vmid->vmid;
-+    need_flush = vmid_handle_vmenter(p_vmid);
-+    new_vmid = p_vmid->vmid;
-+
-+#ifdef P2M_DEBUG
-+    printk("%pv: oldvmid(%d) new_vmid(%d), need_flush(%d)\n",
-+           c, old_vmid, new_vmid, need_flush);
-+#endif
-+
-+    if ( old_vmid != new_vmid )
-+        csr_write(CSR_HGATP, construct_hgatp(p2m, p_vmid->vmid));
-+
-+    if ( unlikely(need_flush) )
-+    {
-+        local_hfence_gvma_all();
-+        flush_tlb_guest_local();
-+    }
-+
-+    /*
-+     * There is no need to set VSATP to 0 to stop speculation before updating
-+     * HGATP, as VSATP is not modified here. There is also no need to flush
-+     * the VS-stage TLB: even if speculation occurs, it will use the old VMID,
-+     * which will not be reused until need_flush is set to true.
-+     */
-+}
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index ce8d346a14d2..7ef089809734 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -177,6 +177,8 @@ static void check_for_pcpu_work(void)
-     vcpu_sync_interrupts(c);
- 
-     vcpu_flush_interrupts(c);
-+
-+    p2m_handle_vmenter();
+     riscv_fill_hwcap();
+diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
+index cb7546558b8e..26434166acc6 100644
+--- a/xen/arch/riscv/stubs.c
++++ b/xen/arch/riscv/stubs.c
+@@ -91,16 +91,6 @@ void continue_running(struct vcpu *same)
+     BUG_ON("unimplemented");
  }
  
- static void timer_interrupt(void)
+-void sync_local_execstate(void)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+-void sync_vcpu_execstate(struct vcpu *v)
+-{
+-    BUG_ON("unimplemented");
+-}
+-
+ void startup_cpu_idle_loop(void)
+ {
+     BUG_ON("unimplemented");
 -- 
 2.52.0
 
