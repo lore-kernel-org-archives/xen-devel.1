@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F5CDEF48C2
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 02:50:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230087.1535676 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029A6EE36B7
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 02:50:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230088.1535692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqjGA-0007SX-CM; Fri, 13 Feb 2026 02:50:22 +0000
+	id 1vqjGB-0007rl-Tj; Fri, 13 Feb 2026 02:50:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230087.1535676; Fri, 13 Feb 2026 02:50:22 +0000
+Received: by outflank-mailman (output) from mailman id 1230088.1535692; Fri, 13 Feb 2026 02:50:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqjGA-0007RT-81; Fri, 13 Feb 2026 02:50:22 +0000
-Received: by outflank-mailman (input) for mailman id 1230087;
- Fri, 13 Feb 2026 02:50:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqjGB-0007rV-QI; Fri, 13 Feb 2026 02:50:23 +0000
+Received: by outflank-mailman (input) for mailman id 1230088;
+ Fri, 13 Feb 2026 02:50:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4gzd=AR=ford.com=dmukhin@srs-se1.protection.inumbo.net>)
- id 1vqjG9-0006yU-Ge
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 02:50:21 +0000
-Received: from mx0b-00498f03.pphosted.com (mx0b-00498f03.pphosted.com
- [148.163.143.241]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9360b3f-0886-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Feb 2026 03:50:16 +0100 (CET)
-Received: from pps.filterd (m0482515.ppops.net [127.0.0.1])
- by m0482515.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 61D26ClX3521405
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 18:50:14 -0800
-Received: from ch1pr05cu001.outbound.protection.outlook.com
- (mail-northcentralusazon11010013.outbound.protection.outlook.com
- [52.101.193.13])
- by m0482515.ppops.net (PPS) with ESMTPS id 4c9tvm855f-1
+ id 1vqjGA-0006yN-1o
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 02:50:22 +0000
+Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
+ [148.163.146.23]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bbf2dc26-0886-11f1-b163-2bf370ae4941;
+ Fri, 13 Feb 2026 03:50:21 +0100 (CET)
+Received: from pps.filterd (m0367123.ppops.net [127.0.0.1])
+ by mx0a-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61CLDYCa438235
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Feb 2026 02:50:19 GMT
+Received: from bn1pr04cu002.outbound.protection.outlook.com
+ (mail-eastus2azon11010063.outbound.protection.outlook.com [52.101.56.63])
+ by mx0a-00498f03.pphosted.com (PPS) with ESMTPS id 4c9pkesr2k-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 18:50:14 -0800 (PST)
-Received: from BL1PR13CA0159.namprd13.prod.outlook.com (2603:10b6:208:2bd::14)
- by IA2PR16MB6348.namprd16.prod.outlook.com (2603:10b6:208:4ad::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Fri, 13 Feb
- 2026 02:50:08 +0000
-Received: from BL02EPF00021F69.namprd02.prod.outlook.com
- (2603:10b6:208:2bd:cafe::3) by BL1PR13CA0159.outlook.office365.com
- (2603:10b6:208:2bd::14) with Microsoft SMTP Server (version=TLS1_3,
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Feb 2026 02:50:19 +0000 (GMT)
+Received: from BY3PR04CA0030.namprd04.prod.outlook.com (2603:10b6:a03:217::35)
+ by SA5PPFCC01D6535.namprd16.prod.outlook.com
+ (2603:10b6:80f:fc04::923) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.18; Fri, 13 Feb
+ 2026 02:50:15 +0000
+Received: from MWH0EPF000C6188.namprd02.prod.outlook.com
+ (2603:10b6:a03:217:cafe::8c) by BY3PR04CA0030.outlook.office365.com
+ (2603:10b6:a03:217::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.11 via Frontend Transport; Fri,
- 13 Feb 2026 02:49:41 +0000
+ 13 Feb 2026 02:50:10 +0000
 Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
- BL02EPF00021F69.mail.protection.outlook.com (10.167.249.5) with Microsoft
+ MWH0EPF000C6188.mail.protection.outlook.com (10.167.249.120) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8
- via Frontend Transport; Fri, 13 Feb 2026 02:50:07 +0000
-Received: from pps.filterd (m0373461.ppops.net [127.0.0.1])
+ via Frontend Transport; Fri, 13 Feb 2026 02:50:14 +0000
+Received: from pps.filterd (m0426316.ppops.net [127.0.0.1])
  by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61D01AZg008731
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 21:50:05 -0500
+ 61CMPDc42547170
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 21:50:12 -0500
 Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
- [44.208.76.22])
- by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4c6mw9we1h-1
+ [3.215.31.156])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4c6nag5bmq-8
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 21:50:05 -0500 (EST)
-Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
- id qjFrvl2LU4XAgqjFsvcASk; Fri, 13 Feb 2026 02:50:04 +0000
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Feb 2026 21:50:12 -0500 (EST)
+Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
+ id qjFzvwTkjP7uEqjFzvDLNo; Fri, 13 Feb 2026 02:50:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -72,24 +72,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9360b3f-0886-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: bbf2dc26-0886-11f1-b163-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppford; bh=gwK
-	KWwFQSxOL2nXP9KGBiAgclLhKYOLn3uWhkxYkz78=; b=SuT6al1mxsfiBroU6jV
-	sX5o1ikNLrDMvRjZ0R0YAOrFuPclDR2a3ncNBNxrYawxRRZI925HwsvGehSan+Yn
-	pqR2cXVn2jnLguplEm9K0Us34JOjBgn+QbcAn8MNt3KnxY0qqzlikyfgg49TqHkI
-	Jxq7sraB/buEEXw24fqhHprd3JZxkg5zc+bITgl/Vp+mE+ITbTTTIJGsfMMzq8L5
-	2MrzrGKqaZrTsOLYg73EXgTBWXDsc22SjzCb1TJnLhrkXURh5LPhL+RxbMNhVi+O
-	ZgPWz0v7ZV25A2iyzvF1S+xgrkKLOSd9Py4/sVkpAW1fI9YSTZeg+Im4H4heHByb
-	Z3A==
+	:message-id:mime-version:references:subject:to; s=ppford; bh=QZz
+	0RdBUzIq+6LfiYUuswSgwU3nj3aTiG/f1W9D2zWY=; b=FqBmqEd7OyO0RtEv17n
+	WDISLFtBqzUyMPTsgxq1qj85EcH8JneeVUMh2hox5QnuOoHATg8EoyJ+YCVSFGYl
+	LfTA9DZfFKZuUH5GwC6Fe76LZzPXh5fC0ZJ5Nzx45wKj++H/RiWsyW/NwYEFazyD
+	dKGi/4/iVBiRtSKArCHLVuiByr4wQxilzgeOHdBiy8OZViWWXHcNNp9mdRH6n2z8
+	3m77VUgt2gP+QhfJceoOvNNgvdDKv9l5l0X6srV2pTurzzzLRWuvHOcV4E0jMO89
+	7G5YvTadw7IhEgD4LzrG1AwEnGvN93W+s4WEk3edJmewbTCpluUB5v3RBwgm09xl
+	Zyw==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XjdIFgOky16Ql43XpphN5yJNrmjOlzpexS0wJw4oZEdnRkIJ7b3F5FrgiGa9Bq8av8bs/4gLQkjOjQ8cgkmWvE0wr+4tcSd8xyTrKG9utqKT3+Yx/8bZ/aFlDNJqgyRtQouOdFHtJi9QseCaAXHcHzIWYMp4qx7ZYs5+wT4pe+JFMtjW3FFui2P+I3hVVyZov3PDoo8YqyCYSKxpez9UWS46dKuCQ/qDUdqOY2WuXvvZOTxyxndgRV/1Ldh5ZfcD3FEpT5CJV8NAV3RJMDMipmRuE1uaPtwdvw/iBI9YPXd2reN79XCd0QE9y9UOjCBv5qgC8mM+H84dqOBkwIw+5g==
+ b=SpNlHX0tSmBCNBBAZjoVGLv0ocJ7D8OV+dApWfL2268/KbLKkrZi2G11AE4xyWummU2SABeY/59rFJJ6g+QCZz92rLKspYSqIddXogHxOq0k6E8QY8F2kj0lYH+1ZN/qCUE0OEQ8zXvFTSPmmepzWXIQINbBV8juiWzwkeCSjrZ0AtERsfW0FMoRHaWy5nQ95sUdVePyKVJkCcxaz4hwKRfV4Vkbjg+veHdTGcWmvkueVW5wTTGOTRJoP+k5lDL4PZPpxuf48vQXDraV22AQxa7T8WNWC7hMaSM+GrRPYHuPDQkb8E18xSrEcxD/fwhTnyiP88XEcjiaMbwStj4KRQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gwKKWwFQSxOL2nXP9KGBiAgclLhKYOLn3uWhkxYkz78=;
- b=Y900s3dqp3kMxUWmTDmyblFPaS0rZsXrBLd+jaRGvfM0M2OLivrQo9xOC4x/0AePNPMPsenqaNspdtgywDPLTiKcy6ggM131OMHch0ggPmTy4Tb8AA1wKNLOP663PF9qTCUjBmiYWRLMtozqDtzmsBCI07V57TC8epf0lv4ocRsmKrkrTLTHhxhRSbI3MTb3Z3+pQ0AdytPs77IzBZOm1mofsvvECvfP5ns4B23ZDPg1w7ISGRLc/qQvGDHtidse7EiMJZqryl0ed2/VN4YdC1Oh9kDre/aMJRkBeEs9ht9zTn7xfUxd+w+uaK9QLtI4KJe2/hBedMnRC02YESTD1Q==
+ bh=QZz0RdBUzIq+6LfiYUuswSgwU3nj3aTiG/f1W9D2zWY=;
+ b=IkJ6r8my6UU/wbC7R8xGx1XcACiXalRa1QqyuHVB3EtH23McVEt/RJoQdWyjduRaWX5Firb/mXoioc4glWMcDjHCJZdqIB05who7lSZkFQCgUDUce/AjCFjV7I3X00g3UwcRZUdTEXc4Dr5gzfBKfsQOIHbgGWi4lkx2AY6LalFDro8w6uMyh3ZDFmV/QjenCKSEMz74zF9L1BxQHhJIOMSsYlLpg9BiDOHsSnnpixWrqYHslAD7UONETFAJoqN1KXoG/WfK6BAQSsqpRcVi25JER0a5A60/rYKpvzutZ3w/QQdCT1TAtxLB6W7XwOUw6O0ZIz5Lt+KXKTrGU7mAMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  148.163.138.245) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -99,8 +99,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gwKKWwFQSxOL2nXP9KGBiAgclLhKYOLn3uWhkxYkz78=;
- b=ITONXQGTF6+ZAvC7icSft2BT0sToLCwGbE8iTDD1FSyoiLSaPVOeZgDcnMrekf0qNU4fhwO8m5ERK4RR72DxxNM4rRsELszsS0Lbe0gfdVoEKJiEak6gI8FGsSVIQpcPGO8M5ETbI3j6T18jBmanm9QE5+zplBF4hpNQVlTT4ik=
+ bh=QZz0RdBUzIq+6LfiYUuswSgwU3nj3aTiG/f1W9D2zWY=;
+ b=GuKwEnySYp+Hhv86vBjhsKaN0Xl2xpAWUsgSjSJttJKDAs6lZS9TuanUwU33arvz/tQQtAtW7PB540f4SoGk6kQzG2t1bKPpzQg8txFla0K6uBJOWSmAhr9fAz0NVgCfeP+h6uIXiKDRfev3KNlExkt5PmH55XENF6ZKL8sZ5nI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
  smtp.mailfrom=ford.com; dkim=pass (signature was verified)
  header.d=saarlouis.ford.com;dkim=pass (signature was verified)
@@ -111,34 +111,34 @@ Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
 	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	ppserprodsaar; bh=gwKKWwFQSxOL2nXP9KGBiAgclLhKYOLn3uWhkxYkz78=; b=
-	ZTkbwIdcSIC4oZcm0Q0L3LGkuk7Z/JyyOjaQ7CtaZi/ex4/CjR94ObRoRHGCLNen
-	6+yIcxp3nDBaSKjmHHCrr6pz2e8VzV/0K4Uc0Fi9u9kgnASwDGXAWIZGRUvRkZAi
-	tqwBMrK6osXXQ+EDR0ZGFm2GX7FKkS7SDjg4xDs/YBKSLMFRJlcdBpbnXBZmMUEb
-	NbU5wdbEb7z/ojY2JX+9qdLgRgng8SfldfhOKtQZXc8z8suL2MKCHYmNQn0YxLPC
-	Y1TSSrVJXT9yvugfeyCLCtvf03xma976YbmJ41U277/s2Pw0htAbB1aZqOnDEJ0M
-	kyRkk8eGDNOrGovUdA0buw==
+	ppserprodsaar; bh=QZz0RdBUzIq+6LfiYUuswSgwU3nj3aTiG/f1W9D2zWY=; b=
+	TWeHJFhkF3hik088K1Y/D+Tefvzq5EPCkzCds+KL4ijJsp98pVeiprHcxW7y4feY
+	Sj0yPf1stpAo4vh7yf3IHxIlP90hay4RyP840r4QaRuFZn1rMsJYlutGnDHxcxfB
+	t65FzbGn1KwGug7wrUzwwOmY7kurGsxjV13mYTylhl9Y1i02RR5UOtQyXemv4qrs
+	ZRn9LLORlmu813CMybLL87mc6oTWhPLGWu/C9eH01Mfv2WKzhWjPPhhVdg5ND8Ro
+	zDGGTWrOIXUxCAovwo3ThNr2MjvXlPKHUVXq8pTd659nFmtU3WNC7gAwTK21SOOg
+	N3N/kC0u2W7BTYAjZ5Menw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=ppfserpocford; bh=gwKKWwF
-	QSxOL2nXP9KGBiAgclLhKYOLn3uWhkxYkz78=; b=U4FVsTcORNQJHtfoZnkuYlo
-	uILFRH982igFElsR7jGL12l1WY2vNq3ZwSySIrzlTzbL6b5uzrfmtEo9xiWlULMG
-	6oSO67cDl0fjfle0tAuv1AqE/RcFzp5lexPLEoPMc7ty37tLxuN31own6LDqVida
-	imn4WVHccW6yiR2uHTCIURswUC/VYpF9U87haQFzz13RyljEGCTvbW+fD+FIOjHv
-	cUJ9EUD2f4QziWRN9KPVm2POFzgKcm4/GC1KXyX7b09KLzwFUxTQeYhQoZmYz5rb
-	dMb+nIj1jvGWZ2qj3JW86ksgLytkG4FbT/r976W0azaDQfEoSpWCQnMMdo56xDg=
+	:mime-version:references:subject:to; s=ppfserpocford; bh=QZz0RdB
+	UzIq+6LfiYUuswSgwU3nj3aTiG/f1W9D2zWY=; b=mlXPrg50fbFssAdD5sUZz2k
+	JTHjq+IVpep0rPWBnKfdUZ/GP4+Y1xOeUG1mdnCiT7yEBPXFYP+07Tmvc525HgvL
+	LW7S42htqLN7FDO0xFeaAvq4Ad7jIOx9488r2VglB4V1sqJMsmoCZMMq7ygSoxgJ
+	tbhzJNb1PnsoVFjsEe/+Ty2RVT8hj41Y981RgYY0/BKBdbkMRYvikXhaXiSTvGTE
+	suotkQzOCcliWWsIZdtx+qDtb2w8b0FEvpmawNmB8E3ZzLfn9tF3wokb3u7zi+53
+	XIhj+XxUOuHJQigdQQrgVPSJYLY5TbzsM73sAtfAHW9PJoLpVt/IbMdxwKBmwwQ=
 	=
 X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: qjFrvl2LU4XAgqjFsvcASk
+X-Cloudmark-MID: qjFzvwTkjP7uEqjFzvDLNo
 X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
 From: dmukhin@ford.com
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
         julien@xen.org, michal.orzel@amd.com, roger.pau@citrix.com,
         sstabellini@kernel.org, dmukhin@ford.com
-Subject: [PATCH v3 1/5] tests: fixup domid make fragment
-Date: Thu, 12 Feb 2026 18:49:48 -0800
-Message-ID: <20260213024952.3270112-2-dmukhin@ford.com>
+Subject: [PATCH v3 5/5] tests: use unit test fragment in PDX test
+Date: Thu, 12 Feb 2026 18:49:52 -0800
+Message-ID: <20260213024952.3270112-6-dmukhin@ford.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260213024952.3270112-1-dmukhin@ford.com>
 References: <20260213024952.3270112-1-dmukhin@ford.com>
@@ -149,224 +149,319 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-12_05,2026-02-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- adultscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
+ adultscore=0 suspectscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
  definitions=main-2602130019
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F69:EE_|IA2PR16MB6348:EE_
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6188:EE_|SA5PPFCC01D6535:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e576522f-e5dd-4ed7-678a-08de6aaa9902
+X-MS-Office365-Filtering-Correlation-Id: 5eaa721b-5007-4da6-eef3-08de6aaa9cf5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?FsilxcRhPqT6CPS/M6U0mf+MNC1JeQKi78+mMdl4tCZxm+zRCG9tlLzuI/KN?=
- =?us-ascii?Q?n4A8RGm4A9/mQlg5y6nkvxKiKZVhaka13RfjIMRhsKKU1hsogj9hIvRVE4NF?=
- =?us-ascii?Q?rG79dZ/KlpyVy8q+ft5anY1yEiF1OTwDGryT4+TSFxOQ5g7hp3r78iQzTm1q?=
- =?us-ascii?Q?uc4Pu/1kij2J7icZuGJWvk6EWMDWLWBpAI+mLaxagVDuowfSn5pZVT4LFJ8Y?=
- =?us-ascii?Q?U2UZ9mcj+rDvqDIg1/dQ+wt/oWevd/kvmIIydRnK2dDx//o7cp6Xv6VtiJmq?=
- =?us-ascii?Q?LXHtzNEpUfdgS4glRVXeY5QVXcEg1HD+QrmGRxemmjNgmZQEvlV5hOH7GN7q?=
- =?us-ascii?Q?gG1EFgRXii6V2zj5ty/2ghH9jQnduiTI5gSV0ren3pH08CT3hJDP9f1sUK4u?=
- =?us-ascii?Q?gwhxIdFTFrGHQFXiJe0P1O53lVFdN92rdFysGd8fx9n18/poiY0xEoGp8wji?=
- =?us-ascii?Q?qD2KdBKC5Xc1n10RYGpEKYn0tJtDHMVxSgIZXGxYXuGnu3AUnK26QYzsJKhs?=
- =?us-ascii?Q?4ggG+9GHFXW1AvbDUE0gFEig+KOTHIAAP/czmdcOMPZUGglSvEGi8m8qXus2?=
- =?us-ascii?Q?Fus7McmrLlecI1gvtwh6fFqn6Yq8fS5tj0sMGbyr9Rol4yFyXxZPfCxWOr+O?=
- =?us-ascii?Q?yNPu4QNIqnltuPtKwQ1Un1SYd7f7Gj0O12GofWK0xC2ARKdLdZ9HNemb0Cyx?=
- =?us-ascii?Q?tejn2z1jpEPZ1xjpWPjUsErjuwO99PnRhGBMxjBGU4sLz6RYlayn8rjykfip?=
- =?us-ascii?Q?ph+DXGRfd1AbRUdIOrOCdozJP4aZSn+am8UHgK6aEfySCUUVHV3zwQlUUz1j?=
- =?us-ascii?Q?aS12anb7Qcph0xzQO4rICct7rV9u9aaWmpBUKJyDQBpV+2qegMUkEea5KFOS?=
- =?us-ascii?Q?WpEuUAmOwk5ul1MFBXu8lAlqSyMecMJiWDvYSL3czJfiPejrxB9sekgRF2Yp?=
- =?us-ascii?Q?Rhcctq2Gm3AerWUgo3NiMnnHiUqJsJN8YVhDjgaS9o9iAaq2qCyDDwd1ibUV?=
- =?us-ascii?Q?hFHLajyUmIxmfEIbwY3mSCfEyfi2g03zvSw5BBAmJ3J1lgZZw+lNcnVn4v72?=
- =?us-ascii?Q?UnE0Vm8PoUkwEH7sNMOePKFOozF4ptVYAF3r/KWFRcClfGoeBUrcMHTZp75Y?=
- =?us-ascii?Q?JswSPqj8zuI0IH65smiL+7ksiU4/I7/vxPxeOwQNCoo4+ikQ6l9AVi3qEvgt?=
- =?us-ascii?Q?1CT5n/qtBRIzrcJrz6b5ADkSZDSudfQ5aUXOisXMf/bb7RBS3Xmkn6EDBRW4?=
- =?us-ascii?Q?1DPwYjwjUGTHRwpHweVX1KqCHyoNfWa4hriSgDY5veBOTEcEwF2iHYwZv817?=
- =?us-ascii?Q?77Bc7NLUl92Zv9g8Cgg1uHu7JVygSmiBwOElA6NLx2HDwHS3rYzFzLB2i2gl?=
- =?us-ascii?Q?ps2AszxjDdLN+x3A3XThgOjpq3rjfR+04gst5zF7DVoQoP1xDSkufxgBJOD6?=
- =?us-ascii?Q?y1cOBYTdzOJ5wX0k97MNY32b35oyJnMfjU/tbTsjlnh4rauFs+b6iuMo6WvL?=
- =?us-ascii?Q?T/L8gLgQQKV7oQfiGJ17z6/L9+69QKBCpzAu+YTBNGo02AWUWNddf5axYwBE?=
- =?us-ascii?Q?aBlhKJTSU0M6sTjL/eAOICRA40u16ome/CG99N6RGF0sA4Sl2iZxMVPWRnYE?=
- =?us-ascii?Q?jDhDCg60+DLv4azV2msEwXDTISqrsQlFlbjMIEbTRb1Mzy4nKRMrCjehU2z6?=
- =?us-ascii?Q?uqDRbA=3D=3D?=
+	=?us-ascii?Q?HdDjsgY5Zs9ijPLoVjj0iiYpn9LyINHlATmSYn0KqAVLKu4Y72YMvzpx67eg?=
+ =?us-ascii?Q?x0usi+Ktu33urfL7Vvsx8rLEUM/KctaL54UuI2uAAbPmuiAl8256iL5KKH6I?=
+ =?us-ascii?Q?lkmKu7rS+41a5a/essP584I5wWQK7Jp5QAvP0kn+STvFzoZUmHDz8Tgshdmg?=
+ =?us-ascii?Q?28BYiQKmVljSpH27nj7HwxQcg3/kjyKgDEm7u8dtrfuNr2NmsZcH0uoF66dl?=
+ =?us-ascii?Q?0sZMqy5vKM9oSLch8a9c5Tb4MQfaXYQneUJI+SqsQ2DJs4Q41EdQtBfDhrbn?=
+ =?us-ascii?Q?J7M8gJ3UD/hJlHBVplojVh5MWnQW/LfSDdDyIclPxB/EuYwqODExrkgzqs7p?=
+ =?us-ascii?Q?l1Yt/w6mrli+BY6iqndOxcbKnsP711XTmVGlGeTsEQ4Ult7IY33SXLFc7MGh?=
+ =?us-ascii?Q?sLBBHEnCrJuY0uJOnC0XEBd/n7NIFuvFOB49pvO3sb8VJUvdSVayt+M0wjP9?=
+ =?us-ascii?Q?PfZ1qj8V49/h2ZkQdx+ixsgOzwQL0tx59uYSORXVrM/f4aLurPxCeQc5o0Pu?=
+ =?us-ascii?Q?AT9cdE1BH5NdbEMXyYEyEdJAvxQtRZQd+EVxpZJMbcS0WpKVmVo/5x0KOGVM?=
+ =?us-ascii?Q?5gV7d3vWYcgJn2fVGls66DpsMxh3ndNQjeFz9uiFU4VWmX5/YAd13oZMxg9Q?=
+ =?us-ascii?Q?rDNWVHQqH2JIgINU/M7EdkZdUZkL/wvSsJnbNS3duo7Pw3DvDrXQ3oGSIdjl?=
+ =?us-ascii?Q?s5FtBClLmcjwkfagDE3jU8P75ZkQ2jf7p2thONQ5LSCTaflYv9lIygJa8Qd9?=
+ =?us-ascii?Q?c5tqNSM1QpPbF1yHe6Zgh7DWgY0XXCHUQzsI3MIy3tvP9wgpPG21WsKdDfcL?=
+ =?us-ascii?Q?TPflD0LlVyDTXmiKEWNudQNpZpchsS/C3LDE2d+ADylPc4QYrsFpZ7pn+YzZ?=
+ =?us-ascii?Q?/EHXuGCNVKl2Cn8MqF0TEE+m70akV3WQD5ZGhMXijVF44KXzWm8N4g29udDi?=
+ =?us-ascii?Q?uwSFiCMvoVM8XKFnGI8uVBvJlUtLqKKmo7CUB5eQo218PkjX6v6m7NgosRcH?=
+ =?us-ascii?Q?DyTLWeJ84TeUVp0817EtPGgNAFl7vwSbKgBjvDbwgJaKR+gW8DYKxpxTrBAQ?=
+ =?us-ascii?Q?U2p5PlvptIJW8egdNpKv3qmHwKc8CpBVB/Wc9u6tax7rxXc++9oM1ixiiM5g?=
+ =?us-ascii?Q?F5qrQqR+rPxAixQqJiOKIfXsjC+ASLx1UsTUKpXFNOrNcQRVI7RuiBG8GgFx?=
+ =?us-ascii?Q?/0narmlwhCH5bOTHgeym4LoqAbVp0XROqJu5l+IuQznXZvhxnvJybXpxSXw+?=
+ =?us-ascii?Q?1Sp3N9JnUsnJY9UHny6XKPMOxsUWgeVooaA53E8N5smXn0K09JItQsklG9C1?=
+ =?us-ascii?Q?RTnqBNIgkUxk79CuCKf3yGeiGqJ1xxiCAQsguaLcsGv2alX+30BL9t6Kk5eW?=
+ =?us-ascii?Q?ng4/sdrMXbdFMOf1uY70N+XqSG1LcR+8YcN/i5XhnyxNQf/fIlQyooM7HRqK?=
+ =?us-ascii?Q?cAyLmtM+qDOao0bLa5d0hSCSZ8fg+0KsgYszVMlnEDKTpM3QReACzp+rR9bO?=
+ =?us-ascii?Q?34oqlaDs2fw9wbWwYF2THI6CVo+O47eZjcy/DxMdSeP7j/9+9N1IoEFGu8jI?=
+ =?us-ascii?Q?/8ZQQ9sFtFMBaVCe1utBDuRjeyJ71YTZ01hiruvueDNWyKQY2ellqfRmiWHv?=
+ =?us-ascii?Q?ZuTPDWH8Naj6yc+KeB0NKxkc5Hlvke3Mri4YZMYc1yhtd3V7jnrRUgRGkeiK?=
+ =?us-ascii?Q?CHJPyw=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:148.163.138.245;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0b-00498f04.pphosted.com;PTR:mx0b-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+	CIP:148.163.138.245;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0b-00498f04.pphosted.com;PTR:mx0b-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	u5Zije45qs3w56HAHjnqOoJaKnk14NMc9WZX1s0nqNC+8cC1XI0658Doxq8Y/E5U3oAwGPMlBqW69LsjszbKjZvGRhhVbA7sb0yuUkuSkKaY6JhDBDhEDBV2xMOFCUUEvuClV/o/EuNBSPvAMpdBojsdJ7mqIL4fR64AzP5GzaOiagaD5LwqTfmVjFOz9weM/4O9A5h8t1txVw9wziRh1lEC0zfoAqMfOj7NFMiXc32FUGqMbLI/CJXH2e8ELDPhrPclRCrT1AkcA8PiiVc87vAKo3Wt27qMIyn2+SRgLKIy+Q9xKhrAoMNY1Tt1L68aFRm3suZwiGSzpiI3SP356XFNLYPd+t6IRorTr8UONTuIXCFxejKRoe59DXLQUmGJVahQ3W7ZISgcnuv1CQkkRhjC+lxu0SwP+YLWvUPnliSesxLvO4BJdbUMdmTcdN06
+	KqVyl3013furYN8MuHrst47hO/y3uzgNd7fIiAmB91+AiV88nuVJEDkDvMtePWrXTqMnCMmgHsxQuNXVHH3vYSiIPyfuU+7lmdnAMWYjkGX7zQjkosMzCFa/PMxa2LuezRI/TblPJwQnNpYMb0wflY6GLX5HD7bKcBP4zO25W6n6zx0lSDnLbc0tDAMQ2P3qCIAqvf4euRcK3DiPMUXJUBIhPSYgej+7yttgDn3/rXm1I9oUKzsu2SMwNF1E4HNlbxHgbOUivAc6SobXJoUQ8hKw9uDZ6zAudOYFYzybEy3V0Ncp9bJTp3uuSKQLQ4ReEr2Op5FKiCuKTQsZaEn/fbXHtnKt8JvDwh/BQmHNAOIDKEmDkOw6uavvp6bpKTFmBpT09OaUwI16oamviQ87X5ORmhc4wUa0DeR1dYvcuhqsFG/NUVjvFWJIywSwZsUL
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	7NPI0d7wMjsnHS+h1rQPjEIaSkH5sRPvotmonX2UIR4d8DQuRkx14WMoUFnBf2oOP65TCE6iUfk2MEln8kSoEfPHyyawqJRzNy9r6gHzDEzkqX3TfAarUE1w+RPchT6aiQNWPAWzZiQRON6bGrX/Qtcu30sQZNb0Q2DASWbFhd65ALJhO6KX2hpWf5PA9xjpUh1KZQzjKoQsqGeoyZc0V4dF9O6joTeUzQ2J/l4AAMff5ZA8OhJ0xxX56nrrUJGkqY5BfAaLHrKo+zS7j2T3DW5gqnKGHWTYAjJBiPFbnB9vpdjkreUXq3iUKk4OSg8MLSMyHrK1tKCvYQfYKGzmCghuFOrKNJeVLs2oM+57dKtBbbkABH6tKx2u0V2d7W1dg6hn3NsGGrndAln3ds2MlxOgX1H5vbGMnaPKK1Gm+i9NiAhySW+a88kuZkMUU28eTd+T73BKsQ4Z4hz5Kwco9WJGKpXHoJ0RhZR0AoR+FDCfqqVbxjsms+o3a4Z12xXPLYRqusRl6vCjkyKKxLaO8B6U/LrdYCCmEwOHQLYL45ncCcZ2Y9dyKREjV/IzOh2ZYWyfSby7wKEktPbSESTlInfDZsUVVJHXNbQBg82WSJEAXUMEaYdqWf231pR3kwKeQVwqZiz5HqS6YAC+fQoziw==
+	0D68Ne2SBWSnHeSpPvWlj61MTJr6t9IeUETXSd2HBq2xxJWOq53PNYQ4jXCLQAIHlsZMoMI/0nQC2+wLtgO3MaNiE/YDhpCe/GL3oaK6CPK7MzRsznWYdidQb7E17LLM03c3GXXOPU3yy1DeP856VRhLYyC4cXHR8/8sfkDXOwrkgcKiEGho7c2CcBThp5y1RlmFNnzMsQXYNquOxajNx8oDayWEy4rdHisnFk6FcCINo9a0erXgUENvhBFCX98AVUQVLCjrlXsM6ljjU259jMuzsP43rCY0crlwHRgnTMeT86+ByT2uWJ+DXK2Z++9CpMwlaoY4pElJEusXSq4HyrwUWzzCVsrGWJY6q0xWGUg8degOv7r8rCR13YT5ec+RGVNniV3MszgCqv5ZynhFiIFS8HR3ZXTCuXJGAsuFng1FBNBSKMPhDRwI9ScnK14WSfaqRhAh8PMMb2sVUDHl6LsWu3RsantLz6XqUlomldmSc93HAKbHsKF52h68LM4Y3hN4aRLRhAEfGO4WVb9dRfZKK6hZoDwHUvw2yXyHHZCoYTsJzbA39HR1YmTZFNWVB14tOuc2iQvmhUgtYnvPdLHIr6Piu1/83aJWuhL6Lk+WorXVhxso/31JMRASeqFgqIv/UEqTpViwls+VnrJOAQ==
 X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 02:50:07.6214
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 02:50:14.0359
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e576522f-e5dd-4ed7-678a-08de6aaa9902
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5eaa721b-5007-4da6-eef3-08de6aaa9cf5
 X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[148.163.138.245];Helo=[mx0b-00498f04.pphosted.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF00021F69.namprd02.prod.outlook.com
+	MWH0EPF000C6188.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA2PR16MB6348
-X-Authority-Analysis: v=2.4 cv=Kv5AGGWN c=1 sm=1 tr=0 ts=698e9166 cx=c_pps
- a=N2Bp1sGBA0q5hqNMPvyVyQ==:117 a=b7IhknPlfT0FN1EembXvig==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPFCC01D6535
+X-Proofpoint-GUID: 8HwLCm9bgunVaHS0d0Rd1ktgjK_zvRvL
+X-Authority-Analysis: v=2.4 cv=Wuwm8Nfv c=1 sm=1 tr=0 ts=698e916b cx=c_pps
+ a=BPguv+Q8Nj9xbNSzergmQw==:117 a=b7IhknPlfT0FN1EembXvig==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=HzLeVaNsDn8A:10 a=3PXLN80vpJUA:10
  a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=cbNQJ9GKAAAA:8
- a=WxjMYAsaG4aR2vMT2MYA:9 a=3whSkbs7g9Me0DR5EJEX:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDAxOSBTYWx0ZWRfXwp0c0qPCOata
- USc/zSSp84fwzlN7bghMfOwun3rmebmlqG2x5Ui6kyw6fyfzvXRusKuMIGIk5c0ss1Mgai4Ar/o
- Kc+5TWi2GIde7XBGv/5R+U36K8J+xBlgrwgV74K1lY9RdQvxaOeNIVeI+mOR0VDqAfRoKCPM274
- Ns7wUU/P+HKwft9ep+OW+6yFS0Ag94LcLWGgoM1q0OhA9rz3OWAdJ/0YBrekX0flDB04i0+FULt
- mSVOStINciPgBEYs3daQlaDuilTyR0Pbc4pvFrXJg/H6Re2eSCVrd9lJDl8XaLKu+ggsRXfFZHn
- ZMRuKqXV+Fxb8SYIQ90/3Sn0vX4EwmQSDjpfkI8DG05Ct+ew9Po4iuiqgAsnCriKkk5zqXDl+ty
- yns+Ev6Gd6Ieqn4Ha9KkcI3dssfSq+85GF0SIIP2tEJhOqLlRQ4Mjcf5aTcNg3shM8LcU6dHbDk
- 2HVEitAu1/UtxCWifQg==
-X-Proofpoint-GUID: ocnhx_Sb35YkR_6ikN0VmZcc2n6lKbqn
-X-Proofpoint-ORIG-GUID: ocnhx_Sb35YkR_6ikN0VmZcc2n6lKbqn
+ a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=mDV3o1hIAAAA:8
+ a=cbNQJ9GKAAAA:8 a=CTJY7OLnDzyQ9A8_STcA:9 a=G69WFyCBNqGPyalROSdv:22
+X-Proofpoint-ORIG-GUID: 8HwLCm9bgunVaHS0d0Rd1ktgjK_zvRvL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDAxOSBTYWx0ZWRfX3ujcxBKhb7rA
+ KCaISNmKUNtpyKaTtbzJD7ZbiCeuPswf2Ivf6U+QaG1fy7KQInvyZAUaXNxWmVPooH5TeUzV74U
+ kli9kZeflEghIV9sDqzLLI5+i0E+D68SVpT3y59CMqPiSmT89kQRqnVX8gageUeKUovqi4R+cC+
+ g4IIS8VQQepe6qtho1Z7OL+JjYPNucNClIivZ9tUxqJjn5lTVKqcimPFFeJ56QUqBvgH6rbCSJj
+ +t0EgPdF8i+Idh5jEW+DC8XPjxF0SD1/tgDyt8JDGJjdWMLoeNyRR+VBkQYmnfAuPSrKvQd4lOq
+ HA0TurMWAlrL74/wymZhWAseRjpyYUnx9c2MGWsZOtCMD6mfyQkPIxxkDrlgmX7iNR71q1QYTzW
+ 2/w2mq4imWiurnEDckRyN/27/so6kr/MdMvQpOljLtvCXew1JFmYK9gCMjFnpFF1K0h/uUf6ct4
+ n7nx14GjIIhOrvacubA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-12_05,2026-02-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- spamscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
- bulkscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
+ adultscore=0 spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ phishscore=0 impostorscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130019
 
 From: Denis Mukhin <dmukhin@ford.com> 
 
-Add guard against HOSTCC != CC (similarly to how its done in PDX unit test).
+Use the new make fragment to generate test harness code for the PDX unit
+test.
 
-Account for multiple test targets in install and uninstall make targets.
+Add ability to pass custom CFLAGS for mock code and object file suffix.
 
-Honor mocked hypervisor header over tools/include/xen symlinks.
+Move <xen/bitops.h> earlier in xen/common/pdx.c to ensure harness.h is
+included before triggering the #ifndef MAX_PFN_RANGES check when building a
+unit test.
 
-Finally, add some clarifications for the functions and do some cleanup.
+Additionally, use real <xen/pdx.h> in harness.h instead of a locally copied
+version.
 
-Amends: 2d5065060710 ("xen/domain: unify domain ID allocation")
+Update .gitignore to exclude generated test build-time dependencies.
+
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
 Changes since v2:
-- fixed emit-harness-nested-rule
-- honor LDFLAGS_APPEND
+- added lost -DCONFIG_PDX_OFFSET_COMPRESSION test
 ---
- tools/tests/domid/Makefile | 59 +++++++++++++++++++++++++++-----------
- 1 file changed, 43 insertions(+), 16 deletions(-)
+ tools/tests/Rules.mk       | 19 ++++++++----
+ tools/tests/pdx/.gitignore |  2 +-
+ tools/tests/pdx/Makefile   | 59 +++++++++++---------------------------
+ tools/tests/pdx/harness.h  |  2 +-
+ tools/tests/pdx/test-pdx.c |  2 --
+ xen/common/pdx.c           |  3 +-
+ xen/include/xen/pdx.h      |  2 ++
+ 7 files changed, 36 insertions(+), 53 deletions(-)
 
-diff --git a/tools/tests/domid/Makefile b/tools/tests/domid/Makefile
-index 753129029ed9..74cadab25b2e 100644
---- a/tools/tests/domid/Makefile
-+++ b/tools/tests/domid/Makefile
-@@ -14,26 +14,44 @@ $(shell sed -n \
-     's/^[ \t]*# *include[ \t]*[<"]\([^">]*\)[">].*/\1/p' $(1) 2>/dev/null)
- endef
- 
--# NB: $1 cannot be a list
-+# Generate mock environment by replicating header file hierarchy;
-+# each mock header file will point to a harness header.
+diff --git a/tools/tests/Rules.mk b/tools/tests/Rules.mk
+index e8a9e82320cf..dc16926f0591 100644
+--- a/tools/tests/Rules.mk
++++ b/tools/tests/Rules.mk
+@@ -16,11 +16,13 @@ prepare-harness:
+ # Generate mock environment by replicating header file hierarchy;
+ # each mock header file will point to a harness header.
+ #
++# NB: double-colon rule for mocking environment for multiple tests.
 +#
-+# $1 Hypervisor header.
-+# $2 Test harness header.
+ # $1 Hypervisor header.
+ # $2 Test harness header.
  define emit-harness-nested-rule
--$(1): $(CURDIR)/harness.h
--	mkdir -p $$(@D);
--	ln -sf $$< $$@;
-+$(1): $(2)
-+	set -e; \
-+	mkdir -p $$(@D); \
-+	[ -e $$@ ] || ln -s $(2) $$@
+-$(1): prepare-harness $(2)
+-	set -e; \
++$(1):: prepare-harness $(2)
++	@set -e; \
+ 	mkdir -p $$(@D); \
+ 	[ -e $$@ ] || ln -s $(2) $$@
  
- endef
- 
--define emit-harness-rules
--$(foreach x,$(2),$(call emit-harness-nested-rule,$(CURDIR)/generated/$(x)))
--$(1:.c=.o): $(addprefix $(CURDIR)/generated/,$(2))
--endef
--
-+# Helper function to emit mock hypervisor code dependencies.
-+#
-+# $1 Hypervisor filename.
-+# $2 Harness filename.
+@@ -30,16 +32,19 @@ endef
+ #
+ # $1 Hypervisor filename.
+ # $2 Harness filename.
++# $3 Extra CFLAGS.
++# $4 Object file suffix.
  define emit-harness-deps
--$(if $(strip $(2)),$(call emit-harness-rules,$1,$2),)
-+$(eval c-file := $(abspath $(1)))
-+$(eval c-name := $(notdir $(c-file)))
-+$(eval c-headers := $(call list-c-headers,$(c-file)))
-+$(eval c-deps := $(addprefix $(CURDIR)/generated/,$(c-headers)))
-+$(foreach x,$(c-headers),$(call emit-harness-nested-rule,\
-+                         $(addprefix $(CURDIR)/generated/,$(x)),\
-+                         $(2)))
-+$(c-name:%.c=%.o): $(c-file) $(c-deps)
-+	$(CC) $(CFLAGS) -o $$@ -c $$(firstword $$^)
-+
+ $(eval c-file := $(abspath $(1)))
+ $(eval c-name := $(notdir $(c-file)))
+ $(eval c-headers := $(call list-c-headers,$(c-file)))
+ $(eval c-deps := $(addprefix $(CURDIR)/generated/,$(c-headers)))
++$(eval c-obj := $(if $(strip $(4)),-$(strip $(4)),))
+ $(foreach x,$(c-headers),$(call emit-harness-nested-rule,\
+                          $(addprefix $(CURDIR)/generated/,$(x)),\
+                          $(2)))
+-$(c-name:%.c=%.o): $(c-file) $(c-deps)
+-	$(CC) $(CFLAGS) -o $$@ -c $$(firstword $$^)
++$(c-name:%.c=%$(c-obj).o): $(c-file) $(c-deps)
++	$(CC) $(3) $(CFLAGS) -o $$@ -c $$(firstword $$^)
+ 
  endef
  
-+# Emit dependencies for mock hypervisor code.
-+#
-+# $1 Hypervisor filename.
-+# $2 Hypervisor source path.
+@@ -48,10 +53,14 @@ endef
+ # $1 Hypervisor filename.
+ # $2 Hypervisor source path.
+ # $3 Harness header filename (optional).
++# $4 Extra CFLAGS (optional).
++# $5 Object file suffix (optional).
  define vpath-with-harness-deps
  vpath $(1) $(2)
--$(call emit-harness-deps,$(1),$(call list-c-headers,$(2)$(1)))
-+$(call emit-harness-deps,$(addprefix $(2),$(1)),\
-+                         $(CURDIR)/harness.h)
+ $(call emit-harness-deps,$(addprefix $(2),$(1)),\
+-                         $(strip $(or $(3),$(CURDIR)/harness.h)))
++                         $(strip $(or $(3),$(CURDIR)/harness.h)),\
++                         $(4),\
++                         $(5))
  endef
  
  .PHONY: all
-@@ -41,7 +59,11 @@ all: $(TESTS)
+diff --git a/tools/tests/pdx/.gitignore b/tools/tests/pdx/.gitignore
+index 1202a531a7fd..1bf9c05985c4 100644
+--- a/tools/tests/pdx/.gitignore
++++ b/tools/tests/pdx/.gitignore
+@@ -1,3 +1,3 @@
+-/pdx.h
++/generated
+ /test-pdx-mask
+ /test-pdx-offset
+diff --git a/tools/tests/pdx/Makefile b/tools/tests/pdx/Makefile
+index 3c431d7c7822..fa0bea8e1035 100644
+--- a/tools/tests/pdx/Makefile
++++ b/tools/tests/pdx/Makefile
+@@ -1,50 +1,23 @@
+-XEN_ROOT=$(CURDIR)/../../..
+-include $(XEN_ROOT)/tools/Rules.mk
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# Unit tests for PDX (Page inDeX).
++#
  
- .PHONY: run
- run: $(TESTS)
-+ifeq ($(CC),$(HOSTCC))
- 	set -e; $(foreach t,$(TESTS),./$(t);)
-+else
-+	$(warning HOSTCC != CC, will not run test)
-+endif
+-TARGETS := test-pdx-mask test-pdx-offset
++TESTS := test-pdx-mask test-pdx-offset
  
- .PHONY: clean
- clean:
-@@ -55,13 +77,12 @@ distclean: clean
- .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) test-domid $(DESTDIR)$(LIBEXEC)/tests
-+	set -e; $(foreach t,$(TESTS),$(INSTALL_PROG) $t $(DESTDIR)$(LIBEXEC)/tests;)
+-.PHONY: all
+-all: $(TARGETS)
++XEN_ROOT = $(CURDIR)/../../..
  
- .PHONY: uninstall
- uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/test-domid
-+	set -e; $(foreach t,$(TESTS),$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$t;)
+-.PHONY: run
+-run: $(TARGETS)
+-ifeq ($(CC),$(HOSTCC))
+-	set -e;             \
+-	for test in $? ; do \
+-		./$$test ;  \
+-	done
+-else
+-	$(warning HOSTCC != CC, will not run test)
+-endif
++include $(XEN_ROOT)/tools/tests/Rules.mk
  
+-.PHONY: clean
+-clean:
+-	$(RM) -- *.o $(TARGETS) $(DEPS_RM) pdx.h
++CFLAGS += -I $(XEN_ROOT)/xen/include/
+ 
+-.PHONY: distclean
+-distclean: clean
+-	$(RM) -- *~
++$(eval $(call vpath-with-harness-deps,pdx.c,$(XEN_ROOT)/xen/common/,,-DCONFIG_PDX_MASK_COMPRESSION,mask))
++test-pdx-mask.o: test-pdx.c
++	$(CC) -DCONFIG_PDX_MASK_COMPRESSION $(CFLAGS) -o $@ -c $^
+ 
+-.PHONY: install
+-install: all
+-	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
+-	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests
++$(eval $(call vpath-with-harness-deps,pdx.c,$(XEN_ROOT)/xen/common/,,-DCONFIG_PDX_OFFSET_COMPRESSION,offset))
++test-pdx-offset.o: test-pdx.c
++	$(CC) -DCONFIG_PDX_OFFSET_COMPRESSION $(CFLAGS) -o $@ -c $^
+ 
+-.PHONY: uninstall
+-uninstall:
+-	$(RM) -- $(patsubst %,$(DESTDIR)$(LIBEXEC)/tests/%,$(TARGETS))
+-
+-pdx.h: $(XEN_ROOT)/xen/include/xen/pdx.h
+-	sed -e '/^#[[:space:]]*include/d' <$< >$@
+-
 -CFLAGS += -D__XEN_TOOLS__
- # find-next-bit.c
- CFLAGS += '-DEXPORT_SYMBOL(x)=' \
-           -Dfind_first_bit \
-@@ -69,9 +90,13 @@ CFLAGS += '-DEXPORT_SYMBOL(x)=' \
-           -Dfind_next_bit \
-           -Dfind_next_bit_le \
-           -Dfind_next_zero_bit_le
 -CFLAGS += $(APPEND_CFLAGS)
+-CFLAGS += $(CFLAGS_xeninclude)
+-
+-test-pdx-mask: CFLAGS += -DCONFIG_PDX_MASK_COMPRESSION
+-test-pdx-offset: CFLAGS += -DCONFIG_PDX_OFFSET_COMPRESSION
+-
+-test-pdx-%: test-pdx.c pdx.h
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) -o $@ $< $(APPEND_CFLAGS)
+-
+--include $(DEPS_INCLUDE)
++test-pdx-%: test-pdx-%.o pdx-%.o
++	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+diff --git a/tools/tests/pdx/harness.h b/tools/tests/pdx/harness.h
+index e49d6bcf92c2..4cdda931feb2 100644
+--- a/tools/tests/pdx/harness.h
++++ b/tools/tests/pdx/harness.h
+@@ -84,7 +84,7 @@ typedef uint64_t paddr_t;
+     qsort(elem, nr, size, cmp);                                         \
+ })
+ 
+-#include "pdx.h"
++#include <xen/pdx.h>
+ 
+ #endif
+ 
+diff --git a/tools/tests/pdx/test-pdx.c b/tools/tests/pdx/test-pdx.c
+index eefd54c76815..3633c231abaa 100644
+--- a/tools/tests/pdx/test-pdx.c
++++ b/tools/tests/pdx/test-pdx.c
+@@ -7,8 +7,6 @@
+ 
+ #include "harness.h"
+ 
+-#include "../../xen/common/pdx.c"
+-
+ struct range {
+     /* Ranges are defined as [start, end). */
+     unsigned long start, end;
+diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+index 7e070ff962e8..068a2098b41b 100644
+--- a/xen/common/pdx.c
++++ b/xen/common/pdx.c
+@@ -15,11 +15,12 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <xen/bitops.h>
 +
-+CFLAGS += -D__XEN_TOOLS__
-+
-+# Honor mock hypervisor headers over tools/include/xen
-+CFLAGS += -I$(CURDIR)/generated/
- CFLAGS += $(CFLAGS_xeninclude)
--CFLAGS += -I./generated/
-+CFLAGS += $(APPEND_CFLAGS)
+ /* Trim content when built for the test harness. */
+ #ifdef __XEN__
+ #include <xen/init.h>
+ #include <xen/mm.h>
+-#include <xen/bitops.h>
+ #include <xen/nospec.h>
+ #include <xen/param.h>
+ #include <xen/pfn.h>
+diff --git a/xen/include/xen/pdx.h b/xen/include/xen/pdx.h
+index 856fc3e8a0e6..8b4a8701a25f 100644
+--- a/xen/include/xen/pdx.h
++++ b/xen/include/xen/pdx.h
+@@ -199,7 +199,9 @@ static inline paddr_t directmapoff_to_maddr_xlate(unsigned long offset)
  
- LDFLAGS += $(APPEND_LDFLAGS)
+ #elif defined(CONFIG_PDX_OFFSET_COMPRESSION) /* CONFIG_PDX_MASK_COMPRESSION */
  
-@@ -85,4 +110,6 @@ $(eval $(call vpath-with-harness-deps,domid.c,$(XEN_ROOT)/xen/common/))
- test-domid: domid.o find-next-bit.o test-domid.o
- 	$(CC) $^ -o $@ $(LDFLAGS)
++#ifdef __XEN__
+ #include <xen/page-size.h>
++#endif
  
-+ifeq ($(filter clean distclean,$(MAKECMDGOALS)),)
- -include $(DEPS_INCLUDE)
-+endif
+ #define CONFIG_PDX_NR_LOOKUP (1UL << CONFIG_PDX_OFFSET_TBL_ORDER)
+ #define PDX_TBL_MASK (CONFIG_PDX_NR_LOOKUP - 1)
 -- 
 2.52.0
 
