@@ -4,32 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31015EF99E3
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 22:48:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1231979.1536887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EF7EF99E0
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 22:57:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1232035.1536917 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vr1xZ-00075V-65; Fri, 13 Feb 2026 22:48:25 +0000
+	id 1vr25f-0001GK-Ad; Fri, 13 Feb 2026 22:56:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1231979.1536887; Fri, 13 Feb 2026 22:48:25 +0000
+Received: by outflank-mailman (output) from mailman id 1232035.1536917; Fri, 13 Feb 2026 22:56:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vr1xZ-00075O-3V; Fri, 13 Feb 2026 22:48:25 +0000
-Received: by outflank-mailman (input) for mailman id 1231979;
- Fri, 13 Feb 2026 22:48:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vr25f-0001GD-7z; Fri, 13 Feb 2026 22:56:47 +0000
+Received: by outflank-mailman (input) for mailman id 1232035;
+ Fri, 13 Feb 2026 22:56:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eHiT=AR=citrix.com=abdelkareem.abdelsaamad@srs-se1.protection.inumbo.net>)
- id 1vr1xY-00075I-IH
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 22:48:24 +0000
-Received: from na1pdmzitismtp01.tibco.com (na1pdmzitismtp01.corp.cloud.com
- [160.101.131.8]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 194cf051-092e-11f1-b163-2bf370ae4941;
- Fri, 13 Feb 2026 23:48:23 +0100 (CET)
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id CE55D4280D5B;
- Fri, 13 Feb 2026 17:48:07 -0500 (EST)
+ <SRS0=p2Ni=AR=amd.com=Jason.Andryuk@srs-se1.protection.inumbo.net>)
+ id 1vr25e-0001G7-0u
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 22:56:46 +0000
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [2a01:111:f403:c105::5])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 43604bd2-092f-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Feb 2026 23:56:43 +0100 (CET)
+Received: from BL1PR13CA0410.namprd13.prod.outlook.com (2603:10b6:208:2c2::25)
+ by DM6PR12MB4284.namprd12.prod.outlook.com (2603:10b6:5:21a::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Fri, 13 Feb
+ 2026 22:56:39 +0000
+Received: from BL6PEPF0001AB56.namprd02.prod.outlook.com
+ (2603:10b6:208:2c2:cafe::15) by BL1PR13CA0410.outlook.office365.com
+ (2603:10b6:208:2c2::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.12 via Frontend Transport; Fri,
+ 13 Feb 2026 22:56:41 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BL6PEPF0001AB56.mail.protection.outlook.com (10.167.241.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Fri, 13 Feb 2026 22:56:38 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Feb
+ 2026 16:56:38 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Feb
+ 2026 14:56:38 -0800
+Received: from fedora.mshome.net (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Fri, 13 Feb 2026 16:56:35 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,92 +65,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 194cf051-092e-11f1-b163-2bf370ae4941
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-Subject: [PATCH v2 0/2] Virtual NMI 
-Date: Fri, 13 Feb 2026 22:44:44 +0000
-Message-ID: <cover.1771016301.git.abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.52.0
+X-Inumbo-ID: 43604bd2-092f-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Kfnq6NdNNVuiOuaR6B4mTFtSUC5xmYKhOavWIw5rVl51xdSDFfjjcNv7WrDrBuNvIrfhggW07s9/uvxbwc6sNJqCCzI/KhZ5FWW0spytDUYnDqBK+noj3UW/fXvmIAaOY7iy3S5LG5xA/26iT+C7c0zDUwSZjoSanDrYC6Ci3LVdscSQLmbbAA8AsjKTiSiEbLZckWlp/byALNLpr53i89ZpUEXRBA9xECjhYeN0usiAAaaJZIQVPOxjpN51a+yX/mXbMFv7TivjS1kFX2eHeS2CRwGEVGYGT+DnYhm4Hc930uX80mnGpMJwAeXpBZZF2QS2hJgQH7Rl5uHp8LIgcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ycUUyyRqydkafbiPgDfQrb38BnVTwnbLy0kPTis535M=;
+ b=dgKpYDswQdFigO3A0ZKLa/uhp4WIAxvwYBE4mQA+RW1sgA0SLOtkZiCImyDRWgAg0BRjx2G0aJGFPb7njUOAcPE9SVezhwIoqgPpHQpsLxOHC/NLnIM/cN6qtT9N3bgOz81033F7TCjBULA57FsjE6oI4FoeUCwBrV114LlAo8/ttiF+hXFFFO1zjT3WuR1Q4v6BZu57V2Av3WNrxsF1q3qzk4yXri4AzakuVzgoJkpBorwNAgJA5aNJcpwxbuxVBfwR2H3b2uCms/48oeVRrXUbhhhbrEB3pfCEvaIvmSHAfoRX2MoA04sL3yVSaIZb2H0xsWYBZIhTepifK7R2+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ycUUyyRqydkafbiPgDfQrb38BnVTwnbLy0kPTis535M=;
+ b=NV4a8dCHnSc6mc3o2yVjP5bQlzxIE4OnUzg3oqsiCg/d/0Bm3imd1VMFFlcd5kWWNbaXrPKxtx0pI2QgLF7jPr5liUONiHLXJWqsM5WT7rZV/s/pSZNG4ptU0go3fIV9jisv/PZ0kehCpwGbfsuuwBImlStqgNvcwRRDFMYKRXk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2] xen: Put wait.c behind CONFIG_VM_EVENT
+Date: Fri, 13 Feb 2026 17:56:35 -0500
+Message-ID: <20260213225635.346187-1-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB56:EE_|DM6PR12MB4284:EE_
+X-MS-Office365-Filtering-Correlation-Id: f67a9200-f6ab-4332-f8be-08de6b53255d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?XeMu4kUAiovf5L1z0mzzknysoh277V1GJowCdyETSKwq5M0eySJRL/GHMyA8?=
+ =?us-ascii?Q?1/VzJCvnu8xFM6EjbrkRLx8yntRToCxjxG0eMaGIKdQEdYmIipn0wcoJP4BQ?=
+ =?us-ascii?Q?G2mGHw4S8Ghfjsva6W+27fx0s8YQGbVPpc9Zl39mfRaZgMWn4ePgwWo7tc2K?=
+ =?us-ascii?Q?9HM30HIeHlrqCOYRkULA1XunLt8hrehCKQI+LTi3OlxAit7n/Ua4ErWl4LOk?=
+ =?us-ascii?Q?XWwXhwMqAe3PgTGtwEM1umXKoPwGCqqwcdc4btzEXPbCF1kYfYW2gq4wOKwB?=
+ =?us-ascii?Q?W2WxB5aZFn8+4OYJxeObq0lQ5iR9/ZaTESSvrU7sB9Uj6Sq1vTJKWLdHNgOK?=
+ =?us-ascii?Q?g+eKSBY+zsOanQoQvXXEg1H7+sLOb/IGsBSPRoe0CRHtPUHsZThlWYmMmBzP?=
+ =?us-ascii?Q?YMAmBIKjLiPKugCh9cjRpjmYX4/D3OJYhipSk+mpEQR4LKRfBEdgUCxmr6OJ?=
+ =?us-ascii?Q?+a+sX9a62TNfFXGELi9KuGhpYYhuP7o1vWbH3FnCSyi+qNqLBHUvH7oGpCqV?=
+ =?us-ascii?Q?n3jMPBZFevhdiXYOTL3L+IcqJLh/zMgd44j4cVVah57pH6OH/wetDPFM+TM+?=
+ =?us-ascii?Q?vu9CKfR8EMECahBf4eGghe2YbwWYSWpPlaQkkgG6RjPQ0c1MAE46ZySDieLo?=
+ =?us-ascii?Q?yEuY+VvToyjYSzWig/pp6NlWZYR190oyLNG9V5kgaUZ42btnyrIpcGPYOhJK?=
+ =?us-ascii?Q?9xq5oQ2XUwmzJOcByb915TIAWQLd/seKQVj7IKdfFK7P5oHcz6++qQiRE/MY?=
+ =?us-ascii?Q?ygA0TuFN957govGV3IR6m30SUeHczkmWq+7mS8D1TVCikCaG4ui8d71KEVU2?=
+ =?us-ascii?Q?UCv4of4ho2MalUWTGfRWmmjrS+ibfmHWUSxkrDfcpb30/81hJpAohtLre/E4?=
+ =?us-ascii?Q?uaDyZVJIPuofPwBKTa6NluqZoTgZYRY+1NSpEdiWuA34D0mCRXKeGRO0NgHD?=
+ =?us-ascii?Q?iKhSKM2RE/vD+PTjSg4iFqGoPE9GqhfQohIxMPFY4uxvqLc2juxhANqAm/xt?=
+ =?us-ascii?Q?QneaH/RlYgR2CTH0Phbb3CJ5MF/i5Ct06Bh+nt3/8I2U5rm9fRaIKrfDN6Yv?=
+ =?us-ascii?Q?kbgFbhFzwQkd8Sp2qsgZc+lWaI6NzzxVvdECCL8QuVV9m0PUFFfQzeGL7UqT?=
+ =?us-ascii?Q?ApK8RqHiooYvR4WgVt92A3dsTPbIYkIDJLw7GUyfDyef+9UlW30D3PDz9At4?=
+ =?us-ascii?Q?6wG80M/ugI07Q355cjMwv82y85/dYZShqlUrYSSaNlRa9dkixUVkQdTb+bKp?=
+ =?us-ascii?Q?VH9sV7gI3zioqut+AZBaxp7SaApNqukFcYQT70p49S5Wa9U+4Y6vEpRGAhEe?=
+ =?us-ascii?Q?aPAVxI4qi41R8Cajo+vr+MJ8s0duEPGhApPgS864lbNy9cZCTk9Dh2l0jbzb?=
+ =?us-ascii?Q?6DlnzPTRmR8+NNqOepBdSLAiGqxWjY7w/U+r//wR3XwoDfSYVWQQAzULQciT?=
+ =?us-ascii?Q?7BQ13VmYkYBkevJTQ8q1qn00nFnf8arvtYHgqhP/RKJPJKKkwH2HWtdj3WDe?=
+ =?us-ascii?Q?b5rtW1WQg9z1g3j4TuqamKS6Y1imX72AEWHhSrP6xs+fmhI5hESc6yUiO+qq?=
+ =?us-ascii?Q?AKgPybx80kj5EgvDnE/kI95s4i/n5NuK/cUkSeVzR7UOX0V6wsFJ0XkL9X1P?=
+ =?us-ascii?Q?lYbgEFZiMovygNzcf3p87GDZoRrRy2yv7MUteqZZ/EuAbNt11KYsW5hu5v6r?=
+ =?us-ascii?Q?jzIRtA=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	mur0ccYvPySXfHKLLHCwo0zj9dodRM77Y0iPzK3fHPJkyhHGgeCZixwIs40khJLFUuboh2td/F2CDTaEybImVAzAZ0DwluMdTk7iBZ2HiwIN7TBFbldZfDqKhrYqFqUnKuNahLdhpWxDoz/2dyGDEx2h4WtqJWWo5ril26V1vXX0wUDNzECgBFpl/5vaJeasHpdHe6iSbKEUi9CpY35ki3VGbjms5am5HnO4q/vVduszvXWL80y0X5D/AiPTMAGb2i+EOkLJXFYcIN4cFAB5cDicxW+1vEVcb1eaV4ZdxjjHNMeI8FOnut5ftjX4izcimwuBms4XTKsp0GKtR28fUyTyRh8rTa/2cDo3bAIIhy/Trze5qml9sfr4sbZ+zM6FJeIoA438vi8aG29/6TeO51daxdkaz0gEN+OHIsJxkVxHh+2knMkXhx4vyH+G1Ftf
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 22:56:38.6113
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f67a9200-f6ab-4332-f8be-08de6b53255d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL6PEPF0001AB56.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4284
 
-Currently, the Xen hypervisor delivers NMIs to the guests using the Event
-Injection mechanism. The Event Injection mechanism does not block the delivery
-of subsequent NMIs. So the Xen Hypervisor tracks the NMI delivery and its
-completion (by intercepting the IRET instruction) before sending a new NMI.
+wait.c is only used by vm_event.c, so build it when CONFIG_VM_EVENT is
+selected.
 
-With the 4th generation AMD EPYC, a hardware NMI virtualization support,
-Virtual NMI (VNMI), is introduced.  The vNMI allows the hypervisor to inject
-the NMI into the guest w/o using Event Injection mechanism. No need to track
-the guest NMI and intercepting the IRET instruction.
+Provide stubs of functions called from common code.  entry.S needs an
+ifdef to hide the symbol from the assembly.
 
-NMI Virtualization support is indicated by CPUID Fn8000_000A_EDX[VNMI] = 1.[1]
+Also conditionalize .waitqueue_vcpu in struct vcpu to save space.
 
-NMI Virtualization is enabled by setting V_NMI_ENABLE (bit 26 in offset 60h
-of the VMCB). Enabling NMI Virtualization requires the NMI intercept bit to
-be set. An attempt to run a guest with V_NMI_ENABLE without the NMI intercept
-bit set results in #VMEXIT(INVALID) [1]
-
-Three new bits are added to the VMCB field at offset 60h to provide NMI
-virtualization hardware support:
-
-V_NMI(11): Indicates whether a virtual NMI is pending in the guest. The
-processor will clear V_NMI once it takes the virtual NMI.
-V_NMI_MASK(12): Indicates whether virtual NMIs are masked. The processor will
-set V_NMI_MASK once it takes the virtual NMI. V_NMI_MASK is cleared when the
-guest successfully completes an IRET instruction or #VMEXIT occurs while
-delivering the virtual NMI.
-V_NMI_ENABLE(26): Enables NMI virtualization. [1]
-
-[1] https://docs.amd.com/v/u/en-US/24593_3.43
-
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-Changes in v2:
- - Merge the patches for
-   "svm/vnmi: introduce the vnmi bit support in the cpuid feature set"
-   and
-   "svm/vnmi: add the definitions for the svm vnmi management bits in the VMCB"
-   into the one patch
-   "x86/svm: Add Enumerations for the SVM virtual NMI".
- - Change the patch subject "svm/vnmi: Add support for the SVM Virtual NMI" to
-   "x86/svm: Use virtual NMI when available"
- - Move the print out of the VNMI capability to the patch
-   "x86/svm: Use virtual NMI when available" when it is being used.
- - Remove the hvm_intblk_vnmi enumeration that was introduced for the separate
-   masked vNMI handling.
- - Introduce the hvm_function_table's is_vnmi_enabled callback to allow for the
-   SVM implementation to verify that the VNMI is enabled by checking the VMCB
-   bits in addition to the CPUID reported support.
- - Change the the name of the hvm_function_table's callback is_vnmi_pending to
-   is_vnmi_masked.
- - The svm_inject_nmi function gains a check for the distinct NMI injection
-   handling when the VNMI is enabled.
- - Simplify the check of AMD SVM Hardware support for the VNMI. The check
-   cpu_has_svm_vnmi is performed unconditionally.
- - Simplify the introduced changes diff for the vintr_t union for the VNMI bits
-   support.
- - Adopt the Xen formatting guidelines for the control structures.
- - CI tests:
-https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2325298577
+v2:
+Use CONFIG_VM_EVENT
 ---
+ xen/arch/x86/x86_64/entry.S |  2 ++
+ xen/common/Makefile         |  2 +-
+ xen/include/xen/sched.h     |  2 ++
+ xen/include/xen/wait.h      | 11 +++++++++--
+ 4 files changed, 14 insertions(+), 3 deletions(-)
 
-Abdelkareem Abdelsaamad (2):
-  x86/svm: Add Enumerations for the SVM virtual NMI
-  x86/svm: Use the virtual NMI when available
-
- xen/arch/x86/hvm/svm/intr.c        | 13 ++++++++++--
- xen/arch/x86/hvm/svm/svm.c         | 34 ++++++++++++++++++++++++++++--
- xen/arch/x86/hvm/svm/vmcb.c        |  2 ++
- xen/arch/x86/hvm/svm/vmcb.h        |  8 +++++--
- xen/arch/x86/include/asm/hvm/hvm.h | 13 +++++++++++-
- xen/arch/x86/include/asm/hvm/svm.h |  2 ++
- 6 files changed, 65 insertions(+), 7 deletions(-)
-
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index ca446c6ff0..8b83082413 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -664,7 +664,9 @@ FUNC(continue_pv_domain)
+         ALTERNATIVE "", "mov $2, %eax; incsspd %eax", X86_FEATURE_XEN_SHSTK
+ #endif
+ 
++#ifdef CONFIG_VM_EVENT
+         call  check_wakeup_from_wait
++#endif
+ ret_from_intr:
+         GET_CURRENT(bx)
+         testb $3, UREGS_cs(%rsp)
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 4fc0c15088..dac8b711cd 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -61,7 +61,7 @@ obj-y += virtual_region.o
+ obj-$(CONFIG_VM_EVENT) += vm_event.o
+ obj-$(CONFIG_HAS_VMAP) += vmap.o
+ obj-y += vsprintf.o
+-obj-y += wait.o
++obj-$(CONFIG_VM_EVENT) += wait.o
+ obj-bin-y += warning.init.o
+ obj-y += xmalloc_tlsf.o
+ 
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 1268632344..40a35fc15c 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -293,7 +293,9 @@ struct vcpu
+     /* Multicall information. */
+     struct mc_state  mc_state;
+ 
++#ifdef CONFIG_VM_EVENT
+     struct waitqueue_vcpu *waitqueue_vcpu;
++#endif
+ 
+     struct evtchn_fifo_vcpu *evtchn_fifo;
+ 
+diff --git a/xen/include/xen/wait.h b/xen/include/xen/wait.h
+index 1c68bc564b..e3510431ac 100644
+--- a/xen/include/xen/wait.h
++++ b/xen/include/xen/wait.h
+@@ -49,11 +49,18 @@ do {                                            \
+ } while (0)
+ 
+ /* Private functions. */
+-int init_waitqueue_vcpu(struct vcpu *v);
+-void destroy_waitqueue_vcpu(struct vcpu *v);
+ void prepare_to_wait(struct waitqueue_head *wq);
+ void wait(void);
+ void finish_wait(struct waitqueue_head *wq);
++
++#ifdef CONFIG_VM_EVENT
++int init_waitqueue_vcpu(struct vcpu *v);
++void destroy_waitqueue_vcpu(struct vcpu *v);
+ void check_wakeup_from_wait(void);
++#else
++static inline int init_waitqueue_vcpu(struct vcpu *v) { return 0; }
++static inline void destroy_waitqueue_vcpu(struct vcpu *v) {}
++static inline void check_wakeup_from_wait(void) {}
++#endif
+ 
+ #endif /* __XEN_WAIT_H__ */
 -- 
-2.52.0
+2.53.0
 
 
