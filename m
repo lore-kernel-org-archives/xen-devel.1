@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BD44EDF155
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 11:37:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230656.1536112 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E617EEDF150
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 11:37:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230665.1536143 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqrU4-0002RX-3e; Fri, 13 Feb 2026 11:37:16 +0000
+	id 1vqrUG-0003g5-Ut; Fri, 13 Feb 2026 11:37:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230656.1536112; Fri, 13 Feb 2026 11:37:16 +0000
+Received: by outflank-mailman (output) from mailman id 1230665.1536143; Fri, 13 Feb 2026 11:37:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqrU3-0002RM-VY; Fri, 13 Feb 2026 11:37:15 +0000
-Received: by outflank-mailman (input) for mailman id 1230656;
- Fri, 13 Feb 2026 11:37:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vqrUG-0003ft-P7; Fri, 13 Feb 2026 11:37:28 +0000
+Received: by outflank-mailman (input) for mailman id 1230665;
+ Fri, 13 Feb 2026 11:37:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VfN9=AR=epam.com=Oleksii_Moisieiev@srs-se1.protection.inumbo.net>)
- id 1vqrU1-0001fQ-Lf
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 11:37:14 +0000
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [2a01:111:f403:c201::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 560a2eeb-08d0-11f1-b163-2bf370ae4941;
- Fri, 13 Feb 2026 12:37:11 +0100 (CET)
+ id 1vqrUE-0003Sj-W5
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 11:37:27 +0000
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [2a01:111:f403:c202::7])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5ab392fa-08d0-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Feb 2026 12:37:19 +0100 (CET)
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
  by DB9PR03MB7615.eurprd03.prod.outlook.com (2603:10a6:10:2ce::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Fri, 13 Feb
- 2026 11:37:05 +0000
+ 2026 11:37:04 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::98:900e:f8e2:716f]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::98:900e:f8e2:716f%5]) with mapi id 15.20.9611.012; Fri, 13 Feb 2026
- 11:37:05 +0000
+ 11:37:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,41 +49,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 560a2eeb-08d0-11f1-b163-2bf370ae4941
+X-Inumbo-ID: 5ab392fa-08d0-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sI/T76UX96QdVshTpxVLgYmfDQGXvCrbyyxB/PYK/pzwcbSTGV8MsBhc6PKqSznIfE2delNrmNcjnLkFktVXBotpDdOin3DmSEQaVaDL6WcMcCHYHqjlykEchrCPY+MMbrOdq7+y+7CIXGzVZAnELS8CR6T7ziZTdiVuAksshNF0OKeqPQc1GVwretbcQKCwpL6/ZLdlCfgz7JopwyYgHBYPd8S8BjW49pZVFZWY7biTICTAMrhegAnH2E6i2vaYR72alueCEIhgsvHy7yGBrr9Y+GBu/lHrgOkimc4LDtpOgv8BphP82fYPUWvZ+gdQkUlCFsqH2ZSOKw7R1xZ9vA==
+ b=NQ1HjJo9IdwLh1S05uyIgmNm30dPYIgYG5+xjZrZ1SVw3oK3XiYc633hTwAUYU84r34tvL4f8+GCCl4Idr7Ap/5haYxCbsWv+FwvjFxRl0YPfy6CiX5jujF1lmCUnM4tHzeczIKccknbP3vw8hfLiJzNNYWWNa2aq2Xy6QKGVloDikR2pqOrVgLo32lqbU3n+wsimvfoEQtPBiYwJuHWokIT6+48gXGaVtbXBb/Oc5A6Nr9Yh5Ru2YCaoU9kXjJMkZQLvOgN2On96jJJEPoWZsLUJlOx9Q2lBdOVT8jyI0zFjfi2MErVHlt7trG5fA10JqRA6prjr2H3T2EhCSAQwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2ka33eEAL7J6JKx8LQs+waJZUK4G9atjYHowIbdY5e0=;
- b=a5iFqZnDU8m6foDKy+ZusW7hm4FLhHo6H7iVJvJiv4O7esvsVV4yzbvkfzhQjYtd9FY2dB50DLYfWu6uvkyJE9+C/5od+pY9WpfC35wm7VoOtiYW0+ReJ2bU+lqWr52DChn2o8Zr5Hi0YBp1P3KHgswZcqZ6WPvxiSjEfMXStkjf44JptJvXwIiyDEq3wfLEbvhx5E02f/3DrjxTJvXVwf3QryVU+dcknVPVRO+GskvfaSZuiUNQBMCCygh33tXN9D0ETkOL+68f09dWnHt+dsNz3wGqwCyqJQePllhJiKTl7n23waAbkbgY9qG62En+6IN5SK+ObRngZ2vK7pygkg==
+ bh=L+6SvCWEo3a7mMe9w3p68DI4xm5bSadniLWyvykJgZ4=;
+ b=eaPHWRptfqfItGJ3jJv4IPM+0njJwP0N3Vwg45YhJvtz0updxVhrZcxGtkL84waudrsaawYmza95vFi4sRnT1w9DhSCsBNpxx9kuoyILgbfrRUE66t24rXmQLqdUEfLi71sYL8Dk8YT6rnDIRWTYxPXph3WO/S6RqBHVAl6kIMqIyaTHWqWOQRN1sYETTD9s8U6EXFi/4Ia3eiAkVZ/GigTJDPT0lfkEMADcV8a4tlShoLf/qeBXf5aCB+xY3p/cYSzWxJmM47XhHzJlBkzu0/xuJCAtDNun8pPe8/9h/E/MQDm9U8R057/d9cnDpQuKZcfSfcZ7xKNA84bsnCF0uQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2ka33eEAL7J6JKx8LQs+waJZUK4G9atjYHowIbdY5e0=;
- b=D7hNUs2dDAtXFxeHpwUygfQmiocNcyCISQfP9FQ2BLDsiPXeF36rv+X8yrf8fLb/9tzRKaxxKnJaKGiCEbN0INrduN9ahhjcj2vicEdwC+YpkswwIswHIXqBhflkMRjjIA7l5k9YnasBUF37TdQi4+KO0dMna+Kcscuk9Ei+16F8uQfufD9gng/MeQy3Vnxve0EXuU11lGT7qJAwdPZv+mWuT21Km7DqRHBUOcaXO3eHeOaGoYzDtnnp9309NwTTrhVNdzXbdkrt4a9EuD9LCmNPXHu9V+hagJf1D6V98MUJ/NmMMD8/y5HaJG2zf9X3D5TVzNbHVte86tpPKG3n+g==
+ bh=L+6SvCWEo3a7mMe9w3p68DI4xm5bSadniLWyvykJgZ4=;
+ b=PQk7dhiDhT1Zy6bEArilq+RYQuuxH0x1xBZ3Smeq4xTu7Nxs1LQIWvTt2tgbE2cmc1nIbHYx02Mb4UlZ8nqz2gA8RloRfF5HgKMkH6xzsxSR4FJ9bgRI4jxnuH036D231O0FFA08rmo8n48OVLISr1GH5xnJAUgbHDOeuwbMPMgNP++mmpDGYI6tO2xhgHUuILiKrtN8icw5fD0EGH1o1mXqA3E6N2Eyx7VqzIBW+D56dQ4IljUhxJZp3bYkxrOAnNGf6UDidF3CuLGjHkrGKbjSElfM4AQmTZDOdUmUcTFKgkFHlC32QdInPZcr1KYCoG5Xx380AxtELueNLSQHUg==
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
 	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>, Jan
  Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>, Julien Grall
 	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Oleksii Moisieiev
-	<Oleksii_Moisieiev@epam.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<Oleksii_Moisieiev@epam.com>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?=
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
 	<grygorii_strashko@epam.com>
-Subject: [PATCH v10 4/6] xen/arm: scmi: introduce SCI SCMI SMC multi-agent
- driver
-Thread-Topic: [PATCH v10 4/6] xen/arm: scmi: introduce SCI SCMI SMC
- multi-agent driver
-Thread-Index: AQHcnN0UbDuPQmM6+UKFbHqunZHHOw==
-Date: Fri, 13 Feb 2026 11:37:05 +0000
-Message-ID:
- <3fd8a91357b21a7523d8067481e93f753577b49e.1770982468.git.oleksii_moisieiev@epam.com>
-References: <cover.1770982468.git.oleksii_moisieiev@epam.com>
-In-Reply-To: <cover.1770982468.git.oleksii_moisieiev@epam.com>
+Subject: [PATCH v10 0/6] xen/arm: scmi: introduce SCI SCMI SMC multi-agent
+ support
+Thread-Topic: [PATCH v10 0/6] xen/arm: scmi: introduce SCI SCMI SMC
+ multi-agent support
+Thread-Index: AQHcnN0TQ2fwOQh9vEukKF+VTOIgsw==
+Date: Fri, 13 Feb 2026 11:37:03 +0000
+Message-ID: <cover.1770982468.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -92,2218 +89,380 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DB9PR03MB7615:EE_
-x-ms-office365-filtering-correlation-id: 8a494df7-fe33-402d-81ea-08de6af436bc
+x-ms-office365-filtering-correlation-id: a5cb8268-e365-405c-97fc-08de6af435cb
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|7416014|376014|1800799024|366016|38070700021;
 x-microsoft-antispam-message-info:
- =?iso-8859-1?Q?76unMZGbAMhjy803JTimpVRmDsDwbIAmBWKdnObGH9HflfmNbelsFR3JhT?=
- =?iso-8859-1?Q?2gXkABBvccy1d0N97+WEBdaPqyTnPf8K4cu4o2y/vmtlf4mEXd0Qp9tJbi?=
- =?iso-8859-1?Q?LhoUqZHO1pw4r+ZY5Zz/WFXTzLxlvl5u6OivtY8L/0Yf2daJ+t0FKZC1ZC?=
- =?iso-8859-1?Q?ZhctzH+UqAPEjlzCn2QU2uED4z3oqKEoHOpVRWjtXZpFxcx1wcPZF9thVn?=
- =?iso-8859-1?Q?+dFMk1zkf3mULWkNFjlJW47WqNbyHIoWNW8my0jsm6TDMn4WqetuOlNQLV?=
- =?iso-8859-1?Q?yzT/zE9yOa7CSiZSNciE9BbQEg43fr4TuMY1BMm3XZz1/kLbW2TitKS6Gl?=
- =?iso-8859-1?Q?VACLdmM2AUu+mc0oje9Fsmsng6gyrHERmtCnTGUBiMoOKWcPrmX3yhAgaZ?=
- =?iso-8859-1?Q?ckrFd81Uaxha10PPnbJapz6XDWp0hJBgA9swz/CtnM5scS7vOpvTiLOM5k?=
- =?iso-8859-1?Q?UVDYSYW3q2mQf360a1uSHc5sVKiXUIyjuvj+OhGjImZ6FG8pFmP6v+H5fZ?=
- =?iso-8859-1?Q?Du43qOKhMaGawbn/mqU6EGSyNPZEagw1L/8th4cxjXoKzaYWb2HlfQNOHy?=
- =?iso-8859-1?Q?10LmxmLkZv/AEdLtNtIa0MhG7A1H5zoLk3KK9KabiClSGLyar2p72rUV5W?=
- =?iso-8859-1?Q?dlb6Owv9xDm2ioBZxZFHox8bYKhFp6VlN9ub+OOYMNsLsm5pDKIk1OM9Xj?=
- =?iso-8859-1?Q?Qv6ERTAsB7A0dfTEZOB4PXwLX9Uf6LsH5Glzm2d/oG4XMDIrDZtD1L4zun?=
- =?iso-8859-1?Q?vCEcBC71+d8kCJMO6UlVhFeOc/Ctw5q+TATkaRNI385zXIUn7fn0nPfqy1?=
- =?iso-8859-1?Q?EFvkMl6FpyhrEEoWFooy6iqNHIrv6BS5FO95vb/HmuYTcqLh1O5uLBNfpr?=
- =?iso-8859-1?Q?HaAKTZSbvFQHU7xday5XFNrfjPihc4OGB3KU3Kft77sUbmPAIKsQldFtfw?=
- =?iso-8859-1?Q?IRtWoY3HJ9VC34JB+8ei3sXA+XFLKDQtXgaaNMxJXBbXl15bHAFhyuuZqd?=
- =?iso-8859-1?Q?wac50pKUG0ut+fsqJh0vnZ/WzgIiMJ/alQneIWPyX6w8VDUd0U7txkPu9h?=
- =?iso-8859-1?Q?O4OypAUSjWVEM6PR+78N0pi23mi4V08Q8OPIhBvVcs+wuxpzWhsJHlVhRL?=
- =?iso-8859-1?Q?+TCq4sYTMZjcm5rbdTU0/l7mYiZ81dUSrPJlfogLO+6g9+c8N2tQssM8ro?=
- =?iso-8859-1?Q?DF5K48iWd49pbR1CTzd2t9SeDv8oWHGoUxV6r5Fa6B9wktDUqoixHQzStq?=
- =?iso-8859-1?Q?/pPhklcxvdCxvbzHPehCOMWMt+9szSOjF0Q5vP3tTR/NbLEmSXsoIYO+s5?=
- =?iso-8859-1?Q?37KYuxxtiXZHY4+3Yz+inPP9yb9fdhR0ngeyKfxb3HFl4Jczw0yYJ4Y6JZ?=
- =?iso-8859-1?Q?DQcLbQ11ym5cx+k7Jzq9O0v6FMzftQ8CKy1qR3FBpQCQ1QYc09kxDcyPZc?=
- =?iso-8859-1?Q?oef32MZ22WDZJOQZ8rv4H3pnoUIcqEU46PM3kbaOS7ZGy/MnjAR9v/Pbw4?=
- =?iso-8859-1?Q?SMeAto0jGbegzuO6pQZZ9RHeWCJQim2FsX07gXOxxyFysUFdBxe6yAUhwV?=
- =?iso-8859-1?Q?KB+sAqF8JjRikdJgg8nG3uiC3t0fvZxdYPVjo6q1RKB157wijUHgy7dMUG?=
- =?iso-8859-1?Q?bboPKXHkOtHg54Sxe5st9nj7Lmol+cMPbFv2LXtIY26FvpXS2JkNWjKqk1?=
- =?iso-8859-1?Q?rllCGfT+QgAwli1D+yE=3D?=
+ =?utf-8?B?VTQrYW9yOUxqSEpRV0hTdUdZUUZDSFlkKzk3bko1SmlpamVZVmxlMHBTUkNF?=
+ =?utf-8?B?V1dwc1YvWnloK3ZsR3lqWmJwR2F0bWNEUExSQ3pucU0zS3E3Y2tOaWZuYzgv?=
+ =?utf-8?B?d2Vuejhzak9xR3FGK1daUWdOMWQvOC9wWDZjMUNldmx3aEFQOHNTTGM2SFY2?=
+ =?utf-8?B?cCtZdk9KeFVHL0tsdk9qTlpnZVVPQlpzN0NjeWJ3R3JHRE5tOVV2ZkYxdXAv?=
+ =?utf-8?B?QTJ4VEw4MW8rYWtlNmx2RkpQMzNGTmFYYTV3WDZYdXhlL0puZXdrSjk1ampI?=
+ =?utf-8?B?NFZoVEFjbW9oWnQ5bytock9taERvZUpVQ3RTOXJrQU5RbVZKNS9ZQjdjRmNl?=
+ =?utf-8?B?SGpXS1BXd3F6Q2QrdVhZTFJ5QkkybFhkS2xlakIzU1lMZmNGZGhaTVZXY2hW?=
+ =?utf-8?B?UFVwQWppWHJYQkNrL3ZOOWFvaXVDRGdGWHVkUDJicGxsTkJVMHFJY3N4eitq?=
+ =?utf-8?B?cFJub0E5T3ZJbkJMckNrMGhIeU1pdTg0citTc0V4QWVhQjN0NjVGQkJmNGEw?=
+ =?utf-8?B?UWllcCtMY1pUL1BvVHFHVnRkUXFTOFJRWWdlNnM3cWhzdXhBUFJDTkt3Vi84?=
+ =?utf-8?B?M3NEKzJqSjlqQTF5RVh6QWdrNVU0Q1BzOTNVNjJ0ZWtEQUsrK3BzenRqOWw0?=
+ =?utf-8?B?QkpLOWZxemxzaGhOWG5JWlhUVU0yRFVwNEN1QVhLQWtJbUZPcFpoeXlUK2I3?=
+ =?utf-8?B?QmUzSEN3YjFOQTFuU1VXTklUUWZCdjNuRFZkSXgzT3B1dDFlNCszSnQ4ODZ3?=
+ =?utf-8?B?NHpkRW5VSHVGaG5wR0hsMUFua3hHZHl5SG0ydXM2QmhwVW9wc0JqY1lYeDZx?=
+ =?utf-8?B?OWJURS9Kc2RHenhNazM3NU4zL2taYnFHZnc4R0l5YlZIbk1ueEl3djk5Umpn?=
+ =?utf-8?B?ZldXb0xGZ1BXUUs3cUxpUEVZUnN3N2Q3R09lNUEyS1lhdDFUcmlKU1dUUnpM?=
+ =?utf-8?B?OGJyRzYranM0QlUyK0IrSEY1bG1yWVIwUlN0RWgzTjNFanJBam9YTVIvVEkz?=
+ =?utf-8?B?cXAxM1BpQ2xxUUdtaDBmcmE4Y3ZEN3ZMb1VFTms3eHZyL0R2a1hpMTFsMXVX?=
+ =?utf-8?B?dnEzY3NxV2sySzFqSEVoWFhiL3NrSEVYL3g5VXlnUEloSTF5THJiR1F0czl3?=
+ =?utf-8?B?TmlpMmx0ejZJVG1rVldpVWF2QXFvNDFyZitmelhTSVJuYVdMNGZEdDV1bUxa?=
+ =?utf-8?B?cUtGb29UTFpIMC9Id01NMGFRRW94UTRnLzl3RHhUeVBXTlVJZG9PaW9mMUZB?=
+ =?utf-8?B?N3hacll5b096b1BzZjlHcUMvSlFkYUt0bnhuVGY2dTY2WXFESnJVKzZVLzZM?=
+ =?utf-8?B?WmNEM1pDMHRoKzczS2tQeThVb3BDZSt5emxRZUgrL25iTzNGUi92Z2doQSto?=
+ =?utf-8?B?Y2JJZnJFSERzUFIzVnE5NlozTW9UOW9teWhSMlhnZk56WERvVWRWZ3I0RHVL?=
+ =?utf-8?B?M285Q0hXdms5Z2N1MFdNNVRLNUNXNkNuUm5GRmRJS1JiLzMzRlplV2p1SmNp?=
+ =?utf-8?B?NmIrM2xLSlZSdUUvdVhjTVBJMzFmS0JFT3phanJvV0ZpZXdseWlwREhtSGx5?=
+ =?utf-8?B?cG1SZnZ1NjBOelE4T242TGx6MXdZUzNxM3Q5TUtuWC9EMTdVUTkwS0FYcVlY?=
+ =?utf-8?B?aG4zUm5rZENRTWhVbUJJOGlxaHJCbEk4dXluTE1PaFFwdEVBeUVZSDFHTDFO?=
+ =?utf-8?B?L1NkUVRsaG5BZ2RIbkFUVExWK082RmlNVlJ2SnVvZXN4b1ZYNEtzTHJSL0Z4?=
+ =?utf-8?B?aVl0dG1sSHpmY2MzODI2VG9kTkNnMW51V1I0OTFSREh3b1lIWkZuZWR1eDZS?=
+ =?utf-8?B?QVF5ZGdLeXRxcWhIK24yd2RTY2gxT1grYnpGNmVXODZRQys4cStUaUVRZkd1?=
+ =?utf-8?B?aUdSdTZGcnhIUlRraHBGcGhJWXRQZ1FoS3lkQVhEUzlWV24vVjZxemhYd2hl?=
+ =?utf-8?B?azBsSE1aOWp3dEVzNk1ETXNSWTU3V1hjNlU1VWlWMVNHbC9ESnd3aHhJWE9X?=
+ =?utf-8?B?VzB3d2xlOVlHR0htWGlEOURsdkE1amY1UnloT2Z0bWU3UW1pSDVuaVRUcFpO?=
+ =?utf-8?B?d1htTU53Qm5KektIREVuVGl1c3dFeUZ0YjZEc0dYNkhONlhFNDg4cWd3WmRy?=
+ =?utf-8?B?eTI1MEZaeERiNC8za3VvOUVBSUlxYkdhcldtNitpbEJ2UVJzbkpNSzNlaGQy?=
+ =?utf-8?Q?3ThPzu0YvbqgOhII1uAHG20=3D?=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB8946.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?XdYhy++WXSdMVuzsgJ2mziPPgOntflfTALtx8HezodYfSfsOhQH4fS4p4m?=
- =?iso-8859-1?Q?wVSI7F/OEsklpIw7jOSMvqJvVn7wau04UU1FAAFE/GAEA1wPIqhf90vIW8?=
- =?iso-8859-1?Q?kncepCicIW/U5VzjYGJIOuPqd05nE10hHgXO7wi8UD9SfguSDTpgaw9+NS?=
- =?iso-8859-1?Q?Ntsn3AZ3DnGu8xQJ9LexJWkebyWLvd7ICx8enZa4R6DkdnFLUylP37Ci4w?=
- =?iso-8859-1?Q?veaUlGznaFK6uYN3B3PVnjLkFs9Qd4tZu9ZhZz6VNGsfjK/8SZUFwa+DDo?=
- =?iso-8859-1?Q?/WCjw4Q2eoe6rksL2wliUz7iBHCXS1QZO4yZTIlTpJ2Hiix2a/yeEESBFY?=
- =?iso-8859-1?Q?AJHKgfxenZhNbbDo35N9BX1H297mOSjhgK/Tq7mZW+w8zA/iLAgjNRcwdP?=
- =?iso-8859-1?Q?Q/mL/133U9ocytKq14RB3wCkq9Nnceu1xx5kukNLuvU3Chuvo90imZb0t6?=
- =?iso-8859-1?Q?FF2oFGw+qK7ntQnY0Ei4bpnzzL8a8DpaxEwR0gztkR1l7VQ1EwwlLl6zhz?=
- =?iso-8859-1?Q?ob/yvUg0VWP7tGGeGIfZop4G3qq5t9l80EUONVSKv4uwKdYpAHvcHvIyMO?=
- =?iso-8859-1?Q?mWVsJ8kM8wWXzXD7SDf4S1GDuM9eEiL0qNQXuObUi5mDP2inTU5lGe7mB0?=
- =?iso-8859-1?Q?E5geuYTrbY0FAc/+YWbCqbsEeTIWNY9kDTClfFQrtCe2ig5DZXsCBOZV3q?=
- =?iso-8859-1?Q?izZ735hzqBoPTyGe8SWciKf9CnicCoMNRRNf4nNz3raWPzl7H5V9jViNzL?=
- =?iso-8859-1?Q?hlrLhnv0xHxCN/P9gqiTdox3zLkxFJllxPU0+whWkbledBjzCDgIHSTRRo?=
- =?iso-8859-1?Q?6JIIXVzOuSDa/KAd/vP6/XCXv5JrK/O7Eh832xPHdfkNCxzw6JUhn60iT6?=
- =?iso-8859-1?Q?WJb2AOkYw2/NLfwq6AX8TZwZ6wHb9lUbpv6SbED3qvTazDffw6ykvxkNvr?=
- =?iso-8859-1?Q?8kVyecbfz4oBcmVE1Ss+ilArm7vKdFRmEbGGV6cPWRZ/tbYzIKbo/exl3X?=
- =?iso-8859-1?Q?Qd0VZmlLtic2xow2F91/UAmIvsUVR2JlAJ4jfxg6c84oHwcJ5HENLAbXlV?=
- =?iso-8859-1?Q?Z3krw3AH4H56eKAR5O7V/cvK3X36AwmK3ldDiIvYx75pf3GG808P9jfBFD?=
- =?iso-8859-1?Q?4TwqtwlDqOJiCJbbZJ2GsDhBP7I2AIjMZvG9MgyAmAfUAM3VDS7LghNuip?=
- =?iso-8859-1?Q?LDcMJZYMXe7MRdE4FQXWRKpm9pLfote6lwG1U2b8IFRZ4r2keG0RuV8XNZ?=
- =?iso-8859-1?Q?sqmX3/AlOMpg+J+K3qo+5gLyabMpN5LPnFEW9hcKcjZFYN7IWANoeWD7EX?=
- =?iso-8859-1?Q?am2PylxefDAwY07njafiimG43yZl8WEY2VKP/zv20UbdPWezoJIavBIoB/?=
- =?iso-8859-1?Q?Uqt/8rSky5I/Tb4oWkbZVTJlN4nBqFCkZJr+6xG2CbHRy8Boz5awXZsn1j?=
- =?iso-8859-1?Q?pex4rbmj7Vmspqu/QfV6n2a63HzpWttQieIywiYLm5KNjT0xKkLgh/a3Un?=
- =?iso-8859-1?Q?Q8e+iJNU3LstiddOVksDPBZf6Z3DUghaYlZPVpCTO16XEBw0PELr4V2VGn?=
- =?iso-8859-1?Q?e4s7dohshszngGUqzpZ0O73a1sbGes89nKrLZwXC/D37469F72SFVyxQKg?=
- =?iso-8859-1?Q?Q0gmmYBF4v154Cz0Zo5TuAYey3vOx6NHdTlCy99Gx6fDxpCgBi7gc2xuo2?=
- =?iso-8859-1?Q?funp5kysZ9foikZXjAj/MQBiFoomTQsP8/mcIwgwK/pB1KbpW3dOy8njV9?=
- =?iso-8859-1?Q?gOGek9xfu5s1Goyccv7jYdTTzyGH3LkP0eM7Il2VRGnYVSxFm+LEBLr7pq?=
- =?iso-8859-1?Q?+V+RaRWiur5NMqdhNjluvRdv8YndsZw=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ =?utf-8?B?ODl2eS9KRGFiclZkSmU3YXhIb0ZkWWptVlg0c2cwVmlFYzE5Sy9wSDZ3MFRj?=
+ =?utf-8?B?cmlZRmRQOU83VElucy8vZUVmVm5SQkVEclljOVFXaENWZUtZYTFVZ29wbnpt?=
+ =?utf-8?B?eFNCc2hNa3pMbWNtV3Q2UVIvY2hCY0NkYVJKaFJYWm0yODNwenRvcU9GWENT?=
+ =?utf-8?B?ZVRkeUl5V3FzTEU4YkRyMkpKcjdVeFlBbDBJU25iWmUycnZNTVpHaG0xQ0tD?=
+ =?utf-8?B?VTVVWndDVVk4aXJsc3hSelpoT2NaN0x4M0Q1YUtaTVBxbmpERWRSWmNVTGZK?=
+ =?utf-8?B?ckhsN3BIWGdGUGp1SXQ0MW1XTHZ1WWhid3lIOExlYlRQY1RRMklhYkpUR0RJ?=
+ =?utf-8?B?WU5RcFJIM1FGYnN0L1JzRjllejhobWorczUyNU5qV1pzRzF0UVEvOWtKT0Nt?=
+ =?utf-8?B?akhPNlo5UUd5ckRzZmZKUkd2T2lkYTdYUWF3eXJnM2E4Vy8rNDVESVYvcVYy?=
+ =?utf-8?B?WEs2TG9lNUZFbHhERzhFV0FIMnpOMmMxdm9PcXUwNWFWT1VMMjA1YVlEUHNs?=
+ =?utf-8?B?T1M1amJRTHRlckJ1T25Db2VHbFlLRHY0c2ZULzlsWUpmakhVeklxQVFaWk14?=
+ =?utf-8?B?VVl5TlY1V2tGR3luSzN4R0lPaFcrOERWSUFLVjh1OUZKM1g5K1ZnZDhkU052?=
+ =?utf-8?B?elovRWpISmw4SmdxbHhheElIbndzMG9LWnJsK3JibjFGcVpiYmc5eDFqQ2ky?=
+ =?utf-8?B?Zjk0a3MyODdCVUxRUE1WQUtMd1c5dy9FL2VURW0xOW8wMTdYWTQwK1ZVanIr?=
+ =?utf-8?B?TGtObGc1WTlrWVJrZGdWTEJNbkRCVXVlOEhDZUVZTlphZzI4WU1tMVBYNXRs?=
+ =?utf-8?B?RG44SGhXWWduTVl5QWJPS2ZOSU95cUdNZEhWd1hVTnJZUllKdklQVWZQY0lG?=
+ =?utf-8?B?MHlpRkpUMGRibXczSjdnMlk4aDBoM2xuOTc2YUdFZEFSN01adjRWVGQxdld0?=
+ =?utf-8?B?MFM2aGtnNlU3M3lqQ3ZkN1JQUGFFOUxjWWMrcjhkblI3U0V2eXFtd1Uray9D?=
+ =?utf-8?B?eThVY2NQUDNJL2M0bkNnTFhmUWkrZ2kzSmlFM1MyVmM1d29CZythWHBmMzBI?=
+ =?utf-8?B?VkdiaFhWS0RIYXVoTXpFZEV2UTZsWUNySGJ0ZXlGbDZmdVJpbnpoM3NJSW1p?=
+ =?utf-8?B?R1JvSUt1bUlMQ2lqaWxQRlIxOXRsSEhMQkYrV2lkKzEwNS9XYThrLzNIVStw?=
+ =?utf-8?B?N1FOS0FSWk1ja1A1RHZEZnBsSC9oOGplNTc4Q0ZJUnlRTW43YWNQU1RYTjBC?=
+ =?utf-8?B?czJTbmZjTjltKzVsVnk5R296NGUrckhoeWxpaW52QUwzNHJHc2pDWGFNNUo5?=
+ =?utf-8?B?aTRqMlRwNlRUTUVia3VieWpGUzhpS0NkajZyTlZhZTlSRXdXRnhaUlhST0Fj?=
+ =?utf-8?B?OFdLSnNZU21tWkdRSXZTTmxBdzU1Nm5SVmlJU3U4ZkQxeHFxU0NueExWc3ph?=
+ =?utf-8?B?OVh3VEdWbUthdzl5YUFwYkZvNkFBZlhBMFhUdnBXOHhWUnViU0RZZXMrY0Yx?=
+ =?utf-8?B?K1Rpek04Z1ZqTEdHeDl5SGtOanB1VU1ZQ1VZQ01lMUI3Q2VKdGowRVhVSUFE?=
+ =?utf-8?B?UW5QNUV2OGJtSXpPamxTanZBOHhCZTdDQXdRRjVLSCtEN0dPYWtNdS9mVnZn?=
+ =?utf-8?B?dWk4Zy9HdUd1QW14eHZ5VjJtMWRaMGsweGJhM3diRWpuaTRWLzNVWTNxak5u?=
+ =?utf-8?B?RVFhdzMweS9ERi9UMEEyaEhiWkd4WXdDUzNkOVRPSjFpZzhsZndtUTI2U0tS?=
+ =?utf-8?B?Sld4U2VCcEE3N2Z3b3pzZW1VYzZDOCs4UnByREZEWUMxUUpsR1VjTWpuWlAw?=
+ =?utf-8?B?cW1DK0hoUVFFZXF1S0JIcncrcDFWL3crTUg3T1BvK1BSd25oT2Z4Qk4wWHEw?=
+ =?utf-8?B?YTJ0eVdWYmtaZmtUaWdhVnJ0NmZJNHYyTDg1UHhEMlZ5REVqS0UrMTVXaEc5?=
+ =?utf-8?B?KzRmUkVlVm8xYytFeFo2MnEwMXUrdXN2WlA1RjdNTG95RUFTRmYzb05EMnBQ?=
+ =?utf-8?B?eVk2b1podmVRdGVuTnFlSzFIYlpkYVFTQk5iL3N6ZnJqRkNGYVAxcnhOb09y?=
+ =?utf-8?B?b0thb2RYQzluekNZQ0t2TzRLVHZxV0Z1TTZ3aXYwbU1BNVBHVEpObWF6cU9S?=
+ =?utf-8?B?anp1MXpaVXh6Rm0wODZ2K3k5QjZCaFVuWDNEeWxXZm05cUd1aUNqSTlWbmVY?=
+ =?utf-8?B?THJoQlp0TUxxdllWdlNiZU9DOU9OY0VmYzJMaTZtdnZhM2toYlhLam4zSm4v?=
+ =?utf-8?B?QnRxNk91enhTbjdQeXlYZVhLR3BZbjZwODlZMzM4SlBRYVNicGUxTkZ6TmI4?=
+ =?utf-8?B?M01jR05STWo4dlFDS2M1Q2RsQTN1S1Y1K2pKbnJnOFl6QTN0UWVPQmkvUjdS?=
+ =?utf-8?Q?bo0UzgQl1ayjvpS0=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <DA5064C4F442AD49B7CFBE09CCE369AA@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a494df7-fe33-402d-81ea-08de6af436bc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2026 11:37:05.5210
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5cb8268-e365-405c-97fc-08de6af435cb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2026 11:37:04.0069
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: DtyLhkcK01ROSJepZ1ZZJhrF/weZ0OEN2R3eC9Z4xxFFm6ysDwaTV8uJfVPONuXAEuEYHEdo0c41iTAMUnBa51XuwJKQlgb74y1oZprnW8I=
+X-MS-Exchange-CrossTenant-userprincipalname: f8f7dCVEEmxh7ybH7UtEuoxDGgahgf7g/uTGn6a/xH96wriFGZcy4f8M2wY2D9RAPkeaoZPxPy3FHHd6nuN1TXwVpIX72bTpxbPylAIHB9Q=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7615
 
-This patch introduces SCI driver to support for ARM EL3 Trusted Firmware-A
-(TF-A) which provides SCMI interface with multi-agent support, as shown
-below.
-
-  +-----------------------------------------+
-  |                                         |
-  | EL3 TF-A SCMI                           |
-  +-------+--+-------+--+-------+--+-------++
-  |shmem1 |  |shmem0 |  |shmem2 |  |shmemX |
-  +-----+-+  +---+---+  +--+----+  +---+---+
-smc-id1 |        |         |           |
-agent1  |        |         |           |
-  +-----v--------+---------+-----------+----+
-  |              |         |           |    |
-  |              |         |           |    |
-  +--------------+---------+-----------+----+
-         smc-id0 |  smc-id2|    smc-idX|
-         agent0  |  agent2 |    agentX |
-                 |         |           |
-            +----v---+  +--v-----+  +--v-----+
-            |        |  |        |  |        |
-            | Dom0   |  | Dom1   |  | DomX   |
-            |        |  |        |  |        |
-            |        |  |        |  |        |
-            +--------+  +--------+  +--------+
-
-The EL3 SCMI multi-agent firmware is expected to provide SCMI SMC shared
-memory transport for every Agent in the system.
-
-The SCMI Agent transport channel defined by pair:
- - smc-id: SMC id used for Doorbell
- - shmem: shared memory for messages transfer, Xen page
- aligned. Shared memort is mapped with the following flags:
- MT_DEVICE_nGnRE.
-
-The follwoing SCMI Agents are expected to be defined by SCMI FW to enable S=
-CMI
-multi-agent functionality under Xen:
-- Xen management agent: trusted agents that accesses to the Base Protocol
-commands to configure agent specific permissions
-- OSPM VM agents: non-trusted agent, one for each Guest domain which is
-  allowed direct HW access. At least one OSPM VM agent has to be provided
-  by FW if HW is handled only by Dom0 or Driver Domain.
-
-The EL3 SCMI FW is expected to implement following Base protocol messages:
-- BASE_DISCOVER_AGENT (optional if agent_id was provided)
-- BASE_RESET_AGENT_CONFIGURATION (optional)
-- BASE_SET_DEVICE_PERMISSIONS (optional)
-
-The SCI SCMI SMC multi-agent driver implements following
-functionality:
-- The driver is initialized from the Xen SCMI container ``xen_scmi_config``
-  (compatible ``xen,sci``) placed under ``/chosen/xen``. Only the
-  ``arm,scmi-smc`` node that is a child of this container will bind to Xen;
-  other SCMI nodes (for example under ``/firmware``) are ignored to avoid
-  stealing the host OSPM instance.
-
-scmi_shm_1: sram@47ff1000 {
-          compatible =3D "arm,scmi-shmem";
-          reg =3D <0x0 0x47ff1000 0x0 0x1000>;
-};
-scmi_xen: scmi {
-        compatible =3D "arm,scmi-smc";
-        arm,smc-id =3D <0x82000003>; <--- Xen management agent smc-id
-        #address-cells =3D < 1>;
-        #size-cells =3D < 0>;
-        #access-controller-cells =3D < 1>;
-        shmem =3D <&scmi_shm_1>; <--- Xen management agent shmem
-};
-
-- The driver obtains Xen specific SCMI Agent's configuration from the
-  Host DT, probes Agents and builds SCMI Agents list. The Agents
-  configuration is taken from "scmi-secondary-agents" property where
-  first item is "arm,smc-id", second - "arm,scmi-shmem" phandle and
-  third is optional "agent_id":
-
-/ {
-  chosen {
-    xen {
-      ranges;
-      xen_scmi_config {
-        compatible =3D "xen,sci";
-        #address-cells =3D <2>;
-        #size-cells =3D <2>;
-        ranges;
-
-        scmi_shm_0: sram@47ff0000 {
-          compatible =3D "arm,scmi-shmem";
-          reg =3D <0x0 0x47ff0000 0x0 0x1000>;
-        };
-
-        /* Xen SCMI management channel */
-        scmi_shm_1: sram@47ff1000 {
-          compatible =3D "arm,scmi-shmem";
-          reg =3D <0x0 0x47ff1000 0x0 0x1000>;
-        };
-
-        scmi_shm_2: sram@47ff2000 {
-          compatible =3D "arm,scmi-shmem";
-          reg =3D <0x0 0x47ff2000 0x0 0x1000>;
-        };
-
-        scmi_shm_3: sram@47ff3000 {
-          compatible =3D "arm,scmi-shmem";
-          reg =3D <0x0 0x47ff3000 0x0 0x1000>;
-        };
-
-        scmi-secondary-agents =3D <
-          0x82000002 &scmi_shm_0 0
-          0x82000004 &scmi_shm_2 2
-          0x82000005 &scmi_shm_3 3>; <--- func_id, shmem, agent_id
-        #scmi-secondary-agents-cells =3D <3>;
-        xen,dom0-sci-agent-id =3D <0>;
-
-        scmi_xen: scmi {
-          compatible =3D "arm,scmi-smc";
-          arm,smc-id =3D <0x82000003>; <--- Xen management agent func_id
-          #address-cells =3D <1>;
-          #size-cells =3D <0>;
-          #access-controller-cells =3D <1>;
-          shmem =3D <&scmi_shm_1>; <--- Xen management agent shmem
-        };
-      };
-    };
-  };
-};
-
-/ {
-    /*
-     * Host SCMI OSPM channel - provided to the Dom0 as is if SCMI
-     * enabled for it, ignored by Xen multi-agent mediator
-     */
-    scmi_shm: sram@47ff0000 {
-            compatible =3D "arm,scmi-shmem";
-            reg =3D <0x0 0x47ff0000 0x0 0x1000>;
-    };
-
-    firmware {
-      scmi: scmi {
-        compatible =3D "arm,scmi-smc";
-        arm,smc-id =3D <0x82000002>; <--- Host OSPM agent smc-id
-        #address-cells =3D < 1>;
-        #size-cells =3D < 0>;
-        shmem =3D <&scmi_shm>; <--- Host OSPM agent shmem
-
-        protocol@X{
-        };
-      };
-   };
-};
-
-This approach allows defining multiple SCMI Agents by adding
-Xen-specific properties under the ``/chosen`` node to the Host Device
-Tree, leaving the main part unchanged. The Host DT SCMI channel will
-be passed to Dom0.
-
-The Xen management agent is described as a ``scmi_xen`` node under the
-``xen,sci`` comaptible node, which is used by Xen to control other
-SCMI Agents in the system.
-
-All secondary agents' configurations are provided in the
-``scmi-secondary-agents`` property with an optional ``agent_id`` field.
-
-The ``agent_id`` from the ``scmi-secondary-agents`` property is used
-to identify the agent in the system and can be omitted by setting
-``#scmi-secondary-agents-cells =3D <2>``, so the Secondary Agents
-configuration will look like this:
-
-/ {
-  chosen {
-    xen {
-      xen_scmi_config {
-        compatible =3D "xen,sci";
-        #address-cells =3D <2>;
-        #size-cells =3D <2>;
-        ranges;
-
-        /* Shared memory nodes as defined earlier */
-
-        scmi-secondary-agents =3D <
-          0x82000003 &scmi_shm_0
-          0x82000004 &scmi_shm_2
-          0x82000005 &scmi_shm_3
-          0x82000006 &scmi_shm_4>;
-        #scmi-secondary-agents-cells =3D <2>;
-      };
-    };
-  };
-}
-
-In this case, Xen will use the ``SCMI_BASE_DISCOVER_AGENT`` call to
-discover the ``agent_id`` for each secondary agent. Providing the
-``agent_id`` in the ``scmi-secondary-agents`` property allows skipping
-the discovery call, which is useful when the secondary agent's shared
-memory is not accessible by Xen or when boot time is important because
-it allows skipping the agent discovery procedure.
-
-  Note that Xen is the only one entry in the system which need to know
-  about SCMI multi-agent support.
-
-SMC ID Configuration and SCMI Connection Compatibility:
-
-The configuration allows the same device tree to work for both baremetal
-Linux and Linux Dom0. This is achieved because:
-
-- Baremetal Linux uses: func_id 0x82000002, scmi-shmem 0x47ff0000
-- Dom0 Linux uses: func_id 0x82000002, scmi-shmem 0x47ff0000
-- Xen management uses: func_id 0x82000003, scmi-shmem 0x47ff1000
-
-This works because the privileged SCMI connection in EL3 firmware is not
-tied exclusively to func_id 0x82000002. The EL3 firmware supports multiple
-SCMI agents with different SMC IDs and shared memory regions. Each agent
-(Dom0 via 0x82000002, Xen via 0x82000003, other domains via additional
-func_ids) has an independent communication channel to the firmware.
-
-The key distinction is that Xen's management channel (0x82000003) is used
-for privileged operations like agent configuration and device permissions
-(BASE_SET_DEVICE_PERMISSIONS, BASE_RESET_AGENT_CONFIGURATION), while Dom0's
-channel (0x82000002) is used for standard SCMI protocol operations (power,
-clock, sensor management, etc.). The firmware enforces different permission
-levels for each agent based on their agent_id, not the SMC ID.
-
-Therefore, there is no conflict: Linux Dom0 retains its standard SCMI
-connection for hardware management, while Xen uses its separate privileged
-channel for mediating access between multiple domains.
-
-- It implements the SCI subsystem interface required for configuring and
-enabling SCMI functionality for Dom0/hwdom and Guest domains. To enable
-SCMI functionality for domain it has to be configured with unique supported
-SCMI Agent_id and use corresponding SCMI SMC shared memory transport
-[smc-id, shmem] defined for this SCMI Agent_id.
-- Once Xen domain is configured it can communicate with EL3 SCMI FW:
-  -- zero-copy, the guest domain puts SCMI message in shmem;
-  -- the guest triggers SMC exception with smc-id (doorbell);
-  -- the Xen driver catches exception, do checks and synchronously forwards
-  it to EL3 FW.
-- the Xen driver sends BASE_RESET_AGENT_CONFIGURATION message to Xen
-  management agent channel on domain destroy event. This allows to reset
-  resources used by domain and so implement use-case like domain reboot.
-
-Dom0 Enable SCMI SMC:
- - set xen,dom0-sci-agent-id=3D<agent_id> under the xen,sci container in
-   the Host DT. If the property is absent, SCMI is disabled for Dom0
-   and all SCMI nodes are removed from the Dom0 DT. The driver updates
-   the Dom0 DT SCMI node "arm,smc-id" value and fixes up the shmem
-   node according to the assigned agent_id.
-
- - pass dom0=3Dsci-agent-id=3D<agent_id> in Xen command line. if not provid=
-ed
-   SCMI will be disabled for Dom0 and all SCMI nodes removed from Dom0 DT.
-   The driver updates Dom0 DT SCMI node "arm,smc-id" value and fix up shmem
-   node according to assigned agent_id.
-
-Guest domains enable SCMI SMC:
- - xl.cfg: add configuration option as below
-
-   arm_sci =3D "type=3Dscmi_smc_multiagent,agent_id=3D2"
-
- - xl.cfg: enable access to the "arm,scmi-shmem" which should
- correspond assigned agent_id for the domain, for example:
-
-iomem =3D [
-    "47ff2,1@22001",
-]
-
- - DT: add SCMI nodes to the Driver domain partial device tree as in the
- below example. The "arm,smc-id" should correspond assigned agent_id
- for the domain:
-
-passthrough {
-   scmi_shm_0: sram@22001000 {
-       compatible =3D "arm,scmi-shmem";
-       reg =3D <0x0 0x22001000 0x0 0x1000>;
-   };
-
-   firmware {
-        compatible =3D "simple-bus";
-            scmi: scmi {
-                compatible =3D "arm,scmi-smc";
-                arm,smc-id =3D <0x82000004>;
-                shmem =3D <&scmi_shm_0>;
-                ...
-            }
-    }
-}
-
-SCMI "4.2.1.1 Device specific access control"
-
-The XEN SCI SCMI SMC multi-agent driver performs "access-controller"
-provider function in case EL3 SCMI FW implements SCMI "4.2.1.1 Device
-specific access control" and provides the BASE_SET_DEVICE_PERMISSIONS
-command to configure the devices that an agents have access to.
-The DT SCMI node should "#access-controller-cells=3D<1>" property and DT
-devices should be bound to the Xen SCMI.
-
-&i2c1 {
-        access-controllers =3D <&scmi 0>;
-};
-
-The Dom0 and dom0less domains DT devices will be processed
-automatically through sci_assign_dt_device() call, but to assign SCMI
-devices from toolstack the xl.cfg:"dtdev" property
-shall be used:
-
-dtdev =3D [
-    "/soc/i2c@e6508000",
-]
-
-xl.cfg:dtdev will contain all nodes which are under SCMI
-management (not only those which are behind IOMMU).
-
-Additionally, this patch adds documentation for the pre-existing
-scmi-smc-passthrough command line option, which was previously
-undocumented.
-
-[0] https://developer.arm.com/documentation/den0056
-[1] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
-tree/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
-[2] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
-tree/Documentation/devicetree/bindings/access-controllers/access-controller=
-s.yaml
-
-Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
----
-
-Changes in v10:
-- Fix tabs in MAINTAINERS file
-- remove duplicate SPDX tag from scmi-shmem.c
-- add cast to ARM_SMCCC_INVALID_PARAMETER to settle the sign since
-ARM_SMCCC_INVALID_PARAMETER is -3 which is part of the spec and resp
-is the default smccc call structure.
-- update free_channel_list. Add spinlock to avoid race condition and
-a comment with a description of the function work
-- preserve error of smc_create_channel in scmi_probe
-- check scmi shmem address alignment as wel as it is done for size
-- check for d->arch.sci_data !=3D NULL in scmi_handle_call
-- use SCMI_SHMEM_MAPPED size for iomem_permit_access
-- change len type to unsigned in shmem_{get|put}_message
-- rename shmem_channel_is_free to shmem_channel_status
-- add comment about skipping message status when getting message response
-- Set correct agent_id ranges for dom0less and a toolstack. Agent_id 0
-is not binded for dom0 so can be reused. Also mentioned that
-UINT8_MAX (255) is treated as invalid agent_id.
-- Split hypervisor and toolstack changes into separate commits
-- move init list and spin init after initial checks in probe call
-- fix typo in comments
-- clean resources when sci_register returns an error.
-
-Changes in v9:
-- sort and refactor MAINTAINERS enties
-- remove Spurious changes
-- add extra check to avoid ASSERT when calling unmap_channel_memory
-from assign device method
-- set correct tx flag to SCMI_BASE_AGENT_PERMISSIONS_RESET when
-freeing resources. Flag should be set to 1 according to the
-section 4.2.2.12 [0].
-- fix dt node copmaring
-- moved channel->shmem check from ASSERT in unmap_memory_channel to
-"if" statement. This will prevent firing ASSERT if
-unmap_channel_memory was called twice on the same channel.
-
-Changes in v8:
-- update xen_scmi func_id in commit description
-- updated documentation with the new DT format
-- updated opt_dom0_scmi_agent_id setting to avoid it to be equal
-SCMI_AGENT_ID_INVALID.
-- changed SCMI_AGENT_ID_INVALID from 0xff to UINT8_MAX which makes
-code more clear showing that UINT8_MAX is theated like invalid
-agent_id and couldn't be used. Also excluded SCMI_AGENT_ID_INVALID
-from acceptable value range
-- remove outdated xen,config property ignore, added xen,sci compatible
-to skip_matches in handle_node
-- add documentation for pre-existing scmi-smc-passthrough command line
-option in alphabetically correct location (in 's' section)
-- add note to commit description about documentation for previously
-undocumented scmi-smc-passthrough
-- Fix SMC IDs in DT examples (Xen management uses 0x82000003, Dom0 uses 0x8=
-2000002)
-- Add explicit note explaining why Dom0 and Xen channels do not conflict
-- Document dom0less multi-agent configuration example (xen,sci_type / xen,s=
-ci-agent-id)
-- Add scmi_xen node to agent-discovery example with #scmi-secondary-agents-=
-cells =3D 2
-- Drop dom0=3Dsci-agent-id command line handling; Dom0 SCMI is now enabled =
-via
-  xen,dom0-sci-agent-id in the xen,sci DT container
-- Refresh docs and examples to mention the DT property instead of the cmdli=
-ne option
-
-Changes in v7:
-- rework scmi nodes for xen to match on compatible string instead of
-the direct path
-
-Changes in v6:
-- updated scmi-shmem to use io.h from generic location
-- update scmi_agent_id parameter to be provided inside dom0=3D parameter
-list and have the following format "dom0=3Dsci-agent-id=3D0"
-This change was done as a response for Stefano comment and
-requires a lot of code changes, but produces much cleaner solution
-that's why I've added it to the code.
-- fix file comments and return codes
-- fix lenght checks in shmem_{get,put}_message to use offsetof
-- remove len member from scmi_channel structure as it is not used
-- set scmi-secondary-agents property to be mandatory since if no
-secondary agents were provided then there is no sence to enable scmi
-when no secondary agents are populated to the Domains
-- update documentation in booting.txt, added xen_scmi node to the
-example
-- adjust d->arch.sci_enabled value in scmi_domain_destroy
-- fix lock management in smc_create_channel call
-- avoid extra map_channel_memory command for Xen management channel
-because collect_agent_id call unmaps memory if DOMID_XEN is not
-set. So for Xen management channel we can init domain_id ad DOMID_XEN
-before calling collect_agent_id so memory shouldn't be unmapped.
-
-Changes in v5:
-- fix device-tree example format in booting.txt, added ";" after "}".
-- update define in scmi-proto.h
-- update define in scmi-shmem.h file
-- scmi_assign_device - do not ignore -EOPNOTSUPP return
-code of the do_smc_xfer
-- remove overwriting agent_channel->agent_id after
-SCMI_BASE_DISCOVER_AGENT call
-- add multi-agent files to the MAINTAINERS
-- add SCMI multi-agent description to the SUPPORT.md
-- handle ARM_SMCCC_INVALID_PARAMETER return code and return -EINVAL
-for smc call
-- updated collect_agents function. Set agent_id parameter as optional
-in scmi-secondary-agents device-tree property
-- introduce "#scmi-secondary-agents-cells" parameter to set if
-agent_id was provided
-- reanme xen,scmi-secondary-agents property to scmi-secondary-agents
-- move memcpu_toio/fromio for the generic place
-- update Xen to get management channel from /chosen/xen,config node
-- get hypervisor channnel from node instead of using hardcoded
-- update handling scmi and shmem nodes for the domain
-- Set multi-agent driver to support only Arm64
-
-Changes in v4:
-- toolstack comments from Anthony PERARD
-- added dom0less support
-- added doc for "xen,scmi-secondary-agents"
-
- MAINTAINERS                                 |   1 +
- SUPPORT.md                                  |  11 +
- docs/misc/arm/device-tree/booting.txt       | 197 +++++
- xen/arch/arm/dom0less-build.c               |  11 +
- xen/arch/arm/domain_build.c                 |  39 +
- xen/arch/arm/firmware/Kconfig               |  12 +
- xen/arch/arm/firmware/Makefile              |   1 +
- xen/arch/arm/firmware/scmi-proto.h          | 164 ++++
- xen/arch/arm/firmware/scmi-shmem.c          | 118 +++
- xen/arch/arm/firmware/scmi-shmem.h          |  45 ++
- xen/arch/arm/firmware/scmi-smc-multiagent.c | 830 ++++++++++++++++++++
- xen/include/public/arch-arm.h               |   3 +
- 12 files changed, 1432 insertions(+)
- create mode 100644 xen/arch/arm/firmware/scmi-proto.h
- create mode 100644 xen/arch/arm/firmware/scmi-shmem.c
- create mode 100644 xen/arch/arm/firmware/scmi-shmem.h
- create mode 100644 xen/arch/arm/firmware/scmi-smc-multiagent.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index bf00be928c..def49c327e 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -529,6 +529,7 @@ SCI MEDIATORS
- R:	Oleksii Moisieiev <oleksii_moisieiev@epam.com>
- S:	Supported
- F:	xen/arch/arm/firmware/sci.c
-+F:	xen/arch/arm/firmware/scmi-*.[ch]
- F:	xen/arch/arm/include/asm/firmware/sci.h
-=20
- SEABIOS UPSTREAM
-diff --git a/SUPPORT.md b/SUPPORT.md
-index d441bccf37..03e3985da2 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -956,6 +956,17 @@ by hwdom. Some platforms use SCMI for access to system=
--level resources.
-=20
-     Status: Supported
-=20
-+### Arm: SCMI SMC multi-agent support
-+
-+Enable support for the multi-agent configuration of the EL3 Firmware, whic=
-h
-+allows Xen to provide an SCMI interface to the Domains.
-+Xen manages access permissions to the HW resources and provides an SCMI in=
-terface
-+to the Domains. Each Domain is represented as a separate Agent, which can
-+communicate with EL3 Firmware using a dedicated shared memory region, and
-+notifications are passed through by Xen.
-+
-+    Status, ARM64: Tech Preview
-+
- ### ARM: Guest PSCI support
-=20
- Emulated PSCI interface exposed to guests. We support all mandatory
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-t=
-ree/booting.txt
-index 977b428608..f0d1c458c9 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -322,6 +322,21 @@ with the following properties:
-     Should be used together with scmi-smc-passthrough Xen command line
-     option.
-=20
-+    - "scmi_smc_multiagent"
-+
-+    Enables ARM SCMI SMC multi-agent support for the guest by enabling SCM=
-I over
-+    SMC calls forwarding from domain to the EL3 firmware (like ARM
-+    Trusted Firmware-A) with a multi SCMI OSPM agent support.
-+    The SCMI agent_id should be specified for the guest with "xen,sci-agen=
-t-id"
-+    property.
-+
-+- "xen,sci-agent-id"
-+
-+    Specifies ARM SCMI agent id for the guest. This option is mandatory if=
- the
-+    SCMI SMC "scmi_smc_multiagent" support is enabled for the guest. The a=
-gent ids
-+    of guest must be unique and in the range [0..254]. UINT8_MAX (255) is
-+    treated as invalid.
-+
- Under the "xen,domain" compatible node, one or more sub-nodes are present
- for the DomU kernel and ramdisk.
-=20
-@@ -824,3 +839,185 @@ The automatically allocated static shared memory will=
- get mapped at
- 0x80000000 in DomU1 guest physical address space, and at 0x90000000 in Dom=
-U2
- guest physical address space. DomU1 is explicitly defined as the owner dom=
-ain,
- and DomU2 is the borrower domain.
-+
-+SCMI SMC multi-agent support
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-+
-+For enabling the ARM SCMI SMC multi-agent support (enabled by CONFIG_SCMI_=
-SMC_MA)
-+the Xen specific SCMI Agent's configuration shall be provided in the Host =
-DT
-+according to the SCMI compliant EL3 Firmware specification with ARM SMC/HV=
-C
-+transport. The SCMI configuration must live under the Xen SCMI container
-+"xen,sci" beneath "/chosen" (for example "/chosen/xen/xen_scmi_config/scmi=
-"). The
-+Xen SCMI mediator will bind only to the "arm,scmi-smc" node that is a chil=
-d of
-+this "xen,sci" container; any other "arm,scmi-smc" nodes (for example unde=
-r
-+"/firmware") are ignored to avoid stealing the host's SCMI OSPM instance.
-+
-+- scmi-secondary-agents
-+
-+    Defines a set of SCMI agents configuration supported by SCMI EL3 FW an=
-d
-+    available for Xen. Each Agent defined as triple consisting of:
-+    SMC/HVC function_id assigned for the agent transport ("arm,smc-id"),
-+    phandle to SCMI SHM assigned for the agent transport ("arm,scmi-shmem"=
-),
-+    SCMI agent_id (optional) if not set - Xen will determine Agent ID for
-+    each provided channel using BASE_DISCOVER_AGENT message.
-+
-+- xen,dom0-sci-agent-id
-+
-+    Optional. Specifies the Dom0/hwdom SCMI agent_id inside the ``xen,sci`=
-`
-+    container. When provided, Dom0 will be configured for SCMI multi-agent
-+    support; when omitted, SCMI remains disabled for Dom0. The value must
-+    match the ``func_id`` and shmem pairing that EL3 firmware exposes for
-+    Dom0 (for example via ``/firmware/scmi``).
-+
-+As an example:
-+
-+/ {
-+    chosen {
-+        xen {
-+            ranges;
-+            xen_scmi_config {
-+                compatible =3D "xen,sci";
-+                #address-cells =3D <2>;
-+                #size-cells =3D <2>;
-+                ranges;
-+
-+                scmi_shm_0: sram@47ff0000 {
-+                    compatible =3D "arm,scmi-shmem";
-+                    reg =3D <0x0 0x47ff0000 0x0 0x1000>;
-+                };
-+
-+                /* Xen SCMI management channel */
-+                scmi_shm_1: sram@47ff1000 {
-+                    compatible =3D "arm,scmi-shmem";
-+                    reg =3D <0x0 0x47ff1000 0x0 0x1000>;
-+                };
-+
-+                scmi_shm_2: sram@47ff2000 {
-+                    compatible =3D "arm,scmi-shmem";
-+                    reg =3D <0x0 0x47ff2000 0x0 0x1000>;
-+                };
-+
-+                scmi_shm_3: sram@47ff3000 {
-+                    compatible =3D "arm,scmi-shmem";
-+                    reg =3D <0x0 0x47ff3000 0x0 0x1000>;
-+                };
-+
-+                xen,dom0-sci-agent-id =3D <0>; <--- dom0 agent id
-+                scmi-secondary-agents =3D <
-+                    0x82000002 &scmi_shm_0 0
-+                    0x82000004 &scmi_shm_2 2
-+                    0x82000005 &scmi_shm_3 3>; <--- func_id, shmem, agent_=
-id
-+                #scmi-secondary-agents-cells =3D <3>;
-+
-+                scmi_xen: scmi {
-+                    compatible =3D "arm,scmi-smc";
-+                    arm,smc-id =3D <0x82000003>; <--- Xen management agent=
- func_id
-+                    #address-cells =3D <1>;
-+                    #size-cells =3D <0>;
-+                    #access-controller-cells =3D <1>;
-+                    shmem =3D <&scmi_shm_1>; <--- Xen management agent shm=
-em
-+                };
-+            };
-+        };
-+    };
-+};
-+
-+Note: This example keeps the Host DT unchanged for Dom0 and baremetal Linu=
-x
-+by using func_id 0x82000002 / shmem 0x47ff0000 for Dom0, while Xen uses a
-+separate privileged channel func_id 0x82000003 / shmem 0x47ff1000. EL3
-+firmware enforces permissions per agent_id, so there is no conflict betwee=
-n
-+Dom0 and Xen channels.
-+
-+- #scmi-secondary-agents-cells
-+
-+    Defines whether Agent_id is set in the "scmi-secondary-agents" propert=
-y.
-+    Possible values are: 2, 3.
-+    When set to 3 (the default), expect agent_id to be present in the seco=
-ndary
-+    agents list.
-+    When set to 2, agent_id will be discovered for each channel using
-+    BASE_DISCOVER_AGENT message.
-+
-+
-+Example:
-+
-+/ {
-+    chosen {
-+        xen {
-+            ranges;
-+            xen_scmi_config {
-+                compatible =3D "xen,sci";
-+                #address-cells =3D <2>;
-+                #size-cells =3D <2>;
-+                ranges;
-+
-+                /* Shared memory nodes as in the previous example */
-+
-+                scmi-secondary-agents =3D <
-+                    0x82000002 &scmi_shm_0
-+                    0x82000004 &scmi_shm_2
-+                    0x82000005 &scmi_shm_3
-+                    0x82000006 &scmi_shm_4>;
-+                #scmi-secondary-agents-cells =3D <2>;
-+
-+                scmi_xen: scmi {
-+                    compatible =3D "arm,scmi-smc";
-+                    arm,smc-id =3D <0x82000003>; <--- Xen management agent=
- func_id
-+                    #address-cells =3D <1>;
-+                    #size-cells =3D <0>;
-+                    #access-controller-cells =3D <1>;
-+                    shmem =3D <&scmi_shm_1>; <--- Xen management agent shm=
-em
-+                };
-+            };
-+        };
-+    };
-+};
-+
-+Dom0less example (multi-agent)
-+-------------------------------
-+
-+Below is a minimal dom0less configuration showing how to enable SCMI SMC
-+multi-agent for a pre-defined guest domain using xen,sci_type and
-+xen,sci-agent-id, together with the Xen SCMI container:
-+
-+chosen {
-+    xen {
-+        ranges;
-+        xen_scmi_config {
-+            compatible =3D "xen,sci";
-+            #address-cells =3D <2>;
-+            #size-cells =3D <2>;
-+            ranges;
-+
-+            /* Xen management channel shared memory */
-+            scmi_shm_1: sram@47ff1000 {
-+                compatible =3D "arm,scmi-shmem";
-+                reg =3D <0x0 0x47ff1000 0x0 0x1000>;
-+            };
-+
-+            scmi_shm_domu: sram@47ff2000 {
-+                compatible =3D "arm,scmi-shmem";
-+                reg =3D <0x0 0x47ff2000 0x0 0x1000>;
-+            };
-+
-+            scmi-secondary-agents =3D <
-+                0x82000004 &scmi_shm_domu 2>;
-+            #scmi-secondary-agents-cells =3D <3>;
-+
-+            scmi_xen: scmi {
-+                compatible =3D "arm,scmi-smc";
-+                arm,smc-id =3D <0x82000003>;
-+                #address-cells =3D <1>;
-+                #size-cells =3D <0>;
-+                #access-controller-cells =3D <1>;
-+                shmem =3D <&scmi_shm_1>;
-+            };
-+        };
-+    };
-+
-+    xen,domain@1 {
-+        compatible =3D "xen,domain";
-+        xen,sci_type =3D "scmi_smc_multiagent";
-+        xen,sci-agent-id =3D <2>;
-+        /* Additional domain properties (memory, cpus, kernels, etc.) */
-+    };
-+};
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 4181c10538..1f8c1d851d 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -299,6 +299,17 @@ static int __init domu_dt_sci_parse(struct dt_device_n=
-ode *node,
-         d_cfg->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE;
-     else if ( !strcmp(sci_type, "scmi_smc") )
-         d_cfg->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC;
-+    else if ( !strcmp(sci_type, "scmi_smc_multiagent") )
-+    {
-+        uint32_t agent_id =3D 0;
-+
-+        if ( !dt_property_read_u32(node, "xen,sci-agent-id", &agent_id) ||
-+             agent_id >=3D UINT8_MAX )
-+            return -EINVAL;
-+
-+        d_cfg->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_MA=
-;
-+        d_cfg->arch.arm_sci_agent_id =3D agent_id;
-+    }
-     else
-     {
-         printk(XENLOG_ERR "xen,sci_type in not valid (%s) for domain %s\n"=
-,
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 986a456f17..c09f50040e 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -86,6 +86,37 @@ int __init parse_arch_dom0_param(const char *s, const ch=
-ar *e)
-     return -EINVAL;
- }
-=20
-+/* SCMI agent ID for dom0 obtained from xen,sci container */
-+#define SCMI_AGENT_ID_INVALID UINT8_MAX
-+
-+static uint8_t __init get_dom0_scmi_agent_id(void)
-+{
-+    const struct dt_device_node *config_node;
-+    u32 val;
-+    const struct dt_property *prop;
-+
-+    config_node =3D dt_find_compatible_node(NULL, NULL, "xen,sci");
-+    if ( !config_node )
-+        return SCMI_AGENT_ID_INVALID;
-+
-+    prop =3D dt_find_property(config_node, "xen,dom0-sci-agent-id", NULL);
-+    if ( !prop )
-+        return SCMI_AGENT_ID_INVALID;
-+
-+    if ( !dt_property_read_u32(config_node, "xen,dom0-sci-agent-id", &val)=
- )
-+        return SCMI_AGENT_ID_INVALID;
-+
-+    if ( val >=3D SCMI_AGENT_ID_INVALID )
-+    {
-+         printk(XENLOG_WARNING
-+             "Invalid xen,dom0-sci-agent-id=3D%u, SCMI disabled for Dom0\n=
-",
-+             val);
-+        return SCMI_AGENT_ID_INVALID;
-+    }
-+
-+    return val;
-+}
-+
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-@@ -1459,6 +1490,7 @@ static int __init handle_node(struct domain *d, struc=
-t kernel_info *kinfo,
-         DT_MATCH_TYPE("memory"),
-         /* The memory mapped timer is not supported by Xen. */
-         DT_MATCH_COMPATIBLE("arm,armv7-timer-mem"),
-+        DT_MATCH_COMPATIBLE("xen,sci"),
-         { /* sentinel */ },
-     };
-     static const struct dt_device_match timer_matches[] __initconst =3D
-@@ -1947,6 +1979,13 @@ void __init create_dom0(void)
-     dom0_cfg.arch.tee_type =3D tee_get_type();
-     dom0_cfg.max_vcpus =3D dom0_max_vcpus();
-=20
-+    /* Set up SCMI agent ID if provided in the xen,sci container */
-+    dom0_cfg.arch.arm_sci_agent_id =3D get_dom0_scmi_agent_id();
-+    dom0_cfg.arch.arm_sci_type =3D (dom0_cfg.arch.arm_sci_agent_id !=3D
-+                                  SCMI_AGENT_ID_INVALID) ?
-+                                 XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_MA :
-+                                 XEN_DOMCTL_CONFIG_ARM_SCI_NONE;
-+
-     if ( iommu_enabled )
-         dom0_cfg.flags |=3D XEN_DOMCTL_CDF_iommu;
-=20
-diff --git a/xen/arch/arm/firmware/Kconfig b/xen/arch/arm/firmware/Kconfig
-index 5c5f0880c4..972cd9b173 100644
---- a/xen/arch/arm/firmware/Kconfig
-+++ b/xen/arch/arm/firmware/Kconfig
-@@ -29,6 +29,18 @@ config SCMI_SMC
- 	  driver domain.
- 	  Use with EL3 firmware which supports only single SCMI OSPM agent.
-=20
-+config SCMI_SMC_MA
-+	bool "Enable ARM SCMI SMC multi-agent driver"
-+	depends on ARM_64
-+	select ARM_SCI
-+	help
-+	  Enables SCMI SMC/HVC multi-agent in XEN to pass SCMI requests from Doma=
-ins
-+	  to EL3 firmware (TF-A) which supports multi-agent feature.
-+	  This feature allows to enable SCMI per Domain using unique SCMI agent_i=
-d,
-+	  so Domain is identified by EL3 firmware as an SCMI Agent and can access
-+	  allowed platform resources through dedicated SMC/HVC Shared memory base=
-d
-+	  transport.
-+
- endchoice
-=20
- endmenu
-diff --git a/xen/arch/arm/firmware/Makefile b/xen/arch/arm/firmware/Makefil=
-e
-index 71bdefc24a..37927e690e 100644
---- a/xen/arch/arm/firmware/Makefile
-+++ b/xen/arch/arm/firmware/Makefile
-@@ -1,2 +1,3 @@
- obj-$(CONFIG_ARM_SCI) +=3D sci.o
- obj-$(CONFIG_SCMI_SMC) +=3D scmi-smc.o
-+obj-$(CONFIG_SCMI_SMC_MA) +=3D scmi-shmem.o scmi-smc-multiagent.o
-diff --git a/xen/arch/arm/firmware/scmi-proto.h b/xen/arch/arm/firmware/scm=
-i-proto.h
-new file mode 100644
-index 0000000000..49f63cfc0a
---- /dev/null
-+++ b/xen/arch/arm/firmware/scmi-proto.h
-@@ -0,0 +1,164 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Arm System Control and Management Interface definitions
-+ * Version 3.0 (DEN0056C)
-+ *
-+ * Copyright (c) 2025 EPAM Systems
-+ */
-+
-+#ifndef ARM_FIRMWARE_SCMI_PROTO_H_
-+#define ARM_FIRMWARE_SCMI_PROTO_H_
-+
-+#include <xen/stdint.h>
-+
-+#define SCMI_SHORT_NAME_MAX_SIZE 16
-+
-+/* SCMI status codes. See section 4.1.4 */
-+#define SCMI_SUCCESS              0
-+#define SCMI_NOT_SUPPORTED      (-1)
-+#define SCMI_INVALID_PARAMETERS (-2)
-+#define SCMI_DENIED             (-3)
-+#define SCMI_NOT_FOUND          (-4)
-+#define SCMI_OUT_OF_RANGE       (-5)
-+#define SCMI_BUSY               (-6)
-+#define SCMI_COMMS_ERROR        (-7)
-+#define SCMI_GENERIC_ERROR      (-8)
-+#define SCMI_HARDWARE_ERROR     (-9)
-+#define SCMI_PROTOCOL_ERROR     (-10)
-+
-+/* Protocol IDs */
-+#define SCMI_BASE_PROTOCOL 0x10
-+
-+/* Base protocol message IDs */
-+#define SCMI_BASE_PROTOCOL_VERSION            0x0
-+#define SCMI_BASE_PROTOCOL_ATTIBUTES          0x1
-+#define SCMI_BASE_PROTOCOL_MESSAGE_ATTRIBUTES 0x2
-+#define SCMI_BASE_DISCOVER_AGENT              0x7
-+#define SCMI_BASE_SET_DEVICE_PERMISSIONS      0x9
-+#define SCMI_BASE_RESET_AGENT_CONFIGURATION   0xB
-+
-+typedef struct scmi_msg_header {
-+    uint8_t id;
-+    uint8_t type;
-+    uint8_t protocol;
-+    uint32_t status;
-+} scmi_msg_header_t;
-+
-+/* Table 2 Message header format */
-+#define SCMI_HDR_ID    GENMASK(7, 0)
-+#define SCMI_HDR_TYPE  GENMASK(9, 8)
-+#define SCMI_HDR_PROTO GENMASK(17, 10)
-+
-+#define SCMI_FIELD_GET(_mask, _reg)                                       =
-     \
-+    ((typeof(_mask))(((_reg) & (_mask)) >> (ffs64(_mask) - 1)))
-+#define SCMI_FIELD_PREP(_mask, _val)                                      =
-     \
-+    (((typeof(_mask))(_val) << (ffs64(_mask) - 1)) & (_mask))
-+
-+static inline uint32_t pack_scmi_header(scmi_msg_header_t *hdr)
-+{
-+    return SCMI_FIELD_PREP(SCMI_HDR_ID, hdr->id) |
-+           SCMI_FIELD_PREP(SCMI_HDR_TYPE, hdr->type) |
-+           SCMI_FIELD_PREP(SCMI_HDR_PROTO, hdr->protocol);
-+}
-+
-+static inline void unpack_scmi_header(uint32_t msg_hdr, scmi_msg_header_t =
-*hdr)
-+{
-+    hdr->id =3D SCMI_FIELD_GET(SCMI_HDR_ID, msg_hdr);
-+    hdr->type =3D SCMI_FIELD_GET(SCMI_HDR_TYPE, msg_hdr);
-+    hdr->protocol =3D SCMI_FIELD_GET(SCMI_HDR_PROTO, msg_hdr);
-+}
-+
-+static inline int scmi_to_xen_errno(int scmi_status)
-+{
-+    if ( scmi_status =3D=3D SCMI_SUCCESS )
-+        return 0;
-+
-+    switch ( scmi_status )
-+    {
-+    case SCMI_NOT_SUPPORTED:
-+        return -EOPNOTSUPP;
-+    case SCMI_INVALID_PARAMETERS:
-+        return -EINVAL;
-+    case SCMI_DENIED:
-+        return -EACCES;
-+    case SCMI_NOT_FOUND:
-+        return -ENOENT;
-+    case SCMI_OUT_OF_RANGE:
-+        return -ERANGE;
-+    case SCMI_BUSY:
-+        return -EBUSY;
-+    case SCMI_COMMS_ERROR:
-+        return -ENOTCONN;
-+    case SCMI_GENERIC_ERROR:
-+        return -EIO;
-+    case SCMI_HARDWARE_ERROR:
-+        return -ENXIO;
-+    case SCMI_PROTOCOL_ERROR:
-+        return -EBADMSG;
-+    default:
-+        return -EINVAL;
-+    }
-+}
-+
-+/* PROTOCOL_VERSION */
-+#define SCMI_VERSION_MINOR GENMASK(15, 0)
-+#define SCMI_VERSION_MAJOR GENMASK(31, 16)
-+
-+struct scmi_msg_prot_version_p2a {
-+    uint32_t version;
-+} __packed;
-+
-+/* BASE PROTOCOL_ATTRIBUTES */
-+#define SCMI_BASE_ATTR_NUM_PROTO GENMASK(7, 0)
-+#define SCMI_BASE_ATTR_NUM_AGENT GENMASK(15, 8)
-+
-+struct scmi_msg_base_attributes_p2a {
-+    uint32_t attributes;
-+} __packed;
-+
-+/*
-+ * BASE_DISCOVER_AGENT
-+ */
-+#define SCMI_BASE_AGENT_ID_OWN 0xFFFFFFFF
-+
-+struct scmi_msg_base_discover_agent_a2p {
-+    uint32_t agent_id;
-+} __packed;
-+
-+struct scmi_msg_base_discover_agent_p2a {
-+    uint32_t agent_id;
-+    char name[SCMI_SHORT_NAME_MAX_SIZE];
-+} __packed;
-+
-+/*
-+ * BASE_SET_DEVICE_PERMISSIONS
-+ */
-+#define SCMI_BASE_DEVICE_ACCESS_ALLOW           BIT(0, UL)
-+
-+struct scmi_msg_base_set_device_permissions_a2p {
-+    uint32_t agent_id;
-+    uint32_t device_id;
-+    uint32_t flags;
-+} __packed;
-+
-+/*
-+ * BASE_RESET_AGENT_CONFIGURATION
-+ */
-+#define SCMI_BASE_AGENT_PERMISSIONS_RESET       BIT(0, UL)
-+
-+struct scmi_msg_base_reset_agent_cfg_a2p {
-+    uint32_t agent_id;
-+    uint32_t flags;
-+} __packed;
-+
-+#endif /* ARM_FIRMWARE_SCMI_PROTO_H_ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/firmware/scmi-shmem.c b/xen/arch/arm/firmware/scm=
-i-shmem.c
-new file mode 100644
-index 0000000000..e36745a85e
---- /dev/null
-+++ b/xen/arch/arm/firmware/scmi-shmem.c
-@@ -0,0 +1,118 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * SMC/HVC shmem transport implementation used by
-+ * SCI SCMI multi-agent driver.
-+ *
-+ * Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-+ * Copyright (c) 2025 EPAM Systems
-+ */
-+
-+#include <xen/err.h>
-+#include <xen/io.h>
-+#include <asm/io.h>
-+
-+#include "scmi-proto.h"
-+#include "scmi-shmem.h"
-+
-+static inline int
-+shmem_channel_status(const volatile struct scmi_shared_mem __iomem *shmem)
-+{
-+    return (readl(&shmem->channel_status) &
-+            SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE) ? 0 : -EBUSY;
-+}
-+
-+int shmem_put_message(volatile struct scmi_shared_mem __iomem *shmem,
-+                      scmi_msg_header_t *hdr, void *data, unsigned int len=
-)
-+{
-+    int ret;
-+
-+    if ( (len + offsetof(struct scmi_shared_mem, msg_payload)) >
-+         SCMI_SHMEM_MAPPED_SIZE )
-+    {
-+        printk(XENLOG_ERR "scmi: Wrong size of smc message. Data is invali=
-d\n");
-+        return -EINVAL;
-+    }
-+
-+    ret =3D shmem_channel_status(shmem);
-+    if ( ret )
-+        return ret;
-+
-+    writel_relaxed(0x0, &shmem->channel_status);
-+    /* Writing 0x0 right now, but "shmem"_FLAG_INTR_ENABLED can be set */
-+    writel_relaxed(0x0, &shmem->flags);
-+    writel_relaxed(sizeof(shmem->msg_header) + len, &shmem->length);
-+    writel(pack_scmi_header(hdr), &shmem->msg_header);
-+
-+    if ( len > 0 && data )
-+        memcpy_toio(shmem->msg_payload, data, len);
-+
-+    return 0;
-+}
-+
-+int shmem_get_response(const volatile struct scmi_shared_mem __iomem *shme=
-m,
-+                       scmi_msg_header_t *hdr, void *data, unsigned int le=
-n)
-+{
-+    int recv_len;
-+    int ret;
-+    /*
-+     * First word of msg_payload carries the returned status; exclude it f=
-rom
-+     * recv_len so only the protocol payload is copied back to the caller.
-+     */
-+    int pad =3D sizeof(hdr->status);
-+
-+    if ( len >=3D SCMI_SHMEM_MAPPED_SIZE -
-+         offsetof(struct scmi_shared_mem, msg_payload) )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Wrong size of input smc message. Data may be invalid=
-\n");
-+        return -EINVAL;
-+    }
-+
-+    ret =3D shmem_channel_status(shmem);
-+    if ( ret )
-+        return ret;
-+
-+    recv_len =3D readl(&shmem->length) - sizeof(shmem->msg_header);
-+
-+    if ( recv_len < 0 )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Wrong size of smc message. Data may be invalid\n");
-+        return -EINVAL;
-+    }
-+
-+    unpack_scmi_header(readl(&shmem->msg_header), hdr);
-+
-+    hdr->status =3D readl(&shmem->msg_payload);
-+    recv_len =3D recv_len > pad ? recv_len - pad : 0;
-+
-+    ret =3D scmi_to_xen_errno(hdr->status);
-+    if ( ret )
-+    {
-+        printk(XENLOG_DEBUG "scmi: Error received: %d\n", ret);
-+        return ret;
-+    }
-+
-+    if ( recv_len > len )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Not enough buffer for message %d, expecting %d\n",
-+               recv_len, len);
-+        return -EINVAL;
-+    }
-+
-+    if ( recv_len > 0 )
-+        memcpy_fromio(data, shmem->msg_payload + pad, recv_len);
-+
-+    return 0;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/firmware/scmi-shmem.h b/xen/arch/arm/firmware/scm=
-i-shmem.h
-new file mode 100644
-index 0000000000..722263aa77
---- /dev/null
-+++ b/xen/arch/arm/firmware/scmi-shmem.h
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Arm System Control and Management Interface definitions
-+ * Version 3.0 (DEN0056C)
-+ * Shared Memory based Transport
-+ *
-+ * Copyright (c) 2024 EPAM Systems
-+ */
-+
-+#ifndef ARM_FIRMWARE_SCMI_SHMEM_H_
-+#define ARM_FIRMWARE_SCMI_SHMEM_H_
-+
-+#include <xen/stdint.h>
-+
-+#define SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE  BIT(0, UL)
-+#define SCMI_SHMEM_CHAN_STAT_CHANNEL_ERROR BIT(1, UL)
-+
-+struct scmi_shared_mem {
-+    uint32_t reserved;
-+    uint32_t channel_status;
-+    uint32_t reserved1[2];
-+    uint32_t flags;
-+    uint32_t length;
-+    uint32_t msg_header;
-+    uint8_t msg_payload[];
-+};
-+
-+#define SCMI_SHMEM_MAPPED_SIZE PAGE_SIZE
-+
-+int shmem_put_message(volatile struct scmi_shared_mem __iomem *shmem,
-+                      scmi_msg_header_t *hdr, void *data, unsigned int len=
-);
-+
-+int shmem_get_response(const volatile struct scmi_shared_mem __iomem *shme=
-m,
-+                       scmi_msg_header_t *hdr, void *data, unsigned int le=
-n);
-+#endif /* ARM_FIRMWARE_SCMI_SHMEM_H_ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/arm/firmware/scmi-smc-multiagent.c b/xen/arch/arm/fir=
-mware/scmi-smc-multiagent.c
-new file mode 100644
-index 0000000000..113af22ec3
---- /dev/null
-+++ b/xen/arch/arm/firmware/scmi-smc-multiagent.c
-@@ -0,0 +1,830 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * SCI SCMI multi-agent driver, using SMC/HVC shmem as transport.
-+ *
-+ * Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-+ * Copyright (c) 2025 EPAM Systems
-+ */
-+
-+#include <xen/acpi.h>
-+
-+#include <xen/device_tree.h>
-+#include <xen/init.h>
-+#include <xen/iocap.h>
-+#include <xen/err.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/string.h>
-+#include <xen/param.h>
-+#include <xen/sched.h>
-+#include <xen/vmap.h>
-+
-+#include <asm/firmware/sci.h>
-+#include <asm/smccc.h>
-+
-+#include "scmi-proto.h"
-+#include "scmi-shmem.h"
-+
-+#define SCMI_SECONDARY_AGENTS "scmi-secondary-agents"
-+
-+struct scmi_channel {
-+    uint32_t agent_id;
-+    uint32_t func_id;
-+    domid_t domain_id;
-+    uint64_t paddr;
-+    struct scmi_shared_mem __iomem *shmem;
-+    spinlock_t lock;
-+    struct list_head list;
-+};
-+
-+struct scmi_data {
-+    struct list_head channel_list;
-+    spinlock_t channel_list_lock;
-+    uint32_t func_id;
-+    bool initialized;
-+    uint32_t shmem_phandle;
-+    uint32_t hyp_channel_agent_id;
-+    struct dt_device_node *dt_dev;
-+};
-+
-+static struct scmi_data scmi_data;
-+
-+static bool scmi_is_under_xen_sci(const struct dt_device_node *node)
-+{
-+    const struct dt_device_node *p;
-+
-+    for ( p =3D node->parent; p; p =3D p->parent )
-+        if ( dt_device_is_compatible(p, "xen,sci") )
-+            return true;
-+
-+    return false;
-+}
-+
-+static int send_smc_message(struct scmi_channel *chan_info,
-+                            scmi_msg_header_t *hdr, void *data, int len)
-+{
-+    struct arm_smccc_res resp;
-+    int ret;
-+
-+    ret =3D shmem_put_message(chan_info->shmem, hdr, data, len);
-+    if ( ret )
-+        return ret;
-+
-+    arm_smccc_1_1_smc(chan_info->func_id, 0, 0, 0, 0, 0, 0, 0, &resp);
-+
-+    if ( resp.a0 =3D=3D (unsigned long)ARM_SMCCC_INVALID_PARAMETER )
-+        return -EINVAL;
-+
-+    if ( resp.a0 )
-+        return -EOPNOTSUPP;
-+
-+    return 0;
-+}
-+
-+static int do_smc_xfer(struct scmi_channel *chan_info, scmi_msg_header_t *=
-hdr,
-+                       void *tx_data, int tx_size, void *rx_data, int rx_s=
-ize)
-+{
-+    int ret =3D 0;
-+
-+    ASSERT(chan_info && chan_info->shmem);
-+
-+    if ( !hdr )
-+        return -EINVAL;
-+
-+    spin_lock(&chan_info->lock);
-+
-+    printk(XENLOG_DEBUG
-+           "scmi: agent_id =3D %d msg_id =3D %x type =3D %d, proto =3D %x\=
-n",
-+           chan_info->agent_id, hdr->id, hdr->type, hdr->protocol);
-+
-+    ret =3D send_smc_message(chan_info, hdr, tx_data, tx_size);
-+    if ( ret )
-+        goto clean;
-+
-+    ret =3D shmem_get_response(chan_info->shmem, hdr, rx_data, rx_size);
-+
-+clean:
-+    printk(XENLOG_DEBUG
-+           "scmi: get smc response agent_id =3D %d msg_id =3D %x proto =3D=
- %x res=3D%d\n",
-+           chan_info->agent_id, hdr->id, hdr->protocol, ret);
-+
-+    spin_unlock(&chan_info->lock);
-+
-+    return ret;
-+}
-+
-+static struct scmi_channel *get_channel_by_id(uint32_t agent_id)
-+{
-+    struct scmi_channel *curr;
-+    bool found =3D false;
-+
-+    spin_lock(&scmi_data.channel_list_lock);
-+    list_for_each_entry(curr, &scmi_data.channel_list, list)
-+    {
-+        if ( curr->agent_id =3D=3D agent_id )
-+        {
-+            found =3D true;
-+            break;
-+        }
-+    }
-+
-+    spin_unlock(&scmi_data.channel_list_lock);
-+    if ( found )
-+        return curr;
-+
-+    return NULL;
-+}
-+
-+static struct scmi_channel *acquire_scmi_channel(struct domain *d,
-+                                                 uint32_t agent_id)
-+{
-+    struct scmi_channel *curr;
-+    struct scmi_channel *ret =3D ERR_PTR(-ENOENT);
-+
-+    spin_lock(&scmi_data.channel_list_lock);
-+    list_for_each_entry(curr, &scmi_data.channel_list, list)
-+    {
-+        if ( curr->agent_id =3D=3D agent_id )
-+        {
-+            if ( curr->domain_id !=3D DOMID_INVALID )
-+            {
-+                ret =3D ERR_PTR(-EEXIST);
-+                break;
-+            }
-+
-+            curr->domain_id =3D d->domain_id;
-+            ret =3D curr;
-+            break;
-+        }
-+    }
-+
-+    spin_unlock(&scmi_data.channel_list_lock);
-+
-+    return ret;
-+}
-+
-+static void relinquish_scmi_channel(struct scmi_channel *channel)
-+{
-+    ASSERT(channel !=3D NULL);
-+
-+    spin_lock(&scmi_data.channel_list_lock);
-+    channel->domain_id =3D DOMID_INVALID;
-+    spin_unlock(&scmi_data.channel_list_lock);
-+}
-+
-+static int map_channel_memory(struct scmi_channel *channel)
-+{
-+    ASSERT(channel && channel->paddr);
-+    channel->shmem =3D ioremap_nocache(channel->paddr, SCMI_SHMEM_MAPPED_S=
-IZE);
-+    if ( !channel->shmem )
-+        return -ENOMEM;
-+
-+    channel->shmem->channel_status =3D SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE;
-+    printk(XENLOG_DEBUG "scmi: Got shmem %lx after vmap %p\n", channel->pa=
-ddr,
-+           channel->shmem);
-+
-+    return 0;
-+}
-+
-+static void unmap_channel_memory(struct scmi_channel *channel)
-+{
-+    ASSERT(channel);
-+
-+    if ( !channel->shmem )
-+        return;
-+
-+    iounmap(channel->shmem);
-+    channel->shmem =3D NULL;
-+}
-+
-+static struct scmi_channel *smc_create_channel(uint32_t agent_id,
-+                                               uint32_t func_id, uint64_t =
-addr)
-+{
-+    struct scmi_channel *channel, *curr;
-+
-+    spin_lock(&scmi_data.channel_list_lock);
-+
-+    /* Check if channel already exists while holding the lock */
-+    list_for_each_entry(curr, &scmi_data.channel_list, list)
-+    {
-+        if ( curr->agent_id =3D=3D agent_id )
-+        {
-+            spin_unlock(&scmi_data.channel_list_lock);
-+            return ERR_PTR(-EEXIST);
-+        }
-+    }
-+
-+    channel =3D xmalloc(struct scmi_channel);
-+    if ( !channel )
-+    {
-+        spin_unlock(&scmi_data.channel_list_lock);
-+        return ERR_PTR(-ENOMEM);
-+    }
-+
-+    spin_lock_init(&channel->lock);
-+    channel->agent_id =3D agent_id;
-+    channel->func_id =3D func_id;
-+    channel->domain_id =3D DOMID_INVALID;
-+    channel->shmem =3D NULL;
-+    channel->paddr =3D addr;
-+    list_add_tail(&channel->list, &scmi_data.channel_list);
-+
-+    spin_unlock(&scmi_data.channel_list_lock);
-+    return channel;
-+}
-+
-+static void free_channel_list(void)
-+{
-+    struct scmi_channel *curr, *_curr;
-+    /*
-+     * Called only on the __init error path, before any runtime users exis=
-t,
-+     * so no other thread is iterating channel_list. Keep the lock for the
-+     * whole drain for clarity and to avoid misleading readers about possi=
-ble
-+     * concurrent access.
-+     */
-+    spin_lock(&scmi_data.channel_list_lock);
-+    list_for_each_entry_safe(curr, _curr, &scmi_data.channel_list, list)
-+    {
-+        list_del(&curr->list);
-+        xfree(curr);
-+    }
-+    spin_unlock(&scmi_data.channel_list_lock);
-+}
-+
-+static int __init
-+scmi_dt_read_hyp_channel_addr(struct dt_device_node *scmi_node, u64 *addr,
-+                              u64 *size)
-+{
-+    struct dt_device_node *shmem_node;
-+    const __be32 *prop;
-+
-+    prop =3D dt_get_property(scmi_node, "shmem", NULL);
-+    if ( !prop )
-+        return -EINVAL;
-+
-+    shmem_node =3D dt_find_node_by_phandle(be32_to_cpu(*prop));
-+    if ( IS_ERR_OR_NULL(shmem_node) )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Device tree error, can't parse reserved memory %ld\n=
-",
-+               PTR_ERR(shmem_node));
-+        return PTR_ERR(shmem_node);
-+    }
-+
-+    return dt_device_get_address(shmem_node, 0, addr, size);
-+}
-+
-+/*
-+ * Handle Dom0 SCMI specific DT nodes
-+ *
-+ * Make a decision on copying SCMI specific nodes into Dom0 device tree.
-+ * For SCMI multi-agent case:
-+ * - shmem nodes will not be copied and generated instead if SCMI
-+ *   is enabled for Dom0
-+ * - scmi node will be copied if SCMI is enabled for Dom0
-+ */
-+static bool scmi_dt_handle_node(struct domain *d, struct dt_device_node *n=
-ode)
-+{
-+    static const struct dt_device_match shmem_matches[] __initconst =3D {
-+        DT_MATCH_COMPATIBLE("arm,scmi-shmem"),
-+        { /* sentinel */ },
-+    };
-+    static const struct dt_device_match scmi_matches[] __initconst =3D {
-+        DT_MATCH_PATH("/firmware/scmi"),
-+        { /* sentinel */ },
-+    };
-+
-+    if ( !scmi_data.initialized )
-+        return false;
-+
-+    /* skip scmi shmem node for dom0 if scmi not enabled */
-+    if ( dt_match_node(shmem_matches, node) && !sci_domain_is_enabled(d) )
-+    {
-+        dt_dprintk("  Skip scmi shmem node\n");
-+        return true;
-+    }
-+
-+    /* drop scmi if not enabled */
-+    if ( dt_match_node(scmi_matches, node) && !sci_domain_is_enabled(d) )
-+    {
-+        dt_dprintk("  Skip scmi node\n");
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+static int scmi_assign_device(uint32_t agent_id, uint32_t device_id,
-+                              uint32_t flags)
-+{
-+    struct scmi_msg_base_set_device_permissions_a2p tx;
-+    struct scmi_channel *channel;
-+    scmi_msg_header_t hdr;
-+
-+    channel =3D get_channel_by_id(scmi_data.hyp_channel_agent_id);
-+    if ( !channel )
-+        return -EINVAL;
-+
-+    hdr.id =3D SCMI_BASE_SET_DEVICE_PERMISSIONS;
-+    hdr.type =3D 0;
-+    hdr.protocol =3D SCMI_BASE_PROTOCOL;
-+
-+    tx.agent_id =3D agent_id;
-+    tx.device_id =3D device_id;
-+    tx.flags =3D flags;
-+
-+    return do_smc_xfer(channel, &hdr, &tx, sizeof(tx), NULL, 0);
-+}
-+
-+static int scmi_dt_assign_device(struct domain *d,
-+                                 struct dt_phandle_args *ac_spec)
-+{
-+    struct scmi_channel *agent_channel;
-+    uint32_t scmi_device_id =3D ac_spec->args[0];
-+    int ret;
-+
-+    if ( !d->arch.sci_data )
-+        return 0;
-+
-+    /* The access-controllers is specified for DT dev, but it's not a SCMI=
- */
-+    if ( !scmi_data.dt_dev ||
-+         !dt_node_path_is_equal(ac_spec->np, scmi_data.dt_dev->full_name) =
-)
-+        return 0;
-+
-+    agent_channel =3D d->arch.sci_data;
-+
-+    spin_lock(&agent_channel->lock);
-+
-+    ret =3D scmi_assign_device(agent_channel->agent_id, scmi_device_id,
-+                             SCMI_BASE_DEVICE_ACCESS_ALLOW);
-+    if ( ret )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: could not assign dev for %pd agent:%d dev_id:%u (%d)=
-",
-+               d, agent_channel->agent_id, scmi_device_id, ret);
-+    }
-+
-+    spin_unlock(&agent_channel->lock);
-+    return ret;
-+}
-+
-+static int collect_agent_id(struct scmi_channel *agent_channel)
-+{
-+    int ret;
-+    scmi_msg_header_t hdr;
-+    struct scmi_msg_base_discover_agent_p2a da_rx;
-+    struct scmi_msg_base_discover_agent_a2p da_tx;
-+
-+    ret =3D map_channel_memory(agent_channel);
-+    if ( ret )
-+        return ret;
-+
-+    hdr.id =3D SCMI_BASE_DISCOVER_AGENT;
-+    hdr.type =3D 0;
-+    hdr.protocol =3D SCMI_BASE_PROTOCOL;
-+
-+    da_tx.agent_id =3D agent_channel->agent_id;
-+
-+    ret =3D do_smc_xfer(agent_channel, &hdr, &da_tx, sizeof(da_tx), &da_rx=
-,
-+                        sizeof(da_rx));
-+    if ( agent_channel->domain_id !=3D DOMID_XEN )
-+        unmap_channel_memory(agent_channel);
-+    if ( ret )
-+        return ret;
-+
-+    printk(XENLOG_DEBUG "id=3D0x%x name=3D%s\n", da_rx.agent_id, da_rx.nam=
-e);
-+    agent_channel->agent_id =3D da_rx.agent_id;
-+    return 0;
-+}
-+
-+static __init int collect_agents(struct dt_device_node *scmi_node)
-+{
-+    const struct dt_device_node *config_node;
-+    const __be32 *prop;
-+    uint32_t len;
-+    const __be32 *end;
-+    uint32_t cells_per_entry =3D 3; /* Default to 3 cells if property is a=
-bsent. */
-+
-+    config_node =3D dt_find_compatible_node(NULL, NULL, "xen,sci");
-+    if ( !config_node )
-+    {
-+        printk(XENLOG_WARNING "scmi: xen,sci node not found, no agents to =
-collect.\n");
-+        return -ENOENT;
-+    }
-+
-+    /* Check for the optional '#scmi-secondary-agents-cells' property. */
-+    if ( dt_property_read_u32(config_node, "#scmi-secondary-agents-cells",
-+                              &cells_per_entry) )
-+    {
-+        if ( cells_per_entry !=3D 2 && cells_per_entry !=3D 3 )
-+        {
-+            printk(XENLOG_ERR "scmi: Invalid #scmi-secondary-agents-cells =
-value: %u\n",
-+                   cells_per_entry);
-+            return -EINVAL;
-+        }
-+    }
-+
-+    prop =3D dt_get_property(config_node, SCMI_SECONDARY_AGENTS, &len);
-+    if ( !prop )
-+    {
-+        printk(XENLOG_ERR "scmi: No %s property found, no agents to collec=
-t.\n",
-+               SCMI_SECONDARY_AGENTS);
-+        return -EINVAL;
-+    }
-+
-+    /* Validate that the property length is a multiple of the cell size. *=
-/
-+    if ( len =3D=3D 0 || len % (cells_per_entry * sizeof(uint32_t)) !=3D 0=
- )
-+    {
-+        printk(XENLOG_ERR "scmi: Invalid length of %s property: %u for %u =
-cells per entry\n",
-+               SCMI_SECONDARY_AGENTS, len, cells_per_entry);
-+        return -EINVAL;
-+    }
-+
-+    end =3D (const __be32 *)((const u8 *)prop + len);
-+
-+    for ( ; prop < end; )
-+    {
-+        uint32_t agent_id;
-+        uint32_t smc_id;
-+        uint32_t shmem_phandle;
-+        struct dt_device_node *node;
-+        u64 addr, size;
-+        int ret;
-+        struct scmi_channel *agent_channel;
-+
-+        smc_id =3D be32_to_cpu(*prop++);
-+        shmem_phandle =3D be32_to_cpu(*prop++);
-+
-+        if ( cells_per_entry =3D=3D 3 )
-+            agent_id =3D be32_to_cpu(*prop++);
-+        else
-+            agent_id =3D SCMI_BASE_AGENT_ID_OWN;
-+
-+        node =3D dt_find_node_by_phandle(shmem_phandle);
-+        if ( !node )
-+        {
-+            printk(XENLOG_ERR "scmi: Could not find shmem node for agent %=
-u\n",
-+                   agent_id);
-+            return -EINVAL;
-+        }
-+
-+        ret =3D dt_device_get_address(node, 0, &addr, &size);
-+        if ( ret )
-+        {
-+            printk(XENLOG_ERR
-+                   "scmi: Could not read shmem address for agent %u: %d\n"=
-,
-+                   agent_id, ret);
-+            return ret;
-+        }
-+
-+        if ( !IS_ALIGNED(size, SCMI_SHMEM_MAPPED_SIZE) ||
-+             !IS_ALIGNED(addr, SCMI_SHMEM_MAPPED_SIZE) )
-+        {
-+            printk(XENLOG_ERR "scmi: shmem memory is not aligned\n");
-+            return -EINVAL;
-+        }
-+
-+        agent_channel =3D smc_create_channel(agent_id, smc_id, addr);
-+        if ( IS_ERR(agent_channel) )
-+        {
-+            printk(XENLOG_ERR "scmi: Could not create channel for agent %u=
-: %ld\n",
-+                   agent_id, PTR_ERR(agent_channel));
-+            return PTR_ERR(agent_channel);
-+        }
-+
-+        if ( cells_per_entry =3D=3D 2 )
-+        {
-+            ret =3D collect_agent_id(agent_channel);
-+            if ( ret )
-+                return ret;
-+        }
-+
-+        printk(XENLOG_DEBUG "scmi: Agent %u SMC %X addr %lx\n", agent_chan=
-nel->agent_id,
-+               smc_id, (unsigned long)addr);
-+    }
-+
-+    return 0;
-+}
-+
-+static int scmi_domain_init(struct domain *d,
-+                            struct xen_domctl_createdomain *config)
-+{
-+    struct scmi_channel *channel;
-+    int ret;
-+
-+    if ( !scmi_data.initialized )
-+        return 0;
-+
-+    /*
-+     * SCMI support is configured via:
-+     * - For dom0: xen,dom0-sci-agent-id property under the xen,sci contai=
-ner
-+     * - For dom0less: xen,sci-agent-id in the domain node
-+     * The config->arch.arm_sci_type and config->arch.arm_sci_agent_id
-+     * are already set by domain_build.c or dom0less-build.c
-+     */
-+
-+    if ( config->arch.arm_sci_type =3D=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE )
-+        return 0;
-+
-+    channel =3D acquire_scmi_channel(d, config->arch.arm_sci_agent_id);
-+    if ( IS_ERR(channel) )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Failed to acquire SCMI channel for agent_id %u: %ld\=
-n",
-+               config->arch.arm_sci_agent_id, PTR_ERR(channel));
-+        return PTR_ERR(channel);
-+    }
-+
-+    printk(XENLOG_INFO
-+           "scmi: Acquire channel id =3D 0x%x, domain_id =3D %d paddr =3D =
-0x%lx\n",
-+           channel->agent_id, channel->domain_id, channel->paddr);
-+
-+    /*
-+     * Dom0 (if present) needs to have an access to the guest memory range
-+     * to satisfy iomem_access_permitted() check in XEN_DOMCTL_iomem_permi=
-ssion
-+     * domctl.
-+     */
-+    if ( hardware_domain && !is_hardware_domain(d) )
-+    {
-+        ret =3D iomem_permit_access(hardware_domain, paddr_to_pfn(channel-=
->paddr),
-+                                  paddr_to_pfn(channel->paddr +
-+                                  SCMI_SHMEM_MAPPED_SIZE - 1));
-+        if ( ret )
-+            goto error;
-+    }
-+
-+    d->arch.sci_data =3D channel;
-+    d->arch.sci_enabled =3D true;
-+
-+    return 0;
-+
-+error:
-+    relinquish_scmi_channel(channel);
-+    return ret;
-+}
-+
-+int scmi_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+{
-+    if ( config->arch.arm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE &&
-+         config->arch.arm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC=
-_MA )
-+    {
-+        dprintk(XENLOG_INFO, "scmi: Unsupported ARM_SCI type\n");
-+        return -EINVAL;
-+    }
-+
-+    return 0;
-+}
-+
-+static int scmi_relinquish_resources(struct domain *d)
-+{
-+    int ret;
-+    struct scmi_channel *channel, *agent_channel;
-+    scmi_msg_header_t hdr;
-+    struct scmi_msg_base_reset_agent_cfg_a2p tx;
-+
-+    if ( !d->arch.sci_data )
-+        return 0;
-+
-+    agent_channel =3D d->arch.sci_data;
-+
-+    spin_lock(&agent_channel->lock);
-+    tx.agent_id =3D agent_channel->agent_id;
-+    spin_unlock(&agent_channel->lock);
-+
-+    channel =3D get_channel_by_id(scmi_data.hyp_channel_agent_id);
-+    if ( !channel )
-+    {
-+        printk(XENLOG_ERR
-+               "scmi: Unable to get Hypervisor scmi channel for domain %d\=
-n",
-+               d->domain_id);
-+        return -EINVAL;
-+    }
-+
-+    hdr.id =3D SCMI_BASE_RESET_AGENT_CONFIGURATION;
-+    hdr.type =3D 0;
-+    hdr.protocol =3D SCMI_BASE_PROTOCOL;
-+
-+    tx.flags =3D SCMI_BASE_AGENT_PERMISSIONS_RESET;
-+
-+    ret =3D do_smc_xfer(channel, &hdr, &tx, sizeof(tx), NULL, 0);
-+    if ( ret =3D=3D -EOPNOTSUPP )
-+        return 0;
-+
-+    return ret;
-+}
-+
-+static void scmi_domain_destroy(struct domain *d)
-+{
-+    struct scmi_channel *channel;
-+
-+    if ( !d->arch.sci_data )
-+        return;
-+
-+    channel =3D d->arch.sci_data;
-+    spin_lock(&channel->lock);
-+
-+    relinquish_scmi_channel(channel);
-+    printk(XENLOG_DEBUG "scmi: Free domain %d\n", d->domain_id);
-+
-+    d->arch.sci_data =3D NULL;
-+    d->arch.sci_enabled =3D false;
-+
-+    spin_unlock(&channel->lock);
-+}
-+
-+static bool scmi_handle_call(struct cpu_user_regs *regs)
-+{
-+    uint32_t fid =3D (uint32_t)get_user_reg(regs, 0);
-+    struct scmi_channel *agent_channel;
-+    struct domain *d =3D current->domain;
-+    struct arm_smccc_res resp;
-+    bool res =3D false;
-+
-+    if ( (!sci_domain_is_enabled(d)) || (!d->arch.sci_data) )
-+        return false;
-+
-+    agent_channel =3D d->arch.sci_data;
-+    spin_lock(&agent_channel->lock);
-+
-+    if ( agent_channel->func_id !=3D fid )
-+    {
-+        res =3D false;
-+        goto unlock;
-+    }
-+
-+    arm_smccc_1_1_smc(fid,
-+                      get_user_reg(regs, 1),
-+                      get_user_reg(regs, 2),
-+                      get_user_reg(regs, 3),
-+                      get_user_reg(regs, 4),
-+                      get_user_reg(regs, 5),
-+                      get_user_reg(regs, 6),
-+                      get_user_reg(regs, 7),
-+                      &resp);
-+
-+    set_user_reg(regs, 0, resp.a0);
-+    set_user_reg(regs, 1, resp.a1);
-+    set_user_reg(regs, 2, resp.a2);
-+    set_user_reg(regs, 3, resp.a3);
-+    res =3D true;
-+unlock:
-+    spin_unlock(&agent_channel->lock);
-+
-+    return res;
-+}
-+
-+static const struct sci_mediator_ops scmi_ops =3D {
-+    .domain_init =3D scmi_domain_init,
-+    .domain_destroy =3D scmi_domain_destroy,
-+    .relinquish_resources =3D scmi_relinquish_resources,
-+    .handle_call =3D scmi_handle_call,
-+    .dom0_dt_handle_node =3D scmi_dt_handle_node,
-+    .domain_sanitise_config =3D scmi_domain_sanitise_config,
-+    .assign_dt_device =3D scmi_dt_assign_device,
-+};
-+
-+static int __init scmi_check_smccc_ver(void)
-+{
-+    if ( smccc_ver < ARM_SMCCC_VERSION_1_1 )
-+    {
-+        printk(XENLOG_WARNING
-+               "scmi: No SMCCC 1.1 support, SCMI calls forwarding disabled=
-\n");
-+        return -ENOSYS;
-+    }
-+
-+    return 0;
-+}
-+
-+static int __init scmi_dt_hyp_channel_read(struct dt_device_node *scmi_nod=
-e,
-+                                           struct scmi_data *scmi_data,
-+                                           u64 *addr)
-+{
-+    int ret;
-+    u64 size;
-+
-+    if ( !dt_property_read_u32(scmi_node, "arm,smc-id", &scmi_data->func_i=
-d) )
-+    {
-+        printk(XENLOG_ERR "scmi: unable to read smc-id from DT\n");
-+        return -ENOENT;
-+    }
-+
-+    ret =3D scmi_dt_read_hyp_channel_addr(scmi_node, addr, &size);
-+    if ( IS_ERR_VALUE(ret) )
-+        return -ENOENT;
-+
-+    if ( !IS_ALIGNED(size, SCMI_SHMEM_MAPPED_SIZE) )
-+    {
-+        printk(XENLOG_ERR "scmi: shmem memory is not aligned\n");
-+        return -EINVAL;
-+    }
-+
-+    return 0;
-+}
-+
-+static __init int scmi_probe(struct dt_device_node *scmi_node, const void =
-*data)
-+{
-+    u64 addr;
-+    int ret;
-+    struct scmi_channel *channel;
-+    unsigned int n_agents;
-+    scmi_msg_header_t hdr;
-+    struct scmi_msg_base_attributes_p2a rx;
-+
-+    ASSERT(scmi_node !=3D NULL);
-+
-+    /*
-+     * Only bind to the SCMI node provided by Xen under the xen,sci contai=
-ner
-+     * (e.g. /chosen/xen/xen_scmi_config/scmi). This avoids binding to fir=
-mware
-+     * SCMI nodes that belong to the host OSPM and keeps the mediator scop=
-ed to
-+     * Xen-provided configuration only.
-+     */
-+    if ( !scmi_is_under_xen_sci(scmi_node) )
-+        return -ENODEV;
-+
-+    if ( !acpi_disabled )
-+    {
-+        printk(XENLOG_WARNING "scmi: is not supported when using ACPI\n");
-+        return -EINVAL;
-+    }
-+
-+    ret =3D scmi_check_smccc_ver();
-+    if ( ret )
-+        return ret;
-+
-+    ret =3D scmi_dt_hyp_channel_read(scmi_node, &scmi_data, &addr);
-+    if ( ret )
-+        return ret;
-+
-+    INIT_LIST_HEAD(&scmi_data.channel_list);
-+    spin_lock_init(&scmi_data.channel_list_lock);
-+
-+    scmi_data.dt_dev =3D scmi_node;
-+
-+    channel =3D smc_create_channel(SCMI_BASE_AGENT_ID_OWN, scmi_data.func_=
-id, addr);
-+    if ( IS_ERR(channel) )
-+    {
-+        ret =3D PTR_ERR(channel);
-+        goto out;
-+    }
-+
-+    /* Mark as Xen management channel before collecting agent ID */
-+    channel->domain_id =3D DOMID_XEN;
-+
-+    /* Request agent id for Xen management channel */
-+    ret =3D collect_agent_id(channel);
-+    if ( ret )
-+        goto error;
-+
-+    /* Save the agent id for Xen management channel */
-+    scmi_data.hyp_channel_agent_id =3D channel->agent_id;
-+
-+    hdr.id =3D SCMI_BASE_PROTOCOL_ATTIBUTES;
-+    hdr.type =3D 0;
-+    hdr.protocol =3D SCMI_BASE_PROTOCOL;
-+
-+    ret =3D do_smc_xfer(channel, &hdr, NULL, 0, &rx, sizeof(rx));
-+    if ( ret )
-+        goto error;
-+
-+    n_agents =3D SCMI_FIELD_GET(SCMI_BASE_ATTR_NUM_AGENT, rx.attributes);
-+    printk(XENLOG_DEBUG "scmi: Got agent count %d\n", n_agents);
-+    ret =3D collect_agents(scmi_node);
-+    if ( ret )
-+        goto error;
-+
-+    ret =3D sci_register(&scmi_ops);
-+    if ( ret )
-+    {
-+        printk(XENLOG_ERR "SCMI: mediator already registered (ret =3D %d)\=
-n",
-+               ret);
-+        goto error;
-+    }
-+
-+    scmi_data.initialized =3D true;
-+    goto out;
-+
-+error:
-+    unmap_channel_memory(channel);
-+    free_channel_list();
-+out:
-+    return ret;
-+}
-+
-+static const struct dt_device_match scmi_smc_match[] __initconst =3D {
-+    DT_MATCH_COMPATIBLE("arm,scmi-smc"),
-+    { /* sentinel */ },
-+};
-+
-+DT_DEVICE_START(scmi_smc_ma, "SCMI SMC MEDIATOR", DEVICE_FIRMWARE)
-+        .dt_match =3D scmi_smc_match,
-+        .init =3D scmi_probe,
-+DT_DEVICE_END
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index d30a288592..8f0f68544e 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -329,6 +329,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
-=20
- #define XEN_DOMCTL_CONFIG_ARM_SCI_NONE      0
- #define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC  1
-+#define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_MA  2
-=20
- struct xen_arch_domainconfig {
-     /* IN/OUT */
-@@ -355,6 +356,8 @@ struct xen_arch_domainconfig {
-     uint32_t clock_frequency;
-     /* IN */
-     uint8_t arm_sci_type;
-+    /* IN */
-+    uint8_t arm_sci_agent_id;
- };
- #endif /* __XEN__ || __XEN_TOOLS__ */
-=20
---=20
-2.34.1
+SW5yb2R1Y2luZyBwYXRjaCBzZXJpZXMgd2hpY2ggaW5jbHVkZXMgaW1wbGVtZW50YXRpb24gb2Yg
+dGhlIFNDSSBTQ01JDQpTTUMgbXVsdGktYWdlbnQgc3VwcG9ydC4NClRoaXMgcGF0Y2ggc2VyaWVz
+IGZvbGxvd3MgUkZDIHY1IFszXSBzZXJpZXMgd2hpY2ggd2FzIGludHJvZHVjaW5nIGJvdGgNClND
+TUkgc2luZ2xlLWFnZW50IGFuZCBtdWx0aS1hZ2VudCBzdXBwb3J0LiBBZnRlciB0aGUgZGlzY3Vz
+c2lvbiBpdCB3YXMNCmRlY2lkZWQgdG8gc3BsaXQgZmVhdHVyZXMgYW5kIHVwc3RyZWFtIHNpbmdl
+LWFnZW50IHN1cHBvcnQgZmlyc3QuIFRoaXMNCmZlYXR1cmUgaXMgbWVyZ2VkIGZvciBub3cgdG8g
+djQuMjEtcmMyLg0KSSdtIHN0YXJ0aW5nIHRoaXMgcGF0Y2ggc2VyaWVzIGZyb20gdjYgdG8gc2F2
+ZSB0aGUgZGlzY3Vzc2lvbiBoaXN0b3J5DQphbmQgZG9uJ3QgYnJlYWsgY2hhbmdlcyBsb2cuDQoN
+ClBhdGNoIC0geGVuL2RvbWN0bDogZXh0ZW5kIFhFTl9ET01DVExfYXNzaWduX2RldmljZSB0byBo
+YW5kbGUgbm90DQpvbmx5IGlvbW11DQotIGFkZCBjaGFpbmdlZCBoYW5kbGluZyBvZiBhc3NpZ25l
+ZCBEVCBkZXZpY2VzIHRvIHN1cHBvcnQNCmFjY2Vzcy1jb250cm9sbGVyIGZ1bmN0aW9uYWxpdHkg
+dGhyb3VnaCBTQ0kgZnJhbWV3b3JrLg0KQ2hhbmdlIHdhcyBkb25lIGluIHR3byBwYXJ0czoNCiAt
+IGNhbGwgdG8gc2NpX2RvX2RvbWN0bCgpIHRvIGRvX2RvbWN0bCgpDQogLSB1cGRhdGUgaW9tbXVf
+ZG9fZHRfZG9tY3RsKCkgdG8gY2hlY2sgZm9yIGR0X2RldmljZV9pc19wcm90ZWN0ZWQoKQ0KIGFu
+ZCBub3QgZmFpbCBpZiBEVCBkZXZpY2UgaXMgbm90IHByb3RlY3RlZCBieSBJT01NVQ0KDQpQYXRj
+aCAtIHhlbi9hcm06IHNjbWk6IGludHJvZHVjZSBTQ0kgU0NNSSBTTUMgbXVsdGktYWdlbnQgZHJp
+dmVyDQotIGFkZCBYZW4tc3BlY2lmaWMgU0NNSSBjb250YWluZXIgY29tcGF0aWJsZSBgeGVuLHNj
+aWANCiAgdW5kZXIgYC9jaG9zZW4veGVuYDsgWGVuIGJpbmRzIG9ubHkgdG8gdGhlIGBhcm0sc2Nt
+aS1zbWNgIGluc2lkZSBpdCBhbmQNCiAgaWdub3JlcyBvdGhlciBTQ01JIG5vZGVzIChlLmcuIHVu
+ZGVyIGAvZmlybXdhcmVgKS4NCi0gYWRkIGBzY21pLXNlY29uZGFyeS1hZ2VudHNgIGFuZCBgI3Nj
+bWktc2Vjb25kYXJ5LWFnZW50cy1jZWxsc2AgdG8gZGVzY3JpYmUNCiAgZnVuY19pZC9zaG1lbS8o
+b3B0aW9uYWwgYWdlbnRfaWQpIHR1cGxlcyBmb3Igc2Vjb25kYXJ5IGFnZW50cy4NCi0gZWFjaCBn
+dWVzdCB1c2luZyBTQ01JIHN1cHBsaWVzIGl0cyBhZ2VudF9pZCAoZG9tMCB2aWENCiAgYHhlbSxk
+b20wLXNjaS1hZ2VudC1pZD1gIHBhcmFtZXRlciBpbiB4ZW4sc2NpIGNvbXBhdGlibGUgbm9kZSwN
+CiAgdG9vbHN0YWNrIHZpYSBgYXJtX3NjaSA9ICJ0eXBlPXNjbWlfc21jX211bHRpYWdlbnQsYWdl
+bnRfaWQ9Li4uImAsIGRvbTBsZXNzDQogIHZpYSBgeGVuLHNjaV90eXBlYCArIGB4ZW4sc2NpLWFn
+ZW50LWlkYCBpbiBgeGVuLGRvbWFpbmApLg0KLSBmYWN0b3Igb3V0IFNDTUkgZ2VuZXJpYyBkZWZp
+bml0aW9ucyBhbmQgc2htZW0gY29kZS4NCi0gcGFzc3Rocm91Z2ggY29uZmlndXJhdGlvbiBmb3Ig
+U0NNSSBndWVzdHMgbWlycm9ycyBvdGhlciBIVyBwYXNzdGhyb3VnaC4NCg0KUGF0Y2ggLSBkb2Nz
+OiBhcm06IGFkZCBTQ0kgU0NNSSBTTUMgbXVsdGktYWdlbnQgZHJpdmVyIGRvY3MNCi0gZG9jdW1l
+bnQgdGhlIFhlbiBTQ01JIGNvbnRhaW5lciB1bmRlciBgL2Nob3Nlbi94ZW4veGVuX3NjbWlfY29u
+ZmlnYCBhbmQgdGhlDQogIG1lZGlhdG9y4oCZcyBiaW5kaW5nIHJ1bGVzOyB1cGRhdGUgZXhhbXBs
+ZXMgYWNjb3JkaW5nbHkuDQoNCkFsbCBYZW4tc3BlY2lmaWMgU0NNSSBjb25maWd1cmF0aW9uIG5v
+dyBsaXZlcyB1bmRlciBgL2Nob3Nlbi9gDQp0byBrZWVwIGhvc3QgRFQgY2hhbmdlcyBpc29sYXRl
+ZCB3aGlsZSBsZWF2aW5nIHRoZSBob3N0IGAvZmlybXdhcmUvc2NtaWANCnVudG91Y2hlZCBmb3Ig
+RG9tMCBjb25zdW1wdGlvbi4NCg0KQ29kZSBjYW4gYmUgZm91bmQgYXQ6DQpodHRwczovL2dpdGh1
+Yi5jb20vb2xla3NpaW1vaXNpZWlldi94ZW4vdHJlZS9zY21pX21hX3Vwc3RydjYNCg0KWzFdIFJG
+QyB2MjoNCmh0dHA6Ly9wYXRjaHdvcmsua2VybmVsLm9yZy9wcm9qZWN0L3hlbi1kZXZlbC9jb3Zl
+ci9jb3Zlci4xNjQ0MzQxNjM1LmdpdC5vbGVrc2lpX21vaXNpZWlldkBlcGFtLmNvbS8NClsyXSBS
+RkMgdjM6DQpodHRwczovL3BhdGNod29yay5rZXJuZWwub3JnL3Byb2plY3QveGVuLWRldmVsL3Bh
+dGNoLzIwMjUwMzExMTExNjE4LjE4NTA5MjctMS1ncnlnb3JpaV9zdHJhc2hrb0BlcGFtLmNvbQ0K
+WzNdIFJGQyB2NToNCmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3hlbi1kZXZlbC9jb3Zlci4xNzUz
+MTg0NDg3LmdpdC5vbGVrc2lpX21vaXNpZWlldkBlcGFtLmNvbS8NCls0XSBTQ01JIHNpbmdsZS1h
+Z2VudDoNCmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3hlbi1kZXZlbC9jb3Zlci4xNzU2OTk1NTk1
+LmdpdC5vbGVrc2lpX21vaXNpZWlldkBlcGFtLmNvbS8NClNDTUkgc3BlYzoNCmh0dHBzOi8vZGV2
+ZWxvcGVyLmFybS5jb20vZG9jdW1lbnRhdGlvbi9kZW4wMDU2L2UvP2xhbmc9ZW4NCg0KU0NNSSBi
+aW5kaW5nczoNCmh0dHBzOi8vd2ViLmdpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVs
+L2dpdC90b3J2YWxkcy9saW51eC5naXQvdHJlZS9Eb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmlu
+ZGluZ3MvZmlybXdhcmUvYXJtLHNjbWkueWFtbA0KaHR0cHM6Ly93ZWIuZ2l0Lmtlcm5lbC5vcmcv
+cHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3RvcnZhbGRzL2xpbnV4LmdpdC90cmVlL0RvY3VtZW50
+YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9hY2Nlc3MtY29udHJvbGxlcnMvYWNjZXNzLWNvbnRy
+b2xsZXJzLnlhbWwNCg0KUmVmZXJlbmNlIEVMMyBGVzoNClJQSTU6IGh0dHBzOi8vZ2l0aHViLmNv
+bS94ZW4tdHJvb3BzL2FybS10cnVzdGVkLWZpcm13YXJlL2NvbW1pdHMvcnBpNV9kZXYvDQpSZW5l
+c2FzIHY0aDoNCmh0dHBzOi8vZ2l0aHViLmNvbS9HcnlnaXJpaVMvYXJtLXRydXN0ZWQtZmlybXdh
+cmUvY29tbWl0cy9yY2FyX2dlbjRfdjIuN192NHgtc2NtaV91cGQvDQoNCmJhc2UtY29tbWl0OiBk
+YmU2MGYyNDRjIChVcGRhdGUgWGVuIHRvIDQuMjEsIDIwMjUtMDItMjEpDQoNCkNoYW5nZXMgaW4g
+djEwOg0KLSByZW1vdmUgdW51c2VkIHNjaV9kb19kb21jdGwgc3R1YiBmcm9tIHNjaS5oDQotIHJl
+bW92ZWQgZXh0cmEgaW5jbHVkZSBpbiBtZW1jcHkte3RvL2Zyb219aW8uYyBmaWxlcw0KLSBGaXgg
+dGFicyBpbiBNQUlOVEFJTkVSUyBmaWxlDQotIHJlbW92ZSBkdXBsaWNhdGUgU1BEWCB0YWcgZnJv
+bSBzY21pLXNobWVtLmMNCi0gYWRkIGNhc3QgdG8gQVJNX1NNQ0NDX0lOVkFMSURfUEFSQU1FVEVS
+IHRvIHNldHRsZSB0aGUgc2lnbiBzaW5jZQ0KQVJNX1NNQ0NDX0lOVkFMSURfUEFSQU1FVEVSIGlz
+IC0zIHdoaWNoIGlzIHBhcnQgb2YgdGhlIHNwZWMgYW5kIHJlc3ANCmlzIHRoZSBkZWZhdWx0IHNt
+Y2NjIGNhbGwgc3RydWN0dXJlLg0KLSB1cGRhdGUgZnJlZV9jaGFubmVsX2xpc3QuIEFkZCBzcGlu
+bG9jayB0byBhdm9pZCByYWNlIGNvbmRpdGlvbiBhbmQNCmEgY29tbWVudCB3aXRoIGEgZGVzY3Jp
+cHRpb24gb2YgdGhlIGZ1bmN0aW9uIHdvcmsNCi0gcHJlc2VydmUgZXJyb3Igb2Ygc21jX2NyZWF0
+ZV9jaGFubmVsIGluIHNjbWlfcHJvYmUNCi0gY2hlY2sgc2NtaSBzaG1lbSBhZGRyZXNzIGFsaWdu
+bWVudCBhcyB3ZWwgYXMgaXQgaXMgZG9uZSBmb3Igc2l6ZQ0KLSBjaGVjayBmb3IgZC0+YXJjaC5z
+Y2lfZGF0YSAhPSBOVUxMIGluIHNjbWlfaGFuZGxlX2NhbGwNCi0gdXNlIFNDTUlfU0hNRU1fTUFQ
+UEVEIHNpemUgZm9yIGlvbWVtX3Blcm1pdF9hY2Nlc3MNCi0gY2hhbmdlIGxlbiB0eXBlIHRvIHVu
+c2lnbmVkIGluIHNobWVtX3tnZXR8cHV0fV9tZXNzYWdlDQotIHJlbmFtZSBzaG1lbV9jaGFubmVs
+X2lzX2ZyZWUgdG8gc2htZW1fY2hhbm5lbF9zdGF0dXMNCi0gYWRkIGNvbW1lbnQgYWJvdXQgc2tp
+cHBpbmcgbWVzc2FnZSBzdGF0dXMgd2hlbiBnZXR0aW5nIG1lc3NhZ2UgcmVzcG9uc2UNCi0gU2V0
+IGNvcnJlY3QgYWdlbnRfaWQgcmFuZ2VzIGZvciBkb20wbGVzcyBhbmQgYSB0b29sc3RhY2suIEFn
+ZW50X2lkIDANCmlzIG5vdCBiaW5kZWQgZm9yIGRvbTAgc28gY2FuIGJlIHJldXNlZC4gQWxzbyBt
+ZW50aW9uZWQgdGhhdA0KVUlOVDhfTUFYICgyNTUpIGlzIHRyZWF0ZWQgYXMgaW52YWxpZCBhZ2Vu
+dF9pZC4NCi0gU3BsaXQgaHlwZXJ2aXNvciBhbmQgdG9vbHN0YWNrIGNoYW5nZXMgaW50byBzZXBh
+cmF0ZSBjb21taXRzDQotIG1vdmUgaW5pdCBsaXN0IGFuZCBzcGluIGluaXQgYWZ0ZXIgaW5pdGlh
+bCBjaGVja3MgaW4gcHJvYmUgY2FsbA0KLSBmaXggdHlwbyBpbiBjb21tZW50cw0KLSBjbGVhbiBy
+ZXNvdXJjZXMgd2hlbiBzY2lfcmVnaXN0ZXIgcmV0dXJucyBhbiBlcnJvci4NCi0gU3BsaXQgaHlw
+ZXJ2aXNvciBhbmQgdG9vbHN0YWNrIGNoYW5nZXMgaW50byBzZXBhcmF0ZSBjb21taXRzDQotIHJl
+cGhyYXNlIHNlY3Rpb24gYWJvdXQgL2Zpcm13YXJlL3NjbWkuIE1lbnRpb25lZCB0aGF0IHRoaXMg
+bm9kZSBpcw0KdGFrZW4gZnJvbSBIb3N0IERUIGFuZCBjb3BpZWQgdW5tb2RpZmllZC4NCi0gZml4
+IHhlbixyZWcgYWRkcmVzcyBmb3Igc2Vjb25kYXJ5IGRvbWFpbnMgZm9yIERvbTBsZXNzIGNvbmZp
+Z3VyYXRpb24NCg0KQ2hhbmdlcyBpbiB2OToNCi0gdHJlYXQgU0NJIGFzIGEgZ2F0ZSBmb3IgWEVO
+X0RPTUNUTF8qYXNzaWduX2RldmljZTogYWJvcnQgYmVmb3JlDQpJT01NVSBpZiBzY2lfZG9fZG9t
+Y3RsKCkgcmV0dXJucyBhbiBlcnJvciBvdGhlciB0aGFuIC1FTlhJTywgaW5zdGVhZA0Kb2YgdHJ5
+aW5nIHRvIHByb3BhZ2F0ZSBTQ0kgZXJyb3JzIGFmdGVyIGEgc3VjY2Vzc2Z1bCBJT01NVQ0Kb3Bl
+cmF0aW9uLiBUaGlzIGF2b2lkcyBwYXJ0aWFsIHN1Y2Nlc3MgYW5kIHRoZSBuZWVkIGZvciBJT01N
+VSByb2xsYmFjay4NCi0gcmVtb3ZlIGVhcmx5IHJldHVybiBmcm9tIGRvX2RvbWN0bCgpIGluIHRo
+ZSBhc3NpZ25fZGV2aWNlDQpwYXRoIHRvIGtlZXAgUkNVIGhhbmRsaW5nIGludGFjdC4NCi0gY2hh
+bmdlIElTX0VOQUJMRUQoKikgdG8gI2lmZGVmIGluIHNjaV9kb19kb21jdGwgcXVhcmQNCi0gcmV3
+b3JkIGNvbW1pdCBkZXNjcmlwdGlvbiB0byByZWZlciB0byBtZW1jcHlfZnJvbWlvIGFuZCBtZW1j
+cHlfdG9pbw0KLSBvcmRlcmluZyBvYmoteSBpbiBNYWtlZmlsZQ0KLSByZW5hbWUgQUxMX0xJQlMg
+dG8gQVJDSF9MSUJTDQotIGRyb3AgaW8uaCBhbmQgbW92ZSBkZWZpbml0aW9ucyB0byB0aGUgY29t
+bW9uIGhlYWRlciwgZml4IGNvbW1lbnRzIHRvDQpiZSBhcmNoIG5ldXRyYWwNCi0gdXBkYXRlIGNv
+bW1lbnRzIGZvciBtZW1jcHlfe2Zyb20vdG99aW8gaW1wbGVtZW50YXRpb24NCi0gc29ydCBhbmQg
+cmVmYWN0b3IgTUFJTlRBSU5FUlMgZW50aWVzDQotIHJlbW92ZSBTcHVyaW91cyBjaGFuZ2VzDQot
+IGFkZCBleHRyYSBjaGVjayB0byBhdm9pZCBBU1NFUlQgd2hlbiBjYWxsaW5nIHVubWFwX2NoYW5u
+ZWxfbWVtb3J5DQpmcm9tIGFzc2lnbiBkZXZpY2UgbWV0aG9kDQotIHNldCBjb3JyZWN0IHR4IGZs
+YWcgdG8gU0NNSV9CQVNFX0FHRU5UX1BFUk1JU1NJT05TX1JFU0VUIHdoZW4NCmZyZWVpbmcgcmVz
+b3VyY2VzLiBGbGFnIHNob3VsZCBiZSBzZXQgdG8gMSBhY2NvcmRpbmcgdG8gdGhlDQpzZWN0aW9u
+IDQuMi4yLjEyIFswXS4NCi0gZml4IGR0IG5vZGUgY29wbWFyaW5nDQotIG1vdmVkIGNoYW5uZWwt
+PnNobWVtIGNoZWNrIGZyb20gQVNTRVJUIGluIHVubWFwX21lbW9yeV9jaGFubmVsIHRvDQoiaWYi
+IHN0YXRlbWVudC4gVGhpcyB3aWxsIHByZXZlbnQgZmlyaW5nIEFTU0VSVCBpZg0KdW5tYXBfY2hh
+bm5lbF9tZW1vcnkgd2FzIGNhbGxlZCB0d2ljZSBvbiB0aGUgc2FtZSBjaGFubmVsLg0KDQpDaGFu
+Z2VzIGluIHY4Og0KLSBjaGVjayBmb3IgQ09ORklHX0FSTV9TQ0kgdG8gYmUgZWJhYmxlZCBpbnN0
+ZWFkIG9mIENPTUZJR19BUk0gYmVmb3JlDQpjYWxsaW5nIHNjaV9kb19kb21jdGwNCi0gcmV3b3Jr
+IHNjaV9kb19kb21jdGwgY2FsbCB0byBhdm9pZCBleHRyYSBjaGVja3MsIGltcHJvdmVkIGVycm9y
+DQpoYW5kbGluZy4NCi0gZG8gbm90IHByb3BhZ2F0ZSByZXQxIGlmIHNjaV9kb19kb21jdGwgcmV0
+dXJuZWQgcG9zaXRpdmUgcmV0DQotIHVwZGF0ZWQgY29tbWVudCBpbiBkb21jdGwuYyBjb2RlDQot
+IHN3aXRjaGVkIHRvIG9yZGVyZWQgYWNjZXNzb3JzIHRvIGFkZHJlc3MgdGhlIG9yZGVyaW5nIGFu
+ZCBiYXJyaWVyDQpjb25jZXJucy4NCi0gdXBkYXRlZCB0aGUgZG9jdW1lbnRhdGlvbiB0byBtYXRj
+aCB0aGUgaW1wbGVtZW50YXRpb24gYW5kIGV4cGxpY2l0bHkNCnN0YXRlIHRoZSBzdXBwb3J0ZWQg
+YWNjZXNzIHNpemVzIGFuZCBncmFudWxhcml0eS4NCi0gcmVuYW1lIG1lbWNweV8qIGltcGxlbWVu
+dGF0aW9uIGZpbGVzIHRvIG1lbWNwdS0qIHRvIGZvbGxvdyBuYW1pbmcNCmNvbnZlbnNpb24NCi0g
+Zml4IGluZGVudGF0aW9uIHRvIG1hdGNoIFhlbiBzdHlsZQ0KLSBmaXggaW50ZW5kYXRpb24gdG8g
+bWF0Y2ggWGVuIHN0eWxlDQotIG1vdmUgbWVtY3B5LXtmcm9tL3RvfWlvIHRvIG1vcmUgY29udmVu
+aWVudCBsaWJyYXJ5IHBsYWNlDQotIHVwZGF0ZSB4ZW5fc2NtaSBmdW5jX2lkIGluIGNvbW1pdCBk
+ZXNjcmlwdGlvbg0KLSB1cGRhdGVkIGRvY3VtZW50YXRpb24gd2l0aCB0aGUgbmV3IERUIGZvcm1h
+dA0KLSB1cGRhdGVkIG9wdF9kb20wX3NjbWlfYWdlbnRfaWQgc2V0dGluZyB0byBhdm9pZCBpdCB0
+byBiZSBlcXVhbA0KU0NNSV9BR0VOVF9JRF9JTlZBTElELg0KLSBjaGFuZ2VkIFNDTUlfQUdFTlRf
+SURfSU5WQUxJRCBmcm9tIDB4ZmYgdG8gVUlOVDhfTUFYIHdoaWNoIG1ha2VzDQpjb2RlIG1vcmUg
+Y2xlYXIgc2hvd2luZyB0aGF0IFVJTlQ4X01BWCBpcyB0aGVhdGVkIGxpa2UgaW52YWxpZA0KYWdl
+bnRfaWQgYW5kIGNvdWxkbid0IGJlIHVzZWQuIEFsc28gZXhjbHVkZWQgU0NNSV9BR0VOVF9JRF9J
+TlZBTElEDQpmcm9tIGFjY2VwdGFibGUgdmFsdWUgcmFuZ2UNCi0gcmVtb3ZlIG91dGRhdGVkIHhl
+bixjb25maWcgcHJvcGVydHkgaWdub3JlLCBhZGRlZCB4ZW4sc2NpIGNvbXBhdGlibGUNCnRvIHNr
+aXBfbWF0Y2hlcyBpbiBoYW5kbGVfbm9kZQ0KLSBhZGQgZG9jdW1lbnRhdGlvbiBmb3IgcHJlLWV4
+aXN0aW5nIHNjbWktc21jLXBhc3N0aHJvdWdoIGNvbW1hbmQgbGluZQ0Kb3B0aW9uIGluIGFscGhh
+YmV0aWNhbGx5IGNvcnJlY3QgbG9jYXRpb24gKGluICdzJyBzZWN0aW9uKQ0KLSBhZGQgbm90ZSB0
+byBjb21taXQgZGVzY3JpcHRpb24gYWJvdXQgZG9jdW1lbnRhdGlvbiBmb3IgcHJldmlvdXNseQ0K
+dW5kb2N1bWVudGVkIHNjbWktc21jLXBhc3N0aHJvdWdoDQotIEZpeCBTTUMgSURzIGluIERUIGV4
+YW1wbGVzIChYZW4gbWFuYWdlbWVudCB1c2VzIDB4ODIwMDAwMDMsIERvbTAgdXNlcyAweDgyMDAw
+MDAyKQ0KLSBBZGQgZXhwbGljaXQgbm90ZSBleHBsYWluaW5nIHdoeSBEb20wIGFuZCBYZW4gY2hh
+bm5lbHMgZG8gbm90IGNvbmZsaWN0DQotIERvY3VtZW50IGRvbTBsZXNzIG11bHRpLWFnZW50IGNv
+bmZpZ3VyYXRpb24gZXhhbXBsZSAoeGVuLHNjaV90eXBlIC8geGVuLHNjaS1hZ2VudC1pZCkNCi0g
+QWRkIHNjbWlfeGVuIG5vZGUgdG8gYWdlbnQtZGlzY292ZXJ5IGV4YW1wbGUgd2l0aCAjc2NtaS1z
+ZWNvbmRhcnktYWdlbnRzLWNlbGxzID0gMg0KLSBEcm9wIGRvbTA9c2NpLWFnZW50LWlkIGNvbW1h
+bmQgbGluZSBoYW5kbGluZzsgRG9tMCBTQ01JIGlzIG5vdyBlbmFibGVkIHZpYQ0KICB4ZW4sZG9t
+MC1zY2ktYWdlbnQtaWQgaW4gdGhlIHhlbixzY2kgRFQgY29udGFpbmVyDQotIFJlZnJlc2ggZG9j
+cyBhbmQgZXhhbXBsZXMgdG8gbWVudGlvbiB0aGUgRFQgcHJvcGVydHkgaW5zdGVhZCBvZiB0aGUg
+Y21kbGluZSBvcHRpb24NCi0gdXBkYXRlIGRvY3VtZW50YXRpb24gdG8gbWF0Y2ggdGhlIGxhc3Qg
+RFQgZm9ybWF0DQotIGZpeGVkIFJTVDogIi4uLiBjb2RlLWJsb2NrOjogZHRzIiAtPiAiLi4gY29k
+ZS1ibG9jazo6IGR0cyINCi0gdXBkYXRlIGRvY3VtZW50YXRpb24gd2l0aCBkb20wbGVzcyBjb25m
+aWd1cmF0aW9uIGV4YW1wbGUNCi0gdXBkYXRlIGRvY3VtZW50YXRpb24gd2l0aCBuZXcgcGFyYW0g
+eGVuLGRvbTAtc2NpLWFnZW50LWlkDQppbnN0ZWFkIG9mIHRoZSBjb21tYW5kIGxpbmUgcGFyYW1l
+dGVyDQoNCkNoYW5nZXMgaW4gdjc6DQotIHVwZGF0ZSBkb21jdGwgdG8gYnVpbGQgb24gYm90aCBB
+cm0gYW5kIHg4NiBwbGF0Zm9ybXMNCi0gbW92ZSByZXQxIGRlY2xhcmF0aW9uIHRvIHRoZSB0b3Ag
+b2YgdGhlIGZ1bmN0aW9uIGFzIHJlcXVpcmVkIGJ5IGNvZGUNCnN0eWxlDQotIHg4NiBndWlkYW5j
+ZTogcmVtb3ZlZCB0aGUgc3BlY3VsYXRpdmUgbm90ZTsgaGVhZGVyIG5vdyBqdXN0IHNheXMNCiAg
+ZWFjaCBhcmNoIHN1cHBsaWVzIGl0cyBvd24gaW1wbGVtZW50YXRpb24gb3IgbWFjcm8uDQotIG5h
+bWUgc3BhY2luZzogZHJvcHBlZCB0aGUgZG91YmxlLXVuZGVyc2NvcmU7IHRoZSBoZWxwZXJzIGFy
+ZSBub3cNCiAgbWVtY3B5X2Zyb21pbyAvIG1lbWNweV90b2lvLiBUaGUgaGVhZGVyIGFsc28gZXhw
+bGljaXRseSBhbGxvd3MgYW4NCiAgYXJjaCB0byBkZWZpbmUgdGhlc2UgYXMgbWFjcm9zIGJlZm9y
+ZSBpbmNsdWRpbmcgaXQuDQotIHVwZGF0ZWQgaW8uYyB0byBrZWVwIDMyLWJpdCB0cmFuc2ZlcnMg
+c2FmZSBvbiBhcm0zMg0KLSBtb3ZlZCB0byBfX3Jhd19yZWFkKi9fX3Jhd193cml0ZSogYWNjZXNz
+b3JzIHRvIGF2b2lkIGVuZGlhbm5lc3MgY29udmVyc2lvbi4NCi0gc3BsaXQgdGhlIGhlbHBlcnMg
+aW50byBzZXBhcmF0ZSBjb21waWxhdGlvbiB1bml0cw0KLSByZXdvcmsgc2NtaSBub2RlcyBmb3Ig
+eGVuIHRvIG1hdGNoIG9uIGNvbXBhdGlibGUgc3RyaW5nIGluc3RlYWQgb2YNCnRoZSBkaXJlY3Qg
+cGF0aA0KLSB1cGRhdGUgZG9jdW1lbnRhdGlvbiBpbiBzZWN0aW9uIG9mIHRoZSB4ZW5fc2NtaSBj
+b25maWd1cmF0aW9uIHdoaWNoDQppcyBtYXRjaGVkIGJ5ICJ4ZW4sc2NpIiBjb21wYXRpYmxlIGlu
+c3RlYWQgb2YgdGhlIGRpcmVjdCBwYXRoLg0KDQpDaGFuZ2VzIGluIHY2Og0KLSBjaGFuZ2UgaW9t
+bXVfZG9fZG9tY3RsIGFuZCBzY2lfZG9fZG9tY3RsIGNvbW1hbmQgb3JkZXIgYW5kDQpjYWxsIHNj
+aV9kb19kb21jdGwgZmlyc3Qgd2hpY2ggd2lsbCBwcm9kdWNlIGNsZWFuZXIgY29kZSBwYXRoLg0K
+QWxzbyBkcm9wcGVkIGNoYW5naW5nIHJldHVybiBjb2RlIHdoZW4gaW9tbXUgd2FzIGRpc2FibGVk
+IGluDQppb21tdV9kb19kb21jdGwuDQotIHNvcnRlZCBvYmpzIGluIE1ha2VmaWxlIGFsaGFiZXRp
+Y2FsbHkNCi0gYWRkZWQgbmV3bGluZSBhdCB0aGUgZW5kIG9mIE1ha2VmaWxlDQotIHVzZWQgdWlu
+dHtOfV90IGludGVhZCBvZiB1e059DQotIGFkZCBjb21tZW50IGFib3V0IHdoeSAzMiBiaXQgSU8g
+b3BlcmF0aW9ucyB3ZXJlIHVzZWQNCi0gdXBkYXRlZCBjYXN0IG9wZXJ0YWlvbnMgdG8gYXZvaWQg
+ZHJvcHBpbmcgY29uc3RuZXNzIHdoaWNoIGlzIHdyb25nDQotIG1vdmUgZnVuY3Rpb24gZGVmaW5p
+dGlvbnMgdG8gZ2VuZXJpYyBwbGFjZSBzbyB0aGUgY291bGQgYmUgcmV1c2VkIGJ5DQpvdGhlciBh
+cmNoDQotIGFkZCBTUERYIHRhZyB0byBpby5jDQotIHVwZGF0ZWQgc2NtaS1zaG1lbSB0byB1c2Ug
+aW8uaCBmcm9tIGdlbmVyaWMgbG9jYXRpb24NCi0gdXBkYXRlIHNjbWlfYWdlbnRfaWQgcGFyYW1l
+dGVyIHRvIGJlIHByb3ZpZGVkIGluc2lkZSBkb20wPSBwYXJhbWV0ZXINCmxpc3QgYW5kIGhhdmUg
+dGhlIGZvbGxvd2luZyBmb3JtYXQgImRvbTA9c2NpLWFnZW50LWlkPTAiDQpUaGlzIGNoYW5nZSB3
+YXMgZG9uZSBhcyBhIHJlc3BvbnNlIGZvciBTdGVmYW5vIGNvbW1lbnQgYW5kDQpyZXF1aXJlcyBh
+IGxvdCBvZiBjb2RlIGNoYW5nZXMsIGJ1dCBwcm9kdWNlcyBtdWNoIGNsZWFuZXIgc29sdXRpb24N
+CnRoYXQncyB3aHkgSSd2ZSBhZGRlZCBpdCB0byB0aGUgY29kZS4NCi0gZml4IGZpbGUgY29tbWVu
+dHMgYW5kIHJldHVybiBjb2Rlcw0KLSBmaXggbGVuZ2h0IGNoZWNrcyBpbiBzaG1lbV97Z2V0LHB1
+dH1fbWVzc2FnZSB0byB1c2Ugb2Zmc2V0b2YNCi0gcmVtb3ZlIGxlbiBtZW1iZXIgZnJvbSBzY21p
+X2NoYW5uZWwgc3RydWN0dXJlIGFzIGl0IGlzIG5vdCB1c2VkDQotIHNldCBzY21pLXNlY29uZGFy
+eS1hZ2VudHMgcHJvcGVydHkgdG8gYmUgbWFuZGF0b3J5IHNpbmNlIGlmIG5vDQpzZWNvbmRhcnkg
+YWdlbnRzIHdlcmUgcHJvdmlkZWQgdGhlbiB0aGVyZSBpcyBubyBzZW5jZSB0byBlbmFibGUgc2Nt
+aQ0Kd2hlbiBubyBzZWNvbmRhcnkgYWdlbnRzIGFyZSBwb3B1bGF0ZWQgdG8gdGhlIERvbWFpbnMN
+Ci0gdXBkYXRlIGRvY3VtZW50YXRpb24gaW4gYm9vdGluZy50eHQsIGFkZGVkIHhlbl9zY21pIG5v
+ZGUgdG8gdGhlDQpleGFtcGxlDQotIGFkanVzdCBkLT5hcmNoLnNjaV9lbmFibGVkIHZhbHVlIGlu
+IHNjbWlfZG9tYWluX2Rlc3Ryb3kNCi0gZml4IGxvY2sgbWFuYWdlbWVudCBpbiBzbWNfY3JlYXRl
+X2NoYW5uZWwgY2FsbA0KLSBhdm9pZCBleHRyYSBtYXBfY2hhbm5lbF9tZW1vcnkgY29tbWFuZCBm
+b3IgWGVuIG1hbmFnZW1lbnQgY2hhbm5lbA0KYmVjYXVzZSBjb2xsZWN0X2FnZW50X2lkIGNhbGwg
+dW5tYXBzIG1lbW9yeSBpZiBET01JRF9YRU4gaXMgbm90DQpzZXQuIFNvIGZvciBYZW4gbWFuYWdl
+bWVudCBjaGFubmVsIHdlIGNhbiBpbml0IGRvbWFpbl9pZCBhZCBET01JRF9YRU4NCmJlZm9yZSBj
+YWxsaW5nIGNvbGxlY3RfYWdlbnRfaWQgc28gbWVtb3J5IHNob3VsZG4ndCBiZSB1bm1hcHBlZC4N
+Ci0gcmVtb3ZlIGFsbCBIVkMgbWVudGlvbnMgZnJvbSB0aGUgbXVsdGktYWdlbnQgZG9jDQotIHVw
+ZGF0ZSBzY2ktYWdlbnQtaWQgcGFyYW1ldGVyIGRlc2NyaXB0aW9uIGluIHRoZSBkb2N1bWVudGF0
+aW9uDQotIGFkZCBtaXNzaW5nIFNpZ24tb2YNCi0gbWlub3IgZml4ZXMgYWNyb3NzIHRoZSBkb2N1
+bWVudA0KDQpDaGFuZ2VzIGluIHY1Og0KLSByZXR1cm4gLUVJTlZBTCBpZiBtZWRpYXRvciB3aXRo
+b3V0IGFzc2lnbl9kdF9kZXZpY2Ugd2FzIHByb3ZpZGVkDQotIGludmVydCByZXR1cm4gY29kZSBj
+aGVjayBmb3IgaW9tbXVfZG9fZG9tY3RsIGluDQpYRU5fRE9NQ1RMX2Fzc2lnbl9kZXZpY2UgZG9t
+Y3RsIHByb2Nlc3NpbmcgdG8gbWFrZSBjbGVhbmVyIGNvZGUNCi0gY2hhbmdlIC1FTk9UU1VQUCBl
+cnJvciBjb2RlIHRvIC1FTlhJTyBpbiBzY2lfZG9fZG9tY3RsDQotIGhhbmRsZSAtRU5YSU8gcmV0
+dXJuIGNvbWRlIG9mIGlvbW11X2RvX2RvbWN0bA0KLSBsZWF2ZSAhZHRfZGV2aWNlX2lzX3Byb3Rl
+Y3RlZCBjaGVjayBpbiBpb21tdV9kb19kdF9kb21jdGwgdG8gbWFrZQ0KY29kZSB3b3JrIHRoZSBz
+YW1lIHdheSBpdCdzIGRvbmUgaW4gImhhbmRsZV9kZXZpY2UiIGNhbGwgd2hpbGUNCmNyZWF0aW5n
+IGh3ZG9tKGRvbTApIGFuZCAiaGFuZGxlX3Bhc3N0aHJvdWdoX3Byb3AiIGNhbGwgZm9yIGRvbTBs
+ZXNzDQpjcmVhdGlvbg0KLSBkcm9wIHJldHVybiBjaGVjayBmcm9tIHNjaV9hc3NpZ25fZHRfZGV2
+aWNlIGNhbGwgYXMgbm90IG5lZWRlZA0KLSBkbyBub3QgcmV0dXJuIEVJTlZBTCB3aGVuIGFkZGln
+bl9kdF9kZXZpY2UgaXMgbm90IHNldC4gVGhhdCBpcw0KYmVjYXVzZSB0aGlzIGNhbGxiYWNrIGlz
+IG9wdGlvbmFsIGFuZCBub3QgaW1wbGVtZW50ZWQgaW4gc2luZ2xlLWFnZW50IGRyaXZlcg0KLSBt
+b3ZlIG1lbWNweV90b2lvL2Zyb21pbyB0byB0aGUgZ2VuZXJpYyBwbGFjZQ0KLSBmaXggZGV2aWNl
+LXRyZWUgZXhhbXBsZSBmb3JtYXQgaW4gYm9vdGluZy50eHQsIGFkZGVkICI7IiBhZnRlciAifSIu
+DQotIHVwZGF0ZSBkZWZpbmUgaW4gc2NtaS1wcm90by5oDQotIHVwZGF0ZSBkZWZpbmUgaW4gc2Nt
+aS1zaG1lbS5oIGZpbGUNCi0gc2NtaV9hc3NpZ25fZGV2aWNlIC0gZG8gbm90IGlnbm9yZSAtRU9Q
+Tk9UU1VQUCByZXR1cm4NCmNvZGUgb2YgdGhlIGRvX3NtY194ZmVyDQotIHJlbW92ZSBvdmVyd3Jp
+dGluZyBhZ2VudF9jaGFubmVsLT5hZ2VudF9pZCBhZnRlcg0KU0NNSV9CQVNFX0RJU0NPVkVSX0FH
+RU5UIGNhbGwNCi0gYWRkIG11bHRpLWFnZW50IGZpbGVzIHRvIHRoZSBNQUlOVEFJTkVSUw0KLSBh
+ZGQgU0NNSSBtdWx0aS1hZ2VudCBkZXNjcmlwdGlvbiB0byB0aGUgU1VQUE9SVC5tZA0KLSBoYW5k
+bGUgQVJNX1NNQ0NDX0lOVkFMSURfUEFSQU1FVEVSIHJldHVybiBjb2RlIGFuZCByZXR1cm4gLUVJ
+TlZBTA0KZm9yIHNtYyBjYWxsDQotIHVwZGF0ZWQgY29sbGVjdF9hZ2VudHMgZnVuY3Rpb24uIFNl
+dCBhZ2VudF9pZCBwYXJhbWV0ZXIgYXMgb3B0aW9uYWwNCmluIHNjbWktc2Vjb25kYXJ5LWFnZW50
+cyBkZXZpY2UtdHJlZSBwcm9wZXJ0eQ0KLSBpbnRyb2R1Y2UgIiNzY21pLXNlY29uZGFyeS1hZ2Vu
+dHMtY2VsbHMiIHBhcmFtZXRlciB0byBzZXQgaWYNCmFnZW50X2lkIHdhcyBwcm92aWRlZA0KLSBy
+ZWFubWUgeGVuLHNjbWktc2Vjb25kYXJ5LWFnZW50cyBwcm9wZXJ0eSB0byBzY21pLXNlY29uZGFy
+eS1hZ2VudHMNCi0gbW92ZSBtZW1jcHVfdG9pby9mcm9taW8gZm9yIHRoZSBnZW5lcmljIHBsYWNl
+DQotIHVwZGF0ZSBYZW4gdG8gZ2V0IG1hbmFnZW1lbnQgY2hhbm5lbCBmcm9tIC9jaG9zZW4veGVu
+LGNvbmZpZyBub2RlDQotIGdldCBoeXBlcnZpc29yIGNoYW5ubmVsIGZyb20gbm9kZSBpbnN0ZWFk
+IG9mIHVzaW5nIGhhcmRjb2RlZA0KLSB1cGRhdGUgaGFuZGxpbmcgc2NtaSBhbmQgc2htZW0gbm9k
+ZXMgZm9yIHRoZSBkb21haW4NCi0gU2V0IG11bHRpLWFnZW50IGRyaXZlciB0byBzdXBwb3J0IG9u
+bHkgQXJtNjQNCi0gcmV3b3JrIG11bHRpLWFnZW50IGRyaXZlciB0byBsZWF2ZSBIb3N0IERldmlj
+ZS10cmVlIHVubW9kaWZpZWQNCg0KQ2hhbmdlcyBpbiB2NDoNCi0gdG9vbHN0YWNrIGNvbW1lbnRz
+IGZyb20gQW50aG9ueSBQRVJBUkQNCi0gYWRkZWQgZG9tMGxlc3Mgc3VwcG9ydA0KLSBhZGRlZCBk
+b2MgZm9yICJ4ZW4sc2NtaS1zZWNvbmRhcnktYWdlbnRzIg0KDQpHcnlnb3JpaSBTdHJhc2hrbyAo
+Mik6DQogIHhlbi9kb21jdGw6IGNoYWluIFNDSSBoYW5kbGluZyBiZWZvcmUgSU9NTVUgaW4gYXNz
+aWduX2RldmljZSBkb21jdGwNCiAgZG9jczogYXJtOiBhZGQgU0NJIFNDTUkgU01DIG11bHRpLWFn
+ZW50IGRyaXZlciBkb2NzDQoNCk9sZWtzaWkgTW9pc2llaWV2ICg0KToNCiAgeGVuOiBhcm06IHNt
+Y2NjOiBhZGQgSU5WQUxJRF9QQVJBTUVURVIgZXJyb3IgY29kZQ0KICBsaWIvYXJtOiBBZGQgSS9P
+IG1lbW9yeSBjb3B5IGhlbHBlcnMNCiAgeGVuL2FybTogc2NtaTogaW50cm9kdWNlIFNDSSBTQ01J
+IFNNQyBtdWx0aS1hZ2VudCBkcml2ZXINCiAgdG9vbHMveGwvbGlieGw6IHdpcmUgdXAgU0NNSSBT
+TUMgbXVsdGktYWdlbnQgY29uZmlndXJhdGlvbg0KDQogTUFJTlRBSU5FUlMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHwgICAxICsNCiBTVVBQT1JULm1kICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgfCAgMTEgKw0KIC4uLi9hcm0vZmlybXdhcmUvYXJtLXNjbWku
+cnN0ICAgICAgICAgICAgICAgICB8IDQyMiArKysrKysrKysNCiBkb2NzL21hbi94bC5jZmcuNS5w
+b2QuaW4gICAgICAgICAgICAgICAgICAgICAgfCAgMTQgKw0KIGRvY3MvbWlzYy9hcm0vZGV2aWNl
+LXRyZWUvYm9vdGluZy50eHQgICAgICAgICB8IDE5NyArKysrKw0KIHRvb2xzL2xpYnMvbGlnaHQv
+bGlieGxfYXJtLmMgICAgICAgICAgICAgICAgICB8ICAgNCArDQogdG9vbHMvbGlicy9saWdodC9s
+aWJ4bF90eXBlcy5pZGwgICAgICAgICAgICAgIHwgICA0ICstDQogdG9vbHMveGwveGxfcGFyc2Uu
+YyAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDEyICsNCiB4ZW4vYXJjaC9hcm0vTWFrZWZp
+bGUgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgKw0KIHhlbi9hcmNoL2FybS9hcmNoLm1r
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArDQogeGVuL2FyY2gvYXJtL2RvbTBsZXNz
+LWJ1aWxkLmMgICAgICAgICAgICAgICAgIHwgIDExICsNCiB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1
+aWxkLmMgICAgICAgICAgICAgICAgICAgfCAgMzkgKw0KIHhlbi9hcmNoL2FybS9maXJtd2FyZS9L
+Y29uZmlnICAgICAgICAgICAgICAgICB8ICAxMiArDQogeGVuL2FyY2gvYXJtL2Zpcm13YXJlL01h
+a2VmaWxlICAgICAgICAgICAgICAgIHwgICAxICsNCiB4ZW4vYXJjaC9hcm0vZmlybXdhcmUvc2Np
+LmMgICAgICAgICAgICAgICAgICAgfCAgMzYgKw0KIHhlbi9hcmNoL2FybS9maXJtd2FyZS9zY21p
+LXByb3RvLmggICAgICAgICAgICB8IDE2NCArKysrDQogeGVuL2FyY2gvYXJtL2Zpcm13YXJlL3Nj
+bWktc2htZW0uYyAgICAgICAgICAgIHwgMTE4ICsrKw0KIHhlbi9hcmNoL2FybS9maXJtd2FyZS9z
+Y21pLXNobWVtLmggICAgICAgICAgICB8ICA0NSArDQogeGVuL2FyY2gvYXJtL2Zpcm13YXJlL3Nj
+bWktc21jLW11bHRpYWdlbnQuYyAgIHwgODMwICsrKysrKysrKysrKysrKysrKw0KIHhlbi9hcmNo
+L2FybS9pbmNsdWRlL2FzbS9maXJtd2FyZS9zY2kuaCAgICAgICB8ICAgOCArDQogeGVuL2FyY2gv
+YXJtL2luY2x1ZGUvYXNtL3NtY2NjLmggICAgICAgICAgICAgIHwgICAxICsNCiB4ZW4vYXJjaC9h
+cm0vbGliL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgfCAgIDIgKw0KIHhlbi9hcmNoL2Fy
+bS9saWIvbWVtY3B5LWZyb21pby5jICAgICAgICAgICAgICB8ICA1NSArKw0KIHhlbi9hcmNoL2Fy
+bS9saWIvbWVtY3B5LXRvaW8uYyAgICAgICAgICAgICAgICB8ICA1NSArKw0KIHhlbi9jb21tb24v
+ZG9tY3RsLmMgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxNSArDQogeGVuL2RyaXZlcnMv
+cGFzc3Rocm91Z2gvZGV2aWNlX3RyZWUuYyAgICAgICAgIHwgICA2ICsNCiB4ZW4vaW5jbHVkZS9w
+dWJsaWMvYXJjaC1hcm0uaCAgICAgICAgICAgICAgICAgfCAgIDMgKw0KIHhlbi9pbmNsdWRlL3hl
+bi9pby5oICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMCArDQogMjggZmlsZXMgY2hhbmdl
+ZCwgMjA3NyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQogY3JlYXRlIG1vZGUgMTAwNjQ0
+IHhlbi9hcmNoL2FybS9maXJtd2FyZS9zY21pLXByb3RvLmgNCiBjcmVhdGUgbW9kZSAxMDA2NDQg
+eGVuL2FyY2gvYXJtL2Zpcm13YXJlL3NjbWktc2htZW0uYw0KIGNyZWF0ZSBtb2RlIDEwMDY0NCB4
+ZW4vYXJjaC9hcm0vZmlybXdhcmUvc2NtaS1zaG1lbS5oDQogY3JlYXRlIG1vZGUgMTAwNjQ0IHhl
+bi9hcmNoL2FybS9maXJtd2FyZS9zY21pLXNtYy1tdWx0aWFnZW50LmMNCiBjcmVhdGUgbW9kZSAx
+MDA2NDQgeGVuL2FyY2gvYXJtL2xpYi9NYWtlZmlsZQ0KIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4v
+YXJjaC9hcm0vbGliL21lbWNweS1mcm9taW8uYw0KIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vYXJj
+aC9hcm0vbGliL21lbWNweS10b2lvLmMNCg0KLS0gDQoyLjM0LjENCg==
 
