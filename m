@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01610EDF141
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 09:58:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1230509.1536012 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 510ACEDF141
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Feb 2026 09:58:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1230530.1536021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqpvy-0000TG-Cd; Fri, 13 Feb 2026 09:57:58 +0000
+	id 1vqpwC-0001IE-OR; Fri, 13 Feb 2026 09:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1230509.1536012; Fri, 13 Feb 2026 09:57:58 +0000
+Received: by outflank-mailman (output) from mailman id 1230530.1536021; Fri, 13 Feb 2026 09:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vqpvy-0000SY-8R; Fri, 13 Feb 2026 09:57:58 +0000
-Received: by outflank-mailman (input) for mailman id 1230509;
- Fri, 13 Feb 2026 09:57:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vqpwC-0001I6-LT; Fri, 13 Feb 2026 09:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 1230530;
+ Fri, 13 Feb 2026 09:58:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Bqff=AR=redhat.com=marcandre.lureau@srs-se1.protection.inumbo.net>)
- id 1vqpos-0001Ng-2q
- for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 09:50:38 +0000
+ id 1vqpol-0001Na-9g
+ for xen-devel@lists.xenproject.org; Fri, 13 Feb 2026 09:50:31 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 716756db-08c1-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Feb 2026 10:50:35 +0100 (CET)
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6e29dd21-08c1-11f1-b163-2bf370ae4941;
+ Fri, 13 Feb 2026 10:50:30 +0100 (CET)
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-245-_JVeCy1lOY-Y9S-Du_iKbw-1; Fri,
- 13 Feb 2026 04:50:31 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-621-HKw9Op8PPjWopkCu_sg3xA-1; Fri,
+ 13 Feb 2026 04:50:25 -0500
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 50B3318005B7; Fri, 13 Feb 2026 09:50:29 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 20FCD195FDE0; Fri, 13 Feb 2026 09:50:24 +0000 (UTC)
 Received: from localhost (unknown [10.44.22.41])
  by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 9A67819560B9; Fri, 13 Feb 2026 09:50:28 +0000 (UTC)
+ id 3453619560BD; Fri, 13 Feb 2026 09:50:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,19 +54,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 716756db-08c1-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 6e29dd21-08c1-11f1-b163-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770976234;
+	s=mimecast20190719; t=1770976229;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VbW6jTOEG9iYTux9Gled281r+tDrauM450W3fBHk0XQ=;
-	b=LQUAgaWEVACgPTWW6ZrzeGB0CI0sE9XLv3E/JaHctbxq3Zu7ZpveyGVW6vx8SKLegoJsJN
-	Y3+JaGwt1K1nYQ0FxlrStNyvSOK9T0jiJS1J64/mn0bXGcuHUcTUDohfmftHJXEu6mQ1an
-	ASeU3K/SIQbRz2l8zI+bL5Bo07/rBZk=
-X-MC-Unique: _JVeCy1lOY-Y9S-Du_iKbw-1
-X-Mimecast-MFC-AGG-ID: _JVeCy1lOY-Y9S-Du_iKbw_1770976229
+	bh=jM55cKZhaLYd8jeB1eDli6p7CvLSuDmkHDqz2KhxR1g=;
+	b=h3UVB8tNDRf3MDzi1oenT3Bo/ty4GP17r+RukgshcugBaqH39+Km2wG2s6+iZjETgYjzJt
+	/tzQ7q6+jkmk6AK4EJQqg28LgNzo0sG0cqtPoii4z2r/Mhz8xxXTWaspdRS7Jsl4BifNeg
+	Sr/HTvy4HW4nmWOpCkCdNXwKDy4qLgc=
+X-MC-Unique: HKw9Op8PPjWopkCu_sg3xA-1
+X-Mimecast-MFC-AGG-ID: HKw9Op8PPjWopkCu_sg3xA_1770976224
 From: marcandre.lureau@redhat.com
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -82,108 +82,62 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
 	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>
-Subject: [PULL v2 15/15] baum: Add copy/paste bindings
-Date: Fri, 13 Feb 2026 10:49:34 +0100
-Message-ID: <20260213094938.4074478-16-marcandre.lureau@redhat.com>
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Subject: [PULL v2 13/15] error-report: make real_time_iso8601() public
+Date: Fri, 13 Feb 2026 10:49:32 +0100
+Message-ID: <20260213094938.4074478-14-marcandre.lureau@redhat.com>
 In-Reply-To: <20260213094938.4074478-1-marcandre.lureau@redhat.com>
 References: <20260213094938.4074478-1-marcandre.lureau@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: tvSfgGXtg1qXtVBXDKvuIhJHVaF6d_cPunGplMYsK7s_1770976229
+X-Mimecast-MFC-PROC-ID: OzU2S9aB7JYJK05V94Oazw0IKUz2EC_qwiyZ9FVDBgo_1770976224
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-Brltty interprets
+To be reused in the following commit.
 
-- TL1 (i.e. Display1) + routing as clip new
-- TL2 (i.e. Display2) + routing as clip add
-- TR1 (i.e. Display4) + routing as copy line
-- TR2 (i.e. Display5) + routing as copy rect
-
-https://github.com/brltty/brltty/blob/master/Tables/Input/bm/routing6.kti
-
-- BAUM_TL1+BAUM_TL2+BAUM_TL3+BAUM_TR1 (i.e.
-Display1+Display2+Display3+Display4) as paste
-
-https://github.com/brltty/brltty/blob/master/Tables/Input/bm/d6.kti
-
-Signed-off-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
-[ Marc-André - style fixes ]
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Message-ID: <20260213000551.2446777-1-samuel.thibault@ens-lyon.org>
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Message-ID: <20260201173633.413934-3-vsementsov@yandex-team.ru>
 ---
- chardev/baum.c | 38 ++++++++++++++++++++++++++++++++++++--
- 1 file changed, 36 insertions(+), 2 deletions(-)
+ include/qemu/error-report.h | 6 ++++++
+ util/error-report.c         | 3 +--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/chardev/baum.c b/chardev/baum.c
-index 1219963656b..ac1e535ba8e 100644
---- a/chardev/baum.c
-+++ b/chardev/baum.c
-@@ -1,7 +1,7 @@
- /*
-  * QEMU Baum Braille Device
-  *
-- * Copyright (c) 2008, 2010-2011, 2016-2017 Samuel Thibault
-+ * Copyright (c) 2008, 2010-2011, 2016-2017, 2026 Samuel Thibault
-  *
-  * Permission is hereby granted, free of charge, to any person obtaining a copy
-  * of this software and associated documentation files (the "Software"), to deal
-@@ -561,9 +561,38 @@ static void baum_chr_read(void *opaque)
-         case BRLAPI_KEY_TYPE_CMD:
-             switch (code & BRLAPI_KEY_CMD_BLK_MASK) {
-             case BRLAPI_KEY_CMD_ROUTE:
--                baum_send_key(baum, BAUM_RSP_RoutingKey, (code & BRLAPI_KEY_CMD_ARG_MASK)+1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey,
-+                              (code & BRLAPI_KEY_CMD_ARG_MASK) + 1);
-                 baum_send_key(baum, BAUM_RSP_RoutingKey, 0);
-                 break;
-+            case BRLAPI_KEY_CMD_CLIP_NEW:
-+                baum_send_key(baum, BAUM_RSP_TopKeys, BAUM_TL1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey,
-+                              (code & BRLAPI_KEY_CMD_ARG_MASK) + 1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey, 0);
-+                baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-+                break;
-+            case BRLAPI_KEY_CMD_CLIP_ADD:
-+                baum_send_key(baum, BAUM_RSP_TopKeys, BAUM_TL2);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey,
-+                              (code & BRLAPI_KEY_CMD_ARG_MASK) + 1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey, 0);
-+                baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-+                break;
-+            case BRLAPI_KEY_CMD_COPY_LINE:
-+                baum_send_key(baum, BAUM_RSP_TopKeys, BAUM_TR1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey,
-+                              (code & BRLAPI_KEY_CMD_ARG_MASK) + 1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey, 0);
-+                baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-+                break;
-+            case BRLAPI_KEY_CMD_COPY_RECT:
-+                baum_send_key(baum, BAUM_RSP_TopKeys, BAUM_TR2);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey,
-+                              (code & BRLAPI_KEY_CMD_ARG_MASK) + 1);
-+                baum_send_key(baum, BAUM_RSP_RoutingKey, 0);
-+                baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-+                break;
-             case 0:
-                 switch (code & BRLAPI_KEY_CMD_ARG_MASK) {
-                 case BRLAPI_KEY_CMD_FWINLT:
-@@ -606,6 +635,11 @@ static void baum_chr_read(void *opaque)
-                     baum_send_key(baum, BAUM_RSP_TopKeys, BAUM_TL1|BAUM_TL3|BAUM_TR1);
-                     baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-                     break;
-+                case BRLAPI_KEY_CMD_PASTE:
-+                    baum_send_key(baum, BAUM_RSP_TopKeys,
-+                                  BAUM_TL1 | BAUM_TL2 | BAUM_TL3 | BAUM_TR1);
-+                    baum_send_key(baum, BAUM_RSP_TopKeys, 0);
-+                    break;
-                 }
-             }
-             break;
+diff --git a/include/qemu/error-report.h b/include/qemu/error-report.h
+index 3ae2357fda5..dc423d36071 100644
+--- a/include/qemu/error-report.h
++++ b/include/qemu/error-report.h
+@@ -74,4 +74,10 @@ extern bool message_with_timestamp;
+ extern bool error_with_guestname;
+ extern const char *error_guest_name;
+ 
++/*
++ * Return current datetime in ISO 8601 format.
++ * Caller is responsible to g_free() the returned string.
++ */
++char *real_time_iso8601(void);
++
+ #endif
+diff --git a/util/error-report.c b/util/error-report.c
+index 1b17c11de19..d6b7448183a 100644
+--- a/util/error-report.c
++++ b/util/error-report.c
+@@ -169,8 +169,7 @@ static void print_loc(void)
+     }
+ }
+ 
+-static char *
+-real_time_iso8601(void)
++char *real_time_iso8601(void)
+ {
+     g_autoptr(GDateTime) dt = g_date_time_new_now_utc();
+     return g_date_time_format_iso8601(dt);
 -- 
 2.52.0
 
