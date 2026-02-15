@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCE6EF586F
-	for <xen-devel@archiver.kernel.org>; Sun, 15 Feb 2026 09:14:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1233227.1537032 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D8EE63F08
+	for <xen-devel@archiver.kernel.org>; Sun, 15 Feb 2026 18:20:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1233477.1537052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vrYC2-0005x5-Ei; Sun, 15 Feb 2026 09:13:30 +0000
+	id 1vrgij-0000hR-0Z; Sun, 15 Feb 2026 18:19:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1233227.1537032; Sun, 15 Feb 2026 09:13:30 +0000
+Received: by outflank-mailman (output) from mailman id 1233477.1537052; Sun, 15 Feb 2026 18:19:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vrYC2-0005wx-AG; Sun, 15 Feb 2026 09:13:30 +0000
-Received: by outflank-mailman (input) for mailman id 1233227;
- Sun, 15 Feb 2026 09:13:28 +0000
+	id 1vrgii-0000hK-U4; Sun, 15 Feb 2026 18:19:48 +0000
+Received: by outflank-mailman (input) for mailman id 1233477;
+ Sun, 15 Feb 2026 18:19:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vrrr=AT=codewreck.org=asmadeus@srs-se1.protection.inumbo.net>)
- id 1vrYBz-0005wo-Rs
- for xen-devel@lists.xenproject.org; Sun, 15 Feb 2026 09:13:28 +0000
-Received: from submarine.notk.org (submarine.notk.org [62.210.214.84])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 92792561-0a4e-11f1-9ccf-f158ae23cfc8;
- Sun, 15 Feb 2026 10:13:22 +0100 (CET)
-Received: from gaia.codewreck.org (localhost [127.0.0.1])
- by submarine.notk.org (Postfix) with ESMTPS id 4AEBF14C2DE;
- Sun, 15 Feb 2026 10:13:17 +0100 (CET)
-Received: from localhost (gaia.codewreck.org [local])
- by gaia.codewreck.org (OpenSMTPD) with ESMTPA id acf4b99f;
- Sun, 15 Feb 2026 09:13:15 +0000 (UTC)
+ <SRS0=+38R=AT=citrix.com=abdelkareem.abdelsaamad@srs-se1.protection.inumbo.net>)
+ id 1vrgii-0000h9-ET
+ for xen-devel@lists.xenproject.org; Sun, 15 Feb 2026 18:19:48 +0000
+Received: from na1pdmzitismtp02.tibco.com (na1pdmzitismtp02.tibco.com
+ [160.101.131.9]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e5f4abf6-0a9a-11f1-9ccf-f158ae23cfc8;
+ Sun, 15 Feb 2026 19:19:43 +0100 (CET)
+Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 84F4E813CD97;
+ Sun, 15 Feb 2026 13:19:16 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,42 +41,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92792561-0a4e-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org;
-	s=2; t=1771146799;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=X6PMMPGz+jLe5ualpnm5Aab0p5EjTgChnMRnoKKA/Fs=;
-	b=ohM1tTgfFBEmPiR3IPGDXoOqOAcf/5fyLo5GMbtawe3lv4QXeHSR6Tfjg3CTsEKJa/0r1a
-	ECI8dgKfua712El69ShX/WNWoB2KFNbkwlbSG627Xwz1xs43TzGJpLVdxDalz0jjV3cL7/
-	cVBlZExsUsBaLyjBuBnjzWsFsV792UAtl5pYusQwv29XiJyxfB+chicskwqc1j+oR/cQDi
-	/XM5hKkxeFBul4d8OX/BEite+SJTT4Vdwe0wYD4Bu5ahgPhkPi9iMS0rzVGa3NJimBYveZ
-	ej9pC0glbNQ/PetAYqOaWK+pt1KaVQIq7WvLmpH4n95kLPt5Tr/MyHUKcm3bnw==
-Date: Sun, 15 Feb 2026 18:13:00 +0900
-From: Dominique Martinet <asmadeus@codewreck.org>
-To: Stefano Stabellini <stefano.stabellini@amd.com>
-Cc: xen-devel@lists.xenproject.org, jgross@suse.com, v9fs@lists.linux.dev,
-	ericvh@kernel.org, lucho@ionkov.net, linux_oss@crudebyte.com,
-	sstabellini@kernel.org
-Subject: Re: [PATCH v2] 9p/xen: protect xen_9pfs_front_free against
- concurrent calls
-Message-ID: <aZGOHNhDe1PPJCRO@codewreck.org>
-References: <20260129230348.2390470-1-stefano.stabellini@amd.com>
+X-Inumbo-ID: e5f4abf6-0a9a-11f1-9ccf-f158ae23cfc8
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH v3 1/2] x86/svm: Add Enumerations for the SVM virtual NMI
+Date: Sun, 15 Feb 2026 18:16:01 +0000
+Message-ID: <8b09eece639ba9cdff0d259e0941f7ef3dae7701.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
+References: <cover.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260129230348.2390470-1-stefano.stabellini@amd.com>
+Content-Transfer-Encoding: 8bit
 
-Stefano Stabellini wrote on Thu, Jan 29, 2026 at 03:03:48PM -0800:
-> Changes in v2:
-> - move priv->rings check above the loop
-> - replace list_del_init with list_del
+Introduce the cpuid bit for the SVM vNMI feature support for the x86\AMD
+platforms. The feature support is indicated by the CPUID
+Fn8000_000A_EDX[25] = 1.
 
-It looks like I didn't reply a couple of weeks ago but I did
-pick it up and just sent to Linus now.
-Thanks!
+Add defines for the three SVM's Virtual NMI (vNMI) managements bits in the
+VMCB structure's vintr_t:
 
+vintr_t(11) - Virtual NMI is pending.
+vintr_t(12) - Virtual NMI is masked.
+vintr_t(26) - Enable NMI virtualization.
+
+Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+---
+ xen/arch/x86/hvm/svm/vmcb.h        | 8 ++++++--
+ xen/arch/x86/include/asm/hvm/svm.h | 2 ++
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
+index 69f6047394..047483db9a 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.h
++++ b/xen/arch/x86/hvm/svm/vmcb.h
+@@ -336,13 +336,17 @@ typedef union
+         u64 tpr:          8;
+         u64 irq:          1;
+         u64 vgif:         1;
+-        u64 rsvd0:        6;
++        u64 rsvd0:        1;
++        u64 vnmi_pending: 1;
++        u64 vnmi_blocking:1;
++        u64:              3;
+         u64 prio:         4;
+         u64 ign_tpr:      1;
+         u64 rsvd1:        3;
+         u64 intr_masking: 1;
+         u64 vgif_enable:  1;
+-        u64 rsvd2:        6;
++        u64 vnmi_enable:  1;
++        u64 rsvd2:        5;
+         u64 vector:       8;
+         u64 rsvd3:       24;
+     } fields;
+diff --git a/xen/arch/x86/include/asm/hvm/svm.h b/xen/arch/x86/include/asm/hvm/svm.h
+index 15f0268be7..a35a61273b 100644
+--- a/xen/arch/x86/include/asm/hvm/svm.h
++++ b/xen/arch/x86/include/asm/hvm/svm.h
+@@ -37,6 +37,7 @@ extern u32 svm_feature_flags;
+ #define SVM_FEATURE_VGIF          16 /* Virtual GIF */
+ #define SVM_FEATURE_SSS           19 /* NPT Supervisor Shadow Stacks */
+ #define SVM_FEATURE_SPEC_CTRL     20 /* MSR_SPEC_CTRL virtualisation */
++#define SVM_FEATURE_VNMI          25 /* Virtual NMI */
+ #define SVM_FEATURE_BUS_LOCK      29 /* Bus Lock Threshold */
+ 
+ static inline bool cpu_has_svm_feature(unsigned int feat)
+@@ -57,6 +58,7 @@ static inline bool cpu_has_svm_feature(unsigned int feat)
+ #define cpu_has_svm_vloadsave cpu_has_svm_feature(SVM_FEATURE_VLOADSAVE)
+ #define cpu_has_svm_sss       cpu_has_svm_feature(SVM_FEATURE_SSS)
+ #define cpu_has_svm_spec_ctrl cpu_has_svm_feature(SVM_FEATURE_SPEC_CTRL)
++#define cpu_has_svm_vnmi      cpu_has_svm_feature(SVM_FEATURE_VNMI)
+ #define cpu_has_svm_bus_lock  cpu_has_svm_feature(SVM_FEATURE_BUS_LOCK)
+ 
+ #define MSR_INTERCEPT_NONE    0
 -- 
-Dominique Martinet | Asmadeus
+2.52.0
+
 
