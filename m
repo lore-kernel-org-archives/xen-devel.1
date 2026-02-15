@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4016CE63F06
-	for <xen-devel@archiver.kernel.org>; Sun, 15 Feb 2026 18:20:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1233475.1537042 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B403E63F0B
+	for <xen-devel@archiver.kernel.org>; Sun, 15 Feb 2026 18:20:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1233478.1537062 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vrgid-0000TS-SG; Sun, 15 Feb 2026 18:19:43 +0000
+	id 1vrgik-0000v8-82; Sun, 15 Feb 2026 18:19:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1233475.1537042; Sun, 15 Feb 2026 18:19:43 +0000
+Received: by outflank-mailman (output) from mailman id 1233478.1537062; Sun, 15 Feb 2026 18:19:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vrgid-0000TK-NF; Sun, 15 Feb 2026 18:19:43 +0000
-Received: by outflank-mailman (input) for mailman id 1233475;
- Sun, 15 Feb 2026 18:19:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vrgik-0000v1-4e; Sun, 15 Feb 2026 18:19:50 +0000
+Received: by outflank-mailman (input) for mailman id 1233478;
+ Sun, 15 Feb 2026 18:19:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+38R=AT=citrix.com=abdelkareem.abdelsaamad@srs-se1.protection.inumbo.net>)
- id 1vrgid-0000TE-92
- for xen-devel@lists.xenproject.org; Sun, 15 Feb 2026 18:19:43 +0000
-Received: from na1pdmzitismtp02.tibco.com (unknown [160.101.131.9])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e48077a5-0a9a-11f1-b163-2bf370ae4941;
- Sun, 15 Feb 2026 19:19:42 +0100 (CET)
+ id 1vrgij-0000h9-1T
+ for xen-devel@lists.xenproject.org; Sun, 15 Feb 2026 18:19:49 +0000
+Received: from na1pdmzitismtp02.tibco.com (na1pdmzitismtp02.tibco.com
+ [160.101.131.9]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e7499ad3-0a9a-11f1-9ccf-f158ae23cfc8;
+ Sun, 15 Feb 2026 19:19:45 +0100 (CET)
 Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id E9338813CB7D;
- Sun, 15 Feb 2026 13:19:13 -0500 (EST)
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id BCBCF810BDF8;
+ Sun, 15 Feb 2026 13:19:18 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e48077a5-0a9a-11f1-b163-2bf370ae4941
+X-Inumbo-ID: e7499ad3-0a9a-11f1-9ccf-f158ae23cfc8
 From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -49,93 +49,88 @@ Cc: andrew.cooper3@citrix.com,
 	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH v3 0/2] Virtual NMI
-Date: Sun, 15 Feb 2026 18:16:00 +0000
-Message-ID: <cover.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
+Subject: [PATCH v3 2/2] x86/svm: Use the virtual NMI when available
+Date: Sun, 15 Feb 2026 18:16:02 +0000
+Message-ID: <ccd7d351fcf47e6a74bd6bdfe3fe8bc9f5023e7e.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
+References: <cover.1771177081.git.abdelkareem.abdelsaamad@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently, the Xen hypervisor delivers NMIs to the guests using the Event
-Injection mechanism. The Event Injection mechanism does not block the delivery
-of subsequent NMIs. So, the Xen Hypervisor tracks the NMI delivery and its
-completion (by intercepting the IRET instruction) before sending a new NMI.
+With the Virtual NMI (vNMI), the pending NMI is simply stuffed into the VMCB
+and handed off to the hardware. There is no need for the artificial tracking
+of the NMI handling completion with the IRET instruction interception.
 
-With the 4th generation AMD EPYC, a hardware NMI virtualization support,
-Virtual NMI (VNMI), is introduced.  The vNMI allows the hypervisor to inject
-the NMI into the guest w/o using Event Injection mechanism. No need to track
-the guest NMI and intercepting the IRET instruction.
+Adjust the svm_inject_nmi to rather inject the NMIs using the vNMI Hardware
+accelerated feature when the AMD platform support the vNMI.
 
-NMI Virtualization support is indicated by CPUID Fn8000_000A_EDX[VNMI] = 1.[1]
+Adjust the svm_get_interrupt_shadow to check if the vNMI is currently blocked
+by servicing another in-progress NMI.
 
-NMI Virtualization is enabled by setting V_NMI_ENABLE (bit 26 in offset 60h
-of the VMCB). Enabling NMI Virtualization requires the NMI intercept bit to
-be set. An attempt to run a guest with V_NMI_ENABLE without the NMI intercept
-bit set results in #VMEXIT(INVALID) [1]
-
-Three new bits are added to the VMCB field at offset 60h to provide NMI
-virtualization hardware support:
-
-V_NMI(11): Indicates whether a virtual NMI is pending in the guest. The
-processor will clear V_NMI once it takes the virtual NMI.
-V_NMI_MASK(12): Indicates whether virtual NMIs are masked. The processor will
-set V_NMI_MASK once it takes the virtual NMI. V_NMI_MASK is cleared when the
-guest successfully completes an IRET instruction or #VMEXIT occurs while
-delivering the virtual NMI.
-V_NMI_ENABLE(26): Enables NMI virtualization. [1]
-
-[1] https://docs.amd.com/v/u/en-US/24593_3.43
-
+Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
 ---
-Changes in v3:
- - Delete the introduced hvm_function_table::vNMI boolean and all the 3 vNMI
-   hooks, hvm_function_table::is_vnmi_enabled,
-   hvm_function_table::is_vnmi_masked and hvm_function_table::set_vnmi_pending.
- - Use the HVM_INTR_SHADOW_NMI to indicate that the NMI is blocked rather than
-   the usage of HVM_INTR_SHADOW_MOV_SS | HVM_INTR_SHADOW_STI.
- - CI tests:
-https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2327265341
----
-Changes in v2:
- - Merge the patches for
-   "svm/vnmi: introduce the vnmi bit support in the cpuid feature set"
-   and
-   "svm/vnmi: add the definitions for the svm vnmi management bits in the VMCB"
-   into the one patch
-   "x86/svm: Add Enumerations for the SVM virtual NMI".
- - Change the patch subject "svm/vnmi: Add support for the SVM Virtual NMI" to
-   "x86/svm: Use virtual NMI when available"
- - Move the print out of the VNMI capability to the patch
-   "x86/svm: Use virtual NMI when available" when it is being used.
- - Remove the hvm_intblk_vnmi enumeration that was introduced for the separate
-   masked vNMI handling.
- - Introduce the hvm_function_table's is_vnmi_enabled callback to allow for the
-   SVM implementation to verify that the VNMI is enabled by checking the VMCB
-   bits in addition to the CPUID reported support.
- - Change the the name of the hvm_function_table's callback is_vnmi_pending to
-   is_vnmi_masked.
- - The svm_inject_nmi function gains a check for the distinct NMI injection
-   handling when the VNMI is enabled.
- - Simplify the check of AMD SVM Hardware support for the VNMI. The check
-   cpu_has_svm_vnmi is performed unconditionally.
- - Simplify the introduced changes diff for the vintr_t union for the VNMI bits
-   support.
- - Adopt the Xen formatting guidelines for the control structures.
- - CI tests:
-https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2325298577
----
+ xen/arch/x86/hvm/svm/intr.c | 9 +++++++++
+ xen/arch/x86/hvm/svm/svm.c  | 5 ++++-
+ xen/arch/x86/hvm/svm/vmcb.c | 2 ++
+ 3 files changed, 15 insertions(+), 1 deletion(-)
 
-Abdelkareem Abdelsaamad (2):
-  x86/svm: Add Enumerations for the SVM virtual NMI
-  x86/svm: Use the virtual NMI when available
-
- xen/arch/x86/hvm/svm/intr.c        | 9 +++++++++
- xen/arch/x86/hvm/svm/svm.c         | 5 ++++-
- xen/arch/x86/hvm/svm/vmcb.c        | 2 ++
- xen/arch/x86/hvm/svm/vmcb.h        | 8 ++++++--
- xen/arch/x86/include/asm/hvm/svm.h | 2 ++
- 5 files changed, 23 insertions(+), 3 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+index 6453a46b85..3e8959f155 100644
+--- a/xen/arch/x86/hvm/svm/intr.c
++++ b/xen/arch/x86/hvm/svm/intr.c
+@@ -33,6 +33,15 @@ static void svm_inject_nmi(struct vcpu *v)
+     u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
+     intinfo_t event;
+ 
++    if ( vmcb->_vintr.fields.vnmi_enable )
++    {
++       if ( !vmcb->_vintr.fields.vnmi_pending &&
++            !vmcb->_vintr.fields.vnmi_blocking )
++           vmcb->_vintr.fields.vnmi_pending = 1;
++
++        return;
++    }
++
+     event.raw = 0;
+     event.v = true;
+     event.type = X86_ET_NMI;
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 18ba837738..3dfdc18133 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -548,7 +548,9 @@ static unsigned cf_check int svm_get_interrupt_shadow(struct vcpu *v)
+     if ( vmcb->int_stat.intr_shadow )
+         intr_shadow |= HVM_INTR_SHADOW_MOV_SS | HVM_INTR_SHADOW_STI;
+ 
+-    if ( vmcb_get_general1_intercepts(vmcb) & GENERAL1_INTERCEPT_IRET )
++    if ( vmcb->_vintr.fields.vnmi_enable
++         ? vmcb->_vintr.fields.vnmi_blocking
++         : (vmcb_get_general1_intercepts(vmcb) & GENERAL1_INTERCEPT_IRET) )
+         intr_shadow |= HVM_INTR_SHADOW_NMI;
+ 
+     return intr_shadow;
+@@ -2524,6 +2526,7 @@ const struct hvm_function_table * __init start_svm(void)
+     P(cpu_has_tsc_ratio, "TSC Rate MSR");
+     P(cpu_has_svm_sss, "NPT Supervisor Shadow Stack");
+     P(cpu_has_svm_spec_ctrl, "MSR_SPEC_CTRL virtualisation");
++    P(cpu_has_svm_vnmi, "Virtual NMI");
+     P(cpu_has_svm_bus_lock, "Bus Lock Filter");
+ #undef P
+ 
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index e583ef8548..e90bbac332 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -184,6 +184,8 @@ static int construct_vmcb(struct vcpu *v)
+     if ( default_xen_spec_ctrl == SPEC_CTRL_STIBP )
+         v->arch.msrs->spec_ctrl.raw = SPEC_CTRL_STIBP;
+ 
++    vmcb->_vintr.fields.vnmi_enable = cpu_has_svm_vnmi;
++
+     return 0;
+ }
+ 
 -- 
 2.52.0
 
