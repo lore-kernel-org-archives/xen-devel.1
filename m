@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F6EE81A3D
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Feb 2026 15:52:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1234314.1537607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A199AE81A3D
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Feb 2026 15:54:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1234322.1537618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vs0tF-00052Q-LL; Mon, 16 Feb 2026 15:52:01 +0000
+	id 1vs0vg-0005Zs-19; Mon, 16 Feb 2026 15:54:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1234314.1537607; Mon, 16 Feb 2026 15:52:01 +0000
+Received: by outflank-mailman (output) from mailman id 1234322.1537618; Mon, 16 Feb 2026 15:54:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vs0tF-00052J-Ii; Mon, 16 Feb 2026 15:52:01 +0000
-Received: by outflank-mailman (input) for mailman id 1234314;
- Mon, 16 Feb 2026 15:52:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vs0vf-0005Zl-UP; Mon, 16 Feb 2026 15:54:31 +0000
+Received: by outflank-mailman (input) for mailman id 1234322;
+ Mon, 16 Feb 2026 15:54:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qFbs=AU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vs0tE-00052B-CI
- for xen-devel@lists.xenproject.org; Mon, 16 Feb 2026 15:52:00 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 691d7379-0b4f-11f1-b163-2bf370ae4941;
- Mon, 16 Feb 2026 16:51:52 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso49922645e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 16 Feb 2026 07:51:52 -0800 (PST)
+ id 1vs0vf-0005Zd-7M
+ for xen-devel@lists.xenproject.org; Mon, 16 Feb 2026 15:54:31 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c6a91eca-0b4f-11f1-9ccf-f158ae23cfc8;
+ Mon, 16 Feb 2026 16:54:29 +0100 (CET)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-43626796202so3077908f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Feb 2026 07:54:29 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48371a21cbesm131157855e9.5.2026.02.16.07.51.50
+ ffacd0b85a97d-43796a6a5e5sm26539933f8f.9.2026.02.16.07.54.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Feb 2026 07:51:51 -0800 (PST)
+ Mon, 16 Feb 2026 07:54:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,58 +47,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 691d7379-0b4f-11f1-b163-2bf370ae4941
+X-Inumbo-ID: c6a91eca-0b4f-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1771257111; x=1771861911; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Sf0ltGRVLvfI7yHqoX7gifHUKoRDWrHBbWORd5IiUys=;
-        b=Lu7A327EyXYwF+/FkqA/5ETWn0EGTiiUaeHEZQQIj/i1l+XnaB5AOXqx0KE07ASDGL
-         00a+QiqZAedpegb5fgdcnjhkz7ysSCw8dzEytrKOXSxcxrbb6kc4WTk2E8BTpL8AXNXn
-         r0Loz0IyBzfAZNaB3kqgwLUU0eZ/Ebq7+HI9pQGy4FxsYpG+8MWTPWEZFz5AbCF5VOX1
-         pm4ReDhfvS40j/B4nbS2MXdtDbgtUkDLs7oBpPVYU4GxsF+G699+tXy7j0THdEcieWHa
-         julSzawNd4n9dxK9TEx83Uh+iInmhjLMDLb0jiDFvRASgB+ATePcmxjQee25iC+f/ZGn
-         5S7w==
+        d=suse.com; s=google; t=1771257268; x=1771862068; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=NyH/rUNMvNUadAFEpknBN6fqSUoRpgmi6qmV19jk/sM=;
+        b=TBjmDyyCOozfFb+c7R2Gj6sRZJHPFP7yHeyagflZPRGBsPXd1vrDrH2WfC5p/bcgI1
+         TK9aSYcGKjZnqLhXVM3f3zlGYt1Oin9OBJUXoSSRwaciIFScDHtayAw2NAfGuv9kOrxV
+         LASNXW7xb2h0iD2dVxGyrhE2zqS2b5wGUsUnU8IThKuNg8UWYTzjLz6286PfkNjvkNGo
+         QoNXyFYv0Ox2pegArTYXnzqGR1+gNSOF11BwEW9HBfH683T/5YHWcS/IYbPwr8nyE4m0
+         NkNaKxFZ7GmCokjIXEsmpfKKx7r6PqU7nAzq4Zc9PAMDUXlzlvf55fEQFzvxyH3J2aYi
+         fBFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771257111; x=1771861911;
-        h=content-transfer-encoding:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+        d=1e100.net; s=20230601; t=1771257268; x=1771862068;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sf0ltGRVLvfI7yHqoX7gifHUKoRDWrHBbWORd5IiUys=;
-        b=CtUCNdurceKnrq+4EUQypHmhgfB9yTnKhGhIxv9kI3Y+lX9J3UoT3UJyK0Yiw+TVbX
-         KcCTI0CAum/5SHeRtxTInC09OqsAaAOB6ulgu8xyNDW4ecSHN+VlM47t6zTGrdXFoJTd
-         2tSV/2Xqhcwp2gkD5wvvQOIjhkoBl3fwp7gHJm1ayWGHU0vkQZRnzP1xR8JhsFLEKA2A
-         P4+SAUmfJgu6fIAXvDX7KttAYC8NYkLcS+cqzd3pJFUVv+z3JE9bRSE0aeYzIIvbBYv4
-         QCRrrmAjxssQ+7/JO3/X42NkV29z3B3A5S1Aclr0vr1qPuPdsRIJZ4eXAg/OpBsluHqc
-         i4tQ==
-X-Gm-Message-State: AOJu0YyGg4ETj1+g4N7mhzU6lnz0hVH7BGjUnYqHqNv16wFyPxV5/Da4
-	leWdtrsDtIzijLVUywzYDhIHs6Ma+OZl5kHN1ByyYDeIr4oGhX9Kdvd9YWWGbSW1U0KOnqdoEwO
-	7fVE=
-X-Gm-Gg: AZuq6aL+HSDGC4eokPj7Ds6CBa7AMLxKoueFd7g3QdAKYpyn3svHImncg7DRzrlEpkJ
-	ystUdtX/0XUTpVqzWP97sA2Eh56xjQY7UgmxhX+IBpdM3Li86hhG0VkRb7OkX191FP8An5dfHpa
-	IJEOPHUS50B0ZQ8QLaMzaDhUUQttTJ5ZlifbuhuXdZ4DUgd+mQ+32ajJ5F/SKGyQNQMmiCPS2iK
-	JF/z+w2AJ0cpKba7OUad1Q465ecI2DYZCOAU6+0sZId0P+0LHr9jTtsft1KyKc0s80dVMRmH5KR
-	hCxpzVUrw4FtZ8uMkZiytsjxaV7WkOcF/Y6USamGfYiW+uMvuQH3Skl6lEd/R4VCHGnPfuQvq+z
-	O0It0i4etneyGQ/X2HDxO0G/0YjA4EGgGeq9iZya4EFXGVNTTsWCO5ko2Fxx5DRPU9hgaRnHB94
-	MpflMjjCgbL1GdKIk48o999zOY/yGRnGaMk9cCRZtXA3ogZmswrl7cnR6kM9LlzcSPd4HVeDPIm
-	8rLB88XsjRkYtA=
-X-Received: by 2002:a05:600c:4f8f:b0:47d:333d:99c with SMTP id 5b1f17b1804b1-48378db0cd3mr149471145e9.18.1771257111281;
-        Mon, 16 Feb 2026 07:51:51 -0800 (PST)
-Message-ID: <528578e1-6374-4fd0-9f67-0769afd2e1c6@suse.com>
-Date: Mon, 16 Feb 2026 16:51:53 +0100
+        bh=NyH/rUNMvNUadAFEpknBN6fqSUoRpgmi6qmV19jk/sM=;
+        b=d28oQ0WVWWOjIs1Z3eJsILtn9k73t9Aj8OKQk1/nFTtB4fWgvVB4Cfn3L43VoDroOL
+         XaAQt49VUYwYW9CWVf7W3LYxTlp89HFQa+cUGMYu+Hy5Er070f8F9FGZ7X/WSiNHUdNo
+         rjoP4acfXCzAB4oHzc+OecPkQC/FhgPyipUYIY/S8zIhkB+3rL+gzkEY8q56zl89Ks5i
+         n0ZySOVetkQkSoaaX0JWI3tffWw+/L2vid33Y0nEYNwp85cTJJf5TIDAgM77s5r6TmpR
+         NmFBvaw0bEcNJg8rong6SnNyOSlJMuCvHpcC4xnV5gUEMK7p9aLQtyk3zW2sW1t/0M5/
+         SWag==
+X-Gm-Message-State: AOJu0Yw9RDIP8lNr5bVgdEUWJC9A8mTyN4SRkd/tdpqACHHG+XD02Ien
+	Dq4TfV3XA6t3X2FZh4OS+f9hlbgDAInld6BuKAHchgAWbtREYPCA+XQ+582KomCC+P5l8+7Xuz5
+	W6Qs=
+X-Gm-Gg: AZuq6aIpTn28WaEAkGpZuVQwkgROg3/1eaJlmwS8UfOq9MjPpzRSEkn2YXTqADrZmJl
+	jUjAJclo7JMUWfKURcFuVIbr3B1Woe1vGYkiyDzZUHDYJZW7yhANGaWiU9XhdW/f6uKTm9S/CBj
+	1yW5aShYHaZtsdd9v/ctfZSg2UI/6eXfwvD/siuCxU99u8u+YZOo8e1Mxb/nv3RnuJlSDgDb+yN
+	/TSYvXXxVmxlF4JuTPhIA0Q80ym0zFuwZI6yqigxI0r89P9EJPulS7PvscmwTrHawJsAQNAzkaz
+	nxtO+Z6Ch9dSQ5fQCsHD6GDID2q9ekw8VcsHsn2jvhoCtUlnKVlKwglhUeqoMWgFI6L1pUcCh/C
+	AJq9vkBBOIx4uWRgPoB5cDYQ1BE8ubgqrW9DydtVQwpbZq7irOhkmVFAhKsyTI2OipHZQJl9EaK
+	ublLXsLFhOQMoN0lmFXjTGxI9SQ9Yepd9m3JZMav7CcOJJKnPPZHlGkX2NkQp9KyAvIOCxVP6gP
+	cEkdS9xAqzwGNM=
+X-Received: by 2002:a05:6000:40cd:b0:437:75c1:5777 with SMTP id ffacd0b85a97d-437978d197emr17113673f8f.16.1771257268336;
+        Mon, 16 Feb 2026 07:54:28 -0800 (PST)
+Message-ID: <c0aef909-b294-40af-8d24-033b28450338@suse.com>
+Date: Mon, 16 Feb 2026 16:54:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2] domain: skip more stuff for idle's vCPU-s in vcpu_create()
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] domain: move vmtrace_alloc_buffer() invocation in
- vcpu_create()
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -123,35 +122,51 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-The label used upon the function failing is wrong. Instead of correcting
-the label, move the invocation up a little, to also avoid it altogether
-for the idle domain (where ->vmtrace_size would be zero, and hence the
-function would bail right away anyway).
+Nothing hypercall-related needs setting up there. Nor do we need to
+check whether the idle domain is shutting down - it never will.
 
-Fixes: 217dd79ee292 ("xen/domain: Add vmtrace_size domain creation parameter")
-Reported-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+v2: Drop vmtrace_alloc_buffer() part.
 
 --- a/xen/common/domain.c
 +++ b/xen/common/domain.c
-@@ -493,14 +493,14 @@ struct vcpu *vcpu_create(struct domain *
-         set_bit(_VPF_down, &v->pause_flags);
-         vcpu_info_reset(v);
-         init_waitqueue_vcpu(v);
+@@ -475,12 +475,6 @@ struct vcpu *vcpu_create(struct domain *
+     v->vcpu_id = vcpu_id;
+     v->dirty_cpu = VCPU_CPU_CLEAN;
+ 
+-    rwlock_init(&v->virq_lock);
+-
+-    tasklet_init(&v->continue_hypercall_tasklet, NULL, NULL);
+-
+-    grant_table_init_vcpu(v);
+-
+     if ( is_idle_domain(d) )
+     {
+         v->runstate.state = RUNSTATE_running;
+@@ -488,6 +482,12 @@ struct vcpu *vcpu_create(struct domain *
+     }
+     else
+     {
++        rwlock_init(&v->virq_lock);
 +
-+        if ( vmtrace_alloc_buffer(v) != 0 )
-+            goto fail_wq;
++        tasklet_init(&v->continue_hypercall_tasklet, NULL, NULL);
++
++        grant_table_init_vcpu(v);
++
+         v->runstate.state = RUNSTATE_offline;
+         v->runstate.state_entry_time = NOW();
+         set_bit(_VPF_down, &v->pause_flags);
+@@ -516,7 +516,8 @@ struct vcpu *vcpu_create(struct domain *
      }
  
-     if ( sched_init_vcpu(v) != 0 )
-         goto fail_wq;
+     /* Must be called after making new vcpu visible to for_each_vcpu(). */
+-    vcpu_check_shutdown(v);
++    if ( !is_idle_domain(d) )
++        vcpu_check_shutdown(v);
  
--    if ( vmtrace_alloc_buffer(v) != 0 )
--        goto fail_wq;
--
-     if ( arch_vcpu_create(v) != 0 )
-         goto fail_sched;
+     return v;
  
 
