@@ -4,31 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED6E8E8383C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Feb 2026 22:03:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1234537.1537748 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59AACE83840
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Feb 2026 22:23:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1234548.1537757 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vs6gA-0005Ck-7N; Mon, 16 Feb 2026 22:02:54 +0000
+	id 1vs6zi-0007xW-NB; Mon, 16 Feb 2026 22:23:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1234537.1537748; Mon, 16 Feb 2026 22:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 1234548.1537757; Mon, 16 Feb 2026 22:23:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vs6gA-0005Cd-45; Mon, 16 Feb 2026 22:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 1234537;
- Mon, 16 Feb 2026 22:02:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vs6zi-0007xP-Jz; Mon, 16 Feb 2026 22:23:06 +0000
+Received: by outflank-mailman (input) for mailman id 1234548;
+ Mon, 16 Feb 2026 22:23:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AdUN=AU=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1vs6g8-0005CW-Rh
- for xen-devel@lists.xenproject.org; Mon, 16 Feb 2026 22:02:52 +0000
-Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
- [136.143.188.50]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3ba3a228-0b83-11f1-b164-2bf370ae4941;
- Mon, 16 Feb 2026 23:02:50 +0100 (CET)
-Received: by mx.zohomail.com with SMTPS id 1771279356362254.9074161418365;
- Mon, 16 Feb 2026 14:02:36 -0800 (PST)
+ <SRS0=txJP=AU=bounce.vates.tech=bounce-md_30504962.699398c2.v1-58517a5d04e04dcda33126465a2c7c03@srs-se1.protection.inumbo.net>)
+ id 1vs6zh-0007xJ-Vt
+ for xen-devel@lists.xenproject.org; Mon, 16 Feb 2026 22:23:06 +0000
+Received: from mail187-15.suw11.mandrillapp.com
+ (mail187-15.suw11.mandrillapp.com [198.2.187.15])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0cce0871-0b86-11f1-9ccf-f158ae23cfc8;
+ Mon, 16 Feb 2026 23:23:00 +0100 (CET)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-15.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fFHN24pwHzPm0PfQ
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Feb 2026 22:22:58 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 58517a5d04e04dcda33126465a2c7c03; Mon, 16 Feb 2026 22:22:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,153 +45,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ba3a228-0b83-11f1-b164-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; t=1771279359; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=fsJigS7W0oSYt93O6uP7xjEitmWGpEzqU1BDOq81q824QpAG27qnb/s7dWSnlBl5hcLwSzkwRF9BcPdie7JxgmCBo7rklaAypVqjOtXWegirTRquPIN7azNwegLsZySmngwtdEF47HJDvvrdcWWpu/+itI2xaOrh+3oZXrEda6g=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1771279359; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=4VEgKRoBkaKV62x2vF6xqW5mSzNd6FYxa2E8lFTgOn4=; 
-	b=PCUwAUVZ3ovEorBfTmYjnKmDh9h1mOK0qCxxwllJSb/q6hq9wyDNz0B5DfSxH/jWofiYvuEjS//X+voQMS03zSMa9zrdlDoyINU2EhOPecvarW7QmgIqNGgNvLLsungMpvxDMEDZDSxYgFd17eDWOYhWW6mXETW9FuUYPOHhuBM=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1771279359;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=4VEgKRoBkaKV62x2vF6xqW5mSzNd6FYxa2E8lFTgOn4=;
-	b=Q2nzDv9KGwZS7v97r2FYPEy6CB9nX2CwIN8D6Wc85W9x6iQNawZp8FoJGPJwtUk4
-	4ZFHOSIrgP27YtQkIFy7EnwA6aNRgagxjwrHa88WdOPubwsijtJsyNLSS+DNzBRmWii
-	ZdcLzx92kthgy7j+ejFJ1mrbc2/EIBNFGUU1DKZU=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Chris Rogers <rogersc@ainfosec.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [BUG] common/domctl: xsm update for get_domain_state access
-Date: Mon, 16 Feb 2026 16:57:48 -0500
-Message-Id: <20260216215748.20398-1-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: 0cce0871-0b86-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1771280578; x=1771550578;
+	bh=q7HFIOeaE/ybQNX7CfL5EmHhsOGesTTjsUOk6a0mVUk=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=CM60rYbqQeeyH3rOTMqg/I/9AWRPihCx+W/JDMWT6iogaoKO2SFmAxkpWRY/0avxd
+	 5g9hIPLNJbt7HHWiW1HHOViEQxGMBlMna/To2HXkSB8mXq0a8waS7gubrcJGgrsl2K
+	 EPY24M4FK6m8B0dQ+nhmlK09g9dtrladvzZAT6ld2s2b96Ny5husRAl7bQvD9oaClA
+	 IcVAnlH7H8QahpfyJFDImh5pfUf7WnU9e1pMwz+iJt9di2OGu3NB14TWw1aesNSu1c
+	 FzJQGuR8pkIrsLqCgy85aULh9BG5djFtqvfgEui1/6jHl17tDeppgUeaegJwJn/FUe
+	 Jx+4OoCZJahtA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1771280578; x=1771541078; i=teddy.astie@vates.tech;
+	bh=q7HFIOeaE/ybQNX7CfL5EmHhsOGesTTjsUOk6a0mVUk=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=L1zUt2RzyjhE+OnOfCvoD2h6ZMxjwZZEm3z/ufpRCd5x4Jydk1IaUnGFOpAwzt7ry
+	 KYkbDjxhL3PqrsR0tGcMbPCRu9RbGgugMLRlTu54Si4iA+PL2N6CRJL3goOBNDSCu0
+	 Esrv2f08dEXguHG8JvM9s9TwatF3dzKzoqTVgiUNavKiMfOYkuridVR509m4wWGSQM
+	 1QFZXILfaVyolOftRHvHXZc6nGqkix1Opt7hSuRrBvBIqzOrCEQJbWUMCuB3M7bmRH
+	 gDFM434hZRfBfhUofeEJHbI5XpFXwjGL4EZnW5v240ZM/WjNklR1TuiStQr01CdtYC
+	 NGNPG1KA6mfAA==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH]=20x86/platform:=20Consider=20PTM=20for=20exposing=20package-related=20MSR?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1771280577708
+Message-Id: <4bcb7fbd-3180-4780-8432-2c62ce24ce99@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Tu Dinh" <ngoc-tu.dinh@vates.tech>, xen-devel@lists.xenproject.org
+References: <e7b1721097bd7abd975882f60b282cf7900db58d.1771254439.git.teddy.astie@vates.tech> <2764f432-85eb-44b9-aae9-f1bce410b4b9@suse.com>
+In-Reply-To: <2764f432-85eb-44b9-aae9-f1bce410b4b9@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.58517a5d04e04dcda33126465a2c7c03?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260216:md
+Date: Mon, 16 Feb 2026 22:22:58 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-When using XSM Flask, passing DOMIND_INVALID will result in a NULL pointer
-reference from the passing of NULL as the target domain to
-xsm_get_domain_state(). Simply not invoking xsm_get_domain_state() when the
-target domain is NULL opens the opportunity to circumvent the XSM
-get_domain_state access check. This is due to the fact that the call to
-xsm_domctl() for get_domain_state op is a no-op check, deferring to
-xsm_get_domain_state().
+Le 16/02/2026 =C3=A0 17:15, Jan Beulich a =C3=A9crit=C2=A0:
+> On 16.02.2026 16:09, Teddy Astie wrote:
+>> Package-related MSR is actually gated behind "PTM" CPUID flag rather tha=
+n
+>> "DTS" one. Make sure we check the right CPUID for package-related MSR.
+>>
+>> Check for either DTS or PTM for MSR_TEMPERATURE_TARGET.
+>>
+>> The only visible difference in practice would be that EPERM would now
+>> be reported instead of EFAULT if we tried accessing the package MSR on
+>> a platform that doesn't have it.
+>>
+>> Amends: 615c9f3f820 ("x86/platform: Expose DTS sensors MSR")
+> 
+> Imo this really addresses a bug, so wants to be Fixes:.
+> 
 
-Modify the helper get_domain_state() to ensure the requesting domain has
-get_domain_state access for the target domain, whether the target domain is
-explicitly set or implicitly determined with a domain state search. In the case
-of access not being allowed for a domain found during an implicit search, the
-search will continue to the next domain whose state has changed.
+I wasn't so sure between Fixes and Amends; but Fixes is ok for me.
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Reported-by: Chris Rogers <rogersc@ainfosec.com>
-Fixes: 3ad3df1bd0aa ("xen: add new domctl get_domain_state")
----
- xen/common/domain.c | 22 +++++++++++++++++++---
- xen/common/domctl.c |  7 ++-----
- 2 files changed, 21 insertions(+), 8 deletions(-)
+>> --- a/xen/arch/x86/platform_hypercall.c
+>> +++ b/xen/arch/x86/platform_hypercall.c
+>> @@ -89,9 +89,12 @@ static bool msr_read_allowed(unsigned int msr)
+>>           return cpu_has_srbds_ctrl;
+>>   
+>>       case MSR_IA32_THERM_STATUS:
+>> +        return host_cpu_policy.basic.digital_temp_sensor;
+> 
+> As per the SDM this doesn't look right either - it's CPUID.01H:EDX[22]
+> (acpi) instead. It is the field you're after in xenpm which is tied to
+> CPUID.06H:EAX[0] (digital_temp_sensor).
+> 
 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index de6fdf59236e..4886c59c874c 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -210,7 +210,7 @@ static void set_domain_state_info(struct xen_domctl_get_domain_state *info,
- int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
-                      domid_t *domid)
- {
--    unsigned int dom;
-+    unsigned int dom = 0;
-     int rc = -ENOENT;
-     struct domain *hdl;
- 
-@@ -219,6 +219,10 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
- 
-     if ( d )
-     {
-+        rc = xsm_get_domain_state(XSM_XS_PRIV, d);
-+        if ( rc )
-+            return rc;
-+
-         set_domain_state_info(info, d);
- 
-         return 0;
-@@ -238,10 +242,10 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
- 
-     while ( dom_state_changed )
-     {
--        dom = find_first_bit(dom_state_changed, DOMID_MASK + 1);
-+        dom = find_next_bit(dom_state_changed, DOMID_MASK + 1, dom);
-         if ( dom >= DOMID_FIRST_RESERVED )
-             break;
--        if ( test_and_clear_bit(dom, dom_state_changed) )
-+        if ( test_bit(dom, dom_state_changed) )
-         {
-             *domid = dom;
- 
-@@ -249,6 +253,15 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
- 
-             if ( d )
-             {
-+                rc = xsm_get_domain_state(XSM_XS_PRIV, d);
-+                if ( rc )
-+                {
-+                    rcu_unlock_domain(d);
-+                    rc = -ENOENT;
-+                    dom++;
-+                    continue;
-+                }
-+
-                 set_domain_state_info(info, d);
- 
-                 rcu_unlock_domain(d);
-@@ -256,10 +269,13 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
-             else
-                 memset(info, 0, sizeof(*info));
- 
-+            clear_bit(dom, dom_state_changed);
-             rc = 0;
- 
-             break;
-         }
-+
-+        dom++;
-     }
- 
-  out:
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 29a7726d32d0..2eedc639c72a 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -860,12 +860,9 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-         break;
- 
-     case XEN_DOMCTL_get_domain_state:
--        ret = xsm_get_domain_state(XSM_XS_PRIV, d);
--        if ( ret )
--            break;
--
--        copyback = 1;
-         ret = get_domain_state(&op->u.get_domain_state, d, &op->domain);
-+        if ( !ret )
-+            copyback = 1;
-         break;
- 
-     default:
--- 
-2.39.5
+I'm not sure to follow exactly what you mean here.
+Which CPUID should we check ?
+
+>>       case MSR_TEMPERATURE_TARGET:
+>> +        return host_cpu_policy.basic.digital_temp_sensor ||
+>> +               host_cpu_policy.basic.package_therm_management;
+> 
+> Where in the SDM did you find this connection? (Anything made up wants
+> commenting upon.)
+> 
+
+To me, we are interested in the MSR_TEMPERATURE_TARGET only with dts or 
+ptm, and the only used probing method in practice is performing a safe 
+rdmsr (at least in Linux coretemp).
+
+That may be worth adding a comment eventually.
+
+>>       case MSR_PACKAGE_THERM_STATUS:
+>> -        return host_cpu_policy.basic.digital_temp_sensor;
+>> +        return host_cpu_policy.basic.package_therm_management;
+>>       }
+> 
+> And of course with this splitting of cases, blank lines want inserting
+> between the case blocks.
+> 
+>> --- a/xen/include/xen/lib/x86/cpu-policy.h
+>> +++ b/xen/include/xen/lib/x86/cpu-policy.h
+>> @@ -132,7 +132,7 @@ struct cpu_policy
+>>                           :1,
+>>                           :1,
+>>                           :1,
+>> -                        :1,
+>> +                        package_therm_management:1,
+> 
+> The SDM calls this PKG_THERM_MGMT; I think our naming would better match =
+now
+> that we decided to have everything else here named according to the SDM.
+> 
+
+I can't find PKG_THERM_MGMT in my SDM version; but overall I don't have 
+a strong opinion on naming and am fine with pkg_therm_mgmt.
+
+> Jan
+> 
+
+Teddy
+
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
 
