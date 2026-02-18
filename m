@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026EEE9A03B
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 10:46:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1235435.1538420 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7550E9A047
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 11:30:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1235460.1538431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsf4F-00066U-2j; Wed, 18 Feb 2026 10:46:03 +0000
+	id 1vsfku-0003oX-3O; Wed, 18 Feb 2026 11:30:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1235435.1538420; Wed, 18 Feb 2026 10:46:03 +0000
+Received: by outflank-mailman (output) from mailman id 1235460.1538431; Wed, 18 Feb 2026 11:30:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsf4F-00066N-08; Wed, 18 Feb 2026 10:46:03 +0000
-Received: by outflank-mailman (input) for mailman id 1235435;
- Wed, 18 Feb 2026 10:46:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=cF4C=AW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vsf4D-00065y-VC
- for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 10:46:01 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ffb86221-0cb6-11f1-9ccf-f158ae23cfc8;
- Wed, 18 Feb 2026 11:45:54 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4837907f535so37533635e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Feb 2026 02:45:54 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483740be167sm373444625e9.15.2026.02.18.02.45.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Feb 2026 02:45:52 -0800 (PST)
+	id 1vsfku-0003oQ-0N; Wed, 18 Feb 2026 11:30:08 +0000
+Received: by outflank-mailman (input) for mailman id 1235460;
+ Wed, 18 Feb 2026 11:30:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=CABg=AW=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1vsfks-0003bf-6F
+ for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 11:30:06 +0000
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [2a00:1450:4864:20::131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2bc865fe-0cbd-11f1-b164-2bf370ae4941;
+ Wed, 18 Feb 2026 12:30:04 +0100 (CET)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-59e0d5c446cso5622570e87.0
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Feb 2026 03:30:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,158 +42,446 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ffb86221-0cb6-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 2bc865fe-0cbd-11f1-b164-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; t=1771414204; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Pgzf3bFV0w8ytvW4AyvzjdU55/Uno2IE4ZWmT+7yD/WDLfbQgpzz214GvxHdCZnywQ
+         2JR02M60eTqe9QJMKeuJAyQJQ+pGWU/QaRng/LMnyEmvOmThs90/MXiZ2HSB/YRKrK+w
+         iHx3lHScK4+fAxQ+ee6PgdGtGrzlc2mlW5LmDW2igp+7/rzi+LAb0l3+Eb5MNxH92yJI
+         LpMlsPYTTiqSNGIaxq53p1iKYmEDeCN8P0boXvM9xygAHHGhgacTG0aRKizLR5EhgPpq
+         Ia7zRnVgjN00+qJjUNvO6Vrn5pOsX6Mr3D7mgDbJE93vlEIbzwULN3og4yNm+UYEZ25h
+         6uZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=SM1GDmGSwQ55wea39cT22PRcVz0PHhUgIiluB5jxPKo=;
+        fh=S1TgsMYO/ju21WOcmYTQxMlAU8ImCjuw50drwKkfBt8=;
+        b=fGWz384vRwJz3nXu+qBea/ijHlc5jN78yyLgXsl5k/WJMUlvV9lyoH4yeGugYHWCgL
+         EnaDDwuuK6qo7yUWOL4kyDgw7X92/MIysxBWlAvl0l9Shxr6adTqjiSgDAxa7OJOgb9h
+         m052olkSdhUoNcaX64wLVYzSlWQTk2aMdYyEITXUh8H0g/+nfh8ZnSMlSbQ/WrLjykwz
+         +I8Qf8mxTgBW3ZfnJtFS0G2dJsvcbkTDdM3ekF4JOwHOgoBRNhoef7pNvFvn/2QwP+s6
+         Z0OGTKFsezyRVyt+VT87GASiSgE4Lvqqfim0sLqXxrPxJHAZ+pv7ImJsRdwd0KUhHn65
+         zcww==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1771411553; x=1772016353; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=guaIVk1bitGgKUwQCbBmi7WJHzwKBp/VOb4RXDcQbGI=;
-        b=X201QsFvbNyA0U4K2ttkj35RqN/t+sJV2WMMQNv5PV+MP1oXkc51OR0I43XX7lNFwQ
-         Gq2sm0nZ59KK0OPVYO5KWkJOI3j2wVNJaCZyYagUM94tmcU19ZkOW9edC6DIwnq4bOva
-         1lxgk2lYjbsfzwVS5WW6cJwImtgcr+jQW5sAb2mjl8M/1J8sfBMm83OwNEuaez/GtZUz
-         92Y3NkksZD1+TpSK5BSrWp9pUCTK4M0e1kB9Eo+BZGOyyz5bJTg9LXA39vIV1w05Mt4t
-         W67vF9UAp/wveML9xkhhnokGsI+5SQ6dBAlCG+34L18gGoo3br7PVJF8FJ7VcUBqcFa+
-         HL8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771411553; x=1772016353;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1771414204; x=1772019004; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=guaIVk1bitGgKUwQCbBmi7WJHzwKBp/VOb4RXDcQbGI=;
-        b=Dv9TJmEGqPxvjh1YQcwnKMVlTVS9pfpT/vwsFunm/l42/+xEVopvQX3fPD3L5Rlbci
-         XcJ2VAqCa5zjVtZyhsYspW67kTtnPGIsyDkdm5aOuMccQzz6UOAGHCTJaB4POcS9xDO5
-         ArbUwtdfTHsYXLC9bGc0Yv8yveNQEBa1spw2iNY5SgKKKGej5Ri7nl3iFsDCeyR8DES9
-         sAfnTVnh1d0Itv0cnicDbnrs4gD896pVd9nU65RbYVvcxBNurz05gTg6atjokKsEBnmJ
-         S75PgvYMAHYUEzY73q5YGywX9timfDsTjHp1cE9Qp1EpfcDNgkZ5x85QbOyQBiZuYLTn
-         K1AQ==
-X-Forwarded-Encrypted: i=1; AJvYcCU7e+akdbqVUfbCkod+AGsQqEqhbqdeYaCOpYBMSLf3UcFRVpXem1Nvkozy7lmf+qvP/tqBj/ntKfM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwvdT4M86uvOWZ+rcVAiDo5dHVvntBwUtypq32nkhgnsLpe3KJ+
-	YvGAqKK4YXyMTjquwLEPOp4khM4duekAwVOLxVGw2c1A6CBD0SdeB9zFbPBLFLgwtg==
-X-Gm-Gg: AZuq6aK3bbvdSfvL3X7UzyJLbM/8os2f26d0qf+oa3E8sw975N16Aa114ID3TwMtfWS
-	u7IWG4H8Zz5oQvfPyto0BS6npQO1iZ6RWtcTI/pN9IWKy/98AmOBPtZZq9pzO2QIx9I1w0zhcoh
-	Uj/3JU00zmP1zp6KSb/83tlnKWF33Gqb7Rh2PYmDTrrZCcD5CaYWavE0jDlGs5XeqFMSqG7FNzK
-	67zab++j5UwF9NA1HsI5lbyod4+26Amau88WhT+vnFvkIReeLiJi+ehjZuRT9DBZ+69cNy6sKRp
-	FgEbiBMoHhBe66GGh5U9ow0yLkkzr3gUwZe7UNKcFuWaVbxaH2Nh7GnEk7uEgfpCPnNH32N75To
-	jf2Z+TOJes9ei+03eoqyiMb9qwsMR6ZoQ2vGSjeYYOmiJHStG5CIr3SQOAn9LslDcUdfTFsBPY/
-	NsnXzoXpPwGPKOF5Z8KkpRylcPuvWOsncVPU6RqYV6ZGYc3cjLzP5ZhZd4RNjWagQQLJojjEi+1
-	Mx7990m58dUfWA=
-X-Received: by 2002:a05:600c:310e:b0:480:4b5d:9ec with SMTP id 5b1f17b1804b1-48379bf4709mr263623085e9.33.1771411553205;
-        Wed, 18 Feb 2026 02:45:53 -0800 (PST)
-Message-ID: <82c65bab-f9a1-497a-a16d-79b29c4d4045@suse.com>
-Date: Wed, 18 Feb 2026 11:45:51 +0100
+        bh=SM1GDmGSwQ55wea39cT22PRcVz0PHhUgIiluB5jxPKo=;
+        b=EnlM+BzDmtZe0VUq1doddqKDeKj2ExNBxGgzB9mn8igx7BlKJpjLeGIgrbnLjxrrP0
+         Eb1yBeYsMbpOd+Vs0IKi1tXxbl5W5jCcBVwQJqP3ZlbvgxM9VeFZzhNJkue7CrM0PbTP
+         AulKGqtNhvtdS4dsemBE95Q9UX5txmxHIQ7g46JjZnvad94ay1u1GndKjhw8StoCaOgA
+         nzLhOSsmarmpPYhaxZUt0DDmnzTSC3nfdHlpOA/elUoj2WDKRytjnBTJeqtDQ6hsLdNx
+         0qLYL05gZNsbmcsM7nsS+47DfejfZ3Ccon/+XU9bXfGaB8rLvhRBJPjy/Lj+JfOmG/dA
+         bFeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771414204; x=1772019004;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=SM1GDmGSwQ55wea39cT22PRcVz0PHhUgIiluB5jxPKo=;
+        b=AGCKfcAU9lqk5nTWweDo2cIltAS+aQN4PQ/cwOVmkJvbYta4BwxQJIstkuaPqH4mDA
+         dK9bmxlI9BzJf2IQ9yQrnZ+OMKDfe87MKtvSl/+kI7srEkUlwnQPJK6BT/edX1XOiK/k
+         jh8cuRBUl9Fv0t95Fo1eeD95dkwHEN4uaL5t/QZUr32U0KAbdurINbQAFh3xp3Ys4+7u
+         drw30PimUhV2nPAwASUHMUPSXiiXTImsJ/GdgPbB+3/4DVAtyXzDRYcWjGsfRVQGrjoC
+         qfqgEaPFhvrrR7Rf68+Def0crE9zic9/POoub5pPFnmO2rgfzmHf65ZMkqj9UFIdOxxE
+         aPng==
+X-Gm-Message-State: AOJu0YyuMlsjFSphqUKR5hpBi3i0mAdAk5piKOyWALoxO4EAbHjP2EmX
+	G/fg8e7XBsrTH9967fGnSD8ManuB3EElVN6I4lg0olFrD+azg4hpS51Kp9NU/qNXFD9ZH+FqOY2
+	2OvI6b6Zz/khYQ0bc3UQyS/eQkidHNP8=
+X-Gm-Gg: AZuq6aIy0mj1VI2f2p7vRpde9dEq6Tb76OPIjcX/4f7YCxIcdp1sunjHj1My/2sQz10
+	ivwleZqqWnYem8a3YsXMbTdXxGD3fPQlupOdq5x0iOVQE5D926JbQLOOzO/M3OgEV3iu1DYwt67
+	Gjc0Da4GVkSvpaIkt/uhyeJn6/3c7o5KD+8bliK3+cOVdHgjv6HxRxlmoP6u/Z9EcGpFlonqhI9
+	NCEibaXCkuAyA3MutcgtzRa4xCAt5DikKpwf5XmXR40RWQp2EugPdXtck3x8QbvfTpXJXS96tjz
+	zW0ang==
+X-Received: by 2002:a05:6512:3d03:b0:59e:39af:a70c with SMTP id
+ 2adb3069b0e04-59f83bc21cfmr537720e87.46.1771414203773; Wed, 18 Feb 2026
+ 03:30:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 6/6] xen/riscv: enable DOMAIN_BUILD_HELPERS
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1770821989.git.oleksii.kurochko@gmail.com>
- <6ab04f3584e45795dc82c25f62a6c950913f5c7d.1770821989.git.oleksii.kurochko@gmail.com>
- <aac9b5ac-6660-4ec0-b88e-605903217588@suse.com>
- <b4ac883d-ce90-40b0-93fc-95c925c7ac61@gmail.com>
- <a35d5566-7da1-406d-abf7-13b423d013f8@suse.com>
- <760d7b95-2e76-453c-8d13-ca4432eb22e5@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <760d7b95-2e76-453c-8d13-ca4432eb22e5@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <cover.1770046465.git.mykyta_poturai@epam.com> <6eee1cbcbfc221b0a6af00f7ec5ccc52f8bd5b75.1770046465.git.mykyta_poturai@epam.com>
+In-Reply-To: <6eee1cbcbfc221b0a6af00f7ec5ccc52f8bd5b75.1770046465.git.mykyta_poturai@epam.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Wed, 18 Feb 2026 13:30:00 +0200
+X-Gm-Features: AaiRm52xyBeRm91RyPK0I2h_h6RAGSKr83z1z4zK6_QrSWXpdscmc0pKtt9OcXo
+Message-ID: <CAGeoDV9Piac4yXQ9NH6simkFeD1867C+_Vq7TkRESgQXZ57YOw@mail.gmail.com>
+Subject: Re: [RFC PATCH 13/19] arm/gic: VPE scheduling
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 18.02.2026 11:39, Oleksii Kurochko wrote:
-> 
-> On 2/13/26 2:11 PM, Jan Beulich wrote:
->> On 13.02.2026 13:54, Oleksii Kurochko wrote:
->>> On 2/12/26 5:39 PM, Jan Beulich wrote:
->>>> On 12.02.2026 17:21, Oleksii Kurochko wrote:
->>>>> --- a/xen/include/public/arch-riscv.h
->>>>> +++ b/xen/include/public/arch-riscv.h
->>>>> @@ -50,6 +50,14 @@ typedef uint64_t xen_ulong_t;
->>>>>    
->>>>>    #if defined(__XEN__) || defined(__XEN_TOOLS__)
->>>>>    
->>>>> +#define GUEST_RAM_BANKS   1
->>>>> +
->>>>> +#define GUEST_RAM0_BASE   xen_mk_ullong(0x80000000) /* 2GB of low RAM @ 2GB */
->>>>> +#define GUEST_RAM0_SIZE   xen_mk_ullong(0x80000000)
->>>>> +
->>>>> +#define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE }
->>>>> +#define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE }
->>>> Hmm, does RISC-V really want to go with compile-time constants here?
->>> It is needed for allocate_memory() for guest domains, so it is expected
->>> to be compile-time constant with the current code of common dom0less
->>> approach.
->>>
->>> It represents the start of RAM address for DomU and the maximum RAM size
->>> (the actual size will be calculated based on what is mentioned in DomU node
->>> in dts) and then will be used to generate memory node for DomU (GUEST_RAM0_BASE
->>> as RAM start address and min(GUEST_RAM0_SIZE, dts->domU->memory->size) as a
->>> RAM size).
->>>
->>>>    And
->>>> if so, why would guests be limited to just 2 Gb?
->>> It is enough for guest domain I am using in dom0less mode.
->> And what others may want to use RISC-V for once it actually becomes usable
->> isn't relevant? As you start adding things to the public headers, you will
->> need to understand that you can't change easily what once was put there.
->> Everything there is part of the ABI, and the ABI needs to remain stable
->> (within certain limits).
-> 
-> Considering this ...
-> 
->>>> That may more efficiently
->>>> be RV32 guests then, with perhaps just an RV32 hypervisor.
->>> I  didn't get this point. Could you please explain differently what do you
->>> mean?
->> If all you want are 2Gb guests, why would such guests be 64-bit? And with
->> (iirc) RV32 permitting more than 4Gb (via PPN being 22 bits wide), perhaps
->> even a 32-bit hypervisor would suffice?
-> 
-> ... now I can agree that Xen should permit bigger amount of RAM. At least,
-> (2^34-1) should be allowed for RV32 and so for RV64 so it could be used
-> like a base for both of them. As RV64 allows (2^56 - 1) it makes sense
-> to add another bank to cover range from 2^34 to (2^56 -1) for RV64 (and ifdef
-> this second bank for  RV64).
-> 
-> Would it be better?
+On Mon, Feb 2, 2026 at 6:14=E2=80=AFPM Mykyta Poturai <Mykyta_Poturai@epam.=
+com> wrote:
+>
+> GICv4 needs to know which VCPU is currently scheduled to be able to
+> deliver VLPIs. Implement switching of VPEs on VCPU context switch by
+> extending the existing save/restore mechanism used for GICv2 and GICv3.
+>
+> Scheduling a VPE is done by setting up the VPENDBASER and VPROPBASER
+> registers to the appropriate tables for the currently running VCPU. When
+> scheduling out, preserve the IDAI and PendingLast bits from VPENDBASER.
+>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> ---
+>  xen/arch/arm/gic-v2.c                  |   2 +-
+>  xen/arch/arm/gic-v3.c                  |   9 +-
+>  xen/arch/arm/gic-v4-its.c              | 138 +++++++++++++++++++++++++
+>  xen/arch/arm/gic-vgic.c                |   6 ++
+>  xen/arch/arm/include/asm/gic.h         |   2 +-
+>  xen/arch/arm/include/asm/gic_v3_defs.h |   6 ++
+>  xen/arch/arm/include/asm/gic_v4_its.h  |   9 ++
+>  xen/arch/arm/include/asm/vgic.h        |   2 +
+>  8 files changed, 170 insertions(+), 4 deletions(-)
+>
+> diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
+> index 0cd41eac12..c16fa5d67e 100644
+> --- a/xen/arch/arm/gic-v2.c
+> +++ b/xen/arch/arm/gic-v2.c
+> @@ -181,7 +181,7 @@ static void gicv2_save_state(struct vcpu *v)
+>      writel_gich(0, GICH_HCR);
+>  }
+>
+> -static void gicv2_restore_state(const struct vcpu *v)
+> +static void gicv2_restore_state(struct vcpu *v)
+>  {
+>      int i;
+>
+> diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+> index d4af332b0e..07736179db 100644
+> --- a/xen/arch/arm/gic-v3.c
+> +++ b/xen/arch/arm/gic-v3.c
+> @@ -133,7 +133,7 @@ bool gic_is_gicv4(void)
+>  #endif
+>
+>  /* per-cpu re-distributor base */
+> -static DEFINE_PER_CPU(void __iomem*, rbase);
+> +DEFINE_PER_CPU(void __iomem*, rbase);
+>
+>  #define GICD                   (gicv3.map_dbase)
+>  #define GICD_RDIST_BASE        (this_cpu(rbase))
+> @@ -475,13 +475,15 @@ static void gicv3_save_state(struct vcpu *v)
+>       * are now visible to the system register interface
+>       */
+>      dsb(sy);
+> +    if ( gic_is_gicv4() )
+> +        vgic_v4_put(v, false);
+>      gicv3_save_lrs(v);
+>      save_aprn_regs(&v->arch.gic);
+>      v->arch.gic.v3.vmcr =3D READ_SYSREG(ICH_VMCR_EL2);
+>      v->arch.gic.v3.sre_el1 =3D READ_SYSREG(ICC_SRE_EL1);
+>  }
+>
+> -static void gicv3_restore_state(const struct vcpu *v)
+> +static void gicv3_restore_state(struct vcpu *v)
+>  {
+>      register_t val;
+>
+> @@ -510,6 +512,9 @@ static void gicv3_restore_state(const struct vcpu *v)
+>      restore_aprn_regs(&v->arch.gic);
+>      gicv3_restore_lrs(v);
+>
+> +    if ( gic_is_gicv4() )
+> +        vgic_v4_load(v);
+> +
+>      /*
+>       * Make sure all stores are visible the GIC
+>       */
+> diff --git a/xen/arch/arm/gic-v4-its.c b/xen/arch/arm/gic-v4-its.c
+> index fac3b44a94..6a550a65b2 100644
+> --- a/xen/arch/arm/gic-v4-its.c
+> +++ b/xen/arch/arm/gic-v4-its.c
+> @@ -18,6 +18,7 @@
+>   * GNU General Public License for more details.
+>   */
+>
+> +#include <xen/delay.h>
+>  #include <xen/errno.h>
+>  #include <xen/sched.h>
+>  #include <xen/spinlock.h>
+> @@ -44,6 +45,21 @@ void __init gicv4_its_vpeid_allocator_init(void)
+>          panic("Could not allocate VPEID bitmap space\n");
+>  }
+>
+> +static void __iomem *gic_data_rdist_vlpi_base(unsigned int cpu)
+> +{
+> +    /*
+> +     * Each Redistributor defines two 64KB frames in the physical addres=
+s map.
+> +     * In GICv4, there are two additional 64KB frames.
+> +     * The frames for each Redistributor must be contiguous and must be
+> +     * ordered as follows:
+> +     * 1. RD_base
+> +     * 2. SGI_base
+> +     * 3. VLPI_base
+> +     * 4. Reserved
+> +     */
+> +    return GICD_RDIST_BASE_CPU(cpu) + SZ_128K;
+> +}
+> +
+>  static int __init its_alloc_vpeid(struct its_vpe *vpe)
+>  {
+>      int id;
+> @@ -571,3 +587,125 @@ int its_send_cmd_vinv(struct host_its *its, struct =
+its_device *dev,
+>
+>      return gicv3_its_wait_commands(its);
+>  }
+> +
+> +static uint64_t read_vpend_dirty_clean(void __iomem *vlpi_base,
+> +                                       unsigned int count)
+> +{
+> +    uint64_t val;
+> +    bool clean;
+> +
+> +    do {
+> +        val =3D gits_read_vpendbaser(vlpi_base + GICR_VPENDBASER);
+> +        /* Poll GICR_VPENDBASER.Dirty until it reads 0. */
+> +        clean =3D !(val & GICR_VPENDBASER_Dirty);
+> +        if ( !clean )
+> +        {
+> +            count--;
+> +            cpu_relax();
+> +            udelay(1);
+> +        }
+> +    } while ( !clean && count );
+> +
+> +    if ( !clean )
+> +    {
+> +        printk(XENLOG_WARNING "ITS virtual pending table not totally par=
+sed\n");
+> +        val |=3D GICR_VPENDBASER_PendingLast;
+> +    }
+> +
+> +    return val;
+> +}
+> +
+> +/*
+> + * When a vPE is made resident, the GIC starts parsing the virtual pendi=
+ng
+> + * table to deliver pending interrupts. This takes place asynchronously,
+> + * and can at times take a long while.
+> + */
+> +static void its_wait_vpt_parse_complete(void __iomem *vlpi_base)
+> +{
+> +    if ( !gic_support_vptValidDirty() )
+> +        return;
+> +
+> +    read_vpend_dirty_clean(vlpi_base, 500);
+> +}
+> +
+> +static uint64_t its_clear_vpend_valid(void __iomem *vlpi_base, uint64_t =
+clr,
+> +                                      uint64_t set)
+> +{
+> +    unsigned int count =3D 1000000;    /* 1s! */
 
-Having a 2nd bank right away for RV64 would seem better to me, yes. Whether
-that means going all the way up to 2^56 I don't know.
+The 1s timeout looks too large for a context=E2=80=91switch path.
+Consider a much smaller bound (or async handling) and warn on
+timeout, rather than potentially stalling the scheduler.
 
-In whether a public header can be changed, it also matters whether these
-#define-s actually are meant to be exposed to guests (vs. merely the tool
-stack). Longer-term, however, this is going to change (as we intend to move
-to a fully stable ABI).
+> +    uint64_t val;
+> +
+> +    /*
+> +     * Clearing the Valid bit informs the Redistributor that a context
+> +     * switch is taking place.
+> +     */
+> +    val =3D gits_read_vpendbaser(vlpi_base + GICR_VPENDBASER);
+> +    val &=3D ~GICR_VPENDBASER_Valid;
+> +    val &=3D ~clr;
+> +    val |=3D set;
+> +    gits_write_vpendbaser(val, vlpi_base + GICR_VPENDBASER);
+> +
+> +    return read_vpend_dirty_clean(vlpi_base, count);
+> +}
+> +
+> +static void its_make_vpe_resident(struct its_vpe *vpe, unsigned int cpu)
+> +{
+> +    void __iomem *vlpi_base =3D gic_data_rdist_vlpi_base(cpu);
+> +    uint64_t val;
+> +
+> +    /* Switch in this VM's virtual property table. */
+> +    val  =3D virt_to_maddr(vpe->its_vm->vproptable) & GENMASK(51, 12);
+> +    val |=3D gicv3_its_get_cacheability() << GICR_VPROPBASER_INNER_CACHE=
+ABILITY_SHIFT;
+> +    val |=3D gicv3_its_get_shareability() << GICR_VPROPBASER_SHAREABILIT=
+Y_SHIFT;
+> +    val |=3D GIC_BASER_CACHE_SameAsInner << GICR_VPROPBASER_OUTER_CACHEA=
+BILITY_SHIFT;
 
-Jan
+Nit: cacheability/shareability are taken from a global ITS quirk.
+If different ITSes can report different attributes, we would need
+per=E2=80=91ITS values here. Otherwise, a short note that Xen assumes
+homogeneous ITS attributes would help.
+
+> +    val |=3D (HOST_LPIS_NRBITS - 1) & GICR_VPROPBASER_IDBITS_MASK;
+> +    gits_write_vpropbaser(val, vlpi_base + GICR_VPROPBASER);
+
+The VPROPBASER value is constant per VM. We could precompute
+and store it in struct its_vm at init, then just write the
+cached value here instead of recomputing each time.
+
+> +
+> +    /* Switch in this VCPU's VPT. */
+> +    val  =3D virt_to_maddr(vpe->vpendtable) & GENMASK(51, 16);
+> +    val |=3D gicv3_its_get_cacheability() << GICR_VPENDBASER_INNER_CACHE=
+ABILITY_SHIFT;
+> +    val |=3D gicv3_its_get_shareability() << GICR_VPENDBASER_SHAREABILIT=
+Y_SHIFT;
+> +    val |=3D GIC_BASER_CACHE_SameAsInner << GICR_VPENDBASER_OUTER_CACHEA=
+BILITY_SHIFT;
+> +    /*
+> +     * When the GICR_VPENDBASER.Valid bit is written from 0 to 1,
+> +     * this bit is RES1.
+> +     */
+> +    val |=3D GICR_VPENDBASER_PendingLast;
+> +    val |=3D vpe->idai ? GICR_VPENDBASER_IDAI : 0;
+> +    val |=3D GICR_VPENDBASER_Valid;
+> +    gits_write_vpendbaser(val, vlpi_base + GICR_VPENDBASER);
+> +
+> +    its_wait_vpt_parse_complete(vlpi_base);
+> +}
+> +
+> +static void its_make_vpe_non_resident(struct its_vpe *vpe, unsigned int =
+cpu)
+> +{
+> +    void __iomem *vlpi_base =3D gic_data_rdist_vlpi_base(cpu);
+> +    uint64_t val;
+> +
+> +    val =3D its_clear_vpend_valid(vlpi_base, 0, 0);
+> +    vpe->idai =3D val & GICR_VPENDBASER_IDAI;
+> +    vpe->pending_last =3D val & GICR_VPENDBASER_PendingLast;
+> +}
+> +
+> +void vgic_v4_load(struct vcpu *vcpu)
+> +{
+> +    struct its_vpe *vpe =3D vcpu->arch.vgic.its_vpe;
+> +
+> +
+> +    if ( vpe->resident )
+
+gicv3_restore_state() call vgic_v4_load when
+gic_is_gicv4() is true, even if its_vpe is NULL.
+
+The same story about vgic_v4_put.
+
+> +        return;
+> +
+> +    its_make_vpe_resident(vpe, vcpu->processor);
+> +    vpe->resident =3D true;
+> +}
+> +
+> +void vgic_v4_put(struct vcpu *vcpu, bool need_db)
+
+nit: unused need_db
+
+> +{
+> +    struct its_vpe *vpe =3D vcpu->arch.vgic.its_vpe;
+> +
+> +    if ( !vpe->resident )
+> +        return;
+> +
+> +    its_make_vpe_non_resident(vpe, vcpu->processor);
+> +    vpe->resident =3D false;
+> +}
+> diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+> index ea48c5375a..44db142dbd 100644
+> --- a/xen/arch/arm/gic-vgic.c
+> +++ b/xen/arch/arm/gic-vgic.c
+> @@ -377,6 +377,12 @@ int vgic_vcpu_pending_irq(struct vcpu *v)
+>          }
+>      }
+>
+> +#ifdef CONFIG_GICV4
+> +    if ( gic_is_gicv4() )
+> +        if ( v->arch.vgic.its_vpe->pending_last )
+
+Should we check its_vpe too?
+
+> +            rc =3D 1;
+> +#endif
+> +
+>  out:
+>      spin_unlock_irqrestore(&v->arch.vgic.lock, flags);
+>      return rc;
+> diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gi=
+c.h
+> index afb1cc3751..04a20bdca5 100644
+> --- a/xen/arch/arm/include/asm/gic.h
+> +++ b/xen/arch/arm/include/asm/gic.h
+> @@ -362,7 +362,7 @@ struct gic_hw_operations {
+>      /* Save GIC registers */
+>      void (*save_state)(struct vcpu *v);
+>      /* Restore GIC registers */
+> -    void (*restore_state)(const struct vcpu *v);
+> +    void (*restore_state)(struct vcpu *v);
+>      /* Dump GIC LR register information */
+>      void (*dump_state)(const struct vcpu *v);
+>
+> diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/includ=
+e/asm/gic_v3_defs.h
+> index 3a7d18ef59..0db75309cf 100644
+> --- a/xen/arch/arm/include/asm/gic_v3_defs.h
+> +++ b/xen/arch/arm/include/asm/gic_v3_defs.h
+> @@ -257,6 +257,12 @@ struct rdist_region {
+>      bool single_rdist;
+>  };
+>
+> +/* per-cpu re-distributor base */
+> +DECLARE_PER_CPU(void __iomem*, rbase);
+> +
+> +#define GICD_RDIST_BASE             (this_cpu(rbase))
+
+looks like possible macro redefinition, see gic-v3.c
+
+Best regards,
+Mykola
+
+
+> +#define GICD_RDIST_BASE_CPU(cpu)    (per_cpu(rbase, cpu))
+> +
+>  #endif /* __ASM_ARM_GIC_V3_DEFS_H__ */
+>
+>  /*
+> diff --git a/xen/arch/arm/include/asm/gic_v4_its.h b/xen/arch/arm/include=
+/asm/gic_v4_its.h
+> index ba81b25bde..37b6b92f0c 100644
+> --- a/xen/arch/arm/include/asm/gic_v4_its.h
+> +++ b/xen/arch/arm/include/asm/gic_v4_its.h
+> @@ -56,6 +56,15 @@ void gicv4_its_vpeid_allocator_init(void);
+>  #define GICR_VPROPBASER                              0x0070
+>  #define GICR_VPENDBASER                              0x0078
+>
+> +#define GICR_VPROPBASER_OUTER_CACHEABILITY_SHIFT         56
+> +#define GICR_VPROPBASER_SHAREABILITY_SHIFT               10
+> +#define GICR_VPROPBASER_SHAREABILITY_MASK                \
+> +        (3UL << GICR_VPROPBASER_SHAREABILITY_SHIFT)
+> +#define GICR_VPROPBASER_INNER_CACHEABILITY_SHIFT          7
+> +#define GICR_VPROPBASER_INNER_CACHEABILITY_MASK           \
+> +        (7UL << GICR_VPROPBASER_INNER_CACHEABILITY_SHIFT)
+> +#define GICR_VPROPBASER_IDBITS_MASK                    0x1f
+> +
+>  #define GICR_VPENDBASER_Dirty                   (1UL << 60)
+>  #define GICR_VPENDBASER_PendingLast             (1UL << 61)
+>  #define GICR_VPENDBASER_IDAI                    (1UL << 62)
+> diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/v=
+gic.h
+> index 580310fec4..9ef667decb 100644
+> --- a/xen/arch/arm/include/asm/vgic.h
+> +++ b/xen/arch/arm/include/asm/vgic.h
+> @@ -417,6 +417,8 @@ bool gic_is_gicv4(void);
+>  int vgic_v4_its_vm_init(struct domain *d);
+>  void vgic_v4_free_its_vm(struct domain *d);
+>  int vgic_v4_its_vpe_init(struct vcpu *vcpu);
+> +void vgic_v4_load(struct vcpu *vcpu);
+> +void vgic_v4_put(struct vcpu *vcpu, bool need_db);
+>  #endif /* !CONFIG_NEW_VGIC */
+>
+>  /*** Common VGIC functions used by Xen arch code ****/
+> --
+> 2.51.2
 
