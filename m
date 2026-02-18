@@ -4,54 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22057E9A047
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 15:50:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1235818.1538673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89658E9A02C
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 16:08:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1235841.1538683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsjov-0003Xh-7J; Wed, 18 Feb 2026 15:50:33 +0000
+	id 1vsk6J-0006K7-SP; Wed, 18 Feb 2026 16:08:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1235818.1538673; Wed, 18 Feb 2026 15:50:33 +0000
+Received: by outflank-mailman (output) from mailman id 1235841.1538683; Wed, 18 Feb 2026 16:08:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsjov-0003XZ-4H; Wed, 18 Feb 2026 15:50:33 +0000
-Received: by outflank-mailman (input) for mailman id 1235818;
- Wed, 18 Feb 2026 15:50:32 +0000
+	id 1vsk6J-0006K0-PW; Wed, 18 Feb 2026 16:08:31 +0000
+Received: by outflank-mailman (input) for mailman id 1235841;
+ Wed, 18 Feb 2026 16:08:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HD5B=AW=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1vsjou-00039n-08
- for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 15:50:32 +0000
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c201::3])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b01966a-0ce1-11f1-9ccf-f158ae23cfc8;
- Wed, 18 Feb 2026 16:50:26 +0100 (CET)
-Received: from AS4P251CA0014.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:5d2::14)
- by AMBPR08MB11660.eurprd08.prod.outlook.com (2603:10a6:20b:735::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Wed, 18 Feb
- 2026 15:50:23 +0000
-Received: from AM3PEPF0000A79A.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d2:cafe::1b) by AS4P251CA0014.outlook.office365.com
- (2603:10a6:20b:5d2::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.14 via Frontend Transport; Wed,
- 18 Feb 2026 15:50:22 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AM3PEPF0000A79A.mail.protection.outlook.com (10.167.16.105) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12
- via Frontend Transport; Wed, 18 Feb 2026 15:50:22 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com (2603:10a6:102:84::13)
- by DB3PR08MB8794.eurprd08.prod.outlook.com (2603:10a6:10:435::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 18 Feb
- 2026 15:49:19 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e]) by PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e%4]) with mapi id 15.20.9632.010; Wed, 18 Feb 2026
- 15:49:18 +0000
+ <SRS0=LfGN=AW=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1vsk6I-0006Js-Hu
+ for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 16:08:30 +0000
+Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com
+ [136.143.188.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0ea1d3f1-0ce4-11f1-9ccf-f158ae23cfc8;
+ Wed, 18 Feb 2026 17:08:27 +0100 (CET)
+Received: by mx.zohomail.com with SMTPS id 1771430890171379.7664783297532;
+ Wed, 18 Feb 2026 08:08:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,241 +40,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b01966a-0ce1-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=o716aLLDET5Y0eW1BbP3i9d/POadYgY/TxBACo9VNDbv1EszvaWt09rv7F6x5WOhQsAO+5gOPq1aI2m056HDn7U9fL2rvuOEKg34/QnTSH+Sk2HY0d/ZEKU84qCdW0T6m/gmx4SOboce3qnjuHw5Ngc9BzFVucYmx759I7HxK6VKI0ccOe/Dy70kdWUG/P5f/cLha6obkhjQU3ZYfJ0qhJYp2dX2SOK/zsTZB6RO3OMsZjAjYqSn/T7fll8LJsNdJN9gXNRzPzc/b7uH4vKbWuDKvjrkpJqu+xZPYPARtGDEIQokQr1k+Uc9HR/s6ZX1rpA9spSSHXovrDs4nuq22w==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A3DeqXAIKKnWywQHo9xnl0/8i309d7qRZueRR3vjb/A=;
- b=rfw+JQb0vQZW71Qca58PmX2co9OsZEMcrijuqCMFRj7u11Lot3jYreoJBP9JerQg6hZXfm9h6WqZ50dyP0gMR/F3U2uz6u8dVWv//xWyZmiogEZj4ZS21JtLGru7KLoqT3HHCb/Rx/ge9pOYdKU7dCfj26Br7Ccm2GzETIVh9Mx4M9H8DbtdFERBxTRhB9nlZus9ZTlcNcAGYj1qDK6PTnTCRpcHfA8lCU19+llYIjTR/KpHzveSXjWfNBwZmqsSIzwP3U/ib7nMREzxQ0dlhWmtDsYwhGTzUAvboRCun6Yv90vWB7JSo1N9d8/KWec9DIMMLSCrUqfOJUt7/rywoQ==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=citrix.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A3DeqXAIKKnWywQHo9xnl0/8i309d7qRZueRR3vjb/A=;
- b=lm8DASCZ1w6u4LBnhTpirZxPpzIH//yPbClM4SAIKlbM8Qqfe6ZktrSv5OemsgjmI/fDqNdGgXzwrcELIh8ZnMPjg9xoo1wqqxKE6oPgOoDfPtLaiMC6USwwZuXmB2lEE6rfbh7GlQMuD6xtw2Hxecofx/J96WRw04tSN7wmQ0M=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=duERugWhXsPHTkcUtYufpsFb4XWFcg0QRV57NzLTBQj12YpTTbPpDii0um7JQZOyOWYaktXZ7yDJeSARizFxgXSQORN7iPyE7+s9YY3YImnTylPoPPqljb+TnpsI02oGtf7mZnqosbyftKLTTVgXYA9pBNA6/JGmFMnsx+bVdQYZjQrOsiexqEWUSk9CcegLUu5AOV2oJrlOrIP1PDWWB5RfFCPYi/JKvgnEke/3adStimvDdWEcTxJp+y5K6eoL2JWUA99qm/AoVYN1wF0SFxMpzqiv0i8VwKn84w2Ul16MXNCkuuxfk57olUnvKc+eDImzTcwaqtoCqZSp1HduGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A3DeqXAIKKnWywQHo9xnl0/8i309d7qRZueRR3vjb/A=;
- b=PbhM/YSgWYxQmuic/Nxca05ZnfhFEQ0qkdZuPpOLZpltsMzxtbU90ZfDvB7y9ni7t80j6XEJquwqYF2ea+8StQlBIksC0zd57W4D8zkhF2DpDhSm2I18OAc9Oq4n0OCPzi0UJEpd4fLVvi+uhA3M2uJZYd82vbjwo4ngqRX2Xc25WFs+8nL6JsQA3HA9Tq1CbUG6LphCs9g2sdnw4Me66ltQO9BW35rtuvG3w2X4MUAG7qkDCM2w8PjxyjR6KvBhvAWP1xRuGGWOmNiL2lj5UcUpYfgRmMTbmEiw0Eb6marfEyhF4gQByRK3/Ro++QVeQ0yt/kU6P6TKW50xQ70dIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A3DeqXAIKKnWywQHo9xnl0/8i309d7qRZueRR3vjb/A=;
- b=lm8DASCZ1w6u4LBnhTpirZxPpzIH//yPbClM4SAIKlbM8Qqfe6ZktrSv5OemsgjmI/fDqNdGgXzwrcELIh8ZnMPjg9xoo1wqqxKE6oPgOoDfPtLaiMC6USwwZuXmB2lEE6rfbh7GlQMuD6xtw2Hxecofx/J96WRw04tSN7wmQ0M=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, "consulting @ bugseng . com"
-	<consulting@bugseng.com>, Nicola Vetrini <nicola.vetrini@bugseng.com>, Jan
- Beulich <JBeulich@suse.com>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?=
-	<roger.pau@citrix.com>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH] CI: Extend eclair-*-allcode to enable as much as possible
-Thread-Topic: [PATCH] CI: Extend eclair-*-allcode to enable as much as
- possible
-Thread-Index: AQHcfj5G7fNp7PSkb0GiHPxZx0yorLWI378A
-Date: Wed, 18 Feb 2026 15:49:18 +0000
-Message-ID: <886C592D-FEC3-4266-B8EA-BE898D140145@arm.com>
-References: <20260105122436.555444-1-andrew.cooper3@citrix.com>
-In-Reply-To: <20260105122436.555444-1-andrew.cooper3@citrix.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3864.300.41.1.7)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	PR3PR08MB5593:EE_|DB3PR08MB8794:EE_|AM3PEPF0000A79A:EE_|AMBPR08MB11660:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12fc3917-3378-4b84-69ba-08de6f056d03
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|1800799024|376014|7416014|366016|38070700021;
-X-Microsoft-Antispam-Message-Info-Original:
- =?utf-8?B?TWJyNU95U1Juajg1NFl3RkhudEhFSDF0bEVPcTBxY0VMVEt5em9DU0NDcmFv?=
- =?utf-8?B?MFRZSlhsNjl0YmVpMVlNaHdNZjl6bHRlTGhURjZOaGt2cVA0L3dNZ1lONXZH?=
- =?utf-8?B?bGVGMGF1OWpnU1VSREJSS0VDZm1ZN2hsemNUMG5HRm8reDIrMEFEc3M1N1Ix?=
- =?utf-8?B?dU5wck1NZDVMWkcxRUIvbXNidDZpUENEaWtyR0xZMHFubDBOQ3hZYy9KZ0py?=
- =?utf-8?B?VXE3eVgya3FUcG1qTU1hczRsVGdJc3A3L3BPQnlURUo4dWQ5NDJjWGgxcTYz?=
- =?utf-8?B?NWcydVN4S05jWVMrS0x4NkdnN2xqZHZ0aHhWZ0ZpTkQ4RlRaTFczcXliSDhs?=
- =?utf-8?B?Smd4a0tEejFGY2xnWDZZaCtjTGo2M1k0eDA5RllyV2hYdGdUdCs5czBNUjk4?=
- =?utf-8?B?aG9OM1BKMWxJQWJIZm43d2JnTG5lc2UwdC9rdnFxdDVkZVN1OUZmV1lhZHpQ?=
- =?utf-8?B?MXc5Sm9PR3E1a0VEMkJYVVBqbk1ZSkE1Q3o4UU9sTWx0YkhCNkV6dERhZEh0?=
- =?utf-8?B?NXlndzhSUnFGa1F5aG1YSGdKOHVPNHFlQjJ0YitneUVaTHVITXhQVmFVemRp?=
- =?utf-8?B?SUVGeVV2V1ZkSUxhWUJpejUxL0RZQXBtWkRsTS91L2tGTlBwTDhDaWk2ZExN?=
- =?utf-8?B?Zko0cmQyQmpjeXByY2pIS1krdUdqRlVGdC9KMnZvSSt6QmhGRTdET2pZVklu?=
- =?utf-8?B?NFQ2dTUrS1lvS2hHYVA1M2ZmWUVyVkVTcjRyZUJDTXNSY2IzWFFGeXltS3dz?=
- =?utf-8?B?RTIramVsYWhLaWhKZ1V6SGhUMkk4SHdnR3pheEMyVG5OMlZocXhtWmxPUGNM?=
- =?utf-8?B?cDZRZWFCRWZkSWtkNjFibmFsaHY4ZndvejVWUHFtLzhmSTBVWWc4eWhneGdK?=
- =?utf-8?B?ZmFZZS9NdXJoMURoOXRILzZUK0RjK0Zocy8yVU5Sa1hKWnYvMlVVZnRWc24w?=
- =?utf-8?B?Ync5b3hKbmUrWWQ2dUVib3R6UjJwYVkxd2xRMU5mc0FOOEo0MkRjWEh3ZXhx?=
- =?utf-8?B?cmsrbVlRcjlmK3dqc1cwQ2RWVHJWejY4Q1ZhQzk5L0ZCOW1DTWxOd0t1UEQx?=
- =?utf-8?B?am1DMmxscmNQK243VXNVdmZrc0JoSllPODIrQmd2NjRoNENsb3lTNGpDcVpn?=
- =?utf-8?B?VjlTOVdFTkdvSU9lSGdkVmp6eCtLaW9JdmxsTnRFb1pmelBxY0xoU2ZlaS9m?=
- =?utf-8?B?OUppSDZBM1BrNzU2VmR5bGZRYitJWktxZFd0YlgxbVQzeGx6K3B2NkFzeWI1?=
- =?utf-8?B?b1hCM0wvVkNFbldLQUloOHI0NWY5OWtla3dpcWFsRS8zWmtKVFJURW12VWZx?=
- =?utf-8?B?LzFURWF5QWhxVDV4K3EwVTNtNVBjTGFlNjRXaTQvQ1RBajdoU0dUWTdJVU1P?=
- =?utf-8?B?TmxSOSsrQjJLcnhTUW1GNzM5NzQ3dUpacnJRazFXeGpzWDVvcmRKSXZrMUly?=
- =?utf-8?B?c0JXVTVGbE5KNmVVaEg0RVZaWCtpM2JUNFVhbUhhaWtwT3o4bmxnWUdUMUhP?=
- =?utf-8?B?Y1RLMnJWaDBLSTZhMVJDUU93VDIrUHRmeE91UisyTUh2aE92UVpiYjUyb01y?=
- =?utf-8?B?NkNnWVpqRUtKamR1dDltdXBHU0xlTisrTjZYWTNMMW9QQ3k1SGNwaWFxeGJU?=
- =?utf-8?B?bElaU3R6QUZLaTdnUU0wL1FPNVludUhudzl2RTI4NFAvUVZGbU5tZExHaEtH?=
- =?utf-8?B?OHRkTHJIdDZTUVRySTYrZUdER2VnUHVOSU4xSHpnN1FqZ2lsNTRITndBODdW?=
- =?utf-8?B?aTBBdlloUXMwNjlGdkJadkNPRG4xNFhJd1JTU2RkY1h6R3M5bFQwZklIZFNh?=
- =?utf-8?B?Q3JSMUZkR01td1Z1ZWRTRFI2NERvRGdsTDFLNkllM2VUcDJPMXpmcEh0UHJU?=
- =?utf-8?B?d0hjc0p1Q1crQXVUYjBoNWo4Tmg1anZNQzdUeGRTdjFEMkJMYzQ5dXFRWGJJ?=
- =?utf-8?B?c3VmZnMvM2tDVlFTVER3UDZGWW5UaEtYSEtBeTUwNTdoOEhPcVJtK1dERHpB?=
- =?utf-8?B?dTZSb1h1dU1jNjlYK1RmdjErMW50SGxPQ3ZOT1pBSHlZMWxWTVgyVzBPSjdn?=
- =?utf-8?B?UUZZamhkajhtRkdSV1FlamhXVXBDdUc2bmhySmhUTXBXbWpOVk5jK1Y1SktC?=
- =?utf-8?B?b25oQW8zTGxBMkFOcDhwNDVabHIzVzJiRXpOelpPVVFYZ1lNRVVXdUs3QTFk?=
- =?utf-8?Q?ld23OFURQXvBJhZJ2xv3NZg=3D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(38070700021);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <5A81EF580E006D4A8C788D22ACBADF1C@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: 0ea1d3f1-0ce4-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; t=1771430893; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Q0LId52bKp0/GTS2A6wkt1dd3cezWqk7zH2usy5ZtPzdfyUq3kJF3bm3oOZlSvkzhwG/EL8CEN2Hj5zMYNyslNgNLl18lZl4yiOLp4N0FLGQVMUcjf+oM0FwQ6t5STqJ0Tuo+VUnZ87OzycsBlJ3J0LUrH82bq2DrQ8BYh1Ny/s=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1771430893; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=fWRXMj7PK6kMHx6AVdRzCrEyKuz94e5VKxOetrzHKTQ=; 
+	b=KhcK/2kbD92aW0JwBswzAi6nG6LNDTFyTJLfFsN++hRYElxR3moDuXfBf4wC+PIUMKOLDqQSmUpzU0tTbS00kBfAI94ChdUA+rKsd1XrEE6izHbu2urzOriwXD+BM2xOFtQNn2jmhmVRkYY7+MPqkbPktQ0acffjn7C3MI3Mx10=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1771430893;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=fWRXMj7PK6kMHx6AVdRzCrEyKuz94e5VKxOetrzHKTQ=;
+	b=JSH1WcTpJG2IAQ2NEhj+qb1ldiJzCMfmMrbPcfY2BHDs7rFX2pY4Q9TqQBalBTk6
+	mX2j7mGAUwvjQk1ZIxvDnmGXauw2DPlsxj1cMsSDE2MPVANv4iHJu4bQRLNxenkrnDu
+	bEWgEGO92Vb97NCxAVrH8rB8hsb7rCwZ3PTvRXcs=
+Message-ID: <89173609-0089-4c89-a924-2feb88e77308@apertussolutions.com>
+Date: Wed, 18 Feb 2026 11:08:08 -0500
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR08MB8794
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM3PEPF0000A79A.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	324411bd-63ba-4bb6-cb0f-08de6f0546cc
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|7416014|14060799003|35042699022|1800799024|376014|36860700013|7053199007|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?T2haMXIzUkZ1TnA4VWYwQVAxSFNqS1IySEVWbUw5TWxqamRwc2lkVElGYzFE?=
- =?utf-8?B?QkNZcnptekNWWEhiOWk1Q3B2U1ZpZE9XUHE4V2lpckJXVU95a2VmN1NzTWwr?=
- =?utf-8?B?Vzh3U0tyWGo1dnZjM0F0SDBMYTZjZ2FtRUpHRkJsYzdNak03bnJBUjNJR1ZW?=
- =?utf-8?B?bVVpWXY2UTJqc3FQdWdWYklqNnZ4dHRLRlFWL29JRFRyR1lNZlFERTQyeEZm?=
- =?utf-8?B?ZnFuY0VXVnp0bE5vRzhwNFhDRFo4Tld6YXgrZFZVYXRyRTh4QWQzYW90ZzM2?=
- =?utf-8?B?clpzcmtnb3NySXZ5RXZrRVg4S1lza0FnbGF6ekZNclF4NGlXWEoyYStKc3hX?=
- =?utf-8?B?VWlaSzFuSUdiYlZaVEFpSncvOWtCYVMwUDlOQWhsNzc2TnpkRmFQT0hreEx3?=
- =?utf-8?B?UHBJT2Vmc1JLY3Z0NE5KMmdvVlFHbFBWcThaNTRDVXVhdXpndkk4Tkx2UU42?=
- =?utf-8?B?RnZ5MDZrazhZYldIaTIwYVhRSE9VUXBPM1h6M0k0ZnpjVDI0RzAzUEI1bk9Y?=
- =?utf-8?B?NVJ5VHRNbkdGSFpDc3ZiV0xjVXExTWdZTHJ3dmU0aGVKYlk4U1FNNG1acUZI?=
- =?utf-8?B?TE9UcXdJaVBpdVpia09oR0FDQlNsOXlyZUNSWnFWMmJ0RmlpczFYK09uSDEr?=
- =?utf-8?B?NDdrS1YxbFNpajdTMDFCY2g0MmNFczRmSVZGUytnTUxLOHprYVBoQ1ZvWE8x?=
- =?utf-8?B?UUJSdklHWWY0bzRZQUlmeHFRdFAxWkt0WnEwRXN5N0ZJRmR2NStvZVdvL0tU?=
- =?utf-8?B?QXBlRmZrbWNYZCt2RVpST1lZYUlBN080MXZvNXg4dXdKWlBCdG1HaUZXWndI?=
- =?utf-8?B?dmJMMnZOaTZmS0tVcmtBL2NkOTIwekVHdG9YanYrcUpLOExES0MwcjlpVlI2?=
- =?utf-8?B?K1lockVYOEJnQmdiUWRkWnFpM3lhbnRKZ2k4bW1GWXVSZUZYUEgzV2hxem5r?=
- =?utf-8?B?dThGbEFjTTk0dFJOU3BKN3MzUGtITUxNNU1COGRrUExMNjJaci9FMVpOaTlI?=
- =?utf-8?B?aE16ZWV1cmk0Y0hkR1VMV3BBOFJLbXNmTWhMWCtKN3c2UWtnT29zZWlaZ2Ir?=
- =?utf-8?B?TGpNR3c3NG1Cc254M0lDZ2l5TWZRVWV2bzUxZmw1bFVYWkxwNlVWcTVrdis5?=
- =?utf-8?B?YS9GNFlGeWRhTmkyTjlObGRHWkNiTmFlSHdQUnRuNjk4dHlnSnZUMlU3VGFj?=
- =?utf-8?B?WUVuaW1hVFkrRlA2cG1nY2ZPc0Z3OVhpajZlOVBVMWlGak84aGJTd0tnTUFS?=
- =?utf-8?B?dlJtUDIzNTNldFZCblBBRnd0WWpoTlB6cEkySGRzTXZKMzlqeEtXenJJSmNP?=
- =?utf-8?B?VWlJbnNaT0NVdzNienpWNHlWbEkxejI0NTE1RndFMGxOTzBNc1pVS2x5Yy93?=
- =?utf-8?B?MzFhdk0wUW9JYlg5a2FOQnErQytMSnJJMW9zWG1kek5xKzgzTHZwamFUYkdV?=
- =?utf-8?B?dU1RUzBDVm5aOEcreHpIWmRMZ1QwRHY2bk0ybS9tQk1TR3VhcjgyWEV5Sk5i?=
- =?utf-8?B?U29FUGovaU42Wmd0QjREOGkySWNVZG1LK1JQUnlLck1pSXI5eVFCK25KeUpE?=
- =?utf-8?B?aHIxUllZTmJEV2VWRUREZEFKR0duYnpPT3FVQ0FyUDYzamV1akRNZmpEeWZw?=
- =?utf-8?B?eXJvYjk3OXZwazYyNTMzLzBSeXc5dUVDRUVmWEtRalRMTWV1ajVxSDlSS3JL?=
- =?utf-8?B?MThIQ1JybmFoQlFFdElHc25DQ2RVNDhXeHkzc2xpYWNGcjZGOVNqRzZydVJS?=
- =?utf-8?B?bkNpejMwdTZrcGNjcy9sb1VkekNmZ2pKRWRDNWd5dmk0bVp1ZWlyTm5JM2My?=
- =?utf-8?B?cmM5QXNBKzA1a2ZYWjYzdWRTZ2VqZHBhZ0k4SnFyc3pYM1NSMWV6MW5ETG56?=
- =?utf-8?B?a3N0NGFsaGlqaWloY3k5MWRaMklieEZvZlA2VzgrSXAvckhPNkIwSzBnclNB?=
- =?utf-8?B?MHd4UTNKVXJxY01rZmRRdDhEajJOcXIrblhWZldGai9JTmwyeTFSN0tqM01q?=
- =?utf-8?B?Z0RYZjRLQks0SGVkcENmaUk0ZHZNbDBLSCtlK0JTYU5zUTloOVdTaldHcnJY?=
- =?utf-8?B?OTJrQ3hVeHNGVDU0YXdpM2w4QkZqVFY4bERtVnpLeE90TUZrSXBzR0N2WVlt?=
- =?utf-8?B?VDlOTGVlMm9HbXVuVGVIbHdVOUhkZkdOS1NpQTh1TjZuV20yYUJLS0o2b2NU?=
- =?utf-8?B?eE9hMWVVSENBUUp3RnNQWkcrWTR2NERnOWl1MHlEbzYyMHU0aUlkK1dGWkpz?=
- =?utf-8?B?cThMZDJGcTlPVWcxVHE3SVpjaTV3PT0=?=
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(7416014)(14060799003)(35042699022)(1800799024)(376014)(36860700013)(7053199007)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	DRe1f+qS9ntlnbFFHUv7dHUmWYFIqhM6UZcexhHFBEWGilvpF4DtZ0CJbVkM4xVzzdhlx0ZOI8IWRYVq4mGV7+bMziHKWh+4sHOGzA/55TAfZ2d8gu4MQeUyYiEEnLYnqtUMFYiWyLJfM5PiPVMOg+dmxAuoE2/7o32PA9sL/+G5O9OwhhaRvDa5FfcjDva3RL8JE3XdTnIEQo/MepXx+/OdfGvNTnMyulXEw5qYJhEPkWGBoswH7dztFpw1L+LoKpSUoFpX2QHfjBOoPvF7kIO8UyjxTyaRAMdsjjGJ9qAXcXJg3xMicTxA2cgN7oY62qDdq1kLozRXQDRJGM2j7cmyqOoTDRHpWt1WXEO5nnDFbz1FDcN9URDN+1ol5sxVoNy/+ntWhQ2DUHpFyxQPe7FE6R3O5mjisuILoXudQiYkylreJgMVd8EU4L0Jck1b
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 15:50:22.6596
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12fc3917-3378-4b84-69ba-08de6f056d03
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM3PEPF0000A79A.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR08MB11660
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v10 2/5] xen: change VIRQ_CONSOLE to VIRQ_DOMAIN to allow
+ non-hwdom binding
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
+ grygorii_strashko@epam.com, anthony.perard@vates.tech, michal.orzel@amd.com,
+ julien@xen.org, roger.pau@citrix.com, jason.andryuk@amd.com,
+ victorm.lira@amd.com, andrew.cooper3@citrix.com,
+ xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
+References: <alpine.DEB.2.22.394.2602041533440.3175371@ubuntu-linux-20-04-desktop>
+ <20260204233712.3396752-2-stefano.stabellini@amd.com>
+ <82c06e52-1db0-46e5-be9f-7ca0360ffc70@suse.com>
+ <alpine.DEB.2.22.394.2602091520460.1134401@ubuntu-linux-20-04-desktop>
+ <43e80ad6-7b42-42de-b36f-1a9079589912@suse.com>
+ <alpine.DEB.2.22.394.2602131206040.6031@ubuntu-linux-20-04-desktop>
+ <053d2624-2891-4534-83f0-b05e190afe3b@apertussolutions.com>
+ <e08b65e3-8908-4882-9481-d4aa7dbfcfa1@suse.com>
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
+ xsJuBFYrueARCACPWL3r2bCSI6TrkIE/aRzj4ksFYPzLkJbWLZGBRlv7HQLvs6i/K4y/b4fs
+ JDq5eL4e9BdfdnZm/b+K+Gweyc0Px2poDWwKVTFFRgxKWq9R7McwNnvuZ4nyXJBVn7PTEn/Z
+ G7D08iZg94ZsnUdeXfgYdJrqmdiWA6iX9u84ARHUtb0K4r5WpLUMcQ8PVmnv1vVrs/3Wy/Rb
+ foxebZNWxgUiSx+d02e3Ad0aEIur1SYXXv71mqKwyi/40CBSHq2jk9eF6zmEhaoFi5+MMMgX
+ X0i+fcBkvmT0N88W4yCtHhHQds+RDbTPLGm8NBVJb7R5zbJmuQX7ADBVuNYIU8hx3dF3AQCm
+ 601w0oZJ0jGOV1vXQgHqZYJGHg5wuImhzhZJCRESIwf+PJxik7TJOgBicko1hUVOxJBZxoe0
+ x+/SO6tn+s8wKlR1Yxy8gYN9ZRqV2I83JsWZbBXMG1kLzV0SAfk/wq0PAppA1VzrQ3JqXg7T
+ MZ3tFgxvxkYqUP11tO2vrgys+InkZAfjBVMjqXWHokyQPpihUaW0a8mr40w9Qui6DoJj7+Gg
+ DtDWDZ7Zcn2hoyrypuht88rUuh1JuGYD434Q6qwQjUDlY+4lgrUxKdMD8R7JJWt38MNlTWvy
+ rMVscvZUNc7gxcmnFUn41NPSKqzp4DDRbmf37Iz/fL7i01y7IGFTXaYaF3nEACyIUTr/xxi+
+ MD1FVtEtJncZNkRn7WBcVFGKMAf+NEeaeQdGYQ6mGgk++i/vJZxkrC/a9ZXme7BhWRP485U5
+ sXpFoGjdpMn4VlC7TFk2qsnJi3yF0pXCKVRy1ukEls8o+4PF2JiKrtkCrWCimB6jxGPIG3lk
+ 3SuKVS/din3RHz+7Sr1lXWFcGYDENmPd/jTwr1A1FiHrSj+u21hnJEHi8eTa9029F1KRfocp
+ ig+k0zUEKmFPDabpanI323O5Tahsy7hwf2WOQwTDLvQ+eqQu40wbb6NocmCNFjtRhNZWGKJS
+ b5GrGDGu/No5U6w73adighEuNcCSNBsLyUe48CE0uTO7eAL6Vd+2k28ezi6XY4Y0mgASJslb
+ NwW54LzSSM0uRGFuaWVsIFAuIFNtaXRoIDxkcHNtaXRoQGFwZXJ0dXNzb2x1dGlvbnMuY29t
+ PsJ6BBMRCAAiBQJWK7ngAhsjBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRBTc6WbYpR8
+ KrQ9AP94+xjtFfJ8gj5c7PVx06Zv9rcmFUqQspZ5wSEkvxOuQQEAg6qEsPYegI7iByLVzNEg
+ 7B7fUG7pqWIfMqFwFghYhQzOwU0EViu54BAIAL6MXXNlrJ5tRUf+KMBtVz1LJQZRt/uxWrCb
+ T06nZjnbp2UcceuYNbISOVHGXTzu38r55YzpkEA8eURQf+5hjtvlrOiHxvpD+Z6WcpV6rrMB
+ kcAKWiZTQihW2HoGgVB3gwG9dCh+n0X5OzliAMiGK2a5iqnIZi3o0SeW6aME94bSkTkuj6/7
+ OmH9KAzK8UnlhfkoMg3tXW8L6/5CGn2VyrjbB/rcrbIR4mCQ+yCUlocuOjFCJhBd10AG1IcX
+ OXUa/ux+/OAV9S5mkr5Fh3kQxYCTcTRt8RY7+of9RGBk10txi94dXiU2SjPbassvagvu/hEi
+ twNHms8rpkSJIeeq0/cAAwUH/jV3tXpaYubwcL2tkk5ggL9Do+/Yo2WPzXmbp8vDiJPCvSJW
+ rz2NrYkd/RoX+42DGqjfu8Y04F9XehN1zZAFmCDUqBMa4tEJ7kOT1FKJTqzNVcgeKNBGcT7q
+ 27+wsqbAerM4A0X/F/ctjYcKwNtXck1Bmd/T8kiw2IgyeOC+cjyTOSwKJr2gCwZXGi5g+2V8
+ NhJ8n72ISPnOh5KCMoAJXmCF+SYaJ6hIIFARmnuessCIGw4ylCRIU/TiXK94soilx5aCqb1z
+ ke943EIUts9CmFAHt8cNPYOPRd20pPu4VFNBuT4fv9Ys0iv0XGCEP+sos7/pgJ3gV3pCOric
+ p15jV4PCYQQYEQgACQUCViu54AIbDAAKCRBTc6WbYpR8Khu7AP9NJrBUn94C/3PeNbtQlEGZ
+ NV46Mx5HF0P27lH3sFpNrwD/dVdZ5PCnHQYBZ287ZxVfVr4Zuxjo5yJbRjT93Hl0vMY=
+In-Reply-To: <e08b65e3-8908-4882-9481-d4aa7dbfcfa1@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-SGkgQW5kcmV3DQoNCj4gT24gNSBKYW4gMjAyNiwgYXQgMTM6MjQsIEFuZHJldyBDb29wZXIgPGFu
-ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOg0KPiANCj4gT24geDg2LCB0aGlzIGlzIGJh
-c2ljYWxseSBldmVyeXRoaW5nLg0KPiANCj4gRm9yIEFSTSwgQ09ORklHX01QVSBhbmQgQ09ORklH
-X01NVSBhcmUgbXV0dWFsbHkgZXhjbHVzaXZlICh3aXRoDQo+IENPTkZJR19TVEFUSUNfTUVNT1JZ
-IGluIHRoZSBtaXgpLCBhcyB3ZWxsIGFzIENPTkZJR19ORVdfVkdJQyBiZWluZyBtdXR1YWxseQ0K
-PiBleGNsdXNpdmUgd2l0aCB0aGUgb3RoZXIgVkdJQyBpbmZyYXN0cnVjdHVyZS4NCj4gDQo+IE5v
-IGZ1bmN0aW9uYWwgY2hhbmdlLCBidXQgYSBsb3Qgb2YgbmV3IEVjbGFpciByZXBvcnRzIChub24t
-YmxvY2tpbmcpLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4NCg0KQWNrZWQtYnk6IEJlcnRyYW5kIE1hcnF1aXMgPGJlcnRyYW5k
-Lm1hcnF1aXNAYXJtLmNvbT4NCg0KQ2hlZXJzDQpCZXJ0cmFuZA0KDQo+IC0tLQ0KPiBDQzogU3Rl
-ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPg0KPiBDQzogY29uc3VsdGlu
-Z0BidWdzZW5nLmNvbSA8Y29uc3VsdGluZ0BidWdzZW5nLmNvbT4NCj4gQ0M6IE5pY29sYSBWZXRy
-aW5pIDxuaWNvbGEudmV0cmluaUBidWdzZW5nLmNvbT4NCj4gQ0M6IEphbiBCZXVsaWNoIDxKQmV1
-bGljaEBzdXNlLmNvbT4NCj4gQ0M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXgu
-Y29tPg0KPiBDQzogSnVsaWVuIEdyYWxsIDxqdWxpZW5AeGVuLm9yZz4NCj4gQ0M6IFZvbG9keW15
-ciBCYWJjaHVrIDxWb2xvZHlteXJfQmFiY2h1a0BlcGFtLmNvbT4NCj4gQ0M6IEJlcnRyYW5kIE1h
-cnF1aXMgPGJlcnRyYW5kLm1hcnF1aXNAYXJtLmNvbT4NCj4gQ0M6IE1pY2hhbCBPcnplbCA8bWlj
-aGFsLm9yemVsQGFtZC5jb20+DQo+IA0KPiBodHRwczovL2dpdGxhYi5jb20veGVuLXByb2plY3Qv
-aGFyZHdhcmUveGVuLXN0YWdpbmcvLS9waXBlbGluZXMvMjI0NTE0MjQyMg0KPiANCj4gTWFpbnRh
-aW5pbmcgdGhlc2UgbGlzdHMgaXMgZ29pbmcgdG8gYmUgYSBuaWdodG1hcmUuICBJIHRoaW5rIHdl
-IHJlYWxseSBkbyBuZWVkDQo+IHRvIGltcGxlbWVudCBDT05GSUdfQ09NUElMRV9URVNUDQo+IC0t
-LQ0KPiBhdXRvbWF0aW9uL2dpdGxhYi1jaS9hbmFseXplLnlhbWwgfCA0NSArKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrDQo+IDEgZmlsZSBjaGFuZ2VkLCA0NSBpbnNlcnRpb25zKCspDQo+
-IA0KPiBkaWZmIC0tZ2l0IGEvYXV0b21hdGlvbi9naXRsYWItY2kvYW5hbHl6ZS55YW1sIGIvYXV0
-b21hdGlvbi9naXRsYWItY2kvYW5hbHl6ZS55YW1sDQo+IGluZGV4IGE0NzI2OTJmY2IzMS4uN2Ey
-YzBiZmE3N2QxIDEwMDY0NA0KPiAtLS0gYS9hdXRvbWF0aW9uL2dpdGxhYi1jaS9hbmFseXplLnlh
-bWwNCj4gKysrIGIvYXV0b21hdGlvbi9naXRsYWItY2kvYW5hbHl6ZS55YW1sDQo+IEBAIC00NCw2
-ICs0NCwyNCBAQCBlY2xhaXIteDg2XzY0LWFsbGNvZGU6DQo+ICAgICBMT0dGSUxFOiAiZWNsYWly
-LXg4Nl82NC5sb2ciDQo+ICAgICBWQVJJQU5UOiAiWDg2XzY0Ig0KPiAgICAgUlVMRVNFVDogIm1v
-bml0b3JlZCINCj4gKyAgICBFWFRSQV9YRU5fQ09ORklHOiB8DQo+ICsgICAgICBDT05GSUdfQVJH
-Tz15DQo+ICsgICAgICBDT05GSUdfREVCVUdfTE9DS19QUk9GSUxFPXkNCj4gKyAgICAgIENPTkZJ
-R19ERUJVR19UUkFDRT15DQo+ICsgICAgICBDT05GSUdfRUZJX1NFVF9WSVJUVUFMX0FERFJFU1Nf
-TUFQPXkNCj4gKyAgICAgIENPTkZJR19FWFBFUlQ9eQ0KPiArICAgICAgQ09ORklHX0hZUEVSVl9H
-VUVTVD15DQo+ICsgICAgICBDT05GSUdfTEFURV9IV0RPTT15DQo+ICsgICAgICBDT05GSUdfTUVN
-X1BBR0lORz15DQo+ICsgICAgICBDT05GSUdfTUVNX1NIQVJJTkc9eQ0KPiArICAgICAgQ09ORklH
-X1BFUkZfQVJSQVlTPXkNCj4gKyAgICAgIENPTkZJR19QRVJGX0NPVU5URVJTPXkNCj4gKyAgICAg
-IENPTkZJR19QVjMyPXkNCj4gKyAgICAgIENPTkZJR19VTlNVUFBPUlRFRD15DQo+ICsgICAgICBD
-T05GSUdfWEVOT1BST0Y9eQ0KPiArICAgICAgQ09ORklHX1hFTl9HVUVTVD15DQo+ICsgICAgICBD
-T05GSUdfWEhDST15DQo+ICsgICAgICBDT05GSUdfWFNNPXkNCj4gICBhbGxvd19mYWlsdXJlOiB0
-cnVlDQo+IA0KPiBlY2xhaXIteDg2XzY0LXRlc3Rpbmc6DQo+IEBAIC0xMDQsNiArMTIyLDMzIEBA
-IGVjbGFpci1BUk02NC1hbGxjb2RlOg0KPiAgICAgTE9HRklMRTogImVjbGFpci1BUk02NC5sb2ci
-DQo+ICAgICBWQVJJQU5UOiAiQVJNNjQiDQo+ICAgICBSVUxFU0VUOiAibW9uaXRvcmVkIg0KPiAr
-ICAgIEVYVFJBX1hFTl9DT05GSUc6IHwNCj4gKyAgICAgIENPTkZJR19BQ1BJPXkNCj4gKyAgICAg
-IENPTkZJR19BUkdPPXkNCj4gKyAgICAgIENPTkZJR19BUk02NF9TVkU9eQ0KPiArICAgICAgQ09O
-RklHX0FSTV9TTU1VX1YzPXkNCj4gKyAgICAgIENPTkZJR19CT09UX1RJTUVfQ1BVUE9PTFM9eQ0K
-PiArICAgICAgQ09ORklHX0RFQlVHX0xPQ0tfUFJPRklMRT15DQo+ICsgICAgICBDT05GSUdfREVC
-VUdfVFJBQ0U9eQ0KPiArICAgICAgQ09ORklHX0RFVklDRV9UUkVFX0RFQlVHPXkNCj4gKyAgICAg
-IENPTkZJR19FRklfU0VUX1ZJUlRVQUxfQUREUkVTU19NQVA9eQ0KPiArICAgICAgQ09ORklHX0VY
-UEVSVD15DQo+ICsgICAgICBDT05GSUdfRkZBPXkNCj4gKyAgICAgIENPTkZJR19GRkFfVk1fVE9f
-Vk09eQ0KPiArICAgICAgQ09ORklHX0dJQ1YzX0VTUEk9eQ0KPiArICAgICAgQ09ORklHX0hBU19J
-VFM9eQ0KPiArICAgICAgQ09ORklHX0lPUkVRX1NFUlZFUj15DQo+ICsgICAgICBDT05GSUdfSVBN
-TVVfVk1TQT15DQo+ICsgICAgICBDT05GSUdfTElWRVBBVENIPXkNCj4gKyAgICAgIENPTkZJR19M
-TENfQ09MT1JJTkc9eQ0KPiArICAgICAgQ09ORklHX09QVEVFPXkNCj4gKyAgICAgIENPTkZJR19P
-VkVSTEFZX0RUQj15DQo+ICsgICAgICBDT05GSUdfUENJX1BBU1NUSFJPVUdIPXkNCj4gKyAgICAg
-IENPTkZJR19QRVJGX0FSUkFZUz15DQo+ICsgICAgICBDT05GSUdfUEVSRl9DT1VOVEVSUz15DQo+
-ICsgICAgICBDT05GSUdfU1RBQ0tfUFJPVEVDVE9SPXkNCj4gKyAgICAgIENPTkZJR19VTlNVUFBP
-UlRFRD15DQo+ICsgICAgICBDT05GSUdfVk1fRVZFTlQ9eQ0KPiAgIGFsbG93X2ZhaWx1cmU6IHRy
-dWUNCj4gDQo+IGVjbGFpci1BUk02NC10ZXN0aW5nOg0KPiAtLSANCj4gMi4zOS41DQo+IA0KDQo=
+On 2/18/26 10:14, Jan Beulich wrote:
+> On 18.02.2026 16:07, Daniel P. Smith wrote:
+>> On 2/13/26 15:09, Stefano Stabellini wrote:
+>>> On Tue, 10 Feb 2026, Jan Beulich wrote:
+>>>> On 10.02.2026 00:23, Stefano Stabellini wrote:
+>>>>> On Mon, 9 Feb 2026, Jan Beulich wrote:
+>>>>>> On 05.02.2026 00:37, Stefano Stabellini wrote:
+>>>>>>> Today only hwdom can bind VIRQ_CONSOLE. This patch changes the virq from
+>>>>>>> global to VIRQ_DOMAIN to allow other domains to bind to it.
+>>>>>>>
+>>>>>>> Note that Linux silently falls back to polling when binding fails, which
+>>>>>>> masks the issue.
+>>>>>>>
+>>>>>>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+>>>>>>> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+>>>>>>
+>>>>>> Technically this is an ABI change, and hence I'm uncertain it can go without
+>>>>>> that aspect being at least mentioned, perhaps even its implications properly
+>>>>>> discussed.
+>>>>>
+>>>>> I am not sure if it qualifies as an ABI change or not but I am happy to
+>>>>> expand the commit message in any way you might suggest.
+>>>>>
+>>>>> The jist of it is already in the commit message, really the key element
+>>>>> is that VIRQ_CONSOLE can be bound by multiple domains.
+>>>>>
+>>>>> Aside from spelling out "this is an ABI change" what do you have in
+>>>>> mind?
+>>>>
+>>>> What I mean is discussion of the implications for domains using the vIRQ.
+>>>> Previously most domains would have attempts to bind this vIRQ rejected.
+>>>> Technically it is possible that kernels had code paths blindly doing the
+>>>> binding, relying on it to work only when running as Dom0. And really, you
+>>>> appear to break XEN_DOMCTL_set_virq_handler when used with VIRQ_CONSOLE,
+>>>> without which its binding wasn't possible at all before (except for the
+>>>> hardware domain, which get_global_virq_handler() falls back to when no
+>>>> other domain is set). Or am I mis-reading things, as I can't spot any use
+>>>> of VIRQ_CONSOLE under tools/, whereas I would have expected provisions
+>>>> for (host) console handling to be delegated to a separate control or
+>>>> console domain? Of course other toolstacks (the XAPI-based one for
+>>>> example) might actually have such provisions.
+>>>>
+>>>> And then there's the XSM question: XEN_DOMCTL_set_virq_handler obviously
+>>>> is subject to XSM checking. The same isn't true for VIRQ_DOMAIN-type
+>>>> vIRQ-s. Yet this vIRQ isn't supposed to be universally available to
+>>>> every DomU. Instead the ->console->input_allowed checking is kind of
+>>>> substituting such a check, which iirc Daniel said (in more general
+>>>> context) shouldn't ever be done. IOW in patch 5 you're actually effecting
+>>>> policy, which should be XSM's job aiui.
+>>>>
+>>>> Bottom line: The patch may need to be more involved, but at the very
+>>>> least the description would need updating to justify it being as simple
+>>>> as it is right now.
+>>>
+>>> What do you think of this:
+>>>
+>>> ---
+>>>
+>>> xen/console: change VIRQ_CONSOLE from global to per-domain
+>>>
+>>> Previously VIRQ_CONSOLE was a global VIRQ (VIRQ_GLOBAL type), meaning
+>>> only the hardware domain (or a domain explicitly set via
+>>> XEN_DOMCTL_set_virq_handler) could bind it. Any other domain attempting
+>>> to bind would fail with -EBUSY because get_global_virq_handler() would
+>>> return hwdom by default.
+>>>
+>>> This patch changes VIRQ_CONSOLE to VIRQ_DOMAIN type, allowing any domain
+>>> to bind it independently, similar to VIRQ_ARGO. The console notification
+>>> is now sent via send_guest_domain_virq() directly to the focus domain
+>>> rather than through send_global_virq().
+>>>
+>>> Implications:
+>>>
+>>> 1. Guest kernels that previously called bind on VIRQ_CONSOLE blindly
+>>>      will now succeed. Linux handles binding failure gracefully by falling
+>>>      back to polling, so this should not cause regressions.
+>>>
+>>> 2. XEN_DOMCTL_set_virq_handler can no longer be used with VIRQ_CONSOLE.
+>>>      The domctl explicitly rejects non-VIRQ_GLOBAL types. This means
+>>>      toolstacks that relied on set_virq_handler to delegate console handling
+>>>      to a separate console domain will need to use a different mechanism.
+>>>      Note: No known in-tree toolstack uses set_virq_handler with VIRQ_CONSOLE.
+>>>
+>>> 3. VIRQ_DOMAIN bindings are not subject to XSM checks beyond the
+>>>      standard event channel allocation policy. Access control for console
+>>>      input is enforced via the per-domain console->input_allowed flag,
+>>>      which is set for:
+>>>      - The hardware domain (by default in domain_create())
+>>>      - dom0less domains on ARM (in construct_domU())
+>>>      - The PV shim domain on x86 (in pv_shim_setup_dom())
+>>>      - Domains with vpl011 using the Xen backend (in domain_vpl011_init())
+>>
+>> Actually this goes back to the concern I have raised many times,
+>> is_hardware_domain() always serves a double purpose. The explicit check
+>> that the domain is where the hardware is, but also the implicit access
+>> control check that it is allowed to do the hardware access. The implicit
+>> access control check is a subversion of XSM and the reality is that the
+>> input_allowed flag is just unmasking this subversion for an explicit
+>> access control check outside the purview of xsm.
+> 
+> I don't think I can deduce from this what your view is on the change proposed.
+> There is, as per what you say, an existing issue with is_hardware_domain().
+> (Likely at some point you'll propose patches to address this.) What I can't
+> conclude is whether you deem this new issue "okay(ish)" on the basis that some
+> vaguely related issue already exists, or whether you object to this new way
+> of "subversion".
+
+Digging deeper, the underlying issue is that when struct domain_console 
+was introduced and now this series is building upon it. The struct 
+domain_console_patch added a resource access control check point for all 
+domains through input_allowed that went around XSM. Now we are here with 
+this series that is exposing what was done. To your question, am I 
+okay(ish) with this. Not really, but it's also not the fault of Stefano 
+or his series that the earlier commit laid this landmine for him.
+
+With all that said, thinking about it in totality, the fine-grained 
+access control does needs to be there for tightly controlled 
+environments, but is not necessary for a general security posture. Plus, 
+I am going to have to think about how to correctly inlay the XSM check, 
+which is outside the scope of this series. All of that is to say, I am 
+not okay but don't feel it's right to block this series over it.
+
+v/r,
+dps
 
