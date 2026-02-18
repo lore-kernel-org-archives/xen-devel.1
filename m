@@ -4,40 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A45AE9A03B
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 11:31:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1235469.1538440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0F8E9A047
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 11:31:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1235474.1538451 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsflo-0004KF-Gg; Wed, 18 Feb 2026 11:31:04 +0000
+	id 1vsfmA-0004lF-NR; Wed, 18 Feb 2026 11:31:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1235469.1538440; Wed, 18 Feb 2026 11:31:04 +0000
+Received: by outflank-mailman (output) from mailman id 1235474.1538451; Wed, 18 Feb 2026 11:31:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsflo-0004K8-DI; Wed, 18 Feb 2026 11:31:04 +0000
-Received: by outflank-mailman (input) for mailman id 1235469;
- Wed, 18 Feb 2026 11:31:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vsfmA-0004l8-Ki; Wed, 18 Feb 2026 11:31:26 +0000
+Received: by outflank-mailman (input) for mailman id 1235474;
+ Wed, 18 Feb 2026 11:31:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=po7z=AW=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1vsfln-0003bf-5d
- for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 11:31:03 +0000
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [2a01:111:f403:c111::5])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d84b78b-0cbd-11f1-b164-2bf370ae4941;
- Wed, 18 Feb 2026 12:31:02 +0100 (CET)
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com (2603:10b6:208:59e::6)
- by DS0PR03MB8296.namprd03.prod.outlook.com (2603:10b6:8:292::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.14; Wed, 18 Feb
- 2026 11:30:59 +0000
-Received: from IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599]) by IA1PR03MB8288.namprd03.prod.outlook.com
- ([fe80::b5ee:28c6:e04b:5599%5]) with mapi id 15.20.9632.010; Wed, 18 Feb 2026
- 11:30:59 +0000
+ <SRS0=CABg=AW=gmail.com=xakep.amatop@srs-se1.protection.inumbo.net>)
+ id 1vsfm9-00046b-9i
+ for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 11:31:25 +0000
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [2a00:1450:4864:20::232])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5ab3731a-0cbd-11f1-9ccf-f158ae23cfc8;
+ Wed, 18 Feb 2026 12:31:23 +0100 (CET)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-388126f79bcso37393361fa.0
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Feb 2026 03:31:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,216 +42,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d84b78b-0cbd-11f1-b164-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PiGNmNjvQ4fZYPGITcJ5DvITN7tte0u5H1gZWGuNKh5xSLFv38K4tF7Yuy12Lb6eoSMYP+McDmFMdUe79ptG/JAj9Ta76BeySfNYtjYeIm1z5s/DMi7by/VUa8lVZW9hP9Zr3yKKeCY/xqMCTRC5kk+etmw5isRsVLucU2bxBzYWWl0bUKljd+9A2rnlzcPL8hFqGkfMJNcxmjiXHwzfCziNlP3veFum14fm0nE6rOmVPCjlfhZ8BQc/dCPc2pkzolW1/WFeehY3f3/IBOsa3pUPUwdiPpoDDmJn3VzYkesMHBkmclhYHX0Bl4Jd3MzbZw5WCiGVaA7itENJ+0F8xw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3pSP71I02lZ3dBJ2hweIUNxrlqQCPeubufzb4yO1LvA=;
- b=MEmRisKUywZOV5+3Rr/lzhZ0geUvZ54TG2NkpqWeDMO59/4j6IHPlx/u3yWgQNZ8EhMyo51OvoLnRiF3WGMJVGgkhoSlKRdGxEzserm9vYjzvTjJZ5k0o3GoCvnxkKMtOp8AJbykD+ggOOMkwOuqJaF80TKy8W8xeJm4Lw8NdgcbNDb2RryWhIYMtzK93CuRJ3C3UQVyNp048NDOBZlOvYQ9w0PyzdmY+nDHT6/qZ9M6SXzsZhGlfO4sfcVFzff4t+i/KDkpxylNiNUqmkZiTpOXxcdFFP4ilwGCQdk0wtrTwvP45Jy9dxifP47QJPO70HjQSsMfVy6NpFR/sI9OFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3pSP71I02lZ3dBJ2hweIUNxrlqQCPeubufzb4yO1LvA=;
- b=H/83DNa8Ms+Cpab929brw9A13I1i0YKlycUUaA11vwn36xKtkFEGdjFeczHisKF398WIuFZCpLO/7p46HcXcrc1cO0Kdq9IPMEyjzUK+0RrT/DF5FANa3bKjmHamoSNLW3iii9dB5pNBOnjB65Jsy0hbuKNGI9rrKp2mbJLD38A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <60a1bc11-f9a6-48c3-b7d8-d007799fbe91@citrix.com>
-Date: Wed, 18 Feb 2026 11:30:56 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] x86/shadow: don't use #if in macro invocations
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <23951625-939c-4658-8146-84c1f12381d0@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <23951625-939c-4658-8146-84c1f12381d0@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LNXP123CA0012.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:d2::24) To IA1PR03MB8288.namprd03.prod.outlook.com
- (2603:10b6:208:59e::6)
+X-Inumbo-ID: 5ab3731a-0cbd-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; t=1771414283; cv=none;
+        d=google.com; s=arc-20240605;
+        b=A65kJh32mXSBGmgaxA8thhfjaStrut5+hJ46vvgP4LgDgsKSojGskvwq9cTRdmc8Ti
+         b6a2FsCpI5dUAt3ppuacFJd1enafxfLnefGPkj9t/skju8wqV7K9kcevItL193cZn2NQ
+         5RDrFF5DfvCXPHnMcaDSTaHy+DdUy7T2GNI48/wtH/zsiVsnahxKiIZQOI3GhOYkAhfd
+         zspQqwRbcIxNvVlle03Ud/ZZL+D7NIIWlhwfNEZbFqBNl9Ff7KJLObcxncVkSK31AWAh
+         LNIHMzYawn8BZ/PfP442VEFN2S71J7sV+Y09XyTfb3KElF0cVP4dPtJjtpb6p92+eK5L
+         fJ/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Cs08etBiNYUYlD0ODZUoYef1Y/MZqFHenbZZSUV9sQI=;
+        fh=S1TgsMYO/ju21WOcmYTQxMlAU8ImCjuw50drwKkfBt8=;
+        b=QK9HiIPi22OCkMT3fjV/N+07+dfmbx5V45FnhZJK9zyCcGlYinxPwoiXm5ge8sMENb
+         lQQBljo6twYG39/faNlsluUU4I20RMCIfO5bPOso9LiVKXSG6wzzBzXliXjlUksvuAcY
+         gs4b0jkGl5MxLI6B+/FNeZJqa71dDS48NLVeqf9lXhPTK+mjY4A1/hkCuHiJNXXwROYW
+         Tk8gMVfESZ5fBSiSlh0A1HWX3DZ84+O2oVPuufSsQlggN5xiibIjVlFI4D8mBBKFrS/Q
+         JkCsDOER/QjHkzVjCdxL76QsaF+lzO8zOriwHniRD4gT0I/IRokqrDzJN1ssHR0ffDQw
+         TZag==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1771414283; x=1772019083; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cs08etBiNYUYlD0ODZUoYef1Y/MZqFHenbZZSUV9sQI=;
+        b=JUbIMC+2EP3vr4RA+yfqRo9Btqmxy2mw1awA6MAyBJaDAzNpULh8QzCbgMhcEYvlZv
+         MHf9fF24FgulZ3qm+uSNrn9fwxV4TkvaiU+ZLkUlC8fBT8STaHbaILDYiNx3xWgkm9Nn
+         tY5DvPgK2qyMV8tNrZF77tLdhp6gWeWa7mXCHAan2Xcqg4HNPP9m3+CObkU2VTHDvzri
+         xUWskdKFFH8Z/bBDEGbgXZn6iFRnJcDtz59Pwh92/UM7P4VOSxTSMPgIwtYM0UiTrGj5
+         YsBAJn/lUuupN5xJfSk5fb/khyDaTwScj3atWzzEfofu3tDSRbh2wgKo+SJK5gWZnhhH
+         iMog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771414283; x=1772019083;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Cs08etBiNYUYlD0ODZUoYef1Y/MZqFHenbZZSUV9sQI=;
+        b=iaciHwbkFW1wAE39CxZTOMmsMfce7cqPye3yB7y3CAKhluFh0UJTA0/LQofl05gPam
+         IlRZa6RqHARq9R1IqtY25UZq46MFk+q/yFNPfilv4FX6cRQNQlAAH5C6RE4QTFmPvyus
+         9+TLOAOVvOm/Kg4cOVP1YH8jO2d+h2IL2OXu4g4WRmJu5IvfyiFgUx7AWa7YZPPlF+kV
+         HFHUlKILvh2+zbS4/E0i52NPJFs6vs7SOMcUwsaPZA4pZi6ybMDfIxpkbohVMDJu+Oya
+         3Es4VwvIKNGlTphZBi+Y0zD7/+srXp5ySf50MtemaaPpd1/bneC1PMZ0pLYcywQ0vwDX
+         Oqtw==
+X-Gm-Message-State: AOJu0YzIdOO8U6V0FfojSysrVVmP10foijyzMbiXPZOUMLEl1u6SpZ91
+	6yQ5ZS/bUNFkYmEbVmLAVKIoNfbdoMRmL/od+5Edafp/kE3rUXWPtF4cldTa03t1XRv80L5/mt3
+	6lNDAkUQWIepzHK6z20cx4g4hrZ5OPPE=
+X-Gm-Gg: AZuq6aJTAHBfpeISCadUkoJtpSvbIhOjYrIba9XfUzP0/L3gBq9OyeriVDdN1n0DtrY
+	7Kzvr36Hkxm9Ag1bbdddrE88jwYLzS27VcnstseEEH8mt6mReERyzqyyMqnn5jPHmYuzQg1qO+d
+	QUIicSCcXuxEgNHPajEYBr0uTMEZ/E2DPHQXOxK2rQgZmcoPDvLNKCQJ3UjxhzO/xYkTtD2wtSd
+	JIofzqT3CGo5+WQNpTljKE/J2bDCbE0KSUAZQI5WAwoiTUMtOyMYxXhnaig10uGpM/rVysTKfbs
+	AC3xvA==
+X-Received: by 2002:a2e:be83:0:b0:386:9653:5d6e with SMTP id
+ 38308e7fff4ca-38846e1c90dmr5404031fa.34.1771414282745; Wed, 18 Feb 2026
+ 03:31:22 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA1PR03MB8288:EE_|DS0PR03MB8296:EE_
-X-MS-Office365-Filtering-Correlation-Id: e93e1358-c032-45b7-fc44-08de6ee1307c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?SUE3b2ZUN0kwNEF3Sm1CUmNJYUlnZVh0SDlLS25EOXJsdHQ1RXEyWm1zZW5r?=
- =?utf-8?B?UjNuYjNPUVh6eDFLK0M0cWxIZlJWK3ZBYXFvd1lQQXhraE93K1o0WjZxakpY?=
- =?utf-8?B?bi9ieE1HVzhYaGhneWZYbmNQejR3alpDVDljNjBKbVJXNzl2U2p5SnFLK3Fk?=
- =?utf-8?B?Mkl6ejBoUU4zaUp5b2htaCs4TWRjNG1lZCthSEpreDZOMU9NelpvVWJWUFRY?=
- =?utf-8?B?NVBvVWhYdEFQei9YcW9DaXVtRzdwWCtsaHFQOXh5U0UrNlpGeURneVBxNnRq?=
- =?utf-8?B?WmZuMUY5c2FvSTNxYXR2eDVLT1hWUGQ5Qld1enVmVjd3Tng4K2J5bzFrK0Vi?=
- =?utf-8?B?dWVJVVh2OXdUcFFQVzN4aFhuRGZsWlp6KzJlTkZsUk5QWU9Fdm5JUDEwc2VW?=
- =?utf-8?B?dklGRVc4aFVhUDU5U1lQTkE1R2ZZUXJUdzRZN3NzTkYwK29lMDlyNElWM3hX?=
- =?utf-8?B?S3A0V3htbVY2RWlYclRPemFXVTVNN2dZcTEya1dhdi9DdGd0YWRTbjNoanZC?=
- =?utf-8?B?NUY3TWhRR3FrQ1FIeGs4MVpjMXlZWFpZZGk2SDlQanNaU0JMRmVXK3Y0VXpI?=
- =?utf-8?B?NnNIT2VQVW1aWWdyNFRmSlUxM3ZLSFFldzdFeVF4RHZ1azlVSnNIT3pyZXV2?=
- =?utf-8?B?cXJEUjFNaGZia0Q0cDNlbGlRQ3o4RXZpVCtMbnlOYTYvQUNaUVB0MTNTMmVB?=
- =?utf-8?B?WGhGeUtuREtlQTZFbnRvUFk0RjltRUxleFJFeXVpNmI4cTBRMVlZN0Yvbm9N?=
- =?utf-8?B?VmR2aHdaNlhrS0laMFowdWxVUld3QmM2YmU1VUtaSHpSbVI3R2ZIdnQ0ckJG?=
- =?utf-8?B?QXpmRDhWd1IxMzhhamZ2WHI5V2NDM1doUTJPTitWQ0tQWGw2Q0ZHemJUclkw?=
- =?utf-8?B?MkpmaEduR2F1cmZseXdyeGVFRndjamlaam5LWG9JYWYrZERDd3NtQmJjb2pD?=
- =?utf-8?B?WEI0MTR5Wi9JSGJRKzc0Z29QVEFBMjl5cUl0ellkaXZzblZsQWZ1cWwyRmMv?=
- =?utf-8?B?aTFLMGMwaGZaR1ZrMVZCTDJCVGJqT0hXZi9iUHN0VUEzdTVBZTBXZ05LK0xF?=
- =?utf-8?B?Ykcxc1paV29oazdueElnaUdmU3JWS3hEeEVWQzVwSkV3OW9tdm9xMWZEWGRE?=
- =?utf-8?B?S1FPVDNlc210RHBQWWlOS29vZ3QreUJxYVEzN2h1NW9KU0lEVzhVclFsR3FV?=
- =?utf-8?B?MGR5ZmFZK0dvYWtJQUl1ZU5IT0UyUVBXVWZ0WWswTXdXRXJsM1YrTDJWOTBN?=
- =?utf-8?B?QW1DSXJPcGY5RzVkanRxVXlhNXg4aFpCNEk2S0FGajJvR210aVRDaTd6K2xy?=
- =?utf-8?B?R3FQY2RJRGZ2N3ZiaFR5SWt3OTRTSjM5UEhBWTNwZmZaODBRNVBRM3I0LzRH?=
- =?utf-8?B?aDQyL2c4STRnVEhQYUdMdDlwVzUzZFVweUVCL3NwcG93NmpRYVNUQzB3cm91?=
- =?utf-8?B?ZGROVVhDRVhKelMrNEVHdEl6SngzMTJPM0RIZ0NobEZsdVpqcUpWajJzNWJr?=
- =?utf-8?B?L0FCOW1DNDZuejNmVTBlTzdPZDBrdWttM1BXc0NDbTZtSVRIT1N2SzFsMHRI?=
- =?utf-8?B?ZnpaMHJOTWJWcXVJd2toa04zM1lHZFdMRHZsWjRLYnVsY2hzOGg0UTdvemN6?=
- =?utf-8?B?ekJteGdBK1IraXJzdFJkZVVQR3BLN0FWM0lUdWJyTUR3ZkhLU2RNb2YycTZ6?=
- =?utf-8?B?YmRTeVREZ3lSZlVWZ0dsSWFtOXUvbGdnSkJibDFPQnRCejN1aFhnZnlRdlMw?=
- =?utf-8?B?MGFBcFF5blYzKzdMS0tRWXlheStvOU5yNnk2QnV6WmgxenppM1NNL0tvaTZn?=
- =?utf-8?B?VHBFS1hUL1ZWZHBzWnA1WmhwcVdwTWVyYXltOTFqbGZBNkQ3Z2M1SFoxTUkw?=
- =?utf-8?B?dWNsVDZZdkhvVmt3dWhlakZKRDl4dmpXK25WelBYMVRRV2xGV2tETDlCM2VK?=
- =?utf-8?B?aS9ZSUFWTU82S2x6VUhqVUVycnNGTncxYTVyeVNvaWdUbFl3QVNldG5nY1E2?=
- =?utf-8?B?ZHpteDJtV0o5UzdRN0ZzQmUwN1lwTSt4MDh6aUZVMjg0V1ErUFNnMy9yblVW?=
- =?utf-8?B?R2xIeEdtdFJOWlVrRHRGei9PRmFsOURWWkFuQkdlT3IwYzJNWU9UTUNjVi9n?=
- =?utf-8?Q?r3gs=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR03MB8288.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?TjY5Z3k0NVFBQ3V3Z01Jellzd09ENmRoSEJtNTFHci9KcnpoMmpYVi9xc256?=
- =?utf-8?B?emo0K0tiVnhoRkQxSVh5Q1VuRTV6WE45dVRFaUxKd1YvWndXRktmMHoxUnZj?=
- =?utf-8?B?eDB4dkRldjZEVzhzTlBhYjNsVE9mU0Ric0dTOEgva2tva0dmeG9wbDhJaDZp?=
- =?utf-8?B?djNDVERTT2V6U3RHWE5ORG5ZNjd4S0JGcWVwS0k3ZUxteHhmTlpaaDNEL01C?=
- =?utf-8?B?bGdPQVZldTlqUnNoZG1QUXhvUXpxWGpiQW9iWGhoMDYxTUlVdEpJZEVTb0sv?=
- =?utf-8?B?aDZ1N3FrcmdaNGgwa282YUwxY1lraGJNMExzODJhZmwreXVVdUdaVmZ0YXRk?=
- =?utf-8?B?eE5sNllaaHQvMUc3U0JaaUVnWTZrNXlqTVF3S05IUmYvMjFDZnp5QXBBTG5x?=
- =?utf-8?B?YUdtTFdhdzhxUkphSWRWVXFYek03Q2J5OWNKak5PTFBpVERsV01aNHZMUjVq?=
- =?utf-8?B?bVAwYnhVNms0ZHJmdStCZDhWeVJLTS9CTEhxL3BGdG1NWUZSM251U05tTDF4?=
- =?utf-8?B?RjdxU0xPVDhDbnVUSDFEOW9FNTJUeTR5aTJlR2VLZ21nUzhGR3d5TFYwUERY?=
- =?utf-8?B?MUhiWHI0eTRlM2FGSnlHZFIvb1JVQ3A1NmJpME9COVdSMXpvZUJGdlhtNUow?=
- =?utf-8?B?Nlg4WnlpQzU2d3N0Mmc2djhhZzVwMnpLTXg0RzNWeHdodFVhYXQycEI4Rkwy?=
- =?utf-8?B?RkVsYkxXaUlHa0FOeUpWZzFTNExDZ05qYzQ2dHhJNWhSYWJIYjFHWE1SWjc3?=
- =?utf-8?B?U2NHZFRGNi90a08rVEtNZldPMTVIQmVONmZPZlJ6Tk4zNlJ0SXo2SGxEa1F0?=
- =?utf-8?B?VlVGVHloWUVOb2JPa0oyT2NSbmRuT29UMStlSVplcy91a0Y0R0Q4dFhPNEkv?=
- =?utf-8?B?OXVCVGp0TWFvOTJGajgyL1BxLzc0c2p1VEdldlhoRjJ2L0t5V2RpRk5aVHFr?=
- =?utf-8?B?dDZ2TnhudDR2cHpEWHlEQStacndvMm15MGFzSTdCM3VQbUlrTmRoc3BxdXN4?=
- =?utf-8?B?QjVncncrc2grbUlOZGtmamE0ekFaVHluSkdWZXdiZUNhM2U5aGJSRFZ0dUZ2?=
- =?utf-8?B?OWNqVk5SZGFaaE40QXI5T2RVSUhjaVBDRjdNV2RNVXBNSzhjZUw1T1JyWnJE?=
- =?utf-8?B?NzJmaU41VUtueFNZVDhVL3FqYlZCYTNwZlZWSHdMNGh5TlpBWGdjSUJadWtK?=
- =?utf-8?B?UmEwemFhQWN1YlFxak9sMUkzNGt4Q05ZdzF2ZjVWVm5wYXZ3THhYMjk0cmc1?=
- =?utf-8?B?eTg3dU9jSkRiS0hzcXJ6WDUzMUozSDgwajMzNTNhU0s0OFF2UUdTU1hITDlT?=
- =?utf-8?B?TDRsKzVTRFVGU20zL2dITEg0VmlIU1pNZjBNNUI1U2JPcHVpVlJEbjc3Zllt?=
- =?utf-8?B?M0RzZlE5Nzl6MkZZSW9SemEwWHNxMGoydWFwUFFoOXppQVlDbmRHMUxVVndC?=
- =?utf-8?B?Y1dPelZFbmVQM0k3NCt0ZXJLY2lkUVFKQndPejZldmxRU1Rtb0pBd1lyQkk0?=
- =?utf-8?B?YjZrbUZGMHJvdlgxVWdlYnVHTWdlRjhEZ0ZiODBlNXpBWnF2NmlJNXNrSzU3?=
- =?utf-8?B?bjBWUnBLYmY0cDdTUm04bE82S09VTVVEbzZpR1Vwb3RFOFN4WkFHR3VTNHpn?=
- =?utf-8?B?bmY2aXVlU1BjaE1FWnlFdVFKcDlneGxPZHNqZ25NNVRHUXprRE1zUnpBazZC?=
- =?utf-8?B?RTBPOTNNa0R2Y0l0TUkxa1VIZTBhTDRrTXR2SUVPaE9IeldTUDBaN3Z3THJy?=
- =?utf-8?B?TGErbG9zeXQzcHkzTlhwMnhLN3dydjY3aEZNZmJNWXNybWxFeTBBRlpCRzhH?=
- =?utf-8?B?djlmNlJZWlFPbzVIb1paOVZLMDlKRDQwazFxMjUxZ1pFUkJCNitHRVZoTW1r?=
- =?utf-8?B?QkZOR0gxT2s5TG05ZVlOWkNiTkoyQlMzYU1EcG03anl4am5JYU95QkhCeDRS?=
- =?utf-8?B?T2NiUHA3eVRXZHVXUjh3cFVFQTVLT2pGS3RDWk5ScStTb05BQ0NsWmpjMDR5?=
- =?utf-8?B?QUw5cDF3MXhIbXRpazZLamtTak5uOHVnK1dqV2N4WExEK1BPcHI3bWRaRVZZ?=
- =?utf-8?B?NFVxSlhsSzRUcEcwcmg0empqckdZeDdVV2lHcmZMVk5qTXptK3JIUTU4clEw?=
- =?utf-8?B?ZWtDRDdOdnVCUi9WWUp4UFVFOTRreWxKNVMwZFB0bnN0dUhqS0M5YTk5MkI1?=
- =?utf-8?B?MWQ3emdFQS8vUjduR0VIOGpOSXZ4UVFROXRQWDRSNnd2eTFqbWFoeUlPSVha?=
- =?utf-8?B?NVhxdDlnOXRQQTg3MEtTM1hGZDR2aElHV0NtZzV5OWFMT0RBME5zQjdhZHVR?=
- =?utf-8?B?WEtuMytDbE9OcjJNOHNVaEFnZlZSNlFGbXY1YkNuN2FDVENyZUNldz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e93e1358-c032-45b7-fc44-08de6ee1307c
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR03MB8288.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 11:30:59.4065
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QK27b38ZC7dMXmAvntycbt1bXkL99ig5Bfxsq0l8K8zCoBxrnXSzW5K8Fs7ofqv/0Qo1AFqlILdnQTRfFUT65YZYBxma4QFIRrqc1S4vit4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB8296
+References: <cover.1770046465.git.mykyta_poturai@epam.com> <b15ec6f42418d7c0669d551e42be1d1b75839df8.1770046465.git.mykyta_poturai@epam.com>
+In-Reply-To: <b15ec6f42418d7c0669d551e42be1d1b75839df8.1770046465.git.mykyta_poturai@epam.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Wed, 18 Feb 2026 13:30:00 +0200
+X-Gm-Features: AaiRm51Fr3YTyjMCneA3a-mdmhwduL52fJf_BXgXYD2zkSB0SaQyfD3EZGcDbsE
+Message-ID: <CAGeoDV_=tpv09wibQcrazt1XvQY=adLDXB7Z+duuN1p5gwrJrw@mail.gmail.com>
+Subject: Re: [RFC PATCH 12/19] arm/gic: Add VPENDBASER/VPROPBASER accessors
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 18/02/2026 9:03 am, Jan Beulich wrote:
-> As per the standard this is UB, i.e. we're building on a defacto extension
-> in the compilers we use.
+Hi Mykyta,
 
-Is it a real extension, or just something that happens to work?
+Thank you for the patch!
 
->  Misra C:2012 rule 20.6 disallows this altogether,
-> though. Use helper always-inline functions instead.
+On Mon, Feb 2, 2026 at 6:14=E2=80=AFPM Mykyta Poturai <Mykyta_Poturai@epam.=
+com> wrote:
 >
-> In sh_audit_l1_table(), along with reducing the scope of "gfn", which now
-> isn't used anymore by the if() side of the conditional, also reduce the
-> scope of two other adjacent variables.
+> Implement accessors for GICv4 registers VPENDBASER and VPROPBASER.
+> VPENDBASER access needs special handling to clear the Valid bit before
+> writing a new value.
 >
-> For audit_magic() note that both which parameters are needed and what
-> their types are is attributed to AUDIT_FAIL() accessing variables which
-> aren't passed as arguments to it.
-
-This is grammatically awkward.  IMO it would be clearer to say "For
-audit_magic() note that there are more parameters than might seem
-necessary, caused by the expectations of AUDIT_FAIL()." 
-
->
-> No functional change intended. Of course codegen does change with this,
-> first and foremost in register allocation.
->
-> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
-Definitely a more surgical fix than my approach.
-
-I was attempting to turn FOREACH_*() into real for() loops behind the
-scenes, so we don't have the {code} as a parameter, and get real break's
-rather than magic behaviour with the _done variable.  The problem is
-that ever helper is different, and there's rather more hidden under the
-covers than appear at first glance.
-
-I'd still like to make this approach work in due course, for the ease of
-following the logic if nothing else, but its hard enough to not be a
-couple of hours work, and not high enough on my priority list right now.
-
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 > ---
-> Leaving even the fetching of current to the helper in
-> sh_rm_write_access_from_l1() looks tidier to me overall, albeit this means
-> the fetch will now occur once per present L1E.
-
-This will not make a dent in the performance of the shadow code.
-
-> Converting the #if to if() and #ifdef to if(IS_ENABLED()) wouldn't work
-> here, as identifiers are used which aren't available when the respective
-> conditions are false.
-
-Personally, I'd have put this in the main commit message, because it's
-the justification for why out-of-line static inline's need to be used.
-
+>  xen/arch/arm/include/asm/gic_v4_its.h | 38 +++++++++++++++++++++++++++
+>  1 file changed, 38 insertions(+)
 >
-> Note that I tested this only on top of
-> https://lists.xen.org/archives/html/xen-devel/2023-05/msg01140.html, but I
-> have no reason to assume that there is a problematic interaction. Of
-> course it would be really nice if the rest of that series finally could go
-> in.
+> diff --git a/xen/arch/arm/include/asm/gic_v4_its.h b/xen/arch/arm/include=
+/asm/gic_v4_its.h
+> index fb0ef37bbe..ba81b25bde 100644
+> --- a/xen/arch/arm/include/asm/gic_v4_its.h
+> +++ b/xen/arch/arm/include/asm/gic_v4_its.h
+> @@ -17,6 +17,8 @@
+>   * along with this program; If not, see <http://www.gnu.org/licenses/>.
+>   */
 >
-> --- a/xen/arch/x86/mm/shadow/multi.c
-> +++ b/xen/arch/x86/mm/shadow/multi.c
-> @@ -395,7 +395,7 @@ static inline mfn_t cf_check sh_next_pag
->      shadow_set_l2e(d, sl2e, new_sl2e, sl2mfn, SH_type_fl1_shadow, sh_next_page)
->  
->  static inline u32
-> -guest_index(void *ptr)
-> +guest_index(const void *ptr)
->  {
->      return (u32)((unsigned long)ptr & ~PAGE_MASK) / sizeof(guest_l1e_t);
->  }
+> +#include <asm/arm64/io.h>
+> +
+>  #ifndef __ASM_ARM_GICV4_ITS_H__
+>  #define __ASM_ARM_GICV4_ITS_H__
+>
+> @@ -50,6 +52,42 @@ struct event_vlpi_map {
+>  };
+>
+>  void gicv4_its_vpeid_allocator_init(void);
+> +
+> +#define GICR_VPROPBASER                              0x0070
+> +#define GICR_VPENDBASER                              0x0078
+> +
+> +#define GICR_VPENDBASER_Dirty                   (1UL << 60)
+> +#define GICR_VPENDBASER_PendingLast             (1UL << 61)
+> +#define GICR_VPENDBASER_IDAI                    (1UL << 62)
+> +#define GICR_VPENDBASER_Valid                   (1UL << 63)
+> +
+> +#define GICR_VPENDBASER_OUTER_CACHEABILITY_SHIFT         56
+> +#define GICR_VPENDBASER_SHAREABILITY_SHIFT               10
+> +#define GICR_VPENDBASER_INNER_CACHEABILITY_SHIFT          7
+> +
+> +#define gits_read_vpropbaser(c)         readq_relaxed(c)
+> +#define gits_write_vpropbaser(v, c)     {writeq_relaxed(v, c);}
+> +
+> +/*
+> + * GICR_VPENDBASER - the Valid bit must be cleared before changing
+> + * anything else.
+> + */
+> +static inline void gits_write_vpendbaser(uint64_t val, void __iomem *add=
+r)
+> +{
+> +    uint64_t tmp;
+> +
+> +    tmp =3D readq_relaxed(addr);
+> +    while ( tmp & GICR_VPENDBASER_Valid )
 
-While fine per say, this doesn't appear to be related to the patch?
+The loop clearing GICR_VPENDBASER_Valid has no timeout.
+If the bit never clears, we can spin forever. Please add a bounded
+retry (and warn on timeout), similar to other polling paths.
 
-Everything else looks fine.
 
-~Andrew
+Best regards,
+Mykola
+
+> +    {
+> +        tmp &=3D ~GICR_VPENDBASER_Valid;
+> +        writeq_relaxed(tmp, addr);
+> +        tmp =3D readq_relaxed(addr);
+> +    }
+> +
+> +    writeq_relaxed(val, addr);
+> +}
+> +#define gits_read_vpendbaser(c)     readq_relaxed(c)
+> +
+>  #endif
+>
+>  /*
+> --
+> 2.51.2
 
