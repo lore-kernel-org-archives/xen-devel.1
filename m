@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF04E9A02C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 15:47:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1235804.1538654 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC08E9A047
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Feb 2026 15:50:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1235812.1538662 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsjm6-0001c4-Jt; Wed, 18 Feb 2026 15:47:38 +0000
+	id 1vsjoX-0003A0-Ue; Wed, 18 Feb 2026 15:50:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1235804.1538654; Wed, 18 Feb 2026 15:47:38 +0000
+Received: by outflank-mailman (output) from mailman id 1235812.1538662; Wed, 18 Feb 2026 15:50:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vsjm6-0001bw-Fj; Wed, 18 Feb 2026 15:47:38 +0000
-Received: by outflank-mailman (input) for mailman id 1235804;
- Wed, 18 Feb 2026 15:47:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=cF4C=AW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vsjm5-0001aX-Am
- for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 15:47:37 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 251cd65f-0ce1-11f1-b164-2bf370ae4941;
- Wed, 18 Feb 2026 16:47:35 +0100 (CET)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4376acce52eso3572443f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 18 Feb 2026 07:47:35 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a74918sm42702163f8f.17.2026.02.18.07.47.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Feb 2026 07:47:34 -0800 (PST)
+	id 1vsjoX-00039t-S1; Wed, 18 Feb 2026 15:50:09 +0000
+Received: by outflank-mailman (input) for mailman id 1235812;
+ Wed, 18 Feb 2026 15:50:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=nwpa=AW=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1vsjoX-00039n-An
+ for xen-devel@lists.xenproject.org; Wed, 18 Feb 2026 15:50:09 +0000
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [2a01:111:f403:c112::5])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7df48003-0ce1-11f1-9ccf-f158ae23cfc8;
+ Wed, 18 Feb 2026 16:50:06 +0100 (CET)
+Received: from CH2PR07CA0065.namprd07.prod.outlook.com (2603:10b6:610:5b::39)
+ by SA1PR12MB9469.namprd12.prod.outlook.com (2603:10b6:806:45a::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 18 Feb
+ 2026 15:50:00 +0000
+Received: from CH3PEPF0000000C.namprd04.prod.outlook.com
+ (2603:10b6:610:5b:cafe::1f) by CH2PR07CA0065.outlook.office365.com
+ (2603:10b6:610:5b::39) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.14 via Frontend Transport; Wed,
+ 18 Feb 2026 15:50:00 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH3PEPF0000000C.mail.protection.outlook.com (10.167.244.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Wed, 18 Feb 2026 15:50:00 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 18 Feb
+ 2026 09:49:59 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 18 Feb
+ 2026 07:49:59 -0800
+Received: from [172.17.121.74] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 18 Feb 2026 09:49:58 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,228 +65,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 251cd65f-0ce1-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1771429655; x=1772034455; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=tpzoMMNKAw8Tv8y20Bu/mhhyjy6Tbc0ostyv8jc+Euk=;
-        b=fOorGpl9XB03075tVM/ntiL+urd0+WrV1oG6kqy/qdlXllWwhlX4zxP6mCFLiEv64b
-         7anjk3GtRu2N0+5e7JthwbhxM4wbeZGbiAfughFjOck+BI9d9JTCnhyQTRSz369uzyVo
-         k/v48FjX5t3iO7FQGQHupqfUi0nzLf0Nr3/h3q6ilkW2O9sGrt5xKQ6NdlqqDQ/tMVyb
-         Pl5rFGT4mGOcfE+O7kVsp3AbKB+4oBscsR2INa6mnGA/9eiDFgKgKj4RShsjQjPYSi6p
-         tB4htT9e1Fqg5ljIi4e9BWxbv+wgTZr1+pkHqanWcBtWv37775+NsbXulmzWRJusAX5w
-         J7rA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771429655; x=1772034455;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tpzoMMNKAw8Tv8y20Bu/mhhyjy6Tbc0ostyv8jc+Euk=;
-        b=dm2O54y2Pnygomr8FXvcHMFtLVH1WF9JHQpgAHdblawvN8IHUcJsTsZrQK5tG2KIf3
-         rXyxYYRwe6sOwJChmPL5JHDR0xwbc+QnEIUumY0ERkA6YGFp0P5gxqqE3dZ9cY1Up81X
-         DyOwqkB2gpBfHuK+Fny19G3LdhFQ8MP6t9TJnLYes7cQZbIcdJL3Qz6VCDKqAaakfG03
-         AnjndsR5IExWAe6Q5xr5i33TRaF4I+z+JHzIoUpyguyqHy51HQdG1QPtCnh+DiNOlXWO
-         lKvQR5de7eSfVqwORBhozyvq9Gje2Ax7CaARW+aTvxrTJ3Jjxf1n8wiZhzB/fW6KTAYb
-         LD0Q==
-X-Forwarded-Encrypted: i=1; AJvYcCXic9YA7LvW5xkmZcgmdNNVaO1QRRdLt+epy6S6peE5uBfypnL7T7A4nusl/PcTczojrCmJP5FwEOw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzdId9wj8zA4+5I0zIgP3R8af/oM9wgzWdQVvmY9T95lWhrGbV9
-	srjZlhxqTWR7SAOlc0NUEuJBi42GJRo1ppYPYRmQU6KaE1sFNMVNOr8xTiQmzx5hOQ==
-X-Gm-Gg: AZuq6aJs7hV43xSH1YN3aDhuCYKEIiwrpK5tt8mZ4XTVtNmGc8PXLMprOnZg/2bX4zi
-	EBCkaaRhQK67PsOwze2sKInBCVTHUcr8TssOpx7f112xPkQhdPKWvUz9c4h3uQjDyHaGarn2GOJ
-	Xs82PIpQ75WtMkvQq3qx4WQgkvGT71SSGXOioI0VXFjl3mz7K2oilNd2/zLq6/LjEwPro4+oNO6
-	Rq+Qk1A99OJ+42jwcdC6oAsU3h/s1bHjr0+0Ye3wP+cbSq97g7uRYGn4BUlNekO735+gg/vNS2x
-	lEQkp4QuALOTfQv31ZRSUWNQeldtrHDQS0PUdtuks4xw8UE0H7f2kWzm/MzfuV6mBDwJAlw52MM
-	prRxuCH+XSIkdeMp6Vc0tm4s7ayV0KId/OrzynMIWaR1YQnMJc5CcWEJ4Aoti+tPfQTjV2HLMl/
-	WaWLEpcCE+jhzxICQ0PLl8ACosXh8AQkqXWFGrwNxPUvJIi3yT7J5dNgoMo2iz9cvtp1DmXPBdj
-	LixR0RcpWh4iHE=
-X-Received: by 2002:a05:6000:184e:b0:436:1a4b:de36 with SMTP id ffacd0b85a97d-43958e0314amr3869656f8f.22.1771429654789;
-        Wed, 18 Feb 2026 07:47:34 -0800 (PST)
-Message-ID: <158de6d6-f7ef-453c-9c78-00c4d785bcd1@suse.com>
-Date: Wed, 18 Feb 2026 16:47:32 +0100
+X-Inumbo-ID: 7df48003-0ce1-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HA4+Q9NHKYGncshG83j3/NYPK5U/UmUCnWXPTcCm52yhsED6cWyz7gJWYSl5GPc8SZXEX/CiWd73PhiEkKsaWiXqziryBoQV74+R2pnszRb9z+aR3I0A5KiQsYJo6oYOP3G52ImYIXPCFKSu4JT6xP4OMsFzAd7/ZYW/4fQIqMhaiu58MYu+xtCiZRFHE7DQUB5okm34XJ1/bWyXMmdmAclQh+PyRLCh5Nfqa58IBYBWH/C0P46H7YE/pzIb24LI6nbX+f5zdl6l+kWgcxEJKSlMbfBz+ccBBtz2ygtSYRDKPcSqsUf56zZp9jCS0QyZETf4I1Pyho3mjpmmpGQxuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eiDC6gGtcvi+Z1M7pdgqZLR9NEQKhSwZ1067MLtFS5I=;
+ b=esjr/cXrHZ79Q5Mw0Mo1ifEPcaocboeMO2nsh1kcfWVv4HM2/7kCi5nT8wMqDMe31MS0FQKUox2eDDZvB0L9nDQI8xNONXwtP2AZg/ukqQIDhhhGgaOOlyX9/Pp4OOirzyTVo5OQb4W4NsBYOeGXCDKIrajT0nsum9UEPM5RzpseaySpXiVe7eAwfcGjLjYWkgbqFa67ABuBPGK4fmTct3yWCszEZEBma3znJB0H0iSN95rHA01HdQtNaeSg2DSrHZIRS03uFsba9hYpDPrCFADisRBbF6yYWh0AxsshuO+srUMktTxZaa1TgltKlr9FKxnLEoDkaCyJlwc6Hq5tZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eiDC6gGtcvi+Z1M7pdgqZLR9NEQKhSwZ1067MLtFS5I=;
+ b=tSS0J3q8CVAjFEdmyHs5Yq+v4RJKqeF5Vr07xAUzLkzeFl2dlneXfReMXMB/KCsUsQZj0jLN62NcKJGl90lpP+N3o+lx06ej0UjrXJMT/IuhxgoUIGOgI3O6lzAEdC4zv+4kcKpHXc8KZYl2UbMZ4XpEHM5cwtRfpyGhRtgFpfY=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <259b799d-33bb-4180-9816-f9bc316b8d9f@amd.com>
+Date: Wed, 18 Feb 2026 10:50:01 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] common/domctl: xsm update for get_domain_state access
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Cc: Chris Rogers <rogersc@ainfosec.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260216215748.20398-1-dpsmith@apertussolutions.com>
- <1a1d8db1-d553-470a-8678-b879385b2fec@suse.com>
- <ff62ece8-a7f3-4490-967c-e9e8283dcd9d@apertussolutions.com>
- <57074bdb-6af9-4cd8-b1da-d348757ca168@suse.com>
- <2ac8e0ec-54ab-4485-b0f4-a49920726d0f@apertussolutions.com>
+Subject: Re: [PATCH v4 3/5] vPCI: move vpci_init_capabilities() to a separate
+ file
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+References: <25c65557-c97c-499c-a698-571e40cde563@suse.com>
+ <c90890f0-2e6a-43d9-84f9-b0ea19a11d3d@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <2ac8e0ec-54ab-4485-b0f4-a49920726d0f@apertussolutions.com>
-Content-Type: text/plain; charset=UTF-8
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+In-Reply-To: <c90890f0-2e6a-43d9-84f9-b0ea19a11d3d@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF0000000C:EE_|SA1PR12MB9469:EE_
+X-MS-Office365-Filtering-Correlation-Id: e5e801c2-8075-4995-9811-08de6f055f85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?dWI2ZzRrYW1XajNSSzI2N091bHR5dEZUVTAvWG43M1QzT1lCY2g1cUpxMC9O?=
+ =?utf-8?B?RXl6dWVCYk5GbGZaaEhEbWtJWmpQL3licHByNE5kL2FqYWs5a0M1MVZoQld0?=
+ =?utf-8?B?RjUwVytJWkhDZ1NHV3JGWXFZZWhuM25FSXRTSDR5dGJUN0UzODBjVE91NkZO?=
+ =?utf-8?B?T3lGNlNiOWdGc3hnMEc1SG1VSGViVGtNRFMybVlOeDFOeGRieUszN2s5QVE0?=
+ =?utf-8?B?ekJ5Lyt6aXU4TGFiVHA0eERZWWdqVVVLclZGT1Z2RkhJZGhsVHpyNyt2QVlr?=
+ =?utf-8?B?QW9QVEJwdXhiQkN6MTZUVno5VHBvaERPRTVub3ZrVU50RTV5SnNjZnJRVUVa?=
+ =?utf-8?B?S3pWYTZOd0Vpa2daRFBNbld3MHdNYTNpWDFHSXhQTzRLSjVqUUQydkZ3VDFJ?=
+ =?utf-8?B?cDh5SEYrK3Fqc0VnUEMwd2RDRTN3V05wU2k2MVhwcUNBU3dMNDgzOGtLTUdK?=
+ =?utf-8?B?TEZDNDIwL1BtODZ4OVhOZUxGZUtJdXhHZUxsK1N0M2Q2SUNrWHlnejc4dzht?=
+ =?utf-8?B?OXE0dXZHNTd4SlRSSmN0ZHVmRnpraGZOUVRONGVGMTNWd2dxb1RqN1lvR1hz?=
+ =?utf-8?B?Umo4RmU5WVREbFg2ZGhIMjF0eHpNT1lQZm1JYXd5S3oxZzNEanN0U3BtaVll?=
+ =?utf-8?B?N01LTTMwVitxUWJBYldpRFA4YmRZVnU1czEzRDU4V1NqdGM5VzZPYTdDZXVy?=
+ =?utf-8?B?MUY4dzE4eHptY095dG9FS2psRk5TQTkrcTZtRFhuWEp4anFGM2NqUkxUWWI1?=
+ =?utf-8?B?elJVcExJdTJWdW5YV1Z3TkhDb0t3STVLd2doYVphaFVtYWhTZVhGSElJL0dY?=
+ =?utf-8?B?TTF3ekpUVnQxYmRuU2ViMDQ4WFlCemFkbHZkT0NlNXdzSnN1djkzLzU4aDZu?=
+ =?utf-8?B?OUZDTFVEZHRMN3IwakJHMzdZZmhGc0JlMElRb3hJeHRzb1pMVmdHQ2VOYWFF?=
+ =?utf-8?B?RnpzTmRENWsrNUFOSXdBUW5BMDJ4VXlTQmRBaWRXQllkK281Rlp4VnRvN1Vs?=
+ =?utf-8?B?ejY5eTRXZEVxN0I2Q25ES3l5QXBKMDRXOFBWeG9ZVkw5M1BidzJST090ak84?=
+ =?utf-8?B?UjJxaFhQNm1SRXVRWXFLSUFOa092UjlCQVBTdXRLMExhS0ZGS05Wd0NvM2tC?=
+ =?utf-8?B?c1VqRjIra0o3dElOLzZIV3dLeTVxMmJ3ODM0bERHQWh2R01zWnY3a1EwZDJP?=
+ =?utf-8?B?QTZ0cTRUdm5FL1QzYUZITzQrbnV4enh5Nlh2UTVaYU5oME5XeTgxZWMxbDBz?=
+ =?utf-8?B?UngyS0dtbnpsSEU2aVB0Z29sTG1ENUd1SFo1dDJBakxFTTZJWUQxR3JBdFpG?=
+ =?utf-8?B?d3pIU2doR09sR2dSSEQvZkhqRnk0bjQ5NVFVYWRoemludkllV2pqdzJ2Q2hi?=
+ =?utf-8?B?MXo5bmhZMlZXaFBlZGNvMkFGN2JMUkd6dUVXRmQrdUZtRXpldEhVQzhoRXdN?=
+ =?utf-8?B?Z0k4MnBlY3RtOEZEeUxIc3ZHc1NZVFNtUy94c2Q0WXVGemR2NVBVU0JmbVlI?=
+ =?utf-8?B?RmV4R05hT2kyeHowZTY4ZGpvbG9oNVNZdWpDZ1N5QjJ3WisvZk50RWlVWER0?=
+ =?utf-8?B?K1diWDJsZCtNZ3NrY2V1ZWJqaHJ3RnpwMTMvQkFLWERCdjFmQ0kxNG9CQUJ6?=
+ =?utf-8?B?dC83VmErb1RreFlySzkwbzJRUmUvVlFOM0lnOVAvTmc5N2U5SmJvR2d4UzRN?=
+ =?utf-8?B?UHdmMWtOQ053TEVuMis2OG9UeHZQRzQyTlJhUVd1N1FQcUdvUzFndFU5WXh6?=
+ =?utf-8?B?ZlJXTGdZQm1Ycm91ZFk1N3B5ZmlFMTFscXE2aFdEMU80TENLZGR6SXdJMWR0?=
+ =?utf-8?B?dFFXWmRuU3oyRER0eURJRElETE4vNktPZTNyWWVWakZBNWE1NHdHOVBhZ1c1?=
+ =?utf-8?B?cmljMkZrNWJtMkdMR3BPMCtldjBwanN4Z2ZFTERqMnVJdithR3FpYll4SmVU?=
+ =?utf-8?B?NmlHaTV1ODZrZDh4czQySGlLanFKck40ZnRJNmN5d21GQzAyclhMV1JjR2Yz?=
+ =?utf-8?B?V2ZzVnp2dWkyY0RHVkNLb3lFaTVnTEVEU21BUGpBYklKNktvRnUvcEtXL2Rr?=
+ =?utf-8?B?Q1hydlQ2L0Z2cnJWYnNQNnJ2aW1ySCtJQjlDaTE0cGkwcGpjQnFCc3dLazNk?=
+ =?utf-8?B?SU1OTk1OU1NJQnVkOFczd3MvVEJFbXExNSthUmJoTENvaUtLWlNUaEVyVTFY?=
+ =?utf-8?B?YnVaS3ByQmFIbUYyZlZkYVJHRUEwd25jNU0raHRwYTJEY2FGSHdwUXJ4aUNW?=
+ =?utf-8?B?azdpNTFsMXd0WHlQRi9MS2d3dlVBPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	0g6y1M5VhnkZ1WjYa5NmelttlMXnUN0HE4EkYoItzSLBOO12mZ1dKMYZ9GwjQwDnch1Tfq5zSy5B9zArP2eSCID9NJBYxqgkzmwzLgD1a3yxNdTLNNL7bakfr/c/USyvu2fGYOjlPF73FOaTFq+r1waDcQ0bdzGJOBBxrdqXXEZ4IVbSxOPGF92zwnCw6Td/00GCXKgfxHcvYYIg90ookUGgI1VegreEIurGpY3auNNACVLeqBSOnWPcUOcLxjjRJdcwqw7RLdA5Dl/Zo+J+eRxUruPqIcUGJve47XW1XZp+qqjLhTizOndP5lZpJchyuTMa8SfAMGVG+nq2sh5zlGhI+5wRGG7C9bpZOJ2+rOeSB8ScS2ToRyiYlW+aC1KPaSkvI9mLfhtO583eM2k7D7HQt9vRD9NXkaUvvGYwpFT7iAWj9ZuYP4VguXGgp0F7
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 15:50:00.0766
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5e801c2-8075-4995-9811-08de6f055f85
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH3PEPF0000000C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB9469
 
-On 18.02.2026 16:32, Daniel P. Smith wrote:
-> On 2/18/26 10:03, Jan Beulich wrote:
->> On 18.02.2026 15:33, Daniel P. Smith wrote:
->>> On 2/17/26 04:34, Jan Beulich wrote:
->>>> On 16.02.2026 22:57, Daniel P. Smith wrote:
->>>>> --- a/xen/common/domain.c
->>>>> +++ b/xen/common/domain.c
->>>>> @@ -210,7 +210,7 @@ static void set_domain_state_info(struct xen_domctl_get_domain_state *info,
->>>>>    int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
->>>>>                         domid_t *domid)
->>>>>    {
->>>>> -    unsigned int dom;
->>>>> +    unsigned int dom = 0;
->>>>>        int rc = -ENOENT;
->>>>>        struct domain *hdl;
->>>>>    
->>>>> @@ -219,6 +219,10 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
->>>>>    
->>>>>        if ( d )
->>>>>        {
->>>>> +        rc = xsm_get_domain_state(XSM_XS_PRIV, d);
->>>>> +        if ( rc )
->>>>> +            return rc;
->>>>> +
->>>>>            set_domain_state_info(info, d);
->>>>>    
->>>>>            return 0;
->>>>> @@ -238,10 +242,10 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
->>>>>    
->>>>>        while ( dom_state_changed )
->>>>>        {
->>>>> -        dom = find_first_bit(dom_state_changed, DOMID_MASK + 1);
->>>>> +        dom = find_next_bit(dom_state_changed, DOMID_MASK + 1, dom);
->>>>>            if ( dom >= DOMID_FIRST_RESERVED )
->>>>>                break;
->>>>> -        if ( test_and_clear_bit(dom, dom_state_changed) )
->>>>> +        if ( test_bit(dom, dom_state_changed) )
->>>>>            {
->>>>>                *domid = dom;
->>>>
->>>> This is problematic wrt other work (already talked about in the distant past,
->>>> but sadly only making little progress) towards trying to pull some of the
->>>> sub-ops out of the domctl-locked region. This subop is one of the prime
->>>> candidates, yet only if the test_and_clear_bit() remains here.
->>>
->>> Okay, but we can't be clearing the bit if the src domain doesn't have
->>> access. When considering that xsm_domctl() does a no-op check for
->>> XEN_DOMCTL_get_domain_state, deferring to xsm_get_domain_state(), then
->>> any domain could invoke the OP with DOMID_INVALID and clear the bit
->>> before access is checked.
->>>
->>> If you want to ensure atomic operations on the bit field, while I am not
->>> a fan of this, a combination with set_bit() could be done. Let the
->>> test_and_clear_bit() remain and then if access check fails, use
->>> set_bit() to put it back. Would that be sufficient for your objective?
->>
->> No, that could then confuse a legitimate (for that domain) caller. IOW
->> you would still build upon the domctl lock serializing things. I think
->> you want to do the XSM check first, and only then use test_and_clear_bit().
+On 2/10/26 05:54, Jan Beulich wrote:
+> Let's keep capability handling together. Start with moving
+> vpci_init_capabilities() and its helpers, plus splitting out of its
+> cleanup counterpart.
 > 
-> Currently, acquiring the struct domain pointer is inside the if 
-> condition. This would have to be moved outside the if condition to be 
-> able to do the access check before calling the bit operation. Which 
-> brings up the question for me, if it is reordered in this fashion, why 
-> not use clear_bit(), aiui it should be atomic as well.
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-The problem isn't with clear_bit() by itself (yes, it is atomic), but
-with how things want doing here: The test-and-clear ensures data for a
-given domain can only be retrieved exactly once (until the bit would be
-set another time later). With test split from clear, multiple callers
-could get data for the same domain, as in the window between test and
-clear a 2nd caller can come in and also commit to returning data for
-that domain. (Given the restriction on who can invoke this, one might
-conclude no such race is possible, but that single domain could process
-things on multiple vCPU-s, and would then wrongly be notified twice for
-the same domain.)
+Reviewed-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
 
->>>>> @@ -249,6 +253,15 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
->>>>>    
->>>>>                if ( d )
->>>>>                {
->>>>> +                rc = xsm_get_domain_state(XSM_XS_PRIV, d);
->>>>> +                if ( rc )
->>>>> +                {
->>>>> +                    rcu_unlock_domain(d);
->>>>> +                    rc = -ENOENT;
->>>>
->>>> As you don't otherwise use xsm_get_domain_state()'s return value, the need
->>>> for this assignment can be eliminated by putting the function call straight
->>>> in the if(). Then again, to address the remark above, overall code structure
->>>> will need to change quite a bit anyway (so the remark here may be moot).
->>>
->>> I can drop the use of rc here and inline it.
->>>
->>>>> +                    dom++;
->>>>
->>>> It may be nice to eliminate the need to have this in two places (here and ...
->>>>
->>>>> +                    continue;
->>>>> +                }
->>>>> +
->>>>>                    set_domain_state_info(info, d);
->>>>>    
->>>>>                    rcu_unlock_domain(d);
->>>>> @@ -256,10 +269,13 @@ int get_domain_state(struct xen_domctl_get_domain_state *info, struct domain *d,
->>>>>                else
->>>>>                    memset(info, 0, sizeof(*info));
->>>>>    
->>>>> +            clear_bit(dom, dom_state_changed);
->>>>>                rc = 0;
->>>>>    
->>>>>                break;
->>>>>            }
->>>>> +
->>>>> +        dom++;
->>>>>        }
->>>>
->>>> ... here), by having the variable's initializer be -1 and then using dom + 1
->>>> in the find_next_bit() invocation.
->>>
->>> If you want this way, then there are two options, make dom no longer
->>> unsigned or be willing to allow unsigned int overflow. If we go with the
->>> former, If you agree, I would leave it as an int as that should cover
->>> the range of valid domids.
->>
->> I wouldn't outright nak use of plain int, but I'm putting in effort to remove
->> such undue uses of that type. Unsigned overflow is well-defined aiui, so I
->> see no reason why the variable can't remain "unsigned int".
-> 
-> Honestly, I'm not sure why it was not domid_t in the first place. I 
-> can't keep all the rules, but I thought MISRA frowned on overflow usages 
-> (abuse?) like this. If you will ack it with it as a uint or as a 
-> domid_t, then I have no issue doing it this way.
+> ---
+> vpci_get_register(), while now only used by cap.c, didn't look like it
+> would want moving there.
 
-A patch without changing the type I would ack. A switch to domid_t, if indeed
-correct (I simply didn't go check yet), likely would want to be a separate
-change.
-
-Jan
+OK. It seems potential opportunities for compiler optimizations would be small
+anyway, and this is not a hot path.
 
