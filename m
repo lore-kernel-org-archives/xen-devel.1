@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFF0C5CFED
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237620.1539944 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50CC6C5B568
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1237613.1539883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLE-0002Fi-80; Fri, 20 Feb 2026 21:47:16 +0000
+	id 1vtYL8-0000lh-TN; Fri, 20 Feb 2026 21:47:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237620.1539944; Fri, 20 Feb 2026 21:47:16 +0000
+Received: by outflank-mailman (output) from mailman id 1237613.1539883; Fri, 20 Feb 2026 21:47:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLD-0002DJ-ST; Fri, 20 Feb 2026 21:47:15 +0000
-Received: by outflank-mailman (input) for mailman id 1237620;
- Fri, 20 Feb 2026 21:47:13 +0000
+	id 1vtYL8-0000kN-JK; Fri, 20 Feb 2026 21:47:10 +0000
+Received: by outflank-mailman (input) for mailman id 1237613;
+ Fri, 20 Feb 2026 21:47:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2tad=AY=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vtYLB-0008IG-LP
- for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:13 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
+ id 1vtYL7-0008IG-8g
+ for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:09 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b6834de7-0ea5-11f1-9ccf-f158ae23cfc8;
- Fri, 20 Feb 2026 22:47:12 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso33419825e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:12 -0800 (PST)
+ id b3d11e93-0ea5-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Feb 2026 22:47:07 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-482f454be5bso33419175e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:07 -0800 (PST)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.10
+ 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 13:47:10 -0800 (PST)
+ Fri, 20 Feb 2026 13:47:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b6834de7-0ea5-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: b3d11e93-0ea5-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1771624031; x=1772228831; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1771624027; x=1772228827; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wazStv22+sAAkXhUXk9SZLE13GE7UuEeUTF8Qgk68Bw=;
-        b=sRmJDvz7AA8KjQEgnW8scWIUHxFwE1hulQAg37MKray+hg2erxodWMFHLuF/ZShj1u
-         WaVRCrzpQdDjMxLCBAGp3eZrI6Iq5/sEVFbc6zZbqnvLRlCbxnQ08fwv75m75ITtuFvx
-         j8KYZkbC8UqeXdb6mbVKaYTrOCjrCoFYdxb34=
+        bh=beuTbfe9kV1Ouyfxy/gjE8egNOMK+gVzuCqzx8daylA=;
+        b=BMiR/T+WEvvW5iGsKAdgfi+cPActfn8vFvDu97HWE0xiqgu3PSNY7LK2RjwCHIGzDl
+         mmO5MGekILMGQOVadEMiwyzuSymZgpES00rTNtDjcGOvq+sP9S4JrVgxkoR8tjIuFFg6
+         y2ygy7gCQ/aQb9W0TAqByris1EsG8MDxDK4GE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771624031; x=1772228831;
+        d=1e100.net; s=20230601; t=1771624027; x=1772228827;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=wazStv22+sAAkXhUXk9SZLE13GE7UuEeUTF8Qgk68Bw=;
-        b=mCWhEbyq1JmmYgVe5Zkw3COkR5h/u07AtjBkdb+fhkWX+xeqpTBAZqUN6U5Vybx2fG
-         HqevFpvtbqhcONko4ixOttxiMXLFjXh/cwIH7pc9gfW7Xn11RTzAEpt7OdcFmFesCJrD
-         b7uWdwnOTU7lw5J2PwjVSNefGSnS7Xk/IznTIF2jePKnhLgYoTlrmkRBvYzNNXXZLEtu
-         RFEXZ0uNAPOxDXSUgpMNNmO5O12/IoREAhr9hILVnMnRddAxTzAdRP/Fi+MJoJsAhg4S
-         1hHTbCYRT9MH8lz0SH9+DhUIW0T+LK9ImtsA0qql60HBMkMyywH5aiGZ5/4UR/Kp91R2
-         yOQg==
-X-Gm-Message-State: AOJu0YzGiC18ynmA17YwOIjN+NAPLwrn45/jf/MVdJxEogiy5OGtyFls
-	ubX06YSYkBpvY+8SRQ5s14aZukAeB0FuuAXGWhbwHrcRwv54L/AT9HVJBxmr5OOBqRlnMTqTiue
-	lnUrs5gO/5Q==
-X-Gm-Gg: AZuq6aIxtFHHoliPmnnNbF6QT02HQcyzOQFw3u49bGAw0ZZbSSdgNPcCr7kIR8rgkGY
-	OvcHxm8bh26Zg0DodwP2BT3YVS6o/U5cg8I8TlNgAIDmNApplVME8aFAgFbP7h7Vt/sE9nG7WQd
-	N7XYNtAhCXJNirj3PJzjOy+wiEMdvGDfJMNhb5pTn5dzNkCJu69T6JvIBNgkZp/wYYgc2pm0E/A
-	5axwb8yNLBt//txlN+mfyO71lhH2+/XqTVXDxv1mryGYDfrDBtdhmQVLambtB3CIi4fxteo1uaT
-	EKdwAaWpij3BKf/HDyBMrsJdvCEKRa4wIZR1xXUyCWCZ3MQGjt4En8gc7vZqFqUKdLPVHfvyR1r
-	21aJMkOMltXql01KFUzSubedYF0MyR6S+brNmTdd5SlbIegskTVWHNmqcy81LUnSHXvdg1JT0oD
-	DXuKpPJKVYN/YvwyqxQMpdTJ4qSDZEfyW9k/DyQwRhNSyJOZRL7UAvumbBrJ+uj9eehqDjaJ0=
-X-Received: by 2002:a05:600c:1f08:b0:46e:59bd:f7e2 with SMTP id 5b1f17b1804b1-483a94c996fmr16228945e9.11.1771624031099;
-        Fri, 20 Feb 2026 13:47:11 -0800 (PST)
+        bh=beuTbfe9kV1Ouyfxy/gjE8egNOMK+gVzuCqzx8daylA=;
+        b=ef7zwv9kOpaDwizhAtPxmwwQIbkuW8TJR4LaD2yGYkhNU5HmQonLPJLKlnoffICbE3
+         WPXUYygXOjMcKiMyrRO+OPISyzgIC9Uv992lnsXyUlZmdY8UB1UcxoCQMTK5hO5I6xr2
+         DJO5K8asFrk1npquct2kyCNA4pAOSIDzhfgDVvQKE1bVPeEB531XuWRkOWgRwKdo80VG
+         UVh77IfE/BCvelJgDa34p41RWpdxCxMvmtvcw2qhR0oeOSUiy1A9YHB88ePs2gLegU2P
+         wII8af5oVmnCoaX3zNDFoYg0T9njVfXxol1pvNwfVW6E7xc2f/jpEdjIFxyscglpnSHv
+         IDxA==
+X-Gm-Message-State: AOJu0Yx+ph2GtDPum6vR6IYgN/LhR9+DCXS1fzWFgoT4BoQkK1Bh1R7M
+	BClaXq/nqbPU66r28q36nCPP1ItN0x8Qs/4VTbbawG5TDSQkNi7zIrJGbhpE7ckvp3ChMqkIMoG
+	FWcug
+X-Gm-Gg: AZuq6aJ4get2Cv4QPIfRMmil837pY/iZiHLZsERPVCmMPIlMCSkOmOpOHLnPvTXidLz
+	gKFst0iC8osqgJqOdRZrneymSHG5uL0dQBgPrRUeSzrFpWI4LCkly2HAem50ohcbam8En6lRTBW
+	RaZI2a86HR2EICn/1SaKEKfz9r8sL8rYRI2Ybnkp/xOsaeAx5sUU11VL28QsiaLHZbofH7KHzSR
+	JE6oRTNDFNql54fy1qrm/J/Q8UyJgX8bD/oHGerFtg86sbRJjmRGDGS0cFcxWpVdlJY4q14gs6e
+	V4GJo0s6AmbRgRT1D9zTxdrxts/R87oreLgtcaJGJYx4Vnou1FA2rFZsfrsSlo0Fc5qCXC3WPtb
+	SvyamgZ6PjQTJNQ+/zl3Zw5EDBIaLDmTuhCDfQtQjnf+hNLtoFhvTyoy05U7iGxqcp4kxFQ8Joc
+	TIKLa+iZxryOjg/12dvP3LKFZGD4SQ153TCuD52K6jYhVk+5vxFZfox9JK20Z3aPP5ILjHH3w=
+X-Received: by 2002:a05:600c:1c29:b0:483:6d9e:e4f5 with SMTP id 5b1f17b1804b1-483a949e5edmr17807355e9.5.1771624025939;
+        Fri, 20 Feb 2026 13:47:05 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -93,9 +93,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 12/12] xen/vmac: Delete STDINT block in vmac.h
-Date: Fri, 20 Feb 2026 21:46:53 +0000
-Message-Id: <20260220214653.3497384-13-andrew.cooper3@citrix.com>
+Subject: [PATCH 04/12] xen/treewide: Adjust parameter names and types
+Date: Fri, 20 Feb 2026 21:46:45 +0000
+Message-Id: <20260220214653.3497384-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
 References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
@@ -103,13 +103,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Eclair complains that _MSC_VER is undefined (a Rule 20.9 violation).
-
-This could be fixed by inserting an "&& defined(_MSC_VER)" clause, but the
-whole block is entirely useless (it comments out the include of stdint) and
-the top of vmac.c pulls in xen/types.h specifically.
-
-Simply delete the block.
+MISRA Rule 8.2 says that parameters must all have names.  Rule 8.3 says that
+the names and types must match between declaration and definition.
 
 No functional change.
 
@@ -125,43 +120,137 @@ CC: Michal Orzel <michal.orzel@amd.com>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/include/crypto/vmac.h | 23 -----------------------
- 1 file changed, 23 deletions(-)
+ xen/arch/arm/include/asm/pci.h    |  2 +-
+ xen/arch/arm/pci/pci-access.c     |  4 ++--
+ xen/arch/x86/include/asm/compat.h |  2 +-
+ xen/arch/x86/include/asm/p2m.h    |  2 +-
+ xen/arch/x86/mm/mem_paging.c      |  2 +-
+ xen/crypto/vmac.c                 |  2 +-
+ xen/include/crypto/rijndael.h     | 16 ++++++++--------
+ xen/include/xen/acpi.h            |  2 +-
+ 8 files changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/xen/include/crypto/vmac.h b/xen/include/crypto/vmac.h
-index 7574c4a3f328..43fd288ae3bd 100644
---- a/xen/include/crypto/vmac.h
-+++ b/xen/include/crypto/vmac.h
-@@ -35,29 +35,6 @@
- #define hz (400e6)   mips
- */
+diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.h
+index 08ffcd443862..73c3be74aef1 100644
+--- a/xen/arch/arm/include/asm/pci.h
++++ b/xen/arch/arm/include/asm/pci.h
+@@ -98,7 +98,7 @@ struct pci_ecam_ops {
+     unsigned int            bus_shift;
+     struct pci_ops          pci_ops;
+     int (*cfg_reg_index)(struct dt_device_node *dev);
+-    int (*init)(struct pci_config_window *);
++    int (*init)(struct pci_config_window *cfg);
+ };
  
--/* --------------------------------------------------------------------------
-- * This implementation uses uint32_t and uint64_t as names for unsigned 32-
-- * and 64-bit integer types. These are defined in C99 stdint.h. The
-- * following may need adaptation if you are not running a C99 or
-- * Microsoft C environment.
-- * ----------------------------------------------------------------------- */
--#define VMAC_USE_STDINT 1  /* Set to zero if system has no stdint.h        */
-- 
--#if VMAC_USE_STDINT && !_MSC_VER /* Try stdint.h if non-Microsoft          */
--#ifdef  __cplusplus
--#define __STDC_CONSTANT_MACROS
--#endif
--//#include <stdint.h>
--#elif (_MSC_VER)                  /* Microsoft C does not have stdint.h    */
--typedef unsigned __int32 uint32_t;
--typedef unsigned __int64 uint64_t;
--#define UINT64_C(v) v ## UI64
--#else                             /* Guess sensibly - may need adaptation  */
--typedef unsigned int uint32_t;
--typedef unsigned long long uint64_t;
--#define UINT64_C(v) v ## ULL
--#endif
--
- /* --------------------------------------------------------------------------
-  * This implementation supports two free AES implementations: OpenSSL's and
-  * Paulo Barreto's. To use OpenSSL's, you will need to include the OpenSSL
+ /* Default ECAM ops */
+diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
+index 4a9486750199..c0533c00c9a5 100644
+--- a/xen/arch/arm/pci/pci-access.c
++++ b/xen/arch/arm/pci/pci-access.c
+@@ -135,9 +135,9 @@ static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
+ 
+ #define PCI_OP_WRITE(size, type)                            \
+     void pci_conf_write##size(pci_sbdf_t sbdf,              \
+-                              unsigned int reg, type val)   \
++                              unsigned int reg, type data)  \
+ {                                                           \
+-    pci_config_write(sbdf, reg, size / 8, val);             \
++    pci_config_write(sbdf, reg, size / 8, data);            \
+ }
+ 
+ #define PCI_OP_READ(size, type)                             \
+diff --git a/xen/arch/x86/include/asm/compat.h b/xen/arch/x86/include/asm/compat.h
+index 30ed8f2fd0dc..f12f4f24d802 100644
+--- a/xen/arch/x86/include/asm/compat.h
++++ b/xen/arch/x86/include/asm/compat.h
+@@ -16,7 +16,7 @@ typedef unsigned long full_ptr_t;
+ 
+ struct domain;
+ #ifdef CONFIG_PV32
+-int switch_compat(struct domain *);
++int switch_compat(struct domain *d);
+ #else
+ #include <xen/errno.h>
+ static inline int switch_compat(struct domain *d) { return -EOPNOTSUPP; }
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index ef6b02ff0bb6..92be64e134e8 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -773,7 +773,7 @@ static inline int relinquish_p2m_mapping(struct domain *d)
+  */
+ 
+ /* Modify p2m table for shared gfn */
+-int set_shared_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn);
++int set_shared_p2m_entry(struct domain *d, unsigned long gfn_l, mfn_t mfn);
+ 
+ /* Tell xenpaging to drop a paged out frame */
+ void p2m_mem_paging_drop_page(struct domain *d, gfn_t gfn, p2m_type_t p2mt);
+diff --git a/xen/arch/x86/mm/mem_paging.c b/xen/arch/x86/mm/mem_paging.c
+index ac8d34ffa074..d4b3cb990c54 100644
+--- a/xen/arch/x86/mm/mem_paging.c
++++ b/xen/arch/x86/mm/mem_paging.c
+@@ -156,7 +156,7 @@ void p2m_mem_paging_populate(struct domain *d, gfn_t gfn)
+  *
+  * If the gfn was dropped the vcpu needs to be unpaused.
+  */
+-void p2m_mem_paging_resume(struct domain *d, vm_event_response_t *rsp)
++void p2m_mem_paging_resume(struct domain *d, struct vm_event_st *rsp)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     p2m_type_t p2mt;
+diff --git a/xen/crypto/vmac.c b/xen/crypto/vmac.c
+index acb4e015f511..f1f6d75f8eeb 100644
+--- a/xen/crypto/vmac.c
++++ b/xen/crypto/vmac.c
+@@ -702,7 +702,7 @@ static uint64_t l3hash(uint64_t p1, uint64_t p2,
+ 
+ /* ----------------------------------------------------------------------- */
+ 
+-void vhash_update(unsigned char *m,
++void vhash_update(unsigned char  m[],
+                   unsigned int   mbytes, /* Pos multiple of VMAC_NHBYTES */
+                   vmac_ctx_t    *ctx)
+ {
+diff --git a/xen/include/crypto/rijndael.h b/xen/include/crypto/rijndael.h
+index 4386be587851..80c612749f9e 100644
+--- a/xen/include/crypto/rijndael.h
++++ b/xen/include/crypto/rijndael.h
+@@ -45,14 +45,14 @@ typedef struct {
+ 	u32	dk[4*(AES_MAXROUNDS + 1)];	/* decrypt key schedule */
+ } rijndael_ctx;
+ 
+-int	 rijndael_set_key(rijndael_ctx *, const unsigned char *, int);
+-int	 rijndael_set_key_enc_only(rijndael_ctx *, const unsigned char *, int);
+-void	 rijndael_decrypt(rijndael_ctx *, const unsigned char *, unsigned char *);
+-void	 rijndael_encrypt(rijndael_ctx *, const unsigned char *, unsigned char *);
++int	 rijndael_set_key(rijndael_ctx *ctx, const unsigned char *key, int bits);
++int	 rijndael_set_key_enc_only(rijndael_ctx *ctx, const unsigned char *key, int bits);
++void	 rijndael_decrypt(rijndael_ctx *ctx, const unsigned char *src, unsigned char *dst);
++void	 rijndael_encrypt(rijndael_ctx *ctx, const unsigned char *src, unsigned char *dst);
+ 
+-int	rijndaelKeySetupEnc(unsigned int [], const unsigned char [], int);
+-int	rijndaelKeySetupDec(unsigned int [], const unsigned char [], int);
+-void	rijndaelEncrypt(const unsigned int [], int, const unsigned char [16],
+-	    unsigned char [16]);
++int	rijndaelKeySetupEnc(unsigned int rk[], const unsigned char cipherKey[], int keyBits);
++int	rijndaelKeySetupDec(unsigned int rk[], const unsigned char cipkerKey[], int keyBits);
++void	rijndaelEncrypt(const unsigned int rk[], int Nr, const unsigned char pt[16],
++			unsigned char ct[16]);
+ 
+ #endif /* __RIJNDAEL_H */
+diff --git a/xen/include/xen/acpi.h b/xen/include/xen/acpi.h
+index 90635ba0f322..ca87cd15a824 100644
+--- a/xen/include/xen/acpi.h
++++ b/xen/include/xen/acpi.h
+@@ -75,7 +75,7 @@ typedef int (*acpi_table_handler) (struct acpi_table_header *table);
+ typedef int (*acpi_table_entry_handler) (struct acpi_subtable_header *header, const unsigned long end);
+ 
+ unsigned int acpi_get_processor_id (unsigned int cpu);
+-char * __acpi_map_table (paddr_t phys_addr, unsigned long size);
++char * __acpi_map_table (paddr_t phys, unsigned long size);
+ bool __acpi_unmap_table(const void *ptr, unsigned long size);
+ int acpi_boot_init (void);
+ int acpi_boot_table_init (void);
 -- 
 2.39.5
 
