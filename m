@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3B6C5ACDC
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D153C5AD05
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 16:19:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237341.1539764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1237336.1539719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtTE4-0002RG-It; Fri, 20 Feb 2026 16:19:32 +0000
+	id 1vtTDy-0001K0-PE; Fri, 20 Feb 2026 16:19:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237341.1539764; Fri, 20 Feb 2026 16:19:32 +0000
+Received: by outflank-mailman (output) from mailman id 1237336.1539719; Fri, 20 Feb 2026 16:19:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtTE4-0002QD-AP; Fri, 20 Feb 2026 16:19:32 +0000
-Received: by outflank-mailman (input) for mailman id 1237341;
- Fri, 20 Feb 2026 16:19:30 +0000
+	id 1vtTDy-0001Jq-Lb; Fri, 20 Feb 2026 16:19:26 +0000
+Received: by outflank-mailman (input) for mailman id 1237336;
+ Fri, 20 Feb 2026 16:19:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=O9tK=AY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vtTE2-0000Q4-SE
- for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 16:19:30 +0000
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [2a00:1450:4864:20::42d])
+ id 1vtTDw-0000Q4-SQ
+ for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 16:19:24 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ee5bc87b-0e77-11f1-9ccf-f158ae23cfc8;
- Fri, 20 Feb 2026 17:19:29 +0100 (CET)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-4362c635319so2097773f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 08:19:29 -0800 (PST)
+ id eaea89bd-0e77-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Feb 2026 17:19:23 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-48370174e18so13579565e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 08:19:23 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a6c1bfsm56991068f8f.13.2026.02.20.08.19.27
+ ffacd0b85a97d-43796a6c1bfsm56991068f8f.13.2026.02.20.08.19.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 08:19:27 -0800 (PST)
+ Fri, 20 Feb 2026 08:19:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee5bc87b-0e77-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: eaea89bd-0e77-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771604368; x=1772209168; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1771604362; x=1772209162; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=J6aGuGPcNuPDYPCV7GwkHM9t8Lc+qUdl4ib7PfisxG8=;
-        b=UtCZMvNsUewN3dl7b484fGEpmCpA5wx7N4zu4EhoBBFEK+CUQGuW4oYuAin2jb3Yhh
-         s11yDClK1e1mCwSFc78C4XBcrKRjZw3SNPkt9uDhFP1D+xjnIl339svmw6KScnlN06sT
-         aUpxuGZehKXQU36t9SELH2py8QXeoEpAmlYm5As4Y1PAcUfd23jkg/fnflNWsJqX/0Zi
-         Oxxd4RdBllPkWpW/NUsDAhFez3g/p3K3p/zmTgnht5PzRJ9rmA6G5eTVtOWw9aIArPiJ
-         R/VnLPq7eTdyVldEB+5tj4dfn4YmFVE+L8/FPZpmirgKSDgvKE948njRHiKt7peyD4ky
-         F59Q==
+        bh=9kLRmTM6oplx9Q9iY0GyvVxh5tBWM0eKNh9+e6RhQFU=;
+        b=X9lulydD7EabLKOHfTb70CevckIMbgjL3X4pAEZGc0M8MfBXpTCnN7o78WHSE7NqrE
+         vEyPtIEc4FdxZjYLVj+rHe3EIMz5+WC7km0qaifH10AvAM6IAVhzzdQaQmgshzscylom
+         mrHJkIly/w+xf4mvVynt0ASm0+ICE6JHWEX0m71pkRGU9rie6wypobKPFqeHTyTAjvHa
+         Yka8MHlW/7TuopLY5eV26rJ5jbDUvOfYsMvSNxyZ+ZwKFc0B7veAtEGOmLUDvd+bVhvf
+         7lL8jec44eRqlPkL1Uas3wrHd6GlThncXANA/qfj1V1YqebFZkTySZ1rzerHiwEAogPr
+         VMKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771604368; x=1772209168;
+        d=1e100.net; s=20230601; t=1771604362; x=1772209162;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=J6aGuGPcNuPDYPCV7GwkHM9t8Lc+qUdl4ib7PfisxG8=;
-        b=HEvvL+ScUAm2asxJuuZc+8vEmiprZpXF0j9PPEVhtsT4PQafjhZdffCfJ/dHK9AYxc
-         tFw/rhS6KarIwbkLpepguUtq7Qh3c1/Bncz1/pkfLOB04n/29W9A7nPIqjP07BH6wYNh
-         eRSCHQ3nM+dzGFa9JWhAln2WwlIFHHMb9Yg+5y8w8KK+6kEyRK0nvKZ9JhOCwJJVI+LJ
-         2u+2640xlgmqyjDDggEhlhNr7Am2LvJo1cypIwGYnac87mj/5OY1B4J0UozxON3gyu7B
-         ylC3MdU3Rz+NPQO3Pkd55C1lODeFZ0czvqxziLSZ+PZ6LP4cuVFQXDdfnfNEzbpGMK73
-         lUng==
-X-Gm-Message-State: AOJu0YwI18DZ8F2bkwshYkqRXAK8UfGEdTY9fzjLi3GTXXcP7izWepZ2
-	YTm9C7nA6xTQOeHymEqLshjs3fgycJpgi1TTTAPrOD+GE+Gc92kLcyxuhmnlbw==
-X-Gm-Gg: AZuq6aJ7yAh0kcl2lmAyy5zsMGicxQeLs0NU11MhyoNTmZffxvdC9fc9DhpJbYMOg7k
-	pJ4JVQOJmQMlmdsN77nPOzsaWruY02mufnv2cFOikVuNb0rGBbeG7UY6ijvgw6kPfl2dbrpCWhB
-	6xMpTl8y3sm4GN5pRyVHxJXc2oTrWHkYad4K+kVdTJRP9IwH0l5vnJVnXyMVArfXjuvtrQyzmYp
-	WAXKjT/XzHvBnm1BtpUQ73rJILUclotcI8nheti20/RSRfa9w07b8Al0S5KnNdpGMhiLcQhH/PR
-	GyVa7CNTtxEX9qUUrbtB5iYymp8SF6wyok0R0uGK7QjkGYHv39uiM9HPbDGyMXaoeAEaqbxoO7u
-	xtRaYYxkpKiJU25o6vqybjcg15ZPx4nQQpulDEXDwCY/Rsu/RrKR29Q4O1zOvEWdZJZ9Soxcx6n
-	1xGOobJ/Dwq30lxlmonJ3idtsQZDTyTzoNbTTxsniUdy9mD+98prv4hz5paeIm73Owuw==
-X-Received: by 2002:a5d:64e5:0:b0:437:6806:994f with SMTP id ffacd0b85a97d-4396f14cb6fmr908975f8f.12.1771604367888;
-        Fri, 20 Feb 2026 08:19:27 -0800 (PST)
+        bh=9kLRmTM6oplx9Q9iY0GyvVxh5tBWM0eKNh9+e6RhQFU=;
+        b=LgYZX7hXYdz3UjvhJo8xW/K5kQaSpwLBWzw6/sPcKgz1sXN+igi3fkajRX1WwJPgMZ
+         qK6ZaTeIvYcFmVm+7Vbzlur28RDGJ0SwaJsdlI+pZfwpRnwP4P0No9lTEqP/3gkgu5Ku
+         OeWBjuVz8DblozgX9b00xVtcvdy62FYHWM59pqQgDy7IJaWwWFcsM1eCebiIcWSjLAL6
+         0dDBF/sx8MqY0X2KmXM4mExFT0W5EPYuPmoBmom6eUlpgR7paiCeHO4+M5AcUmOR5600
+         LCEnAfxeynLq/2ydiRcZQrhdXe6ZpCBi5TTYD52sIvQnUihYtRI/fWGoN5+d52V9giiO
+         Rd+g==
+X-Gm-Message-State: AOJu0YzfI4iJQzO8RmAXWDyWFinjRNJ9wnsot0HAE3FdrwVbuOqrz3sY
+	ZpEB7+BVu46G2GsCMfPM8aR/KjM4BoTwCdAf4TKKIb8VnaEERfW4jQAubjIKgQ==
+X-Gm-Gg: AZuq6aIoU+Ok082Nwo5s0qtcTMugg1BdiTJyuAxv2lhVw8adXGY6D3lIlwAjxYwxEdq
+	R7DHp+rhujVed2qscszZfdFT0Zry+zoqIsyvS0C8l9fMSzcN/NPGAAEY1HEZPHKF+OhgjhlW2R8
+	BzlhLlpWBKES9FyokUEVAAQgPoZeQRov3JPqwuvPfoCBmi3TGp52d2fADMShAfGyZN5G3uCZiiI
+	ZMdynb6tTWZvW+c0pLTS3jrKVjN7EY0pkNKlcT7hB2TqWRFVcCUWjQ/fm9lmovxAGkr4Crm/UfM
+	KcJDhXeNtfr3IEGXMWS1Dv222iJKxdblNcdzTTuViBGr1D+UHNZmrNjcaj8frdgvIIsa9AJ5DWZ
+	KFI/6hOlD+Gu5XGYikrgGboO8roSFRm5/+9zbzYu8PzqXy/iEzheUoYZsvjM1glxxlXiq1IonSj
+	xvIxfnCPxIlsCUpLbJDEw/JjtX8AgJCA3UNj24Jc9F7/KxMppiRlzDeWeS3qALdBc9BA==
+X-Received: by 2002:a05:600c:6296:b0:47a:81b7:9a20 with SMTP id 5b1f17b1804b1-483a95c6774mr1480155e9.9.1771604362296;
+        Fri, 20 Feb 2026 08:19:22 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,59 +96,136 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 09/14] xen/riscv: implement SBI legacy SET_TIMER support for guests
-Date: Fri, 20 Feb 2026 17:19:04 +0100
-Message-ID: <ce624ecca7d725c1abb195177b48e8197322cfac.1771590794.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v5 04/14] xen/riscv: introduce tracking of pending vCPU interrupts, part 2
+Date: Fri, 20 Feb 2026 17:18:59 +0100
+Message-ID: <0d8d0f2240806a4bfaee4c5f395d6220ded00c18.1771590794.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1771590794.git.oleksii.kurochko@gmail.com>
 References: <cover.1771590794.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add handling of the SBI_EXT_0_1_SET_TIMER function ID to the legacy
-extension ecall handler. The handler now programs the vCPU’s virtual
-timer via vtimer_set_timer() and returns SBI_SUCCESS.
+This patch is based on Linux kernel 6.16.0.
 
-This enables guests using the legacy SBI timer interface to schedule
-timer events correctly.
+Add the consumer side (vcpu_flush_interrupts()) of the lockless pending
+interrupt tracking introduced in part 1 (for producers). According, to the
+design only one consumer is possible, and it is vCPU itself.
+vcpu_flush_interrupts() is expected to be ran (as guests aren't ran now due
+to the lack of functionality) before the hypervisor returns control to the
+guest.
+
+Producers may set bits in irqs_pending_mask without a lock. Clearing bits in
+irqs_pending_mask is performed only by the consumer via xchg() (with aquire
+semantics). The consumer must not write to irqs_pending and must not act on
+bits that are not set in the mask. Otherwise, extra synchronization should
+be provided.
+The worst thing which could happen with such approach is that a new pending
+bit will be set to irqs_pending bitmap during update of hvip variable in
+vcpu_flush_interrupt() but it isn't problem as the new pending bit won't
+be lost and just be proceded during the next flush.
+
+As AIA specs introduced hviph register which would want to be updated when
+guest related AIA code vcpu_update_hvip() is introduced instead of just
+open-code it in vcpu_flush_interrupts().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v3 - v5:
- - Nothing changed. Only rebase.
----
-Changes in v2:
+Changes in v5:
+ - Reorder the defintions of local variables (mask, val, hvip) in
+   vcpu_flush_interrupts(). Also, drop a blank line between them.
+ - Move #ifdef CONFIG_RISCV_32 above the comment in vcpu_flush_interrupts()
+   and align the comment properly.
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
- xen/arch/riscv/vsbi/legacy-extension.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+Changes in v4:
+ - Move defintion of hvip local variable to narrower space in
+   vcpu_flush_interrupts().
+ - Use initializers for mask and val variables.
+ - Use local variable c as an argument of vcpu_flush_interrupts() in
+   check_for_pcpu_work().
+---
+Changes in v3:
+ - Update the error message in case of RV32 from "hviph" to v->arch.hviph.
+ - Make const argument of vcpu_update_hvip.
+ - Move local variables mask and val inside if() in vcpu_flush_interrupts().
+ - Call vcpu_flush_interrupts() in check_pcpu_work().
+ - Move vcpu_update_hvip() inside if() in vcpu_flush_interrupts().
+---
+Changes in v2:
+ - New patch.
+---
+ xen/arch/riscv/domain.c             | 30 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h |  1 +
+ xen/arch/riscv/traps.c              |  2 ++
+ 3 files changed, 33 insertions(+)
 
-diff --git a/xen/arch/riscv/vsbi/legacy-extension.c b/xen/arch/riscv/vsbi/legacy-extension.c
-index 2e8df191c295..090c23440cea 100644
---- a/xen/arch/riscv/vsbi/legacy-extension.c
-+++ b/xen/arch/riscv/vsbi/legacy-extension.c
-@@ -7,6 +7,7 @@
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 335c41f3e5a1..636349c8c7e8 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -215,6 +215,36 @@ void vcpu_sync_interrupts(struct vcpu *v)
+ #endif
+ }
  
- #include <asm/processor.h>
- #include <asm/vsbi.h>
-+#include <asm/vtimer.h>
- 
- static void vsbi_print_char(char c)
- {
-@@ -44,6 +45,11 @@ static int vsbi_legacy_ecall_handler(unsigned long eid, unsigned long fid,
-         ret = SBI_ERR_NOT_SUPPORTED;
-         break;
- 
-+    case SBI_EXT_0_1_SET_TIMER:
-+        vtimer_set_timer(&current->arch.vtimer, regs->a0);
-+        regs->a0 = SBI_SUCCESS;
-+        break;
++static void vcpu_update_hvip(const struct vcpu *v)
++{
++    csr_write(CSR_HVIP, v->arch.hvip);
++}
 +
-     default:
-         /*
-          * TODO: domain_crash() is acceptable here while things are still under
++void vcpu_flush_interrupts(struct vcpu *v)
++{
++    if ( ACCESS_ONCE(v->arch.irqs_pending_mask[0]) )
++    {
++        unsigned long mask = xchg(&v->arch.irqs_pending_mask[0], 0UL);
++        unsigned long val = ACCESS_ONCE(v->arch.irqs_pending[0]) & mask;
++        register_t *hvip = &v->arch.hvip;
++
++        *hvip &= ~mask;
++        *hvip |= val;
++
++        vcpu_update_hvip(v);
++    }
++
++#ifdef CONFIG_RISCV_32
++    /*
++     * Flush AIA high interrupts.
++     *
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't
++     * supported now.
++     */
++#   error "Update v->arch.hviph"
++#endif
++}
++
+ static void __init __maybe_unused build_assertions(void)
+ {
+     /*
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index b7241f2a79b1..2a454bfc083c 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -116,6 +116,7 @@ int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
+ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
+ 
+ void vcpu_sync_interrupts(struct vcpu *v);
++void vcpu_flush_interrupts(struct vcpu *v);
+ 
+ #endif /* ASM__RISCV__DOMAIN_H */
+ 
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 551f886e3a69..244264c92a79 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -175,6 +175,8 @@ static void check_for_pcpu_work(void)
+ 
+     vcpu_sync_interrupts(curr);
+ 
++    vcpu_flush_interrupts(curr);
++
+     p2m_handle_vmenter();
+ }
+ 
 -- 
 2.53.0
 
