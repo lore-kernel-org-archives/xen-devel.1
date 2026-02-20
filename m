@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E62C5C5DF60
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237615.1539908 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0803C5CFE6
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1237618.1539927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLA-0001Mg-Sl; Fri, 20 Feb 2026 21:47:12 +0000
+	id 1vtYLC-0001mn-Ii; Fri, 20 Feb 2026 21:47:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237615.1539908; Fri, 20 Feb 2026 21:47:12 +0000
+Received: by outflank-mailman (output) from mailman id 1237618.1539927; Fri, 20 Feb 2026 21:47:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLA-0001Kr-L7; Fri, 20 Feb 2026 21:47:12 +0000
-Received: by outflank-mailman (input) for mailman id 1237615;
- Fri, 20 Feb 2026 21:47:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vtYLC-0001jf-BQ; Fri, 20 Feb 2026 21:47:14 +0000
+Received: by outflank-mailman (input) for mailman id 1237618;
+ Fri, 20 Feb 2026 21:47:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2tad=AY=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vtYL8-0008Ew-Ad
- for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:10 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b51fcf85-0ea5-11f1-b164-2bf370ae4941;
- Fri, 20 Feb 2026 22:47:09 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43621bf67ceso1666755f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:09 -0800 (PST)
+ id 1vtYLA-0008IG-If
+ for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:12 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b5bfbbb9-0ea5-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Feb 2026 22:47:10 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-480706554beso28511075e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:10 -0800 (PST)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.07
+ 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 13:47:08 -0800 (PST)
+ Fri, 20 Feb 2026 13:47:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b51fcf85-0ea5-11f1-b164-2bf370ae4941
+X-Inumbo-ID: b5bfbbb9-0ea5-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1771624029; x=1772228829; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1771624030; x=1772228830; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0Xl/PbKeU3vXsi8lYY06npq9oqfFySBcdivOG4iOWhA=;
-        b=ERg4En1oCz/WkmNntbMDWY53yX/uv0MGVYNMAerFvSS+8BcWmHARyQUhbltvyzqwFS
-         GKOz8YVL0WVmrS0mZ0ur5q1w0v0sr2GTsnzGGahDi2RSMxrsEOMOesiMrY6RCmdYdQ9M
-         jlIjcB6htKAkBARDKeyNtfLOzwmIrpaWKdHEY=
+        bh=ZTqLwQAs0U3ktqAPOv0GkFeeIfrNLrDf4DIWmemjfFQ=;
+        b=MzIwYoLRbmbdwpCrrCbztLj/pWlkZ9t4vfFHzj0ck/GsHrQ+fkwerOXzK3dKGYHcdU
+         /UbtN7WFb5sOtM/u2FSQDG27a5w9E4bvakUueUVK2pL1outtQPgQ7UaPL2+Cd/dg1/Il
+         rKpXhk8uVJwvlmOKB8W8I57Pr/+mFdGoOkCqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771624029; x=1772228829;
+        d=1e100.net; s=20230601; t=1771624030; x=1772228830;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=0Xl/PbKeU3vXsi8lYY06npq9oqfFySBcdivOG4iOWhA=;
-        b=WSBRjF52E3JNx/6uSn41adDMopE7d0i6Jr37g0NS9dc9DNFXKo8Fb56mrYTWh7g3Ke
-         pzuIP9hvtRZdy57crogE6dvflkS3SmC32twFULVHnuyVhlLkocFgcEEla/VizUQ+qZ2s
-         D4q3slif2lFyHzdwQ/kR4msxtH7h1WqLTfzeYLMkc6sHAK8X19TKH+Or84R0G9leZVDB
-         +fdLuxBS4GzjwSs0A3HdARP4yqia3fAu+t7UbgYbeHj9uLE2ZQG/NZctQl8nwsMdLQmp
-         WbQSCdAnhaDZowTIiq7OF5xHb02bfn0Z9SBAaziEugofBA+L7MCAhwFLIzKxGo+3liR2
-         PkHQ==
-X-Gm-Message-State: AOJu0YwO6u1UYVBJiemEIWI1K5kpZ8LBr5hUKJDanPRWeRhNlWN+seI6
-	viI1cl+pNa/gWTkoHyWmp8ogxSKTSgAvKTTOT2aSIjPYWAT3+jzZaDaSShF7+8VgmqfmQkUr+Pn
-	9v14Q
-X-Gm-Gg: AZuq6aJ2tdCVyO5Krq1cPDgNooaBrvJh4O4aIcEKyUGmv8chcRpvLD3KBpahXHckWdW
-	yqhJN3aY6yLN17uPVtPFW5VVOIgrMprp//xLF8IcdYTrhYd1dKDWFdJbw1+rrpw5rhiRYVwxTPM
-	cb7boab4+irKj2ppl6VT3Z6N2PGMjcjBESFvxQonRX66uiRpsJ8DoYcbsvZozqwCt4Z3emQ3apU
-	Sby8P00/7fztZB9hHnwraX0M8Rs2YKiNZzS/nK0kjMgKOXoxDc1e4WkMMTr7jHQ022IC6iqOB8Y
-	swU/JOULuXTBzejQyhjflI35WA8VxmlLlBUdSAGBuwILVhY4DrtQaZcfY3WQ9bKnbswpl8z+BJn
-	l4lV0wfXZa9HFirfoGB+Ekl9MD4eMND5Y0b4emXefkfFu1NCYYZ+McLaoIjvKmraaDEMt8vGSQT
-	S1LdAmN+wXXS/aQHqjidv+7QixNlfrAdoH+7twSyebk4Az9L9npaCJheYIVT9U4a1bpe283G8=
-X-Received: by 2002:a05:600c:4e4a:b0:483:129e:b573 with SMTP id 5b1f17b1804b1-483a962d1d1mr17672845e9.18.1771624028447;
-        Fri, 20 Feb 2026 13:47:08 -0800 (PST)
+        bh=ZTqLwQAs0U3ktqAPOv0GkFeeIfrNLrDf4DIWmemjfFQ=;
+        b=d5Ru0EOGlSSUdHXeoasujpwK2U/7JC8Dz7MYLieEzN6wSkytWjGZZTmmFMe2DxIxDj
+         jIvWcPDf3Nln8FyxK8rCyN0/bvIix2lK69EreEHX5b6mMJxbB1dJnwqzkv66CoV4RNQJ
+         fnPRXUiL5Is0CrqlucD+X1AJ8bRa+UlyoLTUFj2Y+dK6nHCvaEKjEYj5AkjTPRR+DdVQ
+         5/8CshpFw8zFxXVBzJtkwCHeykMhG4ZfY62Ex+e18l7+eqpymz21Dku3za4OKN7Wc6fw
+         CGdmMWMqkmRmo3mM1a9l67GMV7iaEa7aDic0JgX88xCM1Zc7bx+P+dK5emh0PkWGHcy/
+         jfhA==
+X-Gm-Message-State: AOJu0YwEp0DxA8NvlPRox6g8ZPoiEwTfjNKLPs9Su049oXvGIXBFTSDw
+	78upR2XSqvbzcLDu51Lr5WsDAw1uW1kKBmKMlit9oJGJP78Bbf8EyE6XtNwOW8whq+C+n5PaNel
+	RQw8OSnbGlw==
+X-Gm-Gg: AZuq6aI4WT1609B3Kf/CKsizJgAismUXO4nr6tN3+vPhIDusvX/z0JUKqEE/pJLRLvv
+	+Rp3/Li4uEpkP1c498ZtimSwtAotVtkLOIGILfmu2x/nXlV7MtSeDYb9mVi9vGaW9m4uK3JZ9Ee
+	GFLBAfnl85Q9c04UDKgyIYRTDomEZZhRZpKNdJGIXYQ6mJjEeIpThf2ygh5bg5KUJahuEfrI+aq
+	aN0aUEMaI8LD9pe4JzGsQRqww6fWT6Bp1/kK3dWU509x3kiD/S3uE9U56Y6VVRvU/WtDc+ualkz
+	QNvXjTv6fVOSrrOc+rGSJ55pPIX/6b/4iJtwuy/64rcDff5hGpwRf1Argcl8rXkTVF6Cy+aHBsC
+	CFVwhhNNc4DrEptTwBHuHo1+Qmb8AJ8zoM5rtkqIwNO1mNKi3nEbsnzc99JE/kbo11aBDmApXdU
+	qelvh9/148pGV6FXdTEno5hpP+XApymwkFc35iPLAXnXrqAcyWoZZ6bNA1tU9jsQ4i3PVNV2E=
+X-Received: by 2002:a05:600c:64ce:b0:483:7432:a761 with SMTP id 5b1f17b1804b1-483a9637502mr16333205e9.24.1771624029745;
+        Fri, 20 Feb 2026 13:47:09 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -93,9 +93,9 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 08/12] arm/pci-designware: Fix MISRA violations
-Date: Fri, 20 Feb 2026 21:46:49 +0000
-Message-Id: <20260220214653.3497384-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 10/12] xen: Adjust break/fallthrough statements
+Date: Fri, 20 Feb 2026 21:46:51 +0000
+Message-Id: <20260220214653.3497384-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
 References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
@@ -103,8 +103,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
- * Move includes inside the header guards (D4.10)
- * Use NULL in preference to 0 (R11.9)
+sh_destroy_shadow() has a spelling of fallthrough which doesn't match the
+permitted pattern.  Convert it to a real fallthrough (psedo)keyword.
+
+Elsewhere, insert breaks at the end of the default statements.
 
 No functional change.
 
@@ -120,42 +122,77 @@ CC: Michal Orzel <michal.orzel@amd.com>
 CC: consulting@bugseng.com <consulting@bugseng.com>
 CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/arm/pci/pci-designware.c | 2 +-
- xen/arch/arm/pci/pci-designware.h | 5 ++---
- 2 files changed, 3 insertions(+), 4 deletions(-)
+ xen/arch/arm/pci/pci-access.c     | 2 ++
+ xen/arch/arm/pci/pci-designware.c | 2 ++
+ xen/arch/arm/tee/optee.c          | 1 +
+ xen/arch/x86/mm/shadow/common.c   | 2 +-
+ 4 files changed, 6 insertions(+), 1 deletion(-)
 
+diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
+index c0533c00c9a5..2b23d552bbfb 100644
+--- a/xen/arch/arm/pci/pci-access.c
++++ b/xen/arch/arm/pci/pci-access.c
+@@ -63,6 +63,7 @@ int pci_generic_config_read(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+         break;
+     default:
+         ASSERT_UNREACHABLE();
++        break;
+     }
+ 
+     return 0;
+@@ -89,6 +90,7 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+         break;
+     default:
+         ASSERT_UNREACHABLE();
++        break;
+     }
+ 
+     return 0;
 diff --git a/xen/arch/arm/pci/pci-designware.c b/xen/arch/arm/pci/pci-designware.c
-index 0bd67524ac8b..6b85213f637b 100644
+index 6b85213f637b..902da19e8c98 100644
 --- a/xen/arch/arm/pci/pci-designware.c
 +++ b/xen/arch/arm/pci/pci-designware.c
-@@ -285,7 +285,7 @@ void __iomem *dw_pcie_child_map_bus(struct pci_host_bridge *bridge,
-                                     bridge->child_cfg->phys_addr, busdev,
-                                     bridge->child_cfg->size);
-     if ( ret )
--        return 0;
-+        return NULL;
+@@ -48,6 +48,7 @@ static int dw_pcie_read(void __iomem *addr, unsigned int len, uint32_t *val)
+         break;
+     default:
+         ASSERT_UNREACHABLE();
++        break;
+     }
  
-     return bridge->child_cfg->win + where;
- }
-diff --git a/xen/arch/arm/pci/pci-designware.h b/xen/arch/arm/pci/pci-designware.h
-index b9deb3b138ae..bd93dab6f2f1 100644
---- a/xen/arch/arm/pci/pci-designware.h
-+++ b/xen/arch/arm/pci/pci-designware.h
-@@ -6,12 +6,11 @@
-  * Based on xen/arch/arm/pci/pci-host-generic.c
-  */
+     return 0;
+@@ -71,6 +72,7 @@ static int dw_pcie_write(void __iomem *addr, unsigned int len, uint32_t val)
+         break;
+     default:
+         ASSERT_UNREACHABLE();
++        break;
+     }
  
--#include <xen/pci.h>
--#include <xen/init.h>
--
- #ifndef __PCI_DESIGNWARE_H__
- #define __PCI_DESIGNWARE_H__
+     return 0;
+diff --git a/xen/arch/arm/tee/optee.c b/xen/arch/arm/tee/optee.c
+index 699e8d536862..f719d9d767ab 100644
+--- a/xen/arch/arm/tee/optee.c
++++ b/xen/arch/arm/tee/optee.c
+@@ -1206,6 +1206,7 @@ static void do_call_with_arg(struct optee_domain *ctx,
+     default:
+         /* Free any temporary shared buffers */
+         free_shm_buffers(ctx, call->xen_arg);
++        break;
+     }
  
-+#include <xen/pci.h>
-+#include <xen/init.h>
- 
- #define PCIE_ATU_VIEWPORT               0x900
- #define PCIE_ATU_REGION_OUTBOUND        0
+     put_std_call(ctx, call);
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 96986ee2553d..5834c265f76d 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -1213,7 +1213,7 @@ void sh_destroy_shadow(struct domain *d, mfn_t smfn)
+ #ifdef CONFIG_PV32
+     case SH_type_l2h_64_shadow:
+         ASSERT(is_pv_32bit_domain(d));
+-        /* Fall through... */
++        fallthrough;
+ #endif
+     case SH_type_l2_64_shadow:
+         SHADOW_INTERNAL_NAME(sh_destroy_l2_shadow, 4)(d, smfn);
 -- 
 2.39.5
 
