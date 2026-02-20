@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB2EC5CFE7
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237619.1539950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89436C5CFE6
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:58:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1237706.1539969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLE-0002NW-R4; Fri, 20 Feb 2026 21:47:16 +0000
+	id 1vtYVj-0007vi-8s; Fri, 20 Feb 2026 21:58:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237619.1539950; Fri, 20 Feb 2026 21:47:16 +0000
+Received: by outflank-mailman (output) from mailman id 1237706.1539969; Fri, 20 Feb 2026 21:58:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYLE-0002KG-Cf; Fri, 20 Feb 2026 21:47:16 +0000
-Received: by outflank-mailman (input) for mailman id 1237619;
- Fri, 20 Feb 2026 21:47:13 +0000
+	id 1vtYVj-0007vb-60; Fri, 20 Feb 2026 21:58:07 +0000
+Received: by outflank-mailman (input) for mailman id 1237706;
+ Fri, 20 Feb 2026 21:58:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2tad=AY=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vtYLB-0008Ew-Cs
- for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:13 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
+ <SRS0=CjHa=AY=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1vtYVi-0007vV-LB
+ for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:58:06 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b61d39a9-0ea5-11f1-b164-2bf370ae4941;
- Fri, 20 Feb 2026 22:47:11 +0100 (CET)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-436356740e6so2654077f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:11 -0800 (PST)
-Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
- [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 13:47:10 -0800 (PST)
+ id 3b6cffe8-0ea7-11f1-b164-2bf370ae4941;
+ Fri, 20 Feb 2026 22:58:04 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 93C724EE7813;
+ Fri, 20 Feb 2026 22:58:03 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,254 +42,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b61d39a9-0ea5-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1771624031; x=1772228831; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QL0YluuNljQpopZEfgU7W97F1VvgWXQ8YTIYrdrO7hc=;
-        b=Q2M2FZisofsQDWxzuJLABo41tKT3ptdHqJDDaU5HpZVCoGqDc0Bm32JHdghcTbVbzE
-         zFUGHHOxTNaAQLXZiB13yVBzhP6KhSRhxJ4B8Vte/RhZrdHRQYZhFM+nuOWj2mpEf+uK
-         WPP6A4B43Ed1Wf48s67ZDHMHWEUcU0B3ZQT4g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771624031; x=1772228831;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=QL0YluuNljQpopZEfgU7W97F1VvgWXQ8YTIYrdrO7hc=;
-        b=WcWZXIK1XI5IpTFiP+/cgyz7VSdaaoiUjTtY9dm0lTb1SN2bDsSWY4oN4H5jwnouYY
-         SiGF3K/twIYDAPO/Qu6eMQcxQ66FjpFKmdlVcAHIEb2N5uKPsYg3K7oFGpEYKeXBnYkA
-         Jl+JxlxM+zfxcTm7ZnYL6qtLVjcC93TbKCIFkoUY0NK+3JnpR38HRM/ShoxyxxlNbtVZ
-         yvsdnXhPCEBqhYxWC56eyinwHBVVvyi7HVpZqAKVzM5z3Vw0Nz3ytqBUFLc25dGwN8yi
-         uO7yycp3hgG++CcjmBmegTmzCverV3FGsIs1kY0Fotj6I3/yF+UDk+cvmUG6KIz6JgsA
-         DgpA==
-X-Gm-Message-State: AOJu0Yx/fs0RPfQrmkzYwEsQV64oth7aGScxVBmup8YQYpAPNuaOFjjb
-	qVhylPCbp62mAQkggJC38WLMiS3LGHf0vNc7XzKA37lquEmu6EceXiZRNGo6xIOwrkkZQZWWTrK
-	H+I7pDaATNA==
-X-Gm-Gg: AZuq6aLlIHR4MJwhmMdYzJMLeUpnvc3AxqR5MfYo6TWLjyzzJrNj6OY2pkIIo4os9rQ
-	QrujDU56iGtmWn/CCrJkaWpTHKaJh+/lLFhI6cYQmYmXSeEDFgApJZsGGGGrmM2I3DgKJgmHPE9
-	MLC1yFcumgmGKX64KfY3KkPMT/paimpLvcAoRPRPSPCViEMNyhmJFjFBZYgW1hf4tDQIVbSmfE+
-	evnPgqo5B2ly2fSe3Nguduyqkf1hP96AkMlycQUk4tTEN2GI3poEQZ9EhHuEItFgPs+5+p+ZAoU
-	iyxwFnfUVLQzMEgwl6bwNoPOk4G2bXezPCas5NfU+fivsa0mK15Z4aJzx3TmGanI8NPGCwAJ7SR
-	bmffEHuQw/6g57XsmlvQRjYtqS6p544baKwoDV5ntAxoLm9WZto8aBY+8ozAucVTDYSDozaTM6B
-	00S+HZ6sZYeF25fghn5qV+ZXodwbr2KI2zWuYE1GR74duDlrWInpK02SpuEBgtC+aybqb1ZEQ=
-X-Received: by 2002:a05:600c:3b10:b0:483:43da:6c87 with SMTP id 5b1f17b1804b1-483a963d603mr13512275e9.33.1771624030450;
-        Fri, 20 Feb 2026 13:47:10 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	"consulting @ bugseng . com" <consulting@bugseng.com>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 11/12] xen: Bracket uses of macro parameters
-Date: Fri, 20 Feb 2026 21:46:52 +0000
-Message-Id: <20260220214653.3497384-12-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
-References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 3b6cffe8-0ea7-11f1-b164-2bf370ae4941
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1771624683;
+	b=od/wvcOw5vbDQpvmAEMfDB20D5XZoOGEbxlfGQJVjawtDSksmyzYGi/olyuPPi/EDuZF
+	 pXaGkLhv3dCKptrqFd6qP7AyQ4Q2/gL+f4HPr7/i3EVg87AWkDlrtMN8TgRX7YeO1dhbt
+	 rdAf5i7iUsk8bDszyQIP2cKIRWJTZrOezywvmsHNOUC3H8bRhiX9P+0INN68DVBBGJ9og
+	 14KCiG5Wppg50cpFnbKSTe4bdFRwhJvqsbZubA/VZljezFr0pYXY49m3V4H5fviiBKQ05
+	 sDq0UhsNusr8zBukC/eV8pqCaVwwfapXJQaO/evI2dw+EifLBIWXP9lLssew8WPzEdoDQ
+	 3NoEbpvKm5TwZnPrOdyRCD6Lfur+sKJIOwqKLqttrWJsTOTNaGXZ/zrxIFI8zvhCYG2g4
+	 KUTwQQLtEQe8Fz22epXode/C3Aao46gT6TBafijnrBdEshsdcYZpT6wUqRtgwTejyU64L
+	 w1FfJAwfDhKj0xU42hJg+4+eHy6U4w6qTn8EEVoUYeGdKlOZ5F3EI3epbD6FjMrGO/VUD
+	 TzV03Ne8JtuQ3WD7LNZG2kZUs/6nzPmphnS9pl+aCa2IiREdlelfT/BpenVbL7LJmwtcR
+	 e0Rl46A40B1I4bBCZbl5EPiX1F+ZC/riH4sW90KXy2PYwV68NG1YFFRPsHAATvc=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1771624683;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=SQUL1z7BRzL3A60Mgp+F9p0fDu9xJ4j1gn+DCTcytBU=;
+	b=mlFpqNtKw55Ev+PZoM0AIgXFmzcAdp0og1MIyH34KTCe1gTyr79FyGilNHyzo42y/ds5
+	 Jxknc9qTZ/p2pSLnEYFydeggecJFplDLKLD8hIU59ClteX5zKgJsDrCV8/S97Vy5QcWO/
+	 W9mfh/Jlv3sFiKXRkRNUJIr/azzUtvO3jNCR8MQkjEDY5GOfyIaB4pTHKBu3vLEiXt/Sv
+	 A+BEkZvgxniTUQsa6almXBsv6+W/I1M8TpuOTrOQqSre9Pt02QlH82GprX+gG6WCgBEvY
+	 wLddFwDBpLLzHl7cCNUngBOCbLBPafZ45Su1hEWt3plG68Rek71DXH23eIM5cmOc+LpUZ
+	 LJodPaYm8uu1gbO4OD9xjalnDd5QqoJ7aYDLeTMTTh+IfChMRS98EGhjfEkufir8WIbSv
+	 3rlSFAuIuHeCMJZfHLtJHLYgdH0pRqRi2F1Zb1mb6a8rrtqMm+gCCcSAqeqTea2CqpWDQ
+	 HkaUl9qeizEJ2cS0NPhUe0mhFYrr215Ro2V8V13uQKNICRYbauFEU2PQRv9Lr/a0iRine
+	 ewytvHhxHOkWw+1dun1m/oUPSDY82VbbvHaxx9ObKMoHg/9pnApbDdSM5ZT1ejb680wfS
+	 VgQcjrvfz3NLUHzr7boT2DFqEWsueHi8/t6G1+r8mSFtdAVEfSBO5tB+JjF3S1o=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Date: Fri, 20 Feb 2026 22:58:03 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich
+ <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+ <michal.orzel@amd.com>, "consulting @ bugseng . com"
+ <consulting@bugseng.com>
+Subject: Re: [PATCH 01/12] arm: Use __func__ in acpi_boot_table_init()
+In-Reply-To: <20260220214653.3497384-2-andrew.cooper3@citrix.com>
+References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
+ <20260220214653.3497384-2-andrew.cooper3@citrix.com>
+Message-ID: <26db9f5f17b162c0b183cff90cb452da@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
 
-Fixing Rule 20.7 violations.
+On 2026-02-20 22:46, Andrew Cooper wrote:
+> Elcair rejects __FUNCTION__ as nonstandard syntax and a R1.1 violation.
+> 
 
-No functional change.
+s/Elcair/ECLAIR/
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: consulting@bugseng.com <consulting@bugseng.com>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
----
- xen/arch/arm/pci/pci-access.c       |  6 +++---
- xen/arch/x86/include/asm/bootinfo.h |  2 +-
- xen/arch/x86/mm/shadow/multi.c      |  2 +-
- xen/common/kimage.c                 | 11 ++++++-----
- xen/common/livepatch.c              | 11 ++++++-----
- xen/crypto/vmac.c                   |  8 ++++----
- xen/include/xen/libfdt/libfdt.h     |  6 +++---
- 7 files changed, 24 insertions(+), 22 deletions(-)
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Roger Pau Monné <roger.pau@citrix.com>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Julien Grall <julien@xen.org>
+> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+> CC: Bertrand Marquis <bertrand.marquis@arm.com>
+> CC: Michal Orzel <michal.orzel@amd.com>
+> CC: consulting@bugseng.com <consulting@bugseng.com>
+> CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> ---
 
-diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
-index 2b23d552bbfb..7bd6877596d4 100644
---- a/xen/arch/arm/pci/pci-access.c
-+++ b/xen/arch/arm/pci/pci-access.c
-@@ -16,7 +16,7 @@
- #include <asm/io.h>
- 
- #define INVALID_VALUE (~0U)
--#define PCI_ERR_VALUE(len) GENMASK(0, len * 8)
-+#define PCI_ERR_VALUE(len) GENMASK(0, (len) * 8)
- 
- static const struct pci_ops *get_ops(struct pci_host_bridge *bridge,
-                                      pci_sbdf_t sbdf)
-@@ -139,14 +139,14 @@ static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
-     void pci_conf_write##size(pci_sbdf_t sbdf,              \
-                               unsigned int reg, type data)  \
- {                                                           \
--    pci_config_write(sbdf, reg, size / 8, data);            \
-+    pci_config_write(sbdf, reg, (size) / 8, data);          \
- }
- 
- #define PCI_OP_READ(size, type)                             \
-     type pci_conf_read##size(pci_sbdf_t sbdf,               \
-                               unsigned int reg)             \
- {                                                           \
--    return pci_config_read(sbdf, reg, size / 8);            \
-+    return pci_config_read(sbdf, reg, (size) / 8);          \
- }
- 
- PCI_OP_READ(8, uint8_t)
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index 4f2cc5906e59..b3a6b2acf3ac 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -75,7 +75,7 @@ static inline unsigned int __init next_boot_module_index(
- #define for_each_boot_module_by_type(i, b, t)           \
-     for ( (i) = first_boot_module_index(b, t);          \
-           (i) <= (b)->nr_modules;                       \
--          (i) = next_boot_module_index(b, t, i + 1) )
-+          (i) = next_boot_module_index(b, t, (i) + 1) )
- 
- #endif /* X86_BOOTINFO_H */
- 
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index 3bbaceec1287..9de60720db20 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -793,7 +793,7 @@ do {                                                                    \
- do {                                                                    \
-     int __done = 0;                                                     \
-     _FOREACH_PRESENT_L1E(_sl1mfn, _sl1e, _gl1p,                         \
--                         ({ (__done = _done); }), _code);               \
-+                         ({ (__done = (_done)); }), _code);             \
-     _sl1mfn = sh_next_page(_sl1mfn);                                    \
-     if ( !__done )                                                      \
-         _FOREACH_PRESENT_L1E(_sl1mfn, _sl1e, _gl1p, _done, _code);      \
-diff --git a/xen/common/kimage.c b/xen/common/kimage.c
-index e1aec5a18a54..972301368443 100644
---- a/xen/common/kimage.c
-+++ b/xen/common/kimage.c
-@@ -491,11 +491,12 @@ static void kimage_terminate(struct kexec_image *image)
-  * Call unmap_domain_page(ptr) after the loop exits.
-  */
- #define for_each_kimage_entry(image, ptr, entry)                        \
--    for ( ptr = map_domain_page(_mfn(paddr_to_pfn(image->head)));       \
--          (entry = *ptr) && !(entry & IND_DONE);                        \
--          ptr = (entry & IND_INDIRECTION) ?                             \
--              (unmap_domain_page(ptr), map_domain_page(_mfn(paddr_to_pfn(entry)))) \
--              : ptr + 1 )
-+    for ( (ptr) = map_domain_page(_mfn(paddr_to_pfn((image)->head)));   \
-+          ((entry) = *(ptr)) && !((entry) & IND_DONE);                  \
-+          (ptr) = (((entry) & IND_INDIRECTION)                          \
-+                   ? (unmap_domain_page(ptr),                           \
-+                      map_domain_page(_mfn(paddr_to_pfn(entry))))       \
-+                   : (ptr) + 1) )
- 
- static void kimage_free_entry(kimage_entry_t entry)
- {
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 7446533c8cfb..63473925cafb 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -664,9 +664,10 @@ static inline int livepatch_check_expectations(const struct payload *payload)
-     const struct livepatch_elf_sec *__sec = livepatch_elf_sec_by_name(elf, section_name); \
-     if ( !__sec )                                                                         \
-         break;                                                                            \
--    if ( !section_ok(elf, __sec, sizeof(*hook)) || __sec->sec->sh_size != sizeof(*hook) ) \
-+    if ( !section_ok(elf, __sec, sizeof(*(hook))) ||                                      \
-+         __sec->sec->sh_size != sizeof(*(hook)) )                                         \
-         return -EINVAL;                                                                   \
--    hook = __sec->addr;                                                                   \
-+    (hook) = __sec->addr;                                                                 \
- } while (0)
- 
- /*
-@@ -678,10 +679,10 @@ static inline int livepatch_check_expectations(const struct payload *payload)
-     const struct livepatch_elf_sec *__sec = livepatch_elf_sec_by_name(elf, section_name); \
-     if ( !__sec )                                                                         \
-         break;                                                                            \
--    if ( !section_ok(elf, __sec, sizeof(*hook)) )                                         \
-+    if ( !section_ok(elf, __sec, sizeof(*(hook))) )                                       \
-         return -EINVAL;                                                                   \
--    hook = __sec->addr;                                                                   \
--    nhooks = __sec->sec->sh_size / sizeof(*hook);                                         \
-+    (hook) = __sec->addr;                                                                 \
-+    (nhooks) = __sec->sec->sh_size / sizeof(*(hook));                                     \
- } while (0)
- 
- static int prepare_payload(struct payload *payload,
-diff --git a/xen/crypto/vmac.c b/xen/crypto/vmac.c
-index c9914d2c7c1d..c7aa1e9be3b9 100644
---- a/xen/crypto/vmac.c
-+++ b/xen/crypto/vmac.c
-@@ -203,7 +203,7 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- #define nh_16(mp, kp, nw, rh, rl)                                            \
- {   int i; uint64_t th, tl;                                                  \
-     rh = rl = 0;                                                             \
--    for (i = 0; i < nw; i+= 2) {                                             \
-+    for (i = 0; i < (nw); i+= 2) {                                           \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i  ],get64PE((mp)+i+1)+(kp)[i+1]);\
-         ADD128(rh,rl,th,tl);                                                 \
-     }                                                                        \
-@@ -211,7 +211,7 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- #define nh_16_2(mp, kp, nw, rh, rl, rh1, rl1)                                \
- {   int i; uint64_t th, tl;                                                  \
-     rh1 = rl1 = rh = rl = 0;                                                 \
--    for (i = 0; i < nw; i+= 2) {                                             \
-+    for (i = 0; i < (nw); i+= 2) {                                           \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i  ],get64PE((mp)+i+1)+(kp)[i+1]);\
-         ADD128(rh,rl,th,tl);                                                 \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i+2],get64PE((mp)+i+1)+(kp)[i+3]);\
-@@ -223,7 +223,7 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- #define nh_vmac_nhbytes(mp, kp, nw, rh, rl)                                  \
- {   int i; uint64_t th, tl;                                                  \
-     rh = rl = 0;                                                             \
--    for (i = 0; i < nw; i+= 8) {                                             \
-+    for (i = 0; i < (nw); i+= 8) {                                           \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i  ],get64PE((mp)+i+1)+(kp)[i+1]);\
-         ADD128(rh,rl,th,tl);                                                 \
-         MUL64(th,tl,get64PE((mp)+i+2)+(kp)[i+2],get64PE((mp)+i+3)+(kp)[i+3]);\
-@@ -237,7 +237,7 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- #define nh_vmac_nhbytes_2(mp, kp, nw, rh, rl, rh1, rl1)                      \
- {   int i; uint64_t th, tl;                                                  \
-     rh1 = rl1 = rh = rl = 0;                                                 \
--    for (i = 0; i < nw; i+= 8) {                                             \
-+    for (i = 0; i < (nw); i+= 8) {                                           \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i  ],get64PE((mp)+i+1)+(kp)[i+1]);\
-         ADD128(rh,rl,th,tl);                                                 \
-         MUL64(th,tl,get64PE((mp)+i  )+(kp)[i+2],get64PE((mp)+i+1)+(kp)[i+3]);\
-diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
-index fabddbee8cec..1b09bba28eea 100644
---- a/xen/include/xen/libfdt/libfdt.h
-+++ b/xen/include/xen/libfdt/libfdt.h
-@@ -230,9 +230,9 @@ int fdt_next_subnode(const void *fdt, int offset);
-  * literal.
-  */
- #define fdt_for_each_subnode(node, fdt, parent)		\
--	for (node = fdt_first_subnode(fdt, parent);	\
--	     node >= 0;					\
--	     node = fdt_next_subnode(fdt, node))
-+	for ((node) = fdt_first_subnode(fdt, parent);	\
-+	     (node) >= 0;				\
-+	     (node) = fdt_next_subnode(fdt, node))
- 
- /**********************************************************************/
- /* General functions                                                  */
+Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+
+>  xen/arch/arm/acpi/boot.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/xen/arch/arm/acpi/boot.c b/xen/arch/arm/acpi/boot.c
+> index db5085e15d84..4ac0fd8f51e8 100644
+> --- a/xen/arch/arm/acpi/boot.c
+> +++ b/xen/arch/arm/acpi/boot.c
+> @@ -264,14 +264,14 @@ int __init acpi_boot_table_init(void)
+>      if ( error )
+>      {
+>          printk("%s: Unable to initialize table parser (%d)\n",
+> -               __FUNCTION__, error);
+> +               __func__, error);
+>          goto disable;
+>      }
+> 
+>      error = acpi_table_parse(ACPI_SIG_FADT, acpi_parse_fadt);
+>      if ( error )
+>      {
+> -        printk("%s: FADT not found (%d)\n", __FUNCTION__, error);
+> +        printk("%s: FADT not found (%d)\n", __func__, error);
+>          goto disable;
+>      }
+
 -- 
-2.39.5
-
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
