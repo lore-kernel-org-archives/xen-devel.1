@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CC5C5CFEB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15C5C5CFF1
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Feb 2026 21:47:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237608.1539839 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1237611.1539868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYL4-0008FA-BL; Fri, 20 Feb 2026 21:47:06 +0000
+	id 1vtYL7-0000TE-12; Fri, 20 Feb 2026 21:47:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237608.1539839; Fri, 20 Feb 2026 21:47:06 +0000
+Received: by outflank-mailman (output) from mailman id 1237611.1539868; Fri, 20 Feb 2026 21:47:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtYL4-0008F2-7l; Fri, 20 Feb 2026 21:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 1237608;
- Fri, 20 Feb 2026 21:47:05 +0000
+	id 1vtYL6-0000T3-Up; Fri, 20 Feb 2026 21:47:08 +0000
+Received: by outflank-mailman (input) for mailman id 1237611;
+ Fri, 20 Feb 2026 21:47:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2tad=AY=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vtYL3-0008Ew-OW
- for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:05 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1vtYL5-0008Ew-Bg
+ for xen-devel@lists.xenproject.org; Fri, 20 Feb 2026 21:47:07 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b1f5e64b-0ea5-11f1-b164-2bf370ae4941;
- Fri, 20 Feb 2026 22:47:04 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-483a233819aso21422275e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:04 -0800 (PST)
+ id b309dc2b-0ea5-11f1-b164-2bf370ae4941;
+ Fri, 20 Feb 2026 22:47:06 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-48371119eacso24629185e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Feb 2026 13:47:06 -0800 (PST)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.01
+ 5b1f17b1804b1-483a8df83bcsm28940205e9.13.2026.02.20.13.47.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 13:47:02 -0800 (PST)
+ Fri, 20 Feb 2026 13:47:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +47,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1f5e64b-0ea5-11f1-b164-2bf370ae4941
+X-Inumbo-ID: b309dc2b-0ea5-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1771624023; x=1772228823; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yGBm2Qu8JB9RHbibbfp7HlpdXgEWIgkhDqMgDac0Xk4=;
-        b=Io9XjymCsQDDZDVoj5N1IhV5bPxuWzLKxe+ApAzm2HaWrhvW2ysmUYbgEPEePZWawu
-         rmWAjio4Wa5E/EN7GAeuefHZlIl/mlZIoAZKxJqY4frXstJx0/n3a9KoC7z5tfuuZtIU
-         1Z9tjknxuqOwhVAFgY5Ba8U3hVLYmqGsmZaw4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771624023; x=1772228823;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1771624025; x=1772228825; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yGBm2Qu8JB9RHbibbfp7HlpdXgEWIgkhDqMgDac0Xk4=;
-        b=cqU6ga5SbmlKYp45B8M0R6Vgu/4j5IZljVXK27jKb2afftg0nU9C4nUipV7V1UZ26i
-         nEMSYXQ+eUIdK9fQhW+XdNfQxtIB3AsW0NeA+SUuqjt5EzjgdQ73aljzsk+7DezoKC5I
-         SjCCgIzD4QWPFDTnUOZgYg9HFM+GYuIa4Vnymz03iiyL8X9bn/8hNUiCeW+1gJoXnG4Y
-         b7Ot2NDkRBrA2MikEQAWEmxcuIT1mryJPqS/8jd6eDwaCqZL5nFFaYR5sQzu6rBsUCeX
-         6v6Q0HI3d2Vwvip99AxrHEFT1X9N1DoNRkGVMdmA1F5HIrpFaEg0YzpF7LewoPKn7xkt
-         utMQ==
-X-Gm-Message-State: AOJu0YzSn/qhp/fgzC0TAWfqPvIyFQoDwO37YbiG8mvTwPMQKGeT7Jyf
-	gtvMH3yMQC3BQtiJu7VjEieuXFzmNN8uDAtM4G7Km5/4eFKIKBqIFy2yqRPouWnNmUVZdYA7GkX
-	vaP2u
-X-Gm-Gg: AZuq6aLMJFe+F+H3qcxNg9OdohtuDCbVPz0kZlUwwUh0ZZ8GpfV7+n8TIt5Q26hGYJQ
-	+644TQTazBV/+Wo6l9MrbjiKpFjOEtj99xQXd1MUogVlhXt8L8Sxi0YyWNBi3rQ09liNlD/5AkE
-	/WfmL7xQcvcqcc3dVAGvL6Ks0EGxA3blRHsse9fsg2wcAAv+MxzCmCNSn9AIyBrraW9R+h5lEVD
-	irpL4EMeUnfkmye1AK3uHOZTfl7YhuNgWiETRuPepQFwTZauMwS2Os/DW5fqzp2bpH/zIz4meE7
-	5MKqStYhFt3kkVA19ruyszL2avLUViRGXaZZaXiAMwn5UCwhBPxNV+5faZWjUSb/X4UByHbvU4g
-	Ckc/kuCe1eiikJ6PU7g+j1SneQzoL7EysgcJPBae+UML4mcNbVfzUK3yBkdmgl1tzPO3hPyWNYA
-	e2HgPhFl4vBIDiitvljj1a2Y+AlXHYnwtA4sq9EQCacjGME+PUlsjYaMvXORcrfiqjTARNPU8uS
-	YlNW6wPdg==
-X-Received: by 2002:a05:600c:5020:b0:483:71f7:2767 with SMTP id 5b1f17b1804b1-483a95fc0a9mr16791075e9.11.1771624022613;
-        Fri, 20 Feb 2026 13:47:02 -0800 (PST)
+        bh=F7fA2pJ5wU91qVSnLRts4j2C2n/06cd+/6bA5bE+4M0=;
+        b=P+n+Jw261ki3egld4sClFtEsttya0CKtnHY0fjtiQDUcqumvNYTw7kstErSWq9lOTL
+         TALtfUpfIu3dOenbls9IFLPu9TOHtXbwLKPemXmvcoR4TMrvmCFTqVxao+d9ONSJr18q
+         ZHozBulh3BnPltcJxS/fGhlalKyxpiPC/Bw/M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771624025; x=1772228825;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=F7fA2pJ5wU91qVSnLRts4j2C2n/06cd+/6bA5bE+4M0=;
+        b=OaB0e5ePqL2N7McG+sfJComQ59HIxmb8x6OXZWucT1grfs97HEAzx9aBf8JaiMANmf
+         6ySmiYTdyGMHnaF3k3yFWWEVfQgY7s5RjWUy3L2q7X9H8PxrPpsBFg6Ytxbs9o75ZZnu
+         s+GoeRlOasmrM8FIY0Y6+r0q7fXdgcHrYgha5B8IJ/418G+pRhMyfI/VbWZ8Pls9sHbr
+         zs+x4B2bU8ill1swSb/yYUIBr4VRPIRfnj5W0sE+1/GXnrvUGUV6Iw0KyJ9b/IV8rD/F
+         uo78fmoy8pM/RVPqdS2yymqq821ZCfEJ5SVckLdr34koPwpsfSkffD3TQLHy9NecCg8q
+         mSyQ==
+X-Gm-Message-State: AOJu0YyJdqi6wIXM+LRnvXhIsPsvwbn2cR0ZHJUTVo6fNZlFKzJfStuc
+	x27OP9osicnYDBt/TZpM5RODQqqYMk9aZVX+BxGbAQF1vzce9NebObVT4+lqzqWRCT7nZwZohmA
+	ZvFUVA+1D8g==
+X-Gm-Gg: AZuq6aLhvuAi5xMtiorQK/45A2MlTdhwnbLt2m8NvpDsaaqjWIbHxVXWETEwMn9qnsC
+	mCEd96jRHs6UK65bAaXtdS/IzYUIrDEydfCUBgzljKpLbiYFJVk3zZLo9MrzZgqtkEoILNCX4FG
+	L9GOc8lSPZ8FsAg0AfKHUc5UfS4u31nK2nyxa0TGhwYoptZdYwvreQ5mr5CbgTLTxfDeCsKZVdk
+	2UKqLGkfMd9c/3px8Ftn+kVE2HYbzZvU5xCiiNKm+bapFeD17evvnB/kMH1rc7tAnso+STxAlOT
+	IFQnOBLNj0RLYS/MIggAu4tQl5cHrrORwkv5pYOVKVjQ5pjsyzHqTnXotpHnufaVxHE8lm40FMT
+	pBN5zmZ/lEpucyZhlyH2Uh93HXvYO1cGV5HYfLULt0stY8Td+GuTrdi6hJufLEy3zan9mPyFZxR
+	/RJ5Qqe5+6hnJ2nVOAPGIBID1yjbKuZf66yaq3IkEnklci0/mUy2q1mjvUV4p/jnitbAAagnQ=
+X-Received: by 2002:a05:600c:c4a5:b0:483:a2ce:f461 with SMTP id 5b1f17b1804b1-483a95eb453mr15945185e9.4.1771624025257;
+        Fri, 20 Feb 2026 13:47:05 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -93,82 +93,91 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 00/12] xen: Misc MISRA fixes for *-allcode targets
-Date: Fri, 20 Feb 2026 21:46:41 +0000
-Message-Id: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 03/12] xen/argo: Fix MISRA violations around function parameters
+Date: Fri, 20 Feb 2026 21:46:44 +0000
+Message-Id: <20260220214653.3497384-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
+References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2340465777
+For the ARM build only, Eclair reports a R8.4 violation because do_argo_op()
+cannot see its declaration.  This means that x86 is picking hypercall-defs.h
+up transitively while ARM is not.  Include xen/hypercall.h explicitly.
 
-This fixes some low hanging fruit.  There's still more work to do in both the
-x86 and ARM -allcode targets
+Eclair also reports a R8.3 violation because of arg3 and arg4 differing in
+name with a raw_ prefix.  Because hypercall-defs.h generates both do_argo_op()
+and compat_argo_op() from a single description, it's not possible to simply
+rename to raw_ in the declaration, as that would force doing the same rename
+in compat_argo_op().
 
-Andrew Cooper (12):
-  arm: Use __func__ in acpi_boot_table_init()
-  xen/treewide: Adjust suffixes on integer literals
-  xen/argo: Fix MISRA violations around function parameters
-  xen/treewide: Adjust parameter names and types
-  x86: Adjust annotations of asm-used identifiers
-  xen: Include suitable headers to make declarations visible
-  xen/vmac: Const the key parameter of vmac_set_key()
-  arm/pci-designware: Fix MISRA violations
-  x86/shadow: Rework write_atomic() call in shadow_write_entries()
-  xen: Adjust break/fallthrough statements
-  xen: Bracket uses of macro parameters
-  xen/vmac: Delete STDINT block in vmac.h
+In do_argo_op(), drop the split parameter handling, and perform the 32bit
+range check via an explicit cast.  While adjusting the surrounding logic, drop
+unnecessary casts to void * for already pointer arguments in argo_printk().
 
- xen/arch/arm/acpi/boot.c                 |  4 ++--
- xen/arch/arm/gic-v3-its.c                |  2 +-
- xen/arch/arm/include/asm/pci.h           |  2 +-
- xen/arch/arm/include/asm/tee/optee_msg.h | 16 +++++++--------
- xen/arch/arm/include/asm/tee/optee_smc.h |  8 ++++----
- xen/arch/arm/pci/pci-access.c            | 10 ++++++----
- xen/arch/arm/pci/pci-designware.c        |  4 +++-
- xen/arch/arm/pci/pci-designware.h        |  5 ++---
- xen/arch/arm/tee/optee.c                 |  7 ++++---
- xen/arch/x86/boot/cmdline.c              |  3 +--
- xen/arch/x86/boot/reloc.c                |  3 +--
- xen/arch/x86/guest/xen/pvh-boot.c        |  2 +-
- xen/arch/x86/guest/xen/xen.c             |  4 ++--
- xen/arch/x86/include/asm/bootinfo.h      |  2 +-
- xen/arch/x86/include/asm/compat.h        |  2 +-
- xen/arch/x86/include/asm/config.h        |  2 +-
- xen/arch/x86/include/asm/guest/hyperv.h  |  2 +-
- xen/arch/x86/include/asm/p2m.h           |  2 +-
- xen/arch/x86/include/asm/pv/mm.h         |  8 +++++++-
- xen/arch/x86/include/asm/pv/traps.h      |  6 ++----
- xen/arch/x86/mm/mem_paging.c             |  8 +++++---
- xen/arch/x86/mm/shadow/common.c          |  2 +-
- xen/arch/x86/mm/shadow/multi.c           |  2 +-
- xen/arch/x86/mm/shadow/set.c             |  4 ++--
- xen/arch/x86/pv/emul-gate-op.c           |  4 +++-
- xen/arch/x86/pv/emul-inv-op.c            |  1 +
- xen/arch/x86/pv/emul-priv-op.c           |  1 +
- xen/arch/x86/pv/emulate.c                |  1 +
- xen/arch/x86/pv/grant_table.c            |  1 +
- xen/arch/x86/pv/hypercall.c              |  2 +-
- xen/arch/x86/pv/mm.c                     |  1 +
- xen/arch/x86/pv/ro-page-fault.c          |  1 +
- xen/arch/x86/pv/traps.c                  |  1 +
- xen/arch/x86/tboot.c                     | 10 +++++-----
- xen/arch/x86/traps.c                     |  3 +--
- xen/arch/x86/x86_64/machine_kexec.c      |  3 ++-
- xen/common/argo.c                        | 12 ++++++------
- xen/common/kimage.c                      | 11 ++++++-----
- xen/common/livepatch.c                   | 11 ++++++-----
- xen/common/stack-protector.c             |  1 +
- xen/crypto/vmac.c                        | 12 ++++++------
- xen/drivers/char/xhci-dbc.c              | 14 ++++++-------
- xen/include/crypto/rijndael.h            | 16 +++++++--------
- xen/include/crypto/vmac.h                | 25 +-----------------------
- xen/include/xen/acpi.h                   |  2 +-
- xen/include/xen/libfdt/libfdt.h          |  6 +++---
- xen/include/xen/stack-protector.h        |  2 ++
- 47 files changed, 125 insertions(+), 126 deletions(-)
+No functional change.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: consulting@bugseng.com <consulting@bugseng.com>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+ xen/common/argo.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/xen/common/argo.c b/xen/common/argo.c
+index 029a82825ba8..28626e00a8cb 100644
+--- a/xen/common/argo.c
++++ b/xen/common/argo.c
+@@ -21,6 +21,7 @@
+ #include <xen/errno.h>
+ #include <xen/event.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/lib.h>
+ #include <xen/nospec.h>
+ #include <xen/param.h>
+@@ -2084,18 +2085,17 @@ sendv(struct domain *src_d, xen_argo_addr_t *src_addr,
+ 
+ long
+ do_argo_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg1,
+-           XEN_GUEST_HANDLE_PARAM(void) arg2, unsigned long raw_arg3,
+-           unsigned long raw_arg4)
++           XEN_GUEST_HANDLE_PARAM(void) arg2, unsigned long arg3,
++           unsigned long arg4)
+ {
+     struct domain *currd = current->domain;
+     long rc;
+-    unsigned int arg3 = raw_arg3, arg4 = raw_arg4;
+ 
+     argo_dprintk("->do_argo_op(%u,%p,%p,%lu,0x%lx)\n", cmd,
+-                 (void *)arg1.p, (void *)arg2.p, raw_arg3, raw_arg4);
++                 arg1.p, arg2.p, arg3, arg4);
+ 
+     /* Reject numeric hypercall args outside 32-bit range */
+-    if ( (arg3 != raw_arg3) || (arg4 != raw_arg4) )
++    if ( (arg3 != (uint32_t)arg3) || (arg4 != (uint32_t)arg4) )
+         return -EINVAL;
+ 
+     if ( unlikely(!opt_argo) )
+@@ -2248,7 +2248,7 @@ compat_argo_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg1,
+         return rc;
+ 
+     argo_dprintk("->compat_argo_op(%u,%p,%p,%lu,0x%lx)\n", cmd,
+-                 (void *)arg1.p, (void *)arg2.p, arg3, arg4);
++                 arg1.p, arg2.p, arg3, arg4);
+ 
+     send_addr_hnd = guest_handle_cast(arg1, xen_argo_send_addr_t);
+     /* arg2: iovs, arg3: niov, arg4: message_type */
 -- 
 2.39.5
 
