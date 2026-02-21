@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53854C61DE2
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Feb 2026 11:27:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1237900.1540028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CE5C61DE4
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Feb 2026 11:57:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1237912.1540039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtl88-0001td-J0; Sat, 21 Feb 2026 11:26:36 +0000
+	id 1vtlc8-0005qC-SI; Sat, 21 Feb 2026 11:57:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1237900.1540028; Sat, 21 Feb 2026 11:26:36 +0000
+Received: by outflank-mailman (output) from mailman id 1237912.1540039; Sat, 21 Feb 2026 11:57:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vtl88-0001tW-Fd; Sat, 21 Feb 2026 11:26:36 +0000
-Received: by outflank-mailman (input) for mailman id 1237900;
- Sat, 21 Feb 2026 11:26:35 +0000
+	id 1vtlc8-0005q4-P8; Sat, 21 Feb 2026 11:57:36 +0000
+Received: by outflank-mailman (input) for mailman id 1237912;
+ Sat, 21 Feb 2026 11:57:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1vtl87-0001tQ-12
- for xen-devel@lists.xenproject.org; Sat, 21 Feb 2026 11:26:35 +0000
+ (envelope-from <julien@xen.org>) id 1vtlc7-0005py-JH
+ for xen-devel@lists.xenproject.org; Sat, 21 Feb 2026 11:57:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vtl7z-002iys-2J;
- Sat, 21 Feb 2026 11:26:27 +0000
+ (envelope-from <julien@xen.org>) id 1vtlc7-002jX2-0G;
+ Sat, 21 Feb 2026 11:57:35 +0000
 Received: from [2a02:8012:3a1:0:31fa:1b47:3c78:2265]
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1vtl7z-00HZkC-1B;
- Sat, 21 Feb 2026 11:26:27 +0000
+ (envelope-from <julien@xen.org>) id 1vtlc6-0000YC-2k;
+ Sat, 21 Feb 2026 11:57:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,49 +44,121 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=Ie+2jC+rcU0p3EKMOSfhN+nSJwx8/0eWPZeDhh1gTO0=; b=QJTAA4iFp/lXJGfm4nzb5j4xN+
-	mjryiKDlV6dqzGOAigvHkMZxLryq0Tz3sSNLuwPngvRhpouZjqEXRP7pPhlU5ByO6BXIElMC7dIo/
-	csp+TXAH6zyM3eG9206IUI5OYAIlayYsTit/dR+wZgvlCxFTqIiFQvcD3gZU2Yp0Dpd0=;
-Message-ID: <8e5e351d-47fe-4a68-a611-df72e3c5f246@xen.org>
-Date: Sat, 21 Feb 2026 11:26:24 +0000
+	bh=ilZyp0t5vDwXdJuMj+0RKEbkM9xQjkzffh24FsW21yY=; b=yzE5DvSkCR1YppZGIjvU/A2b+d
+	0avi4mEO8hMeBEg0YH+xEv+WpStdGpL9skNUA43GBaiCkh37/X8OyNwPI32W799O/u3BwMd/T/L15
+	RD9ujKij2CzYG0Bg2BbSDZNvucaWC7CBdfCH97ClY5G3z1Eh9a1OEbthcYa3omW6+KVs=;
+Message-ID: <f9996237-760b-4be5-be90-e935ff71284e@xen.org>
+Date: Sat, 21 Feb 2026 11:57:32 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Arm: tighten translate_get_page()
+Subject: Re: [PATCH] xen/arm: Fix memory leak in xenmem_add_to_physmap_one
 Content-Language: en-GB
-To: "Orzel, Michal" <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>
+To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
  Bertrand Marquis <bertrand.marquis@arm.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <1d898900-1072-4ea6-ac4c-1262905cab29@suse.com>
- <abd54c11-28fc-4487-a2f8-733007d361ae@amd.com>
- <9163d0b9-f77e-4c13-b986-2d890bdf8ccd@suse.com>
- <526d338e-8648-4f90-8006-35c639bfa6bd@amd.com>
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>
+References: <20260205125820.116555-1-michal.orzel@amd.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <526d338e-8648-4f90-8006-35c639bfa6bd@amd.com>
+In-Reply-To: <20260205125820.116555-1-michal.orzel@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Hi Michal,
 
-On 18/02/2026 08:36, Orzel, Michal wrote:
->> But that's not correct for cases where share_xen_page_with_privileged_guest()
->> is passed SHARE_ro. XENMAPSPACE_gmfn_foreign requests have to result in r/o
->> mappings in that case.
-> Yes. Therefore, on Arm:
-> - p2m_ram_ro is never stored in P2M tables for normal domains
+For the subject title and part of the code, "memory leak" tends to imply 
+the memory is lost forever and therefore can never be recovered. AFAIU, 
+in your case, the memory will be freed when the domain is destroyed. I 
+would suggest to clarify it so it doesn't sound like a security issue.
 
-p2m_set_permission() is able to deal with p2m_ram_ro. So this could in 
-theory happen.
+What about:
 
-> - it's only used by get_page_from_gfn() for DOMID_XEN pages
-> - it's used as a signal to install p2m_map_foreign_ro mappings
+"xen/arm: mm: Release the old page reference in xenmem_add_to_physmap_one()"
+
+On 05/02/2026 12:58, Michal Orzel wrote:
+> When a guest maps pages via XENMEM_add_to_physmap to a GFN that already
+> has an existing mapping, the old page at that GFN was not being removed,
+> causing a memory leak. This affects all mapping spaces including
+> XENMAPSPACE_shared_info, XENMAPSPACE_grant_table, and
+> XENMAPSPACE_gmfn_foreign. The memory would be reclaimed on domain
+> destruction.
 > 
-> The code should stay as is then and we could modify the comment to say:
- > /* Read-only RAM; only used for DOMID_XEN */
+> Add logic to remove the previously mapped page before creating the new
+> mapping, matching the x86 implementation approach.
+> 
+> Additionally, skip removal if the same MFN is being remapped.
 
-With what I wrote above, I don't think we should add such comment.
+Can you explain why we skip the removal but not the insertion in this case?
+
+> 
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+> ---
+> I'm not sure where to point the Fixes tag to.
+> ---
+>   xen/arch/arm/mm.c | 32 +++++++++++++++++++++++++++++---
+>   1 file changed, 29 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+> index 6df8b616e464..b9f1a493dcd7 100644
+> --- a/xen/arch/arm/mm.c
+> +++ b/xen/arch/arm/mm.c
+> @@ -166,10 +166,11 @@ int xenmem_add_to_physmap_one(
+>       unsigned long idx,
+>       gfn_t gfn)
+>   {
+> -    mfn_t mfn = INVALID_MFN;
+> +    mfn_t mfn = INVALID_MFN, mfn_old;
+>       int rc;
+>       p2m_type_t t;
+>       struct page_info *page = NULL;
+> +    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+>   
+>       switch ( space )
+>       {
+> @@ -244,6 +245,33 @@ int xenmem_add_to_physmap_one(
+>           return -ENOSYS;
+>       }
+>   
+> +    /*
+> +     * Remove previously mapped page if it was present, to avoid leaking
+> +     * memory.
+> +     */
+> +    mfn_old = gfn_to_mfn(d, gfn);
+
+I saw Jan mentionned the fact that we have two section with the P2M lock 
+taken. But isn't it in fact 3 sections as gfn_to_mfn(d, gfn) also take a 
+lock?
+
+I am not against the idea of not solving the locking right now. But I 
+think it would at least be good to document it so this doesn't come as a 
+surprise.
+
+> +
+> +    if ( mfn_valid(mfn_old) )
+> +    {
+> +        if ( is_special_page(mfn_to_page(mfn_old)) )
+> +        {
+> +            /* Just unmap, don't free */
+> +            p2m_write_lock(p2m);
+> +            rc = p2m_set_entry(p2m, gfn, 1, INVALID_MFN,
+> +                               p2m_invalid, p2m->default_access);
+> +            p2m_write_unlock(p2m);
+> +            if ( rc )
+> +                return rc;
+
+For here and the second "return" statement below. Above callers may have 
+taken a reference on the new page. So shouldn't we drop it like this is 
+done at the end of the function?
+
+> +        }
+> +        else if ( !mfn_eq(mfn, mfn_old) )
+> +        {
+> +            /* Normal domain memory is freed, to avoid leaking memory */
+
+Based on the thread with Jan, is this statement actually correct? Could 
+we reach this call with an MMIO (or event foreign mapping). In which 
+case, I am guessing we could fail? If so, is this the intended behavior 
+change?
 
 Cheers,
 
