@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6381E98E10
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 09:16:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1238575.1540182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA311E98E0F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 09:21:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1238584.1540192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuS2p-0007OQ-4H; Mon, 23 Feb 2026 09:15:59 +0000
+	id 1vuS89-0000lM-LG; Mon, 23 Feb 2026 09:21:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1238575.1540182; Mon, 23 Feb 2026 09:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 1238584.1540192; Mon, 23 Feb 2026 09:21:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuS2p-0007OJ-1Q; Mon, 23 Feb 2026 09:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 1238575;
- Mon, 23 Feb 2026 09:15:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vuS89-0000lF-Ih; Mon, 23 Feb 2026 09:21:29 +0000
+Received: by outflank-mailman (input) for mailman id 1238584;
+ Mon, 23 Feb 2026 09:21:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dhnJ=A3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vuS2m-0007OD-WF
- for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 09:15:57 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 421d4c3e-1098-11f1-b164-2bf370ae4941;
- Mon, 23 Feb 2026 10:15:55 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-4377174e1ebso3077164f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 23 Feb 2026 01:15:55 -0800 (PST)
+ id 1vuS87-0000l7-Ha
+ for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 09:21:27 +0000
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [2a00:1450:4864:20::42c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0194bc82-1099-11f1-9ccf-f158ae23cfc8;
+ Mon, 23 Feb 2026 10:21:17 +0100 (CET)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-43945763558so2415309f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Feb 2026 01:21:16 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43970c00db8sm17618744f8f.12.2026.02.23.01.15.54
+ ffacd0b85a97d-43970d4c96csm19597819f8f.30.2026.02.23.01.21.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Feb 2026 01:15:54 -0800 (PST)
+ Mon, 23 Feb 2026 01:21:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +47,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 421d4c3e-1098-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 0194bc82-1099-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1771838155; x=1772442955; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1771838476; x=1772443276; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=AryWjovBpM3X9xg2oKuQbNVxztMg6n+XInojlx7jBbI=;
-        b=WIRrZ6Jo9kZyc97pR8tEmDWAyYyscnS5ziyphUHZ+oW0kCogdJS2102Z7rbNJNUEND
-         xSRh1MDY+wdiKvD4A/XFKoXHhQQRhJ56jEo3ScHlFkUWDDuj0jIbJPWWH5XnVdwBDOE+
-         3/mMvpnfzTn4X9p9sP6pjxZ0u3bZZTYGZ4ZyVh8rI6mm95+t+x7nv/V2yI8VEWfNnffw
-         qD6pZqonCa4u4BI35D0Zf4ESF2YiFOO4uykNk55l/ICHCmVKEO2QC5Cd6Ozq5m4NQmUE
-         yGCiFni3bunhaDAJBCMAnieAH0XfAp5+aV84rUDo6iyvee2CBew7golZgGdR3DWg/EbG
-         dQOA==
+        bh=+QmhRK5BMZEFA5WoJgAFV/ABpJNn2DSWDOAr613kQx8=;
+        b=WOtraBDqmMqQXgn9nu9V0I9QpwGPOIrgILsC7a5RkKJn+AwnUG61IbFtvJ9Tw8PERX
+         8Ruw3cqDKEgonj8hdfD+7J84uuaFQuBw+47XIX9VnoVud2ms52r9rdUnV5w/4rJ2EGEA
+         pCYgUkhQVhZWQN63oA/kLdvmS2Ls4acUMbmCnIkJG9P6aD7UXIlm5xrkYO5v140VUGwS
+         Kp5i6z47tGOIMk+ma0ozvS94GZgij5YvV8BGcQECGrW/U8xG06zLd73bxdLg+pgZ4Wt7
+         7VSZPu6c563q5b/ep0rJ3wtY4GPqGxpUNrZYzSfcRbxOccNwa/L0JduowH7VspqPYv2U
+         GqyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771838155; x=1772442955;
+        d=1e100.net; s=20230601; t=1771838476; x=1772443276;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=AryWjovBpM3X9xg2oKuQbNVxztMg6n+XInojlx7jBbI=;
-        b=SBzfoo6G6GgDaTiFXeK1yjGghBuH7k54YyB7Lar/JA2paURR7hrjmeVC23ibTfK/HK
-         lC0f0uAMQXtL47CGLiaJ9FDrxnOTUqi7VNCzTx0JKp9HFGBV4bgK7ZMDM0Qbx4bHIGgG
-         LiHS9l3qmA2HjxypJAJugG1tIz7HUWH91ZBsw9zaobyUgnu40J0cih1n9xJiYQ7vZRaU
-         nZyMHe2Xe5ZgL8a6ZmVhhrkIAPphYg5dv9yxaY+DVSdSBSdDvSpD5+Lv5lwbl/QCQgQB
-         HVLShDeXdoQ+uO+68M3gMViaJvcbEIxkOtgenCqIPhLF2sVI3iXOS4KDmqmCDs7j4tyU
-         QgJg==
-X-Forwarded-Encrypted: i=1; AJvYcCVkkhMKmApzV8556nfqCf76eZn7ffEE7/AxitfCx+p2hmChNP8hMKIGKXvKcndZNhZw/0QCjKIoxgo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YztZkisp/KUzWAivt2B8/nV2690zsnfw7wIlc/nCU59siIogTyO
-	V5HjQ6NTfp7jkSbRNWS/3GCutEcqVzSf3fJwETScB0nnckhwV2WFQInzruTb+bbdaA==
-X-Gm-Gg: ATEYQzwA4j3eFoJm0Egv6eF9lN7IHvTRKiec246E115Q6IIsG3LLhpn+VqS5BRx+mBU
-	E6n0pkE77k0vFXr1q42mO4uWJlS+JsM92RQFbGx46urhc/V13ZKPqPy766kirUBGMGwnhH45cvV
-	9fymB0dfX/Uj2nmhVQIaMqAkYCGvcoJ61r3jyVP1kvgoVwaN8oTuPC9W8oyTeZs8Gi7RX8ZpaJ8
-	BGF6TcDAjITVmReBnIdvIF6xxeG97vLppnTdo3L36zqK9HVyP26zwhOKPlAYUh2LOai0IxWyLBh
-	HrTJsh6wC/0CBUouFB8O8395rmIE4+o4Yo2tdPlz1ALkLn4A7rlyXwzUaL3N6VfmTYBmbc+BzxK
-	GuqvQpIs9IxVTMvk3hX93pd8hz7gv7aPTb0PRwRfa0axzFJ7O5QsZE4wCksMOdd+fJWqtkCQnxz
-	Um351tOAlcdGvJX64TGCTFlBzyOZD1ADROxGy1h9joDE/dAJSDoP7eppk2DM39cSU/sC/0bZceH
-	x4It2TiIl3dF9Y=
-X-Received: by 2002:a05:6000:615:b0:432:8504:8d5b with SMTP id ffacd0b85a97d-4396f194345mr13869111f8f.50.1771838155040;
-        Mon, 23 Feb 2026 01:15:55 -0800 (PST)
-Message-ID: <aad02d36-5b26-4a59-ac67-99757fe13679@suse.com>
-Date: Mon, 23 Feb 2026 10:15:55 +0100
+        bh=+QmhRK5BMZEFA5WoJgAFV/ABpJNn2DSWDOAr613kQx8=;
+        b=N6phIzF/K+iqTDg40w0pGad2jl56DtGMK1JiLEeXbw2qSoJP9aRIfmE4YNxmbvQzPI
+         icA1x0RR4XAlz/yTcaIVf6+SysUO94UOp2ycaOwZFU7SQFs8ImPRpsVL47x7j7xL3h3N
+         s27xPQsZTlNnAuWrtYeSvLFXy2GqPpKVY4L0TXruH7JlPj1l8JnPZDKmSCtZ43zA28Eh
+         K9mydkkdHwZ0mstZzPr8J2MsqE3zu6dEZ4xOyctiGFFJug0gcdwkSH+ZmvvJVNv75wTS
+         pedh1MgaoYMX2lqLts72JytI02EflKQz3B5gQqCkRCbBE7abWVjTRPBgb3RgW7YeDGd0
+         RNUw==
+X-Forwarded-Encrypted: i=1; AJvYcCUYB/7TLlZ0LYvBnIGN97l0TXGvC3+eK0q5vUha/VMTCE2B39SmdQQeHgCgDqKJTTjNBdmO0AkYFvw=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwoyF9KaX8Jzue/A9sgbz2U3EATPXkVHS/muZ0JrRw3TQ4hilz6
+	OOk1yJHjr0edOYjsOlrbV2krRdcCJOEliVgnRNNG4PlhCBotBivcUDkqRC5EW9NItg==
+X-Gm-Gg: ATEYQzwN5zBP+8jd+ev2tklqHDHT3Odra2qGqfTWNYwxYhZf+ggSQ80UGLPF3KWM7Go
+	8I0lVG6Qr+xJdOU6z2RZKS7NKlgBdKLfLTHV8W1i7le4ABEu8CBefpUo0bCBlvv7JgXL2puZvxV
+	Rhah5BNvh0BlaBqqVXh3DlBZbFxESSUGd649ZSjoJBr0rxwFDkwrHJveDNvEuydBysAV5izpZc3
+	wsJ9JTugWxlW7N6T5z2tJzP76JV5DxJ8GtWD7gdIK8NF1Ufsu15QugPd4Y7kGnd5THDZR21kvds
+	fShyzbOa3J2Msttq1y4esY56R4U2Zqft+QWXZMYAoTdOb+mYOsa+XzIeu9WlRbqb2JTFfA3jEyu
+	GwNs/1sNYmZmqKvAayDLUQqjf8t14xkWPex0SIgzz7xsAv9ocxvnT5omjA67hrnWDu3Zrfvx0FJ
+	5Ix/TjiyhT3otFCYgR9StQ/MRD/tgeOEUY4FVcBlSCaq43kO5H2TSDXUbLbmzb6u5ZSzVhUV7Id
+	yNbPHnK49RxZEo=
+X-Received: by 2002:a05:6000:288c:b0:439:5c09:4854 with SMTP id ffacd0b85a97d-4396f19e75amr15264053f8f.41.1771838476315;
+        Mon, 23 Feb 2026 01:21:16 -0800 (PST)
+Message-ID: <80743dab-4c71-40e2-bf09-789cc7ebbb28@suse.com>
+Date: Mon, 23 Feb 2026 10:21:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/12] xen/argo: Fix MISRA violations around function
- parameters
+Subject: Re: [PATCH 05/12] x86: Adjust annotations of asm-used identifiers
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
@@ -100,11 +99,9 @@ Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Michal Orzel <michal.orzel@amd.com>,
  "consulting @ bugseng . com" <consulting@bugseng.com>,
  Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Xen-devel <xen-devel@lists.xenproject.org>,
- Christopher Clark <christopher.w.clark@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>
+ Xen-devel <xen-devel@lists.xenproject.org>
 References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
- <20260220214653.3497384-4-andrew.cooper3@citrix.com>
+ <20260220214653.3497384-6-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,43 +127,18 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260220214653.3497384-4-andrew.cooper3@citrix.com>
+In-Reply-To: <20260220214653.3497384-6-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 On 20.02.2026 22:46, Andrew Cooper wrote:
-> For the ARM build only, Eclair reports a R8.4 violation because do_argo_op()
-> cannot see its declaration.  This means that x86 is picking hypercall-defs.h
-> up transitively while ARM is not.  Include xen/hypercall.h explicitly.
+> do_entry_int82() is only called by assembly so gains asmlinkage.
 > 
-> Eclair also reports a R8.3 violation because of arg3 and arg4 differing in
-> name with a raw_ prefix.  Because hypercall-defs.h generates both do_argo_op()
-> and compat_argo_op() from a single description, it's not possible to simply
-> rename to raw_ in the declaration, as that would force doing the same rename
-> in compat_argo_op().
-> 
-> In do_argo_op(), drop the split parameter handling, and perform the 32bit
-> range check via an explicit cast.  While adjusting the surrounding logic, drop
-> unnecessary casts to void * for already pointer arguments in argo_printk().
-> 
-> No functional change.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> pvh_start_info_pa and early_hypercall_insn are data used by assembly, and need
+> a SAF-1 annotation.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-> ---
-> CC: Jan Beulich <JBeulich@suse.com>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Julien Grall <julien@xen.org>
-> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> CC: Bertrand Marquis <bertrand.marquis@arm.com>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: consulting@bugseng.com <consulting@bugseng.com>
-> CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
-
-Further Cc-ing Argo maintainer / reviewer.
+Why not use asmlinkage there as well? The deviation covering it as much as SAF-1-safe
+say "only" (which doesn't fully apply here), so if in doubt is should be asmlinkage?
 
 Jan
 
