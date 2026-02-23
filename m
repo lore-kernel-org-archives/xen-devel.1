@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A928BE98E13
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 10:05:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1238618.1540253 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC98E98E0F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 10:05:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1238616.1540244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSoP-00086L-8h; Mon, 23 Feb 2026 10:05:09 +0000
+	id 1vuSoO-0007yH-Nw; Mon, 23 Feb 2026 10:05:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1238618.1540253; Mon, 23 Feb 2026 10:05:09 +0000
+Received: by outflank-mailman (output) from mailman id 1238616.1540244; Mon, 23 Feb 2026 10:05:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSoP-00083d-2T; Mon, 23 Feb 2026 10:05:09 +0000
-Received: by outflank-mailman (input) for mailman id 1238618;
- Mon, 23 Feb 2026 10:05:08 +0000
+	id 1vuSoO-0007yA-Hl; Mon, 23 Feb 2026 10:05:08 +0000
+Received: by outflank-mailman (input) for mailman id 1238616;
+ Mon, 23 Feb 2026 10:05:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3dwo=A3=citrix.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1vuSoO-0007Xe-Eg
- for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 10:05:08 +0000
+ id 1vuSoM-0007Xe-Li
+ for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 10:05:06 +0000
 Received: from na1pdmzitismtp01.tibco.com (na1pdmzitismtp01.tibco.com
  [160.101.131.8]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 20a8c1e0-109f-11f1-9ccf-f158ae23cfc8;
- Mon, 23 Feb 2026 11:05:06 +0100 (CET)
+ id 1ed4dfb6-109f-11f1-9ccf-f158ae23cfc8;
+ Mon, 23 Feb 2026 11:05:03 +0100 (CET)
 Received: from localhost.localdomain (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id 0066C41202E0;
- Mon, 23 Feb 2026 05:04:46 -0500 (EST)
+ by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id E3F9241202D4;
+ Mon, 23 Feb 2026 05:04:43 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 20a8c1e0-109f-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 1ed4dfb6-109f-11f1-9ccf-f158ae23cfc8
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
@@ -49,329 +49,43 @@ Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 4/4] tools/tests/x86_emulator: disable xmm* tests on clang
-Date: Mon, 23 Feb 2026 10:04:55 +0000
-Message-ID: <9e380de50b64e45e9044a2f4bcf1a5bdb7e74a29.1771840208.git.edwin.torok@citrix.com>
+Subject: [PATCH 0/4] Fix building tools/tests/x86_emulator with clang-21
+Date: Mon, 23 Feb 2026 10:04:51 +0000
+Message-ID: <cover.1771840208.git.edwin.torok@citrix.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1771840208.git.edwin.torok@citrix.com>
-References: <cover.1771840208.git.edwin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-clang-21 doesn't support `-ffixed-xmm0`, so `%xmm0` won't have the
-expected value.
-Disable these tests on clang.
+While working on another patch series I noticed that `clang-21` cannot
+build `tools/tests/x86_emulator`. Once I fixed that `xmm0` related tests
+failed, because `clang` doesn't support `-ffixed-xmm0`.
 
-Signed-off-by: Edwin Török <edwin.torok@citrix.com>
----
- tools/tests/x86_emulator/test_x86_emulator.c | 44 ++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+This series fixes building and running the test with `clang`.
 
-diff --git a/tools/tests/x86_emulator/test_x86_emulator.c b/tools/tests/x86_emulator/test_x86_emulator.c
-index cf4e5cc593..3d0ad07c6b 100644
---- a/tools/tests/x86_emulator/test_x86_emulator.c
-+++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -2683,6 +2683,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing fxsave 4(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_fxsr )
-     {
-         const uint16_t nine = 9;
-@@ -2712,6 +2713,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing fxrstor -4(%ecx)...");
-@@ -2748,6 +2750,7 @@ int main(int argc, char **argv)
- 
- #ifdef __x86_64__
-     printf("%-40s", "Testing fxsaveq 8(%edx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_fxsr )
-     {
-         memset(res + 0x80, 0xcc, 0x400);
-@@ -2765,6 +2768,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- #endif
- 
-@@ -2816,6 +2820,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movq %xmm0,32(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movq_to_mem2);
-@@ -2837,9 +2842,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movq 32(%ecx),%xmm1...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movq_from_mem2);
-@@ -2860,9 +2867,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovq %xmm1,32(%edx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovq_to_mem);
-@@ -2884,9 +2893,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovq 32(%edx),%xmm0...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovq_from_mem);
-@@ -2907,9 +2918,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovq %xmm1,32(%edx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx512f )
-     {
-         decl_insn(evex_vmovq_to_mem);
-@@ -2931,9 +2944,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovq 32(%edx),%xmm0...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx512f )
-     {
-         decl_insn(evex_vmovq_from_mem);
-@@ -2954,9 +2969,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movdqu %xmm2,(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movdqu_to_mem);
-@@ -2976,9 +2993,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movdqu (%edx),%xmm4...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movdqu_from_mem);
-@@ -3001,6 +3020,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovdqu %ymm2,(%ecx)...");
-@@ -3386,6 +3406,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movd %xmm2,32(%edx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movd_to_mem2);
-@@ -3407,9 +3428,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movd 32(%edx),%xmm3...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movd_from_mem2);
-@@ -3435,9 +3458,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovd %xmm1,32(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovd_to_mem);
-@@ -3459,9 +3484,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovd 32(%ecx),%xmm2...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovd_from_mem);
-@@ -3487,6 +3514,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovd %xmm3,32(%ecx)...");
-@@ -3597,6 +3625,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movd %xmm2,%ebx...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_sse2 )
-     {
-         decl_insn(movd_to_reg2);
-@@ -3619,6 +3648,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movd %ebx,%xmm3...");
-@@ -3651,6 +3681,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovd %xmm1,%ebx...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovd_to_reg);
-@@ -3673,6 +3704,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovd %ebx,%xmm2...");
-@@ -3705,6 +3737,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovd %xmm2,%ebx...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx512f )
-     {
-         decl_insn(evex_vmovd_to_reg);
-@@ -3728,6 +3761,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovd %ebx,%xmm1...");
-@@ -3781,6 +3815,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movq %xmm2,32(%edx)...");
-+#ifndef __clang__
-     if ( stack_exec )
-     {
-         decl_insn(movq_to_mem4);
-@@ -3802,9 +3837,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovq %xmm1,32(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovq_to_mem2);
-@@ -3830,9 +3867,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing {evex} vmovq %xmm11,32(%ecx)...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx512f )
-     {
-         decl_insn(evex_vmovq_to_mem2);
-@@ -3860,6 +3899,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movq %mm3,%rbx...");
-@@ -3883,6 +3923,7 @@ int main(int argc, char **argv)
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing movq %xmm2,%rbx...");
-+#ifndef __clang__
-     if ( stack_exec )
-     {
-         decl_insn(movq_to_reg2);
-@@ -3900,9 +3941,11 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovq %xmm1,%rbx...");
-+#ifndef __clang__
-     if ( stack_exec && cpu_has_avx )
-     {
-         decl_insn(vmovq_to_reg);
-@@ -3920,6 +3963,7 @@ int main(int argc, char **argv)
-         printf("okay\n");
-     }
-     else
-+#endif
-         printf("skipped\n");
- 
-     printf("%-40s", "Testing vmovq %xmm22,%rbx...");
+There might still be some latent bugs in the tests though, i.e. `xmm0` may not
+be the only reason it fails on clang: the `fxsave` tests have
+2 overlapping areas of memory at `res + 0x80`, and `res + 0x100` of length `0x200`.
+Instead the 2nd area should start at `0x280`, and the memset should
+clear an area of `0x480`.
+I didn't attempt to fix all those, because attempting to do so caused
+the tests to start failing on GCC.
+
+For convenience this patch series is also available at:
+https://gitlab.com/xen-project/people/edwintorok/xen/-/compare/staging...private%2Fedvint%2Femulator?from_project_id=2336572
+https://gitlab.com/xen-project/people/edwintorok/xen/-/pipelines/2343355874
+
+Edwin Török (4):
+  tools/tests/x86_emulator: fix 'shifting a negative signed value is
+    undefined'
+  tools/tests/x86_emulator: avoid duplicating loop body
+  tools/tests/x86_emulator: fix build on clang-21
+  tools/tests/x86_emulator: disable xmm* tests on clang
+
+ tools/tests/x86_emulator/Makefile            |  1 +
+ tools/tests/x86_emulator/test_x86_emulator.c | 48 +++++++++++++++++++-
+ 2 files changed, 47 insertions(+), 2 deletions(-)
+
 -- 
 2.47.3
 
