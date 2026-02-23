@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F20AE98E15
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 10:14:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1238754.1540283 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A911E98E13
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 10:42:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1238971.1540352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSxJ-0003AJ-Bm; Mon, 23 Feb 2026 10:14:21 +0000
+	id 1vuTOi-0002DY-M6; Mon, 23 Feb 2026 10:42:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1238754.1540283; Mon, 23 Feb 2026 10:14:21 +0000
+Received: by outflank-mailman (output) from mailman id 1238971.1540352; Mon, 23 Feb 2026 10:42:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSxJ-0003AB-85; Mon, 23 Feb 2026 10:14:21 +0000
-Received: by outflank-mailman (input) for mailman id 1238754;
- Mon, 23 Feb 2026 10:14:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3dwo=A3=citrix.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1vuSxH-0002wR-UG
- for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 10:14:20 +0000
-Received: from na1pdmzitismtp01.tibco.com (na1pdmzitismtp01.tibco.com
- [160.101.131.8]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 692e4533-10a0-11f1-9ccf-f158ae23cfc8;
- Mon, 23 Feb 2026 11:14:17 +0100 (CET)
-Received: from localhost.localdomain (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id 01342412248C;
- Mon, 23 Feb 2026 05:13:57 -0500 (EST)
+	id 1vuTOi-0002DR-JT; Mon, 23 Feb 2026 10:42:40 +0000
+Received: by outflank-mailman (input) for mailman id 1238971;
+ Mon, 23 Feb 2026 10:42:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dhnJ=A3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vuTOg-0002DJ-Qy
+ for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 10:42:38 +0000
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [2a00:1450:4864:20::331])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5e7fcc92-10a4-11f1-b164-2bf370ae4941;
+ Mon, 23 Feb 2026 11:42:37 +0100 (CET)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4836d4c26d3so36766695e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Feb 2026 02:42:37 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483a42eb86bsm84804325e9.15.2026.02.23.02.42.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Feb 2026 02:42:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,547 +47,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 692e4533-10a0-11f1-9ccf-f158ae23cfc8
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stewart Hildebrand <stewart.hildebrand@amd.com>
-Subject: [PATCH 1/7] tools/tests/*/Makefile: factor out common PHONY rules into Rules.mk
-Date: Mon, 23 Feb 2026 10:14:05 +0000
-Message-ID: <6fa0d95dad3d223cf8aaa923ae59fd0b3a97d4a0.1771840831.git.edwin.torok@citrix.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1771840831.git.edwin.torok@citrix.com>
-References: <cover.1771840831.git.edwin.torok@citrix.com>
+X-Inumbo-ID: 5e7fcc92-10a4-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1771843357; x=1772448157; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=6pgzws46isvFUEBd9jQMx5x4y1kwIq7uBsNdnmg/sgI=;
+        b=Ee4LFSZ/NGdJRXndnn173GhEp1nqWNyMc+AMau+S1c7kf8LSjbmp3zuEKZUpsyEzbY
+         2lDBHZBncZBMalFaUjNqCjC0YG7gP6VVn8VR3obzW8Zxor5IKoqRC1Tig6yFNEKIvL4g
+         WY2IkVtUJ8pPmxaZyGx0rkL2glfJxKwbbAM5IxxyGAzXKEpZob7W9XvcDu4AhSABVdRX
+         mEkoIZyWNdQ4glyPQsbz4nSsbTzlt+RaO5We2rn+HvpIbPpdz012hM35T/GqZP/gtMer
+         BfywIVI79nNHUCopR6EAjQwxfdlkfAIjWZTtZyRHmdPEA3G/CNhTIL6zjhdulo94nIRO
+         lBcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771843357; x=1772448157;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6pgzws46isvFUEBd9jQMx5x4y1kwIq7uBsNdnmg/sgI=;
+        b=uj7MSxdDH5OS/GVaUxBLoJN0fHCZSzoJsa8T1ccdqRP0sbG5FZTAllenIq8CxlHVsH
+         i3U34DTmbS7UEiBa6333/i8U6iTkUm60qEYmbxjFdGsz6xk2x6d6hIxQg3FbWuR622oR
+         c5xkruNeWw/aW2MVwmjsjaHZLY1+I282kdycTryy/Iz4fRsdGIlrLdxPUGtcHCod0tSj
+         WmncD3X40UBbvOPuOn+g7Y+sp/HSQKX6LOq/EDktpRhDeMnPxtFOGRj2iP0O9kTxy8yN
+         KW7nErb70M+NIMt5HqgpLkqkiYz8/lXYquC1dkh3ykBaFU4mkysvg09w460KAHl1JCYJ
+         i0lw==
+X-Forwarded-Encrypted: i=1; AJvYcCXhoL81qSoqAPT48NbBM4Visv1sGNfG53+/fB6AIo7YR/CULDI0PyEtXtQD/kpG9YO+Rj2uzzCeJmk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwwHzove8Z6lu3SY1GdZt8E9gd+NvEIYDEsHDqyLfd8Xnpbjwxk
+	LDPzvnfinBxewRYCGkJp11lnI0EWFJHXyGTFy3+2BAvxddyssXda9jJve0z7PB+E5w==
+X-Gm-Gg: AZuq6aJffZftdUDIcMQ5KgvHffLDVfb1v85WlaVKieW1kyZ9iugTs1aJ67ZoBb0jOyL
+	q2zERtlnySQ43o/ORKJMrEpBAHDzU3qRoYUDcQQGKNk+lXfP8ko0RranR8s+Zg0HCBgiTX3kCdz
+	CY/2nhS+GqpCFbxkL6jMtFKBDIbEw9F1MN/mbi/Di2m4KfF0HvIeH0UIaspj5BUCpG6H6Z2lfK6
+	ssslp/4Rgmu/muvRgeZJTLH/3C7cuaKysdgX7VdjbglR1TG3ElDSFm5VzzngUtoJg+8cFWM2ddT
+	GZVHx3njFPeS7zCmXBnkkhVsitsV0LONPlQQaUywCPz3wO/nAMnt+eJb4VBJyvsKVcWR6PW9UEu
+	39tDTPYWXU86U1bt9AqkBT7jghMNH0VrYmrRo/bB4YtxPDP4MwrfLjAnHZFUU+LYEYXw1ASxJC4
+	/R65RkLxqs0Ti+Y0oNCDmPGRjULwciFpVKjictCBDhg7tcfDmyvgWOPTzZ98nQNOiS85VtHgBkT
+	qtKsRFyfqKAr7I=
+X-Received: by 2002:a05:600c:8716:b0:471:1717:411 with SMTP id 5b1f17b1804b1-483a95e9a7fmr139623095e9.24.1771843356714;
+        Mon, 23 Feb 2026 02:42:36 -0800 (PST)
+Message-ID: <dba3fb3f-b5c9-460c-85fc-761f58e140fc@suse.com>
+Date: Mon, 23 Feb 2026 11:42:37 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] Factor out common build rules and helpers in
+ tools/tests
+To: =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ xen-devel@lists.xenproject.org, Denis Mukhin <dmukhin@ford.com>
+References: <cover.1771840831.git.edwin.torok@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <cover.1771840831.git.edwin.torok@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce a new tools/tests/Rules.mk that must be included *last* in a
-Makefile, after TARGETS is defined.
-This reduces the boilerplate that must be copy pasted when new tests are
-written.
+On 23.02.2026 11:14, Edwin Török wrote:
+> There are a lot of duplicate rules and code in tools/tests.
+> To simplify writing new tests move common build rules into a
+> `tools/tests/Rules.mk`, and helper macros/functions into `common/{tests,guests}.{c,h}`.
+> 
+> This also ensures that CFLAGS are applied consistently across all tests (e.g. one test failed
+> to build now due to an unused variable error).
+> 
+> Guest creation also needs to test for the presence of PV, HVM HAP or HVM shadow support
+> in Xen and create a guest accordingly. This can be shared.
+> 
+> After these changes the per-test Makefile only contains entries specific
+> to the test (its name, dependencies, etc.) and avoids having to
+> copy&paste boilerplate code.
+> 
+> `tools/tests/x86_emulator` remains unchanged, because the Makefile
+> contains a lot of conditional build logic specific to that test.
+> 
+> An upcoming patch series will introduce new tests using the simplified
+> Makefile and shared helpers.
+> 
+> For convenience this is also available at:
+> https://gitlab.com/xen-project/people/edwintorok/xen/-/compare/staging...private%2Fedvint%2Fmigration-tests2?from_project_id=2336572
+> https://gitlab.com/xen-project/people/edwintorok/xen/-/pipelines/2342318716
+> 
+> Edwin Török (7):
+>   tools/tests/*/Makefile: factor out common PHONY rules into Rules.mk
+>   tools/tests/vpci/main.c: drop unused variables
+>   tools/tests/*/Makefile: factor out build rules
+>   tools/tests: factor out common helpers
+>   tools/tests/common: ensure error messages have a newline
+>   tools/tests/tsx: move guest creation to common area
+>   tools/tests: print more debug info
 
-Renamed TESTS to TARGETS in tools/tests/domid/Makefile
-Extend DEPS_RM, so that most tests don't need custom clean rules,
-except in tools/tests/domid which needs to remove a directory too.
+Just fyi that there is also
+https://lists.xen.org/archives/html/xen-devel/2026-02/msg00751.html.
+Can the two of you maybe work together to have a single resulting approach?
 
-Make the run rules consistent: do not attempt to run the tests if HOSTCC != CC.
+Jan
 
-The common rules use the rule forms which allow multiple TARGETS.
-
-tools/tests/x86_emulator/Makefile is unchanged, since this has a lot of
-conditional rules that are very different from the other tests.
-
-Signed-off-by: Edwin Török <edwin.torok@citrix.com>
----
- tools/tests/Rules.mk                | 48 +++++++++++++++++++++++++++++
- tools/tests/cpu-policy/Makefile     | 26 +---------------
- tools/tests/domid/Makefile          | 28 ++---------------
- tools/tests/mem-claim/Makefile      | 23 ++------------
- tools/tests/paging-mempool/Makefile | 23 ++------------
- tools/tests/pdx/Makefile            | 33 ++------------------
- tools/tests/rangeset/Makefile       | 27 ++--------------
- tools/tests/resource/Makefile       | 27 ++--------------
- tools/tests/tsx/Makefile            | 26 ++--------------
- tools/tests/vpci/Makefile           | 30 +++---------------
- tools/tests/xenstore/Makefile       | 29 ++---------------
- 11 files changed, 72 insertions(+), 248 deletions(-)
- create mode 100644 tools/tests/Rules.mk
-
-diff --git a/tools/tests/Rules.mk b/tools/tests/Rules.mk
-new file mode 100644
-index 0000000000..f7ef76bf4f
---- /dev/null
-+++ b/tools/tests/Rules.mk
-@@ -0,0 +1,48 @@
-+# Usage: include this last in your Makefile.
-+#
-+# For example:
-+#
-+# XEN_ROOT = $(CURDIR)/../../..
-+# include $(XEN_ROOT)/tools/Rules.mk
-+#
-+# TARGETS := ...
-+# ...
-+# include $(XEN_ROOT)/tools/tests/Rules.mk
-+
-+ifndef XEN_ROOT
-+$(error XEN_ROOT is not defined)
-+endif
-+
-+.PHONY: all
-+all: $(TARGETS)
-+.DEFAULT_GOAL: all
-+
-+.PHONY: run
-+run: $(TARGETS)
-+ifeq ($(CC),$(HOSTCC))
-+	set -e;             \
-+	for test in $? ; do \
-+		./$$test ;  \
-+	done
-+else
-+	$(warning HOSTCC != CC, will not run test)
-+endif
-+
-+.PHONY: clean
-+clean::
-+	$(RM) -- *.o $(TARGETS) $(DEPS_RM)
-+
-+.PHONY: distclean
-+distclean: clean
-+	$(RM) -- *~
-+
-+.PHONY: install
-+install: all
-+	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
-+	$(if $(TARGETS),$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests)
-+
-+.PHONY: uninstall
-+uninstall:
-+	$(RM) -- $(addprefix $(DESTDIR)$(LIBEXEC)/tests/,$(TARGETS))
-+
-+-include $(DEPS_INCLUDE)
-diff --git a/tools/tests/cpu-policy/Makefile b/tools/tests/cpu-policy/Makefile
-index 24f87e2eca..700e325215 100644
---- a/tools/tests/cpu-policy/Makefile
-+++ b/tools/tests/cpu-policy/Makefile
-@@ -12,30 +12,6 @@ else
- $(warning Test harness not built, use newer compiler than "$(CC)" (version $(shell $(CC) -dumpversion)))
- endif
- 
--.PHONY: all
--all: $(TARGETS)
--
--.PHONY: run
--run: $(TARGETS)
--	./$<
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGETS) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(if $(TARGETS),$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests)
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(addprefix $(DESTDIR)$(LIBEXEC)/tests/,$(TARGETS))
--
- CFLAGS += -D__XEN_TOOLS__
- CFLAGS += $(CFLAGS_xeninclude)
- CFLAGS += $(APPEND_CFLAGS)
-@@ -49,4 +25,4 @@ vpath %.c ../../../xen/lib/x86
- test-cpu-policy: test-cpu-policy.o msr.o cpuid.o policy.o
- 	$(CC) $^ -o $@ $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/domid/Makefile b/tools/tests/domid/Makefile
-index 753129029e..92f11777f2 100644
---- a/tools/tests/domid/Makefile
-+++ b/tools/tests/domid/Makefile
-@@ -7,7 +7,7 @@
- XEN_ROOT=$(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
--TESTS := test-domid
-+TARGETS += test-domid
- 
- define list-c-headers
- $(shell sed -n \
-@@ -36,30 +36,8 @@ vpath $(1) $(2)
- $(call emit-harness-deps,$(1),$(call list-c-headers,$(2)$(1)))
- endef
- 
--.PHONY: all
--all: $(TESTS)
--
--.PHONY: run
--run: $(TESTS)
--	set -e; $(foreach t,$(TESTS),./$(t);)
--
--.PHONY: clean
--clean:
-+clean::
- 	$(RM) -r generated
--	$(RM) -- *.o $(TESTS) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) test-domid $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/test-domid
- 
- CFLAGS += -D__XEN_TOOLS__
- # find-next-bit.c
-@@ -85,4 +63,4 @@ $(eval $(call vpath-with-harness-deps,domid.c,$(XEN_ROOT)/xen/common/))
- test-domid: domid.o find-next-bit.o test-domid.o
- 	$(CC) $^ -o $@ $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/mem-claim/Makefile b/tools/tests/mem-claim/Makefile
-index 76ba3e3c8b..6790e48417 100644
---- a/tools/tests/mem-claim/Makefile
-+++ b/tools/tests/mem-claim/Makefile
-@@ -2,26 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test-mem-claim
--
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGET) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$(TARGET)
-+TARGETS := $(TARGET)
- 
- CFLAGS += $(CFLAGS_xeninclude)
- CFLAGS += $(CFLAGS_libxenctrl)
-@@ -35,4 +16,4 @@ LDFLAGS += $(APPEND_LDFLAGS)
- $(TARGET): test-mem-claim.o
- 	$(CC) -o $@ $< $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/paging-mempool/Makefile b/tools/tests/paging-mempool/Makefile
-index a1e12584ce..9ebeb24ab6 100644
---- a/tools/tests/paging-mempool/Makefile
-+++ b/tools/tests/paging-mempool/Makefile
-@@ -2,26 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test-paging-mempool
--
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGET) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$(TARGET)
-+TARGETS := $(TARGET)
- 
- CFLAGS += $(CFLAGS_xeninclude)
- CFLAGS += $(CFLAGS_libxenctrl)
-@@ -35,4 +16,4 @@ LDFLAGS += $(APPEND_LDFLAGS)
- $(TARGET): test-paging-mempool.o
- 	$(CC) -o $@ $< $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/pdx/Makefile b/tools/tests/pdx/Makefile
-index 3c431d7c78..a5129a8282 100644
---- a/tools/tests/pdx/Makefile
-+++ b/tools/tests/pdx/Makefile
-@@ -3,36 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGETS := test-pdx-mask test-pdx-offset
- 
--.PHONY: all
--all: $(TARGETS)
--
--.PHONY: run
--run: $(TARGETS)
--ifeq ($(CC),$(HOSTCC))
--	set -e;             \
--	for test in $? ; do \
--		./$$test ;  \
--	done
--else
--	$(warning HOSTCC != CC, will not run test)
--endif
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGETS) $(DEPS_RM) pdx.h
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(patsubst %,$(DESTDIR)$(LIBEXEC)/tests/%,$(TARGETS))
-+DEPS_RM += pdx.h
- 
- pdx.h: $(XEN_ROOT)/xen/include/xen/pdx.h
- 	sed -e '/^#[[:space:]]*include/d' <$< >$@
-@@ -47,4 +18,4 @@ test-pdx-offset: CFLAGS += -DCONFIG_PDX_OFFSET_COMPRESSION
- test-pdx-%: test-pdx.c pdx.h
- 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) -o $@ $< $(APPEND_CFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/rangeset/Makefile b/tools/tests/rangeset/Makefile
-index e3bfce471c..c76746ce7a 100644
---- a/tools/tests/rangeset/Makefile
-+++ b/tools/tests/rangeset/Makefile
-@@ -2,30 +2,9 @@ XEN_ROOT=$(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test-rangeset
-+TARGETS := $(TARGET)
- 
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: run
--run: $(TARGET)
--	./$<
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGET) $(DEPS_RM) list.h rangeset.h rangeset.c
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(addprefix $(DESTDIR)$(LIBEXEC)/tests/,$(TARGET))
-+DEPS_RM += list.h rangeset.h rangeset.c
- 
- list.h: $(XEN_ROOT)/xen/include/xen/list.h
- rangeset.h: $(XEN_ROOT)/xen/include/xen/rangeset.h
-@@ -47,4 +26,4 @@ test-rangeset.o rangeset.o: list.h rangeset.h
- test-rangeset: rangeset.o test-rangeset.o
- 	$(CC) $^ -o $@ $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/resource/Makefile b/tools/tests/resource/Makefile
-index 09d678fffe..764e34f3fa 100644
---- a/tools/tests/resource/Makefile
-+++ b/tools/tests/resource/Makefile
-@@ -2,30 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test-resource
--
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: run
--run: $(TARGET)
--	./$(TARGET)
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGET) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$(TARGET)
-+TARGETS := $(TARGET)
- 
- CFLAGS += $(CFLAGS_xeninclude)
- CFLAGS += $(CFLAGS_libxenctrl)
-@@ -43,4 +20,4 @@ LDFLAGS += $(APPEND_LDFLAGS)
- $(TARGET): test-resource.o
- 	$(CC) -o $@ $< $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/tsx/Makefile b/tools/tests/tsx/Makefile
-index 0bb7e70103..817a63b085 100644
---- a/tools/tests/tsx/Makefile
-+++ b/tools/tests/tsx/Makefile
-@@ -2,29 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test-tsx
--
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGET) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$(TARGET)
--
--.PHONY: uninstall
--uninstall:
-+TARGETS := $(TARGET)
- 
- CFLAGS += -I$(XEN_ROOT)/tools/libs/ctrl -I$(XEN_ROOT)/tools/libs/guest
- CFLAGS += $(CFLAGS_xeninclude)
-@@ -41,4 +19,4 @@ LDFLAGS += $(APPEND_LDFLAGS)
- $(TARGET): test-tsx.o
- 	$(CC) -o $@ $< $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/vpci/Makefile b/tools/tests/vpci/Makefile
-index 97359ff67f..597303e31d 100644
---- a/tools/tests/vpci/Makefile
-+++ b/tools/tests/vpci/Makefile
-@@ -2,36 +2,12 @@ XEN_ROOT=$(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- TARGET := test_vpci
--
--.PHONY: all
--all: $(TARGET)
--
--.PHONY: run
--run: $(TARGET)
--ifeq ($(CC),$(HOSTCC))
--	./$(TARGET)
--else
--	$(warning HOSTCC != CC, will not run test)
--endif
-+TARGETS := $(TARGET)
- 
- $(TARGET): vpci.c vpci.h list.h main.c emul.h
- 	$(CC) $(CFLAGS_xeninclude) -g -o $@ vpci.c main.c
- 
--.PHONY: clean
--clean:
--	rm -rf $(TARGET) *.o *~ vpci.h vpci.c list.h
--
--.PHONY: distclean
--distclean: clean
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC)/tests
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(DESTDIR)$(LIBEXEC)/tests/$(TARGET)
-+DEPS_RM += vpci.h vpci.c list.h
- 
- vpci.c: $(XEN_ROOT)/xen/drivers/vpci/vpci.c
- 	# Remove includes and add the test harness header
-@@ -41,3 +17,5 @@ list.h: $(XEN_ROOT)/xen/include/xen/list.h
- vpci.h: $(XEN_ROOT)/xen/include/xen/vpci.h
- list.h vpci.h:
- 	sed -e '/#include/d' <$< >$@
-+
-+include $(XEN_ROOT)/tools/tests/Rules.mk
-diff --git a/tools/tests/xenstore/Makefile b/tools/tests/xenstore/Makefile
-index 2ee4a1327e..56cfe07f25 100644
---- a/tools/tests/xenstore/Makefile
-+++ b/tools/tests/xenstore/Makefile
-@@ -1,31 +1,8 @@
- XEN_ROOT=$(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
--TARGETS-y := test-xenstore
--TARGETS := $(TARGETS-y)
--
--.PHONY: all
--all: build
--
--.PHONY: build
--build: $(TARGETS)
--
--.PHONY: clean
--clean:
--	$(RM) -- *.o $(TARGETS) $(DEPS_RM)
--
--.PHONY: distclean
--distclean: clean
--	$(RM) -- *~
--
--.PHONY: install
--install: all
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
--	$(if $(TARGETS),$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests)
--
--.PHONY: uninstall
--uninstall:
--	$(RM) -- $(addprefix $(DESTDIR)$(LIBEXEC)/tests/,$(TARGETS))
-+TARGET := test-xenstore
-+TARGETS := $(TARGET)
- 
- CFLAGS += $(CFLAGS_libxenstore)
- CFLAGS += $(APPEND_CFLAGS)
-@@ -41,4 +18,4 @@ endif
- test-xenstore: test-xenstore.o
- 	$(CC) -o $@ $< $(LDFLAGS)
- 
---include $(DEPS_INCLUDE)
-+include $(XEN_ROOT)/tools/tests/Rules.mk
--- 
-2.47.3
+>  tools/tests/Rules.mk                          | 60 +++++++++++++
+>  tools/tests/common/guests.c                   | 89 +++++++++++++++++++
+>  tools/tests/common/guests.h                   | 11 +++
+>  tools/tests/common/tests.c                    | 15 ++++
+>  tools/tests/common/tests.h                    | 18 ++++
+>  tools/tests/cpu-policy/Makefile               | 41 ++-------
+>  tools/tests/cpu-policy/test-cpu-policy.c      |  7 +-
+>  tools/tests/domid/Makefile                    | 37 ++------
+>  tools/tests/domid/test-domid.c                | 11 +--
+>  tools/tests/mem-claim/Makefile                | 31 +------
+>  tools/tests/mem-claim/test-mem-claim.c        |  9 +-
+>  tools/tests/paging-mempool/Makefile           | 31 +------
+>  .../paging-mempool/test-paging-mempool.c      |  9 +-
+>  tools/tests/pdx/Makefile                      | 37 +-------
+>  tools/tests/pdx/test-pdx.c                    |  3 +-
+>  tools/tests/rangeset/Makefile                 | 36 +-------
+>  tools/tests/rangeset/test-rangeset.c          |  3 +-
+>  tools/tests/resource/Makefile                 | 35 +-------
+>  tools/tests/resource/test-resource.c          |  9 +-
+>  tools/tests/tsx/Makefile                      | 35 +-------
+>  tools/tests/tsx/test-tsx.c                    | 88 +++---------------
+>  tools/tests/vpci/.gitignore                   |  1 +
+>  tools/tests/vpci/Makefile                     | 36 ++------
+>  tools/tests/vpci/main.c                       |  6 +-
+>  tools/tests/xenstore/Makefile                 | 37 +-------
+>  tools/tests/xenstore/test-xenstore.c          |  4 +-
+>  26 files changed, 261 insertions(+), 438 deletions(-)
+>  create mode 100644 tools/tests/Rules.mk
+>  create mode 100644 tools/tests/common/guests.c
+>  create mode 100644 tools/tests/common/guests.h
+>  create mode 100644 tools/tests/common/tests.c
+>  create mode 100644 tools/tests/common/tests.h
+>  create mode 100644 tools/tests/vpci/.gitignore
+> 
 
 
