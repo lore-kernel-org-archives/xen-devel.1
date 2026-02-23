@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBBAAE98E0F
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 09:38:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1238594.1540208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E601E98E10
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Feb 2026 10:05:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1238615.1540227 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSOp-0002yM-9A; Mon, 23 Feb 2026 09:38:43 +0000
+	id 1vuSoN-0007aD-EU; Mon, 23 Feb 2026 10:05:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1238594.1540208; Mon, 23 Feb 2026 09:38:43 +0000
+Received: by outflank-mailman (output) from mailman id 1238615.1540227; Mon, 23 Feb 2026 10:05:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuSOp-0002xa-3Y; Mon, 23 Feb 2026 09:38:43 +0000
-Received: by outflank-mailman (input) for mailman id 1238594;
- Mon, 23 Feb 2026 09:38:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vuSoN-0007ZU-B9; Mon, 23 Feb 2026 10:05:07 +0000
+Received: by outflank-mailman (input) for mailman id 1238615;
+ Mon, 23 Feb 2026 10:05:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+Xtg=A3=bounce.vates.tech=bounce-md_30504962.699c201e.v1-dde5a2ce1b074551b450dbac9523d23a@srs-se1.protection.inumbo.net>)
- id 1vuSOo-0002vD-ET
- for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 09:38:42 +0000
-Received: from mail187-10.suw11.mandrillapp.com
- (mail187-10.suw11.mandrillapp.com [198.2.187.10])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6eabb233-109b-11f1-9ccf-f158ae23cfc8;
- Mon, 23 Feb 2026 10:38:39 +0100 (CET)
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-10.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4fKG4t1KWrz5QkLdk
- for <xen-devel@lists.xenproject.org>; Mon, 23 Feb 2026 09:38:38 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- dde5a2ce1b074551b450dbac9523d23a; Mon, 23 Feb 2026 09:38:38 +0000
+ <SRS0=3dwo=A3=citrix.com=edwin.torok@srs-se1.protection.inumbo.net>)
+ id 1vuSoM-0007XS-2V
+ for xen-devel@lists.xenproject.org; Mon, 23 Feb 2026 10:05:06 +0000
+Received: from na1pdmzitismtp01.tibco.com (na1pdmzitismtp01.tibco.com
+ [160.101.131.8]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1fb2aa93-109f-11f1-b164-2bf370ae4941;
+ Mon, 23 Feb 2026 11:05:05 +0100 (CET)
+Received: from localhost.localdomain (unknown [10.113.40.46])
+ by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id 7270741202FF;
+ Mon, 23 Feb 2026 05:04:45 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,200 +41,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6eabb233-109b-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1771839518; x=1772109518;
-	bh=/R/ehowVjGJDfMqCUH806hPdMzW6V7gcOMrwhVu20g4=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=KjOBA5yuKAoNMsc/O8Vl9X09BOAi4SaBU6RNOuTj3qFJWqmimKYLE1paJYMcakRXc
-	 Vk/zk7XOb8mHKXtHC3F6uq+iK69u1UXmOHdd9rYHgGXpRLe51eXoDzS+s0+Fw5hYTp
-	 6y3TNtajuL1lUY8FSXNA5pZkxs8BFazvI7ZgaGRphIULSwlmmFEnegRkYoJTSXMzxQ
-	 LnOeeQLp01b9CMJphLPicu+ZDQetnUFpUdboBCUKZywngUnlTQh4k8jporTFHJ4sO4
-	 ZXHLenWLrPNFMbegXMY1PMv0tVpobNbDyu0BIPueEu+7Pxa9C6pcpuA26bBWVw/DJC
-	 2c0v4f3sshL+Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1771839518; x=1772100018; i=julian.vetter@vates.tech;
-	bh=/R/ehowVjGJDfMqCUH806hPdMzW6V7gcOMrwhVu20g4=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=Bmi0xsuNZA4+bQieNBuOtsXUcGFD4GMo3PE3pNFLSuSxeuKyRPmlgBmbxf7SkaGaw
-	 ljbgYxlqnKVmOvKzVFjatj3p4/Py4Q0We8CVgwplBvISqblzkSW7Arb8+qMM6ijeEi
-	 bSWKU1H6y6tVOBq592d9R/YcvFV86R2X0MwtIoQrv79BMydFEssLFNosN4240/7gl6
-	 7H8CKatikf8SFj5V0o+9OHK53xmAkzbjmkZzfXiAB69caL0gpWFPmUSbLf+BsHPVDY
-	 GDN33bivMl9wac8pf1par2Zgch0AQsAWd5uzkjDZc7DULrbacSzTOqP3EKX1HomiF+
-	 SEBAXfsOPFa8A==
-From: "Julian Vetter" <julian.vetter@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v3=201/2]=20x86/ioreq:=20Prepare=20spacing=20for=20upcoming=20patch?=
-X-Mailer: git-send-email 2.51.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1771839516797
+X-Inumbo-ID: 1fb2aa93-109f-11f1-b164-2bf370ae4941
+From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Julian Vetter" <julian.vetter@vates.tech>
-Message-Id: <20260223093831.475769-1-julian.vetter@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.dde5a2ce1b074551b450dbac9523d23a?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260223:md
-Date: Mon, 23 Feb 2026 09:38:38 +0000
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 2/4] tools/tests/x86_emulator: avoid duplicating loop body
+Date: Mon, 23 Feb 2026 10:04:53 +0000
+Message-ID: <c0dc7da75ee36d10863a8b28fa2f19b3b4c8a316.1771840208.git.edwin.torok@citrix.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <cover.1771840208.git.edwin.torok@citrix.com>
+References: <cover.1771840208.git.edwin.torok@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This patch just changes indentation, to make the next patch easier to
-review.
+clang would duplicate the loop body and end up with a double definition
+of the symbol:
+```
+/tmp/test_x86_emulator-0f3576.s:27823: Error: symbol `vmovsh_to_mem' is already defined
+/tmp/test_x86_emulator-0f3576.s:27825: Error: symbol `.Lvmovsh_to_mem_end' is already defined
+```
 
-Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+This is a valid transformation, that even GCC might do, see
+https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Volatile-1 which
+says that `%=` should be used instead. However the C code here also
+needs to know the name of the label, so I don't immediately see how to
+solve that.
+
+For now mark the loop variable `volatile` to prevent the optimization as a
+workaround.
+(another way to fix this could be to move the loop body into a function,
+but a compiler might inline it, or specialize it, leading to the same problem)
+
+Signed-off-by: Edwin Török <edwin.torok@citrix.com>
 ---
-Changes in v3:
-- No changes to this patch
-- Dropped patch "1/3 x86/ioreq: Add missing put_page_alloc_ref(page)"
----
- xen/arch/x86/hvm/ioreq.c | 86 ++++++++++++++++++++++------------------
- 1 file changed, 47 insertions(+), 39 deletions(-)
+ tools/tests/x86_emulator/test_x86_emulator.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index a5fa97e149..5ebc48dbd4 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -125,14 +125,16 @@ static void hvm_unmap_ioreq_gfn(struct ioreq_server *s, bool buf)
- {
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+diff --git a/tools/tests/x86_emulator/test_x86_emulator.c b/tools/tests/x86_emulator/test_x86_emulator.c
+index a25eca1634..cf4e5cc593 100644
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -5248,7 +5248,7 @@ int main(int argc, char **argv)
+         memset(res + 3, ~0, 8);
+         regs.eax = (unsigned long)res;
+         regs.ecx = ~0;
+-        for ( i = 0; i < 2; ++i )
++        for (volatile int i = 0; i < 2; ++i )
+         {
+             decl_insn(vmovsh_to_mem);
  
--    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
--        return;
-+    {
-+        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-+            return;
- 
--    destroy_ring_for_helper(&iorp->va, iorp->page);
--    iorp->page = NULL;
-+        destroy_ring_for_helper(&iorp->va, iorp->page);
-+        iorp->page = NULL;
- 
--    hvm_free_ioreq_gfn(s, iorp->gfn);
--    iorp->gfn = INVALID_GFN;
-+        hvm_free_ioreq_gfn(s, iorp->gfn);
-+        iorp->gfn = INVALID_GFN;
-+    }
- }
- 
- static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
-@@ -141,34 +143,36 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
-     int rc;
- 
--    if ( iorp->page )
-     {
--        /*
--         * If a page has already been allocated (which will happen on
--         * demand if ioreq_server_get_frame() is called), then
--         * mapping a guest frame is not permitted.
--         */
--        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
--            return -EPERM;
--
--        return 0;
--    }
-+        if ( iorp->page )
-+        {
-+            /*
-+             * If a page has already been allocated (which will happen on
-+             * demand if ioreq_server_get_frame() is called), then
-+             * mapping a guest frame is not permitted.
-+             */
-+            if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-+                return -EPERM;
-+
-+            return 0;
-+        }
- 
--    if ( d->is_dying )
--        return -EINVAL;
-+        if ( d->is_dying )
-+            return -EINVAL;
- 
--    iorp->gfn = hvm_alloc_ioreq_gfn(s);
-+        iorp->gfn = hvm_alloc_ioreq_gfn(s);
- 
--    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
--        return -ENOMEM;
-+        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-+            return -ENOMEM;
- 
--    rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
--                                 &iorp->va);
-+        rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
-+                                     &iorp->va);
- 
--    if ( rc )
--        hvm_unmap_ioreq_gfn(s, buf);
-+        if ( rc )
-+            hvm_unmap_ioreq_gfn(s, buf);
- 
--    return rc;
-+        return rc;
-+    }
- }
- 
- static void hvm_remove_ioreq_gfn(struct ioreq_server *s, bool buf)
-@@ -176,12 +180,14 @@ static void hvm_remove_ioreq_gfn(struct ioreq_server *s, bool buf)
-     struct domain *d = s->target;
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
- 
--    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
--        return;
-+    {
-+        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-+            return;
- 
--    if ( p2m_remove_page(d, iorp->gfn, page_to_mfn(iorp->page), 0) )
--        domain_crash(d);
--    clear_page(iorp->va);
-+        if ( p2m_remove_page(d, iorp->gfn, page_to_mfn(iorp->page), 0) )
-+            domain_crash(d);
-+        clear_page(iorp->va);
-+    }
- }
- 
- static int hvm_add_ioreq_gfn(struct ioreq_server *s, bool buf)
-@@ -190,16 +196,18 @@ static int hvm_add_ioreq_gfn(struct ioreq_server *s, bool buf)
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
-     int rc;
- 
--    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
--        return 0;
-+    {
-+        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-+            return 0;
- 
--    clear_page(iorp->va);
-+        clear_page(iorp->va);
- 
--    rc = p2m_add_page(d, iorp->gfn, page_to_mfn(iorp->page), 0, p2m_ram_rw);
--    if ( rc == 0 )
--        paging_mark_pfn_dirty(d, _pfn(gfn_x(iorp->gfn)));
-+        rc = p2m_add_page(d, iorp->gfn, page_to_mfn(iorp->page), 0, p2m_ram_rw);
-+        if ( rc == 0 )
-+            paging_mark_pfn_dirty(d, _pfn(gfn_x(iorp->gfn)));
- 
--    return rc;
-+        return rc;
-+    }
- }
- 
- int arch_ioreq_server_map_pages(struct ioreq_server *s)
 -- 
-2.51.0
-
-
-
---
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+2.47.3
 
 
