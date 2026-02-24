@@ -4,52 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421FBEFB7EF
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Feb 2026 03:05:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1239410.1540816 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA970EFB7FD
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Feb 2026 06:25:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1239396.1540826 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuijp-0003Q9-5n; Tue, 24 Feb 2026 03:05:29 +0000
+	id 1vulqp-00024O-Jb; Tue, 24 Feb 2026 06:24:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1239410.1540816; Tue, 24 Feb 2026 03:05:29 +0000
+Received: by outflank-mailman (output) from mailman id 1239396.1540826; Tue, 24 Feb 2026 06:24:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vuijp-0003Q2-1e; Tue, 24 Feb 2026 03:05:29 +0000
-Received: by outflank-mailman (input) for mailman id 1239410;
- Tue, 24 Feb 2026 03:05:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vulqp-00024H-GQ; Tue, 24 Feb 2026 06:24:55 +0000
+Received: by outflank-mailman (input) for mailman id 1239396;
+ Tue, 24 Feb 2026 02:25:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UmFV=A4=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1vuijo-0003Pw-DR
- for xen-devel@lists.xenproject.org; Tue, 24 Feb 2026 03:05:28 +0000
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [2a01:111:f403:c10c::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aa3b689b-112d-11f1-9ccf-f158ae23cfc8;
- Tue, 24 Feb 2026 04:05:25 +0100 (CET)
-Received: from SA1P222CA0069.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2c1::29)
- by CH2PR12MB9542.namprd12.prod.outlook.com (2603:10b6:610:27d::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Tue, 24 Feb
- 2026 03:05:21 +0000
-Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
- (2603:10b6:806:2c1:cafe::97) by SA1P222CA0069.outlook.office365.com
- (2603:10b6:806:2c1::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
- 24 Feb 2026 03:05:17 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 03:05:20 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 23 Feb
- 2026 21:05:19 -0600
-Received: from ubuntu (10.180.168.240) by satlexmb07.amd.com (10.181.42.216)
- with Microsoft SMTP Server id 15.2.2562.17 via Frontend Transport; Mon, 23
- Feb 2026 21:05:19 -0600
+ <SRS0=C1TO=A4=smail.nju.edu.cn=kexinsun@srs-se1.protection.inumbo.net>)
+ id 1vui7M-0006iV-8m
+ for xen-devel@lists.xenproject.org; Tue, 24 Feb 2026 02:25:46 +0000
+Received: from smtpbg150.qq.com (smtpbg150.qq.com [18.132.163.193])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 141169ef-1128-11f1-b164-2bf370ae4941;
+ Tue, 24 Feb 2026 03:25:28 +0100 (CET)
+Received: from localhost.localdomain ( [116.172.93.199])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 24 Feb 2026 10:24:26 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,115 +41,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aa3b689b-112d-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UrKocwPgNOjSINh/R5GWrr5tVCG5dCQXmzJdlclzeEKg/JDPBpvoo/nlFqGOUZG7g+KpOH1w9cxIYSMhMTLSSPRi+jp6c7oSRQfHgSm6uUvqFQCLovnqo6fIA4/YLGATDi64bxSINxkseR0N8oTk4Frjyeci1rx/ZLYWFkI1Pw0IkMGJevFqZwL1ilzIXEeG2dJ1b7jTnd6dmz6wCxmyokL/qBgQXYSLJY4wip2HhqTZ+mbeZgodyKt+6UVOMJyuRG1B/X+NBXApVy5czZg+NplHFcbeS+rnNKjS1onJUTN/RW1T0h0PT8iP4YDujd/WTut+DFLUnnVAYhJLhN0r7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zqKURGGCLOhSOOZZLDdqmhevzpWzHw0X6/XVJSMdc0A=;
- b=GQdQD1JEupm0FUAVH1C5za/jcETGcu/n17DaQTZhvDuSq1j2rdAjjY5jEBhU5XNfzCHXMX2LuKcPeQdmowxN34/+7emFKOZpN70oLOPmWuRewMi5LjrFGQ2c/mKiXCA82+BRPma3RaSPNIy8Ob36f2Hef1d5PZwUSqLPzB6GnTUqb4tQfLXdxhkdH9k0CIzd452UiOAfNITJZVllgPADgesiYOBpvOblWB+n5UBRfzxA4BTIC+V9+GXMUMuz34gdYIx57D0pFNllu3oElJUjw3qPCxjIjNoD4bYjVEmK0JEjLDDpmUvY0yIVMx2Owk/jG/QpsXQy26KCyClZLhH5ZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zqKURGGCLOhSOOZZLDdqmhevzpWzHw0X6/XVJSMdc0A=;
- b=1pUHtnvZ3bAAnQbaQUwH4ivsCWyMDNxQO/v4gBaB7c3P0hFPpUtkrnSiPyseB9EqiIIIf5ra5po659ItXJpSVlZlyyrxt7HfCpxWg+SyTLYZV+ahBMQE/8a7W/S3Md1ED6HRIIawzgAnvTBrp+Km+WicWqv8hb0GwfwSJVdezqk=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH] vpci/msix: fix typo
-Date: Mon, 23 Feb 2026 22:05:15 -0500
-Message-ID: <20260224030519.27104-1-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.53.0
+X-Inumbo-ID: 141169ef-1128-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smail.nju.edu.cn;
+	s=iohv2404; t=1771899877;
+	bh=Z3Aj/5gqJxLV2xf46st4IBcHNWPExSd6g2RATw3la0o=;
+	h=From:To:Subject:Date:Message-Id:MIME-Version;
+	b=RgBTbs9BpmSAGN8TybkiyoGDfzh3Q8tELoowkRyGcvcYcWIrzH6ycxQnE9vD/s0M7
+	 vay3q+HcqllDlUV9+PzCA3LjMwwp9vPsi7C2xWtURadrkWY5rKG4Q6M7b34/QAJWwy
+	 X5BiDgc1bNWegk7oJKedWNSiaMrU3fbaUrGvY2hY=
+X-QQ-mid: esmtpgz11t1771899869tfe798ebb
+X-QQ-Originating-IP: FIapmEkRFnkqJa29yYNc8kyNQ9O0np8tOiJdKBZzaXM=
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 9509144588414941481
+EX-QQ-RecipientCnt: 15
+From: kexinsun <kexinsun@smail.nju.edu.cn>
+To: jgross@suse.com
+Cc: boris.ostrovsky@oracle.com,
+	tglx@kernel.org,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	x86@kernel.org,
+	hpa@zytor.com,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	julia.lawall@inria.fr,
+	xutong.ma@inria.fr,
+	yunbolyu@smu.edu.sg,
+	ratnadiraw@smu.edu.sg,
+	kexinsun@smail.nju.edu.cn
+Subject: [PATCH] x86/xen: update outdated comment
+Date: Tue, 24 Feb 2026 10:24:24 +0800
+Message-Id: <20260224022424.1718-1-kexinsun@smail.nju.edu.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|CH2PR12MB9542:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6218ed41-a955-4d97-9f5e-08de73518b84
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?p6aUqkayEUWXuFMhSUbFZtc/lpQdtJWrprFXNbninND8FYomh74osJ2B2CCF?=
- =?us-ascii?Q?LXO5dnpuhhS1Udc9pg8Kq8W/V3XsG+9Sr1RSmlbEm+4PfWLrmOUqNAfRfRNm?=
- =?us-ascii?Q?EPYN7imPp9BmnpFZAdl54/ZIViYIOg+/J7LIDF+1Eh64UvcH2PMSWo3cCnri?=
- =?us-ascii?Q?yr+lTN56Ju9hBvZwHN/jblwPMQmURSAE2hazxgSHyl9WECAWVDPcwa/ZDzwO?=
- =?us-ascii?Q?IwbGtPY5HsaNyyLji87rdSsLl2A0GLggLi4lp6GUMT/tR7wv1eWchyivxO4z?=
- =?us-ascii?Q?e0aqiKp7sHn1tWw/Z6Q5c1hnwogKwBecC3+VpABUgwvIjkAlzyl7IqiDcHDz?=
- =?us-ascii?Q?Go6C4QIQ3RgTMcFG1x3H6G1/c1exAARF4PkFgE3KNAjWI+Ukm360Y4J4xQVr?=
- =?us-ascii?Q?Uf7pbkKOEP4tz5gu/cweyax8yZEhjW48BaEHEQdkkCEyu6MnCaKn8iH6ldGa?=
- =?us-ascii?Q?HKz8qJVg7WBRwGs9mQ8PTkyt24IFvyFcRRkFRbmYw8aHQmJbIM0gIZxY/yhm?=
- =?us-ascii?Q?CunRk4PbcAwdr2RopomLVMkBlUpQoTZ88D5EBpbQ36Bd5S9UtcVYnZfiZrWK?=
- =?us-ascii?Q?Td1d+HOwo7ImnAJ71xGtH4hAxrcHXyYgpWK5E2t8nfvMUzCdR+rAy4gLoXSD?=
- =?us-ascii?Q?2vR9U9DdFOz1SwiPK3kdtvzIH2AqlnENI1pkxeXLymAfizPPkHvNF1VdWMnl?=
- =?us-ascii?Q?VG5XPprtVHAy+/SR14qqCn7Fmbtx2TBPj6gE9zOnKpBabgKNCbZ8kp0lLwTr?=
- =?us-ascii?Q?Xerojh+WxOBLenqeM/a6mQBWqPXhzNP1RmrrfC+fCnxVdxck7gQvGtarUGH8?=
- =?us-ascii?Q?1Z/eQQPvjpn9p19DQUCmRTL3b1AzlP9xbmAvNL+ls+TFjfxreu+nU1mgMOYL?=
- =?us-ascii?Q?J7u7vuRUXAkDb1Ef5Vqvbr1eAy6/gY9UmT5iwqbV4KMycM8HbzpDksL0ogPW?=
- =?us-ascii?Q?DBqhhzgWj92/Shpkg5utaBmEFw0qAZC7djdChSPqMiixEuaqm8b1L2jRSXqB?=
- =?us-ascii?Q?4zrnig68o3WMEtZp7YDjORKHB1QAOVJ6gd84mCnN80kUlD6HsuC3JOb2MW5j?=
- =?us-ascii?Q?s8EyL9fraGV/ctIrC9uZ3LTpa4zgGime5bgwJ3kRwI2aeAkPcySHOAnEeeeS?=
- =?us-ascii?Q?3O67gbOwDNpXsXOBoMuceqJ+D2ynSVGoJXd0qqjU0IVH/lFLv58jIGb2R0Qw?=
- =?us-ascii?Q?3WjtT/nufYN2E8dVXWiFBidb74jXdkzMtgeg2PpJMOxWKXH/60v1/tZq+5Jq?=
- =?us-ascii?Q?FgxyEVUKWNScx+YWZ0nsIKyLfxamSd/WEASQtc846ft71fIHHPpG5Ueyfd+c?=
- =?us-ascii?Q?Kq3DHTDocP0QJIZMfjxD516DDkVcC2wwDiqljOGzW0MF18W/MLqSJop6+HAi?=
- =?us-ascii?Q?6+HqrZTSGRcrDda/ilq5jShr2Rx01iFZgyrI1rsSDfkSaRZN1x9Ultn+AYAU?=
- =?us-ascii?Q?y8TiCDQrMGVNo46+3OSZEbaXUdALYJgk6AjpJ626inPxANRFIyj8CwfdpDsk?=
- =?us-ascii?Q?uZPavjl20gWneiMNtbYcb+uWcpjZNnRUpWKtdu1hprwck3JsDxzoPPafXjdW?=
- =?us-ascii?Q?mfQHa5E0p4MSMHTSSHyGUO/8ZZ/etlD0IityKoHtRMWS7vNhy/1ah8Po0yut?=
- =?us-ascii?Q?1a2p16tMTi1kVzT6t6RejlcVJIOhxaW9Jp+9yxFeR3tR6j3oM7mMaUPvVZlo?=
- =?us-ascii?Q?XEU+Ng=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	kKRe8VYD3mszEvpbq9zFBu6dIyCGZ7HDhenuPFb+Z2LXcCOBEngGqfFlg9tbAeejQj4fV9DZYJfSm/r2wSIr4rkCN/YbtNWTGD/N0mK+YLKHSthUmogIAMsrS368HYtw99xh31EASlS75XmbQvGL5EH1P0Im1qxudb6AOyyfqRNSJSc+pXWspTHaCupustpRrhGYucZ1OMfn6OYVa6HjWWue4+sscQEK6Wzrr5JWRWkqTsqNOx4HPM6JkoDnntte+8KmVGHEYexpMh/5OmHCR2K6GZ7eKiHLxfXaM6s2+Ibi1SwnGEdfOPZD2mJAkcZA51XwtWVwZaxMhSWo1i7VFC9O/Z4sz3IKhipbjFrGg3LqFIpEh4her1HAKECuo19K1Wdb1kR+U+gnfcjO+3q+bq1v6R4vgOT7gxltrwbYTxH0CvS8Q/oSFl/IcvYLkQWw
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 03:05:20.2752
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6218ed41-a955-4d97-9f5e-08de73518b84
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00003AE6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB9542
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpgz:smail.nju.edu.cn:qybglogicsvrgz:qybglogicsvrgz5b-0
+X-QQ-XMAILINFO: MQYXLRAkMyaewPsgnE4c4ZNd2McHPQcyK+76J1vlzjHT6FuGa/DmEy/H
+	2RQ0bQm/nF9UpvWi5xKSijJ2Em/sfEBLtQ8DaNQi14DnU7oQuLcoMuC79A5/LeeQdNOkVzl
+	c4gwKSkWW5iXArv3JoMK1iZr2B+8LZDy+iAykyDrDq5g3HMGRlwdBqdP8jts4Fr5yen2q/u
+	83fo5c2igw3XTKes4ba/a4ILje1hCh98Fj9JH/VdjOInsS0t3Hp5pliXB/0Vhx6R/YYGh7X
+	41UttrcbzeQ8WuAZQgWVJk3QFVV9gnnYqcqsOdfxRgnrZxUGgEIRym0xlxF5Zy47ixVbOEO
+	NFsP7EAuYextENmkxzszM6wA8FQSG3Tcn4fCpXyVA8dVvCa8I2G4dQEGU/0qnA0GQykARzk
+	5SYctJUWPLaY/jZb3hINK/TPjfLiywzgoOUp0sbX/M0INuRwzhrapbadjsL+Hf95FkOBCnM
+	VtDe5TBLhzFKir2BKz+05SPqzX4IFXBM5RIsfp/9OvKT7qri9i5vk8l0Z2b6O/v4gxPTqdj
+	FjNOYcQtSZTk60fxOm3kp2Z2+SImHReaEExvWPkkXz/m0NCVJMAYrdXVoKC1bl1qLxgv9oA
+	hCsPccIpa8TVqBUZFyKnPWUO8vuEYvkh/X80V8PEClwBd7RluIjXx5Qwf0w2+zkrYjQbLll
+	j6ZGGWctz7SOrKd0tGvdq5r2RfADNBAT5qFJlxAskAzD0YW4Azm2TTZC0/pfK3za4lOzaLv
+	mE2InteGWmLsmtqSvogoc1Y0ur1ZrzuT4BW6tkW2uBN93DEjVg04Q55sqMPyPNKwoQzFwYz
+	6yZZaQgPsB0tqx4s3C1llWvos6TIqnUAs47kYaVvB3WQFQAtbVM341YJs9FYIcNoYiDTGmO
+	BBar0sgIESkZqMdW9nnO+v6dkLkQPqkMEuqVglI27X88pKBUrO3W9VkkTzoPjpWTCbOwtmt
+	RcDeTTTibgHL6ZpyBMpzVxsoHI4Irj38jkRQgC59qV7BZAcOx1G6ZpQtQPPRgGrLOjC2k0r
+	NKt+8RLfTjfmKIqQugeqnA/bwGcP6TJQG/YvFidMhvNnnfyr28/3ZVHT6E8Iv6cY/9NayU2
+	S9uD5ltWsQxgPokGwZMMuLgbII1nfHBxm0S/xpNG8jAqX1Qn0XktEQs74sNxmD371J+PCN8
+	CSap
+X-QQ-XMRINFO: Mp0Kj//9VHAxzExpfF+O8yhSrljjwrznVg==
+X-QQ-RECHKSPAM: 0
 
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+The function xen_flush_tlb_others() was renamed xen_flush_tlb_multi()
+by commit 4ce94eabac16 ("x86/mm/tlb: Flush remote and local TLBs
+concurrently").  Update the comment accordingly.
+
+Signed-off-by: kexinsun <kexinsun@smail.nju.edu.cn>
 ---
- xen/drivers/vpci/msix.c | 2 +-
+ arch/x86/xen/enlighten_pv.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 516282205a53..eaf8fae970f8 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -795,7 +795,7 @@ static int cf_check init_msix(struct pci_dev *pdev)
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 6e459e47cafd..eaad22b47206 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -392,7 +392,7 @@ static void __init xen_init_capabilities(void)
  
-     /*
-      * vPCI header initialization will have mapped the whole BAR into the
--     * p2m, as MSI-X capability was not yet initialized.  Crave a hole for
-+     * p2m, as MSI-X capability was not yet initialized.  Carve a hole for
-      * the MSI-X table here, so that Xen can trap accesses.
-      */
-     return vpci_make_msix_hole(pdev);
-
-base-commit: 5eb84d6c992cf4e81936872c441b649057947442
+ 	/*
+ 	 * Xen PV would need some work to support PCID: CR3 handling as well
+-	 * as xen_flush_tlb_others() would need updating.
++	 * as xen_flush_tlb_multi() would need updating.
+ 	 */
+ 	setup_clear_cpu_cap(X86_FEATURE_PCID);
+ 
 -- 
-2.53.0
+2.25.1
 
 
