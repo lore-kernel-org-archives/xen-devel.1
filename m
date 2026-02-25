@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A8D5F357DA
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Feb 2026 10:02:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1240487.1541864 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327A3F4BB9A
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Feb 2026 10:51:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1240547.1541895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvBiu-0004Zd-Rq; Wed, 25 Feb 2026 10:02:28 +0000
+	id 1vvCTa-0003PI-RG; Wed, 25 Feb 2026 10:50:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1240487.1541864; Wed, 25 Feb 2026 10:02:28 +0000
+Received: by outflank-mailman (output) from mailman id 1240547.1541895; Wed, 25 Feb 2026 10:50:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvBiu-0004ZS-Ox; Wed, 25 Feb 2026 10:02:28 +0000
-Received: by outflank-mailman (input) for mailman id 1240487;
- Wed, 25 Feb 2026 10:02:27 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vvCTa-0003PB-NC; Wed, 25 Feb 2026 10:50:42 +0000
+Received: by outflank-mailman (input) for mailman id 1240547;
+ Wed, 25 Feb 2026 10:50:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tMbn=A5=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1vvBit-0004Lo-L1
- for xen-devel@lists.xenproject.org; Wed, 25 Feb 2026 10:02:27 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 13b4c061-1231-11f1-9ccf-f158ae23cfc8;
- Wed, 25 Feb 2026 11:02:22 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 18F20165C;
- Wed, 25 Feb 2026 02:02:15 -0800 (PST)
-Received: from C3HXLD123V.arm.com (unknown [10.57.54.86])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0C3073F62B;
- Wed, 25 Feb 2026 02:02:19 -0800 (PST)
+ <SRS0=M72+=A5=bounce.vates.tech=bounce-md_30504962.699ed3fe.v1-8ad8df7059c34404a55a3ea06ffb712a@srs-se1.protection.inumbo.net>)
+ id 1vvCTZ-0003P5-FV
+ for xen-devel@lists.xenproject.org; Wed, 25 Feb 2026 10:50:41 +0000
+Received: from mail187-10.suw11.mandrillapp.com
+ (mail187-10.suw11.mandrillapp.com [198.2.187.10])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d2b30fb7-1237-11f1-b164-2bf370ae4941;
+ Wed, 25 Feb 2026 11:50:40 +0100 (CET)
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-10.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fLWb24Lvzz5QkLbp
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Feb 2026 10:50:38 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 8ad8df7059c34404a55a3ea06ffb712a; Wed, 25 Feb 2026 10:50:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,141 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13b4c061-1231-11f1-9ccf-f158ae23cfc8
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 1/4] xen/arm: ffa: Add start_index to VM partinfo helper
-Date: Wed, 25 Feb 2026 10:57:43 +0100
-Message-ID: <826eae4c8346e79a227c8cf418cd5f42ee3420a1.1772013062.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1772013062.git.bertrand.marquis@arm.com>
-References: <cover.1772013062.git.bertrand.marquis@arm.com>
+X-Inumbo-ID: d2b30fb7-1237-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1772016638; x=1772286638;
+	bh=CtrFlHnqw6yHgtrirC6hE/1//ZvPzW09IT4iSt2SNKo=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=ascFfilDOEekAws3qKuMYy8KMa61RfCiH+QOiXi8/DqYqK67lM7r6ZQIvhzCiGIIE
+	 2eF6fKAPH+FFrO5O+u2P7Z7+G010UNZ96LFfyQn/uTCAslWROeDmpB0j83KYElY28H
+	 HH51yGJWClkG9LpjahKgmlmLe8Nd8l3V5g1Fb5OEB4WhB1IHcOK44TES2wu/pxMviV
+	 cIp53bm8T64yszgkfCV0RYwvbvotKIU4GjjN72b7KRowqm3Rq7ahBdO/Cuuyi4fWXR
+	 HoxMV+0jEtj1YSasbAQ1UzjX7gr9vs43mKek+s7PVQOdPhf7vdHXxwV20GgmybDcbY
+	 wVxrKAGcmc2fA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1772016638; x=1772277138; i=anthony.perard@vates.tech;
+	bh=CtrFlHnqw6yHgtrirC6hE/1//ZvPzW09IT4iSt2SNKo=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=uZhfqaGYPIUDI/9Pjm8qOs9tNp1ExiJmkkmUWPHob0vD2lgWCVQSRwo1vMpfe6Yhs
+	 GeIGfHTykaAPY7UOwK8eR51H0pwqKYWinjnF8jyiLRconBv+afzVGnV4koP4Z8XvhY
+	 xNgO6udzH2OxJOcqZj0iChrs9KTzSI7XrYKScxBv8dM0ESJ329z+Kb4NUXvD1mtdCr
+	 ORZgmlYLWn1e6TIVODjaYCEED093uPAfIs0O3O3A4ZKwFcOCrS5FLNvPsnzNlMROAU
+	 5o0cM8LM2VFpCt2Tg0O+auLZhAAhqq7rlb3W/nXtc+OYS4giD+Zo4HyleyQ9vdDmoU
+	 bvDBVQORoAWng==
+From: "Anthony PERARD" <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=20v7=201/2]=20libxc:=20Report=20consistent=20errors=20in=20xc=5Fresource=5Fop?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1772016637926
+To: "Teddy Astie" <teddy.astie@vates.tech>
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Juergen Gross" <jgross@suse.com>, xen-devel@lists.xenproject.org
+Message-Id: <aZ7T_ddTHBY0fz7I@l14>
+References: <c8677e4588eff14197e47070587f31df1567c030.1771860109.git.teddy.astie@vates.tech> <0d7afac2-d358-4b0e-b828-31ebba6357d2@suse.com> <f569a8f0-8df9-4e5a-b3ed-ae600c3c0bd3@vates.tech>
+In-Reply-To: <f569a8f0-8df9-4e5a-b3ed-ae600c3c0bd3@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.8ad8df7059c34404a55a3ea06ffb712a?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260225:md
+Date: Wed, 25 Feb 2026 10:50:38 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Windowed GET_REGS retrieval needs to emit VM entries starting from an
-arbitrary index, but ffa_get_vm_partinfo() always starts from index 0.
+On Tue, Feb 24, 2026 at 09:28:57AM +0000, Teddy Astie wrote:
+> Le 23/02/2026 =C3=A0 17:15, Jan Beulich a =C3=A9crit=C2=A0:
+> > On 23.02.2026 17:06, Teddy Astie wrote:
+> >> xc_report_op returns -1 in some error conditions.
+> >> Make sure it returns -ENOMEM in out of memory errors and -EINVAL
+> >> in invalid usages errors.
+> >
+> > Isn't this a move in the wrong direction? -1 as a return value is quite=
+ okay.
+> > errno wants setting to indicate the cause of the error (if called funct=
+ions
+> > don't already set it properly).
+> >
+> 
+> To me, passing error through errno here feels more like a workaround
+> rather than a proper error handling. It doesn't feel consistent in libxc
+> overall (some functions returns a negative value corresponding to a
+> error number while some others -1; in some cases we update errno).
+> 
+> What are the error handling rules for xenctrl ?
 
-Add a start_index parameter to ffa_get_vm_partinfo() and skip entries
-until the local index reaches start_index. Update
-ffa_handle_partition_info_get() to pass start_index=0 to preserve
-existing behavior.
+They are written down. See
+    https://elixir.bootlin.com/xen/v4.21.0/source/tools/include/xenctrl.h#L=
+76
 
-No functional changes.
+    Unless otherwise specified, each function here returns zero or a
+    non-null pointer on success; or in case of failure, sets errno and
+    returns -1 or a null pointer.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- xen/arch/arm/tee/ffa_partinfo.c | 61 +++++++++++++++++++--------------
- 1 file changed, 35 insertions(+), 26 deletions(-)
+    Unless otherwise specified, errors result in a call to the error
+    handler function, which by default prints a message to the
+    FILE* passed as the caller_data, which by default is stderr.
+    (This is described below as "logging errors".)
 
-diff --git a/xen/arch/arm/tee/ffa_partinfo.c b/xen/arch/arm/tee/ffa_partinfo.c
-index fdb03dae9a0c..6a6f3ffb822e 100644
---- a/xen/arch/arm/tee/ffa_partinfo.c
-+++ b/xen/arch/arm/tee/ffa_partinfo.c
-@@ -167,14 +167,15 @@ out:
-     return ret;
- }
- 
--static int32_t ffa_get_vm_partinfo(struct ffa_uuid uuid, uint32_t *vm_count,
--                                   void **dst_buf, void *end_buf,
--                                   uint32_t dst_size)
-+static int32_t ffa_get_vm_partinfo(struct ffa_uuid uuid, uint32_t start_index,
-+                                   uint32_t *vm_count, void **dst_buf,
-+                                   void *end_buf, uint32_t dst_size)
- {
-     struct domain *d = current->domain;
-     struct ffa_ctx *curr_ctx = d->arch.tee;
-     struct ffa_ctx *dest_ctx;
-     uint32_t count = 0;
-+    uint32_t idx = 0;
-     int32_t ret = FFA_RET_OK;
-     /*
-      * We do not have UUID info for VMs so use the 1.0 structure so that we set
-@@ -202,17 +203,21 @@ static int32_t ffa_get_vm_partinfo(struct ffa_uuid uuid, uint32_t *vm_count,
-     if ( ACCESS_ONCE(curr_ctx->guest_vers) >= FFA_VERSION_1_2 )
-     {
-         /* Add caller VM information */
--        info.id = curr_ctx->ffa_id;
--        info.execution_context = curr_ctx->num_vcpus;
--        info.partition_properties = FFA_PART_VM_PROP;
--        if ( is_64bit_domain(d) )
--            info.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
--
--        ret = ffa_copy_info(dst_buf, end_buf, &info, dst_size, sizeof(info));
--        if ( ret )
--            return ret;
-+        if ( start_index == 0)
-+        {
-+            info.id = curr_ctx->ffa_id;
-+            info.execution_context = curr_ctx->num_vcpus;
-+            info.partition_properties = FFA_PART_VM_PROP;
-+            if ( is_64bit_domain(d) )
-+                info.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
- 
--        count++;
-+            ret = ffa_copy_info(dst_buf, end_buf, &info, dst_size,
-+                                sizeof(info));
-+            if ( ret )
-+                return ret;
-+            count++;
-+        }
-+        idx++;
-     }
- 
-     if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-@@ -231,21 +236,25 @@ static int32_t ffa_get_vm_partinfo(struct ffa_uuid uuid, uint32_t *vm_count,
-             if ( dest_ctx == curr_ctx )
-                 continue;
- 
--            info.id = dest_ctx->ffa_id;
--            info.execution_context = dest_ctx->num_vcpus;
--            info.partition_properties = FFA_PART_VM_PROP;
--            if ( dest_ctx->is_64bit )
--                info.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
--
--            ret = ffa_copy_info(dst_buf, end_buf, &info, dst_size,
--                                sizeof(info));
--            if ( ret )
-+            if ( idx >= start_index )
-             {
--                read_unlock(&ffa_ctx_list_rwlock);
--                return ret;
-+                info.id = dest_ctx->ffa_id;
-+                info.execution_context = dest_ctx->num_vcpus;
-+                info.partition_properties = FFA_PART_VM_PROP;
-+                if ( dest_ctx->is_64bit )
-+                    info.partition_properties |= FFA_PART_PROP_AARCH64_STATE;
-+
-+                ret = ffa_copy_info(dst_buf, end_buf, &info, dst_size,
-+                                    sizeof(info));
-+                if ( ret )
-+                {
-+                    read_unlock(&ffa_ctx_list_rwlock);
-+                    return ret;
-+                }
-+                count++;
-             }
- 
--            count++;
-+            idx++;
-         }
-         read_unlock(&ffa_ctx_list_rwlock);
-     }
-@@ -355,7 +364,7 @@ void ffa_handle_partition_info_get(struct cpu_user_regs *regs)
-             goto out_rx_release;
-     }
- 
--    ret = ffa_get_vm_partinfo(uuid, &ffa_vm_count, &dst_buf, end_buf,
-+    ret = ffa_get_vm_partinfo(uuid, 0, &ffa_vm_count, &dst_buf, end_buf,
-                               dst_size);
- 
- out_rx_release:
--- 
-2.52.0
+    The error handler can safely trash errno, as libxc saves it across
+    the callback.
+
+`errno` isn't a workaround, it is the way many libc functions and other
+passes generic error code. It may feel awkward, but that C.
+
+If some functions don't update `errno`, it might be because the syscall
+already set `errno` and there's no need to change it.
+
+Thanks,
+
+
+--
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
 
