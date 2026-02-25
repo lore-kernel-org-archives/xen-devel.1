@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F50FD3758
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Feb 2026 13:00:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1240732.1542015 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B0F0FD3758
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Feb 2026 13:09:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1240745.1542026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvEUa-0006bn-2v; Wed, 25 Feb 2026 12:59:52 +0000
+	id 1vvEe7-0008K2-0a; Wed, 25 Feb 2026 13:09:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1240732.1542015; Wed, 25 Feb 2026 12:59:52 +0000
+Received: by outflank-mailman (output) from mailman id 1240745.1542026; Wed, 25 Feb 2026 13:09:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvEUa-0006bg-0O; Wed, 25 Feb 2026 12:59:52 +0000
-Received: by outflank-mailman (input) for mailman id 1240732;
- Wed, 25 Feb 2026 12:59:50 +0000
+	id 1vvEe6-0008Jv-UE; Wed, 25 Feb 2026 13:09:42 +0000
+Received: by outflank-mailman (input) for mailman id 1240745;
+ Wed, 25 Feb 2026 13:09:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xecS=A5=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vvEUY-0006bY-9i
- for xen-devel@lists.xenproject.org; Wed, 25 Feb 2026 12:59:50 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ <SRS0=j5m4=A5=bugseng.com=nicola.vetrini@srs-se1.protection.inumbo.net>)
+ id 1vvEe6-0008Jp-Ct
+ for xen-devel@lists.xenproject.org; Wed, 25 Feb 2026 13:09:42 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id db087ef3-1249-11f1-9ccf-f158ae23cfc8;
- Wed, 25 Feb 2026 13:59:44 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso8272965e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Feb 2026 04:59:44 -0800 (PST)
-Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
- [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd732eb1sm69925795e9.12.2026.02.25.04.59.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 04:59:42 -0800 (PST)
+ id 3e2c0186-124b-11f1-9ccf-f158ae23cfc8;
+ Wed, 25 Feb 2026 14:09:40 +0100 (CET)
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 475754EE7811;
+ Wed, 25 Feb 2026 14:09:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,112 +42,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db087ef3-1249-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1772024383; x=1772629183; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wILc9CGEf1WIqbCiw3qNVsNe1/HTYv9pl3xfzMp11zI=;
-        b=InEI5je8+7v+78AqYekmmp7ZYvejFrqlqQ0Aai4jVVCpC/vZjhZg7m+msJTCOskJX9
-         DtwEyJT6fUa63+Eq9Jcb4MS9Ru1YUQR56+bwhyD/kkBDVs0IiYfqpg48s9anzU7ee00G
-         hcgiFIdUUQ79ogh9Tfjag5qlIWtoGZApfTOBk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772024383; x=1772629183;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wILc9CGEf1WIqbCiw3qNVsNe1/HTYv9pl3xfzMp11zI=;
-        b=EEaf6YHFkPbsW113BydjExD6TDcxCDZTWJ9uNJtVjbm6z0d6QAPizW9Rc7+uIpU3G1
-         NbzM/tHCapjtOahLLgAF4qingMfn7GK6TD0+BFDXs1mTcO2s5Di9grJb5qSvEzsteloM
-         MaLGFCl6DP4dxUCK6h/QAwTQ9u4Qi74f6jmNcWf/M2qi2bW7EcsyJ26hHeFBRMURqiRi
-         qnaIjq0wcKOLJ1OR+SPvZ46n+zTe6gH7CU90p5toa414Ff662i6JcsDBZ16uiUqy7CCJ
-         M3x4k2AOQwdZY9H1DBo2AeEE+ox98Cn7bpIgK52jLsa6GpuGQyV4ePW4hR3h3/05cP/S
-         zqUw==
-X-Gm-Message-State: AOJu0Yxf1ap7o0kryIsqEA4gjKaKgBupyfvdoB9pIbdiWIN2FBVZ2y0A
-	xXPMYN4lX3hlqA0l418F+R7YL0eYZVjFm7PwWxpu9aHiWzjg+Pxw1zkleBLibAwLN2/i7iYFIID
-	R9L2s
-X-Gm-Gg: ATEYQzwL+hz1KiaDfeAK5reuutl1A/99aosr3ktjGYBj88Ldm754/g4PFvivt4mcvV2
-	v4RzvLgTcZQSHMv/4vTY/AVHSv6nYF9YBpea3DXpvOjgpFGlqGMpG9Kk7Dl3JwnGtNx3CayDwyC
-	n6TqJO8zgmcI3z3Rzsld1vpX7XXs160t0x9YdmFRoOitsvHJv4Rp+S7jOI2BoZkl9TlmXJ4IiWo
-	HKvW+8iVK/79wqEpH1jpMDTnZlJvstRJNDHFcgyz3RzWxAcKltk/dJmFFjE6SoutjsnE8Iw/1yD
-	gDxQlmbsmIzYWLP/HHejb09qlr+2bSeRM3uBUzyGGfhntBVwZGAOJI7KFGc28H0t7XEiF0NjC/i
-	TLudRfhgM/bXfdnOhkigU4lSWnIzxd2AfpyH1AZef3k08llGWD0OHiFXQCoOlXAMieGTg8iMPhu
-	gCgeTZnQeTtZ74tkqnCRIcHV3oJunsdgMyu8jy94CJMJ+YxMTehVnRly8ZOklSRNCa+JHr1pA=
-X-Received: by 2002:a05:600c:21d4:b0:483:7eeb:4558 with SMTP id 5b1f17b1804b1-483bd713d0bmr45333455e9.2.1772024382569;
-        Wed, 25 Feb 2026 04:59:42 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] xen/mm: Remove claim that INVALID_{MFN,GFN}_INITIALIZER is for older toolchains
-Date: Wed, 25 Feb 2026 12:59:40 +0000
-Message-Id: <20260225125940.3804137-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: 3e2c0186-124b-11f1-9ccf-f158ae23cfc8
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1772024979;
+	b=toAJGV4kmjabV7WLfmxtdNs9k1d2Lwhmo4tUgvobbMMOZfwtOO5P2UNNaMAfF44/FNct
+	 U3/JJgPZC4gMYptoZdK9ZQawNfxG5DPNFCdxTA9Wq7dwyrR19c78QMitPgkI3+IqbHOzG
+	 YyMVGkRskik+IBpkSgG3Cd4GzbCRQ+on1mUFbLsQ3S9JOzWErddIBk+8X3Snuc/T6EvT+
+	 rlZEIS8R6W3LhIJk1917svuRvyWoPsNCvFPdjwnFevoHHIeDSIuvpD4adD+qLYjoICXEf
+	 NFj3bKL7i/OSoqpCD1rouyPELXbMi6AEYDFp+kJDcd4tibmR4NFhe7wx4ugPiCAHBFAjL
+	 z6jeeZp2adfyNc74ahlG6l5sJfc1U/o5pQOP8dhck5GhtiTQquONi0mgZS1naBqs1jtJf
+	 2VQ3zMuWdTcK43ZZRRWUYYX2h1jcI47In3bm5lFlTsHBB42hEBUJcfRdi//Q91fr3x0Ll
+	 nqb7wSx2RWyGLk+R3pHQOcdlNl/3uGvKP5ksBAY02qnMjAHMoaS02pUynq/3MFAZsV3kV
+	 Fp1kc/mo1s3ivRivVkYo096hZ5CnwzXuF+WM+hN48Q1N07uKtCzKG8X8uPa9N6FONwvzK
+	 F2T3qHhxsmNdmQTIlDVirrhy3KXBQGcH4Mjh3r0mpeAadPttkS6fW5g0CO0jWEI=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1772024979;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=Zt7RKiHU+N4gsCRwFu2kQi2hB4godiYmnjsKiBEsFl8=;
+	b=Cw5cySwW/J4cxMbF2ByAiITItHvzIC5x6Fr5tkCSRz2SxieE9B6LmY7qpxtFXXeOtwSz
+	 o5OnJ9makcuMI4/GazM/lVG/gCfSfZtj3qGtmysmBSnOfFFtVyLO5ARMSyEDZ9nWH6407
+	 ebG1+WttuMGh5Tm1khDgB5rzK11DZtB+EzkVA90FwOYjfzrt7GFAwcJHQeoY7ZTAoLglk
+	 CPxStZozoMkIu1RHoyfpmDn7fatOl/sQBSAcgWwzqEWsWDgTmViABfg1JMsgKBGGqcSLt
+	 6c2zF7+WtkeKLeVHk96LLK8DL6glEAjOGPFxxFiu0REbvl/disiUPzy0EoCoo46OlpOP6
+	 rDsITq3+yQMc44PHGdWFN2nFhbsEm69fBBPgffUYY5IraSh6wfW8Ek07sBrC/1y3VCVPQ
+	 9hrHObiNLonu2LGc8k9RIwzhNXJVo6JZqcKMGjqiqmA+LngeuGz3uH1eXwlhkhX/yqISy
+	 Djya90a/4GXAc+/sbLLStKlNwmia7YXS7fd9/Ta4Bp45NIXPeb7gOSd61bsKCRGua4C6c
+	 ksQuulqRAMQeos+Sxnd5MQGJakFq2DSbSIpwOubSPqGeT6clHzGTvQ2kca/yzN4XApxWg
+	 BtB7zzPMOa3NCSribuHdjrywk66k98LqYkbPGexmeZukoccEVxsp4usFTDUlFpY=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Date: Wed, 25 Feb 2026 14:09:39 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Roberto Bagnara <roberto.bagnara@bugseng.com>, Xen-devel
+ <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>, "consulting @ bugseng . com"
+ <consulting@bugseng.com>
+Subject: Re: [PATCH 09/12] x86/shadow: Rework write_atomic() call in
+ shadow_write_entries()
+In-Reply-To: <c73f3627-73e0-4f36-9085-6c85951c2b0a@citrix.com>
+References: <20260220214653.3497384-1-andrew.cooper3@citrix.com>
+ <20260220214653.3497384-10-andrew.cooper3@citrix.com>
+ <0148ea9f-6486-44a1-b4dd-47af7c978351@bugseng.com>
+ <278f711d-7c61-4a47-868e-ab05b9426e40@citrix.com>
+ <678f1a67603d4b37d717dc84565db044@bugseng.com>
+ <c73f3627-73e0-4f36-9085-6c85951c2b0a@citrix.com>
+Message-ID: <225c04a554ededd04fd6edacf34fd2c6@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
 
-This was never because of a bug in GCC.
+On 2026-02-25 13:53, Andrew Cooper wrote:
+> On 25/02/2026 12:35 pm, Nicola Vetrini wrote:
+>> On 2026-02-25 13:14, Andrew Cooper wrote:
+>>> On 23/02/2026 7:26 am, Roberto Bagnara wrote: 
+>>>> 
+>>>> Note that in recent versions of MISRA C that rule is no longer
+>>>> mandatory.  More generally, note also that, IMHO, switching to
+>>>> a more modern version of MISRA C would simplify compliance.
+>>> 
+>>> Ok.  Making things simpler for compliance sounds like a good thing. 
+>>> What would this entail?
+>>> 
+>>> Presumably we've got to adapt to all changes in this newer revision 
+>>> of
+>>> MISRA C.
+>>> 
+>>> ~Andrew
+>> 
+>> Most likely new violations on new non-clean guidelines, generally
+>> rules for features that were standardized in C11/C18 and were
+>> previously widely available extensions (e.g. _Noreturn, _Alignof,
+>> threads, ...), 
+> 
+> We use noreturn a lot, and alignof() a little.  No threading at all
+> (well - not as C understands it).
+> 
+>> alongside some minor changes in existing ones, such as the
+>> classification change mentioned by Roberto. The exact impact depends
+>> on the target MISRA revision, however. Making an experiment should be
+>> only a matter of s/MC3A2/MC4/ (or whichever MISRA revision is chosen:
+>> MC4 in ECLAIR refers to the latest published MISRA revision, that is,
+>> MISRA C:2025. Perhaps also a few regressions (as in newly introduced
+>> violations) on clean ones, but I do not expect the results to be
+>> radically different.
+>> 
+>> Side note here: are the efforts to make Xen compile with
+>> -stc=c11/gnu11 still ongoing? I say this because any MISRA revision
+>> other than the one currently used by Xen by default is based on C11,
+>> as it introduces guidelines for C11/C18 features. Not that this would
+>> matter a whole lot for Xen, but it is something to consider in the
+>> broader picture.
+>> 
+> 
+> Funny you should ask.  I had a paragraph about it in my reply but
+> dropped it, thinking it was getting off track.
+> 
+> https://gitlab.com/xen-project/xen/-/issues/201
+> 
+> I've just updated it to note that we did start using auto, by way of 
+> the
+> __auto_type language extension.
+> 
+> From the Xen side, switching to gnu11 is a one-line change.  However
+> "ongoing" is really just me in my copious free time, and I'm not able 
+> to
+> do the ECLAIR/MISRA config side of the work.
+> 
+> It sounds to me like we want a dedicated work item switch to gnu11 and
+> some newer MISRA revision, but I will have to defer to you on how large
+> a task this is.
+> 
+> I suppose we should start with an experiment to see what shows up in 
+> the
+> *-amd target builds, and go from there?
+> 
 
-C requires that static objects are initialised with constant expressions;
-_mfn(), as a static inline, is not and cannot be made to be.
+Yes, that's sensible. I just wasn't sure if there were other gotchas in 
+Xen still to be addressed before using gnu11
 
-Correct the comments.  No functional change.
+> ~Andrew
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-
-Slightly RFC.  I left 'global variable' alone in the comment, because C's
-"object with static storage durations" also isn't ideal; there's one user
-which is non-static in terms of visibility.  I'm open to adjusting if we can
-figure out some better wording.
-
-In C++, we'd just make _mfn() be constexpr.  It turns out that C23 added this
-keyword but restricted it to objects and therefore useless.
-
-https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3018.htm literally admits
-that constexpr on objects exists only to force some diagnostics which were
-previously optional.
----
- xen/include/xen/mm-frame.h | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/xen/include/xen/mm-frame.h b/xen/include/xen/mm-frame.h
-index d973aec901fa..80885415a78a 100644
---- a/xen/include/xen/mm-frame.h
-+++ b/xen/include/xen/mm-frame.h
-@@ -9,8 +9,7 @@ TYPE_SAFE(unsigned long, mfn);
- #define INVALID_MFN_RAW  (~0UL)
- #define INVALID_MFN      _mfn(INVALID_MFN_RAW)
- /*
-- * To be used for global variable initialization. This workaround a bug
-- * in GCC < 5.0.
-+ * To be used for global variable initialization.
-  */
- #define INVALID_MFN_INITIALIZER { INVALID_MFN_RAW }
- 
-@@ -45,8 +44,7 @@ TYPE_SAFE(unsigned long, gfn);
- #define INVALID_GFN_RAW  (~0UL)
- #define INVALID_GFN      _gfn(INVALID_GFN_RAW)
- /*
-- * To be used for global variable initialization. This workaround a bug
-- * in GCC < 5.0 https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64856
-+ * To be used for global variable initialization.
-  */
- #define INVALID_GFN_INITIALIZER { INVALID_GFN_RAW }
- 
 -- 
-2.39.5
-
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
