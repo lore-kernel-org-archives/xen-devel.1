@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3BAFC593A
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1241458.1542544 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3692FC593E
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1241456.1542523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu6-0007uS-2G; Thu, 26 Feb 2026 11:51:38 +0000
+	id 1vvZu2-0007Ld-8N; Thu, 26 Feb 2026 11:51:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1241458.1542544; Thu, 26 Feb 2026 11:51:38 +0000
+Received: by outflank-mailman (output) from mailman id 1241456.1542523; Thu, 26 Feb 2026 11:51:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu5-0007uE-SC; Thu, 26 Feb 2026 11:51:37 +0000
-Received: by outflank-mailman (input) for mailman id 1241458;
- Thu, 26 Feb 2026 11:51:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vvZu2-0007Kh-4g; Thu, 26 Feb 2026 11:51:34 +0000
+Received: by outflank-mailman (input) for mailman id 1241456;
+ Thu, 26 Feb 2026 11:51:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1Tft=A6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vvZu4-0006EH-L0
- for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:36 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7fee7579-1309-11f1-9ccf-f158ae23cfc8;
- Thu, 26 Feb 2026 12:51:34 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4837f27cf2dso6970105e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:34 -0800 (PST)
+ id 1vvZu0-0006E8-Mf
+ for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:32 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7cd91581-1309-11f1-b164-2bf370ae4941;
+ Thu, 26 Feb 2026 12:51:29 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4836f363ad2so9650385e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:29 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.32
+ 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 03:51:33 -0800 (PST)
+ Thu, 26 Feb 2026 03:51:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7fee7579-1309-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 7cd91581-1309-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772106694; x=1772711494; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772106689; x=1772711489; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Y1ZCln4LGxYbhh7EA/lAbVEGbnMzo0d9tLUWjs8DB5k=;
-        b=eG2HjWeSENtDPApqBcBWK2jpmataLLKC6cZ4NeqLfxqspG2mlw9dQinywOb05UDLqj
-         nzlP9zuzAtslAYo1pP0jHiCJRyT43HSiBMn8gMzKR62IFiTXZWAwYSHmyr8U+6rN37JY
-         88GMVCYDw2mPtk3+6OVjVp0CflmygO1Q8/DWum1DaWe3Q4gpJtZd+RCile2VSTub67rD
-         jwvYZxkAp1HWEEb2/kX/wJtr3MplsGBcu6DZzTgEPM2BiOze122EqQlOiGLKsmWVvK6z
-         oxJuUmvxSaktKl0iWKBAuLHtEpJyEmOwrkuBPm0G84htLnV/pLDNhCqe/xoDPsSPOkj/
-         EgVg==
+        bh=33kKmz90cEezZ0SKbWH5QuCoRKJPXKUuazyZn8mlTZE=;
+        b=XEGGpl0sBwW93wLua95wUwjmqlZS6NVG6Ultc/synH70ofdyRA31yeJS90QDCSW0K2
+         GF11xwcRaN6N7QcQFZTu+EF5/VZ5fqwJl1ad1K7YLCm2mHP2EmTFbdepepEJhrROHpJr
+         VMXqRePfXWtTZDWVL9xYxU0YBjHhg86s1sc8Bbe3NvW9p9gaTgP9jslxS2xM1wkc1uVq
+         u7BcxqlQa+B/QkbhPLdMP8iozGRRkGYSmT/Pg1ZEAddUbVvWYfDdFqdkqX5sMOEDL4xa
+         OUXBnuBKQ93QWMVi1t6qKm+2nqQpKlyNTAuoBnQghoWrM+XlAu76vMD7/TuzvCouPVr/
+         tjEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772106694; x=1772711494;
+        d=1e100.net; s=20230601; t=1772106689; x=1772711489;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Y1ZCln4LGxYbhh7EA/lAbVEGbnMzo0d9tLUWjs8DB5k=;
-        b=Enqva28TnEHqbLARebVIfr6FviGa/LCWpWBrsNQ9cPdLv/dzjV/ymR/9iREIgceA/D
-         SToceblLQi3RHkXehsCZHM8KLe5C3052wqf65Kv61CIgaA3ICd3uprdve83q22jtOzQJ
-         WA57mmhlNT7Druy5xrnTbRg/5HaWB986YX7F3Ogti7A/BqEoJwnbM1UbK4KeUYMTy3Ke
-         iKi25mP35IhV0/uBaOZoaVMKi3OtDK03NT/Rts6OaS/Pzb6PoOTuLonZo1eor9D2Fi4X
-         Gw89w8IA0AvuwyTo+mc/xWebN+kIMNIFhCVmAZlEops4LloF7/wu07U+UWvFFOvmmN5i
-         XSjg==
-X-Gm-Message-State: AOJu0YwdI6X1loYif8CjIbJdSX6Cf5MWys+TEhCd8SoeZbtEHQj85LI0
-	g8IOTYcKUx+x/krhgkfH1kxl6p1CK9cdAHKd/zHdVDlauCTRSRlNXSIKHu7W3A==
-X-Gm-Gg: ATEYQzzJxUkV6+hALaa5ld5euAlanFGq8GuPtFqHFcZO24Ol2CT+rKhyNV7zcbexFsd
-	quOkCJ8VFnmX8pgDX9Miu1z2r3wS8LYEAI/722F0OMc4+K80K07Tl9JpNXA6oQqZ5wozMLyRtAE
-	M0TKbP3nSa/YP2U4Y8M06d3bOJW/pDv9i7AHxN8Py+xr4YudgdlkhL1OflVe38QZ4mbJx1fhO6F
-	UiqCnAQAyQ+If/k3nAPJw9XM2+aZAHnGN3Y+6/pPs3sQvkhyHigHP02CELmSfo9OAtogAP1E5DD
-	qUYAq9VwqQtTQr9CQJPMwrdgaTrl688q3xsiCxd6ac1/3zotb/qjUCfPfCcKmA0Hk4a1O6BV5oP
-	Vuv5uZw0lCC4tiNPC3f68kiCcJHY9TLYqlfqGtV9dSS8c6zQbBbTq/h2lai7v7YesNzNaRYwiHZ
-	lVJPhb0Q4VeTU9X3LSshx2ssImp06BOG8g1V5fDKoQf08/QltGrkcepcasL5mD4FOEzA==
-X-Received: by 2002:a05:600c:8b16:b0:480:68ed:1e70 with SMTP id 5b1f17b1804b1-483a963de73mr420137245e9.35.1772106693973;
-        Thu, 26 Feb 2026 03:51:33 -0800 (PST)
+        bh=33kKmz90cEezZ0SKbWH5QuCoRKJPXKUuazyZn8mlTZE=;
+        b=OoFmymOd3WJyz+ZiJp5tPpWlPb9sA3HpHySwEGIAr5gN3buDPLpbamtMDxjE4ISIZB
+         q5V+fNb/qVNj2MG30GjTOL1qiD5A/zptvyQc0MGstJmR6dvUzZ3i75JBhBR4lGNm1x9o
+         LhiR+JVmWWSC48jvHSg/12qJY4t9+6zGq/6IH+QJjYJfRSSRMcxiXe4uK2xCQ4sHLuwR
+         xlN80MVHqgiffPdJX3/45brD8TCBwvubfxv2xYR2S89LMEKi8IpsrfKSfdmpdEL3feha
+         Ld57RSWQmPOiMmLAkw6Eci2fEEtMrVbl8Z1a4K9GjjZ3Ya+p2Ru9DCz5BXqyln6guSg4
+         0zhA==
+X-Gm-Message-State: AOJu0Yy4kYMeU8knqexZ9lBI8yt3fjRehjChiQJTGhb2f/GtnFKWfGxi
+	KwTQHkFRtB3hT0/z3y7ikBy67w5q6fH8Ix4H41WNxNC+bddgeN5CG+fvMH7FBA==
+X-Gm-Gg: ATEYQzzAW1Kw721AmNj9JSA0TjL2F8q1rzilRctwL/2CReJt//mCs3nwZeBiduhyc7Y
+	blvkfLfa8KYqAO6qx29E9Eg7904ehRxovFvS/JtZpg3YhgjNg28XHx7R42VsDdT6H4zQPBV3kKc
+	AtMZb7E2r9oIPxIt5AhvLQ2vfF/vVZESwb5KtbzgLpL3MoTW6fKQunGN0sXVMB/0o59KCeckNu5
+	h4oQzL+XxDIVMaDpyh1mGMiFuc9Qckp0LjeOCKRYO3mZwGYY6EPgQ/xThSKzSelD8XqunDeDeRR
+	eScEyNGFYVhm+w8f4PPlDt62KSplIvW+yV/RNos/+qLRTeEb4HIs+wuk3s/HnKigYzOgVSE+ViN
+	o4ZtGzghEUAxQHKTHkFcTq2uw5ZRCiHpAllyDEEGn4covrXFKLBjUkLk9A/uku1c2+cR2tGGePn
+	QGvcAsBw0lr6WCQA2z08s1/BiiN/dBCSVUmpL7U37FWO+0EYavU5QgvS5DaTzTg1r1Ww==
+X-Received: by 2002:a05:600c:470f:b0:46f:c55a:5a8d with SMTP id 5b1f17b1804b1-483a95a852cmr341721945e9.4.1772106688743;
+        Thu, 26 Feb 2026 03:51:28 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,120 +96,139 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 07/14] xen/riscv: introduce vcpu_kick() implementation
-Date: Thu, 26 Feb 2026 12:51:07 +0100
-Message-ID: <fae5055def89528c078bacf7e344fd5116f531e5.1772016457.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 04/14] xen/riscv: introduce tracking of pending vCPU interrupts, part 2
+Date: Thu, 26 Feb 2026 12:51:04 +0100
+Message-ID: <07a3750bf152f31ef8013194536f199ac3540dcf.1772016457.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a RISC-V implementation of vcpu_kick(), which unblocks the target
-vCPU and sends an event check IPI if the vCPU was running on another
-processor. This mirrors the behavior of Arm and enables proper vCPU
-wakeup handling on RISC-V.
+This patch is based on Linux kernel 6.16.0.
 
-Remove the stub implementation from stubs.c, as it is now provided by
-arch/riscv/domain.c.
+Add the consumer side (vcpu_flush_interrupts()) of the lockless pending
+interrupt tracking introduced in part 1 (for producers). According, to the
+design only one consumer is possible, and it is vCPU itself.
+vcpu_flush_interrupts() is expected to be ran (as guests aren't ran now due
+to the lack of functionality) before the hypervisor returns control to the
+guest.
 
-Since vcpu_kick() calls perfc_incr(vcpu_kick), add perfcounter for
-vcpu_kick to handle the case when CONFIG_PERF_COUNTERS=y. Although
-CONFIG_PERF_COUNTERS is not enabled by default, it can be enabled,
-for example, by randconfig what will lead to CI build issues.
+Producers may set bits in irqs_pending_mask without a lock. Clearing bits in
+irqs_pending_mask is performed only by the consumer via xchg() (with aquire
+semantics). The consumer must not write to irqs_pending and must not act on
+bits that are not set in the mask. Otherwise, extra synchronization should
+be provided.
+The worst thing which could happen with such approach is that a new pending
+bit will be set to irqs_pending bitmap during update of hvip variable in
+vcpu_flush_interrupt() but it isn't problem as the new pending bit won't
+be lost and just be proceded during the next flush.
+
+As AIA specs introduced hviph register which would want to be updated when
+guest related AIA code vcpu_update_hvip() is introduced instead of just
+open-code it in vcpu_flush_interrupts().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v4-v6:
+Changes in v6:
  - Nothing changed. Only rebase.
 ---
-Changes in v3:
- - Add asm/perfc_defn.h to provide vcpu_kick perfcoounter to cover
-   the case when CONFIG_PERF_COUNTERS=y.
----
-Changes in v2:
+Changes in v5:
+ - Reorder the defintions of local variables (mask, val, hvip) in
+   vcpu_flush_interrupts(). Also, drop a blank line between them.
+ - Move #ifdef CONFIG_RISCV_32 above the comment in vcpu_flush_interrupts()
+   and align the comment properly.
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
- xen/arch/riscv/domain.c                 | 14 ++++++++++++++
- xen/arch/riscv/include/asm/Makefile     |  1 -
- xen/arch/riscv/include/asm/perfc_defn.h |  3 +++
- xen/arch/riscv/stubs.c                  |  5 -----
- 4 files changed, 17 insertions(+), 6 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/perfc_defn.h
+Changes in v4:
+ - Move defintion of hvip local variable to narrower space in
+   vcpu_flush_interrupts().
+ - Use initializers for mask and val variables.
+ - Use local variable c as an argument of vcpu_flush_interrupts() in
+   check_for_pcpu_work().
+---
+Changes in v3:
+ - Update the error message in case of RV32 from "hviph" to v->arch.hviph.
+ - Make const argument of vcpu_update_hvip.
+ - Move local variables mask and val inside if() in vcpu_flush_interrupts().
+ - Call vcpu_flush_interrupts() in check_pcpu_work().
+ - Move vcpu_update_hvip() inside if() in vcpu_flush_interrupts().
+---
+Changes in v2:
+ - New patch.
+---
+ xen/arch/riscv/domain.c             | 30 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h |  1 +
+ xen/arch/riscv/traps.c              |  2 ++
+ 3 files changed, 33 insertions(+)
 
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 56b28750d3aa..fda8cff90f6a 100644
+index 047dbebc1a09..6988d7032059 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -1,9 +1,11 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <xen/cpumask.h>
- #include <xen/init.h>
- #include <xen/mm.h>
- #include <xen/sections.h>
- #include <xen/sched.h>
-+#include <xen/smp.h>
- #include <xen/vmap.h>
- 
- #include <asm/bitops.h>
-@@ -265,6 +267,18 @@ void vcpu_flush_interrupts(struct vcpu *v)
+@@ -229,6 +229,36 @@ void vcpu_sync_interrupts(struct vcpu *v)
  #endif
  }
  
-+void vcpu_kick(struct vcpu *v)
++static void vcpu_update_hvip(const struct vcpu *v)
 +{
-+    bool running = v->is_running;
++    csr_write(CSR_HVIP, v->arch.hvip);
++}
 +
-+    vcpu_unblock(v);
-+    if ( running && v != current )
++void vcpu_flush_interrupts(struct vcpu *v)
++{
++    if ( ACCESS_ONCE(v->arch.irqs_pending_mask[0]) )
 +    {
-+        perfc_incr(vcpu_kick);
-+        smp_send_event_check_mask(cpumask_of(v->processor));
++        unsigned long mask = xchg(&v->arch.irqs_pending_mask[0], 0UL);
++        unsigned long val = ACCESS_ONCE(v->arch.irqs_pending[0]) & mask;
++        register_t *hvip = &v->arch.hvip;
++
++        *hvip &= ~mask;
++        *hvip |= val;
++
++        vcpu_update_hvip(v);
 +    }
++
++#ifdef CONFIG_RISCV_32
++    /*
++     * Flush AIA high interrupts.
++     *
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't
++     * supported now.
++     */
++#   error "Update v->arch.hviph"
++#endif
 +}
 +
  static void __init __maybe_unused build_assertions(void)
  {
      /*
-diff --git a/xen/arch/riscv/include/asm/Makefile b/xen/arch/riscv/include/asm/Makefile
-index 3824f31c395c..86c56251d5d7 100644
---- a/xen/arch/riscv/include/asm/Makefile
-+++ b/xen/arch/riscv/include/asm/Makefile
-@@ -7,7 +7,6 @@ generic-y += hypercall.h
- generic-y += iocap.h
- generic-y += irq-dt.h
- generic-y += percpu.h
--generic-y += perfc_defn.h
- generic-y += random.h
- generic-y += softirq.h
- generic-y += vm_event.h
-diff --git a/xen/arch/riscv/include/asm/perfc_defn.h b/xen/arch/riscv/include/asm/perfc_defn.h
-new file mode 100644
-index 000000000000..8a4b945df662
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/perfc_defn.h
-@@ -0,0 +1,3 @@
-+/* This file is intended to be included multiple times. */
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index e19365c6fb77..5373a498d80b 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -115,6 +115,7 @@ int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
+ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
+ 
+ void vcpu_sync_interrupts(struct vcpu *v);
++void vcpu_flush_interrupts(struct vcpu *v);
+ 
+ #endif /* ASM__RISCV__DOMAIN_H */
+ 
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 551f886e3a69..244264c92a79 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -175,6 +175,8 @@ static void check_for_pcpu_work(void)
+ 
+     vcpu_sync_interrupts(curr);
+ 
++    vcpu_flush_interrupts(curr);
 +
-+PERFCOUNTER(vcpu_kick, "vcpu: notify other vcpu")
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index daadff0138e4..eedf8bf9350a 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -203,11 +203,6 @@ void vcpu_block_unless_event_pending(struct vcpu *v)
-     BUG_ON("unimplemented");
+     p2m_handle_vmenter();
  }
  
--void vcpu_kick(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
--
- unsigned long
- hypercall_create_continuation(unsigned int op, const char *format, ...)
- {
 -- 
 2.53.0
 
