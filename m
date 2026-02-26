@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FE3FC592F
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1241455.1542510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67DFFC593F
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1241454.1542504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu1-0006xl-1i; Thu, 26 Feb 2026 11:51:33 +0000
+	id 1vvZu0-0006uG-Jc; Thu, 26 Feb 2026 11:51:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1241455.1542510; Thu, 26 Feb 2026 11:51:33 +0000
+Received: by outflank-mailman (output) from mailman id 1241454.1542504; Thu, 26 Feb 2026 11:51:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu0-0006xS-R9; Thu, 26 Feb 2026 11:51:32 +0000
-Received: by outflank-mailman (input) for mailman id 1241455;
+	id 1vvZu0-0006u9-Go; Thu, 26 Feb 2026 11:51:32 +0000
+Received: by outflank-mailman (input) for mailman id 1241454;
  Thu, 26 Feb 2026 11:51:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1Tft=A6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vvZtz-0006E8-MR
- for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:31 +0000
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [2a00:1450:4864:20::330])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7da961ba-1309-11f1-b164-2bf370ae4941;
- Thu, 26 Feb 2026 12:51:31 +0100 (CET)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4836d4c26d3so5243045e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:31 -0800 (PST)
+ id 1vvZty-0006EH-RH
+ for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:30 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7c394cc8-1309-11f1-9ccf-f158ae23cfc8;
+ Thu, 26 Feb 2026 12:51:28 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-483703e4b08so6569475e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:28 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.28
+ 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 03:51:29 -0800 (PST)
+ Thu, 26 Feb 2026 03:51:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,230 +47,354 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7da961ba-1309-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 7c394cc8-1309-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772106690; x=1772711490; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772106688; x=1772711488; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Tg5etO1tk6Lt3f6BDEvCCqmunpQhCPFEnQLjlhq8TEw=;
-        b=lNRRXncDpZcQ3C2vN5pa2w/2+0Z8u1zGEAb4OuHBWJv06bQlAHifJ/ACPExfc6bG2n
-         5ErLJ+Av0ngAKC5PAiawHxdjfM/l4owiu6MyWggf7uYGMi+2nmclJEn93RqouHDwFQPt
-         lnt/0gqGLFRvXFPyyt8sPwuBkGxft99O9zd65mc6kMifiKNrTggX0riAQ7nRtxfPhOsx
-         BhABLhTifrcqR5GNT1BH3kCqjd+061CEofJkvOunbnC/965bYnu13ZNNIOa2WjIMikXP
-         9/45/MvxvsitcuSscvb/iD2J/p7Igtgqfh0QZNc6S4MQGXaEzUrVLVOC+0SE7pWXQu6p
-         kX/A==
+        bh=faQUM4/57rhXIuG8+TO4P4PF19tSV2C7BOOWo8M61xI=;
+        b=lyItUzGGPrYPa0eXCOJ4DgFJqTn/o0jwbU4vJc+vRsnbnqr3aT/K00VcsrzAuadfNh
+         ORrlEZ1GWuF2LdGonbfUaHVbRwLZ5rQfVZhJ0V+tf5/GkL02LNaEFLa4hcscQiKIUgKK
+         tl1EgnbntM8+m/KL8XUeM+LtETjlQ5LZfiZr58sYPyQtnM4Z9oJfTJU6PSXFpNrb3HVj
+         Hf1O1B93ik0h2yR6z+oLUTnU83TXXEhXTIGphsl81KyfG1UGValNmaCn16W7kB4wWo0r
+         0Y6JTnMdKH94G8ZxDGh+FkLELpTtEbBtgfoBuA9kpb7dqjfXFhSC6VpNFWQugGHP5Xug
+         8xlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772106690; x=1772711490;
+        d=1e100.net; s=20230601; t=1772106688; x=1772711488;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Tg5etO1tk6Lt3f6BDEvCCqmunpQhCPFEnQLjlhq8TEw=;
-        b=sLpo5od1yn2VbIUfQuClNBpzZpNhado7s8zor7WMtTbSozQjfCBAcnQFtHjh90vg71
-         1O+oP/n9Y8Djx/ScoQasbhXXN0zfGBqXULRuHF0ujmeYQyxEgV/DdbJ4E5BdCgu4N4eu
-         AytAICl5sx+vzUvV8qf1HmAY8hZ69XC++oXvje8P94pwufV3+u4QWYh+EItgHIfaPYQe
-         be8CqobEHpzvoTjGPvoFxA4Dv8dJuCR/ZDv6EmKF/wtD2k1UkZVCMam7NORLqJw47A3e
-         lLZEXoRXj0UqfFbYxdCH8IuZVOdklBVkhd8bwDxacCXNJF3uFGSpLLAYMZgLrQ9cSJeH
-         311A==
-X-Gm-Message-State: AOJu0YyolOfMAr0NYLwnfOgQsn4bKKSBGvVpQ+6hvguIn+4jMRu5T0A7
-	mOcTkObFzm3ZFN+6a4Z0mCaKRM6lk90aUE2czhGkVyjgPH1zbSGi3/rbWFpnKA==
-X-Gm-Gg: ATEYQzxwilM9iPkPpr/07BgtFcqZWiParMBkcvV2BhLeSXIcABUeAI8J2VZbKkITcZZ
-	vz5fVjqfAJssvhvTt+08/ZVkzP/JhOAoh48AYA1giCEKTP+lYxP320wUGEmwAM+E2mw4t41Xvtg
-	s2WVvGZfreYxLoLRxak88RVKPy+RNg1Qp5XGVuY+tbhfCrdMZXEI21GhajIVzKPS2C+Yve9mFVT
-	N6r5N8rXsks42AfxGjypZor8Z/akBtgS3ERGbJwSgSEv4ZI17CfFFW+pjlutGubmRUCvAoeLL5y
-	1klZC5VTU5HFoIbOnD1a+f0nW8nJiT9mZhT+F4L+m5OywlyUNXgf4Tg+9l81yJIvLgP7NMy2pX0
-	TEduWjh7TJIL0YQjrMu7GXRpnlA/O5e4fP6yFpmZRj458Qs4RRbeyzOl/SLvK0CBWAp5Gop03ZO
-	yRqVwo3+OJoTQi7jH0KNHYAdsz6ZheW+FZfEJYKtJUhS7ynfcKu2qDtSrKfDrSyHzrmA==
-X-Received: by 2002:a05:600c:8b02:b0:47d:5e02:14e5 with SMTP id 5b1f17b1804b1-483a95a86eamr340717315e9.5.1772106690170;
-        Thu, 26 Feb 2026 03:51:30 -0800 (PST)
+        bh=faQUM4/57rhXIuG8+TO4P4PF19tSV2C7BOOWo8M61xI=;
+        b=tYoKD7uTwgbORfiN89McokXkcossPmabQbXVrOyYNUm/EA35AGqd7+k5TqqsbnRYSa
+         WE2Pp8nZ+j+MVkZFPj4YfHfGYXXkUArgjQl6OYC+t1I5NHPzohBJzuQp3nu3iIofCAvB
+         L0L1Y2SNVL03KXvPGz6Iw92jxrP0LewEmi2be2w5+YJsK5mqS/PQDDT9G5WwRPkcKn9Y
+         D7V7ZDfoC5MibAmL0Ae7hhvz0Fh9sWNjJOtzerzdz5lxn52l869j/DX2lDQ5s8cbl1GS
+         jCWe8BwRO7AtnrtP6gjh4G2DrmT3Qkptz3ZiTDK16YRZN28snr0VY16e+F5iWuUEcvqI
+         8OZQ==
+X-Gm-Message-State: AOJu0Yz4ghT4h3JOcnS4GP1+xmJdawDJube7il6XP2zQK9j/W2ierPIP
+	ZqW7RYwQcWE3nU7fjOnBZ9FKvGW8RvKWm/LW/WmHXtSo/qs1ykhkHA0NTLFZBA==
+X-Gm-Gg: ATEYQzxX37EFtN88KeBp7SJLPBetC0cnDdOoEqh1adN55KPP7zpL9SXULQM4Q2MBXRh
+	FJKn8gOYmH9umj0jr6f6SiPhflnOaGYVWMaxP3Ul66bxtkHmwhvTzaKUChRLYo2ZyevD+TLNvRJ
+	e/mKTDAQCe6NhnY6YVlTJQ6WFTv2++73/psbvzgjb7hCkmFN7l4kzTpKtn62GaY+HmAqCrDNdFR
+	OhelWUoXbOJHSfRtalFTyLefBiYiRoTVt5FYqZndElhDTOaaqaG08k3DK/vBqBG02iuhzHYmPOS
+	VOyqdRlL8iRyqdj18R/ActU2Gw9BSTA/BVmx0vGCkkKkdclot+V5xGqOYJjmrmNTPedGkD87rTZ
+	AmRK9RPWn9yoofcIJ8XMBNl8XrVjfQ+Qy7zY7u1usbkTRc+aFvuyjj4QS8Ju0Xf7/bcRq03x1fx
+	SDqvflCRy2qtm60tFdJXXrlp47AGrFzT1ED2MAnRlZ2O+il27ByiDN/Vmd7YNgNpWa1Q==
+X-Received: by 2002:a05:600c:310a:b0:479:1348:c63e with SMTP id 5b1f17b1804b1-483c33d20c3mr40990715e9.9.1772106687451;
+        Thu, 26 Feb 2026 03:51:27 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v6 05/14] xen/time: move ticks<->ns helpers to common code
-Date: Thu, 26 Feb 2026 12:51:05 +0100
-Message-ID: <545c2af877d519b1186c79fd6108d33e7e52cd3b.1772016457.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 03/14] xen/riscv: introduce tracking of pending vCPU interrupts, part 1
+Date: Thu, 26 Feb 2026 12:51:03 +0100
+Message-ID: <a1954e9a30abace453f4604a47b43ecbcebe350a.1772016457.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-ticks_to_ns() and ns_to_ticks() are not architecture-specific, so provide a
-common implementation that is more resilient to overflow than the historical
-Arm version. This is not a practical issue for Arm, as the latest ARM ARM
-that timer frequency should be fixed at 1 GHz and older platforms used much
-lower rates, which is shy of 32-bit overflow. As the helpers are declared
-as static inline, they should not affect x86, which does not use them.
+Based on Linux kernel v6.16.0.
+Note that smp_wmb() is used instead of smp_mb__before_atomic() as what
+we want to guarantee that if a bit in irqs_pending_mask is obversable
+that the correspondent bit in irqs_pending is observable too.
 
-On Arm, these helpers were historically implemented as out-of-line functions
-because the counter frequency was originally defined as static and unavailable
-to headers [1]. Later changes [2] removed this restriction, but the helpers
-remained unchanged. Now they can be implemented as static inline without any
-issues.
+Add lockless tracking of pending vCPU interrupts using atomic bitops.
+Two bitmaps are introduced:
+ - irqs_pending — interrupts currently pending for the vCPU
+ - irqs_pending_mask — bits that have changed in irqs_pending
 
-Centralising the helpers avoids duplication and removes subtle differences
-between architectures while keeping the implementation simple.
+The design follows a multi-producer, single-consumer model, where the
+consumer is the vCPU itself. Producers may set bits in
+irqs_pending_mask without a lock. Clearing bits in irqs_pending_mask is
+performed only by the consumer via xchg(). The consumer must not write
+to irqs_pending and must not act on bits that are not set in the mask.
+Otherwise, extra synchronization should be provided.
 
-Drop redundant <asm/time.h> includes where <xen/time.h> already pulls it in.
+On RISC-V interrupts are not injected via guest registers, so pending
+interrupts must be recorded in irqs_pending (using the new
+vcpu_{un}set_interrupt() helpers) and flushed to the guest by updating
+HVIP before returning control to the guest. The consumer side is
+implemented in a follow-up patch.
 
-No functional change is intended.
+A barrier between updating irqs_pending and setting the corresponding
+mask bit in vcpu_set_interrupt()/vcpu_unset_interrupt() guarantees
+that if the consumer observes a mask bit set, the corresponding pending
+bit is also visible. This prevents missed interrupts during the flush.
 
-[1] ddee56dc2994 arm: driver for the generic timer for ARMv7
-[2] 096578b4e489 xen: move XEN_SYSCTL_physinfo, XEN_SYSCTL_numainfo and
-                      XEN_SYSCTL_topologyinfo to common code
+It is possible that a guest could have pending bit in the hardware
+register without being marked pending in irq_pending bitmap as:
+  According to the RISC-V ISA specification:
+    Bits hip.VSSIP and hie.VSSIE are the interrupt-pending and
+    interrupt-enable  bits for VS-level software interrupts. VSSIP in hip
+    is an alias (writable) of the same bit in hvip.
+  Additionally:
+    When bit 2 of hideleg is zero, vsip.SSIP and vsie.SSIE are read-only
+    zeros. Else, vsip.SSIP and vsie.SSIE are aliases of hip.VSSIP and
+    hie.VSSIE.
+This means the guest may modify vsip.SSIP, which implicitly updates
+hip.VSSIP and the bit being written with 1 would also trigger an interrupt
+as according to the RISC-V spec:
+  These conditions for an interrupt trap to occur must be evaluated in a
+  bounded   amount of time from when an interrupt becomes, or ceases to be,
+  pending in sip,  and must also be evaluated immediately following the
+  execution of an SRET  instruction or an explicit write to a CSR on which
+  these interrupt trap conditions expressly depend (including sip, sie and
+  sstatus).
+What means that IRQ_VS_SOFT must be synchronized separately, what is done
+in vcpu_sync_interrupts(). Note, also, that IRQ_PMU_OVF would want to be
+synced for the similar reason as IRQ_VS_SOFT, but isn't sync-ed now as
+PMU isn't supported now.
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
+For the remaining VS-level interrupt types (IRQ_VS_TIMER and
+IRQ_VS_EXT), the specification states they cannot be modified by the guest
+and are read-only because of:
+  Bits hip.VSEIP and hie.VSEIE are the interrupt-pending and interrupt-enable
+  bits for VS-level external interrupts. VSEIP is read-only in hip, and is
+  the logical-OR of these interrupt sources:
+    • bit VSEIP of hvip;
+    • the bit of hgeip selected by hstatus.VGEIN; and
+    • any other platform-specific external interrupt signal directed to
+      VS-level.
+  Bits hip.VSTIP and hie.VSTIE are the interrupt-pending and interrupt-enable
+  bits for VS-level timer interrupts. VSTIP is read-only in hip, and is the
+  logical-OR of hvip.VSTIP and any other platform-specific timer interrupt
+  signal directed to VS-level.
+and
+  When bit 10 of hideleg is zero, vsip.SEIP and vsie.SEIE are read-only zeros.
+  Else, vsip.SEIP and vsie.SEIE are aliases of hip.VSEIP and hie.VSEIE.
+
+  When bit 6 of hideleg is zero, vsip.STIP and vsie.STIE are read-only zeros.
+  Else, vsip.STIP and vsie.STIE are aliases of hip.VSTIP and hie.VSTIE.
+and also,
+  Bits sip.SEIP and sie.SEIE are the interrupt-pending and interrupt-enable
+  bits for supervisor-level external interrupts. If implemented, SEIP is
+  read-only in sip, and is set and cleared by the execution environment,
+  typically through a platform-specific interrupt controller.
+
+  Bits sip.STIP and sie.STIE are the interrupt-pending and interrupt-enable
+  bits for supervisor-level timer interrupts. If implemented, STIP is
+  read-only in sip, and is set and cleared by the execution environment
+Thus, for these interrupt types, it is sufficient to use vcpu_set_interrupt()
+and vcpu_unset_interrupt(), and flush them during the call of
+vcpu_flush_interrupts() (which is introduced in follow up patch).
+
+vcpu_sync_interrupts(), which is called just before entering the VM,
+slightly bends the rule that the irqs_pending bit must be written
+first, followed by updating the corresponding bit in irqs_pending_mask.
+However, it still respects the core guarantee that the producer never
+clears the mask and only writes to irqs_pending if it is the one that
+flipped the corresponding mask bit from 0 to 1.
+Moreover, since the consumer won't run concurrently because
+vcpu_sync_interrupts() and the consumer path are going to be invoked
+sequentially immediately before VM entry, it is safe to slightly relax
+this ordering rule in vcpu_sync_interrupts().
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v4-v6:
- - Nothing changed. Only rebase.
+Changes in v6:
+ - Drop for the moment:
+       /* Read current HVIP and VSIE CSRs */
+       v->arch.vsie = csr_read(CSR_VSIE);
+   from vcpu_sync_interrupts() as it isn't used at the moment and will
+   be introduced when a usage will be more clear.
+---
+Changes in v5:
+ - Update the commit message().
+ - Rename c to curr.
+ - Update vcpu_set_interrupt() to use test_and_set_bit() for irqs_pending
+   bitmask too.
+ - Move #ifdef CONFIG_RISCV_32 above the comment in vcpu_sync_interrupts().
+---
+Changes in v4:
+ - Update the commit message.
+ - Update the comments in vcpu_(un)set_interrupt() and add the the  comment
+   above smp_wmb() barrier.
+ - call vcpu_kick() only if the pending_mask bit going from 0 to 1.
+ - Code style fixes.
+ - Update defintion of RISCV_VCPU_NR_IRQS to cover potential RV128 case and
+   the case if AIA isn't used.
+ - latch current into a local variable in check_for_pcpu_work().
 ---
 Changes in v3:
- - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+ - Use smp_wb() instead of smp_mb__before_atomic().
+ - Add explanation of the change above in the commit message.
+ - Move vcpu_sync_interrupts() here to producers side.
+ - Introduce check_for_pcpu_work() to be clear from where vcpu_sync_interrupts()
+   is called.
 ---
-Changes in v2:
- - Move ns_to_ticks() and ticks_to_ns() to common code.
+Changes in V2:
+ - Move the patch before an introduction of vtimer.
+ - Drop bitmap_zero() of irqs_pending and irqs_pending_mask bitmaps as
+   vcpu structure starts out all zeros.
+ - Drop const for irq argument of vcpu_{un}set_interrupt().
+ - Drop check "irq < IRQ_LOCAL_MAX" in vcpu_{un}set_interrupt() as it
+   could lead to overrun of irqs_pending and irqs_pending_mask bitmaps.
+ - Drop IRQ_LOCAL_MAX as there is no usage for it now.
 ---
- xen/arch/arm/include/asm/time.h   |  3 ---
- xen/arch/arm/time.c               | 11 -----------
- xen/arch/arm/vtimer.c             |  2 +-
- xen/arch/riscv/include/asm/time.h |  5 -----
- xen/arch/riscv/time.c             |  1 +
- xen/include/xen/time.h            | 11 +++++++++++
- 6 files changed, 13 insertions(+), 20 deletions(-)
+ xen/arch/riscv/domain.c             | 71 +++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h | 22 +++++++++
+ xen/arch/riscv/traps.c              |  4 ++
+ 3 files changed, 97 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
-index 49ad8c1a6d47..c194dbb9f52d 100644
---- a/xen/arch/arm/include/asm/time.h
-+++ b/xen/arch/arm/include/asm/time.h
-@@ -101,9 +101,6 @@ extern void init_timer_interrupt(void);
- /* Counter value at boot time */
- extern uint64_t boot_count;
- 
--extern s_time_t ticks_to_ns(uint64_t ticks);
--extern uint64_t ns_to_ticks(s_time_t ns);
--
- void preinit_xen_time(void);
- 
- void force_update_vcpu_system_time(struct vcpu *v);
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index cc3fcf47b66a..a12912a106a0 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -27,7 +27,6 @@
- #include <asm/cpufeature.h>
- #include <asm/platform.h>
- #include <asm/system.h>
--#include <asm/time.h>
- #include <asm/vgic.h>
- 
- uint64_t __read_mostly boot_count;
-@@ -47,16 +46,6 @@ unsigned int timer_get_irq(enum timer_ppi ppi)
-     return timer_irq[ppi];
- }
- 
--/*static inline*/ s_time_t ticks_to_ns(uint64_t ticks)
--{
--    return muldiv64(ticks, SECONDS(1), 1000 * cpu_khz);
--}
--
--/*static inline*/ uint64_t ns_to_ticks(s_time_t ns)
--{
--    return muldiv64(ns, 1000 * cpu_khz, SECONDS(1));
--}
--
- static __initdata struct dt_device_node *timer;
- 
- #ifdef CONFIG_ACPI
-diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
-index d2124b175521..2e85ff2b6e62 100644
---- a/xen/arch/arm/vtimer.c
-+++ b/xen/arch/arm/vtimer.c
-@@ -12,13 +12,13 @@
- #include <xen/lib.h>
- #include <xen/perfc.h>
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 2a81f8d94f9a..047dbebc1a09 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -6,6 +6,7 @@
  #include <xen/sched.h>
-+#include <xen/time.h>
- #include <xen/timer.h>
+ #include <xen/vmap.h>
  
- #include <asm/cpregs.h>
- #include <asm/div64.h>
- #include <asm/irq.h>
- #include <asm/regs.h>
--#include <asm/time.h>
- #include <asm/vgic.h>
- #include <asm/vreg.h>
- #include <asm/vtimer.h>
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-index 1e7801e2ea0e..be3875b9984e 100644
---- a/xen/arch/riscv/include/asm/time.h
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -24,11 +24,6 @@ static inline cycles_t get_cycles(void)
-     return csr_read(CSR_TIME);
++#include <asm/bitops.h>
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/riscv_encoding.h>
+@@ -158,6 +159,76 @@ void arch_vcpu_destroy(struct vcpu *v)
+     vfree((void *)&v->arch.cpu_info[1] - STACK_SIZE);
  }
  
--static inline s_time_t ticks_to_ns(uint64_t ticks)
--{
--    return muldiv64(ticks, MILLISECS(1), cpu_khz);
--}
--
- void preinit_xen_time(void);
- 
- #endif /* ASM__RISCV__TIME_H */
-diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
-index e962f8518d78..2c7af0a5d63b 100644
---- a/xen/arch/riscv/time.c
-+++ b/xen/arch/riscv/time.c
-@@ -4,6 +4,7 @@
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/sections.h>
-+#include <xen/time.h>
- #include <xen/types.h>
- 
- unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
-diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
-index fe0d7a578a99..2185dd26a439 100644
---- a/xen/include/xen/time.h
-+++ b/xen/include/xen/time.h
-@@ -8,6 +8,7 @@
- #ifndef __XEN_TIME_H__
- #define __XEN_TIME_H__
- 
-+#include <xen/muldiv64.h>
- #include <xen/types.h>
- #include <public/xen.h>
- 
-@@ -75,6 +76,16 @@ extern void send_timer_event(struct vcpu *v);
- 
- void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds);
- 
-+static inline s_time_t ticks_to_ns(uint64_t ticks)
++int vcpu_set_interrupt(struct vcpu *v, unsigned int irq)
 +{
-+    return muldiv64(ticks, MILLISECS(1), cpu_khz);
++    bool kick_vcpu;
++
++    /* We only allow VS-mode software, timer, and external interrupts */
++    if ( irq != IRQ_VS_SOFT &&
++         irq != IRQ_VS_TIMER &&
++         irq != IRQ_VS_EXT )
++        return -EINVAL;
++
++    kick_vcpu = !test_and_set_bit(irq, v->arch.irqs_pending);
++
++    /*
++     * The counterpart of this barrier is the one encoded implicitly in xchg()
++     * which is used in consumer part (vcpu_flush_interrupts()).
++     */
++    smp_wmb();
++
++    kick_vcpu |= !test_and_set_bit(irq, v->arch.irqs_pending_mask);
++
++    if ( kick_vcpu )
++        vcpu_kick(v);
++
++    return 0;
 +}
 +
-+static inline uint64_t ns_to_ticks(s_time_t ns)
++int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq)
 +{
-+    return muldiv64(ns, cpu_khz, MILLISECS(1));
++    /* We only allow VS-mode software, timer, external interrupts */
++    if ( irq != IRQ_VS_SOFT &&
++         irq != IRQ_VS_TIMER &&
++         irq != IRQ_VS_EXT )
++        return -EINVAL;
++
++    clear_bit(irq, v->arch.irqs_pending);
++    /*
++     * The counterpart of this barrier is the one encoded implicitly in xchg()
++     * which is used in consumer part (vcpu_flush_interrupts()).
++     */
++    smp_wmb();
++    set_bit(irq, v->arch.irqs_pending_mask);
++
++    return 0;
 +}
 +
- #include <asm/time.h>
++void vcpu_sync_interrupts(struct vcpu *v)
++{
++    unsigned long hvip = csr_read(CSR_HVIP);
++
++    /* Sync-up HVIP.VSSIP bit changes done by Guest */
++    if ( ((v->arch.hvip ^ hvip) & BIT(IRQ_VS_SOFT, UL)) &&
++         !test_and_set_bit(IRQ_VS_SOFT, &v->arch.irqs_pending_mask) )
++    {
++        if ( hvip & BIT(IRQ_VS_SOFT, UL) )
++            set_bit(IRQ_VS_SOFT, &v->arch.irqs_pending);
++        else
++            clear_bit(IRQ_VS_SOFT, &v->arch.irqs_pending);
++    }
++
++#ifdef CONFIG_RISCV_32
++    /*
++     * Sync-up AIA high interrupts.
++     *
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't supported
++     * now.
++     */
++#   error "Update v->arch.vsieh"
++#endif
++}
++
+ static void __init __maybe_unused build_assertions(void)
+ {
+     /*
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 17be792afe7d..e19365c6fb77 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -54,8 +54,25 @@ struct arch_vcpu {
+     register_t hideleg;
+     register_t henvcfg;
+     register_t hstateen0;
++    register_t hvip;
  
- #endif /* __XEN_TIME_H__ */
+     register_t vsatp;
++
++    /*
++     * VCPU interrupts
++     *
++     * We have a lockless approach for tracking pending VCPU interrupts
++     * implemented using atomic bitops. The irqs_pending bitmap represent
++     * pending interrupts whereas irqs_pending_mask represent bits changed
++     * in irqs_pending. Our approach is modeled around multiple producer
++     * and single consumer problem where the consumer is the VCPU itself.
++     *
++     * DECLARE_BITMAP() is needed here to support 64 vCPU local interrupts
++     * on RV32 host.
++     */
++#define RISCV_VCPU_NR_IRQS MAX(BITS_PER_LONG, 64)
++    DECLARE_BITMAP(irqs_pending, RISCV_VCPU_NR_IRQS);
++    DECLARE_BITMAP(irqs_pending_mask, RISCV_VCPU_NR_IRQS);
+ };
+ 
+ struct paging_domain {
+@@ -94,6 +111,11 @@ static inline void update_guest_memory_policy(struct vcpu *v,
+ 
+ static inline void arch_vcpu_block(struct vcpu *v) {}
+ 
++int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
++int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
++
++void vcpu_sync_interrupts(struct vcpu *v);
++
+ #endif /* ASM__RISCV__DOMAIN_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 9fca941526f6..551f886e3a69 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -171,6 +171,10 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
+ 
+ static void check_for_pcpu_work(void)
+ {
++    struct vcpu *curr = current;
++
++    vcpu_sync_interrupts(curr);
++
+     p2m_handle_vmenter();
+ }
+ 
 -- 
 2.53.0
 
