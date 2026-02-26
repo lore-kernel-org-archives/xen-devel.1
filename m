@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3AE4FC5939
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FE3FC592F
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1241466.1542579 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1241455.1542510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZuA-0000Ni-Kp; Thu, 26 Feb 2026 11:51:42 +0000
+	id 1vvZu1-0006xl-1i; Thu, 26 Feb 2026 11:51:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1241466.1542579; Thu, 26 Feb 2026 11:51:42 +0000
+Received: by outflank-mailman (output) from mailman id 1241455.1542510; Thu, 26 Feb 2026 11:51:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZuA-0000MU-9Z; Thu, 26 Feb 2026 11:51:42 +0000
-Received: by outflank-mailman (input) for mailman id 1241466;
- Thu, 26 Feb 2026 11:51:41 +0000
+	id 1vvZu0-0006xS-R9; Thu, 26 Feb 2026 11:51:32 +0000
+Received: by outflank-mailman (input) for mailman id 1241455;
+ Thu, 26 Feb 2026 11:51:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1Tft=A6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vvZu8-0006E8-UU
- for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:40 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
+ id 1vvZtz-0006E8-MR
+ for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:31 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 82f5fc2e-1309-11f1-b164-2bf370ae4941;
- Thu, 26 Feb 2026 12:51:39 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4834826e5a0so8712995e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:40 -0800 (PST)
+ id 7da961ba-1309-11f1-b164-2bf370ae4941;
+ Thu, 26 Feb 2026 12:51:31 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4836d4c26d3so5243045e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:31 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.37
+ 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 03:51:38 -0800 (PST)
+ Thu, 26 Feb 2026 03:51:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,185 +47,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82f5fc2e-1309-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 7da961ba-1309-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772106699; x=1772711499; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772106690; x=1772711490; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lX9hIaB9WTE6h7+Wjpyh48oNfuDqQhQlogYAFoYLY7c=;
-        b=lQnyGQpef4bwDXDEq0XlJct/7CAurJ2PUFl+4JIpaOAwYsrR39ruZRSP4Cx/oqS6oZ
-         sPtYO+q5aKXvBwXi9giwCJBKl28WcxOFMd/73JBDJ5zjBKjrTMlkgQHFO9CQbah4NQfA
-         OBPR13MmC2R4eMBO6tqr9ZU2k7OOsp7oc23m4MnqBJN3p14O1QGwMjBHxDcwtT8KI2Ly
-         Gt882zXpKibg3i2ECRX9cupq4IEtqTfksBPTJJFGAkIX2nd4kA1LNe/9gsfXnLd4z+KP
-         avEpt8zlCvZ84ZBWDJzRtK8Ja20kIiCJHWmsrzuBO/fmRhgf0UY6auSkDxzSrEvSLVoR
-         YvFA==
+        bh=Tg5etO1tk6Lt3f6BDEvCCqmunpQhCPFEnQLjlhq8TEw=;
+        b=lNRRXncDpZcQ3C2vN5pa2w/2+0Z8u1zGEAb4OuHBWJv06bQlAHifJ/ACPExfc6bG2n
+         5ErLJ+Av0ngAKC5PAiawHxdjfM/l4owiu6MyWggf7uYGMi+2nmclJEn93RqouHDwFQPt
+         lnt/0gqGLFRvXFPyyt8sPwuBkGxft99O9zd65mc6kMifiKNrTggX0riAQ7nRtxfPhOsx
+         BhABLhTifrcqR5GNT1BH3kCqjd+061CEofJkvOunbnC/965bYnu13ZNNIOa2WjIMikXP
+         9/45/MvxvsitcuSscvb/iD2J/p7Igtgqfh0QZNc6S4MQGXaEzUrVLVOC+0SE7pWXQu6p
+         kX/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772106699; x=1772711499;
+        d=1e100.net; s=20230601; t=1772106690; x=1772711490;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=lX9hIaB9WTE6h7+Wjpyh48oNfuDqQhQlogYAFoYLY7c=;
-        b=rz0VKU17bmmvZu8OBVfP29p7tJENBmpDRjOJyMBD6Z3JlNFZp/rwaAC/knZwgU7b8d
-         TQWK0OPvKAjstgRd627eNz0ZRQh7MWtMSkPSyOhbYxBZRpb257AHyrWtC1DgjYS33/mL
-         EHzi6gu0tCTt5N4JkCs0VCuJSqxGrVlA1L9Pg1slmhkHXF0di6hi06piDZ7Vd90gEp1N
-         U/sS/4OBwRlbdi5EY27vdz1lCeaAMGTATOCI+U4G44siNFT7n69G+ZLJ+tMZd65vm7d/
-         2B+D1Rv5LpgQmE5jTBfjk8Lb7ZFCF239CFbZ5HYvfrjrrSsEhGahlEXSLIwtZfLKHpJ+
-         ca0w==
-X-Gm-Message-State: AOJu0Yz4Hei1+ikQQeAarLbM0EkHvkIS8FvMNiaKDLbxUUmcCnJRbAg1
-	QPeZuY1bB5Nq3ULbRDzxaeSCltOspkL4usw7oa21Jw3Gme/LClVFA3zWEhDOTQ==
-X-Gm-Gg: ATEYQzw5o556W9VI+sIl4aiSdMUSsRcSL0U84aDF5lGSzi/vyPtpn8V7JKMJk2Umw2w
-	09FqC6s7fETIaztD2AeEe11b7zYuCMyfxxbAitNJvXIa1+adZIUdtJU9izkIBb+cQU0IhqoD46i
-	1CvFSFu57mR0dIkhmCF2MXYcyeqiDg5vVZ9N+f5BcNs6rZXil3CvxwYLOqPtP2Cs43NvvjuhvTY
-	RRnfzF97FPo4CyxeDk4dV1viB9fZXTFUk09WZLbN5C64v8DG6e4zxF6fErduU3vXvqgELCg8DBG
-	J0kfQWNcI+bj/3htA+S3+reh0JqVvnuWIG3/PwPTRzroaQlfKALBl6n7TNadNIQWItPLvRp7AWl
-	mwjxvBZHTGNE/uXeu/iDKBkpydaWQFSbRxy2mc+YnwPaQAXXRfyshZs7Ypisp7d6c75WrrRMY/E
-	PUiuz2SIgh6ERqlm83s1YcdNEtRmxwGntVt4JQD3bGrJeduK0zQOAqDPlzl3akHA0G5Q==
-X-Received: by 2002:a05:600c:a009:b0:483:b505:9db4 with SMTP id 5b1f17b1804b1-483c3df45e6mr36295685e9.31.1772106698894;
-        Thu, 26 Feb 2026 03:51:38 -0800 (PST)
+        bh=Tg5etO1tk6Lt3f6BDEvCCqmunpQhCPFEnQLjlhq8TEw=;
+        b=sLpo5od1yn2VbIUfQuClNBpzZpNhado7s8zor7WMtTbSozQjfCBAcnQFtHjh90vg71
+         1O+oP/n9Y8Djx/ScoQasbhXXN0zfGBqXULRuHF0ujmeYQyxEgV/DdbJ4E5BdCgu4N4eu
+         AytAICl5sx+vzUvV8qf1HmAY8hZ69XC++oXvje8P94pwufV3+u4QWYh+EItgHIfaPYQe
+         be8CqobEHpzvoTjGPvoFxA4Dv8dJuCR/ZDv6EmKF/wtD2k1UkZVCMam7NORLqJw47A3e
+         lLZEXoRXj0UqfFbYxdCH8IuZVOdklBVkhd8bwDxacCXNJF3uFGSpLLAYMZgLrQ9cSJeH
+         311A==
+X-Gm-Message-State: AOJu0YyolOfMAr0NYLwnfOgQsn4bKKSBGvVpQ+6hvguIn+4jMRu5T0A7
+	mOcTkObFzm3ZFN+6a4Z0mCaKRM6lk90aUE2czhGkVyjgPH1zbSGi3/rbWFpnKA==
+X-Gm-Gg: ATEYQzxwilM9iPkPpr/07BgtFcqZWiParMBkcvV2BhLeSXIcABUeAI8J2VZbKkITcZZ
+	vz5fVjqfAJssvhvTt+08/ZVkzP/JhOAoh48AYA1giCEKTP+lYxP320wUGEmwAM+E2mw4t41Xvtg
+	s2WVvGZfreYxLoLRxak88RVKPy+RNg1Qp5XGVuY+tbhfCrdMZXEI21GhajIVzKPS2C+Yve9mFVT
+	N6r5N8rXsks42AfxGjypZor8Z/akBtgS3ERGbJwSgSEv4ZI17CfFFW+pjlutGubmRUCvAoeLL5y
+	1klZC5VTU5HFoIbOnD1a+f0nW8nJiT9mZhT+F4L+m5OywlyUNXgf4Tg+9l81yJIvLgP7NMy2pX0
+	TEduWjh7TJIL0YQjrMu7GXRpnlA/O5e4fP6yFpmZRj458Qs4RRbeyzOl/SLvK0CBWAp5Gop03ZO
+	yRqVwo3+OJoTQi7jH0KNHYAdsz6ZheW+FZfEJYKtJUhS7ynfcKu2qDtSrKfDrSyHzrmA==
+X-Received: by 2002:a05:600c:8b02:b0:47d:5e02:14e5 with SMTP id 5b1f17b1804b1-483a95a86eamr340717315e9.5.1772106690170;
+        Thu, 26 Feb 2026 03:51:30 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 11/14] xen/riscv: implement reprogram_timer() via SBI
-Date: Thu, 26 Feb 2026 12:51:11 +0100
-Message-ID: <bc30f09d04ae40d84b1b790cc6ca7fba7a6008a8.1772016457.git.oleksii.kurochko@gmail.com>
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v6 05/14] xen/time: move ticks<->ns helpers to common code
+Date: Thu, 26 Feb 2026 12:51:05 +0100
+Message-ID: <545c2af877d519b1186c79fd6108d33e7e52cd3b.1772016457.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implement reprogram_timer() on RISC-V using the standard SBI timer call.
+ticks_to_ns() and ns_to_ticks() are not architecture-specific, so provide a
+common implementation that is more resilient to overflow than the historical
+Arm version. This is not a practical issue for Arm, as the latest ARM ARM
+that timer frequency should be fixed at 1 GHz and older platforms used much
+lower rates, which is shy of 32-bit overflow. As the helpers are declared
+as static inline, they should not affect x86, which does not use them.
 
-The privileged architecture only defines machine-mode timer interrupts
-(using mtime/mtimecmp). Therefore, timer services for S/HS/VS mode must
-be provided by M-mode via SBI calls. SSTC (Supervisor-mode Timer Control)
-is optional and is not supported on the boards available to me, so the
-only viable approach today is to program the timer through SBI.
+On Arm, these helpers were historically implemented as out-of-line functions
+because the counter frequency was originally defined as static and unavailable
+to headers [1]. Later changes [2] removed this restriction, but the helpers
+remained unchanged. Now they can be implemented as static inline without any
+issues.
 
-reprogram_timer() enables/disables the supervisor timer interrupt and
-programs the next timer deadline using sbi_set_timer(). If the SBI call
-fails, the code panics, because sbi_set_timer() is expected to return
-either 0 or -ENOSUPP (this has been stable from early OpenSBI versions to
-the latest ones). The SBI spec does not define a standard negative error
-code for this call, and without SSTC there is no alternative method to
-program the timer, so the SBI timer call must be available.
+Centralising the helpers avoids duplication and removes subtle differences
+between architectures while keeping the implementation simple.
 
-reprogram_timer() currently returns int for compatibility with the
-existing prototype. While it might be cleaner to return bool, keeping the
-existing signature avoids premature changes in case sbi_set_timer() ever
-needs to return other values (based on which we could try to avoid
-panic-ing) in the future.
+Drop redundant <asm/time.h> includes where <xen/time.h> already pulls it in.
 
+No functional change is intended.
+
+[1] ddee56dc2994 arm: driver for the generic timer for ARMv7
+[2] 096578b4e489 xen: move XEN_SYSCTL_physinfo, XEN_SYSCTL_numainfo and
+                      XEN_SYSCTL_topologyinfo to common code
+
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v5 - v6:
+Changes in v4-v6:
  - Nothing changed. Only rebase.
 ---
-Changes in v4:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
----
 Changes in v3:
- - Correct the comments in reprogram_timer().
- - Move enablement of timer interrupt after sbi_set_timer() to avoid
-   potentially receiving a timer interrupt between these 2 operations.
+ - Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v2:
- - Add TODO comment above sbi_set_timer() call.
- - Update the commit message.
+ - Move ns_to_ticks() and ticks_to_ns() to common code.
 ---
- xen/arch/riscv/stubs.c |  5 -----
- xen/arch/riscv/time.c  | 43 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 43 insertions(+), 5 deletions(-)
+ xen/arch/arm/include/asm/time.h   |  3 ---
+ xen/arch/arm/time.c               | 11 -----------
+ xen/arch/arm/vtimer.c             |  2 +-
+ xen/arch/riscv/include/asm/time.h |  5 -----
+ xen/arch/riscv/time.c             |  1 +
+ xen/include/xen/time.h            | 11 +++++++++++
+ 6 files changed, 13 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/riscv/stubs.c b/xen/arch/riscv/stubs.c
-index eedf8bf9350a..2f3a0ce76af9 100644
---- a/xen/arch/riscv/stubs.c
-+++ b/xen/arch/riscv/stubs.c
-@@ -21,11 +21,6 @@ nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
+diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+index 49ad8c1a6d47..c194dbb9f52d 100644
+--- a/xen/arch/arm/include/asm/time.h
++++ b/xen/arch/arm/include/asm/time.h
+@@ -101,9 +101,6 @@ extern void init_timer_interrupt(void);
+ /* Counter value at boot time */
+ extern uint64_t boot_count;
  
- /* time.c */
- 
--int reprogram_timer(s_time_t timeout)
--{
--    BUG_ON("unimplemented");
--}
+-extern s_time_t ticks_to_ns(uint64_t ticks);
+-extern uint64_t ns_to_ticks(s_time_t ns);
 -
- void send_timer_event(struct vcpu *v)
- {
-     BUG_ON("unimplemented");
-diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
-index 2c7af0a5d63b..7efa76fdbcb1 100644
---- a/xen/arch/riscv/time.c
-+++ b/xen/arch/riscv/time.c
-@@ -7,6 +7,9 @@
- #include <xen/time.h>
- #include <xen/types.h>
+ void preinit_xen_time(void);
  
-+#include <asm/csr.h>
-+#include <asm/sbi.h>
-+
- unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
- uint64_t __ro_after_init boot_clock_cycles;
+ void force_update_vcpu_system_time(struct vcpu *v);
+diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+index cc3fcf47b66a..a12912a106a0 100644
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -27,7 +27,6 @@
+ #include <asm/cpufeature.h>
+ #include <asm/platform.h>
+ #include <asm/system.h>
+-#include <asm/time.h>
+ #include <asm/vgic.h>
  
-@@ -40,6 +43,46 @@ static void __init preinit_dt_xen_time(void)
-     cpu_khz = rate / 1000;
+ uint64_t __read_mostly boot_count;
+@@ -47,16 +46,6 @@ unsigned int timer_get_irq(enum timer_ppi ppi)
+     return timer_irq[ppi];
  }
  
-+int reprogram_timer(s_time_t timeout)
+-/*static inline*/ s_time_t ticks_to_ns(uint64_t ticks)
+-{
+-    return muldiv64(ticks, SECONDS(1), 1000 * cpu_khz);
+-}
+-
+-/*static inline*/ uint64_t ns_to_ticks(s_time_t ns)
+-{
+-    return muldiv64(ns, 1000 * cpu_khz, SECONDS(1));
+-}
+-
+ static __initdata struct dt_device_node *timer;
+ 
+ #ifdef CONFIG_ACPI
+diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
+index d2124b175521..2e85ff2b6e62 100644
+--- a/xen/arch/arm/vtimer.c
++++ b/xen/arch/arm/vtimer.c
+@@ -12,13 +12,13 @@
+ #include <xen/lib.h>
+ #include <xen/perfc.h>
+ #include <xen/sched.h>
++#include <xen/time.h>
+ #include <xen/timer.h>
+ 
+ #include <asm/cpregs.h>
+ #include <asm/div64.h>
+ #include <asm/irq.h>
+ #include <asm/regs.h>
+-#include <asm/time.h>
+ #include <asm/vgic.h>
+ #include <asm/vreg.h>
+ #include <asm/vtimer.h>
+diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
+index 1e7801e2ea0e..be3875b9984e 100644
+--- a/xen/arch/riscv/include/asm/time.h
++++ b/xen/arch/riscv/include/asm/time.h
+@@ -24,11 +24,6 @@ static inline cycles_t get_cycles(void)
+     return csr_read(CSR_TIME);
+ }
+ 
+-static inline s_time_t ticks_to_ns(uint64_t ticks)
+-{
+-    return muldiv64(ticks, MILLISECS(1), cpu_khz);
+-}
+-
+ void preinit_xen_time(void);
+ 
+ #endif /* ASM__RISCV__TIME_H */
+diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
+index e962f8518d78..2c7af0a5d63b 100644
+--- a/xen/arch/riscv/time.c
++++ b/xen/arch/riscv/time.c
+@@ -4,6 +4,7 @@
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/sections.h>
++#include <xen/time.h>
+ #include <xen/types.h>
+ 
+ unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
+diff --git a/xen/include/xen/time.h b/xen/include/xen/time.h
+index fe0d7a578a99..2185dd26a439 100644
+--- a/xen/include/xen/time.h
++++ b/xen/include/xen/time.h
+@@ -8,6 +8,7 @@
+ #ifndef __XEN_TIME_H__
+ #define __XEN_TIME_H__
+ 
++#include <xen/muldiv64.h>
+ #include <xen/types.h>
+ #include <public/xen.h>
+ 
+@@ -75,6 +76,16 @@ extern void send_timer_event(struct vcpu *v);
+ 
+ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds);
+ 
++static inline s_time_t ticks_to_ns(uint64_t ticks)
 +{
-+    uint64_t deadline, now;
-+    int rc;
-+
-+    if ( timeout == 0 )
-+    {
-+        /* Disable timer interrupt */
-+        csr_clear(CSR_SIE, BIT(IRQ_S_TIMER, UL));
-+
-+        return 1;
-+    }
-+
-+    deadline = ns_to_ticks(timeout) + boot_clock_cycles;
-+    now = get_cycles();
-+    if ( deadline <= now )
-+        return 0;
-+
-+    /*
-+     * TODO: When the SSTC extension is supported, it would be preferable to
-+     *       use the supervisor timer registers directly here for better
-+     *       performance, since an SBI call and mode switch would no longer
-+     *       be required.
-+     *
-+     *       This would also reduce reliance on a specific SBI implementation.
-+     *       For example, it is not ideal to panic() if sbi_set_timer() returns
-+     *       a non-zero value. Currently it can return 0 or -ENOSUPP, and
-+     *       without SSTC we still need an implementation because only the
-+     *       M-mode timer is available, and it can only be programmed in
-+     *       M-mode.
-+     */
-+    if ( (rc = sbi_set_timer(deadline)) )
-+        panic("%s: timer wasn't set because: %d\n", __func__, rc);
-+
-+    /* Enable timer interrupt */
-+    csr_set(CSR_SIE, BIT(IRQ_S_TIMER, UL));
-+
-+    return 1;
++    return muldiv64(ticks, MILLISECS(1), cpu_khz);
 +}
 +
- void __init preinit_xen_time(void)
- {
-     if ( acpi_disabled )
++static inline uint64_t ns_to_ticks(s_time_t ns)
++{
++    return muldiv64(ns, cpu_khz, MILLISECS(1));
++}
++
+ #include <asm/time.h>
+ 
+ #endif /* __XEN_TIME_H__ */
 -- 
 2.53.0
 
