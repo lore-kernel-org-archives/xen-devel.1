@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48C72FC593B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A578EFC593C
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1241453.1542494 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1241457.1542534 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZty-0006fg-9d; Thu, 26 Feb 2026 11:51:30 +0000
+	id 1vvZu3-0007cg-PV; Thu, 26 Feb 2026 11:51:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1241453.1542494; Thu, 26 Feb 2026 11:51:30 +0000
+Received: by outflank-mailman (output) from mailman id 1241457.1542534; Thu, 26 Feb 2026 11:51:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZty-0006fZ-77; Thu, 26 Feb 2026 11:51:30 +0000
-Received: by outflank-mailman (input) for mailman id 1241453;
- Thu, 26 Feb 2026 11:51:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vvZu3-0007cW-Kh; Thu, 26 Feb 2026 11:51:35 +0000
+Received: by outflank-mailman (input) for mailman id 1241457;
+ Thu, 26 Feb 2026 11:51:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1Tft=A6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vvZtx-0006EH-6A
- for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:29 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b62d24c-1309-11f1-9ccf-f158ae23cfc8;
- Thu, 26 Feb 2026 12:51:27 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-483bd7354efso10329965e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:27 -0800 (PST)
+ id 1vvZu2-0006E8-93
+ for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:34 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7ef86abe-1309-11f1-b164-2bf370ae4941;
+ Thu, 26 Feb 2026 12:51:33 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-483770e0b25so7370705e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:33 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.24
+ 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 03:51:25 -0800 (PST)
+ Thu, 26 Feb 2026 03:51:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b62d24c-1309-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 7ef86abe-1309-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772106686; x=1772711486; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772106693; x=1772711493; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mjWgFbv6nb7y5dLkGr2P5tKeDiy8GNkU4xO5G3VBP8c=;
-        b=MBtGR8KDxfg18JepBfQo1A0LcxujEdFRM+/zs5i9nGmj7KTyTwQsaIrEZYY21Cnqke
-         Aj94WesKr6p/k2ywn/LgAa7VwrkXJ1TVKwUr6sfW8no5gZGGK6DX+QkZByr5NRXNkc+T
-         P+iqItUIMTW6aC8uo4PojkTFHN1dc7UES88Doq9UQJ0KOOJnaONeowWXWCmG1BW/LIYV
-         0NbTB1SeBVJ90vREk9s78olkIHPFCGnIYP4cOeVhjTAjLCWkjfaAT/7mJJxgEu9QW4Hg
-         ls61i0f389J6Wtakard/c3Cav+c5nrsWPFPvTNDE6KQM/9zYsbxCX6Jo8BPsZk9oDU0I
-         o5zA==
+        bh=WQbN7SP3fjaaAEDIkqEkmnk4ywUJEbwgcsMMvUSaPN0=;
+        b=ceT4UyAZvKTKCGcH9s35BtWNIBBKYwaDKDnDLDlhDBOUtMeDt9SWjpJwoo7FyFP24o
+         TLM87+A6N8iFS1k4km0NeekHUDFh5v/VF/NokR9UjtPnHw9A838Pu4nynv7BHKK6yhF8
+         tA9nreJa0csrx9g5X8g9880N+v4PuLfWOuBUz9M/cQ5b9+sHSwj58SmRiBZak0mn+8IQ
+         vBUitBNpDCKKbOeCSu34bnqukE9Dj76AUCg60g6PePZxwMxqBv3Du3UGdnYATKJAKWsn
+         ok83wV4Hk9ncIxr/XE3yEmIin/VugFJ2Fkkx/rfRMrKV+dIjZx0VnGRuQy1mI9+mmOw5
+         /yXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772106686; x=1772711486;
+        d=1e100.net; s=20230601; t=1772106693; x=1772711493;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=mjWgFbv6nb7y5dLkGr2P5tKeDiy8GNkU4xO5G3VBP8c=;
-        b=QoUVzCjOcSx2SAwSIjWJ4wrWvRn07Lai4fbhKiKEkwXHL2kbN8NsMHSDYVlkuq3/2m
-         t+vbOAGm7QuDvEW2kAb2NHxTMCy9fMPN3Qup9wYH08GcLHncQsQGn8Pmwd7e0WYfShAM
-         QqvmKbFhx6HOm3Ih62DcNVWhlTyJujwwmXpD+162k3Cy9q6fw4q9PAh6FaHvpd1Agxrb
-         aI8iac8KZ+Hd8mwZ+5ChzxqyWxvT/3XEIH41WymHjDpL/bxIpCRsNRAKl//hUMlK1mt7
-         zL+mu3PSdEse0zMxMQUiocgEbnjjIH0+8kzHFTTtiOfv38oO9M3Hqe44/HWLSydAhb5b
-         ye9A==
-X-Gm-Message-State: AOJu0YxzQb6JevxbG6N03Umu2yt504FvSPqgFlRj12fHDh1JAIQy8X4K
-	jWdpdNGQA9kqCo2I4d1pWhQ1Qdvf4EpUdZJRQuXjB5U7NEi9lIll/43r/31EmA==
-X-Gm-Gg: ATEYQzyKWU7dDI1bAe59lIQJuzxxm6DHUI6yAGTPxqWAffsfq1XyJO1Ocgp4OBk+8S0
-	JiDEng+7UHxrRbyIzji8mxOMkHQDYJNr526Gox/m/Up3o8U7U4ZaBpRymxzz/LJB9m/OU+3wwTq
-	wn2iod8KCLRcvVYKzDwV76weGCOTa8j4T2TzF62+KdkwdoBtJy7XzhMfiy1khuGFFx73Rz79Z/0
-	9BW+r6v2hmWY6mSdl8I9YmB525biLupEJDrTIc3UclyytxDFKRNxD+9ronem7VUKEQNydfKn0jF
-	jJ9GZkJE+Gp3cHOrsSd4v6h2mNnj16WU63I4pcSxMzBrAwWG9+t0vY8TLwgwZolUSDccYkdzQHk
-	q8PIYZ5VQ2yXTbz1sHYUtnSCtb9CH2Q2Q6ahW9HlY0XB2yB0a7oUmndrFcrtocjrJdJR4ZfM+Jn
-	MSNGqRUzzmfndeaQdaZ3rCr+o2cQlrhrU2yH2kO3wX3mIjkC0WPYod+4eSHxtyUqLl1luAeu/tx
-	LA0
-X-Received: by 2002:a05:600c:8708:b0:483:a922:2e8d with SMTP id 5b1f17b1804b1-483c216ab55mr57961995e9.4.1772106685950;
-        Thu, 26 Feb 2026 03:51:25 -0800 (PST)
+        bh=WQbN7SP3fjaaAEDIkqEkmnk4ywUJEbwgcsMMvUSaPN0=;
+        b=vpCQ+cGiEXaJvn6m7xlvsmK+EhdRjcuC/k7Rs40IJsP1iRyKSsxrf6vMSiUWZOmBp8
+         tzR886kk1wv5mXIpSpr5peC0w0RLPJjONcn3HpdA+hrrZ/fNZ71Dk0ZOBusOU9egD7iY
+         9lK1tNYUDgMmyR6BvGuXPV9v4o+lmEnGvqZheI5S8WsowoQIpWCy589nR9Huq6Awssp2
+         hnZd3Go2Gc6S4bxoGEFkD4U5uLMCzR5xB+b1zpsDfzJnxiQNumeSgbRvWFOgczjfJ9Ew
+         /k4YhUot/c1NwETSF59ScHrEOLa4LbbsCVXaKif2JjV4UWcWUVWmxLF9FZ6LFtLUXKPS
+         +uJw==
+X-Gm-Message-State: AOJu0Ywel0ggIB9upZaem4zAmfdTifIt2WwAZNBPmt74JMS3Bzf87S1G
+	wnze+mCwP9KocFDWKt34dAf0vxZDDpkafAuaFO+smQrOHoJNUyADHEqAs4HkqA==
+X-Gm-Gg: ATEYQzy/e1HZcPwbIaoGXAmC6YTvrPsqF/OIr/VQcblk62o6UnoCdK8z0UHCknEdXV7
+	rkJYta2fDvVPl10VAurxpJ275zkh6tF+GBaPP4Qao4M78W30zRU991rANVr0IfM6VKOncVnHtX6
+	DSe0Vu9U444T5Iajx1W3DGqj+HHry3KIAx1ndU6tlNv889eIiZrFqD0Tti9WXrqBlNn6U6uS1Wu
+	+7kD521+852Us9dL6uRXhPidgwsRAR/pp6VeD5qJGJH6c2Qjqb6/5USWvNstMdXBCg+AiyI9YMW
+	hhhzA6ejhElkdZHJFAekkLoOC16lq6aOZZ3jAplTmoSmacscTySfKlR70sG1suuL8/LEBNb3935
+	J9gdQvPkpG24JL55FkYSjPAy8hglf6sJ8fK3j+YY55Jco3JM7tvMC+Ik6OMv3bTTEa3dH2fDkZr
+	aHw12ye1j1t/ojcfxi1uXq7Osp4aXLsgYVeOTfPoVEYldjtEPmjh8x8cdLS8PyPcaTw4aHLYCGx
+	iri
+X-Received: by 2002:a05:600c:4751:b0:475:de12:d3b5 with SMTP id 5b1f17b1804b1-483a963df99mr310294475e9.34.1772106692483;
+        Thu, 26 Feb 2026 03:51:32 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -97,232 +97,247 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 02/14] xen/riscv: implement vcpu_csr_init()
-Date: Thu, 26 Feb 2026 12:51:02 +0100
-Message-ID: <9694ff5787d5f162581a16f0974ac9a55c538019.1772016457.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 06/14] xen/riscv: introduce basic vtimer infrastructure for guests
+Date: Thu, 26 Feb 2026 12:51:06 +0100
+Message-ID: <ec5903d84f00e1256af6e1662e79234bd79aa6ab.1772016457.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Introduce vcpu_csr_init() to initialise hypervisor CSRs that control
-vCPU execution and virtualization behaviour before the vCPU is first
-scheduled.
-The function configures trap and interrupt delegation to VS-mode by
-setting the appropriate bits in the hedeleg and hideleg registers,
-initializes hstatus so that execution enters VS-mode when control is
-passed to the guest, and restricts guest access to hardware performance
-counters by initializing hcounteren, as unrestricted access would
-require additional handling in Xen.
-When the Smstateen and SSAIA extensions are available, access to AIA
-CSRs and IMSIC guest interrupt files is enabled by setting the
-corresponding bits in hstateen0, avoiding unnecessary traps into Xen
-(note that SVSLCT(Supervisor Virtual Select) name is used intead of
-CSRIND as OpenSBI uses such name and riscv_encoding.h is mostly based
-on it).
-If the Svpbmt extension is supported, the PBMTE bit is set in
-henvcfg to allow its use for VS-stage address translation. Guest
-access to the ENVCFG CSR is also enabled by setting ENVCFG bit in
-hstateen0, as a guest may need to control certain characteristics of
-the U-mode (VU-mode when V=1) execution environment.
+Lay the groundwork for guest timer support by introducing a per-vCPU
+virtual timer backed by Xen’s common timer infrastructure.
 
-For CSRs that may contain read-only bits (e.g. hedeleg, hideleg,
-hstateen0), to the written value a correspondent mask is applied to
-avoid divergence between the software state and the actual CSR
-contents.
+The virtual timer is programmed in response to the guest SBI
+sbi_set_timer() call and injects a virtual supervisor timer interrupt
+into the vCPU when it expires.
 
-As hstatus is not part of struct arch_vcpu (it already resides in
-struct cpu_user_regs), introduce vcpu_guest_cpu_user_regs() to provide
-a uniform way to access hstatus and other guest CPU user registers.
-
-This establishes a consistent and well-defined initial CSR state for
-vCPUs prior to their first context switch.
+While a dedicated struct vtimer is not strictly required at present,
+it is expected to become necessary once SSTC support is introduced.
+In particular, it will need to carry additional state such as whether
+SSTC is enabled, the next compare value (e.g. for the VSTIMECMP CSR)
+to be saved and restored across context switches, and time delta state
+(e.g. HTIMEDELTA) required for use cases such as migration. Introducing
+struct vtimer now avoids a later refactoring.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V6:
- - Apply introduced in prev. patch csr_masks.ro_one.hstaten0 in vcpu_csr_init().
+Changes in v6:
+ - Nothing changed. Only rebase.
 ---
 Changes in v5:
- - Initialize of hstateen0 with SMSTATEEN0_HSENVCFG when a variable is
-   defined.
- - Use |= for a code inside if (*_ssaia) case.
- - Put declaration of the registers hedeleg and hideleg together in arch_vcpu
-   structure as they are typically used together so better chances to
-   be in the same cache line.
+ - Drop copyright line from asm/vtimer.h.
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v4:
- - Move local variable hstateen0 into narrower scope.
- - Code style fixes.
- - Move the call of vcpu_csr_init(v) after if ( is_idle_vcpu() ) check in
-   arcg_vcpu_create().
+ - Add vcpu_timer_destroy() to void arch_vcpu_destroy().
 ---
 Changes in v3:
- - Add hypervisor register used to initalize vCPU state.
- - Apply masks introduced before instead of csr_write()/csr_read() pattern.
+ - use one container_of() to get vcpu instead of two container_of()s.
 ---
 Changes in v2:
- - As hstatus isn't a part of arch_vcpu structure (as it is already a part of
-   cpu_user_regs) introduce vcpu_guest_cpu_user_regs() to be able to access
-   hstatus and other CPU user regs.
- - Sort hideleg bit setting by value. Drop a stray blank.
- - Drop | when the first initialization of hcounteren and hennvcfg happen.
- - Introduce HEDELEG_DEFAULT. Sort set bits by value and use BIT() macros
-   instead of open-coding it.
- - Apply pattern csr_write() -> csr_read() for hedeleg and hideleg instead
-   of direct bit setting in v->arch.h{i,e}deleg as it could be that for some
-   reason some bits of hedeleg and hideleg are r/o.
-   The similar patter is used for hstateen0 as some of the bits could be r/o.
- - Add check that SSAIA is avaialable before setting of SMSTATEEN0_AIA |
-   SMSTATEEN0_IMSIC | SMSTATEEN0_SVSLCT bits.
- - Drop local variables hstatus, hideleg and hedeleg as they aren't used
-   anymore.
+ - Drop domain_vtimer_init() as it does nothing.
+ - Drop "struct vcpu *v;" from struct vtimer as it could be taken
+   from arch_vcpu using container_of().
+ - Drop vtimer_initialized, use t->status == TIMER_STATUS_invalid
+   instead to understand if timer was or wasn't initialized.
+ - Drop inclusion of xen/domain.h as xen/sched.h already includes it.
+ - s/ xen/time.h/ xen.timer.h in vtimer.c.
+ - Drop ULL in if-conidtion in vtimer_set_timer() as with the cast
+   it isn't necessary to have suffix ULL.
+ - Add migrate timer to vtimer_set_timer() to be sure that vtimer
+   will occur on pCPU it was ran, so the signalling to that vCPU
+   will (commonly) be cheaper.
+ - Check if the timeout has already expired and just inject the event
+   in vtimer_vtimer_set_timer().
+ - Drop const for ticks argument of vtimer_set_timer().
+ - Merge two patches to one:
+   - xen/riscv: introduce vtimer
+   - xen/riscv: introduce vtimer_set_timer() and vtimer_expired()
 ---
- xen/arch/riscv/domain.c                     | 63 +++++++++++++++++++++
- xen/arch/riscv/include/asm/current.h        |  2 +
- xen/arch/riscv/include/asm/domain.h         |  6 ++
- xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
- 4 files changed, 73 insertions(+)
+ xen/arch/riscv/Makefile             |  1 +
+ xen/arch/riscv/domain.c             | 10 +++-
+ xen/arch/riscv/include/asm/domain.h |  3 ++
+ xen/arch/riscv/include/asm/vtimer.h | 17 +++++++
+ xen/arch/riscv/vtimer.c             | 71 +++++++++++++++++++++++++++++
+ 5 files changed, 100 insertions(+), 2 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/vtimer.h
+ create mode 100644 xen/arch/riscv/vtimer.c
 
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index bc47e83b26d7..ffbd7062e214 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -22,6 +22,7 @@ obj-y += traps.o
+ obj-y += vmid.o
+ obj-y += vm_event.o
+ obj-y += vsbi/
++obj-y += vtimer.o
+ 
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 902aaac74290..2a81f8d94f9a 100644
+index 6988d7032059..56b28750d3aa 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -8,6 +8,7 @@
- 
+@@ -10,6 +10,7 @@
  #include <asm/cpufeature.h>
  #include <asm/csr.h>
-+#include <asm/riscv_encoding.h>
+ #include <asm/riscv_encoding.h>
++#include <asm/vtimer.h>
  
  struct csr_masks {
      register_t hedeleg;
-@@ -20,6 +21,21 @@ struct csr_masks {
-     } ro_one;
- };
+@@ -138,11 +139,14 @@ int arch_vcpu_create(struct vcpu *v)
  
-+#define HEDELEG_DEFAULT (BIT(CAUSE_MISALIGNED_FETCH, U) | \
-+                         BIT(CAUSE_FETCH_ACCESS, U) | \
-+                         BIT(CAUSE_ILLEGAL_INSTRUCTION, U) | \
-+                         BIT(CAUSE_BREAKPOINT, U) | \
-+                         BIT(CAUSE_MISALIGNED_LOAD, U) | \
-+                         BIT(CAUSE_LOAD_ACCESS, U) | \
-+                         BIT(CAUSE_MISALIGNED_STORE, U) | \
-+                         BIT(CAUSE_STORE_ACCESS, U) | \
-+                         BIT(CAUSE_USER_ECALL, U) | \
-+                         BIT(CAUSE_FETCH_PAGE_FAULT, U) | \
-+                         BIT(CAUSE_LOAD_PAGE_FAULT, U) | \
-+                         BIT(CAUSE_STORE_PAGE_FAULT, U))
-+
-+#define HIDELEG_DEFAULT (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
-+
- static struct csr_masks __ro_after_init csr_masks;
+     vcpu_csr_init(v);
  
- void __init init_csr_masks(void)
-@@ -52,6 +68,51 @@ void __init init_csr_masks(void)
-     }
- }
- 
-+static void vcpu_csr_init(struct vcpu *v)
-+{
-+    v->arch.hedeleg = HEDELEG_DEFAULT & csr_masks.hedeleg;
-+
-+    vcpu_guest_cpu_user_regs(v)->hstatus = HSTATUS_SPV | HSTATUS_SPVP;
-+
-+    v->arch.hideleg = HIDELEG_DEFAULT & csr_masks.hideleg;
-+
-+    /*
-+     * VS should access only the time counter directly.
-+     * Everything else should trap.
-+     */
-+    v->arch.hcounteren = HCOUNTEREN_TM;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svpbmt) )
-+        v->arch.henvcfg = ENVCFG_PBMTE & csr_masks.henvcfg;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
-+    {
-+        /* Allow guest to access CSR_SENVCFG */
-+        register_t hstateen0 = SMSTATEEN0_HSENVCFG;
-+
-+        if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_ssaia) )
-+            /*
-+             * If the hypervisor extension is implemented, the same three
-+             * bits are defined also in hypervisor CSR hstateen0 but concern
-+             * only the state potentially accessible to a virtual machine
-+             * executing in privilege modes VS and VU:
-+             *      bit 60 CSRs siselect and sireg (really vsiselect and
-+             *             vsireg)
-+             *      bit 59 CSRs siph and sieh (RV32 only) and stopi (really
-+             *             vsiph, vsieh, and vstopi)
-+             *      bit 58 all state of IMSIC guest interrupt files, including
-+             *             CSR stopei (really vstopei)
-+             * If one of these bits is zero in hstateen0, and the same bit is
-+             * one in mstateen0, then an attempt to access the corresponding
-+             * state from VS or VU-mode raises a virtual instruction exception.
-+             */
-+            hstateen0 |= SMSTATEEN0_AIA | SMSTATEEN0_IMSIC | SMSTATEEN0_SVSLCT;
-+
-+        v->arch.hstateen0 = (hstateen0 & csr_masks.hstateen0) |
-+                            csr_masks.ro_one.hstateen0;
-+    }
-+}
-+
- static void continue_new_vcpu(struct vcpu *prev)
- {
-     BUG_ON("unimplemented\n");
-@@ -74,6 +135,8 @@ int arch_vcpu_create(struct vcpu *v)
-     if ( is_idle_vcpu(v) )
-         return 0;
- 
-+    vcpu_csr_init(v);
++    if ( (rc = vcpu_vtimer_init(v)) )
++        goto fail;
 +
      /*
-      * As the vtimer and interrupt controller (IC) are not yet implemented,
+-     * As the vtimer and interrupt controller (IC) are not yet implemented,
++     * As interrupt controller (IC) is not yet implemented,
       * return an error.
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index 58c9f1506b7c..5fbee8182caa 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -48,6 +48,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
- #define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
+      *
+-     * TODO: Drop this once the vtimer and IC are implemented.
++     * TODO: Drop this once IC is implemented.
+      */
+     rc = -EOPNOTSUPP;
+     goto fail;
+@@ -156,6 +160,8 @@ int arch_vcpu_create(struct vcpu *v)
  
- #define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
-+#define vcpu_guest_cpu_user_regs(vcpu) \
-+    (&(vcpu)->arch.cpu_info->guest_cpu_user_regs)
+ void arch_vcpu_destroy(struct vcpu *v)
+ {
++    vcpu_timer_destroy(v);
++
+     vfree((void *)&v->arch.cpu_info[1] - STACK_SIZE);
+ }
  
- #define switch_stack_and_jump(stack, fn) do {               \
-     asm volatile (                                          \
 diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 5aec627a7adb..17be792afe7d 100644
+index 5373a498d80b..c0de8612cc25 100644
 --- a/xen/arch/riscv/include/asm/domain.h
 +++ b/xen/arch/riscv/include/asm/domain.h
-@@ -49,6 +49,12 @@ struct arch_vcpu {
+@@ -8,6 +8,7 @@
+ #include <public/hvm/params.h>
+ 
+ #include <asm/p2m.h>
++#include <asm/vtimer.h>
+ 
+ struct vcpu_vmid {
+     uint64_t generation;
+@@ -49,6 +50,8 @@ struct arch_vcpu {
  
      struct cpu_info *cpu_info;
  
-+    register_t hcounteren;
-+    register_t hedeleg;
-+    register_t hideleg;
-+    register_t henvcfg;
-+    register_t hstateen0;
++    struct vtimer vtimer;
 +
-     register_t vsatp;
- };
- 
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index 1f7e612366f8..dd15731a86fa 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -228,6 +228,8 @@
- #define ENVCFG_CBIE_INV			_UL(0x3)
- #define ENVCFG_FIOM			_UL(0x1)
- 
-+#define HCOUNTEREN_TM BIT(1, U)
+     register_t hcounteren;
+     register_t hedeleg;
+     register_t hideleg;
+diff --git a/xen/arch/riscv/include/asm/vtimer.h b/xen/arch/riscv/include/asm/vtimer.h
+new file mode 100644
+index 000000000000..111863610a92
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/vtimer.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
- /* ===== User-level CSRs ===== */
- 
- /* User Trap Setup (N-extension) */
++#ifndef ASM__RISCV__VTIMER_H
++#define ASM__RISCV__VTIMER_H
++
++#include <xen/timer.h>
++
++struct vtimer {
++    struct timer timer;
++};
++
++int vcpu_vtimer_init(struct vcpu *v);
++void vcpu_timer_destroy(struct vcpu *v);
++
++void vtimer_set_timer(struct vtimer *t, uint64_t ticks);
++
++#endif /* ASM__RISCV__VTIMER_H */
+diff --git a/xen/arch/riscv/vtimer.c b/xen/arch/riscv/vtimer.c
+new file mode 100644
+index 000000000000..32d142bcdfcd
+--- /dev/null
++++ b/xen/arch/riscv/vtimer.c
+@@ -0,0 +1,71 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/sched.h>
++#include <xen/timer.h>
++
++#include <asm/vtimer.h>
++
++static void vtimer_expired(void *data)
++{
++    struct vtimer *t = data;
++    struct vcpu *v = container_of(t, struct vcpu, arch.vtimer);
++
++    vcpu_set_interrupt(v, IRQ_VS_TIMER);
++}
++
++int vcpu_vtimer_init(struct vcpu *v)
++{
++    struct vtimer *t = &v->arch.vtimer;
++
++    init_timer(&t->timer, vtimer_expired, t, v->processor);
++
++    return 0;
++}
++
++void vcpu_timer_destroy(struct vcpu *v)
++{
++    struct vtimer *t = &v->arch.vtimer;
++
++    if ( t->timer.status == TIMER_STATUS_invalid )
++        return;
++
++    kill_timer(&v->arch.vtimer.timer);
++}
++
++void vtimer_set_timer(struct vtimer *t, const uint64_t ticks)
++{
++    struct vcpu *v = container_of(t, struct vcpu, arch.vtimer);
++    s_time_t expires = ticks_to_ns(ticks - boot_clock_cycles);
++
++    vcpu_unset_interrupt(v, IRQ_VS_TIMER);
++
++    /*
++     * According to the RISC-V sbi spec:
++     *   If the supervisor wishes to clear the timer interrupt without
++     *   scheduling the next timer event, it can either request a timer
++     *   interrupt infinitely far into the future (i.e., (uint64_t)-1),
++     *   or it can instead mask the timer interrupt by clearing sie.STIE CSR
++     *   bit.
++     */
++    if ( ticks == ((uint64_t)~0) )
++    {
++        stop_timer(&t->timer);
++
++        return;
++    }
++
++    if ( expires < NOW() )
++    {
++        /*
++         * Simplify the logic if the timeout has already expired and just
++         * inject the event.
++         */
++        stop_timer(&t->timer);
++        vcpu_set_interrupt(v, IRQ_VS_TIMER);
++
++        return;
++    }
++
++    migrate_timer(&t->timer, smp_processor_id());
++    set_timer(&t->timer, expires);
++}
 -- 
 2.53.0
 
