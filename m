@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A578EFC593C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C861EFC593D
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Feb 2026 11:51:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1241457.1542534 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1241452.1542483 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu3-0007cg-PV; Thu, 26 Feb 2026 11:51:35 +0000
+	id 1vvZtx-0006RY-46; Thu, 26 Feb 2026 11:51:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1241457.1542534; Thu, 26 Feb 2026 11:51:35 +0000
+Received: by outflank-mailman (output) from mailman id 1241452.1542483; Thu, 26 Feb 2026 11:51:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vvZu3-0007cW-Kh; Thu, 26 Feb 2026 11:51:35 +0000
-Received: by outflank-mailman (input) for mailman id 1241457;
- Thu, 26 Feb 2026 11:51:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vvZtx-0006RR-1J; Thu, 26 Feb 2026 11:51:29 +0000
+Received: by outflank-mailman (input) for mailman id 1241452;
+ Thu, 26 Feb 2026 11:51:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1Tft=A6=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vvZu2-0006E8-93
- for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:34 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7ef86abe-1309-11f1-b164-2bf370ae4941;
- Thu, 26 Feb 2026 12:51:33 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-483770e0b25so7370705e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:33 -0800 (PST)
+ id 1vvZtw-0006EH-7n
+ for xen-devel@lists.xenproject.org; Thu, 26 Feb 2026 11:51:28 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7a857585-1309-11f1-9ccf-f158ae23cfc8;
+ Thu, 26 Feb 2026 12:51:25 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4834826e5a0so8710625e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Feb 2026 03:51:25 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.30
+ 5b1f17b1804b1-483bd68826asm220079295e9.0.2026.02.26.03.51.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 03:51:30 -0800 (PST)
+ Thu, 26 Feb 2026 03:51:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ef86abe-1309-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 7a857585-1309-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772106693; x=1772711493; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772106685; x=1772711485; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WQbN7SP3fjaaAEDIkqEkmnk4ywUJEbwgcsMMvUSaPN0=;
-        b=ceT4UyAZvKTKCGcH9s35BtWNIBBKYwaDKDnDLDlhDBOUtMeDt9SWjpJwoo7FyFP24o
-         TLM87+A6N8iFS1k4km0NeekHUDFh5v/VF/NokR9UjtPnHw9A838Pu4nynv7BHKK6yhF8
-         tA9nreJa0csrx9g5X8g9880N+v4PuLfWOuBUz9M/cQ5b9+sHSwj58SmRiBZak0mn+8IQ
-         vBUitBNpDCKKbOeCSu34bnqukE9Dj76AUCg60g6PePZxwMxqBv3Du3UGdnYATKJAKWsn
-         ok83wV4Hk9ncIxr/XE3yEmIin/VugFJ2Fkkx/rfRMrKV+dIjZx0VnGRuQy1mI9+mmOw5
-         /yXg==
+        bh=Hp5eAdCk/2OvwDZTtcjSxeKObwgzunQJOuXOKfijBE4=;
+        b=RyWH5bb4yR/tmFBThWdUwaJSlABlzhK/2kDuPqtrd6021Qx0ObfANh6QIHhkegpsdE
+         rGDiiZFAiHIhQsUGEA6DMXEoRjuVRD2aXX5QpcQR+Vxt9pqKSobP0fdxgsPJNPB/QLmU
+         2O8M9WWSbVVPS6UKeVLO3HNZa1RD8RO+qs2c4qacX7LQSY+quVYz1/4us7mNPrMOclc2
+         p2MW5xk9ix7xspqKj84Q8mRzuQYJbiLuI682u0zHRr6BokxvSIZbzotb3h3ux8hkjhtp
+         AqlH0/s7uH5eTI2v+7GbCbR8dhsEtpEhaO0klQ4zLaFuZD08g+NQ/jdzQUuRH2UIc0sW
+         ZwYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772106693; x=1772711493;
+        d=1e100.net; s=20230601; t=1772106685; x=1772711485;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=WQbN7SP3fjaaAEDIkqEkmnk4ywUJEbwgcsMMvUSaPN0=;
-        b=vpCQ+cGiEXaJvn6m7xlvsmK+EhdRjcuC/k7Rs40IJsP1iRyKSsxrf6vMSiUWZOmBp8
-         tzR886kk1wv5mXIpSpr5peC0w0RLPJjONcn3HpdA+hrrZ/fNZ71Dk0ZOBusOU9egD7iY
-         9lK1tNYUDgMmyR6BvGuXPV9v4o+lmEnGvqZheI5S8WsowoQIpWCy589nR9Huq6Awssp2
-         hnZd3Go2Gc6S4bxoGEFkD4U5uLMCzR5xB+b1zpsDfzJnxiQNumeSgbRvWFOgczjfJ9Ew
-         /k4YhUot/c1NwETSF59ScHrEOLa4LbbsCVXaKif2JjV4UWcWUVWmxLF9FZ6LFtLUXKPS
-         +uJw==
-X-Gm-Message-State: AOJu0Ywel0ggIB9upZaem4zAmfdTifIt2WwAZNBPmt74JMS3Bzf87S1G
-	wnze+mCwP9KocFDWKt34dAf0vxZDDpkafAuaFO+smQrOHoJNUyADHEqAs4HkqA==
-X-Gm-Gg: ATEYQzy/e1HZcPwbIaoGXAmC6YTvrPsqF/OIr/VQcblk62o6UnoCdK8z0UHCknEdXV7
-	rkJYta2fDvVPl10VAurxpJ275zkh6tF+GBaPP4Qao4M78W30zRU991rANVr0IfM6VKOncVnHtX6
-	DSe0Vu9U444T5Iajx1W3DGqj+HHry3KIAx1ndU6tlNv889eIiZrFqD0Tti9WXrqBlNn6U6uS1Wu
-	+7kD521+852Us9dL6uRXhPidgwsRAR/pp6VeD5qJGJH6c2Qjqb6/5USWvNstMdXBCg+AiyI9YMW
-	hhhzA6ejhElkdZHJFAekkLoOC16lq6aOZZ3jAplTmoSmacscTySfKlR70sG1suuL8/LEBNb3935
-	J9gdQvPkpG24JL55FkYSjPAy8hglf6sJ8fK3j+YY55Jco3JM7tvMC+Ik6OMv3bTTEa3dH2fDkZr
-	aHw12ye1j1t/ojcfxi1uXq7Osp4aXLsgYVeOTfPoVEYldjtEPmjh8x8cdLS8PyPcaTw4aHLYCGx
-	iri
-X-Received: by 2002:a05:600c:4751:b0:475:de12:d3b5 with SMTP id 5b1f17b1804b1-483a963df99mr310294475e9.34.1772106692483;
-        Thu, 26 Feb 2026 03:51:32 -0800 (PST)
+        bh=Hp5eAdCk/2OvwDZTtcjSxeKObwgzunQJOuXOKfijBE4=;
+        b=fGmkA5xGfcCcJXTFfhavJqGnRT7VJpRAGcR/ZzUFhpB/C/SLa3+qJtIwOqG/e3H4RR
+         nLXLROjx+Pf0OpRd9oDFf8qDVFQiNyXmU5LhKPCNctydy3Fi7ha2I47YMhiUMtuSWZAB
+         dmG+WL02vr+P7E93mszysQcW6f2iKC/IyM1cF3toP4QhLdM/4AC+e+niXlTwgHlp18Ss
+         diZGt4WcenmTVTpPMRZAWTwm8iFmMIQN/HGXEW+Xnt41co6sriLo5jgOfePhcROSA9JH
+         y5jizuhKeIEk5IuYhZ1lalK2eDoctgosCmdR1KTHFVrrig/Fud6ajAWCAgHpMAziT/jw
+         3AQA==
+X-Gm-Message-State: AOJu0YwLU7QWkDaJOxz2D8pc1Bwr6X0dmKXl6z/zCHARuQ+tngC89Xe4
+	NYrekiTf7D9OSXHAIWuMn+obILLrmE3xGSYmtnrlY30VxQa1XFFBR79bZckA2g==
+X-Gm-Gg: ATEYQzyCZ029jCQF+i+3ClRkiuDRMVXszRQsJCpuVx572YfCa1tEubMl/q+nLvUV3fb
+	nIC6+a65JviEhsyfaU5Z6VItY6XgISPwL3UiLcKOpgLoeRsaUbPBJBGBzCqzZSodBjcP5PswHQh
+	DzcuklLWSCvGJx81V3SSxtIBL62rJ3C9132SvJsARhtmCnq6cwtklt+WNGUdB112ZVzgqcDylRa
+	Os9cRmyLOa9dSizZQ6AUoy17820lOwmm6+FLhAKpxa2TpQbwTW8oDjgFuP6E/CvuPAX9anFuzkT
+	e1NGB39jeUGV56XeegXDBEZvEXtFy59cciaL0TLZp2x/q8eAyit0iyeuGfQTDmnIKQko/9Yj/MB
+	foNdBnBqL+GbsftjFPjZygJcNnc6wTz8fsKpVLsdUN0h9IIjUbSIcHKUxMZk//oEQe6fkXzi4kV
+	yjtVL8xDCP64PyqZXmC7rEhstUXwXWu8Mj+FcZoem6reQNxU6f5AmQV1l1W8jqYC5tizN2UJ/sP
+	J6n
+X-Received: by 2002:a05:600c:1e8f:b0:477:98f7:2aec with SMTP id 5b1f17b1804b1-483c3db3198mr31642645e9.3.1772106684538;
+        Thu, 26 Feb 2026 03:51:24 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -97,247 +97,155 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 06/14] xen/riscv: introduce basic vtimer infrastructure for guests
-Date: Thu, 26 Feb 2026 12:51:06 +0100
-Message-ID: <ec5903d84f00e1256af6e1662e79234bd79aa6ab.1772016457.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 01/14] xen/riscv: detect and store supported hypervisor CSR bits at boot
+Date: Thu, 26 Feb 2026 12:51:01 +0100
+Message-ID: <a17b6a117726904a9384dc7d9cc140672d3b0453.1772016457.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Lay the groundwork for guest timer support by introducing a per-vCPU
-virtual timer backed by Xen’s common timer infrastructure.
+Some hypervisor CSRs expose optional functionality and may not implement
+all architectural bits. Writing unsupported bits can either be ignored
+or raise an exception depending on the platform.
 
-The virtual timer is programmed in response to the guest SBI
-sbi_set_timer() call and injects a virtual supervisor timer interrupt
-into the vCPU when it expires.
+Detect the set of writable bits for selected hypervisor CSRs at boot and
+store the resulting masks for later use. This allows safely programming
+these CSRs during vCPU context switching and avoids relying on hardcoded
+architectural assumptions.
 
-While a dedicated struct vtimer is not strictly required at present,
-it is expected to become necessary once SSTC support is introduced.
-In particular, it will need to carry additional state such as whether
-SSTC is enabled, the next compare value (e.g. for the VSTIMECMP CSR)
-to be saved and restored across context switches, and time delta state
-(e.g. HTIMEDELTA) required for use cases such as migration. Introducing
-struct vtimer now avoids a later refactoring.
+Use csr_read()&csr_write() instead of csr_swap()+all ones mask as some
+CSR registers have WPRI fields which should be preserved during write
+operation.
+
+Also, ro_one struct is introduced to cover the cases when a bit in CSR
+register (at the momemnt, it is only hstateen0) may be r/o-one to have
+hypervisor view of register seen by guest correct.
+
+Masks are calculated at the moment only for hedeleg, henvcfg, hideleg,
+hstateen0 registers as only them are going to be used in the follow up
+patch.
+
+If the Smstateen extension is not implemented, hstateen0 cannot be read
+because the register is considered non-existent. Instructions that attempt
+to access a CSR that is not implemented or not visible in the current mode
+are reserved and will raise an illegal-instruction exception.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v6:
- - Nothing changed. Only rebase.
+Changes in V6:
+ - Introduce sub-struct ro_one inside csr_masks to cover the case that
+   hstateen0 could have read-only-one bits.
+ - Refacotr init_csr_masks() to handle hstateen0 case when a bit is r/o-one
+   and handle WPRI fields properly.
+ - Update the commit message.
 ---
-Changes in v5:
- - Drop copyright line from asm/vtimer.h.
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+Changes in V5:
+ - Move everything related to csr_masks to domain.c and make it static.
+ - Move declaration of old variable in init_csr_masks() inside INIT_CSR_MASK.
+ - Use csr_swap() in INIT_CSR_MASK().
 ---
-Changes in v4:
- - Add vcpu_timer_destroy() to void arch_vcpu_destroy().
+Changes in V4:
+ - Move csr_masks defintion to domain.c. Make it static as at the moment
+   it is going to be used only in domain.c.
+ - Rename and refactor X macros inside init_csr_masks().
 ---
-Changes in v3:
- - use one container_of() to get vcpu instead of two container_of()s.
+Changes in V3:
+ - New patch.
 ---
-Changes in v2:
- - Drop domain_vtimer_init() as it does nothing.
- - Drop "struct vcpu *v;" from struct vtimer as it could be taken
-   from arch_vcpu using container_of().
- - Drop vtimer_initialized, use t->status == TIMER_STATUS_invalid
-   instead to understand if timer was or wasn't initialized.
- - Drop inclusion of xen/domain.h as xen/sched.h already includes it.
- - s/ xen/time.h/ xen.timer.h in vtimer.c.
- - Drop ULL in if-conidtion in vtimer_set_timer() as with the cast
-   it isn't necessary to have suffix ULL.
- - Add migrate timer to vtimer_set_timer() to be sure that vtimer
-   will occur on pCPU it was ran, so the signalling to that vCPU
-   will (commonly) be cheaper.
- - Check if the timeout has already expired and just inject the event
-   in vtimer_vtimer_set_timer().
- - Drop const for ticks argument of vtimer_set_timer().
- - Merge two patches to one:
-   - xen/riscv: introduce vtimer
-   - xen/riscv: introduce vtimer_set_timer() and vtimer_expired()
----
- xen/arch/riscv/Makefile             |  1 +
- xen/arch/riscv/domain.c             | 10 +++-
- xen/arch/riscv/include/asm/domain.h |  3 ++
- xen/arch/riscv/include/asm/vtimer.h | 17 +++++++
- xen/arch/riscv/vtimer.c             | 71 +++++++++++++++++++++++++++++
- 5 files changed, 100 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/riscv/include/asm/vtimer.h
- create mode 100644 xen/arch/riscv/vtimer.c
+ xen/arch/riscv/domain.c            | 47 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/setup.h |  2 ++
+ xen/arch/riscv/setup.c             |  2 ++
+ 3 files changed, 51 insertions(+)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index bc47e83b26d7..ffbd7062e214 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -22,6 +22,7 @@ obj-y += traps.o
- obj-y += vmid.o
- obj-y += vm_event.o
- obj-y += vsbi/
-+obj-y += vtimer.o
- 
- $(TARGET): $(TARGET)-syms
- 	$(OBJCOPY) -O binary -S $< $@
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 6988d7032059..56b28750d3aa 100644
+index b60320b90def..902aaac74290 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -10,6 +10,7 @@
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
- #include <asm/riscv_encoding.h>
-+#include <asm/vtimer.h>
+@@ -2,9 +2,56 @@
  
- struct csr_masks {
-     register_t hedeleg;
-@@ -138,11 +139,14 @@ int arch_vcpu_create(struct vcpu *v)
+ #include <xen/init.h>
+ #include <xen/mm.h>
++#include <xen/sections.h>
+ #include <xen/sched.h>
+ #include <xen/vmap.h>
  
-     vcpu_csr_init(v);
- 
-+    if ( (rc = vcpu_vtimer_init(v)) )
-+        goto fail;
++#include <asm/cpufeature.h>
++#include <asm/csr.h>
 +
-     /*
--     * As the vtimer and interrupt controller (IC) are not yet implemented,
-+     * As interrupt controller (IC) is not yet implemented,
-      * return an error.
-      *
--     * TODO: Drop this once the vtimer and IC are implemented.
-+     * TODO: Drop this once IC is implemented.
-      */
-     rc = -EOPNOTSUPP;
-     goto fail;
-@@ -156,6 +160,8 @@ int arch_vcpu_create(struct vcpu *v)
- 
- void arch_vcpu_destroy(struct vcpu *v)
- {
-+    vcpu_timer_destroy(v);
++struct csr_masks {
++    register_t hedeleg;
++    register_t henvcfg;
++    register_t hideleg;
++    register_t hstateen0;
 +
-     vfree((void *)&v->arch.cpu_info[1] - STACK_SIZE);
- }
- 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 5373a498d80b..c0de8612cc25 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -8,6 +8,7 @@
- #include <public/hvm/params.h>
- 
- #include <asm/p2m.h>
-+#include <asm/vtimer.h>
- 
- struct vcpu_vmid {
-     uint64_t generation;
-@@ -49,6 +50,8 @@ struct arch_vcpu {
- 
-     struct cpu_info *cpu_info;
- 
-+    struct vtimer vtimer;
-+
-     register_t hcounteren;
-     register_t hedeleg;
-     register_t hideleg;
-diff --git a/xen/arch/riscv/include/asm/vtimer.h b/xen/arch/riscv/include/asm/vtimer.h
-new file mode 100644
-index 000000000000..111863610a92
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/vtimer.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef ASM__RISCV__VTIMER_H
-+#define ASM__RISCV__VTIMER_H
-+
-+#include <xen/timer.h>
-+
-+struct vtimer {
-+    struct timer timer;
++    struct {
++        register_t hstateen0;
++    } ro_one;
 +};
 +
-+int vcpu_vtimer_init(struct vcpu *v);
-+void vcpu_timer_destroy(struct vcpu *v);
++static struct csr_masks __ro_after_init csr_masks;
 +
-+void vtimer_set_timer(struct vtimer *t, uint64_t ticks);
-+
-+#endif /* ASM__RISCV__VTIMER_H */
-diff --git a/xen/arch/riscv/vtimer.c b/xen/arch/riscv/vtimer.c
-new file mode 100644
-index 000000000000..32d142bcdfcd
---- /dev/null
-+++ b/xen/arch/riscv/vtimer.c
-@@ -0,0 +1,71 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/sched.h>
-+#include <xen/timer.h>
-+
-+#include <asm/vtimer.h>
-+
-+static void vtimer_expired(void *data)
++void __init init_csr_masks(void)
 +{
-+    struct vtimer *t = data;
-+    struct vcpu *v = container_of(t, struct vcpu, arch.vtimer);
-+
-+    vcpu_set_interrupt(v, IRQ_VS_TIMER);
-+}
-+
-+int vcpu_vtimer_init(struct vcpu *v)
-+{
-+    struct vtimer *t = &v->arch.vtimer;
-+
-+    init_timer(&t->timer, vtimer_expired, t, v->processor);
-+
-+    return 0;
-+}
-+
-+void vcpu_timer_destroy(struct vcpu *v)
-+{
-+    struct vtimer *t = &v->arch.vtimer;
-+
-+    if ( t->timer.status == TIMER_STATUS_invalid )
-+        return;
-+
-+    kill_timer(&v->arch.vtimer.timer);
-+}
-+
-+void vtimer_set_timer(struct vtimer *t, const uint64_t ticks)
-+{
-+    struct vcpu *v = container_of(t, struct vcpu, arch.vtimer);
-+    s_time_t expires = ticks_to_ns(ticks - boot_clock_cycles);
-+
-+    vcpu_unset_interrupt(v, IRQ_VS_TIMER);
-+
 +    /*
-+     * According to the RISC-V sbi spec:
-+     *   If the supervisor wishes to clear the timer interrupt without
-+     *   scheduling the next timer event, it can either request a timer
-+     *   interrupt infinitely far into the future (i.e., (uint64_t)-1),
-+     *   or it can instead mask the timer interrupt by clearing sie.STIE CSR
-+     *   bit.
++     * The mask specifies the bits that may be safely modified without
++     * causing side effects.
++     *
++     * For example, registers such as henvcfg or hstateen0 contain WPRI
++     * fields that must be preserved. Any write to the full register must
++     * therefore retain the original values of those fields.
 +     */
-+    if ( ticks == ((uint64_t)~0) )
++#define INIT_CSR_MASK(csr, field, mask) do { \
++        old = csr_read(CSR_##csr); \
++        csr_write(CSR_##csr, (old & ~(mask)) | (mask)); \
++        csr_masks.field = csr_swap(CSR_##csr, old); \
++    } while (0)
++
++    register_t old;
++
++    INIT_CSR_MASK(HEDELEG, hedeleg, ULONG_MAX);
++    INIT_CSR_MASK(HIDELEG, hideleg, ULONG_MAX);
++
++    INIT_CSR_MASK(HENVCFG, henvcfg, _UL(0xE0000003000000FF));
++
++    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
 +    {
-+        stop_timer(&t->timer);
-+
-+        return;
++        INIT_CSR_MASK(HSTATEEN0, hstateen0, _UL(0xDE00000000000007));
++        csr_masks.ro_one.hstateen0 = old;
 +    }
-+
-+    if ( expires < NOW() )
-+    {
-+        /*
-+         * Simplify the logic if the timeout has already expired and just
-+         * inject the event.
-+         */
-+        stop_timer(&t->timer);
-+        vcpu_set_interrupt(v, IRQ_VS_TIMER);
-+
-+        return;
-+    }
-+
-+    migrate_timer(&t->timer, smp_processor_id());
-+    set_timer(&t->timer, expires);
 +}
++
+ static void continue_new_vcpu(struct vcpu *prev)
+ {
+     BUG_ON("unimplemented\n");
+diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+index c9d69cdf5166..2215894cfbb1 100644
+--- a/xen/arch/riscv/include/asm/setup.h
++++ b/xen/arch/riscv/include/asm/setup.h
+@@ -11,6 +11,8 @@ void setup_mm(void);
+ 
+ void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+ 
++void init_csr_masks(void);
++
+ #endif /* ASM__RISCV__SETUP_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 9b4835960d20..bca6ca09eddd 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -137,6 +137,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     riscv_fill_hwcap();
+ 
++    init_csr_masks();
++
+     preinit_xen_time();
+ 
+     intc_preinit();
 -- 
 2.53.0
 
