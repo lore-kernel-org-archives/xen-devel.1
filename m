@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E41BFEFB6F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BEBD104891F
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Feb 2026 23:17:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1243150.1543205 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1243147.1543201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw74q-0002Ys-4b; Fri, 27 Feb 2026 23:16:56 +0000
+	id 1vw74p-0002RR-Gl; Fri, 27 Feb 2026 23:16:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1243150.1543205; Fri, 27 Feb 2026 23:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 1243147.1543201; Fri, 27 Feb 2026 23:16:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw74p-0002WH-Px; Fri, 27 Feb 2026 23:16:55 +0000
-Received: by outflank-mailman (input) for mailman id 1243150;
- Fri, 27 Feb 2026 23:16:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vw74p-0002R4-7r; Fri, 27 Feb 2026 23:16:55 +0000
+Received: by outflank-mailman (input) for mailman id 1243147;
+ Fri, 27 Feb 2026 23:16:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gz2F=A7=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vw74o-0008WD-45
- for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 23:16:54 +0000
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [2a00:1450:4864:20::432])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 670b5881-1432-11f1-b164-2bf370ae4941;
- Sat, 28 Feb 2026 00:16:53 +0100 (CET)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-4398e850783so1818829f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 15:16:53 -0800 (PST)
+ id 1vw74n-0001Do-0Y
+ for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 23:16:53 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 61d57dc2-1432-11f1-9ccf-f158ae23cfc8;
+ Sat, 28 Feb 2026 00:16:44 +0100 (CET)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-4375d4fb4d4so1676483f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 15:16:44 -0800 (PST)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4399c70e8e8sm9680306f8f.10.2026.02.27.15.16.51
+ ffacd0b85a97d-4399c70e8e8sm9680306f8f.10.2026.02.27.15.16.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Feb 2026 15:16:51 -0800 (PST)
+ Fri, 27 Feb 2026 15:16:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,49 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 670b5881-1432-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 61d57dc2-1432-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1772234213; x=1772839013; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1772234204; x=1772839004; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=x/38gQJt4Duoysgo51k9uCF7ZRs4cy2MMdxCGTZF0sM=;
-        b=GwO9z+1DaK9BHfSRVqY8Diu6eVJb4bJSYHwF8F5cOUbWPqQs1wN1++kMotfSrKBAl8
-         +eWXfnAeSgAFW5GXsipzHoFWtOdungSB+Y85070W6Q0NonZJEJfI32bUjSSsPx7ij2UP
-         NOA1QMmhq1Za0WeUEBhFI96PJkcSD3LktowuQ=
+        bh=XgdpzNU2ggPbFTgmu4VQz6T9b6r+7R4jXsnlPDE3Rcg=;
+        b=NHLWGZQfYMaqUS/TGKOv5SxPxfjZXs9FFoH+q1SFnWgC+VSzNCtVY3yYo4DJkdeaEe
+         2snzK35OXTjfKKkGbtlWZmM9oD9MugXYCiYwCbBXTo/U5gCXtli5LHVnADr8UnvNP9n5
+         WfLp1NMIUDoNk/9ZcExzZo57GoZA3SaOsEIUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772234213; x=1772839013;
+        d=1e100.net; s=20230601; t=1772234204; x=1772839004;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=x/38gQJt4Duoysgo51k9uCF7ZRs4cy2MMdxCGTZF0sM=;
-        b=YxDvAZ7w5aKNTlES29maHt7pMKvVLeGnSMSQY6OifS2dj0TUEf298ncQdbgArykNrZ
-         lU5FF/GSUTB2s7lGaBW4rdsqvLp+VJg8/Np4pzvoN+udem5dN8m4UpBa0KhBY8znVhzn
-         HuiCxb4xKKcncKPEVMg89g4ewNrtnTyrm0wWhALnLeO3wMKHld0xUlG3sNNSXu2LAHAy
-         Wuce0oROHYCZRr+i9feqo+Sj236B8S3eMV3GPe28N0Z8pE+oYq/MZUdYueupk6gggr6s
-         hysC3Of69D7TmkEwGPxQS/qd2Bijw45LZc59r3XutGSnlA3bjadd+PEEBzNBHgPSCnYu
-         M/2w==
-X-Gm-Message-State: AOJu0YyN05C3f0WS2jlsOyM/JZXfKYPl1A4v+7r4NmrK/4SvXWNpsEjJ
-	NokQXvlrv9bCPoGLxflE11boSNWbsq9+Dn1OY0/HR44IkHXRXOdVrOW7c3OcfIyHGWVkB/k1tg8
-	qC4tM
-X-Gm-Gg: ATEYQzwxTcOMy3RAOZ141Knqh9zIAnYodc0jirAuUS9onALlU5hCYvYmbCFj7xVFZgl
-	m0ATV0aDiU8qLhXXOWWsqXqFirhWmottTk9dPJBklSZ1gIuOuqiGSlfQciBNI4rNESHW3hTFk6Z
-	YuCGx7b17o7i1d+97K9dey/Zm0wU/wAjh7jBaDj59wuaxMElxgVJyfborxDKM/5OUmeMEu8DgdL
-	7WmLU5cvTXA/vywBKFF/225gchmGtQDHCsStFRKAGxiYHngbQ6Vyke/GLU7B3L89AdibFij3lQ8
-	tatM4zxzlWuEDmKlgVSG73Xf6C6lvEfT8dGdeaQ9mt8flve3qmAgQO18fDX9q1g+8DOVGjFX8pB
-	nK46ZLK1C/Q9dljwDMyv5GIoBBreZKixb9jqOujmqO2Wdp7mS1qbJ+w4K9vtTPhoW3hvuHXuXBp
-	keoM0LyMZnZsfLa0Mi4HWun+sGpg7kmYsU8HYRgf3o9cfyQL8hxqtVbGO0MERlJ/gMaswR6xG4r
-	yUHn2Kmvw==
-X-Received: by 2002:a5d:5703:0:b0:439:9203:595a with SMTP id ffacd0b85a97d-4399de2fd89mr5736542f8f.43.1772234212143;
-        Fri, 27 Feb 2026 15:16:52 -0800 (PST)
+        bh=XgdpzNU2ggPbFTgmu4VQz6T9b6r+7R4jXsnlPDE3Rcg=;
+        b=Ru1sBgrIwWgS0SBT+bzWP0s/rlq3QpigeUxOUNx5Ss6rk8vEABOC/9H7vHqGAEqoeW
+         6vCR/nK+BbEPCak8PmGWqvFhnSOYOn8Pcx3Z2I0qI5kMQ312Vu5xsrb6BKFKQUUCYUGL
+         u6GGXWolKmvaLkTrFr76pqdSbyL+t10gMeSkfxFET53Om7ixD/OIgkkPpl955cG5ZXTd
+         KzkNiwAVYUOB6fkeNz/HHETDCQGdXH14ZNQ6ie8vHwoLIedw2NZ+UHreMYaD2qEX6DPr
+         lYZsxM6m9QOG1iDB+67GxRfp2JYLdQqIatp/SQhj5ugUSL6SFqec25iLaShyQMEIqmAI
+         Fyzw==
+X-Gm-Message-State: AOJu0Yyvw0A8CToqUVAGGeQSlQ9Ief5UBEUKW7LWZLtZi44eOXEDbEX7
+	br8yQMmqN8AwgsBaWKMT4UXI1+dv0zvuSGcNYhaYrbLRGXn5i4GzQ+SuJ2LdAc3w8gRBoE76hkE
+	KVnqB
+X-Gm-Gg: ATEYQzwFJhY2pvvPWauC8sr1+iqhPKbXOp9/LiLG7q6P2bzQdo8g2kjSwV8RWK7zaUG
+	ziuQM5w9FyVTNpKKzkr+Fgffzed3jJ3+MG7/SEiD7cZdxhH5x2wj6tFSgRrnPIzM3rU/AD0rjz3
+	0wgyZzGbfcz+p9xc/h02/4uJ//eqVACbRgDDiBKQmMPOYwRga/OTjyNLd65JPoscsmfcuXqR6mm
+	DnLp4cEMWuY8wH0i8RQuhlfxbrDe40ObarrMDtZl/TYbTcuIbfUe793/Ms4QURbx8UgEvu3O+ET
+	xIyN4Ijd8SqdSOEXBYvrpaVeVloWtj6hROhVpu+YaKNasz2Z5924BpmTTnNiZM1mi3F6E8grVdX
+	x2Fk2DHezKNjiv/VRklyBkpAGbHkIcXZYVi74cpEucftIMboO6V+c4LquWsMw1eiqizmzhMDlU0
+	vZhojuy1rfg2nBD5g60yIFHigapjSLPD022QLLHbi1q5WR4YenbKU6vifv8DkDTgAfshyZ4p0=
+X-Received: by 2002:a05:6000:420d:b0:439:8a4f:5250 with SMTP id ffacd0b85a97d-4399dde503fmr7936970f8f.17.1772234203211;
+        Fri, 27 Feb 2026 15:16:43 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 13/14] x86: Clamp reserved bits in eflags more aggressively
-Date: Fri, 27 Feb 2026 23:16:35 +0000
-Message-Id: <20260227231636.3955109-14-andrew.cooper3@citrix.com>
+Subject: [PATCH v4 02/14] docs/guest-guide: Describe the PV traps and entrypoints ABI
+Date: Fri, 27 Feb 2026 23:16:24 +0000
+Message-Id: <20260227231636.3955109-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260227231636.3955109-1-andrew.cooper3@citrix.com>
 References: <20260227231636.3955109-1-andrew.cooper3@citrix.com>
@@ -97,150 +96,177 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-ERETU, unlike IRET, requires the sticky-1 bit (bit 2) be set, and reserved
-bits to be clear.  Notably this means that dom0_construct() must set
-X86_EFLAGS_MBS in order for a PV dom0 to start.
-
-Xen has been overly lax with reserved bit handling.  Adjust
-arch_set_info_guest*() and hypercall_iret() which consume flags to clamp the
-reserved bits for all guest types.
-
-This is a minor ABI change, but by the same argument as commit
-9f892f84c279 ("x86/domctl: Stop using XLAT_cpu_user_regs()"); the reserved
-bits would get clamped like this naturally by hardware when the vCPU is run.
-
-This allows PV guests to start when Xen is using FRED mode.
+... seeing as I've had to thoroughly reverse engineer it for FRED and make
+tweaks in places.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Still slightly RFC.  Testing still in progress.
+Obviously there's a lot more in need of doing, but this is at least a start.
 
-v3:
- * Rewrite the commit message.
-v2:
+v4:
  * New
-
-The handling of VM is complicated.
-
-It turns out that it's simply ignored by IRET in Long Mode (i.e. clearing it
-commit 0e47f92b0725 ("x86: force EFLAGS.IF on when exiting to PV guests")
-wasn't actually necessary) but ERETU does care.
-
-But, it's unclear how to handle this in in arch_set_info().  We must preserve
-it for HVM guests (which can use vm86 mode).  PV32 has special handling but
-only in hypercall_iret(), not in arch_set_info().
 ---
- xen/arch/x86/domain.c                | 4 ++--
- xen/arch/x86/hvm/domain.c            | 4 ++--
- xen/arch/x86/include/asm/x86-defns.h | 7 +++++++
- xen/arch/x86/pv/dom0_build.c         | 2 +-
- xen/arch/x86/pv/iret.c               | 8 +++++---
- 5 files changed, 17 insertions(+), 8 deletions(-)
+ docs/glossary.rst                 |   3 +
+ docs/guest-guide/x86/index.rst    |   1 +
+ docs/guest-guide/x86/pv-traps.rst | 123 ++++++++++++++++++++++++++++++
+ 3 files changed, 127 insertions(+)
+ create mode 100644 docs/guest-guide/x86/pv-traps.rst
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 9c1f6ef76d52..1372a65d8123 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1244,7 +1244,7 @@ int arch_set_info_guest(
-         v->arch.user_regs.rax               = c.nat->user_regs.rax;
-         v->arch.user_regs.rip               = c.nat->user_regs.rip;
-         v->arch.user_regs.cs                = c.nat->user_regs.cs;
--        v->arch.user_regs.rflags            = c.nat->user_regs.rflags;
-+        v->arch.user_regs.rflags            = (c.nat->user_regs.rflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-         v->arch.user_regs.rsp               = c.nat->user_regs.rsp;
-         v->arch.user_regs.ss                = c.nat->user_regs.ss;
-         v->arch.pv.es                       = c.nat->user_regs.es;
-@@ -1268,7 +1268,7 @@ int arch_set_info_guest(
-         v->arch.user_regs.eax               = c.cmp->user_regs.eax;
-         v->arch.user_regs.eip               = c.cmp->user_regs.eip;
-         v->arch.user_regs.cs                = c.cmp->user_regs.cs;
--        v->arch.user_regs.eflags            = c.cmp->user_regs.eflags;
-+        v->arch.user_regs.eflags            = (c.cmp->user_regs.eflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-         v->arch.user_regs.esp               = c.cmp->user_regs.esp;
-         v->arch.user_regs.ss                = c.cmp->user_regs.ss;
-         v->arch.pv.es                       = c.cmp->user_regs.es;
-diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
-index 155d61db13f8..a0e811ea47a0 100644
---- a/xen/arch/x86/hvm/domain.c
-+++ b/xen/arch/x86/hvm/domain.c
-@@ -194,7 +194,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-         uregs->rsi    = regs->esi;
-         uregs->rdi    = regs->edi;
-         uregs->rip    = regs->eip;
--        uregs->rflags = regs->eflags;
-+        uregs->rflags = (regs->eflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
+diff --git a/docs/glossary.rst b/docs/glossary.rst
+index 6adeec77e14c..c8ab2386bc6e 100644
+--- a/docs/glossary.rst
++++ b/docs/glossary.rst
+@@ -43,6 +43,9 @@ Glossary
+      Sapphire Rapids (Server, 2023) CPUs.  AMD support only CET-SS, starting
+      with Zen3 (Both client and server, 2020) CPUs.
  
-         v->arch.hvm.guest_cr[0] = regs->cr0;
-         v->arch.hvm.guest_cr[3] = regs->cr3;
-@@ -245,7 +245,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-         uregs->rsi    = regs->rsi;
-         uregs->rdi    = regs->rdi;
-         uregs->rip    = regs->rip;
--        uregs->rflags = regs->rflags;
-+        uregs->rflags = (regs->rflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
- 
-         v->arch.hvm.guest_cr[0] = regs->cr0;
-         v->arch.hvm.guest_cr[3] = regs->cr3;
-diff --git a/xen/arch/x86/include/asm/x86-defns.h b/xen/arch/x86/include/asm/x86-defns.h
-index 0a0ba83de786..edeb0b4ff95a 100644
---- a/xen/arch/x86/include/asm/x86-defns.h
-+++ b/xen/arch/x86/include/asm/x86-defns.h
-@@ -27,6 +27,13 @@
-     (X86_EFLAGS_CF | X86_EFLAGS_PF | X86_EFLAGS_AF |   \
-      X86_EFLAGS_ZF | X86_EFLAGS_SF | X86_EFLAGS_OF)
- 
-+#define X86_EFLAGS_ALL                                          \
-+    (X86_EFLAGS_ARITH_MASK | X86_EFLAGS_TF | X86_EFLAGS_IF |    \
-+     X86_EFLAGS_DF | X86_EFLAGS_OF | X86_EFLAGS_IOPL |          \
-+     X86_EFLAGS_NT | X86_EFLAGS_RF | X86_EFLAGS_VM |            \
-+     X86_EFLAGS_AC | X86_EFLAGS_VIF | X86_EFLAGS_VIP |          \
-+     X86_EFLAGS_ID)
++   event channel
++     A paravirtual facility for guests to send and recieve interrupts.
 +
- /*
-  * Intel CPU flags in CR0
-  */
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 9a11a0a16b4e..075a3646c2a3 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -1024,7 +1024,7 @@ static int __init dom0_construct(const struct boot_domain *bd)
-     regs->rip = parms.virt_entry;
-     regs->rsp = vstack_end;
-     regs->rsi = vstartinfo_start;
--    regs->eflags = X86_EFLAGS_IF;
-+    regs->eflags = X86_EFLAGS_IF | X86_EFLAGS_MBS;
+    guest
+      The term 'guest' has two different meanings, depending on context, and
+      should not be confused with :term:`domain`.
+diff --git a/docs/guest-guide/x86/index.rst b/docs/guest-guide/x86/index.rst
+index 502968490d9d..5b38ae397a9f 100644
+--- a/docs/guest-guide/x86/index.rst
++++ b/docs/guest-guide/x86/index.rst
+@@ -7,3 +7,4 @@ x86
+    :maxdepth: 2
  
-     /*
-      * We don't call arch_set_info_guest(), so some initialisation needs doing
-diff --git a/xen/arch/x86/pv/iret.c b/xen/arch/x86/pv/iret.c
-index d3a1fb2c685b..39ce316b8d91 100644
---- a/xen/arch/x86/pv/iret.c
-+++ b/xen/arch/x86/pv/iret.c
-@@ -80,8 +80,9 @@ long do_iret(void)
- 
-     regs->rip    = iret_saved.rip;
-     regs->cs     = iret_saved.cs | 3; /* force guest privilege */
--    regs->rflags = ((iret_saved.rflags & ~(X86_EFLAGS_IOPL|X86_EFLAGS_VM))
--                    | X86_EFLAGS_IF);
-+    regs->rflags = ((iret_saved.rflags & X86_EFLAGS_ALL &
-+                     ~(X86_EFLAGS_IOPL | X86_EFLAGS_VM)) |
-+                    X86_EFLAGS_IF | X86_EFLAGS_MBS);
-     regs->rsp    = iret_saved.rsp;
-     regs->ss     = iret_saved.ss | 3; /* force guest privilege */
- 
-@@ -143,7 +144,8 @@ int compat_iret(void)
-     if ( VM_ASSIST(v->domain, architectural_iopl) )
-         v->arch.pv.iopl = eflags & X86_EFLAGS_IOPL;
- 
--    regs->eflags = (eflags & ~X86_EFLAGS_IOPL) | X86_EFLAGS_IF;
-+    regs->eflags = ((eflags & X86_EFLAGS_ALL & ~X86_EFLAGS_IOPL) |
-+                    X86_EFLAGS_IF | X86_EFLAGS_MBS);
- 
-     if ( unlikely(eflags & X86_EFLAGS_VM) )
-     {
+    hypercall-abi
++   pv-traps
+diff --git a/docs/guest-guide/x86/pv-traps.rst b/docs/guest-guide/x86/pv-traps.rst
+new file mode 100644
+index 000000000000..2ff18e2f9454
+--- /dev/null
++++ b/docs/guest-guide/x86/pv-traps.rst
+@@ -0,0 +1,123 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++PV Traps and Entrypoints
++========================
++
++.. note::
++
++   The details here are specific to 64bit builds of Xen.  Details for 32bit
++   builds of Xen, are different and not discussed further.
++
++PV guests are subject to Xen's linkage setup for events (interrupts,
++exceptions and system calls).  x86's IDT architecture and limitations are the
++majority influence on the PV ABI.
++
++All external interrupts are routed to PV guests via the :term:`Event Channel`
++interface, and not discussed further here.
++
++What remain are exceptions, and the instructions which cause a control
++transfers.  In the x86 architecture, the instructions relevant for PV guests
++are:
++
++ * ``INT3``, which generates ``#BP``.
++
++ * ``INTO``, which generates ``#OF`` only if the overflow flag is set.  It is
++   only usable in compatibility mode, and will ``#UD`` in 64bit mode.
++
++ * ``CALL (far)`` referencing a gate in the GDT.
++
++ * ``INT $N``, which invokes an arbitrary IDT gate.  These four instructions
++   so far all check the gate DPL and will ``#GP`` otherwise.
++
++ * ``INT1``, also known as ``ICEBP``, which generates ``#DB``.  This
++   instruction does *not* check DPL, and can be used unconditionally by
++   userspace.
++
++ * ``SYSCALL``, which enters CPL0 as configured by the ``{C,L,}STAR`` MSRs.
++   It is usable if enabled by ``MSR_EFER.SCE``, and will ``#UD`` otherwise.
++   On Intel parts, ``SYSCALL`` is unusable outside of 64bit mode.
++
++ * ``SYSENTER``, which enters CPL0 as configured by the ``SEP`` MSRs.  It is
++   usable if enabled by ``MSR_SYSENTER_CS`` having a non-NUL selector, and
++   will ``#GP`` otherwise.  On AMD parts, ``SYSENTER`` is unusable in Long
++   mode.
++
++
++Xen's configuration
++-------------------
++
++Xen maintains a complete IDT, with most gates configured with DPL0.  This
++causes most ``INT $N`` instructions to ``#GP``.  This allows Xen to emulate
++the instruction, referring to the guest kernels vDPL choice.
++
++ * Vectors 3 ``#BP`` and 4 ``#OF`` are DPL3, in order to allow the ``INT3``
++   and ``INTO`` instructions to function in userspace.
++
++ * Vector 0x80 is DPL3 in order to implement the legacy system call fastpath
++   commonly found in UNIXes.
++
++ * Vector 0x82 is DPL1 when PV32 is enabled, allowing the guest kernel to make
++   hypercalls to Xen.  All other cases (PV32 guest userspace, and both PV64
++   modes) operate in CPL3 and this vector behaves like all others to ``INT
++   $N`` instructions.
++
++A range of the GDT is guest-owned, allowing for call gates.  During audit, Xen
++forces all call gates to DPL0, causing their use to ``#GP`` allowing for
++emulation.
++
++Xen enables ``SYSCALL`` in all cases as it is mandatory in 64bit mode, and
++enables ``SYSENTER`` when available in 64bit mode.
++
++When Xen is using FRED delivery the hardware configuration is substantially
++different, but the behaviour for guests remains as unchanged as possible.
++
++
++PV Guest's configuration
++------------------------
++
++The PV ABI contains the "trap table", modelled very closely on the IDT.  It is
++manipulated by ``HYPERCALL_set_trap_table``, has 256 entries, each containing
++a code segment selector, an address, and flags.  A guest is expected to
++configure handlers for all exceptions; failure to do so is terminal similar to
++a Triple Fault.
++
++Part of the GDT is guest owned with descriptors audited by Xen.  This range
++can be manipulated with ``HYPERVISOR_set_gdt`` and
++``HYPERVISOR_update_descriptor``.
++
++Other entrypoints are configured via ``HYPERVISOR_callback_op``.  Of note here
++are the callback types ``syscall``, ``syscall32`` (relevant for AMD parts) and
++``sysenter`` (relevant for Intel parts).
++
++.. warning::
++
++   Prior to Xen 4.15, there was no check that the ``syscall`` or ``syscall32``
++   callbacks had been registered before attempting to deliver via them.
++   Guests are strongly advised to ensure the entrypoints are registered before
++   running userspace.
++
++
++Notes
++-----
++
++``INT3`` vs ``INT $3`` and ``INTO`` vs ``INT $4`` are hard to distinguish
++architecturally as both forms have a DPL check and use the same IDT vectors.
++Because Xen configures both as DPL3, the ``INT $`` forms do not fault for
++emulation, and are treated as if they were exceptions.  This means the guest
++can't block these instruction by trying to configure them with vDPL0.
++
++The instructions which trap into Xen (``INT $0x80``, ``SYSCALL``,
++``SYSENTER``) but can be disabled by guest configuration need turning back
++into faults for the guest kernel to process.
++
++ * When using IDT delivery, instruction lengths are not provided by hardware
++   and Xen does not account for possible prefixes.  ``%rip`` only gets rewound
++   by the length of the unprefixed instruction.  This is observable, but not
++   expected to be an issue in practice.
++
++ * When Xen is using FRED delivery, the full instruction length is provided by
++   hardware, and ``%rip`` is rewound fully.
++
++While both PV32 and PV64 guests are permitted to write Call Gates into the
++GDT, emulation is only wired up for PV32.  At the time of writing, the x86
++maintainers feel no specific need to fix this omission.
 -- 
 2.39.5
 
