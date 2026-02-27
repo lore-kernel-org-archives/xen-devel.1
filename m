@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24074104891D
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Feb 2026 23:17:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1243149.1543213 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6EEDFEFB6F
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Feb 2026 23:17:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1243152.1543228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw74r-0002eB-0y; Fri, 27 Feb 2026 23:16:57 +0000
+	id 1vw74t-00035m-1p; Fri, 27 Feb 2026 23:16:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1243149.1543213; Fri, 27 Feb 2026 23:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 1243152.1543228; Fri, 27 Feb 2026 23:16:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw74q-0002cA-9b; Fri, 27 Feb 2026 23:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 1243149;
- Fri, 27 Feb 2026 23:16:54 +0000
+	id 1vw74s-00032V-Bp; Fri, 27 Feb 2026 23:16:58 +0000
+Received: by outflank-mailman (input) for mailman id 1243152;
+ Fri, 27 Feb 2026 23:16:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gz2F=A7=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1vw74o-0001Do-0q
- for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 23:16:54 +0000
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [2a00:1450:4864:20::342])
+ id 1vw74q-0001Do-1B
+ for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 23:16:56 +0000
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [2a00:1450:4864:20::442])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6538baf4-1432-11f1-9ccf-f158ae23cfc8;
- Sat, 28 Feb 2026 00:16:50 +0100 (CET)
-Received: by mail-wm1-x342.google.com with SMTP id
- 5b1f17b1804b1-4806bf39419so26514525e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 15:16:50 -0800 (PST)
+ id 66064ac5-1432-11f1-9ccf-f158ae23cfc8;
+ Sat, 28 Feb 2026 00:16:51 +0100 (CET)
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-4398f9e3b40so2692986f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 15:16:51 -0800 (PST)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4399c70e8e8sm9680306f8f.10.2026.02.27.15.16.48
+ ffacd0b85a97d-4399c70e8e8sm9680306f8f.10.2026.02.27.15.16.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Feb 2026 15:16:49 -0800 (PST)
+ Fri, 27 Feb 2026 15:16:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,50 +47,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6538baf4-1432-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 66064ac5-1432-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1772234210; x=1772839010; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1772234211; x=1772839011; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cuNoDLVINXiEv4BH5R0XrplZaA/DMViGBRkmV2Hoar0=;
-        b=nhaxy+kRcF+C2+tZvjT2wr31Q5Iuvdv8PS4XJUT5OGRin0oFuxhadey1qXJzpv+C4C
-         xMfxBD+v8B92zhDBYgigeXRcsJ3dAT4jRmwHAIvDkFoi7yCn1p0vu05hFka6kIqxCR7j
-         ETs+hecEm/6ooGJhAz2UWbME53LWxTuDlphsc=
+        bh=+mPsNS3LpQ9n9lXMqkSeJXydtadjNiDxPpSog7A2Jaw=;
+        b=PdjhBNUzXeKG5TFAcbNR1UbXPQwTxr46q7dh0n8XrILY8ncoEHcMbnPBtV741sLYe9
+         ZKmSRnSaJJ8aiFeIbSu3KUZ1iYE77MuDnUe0dGd39rgPt/A1rvMR2ZKCGHyxoANjDs6s
+         caPxN4Mjd3Dl/fYLkltU2he5mEWdeiuDqONVk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772234210; x=1772839010;
+        d=1e100.net; s=20230601; t=1772234211; x=1772839011;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=cuNoDLVINXiEv4BH5R0XrplZaA/DMViGBRkmV2Hoar0=;
-        b=uVI3IgOaPa9Hc1ismpVdG8u4U7qgnM2dU58onOWt8x9stuXSMcvYlNDg7cspntGKp0
-         tzQCZ2kFLFWt1gZtpJwXcDsGeQhYld3JF0N7nlshdBEdzRHUrSQ1eViC0ff5OKtPHEJX
-         sKPucq6/t78ssO8kjkjJR0I6cUp7E0jV+9/T/AplMjZoInOmzCUJzRIbnLtXC+4cFPrm
-         A4Czc/w0Oheq4sH6S9Bwr+1U2bRR1y/dxtWPEcgwZSFdt8kwka1XTx1gDo5XuTuQdTq/
-         WxoOd0Ew4CUzftG8TzPLYM0WzUmdk7NDTpNmwZhlgVNFs1NVRkDXXD/1gLeNPtXuLYXE
-         OeWw==
-X-Gm-Message-State: AOJu0YzXZt5MQmqfn7l79LRwW+KxKRba9qyiYC+bTs8mcPSU24LlY10I
-	yx/B0+Xv3UvbjutnH+Mp8jXzU031IZmPO5X+O/EhJvC+Hr/BpEodmZhmjViquyQYYdTLo4UPqL/
-	E1qCtdT2RYKhF
-X-Gm-Gg: ATEYQzxegyOx4HMVIQ1D540v8VOsOuSd6OEfXsIj11bBGFVGNVZHjf/5Z2bw/Db5eYA
-	aEeDl8SR+o1uVD9mCbFRkwNjAKi4fhSqiN5M6n4ZF/tOPA+ZbHa3QOkJu2EeDfWF9tFajn/pRvQ
-	M04NwNmK+rE2JlHzqeM+ox3lQRUJQRG24MnubQscaM2fPHmVsXTkL9KQbm2FV8pmpE4joBFZOul
-	lry9ZcJtxhJwk6KWyu30aviksM/UKMRrTz0LmiQRu2bYc5vdFN5pHA5s7O009ncspt0XVMqlegr
-	JbwDQcVgGUeAccWI/blq7v7Hk42RZmf4DV9ksFKrkyB0c8nM9O7Iq9osaovfXLv4/cJENT17rjO
-	g+2UyyL5O5kaU4JVfxhhulD7wLunHYRK/5QQOoML0fkcwsRR5kL3ktQNCfrkkdMexlPtbSAVWyS
-	huxl7Wq1HSmqilgOxNeIx7fwDsfZQzssRrP+7Yf/w4lhq+SrEWdIyaNPvdKqf8z1pISG/hmx97O
-	qqlkuMnkA==
-X-Received: by 2002:a05:600c:c16e:b0:475:ddad:c3a9 with SMTP id 5b1f17b1804b1-483c99348c5mr75009455e9.13.1772234209589;
-        Fri, 27 Feb 2026 15:16:49 -0800 (PST)
+        bh=+mPsNS3LpQ9n9lXMqkSeJXydtadjNiDxPpSog7A2Jaw=;
+        b=C4PDdfQAWDkpMVNe7Azk0b+WMjaiCRJhmgW1TL1dpb4EA70EFCJYxu46PRi+ZO7MZg
+         3jBtA6xVOnHb5XbTfpaTZzH/IQWtloOFjEExRyqM7Tk7PANC3M0pSJHIz5oKCnfRfU/G
+         Um4PsD1mgKZbN1ZPaXyR1PlEyX4Q0wY0Q8u69/3gAQtZA/j5AP0IJf5xu4JZ8l1+Gh9A
+         44B7Df7ocwiClV+xl3fpnUUL/VHBhPp1pWVO5dKgPAPVtQg8bRIEcxoBl0lPIAcvCbrY
+         6CFhH6tM9NQKe+CvB+DJPBR8StLq6pvHsnFMHou1hYMkpsYA4XRUL+F0FMPvybCfeTuS
+         6saw==
+X-Gm-Message-State: AOJu0YzewyUad9XglwYsYOC3n2s/dj2OVEzcrmaEXqJweM+gONO1hoxS
+	47QC3Nyoy7AQxM+X8uId3fBSEntTgkkweBdsDGbjP9jQhJTkcb0xn8MXMyDAyBHvjUnLaqknQzO
+	6bTx8uh2OK5jf
+X-Gm-Gg: ATEYQzyI0CRFEDiPMAKVs96VXZqbxgex+bPLPjlCTUgSplaBcBRisSA+Bp7sVVZSnos
+	8S4aFXcSvcXyL6Y3TjrRoq28VhfKSTgVGFN0oL+TbkhX7s0ZdODBgp1GcvLBdnRhnrLAGWjUBQN
+	QOMtV4Qr94w9l+JfefHxKylj/qqZF2vfyIrcZ6S++5TAK49QbnMOOqk0HKywPZ0G+FLM+ohjzRq
+	lLYBOCkUTkYY2KuYjeUnZU2rOeNTbtxFe5jalw0XnolH9UWmf3DzhNfUR5zWrWJU0hdIaIcsxi1
+	gCZG9RY5naUcppdtsoccdW3+6+nF4MPsUT0tPWxzkXAXBc6DfMpbga8yeqQoXGXwwSYIlDgjx/0
+	DUgHpebFKKLjjDWWaNMNITBT67Ix9XIhVNQYY+VxS4dW+yAPO8Do8RUOOytRmNx4hb6uzu4Uprc
+	7vudvUAUjvSyKstyc3CvM+TIARdKPqygRmKJxZQnhC4fR/OjeHgeQ9Yvs0qeYjp26afQ0xJvQ=
+X-Received: by 2002:a05:6000:144c:b0:430:f3ab:56af with SMTP id ffacd0b85a97d-4399de4a662mr8040445f8f.48.1772234210832;
+        Fri, 27 Feb 2026 15:16:50 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 09/14] x86/pv: Adjust GS handling for FRED mode
-Date: Fri, 27 Feb 2026 23:16:31 +0000
-Message-Id: <20260227231636.3955109-10-andrew.cooper3@citrix.com>
+Subject: [PATCH v4 11/14] x86/pv: ERETU error handling
+Date: Fri, 27 Feb 2026 23:16:33 +0000
+Message-Id: <20260227231636.3955109-12-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260227231636.3955109-1-andrew.cooper3@citrix.com>
 References: <20260227231636.3955109-1-andrew.cooper3@citrix.com>
@@ -98,31 +97,18 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When FRED is active, hardware automatically swaps GS when changing privilege,
-and the SWAPGS instruction is disallowed.
+ERETU can fault for guest reasons, and like IRET needs special handling to
+forward the error into the guest.
 
-For native OSes using GS as the thread local pointer this is a massive
-improvement on the pre-FRED architecture, but under Xen it makes handling PV
-guests more complicated.  Specifically, it means that GS_BASE and GS_SHADOW
-are the opposite way around in FRED mode, as opposed to IDT mode.
+As this is largely written in C, take the opportunity to better classify the
+sources of error, and in particilar, not forward errors that are actually
+Xen's fault into the guest, opting for a domain crash instead.
 
-This leads to the following changes:
+Because ERETU does not enable NMIs if it faults, a corner case exists if an
+NMI was taken while in guest context, and the ERETU back out faults.  Recovery
+must involve an ERETS with the interrupted context's NMI flag.
 
-  * In load_segments(), we have to load both GSes.  Account for this in the
-    SWAP() condition and avoid the path with SWAGS.
-
-  * In save_segments(), we need to read GS_SHADOW rather than GS_BASE.
-
-  * In toggle_guest_mode(), we need to emulate SWAPGS.
-
-  * In {read,write}_msr() which access the live registers, GS_SHADOW and
-    GS_BASE need swapping.
-
-  * In do_set_segment_base(), merge the SEGBASE_GS_{USER,KERNEL} cases and
-    take FRED into account when choosing which base to update.
-
-    SEGBASE_GS_USER_SEL was already an LKGS invocation (decades before FRED)
-    so under FRED needs to be just a MOV %gs.  Simply skip the SWAPGSes.
+See the comments for full details.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
@@ -131,213 +117,174 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
 v4:
- * Adjust GS accesses for emulated {RD,WR}MSR too.
----
- xen/arch/x86/domain.c             | 16 +++++++++++-----
- xen/arch/x86/pv/domain.c          | 22 ++++++++++++++++++++--
- xen/arch/x86/pv/emul-priv-op.c    | 24 +++++++++++++++---------
- xen/arch/x86/pv/misc-hypercalls.c | 16 ++++++++++------
- 4 files changed, 56 insertions(+), 22 deletions(-)
+ * Tweak comments.
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index e658c2d647b7..9c1f6ef76d52 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1791,9 +1791,10 @@ static void load_segments(struct vcpu *n)
+v2:
+ * New
+---
+ xen/arch/x86/traps.c             | 115 +++++++++++++++++++++++++++++++
+ xen/arch/x86/x86_64/entry-fred.S |  13 ++++
+ 2 files changed, 128 insertions(+)
+
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 7563576fb477..2f40f628cbff 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -2348,6 +2348,113 @@ void asmlinkage entry_from_pv(struct cpu_user_regs *regs)
+     fatal_trap(regs, false);
+ }
  
-         /*
-          * Figure out which way around gsb/gss want to be.  gsb needs to be
--         * the active context, and gss needs to be the inactive context.
-+         * the active context, and gss needs to be the inactive context,
-+         * unless we're in FRED mode where they're reversed.
-          */
--        if ( !(n->arch.flags & TF_kernel_mode) )
-+        if ( !(n->arch.flags & TF_kernel_mode) ^ opt_fred )
-             SWAP(gsb, gss);
- 
-         if ( using_svm() && (n->arch.pv.fs | n->arch.pv.gs) <= 3 )
-@@ -1814,7 +1815,9 @@ static void load_segments(struct vcpu *n)
- 
-     if ( !fs_gs_done && !compat )
-     {
--        if ( read_cr4() & X86_CR4_FSGSBASE )
-+        unsigned long cr4 = read_cr4();
++void nocall eretu_error_dom_crash(void);
 +
-+        if ( !(cr4 & X86_CR4_FRED) && (cr4 & X86_CR4_FSGSBASE) )
-         {
-             __wrgsbase(gss);
-             __wrfsbase(n->arch.pv.fs_base);
-@@ -1931,6 +1934,9 @@ static void load_segments(struct vcpu *n)
-  * Guests however cannot use SWAPGS, so there is no mechanism to modify the
-  * inactive GS base behind Xen's back.  Therefore, Xen's copy of the inactive
-  * GS base is still accurate, and doesn't need reading back from hardware.
-+ *
-+ * Under FRED, hardware automatically swaps GS for us, so SHADOW_GS is the
-+ * active GS from the guest's point of view.
-  */
- static void save_segments(struct vcpu *v)
- {
-@@ -1946,12 +1952,12 @@ static void save_segments(struct vcpu *v)
-         if ( read_cr4() & X86_CR4_FSGSBASE )
-         {
-             fs_base = __rdfsbase();
--            gs_base = __rdgsbase();
-+            gs_base = opt_fred ? rdmsr(MSR_SHADOW_GS_BASE) : __rdgsbase();
-         }
-         else
-         {
-             fs_base = rdmsr(MSR_FS_BASE);
--            gs_base = rdmsr(MSR_GS_BASE);
-+            gs_base = opt_fred ? rdmsr(MSR_SHADOW_GS_BASE) : rdmsr(MSR_GS_BASE);
-         }
- 
-         v->arch.pv.fs_base = fs_base;
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index d16583a7454d..b85abb5ed903 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -14,9 +14,10 @@
- #include <asm/cpufeature.h>
- #include <asm/fsgsbase.h>
- #include <asm/invpcid.h>
--#include <asm/spec_ctrl.h>
- #include <asm/pv/domain.h>
- #include <asm/shadow.h>
-+#include <asm/spec_ctrl.h>
-+#include <asm/traps.h>
- 
- #ifdef CONFIG_PV32
- int8_t __read_mostly opt_pv32 = -1;
-@@ -514,11 +515,28 @@ void toggle_guest_mode(struct vcpu *v)
-      * subsequent context switch won't bother re-reading it.
-      */
-     gs_base = read_gs_base();
++/*
++ * Classify an event at the ERETU instruction, and handle if possible.
++ * Returns @true if handled, @false if the event should continue down the
++ * normal handlers.
++ */
++static bool handle_eretu_event(struct cpu_user_regs *regs)
++{
++    unsigned long recover;
 +
 +    /*
-+     * In FRED mode, not only are the two GSes the other way around (i.e. we
-+     * want to read GS_SHADOW here), the SWAPGS instruction is disallowed so
-+     * we have to emulate it.
++     * WARNING: The GPRs in gregs overlaps with regs.  Only gregs->error_code
++     *          and later are legitimate to access.
 +     */
-+    if ( opt_fred )
++    struct cpu_user_regs *gregs =
++        _p(regs->rsp - offsetof(struct cpu_user_regs, error_code));
++
++    /*
++     * The asynchronous or fatal events (INTR, NMI, #MC, #DF) have been dealt
++     * with, meaning we only have synchronous ones to consider.  Anything
++     * which isn't a hardware exception (e.g. #BP) wants handling normally.
++     */
++    if ( regs->fred_ss.type != X86_ET_HW_EXC )
++        return false;
++
++    /*
++     * Guests are permitted to write non-present GDT/LDT entries.  Therefore
++     * #NP[sel] (%cs) and #SS[sel] (%ss) must be handled as guest errors.  The
++     * only other source of #SS is for a bad %ss-relative memory access in
++     * Xen, and if the stack is that bad, we'll have escalated to #DF.
++     *
++     * #PF can happen from ERETU accessing the GDT/LDT.  Xen may translate
++     * these into #GP for the guest, so must be handled as guest errors.  In
++     * theory we can get #PF for a bad instruction fetch or bad stack access,
++     * but either of these will be fatal and not end up here.
++     */
++    switch ( regs->fred_ss.vector )
 +    {
-+        unsigned long gs_shadow = rdmsr(MSR_SHADOW_GS_BASE);
++    case X86_EXC_GP:
++        /*
++         * #GP[0] can occur because of a NULL %cs or %ss (which are a guest
++         * error), but some #GP[0]'s are errors in Xen (ERETU at SL != 0), or
++         * errors of Xen's handling of guest state (bad metadata).
++         *
++         * These magic numbers came from the FRED Spec; they check that ERETU
++         * is trying to return to Ring 3, and that reserved or inapplicable
++         * bits are 0.
++         */
++        if ( regs->error_code == 0 && (gregs->cs & ~3) && (gregs->ss & ~3) &&
++             (regs->fred_cs.sl != 0 ||
++              (gregs->csx    & 0xffffffffffff0003UL) != 3 ||
++              (gregs->rflags & 0xffffffffffc2b02aUL) != 2 ||
++              (gregs->ssx    &         0xfff80003UL) != 3) )
++        {
++            recover = (unsigned long)eretu_error_dom_crash;
 +
-+        wrmsrns(MSR_SHADOW_GS_BASE, gs_base);
-+        write_gs_base(gs_shadow);
++            if ( regs->fred_cs.sl )
++                gprintk(XENLOG_ERR, "ERETU at SL %u\n", regs->fred_cs.sl);
++            else
++                gprintk(XENLOG_ERR, "Bad return state: csx %#lx, rflags %#lx, ssx %#x\n",
++                        gregs->csx, gregs->rflags, (unsigned int)gregs->ssx);
++            break;
++        }
++        fallthrough;
++    case X86_EXC_NP:
++    case X86_EXC_SS:
++    case X86_EXC_PF:
++        recover = (unsigned long)entry_FRED_R3;
++        break;
 +
-+        gs_base = gs_shadow;
++        /*
++         * Handle everything else normally.  e.g. #DB would be debugging
++         * activities in Xen.  In theory we can get #UD if CR4.FRED gets
++         * cleared, but in practice if that were the case we wouldn't be here
++         * handling the result.
++         */
++    default:
++        return false;
 +    }
-+    else
-+        asm volatile ( "swapgs" );
 +
-     if ( v->arch.flags & TF_kernel_mode )
-         v->arch.pv.gs_base_kernel = gs_base;
-     else
-         v->arch.pv.gs_base_user = gs_base;
--    asm volatile ( "swapgs" );
- 
-     _toggle_guest_pt(v);
- 
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 87d3bbcf901f..81153084129a 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -25,6 +25,7 @@
- #include <asm/pv/traps.h>
- #include <asm/shared.h>
- #include <asm/stubs.h>
-+#include <asm/traps.h>
- 
- #include <xsm/xsm.h>
- 
-@@ -926,7 +927,7 @@ static int cf_check read_msr(
-     case MSR_GS_BASE:
-         if ( !cp->extd.lm )
-             break;
--        *val = read_gs_base();
-+        *val = opt_fred ? rdmsr(MSR_SHADOW_GS_BASE) : read_gs_base();
-         return X86EMUL_OKAY;
- 
-     case MSR_SHADOW_GS_BASE:
-@@ -1066,17 +1067,22 @@ static int cf_check write_msr(
-         if ( !cp->extd.lm || !is_canonical_address(val) )
-             break;
- 
--        if ( reg == MSR_FS_BASE )
--            write_fs_base(val);
--        else if ( reg == MSR_GS_BASE )
--            write_gs_base(val);
--        else if ( reg == MSR_SHADOW_GS_BASE )
-+        switch ( reg )
-         {
--            write_gs_shadow(val);
-+        case MSR_FS_BASE:
-+            write_fs_base(val);
-+            break;
++    this_cpu(last_extable_addr) = regs->rip;
 +
-+        case MSR_SHADOW_GS_BASE:
-             curr->arch.pv.gs_base_user = val;
-+            fallthrough;
-+        case MSR_GS_BASE:
-+            if ( (reg == MSR_GS_BASE) ^ opt_fred )
-+                write_gs_base(val);
-+            else
-+                write_gs_shadow(val);
-+            break;
-         }
--        else
--            ASSERT_UNREACHABLE();
-         return X86EMUL_OKAY;
- 
-     case MSR_EFER:
-diff --git a/xen/arch/x86/pv/misc-hypercalls.c b/xen/arch/x86/pv/misc-hypercalls.c
-index 4c2abeb4add8..2c9cf50638db 100644
---- a/xen/arch/x86/pv/misc-hypercalls.c
-+++ b/xen/arch/x86/pv/misc-hypercalls.c
-@@ -11,6 +11,7 @@
- 
- #include <asm/debugreg.h>
- #include <asm/fsgsbase.h>
-+#include <asm/traps.h>
- 
- long do_set_debugreg(int reg, unsigned long value)
++    /*
++     * If an NMI was taken in guest context and the ERETU faulted, NMIs will
++     * still be blocked.  Therefore we copy the interrupted frame's NMI status
++     * into our own, and must ERETS as part of recovery.
++     */
++    regs->fred_ss.nmi = gregs->fred_ss.nmi;
++
++    /*
++     * Next, copy the exception information from the current frame back onto
++     * the interrupted frame, preserving the interrupted frame's %cs and %ss.
++     */
++    *cpu_regs_fred_info(regs) = *cpu_regs_fred_info(gregs);
++    gregs->ssx = (regs->ssx & ~0xffff) | gregs->ss;
++    gregs->csx = (regs->csx & ~0xffff) | gregs->cs;
++    gregs->error_code   = regs->error_code;
++    gregs->entry_vector = regs->entry_vector;
++
++    fixup_exception_return(regs, recover, 0);
++
++    return true;
++}
++
++void nocall eretu(void);
++
+ void asmlinkage entry_from_xen(struct cpu_user_regs *regs)
  {
-@@ -192,11 +193,12 @@ long do_set_segment_base(unsigned int which, unsigned long base)
+     struct fred_info *fi = cpu_regs_fred_info(regs);
+@@ -2389,6 +2496,14 @@ void asmlinkage entry_from_xen(struct cpu_user_regs *regs)
+     if ( regs->eflags & X86_EFLAGS_IF )
+         local_irq_enable();
  
-         case SEGBASE_GS_USER:
-             v->arch.pv.gs_base_user = base;
--            write_gs_shadow(base);
--            break;
--
-+            fallthrough;
-         case SEGBASE_GS_KERNEL:
--            write_gs_base(base);
-+            if ( (which == SEGBASE_GS_KERNEL) ^ opt_fred )
-+                write_gs_base(base);
-+            else
-+                write_gs_shadow(base);
-             break;
-         }
-         break;
-@@ -209,7 +211,8 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-          * We wish to update the user %gs from the GDT/LDT.  Currently, the
-          * guest kernel's GS_BASE is in context.
-          */
--        asm volatile ( "swapgs" );
-+        if ( !opt_fred )
-+            asm volatile ( "swapgs" );
++    /*
++     * An event taken at the ERETU instruction may be because of bad guest
++     * state.  If so, it will need special handling.
++     */
++    if ( unlikely(regs->rip == (unsigned long)eretu) &&
++         handle_eretu_event(regs) )
++        return;
++
+     switch ( type )
+     {
+     case X86_ET_HW_EXC:
+diff --git a/xen/arch/x86/x86_64/entry-fred.S b/xen/arch/x86/x86_64/entry-fred.S
+index a1ff9a4a9747..2fa57beb930c 100644
+--- a/xen/arch/x86/x86_64/entry-fred.S
++++ b/xen/arch/x86/x86_64/entry-fred.S
+@@ -27,9 +27,22 @@ END(entry_FRED_R3)
  
-         if ( sel > 3 )
-             /* Fix up RPL for non-NUL selectors. */
-@@ -247,7 +250,8 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-         /* Update the cache of the inactive base, as read from the GDT/LDT. */
-         v->arch.pv.gs_base_user = read_gs_base();
+ FUNC(eretu_exit_to_guest)
+         POP_GPRS
++
++        /*
++         * Exceptions here are handled by redirecting either to
++         * entry_FRED_R3() (for an error to be passed to the guest), or to
++         * eretu_error_dom_crash() (for a Xen error handling guest state).
++         */
++LABEL(eretu, 0)
+         eretu
+ END(eretu_exit_to_guest)
  
--        asm volatile ( safe_swapgs );
-+        if ( !opt_fred )
-+            asm volatile ( safe_swapgs );
-         break;
-     }
++FUNC(eretu_error_dom_crash)
++        PUSH_AND_CLEAR_GPRS
++        sti
++        call    asm_domain_crash_synchronous  /* Does not return */
++END(eretu_error_dom_crash)
++
+         /* The Ring0 entrypoint is at Ring3 + 0x100. */
+         .org entry_FRED_R3 + 0x100, 0xcc
  
 -- 
 2.39.5
