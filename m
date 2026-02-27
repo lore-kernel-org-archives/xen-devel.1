@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B9AFEFB6D
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Feb 2026 16:58:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1242968.1543059 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED10FEFB6D
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Feb 2026 17:00:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1242978.1543068 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw1AC-0003YD-Fc; Fri, 27 Feb 2026 16:58:04 +0000
+	id 1vw1CE-00053M-PJ; Fri, 27 Feb 2026 17:00:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1242968.1543059; Fri, 27 Feb 2026 16:58:04 +0000
+Received: by outflank-mailman (output) from mailman id 1242978.1543068; Fri, 27 Feb 2026 17:00:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vw1AC-0003Y6-Bg; Fri, 27 Feb 2026 16:58:04 +0000
-Received: by outflank-mailman (input) for mailman id 1242968;
- Fri, 27 Feb 2026 16:58:02 +0000
+	id 1vw1CE-00053F-Mm; Fri, 27 Feb 2026 17:00:10 +0000
+Received: by outflank-mailman (input) for mailman id 1242978;
+ Fri, 27 Feb 2026 17:00:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t/s7=A7=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vw1AA-0003Y0-JB
- for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 16:58:02 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
+ <SRS0=/6pX=A7=bounce.vates.tech=bounce-md_30504962.69a1cd96.v1-f104bc196f53452b83029a520c335318@srs-se1.protection.inumbo.net>)
+ id 1vw1CD-00042Z-0q
+ for xen-devel@lists.xenproject.org; Fri, 27 Feb 2026 17:00:09 +0000
+Received: from mail178-23.suw51.mandrillapp.com
+ (mail178-23.suw51.mandrillapp.com [198.2.178.23])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 796c37ef-13fd-11f1-b164-2bf370ae4941;
- Fri, 27 Feb 2026 17:58:01 +0100 (CET)
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-436317c80f7so2203762f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 08:58:01 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
- [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4399c70e8e8sm7710937f8f.10.2026.02.27.08.57.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Feb 2026 08:57:58 -0800 (PST)
+ id c48b9449-13fd-11f1-b164-2bf370ae4941;
+ Fri, 27 Feb 2026 18:00:07 +0100 (CET)
+Received: from pmta13.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail178-23.suw51.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fMvhQ5v1yz35hfJ8
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Feb 2026 17:00:06 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ f104bc196f53452b83029a520c335318; Fri, 27 Feb 2026 17:00:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,107 +45,288 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 796c37ef-13fd-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772211480; x=1772816280; darn=lists.xenproject.org;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WrmgrbPcMJ4Di3/QQ9JT4CgZ0pcrVSrsfpDaAhlwMnQ=;
-        b=XxgpqNM9myj8XWCIaCaC6kD1fvccN3UWdMEYVhAG5fbFkJZpt4ZSGex/IQuOtx4WfB
-         lh9MyV8cm2OR8gdXXFaPm400+ev+zsWzW05XSNKiR8M8g7GcqDd3KvvfbnImRcZogjW3
-         6w1kkUs6vcdFgmeHWak93W87kCYCXGwJuLtm/sIu+fAHdsLplMhMdmbZwfc+oW5xw/so
-         bFjaq8JkqDnas8JYq7QFFaVS/D/v5TE/vCOgtm9E81BdQErbrLIMkM9z++9/m+qHahW3
-         HYwg4DRoi0V8nwStHbG7gtBtdTbiWRN+vMmO5FOImUJc2ux1rl/ehqskxP6ucQVCV/Wy
-         St7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772211480; x=1772816280;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=WrmgrbPcMJ4Di3/QQ9JT4CgZ0pcrVSrsfpDaAhlwMnQ=;
-        b=ip6iXyTm5FmqHnDzAPSPsldHhADtGXafPwj1n1Mx6TPok7gGxx2XgSM0EAitchgzOx
-         2VUNr/ktBftW6xSt0quXXMtzAkJgXC1SkSX+Qe0lGstsLAsUw8ASfASP9CEbFRgsssBq
-         sA2e5Qc8Yp9U/UZPyI4QVCp3cc3y/Yn1/ZFKf6RlEB4HcC+L3/2dikewvk3EwpeQ/Esk
-         lOdONNZwGoeM24LTfxBkECSeFWJ0Qw16Xz+K9v/LqYDO+zLtpaj6GU00AYBHZKAm66PR
-         eNGNthXpl78R64v/LABmcbEmMBeas1DwkPnFYmKcfHUXMmUzgxF83hFcwNIu6dC+2l44
-         NlXQ==
-X-Gm-Message-State: AOJu0YyzbykGbAUodPuc8sykG1Bk9458RT6ej7Fb/FrS+KXPDyREV7ce
-	K4+n66dVHW0lwHffbMA/A2jzL/bOGAtX7QiICMwTzSP90/Zl9j+25XA4qPDdtQ==
-X-Gm-Gg: ATEYQzwmIMFJC4lbirW09PJL2hW0lGvTFmyCKJW+pUoW6ZOGvEE+nNq+J6RyfrLsnzZ
-	Urp2mPRScmgZCmLZnoRyDDZVu5yn3f63F717qEici9PAkl2vQQqSO3M0fgYvy2TENa38I9aPc5T
-	51ZmvFqkQAH5H5TvlFD/eXFOzGwX+G4wNLLcZEmXhN7fo/HfAe7qtNGjWZ7ihAN2tksxHA3e0Kh
-	FaEOKUSrYgYg4BGmBiuQveAzJ+1yZ/2Si7JGd5QFkz7ElfeZxxZvZSi6VfNcuLZLzHTWZojg9Vv
-	MDjwR1sPU567Veqyhfrx62QYZekdn5Wz6PwsDjZ+qdAYkLn3bBf5AQAYgD1dCY45HcqYErKSjMQ
-	SqVgqgpGyKA/K5d3GePYsshjs8gYI/ggaScW0I7JVcuG9InCnArzuwN++AGCKDWQdYmb/xlAQNp
-	/9WkeS+wmWC6r10R2rBDYiRk3Q/+JwrgVwZE4i+iz//QCGnqnKW696pfwUqejFl+5+qGMAO4bSF
-	hE=
-X-Received: by 2002:a05:6000:220f:b0:430:2773:84d6 with SMTP id ffacd0b85a97d-4399d9bece3mr6447651f8f.24.1772211478967;
-        Fri, 27 Feb 2026 08:57:58 -0800 (PST)
-Message-ID: <19c77389-c22f-4501-8ac4-326d42129d2d@gmail.com>
-Date: Fri, 27 Feb 2026 17:57:54 +0100
+X-Inumbo-ID: c48b9449-13fd-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1772211606; x=1772481606;
+	bh=ahChLrMLIwGTkk7Ei8nA/Gjew8ewv7h2QyrhOulApCs=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=cfmFE9uKr9MkLo15hr2SFefN2OMEiV1lBEtxzOdbPAVEeGBADnjdZjje+qLyGrNil
+	 EOpYXTXqe3ycTWeBess4aM9f0/+7+T+XvVwDxighHdflt1VsLjPr2oiUqFhM8Wr1FK
+	 9ca+YdlEuT1fqADZl0NqUdzyyIqif3oUs4oJfFlLLd2W14zKPuKaWKQanIT2+avjdd
+	 K7oIbCQsoli+S3KDp14KmxQSl7qPJ1MSZTs5O8H4HnTdzyHtVrhaPNjrS7MT9IQxMv
+	 lamBY5EfeYOdnDRPlxs3fTptlT/AWmp8wndRPj9AWHRA4RAVEMb6C7n46kOeDMJby8
+	 dW6UqCutbi5CA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1772211606; x=1772472106; i=teddy.astie@vates.tech;
+	bh=ahChLrMLIwGTkk7Ei8nA/Gjew8ewv7h2QyrhOulApCs=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=ZPLU303VNGy47vc+9aYZSefKjG8z3MxaELMwJFO4vah+M8qcZ9RNG3kq9XuxCq+Yh
+	 cjGxrGV7EqXoAR6iNC5w9k3yr+o4FgGrQWBYZkox0o4V7g8IELx2x1VuxOpjpKCSLJ
+	 dLz7AGE+x2tErET9wQjCPxA3HfUkynqa30ZtYzgdFX/BKZ5RneRJ64+E29uc7RvvcJ
+	 fQnD1QGwvTyNtk3YjAFW/JbwQ7uvgd7zQ1BJwQKS6MAuE+K3VwmUIHuU7sjQl4VMVt
+	 lEpnRQP+lQ+uUEZ7E5wwnCKdR2rFZtVNwFZv4MZX5hqsdi5ZvGqcTHKN9mgR2601K7
+	 EM2b6JPc2SQWQ==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v8=202/2]=20xenpm:=20Add=20get-core-temp=20subcommand?=
+X-Mailer: git-send-email 2.53.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1772211606094
+To: xen-devel@lists.xenproject.org
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Anthony PERARD" <anthony.perard@vates.tech>, "Jan Beulich" <jbeulich@suse.com>
+Message-Id: <aadf2e78f91f442964cc4e93c028b6b31fceb9eb.1772211384.git.teddy.astie@vates.tech>
+In-Reply-To: <ec92e54a493a16f5bc085738e943b3778c3a0231.1772211384.git.teddy.astie@vates.tech>
+References: <ec92e54a493a16f5bc085738e943b3778c3a0231.1772211384.git.teddy.astie@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.f104bc196f53452b83029a520c335318?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260227:md
+Date: Fri, 27 Feb 2026 17:00:06 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: "committers@xenproject.org" <committers@xenproject.org>,
- Community Manager <community.manager@xenproject.org>
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: Xen 4.22 release schedule proposal
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello everyone,
+get-core-temp allows querying the per-core CPU temperature and
+per-package one on processors that supports Digital Temperature Sensors
+(most Intel processors; as usual Dom0 drivers cannot work due to
+misalignment between Dom0 vCPU and pCPUs).
 
-I missed that I've not sent 4.22 schedule proposal and it was all the time
-in my Drafts folder. Sorry for that.
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+CC: Jan Beulich <jbeulich@suse.com>
 
-Following the 8-month release cycle, also taking into account that 4.21
-has been released 19th of November 2025, the next "good" month for release
-should be July according to:
-   https://lists.xen.org/archives/html/xen-devel/2018-07/msg02240.html
+v4: https://lore.kernel.org/xen-devel/cover.1766158766.git.teddy.astie@vate=
+s.tech/
+v5: Removed trailing whitespace.
+v6: Report errors through errno and use strerror() to display them
+v7:
+ - Rename get-intel-temp with get-dts-temp
+ - handle properly errno
+ - make process return a error code if no data
+v8:
+ - update Changelog
+ - improve error handling
+ - rename core-dts-temp with get-core-temp
 
-Here is suggested schedule:
+ CHANGELOG.md       |   2 +
+ tools/misc/xenpm.c | 127 ++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 128 insertions(+), 1 deletion(-)
 
-** Proposed option: Wed Jul 15, 2026 **
-   (~ +8 months from Xen 4.21 release)
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 18f3d10f20..ac2a0412e0 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepach=
+angelog.com/en/1.0.0/)
+    - Support for Bus Lock Threshold on AMD Zen5 and later CPUs, used by Xe=
+n to
+      mitigate (by rate-limiting) the system wide impact of an HVM guest
+      misusing atomic instructions.
++   - Introduce get-core-temp to xenpm to query CPU temperatures on Intel
++     platforms.
+ 
+ ### Removed
+  - On x86:
+diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
+index 682d092479..981d3ec519 100644
+--- a/tools/misc/xenpm.c
++++ b/tools/misc/xenpm.c
+@@ -32,11 +32,14 @@
+ 
+ #include <xen-tools/common-macros.h>
+ 
++#include <xen/asm/msr-index.h>
++
+ #define MAX_PKG_RESIDENCIES 12
+ #define MAX_CORE_RESIDENCIES 8
+ 
+ static xc_interface *xc_handle;
+ static unsigned int max_cpu_nr;
++static xc_physinfo_t physinfo;
+ 
+ /* help message */
+ void show_help(void)
+@@ -93,6 +96,7 @@ void show_help(void)
+             "                                           units default to \=
+"us\" if unspecified.\n"
+             "                                           truncates un-repre=
+sentable values.\n"
+             "                                           0 lets the hardwar=
+e decide.\n"
++            " get-core-temp          [cpuid]      get CPU temperature for =
+<cpuid> or all (Intel only)\n"
+             " start [seconds]                     start collect Cx/Px stat=
+istics,\n"
+             "                                     output after CTRL-C or S=
+IGINT or several seconds.\n"
+             " enable-turbo-mode     [cpuid]       enable Turbo Mode for pr=
+ocessors that support it.\n"
+@@ -1354,6 +1358,127 @@ void enable_turbo_mode(int argc, char *argv[])
+                 errno, strerror(errno));
+ }
+ 
++static int fetch_dts_temp(xc_interface *xch, uint32_t cpu, bool package, i=
+nt *temp)
++{
++    xc_resource_entry_t entries[] =3D {
++        { .idx =3D package ? MSR_PACKAGE_THERM_STATUS : MSR_IA32_THERM_STA=
+TUS },
++        { .idx =3D MSR_TEMPERATURE_TARGET },
++    };
++    struct xc_resource_op ops =3D {
++        .cpu =3D cpu,
++        .entries =3D entries,
++        .nr_entries =3D ARRAY_SIZE(entries),
++    };
++    int tjmax;
++
++    int ret =3D xc_resource_op(xch, 1, &ops);
++
++    switch ( ret )
++    {
++    case 0:
++        /* This CPU isn't online or can't query this MSR */
++        return -1;
++
++    case 1:
++    {
++        /*
++         * The CPU doesn't support MSR_TEMPERATURE_TARGET, we assume it's =
+100
++         * which is correct aside a few selected Atom CPUs. Check Linux
++         * kernel's coretemp.c for more information.
++         */
++        static bool has_reported_once =3D false;
++
++        if ( !has_reported_once )
++        {
++            fprintf(stderr, "MSR_TEMPERATURE_TARGET is not supported, assu=
+me "
++                            "tjmax =3D 100, readings may be incorrect.\n")=
+;
++            has_reported_once =3D true;
++        }
++
++        tjmax =3D 100;
++        break;
++    }
++
++    case 2:
++        tjmax =3D (entries[1].val >> 16) & 0xff;
++        break;
++
++    default:
++        if ( ret > 0 )
++        {
++            fprintf(stderr, "Got unexpected xc_resource_op return value: %=
+d", ret);
++            errno =3D EINVAL;
++        }
++        return -1;
++    }
++
++    *temp =3D tjmax - ((entries[0].val >> 16) & 0xff);
++    return 0;
++}
++
++static void get_core_temp(int argc, char *argv[])
++{
++    int temp =3D -1, cpu =3D -1;
++    unsigned int socket;
++    bool has_data =3D false;
++
++    if ( argc > 0 )
++        parse_cpuid(argv[0], &cpu);
++
++    if ( cpu !=3D -1 )
++    {
++        if ( !fetch_dts_temp(xc_handle, cpu, false, &temp) )
++            printf("CPU%d: %d=C2=B0C\n", cpu, temp);
++        else
++        {
++            fprintf(stderr, "Unable to fetch temperature (%d - %s)\n",
++                    errno, strerror(errno));
++            printf("No data\n");
++            exit(ENODATA);
++        }
++        return;
++    }
++
++    /* Per socket measurement */
++    for ( socket =3D 0, cpu =3D 0; cpu < max_cpu_nr;
++          socket++, cpu +=3D physinfo.cores_per_socket * physinfo.threads_=
+per_core )
++    {
++        if ( fetch_dts_temp(xc_handle, cpu, true, &temp) )
++        {
++            fprintf(stderr,
++                    "[Package%u] Unable to fetch temperature (%d - %s)\n",
++                    cpu, errno, strerror(errno));
++            continue;
++        }
++
++        has_data =3D true;
++        printf("Package%u: %d=C2=B0C\n", socket, temp);
++    }
++
++    if ( has_data )
++        /* Avoid inserting a trailing line if we have nothing */
++        printf("\n");
++
++    for ( cpu =3D 0; cpu < max_cpu_nr; cpu +=3D physinfo.threads_per_core =
+)
++    {
++        if ( fetch_dts_temp(xc_handle, cpu, false, &temp) )
++        {
++            fprintf(stderr, "[CPU%d] Unable to fetch temperature (%d - %s)=
+\n",
++                    cpu, errno, strerror(errno));
++            continue;
++        }
++
++        has_data =3D true;
++        printf("CPU%d: %d=C2=B0C\n", cpu, temp);
++    }
++
++    if ( !has_data )
++    {
++        printf("No data\n");
++        exit(ENODATA);
++    }
++}
++
+ void disable_turbo_mode(int argc, char *argv[])
+ {
+     int cpuid =3D -1;
+@@ -1618,12 +1743,12 @@ struct {
+     { "set-max-cstate", set_max_cstate_func},
+     { "enable-turbo-mode", enable_turbo_mode },
+     { "disable-turbo-mode", disable_turbo_mode },
++    { "get-core-temp", get_core_temp },
+ };
+ 
+ int main(int argc, char *argv[])
+ {
+     int i, ret =3D 0;
+-    xc_physinfo_t physinfo;
+     int nr_matches =3D 0;
+     int matches_main_options[ARRAY_SIZE(main_options)];
+ 
+-- 
+2.53.0
 
-- Last posting date          Fri Apr 17, 2026 (+7 weeks from now)
-
-Patches adding new features are expected to be posted to the mailing
-list by this date, although perhaps not in their final version.
-
-- Feature freeze             Fri May 08, 2026 (+3 weeks from Last posting date)
-
-Patches adding new features should be committed by this date.
-Straightforward bugfixes may continue to be accepted by maintainers.
-
-- Code freeze                Fri Jun 05, 2026 (+4 weeks from Feature freeze)
-
-Bugfixes only.
-
-- Hard code freeze           Fri Jun 26, 2026 (+3 weeks from Code freeze)
-
-Bugfixes for serious bugs (including regressions), and low-risk fixes only.
-
-- Final commits              Fri Jul 10, 2026 (+2 weeks from Hard code freeze)
-
-Branch off staging-4.22.
-
-- Release                    Wed Jul 15, 2026
 
 
-Please don't hesitate to provide your feedback.
+--
+Teddy Astie | Vates XCP-ng Developer
 
-If there are no objections, I plan to update the Wiki page
-Xen_Project_X.YY_Release_Notes to make it easier to find our final schedule
-( especially for the people who aren't following xen-devel mailing list ).
-As an additional benefit, it will also be accessible via SUPPORT.md (in the
-wiki athttps://xenbits.xen.org/docs/unstable-staging/support-matrix.html).
+XCP-ng & Xen Orchestra - Vates solutions
 
-Thanks and have a good weekend.
+web: https://vates.tech
 
-Best regards,
-   Oleksii
 
 
