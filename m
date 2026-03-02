@@ -4,38 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5876FEA4E0C
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Mar 2026 14:50:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1244279.1543717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B051EA4E04
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Mar 2026 14:54:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1244291.1543728 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vx4bg-0003Wo-4g; Mon, 02 Mar 2026 14:50:48 +0000
+	id 1vx4fA-00048b-No; Mon, 02 Mar 2026 14:54:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1244279.1543717; Mon, 02 Mar 2026 14:50:48 +0000
+Received: by outflank-mailman (output) from mailman id 1244291.1543728; Mon, 02 Mar 2026 14:54:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vx4bg-0003Wh-1U; Mon, 02 Mar 2026 14:50:48 +0000
-Received: by outflank-mailman (input) for mailman id 1244279;
- Mon, 02 Mar 2026 14:50:47 +0000
+	id 1vx4fA-00048U-Jw; Mon, 02 Mar 2026 14:54:24 +0000
+Received: by outflank-mailman (input) for mailman id 1244291;
+ Mon, 02 Mar 2026 14:54:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9kJt=BC=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vx4bf-0003Wb-8X
- for xen-devel@lists.xenproject.org; Mon, 02 Mar 2026 14:50:47 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
+ (envelope-from <SRS0=xYbC=BC=kernel.org=david@srs-se1.protection.inumbo.net>)
+ id 1vx4f9-00048O-KI
+ for xen-devel@lists.xenproject.org; Mon, 02 Mar 2026 14:54:23 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2f40d36c-1647-11f1-9ccf-f158ae23cfc8;
- Mon, 02 Mar 2026 15:50:41 +0100 (CET)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-439b7a87fb5so640404f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Mar 2026 06:50:41 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439b503424fsm11376873f8f.22.2026.03.02.06.50.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Mar 2026 06:50:40 -0800 (PST)
+ id afbeb498-1647-11f1-9ccf-f158ae23cfc8;
+ Mon, 02 Mar 2026 15:54:17 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id A22D760008;
+ Mon,  2 Mar 2026 14:54:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D656BC19423;
+ Mon,  2 Mar 2026 14:54:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,102 +43,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f40d36c-1647-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1772463041; x=1773067841; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=olwvB+jj70z4Qp6+y38rWMh4PGJTz8qqZg+5vvB8Bi4=;
-        b=bj+t/u+heQkUWn8jBSONrdWeVm2YBqQ3T0ZD5zAqWwi6gMXksX/64ftHwqHFNd3vmK
-         1Y+EZV4OBZWWYZclU63Fo1kH87SdoktvDc/nh67PyrhqvKCMGAcHTWn8bGibndAKg92d
-         ufkaPR2ySZv6a4mUCYJdu8qVQks9j4dD8eujZ4Mwiqm4GTQZ+aoOJiB9VD6iLb0uacz3
-         4ABs70grZfaB52Bc5B9KzKkJOMyh/JpDaF5h4GmGgO4vLOtT35ijLMD2ZwUKGieUQ/sj
-         Ji2vzcBtNEMXCGgAOLxCU1UO7FziL6sPTUgSoOsVqj+lGpVqh+5WklwDnDAAZQdInF7x
-         nMFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772463041; x=1773067841;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=olwvB+jj70z4Qp6+y38rWMh4PGJTz8qqZg+5vvB8Bi4=;
-        b=PQMvGBE8QWgMQjaZ7EtoaSdAhtCRh65Ek3prNtX7gLag1qGI+t6WqoAKSf4mfcUm6F
-         RBxV6pEV5fsISDVG1Bt6FQ8I9YE7zot6BjY8qRGC9vK+siR6MoR/emUdA/91vX6Bt1e3
-         uuUzMgLpV9/sIQdRt1m/ya0Bam2ZGgtHYnF2g7J8BFfyTwTDCCU5QW6rKv5uM4n3Kxzk
-         5e4LkAvbGsez3775G/MdNYMRUD3+1TAQLDDrKzZGBP08pLW0wKzS5Ky0s/8uPW71P6KQ
-         0EEycPG2q6nbOWuduqJj3R4wc5TLBeZhyDNWZUzQ5IxOy3Ft9oEnNYzHrznGqy/VR5E8
-         xayw==
-X-Forwarded-Encrypted: i=1; AJvYcCUV9xMabRSrkTWd3B4ilbrUHgUP8GJviADTRfVHFqTjw0Ug6UdJX/l1YXga7egc+oUpZopaqq/lInQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw9c/5pwv+9Z9//fkd4zvlgnYBisaR1XfRqVSNCT4p398K+rU+A
-	GUS4Zhee7ltbqCO4Dnd46YWkgsD/9yAarIWdkKn1rZWJI/Huy1XPnVhQRq8rIU3FLw==
-X-Gm-Gg: ATEYQzwsxVErkoLhcIGMcUuDugB++4PG0C7RwMMqKR5pG0eq5bM56EKjaseMZIuqTAR
-	hK4zsSKExUWyPe20+j/YcdT68Od1d8Tx6yHNMrsImBfL6HjKJtwnZnRkAOgJT2aUfMj8CHTnc9o
-	ATUxMbXirPzSwu0dwdsZImt9vGIkR+P7qWMMoKlNBcS2pArcOYrT81fFzBwLlNxupKl+Ct2MjiN
-	VLZgroLAMNAZioJHwLQ3kRGx/N6VUMelR78pfLOAkJuM2/xCr36cVtBvT4+zvnhrU6wSu49pAoD
-	9K2ht38VVsCTPL9uzyyA7CTmFBgJDfSuhaeLWiBBBF5RBkIpl/McXfs4VHOYgWb7vddOOUurohQ
-	3tGAwlZeQlK5SvnElUd1wPI6vQGNPxGloGhxorsgnkLfyJMCE0Zgeu2JnZA8WGVqVt1Sa96LO3C
-	S++R/0jfuexFvfMHSAWrWY17A+d5k4IRb06Kun8mG4wIX6Bad37BMjdn0r80dkrU00/RoQ8jUZJ
-	KNrSDAX+ce+pa0=
-X-Received: by 2002:a05:6000:2001:b0:439:b4c9:9061 with SMTP id ffacd0b85a97d-439b4c99198mr8946651f8f.5.1772463041130;
-        Mon, 02 Mar 2026 06:50:41 -0800 (PST)
-Message-ID: <f3e84e41-438f-4a28-a2e6-863f818e948b@suse.com>
-Date: Mon, 2 Mar 2026 15:50:43 +0100
+X-Inumbo-ID: afbeb498-1647-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772463256;
+	bh=xdku5nig+Gpe25ps3dCqYirfeqxPb+5bKOKhCRkUJYg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=UPpsNxCTCH2blvH4w0w/jJ1uNxzlymqn7amt368g6EWM8QvGvID3bObS60ccOpyND
+	 HAIkiYw4t2sxYLmPVF+fHrlSfknoUysycFnsYeg2bwQNQ75N07g9A2072I8QKx1a81
+	 gVJg1SzyUdP2vkCKMC1exl2KjMgBLttDCBDqICh0qCoFV251Ad2TpvLANGUlbvQzqY
+	 jilHRz6FHN7uCWt2iHKsuYftP8aVE9eMDcdEldNQpdBQSQ3aHnLKRckGzN+kixQ/rG
+	 mVfbKvteJbqXhTZv1DelJq2Edh3ST8tmhSv4X8cncYmcfdELLBhEAglEtkzeNNhARn
+	 ha6UbtSzTkLwA==
+Message-ID: <663cff60-8181-4a47-beff-204bfe01bb06@kernel.org>
+Date: Mon, 2 Mar 2026 15:54:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 06/14] x86/traps: Don't configure Supervisor Shadow
- Stack tokens in FRED mode
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260227231636.3955109-1-andrew.cooper3@citrix.com>
- <20260227231636.3955109-7-andrew.cooper3@citrix.com>
+Subject: Re: Excluding init_on_free for pages for initial balloon down (Xen)
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Vlastimil Babka <vbabka@suse.cz>
+References: <aaRVcVmtv2UBD-GF@mail-itl>
+ <513e624f-35c1-4d43-ba3f-c96af613d400@suse.com>
+ <224968e6-7236-4efe-bcc0-ab39ac0c6c45@kernel.org> <aaVuB3x3y4ROr5XA@mail-itl>
+From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260227231636.3955109-7-andrew.cooper3@citrix.com>
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <aaVuB3x3y4ROr5XA@mail-itl>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 28.02.2026 00:16, Andrew Cooper wrote:
-> FRED doesn't use Supervisor Shadow Stack tokens.  This means that:
 > 
->  1) memguard_guard_stack() should not write Supervisor Shadow Stack Tokens.
->  2) cpu_has_bug_shstk_fracture is no longer relevant when deciding whether or
->     not to enable Shadow Stacks in the first place.
+>> Whatever leaves the buddy shall be zeroed out. If there is a
+>> double-zeroing happen, the latter could get optimized out by checking
+>> something like user_alloc_needs_zeroing().
+>>
+>> See mm/huge_memory.c:vma_alloc_anon_folio_pmd() as an example where we
+>> avoid double-zeroing.
 > 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> It isn't just reducing double-zeroing to single zeroing. It's about
+> avoiding zeroing such pages at all. If a domU is started with
+> populate-on-demand, many (sometimes most) of its pages are populated in
+> EPT. The idea of PoD is to start guest with high static memory size, but
+> low actual allocation and fake it until balloon driver kicks in and make
+> the domU really not use more pages than it has. When balloon driver try
+> to return those pages to the hypervisor, normally it would just take
+> unallocated page one by one and made Linux not use them. But if _any_
+> zeroing is happening, each page first needs to be mapped to the guest by
+> the hypervisor (one trip through EPT), just to be removed from them a
+> moment later...
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+The same is true for most balloon drivers, including virtio-balloon.
 
-> The SDM explicitly points out the shstk fracture vs FRED case, yet PTL
-> enumerates CET-SSS (immunity to shstk fracture).  I can only assume that there
-> are other Intel CPUs with FRED but without CET-SSS.
+So far nobody really cared about that, though, as init_on_free usually
+comes with such a high performance price tag that people in cheap VMs
+(where you overcommit etc) don't enable it.
 
-Isn't CET-SSS still relevant to OSes not using FRED (much like you do for
-the fred=no case)?
+__GFP_BALLOON_OUT is just nasty.
 
-Jan
+We could probably have a special allocation interface (not exposed to
+arbitrary kernel modules) and have things like mm/balloon.c consume that.
+
+
+IIUC, xen balloon does not use the memory balloon infrastructure,
+though. So we'd need some EXPORT_SYMBOL_FOR_MODULES() magic.
+
+
+Like an
+
+	struct page *alloc_balloon_pages(gfp_t gfp, unsigned int order);
+
+Where we only support a subset of gfp flags, for example, to now having
+to deal with mempolicy.
+
+But it needs a bit of code to make it fly, so I am not sure if the page
+allocator wants to support that.
+
+-- 
+Cheers,
+
+David
 
