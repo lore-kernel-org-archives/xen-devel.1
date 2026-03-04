@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D6FEF8FED
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 14:36:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1245487.1544850 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B016EF8FED
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 14:37:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1245494.1544860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxnKr-0008QM-6l; Wed, 04 Mar 2026 14:36:25 +0000
+	id 1vxnLu-0000ZM-Fc; Wed, 04 Mar 2026 14:37:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1245487.1544850; Wed, 04 Mar 2026 14:36:25 +0000
+Received: by outflank-mailman (output) from mailman id 1245494.1544860; Wed, 04 Mar 2026 14:37:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxnKr-0008QF-3d; Wed, 04 Mar 2026 14:36:25 +0000
-Received: by outflank-mailman (input) for mailman id 1245487;
- Wed, 04 Mar 2026 14:36:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=u/nm=BE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1vxnKp-0008Q8-Ed
- for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 14:36:23 +0000
-Received: from fhigh-b6-smtp.messagingengine.com
- (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 82af1929-17d7-11f1-9ccf-f158ae23cfc8;
- Wed, 04 Mar 2026 15:36:21 +0100 (CET)
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 538267A0160;
- Wed,  4 Mar 2026 09:36:19 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Wed, 04 Mar 2026 09:36:19 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 4 Mar 2026 09:36:17 -0500 (EST)
+	id 1vxnLu-0000ZF-Cs; Wed, 04 Mar 2026 14:37:30 +0000
+Received: by outflank-mailman (input) for mailman id 1245494;
+ Wed, 04 Mar 2026 14:37:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Xh4z=BE=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vxnLt-0000VJ-Ir
+ for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 14:37:29 +0000
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [2a00:1450:4864:20::434])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id aae12be4-17d7-11f1-b164-2bf370ae4941;
+ Wed, 04 Mar 2026 15:37:28 +0100 (CET)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-439b6d9c981so2327488f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Mar 2026 06:37:28 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-439b503424fsm28047245f8f.22.2026.03.04.06.37.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Mar 2026 06:37:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,121 +47,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82af1929-17d7-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1772634979;
-	 x=1772721379; bh=v1w24rbHzHrF54HJz/xGTwDUsrsyFlbqLfRT/0XgJAY=; b=
-	dXQdqMylUa09SSFdONySWSh1VUXJcb2hxDdKm+rS/aqMJSEZqTcphuLeI/z+027l
-	sgEwew3hYmHMbq8KfCIi49Sft8s8UUh2115n60+eVTRvoXDpMZfZXZ6nlqw91KW9
-	kURoRdImSaZZyrlseXLgW+nIQvQW/1tF37PadkMaK/EE60kYeggeCf0M4gbIKXGu
-	q9oI8XWRwTAkmfFsSqLV7A/y47gt0Djg/fKDThd9Aoxb5TOIIPrr3JrmcRi8IL+K
-	6REbG/FdltNwQ0FlzqG5wstozhRHmwRyUv0mBCEukwO9OI+GgRi4IdJSVVJp0Pxy
-	F5RZIUwg95rWV0fT1B/LjQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1772634979; x=1772721379; bh=v1w24rbHzHrF54HJz/xGTwDUsrsyFlbqLfR
-	T/0XgJAY=; b=1M/hBxkz5F5/0nMVIE2C6IWbZhebdxbst18HAIVlqUEYyBwO5Kj
-	bxfOFFktvt+ryWHSsRRzpsco/1U6Ka9cB0LhpfniLM3R8tw+TfJVVybI2BCCXEKx
-	pIJSIug3mL+/fFNUIqdHPpLJPwv4qncclYoYh6KkU3PM4q5nbdUmq5ezdCk3KlhD
-	u0fkh1mERSS+KfFvVAxAF4dvHL380NmLziIvdJhPC/5CjEgA+/NlJCVZNaxPnG/5
-	FJTzW7PR5b4K2TxIbI7t/LAp6U75d1sObC2UaN+ysA6eP8/LYRvOI/Em9ZtfnHTr
-	iR6v8AEHsfa2mntFiHQfqRymKNd2nRdb7Ig==
-X-ME-Sender: <xms:YkOoaXvESsUr27CnpqRmZ57-a31j6qc27DhdV5vHpMcpgX8ialNy_Q>
-    <xme:YkOoaffq7luWkHfXreEr52uAXgb3yVtWSzxL5DhGx_lXIfgcbn3xbqWAk-rikSG0n
-    UoKqkt3w6Z3uyDtXg5atS3qxDXbtw3qUHNIMhWLq27QQoNv>
-X-ME-Received: <xmr:YkOoafwCcgfHKwA1pBJfV6TTKpBKWekFL_jSGFdc6OFT4LmiXRvI33UPb2ph3Gfsq2zmNnIVTfHUel4iQ-swKB9GBU7eEVajv7U>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddvieefjeehucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiuceomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhih
-    hnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfekuddtffettefhieeuheff
-    keeuffelvdffuddtteetledtveekfeekleehjefgnecuvehluhhsthgvrhfuihiivgeptd
-    enucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgv
-    thhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtph
-    houhhtpdhrtghpthhtohepjhgsvghulhhitghhsehsuhhsvgdrtghomhdprhgtphhtthho
-    peigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprhgtph
-    htthhopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghpthht
-    oheprhhoghgvrhdrphgruhestghithhrihigrdgtohhm
-X-ME-Proxy: <xmx:YkOoaVG7qbtJLcXtX0z-R7gf5G3-0Tb4HJbpjoeFCoeblIC9pVCNjQ>
-    <xmx:YkOoaTy9fP_cQB9_phLiDba71xPs70M2lBT7-tLVcsSK8I4MIyC1Eg>
-    <xmx:YkOoaWvIBqQN3iR6d7LCxGRHUMdrNEbBWMnDofMLgxNtqEfF0DUwUA>
-    <xmx:YkOoaQ2LggPq3W_u7qUguR2wzruGlP23Vu8_lRivwY6VSBeZhBBWPQ>
-    <xmx:Y0OoaR-5b07bmnP3-QqettNpm3wuD2h9HxUQnel4FOrqnf6JXBspguQq>
-Feedback-ID: i1568416f:Fastmail
-Date: Wed, 4 Mar 2026 15:36:15 +0100
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] x86/S3: restore MCE (APs) and add MTRR (BSP) init
-Message-ID: <aahDX_QvrB1MTLcq@mail-itl>
-References: <12fbad10-78ad-4679-a1db-3995e34da094@suse.com>
+X-Inumbo-ID: aae12be4-17d7-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1772635047; x=1773239847; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ixD03YAwPbqTVrVB8LuXCa5+sDpUh7SDQBZiiZDsct4=;
+        b=cyedKOU+uLOqRa9NydOM/ng1Wz2ZA9lQSU+wNpYjIb9AjNhHNkFpQmWl3VRg79U/Cg
+         HHEG+jVJAOCYqGOUiABZNoNxyPdfgEJOYddBjB2Y+FMIXZ6DtK8bhXshB2aEEkfCfSkZ
+         xXrW8utv90Z6+8XauaUTqmO8ztLRQe708nooxrBFZZxRLrzePpprok+0lBRbc2LuN9p7
+         I+0KW+4ZsWdn6QPMShohDZVJ8aRS6cXr2cpCMCjo7h9sPyVWa8SBfd6JY/Uxpi2HvrSp
+         n3wCWi7vBDwUyr4R8zDEDivP5ZJgfnz+UhMSlPYXZYofasVD0Lerbi7z35Ih9N9Ai4oU
+         SGYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772635047; x=1773239847;
+        h=content-transfer-encoding:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ixD03YAwPbqTVrVB8LuXCa5+sDpUh7SDQBZiiZDsct4=;
+        b=rnU+HiGK2ZyCUohpU+pw36D8oQN/XSAlxskmeM+u1ngXt1Hs36cVpoWmxPB8kRo7hm
+         IPlzMsJS9LGglVE7ZZHcLgigQxSotFM7h6CLncjh7Rogr4lRObZIyCdjRX86Q5rF8Phu
+         md+FDie6u74w+MRoQUgJNOMonPA8qe6YUjJwoLrdhyW6cmYrCo4jzbbkMy/nwJk6B0Hg
+         aen7YWxXMLZ7i/+6JX0oRBLqbUZjr5WUgGuhxLPidzWHFJhst9e0Jlo5AYmlLZkhDdrY
+         kBeDyVW7QYIWaNJ2Aavva07zg//bJErMAQFa11ZVvE84aMKXpe6jWO8ZY8UxaMegfW7s
+         OBDw==
+X-Gm-Message-State: AOJu0YzpLjmAYv/AHJshCQpwfQCLWtZdLw/A/0A+EFDrpzC4GDIcI0Vq
+	+b5GqemYFK1wKiCBlT9bXyLQO6ZmEpjymmKPv/SU2ahe5ly7FnyJjmvnP7Y78CVIGVkbcJ1mJl2
+	dn+A=
+X-Gm-Gg: ATEYQzwnYtdi+4YKRgLxu4cDCUHENnLwBoFb0EAFUBZBfCTD2WCSOU7Q6Kaqa52n4vd
+	MzKUdNasW+mBZjlFJYlfPICxLJgZwGOweLIGivTAOniuXXo0ClyLzWeKsRl3bShAfr2f4NkFt+/
+	L4M7rn9tLu1tqNdl/GdEycMpoxnmSp+xgdzvVX5EIM7hs0ZifoLxxwFYfQg/sA8f1rXHhbYhQvA
+	ndP1v/AiPU6bAj2Qx6R564QYk9JofQb6sDUquBSX+o3Ede83hK3/OpQnjK4DVP5kQikjinSWVi+
+	cRSSCv71QNqWqZdLZEsh+okbk8NsazYirRuenK9kuFK73QGqKItugU0D69QhF6AkCaTjetfRL74
+	P6Z3QK1E8ftqua6dO4jwgYYEE0E8vzkOIp8sg4qSOUYrGmtzBfoEREL6zy9FdAeTqmlSgVjzZID
+	JGNdgAi0NQVAVQpLm4+LenJRbuRqqXysDC8SqDmt2tCX4cv/1ALnvD7FUc8436cKKaNBxhqu7Ob
+	y3MSqLStOjPSnM=
+X-Received: by 2002:a5d:588a:0:b0:439:b79d:b9a6 with SMTP id ffacd0b85a97d-439c10adc38mr11817885f8f.11.1772635047019;
+        Wed, 04 Mar 2026 06:37:27 -0800 (PST)
+Message-ID: <ca1812c2-dadf-422a-a195-9c285ce08077@suse.com>
+Date: Wed, 4 Mar 2026 15:37:25 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="3wsJeamIeufwQU0A"
-Content-Disposition: inline
-In-Reply-To: <12fbad10-78ad-4679-a1db-3995e34da094@suse.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Jason Andryuk <jason.andryuk@amd.com>, Penny Zheng <Penny.Zheng@amd.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86/ACPI: _PDC bits vs HWP/CPPC
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+The treatment of ACPI_PDC_CPPC_NATIVE_INTR should follow that of other P-
+state related bits. Add the bit to ACPI_PDC_P_MASK and apply "mask" in
+arch_acpi_set_pdc_bits() when setting that bit. Move this next to the
+other P-state related logic.
 
---3wsJeamIeufwQU0A
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 4 Mar 2026 15:36:15 +0100
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] x86/S3: restore MCE (APs) and add MTRR (BSP) init
+Further apply ACPI_PDC_P_MASK also when the amd-cppc driver is in use.
 
-On Wed, Mar 04, 2026 at 02:39:01PM +0100, Jan Beulich wrote:
-> MCE init for APs was broken when CPU feature re-checking was added. MTRR
-> (re)init for the BSP looks to never have been there on the resume path.
->=20
-> Fixes: bb502a8ca592 ("x86: check feature flags after resume")
-> Reported-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab=
-=2Ecom>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> Sadly we need to go by CPU number (zero vs non-zero) here. See the call
-> site of recheck_cpu_features() in enter_state().
+Also leave a comment regarding the clearing of bits and add a couple of
+blank lines.
 
-With this patch, I now see the "Thermal monitoring enabled" on resume
-also for AP.
-And then, the "Temperature above threshold" + "Running in modulated
-clock mode" for AP too. But, I don't see matching "Temperature/speed
-normal" for any of them...
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Including XEN_PROCESSOR_PM_CPPC may need accompanying with some change to
+arch_acpi_set_pdc_bits(), but it's entirely unclear to me what to do
+there. I'm unaware of an AMD counterpart of Intel's "Intel® Processor
+Vendor-Specific ACPI". Plus even when the powernow driver is in use, we
+never set any bits, as EIST is an Intel-only feature.
 
-My simple performance test says it's okay for now, though. I'll see how
-it looks in a few hours...
+acpi_set_pdc_bits() having moved to the cpufreq driver looks to have been
+a mistake. It covers not only P-state related bits, but also C-state and
+T-state ones. (This is only a latent issue as long as
+https://lists.xen.org/archives/html/xen-devel/2026-02/msg00875.html
+wouldn't land.)
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---3wsJeamIeufwQU0A
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmmoQ18ACgkQ24/THMrX
-1ywLzAf/bqO07wqXpUQrXgrCBoXHfuZyqb/i/Blg+Z2GItiRrSuQq33VEKJSZPLV
-sEfL9HBpM2AZZxCLn9mPbwIpf1zRnHG+bIDucJC/4cBn9YKyslZ72DxdipqL/pMn
-vc5FgcYuyTKwdnpX2F4XRBRaJSXeY4XmRaNqOHQfp1o24EZHgHmGfbx8nvlyeQOt
-eJyU54hvbYGes21NbRb/x2LWSewjXtUHO1ObL3D80IcJD/ZgBlf8e0ZIwo7X+w8U
-WYM4zmP9WbfHMHzA2EX3lRiZP0AFMOMWgGSGJlFHgyDehI3jX2CxxGEqVmtlba/e
-SpE9LqxbiHWQRypVj8taNB5FHhcxMQ==
-=rsdm
------END PGP SIGNATURE-----
-
---3wsJeamIeufwQU0A--
+--- a/xen/arch/x86/acpi/lib.c
++++ b/xen/arch/x86/acpi/lib.c
+@@ -124,6 +124,9 @@ int arch_acpi_set_pdc_bits(u32 acpi_id,
+ 	if (cpu_has(c, X86_FEATURE_EIST))
+ 		pdc[2] |= ACPI_PDC_EST_CAPABILITY_SWSMP & mask;
+ 
++	if (hwp_active())
++		pdc[2] |= ACPI_PDC_CPPC_NATIVE_INTR & mask;
++
+ 	if (cpu_has(c, X86_FEATURE_ACPI))
+ 		pdc[2] |= ACPI_PDC_T_FFH & mask;
+ 
+@@ -142,8 +145,5 @@ int arch_acpi_set_pdc_bits(u32 acpi_id,
+ 	    !(ecx & CPUID5_ECX_INTERRUPT_BREAK))
+ 		pdc[2] &= ~(ACPI_PDC_C_C1_FFH | ACPI_PDC_C_C2C3_FFH);
+ 
+-	if (hwp_active())
+-		pdc[2] |= ACPI_PDC_CPPC_NATIVE_INTR;
+-
+ 	return 0;
+ }
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -694,14 +694,23 @@ int acpi_set_pdc_bits(unsigned int acpi_
+     {
+         uint32_t mask = 0;
+ 
++        /*
++         * Accumulate all the bits under Xen's control, to mask them off, for
++         * arch_acpi_set_pdc_bits() to then set those we want set.
++         */
+         if ( xen_processor_pmbits & XEN_PROCESSOR_PM_CX )
+             mask |= ACPI_PDC_C_MASK | ACPI_PDC_SMP_C1PT;
+-        if ( xen_processor_pmbits & XEN_PROCESSOR_PM_PX )
++
++        if ( xen_processor_pmbits &
++             (XEN_PROCESSOR_PM_PX | XEN_PROCESSOR_PM_CPPC) )
+             mask |= ACPI_PDC_P_MASK | ACPI_PDC_SMP_C1PT;
++
+         if ( xen_processor_pmbits & XEN_PROCESSOR_PM_TX )
+             mask |= ACPI_PDC_T_MASK | ACPI_PDC_SMP_C1PT;
++
+         bits[2] &= (ACPI_PDC_C_MASK | ACPI_PDC_P_MASK | ACPI_PDC_T_MASK |
+                     ACPI_PDC_SMP_C1PT) & ~mask;
++
+         ret = arch_acpi_set_pdc_bits(acpi_id, bits, mask);
+     }
+     if ( !ret && __copy_to_guest_offset(pdc, 2, bits + 2, 1) )
+--- a/xen/include/acpi/pdc_intel.h
++++ b/xen/include/acpi/pdc_intel.h
+@@ -43,7 +43,8 @@
+ 
+ #define ACPI_PDC_P_MASK			(ACPI_PDC_P_FFH | \
+ 					 ACPI_PDC_SMP_P_SWCOORD | \
+-					 ACPI_PDC_SMP_P_HWCOORD)
++					 ACPI_PDC_SMP_P_HWCOORD | \
++					 ACPI_PDC_CPPC_NATIVE_INTR)
+ 
+ #define ACPI_PDC_T_MASK			(ACPI_PDC_T_FFH | \
+ 					 ACPI_PDC_SMP_T_SWCOORD)
 
