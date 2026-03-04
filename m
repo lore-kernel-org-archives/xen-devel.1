@@ -4,41 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 458ADEFCE3B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 19:11:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1245918.1545247 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 844C8EFCE39
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 19:30:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1245939.1545257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxrcG-00026Y-9f; Wed, 04 Mar 2026 19:10:40 +0000
+	id 1vxrur-0003ti-Ob; Wed, 04 Mar 2026 19:29:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1245918.1545247; Wed, 04 Mar 2026 19:10:40 +0000
+Received: by outflank-mailman (output) from mailman id 1245939.1545257; Wed, 04 Mar 2026 19:29:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxrcG-00026R-6M; Wed, 04 Mar 2026 19:10:40 +0000
-Received: by outflank-mailman (input) for mailman id 1245918;
- Wed, 04 Mar 2026 19:10:39 +0000
+	id 1vxrur-0003tb-Lv; Wed, 04 Mar 2026 19:29:53 +0000
+Received: by outflank-mailman (input) for mailman id 1245939;
+ Wed, 04 Mar 2026 19:29:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qNKU=BE=redhat.com=peterx@srs-se1.protection.inumbo.net>)
- id 1vxrcE-00026L-TH
- for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 19:10:38 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YDHP=BE=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vxruq-0003tT-M5
+ for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 19:29:52 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cb3245de-17fd-11f1-9ccf-f158ae23cfc8;
- Wed, 04 Mar 2026 20:10:24 +0100 (CET)
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-457-2ohN0X8qP3CPSqcLgNxD4A-1; Wed, 04 Mar 2026 14:10:21 -0500
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-89a0013d87bso47755046d6.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Mar 2026 11:10:21 -0800 (PST)
-Received: from x1.local ([174.91.117.149]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-899ff659b75sm73282246d6.34.2026.03.04.11.10.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Mar 2026 11:10:19 -0800 (PST)
+ id 82ee16b5-1800-11f1-9ccf-f158ae23cfc8;
+ Wed, 04 Mar 2026 20:29:50 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-48371bb515eso107980745e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Mar 2026 11:29:50 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-439c6129017sm9129316f8f.31.2026.03.04.11.29.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Mar 2026 11:29:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,74 +47,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb3245de-17fd-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1772651422;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=D0fD55fcz8KZ4PtgIiEuNTP5Fw4Mwe9/ywY1K2zb/Kg=;
-	b=Mcs7K6eSl8NqmMgN0kc4AFD8Xk9fogUDrFYoykk3bzwpIOTHV+HDC1OYCCFRNikQZd5FXV
-	fzRdlw9YSQ/JAwncZXWrp9M1/+oPXC1gj767Qs1i0wyk8KU8c/Ujbo413qY+zRS99GIO3J
-	LLgSvjEKikGhL5tgt0MiWKqS8eUtZ6A=
-X-MC-Unique: 2ohN0X8qP3CPSqcLgNxD4A-1
-X-Mimecast-MFC-AGG-ID: 2ohN0X8qP3CPSqcLgNxD4A_1772651421
+X-Inumbo-ID: 82ee16b5-1800-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772652590; x=1773257390; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Br0owAO4cMjtqobqDOXI/vXhN4+464FEXKnA6CShxks=;
+        b=S5m1wfypIvX+2AgjELH0YxqqVPhqQrGs10M1SP5faNctMBHjMICoON36rf2gh8Ad3S
+         xbNucnj43Cv0tkXeMHktlqlE4Q0iuWZgGipNfA2dDkFnXGt2g7/t+mWavMcVa2mSFXX7
+         sRxO+J+VcufczGefnNehxp/UtDxjFgLO1ec0muKBsaXRLdqOQKWkQkIUGtAmUqJOL8h/
+         UVhC8FfMM5RIU8TEfbEPilzAMIwhdFZdaj84STF/LAkPRbv/E0qaRrUm+Iji4p24uqDE
+         sOL0bM4f8RDSAkI9FPxEfQwdQhdafnSdlNArTj159lomMpOdf4u2Q7q0VAdW8IlEUkGr
+         KTCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772651421; x=1773256221;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=D0fD55fcz8KZ4PtgIiEuNTP5Fw4Mwe9/ywY1K2zb/Kg=;
-        b=MVmYcF3JxpEiGGf/J2EKajOkiHh1+9SI8DTRVWrLkdVGzFHhnuKJeLO0MFKGhTGmrn
-         iLYowj+PviHTPso0uj0haGbxK3Y1zjBAkIcDAmL2miMg5kSgEzZjiqKz5pMFYOhuvtg3
-         avEuXX/iWVb3+Wi9iangQI8dnJXrP9NEe+3J6LrL6xNpF5kc2acydsC2kt/Twr5JzuCS
-         pY4AKakcjQSKs9j0q5wf8IHPcc4lZmXczevrbt1tjD6RVIHZD5ivjdVVIt7peFzcCprk
-         /9N3CObBnAWbS5SaPP4GgNjQHeHtnAYJHuobRT7xW9a8+H2Lplh/tqyNvwW2b0CtIHeM
-         UH8g==
-X-Forwarded-Encrypted: i=1; AJvYcCXcdCCXguHsUbrDcfTvn36AMOr0AZaCk6z3gbKxM9fUYlaWSp0WvsFC7eq96wr8LjaNF2UlcGbWYP4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwHq1EW8LLHFJIB1JL4EG3A0+jiPzVCkl2lTgZLp13treCJlIld
-	cYx0zgH4uWT5ku3dQgDo2Cv5Fo8h/qfuA/+nkbZrikAcouA+q/OI9RtB63mB2tLYSDDr1IW+RSe
-	1dVXLhEWyGoFSa84rxhSzfA2yt0wFk6amICU20J71PUlrMwbmaNBfJo5LlRcHebtN7cOH
-X-Gm-Gg: ATEYQzydTI0xZUfhf7dvNioUvyjmXTKZTchZrE810KflxDULfirqGg+PS6PuWYpu0J9
-	7zDQMiicdGBHxhEWOl3uANdzsbj1C8hovrl0XbterQPPv4zbKl9D2sIEBFmGON8LZp4t3+kyiJc
-	nQnL84w73vShDIP4j5I+o4vii9fwNtnS3DXPncX7t4zuDr3SMpqpWljiJ0lLfHYebHWn87Bg0nq
-	uXhFGGedV+DXChVUl8fyqVC4oQpV7/pPzdtFQ0n+w30hv/PoIW3xmwLymBQRtbkH81ineilJh5T
-	F5SjpeCla5yty2Q32vacD9Fge286tK8lHq5hei1eTzSHxq8Vhso0CukwRc+t83eBgOpcBPZQjtG
-	Q++d8HtWmmnchFA==
-X-Received: by 2002:a05:6214:dcb:b0:89a:1116:b55f with SMTP id 6a1803df08f44-89a1998b398mr41124746d6.7.1772651420624;
-        Wed, 04 Mar 2026 11:10:20 -0800 (PST)
-X-Received: by 2002:a05:6214:dcb:b0:89a:1116:b55f with SMTP id 6a1803df08f44-89a1998b398mr41124166d6.7.1772651419928;
-        Wed, 04 Mar 2026 11:10:19 -0800 (PST)
-Date: Wed, 4 Mar 2026 14:10:08 -0500
-From: Peter Xu <peterx@redhat.com>
-To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	sstabellini@kernel.org, anthony@xenproject.org,
-	edgar.iglesias@amd.com, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v1 3/5] physmem: xen: Conditionalize use of the mapcache
-Message-ID: <aaiDkBwlttHoWRAR@x1.local>
-References: <20260304015222.979224-1-edgar.iglesias@gmail.com>
- <20260304015222.979224-4-edgar.iglesias@gmail.com>
+        d=1e100.net; s=20230601; t=1772652590; x=1773257390;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Br0owAO4cMjtqobqDOXI/vXhN4+464FEXKnA6CShxks=;
+        b=VQfvFjC4NDQ3J7oSEU8F+lDLkIUkyqBnIC1kJb06Y44PLK/bXmGZHw9e6RBRT7CjV0
+         +JcudgtwzJ7SnuRtoUQqWJl3uMrup1e3+WfhDwTegNWcxBlgrqttqtO/YQHtxYhUCgaN
+         vqoad9wz4TEPa7g0PbWRhSpD7xCkdmZqWg/WChs0cxHXJLPeP1IAYSvKb8YLJo89k6vn
+         wZ/2+TKQ5a6HFXj/axnNXoFvvl0/9QKbvEsamopVGdyLC3CZwDY6i9Hz6Fwrt9CvlJVz
+         UKx2y15Vu7CYl1J1kMUoeoktyR+GuuUMlfr1gvgKXn3yCcGL1frmhDI31Nl5ntncTKih
+         VpMw==
+X-Forwarded-Encrypted: i=1; AJvYcCWw2YbZd908UFvdkGNSYj55LgTkecU9USmtdp6JdqvJRy/QPYbIEZ/0TAp7dz3JwpvevwJpNduzpTQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwUT1DSfA2tG9NxHIxDPYuIKYoO3pBMBYE4eTCHk5gbTy17+SeQ
+	6mGwZeuqpKUvcbVo86JOxB7LgPfgeDJi5vvK0qe8WeJOr9yBQeiLAAzl
+X-Gm-Gg: ATEYQzwqDvAhwkU+vRw79JWwxrC7Nyc4T2SebbUDgKNOf9zVXClzgVhP7Nm+azgXY7A
+	OKk1Dei3ETH7zprRfzvLzQhySdzDhw9B9Drb3ivWVFG3KLCArBPYHbdw2pAlnIqPbM/TTZNqmkB
+	f8kKMPM5BpZCrDGs7E1Wt6swIOjKkUeHEneWZebdT3oYaTiiizZM63dQbx7USsXIeEFbKcS9y7k
+	xyDPiZjcZwoS4J1GyxjO2iFFX15icnRiTQ+gKNcSw9dE6mdEuuM0GHdZBOD0pmuqtfhtwarrcCH
+	mN3EZqjG5ZvEpmYqYzB+YtNPuitfXemiLQCFZDJzCJfR3ocEMc8TVe6ilfP2pzhS81tTZKZ3RvY
+	zx29R1Re5Xb5nMwlaQ0HsPquDjdNenjqIJKzER6TwkpKr3PkUcZ2qcOVzZYt+3vDZpIVd2Ry6yq
+	f1LVJ8jzMmhm9Z3d+ydzMrckomiHXF7QxgYy/mH/f1Fa4O22RYF/h+NJo15z9G/2xD1T9lY81ls
+	Mwytn6dPb8bBg==
+X-Received: by 2002:a05:600c:1986:b0:477:af8d:203a with SMTP id 5b1f17b1804b1-48519897aa6mr51546315e9.27.1772652589413;
+        Wed, 04 Mar 2026 11:29:49 -0800 (PST)
+Message-ID: <23b77208-5321-4dad-8974-f943b38ef104@gmail.com>
+Date: Wed, 4 Mar 2026 20:29:45 +0100
 MIME-Version: 1.0
-In-Reply-To: <20260304015222.979224-4-edgar.iglesias@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: uMkzWZmE2PEkuc7Si-0yoeR3GHkKaIlXRP8-1G8CuKY_1772651421
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 03/14] xen/riscv: introduce tracking of pending vCPU
+ interrupts, part 1
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1772016457.git.oleksii.kurochko@gmail.com>
+ <a1954e9a30abace453f4604a47b43ecbcebe350a.1772016457.git.oleksii.kurochko@gmail.com>
+ <6357ad3f-85c8-4fe4-a2c8-8b0a0a97f1b3@suse.com>
+ <32bd2cc9-86ee-4470-af7c-f52838e0c4e1@gmail.com>
+Content-Language: en-US
+In-Reply-To: <32bd2cc9-86ee-4470-af7c-f52838e0c4e1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 04, 2026 at 02:52:19AM +0100, Edgar E. Iglesias wrote:
-> From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
-> 
-> Conditionalize use of the mapcache. This is in preparation
-> to optionally disable the mapcache at runtime.
-> 
-> Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 
-Acked-by: Peter Xu <peterx@redhat.com>
+On 3/4/26 4:07 PM, Oleksii Kurochko wrote:
+>>
+>>> +void vcpu_sync_interrupts(struct vcpu *v)
+>> The sole caller passes "current". Are other uses of this function 
+>> planned?
+>> If not either "current" wants directly using here, or minimally the 
+>> parameter
+>> wants renaming to "curr". In fact ...
+>>
+>>> +{
+>>> +    unsigned long hvip = csr_read(CSR_HVIP);
+>> ... this suggests it's unlikely for the function to be valid to call 
+>> with
+>> other than "current".
+>
+> Agree, I will drop v argument and use current inside 
+> vcpu_sync_interrupts().
 
--- 
-Peter Xu
+Then would you be okay with using current instead of v argument inside vcpu_update_hvip()
+and vcpu_flush_interrupts() introduced in the next patch?
+
+~ Oleksii
 
 
