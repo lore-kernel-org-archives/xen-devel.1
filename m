@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26ADAEDEBFD
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 01:52:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1245073.1544434 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C00FEDEC03
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Mar 2026 01:52:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1245076.1544470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxbPb-0006Bx-Pi; Wed, 04 Mar 2026 01:52:31 +0000
+	id 1vxbPk-00076R-JS; Wed, 04 Mar 2026 01:52:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1245073.1544434; Wed, 04 Mar 2026 01:52:31 +0000
+Received: by outflank-mailman (output) from mailman id 1245076.1544470; Wed, 04 Mar 2026 01:52:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vxbPb-0006B6-K6; Wed, 04 Mar 2026 01:52:31 +0000
-Received: by outflank-mailman (input) for mailman id 1245073;
- Wed, 04 Mar 2026 01:52:30 +0000
+	id 1vxbPk-00076K-DH; Wed, 04 Mar 2026 01:52:40 +0000
+Received: by outflank-mailman (input) for mailman id 1245076;
+ Wed, 04 Mar 2026 01:52:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0T8J=BE=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1vxbPa-00069T-MM
- for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 01:52:30 +0000
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [2607:f8b0:4864:20::936])
+ id 1vxbPi-00069T-Ld
+ for xen-devel@lists.xenproject.org; Wed, 04 Mar 2026 01:52:38 +0000
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [2607:f8b0:4864:20::e32])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cd6a365f-176c-11f1-b164-2bf370ae4941;
- Wed, 04 Mar 2026 02:52:30 +0100 (CET)
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-94dda16ff9fso1914153241.1
- for <xen-devel@lists.xenproject.org>; Tue, 03 Mar 2026 17:52:29 -0800 (PST)
+ id d219c63d-176c-11f1-b164-2bf370ae4941;
+ Wed, 04 Mar 2026 02:52:38 +0100 (CET)
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-5ff1703cb9eso1668728137.3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Mar 2026 17:52:37 -0800 (PST)
 Received: from gmail.com (ip190-5-140-138.intercom.com.sv. [190.5.140.138])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-5ff1ea1596asm18777740137.9.2026.03.03.17.52.27
+ a1e0cc1a2514c-94df6577693sm16742382241.9.2026.03.03.17.52.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Mar 2026 17:52:28 -0800 (PST)
+ Tue, 03 Mar 2026 17:52:35 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +47,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cd6a365f-176c-11f1-b164-2bf370ae4941
+X-Inumbo-ID: d219c63d-176c-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772589149; x=1773193949; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772589157; x=1773193957; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yxu4XRB4FitI2+AcQo8tLZ5+1Awl0R6238sOzIkA3R0=;
-        b=UxSha2V/remXY709hVthtXxJCcOpZq/ReBQ9iYEzmAn2rzakakOt5TDONZQ/2AiGN+
-         pS27vRc8zU4r+93xgjEw+lXoZENRu7W820wHsM7kDJSVgV1HITW/GD2hGUri912amZBE
-         bsFQe22mp7UozRCcw3L9g5Uf0BOlOv4/qeFP7TxdZOC8plbwVo7PDWM2AIF0QZYdx9fA
-         jKB9FXUyU0HZ2yyqHe19w75CRQ8CRoNUfiRTXi9kRlSYQBEwVbbZzoHc2iJZzSMlpRUP
-         4AYXR4ufXYv5ZmPHx4sbIFosb8v+HFGBk7v7RLehpPtdYsrj4sMdJdmRMqQb8okcyF/5
-         A18g==
+        bh=rZOO08zLikZY030P2ehrGV6veLejKIl076oxwM9/gTs=;
+        b=eXk/08fdK1Tui/DCmFmi2fHGK0ecEBAJkf9fZhkl1StlYMNMxgHBwFl5Zh3hE+5J9K
+         n3Axy7FwydzUkCjGruiBggDhzTwBFnX+XydUkvdMPEbTaooYHFRrCcQeS9qoE5s1wq9n
+         VcZLo5bWtuNjuv3sm/3UurFdkkVx0eGuVJj6V4nWA5hm40Li+amUkVb/xMf/HweDevf0
+         T1adE0UmZsPsvl2RZMQQiKLNQ7sfMJUw/EvCbTGsbLa6TQvrHtDoRL4DS4IkTmhUPMmd
+         QhEuw/N92QpYUxRKnrTBtuzcNE1eV7tsUoLffZh+RkkT2lXRhKlyH//IBf5FiPmMnhTH
+         rSxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772589149; x=1773193949;
+        d=1e100.net; s=20230601; t=1772589157; x=1773193957;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=yxu4XRB4FitI2+AcQo8tLZ5+1Awl0R6238sOzIkA3R0=;
-        b=v6sXoniYP1h0o2tKZma9Yce7oj9WPPzEQ3rJUmBimBmhrDtNlg/y76k1gzIyNiOdvy
-         3bHVGTiCD/xO82OIDlycmozKK38nFiJm3SqCpqv+NExn/b/Lao38AY3/DskSOmiQUwSX
-         rBDYtcprDRc8qbDQQmYhoonc+fMx4vLRHVwkos7XXYAO/CLmXoVzwQu1XrxygWRVMOhc
-         a5aicooYBhYfX6iqrzffkxuK3Dzp9yutA4aEP2RfFLDqLbCW8bBUaCIerrJ9vIwhg8hV
-         TG+6yTzMo3BPGhgV1/HhH1tvQFZHiQ37Xzj60wKdlgdPm9k2BdqeetDw6+lgUuXOof1z
-         2RJA==
-X-Forwarded-Encrypted: i=1; AJvYcCW6el+t/I2GA4Ca74BzEO48h4XxTIiFzKxp4zgmzmO0V+ed1r96DjqlrldMOmFvXo8qjnRADznY7M4=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzufG5bYyido0dDj/2I+IgglkqqNqL1yYWJKOxm2Kl63gSvn5EL
-	DBVg3MwHcvqqHInnqPhqVRDWXnqS+F1cb2fxItBVRoPVR0xPG4WafBbe
-X-Gm-Gg: ATEYQzzkhwjVkZqhDJm0NGzYle6Qhwe/0M2JN/iKxeha0026TU3x/hGcbtrjZ8E3Wim
-	Q6X9yl+A0SkbvEy+jYQNeCwwnXd+TehkLU9lWLkP1pjXCcOdz/51U4ylZil7y99jISIIte1uOcy
-	WwF6U9DhZsqWtzPLLzG5TD207WHRrJu4WB9Z/qvcWlu4OZzH5Wu0X/9bNEjNUGMw1c2CrR4NaOT
-	60Lbz+rj0EoLxitCA2NZuVJNWsQP8JdGXJHoI9mR7WKmDecMqB3mAuq4tjRF25MLSn2UksGJEUx
-	iF3dbT4shak5uZ0u+VdQF9yRx0IIf/UWLFkb258JZO5WEm9+VkwBLkCpJybvm90qKn9YHvF2XFv
-	Ff583cDyTD5zXWlDb4sGExUEl37El0sODIj/tsNdCeL9Thj9Tcd+3FILE8TQAjfrlynW0enrv3g
-	hnsTyTylm2Q1MGvfEGBkep2O/DvxHAAS5YgphReL/oc9HZrIW+BdPdueKfSA==
-X-Received: by 2002:a05:6102:c09:b0:5dd:f9c2:551c with SMTP id ada2fe7eead31-5ffaaf1bf2fmr242963137.27.1772589148744;
-        Tue, 03 Mar 2026 17:52:28 -0800 (PST)
+        bh=rZOO08zLikZY030P2ehrGV6veLejKIl076oxwM9/gTs=;
+        b=pzVvZ6lUx14VYhmPDknIA+rBv5qpbwaF5yg6DyVY2iPaE3v+bX8ASSvfnhsNwQDfwb
+         IDP0isornjJouAwj1g1EXW5eiP3CmF4yDpxdhsfqdta7DrzS1LQG6H7BIu7BrMLEs0to
+         rzvjKW3Oy5QwZlBWH0M9wp/yyVqWLAX7C78/CxNA9PRWI/h81hlc9syYf8Q043Z15xec
+         l7hIo50n7zS31SQVDSasdeVr7oiH+WukaBVKqKcTG/2IuHLYzykwROZmAX91dh9ylPBx
+         8g1PjV5MemLeUZACjprzz4I3w8GHlGR/O3vJUDx1eoQWFV2APpDr/Uf9gftpSK4su5uU
+         YDsg==
+X-Forwarded-Encrypted: i=1; AJvYcCWpCdSYjNYFtOfymWwWkoO0PRuYTEz2mXGdL9xXH/mzB6YwxiZSAxNQ0PB35gmVlL588vxvl5kKafs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz5TK0+LKbDoD07VeqXWgp5w0GxmuIkRgPB9Tk0A9MyRDjaV2Ul
+	quEPzGVZ+lpD43e6o/LFP6ooNwrM65T9RUqzlcnuMEPmFSDYj3W26922
+X-Gm-Gg: ATEYQzyKvPXp69wkaW+SZy9If/u3e1kyxj2Nz3PavIIxG6FycVm09ztBsinxHjDTp9p
+	2eMks7a9J1YrhOHjb2MEa5j2nuD/eCkIgOYPGgLYdbj47VYTihGGivv/7jBOsu5mtrZt4VZMdEr
+	4ogTgbJxMkC/ZyEuSq5ii3QGOj+Cqo7hntjTdtsCJGQlEHakUB8zV8VC7+l2Bc+BDrPwTEh5HbN
+	fSKl4MjXNGM8LtZ2X1lFxxCLahJhzERHePF8HwaZMHO6JhN8nnoma1yEzuve/H1vJl1bhXGsFft
+	uFT/anz47nxkKFzvZUmH7EicRJ23NI9Gg1aHMXovABZLcygwX0oNA+WNWYxR8XO+Pvu9pR65jKb
+	k7vrvWnW+22CGuaKxpqGpdER2+XcihPFB1ljULBUFOPXJ8ApTnJFJHWuW5FioBJZOiTYhSmC7+2
+	ip+o1ZVDro6X7kpMCUZKZ3XiF+UFG5vGK9kiMyS+t+MIRFFYciSxTQM6Z7EA==
+X-Received: by 2002:a05:6102:c52:b0:5fe:13bc:f13a with SMTP id ada2fe7eead31-5ffaafb23f5mr239107137.36.1772589156590;
+        Tue, 03 Mar 2026 17:52:36 -0800 (PST)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: qemu-devel@nongnu.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Anthony PERARD <anthony@xenproject.org>,
 	Paul Durrant <paul@xen.org>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>
 Cc: edgar.iglesias@amd.com,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v1 1/5] xen: mapcache: Assert mapcache existance
-Date: Wed,  4 Mar 2026 02:52:17 +0100
-Message-ID: <20260304015222.979224-2-edgar.iglesias@gmail.com>
+Subject: [PATCH v1 4/5] hw/xen-hvm: Add a mapcache arg to xen_register_ioreq()
+Date: Wed,  4 Mar 2026 02:52:20 +0100
+Message-ID: <20260304015222.979224-5-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260304015222.979224-1-edgar.iglesias@gmail.com>
 References: <20260304015222.979224-1-edgar.iglesias@gmail.com>
@@ -103,62 +108,121 @@ Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Assert that the mapcache was created prior to being used.
+Add a mapcache argument to xen_register_ioreq() allowing
+the caller to optionally disable the mapcache.
+
+All callers still call it with mapcache = true so there's no
+functional change yet.
 
 Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
 ---
- hw/xen/xen-mapcache.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ hw/i386/xen/xen-hvm.c           |  2 +-
+ hw/xen/xen-hvm-common.c         | 18 ++++++++++++------
+ hw/xen/xen-pvh-common.c         |  3 ++-
+ include/hw/xen/xen-hvm-common.h |  3 ++-
+ 4 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
-index 11115f6084..517e5171b7 100644
---- a/hw/xen/xen-mapcache.c
-+++ b/hw/xen/xen-mapcache.c
-@@ -464,6 +464,8 @@ uint8_t *xen_map_cache(MemoryRegion *mr,
-     MapCache *mc = mapcache;
-     uint8_t *p;
+diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+index a6e1683885..c7bfcaae8e 100644
+--- a/hw/i386/xen/xen-hvm.c
++++ b/hw/i386/xen/xen-hvm.c
+@@ -622,7 +622,7 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
  
-+    assert(mapcache);
-+
-     if (grant) {
-         mc = is_write ? mapcache_grants_rw : mapcache_grants_ro;
+     xen_register_ioreq(state, max_cpus,
+                        HVM_IOREQSRV_BUFIOREQ_ATOMIC,
+-                       &xen_memory_listener);
++                       &xen_memory_listener, true);
+ 
+     xen_is_stubdomain = xen_check_stubdomain(state->xenstore);
+ 
+diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
+index 59c73dfaeb..8c825588ae 100644
+--- a/hw/xen/xen-hvm-common.c
++++ b/hw/xen/xen-hvm-common.c
+@@ -473,7 +473,9 @@ static void handle_ioreq(XenIOState *state, ioreq_t *req)
+         case IOREQ_TYPE_TIMEOFFSET:
+             break;
+         case IOREQ_TYPE_INVALIDATE:
+-            xen_invalidate_map_cache();
++            if (xen_map_cache_enabled()) {
++                xen_invalidate_map_cache();
++            }
+             break;
+         case IOREQ_TYPE_PCI_CONFIG:
+             cpu_ioreq_config(state, req);
+@@ -823,7 +825,8 @@ void xen_shutdown_fatal_error(const char *fmt, ...)
+ 
+ static void xen_do_ioreq_register(XenIOState *state,
+                                   unsigned int max_cpus,
+-                                  const MemoryListener *xen_memory_listener)
++                                  const MemoryListener *xen_memory_listener,
++                                  bool mapcache)
+ {
+     int i, rc;
+ 
+@@ -874,11 +877,13 @@ static void xen_do_ioreq_register(XenIOState *state,
+         state->bufioreq_local_port = rc;
      }
-@@ -530,6 +532,8 @@ ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
+     /* Init RAM management */
++    if (mapcache) {
+ #ifdef XEN_COMPAT_PHYSMAP
+-    xen_map_cache_init(xen_phys_offset_to_gaddr, state);
++        xen_map_cache_init(xen_phys_offset_to_gaddr, state);
+ #else
+-    xen_map_cache_init(NULL, state);
++        xen_map_cache_init(NULL, state);
+ #endif
++    }
+ 
+     qemu_add_vm_change_state_handler(xen_hvm_change_state_handler, state);
+ 
+@@ -901,7 +906,8 @@ err:
+ 
+ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
+                         uint8_t handle_bufioreq,
+-                        const MemoryListener *xen_memory_listener)
++                        const MemoryListener *xen_memory_listener,
++                        bool mapcache)
  {
-     ram_addr_t addr;
+     int rc;
  
-+    assert(mapcache);
-+
-     addr = xen_ram_addr_from_mapcache_single(mapcache, ptr);
-     if (addr == RAM_ADDR_INVALID) {
-         addr = xen_ram_addr_from_mapcache_single(mapcache_grants_ro, ptr);
-@@ -652,6 +656,8 @@ static void xen_invalidate_map_cache_entry_bh(void *opaque)
+@@ -922,7 +928,7 @@ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
+     state->has_bufioreq = handle_bufioreq != HVM_IOREQSRV_BUFIOREQ_OFF;
+     rc = xen_create_ioreq_server(xen_domid, handle_bufioreq, &state->ioservid);
+     if (!rc) {
+-        xen_do_ioreq_register(state, max_cpus, xen_memory_listener);
++        xen_do_ioreq_register(state, max_cpus, xen_memory_listener, mapcache);
+     } else {
+         warn_report("xen: failed to create ioreq server");
+     }
+diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
+index 1381310fc7..4fade017bb 100644
+--- a/hw/xen/xen-pvh-common.c
++++ b/hw/xen/xen-pvh-common.c
+@@ -202,7 +202,8 @@ static void xen_pvh_init(MachineState *ms)
+     xen_pvh_init_ram(s, sysmem);
+     xen_register_ioreq(&s->ioreq, ms->smp.max_cpus,
+                        xpc->handle_bufioreq,
+-                       &xen_memory_listener);
++                       &xen_memory_listener,
++                       true);
  
- void coroutine_mixed_fn xen_invalidate_map_cache_entry(uint8_t *buffer)
- {
-+    assert(mapcache);
-+
-     if (qemu_in_coroutine()) {
-         XenMapCacheData data = {
-             .co = qemu_coroutine_self(),
-@@ -709,6 +715,8 @@ static void xen_invalidate_map_cache_single(MapCache *mc)
+     if (s->cfg.virtio_mmio_num) {
+         xen_create_virtio_mmio_devices(s);
+diff --git a/include/hw/xen/xen-hvm-common.h b/include/hw/xen/xen-hvm-common.h
+index e1beca062f..d177ff14ea 100644
+--- a/include/hw/xen/xen-hvm-common.h
++++ b/include/hw/xen/xen-hvm-common.h
+@@ -91,7 +91,8 @@ void xen_device_unrealize(DeviceListener *listener, DeviceState *dev);
+ void xen_hvm_change_state_handler(void *opaque, bool running, RunState rstate);
+ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
+                         uint8_t handle_bufioreq,
+-                        const MemoryListener *xen_memory_listener);
++                        const MemoryListener *xen_memory_listener,
++                        bool mapcache);
  
- void xen_invalidate_map_cache(void)
- {
-+    assert(mapcache);
-+
-     /* Flush pending AIO before destroying the mapcache */
-     bdrv_drain_all();
- 
-@@ -776,6 +784,8 @@ uint8_t *xen_replace_cache_entry(hwaddr old_phys_addr,
- {
-     uint8_t *p;
- 
-+    assert(mapcache);
-+
-     mapcache_lock(mapcache);
-     p = xen_replace_cache_entry_unlocked(mapcache, old_phys_addr,
-                                          new_phys_addr, size);
+ void cpu_ioreq_pio(ioreq_t *req);
+ #endif /* HW_XEN_HVM_COMMON_H */
 -- 
 2.43.0
 
