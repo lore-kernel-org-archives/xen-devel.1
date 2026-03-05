@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 191D1F33A62
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 13:52:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1246664.1545768 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A6B1F33A62
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 13:52:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1246666.1545788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy97f-0008N3-7s; Thu, 05 Mar 2026 13:52:15 +0000
+	id 1vy97o-0000Rd-Q1; Thu, 05 Mar 2026 13:52:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1246664.1545768; Thu, 05 Mar 2026 13:52:15 +0000
+Received: by outflank-mailman (output) from mailman id 1246666.1545788; Thu, 05 Mar 2026 13:52:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy97f-0008Mw-4f; Thu, 05 Mar 2026 13:52:15 +0000
-Received: by outflank-mailman (input) for mailman id 1246664;
- Thu, 05 Mar 2026 13:52:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1vy97o-0000RL-Lp; Thu, 05 Mar 2026 13:52:24 +0000
+Received: by outflank-mailman (input) for mailman id 1246666;
+ Thu, 05 Mar 2026 13:52:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=y0Pc=BF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vy97c-0008Mq-W3
- for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 13:52:13 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 820ae696-189a-11f1-b164-2bf370ae4941;
- Thu, 05 Mar 2026 14:52:11 +0100 (CET)
+ id 1vy97n-00008m-IK
+ for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 13:52:23 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8833b762-189a-11f1-9ccf-f158ae23cfc8;
+ Thu, 05 Mar 2026 14:52:21 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6414C3F904;
- Thu,  5 Mar 2026 13:52:10 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 48E335BD8E;
+ Thu,  5 Mar 2026 13:52:21 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3A6DC3EA68;
- Thu,  5 Mar 2026 13:52:10 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 25A873EA68;
+ Thu,  5 Mar 2026 13:52:21 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id pHcFDYqKqWlKTgAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 05 Mar 2026 13:52:10 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id qiwdCJWKqWlYTgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 05 Mar 2026 13:52:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,110 +53,305 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 820ae696-189a-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 8833b762-189a-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1772718730; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=x/tKo6sO/yEl7rIclC8Ou/RxLmCoSVX2S0UQLahfY5Y=;
-	b=W8Njhtr8phGTTkrM/iWOk5nQ1OdpnM8IfavIGp92qr8ObGu4rpQJ/w6Ox0t7RK/Nkdl+Ku
-	OjOsm8qme8KAc81wZk3rG5EkzEVOK36uO0X+Ar41yoDvxHVqR9BF0BsPERcLRkrLUtCZMK
-	RhaB1iGTPJS1VAsnFa5jaLFPPTJilvU=
-Authentication-Results: smtp-out1.suse.de;
+	t=1772718741; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9IGAHWgEG6DCdCIzvkRdi4JDcDDT2+/4tidv+QAPpw=;
+	b=GXk2ra0R2l0UyNGcqR1QsOjJOSvLHndSoaFtUNeNGDQVuPbluI6ANqX3N3c9hQzNG5kzxq
+	LIn/mbbxy4VQlEJmnG49TBOry1E5/gw8tSYRUugBK4J9I1hi5Lwj2y8oubOzQ9JsIkFWsx
+	OB0k8MKFzhWhcFoOGsmDu1HRbxcmqyg=
+Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1772718730; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=x/tKo6sO/yEl7rIclC8Ou/RxLmCoSVX2S0UQLahfY5Y=;
-	b=W8Njhtr8phGTTkrM/iWOk5nQ1OdpnM8IfavIGp92qr8ObGu4rpQJ/w6Ox0t7RK/Nkdl+Ku
-	OjOsm8qme8KAc81wZk3rG5EkzEVOK36uO0X+Ar41yoDvxHVqR9BF0BsPERcLRkrLUtCZMK
-	RhaB1iGTPJS1VAsnFa5jaLFPPTJilvU=
+	t=1772718741; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9IGAHWgEG6DCdCIzvkRdi4JDcDDT2+/4tidv+QAPpw=;
+	b=GXk2ra0R2l0UyNGcqR1QsOjJOSvLHndSoaFtUNeNGDQVuPbluI6ANqX3N3c9hQzNG5kzxq
+	LIn/mbbxy4VQlEJmnG49TBOry1E5/gw8tSYRUugBK4J9I1hi5Lwj2y8oubOzQ9JsIkFWsx
+	OB0k8MKFzhWhcFoOGsmDu1HRbxcmqyg=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Nick Rosbrook <enr0n@ubuntu.com>,
-	George Dunlap <gwd@xenproject.org>
-Subject: [PATCH 00/11] tools: add support for per-domain xenstore quota
-Date: Thu,  5 Mar 2026 14:51:57 +0100
-Message-ID: <20260305135208.2208663-1-jgross@suse.com>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 02/11] tools/xenstored: add central quota check functions
+Date: Thu,  5 Mar 2026 14:51:59 +0100
+Message-ID: <20260305135208.2208663-3-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260305135208.2208663-1-jgross@suse.com>
+References: <20260305135208.2208663-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.79 / 50.00];
+X-Spamd-Result: default: False [-6.79 / 50.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.19)[-0.974];
+	NEURAL_HAM_SHORT(-0.19)[-0.962];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,imap1.dmz-prg2.suse.org:helo];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RCPT_COUNT_FIVE(0.00)[6];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RCPT_COUNT_THREE(0.00)[4];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
 	RCVD_TLS_ALL(0.00)[]
 
-This series is adding support for per-domain Xenstore quota to:
+Add central functions for checking a value (either an absolute one or
+the current domain value plus an offset) against a specific quota.
 
-- xenstored
-- libxenstore
-- libxl
-- xl
+This is in preparation of introducing per-domain quota.
 
-With this it is possible to e.g. allow larger limits for driver
-domains.
+The required changes allow to drop the "update" parameter from
+domain_nbentry_fix().
 
-Juergen Gross (11):
-  tools/libs/store: add get- and set-quota related functions
-  tools/xenstored: add central quota check functions
-  tools/xenstored: rework hard_quotas and soft_quotas arrays
-  tools/xenstored: add GLOBAL_QUOTA_DATA record for live update
-  tools/xenstored: split acc[] array in struct domain
-  tools/xenstored: add infrastructure for per-domain quotas
-  tools/xenstored: implement the GET/SET_QUOTA commands
-  tools/libxl: add functions for retrieving and setting xenstore quota
-  tools/libxl: add support for xenstore quota in domain_config
-  tools/xl: add xl commands for xenstore quota operations
-  tools/xl: add support for xenstore quota setting via domain config
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstored/core.c        |  4 +-
+ tools/xenstored/domain.c      | 74 +++++++++++++++++------------------
+ tools/xenstored/domain.h      |  7 ++--
+ tools/xenstored/transaction.c |  2 +-
+ tools/xenstored/watch.c       |  4 +-
+ 5 files changed, 43 insertions(+), 48 deletions(-)
 
- docs/man/xl.cfg.5.pod.in             |  13 +
- tools/golang/xenlight/helpers.gen.go |  84 +++++
- tools/golang/xenlight/types.gen.go   |  10 +
- tools/include/libxl.h                |  20 ++
- tools/include/xenstore.h             |  19 ++
- tools/libs/light/Makefile            |   1 +
- tools/libs/light/libxl_dom.c         |   8 +
- tools/libs/light/libxl_domain.c      |  10 +
- tools/libs/light/libxl_types.idl     |  10 +
- tools/libs/light/libxl_xsquota.c     | 102 ++++++
- tools/libs/store/Makefile            |   2 +-
- tools/libs/store/libxenstore.map     |   8 +
- tools/libs/store/xs.c                | 111 +++++++
- tools/xenstored/control.c            |  24 +-
- tools/xenstored/core.c               |  41 ++-
- tools/xenstored/domain.c             | 457 +++++++++++++++++++++------
- tools/xenstored/domain.h             |  32 +-
- tools/xenstored/lu.c                 |   6 +
- tools/xenstored/transaction.c        |   2 +-
- tools/xenstored/watch.c              |   4 +-
- tools/xl/Makefile                    |   1 +
- tools/xl/xl.h                        |   2 +
- tools/xl/xl_cmdtable.c               |  10 +
- tools/xl/xl_parse.c                  |  48 ++-
- tools/xl/xl_parse.h                  |   1 +
- tools/xl/xl_xsquota.c                |  88 ++++++
- 26 files changed, 972 insertions(+), 142 deletions(-)
- create mode 100644 tools/libs/light/libxl_xsquota.c
- create mode 100644 tools/xl/xl_xsquota.c
-
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index d509736c32..5a4bf3e302 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -1538,7 +1538,7 @@ static struct node *create_node(struct connection *conn, const void *ctx,
+ 	for (i = node; i; i = i->parent) {
+ 		/* i->parent is set for each new node, so check quota. */
+ 		if (i->parent &&
+-		    domain_nbentry(conn) >= hard_quotas[ACC_NODES].val) {
++		    domain_check_quota_add(conn->domain, ACC_NODES, 1)) {
+ 			ret = ENOSPC;
+ 			goto err;
+ 		}
+@@ -2320,7 +2320,7 @@ void setup_structure(bool live_update)
+ 		manual_node("/tool/xenstored", NULL);
+ 		manual_node("@releaseDomain", NULL);
+ 		manual_node("@introduceDomain", NULL);
+-		domain_nbentry_fix(priv_domid, 5, true);
++		domain_nbentry_fix(priv_domid, 5);
+ 	}
+ }
+ 
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index e453b3061f..1df9265ad5 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -389,6 +389,25 @@ void wrl_apply_debit_trans_commit(struct connection *conn)
+ 	wrl_apply_debit_actual(conn->domain);
+ }
+ 
++static bool domain_check_quota_val(struct domain *d, enum accitem what,
++				   unsigned int val)
++{
++	unsigned int quota = hard_quotas[what].val;
++
++	if (!quota || !domid_is_unprivileged(d->domid))
++		return false;
++
++	return val >= quota;
++}
++
++bool domain_check_quota_add(struct domain *d, enum accitem what, int add)
++{
++	if (add < 0 || !d)
++		return false;
++
++	return domain_check_quota_val(d, what, d->acc[what].val + add);
++}
++
+ static bool check_indexes(XENSTORE_RING_IDX cons, XENSTORE_RING_IDX prod)
+ {
+ 	return ((prod - cons) <= XENSTORE_RING_SIZE);
+@@ -490,10 +509,9 @@ static bool domain_can_read(struct connection *conn)
+ 	if (domain_is_unprivileged(conn)) {
+ 		if (domain->wrl_credit < 0)
+ 			return false;
+-		if (domain->acc[ACC_OUTST].val >= hard_quotas[ACC_OUTST].val)
++		if (domain_check_quota_add(domain, ACC_OUTST, 0))
+ 			return false;
+-		if (domain->acc[ACC_MEM].val >= hard_quotas[ACC_MEM].val &&
+-		    hard_quotas[ACC_MEM].val)
++		if (domain_check_quota_add(domain, ACC_MEM, 0))
+ 			return false;
+ 	}
+ 
+@@ -904,16 +922,20 @@ do {						\
+ 
+ int acc_fix_domains(struct list_head *head, bool chk_quota, bool update)
+ {
++	struct domain *d;
+ 	struct changed_domain *cd;
+-	int cnt;
+ 
+ 	list_for_each_entry(cd, head, list) {
+-		cnt = domain_nbentry_fix(cd->domid, cd->acc[ACC_NODES], update);
+-		if (!update) {
+-			if (chk_quota && cnt >= hard_quotas[ACC_NODES].val)
+-				return ENOSPC;
+-			if (cnt < 0)
++		if (update) {
++			domain_nbentry_fix(cd->domid, cd->acc[ACC_NODES]);
++		} else if (chk_quota) {
++			d = find_or_alloc_existing_domain(cd->domid);
++
++			if (!d)
+ 				return ENOMEM;
++			if (domain_check_quota_add(d, ACC_NODES,
++						   cd->acc[ACC_NODES]))
++				return ENOSPC;
+ 		}
+ 	}
+ 
+@@ -1732,7 +1754,7 @@ bool domain_max_chk(const struct connection *conn, enum accitem what,
+ 	if (!conn || !conn->domain)
+ 		return false;
+ 
+-	if (domain_is_unprivileged(conn) && val > hard_quotas[what].val)
++	if (domain_check_quota_val(conn->domain, what, val))
+ 		return true;
+ 
+ 	domain_acc_valid_max(conn->domain, what, val);
+@@ -1752,21 +1774,9 @@ int domain_nbentry_dec(struct connection *conn, unsigned int domid)
+ 	       ? errno : 0;
+ }
+ 
+-int domain_nbentry_fix(unsigned int domid, int num, bool update)
+-{
+-	int ret;
+-
+-	ret = domain_acc_add(NULL, domid, ACC_NODES, update ? num : 0, update);
+-	if (ret < 0 || update)
+-		return ret;
+-
+-	return domid_is_unprivileged(domid) ? ret + num : 0;
+-}
+-
+-unsigned int domain_nbentry(struct connection *conn)
++int domain_nbentry_fix(unsigned int domid, int num)
+ {
+-	return domain_is_unprivileged(conn)
+-	       ? domain_acc_add(conn, conn->id, ACC_NODES, 0, true) : 0;
++	return domain_acc_add(NULL, domid, ACC_NODES, num, true);
+ }
+ 
+ static bool domain_chk_quota(struct connection *conn, unsigned int mem)
+@@ -1781,7 +1791,7 @@ static bool domain_chk_quota(struct connection *conn, unsigned int mem)
+ 	domain = conn->domain;
+ 	now = time(NULL);
+ 
+-	if (mem >= hard_quotas[ACC_MEM].val && hard_quotas[ACC_MEM].val) {
++	if (domain_check_quota_val(domain, ACC_MEM, mem)) {
+ 		if (domain->hard_quota_reported)
+ 			return true;
+ 		syslog(LOG_ERR, "Domain %u exceeds hard memory quota, Xenstore interface to domain stalled\n",
+@@ -1857,13 +1867,6 @@ void domain_watch_dec(struct connection *conn)
+ 	domain_acc_add(conn, conn->id, ACC_WATCH, -1, true);
+ }
+ 
+-int domain_watch(struct connection *conn)
+-{
+-	return (domain_is_unprivileged(conn))
+-		? domain_acc_add(conn, conn->id, ACC_WATCH, 0, true)
+-		: 0;
+-}
+-
+ void domain_outstanding_inc(struct connection *conn)
+ {
+ 	domain_acc_add(conn, conn->id, ACC_OUTST, 1, true);
+@@ -1884,13 +1887,6 @@ void domain_transaction_dec(struct connection *conn)
+ 	domain_acc_add(conn, conn->id, ACC_TRANS, -1, true);
+ }
+ 
+-unsigned int domain_transaction_get(struct connection *conn)
+-{
+-	return (domain_is_unprivileged(conn))
+-		? domain_acc_add(conn, conn->id, ACC_TRANS, 0, true)
+-		: 0;
+-}
+-
+ const char *dump_state_connections(FILE *fp)
+ {
+ 	const char *ret = NULL;
+diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
+index 28186ccac0..b229f6f4e0 100644
+--- a/tools/xenstored/domain.h
++++ b/tools/xenstored/domain.h
+@@ -113,8 +113,7 @@ int domain_alloc_permrefs(struct node_perms *perms);
+ /* Quota manipulation */
+ int domain_nbentry_inc(struct connection *conn, unsigned int domid);
+ int domain_nbentry_dec(struct connection *conn, unsigned int domid);
+-int domain_nbentry_fix(unsigned int domid, int num, bool update);
+-unsigned int domain_nbentry(struct connection *conn);
++int domain_nbentry_fix(unsigned int domid, int num);
+ int domain_memory_add(struct connection *conn, unsigned int domid, int mem,
+ 		      bool no_quota_check);
+ 
+@@ -141,12 +140,10 @@ static inline void domain_memory_add_nochk(struct connection *conn,
+ }
+ void domain_watch_inc(struct connection *conn);
+ void domain_watch_dec(struct connection *conn);
+-int domain_watch(struct connection *conn);
+ void domain_outstanding_inc(struct connection *conn);
+ void domain_outstanding_dec(struct connection *conn, unsigned int domid);
+ void domain_transaction_inc(struct connection *conn);
+ void domain_transaction_dec(struct connection *conn);
+-unsigned int domain_transaction_get(struct connection *conn);
+ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		     unsigned int domid);
+ 
+@@ -161,6 +158,8 @@ int domain_max_global_acc(const void *ctx, struct connection *conn);
+ void domain_reset_global_acc(void);
+ bool domain_max_chk(const struct connection *conn, enum accitem what,
+ 		    unsigned int val);
++bool domain_check_quota_add(struct domain *d, enum accitem what,
++			    int add);
+ 
+ extern long wrl_ntransactions;
+ 
+diff --git a/tools/xenstored/transaction.c b/tools/xenstored/transaction.c
+index 167cd597fd..ccf93a1132 100644
+--- a/tools/xenstored/transaction.c
++++ b/tools/xenstored/transaction.c
+@@ -470,7 +470,7 @@ int do_transaction_start(const void *ctx, struct connection *conn,
+ 	if (conn->transaction)
+ 		return EBUSY;
+ 
+-	if (domain_transaction_get(conn) > hard_quotas[ACC_TRANS].val)
++	if (domain_check_quota_add(conn->domain, ACC_TRANS, 1))
+ 		return ENOSPC;
+ 
+ 	/* Attach transaction to ctx for autofree until it's complete */
+diff --git a/tools/xenstored/watch.c b/tools/xenstored/watch.c
+index b66a9f1a39..36e4d33f22 100644
+--- a/tools/xenstored/watch.c
++++ b/tools/xenstored/watch.c
+@@ -220,8 +220,8 @@ int do_watch(const void *ctx, struct connection *conn, struct buffered_data *in)
+ 			return EEXIST;
+ 	}
+ 
+-	if (domain_watch(conn) > hard_quotas[ACC_WATCH].val)
+-		return E2BIG;
++	if (domain_check_quota_add(conn->domain, ACC_WATCH, 1))
++		return ENOSPC;
+ 
+ 	watch = add_watch(conn, vec[0], vec[1], relative, false);
+ 	if (!watch)
 -- 
 2.53.0
 
