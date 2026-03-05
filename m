@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AD2F33A65
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 13:57:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1246734.1545847 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C01F33A65
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 13:58:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1246746.1545858 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy9Cs-00049t-LP; Thu, 05 Mar 2026 13:57:38 +0000
+	id 1vy9DJ-0004l1-Vv; Thu, 05 Mar 2026 13:58:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1246734.1545847; Thu, 05 Mar 2026 13:57:38 +0000
+Received: by outflank-mailman (output) from mailman id 1246746.1545858; Thu, 05 Mar 2026 13:58:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy9Cs-00049m-I7; Thu, 05 Mar 2026 13:57:38 +0000
-Received: by outflank-mailman (input) for mailman id 1246734;
- Thu, 05 Mar 2026 13:57:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vy9DJ-0004ks-TD; Thu, 05 Mar 2026 13:58:05 +0000
+Received: by outflank-mailman (input) for mailman id 1246746;
+ Thu, 05 Mar 2026 13:58:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=y0Pc=BF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1vy98F-00008m-5J
- for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 13:52:51 +0000
+ id 1vy98P-0008Mq-P5
+ for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 13:53:01 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 98646d41-189a-11f1-9ccf-f158ae23cfc8;
- Thu, 05 Mar 2026 14:52:48 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9f7a8dd3-189a-11f1-b164-2bf370ae4941;
+ Thu, 05 Mar 2026 14:53:00 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 748E75BEC7;
- Thu,  5 Mar 2026 13:52:48 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5CC845BDE2;
+ Thu,  5 Mar 2026 13:52:59 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 54D0A3EA76;
- Thu,  5 Mar 2026 13:52:48 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3790B3EA68;
+ Thu,  5 Mar 2026 13:52:59 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id n8KnE7CKqWkMTwAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 05 Mar 2026 13:52:48 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id AX2ADLuKqWkdTwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 05 Mar 2026 13:52:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,35 +53,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98646d41-189a-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 9f7a8dd3-189a-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1772718768; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1772718779; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r+4ZO/KspblmGGLhGlNMkeWiLuNQLDCEDNiLJzLmjPY=;
-	b=foug50Oxl/72LzeH5fthq6evZ/egSmCWIwtKH48ES5xxykx8PW6vFp7YvV9Mk5NBiS9sHD
-	F5t+nvvLv8VTVuuis5HKMRGA1ne++NR0kV7fF4xsW49Erk9v25T3ITR9kxMCy/FKdwT1PN
-	hJ0HsStVaIIJo4y2pRJUcrQrHmg4Wd4=
+	bh=+0vTnaLiNIbBDWIqxe6qxu0BI40b3mH2UzHvF/8/7sk=;
+	b=klfusZ5eK/BCbJuwI8jkcOy1FBZfH3lLFFtXZ5cbMAIDCTV/fZ+HaE4DXwFtf6rfrk7mSW
+	tY86rV0uUs+vbKeXv9rwhwHnlQn8kK6cIzwH+RjPXqK0Ar3Isc/qmA11M47kNVxMExrjeo
+	cOfQPCSdK0HTgKIcZBzhYfrUi/Jnj4s=
 Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1772718768; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1772718779; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r+4ZO/KspblmGGLhGlNMkeWiLuNQLDCEDNiLJzLmjPY=;
-	b=foug50Oxl/72LzeH5fthq6evZ/egSmCWIwtKH48ES5xxykx8PW6vFp7YvV9Mk5NBiS9sHD
-	F5t+nvvLv8VTVuuis5HKMRGA1ne++NR0kV7fF4xsW49Erk9v25T3ITR9kxMCy/FKdwT1PN
-	hJ0HsStVaIIJo4y2pRJUcrQrHmg4Wd4=
+	bh=+0vTnaLiNIbBDWIqxe6qxu0BI40b3mH2UzHvF/8/7sk=;
+	b=klfusZ5eK/BCbJuwI8jkcOy1FBZfH3lLFFtXZ5cbMAIDCTV/fZ+HaE4DXwFtf6rfrk7mSW
+	tY86rV0uUs+vbKeXv9rwhwHnlQn8kK6cIzwH+RjPXqK0Ar3Isc/qmA11M47kNVxMExrjeo
+	cOfQPCSdK0HTgKIcZBzhYfrUi/Jnj4s=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Nick Rosbrook <enr0n@ubuntu.com>,
+	George Dunlap <gwd@xenproject.org>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH 07/11] tools/xenstored: implement the GET/SET_QUOTA commands
-Date: Thu,  5 Mar 2026 14:52:04 +0100
-Message-ID: <20260305135208.2208663-8-jgross@suse.com>
+Subject: [PATCH 09/11] tools/libxl: add support for xenstore quota in domain_config
+Date: Thu,  5 Mar 2026 14:52:06 +0100
+Message-ID: <20260305135208.2208663-10-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260305135208.2208663-1-jgross@suse.com>
 References: <20260305135208.2208663-1-jgross@suse.com>
@@ -89,11 +90,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-6.79 / 50.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.19)[-0.964];
+	NEURAL_HAM_SHORT(-0.19)[-0.967];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
@@ -105,170 +106,110 @@ X-Spamd-Result: default: False [-6.79 / 50.00];
 	FROM_EQ_ENVFROM(0.00)[];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCPT_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_FIVE(0.00)[5];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
 	RCVD_TLS_ALL(0.00)[]
 
-Add the implementation of the GET_QUOTA and SET_QUOTA wire commands.
+Add support for xenstore quota in the struct domain_config. Initially
+it will be used only for migration of a domain.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstored/core.c   |   4 ++
- tools/xenstored/domain.c | 106 +++++++++++++++++++++++++++++++++++++++
- tools/xenstored/domain.h |   8 +++
- 3 files changed, 118 insertions(+)
+ tools/golang/xenlight/helpers.gen.go |  6 ++++++
+ tools/golang/xenlight/types.gen.go   |  1 +
+ tools/libs/light/libxl_dom.c         |  8 ++++++++
+ tools/libs/light/libxl_domain.c      | 10 ++++++++++
+ tools/libs/light/libxl_types.idl     |  1 +
+ 5 files changed, 26 insertions(+)
 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index 8a06b35808..e283d47184 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -2034,6 +2034,10 @@ static struct {
- 	    { "GET_FEATURE",   do_get_feature,  XS_FLAG_PRIV },
- 	[XS_SET_FEATURE]       =
- 	    { "SET_FEATURE",   do_set_feature,  XS_FLAG_PRIV },
-+	[XS_GET_QUOTA]         =
-+	    { "GET_QUOTA",     do_get_quota,    XS_FLAG_PRIV },
-+	[XS_SET_QUOTA]         =
-+	    { "SET_QUOTA",     do_set_quota,    XS_FLAG_PRIV },
- };
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index 6c9af904c5..416c2d3e07 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -1286,6 +1286,9 @@ if err := x.TrapUnmappedAccesses.fromC(&xc.trap_unmapped_accesses);err != nil {
+ return fmt.Errorf("converting field TrapUnmappedAccesses: %v", err)
+ }
+ x.XenstoreFeatureMask = uint32(xc.xenstore_feature_mask)
++if err := x.XenstoreQuota.fromC(&xc.xenstore_quota);err != nil {
++return fmt.Errorf("converting field XenstoreQuota: %v", err)
++}
  
- static const char *sockmsg_string(enum xsd_sockmsg_type type)
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 8e52351695..c0bc8a3eb7 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -1363,6 +1363,112 @@ static bool parse_quota_name(const char *name, unsigned int *qidx,
- 	return true;
+  return nil}
+ 
+@@ -1825,6 +1828,9 @@ if err := x.TrapUnmappedAccesses.toC(&xc.trap_unmapped_accesses); err != nil {
+ return fmt.Errorf("converting field TrapUnmappedAccesses: %v", err)
+ }
+ xc.xenstore_feature_mask = C.uint32_t(x.XenstoreFeatureMask)
++if err := x.XenstoreQuota.toC(&xc.xenstore_quota); err != nil {
++return fmt.Errorf("converting field XenstoreQuota: %v", err)
++}
+ 
+  return nil
+  }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index 5393277190..7e7292cf70 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -629,6 +629,7 @@ VmtraceBufKb int
+ Vpmu Defbool
+ TrapUnmappedAccesses Defbool
+ XenstoreFeatureMask uint32
++XenstoreQuota XsQuotaSet
  }
  
-+int do_get_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in)
-+{
-+	const char *vec[2];
-+	unsigned int n_pars;
-+	unsigned int domid;
-+	unsigned int q;
-+	unsigned int idx;
-+	char *resp;
-+	const char *name;
-+	const struct quota *quota;
-+	const struct domain *domain;
-+
-+	n_pars = get_strings(in, vec, ARRAY_SIZE(vec));
-+
-+	if (n_pars > 2)
-+		return EINVAL;
-+
-+	if (n_pars == 0) {
-+		resp = talloc_asprintf(ctx, "%s", "");
-+		if (!resp)
-+			return ENOMEM;
-+		for (q = 0; q < ACC_N; q++) {
-+			if (!quota_adm[q].name)
-+				continue;
-+			if (quotas[q].val[Q_IDX_HARD] != Q_VAL_DISABLED) {
-+				resp = talloc_asprintf_append(resp, "%s%s",
-+					*resp ? " " : "", quota_adm[q].name);
-+				if (!resp)
-+					return ENOMEM;
-+			}
-+			if (quotas[q].val[Q_IDX_SOFT] != Q_VAL_DISABLED) {
-+				resp = talloc_asprintf_append(resp, "%ssoft-%s",
-+					*resp ? " " : "", quota_adm[q].name);
-+				if (!resp)
-+					return ENOMEM;
-+			}
-+		}
-+	} else {
-+		if (n_pars == 1) {
-+			quota = quotas;
-+			name = vec[0];
-+		} else {
-+			domid = atoi(vec[0]);
-+			domain = find_or_alloc_existing_domain(domid);
-+			if (!domain)
-+				return ENOENT;
-+			quota = domain->acc;
-+			name = vec[1];
-+		}
-+
-+		if (parse_quota_name(name, &q, &idx))
-+			return EINVAL;
-+
-+		resp = talloc_asprintf(ctx, "%u", quota[q].val[idx]);
-+		if (!resp)
-+			return ENOMEM;
-+	}
-+
-+	send_reply(conn, XS_GET_QUOTA, resp, strlen(resp) + 1);
-+
-+	return 0;
-+}
-+
-+int do_set_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in)
-+{
-+	const char *vec[3];
-+	unsigned int n_pars;
-+	unsigned int domid;
-+	unsigned int q;
-+	unsigned int idx;
-+	const char *name;
-+	unsigned int val;
-+	struct quota *quota;
-+	struct domain *domain;
-+
-+	n_pars = get_strings(in, vec, ARRAY_SIZE(vec));
-+
-+	if (n_pars < 2 || n_pars > 3)
-+		return EINVAL;
-+
-+	if (n_pars == 2) {
-+		quota = quotas;
-+		name = vec[0];
-+		val = atoi(vec[1]);
-+	} else {
-+		domid = atoi(vec[0]);
-+		domain = find_or_alloc_existing_domain(domid);
-+		if (!domain)
-+			return ENOENT;
-+		quota = domain->acc;
-+		name = vec[1];
-+		val = atoi(vec[2]);
-+	}
-+
-+	if (parse_quota_name(name, &q, &idx))
-+		return EINVAL;
-+
-+	quota[q].val[idx] = val;
-+
-+	send_ack(conn, XS_SET_QUOTA);
-+
-+	return 0;
-+}
-+
- static int close_xgt_handle(void *_handle)
- {
- 	xengnttab_close(*(xengnttab_handle **)_handle);
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index 62ce3b3166..6a06b0d1af 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -93,6 +93,14 @@ int do_get_feature(const void *ctx, struct connection *conn,
- int do_set_feature(const void *ctx, struct connection *conn,
- 		   struct buffered_data *in);
+ type DomainBuildInfoTypeUnion interface {
+diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
+index 05ebc69534..1c0689d7ff 100644
+--- a/tools/libs/light/libxl_dom.c
++++ b/tools/libs/light/libxl_dom.c
+@@ -509,6 +509,14 @@ retry_transaction:
  
-+/* Get quota names or value */
-+int do_get_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in);
+     xs_introduce_domain(ctx->xsh, domid, state->store_mfn, state->store_port);
+ 
++    if (info->xenstore_quota.num_quota) {
++        rc = libxl_xsquota_domain_set(ctx, domid, &info->xenstore_quota);
++        if (rc) {
++            LOGED(ERROR, domid, "Failed to set Xenstore quota");
++            goto out;
++        }
++    }
 +
-+/* Set quota value */
-+int do_set_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in);
+  out:
+     free(vm_path);
+     return rc;
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 5be47f687f..86e43e7133 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -2533,6 +2533,16 @@ static void retrieve_domain_configuration_end(libxl__egc *egc,
+         }
+     }
+ 
++    /* Xenstore quota */
++    {
++        libxl_xs_quota_set_dispose(&d_config->b_info.xenstore_quota);
++        rc = libxl_xsquota_domain_get(CTX, domid, &d_config->b_info.xenstore_quota);
++        if (rc) {
++            LOGD(ERROR, domid, "Fail to get xenstore quota");
++            goto out;
++        }
++    }
 +
- void domain_early_init(void);
- void domain_init(int evtfd);
- void init_domains(bool live_update);
+     /* Devices: disk, nic, vtpm, pcidev etc. */
+ 
+     /* The MERGE macro implements following logic:
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index c5ddc40f35..ee8f89e462 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -760,6 +760,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     ("vpmu", libxl_defbool),
+     ("trap_unmapped_accesses", libxl_defbool),
+     ("xenstore_feature_mask", uint32, {'init_val': '~0U'}),
++    ("xenstore_quota", libxl_xs_quota_set),
+ 
+     ], dir=DIR_IN,
+        copy_deprecated_fn="libxl__domain_build_info_copy_deprecated",
 -- 
 2.53.0
 
