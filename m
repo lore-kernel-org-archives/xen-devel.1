@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FFC3F30946
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 12:44:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1246567.1545696 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11585F30956
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Mar 2026 13:05:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1246591.1545705 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy84L-0004hy-7F; Thu, 05 Mar 2026 12:44:45 +0000
+	id 1vy8Nk-0007hC-Na; Thu, 05 Mar 2026 13:04:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1246567.1545696; Thu, 05 Mar 2026 12:44:45 +0000
+Received: by outflank-mailman (output) from mailman id 1246591.1545705; Thu, 05 Mar 2026 13:04:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vy84L-0004hr-2f; Thu, 05 Mar 2026 12:44:45 +0000
-Received: by outflank-mailman (input) for mailman id 1246567;
- Thu, 05 Mar 2026 12:44:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=00Q8=BF=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vy84K-0004hl-EN
- for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 12:44:44 +0000
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [2a00:1450:4864:20::335])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 14c654f1-1891-11f1-9ccf-f158ae23cfc8;
- Thu, 05 Mar 2026 13:44:42 +0100 (CET)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso82579515e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 05 Mar 2026 04:44:42 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4851fafbf9bsm38275965e9.14.2026.03.05.04.44.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Mar 2026 04:44:41 -0800 (PST)
+	id 1vy8Nk-0007h5-K5; Thu, 05 Mar 2026 13:04:48 +0000
+Received: by outflank-mailman (input) for mailman id 1246591;
+ Thu, 05 Mar 2026 13:04:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Q3zb=BF=bounce.vates.tech=bounce-md_30504962.69a97f6b.v1-95b08eaea145431cae23f4ba27e0cbb9@srs-se1.protection.inumbo.net>)
+ id 1vy8Ni-0007gz-PC
+ for xen-devel@lists.xenproject.org; Thu, 05 Mar 2026 13:04:46 +0000
+Received: from mail177-30.suw61.mandrillapp.com
+ (mail177-30.suw61.mandrillapp.com [198.2.177.30])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e114a926-1893-11f1-b164-2bf370ae4941;
+ Thu, 05 Mar 2026 14:04:45 +0100 (CET)
+Received: from pmta14.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail177-30.suw61.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fRVB30MgxzP0Jwss
+ for <xen-devel@lists.xenproject.org>; Thu,  5 Mar 2026 13:04:43 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 95b08eaea145431cae23f4ba27e0cbb9; Thu, 05 Mar 2026 13:04:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,108 +45,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14c654f1-1891-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1772714682; x=1773319482; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ps30MAUb6AEgAzijJvCP0wKyGWFcZbak+cdz0xP/K4g=;
-        b=ACkfBDjRwVH2Ry7PD9NRwuz2ONkBuxi4SfyQ3wqg9CIXqnHxMZDZue3aGosHsQz0mS
-         TcP5TYjjIlH53io0hWUHbAb1R+yKOyXIA1c23EeP2EX3JZ2C9q/7qiDolQzzJWiIQ80S
-         LS8yb7yr9bXrAGXLJDhZbAdbYDsXsX47qrAB24QYeivD6ogLSrMuVCkJodsK3dkk+MwY
-         fwjhgN6ciVfkYKxPfWr/RbLKBZFcsfyfDFIWREusTGCBmEi6Q4MEyX9v1+ViqdvgXgNw
-         8ZAl4LP2CrAHJRf5K1DBJK3ZvPgGsH4rCko2QFse8QjO2xx3ucT9McsuH/0Bfj0Sm+19
-         2s5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772714682; x=1773319482;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ps30MAUb6AEgAzijJvCP0wKyGWFcZbak+cdz0xP/K4g=;
-        b=t1R/ZLlVoqtwsD9ltfMtWHPfTO9wK0jwCTXjHdazPVC7MBu6uULZrpzL6D8i6yJOTY
-         79Ej+5I/bmGonjYS2DuKPVWkfq91Vw7Mf7hREC7tork2Hipz3kjFwuehSyj3/MdDB1/K
-         /Rdg2yyVHwgWPTWMIYis6Im3NDV698LNZ3gdjIA6oYZ9YOsNdCrSpWSWjk3xno2fUL6U
-         PwlPW5bGSp9iCd4/kBsa7sQaJYVkgLC39ke4H9WwcnFna6g/9oZyyMCDsirVka1zVMK6
-         8cZvz23amzlztT0z78or9VEuDFjbAIJyywyryF43/bbsMUVYgBaNpC3rqjf/KzvYcPUH
-         OOVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVgwY08hmhFRmn9TlRETQhXl/f33wULi8W03GxRajdqLO/RiQCsAT+VmEox9UxtvCRYgLpZeBAr7fQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyxC7cIuQ8aX54llJC5llwBzIn3aa85W90kRM0atRTGe+0jAT7l
-	5kEBH/uAlN1l7VAzeXOIOlJHHobwyjpX4DVC0kjWUR27Y9fv8YpoyHuGrLD26hRYrPPu75T0niF
-	ZIpA=
-X-Gm-Gg: ATEYQzwSMjcEbgSLybzurdAviaVTHR0wug01GX+hBTNGENtAXtAddNDPJYZK6g7XnZS
-	fizU38z/JnWKB7ANAdhuzdcnrmKet3RX2bp019Y+n8KjUWWyBETCS9Z0+vRRxGzegAzCNbG4KCt
-	NJU1UEDkiQ4sXDqLq24FYWY+d0poI1WY0AZptB/4NBNr9MW5W6uevXrybWEpVYdJkj5VeVw9/M6
-	FUpSVXAXNtCPecf7gnjHr0f8kxjsW1fI6RwP80weYQ8Ab5dCHpmBCTvveYSsnlWrmOUsUeXkeJK
-	GQRtvAqxTKFJ7iHCB3ythZ4L9WMKNp9nw3hMk7By8bSlVEI5tFlKhdcYJ00yPY337h4LBJGvIG2
-	f7Zu59OhIppkLvDKvrPrr22/770WAD8d68nUxWWUh8pBSBNW4XlE8roJMdz21Lpb2f1IXnJR35U
-	Y+PfEtR97C29OGihKlnfaGlX01I4nsKSj5omF29O7NyfTmVp9CYFPkLsn1sMnyouKpvZ2fO+cpn
-	VcmJKac3biRGBA=
-X-Received: by 2002:a05:600c:3f0d:b0:481:a662:b3f3 with SMTP id 5b1f17b1804b1-4851ee854b6mr40429935e9.7.1772714681842;
-        Thu, 05 Mar 2026 04:44:41 -0800 (PST)
-Message-ID: <79b2e448-fdba-46dc-8b94-b0128cf0f492@suse.com>
-Date: Thu, 5 Mar 2026 13:44:39 +0100
+X-Inumbo-ID: e114a926-1893-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1772715883; x=1772985883;
+	bh=TrtrGEbMvZfgbcOGMyLdlPsgcFAr6G1EiZiAEmMYYP4=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=Re3g7yp+cFZrYZBzRlxp952Ijf8uZiBvW7E96kl/ktpWgng/+b1R2gZGp6eCYK5hO
+	 HPMhEIqiZDV3pkd1Hi1x3qU59qkwisQgLEEZhGNbiityaIYouF+UdVdSFHHxH/pJS5
+	 IvdVJzYopZ6lG0KNRyGaL/2FaS8z8WatA6zns7pg88gXqrCvGauiMnRMKGVU5G6h8V
+	 bHCtt1aHsv3TxohmfJ2MXc894Oc0CUakU8mQIb5Hq1SsH7CIE7iCPBuPZXUUPZovZM
+	 t3QtUJXLV/6AuqfsqUXn+I1tf4V9ZXLcS4LnH0bYRbd3jP8Jxhr3yqRJkMVXF7oI9N
+	 02W4dvQa0yeZg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1772715883; x=1772976383; i=julian.vetter@vates.tech;
+	bh=TrtrGEbMvZfgbcOGMyLdlPsgcFAr6G1EiZiAEmMYYP4=;
+	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
+	b=a0MpJmTCtW+3kw6qc0uZdcYTAMxHkvxZ7UMZ6Z/3e82tKyz+0fv2GAspLYwMjN4c9
+	 LefVaYywEW1DfFisK9f88ZMtwKJF+yQd8OmjvotbaW1wTWJy3V1RA/+Y5rnRI9lpzj
+	 crxf1XIZ0aRKXMLXvipzvHTUAhoAfnK1XwYpdR2XJFbuX7UP1pNhscoNqQCwzUV7DL
+	 LdiGTRfi47NR5PpfN5uvlkI+23VAQd9ANlnkUqdqcR3Bab7+6IQStGmK9mKaBMFIVw
+	 G44wSv3AxZWDACjTRf7nLAUVErFzN6I5T9B4ZXoMCgOpbgTJLZu30C5js2tdsmMtE0
+	 fdR+0XOeZW7xg==
+From: "Julian Vetter" <julian.vetter@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v4=201/2]=20This=20patch=20just=20changes=20indentation,=20to=20make=20the=20next=20patch=20easier=20to=20review.?=
+X-Mailer: git-send-email 2.51.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1772715881758
+To: xen-devel@lists.xenproject.org
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Julian Vetter" <julian.vetter@vates.tech>
+Message-Id: <20260305130434.635276-1-julian.vetter@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.95b08eaea145431cae23f4ba27e0cbb9?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260305:md
+Date: Thu, 05 Mar 2026 13:04:43 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 05/10] xen/domain: Add DOMCTL handler for claiming
- memory with NUMA awareness
-To: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1772098423.git.bernhard.kaindl@citrix.com>
- <b2c94f0c3b41976b2691ce15b9f9a2589370e65a.1772098423.git.bernhard.kaindl@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <b2c94f0c3b41976b2691ce15b9f9a2589370e65a.1772098423.git.bernhard.kaindl@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 26.02.2026 15:29, Bernhard Kaindl wrote:
-> --- a/xen/common/domctl.c
-> +++ b/xen/common/domctl.c
-> @@ -868,6 +868,15 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
->          ret = get_domain_state(&op->u.get_domain_state, d, &op->domain);
->          break;
->  
-> +    case XEN_DOMCTL_claim_memory:
-> +        /* Use the same XSM hook as XENMEM_claim_pages */
-> +        ret = xsm_claim_pages(XSM_PRIV, d);
-> +        if ( ret )
-> +            break;
-> +
-> +        ret = claim_memory(d, &op->u.claim_memory);
-> +        break;
+Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+---
+Changes in v4:
+- No changes to this patch
+---
+ xen/arch/x86/hvm/ioreq.c | 58 ++++++++++++++++---------------
+ xen/common/ioreq.c       | 74 +++++++++++++++++++++-------------------
+ 2 files changed, 70 insertions(+), 62 deletions(-)
 
-This needs accompanying by a change to xsm/flask/hooks.c:flask_domctl().
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index a5fa97e149..355b2ba12c 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
+@@ -125,14 +125,16 @@ static void hvm_unmap_ioreq_gfn(struct ioreq_server *s, bool buf)
+ {
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+ 
+-    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+-        return;
++    {
++        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
++            return;
+ 
+-    destroy_ring_for_helper(&iorp->va, iorp->page);
+-    iorp->page = NULL;
++        destroy_ring_for_helper(&iorp->va, iorp->page);
++        iorp->page = NULL;
+ 
+-    hvm_free_ioreq_gfn(s, iorp->gfn);
+-    iorp->gfn = INVALID_GFN;
++        hvm_free_ioreq_gfn(s, iorp->gfn);
++        iorp->gfn = INVALID_GFN;
++    }
+ }
+ 
+ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+@@ -141,34 +143,36 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+     int rc;
+ 
+-    if ( iorp->page )
+     {
+-        /*
+-         * If a page has already been allocated (which will happen on
+-         * demand if ioreq_server_get_frame() is called), then
+-         * mapping a guest frame is not permitted.
+-         */
+-        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+-            return -EPERM;
+-
+-        return 0;
+-    }
++        if ( iorp->page )
++        {
++            /*
++             * If a page has already been allocated (which will happen on
++             * demand if ioreq_server_get_frame() is called), then
++             * mapping a guest frame is not permitted.
++             */
++            if ( gfn_eq(iorp->gfn, INVALID_GFN) )
++                return -EPERM;
++
++            return 0;
++        }
+ 
+-    if ( d->is_dying )
+-        return -EINVAL;
++        if ( d->is_dying )
++            return -EINVAL;
+ 
+-    iorp->gfn = hvm_alloc_ioreq_gfn(s);
++        iorp->gfn = hvm_alloc_ioreq_gfn(s);
+ 
+-    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+-        return -ENOMEM;
++        if ( gfn_eq(iorp->gfn, INVALID_GFN) )
++            return -ENOMEM;
+ 
+-    rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
+-                                 &iorp->va);
++        rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
++                                     &iorp->va);
+ 
+-    if ( rc )
+-        hvm_unmap_ioreq_gfn(s, buf);
++        if ( rc )
++            hvm_unmap_ioreq_gfn(s, buf);
+ 
+-    return rc;
++        return rc;
++    }
+ }
+ 
+ static void hvm_remove_ioreq_gfn(struct ioreq_server *s, bool buf)
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index f5fd30ce12..2e284ad26c 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -263,41 +263,43 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+     struct page_info *page;
+ 
+-    if ( iorp->page )
+     {
+-        /*
+-         * If a guest frame has already been mapped (which may happen
+-         * on demand if ioreq_server_get_info() is called), then
+-         * allocating a page is not permitted.
+-         */
+-        if ( !gfn_eq(iorp->gfn, INVALID_GFN) )
+-            return -EPERM;
++        if ( iorp->page )
++        {
++            /*
++             * If a guest frame has already been mapped (which may happen
++             * on demand if ioreq_server_get_info() is called), then
++             * allocating a page is not permitted.
++             */
++            if ( !gfn_eq(iorp->gfn, INVALID_GFN) )
++                return -EPERM;
+ 
+-        return 0;
+-    }
++            return 0;
++        }
+ 
+-    page = alloc_domheap_page(s->target, MEMF_no_refcount);
++        page = alloc_domheap_page(s->target, MEMF_no_refcount);
+ 
+-    if ( !page )
+-        return -ENOMEM;
++        if ( !page )
++            return -ENOMEM;
+ 
+-    if ( !get_page_and_type(page, s->target, PGT_writable_page) )
+-    {
+-        /*
+-         * The domain can't possibly know about this page yet, so failure
+-         * here is a clear indication of something fishy going on.
+-         */
+-        domain_crash(s->emulator);
+-        return -ENODATA;
+-    }
++        if ( !get_page_and_type(page, s->target, PGT_writable_page) )
++        {
++            /*
++             * The domain can't possibly know about this page yet, so failure
++             * here is a clear indication of something fishy going on.
++             */
++            domain_crash(s->emulator);
++            return -ENODATA;
++        }
+ 
+-    iorp->va = __map_domain_page_global(page);
+-    if ( !iorp->va )
+-        goto fail;
++        iorp->va = __map_domain_page_global(page);
++        if ( !iorp->va )
++            goto fail;
+ 
+-    iorp->page = page;
+-    clear_page(iorp->va);
+-    return 0;
++        iorp->page = page;
++        clear_page(iorp->va);
++        return 0;
++    }
+ 
+  fail:
+     put_page_alloc_ref(page);
+@@ -311,16 +313,18 @@ static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+     struct page_info *page = iorp->page;
+ 
+-    if ( !page )
+-        return;
++    {
++        if ( !page )
++            return;
+ 
+-    iorp->page = NULL;
++        iorp->page = NULL;
+ 
+-    unmap_domain_page_global(iorp->va);
+-    iorp->va = NULL;
++        unmap_domain_page_global(iorp->va);
++        iorp->va = NULL;
+ 
+-    put_page_alloc_ref(page);
+-    put_page_and_type(page);
++        put_page_alloc_ref(page);
++        put_page_and_type(page);
++    }
+ }
+ 
+ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+-- 
+2.51.0
 
-Jan
+
+
+--
+Julian Vetter | Vates Hypervisor & Kernel Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
