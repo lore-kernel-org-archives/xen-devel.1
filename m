@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F82FFCB61C
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Mar 2026 16:26:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1247918.1546291 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A03FCB619
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Mar 2026 16:33:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1247972.1546315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vyXzu-0000u6-Fd; Fri, 06 Mar 2026 16:25:54 +0000
+	id 1vyY7U-000348-LJ; Fri, 06 Mar 2026 16:33:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1247918.1546291; Fri, 06 Mar 2026 16:25:54 +0000
+Received: by outflank-mailman (output) from mailman id 1247972.1546315; Fri, 06 Mar 2026 16:33:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vyXzu-0000tz-D5; Fri, 06 Mar 2026 16:25:54 +0000
-Received: by outflank-mailman (input) for mailman id 1247918;
- Fri, 06 Mar 2026 16:25:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1vyY7U-00033o-GU; Fri, 06 Mar 2026 16:33:44 +0000
+Received: by outflank-mailman (input) for mailman id 1247972;
+ Fri, 06 Mar 2026 16:33:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=k/aL=BG=citrix.com=edwin.torok@srs-se1.protection.inumbo.net>)
- id 1vyXzt-0000to-1k
- for xen-devel@lists.xenproject.org; Fri, 06 Mar 2026 16:25:53 +0000
-Received: from na1pdmzitismtp02.tibco.com (unknown [160.101.131.9])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 23815a59-1979-11f1-9ccf-f158ae23cfc8;
- Fri, 06 Mar 2026 17:25:51 +0100 (CET)
-Received: from localhost.localdomain (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTPS id 7130681CBF11;
- Fri,  6 Mar 2026 11:25:15 -0500 (EST)
+ <SRS0=RAjd=BG=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vyY7T-00030j-Ew
+ for xen-devel@lists.xenproject.org; Fri, 06 Mar 2026 16:33:43 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3c87ec6e-197a-11f1-b164-2bf370ae4941;
+ Fri, 06 Mar 2026 17:33:41 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-439aa2f8ebaso4138738f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Mar 2026 08:33:41 -0800 (PST)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-439dae57c05sm4406550f8f.39.2026.03.06.08.33.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Mar 2026 08:33:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,63 +47,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23815a59-1979-11f1-9ccf-f158ae23cfc8
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>
+X-Inumbo-ID: 3c87ec6e-197a-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772814821; x=1773419621; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CmbbmA8PgeTF4OMY1R9mkMVOPj+EWhxjWMhkhMqQixw=;
+        b=mt6XOoSBpqL5RjnQGdAQcigJHrRF2kgeuKl1kMY1nKq2adZ4nI4MHD8DQma9xxve3y
+         Jrs4UVCdZfFBwi275d2Zq2CBhglHblYmDRQxSOMR/9WbkpYitLp1XPk2SVh93AO8btX3
+         F4uCr77wt67dhNyO5oIPdmgGELQoa5xc7fqnVX9DlwdQpzuF++55gypKVMMm5VKrG8O0
+         /wot/Dk6AjO8lt6Ous9KxQNuaRA53AuLxyBwsL7t+KOSSlnLgYOCCgX4nKmnnALKOroN
+         rg3XpSi/pMmwnVdarLHhiEkxhRYj0phnqHvLd2H0G7hkjT5xTxEdXLUoWxLDLYhVailz
+         CnNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772814821; x=1773419621;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=CmbbmA8PgeTF4OMY1R9mkMVOPj+EWhxjWMhkhMqQixw=;
+        b=qv1/AGNTx+r9gmJQYBIkb8u8FYGoC/sSeCr8JCy9zd9AYku3b3Eq1/Ke+dCyxhnU6X
+         jKM8u6j5MqEBcAnnhV8Qki1qGpmGbd7CTBYVIeSF0mgK6RCId1OSnJx3DXSH2Ar9tr23
+         LN2k/J2qC0+XDglcdCB5RjWT9xjDFTxd9BWRaokeXj90YFADNi/rdPAGHl9wD+ZNyACW
+         QRBzxjyS//L+BHD7uNaO6ezFWeIRYp/qXJZyPOgg+hOL8yukgVuCWm+5EiarlKDfJwtp
+         e0qa416kuLq72jxk8SCsSBpaT0DOAk0EE6BDwr9bS+IGhXHeeBW+kjkeEvejp5581pcC
+         Th8w==
+X-Gm-Message-State: AOJu0YzoFswGwjb+vOJXKacpXyf0kLcoVC8Gr9gJl3uIfHTCY4ijvhdr
+	laE0N0neh8AKuLhhF2kuj1A6iyC0n01qbe2yNFMBsLRByUaM57g/Ni/OHuiglQ==
+X-Gm-Gg: ATEYQzxtB0P+cHXbMSF5ksOoiBkK1wU163U21kmRQw34f3MzATz34o9eAqLAqXGLDUG
+	7dnfoK9M7P1vjhAHbLVCG5Us5sxRKaWHwxcfY+y4nt+4sZrT+zRaSMUVUz7JgPE3u3ZwwCqAIxo
+	2FkmKonT2WabknwieQoexAwgGPboHlCKcfwnu+jBtG7w55aggSISV/2oDuN7ep1uHd1Iw29v8lx
+	lr8hHA7FbNBcYeqA8HYZlZGMQjQ4Om5vlMkkAv7fNb1RFDxpZEzGmUs07KXl969vyPiMD4RW7Sh
+	JwXW0wh9AnZqCYN8+el5uVjVGetheNBwd/fqpxAXNKpJiZRtjKfjo7ijrRBiXhVyEkQwxy/6MtY
+	scyrWEWkqmTs//0nPuIFdbeyvfv7shbt4Pyy4zZOnoPDnytFN+CYavw5YWDt5HClWjz7aAHUmGD
+	UI0/OaKFBCjYO9fR8pc5fUTX2orwDXkhUdUuHZwxuBLV0BHWBwoSbDmZsVODXwKLRMkgKF8AYrn
+	6m4
+X-Received: by 2002:a05:6000:2313:b0:431:808:2d58 with SMTP id ffacd0b85a97d-439da8a147bmr5202646f8f.51.1772814820844;
+        Fri, 06 Mar 2026 08:33:40 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v3 1/1] tools/tests/x86_emulator: avoid duplicate symbol error with clang: use -O0
-Date: Fri,  6 Mar 2026 16:25:43 +0000
-Message-ID: <a4a29c95b06a0352889bb6c032c19be6e4cf8288.1772813802.git.edwin.torok@citrix.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1772813802.git.edwin.torok@citrix.com>
-References: <cover.1772813802.git.edwin.torok@citrix.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 01/14] xen/riscv: detect and store supported hypervisor CSR bits at boot
+Date: Fri,  6 Mar 2026 17:33:18 +0100
+Message-ID: <3201951150104f17593e16c7ba00ada51ac1e10f.1772814110.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1772814110.git.oleksii.kurochko@gmail.com>
+References: <cover.1772814110.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-clang would duplicate the loop body and end up with a double definition
-of the symbol:
-```
-/tmp/test_x86_emulator-0f3576.s:27823: Error: symbol `vmovsh_to_mem' is already defined
-/tmp/test_x86_emulator-0f3576.s:27825: Error: symbol `.Lvmovsh_to_mem_end' is already defined
-```
+Some hypervisor CSRs expose optional functionality and may not implement
+all architectural bits. Writing unsupported bits can either be ignored
+or raise an exception depending on the platform.
 
-Until a better solution is found: disable all optimizations in the test runner.
+Detect the set of writable bits for selected hypervisor CSRs at boot and
+store the resulting masks for later use. This allows safely programming
+these CSRs during vCPU context switching and avoids relying on hardcoded
+architectural assumptions.
 
-Using -Os might also work, but we can't rely on the size optimization
-always avoiding the duplication of asm blocks.
-This is test code, not performance critical code, and -O0 is more future
-proof.
+Use csr_read()&csr_write() instead of csr_swap()+all ones mask as some
+CSR registers have WPRI fields which should be preserved during write
+operation.
 
-Signed-off-by: Edwin Török <edwin.torok@citrix.com>
+Also, ro_one struct is introduced to cover the cases when a bit in CSR
+register (at the momemnt, it is only hstateen0) may be r/o-one to have
+hypervisor view of register seen by guest correct.
+
+Masks are calculated at the moment only for hedeleg, henvcfg, hideleg,
+hstateen0 registers as only them are going to be used in the follow up
+patch.
+
+If the Smstateen extension is not implemented, hstateen0 cannot be read
+because the register is considered non-existent. Instructions that attempt
+to access a CSR that is not implemented or not visible in the current mode
+are reserved and will raise an illegal-instruction exception.
+
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changed since v2:
- * use -O0 instead of .ifndef (with ifndef the 2nd iteration would use code identical to first)
-Changed since v1:
- * use .ifndef directive instead of volatile workaround
+Changes in V7:
+ - Use csr_read_set() in INIT_CSR_MASK() instead of csr_read()+csr_write().
+ - Add undef of INIT_CSR_MASK().
+ - Move local variable old above INIT_CSR_MASK().
+ - Introduce INIT_RO_ONE_MASK() to init csr_masks.ro_one.* fields.
+ - Introduce defines for masks intead of constants.
+ - Move old variable inside macros INIT_CSR_MASK() and INIT_RO_ONE_MASK().
 ---
- tools/tests/x86_emulator/Makefile | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes in V6:
+ - Introduce sub-struct ro_one inside csr_masks to cover the case that
+   hstateen0 could have read-only-one bits.
+ - Refacotr init_csr_masks() to handle hstateen0 case when a bit is r/o-one
+   and handle WPRI fields properly.
+ - Update the commit message.
+---
+Changes in V5:
+ - Move everything related to csr_masks to domain.c and make it static.
+ - Move declaration of old variable in init_csr_masks() inside INIT_CSR_MASK.
+ - Use csr_swap() in INIT_CSR_MASK().
+---
+Changes in V4:
+ - Move csr_masks defintion to domain.c. Make it static as at the moment
+   it is going to be used only in domain.c.
+ - Rename and refactor X macros inside init_csr_masks().
+---
+Changes in V3:
+ - New patch.
+---
+ xen/arch/riscv/domain.c            | 57 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/setup.h |  2 ++
+ xen/arch/riscv/setup.c             |  2 ++
+ 3 files changed, 61 insertions(+)
 
-diff --git a/tools/tests/x86_emulator/Makefile b/tools/tests/x86_emulator/Makefile
-index 5003c464f3..ba1d27177f 100644
---- a/tools/tests/x86_emulator/Makefile
-+++ b/tools/tests/x86_emulator/Makefile
-@@ -323,4 +323,9 @@ x86-emulate.o x86_emulate/%.o: HOSTCFLAGS += -D__XEN_TOOLS__
- $(call cc-option-add,HOSTCFLAGS-toplevel,HOSTCC,-fno-toplevel-reorder)
- test_x86_emulator.o: HOSTCFLAGS += $(HOSTCFLAGS-toplevel)
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index b60320b90def..32974cb48929 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -2,9 +2,66 @@
  
-+# clang duplicates inline assembly when unrolling loops,
-+# which causes a duplicate label error.
-+# Until a better solution is found: disable all optimizations in the test runner.
-+test_x86_emulator.o: HOSTCFLAGS += -O0
+ #include <xen/init.h>
+ #include <xen/mm.h>
++#include <xen/sections.h>
+ #include <xen/sched.h>
+ #include <xen/vmap.h>
+ 
++#include <asm/cpufeature.h>
++#include <asm/csr.h>
 +
- test_x86_emulator.o: $(addsuffix .h,$(TESTCASES)) $(addsuffix -opmask.h,$(OPMASK))
++struct csr_masks {
++    register_t hedeleg;
++    register_t henvcfg;
++    register_t hideleg;
++    register_t hstateen0;
++
++    struct {
++        register_t hstateen0;
++    } ro_one;
++};
++
++static struct csr_masks __ro_after_init csr_masks;
++
++#define HEDELEG_AVAIL_MASK ULONG_MAX
++#define HIDELEG_AVAIL_MASK ULONG_MAX
++#define HENVCFG_AVAIL_MASK _UL(0xE0000003000000FF)
++#define HSTATEEN0_AVAIL_MASK _UL(0xDE00000000000007)
++
++void __init init_csr_masks(void)
++{
++    /*
++     * The mask specifies the bits that may be safely modified without
++     * causing side effects.
++     *
++     * For example, registers such as henvcfg or hstateen0 contain WPRI
++     * fields that must be preserved. Any write to the full register must
++     * therefore retain the original values of those fields.
++     */
++#define INIT_CSR_MASK(csr, field, mask) do { \
++        register_t old = csr_read_set(CSR_##csr, mask); \
++        csr_masks.field = csr_swap(CSR_##csr, old); \
++    } while (0)
++
++#define INIT_RO_ONE_MASK(csr, field, mask) do { \
++        register_t old = csr_read_clear(CSR_HSTATEEN0, mask); \
++        csr_masks.ro_one.field = csr_swap(CSR_##csr, old) & mask; \
++    } while (0)
++
++    INIT_CSR_MASK(HEDELEG, hedeleg, HEDELEG_AVAIL_MASK);
++    INIT_CSR_MASK(HIDELEG, hideleg, HIDELEG_AVAIL_MASK);
++
++    INIT_CSR_MASK(HENVCFG, henvcfg, HENVCFG_AVAIL_MASK);
++
++    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
++    {
++        INIT_CSR_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
++        INIT_RO_ONE_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
++    }
++
++#undef INIT_CSR_MASK
++#undef INIT_RO_ONE_MASK
++}
++
+ static void continue_new_vcpu(struct vcpu *prev)
+ {
+     BUG_ON("unimplemented\n");
+diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+index c9d69cdf5166..2215894cfbb1 100644
+--- a/xen/arch/riscv/include/asm/setup.h
++++ b/xen/arch/riscv/include/asm/setup.h
+@@ -11,6 +11,8 @@ void setup_mm(void);
+ 
+ void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+ 
++void init_csr_masks(void);
++
+ #endif /* ASM__RISCV__SETUP_H */
+ 
+ /*
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 9b4835960d20..bca6ca09eddd 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -137,6 +137,8 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ 
+     riscv_fill_hwcap();
+ 
++    init_csr_masks();
++
+     preinit_xen_time();
+ 
+     intc_preinit();
 -- 
-2.47.3
+2.53.0
 
 
