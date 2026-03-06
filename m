@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF0A2FCB619
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Mar 2026 16:34:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1247973.1546328 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B59FCB61F
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Mar 2026 16:34:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1247974.1546333 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vyY7W-0003Rt-QB; Fri, 06 Mar 2026 16:33:46 +0000
+	id 1vyY7X-0003VQ-4P; Fri, 06 Mar 2026 16:33:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1247973.1546328; Fri, 06 Mar 2026 16:33:46 +0000
+Received: by outflank-mailman (output) from mailman id 1247974.1546333; Fri, 06 Mar 2026 16:33:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vyY7W-0003Rm-NR; Fri, 06 Mar 2026 16:33:46 +0000
-Received: by outflank-mailman (input) for mailman id 1247973;
+	id 1vyY7W-0003Uq-V5; Fri, 06 Mar 2026 16:33:46 +0000
+Received: by outflank-mailman (input) for mailman id 1247974;
  Fri, 06 Mar 2026 16:33:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RAjd=BG=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1vyY7V-0003HN-BP
+ id 1vyY7V-00030j-JG
  for xen-devel@lists.xenproject.org; Fri, 06 Mar 2026 16:33:45 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3d1f88e6-197a-11f1-9ccf-f158ae23cfc8;
- Fri, 06 Mar 2026 17:33:42 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-483703e4b08so92166675e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 06 Mar 2026 08:33:42 -0800 (PST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3e69eeb1-197a-11f1-b164-2bf370ae4941;
+ Fri, 06 Mar 2026 17:33:45 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-439b94a19fdso5418564f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Mar 2026 08:33:45 -0800 (PST)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439dae57c05sm4406550f8f.39.2026.03.06.08.33.40
+ ffacd0b85a97d-439dae57c05sm4406550f8f.39.2026.03.06.08.33.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 08:33:41 -0800 (PST)
+ Fri, 06 Mar 2026 08:33:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d1f88e6-197a-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 3e69eeb1-197a-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772814822; x=1773419622; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1772814824; x=1773419624; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CzQC2ov+xYcuBZPHbnymUYPvOXLbca5uUsTK8SmNRMc=;
-        b=ZFs5by6RhXhoDd7Xfev6/OC0yC/6Q+DO+L2wRqeSNMljxn9pBcPyWZ3kaJggx/ybUN
-         RGr99E2GvVJJr/IXIwB5SzjvZ2taWxTquPhNcDwgvQPwS7POJOnDF6eNx9PZvexeJMS/
-         WppRZqcSgWbY08lr5kXh9jkuDYSbnOeRQ4rs3jgUQNHS6MwSS3Ao/oGc1iRLQEEBa9ry
-         IRuuRKXAGLEEeNNX7/XPVAn++LVI7VtaXZjjHokf2xbR/hmdNGXP/kjBepM3Ci3R5F6L
-         lzV6vw0zmYMSriHkH6+rQBWeu4UjfjJFzioHoLktjfD9fXg0ZUVTmYSZ/YBzmHWPxSJl
-         avAg==
+        bh=TD32rUw8Jt+xF61vzNKRB9KoWMugslbXmkZ8IwQfvzs=;
+        b=AcobrcEieugq1Opq15cYORGuZWYpQRlUUanh6S9bd9m7IQuTf3JBvT/A1BcS8/d0UG
+         LsQ840KeUc8EH3HbxheP7Ranx1Z8ZBAcv3SVvkBuUOiHkhDfyEZpQ5MOOWHeUx467gfL
+         Ssy4LnUH8FUFFTXe1kAkGF987gdkzhXSCHc9nSXIG6rdKaqgIeG89EtGa/QT0fvARKAu
+         /mp+RLcaOZnZ32HLd5AWub44OmWQI0hh7KQk6Kxotsks8WP/hyLDNLv6PMQwwHRI3MrF
+         0b4+Shab+PFqd8r+weFfgxuvQD1b+HJonySHMHm+xaP34nMEvCmr42h1o9F9PNYvVZSa
+         QN5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772814822; x=1773419622;
+        d=1e100.net; s=20230601; t=1772814824; x=1773419624;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=CzQC2ov+xYcuBZPHbnymUYPvOXLbca5uUsTK8SmNRMc=;
-        b=P/OkvASnzkwwRbh5MeMOMZH5NPCw0bE6/WURsrXPAxsyqAy45DMdgRKUJH+Y/jaDt7
-         Qj8+eiJPNG+yIDfTbiKo98qe67Hm7MccSiNQvNBjoAeSuzEZFHV26rFQBEF+Aucvjxhr
-         KI7Hr7olVCgi2XGDqBGmXVtFSsA4nyDilbY5c4jaRWPba/T0uyxdHEIpkgI6SDk8YKSI
-         sdPTPXjDbS84RZx8N4Ijj65tBuf2il8G40GSA6dtRLYKdnq7JM5Zcwx+U3IypQxAolYW
-         78L1pN+ooddzdjE3yIBxyQaDq3m0mBTGnjPpR0epf6eEI9UZOfW3PPC4QsN9/ORdV8Gw
-         Hs6w==
-X-Gm-Message-State: AOJu0YwAh7Uht4yBL1xM2Za9xhnqOPZtg+IWN7XCUTe2vqZFAQB78p4Q
-	IvBoteCLbkaIZFfUzruSt8yYGblSaAKPIOj2putkimAl04cewBYcKUuv3MVTTA==
-X-Gm-Gg: ATEYQzwFPLwX8YOfeY7onVC4mEVA5s+T1eccOTWry15snnHsDnR7hdrwM3/poLgEwbK
-	euEq0zrSQGZ3hozr/SAWW2VoYjXu4fvLGIuCmOjRPqbshkAJ6x3lsVZgF8qnLx3DfJEO+4mHYxe
-	VSoe8QUvb/nkJu13j+GPnPDjSOctT2hvOE0qeB9HGUu+S43AcZjpMCzSRrlSf4JbRd4rw5Ypwev
-	bbUO87XD3tuWaNmF7D5T8ayjemDaeFalmS47Z5FLbAZuwGqorodfM2DAfX4BYLhMDY/YlkXDbJB
-	lf4SaZpqksgFv6TGJ5klmi4TZp8s7s9Uy5xwk9WwSZeuG/EWupsTK4aoywNY8mCAKuTsLf2xt6O
-	vG+nyv60HfmXNDOjESWJQjXEol/aekRtCtDKk4yyW9QfonAkZ0Y4r5cLguAGowr/3nJQzR4VCoO
-	EVunaf13fhqvbAC7mc6GF7XWrrIvuMMqhs6ZIMd6yKl0BjeWKtkuk7s5JaYsop4S07UpOnyQ==
-X-Received: by 2002:a05:600c:154b:b0:47d:6c36:a125 with SMTP id 5b1f17b1804b1-4852675edf7mr40929495e9.17.1772814821883;
-        Fri, 06 Mar 2026 08:33:41 -0800 (PST)
+        bh=TD32rUw8Jt+xF61vzNKRB9KoWMugslbXmkZ8IwQfvzs=;
+        b=t9+uvUPfJz0syFDs6yURlCt1my9su2XYm/s8lAk8bxn8aLO3FmQVZVU4pM7Jwl1qGf
+         yUmCEbcEINQkZlNiFURGBOlOIt3i4usrq/iUw94WkBLHX62CkNkuRLwOn5renUW99/RI
+         Sn0CPsxkMceaHUkZf3ub5Beo/Q7xbOIMD3g5lWVgMDVreC2+5hmPbMz3YWvNA0WZkbt3
+         mX7VvCuNUjOBqgOHNzoKtMXLvgNEC79C/YXF4rzGojDyx8TNqFKPJHT9d2viV2xjECTJ
+         tEfo3Ov0EBbIzbi/fb8mA1T/IA0ByXatxyAxdLGWmstbkvB8oXV3m+kEQFR7gtTJWxOP
+         EHvg==
+X-Gm-Message-State: AOJu0Yzametw9tZhZ0tfS3i8PJNe7ae/k4HNTueaxYidIfjr7tko0qMA
+	992j97dDp06QKJRdt+TOcYuMGa+AoUpa+JZaDLsMrAGLcarcuTbTKDeA6L8VDw==
+X-Gm-Gg: ATEYQzzC4PDOAC6sW3zUr0Q/YLY7hhMssIH4oM88K7ljfdtXUb3jk3906nrRh4auV1l
+	RjfnM9HSkh52B5AYfCmumNbtvgoNzU1YXKOCF3NKfrIW7rLwwv2Tturv8NFdiLQgETxApk27mMb
+	uO44lkOmk4dOXACDNMKcbDP0NKFRcF1lsUXJ5v401Z266mmWiYKQMzuclBoFX5xIm4qflrhESHz
+	+EmJqF5+9pU1b45avDxQwtAtGfj4S+t8Xdf66jtEWaLz1j2N1d2MGhsDGcay5tdAbOAYTdkN1E9
+	xv7IHFt8LGCiQqYeDxUhlsaNhpqbM7Yxk4KSCWgNV23NkqJvlkkXDJDZgmLJks+GOo1p8Py/6QY
+	Bu3YwT1bvFAz3UISJ36n5zohXh3diKGYsd8E5zaZOYhhAVh61WSTlQJsBYdH+yWfmvrVWzxSTug
+	oVMdfwWwVsbc/GUjWa0tR7va9qow1aoztWGvX2P9amqTlj5Pa4ur+DjyItBpPNa664xw==
+X-Received: by 2002:a05:6000:1865:b0:439:cba2:2294 with SMTP id ffacd0b85a97d-439da88bc2dmr4437064f8f.37.1772814824070;
+        Fri, 06 Mar 2026 08:33:44 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,236 +96,147 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v7 02/14] xen/riscv: implement vcpu_csr_init()
-Date: Fri,  6 Mar 2026 17:33:19 +0100
-Message-ID: <91724a0d6f2d2de3979a1a7d1f92da11ffd06171.1772814110.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 04/14] xen/riscv: introduce tracking of pending vCPU interrupts, part 2
+Date: Fri,  6 Mar 2026 17:33:21 +0100
+Message-ID: <9fe4e79428719cbf49442af0ab948e398861f27f.1772814110.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1772814110.git.oleksii.kurochko@gmail.com>
 References: <cover.1772814110.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce vcpu_csr_init() to initialise hypervisor CSRs that control
-vCPU execution and virtualization behaviour before the vCPU is first
-scheduled.
-The function configures trap and interrupt delegation to VS-mode by
-setting the appropriate bits in the hedeleg and hideleg registers,
-initializes hstatus so that execution enters VS-mode when control is
-passed to the guest, and restricts guest access to hardware performance
-counters by initializing hcounteren, as unrestricted access would
-require additional handling in Xen.
-When the Smstateen and SSAIA extensions are available, access to AIA
-CSRs and IMSIC guest interrupt files is enabled by setting the
-corresponding bits in hstateen0, avoiding unnecessary traps into Xen
-(note that SVSLCT(Supervisor Virtual Select) name is used intead of
-CSRIND as OpenSBI uses such name and riscv_encoding.h is mostly based
-on it).
-If the Svpbmt extension is supported, the PBMTE bit is set in
-henvcfg to allow its use for VS-stage address translation. Guest
-access to the ENVCFG CSR is also enabled by setting ENVCFG bit in
-hstateen0, as a guest may need to control certain characteristics of
-the U-mode (VU-mode when V=1) execution environment.
+This patch is based on Linux kernel 6.16.0.
 
-For CSRs that may contain read-only bits (e.g. hedeleg, hideleg,
-hstateen0), to the written value a correspondent mask is applied to
-avoid divergence between the software state and the actual CSR
-contents.
+Add the consumer side (vcpu_flush_interrupts()) of the lockless pending
+interrupt tracking introduced in part 1 (for producers). According, to the
+design only one consumer is possible, and it is vCPU itself.
+vcpu_flush_interrupts() is expected to be ran (as guests aren't ran now due
+to the lack of functionality) before the hypervisor returns control to the
+guest.
 
-As hstatus is not part of struct arch_vcpu (it already resides in
-struct cpu_user_regs), introduce vcpu_guest_cpu_user_regs() to provide
-a uniform way to access hstatus and other guest CPU user registers.
+Producers may set bits in irqs_pending_mask without a lock. Clearing bits in
+irqs_pending_mask is performed only by the consumer via xchg() (with aquire
+semantics). The consumer must not write to irqs_pending and must not act on
+bits that are not set in the mask. Otherwise, extra synchronization should
+be provided.
+The worst thing which could happen with such approach is that a new pending
+bit will be set to irqs_pending bitmap during update of hvip variable in
+vcpu_flush_interrupt() but it isn't problem as the new pending bit won't
+be lost and just be proceded during the next flush.
 
-This establishes a consistent and well-defined initial CSR state for
-vCPUs prior to their first context switch.
+As AIA specs introduced hviph register which would want to be updated when
+guest related AIA code vcpu_update_hvip() is introduced instead of just
+open-code it in vcpu_flush_interrupts().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in V7:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+Changes in v7:
+ - Rename argument v of vcpu_flush_interrupts() to curr.
+ - Add ASSERT(curr == current) to be sure that this functions is called only
+   for current vCPU as the whole vcpu_flush_interrupts() implemented to work 
+   with current (at the moment, at least).
+ - Drop vcpu_update_hvip() function and open code it in vcpu_flush_interrupt()
+   as there is no more update of hvip unconditionally and hviph will be
+   updated separately. (originally it was planned to update unconditionally
+   both hvip and hviph inside vcpu_update_hvip() after if() conditions in
+   vcpu_flush_interrupt())
 ---
-Changes in V6:
- - Apply introduced in prev. patch csr_masks.ro_one.hstaten0 in vcpu_csr_init().
+Changes in v6:
+ - Nothing changed. Only rebase.
 ---
 Changes in v5:
- - Initialize of hstateen0 with SMSTATEEN0_HSENVCFG when a variable is
-   defined.
- - Use |= for a code inside if (*_ssaia) case.
- - Put declaration of the registers hedeleg and hideleg together in arch_vcpu
-   structure as they are typically used together so better chances to
-   be in the same cache line.
+ - Reorder the defintions of local variables (mask, val, hvip) in
+   vcpu_flush_interrupts(). Also, drop a blank line between them.
+ - Move #ifdef CONFIG_RISCV_32 above the comment in vcpu_flush_interrupts()
+   and align the comment properly.
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v4:
- - Move local variable hstateen0 into narrower scope.
- - Code style fixes.
- - Move the call of vcpu_csr_init(v) after if ( is_idle_vcpu() ) check in
-   arcg_vcpu_create().
+ - Move defintion of hvip local variable to narrower space in
+   vcpu_flush_interrupts().
+ - Use initializers for mask and val variables.
+ - Use local variable c as an argument of vcpu_flush_interrupts() in
+   check_for_pcpu_work().
 ---
 Changes in v3:
- - Add hypervisor register used to initalize vCPU state.
- - Apply masks introduced before instead of csr_write()/csr_read() pattern.
+ - Update the error message in case of RV32 from "hviph" to v->arch.hviph.
+ - Make const argument of vcpu_update_hvip.
+ - Move local variables mask and val inside if() in vcpu_flush_interrupts().
+ - Call vcpu_flush_interrupts() in check_pcpu_work().
+ - Move vcpu_update_hvip() inside if() in vcpu_flush_interrupts().
 ---
 Changes in v2:
- - As hstatus isn't a part of arch_vcpu structure (as it is already a part of
-   cpu_user_regs) introduce vcpu_guest_cpu_user_regs() to be able to access
-   hstatus and other CPU user regs.
- - Sort hideleg bit setting by value. Drop a stray blank.
- - Drop | when the first initialization of hcounteren and hennvcfg happen.
- - Introduce HEDELEG_DEFAULT. Sort set bits by value and use BIT() macros
-   instead of open-coding it.
- - Apply pattern csr_write() -> csr_read() for hedeleg and hideleg instead
-   of direct bit setting in v->arch.h{i,e}deleg as it could be that for some
-   reason some bits of hedeleg and hideleg are r/o.
-   The similar patter is used for hstateen0 as some of the bits could be r/o.
- - Add check that SSAIA is avaialable before setting of SMSTATEEN0_AIA |
-   SMSTATEEN0_IMSIC | SMSTATEEN0_SVSLCT bits.
- - Drop local variables hstatus, hideleg and hedeleg as they aren't used
-   anymore.
+ - New patch.
 ---
- xen/arch/riscv/domain.c                     | 63 +++++++++++++++++++++
- xen/arch/riscv/include/asm/current.h        |  2 +
- xen/arch/riscv/include/asm/domain.h         |  6 ++
- xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
- 4 files changed, 73 insertions(+)
+ xen/arch/riscv/domain.c             | 27 +++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/domain.h |  1 +
+ xen/arch/riscv/traps.c              |  2 ++
+ 3 files changed, 30 insertions(+)
 
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 32974cb48929..08b990f7b9f6 100644
+index 5447c17402dd..f3e3ad149453 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -8,6 +8,7 @@
- 
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
-+#include <asm/riscv_encoding.h>
- 
- struct csr_masks {
-     register_t hedeleg;
-@@ -20,6 +21,21 @@ struct csr_masks {
-     } ro_one;
- };
- 
-+#define HEDELEG_DEFAULT (BIT(CAUSE_MISALIGNED_FETCH, U) | \
-+                         BIT(CAUSE_FETCH_ACCESS, U) | \
-+                         BIT(CAUSE_ILLEGAL_INSTRUCTION, U) | \
-+                         BIT(CAUSE_BREAKPOINT, U) | \
-+                         BIT(CAUSE_MISALIGNED_LOAD, U) | \
-+                         BIT(CAUSE_LOAD_ACCESS, U) | \
-+                         BIT(CAUSE_MISALIGNED_STORE, U) | \
-+                         BIT(CAUSE_STORE_ACCESS, U) | \
-+                         BIT(CAUSE_USER_ECALL, U) | \
-+                         BIT(CAUSE_FETCH_PAGE_FAULT, U) | \
-+                         BIT(CAUSE_LOAD_PAGE_FAULT, U) | \
-+                         BIT(CAUSE_STORE_PAGE_FAULT, U))
-+
-+#define HIDELEG_DEFAULT (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
-+
- static struct csr_masks __ro_after_init csr_masks;
- 
- #define HEDELEG_AVAIL_MASK ULONG_MAX
-@@ -62,6 +78,51 @@ void __init init_csr_masks(void)
- #undef INIT_RO_ONE_MASK
+@@ -231,6 +231,33 @@ void vcpu_sync_interrupts(struct vcpu *curr)
+     }
  }
  
-+static void vcpu_csr_init(struct vcpu *v)
++void vcpu_flush_interrupts(struct vcpu *curr)
 +{
-+    v->arch.hedeleg = HEDELEG_DEFAULT & csr_masks.hedeleg;
++    ASSERT(curr == current);
 +
-+    vcpu_guest_cpu_user_regs(v)->hstatus = HSTATUS_SPV | HSTATUS_SPVP;
-+
-+    v->arch.hideleg = HIDELEG_DEFAULT & csr_masks.hideleg;
-+
-+    /*
-+     * VS should access only the time counter directly.
-+     * Everything else should trap.
-+     */
-+    v->arch.hcounteren = HCOUNTEREN_TM;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svpbmt) )
-+        v->arch.henvcfg = ENVCFG_PBMTE & csr_masks.henvcfg;
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
++    if ( ACCESS_ONCE(curr->arch.irqs_pending_mask[0]) )
 +    {
-+        /* Allow guest to access CSR_SENVCFG */
-+        register_t hstateen0 = SMSTATEEN0_HSENVCFG;
++        unsigned long mask = xchg(&curr->arch.irqs_pending_mask[0], 0UL);
++        unsigned long val = ACCESS_ONCE(curr->arch.irqs_pending[0]) & mask;
++        register_t *hvip = &curr->arch.hvip;
 +
-+        if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_ssaia) )
-+            /*
-+             * If the hypervisor extension is implemented, the same three
-+             * bits are defined also in hypervisor CSR hstateen0 but concern
-+             * only the state potentially accessible to a virtual machine
-+             * executing in privilege modes VS and VU:
-+             *      bit 60 CSRs siselect and sireg (really vsiselect and
-+             *             vsireg)
-+             *      bit 59 CSRs siph and sieh (RV32 only) and stopi (really
-+             *             vsiph, vsieh, and vstopi)
-+             *      bit 58 all state of IMSIC guest interrupt files, including
-+             *             CSR stopei (really vstopei)
-+             * If one of these bits is zero in hstateen0, and the same bit is
-+             * one in mstateen0, then an attempt to access the corresponding
-+             * state from VS or VU-mode raises a virtual instruction exception.
-+             */
-+            hstateen0 |= SMSTATEEN0_AIA | SMSTATEEN0_IMSIC | SMSTATEEN0_SVSLCT;
++        *hvip &= ~mask;
++        *hvip |= val;
 +
-+        v->arch.hstateen0 = (hstateen0 & csr_masks.hstateen0) |
-+                            csr_masks.ro_one.hstateen0;
++        csr_write(CSR_HVIP, *hvip);
 +    }
++
++#ifdef CONFIG_RISCV_32
++    /*
++     * Flush AIA high interrupts.
++     *
++     * It is necessary to do only for CONFIG_RISCV_32 which isn't
++     * supported now.
++     */
++#   error "Update v->arch.hviph"
++#endif
 +}
 +
- static void continue_new_vcpu(struct vcpu *prev)
+ static void __init __maybe_unused build_assertions(void)
  {
-     BUG_ON("unimplemented\n");
-@@ -84,6 +145,8 @@ int arch_vcpu_create(struct vcpu *v)
-     if ( is_idle_vcpu(v) )
-         return 0;
- 
-+    vcpu_csr_init(v);
-+
      /*
-      * As the vtimer and interrupt controller (IC) are not yet implemented,
-      * return an error.
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index 58c9f1506b7c..5fbee8182caa 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -48,6 +48,8 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
- #define get_cpu_current(cpu)  per_cpu(curr_vcpu, cpu)
- 
- #define guest_cpu_user_regs() ({ BUG_ON("unimplemented"); NULL; })
-+#define vcpu_guest_cpu_user_regs(vcpu) \
-+    (&(vcpu)->arch.cpu_info->guest_cpu_user_regs)
- 
- #define switch_stack_and_jump(stack, fn) do {               \
-     asm volatile (                                          \
 diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 5aec627a7adb..17be792afe7d 100644
+index 1ecfe18c8519..59d23e4f9247 100644
 --- a/xen/arch/riscv/include/asm/domain.h
 +++ b/xen/arch/riscv/include/asm/domain.h
-@@ -49,6 +49,12 @@ struct arch_vcpu {
+@@ -115,6 +115,7 @@ int vcpu_set_interrupt(struct vcpu *v, unsigned int irq);
+ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
  
-     struct cpu_info *cpu_info;
+ void vcpu_sync_interrupts(struct vcpu *curr);
++void vcpu_flush_interrupts(struct vcpu *curr);
  
-+    register_t hcounteren;
-+    register_t hedeleg;
-+    register_t hideleg;
-+    register_t henvcfg;
-+    register_t hstateen0;
+ #endif /* ASM__RISCV__DOMAIN_H */
+ 
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 551f886e3a69..244264c92a79 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -175,6 +175,8 @@ static void check_for_pcpu_work(void)
+ 
+     vcpu_sync_interrupts(curr);
+ 
++    vcpu_flush_interrupts(curr);
 +
-     register_t vsatp;
- };
+     p2m_handle_vmenter();
+ }
  
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index 1f7e612366f8..dd15731a86fa 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -228,6 +228,8 @@
- #define ENVCFG_CBIE_INV			_UL(0x3)
- #define ENVCFG_FIOM			_UL(0x1)
- 
-+#define HCOUNTEREN_TM BIT(1, U)
-+
- /* ===== User-level CSRs ===== */
- 
- /* User Trap Setup (N-extension) */
 -- 
 2.53.0
 
