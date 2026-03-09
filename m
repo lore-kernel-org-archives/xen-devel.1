@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16579EF36EA
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Mar 2026 06:45:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1249071.1546574 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58139EF36E8
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Mar 2026 06:45:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1249074.1546601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzUM9-0005KX-0M; Mon, 09 Mar 2026 06:44:45 +0000
+	id 1vzUMF-0005z4-He; Mon, 09 Mar 2026 06:44:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1249071.1546574; Mon, 09 Mar 2026 06:44:44 +0000
+Received: by outflank-mailman (output) from mailman id 1249074.1546601; Mon, 09 Mar 2026 06:44:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzUM8-0005KO-R3; Mon, 09 Mar 2026 06:44:44 +0000
-Received: by outflank-mailman (input) for mailman id 1249071;
- Mon, 09 Mar 2026 06:44:43 +0000
+	id 1vzUMF-0005yt-EL; Mon, 09 Mar 2026 06:44:51 +0000
+Received: by outflank-mailman (input) for mailman id 1249074;
+ Mon, 09 Mar 2026 06:44:50 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UF23=BJ=gmail.com=edgar.iglesias@srs-se1.protection.inumbo.net>)
- id 1vzUM7-0005KI-BW
- for xen-devel@lists.xenproject.org; Mon, 09 Mar 2026 06:44:43 +0000
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [2607:f8b0:4864:20::a2c])
+ id 1vzUME-0005KI-QK
+ for xen-devel@lists.xenproject.org; Mon, 09 Mar 2026 06:44:50 +0000
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [2607:f8b0:4864:20::a36])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 72e510e2-1b83-11f1-b164-2bf370ae4941;
- Mon, 09 Mar 2026 07:44:41 +0100 (CET)
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-56adf76631cso2441445e0c.1
- for <xen-devel@lists.xenproject.org>; Sun, 08 Mar 2026 23:44:41 -0700 (PDT)
+ id 7811c53a-1b83-11f1-b164-2bf370ae4941;
+ Mon, 09 Mar 2026 07:44:50 +0100 (CET)
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-56affe9f4c4so1330781e0c.2
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Mar 2026 23:44:50 -0700 (PDT)
 Received: from gmail.com (ip190-5-140-138.intercom.com.sv. [190.5.140.138])
  by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-56b09a0881asm9247726e0c.4.2026.03.08.23.44.38
+ 71dfb90a1353d-56b09a2614fsm9529782e0c.7.2026.03.08.23.44.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Mar 2026 23:44:38 -0700 (PDT)
+ Sun, 08 Mar 2026 23:44:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,90 +47,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 72e510e2-1b83-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 7811c53a-1b83-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773038680; x=1773643480; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JhBJGCljjR2vWP5NBGBE3Ox/OrYcaC529yay0waARyQ=;
-        b=Le8xFLVt2Ri2TNA3hEy5MQ2U1fZQXAVSgT5Pyu3AcKlHNoBCyyabt2tKpxBzQhIQic
-         PpemP7vAxVaKhGaFbQA3SM46TdDoUyRu34CY7niP9Y1XNB+4pDjPxJpJYxgtaBo1WTiq
-         1nsGMsZpj7SJtrfGRcpy/NkE9uRvIRvuAwhDKpbFugj5tuMJhpsMBagcHA3hpv2h8u8d
-         nkh89lWqcW1wL8C+oPFnsVmEOLMIFpWqtRqkMcdgIUad3rGnMRqlHPEMD7rqySuOU3VY
-         VvOzaucbpAE3mrHJlS8FybLRI5I3/NVBtJYq8LHtGIXlIgMI4vfl9uPvbkUa6gGG5C2C
-         1F7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773038680; x=1773643480;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1773038689; x=1773643489; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JhBJGCljjR2vWP5NBGBE3Ox/OrYcaC529yay0waARyQ=;
-        b=a+hh7HJ5kKwK0AEcxmZL81XnSMNbgaSJo1FdWDFpNADsqS2CDZokLW8GqcTv6AZXmY
-         fuBze8g4svNEioL06Rwi1m9lE0c5dP6ZDKn0Y++GPZ5+QhXCiPJp0KRdz5JXFR+341Fh
-         o2VAmJqfDllXa65Q+pfAJkKOw8aBa2yw/U1EFfLzjHakhxil9HZpI6P/1wEJ19kRp6A6
-         lKLpIYfXbgdaZiCLn+ngowMlq4DC7485v3GxYc/DXNv8OfnmSGiSJ/8zBeTIjnAsBXEL
-         Qh/z+hIxD128dB6pKiQ3sWC+T+KyGFtCDYtZCe5BW9c5OBpVyBc55UlDPzU4ynPEboxH
-         R8VA==
-X-Forwarded-Encrypted: i=1; AJvYcCWYn5CdKftwzOmomhOfw1xqpCBFmAXOcXfRE5axVYl4XFqpybTZ/u2vNN021wZw925U7YrwXiLvgYk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy6TWXLVNpMwNfr6ZY8jH/O+L/Hi2RGASVD5OiLapNWMolcIweU
-	CHe61UHNt4EERi/T7y+cvLTNy5oSdkz+YR9QX02150yB3cLB0hhPtkUX
-X-Gm-Gg: ATEYQzxLAun6jkAG52GYAdfcCdBD9+H5MhNH7wuJ/X5weWW6aDGddQ04CCqmmWl9zrj
-	yDf4p8/zNEHXSMZkKl/VcbWl78tJYdgBYQZZrD3PAEZsWQ1SCQOHp6s6cZPaXpUIV6duMGZya06
-	/KIrhE9asHy0cRqDKwHLV89seBU0GNJjmSIMmUJHCLDLzOhDHPIPby8Il61MglL92r/zK8qAfEB
-	BNVajJ3czWxjKE3WylW+QCUoxqgJbLA4DO4lYwoNzDtNWrjrBKDwqU9ItQDgNYFf40OIZruQ+ml
-	+F84/+2CknEpECL7qXZ3VAX1Sx3ilZn/QBRUIvbF1zrDVEi1ce3Y847hNd8YZZ1GXkxCzKDqjTS
-	9Z/ncF6Xt7h61V+vQFXxcnPRjhjj1ngYUPsAC0JkDosXQQjAzV14CQFOcu5mvgnolSHUYkKHdoj
-	5z4D3MsA7As8YkMoDIOdkaL7lAXPLgHHtGTQgig7/uzhX4XMRzPT+F02ptRw==
-X-Received: by 2002:a05:6123:4b:b0:55b:16ba:2854 with SMTP id 71dfb90a1353d-56b07d15b1dmr3664236e0c.5.1773038680128;
-        Sun, 08 Mar 2026 23:44:40 -0700 (PDT)
+        bh=a2tMEsPmEaiHyXknwk29SjcZVAaayzKi1p57s2lEHB0=;
+        b=mW5Pe+2jWCfCSoNVatxLSZaJ4edjNDz9JE8VMdeodAgPrMiiGgrpOGwnVkBHtJfhGn
+         salNlGFW3yF8gOnoJG03fXmP/n16y63jTxl5qPeQLYqoVRFlM3TblWZvCCB+owUz563E
+         atgBH9HmnhY9WYHvSIwOYQlPSsXCxv1EkOIj/z14laDo2Eh7vtjXECO3hQPe0zgchsK0
+         JSyxjMCEU0KPn+dDMhjvqYuywFElO68PmLnkBW6OM073Ab41mwAC+Dq6TTZtKZ5bNbrE
+         xuG6vM+rFn3kbnZdxiyofHN80aQPFhTGD7qwjgMCH56CvJJ0p8Adm5tHnizITFmuIA77
+         s0uQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773038689; x=1773643489;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=a2tMEsPmEaiHyXknwk29SjcZVAaayzKi1p57s2lEHB0=;
+        b=D0pWStxgUu9g+wry4OsbfrP8BCaHNt+oTKB7phyWzKVeMOis0FRCgC/5H1VRiw+mjd
+         ZiWlNtleV7xqXINxn3DTf+cjVbDJvVok8IROvG+gH00vRRa0HqX0Fh5hv8H8iX4yY6Rc
+         KdRCUG5i2x0UJnlcdRtQnHtztSJjC41F/2EvcsHfAcHFM8wmmTHUk9sUDEL/+672ayNb
+         mnJ54OdQKLk5IHr/berroeJDsq9l0pUGJtmJM1Ae/KL7R8wWs3RrIPPgNaHWk8bSIJwd
+         rG7MrjTLIMFBbh8pIRTFMHQTxBT3elWQwrYgQCcK9ftL6xrv4Kho8diUEbQ4IvG0eVtr
+         +syw==
+X-Forwarded-Encrypted: i=1; AJvYcCXq/OYY8LNVgV8zHWXZvU01H0A0b4LvG6Tb56MDHL8bdlGQgpJI6zhjfriO6DRX96RIan3xTXzmcyk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzN8uKH6bQhTNnC1L2+ht0JXPZSm9Kq64WBemGznABQfmVUWgPz
+	KgvV5a3DsuVsb7pRamhjNyFIV/XDt7smT/e8hYwRv13eG7pAD7o/Wssd
+X-Gm-Gg: ATEYQzzi66KKtoVwWhmVLr9c4hDa7Bw2YM9ccz3VWtKLBcXGgnbHZDCaeBu+2Xr6nhn
+	Pw/AD9WK+MFUq+arl2sfPIio3MwYECt8D+zsWNbCM8EvrIMOdmVw4og8YzYGZFGyLAyLaM+0Xp4
+	ZUPOFuK8xfQKUjEPj7SWsKGxupqjjoqr+HEYXugYA1pNXdZsY9yfYJFZ+tkVEMO78BmTE+QSyGV
+	5Ah638bOSOZh2X0qK07auFzXa4ekw7+NE/77s6MMbWuaf3etwTPlHbtJcBz2e6q0aiNIDUFJqAD
+	7d9cF4pzGnDRrTLEDXfowfuWDFGCdDU9wk0Dm5EfaNx1/1ch7CME+kdDwiSYUVPM9IDeCwdkqoV
+	GVLXQINlRsJ+d2lxSqBEGb3qXhm088WYRi8mTchBsVRstdM5K4VaH30bYG6tKwYG7GZEaiWE/3y
+	AqcZpPRvgvlAiyTmTbPyP3fbU22nfpNnJoFz7ZYeX6Oqt44+uDgjbt1OXISg==
+X-Received: by 2002:a05:6122:1350:b0:566:36e7:8934 with SMTP id 71dfb90a1353d-56b07e8b7dcmr3378593e0c.16.1773038688827;
+        Sun, 08 Mar 2026 23:44:48 -0700 (PDT)
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-To: qemu-devel@nongnu.org
+To: qemu-devel@nongnu.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Peter Xu <peterx@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: sstabellini@kernel.org,
 	anthony@xenproject.org,
 	edgar.iglesias@amd.com,
 	xen-devel@lists.xenproject.org
-Subject: [PULL v1 0/5] xen: pvh: Add machine option to disable the mapcache
-Date: Mon,  9 Mar 2026 07:44:30 +0100
-Message-ID: <20260309064436.51860-1-edgar.iglesias@gmail.com>
+Subject: [PULL v1 3/5] physmem: xen: Conditionalize use of the mapcache
+Date: Mon,  9 Mar 2026 07:44:33 +0100
+Message-ID: <20260309064436.51860-4-edgar.iglesias@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260309064436.51860-1-edgar.iglesias@gmail.com>
+References: <20260309064436.51860-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-  Merge tag 'pull-11.0-virtio-gpu-updates-060326-1' of https://gitlab.com/stsquad/qemu into staging (2026-03-07 11:22:16 +0000)
+Conditionalize use of the mapcache. This is in preparation
+to optionally disable the mapcache at runtime.
 
-are available in the Git repository at:
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Acked-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ system/physmem.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-  https://gitlab.com/edgar.iglesias/qemu.git tags/edgar/edgars-xen-queue-2026-02-09
-
-for you to fetch changes up to 83d1d9a49e8eb970f87508ae4ce0f222084df365:
-
-  hw/xen: xenpvh: Add prop to enable/disable the mapcache (2026-03-09 03:24:02 +0100)
-
-----------------------------------------------------------------
-Edgars Xen queue
-
-----------------------------------------------------------------
-
-Edgar E. Iglesias (5):
-  xen: mapcache: Assert mapcache existance
-  xen: mapcache: Add function to check if the mapcache is enabled
-  physmem: xen: Conditionalize use of the mapcache
-  hw/xen-hvm: Add a mapcache arg to xen_register_ioreq()
-  hw/xen: xenpvh: Add prop to enable/disable the mapcache
-
- hw/i386/xen/xen-hvm.c           |   2 +-
- hw/xen/xen-hvm-common.c         |  18 +++--
- hw/xen/xen-mapcache.c           |  16 ++++
- hw/xen/xen-pvh-common.c         | 134 +++++++++++++++++++++++++++++---
- hw/xen/xen_stubs.c              |   5 ++
- include/hw/xen/xen-hvm-common.h |   3 +-
- include/hw/xen/xen-pvh-common.h |   2 +
- include/system/xen-mapcache.h   |   1 +
- system/physmem.c                |  14 ++--
- 9 files changed, 170 insertions(+), 25 deletions(-)
-
+diff --git a/system/physmem.c b/system/physmem.c
+index e5ff26acec..7eecd81877 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -578,7 +578,9 @@ MemoryRegion *flatview_translate(FlatView *fv, hwaddr addr, hwaddr *xlat,
+                                     is_write, true, &as, attrs);
+     mr = section.mr;
+ 
+-    if (xen_enabled() && memory_access_is_direct(mr, is_write, attrs)) {
++    if (xen_map_cache_enabled() &&
++        memory_access_is_direct(mr, is_write, attrs)) {
++        /* mapcache: Next page may be unmapped or in a different bucket/VA. */
+         hwaddr page = ((addr & TARGET_PAGE_MASK) + TARGET_PAGE_SIZE) - addr;
+         *plen = MIN(page, *plen);
+     }
+@@ -2577,7 +2579,7 @@ static void reclaim_ramblock(RAMBlock *block)
+ {
+     if (block->flags & RAM_PREALLOC) {
+         ;
+-    } else if (xen_enabled()) {
++    } else if (xen_map_cache_enabled()) {
+         xen_invalidate_map_cache_entry(block->host);
+ #if !defined(_WIN32) && !defined(EMSCRIPTEN)
+     } else if (block->fd >= 0) {
+@@ -2736,7 +2738,7 @@ static void *qemu_ram_ptr_length(RAMBlock *block, ram_addr_t addr,
+         len = *size;
+     }
+ 
+-    if (xen_enabled() && block->host == NULL) {
++    if (xen_map_cache_enabled() && block->host == NULL) {
+         /* We need to check if the requested address is in the RAM
+          * because we don't want to map the entire memory in QEMU.
+          * In that case just map the requested area.
+@@ -2785,7 +2787,7 @@ RAMBlock *qemu_ram_block_from_host(void *ptr, bool round_offset,
+     RAMBlock *block;
+     uint8_t *host = ptr;
+ 
+-    if (xen_enabled()) {
++    if (xen_map_cache_enabled()) {
+         ram_addr_t ram_addr;
+         RCU_READ_LOCK_GUARD();
+         ram_addr = xen_ram_addr_from_mapcache(ptr);
+@@ -3787,7 +3789,7 @@ void address_space_unmap(AddressSpace *as, void *buffer, hwaddr len,
+         if (is_write) {
+             invalidate_and_set_dirty(mr, addr1, access_len);
+         }
+-        if (xen_enabled()) {
++        if (xen_map_cache_enabled()) {
+             xen_invalidate_map_cache_entry(buffer);
+         }
+         memory_region_unref(mr);
+@@ -3898,7 +3900,7 @@ void address_space_cache_destroy(MemoryRegionCache *cache)
+         return;
+     }
+ 
+-    if (xen_enabled()) {
++    if (xen_map_cache_enabled()) {
+         xen_invalidate_map_cache_entry(cache->ptr);
+     }
+     memory_region_unref(cache->mrs.mr);
 -- 
 2.43.0
 
