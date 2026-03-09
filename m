@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A21F3C249
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Mar 2026 12:31:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1249410.1546904 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E574F3C245
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Mar 2026 12:31:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1249409.1546898 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzZlP-0006Oz-6x; Mon, 09 Mar 2026 12:31:11 +0000
+	id 1vzZlO-0006He-LX; Mon, 09 Mar 2026 12:31:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1249410.1546904; Mon, 09 Mar 2026 12:31:11 +0000
+Received: by outflank-mailman (output) from mailman id 1249409.1546898; Mon, 09 Mar 2026 12:31:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzZlO-0006Mu-V6; Mon, 09 Mar 2026 12:31:10 +0000
-Received: by outflank-mailman (input) for mailman id 1249410;
- Mon, 09 Mar 2026 12:31:10 +0000
+	id 1vzZlO-0006HW-HV; Mon, 09 Mar 2026 12:31:10 +0000
+Received: by outflank-mailman (input) for mailman id 1249409;
+ Mon, 09 Mar 2026 12:31:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1Suo=BJ=bounce.vates.tech=bounce-md_30504962.69aebd88.v1-441784b254ef4839bf5042d28ceb1d2a@srs-se1.protection.inumbo.net>)
- id 1vzZlN-0005Rm-S6
- for xen-devel@lists.xenproject.org; Mon, 09 Mar 2026 12:31:09 +0000
+ <SRS0=/VG/=BJ=bounce.vates.tech=bounce-md_30504962.69aebd87.v1-18a1a1d1df8149379ba464e21f873ad8@srs-se1.protection.inumbo.net>)
+ id 1vzZlM-0005Rm-Rz
+ for xen-devel@lists.xenproject.org; Mon, 09 Mar 2026 12:31:08 +0000
 Received: from mail133-21.atl131.mandrillapp.com
  (mail133-21.atl131.mandrillapp.com [198.2.133.21])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d85bf670-1bb3-11f1-9ccf-f158ae23cfc8;
- Mon, 09 Mar 2026 13:31:07 +0100 (CET)
+ id d7b9d31f-1bb3-11f1-9ccf-f158ae23cfc8;
+ Mon, 09 Mar 2026 13:31:06 +0100 (CET)
 Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
  by mail133-21.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4fTxFN0mS4z1XLF8g
- for <xen-devel@lists.xenproject.org>; Mon,  9 Mar 2026 12:31:04 +0000 (GMT)
+ 4fTxFM3ypbz1XLF7l
+ for <xen-devel@lists.xenproject.org>; Mon,  9 Mar 2026 12:31:03 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 441784b254ef4839bf5042d28ceb1d2a; Mon, 09 Mar 2026 12:31:04 +0000
+ 18a1a1d1df8149379ba464e21f873ad8; Mon, 09 Mar 2026 12:31:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,373 +45,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d85bf670-1bb3-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: d7b9d31f-1bb3-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773059464; x=1773329464;
-	bh=yBW+Fz2L+XcrjXyP9HkaoTV/8bPAxt7aYNJZwU0t0XE=;
+	s=mte1; t=1773059463; x=1773329463;
+	bh=Mx7xiEpCf87KqJdZ5mo3DMQmHNKXahVe5TvPx89UTcQ=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=Xp5sdVjacc8RnFuJfvcwe/ETbTNzpRkkisANXtaG+bzfnCJCTnHgu0a52lBF5xaQm
-	 9I6r45bJF7sle0zkAau8V8Qz625BoaABloS3uIVZYlCT2HpAN2ip/w499YIodnudLi
-	 pKJg1OOWdw3dsMLn41ltdBg8I27RyAk6QLWisSzIluNlrC9q5iN25+3prPNktHr+/c
-	 hiRPu6/qaA2lTVYXFi1XBPfsAAOjYFNQIhWGbcJHRj3mxMI9whVJ41O4IfZZwGY99S
-	 og25ajL4U9VNjrnBY9bVnCmypEnWDc3sAh2rosxZM0H0oEYvbamYcZpVGymiuxbsfq
-	 390Y1somR984w==
+	b=q4fxtnhuffHtZoXaXfGXNRFa+aF9DMczP4kP9e0mvKQY803coNgRiq0HdwZQpSZUJ
+	 I2+6JYiuEN5FW9kcHAYlrCaJXmD7TrlzpiNxlIY5FiBgb3SC5i1v9wPrRmywMsoIeM
+	 mOUrNcE+xUDqj7jBDcGOf/aeQMtS25pxgbre0yzIULd6JfMUBVKTJmir4730lVEuAs
+	 L7q+A7SjSnO72FmBsQqNG+0Hnp0SbHEk7v+9OmcjaJQ7HevaGSoOLAPkUqAFTw7F5R
+	 V/3hNxH6sZkzMhBBU+6Xv2GaMikQmKES924VsOJh3R2wkIrLIKqtnsc/mbMaNNI38R
+	 +znp5tfH+de/g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773059464; x=1773319964; i=julian.vetter@vates.tech;
-	bh=yBW+Fz2L+XcrjXyP9HkaoTV/8bPAxt7aYNJZwU0t0XE=;
+	t=1773059463; x=1773319963; i=julian.vetter@vates.tech;
+	bh=Mx7xiEpCf87KqJdZ5mo3DMQmHNKXahVe5TvPx89UTcQ=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=K4A7jHYikj0Wkbrr2AKIEeyof7Rq8okhJSvjsk6pwZDMfA3sBluTQdl91wwTm74xK
-	 JEhHOxh6IP9/0Eoi0bUduHJRP+2itT4u7+emMqbGGm48BdA6pzJj+gnDetw68ltFfR
-	 5gjQInr3qaSTYVRBoM6q9ZeREdvOMvf51a3fkGKEjWKw2ElrHoh5OTbgpy/jJBJdBX
-	 rPkQnucPDz8WjCKAt8YTV9sB9i38KecEFMN3xIgHX6w7R3RgejpKEaEXvVEMkv0niP
-	 rgi2ixNZS295D20Dst9Whsdw3065WciTgevDdQQvojunNwQj+SCuprzlwoYNXcGl7A
-	 NFhcxTqpk7V3Q==
+	b=QwXrRM0B4KQ7VTIFOhOnI/cKO8u9el1Gi4Qp67yPPSq89B7vmTGRM1UJ6oybNkGiP
+	 aon7NlViXYTsPa5JbUEsz7PaKx8jY3Gpyhh+A/41ABgbsBzfUiVxqgD6XapRBupUiV
+	 xLglYlL7EkOrJO/SlYMxEcZVkDqQyrM87z+sgZZ4ooxZgAasZCdX4XK9XpzYsFbNKm
+	 oz64x5R8FyU9iKMqQKcIzNelqkjnVsn9UeVO8X2waE7UEUOjAWzov7JrZ/68biSF/U
+	 SRLm2S+jmmMKuAzCzeYigfGk578/Yzq1cHxKdO+5zwKKV1PW5GV0S0oY+F8Ksh3SU4
+	 Xm5g8a5RVbhmQ==
 From: "Julian Vetter" <julian.vetter@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v3=205/7]=20x86/dmop:=20Add=20XEN=5FDMOP=5F{bind,unbind}=5Fpt=5Fmsi=5Firq=20DM=20ops?=
+Subject: =?utf-8?Q?[PATCH=20v3=203/7]=20x86/hvm:=20Support=20extended=20destination=20IDs=20in=20virtual=20MSI=20and=20IO-APIC?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773059462800
+X-Bm-Transport-Timestamp: 1773059462248
 To: xen-devel@lists.xenproject.org
 Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>, "Julien Grall" <julien@xen.org>, "Julian Vetter" <julian.vetter@vates.tech>
-Message-Id: <20260309123055.880050-5-julian.vetter@vates.tech>
+Message-Id: <20260309123055.880050-3-julian.vetter@vates.tech>
 In-Reply-To: <20260309123055.880050-1-julian.vetter@vates.tech>
 References: <20260309123055.880050-1-julian.vetter@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.441784b254ef4839bf5042d28ceb1d2a?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.18a1a1d1df8149379ba464e21f873ad8?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260309:md
-Date: Mon, 09 Mar 2026 12:31:04 +0000
+Date: Mon, 09 Mar 2026 12:31:03 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Add two DM ops for MSI passthrough IRQs. These new DM ops take the raw
-MSI address and data fields rather than a pre-decoded gflags values. Xen
-decodes the destination ID via msi_addr_to_gflags(), including any
-extended destination bits in address[11:5]. This means the device model
-does not need to understand the extended destination ID encoding, and
-simply forwards the MSI address it observes from the guest.
+Use the newly defined masks to extract the full 15-bit destination ID
+from guest MSI addresses and IO-APIC RTEs. In hvm_inject_msi() combine
+the standard bits [19:12] with the extended bits [11:5] of the MSI
+address into a 15-bit destination ID for LAPIC delivery. Increase the
+dest parameter of vmsi_deliver() and hvm_girq_dest_2_vcpu_id() from
+uint8_t to uint32_t. In vmsi_deliver_pirq() extract the full destination
+from gflags via XEN_DOMCTL_VMSI_X86_FULL_DEST(). In msi_gflags() pack
+the extended bits from the MSI address into the new
+XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK field of gflags. In
+vioapic_deliver() read the combined 15-bit destination using the
+VIOAPIC_RTE_DEST() macro. Extend ioapic_check() to check for extended
+destination bits set in a domain that does not advertise
+XEN_HVM_CPUID_EXT_DEST_ID and refuse to restore the IO-APIC state,
+preventing silent interrupt misrouting after live migration.
 
 Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
 ---
 Changes in V3:
-- New patch addressing feedback from Roger
+- Added additional check to the vioapic_check that makes sure that the
+  extended bits are not set for domains that don't support it
+- Addressed comments from Jan -> Replaced all constants by a proper define
 ---
- tools/include/xendevicemodel.h |  37 ++++++++++++
- tools/libs/devicemodel/core.c  |  44 ++++++++++++++
- xen/arch/x86/hvm/dm.c          | 102 +++++++++++++++++++++++++++++++++
- xen/include/public/hvm/dm_op.h |  23 ++++++++
- xen/include/xlat.lst           |   1 +
- 5 files changed, 207 insertions(+)
+ xen/arch/x86/hvm/irq.c             | 11 ++++++++++-
+ xen/arch/x86/hvm/vioapic.c         | 21 +++++++++++++++++++--
+ xen/arch/x86/hvm/vmsi.c            |  8 +++++---
+ xen/arch/x86/include/asm/hvm/hvm.h |  4 ++--
+ 4 files changed, 36 insertions(+), 8 deletions(-)
 
-diff --git a/tools/include/xendevicemodel.h b/tools/include/xendevicemodel.h
-index 227e7fd810..0d5d7b0ff1 100644
---- a/tools/include/xendevicemodel.h
-+++ b/tools/include/xendevicemodel.h
-@@ -375,6 +375,43 @@ int xendevicemodel_nr_vcpus(
-  */
- int xendevicemodel_restrict(xendevicemodel_handle *dmod, domid_t domid);
- 
-+/**
-+ * This function binds a passthrough physical IRQ to a guest MSI vector
-+ * using raw MSI address/data fields. Unlike XEN_DOMCTL_bind_pt_irq,
-+ * this interface supports extended (15-bit) destination IDs by having
-+ * Xen decode the MSI address internally.
-+ *
-+ * @parm dmod a handle to an open devicemodel interface.
-+ * @parm domid the domain id to be serviced.
-+ * @parm machine_irq the physical IRQ number (pirq).
-+ * @parm gvec the guest interrupt vector.
-+ * @parm msi_addr the MSI address (0xfeexxxxx, includes extended dest ID).
-+ * @parm msi_data the MSI data (vector, delivery mode, trigger mode).
-+ * @parm gtable the MSI-X table base GFN, or 0 for plain MSI.
-+ * @parm unmasked if non-zero, leave the IRQ unmasked after binding.
-+ * @return 0 on success, -1 on failure.
-+ */
-+int xendevicemodel_bind_pt_msi_irq(
-+    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq,
-+    uint8_t gvec, uint64_t msi_addr, uint32_t msi_data, uint64_t gtable,
-+    int unmasked);
-+
-+/**
-+ * This function unbinds a passthrough physical IRQ previously bound
-+ * with xendevicemodel_bind_pt_msi_irq.
-+ *
-+ * @parm dmod a handle to an open devicemodel interface.
-+ * @parm domid the domain id to be serviced.
-+ * @parm machine_irq the physical IRQ number (pirq).
-+ * @parm gvec the guest interrupt vector.
-+ * @parm msi_addr the MSI address.
-+ * @parm msi_data the MSI data.
-+ * @return 0 on success, -1 on failure.
-+ */
-+int xendevicemodel_unbind_pt_msi_irq(
-+    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq,
-+    uint8_t gvec, uint64_t msi_addr, uint32_t msi_data);
-+
- #endif /* XENDEVICEMODEL_H */
- 
- /*
-diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
-index 8e619eeb0a..4a52fe4750 100644
---- a/tools/libs/devicemodel/core.c
-+++ b/tools/libs/devicemodel/core.c
-@@ -645,6 +645,50 @@ int xendevicemodel_nr_vcpus(
-     return 0;
- }
- 
-+int xendevicemodel_bind_pt_msi_irq(
-+    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq,
-+    uint8_t gvec, uint64_t msi_addr, uint32_t msi_data, uint64_t gtable,
-+    int unmasked)
-+{
-+    struct xen_dm_op op;
-+    struct xen_dm_op_bind_pt_msi_irq *data;
-+
-+    memset(&op, 0, sizeof(op));
-+
-+    op.op = XEN_DMOP_bind_pt_msi_irq;
-+    data = &op.u.bind_pt_msi_irq;
-+
-+    data->machine_irq = machine_irq;
-+    data->gvec = gvec;
-+    data->data = msi_data;
-+    data->addr = msi_addr;
-+    data->gtable = gtable;
-+    if ( unmasked )
-+        data->flags |= XEN_DMOP_MSI_FLAG_UNMASKED;
-+
-+    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-+}
-+
-+int xendevicemodel_unbind_pt_msi_irq(
-+    xendevicemodel_handle *dmod, domid_t domid, uint32_t machine_irq,
-+    uint8_t gvec, uint64_t msi_addr, uint32_t msi_data)
-+{
-+    struct xen_dm_op op;
-+    struct xen_dm_op_bind_pt_msi_irq *data;
-+
-+    memset(&op, 0, sizeof(op));
-+
-+    op.op = XEN_DMOP_unbind_pt_msi_irq;
-+    data = &op.u.bind_pt_msi_irq;
-+
-+    data->machine_irq = machine_irq;
-+    data->gvec = gvec;
-+    data->data = msi_data;
-+    data->addr = msi_addr;
-+
-+    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-+}
-+
- int xendevicemodel_restrict(xendevicemodel_handle *dmod, domid_t domid)
+diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
+index 5f64361113..b520fc1150 100644
+--- a/xen/arch/x86/hvm/irq.c
++++ b/xen/arch/x86/hvm/irq.c
+@@ -374,7 +374,16 @@ int hvm_set_pci_link_route(struct domain *d, u8 link, u8 isa_irq)
+ int hvm_inject_msi(struct domain *d, uint64_t addr, uint32_t data)
  {
-     return osdep_xendevicemodel_restrict(dmod, domid);
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index 3b53471af0..3d530d948f 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -7,12 +7,15 @@
- #include <xen/guest_access.h>
- #include <xen/dm.h>
- #include <xen/hypercall.h>
-+#include <xen/iocap.h>
-+#include <xen/iommu.h>
- #include <xen/ioreq.h>
- #include <xen/nospec.h>
- #include <xen/sched.h>
+     uint32_t tmp = (uint32_t) addr;
+-    uint8_t  dest = (tmp & MSI_ADDR_DEST_ID_MASK) >> MSI_ADDR_DEST_ID_SHIFT;
++    /*
++     * Standard MSI destination address bits 19:12 (8 bits).
++     * Extended MSI destination address bits 11:5 (7 more bits).
++     *
++     * As XEN_HVM_CPUID_EXT_DEST_ID is advertised, the guest may use bits 11:5
++     * for high destination ID bits, expanding to 15 bits total. Guests unaware
++     * of this feature set these bits to 0, so this is backwards-compatible.
++     */
++    uint32_t dest = (MASK_EXTR(tmp, MSI_ADDR_EXT_DEST_ID_MASK) << MSI_ADDR_DEST_ID_BITS) |
++                     MASK_EXTR(tmp, MSI_ADDR_DEST_ID_MASK);
+     uint8_t  dest_mode = !!(tmp & MSI_ADDR_DESTMODE_MASK);
+     uint8_t  delivery_mode = (data & MSI_DATA_DELIVERY_MODE_MASK)
+         >> MSI_DATA_DELIVERY_MODE_SHIFT;
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index d7a4105a57..9602572dc4 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -411,7 +411,9 @@ static void ioapic_inj_irq(
  
- #include <asm/hap.h>
- #include <asm/hvm/cacheattr.h>
-+#include <asm/msi.h>
- #include <asm/shadow.h>
- 
- #include <xsm/xsm.h>
-@@ -322,6 +325,25 @@ static int inject_event(struct domain *d,
-     return 0;
- }
- 
-+static uint32_t msi_addr_to_gflags(uint64_t addr, uint32_t data, bool masked)
-+{
-+    uint32_t tmp = (uint32_t)addr;
-+
-+    return MASK_INSR(MASK_EXTR(tmp, MSI_ADDR_DEST_ID_MASK),
-+                     XEN_DOMCTL_VMSI_X86_DEST_ID_MASK) |
-+           MASK_INSR(MASK_EXTR(tmp, MSI_ADDR_EXT_DEST_ID_MASK),
-+                     XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK) |
-+           MASK_INSR(MASK_EXTR(tmp, MSI_ADDR_REDIRECTION_MASK),
-+                     XEN_DOMCTL_VMSI_X86_RH_MASK) |
-+           MASK_INSR(MASK_EXTR(tmp, MSI_ADDR_DESTMODE_MASK),
-+                     XEN_DOMCTL_VMSI_X86_DM_MASK) |
-+           MASK_INSR(MASK_EXTR(data, MSI_DATA_DELIVERY_MODE_MASK),
-+                     XEN_DOMCTL_VMSI_X86_DELIV_MASK) |
-+           MASK_INSR(MASK_EXTR(data, MSI_DATA_TRIGGER_MASK),
-+                     XEN_DOMCTL_VMSI_X86_TRIG_MASK) |
-+           (masked ? 0 : XEN_DOMCTL_VMSI_X86_UNMASKED);
-+}
-+
- int dm_op(const struct dmop_args *op_args)
+ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
  {
-     struct domain *d;
-@@ -350,6 +372,8 @@ int dm_op(const struct dmop_args *op_args)
-         [XEN_DMOP_relocate_memory]                  = sizeof(struct xen_dm_op_relocate_memory),
-         [XEN_DMOP_pin_memory_cacheattr]             = sizeof(struct xen_dm_op_pin_memory_cacheattr),
-         [XEN_DMOP_nr_vcpus]                         = sizeof(struct xen_dm_op_nr_vcpus),
-+        [XEN_DMOP_bind_pt_msi_irq]                  = sizeof(struct xen_dm_op_bind_pt_msi_irq),
-+        [XEN_DMOP_unbind_pt_msi_irq]                = sizeof(struct xen_dm_op_bind_pt_msi_irq),
-     };
- 
-     rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
-@@ -607,6 +631,83 @@ int dm_op(const struct dmop_args *op_args)
-         break;
+-    uint16_t dest = vioapic->redirtbl[pin].fields.dest_id;
++    uint32_t dest = ((uint32_t)vioapic->redirtbl[pin].fields.ext_dest_id <<
++                     VIOAPIC_RTE_DEST_ID_UPPER_BITS) |
++                    vioapic->redirtbl[pin].fields.dest_id;
+     uint8_t dest_mode = vioapic->redirtbl[pin].fields.dest_mode;
+     uint8_t delivery_mode = vioapic->redirtbl[pin].fields.delivery_mode;
+     uint8_t vector = vioapic->redirtbl[pin].fields.vector;
+@@ -618,6 +620,21 @@ static int cf_check ioapic_check(const struct domain *d, hvm_domain_context_t *h
+              e->fields.reserved[0] || e->fields.reserved[1] ||
+              e->fields.reserved[2] || e->fields.reserved2 )
+             return -EINVAL;
++
++        /*
++         * An RTE in the saved state has ext_dest_id bits set. Check that
++         * the destination Xen has extended destination ID support enabled,
++         * otherwise interrupt routing to APIC IDs > 255 would be broken
++         * after restore.
++         */
++        if ( e->fields.ext_dest_id && !d->arch.hvm.ext_dest_id_enabled )
++        {
++            printk(XENLOG_G_ERR "HVM restore: %pd IO-APIC RTE %u has "
++                                "extended destination ID bits set but "
++                                "XEN_HVM_CPUID_EXT_DEST_ID is not enabled\n",
++                                d, i);
++            return -EINVAL;
++        }
      }
  
-+    case XEN_DMOP_bind_pt_msi_irq:
-+    {
-+        const struct xen_dm_op_bind_pt_msi_irq *data =
-+            &op.u.bind_pt_msi_irq;
-+        struct xen_domctl_bind_pt_irq bind = {
-+            .machine_irq = data->machine_irq,
-+            .irq_type = PT_IRQ_TYPE_MSI,
-+        };
-+        int irq;
-+
-+        rc = -EINVAL;
-+        if ( data->pad0 || data->pad1 )
-+            break;
-+
-+        if ( data->flags & ~XEN_DMOP_MSI_FLAG_UNMASKED )
-+            break;
-+
-+        irq = domain_pirq_to_irq(d, bind.machine_irq);
-+
-+        rc = -EPERM;
-+        if ( irq <= 0 || !irq_access_permitted(current->domain, irq) )
-+            break;
-+
-+        bind.u.msi.gvec = data->gvec;
-+        bind.u.msi.gflags =
-+            msi_addr_to_gflags(data->addr, data->data,
-+                               !(data->flags & XEN_DMOP_MSI_FLAG_UNMASKED));
-+        bind.u.msi.gtable = data->gtable;
-+
-+        rc = -ESRCH;
-+        if ( is_iommu_enabled(d) )
-+        {
-+            pcidevs_lock();
-+            rc = pt_irq_create_bind(d, &bind);
-+            pcidevs_unlock();
-+        }
-+        if ( rc < 0 )
-+            printk(XENLOG_G_ERR
-+                   "pt_irq_create_bind failed (%ld) for dom%d\n",
-+                   rc, d->domain_id);
-+        break;
-+    }
-+
-+    case XEN_DMOP_unbind_pt_msi_irq:
-+    {
-+        const struct xen_dm_op_bind_pt_msi_irq *data =
-+            &op.u.bind_pt_msi_irq;
-+        struct xen_domctl_bind_pt_irq bind = {
-+            .machine_irq = data->machine_irq,
-+            .irq_type = PT_IRQ_TYPE_MSI,
-+        };
-+        int irq;
-+
-+        rc = -EINVAL;
-+        if ( data->pad0 || data->pad1 )
-+            break;
-+
-+        irq = domain_pirq_to_irq(d, bind.machine_irq);
-+
-+        rc = -EPERM;
-+        if ( irq <= 0 || !irq_access_permitted(current->domain, irq) )
-+            break;
-+
-+        rc = -ESRCH;
-+        if ( is_iommu_enabled(d) )
-+        {
-+            pcidevs_lock();
-+            rc = pt_irq_destroy_bind(d, &bind);
-+            pcidevs_unlock();
-+        }
-+        if ( rc < 0 )
-+            printk(XENLOG_G_ERR
-+                   "pt_irq_destroy_bind failed (%ld) for dom%d\n",
-+                   rc, d->domain_id);
-+        break;
-+    }
-+
-     default:
-         rc = ioreq_server_dm_op(&op, d, &const_op);
-         break;
-@@ -643,6 +744,7 @@ CHECK_dm_op_remote_shutdown;
- CHECK_dm_op_relocate_memory;
- CHECK_dm_op_pin_memory_cacheattr;
- CHECK_dm_op_nr_vcpus;
-+CHECK_dm_op_bind_pt_msi_irq;
+     return 0;
+@@ -659,7 +676,7 @@ static int cf_check ioapic_load(struct domain *d, hvm_domain_context_t *h)
+     return 0;
+ }
  
- int compat_dm_op(
-     domid_t domid, unsigned int nr_bufs, XEN_GUEST_HANDLE_PARAM(void) bufs)
-diff --git a/xen/include/public/hvm/dm_op.h b/xen/include/public/hvm/dm_op.h
-index 2bf0fdc1ae..fd0f3a6a99 100644
---- a/xen/include/public/hvm/dm_op.h
-+++ b/xen/include/public/hvm/dm_op.h
-@@ -444,6 +444,28 @@ struct xen_dm_op_nr_vcpus {
- };
- typedef struct xen_dm_op_nr_vcpus xen_dm_op_nr_vcpus_t;
+-HVM_REGISTER_SAVE_RESTORE(IOAPIC, ioapic_save, NULL, ioapic_load, 1,
++HVM_REGISTER_SAVE_RESTORE(IOAPIC, ioapic_save, ioapic_check, ioapic_load, 1,
+                           HVMSR_PER_DOM);
  
-+#define XEN_DMOP_bind_pt_msi_irq   21
-+#define XEN_DMOP_unbind_pt_msi_irq 22
-+
-+struct xen_dm_op_bind_pt_msi_irq {
-+    /* IN - physical IRQ (pirq) */
-+    uint32_t machine_irq;
-+    /* IN - guest vector */
-+    uint8_t  gvec;
-+    uint8_t  pad0;
-+    uint16_t pad1;
-+    /* IN - MSI data (vector, delivery, trigger) */
-+    uint32_t data;
-+    /* IN - flags */
-+    uint32_t flags;
-+#define XEN_DMOP_MSI_FLAG_UNMASKED (1u << 0)
-+    /* IN - MSI address (0xfeexxxxx, includes ext dest) */
-+    uint64_aligned_t addr;
-+    /* IN - MSI-X table base GFN, 0 for MSI */
-+    uint64_aligned_t gtable;
-+};
-+typedef struct xen_dm_op_bind_pt_msi_irq xen_dm_op_bind_pt_msi_irq_t;
-+
- struct xen_dm_op {
-     uint32_t op;
-     uint32_t pad;
-@@ -468,6 +490,7 @@ struct xen_dm_op {
-         xen_dm_op_relocate_memory_t relocate_memory;
-         xen_dm_op_pin_memory_cacheattr_t pin_memory_cacheattr;
-         xen_dm_op_nr_vcpus_t nr_vcpus;
-+        xen_dm_op_bind_pt_msi_irq_t bind_pt_msi_irq;
-     } u;
- };
+ void vioapic_reset(struct domain *d)
+diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
+index 27b1f089e2..36ea898ac7 100644
+--- a/xen/arch/x86/hvm/vmsi.c
++++ b/xen/arch/x86/hvm/vmsi.c
+@@ -66,7 +66,7 @@ static void vmsi_inj_irq(
  
-diff --git a/xen/include/xlat.lst b/xen/include/xlat.lst
-index 9d08dcc4bb..9236394786 100644
---- a/xen/include/xlat.lst
-+++ b/xen/include/xlat.lst
-@@ -107,6 +107,7 @@
- ?	dm_op_map_mem_type_to_ioreq_server hvm/dm_op.h
- ?	dm_op_modified_memory		hvm/dm_op.h
- ?	dm_op_nr_vcpus			hvm/dm_op.h
-+?	dm_op_bind_pt_msi_irq		hvm/dm_op.h
- ?	dm_op_pin_memory_cacheattr	hvm/dm_op.h
- ?	dm_op_relocate_memory		hvm/dm_op.h
- ?	dm_op_remote_shutdown		hvm/dm_op.h
+ int vmsi_deliver(
+     struct domain *d, int vector,
+-    uint8_t dest, uint8_t dest_mode,
++    uint32_t dest, uint8_t dest_mode,
+     uint8_t delivery_mode, uint8_t trig_mode)
+ {
+     struct vlapic *target;
+@@ -109,7 +109,7 @@ void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
+ {
+     uint32_t flags = pirq_dpci->gmsi.gflags;
+     int vector = pirq_dpci->gmsi.gvec;
+-    uint8_t dest = (uint8_t)flags;
++    uint32_t dest = XEN_DOMCTL_VMSI_X86_FULL_DEST(flags);
+     bool dest_mode = flags & XEN_DOMCTL_VMSI_X86_DM_MASK;
+     uint8_t delivery_mode = MASK_EXTR(flags, XEN_DOMCTL_VMSI_X86_DELIV_MASK);
+     bool trig_mode = flags & XEN_DOMCTL_VMSI_X86_TRIG_MASK;
+@@ -125,7 +125,7 @@ void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
+ }
+ 
+ /* Return value, -1 : multi-dests, non-negative value: dest_vcpu_id */
+-int hvm_girq_dest_2_vcpu_id(struct domain *d, uint8_t dest, uint8_t dest_mode)
++int hvm_girq_dest_2_vcpu_id(struct domain *d, uint32_t dest, uint8_t dest_mode)
+ {
+     int dest_vcpu_id = -1, w = 0;
+     struct vcpu *v;
+@@ -802,6 +802,8 @@ static unsigned int msi_gflags(uint16_t data, uint64_t addr, bool masked)
+      */
+     return MASK_INSR(MASK_EXTR(addr, MSI_ADDR_DEST_ID_MASK),
+                      XEN_DOMCTL_VMSI_X86_DEST_ID_MASK) |
++           MASK_INSR(MASK_EXTR(addr, MSI_ADDR_EXT_DEST_ID_MASK),
++                     XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK) |
+            MASK_INSR(MASK_EXTR(addr, MSI_ADDR_REDIRECTION_MASK),
+                      XEN_DOMCTL_VMSI_X86_RH_MASK) |
+            MASK_INSR(MASK_EXTR(addr, MSI_ADDR_DESTMODE_MASK),
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index 7d9774df59..11256d5e67 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -295,11 +295,11 @@ uint64_t hvm_get_guest_time_fixed(const struct vcpu *v, uint64_t at_tsc);
+ 
+ int vmsi_deliver(
+     struct domain *d, int vector,
+-    uint8_t dest, uint8_t dest_mode,
++    uint32_t dest, uint8_t dest_mode,
+     uint8_t delivery_mode, uint8_t trig_mode);
+ struct hvm_pirq_dpci;
+ void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci);
+-int hvm_girq_dest_2_vcpu_id(struct domain *d, uint8_t dest, uint8_t dest_mode);
++int hvm_girq_dest_2_vcpu_id(struct domain *d, uint32_t dest, uint8_t dest_mode);
+ 
+ enum hvm_intblk
+ hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack);
 -- 
 2.51.0
 
