@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9105CFD4F0F
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:09:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250391.1547910 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE8CFD4F0A
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:09:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250384.1547855 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00aA-00032U-7x; Tue, 10 Mar 2026 17:09:22 +0000
+	id 1w00a3-0001dh-Ua; Tue, 10 Mar 2026 17:09:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250391.1547910; Tue, 10 Mar 2026 17:09:22 +0000
+Received: by outflank-mailman (output) from mailman id 1250384.1547855; Tue, 10 Mar 2026 17:09:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00aA-000300-2G; Tue, 10 Mar 2026 17:09:22 +0000
-Received: by outflank-mailman (input) for mailman id 1250391;
- Tue, 10 Mar 2026 17:09:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w00a3-0001da-RD; Tue, 10 Mar 2026 17:09:15 +0000
+Received: by outflank-mailman (input) for mailman id 1250384;
+ Tue, 10 Mar 2026 17:09:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1w00a8-0001Q4-Af
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:20 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e0890da2-1ca3-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 18:09:19 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4853510b4f3so41185485e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:19 -0700 (PDT)
+ id 1w00a2-0001QA-0m
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:14 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id db5603bb-1ca3-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Mar 2026 18:09:11 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso107421775e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:11 -0700 (PDT)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.17
+ 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 10:09:18 -0700 (PDT)
+ Tue, 10 Mar 2026 10:09:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0890da2-1ca3-11f1-b164-2bf370ae4941
+X-Inumbo-ID: db5603bb-1ca3-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773162559; x=1773767359; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1773162550; x=1773767350; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nhr/YFfUk73fJbCvGKZFP0P0mCzExALFTOhZRjG1AeU=;
-        b=ZFB8LKD577w5idg3ca7RIHLuzqpe2Fu47tUN54QV/8l+a3/zswFtxLLB+X9pw7D70S
-         4kPdDAGUl6qYCf5lOijzS+sXCPjMYio140HCkdMOVoKkyqJEcw1RMxCMITOvpG2e1gzs
-         cwUNyOq5UYaRnjNHZ3WoQObixO/L4pezOHHPrDwAXPid03gO07yqG2xbH9T0O4ILYRpi
-         PQP8E0dPXzQWRKGnHlW4h5ZpE8Z1aCSCQZ7q8X/3k0DRioJ999zuS6GEnWT3K31Xy6Ou
-         4qPG+l80rJj3hTxPuNkINB0e4FcAX6KiimVdnHlRaAtWgjAYu/eaWV3OQD+phCoEH+Qq
-         /qEw==
+        bh=mMLvC7RrPAqRfMztOqd3dBSpw1saOMdIpsVoEROSJU4=;
+        b=fTY59slMZv+YgNJ0FI+XhCaJfoa2S8SsRq5ufCKrVciZ1ayTcRMxFydVtUMQK3cDk4
+         GVI4OBGmfoGE7Uw568eY9pv7ru7N4GbWKBdTIh0RU67QXgSgKrhhYrFEi59TQvHZQ5qU
+         kbj3FHyIkM3LXSmQYE5xn5neJ97FMVt8UTGnIG+Sf2MiZGsYVT2Zqu7eAsFKUCqSAPER
+         MVAH5lG3EXGjU5jWrbJ24hk/348KRwlNoxnywua3ajmzgZbShzek/n7hddDKl9t9FsJe
+         z/VUr5WcckW46OSPM/BhqqHW/XwtoSSKRVWdTix7+jugf/XwFg5PZqsohyD4+keF2jvq
+         gAKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773162559; x=1773767359;
+        d=1e100.net; s=20230601; t=1773162550; x=1773767350;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=nhr/YFfUk73fJbCvGKZFP0P0mCzExALFTOhZRjG1AeU=;
-        b=SRtqobsqq4ggtMGsYnwTFEI2sP8OFabO9IMc6UiJo6/jFQRdVU55dXNL/7MB7c/uGt
-         7+d0rwV9JmL2DzOKvSIDomaTX4TXH6YKYJ8g+j2C6+Z3Ic9Q491spU1LKJun6BgcW7tr
-         FsObgh5fr3ICfXBnLISHrZqsKWw9Kq5Mb7ce+5xb9VXO3MhawB4PzHrE0wIfdrGa6ng2
-         qu1JM52ea+B2LWbd8iKGw+zWZ+QcwTBcylMW2LKIJcawKssnSPPP0qBFvNKvIsK/oRWt
-         tlwSzdl7DI4LndijfgqwmVgH/UPqfvoaqSWm3PpZSNf3WTk3VST8WJLxWHihATjLsBOi
-         oyzQ==
-X-Gm-Message-State: AOJu0YwMN1IR8Rx3cs4SkliJPpq5z794UqsCOn0s8gWNaDYCJq1+n/Jx
-	oSavh44WKPWBsJz3b/q5/etEdXNTz5CRk2KsC80GPXIh8XY/hk0slgElaioABJhJ
-X-Gm-Gg: ATEYQzwTJdFqqZUyxY1CpAZP+OOj2DXV3O1qXW2Ot8qr+T9ZNgk0UK19WrhkMMspw7g
-	cNn+99Ilp5ax1cJFrtG8CHw+0a3JPSCKutyMv9ZUT/A1ab1oEVZ6aQZpQCLhvhErSWepTX4U1xF
-	hlr2MpxddjImo0IcjjXok0agmijOJt14lOtwwZw8dFXED/5Fsm6B7AuKe7c8j7lsyLfkZnrk19G
-	xwUj8exfS6GHzzZxSaBp99rIbsu9fiT1aS+ff8yYrBbwE9fqB/j+hE+WCNUGYizp9lJWnkg+gCg
-	uLdlaOjLLAh+C/KQfT6NoIdFl/AgZIyFytAH2aXwQxqKjEG/eIc/WzUGaJA3NZ+NE9LfhNlfK5c
-	QizKS9i4BxSGIOOfcOhlOYa7zXzh1K/WZyiT6rUotXzNv6CwBhzdR4zAiB440MUkWO9MzeEot5Z
-	VEiLUzp+/8vQzw2TWLkZI9q9U8EmgXqx5MzlcakbESidRD3OmKxJOYp60ubdWDA+UU7w==
-X-Received: by 2002:a05:600c:1e2a:b0:47e:e57d:404 with SMTP id 5b1f17b1804b1-485269582efmr253670135e9.16.1773162558685;
-        Tue, 10 Mar 2026 10:09:18 -0700 (PDT)
+        bh=mMLvC7RrPAqRfMztOqd3dBSpw1saOMdIpsVoEROSJU4=;
+        b=X5IvfySpgqBN4Bcns1LKvve2WiPKCF9H79Lw3OAWkewzhxjcOChK6ik+qctMhyu6U1
+         01aGvYoXL7oQoTSNeRRe3dHUg+DppnSV42OQeJ4JCNleIS8yPmOg/qUNWAUy9bIIJa0h
+         uK+VDO53RsZlgaoPwumsNNJ9cPj3xjqQ034QZBn5sudlJo+9OzTcf12Gay02euBTcSZC
+         ohVi/kIOp+WJMDVx6yNQ8uC96Jme/eIQUZPXiEMCuRpdPVgKRI/E5aQWDCfdIxoHd0Zp
+         wHJkzPCX2pE7T4gzLl472XgiPzVt9ZyJ4XAWctbOlJT7LXvOSzMTtQbXJALOh6epEdku
+         fr4A==
+X-Gm-Message-State: AOJu0YxI/BLDISg+ecHO8vKnjkV/07dkpcQAjiSJdjLdPvxIXIcxCvju
+	Q9wWq0aM9uVpWkT/AJHjsijF/ZuLFeXzus/924oTnM0oA5lva/Mwh23U3yjvAl+e
+X-Gm-Gg: ATEYQzxmAPrDseGS1jvJFtrBjH9XFcJ/1NJAM/B1EnjsLdvyN0ECZMxgbxAjHsK3ZyS
+	zM108ncVv4Lszs1bjU9TdClFul9P6fLx9+BUj1Lcbu4cNwYgtz4iPDf9FILpuyf6I7nmKBXSJe8
+	16PaxmL2s1GkivT5CjYMQBgvXh1wcsXm6sAOFYjxDWtMdWeFQSKp3QfASjckhR5tDtJznNFcv9r
+	2/zy6au2O811TWl88Pk2rbuUShwGod5Athzx7Rd/sswtsO/E3NlYsdAIaG4XK0R+g8H06P+kJgK
+	uN3uiAb+7xCljqILueWT+qGZSbkXjvukJFpZ6eqJ8kthsB+UE12xVgpTJhoeaHGW/eJzvz2P6Iu
+	9iZKPqJIv1sFtou/DTkqKFtdJFqI5O55rqN6/Lwb8o6wA1zdUBLRkRxkBFQpvOn5GLInCDRAi0+
+	4lsfeVFm1jIz1XkBp9k2Ex9NUFibw+d77pp0ySq/7AN3b3Emjk2U07KUbQp172afeifg==
+X-Received: by 2002:a05:600c:8b6d:b0:485:364e:9328 with SMTP id 5b1f17b1804b1-485364e9569mr156488245e9.16.1773162550327;
+        Tue, 10 Mar 2026 10:09:10 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,53 +96,113 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 08/27] xen/riscv: implement make_arch_nodes()
-Date: Tue, 10 Mar 2026 18:08:41 +0100
-Message-ID: <9c97b4bc6fb8a5e556c38cfe7e34de0eb3cbbbb0.1773157782.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 01/27] xen/riscv: Implement ARCH_PAGING_MEMPOOL
+Date: Tue, 10 Mar 2026 18:08:34 +0100
+Message-ID: <887d914aa0ddb1884c19c9567d4633ecaf810066.1773157782.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-No RISC-V-specific nodes need to be created at the moment,
-so make_arch_nodes() is implemented to simply return 0.
+The p2m_freelist is used to allocate pages for the P2M, but to initialize
+this list, domain_p2m_set_allocation() might be called.
+This function is invoked in construct_domU() within the common Dom0less
+code, and providing an implementation of domain_p2m_set_allocation() when
+CONFIG_ARCH_PAGING_MEMPOOL=y is appropriate for RISC-V.
+
+Additionally, implement arch_{set,get}_paging_mempool_size().
+They are not used directly for now, but are required to support the
+XEN_DOMCTL_{get,set}_paging_mempool_size() hypercalls.
+
+Remove 'struct paging_domain' from RISC-V's 'struct arch_domain' when
+the field is not required.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/Makefile         |  1 +
- xen/arch/riscv/dom0less-build.c | 11 +++++++++++
- 2 files changed, 12 insertions(+)
- create mode 100644 xen/arch/riscv/dom0less-build.c
+ xen/arch/riscv/Kconfig              |  1 +
+ xen/arch/riscv/Makefile             |  2 +-
+ xen/arch/riscv/include/asm/domain.h |  2 ++
+ xen/arch/riscv/p2m.c                | 31 +++++++++++++++++++++++++++++
+ 4 files changed, 35 insertions(+), 1 deletion(-)
 
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+index 12b337365f1f..091510380949 100644
+--- a/xen/arch/riscv/Kconfig
++++ b/xen/arch/riscv/Kconfig
+@@ -1,5 +1,6 @@
+ config RISCV
+ 	def_bool y
++	select ARCH_PAGING_MEMPOOL
+ 	select DOMAIN_BUILD_HELPERS
+ 	select FUNCTION_ALIGNMENT_16B
+ 	select GENERIC_BUG_FRAME
 diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 6c6c58ed1ac0..fb04cc5a56b2 100644
+index 48957104e0b5..b1514f1514a2 100644
 --- a/xen/arch/riscv/Makefile
 +++ b/xen/arch/riscv/Makefile
-@@ -1,5 +1,6 @@
- obj-y += aplic.o
- obj-y += cpufeature.o
-+obj-y += dom0less-build.o
- obj-y += domain.o
- obj-y += domain-build.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
-diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
-new file mode 100644
-index 000000000000..10863cffc96b
---- /dev/null
-+++ b/xen/arch/riscv/dom0less-build.c
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
+@@ -10,7 +10,7 @@ obj-y += irq.o
+ obj-y += kernel.o
+ obj-y += mm.o
+ obj-y += p2m.o
+-obj-y += paging.o
++obj-$(CONFIG_ARCH_PAGING_MEMPOOL) += paging.o
+ obj-y += pt.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 6c48bf13111d..0caacf92b5a2 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -92,7 +92,9 @@ struct arch_domain {
+     /* Virtual MMU */
+     struct p2m_domain p2m;
+ 
++#ifdef CONFIG_ARCH_PAGING_MEMPOOL
+     struct paging_domain paging;
++#endif
+ };
+ 
+ #include <xen/sched.h>
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index fba93bce24d9..886e06196ba2 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -1568,3 +1568,34 @@ struct page_info *get_page_from_gfn(struct domain *d, unsigned long gfn,
+ 
+     return page;
+ }
 +
-+#include <xen/fdt-kernel.h>
-+#include <xen/init.h>
++#ifdef CONFIG_ARCH_PAGING_MEMPOOL
 +
-+int __init make_arch_nodes(struct kernel_info *kinfo)
++int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
 +{
-+    /* No RISC-V specific nodes need to be made, at the moment. */
++    unsigned long pages = PFN_DOWN(size);
++    bool preempted = false;
++    int rc;
++
++    if ( (size & ~PAGE_MASK) || /* Non page-sized request? */
++         pages != PFN_DOWN(size) ) /* 32-bit overflow? */
++        return -EINVAL;
++
++    spin_lock(&d->arch.paging.lock);
++    rc = p2m_set_allocation(d, pages, &preempted);
++    spin_unlock(&d->arch.paging.lock);
++
++    ASSERT(preempted == (rc == -ERESTART));
++
++    return rc;
++}
++
++/* Return the size of the pool, in bytes. */
++int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
++{
++    *size = (uint64_t)ACCESS_ONCE(d->arch.paging.total_pages) << PAGE_SHIFT;
 +
 +    return 0;
 +}
++
++#endif /* CONFIG_ARCH_PAGING_MEMPOOL */
 -- 
 2.53.0
 
