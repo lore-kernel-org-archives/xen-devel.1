@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FFF7FD4F07
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:18:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250521.1548021 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF9FFD4F08
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:18:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250520.1548017 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00iS-0003Mp-0v; Tue, 10 Mar 2026 17:17:56 +0000
+	id 1w00iR-0003JF-OX; Tue, 10 Mar 2026 17:17:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250521.1548021; Tue, 10 Mar 2026 17:17:55 +0000
+Received: by outflank-mailman (output) from mailman id 1250520.1548017; Tue, 10 Mar 2026 17:17:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00iR-0003MB-Tp; Tue, 10 Mar 2026 17:17:55 +0000
-Received: by outflank-mailman (input) for mailman id 1250521;
+	id 1w00iR-0003J6-Kj; Tue, 10 Mar 2026 17:17:55 +0000
+Received: by outflank-mailman (input) for mailman id 1250520;
  Tue, 10 Mar 2026 17:17:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1w00ag-0001Q4-5m
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:54 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1w00aM-0001Q4-HC
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:34 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f46f539d-1ca3-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 18:09:53 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-439c5b40f60so5923229f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:53 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439dadb29fdsm37574422f8f.16.2026.03.10.10.09.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Mar 2026 10:09:52 -0700 (PDT)
+ id e86f8024-1ca3-11f1-b164-2bf370ae4941;
+ Tue, 10 Mar 2026 18:09:33 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-48529c325f0so30678765e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:33 -0700 (PDT)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 10:09:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,148 +47,300 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f46f539d-1ca3-11f1-b164-2bf370ae4941
+X-Inumbo-ID: e86f8024-1ca3-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1773162593; x=1773767393; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=dZgPk3awh75bNJRkjsQOS3WuaDXX5ZqhTUv4DsGOP+k=;
-        b=PwSRzWGSxxX9Ieq6OlN1OlYFfwLJ/mMpAt3hMlDhGL9wp1jogA/t6IBtxuRbYo5CeS
-         rd7c+EXNKf9suMTAp1AW5sgCOJpS5Q6M5y8ruPC00l669YxDmry0tUupdMA5UGE3KCTm
-         YpPIjgJCvqn4UfVS442VqP+QwmU6qn4C4z9sZiJhNkoTlgj1Fu1Av1fTmOHoOcTLJCV3
-         l++LqqT5ZedtrOuMf+dslQORLIooA7W9F0axkH5O4QY7hu0fs8G2ii7TXC6x3QHdhPVt
-         BblwGkx+r6La8o/eiXR3w3a3CkZbt7vDM3T9NayIuiQo8bHQSJlImcphdfTJaJnU2QyT
-         t8xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773162593; x=1773767393;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1773162572; x=1773767372; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dZgPk3awh75bNJRkjsQOS3WuaDXX5ZqhTUv4DsGOP+k=;
-        b=lKtR4FxWecb/rSKlwifgC/Ssed2NsOd7cO4sk+tbyJq2tqSLCXcULnWxfTzMiayv51
-         LOIbRtgoRDsIh2qMQifPQ50sO7CIEWgpql/mrdGnCJp1Vie1KU0NAehW8Yhbo7LEOCJZ
-         ApAGZnIHA+AKgPX9GPtlZXM5SLw6A/Wjbq2eypBTiNWeYYvWWUIWfgmgyMoq5Mzmngg1
-         Gwzm1YXo+RLDVqmMigy3c1IEMflUjOQUUfVTAM37bJDCTOjMtvTpUDY2ePgCQemx5S/1
-         MFLxMKmiAXJC5Tfu852yZNI1OE9THY6gYTbEgG12IZu4yPPZddHzh0uf6fhEdzyAc2n+
-         Y1UQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWkshh0IaH723wy5w8RFLOfyPFterh9/g1VaIf71Z5Iqgb62XZozP4/ZUTPeiYiu8OvVIoXt4DQn9w=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxNCBvHIK2EvhxRpAAzBei2gqVr2+TFFO/7Y/VZR+c4hBupZk1p
-	dOMmQ1R/8MSh3Zi7TadFSmTePKRt1s2EljwxDi2H6bqJEi7ksVSW6khjbptUu20jDg==
-X-Gm-Gg: ATEYQzzXX8E6kRBDmg+lH0uHvzjz2TNFMAwmbwB7XajmIz0ED20PjSzNXYYurvSiGwU
-	4y/BwaXR0xQTxUNqElqJC7w1BSh6rNFslD7mMAa8J7YK1mc8frcvzOG0tZNHhRj1nl9IzieFv06
-	mAtcgKfe47bTOaGmMGOkbM+IJWqAMwkrkP9CmX3lamNrl432mLFwSdA8gvr4fhJ5fooslCak2yH
-	xwiWMBqeZGUyu9TUQZsq/8oyhHdqf8PGpS4o0CTuRgYoShzjlop5OaxqvmqTwkmr42celBXvbhC
-	0Jusy1tRXl7Q5JuDqNAmWY3o135p5IFxp8Lx1Uhwn6CXMaZkQYngOCs7PuRqT5PgltBb/xZbbdh
-	p7KWXqG8L6bKX3rGyGA9csoiG8LVA4+wxBTALnqyJAV2XXWBpmaW3WxH8Xcy9Kq3XQz2uqJqXXy
-	GFDBZbdQMvD0j7HvcZUL2IKu3Z0EZUWU97VNdzSQo5ZVsgy9Qajge9ILNHl8E/PC2qM4kK2rMNh
-	umRz2k1z84kzfY=
-X-Received: by 2002:a05:6000:2404:b0:430:f985:a7b2 with SMTP id ffacd0b85a97d-439da86e9f5mr28965655f8f.51.1773162592593;
-        Tue, 10 Mar 2026 10:09:52 -0700 (PDT)
-Message-ID: <06ac2196-71a0-45ba-a9b5-b76f098381dc@suse.com>
-Date: Tue, 10 Mar 2026 18:09:52 +0100
+        bh=dla2ZfjKuAdtGf39njgNy8xyCVJufRaAAQSeRsdKKdA=;
+        b=RIb/tv4cYnIPfFle98vInh+ohr451UXDC/EyxAOwEMmzdq2mKFZeiAqiXpHz1I7l5A
+         N4T/ncLVrATIdFPF+KY6pzb0aYbWzoe6GaXioto//Ofiv9AP5M/Fk+lpfIZRx46l1OXO
+         /Jb36T0qPXvwryMlZc5z1yb4Ol2uJ+IQZxHdWccwVL5jCaO2INmKkLTJhzBkAJB+ziHF
+         6w4vWW7qgN4uceQ86Zc5/8CAXWrgXNzmXdXmB7cZgHR/TaAJd8GpozNgbe98GrtyiQOW
+         LQ3+YKnewLEGxXBx2q47yL5AqX16ohdT5T5cGS+AWOw7UhnbNCkmzp0N9gE8vFUOj/rt
+         1EGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773162572; x=1773767372;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=dla2ZfjKuAdtGf39njgNy8xyCVJufRaAAQSeRsdKKdA=;
+        b=lRN+lRlSQ67kytKB7gVJSz/Tx4zZCawruhHr6LgV0t1uSsMtVKu+OByQRA9FOy+To+
+         EorKqrA2rbPGTKJ/pqIBoHzSLVxURsjpAvBPkYTpQhLg5JbUqnTRm3SUxRopYMbxo3dz
+         JqlUp01WJEfMqxSzdn+ggsge90JJ2yBnQkP0xenUWHCe2avRpgv/s0PqgZYwoazORlBA
+         YUhqF57NyJHDbkW3Svgw8rpsCyqIDN09yXlYCfeDyMRojGXhoWIWzJEkmKbw7FmstwwM
+         GKwlU37rs1YCZWh8j58npqM6jYGxNgk9u7p1HuW1ETmMaafF+iEcVNNbnmNxNAxJUJkY
+         DzSw==
+X-Gm-Message-State: AOJu0YxYNN4ctG4lCMHCbzmJp3aEyvA9Ky+iu67+G+qG3+qvR2Ib9zl5
+	xzVrng4Qf5kVAAvXgyj8+HPM8S/6JaRKlUkr98De8nAKhAcctt6PdPefMRIRNMMh
+X-Gm-Gg: ATEYQzy2J2cgC/xJ68DXEViZb6l6TESe3/fjBpj/y+JAJ6j2Rjm8ByZ5ux8Gif8KoX+
+	XtwDb1LOZcnz5agsb87JAJso1CEe13YOCJtWxH48j74sbAQKS39LxGlP9/3uMM27g7eQUW2h6XR
+	lPNBhGgxVdR1R0fRdVy736D0nzDZbVi2yJ7f7a4bxeSm6mj/beHLSr1wSO6V0Mf9xzuIBraJGo+
+	DbAyrDUoN3mZde4ltqrYaGu2oLK74rim8fRh2hDYSdb2ptjWROUZCqqLcLsbGQeU+X6ghonlSUL
+	XJk9EKGPI5zQkgPlfVFwqj6pCwgyIStoy03ySFguhlyqHVECarzliRS+/g17FNNGXsWmhvZitSs
+	dhHtqXgRzGYamh+GYVjXZGTbosvTieldk3d1Dt29V8mrAoPV4rEx3mEa9gnoQPX6Vvn3qhlhq35
+	sfR9WHQBPx06QGRuuYTbSEbMiN0AM2mTfH+URL36i6O9LtwNInu8oOchFXqEX0gC1obg==
+X-Received: by 2002:a05:600c:46c4:b0:485:304a:58cd with SMTP id 5b1f17b1804b1-485304a5a00mr211584565e9.4.1773162571955;
+        Tue, 10 Mar 2026 10:09:31 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 19/27] xen/riscv: emulate guest writes to virtual APLIC MMIO
+Date: Tue, 10 Mar 2026 18:08:52 +0100
+Message-ID: <e29eace5006929e61da347814b9759896d179e28.1773157782.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1773157782.git.oleksii.kurochko@gmail.com>
+References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/7] x86/msi: Define extended destination ID masks and
- IO-APIC RTE fields
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Julien Grall <julien@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20260309123055.880050-1-julian.vetter@vates.tech>
- <20260309123055.880050-2-julian.vetter@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260309123055.880050-2-julian.vetter@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 09.03.2026 13:31, Julian Vetter wrote:
-> --- a/xen/arch/x86/include/asm/hvm/vioapic.h
-> +++ b/xen/arch/x86/include/asm/hvm/vioapic.h
-> @@ -32,6 +32,19 @@
->  #define VIOAPIC_EDGE_TRIG  0
->  #define VIOAPIC_LEVEL_TRIG 1
->  
-> +/*
-> + * Extract the destination ID from a 64-bit IO-APIC RTE, including the
-> + * extended bits (55:49) used when XEN_HVM_CPUID_EXT_DEST_ID is advertised.
-> + */
-> +#define IO_APIC_REDIR_DEST_MASK         (0xffULL << 56)
-> +#define IO_APIC_REDIR_EXT_DEST_MASK     (0x7fULL << 49)
-> +
-> +#define VIOAPIC_RTE_DEST_ID_UPPER_BITS  8
+RISC-V guests program interrupt routing by writing to APLIC registers.
+When APLIC is virtualised, Xen must intercept these MMIO writes and
+translate them into updates of the virtual interrupt controller state.
 
-The name suggests this is the number of upper bits, which it isn't. You shouldn't
-need this constant anyway, see below.
+Introduce vaplic_emulate_store() to validate guest APLIC accesses and
+apply only those changes that are permitted by the domain’s authorised
+interrupt bitmap. Writes targeting unauthorised interrupts are ignored,
+ensuring that guests cannot affect interrupts they do not own.
 
-> --- a/xen/include/public/domctl.h
-> +++ b/xen/include/public/domctl.h
-> @@ -615,12 +615,14 @@ struct xen_domctl_bind_pt_irq {
->          struct {
->              uint8_t gvec;
->              uint32_t gflags;
-> -#define XEN_DOMCTL_VMSI_X86_DEST_ID_MASK 0x0000ff
-> -#define XEN_DOMCTL_VMSI_X86_RH_MASK      0x000100
-> -#define XEN_DOMCTL_VMSI_X86_DM_MASK      0x000200
-> -#define XEN_DOMCTL_VMSI_X86_DELIV_MASK   0x007000
-> -#define XEN_DOMCTL_VMSI_X86_TRIG_MASK    0x008000
-> -#define XEN_DOMCTL_VMSI_X86_UNMASKED     0x010000
-> +#define XEN_DOMCTL_VMSI_X86_DEST_ID_MASK        0x0000ff
-> +#define XEN_DOMCTL_VMSI_X86_DEST_ID_BITS        8
+APLIC TARGET writes are rewritten to reflect the effective interrupt
+delivery configuration, depending on whether the domain operates in
+direct (isn't supported by Xen) or MSI mode. This ensures that
+guest-visible routing requests are correctly mapped onto the underlying
+virtual interrupt topology.
 
-This constant is redundant with _MASK. It is generally helpful to avoid
-such redundancies (especially in the public interface), and derive the wanted
-value from the main (most generally usable) constant. IOW here maybe
+Unexpected or unsupported register accesses are treated as fatal, as
+they indicate a emulation bug.
 
-#define XEN_DOMCTL_VMSI_X86_DEST_ID_BITS        8
-#define XEN_DOMCTL_VMSI_X86_DEST_ID_MASK        ((1U << XEN_DOMCTL_VMSI_X86_DEST_ID_BITS) - 1)
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/include/asm/intc.h |   4 +
+ xen/arch/riscv/vaplic.c           | 169 ++++++++++++++++++++++++++++++
+ 2 files changed, 173 insertions(+)
 
-But of course it could also be done the other way around, albeit in a public
-header this may end up more difficult. (Generally the mask wants to be the
-main definition, as everything else can be derived from them.)
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index e6b6c179415a..92a74eede4a0 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -56,6 +56,10 @@ struct vintc_ops {
+     /* Initialize some vINTC-related stuff for a vCPU */
+     int (*vcpu_init)(struct vcpu *vcpu);
+ 
++    /* Emulate store to virtual interrupt controller MMIOs */
++    int (*emulate_store)(const struct vcpu *vcpu, unsigned long addr,
++                         uint32_t in);
++
+     /* Check if a register is virtual interrupt controller MMIO */
+     int (*is_access)(const struct vcpu *vcpu, const unsigned long addr);
+ 
+diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
+index 82e74a609ee6..5540b4884179 100644
+--- a/xen/arch/riscv/vaplic.c
++++ b/xen/arch/riscv/vaplic.c
+@@ -20,6 +20,16 @@
+ 
+ #include "aplic-priv.h"
+ 
++#define APLIC_REG_GET(addr, offset) \
++    readl((void *)((vaddr_t)(addr) + offset))
++#define APLIC_REG_SET(addr, offset, value) \
++    writel(value, (void *)((vaddr_t)(addr) + offset))
++
++#define AUTH_IRQ_BIT(irqnum) (auth_irq_bmp[(irqnum) / APLIC_NUM_REGS] & \
++                              BIT((irqnum) % APLIC_NUM_REGS, U))
++
++#define regval_to_irqn(reg_val) ((reg_val) / sizeof(uint32_t))
++
+ struct vaplic_priv {
+     /* Contains a legal interrupts for a domain */
+     uint32_t auth_irq_bmp[APLIC_NUM_REGS];
+@@ -127,6 +137,164 @@ int vaplic_map_device_irqs_to_domain(struct domain *d,
+     return 0;
+ }
+ 
++static void vaplic_dm_update_target(const unsigned long hart_id, uint32_t *iprio)
++{
++    *iprio &= APLIC_TARGET_IPRIO_MASK;
++    *iprio |= (hart_id << APLIC_TARGET_HART_IDX_SHIFT);
++}
++
++static void vaplic_update_target(const struct imsic_config *imsic,
++                                 const int guest_id,
++                                 const unsigned long hart_id, uint32_t *value)
++{
++    unsigned long group_index;
++    unsigned int hhxw = imsic->group_index_bits;
++    unsigned int lhxw = imsic->hart_index_bits;
++    unsigned int hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT * 2;
++    unsigned long base_ppn = imsic->msi[hart_id].base_addr >> IMSIC_MMIO_PAGE_SHIFT;
++
++    group_index = (base_ppn >> (hhxs + 12)) & (BIT(hhxw, UL) - 1);
++
++    *value &= APLIC_TARGET_EIID_MASK;
++    *value |= guest_id << APLIC_TARGET_GUEST_IDX_SHIFT;
++    *value |= hart_id << APLIC_TARGET_HART_IDX_SHIFT;
++    *value |= group_index << (lhxw + APLIC_TARGET_HART_IDX_SHIFT) ;
++}
++
++#define CALC_REG_VALUE(base) \
++{ \
++    uint32_t index; \
++    uint32_t tmp_val; \
++    index = regval_to_irqn(offset - base); \
++    tmp_val = APLIC_REG_GET(priv->regs, aplic_addr) & ~auth_irq_bmp[index]; \
++    value &= auth_irq_bmp[index]; \
++    value |= tmp_val; \
++}
++
++static int cf_check vaplic_emulate_store(const struct vcpu *vcpu,
++                                         unsigned long addr, uint32_t value)
++{
++    struct vaplic *vaplic = to_vaplic(vcpu->domain->arch.vintc);
++    struct aplic_priv *priv = vaplic->base.info->private;
++    uint32_t offset = addr & APLIC_REG_OFFSET_MASK;
++    unsigned long aplic_addr = addr - priv->paddr_start;
++    const uint32_t *auth_irq_bmp = vcpu->domain->arch.vintc->private;
++
++    switch ( offset )
++    {
++    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
++        CALC_REG_VALUE(APLIC_SETIP_BASE);
++        break;
++
++    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
++        CALC_REG_VALUE(APLIC_CLRIP_BASE);
++        break;
++
++    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
++        CALC_REG_VALUE(APLIC_SETIE_BASE);
++        break;
++
++    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
++        CALC_REG_VALUE(APLIC_CLRIE_BASE);
++        break;
++
++    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
++        /* We don't suppert delagation, so bit10 if sourcecfg should be 0 */
++        ASSERT(!(value & BIT(10, U)));
++
++        /*
++         * As sourcecfg register starts from 1:
++         *   0x0000 domaincfg
++         *   0x0004 sourcecfg[1]
++         *   0x0008 sourcecfg[2]
++         *    ...
++         *   0x0FFC sourcecfg[1023]
++         * It is necessary to calculate an interrupt number by substracting
++         * of APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
++         */
++        if ( !AUTH_IRQ_BIT(regval_to_irqn(offset - APLIC_DOMAINCFG)) )
++            /* interrupt not enabled, ignore it */
++            return 0;
++
++        break;
++
++    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
++        struct vcpu *target_vcpu = NULL;
++
++        /*
++         * Look at vaplic_emulate_load() for explanation why
++         * APLIC_GENMSI is substracted.
++         */
++        if ( !AUTH_IRQ_BIT(regval_to_irqn(offset - APLIC_GENMSI)) )
++            /* interrupt not enabled, ignore it */
++            return 0;
++
++        for ( int i = 0; i < vcpu->domain->max_vcpus; i++ )
++        {
++            struct vcpu *v = vcpu->domain->vcpu[i];
++
++            if ( v->vcpu_id == (value >> APLIC_TARGET_HART_IDX_SHIFT) )
++            {
++                target_vcpu = v;
++                break;
++            }
++        }
++
++        ASSERT(target_vcpu);
++
++        if ( !(vaplic->regs.domaincfg & APLIC_DOMAINCFG_DM) )
++        {
++            vaplic_dm_update_target(cpuid_to_hartid(target_vcpu->processor),
++                                    &value);
++        }
++        else
++            vaplic_update_target(priv->imsic_cfg,
++                                 vcpu_guest_file_id(target_vcpu),
++                                 cpuid_to_hartid(target_vcpu->processor),
++                                 &value);
++
++        break;
++
++    case APLIC_SETIPNUM:
++    case APLIC_SETIPNUM_LE:
++    case APLIC_CLRIPNUM:
++    case APLIC_SETIENUM:
++    case APLIC_CLRIENUM:
++        if ( AUTH_IRQ_BIT(value) )
++            break;
++
++        return 0;
++
++    case APLIC_DOMAINCFG:
++        /*
++         * TODO:
++         * The domaincfg register has this format:
++         * bits 31:24 read-only 0x80
++         * bit 8      IE
++         * bit 7      read-only 0
++         * bit 2      DM (WARL)
++         * bit 0      BE (WARL)
++         *
++         * The most interesting bit for us is IE(Interrupt Enable) bit.
++         * At the moment, at least, Linux doesn't use domaincfg.IE bit to
++         * disable interrupts globally, but if one day someone will use it
++         * then extra actions should be done.
++         */
++
++        printk_once("%s: Nothing to do, domaincfg is set by aplic during "
++                    "initialization in Xen\n", __func__);
++
++        return 0;
++
++    default:
++        panic("%s: unsupported register offset: %#x\n", __func__, offset);
++    }
++
++    APLIC_REG_SET(priv->regs, aplic_addr, value);
++
++    return 0;
++}
++
+ static int cf_check vaplic_is_access(const struct vcpu *vcpu,
+                                      const unsigned long addr)
+ {
+@@ -158,6 +326,7 @@ static const struct vintc_ops vaplic_ops = {
+     .vcpu_init = vcpu_vaplic_init,
+     .map_device_irqs_to_domain = vaplic_map_device_irqs_to_domain,
+     .is_access = vaplic_is_access,
++    .emulate_store = vaplic_emulate_store,
+ };
+ 
+ static struct vintc * __init vaplic_alloc(void)
+-- 
+2.53.0
 
-> @@ -630,6 +632,10 @@ struct xen_domctl_bind_pt_irq {
->      } u;
->  };
->  
-> +#define XEN_DOMCTL_VMSI_X86_FULL_DEST(gflags) \
-> +        (MASK_EXTR((gflags), XEN_DOMCTL_VMSI_X86_DEST_ID_MASK) | \
-> +        (MASK_EXTR((gflags), XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK) << \
-> +         XEN_DOMCTL_VMSI_X86_DEST_ID_BITS))
-
-There's no MASK_EXTR() in the public interface.
-
-Also, nit: No need to parenthesize gflags when used in macro invocations like
-this one. Iirc there was a similar pattern elsewhere in the patch.
-
-Jan
 
