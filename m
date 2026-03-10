@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C45FD4F07
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:55:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250371.1547836 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36CBEFD4F03
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:09:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250388.1547891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00Mo-0007gc-GW; Tue, 10 Mar 2026 16:55:34 +0000
+	id 1w00a6-0002Wy-UO; Tue, 10 Mar 2026 17:09:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250371.1547836; Tue, 10 Mar 2026 16:55:34 +0000
+Received: by outflank-mailman (output) from mailman id 1250388.1547891; Tue, 10 Mar 2026 17:09:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00Mo-0007gV-Dr; Tue, 10 Mar 2026 16:55:34 +0000
-Received: by outflank-mailman (input) for mailman id 1250371;
- Tue, 10 Mar 2026 16:55:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1w00Mm-0007gP-RY
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 16:55:32 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f2b4a817-1ca1-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 17:55:31 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-48334ee0aeaso107282585e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 09:55:31 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48534fa65a6sm172083335e9.2.2026.03.10.09.55.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Mar 2026 09:55:30 -0700 (PDT)
+	id 1w00a6-0002Wi-RD; Tue, 10 Mar 2026 17:09:18 +0000
+Received: by outflank-mailman (input) for mailman id 1250388;
+ Tue, 10 Mar 2026 17:09:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1w00a5-0001QA-DA
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:17 +0000
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [2a00:1450:4864:20::333])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id de296016-1ca3-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Mar 2026 18:09:15 +0100 (CET)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4852e9ca034so34282465e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:15 -0700 (PDT)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 10:09:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,144 +47,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2b4a817-1ca1-11f1-b164-2bf370ae4941
+X-Inumbo-ID: de296016-1ca3-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1773161731; x=1773766531; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=yifBnf9TlEonB14TYREFh6/NspZbrRBdgUShsp6cVUA=;
-        b=BrmRzpMzs4PDAeDxCLgSrFx/iHsz7QUs9cf/qr8wvKAelja+sWL4oYZ8aUO2AYq5wu
-         CTy3uODFG/gJkKPVw8YN4CbU9CCcWvFGcoePIxT2wMODCUy7gWan21ema23EPT3vjblH
-         ryGnc293yUj/VKs8q3aiua6uAQuTeFiuaYaeKSP+wMXpgBLbQ1JGFfLuiIm5QWm6prCR
-         qNkJRTymZaBjH3SJg6SGCW8YylvOQzXC5DGbt8ucqtWqzffnKqjDSj15ngFcrG6xONjE
-         klITRg/Clr3E075At88wm2azskTWZFd/T0mF24ctETQrm+0lwa5a+s6Kcu1MunTqrWcS
-         LVeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773161731; x=1773766531;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1773162555; x=1773767355; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yifBnf9TlEonB14TYREFh6/NspZbrRBdgUShsp6cVUA=;
-        b=p1ejcFgXhYfuBSx4k8NGL+bUwbBGWwOS/EdkxJTcuoCBGFW/1tDIMfYu/RoXxdUhyb
-         PoKLqLLeAyAfDJh2LTayQojsbd3bqAl5Gr5dWyDxpbmtv6o9okEN7vSo4GuMYMoTV3Zf
-         YYuEy7sklgXiUBClmUUiKZz638mtWf8OE+FJ+FIKpzm1Vw/1OAsfcVGpIyGDFBFCJ9Xq
-         YKoO06U0L/2SXx7TsR2YmlQ/bxj40+PiltjvcUJSYrAY+QXiicAI+ZkjTzLOcxhlk0dd
-         2ucCNmI1hrCQIM0Lp7kUQd6O7IvPeruAYQdis20kSPtQKpDG337tuHec2yGFSMDXxMgh
-         rzFw==
-X-Forwarded-Encrypted: i=1; AJvYcCVFGE1ERbEoAs2Lw7ULpC0zUS8UE8JxCDdq73t+MQbN+7W7wxV/22MakDN+CEeHIQpsmc7VOtGahLY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw7EomEahZqTMG6PUdUnZSABJXB/yeDIZTWoxEMPgoH7BmEbwyf
-	g5lxvYO18RIh+AAwNes3aacDUoZXxyyvIYgar+pTprO20M35cRDFsBjZU2eULVuwXQ==
-X-Gm-Gg: ATEYQzxkkUyRAUZsUF5cTOWi5jh6DAs0+FCEkfOcmBQiC3rgRQDimJMBf2zTYgEkreG
-	veTsIUPrCmnesStMb/hruUL3wiYyt1vlTvml06jS4YWLh5/2nIbpI7vrk6I5c/hNKplaJKvzL0i
-	Y8jWDCiKZMsZI1i8QWnj4xfD3N0b2ADs76z7nxt+VJZQ+7XH1KqeWPD/v4cIo1+4aQ1VfnMLCGY
-	HuNCkFWrFQbObMQOsk2l858DB3Le+oEyLZFBvgOjMaxgSxSVsGVy9sj+SKcxUjY88/D0ECLWEvS
-	AbrxKjTR1nHoBpcqenw/EexErt0qOxse1/xXj5nxNul4kr87huoO+tsRYd7iZMaQOZYcnS4Bf/g
-	5DR1CTZViyoTgHtrgdPAOCN2AJsfGiUpKjQDEgppaqiBo4zIvn0tJuVHlIVEYiP8ojgHLGoYjra
-	MUbNei4OvjejsIx6VKQlIqQ7iHCc1XkP0JPc7yEN7FVdLuNu6MaqIbySISdamexjBvqoWHlo4aD
-	ZhBnpO21PX77hM=
-X-Received: by 2002:a05:600c:a4a:b0:480:690e:f14a with SMTP id 5b1f17b1804b1-4852691e00dmr256773305e9.14.1773161730685;
-        Tue, 10 Mar 2026 09:55:30 -0700 (PDT)
-Message-ID: <b68a356b-2cc7-49be-bc8e-eea36d316175@suse.com>
-Date: Tue, 10 Mar 2026 17:55:30 +0100
+        bh=F37HFkhRbnNKMwdsdySIIUyxwC6WRGnT9uYuIwl9b5U=;
+        b=BQC/eGi62ImYEG6jyp1sk7rfyLMl1c+jlrrDijPte6RZOeiV6ty0CH5C67cGie0P7v
+         hcW/eYDNFWtSZBxZBecbt75gRfF6PnQlgJRSGzN7a5leJFNrMvs1GxMZv8+eqIJjY+4w
+         ck0H8s5UguQTmw32G49tEJGiaQ6/il7alxiANHrZ+duSh6l8lMLQ5Vq9jMdjm8+9djiI
+         Q6kSx6AfgnGQXtQAVV7iWMMxSRJgkgY9PXh9ZFXdtvm4MhzCZqI05SP1M9le+QRJdpk7
+         US2iaCdzuVxDEKfLzsMI6+4P7O053U0fV6pHeFflsmRsH/FVUohVsfBLDc+l9suu2/gC
+         Cyjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773162555; x=1773767355;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=F37HFkhRbnNKMwdsdySIIUyxwC6WRGnT9uYuIwl9b5U=;
+        b=L+sCK/pY7zBWrFeULSBsucdxRnZyuBaVLnB9Ic2gzd4RlInBeNKEhAwPqNj3VUQe7A
+         r9LM6U/ykaVSqqQwSnqZLCVfoT9P80Sb/91vyR3cCX/CtwCMZXxIcvDC70P1Cfqg8G52
+         jDuVR49tPXQK5uri0WFXEm3n2kbiDOt43n+FawI1qCs0tTJrD2oTh9NOXe0t2+CsKasV
+         ZR5InQkGwNaeBlkP/NvMPzvLGaYOZu5+OMv+xW6mriL+j4QSO2yAvWkfsuKqvI2qIu/X
+         3KHeAfio5IRG8LqGuXBB+dWQOTnAJwAfTdTK0fEdCGkINdHwtJU5i2lit5mgeMYqCqhS
+         YbtQ==
+X-Gm-Message-State: AOJu0YwRY+qy9MTyF3loIENSdUS5f4vhnvXqvB/iMt5l0vcfGHZ4kNPl
+	25oN52dwENnsQyHFoBFRADclJUKCQT3gY1cPSCFV7LJeSqE1DWzUqh7i/qyKcV33
+X-Gm-Gg: ATEYQzzY16nUmn1/Lv3Eg/mMC4mzsxYjKB2AW6zijlaBghD36yUR7mLZa2gLxKS7z/J
+	P0IF+0mOPj96oSoPMdnkbbUEohf0CE8XNLLXDitk1X5TYozZvfJ1y8pkq2nvAcz7ipY0F0dUxR0
+	1PkCdVVc6ZpVDbPZ0P+brQQ4dxtlHeHb4gyhZjF8LV5y9T1gBpLzggMoR+AdZArfCYF5Ap2Tb/8
+	Kbp9HQ91aQXJGicoxK5Ciifn4J67T6y3dpYni7QB7dDyVRcD9n0RWg9TAVxIVVCxfaILtGiE4Hw
+	qdB/sdZdbKM2na2I3YVLeiDAYv9uqsE+rovg5TXZooFQ95HQUjZg771UKr3xqKxCsaUQNFRvVra
+	MlWMOYnshwB4PFGgdvhOAecKre3YNKOzlsetLeh7PEBvSvj3DJQmHoviV+zbFmOSpljN/MToAIe
+	cd+6zQCo+JPuu6K8lZPEChenesoMylSeDIIH7qhZEd325mPfdW7jqkbbxCs4NJ/RM7lQ==
+X-Received: by 2002:a05:600c:3b83:b0:485:35d3:ce57 with SMTP id 5b1f17b1804b1-48535d3cf0cmr190710405e9.34.1773162554952;
+        Tue, 10 Mar 2026 10:09:14 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 05/27] xen/riscv: introduce guest riscv,isa string
+Date: Tue, 10 Mar 2026 18:08:38 +0100
+Message-ID: <007c0a0243ac7ff1d1ab3faa4ebcdd6fcd14e485.1773157782.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1773157782.git.oleksii.kurochko@gmail.com>
+References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/7] x86/vioapic: Add ioapic_check() to validate
- IO-APIC state before restore
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Julien Grall <julien@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20260309123055.880050-1-julian.vetter@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260309123055.880050-1-julian.vetter@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 09.03.2026 13:31, Julian Vetter wrote:
-> --- a/xen/arch/x86/hvm/vioapic.c
-> +++ b/xen/arch/x86/hvm/vioapic.c
-> @@ -594,6 +594,35 @@ int vioapic_get_trigger_mode(const struct domain *d, unsigned int gsi)
->      return vioapic->redirtbl[pin].fields.trig_mode;
->  }
->  
-> +static int cf_check ioapic_check(const struct domain *d, hvm_domain_context_t *h)
-> +{
-> +    const HVM_SAVE_TYPE(IOAPIC) *s;
-> +    unsigned int i;
-> +
-> +    if ( !has_vioapic(d) )
-> +        return -ENODEV;
-> +
-> +    s = hvm_get_entry(IOAPIC, h);
-> +    if ( !s )
-> +        return -ENODATA;
-> +
-> +    for ( i = 0; i < ARRAY_SIZE(s->redirtbl); i++ )
-> +    {
-> +        const union vioapic_redir_entry *e = &s->redirtbl[i];
-> +
-> +        /*
-> +         * Check to-be-loaded values are within valid range, for them to
-> +         * represent actually reachable state.
-> +         */
-> +        if ( e->fields.reserve ||
-> +             e->fields.reserved[0] || e->fields.reserved[1] ||
-> +             e->fields.reserved[2] || e->fields.reserved[3] )
-> +            return -EINVAL;
+Introduce generation of the riscv,isa string passed to the guest via the
+Device Tree riscv,isa property.
 
-Are comment and code actually in sync? I can't spot anything preventing the
-reserved fields to be set by a guest. Such setting would simply be ignored.
-(And this is actually why I was asking you to add such a function: By adding
-the checks you should have noticed that the fields can be non-zero if a guest
-writes them this way. Which in turn may pose a problem for your extid
-intentions.)
+The following changes are introduced:
 
-> +    }
-> +
-> +    return 0;
-> +}
+- According to the RISC-V privileged specification, M-mode software controls
+  the XLEN value used by S-mode and U-mode. For RV64 harts, the SXL and UXL
+  fields of the mstatus register are WARL fields that define the XLEN for
+  S-mode and U-mode.
 
-If it wasn't for the above, something like this may do for starters. Would
-be nice if base_address, ioregsel, and id also had some sanity checking
-applied.
+  The XLEN value is provided by M-mode software (OpenSBI in the case of Xen)
+  via the riscv,isa DT property. Introduce and initialize an xlen variable
+  when parsing the host riscv,isa string in riscv_isa_parse_string().
 
-However, does this build at all with the function unused? You lack ...
+- Introduce the guest_isa_str variable to store the riscv,isa string
+  generated for a guest domain during riscv,isa property parsing. Update
+  match_isa_ext() to populate guest_isa_str accordingly.
 
->  static int cf_check ioapic_save(struct vcpu *v, hvm_domain_context_t *h)
->  {
->      const struct domain *d = v->domain;
+- Introduce guest_unsupp_bmp and guest_unsupp_exts[] to filter out ISA
+  extensions that should not be exposed to guests. For example, FPU-related
+  extensions are currently not supported for guests (at the moment) and are
+  therefore removed from the guest riscv,isa string.
 
-... a hunk altering the HVM_REGISTER_SAVE_RESTORE() further down.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/cpufeature.c             | 33 +++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/cpufeature.h |  2 ++
+ 2 files changed, 35 insertions(+)
 
-Jan
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index 987d36dc7eee..d7e483603dbe 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -38,6 +38,8 @@ struct riscv_isa_ext_data {
+ /* Host ISA bitmap */
+ static __ro_after_init DECLARE_BITMAP(riscv_isa, RISCV_ISA_EXT_MAX);
+ 
++static __ro_after_init unsigned int xlen;
++
+ static int __init dt_get_cpuid_from_node(const struct dt_device_node *cpu,
+                                          unsigned long *dt_cpuid)
+ {
+@@ -160,6 +162,19 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+     RISCV_ISA_EXT_DATA(svpbmt),
+ };
+ 
++static const unsigned int __initconst guest_unsupp_exts[] = {
++    RISCV_ISA_EXT_f,
++    RISCV_ISA_EXT_d,
++    RISCV_ISA_EXT_h,
++    RISCV_ISA_EXT_q,
++    RISCV_ISA_EXT_v,
++};
++
++static __ro_after_init DECLARE_BITMAP(guest_unsupp_bmp, RISCV_ISA_EXT_MAX);
++
++#define MAX_GUEST_ISA_STR_LEN 256
++char guest_isa_str[MAX_GUEST_ISA_STR_LEN];
++
+ static bool __init is_lowercase_extension_name(const char *str)
+ {
+     /*
+@@ -193,6 +208,15 @@ static void __init match_isa_ext(const char *name, const char *name_end,
+              !memcmp(name, ext->name, name_end - name) )
+         {
+             __set_bit(ext->id, bitmap);
++
++            if ( riscv_isa_extension_available(guest_unsupp_bmp, ext->id) )
++                break;
++
++            if ( ext->id >= RISCV_ISA_EXT_BASE )
++                safe_strcat(guest_isa_str, "_");
++
++            safe_strcat(guest_isa_str, ext->name);
++
+             break;
+         }
+     }
+@@ -207,13 +231,17 @@ static int __init riscv_isa_parse_string(const char *isa,
+ #if defined(CONFIG_RISCV_32)
+     if ( isa[2] != '3' && isa[3] != '2' )
+         return -EINVAL;
++    xlen = 32;
+ #elif defined(CONFIG_RISCV_64)
+     if ( isa[2] != '6' && isa[3] != '4' )
+         return -EINVAL;
++    xlen = 64;
+ #else
+ # error "unsupported RISC-V bitness"
+ #endif
+ 
++    snprintf(guest_isa_str, sizeof(guest_isa_str), "rv%d", xlen);
++
+     /*
+      * In unpriv. specification (*_20240411) is mentioned the following:
+      * (1) A RISC-V ISA is defined as a base integer ISA, which must be
+@@ -487,6 +515,11 @@ void __init riscv_fill_hwcap(void)
+     bool all_extns_available = true;
+     struct trap_info trap;
+ 
++    for ( i = 0; i < ARRAY_SIZE(guest_unsupp_exts); i++ )
++    {
++        __set_bit(guest_unsupp_exts[i], guest_unsupp_bmp);
++    }
++
+     riscv_fill_hwcap_from_isa_string();
+ 
+     if ( bitmap_empty(riscv_isa, RISCV_ISA_EXT_MAX) )
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index ef02a3e26d2c..aabbbf0c2cc3 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -43,6 +43,8 @@ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_MAX
+ };
+ 
++extern char guest_isa_str[];
++
+ void riscv_fill_hwcap(void);
+ 
+ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+-- 
+2.53.0
+
 
