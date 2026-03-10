@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED4BFD4F02
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:04:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250258.1547734 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BC7FD4F03
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:10:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250280.1547744 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzZE-0004sU-F2; Tue, 10 Mar 2026 16:04:20 +0000
+	id 1vzzeu-0006XN-4N; Tue, 10 Mar 2026 16:10:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250258.1547734; Tue, 10 Mar 2026 16:04:20 +0000
+Received: by outflank-mailman (output) from mailman id 1250280.1547744; Tue, 10 Mar 2026 16:10:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzZE-0004sN-CR; Tue, 10 Mar 2026 16:04:20 +0000
-Received: by outflank-mailman (input) for mailman id 1250258;
- Tue, 10 Mar 2026 15:59:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LFVH=BK=arm.com=jeremy.linton@srs-se1.protection.inumbo.net>)
- id 1vzzU8-0002mp-Hq
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 15:59:04 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 0e27e170-1c9a-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 16:59:01 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 74A8B16A3;
- Tue, 10 Mar 2026 08:58:54 -0700 (PDT)
-Received: from [192.168.20.93] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
- 384493F7BD; Tue, 10 Mar 2026 08:58:53 -0700 (PDT)
+	id 1vzzeu-0006XG-1f; Tue, 10 Mar 2026 16:10:12 +0000
+Received: by outflank-mailman (input) for mailman id 1250280;
+ Tue, 10 Mar 2026 16:10:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1vzzes-0006XA-DR
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 16:10:10 +0000
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [2a00:1450:4864:20::32e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 96812c5b-1c9b-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Mar 2026 17:09:59 +0100 (CET)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4852f8ac7e9so42037655e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 09:09:59 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-485244b6e9esm217818755e9.5.2026.03.10.09.09.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Mar 2026 09:09:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,279 +47,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e27e170-1c9a-11f1-b164-2bf370ae4941
-Message-ID: <657142d1-1632-4a3e-8800-ee1dd5763d78@arm.com>
-Date: Tue, 10 Mar 2026 10:58:49 -0500
+X-Inumbo-ID: 96812c5b-1c9b-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1773158999; x=1773763799; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZKb99p8Z8dwMpOwrxkhYrxmhrN8VUsSCJFX1+xevsaU=;
+        b=g1R21WKvdxVpPRmrTY+O28PIvaa/uNZCVJ7JIpkykS4dn+pDw/nWgdmt9gLkGJPYRT
+         0e49uOR8CG5tIbMCeVFwxo0wnx6WxYlH3vjeZguVqz4TQFEdMEJODaqHsYZkxQ7aIKaa
+         1IjSi3G/4XW19WoBSiYx3eH323z4LEJFKymxfuF4qsOAddEnS1X4eLmJrnEg3p/X8YLK
+         UyNhz+1H8viNkklV7oq3TSols1NHbJQ9kvcbLNWR0W0411A5VHKS0b0sRsT1lqfIkbVd
+         XQso/EJt6rfHWHqFMa2KL2H1MmkmWBk0qs6T6f+Vm73vt0MAdM7ymB4B1frR0n8wvnRx
+         as6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773158999; x=1773763799;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZKb99p8Z8dwMpOwrxkhYrxmhrN8VUsSCJFX1+xevsaU=;
+        b=YS7Py1qAXCDaglKQLtldiRF9q+EgcCjTYVf5KAxjQPu/tnqpktKOHq/ScvRk724Ra0
+         935H4kVec4UWT5tXOnBPt9JR/vL3VrXTDoCol20eigGH4aQmLtUjCEs5XmRFHCDvlip+
+         9yDS9Rfr7pnl0kMQFAULkHEfgzj66InQJOrF8WycV0WCaj2hc2SWEAicoFt0PSK5wX7H
+         pJzQBFS0MdwROkH3JJhnhqYOi3KDRjVtb8Z8S5ygvIGTIpbgaJONRzpQLNSL6N0Qmto9
+         CXZs1Eh1eEjK+6IFYBabj+ljjxMrtdbJ/KneqPA7z3MSkofVUU+46aAftKJ7aC29cVTm
+         6q7w==
+X-Forwarded-Encrypted: i=1; AJvYcCVv7gNbls+tU08RKSSm7SSBmYFGHyrP5bRHvIp0vPjgMIsI6r4T/LwCREn/SHJc0GlCJdvssjlBRIY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxSQXEALnotKJL0AX+F5VjmbSiVlUkzC+e1ntSmtjeFBBUglI4q
+	s/sZgzgLT7ATNfeTBrT8PlpH/7Fe3UsEdG8c+SsIKwISnfclgTSdrK4W6TkH5lfJYQ==
+X-Gm-Gg: ATEYQzwPnn6z/tn722zcZ1eLmU7Sa9EcL4eTOaBoT3wdekJ7a6ldmGHb8sdE/KBp2nH
+	vTeEtXuyEuQhEoLJkZVDQAW/+SEAMM02x2zR9dG9iNGVVX+VGNVVQfQEYsys7F9J5Jz3G68zF0A
+	jI0h7M0k5xIBA3NCKSTv2mLWpSMsiWhxvVhaWSpIvhBeErmr5C16fiFG6txTWG4ddZ/T2j4ix9n
+	tjg33AOPOKyTiHjW83E73pAzYfe6vp1SLq2/uEog8hBzQ0iJKCyNDDNQBcn9leNkCAv96OkslgN
+	/X6bocoNpPEnrz72ldt4Vfby+J/Zfd2AHSyb+gr1D+xD965UX5UCx7W5sOMpeIMq1UpSqHPrwOJ
+	IxxGDX/RwnKgZStNKiYdmY3r2wF4PyVwpcsfE2NNRd8S17ZCKsfS4/aUoWhHpOYCds27jdL2RdL
+	JjZUfLxc/3d+wZedAmoFmxfLUyZlYEX3at34Qk/YH8Y9jr/KQQONXlCN8JZBLyol69LOHlVNMKm
+	FIZszMknOO/R4M=
+X-Received: by 2002:a05:600c:c8f:b0:483:2c98:4368 with SMTP id 5b1f17b1804b1-4852695aec4mr261574495e9.18.1773158998968;
+        Tue, 10 Mar 2026 09:09:58 -0700 (PDT)
+Message-ID: <5724bdb3-bec5-4159-a4f4-9bdad39acd7b@suse.com>
+Date: Tue, 10 Mar 2026 17:09:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/2] PCI/TPH: Fix get cpu steer-tag fail on ARM64
- platform
-To: Chengwen Feng <fengchengwen@huawei.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- "Rafael J . Wysocki" <rafael@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
- Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
- Juergen Gross <jgross@suse.com>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>,
- Sunil V L <sunilvl@ventanamicro.com>, Mark Rutland <mark.rutland@arm.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>, Kees Cook <kees@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Sean Christopherson <seanjc@google.com>,
- Kai Huang <kai.huang@intel.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Thomas Huth <thuth@redhat.com>, Thorsten Blum <thorsten.blum@linux.dev>,
- Kevin Loughlin <kevinloughlin@google.com>, Zheyun Shen
- <szy0127@sjtu.edu.cn>, Peter Zijlstra <peterz@infradead.org>,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Xin Li <xin@zytor.com>,
- "Ahmed S . Darwish" <darwi@linutronix.de>,
- Sohil Mehta <sohil.mehta@intel.com>,
- Ilkka Koskinen <ilkka@os.amperecomputing.com>,
- Robin Murphy <robin.murphy@arm.com>, James Clark <james.clark@linaro.org>,
- Besar Wicaksono <bwicaksono@nvidia.com>, Ma Ke <make24@iscas.ac.cn>,
- Ajit Khaparde <ajit.khaparde@broadcom.com>, Wei Huang <wei.huang2@amd.com>,
- Andy Gospodarek <andrew.gospodarek@broadcom.com>,
- Somnath Kotur <somnath.kotur@broadcom.com>, wangzhou1@hisilicon.com,
- wanghuiqiang@huawei.com, liuyonglong@huawei.com, linux-pci@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, loongarch@lists.linux.dev,
- linux-riscv@lists.infradead.org, xen-devel@lists.xenproject.org,
- linux-acpi@vger.kernel.org, linux-perf-users@vger.kernel.org,
- stable@vger.kernel.org, Wathsala Vithanage <wathsala.vithanage@arm.com>
-References: <20260310032049.25387-1-fengchengwen@huawei.com>
- <20260310032049.25387-3-fengchengwen@huawei.com>
+Subject: Re: [PATCH v4 2/2] x86/ioreq: Extend ioreq server to support multiple
+ ioreq pages
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260305130434.635276-1-julian.vetter@vates.tech>
+ <20260305130434.635276-2-julian.vetter@vates.tech>
+ <c73afb52-e39c-48c8-bf2c-41b509ca0dd0@suse.com>
+ <a05e2d6c-5ba7-4651-b9d1-c1b502be0e7b@vates.tech>
 Content-Language: en-US
-From: Jeremy Linton <jeremy.linton@arm.com>
-In-Reply-To: <20260310032049.25387-3-fengchengwen@huawei.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <a05e2d6c-5ba7-4651-b9d1-c1b502be0e7b@vates.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-+Wathsala who has been looking at TPH too.
-
-On 3/9/26 10:20 PM, Chengwen Feng wrote:
-> pcie_tph_get_cpu_st() is broken on ARM64:
-> 1. pcie_tph_get_cpu_st() passes cpu_uid to the PCI ACPI DSM method.
->     cpu_uid should be the ACPI Processor UID [1].
-> 2. In BNXT, pcie_tph_get_cpu_st() is passed a cpu_uid obtained via
->     cpumask_first(irq->cpu_mask) - the logical CPU ID of a CPU core,
->     generated and managed by kernel (e.g., [0,255] for a system  with 256
->     logical CPU cores).
-> 3. On ARM64 platforms, ACPI assigns Processor UID to cores listed in the
->     MADT table, and this UID may not match the kernel's logical CPU ID.
->     When this occurs, the mismatch results in the wrong CPU steer-tag.
-> 4. On AMD x86 the logical CPU ID is identical to the ACPI Processor UID
->     so the mismatch is not seen.
+On 10.03.2026 16:56, Julian Vetter wrote:
+> On 3/10/26 16:36, Jan Beulich wrote:
+>> On 05.03.2026 14:04, Julian Vetter wrote:
+>>> @@ -45,7 +52,8 @@ struct ioreq_server {
+>>>       /* Lock to serialize toolstack modifications */
+>>>       spinlock_t             lock;
+>>>   
+>>> -    struct ioreq_page      ioreq;
+>>> +    ioreq_t                *ioreq;
+>>> +    gfn_t                  ioreq_gfn;
+>>>       struct list_head       ioreq_vcpu_list;
+>>>       struct ioreq_page      bufioreq;
+>>
+>> This change in data arrangement should in principle be independent of the
+>> step to supporting multiple pages. Hence it should be possible to separate
+>> out. Problem being that just by looking here and at hvm_{,un}map_ioreq_gfn()
+>> I can't conclude how you get away without the "page" field that struct
+>> ioreq_page had. If you can get away without, it's not quite clear why the
+>> field exists in the first place. If it's not needed, dropping it would be
+>> yet another separate, prereq change. At which point the remaining pair of
+>> fields could continue to be used, i.e. the change above then wouldn't be
+>> needed; va could be renamed if need be, and its type changed.
 > 
-> Resolution:
-> 1. Implement acpi_get_cpu_acpi_id() for x86, which replaces
->     cpu_acpi_id(). All ACPI platforms now have an implementation.
-> 2. Use acpi_get_cpu_acpi_id() in pcie_tph_get_cpu_st() to translate from
->     logical CPU ID to ACPI Processor UID needed for the DSM call.
-> 3. Rename pcie_tpu_get_cpu_st() parameter from cpu_uid to cpu to
->     reflect that it is a logical CPU_ID.
+> Thank you again Jan for your feedback! I don't need the page anymore. 
+> When I use vmap(), I don't need to keep track of it, because during 
+> teardown, I can recover it via vmap_to_page(). Currently it's necessary 
+> because in destroy_ring_for_helper we need the page, to be destroyed. 
+> But I see now, on X86 the map_domain_page_global called from 
+> prepare_ring_for_helper actually does vmap(&mfn, 1). So the page is also 
+> from the vmap range. So for the teardown I assume a vmap_to_page() could 
+> be used as well. But I also see there is a special case, if NDEBUG=1, 
+> map_domain_page_global short-circuits to mfn_to_virt() for low MFNs 
+> (putting the VA in the directmap range) and bypassing vmap. In that case 
 > 
-> [1] According to ECN_TPH-ST_Revision_20200924
->      (https://members.pcisig.com/wg/PCI-SIG/document/15470), the input
->      is defined as: "If the target is a processor, then this field
->      represents the ACPI Processor UID of the processor as specified in
->      the MADT. If the target is a processor container, then this field
->      represents the ACPI Processor UID of the processor container as
->      specified in the PPTT."
+> vmap_to_page() would not work. So, this would be really messy. I would 
+> rather switch the bufioreq also to an explicitly vmap()'ed page, then we 
+> could remove the page pointer and both cases would be aligned again.
 
-The bit about "processor containers" is not supported by linux yet, and 
-is potentially a problem worth considering.
+That's an option. Yet are you aware of domain_page_map_to_mfn()? Perhaps
+that's what you want to switch to using in the patch removing the "page"
+field. To then, conditionally or uniformly, switch to vmap_to_{mfn,page}()
+when doing the multi-page work in the subsequent patch.
 
-The original rename comments from the previous patch versions are on 
-point, but since they have grown large, i'm going to suggest the x86 
-rename/shuffle here is also in its own patch seperate from the TPH 
-specific changes like the arm ones now are.
-
-Thanks for looking after this.
-
-> 
-> Fixes: d2e8a34876ce ("PCI/TPH: Add Steering Tag support")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
-> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> ---
->   Documentation/PCI/tph.rst    |  4 ++--
->   arch/x86/include/asm/acpi.h  |  2 ++
->   arch/x86/include/asm/cpu.h   |  1 -
->   arch/x86/include/asm/smp.h   |  1 -
->   arch/x86/kernel/cpu/common.c | 12 ++++++++++++
->   arch/x86/xen/enlighten_hvm.c |  4 ++--
->   drivers/pci/tph.c            | 11 ++++++-----
->   include/linux/pci-tph.h      |  4 ++--
->   8 files changed, 26 insertions(+), 13 deletions(-)
-> 
-> diff --git a/Documentation/PCI/tph.rst b/Documentation/PCI/tph.rst
-> index e8993be64fd6..b6cf22b9bd90 100644
-> --- a/Documentation/PCI/tph.rst
-> +++ b/Documentation/PCI/tph.rst
-> @@ -79,10 +79,10 @@ To retrieve a Steering Tag for a target memory associated with a specific
->   CPU, use the following function::
->   
->     int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type type,
-> -                          unsigned int cpu_uid, u16 *tag);
-> +                          unsigned int cpu, u16 *tag);
->   
->   The `type` argument is used to specify the memory type, either volatile
-> -or persistent, of the target memory. The `cpu_uid` argument specifies the
-> +or persistent, of the target memory. The `cpu` argument specifies the
->   CPU where the memory is associated to.
->   
->   After the ST value is retrieved, the device driver can use the following
-> diff --git a/arch/x86/include/asm/acpi.h b/arch/x86/include/asm/acpi.h
-> index a03aa6f999d1..b968369715c1 100644
-> --- a/arch/x86/include/asm/acpi.h
-> +++ b/arch/x86/include/asm/acpi.h
-> @@ -157,6 +157,8 @@ static inline bool acpi_has_cpu_in_madt(void)
->   	return !!acpi_lapic;
->   }
->   
-> +u32 acpi_get_cpu_acpi_id(unsigned int cpu);
-> +
->   #define ACPI_HAVE_ARCH_SET_ROOT_POINTER
->   static __always_inline void acpi_arch_set_root_pointer(u64 addr)
->   {
-> diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
-> index ad235dda1ded..57a0786dfd75 100644
-> --- a/arch/x86/include/asm/cpu.h
-> +++ b/arch/x86/include/asm/cpu.h
-> @@ -11,7 +11,6 @@
->   
->   #ifndef CONFIG_SMP
->   #define cpu_physical_id(cpu)			boot_cpu_physical_apicid
-> -#define cpu_acpi_id(cpu)			0
->   #endif /* CONFIG_SMP */
->   
->   #ifdef CONFIG_HOTPLUG_CPU
-> diff --git a/arch/x86/include/asm/smp.h b/arch/x86/include/asm/smp.h
-> index 84951572ab81..05d1d479b4cf 100644
-> --- a/arch/x86/include/asm/smp.h
-> +++ b/arch/x86/include/asm/smp.h
-> @@ -130,7 +130,6 @@ __visible void smp_call_function_interrupt(struct pt_regs *regs);
->   __visible void smp_call_function_single_interrupt(struct pt_regs *r);
->   
->   #define cpu_physical_id(cpu)	per_cpu(x86_cpu_to_apicid, cpu)
-> -#define cpu_acpi_id(cpu)	per_cpu(x86_cpu_to_acpiid, cpu)
->   
->   /*
->    * This function is needed by all SMP systems. It must _always_ be valid
-> diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-> index 1c3261cae40c..93f4f3283c81 100644
-> --- a/arch/x86/kernel/cpu/common.c
-> +++ b/arch/x86/kernel/cpu/common.c
-> @@ -29,6 +29,7 @@
->   #include <linux/utsname.h>
->   #include <linux/efi.h>
->   
-> +#include <asm/acpi.h>
->   #include <asm/alternative.h>
->   #include <asm/cmdline.h>
->   #include <asm/cpuid/api.h>
-> @@ -57,6 +58,7 @@
->   #include <asm/asm.h>
->   #include <asm/bugs.h>
->   #include <asm/cpu.h>
-> +#include <asm/smp.h>
->   #include <asm/mce.h>
->   #include <asm/msr.h>
->   #include <asm/cacheinfo.h>
-> @@ -2643,3 +2645,13 @@ void __init arch_cpu_finalize_init(void)
->   	 */
->   	mem_encrypt_init();
->   }
-> +
-> +u32 acpi_get_cpu_acpi_id(unsigned int cpu)
-> +{
-> +#ifndef CONFIG_SMP
-> +	return 0;
-> +#else
-> +	return per_cpu(x86_cpu_to_acpiid, cpu);
-> +#endif
-> +}
-> +EXPORT_SYMBOL_GPL(acpi_get_cpu_acpi_id);
-> diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
-> index fe57ff85d004..0a5cde7865b2 100644
-> --- a/arch/x86/xen/enlighten_hvm.c
-> +++ b/arch/x86/xen/enlighten_hvm.c
-> @@ -161,8 +161,8 @@ static int xen_cpu_up_prepare_hvm(unsigned int cpu)
->   	 */
->   	xen_uninit_lock_cpu(cpu);
->   
-> -	if (cpu_acpi_id(cpu) != CPU_ACPIID_INVALID)
-> -		per_cpu(xen_vcpu_id, cpu) = cpu_acpi_id(cpu);
-> +	if (acpi_get_cpu_acpi_id(cpu) != CPU_ACPIID_INVALID)
-> +		per_cpu(xen_vcpu_id, cpu) = acpi_get_cpu_acpi_id(cpu);
->   	else
->   		per_cpu(xen_vcpu_id, cpu) = cpu;
->   	xen_vcpu_setup(cpu);
-> diff --git a/drivers/pci/tph.c b/drivers/pci/tph.c
-> index ca4f97be7538..c1bd60637b5a 100644
-> --- a/drivers/pci/tph.c
-> +++ b/drivers/pci/tph.c
-> @@ -236,18 +236,19 @@ static int write_tag_to_st_table(struct pci_dev *pdev, int index, u16 tag)
->    * with a specific CPU
->    * @pdev: PCI device
->    * @mem_type: target memory type (volatile or persistent RAM)
-> - * @cpu_uid: associated CPU id
-> + * @cpu: associated CPU id
->    * @tag: Steering Tag to be returned
->    *
->    * Return the Steering Tag for a target memory that is associated with a
-> - * specific CPU as indicated by cpu_uid.
-> + * specific CPU as indicated by cpu.
->    *
->    * Return: 0 if success, otherwise negative value (-errno)
->    */
->   int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type mem_type,
-> -			unsigned int cpu_uid, u16 *tag)
-> +			unsigned int cpu, u16 *tag)
->   {
->   #ifdef CONFIG_ACPI
-> +	u32 cpu_uid = acpi_get_cpu_acpi_id(cpu);
->   	struct pci_dev *rp;
->   	acpi_handle rp_acpi_handle;
->   	union st_info info;
-> @@ -265,9 +266,9 @@ int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type mem_type,
->   
->   	*tag = tph_extract_tag(mem_type, pdev->tph_req_type, &info);
->   
-> -	pci_dbg(pdev, "get steering tag: mem_type=%s, cpu_uid=%d, tag=%#04x\n",
-> +	pci_dbg(pdev, "get steering tag: mem_type=%s, cpu=%d, tag=%#04x\n",
->   		(mem_type == TPH_MEM_TYPE_VM) ? "volatile" : "persistent",
-> -		cpu_uid, *tag);
-> +		cpu, *tag);
->   
->   	return 0;
->   #else
-> diff --git a/include/linux/pci-tph.h b/include/linux/pci-tph.h
-> index ba28140ce670..be68cd17f2f8 100644
-> --- a/include/linux/pci-tph.h
-> +++ b/include/linux/pci-tph.h
-> @@ -25,7 +25,7 @@ int pcie_tph_set_st_entry(struct pci_dev *pdev,
->   			  unsigned int index, u16 tag);
->   int pcie_tph_get_cpu_st(struct pci_dev *dev,
->   			enum tph_mem_type mem_type,
-> -			unsigned int cpu_uid, u16 *tag);
-> +			unsigned int cpu, u16 *tag);
->   void pcie_disable_tph(struct pci_dev *pdev);
->   int pcie_enable_tph(struct pci_dev *pdev, int mode);
->   u16 pcie_tph_get_st_table_size(struct pci_dev *pdev);
-> @@ -36,7 +36,7 @@ static inline int pcie_tph_set_st_entry(struct pci_dev *pdev,
->   { return -EINVAL; }
->   static inline int pcie_tph_get_cpu_st(struct pci_dev *dev,
->   				      enum tph_mem_type mem_type,
-> -				      unsigned int cpu_uid, u16 *tag)
-> +				      unsigned int cpu, u16 *tag)
->   { return -EINVAL; }
->   static inline void pcie_disable_tph(struct pci_dev *pdev) { }
->   static inline int pcie_enable_tph(struct pci_dev *pdev, int mode)
-
+Jan
 
