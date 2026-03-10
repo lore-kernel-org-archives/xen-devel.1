@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DEF5EB107C
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 15:56:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250249.1547717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7572EB1076
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:00:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250261.1547726 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzRi-0002DN-G6; Tue, 10 Mar 2026 15:56:34 +0000
+	id 1vzzVp-0004Ms-0y; Tue, 10 Mar 2026 16:00:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250249.1547717; Tue, 10 Mar 2026 15:56:34 +0000
+Received: by outflank-mailman (output) from mailman id 1250261.1547726; Tue, 10 Mar 2026 16:00:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzRi-0002DF-Cl; Tue, 10 Mar 2026 15:56:34 +0000
-Received: by outflank-mailman (input) for mailman id 1250249;
- Tue, 10 Mar 2026 15:56:33 +0000
+	id 1vzzVo-0004Ml-UJ; Tue, 10 Mar 2026 16:00:48 +0000
+Received: by outflank-mailman (input) for mailman id 1250261;
+ Tue, 10 Mar 2026 16:00:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+/Uq=BK=bounce.vates.tech=bounce-md_30504962.69b03f27.v1-01e064fb06d54d30b8ea52b39efaa898@srs-se1.protection.inumbo.net>)
- id 1vzzRh-0002D9-6f
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 15:56:33 +0000
-Received: from mail133-21.atl131.mandrillapp.com
- (mail133-21.atl131.mandrillapp.com [198.2.133.21])
+ <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1vzzVn-0004Mf-Vd
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 16:00:48 +0000
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [2a00:1450:4864:20::334])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b0c59f11-1c99-11f1-9ccf-f158ae23cfc8;
- Tue, 10 Mar 2026 16:56:25 +0100 (CET)
-Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail133-21.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4fVdlq5Hksz1XLF12
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 15:56:23 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 01e064fb06d54d30b8ea52b39efaa898; Tue, 10 Mar 2026 15:56:23 +0000
+ id 4c636630-1c9a-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Mar 2026 17:00:45 +0100 (CET)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso106670615e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 09:00:45 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-67-101.play-internet.pl.
+ [109.243.67.101]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4852470c697sm115928445e9.31.2026.03.10.09.00.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Mar 2026 09:00:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,110 +47,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0c59f11-1c99-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773158183; x=1773428183;
-	bh=FENQz4sBH2k2YM19ydf9S4jWXysIFZNaNow0h7SDNkQ=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=uNA14AUNQ3+VqnHHYGAwaKuElHbhyjElNZhBUIEb9CGi+92+C2MwQTjjkSHisTyjY
-	 YLvHzg24lGOaf+y/XaEn2uXNw6kiD527DKEkDeqkC1FRxJcm7mhRcHz/p6V54REPFy
-	 OtGzK8XDyIU8nigAWeWKBCaZFRT6blVA5eI72qHs2tcgauKfbKZbTNmHqpLicKhyhl
-	 hhxHZwuXk4rsCyxcvmiQVwvloeCeCXWQWS9fglyVkJuU9Ni1hD4ThlSm8VoP4VSmMH
-	 LvgmKOvrx7ZulbwBjqHVOtNQD3gTtBnEbkiBis6xsmK2nvlqXhtVm+U/Uj58XqOSye
-	 BvOVNIiLjiRPQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773158183; x=1773418683; i=julian.vetter@vates.tech;
-	bh=FENQz4sBH2k2YM19ydf9S4jWXysIFZNaNow0h7SDNkQ=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=fziHjF5l2OHmmAzZmwY8rjHFeVQshxwT1aNU6wO/48bAt7tavK/DxHYq3wkCzBcD2
-	 wPlmbYkMRDkn55QJnt+3BUlqRnfyIyKX83SUtwVjIypXFi6oVCA5t6Uf0PlGWeoMYf
-	 aD7J+7Wm/GozwUKjZKXzNCZW29ymDQ9ulfL1MOPxrfEw19gPPQOT2VkgmAr7JePftS
-	 VEL2jjOlmQb+hW4k4TOff7g4P/z/ZB/B+WEYFoZvUWuhPHVsENDL84PPK5LZRUD7nA
-	 lqohT4q1UvaUbwON9B4GHZdnbKS74eBwQGzfjyW2rAvThdx53TSMbaAfETvjrZYLy4
-	 4nfTfHHl4zCJw==
-From: "Julian Vetter" <julian.vetter@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20v4=202/2]=20x86/ioreq:=20Extend=20ioreq=20server=20to=20support=20multiple=20ioreq=20pages?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773158182407
-Message-Id: <a05e2d6c-5ba7-4651-b9d1-c1b502be0e7b@vates.tech>
-To: "Jan Beulich" <jbeulich@suse.com>
-Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260305130434.635276-1-julian.vetter@vates.tech> <20260305130434.635276-2-julian.vetter@vates.tech> <c73afb52-e39c-48c8-bf2c-41b509ca0dd0@suse.com>
-In-Reply-To: <c73afb52-e39c-48c8-bf2c-41b509ca0dd0@suse.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.01e064fb06d54d30b8ea52b39efaa898?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260310:md
-Date: Tue, 10 Mar 2026 15:56:23 +0000
+X-Inumbo-ID: 4c636630-1c9a-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773158445; x=1773763245; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=AQV8fZ84ZRFEpZsKly3NgEQ81YLTvarXOg/rJ1/KrGM=;
+        b=kjdNPiDr/0vTz7EHCuB8qc26VNR02x9P5X/Nie+nvYbqzyw/JEQkZs1TBdIup3nSzO
+         cJqpVbq9/q7k8OczsKSoLz7wIB5qMZvUxOKt9SlMIO6kJvXiukVZYT3fHXiNpZtbFAVx
+         PqrsKZ8vlbvOWhZ4uceiXJaSvpcy1BFzRjMot0o/tFXJe2igixED/Tyrn8accQcSWILU
+         jLBM5P1Q/DCDjjI55da9jWlSpHucOfeN2xRJVMqt9NvzLGbUNDJd/fPnBQretcxhmybp
+         BGeTKYpHwHJ5Rv4ORHg+QbZXxBOYwGEJNX0LmK8xHlRa+d9ZbTp07A5Y9p+HJ5iK637C
+         uypw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773158445; x=1773763245;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AQV8fZ84ZRFEpZsKly3NgEQ81YLTvarXOg/rJ1/KrGM=;
+        b=MyszPuNCq6UXkHO0OFXlHmEFebHO78nywxG7/xJm9fpcwuvNMFmfNguPLFWPwBrgoE
+         qRS9CLYf/zg6iMj4iEQ+KqrIB8Bjby9K9omWY1lg5jNuewwpn6xQKWINY8XlDEVNK8Y/
+         G2IJYY3NsjIFr4MTyXVYrj7WQ69DKx34zv11+T30j0uos2sLUHfkYR5Ml7OEMSav+A7P
+         qwklf4Ahm6LGT+CJbCZMa4oT+IloqHpTKpc7SeLi9twl++TvfF1vinAOowzPp13P52Js
+         RXhLGFESIAxTFjQBoPo2vdcMRB5oZ0U9Lj0r4SPRoWqhOTS5ytzL7RDP/LyxBRXv19hQ
+         Sgag==
+X-Forwarded-Encrypted: i=1; AJvYcCW4Av+Uhlask9kuY2O5OQlbLTcPMeIqB+nIcNez2geaH50dS8ZGxcUpC++UqqQbDBZv/6Taqd228j8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzqUNIBKxpYkZ82+zBfqgCPS6IE5QsoJTckLSfP7OYK8YCY2P+K
+	mk9MkklYjKwnKm1gA6sQJj7g5KZ5pqgM9p/FbRuvSeuWNv+39IIbECmB
+X-Gm-Gg: ATEYQzwAi0Ane0SWwD9Ijs6AVE8eDfsMt0AFBKJJXsSbMFe1XJ6EFBOHRb9cKwV0TQZ
+	PoyQ+D+gmT/kYhq/tVpZr6dkc8K+luuA59OxcVWwLnOx+lGj5cA5KoHvIUkoYUY+knxhPeYXB07
+	Kuj7m8xMaAak+KmjGTAeteAT37uuNFg3vcQTuSCkYHJSwPWAyQw9MxekaZKAoo1/GWoM16E3eTe
+	zj2BHK56XMjiSnkVPUmb+gBTJ/U5fMqo1e4DSxaWneAw70F2B2gIvRUSg9Md0pQ13poNhht2P+i
+	pQXIvf+/3n1vlC7DZ4BPQNcCc+rmcBCy1726XU99Z2clhDVrGPtChXFSDehIHWsYXWUH2gIZqKS
+	/J9GrNLnahdv3nmgrmk+joy1MrZj97eOJCFBoBwi9tiNH2MAL6W6/XacHKSLTlCw36PQ3eRtz2q
+	dYkxVzryE70rjJ7NokB+lNU7/ex4O6Dtm3wKOJsbinewODARstTSZWJUdb0jLqhah+V+gAuDvc3
+	dHCEFs=
+X-Received: by 2002:a05:600c:3b92:b0:485:3b00:f939 with SMTP id 5b1f17b1804b1-4853b00fa43mr148729915e9.8.1773158444677;
+        Tue, 10 Mar 2026 09:00:44 -0700 (PDT)
+Message-ID: <5d15bc9b-ead9-4690-b5cd-3b63d83537b6@gmail.com>
+Date: Tue, 10 Mar 2026 17:00:41 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 01/14] xen/riscv: detect and store supported hypervisor
+ CSR bits at boot
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1772814110.git.oleksii.kurochko@gmail.com>
+ <3201951150104f17593e16c7ba00ada51ac1e10f.1772814110.git.oleksii.kurochko@gmail.com>
+ <2de7f459-00b3-4968-aaa2-9067cb0c4aa4@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <2de7f459-00b3-4968-aaa2-9067cb0c4aa4@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 3/10/26 16:36, Jan Beulich wrote:
-> On 05.03.2026 14:04, Julian Vetter wrote:
->> @@ -45,7 +52,8 @@ struct ioreq_server {
->>       /* Lock to serialize toolstack modifications */
->>       spinlock_t             lock;
+
+On 3/10/26 9:11 AM, Jan Beulich wrote:
+> On 06.03.2026 17:33, Oleksii Kurochko wrote:
+>> Some hypervisor CSRs expose optional functionality and may not implement
+>> all architectural bits. Writing unsupported bits can either be ignored
+>> or raise an exception depending on the platform.
+>>
+>> Detect the set of writable bits for selected hypervisor CSRs at boot and
+>> store the resulting masks for later use. This allows safely programming
+>> these CSRs during vCPU context switching and avoids relying on hardcoded
+>> architectural assumptions.
+>>
+>> Use csr_read()&csr_write() instead of csr_swap()+all ones mask as some
+>> CSR registers have WPRI fields which should be preserved during write
+>> operation.
+>>
+>> Also, ro_one struct is introduced to cover the cases when a bit in CSR
+>> register (at the momemnt, it is only hstateen0) may be r/o-one to have
+>> hypervisor view of register seen by guest correct.
+>>
+>> Masks are calculated at the moment only for hedeleg, henvcfg, hideleg,
+>> hstateen0 registers as only them are going to be used in the follow up
+>> patch.
+>>
+>> If the Smstateen extension is not implemented, hstateen0 cannot be read
+>> because the register is considered non-existent. Instructions that attempt
+>> to access a CSR that is not implemented or not visible in the current mode
+>> are reserved and will raise an illegal-instruction exception.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> --- a/xen/arch/riscv/domain.c
+>> +++ b/xen/arch/riscv/domain.c
+>> @@ -2,9 +2,66 @@
 >>   
->> -    struct ioreq_page      ioreq;
->> +    ioreq_t                *ioreq;
->> +    gfn_t                  ioreq_gfn;
->>       struct list_head       ioreq_vcpu_list;
->>       struct ioreq_page      bufioreq;
-> 
-> This change in data arrangement should in principle be independent of the
-> step to supporting multiple pages. Hence it should be possible to separate
-> out. Problem being that just by looking here and at hvm_{,un}map_ioreq_gfn()
-> I can't conclude how you get away without the "page" field that struct
-> ioreq_page had. If you can get away without, it's not quite clear why the
-> field exists in the first place. If it's not needed, dropping it would be
-> yet another separate, prereq change. At which point the remaining pair of
-> fields could continue to be used, i.e. the change above then wouldn't be
-> needed; va could be renamed if need be, and its type changed.
+>>   #include <xen/init.h>
+>>   #include <xen/mm.h>
+>> +#include <xen/sections.h>
+>>   #include <xen/sched.h>
+>>   #include <xen/vmap.h>
+>>   
+>> +#include <asm/cpufeature.h>
+>> +#include <asm/csr.h>
+>> +
+>> +struct csr_masks {
+>> +    register_t hedeleg;
+>> +    register_t henvcfg;
+>> +    register_t hideleg;
+>> +    register_t hstateen0;
+>> +
+>> +    struct {
+>> +        register_t hstateen0;
+>> +    } ro_one;
+>> +};
+>> +
+>> +static struct csr_masks __ro_after_init csr_masks;
+>> +
+>> +#define HEDELEG_AVAIL_MASK ULONG_MAX
+>> +#define HIDELEG_AVAIL_MASK ULONG_MAX
+>> +#define HENVCFG_AVAIL_MASK _UL(0xE0000003000000FF)
+>> +#define HSTATEEN0_AVAIL_MASK _UL(0xDE00000000000007)
+> It's not quite clear to me what AVAIL in here is to signal.
+
+It signal that these bits are potentially available for s/w to be set.
+If you want to suggest the better naming and can change that in the
+follow-up patch.
+
+
+>   It's also not
+> quite clear to me why you would use _UL() in #define-s sitting in a C file
+> (and hence not possibly being used in assembly code; even for asm() I'd
+> expect constants to be properly passed in as C operands).
+
+I thought it is always be good to use _UL() for such type of constants as
+ULONG_MAX also uses UL, but not in form of _UL() macros. If it would be
+better to drop, I can do that in follow-up patch.
+
 >
+>> +void __init init_csr_masks(void)
+>> +{
+>> +    /*
+>> +     * The mask specifies the bits that may be safely modified without
+>> +     * causing side effects.
+>> +     *
+>> +     * For example, registers such as henvcfg or hstateen0 contain WPRI
+>> +     * fields that must be preserved. Any write to the full register must
+>> +     * therefore retain the original values of those fields.
+>> +     */
+>> +#define INIT_CSR_MASK(csr, field, mask) do { \
+>> +        register_t old = csr_read_set(CSR_##csr, mask); \
+>> +        csr_masks.field = csr_swap(CSR_##csr, old); \
+>> +    } while (0)
+>> +
+>> +#define INIT_RO_ONE_MASK(csr, field, mask) do { \
+>> +        register_t old = csr_read_clear(CSR_HSTATEEN0, mask); \
+>> +        csr_masks.ro_one.field = csr_swap(CSR_##csr, old) & mask; \
+>> +    } while (0)
+>> +
+>> +    INIT_CSR_MASK(HEDELEG, hedeleg, HEDELEG_AVAIL_MASK);
+>> +    INIT_CSR_MASK(HIDELEG, hideleg, HIDELEG_AVAIL_MASK);
+>> +
+>> +    INIT_CSR_MASK(HENVCFG, henvcfg, HENVCFG_AVAIL_MASK);
+>> +
+>> +    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+>> +    {
+>> +        INIT_CSR_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
+>> +        INIT_RO_ONE_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
+>> +    }
+> The 3rd macro parameters are now redundant. At the example of INIT_CSR_MASK(),
+> you could now have
+>
+> #define INIT_CSR_MASK(csr, field) do { \
+>          register_t old = csr_read_set(CSR_ ## csr, csr ## _AVAIL_MASK); \
+>          csr_masks.field = csr_swap(CSR_ ## csr, old); \
+>      } while (0)
+>
+> This would reduce the risk of incomplete editing after copy-and-paste, or
+> other typo-ing.
+>
+> Note also that ## being a binary operator, ./CODING_STYLE wants us to put
+> blanks around it just like for non-pre-processor binary operators. I'll
+> try to remember to make that adjustment when committing.
 
-Thank you again Jan for your feedback! I don't need the page anymore. 
-When I use vmap(), I don't need to keep track of it, because during 
-teardown, I can recover it via vmap_to_page(). Currently it's necessary 
-because in destroy_ring_for_helper we need the page, to be destroyed. 
-But I see now, on X86 the map_domain_page_global called from 
-prepare_ring_for_helper actually does vmap(&mfn, 1). So the page is also 
-from the vmap range. So for the teardown I assume a vmap_to_page() could 
-be used as well. But I also see there is a special case, if NDEBUG=1, 
-map_domain_page_global short-circuits to mfn_to_virt() for low MFNs 
-(putting the VA in the directmap range) and bypassing vmap. In that case 
+Good point. Thanks a lot!
 
-vmap_to_page() would not work. So, this would be really messy. I would 
-rather switch the bufioreq also to an explicitly vmap()'ed page, then we 
-could remove the page pointer and both cases would be aligned again.
-
-> And if the "page" field is still needed, then even more so you would imo
-> want to retain the present data layout.
-> 
-> In any event, if at all possible a goal imo ought to be to avoid
-> duplication of logic, like what is happening in the two named functions.
-> I.e. preferably the bufio case would continue to be as similar as possible,
-> just known to be single-page.
-
-Yes, I agree. Thank you for you insight. I will have a look again how I 
-could align them as much as possible.
-
-Julian
-> 
-> Jan
-
-
-
---
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+~ Oleksii
 
 
