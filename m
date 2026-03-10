@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA3EFD4F0C
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:09:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250387.1547882 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 330FBFD4F0D
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:09:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250392.1547915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00a5-0002Gn-Ob; Tue, 10 Mar 2026 17:09:17 +0000
+	id 1w00aA-00039u-Qn; Tue, 10 Mar 2026 17:09:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250387.1547882; Tue, 10 Mar 2026 17:09:17 +0000
+Received: by outflank-mailman (output) from mailman id 1250392.1547915; Tue, 10 Mar 2026 17:09:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00a5-0002Gb-KB; Tue, 10 Mar 2026 17:09:17 +0000
-Received: by outflank-mailman (input) for mailman id 1250387;
- Tue, 10 Mar 2026 17:09:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w00aA-00038q-J7; Tue, 10 Mar 2026 17:09:22 +0000
+Received: by outflank-mailman (input) for mailman id 1250392;
+ Tue, 10 Mar 2026 17:09:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1w00a4-0001QA-M9
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:16 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dd807af5-1ca3-11f1-9ccf-f158ae23cfc8;
- Tue, 10 Mar 2026 18:09:14 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-485410a0a8aso16042795e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:14 -0700 (PDT)
+ id 1w00a9-0001Q4-Gb
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:21 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e11448e7-1ca3-11f1-b164-2bf370ae4941;
+ Tue, 10 Mar 2026 18:09:20 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-485392de558so15013885e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:20 -0700 (PDT)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.12
+ 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 10:09:13 -0700 (PDT)
+ Tue, 10 Mar 2026 10:09:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd807af5-1ca3-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: e11448e7-1ca3-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773162554; x=1773767354; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1773162560; x=1773767360; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=y2l9GSTVdHf37ct2dJEvx0io7ScAIs5lEweSLfZGouo=;
-        b=iIuPKO4b+qUhMQwTITvT3pvAvG6IJR50piZmXbxla5v5v6ZUcQx+0PAERuup0F1qlo
-         g+FE2eOCLD8mjE0gXjHmdmxpAgiwWuZdOaWlO3IefvaqRIQtkhnHWmOiYGIkKNtXYLew
-         c2TrlXp0JEhUZGoOBTJoT1jiqDQ4t2nLhvhT/16OSaxAflo58U8L5NMDJPbRgwvkkOrw
-         fWej3C0xAQ5hvmvPh4hOgQ64RBzdavG4B9uU4sVCEA6lkpInrhHeTedkBC8wQvIQ5Ofa
-         iCbzDRUgAoHILRIEB6kt9FMU1QXS3xOrp1Bu1cVxBuM5K6SlH3YZaNZXNmzLEps2tA10
-         RDMA==
+        bh=/l+2sfUlHi+3W7tldQuhyj7te+foi9fBjieEM15WHyQ=;
+        b=ZAK36sIlsfOk4hW9Bb7BChtrCIV28Sid3O9vbFB3gC2iVx0qWb4/GSNl2bKt0eRBAq
+         WT47fAnrqMH3QdgU3oMD9LVUPDJAx39Z4nV2R5xe2HqbLW6+2g5Gl4fWGHtxYIAmYtFG
+         grN3QsJ3opTlj7q36I+/NVNyF/vaR95dpMoIbgF/tmc3QsQ47hM5KSAwB0MJVUC+tTWm
+         bbOmaevwCoZQD+RT95OzP8Ccqk4KHVbgQO4PCbfXHZfRPCPWZTJnPCVDiPZPGLfg4pqU
+         XXKzS1tPIhHN6anLHFRhd/HMhsyH3w590akpfFIWeBomVc9FJ3gKGN/L5h9AyjyGRXN+
+         SUWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773162554; x=1773767354;
+        d=1e100.net; s=20230601; t=1773162560; x=1773767360;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=y2l9GSTVdHf37ct2dJEvx0io7ScAIs5lEweSLfZGouo=;
-        b=MusXI6CI1bXU+TVEazp83y9f5vrpZoeWQygPJLTYc8pkPDwi0kXNrN6j/DJBMvFdkR
-         TfyBMUtgZT+42ctFQ7YzI/yO6Pl3O8JM99nXBq+W92s3loFIDBeYZzEfgZqIlz3PPxy+
-         w79mR6Oy4biyVBq/xCutI9F4GcMnd0zHru5fKLyuZB7OBM3BUoaK4rZHI5u40VYAzqJw
-         SFR585z/HuBYnUiM3sWrnsMIc/dNVh9txRv7v19/A6GuY+ATM1cDC+5CeF4EcihlB7R3
-         3SZjUzSZ2LBCKmnKzq5MEJHcWtq852JTkTTQCIEvwhe/KwIu0fN7HMHf3tDIp6ny1DVS
-         e8ew==
-X-Gm-Message-State: AOJu0YyN9sxMqexhh67wh+yTR/Rvo6e2m3q+QyI5dufTLdKT+48mvyfE
-	Y8eXMJN3hqQYwYwpWsaGAmz33zKA7++ouWIAss0mid7kiihgBM0Ny3wQ3xBJcKMt
-X-Gm-Gg: ATEYQzzbuSk7Qv9YN0xCaZhJA+xrSIbwJQSnzkdGONzi20jpYAa5jeJ+qlhKXz7dIGX
-	Hju9abVBhIt/V0A88CeIKgGv+uuP5OXVAwMO37rxr6JcgLyCuLn9r2UpCTV7Q9Ei5QQ0j/Ve6G/
-	rPSNoTWaHaG5/oAp1zjMslUuoM5PsHsybKG0YvtgQWe0PzVTr1BrRfVmsn9YP+fJOZcRnAzEbn6
-	BeuwwNAmbOhBJfdptYXPhmSObybJO2HBbOyd6zM2A6H11omDItrO34DIJMkBNi1qdgwy1aSfXaG
-	CUmVfRvLB5SuKDHBX6a8W23LoKSu40yI0HgOv0wOJr6h/T9a241pz19HwngaC7I7qkBWkjVZwGC
-	xoXqB+OH41NMjRPPx+560g4IrgMlBssqezdvb5JCk38T5oD+qGu6o1rTc/vhtopr4xrrFC0JFRA
-	XZ849b55hPNphvrboaCMIU1PzBysaAr0Rf2rL0lLGUyl3kv4sXeGMcn1rrTBAvguicJg==
-X-Received: by 2002:a05:600c:a12:b0:483:badb:618f with SMTP id 5b1f17b1804b1-48526966b07mr244053275e9.25.1773162553878;
-        Tue, 10 Mar 2026 10:09:13 -0700 (PDT)
+        bh=/l+2sfUlHi+3W7tldQuhyj7te+foi9fBjieEM15WHyQ=;
+        b=XKrojN2ypzF0CG/eTPhVLlAMXbivQV0F8uKHcVzHTvZgUT0nbkuG1Y0gQ/G8t3+t0E
+         VT+LaVGSgnGxNLW01iABuo7CIKD3bFkWSOm1y1PRv9uohe+rn8qQ8MXcvcChQSU0UaWS
+         depDiXgqqc86H0o8RpCLWy/ADwvQ0CKyz8Z6hdxkS4b2gZ2uBPNCyTdrp/Swd60lAexv
+         uVuvf1pz1k6cGbXalTSZyAAjfsKrbrd4M0QQTMqP98i1WtV5GGmORyfoMq2z2uR4XiZ/
+         LiHRTR75m0FSfXB6k1ehiZvvRAoZY1n54H8KUmowczoF9rIONma2+uZvgtmj0f6ckBZh
+         wBbA==
+X-Gm-Message-State: AOJu0YzTnMQDZVUdZWLK0ma9ROSNvBFt6tDjsrulScKtgDepbuwjllfm
+	cQjNrg6m52mWXMmlv8axx/tJoXUY3o97aB5e/sDcz9KsEYrOcjFGVtnMxQbtxkUP
+X-Gm-Gg: ATEYQzyJ/l2cTlL3dlpl/2BuKkuDIU0UUrG8TA0Gkx7cV0CoAWAxra9UqROpoa6NbnY
+	kk5WeRG5UOsxULuEjJfULUzyVD1RMoSe0bj0mkbvVsWQjZ7Q3j2yR2nDamdYkRRCNfziyUe+uNm
+	IjqZRp0vkddZXdszNG90SBPt3Ns7BfajrTaBbgq13+pzPdw6dkHQh6y14xEqDPQocleaIPfF0sL
+	k9kGf/cm9nmcPsgaPMT+1ZP/VVb5hHg7DaOVwjCp1h0x4fO4aN2v5HpRQJqgtTx1BqwN4A6oSlN
+	ioKESIzbXEcyOrJpjgLPUrXE1bWmILUtqu3a561diqKpzWqKtFj06q7jFoaZZ4i2fkh96QGa7cy
+	QERmB+gZrPGILQ71/IEc2D6zBAXzBGfvdm34U9Fzsd4pBbOyfO48zpoN0NYLdBjXZS8uGo7p3Ug
+	C1cNCxbxeaR2GEcDE2mImWFphpEpjF7qpJpFUT4t78UiGKayoM1tPGB4z3gpHWpT7K2ac7OA==
+X-Received: by 2002:a05:600c:1f0f:b0:483:703e:4ad5 with SMTP id 5b1f17b1804b1-48526967cd9mr255015965e9.22.1773162559897;
+        Tue, 10 Mar 2026 10:09:19 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,219 +96,110 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 04/27] xen/riscv: rework G-stage mode handling
-Date: Tue, 10 Mar 2026 18:08:37 +0100
-Message-ID: <2c8f1ea25b8d3ec78b00510fbe604a87e759e194.1773157782.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 09/27] xen/riscv: implement make_intc_domU_node()
+Date: Tue, 10 Mar 2026 18:08:42 +0100
+Message-ID: <7a7f1430090eaf50cc3bff25e894c13404bffad5.1773157782.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rework G-stage mode handling to make the selected mode descriptor reusable
-outside of p2m initialization.
+Introduce a RISC-V specific function to create an interrupt controller
+Device Tree node for DomU domains during dom0less build.
 
-As max_gstage_mode is going to be reused by code that creates CPU nodes for
-guest domains, not only max_gstage_mode->mode but also max_gstage_mode->name
-is required. To support this, make max_gstage_mode a global pointer to one of
-the entries in a global modes[] array, and remove get_max_supported_mode().
+Add make_intc_domU_node() to the dom0less build path and wire it to
+a new generic helper, intc_make_domu_dt_node(), which delegates DT
+node creation to the active interrupt controller implementation via
+intc_hw_ops.
 
-Update struct p2m_domain to store a pointer to a mode descriptor instead of
-embedding the structure directly.
-
-Refactor the modes[] array so that mode->name contains only the MMU scheme
-name (without the "x4" suffix), as this value is reused when filling the
-maximum MMU type passed to the guest. According to DT bindings [1], the MMU
-type must not include the "x4" suffix. Use "none" for the Bare mode to match
-the DT binding requirements.
-
-Adjust modes[]->paging_levels to represent the maximum paging level rather
-than the total number of levels. This ensures that P2M_ROOT_LEVEL() and its
-users behave correctly without relying on hardcoded p2m mode values.
-
-Finally, drop __initconst from the modes[] declaration, as the array is
-referenced via p2m->mode and max_gstage_mode beyond the init stage.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/riscv/cpus.yaml?h=v6.19-rc3#n82
+Extend struct intc_hw_operations with a make_dom_dt_node callback
+and expose the required interfaces in the interrupt controller header,
+allowing individual interrupt controller drivers to populate DomU DT
+nodes as needed.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/p2m.h |  7 ++--
- xen/arch/riscv/p2m.c             | 60 +++++++++++++-------------------
- xen/arch/riscv/vmid.c            |  2 +-
- 3 files changed, 30 insertions(+), 39 deletions(-)
+ xen/arch/riscv/dom0less-build.c   |  9 +++++++++
+ xen/arch/riscv/include/asm/intc.h | 10 ++++++++--
+ xen/arch/riscv/intc.c             |  8 ++++++++
+ 3 files changed, 25 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index c6d846b96fb4..4441c0400b83 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -13,7 +13,7 @@
+diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
+index 10863cffc96b..312c5d7d4979 100644
+--- a/xen/arch/riscv/dom0less-build.c
++++ b/xen/arch/riscv/dom0less-build.c
+@@ -3,6 +3,15 @@
+ #include <xen/fdt-kernel.h>
+ #include <xen/init.h>
  
- #define P2M_ROOT_ORDER  (ilog2(GSTAGE_ROOT_PAGE_TABLE_SIZE) - PAGE_SHIFT)
- #define P2M_ROOT_PAGES  BIT(P2M_ROOT_ORDER, U)
--#define P2M_ROOT_LEVEL(p2m) ((p2m)->mode.paging_levels)
-+#define P2M_ROOT_LEVEL(p2m) ((p2m)->mode->paging_levels)
++#include <asm/intc.h>
++
++int __init make_intc_domU_node(struct kernel_info *kinfo)
++{
++    intc_make_domu_dt_node(kinfo);
++
++    return 0;
++}
++
+ int __init make_arch_nodes(struct kernel_info *kinfo)
+ {
+     /* No RISC-V specific nodes need to be made, at the moment. */
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index ecdc8a5e6577..8300d71d472f 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -8,14 +8,14 @@
+ #ifndef ASM__RISCV__INTERRUPT_CONTOLLER_H
+ #define ASM__RISCV__INTERRUPT_CONTOLLER_H
  
- /*
-  * According to the RISC-V spec:
-@@ -58,6 +58,8 @@ struct gstage_mode_desc {
-     char name[8];
+-struct dt_device_node;
+-
+ enum intc_version {
+     INTC_APLIC,
  };
  
-+extern const struct gstage_mode_desc *max_gstage_mode;
+ struct cpu_user_regs;
++struct dt_device_node;
+ struct irq_desc;
++struct kernel_info;
+ 
+ struct intc_info {
+     enum intc_version hw_version;
+@@ -41,6 +41,10 @@ struct intc_hw_operations {
+ 
+     /* handle external interrupt */
+     void (*handle_interrupt)(struct cpu_user_regs *regs);
 +
- /* Per-p2m-table state */
- struct p2m_domain {
-     /*
-@@ -71,7 +73,7 @@ struct p2m_domain {
-     /* The root of the p2m tree. May be concatenated */
-     struct page_info *root;
- 
--    struct gstage_mode_desc mode;
-+    const struct gstage_mode_desc *mode;
- 
-     /* Back pointer to domain */
-     struct domain *domain;
-@@ -218,7 +220,6 @@ static inline bool arch_acquire_resource_check(struct domain *d)
- }
- 
- void guest_mm_init(void);
--unsigned char get_max_supported_mode(void);
- 
- int p2m_init(struct domain *d);
- 
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 886e06196ba2..dce1eb205ec9 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -45,18 +45,32 @@ struct p2m_pte_ctx {
-     unsigned int level;          /* Paging level at which the PTE resides. */
++    /* Create interrupt controller node for domain */
++    int (*make_dom_dt_node)(const struct kernel_info *kinfo,
++                            const struct dt_device_node *intc);
  };
  
--static struct gstage_mode_desc __ro_after_init max_gstage_mode = {
--    .mode = HGATP_MODE_OFF,
--    .paging_levels = 0,
--    .name = "Bare",
--};
--
- /*
-  * Set to the maximum configured support for IPA bits, so the number of IPA bits can be
-  * restricted by external entity (e.g. IOMMU).
-  */
- unsigned int __read_mostly p2m_ipa_bits = PADDR_BITS;
+ void intc_preinit(void);
+@@ -53,4 +57,6 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
  
-+static const struct gstage_mode_desc modes[] = {
-+    /*
-+     * Based on the RISC-V spec:
-+     *   Bare mode is always supported, regardless of SXLEN.
-+     *   When SXLEN=32, the only other valid setting for MODE is Sv32.
-+     *   When SXLEN=64, three paged virtual-memory schemes are defined:
-+     *   Sv39, Sv48, and Sv57.
-+     */
-+    [0] = { HGATP_MODE_OFF,    0, "none" },
-+#ifdef CONFIG_RISCV_32
-+    [1] = { HGATP_MODE_SV32X4, 1, "sv32" }
-+#else
-+    [2] = { HGATP_MODE_SV39X4, 2, "sv39" },
-+    [3] = { HGATP_MODE_SV48X4, 3, "sv48" },
-+    [4] = { HGATP_MODE_SV57X4, 4, "sv57" },
-+#endif
-+};
+ void intc_handle_external_irqs(struct cpu_user_regs *regs);
+ 
++int intc_make_domu_dt_node(const struct kernel_info *kinfo);
 +
-+const struct gstage_mode_desc * __ro_after_init max_gstage_mode = &modes[0];
+ #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index ea317aea5ad8..a6f8c30f4771 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -67,3 +67,11 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+     intc_set_irq_type(desc, desc->arch.type);
+     intc_set_irq_priority(desc, priority);
+ }
 +
- static void p2m_free_page(struct p2m_domain *p2m, struct page_info *pg);
- 
- static inline void p2m_free_metadata_page(struct p2m_domain *p2m,
-@@ -69,11 +83,6 @@ static inline void p2m_free_metadata_page(struct p2m_domain *p2m,
-     }
- }
- 
--unsigned char get_max_supported_mode(void)
--{
--    return max_gstage_mode.mode;
--}
--
- /*
-  * If anything is changed here, it may also require updates to
-  * p2m_{get,set}_type().
-@@ -154,23 +163,6 @@ static pte_t *p2m_get_root_pointer(struct p2m_domain *p2m, gfn_t gfn)
- 
- static void __init gstage_mode_detect(void)
- {
--    static const struct gstage_mode_desc modes[] __initconst = {
--        /*
--         * Based on the RISC-V spec:
--         *   Bare mode is always supported, regardless of SXLEN.
--         *   When SXLEN=32, the only other valid setting for MODE is Sv32.
--         *   When SXLEN=64, three paged virtual-memory schemes are defined:
--         *   Sv39, Sv48, and Sv57.
--         */
--#ifdef CONFIG_RISCV_32
--        { HGATP_MODE_SV32X4, 2, "Sv32x4" }
--#else
--        { HGATP_MODE_SV39X4, 3, "Sv39x4" },
--        { HGATP_MODE_SV48X4, 4, "Sv48x4" },
--        { HGATP_MODE_SV57X4, 5, "Sv57x4" },
--#endif
--    };
--
-     for ( unsigned int mode_idx = ARRAY_SIZE(modes); mode_idx-- > 0; )
-     {
-         unsigned long mode = modes[mode_idx].mode;
-@@ -179,16 +171,16 @@ static void __init gstage_mode_detect(void)
- 
-         if ( MASK_EXTR(csr_read(CSR_HGATP), HGATP_MODE_MASK) == mode )
-         {
--            max_gstage_mode = modes[mode_idx];
-+            max_gstage_mode = &modes[mode_idx];
- 
-             break;
-         }
-     }
- 
--    if ( max_gstage_mode.mode == HGATP_MODE_OFF )
-+    if ( max_gstage_mode->mode == HGATP_MODE_OFF )
-         panic("Xen expects that G-stage won't be Bare mode\n");
- 
--    printk("Max supported G-stage mode is %s\n", max_gstage_mode.name);
-+    printk("Max supported G-stage mode is %sx4\n", max_gstage_mode->name);
- 
-     csr_write(CSR_HGATP, 0);
- 
-@@ -289,7 +281,7 @@ static void clear_and_clean_page(struct page_info *page, bool clean_dcache)
- unsigned long construct_hgatp(const struct p2m_domain *p2m, uint16_t vmid)
- {
-     return MASK_INSR(mfn_x(page_to_mfn(p2m->root)), HGATP_PPN_MASK) |
--           MASK_INSR(p2m->mode.mode, HGATP_MODE_MASK) |
-+           MASK_INSR(p2m->mode->mode, HGATP_MODE_MASK) |
-            MASK_INSR(vmid, HGATP_VMID_MASK);
- }
- 
-@@ -369,9 +361,7 @@ int p2m_init(struct domain *d)
- #endif
- 
-     /* TODO: don't hardcode used for a domain g-stage mode. */
--    p2m->mode.mode = HGATP_MODE_SV39X4;
--    p2m->mode.paging_levels = 2;
--    safe_strcpy(p2m->mode.name, "Sv39x4");
-+    p2m->mode = &modes[2];
- 
-     return 0;
- }
-diff --git a/xen/arch/riscv/vmid.c b/xen/arch/riscv/vmid.c
-index 8fbcd500f24d..11c7e9d6d6c8 100644
---- a/xen/arch/riscv/vmid.c
-+++ b/xen/arch/riscv/vmid.c
-@@ -52,7 +52,7 @@ static DEFINE_PER_CPU(struct vmid_data, vmid_data);
- static unsigned int vmidlen_detect(void)
- {
-     unsigned int vmid_bits;
--    unsigned char gstage_mode = get_max_supported_mode();
-+    unsigned char gstage_mode = max_gstage_mode->mode;
- 
-     /*
-      * According to the RISC-V Privileged Architecture Spec:
++int __init intc_make_domu_dt_node(const struct kernel_info *kinfo)
++{
++    if ( intc_hw_ops && intc_hw_ops->make_dom_dt_node )
++        return intc_hw_ops->make_dom_dt_node(kinfo, intc_hw_ops->info->node);
++
++    return -ENOSYS;
++}
 -- 
 2.53.0
 
