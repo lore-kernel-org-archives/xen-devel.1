@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1EA5FD4F04
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:14:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250289.1547753 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3C1FD4F04
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 16:45:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250310.1547824 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzjM-00075M-Ki; Tue, 10 Mar 2026 16:14:48 +0000
+	id 1w00Cd-0003zj-Id; Tue, 10 Mar 2026 16:45:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250289.1547753; Tue, 10 Mar 2026 16:14:48 +0000
+Received: by outflank-mailman (output) from mailman id 1250310.1547824; Tue, 10 Mar 2026 16:45:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1vzzjM-00075F-Hc; Tue, 10 Mar 2026 16:14:48 +0000
-Received: by outflank-mailman (input) for mailman id 1250289;
- Tue, 10 Mar 2026 16:14:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1vzzjL-000759-8J
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 16:14:47 +0000
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [2a00:1450:4864:20::434])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d026b3d-1c9c-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 17:14:39 +0100 (CET)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-439ac15f35fso9525843f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 09:14:39 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439dada9116sm34495246f8f.14.2026.03.10.09.14.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Mar 2026 09:14:38 -0700 (PDT)
+	id 1w00Cd-0003yf-Cu; Tue, 10 Mar 2026 16:45:03 +0000
+Received: by outflank-mailman (input) for mailman id 1250310;
+ Tue, 10 Mar 2026 16:45:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=BkbS=BK=bounce.vates.tech=bounce-md_30504962.69b04a87.v1-dba5e090b02c4a199bdbd3059630d207@srs-se1.protection.inumbo.net>)
+ id 1w00Cc-000397-Na
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 16:45:02 +0000
+Received: from mail133-21.atl131.mandrillapp.com
+ (mail133-21.atl131.mandrillapp.com [198.2.133.21])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7a49f90b-1ca0-11f1-9ccf-f158ae23cfc8;
+ Tue, 10 Mar 2026 17:44:59 +0100 (CET)
+Received: from pmta13.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail133-21.atl131.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fVfqq1hYkz1XLF4d
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 16:44:55 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ dba5e090b02c4a199bdbd3059630d207; Tue, 10 Mar 2026 16:44:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,149 +45,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d026b3d-1c9c-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1773159278; x=1773764078; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=xtI+z3R8YsFXQL9uSgC7sP0cd+QLnw4JPhISRguRJyc=;
-        b=Nlhnb8TtX2FboJx/TTAa09bLRhnTjSOo7kSqxYf2HF7asJT+V/OEeTl2DueTVCl/Zt
-         iMloZ8LdswePQYk9K43WyHXcNA9P/j8CmqjhokGTsHMqLnRLqCUPf1Q4HmO23D/vY37B
-         amX9ilVNlhMj7OTeoFhXoEnY1j4M/bYimbx6vAPRW8AsjdY72n9F3lMUI8RS3s4iCNE2
-         sn1OCR3OGtYpOy9AGqNYEBzJEAVC6AZrr9HGvd8GEYr1AT1G6lAU+Ym69nfIQuVSbA3Y
-         +j+HiIQS6StVWEI07XSiZ+Tf6+TYqygYvcxwQ7DCHmMaFYvLCwAdasmt/CkILeK/GLak
-         SFzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773159278; x=1773764078;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xtI+z3R8YsFXQL9uSgC7sP0cd+QLnw4JPhISRguRJyc=;
-        b=lbUmWjwz54SsjW4BfmG84efQo7cahM9O5KAzSfhHdky6jxmUrMe1B78SKpIVXhHMgT
-         bP6xChsgh3YArhQmWf6Yk6oFBNVzyq68+BrtJ+LshBFfhRCXs96VKXGU+8PYux521RjM
-         +uz9K/eyUPVKd4QWLFHkRSzpPXLSp8xZTxWjBwxit+74OBh7fCYnf4F9lt9MUua4t9fN
-         DKNM0upF2dqk2Y3aOWVDtCwmPyjJ3QeM5im4gd8d7CYA1cOzgopV2FbIjrNdhIvt8xzm
-         ZdUHWLiDIU8d78rJU/5FUCAMasQMxgLexLGbb3sdLT+WUlGQ0D6T83bHhxgENLTg+FqL
-         QLpA==
-X-Forwarded-Encrypted: i=1; AJvYcCU5fcieNf3rBIEEcwbP3SB0GL9s/yA7Sb0sSwXCkHlYMK0oXIZIJ830js7yEqQLxHpROgSdhyxIQ70=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx7tq5Sut9qqDRObhlEpxa200qSWubLS2c1Dqv6vSoLzN3wiR+z
-	xhq6IJXtRyYk2k2CXd5hZpl4PK7juRUJf0VveCPx9RKCtpJaddjz7IRU7bJaIXPOHg==
-X-Gm-Gg: ATEYQzw0inbWydp8/Wj4qx9FbKp6MNMXQAo7N0SKy/oC81WudTMh1SS0S3LVMh0bQE2
-	wqvT67h+YUjITJFsvLhD5bW7+YXT8IKiYjmKJx3PAfzOl1UykzxUcdrwe9ZUIphdjXQXMwKaM5m
-	6Ul5Fz9HKD5WINHTEjOFtS7aRHtNV7c+oHPQI/Zx0YquGmC0U5ou40mmrl3808xTH0HCRTE4b6V
-	/zfNgwh4rODQHVv2pF4Y/ZFJEO33LMRP0whmqkl68BFMf/54V5RqWFL/vsy4aWQ4++atNcEZlV1
-	zt5TWGrPMKv0wngRubymRfh4wK4lPzJGG/kcKwg0AHZvcYSWtsedzKGyEXqqITwXZ+Ry7jXI5Oh
-	O7gJWqnHFkNm/XE7aWTlNsLGPyJjpmqpvzKOODmOPU+OFGcubVl3uJePDHxFzUEijnPLzuj//OK
-	aE1yJz4ZX2NVw5I5qDWsiasjdIHmz2pEnutyiFXbMC1MnuvoZFTiL0hnNFfBItRV5njdh5YkkY+
-	r0j9S+zg+KE+YQ=
-X-Received: by 2002:a05:6000:2888:b0:439:afea:aff2 with SMTP id ffacd0b85a97d-439da337f97mr27539193f8f.23.1773159278406;
-        Tue, 10 Mar 2026 09:14:38 -0700 (PDT)
-Message-ID: <45b66d43-07ad-4acc-bb0a-f311fef0261d@suse.com>
-Date: Tue, 10 Mar 2026 17:14:37 +0100
+X-Inumbo-ID: 7a49f90b-1ca0-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1773161095; x=1773431095;
+	bh=3Wd0xKWdvd2LCo+Aysi0R4yuf0yNnldMdvsEMKvsrOI=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=1qUf6IvwcYn+YBCjZb+CiiNsxrDid8C1mWUh+mEZGnICezlZpOT7U/T9aRF0wgG4q
+	 5Fbk9vj5CqsaZ4qzIXjSl6e9kZR+784xJX8oc/FYq6+eWQJa+adD5554wHgi8X7RSK
+	 Lg8VqpJZiSimRVxNVBNLldCbQ4c8sPXM74tdFzBJYewAtotjHoAnTEFI93Kxw2Ftgg
+	 InICSKP3V3hFKS5Lw1hmXujD/td+RELRLcLBmT+0g6FO7F/qrGfWqvVVB2H3Lu94fy
+	 asS2zRfo3zsrgPXs4QXRcqO2a/pTZlXI9swU7oEIBkesgY42ektu4QwC0maQFBu7Gd
+	 UfHGxYC61tABw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1773161095; x=1773421595; i=teddy.astie@vates.tech;
+	bh=3Wd0xKWdvd2LCo+Aysi0R4yuf0yNnldMdvsEMKvsrOI=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=BKmy+efIBRyDb9esunrpL58xXMqJt6/vCoQXH79LQX5aUzXatNm0caT83CFzIdg+b
+	 EkRH/OScUju4yfFdjJjCPULwuycRypUJ+VM13L+w+si2YfsNM1LmN5XrLxuMZT8b3C
+	 Lj4MXkmcAPMsPpIi6V3hx3fmUd1O5Rt+34k2xZHhWMizqjcbGp2viDmmAktTskedBO
+	 uqCeu1FDYMQDfKYHkJpbc/eB4jRiK0WhTbD2sTC6eiZHKASFm7P2qQZeuj8w3dYoJs
+	 tG9XYpymA7Y+WigUf1CM4NFV8voEVKjKalg9maltqVWgzq7NDp7fwTK7xfM21Z8mOd
+	 f4JComHw8BrIw==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[PATCH=205/6]=20x86/vpmu:=20Limit=20to=20using=20supported=20general/fixed=20counters?=
+X-Mailer: git-send-email 2.53.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1773161094391
+To: xen-devel@lists.xenproject.org
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <854c5fe569f1a2f1f60e0768ee3d9a921ad54215.1773160025.git.teddy.astie@vates.tech>
+In-Reply-To: <cover.1773160025.git.teddy.astie@vates.tech>
+References: <cover.1773160025.git.teddy.astie@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.dba5e090b02c4a199bdbd3059630d207?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260310:md
+Date: Tue, 10 Mar 2026 16:44:55 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 01/14] xen/riscv: detect and store supported hypervisor
- CSR bits at boot
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1772814110.git.oleksii.kurochko@gmail.com>
- <3201951150104f17593e16c7ba00ada51ac1e10f.1772814110.git.oleksii.kurochko@gmail.com>
- <2de7f459-00b3-4968-aaa2-9067cb0c4aa4@suse.com>
- <5d15bc9b-ead9-4690-b5cd-3b63d83537b6@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <5d15bc9b-ead9-4690-b5cd-3b63d83537b6@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 10.03.2026 17:00, Oleksii Kurochko wrote:
-> On 3/10/26 9:11 AM, Jan Beulich wrote:
->> On 06.03.2026 17:33, Oleksii Kurochko wrote:
->>> --- a/xen/arch/riscv/domain.c
->>> +++ b/xen/arch/riscv/domain.c
->>> @@ -2,9 +2,66 @@
->>>   
->>>   #include <xen/init.h>
->>>   #include <xen/mm.h>
->>> +#include <xen/sections.h>
->>>   #include <xen/sched.h>
->>>   #include <xen/vmap.h>
->>>   
->>> +#include <asm/cpufeature.h>
->>> +#include <asm/csr.h>
->>> +
->>> +struct csr_masks {
->>> +    register_t hedeleg;
->>> +    register_t henvcfg;
->>> +    register_t hideleg;
->>> +    register_t hstateen0;
->>> +
->>> +    struct {
->>> +        register_t hstateen0;
->>> +    } ro_one;
->>> +};
->>> +
->>> +static struct csr_masks __ro_after_init csr_masks;
->>> +
->>> +#define HEDELEG_AVAIL_MASK ULONG_MAX
->>> +#define HIDELEG_AVAIL_MASK ULONG_MAX
->>> +#define HENVCFG_AVAIL_MASK _UL(0xE0000003000000FF)
->>> +#define HSTATEEN0_AVAIL_MASK _UL(0xDE00000000000007)
->> It's not quite clear to me what AVAIL in here is to signal.
-> 
-> It signal that these bits are potentially available for s/w to be set.
-> If you want to suggest the better naming and can change that in the
-> follow-up patch.
+Hardware can support more than 8 general or 3 fixed counters, which could lead
+to inconsistent access to MSRs (thus failure to initialize vPMU in guest) as we
+don't support accessing more than these limits.
 
-I'd either omit the infix altogether ("avail" after all often means
-"available for software use"), or use "valid" or (less desirable)
-"defined".
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+---
+I'm not aware of a processor that have more than that, but the specification
+tells that this is possible.
 
->>   It's also not
->> quite clear to me why you would use _UL() in #define-s sitting in a C file
->> (and hence not possibly being used in assembly code; even for asm() I'd
->> expect constants to be properly passed in as C operands).
-> 
-> I thought it is always be good to use _UL() for such type of constants as
-> ULONG_MAX also uses UL, but not in form of _UL() macros. If it would be
-> better to drop, I can do that in follow-up patch.
+ xen/arch/x86/cpu-policy.c     |  6 ++++++
+ xen/arch/x86/cpu/vpmu_intel.c | 15 +++++++++++++++
+ 2 files changed, 21 insertions(+)
 
-The suffixes want to be there, at the very least for Misra's sake. But
-you can just write 0xabcdUL, there's no need to involve a macro there.
-That's only needed when the appending of the suffix needs to be
-conditional upon is being C or assembler code that includes a header.
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index 7f4456d5a2..46db7f0726 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -276,6 +276,12 @@ switch ( p->x86_vendor )
+         if ( p->basic.pmu.version > 2 )
+             p->basic.pmu.version = 2;
+ 
++        /* Truncate control register count to what we support */
++        if ( p->basic.pmu.num_gp_ctrs > 8 )
++            p->basic.pmu.num_gp_ctrs = 8;
++
++        if ( p->basic.pmu.num_fixed_ctr > 3 )
++            p->basic.pmu.num_fixed_ctr = 3;
+         break;
+     }
+ }
+diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
+index 85539ce6c5..0871795218 100644
+--- a/xen/arch/x86/cpu/vpmu_intel.c
++++ b/xen/arch/x86/cpu/vpmu_intel.c
+@@ -924,7 +924,22 @@ const struct arch_vpmu_ops *__init core2_vpmu_init(void)
+     }
+ 
+     arch_pmc_cnt = core2_get_arch_pmc_count();
++    if ( arch_pmc_cnt > 8 )
++    {
++        printk(XENLOG_INFO
++               "VPMU: Too many general counters (%u), emulating 8 registers\n",
++               arch_pmc_cnt);
++        arch_pmc_cnt = 8;
++    }
++
+     fixed_pmc_cnt = core2_get_fixed_pmc_count();
++    if ( fixed_pmc_cnt > 3 )
++    {
++        printk(XENLOG_INFO
++               "VPMU: Too many fixed counters (%u), emulating 3 registers\n",
++               arch_pmc_cnt);
++        fixed_pmc_cnt = 3;
++    }
+ 
+     if ( cpu_has_pdcm )
+     {
+-- 
+2.53.0
 
-Jan
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
