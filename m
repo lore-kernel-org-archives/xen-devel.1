@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF9FFD4F08
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:18:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1250520.1548017 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABBAFD4F08
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Mar 2026 17:18:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1250548.1548034 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00iR-0003JF-OX; Tue, 10 Mar 2026 17:17:55 +0000
+	id 1w00io-0004VD-7c; Tue, 10 Mar 2026 17:18:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1250520.1548017; Tue, 10 Mar 2026 17:17:55 +0000
+Received: by outflank-mailman (output) from mailman id 1250548.1548034; Tue, 10 Mar 2026 17:18:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w00iR-0003J6-Kj; Tue, 10 Mar 2026 17:17:55 +0000
-Received: by outflank-mailman (input) for mailman id 1250520;
- Tue, 10 Mar 2026 17:17:54 +0000
+	id 1w00io-0004Ur-4v; Tue, 10 Mar 2026 17:18:18 +0000
+Received: by outflank-mailman (input) for mailman id 1250548;
+ Tue, 10 Mar 2026 17:18:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eHsH=BK=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1w00aM-0001Q4-HC
- for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:34 +0000
+ id 1w00aQ-0001Q4-I4
+ for xen-devel@lists.xenproject.org; Tue, 10 Mar 2026 17:09:38 +0000
 Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
  [2a00:1450:4864:20::335])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e86f8024-1ca3-11f1-b164-2bf370ae4941;
- Tue, 10 Mar 2026 18:09:33 +0100 (CET)
+ id ea6f992a-1ca3-11f1-b164-2bf370ae4941;
+ Tue, 10 Mar 2026 18:09:36 +0100 (CET)
 Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-48529c325f0so30678765e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:33 -0700 (PDT)
+ 5b1f17b1804b1-4853510b4f3so41190585e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Mar 2026 10:09:36 -0700 (PDT)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.31
+ 5b1f17b1804b1-485359bf807sm119619845e9.2.2026.03.10.10.09.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 10:09:31 -0700 (PDT)
+ Tue, 10 Mar 2026 10:09:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,42 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e86f8024-1ca3-11f1-b164-2bf370ae4941
+X-Inumbo-ID: ea6f992a-1ca3-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773162572; x=1773767372; darn=lists.xenproject.org;
+        d=gmail.com; s=20230601; t=1773162576; x=1773767376; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dla2ZfjKuAdtGf39njgNy8xyCVJufRaAAQSeRsdKKdA=;
-        b=RIb/tv4cYnIPfFle98vInh+ohr451UXDC/EyxAOwEMmzdq2mKFZeiAqiXpHz1I7l5A
-         N4T/ncLVrATIdFPF+KY6pzb0aYbWzoe6GaXioto//Ofiv9AP5M/Fk+lpfIZRx46l1OXO
-         /Jb36T0qPXvwryMlZc5z1yb4Ol2uJ+IQZxHdWccwVL5jCaO2INmKkLTJhzBkAJB+ziHF
-         6w4vWW7qgN4uceQ86Zc5/8CAXWrgXNzmXdXmB7cZgHR/TaAJd8GpozNgbe98GrtyiQOW
-         LQ3+YKnewLEGxXBx2q47yL5AqX16ohdT5T5cGS+AWOw7UhnbNCkmzp0N9gE8vFUOj/rt
-         1EGg==
+        bh=yJVP2CNX14UgxmTAWNMtAQ5gdpc3OGAi5Vg/Vni1k8k=;
+        b=gLgGsN8SmUSsWitN/PB72s1+nqVMlU3K4dhUR7Y0ngWHxHby5cakYuynZMNdvMXGYz
+         qoOmFWXtorZE/9IJyvBzNk6vTtyCkRmkjlMPX19A5Jk1UIFeWLBmCGXh6zJ+MKtJJty9
+         lvmKGn4/ZYKLXDgQwsi7WHmy373b8H9+G4LiuH5PmTdfLSjJNfJKa5o3td7f+B/AVlmq
+         SjMDkOtlR/W40ht91XOjZIEa+lI3E5AKTjUf2Wcfagb1MHoxpryG1lEUMarZTWfTz7r+
+         hIfUDMuJTxZbHPeTePlegX419LD1lIYHawBTaIvOw7PpD+IPSsSWIZDqgDSO5/b55wlL
+         9Hqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773162572; x=1773767372;
+        d=1e100.net; s=20230601; t=1773162576; x=1773767376;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=dla2ZfjKuAdtGf39njgNy8xyCVJufRaAAQSeRsdKKdA=;
-        b=lRN+lRlSQ67kytKB7gVJSz/Tx4zZCawruhHr6LgV0t1uSsMtVKu+OByQRA9FOy+To+
-         EorKqrA2rbPGTKJ/pqIBoHzSLVxURsjpAvBPkYTpQhLg5JbUqnTRm3SUxRopYMbxo3dz
-         JqlUp01WJEfMqxSzdn+ggsge90JJ2yBnQkP0xenUWHCe2avRpgv/s0PqgZYwoazORlBA
-         YUhqF57NyJHDbkW3Svgw8rpsCyqIDN09yXlYCfeDyMRojGXhoWIWzJEkmKbw7FmstwwM
-         GKwlU37rs1YCZWh8j58npqM6jYGxNgk9u7p1HuW1ETmMaafF+iEcVNNbnmNxNAxJUJkY
-         DzSw==
-X-Gm-Message-State: AOJu0YxYNN4ctG4lCMHCbzmJp3aEyvA9Ky+iu67+G+qG3+qvR2Ib9zl5
-	xzVrng4Qf5kVAAvXgyj8+HPM8S/6JaRKlUkr98De8nAKhAcctt6PdPefMRIRNMMh
-X-Gm-Gg: ATEYQzy2J2cgC/xJ68DXEViZb6l6TESe3/fjBpj/y+JAJ6j2Rjm8ByZ5ux8Gif8KoX+
-	XtwDb1LOZcnz5agsb87JAJso1CEe13YOCJtWxH48j74sbAQKS39LxGlP9/3uMM27g7eQUW2h6XR
-	lPNBhGgxVdR1R0fRdVy736D0nzDZbVi2yJ7f7a4bxeSm6mj/beHLSr1wSO6V0Mf9xzuIBraJGo+
-	DbAyrDUoN3mZde4ltqrYaGu2oLK74rim8fRh2hDYSdb2ptjWROUZCqqLcLsbGQeU+X6ghonlSUL
-	XJk9EKGPI5zQkgPlfVFwqj6pCwgyIStoy03ySFguhlyqHVECarzliRS+/g17FNNGXsWmhvZitSs
-	dhHtqXgRzGYamh+GYVjXZGTbosvTieldk3d1Dt29V8mrAoPV4rEx3mEa9gnoQPX6Vvn3qhlhq35
-	sfR9WHQBPx06QGRuuYTbSEbMiN0AM2mTfH+URL36i6O9LtwNInu8oOchFXqEX0gC1obg==
-X-Received: by 2002:a05:600c:46c4:b0:485:304a:58cd with SMTP id 5b1f17b1804b1-485304a5a00mr211584565e9.4.1773162571955;
-        Tue, 10 Mar 2026 10:09:31 -0700 (PDT)
+        bh=yJVP2CNX14UgxmTAWNMtAQ5gdpc3OGAi5Vg/Vni1k8k=;
+        b=PI0WoY1KdrYkmC94pZmdh8B4TmZswHwtcDXjGs2tT2BgQdEnp2pLjpi11JikqWdYiT
+         gEaQUjz0OQQwxDHaMGDA2gd3/Frai2v6snROZtOFQ6N7iCXEoAO/sdDOPTPUWZyfIYa5
+         5aRB/btThnExKpsHseyvBXQxwoWbLK35rolV7SP3gO0nR+cFBZfk8OsN/8wEsotWNCx4
+         kkMd4ppUigRGE/eGGp2zqlcNYmurZ6yKgVw9aLA+ro+Qfj16OKGsVWA9ezAD4nIAra5/
+         kFG9TSMiK/954VVi1S4FBTrytLS+By2FPPPQAJ9fXNvcgmC3TSs0W3h3z6A+MkZ/mHeP
+         SoHQ==
+X-Gm-Message-State: AOJu0Yz8gMkYhuzA5lxjyzLBarABcYRWq+0g2LI+919IzFr1ZSL9VdZo
+	Y82NJUZVyiwtlapKY4p+J+NsnARpbMFg/1cbvxCjF8AlOwbYTNgcLZs72Qmfnmtc
+X-Gm-Gg: ATEYQzzutfvmvGRD+M8AIosLcyxvDo11ODD2zPcWQfhAQzEF8QNKI4ZgreR9STffxtB
+	r2rcyjedaOqT70a2y7f6tB1L2oo0O5R/GAhJxa0w18QolZEB6mk+3MoRjuhFdFnoT9CBsVjSUNC
+	7PA6tSxvoofrg7XmbyxXd5ZZ4SpUQm196pbm3hwxfj662me1bweRYmlvzJn/UIDGqg3c5h8wXm1
+	I9RRRJfclDTOBwkv5QWehrz11PKS47E3bkqlsCBZrfpcLH39EvBoJhR3uMOsefSxwUEc11fTZ1k
+	meP5boI4XwsJa4wRsTpEQBcK7ERmwD4mX41Zf+WntgbYROBk9o6zmbE12oSjek2MsGqZGF9LWqJ
+	ODmd5Ky/5D4VElxQALrHbQp6TqDRyR+fPXwJ2Uyjb2uTUx2R8NIApyKNbYX+ze+AW5wLryVgvkr
+	ar6wRq+h09NKlN2gySZ+t6gJ6hm055yd57YTrm/UfUrdv89coiuFbNi+tcZ4UWFwEyQRP0SrqbK
+	ZHfPqAS
+X-Received: by 2002:a05:600c:6306:b0:485:40ed:2d1 with SMTP id 5b1f17b1804b1-48540ed03fdmr88457825e9.17.1773162575630;
+        Tue, 10 Mar 2026 10:09:35 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,250 +97,55 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 19/27] xen/riscv: emulate guest writes to virtual APLIC MMIO
-Date: Tue, 10 Mar 2026 18:08:52 +0100
-Message-ID: <e29eace5006929e61da347814b9759896d179e28.1773157782.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 22/27] xen/riscv: implement init_intc_phandle()
+Date: Tue, 10 Mar 2026 18:08:55 +0100
+Message-ID: <b0669c89d963c31426acb239bc7c436c13d6ba45.1773157782.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-RISC-V guests program interrupt routing by writing to APLIC registers.
-When APLIC is virtualised, Xen must intercept these MMIO writes and
-translate them into updates of the virtual interrupt controller state.
+Implement init_intc_phandle() to read phandle of interrupt controller
+node and save it in kernel->phandle_intc for the future usage during
+creation of guest interrupt controller node.
 
-Introduce vaplic_emulate_store() to validate guest APLIC accesses and
-apply only those changes that are permitted by the domain’s authorised
-interrupt bitmap. Writes targeting unauthorised interrupts are ignored,
-ensuring that guests cannot affect interrupts they do not own.
-
-APLIC TARGET writes are rewritten to reflect the effective interrupt
-delivery configuration, depending on whether the domain operates in
-direct (isn't supported by Xen) or MSI mode. This ensures that
-guest-visible routing requests are correctly mapped onto the underlying
-virtual interrupt topology.
-
-Unexpected or unsupported register accesses are treated as fatal, as
-they indicate a emulation bug.
-
-Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/intc.h |   4 +
- xen/arch/riscv/vaplic.c           | 169 ++++++++++++++++++++++++++++++
- 2 files changed, 173 insertions(+)
+ xen/arch/riscv/dom0less-build.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index e6b6c179415a..92a74eede4a0 100644
---- a/xen/arch/riscv/include/asm/intc.h
-+++ b/xen/arch/riscv/include/asm/intc.h
-@@ -56,6 +56,10 @@ struct vintc_ops {
-     /* Initialize some vINTC-related stuff for a vCPU */
-     int (*vcpu_init)(struct vcpu *vcpu);
+diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
+index 312c5d7d4979..180d653e5780 100644
+--- a/xen/arch/riscv/dom0less-build.c
++++ b/xen/arch/riscv/dom0less-build.c
+@@ -2,9 +2,26 @@
  
-+    /* Emulate store to virtual interrupt controller MMIOs */
-+    int (*emulate_store)(const struct vcpu *vcpu, unsigned long addr,
-+                         uint32_t in);
-+
-     /* Check if a register is virtual interrupt controller MMIO */
-     int (*is_access)(const struct vcpu *vcpu, const unsigned long addr);
+ #include <xen/fdt-kernel.h>
+ #include <xen/init.h>
++#include <xen/libfdt/libfdt.h>
  
-diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
-index 82e74a609ee6..5540b4884179 100644
---- a/xen/arch/riscv/vaplic.c
-+++ b/xen/arch/riscv/vaplic.c
-@@ -20,6 +20,16 @@
+ #include <asm/intc.h>
  
- #include "aplic-priv.h"
- 
-+#define APLIC_REG_GET(addr, offset) \
-+    readl((void *)((vaddr_t)(addr) + offset))
-+#define APLIC_REG_SET(addr, offset, value) \
-+    writel(value, (void *)((vaddr_t)(addr) + offset))
-+
-+#define AUTH_IRQ_BIT(irqnum) (auth_irq_bmp[(irqnum) / APLIC_NUM_REGS] & \
-+                              BIT((irqnum) % APLIC_NUM_REGS, U))
-+
-+#define regval_to_irqn(reg_val) ((reg_val) / sizeof(uint32_t))
-+
- struct vaplic_priv {
-     /* Contains a legal interrupts for a domain */
-     uint32_t auth_irq_bmp[APLIC_NUM_REGS];
-@@ -127,6 +137,164 @@ int vaplic_map_device_irqs_to_domain(struct domain *d,
-     return 0;
- }
- 
-+static void vaplic_dm_update_target(const unsigned long hart_id, uint32_t *iprio)
++int __init init_intc_phandle(struct kernel_info *kinfo, const char *name,
++                             const int node_next, const void *pfdt)
 +{
-+    *iprio &= APLIC_TARGET_IPRIO_MASK;
-+    *iprio |= (hart_id << APLIC_TARGET_HART_IDX_SHIFT);
-+}
-+
-+static void vaplic_update_target(const struct imsic_config *imsic,
-+                                 const int guest_id,
-+                                 const unsigned long hart_id, uint32_t *value)
-+{
-+    unsigned long group_index;
-+    unsigned int hhxw = imsic->group_index_bits;
-+    unsigned int lhxw = imsic->hart_index_bits;
-+    unsigned int hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT * 2;
-+    unsigned long base_ppn = imsic->msi[hart_id].base_addr >> IMSIC_MMIO_PAGE_SHIFT;
-+
-+    group_index = (base_ppn >> (hhxs + 12)) & (BIT(hhxw, UL) - 1);
-+
-+    *value &= APLIC_TARGET_EIID_MASK;
-+    *value |= guest_id << APLIC_TARGET_GUEST_IDX_SHIFT;
-+    *value |= hart_id << APLIC_TARGET_HART_IDX_SHIFT;
-+    *value |= group_index << (lhxw + APLIC_TARGET_HART_IDX_SHIFT) ;
-+}
-+
-+#define CALC_REG_VALUE(base) \
-+{ \
-+    uint32_t index; \
-+    uint32_t tmp_val; \
-+    index = regval_to_irqn(offset - base); \
-+    tmp_val = APLIC_REG_GET(priv->regs, aplic_addr) & ~auth_irq_bmp[index]; \
-+    value &= auth_irq_bmp[index]; \
-+    value |= tmp_val; \
-+}
-+
-+static int cf_check vaplic_emulate_store(const struct vcpu *vcpu,
-+                                         unsigned long addr, uint32_t value)
-+{
-+    struct vaplic *vaplic = to_vaplic(vcpu->domain->arch.vintc);
-+    struct aplic_priv *priv = vaplic->base.info->private;
-+    uint32_t offset = addr & APLIC_REG_OFFSET_MASK;
-+    unsigned long aplic_addr = addr - priv->paddr_start;
-+    const uint32_t *auth_irq_bmp = vcpu->domain->arch.vintc->private;
-+
-+    switch ( offset )
++    if ( dt_node_cmp(name, "intc") == 0 )
 +    {
-+    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
-+        CALC_REG_VALUE(APLIC_SETIP_BASE);
-+        break;
++        uint32_t phandle_intc = fdt_get_phandle(pfdt, node_next);
 +
-+    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
-+        CALC_REG_VALUE(APLIC_CLRIP_BASE);
-+        break;
-+
-+    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
-+        CALC_REG_VALUE(APLIC_SETIE_BASE);
-+        break;
-+
-+    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
-+        CALC_REG_VALUE(APLIC_CLRIE_BASE);
-+        break;
-+
-+    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
-+        /* We don't suppert delagation, so bit10 if sourcecfg should be 0 */
-+        ASSERT(!(value & BIT(10, U)));
-+
-+        /*
-+         * As sourcecfg register starts from 1:
-+         *   0x0000 domaincfg
-+         *   0x0004 sourcecfg[1]
-+         *   0x0008 sourcecfg[2]
-+         *    ...
-+         *   0x0FFC sourcecfg[1023]
-+         * It is necessary to calculate an interrupt number by substracting
-+         * of APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
-+         */
-+        if ( !AUTH_IRQ_BIT(regval_to_irqn(offset - APLIC_DOMAINCFG)) )
-+            /* interrupt not enabled, ignore it */
-+            return 0;
-+
-+        break;
-+
-+    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
-+        struct vcpu *target_vcpu = NULL;
-+
-+        /*
-+         * Look at vaplic_emulate_load() for explanation why
-+         * APLIC_GENMSI is substracted.
-+         */
-+        if ( !AUTH_IRQ_BIT(regval_to_irqn(offset - APLIC_GENMSI)) )
-+            /* interrupt not enabled, ignore it */
-+            return 0;
-+
-+        for ( int i = 0; i < vcpu->domain->max_vcpus; i++ )
-+        {
-+            struct vcpu *v = vcpu->domain->vcpu[i];
-+
-+            if ( v->vcpu_id == (value >> APLIC_TARGET_HART_IDX_SHIFT) )
-+            {
-+                target_vcpu = v;
-+                break;
-+            }
-+        }
-+
-+        ASSERT(target_vcpu);
-+
-+        if ( !(vaplic->regs.domaincfg & APLIC_DOMAINCFG_DM) )
-+        {
-+            vaplic_dm_update_target(cpuid_to_hartid(target_vcpu->processor),
-+                                    &value);
-+        }
-+        else
-+            vaplic_update_target(priv->imsic_cfg,
-+                                 vcpu_guest_file_id(target_vcpu),
-+                                 cpuid_to_hartid(target_vcpu->processor),
-+                                 &value);
-+
-+        break;
-+
-+    case APLIC_SETIPNUM:
-+    case APLIC_SETIPNUM_LE:
-+    case APLIC_CLRIPNUM:
-+    case APLIC_SETIENUM:
-+    case APLIC_CLRIENUM:
-+        if ( AUTH_IRQ_BIT(value) )
-+            break;
++        if ( phandle_intc != 0 )
++            kinfo->phandle_intc = phandle_intc;
 +
 +        return 0;
-+
-+    case APLIC_DOMAINCFG:
-+        /*
-+         * TODO:
-+         * The domaincfg register has this format:
-+         * bits 31:24 read-only 0x80
-+         * bit 8      IE
-+         * bit 7      read-only 0
-+         * bit 2      DM (WARL)
-+         * bit 0      BE (WARL)
-+         *
-+         * The most interesting bit for us is IE(Interrupt Enable) bit.
-+         * At the moment, at least, Linux doesn't use domaincfg.IE bit to
-+         * disable interrupts globally, but if one day someone will use it
-+         * then extra actions should be done.
-+         */
-+
-+        printk_once("%s: Nothing to do, domaincfg is set by aplic during "
-+                    "initialization in Xen\n", __func__);
-+
-+        return 0;
-+
-+    default:
-+        panic("%s: unsupported register offset: %#x\n", __func__, offset);
 +    }
 +
-+    APLIC_REG_SET(priv->regs, aplic_addr, value);
-+
-+    return 0;
++    return 1;
 +}
 +
- static int cf_check vaplic_is_access(const struct vcpu *vcpu,
-                                      const unsigned long addr)
+ int __init make_intc_domU_node(struct kernel_info *kinfo)
  {
-@@ -158,6 +326,7 @@ static const struct vintc_ops vaplic_ops = {
-     .vcpu_init = vcpu_vaplic_init,
-     .map_device_irqs_to_domain = vaplic_map_device_irqs_to_domain,
-     .is_access = vaplic_is_access,
-+    .emulate_store = vaplic_emulate_store,
- };
- 
- static struct vintc * __init vaplic_alloc(void)
+     intc_make_domu_dt_node(kinfo);
 -- 
 2.53.0
 
