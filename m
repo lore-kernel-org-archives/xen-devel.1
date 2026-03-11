@@ -4,49 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA627112583A
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Mar 2026 14:27:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1251170.1548406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ADC51125839
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Mar 2026 14:29:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1251212.1548450 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0KX9-00087N-Es; Wed, 11 Mar 2026 14:27:35 +0000
+	id 1w0KYV-0002BX-3u; Wed, 11 Mar 2026 14:28:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1251170.1548406; Wed, 11 Mar 2026 14:27:35 +0000
+Received: by outflank-mailman (output) from mailman id 1251212.1548450; Wed, 11 Mar 2026 14:28:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0KX9-00087G-Ay; Wed, 11 Mar 2026 14:27:35 +0000
-Received: by outflank-mailman (input) for mailman id 1251170;
- Wed, 11 Mar 2026 14:27:33 +0000
+	id 1w0KYV-0002BP-0S; Wed, 11 Mar 2026 14:28:59 +0000
+Received: by outflank-mailman (input) for mailman id 1251212;
+ Wed, 11 Mar 2026 14:28:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tK7a=BL=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1w0KX7-00087A-P6
- for xen-devel@lists.xenproject.org; Wed, 11 Mar 2026 14:27:33 +0000
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [2a01:111:f403:c107::3])
+ <SRS0=Qrm0=BL=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1w0KYU-0002BH-Ad
+ for xen-devel@lists.xenproject.org; Wed, 11 Mar 2026 14:28:58 +0000
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [2a01:111:f403:c100::f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6fa6765c-1d56-11f1-b164-2bf370ae4941;
- Wed, 11 Mar 2026 15:27:31 +0100 (CET)
-Received: from SN7PR18CA0028.namprd18.prod.outlook.com (2603:10b6:806:f3::11)
- by IA4PR12MB9787.namprd12.prod.outlook.com (2603:10b6:208:54d::6)
+ id a2930dc0-1d56-11f1-b164-2bf370ae4941;
+ Wed, 11 Mar 2026 15:28:56 +0100 (CET)
+Received: from SA9PR13CA0173.namprd13.prod.outlook.com (2603:10b6:806:28::28)
+ by MN0PR12MB6053.namprd12.prod.outlook.com (2603:10b6:208:3cf::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Wed, 11 Mar
- 2026 14:27:25 +0000
-Received: from SA2PEPF0000150B.namprd04.prod.outlook.com
- (2603:10b6:806:f3:cafe::bd) by SN7PR18CA0028.outlook.office365.com
- (2603:10b6:806:f3::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.26 via Frontend Transport; Wed,
- 11 Mar 2026 14:27:20 +0000
+ 2026 14:28:50 +0000
+Received: from SA2PEPF00001508.namprd04.prod.outlook.com
+ (2603:10b6:806:28:cafe::58) by SA9PR13CA0173.outlook.office365.com
+ (2603:10b6:806:28::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.22 via Frontend Transport; Wed,
+ 11 Mar 2026 14:28:48 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF0000150B.mail.protection.outlook.com (10.167.242.43) with Microsoft
+ SA2PEPF00001508.mail.protection.outlook.com (10.167.242.40) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Wed, 11 Mar 2026 14:27:24 +0000
-Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ 15.20.9678.18 via Frontend Transport; Wed, 11 Mar 2026 14:28:48 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 11 Mar
- 2026 09:27:22 -0500
+ 2026 09:28:47 -0500
+Received: from [10.71.194.215] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 11 Mar 2026 09:28:46 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,105 +61,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6fa6765c-1d56-11f1-b164-2bf370ae4941
+X-Inumbo-ID: a2930dc0-1d56-11f1-b164-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=asou78lM4f7GfT9vCJ7pDT2IZmTwaOZ4288Qw/HrI40fgr8i9emYWTFv5N7acciymhCozWwjpSkTJbwPc/qsOGs8EpbRRvCyANvYwX7Lgqh240H1wmROKZvSyU9Ha6q6P8Ez4K3kIGBOjE1gUYDqxfeEeeHu6ROlivEOiHF7YYkqLUdJoEXbEafjC7/9p3xOihtz2LkvG0+sRG36R5mejwblu8T4/+fSwmkj6AluQ+w5l6Z5eB8TopmaUDtm/AbzSPVWPy5Ouq5KJfNmygJn4J+XSqBBD2AYuETfNYaT+u92gpwHw/tKaWhYIQJYFRfgJHgsiEqYqpTM2yk0IkZzEg==
+ b=l8qgotWeY4JcGfaWTWkqNpf0tPh9GWygkuU0Y5fp4jcItiNM0lhISiDydHrMpQHmj/3MKDcioH+AIN7VHwcXtr1AU/Jm2rBGpBnY6LOOeL7mFk5DgcZd9VolB8zSfXn6w8Y1on0v2H/IdmEP3kmwnEdNRgyo31/A0CXEXdvhTtFbW3+UuT5UTcDsIpy4DqD+msuzYc47Wtoybx3PJhvllD6+BA/HcXxZMdIGW6H9ypjNoaCJwj+U3STxxQYZdswLxdv7/SjSaDiJt8LpouSfacZmPboygBmNvW5cxlP1Lz26Gb3rCdhlN0wWFA3xkUJHIpAu/bq8vGmsi+21MvAF5Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rX85h1Hwc8oqInc2hnINB1xhgtpkPVwSbXpHMzhPg3I=;
- b=DIzvZYmMJMx+6RqGSLoQmmUoEfJ8soVUC4iceCS9iaN5m1umdYqmBnMmQOqa2kw3MEMdxD7wUQlyrczKsQGbGnKSSaOqHPUxQd5WkT3swOxDkbvSw0Gm0qb+JbXAF/OKrnLzLQCQ8KUYq9OyyXyJ+XzlNobUmbBQVxw19W66yMLTjBNwYYhHcV4Yh69MDnOEvUtp3CBBuThFLEgnWf2kSIBBNU0Fo6oXvPit7fSutLyDrSy9DHjCQmF6ID1nRLYnnykiyXI6NTJNN5T0hTn7aeNYifJqGCublJWYp4eBX04vffZZhmEHt2X8218+poQ9d75JCUPCJLEaIe6s9w/FxA==
+ bh=h2r0/8ej73WI0PEnvNExoigrPoI3S4hHyeVt31lA25I=;
+ b=E10sITTDsFYcRe1UWhcyZTcNxVi3I5JFBi0yVGRoCZX1rw6DY+T+QHMMxZYW9zqIWUUB1gB7oJG4I6w2l97Inv8BUgZ5OONY3ucl6xUO+9EWvJarNtTNLCsrD39+ZEf36G01vPh2Cz3LbXQ+KqYNg8sqpxQtIv0niRK1tyT3BPdbcy0MULz/racnZ3CiK0AKi9RxA7L5jiFDEbCEhYdaARC/e/RWWER4SBvZRkDx8GOHVQG81+Oxjhko71qoGaVMrTqfcu3gYgVFIzBCh5HYNqBejLPnQvqHdIJohrXYm+EADUVwLq432zPlniL5xNh0PrDJiA4BDiPxggLgdJfdmQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rX85h1Hwc8oqInc2hnINB1xhgtpkPVwSbXpHMzhPg3I=;
- b=Na4zcyltr74ruaBij/ZOEKdLYs8XcmC36iR/hhaJbjY6U7vZBBQL7vcZh481dzLyc3D/ZYjpkNG2qXzqAhc82Ow6RAeHqGH8tlMTtQUFroUdKVzLeHPR2Ys+NOAwlhYkY8xLkbS7NZv7PIMj3Ix9pQ/o7M/ehEfo4C9Tg1KJw04=
+ bh=h2r0/8ej73WI0PEnvNExoigrPoI3S4hHyeVt31lA25I=;
+ b=5hb1Gdps4PCLXD6kh0GFcm8oTxiECEUcOkP9U9vgQU4gQ1fYN/q2ooHDBC5gnuOlz3MxMUArmE5pvNe0z7MEoGygpkGSr6nvpfIjfiFwJGmZmBcEPIA87EoTjQXC5cYbDDOJDDpoU3jiOYSKLpqC8zscYJEDjqrOIn4O5fLVEiU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Oleksii Kurochko
-	<oleksii.kurochko@gmail.com>, Community Manager
-	<community.manager@xenproject.org>, Jan Beulich <jbeulich@suse.com>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jason
- Andryuk" <jason.andryuk@amd.com>
-Subject: [PATCH v4 0/4] x86: Drop cross-vendor support
-Date: Wed, 11 Mar 2026 15:27:03 +0100
-Message-ID: <20260311142711.16754-1-alejandro.garciavallejo@amd.com>
-X-Mailer: git-send-email 2.43.0
+Message-ID: <db36c55b-d9a1-448d-bc53-64a9d5254bc8@amd.com>
+Date: Wed, 11 Mar 2026 15:28:41 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/arm: fix unmapped access trapping on GICv2 hardware
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+	<xen-devel@lists.xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+References: <20260205190128.38716-1-stewart.hildebrand@amd.com>
+ <f91e0f7e-9afe-40bd-8e44-4aadbdf8e4b0@amd.com>
+ <1e8f9976-b0b6-47b1-88c0-690d4f1589ce@amd.com>
+ <8ccde8eb-d8a4-411c-bd6e-9c3fcea1150f@amd.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <8ccde8eb-d8a4-411c-bd6e-9c3fcea1150f@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF0000150B:EE_|IA4PR12MB9787:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21fd5987-e9e2-4883-b2d4-08de7f7a50b4
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001508:EE_|MN0PR12MB6053:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59e88267-9d35-4736-1cdb-08de7f7a8262
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|1800799024|376014|82310400026|13003099007|56012099003|18002099003;
+	BCL:0;ARA:13230040|376014|1800799024|36860700016|82310400026|22082099003|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	VaBGWPmJUjXglkNEQXMs6H5QRDFb/PbrWizRY+8V+omFt7A4Rd2puJ4uYFbGRkaTOxvB0H1+ICVjrOZptKSIE+hXCMxE1eJYTy/2u/Z8GQMyVsGlLseIvT+hU/sBfA/sRM9evXONP5i8SuAHKIZWC4yw0hZdZCb9RpWeD5EA81f1USyKCPlrEBSpNpootC17OOdBDWrG7pyi0J6LOGX0uVyhAo58ZobKC7JyWyAf0DUBSwhN/I3aqZ2BQgjgQxK5xQtvCy9oQFKwmzkAKitNdjL2zbPQINcHS9rir6RVnO2NoIBMJdvEmr95OT9u4ABuNN6W7v3VpsLFeVryyvC9aJTDQjrNMwz//jYuuuT65dHuNIT42obEd1Exdz3mQaHHGqWo61Kmhq2w5qtbWUqWHRz+z6gERzSifqj5J0OL57whcBXHhLUtjPUl6nxI30sWYDayAerMuVkWGHiOcx8XnjkPE2en/u9fNMmM9RTR/hhoC6O47H+ardr64nUwi0cXOsbhcEN93OsMdOAR1hq+HscoLuWIMEB4eVXU/h0MZwkQqRoaZFjCQKspxb13FaSuiFdK32MVJXMZaw9Q9vI6KOY8PapFJGT07A8Ilnav4tSSY/wCyE2GCOJZ801rd/nVgN+XKVOPCU/vmaQySBGySe24VfZB/dMIdGtOe9rK3MDZtrJtdM2/2LpAtzSVi2J8gW6sRO1FSSJlu2r5oJ0p3WEOYJdKt0Ckdt6aKBlt7EXQs8Y2fD7Qn1D5fXLNhR4Ln0y7mG07la66uJbLYHRkOK8Xn3a7Q0Srb5QrqeLnALY=
+	gzOod23MWwk/NllvNAIr5qa+/Wv6smM5H299p0Zql1OhCcQ5MhcWwj2tQxDQp2ump7TYFw2+PpHOFvnSL88uRceq6agKgFNu+LIvns1CCyYmZJJ3Nd5h7ftC2LXP49ERo8xw0Ak3x3OJVu3ke7vTXRZyxplalYpCSOvW0emeSomiNRxllaVPy1vbYCDuIC3E2f+y7x6FO94D04WnKVhk/nYlmf2KnWrkunEc6k5+nSej6OwMw7xsVuOxxZhTyL4xn+P7NSnl0nCGJ91KnDT6XtxntCoJbyagisLj7g8lFIKwCtdTxBH7dwWb5/MNkz9/g+eWaOXbNmTyAUhAe0woqcFV/mEPWqUvO21GG0s69lkmF1QD0OGMIAzgMX/fXxspGodls38rx6ZRqpo4UVbgJvVDNkVdCDdMgQgMI0PIplBUAuhx0SgRAlW5us7WQ1BlP38BgWHo1wofCK+2uqiS3veEbjvPdz4kjXoZlhgb3I1gqRYlDfkmMANaHeIJwPs8lj1GA1w4rNvp0RJ9dEiuq0GQAkMg9/X9VLcl/eztCjA5x0x317WxTRPVl9+C15OH9rvYBKoA2pUOimvBFj4tI0c8nHvAVf0D1Jg41p1nC+2Dc88gQgX057+HWvvQpritoqQaOQMBbUn8e9/RJjqqDJqA37JFAWyNgCRpKSycxpgak/Wg4PavP9BxUuWP+y5Gli7VEDyD3WxwoPIfbT14vs0/A53sxh2NngDpUSglwpI1lGpihp6gFGZthbUy49oxOwCTpZWXw16PrYg2/9uUPg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(13003099007)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	6lLTd0OS17ue2O07i1G9Ty+wncOXkJJ6KhR6V3G49vtEs2TYFRsNWxSdUlEakNK5VZvZvNU/9V1Zy8/SIGK7n35RDGx38uTftnY4WiDkm2tpgT0H5Uzyc2XU1jKLkfP5kQ1KMJV22LhXrkRC3VQMfaGhXkkgDKcxt0BySpSdvVCvxOHI61cQTKiy1kHYSLfpsQOqwAA/j4wBpFdykg5zVcGWMHIinxeYkofT6LEKbbSZjc7oOkcd+yKxz8DLkTjmukZvjDIrlnsTmFaZ5YdPAvkfeXb4qxL8So5ywUGn24rJoYZhFptMRM5Vq+HDKG2VFwJjKAOZSzXjilYPxs/kF/sWTs3X9Z6BGFYqV4cH07yPKNPrATctmOX4DMiPL3sDxT4f9RISkcs5aa+Em7FfYks9MxsKymo9tuC+l20koKA/nF0r9tmc6Wmo1kYjedBp
+	QkvT2UDnJ+Sh3D9iCfOKp+St4uGW6ExeFNcdokG6+hOCiQN8TNo3+SEkWQ5M0H0A2tzG4mhCwMF+rqvyULlPHju0KNEyTOXUInFfLpn0FPu+IgbeDDlo986VfQEq8FpNKqScCB/+HEQfjWoXwyfoyIOm/yJx5beJ8SX0mFrpoYkACpw7fHhSYw5lTl1W8Jgl5NajTumskydnbvIgcdK27pVMD4OZc20izv4+zyVkz++7eHgeIkUuVWEYsCcLJaMozWfDtn/CqA88PAv9RKQRlLpxybkC4/41gowKFqHK5LMn7kLJluE5nYvmORDOjyJOVnqTDepSSd7Lfr1zefKzM6R86MfPBSuahGzrKOJeNpFsS2CFcDIsO3UT/jH9eM7WGajjHFZkloxHzU2K0yCXZAqctPROfdOlw1Ok3NPImQreozZY4cTMNwYdqRCZjnHV
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2026 14:27:24.9314
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2026 14:28:48.3079
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21fd5987-e9e2-4883-b2d4-08de7f7a50b4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59e88267-9d35-4736-1cdb-08de7f7a8262
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF0000150B.namprd04.prod.outlook.com
+	SA2PEPF00001508.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR12MB9787
-
-Hi,
-
-Only patches 1 and 2 missing acks.
-
-v1: https://lore.kernel.org/xen-devel/20260122164943.20691-1-alejandro.garciavallejo@amd.com/
-v2: https://lore.kernel.org/xen-devel/20260205170923.38425-1-alejandro.garciavallejo@amd.com/
-v3: https://lore.kernel.org/xen-devel/20260213114232.42996-1-alejandro.garciavallejo@amd.com/
-pipeline (green):  https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2378378894
-
-Cheers,
-Alejandro
-
-Alejandro Vallejo (4):
-  x86: Reject CPU policies with vendors other than the host's
-  x86/hvm: Disable cross-vendor handling in #UD handler
-  x86/hvm: Remove cross-vendor checks from MSR handlers.
-  x86/svm: Drop emulation of Intel's SYSENTER behaviour on AMD systems
-
- CHANGELOG.md                             |  5 ++
- tools/tests/cpu-policy/test-cpu-policy.c | 27 +++++++++
- xen/arch/x86/hvm/hvm.c                   | 73 +++++++++---------------
- xen/arch/x86/hvm/svm/svm.c               | 45 +++++++--------
- xen/arch/x86/hvm/svm/vmcb.c              |  3 +
- xen/arch/x86/hvm/vmx/vmx.c               |  3 +-
- xen/arch/x86/include/asm/hvm/svm-types.h | 10 ----
- xen/arch/x86/lib/cpu-policy/policy.c     |  5 +-
- xen/arch/x86/msr.c                       |  8 +--
- 9 files changed, 91 insertions(+), 88 deletions(-)
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6053
 
 
-base-commit: bfb33fa6d4eb4110cd7dd47ec71d2e550739e126
--- 
-2.43.0
+
+On 11/03/2026 15:09, Stewart Hildebrand wrote:
+> On 2/18/26 12:16, Orzel, Michal wrote:
+>>
+>>
+>> On 18/02/2026 15:21, Stewart Hildebrand wrote:
+>>> Gentle ping.
+>> Sorry, I'm quite busy these days.
+>>
+>>>
+>>> To be clear, domU interrupts with vGICv2 are currently broken when
+>>> XEN_DOMCTL_CDF_trap_unmapped_accesses is not set.
+>>>
+>>> On 2/5/26 14:01, Stewart Hildebrand wrote:
+>>>> Since 4dbcb0653621, the vGICv2 CPU interface is mapped in a deferred
+>>>> manner. On domains with XEN_DOMCTL_CDF_trap_unmapped_accesses unset on
+>>>> GICv2 hardware, the vGICv2 CPU interface fails to be mapped. A visible
+>>>> symptom is that a domU gets stuck at:
+>>>>
+>>>>   [    0.177983] smp: Bringing up secondary CPUs ...
+>>>>
+>>>> Move the 2nd check_p2m earlier so it's prioritized over try_handle_mmio.
+>>>>
+>>>> Fixes: 980aff4e8fcd ("xen/arm: Add way to disable traps on accesses to unmapped addresses")
+>>>> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+>> I investigated whether the reordering is safe and it looks ok:
+>> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+> 
+> Thanks! Is there any other feedback? Is this ready for commit?
+It's ready, will commit tomorrow.
+
+~Michal
+
 
 
