@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4AB4105A583
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2026 11:22:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1252078.1548885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73673105A583
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2026 11:22:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1252080.1548895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0e72-0007LK-4o; Thu, 12 Mar 2026 11:21:56 +0000
+	id 1w0e74-0007g3-LV; Thu, 12 Mar 2026 11:21:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1252078.1548885; Thu, 12 Mar 2026 11:21:56 +0000
+Received: by outflank-mailman (output) from mailman id 1252080.1548895; Thu, 12 Mar 2026 11:21:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0e71-0007KS-W3; Thu, 12 Mar 2026 11:21:55 +0000
-Received: by outflank-mailman (input) for mailman id 1252078;
- Thu, 12 Mar 2026 11:21:54 +0000
+	id 1w0e74-0007ft-GR; Thu, 12 Mar 2026 11:21:58 +0000
+Received: by outflank-mailman (input) for mailman id 1252080;
+ Thu, 12 Mar 2026 11:21:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=17Qz=BM=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1w0e6z-0006gG-Vq
- for xen-devel@lists.xenproject.org; Thu, 12 Mar 2026 11:21:53 +0000
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [2a01:111:f403:c105::5])
+ id 1w0e73-0006gG-1e
+ for xen-devel@lists.xenproject.org; Thu, 12 Mar 2026 11:21:57 +0000
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [2a01:111:f403:c111::5])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a9874ec0-1e05-11f1-9ccf-f158ae23cfc8;
- Thu, 12 Mar 2026 12:21:51 +0100 (CET)
-Received: from BLAPR03CA0179.namprd03.prod.outlook.com (2603:10b6:208:32f::33)
- by LV8PR12MB9405.namprd12.prod.outlook.com (2603:10b6:408:1fa::22)
+ id ac67d48b-1e05-11f1-9ccf-f158ae23cfc8;
+ Thu, 12 Mar 2026 12:21:55 +0100 (CET)
+Received: from BLAPR03CA0173.namprd03.prod.outlook.com (2603:10b6:208:32f::35)
+ by DS5PPFD22966BE3.namprd12.prod.outlook.com (2603:10b6:f:fc00::662)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.7; Thu, 12 Mar
- 2026 11:21:42 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.6; Thu, 12 Mar
+ 2026 11:21:49 +0000
 Received: from MN1PEPF0000F0DF.namprd04.prod.outlook.com
- (2603:10b6:208:32f:cafe::36) by BLAPR03CA0179.outlook.office365.com
- (2603:10b6:208:32f::33) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:208:32f:cafe::ae) by BLAPR03CA0173.outlook.office365.com
+ (2603:10b6:208:32f::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.27 via Frontend Transport; Thu,
- 12 Mar 2026 11:21:37 +0000
+ 12 Mar 2026 11:21:44 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  MN1PEPF0000F0DF.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 11:21:42 +0000
+ 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 11:21:49 +0000
 Received: from xcbagarciav01.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 12 Mar
- 2026 06:21:39 -0500
+ 2026 06:21:46 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a9874ec0-1e05-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: ac67d48b-1e05-11f1-9ccf-f158ae23cfc8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pzFx4z92leE4X94xzu6vXFjM59CEBxe0fnTSy0wdRI6obVtU+DxheYnlV+yBGahDO0Uk6qZUL2RQWDcog3MxdadXcqWdBo6NnSVwTpAHVvDpf9OFRI/T+T6mLs7afU6r3IFI28zD6aklfsRz+mHDKd607I8Z834/afqFdCO9qwIvfbbOJsGyxLdY6Wp+u5SrvhrFEaBL+liuR8E0hSvOKTw7F6b+StW+yYgdVvsYp2mSPSn40F5YBsMjPaYVlmOm2P1633CIDIwhCYjDpURHd2H+b9y+6WpX8aj/5ASuAIB8nTRNV/BOKR1+jIiNXHfajSj9O6H6Ri/QhfEeYgbqeA==
+ b=SdwFOJLt9vlEHVBamaCRsdGomWgkR28q8jXTETF5GHnCNPqjGoDJdAFndp9JJoWrfCWVpUl2NDqxwAD3MJDJxWOqsHT5U7EXkxcgHF9JCu//OgmNxtFrj6ISbPZU0u6PCkCBmTtl9uscQZ/d0hzKXy23NbyPFr9Z3CmRdLGigtmGy2wH6hx82PSQby/TcrnjV5I0gYiEzeJtKbBwH7ujOUuZHGKsh9jES2E5dSscchqMH8T4r9SgAmhZ/bUYXiNSYIB1MzlYXQp12ybV/H9MbSXL7Rbv+LMrX7vu4P1X7rkDJtFYwwYcoXXJhW9f1GWis6+yn3/h2TedMdgz+qp+NA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wv5wvI380mS69M5JH7UHNf7qmRDw4qiA/tgGNcS4cFM=;
- b=feBmPoti15B5Q4AoZ1DKIEngV8URAIk6B44RRlrlEsJG+44j/1+t9l5lyQ8+xStRVkEfGsLKYfXMt1AFbw6iKnQK+oZalzQdOVFmh8chw4ImRZK5NZahB6pN3jsIOjrrafjKoBMNAY6GAU6Ld20MsoOl52JTY82IVSJeSyU9wMu+BSOpDK6AcoYPGXYnx872p2ugwsIJkT/qIWxkpp50ah1Mt3dsCoOw+mcfJeWlqzJD/kF7q/rvuuCIT928cT3tmqSS/64hMU0aZh0MOUQxyve5DwU2Am0YIIqUMzhOhHBaDPBFuqvwzvw3wGnPXpeXGhhdw0q4ke8Xpz1o0JDQZg==
+ bh=N3XZe9B6SBQbKn8ypeUZSmODNlvYz970OWYJkLumTS8=;
+ b=Zotl9oheACloDlcH4fuVeVA9pA8kTKNjs16BsFs/tKGQja2orxHsq1wFixX8KelCj3uJhDKDKjvoCKp+KYWioTv1DD7cMUEfm5+owSBS+E9SwWqTSc4lkFWf/BIPmcU2tdcaW6ukh+RDBvrsfmnOQPdkYZAIGzb4AZj0TMWDfDS4Rouu3RNKCHXLUKWXMgY78quJbIta9OhHd+B6FQtpl8jl0IRSBeg/FigYY/rxvjrUhAqGIFr++26vZ0/Awqe6vpg/VbVwxK/ri1W0z2J6ApSnvajgUZpF9N7lM68Lpc4sjhunzezmMCM0I0L8ZKP1cdfwR4rPHNZjGiJQw3/FaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wv5wvI380mS69M5JH7UHNf7qmRDw4qiA/tgGNcS4cFM=;
- b=GX/rSusZYPQm81Z6n0EQJKB3UAfJpaaUIq5ZR+RXWD0zW1LTbedBJ5qeDAfaDaRQyKmFGxB98VJPwGXQvPywhDhaSDeMYSzi7RfS5IkFCEIqveJuQbfWj0rW2VwaxqQ4kNBFQHILgmYCvaEF2RUm3EfV7XCvu50z5LcAq1GJlcs=
+ bh=N3XZe9B6SBQbKn8ypeUZSmODNlvYz970OWYJkLumTS8=;
+ b=I41yhbnbCCdgxN4HPe7jxHsRLs1+DJQrW9TQO00TYuJ/OSljlFN4UBfqukqJvevuauTZqYEflT6OLCOYSyc/G8Fyby3dhwRVh0SZ5ruM2gemQMqCL9ocIU9f/Da7TbK3vcP5ThSXoijyFo0PY74TtprOviLMjTNMqz4wj5b6QWw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -84,11 +84,10 @@ From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Jason Andryuk
-	<jason.andryuk@amd.com>
-Subject: [PATCH v5 2/5] x86/hvm: Disable cross-vendor handling in #UD handler
-Date: Thu, 12 Mar 2026 12:21:11 +0100
-Message-ID: <20260312112116.22563-3-alejandro.garciavallejo@amd.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 5/5] x86/hvm: Un-indent the HVM_FEP block in the #UD handler
+Date: Thu, 12 Mar 2026 12:21:14 +0100
+Message-ID: <20260312112116.22563-6-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260312112116.22563-1-alejandro.garciavallejo@amd.com>
 References: <20260312112116.22563-1-alejandro.garciavallejo@amd.com>
@@ -100,110 +99,99 @@ X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DF:EE_|LV8PR12MB9405:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3cfe8d4c-7893-4c72-3952-08de8029896d
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DF:EE_|DS5PPFD22966BE3:EE_
+X-MS-Office365-Filtering-Correlation-Id: a1bddbd4-34bb-46d9-c773-08de80298d9d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|376014|1800799024|22082099003|56012099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|36860700016|376014|82310400026|22082099003|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	tUoTV/kTkQL2wetZ09nm49C92ytV/0meKac80akq1LuKClxmq9qhlq0mUrHpDGsSlk7Hmd83EocIS+GYaINXV8JYH65CbgpUah8mHulqDFdr7ZtVC0WHFQDDPNLB8iDeLo3HEydWzBkEN6ux9dyre6zOoHxFrFY5K5RNmpylFf2t9hfeBkfRMUEdcmRo9Kdt2nZJ6eS5U4S6vQmCu7SYfrsEpkS4aSgDI8xaeLyZE2QCRpjI6Vl0Dl4kx0FX3/ad0MCflByk/a3jmwuJergu6ad287S2YKsawBWPx/pgkBUWEx23Lf1rWJK9GcOVVHpgqIclAzh7AOWTwJpqW2Uds09LUvfmYSxm5n5iZykq5mIMbQ6cLW3QAqlKCMWk3mDsHZoSNKqB19IbyR/HUhf7ID3/8a3+5bCk+/Cj6G4bq63HyMQEAVttmPpqW2fZrBsnVxquhFbnw2fTewxywFFBIEWJMRgx1FlTMkeTBjb0I1cL0QbSlNfrf+xKWcUTpAQpq9sygXeNv3vfnA4SLkTodqFZpjhad2Ryvjgdiz1rU0MTQK7TLgQSkkvB2uWCjkVBhcN9y6S5UXeymOGhzrjlM3PxUGITZmQBnyJ6GIGpFmYda9Lr9QexH/FyZPKs3XyGUHAGQqGAXMBcd/7eQJYZR8ohWsgpfQlqk22JePrpc/IQPImpEfpW2gfkGvMXj5wC6tk6+Kgrpb9qAko0W2OLvbvA5lt1L+eg6wyp+cxxA7dw0QIq1gXGEjBk1scw//DYbugKTBsodcZf0eGRLfX7XQ==
+	M80IomQrWaBTjaPrn8qRafC1MRET4Uc6BdN07XML7ADd693QHE5w2s9Cuo3TLolDUQ3EmEEeoKhKEIdYd1CN3W5+AMlwvYiKaCUYSHeIostRq1zQUsxAvFFEtWRDhyIcjVr2LovdS10gt2VFpyeLzoaNh3bZ260M9S0fVAFiQ066nCwbuY9+wwINvEgqbU/EQzj0UayNNZrlp8/Ezq71sZsQKoRGwP43Up8vgdIFB5Zxs8ofww+BRNCHNIV5MGLu0V9UNt3iFOlfR+fKimKl5VF3fVh58XPeik2nztJ4GJQ0UVSr+T+eGzEvQe7qOxH4yxVgWLeL9weS1QyoaMmeJ0AutRg1H3pooPAOz+2+i8t102/2zk5ZTzl5XLoeoV+T6j8Z7cvwm6opHEpAHMRX/E5jt8WQ1pmEt1nKUw3TqA8jmTyxG85+qgt7k7eFaTJZyHgBL0XK+yjIdpTizYUmlX87dJcO6gSp2EbslL2WumxbGnpqF13sHWTEDqK0GmS+NceIyUBGC/Tg/irjtPyBmYXyD19c5N8m7uOxFTcMMBgghPyBatdf6pI7/i04XdjDGgD3mjBuIw15u3KKqoPAPFiPNiSjRJNng2nTJxRObFbfEujH8SoshdBDDScQcCEBzWOoD4Xlr0f+Qr/NDMZlTWgQ1CI5mz1sO0npf1DiZuzOFi6En7RXrjJqFFBWg/fEoy87oeOxKsxwLco6LrstBppVr0GqRvL6mrIxJaAKtldol5eqvaV2ar9EkWbZSHwU/XjscZYttzBclzf9fGpitg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	+QpxfV8ndm2BiwAr6EMhW9o1SOzpXerkK1X5rEDNjoRwPHwUFBD88eKPmYkQqx/Pk76bRv2d3XwQRLJ/RzVwStMlNJFPuZE/SL0tQ6ICyOtHkTwIzjb+mOrqoYivOD1akeGtNaQcxrsqMdJMwtk/eLwxZGYDAoz8eR0/4pbZYI59Zj0qS6yJbOBXVDSZt9nX915Aj7coxnOhBeFBnrOqbbiKWL/tPrtm28TrY+d6wa4Y0VReEJenBublWKwioXSIgLn/x0H5NhA3tBTG8KIzsM6RzReR11I7wdOslzVk0gid4OlUvLZbEzC/y+ANQjf3ZvxiR8ZdK+YMfG/E0eLC4H7jVi6rQaXLxY4QMrPBpVQ0ozVav41GjgfRbXZRwP7riF+DEuYULfo1q8WTXGmhQP3TQTxDE6lGUbP6JGxBhy67dg1bxrMkwSQXukdiuFqb
+	B41kkjv6oc6ttN8PFcrSRImCRottItfd9+FR7GwO7jGjKS49tWsrbJhr/ILyeKRVnEE716wUw74R5GijJ2DoirUR3xeIoY/tmpjmvwqImm9bJnXoyU3C5HHoL8+OcAE8W6I3F1b+JycSXR+NrRUu5676LYU+XiqGDkbi6IOXzYO/X5vJ6dq1ZeKA1aenS8vefk5Fz9TFUqW7CLgwtmXVfdtb24rZYXBU4uTqteY1TPQG8CEwa/KoLXzUv+Sl1oiRL2Kmt0RiJixNPm++cz9lV6glzSosEZp2u6uIhGTL0QAcix++qAxidQtxgOhN+fyp+Eiohzl+NOQH/GK6tZo8LBAYiAazvNxASs1D6WA/y+NJSmWJbFK6C1iU2vwxmGgQZMYHVnejY/zQdiXJxqMEfjxJS7tlr0ZEFBZiZjZKuC0ikPtg3uZ+aTUX6pinKXJN
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 11:21:42.0393
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 11:21:49.0692
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3cfe8d4c-7893-4c72-3952-08de8029896d
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1bddbd4-34bb-46d9-c773-08de80298d9d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	MN1PEPF0000F0DF.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9405
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPFD22966BE3
 
-Remove cross-vendor support now that VMs can no longer have a different
-vendor than the host.
-
-No functional change intended.
+FEP is now the only reason for the #UD handler to run.
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
-v5:
-  * This patch now performs a minimal diff, with the other parts appended
-    to the tail of the series.
----
- xen/arch/x86/hvm/hvm.c     | 19 ++-----------------
- xen/arch/x86/hvm/svm/svm.c |  3 +--
- xen/arch/x86/hvm/vmx/vmx.c |  3 +--
- 3 files changed, 4 insertions(+), 21 deletions(-)
+ xen/arch/x86/hvm/hvm.c | 43 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 22 deletions(-)
 
 diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4d37a93c57a..c8cae41705d 100644
+index c8cae41705d..4c00cf4c4fe 100644
 --- a/xen/arch/x86/hvm/hvm.c
 +++ b/xen/arch/x86/hvm/hvm.c
-@@ -3832,28 +3832,13 @@ int hvm_descriptor_access_intercept(uint64_t exit_info,
-     return X86EMUL_OKAY;
- }
- 
--static bool cf_check is_cross_vendor(
--    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
--{
--    switch ( ctxt->opcode )
--    {
--    case X86EMUL_OPC(0x0f, 0x05): /* syscall */
--    case X86EMUL_OPC(0x0f, 0x34): /* sysenter */
--    case X86EMUL_OPC(0x0f, 0x35): /* sysexit */
--        return true;
--    }
--
--    return false;
--}
--
- void hvm_ud_intercept(struct cpu_user_regs *regs)
- {
+@@ -3837,35 +3837,34 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
      struct vcpu *cur = current;
--    bool should_emulate =
--        cur->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor;
-+    bool should_emulate = false;
+     bool should_emulate = false;
      struct hvm_emulate_ctxt ctxt;
++    const struct segment_register *cs;
++    uint32_t walk;
++    unsigned long addr;
++    char sig[5]; /* ud2; .ascii "xen" */
  
--    hvm_emulate_init_once(&ctxt, opt_hvm_fep ? NULL : is_cross_vendor, regs);
-+    hvm_emulate_init_once(&ctxt, NULL, regs);
+     hvm_emulate_init_once(&ctxt, NULL, regs);
  
-     if ( opt_hvm_fep )
+-    if ( opt_hvm_fep )
++    cs = &ctxt.seg_reg[x86_seg_cs];
++    walk = ((ctxt.seg_reg[x86_seg_ss].dpl == 3)
++            ? PFEC_user_mode : 0) | PFEC_insn_fetch;
++
++    if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
++                                    sizeof(sig), hvm_access_insn_fetch,
++                                    cs, &addr) &&
++         (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
++                                     walk, NULL) == HVMTRANS_okay) &&
++         (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) == 0) )
      {
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 243c41fb13a..20591c4a44f 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -589,8 +589,7 @@ static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
-     const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     u32 bitmap = vmcb_get_exception_intercepts(vmcb);
+-        const struct segment_register *cs = &ctxt.seg_reg[x86_seg_cs];
+-        uint32_t walk = ((ctxt.seg_reg[x86_seg_ss].dpl == 3)
+-                         ? PFEC_user_mode : 0) | PFEC_insn_fetch;
+-        unsigned long addr;
+-        char sig[5]; /* ud2; .ascii "xen" */
+-
+-        if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
+-                                        sizeof(sig), hvm_access_insn_fetch,
+-                                        cs, &addr) &&
+-             (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
+-                                         walk, NULL) == HVMTRANS_okay) &&
+-             (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) == 0) )
+-        {
+-            regs->rip += sizeof(sig);
+-            regs->eflags &= ~X86_EFLAGS_RF;
++        regs->rip += sizeof(sig);
++        regs->eflags &= ~X86_EFLAGS_RF;
  
--    if ( opt_hvm_fep ||
--         (v->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor) )
-+    if ( opt_hvm_fep )
-         bitmap |= (1U << X86_EXC_UD);
-     else
-         bitmap &= ~(1U << X86_EXC_UD);
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 82c55f49aea..eda99e268d1 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -803,8 +803,7 @@ static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
-     const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     int rc = 0;
+-            /* Zero the upper 32 bits of %rip if not in 64bit mode. */
+-            if ( !(hvm_long_mode_active(cur) && cs->l) )
+-                regs->rip = (uint32_t)regs->rip;
++        /* Zero the upper 32 bits of %rip if not in 64bit mode. */
++        if ( !(hvm_long_mode_active(cur) && cs->l) )
++            regs->rip = (uint32_t)regs->rip;
  
--    if ( opt_hvm_fep ||
--         (v->domain->arch.cpuid->x86_vendor != boot_cpu_data.x86_vendor) )
-+    if ( opt_hvm_fep )
-         v->arch.hvm.vmx.exception_bitmap |= (1U << X86_EXC_UD);
-     else
-         v->arch.hvm.vmx.exception_bitmap &= ~(1U << X86_EXC_UD);
+-            add_taint(TAINT_HVM_FEP);
++        add_taint(TAINT_HVM_FEP);
+ 
+-            should_emulate = true;
+-        }
++        should_emulate = true;
+     }
+ 
+     if ( !should_emulate )
 -- 
 2.43.0
 
