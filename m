@@ -4,53 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26027106702C
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2026 14:11:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1252447.1549126 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119461067038
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2026 14:18:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1252464.1549137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0gl8-0001lG-2M; Thu, 12 Mar 2026 14:11:30 +0000
+	id 1w0gru-0002TV-PB; Thu, 12 Mar 2026 14:18:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1252447.1549126; Thu, 12 Mar 2026 14:11:30 +0000
+Received: by outflank-mailman (output) from mailman id 1252464.1549137; Thu, 12 Mar 2026 14:18:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0gl7-0001l9-Vm; Thu, 12 Mar 2026 14:11:29 +0000
-Received: by outflank-mailman (input) for mailman id 1252447;
- Thu, 12 Mar 2026 14:11:28 +0000
+	id 1w0gru-0002TO-LF; Thu, 12 Mar 2026 14:18:30 +0000
+Received: by outflank-mailman (input) for mailman id 1252464;
+ Thu, 12 Mar 2026 14:18:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=17Qz=BM=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
- id 1w0gl6-0001l3-Qu
- for xen-devel@lists.xenproject.org; Thu, 12 Mar 2026 14:11:28 +0000
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [2a01:111:f403:c107::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5a8861dd-1e1d-11f1-b164-2bf370ae4941;
- Thu, 12 Mar 2026 15:11:26 +0100 (CET)
-Received: from CH0PR03CA0019.namprd03.prod.outlook.com (2603:10b6:610:b0::24)
- by DS0PR12MB9057.namprd12.prod.outlook.com (2603:10b6:8:c7::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.6; Thu, 12 Mar
- 2026 14:11:17 +0000
-Received: from CH3PEPF0000000C.namprd04.prod.outlook.com
- (2603:10b6:610:b0:cafe::99) by CH0PR03CA0019.outlook.office365.com
- (2603:10b6:610:b0::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.28 via Frontend Transport; Thu,
- 12 Mar 2026 14:11:10 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH3PEPF0000000C.mail.protection.outlook.com (10.167.244.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 14:11:17 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 12 Mar
- 2026 09:11:10 -0500
-Received: from localhost (10.180.168.240) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 12 Mar
- 2026 07:02:38 -0700
+ <SRS0=+mtD=BM=oss.qualcomm.com=dmitry.baryshkov@srs-se1.protection.inumbo.net>)
+ id 1w0grt-0002TD-6O
+ for xen-devel@lists.xenproject.org; Thu, 12 Mar 2026 14:18:29 +0000
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 558c08e2-1e1e-11f1-b164-2bf370ae4941;
+ Thu, 12 Mar 2026 15:18:26 +0100 (CET)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 62CDrlRb1740509
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Mar 2026 14:18:25 GMT
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cumvdhq8s-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Mar 2026 14:18:25 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-94ad0ada31bso19024843241.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Mar 2026 07:18:25 -0700 (PDT)
+Received: from umbar.lan
+ (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi.
+ [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5a15602e268sm977710e87.21.2026.03.12.07.18.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Mar 2026 07:18:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,166 +57,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a8861dd-1e1d-11f1-b164-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vpmd9RGo7BiJyRPhdE3gvBIryy7pFAD6al1gukHKtG1h6gPM4qfPOv2/ctHAWjnb4DNs2KwbvZFmjwMf77irMObj91wyDGhXJMzkdXxLEURm8h1Cz0h1DlrhV4S3wBY34c9ytJwWv1iDXP8J7no11jQ+fCOJWjcplOsOLBPBf7UPR/nmXm8TkG6cBjaSNPQqOdYp6CS87GEt2R07gJ0ROBvYgHHAw8cD8qv4ltxOf/6ZvCLwrAexN5B1TQ1HhgFDbcUkLY4A75pOrbYVFhAzXOTCfIBuIl+WFMQ7XdRcM5uWVdJhKlJOF3Cj9uXGwRuOJBZV0+t643L5wUFdvTfaRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ygk6T4hWc/DWYmyFTOeqWe2L6qfEZIP82s69SGYY8OU=;
- b=eTRBb1Ps85l3CM8vjMvbkWmrtlP/18jfL+fJgESr9ZVc7pZN9cmW8xC4Ms+mEXMwY36yffnoNblk5Y5zsyaFTBRyl/uSVDAlsaI664NxJOiSMBfge4w3HfZgD5zZqMcja9R4cDxEKit9XiJ9QUY/WT8WdK3Z+pXF9g0YeqQUbtDRRZMIxiNnKFwiESeu8naLIQ0DL7fTW2G+ienZu4f3l1SfNp40EOlgWqLpPrGml6CnqsF/c74BCJJvo9manhddiYOlx5qWr9X2/dJHMrsXM36i6BSplWy8MxCDBiCdxdJ3mceXKetGhNuaGMCQ7p8xsBicR8I6CW87eiptyaHsRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ygk6T4hWc/DWYmyFTOeqWe2L6qfEZIP82s69SGYY8OU=;
- b=JYMRVU1/TobHKRNql4xl9KdGrdl22VfWTPbrk0aSGMPMsHwskV1De5X3szAmWvhOl8RVQfxVe32pJots09gXYlWRsSN2PpNVm9aTYkwcJ9pV0R7HrbX0dTvTfN6SZhm1GshX1/AA6y3RHjK7TGaXePAeHnUDLS3Czb7eDzQVXac=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+X-Inumbo-ID: 558c08e2-1e1e-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	y7xFTGXb5DPsTd4oxsCvF8mg+z4yb1CrqE2iNac3ooo=; b=pC9s3oCR3E3pJGcF
+	6UBJOzneozRH8yHPflsxqstBz8NmkNtzIcCOMzWl7Mf8bniEEG3tg1o8Gf6eOER8
+	iEH5SI48La5x3ShD7d2U00BqfTQnGC86RMZBVy2//Y+3lQg8W+seoMLrQOG0EE+z
+	dNM8ykzfkh7kNSve4jqCX2isXmsW6au2z2aD2Vl0RhkvgqBsHAjer2W60uOZM/ou
+	G8q60QJZpk6R8OE+8EDLj6gFvBCIXS+427OcZgRvCgssFzBbiFfuWMcbTcw+C5VY
+	9kymaHldyvZ6go56cowbutM/NN/MqcTN7b0pv0p53rwa2PzV2geT4iFmeTzVyLMA
+	ChezqA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1773325105; x=1773929905; darn=lists.xenproject.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=y7xFTGXb5DPsTd4oxsCvF8mg+z4yb1CrqE2iNac3ooo=;
+        b=DKdgrxc3/U7i14WxkJX93Nr/Y5+SWDTAJGsH9MUZDlZ75EauNuZanMzo6SybNKW55k
+         6h2l2jENigpvWekhHvtViaDciVTNIM1YmdXHhVlGz5pC5/vf8rBMA8yqIG6oA1+qAuGj
+         kvprI3Yno0MCJ/EgCaiO8V0KU6JSV6hUi+ElpiHy9Wfv+ZTqie4mSCaxRDiCQQNeo2Uv
+         PkI+hS1RPCYmfuvYRvf538jhU9OAoAhmFoDk3Y9hlZq/WRcE2fQrFcynUFCk1jKetqKN
+         QBCAVEiCx7zW0cjtbPpbyuzkFsyFZ8U/s9PyVPB9+2H8/PBrUmCHQSFZJdAhZVTyckk3
+         9NVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773325105; x=1773929905;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=y7xFTGXb5DPsTd4oxsCvF8mg+z4yb1CrqE2iNac3ooo=;
+        b=HlXk7GDhYP95zr2FdJdQhxzpwFsv4tQ/VqhMMRWzQqpLnfwUiCscdM3WiHb4PkCJTM
+         8qWHFhNBWkpflkHwmaGOw+UEaJFXEFoW25i21S6oBsM04ExyKY8Z6ajAvG8uu4nD/B18
+         I7RI2BqvMOufPMdNULSZupQjCGMaXMeHqkDcJdykMGYoPG2tjQhTgfz9zGmZmzUlsPeU
+         uLnwn4xRW5EMm+BWcjeSzWHpJZhv9RB/Ud1wyN8O3ws9b+gYuEaa/RmrNPxo2ZlbKhKM
+         tKc6gHCqnF6FyT7/1VG9bjUjaCuaNSG50kCQgE3yDM2K5704I8vYrsBCJCmBO6sssXoM
+         4Qgg==
+X-Forwarded-Encrypted: i=1; AJvYcCWtjcFDGdZo3hI7ufxnTvIyBx7JJQXZw4ufIsuODA+d9opEqWyxGAv4ivGWUGpU9Y5TYy/5YqEuLX8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yyj6z6f1t1Hc9IcKTMIV7+4Cadcm4brUUZQcFCgoOXSQd+DorIb
+	y4d/G5rLjTc/ujLqzBQaymTCF//frrjJwZ+0BTje+3Ge0w5/ckxHCSTZ8AqB/PEnbNnXxpeRsfh
+	jrnIFLgBKKosbpSW+/rdTSIdJM/8TAiTeGqtjIT0Euj0REbA7iFdb/xiF7nbXDRzvbVxxbw==
+X-Gm-Gg: ATEYQzxUbhojKNuFf1p4Z84DE4elS+3B4h2Mh8YsBCnP6qwAUQZH1tpheCHxKLd7gIL
+	6ZddagrUIyjtXI6gisBdHIAs5Ee9wFGdsBZ/SURb5TOmu84mDAGlAqbJw0A05yZEe0UfG9HoMwM
+	7Si18BX+9tc6sTPnE2te2bxotf5PFklShUQuAJMBlcepASCgIYLBRdt7zFOnauoG1lLKF3aiGhY
+	zUSHfOUP5YIp9Q8e6KYys4IeGByRBSfV3W87xu4OJFB9wlCCLfvWckFYvZWCAyRPp3ruQ0r/YUL
+	goJibnGUcIoAjf4a0LVjQE4lNpvMfh31+KRNYUNS03LQXazf9HIIfKo5RiW98uC4vCJFLrNXjjO
+	gANIMuQoqzqbJgAyRWQa/FDyctbGjXa9HohlpeG4LFoS0iBtHXqiHknnI3VKnFTVfY40Jy7RQEB
+	7PlnYZYrByyNHfdBR/bRsvxWmJc0ujwo1g2DM=
+X-Received: by 2002:a05:6102:f11:b0:5ff:eaf0:6e77 with SMTP id ada2fe7eead31-601f4a44a79mr1406623137.17.1773325104576;
+        Thu, 12 Mar 2026 07:18:24 -0700 (PDT)
+X-Received: by 2002:a05:6102:f11:b0:5ff:eaf0:6e77 with SMTP id ada2fe7eead31-601f4a44a79mr1406556137.17.1773325104042;
+        Thu, 12 Mar 2026 07:18:24 -0700 (PDT)
+Date: Thu, 12 Mar 2026 16:18:20 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+Cc: Nipun Gupta <nipun.gupta@amd.com>, Nikhil Agarwal <nikhil.agarwal@amd.com>,
+        Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, Marc Zyngier <maz@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Thomas Gleixner <tglx@kernel.org>,
+        Saravana Kannan <saravanak@kernel.org>,
+        Richard Zhu <hongxing.zhu@nxp.com>,
+        Lucas Stach <l.stach@pengutronix.de>,
+        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-pci@vger.kernel.org, imx@lists.linux.dev,
+        xen-devel@lists.xenproject.org, linux-arm-msm@vger.kernel.org,
+        Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+Subject: Re: [PATCH v10 2/3] of: factor arguments passed to of_map_id() into
+ a struct
+Message-ID: <dyjdwxaq4oc7ahri3iuhnmobh3gwmn6drhox7t2elep4rlqhuq@fe4gp5t7q5r5>
+References: <20260309-parse_iommu_cells-v10-0-c62fcaa5a1d8@oss.qualcomm.com>
+ <20260309-parse_iommu_cells-v10-2-c62fcaa5a1d8@oss.qualcomm.com>
+ <esfzpgpgenydif2sxahsetkglz6kewsgjhkmzr6ulrrkctnkbq@a4zsfdmhbxui>
+ <27edd195-b0d3-4214-9df3-74a84da1e3e1@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 12 Mar 2026 15:02:36 +0100
-Message-ID: <DH0UY76CXR3S.2VR0A0K912P8R@amd.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
-	<xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v5 5/5] x86/hvm: Un-indent the HVM_FEP block in the #UD
- handler
-From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-To: Jan Beulich <jbeulich@suse.com>
-X-Mailer: aerc 0.20.1
-References: <20260312112116.22563-1-alejandro.garciavallejo@amd.com>
- <20260312112116.22563-6-alejandro.garciavallejo@amd.com>
- <12ed74c0-1ea2-4458-881e-ccb7e59e0088@suse.com>
-In-Reply-To: <12ed74c0-1ea2-4458-881e-ccb7e59e0088@suse.com>
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb09.amd.com
- (10.181.42.218)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000C:EE_|DS0PR12MB9057:EE_
-X-MS-Office365-Filtering-Correlation-Id: 55eae381-80d9-409a-e080-08de80413aa0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	mv+VWNt6yWxkGeRibxlM456wH+T37Me3t+p2wn6FlYFiZZsUNl+aD1NdNTbPjHueqoa0V67jkI8MHQl4Rq60lmDr7qrZ0NFkfeV1uyTN74iLU52ht1FvVuy8sD3eF3YStQYf0H0HrEKlROQcYsUjY5EEvzLsL8pPwszLEpxLD8ygiEYgkaKmvd0H8qvQ3qQGeVItmGupUz1W8knuuD/v2VxjEZ7u5mZ8CWOPv8XuuI7DcKrGqvFq2IZn0Qryh8WbDPiha0ljr8qeVrnTfsmU5xwfJZIWWTK3t+Iaqmpnfepzd//xe/3NKIV3IQCUpUXuczYRBIRLEv5gDH3Q9YxGymqaw0+I0uUQcYKewJP4sSjaBSMPl9rGszob1X3cdGurvdb/98Z/sEEfDt6qxqj3ihLbt8CjZ+gQvurqqGbCG5o+GwJMdC4WBW2iZkyqJ3ikxr/WA66KKfKiBm36VcGiUC2jrxemd2mdlFL9NKnxkDYEhSYfNB+WkuXvaoJALUMGCbucRTx9k1fMBtmgTkrA6uubZCdcCzjdLW0e/jRMOO3xFJQ+39a8nlsTqfyRvCwxquUWnGLEPE1h8spYclHQF7FAyEpd07DkSJHAJUa6c3LfIdPKiJWw2zLS0151CD8EjmcSzDR8xfJ4arIEXNOTOh5B1j8V/3prN/zboLlLDRewkEtLZo+V3Xb0tBRvs03zJFEp9dLj8glwGFFj/exFKr1VUcsgjF2IfkiqqhPKkApP+iwreun/dimWwPItoNSk3Jq7jn6EpXoIJvFWXhZ6QQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	7vsOIiIL/mZsSodla8WIpj9j4ROVfIIpNWpfpwxy2GAVl/wZDpNBrvarEVyKzP1RqF9H8xcRSkccx3bEiUWRW6jFV/GEFABFdkvjOkewB6RyVW/V0jETkbVSHvllJBtufoe+zEi9njhLdtph4fHeE7wi596yeHhF+qs/RGsV837hm7ugl4uzSM5oplpMyuB1goB9hLxsV0gs7JYkvvbd/liOM3aZmlRB3MH+FCwB3LezmutwnafCKinqGeT7KKowWmWi1jXOixzP+4eZSXhJR5sQkv2LIf7rMpq5pyJt+XZGHkpEZE77ol8Kmt/IsHxNQXNl7l7XVA1VfBJdkiObBHxUV7thfLOngrdFHqFFEIzEfr1acKN+Vuwj58if3pqjTTPLXeJht9xs181eAvORLodrme0XpYDIxW2fF8D5YB43e5OtbbtrrjEDpGLBTEMG
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 14:11:17.7497
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 55eae381-80d9-409a-e080-08de80413aa0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH3PEPF0000000C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9057
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <27edd195-b0d3-4214-9df3-74a84da1e3e1@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzEyMDExNCBTYWx0ZWRfX/JrZjcCWHsfk
+ yjnhNL5JhJ4RxbXw1x0taQx9jqMbzSThcNTTf/BAV14VQFeFrhM15f1VJnvzRMettdaGWY7/n7R
+ POtbu6xlgOh6654NpwlZpGQiEt2FsEeGKDY7GwZOg7tIQ+rHKcDtJTfRWjfnEBzOs++XMHWjZpd
+ pBezH7NJui+RbmbUkZLR94qXxkgZWe0RNDTuEn20abUtbhNox84lmcphXmZsU3Jz/rwHAHAqofT
+ HzaO2HXs3JdxymsmTNtsTNgsmInRq6c4mSb4HsbO1nIBZq15WaJAD9D2VzSAEq/3ugWtgTmsHCK
+ 6bqRTi33lx4495P2JESuuQDlBaNKCxZZQ24oPJuVCDEJwyE3ewIsuk1YHARTD5uKEZoR7KqKgmM
+ csbe65mOVcp+VS4tZwNUQ0aMnObij52mmMJR8Aq8L5Kgb3IATjqhWneXqCYAv82IkiqXQCSw7vh
+ E+8qGzmygWdbcGz70aA==
+X-Proofpoint-GUID: 0Ju4sdRhMROkeyidv1YF4FpnhN13vHsi
+X-Proofpoint-ORIG-GUID: 0Ju4sdRhMROkeyidv1YF4FpnhN13vHsi
+X-Authority-Analysis: v=2.4 cv=XsT3+FF9 c=1 sm=1 tr=0 ts=69b2cb31 cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=VwQbUJbxAAAA:8 a=KPxCMH61eqygQ3DODZ0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-12_01,2026-03-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 malwarescore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
+ definitions=main-2603120114
 
-On Thu Mar 12, 2026 at 12:42 PM CET, Jan Beulich wrote:
-> On 12.03.2026 12:21, Alejandro Vallejo wrote:
->> --- a/xen/arch/x86/hvm/hvm.c
->> +++ b/xen/arch/x86/hvm/hvm.c
->> @@ -3837,35 +3837,34 @@ void hvm_ud_intercept(struct cpu_user_regs *regs=
-)
->>      struct vcpu *cur =3D current;
->>      bool should_emulate =3D false;
->>      struct hvm_emulate_ctxt ctxt;
->> +    const struct segment_register *cs;
->> +    uint32_t walk;
->> +    unsigned long addr;
->> +    char sig[5]; /* ud2; .ascii "xen" */
->> =20
->>      hvm_emulate_init_once(&ctxt, NULL, regs);
->> =20
->> -    if ( opt_hvm_fep )
->> +    cs =3D &ctxt.seg_reg[x86_seg_cs];
->> +    walk =3D ((ctxt.seg_reg[x86_seg_ss].dpl =3D=3D 3)
->> +            ? PFEC_user_mode : 0) | PFEC_insn_fetch;
->
-> While of course functionally everything's fine this way, I'm now entirely=
- lost:
-> Why are what were ...
->
->> +    if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
->> +                                    sizeof(sig), hvm_access_insn_fetch,
->> +                                    cs, &addr) &&
->> +         (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
->> +                                     walk, NULL) =3D=3D HVMTRANS_okay) =
-&&
->> +         (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) =3D=3D 0) )
->>      {
->> -        const struct segment_register *cs =3D &ctxt.seg_reg[x86_seg_cs]=
-;
->> -        uint32_t walk =3D ((ctxt.seg_reg[x86_seg_ss].dpl =3D=3D 3)
->> -                         ? PFEC_user_mode : 0) | PFEC_insn_fetch;
->
-> ... initializers before not initializers anymore, when all you're doing i=
-s
-> (supposedly) re-indentation (and, necessarily, moving decls up to the top=
- of
-> the scope they need to live in)?
+On Thu, Mar 12, 2026 at 05:12:51PM +0530, Vijayanand Jitta wrote:
+> 
+> 
+> On 3/10/2026 2:53 AM, Dmitry Baryshkov wrote:
+> > On Mon, Mar 09, 2026 at 01:03:38AM +0530, Vijayanand Jitta wrote:
+> >> From: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+> >>
+> >> Change of_map_id() to take a pointer to struct of_phandle_args
+> >> instead of passing target device node and translated IDs separately.
+> >> Update all callers accordingly.
+> >>
+> >> Subsequent patch will make use of the args_count field in
+> >> struct of_phandle_args.
+> >>
+> >> Suggested-by: Rob Herring (Arm) <robh@kernel.org>
+> >> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+> >> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+> >> ---
+> >>  drivers/cdx/cdx_msi.c                    |  5 ++-
+> >>  drivers/iommu/of_iommu.c                 |  2 +-
+> >>  drivers/irqchip/irq-gic-its-msi-parent.c | 11 ++++--
+> >>  drivers/of/base.c                        | 63 ++++++++++++++++----------------
+> >>  drivers/of/irq.c                         |  8 +++-
+> >>  drivers/pci/controller/dwc/pci-imx6.c    | 16 ++++++--
+> >>  drivers/pci/controller/pcie-apple.c      |  5 ++-
+> >>  drivers/xen/grant-dma-ops.c              |  4 +-
+> >>  include/linux/of.h                       | 12 +++---
+> >>  9 files changed, 76 insertions(+), 50 deletions(-)
+> >>
+> >> diff --git a/drivers/cdx/cdx_msi.c b/drivers/cdx/cdx_msi.c
+> >> index 63b3544ec997..03232b5ffbca 100644
+> >> --- a/drivers/cdx/cdx_msi.c
+> >> +++ b/drivers/cdx/cdx_msi.c
+> >> @@ -121,6 +121,7 @@ static int cdx_msi_prepare(struct irq_domain *msi_domain,
+> >>  			   struct device *dev,
+> >>  			   int nvec, msi_alloc_info_t *info)
+> >>  {
+> >> +	struct of_phandle_args msi_spec = { .np = NULL };
+> > 
+> > Why do you need to set it? Parse functions ignore passed args, don't
+> > they?
+> > 
+> 
+> The parse function does check arg->np on input — if it is non-NULL,
+> it is used to match only entries targeting that specific node.
+> 
+> Also, there is this existing path in drivers/pci/msi/irqdomain.c which
+> pre-sets the node and passes it as input to of_msi_xlate(), so the node
+> pointer is not ignored by the parse code:
 
-walk cannot be initialised at the delcaration site because it relies on
-hvm_emulate_init_once() having run and you made a strong argument to preser=
-ve
-the current form so I left cs next to walk, as it was before.
+Is it only being used for MSIs? If so, can we make that explicit in the
+API by having the 'filter' device_node pointer?
 
->
->> -        unsigned long addr;
->> -        char sig[5]; /* ud2; .ascii "xen" */
->> -
->> -        if ( hvm_virtual_to_linear_addr(x86_seg_cs, cs, regs->rip,
->> -                                        sizeof(sig), hvm_access_insn_fe=
-tch,
->> -                                        cs, &addr) &&
->> -             (hvm_copy_from_guest_linear(sig, addr, sizeof(sig),
->> -                                         walk, NULL) =3D=3D HVMTRANS_ok=
-ay) &&
->> -             (memcmp(sig, "\xf\xb" "xen", sizeof(sig)) =3D=3D 0) )
->> -        {
->> -            regs->rip +=3D sizeof(sig);
->> -            regs->eflags &=3D ~X86_EFLAGS_RF;
->> +        regs->rip +=3D sizeof(sig);
->> +        regs->eflags &=3D ~X86_EFLAGS_RF;
->> =20
->> -            /* Zero the upper 32 bits of %rip if not in 64bit mode. */
->> -            if ( !(hvm_long_mode_active(cur) && cs->l) )
->> -                regs->rip =3D (uint32_t)regs->rip;
->> +        /* Zero the upper 32 bits of %rip if not in 64bit mode. */
->> +        if ( !(hvm_long_mode_active(cur) && cs->l) )
->> +            regs->rip =3D (uint32_t)regs->rip;
->> =20
->> -            add_taint(TAINT_HVM_FEP);
->> +        add_taint(TAINT_HVM_FEP);
->> =20
->> -            should_emulate =3D true;
->> -        }
->> +        should_emulate =3D true;
->>      }
->> =20
->>      if ( !should_emulate )
->
-> With this, the purpose of the should_emulate variable effectively vanishe=
-s,
-> without it actually being purged (unlike you had it earlier).
+> 
+> u32 pci_msi_domain_get_msi_rid(struct irq_domain *domain, struct pci_dev *pdev)
+> {
+>         struct device_node *of_node;
+>         u32 rid = pci_dev_id(pdev);
+> 
+>         pci_for_each_dma_alias(pdev, get_msi_id_cb, &rid);
+> 
+>         of_node = irq_domain_get_of_node(domain);
+>         rid = of_node ? of_msi_xlate(&pdev->dev, &of_node, rid) :
+>                         iort_msi_map_id(&pdev->dev, rid);
+> 
+>         return rid;
+> }
+> 
 
-That goes away with patch 6, that I neglected to send before.
-
->
-> Jan
-
+-- 
+With best wishes
+Dmitry
 
