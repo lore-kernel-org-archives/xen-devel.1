@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7A6107BCCD
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:45:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1254118.1550105 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F33107BCCC
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:45:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1254116.1550090 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15d6-0004Sc-N6; Fri, 13 Mar 2026 16:44:52 +0000
+	id 1w15d3-00048O-V8; Fri, 13 Mar 2026 16:44:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1254118.1550105; Fri, 13 Mar 2026 16:44:52 +0000
+Received: by outflank-mailman (output) from mailman id 1254116.1550090; Fri, 13 Mar 2026 16:44:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15d6-0004Rm-Hq; Fri, 13 Mar 2026 16:44:52 +0000
-Received: by outflank-mailman (input) for mailman id 1254118;
- Fri, 13 Mar 2026 16:44:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w15d3-00048H-SU; Fri, 13 Mar 2026 16:44:49 +0000
+Received: by outflank-mailman (input) for mailman id 1254116;
+ Fri, 13 Mar 2026 16:44:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=p3qR=BN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1w15d5-0004GG-CC
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:44:51 +0000
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [2a00:1450:4864:20::52a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f339755f-1efb-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:44:49 +0100 (CET)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6642c9254c2so1346891a12.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 09:44:49 -0700 (PDT)
+ id 1w15d2-00048B-Kb
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:44:48 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f20268b9-1efb-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 17:44:47 +0100 (CET)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6611f41eebcso3200281a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 09:44:47 -0700 (PDT)
 Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-66350b86008sm1394733a12.28.2026.03.13.09.44.47
+ 4fb4d7f45d1cf-66350b86008sm1394733a12.28.2026.03.13.09.44.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 09:44:47 -0700 (PDT)
+ Fri, 13 Mar 2026 09:44:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,43 +47,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f339755f-1efb-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: f20268b9-1efb-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773420288; x=1774025088; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iuU0sIa/VVlWbkh1TAky3TiyUmxNd2Qh9VKL5gjHn0k=;
-        b=loPICnzuKd343iWNPlJjaz33BKshEr3w55lwx81Vx1L8DJlYD+Xj8yZ1WWxL6m8w1c
-         QmKkrkGz8odl2XG4ygR8VIIbhQ8or1AwgN+NaJDU4OuCxB/u0PLBbUiD5eigJS3zS1Kl
-         gMdKaWIZHTzG/Dpd0nz5DvkgxfFygAZHoEbFSsCDTA6qbVAglL6hUi3liDJbvxVtKtev
-         L5oQ90PillVZuhth7ofS7r7H4seGToHKYlneB56Fs5slSc1jOC6XGpyCnq7pTwJqTeyz
-         sYYOL9LYIHRhpH9wUsr+gG9aAXbEUfA0LQV7+9u0laOV4Cn8Duqh5IhvaoJgqG7FnMxV
-         NRlQ==
+        d=gmail.com; s=20230601; t=1773420286; x=1774025086; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nvusB8amxANk2/hw0DyBVCpoKjQxhuOgDtnr4JFcqBM=;
+        b=L1BY/W0e2Vctn0m3KQzKHUug6kxYCCMGIOQNRjWuw+hhBH2KAsuGOJZI7XjTdIQF+o
+         17h7Qzgx+Rrq7MejimTCOAdCaIe488/LxBccIhNQ+0oHRD0WtSWirTtGmeDMhmM+7+7L
+         V/VALccSHfceTR/kQwFpzM20G9x3E6AuWokfa6L4AEPJBsE9Sp5WwBBzu+3TFD2+nKgZ
+         DLXDjfPIgoeZaT/RZ9QKpvUh7MuNQnJkaG17a0yAW/yctM/Ql4rBQcVKdxq8B2c4I5Vp
+         0CoTmqJN0+O+vNoy7JP3JE9HKkkWq60gfbX4cZ33oyB+zFzcWb+kJx/nKTsDtWtXAp47
+         hVRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773420288; x=1774025088;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=iuU0sIa/VVlWbkh1TAky3TiyUmxNd2Qh9VKL5gjHn0k=;
-        b=qXLo0fT1mShYtzutR/wqxW4lwYM3NANAnhEbvZ1DE4Cx3MXyJns21rTjD8LYaYS5RB
-         xij4EXh2vycupr1/t/m2T6YExNuWrmYEXIhfGMWSwisR08GxeXMaEg2ZtfzS9/PZjjBJ
-         yjeJ0H1SDkPNRx+X6RNPC+MesSHVuoWRbLiAoiPslMYXjdzos+Pkt89rPSknf5sR81VM
-         DPBCCDgN4HhcKc1dZ1xYBLkej0mf/uKkhsogvbGV8KCE4U5L9FtRSbsA29r/pKn/TTA8
-         jurHppnQFcTyAhUcks0tl7oLlnv4CRGgo5+oMMhq1PBRe1TtbchANk4bJuHSTdMRvEhL
-         wp3A==
-X-Gm-Message-State: AOJu0YzoX3UOlwXEPt8sU9Xqt8Bji6bDNnybHunoUI4JmZr7SfIo5aZq
-	p1OQ7dim268B3SJwERwQhpg7+yKgk9RLx71ieK1dBT+g/aWUwcsUiJDJddAMUg==
-X-Gm-Gg: ATEYQzynBJVmfcAzl4RaWR68gt42aLpUM464+JwyErMi7VtSE2CcqGapHrvKV0hcOQ+
-	RkEYHvJWrLeqfkLETQPwHPrui9bEAzYeqbLmJVwsq5/AlfQVXMZ3bzuwZeUthGvJW7KI1TF+p6P
-	8+ZhDZ7aLZJww1r7KH3F2mZi4yH2lrURDCFR4ICO0ccgIQO086d8SM2QoQ5zW/C5Dmh4WNg46PN
-	fX2WgGAJddiMpaov+tAXHXb4mQvBnUsVDzRJJ6VrmvkwCrRNIG8Gs+O6b/YlfSMKrJtd7Klv5Lb
-	yDU03z3NkC0PBgaR5Jy8407yX9IopAEDxlzEPKXVAYz5KuI2I3y3Sb5LuZ7lnK/FyeurnObgiYg
-	yflk5SUcsVi+9OYe/c0AEQ2NxgHb3DayMhXJTIQashCs9Tn5tUUoYNSkdPNY2ZQmJqtIm2alIlm
-	VM4o/AIgAQHU4rSVexi0yNbOOFRr66YIJhy+j0asQl1VUHv9unUKMrrzaqkzGi1y9WaTS8itOyE
-	iAnLAw7
-X-Received: by 2002:a05:6402:1e96:b0:662:fd15:1ae with SMTP id 4fb4d7f45d1cf-663babf76afmr2209158a12.21.1773420288310;
-        Fri, 13 Mar 2026 09:44:48 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1773420286; x=1774025086;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nvusB8amxANk2/hw0DyBVCpoKjQxhuOgDtnr4JFcqBM=;
+        b=CAh3+z5Y1cNu8I2WJMDqN+0EkkYxRaLhWiZ7bV48X9sF/a89YGlXdaFmRDlMkZjLcr
+         4miFFUv7wX3IGrX5RbfQp815DTpp2CZ+3YWUJDzYxR3L2MgEr9R3MAAyxPPL6LbX6/XA
+         DZw84Q5bCy7pidpGjNA8oUcbCQisFJofFvJKRgv/t4sLOID/Ovnyu2J1JH9FQMreV+JF
+         dPN3jtBHDhpZrOKpX4qe4VMaSKoO1EKYl8TgIUnWFwQ7kaK6vYiYDSeZbcMRsEBOv6Gz
+         j0HJMGJ0hYZia2OPpGh4lqbZ/5yfmsYfM6VRS2BUFnd/7TJenOnucPQNdHZ4uJDU90ZH
+         1yUw==
+X-Gm-Message-State: AOJu0YzkYfCyJK27imm6kl4xasoq+s5jOKawMLez+BwPQwfV6shgjGil
+	YqYuKCl02ydsf3PLm/JhyzPLP0zdEA4nqD7UfL74SbdJy8ZYKf5o9gzhVhpfyQ==
+X-Gm-Gg: ATEYQzxnKr5IvAdDJDBU+llx4Dsa7awaKT+4hplTB4Gc3jf9KuoeTqEMxtPzyD4jbLr
+	6Z4KyY2GHvWZnyQHjV+UBGl6xf6Jtr6ifyPNKcbcvzhmi5OITMZDCipIqaM0zUEUCD4jybvjiC5
+	B1aSCcLCBS969Jb7nCgaSvKSm+GM2WTKDLUD9qWwfn22KRT+TaQHM3Frjnxg8CT/KCTqXPKf8Y7
+	/IxTD9m6bGkulIW9ensP09NgtqVJ/ybbfHj44WyV6/ketlDx2daeaAO8MvetnSDPUl8YJAkp3v0
+	9HC8LwheK8yX2FHQ+4R8gCn6EnGjUgrdvjIR0Gdgz+aOTelPj0CAWhWt/aX5EVELqMI5yjl3d6W
+	T6UXzrMBVgLBYvWBHdBwx7NfQIxhJeiCF6d1ku3j0ApGqUlK/aYsiaJewr03gMyDpD+i29ZtD9e
+	CWCBw8qkWQ9d9X9jsqPZ7+B7f+4bTA0HNM6kZeOFK/L8eOEQdk/El/Bp3yfP0CSb5Kow==
+X-Received: by 2002:a17:907:da07:b0:b94:1224:c605 with SMTP id a640c23a62f3a-b976500fa5bmr219134666b.19.1773420286041;
+        Fri, 13 Mar 2026 09:44:46 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -97,85 +95,51 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 2/4] xen/riscv: add csr_allowed_read() helper
-Date: Fri, 13 Mar 2026 17:44:36 +0100
-Message-ID: <2ea34e564533accb33ccee66b4a8c7a750733ae0.1773419622.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 0/4] RISCV: Intrdouce SSTC support in Xen
+Date: Fri, 13 Mar 2026 17:44:34 +0100
+Message-ID: <cover.1773419622.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1773419622.git.oleksii.kurochko@gmail.com>
-References: <cover.1773419622.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Accessing some CSRs may trap when the corresponding extension is not
-implemented or enabled. Introduce csr_allowed_read() which attempts to
-read a CSR and relies on the exception table mechanism to safely recover
-if the access faults.
+This patch series is created based on [1] and the aim is to make Xen properly
+works when SSTC extension is available.
 
-This helper allows Xen to probe CSR availability without taking a fatal
-trap and will be used for feature detection during early boot as we
-can't always rely on what is in riscv,isa string in DTS.
+It is needed to do in this way as OpenSBI doesn't pass that it supports SSTC
+by DTS to Xen and there is no easy way to turn off support of SSTC support.
 
-While touching the header, reorder the include directives to follow the
-usual Xen style.
+Also, as a part of this patch series intrdouce suggested [2] by Jan B.
+improvements of init_csr_masks().
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- xen/arch/riscv/include/asm/csr.h | 34 +++++++++++++++++++++++++++++++-
- 1 file changed, 33 insertions(+), 1 deletion(-)
+[1] https://lore.kernel.org/xen-devel/cover.1772814110.git.oleksii.kurochko@gmail.com/T/#mc14576ef43a83b344c5f31626005b995e2ccbeaa
+[2] https://lore.kernel.org/xen-devel/cover.1772814110.git.oleksii.kurochko@gmail.com/T/#m9c18d2d7a98958befec16419f5deccc40f6c8c3e
 
-diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
-index 01876f828981..b9bee3d25d21 100644
---- a/xen/arch/riscv/include/asm/csr.h
-+++ b/xen/arch/riscv/include/asm/csr.h
-@@ -6,8 +6,10 @@
- #ifndef ASM__RISCV__CSR_H
- #define ASM__RISCV__CSR_H
- 
--#include <asm/asm.h>
- #include <xen/const.h>
-+
-+#include <asm/asm.h>
-+#include <asm/extables.h>
- #include <asm/riscv_encoding.h>
- 
- #ifndef __ASSEMBLER__
-@@ -78,6 +80,36 @@
-                            : "memory" );                        \
- })
- 
-+static always_inline bool csr_allowed_read(unsigned long csr,
-+                                           unsigned long *val)
-+{
-+    bool error = false;
-+
-+    /*
-+     * Use "+" as a constraint instead of "=" to ensure the compiler passes the
-+     * initial value into the asm volatile block. Otherwise, if the instruction
-+     * (at label 1) faults, the variable 'error' may contain an undefined value
-+     * instead of 0.
-+     * If reading of CSR register was failed, we don't care about val, so "="
-+     * constraint could be used in asm volatile block to not force always init.
-+     * val argument before being passed to csr_allowed_read() functions.
-+     *
-+     * This avoids the need for an additional instruction inside the asm block
-+     * to explicitly initialize 'error' to 0 before executing the potentially
-+     * faulting instruction.
-+     */
-+    asm volatile (
-+        "1: csrr %[val], %[csr]\n"
-+        "   li %[err], 1\n"
-+        "2:\n"
-+        ASM_EXTABLE(1b, 2b)
-+        : [val] "=&r" (*val), [err] "+&r" (error)
-+        : [csr] "i" (csr)
-+        : "memory" );
-+
-+    return error;
-+}
-+
- #endif /* __ASSEMBLER__ */
- 
- #endif /* ASM__RISCV__CSR_H */
+Oleksii Kurochko (4):
+  xen/riscv: add exception table support
+  xen/riscv: add csr_allowed_read() helper
+  xen/riscv: allow Xen to use SSTC while hiding it from guests
+  xen/riscv: init_csr_masks()-related improvements
+
+ xen/arch/riscv/Kconfig                      |  1 +
+ xen/arch/riscv/Makefile                     |  1 +
+ xen/arch/riscv/cpufeature.c                 | 33 ++++++++
+ xen/arch/riscv/domain.c                     | 32 ++++----
+ xen/arch/riscv/extables.c                   | 85 +++++++++++++++++++++
+ xen/arch/riscv/include/asm/cpufeature.h     |  1 +
+ xen/arch/riscv/include/asm/csr.h            | 34 ++++++++-
+ xen/arch/riscv/include/asm/extables.h       | 72 +++++++++++++++++
+ xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
+ xen/arch/riscv/setup.c                      |  3 +
+ xen/arch/riscv/time.c                       | 36 +++++----
+ xen/arch/riscv/traps.c                      |  3 +
+ xen/arch/riscv/vtimer.c                     |  7 +-
+ xen/arch/riscv/xen.lds.S                    |  3 +
+ xen/arch/x86/xen.lds.S                      |  6 +-
+ xen/include/xen/xen.lds.h                   | 10 +++
+ 16 files changed, 294 insertions(+), 35 deletions(-)
+ create mode 100644 xen/arch/riscv/extables.c
+ create mode 100644 xen/arch/riscv/include/asm/extables.h
+
 -- 
 2.53.0
 
