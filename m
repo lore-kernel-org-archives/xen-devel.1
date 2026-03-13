@@ -4,36 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA1D107BCCB
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253918.1549955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A88107BCCB
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:36:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253991.1549973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15To-0000PF-Rt; Fri, 13 Mar 2026 16:35:16 +0000
+	id 1w15VE-00049S-50; Fri, 13 Mar 2026 16:36:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253918.1549955; Fri, 13 Mar 2026 16:35:16 +0000
+Received: by outflank-mailman (output) from mailman id 1253991.1549973; Fri, 13 Mar 2026 16:36:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15To-0000O4-IT; Fri, 13 Mar 2026 16:35:16 +0000
-Received: by outflank-mailman (input) for mailman id 1253918;
- Fri, 13 Mar 2026 16:35:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w15VE-00049H-1x; Fri, 13 Mar 2026 16:36:44 +0000
+Received: by outflank-mailman (input) for mailman id 1253991;
+ Fri, 13 Mar 2026 16:36:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Uwc8=BN=bounce.vates.tech=bounce-md_30504962.69b43cb7.v1-344d125658814570b3612034e846277e@srs-se1.protection.inumbo.net>)
- id 1w15Tm-0006Ps-NA
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:14 +0000
-Received: from mail136-12.atl41.mandrillapp.com
- (mail136-12.atl41.mandrillapp.com [198.2.136.12])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 979dae23-1efa-11f1-b164-2bf370ae4941;
- Fri, 13 Mar 2026 17:35:06 +0100 (CET)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fXVT36mzZz5Qkjg4
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:03 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 344d125658814570b3612034e846277e; Fri, 13 Mar 2026 16:35:03 +0000
+ <SRS0=rc6w=BN=citrix.com=kevin.lampis@srs-se1.protection.inumbo.net>)
+ id 1w15VC-00040A-RV
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:36:42 +0000
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [2a01:111:f403:c110::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cdb9cf81-1efa-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:36:37 +0100 (CET)
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
+ by CH2PR03MB5271.namprd03.prod.outlook.com (2603:10b6:610:95::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.17; Fri, 13 Mar
+ 2026 16:36:27 +0000
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07%5]) with mapi id 15.20.9700.015; Fri, 13 Mar 2026
+ 16:36:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,122 +49,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 979dae23-1efa-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419703; x=1773689703;
-	bh=SJNwp/e+ZZuXxiujULGF+OAKlHbvuetBMvexQHhjjo8=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=VtsccEyU7+GNTAHs4flCl0OeOQylMdjXtK3xTaGgkOt+kYYO462N6VEtbGvBaPXoU
-	 50bUH5TgVxX1ZIM3cPKW61GchWLiBZazkDjJuZ5bL+c+fyLmRf2k3AZPtZIb2NkDLe
-	 fDA140diy5tmrsrfRnqA3RVIZocKA2a6sFdK3R1oo9LVb8Y6fnf6BBD53Tb6xV8NhT
-	 GzfzQmr8YeakG5WfBeDpby03k5BlRCitz8Y4Y8VAa2bIArVX3HfsU3QGpD5AP5p1p2
-	 COQTLeC1mSJzb0hz6mV1bRgLo86pyu/5A3YzEFXC+UCtLS3eRmV+au32lO58yxYVUa
-	 akRBQlMlnFn6Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419703; x=1773680203; i=thierry.escande@vates.tech;
-	bh=SJNwp/e+ZZuXxiujULGF+OAKlHbvuetBMvexQHhjjo8=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=lhkiGL07AiVnT6o0YW6293mnSd4WF2oA6yZIZXZaH7eUj250uCYW5OAtKbC7Nr83p
-	 nmj9NaOyLkL0EuRONTiFZ2slExNmGAQbSluFxJ4o73DtLxLS4BfWfD38vOZ2R+RCAQ
-	 9yA3l+X7Q3ArUQGgGaq9V3J+Z23B9MFJEHjjjQF+eEbtzcYKwP52aVlHM6uSUtJ+u6
-	 fl71oFIEI8VChyctmq/bC0AOiHJgP/sFH1Vk+FtX5gKslnYsGdimR+Kg/F0Nk3TIL3
-	 Ngbci2xTgcRCvisrb/6x01ms8DljL0fxO/W1CAZTi2aN2Q/84BD5q0ksB75OHwXUTD
-	 ibH2w8VBIK9LA==
-From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2010/17]=20hvmloader:=20Add=20support=20for=20HVMOP=5Fset|get=5Fecam=5Fspace=20hypercalls?=
-X-Mailer: git-send-email 2.51.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419703166
+X-Inumbo-ID: cdb9cf81-1efa-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VeJzfOhq0v1nD5dAgUpULM6bHwWcVQpKZcfb6Vlb5xFtngcdpadc+PKT/+I05ny4CY2DLE7SfxLodMGxjKnVPEHXMe2fMhnDEeWVXsmrhLZxGefO+tWph+kozuvy0EOg+wPTSbdAOpFHvCYbxhpav/xzad7knkKKfMBdKBboTYYAuNpS81GX+d2ucsp/gDwkTgiQUdHjIi5lWlEBSnfaqBwaRgb+HkJ8Z/1aoCGs6qKwoeuTUPbR0K6f/lwEBiAYd5IhG4hRTMTY8yw3Z4zu/4QenPWC9wo04FGoF8/BRr7NeZqBxnMI3ngTTzbDfjJ5jeVPOPCyDvgqCjv55ctpJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rAGJbO//KWTn14NI8yrsqMSsRTI1UMXqBSznXwprmUs=;
+ b=gJnpytLYCwFBaRQ+YTeQTBmJgYRChXo69pZ7EUs4A3+jzRmiEd5gjTTBHwKyHxC0Uc7zG5WOcHAbmcuAjGMihgNgLFBqCl58I4p/JDcuyNdf6WPihRoHOiTErwQJMyTK2GQWtLm5jxZjicyKWFgzQJP/R+oUKgLiC0zt1LHdg6MGKdp72Qf2jW+IxlLapWOLnwav3TKCbD7FRf3zFlx4qM3YjI6pIqR/q9kQa5mu7PUYfrujoTDxSdVh36TZWJqmkp+TOtouNgpfZtVLXmV3R83jVaIwssihXpYq1eoWDL91uBuM6YgWWA4H2T3m7RIPPYrsXWT1XBdgueFuWOPKIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rAGJbO//KWTn14NI8yrsqMSsRTI1UMXqBSznXwprmUs=;
+ b=sbLnbOn9BXUI2dh9fBIuNfbFBkNDo4q9FEWyIVmARkSDdVweu7J/CH+Y5DAX9wotx6sNukN5ju4leecW5sw076h+WjLtThdPjSdtTO972iQOaKNP0kgJ63B7D6wPbNqIaMqh4ekNS0/L6GARDDjj0wTwlMLA8iuQ70EKqwDCvDU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Kevin Lampis <kevin.lampis@citrix.com>
 To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
-Message-Id: <20260313163455.790692-11-thierry.escande@vates.tech>
-In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
-References: <20260313163455.790692-1-thierry.escande@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.344d125658814570b3612034e846277e?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:03 +0000
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger.pau@citrix.com,
+	Kevin Lampis <kevin.lampis@citrix.com>
+Subject: [PATCH v v3 0/7] Remove x86 prefixed names from cpuinfo
+Date: Fri, 13 Mar 2026 16:36:23 +0000
+Message-ID: <20260313163630.1073019-1-kevin.lampis@citrix.com>
+X-Mailer: git-send-email 2.51.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO2P265CA0312.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a5::36) To BY1PR03MB7996.namprd03.prod.outlook.com
+ (2603:10b6:a03:5b2::8)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PR03MB7996:EE_|CH2PR03MB5271:EE_
+X-MS-Office365-Filtering-Correlation-Id: b78f5879-0b94-43ea-670a-08de811eae8c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	B/+Kdm4iMFsSDcOMpiZ8wF6TnNn+uErPAF5u2lpwuHHg1iqr8ticHRS9Z3HxEgr0GgJlWwuYoXrKREKI79+ubJqeGdlG2yTqZtm4jWhz55CgDjJl9Pog8vXgwahCfpzu5vYWqqr1nAtt4aTuyg722odV3gnmPuzs0QWcVQwQc3xBw91634j5kxoF5V0mZQG4s5SRHmk6MjXX4/qt3Se/EAlaevU0GGwL6MwPAsKIM2s0UUblGUvhce2z2kIYaocJYAgg1V+fCvRbb3ysSs0yXBRSnjGEieJ1rMm3+N1fb3bhm1iHF8dLKZyJsNwjq6+GpAIimGWUuJxZJ/AV/ih1Enn2dO0qyNwLkkkr6hHdX75EqR1Zhp/Ln4f+4lRUvw8XEKaPfRNTie3Fkl6gzAZBp9Cryb9pzMn0xRQbknpB2aj0ZUoLT6+yh70rAMx18JO3t9YFi2qM0cmjc2NHceny5fvao5O0BZKbI47o4r8/1ZX+2GMquAZyhElePOtRBhNZRQdPUNCEih5gy7OpVXUyHctK+/O2RtlgPHDwHoneXpWGHvleZSrU/RIfxFu1a1i6y/uk4sf1pASybiUPYqM7w3rWp9pJs2cRQ9KGvbvQOVXDJj5uTiYPBiEVGcQUhoVziofLfYM3cWA+FoxVYZbKlvxJY2D87OYBDS17AmivFlHi1PM4VnAoHTs2KWuBMWttvX9+le2wyaGmkis6suS1vaF6qjvtD2zV+Q3n8FIdE70=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?WoKMJtn2xwQVXrg6jJHdeIltjbyTePlSP4YmR9WF7d7zqRZdi9ln0MatN6pk?=
+ =?us-ascii?Q?x8sDHx8uHCbkv9xHXs1KuIfGJdg0yo4lSN7lfv4ZUZG6IgIk/G4rVqbQR2IE?=
+ =?us-ascii?Q?EIEpjdtjFu7JlkUcz109/R4trOBXlM7IrtjGxX96+74yy11Bdq9MdqWgN+e0?=
+ =?us-ascii?Q?mj7IJkWtCBqFPPUKCkFYJvzo/l3RavL6hFFBnoPXe9pH9PcKbv0Di29PARt1?=
+ =?us-ascii?Q?Y5xANCehHs4CiF+oXEl+2WT8Jf7S7AefX8rCbYeZf+zNBj1Toz/AlG7diE3a?=
+ =?us-ascii?Q?aUlog6N6PN74310gW+t082Yp+V6ef6tA14GRL0CYCwDOW6rNkMjZS5Sr9XeE?=
+ =?us-ascii?Q?CjuMns6GwogGuRbT3xOlx811KnlP4JUVtxgd8w1JjjCZRmaAoBJoSPsA5ztY?=
+ =?us-ascii?Q?EuNN/GelHgxwyuDUZrCgYMBfwaHGfdhsAWmyA3pPUTTyUYY4cX2ajzz3OHJm?=
+ =?us-ascii?Q?SU28yv554gbzLDnhtZ9GZi/zAKaeUVc2SoKzNxCP68oeYHkXpFdrPPwAAwDb?=
+ =?us-ascii?Q?b0J/4MhDD0Lktf06XYzTctQzclkGpJ7xqrfqSl+V9jq86MI0mKwMWe3sXjKw?=
+ =?us-ascii?Q?eIeBvqPgaGqYWWFjR//IoggPG8OTKXDye3lF2o0Qs9fX01HCUW2wNWI7DKe8?=
+ =?us-ascii?Q?u1ehnThAcYJCcrh66kVjL7GBmvGXw+VX1XSOMfwtkoqaM/1W7ir5VWG+g8NH?=
+ =?us-ascii?Q?bxoE2+m2l6k7bIOW+I3LCSZizRlnfxjvpbGCV5gKnciNQ9hn7kJgWONm8BBA?=
+ =?us-ascii?Q?xnV4mezBzQ0VBsS2pgQJn+EQ66KQeyRm58L3JvIH5MGb5BxFfcbQJRvSvJZb?=
+ =?us-ascii?Q?AUMJIa8QBK8BeNgXIJ21qWoAdLB5Fb4TYnZ52QEp6D2cpP492jA/0K5cXLdR?=
+ =?us-ascii?Q?yKkzTGC4JFcG3uN2zph2vQLS31Ui2ehYz6NKJdHQZSjCN0fF82QAQWnS4fYe?=
+ =?us-ascii?Q?2JgaBHbPZdXHke06ZRSVrCOJIriIqCZCHCJDLaCXcsxGjjisJ2Al0n6H8owf?=
+ =?us-ascii?Q?hCiU0inSCzce46nQR73rM2CBVQy5w80cPvb7c8VrXxsUFAvDLyRIwcByRtHI?=
+ =?us-ascii?Q?9fAVvKVGoErZmn9C3SWj1y6fzE28LFDZaSdePfq2zH736wlC7eYtBvkY+Xap?=
+ =?us-ascii?Q?wS+K/VaAk0yCsCgT5gJDwG9H1JARtiHdX+K5CTp0A23SZPkbJDklY+ItCbRs?=
+ =?us-ascii?Q?9vt4jqmurUwy6RkycG5Lb1gAYzD9hLzrSOkJfTybL3EjvRpJ8w/KCaUeiBfu?=
+ =?us-ascii?Q?ycT/0usbvVgc5yoNH2J4oirwjnCtJBdwQJEClN4Hh3xrKL/FG7i+OgcFdilk?=
+ =?us-ascii?Q?ihZHugh0BT0ryZHJ4So5BCm2fLfoXHx2gqwQ+YSEXJaMvhb9IEDAZSQwutH3?=
+ =?us-ascii?Q?JUbaaxNaF3YJhRgckIor/rUJ4Jr7hfh5ATrI27WJVu6eqd87gUDO4qVs34hO?=
+ =?us-ascii?Q?0W44wKq5dQRdxY02oDMfY28s6UasoyG24yxQS2VZRFlD5FUsTrNQdHX86SJe?=
+ =?us-ascii?Q?w/BVBJkhjRyQ/3jGQ2Tr4mnlND6y+5M3MlHZtCxxIkxj36IZ19N2X4dyLHz5?=
+ =?us-ascii?Q?scwKmC926P4eXD6AKkbvR7SCR24oH8qHsJis53Wcr6wZTf1Yc6s3lzIY7Tr4?=
+ =?us-ascii?Q?LFQe696YyOpgc6iUcE1fYfFxh2ff1QOIuxk7YKyGDqMEy7Z4MantnvEBdLZ8?=
+ =?us-ascii?Q?YA3I5O0q/Df+BXCUTNH0dM1t7alDR6EBKkEvy7uiXmnOXPMzPqfrYUvIK5W2?=
+ =?us-ascii?Q?ysJab7O49g=3D=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b78f5879-0b94-43ea-670a-08de811eae8c
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 16:36:31.2222
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DDipIl9JCTAQhHgaAcMGzf7zJIxtoX6zqQYt1LqBmDg+KqjO8fikSqeCigDU1o/yNCW3y8xsqkPMvNbYzsDx0w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5271
 
-This patch adds wrappers in hvmloader for the hypercalls used to set and
-get the ECAM space base address and size.
+Remove x86 prefixed names from cpuinfo and all the places it is used.
+This work is part of making Xen safe for Intel family 18/19.
 
-Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
----
- tools/firmware/hvmloader/util.c | 26 ++++++++++++++++++++++++++
- tools/firmware/hvmloader/util.h |  4 ++++
- 2 files changed, 30 insertions(+)
+Kevin Lampis (7):
+  x86: relax some CPU checks for non-64 bit CPUs
+  x86: Remove x86 prefixed names from mcheck code
+  x86: Remove x86 prefixed names from acpi code
+  x86: Remove Intel 0x65, 0x6e, 0x5d from VMX code
+  x86: Remove x86 prefixed names from hvm code
+  x86: Remove x86 prefixed names from x86/cpu/ files
+  x86: Remove x86 prefixed names from cpuinfo
 
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index 45519ea583..ee7a09b5bc 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -690,6 +690,32 @@ error:
-     BUG();
- }
- 
-+int hvm_set_ecam_space(uint64_t addr, uint32_t size)
-+{
-+    xen_hvm_ecam_space_t ecam;
-+
-+    ecam.domid = DOMID_SELF;
-+    ecam.addr = addr;
-+    ecam.size = size;
-+    return hypercall_hvm_op(HVMOP_set_ecam_space, &ecam);
-+}
-+
-+int hvm_get_ecam_space(uint64_t *addr, uint32_t *size)
-+{
-+    struct xen_hvm_ecam_space e = { };
-+    int ret;
-+
-+    e.domid = DOMID_SELF;
-+
-+    ret = hypercall_hvm_op(HVMOP_get_ecam_space, &e);
-+    if ( ret == 0 ) {
-+        *addr = e.addr;
-+        *size = e.size;
-+    }
-+
-+    return ret;
-+}
-+
- static void validate_hvm_info(struct hvm_info_table *t)
- {
-     uint8_t *ptr = (uint8_t *)t;
-diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
-index 4641ca0c46..f63fdd3fbf 100644
---- a/tools/firmware/hvmloader/util.h
-+++ b/tools/firmware/hvmloader/util.h
-@@ -403,6 +403,10 @@ struct acpi_config;
- void hvmloader_acpi_build_tables(struct acpi_config *config,
-                                  unsigned int physical);
- 
-+/* Pass ecam space information to Xen */
-+int hvm_get_ecam_space(uint64_t *addr, uint32_t *size);
-+int hvm_set_ecam_space(uint64_t addr, uint32_t size);
-+
- #endif /* __HVMLOADER_UTIL_H__ */
- 
- /*
+ xen/arch/x86/acpi/cpu_idle.c           |  21 +-
+ xen/arch/x86/acpi/cpufreq/acpi.c       |   2 +-
+ xen/arch/x86/acpi/cpufreq/cpufreq.c    |   4 +-
+ xen/arch/x86/acpi/cpufreq/powernow.c   |   4 +-
+ xen/arch/x86/cpu/centaur.c             |   4 +-
+ xen/arch/x86/cpu/hygon.c               |   4 +-
+ xen/arch/x86/cpu/intel_cacheinfo.c     |   6 +-
+ xen/arch/x86/cpu/mcheck/amd_nonfatal.c |   2 +-
+ xen/arch/x86/cpu/mcheck/mcaction.c     |   2 +-
+ xen/arch/x86/cpu/mcheck/mce.c          |  36 ++--
+ xen/arch/x86/cpu/mcheck/mce.h          |   2 +-
+ xen/arch/x86/cpu/mcheck/mce_amd.c      |  16 +-
+ xen/arch/x86/cpu/mcheck/mce_intel.c    |   5 +-
+ xen/arch/x86/cpu/mcheck/non-fatal.c    |   2 +-
+ xen/arch/x86/cpu/mcheck/vmce.c         |   8 +-
+ xen/arch/x86/cpu/mtrr/generic.c        |   5 +-
+ xen/arch/x86/cpu/mwait-idle.c          |   4 +-
+ xen/arch/x86/cpu/vpmu.c                |   4 +-
+ xen/arch/x86/cpu/vpmu_amd.c            |   6 +-
+ xen/arch/x86/cpu/vpmu_intel.c          |   4 +-
+ xen/arch/x86/hvm/hvm.c                 |   2 +-
+ xen/arch/x86/hvm/svm/svm.c             |   6 +-
+ xen/arch/x86/hvm/vmx/vmcs.c            |   4 +-
+ xen/arch/x86/hvm/vmx/vmx.c             | 280 ++++++++++++-------------
+ xen/arch/x86/include/asm/cpufeature.h  |  21 +-
+ 25 files changed, 215 insertions(+), 239 deletions(-)
+
 -- 
-2.51.0
-
-
-
---
-Thierry Escande | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+2.51.1
 
 
