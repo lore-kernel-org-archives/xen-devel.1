@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDE2107BCCB
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:37:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1254064.1550081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7A6107BCCD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:45:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1254118.1550105 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15WB-0001Ny-AQ; Fri, 13 Mar 2026 16:37:43 +0000
+	id 1w15d6-0004Sc-N6; Fri, 13 Mar 2026 16:44:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1254064.1550081; Fri, 13 Mar 2026 16:37:43 +0000
+Received: by outflank-mailman (output) from mailman id 1254118.1550105; Fri, 13 Mar 2026 16:44:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15WB-0001Nn-62; Fri, 13 Mar 2026 16:37:43 +0000
-Received: by outflank-mailman (input) for mailman id 1254064;
- Fri, 13 Mar 2026 16:37:42 +0000
+	id 1w15d6-0004Rm-Hq; Fri, 13 Mar 2026 16:44:52 +0000
+Received: by outflank-mailman (input) for mailman id 1254118;
+ Fri, 13 Mar 2026 16:44:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=99UC=BN=bounce.vates.tech=bounce-md_30504962.69b43cb9.v1-0d58c467262f41fd83129dba59f499f8@srs-se1.protection.inumbo.net>)
- id 1w15Tq-0006Ek-OL
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:18 +0000
-Received: from mail134-15.atl141.mandrillapp.com
- (mail134-15.atl141.mandrillapp.com [198.2.134.15])
+ <SRS0=p3qR=BN=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1w15d5-0004GG-CC
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:44:51 +0000
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [2a00:1450:4864:20::52a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9a83c461-1efa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:35:10 +0100 (CET)
-Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail134-15.atl141.mandrillapp.com (Mailchimp) with ESMTP id
- 4fXVT52z3lzPm0VQt
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:05 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 0d58c467262f41fd83129dba59f499f8; Fri, 13 Mar 2026 16:35:05 +0000
+ id f339755f-1efb-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:44:49 +0100 (CET)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6642c9254c2so1346891a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 09:44:49 -0700 (PDT)
+Received: from fedora (user-109-243-67-101.play-internet.pl. [109.243.67.101])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-66350b86008sm1394733a12.28.2026.03.13.09.44.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Mar 2026 09:44:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,130 +47,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a83c461-1efa-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419705; x=1773689705;
-	bh=7Tb9FoFWUrTG8bVI2BmSiKFAzIP/VrW/gdQM1MC0oms=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=tVTR8ZL+tGzsruvdEkBKwXPgUz58kYymfrscpoGZzQfkjym4/vkwPUmFlpPLnNSLM
-	 DEgYLBS31r/pv1MzcJ+cmYvGeY2FiRxT+O3F2CkwCmPCWNB8nOSMd6DXbMBL4HIazj
-	 grMJ4BxQ6kttNnlEb/zyNBI2CQfU4EBMG/mfo8CBHMb3uNYSMX8whGn/YjuqjJktqM
-	 Bgq0K6D+GvFucvA4tj+mhmhjYkpr+HDqlw95UPFLdJYbIcgcysYX0nc+0txsTEw07a
-	 u9/LVT6rytYUN248JbVKq7pCNOO047mRFdJfw2ESrpxi2xljvnnMVswnQPsiuTjzL4
-	 PBqZNHLYYNIEA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419705; x=1773680205; i=thierry.escande@vates.tech;
-	bh=7Tb9FoFWUrTG8bVI2BmSiKFAzIP/VrW/gdQM1MC0oms=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=n7hT4u57+/WziwtTPyLi72zdqfKdJdi+w4ywlBQDjtIBMzrlWuDnKpfDljbg3IpQl
-	 OSJ7wMdvfGFt+zCxmgd7p5RXMFC/K1FVMxSoLhleX1h5vef/I8fZUsfigDVHjnIKw1
-	 a50UV4tuBp4YU/eTScAnCikpsXCxE0ljkkBsS1kNFb/mUs8VuAab0ywgdyhdtO7xy8
-	 PF6+rj1gdeCCfdJ5eh0LGvmAljng2+Zci7YjLYhfB0SNQ/qpp3kQtmFK8g5Pgwa208
-	 HR1+ONeFHgjSmGZ3UaC77NOz33QwV/rFE+SSqdap+jbna1f3xsYh4sTxUWLWNOG6wH
-	 yC08iq99W8UNw==
-From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2015/17]=20hvmloader:=20Set=20MCFG=20in=20ACPI=20table?=
-X-Mailer: git-send-email 2.51.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419704313
+X-Inumbo-ID: f339755f-1efb-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773420288; x=1774025088; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iuU0sIa/VVlWbkh1TAky3TiyUmxNd2Qh9VKL5gjHn0k=;
+        b=loPICnzuKd343iWNPlJjaz33BKshEr3w55lwx81Vx1L8DJlYD+Xj8yZ1WWxL6m8w1c
+         QmKkrkGz8odl2XG4ygR8VIIbhQ8or1AwgN+NaJDU4OuCxB/u0PLBbUiD5eigJS3zS1Kl
+         gMdKaWIZHTzG/Dpd0nz5DvkgxfFygAZHoEbFSsCDTA6qbVAglL6hUi3liDJbvxVtKtev
+         L5oQ90PillVZuhth7ofS7r7H4seGToHKYlneB56Fs5slSc1jOC6XGpyCnq7pTwJqTeyz
+         sYYOL9LYIHRhpH9wUsr+gG9aAXbEUfA0LQV7+9u0laOV4Cn8Duqh5IhvaoJgqG7FnMxV
+         NRlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773420288; x=1774025088;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=iuU0sIa/VVlWbkh1TAky3TiyUmxNd2Qh9VKL5gjHn0k=;
+        b=qXLo0fT1mShYtzutR/wqxW4lwYM3NANAnhEbvZ1DE4Cx3MXyJns21rTjD8LYaYS5RB
+         xij4EXh2vycupr1/t/m2T6YExNuWrmYEXIhfGMWSwisR08GxeXMaEg2ZtfzS9/PZjjBJ
+         yjeJ0H1SDkPNRx+X6RNPC+MesSHVuoWRbLiAoiPslMYXjdzos+Pkt89rPSknf5sR81VM
+         DPBCCDgN4HhcKc1dZ1xYBLkej0mf/uKkhsogvbGV8KCE4U5L9FtRSbsA29r/pKn/TTA8
+         jurHppnQFcTyAhUcks0tl7oLlnv4CRGgo5+oMMhq1PBRe1TtbchANk4bJuHSTdMRvEhL
+         wp3A==
+X-Gm-Message-State: AOJu0YzoX3UOlwXEPt8sU9Xqt8Bji6bDNnybHunoUI4JmZr7SfIo5aZq
+	p1OQ7dim268B3SJwERwQhpg7+yKgk9RLx71ieK1dBT+g/aWUwcsUiJDJddAMUg==
+X-Gm-Gg: ATEYQzynBJVmfcAzl4RaWR68gt42aLpUM464+JwyErMi7VtSE2CcqGapHrvKV0hcOQ+
+	RkEYHvJWrLeqfkLETQPwHPrui9bEAzYeqbLmJVwsq5/AlfQVXMZ3bzuwZeUthGvJW7KI1TF+p6P
+	8+ZhDZ7aLZJww1r7KH3F2mZi4yH2lrURDCFR4ICO0ccgIQO086d8SM2QoQ5zW/C5Dmh4WNg46PN
+	fX2WgGAJddiMpaov+tAXHXb4mQvBnUsVDzRJJ6VrmvkwCrRNIG8Gs+O6b/YlfSMKrJtd7Klv5Lb
+	yDU03z3NkC0PBgaR5Jy8407yX9IopAEDxlzEPKXVAYz5KuI2I3y3Sb5LuZ7lnK/FyeurnObgiYg
+	yflk5SUcsVi+9OYe/c0AEQ2NxgHb3DayMhXJTIQashCs9Tn5tUUoYNSkdPNY2ZQmJqtIm2alIlm
+	VM4o/AIgAQHU4rSVexi0yNbOOFRr66YIJhy+j0asQl1VUHv9unUKMrrzaqkzGi1y9WaTS8itOyE
+	iAnLAw7
+X-Received: by 2002:a05:6402:1e96:b0:662:fd15:1ae with SMTP id 4fb4d7f45d1cf-663babf76afmr2209158a12.21.1773420288310;
+        Fri, 13 Mar 2026 09:44:48 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
-Message-Id: <20260313163455.790692-16-thierry.escande@vates.tech>
-In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
-References: <20260313163455.790692-1-thierry.escande@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.0d58c467262f41fd83129dba59f499f8?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:05 +0000
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 2/4] xen/riscv: add csr_allowed_read() helper
+Date: Fri, 13 Mar 2026 17:44:36 +0100
+Message-ID: <2ea34e564533accb33ccee66b4a8c7a750733ae0.1773419622.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1773419622.git.oleksii.kurochko@gmail.com>
+References: <cover.1773419622.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-This patch extends hvmloader_acpi_build_tables() to detect if MMCONFIG
-is available by obtaining its base address and size from the hypercall
-HVMOP_get_ecam_space and sets the flag ACPI_HAS_MCFG in the ACPI config
-if needed.
+Accessing some CSRs may trap when the corresponding extension is not
+implemented or enabled. Introduce csr_allowed_read() which attempts to
+read a CSR and relies on the exception table mechanism to safely recover
+if the access faults.
 
-This also sets the MMCONFIG area in E820 map using the same method.
+This helper allows Xen to probe CSR availability without taking a fatal
+trap and will be used for feature detection during early boot as we
+can't always rely on what is in riscv,isa string in DTS.
 
-Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
+While touching the header, reorder the include directives to follow the
+usual Xen style.
+
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- tools/firmware/hvmloader/e820.c | 11 +++++++++++
- tools/firmware/hvmloader/util.c |  9 +++++++++
- 2 files changed, 20 insertions(+)
+ xen/arch/riscv/include/asm/csr.h | 34 +++++++++++++++++++++++++++++++-
+ 1 file changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/tools/firmware/hvmloader/e820.c b/tools/firmware/hvmloader/e820.c
-index 86d39544e8..ff5c270f57 100644
---- a/tools/firmware/hvmloader/e820.c
-+++ b/tools/firmware/hvmloader/e820.c
-@@ -158,6 +158,8 @@ int build_e820_table(struct e820entry *e820,
-     unsigned long acpi_mem_end = acpi_enabled ?
-         ACPI_MEMORY_DYNAMIC_START + (acpi_pages_allocated() << PAGE_SHIFT) :
-         RESERVED_MEMBASE;
-+    uint64_t mmconfig_addr;
-+    uint32_t mmconfig_size;
+diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+index 01876f828981..b9bee3d25d21 100644
+--- a/xen/arch/riscv/include/asm/csr.h
++++ b/xen/arch/riscv/include/asm/csr.h
+@@ -6,8 +6,10 @@
+ #ifndef ASM__RISCV__CSR_H
+ #define ASM__RISCV__CSR_H
  
-     if ( !lowmem_reserved_base )
-             lowmem_reserved_base = 0xA0000;
-@@ -260,6 +262,15 @@ int build_e820_table(struct e820entry *e820,
-         nr++;
-     }
- 
-+    /* mark MMCONFIG area */
-+    if ( ! hvm_get_ecam_space(&mmconfig_addr, &mmconfig_size) )
-+    {
-+        e820[nr].addr = mmconfig_addr;
-+        e820[nr].size = mmconfig_size;
-+        e820[nr].type = E820_RESERVED;
-+        nr++;
-+    }
+-#include <asm/asm.h>
+ #include <xen/const.h>
 +
-     /* Low RAM goes here. Reserve space for special pages. */
-     BUG_ON(low_mem_end < MB(2));
++#include <asm/asm.h>
++#include <asm/extables.h>
+ #include <asm/riscv_encoding.h>
  
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index ee7a09b5bc..2cd1cadfc3 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -903,6 +903,8 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
-     struct acpi_ctxt ctxt;
-     long long tpm_version;
-     char *end;
-+    uint64_t mmconfig_addr;
-+    uint32_t mmconfig_size;
+ #ifndef __ASSEMBLER__
+@@ -78,6 +80,36 @@
+                            : "memory" );                        \
+ })
  
-     /* Allocate and initialise the acpi info area. */
-     mem_hole_populate_ram(ACPI_INFO_PHYSICAL_ADDRESS >> PAGE_SHIFT, 1);
-@@ -953,6 +955,13 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
-         config->pci_hi_len = pci_hi_mem_end - pci_hi_mem_start;
-     }
- 
-+    if ( ! hvm_get_ecam_space(&mmconfig_addr, &mmconfig_size) )
-+    {
-+        config->table_flags |= ACPI_HAS_MCFG;
-+        config->mmconfig_addr = mmconfig_addr;
-+        config->mmconfig_size = mmconfig_size;
-+    }
++static always_inline bool csr_allowed_read(unsigned long csr,
++                                           unsigned long *val)
++{
++    bool error = false;
 +
-     s = xenstore_read("platform/generation-id", "0:0");
-     if ( s )
-     {
++    /*
++     * Use "+" as a constraint instead of "=" to ensure the compiler passes the
++     * initial value into the asm volatile block. Otherwise, if the instruction
++     * (at label 1) faults, the variable 'error' may contain an undefined value
++     * instead of 0.
++     * If reading of CSR register was failed, we don't care about val, so "="
++     * constraint could be used in asm volatile block to not force always init.
++     * val argument before being passed to csr_allowed_read() functions.
++     *
++     * This avoids the need for an additional instruction inside the asm block
++     * to explicitly initialize 'error' to 0 before executing the potentially
++     * faulting instruction.
++     */
++    asm volatile (
++        "1: csrr %[val], %[csr]\n"
++        "   li %[err], 1\n"
++        "2:\n"
++        ASM_EXTABLE(1b, 2b)
++        : [val] "=&r" (*val), [err] "+&r" (error)
++        : [csr] "i" (csr)
++        : "memory" );
++
++    return error;
++}
++
+ #endif /* __ASSEMBLER__ */
+ 
+ #endif /* ASM__RISCV__CSR_H */
 -- 
-2.51.0
-
-
-
---
-Thierry Escande | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+2.53.0
 
 
