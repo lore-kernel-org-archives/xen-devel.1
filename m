@@ -4,40 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD5A107BCCB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CD9107BCCA
 	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:37:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1254026.1550027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1254031.1550029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Vt-0007J7-5d; Fri, 13 Mar 2026 16:37:25 +0000
+	id 1w15Vt-0007LF-CO; Fri, 13 Mar 2026 16:37:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1254026.1550027; Fri, 13 Mar 2026 16:37:25 +0000
+Received: by outflank-mailman (output) from mailman id 1254031.1550029; Fri, 13 Mar 2026 16:37:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Vt-0007IC-1a; Fri, 13 Mar 2026 16:37:25 +0000
-Received: by outflank-mailman (input) for mailman id 1254026;
- Fri, 13 Mar 2026 16:37:23 +0000
+	id 1w15Vt-0007KX-9L; Fri, 13 Mar 2026 16:37:25 +0000
+Received: by outflank-mailman (input) for mailman id 1254031;
+ Fri, 13 Mar 2026 16:37:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rc6w=BN=citrix.com=kevin.lampis@srs-se1.protection.inumbo.net>)
- id 1w15Vg-00040A-VV
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:37:12 +0000
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [2a01:111:f403:c007::2])
+ <SRS0=+CwN=BN=bounce.vates.tech=bounce-md_30504962.69b43cb8.v1-4c742f4a7f4f4904ac3549a756e6bd0d@srs-se1.protection.inumbo.net>)
+ id 1w15To-0006Ek-Nv
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:16 +0000
+Received: from mail134-15.atl141.mandrillapp.com
+ (mail134-15.atl141.mandrillapp.com [198.2.134.15])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e1601c20-1efa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:37:11 +0100 (CET)
-Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
- by CH3PR03MB7412.namprd03.prod.outlook.com (2603:10b6:610:198::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Fri, 13 Mar
- 2026 16:36:44 +0000
-Received: from BY1PR03MB7996.namprd03.prod.outlook.com
- ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
- ([fe80::5068:e1b5:b478:8d07%5]) with mapi id 15.20.9700.015; Fri, 13 Mar 2026
- 16:37:03 +0000
+ id 9947323d-1efa-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:35:08 +0100 (CET)
+Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail134-15.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fXVT42HJpzPm0V3p
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:04 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 4c742f4a7f4f4904ac3549a756e6bd0d; Fri, 13 Mar 2026 16:35:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,147 +45,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e1601c20-1efa-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HujcbZVQlkiQ4pwQH9DE3gv7KcvxEatO3ZsNp5wda7TkwrnF2g0b3zZQZdd236NU9uhzu2rsY9k/51PSNyaPppVcCERJYDAyfp1ZX9bTMg2N1o4nFjBQc8aQRYxaioKTBfXfn0ugeuFFy4qiN1vWfbzhk1zoqwpf0HsBlvZ/FyTAs7hc1ycr1bOht/hNsYSfUd2ZjmKQFJInFczJZzZBVm9OA2kxRapOXTWeLvBE2YvDekq7jp3RE+VI7KHPPDnQMNueICna26cDOeM+JVMXVJadcTIv9wKw4tnwN78XJi5LqMK/klyN9iMtcqYfCuNcCDVsC6wh68BF8JBhxO6Qmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Yd8n5uLy2YBtVrAJOKIpy1iVYTwPAmDskE+Dkrm1v1c=;
- b=wikCIBkDNBhVhrB7RBKFnsn46Z7d8wGbJwIEdN3SVb0Ky20hvsHnaNDDyBJTpfakcKQhXAj9dgxTNu+9Z7sDp5Ka8u0Dk8bLerFyJj8Z1pyuJHwcQ8fpvRtS0x2ZY5BSFMJ+3IJH9oWwLtfP3xLR/N9yZV6XTs0933+FnVDn60pj3cn9avqZjH1CyBbCtrU9++5Wx5gOuwshKcdRfWOt/41tFI2Y74oLRNmLKX2YX5f2qi56a9fFFq6h5DifFdtBvx1rxQdI+d7JvpQJzyAn1rXn4O1/UbTHpxZgTmbyGBWFr/lUyTdTEO3FWrKY+A2QwXS5BLHEfhf5S/asxIR6/A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Yd8n5uLy2YBtVrAJOKIpy1iVYTwPAmDskE+Dkrm1v1c=;
- b=dKNqnz7gi25nKxkUEYmQnstz9cowR53FGQ4Jgqsm52VaSeOncr+YWDm7xC6fxaHre5F9MZLqhy9P1Tuns0KfUDq/3cDrje8/15GnCqf0ExgbIi2xz2tXjOya0hEx4prZZg7hEBQG6JbvbTKojCZjdIZ/DwMdVJJfi9beG1094O0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Kevin Lampis <kevin.lampis@citrix.com>
+X-Inumbo-ID: 9947323d-1efa-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1773419704; x=1773689704;
+	bh=Hgw6ALXwahveH8XpeaP1oYUCpV9mVDJR9YzEbJZFSCM=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=Mw1wDR5DHu8B4KkyqcCPxxNRFao0l9qHnuMzUvOEDFGgGAN4p8xZ7tWMBSSDTzm1f
+	 bvhCjJsH1efWgoJQ6KRhB/yt+CT5gOT59mKx5PsOpnkruvxo3m7XpLNBl8CEItgPKK
+	 7+rSslNK6mh/aLYc2nq51CXrVZ2kft2WEAYZUWscRdGaHyRSYhdwsHSchSE9PqzIgO
+	 UKIe0jccpuhd/bZ7vWlskZcf0kBVeAEeaQvIfRPdHdXt3mliQbQVNL9HAxz6NZhtFf
+	 Cd0OdZc8ut1N7z7Q+Xs92/+A8oH9YgG78C2U0LX1hTKbJ5JPL3aeSGFkqHjgvHcZkc
+	 3MiEIXYpyAXtA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1773419704; x=1773680204; i=thierry.escande@vates.tech;
+	bh=Hgw6ALXwahveH8XpeaP1oYUCpV9mVDJR9YzEbJZFSCM=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=BEn/o7TCPtwEkYCRFfTyo80k7wi0W1aCZ8bJzjbv272Vg+pZKFrYx/wBtmsYO/CU+
+	 dHXvdJtKNEn+8ui23EFuXwbZHEGliqNY7m4QpOn3s6dcp4QG+aLLsf0c0JFWwWEPAO
+	 PE7F4AQhKywwk0w2t01HOcPqqmdxygPL5qCYpI1D2jo6E9pBX+HatfUp/Izy8LO7ij
+	 7LpevsfSpK9ENg9AWlDBzSWdACdtvNyszxXWbtLFxcedk5r5HoLjbjfVb1IU/Mzjxr
+	 C7PYxVfEhQMjiaHN3LVXEZEh/RIqEyiXcfjZ8afe3nAfF75foUosFcC43c+BLS6/ku
+	 1WQV9hkKxtntQ==
+From: "Thierry Escande" <thierry.escande@vates.tech>
+Subject: =?utf-8?Q?[PATCH=2009/17]=20xev/hvm:=20Add=20HVMOP=5Fget|set=5Fecam=5Fspace=20hypercalls?=
+X-Mailer: git-send-email 2.51.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1773419702933
 To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger.pau@citrix.com,
-	Kevin Lampis <kevin.lampis@citrix.com>
-Subject: [PATCH v v3 7/7] x86: Remove x86 prefixed names from cpuinfo
-Date: Fri, 13 Mar 2026 16:36:30 +0000
-Message-ID: <20260313163630.1073019-8-kevin.lampis@citrix.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20260313163630.1073019-1-kevin.lampis@citrix.com>
-References: <20260313163630.1073019-1-kevin.lampis@citrix.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0308.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:197::7) To BY1PR03MB7996.namprd03.prod.outlook.com
- (2603:10b6:a03:5b2::8)
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
+Message-Id: <20260313163455.790692-10-thierry.escande@vates.tech>
+In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
+References: <20260313163455.790692-1-thierry.escande@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.4c742f4a7f4f4904ac3549a756e6bd0d?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260313:md
+Date: Fri, 13 Mar 2026 16:35:04 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PR03MB7996:EE_|CH3PR03MB7412:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c28bd30-667a-405d-a693-08de811ec1aa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	rlkNn/n0nqb/H9RqKcNWbEagWf83eRo8Hp8EO/d79NjWFxxfgRkaAbtHUuHB6nkjT+o+Afo2a9s5RSzSA92ukDCzzBSwZgEIGR9GXjkkdv8CXTemveS3yTzat6a7CwQ84DbkAHAUwKhFqpwZyVsEMmeEQ4HS958mHTstm1o+I/7yKAOxb/0aFjRa1ZCHZTh3vwYSuXPZxpF3nFUDx/KOsv/sPe6zkbOKYEPpCagaZqe7n+/RIt2uYsFFIiQ7ZYFoQzyEPWb5rebU+COhveKNH03ooIMxDTDxVug1P3+JpkD5ks8uol1A4DHP9s5c5GMYTgrVUbFKD/G/VRO+9oaY9B4REYEwjHun9ux72J12agwNsgEDPAwkHc2pKD2M9M9bVC5KnyHM+2N9DOyuy08U4iTAqowF/6m+zbt/C81d6rnhEUu2qRnS2FElAciKXVgNcMN2XDJbL09K0lt6PMXWUspq1HWMnV9s2Fst9VxXvOhk7kQ0aKQauuwPDAe/w+LHRhrxzkVgsnrs2ahbhVIvbuutsRm7sHVlynkn3anwzI6ORJF/p3GbN00AR98jJHSC+PVD5n+DzknqUm1uobVzEEzPbtdT2k7NBEpVzFZQ4FF29T2Ziv7FcbqCDOiVajZROeK8zp6XtTG4UAR1IdE2psXBOSOTo1uZWRUHTkFgl2H4bXs4AbTzp7hwtj2Dw6mK2oUJIczIJrYTuYlFXW7nCLRw3RE3Ngq5ZPeMHCbyPlE=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?fL5UP2X4258NefnzQ90Agk85sctdBd4LR9e0Nn6Z77eeBV+2LBLmtRAF68L7?=
- =?us-ascii?Q?VzsvIttNINBCWpGN+n9A7bSi4+70PkAhyWkcO10CTuXSbKvsaTF6Vmzb7RGZ?=
- =?us-ascii?Q?uLL+NiSAnlqK1ZUVjLETaHPFKntMK2QKOWl+/lgItuB0rdBKYmFwsnnHoeFW?=
- =?us-ascii?Q?O5k4TtjmYsUFrTnp5puE4OJsuG3tf2kzxgNr2mC5jqEVAcqz8zANcKsIqLxW?=
- =?us-ascii?Q?vDbpCCVOLCGRiKbf0EECbhxzsRHF7Re9xTNUvE9wyBpNpOxqfMIj+r8QgMPF?=
- =?us-ascii?Q?VUv6u/JcXu9OMVQ5nxOr1I1BOAm8LxZM/vOhUVDyyk1mQbgBceTVSlBjuAwR?=
- =?us-ascii?Q?VylJpmf6MXD6MFIvDIs3Vms/JfENN9z/iwMF/LXYPXlHsmeObA0kRPBxWtFV?=
- =?us-ascii?Q?sCUnovp5hK6q34hdxQKpx/EAqdpxriQiKMVnGIJ+EHR7sZp7VbumvLmB3ToA?=
- =?us-ascii?Q?fVHZ1gZO7Q2rJjhaOucTeDTLxLtKLyDsj/66lhxXBSAHnPOUa0fr+iF6wOxv?=
- =?us-ascii?Q?dusbWccNNE/RGjuUskfnvS6bOXkwoNK0rGBsbaQUadsersk7x+eMGZl5ICCB?=
- =?us-ascii?Q?wfM/azeMVDtKTaEFblilzyWjDsoymezcy+Z3/hEmLHKkQaz2UOaYEfu5mG6v?=
- =?us-ascii?Q?3rO3pmh8dsGk0uLtkS9KM4VFg/YROWBLXKcAQYLdkupj+qNJXx+KlZsO+2Wx?=
- =?us-ascii?Q?no4uqfaB4p7bWpiTETMKapPXilaXz2sXV1Ej+ZrTecWXVV+2ML6FtLJdQmnQ?=
- =?us-ascii?Q?N5r+gOyzP2v7Qkm6huoMeQW/x4w93H7dmKhNddOoZ0HLAW3Y6/epxxWpYItt?=
- =?us-ascii?Q?6gqWIRGiADK6++8TP9a18M5QY39lOMwGTpJXCDAb33sauWMyrYyChsyJjvk2?=
- =?us-ascii?Q?mNtqRjp0orPZB+tqix2QMz/2at4JNXzDm17dO0aBak1T06UxlYdi0bErgGdG?=
- =?us-ascii?Q?wUyK/RNZ3aFdBhoPujkmTNhX9LAGy7VvOvukbrlLU4nk7xImKROtMLucw6Zw?=
- =?us-ascii?Q?J6IdeGu8fMnF+3BULxxkgbtfrfPhKO5r2unxEMl+kkPjFIj68nmosVMf1bfb?=
- =?us-ascii?Q?1o1tHq31rIxQDiEfniOVZ4GWyYcHMYOJFtDZ+bb1qzj4qJ6/VCnmD1PjxMdx?=
- =?us-ascii?Q?h7CT8rzzQw5GjodJjvKWMfwdt5Yv6x89lerVrSwqm17jgZ4Hom2CBtjw5WE0?=
- =?us-ascii?Q?czIBkEC3Y/dWimXZOM9MVzf2xJ1m5Fvps0zEbodGSS9DiDGeNNqWmoBoHqHF?=
- =?us-ascii?Q?bf099d46mROkIvwM9j0i3K9JIrsAQIF8H6Vta1rs0c9TqZU+4zLr2c5BbrcI?=
- =?us-ascii?Q?HpavBLAJGc40Pl+/Q8hy5b9KPB+8nXSGF7giJw3jLzXV5U8nOz+NxRii/Uvz?=
- =?us-ascii?Q?K2IGTvoOCDMysecn+MkijVSGhQcT4aBAnsxQYdx4MC1gQ83urLHtYE184Sue?=
- =?us-ascii?Q?uRs3kPkSp1Shtb+NuyDfYW3ti+CCRC96oc7LfKUkX3iOXQvDkOSjeDiyjwho?=
- =?us-ascii?Q?B1MBUlwy+j/pOvYDnC+5OfOVN5+bvLGQ5siL9UfiiAel1IIxrQ2ztXCUTIOl?=
- =?us-ascii?Q?zSwKuw7GSc9DauJOknXq7hzG3bxCRbczLJtAr0P97ivAYggZhi2/t50OaHo3?=
- =?us-ascii?Q?GC9EiWB4TfPisCF4DYJZX+2GWdP4P5p5DSIdF5hrc+YfL9ZX2ZtWt5dkCD5y?=
- =?us-ascii?Q?9LkacNYUdUkJHWhHcWTv1WU4UTi8oZFR/PfRYx0VttFBMWKYNoF6HNH5qIqX?=
- =?us-ascii?Q?T6bbJ5JPYQ=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c28bd30-667a-405d-a693-08de811ec1aa
-X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 16:37:03.2855
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: snsrs0O6E+0fUmQq6A90BcItMWtw4DnLvCq/Mm3OzAi+IfdzxPijcEBv79h+24l+N8WmLSKXKkDpzhEazudQyw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR03MB7412
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Kevin Lampis <kevin.lampis@citrix.com>
+This patch adds 2 HVMOP hypercalls, HVMOP_get|set_ecam_space, used to
+set and get the base address and size of the PCIe ECAM space as
+configured by hvmloader.
+
+Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
 ---
-Changes in v2:
-- Remove the unneeded unions
+ xen/arch/x86/hvm/hvm.c            | 52 +++++++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/domain.h |  4 +++
+ xen/include/public/hvm/hvm_op.h   | 11 +++++++
+ 3 files changed, 67 insertions(+)
 
-Changes in v3:
-- No changes
----
- xen/arch/x86/include/asm/cpufeature.h | 21 ++++-----------------
- 1 file changed, 4 insertions(+), 17 deletions(-)
-
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index dcd223d84f..11661a114f 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -43,29 +43,16 @@
- #ifndef __ASSEMBLER__
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 4d37a93c57..a46dfa955d 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -5195,6 +5195,58 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) arg)
+         rc = current->hcall_compat ? compat_altp2m_op(arg) : do_altp2m_op(arg);
+         break;
  
- struct cpuinfo_x86 {
--    /* TODO: Phase out the x86 prefixed names. */
-     union {
-         struct {
--            union {
--                uint8_t x86_model;
--                uint8_t model;
--            };
--            union {
--                uint8_t x86;
--                uint8_t family;
--            };
--            union {
--                uint8_t x86_vendor;
--                uint8_t vendor;
--            };
-+            uint8_t model;
-+            uint8_t family;
-+            uint8_t vendor;
-             uint8_t _rsvd;             /* Use of this needs coordinating with VFM_MAKE() */
-         };
-         uint32_t vfm;                  /* Vendor Family Model */
-     };
--    union {
--        uint8_t x86_mask;
--        uint8_t stepping;
--    };
-+    uint8_t stepping;
++    case HVMOP_set_ecam_space: {
++        xen_hvm_ecam_space_t ecam;
++        struct domain *d;
++
++        if ( copy_from_guest( &ecam, guest_handle_cast(arg, xen_hvm_ecam_space_t), 1 ) )
++            return -EFAULT;
++
++        d = rcu_lock_domain_by_any_id(ecam.domid);
++        if ( d == NULL )
++            return -ESRCH;
++
++        if ( d->arch.ecam_addr ) {
++            rcu_unlock_domain(d);
++            return -EFAULT;
++        }
++
++        if ( (ecam.size >> 28) || (!ecam.addr) ) {
++            rcu_unlock_domain(d);
++            return -EINVAL;
++        }
++
++        d->arch.ecam_addr = ecam.addr;
++        d->arch.ecam_size = ecam.size;
++
++        rcu_unlock_domain(d);
++        break;
++    }
++
++    case HVMOP_get_ecam_space: {
++        xen_hvm_ecam_space_t ecam;
++        struct domain *d;
++
++        if ( copy_from_guest( &ecam, guest_handle_cast(arg, xen_hvm_ecam_space_t), 1 ) )
++            return -EFAULT;
++
++        d = rcu_lock_domain_by_any_id(ecam.domid);
++        if ( d == NULL )
++            return -ESRCH;
++
++        if ( ! d->arch.ecam_addr || ! d->arch.ecam_size ) {
++            rcu_unlock_domain(d);
++            return -EINVAL;
++        }
++
++        ecam.addr = d->arch.ecam_addr;
++        ecam.size = d->arch.ecam_size;
++        rc = __copy_to_guest(arg, &ecam, 1) ? -EFAULT : 0;
++
++        rcu_unlock_domain(d);
++        break;
++    }
++
+     default:
+         rc = -ENOSYS;
+         break;
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index ad7f6adb2c..24ec33fc4d 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -476,6 +476,10 @@ struct arch_domain
  
-     unsigned int cpuid_level;          /* Maximum supported CPUID level */
-     unsigned int extended_cpuid_level; /* Maximum supported CPUID extended level */
+     /* Emulated devices enabled bitmap. */
+     uint32_t emulation_flags;
++
++    /* PCI ECAM space emulation */
++    uint64_t ecam_addr;
++    uint32_t ecam_size;
+ } __cacheline_aligned;
+ 
+ #ifdef CONFIG_HVM
+diff --git a/xen/include/public/hvm/hvm_op.h b/xen/include/public/hvm/hvm_op.h
+index e22adf0319..c84febc37c 100644
+--- a/xen/include/public/hvm/hvm_op.h
++++ b/xen/include/public/hvm/hvm_op.h
+@@ -166,6 +166,17 @@ struct xen_hvm_get_mem_type {
+ typedef struct xen_hvm_get_mem_type xen_hvm_get_mem_type_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_hvm_get_mem_type_t);
+ 
++#define HVMOP_set_ecam_space    16
++#define HVMOP_get_ecam_space    17
++struct xen_hvm_ecam_space {
++    domid_t  domid;
++    uint16_t pad[3]; /* align next field on 8-byte boundary */
++    uint64_t addr;
++    uint32_t size;
++};
++typedef struct xen_hvm_ecam_space xen_hvm_ecam_space_t;
++DEFINE_XEN_GUEST_HANDLE(xen_hvm_ecam_space_t);
++
+ /* Following tools-only interfaces may change in future. */
+ #if defined(__XEN__) || defined(__XEN_TOOLS__)
+ 
 -- 
-2.51.1
+2.51.0
+
+
+
+--
+Thierry Escande | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
 
