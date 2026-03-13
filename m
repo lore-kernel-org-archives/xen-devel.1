@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DA1106FD91
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 07:05:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253268.1549541 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D51D106FD91
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 07:11:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253278.1549550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0wa4-0002kn-SC; Fri, 13 Mar 2026 07:05:08 +0000
+	id 1w0wfd-0004Ii-Fc; Fri, 13 Mar 2026 07:10:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253268.1549541; Fri, 13 Mar 2026 07:05:08 +0000
+Received: by outflank-mailman (output) from mailman id 1253278.1549550; Fri, 13 Mar 2026 07:10:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0wa4-0002kg-Ph; Fri, 13 Mar 2026 07:05:08 +0000
-Received: by outflank-mailman (input) for mailman id 1253268;
- Fri, 13 Mar 2026 07:05:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w0wfd-0004Ib-BG; Fri, 13 Mar 2026 07:10:53 +0000
+Received: by outflank-mailman (input) for mailman id 1253278;
+ Fri, 13 Mar 2026 07:10:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uwFZ=BN=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1w0wa3-0002ka-E0
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 07:05:07 +0000
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [2a00:1450:4864:20::332])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f3df72d5-1eaa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 08:05:01 +0100 (CET)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4852ff06541so17970525e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 00:05:01 -0700 (PDT)
+ id 1w0wfc-0004IT-8p
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 07:10:52 +0000
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [2a00:1450:4864:20::32b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c4163377-1eab-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 08:10:50 +0100 (CET)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4852ff06541so18018185e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 00:10:51 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48557c66583sm13953565e9.21.2026.03.13.00.04.59
+ ffacd0b85a97d-439fe20b544sm16037226f8f.20.2026.03.13.00.10.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Mar 2026 00:04:59 -0700 (PDT)
+ Fri, 13 Mar 2026 00:10:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,56 +47,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3df72d5-1eaa-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c4163377-1eab-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1773385500; x=1773990300; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1773385850; x=1773990650; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=N8jOkHiXd1EfrhPo3SajjKBWEjcQ9wGxmz6VVii8k3M=;
-        b=Zr01AhX4fVcBAPE1WqHZ3Oj08Z37Sq/6R+kJQzd72zRLqdER49rEMrRiUMRtenkf95
-         Yw3g6c+clQ+PF/+MflGdidpK/N2+T3nOKvU5j4o6zhU7+p7HT5USIQQk91qseCCTca+9
-         8Ri2ZINTmuX6Arx5YJVXweoD9fIcv6M3PEfVI9zcLOIMppMXgdNNbAFGbCRTj/aGuz1J
-         Yyg9r9hot6XG0RdwW23ullJWzO915fGHUPL7bnQdqDYHPBiubk4e/mGopNoMZzL9wtgX
-         YzqfVV880l65QHIQ93RkZLB7WHCQrDqWyZ1GdWca/H3IHUqkxn0AHtKxri3pAGyJjdTd
-         7LsQ==
+        bh=IkELls+cI5NtJoMoohsJg9eiOC1UmK6cR3HNcFjiUX0=;
+        b=OB93GFTUVDeYHUveOnK/IlNToflKll3Z2qoftyNgavoEu3d6EYp7SC+X0EUsA08k1r
+         bKE+eGpoo6NSlxZs7LittOulb6UGQX6Il6oc6p5BQe+1qfZnV5kk1okS4AU2uBfaagAJ
+         818Nbbguf7S/kkt4yuQYQ9H/qJTQgjvTtpOGnFVX7G4vKHY/ZBNrtpr0n57bqe9sLGbe
+         Ih3M/3mFGXE0k8wn3ZwkZ0puavnirgQgBWH3BPm+VjLpSRu64PmGC9XW0gn4h0/HS5fu
+         zs9Hv6Ye/bwhZs7d/h6xqGCCLZIFIDGHJ9Isw0TgcWbYHQHmyMr7a2f+C0diYYSN7RZK
+         cNQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773385500; x=1773990300;
+        d=1e100.net; s=20251104; t=1773385850; x=1773990650;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=N8jOkHiXd1EfrhPo3SajjKBWEjcQ9wGxmz6VVii8k3M=;
-        b=dw8PAMd2bpVbDqPutIgaFyOTPodg+M/hh6B0SgAyGjflNjaExPlp7bjQWjfnAtOuA6
-         P//eZJIMBsLGik5K7lK31ZlXl0lrOPg1DBW/EQyPxH3ndCafj+OwhsosxfLv/+/b2L2o
-         AJ/L7v6j7pVmp0si+QvifPGSeVwVmOvW9bKPSgdyusNowlCkdAwA23GenCJMSs0+SZur
-         T90tseA/R+6MhzMeLtlXx4zAXt+IBMqo5qnMvMnWvGkn75d457wfWWb3epATD9rSB/HQ
-         a+pGMpNgbEG5hxaXpir9eYHwEnAfmEp8B2GOGfwUuN8Z2UD+X62Pa/jnGLZMsXt59lGq
-         iiWg==
-X-Forwarded-Encrypted: i=1; AJvYcCWuUOOs7+8nk+ehc0xoiR31UsaTV0MyvCrsO02Rkhb4Q8R+f3lUDtnm04WE1uOgB9SBWiC8oeW2geQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyWgLbsbQNQGkN727z6pV0/FowXR8vLsu6Lg4EKha5x0H8WKAR5
-	BGYYtSpENL2VaG+KBtE5etRKzpZMZmZagpOY+Cv2ZMuCNxM+AuWpfT/IbXCYkE2L7Q==
-X-Gm-Gg: ATEYQzzaoHLJlkEjVv0kDSaMrelIhrYsHWaj3dCqYWUoyKHQ52dqOPQUKKpWVKGjYka
-	pzDuif6/up+mfjSdBuejOuA9h9NOVxqyA1R4QVNv1cGd4ttRZjbNA+Y56lc9eHuQESefUMABsD7
-	CTmSO/9Ht+Bq7dxXJoQgmrCk5XKaaIpWB7tou0UF8tNJJ4FJRRrtmS5fvoUEsN2B+6lukl1w0id
-	bXimN2abumN/WGF3pbfa9btb178xNdMYV3StDU7pnmJRJOn8QT6FP7kkUmprPvHKvAL7I6czH4B
-	pmSQM0rv9FTWPOOPRoJNppL8/qs42JuW+1kScaXI6+9EnpD3K+N2KRXGJ5TX+SAU2+8G2SOCJM8
-	hYiFkxXM/y/iQDKfXL6nVl1p8gC+sZQS6TPz0FkwqEWATWnBIjXLjMJW9FRgl8k5aeQNtrI6JZs
-	rpYL35tbjb5cumPGaouYSq4BKW4CWB4l6yWU1X2jcvBoJhSyrVm8mLUYdBnhZ3rtN7FdZjkoXWR
-	m7wvy6/fq/Y5YI=
-X-Received: by 2002:a05:600c:3487:b0:485:4eaf:eb14 with SMTP id 5b1f17b1804b1-485567052f6mr31803335e9.21.1773385500532;
-        Fri, 13 Mar 2026 00:05:00 -0700 (PDT)
-Message-ID: <7d4bd6e2-efcb-470b-a82e-83e693d28993@suse.com>
-Date: Fri, 13 Mar 2026 08:04:58 +0100
+        bh=IkELls+cI5NtJoMoohsJg9eiOC1UmK6cR3HNcFjiUX0=;
+        b=Hkwa+IjggJ36AwwEkvZ8rm/BoOEL6mWIu8K71M1uiWH85WfOdLCF17/o6AHXyzybQ/
+         6RFk5LMQ98EoLzhnaiqpChF6zqZYZp5P63PyF35RV+xeWk5SESw7/0TkSbLVn2Gf0YgA
+         qvISs6Rz45Yj1qGdIg3k/9yWs2ik3ZJ9afh33ql6/IrNqaPDBJumC43PgA05COw6rJ5O
+         DGtNbYKpZJmTIpXAzNCnGzj7iNj2oG/bD8QOKuy35mKySTHeq8zeeC5CPfv1eTZH9zWR
+         1fx9svsVLmvSiKAgVfR9Ipkzfrgu/3tDdWD3Wp2wDY6HetvpsB8OJpsG+YvUTU/RUBqy
+         enGQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXbe1zU6LDS+VudgYgXSDHR6FjHGerFpYcqMxjIBf4qP4Ih0VYOybq19g0nWkMGNxYaWnl4Sgt1wh0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwUCVp2+zA1n7s3um+NBSBRi6740CnbAG6jG6Hk1lnZDKw+7xWp
+	ZkHKvZPfVnkF6Kx48qvv0LLuxiH7Lp5DXDLdJWK45+pBOL/zuKAVzvBMzAbA+AJXzz1Y4K1RBA8
+	VgJw=
+X-Gm-Gg: ATEYQzxsuz5/vGWODGoXun6W82CzNlRAAknKSYK+zN6qL6l7Bsq3dpElGzTODImmG86
+	YUSSNFPT1BmEcXVDFVZRV2H9OdFKxrK4ZZAKNeoe4Ze+Z8GMS9mDk/2VSg9SoIaGywmJIELbraW
+	6vTNkap1uuRj1Z12wYUhYb6UrxJDUiw4kUPRnR0YDEWDViYBc9cBuX/Rt9HyscT/GNUp6vHXOYN
+	5XrxotvsWNuv5RyZWYciNJIKmWVz9BS2CM6dIgdnydGLxRv2KjUAemnSOqT0/lja52eGXIf82EA
+	VMTdwvwgx07KzJJcCk2A9CJY/OgyjQK2Eh9WqwGRpvROMPdpTQu9mpH4MMwJfRnM/1PjByhEAn3
+	qgHk1047cz/tZcbNfRsH8G9JTT+3gbU5CWToVxDVwxo5QtJUXpJZflNCKBwXdyFXfiefYfN2S+x
+	iqoXlhdsjFqb46PBxL+vcGQJXp8F2z0LXJkbY3FlKI5YueeZltj3Dr6vIw9DtcrQdHmS/zCLWcS
+	ZlTLuw2zOx/nzU=
+X-Received: by 2002:a05:600c:64cd:b0:485:4533:9c47 with SMTP id 5b1f17b1804b1-48556705203mr31220845e9.22.1773385850347;
+        Fri, 13 Mar 2026 00:10:50 -0700 (PDT)
+Message-ID: <60349979-7dc9-4ff2-9043-957cfc039c6a@suse.com>
+Date: Fri, 13 Mar 2026 08:10:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v v2 1/7] x86: Remove x86 prefixed names from mcheck code
+Subject: Re: [PATCH v v2 2/7] x86: Remove x86 prefixed names from acpi code
 To: Kevin Lampis <kevin.lampis@citrix.com>
-Cc: roger.pau@citrix.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: andrew.cooper3@citrix.com, roger.pau@citrix.com,
  xen-devel@lists.xenproject.org
 References: <20260312204339.740403-1-kevin.lampis@citrix.com>
- <20260312204339.740403-2-kevin.lampis@citrix.com>
- <abbcce95-836f-4a06-a250-4480061ac3cf@citrix.com>
+ <20260312204339.740403-3-kevin.lampis@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -122,34 +122,22 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <abbcce95-836f-4a06-a250-4480061ac3cf@citrix.com>
+In-Reply-To: <20260312204339.740403-3-kevin.lampis@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 13.03.2026 01:01, Andrew Cooper wrote:
-> On 12/03/2026 8:43 pm, Kevin Lampis wrote:
->> diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
->> index 839a0e5ba9..4d6b7d588e 100644
->> --- a/xen/arch/x86/cpu/mcheck/mce_intel.c
->> +++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
->> @@ -711,10 +711,7 @@ static bool mce_is_broadcast(struct cpuinfo_x86 *c)
->>       * DisplayFamily_DisplayModel encoding of 06H_EH and above,
->>       * a MCA signal is broadcast to all logical processors in the system
->>       */
->> -    if ( c->x86_vendor == X86_VENDOR_INTEL && c->x86 == 6 &&
->> -         c->x86_model >= 0xe )
->> -        return true;
->> -    return false;
->> +    return c->vendor == X86_VENDOR_INTEL && c->vfm >= INTEL_CORE_YONAH;
->>  }
-> 
-> This breaks P4.
-> 
-> It is not safe to write expressions like this, and I've already
-> explained why.
+On 12.03.2026 21:43, Kevin Lampis wrote:
+> @@ -1059,8 +1059,7 @@ static void acpi_processor_power_init_bm_check(struct acpi_processor_flags *flag
+>       * is not required while entering C3 type state on
+>       * P4, Core and beyond CPUs
+>       */
+> -    if ( c->x86_vendor == X86_VENDOR_INTEL &&
+> -        (c->x86 > 0x6 || (c->x86 == 6 && c->x86_model >= 14)) )
+> +    if ( c->vendor == X86_VENDOR_INTEL && c->vfm >= INTEL_CORE_YONAH )
+>              flags->bm_control = 0;
 
-Plus I had asked whether the comparison needs to stay at all, seeing how
-Xen has been 64-bit only for a pretty long while.
+Similar issue to patch 1: Here it ought to be possible to leave just the vendor
+check.
 
 Jan
 
