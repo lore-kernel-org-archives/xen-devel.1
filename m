@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACFA107BCCA
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:10:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253887.1549847 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B854F107BCCB
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253912.1549901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w1555-0002Ja-K3; Fri, 13 Mar 2026 16:09:43 +0000
+	id 1w15Tj-0007KS-4H; Fri, 13 Mar 2026 16:35:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253887.1549847; Fri, 13 Mar 2026 16:09:43 +0000
+Received: by outflank-mailman (output) from mailman id 1253912.1549901; Fri, 13 Mar 2026 16:35:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w1555-0002JT-GL; Fri, 13 Mar 2026 16:09:43 +0000
-Received: by outflank-mailman (input) for mailman id 1253887;
- Fri, 13 Mar 2026 16:09:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w15Ti-0007Jm-VD; Fri, 13 Mar 2026 16:35:10 +0000
+Received: by outflank-mailman (input) for mailman id 1253912;
+ Fri, 13 Mar 2026 16:35:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Yb2q=BN=bounce.vates.tech=bounce-md_30504962.69b436be.v1-5c3b9378c03a49cd8354a292b2c09f88@srs-se1.protection.inumbo.net>)
- id 1w1554-0002JN-1J
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:09:42 +0000
+ <SRS0=HapF=BN=bounce.vates.tech=bounce-md_30504962.69b43cb9.v1-f3d1f1e41b594d69b286bae8494a8c00@srs-se1.protection.inumbo.net>)
+ id 1w15Tg-0006Ps-UM
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:08 +0000
 Received: from mail179-36.suw41.mandrillapp.com
  (mail179-36.suw41.mandrillapp.com [198.2.179.36])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 075f3bc9-1ef7-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:09:36 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 98bb3473-1efa-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 17:35:07 +0100 (CET)
 Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-36.suw41.mandrillapp.com (Mailchimp) with ESMTP id 4fXTvf5xlMzlfk15
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:09:34 +0000 (GMT)
+ by mail179-36.suw41.mandrillapp.com (Mailchimp) with ESMTP id 4fXVT52GHlzlfhqS
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:05 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 5c3b9378c03a49cd8354a292b2c09f88; Fri, 13 Mar 2026 16:09:34 +0000
+ f3d1f1e41b594d69b286bae8494a8c00; Fri, 13 Mar 2026 16:35:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,71 +44,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 075f3bc9-1ef7-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 98bb3473-1efa-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773418174; x=1773688174;
-	bh=D0qC/theo3h956Bl6+OqebRtvIjKvfjXng6e2rmfBwo=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	s=mte1; t=1773419705; x=1773689705;
+	bh=z20eYvkhwyKw++a+c98wvdYw/gsjZHxgfR6V0/vLjGg=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=OcRsO9LUc4pq48y8jnKm03pGxqlXTcH1nCx2QAuGee02qlHmFiIm3dKbknOYqNAjs
-	 EZBo6cWyiSvRqgR/RoiSS8NY8sEd8Kr7LIaPY1c3pcSK2uGnQMfgP96m+XwoIUWl2U
-	 DzyOBSAX6L+GKYoABMMlj+Em5FUYtdBLKNvhD0+tZ0lbxJs8dndUYi1t9zP+WarQd8
-	 s5/gFnLPl6SE/KcLthwEvDvcIIjA5UAyfuLf4gQhc/bp7n+pdSLV93spW59QnLlsma
-	 FdOPDCxaY1vEEh+IM3uwviPpjd3dCqP1mtvJdwek4dAlJQ5CeLcoWQ4THEzGFYYVfn
-	 5E9T29EWe0mWA==
+	b=c2lhrOE3EcoU+EqduNWxBC4UypXSqQYjFiRydu7L4GjSJUyhHHxgFzNJ6l4az03c/
+	 OYBjJMh8l3Nh8sDPLqZPhbRdJ5yJUr+YaUx9j7SDFlC0XKFtlFJCWFJq1nOuPBwEtr
+	 V5eC1kjAvHVZufGS9CfvWEpIc/80X2R0kbQtYHM9FmqzXKav43vEKjA08hlzhys9hA
+	 d64PDAuTvQAOd0sYFDwK9B4lt8VBWWRBYJgfJ6Jz7Qo+Jb8w3ethpTiIBFb40hApLd
+	 MCBrSrXGZYpZgYa/hGUYaVjQvy72phdyE+K2QGlOR18gI9kwXhfP9Xl+SVJwVdxdca
+	 E1mFLVoUKEruQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773418174; x=1773678674; i=anthony.perard@vates.tech;
-	bh=D0qC/theo3h956Bl6+OqebRtvIjKvfjXng6e2rmfBwo=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+	t=1773419705; x=1773680205; i=thierry.escande@vates.tech;
+	bh=z20eYvkhwyKw++a+c98wvdYw/gsjZHxgfR6V0/vLjGg=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=DluaJF2qBnK5kQMOlEDirGaXt00XUKDr0V6FFF6OSr8gLL6jfDx+F+bM16ls10oOA
-	 lnr9I1GAp6/pccv1zddadC+uXyjaWrnx+Vg6NtJT4sfb7MROLozl8ZaQ3R4CF91wFz
-	 gssPj5I3BNXn2XY/Yspn2m5uXawVtzxSpiygLAKCbOmgSAjySi1lkNhvbsJeRaT1Vw
-	 QL4I/ND1KpqG2hcIGfoEu7GArZNk7Sd1a/bT/ZrD7wZ2cAPFWMoHU6+jHUu8JQkrX6
-	 pbVcwtLYeix2XXEiWUArSh/NWIXFz179Rz6wly0ylTjEodRsnxvqVf82Ejt0l5q/y2
-	 42hbfA4pAkGuQ==
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=2003/11]=20tools/xenstored:=20rework=20hard=5Fquotas=20and=20soft=5Fquotas=20arrays?=
+	b=WeBWCsYS+nyPsnO9wjCuwyRnDA6FRr+o2IeHHhTkO42qeoVJOHN0IhNIViAOHnb5g
+	 +f2eyy77/jJIj9Gg1dwJf8/iiyW2TVR5vedTpLqSyyGItdbc6oi7ai/ymtqx7+lzEP
+	 Oy/bFqfy770baXYkhgXCvnwLmg4NCeH/eUHTLJuB3+qS5mMOzzUgjrFxcNnCftLrg+
+	 JxU4vQFSLtqsuAoTkUBI0eJmmnGzJbxJCSjaB7M1EI9eP6Xrm4RDYlHyHKrEC3dwgM
+	 pGtucqvZRfTKWv7Tu2JPryvGI9nrsD9bMSUDsC7u/I/Ae61lTNBqVO0jrkn8djijjP
+	 s63ZCyLJZEr3Q==
+From: "Thierry Escande" <thierry.escande@vates.tech>
+Subject: =?utf-8?Q?[PATCH=2016/17]=20Handle=20PCIe=20ECAM=20space=20access=20from=20guests?=
+X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773418174127
-To: "Juergen Gross" <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, "Julien Grall" <julien@xen.org>
-Message-Id: <abQ2vcxWKW1j_KeJ@l14>
-References: <20260305135208.2208663-1-jgross@suse.com> <20260305135208.2208663-4-jgross@suse.com>
-In-Reply-To: <20260305135208.2208663-4-jgross@suse.com>
+X-Bm-Transport-Timestamp: 1773419704539
+To: xen-devel@lists.xenproject.org
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <20260313163455.790692-17-thierry.escande@vates.tech>
+In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
+References: <20260313163455.790692-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.5c3b9378c03a49cd8354a292b2c09f88?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.f3d1f1e41b594d69b286bae8494a8c00?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:09:34 +0000
+Date: Fri, 13 Mar 2026 16:35:05 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 05, 2026 at 02:52:00PM +0100, Juergen Gross wrote:
-> Instead of having one array for hard quotas and one for soft quotas,
-> split them differently: have one array with the quota names and
-> descriptions, and one with the quota values (soft and hard) and the
-> maximum value so far.
-> 
-> This is in preparation of supporting per-domain quotas, as the layout
-> of the second array elements will be reused in the domain data.
-> 
-> While at it add an accessor for getting a soft quota value, as this
-> will be needed for per-domain quotas, too.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+This patch adds the logic to decode MMIO-based PCIe ECAM accesses. If
+the IOREQ_TYPE_COPY request is within the ECAM address space configured
+by hvmloader, the ioreq type is set to XEN_DMOP_IO_RANGE_PCI and the
+sbdf decoded from the accessed address.
 
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
+---
+ xen/arch/x86/hvm/ioreq.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Thanks,
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index a5fa97e149..022fe05222 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
+@@ -268,6 +268,8 @@ bool arch_ioreq_server_get_type_addr(const struct domain *d,
+                                      uint64_t *addr)
+ {
+     unsigned int cf8 = d->arch.hvm.pci_cf8;
++    unsigned long mmio_start = (p->type == IOREQ_TYPE_COPY) ?
++                                ioreq_mmio_first_byte(p) : 0;
+ 
+     if ( p->type != IOREQ_TYPE_COPY && p->type != IOREQ_TYPE_PIO )
+         return false;
+@@ -298,6 +300,19 @@ bool arch_ioreq_server_get_type_addr(const struct domain *d,
+                 *addr |= CF8_ADDR_HI(cf8);
+         }
+     }
++    else if ( p->type == IOREQ_TYPE_COPY &&
++              (mmio_start >= d->arch.ecam_addr &&
++               mmio_start < (d->arch.ecam_addr + d->arch.ecam_size)) )
++    {
++        pci_sbdf_t sbdf;
++        unsigned int reg = mmio_start & ~PAGE_MASK;
++
++        sbdf.bdf =  (((mmio_start - d->arch.ecam_addr) & 0x0ffff000) >> 12);
++        sbdf.seg = 0;
++
++        *type = XEN_DMOP_IO_RANGE_PCI;
++        *addr = ((uint64_t)sbdf.sbdf << 32) | reg;
++    }
+     else
+     {
+         *type = (p->type == IOREQ_TYPE_PIO) ?
+-- 
+2.51.0
+
 
 
 --
-Anthony Perard | Vates XCP-ng Developer
+Thierry Escande | Vates XCP-ng Developer
 
 XCP-ng & Xen Orchestra - Vates solutions
 
