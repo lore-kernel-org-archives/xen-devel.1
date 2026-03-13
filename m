@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F0F106ACFF
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 00:01:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253142.1549478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F17106FD68
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 02:22:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253179.1549505 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0py3-0001P8-7s; Fri, 13 Mar 2026 00:01:27 +0000
+	id 1w0sA9-0000fK-8v; Fri, 13 Mar 2026 02:22:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253142.1549478; Fri, 13 Mar 2026 00:01:27 +0000
+Received: by outflank-mailman (output) from mailman id 1253179.1549505; Fri, 13 Mar 2026 02:22:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0py3-0001P0-3A; Fri, 13 Mar 2026 00:01:27 +0000
-Received: by outflank-mailman (input) for mailman id 1253142;
- Fri, 13 Mar 2026 00:01:25 +0000
+	id 1w0sA9-0000fD-5p; Fri, 13 Mar 2026 02:22:05 +0000
+Received: by outflank-mailman (input) for mailman id 1253179;
+ Fri, 13 Mar 2026 02:22:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=N2jY=BN=citrix.com=andrew.cooper@srs-se1.protection.inumbo.net>)
- id 1w0py0-0001Os-Ti
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 00:01:25 +0000
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [2a01:111:f403:c101::7])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2bd3660-1e6f-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 01:01:19 +0100 (CET)
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SA2PR03MB5689.namprd03.prod.outlook.com (2603:10b6:806:119::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Fri, 13 Mar
- 2026 00:01:11 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.20.9700.013; Fri, 13 Mar 2026
- 00:01:14 +0000
+ <SRS0=OImI=BN=huawei.com=fengchengwen@srs-se1.protection.inumbo.net>)
+ id 1w0sA8-0000ET-0N
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 02:22:04 +0000
+Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com
+ [113.46.200.224]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 685836ec-1e83-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 03:21:58 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.163])
+ by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4fX7Qv3vtcz1cyPF;
+ Fri, 13 Mar 2026 10:16:55 +0800 (CST)
+Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
+ by mail.maildlp.com (Postfix) with ESMTPS id 9FC214048B;
+ Fri, 13 Mar 2026 10:21:51 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Fri, 13 Mar 2026 10:21:50 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,127 +48,471 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2bd3660-1e6f-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DAundYrdPnch3CbjKMhGVBb6DoymJKFWvqYtNobuYsvtXsgcwBU+WscgprqvmeciYzFYZanr96oH9YgnV3cpAjNltP6t77Nq2jERQTcS/p7rfhzFIlUDPapclnixb84gxUw0kXrp66un0VPXfRfp+g3RfhHBI6eQBxV6xWYZSVbKXz1qDcs+F2Kt717gNre/SRsKLCJd+u3PQJdbRD31Ahkq4ulKahZ32jsUUf7vluq/aRU5vDGSoMX5cVIhfAnqyESFrqpE77/PdFS4MhyyFQrv1X0YiNRWaSQ7XXueI7QUq9igK2AD3EcIDjicsbeY5Tdl4n1+hatk1ZShKhQAgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cWYMl+9F6/FUqWqvRpyhGOMiN+6iTBhV64lLKmpc+zk=;
- b=SeMittNCBlhvYUSjFuhYCNpjL4A8KwkmAe1O31nFOzGLzdETGJkiSf/gKgU71Eobr2fRHsdsqNLHTcvGnw5g//lWstzOrpHvr9ZZ2w5Wq2T+L85p3G20UiQBiDWA6I7yknO37bgjkRJz082mbUnnNcc1drSZA1EEEpDymzFbj8YUovYYYndTggXjXnPQCWUXMSnnS3ZNPKNMnMx3W1/zaIvq9OB/GGCRji8I9NkafHPSBK4otOnORE1665uRzfwrYiw57XYhspXrR/PBgoXPWDX2vTcVR0XU6ZPUR5QsfpT0bfdCmpKI/D9BzMGSMc0O8vOyaKIY1LHHcK1M8RBCZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cWYMl+9F6/FUqWqvRpyhGOMiN+6iTBhV64lLKmpc+zk=;
- b=GwvYFycnC4ztIpTDlcWVdgxmP7bdhEYK3moDp7HpDEFLnjk5trjZvub4guyLsgdmkow25w/qfLhDX1p5S0vm8ANex3Bt2z07y4Wx+7ZeHPuILZ/AsdUiCqnEQ9q161wdTB0o7jR1UcKDuWAzpRWa48ccPciuh81Bsra8zfYZKaM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <abbcce95-836f-4a06-a250-4480061ac3cf@citrix.com>
-Date: Fri, 13 Mar 2026 00:01:11 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jbeulich@suse.com,
- roger.pau@citrix.com
-Subject: Re: [PATCH v v2 1/7] x86: Remove x86 prefixed names from mcheck code
-To: Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org
-References: <20260312204339.740403-1-kevin.lampis@citrix.com>
- <20260312204339.740403-2-kevin.lampis@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <20260312204339.740403-2-kevin.lampis@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PA7P264CA0173.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:36f::9) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+X-Inumbo-ID: 685836ec-1e83-11f1-9ccf-f158ae23cfc8
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=QjrGSLk+yOhOI441CfjS5P5KG0hkwXI+k0WuGTLs9Ws=;
+	b=cHC9CGJlkw77fmcnNreSFKjdDqRfDH0LYEvCWRpuJfoHwv5cPUyubXZ7H1RRgbaveAHnEQh51
+	bmB5ABXpAWB4EhekKEBGenq2CEn8mTWvHAORfdx3zvZPfnbIIiabcms9YiXvd0fpBRPgTjiKSm+
+	WvkqhccMHQki9ryvVlEYYWw=
+From: Chengwen Feng <fengchengwen@huawei.com>
+To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
+	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
+ Wysocki" <rafael@kernel.org>
+CC: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Thomas Gleixner
+	<tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, <x86@kernel.org>,
+	"H . Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Sohil
+ Mehta <sohil.mehta@intel.com>, Ilkka Koskinen <ilkka@os.amperecomputing.com>,
+	Robin Murphy <robin.murphy@arm.com>, James Clark <james.clark@linaro.org>,
+	Besar Wicaksono <bwicaksono@nvidia.com>, Ma Ke <make24@iscas.ac.cn>, Wei
+ Huang <wei.huang2@amd.com>, Andy Gospodarek <andrew.gospodarek@broadcom.com>,
+	Somnath Kotur <somnath.kotur@broadcom.com>, <kees@kernel.org>,
+	<punit.agrawal@oss.qualcomm.com>, <guohanjun@huawei.com>,
+	<suzuki.poulose@arm.com>, <ryan.roberts@arm.com>, <chenl311@chinatelecom.cn>,
+	<masahiroy@kernel.org>, <wangyuquan1236@phytium.com.cn>,
+	<anshuman.khandual@arm.com>, <heinrich.schuchardt@canonical.com>,
+	<Eric.VanTassell@amd.com>, <jonathan.cameron@huawei.com>,
+	<wangzhou1@hisilicon.com>, <wanghuiqiang@huawei.com>,
+	<liuyonglong@huawei.com>, <fengchengwen@huawei.com>,
+	<linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<loongarch@lists.linux.dev>, <linux-riscv@lists.infradead.org>,
+	<xen-devel@lists.xenproject.org>, <linux-acpi@vger.kernel.org>,
+	<linux-perf-users@vger.kernel.org>, <stable@vger.kernel.org>
+Subject: [PATCH v7 1/3] ACPI: Refactor get_acpi_id_for_cpu() to acpi_get_cpu_uid() on non-x86
+Date: Fri, 13 Mar 2026 10:21:42 +0800
+Message-ID: <20260313022144.40942-2-fengchengwen@huawei.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20260313022144.40942-1-fengchengwen@huawei.com>
+References: <20260313022144.40942-1-fengchengwen@huawei.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SA2PR03MB5689:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f0c5898-8097-46de-37ef-08de8093a456
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	c2r0ieh9aVtrnYKRP2fp+uxa7V4mL41k53gYxuD3UxSZ4r8WKzJUAWHqTvz9OJTtdF9ZZXSiuXSViahiiKGf4aci7nUQ+/1vziWRTJNjbRrH96hzipNjPY/uwKl5DiW2gW12BFIhC/KrEni8L/UR/vHtkAtDK5e8++sgRcV3V/rrkUXZbNBmcaV31h+YlpTcSYYyw80i36T9Jx/HfSLiJ/TZAESMqu9A/SkZ2+Hu5gHB/qTSTfYc5Q9sY8XPpUPgkQVMWOOuBwzjBhAi7caiNQWBLgYP6OCOjCa1RcfLHZ3E0IvxqETXSNIdQPA5zpmDVSHXgYwXDMpF7feY/Ee4S7JWrweXtCPQbJdmXq7m2JhUajQEF/VcclZJiCOW6E3fdHLL3D+O/aJjNpE67nuoU0woQ6i7yNXvdSW98GrQYcCJDioMuYRE1ss0IlQ45utCVLZnnVhDZD7GKxTK0SeVSGgUhM6QQLiQwiMqIVm2IwrhItNS8rpyToe6wbrxV0cD2WjN8P9ZKYyuGDnRLCVmFPeo4FS/HEIkgTXK5Ac/lMgvSLEJfsGvP34QbQdRMyErKon61/OQ2sJOpIdwG+AUy/QaWeIY1+4ghPGrBSN4q4x9NWcl4uO8Skch2pLyJa7So3ObcAI3KLnjGOK7eS4j2U66JAQKLgbocpCWlwjHbZS3ZOyA3eM8jedPRDG7zMUNsfrqgpEl59Lg01DoG/259hay6kFFzQhJrytkwNvFeeA=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WDhYQlFaVkdzNDNRck8ySG1UYTJ3N0dKV0hieGNwYlFXV3BlenpGaEp3TENV?=
- =?utf-8?B?TjY0aFB0WjdDdnJ3QmFtdklzUFg2N3VlcEF0ZldZYTZSTElHcFc3MUNKK2lW?=
- =?utf-8?B?bTM3a243SUllTnRiV3EweXQyQzc3Y0dCUE1IbmhMR2RXTVJXd1N4c3BNOHpj?=
- =?utf-8?B?bDJKVGlxS2dvbTRlTmxWT3o3L1NUQmhScjNONlFrWC9FVHI2RE8xbllGOVdO?=
- =?utf-8?B?d1dFYmgxZHdWUjBuOVVFUmM2R1pQckp1Y29zZ3R0S1NmdnM5UmJoZXdEcWFx?=
- =?utf-8?B?V1E0MExFT05BcGF0RUx2NVR2ZitNVHhTenhrU0o3djlkK1lidnpjcll5M1A0?=
- =?utf-8?B?S0EzTXBwMGVJSE1PSG1sV0VlNkR0Qi9zeUxoS0dlNDNIZlVzSHZ2R3BaSTVO?=
- =?utf-8?B?dzBCTFVDbVRSTDJCZG9XNUoyVHA2Zi9nQ1BXa3JRcXFENSs5UktQY29PQ1BP?=
- =?utf-8?B?aXZjaVhpcUxYbXpNYVVLbDFpRFRpT0ltMVpMelFlNml6T0ZmQ2FjTVl3RXMw?=
- =?utf-8?B?Y3VCRC9FaHRpN2Y0VDlMN3Zzdm1OR05Fc0FHemFUMWJidTRIcHU5WndxSXVh?=
- =?utf-8?B?V0VtU2lTcjNYcUN0SXo3eWxZajlaU1dUTUg3akpaaFphTXlNZ1Fqbk8zOTBt?=
- =?utf-8?B?NkFFdlYwQzFiVXZ5TG94RkVLSUl2YUttTUY2VVVVdE1ybGF6L3czUWZwdk5w?=
- =?utf-8?B?VFFnbk5keStXek1jVDNTU2Y0OStaZGpsTitmaDhCZzZ1QktZalVtR29GeXA3?=
- =?utf-8?B?dFUxWWlCVTlxMzdoUjJoTisxOVpxazFjd01nUjNuQko1ZzB2TW5hRjRzWVZN?=
- =?utf-8?B?dFVQZUZsSGl4czBlRXpVVE1zcm9RWUJIc0dENUhOcFJ3bGdsaW16S2hhcDB4?=
- =?utf-8?B?b0dlb2FZMklHNFl6cC9sMnFLOHZRcE9SLzNmNXhHUVhOdTFjYU9ya3hpS3FS?=
- =?utf-8?B?ZWk1ZTBjaWxkL2JKZmx4UFBjNGVZNXA3K25JZVJDQ3hvdDVaUzVJQnB4bko0?=
- =?utf-8?B?cTB2Y3BDUXRSTVlMOVl1R1ZlWXozZDJscnpwZHFhYTh3dHlVTWE1SHNieVpi?=
- =?utf-8?B?MmlBa1REMnM2S01pTkRTSU9zMC9jeFc1RnBtQ3N6WUtDSnFGeXZUTjg5TTJx?=
- =?utf-8?B?UzIrMktjZmRGa1VGMk5UKzAxVlBqb1JEZEJEVFZseHI3SndiVmNsSk40OWRF?=
- =?utf-8?B?eXBzcnNWZXNwYmRVTCtoSExSWENIekVvVnpmbVJDV2lrcytkM25RbHJpR0Jy?=
- =?utf-8?B?TEplblBMY1JhTFFOYjdiaHlCdHViU2hUL0dTa2NXc00zZHZsazhna080anRZ?=
- =?utf-8?B?aHRzek1HUXA5Q1h1WlNMblVxeWlvdjZobWJIK2NNYTJzNE1LQUJ5TTJqTzFu?=
- =?utf-8?B?Vk5xemJoSWhrWWh4cWNsK1JWSE1QYkUrUkoxS3VScTdvOWhpVERQdCtndkZi?=
- =?utf-8?B?R3dzejI1OEl1RGE2LzhpbTBjKy9FZUNPSkxtR2xERDgxRnoyOE9VUlpVNU02?=
- =?utf-8?B?TjhGL29OK255QnlWUCt2SUxVbXREcis1a0VyU01GREZuNkllT0FqZnJqYVJY?=
- =?utf-8?B?SzY3RnQ0SGV1RVFlNDNUcEJsVTRabmU1Zk5ZNmFYUExkc3VqbXFHWFlXS2Ur?=
- =?utf-8?B?RUVzWFNFbmhubVVzYlJxamY0TGdhSlhFbUlMWE8zQlYrRUY4ZHdNTGJsY3hW?=
- =?utf-8?B?aWdtQnJhNW1sTGt3ZTYyVGVzQ1pHT0hva3BDQTlrMEp4ZVpjY2pJSVZEdFBT?=
- =?utf-8?B?WHA4WnN1dGNBSlNKSlhSTEhVMFZYS0hWS1FiK2dDdUtYOHNGOEY3L3IvTEYy?=
- =?utf-8?B?MnpCY01VSGl5aWIwdWtodHNCTUV0cjh5VjRCaVNQeG0ya0dTYW5YbU9DaVpt?=
- =?utf-8?B?WWdkbEhaVXF5YW5mWEZkZk52b1RvcmNOcjFGcFBIWk9BaVpaaUFhWFlCMDE2?=
- =?utf-8?B?UkVwaDNLTUtQby9kMFU2R0xjSU50TkFReCtXNFJ0a3I5SVI4ejEwM2wvQ2ox?=
- =?utf-8?B?MlY2amp5aTZHVTlJdzhZMXVSZE11enZqSVUvSGswb3loWUZkOWFzQ1FqNkZs?=
- =?utf-8?B?NUZzVkFEV3JmMzc3ckcwTlB4ZCtmYU9xZW1WMVd3dUVpOWhNeGluM3dubHVB?=
- =?utf-8?B?V2JtY09Ua3czZGxXTTVhQTJTZ1JMWU1tVVFaY2N1M2xWbUVPNVJtQTBtNTZK?=
- =?utf-8?B?N2RmK1RUeHBGdm9GclA4a2ZjUVNpS1QyYis0bGN0dTRITXErQ2hpZEtvdXRI?=
- =?utf-8?B?Z2xNREl6N21tazQyNnFHK1hhVjZWcFFEUXJUeStTVGtnRWtydTZ1SUdkVWZj?=
- =?utf-8?B?MkdXNTI0LzB5enRqVkxzWjVtbVJMU1N2TXhNZ2JzOVFOMWYxV1JsYjVUMks1?=
- =?utf-8?Q?OXQrEqv/ilMk9mAI=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f0c5898-8097-46de-37ef-08de8093a456
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 00:01:13.9808
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HtLzZXiIT4uTj4Uy84kdJgkksea4rxHHKZolZzUOzM57/lJYMp/BAShgeWHj+WFVO5czKGPbrqqBqpRuAcgBvDAbuGoGns92nJg/3U0ueKs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR03MB5689
+Content-Type: text/plain
+X-Originating-IP: [10.50.163.32]
+X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+ kwepemk500009.china.huawei.com (7.202.194.94)
 
-On 12/03/2026 8:43 pm, Kevin Lampis wrote:
-> diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
-> index 839a0e5ba9..4d6b7d588e 100644
-> --- a/xen/arch/x86/cpu/mcheck/mce_intel.c
-> +++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
-> @@ -711,10 +711,7 @@ static bool mce_is_broadcast(struct cpuinfo_x86 *c)
->       * DisplayFamily_DisplayModel encoding of 06H_EH and above,
->       * a MCA signal is broadcast to all logical processors in the system
->       */
-> -    if ( c->x86_vendor == X86_VENDOR_INTEL && c->x86 == 6 &&
-> -         c->x86_model >= 0xe )
-> -        return true;
-> -    return false;
-> +    return c->vendor == X86_VENDOR_INTEL && c->vfm >= INTEL_CORE_YONAH;
->  }
+Unify CPU ACPI ID retrieval interface across architectures by
+refactoring get_acpi_id_for_cpu() to acpi_get_cpu_uid() on
+arm64/riscv/loongarch:
+- Add input parameter validation
+- Adjust interface to int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
+  (old: u32 get_acpi_id_for_cpu(unsigned int cpu), no input check)
 
-This breaks P4.
+This refactoring (not a pure rename) enhances interface robustness while
+preparing for consistent ACPI Processor UID retrieval across all
+ACPI-enabled platforms. Valid inputs retain original behavior.
 
-It is not safe to write expressions like this, and I've already
-explained why.
+Note: Move the ARM64-specific get_cpu_for_acpi_id() implementation to
+      arch/arm64/kernel/acpi_numa.c to fix compilation errors from
+      circular header dependencies introduced by the rename.
 
-~Andrew
+Cc: stable@vger.kernel.org
+Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
+Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+---
+ arch/arm64/include/asm/acpi.h      | 16 +---------
+ arch/arm64/kernel/acpi.c           | 16 ++++++++++
+ arch/arm64/kernel/acpi_numa.c      | 14 +++++++++
+ arch/loongarch/include/asm/acpi.h  |  5 ---
+ arch/loongarch/kernel/acpi.c       |  9 ++++++
+ arch/riscv/include/asm/acpi.h      |  4 ---
+ arch/riscv/kernel/acpi.c           | 16 ++++++++++
+ arch/riscv/kernel/acpi_numa.c      |  9 ++++--
+ drivers/acpi/pptt.c                | 50 ++++++++++++++++++++++--------
+ drivers/acpi/riscv/rhct.c          |  7 ++++-
+ drivers/perf/arm_cspmu/arm_cspmu.c |  6 ++--
+ include/linux/acpi.h               | 13 ++++++++
+ 12 files changed, 122 insertions(+), 43 deletions(-)
+
+diff --git a/arch/arm64/include/asm/acpi.h b/arch/arm64/include/asm/acpi.h
+index c07a58b96329..106a08556cbf 100644
+--- a/arch/arm64/include/asm/acpi.h
++++ b/arch/arm64/include/asm/acpi.h
+@@ -114,22 +114,8 @@ static inline bool acpi_has_cpu_in_madt(void)
+ }
+ 
+ struct acpi_madt_generic_interrupt *acpi_cpu_get_madt_gicc(int cpu);
+-static inline u32 get_acpi_id_for_cpu(unsigned int cpu)
+-{
+-	return	acpi_cpu_get_madt_gicc(cpu)->uid;
+-}
+-
+-static inline int get_cpu_for_acpi_id(u32 uid)
+-{
+-	int cpu;
+-
+-	for (cpu = 0; cpu < nr_cpu_ids; cpu++)
+-		if (acpi_cpu_get_madt_gicc(cpu) &&
+-		    uid == get_acpi_id_for_cpu(cpu))
+-			return cpu;
+ 
+-	return -EINVAL;
+-}
++int get_cpu_for_acpi_id(u32 uid);
+ 
+ static inline void arch_fix_phys_package_id(int num, u32 slot) { }
+ void __init acpi_init_cpus(void);
+diff --git a/arch/arm64/kernel/acpi.c b/arch/arm64/kernel/acpi.c
+index af90128cfed5..f3866606fc46 100644
+--- a/arch/arm64/kernel/acpi.c
++++ b/arch/arm64/kernel/acpi.c
+@@ -458,3 +458,19 @@ int acpi_unmap_cpu(int cpu)
+ }
+ EXPORT_SYMBOL(acpi_unmap_cpu);
+ #endif /* CONFIG_ACPI_HOTPLUG_CPU */
++
++int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
++{
++	struct acpi_madt_generic_interrupt *gicc;
++
++	if (cpu >= nr_cpu_ids)
++		return -EINVAL;
++
++	gicc = acpi_cpu_get_madt_gicc(cpu);
++	if (!gicc)
++		return -ENODEV;
++
++	*uid = gicc->uid;
++	return 0;
++}
++EXPORT_SYMBOL_GPL(acpi_get_cpu_uid);
+diff --git a/arch/arm64/kernel/acpi_numa.c b/arch/arm64/kernel/acpi_numa.c
+index 2465f291c7e1..41d1e46a4338 100644
+--- a/arch/arm64/kernel/acpi_numa.c
++++ b/arch/arm64/kernel/acpi_numa.c
+@@ -34,6 +34,20 @@ int __init acpi_numa_get_nid(unsigned int cpu)
+ 	return acpi_early_node_map[cpu];
+ }
+ 
++int get_cpu_for_acpi_id(u32 uid)
++{
++	u32 cpu_uid;
++	int ret;
++
++	for (int cpu = 0; cpu < nr_cpu_ids; cpu++) {
++		ret = acpi_get_cpu_uid(cpu, &cpu_uid);
++		if (ret == 0 && uid == cpu_uid)
++			return cpu;
++	}
++
++	return -EINVAL;
++}
++
+ static int __init acpi_parse_gicc_pxm(union acpi_subtable_headers *header,
+ 				      const unsigned long end)
+ {
+diff --git a/arch/loongarch/include/asm/acpi.h b/arch/loongarch/include/asm/acpi.h
+index 7376840fa9f7..eda9d4d0a493 100644
+--- a/arch/loongarch/include/asm/acpi.h
++++ b/arch/loongarch/include/asm/acpi.h
+@@ -40,11 +40,6 @@ extern struct acpi_madt_core_pic acpi_core_pic[MAX_CORE_PIC];
+ 
+ extern int __init parse_acpi_topology(void);
+ 
+-static inline u32 get_acpi_id_for_cpu(unsigned int cpu)
+-{
+-	return acpi_core_pic[cpu_logical_map(cpu)].processor_id;
+-}
+-
+ #endif /* !CONFIG_ACPI */
+ 
+ #define ACPI_TABLE_UPGRADE_MAX_PHYS ARCH_LOW_ADDRESS_LIMIT
+diff --git a/arch/loongarch/kernel/acpi.c b/arch/loongarch/kernel/acpi.c
+index 1367ca759468..058f0dbe8e8f 100644
+--- a/arch/loongarch/kernel/acpi.c
++++ b/arch/loongarch/kernel/acpi.c
+@@ -385,3 +385,12 @@ int acpi_unmap_cpu(int cpu)
+ EXPORT_SYMBOL(acpi_unmap_cpu);
+ 
+ #endif /* CONFIG_ACPI_HOTPLUG_CPU */
++
++int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
++{
++	if (cpu >= nr_cpu_ids)
++		return -EINVAL;
++	*uid = acpi_core_pic[cpu_logical_map(cpu)].processor_id;
++	return 0;
++}
++EXPORT_SYMBOL_GPL(acpi_get_cpu_uid);
+diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
+index 6e13695120bc..26ab37c171bc 100644
+--- a/arch/riscv/include/asm/acpi.h
++++ b/arch/riscv/include/asm/acpi.h
+@@ -61,10 +61,6 @@ static inline void arch_fix_phys_package_id(int num, u32 slot) { }
+ 
+ void acpi_init_rintc_map(void);
+ struct acpi_madt_rintc *acpi_cpu_get_madt_rintc(int cpu);
+-static inline u32 get_acpi_id_for_cpu(int cpu)
+-{
+-	return acpi_cpu_get_madt_rintc(cpu)->uid;
+-}
+ 
+ int acpi_get_riscv_isa(struct acpi_table_header *table,
+ 		       unsigned int cpu, const char **isa);
+diff --git a/arch/riscv/kernel/acpi.c b/arch/riscv/kernel/acpi.c
+index 71698ee11621..322ea92aa39f 100644
+--- a/arch/riscv/kernel/acpi.c
++++ b/arch/riscv/kernel/acpi.c
+@@ -337,3 +337,19 @@ int raw_pci_write(unsigned int domain, unsigned int bus,
+ }
+ 
+ #endif	/* CONFIG_PCI */
++
++int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
++{
++	struct acpi_madt_rintc *rintc;
++
++	if (cpu >= nr_cpu_ids)
++		return -EINVAL;
++
++	rintc = acpi_cpu_get_madt_rintc(cpu);
++	if (!rintc)
++		return -ENODEV;
++
++	*uid = rintc->uid;
++	return 0;
++}
++EXPORT_SYMBOL_GPL(acpi_get_cpu_uid);
+diff --git a/arch/riscv/kernel/acpi_numa.c b/arch/riscv/kernel/acpi_numa.c
+index 130769e3a99c..6a2d4289f806 100644
+--- a/arch/riscv/kernel/acpi_numa.c
++++ b/arch/riscv/kernel/acpi_numa.c
+@@ -37,11 +37,14 @@ static int __init acpi_numa_get_nid(unsigned int cpu)
+ 
+ static inline int get_cpu_for_acpi_id(u32 uid)
+ {
+-	int cpu;
++	u32 cpu_uid;
++	int ret;
+ 
+-	for (cpu = 0; cpu < nr_cpu_ids; cpu++)
+-		if (uid == get_acpi_id_for_cpu(cpu))
++	for (int cpu = 0; cpu < nr_cpu_ids; cpu++) {
++		ret = acpi_get_cpu_uid(cpu, &cpu_uid);
++		if (ret == 0 && uid == cpu_uid)
+ 			return cpu;
++	}
+ 
+ 	return -EINVAL;
+ }
+diff --git a/drivers/acpi/pptt.c b/drivers/acpi/pptt.c
+index de5f8c018333..7bd5bc1f225a 100644
+--- a/drivers/acpi/pptt.c
++++ b/drivers/acpi/pptt.c
+@@ -459,11 +459,14 @@ static void cache_setup_acpi_cpu(struct acpi_table_header *table,
+ {
+ 	struct acpi_pptt_cache *found_cache;
+ 	struct cpu_cacheinfo *this_cpu_ci = get_cpu_cacheinfo(cpu);
+-	u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	u32 acpi_cpu_id;
+ 	struct cacheinfo *this_leaf;
+ 	unsigned int index = 0;
+ 	struct acpi_pptt_processor *cpu_node = NULL;
+ 
++	if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++		return;
++
+ 	while (index < get_cpu_cacheinfo(cpu)->num_leaves) {
+ 		this_leaf = this_cpu_ci->info_list + index;
+ 		found_cache = acpi_find_cache_node(table, acpi_cpu_id,
+@@ -546,7 +549,10 @@ static int topology_get_acpi_cpu_tag(struct acpi_table_header *table,
+ 				     unsigned int cpu, int level, int flag)
+ {
+ 	struct acpi_pptt_processor *cpu_node;
+-	u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	u32 acpi_cpu_id;
++
++	if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++		return -ENOENT;
+ 
+ 	cpu_node = acpi_find_processor_node(table, acpi_cpu_id);
+ 	if (cpu_node) {
+@@ -614,18 +620,22 @@ static int find_acpi_cpu_topology_tag(unsigned int cpu, int level, int flag)
+  *
+  * Check the node representing a CPU for a given flag.
+  *
+- * Return: -ENOENT if the PPTT doesn't exist, the CPU cannot be found or
+- *	   the table revision isn't new enough.
++ * Return: -ENOENT if can't get CPU's ACPI Processor UID, the PPTT doesn't
++ *	   exist, the CPU cannot be found or the table revision isn't new
++ *	   enough.
+  *	   1, any passed flag set
+  *	   0, flag unset
+  */
+ static int check_acpi_cpu_flag(unsigned int cpu, int rev, u32 flag)
+ {
+ 	struct acpi_table_header *table;
+-	u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	u32 acpi_cpu_id;
+ 	struct acpi_pptt_processor *cpu_node = NULL;
+ 	int ret = -ENOENT;
+ 
++	if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++		return -ENOENT;
++
+ 	table = acpi_get_pptt();
+ 	if (!table)
+ 		return -ENOENT;
+@@ -651,7 +661,8 @@ static int check_acpi_cpu_flag(unsigned int cpu, int rev, u32 flag)
+  * in the PPTT. Errors caused by lack of a PPTT table, or otherwise, return 0
+  * indicating we didn't find any cache levels.
+  *
+- * Return: -ENOENT if no PPTT table or no PPTT processor struct found.
++ * Return: -ENOENT if no PPTT table, can't get CPU's ACPI Process UID or no PPTT
++ *	   processor struct found.
+  *	   0 on success.
+  */
+ int acpi_get_cache_info(unsigned int cpu, unsigned int *levels,
+@@ -671,7 +682,9 @@ int acpi_get_cache_info(unsigned int cpu, unsigned int *levels,
+ 
+ 	pr_debug("Cache Setup: find cache levels for CPU=%d\n", cpu);
+ 
+-	acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	if (acpi_get_cpu_uid(cpu, &acpi_cpu_id))
++		return -ENOENT;
++
+ 	cpu_node = acpi_find_processor_node(table, acpi_cpu_id);
+ 	if (!cpu_node)
+ 		return -ENOENT;
+@@ -780,8 +793,9 @@ int find_acpi_cpu_topology_package(unsigned int cpu)
+  * It may not exist in single CPU systems. In simple multi-CPU systems,
+  * it may be equal to the package topology level.
+  *
+- * Return: -ENOENT if the PPTT doesn't exist, the CPU cannot be found
+- * or there is no toplogy level above the CPU..
++ * Return: -ENOENT if the PPTT doesn't exist, can't get CPU's ACPI
++ * Processor UID, the CPU cannot be found or there is no toplogy level
++ * above the CPU.
+  * Otherwise returns a value which represents the package for this CPU.
+  */
+ 
+@@ -797,7 +811,9 @@ int find_acpi_cpu_topology_cluster(unsigned int cpu)
+ 	if (!table)
+ 		return -ENOENT;
+ 
+-	acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++		return -ENOENT;
++
+ 	cpu_node = acpi_find_processor_node(table, acpi_cpu_id);
+ 	if (!cpu_node || !cpu_node->parent)
+ 		return -ENOENT;
+@@ -872,7 +888,9 @@ static void acpi_pptt_get_child_cpus(struct acpi_table_header *table_hdr,
+ 	cpumask_clear(cpus);
+ 
+ 	for_each_possible_cpu(cpu) {
+-		acpi_id = get_acpi_id_for_cpu(cpu);
++		if (acpi_get_cpu_uid(cpu, &acpi_id) != 0)
++			continue;
++
+ 		cpu_node = acpi_find_processor_node(table_hdr, acpi_id);
+ 
+ 		while (cpu_node) {
+@@ -966,10 +984,13 @@ int find_acpi_cache_level_from_id(u32 cache_id)
+ 	for_each_possible_cpu(cpu) {
+ 		bool empty;
+ 		int level = 1;
+-		u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++		u32 acpi_cpu_id;
+ 		struct acpi_pptt_cache *cache;
+ 		struct acpi_pptt_processor *cpu_node;
+ 
++		if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++			continue;
++
+ 		cpu_node = acpi_find_processor_node(table, acpi_cpu_id);
+ 		if (!cpu_node)
+ 			continue;
+@@ -1030,10 +1051,13 @@ int acpi_pptt_get_cpumask_from_cache_id(u32 cache_id, cpumask_t *cpus)
+ 	for_each_possible_cpu(cpu) {
+ 		bool empty;
+ 		int level = 1;
+-		u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++		u32 acpi_cpu_id;
+ 		struct acpi_pptt_cache *cache;
+ 		struct acpi_pptt_processor *cpu_node;
+ 
++		if (acpi_get_cpu_uid(cpu, &acpi_cpu_id) != 0)
++			continue;
++
+ 		cpu_node = acpi_find_processor_node(table, acpi_cpu_id);
+ 		if (!cpu_node)
+ 			continue;
+diff --git a/drivers/acpi/riscv/rhct.c b/drivers/acpi/riscv/rhct.c
+index caa2c16e1697..8f3f38c64a88 100644
+--- a/drivers/acpi/riscv/rhct.c
++++ b/drivers/acpi/riscv/rhct.c
+@@ -44,10 +44,15 @@ int acpi_get_riscv_isa(struct acpi_table_header *table, unsigned int cpu, const
+ 	struct acpi_rhct_isa_string *isa_node;
+ 	struct acpi_table_rhct *rhct;
+ 	u32 *hart_info_node_offset;
+-	u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
++	u32 acpi_cpu_id;
++	int ret;
+ 
+ 	BUG_ON(acpi_disabled);
+ 
++	ret = acpi_get_cpu_uid(cpu, &acpi_cpu_id);
++	if (ret != 0)
++		return ret;
++
+ 	if (!table) {
+ 		rhct = acpi_get_rhct();
+ 		if (!rhct)
+diff --git a/drivers/perf/arm_cspmu/arm_cspmu.c b/drivers/perf/arm_cspmu/arm_cspmu.c
+index 34430b68f602..ed72c3d1f796 100644
+--- a/drivers/perf/arm_cspmu/arm_cspmu.c
++++ b/drivers/perf/arm_cspmu/arm_cspmu.c
+@@ -1107,15 +1107,17 @@ static int arm_cspmu_acpi_get_cpus(struct arm_cspmu *cspmu)
+ {
+ 	struct acpi_apmt_node *apmt_node;
+ 	int affinity_flag;
++	u32 cpu_uid;
+ 	int cpu;
++	int ret;
+ 
+ 	apmt_node = arm_cspmu_apmt_node(cspmu->dev);
+ 	affinity_flag = apmt_node->flags & ACPI_APMT_FLAGS_AFFINITY;
+ 
+ 	if (affinity_flag == ACPI_APMT_FLAGS_AFFINITY_PROC) {
+ 		for_each_possible_cpu(cpu) {
+-			if (apmt_node->proc_affinity ==
+-			    get_acpi_id_for_cpu(cpu)) {
++			ret = acpi_get_cpu_uid(cpu, &cpu_uid);
++			if (ret == 0 && apmt_node->proc_affinity == cpu_uid) {
+ 				cpumask_set_cpu(cpu, &cspmu->associated_cpus);
+ 				break;
+ 			}
+diff --git a/include/linux/acpi.h b/include/linux/acpi.h
+index 4d2f0bed7a06..035094a55f18 100644
+--- a/include/linux/acpi.h
++++ b/include/linux/acpi.h
+@@ -324,6 +324,19 @@ int acpi_unmap_cpu(int cpu);
+ 
+ acpi_handle acpi_get_processor_handle(int cpu);
+ 
++#ifndef CONFIG_X86
++/*
++ * acpi_get_cpu_uid() - Get ACPI Processor UID of a specified CPU from MADT table
++ * @cpu: Logical CPU number (0-based)
++ * @uid: Pointer to store the ACPI Processor UID (valid only on successful return)
++ *
++ * Return: 0 on successful retrieval (the ACPI Processor ID is stored in *uid);
++ *         -EINVAL if the CPU number is invalid or out of range;
++ *         -ENODEV if the ACPI Processor UID for the specified CPU is not found.
++ */
++int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
++#endif
++
+ #ifdef CONFIG_ACPI_HOTPLUG_IOAPIC
+ int acpi_get_ioapic_id(acpi_handle handle, u32 gsi_base, u64 *phys_addr);
+ #endif
+-- 
+2.17.1
+
 
