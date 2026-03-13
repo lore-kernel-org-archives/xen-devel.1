@@ -4,38 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797CF105F799
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 10:50:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253520.1549721 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F10C8105F79B
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 11:27:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253551.1549729 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w105g-0006NB-TE; Fri, 13 Mar 2026 10:50:00 +0000
+	id 1w10g4-0003J5-IR; Fri, 13 Mar 2026 11:27:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253520.1549721; Fri, 13 Mar 2026 10:50:00 +0000
+Received: by outflank-mailman (output) from mailman id 1253551.1549729; Fri, 13 Mar 2026 11:27:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w105g-0006N4-Pd; Fri, 13 Mar 2026 10:50:00 +0000
-Received: by outflank-mailman (input) for mailman id 1253520;
- Fri, 13 Mar 2026 10:49:58 +0000
+	id 1w10g4-0003Iy-Fl; Fri, 13 Mar 2026 11:27:36 +0000
+Received: by outflank-mailman (input) for mailman id 1253551;
+ Fri, 13 Mar 2026 11:27:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RFGv=BN=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1w105e-0006Mw-RL
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 10:49:58 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+ <SRS0=SvP/=BN=amd.com=Alejandro.GarciaVallejo@srs-se1.protection.inumbo.net>)
+ id 1w10g3-0003Is-G3
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 11:27:35 +0000
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [2a01:111:f403:c001::2])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 60422c07-1eca-11f1-b164-2bf370ae4941;
- Fri, 13 Mar 2026 11:49:57 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4853f2826f7so19617025e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 03:49:57 -0700 (PDT)
-Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
- [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48541b7f255sm306357955e9.12.2026.03.13.03.49.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 03:49:56 -0700 (PDT)
+ id a0089034-1ecf-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 12:27:33 +0100 (CET)
+Received: from DS7P220CA0042.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:223::35) by
+ LVUPR12MB999162.namprd12.prod.outlook.com (2603:10b6:408:3a2::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.4; Fri, 13 Mar
+ 2026 11:27:27 +0000
+Received: from DS1PEPF00017093.namprd03.prod.outlook.com
+ (2603:10b6:8:223:cafe::34) by DS7P220CA0042.outlook.office365.com
+ (2603:10b6:8:223::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.16 via Frontend Transport; Fri,
+ 13 Mar 2026 11:27:27 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS1PEPF00017093.mail.protection.outlook.com (10.167.17.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 11:27:27 +0000
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Mar
+ 2026 06:27:25 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,86 +58,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 60422c07-1eca-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1773398997; x=1774003797; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cCc6Rsu6njgY2i55JlN7uSjh8xb1A//upegbhHr/ukE=;
-        b=nfPQYh3wQq/FCQ2gJ3ufnV940l5eBNezWNlPRQ5Et1Lhw+8lkaPp17ljjG4+uOuQy4
-         4jMCt57/SiTlFQyVVrVR/FopPAvNoCIUm4QJiuqPKY+D4+43oZNEH0KxUeAmgSAeF1qg
-         cXWsaXPNIIYNo54KW9lcZaT+xIYdyx8pGIlAs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773398997; x=1774003797;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cCc6Rsu6njgY2i55JlN7uSjh8xb1A//upegbhHr/ukE=;
-        b=RFJFcTQ2VpDnak8nfVQkXJ7wmIdtQJxnUXvgXRaVCpJ0KbrGGw+xiy+VbE+G6Kr7GE
-         8BCAXrHz1TfybmxPtAvqWgubfMbOTnE5OHIFp3wWT67x8q05C8bLE1rYUjkQ7dhB1ELT
-         BiLebrSc1o2UxK+lVnvjyJlg3oiZG0d9AMScuyftodMTmkZSXuKaaxSGkQ0YmFjFyW8d
-         rpXQTAhqsU17v169n241ksnlRTl7+RTpzbWdF613C/o5IvMDvZNdGfjI+UKiZ1kZRMP8
-         l0YP96gaZAjKxieizrgk2CE13JKa0dET1zjVoSjqkGHFcJj7atlGh0AOvZZWovdwPDfW
-         YMcA==
-X-Gm-Message-State: AOJu0Yz6Lm9z+HsEk5eyGcsRpaWN0qBu7+WGdVWnYyBAdXSdCL1ImV2u
-	Hzlc3VTDQUX+vDdWkhmwyPpiHfnI57zq3aB0u6diHx5bWPij+S1SamrlDNd710lVjKeNF5Ebk9y
-	99kYG
-X-Gm-Gg: ATEYQzwAY7EFKn15ffqpr+Ga/HXpzxfreRyRMWf+eYUV1xai07ZthVoMOJzf7FqvvBF
-	leASEd7LCjOQxyg4900ixGdSOnP1Md7rVeb1EJMcouKPfyB3Y9tDh5HQ5EvqK8UekwejnZRARPT
-	lFxRCk4xv/Rea6AjyGEz5d37pVaGfwWz40AWdEInVAR9UfEmSaQXtAfFGMjh488A2hljPd20r2p
-	ztvWy5RMmrNOWT8Ho1DfSZibs9jGm4QlTNKaukglrb1/eJqxJIEskEl76ZGs0cl4zFvoDgZq6lG
-	SG+1E+uz1uL1BhEA601buKOmJFhwMdsjVHyxEdIultkx4g3nt7aUUt8Yr7MwHvdQApJAdck8lR1
-	q8pkCP7/P1b+8IpE04AnOkynoxGoqQPC4WyVPM3gnj4IMjQFpMJC+rXSsF74mSY+iZu7YBIU+KZ
-	kMJPnB73lW/R9RGwno756dMccAs1U42wB0RNRjjIl23debQFRfrKwVCNo6OGDJKKZd3Si2M9c=
-X-Received: by 2002:a05:600c:45d5:b0:485:4535:73d with SMTP id 5b1f17b1804b1-485566cfb8amr43531425e9.2.1773398996418;
-        Fri, 13 Mar 2026 03:49:56 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH] x86/mce: Fix buggy error path in cpu_bank_alloc() leading to UAF
-Date: Fri, 13 Mar 2026 10:49:54 +0000
-Message-Id: <20260313104954.590855-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: a0089034-1ecf-11f1-b164-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ISx8sNcd4K1X5/YRgiDM9Gl0no0EYtAViZxW08zqm8/8LDHfLuLiGsVTaKCh6S0azxCw72fR5DxFlI0XZ3f3c0LwCuCpdFv4hdZHxAnBs38Z1MZ43G9Fh9cRBpygUtM28EXqzir7mXfy3qdb6+nhPoNzlie8fdvxDk3TSVmPvsQboEpbwiWIg8U6IBBy5laweZvP4rCv3PmfY6jmkzGNy9GZX3aOHTfZM2QJh7d4O31hDdSO7ytDQAQu/mFndDUqIgk7MPW2xGvqyGNe2SrhLSTdAwCW2YBzymrimXOcNQexDcLYWzM2cjwngtbuhwAarHVhjLWPAvxTLwVSkr/ZNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k7jeo7FjACy6+3xAmpUGqOgAc/b1qt2HxxFvx8aSx5U=;
+ b=JiOC/ddw7NhZuelGqlUb5FGR19+I+UFEjK/GJYvpDwOF1cVR2WVTeGA/cRZVal6vrKza/L44KvZx8u2FCu+WGe6UxgeQsMBW+Kp1ppSXj8HQV4Vb8yyFW4IzcGnjQYlj1UfPZE5I8YwYMpvt0xGmwUG8iYQmFYb+0O7cDePV0ak8TVURUHe9YgU57WpJm2D5JRXqrl1nv7VdIkyMkN87wZztS4FlpMYUBDvnyPkhWKuoCpGVTCAm0nlGVriwi3+w1ZGZRruCUCGqE7rWguUN44VMyBwOaHJsD/O9cXI17IhjcIvzpMY1A+1nDOJOSAjCq4VWaaNyTVRAHDUWsdH11g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k7jeo7FjACy6+3xAmpUGqOgAc/b1qt2HxxFvx8aSx5U=;
+ b=UdsHncO7Wl68t/E7SKdRJ1Y+sHB3uLGyAMgr7V5IFTpoq80jIDBRfRgZdA0lol4UeKgTkJOOjukYAwqO7hcKHz5PoZMcoLl1oAWpa8oMQW8sLmM5o/zvLyCZhkBLxq2UKAauEc+lCJJmphTBq1DD6Z/TyWokWYs50oBzkmwXSJE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 13 Mar 2026 12:27:24 +0100
+Message-ID: <DH1M9WRZYYCB.2345TIX8OTAGA@amd.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>, Community Manager
+	<community.manager@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>
+Subject: Re: [PATCH v5 1/5] x86: Reject CPU policies with vendors other than
+ the host's
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	<xen-devel@lists.xenproject.org>
+X-Mailer: aerc 0.20.1
+References: <20260312112116.22563-1-alejandro.garciavallejo@amd.com>
+ <20260312112116.22563-2-alejandro.garciavallejo@amd.com>
+ <92d21438-9573-45ce-a589-d292d1c31ecf@citrix.com>
+In-Reply-To: <92d21438-9573-45ce-a589-d292d1c31ecf@citrix.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017093:EE_|LVUPR12MB999162:EE_
+X-MS-Office365-Filtering-Correlation-Id: 267a16f5-90d9-4f0b-8761-08de80f381a9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|36860700016|82310400026|1800799024|18002099003|56012099003|22082099003|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	6H6s2igukdcMz6ZCgjBWAaYg70Stwt6I3Dva6Ci+m11j7Wbs8FYJdnL0fR33babJqWoHINpzqFNh1YtLZon98SNymQsmnJgLn7ud+/p8KBpAfVpzi5V7fCVx0Y0nN4vKhE4ZBRSwmDicY3+wsasswJcfaZJdljrvC/C7wKKHNlBtTuV89clcHP8JhBGWLTXWIEENKDktcNhmxuPcyPaS6OH9s2q98GmVC+rgUFR5Hi9a3cc+jFG3+pOBTwG+SNXks7unFD6Rjp7wTFOy5r5KD7FDg3cjWnXodQR5VO4+9L7rgdGysuxUUXgH+tqkEDF0J0FdsNtpEUSNZmRjtglYUqR18p7rVagqo4LgNLq+iETvxZxrxcPLaWNbAxVeptLPdfA8JvsZtmRccendq53IVkTaW4gFhKDClQ+2YTRh3W7iojFqB7P086gIk8BQGIlNqMu8dUL0fktD0Hn47GLtzLZ0D3kZ2AE21t5W2lGaa6tZqNmA8VtNkUg+R5Ly5LGYTP0nBZCJWiE5JAXPD6SLqlE0tz0iFwtp3q6idQ5bL2Qe7AeAQQGkQitBQ8tVYnuk0WSHYfxfc/4k1I152G6YTZkPwYAjdiY/3lxDdNLQDztURrxWVfHut38ZDqlddO/kPPRzuulu9gzmby+d9gigNZY6h7S/DPmHHFo/Jf7YgI8HfH+4+hlV1gOVM6PyCCKqWrj66gjUQV6Ay21NOjCD2uDmJo1wLhNG+Yf1CoUp58U=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(18002099003)(56012099003)(22082099003)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	o66xJ+OU4X+dgN2mDM8J+R7/zHut4ZeucmbVqep6i7gVlX0yRTCODD6ilPPQRZPIsozVN4nozCwydvxDqoK9weXqIbs5oni/KWKBnn0W5WJJa5TrxmOCbfcNkGtWt6PCYwzuz4Nf/Hhp/Fl8jwtYESprWfQpHDoB6xXOZd00h9OzhZ9KZyyl6LauMIIZqtyd13f7ekB5soCc8J9awldHktc3i+KmSTG3k2tZIqRi5WZrwTAWUWSCSyVfHKxwVwCWdic7jSBZZXcIbziZVB54506pf0de2UW3H+kW555rYCj+rwtUeI8q+1YnEgdcv/1Ie3V7Ue4XMkGdhRH4XldWbiEZKchaKzI5qP9hxWfqWQ7moN9/WMFoYhZVfnM9b08LcVlhMLG/l8U/iP1GWFP9wUbZX0Wj/IzFDSuJnRMqOPeZOxgQAhCTzVIIzCrp4BUa
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 11:27:27.3169
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 267a16f5-90d9-4f0b-8761-08de80f381a9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS1PEPF00017093.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVUPR12MB999162
 
-When cleaning up from a mcabanks_alloc() failure, the memory is freed but
-stale pointers are left in the percpu variables.
+On Thu Mar 12, 2026 at 10:01 PM CET, Andrew Cooper wrote:
+> On 12/03/2026 11:21 am, Alejandro Vallejo wrote:
+>> While in principle it's possible to have a vendor virtualising another,
+>> this is fairly tricky in practice and comes with the world's supply of
+>> security issues.
+>>
+>> Reject any CPU policy with vendors not matching the host's.
+>>
+>> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>>  CHANGELOG.md                             |  5 +++++
+>>  tools/tests/cpu-policy/test-cpu-policy.c | 27 ++++++++++++++++++++++++
+>>  xen/arch/x86/lib/cpu-policy/policy.c     |  5 ++++-
+>>  3 files changed, 36 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/CHANGELOG.md b/CHANGELOG.md
+>> index c191e504aba..90ba5da69e4 100644
+>> --- a/CHANGELOG.md
+>> +++ b/CHANGELOG.md
+>> @@ -23,6 +23,11 @@ The format is based on [Keep a Changelog](https://kee=
+pachangelog.com/en/1.0.0/)
+>>     - Xenoprofile support.  Oprofile themselves removed support for Xen =
+in 2014
+>>       prior to the version 1.0 release, and there has been no developmen=
+t since
+>>       before then in Xen.
+>> +   - Domains can no longer run on a system with CPUs of a vendor differ=
+ent from
+>> +     the one they were initially launched on. This affects live migrati=
+ons and
+>> +     save/restore workflows across mixed-vendor hosts. Cross-vendor emu=
+lation
+>> +     has always been unreliable, but since 2017 with the advent of spec=
+ulation
+>> +     security it became unsustainably so.
+>
+> c/s 0f1cb96e9785294f149ab3c7feb90c0eb9daeede was when it got added to Xen=
+.
+>
+> I'm certain there's a whitepaper somewhere from AMD about this, but I
+> can't locate it.=C2=A0 It was partly marketing about how you could buy AM=
+D
+> hardware (which was cheaper) and live-migrate your Intel VMs without
+> interruption.=C2=A0 It would have been nice to find for posterity.
+>
+> For the changelog, can I suggest this:
+>
+> diff --git a/CHANGELOG.md b/CHANGELOG.md
+> index c191e504aba9..377711d40953 100644
+> --- a/CHANGELOG.md
+> +++ b/CHANGELOG.md
+> @@ -23,6 +23,12 @@ The format is based on [Keep a Changelog](https://keep=
+achangelog.com/en/1.0.0/)
+> =C2=A0 =C2=A0 - Xenoprofile support.=C2=A0 Oprofile themselves removed su=
+pport for Xen in 2014
+> =C2=A0 =C2=A0 =C2=A0 prior to the version 1.0 release, and there has been=
+ no development since
+> =C2=A0 =C2=A0 =C2=A0 before then in Xen.
+> +=C2=A0 =C2=A0- Cross-vendor support; guests can now only be configured a=
+s the same
+> +=C2=A0 =C2=A0 =C2=A0vendor as the host CPU.=C2=A0 When added back in 200=
+9, with enough trickery
+> +=C2=A0 =C2=A0 =C2=A0Intel and AMD CPUs could be made to be compatible en=
+ough to live migrate
+> +=C2=A0 =C2=A0 =C2=A0a guest, but the vendors have been diverging since t=
+hen in ways that Xen
+> +=C2=A0 =C2=A0 =C2=A0cannot compensate for, and the advent of speculative=
+ security issues has
+> +=C2=A0 =C2=A0 =C2=A0put to rest any possibility of this being a viable o=
+ption.
+> =C2=A0
+> =C2=A0 - Removed xenpm tool on non-x86 platforms as it doesn't actually p=
+rovide
+> =C2=A0 =C2=A0 anything useful outside of x86.
+>
+>
+> which is closer to the style of the surrounding bullet points.=C2=A0 Also
+> s/domain/guest/ which is a subtle but important distinction made by the
+> Security Team when discussing configurations.
 
-Use cpu_bank_free() which is idempotent and behaves correctly.
+Sure on both accounts. I don't mind the contents so long as there is any.
 
-Fixes: 2e6c8f182c9c ("x86: distinguish CPU offlining from CPU removal")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+Should I consider these on the "doable on commit" camp? Or do you want a v6=
+?
 
-2e6c8f182c9c updated the success path but missed the associated error path.
-
-Prior to that, the paths were at least consistent since their introduction in
-commit 78c579426fb5 ("x86/MCE: Implement clearbank callback for AMD").
----
- xen/arch/x86/cpu/mcheck/mce.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 9a91807cfb33..684871b216a4 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -694,8 +694,7 @@ static int cpu_bank_alloc(unsigned int cpu)
- 
-     if ( !poll || !clr )
-     {
--        mcabanks_free(poll);
--        mcabanks_free(clr);
-+        cpu_bank_free(cpu);
-         return -ENOMEM;
-     }
- 
--- 
-2.39.5
-
+Cheers,
+Alejandro
 
