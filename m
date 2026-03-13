@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E740D107BCCD
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253908.1549860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428CC107BCD0
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253911.1549883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tf-0006IC-M8; Fri, 13 Mar 2026 16:35:07 +0000
+	id 1w15Th-0006q8-NM; Fri, 13 Mar 2026 16:35:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253908.1549860; Fri, 13 Mar 2026 16:35:07 +0000
+Received: by outflank-mailman (output) from mailman id 1253911.1549883; Fri, 13 Mar 2026 16:35:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tf-0006I1-IE; Fri, 13 Mar 2026 16:35:07 +0000
-Received: by outflank-mailman (input) for mailman id 1253908;
- Fri, 13 Mar 2026 16:35:06 +0000
+	id 1w15Th-0006oJ-GI; Fri, 13 Mar 2026 16:35:09 +0000
+Received: by outflank-mailman (input) for mailman id 1253911;
+ Fri, 13 Mar 2026 16:35:08 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tQrp=BN=bounce.vates.tech=bounce-md_30504962.69b43cb5.v1-73f22918691e4f6590e71139c2bbb6cf@srs-se1.protection.inumbo.net>)
- id 1w15Te-0006Ek-Mi
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:06 +0000
-Received: from mail134-15.atl141.mandrillapp.com
- (mail134-15.atl141.mandrillapp.com [198.2.134.15])
+ <SRS0=rFLP=BN=bounce.vates.tech=bounce-md_30504962.69b43cb6.v1-a80daf2a6a5d488eb90b6254a9f1b77a@srs-se1.protection.inumbo.net>)
+ id 1w15Tg-0006Ek-My
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:08 +0000
+Received: from mail136-12.atl41.mandrillapp.com
+ (mail136-12.atl41.mandrillapp.com [198.2.136.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 958cdc8b-1efa-11f1-9ccf-f158ae23cfc8;
+ id 95a21f94-1efa-11f1-9ccf-f158ae23cfc8;
  Fri, 13 Mar 2026 17:35:03 +0100 (CET)
-Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail134-15.atl141.mandrillapp.com (Mailchimp) with ESMTP id
- 4fXVT156HszPm0PrP
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:01 +0000 (GMT)
+Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fXVT21jsdz5QmHBy
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:02 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 73f22918691e4f6590e71139c2bbb6cf; Fri, 13 Mar 2026 16:35:01 +0000
+ a80daf2a6a5d488eb90b6254a9f1b77a; Fri, 13 Mar 2026 16:35:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,290 +45,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 958cdc8b-1efa-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 95a21f94-1efa-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419701; x=1773689701;
-	bh=xkR51huuZGxHmTSzRvJUtjlM0MP/Kew4xYHp0fhpCbg=;
+	s=mte1; t=1773419702; x=1773689702;
+	bh=EZV6VZwcVdA/V+iWTxOZ0DDZfDnD1N74CpP85tJ1xcs=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=YNiAtf/nxp0NJtbCaQGLI2VrUUiUBaeDLqB3ZduynhWp2LTonNfA9A/Oky/7m/dr6
-	 tLer3bn0irCv6unTBWcy5ZWCxI9ho1Af0IYu2KDVR7zylhktrlbAuPj3VBztQwgkIR
-	 gU/ZdL/EbnYAOHEqhVRHWsh395nc++FsVQ059wU2x74iXabqDHWDT64a7tiPfiNpHZ
-	 cLibmdl4SPAcRgB6ZkanNk+fskL+DUfTI2oXaUg1COCKRr4mnzs+8/3XcWMaaC8E6Y
-	 GvlTtko2QUUgGcD/CeoByhJA9vsRYovWFsJeLPwvNiwm5JTFSvc5JDmfTrjEiS3TEX
-	 LWYtcc6X6+G6w==
+	b=nBTvzgCXtgVPKD443WZh7ijLbsZv+RQ2NglOoLl/d7+/UWjEAbZvpov+QeZGj6Ntj
+	 lXsGfAhgbRxLhvQwYTe2fDXufxeOb1hmUGVZTmTmmrAiRmSrt6zNeUwjzKzEx4x3Oc
+	 NP7uhuW5V5iVrmGb1fiZAMS+uEq5Kbaf144Owtp3HMaIP20Sqh3HvcstJEGO0YdSxX
+	 XdRWmu81ZJfND1bzTQFIJO046ZeGpSGVFC0wYAUaI0PwH5OgQK0SbBg3iQ8gQD2q3/
+	 MVzNKU/7V54hIa2nOrPbTagqOikmp9ro8C9duSAkJxEg89QRmOug5forCLuWOwKBFv
+	 5308YFMqwVK2g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419701; x=1773680201; i=thierry.escande@vates.tech;
-	bh=xkR51huuZGxHmTSzRvJUtjlM0MP/Kew4xYHp0fhpCbg=;
+	t=1773419702; x=1773680202; i=thierry.escande@vates.tech;
+	bh=EZV6VZwcVdA/V+iWTxOZ0DDZfDnD1N74CpP85tJ1xcs=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=aDCJyBCXYWddBWvMz/tk43hGiVkQL1U5pAV1Ibh9eF+MbSUU8CpG7UFonw0PNyaLr
-	 MJP/h1AKv1Eb/f59DJfQfwwNzgqUdPexZgpdxyCHsUUzWz/50uRMfqScLxg5xAq9Rd
-	 YLC8b8BTe4f9itCS3vcrj4O59LoCNCI71rNVAaO5w26x3hBsgsdmVhSRTzGJwv03zo
-	 1pevTZSlZQ1b0LzWXYlarkXpMQ9IaWjWcXRmDeRg4J8pQKsT4DAsu6P5oJ0YMdw2FF
-	 BK6FPTtEN5jMpom8Pr6EL2Resjc7faV1MQhjU5Ov/TXU2r9ad+Mm1Zo6D3L044IcSm
-	 ZZ3+82MzfuTNg==
+	b=Jg01yOHajDuGeiFFDGKRfwE1G1TxOV9qEttlhxL4WQfH0W5HO1giUTnCYHNBRIHBU
+	 yIfpSa1SK21cU/52PhYIAzc5HKt6Ukw4t5QIDUelOPeSXEa6m/44A6bg429fXLnqE7
+	 CK+1ZSORo2VFCmP+silLs5/2G0qD8gGhDeHJ4jC7F7QKje/Dp3J9hsmBd1fqDywi+T
+	 BDsJt7lYDobAyvzmaO970S5tLsSne+J41DB8HMzl5gii7rJG7KZuH0Hwh3SK+CsQfN
+	 DrYuZNPAQTpTfuAg+UmFWvuSLa2vSXVkPd/70vfKW1enQSxwne7K3/D+NdIoa4XeLR
+	 Y7PTIfAhvIjvw==
 From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2001/17]=20libacpi:=20Split=20dsdt.asl=20file=20and=20extract=20i440=20specific=20parts?=
+Subject: =?utf-8?Q?[PATCH=2003/17]=20hvmloader:=20add=20function=20to=20set=20the=20emulated=20machine=20type=20(i440/Q35)?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419700638
+X-Bm-Transport-Timestamp: 1773419701312
 To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
-Message-Id: <20260313163455.790692-2-thierry.escande@vates.tech>
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Alexey Gerasimenko" <x1917x@gmail.com>
+Message-Id: <20260313163455.790692-4-thierry.escande@vates.tech>
 In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
 References: <20260313163455.790692-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.73f22918691e4f6590e71139c2bbb6cf?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.a80daf2a6a5d488eb90b6254a9f1b77a?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:01 +0000
+Date: Fri, 13 Mar 2026 16:35:02 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-In order to factorize the common parts between i440 and q35 dsdt files,
-this patch splits dsdt.asl and put the i440 specific parts into
-dsdt_i400.asl.
+This adds a new function init_pc_machine_type() which allows to
+determine and set the emulated chipset type. Possible values are
+MACHINE_TYPE_I440 and MACHINE_TYPE_Q35 and stored in the global variable
+machine_type.
 
-This also makes use of #include directives instead of file
-concatenations to build the asl files.
+The machine_type variable will be used from multiple places in following
+commits.
 
-Also, the anycpu asl files generation makes use of makefile pattern
-rules to avoid duplication for i440 and q35.
-
-Becuase the LPC controller BDF (which differs between i440 and q35) must
-be set at device declaration, it is still set in dsdt.asl by checking
-for a MACHINE_TYPE_I440 macro defined in dsdt_i400.asl.
-
+Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
 Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
 ---
- tools/firmware/hvmloader/Makefile  |  2 +-
- tools/firmware/hvmloader/ovmf.c    |  4 ++--
- tools/firmware/hvmloader/seabios.c |  4 ++--
- tools/firmware/hvmloader/util.c    |  4 ++--
- tools/firmware/hvmloader/util.h    |  4 ++--
- tools/libacpi/Makefile             | 10 ++++-----
- tools/libacpi/dsdt.asl             | 25 ++++-----------------
- tools/libacpi/dsdt_i440.asl        | 36 ++++++++++++++++++++++++++++++
- 8 files changed, 53 insertions(+), 36 deletions(-)
- create mode 100644 tools/libacpi/dsdt_i440.asl
+ tools/firmware/hvmloader/hvmloader.c |  2 ++
+ tools/firmware/hvmloader/pci_regs.h  |  4 +++
+ tools/firmware/hvmloader/util.c      | 42 ++++++++++++++++++++++++++++
+ tools/firmware/hvmloader/util.h      | 11 ++++++++
+ 4 files changed, 59 insertions(+)
 
-diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
-index 21de72187d..bdc33a877f 100644
---- a/tools/firmware/hvmloader/Makefile
-+++ b/tools/firmware/hvmloader/Makefile
-@@ -78,7 +78,7 @@ rombios.o: roms.inc
- smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
+diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
+index 6d23150fc9..626cc53649 100644
+--- a/tools/firmware/hvmloader/hvmloader.c
++++ b/tools/firmware/hvmloader/hvmloader.c
+@@ -332,6 +332,8 @@ int main(void)
  
- ACPI_PATH = ../../libacpi
--DSDT_FILES += dsdt_anycpu_qemu_xen.c
-+DSDT_FILES += dsdt_i440_anycpu_qemu_xen.c
- ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
- $(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
- CFLAGS += -I$(ACPI_PATH)
-diff --git a/tools/firmware/hvmloader/ovmf.c b/tools/firmware/hvmloader/ovmf.c
-index 23610a0717..d264a50c73 100644
---- a/tools/firmware/hvmloader/ovmf.c
-+++ b/tools/firmware/hvmloader/ovmf.c
-@@ -119,8 +119,8 @@ static void ovmf_load(const struct bios_config *config,
- static void ovmf_acpi_build_tables(void)
- {
-     struct acpi_config config = {
--        .dsdt_anycpu = dsdt_anycpu_qemu_xen,
--        .dsdt_anycpu_len = dsdt_anycpu_qemu_xen_len,
-+        .dsdt_anycpu = dsdt_i440_anycpu_qemu_xen,
-+        .dsdt_anycpu_len = dsdt_i440_anycpu_qemu_xen_len,
-         .dsdt_15cpu = NULL, 
-         .dsdt_15cpu_len = 0
-     };
-diff --git a/tools/firmware/hvmloader/seabios.c b/tools/firmware/hvmloader/seabios.c
-index 444d118ddb..74b0406b5a 100644
---- a/tools/firmware/hvmloader/seabios.c
-+++ b/tools/firmware/hvmloader/seabios.c
-@@ -90,8 +90,8 @@ static void seabios_acpi_build_tables(void)
- {
-     uint32_t rsdp = (uint32_t)scratch_alloc(sizeof(struct acpi_20_rsdp), 0);
-     struct acpi_config config = {
--        .dsdt_anycpu = dsdt_anycpu_qemu_xen,
--        .dsdt_anycpu_len = dsdt_anycpu_qemu_xen_len,
-+        .dsdt_anycpu = dsdt_i440_anycpu_qemu_xen,
-+        .dsdt_anycpu_len = dsdt_i440_anycpu_qemu_xen_len,
-         .dsdt_15cpu = NULL,
-         .dsdt_15cpu_len = 0,
-     };
+     init_hypercalls();
+ 
++    init_pc_machine_type();
++
+     memory_map_setup();
+ 
+     xenbus_setup();
+diff --git a/tools/firmware/hvmloader/pci_regs.h b/tools/firmware/hvmloader/pci_regs.h
+index 7bf2d873ab..4d4dc0cd01 100644
+--- a/tools/firmware/hvmloader/pci_regs.h
++++ b/tools/firmware/hvmloader/pci_regs.h
+@@ -107,6 +107,10 @@
+ 
+ #define PCI_INTEL_OPREGION 0xfc /* 4 bits */
+ 
++#define PCI_VENDOR_ID_INTEL              0x8086
++#define PCI_DEVICE_ID_INTEL_82441        0x1237
++#define PCI_DEVICE_ID_INTEL_Q35_MCH      0x29c0
++
+ #endif /* __HVMLOADER_PCI_REGS_H__ */
+ 
+ /*
 diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index e651342681..f1ed1eb48d 100644
+index f1ed1eb48d..f9116bea4d 100644
 --- a/tools/firmware/hvmloader/util.c
 +++ b/tools/firmware/hvmloader/util.c
-@@ -843,8 +843,8 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
-     s = xenstore_read("platform/device-model", "");
-     if ( !strncmp(s, "qemu_xen", 9) )
-     {
--        config->dsdt_anycpu = dsdt_anycpu_qemu_xen;
--        config->dsdt_anycpu_len = dsdt_anycpu_qemu_xen_len;
-+        config->dsdt_anycpu = dsdt_i440_anycpu_qemu_xen;
-+        config->dsdt_anycpu_len = dsdt_i440_anycpu_qemu_xen_len;
-         config->dsdt_15cpu = NULL;
-         config->dsdt_15cpu_len = 0;
-     }
-diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
-index 765a013ddd..3c5eeff5e7 100644
---- a/tools/firmware/hvmloader/util.h
-+++ b/tools/firmware/hvmloader/util.h
-@@ -381,8 +381,8 @@ extern struct e820map memory_map;
- bool check_overlap(uint64_t start, uint64_t size,
-                    uint64_t reserved_start, uint64_t reserved_size);
+@@ -22,6 +22,7 @@
+ #include "hypercall.h"
+ #include "ctype.h"
+ #include "vnuma.h"
++#include "pci_regs.h"
+ #include <acpi2_0.h>
+ #include <libacpi.h>
+ #include <stdint.h>
+@@ -648,6 +649,47 @@ void __bug(const char *file, int line)
+     crash();
+ }
  
--extern const unsigned char dsdt_anycpu_qemu_xen[], dsdt_anycpu[], dsdt_15cpu[];
--extern const int dsdt_anycpu_qemu_xen_len, dsdt_anycpu_len, dsdt_15cpu_len;
-+extern const unsigned char dsdt_i440_anycpu_qemu_xen[], dsdt_anycpu[], dsdt_15cpu[];
-+extern const int dsdt_i440_anycpu_qemu_xen_len, dsdt_anycpu_len, dsdt_15cpu_len;
- 
- unsigned long acpi_pages_allocated(void);
- 
-diff --git a/tools/libacpi/Makefile b/tools/libacpi/Makefile
-index b21a64c6b4..d3d4bc9543 100644
---- a/tools/libacpi/Makefile
-+++ b/tools/libacpi/Makefile
-@@ -11,7 +11,7 @@ endif
- 
- MK_DSDT = $(ACPI_BUILD_DIR)/mk_dsdt
- 
--C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c dsdt_pvh.c
-+C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_i440_anycpu_qemu_xen.c dsdt_pvh.c
- C_SRC-$(CONFIG_ARM_64) = dsdt_anycpu_arm.c
- DSDT_FILES ?= $(C_SRC-y)
- C_SRC = $(addprefix $(ACPI_BUILD_DIR)/, $(DSDT_FILES))
-@@ -39,18 +39,16 @@ $(H_SRC): $(ACPI_BUILD_DIR)/%.h: %.asl
- $(MK_DSDT): mk_dsdt.c
- 	$(HOSTCC) $(HOSTCFLAGS) $(MKDSDT_CFLAGS-y) $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -o $@ mk_dsdt.c
- 
--$(ACPI_BUILD_DIR)/dsdt_anycpu_qemu_xen.asl: dsdt.asl dsdt_acpi_info.asl $(MK_DSDT)
-+$(ACPI_BUILD_DIR)/dsdt_%_anycpu_qemu_xen.asl: dsdt_%.asl dsdt.asl dsdt_acpi_info.asl $(MK_DSDT)
- 	# Remove last bracket
- 	awk 'NR > 1 {print s} {s=$$0}' $< > $@.$(TMP_SUFFIX)
--	cat dsdt_acpi_info.asl >> $@.$(TMP_SUFFIX)
- 	$(MK_DSDT) --debug=$(debug) --dm-version qemu-xen >> $@.$(TMP_SUFFIX)
- 	mv -f $@.$(TMP_SUFFIX) $@
- 
- # NB. awk invocation is a portable alternative to 'head -n -1'
--$(ACPI_BUILD_DIR)/dsdt_%cpu.asl: dsdt.asl dsdt_acpi_info.asl  $(MK_DSDT)
-+$(ACPI_BUILD_DIR)/dsdt_%cpu.asl: dsdt_i440.asl dsdt.asl dsdt_acpi_info.asl  $(MK_DSDT)
- 	# Remove last bracket
- 	awk 'NR > 1 {print s} {s=$$0}' $< > $@.$(TMP_SUFFIX)
--	cat dsdt_acpi_info.asl >> $@.$(TMP_SUFFIX)
- 	$(MK_DSDT) --debug=$(debug) --maxcpu $*  >> $@.$(TMP_SUFFIX)
- 	mv -f $@.$(TMP_SUFFIX) $@
- 
-@@ -65,7 +63,7 @@ $(ACPI_BUILD_DIR)/dsdt_anycpu_arm.asl: $(MK_DSDT)
- 	mv -f $@.$(TMP_SUFFIX) $@
- 
- $(C_SRC): $(ACPI_BUILD_DIR)/%.c: $(ACPI_BUILD_DIR)/%.asl
--	$(IASL) -vs -p $(ACPI_BUILD_DIR)/$*.$(TMP_SUFFIX) -tc $<
-+	$(IASL) -vs -I $(CURDIR) -p $(ACPI_BUILD_DIR)/$*.$(TMP_SUFFIX) -tc $<
- 	sed -e 's/AmlCode/$*/g' -e 's/_aml_code//g' $(ACPI_BUILD_DIR)/$*.hex > $@.$(TMP_SUFFIX)
- 	echo "int $*_len=sizeof($*);" >> $@.$(TMP_SUFFIX)
- 	mv -f $@.$(TMP_SUFFIX) $@
-diff --git a/tools/libacpi/dsdt.asl b/tools/libacpi/dsdt.asl
-index 32b42f85ae..130826fdcc 100644
---- a/tools/libacpi/dsdt.asl
-+++ b/tools/libacpi/dsdt.asl
-@@ -5,8 +5,6 @@
-  * Copyright (c) 2004, Intel Corporation.
-  */
- 
--DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
--{
-     Name (\PMBS, 0x0C00)
-     Name (\PMLN, 0x08)
-     Name (\IOB1, 0x00)
-@@ -199,7 +197,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
- 
-             Device (ISA)
-             {
--                Name (_ADR, 0x00010000) /* device 1, fn 0 */
-+                /* Error will be raised if the machine type is not defined */
-+                #ifdef MACHINE_TYPE_I440
-+                    Name (_ADR, 0x00010000) /* device 1, fn 0 */
-+                #endif
- 
-                 OperationRegion(PIRQ, PCI_Config, 0x60, 0x4)
-                 Scope(\) {
-@@ -329,23 +330,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
-                     })
-                 }
- 
--                Device (FDC0)
--                {
--                    Name (_HID, EisaId ("PNP0700"))
--                    Method (_STA, 0, NotSerialized)
--                    {
--                          Return (0x0F)
--                    }
--
--                    Name (_CRS, ResourceTemplate ()
--                    {
--                        IO (Decode16, 0x03F0, 0x03F0, 0x01, 0x06)
--                        IO (Decode16, 0x03F7, 0x03F7, 0x01, 0x01)
--                        IRQNoFlags () {6}
--                        DMA (Compatibility, NotBusMaster, Transfer8) {2}
--                    })
--                }
--
-                 Device (UAR1)
-                 {
-                     Name (_HID, EisaId ("PNP0501"))
-@@ -444,4 +428,3 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
-     Method(_PIC, 1) {
-         Store(Arg0, PICD)
-     }
--}
-diff --git a/tools/libacpi/dsdt_i440.asl b/tools/libacpi/dsdt_i440.asl
-new file mode 100644
-index 0000000000..e80c454ad9
---- /dev/null
-+++ b/tools/libacpi/dsdt_i440.asl
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: LGPL-2.1-only */
-+/******************************************************************************
-+ * DSDT for Xen with Qemu device model (for i440 machine)
-+ *
-+ * Copyright (c) 2004, Intel Corporation.
-+ */
++machine_type_t machine_type;
 +
-+DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
++void init_pc_machine_type(void)
 +{
-+    #define MACHINE_TYPE_I440
++    uint16_t vendor_id;
++    uint16_t device_id;
 +
-+    #include "dsdt.asl"
++    if ( machine_type != MACHINE_TYPE_UNDEFINED )
++        return;
 +
-+    Scope (\_SB.PCI0.ISA)
++    vendor_id = pci_readw(0, PCI_VENDOR_ID);
++    device_id = pci_readw(0, PCI_DEVICE_ID);
++
++    /* only Intel platforms are emulated currently */
++    if ( vendor_id != PCI_VENDOR_ID_INTEL )
++        goto error;
++
++    switch ( device_id )
 +    {
-+         Device (FDC0)
-+         {
-+             Name (_HID, EisaId ("PNP0700"))
++    case PCI_DEVICE_ID_INTEL_82441:
++        machine_type = MACHINE_TYPE_I440;
++        printf("Detected i440 chipset\n");
++        break;
 +
-+             Method (_STA, 0, NotSerialized)
-+             {
-+                   Return (0x0F)
-+             }
++    case PCI_DEVICE_ID_INTEL_Q35_MCH:
++        machine_type = MACHINE_TYPE_Q35;
++        printf("Detected Q35 chipset\n");
++        break;
 +
-+             Name (_CRS, ResourceTemplate ()
-+             {
-+                 IO (Decode16, 0x03F0, 0x03F0, 0x01, 0x06)
-+                 IO (Decode16, 0x03F7, 0x03F7, 0x01, 0x01)
-+                 IRQNoFlags () {6}
-+                 DMA (Compatibility, NotBusMaster, Transfer8) {2}
-+             })
-+        }
++    default:
++        goto error;
 +    }
 +
-+    #include "dsdt_acpi_info.asl"
++    return;
++
++error:
++    printf("Unknown emulated chipset encountered, VID=%04Xh, DID=%04Xh\n",
++           vendor_id, device_id);
++    BUG();
 +}
++
+ static void validate_hvm_info(struct hvm_info_table *t)
+ {
+     uint8_t *ptr = (uint8_t *)t;
+diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
+index 3c5eeff5e7..2f37504aca 100644
+--- a/tools/firmware/hvmloader/util.h
++++ b/tools/firmware/hvmloader/util.h
+@@ -170,6 +170,17 @@ void pci_write(uint32_t devfn, uint32_t reg, uint32_t len, uint32_t val);
+ #define pci_writew(devfn, reg, val) pci_write(devfn, reg, 2, (uint16_t)(val))
+ #define pci_writel(devfn, reg, val) pci_write(devfn, reg, 4, (uint32_t)(val))
+ 
++/* Emulated machine types */
++typedef enum {
++    MACHINE_TYPE_UNDEFINED = 0,
++    MACHINE_TYPE_I440,
++    MACHINE_TYPE_Q35,
++} machine_type_t;
++
++extern machine_type_t machine_type;
++
++void init_pc_machine_type(void);
++
+ /* Get a pointer to the shared-info page */
+ struct shared_info *get_shared_info(void) __attribute__ ((const));
+ 
 -- 
 2.51.0
 
