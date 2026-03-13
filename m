@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1236D107BCD5
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253914.1549912 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5603A107BCCD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253907.1549855 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tk-0007VK-1N; Fri, 13 Mar 2026 16:35:12 +0000
+	id 1w15Tf-0006F5-ED; Fri, 13 Mar 2026 16:35:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253914.1549912; Fri, 13 Mar 2026 16:35:11 +0000
+Received: by outflank-mailman (output) from mailman id 1253907.1549855; Fri, 13 Mar 2026 16:35:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tj-0007U5-M2; Fri, 13 Mar 2026 16:35:11 +0000
-Received: by outflank-mailman (input) for mailman id 1253914;
- Fri, 13 Mar 2026 16:35:10 +0000
+	id 1w15Tf-0006Ey-BI; Fri, 13 Mar 2026 16:35:07 +0000
+Received: by outflank-mailman (input) for mailman id 1253907;
+ Fri, 13 Mar 2026 16:35:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=H/wq=BN=bounce.vates.tech=bounce-md_30504962.69b43cb5.v1-dee8f2259b93467080f6b231169e5ae3@srs-se1.protection.inumbo.net>)
- id 1w15Ti-0006Ek-NG
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:10 +0000
+ <SRS0=6RdW=BN=bounce.vates.tech=bounce-md_30504962.69b43cb6.v1-3400e0b633134c63b4737acb401da8d3@srs-se1.protection.inumbo.net>)
+ id 1w15Te-0006Ek-1y
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:06 +0000
 Received: from mail179-36.suw41.mandrillapp.com
  (mail179-36.suw41.mandrillapp.com [198.2.179.36])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95403724-1efa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:35:02 +0100 (CET)
+ id 959554c3-1efa-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:35:03 +0100 (CET)
 Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail179-36.suw41.mandrillapp.com (Mailchimp) with ESMTP id 4fXVT13g0nzlfcWc
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:01 +0000 (GMT)
+ by mail179-36.suw41.mandrillapp.com (Mailchimp) with ESMTP id 4fXVT20tXpzlfcYX
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:02 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- dee8f2259b93467080f6b231169e5ae3; Fri, 13 Mar 2026 16:35:01 +0000
+ 3400e0b633134c63b4737acb401da8d3; Fri, 13 Mar 2026 16:35:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,124 +44,252 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95403724-1efa-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 959554c3-1efa-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419701; x=1773689701;
-	bh=REkocrI6Nk2YpoA8OynAjGyLNwNnZKPqQ6VDiOkj00E=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=Q31graVI6AFMeCAtOCGvkHRYQf/+xCA8xFi2Rjrep2kzpBn5xgZ++aGaiwtGaemUa
-	 DgGlRI3GTn3mAhhvA6Ymg0GeBZJVlzjroTZoydrVawge2fnnn1cY0NImKYZ7wKDAo0
-	 8HQemOGAYRfLVkvXlE/Oczdj9O8io1xcSCFBXZDe+GSuXhzHDBXw/oC/ywGqwJmJNn
-	 9nSsAw22rXk9ARvYLhpJZB76kgLX3+Mmzck4k+D7zi8StQgvj9UYDn4Vg8VvE/BiVG
-	 bEv/KtLlM8/4jKtwPxOIozWfvVyWPdrTfEXuB68PO++9PcjL9bhCB6l7do3okjCThm
-	 Jy0Nwr7k3WX6w==
+	s=mte1; t=1773419702; x=1773689702;
+	bh=ZFode1C11grIE/JKanD6R+1CjHsHBuSPqCWIftB9HSk=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=fFmc8jZsv3oHWELzoOSyw3b6GGkZrB0/Dvc6ayoQWpuVXfi+25ZMr+keBZsclO34/
+	 1Tnw57+Qq+WzZilPFVEw8phSCQ/Ao8hlmal3vIjYcYl0IdNEi9EidRiFQl7LGR7IXQ
+	 MQsHvlv5KoER3jJllVtqgEubuC5pUTxRf/qZjvdGSv+kxSGokcFj/oX/GRYBfPPZ+J
+	 Nbi8Kn3aYorsL//OVvLG9ZIvzxJjr4h8z30Zk4mW4ZaVHGbEeu+KZYFpXRLFf8rEmg
+	 Ox3JalRM5fCABhVYDdEzwT5dnVhYhzYlJteOLguAMtdiCuzH6r0ZDSGwBmWDuZHNIE
+	 U/MJRq952W7Uw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419701; x=1773680201; i=thierry.escande@vates.tech;
-	bh=REkocrI6Nk2YpoA8OynAjGyLNwNnZKPqQ6VDiOkj00E=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=LjklmnpcnUd3nisXU/GCwH0RUgbk4L4Bar+lOQVEKHoJww+laau1dTNDuxiAuQhlZ
-	 ogLBptd9v52pinNDvxZDAMuRVtYb2b69QQLdd292lZwBbRxlwZoe/J/V3WLZhgoYXd
-	 cMLOBuUgTEUhQlnbmyMlRIwbU70vpWZcHRxpcbD8yC/9FF7cl/X6/HCbgESsntQ0mk
-	 mC/zh7ISCUYIKJGQKhVLOg4jIShnrSutJRZuHpSB1S2FfAOXd1P8O/SW2rUCrC7eEJ
-	 auPTrEX1ItB6ZI/sQky3v4YYTzeXnDW+0gHJ6zEFYb7h4BYPBBbSVZNQtHN2ukafJK
-	 9VP5+yjUxOisg==
+	t=1773419702; x=1773680202; i=thierry.escande@vates.tech;
+	bh=ZFode1C11grIE/JKanD6R+1CjHsHBuSPqCWIftB9HSk=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=b4MczgNqHmRiJMLVpSOlr2OCMAYtVQVZWqBlTzi8rKRpQbwzm4zBAh3qFqJEDI/q8
+	 DpG1dVL5ak6/PTIr6dJZP+DWHxanjVHOIPOCfMbdLiqB9prKlH/K6mS6yJwyxDeM7N
+	 F3fZ6a27RDd5nJ/AgOnNWlegpRP+iINykW8a60nzv0BVWfEVnZWnWUoJe95FUVpAiN
+	 /2zl26GcSnlXV67Eo8ji3Hk0ZeUQbMdl9CQT2aJhnWLYs0hihDSIP01zWNwE6JRqZi
+	 9kEcoCTEsQpGZnf0hzZvCdCSzSGewsw3g7qMuZAqeenV8CDes2XjR1A+0C/LI1xre5
+	 uYhC0x9/8cNRg==
 From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2000/17]=20Q35=20initial=20support=20for=20HVM=20guests?=
+Subject: =?utf-8?Q?[PATCH=2002/17]=20libacpi:=20new=20DSDT=20ACPI=20table=20for=20Q35?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419700304
+X-Bm-Transport-Timestamp: 1773419700964
 To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>
-Message-Id: <20260313163455.790692-1-thierry.escande@vates.tech>
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Alexey Gerasimenko" <x1917x@gmail.com>
+Message-Id: <20260313163455.790692-3-thierry.escande@vates.tech>
+In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
+References: <20260313163455.790692-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.dee8f2259b93467080f6b231169e5ae3?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.3400e0b633134c63b4737acb401da8d3?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:01 +0000
+Date: Fri, 13 Mar 2026 16:35:02 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-This series introduces initial Q35 chipset support for HVM guests, based on the
-patchset at [1] by Alexey Gerasimenko.
+This patch adds the DSDT table for Q35 (new tools/libacpi/dsdt_q35.asl
+file). It only contains the specific Q35 parts that differ from i440).
+At the moment, these are:
 
-Basic support means that this patchset allows to start an HVM guest that
-emulates a Q35 chipset via Qemu and implements access to PCIe extended
-configuration space for such devices emulated by Qemu.
+- BDF location of LPC Controller
+- Minor changes related to FDC detection
+- Addition of _OSC method to inform OSPM about PCIe features supported
 
-Support for PCIe device passthrough is not implemented yet. This is planned but
-implies modifications in the hypervisor and the firmwares, mainly for the
-support of multiple PCI buses.
+As we are still using 4 PCI router links and their corresponding
+device/register addresses are same (offset 0x60), no need to change PCI
+routing descriptions.
 
-In order to create a Q35 guest, a new domain config option has been added,
-named 'device_model_machine'. Possible values are:
-- "i440" - i440 emulation (default)
-- "q35"  - emulate a Q35 machine
+Note that '15cpu' ACPI tables are only applicable to qemu-traditional
+(which have no support for Q35), so we need to use 'anycpu' version only.
 
-If the option is omitted it defaults to "i440", not impacting existing domain
-configuration files.
-
-DSDT files for Q35 and i440 are largely similar so the existing file dsdt.asl
-has been split with i440 and q35 specific parts put in seperated files.
-
-The PCIe MMCONFIG area is configured by hvmloader and its base address and size
-are set in Xen using a new pair of hypercalls HVMOP_get|set_ecam_space. Access
-to the MMCONFIG area from a guest is trapped by Xen and transfered to the
-emulator as XEN_DMOP_IO_RANGE_PCI ioreq type.
-
-[1] https://lore.kernel.org/xen-devel/cover.1520867740.git.x1917x@gmail.com/
-
-Thierry Escande (17):
-  libacpi: Split dsdt.asl file and extract i440 specific parts
-  libacpi: new DSDT ACPI table for Q35
-  hvmloader: add function to set the emulated machine type (i440/Q35)
-  hvmloader: add ACPI enabling for Q35
-  hvmloader: add Q35 DSDT table loading
-  hvmloader: Move pci devices setup to a separate function
-  hvmloader: add basic Q35 support
-  hvmloader: Extend PCI BAR struct
-  xev/hvm: Add HVMOP_get|set_ecam_space hypercalls
-  hvmloader: Add support for HVMOP_set|get_ecam_space hypercalls
-  hvmloader: allocate MMCONFIG area in the MMIO hole
-  libxl: Q35 support (new option device_model_machine)
-  libxl: Add xen-platform device for Q35 machine
-  libacpi: build ACPI MCFG table if requested
-  hvmloader: Set MCFG in ACPI table
-  Handle PCIe ECAM space access from guests
-  docs: provide description for device_model_machine option
-
- docs/man/xl.cfg.5.pod.in             |  27 +++
- tools/firmware/hvmloader/Makefile    |   2 +-
- tools/firmware/hvmloader/config.h    |   5 +
- tools/firmware/hvmloader/e820.c      |  11 ++
- tools/firmware/hvmloader/hvmloader.c |  21 ++-
- tools/firmware/hvmloader/ovmf.c      |   4 +-
- tools/firmware/hvmloader/pci.c       | 264 +++++++++++++++++++--------
- tools/firmware/hvmloader/pci_regs.h  |  16 ++
- tools/firmware/hvmloader/seabios.c   |   4 +-
- tools/firmware/hvmloader/util.c      |  94 +++++++++-
- tools/firmware/hvmloader/util.h      |  21 ++-
- tools/libacpi/Makefile               |  10 +-
- tools/libacpi/acpi2_0.h              |  17 ++
- tools/libacpi/build.c                |  43 +++++
- tools/libacpi/dsdt.asl               |  28 +--
- tools/libacpi/dsdt_i440.asl          |  36 ++++
- tools/libacpi/dsdt_q35.asl           | 130 +++++++++++++
- tools/libacpi/libacpi.h              |   6 +
- tools/libs/light/libxl_dm.c          |  22 ++-
- tools/libs/light/libxl_types.idl     |   7 +
- tools/xl/xl_parse.c                  |  14 ++
- xen/arch/x86/hvm/hvm.c               |  52 ++++++
- xen/arch/x86/hvm/ioreq.c             |  15 ++
- xen/arch/x86/include/asm/domain.h    |   4 +
- xen/include/public/hvm/hvm_op.h      |  11 ++
- 25 files changed, 739 insertions(+), 125 deletions(-)
- create mode 100644 tools/libacpi/dsdt_i440.asl
+Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
+Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
+---
+ tools/firmware/hvmloader/Makefile |   2 +-
+ tools/libacpi/Makefile            |   2 +-
+ tools/libacpi/dsdt.asl            |   3 +
+ tools/libacpi/dsdt_q35.asl        | 130 ++++++++++++++++++++++++++++++
+ 4 files changed, 135 insertions(+), 2 deletions(-)
  create mode 100644 tools/libacpi/dsdt_q35.asl
 
+diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
+index bdc33a877f..99f045efaa 100644
+--- a/tools/firmware/hvmloader/Makefile
++++ b/tools/firmware/hvmloader/Makefile
+@@ -78,7 +78,7 @@ rombios.o: roms.inc
+ smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
+ 
+ ACPI_PATH = ../../libacpi
+-DSDT_FILES += dsdt_i440_anycpu_qemu_xen.c
++DSDT_FILES += dsdt_i440_anycpu_qemu_xen.c dsdt_q35_anycpu_qemu_xen.c
+ ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
+ $(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
+ CFLAGS += -I$(ACPI_PATH)
+diff --git a/tools/libacpi/Makefile b/tools/libacpi/Makefile
+index d3d4bc9543..e6c4a3fd8b 100644
+--- a/tools/libacpi/Makefile
++++ b/tools/libacpi/Makefile
+@@ -11,7 +11,7 @@ endif
+ 
+ MK_DSDT = $(ACPI_BUILD_DIR)/mk_dsdt
+ 
+-C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_i440_anycpu_qemu_xen.c dsdt_pvh.c
++C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_i440_anycpu_qemu_xen.c dsdt_q35_anycpu_qemu_xen.c dsdt_pvh.c
+ C_SRC-$(CONFIG_ARM_64) = dsdt_anycpu_arm.c
+ DSDT_FILES ?= $(C_SRC-y)
+ C_SRC = $(addprefix $(ACPI_BUILD_DIR)/, $(DSDT_FILES))
+diff --git a/tools/libacpi/dsdt.asl b/tools/libacpi/dsdt.asl
+index 130826fdcc..dc764881c9 100644
+--- a/tools/libacpi/dsdt.asl
++++ b/tools/libacpi/dsdt.asl
+@@ -201,6 +201,9 @@
+                 #ifdef MACHINE_TYPE_I440
+                     Name (_ADR, 0x00010000) /* device 1, fn 0 */
+                 #endif
++                #ifdef MACHINE_TYPE_Q35
++                    Name (_ADR, 0x001f0000) /* device 31, fn 0 */
++                #endif
+ 
+                 OperationRegion(PIRQ, PCI_Config, 0x60, 0x4)
+                 Scope(\) {
+diff --git a/tools/libacpi/dsdt_q35.asl b/tools/libacpi/dsdt_q35.asl
+new file mode 100644
+index 0000000000..7cefe63506
+--- /dev/null
++++ b/tools/libacpi/dsdt_q35.asl
+@@ -0,0 +1,130 @@
++/* SPDX-License-Identifier: LGPL-2.1-only */
++/******************************************************************************
++ * DSDT for Xen with Qemu device model (for Q35 machine)
++ */
++
++DefinitionBlock ("DSDT.aml", "DSDT", 2, "Xen", "HVM", 0)
++{
++    #define MACHINE_TYPE_Q35
++
++    #include "dsdt.asl"
++
++    Scope (\_SB.PCI0)
++    {
++       /* _OSC, modified from ASL sample in ACPI spec */
++       Name (SUPP, 0) /* PCI _OSC Support Field value */
++       Name (CTRL, 0) /* PCI _OSC Control Field value */
++       Method (_OSC, 4) {
++           /* Create DWORD-addressable fields from the Capabilities Buffer */
++           CreateDWordField (Arg3, 0, CDW1)
++
++           /* Switch by UUID.
++            * Only PCI Host Bridge Device capabilities UUID used for now
++            */
++           If (LEqual (Arg0, ToUUID ("33DB4D5B-1FF7-401C-9657-7441C03DD766"))) {
++               /* Create DWORD-addressable fields from the Capabilities Buffer */
++               CreateDWordField (Arg3, 4, CDW2)
++               CreateDWordField (Arg3, 8, CDW3)
++
++               /* Save Capabilities DWORD2 & 3 */
++               Store (CDW2, SUPP)
++               Store (CDW3, CTRL)
++
++               /* Validate Revision DWORD */
++               If (LNotEqual (Arg1, One)) {
++                   /* Unknown revision */
++                   /* Support and Control DWORDs will be returned anyway */
++                   Or (CDW1, 0x08, CDW1)
++               }
++
++               /* Control field bits are:
++                * bit 0    PCI Express Native Hot Plug control
++                * bit 1    SHPC Native Hot Plug control
++                * bit 2    PCI Express Native Power Management Events control
++                * bit 3    PCI Express Advanced Error Reporting control
++                * bit 4    PCI Express Capability Structure control
++                */
++
++               /* Always allow native PME, AER (no dependencies)
++                * Never allow SHPC (no SHPC controller in this system)
++                * Do not allow PCIe Capability Structure control for now
++                * Also, ACPI hotplug is used for now instead of PCIe
++                * Native Hot Plug
++                */
++               And (CTRL, 0x0C, CTRL)
++
++               If (LNotEqual (CDW3, CTRL)) {
++                   /* Some of Capabilities bits were masked */
++                   Or (CDW1, 0x10, CDW1)
++               }
++               /* Update DWORD3 in the buffer */
++               Store (CTRL, CDW3)
++           } Else {
++               Or (CDW1, 4, CDW1) /* Unrecognized UUID */
++           }
++           Return (Arg3)
++       }
++       /* end of _OSC */
++    }
++
++    /****************************************************************
++     * LPC ISA bridge
++     ****************************************************************/
++
++    Scope (\_SB.PCI0.ISA)
++    {
++        /*
++         LPC ISA bridge
++
++         PCI Interrupt Routing Register 2 (PIRQE..PIRQH) cannot be
++         used because of existing Xen IRQ limitations (4 PCI links
++         only)
++        */
++
++        /* LPC_I/O: I/O Decode Ranges Register */
++        OperationRegion (LPCD, PCI_Config, 0x80, 0x2)
++        Field (LPCD, AnyAcc, NoLock, Preserve) {
++            COMA,   3,
++                ,   1,
++            COMB,   3,
++
++            Offset(0x01),
++            LPTD,   2,
++                ,   2,
++            FDCD,   2
++        }
++
++        /* LPC_EN: LPC I/F Enables Register */
++        OperationRegion(LPCE, PCI_Config, 0x82, 0x2)
++        Field(LPCE, AnyAcc, NoLock, Preserve) {
++            CAEN,   1,
++            CBEN,   1,
++            LPEN,   1,
++            FDEN,   1
++        }
++
++        Device (FDC0)
++        {
++            Name (_HID, EisaId ("PNP0700"))
++            Method (_STA, 0, NotSerialized)
++            {
++                Store (FDEN, Local0)
++                If (LEqual (Local0, 0)) {
++                    Return (0x00)
++                } Else {
++                    Return (0x0F)
++                }
++           }
++
++           Name (_CRS, ResourceTemplate ()
++           {
++               IO (Decode16, 0x03F2, 0x03F2, 0x00, 0x04)
++               IO (Decode16, 0x03F7, 0x03F7, 0x00, 0x01)
++               IRQNoFlags () {6}
++               DMA (Compatibility, NotBusMaster, Transfer8) {2}
++           })
++        }
++    }
++
++    #include "dsdt_acpi_info.asl"
++}
 -- 
 2.51.0
 
