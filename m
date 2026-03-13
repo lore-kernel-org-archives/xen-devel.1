@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBC1F107BCD3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ECE107BCD2
 	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253916.1549932 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1253913.1549907 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tm-00087n-6S; Fri, 13 Mar 2026 16:35:14 +0000
+	id 1w15Tj-0007Pr-Ii; Fri, 13 Mar 2026 16:35:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253916.1549932; Fri, 13 Mar 2026 16:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 1253913.1549907; Fri, 13 Mar 2026 16:35:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Tl-00085C-PG; Fri, 13 Mar 2026 16:35:13 +0000
-Received: by outflank-mailman (input) for mailman id 1253916;
- Fri, 13 Mar 2026 16:35:12 +0000
+	id 1w15Tj-0007PE-B4; Fri, 13 Mar 2026 16:35:11 +0000
+Received: by outflank-mailman (input) for mailman id 1253913;
+ Fri, 13 Mar 2026 16:35:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HW2+=BN=bounce.vates.tech=bounce-md_30504962.69b43cb8.v1-ee742bd0e8e04fb0b2288f6f2cdd7ad3@srs-se1.protection.inumbo.net>)
- id 1w15Tk-0006Ek-NW
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:12 +0000
+ <SRS0=WDTR=BN=bounce.vates.tech=bounce-md_30504962.69b43cb6.v1-be292d3c77f841e39b0ebfacbd36f6a1@srs-se1.protection.inumbo.net>)
+ id 1w15Th-0006Ek-N8
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:09 +0000
 Received: from mail136-12.atl41.mandrillapp.com
  (mail136-12.atl41.mandrillapp.com [198.2.136.12])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 97a09214-1efa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:35:06 +0100 (CET)
+ id 95ec48ac-1efa-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:35:03 +0100 (CET)
 Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
  by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fXVT43Vybz5Rb3ST
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:04 +0000 (GMT)
+ 4fXVT26G1Rz5QlqMM
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:02 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- ee742bd0e8e04fb0b2288f6f2cdd7ad3; Fri, 13 Mar 2026 16:35:04 +0000
+ be292d3c77f841e39b0ebfacbd36f6a1; Fri, 13 Mar 2026 16:35:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,177 +45,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 97a09214-1efa-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 95ec48ac-1efa-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419704; x=1773689704;
-	bh=9d+OJots/k384GAeF2LH1TnTIC8qi57D6qknmRoe2hc=;
+	s=mte1; t=1773419702; x=1773689702;
+	bh=qbZoeBv8SgU3eWXReXQKgYvL+qyJ7a3Zk9GQ6xJBpd4=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=u+P0My+Lkw6MMAr/LeetpFtzceuJWbRpbiUDSNi/JIX5BTkKd2A7MWGC+rbauPLB5
-	 5vmZYl3F5iAk/K0/qP7BeVPLcp7t9bVuUkXDhncPpiZZL7vytHZRfqFzAQq66F3c84
-	 pOecnHt33RHlj+yvqX4ncRQQG+GhMAyCQ3Gl1CykOT1MZdAJ1h9jL9iIGN5Czc50CM
-	 DiEBmzJhRLUhLXtGMcVY98yISSbT2/yDrRxDiCz4FDzIJBdMc0Opdkci5yC5gMNe1o
-	 ZO+EhBTSQtuDxAsmSgaxOmEoHJyHH0vTRpQfAHr0KAetmmbQcjSfKuGZqdym5C0e9/
-	 JASJaL3D8d9Tg==
+	b=0WwwoKl5Gg/CHOMM9d7EBMCDk3yE9YP2PwHUU/ZBrkTr2630+XXSVWVUBX7YopKAi
+	 7QWFjfczxzdDo+dRgdrGELUxF2+zLVX4e6SR+yvn3QV0Q/4/E95WeM+MKT4hdLrncw
+	 Y9hDbSx6Q06xmMPVcPzXsYpX5oHXck2MNScbg7KE2iJKc2+amV/GiuCcWrODLQcv8x
+	 rFbs8QC3QuEv+krEK7IWf9VzsEeWbCNao77K1SqEOhCDfqDrkR0ydIhhJdWR8G3G7G
+	 +sE4Uugh21fnsC5JbU0zEyB4xDOfC2TYZ5dMBV8Slxn8uAN63mwuz1xsy+Nqqx1tGB
+	 sOvO6ESEVnSRA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419704; x=1773680204; i=thierry.escande@vates.tech;
-	bh=9d+OJots/k384GAeF2LH1TnTIC8qi57D6qknmRoe2hc=;
+	t=1773419702; x=1773680202; i=thierry.escande@vates.tech;
+	bh=qbZoeBv8SgU3eWXReXQKgYvL+qyJ7a3Zk9GQ6xJBpd4=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=A019VsH6dSG6YnTwJHlebFuP8rlPdNvnhXsEHuBdoEz/A1NI6iN7Yn7KPF3MzRuWf
-	 jAOlrvsNBk3tNfZFjv9+PsVZV6lHizg5kyhRVIKpW150YLM6kZNZaKNw64/nGgOfz3
-	 4DMBklH+3g2jBrd116azWAqarkMSU8psm2rXvvT43C+4Fn3Eaoz68mXqfMqkekBKUA
-	 QidGqWnmARVYsUr8BniRv6uhgdBy/3BbSfG/Lh8ax0gaGMw6XfJWX1bYyo6azODxj0
-	 fVmfuF49zm7O9jKZFBSQN5Xm4RW40wYoYlaiDFZE+C67jCfymev2VEP2TBlTW8SANc
-	 OmpV8uaahPgWA==
+	b=l9mt3IbMuetvw+obqEF3dVhNccAKFpxQjr7taWJQFUEetrltAOyhs8jY1wheecsmw
+	 TsbETwCC+GBgtDNako0VEMJV0DaGIFRgaWf/hd54SjqfBWwwt8DwpU67XMZ9s2iA+A
+	 x32KWc7RTkIdrpVIW3mRnSVNkU/cnrfETtA4cGPOXlNF2os0Sn6Gy258SYjYfdzZuN
+	 VUBwSkhXM4s4L9MuX25ZYy2eWgXophPT7TFUjwD10sJ3gmh1J65euyzCn8MhwgxnqK
+	 Ym5G7rl/UUP9c5AZA0wvXyYPGnaHwXRHnhii5SVv3RaeOQKmHFRiG7MSFBLxFTyTZN
+	 p/4gxWcpgI2tg==
 From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2011/17]=20hvmloader:=20allocate=20MMCONFIG=20area=20in=20the=20MMIO=20hole?=
+Subject: =?utf-8?Q?[PATCH=2006/17]=20hvmloader:=20Move=20pci=20devices=20setup=20to=20a=20separate=20function?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419703422
+X-Bm-Transport-Timestamp: 1773419702054
 To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Alexey Gerasimenko" <x1917x@gmail.com>
-Message-Id: <20260313163455.790692-12-thierry.escande@vates.tech>
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>
+Message-Id: <20260313163455.790692-7-thierry.escande@vates.tech>
 In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
 References: <20260313163455.790692-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ee742bd0e8e04fb0b2288f6f2cdd7ad3?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.be292d3c77f841e39b0ebfacbd36f6a1?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:04 +0000
+Date: Fri, 13 Mar 2026 16:35:02 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-The actual MMCONFIG size depends on the number of PCI buses available
-which should be covered by ECAM. Possible options are 64MB, 128MB and
-256MB. As Xen is limited to the bus 0 currently, the lowest possible
-setting is used (64MB), defined via PCI_MAX_MCFG_BUSES in
-hvmloader/config.h. When multiple PCI buses support for Xen will be
-implemented, PCI_MAX_MCFG_BUSES may be replaced by a calculation of the
-number of buses according to PCI devices enumeration.
+For readability and code simplification, this patch moves PCI-device
+specific initializations out of the pci_setup() function to a new
+function class_specific_pci_device_setup().
 
-The MMCONFIG entry is inserted into bars array in the same manner like
-for any other BARs. In this case, the devfn field will point to MCH PCI
-device and bar_reg will contain PCIEXBAR register offset. It will be
-assigned a slot in the MMIO hole later in a very same way like for plain
-PCI BARs, with respect to its size and alignment. At this point, the
-actual base address and size of the ECAM space are passed to Xen using
-the HVMOP_set_ecam_space hypercall.
-
-Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
 Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
 ---
- tools/firmware/hvmloader/config.h   |  4 +++
- tools/firmware/hvmloader/pci.c      | 55 +++++++++++++++++++++++++++++
- tools/firmware/hvmloader/pci_regs.h |  7 ++++
- 3 files changed, 66 insertions(+)
+ tools/firmware/hvmloader/pci.c      | 117 +++++++++++++++-------------
+ tools/firmware/hvmloader/pci_regs.h |   4 +
+ 2 files changed, 68 insertions(+), 53 deletions(-)
 
-diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
-index baaed91c7f..aa3158bca5 100644
---- a/tools/firmware/hvmloader/config.h
-+++ b/tools/firmware/hvmloader/config.h
-@@ -55,6 +55,10 @@ extern uint32_t *cpu_to_apicid;
- #define PCI_ISA_DEVFN       0x08    /* dev 1, fn 0 */
- #define PCI_ISA_IRQ_MASK    0x0c20U /* ISA IRQs 5,10,11 are PCI connected */
- #define PCI_ICH9_LPC_DEVFN  0xf8    /* dev 31, fn 0 */
-+#define PCI_MCH_DEVFN       0       /* bus 0, dev 0, func 0 */
-+
-+/* possible values are: 64, 128, 256 */
-+#define PCI_MAX_MCFG_BUSES  64
- 
- #define ACPI_TIS_HDR_ADDRESS 0xFED40F00UL
- 
 diff --git a/tools/firmware/hvmloader/pci.c b/tools/firmware/hvmloader/pci.c
-index 6e6720adae..54c23ffdd8 100644
+index c41c8d946a..a76d051bdf 100644
 --- a/tools/firmware/hvmloader/pci.c
 +++ b/tools/firmware/hvmloader/pci.c
-@@ -413,6 +413,58 @@ void pci_setup(void)
-         pci_devfn_decode_type[devfn] |= PCI_COMMAND_MASTER;
+@@ -84,12 +84,71 @@ static int find_next_rmrr(uint32_t base)
+     return next_rmrr;
+ }
+ 
++static void class_specific_pci_device_setup(uint16_t vendor_id,
++                                            uint16_t device_id,
++                                            uint16_t class,
++                                            uint8_t bus,
++                                            uint8_t devfn, uint8_t *vga_devfn)
++{
++    switch ( class )
++    {
++    case PCI_CLASS_DISPLAY_VGA:
++        /* If emulated VGA is found, preserve it as primary VGA. */
++        if ( (vendor_id == 0x1234) && (device_id == 0x1111) )
++        {
++            *vga_devfn = devfn;
++            virtual_vga = VGA_std;
++        }
++        else if ( (vendor_id == 0x1013) && (device_id == 0xb8) )
++        {
++            *vga_devfn = devfn;
++            virtual_vga = VGA_cirrus;
++        }
++        else if ( virtual_vga == VGA_none )
++        {
++            *vga_devfn = devfn;
++            virtual_vga = VGA_pt;
++            if ( vendor_id == 0x8086 )
++            {
++                igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
++                /*
++                 * Write the the OpRegion offset to give the opregion
++                 * address to the device model. The device model will trap
++                 * and map the OpRegion at the give address.
++                 */
++                pci_writel(*vga_devfn, PCI_INTEL_OPREGION,
++                           igd_opregion_pgbase << PAGE_SHIFT);
++            }
++        }
++        break;
++    case PCI_CLASS_BRIDGE_OTHER:
++        /* PIIX4 ACPI PM. Special device with special PCI config space. */
++        ASSERT((vendor_id == 0x8086) && (device_id == 0x7113));
++        pci_writew(devfn, 0x20, 0x0000); /* No smb bus IO enable */
++        pci_writew(devfn, 0xd2, 0x0000); /* No smb bus IO enable */
++        pci_writew(devfn, 0x22, 0x0000);
++        pci_writew(devfn, 0x3c, 0x0009); /* Hardcoded IRQ9 */
++        pci_writew(devfn, 0x3d, 0x0001);
++        pci_writel(devfn, 0x40, ACPI_PM1A_EVT_BLK_ADDRESS_V1 | 1);
++        pci_writeb(devfn, 0x80, 0x01); /* enable PM io space */
++        break;
++    case PCI_CLASS_STORAGE_IDE:
++        if ( vendor_id == 0x8086 )
++        {
++            /* Intel ICHs since PIIX3: enable IDE legacy mode. */
++            pci_writew(devfn, 0x40, 0x8000); /* enable IDE0 */
++            pci_writew(devfn, 0x42, 0x8000); /* enable IDE1 */
++        }
++        break;
++    }
++}
++
+ void pci_setup(void)
+ {
+     uint8_t is_64bar, using_64bar, bar64_relocate = 0;
+     uint32_t devfn, bar_reg, cmd, bar_data, bar_data_upper;
+     uint64_t base, bar_sz, bar_sz_upper, mmio_total = 0;
+-    uint32_t vga_devfn = 256;
++    uint8_t vga_devfn = 0xff;
+     uint16_t class, vendor_id, device_id;
+     unsigned int bar, pin, link, isa_irq;
+     uint8_t pci_devfn_decode_type[256] = {};
+@@ -170,57 +229,9 @@ void pci_setup(void)
+         ASSERT((devfn != PCI_ISA_DEVFN) ||
+                ((vendor_id == 0x8086) && (device_id == 0x7000)));
+ 
+-        switch ( class )
+-        {
+-        case 0x0300:
+-            /* If emulated VGA is found, preserve it as primary VGA. */
+-            if ( (vendor_id == 0x1234) && (device_id == 0x1111) )
+-            {
+-                vga_devfn = devfn;
+-                virtual_vga = VGA_std;
+-            }
+-            else if ( (vendor_id == 0x1013) && (device_id == 0xb8) )
+-            {
+-                vga_devfn = devfn;
+-                virtual_vga = VGA_cirrus;
+-            }
+-            else if ( virtual_vga == VGA_none )
+-            {
+-                vga_devfn = devfn;
+-                virtual_vga = VGA_pt;
+-                if ( vendor_id == 0x8086 )
+-                {
+-                    igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
+-                    /*
+-                     * Write the the OpRegion offset to give the opregion
+-                     * address to the device model. The device model will trap 
+-                     * and map the OpRegion at the give address.
+-                     */
+-                    pci_writel(vga_devfn, PCI_INTEL_OPREGION,
+-                               igd_opregion_pgbase << PAGE_SHIFT);
+-                }
+-            }
+-            break;
+-        case 0x0680:
+-            /* PIIX4 ACPI PM. Special device with special PCI config space. */
+-            ASSERT((vendor_id == 0x8086) && (device_id == 0x7113));
+-            pci_writew(devfn, 0x20, 0x0000); /* No smb bus IO enable */
+-            pci_writew(devfn, 0xd2, 0x0000); /* No smb bus IO enable */
+-            pci_writew(devfn, 0x22, 0x0000);
+-            pci_writew(devfn, 0x3c, 0x0009); /* Hardcoded IRQ9 */
+-            pci_writew(devfn, 0x3d, 0x0001);
+-            pci_writel(devfn, 0x40, ACPI_PM1A_EVT_BLK_ADDRESS_V1 | 1);
+-            pci_writeb(devfn, 0x80, 0x01); /* enable PM io space */
+-            break;
+-        case 0x0101:
+-            if ( vendor_id == 0x8086 )
+-            {
+-                /* Intel ICHs since PIIX3: enable IDE legacy mode. */
+-                pci_writew(devfn, 0x40, 0x8000); /* enable IDE0 */
+-                pci_writew(devfn, 0x42, 0x8000); /* enable IDE1 */
+-            }
+-            break;
+-        }
++        class_specific_pci_device_setup(vendor_id, device_id, class,
++                                        0 /* virt_bus support TBD */,
++                                        devfn, &vga_devfn);
+ 
+         /*
+          * It is recommended that BAR programming be done whilst decode
+@@ -583,7 +594,7 @@ void pci_setup(void)
+                           ((pci_hi_mem_start & -pci_hi_mem_start) - 1)) + 1;
      }
  
-+    /*
-+     *  Calculate MMCONFIG area size and squeeze it into the bars array
-+     *  for assigning a slot in the MMIO hole
-+     */
-+    if ( is_running_on_q35 )
-+    {
-+        /* disable PCIEXBAR decoding for now */
-+        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR, 0);
-+        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR + 4, 0);
-+
-+        switch ( PCI_MAX_MCFG_BUSES )
-+        {
-+        case 64:
-+            bar_data = PCIEXBAR_64_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(64);
-+            break;
-+
-+        case 128:
-+            bar_data = PCIEXBAR_128_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(128);
-+            break;
-+
-+        case 256:
-+            bar_data = PCIEXBAR_256_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(256);
-+            break;
-+
-+        default:
-+            /* unsupported number of buses specified */
-+            BUG();
-+        }
-+
-+        addr_mask = ~(bar_sz - 1);
-+
-+        for ( i = 0; i < nr_bars; i++ )
-+            if ( bars[i].bar_sz < bar_sz )
-+                break;
-+
-+        if ( i != nr_bars )
-+            memmove(&bars[i+1], &bars[i], (nr_bars-i) * sizeof(*bars));
-+
-+        bars[i].is_mem    = 1;
-+        bars[i].devfn     = PCI_MCH_DEVFN;
-+        bars[i].bar_reg   = PCI_MCH_PCIEXBAR;
-+        bars[i].bar_sz    = bar_sz;
-+        bars[i].addr_mask = addr_mask;
-+        bars[i].bar_data  = bar_data;
-+
-+        mmio_total += bar_sz;
-+        nr_bars++;
-+    }
-+
-     if ( mmio_hole_size )
+-    if ( vga_devfn != 256 )
++    if ( vga_devfn != 0xff )
      {
-         uint64_t max_ram_below_4g = GB(4) - mmio_hole_size;
-@@ -592,6 +644,9 @@ void pci_setup(void)
-             }
-         }
- 
-+        if ( bar_reg == PCI_MCH_PCIEXBAR )
-+            hvm_set_ecam_space(base, bar_sz);
-+
-         bar_data |= (uint32_t) (base & bars[i].addr_mask);
-         bar_data_upper = (uint32_t)(base >> 32);
-         base += bar_sz;
+         /*
+          * VGA registers live in I/O space so ensure that primary VGA
 diff --git a/tools/firmware/hvmloader/pci_regs.h b/tools/firmware/hvmloader/pci_regs.h
-index d217b8f1a4..86e04f8bbd 100644
+index 4d4dc0cd01..c94278855b 100644
 --- a/tools/firmware/hvmloader/pci_regs.h
 +++ b/tools/firmware/hvmloader/pci_regs.h
-@@ -116,6 +116,13 @@
- #define PCI_CLASS_BRIDGE_OTHER           0x0680
- #define PCI_CLASS_BRIDGE_ISA             0x0601
+@@ -111,6 +111,10 @@
+ #define PCI_DEVICE_ID_INTEL_82441        0x1237
+ #define PCI_DEVICE_ID_INTEL_Q35_MCH      0x29c0
  
-+#define PCI_MCH_PCIEXBAR   0x60
-+
-+#define PCIEXBAR_64_BUSES  0x04
-+#define PCIEXBAR_128_BUSES 0x02
-+#define PCIEXBAR_256_BUSES 0x00
-+#define PCIEXBAR_ENABLE    0x01
++#define PCI_CLASS_STORAGE_IDE            0x0101
++#define PCI_CLASS_DISPLAY_VGA            0x0300
++#define PCI_CLASS_BRIDGE_OTHER           0x0680
 +
  #endif /* __HVMLOADER_PCI_REGS_H__ */
  
