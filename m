@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86702106FD69
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 02:22:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253177.1549487 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DAD106FD68
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 02:30:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253214.1549522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0sA7-0000Eo-Q7; Fri, 13 Mar 2026 02:22:03 +0000
+	id 1w0sIH-0003VH-DR; Fri, 13 Mar 2026 02:30:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253177.1549487; Fri, 13 Mar 2026 02:22:03 +0000
+Received: by outflank-mailman (output) from mailman id 1253214.1549522; Fri, 13 Mar 2026 02:30:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w0sA7-0000Ee-Kt; Fri, 13 Mar 2026 02:22:03 +0000
-Received: by outflank-mailman (input) for mailman id 1253177;
- Fri, 13 Mar 2026 02:22:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w0sIH-0003VA-Ab; Fri, 13 Mar 2026 02:30:29 +0000
+Received: by outflank-mailman (input) for mailman id 1253214;
+ Fri, 13 Mar 2026 02:30:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OImI=BN=huawei.com=fengchengwen@srs-se1.protection.inumbo.net>)
- id 1w0sA6-0000ET-BE
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 02:22:02 +0000
-Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com
- [113.46.200.218]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 65cd992c-1e83-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 03:21:55 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.162.140])
- by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4fX7QX0pcgzpTJ7;
- Fri, 13 Mar 2026 10:16:36 +0800 (CST)
+ id 1w0sIG-0003V4-Mx
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 02:30:28 +0000
+Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com
+ [113.46.200.224]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 964348b8-1e84-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 03:30:26 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.163.163])
+ by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4fX7cg31mZz1cynf;
+ Fri, 13 Mar 2026 10:25:23 +0800 (CST)
 Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
- by mail.maildlp.com (Postfix) with ESMTPS id 9A98E2022B;
- Fri, 13 Mar 2026 10:21:50 +0800 (CST)
-Received: from localhost.localdomain (10.50.163.32) by
+ by mail.maildlp.com (Postfix) with ESMTPS id 847034048B;
+ Fri, 13 Mar 2026 10:30:19 +0800 (CST)
+Received: from [10.67.121.161] (10.67.121.161) by
  kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Fri, 13 Mar 2026 10:21:49 +0800
+ 15.2.1544.11; Fri, 13 Mar 2026 10:30:17 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,124 +48,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65cd992c-1e83-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 964348b8-1e84-11f1-b164-2bf370ae4941
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=2rcpAa1TtZWLDIvssxD1LEn5AvFd7LlqWNSfVu4tX3w=;
-	b=k2FbFqJDheDFD8ZQ1TIKD7MLAMU7NtAmyzZS79wyrByImlG/9Oz+7Ht/PCD+SNciSCiVeFaBq
-	3VV/zPoCsVqgcC+m0j9DJ69/4Lo6oVqnv6AFub2EAZnQ3hPUkQ+J/R+M/YieceCx1b3KO4HESDm
-	4ZRimNSFXHPkX5qqZZQWUsU=
-From: Chengwen Feng <fengchengwen@huawei.com>
-To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
-	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
- Wysocki" <rafael@kernel.org>
-CC: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-	Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Thomas Gleixner
-	<tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
-	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, <x86@kernel.org>,
-	"H . Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Sohil
- Mehta <sohil.mehta@intel.com>, Ilkka Koskinen <ilkka@os.amperecomputing.com>,
-	Robin Murphy <robin.murphy@arm.com>, James Clark <james.clark@linaro.org>,
-	Besar Wicaksono <bwicaksono@nvidia.com>, Ma Ke <make24@iscas.ac.cn>, Wei
- Huang <wei.huang2@amd.com>, Andy Gospodarek <andrew.gospodarek@broadcom.com>,
-	Somnath Kotur <somnath.kotur@broadcom.com>, <kees@kernel.org>,
-	<punit.agrawal@oss.qualcomm.com>, <guohanjun@huawei.com>,
-	<suzuki.poulose@arm.com>, <ryan.roberts@arm.com>, <chenl311@chinatelecom.cn>,
-	<masahiroy@kernel.org>, <wangyuquan1236@phytium.com.cn>,
-	<anshuman.khandual@arm.com>, <heinrich.schuchardt@canonical.com>,
-	<Eric.VanTassell@amd.com>, <jonathan.cameron@huawei.com>,
-	<wangzhou1@hisilicon.com>, <wanghuiqiang@huawei.com>,
-	<liuyonglong@huawei.com>, <fengchengwen@huawei.com>,
-	<linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linux-riscv@lists.infradead.org>,
-	<xen-devel@lists.xenproject.org>, <linux-acpi@vger.kernel.org>,
-	<linux-perf-users@vger.kernel.org>, <stable@vger.kernel.org>
-Subject: [PATCH v7 0/3] Fix get cpu steer-tag fail on ARM64 platform
-Date: Fri, 13 Mar 2026 10:21:41 +0800
-Message-ID: <20260313022144.40942-1-fengchengwen@huawei.com>
-X-Mailer: git-send-email 2.17.1
+	bh=CVkB4K6yegSE+n79ThisbSxU7cMPDcr1n6IOBQnBrIM=;
+	b=2MIeAfhQxyTndrqGx6t5o31MFsRiG77XtXY34XUO7DkiajhwGBA/mw3XKKYJw98GhroY7x9oR
+	ZDuUg+PHLgfHz6ntw9twsM8tzX3A2VuZkh9UNQOhbLPswsT/Z5MluwK4Fi4c98OhfzTrgVYMsZA
+	OvT6o9I1lcIszGmULdjTf3M=
+Message-ID: <699a428a-6271-4369-83f4-8b1f2e1bfa42@huawei.com>
+Date: Fri, 13 Mar 2026 10:30:16 +0800
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.50.163.32]
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/3] ACPI: Rename get_acpi_id_for_cpu() to
+ acpi_get_cpu_uid() on non-x86
+To: Jonathan Cameron <jonathan.cameron@huawei.com>
+CC: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
+	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
+ Wysocki" <rafael@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+	<skhan@linuxfoundation.org>, Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui
+	<kernel@xen0n.name>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
+	<palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
+	<alex@ghiti.fr>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
+	<mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
+	<dave.hansen@linux.intel.com>, <x86@kernel.org>, "H . Peter Anvin"
+	<hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Boris Ostrovsky
+	<boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>, Sunil V L
+	<sunilvl@ventanamicro.com>, Mark Rutland <mark.rutland@arm.com>, Kees Cook
+	<kees@kernel.org>, Yanteng Si <si.yanteng@linux.dev>, Sean Christopherson
+	<seanjc@google.com>, Kai Huang <kai.huang@intel.com>, Tom Lendacky
+	<thomas.lendacky@amd.com>, Thomas Huth <thuth@redhat.com>, Thorsten Blum
+	<thorsten.blum@linux.dev>, Kevin Loughlin <kevinloughlin@google.com>, Zheyun
+ Shen <szy0127@sjtu.edu.cn>, Peter Zijlstra <peterz@infradead.org>, Pawan
+ Gupta <pawan.kumar.gupta@linux.intel.com>, Xin Li <xin@zytor.com>, "Ahmed S .
+ Darwish" <darwi@linutronix.de>, Sohil Mehta <sohil.mehta@intel.com>, Ilkka
+ Koskinen <ilkka@os.amperecomputing.com>, Robin Murphy <robin.murphy@arm.com>,
+	James Clark <james.clark@linaro.org>, Besar Wicaksono
+	<bwicaksono@nvidia.com>, Ma Ke <make24@iscas.ac.cn>, Wei Huang
+	<wei.huang2@amd.com>, Andy Gospodarek <andrew.gospodarek@broadcom.com>,
+	Somnath Kotur <somnath.kotur@broadcom.com>, <punit.agrawal@oss.qualcomm.com>,
+	<guohanjun@huawei.com>, <suzuki.poulose@arm.com>, <ryan.roberts@arm.com>,
+	<chenl311@chinatelecom.cn>, <masahiroy@kernel.org>,
+	<wangyuquan1236@phytium.com.cn>, <anshuman.khandual@arm.com>,
+	<heinrich.schuchardt@canonical.com>, <Eric.VanTassell@amd.com>,
+	<wangzhou1@hisilicon.com>, <wanghuiqiang@huawei.com>,
+	<liuyonglong@huawei.com>, <linux-pci@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <loongarch@lists.linux.dev>,
+	<linux-riscv@lists.infradead.org>, <xen-devel@lists.xenproject.org>,
+	<linux-acpi@vger.kernel.org>, <linux-perf-users@vger.kernel.org>,
+	<stable@vger.kernel.org>
+References: <20260312072316.4806-1-fengchengwen@huawei.com>
+ <20260312072316.4806-2-fengchengwen@huawei.com>
+ <20260312110742.00002716@huawei.com>
+Content-Language: en-US
+From: fengchengwen <fengchengwen@huawei.com>
+In-Reply-To: <20260312110742.00002716@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.67.121.161]
+X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
  kwepemk500009.china.huawei.com (7.202.194.94)
 
-This patchset fixes the failure of CPU steer tag retrieval on ARM64
-platforms. The series is structured as follows:
+On 3/12/2026 7:07 PM, Jonathan Cameron wrote:
+> On Thu, 12 Mar 2026 15:23:14 +0800
+> Chengwen Feng <fengchengwen@huawei.com> wrote:
+> 
+>> To unify the CPU ACPI ID retrieval interface across architectures,
+>> rename the existing get_acpi_id_for_cpu() function to
+>> acpi_get_cpu_uid() on arm64/riscv/loongarch platforms.
+>>
+>> This is a pure rename with no functional change, preparing for a
+> 
+> It's not just a rename.  This should mention that the addition of error
+> checks and hence the resulting signature change.
 
-1. First commit: Refactor the ACPI Processor UID retrieval interface
-   (no functional changes when input valid) to align naming conventions
-   across arm64/riscv/loongarch architectures;
-2. Second commit: Implement acpi_get_cpu_uid() for the x86 platform to
-   complete the unified ACPI Processor UID interface across all
-   ACPI-enabled architectures;
-3. Third commit: Implement the core fix for the CPU steer tag retrieval
-   logic on ARM64 (the root cause of the retrieval failure).
+Sorry for overlooking this, it has already been fixed in v7.
+And v7 also fix below review comments.
 
-The refactor and x86 implementation lay the groundwork for the unified
-ACPI interface required by the ARM64 steer tag fix, ensuring consistent
-CPU UID retrieval across architectures before addressing the functional
-bug.
+Thanks
 
----
-Changes in v7:
-- Refine first commit which address Jonathan's reviews
-- Fix x86 implement bug (not consider INVALID-ID) which address Peter's
-  review
-- Fix CI error of x86 implement by moving function to acpi/boot.c
+> 
+>> consistent ACPI Processor UID retrieval interface across all ACPI-enabled
+>> platforms.
+>>
+>> Note: Move the ARM64-specific get_cpu_for_acpi_id() implementation to
+>>       arch/arm64/kernel/acpi_numa.c to fix compilation errors from
+>>       circular header dependencies introduced by the rename.
+>>
+>> Cc: stable@vger.kernel.org
+>> Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
+>> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+> From a reread, a few minor style consistency things inline.
+> 
 
-Changes in v6:
-- Rename existing get_acpi_id_for_cpu() to acpi_get_cpu_uid()
-- Split x86's modify as one commit
+...
 
-Changes in v5:
-- Refine commit-log of commit 2/2
-- Replace cpu_acpi_id() by acpi_get_cpu_acpi_id() on x86
-
-Changes in v4:
-- Split the rename into a separate commit.
-
-Changes in v3:
-- Rename existing get_acpi_id_for_cpu() to acpi_get_cpu_acpi_id() other
-  than add one new API.
-
-Changes in v2:
-- Add ECN _DSM reference doc name and its URL.
-- Separate implement acpi_get_cpu_acpi_id() in each arch which supports
-  ACPI.
-- Refine commit-log
-
-Chengwen Feng (3):
-  ACPI: Refactor get_acpi_id_for_cpu() to acpi_get_cpu_uid() on non-x86
-  x86: Implement acpi_get_cpu_uid()
-  PCI/TPH: Fix get cpu steer-tag fail on ARM64 platform
-
- Documentation/PCI/tph.rst          |  4 +--
- arch/arm64/include/asm/acpi.h      | 16 +---------
- arch/arm64/kernel/acpi.c           | 16 ++++++++++
- arch/arm64/kernel/acpi_numa.c      | 14 +++++++++
- arch/loongarch/include/asm/acpi.h  |  5 ---
- arch/loongarch/kernel/acpi.c       |  9 ++++++
- arch/riscv/include/asm/acpi.h      |  4 ---
- arch/riscv/kernel/acpi.c           | 16 ++++++++++
- arch/riscv/kernel/acpi_numa.c      |  9 ++++--
- arch/x86/include/asm/cpu.h         |  1 -
- arch/x86/include/asm/smp.h         |  1 -
- arch/x86/kernel/acpi/boot.c        | 20 ++++++++++++
- arch/x86/xen/enlighten_hvm.c       |  5 +--
- drivers/acpi/pptt.c                | 50 ++++++++++++++++++++++--------
- drivers/acpi/riscv/rhct.c          |  7 ++++-
- drivers/pci/tph.c                  | 16 +++++++---
- drivers/perf/arm_cspmu/arm_cspmu.c |  6 ++--
- include/linux/acpi.h               | 11 +++++++
- include/linux/pci-tph.h            |  4 +--
- 19 files changed, 158 insertions(+), 56 deletions(-)
-
--- 
-2.17.1
+> 
 
 
