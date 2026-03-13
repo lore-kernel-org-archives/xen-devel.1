@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428CC107BCD0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0705107BCD1
 	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 16:35:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253911.1549883 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1253919.1549958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Th-0006q8-NM; Fri, 13 Mar 2026 16:35:09 +0000
+	id 1w15Tp-0000VB-AP; Fri, 13 Mar 2026 16:35:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253911.1549883; Fri, 13 Mar 2026 16:35:09 +0000
+Received: by outflank-mailman (output) from mailman id 1253919.1549958; Fri, 13 Mar 2026 16:35:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w15Th-0006oJ-GI; Fri, 13 Mar 2026 16:35:09 +0000
-Received: by outflank-mailman (input) for mailman id 1253911;
- Fri, 13 Mar 2026 16:35:08 +0000
+	id 1w15Tp-0000TO-2B; Fri, 13 Mar 2026 16:35:17 +0000
+Received: by outflank-mailman (input) for mailman id 1253919;
+ Fri, 13 Mar 2026 16:35:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rFLP=BN=bounce.vates.tech=bounce-md_30504962.69b43cb6.v1-a80daf2a6a5d488eb90b6254a9f1b77a@srs-se1.protection.inumbo.net>)
- id 1w15Tg-0006Ek-My
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:08 +0000
-Received: from mail136-12.atl41.mandrillapp.com
- (mail136-12.atl41.mandrillapp.com [198.2.136.12])
+ <SRS0=poTc=BN=bounce.vates.tech=bounce-md_30504962.69b43cb9.v1-27f9226dc476489280796f4f05794d27@srs-se1.protection.inumbo.net>)
+ id 1w15Tm-0006Ek-Nl
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 16:35:14 +0000
+Received: from mail179-36.suw41.mandrillapp.com
+ (mail179-36.suw41.mandrillapp.com [198.2.179.36])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95a21f94-1efa-11f1-9ccf-f158ae23cfc8;
- Fri, 13 Mar 2026 17:35:03 +0100 (CET)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fXVT21jsdz5QmHBy
- for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:02 +0000 (GMT)
+ id 98d2f523-1efa-11f1-9ccf-f158ae23cfc8;
+ Fri, 13 Mar 2026 17:35:08 +0100 (CET)
+Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail179-36.suw41.mandrillapp.com (Mailchimp) with ESMTP id 4fXVT53gDVzlfjbT
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Mar 2026 16:35:05 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- a80daf2a6a5d488eb90b6254a9f1b77a; Fri, 13 Mar 2026 16:35:02 +0000
+ 27f9226dc476489280796f4f05794d27; Fri, 13 Mar 2026 16:35:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,178 +44,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95a21f94-1efa-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 98d2f523-1efa-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773419702; x=1773689702;
-	bh=EZV6VZwcVdA/V+iWTxOZ0DDZfDnD1N74CpP85tJ1xcs=;
+	s=mte1; t=1773419705; x=1773689705;
+	bh=peVzH/RSknOHNSKTQdaYXevRTD3ymuxiEuHEUoR9BgM=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=nBTvzgCXtgVPKD443WZh7ijLbsZv+RQ2NglOoLl/d7+/UWjEAbZvpov+QeZGj6Ntj
-	 lXsGfAhgbRxLhvQwYTe2fDXufxeOb1hmUGVZTmTmmrAiRmSrt6zNeUwjzKzEx4x3Oc
-	 NP7uhuW5V5iVrmGb1fiZAMS+uEq5Kbaf144Owtp3HMaIP20Sqh3HvcstJEGO0YdSxX
-	 XdRWmu81ZJfND1bzTQFIJO046ZeGpSGVFC0wYAUaI0PwH5OgQK0SbBg3iQ8gQD2q3/
-	 MVzNKU/7V54hIa2nOrPbTagqOikmp9ro8C9duSAkJxEg89QRmOug5forCLuWOwKBFv
-	 5308YFMqwVK2g==
+	b=E4iTtJ8OJ+U52Jcmqe6F4/4D2tExf3Njg8tyNOGH/opfEnDxh4V3DdqBHFlkE2BkT
+	 LNYjx8uVG2RpsNDlUdo6RktLw3fuNAZlP7nkOPh2vnMIJFJo3BoLlkI271XT+iovI4
+	 oCP8cbVbTTVMNS68tAfUPjPjkZh8/3NWoJj+bGnfGOsrBnXalIyP7RucDl18QeCpf6
+	 JQ5dMlNeIVaxbWXBrK5Dqjl/8xEfXab206rcNjXzuv82YpKAFBgkktTNEAdB+KAq9V
+	 KLLpSnwv+mMAFWIAyjV0J7lRFp0KidcGh0+B/F1mLIM0HBp94ZoSNzDBizIQNOZdLT
+	 zpD/7qWCutmZQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773419702; x=1773680202; i=thierry.escande@vates.tech;
-	bh=EZV6VZwcVdA/V+iWTxOZ0DDZfDnD1N74CpP85tJ1xcs=;
+	t=1773419705; x=1773680205; i=thierry.escande@vates.tech;
+	bh=peVzH/RSknOHNSKTQdaYXevRTD3ymuxiEuHEUoR9BgM=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=Jg01yOHajDuGeiFFDGKRfwE1G1TxOV9qEttlhxL4WQfH0W5HO1giUTnCYHNBRIHBU
-	 yIfpSa1SK21cU/52PhYIAzc5HKt6Ukw4t5QIDUelOPeSXEa6m/44A6bg429fXLnqE7
-	 CK+1ZSORo2VFCmP+silLs5/2G0qD8gGhDeHJ4jC7F7QKje/Dp3J9hsmBd1fqDywi+T
-	 BDsJt7lYDobAyvzmaO970S5tLsSne+J41DB8HMzl5gii7rJG7KZuH0Hwh3SK+CsQfN
-	 DrYuZNPAQTpTfuAg+UmFWvuSLa2vSXVkPd/70vfKW1enQSxwne7K3/D+NdIoa4XeLR
-	 Y7PTIfAhvIjvw==
+	b=IAG8VVPYvK2e73qkhrFw4a55QbxAeF4tgwa1P3vkuEuENpJbMTUKozO2PM2rHpPWe
+	 NtNq6i8c/u1K4AvnIrMwYrlM5IeZCfkw+I5plnttlBYUfwPzs9UJ5/vonOUBG9/Hbn
+	 84tP8B+6d/sz7oPhyTK1yR0cypIQ8M4pfuKl719qIhIEuQAIihJlB6IDMQI5pTte8q
+	 ayILS8tgVK9exOEJ9E5vc0m2vqOeVHSDpkjaTp2uBzankU3oqKN9smZ+yS17x0cNcX
+	 Pyl6zjDo8lB1hwBs4wtKmPHaoTItPAP55A/gMmQMAccVlyxVPHCeHud6AgBG09O6zS
+	 JFF3QHCCPpK5w==
 From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[PATCH=2003/17]=20hvmloader:=20add=20function=20to=20set=20the=20emulated=20machine=20type=20(i440/Q35)?=
+Subject: =?utf-8?Q?[PATCH=2004/17]=20hvmloader:=20add=20ACPI=20enabling=20for=20Q35?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773419701312
+X-Bm-Transport-Timestamp: 1773419701560
 To: xen-devel@lists.xenproject.org
 Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Alexey Gerasimenko" <x1917x@gmail.com>
-Message-Id: <20260313163455.790692-4-thierry.escande@vates.tech>
+Message-Id: <20260313163455.790692-5-thierry.escande@vates.tech>
 In-Reply-To: <20260313163455.790692-1-thierry.escande@vates.tech>
 References: <20260313163455.790692-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.a80daf2a6a5d488eb90b6254a9f1b77a?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.27f9226dc476489280796f4f05794d27?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260313:md
-Date: Fri, 13 Mar 2026 16:35:02 +0000
+Date: Fri, 13 Mar 2026 16:35:05 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-This adds a new function init_pc_machine_type() which allows to
-determine and set the emulated chipset type. Possible values are
-MACHINE_TYPE_I440 and MACHINE_TYPE_Q35 and stored in the global variable
-machine_type.
-
-The machine_type variable will be used from multiple places in following
-commits.
+In order to turn on ACPI for OS, we need to write a chipset-specific value
+to SMI_CMD register (sort of imitation of the APM->ACPI switch on real
+systems). Modify acpi_enable_sci() function to support both i440 and Q35
+emulation.
 
 Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
 Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
 ---
- tools/firmware/hvmloader/hvmloader.c |  2 ++
- tools/firmware/hvmloader/pci_regs.h  |  4 +++
- tools/firmware/hvmloader/util.c      | 42 ++++++++++++++++++++++++++++
- tools/firmware/hvmloader/util.h      | 11 ++++++++
- 4 files changed, 59 insertions(+)
+ tools/firmware/hvmloader/hvmloader.c | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
 diff --git a/tools/firmware/hvmloader/hvmloader.c b/tools/firmware/hvmloader/hvmloader.c
-index 6d23150fc9..626cc53649 100644
+index 626cc53649..f6cc3fa4b9 100644
 --- a/tools/firmware/hvmloader/hvmloader.c
 +++ b/tools/firmware/hvmloader/hvmloader.c
-@@ -332,6 +332,8 @@ int main(void)
- 
-     init_hypercalls();
- 
-+    init_pc_machine_type();
-+
-     memory_map_setup();
- 
-     xenbus_setup();
-diff --git a/tools/firmware/hvmloader/pci_regs.h b/tools/firmware/hvmloader/pci_regs.h
-index 7bf2d873ab..4d4dc0cd01 100644
---- a/tools/firmware/hvmloader/pci_regs.h
-+++ b/tools/firmware/hvmloader/pci_regs.h
-@@ -107,6 +107,10 @@
- 
- #define PCI_INTEL_OPREGION 0xfc /* 4 bits */
- 
-+#define PCI_VENDOR_ID_INTEL              0x8086
-+#define PCI_DEVICE_ID_INTEL_82441        0x1237
-+#define PCI_DEVICE_ID_INTEL_Q35_MCH      0x29c0
-+
- #endif /* __HVMLOADER_PCI_REGS_H__ */
- 
- /*
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index f1ed1eb48d..f9116bea4d 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -22,6 +22,7 @@
- #include "hypercall.h"
- #include "ctype.h"
- #include "vnuma.h"
-+#include "pci_regs.h"
- #include <acpi2_0.h>
- #include <libacpi.h>
- #include <stdint.h>
-@@ -648,6 +649,47 @@ void __bug(const char *file, int line)
-     crash();
- }
- 
-+machine_type_t machine_type;
-+
-+void init_pc_machine_type(void)
-+{
-+    uint16_t vendor_id;
-+    uint16_t device_id;
-+
-+    if ( machine_type != MACHINE_TYPE_UNDEFINED )
-+        return;
-+
-+    vendor_id = pci_readw(0, PCI_VENDOR_ID);
-+    device_id = pci_readw(0, PCI_DEVICE_ID);
-+
-+    /* only Intel platforms are emulated currently */
-+    if ( vendor_id != PCI_VENDOR_ID_INTEL )
-+        goto error;
-+
-+    switch ( device_id )
-+    {
-+    case PCI_DEVICE_ID_INTEL_82441:
-+        machine_type = MACHINE_TYPE_I440;
-+        printf("Detected i440 chipset\n");
-+        break;
-+
-+    case PCI_DEVICE_ID_INTEL_Q35_MCH:
-+        machine_type = MACHINE_TYPE_Q35;
-+        printf("Detected Q35 chipset\n");
-+        break;
-+
-+    default:
-+        goto error;
-+    }
-+
-+    return;
-+
-+error:
-+    printf("Unknown emulated chipset encountered, VID=%04Xh, DID=%04Xh\n",
-+           vendor_id, device_id);
-+    BUG();
-+}
-+
- static void validate_hvm_info(struct hvm_info_table *t)
+@@ -258,9 +258,24 @@ static const struct bios_config *detect_bios(void)
+ static void acpi_enable_sci(void)
  {
-     uint8_t *ptr = (uint8_t *)t;
-diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
-index 3c5eeff5e7..2f37504aca 100644
---- a/tools/firmware/hvmloader/util.h
-+++ b/tools/firmware/hvmloader/util.h
-@@ -170,6 +170,17 @@ void pci_write(uint32_t devfn, uint32_t reg, uint32_t len, uint32_t val);
- #define pci_writew(devfn, reg, val) pci_write(devfn, reg, 2, (uint16_t)(val))
- #define pci_writel(devfn, reg, val) pci_write(devfn, reg, 4, (uint32_t)(val))
+     uint8_t pm1a_cnt_val;
++    uint8_t acpi_enable_val;
  
-+/* Emulated machine types */
-+typedef enum {
-+    MACHINE_TYPE_UNDEFINED = 0,
-+    MACHINE_TYPE_I440,
-+    MACHINE_TYPE_Q35,
-+} machine_type_t;
+-#define PIIX4_SMI_CMD_IOPORT 0xb2
++#define SMI_CMD_IOPORT       0xb2
+ #define PIIX4_ACPI_ENABLE    0xf1
++#define ICH9_ACPI_ENABLE     0x02
 +
-+extern machine_type_t machine_type;
-+
-+void init_pc_machine_type(void);
-+
- /* Get a pointer to the shared-info page */
- struct shared_info *get_shared_info(void) __attribute__ ((const));
++    switch ( machine_type )
++    {
++    case MACHINE_TYPE_Q35:
++        acpi_enable_val = ICH9_ACPI_ENABLE;
++        break;
++    case MACHINE_TYPE_I440:
++        acpi_enable_val = PIIX4_ACPI_ENABLE;
++        break;
++    default:
++        /* Not likely to happen */
++        BUG();
++    }
  
+     /*
+      * PIIX4 emulation in QEMU has SCI_EN=0 by default. We have no legacy
+@@ -268,7 +283,7 @@ static void acpi_enable_sci(void)
+      */
+     pm1a_cnt_val = inb(ACPI_PM1A_CNT_BLK_ADDRESS_V1);
+     if ( !(pm1a_cnt_val & ACPI_PM1C_SCI_EN) )
+-        outb(PIIX4_SMI_CMD_IOPORT, PIIX4_ACPI_ENABLE);
++        outb(SMI_CMD_IOPORT, acpi_enable_val);
+ 
+     pm1a_cnt_val = inb(ACPI_PM1A_CNT_BLK_ADDRESS_V1);
+     BUG_ON(!(pm1a_cnt_val & ACPI_PM1C_SCI_EN));
 -- 
 2.51.0
 
