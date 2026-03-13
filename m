@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BD5105F79E
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 11:44:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1253572.1549747 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DAF105F79C
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Mar 2026 11:44:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1253573.1549756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w10wM-0006DJ-4V; Fri, 13 Mar 2026 11:44:26 +0000
+	id 1w10wN-0006Ry-Hd; Fri, 13 Mar 2026 11:44:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1253572.1549747; Fri, 13 Mar 2026 11:44:26 +0000
+Received: by outflank-mailman (output) from mailman id 1253573.1549756; Fri, 13 Mar 2026 11:44:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w10wM-0006DC-1x; Fri, 13 Mar 2026 11:44:26 +0000
-Received: by outflank-mailman (input) for mailman id 1253572;
- Fri, 13 Mar 2026 11:44:24 +0000
+	id 1w10wN-0006Rr-Dq; Fri, 13 Mar 2026 11:44:27 +0000
+Received: by outflank-mailman (input) for mailman id 1253573;
+ Fri, 13 Mar 2026 11:44:25 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Q06f=BN=epam.com=dmytro_prokopchuk1@srs-se1.protection.inumbo.net>)
- id 1w10wK-0005zu-OF
- for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 11:44:24 +0000
+ id 1w10wL-0005zu-OI
+ for xen-devel@lists.xenproject.org; Fri, 13 Mar 2026 11:44:25 +0000
 Received: from GVXPR05CU001.outbound.protection.outlook.com
  (mail-swedencentralazlp170130007.outbound.protection.outlook.com
  [2a01:111:f403:c202::7])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fb21e65d-1ed1-11f1-b164-2bf370ae4941;
- Fri, 13 Mar 2026 12:44:23 +0100 (CET)
+ id fb5d0844-1ed1-11f1-b164-2bf370ae4941;
+ Fri, 13 Mar 2026 12:44:24 +0100 (CET)
 Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
  by DU5PR03MB10219.eurprd03.prod.outlook.com (2603:10a6:10:51b::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.16; Fri, 13 Mar
- 2026 11:44:17 +0000
+ 2026 11:44:18 +0000
 Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
  ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
  ([fe80::904d:5820:80e1:41ba%5]) with mapi id 15.20.9700.010; Fri, 13 Mar 2026
- 11:44:15 +0000
+ 11:44:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,33 +49,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb21e65d-1ed1-11f1-b164-2bf370ae4941
+X-Inumbo-ID: fb5d0844-1ed1-11f1-b164-2bf370ae4941
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ne+5rdChiqpoBE41dI6xMEUACodZ0jf9kMigVwMJISg40RT818AqFJkbuC1Nke99OGf+88hS/2DY9tg/nX87TAk1h4z1AeRllb3ZJj48MYH4YcoeJBJInaSqorVOLMNEuZpd1t/pNkSvIpgsB4IFQqJ3zMX1YvXwSOOr/Q2jQoctlbvEHnulJalnNlvXmi6fPgHUjgh327690Efld0ubnFtcq6kEXiJJvWAbuNontROOhiqVYV6uEQzy3ZsKgimE+6MgPfhqHHn+jIkPkhoo4p/uqB7cx44D1AW4puApmnejSEXepXBzbBb+aKgMFwMyZ2DC4LmqNlR8BcFdLDd+oA==
+ b=VAxu/PAhwEzb+JP05VQXQ4Fia53vo+yOhdNsbUZqGcfmUXzFoRcODGKgiNczNQFv9Y7AeL2ubyjwiw8u2+QQqjmIUhW4PsBUFcXuEff3oJDnE6Eq+QAm3MECEB5cpafGMDYDFN08BcRkUK9ZcerS0wKTU5kocEuFFFp39Q+cfYeOkvPyRKYG5SJ9m+yth2fhA4YC5kMXzSC5jDzpzPTQ4x7Hw4ad/EwPI59xWvUKWLD60zfdwacXs7OpNSRptaxY6WdkbpIoJRPUY4Vw3RRr2sspc98qvse0mg9vCtI18uDpnM98Cr/QSRF4ZkIk8kgdW9DW8cXOMdM+xjyPVKz4wg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ImfwjO5yizsGwgyTir/GZv6N41PvSfvoDoYndUw3Pi8=;
- b=t5+PKFxABdcLP37OqQ7q5gzxC+tBGBTqFuh8LrCsCWQSA4xeLgqzLGp4Ul0xTt+HbLhEF7/OxY0M16pRUGLqfu4sV7jj54wbXwY4kti3WfosQeUaHoGoIQyvEN8oh9FzoT6gFPT18y7TihW/iCrZFQ1A8NwdqNqqOwMYiwQt2zVnoOZtbGOdGWjkOuPE3vt4h9aMTBCe4sIe/+s0hguZOSh9D6NH4hg/QsyjdgVS3XUBDMP/3eAjHgNKjaANFaWB5nCzndJH3aOQAkgukyOvT0l/Tm0SdzpnEV4v6rT+pZFNJW03xukkOcD6Vxk1X2eb1/vRPf01iCGjIW5XtmAxtA==
+ bh=vshbixKweyTpuWP1WiS0HOtqU2yyfMLBFnxs6AU9Xi0=;
+ b=k+RuaBpKs7Zks5F0VCQgM0zibZ6wUZh5tWhLMk5tC9YYfyP2c4Lqm0eh6/WtE2Hinlg8dcE7QuqfuAFLU56FvHTbwDKaMUa8u/wW/GCHZ2cUp91yjSTGEWE0P6p1Q0myMUOVE+mJFGKsC+XlhEcSBM13wOv97xh3qZXQnfxpS+sgzCQOKQUcLNviuAV/c1kV9KYh54FKYUtBo8hbj3/tZairyRVUoOBKfoA4JTSpnHAd4VLggui4q8PvtpXd+L5jOnpEWJqbAGDbTrFqW527kvN3JyT2GJt4EBPbuJ8V2ohdhpylbmQ1A3+jmVXKWHz0GzpkqPGaHW2H32hIBKcc4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ImfwjO5yizsGwgyTir/GZv6N41PvSfvoDoYndUw3Pi8=;
- b=NEs/9J12UrYYgCZFSXLOTZz3/aWoyrcepHk49enN4qPKjJjfxGegRYdpiU2Z0PUbrMG0A0nc4oVZbjF3RoJsFtV0SGWoGlfY5OnK67/Gk/LmUU7b8WRrjL/kJNkpUZ7aimO4f0/gOV2j7/kttogUqrkFnHo3Cac2iXdSXswJciJ8z5dRGj1VCiFOTUqnhsM+5tAmQnh3UPCl1Wcvwa3dJ8lDAAWo9O/K3nOkL70BjJH/RH8UXppsAfYRwKVDw3bjCWu3L87FI4ereHzvN6EFznoQXj2OePtvXVL67io4XHC5TUwMcCPEJpWfaZwH35vsn7Yfl3d6VpfNO7QD7UeeRQ==
+ bh=vshbixKweyTpuWP1WiS0HOtqU2yyfMLBFnxs6AU9Xi0=;
+ b=Yxfa5nOuOOlZvadBuRfgHxSU3fR+m17m1QGeUL7LoQno9/d4XErFYolL4rkie0ceZ05ij52048TZGqsBtSJl8nDa9PBsNT3JhtB2kIp42IwOVyxEe+5QattTJE+p/Y7YH/kY+mgDcDvVscXW/ekSfnORDLBwUdmqh6j9opnHaf92Nv5FHbZ7+hM2YEHssaeKTS7O5cOyT2YdRx82mRKe2IvdYsF7ByTreEY1XWDEHOC9va6oqUyflUHFjn6rYuPIrLAVgVD7ovVSiL+Rhwt/PCRAX13yo3USNPFTqMnHq0AuHY0j7PENB7bYls7M6G8M19k3Z5BF87jzHyy+EaY0Yw==
 From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 0/2] Address violations of MISRA C Rule 20.7
-Thread-Topic: [PATCH 0/2] Address violations of MISRA C Rule 20.7
-Thread-Index: AQHcst645g7QlNxsOkmEje6S743Qyw==
-Date: Fri, 13 Mar 2026 11:44:15 +0000
-Message-ID: <cover.1773399567.git.dmytro_prokopchuk1@epam.com>
+CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Ross Lagerwall
+	<ross.lagerwall@citrix.com>
+Subject: [PATCH 2/2] livepatch: address violations of MISRA C Rule 20.7
+Thread-Topic: [PATCH 2/2] livepatch: address violations of MISRA C Rule 20.7
+Thread-Index: AQHcst66E5OKF88ZqUOMQkXYvVhPMw==
+Date: Fri, 13 Mar 2026 11:44:18 +0000
+Message-ID:
+ <a495a577f68e23dcbbc92cc4d0ace8b9fb46e711.1773399567.git.dmytro_prokopchuk1@epam.com>
+References: <cover.1773399567.git.dmytro_prokopchuk1@epam.com>
+In-Reply-To: <cover.1773399567.git.dmytro_prokopchuk1@epam.com>
 Accept-Language: en-US, uk-UA, ru-RU
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -84,76 +85,141 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|DU5PR03MB10219:EE_
-x-ms-office365-filtering-correlation-id: 99ea81c6-7164-4a92-6e2c-08de80f5dab4
+x-ms-office365-filtering-correlation-id: e3ff2352-74d5-48b6-b83d-08de80f5dc8c
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|42112799006|376014|366016|38070700021|18002099003|56012099003;
+ BCL:0;ARA:13230040|1800799024|42112799006|376014|366016|38070700021|18002099003|56012099003|22082099003;
 x-microsoft-antispam-message-info:
- 6b8U4gVNHAXF72zhLZUa+IKvzxczJBdmN0X1vEWqNhl8nhOVW65Wdnqh6auxYehsmhmV8JP9YyhuVaZWvqmXl7+hYW5UvTIHh0ZsEXoeC3Pcx14VqRrq7qH07GA8Ji948muYUO98iL/XpyEaSwhTkkIJmq7mfeDdHwAbqlJUY+hBU/IUn3NsYJn8qPWzk093fqmo3TBouqTZBIywmrQ07v+ZLyGAYYOzc+c5wBO0s5RCTHYkm5ozOW5GhHAuGK/Mi/RXUO12OqNWEG9inEi4xePklDHeyYck2+JTxP/exsRVi2IvuroNH+QzyUIAsy1rzZeQHyg+uwY3FjrrU0aP+nlzj/n/FsG2aexuVH+1VshFeGTidpKBapqSaISfnfPvYSrH4AICZG9+0jL8M28xbUQsQfUEBZEKv+Zgyk4mFd0M9jtK3apzwYzC8O8hRltfPucg4T+k2PfGgrO/zKDYQ7bOnaSL4nN9HWA/xgZde5j0QajHSACQKJaF9OI41RCmPuyd8Y+PVQURL5ZF5WXD+JypMlzwap7zBJpuqKsjqUYwRNIe4S76OKIpOAcVCvcgG/xc6Ty8aVGkyhrR9iZwcvgwTMhUBdJCLtUZukKjBIsa00/+IqifjZxX6WBhHA2+B6IZ44kvSk5JLajoaby0RA60O5uWQtvT1E9pZEJn8X0Tezu6L6ocP8kKvAfPE6MOOUsncujVUpUqnl8X/AaRYRQGtHiYxjScoNUxJIIIYg/AfP6OQZ9W5Rgtp8OOygwBmmiVXpln2YFNUhydPnsJY/2UC8bf7J2FfOjlsfsVfFQ=
+ m0YyqNAanap/PorJinnPSn9KuQlIRIphFEt6Ib6cYVDkZoHFsY3lyl+zpUoT5pY9e+TddfzIwzH6vPL0gqeumEyq9skmuxqlXSYBr1yprILG8x6JMvGlQgWBR3hzZBKtPud4CKxBkGQVhw6YSxT0yor6toTOhTPy6TeGfHAn85NdiB7vD/qDOxYDaTDoGl1z9hrkOj/3Hkcgt+OgbbWkGrF+qZud6TNAPKrf31ZodcRha/Gt3F0aDNV+jpcWxnhAfzhQwM51/Xw4QsjalEWGdgIv+bsn83oeJ+iEvC9tbny6+VKYVLPcmiMYcCbysEl21f4kdCZsUdGtIEZ43Ww34qOS06q7PB6saPQAUOqrVp11uq+DerjVEWb32G2AXEH9zvyr0eN20lfxOWF7fSmUXgMdo4zBPag5/ObYLkfSOAWSYT4jl0xPwV2um0G1EHPEppzDeypZaNAslBdPxqYnaS/el6PTW26jqDYt2kjHQ5u/4SteY7LOB5K0SUTIZLBAuJPx79a3fT9lh6uWxMlEGUHu0mgxsd2fWvsSB/Zlp86sSjcNjj98FuVG3qi1ixXxAG2TyY3hbNX32qyivdyUbaeAHCBRH3I1SyPgP05KzL8Sb50Vqa3d5o+CuN6hyWbpccpcLZbcyySZ9C0kNvzPIhVz/oYC+Y1QikPiAEmnV7POFthuVRTgVu9lkPhOvuI3cIFfM5vRifJ6QymtX7eZ6kV5G9o3AieYHyLp8uOaBL+vPNWEoQTw8E019RX7By+m3XXxGcUwymxxpP6psrejyPsJ65DOgLVb/2sDv5LZ7x4=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(42112799006)(376014)(366016)(38070700021)(18002099003)(56012099003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(42112799006)(376014)(366016)(38070700021)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?JhfTbasKz1Z2nYg3Y5KgvtJZPJEJzQJuxh2932neJ8V4usUtqQFTWJzad+?=
- =?iso-8859-1?Q?J/V5sS80/Z6Z3RtNZgtHO50+IQ2HMKqx174dPjxlW5C7iZR+f13Y5gEo1h?=
- =?iso-8859-1?Q?IuhmdasuWjrFAl3cUeaHx7DccvmzcqxbhvQOzuwVbkSexP/abwLbg9g6hd?=
- =?iso-8859-1?Q?K8Wqs1VMENgWu78EUoUqSL3Ko1diEYL8EDXUW5c4cVUHsBLU+l/7KDa8w6?=
- =?iso-8859-1?Q?ncPjDvcnd4AI5Zgb+f1hhEtV6rKWb+aBz199hmfJ63RWwQuABoM5ddntka?=
- =?iso-8859-1?Q?WwLn4ZAL49FHwDAm2kkn0RdBVMSXD+LQRiFzQZgpgNmdrP4IOGV3VhcQlQ?=
- =?iso-8859-1?Q?7vlLOeZtOxFe8Rf+1thDK7RE1y1KXWz/2IR++ZJpOx7Y/7Uq1+dqW1A7Wc?=
- =?iso-8859-1?Q?F7761CTVwLvqpol2vvxhM4Tt1giRr5H81gGe89Bnsw+b5OCPrljL8Qswkk?=
- =?iso-8859-1?Q?crkuMG8ak1/9VzNN0EExA+EJCj5ZK7uxVnQfzpVRu+qvHkNMqtcxbwEtjS?=
- =?iso-8859-1?Q?P/FIOvsf6TX6zVmc14wi9IzIoxLBGiW0Q+B0GySBWppaJGl2dOL/Usspn1?=
- =?iso-8859-1?Q?sdHr+yCnDaYHJDeDEyZRSQiH4xNG2RHTX6SbyQ7DelC6v2G75s8usGY5Eb?=
- =?iso-8859-1?Q?bvNxwSR410pnY9Y9SDOxlTQdnXht+gOQXJ9+MieI4eCJE5plcWRfk4bvLR?=
- =?iso-8859-1?Q?SDfZYqvw7/I8NDI1WnNzYF6AwR4DXT1DQRnD5eGa0LHfDlPDGsmmDWjDI6?=
- =?iso-8859-1?Q?fc36rW84XIyZ8Z7UbV4UkAzDVbgCLXQh0K9uGRrxyrY45RqahOtAc+CG8w?=
- =?iso-8859-1?Q?DzoQaDqLPqNraZtyuqh0FZw0WZE7Y0NCjr69LEsqDjZvzv6z4FVNBciqVS?=
- =?iso-8859-1?Q?B7NSBhRJEtDhO50hHZPD25O5oOflel0A5OEAbhESPsn2dpxxEbzUq9f+sn?=
- =?iso-8859-1?Q?OeK0z4gOBJRvL40CcGKLW5fjCaX9gc+taY9T0l2LG7BlaDB/rfcTezqJJA?=
- =?iso-8859-1?Q?5zVkCvXN8vMy8RgBJ8lqBkd9MCuBnt+9c0Hk9fHGiVSRPgp8rKixga84g9?=
- =?iso-8859-1?Q?Wk+sJFzdiEyHzcvsdQlFYBK3CqSt23ZN40h1XFZIAMq4TWljdJrJRCEcJ0?=
- =?iso-8859-1?Q?KBd01ZDmR2fcwhr3rzyf6qyAtgSSwD030KBtzUrKt81FLtkf3A4kk5I5ti?=
- =?iso-8859-1?Q?BmqborMZS4OBXWcwGV5w5Sqs3Im5PoOef6QscPqs7sFoY1oAnVG4ko+eeh?=
- =?iso-8859-1?Q?+Z5sz2P04AayqWPOJIxbUQShLDem0q2AkwSrf8kV6bnzymiYqqLxaaS0wk?=
- =?iso-8859-1?Q?qhsND+ZScL9qulSuXvoRuFjgO2kYEStzBVj2FyaMbGhASaOQu4i1Dccv+/?=
- =?iso-8859-1?Q?TI7RyCGTTWLGZhhGYUYDRcL6Y1ofpRbODlGQgBLjHnvXuYRlydbLVdFwwY?=
- =?iso-8859-1?Q?kW6unWS3Qvg33a/+rM4POb6+MEqJq4ATneSL0V1yviFa9TubhEkvSDVfNF?=
- =?iso-8859-1?Q?0z6P1OgIdVFk2nTMpcJ7NvC5LC1r6Yz/ssnQjGeCS43g5uPbjCTEWjpqiS?=
- =?iso-8859-1?Q?vvQNe3QW+S2gZ62yt9leWKpmek6MQDHSKr9Rb3SnKKfALVPPi47VPbi1IU?=
- =?iso-8859-1?Q?K/HIxJeZ4YwFPTQmtrpORl3NV8bjYh7DfhKJ8rW7gnKr+q2GurgOFnft5+?=
- =?iso-8859-1?Q?LgWZ/zTXpCMcAOPqTwORATjo1fwWgrIa5EJq0n0yGyDCaVMZSJ9RjOBT0r?=
- =?iso-8859-1?Q?/u2CQbrpAZW8H4bPpKnz/WpKbfp7zlAGV7jvQdYEgxrrGm734Q0sliLRBf?=
- =?iso-8859-1?Q?SMnzBzrlQQlZITRaN7V9AT3fFJU02jk=3D?=
+ =?iso-8859-1?Q?pem9iAB0cjOQ0vWJgznuoB/Ef/ibHqyJRKKl90gmad4FLYTCMnqMAdr2XN?=
+ =?iso-8859-1?Q?lwS8EbWqZPtT3oCD1fCCkaAedfGDBmUQiUHCaROjXvtWX5u6CFPUW/hNg6?=
+ =?iso-8859-1?Q?9ZgM6wWFwRceAq8j5bdH77WBG1BzfW3EVJsBOJt+xtAzH6TmEFWeRbor1z?=
+ =?iso-8859-1?Q?oMeFt57vAEX27tSk5TeQ8SeQZMJ1J4wuuC6qB9hVt2O9U9264AlbQBplXo?=
+ =?iso-8859-1?Q?jbvJY4CdsSd7gfiDP/CB82gd2RRBH3cLnW30eJr0Zi9/3xk4lnwvxf8h3C?=
+ =?iso-8859-1?Q?6ehMOZdgLM9FoVmdJ/MFaGlMeSnABaptfWZcQBDSTrAWxFMTRKwuDclbUm?=
+ =?iso-8859-1?Q?2Dh7k3A+GKONviFMpLA3L92JTOMr2I16XV1lDAgVXH0/LAqRJqh2fS3wTP?=
+ =?iso-8859-1?Q?RNB15X4eyDOYFJkPjCsQyQvoinb+2C7z8qAMa8Q8t6Z5IH+kzCwQnt6zFc?=
+ =?iso-8859-1?Q?6zkZOTK9xg7tbD6fh8h2NkZypMEWxEuk0XzT1hnD92FqjkFiSeMuNcslJy?=
+ =?iso-8859-1?Q?MO5tnFShQ+t7T3FT6Mju4YqNf8BVIw+eDZDgdi9B3MKTMU7ViouLUiTPb6?=
+ =?iso-8859-1?Q?OlAZS6ptXTg2E7lZSxk7o8ed/Kkt97O9E21SLQErLN2wwTO518C/6Ju3a9?=
+ =?iso-8859-1?Q?ehvgVOMZt1kEpu4cfHcRhYkzp/NfBsbw1TJ1vZkOOGnrHnveG35xuBSHSE?=
+ =?iso-8859-1?Q?/0s9J5Vh8GXALk1hbmDDMzysp8I+AZzHJFWL1DMo9hrf9O4S6aIEOQdoLI?=
+ =?iso-8859-1?Q?me2uf3Vqbje81ATuSQ/vfnGad+r+5f6oIm0Y8rfENOB6qb8N/w5Vg7TUxR?=
+ =?iso-8859-1?Q?BX/eF4cG8MnTZygqoJ4XQIBI5QbR33k6m/7letmsX6R4+TexleiMZlfX9u?=
+ =?iso-8859-1?Q?X6RAHgGe3iD6dfcBG3+rdvrAnwotAEdH+5tDlFfYZxXMiJe7mnt02hQW+a?=
+ =?iso-8859-1?Q?UCB0SlMiYiBOhLURJvJ7kkSC6VotISooqR1novPouMaOqjYRZIA/c60fAa?=
+ =?iso-8859-1?Q?e3fsNJv/USOOvK4aJzrXahF7b5hzcCYpWDIoLO5+0GO1VVAGN5cr+XKUOg?=
+ =?iso-8859-1?Q?rC8bqFE5287KrFg6cit0sG0XEqqlcel8PP3RpCUn5+pmfx0wzd+Yg9yaPl?=
+ =?iso-8859-1?Q?S5rCp1eHA966ciLAw4KoE6roz8009xd+T5EBXeA3w1a+h+1P0215LuiLso?=
+ =?iso-8859-1?Q?tKEP26OKjaaXnOQC3Mc1oBjWLL1aG3DGE8UMiNNP+ciJ3b4B8a3R8jhwTz?=
+ =?iso-8859-1?Q?c7RNAGKBQm6irb8E4TIxQ4y2jTsnNPOc2VIhtlupxLsyPTL1L5GgRZmaD8?=
+ =?iso-8859-1?Q?oQrSJjKm4CrsEVzWN4LtjjOc0/ghjJraTbefLxWMO1BoK7yNVcdk5CyLO7?=
+ =?iso-8859-1?Q?jjaql++JF4moALhb3R+kaEXaEBpWpUbHdlVIE+x+iFoM8FtvzpV4h4j4Va?=
+ =?iso-8859-1?Q?+8oVN326piw9BnjZjfUT7pH84eick8bSk2WZwJUbuKp83CkRB1ndOYQX93?=
+ =?iso-8859-1?Q?B/d+qWmaKGTIXSJUX+ZR4jv3btXlYRN0Lts4dXc+KXi+WjBWuSlOGpyfoX?=
+ =?iso-8859-1?Q?uAzHZW4kCqSpqMOPbV/tMgRFO8euhzR2qweDM9qXHOhNhD5hPAWUKgXNMo?=
+ =?iso-8859-1?Q?he6B647cPUsCOss3CaTsZzGNeRI7JDX92ApxzKW8Hwx4DJDa5fz5iHN5CR?=
+ =?iso-8859-1?Q?ZozPn89zdJG2ubi7b4sRsXfqu+SzTPBLHqYQpQaFOSby3gHGkxWuWn/XSv?=
+ =?iso-8859-1?Q?vAt5ZbvII2MA7nkexgDJDhb45OHV3Ax0gwBhBDXXx65jbO05ETmGVVi7kN?=
+ =?iso-8859-1?Q?yGxrr474JZg1OQwftHyK+Iv1dibZK7E=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99ea81c6-7164-4a92-6e2c-08de80f5dab4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Mar 2026 11:44:15.7429
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3ff2352-74d5-48b6-b83d-08de80f5dc8c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Mar 2026 11:44:18.8159
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xxzu0Hn1D/8dR7FyFt8mza05jzm4DPBqxc5jnXunSG3osGz+gZXIH7E/7xg/lZByUxr2hgxxUtb/1Mo1Y6mt4xpJrVWonINoYkYnJ7mQg9w=
+X-MS-Exchange-CrossTenant-userprincipalname: O+xOVGB1UVuycixMFBG5ulky8pxeWavKNASiBSLjJOrkPoftUvuVf8XB7s4SP2lFyUWmxkXN6HVakLclRm5OcjVGeuInSiKRajdVcaPB/Ko=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU5PR03MB10219
 
-This series fixes some MISRA C Rule 20.7.
+MISRA C Rule 20.7 states: "Expressions resulting from the expansion
+of macro parameters shall be enclosed in parentheses".
 
-Test CI pipeline:
-https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2383264392
+In macros LIVEPATCH_ASSIGN_SINGLE_HOOK() and LIVEPATCH_ASSIGN_MULTI_HOOK()
+add parentheses around the macro's parameter 'hook' to prevent against
+unintended expansions.
 
-Dmytro Prokopchuk (2):
-  arm/pci: address violations of MISRA C Rule 20.7
-  livepatch: address violations of MISRA C Rule 20.7
+No functional changes.
 
- xen/arch/arm/pci/pci-access.c |  6 +++---
- xen/common/livepatch.c        | 18 +++++++++---------
- 2 files changed, 12 insertions(+), 12 deletions(-)
+Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+---
+ xen/common/livepatch.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index 7446533c8c..a9986c2aa8 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -660,13 +660,13 @@ static inline int livepatch_check_expectations(const =
+struct payload *payload)
+  * Perform section pointer and size validation: single hook sections must =
+contain a
+  * single pointer only.
+  */
+-#define LIVEPATCH_ASSIGN_SINGLE_HOOK(elf, hook, section_name) do {        =
+                \
+-    const struct livepatch_elf_sec *__sec =3D livepatch_elf_sec_by_name(el=
+f, section_name); \
+-    if ( !__sec )                                                         =
+                \
+-        break;                                                            =
+                \
+-    if ( !section_ok(elf, __sec, sizeof(*hook)) || __sec->sec->sh_size !=
+=3D sizeof(*hook) ) \
+-        return -EINVAL;                                                   =
+                \
+-    hook =3D __sec->addr;                                                 =
+                  \
++#define LIVEPATCH_ASSIGN_SINGLE_HOOK(elf, hook, section_name) do {        =
+                    \
++    const struct livepatch_elf_sec *__sec =3D livepatch_elf_sec_by_name(el=
+f, section_name);     \
++    if ( !__sec )                                                         =
+                    \
++        break;                                                            =
+                    \
++    if ( !section_ok(elf, __sec, sizeof(*(hook))) || __sec->sec->sh_size !=
+=3D sizeof(*(hook)) ) \
++        return -EINVAL;                                                   =
+                    \
++    hook =3D __sec->addr;                                                 =
+                      \
+ } while (0)
+=20
+ /*
+@@ -678,10 +678,10 @@ static inline int livepatch_check_expectations(const =
+struct payload *payload)
+     const struct livepatch_elf_sec *__sec =3D livepatch_elf_sec_by_name(el=
+f, section_name); \
+     if ( !__sec )                                                         =
+                \
+         break;                                                            =
+                \
+-    if ( !section_ok(elf, __sec, sizeof(*hook)) )                         =
+                \
++    if ( !section_ok(elf, __sec, sizeof(*(hook))) )                       =
+                \
+         return -EINVAL;                                                   =
+                \
+     hook =3D __sec->addr;                                                 =
+                  \
+-    nhooks =3D __sec->sec->sh_size / sizeof(*hook);                       =
+                  \
++    nhooks =3D __sec->sec->sh_size / sizeof(*(hook));                     =
+                  \
+ } while (0)
+=20
+ static int prepare_payload(struct payload *payload,
 --=20
 2.43.0
 
