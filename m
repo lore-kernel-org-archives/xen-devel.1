@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C587F4644C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAB8F46452
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2026 11:17:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1255503.1550448 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1255502.1550440 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w25wj-0008Dj-Q4; Mon, 16 Mar 2026 11:17:17 +0000
+	id 1w25wj-00083a-An; Mon, 16 Mar 2026 11:17:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1255503.1550448; Mon, 16 Mar 2026 11:17:17 +0000
+Received: by outflank-mailman (output) from mailman id 1255502.1550440; Mon, 16 Mar 2026 11:17:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w25wj-0008C7-Kp; Mon, 16 Mar 2026 11:17:17 +0000
-Received: by outflank-mailman (input) for mailman id 1255503;
- Mon, 16 Mar 2026 11:17:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w25wj-00082j-7T; Mon, 16 Mar 2026 11:17:17 +0000
+Received: by outflank-mailman (input) for mailman id 1255502;
+ Mon, 16 Mar 2026 11:17:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+yLr=BQ=bounce.vates.tech=bounce-md_30504962.69b7e6ac.v1-384f3c454f2b4e7a96bf99f610f55f96@srs-se1.protection.inumbo.net>)
- id 1w25wi-00080O-HU
- for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 11:17:16 +0000
+ <SRS0=di6d=BQ=bounce.vates.tech=bounce-md_30504962.69b7e6ac.v1-096817dc48ee470daf05cea08c53910a@srs-se1.protection.inumbo.net>)
+ id 1w25wh-00080D-Fc
+ for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 11:17:15 +0000
 Received: from mail136-12.atl41.mandrillapp.com
  (mail136-12.atl41.mandrillapp.com [198.2.136.12])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id af652f1c-2129-11f1-b164-2bf370ae4941;
- Mon, 16 Mar 2026 12:17:15 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7533da5-2129-11f1-9ccf-f158ae23cfc8;
+ Mon, 16 Mar 2026 12:17:01 +0100 (CET)
 Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
  by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fZCGh5gmcz5QkW27
+ 4fZCGh2Mgfz5QkT4q
  for <xen-devel@lists.xenproject.org>; Mon, 16 Mar 2026 11:17:00 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 384f3c454f2b4e7a96bf99f610f55f96; Mon, 16 Mar 2026 11:17:00 +0000
+ 096817dc48ee470daf05cea08c53910a; Mon, 16 Mar 2026 11:17:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,44 +45,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af652f1c-2129-11f1-b164-2bf370ae4941
+X-Inumbo-ID: a7533da5-2129-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
 	s=mte1; t=1773659820; x=1773929820;
-	bh=6RYWc6Fjxgy8OveMTnPi/ksrvu05Heao6RIo3wosYw8=;
+	bh=1rdsgYGrdZ+Aj6vu34GfiCU8HteOHeBAK+Ods8sd53g=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=pvkx76ahf78bKM6fYZmuZ+wRuUNX+O6vpujMXp8XfA9jurWPMN6l2p1/r17IYvKt/
-	 u5GsiPew3GZWQpMVBUt/HBd6XD9/jZ7o2jY//lpm0YjqMttqY9WjwQ2BOWWhpm+oFv
-	 jxpZ/wvRgZighI1wY8TuodkidWbwAtOuQ8ASwuRBCVJwX96XwCBeNEavpBGwLSxBFM
-	 ZLfXhJp+r9Yf7FM8DN0xEgOfKqJApD5/g7uyZy3ua9ubptLd9MUzxVjlzFe/RMJ/Kc
-	 5Wcw174sM7Xxb7omove/6hHpY5+EX+4soSmWv7mzHmkqyHSRRrIIFy2H7B92jfmfOl
-	 4LhJs45priH3A==
+	b=KsoMc2o9rnN1cBHUFtsRMm0buK7ivoy7p+CFHHXmhGwQrtDGvzuYw2clTd47xw562
+	 z7hsc38a+9+l9K9orfmcOFch5uxY1qZPqZuAX9n0jhPyP87YKL3aycAJZfxJfa9L6R
+	 zPJuC/dKhlGZMlZS3KlRADuAmzCAHpOVeAEYcm1MnVDfm7MQROBQOR6XtNN78UctnX
+	 Ci+CNVzEneh6prBdX1YN1KQGsk0VPJ5FPZdLR+7zMWFQgzHkFKSrIK8lIM9xvm+W7r
+	 RnPxH8b1LK4XXRqwmwIWfqkj6BdAZKealS7vMdGs7f8hk+I8TgUHX8DuUDqHaqlusd
+	 oBDMfK19xUoDw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
 	t=1773659820; x=1773920320; i=julian.vetter@vates.tech;
-	bh=6RYWc6Fjxgy8OveMTnPi/ksrvu05Heao6RIo3wosYw8=;
+	bh=1rdsgYGrdZ+Aj6vu34GfiCU8HteOHeBAK+Ods8sd53g=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=XzCqO8EqfeFZCh5tfbSRLQGEIxJ8xbxHAnfIL3u3MjHI3fgViqivWyelLgVFivG2x
-	 +ROtvIb+dX3jqMa6kfum4LU1TEW+sIt1r0LnnxCIOBzZst8G2m3s4YGwJSAiCX+W7P
-	 1E8DSsnxNPsj/NNlgTfkZU10GTkGqjIbJckcRV2YA856duhEjR4XVcPsRH2aoTct5d
-	 20ZarZGw/CY8+0T/N1rfr+H6fcHFVlMjmlSfpl7BqUN7SVCY1VUSPFYlWZbSo6fLUV
-	 HPPUyEKINZkVbSTa36uzCr2RshR0jIMsXTnFeJMrEu0eikGg6QMNaRgzbSy0+Fajfx
-	 IQsSTIyjVZPnw==
+	b=Bxl3/X9AGtgxVEiWpx+oJf9jqOyGEY6Im/amXa19x+ahVssXvRvIqto+OwgcCrVVy
+	 olQ7R7Z3oraWvce6WEOvsEK73wo+5Wn4NHlIIo+5qEz6+NssA2rNhNGsKNlUdXa30d
+	 umq6uIgRSrqCN4pZRuW//ir54uHyaY7FKS9yhIz9Z9nqW51k9KQSsCuhiWfNUe3rkW
+	 CnFYbHqYzEG7KoJGhp9X4RklHR7aBNa4jIo1FQh49SIaohvoqkGIjgytT47mimnB8g
+	 VqJq9JrvX8rnvnb9vd8qKUMbmMSAnJ8aLQBGZdMzsp9Bmf2oVKXcy0YUHVh/ka8ZDQ
+	 6xsX7tKZ/+GVA==
 From: "Julian Vetter" <julian.vetter@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v5=203/3]=20x86/ioreq:=20Extend=20ioreq=20server=20to=20support=20multiple=20ioreq=20pages?=
+Subject: =?utf-8?Q?[PATCH=20v5=201/3]=20ioreq:=20Unify=20buf=20and=20non-buf=20ioreq=20page=20management?=
 X-Mailer: git-send-email 2.51.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773659819650
+X-Bm-Transport-Timestamp: 1773659819095
 To: xen-devel@lists.xenproject.org
 Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Julian Vetter" <julian.vetter@vates.tech>
-Message-Id: <20260316111653.178104-4-julian.vetter@vates.tech>
+Message-Id: <20260316111653.178104-2-julian.vetter@vates.tech>
 In-Reply-To: <20260316111653.178104-1-julian.vetter@vates.tech>
 References: <20260316111653.178104-1-julian.vetter@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.384f3c454f2b4e7a96bf99f610f55f96?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.096817dc48ee470daf05cea08c53910a?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260316:md
 Date: Mon, 16 Mar 2026 11:17:00 +0000
@@ -90,266 +90,252 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-A domain with more than (PAGE_SIZE / sizeof(ioreq_t)) vCPUs needs more
-than one ioreq page to hold all per-vCPU ioreq slots. In order to
-support this a number of changes have been made:
+Switch the ioreq page mapping in hvm_map_ioreq_gfn() from
+prepare_ring_for_helper() / __map_domain_page_global() to explicit
+vmap(), aligning it with ioreq_server_alloc_mfn() which already
+allocates domain-heap pages and will now also map them via vmap().
 
-1. Add nr_ioreq_pages() to compute the required number of pages, defined
-   as DIV_ROUND_UP(d->max_vcpus, PAGE_SIZE / sizeof(ioreq_t))
-2. ioreq_server_alloc_mfn() now allocates nr_ioreq_pages() pages for the
-   non-buf case, builds an mfn_t array, and calls vmap() to map them
-   contiguously. The buf path remains single-page.
-3. ioreq_server_free_mfn() uses vmap_size() to determine how many pages
-   to release.
-4. is_ioreq_server_page() loops over all mapped ioreq pages using
-   vmap_size() and vmap_to_page() with per-page offsets
-5. ioreq_server_get_frame() now handles idx values in the range
-   [XENMEM_resource_ioreq_server_frame_ioreq(0),
-   XENMEM_resource_ioreq_server_frame_ioreq(nr_pages - 1)], returning
-   the MFN via vmap_to_mfn() with the appropriate page offset.
-
-The legacy GFN path (hvm_map_ioreq_gfn) is restricted to single-page.
-Domains with more vCPUs must use XENMEM_acquire_resource!
+With both paths using vmap(), vmap_to_page() can recover the struct
+page_info * uniformly during teardown, removing the need to cache the
+page pointer in struct ioreq_page. So, drop the 'page' field from struct
+ioreq_page and update all callers accordingly.
 
 Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
 ---
 Changes in v5:
-- Reduced complexity a lot because there is no distinction between buf
-  and !buf case
-- Directly use va and gfn from struct ioreq_page, dropped additional
-  members in struct ioreq_server
+- New patch that unforms the buf and non-buf code path
 ---
- xen/arch/x86/hvm/ioreq.c |   8 +++
- xen/common/ioreq.c       | 103 +++++++++++++++++++++++++++++----------
- xen/include/xen/ioreq.h  |   6 +++
- 3 files changed, 90 insertions(+), 27 deletions(-)
+ xen/arch/x86/hvm/ioreq.c | 57 ++++++++++++++++++++++++++++++++--------
+ xen/common/ioreq.c       | 36 +++++++++++++------------
+ xen/include/xen/ioreq.h  |  1 -
+ 3 files changed, 65 insertions(+), 29 deletions(-)
 
 diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 145dcba5c1..872247e300 100644
+index a5fa97e149..145dcba5c1 100644
 --- a/xen/arch/x86/hvm/ioreq.c
 +++ b/xen/arch/x86/hvm/ioreq.c
-@@ -163,6 +163,14 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+@@ -15,6 +15,7 @@
+ #include <xen/sched.h>
+ #include <xen/softirq.h>
+ #include <xen/trace.h>
++#include <xen/vmap.h>
+ #include <xen/vpci.h>
+ 
+ #include <asm/hvm/emulate.h>
+@@ -128,8 +129,9 @@ static void hvm_unmap_ioreq_gfn(struct ioreq_server *s, bool buf)
+     if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+         return;
+ 
+-    destroy_ring_for_helper(&iorp->va, iorp->page);
+-    iorp->page = NULL;
++    put_page_and_type(vmap_to_page(iorp->va));
++    vunmap(iorp->va);
++    iorp->va = NULL;
+ 
+     hvm_free_ioreq_gfn(s, iorp->gfn);
+     iorp->gfn = INVALID_GFN;
+@@ -139,9 +141,13 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+ {
+     struct domain *d = s->target;
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
++    struct page_info *page;
++    p2m_type_t p2mt;
++    gfn_t base_gfn;
++    mfn_t mfn;
+     int rc;
+ 
+-    if ( iorp->page )
++    if ( iorp->va )
+     {
+         /*
+          * If a page has already been allocated (which will happen on
+@@ -157,17 +163,45 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
      if ( d->is_dying )
          return -EINVAL;
  
+-    iorp->gfn = hvm_alloc_ioreq_gfn(s);
++    base_gfn = hvm_alloc_ioreq_gfn(s);
+ 
+-    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
++    if ( gfn_eq(base_gfn, INVALID_GFN) )
+         return -ENOMEM;
+ 
+-    rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
+-                                 &iorp->va);
+-
 +    /*
-+     * The legacy GFN path supports only a single ioreq page. Guests requiring
-+     * more ioreq slots must use the resource mapping interface
-+     * (XENMEM_acquire_resource).
++     * vmap() is used for the Xen-side mapping so that vmap_to_page() can
++     * recover the struct page_info * during teardown, consistent with
++     * ioreq_server_alloc_mfn().
 +     */
-+    if ( !buf && nr_ioreq_pages(d) > 1 )
-+        return -EOPNOTSUPP;
-+
-     base_gfn = hvm_alloc_ioreq_gfn(s);
- 
-     if ( gfn_eq(base_gfn, INVALID_GFN) )
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index b22f656701..71fac2bc7b 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -261,8 +261,9 @@ bool vcpu_ioreq_handle_completion(struct vcpu *v)
- static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
- {
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
--    struct page_info *page;
--    mfn_t mfn;
-+    unsigned int i, nr_pages = buf ? 1 : nr_ioreq_pages(s->target);
-+    mfn_t *mfns;
-+    int rc;
- 
-     if ( iorp->va )
-     {
-@@ -277,11 +278,20 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
-         return 0;
-     }
- 
-+    mfns = xmalloc_array(mfn_t, nr_pages);
-+    if ( !mfns )
-+        return -ENOMEM;
-+
-+    for ( i = 0; i < nr_pages; i++ )
-     {
--        page = alloc_domheap_page(s->target, MEMF_no_refcount);
-+        struct page_info *page = alloc_domheap_page(s->target,
-+                                                    MEMF_no_refcount);
- 
-         if ( !page )
--            return -ENOMEM;
-+        {
-+            rc = -ENOMEM;
-+            goto fail;
-+        }
- 
-         if ( !get_page_and_type(page, s->target, PGT_writable_page) )
-         {
-@@ -290,41 +300,60 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
-              * here is a clear indication of something fishy going on.
-              */
-             domain_crash(s->emulator);
--            return -ENODATA;
-+            rc = -ENODATA;
-+            goto fail;
-         }
- 
--        mfn = page_to_mfn(page);
-+        mfns[i] = page_to_mfn(page);
-     }
--    iorp->va = vmap(&mfn, 1);
-+
-+    iorp->va = vmap(mfns, nr_pages);
-     if ( !iorp->va )
++    rc = check_get_page_from_gfn(d, base_gfn, false, &p2mt, &page);
+     if ( rc )
+-        hvm_unmap_ioreq_gfn(s, buf);
 +    {
-+        rc = -ENOMEM;
-         goto fail;
++        if ( rc == -EAGAIN )
++            rc = -ENOENT;
++        goto fail;
 +    }
 +
-+    xfree(mfns);
-+
-+    for ( i = 0; i < nr_pages; i++ )
-+        clear_page((char *)iorp->va + i * PAGE_SIZE);
- 
--    clear_page(iorp->va);
-     return 0;
- 
-  fail:
--    put_page_alloc_ref(page);
--    put_page_and_type(page);
-+    while ( i-- )
++    if ( !get_page_type(page, PGT_writable_page) )
 +    {
-+        struct page_info *page = mfn_to_page(mfns[i]);
++        put_page(page);
++        rc = -EINVAL;
++        goto fail;
++    }
 +
-+        put_page_alloc_ref(page);
++    mfn = page_to_mfn(page);
++    iorp->va = vmap(&mfn, 1);
++    if ( !iorp->va )
++    {
 +        put_page_and_type(page);
++        rc = -ENOMEM;
++        goto fail;
 +    }
-+    xfree(mfns);
++
++    iorp->gfn = base_gfn;
++    return 0;
  
--    return -ENOMEM;
-+    return rc;
++ fail:
++    hvm_free_ioreq_gfn(s, base_gfn);
+     return rc;
  }
  
+@@ -179,7 +213,7 @@ static void hvm_remove_ioreq_gfn(struct ioreq_server *s, bool buf)
+     if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+         return;
+ 
+-    if ( p2m_remove_page(d, iorp->gfn, page_to_mfn(iorp->page), 0) )
++    if ( p2m_remove_page(d, iorp->gfn, page_to_mfn(vmap_to_page(iorp->va)), 0) )
+         domain_crash(d);
+     clear_page(iorp->va);
+ }
+@@ -195,7 +229,8 @@ static int hvm_add_ioreq_gfn(struct ioreq_server *s, bool buf)
+ 
+     clear_page(iorp->va);
+ 
+-    rc = p2m_add_page(d, iorp->gfn, page_to_mfn(iorp->page), 0, p2m_ram_rw);
++    rc = p2m_add_page(d, iorp->gfn, page_to_mfn(vmap_to_page(iorp->va)), 0,
++                      p2m_ram_rw);
+     if ( rc == 0 )
+         paging_mark_pfn_dirty(d, _pfn(gfn_x(iorp->gfn)));
+ 
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index f5fd30ce12..5b026fc1b2 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -17,11 +17,11 @@
+  */
+ 
+ #include <xen/domain.h>
+-#include <xen/domain_page.h>
+ #include <xen/event.h>
+ #include <xen/init.h>
+ #include <xen/ioreq.h>
+ #include <xen/irq.h>
++#include <xen/vmap.h>
+ #include <xen/lib.h>
+ #include <xen/paging.h>
+ #include <xen/sched.h>
+@@ -262,8 +262,9 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+ {
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+     struct page_info *page;
++    mfn_t mfn;
+ 
+-    if ( iorp->page )
++    if ( iorp->va )
+     {
+         /*
+          * If a guest frame has already been mapped (which may happen
+@@ -291,11 +292,11 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+         return -ENODATA;
+     }
+ 
+-    iorp->va = __map_domain_page_global(page);
++    mfn = page_to_mfn(page);
++    iorp->va = vmap(&mfn, 1);
+     if ( !iorp->va )
+         goto fail;
+ 
+-    iorp->page = page;
+     clear_page(iorp->va);
+     return 0;
+ 
+@@ -309,14 +310,13 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
  static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
  {
      struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
--    struct page_info *page;
-+    unsigned int i, nr_pages;
+-    struct page_info *page = iorp->page;
++    struct page_info *page;
  
-     if ( !iorp->va )
+-    if ( !page )
++    if ( !iorp->va )
          return;
  
-+    nr_pages = vmap_size(iorp->va);
-+
-+    for ( i = 0; i < nr_pages; i++ )
-     {
--        page = vmap_to_page(iorp->va);
--        vunmap(iorp->va);
--        iorp->va = NULL;
-+        struct page_info *page = vmap_to_page(iorp->va + i * PAGE_SIZE);
- 
-         put_page_alloc_ref(page);
-         put_page_and_type(page);
-     }
-+
+-    iorp->page = NULL;
+-
+-    unmap_domain_page_global(iorp->va);
++    page = vmap_to_page(iorp->va);
 +    vunmap(iorp->va);
-+    iorp->va = NULL;
- }
+     iorp->va = NULL;
  
- bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
-@@ -337,12 +366,28 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+     put_page_alloc_ref(page);
+@@ -333,7 +333,8 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
  
      FOR_EACH_IOREQ_SERVER(d, id, s)
      {
--        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
--             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
-+        if ( s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page )
+-        if ( (s->ioreq.page == page) || (s->bufioreq.page == page) )
++        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
++             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
          {
              found = true;
              break;
-         }
-+
-+        if ( s->ioreq.va )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < vmap_size(s->ioreq.va); i++ )
-+            {
-+                if ( vmap_to_page(s->ioreq.va + i * PAGE_SIZE) == page )
-+                {
-+                    found = true;
-+                    break;
-+                }
-+            }
-+
-+            if ( found )
-+                break;
-+        }
-     }
- 
-     rspin_unlock(&d->ioreq_server.lock);
-@@ -818,26 +863,30 @@ int ioreq_server_get_frame(struct domain *d, ioservid_t id,
-     if ( rc )
-         goto out;
- 
--    switch ( idx )
-+    if ( idx == XENMEM_resource_ioreq_server_frame_bufioreq )
-     {
--    case XENMEM_resource_ioreq_server_frame_bufioreq:
-         rc = -ENOENT;
+@@ -626,11 +627,12 @@ static void ioreq_server_deinit(struct ioreq_server *s)
+     /*
+      * NOTE: It is safe to call both arch_ioreq_server_unmap_pages() and
+      *       ioreq_server_free_pages() in that order.
+-     *       This is because the former will do nothing if the pages
+-     *       are not mapped, leaving the page to be freed by the latter.
+-     *       However if the pages are mapped then the former will set
+-     *       the page_info pointer to NULL, meaning the latter will do
+-     *       nothing.
++     *       arch_ioreq_server_unmap_pages() handles the GFN-mapped path
++     *       (iorp->gfn != INVALID_GFN) and clears iorp->va on completion,
++     *       so ioreq_server_free_pages() will find iorp->va == NULL and
++     *       do nothing. Conversely, pages allocated via the resource path
++     *       have iorp->gfn == INVALID_GFN, so arch_ioreq_server_unmap_pages()
++     *       is a no-op and ioreq_server_free_pages() handles the teardown.
+      */
+     arch_ioreq_server_unmap_pages(s);
+     ioreq_server_free_pages(s);
+@@ -819,12 +821,12 @@ int ioreq_server_get_frame(struct domain *d, ioservid_t id,
          if ( !HANDLE_BUFIOREQ(s) )
              goto out;
  
-         *mfn = page_to_mfn(vmap_to_page(s->bufioreq.va));
+-        *mfn = page_to_mfn(s->bufioreq.page);
++        *mfn = page_to_mfn(vmap_to_page(s->bufioreq.va));
          rc = 0;
--        break;
-+    }
-+    else if ( idx >= XENMEM_resource_ioreq_server_frame_ioreq(0) &&
-+              idx < XENMEM_resource_ioreq_server_frame_ioreq(nr_ioreq_pages(d)) )
-+    {
-+        unsigned int page_idx = idx - XENMEM_resource_ioreq_server_frame_ioreq(0);
-+        if ( page_idx >= vmap_size(s->ioreq.va) )
-+        {
-+            rc = -EINVAL;
-+            goto out;
-+        }
+         break;
  
--    case XENMEM_resource_ioreq_server_frame_ioreq(0):
--        *mfn = page_to_mfn(vmap_to_page(s->ioreq.va));
-+        *mfn = vmap_to_mfn(s->ioreq.va + page_idx * PAGE_SIZE);
+     case XENMEM_resource_ioreq_server_frame_ioreq(0):
+-        *mfn = page_to_mfn(s->ioreq.page);
++        *mfn = page_to_mfn(vmap_to_page(s->ioreq.va));
          rc = 0;
--        break;
--
--    default:
--        rc = -EINVAL;
--        break;
-     }
-+    else
-+        rc = -EINVAL;
+         break;
  
-  out:
-     rspin_unlock(&d->ioreq_server.lock);
 diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index d63fa4729e..c12480472d 100644
+index e86f0869fa..d63fa4729e 100644
 --- a/xen/include/xen/ioreq.h
 +++ b/xen/include/xen/ioreq.h
-@@ -19,6 +19,7 @@
- #ifndef __XEN_IOREQ_H__
- #define __XEN_IOREQ_H__
+@@ -25,7 +25,6 @@
  
-+#include <xen/macros.h>
- #include <xen/sched.h>
+ struct ioreq_page {
+     gfn_t gfn;
+-    struct page_info *page;
+     void *va;
+ };
  
- #include <public/hvm/dm_op.h>
-@@ -82,6 +83,11 @@ static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
- #define HANDLE_BUFIOREQ(s) \
-     ((s)->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF)
- 
-+static inline unsigned int nr_ioreq_pages(const struct domain *d)
-+{
-+    return DIV_ROUND_UP(d->max_vcpus, PAGE_SIZE / sizeof(ioreq_t));
-+}
-+
- bool domain_has_ioreq_server(const struct domain *d);
- 
- bool vcpu_ioreq_pending(struct vcpu *v);
 -- 
 2.51.0
 
