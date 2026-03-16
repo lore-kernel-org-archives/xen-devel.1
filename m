@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E82F46456
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2026 12:06:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1255561.1550481 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F486F506DA
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2026 14:34:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1255590.1550501 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w26i3-0008EN-Ul; Mon, 16 Mar 2026 12:06:11 +0000
+	id 1w291L-0000dX-D5; Mon, 16 Mar 2026 14:34:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1255561.1550481; Mon, 16 Mar 2026 12:06:11 +0000
+Received: by outflank-mailman (output) from mailman id 1255590.1550501; Mon, 16 Mar 2026 14:34:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w26i3-0008EF-S0; Mon, 16 Mar 2026 12:06:11 +0000
-Received: by outflank-mailman (input) for mailman id 1255561;
- Mon, 16 Mar 2026 12:06:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w291L-0000cn-6f; Mon, 16 Mar 2026 14:34:15 +0000
+Received: by outflank-mailman (input) for mailman id 1255590;
+ Mon, 16 Mar 2026 14:34:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=49j5=BQ=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1w26i2-0008E9-HW
- for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 12:06:10 +0000
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [2a00:1450:4864:20::333])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 847d9a08-2130-11f1-b164-2bf370ae4941;
- Mon, 16 Mar 2026 13:06:09 +0100 (CET)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4855dbfc129so20868975e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 16 Mar 2026 05:06:09 -0700 (PDT)
-Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
- [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4855640d915sm91540365e9.4.2026.03.16.05.06.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 05:06:07 -0700 (PDT)
+ <SRS0=tk1S=BQ=bounce.vates.tech=bounce-md_30504962.69b814e1.v1-b18f5b09c0604483807fcecab1c85ec0@srs-se1.protection.inumbo.net>)
+ id 1w291J-0000Vg-KF
+ for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 14:34:13 +0000
+Received: from mail134-15.atl141.mandrillapp.com
+ (mail134-15.atl141.mandrillapp.com [198.2.134.15])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 320fa13e-2145-11f1-9ccf-f158ae23cfc8;
+ Mon, 16 Mar 2026 15:34:10 +0100 (CET)
+Received: from pmta10.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail134-15.atl141.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fZHf95VtQzPm0YCX
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Mar 2026 14:34:09 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ b18f5b09c0604483807fcecab1c85ec0; Mon, 16 Mar 2026 14:34:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,123 +45,290 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 847d9a08-2130-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1773662768; x=1774267568; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0rWbpJ2be8sUH/WQvbkRx6j6nRNRuf+/YSo/lRPoWO4=;
-        b=lq0avIugbPVTFIkF54Y8exXm1EQFWMPdWkRBOVxCATkeOVdoNjBaWEWxEqYi2YaI/B
-         cmVtEv6C8LwrfWjGWul1Fk/+InCyWYIVooKASfVAwS6otLfECAynm6MNJYCzvOpHa+Yz
-         NzAEOgrFdF/YrTP1WQEqL6yzEgjPaKnwSV/RM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773662768; x=1774267568;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0rWbpJ2be8sUH/WQvbkRx6j6nRNRuf+/YSo/lRPoWO4=;
-        b=VtUHVkFNgtA/EbLs5R/6l45f1DanANFGSoXuoIJS1JJyIfrOUHReCzGtyYq+7F1xJX
-         UyHEoGFUutjGrteRBAIR/uyMZkF9atdNCX0A80E4wN2Ma8LgSf9iI8rx6SAf5I4yczKR
-         JIm6DEuwVx7/Yiwm1+iFdbn1w73dTNweexWfQ4FRJ5h0GYEf5qFyWoYo332Ir4OVKW9l
-         WF1uepKm7fZhh2mGxijhAlSq5joAPva5ShrG8bQoKvR+r9xjYzWBLJJEH/G3bspHILkG
-         cLJIvDa3o1uRGv0YwYuAls1pCafj9xrfGMF18tPOD5rJq6TFq1ZJq92H6U+Fz3WuA2f9
-         ZFBQ==
-X-Gm-Message-State: AOJu0YyuxhWaTaJacfFPxA4wReOeR+6iQUp5isVys68UsT2wSBI152pY
-	kaZWTFM4oJFjLytfuchcD6V+ODrxFNSKjkVpYkrbtGwHVW/gVUM+D+0qVUWNuRTuSs6LxdeN9ez
-	hopuz
-X-Gm-Gg: ATEYQzzlFjobwkQ2g9Nu0j/ExijxHkRhmkV7vJcLnsf0sYghItrhiw2aNllu2hLjE9D
-	KPcTcxEmYIftyW0RqsgjhyV8aVS0OtwjSov9Edej7A2zKjXSQIo5bosXYAFnTxDTw+yxJLG52/E
-	qOKA3uaRSGwNrbw2dG5EQg1/uYURJ0Q6ofZDOtdiiCGABJGIfnA+qwtUvzMUoNxmm7wXQybe3RM
-	fWUYNg+eKqPaGpweC22aUxk+DQjLPZX3uICWYBrUcwbwvmJoCcxqvdJdJ8ew8v99QfpJAHbkm/4
-	nDJVbjnQqAZd4n9EJMgl378R1KsflkWxeGxsgeY4GXRhZTOjOy5m17i80lcpGb5kFYGqs/DbcES
-	ZZEbRVrox7GZGaO1dUSHsWB/qzEMXRNCXTV5/s77f+W+8VHHVUjSf+ef4mPzlZK/kghm5Ue9uRz
-	o7jMQj/+//ZqCEYSs21oTssuoxNITbuHMNODa0LAOQ6uPZlhupuC+tkUAY5FZ/1SdUcVal4+Sms
-	iMrq6JaUQ==
-X-Received: by 2002:a05:600c:4fc6:b0:485:3fc8:de9c with SMTP id 5b1f17b1804b1-485566d520cmr199054845e9.12.1773662768233;
-        Mon, 16 Mar 2026 05:06:08 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH] x86/ucode: Exclude Zen6 from entrysign mitigations
-Date: Mon, 16 Mar 2026 12:06:05 +0000
-Message-Id: <20260316120605.661823-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+X-Inumbo-ID: 320fa13e-2145-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1773671649; x=1773941649;
+	bh=bDNF/5Vy1gLBiqNe5tEBVim+dhZH1Kyasg4KXkbniuU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=d5IYVnuHCRnlfMvmbZky4YbZZuKnDgnvazIDZ4sIdyQT6K2wboMwAZff+qr3K7aZ9
+	 9bTPaZXev7OTEuDZEUaWhpqTM7+z7g+pVOlr3qozZPRElGmrwk8tGrExoqoN1MNTco
+	 OlB1iOrmKOter941EtWXISFN3oO3KQ7mR+u9f2ctrUZ0fzyIgGYANbz7ya+V9Nd0wo
+	 pTwZSM3kftcsPjh06sJeAb0enVbxCh8UQr35W5VsBQQksXYzQwW/3H+gKG13DEHhxC
+	 c5p8ojOiK+QgwDa1Y8eli7zi0nc0xZ7zjrAoDzmqbfyMErsrTt13DodYoGT3/Mc2w6
+	 52TojOR+qWtfA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1773671649; x=1773932149; i=teddy.astie@vates.tech;
+	bh=bDNF/5Vy1gLBiqNe5tEBVim+dhZH1Kyasg4KXkbniuU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=do2f2rtkaADnvAEOiX4boBqG242GOrtchJY8SAc405NCVciTimiI9RocLTnl08owY
+	 chOTC82nvm/LyJTeuI4RZrn+2t5FDvSNeNlMOoYz/OAc+4/v5I+DhcC7hzEzoZqaHg
+	 FvGhVwuFLxDigkWnow4E60gcXX6IHBPJ9At4ptM2qOSabzWB7q0YuGEohHcZFWC3PZ
+	 8EudNqxtDoU8aa6OJ7exQK4cibXpyUZpvAjh8YwQxWNcRqcgegRmJWm8qRMGRIeWOc
+	 gLCRXVWfo3E+JUSPbA0TTu8VI/UI+PodhbNo4x3XfiGLd9REwUMP7AQ85m3SJQEVMH
+	 94JCi8mTeHR4Q==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v9=203/3]=20xenpm:=20Add=20get-core-temp=20subcommand?=
+X-Mailer: git-send-email 2.53.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1773671648961
+To: xen-devel@lists.xenproject.org
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Anthony PERARD" <anthony.perard@vates.tech>, "Jan Beulich" <jbeulich@suse.com>
+Message-Id: <97e34958e8070ee8771157e5ece78e7db1308174.1773671343.git.teddy.astie@vates.tech>
+In-Reply-To: <d7d0fa8ca02d59d34bd3be7ecfacd5c0376fafc0.1773671343.git.teddy.astie@vates.tech>
+References: <d7d0fa8ca02d59d34bd3be7ecfacd5c0376fafc0.1773671343.git.teddy.astie@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.b18f5b09c0604483807fcecab1c85ec0?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260316:md
+Date: Mon, 16 Mar 2026 14:34:09 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Family 0x1a covers both Zen5 and Zen6, but the latter is not believed to be
-vulnerable to entrysign.
+get-core-temp allows querying the per-core CPU temperature and
+per-package one on processors that supports Digital Temperature Sensors
+(most Intel processors; as usual Dom0 drivers cannot work due to
+misalignment between Dom0 vCPU and pCPUs).
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
 
-This does want backporting, but it depends on 8e4775d118c327 which collects
-leaf 7a1 early enough to be used in this way.  So, it should hold off for the
-moment until the FRED backports are finalised.
----
- xen/arch/x86/cpu/microcode/amd.c | 6 ++++--
- xen/arch/x86/include/asm/amd.h   | 4 ++++
- 2 files changed, 8 insertions(+), 2 deletions(-)
+v4: https://lore.kernel.org/xen-devel/cover.1766158766.git.teddy.astie@vate=
+s.tech/
+v5: Removed trailing whitespace.
+v6: Report errors through errno and use strerror() to display them
+v7:
+ - Rename get-intel-temp with get-dts-temp
+ - handle properly errno
+ - make process return a error code if no data
+v8:
+ - update Changelog
+ - improve error handling
+ - rename core-dts-temp with get-core-temp
+v9:
+ - exit with EXIT_{SUCCESS,FAILURE} instead of errno
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 90f10ac8be37..2ba1fa825f2f 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -20,6 +20,7 @@
- #include <xen/mm.h> /* TODO: Fix asm/tlbflush.h breakage */
- #include <xen/sha2.h>
+ CHANGELOG.md       |   2 +
+ tools/misc/xenpm.c | 128 ++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 129 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index c191e504ab..69cce1c874 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](https://keepach=
+angelog.com/en/1.0.0/)
+      mitigate (by rate-limiting) the system wide impact of an HVM guest
+      misusing atomic instructions.
+    - Support for CPIO microcode in discrete multiboot modules.
++   - Introduce get-core-temp to xenpm to query CPU temperatures on Intel
++     platforms.
  
-+#include <asm/amd.h>
- #include <asm/msr.h>
+ ### Removed
+  - On x86:
+diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
+index e4902d2e82..37f484b362 100644
+--- a/tools/misc/xenpm.c
++++ b/tools/misc/xenpm.c
+@@ -32,11 +32,14 @@
  
- #include "private.h"
-@@ -576,7 +577,7 @@ void __init ucode_probe_amd(struct microcode_ops *ops)
-      */
-     if ( IS_ENABLED(CONFIG_MICROCODE_LOADING) &&
-          boot_cpu_data.family >= 0x17 && boot_cpu_data.family <= 0x1a &&
--         !opt_digest_check )
-+         !is_zen6_uarch() && !opt_digest_check )
-     {
-         printk(XENLOG_WARNING
-                "Microcode patch additional digest checks disabled\n");
-@@ -618,7 +619,8 @@ void __init amd_check_entrysign(void)
-     if ( !IS_ENABLED(CONFIG_MICROCODE_LOADING)  ||
-          boot_cpu_data.vendor != X86_VENDOR_AMD ||
-          boot_cpu_data.family < 0x17            ||
--         boot_cpu_data.family > 0x1a )
-+         boot_cpu_data.family > 0x1a            ||
-+         is_zen6_uarch() )
-         return;
+ #include <xen-tools/common-macros.h>
  
-     /*
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index 4036dd549835..d21df0741a32 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -59,6 +59,8 @@
-  * For Zen3 and Zen4 (Fam19h) the heuristic is the presence of AutoIBRS, as
-  * it's Zen4-specific.
-  *
-+ * For Zen5 and Zen6 (Fam1ah) the heuristic is the presence of FRED.
-+ *
-  * The caller is required to perform the appropriate vendor/family checks
-  * first.
-  */
-@@ -66,6 +68,8 @@
- #define is_zen2_uarch()   boot_cpu_has(X86_FEATURE_AMD_STIBP)
- #define is_zen3_uarch() (!boot_cpu_has(X86_FEATURE_AUTO_IBRS))
- #define is_zen4_uarch()   boot_cpu_has(X86_FEATURE_AUTO_IBRS)
-+#define is_zen5_uarch() (!boot_cpu_has(X86_FEATURE_FRED))
-+#define is_zen6_uarch()   boot_cpu_has(X86_FEATURE_FRED)
++#include <xen/asm/msr-index.h>
++
+ #define MAX_PKG_RESIDENCIES 12
+ #define MAX_CORE_RESIDENCIES 8
  
- struct cpuinfo_x86;
- int cpu_has_amd_erratum(const struct cpuinfo_x86 *cpu, int osvw_id, ...);
+ static xc_interface *xc_handle;
+ static unsigned int max_cpu_nr;
++static xc_physinfo_t physinfo;
+ 
+ /* help message */
+ void show_help(void)
+@@ -93,6 +96,7 @@ void show_help(void)
+             "                                           units default to \=
+"us\" if unspecified.\n"
+             "                                           truncates un-repre=
+sentable values.\n"
+             "                                           0 lets the hardwar=
+e decide.\n"
++            " get-core-temp          [cpuid]      get CPU temperature for =
+<cpuid> or all (Intel only)\n"
+             " start [seconds]                     start collect Cx/Px stat=
+istics,\n"
+             "                                     output after CTRL-C or S=
+IGINT or several seconds.\n"
+             " enable-turbo-mode     [cpuid]       enable Turbo Mode for pr=
+ocessors that support it.\n"
+@@ -1354,6 +1358,128 @@ void enable_turbo_mode(int argc, char *argv[])
+                 errno, strerror(errno));
+ }
+ 
++static int fetch_dts_temp(xc_interface *xch, uint32_t cpu, bool package, i=
+nt *temp)
++{
++    xc_resource_entry_t entries[] =3D {
++        { .idx =3D package ? MSR_PACKAGE_THERM_STATUS : MSR_IA32_THERM_STA=
+TUS },
++        { .idx =3D MSR_TEMPERATURE_TARGET },
++    };
++    struct xc_resource_op ops =3D {
++        .cpu =3D cpu,
++        .entries =3D entries,
++        .nr_entries =3D ARRAY_SIZE(entries),
++    };
++    int tjmax;
++
++    int ret =3D xc_resource_op(xch, 1, &ops);
++
++    switch ( ret )
++    {
++    case 0:
++        /* This CPU isn't online or can't query this MSR */
++        errno =3D ENODATA;
++        return -1;
++
++    case 1:
++    {
++        /*
++         * The CPU doesn't support MSR_TEMPERATURE_TARGET, we assume it's =
+100
++         * which is correct aside a few selected Atom CPUs. Check Linux
++         * kernel's coretemp.c for more information.
++         */
++        static bool has_reported_once =3D false;
++
++        if ( !has_reported_once )
++        {
++            fprintf(stderr, "MSR_TEMPERATURE_TARGET is not supported, assu=
+me "
++                            "tjmax =3D 100, readings may be incorrect.\n")=
+;
++            has_reported_once =3D true;
++        }
++
++        tjmax =3D 100;
++        break;
++    }
++
++    case 2:
++        tjmax =3D (entries[1].val >> 16) & 0xff;
++        break;
++
++    default:
++        if ( ret > 0 )
++        {
++            fprintf(stderr, "Got unexpected xc_resource_op return value: %=
+d", ret);
++            errno =3D EINVAL;
++        }
++        return -1;
++    }
++
++    *temp =3D tjmax - ((entries[0].val >> 16) & 0xff);
++    return 0;
++}
++
++static void get_core_temp(int argc, char *argv[])
++{
++    int temp =3D -1, cpu =3D -1;
++    unsigned int socket;
++    bool has_data =3D false;
++
++    if ( argc > 0 )
++        parse_cpuid(argv[0], &cpu);
++
++    if ( cpu !=3D -1 )
++    {
++        if ( !fetch_dts_temp(xc_handle, cpu, false, &temp) )
++            printf("CPU%d: %d=C2=B0C\n", cpu, temp);
++        else
++        {
++            fprintf(stderr, "Unable to fetch temperature (%d - %s)\n",
++                    errno, strerror(errno));
++            printf("No data\n");
++            exit(EXIT_FAILURE);
++        }
++        return;
++    }
++
++    /* Per socket measurement */
++    for ( socket =3D 0, cpu =3D 0; cpu < max_cpu_nr;
++          socket++, cpu +=3D physinfo.cores_per_socket * physinfo.threads_=
+per_core )
++    {
++        if ( fetch_dts_temp(xc_handle, cpu, true, &temp) )
++        {
++            fprintf(stderr,
++                    "[Package%u] Unable to fetch temperature (%d - %s)\n",
++                    cpu, errno, strerror(errno));
++            continue;
++        }
++
++        has_data =3D true;
++        printf("Package%u: %d=C2=B0C\n", socket, temp);
++    }
++
++    if ( has_data )
++        /* Avoid inserting a trailing line if we have nothing */
++        printf("\n");
++
++    for ( cpu =3D 0; cpu < max_cpu_nr; cpu +=3D physinfo.threads_per_core =
+)
++    {
++        if ( fetch_dts_temp(xc_handle, cpu, false, &temp) )
++        {
++            fprintf(stderr, "[CPU%d] Unable to fetch temperature (%d - %s)=
+\n",
++                    cpu, errno, strerror(errno));
++            continue;
++        }
++
++        has_data =3D true;
++        printf("CPU%d: %d=C2=B0C\n", cpu, temp);
++    }
++
++    if ( !has_data )
++    {
++        printf("No data\n");
++        exit(EXIT_FAILURE);
++    }
++}
++
+ void disable_turbo_mode(int argc, char *argv[])
+ {
+     int cpuid =3D -1;
+@@ -1618,12 +1744,12 @@ struct {
+     { "set-max-cstate", set_max_cstate_func},
+     { "enable-turbo-mode", enable_turbo_mode },
+     { "disable-turbo-mode", disable_turbo_mode },
++    { "get-core-temp", get_core_temp },
+ };
+ 
+ int main(int argc, char *argv[])
+ {
+     int i, ret =3D 0;
+-    xc_physinfo_t physinfo;
+     int nr_matches =3D 0;
+     int matches_main_options[ARRAY_SIZE(main_options)];
+ 
 -- 
-2.39.5
+2.53.0
+
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
 
