@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45331F506E1
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2026 14:34:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1255588.1550489 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB47F53D69
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2026 15:06:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1255619.1550516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w291K-0000W3-Sb; Mon, 16 Mar 2026 14:34:14 +0000
+	id 1w29WQ-0005p2-PU; Mon, 16 Mar 2026 15:06:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1255588.1550489; Mon, 16 Mar 2026 14:34:14 +0000
+Received: by outflank-mailman (output) from mailman id 1255619.1550516; Mon, 16 Mar 2026 15:06:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w291K-0000Vw-Pd; Mon, 16 Mar 2026 14:34:14 +0000
-Received: by outflank-mailman (input) for mailman id 1255588;
- Mon, 16 Mar 2026 14:34:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w29WQ-0005ov-Mj; Mon, 16 Mar 2026 15:06:22 +0000
+Received: by outflank-mailman (input) for mailman id 1255619;
+ Mon, 16 Mar 2026 15:06:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PwZs=BQ=bounce.vates.tech=bounce-md_30504962.69b814df.v1-d94525953523425bb436d36834fbbc98@srs-se1.protection.inumbo.net>)
- id 1w291I-0000Vg-PO
- for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 14:34:13 +0000
+ <SRS0=4Dji=BQ=bounce.vates.tech=bounce-md_30504962.69b81c69.v1-271f0506bb074d7e981029c0320f1b4c@srs-se1.protection.inumbo.net>)
+ id 1w29WP-0005op-JU
+ for xen-devel@lists.xenproject.org; Mon, 16 Mar 2026 15:06:21 +0000
 Received: from mail136-12.atl41.mandrillapp.com
  (mail136-12.atl41.mandrillapp.com [198.2.136.12])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 30e3f0b1-2145-11f1-9ccf-f158ae23cfc8;
- Mon, 16 Mar 2026 15:34:08 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id af9449ee-2149-11f1-b164-2bf370ae4941;
+ Mon, 16 Mar 2026 16:06:19 +0100 (CET)
 Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
  by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fZHf74kpvz5QkLb6
- for <xen-devel@lists.xenproject.org>; Mon, 16 Mar 2026 14:34:07 +0000 (GMT)
+ 4fZJMF6nMBz5QkW2Q
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Mar 2026 15:06:17 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- d94525953523425bb436d36834fbbc98; Mon, 16 Mar 2026 14:34:07 +0000
+ 271f0506bb074d7e981029c0320f1b4c; Mon, 16 Mar 2026 15:06:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,223 +45,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30e3f0b1-2145-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: af9449ee-2149-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773671647; x=1773941647;
-	bh=gwdv71sUMq3fhmfuQTOxzGGx0ecKOIqyx3qkAuUr2jA=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	s=mte1; t=1773673577; x=1773943577;
+	bh=8V88MMOnEVAEXfQpk4zoBHdDg3/63NOPBcKopCaDPG8=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=IAS7NtCtYXyfYBfpwT1at8dsKTN4cUES1U3STkCLnEKIwNvQnCCXLpJwZplYZAlRO
-	 VNcimgWVyRT2jYxGum08Y0vPtEvsHGvyu5srbYUNhOe66BFiwtILfgioMf55AzReEt
-	 l/Nd5ifp42bxJOI0l2j14PhwmtXoFxPagVfs3InW3Jn+LdjUNnuko9Wu73G9umYfnA
-	 hR39YpFsHumGC4cWzduaE1OAE3eMhPgC6R4KUzBQcwA+H8go7CArAMcKkUS+MiURJR
-	 OMj2szJpPT3lL3G69SxP3tNzZfj6FrugFHHZG2RYeWtIjorCL9VUFn9LyzttkoUIux
-	 ITvI79PIQZCOA==
+	b=Ss9wE/uFayCf0VXV4qhWKOGLli6dnPlxSLd0bm9a8BqloDhinkBw82LwAl670TE6h
+	 93fj2Yjswz7c2H5yk9rpg/31K2W3OLhLK3aRhr+WaAndxoMVGysubDyhTEh6tiAGm9
+	 /+GOJujszo4ZPzsW8EaxZOlycTAp8muHS/zuibhJpHVF63VNuQ1kcCrEomECcz7UBM
+	 P/VvUCJ8rqIc7eXpCg/Rhyn7XS6Dq1XGrl8p7avxSZ42H1SEfrxuaf1qN1a4sEtAfn
+	 HuPiI5Y7lU3lz6tMiR+49IlgujAGkQlCis0nXNgslC9bLRkm4uX1hRfFBR3ipvD5bU
+	 DBkZtvuFYfYlQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773671647; x=1773932147; i=teddy.astie@vates.tech;
-	bh=gwdv71sUMq3fhmfuQTOxzGGx0ecKOIqyx3qkAuUr2jA=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	t=1773673577; x=1773934077; i=julian.vetter@vates.tech;
+	bh=8V88MMOnEVAEXfQpk4zoBHdDg3/63NOPBcKopCaDPG8=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=kcbdoPkmnO4cdwhDD42+tFfVaG0WjCJSpdSBa8RCTB0o8vM0ti9vxwE2q9xbWIMRV
-	 OnjPlDtbpZOe3DTBOac3wr30OLfzPf2RDSvLPR/hcNIZ0cvgN52NJyy7b2TsV+vPtU
-	 uegkz09QOpoWwMrfvvQstNFXgvvKsAJzriXkWMM27xW29MZnzmQixlk2pTNARN9EGS
-	 nzbED8094uXxisCM6eZj+VHr9/pLTe8S+5H3d7hnnpMIhQ1ZlRpaHpZN4FTzkrAYc+
-	 T+i1Cy05f0IMTN8HVWu0GXJI+phTZXHY/VgQ/20MJBJvMNLwKlYNAkTZJNzc0+yKIE
-	 wVKXQa8BRr5gQ==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v9=202/3]=20xenpm:=20Use=20EXIT=5F{SUCCESS,FAILURE}=20instead=20of=20errno=20as=20=20exit=20codes?=
-X-Mailer: git-send-email 2.53.0
+	b=oljvqHrqklepyFZKcCRdQs+Zg/GlyKivxYRg9OH3Kyu7eLAdZYaeNne8BK1fDVC5H
+	 aEEp4BAn8uum7Wot4ub3PPH7kc/8oql9EA/BL+/rTAQMe82GV58Nkl8Y+Qu7ayJlHU
+	 Rxsq4qXBm7+ytSiJNytiCtLIXJYigR5XJC6ke/TYZSn+o2zr0Ea5dJVXK14M9c8CGP
+	 RZjDV9iqYeT2BnOQPXmxWYKeSpkltnab2eIdMi0pEFNtU+7jK5CktMIgxD2u8g9VRP
+	 O1Qk0NSWY1BjlCfl6/pS4ntqlu9i1zP2Sfq+TVxjiFu08fbIbFgd2WnPby5wqkCaQw
+	 PJm72qNntr6Bg==
+From: "Julian Vetter" <julian.vetter@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=20v3=203/7]=20x86/hvm:=20Support=20extended=20destination=20IDs=20in=20virtual=20MSI=20and=20IO-APIC?=
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773671646918
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Jan Beulich" <jbeulich@suse.com>
-Message-Id: <cafb3c93e212a20e314517418dc2ab9f316708b1.1773671343.git.teddy.astie@vates.tech>
-In-Reply-To: <d7d0fa8ca02d59d34bd3be7ecfacd5c0376fafc0.1773671343.git.teddy.astie@vates.tech>
-References: <d7d0fa8ca02d59d34bd3be7ecfacd5c0376fafc0.1773671343.git.teddy.astie@vates.tech>
+X-Bm-Transport-Timestamp: 1773673576518
+Message-Id: <635f1e21-f1e0-451a-9374-c91b33784894@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>, "Julien Grall" <julien@xen.org>, xen-devel@lists.xenproject.org
+References: <20260309123055.880050-1-julian.vetter@vates.tech> <20260309123055.880050-3-julian.vetter@vates.tech> <1e371e65-ca79-42a0-93f9-804f73084033@suse.com> <9f40fbec-008f-4a50-bfb2-27c35d88f2a2@suse.com>
+In-Reply-To: <9f40fbec-008f-4a50-bfb2-27c35d88f2a2@suse.com>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.d94525953523425bb436d36834fbbc98?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.271f0506bb074d7e981029c0320f1b4c?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260316:md
-Date: Mon, 16 Mar 2026 14:34:07 +0000
+Date: Mon, 16 Mar 2026 15:06:17 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-errno is not unified accross platforms, which makes error codes actually
-platform specific. C standard defines EXIT_SUCCESS and EXIT_FAILURE
-(respectively 0 and 1) as standard errors codes, even though it only reports
-whether it failed or not.
+On 3/12/26 12:15 PM, Jan Beulich wrote:
+> On 11.03.2026 16:27, Jan Beulich wrote:
+>> On 09.03.2026 13:31, Julian Vetter wrote:
+>>> @@ -618,6 +620,21 @@ static int cf_check ioapic_check(const struct domain *d, hvm_domain_context_t *h
+>>>                e->fields.reserved[0] || e->fields.reserved[1] ||
+>>>                e->fields.reserved[2] || e->fields.reserved2 )
+>>>               return -EINVAL;
+>>> +
+>>> +        /*
+>>> +         * An RTE in the saved state has ext_dest_id bits set. Check that
+>>> +         * the destination Xen has extended destination ID support enabled,
+>>> +         * otherwise interrupt routing to APIC IDs > 255 would be broken
+>>> +         * after restore.
+>>> +         */
+>>> +        if ( e->fields.ext_dest_id && !d->arch.hvm.ext_dest_id_enabled )
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
-v9:
- - Introduced
+Thank you for your feedback Jan! Yes, right the 'ext_dest_id_enabled' 
+must be defined before it can be checked. I have rearranged this in my 
+patch set.
 
- tools/misc/xenpm.c | 36 +++++++++++++++++++-----------------
- 1 file changed, 19 insertions(+), 17 deletions(-)
+>>
+>> This won't build, as the ext_dest_id_enabled field appears only in patch 6.
+>> But yes, that looks to be the opt-in mechanism I mentioned above.
+> 
+> Actually no, how could it be. That's for the DM to invoke.
 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index 682d092479..e4902d2e82 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -112,7 +112,7 @@ static void parse_cpuid(const char *arg, int *cpuid)
-         if ( strcasecmp(arg, "all") )
-         {
-             fprintf(stderr, "Invalid CPU identifier: '%s'\n", arg);
--            exit(EINVAL);
-+            exit(EXIT_FAILURE);
-         }
-         *cpuid = -1;
-     }
-@@ -124,7 +124,7 @@ static void parse_cpuid_and_int(int argc, char *argv[],
-     if ( argc == 0 )
-     {
-          fprintf(stderr, "Missing %s\n", what);
--         exit(EINVAL);
-+         exit(EXIT_FAILURE);
-     }
- 
-     if ( argc > 1 )
-@@ -133,7 +133,7 @@ static void parse_cpuid_and_int(int argc, char *argv[],
-     if ( sscanf(argv[argc > 1], "%d", val) != 1 )
-     {
-         fprintf(stderr, "Invalid %s '%s'\n", what, argv[argc > 1]);
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- }
- 
-@@ -662,7 +662,7 @@ static void signal_int_handler(int signo)
- out:
-     free(cputopo);
-     xc_interface_close(xc_handle);
--    exit(0);
-+    exit(EXIT_SUCCESS);
- }
- 
- void start_gather_func(int argc, char *argv[])
-@@ -1154,7 +1154,7 @@ void scaling_governor_func(int argc, char *argv[])
-     else
-     {
-         fprintf(stderr, "Missing argument(s)\n");
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- 
-     if ( cpuid < 0 )
-@@ -1215,7 +1215,7 @@ void cpu_topology_func(int argc, char *argv[])
- out:
-     free(cputopo);
-     if ( rc )
--        exit(rc);
-+        exit(EXIT_FAILURE);
- }
- 
- void set_sched_smt_func(int argc, char *argv[])
-@@ -1224,7 +1224,7 @@ void set_sched_smt_func(int argc, char *argv[])
- 
-     if ( argc != 1 ) {
-         fprintf(stderr, "Missing or invalid argument(s)\n");
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- 
-     if ( !strcasecmp(argv[0], "disable") )
-@@ -1234,7 +1234,7 @@ void set_sched_smt_func(int argc, char *argv[])
-     else
-     {
-         fprintf(stderr, "Invalid argument: %s\n", argv[0]);
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- 
-     if ( !xc_set_sched_opt_smt(xc_handle, value) )
-@@ -1254,12 +1254,12 @@ void set_vcpu_migration_delay_func(int argc, char *argv[])
- 
-     if ( argc != 1 || (value = atoi(argv[0])) < 0 ) {
-         fprintf(stderr, "Missing or invalid argument(s)\n");
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- 
-     if ( xc_sched_credit_params_get(xc_handle, 0, &sparam) < 0 ) {
-         fprintf(stderr, "getting Credit scheduler parameters failed\n");
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
-     sparam.vcpu_migr_delay_us = value;
- 
-@@ -1304,7 +1304,7 @@ void set_max_cstate_func(int argc, char *argv[])
-            : (subval = XEN_SYSCTL_CX_UNLIMITED, strcmp(argv[1], "unlimited")))) )
-     {
-         fprintf(stderr, "Missing, excess, or invalid argument(s)\n");
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
-     }
- 
-     snprintf(buf, ARRAY_SIZE(buf), "C%d", value);
-@@ -1575,7 +1575,7 @@ static void cppc_set_func(int argc, char *argv[])
-     uint32_t set_params;
- 
-     if ( parse_cppc_opts(&set_cppc, &cpuid, argc, argv) )
--        exit(EINVAL);
-+        exit(EXIT_FAILURE);
- 
-     if ( cpuid != -1 )
-     {
-@@ -1637,7 +1637,7 @@ int main(int argc, char *argv[])
-     if ( !xc_handle )
-     {
-         fprintf(stderr, "failed to get the handler\n");
--        return EIO;
-+        return EXIT_FAILURE;
-     }
- 
-     ret = xc_physinfo(xc_handle, &physinfo);
-@@ -1647,7 +1647,7 @@ int main(int argc, char *argv[])
-         fprintf(stderr, "failed to get processor information (%d - %s)\n",
-                 ret, strerror(ret));
-         xc_interface_close(xc_handle);
--        return ret;
-+        return EXIT_FAILURE;
-     }
-     max_cpu_nr = physinfo.max_cpu_id + 1;
- 
-@@ -1662,7 +1662,8 @@ int main(int argc, char *argv[])
-         for ( i = 0; i < nr_matches; i++ )
-             fprintf(stderr, " %s", main_options[matches_main_options[i]].name);
-         fprintf(stderr, "\n");
--        ret = EINVAL;
-+        xc_interface_close(xc_handle);
-+        return EXIT_FAILURE;
-     }
-     else if ( nr_matches == 1 )
-         /* dispatch to the corresponding function handler */
-@@ -1670,10 +1671,11 @@ int main(int argc, char *argv[])
-     else
-     {
-         show_help();
--        ret = EINVAL;
-+        xc_interface_close(xc_handle);
-+        return EXIT_FAILURE;
-     }
- 
-     xc_interface_close(xc_handle);
--    return ret;
-+    return EXIT_SUCCESS;
- }
- 
--- 
-2.53.0
+But this comment here I'm not sure I fully understand. You mean that 
+checking 'if ( e->fields.ext_dest_id && !d->arch.hvm.ext_dest_id_enabled 
+)' is not enough? This check only verifies that if the target domain 
+doesn't support ext_dest_id_enabled, no RTE in the source domain is 
+allowed to have a ext_dest_id set. But now we also have to check that if 
+the source domain has ext_dest_id_enabled, the target also have to 
+announce it, right? So,
+
+if ( s->ext_dest_id_enabled && !d->arch.hvm.ext_dest_id_enabled )
+{
+     //ERROR
+}
+
+Is this what you meant?
+
+Julian
+
+> 
+> Jan
 
 
 
 --
-Teddy Astie | Vates XCP-ng Developer
+Julian Vetter | Vates Hypervisor & Kernel Developer
 
 XCP-ng & Xen Orchestra - Vates solutions
 
