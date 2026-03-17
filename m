@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2286EFD706D
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Mar 2026 10:22:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1255894.1550670 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94EE4FD874D
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Mar 2026 12:05:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1255915.1550738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w2RZB-0004vO-MX; Tue, 17 Mar 2026 10:22:25 +0000
+	id 1w2TAp-0001JX-9l; Tue, 17 Mar 2026 12:05:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1255894.1550670; Tue, 17 Mar 2026 10:22:25 +0000
+Received: by outflank-mailman (output) from mailman id 1255915.1550738; Tue, 17 Mar 2026 12:05:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w2RZB-0004vH-Jm; Tue, 17 Mar 2026 10:22:25 +0000
-Received: by outflank-mailman (input) for mailman id 1255894;
- Tue, 17 Mar 2026 10:22:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w2TAp-0001JK-6C; Tue, 17 Mar 2026 12:05:23 +0000
+Received: by outflank-mailman (input) for mailman id 1255915;
+ Tue, 17 Mar 2026 12:05:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rXng=BR=bounce.vates.tech=bounce-md_30504962.69b92b5c.v1-02b8f13e50e84a3b8a35fff1d9082418@srs-se1.protection.inumbo.net>)
- id 1w2RZA-0004vB-GT
- for xen-devel@lists.xenproject.org; Tue, 17 Mar 2026 10:22:24 +0000
-Received: from mail136-12.atl41.mandrillapp.com
- (mail136-12.atl41.mandrillapp.com [198.2.136.12])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2f12a997-21eb-11f1-b164-2bf370ae4941;
- Tue, 17 Mar 2026 11:22:22 +0100 (CET)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-12.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4fZp1853Kmz5QkLq0
- for <xen-devel@lists.xenproject.org>; Tue, 17 Mar 2026 10:22:20 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 02b8f13e50e84a3b8a35fff1d9082418; Tue, 17 Mar 2026 10:22:20 +0000
+ <SRS0=pa/0=BR=xenbits.xen.org=andrewcoop@srs-se1.protection.inumbo.net>)
+ id 1w2TAn-0008QI-1U
+ for xen-devel@lists.xen.org; Tue, 17 Mar 2026 12:05:21 +0000
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8d8f2755-21f9-11f1-9ccf-f158ae23cfc8;
+ Tue, 17 Mar 2026 13:05:13 +0100 (CET)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1w2TAa-00D7eo-2J;
+ Tue, 17 Mar 2026 12:05:08 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1w2TAa-00DbYI-1T;
+ Tue, 17 Mar 2026 12:05:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,123 +45,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f12a997-21eb-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773742940; x=1774012940;
-	bh=SB8tee7BVwumhyB+qrZNJF8OpTB0mvIkzO0/xMyjFX4=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=XypLha3UJXljlUm3pYPBdTokSnEI5jZTHCvocl9ntTCjUlLW6+fRhqufXlDSFGZ5F
-	 9THjqrIu8PFUZ85EGt0/sggJh+iVazOO/nfMdT1k2syDtKWhYlfUj2rpVrjDmp6RgA
-	 AyMI1311UCZU0wsZUOVH3GkXTxFI+BVGGqlrUv0IlTwfDx6lUF7WI5cPBs23hX5ogs
-	 tzuOPBWE7pzRi8ln59F/jxjzDA2UR7bg5yjif6o33KTEqNW+JXrTMHMi3dhmk7VwrY
-	 DZlTArXhnmUCbzsukDUEfy4RKUWJMZieZy4ObW4RAYWB78FR+fZm+/iI8rpNUgGC/V
-	 +coCciOMkehiw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773742940; x=1774003440; i=julian.vetter@vates.tech;
-	bh=SB8tee7BVwumhyB+qrZNJF8OpTB0mvIkzO0/xMyjFX4=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=minwlhCbxB8zHxzKqsjQhu83U4EpTfy8i+W4n2pfR9/BcLyUegx8+PkBDytBzUaw+
-	 mQ7j6I5VSpHd5L5QUh7Gwk7xUQwOsdS7vja0OXqxSuvVcKkriYUrmCfIObzwQxfPjl
-	 A/bCOW6r1uI1ECf6div4mOfIGfcddrAHgCDH/MfCPtw8VMlEJbWGQD7bJ6Tb2CuPI1
-	 abhO0hWFEzrA2QqQJlYyOx6odEvEfu5J8LERl43rCcVyNegaX6ZswHvrbRgXFiBQeM
-	 DYkzmVdmcrfo5zKxoy3YmTcp/Pp8MAqUMdTl8/rWgZTB2MLcBly0hQntH9VJECneYo
-	 0iDv76pGWoOpQ==
-From: "Julian Vetter" <julian.vetter@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20v3=206/7]=20x86/dmop:=20Add=20XEN=5FDMOP=5Fenable=5Fext=5Fdest=5Fid=20DM=20op?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773742939233
-Message-Id: <1124b3b3-6593-4ef0-ad9a-28d21e06bbfd@vates.tech>
-To: "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "Juergen Gross" <jgross@suse.com>, "Julien Grall" <julien@xen.org>
-References: <20260309123055.880050-1-julian.vetter@vates.tech> <20260309123055.880050-6-julian.vetter@vates.tech> <aa7KcQQoc3-HwlcE@macbook.local>
-In-Reply-To: <aa7KcQQoc3-HwlcE@macbook.local>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.02b8f13e50e84a3b8a35fff1d9082418?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260317:md
-Date: Tue, 17 Mar 2026 10:22:20 +0000
+X-Inumbo-ID: 8d8f2755-21f9-11f1-9ccf-f158ae23cfc8
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 481 v2 (CVE-2026-23555) - Xenstored DoS by
+ unprivileged domain
+Message-Id: <E1w2TAa-00DbYI-1T@xenbits.xenproject.org>
+Date: Tue, 17 Mar 2026 12:05:08 +0000
 
-On 3/9/26 14:29, Roger Pau Monn=C3=A9 wrote:
-> On Mon, Mar 09, 2026 at 12:31:03PM +0000, Julian Vetter wrote:
->> Xen cannot simply advertise XEN_HVM_CPUID_EXT_DEST_ID to the guest
->> without knowing that the device model will handle extended destination
->> IDs correctly for passthrough MSIs. A device model that still uses
->> XEN_DOMCTL_bind_pt_irq would pass only the low 8 bits of the destination
->> ID, misrouting interrupts to vCPUs with APIC IDs greater than 255. So,
->> add a DM op XEN_DMOP_enable_ext_dest_id that the device model can call
->> during domain setup (before vCPUs are started) to signal that it will
->> use XEN_DMOP_bind_pt_msi_irq for all passthrough MSI bindings. When
->> called, Xen sets ext_dest_id_enabled in struct hvm_domain, so it's
->> visible to the guest via CPUID.
-> 
-> Have you considered whether you could re-use the padding in
-> XEN_DMOP_create_ioreq_server to signal whether the device model
-> supports Extended ID parsing?
-> 
-> Also, you might want some negotiation between multiple ioreq servers
-> on the same domain.  IOW: is multiple ioreq servers are registered
-> ahead of the domain having finished creation you could level whether
-> extended ID should be announced.  For ioreqs that are registered after
-> the domain have started you need to enforce the currently set Extended
-> ID support.  If the domain is running, and Extended ID is advertised
-> you must prevent registering any new ioreq that doesn't support
-> Extended ID.
-> 
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Thank you Roger for your feedback! It's very appreciated! This was a 
-good idea. I have implemented this now. I have used one of the reserved 
-bytes and use it as a flag field.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-But I have a remaining question/concern, which maybe you can clarify.
-If server A (e.g., a secondary emulator) registers WITH ext_dest_id 
-before the domain starts, hvm_ext_dest_id_enabled() returns true and the 
-guest will be advertised XEN_HVM_CPUID_EXT_DEST_ID. If QEMU's primary 
-ioreq server then registers WITHOUT the flag and goes on to use 
-XEN_DOMCTL_bind_pt_irq, pass-through MSIs will be misrouted (or rejected 
-if I then refuse calls to XEN_DOMCTL_bind_pt_irq for that domain). My 
-implementation allows this combination before 'd->creation_finished'.
+            Xen Security Advisory CVE-2026-23555 / XSA-481
+                               version 2
 
-I have added a check in ioreq_server_dm_op() for the 
-XEN_DMOP_create_ioreq_server case for the "runtime" case as you 
-suggested. If one of the existing ioreq servers announces it, and a new 
-server wants to join, that doesn't have this flag set, it will be 
-rejected with -EINVAL:
+                 Xenstored DoS by unprivileged domain
 
-if ( d->creation_finished && hvm_ext_dest_id_enabled(d) &&
-      !(data->flags & XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID) )
-     break;
+UPDATES IN VERSION 2
+====================
 
-But what happens to the first case I described, how can I reasonably 
-negotiate between different ioreq servers or determine who is the "main" 
-server? In practice, usually if QEMU ("the only" server that matters for 
-pass-through) opted in, the feature is enabled. If it didn't, no other 
-server would have opted in either, no? The only "sort of" issue would be 
-if someone wrote a secondary emulator that sets ext_dest_id to basically 
-"lock out" a QEMU that doesn't support the new XEN_DMs?
+Public release.
 
-Thank you!
+ISSUE DESCRIPTION
+=================
 
-Julian
+Any guest issuing a Xenstore command accessing a node using the
+(illegal) node path "/local/domain/", will crash xenstored due to a
+clobbered error indicator in xenstored when verifying the node path.
 
-> Thanks, Roger.
-> 
+Note that the crash is forced via a failing assert() statement in
+xenstored. In case xenstored is being built with NDEBUG #defined,
+an unprivileged guest trying to access the node path "/local/domain/"
+will result in it no longer being serviced by xenstored, other guests
+(including dom0) will still be serviced, but xenstored will use up
+all cpu time it can get.
 
+IMPACT
+======
 
+Any unprivileged domain can cause xenstored to crash, causing a
+DoS (denial of service) for any Xenstore action. This will result
+in an inability to perform further domain administration on the host.
 
---
-Julian Vetter | Vates Hypervisor & Kernel Developer
+In case xenstored has been built with NDEBUG defined, an unprivileged
+domain can force xenstored to be 100% busy, but without harming
+xenstored functionality for other guests otherwise.
 
-XCP-ng & Xen Orchestra - Vates solutions
+VULNERABLE SYSTEMS
+==================
 
-web: https://vates.tech
+All Xen systems from Xen 4.18 onwards are vulnerable. Systems up to
+Xen 4.17 are not vulnerable.
 
+Systems using the C variant of xenstored are vulnerable. Systems using
+xenstore-stubdom or the OCaml variant of Xenstore (oxenstored) are not
+vulnerable.
 
+MITIGATION
+==========
+
+There is no known mitigation available.
+
+CREDITS
+=======
+
+This issue was discovered by Marek Marczykowski-Góreckiof
+Invisible Things Lab.
+
+RESOLUTION
+==========
+
+Applying the appropriate attached patch resolves this issue.
+
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
+
+xsa481.patch         xen-unstable - Xen 4.18.x
+
+$ sha256sum xsa481*
+148147e4545a4670578c0f24aa136f67bc203c7b18ec980b8cc80cfbb04ace68  xsa481.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patch described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+Switching xenstored with oxenstored or xenstore-stubdom is not permitted
+as a mitigation, as this is a guest visible change of the configuration.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmm5Q1sMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZKmYIAKOrz2ZWyIQyEJCuci+pavN6zG8/qgBhoRhzB2gJ
+piwk6CDr0gB2LseEePPLbl+yoGmNxNVtXjgCNyWVbCA2HaCnPsENOOkZkUhwffN/
+fXVMJHC43YdiaknKTKc8QoRn0poiPLIBQE2eXpIMVo9J7FoPkqQZYM1DS6B5x/q3
+FWyKjHWwnGRv2pzRAm6mx22bu6wNpzYsfD2qCUe4d08njC3+iFLn1az+9XwF+Yw6
+nS51gB2KjzRoGNhfepwzHC9R2cysYQdySFbAbskcGBTTD2FI9D+k6fBbXc7Tuj4T
+v+JqgQMkmQitJepE875VWxfFAR2PTRcBbL2ev6tQvA1x5mQ=
+=Bv72
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa481.patch"
+Content-Disposition: attachment; filename="xsa481.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSAwY2ZmMTZmMGE5OTdmMWIwODcxYjYyMWExZDYwNTA2NTI1MzBlNWQ5
+IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6IFRodSwgMTIgRmViIDIwMjYgMDg6
+Mjk6MzggKzAxMDAKU3ViamVjdDogW1BBVENIXSB0b29scy94ZW5zdG9yZWQ6
+IGZpeCBjYW5vbmljYWxpemUoKSBlcnJvciB0ZXN0aW5nCk1JTUUtVmVyc2lv
+bjogMS4wCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD1VVEYt
+OApDb250ZW50LVRyYW5zZmVyLUVuY29kaW5nOiA4Yml0CgpUaGUgc2V0dGlu
+ZyBvZiBlcnJubyBpbiBjYW5vbmljYWxpemUoKSBpcyByYXRoZXIgZnJhZ2ls
+ZSBhbmQgc2VlbXMgdG8KYmUgZXZlbiB3cm9uZyBpbiBvbmUgY29ybmVyIGNh
+c2U6IHdoZW4gdGhlIGludmFsaWQgcGF0aCAiL2xvY2FsL2RvbWFpbi8iCmlz
+IHBhc3NlZCwgc3NjYW5mKCkgd2lsbCBzZXQgZXJybm8gdG8gMCwgcmVzdWx0
+aW5nIGluIGNhbm9uaWNhbGl6ZSgpIHRvCnJldHVybiBOVUxMIHdpdGggZXJy
+bm8gYmVpbmcgMC4gVGhpcyBjYW4gcmVzdWx0IGluIHRyaWdnZXJpbmcgdGhl
+CmFzc2VydChjb25uLT5pbiA9PSBOVUxMKSBpbiBjb25zaWRlcl9tZXNzYWdl
+KCkuCgpEb24ndCBhc3N1bWUgdGhlIGluaXRpYWwgc2V0dGluZyBvZiBlcnJu
+byB0byAiRUlOVkFMIiB3aWxsIHN0YXkgdmFsaWQKaW4gYWxsIGNhc2VzIGFu
+ZCBzZXQgaXQgdG8gRUlOVkFMIG9ubHkgd2hlbiByZXR1cm5pbmcgTlVMTCBk
+dWUgdG8gYW4KaW52YWxpZCBwYXRoLgoKVGhpcyBpcyBYU0EtNDgxL0NWRS0y
+MDI2LTIzNTU1CgpSZXBvcnRlZC1ieTogTWFyZWsgTWFyY3p5a293c2tpLUfD
+s3JlY2tpIDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgpTaWdu
+ZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+ClJl
+dmlld2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbkB4ZW4ub3JnPgotLS0K
+IHRvb2xzL3hlbnN0b3JlZC9jb3JlLmMgfCA1ICsrKy0tCiAxIGZpbGUgY2hh
+bmdlZCwgMyBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAt
+LWdpdCBhL3Rvb2xzL3hlbnN0b3JlZC9jb3JlLmMgYi90b29scy94ZW5zdG9y
+ZWQvY29yZS5jCmluZGV4IDY0YzQ3OGE4MDEuLjJlODI2Zjk5ZWIgMTAwNjQ0
+Ci0tLSBhL3Rvb2xzL3hlbnN0b3JlZC9jb3JlLmMKKysrIGIvdG9vbHMveGVu
+c3RvcmVkL2NvcmUuYwpAQCAtMTI0MCwxMSArMTI0MCwxMCBAQCBjb25zdCBj
+aGFyICpjYW5vbmljYWxpemUoc3RydWN0IGNvbm5lY3Rpb24gKmNvbm4sIGNv
+bnN0IHZvaWQgKmN0eCwKIAkgKiAtIGlsbGVnYWwgY2hhcmFjdGVyIGluIG5v
+ZGUKIAkgKiAtIHN0YXJ0cyB3aXRoICdAJyBidXQgbm8gc3BlY2lhbCBub2Rl
+IGFsbG93ZWQKIAkgKi8KLQllcnJubyA9IEVJTlZBTDsKIAlpZiAoIW5vZGUg
+fHwKIAkgICAgIXZhbGlkX2NoYXJzKG5vZGUpIHx8CiAJICAgIChub2RlWzBd
+ID09ICdAJyAmJiAhYWxsb3dfc3BlY2lhbCkpCi0JCXJldHVybiBOVUxMOwor
+CQlnb3RvIGludmFsOwogCiAJaWYgKG5vZGVbMF0gIT0gJy8nICYmIG5vZGVb
+MF0gIT0gJ0AnKSB7CiAJCW5hbWUgPSB0YWxsb2NfYXNwcmludGYoY3R4LCAi
+JXMvJXMiLCBnZXRfaW1wbGljaXRfcGF0aChjb25uKSwKQEAgLTEyNzIsNiAr
+MTI3MSw4IEBAIGNvbnN0IGNoYXIgKmNhbm9uaWNhbGl6ZShzdHJ1Y3QgY29u
+bmVjdGlvbiAqY29ubiwgY29uc3Qgdm9pZCAqY3R4LAogCWlmIChuYW1lICE9
+IG5vZGUpCiAJCXRhbGxvY19mcmVlKG5hbWUpOwogCisgaW52YWw6CisJZXJy
+bm8gPSBFSU5WQUw7CiAJcmV0dXJuIE5VTEw7CiB9CiAKLS0gCjIuNTMuMAoK
+
+--=separator--
 
