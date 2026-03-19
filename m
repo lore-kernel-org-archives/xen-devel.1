@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8BE8108E1FA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B68107529F
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 12:26:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1257013.1551474 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1257012.1551470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3CRq-00087K-Gu; Thu, 19 Mar 2026 12:25:58 +0000
+	id 1w3CRq-00084J-9T; Thu, 19 Mar 2026 12:25:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1257013.1551474; Thu, 19 Mar 2026 12:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 1257012.1551470; Thu, 19 Mar 2026 12:25:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3CRq-00086P-By; Thu, 19 Mar 2026 12:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 1257013;
- Thu, 19 Mar 2026 12:25:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w3CRq-00084B-4u; Thu, 19 Mar 2026 12:25:58 +0000
+Received: by outflank-mailman (input) for mailman id 1257012;
+ Thu, 19 Mar 2026 12:25:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Yv1Q=BT=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
- id 1w3CRp-0007qy-4g
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 12:25:57 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c5a0426f-238e-11f1-9ccf-f158ae23cfc8;
- Thu, 19 Mar 2026 13:25:53 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso19531495e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 19 Mar 2026 05:25:53 -0700 (PDT)
+ id 1w3CRo-0007dl-I6
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 12:25:56 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c673dd97-238e-11f1-b164-2bf370ae4941;
+ Thu, 19 Mar 2026 13:25:54 +0100 (CET)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4852afd42ceso6482595e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Mar 2026 05:25:54 -0700 (PDT)
 Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
  [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-486f8c350aesm60831395e9.4.2026.03.19.05.25.51
+ 5b1f17b1804b1-486f8c350aesm60831395e9.4.2026.03.19.05.25.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 05:25:51 -0700 (PDT)
+ Thu, 19 Mar 2026 05:25:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,65 +47,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5a0426f-238e-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: c673dd97-238e-11f1-b164-2bf370ae4941
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1773923152; x=1774527952; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Rf11YSHnRxDOMSevtCdzvsJWQN4vjp+wOdoo6LaGDtg=;
-        b=MZFVv5xZT7CvEY/2h26tHPlHiui4hnXAxrUWZPYERBlQC6RKxU1dsZyPZhbbFPEmAz
-         lMzZKlCwfxeXojIXfVlaCjVM8R64rwNNr7BSY93cGAnpSiQQCd3yI6G++VGvM6wvOPtk
-         G70Z67WEnl6ubdFTW5xIdvHAPrtmjQNkNGjXs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773923152; x=1774527952;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1773923154; x=1774527954; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Rf11YSHnRxDOMSevtCdzvsJWQN4vjp+wOdoo6LaGDtg=;
-        b=dShER4IWE+yypL+/VFH393M50lbo7V/kuhKvIN6DQ4wTeuu3lqptFS2nfV8O/l3RHu
-         otDLdqeYvDkuz5gU7EdTAzDfE56zAjmnKrXIA3kCi1GcKtRaHUTcmjUpyP69WtHAb+R/
-         5BkdKE08huVynIUwB0BQFqII9rDrIhfihPE3xKW5QXwVOl9abzyJnj6QqhB8scztMFdu
-         kAu19axiCCQQGpBxrL1TLIPUof9rufNJSPbY3IcyHYybvKBIKW7qEbwF51wLR7n03OlQ
-         rd2oUvNDnfYtFwlQ4jit6GkKYLEmXBUA0HN2H8grUyoUauKHDy6uAQgwMBnUVac9AAwc
-         927A==
-X-Gm-Message-State: AOJu0YzTqZ2SqO1JhfhNpFRngRcYv0wgywYNTg8AMUiQqfID7C2HPTD6
-	j3MS/Y+Dc7lrUfpwSTx1pdlddBqj9vgCnLgHc4VOvpbm5JujS9vu6hTp6whihtT4BEOuZAJ8kpM
-	e0dvt
-X-Gm-Gg: ATEYQzyVrhN+g9aqBvfK+/cnCF0sfsy3CXWUIQRN6dXpSrLhbI/PF7Ez72C4jnFJkE6
-	GXcDbTr6z1rCoI36iGhICEvJTvemzwZXR+9TEfO2Rhy5gQwy2QhHdNWC7ppGx+7DvxiLy9GaIpH
-	3BMlHi1noRxZP/BhWBEd6cC5teBrV37CUM62Cel45Db93OFlxSsc9pfbRXB3ZNzCNWXfkNMV7rq
-	SJ3iPRukWzMIyTBcVy++J0+eT7MSPoaDNwLjkXZU71SrumQFWK0Hdle6wU/cXSZNk/vG4L917jT
-	n9ZT5epxt+g3sGjCPNKYjHYIB8XhOMwyHk6ROdqV06if+usrarJPubx1HKV5L8Jtj7+Psb7ZZBy
-	vrYneGn81QiJoYW/IkX9KhU3XxwHLQ8HsFRBTqxP/XE8l6H9sHugSOdDAqLLexRyTaSWvDRW65t
-	Sf3AuzIy5ry+Aop3V2aCxtNAXY4kCeWfGGVXzTJSSKYoTN/FOpe09eo0+vcWdJkdN5v4gzalo=
-X-Received: by 2002:a05:600c:3f10:b0:485:3c2e:60d5 with SMTP id 5b1f17b1804b1-486f8b0b482mr56466255e9.2.1773923151735;
-        Thu, 19 Mar 2026 05:25:51 -0700 (PDT)
+        bh=sNvCSrOBffuTtzSMMrot8orJxzRk8BMjuPIbTAHvYz0=;
+        b=RNlQOr+bemU/6niK4DzhTF2Od9gVL/MBhqUOzn9suiBZguQt2vtiVoFwiKR4/2xtbC
+         A9VpZ4XFwBsgFWDM3VVCqztOJMs7T3LjMinREbNG8jCyanwu4sMEUa4/4kXa2BpTjIsM
+         73Zyb3VBSt+4q0DCyyReAo7IUDb6JS+rOnHfI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773923154; x=1774527954;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=sNvCSrOBffuTtzSMMrot8orJxzRk8BMjuPIbTAHvYz0=;
+        b=ZYcwk3kieH2lg2UFwiMEaZRVY30TO2m3TbPIgmW/jDik0g3PtyFaDC7sgVMbR59tI4
+         yK8bRCNYG678g2ieGeqy9Wk8ih9ClxpoyaJdwD60kTvWseaireafMaRg9vaoivXOtNox
+         TbV/uEUF9YiOEkRqNv9iYjbQz+Jef/UT5+fN9nOdKjX7YY+ZYXk5Ko4hYZwOiVW9RirC
+         vThzSGK1Gaxf+7HXFsVkc9pMI8+Z7ckOswtf6nIRklJeZH8l6zYfr4/+wq2fO9TpBJ42
+         dQDKr7D7zEHHKk/c3m6lv58QhXnM9fW9+CUwDLDRO8aQmC8RPUKY2E5vSg47AP7wbkL1
+         oX9w==
+X-Gm-Message-State: AOJu0YxNyqpbRK5ajzhPjDcBCqlEcoM1ff+muyFXL+i1sZ4qw8/bVd9g
+	gs1jO5JT6jA262MKcwAEK25kzXJd4DpoAzDyuSsxDoMzjZswIDAYlPM7FQ52ZJdx06J2yrGCiaI
+	3Ey7u
+X-Gm-Gg: ATEYQzwGb2JlxZUqeKPYarVO3QR7lKAVuHFX+17f8Rc040d/gXrHR4sG9LCAJ629cI+
+	ht1VEL+XwSTSFmr4wOXUTTqAPIxzaJJChmemI4DP+IcqHeizxRYa24LPotjwn7ksD+4tilbPkKh
+	AK2jnMJhQq7TTlP+nBTxNkTWRj0F0lTzEzPnnJtx5TLNA3Ewd7yLk2OY42YQBPXJzdZfZV0fDp5
+	GlsBCfJ2/tl3zUonNe0eC65wGwPmqYrCbIC0FBjFX0C3iEd0CvtfbQ9ZEaW1pz4OkgcJNF2f00y
+	N/zeXvssYt517ZI2MFryK/Bd4fOJtTY4H/aAqBmSBmYo4Rh1qjaSvrm2vf+WzRmVPtjLlJQJD5y
+	RsU+jW51SGAZ3FWZnQVswz4eJyRP8e5BZ0MQ3RdboFytXzH51LvcksPsTgh6EDb2UvaLAGKVMrx
+	C7ujO41TgLHLAaEk74xg/X6IRnyf5/fB0atZ/tvsiX8fRqEzlJ/j3Tjdg8l+IoPbtOoIj019A=
+X-Received: by 2002:a05:600c:4ed4:b0:485:3c2d:d02b with SMTP id 5b1f17b1804b1-486f4444050mr121170235e9.22.1773923153070;
+        Thu, 19 Mar 2026 05:25:53 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/4] x86/kexec: Improvements for FRED
-Date: Thu, 19 Mar 2026 12:25:45 +0000
-Message-Id: <20260319122549.922724-1-andrew.cooper3@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 2/4] x86/kexec: Fix and expands comments for kexec_reloc()
+Date: Thu, 19 Mar 2026 12:25:47 +0000
+Message-Id: <20260319122549.922724-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260319122549.922724-1-andrew.cooper3@citrix.com>
+References: <20260319122549.922724-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Kexec with FRED happens to already function.
+The order of shutdown is delicate.  Explain things a little better.
 
-Looking at the logic, several unsafe actions are occuring.  Fix the worst of
-them.
+Fix two comments about leaving Long Mode.
 
-Andrew Cooper (4):
-  x86/kexec: Stop hooking NMIs with trap_nop()
-  x86/kexec: Fix and expands comments for kexec_reloc()
-  x86/kexec: Invalidate the IDT earlier in kexec_reloc()
-  x86/kexec: Disable FRED earlier in kexec_reloc()
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/x86_64/kexec_reloc.S | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
 
- xen/arch/x86/crash.c              | 20 +++++-----
- xen/arch/x86/x86_64/kexec_reloc.S | 62 ++++++++++++++++++++++---------
- 2 files changed, 55 insertions(+), 27 deletions(-)
-
+diff --git a/xen/arch/x86/x86_64/kexec_reloc.S b/xen/arch/x86/x86_64/kexec_reloc.S
+index b52d31a654e0..d0951ea1e1c4 100644
+--- a/xen/arch/x86/x86_64/kexec_reloc.S
++++ b/xen/arch/x86/x86_64/kexec_reloc.S
+@@ -27,6 +27,14 @@
+         .section .text.kexec, "ax", @progbits
+         .code64
+ 
++        /*
++         * kexec_reloc() is entered in it's natural position within Xen.
++         *
++         * A copy of .text.kexec is identity mapped at %rdi within the
++         * pagetables in %rsi.  Xen's .text is mapped into %rsi at it's high
++         * alias allowing to pivot, but most other things including the stacks
++         * are not mapped.
++         */
+ FUNC(kexec_reloc, PAGE_SIZE)
+         /* %rdi - code page maddr */
+         /* %rsi - page table maddr */
+@@ -36,10 +44,17 @@ FUNC(kexec_reloc, PAGE_SIZE)
+ 
+         movq    %rcx, %rbp
+ 
+-        /* Setup stack. */
++        /*
++         * Move to the identity mapped stack.
++         *
++         * Note this mapping doesn't exist until the pagetable switch.
++         */
+         leaq    (.Lreloc_stack_base - kexec_reloc)(%rdi), %rsp
+ 
+-        /* Load reloc page table. */
++        /*
++         * Move to the relocation pagetables.  Xen's .text is mapped allowing
++         * the pivot, but very little else is.
++         */
+         movq    %rsi, %cr3
+ 
+         /* Jump to identity mapped code. */
+@@ -153,12 +168,12 @@ FUNC_LOCAL(compatibility_mode)
+         movl    %eax, %gs
+         movl    %eax, %ss
+ 
+-        /* Disable paging and therefore leave 64 bit mode. */
++        /* Disable paging and therefore leave long mode. */
+         movl    %cr0, %eax
+         andl    $~X86_CR0_PG, %eax
+         movl    %eax, %cr0
+ 
+-        /* Disable long mode */
++        /* Clear EFER.LME */
+         movl    $MSR_EFER, %ecx
+         rdmsr
+         andl    $~EFER_LME, %eax
 -- 
 2.39.5
 
