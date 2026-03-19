@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCEE108E1F6
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 11:41:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1256991.1551441 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67EA0108E1FE
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 12:26:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1257011.1551460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3BkZ-0001LW-Ek; Thu, 19 Mar 2026 11:41:15 +0000
+	id 1w3CRp-0007r6-0R; Thu, 19 Mar 2026 12:25:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1256991.1551441; Thu, 19 Mar 2026 11:41:15 +0000
+Received: by outflank-mailman (output) from mailman id 1257011.1551460; Thu, 19 Mar 2026 12:25:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3BkZ-0001LP-BP; Thu, 19 Mar 2026 11:41:15 +0000
-Received: by outflank-mailman (input) for mailman id 1256991;
- Thu, 19 Mar 2026 11:41:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w3CRo-0007qz-Th; Thu, 19 Mar 2026 12:25:56 +0000
+Received: by outflank-mailman (input) for mailman id 1257011;
+ Thu, 19 Mar 2026 12:25:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wl8P=BT=citrix.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1w3BkX-0001LH-F0
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 11:41:13 +0000
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [2a01:111:f403:c112::7])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 84777f81-2388-11f1-9ccf-f158ae23cfc8;
- Thu, 19 Mar 2026 12:41:08 +0100 (CET)
-Received: from DS0PR03MB8272.namprd03.prod.outlook.com (2603:10b6:8:28f::23)
- by SA0PR03MB5546.namprd03.prod.outlook.com (2603:10b6:806:bb::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Thu, 19 Mar
- 2026 11:41:03 +0000
-Received: from DS0PR03MB8272.namprd03.prod.outlook.com
- ([fe80::2e63:9a7a:3701:7654]) by DS0PR03MB8272.namprd03.prod.outlook.com
- ([fe80::2e63:9a7a:3701:7654%5]) with mapi id 15.20.9723.019; Thu, 19 Mar 2026
- 11:41:03 +0000
+ <SRS0=Yv1Q=BT=citrix.com=andrew.cooper3@srs-se1.protection.inumbo.net>)
+ id 1w3CRn-0007dl-I3
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 12:25:55 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c65eee1b-238e-11f1-b164-2bf370ae4941;
+ Thu, 19 Mar 2026 13:25:54 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-486fd5360d4so2517205e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Mar 2026 05:25:54 -0700 (PDT)
+Received: from localhost.localdomain (host-92-22-18-152.as13285.net.
+ [92.22.18.152]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-486f8c350aesm60831395e9.4.2026.03.19.05.25.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Mar 2026 05:25:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,153 +47,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84777f81-2388-11f1-9ccf-f158ae23cfc8
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xMqH1yFbebxPmKeZyCQ5nEcH49E+Y5tm2dCHXlXNud4E6gyyGE1oaaJ0bgkLyC4uTMo2j2Bk1qF1ximu6CZsLkqCbB3w7f+O8gSY+2jXX8+xXKJehVUgNM6HhLGJ6BozxJmw/DCqXKTcBp+OddJMMuYwXpjWahjUaMpZ+UcrCH8fKz95dYwKym50SqSNOXODMsmUZmA2/pghWoKQlYNcEM24y6nQD6Ix86VOvyfAhphGeQUQgmIVwmXZwSzelpbgsTPK7hmZAyNtLEWACjAhjw/Kr4RTvQWmHoIli+aftkmop280vGB4ZsFoERb25GLCHnVtWtAayAaTk/c+/4pOfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ad/E3aQRMTWonx4vddCbikVgvVJo0XPTtSd/NZmXUx8=;
- b=dlg9xRVth9tAlfshSj9Suchbs+W9SK/sZgoGeCz2cfouxX++RAbLRG67Bbt52e9XXJDwkabuf3OW1sS+WGT3a2FTc9R0IboYJjyV+S+mCsjKpMmifjIHY2xDzeJGnC2D76D2KNgDP7vETmYkpix1BvDWsKfH4+ijAd0pnpacgJvsSek2pIQulmOmhnKfE6/PDJHTg5WggrZGz6XzGVAlxo8WDQeKOTMOdmhaUjiwwTA3+0pzknTa2fOXMlKCIjAYllEfq89WMiZjBqnPKRgEctjYApHiwnvXdvcSaWWncS/TvfaC4oMK23nSWr4HieUhV7w8LqEyyO0fgm3wBRBGFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ad/E3aQRMTWonx4vddCbikVgvVJo0XPTtSd/NZmXUx8=;
- b=wrbMU+NplCw+7ultf5UUxB9ItmGpcgmj/6o2lihPSA9O76C+/iH2Sc+949BrkPdzdbCeKLE2nYHPtvwrlCEWBH2/767II06sWFQE7MIFqEgZJ5MlHAfoZAnX4xagZ8REoCHk0D4Ye4YFzxowBLpXCmKD+btD8nGElatMuypS2SI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+X-Inumbo-ID: c65eee1b-238e-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1773923154; x=1774527954; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DfzaREpgue5aOwMwONNRYs0JWFfpCu2AsihViVXhTqA=;
+        b=jQulXTJyAiUaesbJ/uWRJCcVcZYa0XFWr2GPcdU795QS1uWDctqVWOANEC9FppQubO
+         c95d4KXGMqEGbBy8FScP30iD/eo0Lf9iJnWICgJUpkzJxCpcuT1xKcNgBfKjEhczmCv3
+         MbwqenpmksJmr736mcQ65dt1UCuPv9/vD7LWI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773923154; x=1774527954;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=DfzaREpgue5aOwMwONNRYs0JWFfpCu2AsihViVXhTqA=;
+        b=CVQ5iQ6mX3pWXjT7j0lGE8EKwVGN9evUQYt+QHHwF8B4uRJQXp7Gkvu/HwZqmmBegU
+         13GpALh5ISMg+U2i9PQuuwtANVrhF66kuRvRWmR02Bmdb6uDSJLPvYix1OLa+F/Wd+p9
+         CqTXaeDbsirBrMicwAklwPB9ShzcsGSVWEn6ytrPsgUZdxI54RzsA0xRxasQqePOnmJ+
+         QECoRGtEF+4GSAY1Is0nxtegWMN3MirVhTGsiLep4IdxCXqv2sfYKoRG5lBE8YeSpXCi
+         lpKvulOxlAJvQFiSUGUvMXeDyADr78yvb6c5c9WnoYWTKRQXlb4CMt5r4H9S3wH2Nz6f
+         7e1w==
+X-Gm-Message-State: AOJu0YxdGigkZCYa9lb1a+3z4Ldq+mNQ9rYauoiVtyvIvsYDWG+p1fOP
+	9GojqEUe+2gctSVhqIum2kQqpiABHEQI/tcF4Qj8DvxBSI7gOqLoiZ2ljL+9IaFppXFoqYV2zY6
+	ajwse
+X-Gm-Gg: ATEYQzxOoZZmPz7Dq7nnY2zQk/hPTNsybZlQ3PXJ45NQFisVaeUiOBVUxYDsKcGVptM
+	55jhlyiAAUJw5Jqw3uFvK7DgRDb1PcZsLeNOm+NyrbfBLnAT53vjlX+EpVXq3mSzG6UNKp/enSp
+	2Os960FhCqZ+77J20OAbQQPOcOXIA8P/A1Dstd2oLExem1S+L+y62MxlYh9OZlMsM2v/d1ux2pA
+	EO4Kpul0kN3o9EXi6aZAhjIatpfRLSmUFxo8n4ynLzBQ5MMmJkFs3QnizTVKrP9O8L5NtMmwus0
+	B5rOMIHHrqfZR0s4araOYeSOYL9L/lTQHvBWbbrm+oM59l5GV7yA5RSo4Cw2Eb6F42UhGSxe6RS
+	9neXWBVB/nxeD7CDSfNdU9Py1l27OT15w9yDYmFxslkyzKfvKDl0o1T/nXNYekSHsC+UTBwbB1P
+	GzQpWgs4l8KyKOi1pW8+hf0NfuHrgdDU8Jm0eJj0NTbWOLOI0vxXsx0WCL9tlcUQKOqkIQmxw=
+X-Received: by 2002:a05:600c:8218:b0:47e:e57d:404 with SMTP id 5b1f17b1804b1-486f4475336mr131451655e9.16.1773923153601;
+        Thu, 19 Mar 2026 05:25:53 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2] x86/hap: Defer NPT P2M TLB flushes
-Date: Thu, 19 Mar 2026 11:40:41 +0000
-Message-ID: <20260319114041.1455593-1-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.53.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LNXP265CA0005.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:5e::17) To DS0PR03MB8272.namprd03.prod.outlook.com
- (2603:10b6:8:28f::23)
+Subject: [PATCH 3/4] x86/kexec: Invalidate the IDT earlier in kexec_reloc()
+Date: Thu, 19 Mar 2026 12:25:48 +0000
+Message-Id: <20260319122549.922724-4-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260319122549.922724-1-andrew.cooper3@citrix.com>
+References: <20260319122549.922724-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR03MB8272:EE_|SA0PR03MB5546:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f6d286d-ea64-4e3e-261d-08de85ac66be
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	tuTZmh3/WR25QyK/hdvRlTbRuFRa6crokzIIHxibGitjlMWrmfD8RZwMvn1ZW0zCcbQb3ymU0Isig57/z30s8AAWB/a1dd7bmxnvsq4UWvk06hZjIgUd0lnYDUepf8gLJGg9plj7Li0xeV9ymWfAvE69kKkMRFbbbNHPoTlMlnNdhEnawBPKMmTw/Iaykl39C7ifkcTJFbCJJHQhxYSmOw9gdJtdv+SJjUBsK062iL4AUOH7H+Vpl3p3STVBTWbYnZ2m125G2D8bCHzWvPZwLPXeT5z85iGC6J44uFGZQRpwC5CJ83pYE2uhb5ZkwaiegRc4RLKu5aN5R4r/y5MqFMGEujIdoHjJZaQyHNhWi7DYuhRM0hehMCTZuB+cRFyRdgnxUxvrMXkN8UXe/ipBpqB62LMw5l/5QQuTVl3Vb7Dww+2hROGB/Pz7Rch1b5dTvQhod5aKyHQf9gYHanfXRHA75jIQmWSpLx2e+TPJxCCEnHMaIlfoBOkvu0IDUdxyKwfP6S65k4voidmBN4mn9Ym7mp1lfe+oPPMmZhTCn4zpOAxk0bVGEjDYMyACeD0c2JlrJ0uQsRRNT7AnSn5rczb5OfZhixhySyvdq5TmDY78TmAaCMYkwB2VGcpC4s4tdhsjpNReZvB19I6hqaJj5HAPa2Dg3QYULkZJkzOtK78b39lYZhC5sajlUzsPwuq1S5Zjd8ow7mo1KJ/8EspHgZlMb8ks3GqNx/iMO41vfDQ=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR03MB8272.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(56012099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Vp0MkHSoiLx4ZxwqoXK55bL7MQqqsjPBnIBJ5J5uDSlvck9lt3xT2QJlRvM9?=
- =?us-ascii?Q?0reWQAdMI3JzEsoc/f4yQYmzj+bXTQuu57THw+4xsgUs514DpII9MC3CG6of?=
- =?us-ascii?Q?GI4phg7GjFoXLofOQm9GEJYX0pdbz2SkLbwsurRJu14y99JM5GhItUUDwhe5?=
- =?us-ascii?Q?E4Ph975A6PAHjdTgxasfAgaC2bfzcfnGrH1eH29urDpm/bdUAqJssrVmalTc?=
- =?us-ascii?Q?ZjUwif/PNUabJmFCeR/SGPLGFT8oPpJYgR4JPhxgC7trldUf5Fva9RnebC9T?=
- =?us-ascii?Q?eAXSJ1OxuegmXlzDAl/uOLjBxb+AQR3AeiQvl4E0o4JV0QEshKonArottt+3?=
- =?us-ascii?Q?jSeu6Zyot8VhtDZUVzP5szPVPCJI2SAhtmNE/PostkPJidI23MXOMRRXshOr?=
- =?us-ascii?Q?XBlsfRkD43U4s3iZqaPRI3EPvBQgavDLbH0fnugCnHY4mr9sTy8TsJOJGG2R?=
- =?us-ascii?Q?i9lF1DCg4jjQzpb1saQuiucMwmmNAPed0J4W2H0VboGUiBL0utfNJ+AksAuC?=
- =?us-ascii?Q?BSjTyvd7OrMIbsFXCOVyv82U0L2N8W5A+hM1fSl58sCUfOZlPHLcKof9nksa?=
- =?us-ascii?Q?+yD+8YcSABEaeNQAsXL3uqF0j++dW6rg4nY1Nltm7+ZGaHm0L44nvWmr706i?=
- =?us-ascii?Q?TdKUZgdmb6W7+XEUbatsev+TF0Hz3MjeYvar7uL5sgSTxm6RuWKgullbp09u?=
- =?us-ascii?Q?fytvvJkx/GyLtZMa17RdiXix+v624OhP1+nZx8gAyzYVjFRi6t13wIj6SYNi?=
- =?us-ascii?Q?L7EeWg+OkywfVJhIZeRbxf71igMBTjI/XuJvXfmxolD/ouFx0TAw0pmi/hGY?=
- =?us-ascii?Q?3SibfPJeNxGt2MyWqmtI9w/MnunBw7hR8ZvYH11NfVyBYvymQbVVzoA+R8Vf?=
- =?us-ascii?Q?TRWuxWqGJwO2dpUetw0LR+DBnBlrLhuB8ft99xHoOLq0KWOvEj/LXZqV7cTI?=
- =?us-ascii?Q?kaDaXB/MTyNEmlhH4k0mmkQLWIFUFgruzKSuxtgJ/vc7PQaaW52iZBeXqNfS?=
- =?us-ascii?Q?7ZR/GD1cagn65EUjiZeFeahg2CR7M5BOoSYep4W0nBZYdKijn4NQuArJZLd1?=
- =?us-ascii?Q?vl8ntAx7wwVIuB+mYIuwCoskCdncQ01bQsjhaak4zRelPcE+f2emdCTzcX3S?=
- =?us-ascii?Q?SVJAybQel78KUD77wkQG1feDmBlLiydNK1YcGAH2n22B2pwUl6pnVdcbUHMY?=
- =?us-ascii?Q?Tm/S9ku7pGWgXY+ZloW8WGLHbJx+vy48bJhoJf4XyxGdSfknYP10sRzj82C5?=
- =?us-ascii?Q?iCcbG0fsd39YSzAfMmzDyDSePD+BTJuZKiXpq6dCRv9DdLibtd90zFU4AjvE?=
- =?us-ascii?Q?p1IOUCe4Q0qfHCVt4GY6vil/gtjYRyIP+Ea9UBTgBdKVBzpCr+2rNvPh1fqZ?=
- =?us-ascii?Q?aGvcFd7UhSi1CYgX9rKOD2FkesiPmYVx2Z6H6JeKjA2kZwKmDneFisj5ne2P?=
- =?us-ascii?Q?MnhgN2w9XrU8dE+UCmK45HTT4aOfu9n7Tb33tczbe518SIBygskWg5Secs/n?=
- =?us-ascii?Q?sQsYKq4fgBQxHTiOH0sEkR0BzWCporMVlBQIIw6MUbDGAgQzaFxYbTgc8rIA?=
- =?us-ascii?Q?I80+9xNU8vFf5AFzFIgRJo4KUbTuUyrSV5QA/Wx++YdfuAoqnMiJ43mn7PML?=
- =?us-ascii?Q?gbmf9yyHl8RyCsOX1lpgnE48hVO+4vTRsdasjzXv01T38fnqO+ydKO1STVzI?=
- =?us-ascii?Q?nsd1liiY4j+JQTFVm6emaeenQukgo3v640vZ9/C2zm5uawWnYA2oIKHdE0Ph?=
- =?us-ascii?Q?HbOxbPO/N5hzyZNJJQOcveLVVGat3oA=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f6d286d-ea64-4e3e-261d-08de85ac66be
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR03MB8272.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 11:41:03.8454
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mNYfcgVR1dv8PiIUGHaC1IRRNCReYw9R1Z6X7I0HKnjQBuec+s1A7EOsx0VuSYieNCrBaww6tD18K66UVSdBhtyH06UeHihpQOyR7F6PCEQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5546
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Like the EPT code, defer TLB flushes for NPT to reduce the number of
-flushes and avoid holding the P2M lock while flushing. This can
-substantially improve performance in some scenarios.
+After switching stack, it is not safe to run any exception handlers, because
+attempts to access the cpu_info block are out-of-bounds and will generate wild
+accesses.
 
-The cases where the TLB needs to be flushed without deferring are
-already handled by the call to p2m_tlb_flush_sync() in p2m_free_ptp().
+Invalidating the IDT in the common path means there's no need to do so again
+in the 32bit path, so drop compat_mode_idt entirely.
 
-Suggested-by: Roger Pau Monne <roger.pau@citrix.com>
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-In v2:
-* Tweak commit message.
-* Call guest_flush_tlb_mask() if the assertion fails.
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/x86_64/kexec_reloc.S | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
 
- xen/arch/x86/mm/hap/hap.c | 22 ++++++++++++++++++++--
- 1 file changed, 20 insertions(+), 2 deletions(-)
-
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index a337752bf488..67137611d9db 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -814,15 +814,33 @@ static void cf_check hap_update_paging_modes(struct vcpu *v)
- static void cf_check
- hap_write_p2m_entry_post(struct p2m_domain *p2m, unsigned int oflags)
- {
--    struct domain *d = p2m->domain;
-+    if ( !(oflags & _PAGE_PRESENT) )
-+        return;
-+
-+    if ( unlikely(!p2m->defer_flush) )
-+    {
-+        struct domain *d = p2m->domain;
+diff --git a/xen/arch/x86/x86_64/kexec_reloc.S b/xen/arch/x86/x86_64/kexec_reloc.S
+index d0951ea1e1c4..7a6dd2cbe736 100644
+--- a/xen/arch/x86/x86_64/kexec_reloc.S
++++ b/xen/arch/x86/x86_64/kexec_reloc.S
+@@ -44,6 +44,16 @@ FUNC(kexec_reloc, PAGE_SIZE)
  
--    if ( oflags & _PAGE_PRESENT )
-+        ASSERT_UNREACHABLE();
-         guest_flush_tlb_mask(d, d->dirty_cpumask);
-+        return;
-+    }
-+
-+    p2m->need_flush = true;
-+}
-+
-+static void cf_check
-+hap_p2m_tlb_flush(struct p2m_domain *p2m)
-+{
-+    struct domain *d = p2m->domain;
-+
-+    guest_flush_tlb_mask(d, d->dirty_cpumask);
- }
+         movq    %rcx, %rbp
  
- void hap_p2m_init(struct p2m_domain *p2m)
- {
-     p2m->write_p2m_entry_post = hap_write_p2m_entry_post;
-+    p2m->tlb_flush = hap_p2m_tlb_flush;
- }
++        /*
++         * Invalidate the IDT.  After switching off Xen's stacks, the
++         * exception handlers are unsafe to use, because there's no way to
++         * perform arithmetic on the stack pointer to find the cpu_info block.
++         */
++        push    $0
++        pushw   $0
++        lidt    (%rsp)
++        add     $10, %rsp
++
+         /*
+          * Move to the identity mapped stack.
+          *
+@@ -94,8 +104,6 @@ FUNC(kexec_reloc, PAGE_SIZE)
+         jmp     *%rbp
  
- static unsigned long cf_check hap_gva_to_gfn_real_mode(
+ .L_call_32_bit:
+-        /* Setup IDT. */
+-        lidt    compat_mode_idt(%rip)
+ 
+         /* Load compat GDT. */
+         leaq    compat_mode_gdt(%rip), %rax
+@@ -202,11 +210,6 @@ DATA_LOCAL(compat_mode_gdt, 8)
+ .Lcompat_mode_gdt_end:
+ END(compat_mode_gdt)
+ 
+-DATA_LOCAL(compat_mode_idt)
+-        .word 0                      /* limit */
+-        .long 0                      /* base */
+-END(compat_mode_idt)
+-
+         /*
+          * 16 words of stack are more than enough.
+          */
 -- 
-2.53.0
+2.39.5
 
 
