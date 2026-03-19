@@ -4,36 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243BB1090225
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 13:32:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1257167.1551622 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D0E1090225
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 13:37:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1257191.1551638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3DTn-0001VR-GV; Thu, 19 Mar 2026 13:32:03 +0000
+	id 1w3DYz-0002Dh-4a; Thu, 19 Mar 2026 13:37:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1257167.1551622; Thu, 19 Mar 2026 13:32:03 +0000
+Received: by outflank-mailman (output) from mailman id 1257191.1551638; Thu, 19 Mar 2026 13:37:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3DTn-0001VK-DW; Thu, 19 Mar 2026 13:32:03 +0000
-Received: by outflank-mailman (input) for mailman id 1257167;
- Thu, 19 Mar 2026 13:32:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w3DYz-0002Da-1g; Thu, 19 Mar 2026 13:37:25 +0000
+Received: by outflank-mailman (input) for mailman id 1257191;
+ Thu, 19 Mar 2026 13:37:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+00E=BT=bounce.vates.tech=bounce-md_30504962.69bbfacb.v1-ca5698857e7d42dea41dce3c5d105453@srs-se1.protection.inumbo.net>)
- id 1w3DTl-0001Uk-S8
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 13:32:01 +0000
-Received: from mail132-30.atl131.mandrillapp.com
- (mail132-30.atl131.mandrillapp.com [198.2.132.30])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ff6ef31b-2397-11f1-9ccf-f158ae23cfc8;
- Thu, 19 Mar 2026 14:31:56 +0100 (CET)
-Received: from pmta09.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail132-30.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4fc66z11p2zP0Jw5X
- for <xen-devel@lists.xenproject.org>; Thu, 19 Mar 2026 13:31:55 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- ca5698857e7d42dea41dce3c5d105453; Thu, 19 Mar 2026 13:31:55 +0000
+ <SRS0=wl8P=BT=citrix.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
+ id 1w3DRk-0004oN-QL
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 13:29:56 +0000
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [2a01:111:f403:c107::9])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b79c5a5e-2397-11f1-b164-2bf370ae4941;
+ Thu, 19 Mar 2026 14:29:56 +0100 (CET)
+Received: from DS0PR03MB8272.namprd03.prod.outlook.com (2603:10b6:8:28f::23)
+ by SA5PR03MB989126.namprd03.prod.outlook.com (2603:10b6:806:4d6::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Thu, 19 Mar
+ 2026 13:29:53 +0000
+Received: from DS0PR03MB8272.namprd03.prod.outlook.com
+ ([fe80::2e63:9a7a:3701:7654]) by DS0PR03MB8272.namprd03.prod.outlook.com
+ ([fe80::2e63:9a7a:3701:7654%5]) with mapi id 15.20.9723.019; Thu, 19 Mar 2026
+ 13:29:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,158 +49,223 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff6ef31b-2397-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1773927115; x=1774197115;
-	bh=9p5tJHoQx4Uw1ylTQt9FJyHIksG7rvfPVCHL0TVAkwE=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=RdCjAnHuWJapLMvmG0U3hiv5SVNyxnE0binYuSGwMoQk4EGMngP0+m6tD+Jb7mOtP
-	 3hSAz2AXumwjwiIG+RQ35LDDhcMMRXgCzhBhGgDDoYZ9K8aQWTsAmFqJidOs+oWgS/
-	 kOgeS9hI5MSIozLUXwSrfJxyfaIQq5cLwVY90dBplGblu7CnZVu6u/REbApyrvG/ME
-	 rPa4+0D025F040xb/qHFsAV6ix2prW2widtKlsSCXj/idQaHjCfnc/lkTTOiPVUfUr
-	 5u4SZWRdlVz5Ni0ZWoAMGoGFuMTISeV8RvsXFCNLr4XrJTpa9uVWnuyLwQQuqEKRaw
-	 Cic+6tR4v8xBA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1773927115; x=1774187615; i=anthony.perard@vates.tech;
-	bh=9p5tJHoQx4Uw1ylTQt9FJyHIksG7rvfPVCHL0TVAkwE=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=fcelPUD6yd7JiqsAZPLDLZlFa3hSvV72lnt9awJv5k7jKfnddTYNB+47Fv6aWgrSD
-	 z46DZ4kNQIC6djp4YST1/6mYToeOCrQm/ASonwKU6nURWcn7Ookl8YyLWPBaRWw6ht
-	 o0Tz0IogcWn/Bn4HcS9qlOPe47R2jr7SCJ6hU7sz27GgZ45d04bORi+nwREeLD1MQ/
-	 CVUnRNlSXZHeVtakAk/b59Ggg4FFqg2nkYZxbd7M/8xH1tnXgsofYtkCPnRBE/4uYe
-	 tSdu5qGyQNhH/xsiSi2WGnNDOrXrdyh/XR57gvYTGaS10Q1wH9sFaAo5yCpLBnOMlD
-	 5RIVybI24D2Tw==
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=2001/11]=20tools/libs/store:=20add=20get-=20and=20set-quota=20related=20functions?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1773927114457
-To: "=?utf-8?Q?J=C3=BCrgen=20Gro=C3=9F?=" <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, "Julien Grall" <julien@xen.org>
-Message-Id: <abv6ymdE8bYOIW_f@l14>
-References: <20260305135208.2208663-1-jgross@suse.com> <20260305135208.2208663-2-jgross@suse.com> <abQd82Z8x3_9CY2Q@l14> <c7870ce3-fc52-4bda-997f-4791fe3020a1@suse.com>
-In-Reply-To: <c7870ce3-fc52-4bda-997f-4791fe3020a1@suse.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.ca5698857e7d42dea41dce3c5d105453?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260319:md
-Date: Thu, 19 Mar 2026 13:31:55 +0000
+X-Inumbo-ID: b79c5a5e-2397-11f1-b164-2bf370ae4941
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jzg/BRtkt2yFUu0yjB3bFWBRFf4qaCnQIssDCOelH+cxzfu7MZZEhupUcPsDbNscDfJjRmFJmXnvBVVGMoeT5Lto7GdxKSCAdpwZZstlOLE1PDavS0u5L1BXa9ritpmZd9c/9ZV6MjAVTTgGUCZEiJpiVtaxJKeB5oV16p0L92fUTYscbVX7qZuMbirwBbe4Cqf0oEvEfupRHhxsto2wIaT9sNKadTtvQNJTpVB0LAI7NyCtWuy6HTRHj5y1taoKNB7RdMVUBdBNxaKR5bnI3E2tTmFSdGsLr6uc/ofTppPyPz9gtWxRe9N6GuZJb9dxHLcOkhdQgc0ZpYlGPQs9VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=elIA6dvdGp1tAzqHaCSWjimWB/eU8V8D3hrq8bZIfs4=;
+ b=tz/KDJ0iMa1CzQk1ce1yjjwjxt6boKe7959nbpWDFZ5lgTyyNO2hgCB+PHKiaTTCPaChuMx4ZHcJNa2Zbtq4XZtWpV2RQDono7f97MdETuvmB9BxkQwU9ew/8HFYbuIKfFCA6jrCuIEKEeOOIcmKed0alA4GV0bBrSm1cwzMA+fROhWsP08S9af2QqrBfW+apNs+Pmm1HDoi88jtRhHlLmpoFxd+Oueppn7X8QA9i4zv7Sj8M6EQVwFGbFjULcgKtD2KftqEfRU+mR5SbYo+FMtXUUm+5hYx7kgv4ooB70aJG4eij4jDI126gVFUbIMN9dCQXdPZX3FdBuoPIljidA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=elIA6dvdGp1tAzqHaCSWjimWB/eU8V8D3hrq8bZIfs4=;
+ b=aI2u9AkhtBtcTLeLdlohn56Xh0r1YrV3G4Enl3RaHXHg37XKSLPsiH0jmpfnnp/OEQf+D/04toAt4pPLujw02xAPDUQ2JRjR61rj1kTt84TM0EmWgb9aWXFe6xFYLHnNc2s3L/N6OXUvn/h0LrJ+TmZNfATtpieyUo6QQa1/Y10=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH v1 7/8] x86/xstate: Stop tracking nonlazy xstate use
+Date: Thu, 19 Mar 2026 13:29:23 +0000
+Message-ID: <20260319132924.1469809-8-ross.lagerwall@citrix.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260319132924.1469809-1-ross.lagerwall@citrix.com>
+References: <20260319132924.1469809-1-ross.lagerwall@citrix.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P265CA0075.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2bd::16) To DS0PR03MB8272.namprd03.prod.outlook.com
+ (2603:10b6:8:28f::23)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR03MB8272:EE_|SA5PR03MB989126:EE_
+X-MS-Office365-Filtering-Correlation-Id: 85cd2d53-48fa-476f-b6ff-08de85bb9ad4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	wAva+HpgSNLn0rRJzhsow25Rj8VZsutPQbxWQVQKWWQUtDow+m6olGmQi4Xtey1skjTr2SAMA4BPPn8tznLUOkMlnAak4jEkwFKkup1r5oGQX9Hn0AMYyBhqP7xfKCpI03L27xp/xoyo+aL51cq+vVuFhnrUiGUdrn2UCnKbeXYoyXT6K17hJKJ33NZvCjLVVvKHEu7zysEsyMj/xzfJTzXtip3egsuHllqsKqZh6bswUlm0uP2VKvggyYzbGFXQRpLBIQJP+DeKN7NENGvDJBvfZ4kJn7+LBoSFpMNGpFYO0QZXckBuDMfEwsGEhujnvavSJcGd+vAy2VibD64gS4yeH+5ePbOIgQLZY9Y6fDPuxXA8Y7tCiCK4QfIjVdQk4+x7EA0EhaJFW0Yr5iBhpV8RflsAeZhldtRDSuTkYxoHWAXWVHzdB07rDpDGJCZ1R3QQFbP5EUHot7mxXW43MIQhX3PBNaA5PK/UwFKRz/K+UzCsJ2FAWGi+YkxVvQa8pRhKs5fgFi6ZGlwd8HYqw5VxiM4vcQZUqz7OoHnns81XPuqLzOwm1OhQZvZmNJMEt4sOXmU3hIz1yPhpg+I7LLti68HG3rCc3Elhq9ZlJ8+mhh6VNRnrfO23biIMz6A9y5lMYh9M3BQ4LVsPVCRqx7q94UblcPp4SQEiogw1k5kgt/ylKWRRdp4G4VySksDMt7tF5aUsmI28CdyaGqHrFUjLdwlrc18rh5ExXrBBplI=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR03MB8272.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?UYKEo2T2pCVniwewGjkYq3ngC7TsYr6UisUN9B0Jbkj5NZZFa34KFKQhBS9J?=
+ =?us-ascii?Q?f8ymMrdJ+HC7wsn+9KQOJ6BlUbMtTQNq50kCciyCHBLdBEYxt+PzXjYGfvXw?=
+ =?us-ascii?Q?O0rmnDTxw5b59kSm5L1jS0n2T3VvL86cCLKN5W8ivi2x5am+5p3g7wPoGZmh?=
+ =?us-ascii?Q?WejyZkpFMUt+8Qe2U7r/T+uU2NLZDJ46iOX+Cv1i0LKcwlL2Zg8rDjMq5+oR?=
+ =?us-ascii?Q?N2Da3aIpCezoq6hXcWCXX1sycSZvYBIei/97/oniX7DENvDGjTKtTWbOUkvh?=
+ =?us-ascii?Q?NJnIfXhS4/YPPd3lT/RL6txtEISGDspIbXjeSCksydpnSd4DW6Cz38by6VzF?=
+ =?us-ascii?Q?df5aQyHGpFzJ8SNQAy/+L6ICBI/SdOEnlF8T661PZo6DhMguBduqFncuZIEn?=
+ =?us-ascii?Q?ErHDVpZaKeDdOqcmz/I/wlWP49ZDIraQZmerrRtvykMkUH+iWnUiZDGUkWvZ?=
+ =?us-ascii?Q?vuHpej10H1WlVDa/eL68UrekmmCnBVCkISQHFGORMvtWHssc9bzX2t+YCS+k?=
+ =?us-ascii?Q?tKtayylSHX+4gxZKaoiHFbj7mKEn9gRaDCS404oeBYN8IZuM2j2iAYoF0U5s?=
+ =?us-ascii?Q?Xj3AMMLlzfgZxuQYRMCk9GDg9qEVDGwrqlkVNhpniZvG8hrE0Bt7Y+fhcrxD?=
+ =?us-ascii?Q?lKTmX1b8yjaAzEJ6hSVSrZddDQBRJGokmrxcZKJUdkKINR8wgx54I3cBwZau?=
+ =?us-ascii?Q?nfmBS7dBjyO6x4SrOLXHeVmf60fTrQimqlrcyVBkITEZEB3dPSj+Kli0C+pV?=
+ =?us-ascii?Q?/0OKKNtMyWtAYkRUDzpZkJ3b12BddnAUbEoLSIOze/r7FiTXYk4F3q8Rog30?=
+ =?us-ascii?Q?k2HUiLuGyU40RPP6PJ8WO6OUyMLXCxqFIIwXcRpIK8dr4LPsnInf7/0Gvt8q?=
+ =?us-ascii?Q?SH1U/Ou6rEZkv/1JeWxgzRhb3i18z/eiReHPNZKPYv+7axXUx7ahFBaMshWJ?=
+ =?us-ascii?Q?IFp53/kQcZT7McZKqtgLrkWsABDY6ik4tNk81ypM5TNM7kEovcdlimTBp5l6?=
+ =?us-ascii?Q?bjcf9o+38cL0Ab4EHOsx5LKX1jLCq2t2y2DAbPdpNeARN2t95o0LHjxMFhBn?=
+ =?us-ascii?Q?US38DEiY3eVUrfjwDmo+zXEz45/5AgvwtnLQZhuy7d0jtLukGl78vP3WlWom?=
+ =?us-ascii?Q?rrmC0oZw0AS04wOxbY4GBHrXBqETEfBdG4lDV4qYV0bzvvKyALF+IG2Jxwbq?=
+ =?us-ascii?Q?zg63ATWoGMdgPnqC/oRfqbZVw7oFsXedTKu4J1BxUApfM+XUbZuN5zOvPa72?=
+ =?us-ascii?Q?rAbJ+dCLxhbqcYk2L497LU1UGvZUXDrZrEN6sMbHNbX+w/46fgh5noqkW2Ol?=
+ =?us-ascii?Q?bJPLrwwWlABA7bHLaejAyoxwZlcsxnyE6D6GhNJAu/idCv5piOobeXfQj7ld?=
+ =?us-ascii?Q?VLuNE2Ekt4BXtOHi5PxRGrgAkcouElXklHVyOE7B2VEO4OXEROEhZCmYqhYW?=
+ =?us-ascii?Q?Gf6p1MMUDQ/BCMV4Qvm+0tB3UhFmgrnXylyVXpUycD0wCM5Q1PYC7daScdIo?=
+ =?us-ascii?Q?frcKZhyW7/p9Umyk3pHbW4JgxxCN7k6jf87k4DCNsg/GWGDsEAH5UMpBMu/T?=
+ =?us-ascii?Q?tQd9zk2lW20zIclbNybKWvLJDktrZODYJRPL/bqmtFaj26kMStKV3YKu1SUv?=
+ =?us-ascii?Q?lDYyLove6sK7aQjcaTh0nQqh5OD9+KgoVSu0YxuWZBZWoj8vNoJ+y2L/ssil?=
+ =?us-ascii?Q?r8h5MfaA25lq06+mLAl13jw7a/tHtJGeRZ2YwkRuATEQL/PgTgAw/EawKW5Z?=
+ =?us-ascii?Q?ewXPKuV7L9zgkFZI+/Se+SreNS2bIKk=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85cd2d53-48fa-476f-b6ff-08de85bb9ad4
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR03MB8272.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 13:29:53.6959
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MBUWIldycPuvcApCdX8Ol+TMq3v1iCP1j2GAHj9YKb3y5avpkuMWD4XaeZmcXG2m2Ey278CMwY1W27hCfdj/9ixr/j7Wqp+shGNOrIFug7M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB989126
 
-On Mon, Mar 16, 2026 at 08:51:21AM +0100, J=C3=BCrgen Gro=C3=9F wrote:
-> On 13.03.26 15:23, Anthony PERARD wrote:
-> > On Thu, Mar 05, 2026 at 02:51:58PM +0100, Juergen Gross wrote:
-> > > diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
-> > > index 8f4b90a3cf..dda37f7526 100644
-> > > --- a/tools/libs/store/xs.c
-> > > +++ b/tools/libs/store/xs.c
-> > > @@ -1456,6 +1456,117 @@ bool xs_set_features_domain(struct xs_handle =
-*h, unsigned int domid,
-> > >   =09return xs_bool(xs_talkv(h, iov, ARRAY_SIZE(iov), NULL));
-> > >   }
-> > > +char **xs_get_quota_names(struct xs_handle *h, unsigned int *num)
-> > > +{
-> > > +=09struct xsd_sockmsg msg =3D { .type =3D XS_GET_QUOTA };
-> > > +=09struct iovec iov[1];
-> > > +=09char **quota;
-> > > +=09char *reply;
-> > > +=09char *c;
-> > > +=09unsigned int i;
-> > > +
-> > > +=09iov[0].iov_base =3D &msg;
-> > > +=09iov[0].iov_len  =3D sizeof(msg);
-> > > +
-> > > +=09reply =3D xs_talkv(h, iov, ARRAY_SIZE(iov), NULL);
-> > > +=09if (!reply)
-> > > +=09=09return NULL;
-> > > +
-> > > +=09*num =3D 1;
-> > > +=09for (c =3D reply; *c; c++)
-> > > +=09=09if (*c =3D=3D ' ')
-> > > +=09=09=09(*num)++;
-> > > +
-> > > +=09quota =3D malloc(*num * sizeof(char *) + strlen(reply) + 1);
-> > > +=09c =3D (char *)(quota + *num);
-> > > +=09strcpy(c, reply);
-> > > +=09for (i =3D 0; i < *num; i++) {
-> > > +=09=09quota[i] =3D c;
-> > > +=09=09c =3D strchr(c, ' ');
-> > > +=09=09if (c) {
-> > 
-> > If `c` is NULL, it's likely that this is the last iteration of the `for=
-`
-> > loop. But just in case, should we prevent the code from doing another
-> > round and prevent `strchr(NULL, ' ')`? (Or just check that `c` is !NULL=
-,
-> > and let the loop finish set NULL for the remaining slot in `quota`)
-> 
-> Not sure this is really needed. *num is set just a few lines further up
-> using the same way to count the number of strings. Do we really need to d=
-o
-> consistency checks of intermediate results in such a short function?
+With the removal of lazy FPU, the full state is always restored on context
+switch so stop tracking whether nonlazy xstate is used.
 
-I guess it's ok.
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+---
+ xen/arch/x86/domctl.c             |  1 -
+ xen/arch/x86/hvm/hvm.c            |  1 -
+ xen/arch/x86/i387.c               | 12 +-----------
+ xen/arch/x86/include/asm/domain.h |  3 ---
+ xen/arch/x86/include/asm/xstate.h |  6 ++----
+ xen/arch/x86/xstate.c             |  3 ---
+ 6 files changed, 3 insertions(+), 23 deletions(-)
 
-> > 
-> > > +=09=09=09*c =3D 0;
-> > > +=09=09=09c++;
-> > > +=09=09}
-> > > +=09}
-> > > +
-> > > +=09return quota;
-> > > +}
-> > > +
-> > > +bool xs_get_global_quota(struct xs_handle *h, char *quota,
-> > > +=09=09=09 unsigned int *value)
-> > > +{
-> > > +=09struct xsd_sockmsg msg =3D { .type =3D XS_GET_QUOTA };
-> > > +=09struct iovec iov[2];
-> > > +
-> > > +=09iov[0].iov_base =3D &msg;
-> > > +=09iov[0].iov_len  =3D sizeof(msg);
-> > > +=09iov[1].iov_base =3D quota;
-> > > +=09iov[1].iov_len  =3D strlen(quota) + 1;
-> > > +
-> > > +=09return xs_uint(xs_talkv(h, iov, ARRAY_SIZE(iov), NULL), value);
-> > > +}
-> > > +
-> > > +bool xs_set_global_quota(struct xs_handle *h, char *quota,
-> > > +=09=09=09 unsigned int value)
-> > > +{
-> > > +=09struct xsd_sockmsg msg =3D { .type =3D XS_SET_QUOTA };
-> > > +=09char val_str[MAX_STRLEN(value)];
-> > 
-> > MAX_STRLEN doesn't have a great name, I wounder what is was :-). And
-> > it's not about a maximum size of payload that could go on xs wire or
-> > something, it's actually the maximum string size that can take a
-> > numerical value, when converted to charaters.
-> 
-> Unfortunately the MAX_STRLEN() macro is defined in a public header file.
-> I could define another macro with a different name doing the same and
-> use that here, but MAX_STRLEN() would still be there.
-> 
-> What is your preference?
-
-Well, it's probably better to leave it like that. Having two different
-macro names might be more confusing than useful. And I see that the
-macro is only defined three time in the repo. Next time I'll stumble on
-MAX_STRLEN, I'll know what it mean.
-
-Cheers,,
-
-
---
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index d9b08182ac1d..a9fbb2d405b7 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1013,7 +1013,6 @@ long arch_do_domctl(
+ 
+                 v->arch.xcr0 = _xcr0;
+                 v->arch.xcr0_accum = _xcr0_accum;
+-                v->arch.nonlazy_xstate_used = _xcr0_accum & XSTATE_NONLAZY;
+                 compress_xsave_states(v, _xsave_area,
+                                       evc->size - PV_XSAVE_HDR_SIZE);
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index d4ba82845146..0e7b66d726ae 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -1383,7 +1383,6 @@ static int cf_check hvm_load_cpu_xsave_states(
+ 
+     v->arch.xcr0 = ctxt->xcr0;
+     v->arch.xcr0_accum = ctxt->xcr0_accum;
+-    v->arch.nonlazy_xstate_used = ctxt->xcr0_accum & XSTATE_NONLAZY;
+     compress_xsave_states(v, &ctxt->save_area,
+                           size - offsetof(struct hvm_hw_cpu_xsave, save_area));
+ 
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index 5e893a2aab94..9acaaf4673df 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -108,25 +108,18 @@ static inline void fpu_fxrstor(struct vcpu *v)
+ /*      FPU Save Functions     */
+ /*******************************/
+ 
+-static inline uint64_t vcpu_xsave_mask(const struct vcpu *v)
+-{
+-    return v->arch.nonlazy_xstate_used ? XSTATE_ALL : XSTATE_LAZY;
+-}
+-
+ /* Save x87 extended state */
+ static inline void fpu_xsave(struct vcpu *v)
+ {
+     bool ok;
+-    uint64_t mask = vcpu_xsave_mask(v);
+ 
+-    ASSERT(mask);
+     /*
+      * XCR0 normally represents what guest OS set. In case of Xen itself,
+      * we set the accumulated feature mask before doing save/restore.
+      */
+     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
+     ASSERT(ok);
+-    xsave(v, mask);
++    xsave(v, XSTATE_ALL);
+     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
+     ASSERT(ok);
+ }
+@@ -202,9 +195,6 @@ void vcpu_restore_fpu(struct vcpu *v)
+  */
+ static bool _vcpu_save_fpu(struct vcpu *v)
+ {
+-    if ( !v->arch.nonlazy_xstate_used )
+-        return false;
+-
+     ASSERT(!is_idle_vcpu(v));
+ 
+     /* This can happen, if a paravirtualised guest OS has set its CR0.TS. */
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index bd7b02085ef8..385a6666dafa 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -667,9 +667,6 @@ struct arch_vcpu
+      * it explicitly enables it via xcr0.
+      */
+     uint64_t xcr0_accum;
+-    /* This variable determines whether nonlazy extended state has been used,
+-     * and thus should be saved/restored. */
+-    bool nonlazy_xstate_used;
+ 
+     struct vmce vmce;
+ 
+diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
+index ca38c43ec1c3..c96d75e38b25 100644
+--- a/xen/arch/x86/include/asm/xstate.h
++++ b/xen/arch/x86/include/asm/xstate.h
+@@ -33,12 +33,10 @@ extern uint32_t mxcsr_mask;
+ #define XSTATE_FP_SSE  (X86_XCR0_X87 | X86_XCR0_SSE)
+ #define XCNTXT_MASK    (X86_XCR0_X87 | X86_XCR0_SSE | X86_XCR0_YMM | \
+                         X86_XCR0_OPMASK | X86_XCR0_ZMM | X86_XCR0_HI_ZMM | \
+-                        XSTATE_NONLAZY)
++                        X86_XCR0_BNDREGS | X86_XCR0_BNDCSR | X86_XCR0_PKRU | \
++                        X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)
+ 
+ #define XSTATE_ALL     (~(1ULL << 63))
+-#define XSTATE_NONLAZY (X86_XCR0_BNDREGS | X86_XCR0_BNDCSR | X86_XCR0_PKRU | \
+-                        X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)
+-#define XSTATE_LAZY    (XSTATE_ALL & ~XSTATE_NONLAZY)
+ #define XSTATE_XSAVES_ONLY         0
+ #define XSTATE_COMPACTION_ENABLED  (1ULL << 63)
+ 
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 11d390cac985..658f372b8c51 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -991,9 +991,6 @@ int handle_xsetbv(u32 index, u64 new_bv)
+     curr->arch.xcr0 = new_bv;
+     curr->arch.xcr0_accum |= new_bv;
+ 
+-    if ( new_bv & XSTATE_NONLAZY )
+-        curr->arch.nonlazy_xstate_used = 1;
+-
+     mask &= ~XSTATE_FP_SSE;
+     if ( mask )
+     {
+-- 
+2.53.0
 
 
