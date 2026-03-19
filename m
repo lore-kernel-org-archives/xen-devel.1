@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D0E1090225
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 13:37:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1257191.1551638 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01A221090229
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 13:44:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1257218.1551648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3DYz-0002Dh-4a; Thu, 19 Mar 2026 13:37:25 +0000
+	id 1w3Dg1-0004X1-TK; Thu, 19 Mar 2026 13:44:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1257191.1551638; Thu, 19 Mar 2026 13:37:25 +0000
+Received: by outflank-mailman (output) from mailman id 1257218.1551648; Thu, 19 Mar 2026 13:44:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3DYz-0002Da-1g; Thu, 19 Mar 2026 13:37:25 +0000
-Received: by outflank-mailman (input) for mailman id 1257191;
- Thu, 19 Mar 2026 13:37:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wl8P=BT=citrix.com=ross.lagerwall@srs-se1.protection.inumbo.net>)
- id 1w3DRk-0004oN-QL
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 13:29:56 +0000
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [2a01:111:f403:c107::9])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b79c5a5e-2397-11f1-b164-2bf370ae4941;
- Thu, 19 Mar 2026 14:29:56 +0100 (CET)
-Received: from DS0PR03MB8272.namprd03.prod.outlook.com (2603:10b6:8:28f::23)
- by SA5PR03MB989126.namprd03.prod.outlook.com (2603:10b6:806:4d6::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Thu, 19 Mar
- 2026 13:29:53 +0000
-Received: from DS0PR03MB8272.namprd03.prod.outlook.com
- ([fe80::2e63:9a7a:3701:7654]) by DS0PR03MB8272.namprd03.prod.outlook.com
- ([fe80::2e63:9a7a:3701:7654%5]) with mapi id 15.20.9723.019; Thu, 19 Mar 2026
- 13:29:53 +0000
+	id 1w3Dg1-0004Wu-Qh; Thu, 19 Mar 2026 13:44:41 +0000
+Received: by outflank-mailman (input) for mailman id 1257218;
+ Thu, 19 Mar 2026 13:44:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8LP9=BT=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1w3Dg0-0004W5-G5
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 13:44:40 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id be9098c9-2399-11f1-9ccf-f158ae23cfc8;
+ Thu, 19 Mar 2026 14:44:26 +0100 (CET)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-439b9cf8cb5so1227445f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Mar 2026 06:44:26 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b5189970fsm16901249f8f.27.2026.03.19.06.44.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Mar 2026 06:44:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,223 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b79c5a5e-2397-11f1-b164-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jzg/BRtkt2yFUu0yjB3bFWBRFf4qaCnQIssDCOelH+cxzfu7MZZEhupUcPsDbNscDfJjRmFJmXnvBVVGMoeT5Lto7GdxKSCAdpwZZstlOLE1PDavS0u5L1BXa9ritpmZd9c/9ZV6MjAVTTgGUCZEiJpiVtaxJKeB5oV16p0L92fUTYscbVX7qZuMbirwBbe4Cqf0oEvEfupRHhxsto2wIaT9sNKadTtvQNJTpVB0LAI7NyCtWuy6HTRHj5y1taoKNB7RdMVUBdBNxaKR5bnI3E2tTmFSdGsLr6uc/ofTppPyPz9gtWxRe9N6GuZJb9dxHLcOkhdQgc0ZpYlGPQs9VQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=elIA6dvdGp1tAzqHaCSWjimWB/eU8V8D3hrq8bZIfs4=;
- b=tz/KDJ0iMa1CzQk1ce1yjjwjxt6boKe7959nbpWDFZ5lgTyyNO2hgCB+PHKiaTTCPaChuMx4ZHcJNa2Zbtq4XZtWpV2RQDono7f97MdETuvmB9BxkQwU9ew/8HFYbuIKfFCA6jrCuIEKEeOOIcmKed0alA4GV0bBrSm1cwzMA+fROhWsP08S9af2QqrBfW+apNs+Pmm1HDoi88jtRhHlLmpoFxd+Oueppn7X8QA9i4zv7Sj8M6EQVwFGbFjULcgKtD2KftqEfRU+mR5SbYo+FMtXUUm+5hYx7kgv4ooB70aJG4eij4jDI126gVFUbIMN9dCQXdPZX3FdBuoPIljidA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=elIA6dvdGp1tAzqHaCSWjimWB/eU8V8D3hrq8bZIfs4=;
- b=aI2u9AkhtBtcTLeLdlohn56Xh0r1YrV3G4Enl3RaHXHg37XKSLPsiH0jmpfnnp/OEQf+D/04toAt4pPLujw02xAPDUQ2JRjR61rj1kTt84TM0EmWgb9aWXFe6xFYLHnNc2s3L/N6OXUvn/h0LrJ+TmZNfATtpieyUo6QQa1/Y10=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v1 7/8] x86/xstate: Stop tracking nonlazy xstate use
-Date: Thu, 19 Mar 2026 13:29:23 +0000
-Message-ID: <20260319132924.1469809-8-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260319132924.1469809-1-ross.lagerwall@citrix.com>
-References: <20260319132924.1469809-1-ross.lagerwall@citrix.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P265CA0075.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2bd::16) To DS0PR03MB8272.namprd03.prod.outlook.com
- (2603:10b6:8:28f::23)
+X-Inumbo-ID: be9098c9-2399-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1773927865; x=1774532665; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=NO/XznmgDx9IYu7OvLPBUEtAZrfkpJjsR2iiABXNnMM=;
+        b=N5VnP7RpujU4lVa4OPeqvfohev29Xz3kBapBXuaoEAmSdquI6yJp3MOz+1DOrlBVRH
+         YEf3BNd4Vj9Dec/1TVi5VsaxcbMNm51wWJlHUpXUGFPcTOEQifZLulX2vBNbdmGYYxVB
+         s78+SNEYcRQ5a1WqeB+PjzGIcxvtBGqvRT4qQg5uOf8o4hOg49hLtch2PA5k+VyI4Jt5
+         dgFyf9oE9N6qc8aDyqoN1xYKeuap9Z5+z2kVPFa0pQCxg+mgrf5ffNeX9/XOwXv4do3P
+         nKlmr4mYJ3rvQr2R+IkutxYG6OZ+bddDEi/pvTpXYpVmX1NJPFo7GLOgOCN/inDSN9BL
+         PLOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773927865; x=1774532665;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NO/XznmgDx9IYu7OvLPBUEtAZrfkpJjsR2iiABXNnMM=;
+        b=lGicP0NMgO3gdlb198aqOVqcba6okw0rbyAVkUF3iRW68vt4VpQQ3k/ELMKHiBqcu9
+         ou+KWl4GYwa4Q4MtcQ/I0uYecdub4zF1WO0XdnDoIMgEe/u/yVx4u1aNMrT+cdDvfE9j
+         H/q/Z2Ttq8utjibg9Yn0J3ICVpboFwHw+r7ABs3LUWu7+2S2FvspJlR5MALQRNl75qRL
+         roBsZM2tsZlqhd+SE0lObGlXGvfw+bwHWmjtRDts9D4DuJIdQt1dFSQf3ijEDOzAxOAT
+         oJC2ON8z4OWmzuXrLekIrK7GqFsQG1RRCKSHEj/tfdABTdFGY9Dx48qeB254Ou1Fl26D
+         IGjA==
+X-Forwarded-Encrypted: i=1; AJvYcCXwbM4du+6+6D1knn+J9YnDqveWk7lZewB4RXw+wDMNY8QTJ3GVUnErWpyNOpKVBZX9JbDdRuDmEEs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw3rujiQFgzFe/zVvakBkEsuK/yqwHhheErfvVcYiJTnHPhIgri
+	1gucGg9tNpkBPYvfU2uqkvAQh4TtbIIAtx51jeVHpPph0Si2glkTB7+W5tz/8pjhOg==
+X-Gm-Gg: ATEYQzw9s8Xua8zCMcB4F1TwvO3gCiC1z1w18K7hR+tes3oN9scAA86qFGFhsQXdvDV
+	MTAPlJNsqzD5KPUhLo4ZB1NVMBC8tgi8JLAWZ5tErdRVX9ZMq6Trm7aIap3wwIbdtczGTTO1spb
+	w9LqS3UfZDb0Gb6u5KLpNw9dpN61fM6uQzWwqs2Bmk1wZbb5ld4XsFa6NVFoqhoFnYSlA+2sNuJ
+	KlODJgTRAPz25J6c6Qc2pxRy1Hkx+16i18CtiFvTsS1p2OcvFSggT2OGzfeNIvtCMbGmt8uRRhy
+	OQuQlIPMnOe53RqpJUpLgwcGtdRVgma5cbrJOQuqkpSw13f2b2H/Kg6dPmh1keuzFBGebgBrJ3e
+	S5l1kWHMjUoV1d2B+oS0lfKUVnwzkOtraTmmL9IzN+Q+f837KNte6H+aNeh5xwysboBbdAWLGs3
+	sHrXw3CWvjeOI8gPopqVXx694a052/Btjf7dLOMdPXSFVKc65xeVvF/KvQcMt0+88/3a8mhRpAJ
+	UW9E2AkLImtFoM=
+X-Received: by 2002:a05:600c:a206:b0:485:3e6c:aacb with SMTP id 5b1f17b1804b1-486f44385ecmr88375035e9.4.1773927865347;
+        Thu, 19 Mar 2026 06:44:25 -0700 (PDT)
+Message-ID: <48841930-bb2f-48e7-963a-e823fec70442@suse.com>
+Date: Thu, 19 Mar 2026 14:44:29 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR03MB8272:EE_|SA5PR03MB989126:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85cd2d53-48fa-476f-b6ff-08de85bb9ad4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	wAva+HpgSNLn0rRJzhsow25Rj8VZsutPQbxWQVQKWWQUtDow+m6olGmQi4Xtey1skjTr2SAMA4BPPn8tznLUOkMlnAak4jEkwFKkup1r5oGQX9Hn0AMYyBhqP7xfKCpI03L27xp/xoyo+aL51cq+vVuFhnrUiGUdrn2UCnKbeXYoyXT6K17hJKJ33NZvCjLVVvKHEu7zysEsyMj/xzfJTzXtip3egsuHllqsKqZh6bswUlm0uP2VKvggyYzbGFXQRpLBIQJP+DeKN7NENGvDJBvfZ4kJn7+LBoSFpMNGpFYO0QZXckBuDMfEwsGEhujnvavSJcGd+vAy2VibD64gS4yeH+5ePbOIgQLZY9Y6fDPuxXA8Y7tCiCK4QfIjVdQk4+x7EA0EhaJFW0Yr5iBhpV8RflsAeZhldtRDSuTkYxoHWAXWVHzdB07rDpDGJCZ1R3QQFbP5EUHot7mxXW43MIQhX3PBNaA5PK/UwFKRz/K+UzCsJ2FAWGi+YkxVvQa8pRhKs5fgFi6ZGlwd8HYqw5VxiM4vcQZUqz7OoHnns81XPuqLzOwm1OhQZvZmNJMEt4sOXmU3hIz1yPhpg+I7LLti68HG3rCc3Elhq9ZlJ8+mhh6VNRnrfO23biIMz6A9y5lMYh9M3BQ4LVsPVCRqx7q94UblcPp4SQEiogw1k5kgt/ylKWRRdp4G4VySksDMt7tF5aUsmI28CdyaGqHrFUjLdwlrc18rh5ExXrBBplI=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR03MB8272.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?UYKEo2T2pCVniwewGjkYq3ngC7TsYr6UisUN9B0Jbkj5NZZFa34KFKQhBS9J?=
- =?us-ascii?Q?f8ymMrdJ+HC7wsn+9KQOJ6BlUbMtTQNq50kCciyCHBLdBEYxt+PzXjYGfvXw?=
- =?us-ascii?Q?O0rmnDTxw5b59kSm5L1jS0n2T3VvL86cCLKN5W8ivi2x5am+5p3g7wPoGZmh?=
- =?us-ascii?Q?WejyZkpFMUt+8Qe2U7r/T+uU2NLZDJ46iOX+Cv1i0LKcwlL2Zg8rDjMq5+oR?=
- =?us-ascii?Q?N2Da3aIpCezoq6hXcWCXX1sycSZvYBIei/97/oniX7DENvDGjTKtTWbOUkvh?=
- =?us-ascii?Q?NJnIfXhS4/YPPd3lT/RL6txtEISGDspIbXjeSCksydpnSd4DW6Cz38by6VzF?=
- =?us-ascii?Q?df5aQyHGpFzJ8SNQAy/+L6ICBI/SdOEnlF8T661PZo6DhMguBduqFncuZIEn?=
- =?us-ascii?Q?ErHDVpZaKeDdOqcmz/I/wlWP49ZDIraQZmerrRtvykMkUH+iWnUiZDGUkWvZ?=
- =?us-ascii?Q?vuHpej10H1WlVDa/eL68UrekmmCnBVCkISQHFGORMvtWHssc9bzX2t+YCS+k?=
- =?us-ascii?Q?tKtayylSHX+4gxZKaoiHFbj7mKEn9gRaDCS404oeBYN8IZuM2j2iAYoF0U5s?=
- =?us-ascii?Q?Xj3AMMLlzfgZxuQYRMCk9GDg9qEVDGwrqlkVNhpniZvG8hrE0Bt7Y+fhcrxD?=
- =?us-ascii?Q?lKTmX1b8yjaAzEJ6hSVSrZddDQBRJGokmrxcZKJUdkKINR8wgx54I3cBwZau?=
- =?us-ascii?Q?nfmBS7dBjyO6x4SrOLXHeVmf60fTrQimqlrcyVBkITEZEB3dPSj+Kli0C+pV?=
- =?us-ascii?Q?/0OKKNtMyWtAYkRUDzpZkJ3b12BddnAUbEoLSIOze/r7FiTXYk4F3q8Rog30?=
- =?us-ascii?Q?k2HUiLuGyU40RPP6PJ8WO6OUyMLXCxqFIIwXcRpIK8dr4LPsnInf7/0Gvt8q?=
- =?us-ascii?Q?SH1U/Ou6rEZkv/1JeWxgzRhb3i18z/eiReHPNZKPYv+7axXUx7ahFBaMshWJ?=
- =?us-ascii?Q?IFp53/kQcZT7McZKqtgLrkWsABDY6ik4tNk81ypM5TNM7kEovcdlimTBp5l6?=
- =?us-ascii?Q?bjcf9o+38cL0Ab4EHOsx5LKX1jLCq2t2y2DAbPdpNeARN2t95o0LHjxMFhBn?=
- =?us-ascii?Q?US38DEiY3eVUrfjwDmo+zXEz45/5AgvwtnLQZhuy7d0jtLukGl78vP3WlWom?=
- =?us-ascii?Q?rrmC0oZw0AS04wOxbY4GBHrXBqETEfBdG4lDV4qYV0bzvvKyALF+IG2Jxwbq?=
- =?us-ascii?Q?zg63ATWoGMdgPnqC/oRfqbZVw7oFsXedTKu4J1BxUApfM+XUbZuN5zOvPa72?=
- =?us-ascii?Q?rAbJ+dCLxhbqcYk2L497LU1UGvZUXDrZrEN6sMbHNbX+w/46fgh5noqkW2Ol?=
- =?us-ascii?Q?bJPLrwwWlABA7bHLaejAyoxwZlcsxnyE6D6GhNJAu/idCv5piOobeXfQj7ld?=
- =?us-ascii?Q?VLuNE2Ekt4BXtOHi5PxRGrgAkcouElXklHVyOE7B2VEO4OXEROEhZCmYqhYW?=
- =?us-ascii?Q?Gf6p1MMUDQ/BCMV4Qvm+0tB3UhFmgrnXylyVXpUycD0wCM5Q1PYC7daScdIo?=
- =?us-ascii?Q?frcKZhyW7/p9Umyk3pHbW4JgxxCN7k6jf87k4DCNsg/GWGDsEAH5UMpBMu/T?=
- =?us-ascii?Q?tQd9zk2lW20zIclbNybKWvLJDktrZODYJRPL/bqmtFaj26kMStKV3YKu1SUv?=
- =?us-ascii?Q?lDYyLove6sK7aQjcaTh0nQqh5OD9+KgoVSu0YxuWZBZWoj8vNoJ+y2L/ssil?=
- =?us-ascii?Q?r8h5MfaA25lq06+mLAl13jw7a/tHtJGeRZ2YwkRuATEQL/PgTgAw/EawKW5Z?=
- =?us-ascii?Q?ewXPKuV7L9zgkFZI+/Se+SreNS2bIKk=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85cd2d53-48fa-476f-b6ff-08de85bb9ad4
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR03MB8272.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 13:29:53.6959
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MBUWIldycPuvcApCdX8Ol+TMq3v1iCP1j2GAHj9YKb3y5avpkuMWD4XaeZmcXG2m2Ey278CMwY1W27hCfdj/9ixr/j7Wqp+shGNOrIFug7M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB989126
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] xen: handle domain_shutdown() return values
+To: Mykola Kvach <xakep.amatop@gmail.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+References: <95dacecdce8f8417562548e16a4d3e11c41a3f27.1773923242.git.mykola_kvach@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <95dacecdce8f8417562548e16a4d3e11c41a3f27.1773923242.git.mykola_kvach@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-With the removal of lazy FPU, the full state is always restored on context
-switch so stop tracking whether nonlazy xstate is used.
+On 19.03.2026 13:42, Mykola Kvach wrote:
+> From: Mykola Kvach <mykola_kvach@epam.com>
+> 
+> Propagate domain_shutdown() return codes through the shutdown paths
+> which can still report errors to their callers, and log explicit
+> failures in fire-and-forget paths instead of silently discarding the
+> result.
+> 
+> This makes the shutdown contract explicit for callers which can report
+> errors, while preserving observable diagnostics for the remaining
+> fire-and-forget paths.
+> 
+> It also fixes MISRA Dir 4.7 and Rule 17.7 violations by ensuring that
+> the returned status is tested or otherwise used.
+> 
+> Suggested-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
- xen/arch/x86/domctl.c             |  1 -
- xen/arch/x86/hvm/hvm.c            |  1 -
- xen/arch/x86/i387.c               | 12 +-----------
- xen/arch/x86/include/asm/domain.h |  3 ---
- xen/arch/x86/include/asm/xstate.h |  6 ++----
- xen/arch/x86/xstate.c             |  3 ---
- 6 files changed, 3 insertions(+), 23 deletions(-)
+I don't agree with this. For what you want to do (as per the link below)
+this is a prereq, but as an independent change I'm not convinced this is
+needed. Once it is grouped with that other change, it's kind of natural,
+and hence any Suggested-by: would feel odd.
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index d9b08182ac1d..a9fbb2d405b7 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -1013,7 +1013,6 @@ long arch_do_domctl(
- 
-                 v->arch.xcr0 = _xcr0;
-                 v->arch.xcr0_accum = _xcr0_accum;
--                v->arch.nonlazy_xstate_used = _xcr0_accum & XSTATE_NONLAZY;
-                 compress_xsave_states(v, _xsave_area,
-                                       evc->size - PV_XSAVE_HDR_SIZE);
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index d4ba82845146..0e7b66d726ae 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1383,7 +1383,6 @@ static int cf_check hvm_load_cpu_xsave_states(
- 
-     v->arch.xcr0 = ctxt->xcr0;
-     v->arch.xcr0_accum = ctxt->xcr0_accum;
--    v->arch.nonlazy_xstate_used = ctxt->xcr0_accum & XSTATE_NONLAZY;
-     compress_xsave_states(v, &ctxt->save_area,
-                           size - offsetof(struct hvm_hw_cpu_xsave, save_area));
- 
-diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
-index 5e893a2aab94..9acaaf4673df 100644
---- a/xen/arch/x86/i387.c
-+++ b/xen/arch/x86/i387.c
-@@ -108,25 +108,18 @@ static inline void fpu_fxrstor(struct vcpu *v)
- /*      FPU Save Functions     */
- /*******************************/
- 
--static inline uint64_t vcpu_xsave_mask(const struct vcpu *v)
--{
--    return v->arch.nonlazy_xstate_used ? XSTATE_ALL : XSTATE_LAZY;
--}
--
- /* Save x87 extended state */
- static inline void fpu_xsave(struct vcpu *v)
- {
-     bool ok;
--    uint64_t mask = vcpu_xsave_mask(v);
- 
--    ASSERT(mask);
-     /*
-      * XCR0 normally represents what guest OS set. In case of Xen itself,
-      * we set the accumulated feature mask before doing save/restore.
-      */
-     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
-     ASSERT(ok);
--    xsave(v, mask);
-+    xsave(v, XSTATE_ALL);
-     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
-     ASSERT(ok);
- }
-@@ -202,9 +195,6 @@ void vcpu_restore_fpu(struct vcpu *v)
-  */
- static bool _vcpu_save_fpu(struct vcpu *v)
- {
--    if ( !v->arch.nonlazy_xstate_used )
--        return false;
--
-     ASSERT(!is_idle_vcpu(v));
- 
-     /* This can happen, if a paravirtualised guest OS has set its CR0.TS. */
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index bd7b02085ef8..385a6666dafa 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -667,9 +667,6 @@ struct arch_vcpu
-      * it explicitly enables it via xcr0.
-      */
-     uint64_t xcr0_accum;
--    /* This variable determines whether nonlazy extended state has been used,
--     * and thus should be saved/restored. */
--    bool nonlazy_xstate_used;
- 
-     struct vmce vmce;
- 
-diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
-index ca38c43ec1c3..c96d75e38b25 100644
---- a/xen/arch/x86/include/asm/xstate.h
-+++ b/xen/arch/x86/include/asm/xstate.h
-@@ -33,12 +33,10 @@ extern uint32_t mxcsr_mask;
- #define XSTATE_FP_SSE  (X86_XCR0_X87 | X86_XCR0_SSE)
- #define XCNTXT_MASK    (X86_XCR0_X87 | X86_XCR0_SSE | X86_XCR0_YMM | \
-                         X86_XCR0_OPMASK | X86_XCR0_ZMM | X86_XCR0_HI_ZMM | \
--                        XSTATE_NONLAZY)
-+                        X86_XCR0_BNDREGS | X86_XCR0_BNDCSR | X86_XCR0_PKRU | \
-+                        X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)
- 
- #define XSTATE_ALL     (~(1ULL << 63))
--#define XSTATE_NONLAZY (X86_XCR0_BNDREGS | X86_XCR0_BNDCSR | X86_XCR0_PKRU | \
--                        X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)
--#define XSTATE_LAZY    (XSTATE_ALL & ~XSTATE_NONLAZY)
- #define XSTATE_XSAVES_ONLY         0
- #define XSTATE_COMPACTION_ENABLED  (1ULL << 63)
- 
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index 11d390cac985..658f372b8c51 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -991,9 +991,6 @@ int handle_xsetbv(u32 index, u64 new_bv)
-     curr->arch.xcr0 = new_bv;
-     curr->arch.xcr0_accum |= new_bv;
- 
--    if ( new_bv & XSTATE_NONLAZY )
--        curr->arch.nonlazy_xstate_used = 1;
--
-     mask &= ~XSTATE_FP_SSE;
-     if ( mask )
-     {
--- 
-2.53.0
+I'm further unconvinced logging is the right course of action in all of
+the cases. Some may want to be assertions instead?
 
+Jan
+
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> ---
+> Link to discussion: https://patchew.org/Xen/cover.1748848482.git.mykola._5Fkvach@epam.com/7bd75ecfff5b0a75ea5abd7cc4934582d7e1250c.1748848482.git.mykola._5Fkvach@epam.com/#90048f71-8313-4110-924c-f956a2bec5a0@suse.com
 
