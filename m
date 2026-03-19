@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51DE91075262
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 06:58:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1256667.1551226 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065C4107526A
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2026 06:58:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1256663.1551190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w37KW-0005OZ-IU; Thu, 19 Mar 2026 06:58:04 +0000
+	id 1w37KS-0004Rr-90; Thu, 19 Mar 2026 06:58:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1256667.1551226; Thu, 19 Mar 2026 06:58:04 +0000
+Received: by outflank-mailman (output) from mailman id 1256663.1551190; Thu, 19 Mar 2026 06:58:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w37KW-0005OG-Dx; Thu, 19 Mar 2026 06:58:04 +0000
-Received: by outflank-mailman (input) for mailman id 1256667;
- Thu, 19 Mar 2026 06:58:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w37KS-0004Rf-5M; Thu, 19 Mar 2026 06:58:00 +0000
+Received: by outflank-mailman (input) for mailman id 1256663;
+ Thu, 19 Mar 2026 06:57:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F4ko=BT=huawei.com=fengchengwen@srs-se1.protection.inumbo.net>)
- id 1w37KV-0003m8-Et
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 06:58:03 +0000
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com
- [113.46.200.217]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f6b94a0f-2360-11f1-9ccf-f158ae23cfc8;
- Thu, 19 Mar 2026 07:58:01 +0100 (CET)
+ id 1w37KR-0003zM-0b
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2026 06:57:59 +0000
+Received: from canpmsgout06.his.huawei.com (canpmsgout06.his.huawei.com
+ [113.46.200.221]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f43612db-2360-11f1-b164-2bf370ae4941;
+ Thu, 19 Mar 2026 07:57:57 +0100 (CET)
 Received: from mail.maildlp.com (unknown [172.19.162.197])
- by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4fbxFs2L2qzcZyY;
- Thu, 19 Mar 2026 14:52:17 +0800 (CST)
+ by canpmsgout06.his.huawei.com (SkyGuard) with ESMTPS id 4fbxGZ3YfYzRhVC;
+ Thu, 19 Mar 2026 14:52:54 +0800 (CST)
 Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
- by mail.maildlp.com (Postfix) with ESMTPS id 004D440363;
- Thu, 19 Mar 2026 14:57:58 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id BB35540363;
+ Thu, 19 Mar 2026 14:57:53 +0800 (CST)
 Received: from localhost.localdomain (10.50.163.32) by
  kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 19 Mar 2026 14:57:55 +0800
+ 15.2.1544.11; Thu, 19 Mar 2026 14:57:51 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,14 +48,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6b94a0f-2360-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: f43612db-2360-11f1-b164-2bf370ae4941
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=yK49JnkLKpYBZOqDDiJ5tuFkHdnhSIg09tqBvQIMd28=;
-	b=kKHyA/oBTEDBLkGyt6IF5Mfl/9NSCdKjuLiy/HF08xBMphI4nGy1HFAwxMG51XNjBjkBo5mE1
-	yjJ8Kunab1b6+Q35VPZpdNjHq9uHYBsa/8T6vWVzXsQpo9LPA6UF2V4Yh93oUHRXBNRvgd2kM7T
-	N9D++v+eloU19GgyjqKPnrA=
+	bh=oewhn2IMbmtF3+gd2nTsD3HCqK7a08k6f+Tu2Cay+iU=;
+	b=oFXndCwr5vh34n8gkLHTXEqaV/0hW8+wBcd4nv9xiy4HlW6wnZujLWAqw5SOSdiBqNavOPkDN
+	9/+jlDZPPrN8NNsh9km26BRhYie1bdqp34HdjgLcKvnwuGrBr4N5KNZvnUcjwwYV3Sn8Jltg1CS
+	eKmjnoNFW6S+6Hh8gKOwc+M=
 From: Chengwen Feng <fengchengwen@huawei.com>
 To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
 	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
@@ -92,9 +92,9 @@ CC: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
 	<loongarch@lists.linux.dev>, <linux-riscv@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>, <linux-acpi@vger.kernel.org>,
 	<linux-perf-users@vger.kernel.org>, <stable@vger.kernel.org>
-Subject: [PATCH v9 7/7] PCI/TPH: Fix get cpu steer-tag fail on ARM64 platform
-Date: Thu, 19 Mar 2026 14:57:35 +0800
-Message-ID: <20260319065735.45954-8-fengchengwen@huawei.com>
+Subject: [PATCH v9 5/7] ACPI: Centralize acpi_get_cpu_uid() declaration in include/linux/acpi.h
+Date: Thu, 19 Mar 2026 14:57:33 +0800
+Message-ID: <20260319065735.45954-6-fengchengwen@huawei.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20260319065735.45954-1-fengchengwen@huawei.com>
 References: <20260319065735.45954-1-fengchengwen@huawei.com>
@@ -104,129 +104,97 @@ X-Originating-IP: [10.50.163.32]
 X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
  kwepemk500009.china.huawei.com (7.202.194.94)
 
-pcie_tph_get_cpu_st() is broken on ARM64:
-1. pcie_tph_get_cpu_st() passes cpu_uid to the PCI ACPI DSM method.
-   cpu_uid should be the ACPI Processor UID [1].
-2. In BNXT, pcie_tph_get_cpu_st() is passed a cpu_uid obtained via
-   cpumask_first(irq->cpu_mask) - the logical CPU ID of a CPU core,
-   generated and managed by kernel (e.g., [0,255] for a system  with 256
-   logical CPU cores).
-3. On ARM64 platforms, ACPI assigns Processor UID to cores listed in the
-   MADT table, and this UID may not match the kernel's logical CPU ID.
-   When this occurs, the mismatch results in the wrong CPU steer-tag.
-4. On AMD x86 the logical CPU ID is identical to the ACPI Processor UID
-   so the mismatch is not seen.
+- Add acpi_get_cpu_uid() prototype to include/linux/acpi.h (global
+  scope)
+- Remove arch-specific acpi_get_cpu_uid() declarations from
+  arm64/loongarch/riscv/x86 asm/acpi.h
 
-Resolution:
-1. Use acpi_get_cpu_uid() in pcie_tph_get_cpu_st() to translate from
-   logical CPU ID to ACPI Processor UID needed for the DSM call.
-2. Rename pcie_tpu_get_cpu_st() parameter from cpu_uid to cpu to
-   reflect that it is a logical CPU_ID.
+This centralizes the interface declaration for consistency, avoiding
+duplicate prototypes across architectures and simplifying future
+maintenance.
 
-[1] According to ECN_TPH-ST_Revision_20200924
-    (https://members.pcisig.com/wg/PCI-SIG/document/15470), the input
-    is defined as: "If the target is a processor, then this field
-    represents the ACPI Processor UID of the processor as specified in
-    the MADT. If the target is a processor container, then this field
-    represents the ACPI Processor UID of the processor container as
-    specified in the PPTT."
-
-Fixes: d2e8a34876ce ("PCI/TPH: Add Steering Tag support")
 Cc: stable@vger.kernel.org
 Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 ---
- Documentation/PCI/tph.rst |  4 ++--
- drivers/pci/tph.c         | 16 +++++++++++-----
- include/linux/pci-tph.h   |  4 ++--
- 3 files changed, 15 insertions(+), 9 deletions(-)
+ arch/arm64/include/asm/acpi.h     |  1 -
+ arch/loongarch/include/asm/acpi.h |  1 -
+ arch/riscv/include/asm/acpi.h     |  1 -
+ arch/x86/include/asm/acpi.h       |  2 --
+ include/linux/acpi.h              | 11 +++++++++++
+ 5 files changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/PCI/tph.rst b/Documentation/PCI/tph.rst
-index e8993be64fd6..b6cf22b9bd90 100644
---- a/Documentation/PCI/tph.rst
-+++ b/Documentation/PCI/tph.rst
-@@ -79,10 +79,10 @@ To retrieve a Steering Tag for a target memory associated with a specific
- CPU, use the following function::
- 
-   int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type type,
--                          unsigned int cpu_uid, u16 *tag);
-+                          unsigned int cpu, u16 *tag);
- 
- The `type` argument is used to specify the memory type, either volatile
--or persistent, of the target memory. The `cpu_uid` argument specifies the
-+or persistent, of the target memory. The `cpu` argument specifies the
- CPU where the memory is associated to.
- 
- After the ST value is retrieved, the device driver can use the following
-diff --git a/drivers/pci/tph.c b/drivers/pci/tph.c
-index ca4f97be7538..b67c9ad14bda 100644
---- a/drivers/pci/tph.c
-+++ b/drivers/pci/tph.c
-@@ -236,21 +236,27 @@ static int write_tag_to_st_table(struct pci_dev *pdev, int index, u16 tag)
-  * with a specific CPU
-  * @pdev: PCI device
-  * @mem_type: target memory type (volatile or persistent RAM)
-- * @cpu_uid: associated CPU id
-+ * @cpu: associated CPU id
-  * @tag: Steering Tag to be returned
-  *
-  * Return the Steering Tag for a target memory that is associated with a
-- * specific CPU as indicated by cpu_uid.
-+ * specific CPU as indicated by cpu.
-  *
-  * Return: 0 if success, otherwise negative value (-errno)
-  */
- int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type mem_type,
--			unsigned int cpu_uid, u16 *tag)
-+			unsigned int cpu, u16 *tag)
+diff --git a/arch/arm64/include/asm/acpi.h b/arch/arm64/include/asm/acpi.h
+index 2219a3301e72..bdb0ecf95b5c 100644
+--- a/arch/arm64/include/asm/acpi.h
++++ b/arch/arm64/include/asm/acpi.h
+@@ -118,7 +118,6 @@ static inline u32 get_acpi_id_for_cpu(unsigned int cpu)
  {
- #ifdef CONFIG_ACPI
- 	struct pci_dev *rp;
- 	acpi_handle rp_acpi_handle;
- 	union st_info info;
-+	u32 cpu_uid;
-+	int ret;
+ 	return	acpi_cpu_get_madt_gicc(cpu)->uid;
+ }
+-int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
+ int get_cpu_for_acpi_id(u32 uid);
+ 
+ static inline void arch_fix_phys_package_id(int num, u32 slot) { }
+diff --git a/arch/loongarch/include/asm/acpi.h b/arch/loongarch/include/asm/acpi.h
+index 8bb101b4557e..7376840fa9f7 100644
+--- a/arch/loongarch/include/asm/acpi.h
++++ b/arch/loongarch/include/asm/acpi.h
+@@ -44,7 +44,6 @@ static inline u32 get_acpi_id_for_cpu(unsigned int cpu)
+ {
+ 	return acpi_core_pic[cpu_logical_map(cpu)].processor_id;
+ }
+-int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
+ 
+ #endif /* !CONFIG_ACPI */
+ 
+diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
+index f3520cc85af3..6e13695120bc 100644
+--- a/arch/riscv/include/asm/acpi.h
++++ b/arch/riscv/include/asm/acpi.h
+@@ -65,7 +65,6 @@ static inline u32 get_acpi_id_for_cpu(int cpu)
+ {
+ 	return acpi_cpu_get_madt_rintc(cpu)->uid;
+ }
+-int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
+ 
+ int acpi_get_riscv_isa(struct acpi_table_header *table,
+ 		       unsigned int cpu, const char **isa);
+diff --git a/arch/x86/include/asm/acpi.h b/arch/x86/include/asm/acpi.h
+index 92b5c27c4fea..a03aa6f999d1 100644
+--- a/arch/x86/include/asm/acpi.h
++++ b/arch/x86/include/asm/acpi.h
+@@ -157,8 +157,6 @@ static inline bool acpi_has_cpu_in_madt(void)
+ 	return !!acpi_lapic;
+ }
+ 
+-int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
+-
+ #define ACPI_HAVE_ARCH_SET_ROOT_POINTER
+ static __always_inline void acpi_arch_set_root_pointer(u64 addr)
+ {
+diff --git a/include/linux/acpi.h b/include/linux/acpi.h
+index 4d2f0bed7a06..74a73f0e5944 100644
+--- a/include/linux/acpi.h
++++ b/include/linux/acpi.h
+@@ -324,6 +324,17 @@ int acpi_unmap_cpu(int cpu);
+ 
+ acpi_handle acpi_get_processor_handle(int cpu);
+ 
++/**
++ * acpi_get_cpu_uid() - Get ACPI Processor UID of from MADT table
++ * @cpu: Logical CPU number (0-based)
++ * @uid: Pointer to store ACPI Processor UID
++ *
++ * Return: 0 on success (ACPI Processor ID stored in *uid);
++ *         -EINVAL if CPU number is invalid or out of range;
++ *         -ENODEV if ACPI Processor UID for the CPU is not found.
++ */
++int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
 +
-+	ret = acpi_get_cpu_uid(cpu, &cpu_uid);
-+	if (ret != 0)
-+		return ret;
- 
- 	rp = pcie_find_root_port(pdev);
- 	if (!rp || !rp->bus || !rp->bus->bridge)
-@@ -265,9 +271,9 @@ int pcie_tph_get_cpu_st(struct pci_dev *pdev, enum tph_mem_type mem_type,
- 
- 	*tag = tph_extract_tag(mem_type, pdev->tph_req_type, &info);
- 
--	pci_dbg(pdev, "get steering tag: mem_type=%s, cpu_uid=%d, tag=%#04x\n",
-+	pci_dbg(pdev, "get steering tag: mem_type=%s, cpu=%d, tag=%#04x\n",
- 		(mem_type == TPH_MEM_TYPE_VM) ? "volatile" : "persistent",
--		cpu_uid, *tag);
-+		cpu, *tag);
- 
- 	return 0;
- #else
-diff --git a/include/linux/pci-tph.h b/include/linux/pci-tph.h
-index ba28140ce670..be68cd17f2f8 100644
---- a/include/linux/pci-tph.h
-+++ b/include/linux/pci-tph.h
-@@ -25,7 +25,7 @@ int pcie_tph_set_st_entry(struct pci_dev *pdev,
- 			  unsigned int index, u16 tag);
- int pcie_tph_get_cpu_st(struct pci_dev *dev,
- 			enum tph_mem_type mem_type,
--			unsigned int cpu_uid, u16 *tag);
-+			unsigned int cpu, u16 *tag);
- void pcie_disable_tph(struct pci_dev *pdev);
- int pcie_enable_tph(struct pci_dev *pdev, int mode);
- u16 pcie_tph_get_st_table_size(struct pci_dev *pdev);
-@@ -36,7 +36,7 @@ static inline int pcie_tph_set_st_entry(struct pci_dev *pdev,
- { return -EINVAL; }
- static inline int pcie_tph_get_cpu_st(struct pci_dev *dev,
- 				      enum tph_mem_type mem_type,
--				      unsigned int cpu_uid, u16 *tag)
-+				      unsigned int cpu, u16 *tag)
- { return -EINVAL; }
- static inline void pcie_disable_tph(struct pci_dev *pdev) { }
- static inline int pcie_enable_tph(struct pci_dev *pdev, int mode)
+ #ifdef CONFIG_ACPI_HOTPLUG_IOAPIC
+ int acpi_get_ioapic_id(acpi_handle handle, u32 gsi_base, u64 *phys_addr);
+ #endif
 -- 
 2.17.1
 
