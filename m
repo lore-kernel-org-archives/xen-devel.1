@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E0A41098796
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:07:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258165.1552337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 506CE1098796
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:07:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258162.1552329 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bRo-0006Ww-5h; Fri, 20 Mar 2026 15:07:36 +0000
+	id 1w3bRi-0006HZ-Vl; Fri, 20 Mar 2026 15:07:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258165.1552337; Fri, 20 Mar 2026 15:07:36 +0000
+Received: by outflank-mailman (output) from mailman id 1258162.1552329; Fri, 20 Mar 2026 15:07:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bRo-0006Wp-2f; Fri, 20 Mar 2026 15:07:36 +0000
-Received: by outflank-mailman (input) for mailman id 1258165;
- Fri, 20 Mar 2026 15:07:34 +0000
+	id 1w3bRi-0006HS-SG; Fri, 20 Mar 2026 15:07:30 +0000
+Received: by outflank-mailman (input) for mailman id 1258162;
+ Fri, 20 Mar 2026 15:07:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IyP1=BU=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1w3bMz-0001Ve-M2
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:37 +0000
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com
- [209.85.160.43]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d47e7b0d-246d-11f1-b164-2bf370ae4941;
- Fri, 20 Mar 2026 16:02:36 +0100 (CET)
-Received: by mail-oa1-f43.google.com with SMTP id
- 586e51a60fabf-4094b31a037so1482211fac.1
- for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 08:02:36 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1w3bMp-0001Ve-V4
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:27 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cf05fdfb-246d-11f1-b164-2bf370ae4941;
+ Fri, 20 Mar 2026 16:02:27 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id DE87E5BDF3;
+ Fri, 20 Mar 2026 15:02:21 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C33BD42866;
+ Fri, 20 Mar 2026 15:02:21 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id N6GULn1hvWn5XAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,100 +53,274 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d47e7b0d-246d-11f1-b164-2bf370ae4941
-ARC-Seal: i=1; a=rsa-sha256; t=1774018955; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ZyyhOrXVXff4riATGoZMjnlTiENcMPt21IwX9FKv2R+CpEGCmiaIXPfWA2IDK8iwLC
-         W1B6VXgi1n/QYPMyk4IT769tCheNhaqSwCaAI3b/NOeXU8gk4cFhQCKFu7bgr0ssd/Xh
-         Bw6vh8PltTm5GOrDObOfua+ul3GVZmyBX8FnuTfRxjMoWPnVT2yfBer2A0Wdfz5G/6Y6
-         xHL0m3FiiStOpx3uBJTflQTd8DeV14JRdgGoJVG8+VbTxvu2W1upE2CCBIX/uz+NP2c+
-         a/eQqVmKvA+MnbSDAuaKAyug+6P74I1hUGd0i/h2+elzZA5SHmdaDuW8vkks2i1R07H9
-         IsLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=5UaDWyjtfSyl77XXz0U7ShmHX+gyfVpxi6SPVf+gsF0=;
-        fh=wNLC6Hyb5Ukz/ErppBRQBwv8vwa/OMsdh6R8bnNsiPU=;
-        b=lr5E+h6WDTXGZHwEYaBgxwLMoUCnNsVHoET1my2txLkIDv+5j2re7jtp2Q4mnl8RJH
-         NixlzOya6ISgF+AKKMvjCxKAZA3vINmoPmMeoayK43VuPCoYXa+pvRrz0p62BC2wfjsw
-         6usMtfPzkUBQCCVqDd86pmyurbCLHpNviUrAeWeaQYF3DkOhlHxoYSSdQX1wip2hJvAY
-         sRN8jjQIyoegDjstIHEvS2JTLrxbHNTVrd7TejROef8j993+9/qWeEH53IGuW3e5Pq5f
-         1e0PVR52LZ9XqVbF7fe+Wmxkttk5Yd7xPxJLGNcZA/4aPYSpuQPZRJx5kaHGRNY/7jeh
-         yR+w==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1774018955; x=1774623755; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5UaDWyjtfSyl77XXz0U7ShmHX+gyfVpxi6SPVf+gsF0=;
-        b=Mq5cgfZaXafcUH3PKwUs+q2MFgJS2FN/YW01dqTFL7TjZcKOanajWB3VA2APnFnoP9
-         Y1xlajCwpbietzHoPhBf9Ty8wfbd7IFdhKlJ+3m6t8ejt4YnJMyLJ4wVrCHDmY/WVJn7
-         rP8L0e6LHjKTG0HxSY27z90T/YO/tFARbna9Eozne/ArQP4RvIU3OtUzZpgVwKHFsmX5
-         Re9/AKru/ecCbsLlvFpzob35DZdIzmbY2GpMdQ6hnkSxq4LoasLDkIiEgySOjXCOtHJF
-         NWpaZbkxjb3j9aE+zJERn9W420WUWTlhUnsG85GtzcV6909LM3VUJhyVV4Wz9pwJiUda
-         am9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774018955; x=1774623755;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=5UaDWyjtfSyl77XXz0U7ShmHX+gyfVpxi6SPVf+gsF0=;
-        b=DdF+i4L+glf3NIXYh4BsNhlafE9Vfnvn5cPwn56FjlEsrYLHD1JmTCmahlHZrUluSd
-         TUGWWy52t4HFA/BM/CFdu/vRW4bAQARqVpcdR5qjQ7KrlGlzo9Bv9nBz6orSI+FEtlE+
-         kdnWWqbiXk42TLwXmIYPWzYweUiJtCSOat0eBCu8TT5gPAhxfmjuUtZW8Zh1guRYAk2y
-         Pi2UO8h/4GqIbGpjw1Tel2/olj7QjaJ13tImL2PwpGZvehvz72TD4kTAdgiLeHmMbcCs
-         1j+ZMVdl00JNiVcORX20IRB9PtP8zxvOb4idLPIis5Pjjxw7O7Y4uw+YhXjJnnTtffxv
-         s5GQ==
-X-Gm-Message-State: AOJu0YxbPVUcAFVy9dUX6RIv1qkNrDSkv3TeF+YshNwrPkpM8tNIYJte
-	ET7IOvFegNah64Wwf5784FsRwwW2zspFVijmz6HE+lNI2MGGZa9sZV1P05AhDU+9lReZ0jqav8v
-	YUlKOPseRdM61au8X029ZK9gCWxV+eC2pZR1CdBOT3Fsr77D4q5pZ7eLG5A==
-X-Gm-Gg: ATEYQzxPmjYLqhZgtKj289r1XEUopA7KR5b8Tro37JKJzAoD7DvsuWTVyWYXQ4t/ym2
-	EMbLwI6Cl8WjPyM+GouScpCAkrD1MtE/9lvx+5s/PF73XwIyn4KpUSBuIkaqcU7Q5f8GzkBR1JW
-	aYSdu2ubexO5p6j/a/TROR9hPusKwbbzlQq8TLDiYW1n10xIe71AuGK0uIYF1zy9obvUCTicgra
-	wKZvpw/McBr3In4tv8iAoDpoJi8N5wZHdXvAahrJ71shV71kH2QG342a5jPVhcdH52d/gcMpk4O
-	HrtmPpU5EZ3/Jh1rUTvpjrs+O+A16srabqUICQ==
-X-Received: by 2002:a05:6871:529a:b0:416:543c:9180 with SMTP id
- 586e51a60fabf-41c1146aca3mr1918897fac.50.1774018954782; Fri, 20 Mar 2026
- 08:02:34 -0700 (PDT)
+X-Inumbo-ID: cf05fdfb-246d-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1774018941; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YI1ysKQoZ4KtpQt8LrU0cY4zBTnFx8A/2d0JHjXzvmY=;
+	b=SIE3Wn8GWPLkL9ArQd8k4xcqVXtvyUsC2IkfepOHPe3I3rKZtGMsmHG6B9yu0xjw0RyeQr
+	mfYgGNQxegMu9/XhiXVoRKzsZRkfe7bLLJujp0WxofqDGqfHkPLJ6mHrfnAeWGscJqxhWu
+	EERxJRtFRBcFZeoYHKAnNDfVcoozdcM=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1774018941; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YI1ysKQoZ4KtpQt8LrU0cY4zBTnFx8A/2d0JHjXzvmY=;
+	b=SIE3Wn8GWPLkL9ArQd8k4xcqVXtvyUsC2IkfepOHPe3I3rKZtGMsmHG6B9yu0xjw0RyeQr
+	mfYgGNQxegMu9/XhiXVoRKzsZRkfe7bLLJujp0WxofqDGqfHkPLJ6mHrfnAeWGscJqxhWu
+	EERxJRtFRBcFZeoYHKAnNDfVcoozdcM=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 11/12] tools/xl: add xl commands for xenstore quota operations
+Date: Fri, 20 Mar 2026 16:01:19 +0100
+Message-ID: <20260320150120.874878-12-jgross@suse.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
+References: <20260320150120.874878-1-jgross@suse.com>
 MIME-Version: 1.0
-References: <cover.1773911799.git.bertrand.marquis@arm.com> <030d24e1776af7c2391c588bc696592a64a92c51.1773911799.git.bertrand.marquis@arm.com>
-In-Reply-To: <030d24e1776af7c2391c588bc696592a64a92c51.1773911799.git.bertrand.marquis@arm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Fri, 20 Mar 2026 16:02:23 +0100
-X-Gm-Features: AaiRm53ARa9Luu99yDzrIbj2IoLI11hjxXaZ0urSQ1XVJmbKlTftr6CwucdTTAo
-Message-ID: <CAHUa44Geu4ch=xo21w_bOJLM6GLVUn_xU6BiKhks=MLxyWoP2w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] xen/arm: ffa: Fix local ffa_vm_count shadowing
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	MIME_GOOD(-0.10)[text/plain];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RCPT_COUNT_THREE(0.00)[3];
+	RCVD_TLS_ALL(0.00)[]
 
-On Fri, Mar 20, 2026 at 10:07=E2=80=AFAM Bertrand Marquis
-<bertrand.marquis@arm.com> wrote:
->
-> ffa_handle_partition_info_get() declares a local variable named
-> ffa_vm_count, which hides the global atomic ffa_vm_count declared in
-> ffa_private.h.
->
-> This triggered the ECLAIR Rule 5.3 finding "non-compliant local variable
-> `ffa_vm_count'".
->
-> Rename the local counters to vm_count and sp_count and update their
-> uses.
->
-> No functional changes.
->
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> ---
->  xen/arch/arm/tee/ffa_partinfo.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+Add "xl xenstore-quota-get" and "xl xenstore-quota-set" commands for
+retrieving and setting global and per-domain Xenstore quota.
 
-Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- s/quota data/quotas/ in cmdtable (Anthony Perard)
+- test for quota value to fit into type (Anthony Perard)
+- use libxl_xs_quota_list_init() (Anthony Perard)
+- use xcalloc() (Anthony Perard)
+---
+ tools/xl/Makefile      |  1 +
+ tools/xl/xl.h          |  2 +
+ tools/xl/xl_cmdtable.c | 10 +++++
+ tools/xl/xl_parse.c    | 28 +++++++++++++
+ tools/xl/xl_parse.h    |  1 +
+ tools/xl/xl_xsquota.c  | 90 ++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 132 insertions(+)
+ create mode 100644 tools/xl/xl_xsquota.c
 
-Cheers,
-Jens
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index 973ff0e1a2..e4eed8be13 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -24,6 +24,7 @@ XL_OBJS += xl_sched.o xl_pci.o xl_vcpu.o xl_cdrom.o xl_mem.o
+ XL_OBJS += xl_info.o xl_console.o xl_misc.o
+ XL_OBJS += xl_vmcontrol.o xl_saverestore.o xl_migrate.o
+ XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o
++XL_OBJS += xl_xsquota.o
+ 
+ $(XL_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+ $(XL_OBJS): CFLAGS += $(CFLAGS_XL)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 9000df00de..0efc07a6ba 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -217,6 +217,8 @@ int main_psr_mba_set(int argc, char **argv);
+ int main_psr_mba_show(int argc, char **argv);
+ #endif
+ int main_qemu_monitor_command(int argc, char **argv);
++int main_xsquota_get(int argc, char **argv);
++int main_xsquota_set(int argc, char **argv);
+ 
+ void help(const char *command);
+ 
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 06a0039718..5098f72ab4 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -649,6 +649,16 @@ const struct cmd_spec cmd_table[] = {
+       "-h print this help\n"
+     },
+ #endif
++    { "xenstore-quota-get",
++      &main_xsquota_get, 0, 0,
++      "List global or domain specific Xenstore quotas",
++      "<Domain>|-g",
++    },
++    { "xenstore-quota-set",
++      &main_xsquota_set, 0, 1,
++      "Set global or domain specific Xenstore quotas",
++      "<Domain>|-g <quota>=<val>...",
++    },
+ };
+ 
+ const int cmdtable_len = ARRAY_SIZE(cmd_table);
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 1a2ea8b5d5..4b074fdb58 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1314,6 +1314,34 @@ out:
+     return ret;
+ }
+ 
++int parse_xsquota_item(const char *buf, struct libxl_xs_quota_item *item)
++{
++    const char *eq;
++    char *endptr;
++    unsigned long val;
++
++    eq = strchr(buf, '=');
++    if (!eq) {
++        fprintf(stderr, "Quota specification \"%s\" lacks \"=\".\n", buf);
++        return ERROR_INVAL;
++    }
++    errno = 0;
++    item->name = strndup(buf, eq - buf);
++    if (!item->name)
++        return ERROR_NOMEM;
++    val = strtoul(eq + 1, &endptr, 0);
++    if (errno || !eq[1] || *endptr || (unsigned int)val != val) {
++        fprintf(stderr,
++                "Quota specification \"%s\" uses illegal value \"%s\".\n",
++                buf, eq + 1);
++        return ERROR_INVAL;
++    }
++
++    item->val = val;
++
++    return 0;
++}
++
+ void parse_config_data(const char *config_source,
+                        const char *config_data,
+                        int config_len,
+diff --git a/tools/xl/xl_parse.h b/tools/xl/xl_parse.h
+index fe0d586cdd..57bb43a067 100644
+--- a/tools/xl/xl_parse.h
++++ b/tools/xl/xl_parse.h
+@@ -36,6 +36,7 @@ int parse_nic_config(libxl_device_nic *nic, XLU_Config **config, char *token);
+ int parse_vdispl_config(libxl_device_vdispl *vdispl, char *token);
+ int parse_vsnd_item(libxl_device_vsnd *vsnd, const char *spec);
+ int parse_vkb_config(libxl_device_vkb *vkb, char *token);
++int parse_xsquota_item(const char *buf, struct libxl_xs_quota_item *item);
+ 
+ int match_option_size(const char *prefix, size_t len,
+                       char *arg, char **argopt);
+diff --git a/tools/xl/xl_xsquota.c b/tools/xl/xl_xsquota.c
+new file mode 100644
+index 0000000000..3533d22dae
+--- /dev/null
++++ b/tools/xl/xl_xsquota.c
+@@ -0,0 +1,90 @@
++/* SPDX-License-Identifier: LGPL-2.1-only */
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <libxl.h>
++#include <libxlutil.h>
++
++#include "xl.h"
++#include "xl_utils.h"
++#include "xl_parse.h"
++
++int main_xsquota_get(int argc, char **argv)
++{
++    libxl_xs_quota_list q;
++    unsigned int i;
++    int rc;
++
++    if (argc != 2) {
++        fprintf(stderr, "Domain or \"-g\" must be specified.\n");
++        return EXIT_FAILURE;
++    }
++
++    libxl_xs_quota_list_init(&q);
++
++    if (!strcmp(argv[1], "-g")) {
++        rc = libxl_xs_quota_global_get(ctx, &q);
++    } else {
++        uint32_t domid = find_domain(argv[1]);
++
++        rc = libxl_xs_quota_domain_get(ctx, domid, &q);
++    }
++
++    if (rc) {
++        libxl_xs_quota_list_dispose(&q);
++        fprintf(stderr, "Quota could not be obtained.\n");
++        return EXIT_FAILURE;
++    }
++
++    printf("Quota name           Quota value\n");
++    printf("--------------------------------\n");
++    for (i = 0; i < q.num_quota; i++)
++        printf("%-20s %8u\n", q.quota[i].name, q.quota[i].val);
++
++    libxl_xs_quota_list_dispose(&q);
++
++    return EXIT_SUCCESS;
++}
++
++int main_xsquota_set(int argc, char **argv)
++{
++    unsigned int i;
++    libxl_xs_quota_list q;
++    int rc = EXIT_FAILURE;
++
++    if (argc < 3) {
++        fprintf(stderr, "Not enough parameters.\n");
++        help("xenstore-quota-set");
++        return EXIT_FAILURE;
++    }
++
++    libxl_xs_quota_list_init(&q);
++
++    q.num_quota = argc - 2;
++    q.quota = xcalloc(q.num_quota, sizeof(*q.quota));
++
++    for (i = 2; i < argc; i++) {
++        if (parse_xsquota_item(argv[i], q.quota + i - 2))
++            goto err;
++    }
++
++    if (!strcmp(argv[1], "-g")) {
++         rc = libxl_xs_quota_global_set(ctx, &q);
++    } else {
++        uint32_t domid = find_domain(argv[1]);
++
++        rc = libxl_xs_quota_domain_set(ctx, domid, &q);
++    }
++
++    if (rc) {
++        fprintf(stderr, "Quota could not be set.\n");
++        rc = EXIT_FAILURE;
++    } else {
++        rc = EXIT_SUCCESS;
++    }
++
++ err:
++    libxl_xs_quota_list_dispose(&q);
++
++    return rc;
++}
+-- 
+2.53.0
+
 
