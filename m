@@ -4,37 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5271098782
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 14:31:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258077.1552239 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA4F61098793
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:01:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258096.1552258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3asE-0005Sw-1Z; Fri, 20 Mar 2026 14:30:50 +0000
+	id 1w3bLz-0001l0-JP; Fri, 20 Mar 2026 15:01:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258077.1552239; Fri, 20 Mar 2026 14:30:50 +0000
+Received: by outflank-mailman (output) from mailman id 1258096.1552258; Fri, 20 Mar 2026 15:01:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3asD-0005Sp-U8; Fri, 20 Mar 2026 14:30:49 +0000
-Received: by outflank-mailman (input) for mailman id 1258077;
- Fri, 20 Mar 2026 14:30:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=X43w=BU=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1w3asC-0005Sj-3x
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 14:30:48 +0000
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 61d221dc-2469-11f1-9ccf-f158ae23cfc8;
- Fri, 20 Mar 2026 15:30:45 +0100 (CET)
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-439b2965d4bso514536f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 07:30:45 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-146-121.play-internet.pl.
- [109.243.146.121]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64717e97sm7051545f8f.35.2026.03.20.07.30.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Mar 2026 07:30:44 -0700 (PDT)
+	id 1w3bLz-0001kp-F5; Fri, 20 Mar 2026 15:01:35 +0000
+Received: by outflank-mailman (input) for mailman id 1258096;
+ Fri, 20 Mar 2026 15:01:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1w3bLy-0001Ve-B4
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:01:34 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id af1e4f0b-246d-11f1-b164-2bf370ae4941;
+ Fri, 20 Mar 2026 16:01:33 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 046424D27B;
+ Fri, 20 Mar 2026 15:01:33 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D619B42868;
+ Fri, 20 Mar 2026 15:01:32 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id cusPM0xhvWksXAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:01:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,140 +54,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61d221dc-2469-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774017045; x=1774621845; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=VwgfdF4QVqtMsrH3JfJKyHvtzCZOz5DQUkw+D8MeQeA=;
-        b=PLn6s97RY2HxWQLQwHOAXOYKMjhVplpBgLVTrErASqIxl81ZyPVFeRKcWngB7oO/Lt
-         8WmlpfhPWv4+aOD47U9/dcKVXzZ6WE83h+Ro+2yvGMQ3/7Qtftmxg4hvklSg/mrOsmOO
-         fx83IsHoY0Fbs7ESlFAW8MIFZKJ05ucAoh5ndtYthH0h/bZVAfEE/VZP+uub3xTCxEnv
-         zDDbMEUKTVRs771orUErVkCzzk/niW3NIATtcdHa++nvT+fPxNYk5n/AtraqWlIDA5nx
-         Ac98acGllaAvMmRjHy91chLvivhxIWJjVnGMcQeJH1g5OKSXDjne4YGFu7Ht7SWxYv1p
-         oIFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774017045; x=1774621845;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VwgfdF4QVqtMsrH3JfJKyHvtzCZOz5DQUkw+D8MeQeA=;
-        b=nuRCJvpI0f1t3WerSQQN89OuP/aFm3vKuYrVjWXdoK4DDi5hveVNFf6pvZKltrISeO
-         +mXtlbLoW3t5swdQTa2u7BCqDpgVBntP9wjOGhCnMg+1FsyMGYGQE02DPxc6tcbM0K+h
-         pXR9sapo8y8Eo6BoIwPCV2QthugmDqp55LG77v8hla56HVCB0cxUV6m0wKJbkAWytR63
-         cj8LMKSjAVoRMlRb8esAPT1e6GGEQTjDKAEcuLluCkJ7zkEpXHVaauIFxplxbnhD3zec
-         fdePQT1Yxw2eDuDFZKQPaUf3jTwu0i3FDMcjQB38bzVsKjt3HphAx7Xofo58YMXxZ+tJ
-         Duug==
-X-Forwarded-Encrypted: i=1; AJvYcCUnoL82iVk35imqk4cyBFOdQDS/1/BnJ4xlU5BMRnnUPMA7LZh+C9n7DLHy/4uTd9lUNNz6nfm/Tm0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyXZrFvdTsuyCoQMixulJXxobwhuc+KOGkyMHZPIT1PDlXjlyU2
-	s16ACfar9rzxt09yUshkSjbIP/Q+D5lJ2ATspQ8j9sdnJe6VRiYDm5n9
-X-Gm-Gg: ATEYQzwMSjUX0tTWtDHu4e/b8rs+A/U/ojcH70dNpyifTVVJ/ZVL1rdFANt8oKldk24
-	SBAslEhvXAEkjpzzbMN6Ks1D17mqhoOZ1/rP/YLlTqPcaIQv+UMD/GdeLHqFWtgwtH6tyg3GgW9
-	n6jMYcL/KRlnNZJNL+fOZHPilVjrzCGnDbtgXXLvOVm9871S4SWo949KcvRY19NBL5sEvIWCbKD
-	mZVfqmR4CNWo7KbXwuYDOSbpVVZqCIQFMJyen2aq/7JXP41L9y/LIPJVhKDgNgCpKu4cUkMXr+H
-	wyC+2sExXEw4Z/Exd5k6IHiN+bhuaMGy8gQEPBY5HKXPD53gQw/O10egDcH0NB+ICufzX2HgWaC
-	XOWRd6/PJLPdvAQVHAvFlsC9ucp7rdI0I+fh+YdWa6tYZCFO8xHgUMZK6FxfU4i+p81RxxZmOdG
-	M0cfIc7Uz6xLuCIo12IyudWxarAe0xGkbh5iK6yVcH/samY/1Ge2SdW5NDe3PMemgesQFKpR2ky
-	AYIuw==
-X-Received: by 2002:a05:6000:2584:b0:43b:4e01:4aa9 with SMTP id ffacd0b85a97d-43b64242a6emr5920740f8f.10.1774017044866;
-        Fri, 20 Mar 2026 07:30:44 -0700 (PDT)
-Message-ID: <1b56d49d-f12e-4e6d-ae78-d5d76552297f@gmail.com>
-Date: Fri, 20 Mar 2026 15:30:42 +0100
+X-Inumbo-ID: af1e4f0b-246d-11f1-b164-2bf370ae4941
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1774018893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UMmQvyab5G2G37hAWlU7WoprCOyLWbdVZgzV27fPe1Y=;
+	b=sezfUz6RZ3nMFx6zUFekzrc3QDFxkgKQwMpcDYUOBQ95kiJWb3QS375tzfBQFb7z8gxjM+
+	eK+QZmeSjNOyrMl1/j22YLtQRKBWiPvl+MfwSmUAfgtsoiSWoeKdHgnuSCbs7mU6cWykSd
+	chdAsTm4FXFtHYeUdWO62NdoidYQt/I=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=sezfUz6R
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1774018893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UMmQvyab5G2G37hAWlU7WoprCOyLWbdVZgzV27fPe1Y=;
+	b=sezfUz6RZ3nMFx6zUFekzrc3QDFxkgKQwMpcDYUOBQ95kiJWb3QS375tzfBQFb7z8gxjM+
+	eK+QZmeSjNOyrMl1/j22YLtQRKBWiPvl+MfwSmUAfgtsoiSWoeKdHgnuSCbs7mU6cWykSd
+	chdAsTm4FXFtHYeUdWO62NdoidYQt/I=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 02/12] tools/xenstored: add helper to parse domid
+Date: Fri, 20 Mar 2026 16:01:10 +0100
+Message-ID: <20260320150120.874878-3-jgross@suse.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
+References: <20260320150120.874878-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 6/6] xen/riscv: enable DOMAIN_BUILD_HELPERS
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1770821989.git.oleksii.kurochko@gmail.com>
- <6ab04f3584e45795dc82c25f62a6c950913f5c7d.1770821989.git.oleksii.kurochko@gmail.com>
- <aac9b5ac-6660-4ec0-b88e-605903217588@suse.com>
- <b4ac883d-ce90-40b0-93fc-95c925c7ac61@gmail.com>
- <a35d5566-7da1-406d-abf7-13b423d013f8@suse.com>
- <ad59c5ea-ae8c-4e6e-8b49-dcd0eefc3197@gmail.com>
- <1efcb5eb-1b59-4def-a527-254a31efe2b7@suse.com>
- <a8e3b6fe-d1cc-44d5-b286-b59b65e25320@gmail.com>
- <92becfa8-1f61-4137-b0ec-ee7160913c5c@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <92becfa8-1f61-4137-b0ec-ee7160913c5c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	ARC_NA(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_COUNT_TWO(0.00)[2];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	TO_DN_SOME(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:dkim,suse.com:mid,suse.com:email];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	DKIM_TRACE(0.00)[suse.com:+]
+X-Rspamd-Queue-Id: 046424D27B
 
+Today a domid passed in by a command is parsed using atoi(). This
+will still "succeed" even with a domid like "x", resulting in "0" to
+be used instead.
 
+Use a common domid parser instead rejecting everything but integers
+in the range 0..65535 like specified in docs/misc/xenstore.txt.
 
-On 3/20/26 2:19 PM, Jan Beulich wrote:
-> On 20.03.2026 10:58, Oleksii Kurochko wrote:
->> On 3/19/26 8:58 AM, Jan Beulich wrote:
->>> On 17.03.2026 13:49, Oleksii Kurochko wrote:
->>>> On 2/13/26 2:11 PM, Jan Beulich wrote:
->>>>>>>> +#define GUEST_RAM0_BASE   xen_mk_ullong(0x80000000) /* 2GB of low RAM @ 2GB */
->>>>>>>> +#define GUEST_RAM0_SIZE   xen_mk_ullong(0x80000000)
->>>>>>>> +
->>>>>>>> +#define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE }
->>>>>>>> +#define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE }
->>>> (cut)
->>>>
->>>>> If all you want are 2Gb guests, why would such guests be 64-bit? And with
->>>>> (iirc) RV32 permitting more than 4Gb (via PPN being 22 bits wide), perhaps
->>>>> even a 32-bit hypervisor would suffice?
->>>> Btw, shouldn't we look at VPN width?
->>>>
->>>> My understanding is that we should take GUEST_RAM0_BASE as sgfn address
->>>> and then map it to mfn's page (allocated by alloc_domheap_pages())? And then
->>>> repeat this process until we won't map GUEST_RAM0_SIZE.
->>>>
->>>> In this case for RV32 VPN (which is GFN in the current context) is 32-bit
->>>> wide as RV32 supports only Sv32, what is 2^32 - 1, what is almost 4gb.
->>> ??? (IOW - I fear I'm confused enough by the question that I don't know how
->>> to respond.)
->>
->> You mentioned above that:
->>     "... And with (iirc) RV32 permitting more than 4Gb (via PPN being 22 bits wide) ..."
->>
->> I wanted to clarify why you use PPN here in the context of GUEST_RAM0_BASE definition.
->> (and maybe I just misinterpreted incorrectly your original message)
->> GUEST_RAM0_BASE is the address at which the guest believes RAM starts in its physical
->> address space, i.e. it is a GPA, which is then translated to an MPA.
->>
->>   From the MMU's perspective, the GPA looks like:
->>     VPN[1] | VPN[0] | page_offset   (in Sv32x4 mode)
->>
->> In Sv32x4, the GPA is 34 bits wide (or 22 bits wide in terms of GFNs), and the MPA is
->> also 32 bits wide (or 22 bits wide in terms of PPN).
-> 
-> You mentioning Sv32x4 may point at part of the problem: For the guest physical
-> memory layout (and hence size), paging and hence virtual addresses don't matter
-> at all. What matters is what the guest can put in the page table entries it
-> writes. Addresses there are represented as PPNs, aren't they? Hence my use of
-> that acronym.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- new patch (kind of suggested by Anthony Perard)
+---
+ tools/xenstored/domain.c | 47 +++++++++++++++++++++++++++++++++-------
+ 1 file changed, 39 insertions(+), 8 deletions(-)
 
-That's is what I came to after wrote and sent an e-mail. Now you 
-confirmed that.
-
-> 
->> The distinction is not significant in Sv32x4, since PPN width equals VPN width, but
->> in other modes VPN < PPN (in terms of bit width).
->> So when we want to run a guest in Sv39x4 mode and want to give the guest the full
->> Sv39x4 address space, setting GUEST_RAM0_SIZE to the maximum possible value for
->> Sv39x4, shouldn't we look at the VPN width rather than the PPN width?
-> 
-> No, why? The guest can arrange to map more than 2^39 bytes. Not all at the same
-> time, sure, but by suitable switching page tables (or merely entries) around.
-> 
-Good point. Then the right limit is therefore the PPN width which 
-reflects the actual physical addressing capability.
-
-Thanks a lot.
-
-~ Oleksii
+diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
+index e453b3061f..a70acddf94 100644
+--- a/tools/xenstored/domain.c
++++ b/tools/xenstored/domain.c
+@@ -732,6 +732,18 @@ static char *talloc_domain_path(const void *context, unsigned int domid)
+ 	return talloc_asprintf(context, "/local/domain/%u", domid);
+ }
+ 
++/* Parse a domid. Sets errno either to 0 or EINVAL. */
++static unsigned int parse_domid(const char *input)
++{
++	unsigned long domid;
++	char *endptr;
++
++	domid = strtoul(input, &endptr, 10);
++	errno = (*endptr != 0 || domid > 65535) ? EINVAL : 0;
++
++	return domid;
++}
++
+ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		     unsigned int domid)
+ {
+@@ -1077,7 +1089,10 @@ int do_introduce(const void *ctx, struct connection *conn,
+ 	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
+ 		return EINVAL;
+ 
+-	domid = atoi(vec[0]);
++	domid = parse_domid(vec[0]);
++	if (errno)
++		return errno;
++
+ 	/* Ignore the gfn, we don't need it. */
+ 	port = atoi(vec[2]);
+ 
+@@ -1124,8 +1139,12 @@ int do_set_target(const void *ctx, struct connection *conn,
+ 	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
+ 		return EINVAL;
+ 
+-	domid = atoi(vec[0]);
+-	tdomid = atoi(vec[1]);
++	domid = parse_domid(vec[0]);
++	if (errno)
++		return errno;
++	tdomid = parse_domid(vec[1]);
++	if (errno)
++		return errno;
+ 
+         domain = find_connected_domain(domid);
+ 	if (IS_ERR(domain))
+@@ -1152,7 +1171,9 @@ static struct domain *onearg_domain(struct connection *conn,
+ 	if (!domid_str)
+ 		return ERR_PTR(-EINVAL);
+ 
+-	domid = atoi(domid_str);
++	domid = parse_domid(domid_str);
++	if (errno)
++		return ERR_PTR(-errno);
+ 	if (domid == store_domid || domid == priv_domid)
+ 		return ERR_PTR(-EINVAL);
+ 
+@@ -1200,11 +1221,15 @@ int do_get_domain_path(const void *ctx, struct connection *conn,
+ {
+ 	char *path;
+ 	const char *domid_str = onearg(in);
++	unsigned int domid;
+ 
+ 	if (!domid_str)
+ 		return EINVAL;
+ 
+-	path = talloc_domain_path(ctx, atoi(domid_str));
++	domid = parse_domid(domid_str);
++	if (errno)
++		return errno;
++	path = talloc_domain_path(ctx, domid);
+ 	if (!path)
+ 		return errno;
+ 
+@@ -1223,7 +1248,9 @@ int do_is_domain_introduced(const void *ctx, struct connection *conn,
+ 	if (!domid_str)
+ 		return EINVAL;
+ 
+-	domid = atoi(domid_str);
++	domid = parse_domid(domid_str);
++	if (errno)
++		return errno;
+ 	if (domid == DOMID_SELF)
+ 		result = 1;
+ 	else
+@@ -1261,7 +1288,9 @@ int do_get_feature(const void *ctx, struct connection *conn,
+ 		return EINVAL;
+ 
+ 	if (n_args == 1) {
+-		domid = atoi(vec[0]);
++		domid = parse_domid(vec[0]);
++		if (errno)
++			return errno;
+ 		domain = find_or_alloc_existing_domain(domid);
+ 		if (!domain)
+ 			return ENOENT;
+@@ -1289,7 +1318,9 @@ int do_set_feature(const void *ctx, struct connection *conn,
+ 	if (get_strings(in, vec, ARRAY_SIZE(vec)) != ARRAY_SIZE(vec))
+ 		return EINVAL;
+ 
+-	domid = atoi(vec[0]);
++	domid = parse_domid(vec[0]);
++	if (errno)
++		return errno;
+ 	features = atoi(vec[1]);
+ 	domain = find_or_alloc_existing_domain(domid);
+ 	if (!domain)
+-- 
+2.53.0
 
 
