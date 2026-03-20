@@ -4,45 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40461098797
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:12:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258221.1552374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE9C10987A1
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:58:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258254.1552398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bW0-0001h1-FM; Fri, 20 Mar 2026 15:11:56 +0000
+	id 1w3cFB-0000vc-2x; Fri, 20 Mar 2026 15:58:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258221.1552374; Fri, 20 Mar 2026 15:11:56 +0000
+Received: by outflank-mailman (output) from mailman id 1258254.1552398; Fri, 20 Mar 2026 15:58:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bW0-0001gu-CH; Fri, 20 Mar 2026 15:11:56 +0000
-Received: by outflank-mailman (input) for mailman id 1258221;
- Fri, 20 Mar 2026 15:11:54 +0000
+	id 1w3cFB-0000vV-0S; Fri, 20 Mar 2026 15:58:37 +0000
+Received: by outflank-mailman (input) for mailman id 1258254;
+ Fri, 20 Mar 2026 15:58:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1w3bMv-0001ko-3N
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:33 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ (envelope-from <SRS0=8gqn=BU=kernel.org=rafael@srs-se1.protection.inumbo.net>)
+ id 1w3cFA-0000vP-4q
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:58:36 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1821fae-246d-11f1-9ccf-f158ae23cfc8;
- Fri, 20 Mar 2026 16:02:31 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4F34F5BDF1;
- Fri, 20 Mar 2026 15:02:27 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 328F242866;
- Fri, 20 Mar 2026 15:02:27 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id e5RHC4NhvWkQXQAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:27 +0000
+ id a4eeaa3d-2475-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Mar 2026 16:58:33 +0100 (CET)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 6156F43A1F
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 15:58:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E3E9C2BCB1
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 15:58:31 +0000 (UTC)
+Received: by mail-oi1-f169.google.com with SMTP id
+ 5614622812f47-4645dde00a7so2668946b6e.1
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 08:58:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,152 +46,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1821fae-246d-11f1-9ccf-f158ae23cfc8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018947; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RvZyWf80UhIWQ1Ha92/GkHwBZUAkRxIiyYOr24YFL4c=;
-	b=u2wXVdKkXq1jVy9V9f9iklAiWJ5Kt3UogaAKILZjUMZ8+6H6zjmiSsBBPYECJAkcOZpIQx
-	96RgUK6eWPXG9IzikBjViC+o25mHnBc8u8N3nzfCqtvYVmT1krXOwZTwR+9pfuZVpcdowr
-	ytNq900LHAh/UqcEAkP0twmudkMANe4=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=u2wXVdKk
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018947; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RvZyWf80UhIWQ1Ha92/GkHwBZUAkRxIiyYOr24YFL4c=;
-	b=u2wXVdKkXq1jVy9V9f9iklAiWJ5Kt3UogaAKILZjUMZ8+6H6zjmiSsBBPYECJAkcOZpIQx
-	96RgUK6eWPXG9IzikBjViC+o25mHnBc8u8N3nzfCqtvYVmT1krXOwZTwR+9pfuZVpcdowr
-	ytNq900LHAh/UqcEAkP0twmudkMANe4=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 12/12] tools/xl: add support for xenstore quota setting via domain config
-Date: Fri, 20 Mar 2026 16:01:20 +0100
-Message-ID: <20260320150120.874878-13-jgross@suse.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
-References: <20260320150120.874878-1-jgross@suse.com>
+X-Inumbo-ID: a4eeaa3d-2475-11f1-9ccf-f158ae23cfc8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774022311;
+	bh=5OVfAAKYK3pCoLiGVQAI4LiOth4ynX3Xbge5VJYkavc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=pl16mdaQ5+COvdD9bX5ZRystAoUG0uE2dY3Yvx/WMuBeNO8FE3lhKUIpOLQg17eGT
+	 0FhgrAVDhlH9C1iGGYtI3u+/XlktPJzKMcGFmHHp8+mQDNiY6rF0ztNzJijj3vq8oz
+	 gcGClnbQENyd5qhJdBGbF3h3Zc1ZGp9PFi4NGz8wvyodWXjcf2nK+eoVCNbBtlkRWZ
+	 TZACQxSFIr1KUyJi2Zg8TYtLAnIqjPEgRkNkZ5lAstrP+LSGDP85SJLPZzEYMWEzbT
+	 NE2qZUwQ3n20WaxKqnvQ7HzD401uSj8kc+q67u3Ngz+2UdaCD3Uvkpk1ncw5vWPpG1
+	 t0APO6MNg/N0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCV5cSl3+mz461WjsRi0Fkkno/NLRGNuh/m8raJWFbKtczhFxbDodDa7rsYhU3O70fStA23y9GyxJJc=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzvHUsnaMEzKOxZOYeLibTo+Hh+Q+AzUDooBMYqYjler3U25yU+
+	8a+EojdTFC2AjeOVnqFCPPhMjaXZBpvSfE3Ka8SWiu7ZUjG97qwkvApQWH2YWOn0Rl3l34MFimt
+	hjD6niDoaEhg8NprW+biz3elM4BNvquQ=
+X-Received: by 2002:a05:6808:4fe4:b0:467:cd8:7f5e with SMTP id
+ 5614622812f47-467cd556a0dmr4624044b6e.4.1774022310328; Fri, 20 Mar 2026
+ 08:58:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,vates.tech:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 4F34F5BDF1
+References: <8683270.T7Z3S40VBb@rafael.j.wysocki>
+In-Reply-To: <8683270.T7Z3S40VBb@rafael.j.wysocki>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Fri, 20 Mar 2026 16:58:18 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0gt72nhueFkpP1Hp9PNNbnQ6cmskq_sxEbdgzxy-ZWqjg@mail.gmail.com>
+X-Gm-Features: AaiRm53OWzJ_LsLSl2Q21Pi0otYOG2pKuGSzCAUkrh5-7mMws8P_z_zFxxlNZcA
+Message-ID: <CAJZ5v0gt72nhueFkpP1Hp9PNNbnQ6cmskq_sxEbdgzxy-ZWqjg@mail.gmail.com>
+Subject: Re: [PATCH v1] ACPI: PAD: xen: Convert to a platform driver
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: Linux ACPI <linux-acpi@vger.kernel.org>, xen-devel@lists.xenproject.org, 
+	LKML <linux-kernel@vger.kernel.org>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add a new "xenstore_quota" domain config parameter for setting the
-Xenstore quota of a new domain via a list of <quota>=<val> items.
+On Sat, Mar 14, 2026 at 12:57=E2=80=AFPM Rafael J. Wysocki <rafael@kernel.o=
+rg> wrote:
+>
+> From: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
+>
+> In all cases in which a struct acpi_driver is used for binding a driver
+> to an ACPI device object, a corresponding platform device is created by
+> the ACPI core and that device is regarded as a proper representation of
+> underlying hardware.  Accordingly, a struct platform_driver should be
+> used by driver code to bind to that device.  There are multiple reasons
+> why drivers should not bind directly to ACPI device objects [1].
+>
+> Overall, it is better to bind drivers to platform devices than to their
+> ACPI companions, so convert the Xen ACPI processor aggregator device
+> (PAD) driver to a platform one.
+>
+> While this is not expected to alter functionality, it changes sysfs
+> layout and so it will be visible to user space.
+>
+> Link: https://lore.kernel.org/all/2396510.ElGaqSPkdT@rafael.j.wysocki/ [1=
+]
+> Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
----
-V2:
-- fix typo in commit message (Anthony Perard)
-- use xcalloc() (Anthony Perard)
----
- docs/man/xl.cfg.5.pod.in | 13 +++++++++++++
- tools/xl/xl_parse.c      | 19 ++++++++++++++++++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
+If there are any objections or concerns regarding this change, please
+let me know.
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 27c455210b..3aac0bc4fb 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -748,6 +748,19 @@ via the B<xl info -x> command in dom0.
- The default value is B<0xffffffff>, meaning that all possible Xenstore
- features are visible by the guest.
- 
-+=item B<xenstore_quota=[ QUOTA_SPEC, QUOTA_SPEC, ...]>
-+
-+Specifies Xenstore quota values of the domain, overriding the default
-+values of Xenstore.
-+
-+Each B<QUOTA_SPEC> is a B<quota-name>=B<value> specification. The supported
-+B<quota-name> identifiers can be obtained by the B<xl xenstore-quota-get -g>
-+command. B<value> is a non-negative integer.
-+
-+As per-domain Xenstore quota are an optional Xenstore feature, the
-+B<xenstore_quota> config parameter may not be supported by all Xenstore
-+implementations.
-+
- =back
- 
- =head2 Devices
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 4b074fdb58..48c72dce9c 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1354,7 +1354,7 @@ void parse_config_data(const char *config_source,
-     XLU_ConfigList *cpus, *vbds, *nics, *pcis, *cvfbs, *cpuids, *vtpms,
-                    *usbctrls, *usbdevs, *p9devs, *vdispls, *pvcallsifs_devs;
-     XLU_ConfigList *channels, *ioports, *irqs, *iomem, *viridian, *dtdevs,
--                   *mca_caps, *smbios, *llc_colors;
-+                   *mca_caps, *smbios, *llc_colors, *xs_quota;
-     int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps;
-     int num_smbios;
-     int pci_power_mgmt = 0;
-@@ -1363,6 +1363,7 @@ void parse_config_data(const char *config_source,
-     int pci_seize = 0;
-     int i, e;
-     int num_llc_colors;
-+    int num_xs_quota;
-     char *kernel_basename;
- 
-     libxl_domain_create_info *c_info = &d_config->c_info;
-@@ -1470,6 +1471,22 @@ void parse_config_data(const char *config_source,
-     if (!xlu_cfg_get_long (config, "xenstore_feature_mask", &l, 0))
-         b_info->xenstore_feature_mask = l;
- 
-+    if (!xlu_cfg_get_list(config, "xenstore_quota", &xs_quota, &num_xs_quota, 0)) {
-+        b_info->xenstore_quota.num_quota = num_xs_quota;
-+        b_info->xenstore_quota.quota = xcalloc(num_xs_quota, sizeof(* b_info->xenstore_quota.quota));
-+
-+        for (i = 0; i < num_xs_quota; i++) {
-+           buf = xlu_cfg_get_listitem(xs_quota, i);
-+           if (!buf) {
-+                fprintf(stderr,
-+                        "xl: Can't get element %d in Xenstore quota list\n", i);
-+                exit(1);
-+            }
-+            if (parse_xsquota_item(buf, b_info->xenstore_quota.quota + i))
-+                exit(1);
-+        }
-+    }
-+
-     libxl_domain_build_info_init_type(b_info, c_info->type);
- 
-     if (b_info->type == LIBXL_DOMAIN_TYPE_PVH) {
--- 
-2.53.0
+In the absence of any, I'll queue it up for 7.1.
 
+Thanks!
+
+> ---
+>
+> Note that the original ACPI PAD driver has been a platform driver for
+> quite some time already.
+>
+> ---
+>  drivers/xen/xen-acpi-pad.c | 23 ++++++++++++-----------
+>  1 file changed, 12 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/xen/xen-acpi-pad.c b/drivers/xen/xen-acpi-pad.c
+> index ede69a5278d3..75a39862c1df 100644
+> --- a/drivers/xen/xen-acpi-pad.c
+> +++ b/drivers/xen/xen-acpi-pad.c
+> @@ -11,6 +11,7 @@
+>  #include <linux/kernel.h>
+>  #include <linux/types.h>
+>  #include <linux/acpi.h>
+> +#include <linux/platform_device.h>
+>  #include <xen/xen.h>
+>  #include <xen/interface/version.h>
+>  #include <xen/xen-ops.h>
+> @@ -107,8 +108,9 @@ static void acpi_pad_notify(acpi_handle handle, u32 e=
+vent,
+>         }
+>  }
+>
+> -static int acpi_pad_add(struct acpi_device *device)
+> +static int acpi_pad_probe(struct platform_device *pdev)
+>  {
+> +       struct acpi_device *device =3D ACPI_COMPANION(&pdev->dev);
+>         acpi_status status;
+>
+>         strcpy(acpi_device_name(device), ACPI_PROCESSOR_AGGREGATOR_DEVICE=
+_NAME);
+> @@ -122,13 +124,13 @@ static int acpi_pad_add(struct acpi_device *device)
+>         return 0;
+>  }
+>
+> -static void acpi_pad_remove(struct acpi_device *device)
+> +static void acpi_pad_remove(struct platform_device *pdev)
+>  {
+>         mutex_lock(&xen_cpu_lock);
+>         xen_acpi_pad_idle_cpus(0);
+>         mutex_unlock(&xen_cpu_lock);
+>
+> -       acpi_remove_notify_handler(device->handle,
+> +       acpi_remove_notify_handler(ACPI_HANDLE(&pdev->dev),
+>                 ACPI_DEVICE_NOTIFY, acpi_pad_notify);
+>  }
+>
+> @@ -137,13 +139,12 @@ static const struct acpi_device_id pad_device_ids[]=
+ =3D {
+>         {"", 0},
+>  };
+>
+> -static struct acpi_driver acpi_pad_driver =3D {
+> -       .name =3D "processor_aggregator",
+> -       .class =3D ACPI_PROCESSOR_AGGREGATOR_CLASS,
+> -       .ids =3D pad_device_ids,
+> -       .ops =3D {
+> -               .add =3D acpi_pad_add,
+> -               .remove =3D acpi_pad_remove,
+> +static struct platform_driver acpi_pad_driver =3D {
+> +       .probe =3D acpi_pad_probe,
+> +       .remove =3D acpi_pad_remove,
+> +       .driver =3D {
+> +               .name =3D "acpi_processor_aggregator",
+> +               .acpi_match_table =3D pad_device_ids,
+>         },
+>  };
+>
+> @@ -157,6 +158,6 @@ static int __init xen_acpi_pad_init(void)
+>         if (!xen_running_on_version_or_later(4, 2))
+>                 return -ENODEV;
+>
+> -       return acpi_bus_register_driver(&acpi_pad_driver);
+> +       return platform_driver_register(&acpi_pad_driver);
+>  }
+>  subsys_initcall(xen_acpi_pad_init);
+> --
+> 2.51.0
+>
+>
+>
+>
+>
 
