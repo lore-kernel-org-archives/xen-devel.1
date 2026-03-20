@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05B41098796
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:11:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258213.1552365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40461098797
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:12:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258221.1552374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bVd-0001Bb-6e; Fri, 20 Mar 2026 15:11:33 +0000
+	id 1w3bW0-0001h1-FM; Fri, 20 Mar 2026 15:11:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258213.1552365; Fri, 20 Mar 2026 15:11:33 +0000
+Received: by outflank-mailman (output) from mailman id 1258221.1552374; Fri, 20 Mar 2026 15:11:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bVd-0001BU-3b; Fri, 20 Mar 2026 15:11:33 +0000
-Received: by outflank-mailman (input) for mailman id 1258213;
- Fri, 20 Mar 2026 15:11:32 +0000
+	id 1w3bW0-0001gu-CH; Fri, 20 Mar 2026 15:11:56 +0000
+Received: by outflank-mailman (input) for mailman id 1258221;
+ Fri, 20 Mar 2026 15:11:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1w3bMl-0001ko-Gr
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:23 +0000
+ id 1w3bMv-0001ko-3N
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:33 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cbde84f1-246d-11f1-9ccf-f158ae23cfc8;
- Fri, 20 Mar 2026 16:02:21 +0100 (CET)
+ id d1821fae-246d-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Mar 2026 16:02:31 +0100 (CET)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0E3375BDF1;
- Fri, 20 Mar 2026 15:02:11 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4F34F5BDF1;
+ Fri, 20 Mar 2026 15:02:27 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DCB2F42866;
- Fri, 20 Mar 2026 15:02:10 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 328F242866;
+ Fri, 20 Mar 2026 15:02:27 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id ll/PNHJhvWnpXAAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:10 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id e5RHC4NhvWkQXQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,36 +54,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbde84f1-246d-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: d1821fae-246d-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018935; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1774018947; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=yEuehUlwv5fMYrq9vtoirIlozvH3dEV269XfkzYgNss=;
-	b=T6DmaqxNH0Blb5cy10dYluQkE/UVVbMDbkyOC1lKBJUWBln5GrMVqMIEm9tb8VcXHYz2Xp
-	2cPIjSGlYyIQaGWUnYZ3sxzxWaXfADO7K+aqvBGoSAoI5PR8Qz4eWfJoELJw2z19Qg4iOi
-	Rqee8A/RHXEanvQ3WTk18amsR2Aueso=
+	bh=RvZyWf80UhIWQ1Ha92/GkHwBZUAkRxIiyYOr24YFL4c=;
+	b=u2wXVdKkXq1jVy9V9f9iklAiWJ5Kt3UogaAKILZjUMZ8+6H6zjmiSsBBPYECJAkcOZpIQx
+	96RgUK6eWPXG9IzikBjViC+o25mHnBc8u8N3nzfCqtvYVmT1krXOwZTwR+9pfuZVpcdowr
+	ytNq900LHAh/UqcEAkP0twmudkMANe4=
 Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=qk+UQdiW
+	dkim=pass header.d=suse.com header.s=susede1 header.b=u2wXVdKk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018931; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1774018947; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=yEuehUlwv5fMYrq9vtoirIlozvH3dEV269XfkzYgNss=;
-	b=qk+UQdiWmj+Z6a59Nl9lfH2OfrCbGM/lZHDhziABoik4HjNjfuWCwagut55CdiHpviqeCS
-	2tMNFZuL+mSUotU9EuYgU2aB/sOEBbcKU11c5xj6wrnV7IHu8Bt50ggAfEKgviwbkl9bCs
-	VH/mqJA7DE+uEnMzO08Yg+0VF2uHjS4=
+	bh=RvZyWf80UhIWQ1Ha92/GkHwBZUAkRxIiyYOr24YFL4c=;
+	b=u2wXVdKkXq1jVy9V9f9iklAiWJ5Kt3UogaAKILZjUMZ8+6H6zjmiSsBBPYECJAkcOZpIQx
+	96RgUK6eWPXG9IzikBjViC+o25mHnBc8u8N3nzfCqtvYVmT1krXOwZTwR+9pfuZVpcdowr
+	ytNq900LHAh/UqcEAkP0twmudkMANe4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Nick Rosbrook <enr0n@ubuntu.com>,
-	George Dunlap <gwd@xenproject.org>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 09/12] tools/libxl: add functions for retrieving and setting xenstore quota
-Date: Fri, 20 Mar 2026 16:01:17 +0100
-Message-ID: <20260320150120.874878-10-jgross@suse.com>
+Subject: [PATCH v2 12/12] tools/xl: add support for xenstore quota setting via domain config
+Date: Fri, 20 Mar 2026 16:01:20 +0100
+Message-ID: <20260320150120.874878-13-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
 References: <20260320150120.874878-1-jgross@suse.com>
@@ -109,340 +107,98 @@ X-Spamd-Result: default: False [-3.01 / 50.00];
 	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
 	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,vates.tech:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
 	RCVD_TLS_ALL(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_THREE(0.00)[3];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	DKIM_TRACE(0.00)[suse.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 0E3375BDF1
+X-Rspamd-Queue-Id: 4F34F5BDF1
 
-Add some functions allowing to retrieve and set Xenstore quota (either
-global or domain specific).
+Add a new "xenstore_quota" domain config parameter for setting the
+Xenstore quota of a new domain via a list of <quota>=<val> items.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Nick Rosbrook <enr0n@ubuntu.com> # golang stuff
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
 V2:
-- rename libxl functions to use "xs_quota" instead of "xsquota"
-  (Anthony Perard)
-- rename the libxl_xs_quota_*_get() "q" parameter to "q_out"
-  (Anthony Perard)
-- rename the struct xs_quota_set to xs_quota_list (Anthony Perard)
-- several style changes (Anthony Perard)
+- fix typo in commit message (Anthony Perard)
+- use xcalloc() (Anthony Perard)
 ---
- tools/golang/xenlight/helpers.gen.go |  78 ++++++++++++++++++
- tools/golang/xenlight/types.gen.go   |   9 +++
- tools/include/libxl.h                |  20 +++++
- tools/libs/light/Makefile            |   1 +
- tools/libs/light/libxl_types.idl     |   9 +++
- tools/libs/light/libxl_xsquota.c     | 116 +++++++++++++++++++++++++++
- 6 files changed, 233 insertions(+)
- create mode 100644 tools/libs/light/libxl_xsquota.c
+ docs/man/xl.cfg.5.pod.in | 13 +++++++++++++
+ tools/xl/xl_parse.c      | 19 ++++++++++++++++++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
 
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index 8909fe8a1b..767b9e45f5 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -998,6 +998,84 @@ xc.policy = C.libxl_rdm_reserve_policy(x.Policy)
-  return nil
-  }
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 27c455210b..3aac0bc4fb 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -748,6 +748,19 @@ via the B<xl info -x> command in dom0.
+ The default value is B<0xffffffff>, meaning that all possible Xenstore
+ features are visible by the guest.
  
-+// NewXsQuotaItem returns an instance of XsQuotaItem initialized with defaults.
-+func NewXsQuotaItem() (*XsQuotaItem, error) {
-+var (
-+x XsQuotaItem
-+xc C.libxl_xs_quota_item)
++=item B<xenstore_quota=[ QUOTA_SPEC, QUOTA_SPEC, ...]>
 +
-+C.libxl_xs_quota_item_init(&xc)
-+defer C.libxl_xs_quota_item_dispose(&xc)
++Specifies Xenstore quota values of the domain, overriding the default
++values of Xenstore.
 +
-+if err := x.fromC(&xc); err != nil {
-+return nil, err }
++Each B<QUOTA_SPEC> is a B<quota-name>=B<value> specification. The supported
++B<quota-name> identifiers can be obtained by the B<xl xenstore-quota-get -g>
++command. B<value> is a non-negative integer.
 +
-+return &x, nil}
++As per-domain Xenstore quota are an optional Xenstore feature, the
++B<xenstore_quota> config parameter may not be supported by all Xenstore
++implementations.
 +
-+func (x *XsQuotaItem) fromC(xc *C.libxl_xs_quota_item) error {
-+ x.Name = C.GoString(xc.name)
-+x.Val = uint32(xc.val)
-+
-+ return nil}
-+
-+func (x *XsQuotaItem) toC(xc *C.libxl_xs_quota_item) (err error){defer func(){
-+if err != nil{
-+C.libxl_xs_quota_item_dispose(xc)}
-+}()
-+
-+if x.Name != "" {
-+xc.name = C.CString(x.Name)}
-+xc.val = C.uint32_t(x.Val)
-+
-+ return nil
-+ }
-+
-+// NewXsQuotaList returns an instance of XsQuotaList initialized with defaults.
-+func NewXsQuotaList() (*XsQuotaList, error) {
-+var (
-+x XsQuotaList
-+xc C.libxl_xs_quota_list)
-+
-+C.libxl_xs_quota_list_init(&xc)
-+defer C.libxl_xs_quota_list_dispose(&xc)
-+
-+if err := x.fromC(&xc); err != nil {
-+return nil, err }
-+
-+return &x, nil}
-+
-+func (x *XsQuotaList) fromC(xc *C.libxl_xs_quota_list) error {
-+ x.Quota = nil
-+if n := int(xc.num_quota); n > 0 {
-+cQuota := (*[1<<28]C.libxl_xs_quota_item)(unsafe.Pointer(xc.quota))[:n:n]
-+x.Quota = make([]XsQuotaItem, n)
-+for i, v := range cQuota {
-+if err := x.Quota[i].fromC(&v); err != nil {
-+return fmt.Errorf("converting field Quota: %v", err) }
-+}
-+}
-+
-+ return nil}
-+
-+func (x *XsQuotaList) toC(xc *C.libxl_xs_quota_list) (err error){defer func(){
-+if err != nil{
-+C.libxl_xs_quota_list_dispose(xc)}
-+}()
-+
-+if numQuota := len(x.Quota); numQuota > 0 {
-+xc.quota = (*C.libxl_xs_quota_item)(C.malloc(C.ulong(numQuota)*C.sizeof_libxl_xs_quota_item))
-+xc.num_quota = C.int(numQuota)
-+cQuota := (*[1<<28]C.libxl_xs_quota_item)(unsafe.Pointer(xc.quota))[:numQuota:numQuota]
-+for i,v := range x.Quota {
-+if err := v.toC(&cQuota[i]); err != nil {
-+return fmt.Errorf("converting field Quota: %v", err)
-+}
-+}
-+}
-+
-+ return nil
-+ }
-+
- // NewDomainBuildInfo returns an instance of DomainBuildInfo initialized with defaults.
- func NewDomainBuildInfo(dtype DomainType) (*DomainBuildInfo, error) {
- var (
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index ab9d4ca7b4..8dd610919d 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -543,6 +543,15 @@ Altp2MModeExternal Altp2MMode = 2
- Altp2MModeLimited Altp2MMode = 3
- )
+ =back
  
-+type XsQuotaItem struct {
-+Name string
-+Val uint32
-+}
-+
-+type XsQuotaList struct {
-+Quota []XsQuotaItem
-+}
-+
- type DomainBuildInfo struct {
- MaxVcpus int
- AvailVcpus Bitmap
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index bc35e412da..6d2910df34 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1537,6 +1537,18 @@ void libxl_mac_copy(libxl_ctx *ctx, libxl_mac *dst, const libxl_mac *src);
-  */
- #define LIBXL_HAVE_XEN_PLATFORM_PCI_BAR_UC
+ =head2 Devices
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 4b074fdb58..48c72dce9c 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1354,7 +1354,7 @@ void parse_config_data(const char *config_source,
+     XLU_ConfigList *cpus, *vbds, *nics, *pcis, *cvfbs, *cpuids, *vtpms,
+                    *usbctrls, *usbdevs, *p9devs, *vdispls, *pvcallsifs_devs;
+     XLU_ConfigList *channels, *ioports, *irqs, *iomem, *viridian, *dtdevs,
+-                   *mca_caps, *smbios, *llc_colors;
++                   *mca_caps, *smbios, *llc_colors, *xs_quota;
+     int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps;
+     int num_smbios;
+     int pci_power_mgmt = 0;
+@@ -1363,6 +1363,7 @@ void parse_config_data(const char *config_source,
+     int pci_seize = 0;
+     int i, e;
+     int num_llc_colors;
++    int num_xs_quota;
+     char *kernel_basename;
  
-+/*
-+ * LIBXL_HAVE_XENSTORE_QUOTA
-+ *
-+ * If this is defined the Xenstore quota related functions
-+ * libxl_xs_quota_global_get()
-+ * libxl_xs_quota_global_set()
-+ * libxl_xs_quota_domain_get()
-+ * libxl_xs_quota_domain_set()
-+ * are available.
-+ */
-+#define LIBXL_HAVE_XENSTORE_QUOTA
-+
- typedef char **libxl_string_list;
- void libxl_string_list_dispose(libxl_string_list *sl);
- int libxl_string_list_length(const libxl_string_list *sl);
-@@ -3011,6 +3023,14 @@ static inline int libxl_qemu_monitor_command_0x041200(libxl_ctx *ctx,
- #define libxl_qemu_monitor_command libxl_qemu_monitor_command_0x041200
- #endif
+     libxl_domain_create_info *c_info = &d_config->c_info;
+@@ -1470,6 +1471,22 @@ void parse_config_data(const char *config_source,
+     if (!xlu_cfg_get_long (config, "xenstore_feature_mask", &l, 0))
+         b_info->xenstore_feature_mask = l;
  
-+/* Get/set global and per-domain Xenstore quota. */
-+int libxl_xs_quota_global_get(libxl_ctx *ctx, libxl_xs_quota_list *q_out);
-+int libxl_xs_quota_global_set(libxl_ctx *ctx, libxl_xs_quota_list *q);
-+int libxl_xs_quota_domain_get(libxl_ctx *ctx, uint32_t domid,
-+                              libxl_xs_quota_list *q_out);
-+int libxl_xs_quota_domain_set(libxl_ctx *ctx, uint32_t domid,
-+                              libxl_xs_quota_list *q);
++    if (!xlu_cfg_get_list(config, "xenstore_quota", &xs_quota, &num_xs_quota, 0)) {
++        b_info->xenstore_quota.num_quota = num_xs_quota;
++        b_info->xenstore_quota.quota = xcalloc(num_xs_quota, sizeof(* b_info->xenstore_quota.quota));
 +
- #include <libxl_event.h>
- 
- /*
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index bc60c46558..ca22a40c6c 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -106,6 +106,7 @@ OBJS-y += libxl_pvcalls.o
- OBJS-y += libxl_vsnd.o
- OBJS-y += libxl_vkb.o
- OBJS-y += libxl_virtio.o
-+OBJS-y += libxl_xsquota.o
- OBJS-y += libxl_genid.o
- OBJS-y += _libxl_types.o
- OBJS-y += libxl_flask.o
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index d64a573ff3..1a63c8af76 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -574,6 +574,15 @@ libxl_altp2m_mode = Enumeration("altp2m_mode", [
-     (3, "limited"),
-     ], init_val = "LIBXL_ALTP2M_MODE_DISABLED")
- 
-+libxl_xs_quota_item = Struct("xs_quota_item", [
-+    ("name", string),
-+    ("val",  uint32),
-+    ])
-+
-+libxl_xs_quota_list = Struct("xs_quota_list", [
-+    ("quota", Array(libxl_xs_quota_item, "num_quota"))
-+    ])
-+
- libxl_domain_build_info = Struct("domain_build_info",[
-     ("max_vcpus",       integer),
-     ("avail_vcpus",     libxl_bitmap),
-diff --git a/tools/libs/light/libxl_xsquota.c b/tools/libs/light/libxl_xsquota.c
-new file mode 100644
-index 0000000000..4524442655
---- /dev/null
-+++ b/tools/libs/light/libxl_xsquota.c
-@@ -0,0 +1,116 @@
-+/* SPDX-License-Identifier: LGPL-2.1-only */
-+
-+/* Xenstore quota handling functions. */
-+
-+#include "libxl_internal.h"
-+
-+static int get_quota(libxl_ctx *ctx, unsigned int domid,
-+                     libxl_xs_quota_list *q_out,
-+                     bool (func)(struct xs_handle *h, unsigned int domid,
-+                                 const char *quota, unsigned int *value))
-+{
-+    const char **names;
-+    unsigned int num, i;
-+    bool ok;
-+    int rc;
-+    GC_INIT(ctx);
-+
-+    libxl_xs_quota_list_init(q_out);
-+    names = xs_get_quota_names(ctx->xsh, &num);
-+    if (!names) {
-+        /* Xenstore quota support is optional! */
-+        if (errno != ENOSYS) {
-+            libxl_xs_quota_list_dispose(q_out);
-+            rc = ERROR_FAIL;
-+        } else {
-+            rc = 0;
-+        }
-+        goto out;
-+    }
-+
-+    q_out->num_quota = num;
-+    q_out->quota = libxl__calloc(NOGC, num, sizeof(*q_out->quota));
-+    for (i = 0; i < num; i++) {
-+        q_out->quota[i].name = libxl__strdup(NOGC, names[i]);
-+        ok = func(ctx->xsh, domid, q_out->quota[i].name, &q_out->quota[i].val);
-+        if (!ok) {
-+            libxl_xs_quota_list_dispose(q_out);
-+            rc = ERROR_FAIL;
-+            goto out;
++        for (i = 0; i < num_xs_quota; i++) {
++           buf = xlu_cfg_get_listitem(xs_quota, i);
++           if (!buf) {
++                fprintf(stderr,
++                        "xl: Can't get element %d in Xenstore quota list\n", i);
++                exit(1);
++            }
++            if (parse_xsquota_item(buf, b_info->xenstore_quota.quota + i))
++                exit(1);
 +        }
 +    }
 +
-+    rc = 0;
-+
-+ out:
-+    free(names);
-+
-+    GC_FREE;
-+    return rc;
-+}
-+
-+static int set_quota(libxl_ctx *ctx, unsigned int domid, libxl_xs_quota_list *q,
-+                     bool (func)(struct xs_handle *h, unsigned int domid,
-+                                 const char *quota, unsigned int value))
-+{
-+    unsigned int i;
-+    bool ok;
-+    int rc;
-+    GC_INIT(ctx);
-+
-+    for (i = 0; i < q->num_quota; i++) {
-+        ok = func(ctx->xsh, domid, q->quota[i].name, q->quota[i].val);
-+        if (!ok) {
-+            rc = ERROR_FAIL;
-+            goto out;
-+        }
-+    }
-+
-+    rc = 0;
-+
-+ out:
-+    GC_FREE;
-+    return rc;
-+}
-+
-+static bool get_global_quota(struct xs_handle *h, unsigned int domid,
-+                             const char *quota, unsigned int *value)
-+{
-+    return xs_get_global_quota(h, quota, value);
-+}
-+
-+int libxl_xs_quota_global_get(libxl_ctx *ctx, libxl_xs_quota_list *q_out)
-+{
-+    return get_quota(ctx, 0, q_out, get_global_quota);
-+}
-+
-+static bool set_global_quota(struct xs_handle *h, unsigned int domid,
-+                             const char *quota, unsigned int value)
-+{
-+    return xs_set_global_quota(h, quota, value);
-+}
-+
-+int libxl_xs_quota_global_set(libxl_ctx *ctx, libxl_xs_quota_list *q)
-+{
-+    return set_quota(ctx, 0, q, set_global_quota);;
-+}
-+
-+int libxl_xs_quota_domain_get(libxl_ctx *ctx, uint32_t domid,
-+                              libxl_xs_quota_list *q_out)
-+{
-+    return get_quota(ctx, domid, q_out, xs_get_domain_quota);
-+}
-+
-+int libxl_xs_quota_domain_set(libxl_ctx *ctx, uint32_t domid,
-+                              libxl_xs_quota_list *q)
-+{
-+    return set_quota(ctx, domid, q, xs_set_domain_quota);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+     libxl_domain_build_info_init_type(b_info, c_info->type);
+ 
+     if (b_info->type == LIBXL_DOMAIN_TYPE_PVH) {
 -- 
 2.53.0
 
