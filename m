@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E861098797
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:08:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258182.1552347 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBA91098796
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:11:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258206.1552356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bSS-0007Fr-JG; Fri, 20 Mar 2026 15:08:16 +0000
+	id 1w3bV8-0000hy-W0; Fri, 20 Mar 2026 15:11:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258182.1552347; Fri, 20 Mar 2026 15:08:16 +0000
+Received: by outflank-mailman (output) from mailman id 1258206.1552356; Fri, 20 Mar 2026 15:11:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bSS-0007Fk-FN; Fri, 20 Mar 2026 15:08:16 +0000
-Received: by outflank-mailman (input) for mailman id 1258182;
- Fri, 20 Mar 2026 15:08:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1w3bMX-0001Ve-1c
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:09 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c3e99463-246d-11f1-b164-2bf370ae4941;
- Fri, 20 Mar 2026 16:02:08 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 95F194D27B;
- Fri, 20 Mar 2026 15:02:05 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7554842866;
- Fri, 20 Mar 2026 15:02:05 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id WniTG21hvWnjXAAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:05 +0000
+	id 1w3bV8-0000hq-Sm; Fri, 20 Mar 2026 15:11:02 +0000
+Received: by outflank-mailman (input) for mailman id 1258206;
+ Fri, 20 Mar 2026 15:11:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=IyP1=BU=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1w3bV7-0000hk-OF
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:11:01 +0000
+Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com
+ [209.85.160.54]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 001dbd4d-246f-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Mar 2026 16:10:59 +0100 (CET)
+Received: by mail-oa1-f54.google.com with SMTP id
+ 586e51a60fabf-40ea611d1a4so326718fac.2
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Mar 2026 08:10:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,229 +41,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c3e99463-246d-11f1-b164-2bf370ae4941
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018925; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1FYqa2/aDourOwOzPQpClM0FHHXiPvq6a2dggyIoDDM=;
-	b=GBtKCSZwN71iawlNf2pdCyt1/RIcOJvcvlCzBXxiUw9lJ3UlgYmfNyl0TpI9JaBza2xR3j
-	U1xys8D+qc99q0qW6tZAJkGgtHP6N1vAwlzKluHiAjEcQIW0hYZsydiSupsejnib/pRHOO
-	UcDO6GqdG3/Nosj9LHy+qMiFcxLMPeg=
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018925; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1FYqa2/aDourOwOzPQpClM0FHHXiPvq6a2dggyIoDDM=;
-	b=GBtKCSZwN71iawlNf2pdCyt1/RIcOJvcvlCzBXxiUw9lJ3UlgYmfNyl0TpI9JaBza2xR3j
-	U1xys8D+qc99q0qW6tZAJkGgtHP6N1vAwlzKluHiAjEcQIW0hYZsydiSupsejnib/pRHOO
-	UcDO6GqdG3/Nosj9LHy+qMiFcxLMPeg=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 08/12] tools/xenstored: implement the GET/SET_QUOTA commands
-Date: Fri, 20 Mar 2026 16:01:16 +0100
-Message-ID: <20260320150120.874878-9-jgross@suse.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
-References: <20260320150120.874878-1-jgross@suse.com>
+X-Inumbo-ID: 001dbd4d-246f-11f1-9ccf-f158ae23cfc8
+ARC-Seal: i=1; a=rsa-sha256; t=1774019458; cv=none;
+        d=google.com; s=arc-20240605;
+        b=hrjL0uk4VUkRC2Wef0bAa+cIKD28zViD5+p5FXvxDkMCCMoP9JtiXVyvORdAOC9XkB
+         f0LhRpbY9r0gkG+zMioqHxwSdNHluGLkKnUq8IT3+PEBOBc9S3lkAS82hy7tB/4yE9QN
+         lArA1SPkp73P1m+J/uMSup7gVvJoVAPAh72KrCS5vUa9BoFEap1iUPQMDnJeS5gIYTto
+         rbCFO374l5wNBhNR1cSjEF2mpuYpUuV+T04KFJPzBAao5uiY8O2Sd8nqN+pWdf+QqOUy
+         nuq0L5c4H7XC9hig+WLdcUaywFs2JxCe64kiLtNINgSl6dMfu2nV9IYrFiWD/DByoGnC
+         AAag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ZGaoT6ic99GsF4u+JNCzJoc3s5ODFyKGLwhSZj48pv4=;
+        fh=wNLC6Hyb5Ukz/ErppBRQBwv8vwa/OMsdh6R8bnNsiPU=;
+        b=dzcHcf9bJk1BnWq1hTwDYbObAYgWeDiAEGuRPDcVkwi1jSyRV7JJkegAh5HlkWYDYI
+         VzQ3BADRbb8eGMg/+rpD6myMOtxfMU9qdmmtGDAGCdu7dWHE72RcMVpWzYA35+YxafEx
+         5Z6LYqHcUzNooLKwFwH4NFziy013GPYkZAN17NfcAS/ONvhxGKddaky3uMsKNjfFCbt7
+         UGxqztovXxGiQ/frAUgnRYJwUa5VmfjVgnAjwHoXnzHLtMYQv34xbp3L93Y3nc67iA8B
+         Zto2yI9XcGCWv0vn+F90GXjhz5qEiC+Yudt5UqQkSVOpliA39gVYtsm8FHBgdzZGsxyA
+         Z2yQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1774019458; x=1774624258; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZGaoT6ic99GsF4u+JNCzJoc3s5ODFyKGLwhSZj48pv4=;
+        b=jE2jelymMD2Y7V0HYnTiy75nSqmCGdODP1QpK47D+Y7nBInbbp2ZeWlgfvcFkr3g6Z
+         4l48TPGaHOfvaH/Q9FdMoba3BjQxl44IOvUzJQNla9vWphpkqKNZzKO/gX6LEF7w6vMH
+         OcDHA7PSRvnQeHjQMAQWe+RJuNzTDd3+Hpp3ihFxeN5lLNumNk2D3P7tpmbP2KrJi8tQ
+         f/ZF/ih3UQMWP8J1VrQmOeTVqIjdFUIF4M17XYTB85OM4foHaENxwQBCyeZ7GPm9uHs5
+         JPJlk+w3E9XCHGt3zInE0gh3Rk1Oc8E9QegjbZ7tNnS/e4wJD5GRjkNwEl3UOk/mVskb
+         CYIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774019458; x=1774624258;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ZGaoT6ic99GsF4u+JNCzJoc3s5ODFyKGLwhSZj48pv4=;
+        b=NU45AP1OCFZXINqYDx3q1tXsnjRs5YTYHREm4FM0KTJ17wXXi3+qJkH/PfAHTqbK7u
+         OQ8m8uuvdECQx8VSo/T5y8K6ev3ZNX9dBgdHnCZNYh6WOZK2ZGkGZexgMj4fFyU7SC6d
+         +k+JvheWRb3rb5b0QPh8jRY/R1uTBsqZ4glqIfcoB1Zuy9i8mipmz3eWlSRckif5eT/b
+         2IRv9pkZ7gqxGeJKY3yR4a1Qy+SUsuUqXkOZ4sDdBVGwohNxun9mPRPGOpR4OMp+fttH
+         psORlO3pHOE/hBlqT5UEo1cbWP7DecvOLo4NVw9wfRBCY/YgxPYFj6c951ZxPgWviDGN
+         VLzA==
+X-Gm-Message-State: AOJu0YwPSJagQo8CJL4SYKCjKmvhg1gtQP0jiGRp1tPsVStIZ6rODwyg
+	xhfAeE8giCMS0PLHlr2awfRYsXZ8l2dc3MofPca16CYa8ZU70vTDIKmTA/F4WqmrQiqu3iwT+0Q
+	KfLmwcRZ2Q4yKh2a/qLrcSFvqoostU0krlGrE3+VAwA==
+X-Gm-Gg: ATEYQzzWu2EYzjV/WSxB4z7uh82znE39fpxtlgWvDy8J2jLNsRWt2wjnp4LUFzXvAr6
+	SDGm4DfwmzElTPgYDt3A5/WKrxQ8LnqNn5hWXxd8IUzpXktB2jkrox2QU67ggJVYTSmfmJ6SFvS
+	iTQXmFhsR+FeSok6XbIEK4s4XSvI8Br5qcewGAUF7Cj0TqCNTz5qUAUxGHbDpJ1YwFnBCAvLxWg
+	b4j9U3rF36Kw5PpiwcGjHa5KoAx7ZUA5pywXTwajZXRvXMpyvUGwHygkMwheWUHfaus2ea/QG/V
+	eB4pogGvzoEMLmslDZj9DPu8Scq+XUK4znvsQw==
+X-Received: by 2002:a05:6870:63ab:b0:417:6224:5855 with SMTP id
+ 586e51a60fabf-41c10c6ccaemr2074122fac.0.1774019457988; Fri, 20 Mar 2026
+ 08:10:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
-	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RCPT_COUNT_THREE(0.00)[4];
-	RCVD_TLS_ALL(0.00)[]
+References: <cover.1773911799.git.bertrand.marquis@arm.com> <0050ab559814a619b4ae23dd070e7aa4629865e2.1773911799.git.bertrand.marquis@arm.com>
+In-Reply-To: <0050ab559814a619b4ae23dd070e7aa4629865e2.1773911799.git.bertrand.marquis@arm.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Fri, 20 Mar 2026 16:10:45 +0100
+X-Gm-Features: AaiRm503kw4TRRLMqY0L2_uIEtBzREIoAAXo_6ZShucMyru2vptPC5CkoIKaCtI
+Message-ID: <CAHUa44GHBNfPTn91L_9K=QVMCy3MAaoQWBHGU9rxzrs818-b6g@mail.gmail.com>
+Subject: Re: [PATCH 2/2] xen/arm: optee: Add MISRA-compliant switch default labels
+To: Bertrand Marquis <bertrand.marquis@arm.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add the implementation of the GET_QUOTA and SET_QUOTA wire commands.
+Hi Bertrand,
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- refuse quota value Q_VAL_DISABLED (Anthony Perard)
-- use talloc_strdup() (Anthony Perard)
-- drop comments in domain.h (Anthony Perard)
----
- tools/xenstored/core.c   |   4 ++
- tools/xenstored/domain.c | 111 +++++++++++++++++++++++++++++++++++++++
- tools/xenstored/domain.h |   5 ++
- 3 files changed, 120 insertions(+)
+On Fri, Mar 20, 2026 at 10:07=E2=80=AFAM Bertrand Marquis
+<bertrand.marquis@arm.com> wrote:
+>
+> optee.c has several switch statements over integer-valued OP-TEE fields
+> without a default label, and two default clauses that only contain
+> break. This triggers MISRA C Rule 16.4 findings.
+>
+> Add explicit default labels to all reported switches and document the
+> intentional no-op defaults with rationale comments. The new default
+> paths preserve the existing behavior:
+> - unsupported parameter attribute types are ignored;
+> - non-handled RPC commands require no post-processing in Xen;
+> - unknown RPC function IDs are resumed unchanged.
+>
+> No functional changes.
+>
+> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> ---
+>  xen/arch/arm/tee/optee.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index dc63c97658..4786a2a82e 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -2035,6 +2035,10 @@ static struct {
- 	    { "GET_FEATURE",   do_get_feature,  XS_FLAG_PRIV },
- 	[XS_SET_FEATURE]       =
- 	    { "SET_FEATURE",   do_set_feature,  XS_FLAG_PRIV },
-+	[XS_GET_QUOTA]         =
-+	    { "GET_QUOTA",     do_get_quota,    XS_FLAG_PRIV },
-+	[XS_SET_QUOTA]         =
-+	    { "SET_QUOTA",     do_set_quota,    XS_FLAG_PRIV },
- };
- 
- static const char *sockmsg_string(enum xsd_sockmsg_type type)
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 7a8d285e64..1684f6dee7 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -1399,6 +1399,117 @@ static bool parse_quota_name(const char *name, unsigned int *qidx,
- 	return true;
- }
- 
-+int do_get_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in)
-+{
-+	const char *vec[2];
-+	unsigned int n_pars;
-+	unsigned int domid;
-+	unsigned int q;
-+	unsigned int idx;
-+	char *resp;
-+	const char *name;
-+	const struct quota *quota;
-+	const struct domain *domain;
-+
-+	n_pars = get_strings(in, vec, ARRAY_SIZE(vec));
-+
-+	if (n_pars > 2)
-+		return EINVAL;
-+
-+	if (n_pars == 0) {
-+		resp = talloc_strdup(ctx, "");
-+		if (!resp)
-+			return ENOMEM;
-+		for (q = 0; q < ACC_N; q++) {
-+			if (!quota_adm[q].name)
-+				continue;
-+			if (quotas[q].val[Q_IDX_HARD] != Q_VAL_DISABLED) {
-+				resp = talloc_asprintf_append(resp, "%s%s",
-+					*resp ? " " : "", quota_adm[q].name);
-+				if (!resp)
-+					return ENOMEM;
-+			}
-+			if (quotas[q].val[Q_IDX_SOFT] != Q_VAL_DISABLED) {
-+				resp = talloc_asprintf_append(resp, "%s%s%s",
-+					*resp ? " " : "", SOFT_PREFIX,
-+					quota_adm[q].name);
-+				if (!resp)
-+					return ENOMEM;
-+			}
-+		}
-+	} else {
-+		if (n_pars == 1) {
-+			quota = quotas;
-+			name = vec[0];
-+		} else {
-+			domid = parse_domid(vec[0]);
-+			if (errno)
-+				return errno;
-+			domain = find_or_alloc_existing_domain(domid);
-+			if (!domain)
-+				return ENOENT;
-+			quota = domain->acc;
-+			name = vec[1];
-+		}
-+
-+		if (parse_quota_name(name, &q, &idx))
-+			return EINVAL;
-+
-+		resp = talloc_asprintf(ctx, "%u", quota[q].val[idx]);
-+		if (!resp)
-+			return ENOMEM;
-+	}
-+
-+	send_reply(conn, XS_GET_QUOTA, resp, strlen(resp) + 1);
-+
-+	return 0;
-+}
-+
-+int do_set_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in)
-+{
-+	const char *vec[3];
-+	unsigned int n_pars;
-+	unsigned int domid;
-+	unsigned int q;
-+	unsigned int idx;
-+	const char *name;
-+	unsigned int val;
-+	struct quota *quota;
-+	struct domain *domain;
-+
-+	n_pars = get_strings(in, vec, ARRAY_SIZE(vec));
-+
-+	if (n_pars < 2 || n_pars > 3)
-+		return EINVAL;
-+
-+	if (n_pars == 2) {
-+		quota = quotas;
-+		name = vec[0];
-+		val = atoi(vec[1]);
-+	} else {
-+		domid = parse_domid(vec[0]);
-+		if (errno)
-+			return errno;
-+		domain = find_or_alloc_existing_domain(domid);
-+		if (!domain)
-+			return ENOENT;
-+		quota = domain->acc;
-+		name = vec[1];
-+		val = atoi(vec[2]);
-+	}
-+
-+	if (parse_quota_name(name, &q, &idx) || val == Q_VAL_DISABLED)
-+		return EINVAL;
-+
-+	quota[q].val[idx] = val;
-+
-+	send_ack(conn, XS_SET_QUOTA);
-+
-+	return 0;
-+}
-+
- static int close_xgt_handle(void *_handle)
- {
- 	xengnttab_close(*(xengnttab_handle **)_handle);
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index 8f23a82854..ca38b5e0ea 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -93,6 +93,11 @@ int do_get_feature(const void *ctx, struct connection *conn,
- int do_set_feature(const void *ctx, struct connection *conn,
- 		   struct buffered_data *in);
- 
-+int do_get_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in);
-+int do_set_quota(const void *ctx, struct connection *conn,
-+		 struct buffered_data *in);
-+
- void domain_early_init(void);
- void domain_init(int evtfd);
- void init_domains(bool live_update);
--- 
-2.53.0
+Looks good.
 
+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+
+Cheers,
+Jens
 
