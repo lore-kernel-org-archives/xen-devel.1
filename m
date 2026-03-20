@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D5321093170
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782EE1093176
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 03:18:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1257685.1551988 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1257689.1552026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3QN2-0004a5-SE; Fri, 20 Mar 2026 03:17:56 +0000
+	id 1w3QN9-0005Uo-4E; Fri, 20 Mar 2026 03:18:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1257685.1551988; Fri, 20 Mar 2026 03:17:56 +0000
+Received: by outflank-mailman (output) from mailman id 1257689.1552026; Fri, 20 Mar 2026 03:18:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3QN2-0004Zy-Oy; Fri, 20 Mar 2026 03:17:56 +0000
-Received: by outflank-mailman (input) for mailman id 1257685;
- Fri, 20 Mar 2026 03:17:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w3QN8-0005Tt-UL; Fri, 20 Mar 2026 03:18:02 +0000
+Received: by outflank-mailman (input) for mailman id 1257689;
+ Fri, 20 Mar 2026 03:18:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4NFT=BU=huawei.com=fengchengwen@srs-se1.protection.inumbo.net>)
- id 1w3QN1-00049n-9I
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 03:17:55 +0000
-Received: from canpmsgout08.his.huawei.com (canpmsgout08.his.huawei.com
- [113.46.200.223]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 605aab81-240b-11f1-b164-2bf370ae4941;
- Fri, 20 Mar 2026 04:17:53 +0100 (CET)
-Received: from mail.maildlp.com (unknown [172.19.163.163])
- by canpmsgout08.his.huawei.com (SkyGuard) with ESMTPS id 4fcSL815VlzmV66;
- Fri, 20 Mar 2026 11:12:48 +0800 (CST)
+ id 1w3QN7-0004o0-VD
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 03:18:01 +0000
+Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com
+ [113.46.200.216]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5fd521b6-240b-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Mar 2026 04:17:52 +0100 (CET)
+Received: from mail.maildlp.com (unknown [172.19.162.140])
+ by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4fcSKf63Y8z1T4Fg;
+ Fri, 20 Mar 2026 11:12:22 +0800 (CST)
 Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
- by mail.maildlp.com (Postfix) with ESMTPS id B24234056B;
- Fri, 20 Mar 2026 11:17:49 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 832D62012A;
+ Fri, 20 Mar 2026 11:17:46 +0800 (CST)
 Received: from localhost.localdomain (10.50.163.32) by
  kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Fri, 20 Mar 2026 11:17:47 +0800
+ 15.2.1544.11; Fri, 20 Mar 2026 11:17:44 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,14 +48,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 605aab81-240b-11f1-b164-2bf370ae4941
+X-Inumbo-ID: 5fd521b6-240b-11f1-9ccf-f158ae23cfc8
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=BMMryEb1CdnOx2gMiVv+9iHKONhR3XK5c+5CZUibkPo=;
-	b=l/7oJpMqJuYSGHZyOqLiw5LD07h+45LWAipYVAvEt9pYxSp4UxJSqwXgX66M8/EZ74aeSBY3M
-	qLpVsSs+rpKpxDOoVmFTloYQFQ4DUIG80JTpBOmlHJ7rSI3KUDZxGFyGCXDxs8sVu0UH3BlI+It
-	fJwAj4fQtMaqP5gUwirfIBk=
+	bh=iz8YIEZdONKZjhVUadBKtisgs3GnBKQW890wI7E2K40=;
+	b=JkiHQ4POUePhg6nVnn7KYCDnENz7SLcoof0mOjF3SuSUq8iuNklW2rhRA5lGQFfksKsKg/CJB
+	fgMOjIFrgZCX9KAxkrsIaVclooF0P9jJSHtGkT9OJDkVde3FzBSqg1oVyD4JQp6fGM3G+LNl1gU
+	iaDtpnWu2OjsLqrqB35ybCc=
 From: Chengwen Feng <fengchengwen@huawei.com>
 To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
 	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
@@ -88,9 +88,9 @@ CC: Jonathan Corbet <corbet@lwn.net>, Palmer Dabbelt <palmer@dabbelt.com>,
 	<loongarch@lists.linux.dev>, <linux-riscv@lists.infradead.org>,
 	<xen-devel@lists.xenproject.org>, <linux-acpi@vger.kernel.org>,
 	<linux-perf-users@vger.kernel.org>, <stable@vger.kernel.org>
-Subject: [PATCH v10 3/8] RISC-V: ACPI: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-Date: Fri, 20 Mar 2026 11:17:32 +0800
-Message-ID: <20260320031737.35048-4-fengchengwen@huawei.com>
+Subject: [PATCH v10 1/8] arm64: acpi: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
+Date: Fri, 20 Mar 2026 11:17:30 +0800
+Message-ID: <20260320031737.35048-2-fengchengwen@huawei.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20260320031737.35048-1-fengchengwen@huawei.com>
 References: <20260320031737.35048-1-fengchengwen@huawei.com>
@@ -102,100 +102,83 @@ X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
 
 As a step towards unifying the interface for retrieving ACPI CPU UID
 across architectures, introduce a new function acpi_get_cpu_uid() for
-riscv. While at it, add input validation to make the code more robust.
+arm64. While at it, add input validation to make the code more robust.
 
-And also update acpi_numa.c and rhct.c to use the new interface instead
-of the legacy get_acpi_id_for_cpu().
+Reimplement get_cpu_for_acpi_id() based on acpi_get_cpu_uid() for
+consistency, and move its implementation next to the new function for
+code coherence.
 
 Cc: stable@vger.kernel.org
 Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 ---
- arch/riscv/include/asm/acpi.h |  1 +
- arch/riscv/kernel/acpi.c      | 16 ++++++++++++++++
- arch/riscv/kernel/acpi_numa.c |  9 ++++++---
- drivers/acpi/riscv/rhct.c     |  7 ++++++-
- 4 files changed, 29 insertions(+), 4 deletions(-)
+ arch/arm64/include/asm/acpi.h | 14 ++------------
+ arch/arm64/kernel/acpi.c      | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+), 12 deletions(-)
 
-diff --git a/arch/riscv/include/asm/acpi.h b/arch/riscv/include/asm/acpi.h
-index 6e13695120bc..f3520cc85af3 100644
---- a/arch/riscv/include/asm/acpi.h
-+++ b/arch/riscv/include/asm/acpi.h
-@@ -65,6 +65,7 @@ static inline u32 get_acpi_id_for_cpu(int cpu)
+diff --git a/arch/arm64/include/asm/acpi.h b/arch/arm64/include/asm/acpi.h
+index c07a58b96329..2219a3301e72 100644
+--- a/arch/arm64/include/asm/acpi.h
++++ b/arch/arm64/include/asm/acpi.h
+@@ -118,18 +118,8 @@ static inline u32 get_acpi_id_for_cpu(unsigned int cpu)
  {
- 	return acpi_cpu_get_madt_rintc(cpu)->uid;
+ 	return	acpi_cpu_get_madt_gicc(cpu)->uid;
  }
+-
+-static inline int get_cpu_for_acpi_id(u32 uid)
+-{
+-	int cpu;
+-
+-	for (cpu = 0; cpu < nr_cpu_ids; cpu++)
+-		if (acpi_cpu_get_madt_gicc(cpu) &&
+-		    uid == get_acpi_id_for_cpu(cpu))
+-			return cpu;
+-
+-	return -EINVAL;
+-}
 +int acpi_get_cpu_uid(unsigned int cpu, u32 *uid);
++int get_cpu_for_acpi_id(u32 uid);
  
- int acpi_get_riscv_isa(struct acpi_table_header *table,
- 		       unsigned int cpu, const char **isa);
-diff --git a/arch/riscv/kernel/acpi.c b/arch/riscv/kernel/acpi.c
-index 71698ee11621..322ea92aa39f 100644
---- a/arch/riscv/kernel/acpi.c
-+++ b/arch/riscv/kernel/acpi.c
-@@ -337,3 +337,19 @@ int raw_pci_write(unsigned int domain, unsigned int bus,
+ static inline void arch_fix_phys_package_id(int num, u32 slot) { }
+ void __init acpi_init_cpus(void);
+diff --git a/arch/arm64/kernel/acpi.c b/arch/arm64/kernel/acpi.c
+index af90128cfed5..24b9d934be54 100644
+--- a/arch/arm64/kernel/acpi.c
++++ b/arch/arm64/kernel/acpi.c
+@@ -458,3 +458,33 @@ int acpi_unmap_cpu(int cpu)
  }
- 
- #endif	/* CONFIG_PCI */
+ EXPORT_SYMBOL(acpi_unmap_cpu);
+ #endif /* CONFIG_ACPI_HOTPLUG_CPU */
 +
 +int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
 +{
-+	struct acpi_madt_rintc *rintc;
++	struct acpi_madt_generic_interrupt *gicc;
 +
 +	if (cpu >= nr_cpu_ids)
 +		return -EINVAL;
 +
-+	rintc = acpi_cpu_get_madt_rintc(cpu);
-+	if (!rintc)
++	gicc = acpi_cpu_get_madt_gicc(cpu);
++	if (!gicc)
 +		return -ENODEV;
 +
-+	*uid = rintc->uid;
++	*uid = gicc->uid;
 +	return 0;
 +}
 +EXPORT_SYMBOL_GPL(acpi_get_cpu_uid);
-diff --git a/arch/riscv/kernel/acpi_numa.c b/arch/riscv/kernel/acpi_numa.c
-index 130769e3a99c..6a2d4289f806 100644
---- a/arch/riscv/kernel/acpi_numa.c
-+++ b/arch/riscv/kernel/acpi_numa.c
-@@ -37,11 +37,14 @@ static int __init acpi_numa_get_nid(unsigned int cpu)
- 
- static inline int get_cpu_for_acpi_id(u32 uid)
- {
--	int cpu;
++
++int get_cpu_for_acpi_id(u32 uid)
++{
 +	u32 cpu_uid;
 +	int ret;
- 
--	for (cpu = 0; cpu < nr_cpu_ids; cpu++)
--		if (uid == get_acpi_id_for_cpu(cpu))
++
 +	for (int cpu = 0; cpu < nr_cpu_ids; cpu++) {
 +		ret = acpi_get_cpu_uid(cpu, &cpu_uid);
 +		if (ret == 0 && uid == cpu_uid)
- 			return cpu;
++			return cpu;
 +	}
- 
- 	return -EINVAL;
- }
-diff --git a/drivers/acpi/riscv/rhct.c b/drivers/acpi/riscv/rhct.c
-index caa2c16e1697..8f3f38c64a88 100644
---- a/drivers/acpi/riscv/rhct.c
-+++ b/drivers/acpi/riscv/rhct.c
-@@ -44,10 +44,15 @@ int acpi_get_riscv_isa(struct acpi_table_header *table, unsigned int cpu, const
- 	struct acpi_rhct_isa_string *isa_node;
- 	struct acpi_table_rhct *rhct;
- 	u32 *hart_info_node_offset;
--	u32 acpi_cpu_id = get_acpi_id_for_cpu(cpu);
-+	u32 acpi_cpu_id;
-+	int ret;
- 
- 	BUG_ON(acpi_disabled);
- 
-+	ret = acpi_get_cpu_uid(cpu, &acpi_cpu_id);
-+	if (ret != 0)
-+		return ret;
 +
- 	if (!table) {
- 		rhct = acpi_get_rhct();
- 		if (!rhct)
++	return -EINVAL;
++}
 -- 
 2.17.1
 
