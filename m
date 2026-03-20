@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88291098793
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:02:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1258101.1552293 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC83E1098794
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Mar 2026 15:02:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1258112.1552311 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bMH-0002qK-Kc; Fri, 20 Mar 2026 15:01:53 +0000
+	id 1w3bMW-0003iU-84; Fri, 20 Mar 2026 15:02:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1258101.1552293; Fri, 20 Mar 2026 15:01:53 +0000
+Received: by outflank-mailman (output) from mailman id 1258112.1552311; Fri, 20 Mar 2026 15:02:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w3bMH-0002qD-FW; Fri, 20 Mar 2026 15:01:53 +0000
-Received: by outflank-mailman (input) for mailman id 1258101;
- Fri, 20 Mar 2026 15:01:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1w3bMW-0003iI-4c; Fri, 20 Mar 2026 15:02:08 +0000
+Received: by outflank-mailman (input) for mailman id 1258112;
+ Fri, 20 Mar 2026 15:02:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=0BFG=BU=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1w3bMG-0001Ve-Hz
- for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:01:52 +0000
+ id 1w3bMU-0001ko-8s
+ for xen-devel@lists.xenproject.org; Fri, 20 Mar 2026 15:02:06 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ba0c9fcd-246d-11f1-b164-2bf370ae4941;
- Fri, 20 Mar 2026 16:01:51 +0100 (CET)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c0859742-246d-11f1-9ccf-f158ae23cfc8;
+ Fri, 20 Mar 2026 16:02:02 +0100 (CET)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4C8894D282;
- Fri, 20 Mar 2026 15:01:49 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2D76A4D27B;
+ Fri, 20 Mar 2026 15:02:00 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 2D97042866;
- Fri, 20 Mar 2026 15:01:49 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0D3EF42866;
+ Fri, 20 Mar 2026 15:02:00 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 3ycOCl1hvWnNXAAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:01:49 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id /qksAmhhvWneXAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 20 Mar 2026 15:02:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,303 +53,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba0c9fcd-246d-11f1-b164-2bf370ae4941
+X-Inumbo-ID: c0859742-246d-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1774018922; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=71OCtUN3V2d3sM2aEWOZPCVfbKJBQnPGkvk8gK9D9UI=;
-	b=hrfUx7Dp4ipwlA33mKY5qH08RvtebywdI4DCPPaHvQ+JJamb6otSfLnmWe1Pt41+Qb/E6s
-	X8U61R47Lprp+3UkgqpOdyyfwrZie9ceJdvZHYJwikYixRCFkk2LwWZaxOYFXRYjznHDgk
-	mQ2v8zhL45x4hJzrAIgy57ImZ4vB9no=
+	bh=R+PpHjFLzvQIrf2KVCkmF/XhxpN/XcwoIQUr9KmYFoI=;
+	b=KOvbaB3/47LkpwEa0g8TBdgM8H2CK5iLpCFU8NDRvvyvpRfg2v20GO5UNslIn6e9Lvstuf
+	DAWr2KkK3AF+mWQCKrpeSwLh3haqLt3IzsJzVAugaAIokFFn1bSUme1PZhyqYwCc3ztbFy
+	kMuQPWkbBw6JjeVnkFv/XLqwTgJcTIE=
 Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=hrfUx7Dp
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1774018909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1774018920; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=71OCtUN3V2d3sM2aEWOZPCVfbKJBQnPGkvk8gK9D9UI=;
-	b=hrfUx7Dp4ipwlA33mKY5qH08RvtebywdI4DCPPaHvQ+JJamb6otSfLnmWe1Pt41+Qb/E6s
-	X8U61R47Lprp+3UkgqpOdyyfwrZie9ceJdvZHYJwikYixRCFkk2LwWZaxOYFXRYjznHDgk
-	mQ2v8zhL45x4hJzrAIgy57ImZ4vB9no=
+	bh=R+PpHjFLzvQIrf2KVCkmF/XhxpN/XcwoIQUr9KmYFoI=;
+	b=EUb/g56efp1Yf5qeMEHjfrDKfGpmopQp0grGgajiCZG26XH05kKKOZaUZZD73DCEFfiqyi
+	oAg7v+SU6ez7b7U3XkFtw0Ie1eNQLUieFrJu97ix/SzZGnjT7wTAAy49ND/WvKCrOtGQwh
+	m4oZuXitluJ0EXPZVM2wbufGDBf1hgA=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v2 05/12] tools/xenstored: add GLOBAL_QUOTA_DATA record for live update
-Date: Fri, 20 Mar 2026 16:01:13 +0100
-Message-ID: <20260320150120.874878-6-jgross@suse.com>
+Subject: [PATCH v2 07/12] tools/xenstored: use per-domain quota settings
+Date: Fri, 20 Mar 2026 16:01:15 +0100
+Message-ID: <20260320150120.874878-8-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260320150120.874878-1-jgross@suse.com>
 References: <20260320150120.874878-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 4C8894D282
+	MIME_TRACE(0.00)[0:+];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:email,vates.tech:email]
 
-Communicate the global quota settings via the GLOBAL_QUOTA_DATA
-record to the new Xenstore instance.
+Initialize the per-domain quota values with the global ones at domain
+introduction. Use the per-domain quota settings when checking for
+current values to exceed the quota.
 
-This avoids to lose global quota settings done via xenstore-control.
-
-In theory it would be possible to drop any quota related command line
-parameters in the live update case, but they don't do any harm, as
-the record data is applied on top of the command line data.
-
-For soft-quota just prepend "soft-" to the quota name.
-
-Use sub-functions for building and analyzing the quota part of the
-migration stream, as they will be reused for per-domain quotas.
+Add per-domain quota support to live update.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
 ---
 V2:
-- add macros for soft-quota name prefix and its length (Anthony Perard)
-- don't allow disabled quota in parse_quota_name() (Anthony Perard)
-- rename "len" to "rec_len" in dump_state_glb_quota() (Anthony Perard)
-- rename build_quota_data() parameter "name" to "names_buf" (Anthony Perard)
-- let get_quota_size() start with len 0 (Anthony Perard)
+- fix commit message (Anthony Perard)
+- rename "len" to "rec_len" in dump_state_domain() (Anthony Perard)
 ---
- tools/xenstored/domain.c | 132 +++++++++++++++++++++++++++++++++++++++
- tools/xenstored/domain.h |   2 +
- tools/xenstored/lu.c     |   6 ++
- 3 files changed, 140 insertions(+)
+ tools/xenstored/domain.c | 60 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 45 insertions(+), 15 deletions(-)
 
 diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 4e696a81a8..cfc8fd0cb4 100644
+index b82f2d5167..7a8d285e64 100644
 --- a/tools/xenstored/domain.c
 +++ b/tools/xenstored/domain.c
-@@ -107,6 +107,9 @@ struct quota quotas[ACC_N] = {
- 	[ACC_NODESZ] =     { .val = { 2048, Q_VAL_DISABLED }, },
- };
+@@ -392,6 +392,9 @@ void wrl_apply_debit_trans_commit(struct connection *conn)
  
-+#define SOFT_PREFIX	"soft-"
-+#define SOFT_PREFIX_LEN	(sizeof(SOFT_PREFIX) - 1)
-+
- typedef int32_t wrl_creditt;
- 
- struct domain
-@@ -1363,6 +1366,29 @@ int do_set_feature(const void *ctx, struct connection *conn,
- 	return 0;
- }
- 
-+static bool parse_quota_name(const char *name, unsigned int *qidx,
-+			     unsigned int *idx)
-+{
-+	unsigned int q;
-+
-+	if (strncmp(name, SOFT_PREFIX, SOFT_PREFIX_LEN)) {
-+		*idx = Q_IDX_HARD;
-+	} else {
-+		*idx = Q_IDX_SOFT;
-+		name += SOFT_PREFIX_LEN;
-+	}
-+	for (q = 0; q < ACC_N; q++) {
-+		if (quota_adm[q].name && !strcmp(quota_adm[q].name, name)) {
-+			if (quotas[q].val[*idx] == Q_VAL_DISABLED)
-+				return true;
-+			*qidx = q;
-+			return false;
-+		}
-+	}
-+
-+	return true;
-+}
-+
- static int close_xgt_handle(void *_handle)
+ static unsigned int domain_get_soft_quota(struct domain *d, enum accitem what)
  {
- 	xengnttab_close(*(xengnttab_handle **)_handle);
-@@ -2032,6 +2058,64 @@ void read_state_connection(const void *ctx, const void *state)
- 	}
++	if (d && d->acc[what].val[Q_IDX_SOFT] != Q_VAL_DISABLED)
++		return d->acc[what].val[Q_IDX_SOFT];
++
+ 	return quotas[what].val[Q_IDX_SOFT];
  }
  
-+/* Returns number of quota and adds length of quota names to *len. */
-+static unsigned int get_quota_size(struct quota *quota, unsigned int *len)
-+{
+@@ -400,6 +403,9 @@ static bool domain_quota_val_exceeds(struct domain *d, enum accitem what,
+ {
+ 	unsigned int quota = quotas[what].val[Q_IDX_HARD];
+ 
++	if (d->acc[what].val[Q_IDX_HARD] != Q_VAL_DISABLED)
++		quota = d->acc[what].val[Q_IDX_HARD];
++
+ 	if (!quota || !domid_is_unprivileged(d->domid))
+ 		return false;
+ 
+@@ -824,6 +830,7 @@ static struct domain *alloc_domain(const void *context, unsigned int domid,
+ 				   uint64_t unique_id)
+ {
+ 	struct domain *domain;
 +	unsigned int q;
-+	unsigned int n = 0;
-+
-+	*len = 0;
+ 
+ 	domain = talloc_zero(context, struct domain);
+ 	if (!domain) {
+@@ -837,6 +844,11 @@ static struct domain *alloc_domain(const void *context, unsigned int domid,
+ 	domain->introduced = false;
+ 	domain->features = XENSTORE_FEATURES;
+ 
 +	for (q = 0; q < ACC_N; q++) {
-+		if (!quota_adm[q].name)
-+			continue;
-+		if (quota[q].val[Q_IDX_HARD] != Q_VAL_DISABLED) {
-+			n++;
-+			*len += strlen(quota_adm[q].name) + 1;
-+		}
-+		if (quota[q].val[Q_IDX_SOFT] != Q_VAL_DISABLED) {
-+			n++;
-+			*len += strlen(quota_adm[q].name) + SOFT_PREFIX_LEN + 1;
-+		}
++		domain->acc[q].val[Q_IDX_HARD] = quotas[q].val[Q_IDX_HARD];
++		domain->acc[q].val[Q_IDX_SOFT] = quotas[q].val[Q_IDX_SOFT];
 +	}
 +
-+	return n;
-+}
-+
-+static void build_quota_data(struct quota *quota, uint32_t *val,
-+			     char *names_buf)
-+{
-+	unsigned int q;
-+	unsigned int n = 0;
-+
-+	for (q = 0; q < ACC_N; q++) {
-+		if (!quota_adm[q].name)
-+			continue;
-+		if (quota[q].val[Q_IDX_HARD] != Q_VAL_DISABLED) {
-+			val[n++] = quota[q].val[Q_IDX_HARD];
-+			strcpy(names_buf, quota_adm[q].name);
-+			names_buf += strlen(names_buf) + 1;
-+		}
-+		if (quota[q].val[Q_IDX_SOFT] != Q_VAL_DISABLED) {
-+			val[n++] = quota[q].val[Q_IDX_SOFT];
-+			strcpy(names_buf, SOFT_PREFIX);
-+			strcpy(names_buf + SOFT_PREFIX_LEN, quota_adm[q].name);
-+			names_buf += strlen(names_buf) + 1;
-+		}
-+	}
-+}
-+
-+static void parse_quota_data(const uint32_t *val, const char *name,
-+			     unsigned int n, struct quota *quota)
-+{
-+	unsigned int i, q, idx;
-+
-+	for (i = 0; i < n; i++) {
-+		if (!parse_quota_name(name, &q, &idx))
-+			quota[q].val[idx] = val[i];
-+		name += strlen(name) + 1;
-+	}
-+}
-+
- static int dump_state_domain(const void *k, void *v, void *arg)
+ 	if (hashtable_add(domhash, &domain->domid, domain)) {
+ 		talloc_free(domain);
+ 		errno = ENOMEM;
+@@ -2118,25 +2130,39 @@ static int dump_state_domain(const void *k, void *v, void *arg)
  {
  	struct domain *domain = v;
-@@ -2080,6 +2164,54 @@ void read_state_domain(const void *ctx, const void *state, unsigned int version)
- 		domain->features = sd->features;
- }
- 
-+const char *dump_state_glb_quota(FILE *fp)
-+{
+ 	FILE *fp = arg;
+-	struct xs_state_domain sd;
+-	struct xs_state_record_header head;
+-
+-	head.type = XS_STATE_TYPE_DOMAIN;
+-	head.length = sizeof(sd);
+-	memset(&sd, 0, sizeof(sd));
+-	sd.domain_id = domain->domid;
++	struct xs_state_domain *sd;
 +	struct xs_state_record_header *head;
-+	struct xs_state_glb_quota *glb;
 +	void *record;
 +	unsigned int n_quota;
 +	unsigned int rec_len;
 +	size_t ret;
-+
-+	n_quota = get_quota_size(quotas, &rec_len);
-+	rec_len += n_quota * sizeof(glb->quota_val[0]);
-+	rec_len += sizeof(*glb);
+ 
+-	if (lu_status->version > 1)
+-		sd.features = domain->features;
++	n_quota = get_quota_size(domain->acc, &rec_len);
++	rec_len += n_quota * sizeof(sd->quota_val[0]);
++	rec_len += sizeof(*sd);
 +	rec_len = ROUNDUP(rec_len, 3);
-+
+ 
+-	if (fwrite(&head, sizeof(head), 1, fp) != 1)
+-		return 1;
+-	if (fwrite(&sd, sizeof(sd), 1, fp) != 1)
+-		return 1;
+-	if (dump_state_align(fp))
 +	record = talloc_size(NULL, rec_len + sizeof(*head));
 +	if (!record)
-+		return "Dump global quota allocation error";
-+
+ 		return 1;
+ 
+-	return 0;
 +	head = record;
-+	head->type = XS_STATE_TYPE_GLB_QUOTA;
++	head->type = XS_STATE_TYPE_DOMAIN;
 +	head->length = rec_len;
 +
-+	glb = (struct xs_state_glb_quota *)(head + 1);
-+	glb->n_dom_quota = n_quota;
-+	glb->n_glob_quota = 0;
++	sd = (struct xs_state_domain *)(head + 1);
++	sd->domain_id = domain->domid;
++	sd->n_quota = n_quota;
++	sd->features = (lu_status->version > 1) ? domain->features : 0;
 +
-+	build_quota_data(quotas, glb->quota_val,
-+			 (char *)(glb->quota_val + n_quota));
++	build_quota_data(domain->acc, sd->quota_val,
++			 (char *)(sd->quota_val + n_quota));
 +
 +	ret = fwrite(record, rec_len + sizeof(*head), 1, fp);
 +
 +	talloc_free(record);
 +
-+	if (ret != 1 || dump_state_align(fp))
-+		return "Dump global quota error";
-+
-+	return NULL;
-+}
-+
-+void read_state_glb_quota(const void *ctx, const void *state)
-+{
-+	const struct xs_state_glb_quota *glb = state;
-+	unsigned int n_quota = glb->n_dom_quota + glb->n_glob_quota;
-+	const char *name = (const char *)(glb->quota_val + n_quota);
-+
-+	parse_quota_data(glb->quota_val, name, n_quota, quotas);
-+}
-+
- struct domain_acc {
- 	unsigned int domid;
- 	int nodes;
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index 3bedadb477..8f23a82854 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -172,10 +172,12 @@ void wrl_apply_debit_trans_commit(struct connection *conn);
++	return (ret != 1 || dump_state_align(fp)) ? 1 : 0;
+ }
  
- const char *dump_state_connections(FILE *fp);
- const char *dump_state_domains(FILE *fp);
-+const char *dump_state_glb_quota(FILE *fp);
+ const char *dump_state_domains(FILE *fp)
+@@ -2153,6 +2179,8 @@ void read_state_domain(const void *ctx, const void *state, unsigned int version)
+ {
+ 	const struct xs_state_domain *sd = state;
+ 	struct domain *domain;
++	unsigned int n_quota = sd->n_quota;
++	const char *name = (const char *)(sd->quota_val + n_quota);
  
- void read_state_connection(const void *ctx, const void *state);
- void read_state_domain(const void *ctx, const void *state,
- 		       unsigned int version);
-+void read_state_glb_quota(const void *ctx, const void *state);
+ 	domain = find_domain_struct(sd->domain_id);
+ 	if (!domain)
+@@ -2160,6 +2188,8 @@ void read_state_domain(const void *ctx, const void *state, unsigned int version)
  
- struct hashtable *domain_check_acc_init(void);
- void domain_check_acc_add(const struct node *node, struct hashtable *domains);
-diff --git a/tools/xenstored/lu.c b/tools/xenstored/lu.c
-index fa8395eb1e..eaffdbc69e 100644
---- a/tools/xenstored/lu.c
-+++ b/tools/xenstored/lu.c
-@@ -192,6 +192,9 @@ void lu_read_state(void)
- 		case XS_STATE_TYPE_DOMAIN:
- 			read_state_domain(ctx, state.buf, version);
- 			break;
-+		case XS_STATE_TYPE_GLB_QUOTA:
-+			read_state_glb_quota(ctx, state.buf);
-+			break;
- 		default:
- 			xprintf("live-update: unknown state record %08x\n",
- 				head.type);
-@@ -319,6 +322,9 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
- 	}
+ 	if (version > 1)
+ 		domain->features = sd->features;
++
++	parse_quota_data(sd->quota_val, name, n_quota, domain->acc);
+ }
  
- 	ret = dump_state_global(fp);
-+	if (ret)
-+		goto out;
-+	ret = dump_state_glb_quota(fp);
- 	if (ret)
- 		goto out;
- 	ret = dump_state_connections(fp);
+ const char *dump_state_glb_quota(FILE *fp)
 -- 
 2.53.0
 
