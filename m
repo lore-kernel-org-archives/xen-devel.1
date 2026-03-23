@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC64FC72CA
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2026 22:51:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259641.1553008 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47880F4613F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2026 22:51:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1259643.1553029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4o7J-0008Aa-O4; Mon, 23 Mar 2026 22:51:25 +0000
+	id 1w4o7L-0000MB-IT; Mon, 23 Mar 2026 22:51:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259641.1553008; Mon, 23 Mar 2026 22:51:25 +0000
+Received: by outflank-mailman (output) from mailman id 1259643.1553029; Mon, 23 Mar 2026 22:51:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4o7J-00089i-HE; Mon, 23 Mar 2026 22:51:25 +0000
-Received: by outflank-mailman (input) for mailman id 1259641;
- Mon, 23 Mar 2026 22:51:24 +0000
+	id 1w4o7L-0000K8-CI; Mon, 23 Mar 2026 22:51:27 +0000
+Received: by outflank-mailman (input) for mailman id 1259643;
+ Mon, 23 Mar 2026 22:51:25 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1w4o7I-0007wO-Fh
- for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 22:51:24 +0000
+ (envelope-from <milan_djokic@epam.com>) id 1w4o7J-00087U-BU
+ for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 22:51:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w4o7H-0000sX-Rp
- for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 23:51:23 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1w4o7I-00As5i-Nm
+ for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 23:51:24 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <milan_djokic@epam.com>)
- id 69c1c360-5cb7-0a2a0a5109dd-0a2a4502e3b2-44
- for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:23 +0100
-Received: from [52.101.70.72]
+ id 69c1c39c-e002-0a2a0a5209dd-0a2a4508b60e-10
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:24 +0100
+Received: from [52.101.70.122]
  (helo=AS8PR04CU009.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <milan_djokic@epam.com>)
- id 69c1c3eb-63bb-0a2a45020019-34654648d8b3-4
- for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:23 +0100
+ id 69c1c3ec-1950-0a2a45080019-3465467af2ba-3
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:24 +0100
 Received: from VI1PR03MB5088.eurprd03.prod.outlook.com (2603:10a6:803:c2::20)
  by AS8PR03MB7653.eurprd03.prod.outlook.com (2603:10a6:20b:34b::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
- 2026 22:51:21 +0000
+ 2026 22:51:23 +0000
 Received: from VI1PR03MB5088.eurprd03.prod.outlook.com
  ([fe80::8471:b7dd:8a1c:c30]) by VI1PR03MB5088.eurprd03.prod.outlook.com
  ([fe80::8471:b7dd:8a1c:c30%6]) with mapi id 15.20.9723.022; Mon, 23 Mar 2026
- 22:51:21 +0000
+ 22:51:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,33 +57,33 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nI8SQf7hRUS008Vf8vbxYc3YdqvgU1knGZIsZIhfA40qSbnSeUyak2kGCMPf4cmaRoYEN3/knsdeVE94idsx9d6YIPvdMlsXfU7nJ3smQHwlUFVOEGCXzReQMKB9itV2Jgq31eQmRzovmbHYdsAnvXnfiDEM/hcPFdB2zUW4co96y3y2WHDny1MAE0LOFojPYdoGhsDx4xqwuaDhTlkHcypJzYHab12bzPEhig8GwS35iNPymwNMmAXn24pU/ZEjQB0o2EMdz1PTcmHOL/mQ6y1fdupz+DZKluWkLO1LAt6yt9q883pKPY5rJw6Dh8z26vCMvVS9fgSmNy7cqK3n3w==
+ b=JVgrz7wbISlrpebU/bCX+S9GstWY5hFMUHW5QOBDin4/tgInSpsPbe5iFs58PdcJIXfX136D8YOn12PA3qFgCjjDBtsdUfSjJvl4B/PIiIiX7kEKvTOOLik2tkNm8BPyBTkcbPovqm6lxi1Lg1HQdmO6OUZE9yHI4IriJXmMEPGdf646aA/lRRi6GGATbHqumKjn2IDsfHQqdaQk5QG6woUYR4QChx4fc5RKH0MzezzsQqKykBc5j8zYbZwQ5krUJnPxjQsAMS7Yx3dh18c6yGBVqp93+2NMWFPP7nk2mMEtEGySCFgNoQ8sFIWbEtRYRg67RDvLaNGVBUJsGGNnxw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GwgosUysiRpjZuWloQCjW+LxR3bA2OFErZFmVHnQIUw=;
- b=hZaH7PfAz9g+6wdlclkWHKzJQHx3YmmEOXA0dHB2mASb8f2MSBVAn11H/Agr7UAiD+NubkwWabSZ+yKLBV4QRbdlEJEm7hH9S6XY11H6ZkQX9aUqAQPTrNJROVtkfdYQefd4DkTcc8FmsUpye2mRsq6jdgGBV3qvIt+20ne1/+xQ6+F9POlWPvk+UGGDwmb6/gxODfPBTDGFAmgpR3jlndtu5ynQ8zqROBAyfV9nfhl/FXjcuiMcZM3Sh5/8IOp75WV2pR9h2IzchZt2NEh3Qv4oBIQH/dXxQaZZKk+Nr1Q4puPj0XeZ3T07PkvflsY7xe05NGtI72c+C+WtgpiOTw==
+ bh=DSkdc8Q1mbwBeVdo4Zby08ryEVkC3pfgX4ru+ElFWTU=;
+ b=kzpyjRyOGnRaVgZ7f61hM7dJ8UamXLEdLEB8I04FFdXU1OX5cFL9vCKrWxz0DOzT/fx7PspIfiF9Lh3ttrrv+TgiEhO2Z0l0EmLDfa4khrCunR74HNc41onZLZpoOkaPL9l1fHCrFAZ6g29+2+F/vsn1RBX2KHm9se8pd5HuTqzC1tWFXcCbYKaI3CjdrE5Ff0D8OR3AoEsVGEHC+KqJ0YjTESWAb5iNLbnOJSLDxhUbREzMyLL6aNbcw1R5a/kwmovn8pOuIYd6458sK2RSOo0ZtLQd/onZgl8zuO9+b/u7nrDWOkQDLsTAZ0v7lJeajXg7AyFVxkUmqrdp8g7TLw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GwgosUysiRpjZuWloQCjW+LxR3bA2OFErZFmVHnQIUw=;
- b=JJx6YlU65OgvREtTxVzsHVbJ/Y0rs3zvUNVP8Fb38xOBT2FqVdazmqbpU6+ymtOb1V4l8TLsjXc8wyOg3rfw1vDFMIy477o5TXJQ7/Ua72koX0T6kutU1k87W+EpObiGPaDq4xp/lIkA+G1u9AmD9Bg2OZsYPoul7ziRT3Newuh+CcYNvzR9aI6mJPKT8VoQYGr0DUzTON4CQ4fTbwuC3MI6WsgePR8qktsankzdohHxRODgI+HiHaFpqrdDu3ztwGBNNiisqWawh6ub4pTI21JNuwAX1NtqO4CCu8kHi8GipEu8osGFIiIMBna74yAYgrkiwY+qC+nNrjcHxP3cFw==
+ bh=DSkdc8Q1mbwBeVdo4Zby08ryEVkC3pfgX4ru+ElFWTU=;
+ b=LwDz0F4YvXZo8evBfE4wFI4aBaAyFx1JPum7Rt8I96hlcOPDkFD4aoBEdzMaDilI+eZ9zZkBPxilOprIC/+hXsZ2KT5ZRs/X0ux//FmP4Gl0F1Ibbg8KLTLUSMvTzNjJzjqViRgY0gyCDQ2F1DFzXNybtj+Xsedz6x/5agZJYWpgBPR39CDL3N23k1u5sE48Da4Emv6kMRMLOocIvIVuBlBpjMfNiIrEi68rt7hD28nwkXoDDErWs3u9hsFTtRTSF0reAKiwucJucL2lE3UxbgGKrTFwQ48bkBkQ1WsAVUTSla+MUu+QhKzX6jTGiejgnnJFFRtC21WB3UAZNtz5qw==
 From: Milan Djokic <milan_djokic@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Rahul Singh <rahul.singh@arm.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Milan Djokic
+CC: Rahul Singh <rahul.singh@arm.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Nick Rosbrook <enr0n@ubuntu.com>, George Dunlap
+	<gwd@xenproject.org>, Juergen Gross <jgross@suse.com>, Milan Djokic
 	<milan_djokic@epam.com>
-Subject: [PATCH v2 04/23] xen/arm: vIOMMU: add generic vIOMMU framework
-Thread-Topic: [PATCH v2 04/23] xen/arm: vIOMMU: add generic vIOMMU framework
-Thread-Index: AQHcuxeRR7+UskAt3km+pnjx0ifivA==
-Date: Mon, 23 Mar 2026 22:51:21 +0000
+Subject: [PATCH v2 06/23] xen/domctl: Add XEN_DOMCTL_CONFIG_VIOMMU_* and
+ viommu config param
+Thread-Topic: [PATCH v2 06/23] xen/domctl: Add XEN_DOMCTL_CONFIG_VIOMMU_* and
+ viommu config param
+Thread-Index: AQHcuxeSK6excSmuKEuyXATKeh0DbQ==
+Date: Mon, 23 Mar 2026 22:51:23 +0000
 Message-ID:
- <f20ce7b6b230ee234c9a278a6d69330f1abb03c1.1774305918.git.milan_djokic@epam.com>
+ <f04d9186eb3b83a4f5fb27db412bf10fb6fb092c.1774305918.git.milan_djokic@epam.com>
 References: <cover.1774305918.git.milan_djokic@epam.com>
 In-Reply-To: <cover.1774305918.git.milan_djokic@epam.com>
 Accept-Language: en-US
@@ -94,374 +94,236 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB5088:EE_|AS8PR03MB7653:EE_
-x-ms-office365-filtering-correlation-id: ff2f71c4-7a87-420b-551b-08de892eb40b
+x-ms-office365-filtering-correlation-id: 48d1e7f5-9e70-4e38-d1e3-08de892eb50d
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|366016|376014|1800799024|38070700021|22082099003|18002099003|56012099003;
 x-microsoft-antispam-message-info:
- IJBDxKbAw+GqqjAgZA8EZx94Ux4GsxEZhv1YtueIGD54g5SiZQS2GzU/wpKwyW4tfwcdNFMJl20UWmG8D1qNLMxJnyy4zxSIWlGoUJUGjK+uFZ17/GZbaKAutFpHbaHk9K5A6quQ48qzwPGz6BiOdMOLm6uMLHq2OdDgr1pPG4xADbcIeNfFFficrTfHYkeOBLeambXAiD6UDDQYNFQvClXOjiGVXs3l3Z4Q5+ueBsa+hZWXgtzt1/na3BktrK4PT4WuamWGxw6mblDopifhBL3PMksldyb/CRv8WkTTxSz4/sUb5BBJXW+LrUKzTEEaJ2WM2HvohoTQ+i5t2Wxtj8q+M4OaaRwL3wfqk+lLHTQgk25pxuJbSRHsFteUc0v4MVAxTzukk5kZ9rKYEg3PWjQhQjTgLJfTiiaFTFejCZiu+6hLxGUpeCH90a92V3T/IcOfavchuPbTDwGoIFbZfGOWxrOp9HCfIwtriMr1TNVeQdHIB0uI2Wedk1pJnYZLuOFOTJ8+rpZvZxgUsupKS0BbnRvPca5NbrGsxUMzuHzeJtrDVixSfoq9UjjxrNuQStVIBg6mu5J8lKZoIWeiTzJgDMrzrZ1Og6JsvJz4JCgzyJ8oLqxPSvxy6PWm+6VUULxYp/Xu0z5+ziiFKW+q8YXPPc5uwPP16HgebsXt9GxoIN5y4owtDXbtKCKtyT5t/9TnUPghfF/w7FQ2QjzoifHRpIsNXMS3Zm4/FuuwrvizQ/tAZLGH2SgqLP9AcvrWGXqoEt57ddVuaIDrEUMqNcDfa6IKZn0XIWocjyEL0Ro=
+ 366dmPq2bCPDrVEGapTJoVx2VdXisEMP0FR5jdKbacLQuHEr58bQjlCGsBf4ce8frG8VdmIWxalBZ/b35e70sjs8YKqTeM9IYoNXkcph9HuC/vQ6vbqk29i/HxWwuKKoQFXmxIh4oOyfBJF1KGI58AXLWXPM6FkPIGMenGdh9WYA1tZ3XSXAjA1gXC/BhdV1BJO6r68Zr9WJPGKWOxQXgFyTFMAyscaE+IMNeR4TMK1dmQGwZU7mdTOMi1Gxyt+8Zye9s1Xmy269jfbZ4YBDWdUcgC3iDjJn2vhNZ7VHGDArUUq1hbKYqTcXtv+ozp6LP/yMWDNi72QPN9aqG+rxuJTiPYCnmrhnaikX81POLkZ4v13KcIIQXBY7fZDuylk9QgjR+E67jb0KxYvDPVHDOj+OPfJMQsrJXxK/XAbdQMKMA0cP7bkNRm+9PnpuLpIPWwqkUDfgtC/j0+BqXKx9/d60mzcwK4UvWZt7L1OgeTbNYprfPG0P+XCHVNSB8gwDEhh6J1v9n7OcnMYcenBilChhBmkOlFsI4KWZ/wqBpRf06W3jz9e8kgXqD3SXrdC0+dathXH4S4+ys3oHokRKkQT1mRDwc4m1FintbQtXqt+sCV9xW/ftufxMU+wFi9iQ833kk/pVUGHSNGSYJr2MLtm3muGsKg6an92CzugMUPg0HTzoZ01j4yHJxqekC6Nkid3ogEXfPsl4nd4BA0WpgJmjh6kJozs9LBeXVW9r67UtLmRrm67NtZPTsjtClKmh8QLkqlw1nPshMZARnvnTGGOPahFyXECLbaLcO9uxIZM=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB5088.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?AdpApo9e+oc5tcfLhiBs3yBwxkwMK2GOwdRpiKEESlWW+9R0vq5uLACI2q?=
- =?iso-8859-1?Q?/VuUJRbLaAuH8InOCnJJv1fKQqu2xliSzAqLY5aFBtJqaq7Axf47Flw1LK?=
- =?iso-8859-1?Q?+V3CDLhAVhUOEe4yE8uVXod+GM0LuePa6iSeQFjmnlejZtDZ1fofkeIghj?=
- =?iso-8859-1?Q?4eVQDrEilGheGtpHuj4GzYmG1GNYUqxh+nRDq8yrFssuGazVS7eQtXuIAi?=
- =?iso-8859-1?Q?Sw9GFZQ9OlsdEMEQkUbTRlOa449Q4o0gHNFfNtBFFtbRrun/Byoj3MMNeE?=
- =?iso-8859-1?Q?0FepisRNE9DEGflG6yx38Gd5yMoEA6If9LZ00AzhwtKl6C5SS57RO/4zdp?=
- =?iso-8859-1?Q?2mYs8aZqCbHNExCZC/Uq+qbv6b6I2BgcxoV/+r8cUdLaGYorbLfkFdcTTz?=
- =?iso-8859-1?Q?BZ98vULQ6k8kmGU21QOx4dQPsrFPAz1CntpC2gR3RdcKzCiysH5/DGbMiG?=
- =?iso-8859-1?Q?bL8R81schozf6gwmtkXP+cRkbT/OFcD8yNlxo24LHf0AH+XdCVezPh2SoB?=
- =?iso-8859-1?Q?/2GUxbWUhAsIwSIjAq5v7bWmAe+Um16S4BMn+pzEbf8p/8QSdU297Wm0FT?=
- =?iso-8859-1?Q?dyFtWv2Kybp8oYK2SkYyLJb1gBf2uyKzAMvpCNLfZWc6zYJss72MRSbBbh?=
- =?iso-8859-1?Q?ksByivX3cbhwuv9goNH8tVJ2NTATN1zglTpQhBGMvA0GJb5jydBqU+XOBo?=
- =?iso-8859-1?Q?koxxOUJzyxd3OVyr3kvHPe01EUyhfhThB798Z3Q5lVzENgvs+vRbF+JD7p?=
- =?iso-8859-1?Q?ugLrnZORnGhsVqZHk9Zi8emm8UhbMafwcdoRJpbVDUm8tkgk/bLgEVHR4/?=
- =?iso-8859-1?Q?MYg+ZiXnokcH/l60lnQl5r/KWHFYLovQHf2H5yzTi6VmYaDR+hSxUsGRaD?=
- =?iso-8859-1?Q?KGWMTgMb6Llgvhke3kZiLSJ70Ah33YUbQEseZ9clEbK98gmLoww0JvQezV?=
- =?iso-8859-1?Q?ZxaCvBDTwsqCEjSuIRUMrieoQpjjDb5RfYFEuoHcVDGtec4Rdj7bsVns4w?=
- =?iso-8859-1?Q?lyX3MOhMULX3C7cAQmLbI/UTmku4kjUFV0Sxkrc1lfH70FITUL5wZ/9m90?=
- =?iso-8859-1?Q?CJQLT5nG3SfEOZ4x+gAfTMBqxjzaIINqXDktRfMmDXq4tuJq65TwisUOmq?=
- =?iso-8859-1?Q?2Lq18GNVqCgNVKTgwZndRgrdACf36sNvqVgZeFfXJVUS12R0uLh0ZmOjtQ?=
- =?iso-8859-1?Q?QbPWAnM/O4oD+Y4nbhZz7sZkjCqFtnRE6lCPDL8jz+hr7UtJiK8inYhrpT?=
- =?iso-8859-1?Q?BCQmT6Yr859vz51W8nODORNGsaO7ifPuYZK0UHMJJvlyG1yVrX8Sz9f2iZ?=
- =?iso-8859-1?Q?rRU57sehG1yGf/dAqNkZ7YV8KbPLBWlf79MiNfLwtov2QNG3920cO0U9qD?=
- =?iso-8859-1?Q?+DkL66KfcUDGCXyiwP9NGRaUn7dzomERG1HldEHsElIcJHuxfNwqohFzTH?=
- =?iso-8859-1?Q?xIWfKNVR16bTFuIe1GUE1hvpF/TtZeKjwwi2XTgl8qqv4c0JTcKL++bL6H?=
- =?iso-8859-1?Q?QZHr33NQ4wBQ2eJGOQYbWBJZRgqzxvwEO7xV2Z+CXzJktRMcRpvY422JZ5?=
- =?iso-8859-1?Q?yI6Enowh6ulq3l4SC1IPPrqyF1ZDeN6nbzLW5TTN0Qn2KY2IR1z6yqZVo/?=
- =?iso-8859-1?Q?TaM43DE5ji79Tssf1/KW0e6NAMRzV0V8erlu+K/EVK0OxCeRaCywN51ZsN?=
- =?iso-8859-1?Q?5E+jjSo4VCaDiahUNrQ+IxSsFuET1WII4D8l+EGzdRIVnao5FEK4rvDDf+?=
- =?iso-8859-1?Q?t0GW97LuswSDWGXoCcvY8uA/BToM+LVvOcp8DbHURaYrDYEAdJUJyBbx5L?=
- =?iso-8859-1?Q?+Y6AOQRmSQ6PfkZOjUXGjtfB9ELTztA=3D?=
+ =?iso-8859-1?Q?dr5SxvQb/9UgKxOTdfiTjKkV3s8ENbSSVwArIbolR+GiaNLh8d+3WERYju?=
+ =?iso-8859-1?Q?Sf4Q2263M1ifHZfsXX/2hJuDy6t63YzzPb5i84wJ6jC6HHPJmlYgOetYQm?=
+ =?iso-8859-1?Q?46E5XtuCvQXtv1JQzzrimiN+WoYrwEB/N8qIapwqtkS9AinhsmEWIXLr2V?=
+ =?iso-8859-1?Q?/j6kk+s9UBnJAXB3V3W65g8JK1UWRgZy+3Qs0+gcaQEV8SO1UGELrnG7RU?=
+ =?iso-8859-1?Q?SMa1WQSkSi8FYACMjO+GbizTRRHF6thYUXXDu2gEnC6kZWWQNzOqX9NXoT?=
+ =?iso-8859-1?Q?vj3Ci95VIEu8WqnSLDXcBLPbaQFXcw8HWisPJ6NRvT2YBcx7GpufTwGvqh?=
+ =?iso-8859-1?Q?GgNhhP86Ap1MANZ1mVnDQfAnYOQqPpTKLGPPTKog7cp/SNKVcO3hICmYJ1?=
+ =?iso-8859-1?Q?qp9TfXrl4PszTvB3ijLBn5zM3CMzXvk9O5pQqMFR+VAdDCl/zTn6ngFJkK?=
+ =?iso-8859-1?Q?hmMrfGdljai/znLgfY7eV+Odus1ky3YnTlfflmb30alsEtBOC4/nlNmAyB?=
+ =?iso-8859-1?Q?qODcfCSWBz6KsavXMeAl3lHMV+BtpbqHmm7CdFfxBC/tGTHxS6MFWxn8rE?=
+ =?iso-8859-1?Q?kuNws98baSocW9YiNFJPF7v0FZdudNoJ3dxWyalD/CvUEIy2E+sifIG7V2?=
+ =?iso-8859-1?Q?7V+xQV4g/+Jt9/tL35zV7WxUaoC8kgh2q/XPFYS9j9ayEI/H3Nyz0Zo0OJ?=
+ =?iso-8859-1?Q?Pz/cRKm1XCPJ9gee1VFrVTBa8nV53B580E88BBEgTnHy4qxj9QE+Sh7R8Z?=
+ =?iso-8859-1?Q?IMZaSms5jau3WsVmz44ePgxzTMEgkFMC1MbfyDBH9lLn2otpszt6Q7JgXp?=
+ =?iso-8859-1?Q?jrPg0frSAh8B9ijwrnqNa43C1ufvnl5oVGzpUxoUBN7xcMczmtQlP2EeLA?=
+ =?iso-8859-1?Q?U6Kqm8JC+GYXZvw8Dlk8aRZxyM5zOgFjYwjGwGIHJNdUrQCuR9BgVDvDW8?=
+ =?iso-8859-1?Q?HYbBzodzd+tFmt/tjS7LJZE1izWWBqrG2igwknpSLJE5M5+2C5fwl4lrJA?=
+ =?iso-8859-1?Q?HEBOLpS/1UvasKX01yhxFAa96UkQ/k7vgXWMO1tGnWj7tXADlqtk2yV5Cl?=
+ =?iso-8859-1?Q?LJ+LpHAViAFxnjpYJ4AfqQOEfx35nRabP6j8Vw9qyKcXGwiiMkcT5rLEbK?=
+ =?iso-8859-1?Q?3Lzp6WkKkDcQfMnnulRHWodGMbT9B1Q2STintdkBY7q8POUn8Wme0k/6zW?=
+ =?iso-8859-1?Q?hLXht6ZZkz8BJflqddYqfYU8AGUXHquHMJfnIBljJAaYfEnVoC6w/zvDQ6?=
+ =?iso-8859-1?Q?vQRefI5rZUFbGdNB84P3TbvhiG8rpY3VxXY9wt2xK6aXVXI/c9j7ytsfsu?=
+ =?iso-8859-1?Q?1OBMQyHKwvBasO99Z1g59oe2pJaljWxjDp+6EvLwcWnGmPGcgj7y4eLq9v?=
+ =?iso-8859-1?Q?EC+4v4a7yYGC2EdHfU4nPJSFkwlA43U8NZKH+6PnObZ7gRrZSkSsdFoF8c?=
+ =?iso-8859-1?Q?kk8wUPj0XZbIUN5cfhUyYE4sTMsqpuvoffnJSqX6tPYgN6JrPlNJtnjrYG?=
+ =?iso-8859-1?Q?9iLMAtBlUtNyP+IamX5nEkG8jgthUniF2YTQxBrPoryETslVKFiJUlXy3X?=
+ =?iso-8859-1?Q?E6GkPwLRq70khg7ve6wwKuj9L6Wk24NQX/6rIV/2EBrT5QrXW1zzooXpxg?=
+ =?iso-8859-1?Q?hAq3iA4qpj9JkLgi8wMhE4NXUHJix21rMOAKHgkHbXK4yqes4F6f5iORZp?=
+ =?iso-8859-1?Q?LOVxUsTbysjSRlf8AK4MAeXW6t3WXdagFtSQvix+TGFJF6eWMk3gPW9TuW?=
+ =?iso-8859-1?Q?1T4FGcnpi6/ybkUw2rae/XwvjdP/nhGmaT6MOS1ab2cmkTUXtTXb6/4tcO?=
+ =?iso-8859-1?Q?f9WSpuGvTqNOh9HQJVZFUn+5vPFmxKI=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB5088.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ff2f71c4-7a87-420b-551b-08de892eb40b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Mar 2026 22:51:21.0815
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48d1e7f5-9e70-4e38-d1e3-08de892eb50d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Mar 2026 22:51:23.2009
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: D7XKZncfJO4klT7Yuhv/nsqM/Ur+ScX5LFw4PnTPH81AAxQGESDx7/6C608gccsNRxqj95jA2V2k8x4MvOdZxg==
+X-MS-Exchange-CrossTenant-userprincipalname: 3aiE0k0UTNmrGcV8CWod3uBnZJbqVD3A/2BVfS1hD5QJsV2dNWExPtlO6mDmMunXPUMmhwTVMw6+YmkhA77hLQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7653
-X-purgate-ID: tlsNG-720697/1774306283-4388DDB8-239BFA7B/0/0
+X-purgate-ID: tlsNG-c1860d/1774306284-EB096726-1C5C9DFA/0/0
 X-purgate-type: clean
-X-purgate-size: 8907
+X-purgate-size: 5868
 
 From: Rahul Singh <rahul.singh@arm.com>
 
-This patch adds basic framework for vIOMMU.
+Add new viommu_type field and field values XEN_DOMCTL_CONFIG_VIOMMU_NONE
+XEN_DOMCTL_CONFIG_VIOMMU_SMMUV3 in xen_arch_domainconfig to
+enable/disable vIOMMU support for domains.
+
+Also add viommu=3D"N" parameter to xl domain configuration to enable the
+vIOMMU for the domains. Currently, only the "smmuv3" type is supported
+for ARM.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 ---
- xen/arch/arm/dom0less-build.c        |  2 +
- xen/arch/arm/domain.c                | 25 ++++++++++
- xen/arch/arm/domain_build.c          |  2 +
- xen/arch/arm/include/asm/viommu.h    | 70 ++++++++++++++++++++++++++++
- xen/drivers/passthrough/Kconfig      |  5 ++
- xen/drivers/passthrough/arm/Makefile |  1 +
- xen/drivers/passthrough/arm/viommu.c | 48 +++++++++++++++++++
- xen/include/public/arch-arm.h        |  4 ++
- 8 files changed, 157 insertions(+)
- create mode 100644 xen/arch/arm/include/asm/viommu.h
- create mode 100644 xen/drivers/passthrough/arm/viommu.c
+ docs/man/xl.cfg.5.pod.in             | 13 +++++++++++++
+ tools/golang/xenlight/helpers.gen.go |  2 ++
+ tools/golang/xenlight/types.gen.go   |  1 +
+ tools/include/libxl.h                |  5 +++++
+ tools/libs/light/libxl_arm.c         | 13 +++++++++++++
+ tools/libs/light/libxl_types.idl     |  6 ++++++
+ tools/xl/xl_parse.c                  |  9 +++++++++
+ 7 files changed, 49 insertions(+)
 
-diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
-index 4181c10538..067835e5d0 100644
---- a/xen/arch/arm/dom0less-build.c
-+++ b/xen/arch/arm/dom0less-build.c
-@@ -23,6 +23,7 @@
- #include <asm/arm64/sve.h>
- #include <asm/domain_build.h>
- #include <asm/firmware/sci.h>
-+#include <asm/viommu.h>
- #include <asm/grant_table.h>
- #include <asm/setup.h>
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 27c455210b..f69cdee55c 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -3162,6 +3162,19 @@ option.
 =20
-@@ -317,6 +318,7 @@ int __init arch_parse_dom0less_node(struct dt_device_no=
-de *node,
-     uint32_t val;
+ =3Dback
 =20
-     d_cfg->arch.gic_version =3D XEN_DOMCTL_CONFIG_GIC_NATIVE;
-+    d_cfg->arch.viommu_type =3D viommu_get_type();
-     d_cfg->flags |=3D XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
-=20
-     if ( domu_dt_sci_parse(node, d_cfg) )
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 94b9858ad2..37511c9323 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -28,6 +28,7 @@
- #include <asm/tee/tee.h>
- #include <asm/vfp.h>
- #include <asm/vgic.h>
-+#include <asm/viommu.h>
- #include <asm/vtimer.h>
-=20
- #include "vpci.h"
-@@ -626,6 +627,21 @@ int arch_sanitise_domain_config(struct xen_domctl_crea=
-tedomain *config)
-         return -EINVAL;
-     }
-=20
-+    if ( !(config->flags & XEN_DOMCTL_CDF_iommu) &&
-+         config->arch.viommu_type !=3D XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-+    {
-+        dprintk(XENLOG_INFO,
-+                "vIOMMU requested while iommu not enabled for domain\n");
-+        return -EINVAL;
-+    }
++=3Dover 4
 +
-+    if ( config->arch.viommu_type !=3D XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-+    {
-+        dprintk(XENLOG_INFO,
-+                "vIOMMU type requested not supported by the platform or Xe=
-n\n");
-+        return -EINVAL;
-+    }
++=3Ditem B<viommu=3D"N">
 +
-     return sci_domain_sanitise_config(config);
++To enable viommu, user must specify the following option in the VM
++config file:
++
++viommu =3D "smmuv3"
++
++Currently, only the "smmuv3" type is supported for ARM.
++
++=3Dback
++
+ =3Dhead3 x86
+=20
+ =3Dover 4
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/h=
+elpers.gen.go
+index 8909fe8a1b..4f0997f02f 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -1195,6 +1195,7 @@ x.ArchArm.NrSpis =3D uint32(xc.arch_arm.nr_spis)
+ if err :=3D x.ArchArm.ArmSci.fromC(&xc.arch_arm.arm_sci);err !=3D nil {
+ return fmt.Errorf("converting field ArchArm.ArmSci: %v", err)
  }
++x.ArchArm.Viommu =3D ViommuType(xc.arch_arm.viommu)
+ if err :=3D x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err !=3D =
+nil {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+@@ -1734,6 +1735,7 @@ xc.arch_arm.nr_spis =3D C.uint32_t(x.ArchArm.NrSpis)
+ if err :=3D x.ArchArm.ArmSci.toC(&xc.arch_arm.arm_sci); err !=3D nil {
+ return fmt.Errorf("converting field ArchArm.ArmSci: %v", err)
+ }
++xc.arch_arm.viommu =3D C.libxl_viommu_type(x.ArchArm.Viommu)
+ if err :=3D x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err !=3D n=
+il {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/typ=
+es.gen.go
+index ab9d4ca7b4..8a37b52a82 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -610,6 +610,7 @@ Vuart VuartType
+ SveVl SveType
+ NrSpis uint32
+ ArmSci ArmSci
++Viommu ViommuType
+ }
+ ArchX86 struct {
+ MsrRelaxed Defbool
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index bc35e412da..f7d5c77e23 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -318,6 +318,11 @@
+  */
+ #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_SCI 1
 =20
-@@ -721,6 +737,9 @@ int arch_domain_create(struct domain *d,
-     if ( (rc =3D sci_domain_init(d, config)) !=3D 0 )
-         goto fail;
++/*
++ * libxl_domain_build_info has the arch_arm.viommu_type field.
++ */
++#define LIBXL_HAVE_BUILDINFO_ARM_VIOMMU 1
++
+ /*
+  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
+  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 7e9f8a1bc3..a248793588 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -247,6 +247,19 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+     }
+     LOG(DEBUG, " - SCI type=3D%u", config->arch.arm_sci_type);
 =20
-+    if ( (rc =3D domain_viommu_init(d, config->arch.viommu_type)) !=3D 0 )
-+        goto fail;
++    switch (d_config->b_info.arch_arm.viommu_type) {
++    case LIBXL_VIOMMU_TYPE_NONE:
++        config->arch.viommu_type =3D XEN_DOMCTL_CONFIG_VIOMMU_NONE;
++        break;
++    case LIBXL_VIOMMU_TYPE_SMMUV3:
++        config->arch.viommu_type =3D XEN_DOMCTL_CONFIG_VIOMMU_SMMUV3;
++        break;
++    default:
++        LOG(ERROR, "Unknown vIOMMU type %d",
++            d_config->b_info.arch_arm.viommu_type);
++        return ERROR_FAIL;
++    }
 +
      return 0;
+ }
 =20
- fail:
-@@ -965,6 +984,7 @@ enum {
-     PROG_pci =3D 1,
-     PROG_sci,
-     PROG_tee,
-+    PROG_viommu,
-     PROG_xen,
-     PROG_page,
-     PROG_mapping,
-@@ -1021,6 +1041,11 @@ int domain_relinquish_resources(struct domain *d)
-         if (ret )
-             return ret;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_type=
+s.idl
+index d64a573ff3..c7ad0e77b2 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -561,6 +561,11 @@ libxl_arm_sci =3D Struct("arm_sci", [
+     ("type", libxl_arm_sci_type),
+     ])
 =20
-+    PROGRESS(viommu):
-+        ret =3D viommu_relinquish_resources(d);
-+        if (ret )
-+            return ret;
++libxl_viommu_type =3D Enumeration("viommu_type", [
++    (0, "none"),
++    (1, "smmuv3")
++    ], init_val =3D "LIBXL_VIOMMU_TYPE_NONE")
 +
-     PROGRESS(xen):
-         ret =3D relinquish_memory(d, &d->xenpage_list);
-         if ( ret )
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index e8795745dd..a51563ee3d 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -35,6 +35,7 @@
- #include <asm/arm64/sve.h>
- #include <asm/cpufeature.h>
- #include <asm/domain_build.h>
-+#include <asm/viommu.h>
- #include <xen/event.h>
+ libxl_rdm_reserve =3D Struct("rdm_reserve", [
+     ("strategy",    libxl_rdm_reserve_strategy),
+     ("policy",      libxl_rdm_reserve_policy),
+@@ -736,6 +741,7 @@ libxl_domain_build_info =3D Struct("domain_build_info",=
+[
+                                ("sve_vl", libxl_sve_type),
+                                ("nr_spis", uint32, {'init_val': 'LIBXL_NR_=
+SPIS_DEFAULT'}),
+                                ("arm_sci", libxl_arm_sci),
++                               ("viommu_type", libxl_viommu_type),
+                               ])),
+     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
+                               ])),
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 1a2ea8b5d5..dcae8314fe 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -3033,6 +3033,15 @@ skip_usbdev:
+         }
+     }
 =20
- #include <xen/irq.h>
-@@ -1946,6 +1947,7 @@ void __init create_dom0(void)
-     dom0_cfg.arch.nr_spis =3D vgic_def_nr_spis();
-     dom0_cfg.arch.tee_type =3D tee_get_type();
-     dom0_cfg.max_vcpus =3D dom0_max_vcpus();
-+    dom0_cfg.arch.viommu_type =3D viommu_get_type();
++    if (!xlu_cfg_get_string (config, "viommu", &buf, 1)) {
++        e =3D libxl_viommu_type_from_string(buf, &b_info->arch_arm.viommu_=
+type);
++        if (e) {
++            fprintf(stderr,
++                    "Unknown vIOMMU type \"%s\" specified\n", buf);
++            exit(-ERROR_FAIL);
++        }
++    }
++
+     parse_vkb_list(config, d_config);
 =20
-     if ( iommu_enabled )
-         dom0_cfg.flags |=3D XEN_DOMCTL_CDF_iommu;
-diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/v=
-iommu.h
-new file mode 100644
-index 0000000000..7cd3818a12
---- /dev/null
-+++ b/xen/arch/arm/include/asm/viommu.h
-@@ -0,0 +1,70 @@
-+/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
-+#ifndef __ARCH_ARM_VIOMMU_H__
-+#define __ARCH_ARM_VIOMMU_H__
-+
-+#ifdef CONFIG_VIRTUAL_IOMMU
-+
-+#include <xen/lib.h>
-+#include <xen/types.h>
-+#include <public/xen.h>
-+
-+struct viommu_ops {
-+    /*
-+     * Called during domain construction if toolstack requests to enable
-+     * vIOMMU support.
-+     */
-+    int (*domain_init)(struct domain *d);
-+
-+    /*
-+     * Called during domain destruction to free resources used by vIOMMU.
-+     */
-+    int (*relinquish_resources)(struct domain *d);
-+};
-+
-+struct viommu_desc {
-+    /* vIOMMU domains init/free operations described above. */
-+    const struct viommu_ops *ops;
-+
-+    /*
-+     * ID of vIOMMU. Corresponds to xen_arch_domainconfig.viommu_type.
-+     * Should be one of XEN_DOMCTL_CONFIG_VIOMMU_xxx
-+     */
-+    uint16_t viommu_type;
-+};
-+
-+int domain_viommu_init(struct domain *d, uint16_t viommu_type);
-+int viommu_relinquish_resources(struct domain *d);
-+uint16_t viommu_get_type(void);
-+
-+#else
-+
-+static inline uint8_t viommu_get_type(void)
-+{
-+    return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
-+}
-+
-+static inline int domain_viommu_init(struct domain *d, uint16_t viommu_typ=
-e)
-+{
-+    if ( likely(viommu_type =3D=3D XEN_DOMCTL_CONFIG_VIOMMU_NONE) )
-+        return 0;
-+
-+    return -ENODEV;
-+}
-+
-+static inline int viommu_relinquish_resources(struct domain *d)
-+{
-+    return 0;
-+}
-+
-+#endif /* CONFIG_VIRTUAL_IOMMU */
-+
-+#endif /* __ARCH_ARM_VIOMMU_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kcon=
-fig
-index b413c33a4c..487331607c 100644
---- a/xen/drivers/passthrough/Kconfig
-+++ b/xen/drivers/passthrough/Kconfig
-@@ -35,6 +35,11 @@ config IPMMU_VMSA
- 	  (H3 ES3.0, M3-W+, etc) or Gen4 SoCs which IPMMU hardware supports stage=
- 2
- 	  translation table format and is able to use CPU's P2M table as is.
-=20
-+config VIRTUAL_IOMMU
-+	bool "Virtual IOMMU Support (UNSUPPORTED)" if UNSUPPORTED
-+	help
-+	 Support virtual IOMMU infrastructure to implement vIOMMU.
-+
- endif
-=20
- config AMD_IOMMU
-diff --git a/xen/drivers/passthrough/arm/Makefile b/xen/drivers/passthrough=
-/arm/Makefile
-index c5fb3b58a5..4cc54f3f4d 100644
---- a/xen/drivers/passthrough/arm/Makefile
-+++ b/xen/drivers/passthrough/arm/Makefile
-@@ -2,3 +2,4 @@ obj-y +=3D iommu.o iommu_helpers.o iommu_fwspec.o
- obj-$(CONFIG_ARM_SMMU) +=3D smmu.o
- obj-$(CONFIG_IPMMU_VMSA) +=3D ipmmu-vmsa.o
- obj-$(CONFIG_ARM_SMMU_V3) +=3D smmu-v3.o
-+obj-$(CONFIG_VIRTUAL_IOMMU) +=3D viommu.o
-diff --git a/xen/drivers/passthrough/arm/viommu.c b/xen/drivers/passthrough=
-/arm/viommu.c
-new file mode 100644
-index 0000000000..7ab6061e34
---- /dev/null
-+++ b/xen/drivers/passthrough/arm/viommu.c
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
-+
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/types.h>
-+
-+#include <asm/viommu.h>
-+
-+const struct viommu_desc __read_mostly *cur_viommu;
-+
-+int domain_viommu_init(struct domain *d, uint16_t viommu_type)
-+{
-+    if ( viommu_type =3D=3D XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-+        return 0;
-+
-+    if ( !cur_viommu )
-+        return -ENODEV;
-+
-+    if ( cur_viommu->viommu_type !=3D viommu_type )
-+        return -EINVAL;
-+
-+    return cur_viommu->ops->domain_init(d);
-+}
-+
-+int viommu_relinquish_resources(struct domain *d)
-+{
-+    if ( !cur_viommu )
-+        return 0;
-+
-+    return cur_viommu->ops->relinquish_resources(d);
-+}
-+
-+uint16_t viommu_get_type(void)
-+{
-+    if ( !cur_viommu )
-+        return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
-+
-+    return cur_viommu->viommu_type;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index cd563cf706..b1db2bf19d 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -330,12 +330,16 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
- #define XEN_DOMCTL_CONFIG_ARM_SCI_NONE      0
- #define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC  1
-=20
-+#define XEN_DOMCTL_CONFIG_VIOMMU_NONE   0
-+
- struct xen_arch_domainconfig {
-     /* IN/OUT */
-     uint8_t gic_version;
-     /* IN - Contains SVE vector length divided by 128 */
-     uint8_t sve_vl;
-     /* IN */
-+    uint8_t viommu_type;
-+    /* IN */
-     uint16_t tee_type;
-     /* IN */
-     uint32_t nr_spis;
+     d_config->virtios =3D NULL;
 --=20
 2.43.0
 
