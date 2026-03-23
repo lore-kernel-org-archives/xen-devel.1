@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D6EF4613F
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2026 22:51:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259668.1553110 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0D7FC72C5
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2026 22:51:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1259670.1553116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4o7c-0003JG-0r; Mon, 23 Mar 2026 22:51:44 +0000
+	id 1w4o7d-0003Wq-2f; Mon, 23 Mar 2026 22:51:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259668.1553110; Mon, 23 Mar 2026 22:51:43 +0000
+Received: by outflank-mailman (output) from mailman id 1259670.1553116; Mon, 23 Mar 2026 22:51:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4o7a-0003Dz-VY; Mon, 23 Mar 2026 22:51:42 +0000
-Received: by outflank-mailman (input) for mailman id 1259668;
+	id 1w4o7c-0003Sf-8w; Mon, 23 Mar 2026 22:51:44 +0000
+Received: by outflank-mailman (input) for mailman id 1259670;
  Mon, 23 Mar 2026 22:51:40 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=P8gh=BX=epam.com=milan_djokic@srs-se1.protection.inumbo.net>)
- id 1w4o7X-0007Yi-Ju
- for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 22:51:39 +0000
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazon11021085.outbound.protection.outlook.com [52.101.70.85])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d923f423-270a-11f1-b166-2bf370ae4941;
- Mon, 23 Mar 2026 23:51:37 +0100 (CET)
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <milan_djokic@epam.com>) id 1w4o7X-0002eA-Ux
+ for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 22:51:40 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1w4o7X-00As5i-AI
+ for xen-devel@lists.xenproject.org; Mon, 23 Mar 2026 23:51:39 +0100
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <milan_djokic@epam.com>)
+ id 69c1c3f6-e002-0a2a0a5209dd-0a2a4503d58c-4
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:39 +0100
+Received: from [52.101.84.77]
+ (helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <milan_djokic@epam.com>)
+ id 69c1c3fa-1947-0a2a45030019-3465544d7449-3
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Mar 2026 23:51:39 +0100
 Received: from VI1PR03MB5088.eurprd03.prod.outlook.com (2603:10a6:803:c2::20)
  by AS8PR03MB9699.eurprd03.prod.outlook.com (2603:10a6:20b:61d::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
- 2026 22:51:33 +0000
+ 2026 22:51:37 +0000
 Received: from VI1PR03MB5088.eurprd03.prod.outlook.com
  ([fe80::8471:b7dd:8a1c:c30]) by VI1PR03MB5088.eurprd03.prod.outlook.com
  ([fe80::8471:b7dd:8a1c:c30%6]) with mapi id 15.20.9723.022; Mon, 23 Mar 2026
- 22:51:33 +0000
+ 22:51:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d923f423-270a-11f1-b166-2bf370ae4941
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mHOrF+EjAO6uwA9vJzJktySafOiodyX0POlB+eqgIfRsiLQ0eeDPSlHuCjVRGkmzV0e/1EERPee8XEYq7rIsQ5zjq/vFTXbrO+OG7mSEzbuPZ5noky//EUn/BcpmtIoRSAiJyhJHFE9FFY6uCJGkDU7KcLsBuelbwFb84BZ1RDNy7K4Ffura9YZR8wIitbqbcFGNcS4eSY9V6OzGFf7b9/W3Oz7KaSantRqqvjqgJtZBci3efU4drC+qtGVKIDQxPyos6qlYzauaKD8JdOhSZYlLO9xZLRPX/xSaC9noPG9+PWIq+uUAAxSsvdFmM92+hbnPu+8hJP16ncWqRr+cFw==
+ b=AXE3LeuQiNk8MUz/2cfyLnw/Xqg/riiBdMwu7qKVDH+IzVlR9637MRlxLJkS+SKGHa+JTGyrw/S+pWlQH8hsXpvoFJtco4CWZNMvSi4cRq4uFHl16jrugMBH+iPLmmN8TT5aQmAgLaUHRUJluTiEv6z4IdI1iMCNHLnp3TRjd5Z+WiwDj8F5GHNMtc3eFtzucyJSsGkBP0oRTYIeyh0DmCGtpxYVB5Jh538qFSjRc8vRNvcXPEfntTc1AZq9IXh9sPHmHKfGPextwgyxMSK9y0u83hPSdv+mCKkc5Rs95C6mXv+VP4lBqaoWzHwJE6gTkT2HI5d1+oZKEXai0xq3jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lj+Sg5LBkxi+H913KrrxXSn48z00gNy3tUlieV05i7o=;
- b=AUvLEA9HnkYKkpY8UV3ZCrSFTqdmL2eKqzw/FTi5bMqfcR1BZiCEZUaW4X5Ys2AAiaUfwi0DAPX0EnL6nWiwvGAaR1SZ7eg3LJC7q8oOcUgYuk2Y4r46mLx1aSb3kXhIEAb+hGSVgAsSgeQmnE60lBsdDesdLlkiKRU2Mr9tAhQeXm6QX/CNwEO+KuzK/EWSsW+UQUCNzemzMM8OHMQbavpFZqXYOcaBCI8TtvQ67Vbv2cJIDWa6gWlEaXIONT+gdxCE36q1jMBtd7XHHW92xUHGNi8pMmpgqQI81Bz81v7Wk9Y2KwtJeSBC5TbKslRPIWjEDCndjkTSBd5B8suwCw==
+ bh=O46ZCtqqAtKuVVyR61YNPzdDBAuzXaUE5Bb7qosufwc=;
+ b=WaoNT+S4l8pxDlTNg6pdSMtJIyCty+JaT2by4f7OhmjSrrZy3M9VM8TJtx0iD2SfPdIayWtt+9siOh4jkHBMqHKKb9pZ4LVJTNTLJ9ZvdJqww6Wy5f/0+1bP9CCToYclUY59hdqvEaY4rHLm3vGPJaxYylKkZe0ZnCh5LBh9rkc+0FypOQj/sgbs7Ja6e84RNWCx1KWUWUjs/81hsInpn22inbsB9qwptPA/u/J54E625GRJCAvy85lvuAMlmxWnDeEBX/CFIzfBBK7ayo9WN3xFHwE/fxT77+bGOrOFwUUKW/0OPvGf9HFVupQY007u4iZvvrx9VQRlh0VHiZ4yng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lj+Sg5LBkxi+H913KrrxXSn48z00gNy3tUlieV05i7o=;
- b=QskhLSAUPOx9YjQ5YqAEee8mWiNlIGUuQpWDqzow9FuumJw3h3eU369IU9www7NtmObiMFV2ZVJLMAonIkRoyiqRqiRX/N7krUcdpS+a+k+KQgl2KyHd7x+GQ/P5aJomH6lUBS9TIPlpPwv0OxdwZ1EkcBe5pPSM/0dC+67faqzysym2IuFnGAxfZ/N9+ceXoxOGuTmgEtj4E2YQAaif3rr02FNNLoBG28sppipfq+t0sA5HgJ9q2fh14hj7NZpf4CWK4UZ4xmluwn3hkAYsx1RRDeFiqveUFQ+wUMCQZFMe6NctnmcOe159Qt5SHuSiv3xp/TCN/XesoGqNaJSjKg==
+ bh=O46ZCtqqAtKuVVyR61YNPzdDBAuzXaUE5Bb7qosufwc=;
+ b=kAT+Y9F0S9xKYw61nE37wm6WvxWmzq4Ck9aYTutHU4I7cvVMRE0SO8GC6aLLEcLmXzggkIZ4ja5yFvacUrrrii2inCx0g58au+BTtfoKKbKSewX5fuCq1/pp+IdSZ2DAYROv9baubWL4F9XFcplxw2PolW1fotX5qTpgJAe5lk0maEIG1TxJoJ7dvfs7/a5mnXXsK1WHcQmfjMagm/OdvvNbptl+neFlqx+O35ZXyBKipX14eY/wBDJiiRNWddvwBNWdodq9RekRpdq5/lmciFn3F31RwY1ek9Q/n2H7Dm6PuJIofRfb3xc1yd7LhfcnsU8JGWRdxde0qCGp4by56w==
 From: Milan Djokic <milan_djokic@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Rahul Singh <rahul.singh@arm.com>, Anthony PERARD
 	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>, Milan Djokic
 	<milan_djokic@epam.com>
-Subject: [PATCH v2 16/23] arm/libxl: vsmmuv3: Emulated SMMUv3 device tree node
- in libxl
-Thread-Topic: [PATCH v2 16/23] arm/libxl: vsmmuv3: Emulated SMMUv3 device tree
- node in libxl
-Thread-Index: AQHcuxeY4ZME1ykbT0SM9HSVq+3Z2Q==
-Date: Mon, 23 Mar 2026 22:51:33 +0000
+Subject: [PATCH v2 19/23] libxl/arm: vIOMMU: Modify the partial device tree
+ for iommus
+Thread-Topic: [PATCH v2 19/23] libxl/arm: vIOMMU: Modify the partial device
+ tree for iommus
+Thread-Index: AQHcuxeaWYek8XrVDUW5at3G4vpkiQ==
+Date: Mon, 23 Mar 2026 22:51:37 +0000
 Message-ID:
- <a33ab266d95c9b9ca18043d6ddeab48fd5a2f86b.1774305918.git.milan_djokic@epam.com>
+ <ba4a05e53f784fd338d0501085ac0e3d289ffbc4.1774305918.git.milan_djokic@epam.com>
 References: <cover.1774305918.git.milan_djokic@epam.com>
 In-Reply-To: <cover.1774305918.git.milan_djokic@epam.com>
 Accept-Language: en-US
@@ -86,141 +93,155 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB5088:EE_|AS8PR03MB9699:EE_
-x-ms-office365-filtering-correlation-id: dd9833ac-2772-4628-5108-08de892ebb4d
+x-ms-office365-filtering-correlation-id: a7a7262c-52df-484a-19ee-08de892ebd72
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|366016|1800799024|376014|38070700021|22082099003|56012099003|18002099003;
 x-microsoft-antispam-message-info:
- F5t84foDWq2fsZAJr9P/oCL+6SmAl2dSR5pyDYNrw2GP6wa96An7+/po580qpA+cxaWpUq9mM6pTh5BOdvqm1yckfMfQjUrvdbT11vXyRGYq0vOL//sn+JmTw8mfLepwTzQtJGh3EjahzOOecTyE/jRnDdhrMvQc9d2glzhAxrECnwmg09T79i/+/l0Uhporo5mR89qDMIchMsvoxWrTH3EX0P20fdAEmYa4Pi9bJU+UKzfFeG4q0khIHkxY0KK3+xV6yT0syx7Odnlk8d+WWyU9h0nmSPhUI8g0MBFtOV0bNpO+/qhN3WUuK5ysaaOz3OjtIaHLQnVU/xEOc1XAMUYbj++4LyqDEfFF9K98DjMC/81h2h01SiDVGeyIm5Xdd8Z0k8JN0BwTkFc5vFiviITBC6thymKvVY5Kn5AHbD0NNXB4qgRLpoBrpC86qxMXaC78JkFVDEB/Y+lD/sQN9vksxX2m0Rp4jtBvBZ9Y7DaOsg693gQKNkv2umbLX0cf0s5xvyRQ24l7Yr8DEKg5M53P7UGuvFAvvFm1+fXjxSTBXMmGug64CDECctYEcappRec2HKtSUaaWzZ1JECefKkMfxs41s+1o289Osf7sTIgBHApqPRkoWGGwJdR6H7cNKM9PUX7TdkhHN4fyOwKNkIUaFQZrui4hI6SbNQO9dbbB2n8A/und3hyUy6hjxcKTapb1//vrzXm0rWkRfn4KUKmfr22t4vvDyEx/ho8VOnPuGH65Uy9BuFnPxVgXJU0QBPXJbl3MRLX6f4OBUJspSa4tRrysauwWiFL4bkiKIt8=
+ 77gQYYTKVng/u5pJirqzY0vNDu+6bChvZ0SGXdfKqBkbNzf6SPBrOYHtUrjOAUydT84vQbd3MScdGThy7Usj6GKwIJtffMxxbIVePgXgqakdtuDSw7VvU467Nf6ziPrV5IKhdQiJofi8LZmq0CYtP3GI44bj8xe03RoQUSkIOhSrXp3BFSKzFp6sKjdPZIRTOcdnQLCqxfcoOIBTptwDiqDsAj5/GPkK+K1PYG7D7fiSbIETuO0yfOfD5s7eO+HRPhZkKzzhXiv6pZOWzW6tqnVaQqt9PXpYEVly0lUPsKZNJ9ylkFZtHj5eVQakWFvOaClXT2Uj0dpYYlg/xk4GKoTrptnbce0VkmlkWBnusJPfZjLOLWqANXl5coHcHiOs2O80me30H+Y8ktVfv4qJp5hNbR6048acwoCdeAwZ9z6S4zJ4qy0ukV+LK8Uwe+ISQ5fzD8QvzUBBP3CBSz9+udjmo6IsnpBQVXd87UtX0iDcmFSI63v5YBfnwhy4kB2Esam4yUi1WABiOqOX9FnwIoEa/U4Iz8OTVwcugZEBCvQqhL8SzHwMjxxuXYgMHp+QIgA96mjZ0udSK2eftMTVEJdFb1hMN+F38NttGlysV40k6QQoaoX27XcYMD7cT1JSZtHfz2nlZZ2wBzwRXFYn1bCcGBnVibO6/b5VivSEOfAKRiJqwBfatS5Gk7/gjOecILT3nr50QhXhcgAMH7S4STcv8F6Dzft6rONExmRBrXgLD3CoYZfOoFDkY7Gln/gf+BBq7yDy99rWIZNMJPcnpwj49oN3xTBbhdIEY4ZD6VM=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB5088.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?hFo68PatmN9Lgd7E3aKuE0hI8mKrSKVq+YjXtBQb19wSIBsYfGgRIvCcMd?=
- =?iso-8859-1?Q?9tRmffRjpJ3JTS9aZkHYpFBSKziCRI/Jvkrts9R2lN2zjLDFaRuUn7hzro?=
- =?iso-8859-1?Q?lmAiJJR23M3W34imU3Qi0IZ62aWfyT6gGztj0X+eD77IYJEqJ2U2JZq3iY?=
- =?iso-8859-1?Q?HeEF6nDyMzEhKF7Fchml5HqvtE8X9eMSd983z6elGnwW54ObYpZmpp/2id?=
- =?iso-8859-1?Q?lRAmqrpGvRcDEMmVnFg940liIhCFiJW9LNzq1bs+AyOoBs0KfwqYBYLCdC?=
- =?iso-8859-1?Q?+24l2BarLy20vjwlkLuIRpVjRgGWgryHFwtWppCLgY/OyTNZ6G1DZAJ2cO?=
- =?iso-8859-1?Q?Nbuu2iknM89wUaMagmypUOCFYg+IwrIDlMzr/N/uYZNLyvXkJ1ul07350w?=
- =?iso-8859-1?Q?fjamOPD0YlmqHUUQyAym4dD9bHVpUAYJOiUZHjy/iqHBv1lFHo8mLtleQU?=
- =?iso-8859-1?Q?EOf0kDSaaU/ZL0K96Gt9dIR5zxcDqjL0reX19TJmcBYEOBEBUyhP49CJLe?=
- =?iso-8859-1?Q?VyHMYIO+pEZMM4+AYQuNFhSWKJqSkl99eV7Z3vb/q54P2IlsSnSXYi1Dnh?=
- =?iso-8859-1?Q?mV1drrkxTguIhY4yLOjOntPpSZKcXRMSt8TuG6HJvD8Sril7H2nJ6sIF/S?=
- =?iso-8859-1?Q?WQqgq222o4w+bub/gvaWMBnEd+ZFDnaCmPM1m3/lJw2mxtAuhyh3z41+/G?=
- =?iso-8859-1?Q?0mPFlwKQAikyIIUkBOnBX1SQ/zHMXJ+3c+RV0kqmXIOBm9xj3lMthvaIoD?=
- =?iso-8859-1?Q?7bLka9u5Hx7S2r66oUgLs01FinwAVDmbt1C5F40c4IpVa3NyZbxZfY1FJ2?=
- =?iso-8859-1?Q?b/hejuEZFhJ8Sj5Iu7Ek5qE3//9TNFQwXLKxAhq/rcsMCVh7R7xo8/tx6w?=
- =?iso-8859-1?Q?dh36J55DgPblUX21mGT78Hj7wI/Rg90/dmghu5qvrfLK9X4tZyo5DfXPi8?=
- =?iso-8859-1?Q?LphLF3PIeGg18TE8UPeGWFbOOlNnzdSPbBezGZ9Uavi+OC1ARHGNLhc4aa?=
- =?iso-8859-1?Q?Hfqc0FROrJAXx5CBUD7NYOpAC4DOpS3t1GusSPr2TSrOQoqFYj64h5OBZ+?=
- =?iso-8859-1?Q?LP0vKp56TI/FGAoEJiv+AcHJ//VtYvmSRLKZNwipX/ey35Taktfs4GwcpE?=
- =?iso-8859-1?Q?+rDpYkaPLPnntPaHkpxYtVOs42BfIRLijaAHuP5rHhJOsicvr6zHG0cIaR?=
- =?iso-8859-1?Q?+toSzNYxi+JFWRUE4XdBKuVgViVZVNelNbmnEdaX9o5Q6rHYO/RQkOFt7m?=
- =?iso-8859-1?Q?iqQnKO5ibfaxCbY5eAgT7eAPoiRPUop4Ua2noc/DJkr02PNUDlAhC0vQEZ?=
- =?iso-8859-1?Q?Q0ygh7wHR93mEqd/ohr6OLqGjti+C7hQZpXJKKMgs/G4jY533T+eLqKJBd?=
- =?iso-8859-1?Q?aVARSXTx3nOufzYvePgN7r932rPxXQVdq8pcaGuMqobh+mIzyF6YGjGsxh?=
- =?iso-8859-1?Q?fD3y4sH+qIwZaJp9VbIkaSjudOSCYklHk2FIlg8IPvrGzQlMQPF7RTzYX4?=
- =?iso-8859-1?Q?Fo7Qi+ISsWl4EKy6MC3aOKR5bAHRIF58hd4MLBwDmRyM1y/yGU78BWRJPg?=
- =?iso-8859-1?Q?V8cHyTrfFF1C1E85S0cSSBNFI6r3VbuBX3sXo/y4MsQTQRu5TmPRZK0oQS?=
- =?iso-8859-1?Q?Bd3T+N311FzMXWhOZtD46HDw5ze283VUrSc1/nwbxuQMylVX7P44TZIE/B?=
- =?iso-8859-1?Q?aLYUrqBrv2plicsTA30GLxWABamvBvacs67QmSOP8UmLwcciRHdKr7EStT?=
- =?iso-8859-1?Q?eAoWN4/DyJ4zq7N5dKzDMx72Nvj0idpkIGS09NpnshakECkQGDqI92LgLg?=
- =?iso-8859-1?Q?HV2x1B/9/JSl8bVGy/uIXEu2rB3TeG0=3D?=
+ =?iso-8859-1?Q?4yOSibhF44rpXoT8GACk+KowMe++TUEgO4z5q9Z0SKcb13ctmX/clrwNeT?=
+ =?iso-8859-1?Q?rRdRCRh1JOVreyTS+qtcZPf3qXP/qYd5HDPYEyIxh1tMJUtiDnj3EIYE/f?=
+ =?iso-8859-1?Q?C9PoTCAi+yPsD21a5q6foYhBHXsISawLiEYwj5TN+DVwWDx55UPNB6CCi7?=
+ =?iso-8859-1?Q?3wLewtiFDzf5OSFwFiMug6rpvHqHt2jS3ABA+hOVW1cBdapNkIkLreOknC?=
+ =?iso-8859-1?Q?1pYhjKe8K2vNmDf9EOu2Alebrm24UtobUS/BuC2jOcPjsOhRZelsZD1pIL?=
+ =?iso-8859-1?Q?wZUSaxBQi1NAwpZuTxg7Jmkw851BoIujtwn7Jhq/ilu+jh7k/SQg4AuX8T?=
+ =?iso-8859-1?Q?ykug0H4cM9L2FC+G9o7RdW+EE9hDw3D4SM5i/EBJ4wDQ+n6aNgwmtqyFNP?=
+ =?iso-8859-1?Q?l9F+a2P7TIblamv3+H5ba58lR6Axnd3QjIC3Cpetz9BWQK/IaaqednuOeo?=
+ =?iso-8859-1?Q?bDMqeU4MZq50JXTAu2ERimSYP8O2WN+ENGYIdpPOIip+bWfxtz6hzcCCjC?=
+ =?iso-8859-1?Q?9YTNBP+lXu9lVDSB+6KCThxn5eeEf8s5TK4A4taahm29XP6xCymDTiA2ou?=
+ =?iso-8859-1?Q?sb2hQFnwiQUVpl/LTAS2IvW4z4jTcgk3WLKExgwYCn8YnB15lHIr90tMtZ?=
+ =?iso-8859-1?Q?k46WOA5BDyLegNSAhl34t8Bw8rhk4Z4FD9W9TYyP/742HrV9OOG9cgHsed?=
+ =?iso-8859-1?Q?2eQ0nsLE86wdDKN5aNPMbwKAEB+1dZt2mxTdy+W2Hte0U1AQVMQ7qB3ZC9?=
+ =?iso-8859-1?Q?KDwaGhd8QwT/IUTSPwOsMCF5M5hyXTT9OCE3hynPjjTffmGozIv0A8ELfk?=
+ =?iso-8859-1?Q?iGySY0UDyp6guiMmLSSe9IxZmFs2imSaVYQBy8G3mKCl4gse80Nj7n1yvk?=
+ =?iso-8859-1?Q?sFhbT7l2UdoO51BBeZMPv4AEbiZaMNNYcdombhuqcsrT1AawXr05NR46Xq?=
+ =?iso-8859-1?Q?waC9xSUBAc2wwezNisyx/1RuttmEsRbfBbBPFqDocp7RiV6XA5rOPKHKTb?=
+ =?iso-8859-1?Q?0TXa5Vrjv8qeHn6SRJdRl2E3Fole92mJ+Q+U6X5ltBpjI+9JeZyeVsyTHP?=
+ =?iso-8859-1?Q?0PNOUI1ZaNoDMmHskDm0NI6Fv/eyGzFzC0M/i3C6+b1bcy1PSnXAfeRQ+L?=
+ =?iso-8859-1?Q?QetfY83drmgA6BKDF/trVVEJ0cZ+gLtNj83AP3MyigM+lx3GM6YascojpM?=
+ =?iso-8859-1?Q?eUgjC+5L4OVKRFxVzuUwE7wanFWBJfC5Q4FeiXyxPLuf6MtZt0s8or+JwM?=
+ =?iso-8859-1?Q?o15QgfxzEPBmQOcyKxkKJINHUw/pP2ATu0WhNy7FRm3yeWmRQGJPw8QSk7?=
+ =?iso-8859-1?Q?xTeTOTXqxkOgkbFwqubxo6cfy99MtrQTYw03vMLw6mDGroVtmTo3OWDf34?=
+ =?iso-8859-1?Q?3tNyz2gJr0Z1mNzIedbRB7aqBBgaBNWr8FN5kd3ssKv4F4lWsm1QtY9U6W?=
+ =?iso-8859-1?Q?nCy0AeyyjrSxnV+nYJZ0z4bhevG3wkuq89mdXLFpv8lY/gJTQLBdweM9HB?=
+ =?iso-8859-1?Q?PQ2bp3sh0E+OtGMOfZpuJx8a3xjoxPvs0FADQ0hKn2hiZ5CpNxRHqVXSgS?=
+ =?iso-8859-1?Q?1Wj6PaRf+dqbaiuGmbVX9hpSvrSA1KQh8KjqARcDjtTUo0aHG6VubXxfZ0?=
+ =?iso-8859-1?Q?roz3lFnWwlnj/zHtNLsSwyItCbaMuoqiofYHakp+mMaDRSYPn2J6FoEUKv?=
+ =?iso-8859-1?Q?WmL3Y/rSX3APa33lE7oONP1SrKTGmpzUL1BiB43phK9gKLYB+GOa++Kqis?=
+ =?iso-8859-1?Q?nXB37pYESduPPcbRDLIz65lJX/daHex1ie11OkAEcYO0snBQ2EPZkc+5Rz?=
+ =?iso-8859-1?Q?i8VF0bLCqX+F34WsWHWN+3t+UDQdVcA=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB5088.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd9833ac-2772-4628-5108-08de892ebb4d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Mar 2026 22:51:33.6739
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7a7262c-52df-484a-19ee-08de892ebd72
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Mar 2026 22:51:37.2424
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: XMscshbLCJ/s8dQtJ4eu7YX9lcBHD+4iGNcC+Ruy0GOx+SFoHUJu8CGFGU5ZIFJeIDRhzgwV9h0nBjj3b98ozA==
+X-MS-Exchange-CrossTenant-userprincipalname: ixSWt/zyTw+R6/v5vng+O/cWIJWHLySD62/bQNzKbc/YlhY9ltk8bke0tC69eQTa0SUCcD/iatjvuQA3Spl+sw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9699
+X-purgate-ID: tlsNG-33051d/1774306299-EAE8572C-7324E835/0/0
+X-purgate-type: clean
+X-purgate-size: 2920
 
 From: Rahul Singh <rahul.singh@arm.com>
 
-libxl will create an Emulated SMMUv3 device tree node in the device
-tree to enable the guest OS to discover the virtual SMMUv3 during guest
-boot.
-
-Emulated SMMUv3 device tree node will only be created when
-"viommu=3Dsmmuv3" is set in xl domain configuration.
+To configure IOMMU in guest for passthrough devices, user will need to
+copy the unmodified "iommus" property from host device tree to partial
+device tree. To enable the dom0 linux kernel to confiure the IOMMU
+correctly replace the phandle in partial device tree with virtual
+IOMMU phandle when "iommus" property is set.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-Signed-off-by: Milan Djokic <milan_djokic@epam.com>
+Singed-off-by: Milan Djokic <milan_djokic@epam.com>
 ---
- tools/libs/light/libxl_arm.c | 37 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ tools/libs/light/libxl_arm.c | 47 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 46 insertions(+), 1 deletion(-)
 
 diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index a248793588..eb879473f5 100644
+index 803c3b39b7..7b887898bb 100644
 --- a/tools/libs/light/libxl_arm.c
 +++ b/tools/libs/light/libxl_arm.c
-@@ -901,6 +901,36 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *=
-fdt,
+@@ -1326,6 +1326,41 @@ static int copy_partial_fdt(libxl__gc *gc, void *fdt=
+, void *pfdt)
      return 0;
  }
 =20
-+static int make_vsmmuv3_node(libxl__gc *gc, void *fdt,
-+                             const struct arch_info *ainfo,
-+                             struct xc_dom_image *dom)
++static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
 +{
-+    int res;
-+    const char *name =3D GCSPRINTF("iommu@%llx", GUEST_VSMMUV3_BASE);
++    int nodeoff, proplen, i, r;
++    const fdt32_t *prop;
++    fdt32_t *prop_c;
 +
-+    res =3D fdt_begin_node(fdt, name);
-+    if (res) return res;
++    nodeoff =3D fdt_path_offset(pfdt, "/passthrough");
++    if (nodeoff < 0)
++        return nodeoff;
 +
-+    res =3D fdt_property_compat(gc, fdt, 1, "arm,smmu-v3");
-+    if (res) return res;
++    for (nodeoff =3D fdt_first_subnode(pfdt, nodeoff);
++         nodeoff >=3D 0;
++         nodeoff =3D fdt_next_subnode(pfdt, nodeoff)) {
 +
-+    res =3D fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+                            GUEST_ROOT_SIZE_CELLS, 1, GUEST_VSMMUV3_BASE,
-+                            GUEST_VSMMUV3_SIZE);
-+    if (res) return res;
++        prop =3D fdt_getprop(pfdt, nodeoff, "iommus", &proplen);
++        if (!prop)
++            continue;
 +
-+    res =3D fdt_property_cell(fdt, "phandle", GUEST_PHANDLE_VSMMUV3);
-+    if (res) return res;
++        prop_c =3D libxl__zalloc(gc, proplen);
 +
-+    res =3D fdt_property_cell(fdt, "#iommu-cells", 1);
-+    if (res) return res;
++        for (i =3D 0; i < proplen / 8; ++i) {
++            prop_c[i * 2] =3D cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
++            prop_c[i * 2 + 1] =3D prop[i * 2 + 1];
++        }
 +
-+    res =3D fdt_end_node(fdt);
-+    if (res) return res;
++        r =3D fdt_setprop(pfdt, nodeoff, "iommus", prop_c, proplen);
++        if (r) {
++            LOG(ERROR, "Can't set the iommus property in partial FDT");
++            return r;
++        }
++    }
 +
 +    return 0;
 +}
 +
- static int make_vpci_node(libxl__gc *gc, void *fdt,
-                           const struct arch_info *ainfo,
-                           struct xc_dom_image *dom)
-@@ -942,6 +972,10 @@ static int make_vpci_node(libxl__gc *gc, void *fdt,
-         GUEST_VPCI_PREFETCH_MEM_SIZE);
-     if (res) return res;
+ #else
 =20
-+    res =3D fdt_property_values(gc, fdt, "iommu-map", 4, 0,
-+                              GUEST_PHANDLE_VSMMUV3, 0, 0x10000);
-+    if (res) return res;
+ static int check_partial_fdt(libxl__gc *gc, void *fdt, size_t size)
+@@ -1344,6 +1379,13 @@ static int copy_partial_fdt(libxl__gc *gc, void *fdt=
+, void *pfdt)
+     return -FDT_ERR_INTERNAL;
+ }
+=20
++static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
++{
++    LOG(ERROR, "partial device tree not supported");
 +
-     res =3D fdt_end_node(fdt);
-     if (res) return res;
++    return ERROR_FAIL;
++}
++
+ #endif /* ENABLE_PARTIAL_DEVICE_TREE */
 =20
-@@ -1408,6 +1442,9 @@ next_resize:
+ #define FDT_MAX_SIZE (1<<20)
+@@ -1466,8 +1508,11 @@ next_resize:
          if (d_config->num_pcidevs)
              FDT( make_vpci_node(gc, fdt, ainfo, dom) );
 =20
-+        if (info->arch_arm.viommu_type =3D=3D LIBXL_VIOMMU_TYPE_SMMUV3)
-+            FDT( make_vsmmuv3_node(gc, fdt, ainfo, dom) );
-+
+-        if (info->arch_arm.viommu_type =3D=3D LIBXL_VIOMMU_TYPE_SMMUV3)
++        if (info->arch_arm.viommu_type =3D=3D LIBXL_VIOMMU_TYPE_SMMUV3) {
+             FDT( make_vsmmuv3_node(gc, fdt, ainfo, dom) );
++            if (pfdt)
++                FDT( modify_partial_fdt(gc, pfdt) );
++        }
+=20
          for (i =3D 0; i < d_config->num_disks; i++) {
              libxl_device_disk *disk =3D &d_config->disks[i];
-=20
 --=20
 2.43.0
 
