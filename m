@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED2E6E9A77D
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 12:33:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1260639.1553913 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5350CD58CC9
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 12:41:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1260675.1553928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w50x0-0005gd-Rs; Tue, 24 Mar 2026 12:33:38 +0000
+	id 1w514E-0008Mf-Rq; Tue, 24 Mar 2026 12:41:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1260639.1553913; Tue, 24 Mar 2026 12:33:38 +0000
+Received: by outflank-mailman (output) from mailman id 1260675.1553928; Tue, 24 Mar 2026 12:41:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w50x0-0005gS-OO; Tue, 24 Mar 2026 12:33:38 +0000
-Received: by outflank-mailman (input) for mailman id 1260639;
- Tue, 24 Mar 2026 12:33:37 +0000
+	id 1w514E-0008MU-NH; Tue, 24 Mar 2026 12:41:06 +0000
+Received: by outflank-mailman (input) for mailman id 1260675;
+ Tue, 24 Mar 2026 12:41:04 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <soumyajyotisarkar23@gmail.com>) id 1w50wy-0005dz-UH
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 12:33:37 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1w514C-0008It-Md; Tue, 24 Mar 2026 12:41:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w50wy-006OfX-A7
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 13:33:36 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w514C-00Ccc7-2T; Tue, 24 Mar 2026 13:41:04 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <soumyajyotisarkar23@gmail.com>)
- id 69c2849b-bab6-0a2a0a5309dd-0a2a4505ea44-40
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 13:33:36 +0100
-Received: from [209.85.216.66] (helo=mail-pj1-f66.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <soumyajyotisarkar23@gmail.com>)
- id 69c2849e-5aeb-0a2a45050019-d155d842a439-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 13:33:36 +0100
-Received: by mail-pj1-f66.google.com with SMTP id
- 98e67ed59e1d1-35a1d4a095bso3177885a91.0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 05:33:35 -0700 (PDT)
-Received: from fedora ([103.2.232.250]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35c031ed04esm2215792a91.12.2026.03.24.05.33.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 05:33:33 -0700 (PDT)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 69c2865e-bab6-0a2a0a5309dd-0a2a450ac9a4-16
+ for <multiple-recipients>; Tue, 24 Mar 2026 13:41:03 +0100
+Received: from [104.130.215.37] (helo=mail.xenproject.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 69c281e8-1772-0a2a450a0019-6882d725a4bc-3
+ for <multiple-recipients>; Tue, 24 Mar 2026 13:22:01 +0100
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1w50lg-007DvC-0W;
+ Tue, 24 Mar 2026 12:21:55 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1w50lf-00ByI7-2u;
+ Tue, 24 Mar 2026 12:21:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,162 +51,302 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774355614; x=1774960414; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6/EFfTLPPvtpKfYbDxMVwQU9jDgu7ScMy19tpR6gQjI=;
-        b=gMIWUa7uwCC9TMeUOldNRKNCQ5mmAtOCr51KtRqFcKQPgOEaOwQWMir2feHE6bYBiX
-         iOyppAN9vlFmomvhbjsG+qrsEOcWdaeuGqN+b1ItkHY/8zJvuJqKM1lnUN+8accZPnB1
-         21NRjtOOhCbA2KWwWSZKJX6pbRE5UvUhizfrQalnrFGIRU84LIV1STugqgIPqwqMo9cR
-         DQANL1/iTIq5+2B+Ya9XosR03KdnJpAjvWLEpUiRF+NZJInRM5jHN+I1OfoSYIkWUpXS
-         Fe+wc4ctNUeFu06V36xn1YYdbeUwFw0AMu8VuTgPikn8re+eYY9beJBHCuPinclJAcw8
-         BkEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774355614; x=1774960414;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=6/EFfTLPPvtpKfYbDxMVwQU9jDgu7ScMy19tpR6gQjI=;
-        b=Ev9D62IsymfQteD1zN1QMsOEBUwlezEpC4J6dhcYCQAmUXJ7gpVFvmlA4Fo1b5Nk4U
-         fOoKOx6ATcgsBw+3ffJV1Xw8b3pLlqiDPjoKgHRYZhNLy6QgDzeFif2oiFciSt1wWxuc
-         l3fQORk7mCYYpL6ndEH0ldlozEpnWi3KllMsDLw51LGCew6SktKJ8Q48wYWOKTx6DYd1
-         MtDPmb5rkIY/083loCgAis+YQw+lnSc5Dqvnywjb1mc77nnjRic4vTd2WCEhOKkM3sn4
-         Hpg6YxquiCy5L43o58G8Qm+Thbzr1Ihp4sWDdRcuQOyRP+IktEiXdgrBhD9DWg+AWgp1
-         TvgA==
-X-Forwarded-Encrypted: i=1; AJvYcCU8peUw3/j6DS1vCOl90O8OIYlO6488I3b80Pr7wjaQ5/f5ED10a1UXwZXUXRWOXo1+DB4oqCjAesw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxRDbXjmFkcFI0R0uh/XlU0vOVqAcbKZme5s9f0l212lVUqwnmM
-	WmvbTE4ZHkeA45ZH6Y/IXbcrbKjrUa2aZf2tm/JVidOmN6fmEjZMZ/KIL5eWfnSn
-X-Gm-Gg: ATEYQzySL70rFRDa3K8RGeSoNr5iX/GwJeYG9IUUrKeK3vDhOGiKQ0bZFY+6Q++14kp
-	Y5wgFit3IvyOk4yMH97mwB9N+IGybtQLUx6ctr/+xCUkgtF28QYSJvfunsEu3tsYuImrucEBNJ+
-	wEHcL8Yxcz2d222ePPY1P/hZHq5XblFZXGIWDoVFfbq3sMFNBXoMxwu22yqLmo0lgDuV9jii45m
-	2ms35TeHT1br1ROI5QmOQfOqxa94hSoYsBb+GU3o74Wf8mhNT/Usf/O3PmGxxKfZ73NQcJVO7Eg
-	l1UaaukNNCmueoCTVR3yO3EP+06z8ATWq2ZT9hepv9dzh58mzYtY4NB9s2+JteVr8BEm+H5JR0v
-	wxpAXRAWrE/VMtqqDH10jnsUpn1giSV8QzXzz2eMlFSVhTG7Vhwqd434ac1KDTbBZdIE3RR6CjH
-	FY3PGRS8vbZJnDoL+1Dq0IbZd7CEEf6H82G/gUoS+8Y1UW2O50V9llIwQa63xIULFQFo/ZouVao
-	Au6KbZl4hWFGXBTDr/JRBVdI7BYc5Q/Z7vOU364UkjPMrMcsqBDQ37WNMiQJxDXKjvkayRaKQ==
-X-Received: by 2002:a17:90b:1e44:b0:34a:be93:72ee with SMTP id 98e67ed59e1d1-35c0083302cmr2487364a91.8.1774355613938;
-        Tue, 24 Mar 2026 05:33:33 -0700 (PDT)
-From: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
-To: sarkarsoumyajyoti23@gmail.com,
-	xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
-Subject: [PATCH v5 3/3] x86/efi: Add opt-out mechanism for BGRT preservation
-Date: Tue, 24 Mar 2026 18:03:12 +0530
-Message-ID: <20260324123312.11076-4-soumyajyotisarkar23@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260324123312.11076-1-soumyajyotisarkar23@gmail.com>
-References: <20260324123312.11076-1-soumyajyotisarkar23@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1774355616-82759488-AE5003A6/0/0
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 482 v3 (CVE-2026-31788) - Linux privcmd
+ driver can circumvent kernel lockdown
+Message-Id: <E1w50lf-00ByI7-2u@xenbits.xenproject.org>
+Date: Tue, 24 Mar 2026 12:21:55 +0000
+X-purgate-ID: tlsNG-4011c0/1774354921-BDC8C900-E6AC00F7/1/8689920845
 X-purgate-type: clean
-X-purgate-size: 3800
+X-purgate-size: 13951
 
-BGRT preservation is now enabled by default to fix ACPI corruption
-for desktop/workstation systems (similar to ESRT).
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-As described in the task:
-https://github.com/QubesOS/qubes-issues/issues/10764
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-Add an opt-out parameter to allow disabling BGRT preservation on
-systems where the ~1MB memory overhead is not desired.
+            Xen Security Advisory CVE-2026-31788 / XSA-482
+                              version 3
 
-The opt-out is implemented through two boot paths with early parsing
-during the EFI boot phase before preservation runs:
+          Linux privcmd driver can circumvent kernel lockdown
 
-1. xen.efi direct boot: '-nobgrt' command line option (parsed in
-   efi_start())
-2. Multiboot2 (GRUB): 'efi=no-bgrt' peeked from mb2 cmdline tag
-   using get_option() in efi_multiboot2()
+UPDATES IN VERSION 3
+====================
 
-The flag is checked at the start of efi_preserve_bgrt_img() to
-skip preservation entirely when disabled. Status logging indicates
-whether preservation was disabled, succeeded, or failed.
+CVE assigned.
 
-Usage:
-  Default: BGRT preserved automatically
-  xen.efi: Add '-nobgrt' option
-  GRUB/MB2: Add 'efi=no-bgrt' to Xen command line
+ISSUE DESCRIPTION
+=================
 
-Signed-off-by: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
----
- xen/arch/x86/efi/efi-boot.h |  3 +++
- xen/common/efi/boot.c       | 11 ++++++++++-
- 2 files changed, 13 insertions(+), 1 deletion(-)
+The Linux kernel's privcmd driver can be abused to circumvent kernel
+lockdown (secure boot), e.g. by modifying page tables to enable user
+mode to modify kernel memory.
 
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index 0547d845cd..6c986cf6c0 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -897,6 +897,9 @@ void __init efi_multiboot2(EFI_HANDLE ImageHandle,
-         efi_arch_edid(gop_handle);
-     }
+IMPACT
+======
 
-+    if ( cmdline && get_option(cmdline, "efi=no-bgrt") )
-+        opt_bgrt_disabled = true;
-+
-     efi_arch_edd();
-     efi_arch_cpu();
+An administrator of an unprivileged guest booted in secure mode is able
+to perform actions on the kernel which should not be possible in secure
+mode.
 
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index e22a42c15b..a4db7ee516 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -170,6 +170,7 @@ static SIMPLE_TEXT_OUTPUT_INTERFACE *__initdata StdErr;
+VULNERABLE SYSTEMS
+==================
 
- static UINT32 __initdata mdesc_ver;
- static bool __initdata map_bs;
-+static bool __initdata opt_bgrt_disabled = false;
+PV, PVH and HVM guests running Linux using secure boot are vulnerable.
 
- static struct file __initdata cfg;
- static struct file __initdata kernel;
-@@ -825,6 +826,9 @@ static void __init efi_preserve_bgrt_img(void)
+BSD based systems are believed not to be vulnerable due to a lack of
+secure boot support.
 
-     bgrt_info.preserved = false;
+MITIGATION
+==========
 
-+    if ( opt_bgrt_disabled )
-+        return;
-+
-     bgrt = efi_get_bgrt();
-     if ( !bgrt )
-     {
-@@ -1582,6 +1586,8 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-                     base_video = true;
-                 else if ( wstrcmp(ptr + 1, L"mapbs") == 0 )
-                     map_bs = true;
-+                else if ( wstrcmp(ptr + 1, L"nobgrt") == 0 )
-+                    opt_bgrt_disabled = true;
-                 else if ( wstrncmp(ptr + 1, L"cfg=", 4) == 0 )
-                     cfg_file_name = ptr + 5;
-                 else if ( i + 1 < argc && wstrcmp(ptr + 1, L"cfg") == 0 )
-@@ -1592,6 +1598,7 @@ void EFIAPI __init noreturn efi_start(EFI_HANDLE ImageHandle,
-                     PrintStr(L"Xen EFI Loader options:\r\n");
-                     PrintStr(L"-basevideo   retain current video mode\r\n");
-                     PrintStr(L"-mapbs       map EfiBootServices{Code,Data}\r\n");
-+                    PrintStr(L"-nobgrt      disable BGRT preservation\r\n");
-                     PrintStr(L"-cfg=<file>  specify configuration file\r\n");
-                     PrintStr(L"-help, -?    display this help\r\n");
-                     blexit(NULL);
-@@ -1916,7 +1923,9 @@ void __init efi_bgrt_status_info(void)
-     if ( !efi_enabled(EFI_BOOT) )
-         return;
+There is no known mitigation.
 
--    if ( bgrt_info.preserved )
-+    if ( opt_bgrt_disabled )
-+        printk(XENLOG_INFO "EFI: BGRT preservation disabled\n");
-+    else if ( bgrt_info.preserved )
-     {
-         printk(XENLOG_INFO "EFI: BGRT image preserved: %lu KB\n",
-                bgrt_info.size / 1024);
---
-2.53.0
+CREDITS
+=======
 
+This issue was discovered by Teddy Astie of Vates.
+
+RESOLUTION
+==========
+
+Applying the set of attached patches resolves this issue.
+
+xsa482-linux-?.patch           Linux
+
+$ sha256sum xsa482*
+a4e67d2c773e2e13252337e4b64c08b342c0eb2e0e92271a79dc588ac34e7c3a  xsa482-linux-1.patch
+dd952c1fc49ceb47803b78e15cfe3f7f11a845b29c6b2a80afa7a9eaa60a00ec  xsa482-linux-2.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of patches or mitigations is NOT permitted (except where
+all the affected systems and VMs are administered and used only by
+organisations which are members of the Xen Project Security Issues
+Predisclosure List).  Specifically, deployment on public cloud systems
+is NOT permitted.
+
+This is because the patches need to be applied to the guests.
+
+Deployment is permitted only AFTER the embargo ends.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmnCgb8MHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZ+HQIALz+nyJm5t0ZSnPHwNDN/EVOrftrep1+m2f35QeG
+9/PWglS7gb5FX7q7Ao5dPoNsN0vJhgeiqyuJlUuvOwvVNPF7mA/wl+YuzgCjMyTD
+rPS3E9lzaQRyfAR1UwvDRyUCYeiE2TNNWA/Y7LMOVB5dswrhO3P7jH5qvUJLTz3z
+fcWKsnunrK1AK1YepklI6ybRhyZY191xI10FX0eSRo1k5gh6KuT5FPqCdjUEBjFO
+0BPi+L+Lj8mZW2kbQ5ctRnesneQqS8Kud/EP+xnTH1hy/YiQny0T2RC9s4/hpQMu
+Mav6EICE7kPvGtjgAYpjBQj+LHCyek3nRizd9gQ8tDaiYLQ=
+=CIF6
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa482-linux-1.patch"
+Content-Disposition: attachment; filename="xsa482-linux-1.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSAyNjVmMjA1MmZjYjUyYjllMjZlMTQ2Nzg5MzU5ZjQ1MjJjZWVkZDFi
+IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6IFRodSwgOSBPY3QgMjAyNSAxNjo1
+NDo1OCArMDIwMApTdWJqZWN0OiBbUEFUQ0ggdjMgMS8yXSB4ZW4vcHJpdmNt
+ZDogcmVzdHJpY3QgdXNhZ2UgaW4gdW5wcml2aWxlZ2VkIGRvbVUKClRoZSBY
+ZW4gcHJpdmNtZCBkcml2ZXIgYWxsb3dzIHRvIGlzc3VlIGFyYml0cmFyeSBo
+eXBlcmNhbGxzIGZyb20KdXNlciBzcGFjZSBwcm9jZXNzZXMuIFRoaXMgaXMg
+bm9ybWFsbHkgbm8gcHJvYmxlbSwgYXMgYWNjZXNzIGlzCnVzdWFsbHkgbGlt
+aXRlZCB0byByb290IGFuZCB0aGUgaHlwZXJ2aXNvciB3aWxsIGRlbnkgYW55
+IGh5cGVyY2FsbHMKYWZmZWN0aW5nIG90aGVyIGRvbWFpbnMuCgpJbiBjYXNl
+IHRoZSBndWVzdCBpcyBib290ZWQgdXNpbmcgc2VjdXJlIGJvb3QsIGhvd2V2
+ZXIsIHRoZSBwcml2Y21kCmRyaXZlciB3b3VsZCBiZSBlbmFibGluZyBhIHJv
+b3QgdXNlciBwcm9jZXNzIHRvIG1vZGlmeSBlLmcuIGtlcm5lbAptZW1vcnkg
+Y29udGVudHMsIHRodXMgYnJlYWtpbmcgdGhlIHNlY3VyZSBib290IGZlYXR1
+cmUuCgpUaGUgb25seSBrbm93biBjYXNlIHdoZXJlIGFuIHVucHJpdmlsZWdl
+ZCBkb21VIGlzIHJlYWxseSBuZWVkaW5nIHRvCnVzZSB0aGUgcHJpdmNtZCBk
+cml2ZXIgaXMgdGhlIGNhc2Ugd2hlbiBpdCBpcyBhY3RpbmcgYXMgdGhlIGRl
+dmljZQptb2RlbCBmb3IgYW5vdGhlciBndWVzdC4gSW4gdGhpcyBjYXNlIGFs
+bCBoeXBlcmNhbGxzIGlzc3VlZCB2aWEgdGhlCnByaXZjbWQgZHJpdmVyIHdp
+bGwgdGFyZ2V0IHRoYXQgb3RoZXIgZ3Vlc3QuCgpGb3J0dW5hdGVseSB0aGUg
+cHJpdmNtZCBkcml2ZXIgY2FuIGFscmVhZHkgYmUgbG9ja2VkIGRvd24gdG8g
+YWxsb3cKb25seSBoeXBlcmNhbGxzIHRhcmdldGluZyBhIHNwZWNpZmljIGRv
+bWFpbiwgYnV0IHRoaXMgbW9kZSBjYW4gYmUKYWN0aXZhdGVkIGZyb20gdXNl
+ciBsYW5kIG9ubHkgdG9kYXkuCgpUaGUgdGFyZ2V0IGRvbWFpbiBjYW4gYmUg
+b2J0YWluZWQgZnJvbSBYZW5zdG9yZSwgc28gd2hlbiBub3QgcnVubmluZwpp
+biBkb20wIHJlc3RyaWN0IHRoZSBwcml2Y21kIGRyaXZlciB0byB0aGF0IHRh
+cmdldCBkb21haW4gZnJvbSB0aGUKYmVnaW5uaW5nLCByZXNvbHZpbmcgdGhl
+IHBvdGVudGlhbCBwcm9ibGVtIG9mIGJyZWFraW5nIHNlY3VyZSBib290LgoK
+VGhpcyBpcyBYU0EtNDgyIC8gQ1ZFID8/PwoKUmVwb3J0ZWQtYnk6IFRlZGR5
+IEFzdGllIDx0ZWRkeS5hc3RpZUB2YXRlcy50ZWNoPgpGaXhlczogMWM1ZGUx
+OTM5YzIwICgieGVuOiBhZGQgcHJpdmNtZCBkcml2ZXIiKQpTaWduZWQtb2Zm
+LWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Ci0tLQogZHJp
+dmVycy94ZW4vcHJpdmNtZC5jIHwgNjAgKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKy0tLQogMSBmaWxlIGNoYW5nZWQsIDU3IGlu
+c2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJp
+dmVycy94ZW4vcHJpdmNtZC5jIGIvZHJpdmVycy94ZW4vcHJpdmNtZC5jCmlu
+ZGV4IDE3NTljYzE4NzUzZi4uYTgzYmFkNjlmNGYyIDEwMDY0NAotLS0gYS9k
+cml2ZXJzL3hlbi9wcml2Y21kLmMKKysrIGIvZHJpdmVycy94ZW4vcHJpdmNt
+ZC5jCkBAIC0xMiw2ICsxMiw3IEBACiAjaW5jbHVkZSA8bGludXgvZXZlbnRm
+ZC5oPgogI2luY2x1ZGUgPGxpbnV4L2ZpbGUuaD4KICNpbmNsdWRlIDxsaW51
+eC9rZXJuZWwuaD4KKyNpbmNsdWRlIDxsaW51eC9rc3RydG94Lmg+CiAjaW5j
+bHVkZSA8bGludXgvbW9kdWxlLmg+CiAjaW5jbHVkZSA8bGludXgvbXV0ZXgu
+aD4KICNpbmNsdWRlIDxsaW51eC9wb2xsLmg+CkBAIC0zMCw3ICszMSw5IEBA
+CiAjaW5jbHVkZSA8bGludXgvc2VxX2ZpbGUuaD4KICNpbmNsdWRlIDxsaW51
+eC9taXNjZGV2aWNlLmg+CiAjaW5jbHVkZSA8bGludXgvbW9kdWxlcGFyYW0u
+aD4KKyNpbmNsdWRlIDxsaW51eC9ub3RpZmllci5oPgogI2luY2x1ZGUgPGxp
+bnV4L3ZpcnRpb19tbWlvLmg+CisjaW5jbHVkZSA8bGludXgvd2FpdC5oPgog
+CiAjaW5jbHVkZSA8YXNtL3hlbi9oeXBlcnZpc29yLmg+CiAjaW5jbHVkZSA8
+YXNtL3hlbi9oeXBlcmNhbGwuaD4KQEAgLTQ2LDYgKzQ5LDcgQEAKICNpbmNs
+dWRlIDx4ZW4vcGFnZS5oPgogI2luY2x1ZGUgPHhlbi94ZW4tb3BzLmg+CiAj
+aW5jbHVkZSA8eGVuL2JhbGxvb24uaD4KKyNpbmNsdWRlIDx4ZW4veGVuYnVz
+Lmg+CiAjaWZkZWYgQ09ORklHX1hFTl9BQ1BJCiAjaW5jbHVkZSA8eGVuL2Fj
+cGkuaD4KICNlbmRpZgpAQCAtNzIsNiArNzYsMTEgQEAgc3RydWN0IHByaXZj
+bWRfZGF0YSB7CiAJZG9taWRfdCBkb21pZDsKIH07CiAKKy8qIERPTUlEX0lO
+VkFMSUQgaW1wbGllcyBubyByZXN0cmljdGlvbiAqLworc3RhdGljIGRvbWlk
+X3QgdGFyZ2V0X2RvbWFpbiA9IERPTUlEX0lOVkFMSUQ7CitzdGF0aWMgYm9v
+bCByZXN0cmljdF93YWl0Oworc3RhdGljIERFQ0xBUkVfV0FJVF9RVUVVRV9I
+RUFEKHJlc3RyaWN0X3dhaXRfd3EpOworCiBzdGF0aWMgaW50IHByaXZjbWRf
+dm1hX3JhbmdlX2lzX21hcHBlZCgKICAgICAgICAgICAgICAgIHN0cnVjdCB2
+bV9hcmVhX3N0cnVjdCAqdm1hLAogICAgICAgICAgICAgICAgdW5zaWduZWQg
+bG9uZyBhZGRyLApAQCAtMTU2MywxMyArMTU3MiwxNiBAQCBzdGF0aWMgbG9u
+ZyBwcml2Y21kX2lvY3RsKHN0cnVjdCBmaWxlICpmaWxlLAogCiBzdGF0aWMg
+aW50IHByaXZjbWRfb3BlbihzdHJ1Y3QgaW5vZGUgKmlubywgc3RydWN0IGZp
+bGUgKmZpbGUpCiB7Ci0Jc3RydWN0IHByaXZjbWRfZGF0YSAqZGF0YSA9IGt6
+YWxsb2Nfb2JqKCpkYXRhKTsKKwlzdHJ1Y3QgcHJpdmNtZF9kYXRhICpkYXRh
+OworCisJaWYgKHdhaXRfZXZlbnRfaW50ZXJydXB0aWJsZShyZXN0cmljdF93
+YWl0X3dxLCAhcmVzdHJpY3Rfd2FpdCkgPCAwKQorCQlyZXR1cm4gLUVJTlRS
+OwogCisJZGF0YSA9IGt6YWxsb2Nfb2JqKCpkYXRhKTsKIAlpZiAoIWRhdGEp
+CiAJCXJldHVybiAtRU5PTUVNOwogCi0JLyogRE9NSURfSU5WQUxJRCBpbXBs
+aWVzIG5vIHJlc3RyaWN0aW9uICovCi0JZGF0YS0+ZG9taWQgPSBET01JRF9J
+TlZBTElEOworCWRhdGEtPmRvbWlkID0gdGFyZ2V0X2RvbWFpbjsKIAogCWZp
+bGUtPnByaXZhdGVfZGF0YSA9IGRhdGE7CiAJcmV0dXJuIDA7CkBAIC0xNjYy
+LDYgKzE2NzQsNDUgQEAgc3RhdGljIHN0cnVjdCBtaXNjZGV2aWNlIHByaXZj
+bWRfZGV2ID0gewogCS5mb3BzID0gJnhlbl9wcml2Y21kX2ZvcHMsCiB9Owog
+CitzdGF0aWMgaW50IGluaXRfcmVzdHJpY3Qoc3RydWN0IG5vdGlmaWVyX2Js
+b2NrICpub3RpZmllciwKKwkJCSB1bnNpZ25lZCBsb25nIGV2ZW50LAorCQkJ
+IHZvaWQgKmRhdGEpCit7CisJY2hhciAqdGFyZ2V0OworCXVuc2lnbmVkIGlu
+dCBkb21pZDsKKworCS8qIERlZmF1bHQgdG8gYW4gZ3VhcmFudGVlZCB1bnVz
+ZWQgZG9tYWluLWlkLiAqLworCXRhcmdldF9kb21haW4gPSBET01JRF9JRExF
+OworCisJdGFyZ2V0ID0geGVuYnVzX3JlYWQoWEJUX05JTCwgInRhcmdldCIs
+ICIiLCBOVUxMKTsKKwlpZiAoSVNfRVJSKHRhcmdldCkgfHwga3N0cnRvdWlu
+dCh0YXJnZXQsIDEwLCAmZG9taWQpKSB7CisJCXByX2VycigiTm8gdGFyZ2V0
+IGRvbWFpbiBmb3VuZCwgYmxvY2tpbmcgYWxsIGh5cGVyY2FsbHNcbiIpOwor
+CQlnb3RvIG91dDsKKwl9CisKKwl0YXJnZXRfZG9tYWluID0gZG9taWQ7CisK
+KyBvdXQ6CisJaWYgKCFJU19FUlIodGFyZ2V0KSkKKwkJa2ZyZWUodGFyZ2V0
+KTsKKworCXJlc3RyaWN0X3dhaXQgPSBmYWxzZTsKKwl3YWtlX3VwX2FsbCgm
+cmVzdHJpY3Rfd2FpdF93cSk7CisKKwlyZXR1cm4gTk9USUZZX0RPTkU7Cit9
+CisKK3N0YXRpYyBzdHJ1Y3Qgbm90aWZpZXJfYmxvY2sgeGVuc3RvcmVfbm90
+aWZpZXIgPSB7CisJLm5vdGlmaWVyX2NhbGwgPSBpbml0X3Jlc3RyaWN0LAor
+fTsKKworc3RhdGljIHZvaWQgX19pbml0IHJlc3RyaWN0X2RyaXZlcih2b2lk
+KQoreworCXJlc3RyaWN0X3dhaXQgPSB0cnVlOworCisJcmVnaXN0ZXJfeGVu
+c3RvcmVfbm90aWZpZXIoJnhlbnN0b3JlX25vdGlmaWVyKTsKK30KKwogc3Rh
+dGljIGludCBfX2luaXQgcHJpdmNtZF9pbml0KHZvaWQpCiB7CiAJaW50IGVy
+cjsKQEAgLTE2NjksNiArMTcyMCw5IEBAIHN0YXRpYyBpbnQgX19pbml0IHBy
+aXZjbWRfaW5pdCh2b2lkKQogCWlmICgheGVuX2RvbWFpbigpKQogCQlyZXR1
+cm4gLUVOT0RFVjsKIAorCWlmICgheGVuX2luaXRpYWxfZG9tYWluKCkpCisJ
+CXJlc3RyaWN0X2RyaXZlcigpOworCiAJZXJyID0gbWlzY19yZWdpc3Rlcigm
+cHJpdmNtZF9kZXYpOwogCWlmIChlcnIgIT0gMCkgewogCQlwcl9lcnIoIkNv
+dWxkIG5vdCByZWdpc3RlciBYZW4gcHJpdmNtZCBkZXZpY2VcbiIpOwotLSAK
+Mi41My4wCgo=
+
+--=separator
+Content-Type: application/octet-stream; name="xsa482-linux-2.patch"
+Content-Disposition: attachment; filename="xsa482-linux-2.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSA2ZjY5MThmZTFkZDQ1OTBlMDBmZjk1OTAwODZmYWIwOGQ5Mjg0MDVi
+IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6IFR1ZSwgMTQgT2N0IDIwMjUgMTM6
+Mjg6MTUgKzAyMDAKU3ViamVjdDogW1BBVENIIHYzIDIvMl0geGVuL3ByaXZj
+bWQ6IGFkZCBib290IGNvbnRyb2wgZm9yIHJlc3RyaWN0ZWQgdXNhZ2UgaW4K
+IGRvbVUKCldoZW4gcnVubmluZyBpbiBhbiB1bnByaXZpbGVnZWQgZG9tVSB1
+bmRlciBYZW4sIHRoZSBwcml2Y21kIGRyaXZlcgppcyByZXN0cmljdGVkIHRv
+IGFsbG93IG9ubHkgaHlwZXJjYWxscyBhZ2FpbnN0IGEgdGFyZ2V0IGRvbWFp
+biwgZm9yCndoaWNoIHRoZSBjdXJyZW50IGRvbVUgaXMgYWN0aW5nIGFzIGEg
+ZGV2aWNlIG1vZGVsLgoKQWRkIGEgYm9vdCBwYXJhbWV0ZXIgInVucmVzdHJp
+Y3RlZCIgdG8gYWxsb3cgYWxsIGh5cGVyY2FsbHMgKHRoZQpoeXBlcnZpc29y
+IHdpbGwgc3RpbGwgcmVmdXNlIGRlc3RydWN0aXZlIGh5cGVyY2FsbHMgYWZm
+ZWN0aW5nIG90aGVyCmd1ZXN0cykuCgpNYWtlIHRoaXMgbmV3IHBhcmFtZXRl
+ciBlZmZlY3RpdmUgb25seSBpbiBjYXNlIHRoZSBkb21VIHdhc24ndCBzdGFy
+dGVkCnVzaW5nIHNlY3VyZSBib290LCBhcyBvdGhlcndpc2UgaHlwZXJjYWxs
+cyB0YXJnZXRpbmcgdGhlIGRvbVUgaXRzZWxmCm1pZ2h0IHJlc3VsdCBpbiB2
+aW9sYXRpbmcgdGhlIHNlY3VyZSBib290IGZ1bmN0aW9uYWxpdHkuCgpUaGlz
+IGlzIGFjaGlldmVkIGJ5IGFkZGluZyBhbm90aGVyIGxvY2tkb3duIHJlYXNv
+biwgd2hpY2ggY2FuIGJlCnRlc3RlZCB0byBub3QgYmVpbmcgc2V0IHdoZW4g
+YXBwbHlpbmcgdGhlICJ1bnJlc3RyaWN0ZWQiIG9wdGlvbi4KClRoaXMgaXMg
+cGFydCBvZiBYU0EtNDgyIC8gQ1ZFLT8/PwoKU2lnbmVkLW9mZi1ieTogSnVl
+cmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMveGVu
+L3ByaXZjbWQuYyAgICB8IDEzICsrKysrKysrKysrKysKIGluY2x1ZGUvbGlu
+dXgvc2VjdXJpdHkuaCB8ICAxICsKIHNlY3VyaXR5L3NlY3VyaXR5LmMgICAg
+ICB8ICAxICsKIDMgZmlsZXMgY2hhbmdlZCwgMTUgaW5zZXJ0aW9ucygrKQoK
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL3ByaXZjbWQuYyBiL2RyaXZlcnMv
+eGVuL3ByaXZjbWQuYwppbmRleCBhODNiYWQ2OWY0ZjIuLmJiZjllZTIxMzA2
+YyAxMDA2NDQKLS0tIGEvZHJpdmVycy94ZW4vcHJpdmNtZC5jCisrKyBiL2Ry
+aXZlcnMveGVuL3ByaXZjbWQuYwpAQCAtMzIsNiArMzIsNyBAQAogI2luY2x1
+ZGUgPGxpbnV4L21pc2NkZXZpY2UuaD4KICNpbmNsdWRlIDxsaW51eC9tb2R1
+bGVwYXJhbS5oPgogI2luY2x1ZGUgPGxpbnV4L25vdGlmaWVyLmg+CisjaW5j
+bHVkZSA8bGludXgvc2VjdXJpdHkuaD4KICNpbmNsdWRlIDxsaW51eC92aXJ0
+aW9fbW1pby5oPgogI2luY2x1ZGUgPGxpbnV4L3dhaXQuaD4KIApAQCAtNzIs
+NiArNzMsMTEgQEAgbW9kdWxlX3BhcmFtX25hbWVkKGRtX29wX2J1Zl9tYXhf
+c2l6ZSwgcHJpdmNtZF9kbV9vcF9idWZfbWF4X3NpemUsIHVpbnQsCiBNT0RV
+TEVfUEFSTV9ERVNDKGRtX29wX2J1Zl9tYXhfc2l6ZSwKIAkJICJNYXhpbXVt
+IHNpemUgb2YgYSBkbV9vcCBoeXBlcmNhbGwgYnVmZmVyIik7CiAKK3N0YXRp
+YyBib29sIHVucmVzdHJpY3RlZDsKK21vZHVsZV9wYXJhbSh1bnJlc3RyaWN0
+ZWQsIGJvb2wsIDApOworTU9EVUxFX1BBUk1fREVTQyh1bnJlc3RyaWN0ZWQs
+CisJIkRvbid0IHJlc3RyaWN0IGh5cGVyY2FsbHMgdG8gdGFyZ2V0IGRvbWFp
+biBpZiBydW5uaW5nIGluIGEgZG9tVSIpOworCiBzdHJ1Y3QgcHJpdmNtZF9k
+YXRhIHsKIAlkb21pZF90IGRvbWlkOwogfTsKQEAgLTE3MDgsNiArMTcxNCwx
+MyBAQCBzdGF0aWMgc3RydWN0IG5vdGlmaWVyX2Jsb2NrIHhlbnN0b3JlX25v
+dGlmaWVyID0gewogCiBzdGF0aWMgdm9pZCBfX2luaXQgcmVzdHJpY3RfZHJp
+dmVyKHZvaWQpCiB7CisJaWYgKHVucmVzdHJpY3RlZCkgeworCQlpZiAoc2Vj
+dXJpdHlfbG9ja2VkX2Rvd24oTE9DS0RPV05fWEVOX1VTRVJfQUNUSU9OUykp
+CisJCQlwcl93YXJuKCJLZXJuZWwgaXMgbG9ja2VkIGRvd24sIHBhcmFtZXRl
+ciBcInVucmVzdHJpY3RlZFwiIGlnbm9yZWRcbiIpOworCQllbHNlCisJCQly
+ZXR1cm47CisJfQorCiAJcmVzdHJpY3Rfd2FpdCA9IHRydWU7CiAKIAlyZWdp
+c3Rlcl94ZW5zdG9yZV9ub3RpZmllcigmeGVuc3RvcmVfbm90aWZpZXIpOwpk
+aWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9zZWN1cml0eS5oIGIvaW5jbHVk
+ZS9saW51eC9zZWN1cml0eS5oCmluZGV4IDgzYTY0NmQ3MmY2Zi4uZWU4OGRk
+MmQyZDFmIDEwMDY0NAotLS0gYS9pbmNsdWRlL2xpbnV4L3NlY3VyaXR5LmgK
+KysrIGIvaW5jbHVkZS9saW51eC9zZWN1cml0eS5oCkBAIC0xNDUsNiArMTQ1
+LDcgQEAgZW51bSBsb2NrZG93bl9yZWFzb24gewogCUxPQ0tET1dOX0JQRl9X
+UklURV9VU0VSLAogCUxPQ0tET1dOX0RCR19XUklURV9LRVJORUwsCiAJTE9D
+S0RPV05fUlRBU19FUlJPUl9JTkpFQ1RJT04sCisJTE9DS0RPV05fWEVOX1VT
+RVJfQUNUSU9OUywKIAlMT0NLRE9XTl9JTlRFR1JJVFlfTUFYLAogCUxPQ0tE
+T1dOX0tDT1JFLAogCUxPQ0tET1dOX0tQUk9CRVMsCmRpZmYgLS1naXQgYS9z
+ZWN1cml0eS9zZWN1cml0eS5jIGIvc2VjdXJpdHkvc2VjdXJpdHkuYwppbmRl
+eCA2N2FmOTIyOGM0ZTkuLmEyNmMxNDc0ZTJlNCAxMDA2NDQKLS0tIGEvc2Vj
+dXJpdHkvc2VjdXJpdHkuYworKysgYi9zZWN1cml0eS9zZWN1cml0eS5jCkBA
+IC02MSw2ICs2MSw3IEBAIGNvbnN0IGNoYXIgKmNvbnN0IGxvY2tkb3duX3Jl
+YXNvbnNbTE9DS0RPV05fQ09ORklERU5USUFMSVRZX01BWCArIDFdID0gewog
+CVtMT0NLRE9XTl9CUEZfV1JJVEVfVVNFUl0gPSAidXNlIG9mIGJwZiB0byB3
+cml0ZSB1c2VyIFJBTSIsCiAJW0xPQ0tET1dOX0RCR19XUklURV9LRVJORUxd
+ID0gInVzZSBvZiBrZ2RiL2tkYiB0byB3cml0ZSBrZXJuZWwgUkFNIiwKIAlb
+TE9DS0RPV05fUlRBU19FUlJPUl9JTkpFQ1RJT05dID0gIlJUQVMgZXJyb3Ig
+aW5qZWN0aW9uIiwKKwlbTE9DS0RPV05fWEVOX1VTRVJfQUNUSU9OU10gPSAi
+WGVuIGd1ZXN0IHVzZXIgYWN0aW9uIiwKIAlbTE9DS0RPV05fSU5URUdSSVRZ
+X01BWF0gPSAiaW50ZWdyaXR5IiwKIAlbTE9DS0RPV05fS0NPUkVdID0gIi9w
+cm9jL2tjb3JlIGFjY2VzcyIsCiAJW0xPQ0tET1dOX0tQUk9CRVNdID0gInVz
+ZSBvZiBrcHJvYmVzIiwKLS0gCjIuNTMuMAoK
+
+--=separator--
 
