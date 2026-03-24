@@ -4,34 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B291DF532C9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B514FF532CA
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259877.1553233 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1259881.1553248 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXO-00005N-Er; Tue, 24 Mar 2026 01:26:30 +0000
+	id 1w4qXP-0000Ri-90; Tue, 24 Mar 2026 01:26:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259877.1553233; Tue, 24 Mar 2026 01:26:30 +0000
+Received: by outflank-mailman (output) from mailman id 1259881.1553248; Tue, 24 Mar 2026 01:26:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXO-0008TL-6e; Tue, 24 Mar 2026 01:26:30 +0000
-Received: by outflank-mailman (input) for mailman id 1259877;
- Tue, 24 Mar 2026 01:00:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w4qXP-0000PF-2c; Tue, 24 Mar 2026 01:26:31 +0000
+Received: by outflank-mailman (input) for mailman id 1259881;
+ Tue, 24 Mar 2026 01:01:11 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=t6JZ=BY=kernel.org=dakr@srs-se1.protection.inumbo.net>)
- id 1w4q8R-0005Au-6S
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:00:43 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0ab228c-271c-11f1-9ccf-f158ae23cfc8;
- Tue, 24 Mar 2026 02:00:41 +0100 (CET)
+ (envelope-from <dakr@kernel.org>) id 1w4q8t-0006VL-8C
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:01:11 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1w4q8s-004t0e-KI
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:01:10 +0100
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <dakr@kernel.org>)
+ id 69c1e229-e002-0a2a0a5209dd-0a2a45049692-46
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:10 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <dakr@kernel.org>)
+ id 69c1e254-c823-0a2a45040019-aceafc1f8d64-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:10 +0100
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3D70B60123;
- Tue, 24 Mar 2026 01:00:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEA80C2BCB0;
- Tue, 24 Mar 2026 01:00:30 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B1AFA404E5;
+ Tue, 24 Mar 2026 01:01:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931DBC2BCB0;
+ Tue, 24 Mar 2026 01:00:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +50,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0ab228c-271c-11f1-9ccf-f158ae23cfc8
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314039;
-	bh=OxPzK3/iX5TzeguT4C32klLe13a3sjO2YbS7arezVF0=;
+	s=k20201202; t=1774314068;
+	bh=A7+ilLlUptt8NahoteAzf0RgIRgwKuFBHYBpfbQD/9c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DYzKa8W5KbZsX0Q3U46OAbU/nH1t2yuASEQDJe8GInk2ZFV9p/BTpJrbQ5iSVN+Rr
-	 iDsxtzXT1Q5IhpK1FpgMwK53o4dIzhC5AhsOW9v9r0Qy8xJdrXdZNw61AejuhRVV9e
-	 VgG3LgpZit11/+9g6ang/38slf+5Zbns+RQFiELF9Xyt/9STRMSAHd9hVjW2LOrKkI
-	 9RuIqlPIejomaO8iaT6YqLBMXcEr11Es9lpiZyb/MMWt2w7I73dlPA3B+6L5DTk0yn
-	 REGuHaXz3xcd7vUQFZtCso2zZj9BStIrhcEah88ZcgAmaJ5zQO93xCdWxTK+gpJBxu
-	 ZV5PBCZyCdkKA==
+	b=erU7fvhzJv2tp5KrkKrqx+Erdif01ZeeUOpNA4f3SMGY5Zd3volrXG0e/GJE1PA+4
+	 eGQrxZX3PAs12r5SMw5wVj3Dru900+u5sZlt2HAhjsWXohecP7okhBQJqUVMGYmK9x
+	 t4JpMcZVTz48+PY+wk5zYrMxets8K+lB6YlpzvSaaUxQizoh9N8ogOZ6kZFkBtVUt/
+	 +2U/I6kRnURbopqcXHThSae0+v5nsjA+MtxnO1+6Qp2DXSnViA+Sg/1CnS+DYaIbv9
+	 MmwreYV6dk6ePxO92r/nW6iGASWXgbC1mouwugaLRXGpdUBgdYK22pwqvUSENOqNbX
+	 RFBSTYbpYZsGA==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -103,184 +110,188 @@ Cc: linux-kernel@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-arm-kernel@lists.infradead.org,
-	Danilo Krummrich <dakr@kernel.org>,
-	Gui-Dong Han <hanguidong02@gmail.com>
-Subject: [PATCH 07/12] rpmsg: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:11 +0100
-Message-ID: <20260324005919.2408620-8-dakr@kernel.org>
+	Danilo Krummrich <dakr@kernel.org>
+Subject: [PATCH 10/12] s390/ap: use generic driver_override infrastructure
+Date: Tue, 24 Mar 2026 01:59:14 +0100
+Message-ID: <20260324005919.2408620-11-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1774314070-B80B39D1-08BA4308/0/0
+X-purgate-type: clean
+X-purgate-size: 6288
 
-When a driver is probed through __driver_attach(), the bus' match()
-callback is called without the device lock held, thus accessing the
-driver_override field without a lock, which can cause a UAF.
+When the AP masks are updated via apmask_store() or aqmask_store(),
+ap_bus_revise_bindings() is called after ap_attr_mutex has been
+released.
 
-Fix this by using the driver-core driver_override infrastructure taking
-care of proper locking internally.
+This calls __ap_revise_reserved(), which accesses the driver_override
+field without holding any lock, racing against a concurrent
+driver_override_store() that may free the old string, resulting in a
+potential UAF.
 
-Note that calling match() from __driver_attach() without the device lock
-held is intentional. [1]
+Fix this by using the driver-core driver_override infrastructure, which
+protects all accesses with an internal spinlock.
 
-Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
-Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
-Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-Fixes: e95060478244 ("rpmsg: Introduce a driver override mechanism")
+Note that unlike most other buses, the AP bus does not check
+driver_override in its match() callback; the override is checked in
+ap_device_probe() and __ap_revise_reserved() instead.
+
+Also note that we do not enable the driver_override feature of struct
+bus_type, as AP - in contrast to most other buses - passes "" to
+sysfs_emit() when the driver_override pointer is NULL. Thus, printing
+"\n" instead of "(null)\n".
+
+Additionally, AP has a custom counter that is modified in the
+corresponding custom driver_override_store().
+
+Fixes: d38a87d7c064 ("s390/ap: Support driver_override for AP queue devices")
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/rpmsg/qcom_glink_native.c |  2 --
- drivers/rpmsg/rpmsg_core.c        | 43 +++++--------------------------
- drivers/rpmsg/virtio_rpmsg_bus.c  |  1 -
- include/linux/rpmsg.h             |  4 ---
- 4 files changed, 7 insertions(+), 43 deletions(-)
+ drivers/s390/crypto/ap_bus.c   | 34 +++++++++++++++++-----------------
+ drivers/s390/crypto/ap_bus.h   |  1 -
+ drivers/s390/crypto/ap_queue.c | 24 ++++++------------------
+ 3 files changed, 23 insertions(+), 36 deletions(-)
 
-diff --git a/drivers/rpmsg/qcom_glink_native.c b/drivers/rpmsg/qcom_glink_native.c
-index 9ef17c2e45b0..e9d1b2082477 100644
---- a/drivers/rpmsg/qcom_glink_native.c
-+++ b/drivers/rpmsg/qcom_glink_native.c
-@@ -1623,7 +1623,6 @@ static void qcom_glink_rpdev_release(struct device *dev)
+diff --git a/drivers/s390/crypto/ap_bus.c b/drivers/s390/crypto/ap_bus.c
+index d652df96a507..f24e27add721 100644
+--- a/drivers/s390/crypto/ap_bus.c
++++ b/drivers/s390/crypto/ap_bus.c
+@@ -859,25 +859,24 @@ static int __ap_queue_devices_with_id_unregister(struct device *dev, void *data)
+ 
+ static int __ap_revise_reserved(struct device *dev, void *dummy)
  {
- 	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
+-	int rc, card, queue, devres, drvres;
++	int rc, card, queue, devres, drvres, ovrd;
  
--	kfree(rpdev->driver_override);
- 	kfree(rpdev);
- }
+ 	if (is_queue_dev(dev)) {
+ 		struct ap_driver *ap_drv = to_ap_drv(dev->driver);
+ 		struct ap_queue *aq = to_ap_queue(dev);
+-		struct ap_device *ap_dev = &aq->ap_dev;
  
-@@ -1859,7 +1858,6 @@ static void qcom_glink_device_release(struct device *dev)
+ 		card = AP_QID_CARD(aq->qid);
+ 		queue = AP_QID_QUEUE(aq->qid);
  
- 	/* Release qcom_glink_alloc_channel() reference */
- 	kref_put(&channel->refcount, qcom_glink_channel_release);
--	kfree(rpdev->driver_override);
- 	kfree(rpdev);
- }
+-		if (ap_dev->driver_override) {
+-			if (strcmp(ap_dev->driver_override,
+-				   ap_drv->driver.name)) {
+-				pr_debug("reprobing queue=%02x.%04x\n", card, queue);
+-				rc = device_reprobe(dev);
+-				if (rc) {
+-					AP_DBF_WARN("%s reprobing queue=%02x.%04x failed\n",
+-						    __func__, card, queue);
+-				}
++		ovrd = device_match_driver_override(dev, &ap_drv->driver);
++		if (ovrd > 0) {
++			/* override set and matches, nothing to do */
++		} else if (ovrd == 0) {
++			pr_debug("reprobing queue=%02x.%04x\n", card, queue);
++			rc = device_reprobe(dev);
++			if (rc) {
++				AP_DBF_WARN("%s reprobing queue=%02x.%04x failed\n",
++					    __func__, card, queue);
+ 			}
+ 		} else {
+ 			mutex_lock(&ap_attr_mutex);
+@@ -928,7 +927,7 @@ int ap_owned_by_def_drv(int card, int queue)
+ 	if (aq) {
+ 		const struct device_driver *drv = aq->ap_dev.device.driver;
+ 		const struct ap_driver *ap_drv = to_ap_drv(drv);
+-		bool override = !!aq->ap_dev.driver_override;
++		bool override = device_has_driver_override(&aq->ap_dev.device);
  
-diff --git a/drivers/rpmsg/rpmsg_core.c b/drivers/rpmsg/rpmsg_core.c
-index 96964745065b..2b9f6d5a9a4f 100644
---- a/drivers/rpmsg/rpmsg_core.c
-+++ b/drivers/rpmsg/rpmsg_core.c
-@@ -358,33 +358,6 @@ rpmsg_show_attr(src, src, "0x%x\n");
- rpmsg_show_attr(dst, dst, "0x%x\n");
- rpmsg_show_attr(announce, announce ? "true" : "false", "%s\n");
+ 		if (override && drv && ap_drv->flags & AP_DRIVER_FLAG_DEFAULT)
+ 			rc = 1;
+@@ -977,7 +976,7 @@ static int ap_device_probe(struct device *dev)
+ {
+ 	struct ap_device *ap_dev = to_ap_dev(dev);
+ 	struct ap_driver *ap_drv = to_ap_drv(dev->driver);
+-	int card, queue, devres, drvres, rc = -ENODEV;
++	int card, queue, devres, drvres, rc = -ENODEV, ovrd;
  
--static ssize_t driver_override_store(struct device *dev,
--				     struct device_attribute *attr,
--				     const char *buf, size_t count)
--{
--	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
--	int ret;
--
--	ret = driver_set_override(dev, &rpdev->driver_override, buf, count);
--	if (ret)
--		return ret;
--
--	return count;
--}
--
--static ssize_t driver_override_show(struct device *dev,
--				    struct device_attribute *attr, char *buf)
--{
--	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
--	ssize_t len;
+ 	if (!get_device(dev))
+ 		return rc;
+@@ -991,10 +990,11 @@ static int ap_device_probe(struct device *dev)
+ 		 */
+ 		card = AP_QID_CARD(to_ap_queue(dev)->qid);
+ 		queue = AP_QID_QUEUE(to_ap_queue(dev)->qid);
+-		if (ap_dev->driver_override) {
+-			if (strcmp(ap_dev->driver_override,
+-				   ap_drv->driver.name))
+-				goto out;
++		ovrd = device_match_driver_override(dev, &ap_drv->driver);
++		if (ovrd > 0) {
++			/* override set and matches, nothing to do */
++		} else if (ovrd == 0) {
++			goto out;
+ 		} else {
+ 			mutex_lock(&ap_attr_mutex);
+ 			devres = test_bit_inv(card, ap_perms.apm) &&
+diff --git a/drivers/s390/crypto/ap_bus.h b/drivers/s390/crypto/ap_bus.h
+index 51e08f27bd75..04ea256ecf91 100644
+--- a/drivers/s390/crypto/ap_bus.h
++++ b/drivers/s390/crypto/ap_bus.h
+@@ -166,7 +166,6 @@ void ap_driver_unregister(struct ap_driver *);
+ struct ap_device {
+ 	struct device device;
+ 	int device_type;		/* AP device type. */
+-	const char *driver_override;
+ };
+ 
+ #define to_ap_dev(x) container_of((x), struct ap_device, device)
+diff --git a/drivers/s390/crypto/ap_queue.c b/drivers/s390/crypto/ap_queue.c
+index 3fe2e41c5c6b..ca9819e6f7e7 100644
+--- a/drivers/s390/crypto/ap_queue.c
++++ b/drivers/s390/crypto/ap_queue.c
+@@ -734,26 +734,14 @@ static ssize_t driver_override_show(struct device *dev,
+ 				    struct device_attribute *attr,
+ 				    char *buf)
+ {
+-	struct ap_queue *aq = to_ap_queue(dev);
+-	struct ap_device *ap_dev = &aq->ap_dev;
+-	int rc;
 -
 -	device_lock(dev);
--	len = sysfs_emit(buf, "%s\n", rpdev->driver_override);
+-	if (ap_dev->driver_override)
+-		rc = sysfs_emit(buf, "%s\n", ap_dev->driver_override);
+-	else
+-		rc = sysfs_emit(buf, "\n");
 -	device_unlock(dev);
--	return len;
--}
--static DEVICE_ATTR_RW(driver_override);
 -
- static ssize_t modalias_show(struct device *dev,
- 			     struct device_attribute *attr, char *buf)
- {
-@@ -405,7 +378,6 @@ static struct attribute *rpmsg_dev_attrs[] = {
- 	&dev_attr_dst.attr,
- 	&dev_attr_src.attr,
- 	&dev_attr_announce.attr,
--	&dev_attr_driver_override.attr,
- 	NULL,
- };
- ATTRIBUTE_GROUPS(rpmsg_dev);
-@@ -424,9 +396,11 @@ static int rpmsg_dev_match(struct device *dev, const struct device_driver *drv)
- 	const struct rpmsg_driver *rpdrv = to_rpmsg_driver(drv);
- 	const struct rpmsg_device_id *ids = rpdrv->id_table;
- 	unsigned int i;
-+	int ret;
- 
--	if (rpdev->driver_override)
--		return !strcmp(rpdev->driver_override, drv->name);
-+	ret = device_match_driver_override(dev, drv);
-+	if (ret >= 0)
-+		return ret;
- 
- 	if (ids)
- 		for (i = 0; ids[i].name[0]; i++)
-@@ -535,6 +509,7 @@ static const struct bus_type rpmsg_bus = {
- 	.name		= "rpmsg",
- 	.match		= rpmsg_dev_match,
- 	.dev_groups	= rpmsg_dev_groups,
-+	.driver_override = true,
- 	.uevent		= rpmsg_uevent,
- 	.probe		= rpmsg_dev_probe,
- 	.remove		= rpmsg_dev_remove,
-@@ -560,11 +535,9 @@ int rpmsg_register_device_override(struct rpmsg_device *rpdev,
- 
- 	device_initialize(dev);
- 	if (driver_override) {
--		ret = driver_set_override(dev, &rpdev->driver_override,
--					  driver_override,
--					  strlen(driver_override));
-+		ret = device_set_driver_override(dev, driver_override);
- 		if (ret) {
--			dev_err(dev, "device_set_override failed: %d\n", ret);
-+			dev_err(dev, "device_set_driver_override() failed: %d\n", ret);
- 			put_device(dev);
- 			return ret;
- 		}
-@@ -573,8 +546,6 @@ int rpmsg_register_device_override(struct rpmsg_device *rpdev,
- 	ret = device_add(dev);
- 	if (ret) {
- 		dev_err(dev, "device_add failed: %d\n", ret);
--		kfree(rpdev->driver_override);
--		rpdev->driver_override = NULL;
- 		put_device(dev);
- 	}
- 
-diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-index 8d9e2b4dc7c1..e0dacb736ef9 100644
---- a/drivers/rpmsg/virtio_rpmsg_bus.c
-+++ b/drivers/rpmsg/virtio_rpmsg_bus.c
-@@ -373,7 +373,6 @@ static void virtio_rpmsg_release_device(struct device *dev)
- 	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
- 	struct virtio_rpmsg_channel *vch = to_virtio_rpmsg_channel(rpdev);
- 
--	kfree(rpdev->driver_override);
- 	kfree(vch);
+-	return rc;
++	guard(spinlock)(&dev->driver_override.lock);
++	return sysfs_emit(buf, "%s\n", dev->driver_override.name ?: "");
  }
  
-diff --git a/include/linux/rpmsg.h b/include/linux/rpmsg.h
-index fb7ab9165645..c2e3ef8480d5 100644
---- a/include/linux/rpmsg.h
-+++ b/include/linux/rpmsg.h
-@@ -41,9 +41,6 @@ struct rpmsg_channel_info {
-  * rpmsg_device - device that belong to the rpmsg bus
-  * @dev: the device struct
-  * @id: device id (used to match between rpmsg drivers and devices)
-- * @driver_override: driver name to force a match; do not set directly,
-- *                   because core frees it; use driver_set_override() to
-- *                   set or clear it.
-  * @src: local address
-  * @dst: destination address
-  * @ept: the rpmsg endpoint of this channel
-@@ -53,7 +50,6 @@ struct rpmsg_channel_info {
- struct rpmsg_device {
- 	struct device dev;
- 	struct rpmsg_device_id id;
--	const char *driver_override;
- 	u32 src;
- 	u32 dst;
- 	struct rpmsg_endpoint *ept;
+ static ssize_t driver_override_store(struct device *dev,
+ 				     struct device_attribute *attr,
+ 				     const char *buf, size_t count)
+ {
+-	struct ap_queue *aq = to_ap_queue(dev);
+-	struct ap_device *ap_dev = &aq->ap_dev;
+ 	int rc = -EINVAL;
+ 	bool old_value;
+ 
+@@ -764,13 +752,13 @@ static ssize_t driver_override_store(struct device *dev,
+ 	if (ap_apmask_aqmask_in_use)
+ 		goto out;
+ 
+-	old_value = ap_dev->driver_override ? true : false;
+-	rc = driver_set_override(dev, &ap_dev->driver_override, buf, count);
++	old_value = device_has_driver_override(dev);
++	rc = __device_set_driver_override(dev, buf, count);
+ 	if (rc)
+ 		goto out;
+-	if (old_value && !ap_dev->driver_override)
++	if (old_value && !device_has_driver_override(dev))
+ 		--ap_driver_override_ctr;
+-	else if (!old_value && ap_dev->driver_override)
++	else if (!old_value && device_has_driver_override(dev))
+ 		++ap_driver_override_ctr;
+ 
+ 	rc = count;
 -- 
 2.53.0
 
