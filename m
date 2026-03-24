@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B97E9A75C
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 10:09:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1260229.1553584 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86502E9A75C
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 10:09:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1260231.1553602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4yhE-0001Nu-7X; Tue, 24 Mar 2026 10:09:12 +0000
+	id 1w4yhL-0001rk-LN; Tue, 24 Mar 2026 10:09:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1260229.1553584; Tue, 24 Mar 2026 10:09:12 +0000
+Received: by outflank-mailman (output) from mailman id 1260231.1553602; Tue, 24 Mar 2026 10:09:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4yhE-0001Nn-3c; Tue, 24 Mar 2026 10:09:12 +0000
-Received: by outflank-mailman (input) for mailman id 1260229;
- Tue, 24 Mar 2026 10:09:10 +0000
+	id 1w4yhL-0001rV-HT; Tue, 24 Mar 2026 10:09:19 +0000
+Received: by outflank-mailman (input) for mailman id 1260231;
+ Tue, 24 Mar 2026 10:09:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SJqO=BY=gmail.com=soumyajyotisarkar23@srs-se1.protection.inumbo.net>)
- id 1w4yhC-0001Nh-Nz
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 10:09:10 +0000
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
- [209.85.210.193]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7df92f68-2769-11f1-9ccf-f158ae23cfc8;
- Tue, 24 Mar 2026 11:09:08 +0100 (CET)
-Received: by mail-pf1-f193.google.com with SMTP id
- d2e1a72fcca58-829a9d08644so2101756b3a.1
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 03:09:07 -0700 (PDT)
+ id 1w4yhK-0001Nh-7r
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 10:09:18 +0000
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+ [209.85.210.196]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 835e60d7-2769-11f1-9ccf-f158ae23cfc8;
+ Tue, 24 Mar 2026 11:09:16 +0100 (CET)
+Received: by mail-pf1-f196.google.com with SMTP id
+ d2e1a72fcca58-82c4b5dfe6cso948241b3a.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 03:09:16 -0700 (PDT)
 Received: from fedora ([103.2.232.250]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c74665ca206sm11377434a12.18.2026.03.24.03.09.00
+ 41be03b00d2f7-c74665ca206sm11377434a12.18.2026.03.24.03.09.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 03:09:04 -0700 (PDT)
+ Tue, 24 Mar 2026 03:09:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,42 +45,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7df92f68-2769-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: 835e60d7-2769-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774346945; x=1774951745; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QCGqbl32Z3lKiFMrkcslcve9d2BQbKfcbIPf55C+jQE=;
-        b=qo4vScjB3/t3snEO71DhOAiDNNJaof00lkDM0w+a5KfnTrWcmyIxCEv9px0eZJsrxB
-         tkjhOCrEJLEr+Jcb4/4sk1UZUJMqwGkELZ00Tvbcq5rnpZZfC9+x+ZrPgV0rjqOrLWXQ
-         D3j2bzYYJ5IOK2CIQqnlnuLu+wdyKdUZJLdbPy8cZO2D4dNCu0CsVxvo/sG4Hyw9X7kF
-         Z3Qa/Oo4qCjzaDOp1IbYdtg6BaOEyjFVQITa947RsweTpEjZq3a7yaz+xcfPLYehP5/I
-         xyyueRu/QCUmYra0UZXD3jYg2nHe64hie2hkU3AZeN8xPuEv8o7V9Kt+JxiVyom5PAVR
-         h8RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774346945; x=1774951745;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1774346954; x=1774951754; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QCGqbl32Z3lKiFMrkcslcve9d2BQbKfcbIPf55C+jQE=;
-        b=pDMrZZyh0Zcl0tPeazJIC1j70F7NP6JprWabixn1dskVSGr1HOFygd28l9/c1hJvfZ
-         dgeLpxCLFml0GHYkWeCsSRyx9dxKXjUXOBOM4OZYKnUSpJKoG9/Vq8GWaNd+mbm6mkRE
-         UtrHzZxDxnpy9HhKOPfoPcWX4lnvepQf7H51g3hW+N02KvRSmHIO13d04XrKLs4GnZEF
-         UXG2kUUoBOqrIphVVN7OtVBEcB63gJqIgrix2uWXSaxQBuHSzyB6dQAyil1WUqdYrjIf
-         CNUKpYEBYAdjtLsc94yr5rkDymq+F9rpVI3fmWAVeCYguOtLJMr9jKaLIIQRj2CEBKuI
-         YLOQ==
-X-Gm-Message-State: AOJu0YywMvNBoeD4Ce2DBfFcO25vbZuuLj+CaPLBKOTQ7HPEXpksZay6
-	nPLHcZ4fZY/pP2XnGob8CDe9nTEdMcKB0KcA+xGqbd5qPgCOW5kLvCiWlkOcji+L
-X-Gm-Gg: ATEYQzyxaTfEuxxzGKjY+PLBcqM8ctgHv5M4skXFTHSlHC0JI80YQkSjL98JR90bxpQ
-	m3T76qhLrcPxEyj4/XIALKT6cniDNNQy9zTmnxXkv6Diu5CW2n70U1Eips2Fh6WLzm8Elm1KgdH
-	y/HCLx+kjbrZfS0M53LsazCkmqPcYd5c+4EwcfQCwxMzld2r4Df4OX+QiK/vIPzGwx9mclQAOV2
-	XiUEZcH4SJBTBUIzp0HlsGejnmc/rYBuJ5EbUOAXk6jbJCSFM5dSzoMUmC+a8gVpH8So/YOWnnE
-	5BThrMOTuTkbYIQtHcrCsmktnsFcj5tpAA6cbbi+3f36Sg2Cf+kYgKNWEm3X7/e05Cxunp3Q4XJ
-	N4hjFa8ihDkCTCsb32eq0kB6SW5AaK27+rY4xBzqaUEKoRfcj8mz+fk6NlGTLAnVagI5JIoHVKz
-	UY+segqcnuQ7lKCKx0DES/qIuAdNpP/QJ9GP4EckLxKISvTokjClIl5yAAoG+kYf2qPWkAdawfX
-	z5zyQ8zO+g2I3OenFPDOx9LDmDblM9K1QZMWDa20PdzsaZk7LrLxMpTXPJXHZKYCrmP2ifsKA==
-X-Received: by 2002:a05:6a20:4304:b0:398:71b6:33aa with SMTP id adf61e73a8af0-39bcec312ccmr14913772637.64.1774346945235;
-        Tue, 24 Mar 2026 03:09:05 -0700 (PDT)
+        bh=S7lJOGAyXgWXm5RAImeMolbrvF/QPjaKzs3OuvcIdvo=;
+        b=YxPwxc2SlyXElmo7X+3rbbmq6Fu192D7n9jpOa/CKoJ99PbxKGW6xRGzHYBIkY4mKi
+         UdNVLkHXgvbRGoN0kAAUp179XYDxMDGxSZylGLmE0sQ4NV24WJdoRLghpUfMTyKbGoQJ
+         TreSwjGP1P09OjE/Mze1R9pWeIlPi+6ojeuItg+zLJpzTGRZrqFOO5RCQnMYtUNOlYTS
+         YfGGIhsh09dwyJExrXaDeG9gRuIPNivqlEuw71xj2/pOExJ4UTCvO20/AzlQaQ5VzZOu
+         jb0r9sM1cOgLaVDQofyQr7UymDRXxI4INhi8D/B5y4tsVgwa3kQ75UTWLzLFf2slR1el
+         h9yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774346954; x=1774951754;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=S7lJOGAyXgWXm5RAImeMolbrvF/QPjaKzs3OuvcIdvo=;
+        b=k7NUA7GFf1V5HfRli0bqEeoPOqm89+Txi5Xhh7rRJ6TK9V4qsHJMNgag8QXtjaHqgd
+         A7Y4ev/P4skjKQzy6UCYo1djJZ1bMTMzJQhuP0oGbVjHiYw77nvNBScfevj0WB3f7Alu
+         EjCLoHRRqRUCtFGnX4+1XDmQrv6uxIxwgPifttK3KrkOZaCmOOg4Gt1/gPO94F3qJ6Dp
+         udSsxbAwMzEqAXsTIk+ig6mYSKPNHpGzMfD6GMkwtgSbaKFiaN4UY01kxXvGt+d5mucu
+         fIQWk/6HUj4+avl/9kmNwgrNQ3jHjnR2XuW/AwUYXvrWLy2uwnZAT/ZGFdufhap/Xhdr
+         6HeQ==
+X-Gm-Message-State: AOJu0YwKmUKIfYXw6mMeLV+Ns2Dk1hRnZdbzuSkcDWBq0MYIauQXdyTT
+	KxsHzd/OfCKFD/zQdXydA8UCUzD70ZPMTXyIDWGos85+Jj/U80e6ZzwhcnW7qGFv
+X-Gm-Gg: ATEYQzy1XVYnw11RFNBwPZ5bP/eLiwdZPdLkd3tHwkEDugbjcKJPDxUCB2gI8VEBgkx
+	Jcqz4kIbvnP2LLQZ/TjDoztpuswzPlKv2nFUjUx45Civ8V2Q9KWVTCCXskbhKUQngUHsP5Y8931
+	NwVb1ERA3ppSzZsvqhFRwao8lBzOuX1+29v+d9UCcuCH2GwU/qKgp/+8mqsZhQT0jyXy8nQyYXb
+	JWLdVe/shIJWxhbO7s7/F2Rn0t1BU6OA6EI4RmbgeBZoR8OSb7auaZjEQfjDcPlapTU4h8Acg4O
+	rdARZMZos8DYtWyJ9XfcWUhdcsReOR15MFeBrsYksenMcnj4HvYzlkB9PO+4sCSwa8H4Hj+m4Of
+	WOq1bpTU6iL0xnNBpv2TotLtjxgaleKnq0w1WlNMAj5iIvW+o4O8Bes7eQuE4bAkiDYObdbAB1D
+	J2+uTFYsmCnInfDt1GcxngKGOwIm2Bn3j6xLRUebVEfPmwkfOub2zt6UMpA/nqW05qv9/pieQEs
+	5f3irhZOBehlMbvabhvWHeQYX0oFG4IOFJM1erlnVz0Z/Pk8ashgNmqRDpvRTzico0HWtvNjw==
+X-Received: by 2002:a05:6a20:9189:b0:398:c170:1c7 with SMTP id adf61e73a8af0-39bcea27c41mr14127397637.26.1774346954322;
+        Tue, 24 Mar 2026 03:09:14 -0700 (PDT)
 From: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
 To: xen-devel@lists.xenproject.org,
 	sarkarsoumyajyoti23@gmail.com
@@ -90,104 +91,105 @@ Cc: "Daniel P . Smith" <dpsmith@apertussolutions.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
-Subject: [PATCH v4 0/3] Fixing ACPI BGRT (Boot Graphics Resource Table) corruption
-Date: Tue, 24 Mar 2026 15:38:53 +0530
-Message-ID: <20260324100856.6691-1-soumyajyotisarkar23@gmail.com>
+Subject: [PATCH v4 2/3] x86/acpi: Integrate BGRT preservation with status reporting
+Date: Tue, 24 Mar 2026 15:38:55 +0530
+Message-ID: <20260324100856.6691-3-soumyajyotisarkar23@gmail.com>
 X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20260324100856.6691-1-soumyajyotisarkar23@gmail.com>
+References: <20260324100856.6691-1-soumyajyotisarkar23@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This RFC series plans to addres ACPI BGRT (Boot Graphics Resource Table) corruption,
-that occured when Xen reuses the memory containing the boot logo
-image before dom0 is able to parse ACPI tables.
+Add status reporting for BGRT preservation and integrate with Xen's
+ACPI subsystem:
+- efi_bgrt_status_info() prints preservation status (success/failure)
+- Called from acpi_boot_init() after ACPI tables are processed
+- Clarifying comment explains why invalidation code remains
 
-The BGRT table contains a pointer to a BMP image stored in
-BootServicesData memory. When Xen reclaims this memory early in boot,
-the pointer becomes invalid, causing Linux dom0 to report:
-Xen: `(XEN) ACPI: BGRT: invalidating v1 image at 0x47cc2018`
-Linux (dom0): `ACPI BIOS Warning (bug): Incorrect checksum
-in table [BGRT] - 0xF9, should be 0xB4 (20250807/utcksum-58)`
-
-This series:
-1. Adds BGRT image preservation infrastructure during EFI boot
-(validates BMP format, allocates EfiACPIReclaimMemory, stores pointers)
-
-2. Integrates preservation with ACPI subsystem
-(clarifies acpi_invalidate_bgrt() safety net behavior,
-adds status reporting via efi_bgrt_status_info())
-
-3. Provides opt-out mechanism
-(-nobgrt for xen.efi direct boot, efi=no-bgrt
-for multiboot2, both via early EFI-phase parsing)
-
-The preservation is enabled by default to fix the corruption for all
-users, with minimal overhead (~1MB). Also, servers that don't need boot
-graphics can disable it using the "efi=no-bgrt" option.
-
-Thank you everyone for the constructive feedback! It is really helpful,
-I hope this RFC series is upto standards, I would greatly appriciate further feedback.
-
-Changes since v1:
-- The BGRT invalidation behaviour should still presist
-  and server as a safety net when "efi=no-bgrt" or the
-  preservation fails for some reason thus: Add Clarify comment
-  for BGRT invalidation behavior with preservation.
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-
-Changes since v2:
-- Use existing ACPI headers (actbl.h, actbl3.h) instead of custom structs
-- Modify the function names and code in function to conform with Coding Style.
-- Reuse efi.acpi20 from efi_tables() instead of manual RSDP search
-- Use appropriate types: EFI types for firmware code, unsigned int for
-  loop counters (matching ESRT pattern)
-- Used of sizeof(<expression>) over sizeof(<type>)
-- Remove fixed-type widths & limited typecasting
-- Add Blank line ahead of the main return statement of a function.
-- Better wording error message for image cap size
-- Remove parse_boolean(no-bgrt) since it could be bit misleading
-- Add const qualifiers throughout for safety
-- Use %p format for pointers (32-bit compatibility)
-- Initialize failure_reason with string literal for proper relocation
-- Use memcmp() with ACPI_SIG_* constants for signature checks
-- Add direct Xen.efi calling.
-- Add opt-out mechanism with proper early parsing during EFI phase.
-
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reported-by: Jan Beulich <jbeulich@suse.com>
-
-Changes since v3:
-- Fix casting away const issue.
-- Add Stub function
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-Please refer to QubesOS Issue for more context:
-https://github.com/QubesOS/qubes-issues/issues/10764
-
-This is a companion series to Linux Kernel side at
-https://patchew.org/linux/cover.751f45ebbb644244b1d9da3aff289d6b66db4c6b.1773058629.git-series.marmarek@invisiblethingslab.com/
-
-Testing:
-- Verified on Intel UEFI system with Fedora 43 dom0
-- Before: ACPI checksum errors in dom0
-- After: Clean boot, no ACPI warnings
-- Memory overhead: ~972 KB (preserved image size)
+The invalidation code in acpi_invalidate_bgrt() now acts as a safety
+net: if preservation fails, the image remains in conventional RAM
+and gets invalidated. If preservation succeeds, the image is in
+EfiACPIReclaimMemory which won't match the RAM_TYPE_CONVENTIONAL
+check, leaving the table valid.
 
 Signed-off-by: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
+---
+ xen/arch/x86/acpi/boot.c |  8 ++++++++
+ xen/common/efi/boot.c    | 16 ++++++++++++++++
+ xen/include/xen/efi.h    |  1 +
+ 3 files changed, 25 insertions(+)
 
-Soumyajyotii Ssarkar (3):
-  x86/efi: Add BGRT image preservation infrastructure
-  x86/acpi: Integrate BGRT preservation with status reporting
-  x86/efi: Add opt-out mechanism for BGRT preservation
+diff --git a/xen/arch/x86/acpi/boot.c b/xen/arch/x86/acpi/boot.c
+index 1ca2360e00..20afe79db9 100644
+--- a/xen/arch/x86/acpi/boot.c
++++ b/xen/arch/x86/acpi/boot.c
+@@ -29,6 +29,7 @@
+ #include <xen/mm.h>
+ #include <xen/param.h>
+ #include <xen/dmi.h>
++#include <xen/efi.h>
+ #include <asm/fixmap.h>
+ #include <asm/page.h>
+ #include <asm/apic.h>
+@@ -327,6 +328,11 @@ static int __init cf_check acpi_parse_hpet(struct acpi_table_header *table)
+ 	return 0;
+ }
 
- xen/arch/x86/acpi/boot.c     |   8 ++
- xen/arch/x86/efi/efi-boot.h  |   5 ++
- xen/common/efi/boot.c        | 158 +++++++++++++++++++++++++++++++++++
- xen/common/efi/common-stub.c |   1 +
- xen/include/xen/efi.h        |   1 +
- 5 files changed, 173 insertions(+)
++/*
++ * Invalidate BGRT if image is in conventional RAM (preservation failed).
++ * If preservation succeeded, image is in EfiACPIReclaimMemory, which
++ * won't match RAM_TYPE_CONVENTIONAL check, so table remains valid.
++ */
+ static int __init cf_check acpi_invalidate_bgrt(struct acpi_table_header *table)
+ {
+ 	struct acpi_table_bgrt *bgrt_tbl =
+@@ -754,5 +760,7 @@ int __init acpi_boot_init(void)
 
+ 	acpi_table_parse(ACPI_SIG_BGRT, acpi_invalidate_bgrt);
+
++	efi_bgrt_status_info();
++
+ 	return 0;
+ }
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 47d5b9b2a8..e22a42c15b 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -1911,6 +1911,22 @@ static bool __init cf_check rt_range_valid(unsigned long smfn, unsigned long emf
+     return true;
+ }
+
++void __init efi_bgrt_status_info(void)
++{
++    if ( !efi_enabled(EFI_BOOT) )
++        return;
++
++    if ( bgrt_info.preserved )
++    {
++        printk(XENLOG_INFO "EFI: BGRT image preserved: %lu KB\n",
++               bgrt_info.size / 1024);
++        printk(XENLOG_INFO "EFI: BGRT relocated from %p to %p\n",
++               bgrt_info.old_addr, bgrt_info.new_addr);
++    }
++    else if ( bgrt_info.failure_reason[0] )
++        printk(XENLOG_WARNING "EFI: BGRT preservation failed: %s\n",
++               bgrt_info.failure_reason);
++}
+
+ void __init efi_init_memory(void)
+ {
+diff --git a/xen/include/xen/efi.h b/xen/include/xen/efi.h
+index 723cb80852..e72ab3c6b5 100644
+--- a/xen/include/xen/efi.h
++++ b/xen/include/xen/efi.h
+@@ -39,6 +39,7 @@ static inline bool efi_enabled(unsigned int feature)
+ extern bool efi_secure_boot;
+
+ void efi_init_memory(void);
++void efi_bgrt_status_info(void);
+ bool efi_boot_mem_unused(unsigned long *start, unsigned long *end);
+ bool efi_rs_using_pgtables(void);
+ unsigned long efi_get_time(void);
 --
 2.53.0
 
