@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BA9DF532C7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C037F532CC
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259875.1553226 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1259879.1553241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXO-0008Gw-1l; Tue, 24 Mar 2026 01:26:30 +0000
+	id 1w4qXO-0000Cw-RM; Tue, 24 Mar 2026 01:26:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259875.1553226; Tue, 24 Mar 2026 01:26:29 +0000
+Received: by outflank-mailman (output) from mailman id 1259879.1553241; Tue, 24 Mar 2026 01:26:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXN-0008CX-On; Tue, 24 Mar 2026 01:26:29 +0000
-Received: by outflank-mailman (input) for mailman id 1259875;
- Tue, 24 Mar 2026 01:00:25 +0000
+	id 1w4qXO-0000BI-Jb; Tue, 24 Mar 2026 01:26:30 +0000
+Received: by outflank-mailman (input) for mailman id 1259879;
+ Tue, 24 Mar 2026 01:01:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=t6JZ=BY=kernel.org=dakr@srs-se1.protection.inumbo.net>)
- id 1w4q89-0005Au-IS
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:00:25 +0000
+ id 1w4q8k-0005Au-6W
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:01:02 +0000
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d521cbb5-271c-11f1-9ccf-f158ae23cfc8;
- Tue, 24 Mar 2026 02:00:22 +0100 (CET)
+ id ec01ef05-271c-11f1-9ccf-f158ae23cfc8;
+ Tue, 24 Mar 2026 02:01:00 +0100 (CET)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 0775E60103;
- Tue, 24 Mar 2026 01:00:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88E74C2BCB0;
- Tue, 24 Mar 2026 01:00:11 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6F07260121;
+ Tue, 24 Mar 2026 01:00:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F37F1C4CEF7;
+ Tue, 24 Mar 2026 01:00:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d521cbb5-271c-11f1-9ccf-f158ae23cfc8
+X-Inumbo-ID: ec01ef05-271c-11f1-9ccf-f158ae23cfc8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314020;
-	bh=zi0v4zurXgdLP04GC9K8onaZXN/N3Qlem6TWYef3iJk=;
+	s=k20201202; t=1774314059;
+	bh=ByobimVvZngWYiBS4MISNoCZaILbn7MyP0EmUHxONX8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QIEgBZSeprBd8eco5o8dw+zg/Y5BKWKjmLND8s3b+DopMyWSHVyEjpTlL4MeXNu6J
-	 X/vMHl5tcRAtlKG5k4UUt+iHGlqdNZ7OAGIqIUnN+AuKhAX5Gfvn1RJ2JN+B+b/8oV
-	 Dnw348XctBIWTV33IkRHOMoqJWQCsfR8SsPVZoMNEUBzpdW4p6GRIYIot6LJvdMFsS
-	 3QbEZOR+DnIpCdhzlekCzLxRc423a9T2znnXXKY+47An9vD8vHI4TrhpijQMqnokV+
-	 3RMAL22cwN1WStl+aUt4vfTVte+eCLX64fU0XiBT76DmRE+t61UwtJ1wkOziB9Utd8
-	 OLcnfwwHxuprw==
+	b=M5cmM+6DyqmK+EAGRvLHS/yaDqvmCvw5jU4r7SCyXiBwcQBFFqbb4X/i4pXN2bi2S
+	 gHkRbl+Xo3RELYoiG4jfGiG71cPBeRkIjOhdvO7LyCtTJjVMWWsggEZfDrMHEQh/LT
+	 sJPml12ZLm2ZXWcUV7+rSBuPDv4wlXIGpfa5Mp3UMgF0NSXsREGrGnuvEljzT3nxKU
+	 rRCqRHzFA+L/AZEsNVivSFaFs9zyzzt9OOmEyPjs+2mnPiQ4PBAEg9i9nAYF6+ohUT
+	 5vkv2XGga3nnGd1hHPKmfzckD1wY8wwkbKkdLTe4mZgsX9KBZZceAs6EiZe7MaJYyF
+	 N2W+3BMlOYL3w==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -105,9 +105,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	Danilo Krummrich <dakr@kernel.org>,
 	Gui-Dong Han <hanguidong02@gmail.com>
-Subject: [PATCH 05/12] PCI: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:09 +0100
-Message-ID: <20260324005919.2408620-6-dakr@kernel.org>
+Subject: [PATCH 09/12] s390/cio: use generic driver_override infrastructure
+Date: Tue, 24 Mar 2026 01:59:13 +0100
+Message-ID: <20260324005919.2408620-10-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
@@ -127,85 +127,53 @@ held is intentional. [1]
 Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
 Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
 Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-Fixes: 782a985d7af2 ("PCI: Introduce new device binding path using pci_dev.driver_override")
+Fixes: ebc3d1791503 ("s390/cio: introduce driver_override on the css bus")
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/pci/pci-driver.c           | 11 +++++++----
- drivers/pci/pci-sysfs.c            | 28 ----------------------------
- drivers/pci/probe.c                |  1 -
- drivers/vfio/pci/vfio_pci_core.c   |  5 ++---
- drivers/xen/xen-pciback/pci_stub.c |  6 ++++--
- include/linux/pci.h                |  6 ------
- 6 files changed, 13 insertions(+), 44 deletions(-)
+ drivers/s390/cio/cio.h |  5 -----
+ drivers/s390/cio/css.c | 34 ++++------------------------------
+ 2 files changed, 4 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
-index dd9075403987..d10ece0889f0 100644
---- a/drivers/pci/pci-driver.c
-+++ b/drivers/pci/pci-driver.c
-@@ -138,9 +138,11 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
- {
- 	struct pci_dynid *dynid;
- 	const struct pci_device_id *found_id = NULL, *ids;
-+	int ret;
+diff --git a/drivers/s390/cio/cio.h b/drivers/s390/cio/cio.h
+index 08a5e9380e75..bad142c536e1 100644
+--- a/drivers/s390/cio/cio.h
++++ b/drivers/s390/cio/cio.h
+@@ -103,11 +103,6 @@ struct subchannel {
+ 	struct work_struct todo_work;
+ 	struct schib_config config;
+ 	u64 dma_mask;
+-	/*
+-	 * Driver name to force a match.  Do not set directly, because core
+-	 * frees it.  Use driver_set_override() to set or clear it.
+-	 */
+-	const char *driver_override;
+ } __attribute__ ((aligned(8)));
  
- 	/* When driver_override is set, only bind to the matching driver */
--	if (dev->driver_override && strcmp(dev->driver_override, drv->name))
-+	ret = device_match_driver_override(&dev->dev, &drv->driver);
-+	if (ret == 0)
- 		return NULL;
+ DECLARE_PER_CPU_ALIGNED(struct irb, cio_irb);
+diff --git a/drivers/s390/cio/css.c b/drivers/s390/cio/css.c
+index 5ab239f38588..e5a0ec6b4e3e 100644
+--- a/drivers/s390/cio/css.c
++++ b/drivers/s390/cio/css.c
+@@ -159,7 +159,6 @@ static void css_subchannel_release(struct device *dev)
  
- 	/* Look at the dynamic ids first, before the static ones */
-@@ -164,7 +166,7 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
- 		 * matching.
- 		 */
- 		if (found_id->override_only) {
--			if (dev->driver_override)
-+			if (ret > 0)
- 				return found_id;
- 		} else {
- 			return found_id;
-@@ -172,7 +174,7 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
- 	}
- 
- 	/* driver_override will always match, send a dummy id */
--	if (dev->driver_override)
-+	if (ret > 0)
- 		return &pci_device_id_any;
- 	return NULL;
+ 	sch->config.intparm = 0;
+ 	cio_commit_config(sch);
+-	kfree(sch->driver_override);
+ 	kfree(sch);
  }
-@@ -452,7 +454,7 @@ static int __pci_device_probe(struct pci_driver *drv, struct pci_dev *pci_dev)
- static inline bool pci_device_can_probe(struct pci_dev *pdev)
- {
- 	return (!pdev->is_virtfn || pdev->physfn->sriov->drivers_autoprobe ||
--		pdev->driver_override);
-+		device_has_driver_override(&pdev->dev));
- }
- #else
- static inline bool pci_device_can_probe(struct pci_dev *pdev)
-@@ -1722,6 +1724,7 @@ static const struct cpumask *pci_device_irq_get_affinity(struct device *dev,
  
- const struct bus_type pci_bus_type = {
- 	.name		= "pci",
-+	.driver_override = true,
- 	.match		= pci_bus_match,
- 	.uevent		= pci_uevent,
- 	.probe		= pci_device_probe,
-diff --git a/drivers/pci/pci-sysfs.c b/drivers/pci/pci-sysfs.c
-index 16eaaf749ba9..a9006cf4e9c8 100644
---- a/drivers/pci/pci-sysfs.c
-+++ b/drivers/pci/pci-sysfs.c
-@@ -615,33 +615,6 @@ static ssize_t devspec_show(struct device *dev,
- static DEVICE_ATTR_RO(devspec);
- #endif
+@@ -323,37 +322,9 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
+ 
+ static DEVICE_ATTR_RO(modalias);
  
 -static ssize_t driver_override_store(struct device *dev,
 -				     struct device_attribute *attr,
 -				     const char *buf, size_t count)
 -{
--	struct pci_dev *pdev = to_pci_dev(dev);
+-	struct subchannel *sch = to_subchannel(dev);
 -	int ret;
 -
--	ret = driver_set_override(dev, &pdev->driver_override, buf, count);
+-	ret = driver_set_override(dev, &sch->driver_override, buf, count);
 -	if (ret)
 -		return ret;
 -
@@ -215,96 +183,44 @@ index 16eaaf749ba9..a9006cf4e9c8 100644
 -static ssize_t driver_override_show(struct device *dev,
 -				    struct device_attribute *attr, char *buf)
 -{
--	struct pci_dev *pdev = to_pci_dev(dev);
+-	struct subchannel *sch = to_subchannel(dev);
 -	ssize_t len;
 -
 -	device_lock(dev);
--	len = sysfs_emit(buf, "%s\n", pdev->driver_override);
+-	len = sysfs_emit(buf, "%s\n", sch->driver_override);
 -	device_unlock(dev);
 -	return len;
 -}
 -static DEVICE_ATTR_RW(driver_override);
 -
- static struct attribute *pci_dev_attrs[] = {
- 	&dev_attr_power_state.attr,
- 	&dev_attr_resource.attr,
-@@ -669,7 +642,6 @@ static struct attribute *pci_dev_attrs[] = {
- #ifdef CONFIG_OF
- 	&dev_attr_devspec.attr,
- #endif
+ static struct attribute *subch_attrs[] = {
+ 	&dev_attr_type.attr,
+ 	&dev_attr_modalias.attr,
 -	&dev_attr_driver_override.attr,
- 	&dev_attr_ari_enabled.attr,
  	NULL,
  };
-diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index bccc7a4bdd79..b4707640e102 100644
---- a/drivers/pci/probe.c
-+++ b/drivers/pci/probe.c
-@@ -2488,7 +2488,6 @@ static void pci_release_dev(struct device *dev)
- 	pci_release_of_node(pci_dev);
- 	pcibios_release_device(pci_dev);
- 	pci_bus_put(pci_dev->bus);
--	kfree(pci_dev->driver_override);
- 	bitmap_free(pci_dev->dma_alias_mask);
- 	dev_dbg(dev, "device released\n");
- 	kfree(pci_dev);
-diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-index d43745fe4c84..460852f79f29 100644
---- a/drivers/vfio/pci/vfio_pci_core.c
-+++ b/drivers/vfio/pci/vfio_pci_core.c
-@@ -1987,9 +1987,8 @@ static int vfio_pci_bus_notifier(struct notifier_block *nb,
- 	    pdev->is_virtfn && physfn == vdev->pdev) {
- 		pci_info(vdev->pdev, "Captured SR-IOV VF %s driver_override\n",
- 			 pci_name(pdev));
--		pdev->driver_override = kasprintf(GFP_KERNEL, "%s",
--						  vdev->vdev.ops->name);
--		WARN_ON(!pdev->driver_override);
-+		WARN_ON(device_set_driver_override(&pdev->dev,
-+						   vdev->vdev.ops->name));
- 	} else if (action == BUS_NOTIFY_BOUND_DRIVER &&
- 		   pdev->is_virtfn && physfn == vdev->pdev) {
- 		struct pci_driver *drv = pci_dev_driver(pdev);
-diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
-index e4b27aecbf05..79a2b5dfd694 100644
---- a/drivers/xen/xen-pciback/pci_stub.c
-+++ b/drivers/xen/xen-pciback/pci_stub.c
-@@ -598,6 +598,8 @@ static int pcistub_seize(struct pci_dev *dev,
- 	return err;
- }
  
-+static struct pci_driver xen_pcibk_pci_driver;
-+
- /* Called when 'bind'. This means we must _NOT_ call pci_reset_function or
-  * other functions that take the sysfs lock. */
- static int pcistub_probe(struct pci_dev *dev, const struct pci_device_id *id)
-@@ -609,8 +611,8 @@ static int pcistub_probe(struct pci_dev *dev, const struct pci_device_id *id)
+@@ -1356,9 +1327,11 @@ static int css_bus_match(struct device *dev, const struct device_driver *drv)
+ 	struct subchannel *sch = to_subchannel(dev);
+ 	const struct css_driver *driver = to_cssdriver(drv);
+ 	struct css_device_id *id;
++	int ret;
  
- 	match = pcistub_match(dev);
+ 	/* When driver_override is set, only bind to the matching driver */
+-	if (sch->driver_override && strcmp(sch->driver_override, drv->name))
++	ret = device_match_driver_override(dev, drv);
++	if (ret == 0)
+ 		return 0;
  
--	if ((dev->driver_override &&
--	     !strcmp(dev->driver_override, PCISTUB_DRIVER_NAME)) ||
-+	if (device_match_driver_override(&dev->dev,
-+					 &xen_pcibk_pci_driver.driver) > 0 ||
- 	    match) {
+ 	for (id = driver->subchannel_type; id->match_flags; id++) {
+@@ -1415,6 +1388,7 @@ static int css_uevent(const struct device *dev, struct kobj_uevent_env *env)
  
- 		if (dev->hdr_type != PCI_HEADER_TYPE_NORMAL
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 1c270f1d5123..57e9463e4347 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -575,12 +575,6 @@ struct pci_dev {
- 	u8		supported_speeds; /* Supported Link Speeds Vector */
- 	phys_addr_t	rom;		/* Physical address if not from BAR */
- 	size_t		romlen;		/* Length if not from BAR */
--	/*
--	 * Driver name to force a match.  Do not set directly, because core
--	 * frees it.  Use driver_set_override() to set or clear it.
--	 */
--	const char	*driver_override;
--
- 	unsigned long	priv_flags;	/* Private flags for the PCI driver */
- 
- 	/* These methods index pci_reset_fn_methods[] */
+ static const struct bus_type css_bus_type = {
+ 	.name     = "css",
++	.driver_override = true,
+ 	.match    = css_bus_match,
+ 	.probe    = css_probe,
+ 	.remove   = css_remove,
 -- 
 2.53.0
 
