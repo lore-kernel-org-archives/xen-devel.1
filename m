@@ -4,34 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C037F532CC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259879.1553241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15CA3F532C0
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1259869.1553207 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXO-0000Cw-RM; Tue, 24 Mar 2026 01:26:30 +0000
+	id 1w4qXN-0007zS-7a; Tue, 24 Mar 2026 01:26:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259879.1553241; Tue, 24 Mar 2026 01:26:30 +0000
+Received: by outflank-mailman (output) from mailman id 1259869.1553207; Tue, 24 Mar 2026 01:26:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXO-0000BI-Jb; Tue, 24 Mar 2026 01:26:30 +0000
-Received: by outflank-mailman (input) for mailman id 1259879;
- Tue, 24 Mar 2026 01:01:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1w4qXN-0007xw-1j; Tue, 24 Mar 2026 01:26:29 +0000
+Received: by outflank-mailman (input) for mailman id 1259869;
+ Tue, 24 Mar 2026 00:59:54 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=t6JZ=BY=kernel.org=dakr@srs-se1.protection.inumbo.net>)
- id 1w4q8k-0005Au-6W
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:01:02 +0000
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ec01ef05-271c-11f1-9ccf-f158ae23cfc8;
- Tue, 24 Mar 2026 02:01:00 +0100 (CET)
+ (envelope-from <dakr@kernel.org>) id 1w4q7e-0004gw-3f
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 00:59:54 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1w4q7d-004soF-FK
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:59:53 +0100
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <dakr@kernel.org>)
+ id 69c1e1de-e002-0a2a0a5209dd-0a2a4502d854-26
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 01:59:53 +0100
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <dakr@kernel.org>)
+ id 69c1e208-63bb-0a2a45020019-ac6904fea2b6-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 01:59:53 +0100
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6F07260121;
- Tue, 24 Mar 2026 01:00:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F37F1C4CEF7;
- Tue, 24 Mar 2026 01:00:49 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 87C0F60120;
+ Tue, 24 Mar 2026 00:59:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 138D4C4CEF7;
+ Tue, 24 Mar 2026 00:59:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +50,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec01ef05-271c-11f1-9ccf-f158ae23cfc8
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314059;
-	bh=ByobimVvZngWYiBS4MISNoCZaILbn7MyP0EmUHxONX8=;
+	s=k20201202; t=1774313991;
+	bh=8SBWPlY0FpAPUZM3VGM6jk8MBe902KSJN4WiLZGAbHc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=M5cmM+6DyqmK+EAGRvLHS/yaDqvmCvw5jU4r7SCyXiBwcQBFFqbb4X/i4pXN2bi2S
-	 gHkRbl+Xo3RELYoiG4jfGiG71cPBeRkIjOhdvO7LyCtTJjVMWWsggEZfDrMHEQh/LT
-	 sJPml12ZLm2ZXWcUV7+rSBuPDv4wlXIGpfa5Mp3UMgF0NSXsREGrGnuvEljzT3nxKU
-	 rRCqRHzFA+L/AZEsNVivSFaFs9zyzzt9OOmEyPjs+2mnPiQ4PBAEg9i9nAYF6+ohUT
-	 5vkv2XGga3nnGd1hHPKmfzckD1wY8wwkbKkdLTe4mZgsX9KBZZceAs6EiZe7MaJYyF
-	 N2W+3BMlOYL3w==
+	b=fg9y82iadfDPF6nOAy0HmPYPAiOP6FG/VDHn1TkIcmsusWoR+G/nVZNnCuZY075br
+	 gKlvWvjVdGmnI0JgptoDvayEdCUtkEYfsg2A7PluZUkmjkJczc4SoAIa2b+24cTLMO
+	 ehoUBK1kyWeitGv4Js4jW16nmf/+SUVzGnTpP2KwCYTWTgtSAqvsLMsfsTs35ptcMx
+	 Qhx+u6Ww/NKX1+DPPnLU1acTql1U6mNB+wnFZugPadRV0p5Gw0gHRTgVhOLxhxmRdq
+	 AfBcD9mRlS2Zl/SNmQhvetfwNouTevadSCvwGk1WKIFaHCmyoKhqRcaFynIdgVlqMc
+	 HA/jQLBEPF5WA==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -105,14 +112,17 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	Danilo Krummrich <dakr@kernel.org>,
 	Gui-Dong Han <hanguidong02@gmail.com>
-Subject: [PATCH 09/12] s390/cio: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:13 +0100
-Message-ID: <20260324005919.2408620-10-dakr@kernel.org>
+Subject: [PATCH 02/12] bus: fsl-mc: use generic driver_override infrastructure
+Date: Tue, 24 Mar 2026 01:59:06 +0100
+Message-ID: <20260324005919.2408620-3-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1774313993-40696DB8-A42AFC8A/0/0
+X-purgate-type: clean
+X-purgate-size: 5000
 
 When a driver is probed through __driver_attach(), the bus' match()
 callback is called without the device lock held, thus accessing the
@@ -127,53 +137,52 @@ held is intentional. [1]
 Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
 Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
 Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-Fixes: ebc3d1791503 ("s390/cio: introduce driver_override on the css bus")
+Fixes: 1f86a00c1159 ("bus/fsl-mc: add support for 'driver_override' in the mc-bus")
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/s390/cio/cio.h |  5 -----
- drivers/s390/cio/css.c | 34 ++++------------------------------
- 2 files changed, 4 insertions(+), 35 deletions(-)
+ drivers/bus/fsl-mc/fsl-mc-bus.c   | 43 +++++--------------------------
+ drivers/vfio/fsl-mc/vfio_fsl_mc.c |  4 +--
+ include/linux/fsl/mc.h            |  4 ---
+ 3 files changed, 8 insertions(+), 43 deletions(-)
 
-diff --git a/drivers/s390/cio/cio.h b/drivers/s390/cio/cio.h
-index 08a5e9380e75..bad142c536e1 100644
---- a/drivers/s390/cio/cio.h
-+++ b/drivers/s390/cio/cio.h
-@@ -103,11 +103,6 @@ struct subchannel {
- 	struct work_struct todo_work;
- 	struct schib_config config;
- 	u64 dma_mask;
--	/*
--	 * Driver name to force a match.  Do not set directly, because core
--	 * frees it.  Use driver_set_override() to set or clear it.
--	 */
--	const char *driver_override;
- } __attribute__ ((aligned(8)));
+diff --git a/drivers/bus/fsl-mc/fsl-mc-bus.c b/drivers/bus/fsl-mc/fsl-mc-bus.c
+index c117745cf206..221146e4860b 100644
+--- a/drivers/bus/fsl-mc/fsl-mc-bus.c
++++ b/drivers/bus/fsl-mc/fsl-mc-bus.c
+@@ -86,12 +86,16 @@ static int fsl_mc_bus_match(struct device *dev, const struct device_driver *drv)
+ 	struct fsl_mc_device *mc_dev = to_fsl_mc_device(dev);
+ 	const struct fsl_mc_driver *mc_drv = to_fsl_mc_driver(drv);
+ 	bool found = false;
++	int ret;
  
- DECLARE_PER_CPU_ALIGNED(struct irb, cio_irb);
-diff --git a/drivers/s390/cio/css.c b/drivers/s390/cio/css.c
-index 5ab239f38588..e5a0ec6b4e3e 100644
---- a/drivers/s390/cio/css.c
-+++ b/drivers/s390/cio/css.c
-@@ -159,7 +159,6 @@ static void css_subchannel_release(struct device *dev)
+ 	/* When driver_override is set, only bind to the matching driver */
+-	if (mc_dev->driver_override) {
+-		found = !strcmp(mc_dev->driver_override, mc_drv->driver.name);
++	ret = device_match_driver_override(dev, drv);
++	if (ret > 0) {
++		found = true;
+ 		goto out;
+ 	}
++	if (ret == 0)
++		goto out;
  
- 	sch->config.intparm = 0;
- 	cio_commit_config(sch);
--	kfree(sch->driver_override);
- 	kfree(sch);
+ 	if (!mc_drv->match_id_table)
+ 		goto out;
+@@ -210,39 +214,8 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
  }
- 
-@@ -323,37 +322,9 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
- 
  static DEVICE_ATTR_RO(modalias);
  
 -static ssize_t driver_override_store(struct device *dev,
 -				     struct device_attribute *attr,
 -				     const char *buf, size_t count)
 -{
--	struct subchannel *sch = to_subchannel(dev);
+-	struct fsl_mc_device *mc_dev = to_fsl_mc_device(dev);
 -	int ret;
 -
--	ret = driver_set_override(dev, &sch->driver_override, buf, count);
+-	if (WARN_ON(dev->bus != &fsl_mc_bus_type))
+-		return -EINVAL;
+-
+-	ret = driver_set_override(dev, &mc_dev->driver_override, buf, count);
 -	if (ret)
 -		return ret;
 -
@@ -183,44 +192,77 @@ index 5ab239f38588..e5a0ec6b4e3e 100644
 -static ssize_t driver_override_show(struct device *dev,
 -				    struct device_attribute *attr, char *buf)
 -{
--	struct subchannel *sch = to_subchannel(dev);
+-	struct fsl_mc_device *mc_dev = to_fsl_mc_device(dev);
 -	ssize_t len;
 -
 -	device_lock(dev);
--	len = sysfs_emit(buf, "%s\n", sch->driver_override);
+-	len = sysfs_emit(buf, "%s\n", mc_dev->driver_override);
 -	device_unlock(dev);
 -	return len;
 -}
 -static DEVICE_ATTR_RW(driver_override);
 -
- static struct attribute *subch_attrs[] = {
- 	&dev_attr_type.attr,
+ static struct attribute *fsl_mc_dev_attrs[] = {
  	&dev_attr_modalias.attr,
 -	&dev_attr_driver_override.attr,
  	NULL,
  };
  
-@@ -1356,9 +1327,11 @@ static int css_bus_match(struct device *dev, const struct device_driver *drv)
- 	struct subchannel *sch = to_subchannel(dev);
- 	const struct css_driver *driver = to_cssdriver(drv);
- 	struct css_device_id *id;
-+	int ret;
+@@ -345,6 +318,7 @@ ATTRIBUTE_GROUPS(fsl_mc_bus);
  
- 	/* When driver_override is set, only bind to the matching driver */
--	if (sch->driver_override && strcmp(sch->driver_override, drv->name))
-+	ret = device_match_driver_override(dev, drv);
-+	if (ret == 0)
- 		return 0;
- 
- 	for (id = driver->subchannel_type; id->match_flags; id++) {
-@@ -1415,6 +1388,7 @@ static int css_uevent(const struct device *dev, struct kobj_uevent_env *env)
- 
- static const struct bus_type css_bus_type = {
- 	.name     = "css",
+ const struct bus_type fsl_mc_bus_type = {
+ 	.name = "fsl-mc",
 +	.driver_override = true,
- 	.match    = css_bus_match,
- 	.probe    = css_probe,
- 	.remove   = css_remove,
+ 	.match = fsl_mc_bus_match,
+ 	.uevent = fsl_mc_bus_uevent,
+ 	.probe = fsl_mc_probe,
+@@ -910,9 +884,6 @@ static struct notifier_block fsl_mc_nb;
+  */
+ void fsl_mc_device_remove(struct fsl_mc_device *mc_dev)
+ {
+-	kfree(mc_dev->driver_override);
+-	mc_dev->driver_override = NULL;
+-
+ 	/*
+ 	 * The device-specific remove callback will get invoked by device_del()
+ 	 */
+diff --git a/drivers/vfio/fsl-mc/vfio_fsl_mc.c b/drivers/vfio/fsl-mc/vfio_fsl_mc.c
+index 462fae1aa538..b4c3958201b2 100644
+--- a/drivers/vfio/fsl-mc/vfio_fsl_mc.c
++++ b/drivers/vfio/fsl-mc/vfio_fsl_mc.c
+@@ -424,9 +424,7 @@ static int vfio_fsl_mc_bus_notifier(struct notifier_block *nb,
+ 
+ 	if (action == BUS_NOTIFY_ADD_DEVICE &&
+ 	    vdev->mc_dev == mc_cont) {
+-		mc_dev->driver_override = kasprintf(GFP_KERNEL, "%s",
+-						    vfio_fsl_mc_ops.name);
+-		if (!mc_dev->driver_override)
++		if (device_set_driver_override(dev, vfio_fsl_mc_ops.name))
+ 			dev_warn(dev, "VFIO_FSL_MC: Setting driver override for device in dprc %s failed\n",
+ 				 dev_name(&mc_cont->dev));
+ 		else
+diff --git a/include/linux/fsl/mc.h b/include/linux/fsl/mc.h
+index 897d6211c163..1da63f2d7040 100644
+--- a/include/linux/fsl/mc.h
++++ b/include/linux/fsl/mc.h
+@@ -178,9 +178,6 @@ struct fsl_mc_obj_desc {
+  * @regions: pointer to array of MMIO region entries
+  * @irqs: pointer to array of pointers to interrupts allocated to this device
+  * @resource: generic resource associated with this MC object device, if any.
+- * @driver_override: driver name to force a match; do not set directly,
+- *                   because core frees it; use driver_set_override() to
+- *                   set or clear it.
+  *
+  * Generic device object for MC object devices that are "attached" to a
+  * MC bus.
+@@ -214,7 +211,6 @@ struct fsl_mc_device {
+ 	struct fsl_mc_device_irq **irqs;
+ 	struct fsl_mc_resource *resource;
+ 	struct device_link *consumer_link;
+-	const char *driver_override;
+ };
+ 
+ #define to_fsl_mc_device(_dev) \
 -- 
 2.53.0
 
