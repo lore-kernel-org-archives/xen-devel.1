@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF94FEC102
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 19:45:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261361.1554407 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3D1BD58CC9
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 23:03:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261402.1554416 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w57gN-00031P-Vx; Tue, 24 Mar 2026 19:44:55 +0000
+	id 1w5Alp-0001Kp-Hy; Tue, 24 Mar 2026 23:02:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261361.1554407; Tue, 24 Mar 2026 19:44:55 +0000
+Received: by outflank-mailman (output) from mailman id 1261402.1554416; Tue, 24 Mar 2026 23:02:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w57gN-00031I-T0; Tue, 24 Mar 2026 19:44:55 +0000
-Received: by outflank-mailman (input) for mailman id 1261361;
- Tue, 24 Mar 2026 19:44:54 +0000
+	id 1w5Alp-0001Ki-FM; Tue, 24 Mar 2026 23:02:45 +0000
+Received: by outflank-mailman (input) for mailman id 1261402;
+ Tue, 24 Mar 2026 23:02:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <broonie@kernel.org>) id 1w57gM-00031C-Rf
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 19:44:54 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1w5Alo-0001Kc-7Q
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 23:02:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w57gL-002Hgi-0t
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 20:44:53 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1w5Aln-007qHu-H1
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 00:02:43 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <broonie@kernel.org>)
- id 69c2e9a8-bab6-0a2a0a5309dd-0a2a450bbffe-18
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 20:44:52 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <broonie@kernel.org>)
- id 69c2e9b3-ef63-0a2a450b0019-ac6904fea0ea-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 20:44:52 +0100
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2B3A3600AC;
- Tue, 24 Mar 2026 19:44:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF553C19424;
- Tue, 24 Mar 2026 19:44:42 +0000 (UTC)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 69c31805-e002-0a2a0a5209dd-0a2a4501a004-26
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 00:02:43 +0100
+Received: from [40.107.209.3]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 69c31810-6400-0a2a45010019-286bd1030708-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 00:02:43 +0100
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by BN8PR03MB5075.namprd03.prod.outlook.com (2603:10b6:408:df::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Tue, 24 Mar
+ 2026 23:02:37 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.20.9723.030; Tue, 24 Mar 2026
+ 23:02:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,116 +55,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:In-Reply-To:References:Subject:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774381490;
-	bh=WRF/0A79XI/IfrPujL8sWiRG4jtPsIHG8/HKlYhxfwg=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=BI/PyKSYvjLJXWbEpQrc+czH+55hhTQfVKT55Uu1wKsITHQaRklHZhshTVjzHQFZN
-	 XI99w4CrCK+yRfm2877TM5yV4pPdvKaG1DWbUoq9X2UMljaiVAeNppp3zNtFe6VQcR
-	 Nbxio4BzKuKvbSdbHpiqyp9b0V4Wi4iBFmRLBu0AraFrnoul9PN3a4ntDRFnw+1WBV
-	 6VOLh/84HoNWnxFvJA4p13awciT/KZz8A8WdIkArI2aCUbV0ZkSk5h4r/JYUTPRIIT
-	 T8Jt8zQSnSc69wMDv4JXXRT2onYDSQlxz5UqGBDTvOp1c1OxGFbD7+EZxoeS8MPSTJ
-	 8n38/skizDzlQ==
-From: Mark Brown <broonie@kernel.org>
-To: Russell King <linux@armlinux.org.uk>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Ioana Ciornei <ioana.ciornei@nxp.com>, Nipun Gupta <nipun.gupta@amd.com>, 
- Nikhil Agarwal <nikhil.agarwal@amd.com>, 
- "K. Y. Srinivasan" <kys@microsoft.com>, 
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
- Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
- Bjorn Helgaas <bhelgaas@google.com>, Armin Wolf <W_Armin@gmx.de>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, 
- Vineeth Vijayan <vneethv@linux.ibm.com>, 
- Peter Oberparleiter <oberpar@linux.ibm.com>, 
- Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
- Alexander Gordeev <agordeev@linux.ibm.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- Sven Schnelle <svens@linux.ibm.com>, 
- Harald Freudenberger <freude@linux.ibm.com>, 
- Holger Dengler <dengler@linux.ibm.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, 
- Alex Williamson <alex@shazbot.org>, Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
- Danilo Krummrich <dakr@kernel.org>
-Cc: linux-kernel@vger.kernel.org, driver-core@lists.linux.dev, 
- linuxppc-dev@lists.ozlabs.org, linux-hyperv@vger.kernel.org, 
- linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
- linux-s390@vger.kernel.org, linux-spi@vger.kernel.org, 
- virtualization@lists.linux.dev, kvm@vger.kernel.org, 
- xen-devel@lists.xenproject.org, linux-arm-kernel@lists.infradead.org
-In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
-References: <20260324005919.2408620-1-dakr@kernel.org>
-Subject: Re: (subset) [PATCH 00/12] treewide: Convert buses to use generic
- driver_override
-Message-Id: <177436441990.98682.12977271865531185229.b4-ty@b4>
-Date: Tue, 24 Mar 2026 15:00:19 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WQr4i1aD6CjWwC4HUjTFoVx8+MtEciqSu1s80rhC/h1mk2FV0g1hgheBdgkwSXGB4ljNxg0LZZT0gnQ4+IYOhx0m1QAVha/GADpwUEa6OXEz5sViQanxq6zLSeNUetYX1L7ZjS4gBAx10Jmbga7CdijH4Pi6g615dW8tyY7mjxbtg+vMdMkcOl6oFReHIxjPoPXM4ElOF+i/qlgaG4SjNuj6Z26NeFwLp9orxcYaF9un17xudEzTwIhoLtCQLeNs5SBnUc7R6mva5ooLe4VO4jWGxYMRq1wuLhAx8+vPXx2Hx6pr7VTEwUzqcqrmEbN7seZwb4tqw4+eEf+Xu3Gkbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JqqudF5anQWFqWO2PLgWenYBP8oU9QxSD9EI6x275qA=;
+ b=OmW5WgeWOcHyP2uRIafR44kz/DAlDPmzz8tfNUxFMi672sgwt1Nd9AVhFT1QcJb1Nfd8FYNfs98GeugSZl2Q/W/x+Q2mZPHNzW3ttQ7/0QLfe5jDIHsjnyFACvkxFIFAPB1jY3m3aISzGZUWpvF0mGZ6XrARF4wD7rUzq6i2HgqwJq+Q3TXfFqqrm2khEhFHAHxX3AbkCevIOpIsnEbfMA5H5OjeC279vOzI/gDyLiq+8MlidiN9NVRmntlFfDJSXAZkoZVgg8JHaRDCGB0svmpZh+biMYzi7q8CjWACVV6sfs8PMFEOsA6Z06DeYmHEuNIAYNq2ahESch6jb58UOA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JqqudF5anQWFqWO2PLgWenYBP8oU9QxSD9EI6x275qA=;
+ b=wT5xysICdXCxcIcXmrUwsRhVv4M0bfHHLG9/HyujLwGQ/E4dF5p49LKp2Y91VlhhLlG5yzeX2YKdUA/9tnj9KfxcYbYaNkS2rPrWhzz5UT+vRdV8/qarYTbP/bK2AU1bp7yV8F6kdaZheyYOGe4peF8JzehWKXfrQ0+7cqosHpM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <0471e754-9ea7-4fb5-b573-b770713b2f53@citrix.com>
+Date: Tue, 24 Mar 2026 23:02:34 +0000
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 1/9] x86/domain: Ensure a vCPU's FPU is reset early
+To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
+References: <20260324181937.2465574-1-ross.lagerwall@citrix.com>
+ <20260324181937.2465574-2-ross.lagerwall@citrix.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+In-Reply-To: <20260324181937.2465574-2-ross.lagerwall@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO6P265CA0021.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ff::14) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev-6cc06
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1523; i=broonie@kernel.org;
- h=from:subject:message-id; bh=WRF/0A79XI/IfrPujL8sWiRG4jtPsIHG8/HKlYhxfwg=;
- b=kA0DAAoBJNaLcl1Uh9AByyZiAGnC6amgudhaUXvPlk+pDm3GoyUp8H0DzJj7P23jodGH3vgaM
- YkBMwQAAQoAHRYhBK3maKpnVxi1n+Kf6iTWi3JdVIfQBQJpwumpAAoJECTWi3JdVIfQ7W4H/0HK
- bnLD6QxQOBC+fzyIxZ6G6kEKZPO4GVW3Pfn4yfAzX5qrdKQRkDgps7IYWut/u33hS3f+Z04EmOJ
- lYrLIJIM422nR6nge6hF8EhqNBiTq/w9q7cGC48hH540F15d0sLd2//XCIGupIA1RXpBqVdzq5x
- OT6qjdHSfs8FyZ+oeQmp08Rcg1XfVc+MneH1PzidJufZ+tJUtayZw29OlGfNk6vGZ389vkRi+Ec
- XFn5qSzIYh78B0Z0zXzPv2/IjG8frEcheWdi3dJbD2bUS4h2S1US62r3HG8U3Au0lRz8ggXRMML
- 03vuVW3IP0egShhpeZHJhBzFqhYb6LFlY+k9hXc=
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
-X-purgate-ID: tlsNG-42698a/1774381492-A3630112-27420F28/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|BN8PR03MB5075:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1de09cf8-e9ac-4b27-e088-08de89f96ac4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	gTpIQekK4U98TfhyrtDLll5Zw6PTSV4Q/Ns5ckDILBwT2AzvzEAcQVCSNKGA5YKEhlMl0VXMC7hui9z1vRIxKSYCQJDBWij7PJt9IsAejpfmR+MZky7qkRCHCAtAPqIVsbker5S7BBDWyAe79VZ1mpNdwONX48fZUTKBfvYC6qMpOd5rlZ5JKXtVneeTH+O2Yfq8CjW/bbBGdGkMUsu32yYFsilDKeiZ54F93XgEBQkhs4EXSTjVFmPYQNSu7p8wKZiHAMnVmhVKFA1BrAEq9tACYg+ous9Y+mMHaCNyNxy28qJr2AnQVxq7cBPPXQcJPppdai5DjRDoLLev+0WGbHGiD/C+aIWqePxyIQd1kbjPvKFdJE6ZBQNb9pKP6+SehRRjK+hKL+c6qY93ArSvqtfaTvOZs6CEXV6QctV39qftjfUXkv7SoivRBfHYmEUSWbKaKGtfa1ccXpG4CeFHfxmyElDYdfF38fw582fWS/tInx2zvL7jkxm/R26cvpiYLP7U5DSFLD88MJLfOv319AFEOmK16oJD8jzWMos379BdARTwvLZIPrty3GzXwYV5ac5R75m/Tzt4hnCCGbbImImLC/Pib3+0W1diZ2MDaSMaWj0g9SQ7XjkMN/NmOH8+bmQZwJIcgO+4j5zR04fC6gHj0GzO6iF0LUALdqzqrrfDWhx9YRUgPTK0BgSBIqQf
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?OHpmcTBqZEpqZkVyYTU4NURoQlYraFpqMjk5WWdXTkE2RTlnWTUwZXd1NnBt?=
+ =?utf-8?B?YTEzcVMxRXBYR3NUZWUwVGVacW9UUXZUeVhGVUoyYUpzd09kVFI3SFZPTElG?=
+ =?utf-8?B?cDFRUDlRZThpbVZGYW9GVDIwM0RPZXJnRnR5MnJVUzlocmwyUEpoV1MzTzVX?=
+ =?utf-8?B?ektpOE5JajdBT0FtcHdYNW9iemhLVGRRWTl2S1lFMmdRZ0pWdnN0MFIrK0NJ?=
+ =?utf-8?B?aFg5ZlhjclR3ZlZ6Yy81Z09TeTl2S0FHR2t3OG5NNmNiU0dKTWdmSXl6RHZL?=
+ =?utf-8?B?a1A2dklZYzdBZ2lBMmF6SkNxSXhkZFMyRzMxeHY5MGNHYnVOY3V4cTlERDdp?=
+ =?utf-8?B?bVcvZjUxTVIxQmxmZEk4djc5WXFjZEw3a1J4SERmMUdOZUZ4UWlWTHE0QnE1?=
+ =?utf-8?B?a0o0NTNVTHpSYlY0aW1GbXAxYUJKNE13cTZ1eC96eG1DaitBK2xHbTdoMGlm?=
+ =?utf-8?B?V3dVaHY2QzN3QTUwU25adER1VWNnZ0xYdnhhejNTaHdYZDd1cjVnSzdkaitu?=
+ =?utf-8?B?L01ZNmZrT0J3VkpXN0I1enNOY04xdjFIaE1nK05MaTVkWUt5eGFJbThjNm1a?=
+ =?utf-8?B?dk1mRjRRMHpUVnduM0huTFFsTm1xWGhlQ1NWS1dMWGtodFNpdFBCem5qYUxI?=
+ =?utf-8?B?M2dvK1JiMENZMWp4TjZtK0dnaDR0VmNDMjZaWDRlT1FNb1pxN0lSdGRuK01Q?=
+ =?utf-8?B?ZjRrbjY1YTEvVS9VN29HK0l1WTA0N0RwK3hXZTZZMFFEK2hMalhXV3J4NGlY?=
+ =?utf-8?B?NmJzNUZOZzhaS0JwUEh6b0liSXgvbFVZa2dpODFBcG1NRjg1WVplUlMzeWdy?=
+ =?utf-8?B?SmNCT1pGUU1ORTcvSXBsbjB3NktMeENvUGF3b24xa3NNRkxBVGdrdmVTak1W?=
+ =?utf-8?B?MXBzV1g0dnMvSTd2UVB6QThlR0Z3dDBJVktLbiszdWk1WHZ6YW5IZUlTaEdz?=
+ =?utf-8?B?ckJDWm5sb2wyRWRxZEpSZzdleXE3cHBuY0wxNWNxUkdOWEdXUlF6VWFoL2tM?=
+ =?utf-8?B?cFBDSjAybkFqVzgrS2JaeUtQOFpUVnA4NmF3OUR2Q0lIRFVRNHdwQzNJS2dq?=
+ =?utf-8?B?MlJITkhkbmJrYTdzaTVWNGV0bksrcDRoZlhBY3J2S1d4Zy9jV1lreVI4Nk93?=
+ =?utf-8?B?MEJyc2orOG1FVzRady9lbkR1cjNUTllVbW51NGluajJVQVQ1b1NWS1RRMmpB?=
+ =?utf-8?B?ZWRPUjBLdlVsR2xQbVcyRHNOUTgxNFdOMENubXNZUkpDYVNqMThVQUhxUmZs?=
+ =?utf-8?B?N0wrc3A5YnYxRDRmWEtielV6dVJxbmY3TjMyMnNvSkR6SzNTZHd2WDB0TVJ4?=
+ =?utf-8?B?WmJsRVdmOFFtR1pEa01xVVFlbHMrbmlvZXJjNVZVa0pYV2pWWnBkRXlieWRN?=
+ =?utf-8?B?ejlVV3NTdXZONXZvcmoxSHdnNnBvUUdjK1hFanZ6Rm13ZW1neGo3UXp5dWVh?=
+ =?utf-8?B?SzdoeEFjbEFpRkRNRXgzb3F2ZWd5YkFNRjhDaWtyQ1J4dC9OcTc1cGErKzcy?=
+ =?utf-8?B?N2grV1liVkJJdUZ5Z3Q5V2l3V2VCQUxSMDMwcWplSUZRQzV1RTNLWlZ3aGQw?=
+ =?utf-8?B?R3BPL1lLek8wNFJ2aVlpY2hLcjBnaGtPK21sR1RmK3ZUWWd1UHBmNGpGMVBL?=
+ =?utf-8?B?MFFDQmg5Y01nQmNwM1k3MjZZdCtoOHpiSUFqd0UzZ2pHS01VR1BnMHJkK1Vi?=
+ =?utf-8?B?YW9DMFNRRVRUNFBWSmpPdXB3TUh5UDh4RzE5M3ViSXljR3FYM3FmZmsvQUhl?=
+ =?utf-8?B?ZlcvSGpqYXNVajdETlFSMHJIYVlRbWJJcElQSXVESi85aEVlUm1vb0R2NVFa?=
+ =?utf-8?B?N2hlYjZVRkl1SlFPZ0g2ZW0wYk9MaXlHT1ZNbUMxWVQ0ek1UUHl0LzFPVnlj?=
+ =?utf-8?B?SkJwNTBTL0tyM2xCNzJhSUxXVWJrMmtDZm1rdmdsczQ1NW5KdytSTlRkWVJR?=
+ =?utf-8?B?cmtUcXdvZ0swNTI3WFI4cFpFV2xJS25CakhIa0VoVzlGMzZsVGNRMTlNWGpE?=
+ =?utf-8?B?cVZ1WjdkZ0VvNjZGZXR1TTIrc0loWDhxTDdUOWIyZEJFVGFpYVFtZkRUU2dV?=
+ =?utf-8?B?NzVUb2RVQlVWTjVLZ0IrZENoVTZxaHcxamVvaHZ5aklQUFRBYW9IN0hFWWp1?=
+ =?utf-8?B?eXNiYVBqZUZVWWZ0WUE0VW40bDJlaXpmV3NPVjVVR0dVSGlpWFNvQUl0WGJo?=
+ =?utf-8?B?K1ozSnFwOTBjS2RQc0lnd0ptSTlPejJuK2xqS0V5NkNpUWhVazNDYStiQzNp?=
+ =?utf-8?B?ak44anpPb2Vudm1CVmFEK1dKQkZOQ0EyQkhhZlJuU2czMk04YURQOVhNMlRj?=
+ =?utf-8?B?UHRtcjFpdTRWbkg5OFZ2dUx0TDF2OHdralVXN1ZaN3psT3h6UEFBNk9mS25M?=
+ =?utf-8?Q?AccaddxuT7n2ta1E=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1de09cf8-e9ac-4b27-e088-08de89f96ac4
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 23:02:26.5348
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RD8ofXqEIX04yzfQBTtJ2WHb+z/4G2KBLbkgR3CxzYMZOXzZMFv88DboN/h0kCVIB/ezLGU9F3/D/YtZVohV4DxHAeHSfxniQkA5afHIhUs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5075
+X-purgate-ID: tlsNG-d62444/1774393363-48815DF3-E9764C63/0/0
 X-purgate-type: clean
-X-purgate-size: 1525
+X-purgate-size: 3290
 
-On Tue, 24 Mar 2026 01:59:04 +0100, Danilo Krummrich wrote:
-> treewide: Convert buses to use generic driver_override
-> 
-> This is the follow-up of the driver_override generalization in [1], converting
-> the remaining 11 busses and removing the now-unused driver_set_override()
-> helper.
-> 
-> All of them (except AP, which has a different race condition) are prone to the
-> potential UAF described in [2], caused by accessing the driver_override field
-> from their corresponding match() callback.
-> 
-> [...]
+On 24/03/2026 6:19 pm, Ross Lagerwall wrote:
+> When using eager-fpu, a vCPU's FPU is always marked as initialized on
+> context switch but it is possible that neither vcpu_reset_fpu() nor
+> vcpu_setup_fpu() has been called on it.
 
-Applied to
+How?
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-7.0
+I don't think a PV vCPU can.  You cannot VCPUOP_up a vCPU for which
+v->is_initialised is false, and setting is_initialised involves either
+giving a good FPU, or taking the "reset" path.
 
-Thanks!
+An HVM use of VCPUOP_initialise only passes basic state, so can be used
+to set v->is_initialised without touching the FPU state.
 
-[11/12] spi: use generic driver_override infrastructure
-        https://git.kernel.org/broonie/spi/c/cc34d77dd487
+DM_INIT preserves the v->fpu_initialised-ness while not touching the
+buffer.  This is correct(ish).  FPU registers are (mostly) not modified
+on INIT.
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+>  If that happens,
+> arch_get_info_guest() would return a block of all 0's for the FPU
+> context claiming it to be valid.
+>
+> Fix this by calling vcpu_reset_fpu() during vCPU creation.
+>
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+The phrasing is a bit awkward, and the function names don't help, but it
+is something we're going to have to address properly when doing nested virt.
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+(A minor tangent which is relevant to where we want to end up)
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
+https://sandpile.org/x86/initial.htm
 
-Thanks,
-Mark
+#RESET and #INIT used to be a physical pins, but are just a message on
+the fabric. Either way they're events which alter state in well defined
+ways.
 
+From Xen's point of view, vcpu_create() is the only #RESET-like thing
+we've got.  If we didn't model crash/reboot as constructing a new
+domain, that would be the other place to use #RESET.
+
+#INIT exists explicitly for HVM guests, via the APIC interface.  Xen has
+no working model of this because HVM guests were built on PV which
+wasn't modelled on how CPUs work.
+
+v->is_initialised is a PV-ism which has infected x86 HVM and non-x86
+architectures too.  The key thing which PV vCPUs need that doesn't work
+like CPUs in the slightest is the chosen vCR3 (and vCR1 for PV64) need
+to refer to a property typed L4/L3 pagetable, and PV guests can't take a
+type ref on 0.
+
+
+Anyway, returning from the tangent ...
+
+> ---
+> New in v2
+>
+>  xen/arch/x86/domain.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+> index 9ba2774762cc..82da1c5d7b38 100644
+> --- a/xen/arch/x86/domain.c
+> +++ b/xen/arch/x86/domain.c
+> @@ -522,6 +522,8 @@ int arch_vcpu_create(struct vcpu *v)
+>          if ( (rc = vcpu_init_fpu(v)) != 0 )
+>              return rc;
+>  
+> +        vcpu_reset_fpu(v);
+> +
+
+... this really should be part of allocating the memory.
+
+First, we should never have the backing memory in the wrong state, and
+second, the idle vCPU doesn't take this path.  i.e. in
+xstate_alloc_save_area().
+
+Looking into this asks more questions.
+
+xstate_alloc_save_area() does set some of the backing state, but misses
+FXSAVE_FTW_RESET.  That's easy enough to fix, and turns out to address
+my original concern.
+
+vcpu_reset_fpu() sets v->fpu_initialised = false.  Doesn't this defeat
+the point of this patch?
+
+Maybe it's easiest just to fix FXSAVE_FTW_RESET and then purge the
+booleans in the way this series does.  I don't think trying to unpick
+any other bugfixes is going to be fruitful.
+
+~Andrew
 
