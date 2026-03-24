@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF0CAE9A777
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 12:17:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1260504.1553804 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ADBE9A77D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 12:29:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1260573.1553850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w50hd-0006BG-Kc; Tue, 24 Mar 2026 12:17:45 +0000
+	id 1w50sU-00019S-MK; Tue, 24 Mar 2026 12:28:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1260504.1553804; Tue, 24 Mar 2026 12:17:45 +0000
+Received: by outflank-mailman (output) from mailman id 1260573.1553850; Tue, 24 Mar 2026 12:28:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w50hd-0006B8-G0; Tue, 24 Mar 2026 12:17:45 +0000
-Received: by outflank-mailman (input) for mailman id 1260504;
- Tue, 24 Mar 2026 12:17:44 +0000
+	id 1w50sU-00019L-Je; Tue, 24 Mar 2026 12:28:58 +0000
+Received: by outflank-mailman (input) for mailman id 1260573;
+ Tue, 24 Mar 2026 12:28:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>)
- id 1w50hc-0006Ak-1I; Tue, 24 Mar 2026 12:17:44 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w50sT-0000iz-9U
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 12:28:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w50hZ-008qFY-O6; Tue, 24 Mar 2026 13:17:43 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1w50sS-00EGTP-L5
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 13:28:56 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 69c280e0-2eae-0a2a0a5409dd-0a2a4504e370-18
- for <multiple-recipients>; Tue, 24 Mar 2026 13:17:43 +0100
-Received: from [40.107.200.22]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <andrew.cooper@citrix.com>)
- id 69c280e5-c823-0a2a45040019-286bc8164016-3
- for <multiple-recipients>; Tue, 24 Mar 2026 13:17:42 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by BY1PR03MB7876.namprd03.prod.outlook.com (2603:10b6:a03:5b7::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Tue, 24 Mar
- 2026 12:17:11 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.20.9723.030; Tue, 24 Mar 2026
- 12:17:28 +0000
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69c2837f-e002-0a2a0a5209dd-0a2a450a8b58-34
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 13:28:56 +0100
+Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69c28388-1772-0a2a450a0019-d155da2cd587-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 13:28:56 +0100
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so639828966b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 05:28:56 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.26.190])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b9832f43ae8sm638180966b.6.2026.03.24.05.28.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Mar 2026 05:28:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,138 +53,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SEFF6EiVhC1DVQyCkq3R+UcyMlepVpjRI0H4bBXUdBsQBnJaXaAFylhwpTQeWIQnvjsPlRVHNH5QoSXPnmV4E/gKovrGC7PacXi4IPIyDER63MU5QUS0WCJ+14J+w+5n3ayfQ8VjZm86VRr+9TtbSo2z1jd6lBcWU4N5FKHSdZ8arufnIRfdWAV/9vHnWTKPmlntyT7Y5kgxyIJYoIE3NC08kKJ+yEEbknrpN9i/YPQpv8v7GF5oUZnmdll9ggGFwIrjzVLhGKQ+yfoMJqWsIiSEObp3HSPHPOUdVj6nWOwZbZKq6AigaFUyQLTiUNEpcB0ExwPX+fdOT7vWItVB+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k7fFmcOHa9xrVsy3zFKKwj0AreCu1/WA3CgGLbcb7C4=;
- b=nzGfVhC1ikQmRvnIZRlOFNijZeMc05n0S7iBb4x+LY5ehsOGJXPMHCgzEhAcN4fMuETBuYbCHqw+BHbNQrEtDqBxQhXuAVhhFgy7p3hYRuobClvUlvEN0FkwQfOvcatFUAIeNf4wAZsd+fmOjxpIcmvy/7eEZJDV2ZQ+Kg69ZucWbA1DWcT1Y4R9MFbc9+HlLuMjUaUn/KUWxgtxAk4vaUoq+rOnJltaq9XZ+JX/HJcZEZlRIfgfa+aHxOcX6NPa42Zh5bUkkXnfRIo65cr56g3PWmq3J8Lq+ZqGOsY+FDAQA/qeW3mkiThdmAjpa9huqa1lmtUypQSOmb0S+/8UOA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k7fFmcOHa9xrVsy3zFKKwj0AreCu1/WA3CgGLbcb7C4=;
- b=iDhZNazq18VSRZSA6ymeXuMzhl0c6qeK8ed8WImCmNTvR6uiU9Q5A8yBVGEyPV7XpphNa6ZiXsTCdimJbVbzWzKafquzfcUgDGobdfnNkOtbAdOm+nxiijr5cDuIfuuQrWk9xBYEwhRV1LQ5DwYvuwUc4wxvoRu3T36QKShxt10=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <e07ab218-c15c-4844-9594-dd456860f83d@citrix.com>
-Date: Tue, 24 Mar 2026 12:17:34 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-announce@lists.xen.org,
- xen-devel@lists.xen.org, xen-users@lists.xen.org,
- "Xen.org security team" <security-team-members@xen.org>
-Subject: Re: [oss-security] Xen Security Advisory 482 v2 - Linux privcmd
- driver can circumvent kernel lockdown
-To: Greg KH <greg@kroah.com>, oss-security@lists.openwall.com
-References: <E1w50W0-00Bwo0-1i@xenbits.xenproject.org>
- <2026032453-departed-thrash-f153@gregkh>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <2026032453-departed-thrash-f153@gregkh>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO0P123CA0013.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:354::6) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774355336; x=1774960136; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SjKcgpgVhPtaCMEXLSjgtM5Jeo9qa3Adh6wKPCR5tAQ=;
+        b=OXVmHXT4K9YA2DAVQHDFyR9U/jUAXr94idFXgjajE+SATmuszGQKKj1rGBZDfARCYQ
+         COLm9DcJXM9EFGnFOIs+W54KRAfuwTOsO47naFR9MmU1eNf3r7Xvu4aoAorep/umI0xY
+         3HFe1Ziir4Z6YXcnjAnIiDRG8/Y+hfSkxgIZs4n7qSfMHXCi7WccLICmgqfcwq7diVGq
+         mImWYAbnEBQsxrPNpDvocbxviHUwQOvfIMGqhESXW4benM1iCHYm0YGkHl8q1Jd5d1JV
+         4MMy54z6JQPV4Vz4cuAfbdej0HJwpBT13aoOUPf00uW1AaSFE9nUcMVh5TjvywnGKMCq
+         +Oag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774355336; x=1774960136;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=SjKcgpgVhPtaCMEXLSjgtM5Jeo9qa3Adh6wKPCR5tAQ=;
+        b=a/QRqXxl5TxY2jrydL9CnpIdvddjBWu0xWmpxao+1um9wql79cPa8yVxz71lHwhfdl
+         nl+HqZ+uxbP/UnXUvph/C1wvqzM3iK9lhIeiLstNEMF/dOR9570oaonN0I90w5DJ9nhS
+         agahnQ/RnjTG98v3BfahYbc4wPEqSDXNsL2s27lKyl6JTgKM7b4XY7Q8ZZCMoHZ54WtD
+         ZeNbHns0v/todqwTTzywIfhcljJMIJvikLb8m4LMb/6n9N4/gE6rQRISChSlRDGbgSkC
+         yVXfjO7VBXjWqW1luW/bhufuThNG3nQnul7bpRMg+Z9X55b63C+sCQ2xxcx8uhdnVwbk
+         Fc6g==
+X-Gm-Message-State: AOJu0Yyj6+ZNUSyA/0ZLc9AMvnPghFlPunbScxPfXHYN9z7qplaBP8l2
+	hqgszEdgLacXppOFqnVSPq/Kssmry3rk5XVPAmdAh2zQYcxw2nTT5Pdnxj18XQ==
+X-Gm-Gg: ATEYQzymdni2j4chJwAz1Va4K29mIteqa+oe6MicuNkUa0JlDe/iSzgB0n4NqZ1U139
+	4hDs745ugjHThynAIqr+aaxkSHPTiNMPFXMW2G+SQ2xmRjeuq3dDJptziNsP/Y2Ha6Yh2Nve7Tw
+	EWiLnCLFoTzbp7qCFs9weeLkSfgEFzttz9YHDdtWLvR8n/LG7ar1zleOsyQf2yPPatGdop7ygSw
+	IVgmn19N4OwlKL9NVc4LyHc1Ms5IGk/TXH0WkpEBdTvoKNytjyvkFBZSXBtVFzTyPx++ap8j3D5
+	PYt4vDj8ZjRLekTkLO2QU26hr7VYjbKLMeyodkw6w9qn7vc9shltsZuGqNAr7VOyX/em81hQCvV
+	QV5zI27H2FRz+rwarsYWvawIIo8fgjtNc0EiQTp85wiodT2ZT54FLnwsGVnKNJVuDRTZgzVUzh0
+	JXCLmnMJzOdPwOhEMgNYiGqslFLac=
+X-Received: by 2002:a17:906:1b17:b0:b97:91c0:fc3b with SMTP id a640c23a62f3a-b982f242b11mr1012744866b.16.1774355335307;
+        Tue, 24 Mar 2026 05:28:55 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v17 2/4] tools/xl: Allow compilation of 'xl resume' command on Arm
+Date: Tue, 24 Mar 2026 14:26:35 +0200
+Message-ID: <6a9b083bf18c9eb388076ba71041452937d29b01.1774353053.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1774353053.git.mykola_kvach@epam.com>
+References: <cover.1774353053.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|BY1PR03MB7876:EE_
-X-MS-Office365-Filtering-Correlation-Id: add4df25-f564-4f2e-8303-08de899f50cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	2yodM/wHZPp5oJZ9kIXMYuK5wMbRopQkSntfz7ImwLBSskgT61h+3nbPzkhDjN0fxJtlDT1lYrjtTurAfI0HGKJpKYlXoLEXTXiSME6hYdl/hOlpUA+1xjErINzly5nxlTyHV2d+RkTbx24txe7emgpOiILkPbNOeRqO22M9WScV855/9MhE4CCDqjdaHZ9MaMgub7GwGGvjjDU99cfVUAY2Cu51VB1zt9O8zADLxAuuc2eZWQS1QRViwDnY0wKDH77mv0F9qxmK3rHtj6lNzDwIhtkS9NI83KESxdiyyXja7+h0K7fYwqo9wNw05Akur/IWn7eEVF6Aq8Kr/qv47lat1Cjeg2eyxncmPvryTbr77vr+k4BSvw4tOKFchfkCIctPMrEgsNkSojmOX05TGqZVrluF/s8HSRMxMqBRabLAeDJhlDA709cZ2bsgWjM+E5j2XUyMlkb0Zb4i66C5wxedvEF4Mh7LUnKQXvdEDJyutPucNHuZ+p7zNt0J6xqtgGFkuuOMSfAIX+MTONMAseZ1BobrBhQ1k4ozr+j+qyc5AO9yXjavE0fX9d07lPVAN7ox+Qb6sEtKlyOhBYndOoU5FStuhGJQQy9z1NgPej8Tuhm7bPZZfE4mSUPv8r1FRMlxx4eeQkDrWgo9COIjl8eYvBl+EGO+rYGnEFD2XGdDFKvpeoei5ceEDkQvmR4O3CSeSGnvboLB+pSEMdM3vNwW+krbG2uocZnGiZqKtmw=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NDl5Rkl5Mkw1a0V1bENZWDNjcUtuMDJZZVptemtWSWVIUlB2VTF1OEdkaHNx?=
- =?utf-8?B?UHRyQVR5TXpGdTBrQkZmMjBOVW42eml4NGJQekJNUFhkcTBuUjRtblUxbmNT?=
- =?utf-8?B?N2NoRXBlaTdnN2RHR20zT2dIZzFTRm80TlJUUTdjUU45ZzR2L0Z3RWN6Wlky?=
- =?utf-8?B?MlpjTVYwREFzeTJaYWVCbVJSZm1GVzdlNXM0S3MxWmhzWkJ5YXo2OE92MGVQ?=
- =?utf-8?B?VHl2SUxVeWxFd2VvMUM2eDMvTkR0Y3BpMlB0VVgreEU5K2xrRDdCd0FBTlZm?=
- =?utf-8?B?ZUMvTVYwcGFMSmUzamZIaW5VK1BPeDhpN0xPZmpwRVRGRmtGeDNnSStMbXJN?=
- =?utf-8?B?TlZqWThqRzUyMEFHM3A4eDRmMVVQMDJpbGFvd2NwN05BeDJOVmxneGJ3QVBK?=
- =?utf-8?B?dUZoWTJwdWNDRGdKM003Uy9TeGxPejZZRWNMeGkwNy9jc3BVL1N0eHpOWnJV?=
- =?utf-8?B?WDlOaW5CYlArb0R0SXNUOVFPV3FJbWpkY0MyTGZtWXdJcG9qMXYzOHdESFZz?=
- =?utf-8?B?WUQvNWRxalBrd1owL085UkVaS2taTjQvRC81SGRleFIrZytOVDdqNlRpalJx?=
- =?utf-8?B?UURvdjIvdCtId2MvdHMxakVPWE10ZUhKVjVYeXpCbE05VEhmdmE2MWdkR1Rq?=
- =?utf-8?B?RExrZExuYXpqTjBqcDkrNTRtZ21WQms2L3N3cTB0UVJYcUhBWGs5Qlhod2NZ?=
- =?utf-8?B?T2RDY2xVdGY1OWpDSDI5S21rSTdwaHdFVWVMUGlodVVUeWNUcVdtcTVFRUQ0?=
- =?utf-8?B?ZS9vdmZlTVNWOVEvbmZBU1RDYjhCdFF4b1pOVFUvNFdTcDd4R1NPdE1kendL?=
- =?utf-8?B?OEFIYjBKdDZteHZQS3FHNGZHY09YWTJaNVc4MmF5UWZWMUJjMkU5cDJ6cXBl?=
- =?utf-8?B?eUp3VFlyb3h1WTBxOVZrS2ZoZUltaUFWa0JtNmoyY2VkMVVUTkJKYXk2cGlO?=
- =?utf-8?B?TXBDUjJiblFiUXhGcFpvVXVHN09WU2NmaHo0azJvbmJIVjF2cW9aeGFaS3c5?=
- =?utf-8?B?UXRwVXR3bXJ6MFE2aHZqRHdaeG16eXYvNVEvZzgvSDBKcFIzb3gza0tOMWJQ?=
- =?utf-8?B?REUzZC9CRHpyNkpFZ0Q0YURudjltMGhLMWsrTlR5bWVTZXBYQ3hCam5MQlFl?=
- =?utf-8?B?cldIcTVYa2JWQXdPRnZvVS9SYkZuMnBCeHYyWExDb2ZvSkw5b0kwR29EK3NB?=
- =?utf-8?B?U2RJYmFDN21NVXh5eGlxRURGaUNyajdjWDlTSzBiQ25kRFM5dGhOcWJUOHEx?=
- =?utf-8?B?UnFBK0NscmZOYzBod05yR21EY2prS01OWVdVNENnQjNvcHJuRmR6WkhuazFv?=
- =?utf-8?B?OGxUSUZHRFErUkY3WmVHVHB5R2VTcDZ6WWdySUcvcG9YcTdQa0lNYnhqNEpZ?=
- =?utf-8?B?bnAxNVQ4QmxnRUtMNVVmZCsyZEpVZUExN0lFQk5NRERCLzgySjMxUGJzUHpW?=
- =?utf-8?B?Rk5mN1JDY3RYdTBkM1lsWnYwZWE0bnZsa1MreXZsT3k0bWpNWmdxRHp3T0hR?=
- =?utf-8?B?WXlNNnBMRTh5Y3NvVHgvZzFsaVFaa0N3SEJiMUpjWEZDSGwwU0tGeWxCeWtH?=
- =?utf-8?B?aDdkeSt4T2tRUjNzT0ZqWW1WbXpzVW0rU0pPb00xc1hJVkRHT0NrbUhseHBw?=
- =?utf-8?B?WjRPWndrZm00VjhQdVZXaGxjSU9TeC9EY1NoWkFETXpqUVJJd0Q4V2NrckEy?=
- =?utf-8?B?V1ZkUUhNd2xtbkowc2NUMlVEMHRQNjk1dVZjMm9IUzB3WmExOFB2ajE5MXdT?=
- =?utf-8?B?SURtL0ErMGloS2xpTnprdUtpK28wVk9PYjdDZkt1YndUVnVDUDQ1L25OUDV5?=
- =?utf-8?B?dnFCUG8wd1hKcmpaVG9VaXRWcWMyeDhpb0p4aTVaZlJIOVNpRnJReURPWG9X?=
- =?utf-8?B?VmRwSlR1S1dWZjVHS0xmMnNOZ1R2emV1aFF6a2RBRFNVeGQzUXo5bUlURVlZ?=
- =?utf-8?B?T3NYSngwcmpmeER0MWs3Y0ozSzdrNEN1WE9rWk4xWEpCckd6YmNpazZONkFS?=
- =?utf-8?B?RzQvTnBNLzJXY1BPVGtwTzFVUTdESXljejlJdk5vRk1UZC9ITzRnYVFyODE4?=
- =?utf-8?B?SURES1VhaWdmMGorb3hmR1BML1ZIWlVuWFZlc1k0aXJlR0JnN3ZyanhEYm1j?=
- =?utf-8?B?THRFbTYwOTE2NENtOEd2Zjdld0pDVDl5a1ZMU0Vpa3d3UXlPejQxcnhyUlNH?=
- =?utf-8?B?eUV2MjU0U05qSlZJaUpBUGQydGZaUFY4dFZlTjd4K0pUUHNXTjRGUWVIRXVh?=
- =?utf-8?B?N2JsdkZBamtyZFdQL1k5RTNYTy9TVjEzYitSbFM3eFYxYm5EVldrcDhNUXFF?=
- =?utf-8?B?ZjdrbVUybUlLS01EbzlWbERFTkhsUDhjMmp3OWk3UENvdnJvQUF4blJlLzdu?=
- =?utf-8?Q?WC1h69qyau7QsbHU=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: add4df25-f564-4f2e-8303-08de899f50cc
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 12:17:28.2983
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SXubtVYsvU7CI6DzzV8RSsHRFeyHAyQvt8AGGVXifLgQchY3GPU6cpxipK3Jy1fP8g8/Eird+lo9tU4941MacBg0zqBk9ha6HuQ7utm71zo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR03MB7876
-X-purgate-ID: tlsNG-ebf023/1774354663-124769D1-F2F3666C/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1774355336-52892900-8588D33B/0/0
 X-purgate-type: clean
-X-purgate-size: 822
+X-purgate-size: 4933
 
-On 24/03/2026 12:16 pm, Greg KH wrote:
-> On Tue, Mar 24, 2026 at 12:05:44PM +0000, Xen.org security team wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA256
->>
->>                     Xen Security Advisory XSA-482
->>                               version 2
->>
->>           Linux privcmd driver can circumvent kernel lockdown
->>
->> UPDATES IN VERSION 2
->> ====================
->>
->> Public release.
->>
->> ISSUE DESCRIPTION
->> =================
->>
->> The Linux kernel's privcmd driver can be abused to circumvent kernel
->> lockdown (secure boot), e.g. by modifying page tables to enable user
->> mode to modify kernel memory.
->>
->> The CNA covering Linux has refused to assign a CVE at this juncture.
-> This is now assigned to CVE-2026-31788
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Thankyou.  I'll send out an update.
+The "xl resume" command was previously excluded from Arm builds because
+system suspend/resume (e.g., SYSTEM_SUSPEND via vPSCI) was not
+implemented. On x86, this command is used for resume.
 
-~Andrew
+This change enables compilation of `xl resume` on Arm regardless of the
+underlying implementation status, making the tool available for testing
+and future feature support. The relevant libxl infrastructure and handler
+functions are already present and usable.
+
+Note: This does not imply full system suspend/resume support on Arm.
+      The `xl suspend` command still does not work on Arm platforms.
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+---
+Changes in v16:
+- no chnages
+---
+ tools/include/libxl.h     |  1 -
+ tools/xl/xl.h             |  4 ++--
+ tools/xl/xl_cmdtable.c    |  4 ++--
+ tools/xl/xl_migrate.c     |  2 +-
+ tools/xl/xl_saverestore.c |  2 +-
+ tools/xl/xl_vmcontrol.c   | 12 ++++++------
+ 6 files changed, 12 insertions(+), 13 deletions(-)
+
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index bc35e412da..14b9e4a859 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1145,7 +1145,6 @@ typedef struct libxl__ctx libxl_ctx;
+  * restoring or migrating a domain. In this case the related functions
+  * should be expected to return failure. That is:
+  *  - libxl_domain_suspend
+- *  - libxl_domain_resume
+  *  - libxl_domain_remus_start
+  */
+ #if defined(__arm__) || defined(__aarch64__)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 9000df00de..63db30a6eb 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -65,7 +65,7 @@ static const char migrate_permission_to_go[]=
+     "domain is yours, you are cleared to unpause";
+ static const char migrate_report[]=
+     "my copy unpause results are as follows";
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+   /* followed by one byte:
+    *     0: everything went well, domain is running
+@@ -130,8 +130,8 @@ int main_migrate_receive(int argc, char **argv);
+ int main_save(int argc, char **argv);
+ int main_migrate(int argc, char **argv);
+ int main_suspend(int argc, char **argv);
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ int main_resume(int argc, char **argv);
+-#endif
+ int main_dump_core(int argc, char **argv);
+ int main_pause(int argc, char **argv);
+ int main_unpause(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 06a0039718..bcb2d233cc 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -198,12 +198,12 @@ const struct cmd_spec cmd_table[] = {
+       "Suspend a domain to RAM",
+       "<Domain>",
+     },
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "resume",
+       &main_resume, 0, 1,
+       "Resume a domain from RAM",
+       "<Domain>",
+     },
+-#endif
+     { "dump-core",
+       &main_dump_core, 0, 1,
+       "Core dump a domain",
+@@ -548,7 +548,7 @@ const struct cmd_spec cmd_table[] = {
+       "                        checkpoint must be disabled.\n"
+       "-p                      Use COLO userspace proxy."
+     },
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+     { "devd",
+       &main_devd, 0, 1,
+       "Daemon that listens for devices and launches backends",
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..4b4a379aa1 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -767,7 +767,7 @@ int main_remus(int argc, char **argv)
+     close(send_fd);
+     return EXIT_FAILURE;
+ }
+-#endif
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ /*
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..747094ec7b 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -270,7 +270,7 @@ int main_save(int argc, char **argv)
+     return EXIT_SUCCESS;
+ }
+ 
+-#endif /* LIBXL_HAVE_NO_SUSPEND_RESUME */
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
+ 
+ 
+ 
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index c813732838..93766f631b 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -38,11 +38,6 @@ static void suspend_domain(uint32_t domid)
+     libxl_domain_suspend_only(ctx, domid, NULL);
+ }
+ 
+-static void resume_domain(uint32_t domid)
+-{
+-    libxl_domain_resume(ctx, domid, 1, NULL);
+-}
+-
+ int main_suspend(int argc, char **argv)
+ {
+     int opt;
+@@ -55,6 +50,12 @@ int main_suspend(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
++#endif /* !LIBXL_HAVE_NO_SUSPEND_RESUME */
++
++static void resume_domain(uint32_t domid)
++{
++    libxl_domain_resume(ctx, domid, 1, NULL);
++}
+ 
+ int main_resume(int argc, char **argv)
+ {
+@@ -68,7 +69,6 @@ int main_resume(int argc, char **argv)
+ 
+     return EXIT_SUCCESS;
+ }
+-#endif
+ 
+ static void pause_domain(uint32_t domid)
+ {
+-- 
+2.43.0
+
 
