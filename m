@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C441F532C0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEC49F532C8
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259873.1553220 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1259889.1553284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXN-00088d-RM; Tue, 24 Mar 2026 01:26:29 +0000
+	id 1w4qXR-0001Is-Pe; Tue, 24 Mar 2026 01:26:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259873.1553220; Tue, 24 Mar 2026 01:26:29 +0000
+Received: by outflank-mailman (output) from mailman id 1259889.1553284; Tue, 24 Mar 2026 01:26:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXN-00087U-Gd; Tue, 24 Mar 2026 01:26:29 +0000
-Received: by outflank-mailman (input) for mailman id 1259873;
- Tue, 24 Mar 2026 01:00:14 +0000
+	id 1w4qXR-0001C5-4l; Tue, 24 Mar 2026 01:26:33 +0000
+Received: by outflank-mailman (input) for mailman id 1259889;
+ Tue, 24 Mar 2026 01:05:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dakr@kernel.org>) id 1w4q7x-0001KD-VV
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:00:13 +0000
+ (envelope-from <dakr@kernel.org>) id 1w4qCv-0005BA-CQ
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:05:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w4q7x-00GhUR-Bc
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:00:13 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1w4qCu-00774E-OC
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:05:20 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dakr@kernel.org>)
- id 69c1e217-2eae-0a2a0a5409dd-0a2a4503cb90-12
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:00:13 +0100
+ id 69c1e34f-5cb7-0a2a0a5109dd-0a2a4509d162-2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:05:20 +0100
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <dakr@kernel.org>)
- id 69c1e21b-1947-0a2a45030019-aceafc1fc250-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:00:13 +0100
+ id 69c1e25e-e484-0a2a45090019-aceafc1fd662-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:19 +0100
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3E66F435AF;
- Tue, 24 Mar 2026 01:00:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98196C4CEF7;
- Tue, 24 Mar 2026 01:00:01 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 506F040596;
+ Tue, 24 Mar 2026 01:01:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08877C4CEF7;
+ Tue, 24 Mar 2026 01:01:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,15 +52,15 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314011;
-	bh=n8Np19d6r8hZP3UfKo2xpfAW6SzD3g4bxMFuAspv2o0=;
+	s=k20201202; t=1774314078;
+	bh=TSvMQrmWsjFbNL0IRf0H97QbCggIeEqWbPsKuLbLU4A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=UaBbnH6K5PmlHRTAv2QpnB7L6Oek7DpdNRyO3DZniaipx3T4OH8aQr0MWP23mO+nu
-	 bfEd7aSy90OVPMONjSRlDR+BhJep8zQkJXj3EuTj+FdEJ7Qnz1bGziLI/rD717BPhk
-	 b0qHoXuzvssQYxYxewY0RImhKrTnweUaP7b/G+xvgY86M3nL9h5A6viQlAO4cSYSa+
-	 cTGrxdvuLF6cPLHkd8IEp6jriRalhcgoEWJdpC8TUtaMkApKMmASLxQKpBLi0FdDUk
-	 0+jAHYnaXmU5F6R+YbNbusudC4hG0VrqpKsYsYuN7LhJINQFVJ9EqYYng4Ywg7RJ8h
-	 GAjkf9mQ3//og==
+	b=Nt7EnChiw/TSy7uxZL1NGCwc80dLd1NcsHa2f5yOYAsRoEuKZz3R4Zc2Jky7pI1PP
+	 fX38CD0xPqsoAlbl8ygm7B7pQvUt21fJRqnuUoJzuGo/w1SwTYIkOuYMzYD6++PKyO
+	 GlReyOV0V5oiuGn3d19d+P/0YVof0JWBUjpR7gvA94kKmmZrfsVK4M+LbO6J+BIjBR
+	 GNNZS00+k7bbnjV9HfcGI/slE84pV5D8Pfilwv3HA2XN5pcxtA4pjQBZ0SSOkup/06
+	 D6VUmZOVMXZtjDLE4b4uCWJCE0Qw6XcyAZU2CAHH+xAz/p1g0p71QYF5eQjsqdnxat
+	 5+zw/NsuVO7yw==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -112,17 +112,17 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	Danilo Krummrich <dakr@kernel.org>,
 	Gui-Dong Han <hanguidong02@gmail.com>
-Subject: [PATCH 04/12] hv: vmbus: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:08 +0100
-Message-ID: <20260324005919.2408620-5-dakr@kernel.org>
+Subject: [PATCH 11/12] spi: use generic driver_override infrastructure
+Date: Tue, 24 Mar 2026 01:59:15 +0100
+Message-ID: <20260324005919.2408620-12-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1774314013-4846E72C-6E93E4BE/0/0
+X-purgate-ID: tlsNG-bad1c0/1774314080-622B0A73-AAC03874/13/0
 X-purgate-type: clean
-X-purgate-size: 3844
+X-purgate-size: 4107
 
 When a driver is probed through __driver_attach(), the bus' match()
 callback is called without the device lock held, thus accessing the
@@ -134,109 +134,99 @@ care of proper locking internally.
 Note that calling match() from __driver_attach() without the device lock
 held is intentional. [1]
 
+Also note that we do not enable the driver_override feature of struct
+bus_type, as SPI - in contrast to most other buses - passes "" to
+sysfs_emit() when the driver_override pointer is NULL. Thus, printing
+"\n" instead of "(null)\n".
+
 Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
 Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
 Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-Fixes: d765edbb301c ("vmbus: add driver_override support")
+Fixes: 5039563e7c25 ("spi: Add driver_override SPI device attribute")
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/hv/vmbus_drv.c | 36 +++++-------------------------------
- include/linux/hyperv.h |  5 -----
- 2 files changed, 5 insertions(+), 36 deletions(-)
+ drivers/spi/spi.c       | 19 +++++++------------
+ include/linux/spi/spi.h |  5 -----
+ 2 files changed, 7 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/hv/vmbus_drv.c b/drivers/hv/vmbus_drv.c
-index bc4fc1951ae1..bc8dfd136f3c 100644
---- a/drivers/hv/vmbus_drv.c
-+++ b/drivers/hv/vmbus_drv.c
-@@ -541,34 +541,6 @@ static ssize_t device_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(device);
+diff --git a/drivers/spi/spi.c b/drivers/spi/spi.c
+index 53dee314d76a..4101c2803eb3 100644
+--- a/drivers/spi/spi.c
++++ b/drivers/spi/spi.c
+@@ -50,7 +50,6 @@ static void spidev_release(struct device *dev)
+ 	struct spi_device	*spi = to_spi_device(dev);
  
--static ssize_t driver_override_store(struct device *dev,
--				     struct device_attribute *attr,
--				     const char *buf, size_t count)
--{
--	struct hv_device *hv_dev = device_to_hv_device(dev);
--	int ret;
--
--	ret = driver_set_override(dev, &hv_dev->driver_override, buf, count);
--	if (ret)
--		return ret;
--
--	return count;
--}
--
--static ssize_t driver_override_show(struct device *dev,
--				    struct device_attribute *attr, char *buf)
--{
--	struct hv_device *hv_dev = device_to_hv_device(dev);
+ 	spi_controller_put(spi->controller);
+-	kfree(spi->driver_override);
+ 	free_percpu(spi->pcpu_statistics);
+ 	kfree(spi);
+ }
+@@ -73,10 +72,9 @@ static ssize_t driver_override_store(struct device *dev,
+ 				     struct device_attribute *a,
+ 				     const char *buf, size_t count)
+ {
+-	struct spi_device *spi = to_spi_device(dev);
+ 	int ret;
+ 
+-	ret = driver_set_override(dev, &spi->driver_override, buf, count);
++	ret = __device_set_driver_override(dev, buf, count);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -86,13 +84,8 @@ static ssize_t driver_override_store(struct device *dev,
+ static ssize_t driver_override_show(struct device *dev,
+ 				    struct device_attribute *a, char *buf)
+ {
+-	const struct spi_device *spi = to_spi_device(dev);
 -	ssize_t len;
 -
 -	device_lock(dev);
--	len = sysfs_emit(buf, "%s\n", hv_dev->driver_override);
+-	len = sysfs_emit(buf, "%s\n", spi->driver_override ? : "");
 -	device_unlock(dev);
--
 -	return len;
--}
--static DEVICE_ATTR_RW(driver_override);
--
- /* Set up per device attributes in /sys/bus/vmbus/devices/<bus device> */
- static struct attribute *vmbus_dev_attrs[] = {
- 	&dev_attr_id.attr,
-@@ -599,7 +571,6 @@ static struct attribute *vmbus_dev_attrs[] = {
- 	&dev_attr_channel_vp_mapping.attr,
- 	&dev_attr_vendor.attr,
- 	&dev_attr_device.attr,
--	&dev_attr_driver_override.attr,
- 	NULL,
- };
++	guard(spinlock)(&dev->driver_override.lock);
++	return sysfs_emit(buf, "%s\n", dev->driver_override.name ?: "");
+ }
+ static DEVICE_ATTR_RW(driver_override);
  
-@@ -711,9 +682,11 @@ static const struct hv_vmbus_device_id *hv_vmbus_get_id(const struct hv_driver *
+@@ -376,10 +369,12 @@ static int spi_match_device(struct device *dev, const struct device_driver *drv)
  {
- 	const guid_t *guid = &dev->dev_type;
- 	const struct hv_vmbus_device_id *id;
+ 	const struct spi_device	*spi = to_spi_device(dev);
+ 	const struct spi_driver	*sdrv = to_spi_driver(drv);
 +	int ret;
  
- 	/* When driver_override is set, only bind to the matching driver */
--	if (dev->driver_override && strcmp(dev->driver_override, drv->name))
-+	ret = device_match_driver_override(&dev->device, &drv->driver);
-+	if (ret == 0)
- 		return NULL;
+ 	/* Check override first, and if set, only use the named driver */
+-	if (spi->driver_override)
+-		return strcmp(spi->driver_override, drv->name) == 0;
++	ret = device_match_driver_override(dev, drv);
++	if (ret >= 0)
++		return ret;
  
- 	/* Look at the dynamic ids first, before the static ones */
-@@ -722,7 +695,7 @@ static const struct hv_vmbus_device_id *hv_vmbus_get_id(const struct hv_driver *
- 		id = hv_vmbus_dev_match(drv->id_table, guid);
+ 	/* Attempt an OF style match */
+ 	if (of_driver_match_device(dev, drv))
+diff --git a/include/linux/spi/spi.h b/include/linux/spi/spi.h
+index af7cfee7b8f6..0dc671c07d3a 100644
+--- a/include/linux/spi/spi.h
++++ b/include/linux/spi/spi.h
+@@ -159,10 +159,6 @@ extern void spi_transfer_cs_change_delay_exec(struct spi_message *msg,
+  * @modalias: Name of the driver to use with this device, or an alias
+  *	for that name.  This appears in the sysfs "modalias" attribute
+  *	for driver coldplugging, and in uevents used for hotplugging
+- * @driver_override: If the name of a driver is written to this attribute, then
+- *	the device will bind to the named driver and only the named driver.
+- *	Do not set directly, because core frees it; use driver_set_override() to
+- *	set or clear it.
+  * @pcpu_statistics: statistics for the spi_device
+  * @word_delay: delay to be inserted between consecutive
+  *	words of a transfer
+@@ -224,7 +220,6 @@ struct spi_device {
+ 	void			*controller_state;
+ 	void			*controller_data;
+ 	char			modalias[SPI_NAME_SIZE];
+-	const char		*driver_override;
  
- 	/* driver_override will always match, send a dummy id */
--	if (!id && dev->driver_override)
-+	if (!id && ret > 0)
- 		id = &vmbus_device_null;
- 
- 	return id;
-@@ -1024,6 +997,7 @@ static const struct dev_pm_ops vmbus_pm = {
- /* The one and only one */
- static const struct bus_type  hv_bus = {
- 	.name =		"vmbus",
-+	.driver_override =	true,
- 	.match =		vmbus_match,
- 	.shutdown =		vmbus_shutdown,
- 	.remove =		vmbus_remove,
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index dfc516c1c719..bf689d07d750 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -1272,11 +1272,6 @@ struct hv_device {
- 	u16 device_id;
- 
- 	struct device device;
--	/*
--	 * Driver name to force a match.  Do not set directly, because core
--	 * frees it.  Use driver_set_override() to set or clear it.
--	 */
--	const char *driver_override;
- 
- 	struct vmbus_channel *channel;
- 	struct kset	     *channels_kset;
+ 	/* The statistics */
+ 	struct spi_statistics __percpu	*pcpu_statistics;
 -- 
 2.53.0
 
