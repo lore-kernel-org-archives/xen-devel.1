@@ -4,46 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7511FD58CC9
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 23:06:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261412.1554424 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0E7FEA80D
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 05:49:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261358.1554477 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5ApX-0001ri-0g; Tue, 24 Mar 2026 23:06:35 +0000
+	id 1w5H6r-0004tD-Vw; Wed, 25 Mar 2026 05:48:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261412.1554424; Tue, 24 Mar 2026 23:06:34 +0000
+Received: by outflank-mailman (output) from mailman id 1261358.1554477; Wed, 25 Mar 2026 05:48:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5ApW-0001rb-UU; Tue, 24 Mar 2026 23:06:34 +0000
-Received: by outflank-mailman (input) for mailman id 1261412;
- Tue, 24 Mar 2026 23:06:34 +0000
+	id 1w5H6r-0004q0-OO; Wed, 25 Mar 2026 05:48:53 +0000
+Received: by outflank-mailman (input) for mailman id 1261358;
+ Tue, 24 Mar 2026 19:42:20 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1w5ApW-0001rV-5i
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 23:06:34 +0000
+ (envelope-from <W_Armin@gmx.de>) id 1w57dr-0002yH-L4
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 19:42:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5ApV-00CCyo-Hi
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 00:06:33 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1w57dp-00A8nJ-BC
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 20:42:18 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 69c318f3-5cb7-0a2a0a5109dd-0a2a450ccf14-4
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 00:06:33 +0100
-Received: from [52.101.48.0]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <andrew.cooper@citrix.com>)
- id 69c318f7-f93d-0a2a450c0019-34653000544a-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 00:06:33 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by BN8PR03MB5075.namprd03.prod.outlook.com (2603:10b6:408:df::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Tue, 24 Mar
- 2026 23:06:28 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%6]) with mapi id 15.20.9723.030; Tue, 24 Mar 2026
- 23:06:17 +0000
+ (envelope-from <W_Armin@gmx.de>)
+ id 69c2e911-e002-0a2a0a5209dd-0a2a450a936e-4
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 20:42:18 +0100
+Received: from [212.227.15.15] (helo=mout.gmx.net)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <W_Armin@gmx.de>)
+ id 69c2e91a-1772-0a2a450a0019-d4e30f0fd4db-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 20:42:18 +0100
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJE6L-1vpN8Z0wQN-00N053; Tue, 24
+ Mar 2026 20:42:04 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,118 +48,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aJozst9O3M87v2lZ2nIHcSYrdrtXyk5y6FEYQALlAQ7zWXoB2z1cgSko2QleShZFAxfPtl+S+E/UOjCb36fdgnAoHhXsdF6rZhkXSFPzxJOhRr1z9T/4lk7E+oflHevoLfvxrxdoYGKnXGSOjmMAVNUkXazGtCQs5OtX1fjykLakaLrwyeFLskDRznEkcx22ZrHdCCvlfD0axTvfmiOGTnBWP1YlrVh4dAlHn3mx9T3pnezeheUoIxGdvaHP72PyJbLTq8CQQl6f8lmR7KWYEiZdn7s0h91Q9XHJ2LfDMQd05PvcmantWkreQvycS29X36chCtuT/crmlWhY0mvxsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R3hE3kjxXjWhaZlJa7ok9Meu56FGPwW/AwBCYLkZ6iA=;
- b=MeHrff1w8ooTTc8GBF1Fw0wQhoBOZGY2GGiL8M+XU0pRzaN5LpY1Oq6MqZtblNgfl/1+0wX8QQIJhYFQFYaaXhVu/wwfYSkaxIrUAW0WZ6SmEqmlYqZ0nlvPD5x2eaxkFlUqMYImJBH3StRvbzTp0bfpM9GqkDBjtXau3witLlpJXxVX6sAVNIT00/FNI9/uC8rJT6ynqUmi6LvKSmRuQ8jZ3jUnqdrTG8xYqr0nINCOfr02XNnyqfW/7jPjGh+eE2qOQWdsyiySKEa9dwljKKFgAZa1iGkoGl6+KtivE3jF2P4PAEWrPkm0c7hDAyeActpqjZVH2WTeQTV9ovMSzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R3hE3kjxXjWhaZlJa7ok9Meu56FGPwW/AwBCYLkZ6iA=;
- b=f1WO5qjNIZASs0tyVLq0btWtEJIorX2R1T2cAKrRYmXiNVf6gTKdZAolL/tl3LgV9d0fShB8JwCA4WMGLZeWJFrlwSRSx9PPp/qtD6v68QBLbX78bhYYtu2X+qHaRK5gEW1sk2uMiRt6pv7VtRsqoIb2UgmpVU0eJeKe7VBlkjQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <954f0aaf-bfc9-466e-aa53-58a35fc54922@citrix.com>
-Date: Tue, 24 Mar 2026 23:06:24 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 5/9] x86/traps: Remove lazy FPU support
-To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
-References: <20260324181937.2465574-1-ross.lagerwall@citrix.com>
- <20260324181937.2465574-6-ross.lagerwall@citrix.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <20260324181937.2465574-6-ross.lagerwall@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0268.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:37a::20) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=s31663417 header.d=gmx.de header.i="w_armin@gmx.de" header.h="X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1774381324; x=1774986124; i=w_armin@gmx.de;
+	bh=GGWlvb2n3V4HaO8XQjVf9hW7XhuAzhwdcuVxgB5Di8o=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=ifvPJxvAhtek8q+pCeeyITFinHZKIJzqVHZWD0oNtpjBH1VESRkcZtiJ0sFNIVvR
+	 +0tHnwJ18q+Z71ZrayUhU0vh5SiV1GPGwunmQmajPwVX4HXy1AnJ3jVQfcgYl/q0G
+	 7GpW93BfuY2TpH5ZIbrRDM1vyhuFD6vaYRPfQPHs2isrsWWvKb6H9asjxTkbrpRtL
+	 3vWhE/L/BP8v1cfiKyUpLIqIJ9UK3RIuIZtPTLzS2X0sC5ZIUWvYq6SpqamMfPhIB
+	 3LW6jjBPxIdqM4s0+mkdYOjqtI6GXvkruP0E13jFM3HajUwIRo0KgB5dciwbWvO8R
+	 RuMZmDRORvSKwwSOYw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Message-ID: <50ed0e80-c1f3-48da-81f6-9edd2b1c35e1@gmx.de>
+Date: Tue, 24 Mar 2026 20:41:59 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|BN8PR03MB5075:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30fe698e-6b37-4631-215d-08de89f9f441
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	98MZ0zYUv30TOhYYD8oSnnkeDA5+9sVFkX2O2EEy0NLl9CiZnZSxgH4+QZH0FgkpVwlUrL69Di/73wfOYeNS3UDPyiQ4wqcsQD8NgelCuJghQzR5mVm3d4I6FRPbv5Ych6gO0Zke2FGs1kUaaXnCVC9oUc9HJ6vvMgb6ZbKruBRq7OytohJoYgA/hfU5JNr4UdeYuP17XziTrMNfEeEERo2K06NQdkJWy5uuu5rGr+xOduUagOEYzl/phd2eAfmqXzmkNJl+nsBFDXQBq5LtS7NA/aAyHLGyZ1nCjhQkTOsgSS3E2f8A6X6LzdiKyIMH2lEC5b6SVSEwTCOI7VBfQOfZUxn7lGaXyPmMYvgXUXMFYQfP49cG4xqNymBqEl+Z7igsnwJGMOid5Jh0ZWs53ACx/TG9h0E8U1i89DDkztGocUdkjlJ4i1yjaCEdUtgEhcogYXzoYRmUFslJVhlpP4LkDhs/pXSazoKEhN1rPSobZVXx7TztpN4/ZpNuS5nK2kK2iDSm2u6OGrSU8ixfYp6T//YzVPpVbHM+XGpoRhXKa/mEYHpi0V/qo52D77VuMJsG3eyO2Zc2oNDP69Cx8Kv6mPw+1Sq7oLyXgIptLvdA3EGKxYzsctVfIi+3T818LUb5Ab6w5wsgCniVQ/tmUWT1SisbUkcnVN/ueNcGxQKKUbz3O0K0ITSn5d+4U+QGIBI/JIXEK7GsJY6NJmfkx51Pz8tsQPAaqgQtPCZx0Xk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?a3RPbGFWMmFmK1FFZGl2WFRzdXUyeWZOdHY3eDQ0OGpGcjJBVkp3bWVsZGUy?=
- =?utf-8?B?VnE3QytIblV3cE03aGdKVUVqWWkwMWJFWHdjaWJWQk9aam5weHpoWlB6allJ?=
- =?utf-8?B?eGNTTzlZT2pHYTVqRWZwdzltOUR0L05iY2ExQlhpZytOaWZkcUhEbWY2TEIy?=
- =?utf-8?B?STRGUHBpR2ppbEFPQkh0NUFsL1ZnRWRqWENoYzZ6NG9vVU5rSUhCTlNtdmlM?=
- =?utf-8?B?ZkptT3VpVDV6WEhOWFIvNVZxVVVSMjZ1SjUyWHZmM3Nic0hhbzFhcGJJbGNO?=
- =?utf-8?B?OUEwZ3l0NXNNZmdJTTNPUFdyUm1LUTBvWWttcVFBTVQrY3cvNEdjWWVqSmFs?=
- =?utf-8?B?TWRnOHdacjZoSEkyQjVTdjBHL1JMM0JGQTZoRlRqeUNrcW9TdC9SbGl4L3Fk?=
- =?utf-8?B?cHhnUy9zanpjbjdFK1hsaXRvRisvQzdnWTVmMTc5NUxBMzJQYzFCREc0ZW12?=
- =?utf-8?B?UGxmZjZhWVBoeUpqMzdIUU1obmZYTjVKNzljRWtsQmhPbHVHcFFOWVFhcHJZ?=
- =?utf-8?B?dDVXT3pVQSs4bnlMSnQ2YUsxRVp1eHBKQm1MZmNrS3FGMVZGYWwxWDFrNHFK?=
- =?utf-8?B?VXpndFIvcU0vcEVhbkthZDdFS3BTYlJKNmhBK3lNZjhPN2dTTit6TldKZ2xz?=
- =?utf-8?B?dktFci9RbGlUNFNVQnVnK1hITGk1VEhpeHBMSFloMzNvNDlyTTVuQjhCcG1F?=
- =?utf-8?B?R2NLZHZZTnNRNEJmTFZpaUZjL1BTeUpyU1hjaitPT3dmU0FBY1ZjYzc2KzVC?=
- =?utf-8?B?S0pyajcybmFZMVoyK0NIY3RNQjJXRHdkNGxyYUMvNW1qTXRDNVVZUmhaMTFZ?=
- =?utf-8?B?a2ZPelNnQlJUdEJFdUUyS1Z0VFpQdnlTVXdpS0FJRlRpY3hzaXh3RXYvT2Zt?=
- =?utf-8?B?a2o5MnIwMUlwelZLdEZHTjBvUll6QXZyRUN2WlhiUTZWd0FoRm9BeTRJSFZM?=
- =?utf-8?B?d2lVVXU3VXV0eDgvZWhWd2h5RWpoWTNsYkJLQ2pQTDFxZEhCS2cyR2VaVUVV?=
- =?utf-8?B?VHpJS3BEN0l2UDlNSzFjcTdldktFOCswclluNlZXMGxLMEltZXBpZTJrQ21T?=
- =?utf-8?B?bUVtRjlGUmF5VDhST0tQb29TTmdjc1lmOXM2cFhFL3NFUlFiOEt5ZGlDc1Vl?=
- =?utf-8?B?RXFGSElVdFRSMEhCdm5NOTBMU1RvelpoTG1hdm9OUnFTS0xiNVdQVVhtZyta?=
- =?utf-8?B?RjQxZHBpUmhVU0YzM2wyYzRNZWwyd3IyVXFpM2dwYzFRTFJOZmgvSjBIMkk4?=
- =?utf-8?B?YVNWM1lSWS9JT1BYRU5jV1hobXNmV1dtbkk0TktDcXVhZGJuSTlHOG0wLzdM?=
- =?utf-8?B?RnAzeDI5Y1U2MGh1ZW8xTmFOdDJFQkh4LzVpdks0RERycWJjOWt5ZG5Qczc5?=
- =?utf-8?B?OExlcW9FYTR6bk00d2ZhdnBYTkhCTDZzb1ZLZzlMcW9aTlo2czJ5UlU3cHky?=
- =?utf-8?B?UnRrN3JUTG9mZkNtV3IydzJUc3BtQVlLeVgwTHd2MHNmeVBMUE12SCtJQXlK?=
- =?utf-8?B?MW8wWFN4ZElTT1pnQlUrVHkzK3RtbmVoTDVBM05YV0M4SkQrVENzTXc5WjBo?=
- =?utf-8?B?MHFzWHByQ0ZtQlk1cm40VVRLRVI4TE9Ca3dNakhuNFhlcy9NK3VmdGxVeWtk?=
- =?utf-8?B?ZnpsZnIrWWNPMndtdm1pT2pFWkpvN3Y3MHRiYVBEdVg4L2d3WHdBcDZ6WWUy?=
- =?utf-8?B?MThIWXhOT2c1NHVxcWlwUjE4cG1LOHpsU1BhekRNQXkwWjBMdXU1VFJEdnRL?=
- =?utf-8?B?TW1sY0pnbzdmUllaWkpLaUtRRElLSWxoOXJXaG5remswNEtkWDZLQlpQbFBH?=
- =?utf-8?B?Ujk4ZzRRYjJ6K29LUmtibzVMVHNEWGZKTEc3RzJEcDNndzBoZjFPU3YrNlhJ?=
- =?utf-8?B?cVp1MzdzODhQbytCNG9UVTZ0Mi85Zyt0dy9saVQ2MDhidUNsK0E4Y0dpTXlZ?=
- =?utf-8?B?NmRuYzB0VUxqZWh5N01HNldVYko5NThITXlpWlRzT3lva1ZGUnlHYjJscjdU?=
- =?utf-8?B?R3hoanhab0Q4N09NcGVJVlRmTkY2b3VxNVBILzlhMXVNUzhLMHAvNGlMMWc4?=
- =?utf-8?B?eHM2NEJHY2NBcjFrT0hxUlMxZW95L2M3L3RhODdXQlA5NHVnbmRBN0tyVlFh?=
- =?utf-8?B?YW02bXBheFkrSCtZL2czK2NSNDhlYklPMGQ3WjlDTm9DNmFHQ2xIdUI5MUta?=
- =?utf-8?B?bVJlN1gzeWlER1VpRFlxcEphdEt6dkE0WFB1ajJ0MHVzcmpXZG5GM25hSmpN?=
- =?utf-8?B?dlpOVG45aDcyNVY4WlJPbGdZcTBxNWJwUVRVdE1TZDd6Q2ZCaHh1OVh4eFhv?=
- =?utf-8?B?Qy9CQ0Z6eDdVcFAvYnk2SnBYWHdVSTREQjkxeG5JazJ5TVVpYVpXVnRrMVMv?=
- =?utf-8?Q?aAu51fUYN1WxqU6U=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30fe698e-6b37-4631-215d-08de89f9f441
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 23:06:17.2526
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D7R7dekNFjK4zNKzzfNM1ouxhlBZjoe21goKI5XTWASxeSNWxdeYezTPgO90kenmM7ULL8eZE7dsQ6oNo0GHV6kNBfRv5EkJTcUwyZJQOvI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5075
-X-purgate-ID: tlsNG-d25034/1774393593-6F8A4734-1D89974B/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/12] platform/wmi: use generic driver_override
+ infrastructure
+To: Danilo Krummrich <dakr@kernel.org>, Russell King <linux@armlinux.org.uk>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Ioana Ciornei <ioana.ciornei@nxp.com>, Nipun Gupta <nipun.gupta@amd.com>,
+ Nikhil Agarwal <nikhil.agarwal@amd.com>, "K. Y. Srinivasan"
+ <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+ Long Li <longli@microsoft.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ Vineeth Vijayan <vneethv@linux.ibm.com>,
+ Peter Oberparleiter <oberpar@linux.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Sven Schnelle <svens@linux.ibm.com>,
+ Harald Freudenberger <freude@linux.ibm.com>,
+ Holger Dengler <dengler@linux.ibm.com>, Mark Brown <broonie@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>, Alex Williamson <alex@shazbot.org>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
+Cc: linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
+ linuxppc-dev@lists.ozlabs.org, linux-hyperv@vger.kernel.org,
+ linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+ linux-s390@vger.kernel.org, linux-spi@vger.kernel.org,
+ virtualization@lists.linux.dev, kvm@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-arm-kernel@lists.infradead.org,
+ Gui-Dong Han <hanguidong02@gmail.com>
+References: <20260324005919.2408620-1-dakr@kernel.org>
+ <20260324005919.2408620-7-dakr@kernel.org>
+Content-Language: en-US
+From: Armin Wolf <W_Armin@gmx.de>
+In-Reply-To: <20260324005919.2408620-7-dakr@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:KKKjGPofriNO2Y7ny8bzLW+ogpO7D8lGPS1ezTtV32qPriElMBO
+ jvtg2QtMPBSSFpK+K9f9/W3IHaIUxxM1SjbuL+eF3f/6Z6WRzj/HQbWdJ/0smqYXW/iekvq
+ A+6iz88zZSNd21TB/fuLIMalZH7T5q5DuSXS3//CqYIoGgOXkyuC7c9IHxbPHBnE7ZSgdkY
+ FFp1rdFLmEZzrK9+h1giQ==
+UI-OutboundReport: notjunk:1;M01:P0:kIvBWcj/zXQ=;/niOuXlWvI8Na8RihCaK5ylBNR/
+ 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
+X-purgate-ID: tlsNG-4011c0/1774381338-BF096900-8898AC5E/0/0
 X-purgate-type: clean
-X-purgate-size: 379
+X-purgate-size: 4278
 
-On 24/03/2026 6:19 pm, Ross Lagerwall wrote:
-> From: Wei Liu <wei.liu2@citrix.com>
->
-> Remove lazy FPU support from the #NM exception handler used by PV
-> guests since fully_eager_fpu is now always true.
->
-> Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Am 24.03.26 um 01:59 schrieb Danilo Krummrich:
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> When a driver is probed through __driver_attach(), the bus' match()
+> callback is called without the device lock held, thus accessing the
+> driver_override field without a lock, which can cause a UAF.
+>
+> Fix this by using the driver-core driver_override infrastructure taking
+> care of proper locking internally.
+>
+> Note that calling match() from __driver_attach() without the device lock
+> held is intentional. [1]
+
+Reviewed-by: Armin Wolf <W_Armin@gmx.de>
+
+> Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@ker=
+nel.org/ [1]
+> Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
+> Closes: https://bugzilla.kernel.org/show_bug.cgi?id=3D220789
+> Fixes: 12046f8c77e0 ("platform/x86: wmi: Add driver_override support")
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>   drivers/platform/wmi/core.c | 36 +++++-------------------------------
+>   include/linux/wmi.h         |  4 ----
+>   2 files changed, 5 insertions(+), 35 deletions(-)
+>
+> diff --git a/drivers/platform/wmi/core.c b/drivers/platform/wmi/core.c
+> index b8e6b9a421c6..750e3619724e 100644
+> --- a/drivers/platform/wmi/core.c
+> +++ b/drivers/platform/wmi/core.c
+> @@ -842,39 +842,11 @@ static ssize_t expensive_show(struct device *dev,
+>   }
+>   static DEVICE_ATTR_RO(expensive);
+>  =20
+> -static ssize_t driver_override_show(struct device *dev, struct device_a=
+ttribute *attr,
+> -				    char *buf)
+> -{
+> -	struct wmi_device *wdev =3D to_wmi_device(dev);
+> -	ssize_t ret;
+> -
+> -	device_lock(dev);
+> -	ret =3D sysfs_emit(buf, "%s\n", wdev->driver_override);
+> -	device_unlock(dev);
+> -
+> -	return ret;
+> -}
+> -
+> -static ssize_t driver_override_store(struct device *dev, struct device_=
+attribute *attr,
+> -				     const char *buf, size_t count)
+> -{
+> -	struct wmi_device *wdev =3D to_wmi_device(dev);
+> -	int ret;
+> -
+> -	ret =3D driver_set_override(dev, &wdev->driver_override, buf, count);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return count;
+> -}
+> -static DEVICE_ATTR_RW(driver_override);
+> -
+>   static struct attribute *wmi_attrs[] =3D {
+>   	&dev_attr_modalias.attr,
+>   	&dev_attr_guid.attr,
+>   	&dev_attr_instance_count.attr,
+>   	&dev_attr_expensive.attr,
+> -	&dev_attr_driver_override.attr,
+>   	NULL
+>   };
+>   ATTRIBUTE_GROUPS(wmi);
+> @@ -943,7 +915,6 @@ static void wmi_dev_release(struct device *dev)
+>   {
+>   	struct wmi_block *wblock =3D dev_to_wblock(dev);
+>  =20
+> -	kfree(wblock->dev.driver_override);
+>   	kfree(wblock);
+>   }
+>  =20
+> @@ -952,10 +923,12 @@ static int wmi_dev_match(struct device *dev, const=
+ struct device_driver *driver)
+>   	const struct wmi_driver *wmi_driver =3D to_wmi_driver(driver);
+>   	struct wmi_block *wblock =3D dev_to_wblock(dev);
+>   	const struct wmi_device_id *id =3D wmi_driver->id_table;
+> +	int ret;
+>  =20
+>   	/* When driver_override is set, only bind to the matching driver */
+> -	if (wblock->dev.driver_override)
+> -		return !strcmp(wblock->dev.driver_override, driver->name);
+> +	ret =3D device_match_driver_override(dev, driver);
+> +	if (ret >=3D 0)
+> +		return ret;
+>  =20
+>   	if (id =3D=3D NULL)
+>   		return 0;
+> @@ -1076,6 +1049,7 @@ static struct class wmi_bus_class =3D {
+>   static const struct bus_type wmi_bus_type =3D {
+>   	.name =3D "wmi",
+>   	.dev_groups =3D wmi_groups,
+> +	.driver_override =3D true,
+>   	.match =3D wmi_dev_match,
+>   	.uevent =3D wmi_dev_uevent,
+>   	.probe =3D wmi_dev_probe,
+> diff --git a/include/linux/wmi.h b/include/linux/wmi.h
+> index 75cb0c7cfe57..14fb644e1701 100644
+> --- a/include/linux/wmi.h
+> +++ b/include/linux/wmi.h
+> @@ -18,16 +18,12 @@
+>    * struct wmi_device - WMI device structure
+>    * @dev: Device associated with this WMI device
+>    * @setable: True for devices implementing the Set Control Method
+> - * @driver_override: Driver name to force a match; do not set directly,
+> - *		     because core frees it; use driver_set_override() to
+> - *		     set or clear it.
+>    *
+>    * This represents WMI devices discovered by the WMI driver core.
+>    */
+>   struct wmi_device {
+>   	struct device dev;
+>   	bool setable;
+> -	const char *driver_override;
+>   };
+>  =20
+>   /**
 
