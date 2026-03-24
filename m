@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB720F532C6
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259885.1553271 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F598F532CB
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1259883.1553258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXQ-0000ub-Jp; Tue, 24 Mar 2026 01:26:32 +0000
+	id 1w4qXP-0000gP-R9; Tue, 24 Mar 2026 01:26:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259885.1553271; Tue, 24 Mar 2026 01:26:32 +0000
+Received: by outflank-mailman (output) from mailman id 1259883.1553258; Tue, 24 Mar 2026 01:26:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXQ-0000pD-4G; Tue, 24 Mar 2026 01:26:32 +0000
-Received: by outflank-mailman (input) for mailman id 1259885;
- Tue, 24 Mar 2026 01:02:33 +0000
+	id 1w4qXP-0000cf-Jx; Tue, 24 Mar 2026 01:26:31 +0000
+Received: by outflank-mailman (input) for mailman id 1259883;
+ Tue, 24 Mar 2026 01:01:30 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dakr@kernel.org>) id 1w4qAD-00054A-AO
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:02:33 +0000
+ (envelope-from <dakr@kernel.org>) id 1w4q9C-0005wi-63
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:01:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w4qAC-00CORR-LX
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:02:32 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1w4q9B-004t4m-GW
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:01:29 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dakr@kernel.org>)
- id 69c1e2a8-bab6-0a2a0a5309dd-0a2a4502ca30-0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:02:32 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69c1e257-e002-0a2a0a5209dd-0a2a4503b5ea-18
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:29 +0100
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <dakr@kernel.org>)
- id 69c1e22e-63bb-0a2a45020019-aceafc1fbf76-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:00:32 +0100
+ id 69c1e268-1947-0a2a45030019-ac6904fe8d24-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:29 +0100
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 74AEC41714;
- Tue, 24 Mar 2026 01:00:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A3D3C4CEF7;
- Tue, 24 Mar 2026 01:00:20 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id E26DB6012B;
+ Tue, 24 Mar 2026 01:01:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C0E8C4CEF7;
+ Tue, 24 Mar 2026 01:01:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,15 +52,15 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314030;
-	bh=dVVILhMfLU1pcFlan9xwtWDXjlzo37eXkY5X05ORIlo=;
+	s=k20201202; t=1774314087;
+	bh=KpxTlQdpK2jKnd62P5I8EEqT3CEkSotjkNoM+lvw6Dc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oy7fnz0d39vA8DeLusS4kHmpWkfMdqaP0nrRciue0f+NOlsV7gOuADpO1Y48Jjg9f
-	 MITiU8jQzjjQb8f5VUB0Og0V6KsNuJU5YifXigPhRS4NOb+330wbT3injb7ng50liP
-	 ZqYubh6zWsY6SNwUAyB+PO/HpqXevDVNbsUrBXfFeyOD+eL8N4tmQ16wvpDq7I+Ye8
-	 iZ8d4J+xr7mwhTpSI2vWE/qgDpXkD4QpCa5xOcpu1lnxoYQaD4trGqmzV3/Z0aby4P
-	 mzbq8SomMXXsM9/OneYtf9uUKMBhTaqwO7Z3Va8LBxv8TI9anEyvFJWgLAVmMmZ6P7
-	 5kfjdP36uus8A==
+	b=rLAmVR6groUQSZRplygjMn68KJDDiLrGR9Vctd6Afc3mLDKzHEaYGbMFZ3KXs4fK4
+	 MUoXCr/h6SfvTEE4yAlc7KGjraQ8CFJXtGn8f5BkmJWMm1J/pjXgfy9qXciydDWGLj
+	 XNYlWwVjufJG5KD0z7v9ARc0FuEyAjjiYRe15HPbrYCuuNFi4/b/eyHrklVGEVsCSm
+	 lE5k5muPCMjo/9hKdfl5T5LohS8mNpZoGcTFibqf76OQzdeH43NHUrx9bEVbSisncq
+	 g/N4LXJNuBtUlzaGXa8b6D8KnPgXir5STaz/+AS+2urYkPCvbB6vpDfKREYcWyPp9d
+	 47Lib8DntPlsA==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -110,136 +110,135 @@ Cc: linux-kernel@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-arm-kernel@lists.infradead.org,
-	Danilo Krummrich <dakr@kernel.org>,
-	Gui-Dong Han <hanguidong02@gmail.com>
-Subject: [PATCH 06/12] platform/wmi: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:10 +0100
-Message-ID: <20260324005919.2408620-7-dakr@kernel.org>
+	Danilo Krummrich <dakr@kernel.org>
+Subject: [PATCH 12/12] driver core: remove driver_set_override()
+Date: Tue, 24 Mar 2026 01:59:16 +0100
+Message-ID: <20260324005919.2408620-13-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1774314032-4189DDB8-A9B9F29E/0/0
+X-purgate-ID: tlsNG-33051d/1774314089-4846E72C-6B87008D/0/0
 X-purgate-type: clean
-X-purgate-size: 3858
+X-purgate-size: 3736
 
-When a driver is probed through __driver_attach(), the bus' match()
-callback is called without the device lock held, thus accessing the
-driver_override field without a lock, which can cause a UAF.
+All buses have been converted from driver_set_override() to the generic
+driver_override infrastructure introduced in commit cb3d1049f4ea
+("driver core: generalize driver_override in struct device").
 
-Fix this by using the driver-core driver_override infrastructure taking
-care of proper locking internally.
+Buses now either opt into the generic sysfs callbacks via the
+bus_type::driver_override flag, or use device_set_driver_override() /
+__device_set_driver_override() directly.
 
-Note that calling match() from __driver_attach() without the device lock
-held is intentional. [1]
+Thus, remove the now-unused driver_set_override() helper.
 
-Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
-Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
-Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-Fixes: 12046f8c77e0 ("platform/x86: wmi: Add driver_override support")
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=220789
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/platform/wmi/core.c | 36 +++++-------------------------------
- include/linux/wmi.h         |  4 ----
- 2 files changed, 5 insertions(+), 35 deletions(-)
+ drivers/base/driver.c         | 75 -----------------------------------
+ include/linux/device/driver.h |  2 -
+ 2 files changed, 77 deletions(-)
 
-diff --git a/drivers/platform/wmi/core.c b/drivers/platform/wmi/core.c
-index b8e6b9a421c6..750e3619724e 100644
---- a/drivers/platform/wmi/core.c
-+++ b/drivers/platform/wmi/core.c
-@@ -842,39 +842,11 @@ static ssize_t expensive_show(struct device *dev,
+diff --git a/drivers/base/driver.c b/drivers/base/driver.c
+index 8ab010ddf709..7ed834f7199c 100644
+--- a/drivers/base/driver.c
++++ b/drivers/base/driver.c
+@@ -30,81 +30,6 @@ static struct device *next_device(struct klist_iter *i)
+ 	return dev;
  }
- static DEVICE_ATTR_RO(expensive);
  
--static ssize_t driver_override_show(struct device *dev, struct device_attribute *attr,
--				    char *buf)
+-/**
+- * driver_set_override() - Helper to set or clear driver override.
+- * @dev: Device to change
+- * @override: Address of string to change (e.g. &device->driver_override);
+- *            The contents will be freed and hold newly allocated override.
+- * @s: NUL-terminated string, new driver name to force a match, pass empty
+- *     string to clear it ("" or "\n", where the latter is only for sysfs
+- *     interface).
+- * @len: length of @s
+- *
+- * Helper to set or clear driver override in a device, intended for the cases
+- * when the driver_override field is allocated by driver/bus code.
+- *
+- * Returns: 0 on success or a negative error code on failure.
+- */
+-int driver_set_override(struct device *dev, const char **override,
+-			const char *s, size_t len)
 -{
--	struct wmi_device *wdev = to_wmi_device(dev);
--	ssize_t ret;
+-	const char *new, *old;
+-	char *cp;
+-
+-	if (!override || !s)
+-		return -EINVAL;
+-
+-	/*
+-	 * The stored value will be used in sysfs show callback (sysfs_emit()),
+-	 * which has a length limit of PAGE_SIZE and adds a trailing newline.
+-	 * Thus we can store one character less to avoid truncation during sysfs
+-	 * show.
+-	 */
+-	if (len >= (PAGE_SIZE - 1))
+-		return -EINVAL;
+-
+-	/*
+-	 * Compute the real length of the string in case userspace sends us a
+-	 * bunch of \0 characters like python likes to do.
+-	 */
+-	len = strlen(s);
+-
+-	if (!len) {
+-		/* Empty string passed - clear override */
+-		device_lock(dev);
+-		old = *override;
+-		*override = NULL;
+-		device_unlock(dev);
+-		kfree(old);
+-
+-		return 0;
+-	}
+-
+-	cp = strnchr(s, len, '\n');
+-	if (cp)
+-		len = cp - s;
+-
+-	new = kstrndup(s, len, GFP_KERNEL);
+-	if (!new)
+-		return -ENOMEM;
 -
 -	device_lock(dev);
--	ret = sysfs_emit(buf, "%s\n", wdev->driver_override);
+-	old = *override;
+-	if (cp != s) {
+-		*override = new;
+-	} else {
+-		/* "\n" passed - clear override */
+-		kfree(new);
+-		*override = NULL;
+-	}
 -	device_unlock(dev);
 -
--	return ret;
+-	kfree(old);
+-
+-	return 0;
 -}
+-EXPORT_SYMBOL_GPL(driver_set_override);
 -
--static ssize_t driver_override_store(struct device *dev, struct device_attribute *attr,
--				     const char *buf, size_t count)
--{
--	struct wmi_device *wdev = to_wmi_device(dev);
--	int ret;
--
--	ret = driver_set_override(dev, &wdev->driver_override, buf, count);
--	if (ret < 0)
--		return ret;
--
--	return count;
--}
--static DEVICE_ATTR_RW(driver_override);
--
- static struct attribute *wmi_attrs[] = {
- 	&dev_attr_modalias.attr,
- 	&dev_attr_guid.attr,
- 	&dev_attr_instance_count.attr,
- 	&dev_attr_expensive.attr,
--	&dev_attr_driver_override.attr,
- 	NULL
- };
- ATTRIBUTE_GROUPS(wmi);
-@@ -943,7 +915,6 @@ static void wmi_dev_release(struct device *dev)
- {
- 	struct wmi_block *wblock = dev_to_wblock(dev);
- 
--	kfree(wblock->dev.driver_override);
- 	kfree(wblock);
- }
- 
-@@ -952,10 +923,12 @@ static int wmi_dev_match(struct device *dev, const struct device_driver *driver)
- 	const struct wmi_driver *wmi_driver = to_wmi_driver(driver);
- 	struct wmi_block *wblock = dev_to_wblock(dev);
- 	const struct wmi_device_id *id = wmi_driver->id_table;
-+	int ret;
- 
- 	/* When driver_override is set, only bind to the matching driver */
--	if (wblock->dev.driver_override)
--		return !strcmp(wblock->dev.driver_override, driver->name);
-+	ret = device_match_driver_override(dev, driver);
-+	if (ret >= 0)
-+		return ret;
- 
- 	if (id == NULL)
- 		return 0;
-@@ -1076,6 +1049,7 @@ static struct class wmi_bus_class = {
- static const struct bus_type wmi_bus_type = {
- 	.name = "wmi",
- 	.dev_groups = wmi_groups,
-+	.driver_override = true,
- 	.match = wmi_dev_match,
- 	.uevent = wmi_dev_uevent,
- 	.probe = wmi_dev_probe,
-diff --git a/include/linux/wmi.h b/include/linux/wmi.h
-index 75cb0c7cfe57..14fb644e1701 100644
---- a/include/linux/wmi.h
-+++ b/include/linux/wmi.h
-@@ -18,16 +18,12 @@
-  * struct wmi_device - WMI device structure
-  * @dev: Device associated with this WMI device
-  * @setable: True for devices implementing the Set Control Method
-- * @driver_override: Driver name to force a match; do not set directly,
-- *		     because core frees it; use driver_set_override() to
-- *		     set or clear it.
-  *
-  * This represents WMI devices discovered by the WMI driver core.
-  */
- struct wmi_device {
- 	struct device dev;
- 	bool setable;
--	const char *driver_override;
- };
- 
  /**
+  * driver_for_each_device - Iterator for devices bound to a driver.
+  * @drv: Driver we're iterating.
+diff --git a/include/linux/device/driver.h b/include/linux/device/driver.h
+index bbc67ec513ed..aa3465a369f0 100644
+--- a/include/linux/device/driver.h
++++ b/include/linux/device/driver.h
+@@ -160,8 +160,6 @@ int __must_check driver_create_file(const struct device_driver *driver,
+ void driver_remove_file(const struct device_driver *driver,
+ 			const struct driver_attribute *attr);
+ 
+-int driver_set_override(struct device *dev, const char **override,
+-			const char *s, size_t len);
+ int __must_check driver_for_each_device(struct device_driver *drv, struct device *start,
+ 					void *data, device_iter_t fn);
+ struct device *driver_find_device(const struct device_driver *drv,
 -- 
 2.53.0
 
