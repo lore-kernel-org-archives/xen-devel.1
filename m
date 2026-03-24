@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B514FF532CA
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1259881.1553248 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB720F532C6
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 01:26:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1259885.1553271 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXP-0000Ri-90; Tue, 24 Mar 2026 01:26:31 +0000
+	id 1w4qXQ-0000ub-Jp; Tue, 24 Mar 2026 01:26:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1259881.1553248; Tue, 24 Mar 2026 01:26:31 +0000
+Received: by outflank-mailman (output) from mailman id 1259885.1553271; Tue, 24 Mar 2026 01:26:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w4qXP-0000PF-2c; Tue, 24 Mar 2026 01:26:31 +0000
-Received: by outflank-mailman (input) for mailman id 1259881;
- Tue, 24 Mar 2026 01:01:11 +0000
+	id 1w4qXQ-0000pD-4G; Tue, 24 Mar 2026 01:26:32 +0000
+Received: by outflank-mailman (input) for mailman id 1259885;
+ Tue, 24 Mar 2026 01:02:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dakr@kernel.org>) id 1w4q8t-0006VL-8C
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:01:11 +0000
+ (envelope-from <dakr@kernel.org>) id 1w4qAD-00054A-AO
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 01:02:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w4q8s-004t0e-KI
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:01:10 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1w4qAC-00CORR-LX
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 02:02:32 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dakr@kernel.org>)
- id 69c1e229-e002-0a2a0a5209dd-0a2a45049692-46
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:10 +0100
+ id 69c1e2a8-bab6-0a2a0a5309dd-0a2a4502ca30-0
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:02:32 +0100
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <dakr@kernel.org>)
- id 69c1e254-c823-0a2a45040019-aceafc1f8d64-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:01:10 +0100
+ id 69c1e22e-63bb-0a2a45020019-aceafc1fbf76-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 02:00:32 +0100
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B1AFA404E5;
- Tue, 24 Mar 2026 01:01:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931DBC2BCB0;
- Tue, 24 Mar 2026 01:00:59 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 74AEC41714;
+ Tue, 24 Mar 2026 01:00:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A3D3C4CEF7;
+ Tue, 24 Mar 2026 01:00:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,15 +52,15 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774314068;
-	bh=A7+ilLlUptt8NahoteAzf0RgIRgwKuFBHYBpfbQD/9c=;
+	s=k20201202; t=1774314030;
+	bh=dVVILhMfLU1pcFlan9xwtWDXjlzo37eXkY5X05ORIlo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=erU7fvhzJv2tp5KrkKrqx+Erdif01ZeeUOpNA4f3SMGY5Zd3volrXG0e/GJE1PA+4
-	 eGQrxZX3PAs12r5SMw5wVj3Dru900+u5sZlt2HAhjsWXohecP7okhBQJqUVMGYmK9x
-	 t4JpMcZVTz48+PY+wk5zYrMxets8K+lB6YlpzvSaaUxQizoh9N8ogOZ6kZFkBtVUt/
-	 +2U/I6kRnURbopqcXHThSae0+v5nsjA+MtxnO1+6Qp2DXSnViA+Sg/1CnS+DYaIbv9
-	 MmwreYV6dk6ePxO92r/nW6iGASWXgbC1mouwugaLRXGpdUBgdYK22pwqvUSENOqNbX
-	 RFBSTYbpYZsGA==
+	b=oy7fnz0d39vA8DeLusS4kHmpWkfMdqaP0nrRciue0f+NOlsV7gOuADpO1Y48Jjg9f
+	 MITiU8jQzjjQb8f5VUB0Og0V6KsNuJU5YifXigPhRS4NOb+330wbT3injb7ng50liP
+	 ZqYubh6zWsY6SNwUAyB+PO/HpqXevDVNbsUrBXfFeyOD+eL8N4tmQ16wvpDq7I+Ye8
+	 iZ8d4J+xr7mwhTpSI2vWE/qgDpXkD4QpCa5xOcpu1lnxoYQaD4trGqmzV3/Z0aby4P
+	 mzbq8SomMXXsM9/OneYtf9uUKMBhTaqwO7Z3Va8LBxv8TI9anEyvFJWgLAVmMmZ6P7
+	 5kfjdP36uus8A==
 From: Danilo Krummrich <dakr@kernel.org>
 To: Russell King <linux@armlinux.org.uk>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -110,188 +110,136 @@ Cc: linux-kernel@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-arm-kernel@lists.infradead.org,
-	Danilo Krummrich <dakr@kernel.org>
-Subject: [PATCH 10/12] s390/ap: use generic driver_override infrastructure
-Date: Tue, 24 Mar 2026 01:59:14 +0100
-Message-ID: <20260324005919.2408620-11-dakr@kernel.org>
+	Danilo Krummrich <dakr@kernel.org>,
+	Gui-Dong Han <hanguidong02@gmail.com>
+Subject: [PATCH 06/12] platform/wmi: use generic driver_override infrastructure
+Date: Tue, 24 Mar 2026 01:59:10 +0100
+Message-ID: <20260324005919.2408620-7-dakr@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324005919.2408620-1-dakr@kernel.org>
 References: <20260324005919.2408620-1-dakr@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1774314070-B80B39D1-08BA4308/0/0
+X-purgate-ID: tlsNG-720697/1774314032-4189DDB8-A9B9F29E/0/0
 X-purgate-type: clean
-X-purgate-size: 6288
+X-purgate-size: 3858
 
-When the AP masks are updated via apmask_store() or aqmask_store(),
-ap_bus_revise_bindings() is called after ap_attr_mutex has been
-released.
+When a driver is probed through __driver_attach(), the bus' match()
+callback is called without the device lock held, thus accessing the
+driver_override field without a lock, which can cause a UAF.
 
-This calls __ap_revise_reserved(), which accesses the driver_override
-field without holding any lock, racing against a concurrent
-driver_override_store() that may free the old string, resulting in a
-potential UAF.
+Fix this by using the driver-core driver_override infrastructure taking
+care of proper locking internally.
 
-Fix this by using the driver-core driver_override infrastructure, which
-protects all accesses with an internal spinlock.
+Note that calling match() from __driver_attach() without the device lock
+held is intentional. [1]
 
-Note that unlike most other buses, the AP bus does not check
-driver_override in its match() callback; the override is checked in
-ap_device_probe() and __ap_revise_reserved() instead.
-
-Also note that we do not enable the driver_override feature of struct
-bus_type, as AP - in contrast to most other buses - passes "" to
-sysfs_emit() when the driver_override pointer is NULL. Thus, printing
-"\n" instead of "(null)\n".
-
-Additionally, AP has a custom counter that is modified in the
-corresponding custom driver_override_store().
-
-Fixes: d38a87d7c064 ("s390/ap: Support driver_override for AP queue devices")
+Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
+Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
+Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
+Fixes: 12046f8c77e0 ("platform/x86: wmi: Add driver_override support")
 Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 ---
- drivers/s390/crypto/ap_bus.c   | 34 +++++++++++++++++-----------------
- drivers/s390/crypto/ap_bus.h   |  1 -
- drivers/s390/crypto/ap_queue.c | 24 ++++++------------------
- 3 files changed, 23 insertions(+), 36 deletions(-)
+ drivers/platform/wmi/core.c | 36 +++++-------------------------------
+ include/linux/wmi.h         |  4 ----
+ 2 files changed, 5 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/s390/crypto/ap_bus.c b/drivers/s390/crypto/ap_bus.c
-index d652df96a507..f24e27add721 100644
---- a/drivers/s390/crypto/ap_bus.c
-+++ b/drivers/s390/crypto/ap_bus.c
-@@ -859,25 +859,24 @@ static int __ap_queue_devices_with_id_unregister(struct device *dev, void *data)
+diff --git a/drivers/platform/wmi/core.c b/drivers/platform/wmi/core.c
+index b8e6b9a421c6..750e3619724e 100644
+--- a/drivers/platform/wmi/core.c
++++ b/drivers/platform/wmi/core.c
+@@ -842,39 +842,11 @@ static ssize_t expensive_show(struct device *dev,
+ }
+ static DEVICE_ATTR_RO(expensive);
  
- static int __ap_revise_reserved(struct device *dev, void *dummy)
+-static ssize_t driver_override_show(struct device *dev, struct device_attribute *attr,
+-				    char *buf)
+-{
+-	struct wmi_device *wdev = to_wmi_device(dev);
+-	ssize_t ret;
+-
+-	device_lock(dev);
+-	ret = sysfs_emit(buf, "%s\n", wdev->driver_override);
+-	device_unlock(dev);
+-
+-	return ret;
+-}
+-
+-static ssize_t driver_override_store(struct device *dev, struct device_attribute *attr,
+-				     const char *buf, size_t count)
+-{
+-	struct wmi_device *wdev = to_wmi_device(dev);
+-	int ret;
+-
+-	ret = driver_set_override(dev, &wdev->driver_override, buf, count);
+-	if (ret < 0)
+-		return ret;
+-
+-	return count;
+-}
+-static DEVICE_ATTR_RW(driver_override);
+-
+ static struct attribute *wmi_attrs[] = {
+ 	&dev_attr_modalias.attr,
+ 	&dev_attr_guid.attr,
+ 	&dev_attr_instance_count.attr,
+ 	&dev_attr_expensive.attr,
+-	&dev_attr_driver_override.attr,
+ 	NULL
+ };
+ ATTRIBUTE_GROUPS(wmi);
+@@ -943,7 +915,6 @@ static void wmi_dev_release(struct device *dev)
  {
--	int rc, card, queue, devres, drvres;
-+	int rc, card, queue, devres, drvres, ovrd;
+ 	struct wmi_block *wblock = dev_to_wblock(dev);
  
- 	if (is_queue_dev(dev)) {
- 		struct ap_driver *ap_drv = to_ap_drv(dev->driver);
- 		struct ap_queue *aq = to_ap_queue(dev);
--		struct ap_device *ap_dev = &aq->ap_dev;
+-	kfree(wblock->dev.driver_override);
+ 	kfree(wblock);
+ }
  
- 		card = AP_QID_CARD(aq->qid);
- 		queue = AP_QID_QUEUE(aq->qid);
+@@ -952,10 +923,12 @@ static int wmi_dev_match(struct device *dev, const struct device_driver *driver)
+ 	const struct wmi_driver *wmi_driver = to_wmi_driver(driver);
+ 	struct wmi_block *wblock = dev_to_wblock(dev);
+ 	const struct wmi_device_id *id = wmi_driver->id_table;
++	int ret;
  
--		if (ap_dev->driver_override) {
--			if (strcmp(ap_dev->driver_override,
--				   ap_drv->driver.name)) {
--				pr_debug("reprobing queue=%02x.%04x\n", card, queue);
--				rc = device_reprobe(dev);
--				if (rc) {
--					AP_DBF_WARN("%s reprobing queue=%02x.%04x failed\n",
--						    __func__, card, queue);
--				}
-+		ovrd = device_match_driver_override(dev, &ap_drv->driver);
-+		if (ovrd > 0) {
-+			/* override set and matches, nothing to do */
-+		} else if (ovrd == 0) {
-+			pr_debug("reprobing queue=%02x.%04x\n", card, queue);
-+			rc = device_reprobe(dev);
-+			if (rc) {
-+				AP_DBF_WARN("%s reprobing queue=%02x.%04x failed\n",
-+					    __func__, card, queue);
- 			}
- 		} else {
- 			mutex_lock(&ap_attr_mutex);
-@@ -928,7 +927,7 @@ int ap_owned_by_def_drv(int card, int queue)
- 	if (aq) {
- 		const struct device_driver *drv = aq->ap_dev.device.driver;
- 		const struct ap_driver *ap_drv = to_ap_drv(drv);
--		bool override = !!aq->ap_dev.driver_override;
-+		bool override = device_has_driver_override(&aq->ap_dev.device);
+ 	/* When driver_override is set, only bind to the matching driver */
+-	if (wblock->dev.driver_override)
+-		return !strcmp(wblock->dev.driver_override, driver->name);
++	ret = device_match_driver_override(dev, driver);
++	if (ret >= 0)
++		return ret;
  
- 		if (override && drv && ap_drv->flags & AP_DRIVER_FLAG_DEFAULT)
- 			rc = 1;
-@@ -977,7 +976,7 @@ static int ap_device_probe(struct device *dev)
- {
- 	struct ap_device *ap_dev = to_ap_dev(dev);
- 	struct ap_driver *ap_drv = to_ap_drv(dev->driver);
--	int card, queue, devres, drvres, rc = -ENODEV;
-+	int card, queue, devres, drvres, rc = -ENODEV, ovrd;
- 
- 	if (!get_device(dev))
- 		return rc;
-@@ -991,10 +990,11 @@ static int ap_device_probe(struct device *dev)
- 		 */
- 		card = AP_QID_CARD(to_ap_queue(dev)->qid);
- 		queue = AP_QID_QUEUE(to_ap_queue(dev)->qid);
--		if (ap_dev->driver_override) {
--			if (strcmp(ap_dev->driver_override,
--				   ap_drv->driver.name))
--				goto out;
-+		ovrd = device_match_driver_override(dev, &ap_drv->driver);
-+		if (ovrd > 0) {
-+			/* override set and matches, nothing to do */
-+		} else if (ovrd == 0) {
-+			goto out;
- 		} else {
- 			mutex_lock(&ap_attr_mutex);
- 			devres = test_bit_inv(card, ap_perms.apm) &&
-diff --git a/drivers/s390/crypto/ap_bus.h b/drivers/s390/crypto/ap_bus.h
-index 51e08f27bd75..04ea256ecf91 100644
---- a/drivers/s390/crypto/ap_bus.h
-+++ b/drivers/s390/crypto/ap_bus.h
-@@ -166,7 +166,6 @@ void ap_driver_unregister(struct ap_driver *);
- struct ap_device {
- 	struct device device;
- 	int device_type;		/* AP device type. */
+ 	if (id == NULL)
+ 		return 0;
+@@ -1076,6 +1049,7 @@ static struct class wmi_bus_class = {
+ static const struct bus_type wmi_bus_type = {
+ 	.name = "wmi",
+ 	.dev_groups = wmi_groups,
++	.driver_override = true,
+ 	.match = wmi_dev_match,
+ 	.uevent = wmi_dev_uevent,
+ 	.probe = wmi_dev_probe,
+diff --git a/include/linux/wmi.h b/include/linux/wmi.h
+index 75cb0c7cfe57..14fb644e1701 100644
+--- a/include/linux/wmi.h
++++ b/include/linux/wmi.h
+@@ -18,16 +18,12 @@
+  * struct wmi_device - WMI device structure
+  * @dev: Device associated with this WMI device
+  * @setable: True for devices implementing the Set Control Method
+- * @driver_override: Driver name to force a match; do not set directly,
+- *		     because core frees it; use driver_set_override() to
+- *		     set or clear it.
+  *
+  * This represents WMI devices discovered by the WMI driver core.
+  */
+ struct wmi_device {
+ 	struct device dev;
+ 	bool setable;
 -	const char *driver_override;
  };
  
- #define to_ap_dev(x) container_of((x), struct ap_device, device)
-diff --git a/drivers/s390/crypto/ap_queue.c b/drivers/s390/crypto/ap_queue.c
-index 3fe2e41c5c6b..ca9819e6f7e7 100644
---- a/drivers/s390/crypto/ap_queue.c
-+++ b/drivers/s390/crypto/ap_queue.c
-@@ -734,26 +734,14 @@ static ssize_t driver_override_show(struct device *dev,
- 				    struct device_attribute *attr,
- 				    char *buf)
- {
--	struct ap_queue *aq = to_ap_queue(dev);
--	struct ap_device *ap_dev = &aq->ap_dev;
--	int rc;
--
--	device_lock(dev);
--	if (ap_dev->driver_override)
--		rc = sysfs_emit(buf, "%s\n", ap_dev->driver_override);
--	else
--		rc = sysfs_emit(buf, "\n");
--	device_unlock(dev);
--
--	return rc;
-+	guard(spinlock)(&dev->driver_override.lock);
-+	return sysfs_emit(buf, "%s\n", dev->driver_override.name ?: "");
- }
- 
- static ssize_t driver_override_store(struct device *dev,
- 				     struct device_attribute *attr,
- 				     const char *buf, size_t count)
- {
--	struct ap_queue *aq = to_ap_queue(dev);
--	struct ap_device *ap_dev = &aq->ap_dev;
- 	int rc = -EINVAL;
- 	bool old_value;
- 
-@@ -764,13 +752,13 @@ static ssize_t driver_override_store(struct device *dev,
- 	if (ap_apmask_aqmask_in_use)
- 		goto out;
- 
--	old_value = ap_dev->driver_override ? true : false;
--	rc = driver_set_override(dev, &ap_dev->driver_override, buf, count);
-+	old_value = device_has_driver_override(dev);
-+	rc = __device_set_driver_override(dev, buf, count);
- 	if (rc)
- 		goto out;
--	if (old_value && !ap_dev->driver_override)
-+	if (old_value && !device_has_driver_override(dev))
- 		--ap_driver_override_ctr;
--	else if (!old_value && ap_dev->driver_override)
-+	else if (!old_value && device_has_driver_override(dev))
- 		++ap_driver_override_ctr;
- 
- 	rc = count;
+ /**
 -- 
 2.53.0
 
