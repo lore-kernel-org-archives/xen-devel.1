@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF7BF54AC7
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 15:00:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1260956.1554109 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0FFDF54ACE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 15:21:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1260972.1554120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w53Ej-0006M4-Pb; Tue, 24 Mar 2026 15:00:05 +0000
+	id 1w53ZV-0001aD-EN; Tue, 24 Mar 2026 15:21:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1260956.1554109; Tue, 24 Mar 2026 15:00:05 +0000
+Received: by outflank-mailman (output) from mailman id 1260972.1554120; Tue, 24 Mar 2026 15:21:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w53Ej-0006Lx-LU; Tue, 24 Mar 2026 15:00:05 +0000
-Received: by outflank-mailman (input) for mailman id 1260956;
- Tue, 24 Mar 2026 15:00:04 +0000
+	id 1w53ZV-0001a6-Ag; Tue, 24 Mar 2026 15:21:33 +0000
+Received: by outflank-mailman (input) for mailman id 1260972;
+ Tue, 24 Mar 2026 15:21:32 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w53Ei-00069G-Ph
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 15:00:04 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w53ZT-0001a0-UT
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 15:21:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w53Ei-00D86E-10
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 16:00:04 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1w53ZT-00DC0T-66
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 16:21:31 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69c2a6f2-bab6-0a2a0a5309dd-0a2a450aa898-16
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 16:00:03 +0100
-Received: from [209.85.208.169] (helo=mail-lj1-f169.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69c2a6f3-1772-0a2a450a0019-d155d0a9d07a-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 16:00:03 +0100
-Received: by mail-lj1-f169.google.com with SMTP id
- 38308e7fff4ca-38ad4677830so37746701fa.2
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 08:00:03 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69c2abf3-5cb7-0a2a0a5109dd-0a2a450cedda-36
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 16:21:30 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <jbeulich@suse.com>)
+ id 69c2abfa-f93d-0a2a450c0019-d155dd36ddc0-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 16:21:30 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-43a03cb1df9so1549823f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 08:21:30 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b6470b243sm39568431f8f.26.2026.03.24.08.21.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Mar 2026 08:21:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,124 +53,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1774364403; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ebVUX4F9WIWRYfrjZmvQzt6P7I+DZ8pF2Y2/b+oQWuby1blWt+5zYjIeB54Tm6Gn3W
-         Geh/cSP//rNRlrk4lMhex4EnCZ1FxkLfSQiVPw+AcJ3aarP5c3n3E1oQXPybTRvJV8Mf
-         tIL8ti0PkD5/MmeNxQkxmYD3h1e7IFADuLSsnX+3PUppVp+mPd4IAKI1z6GA7GwQfxhq
-         vD/jksix8nt2d3TTwAbVwqNG4pdVpxG5wguLBieffsqtoR5JvH2YBIHd6EEE1kq/LW2+
-         BYpS0ZXTrELZh0haJzkVReckf1mr/gOqiGmJF4lIMHRSQycSliO6iYFQFSMY6gLARJaB
-         pqwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=YSuTnvHSeVcFUB/+9C4fCV2nR4/iqnZ0NXe5dDdHJdw=;
-        fh=ER/BYFrrpCrSSVfzOMF7Ku3o0WALv6zM9JFyjgxE93g=;
-        b=JrcCZQKw9tidmLfPJQfE126q97gI3FAOjSgklrUX27o7BEf1VL5d7LbTRL/GomJ4ix
-         seB9I2iw8MqSC6sqlw/YOmdD0+EYTQdVzPxIeRAoWSxtEINl05ZHoRF7yxGoPc2RlshO
-         0t+S8IGSzSabiCSURMWKsw/LxLsDWY0W0zd7To4Qd+L1p0uXPptKsIoBLbYZDVKsoe6w
-         I+ycHYdltRGxdanSR1Vycf6oX9mMHtrM9kU+6kFCvNiKVej9UqgAEDWTK2KoOXTheyKc
-         clvfBqnTmkesvp2hURgXzdS4rrrgC1+drbj0pU2k+jYV0MV8YoXwjJTyNuxtLMFuy66Z
-         +ObQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774364403; x=1774969203; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YSuTnvHSeVcFUB/+9C4fCV2nR4/iqnZ0NXe5dDdHJdw=;
-        b=Eop+594yb4qqC47mMYi7nSfztC1vbcYAz30wOkIL+EGGRQBYu7FyRx2+UWFeWnNKUp
-         ErYC6bH54HFqnIWkE4wOkSZr+VIzMjosaAfGhYDa3itg2HTDbRr3xAPeTIai0kxGTWn2
-         agDfm8lLclzXNAV+4jIAYauRiVi8myzxBbmWOQQ08kCGiWakYFOJ2Vw/uC7gBpvBXtrT
-         ftjhUlmfirI8pVJfm5V41hOTVUC668XHnTfKKDpY07qyITpYMm/cMjESwbLSl76u0DnK
-         upj1g4Qu05ynP0+MP1uBFs5Ba2X9ZIlllat7saLLlvWy7FaWD3BQhWhWFVNgd46b6tfb
-         rBdw==
+        d=suse.com; s=google; t=1774365690; x=1774970490; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=5L1sTj3Vr+ZG58jSmqe7T9ByzXbgZJUiuRPRTwWT/30=;
+        b=d1Zs1e/1vYaeiE8Ig7lEO5aptSYaFvx6r27UNvNs4iO4OBqYOiqnzOJG0MVM8buXQf
+         NOqAx34yllL9uP6SrphUk6ts7d//rqDuYwg6No/yRCEkOADgi51/O+7wVWNNt/ySxCgn
+         NYAj2U9EwXxGGr1sRrDz7nkH/VtzJhM74BnrglnXUfK+ysBmUq9b9IVTLrvm/aJdkElO
+         O5otjpJzNAq3l6jLmAewp+hxW3YhTkA7T0ZLmerimyikffzXDdRpiD+s3A0sFdvEtHtj
+         GCV2rBMPKxkc8UdKMqwqaZev2yaOau8P73lpvh3l5DgH4EC63JE67qRANgDZAfxnoWuP
+         Zggw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774364403; x=1774969203;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=YSuTnvHSeVcFUB/+9C4fCV2nR4/iqnZ0NXe5dDdHJdw=;
-        b=K+BGIocThsP4AN5ucelD2DgOCf6xllYxqVc/fOttxjGfwYCXa9Jx/eUy+SwcY+76sQ
-         dgbAK+GUSvztOqo7lahTxbZLgt9JpLlKu6b88AWTpO63b7+ECyd6vuDNCuQj7935WHuh
-         57nl1U3UElSku+TlJB43L3JMmxyLikooUBNEx27BPbSVbwtOaBnHKI+KBDCSU47vG7hG
-         L90jz9FODr4tfvXBqgrOARfl3gBxs21oc1r5793/fdY2uN8Qtof3g1em+zk/cR9diX+6
-         5xTT3BdGj+IF12epbvl1zYXELPB+x5sz6/7ap6zPrHo4k97emR0ObPqcbbY5CLIsLstK
-         ijXg==
-X-Forwarded-Encrypted: i=1; AJvYcCWsNumPK39DLATnxT5fqM4EFXx7Mq3NhxDWp142xzbEo1J+Sc1ukQmvITtAJ2NHzaaE5AHS0t5ZANM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzDd3VxB5GGbi4P5hbwxHCT/Q+lU0qkonSoeC+cabmZegfRbO4m
-	EOepwe1xqJ/kYeaRkreNXYL0ViAJQM9qOe3PUctOohoqx+zGwJlH6Bko+ej6JVHMIQjSsWc9tia
-	XVJLUS6AJw7GxeJQDlLPklsaleElGggM=
-X-Gm-Gg: ATEYQzxYn2XXAh1D9r0ERwlkbO1VoRMdGsQLzCFwAKYLHZsye+Ldugk9kVzR0Qz5+L3
-	7zrkCgQg1aPR5rmTE9csARHM1cLdbKmiMZlV13CoseA+46oBPxhizV9Q0kDxLTIJ4PDAsbmU6wQ
-	Dy7Sbm0q+PvwgkyGscxN9EMETT7UTig9o3FmGSOCiA+m98CoQja+jDiBZ7THS1BSc3+WIKkKzOv
-	AVkAX7Lqj3rzGpIIXHQTar7WFvI8icH3N3pj2aYOwbPzJqzXTYwyCFOkARpbIexGDU7qGAqOiWU
-	ELrO6w==
-X-Received: by 2002:a05:651c:25c1:20b0:38a:6acb:eab3 with SMTP id
- 38308e7fff4ca-38bf96f3a52mr38546621fa.35.1774364402501; Tue, 24 Mar 2026
- 08:00:02 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774365690; x=1774970490;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5L1sTj3Vr+ZG58jSmqe7T9ByzXbgZJUiuRPRTwWT/30=;
+        b=XnqKvZwZsyWF+E/zJsHNKwt8crccza9STiLDlZp5cv1QHbLjd0Xf0tt7wC0ZtbnBu/
+         EAqaAJc8yxeJ2Fi5i0V67WcICdyMpYjSdzIPkb51UXKGnE8Y/inLOjoa622923qGsdGk
+         +gklSo2s+pS07yqarHgS8vX/NQCbvy261X8KY2k5hvDgdJ0/6x17A0K52oOq5ssJ+6M/
+         g1KDOO8x7Xnvf7HRTwJ1/HK0Y5a8yQhXka6VL8+umWciJO6jHS84+a4gjMQ2QPqoMD7d
+         8uF50LuYBUtwKwpuZLL54MB3YXtI3lL+mVu8JYo1yP/2KpZ+WluO5TLjpv9/Ed3hbbod
+         +10g==
+X-Forwarded-Encrypted: i=1; AJvYcCUFxetkngEuQN7G+8zHXSlqLeLGJ7DGgJwCSv4gBATVCLNwRrvFuxXif7MOlfyeakAx15kP+Q821ic=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzu6C3Je+Ah7yod/Ev8+QfmOX2jAJU5vVZ1ssX6BGJINAnZdl4k
+	SoDoeLm6R5aSMUS0pwaCWZl912HSkgzCIpDoPRrTnP5XQ1WAYW0UcUoIO6grANlhVw==
+X-Gm-Gg: ATEYQzy6ZK2M6KdKlRiaNAtAKKOABkM5rZyBU/fLPd2o2v2jfhEixeLn/loFUqvwzHb
+	9ov3NzE4H3ITjaRKIOgo3D83JdLrhiKKpMw8Rpp3GjpT5FYDauv6GiF6veJUsZVHLo9hHdrbrMb
+	O42KX120qpDxHgDmLggO8YsfMpXiWRA2uK35AoI70D/2mwk0dOsOnh7k/cU7HPqHyb4OmAHNio8
+	9e6UP4BJZjTgZWS8JTjcGBxqGsYHUvi+qiWVbtj+2B9eohVoULyj4Rn9YiZ8xxvi16GaqgfjWea
+	BASpKqmLSrgrmWxov3K8pZ59NojyXaWoB2xWay2hhYHthBsCZnOxDI60tvR50QWYL65qJmHK3as
+	Fb8xlnZWfqplwVMmYEQYEn584ItktGQtWzSJNKlXiewN2NFNucUGWfIGAdy53qat1iSBKE1ydrj
+	wF8BDw/+9Y2VtEct1wl8UP42YNsJqquJrY9DzWnYyZ3598rFJk9Fh5kgOuvOzllxQu2RZrhep48
+	FN6uGF2OFgnn+M=
+X-Received: by 2002:a05:6000:2906:b0:43b:498f:b039 with SMTP id ffacd0b85a97d-43b642388bcmr25822861f8f.9.1774365690198;
+        Tue, 24 Mar 2026 08:21:30 -0700 (PDT)
+Message-ID: <f17c9579-fb91-41bf-b4e8-faf5b79c7c6a@suse.com>
+Date: Tue, 24 Mar 2026 16:21:28 +0100
 MIME-Version: 1.0
-References: <cover.1774353053.git.mykola_kvach@epam.com> <581179709977ce4cebb22597411048dc93b11167.1774353053.git.mykola_kvach@epam.com>
- <3882d56e-def9-4ff5-9014-f72e80c7a1c8@suse.com>
-In-Reply-To: <3882d56e-def9-4ff5-9014-f72e80c7a1c8@suse.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Tue, 24 Mar 2026 16:59:49 +0200
-X-Gm-Features: AaiRm53OuS123wlfJDdFo4uwZri6vrHnnPHVdPLvwE7AuMJA9dgli6w0KkUc6ps
-Message-ID: <CAGeoDV8=ezYesxz7AgdPP4K_vcJZhCTTsQ3UTRC95NiYDgPgZQ@mail.gmail.com>
-Subject: Re: [PATCH v17 1/4] xen/arm: Implement PSCI SYSTEM_SUSPEND call for guests
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, 
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1774364403-53699900-A2C8B20A/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/3] ioreq: Unify buf and non-buf ioreq page management
+To: Julian Vetter <julian.vetter@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260316111653.178104-1-julian.vetter@vates.tech>
+ <20260316111653.178104-2-julian.vetter@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260316111653.178104-2-julian.vetter@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1774365690-F54B6734-2E1DB27D/0/0
 X-purgate-type: clean
-X-purgate-size: 1154
+X-purgate-size: 4391
 
-On Tue, Mar 24, 2026 at 2:53=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 24.03.2026 13:26, Mykola Kvach wrote:
-> > --- /dev/null
-> > +++ b/xen/include/xen/suspend.h
-> > @@ -0,0 +1,25 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +
-> > +#ifndef XEN_SUSPEND_H
-> > +#define XEN_SUSPEND_H
-> > +
-> > +#if __has_include(<asm/suspend.h>)
-> > +#include <asm/suspend.h>
-> > +#else
-> > +static inline void arch_domain_resume(struct domain *d)
-> > +{
-> > +    (void)d;
->
-> What use is this? None of our stubs does anything like that without a cle=
-ar
-> need.
+On 16.03.2026 12:17, Julian Vetter wrote:
+> Switch the ioreq page mapping in hvm_map_ioreq_gfn() from
+> prepare_ring_for_helper() / __map_domain_page_global() to explicit
+> vmap(), aligning it with ioreq_server_alloc_mfn() which already
+> allocates domain-heap pages and will now also map them via vmap().
 
-The (void)d was only meant to make it explicit that the parameter is
-intentionally unused in this no-op stub.
+In debug builds it did so before already, just indirectly through
+map_domain_page_global(). You may want to adjust the wording slightly.
 
-I find this useful as a reminder both for possible compiler
-unused-parameter checks and from a MISRA-style point of view, although it
-has no functional effect. Given how late this is in the series, I would
-prefer to avoid another reroll for this detail alone.
+> With both paths using vmap(), vmap_to_page() can recover the struct
+> page_info * uniformly during teardown, removing the need to cache the
+> page pointer in struct ioreq_page. So, drop the 'page' field from struct
+> ioreq_page and update all callers accordingly.
+> 
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
 
-Happy to send v18 if you think this is a blocker, but I'm also fine if you
-want to strip that line on commit to save us both some time.
+What's missing is _why_ you actually want to make this change. Without
+that info, one may want to reject the change for adding overhead for no
+gain. This would then also help with naming choices like "base_gfn".
 
+> @@ -128,8 +129,9 @@ static void hvm_unmap_ioreq_gfn(struct ioreq_server *s, bool buf)
+>      if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+>          return;
+>  
+> -    destroy_ring_for_helper(&iorp->va, iorp->page);
+> -    iorp->page = NULL;
+> +    put_page_and_type(vmap_to_page(iorp->va));
+> +    vunmap(iorp->va);
+> +    iorp->va = NULL;
 
-Best regards,
-Mykola
+In ioreq_server_deinit() you alter a comment regarding
+arch_ioreq_server_unmap_pages(), which calls the function here. The
+property described there looks to be lost.
 
->
-> Jan
+Here (and in the counterpart function below) I think you also want to
+leave a comment that this is effectively
+{destroy,prepare}_ring_for_helper(), merely using vmap(). That'll
+increase the chance of noticing a change is needed here as well in
+case those functions are modified.
+
+> @@ -157,17 +163,45 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+>      if ( d->is_dying )
+>          return -EINVAL;
+>  
+> -    iorp->gfn = hvm_alloc_ioreq_gfn(s);
+> +    base_gfn = hvm_alloc_ioreq_gfn(s);
+>  
+> -    if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+> +    if ( gfn_eq(base_gfn, INVALID_GFN) )
+>          return -ENOMEM;
+>  
+> -    rc = prepare_ring_for_helper(d, gfn_x(iorp->gfn), &iorp->page,
+> -                                 &iorp->va);
+> -
+> +    /*
+> +     * vmap() is used for the Xen-side mapping so that vmap_to_page() can
+> +     * recover the struct page_info * during teardown, consistent with
+> +     * ioreq_server_alloc_mfn().
+> +     */
+> +    rc = check_get_page_from_gfn(d, base_gfn, false, &p2mt, &page);
+>      if ( rc )
+> -        hvm_unmap_ioreq_gfn(s, buf);
+
+With the comment above addressed, I think this should be possible to keep.
+(FTAOD the same isn't true for the other error paths further down.)
+
+> @@ -262,8 +262,9 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+>  {
+>      struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+
+This is a good place to comment on the patch title: Here we're dealing (in
+unified manner) with both buffered and non-buffered ioreq-s. There's nothing
+being further unified in this regard. I think you must mean something else.
+
+> @@ -309,14 +310,13 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+>  static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
+>  {
+>      struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+> -    struct page_info *page = iorp->page;
+> +    struct page_info *page;
+>  
+> -    if ( !page )
+> +    if ( !iorp->va )
+>          return;
+>  
+> -    iorp->page = NULL;
+> -
+> -    unmap_domain_page_global(iorp->va);
+> +    page = vmap_to_page(iorp->va);
+> +    vunmap(iorp->va);
+>      iorp->va = NULL;
+>  
+>      put_page_alloc_ref(page);
+
+Operations want re-ordering a little, to retain the prior property of what
+the if() at the top is checking for getting cleared _before_ freeing /
+unmapping anything.
+
+> @@ -819,12 +821,12 @@ int ioreq_server_get_frame(struct domain *d, ioservid_t id,
+>          if ( !HANDLE_BUFIOREQ(s) )
+>              goto out;
+>  
+> -        *mfn = page_to_mfn(s->bufioreq.page);
+> +        *mfn = page_to_mfn(vmap_to_page(s->bufioreq.va));
+
+You did look at what vmap_to_page() expands to, didn't you? If you did, didn't
+it occur to you to use vmap_to_mfn() directly? (Applies elsewhere as well.)
+
+Jan
 
