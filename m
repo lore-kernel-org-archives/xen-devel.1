@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C96FEC0EF
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 18:20:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261245.1554344 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34478FEC0EB
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2026 18:20:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261252.1554362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w56MC-0004Lu-2b; Tue, 24 Mar 2026 18:20:00 +0000
+	id 1w56MJ-0005pB-Qb; Tue, 24 Mar 2026 18:20:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261245.1554344; Tue, 24 Mar 2026 18:20:00 +0000
+Received: by outflank-mailman (output) from mailman id 1261252.1554362; Tue, 24 Mar 2026 18:20:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w56MB-0004Lh-W9; Tue, 24 Mar 2026 18:19:59 +0000
-Received: by outflank-mailman (input) for mailman id 1261245;
- Tue, 24 Mar 2026 18:19:58 +0000
+	id 1w56MJ-0005oo-Lf; Tue, 24 Mar 2026 18:20:07 +0000
+Received: by outflank-mailman (input) for mailman id 1261252;
+ Tue, 24 Mar 2026 18:20:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1w56MA-0004Jf-1p
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 18:19:58 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1w56MJ-0005hb-4T
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 18:20:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w56M9-00Db9Z-9u
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 19:19:57 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1w56MI-00FIpx-GR
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2026 19:20:06 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 69c2d5ae-bab6-0a2a0a5309dd-0a2a4503b5fc-46
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 19:19:57 +0100
-Received: from [40.93.196.11]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69c2d5d4-2eae-0a2a0a5409dd-0a2a45019638-6
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 19:20:06 +0100
+Received: from [52.101.52.43]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 69c2d5cb-1947-0a2a45030019-285dc40b1c1a-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 19:19:56 +0100
+ id 69c2d5d5-6400-0a2a45010019-3465342b1f92-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2026 19:20:06 +0100
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
  by CH4PR03MB7771.namprd03.prod.outlook.com (2603:10b6:610:237::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.25; Tue, 24 Mar
- 2026 18:19:54 +0000
+ 2026 18:20:03 +0000
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096%5]) with mapi id 15.20.9745.019; Tue, 24 Mar 2026
- 18:19:54 +0000
+ 18:20:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZGKfpUK4b9Nwc50kQU+h2txy+LktN8gLAgrf5g5yTDw5wDMQGkyE3fQLOSBfuQ1YLOnGnjJkPWuZaVCJz2lLABxmqLMgN3XGpidBHu3p5WOTHjtVY+o1pCmaoUd/Na/+GpLTpt1djgDHIS7dP1M8qwzA38YyM9T1ZTt3AP44zMMlUvaSSceAYxLVO8uQIu19S9clgp+X3ZmLle89uOmA0GevBQ2y/n4M2Z3ncQaVzzpN2FCd1fikWxL1vNYjWB9I8rGLNhaaPlEfK4aXfaljWS8mzKcXDbr//WaNGOHt9gJs8Eh+/wEMounCLgv9BndHi0+/s0KpP54EtR3TP/i8dw==
+ b=uAsBftCxGU3IJZFYF+v/eo6ygGeTCyObytcq8yJe1L4asFu4tvR25z3+b0vrB49KZkW6JJg6zWrImsTYbvDEiXvMkXQ2hZ5Cw/DiB6pIjw7Jr/wRsbJ66/hbmtajoJzaMHNQOHwgEZHsXPoHHjSNPEOvxN2pXgvtoKdq4z6HGHZAzdHSTMMmDxNlyp1q4eQW2gDaW3AN3DySiFfp19iZGXcEiYotL+3BN6KyiQ2NHnO4kGnmsH6Pe4n2GtUSKt129sYVUEEvBCjdc6EJYtviYWQJVseY3S5REYu8jD2tO0TBVy64MkrzCo5XDMQ8xRcVRQZkOX2We5K7+T0yzqpVBg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qI+LNjy72D4wHoOthvYhwfj9bAoz+vROImIxBQ8ISLY=;
- b=L1+/e3wuGBpwZenvlDwS1S5P7PYsuD9aa43gPfig0DQii3UNpQJWQHxI6NnxZTp+U9MRyuj3AgZfWWxIS+YeArn1UZ4cm94US3Pt4ELRSwOFiu/lmniMnVaNZlvX6CG/ofzllBBooB2F0XToFOTrPFPEb7WQDJR6gvm+2echDInFKwfNyN6D4n+hGwpV2jHScYtPEWfMU/fMJ8xQtfuRRAsuNIKw2Ito8/1LJGI1ulFZYtwGoCKGakguEh6lPzl/pxmOUmpdfqFW+TUtcwgS9rOI+HIPnEMag2a4EUoJOgbQ46/gZNDj65FNxESaEpCXZw96Quuxsoq/AQ7TB/TcBw==
+ bh=ENHvXBDFYPK8S39Fvdlcd7u1cuBTdaLhm3Un5HN/3RA=;
+ b=NtHKR8hesoAB+FxiLKsM7ot1wLXmzuIcbkoQG6OePfkJ5sGKD29Z6lSeJy1qkp5rJKOtol7nNrvdAi87TiNO780eFVHFZiILa47oHtNtbMH6JcfSw/Xht+SAwQ6arcCnxddSyoaGWqMiv/pBAiSVbagGyi+O7gtrsH2BgYAiT5KWq/RqkTRVUr7TS1d7JDiBZ1srE2mTiyyvGiaC/emqckb4ltXld+XyTJmMYEhYOBTRzfKHMu3rbHuf4RhPr6g1e6gkwZV4rMQExbUT/Ue/JzDa/PoOtp8APfGv2OVBooPyyrtJsr4sYGFvwxCG5T7pn8oKRtBSYEJCuzEyWoyFmA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qI+LNjy72D4wHoOthvYhwfj9bAoz+vROImIxBQ8ISLY=;
- b=qLV/5GO3UnvirntbrR4tJg0GccmeS2n5pPIfBzUEjfxTl9hl36rcdI4slCojga5RJAx0AiVKsd6THx1E/d12UlWu7W/uROSluvcxB981nsm0z8q6CqmQe/obpIEQ+3uz9ZhbgnfMpxqiqxKPmFZe/vxzOKO8Ymh8GKbilJMT9hE=
+ bh=ENHvXBDFYPK8S39Fvdlcd7u1cuBTdaLhm3Un5HN/3RA=;
+ b=aPzWhPX5/5Ar7naE08Zh5TAKZM76Oc6RlO0URCR1fAjAWD/Fr10BoGsVYVtgdCVWuJvyrSdZxbA1uNI6SPYMQz4qklk/9nr42W5w/DpGTNDF5aRxSar/+pg/xjTlBkOvfNC6+QHT/zgBOzi4uRE5R/2kLAeoSarBK80gCHudnJw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
@@ -79,307 +79,191 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v2 3/9] x86/vmx: Remove lazy FPU support
-Date: Tue, 24 Mar 2026 18:19:31 +0000
-Message-ID: <20260324181937.2465574-4-ross.lagerwall@citrix.com>
+Subject: [PATCH v2 5/9] x86/traps: Remove lazy FPU support
+Date: Tue, 24 Mar 2026 18:19:33 +0000
+Message-ID: <20260324181937.2465574-6-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260324181937.2465574-1-ross.lagerwall@citrix.com>
 References: <20260324181937.2465574-1-ross.lagerwall@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: LO4P265CA0318.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:390::17) To DS0PR03MB8272.namprd03.prod.outlook.com
- (2603:10b6:8:28f::23)
+X-ClientProxiedBy: AS4P195CA0032.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:65a::6) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CH4PR03MB7771:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d9fc831-f0c5-49ed-f3d7-08de89d1ecef
+X-MS-Office365-Filtering-Correlation-Id: 2135e678-27e3-43d6-9137-08de89d1f7c4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	GuE5X3Iom0ad4IIm0+J47VrN2502B9OHbqnJzaOm18a0eqm0TT0HQGdV31iDIK0CaSKJWA+u2iY2l5CxoDLQdxd5u+Y5EWKD2YMqGc6xONEkv5qdeYO3/6pz50EPtu+LZ18vw/gXa70xYWca6lJeyyQKeoWcqv0CaZ+oY0tBxeKwVZ+rtKP+teGs2c42gNAYLKzpCK60LduoiXKydbpqfWAZ2shIC9oUMeF33dBUzHegJBBDnIDZ1U1CvSaO0T37IVsx1rUOyfJxQBahhQIdNcb/LY5kkvRx0vi/xAZtfMmYweIrllrYcW57/+sw/tFJF7jrIVAQOEWASFihTuWw/JoG/PQ4XzmGLGPuOYz2T9ae+2Sb/donAgoFCbLIGCGbFFyN1SoZLoq9DPb206HIrCpdDT6vn+7dS6i9TQ5TzSrL0sIWJ4gNNVjXkWGz5zXSZZDG6snGCM2yNispj/hWaWHNXZ5l+frcMXgEVB4oorUr4atmNX9krXI+g8F6DCjCvKkwyWnShw2vQUxG4xSVTKisqo4E8ZrnKiWT+Ejw6YtQo7B/7g7UGx2rr3RvDpZGq7G+1jx/q46NNKqgr+LDYWRv+lhmURbLWOyD8Q9+n1bG9JfV57gwigaMmmvRRfMM0xIqtKUTpHS81yYZp+Oza6nK7Ei2NPVmgXWMZ2GZTLBPKNDjt2YysIy/E1zUTXur//x2OOpDvihVGJBY55GUe3Va4OBAcRcntSGsZGjdU74=
+	3IL4VuXg8wEiicp5EaCgVBrIY/3DBIsjpw7d+WQy3YKRy41BRGeavaO36dHPWpt862ensZUNzanG9vef51iUuoNU/Cvde+7rSCC3nOztFu7y4c4e4JvtXvlF/maYrHBS7BDOBZCtaCc6+rnm2FMMu/urhjELn2Ijha/3jGLt+4mFZOU9yKIW9b/zTQjF+p2PyOMVJRmrd48HFpGD4NNZTINgzoEqJbCAMRqPTHA/sZR+BeGo41iePmy7hdqYcfs1p8K+rut0lfSV6ZkImycnzR03gVmdYRTMyNOpUcl3Vko7AHgCZTteq7y8bHhbE0I6+yfQ+VCGJ2Tjswv/vcXw0VdAf3opY57r/1zC19ihJFHMQR3rJSLfS34YHLa9xpa96feeUTPbZ40wRNhECppO6cgE1WN2ylj68q3iTtuP6HYEDz7aDAzN1TqA5OWvsR4BcQawHtHe4h4TvK6TzhoQYZ+TrNld7YSfpqiewuT7kSzbI79H/9tHFtIPO5lBlErE/WRlHI3Vb2A+70RN41qm+2ZY+BPyPx19elZXhyt9mhP2lltduo+irwhUq1B9rP1m+v1ji+8eCIp3Kcqa2oHIeSxUf0zndKeDFwZfk2Ff7tGcmccsLKEnVuiNwlLOxwf7NLbuTAqESO/g+DIfN1r2sM4u5NQx5M4fRNHnEKCYE1/rZdrps5oYEl29tu7mZuv2iicE7vHQIIis3XjY/p/yfOlfQ3kKEqiAUn9Orr+LfdY=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?q3+ZZatHTrwZ2voEB46PZjkMGiqapB2A+EwLpPmmSjuy9bLPSZgwuPxaydRr?=
- =?us-ascii?Q?19jbHneiL+YBsJgM6LKn4tSKyGiEIaY2TGG4vwSQ+4lgmP7lvAMBqIT+LpP8?=
- =?us-ascii?Q?jC5Ik92doIs3SgMh2gYukE88EJ+LuVpiSJ0tjbwbs07LpPfEFMwAIalZgHgy?=
- =?us-ascii?Q?eYmAkkZDkfN6u6CM4I+WBDKCRrmIrWFxXn1k4xy5CrF5RkVuoi/47P6pxFeA?=
- =?us-ascii?Q?BsjEgM/wt9XY8KuPK7jw7nb8zDPGl2sptdCUIi0mF/HUYCcs8/QenBwl4PW6?=
- =?us-ascii?Q?Bz3lCcik67tTuhgTXcmS5z6fcQxVu1NzTCxbIDslmAG9lfs713Ktjlcp5mAd?=
- =?us-ascii?Q?SRf5shWph3/TdIxichcIuJeGstDOwZPiNJC5eIG14TDX9ZqXWRFWoiMYdQ4j?=
- =?us-ascii?Q?in2rsWcjtyztg9dXbpXGeAsZwmMGM2C1MyZ/4K/62ggwFtGdgJjmFSo3ZLwn?=
- =?us-ascii?Q?bBwi41COhknQJkiwiuEmlJtTEj2rbuDoMvmJPh/eD74GQtZOhgp+cZbPmeYm?=
- =?us-ascii?Q?M16ah65sy6f71Rx4YGxXPk1WdqzvPgAX248/63YJknODtb+ljJyAuvWCERKk?=
- =?us-ascii?Q?yyJDdoM6+LYVofHLqrR4iMDt3XYoH/mP10g5C/o9WJ8zAcZ03VDv7yaVyOwS?=
- =?us-ascii?Q?jY8v8Z9KH1SYt5cce2gP7CehhHtpe1xe+ZpYhAwCEpu5Sn93yxkZx8QhVWtX?=
- =?us-ascii?Q?z0AhNas150GkayWIOWeZE+mP+UJmZ4DlqvqbedFzyjGzvwErjAY0B+nXgSUY?=
- =?us-ascii?Q?UO8Nbqd7TqXPKMFcAOeug5MeIFTtouu711wK3AnJrcgyT+emHbG0Q6qHS6vY?=
- =?us-ascii?Q?sOoQKVpUwyWl8ZIUXsMAlXYcguwkb5VmZYNWdkKorN4ae3JeSoyE8PmXJanD?=
- =?us-ascii?Q?NZ2js1LU0ALK0hs275620GJlRIES/vgOld83RUgu8PU1I6H7XQnpq6KT2925?=
- =?us-ascii?Q?iGcsDlbsqkpe57DWyGRP0LzXr2rZHhjuIkUNjCflXTssIPUHynf0K1jUTQE1?=
- =?us-ascii?Q?hlLzTdc9bpbYPBGUVYaTxtdG1Il6enEh+6Yb21iNU0KGCvSZdSgsSxR0S3yA?=
- =?us-ascii?Q?kjHd1pj2psnZH1hPTejll5BEdQZEZxAuR5yWdCAfucLmchJeU+Zp18bS9QdV?=
- =?us-ascii?Q?WwA7mak4oW+0fEZRWgSD4vnJw07fqj6YfKXLj3q2oPU/NqjVnBcMlFMK3Kei?=
- =?us-ascii?Q?7ynHviPWEkUbhNf0xq/6cSqL0JCFwgqoUzwDxx2ExSLoBfdqDzKKYTiokFIq?=
- =?us-ascii?Q?RrB8oDRvxG0ZN6NPubUQ6+2Pp2l7cHk8TK8eXj1+qgPpmglSfSIe2uXASny/?=
- =?us-ascii?Q?uDShIY/xnf0tlOwlwTzW0k6yVgJ4TInUTbRkzCqaTTqKTGfQ5QsdzCSPUjiA?=
- =?us-ascii?Q?W5za/cFFO76+dPpEpZkRzgA+zmxpH/wjLuiEo/cNvnTrJbOi6ZQwG27/f74z?=
- =?us-ascii?Q?JHXBTTSPQHJ5t3e93V1i+cmhsp5zO72EgOcpgP9h/VbOA7VuIZ1llVZHFIpp?=
- =?us-ascii?Q?wW8etSOY+FeI+49cFHcMxn7XbuCNJqH7YtZqcSRd0PzS27hcawWouZvdYi4u?=
- =?us-ascii?Q?OYhKfNEo0j1I4LP/+gnVq8adqVemqfXNU1Z68//EJGQeclW7l6b2WBr7Tax6?=
- =?us-ascii?Q?XGYEAK1WpC6t5Ho9wVgtlOWS4b3sJ9s8496nDI0lg3p8/LNTHcQYn35aELr2?=
- =?us-ascii?Q?ivpFPveElnz3+Yj7+hM5yaUM46EiggfYB75nGGyXaUrPSX54x4gI+DJhOCNn?=
- =?us-ascii?Q?Vh5dcMtMcC85ITZkkNu+nY2ApG4cmRA=3D?=
+	=?us-ascii?Q?XE8R+WfqR2KA/XD4I2aII+6ZPi8cE6wTxdrcsuIXXf0zDNkFNGzikx1KbNxj?=
+ =?us-ascii?Q?Of5sd9XPcA5qP0Ya0fbjey6WTMYAjJr9px57rKZE5qTybwQQ3kRcz1elr2o4?=
+ =?us-ascii?Q?bH4aor6fH/mPkJGRJP3kJHZxXpKFydW7Ifc49AOKnNBIKYlZJRg5ZUmkob6l?=
+ =?us-ascii?Q?lgTvx0zKuFJRP+BzAbsbXnTB46C3NSLjIP5QwSywI6LKh90p+Kx8omb0Ncuk?=
+ =?us-ascii?Q?f/TFJM0S8JxpRE1MaXGUMc46WHvZuWJV2IKSFGSdQD4Tq/aw9/VKkKYMn6cg?=
+ =?us-ascii?Q?qBZ6t8GQJHRYGR9Jcau+4m4dO2A+EGqLSkN4yypJCaIQ/DAuIVIGkLZ6eK46?=
+ =?us-ascii?Q?EBNkKCX7EOsNjkr1n1aeZCIENk5600YzKnkc2za6rECykzslZKf4D8a/FBIV?=
+ =?us-ascii?Q?g0XHyvvI1IIoIOpYyvnOanzj4Qjx+aBTVU/bGv8v9i+6z2bS/O6cGZ0kaHjY?=
+ =?us-ascii?Q?zqCxfZaM3YQIfVQ9BUkvqqAp2XI/CmI11cUChoOsxBiGP0UgKWcbbIGug3So?=
+ =?us-ascii?Q?Td//Fa5Y+iHtx2saUFI6Ow9+ni7vReCGccJVpHevT5IQt/vELGUZRa+/ry4G?=
+ =?us-ascii?Q?yClXrK+u2f/J/eclGiDZnyullGfiISGUk+h3lzFPwvH5jd72b7R2cb8kephB?=
+ =?us-ascii?Q?fETNdjH/rfXzlj5JZt7FQhgbFpScfXNdH7zR9eHSGHr8OX9W00QbzQbmtIEA?=
+ =?us-ascii?Q?NpUghGw1/urQR2BySUBdG69DgPsGDPsK1rV7oQtSsYLbcBEqjDGUWDO8iJr0?=
+ =?us-ascii?Q?rdjo8TvFw1430tSk205I9WVvFvIVTRUkQZQEDowy7U/3czxyLnSvYIjR9NrF?=
+ =?us-ascii?Q?HrTsSa94GR+UDowtpJmyPJwZ6gDzLCjXR451v1Q/jcXbMHT9vX1lTnavncJ4?=
+ =?us-ascii?Q?B2VC4ZPvXaj5vIg80luFEkDH/9LVOWLi4sRxkPVT/CmpdWrunj+Wl//CsBOA?=
+ =?us-ascii?Q?h6tsHHoPyG/y83J6Bid4KjvlrUfEkidRuAqTErNpbKoTZDUA6XB/n2SUA6GL?=
+ =?us-ascii?Q?tPlniS0EzcyurPY7SYWgSR/o7bxt+adE+ayT/8DHuhp8C+21dKeNpwhcxe6e?=
+ =?us-ascii?Q?gex9XiEj0S1LlmaTo+7InE0XADm3UCSOjcfvy5TQVeaAibddsiGevumJrOcH?=
+ =?us-ascii?Q?lNNfwbXVvADVTLrQxSUHncvdreE/SufUPm7LJsiU08BIEefAapacIid0VL9q?=
+ =?us-ascii?Q?jZwHVvz3Moron/xPZpq7qpxprBlhWCy7g53y9o4ipn6qgHJrfNDT2iRST+6e?=
+ =?us-ascii?Q?kxdOAOQnpEHVCwnVXxQuD1zopPGEZJGj+zEl03DAjV/R4gSDmcRSa5n1BFyk?=
+ =?us-ascii?Q?nVYczOugdiD+F54ix57HoC6dTA8HSmK0l2bkPS5R5V1AwCLSDNPA85Tv8Ys5?=
+ =?us-ascii?Q?n7d4/zfH8uROVBrZIQBmL2dhCsCur7d7HAWKinGb+w5MOtrNBeGZHs7gNdj6?=
+ =?us-ascii?Q?4d0a0ltSwmFhk6tr+Tdhe5atn1LKNqeL5nyZUNn9PZ+NK0cnwpQdKsfbQC1w?=
+ =?us-ascii?Q?x12BG7DdinkoJs5Jc+HoZTLbuPqWqcN9s1xTSPgHCNWl6XiOhKhaYJI58qma?=
+ =?us-ascii?Q?LFiiwDTVoIgWswVV5UwxFv8DZAQLyGBlrScReuHm8NlRfkyH9Z+Dc0G88W+k?=
+ =?us-ascii?Q?H0U64qBhMlwXlZoY+yKDz+Sa4QE332hP0DZd4s6LzLaxGwkimlS6UUMc4hS0?=
+ =?us-ascii?Q?oslclTil+4iy+b80CL4Yrmj2B87tqSVSmqxUkUJFsfdCmX5Uv2NGPLfGnqo7?=
+ =?us-ascii?Q?JwjKnsw58cWR7jputWAiNBlvPmsysHs=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d9fc831-f0c5-49ed-f3d7-08de89d1ecef
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR03MB8272.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2135e678-27e3-43d6-9137-08de89d1f7c4
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 18:19:54.4400
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 18:20:03.2706
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nuWAKn8HaD7Dsk7OK67C79xbh7YyXkmW2a9cK8x78QmVY5fRcFbiab/IJa6jvfHIT5X2gs7+1TKRVMl4pc/pc0aWbFx2HdQqZCK2pyPnF74=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0UyYFVj9JmAhjM8tcteavuiZrGNhjgz9RABQpt3GL0kpa8LNBqhznM9YnGqRvZkrUy4+4ozWeJ5U+4aBAg//VaMcCFrb7VawMn3j5d2BBmU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH4PR03MB7771
-X-purgate-ID: tlsNG-33051d/1774376397-4866F72C-7F8B867D/0/0
+X-purgate-ID: tlsNG-d62444/1774376406-8EEE2DF3-935198DF/0/0
 X-purgate-type: clean
-X-purgate-size: 9025
+X-purgate-size: 3505
 
-Remove lazy FPU support from the VMX code since fully_eager_fpu is now
-always true.
+From: Wei Liu <wei.liu2@citrix.com>
 
-No functional change intended.
+Remove lazy FPU support from the #NM exception handler used by PV
+guests since fully_eager_fpu is now always true.
 
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Unchanged in v2
+In v2:
+* Tweaked the commit message
+* Crash the guest rather than host if the guest register is in an
+  unexpected state.
+* Reword a comment
+* Allow tail-call optimization
 
- xen/arch/x86/hvm/vmx/vmcs.c             |  8 +--
- xen/arch/x86/hvm/vmx/vmx.c              | 70 +------------------------
- xen/arch/x86/hvm/vmx/vvmx.c             | 15 +-----
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  2 -
- 4 files changed, 5 insertions(+), 90 deletions(-)
+ xen/arch/x86/i387.c               | 24 ------------------------
+ xen/arch/x86/include/asm/i387.h   |  1 -
+ xen/arch/x86/pv/misc-hypercalls.c |  3 +--
+ xen/arch/x86/traps.c              | 20 +++++++++++++-------
+ 4 files changed, 14 insertions(+), 34 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index c2e7f9aed39f..8e52ef4d497a 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1247,10 +1247,7 @@ static int construct_vmcs(struct vcpu *v)
-     __vmwrite(HOST_TR_SELECTOR, TSS_SELECTOR);
- 
-     /* Host control registers. */
--    v->arch.hvm.vmx.host_cr0 = read_cr0() & ~X86_CR0_TS;
--    if ( !v->arch.fully_eager_fpu )
--        v->arch.hvm.vmx.host_cr0 |= X86_CR0_TS;
--    __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
-+    __vmwrite(HOST_CR0, read_cr0());
-     __vmwrite(HOST_CR4, mmu_cr4_features);
-     if ( cpu_has_vmx_efer )
-         __vmwrite(HOST_EFER, read_efer());
-@@ -1330,8 +1327,7 @@ static int construct_vmcs(struct vcpu *v)
-     __vmwrite(VMCS_LINK_POINTER, ~0UL);
- 
-     v->arch.hvm.vmx.exception_bitmap = HVM_TRAP_MASK
--              | (paging_mode_hap(d) ? 0 : (1U << X86_EXC_PF))
--              | (v->arch.fully_eager_fpu ? 0 : (1U << X86_EXC_NM));
-+              | (paging_mode_hap(d) ? 0 : (1U << X86_EXC_PF));
- 
-     if ( cpu_has_vmx_notify_vm_exiting )
-         __vmwrite(NOTIFY_WINDOW, vm_notify_window);
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 82c55f49aea9..03daf2f52bf2 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -68,7 +68,6 @@ static void cf_check vmx_update_guest_cr(
-     struct vcpu *v, unsigned int cr, unsigned int flags);
- static void cf_check vmx_update_guest_efer(struct vcpu *v);
- static void cf_check vmx_wbinvd_intercept(void);
--static void cf_check vmx_fpu_dirty_intercept(void);
- static int cf_check vmx_msr_read_intercept(
-     unsigned int msr, uint64_t *msr_content);
- static int cf_check vmx_msr_write_intercept(
-@@ -1130,41 +1129,6 @@ static int cf_check vmx_load_vmcs_ctxt(struct vcpu *v, struct hvm_hw_cpu *ctxt)
-     return 0;
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index 954ba3b1799b..7da731865f73 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -234,30 +234,6 @@ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts)
+         stts();
  }
  
--static void vmx_fpu_enter(struct vcpu *v)
+-/* 
+- * Restore FPU state when #NM is triggered.
+- */
+-void vcpu_restore_fpu_lazy(struct vcpu *v)
 -{
--    vcpu_restore_fpu_lazy(v);
--    v->arch.hvm.vmx.exception_bitmap &= ~(1u << X86_EXC_NM);
--    vmx_update_exception_bitmap(v);
--    v->arch.hvm.vmx.host_cr0 &= ~X86_CR0_TS;
--    __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
+-    ASSERT(!is_idle_vcpu(v));
+-
+-    /* Avoid recursion. */
+-    clts();
+-
+-    if ( v->fpu_dirtied )
+-        return;
+-
+-    ASSERT(!v->arch.fully_eager_fpu);
+-
+-    if ( cpu_has_xsave )
+-        fpu_xrstor(v, XSTATE_LAZY);
+-    else
+-        fpu_fxrstor(v);
+-
+-    v->fpu_initialised = 1;
+-    v->fpu_dirtied = 1;
 -}
 -
--static void cf_check vmx_fpu_leave(struct vcpu *v)
--{
--    ASSERT(!v->fpu_dirtied);
--    ASSERT(read_cr0() & X86_CR0_TS);
--
--    if ( !(v->arch.hvm.vmx.host_cr0 & X86_CR0_TS) )
--    {
--        v->arch.hvm.vmx.host_cr0 |= X86_CR0_TS;
--        __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
--    }
--
--    /*
--     * If the guest does not have TS enabled then we must cause and handle an
--     * exception on first use of the FPU. If the guest *does* have TS enabled
--     * then this is not necessary: no FPU activity can occur until the guest
--     * clears CR0.TS, and we will initialise the FPU when that happens.
--     */
--    if ( !(v->arch.hvm.guest_cr[0] & X86_CR0_TS) )
--    {
--        v->arch.hvm.hw_cr[0] |= X86_CR0_TS;
--        __vmwrite(GUEST_CR0, v->arch.hvm.hw_cr[0]);
--        v->arch.hvm.vmx.exception_bitmap |= (1u << X86_EXC_NM);
--        vmx_update_exception_bitmap(v);
--    }
--}
--
- static void cf_check vmx_ctxt_switch_from(struct vcpu *v)
- {
-     /*
-@@ -1187,8 +1151,6 @@ static void cf_check vmx_ctxt_switch_from(struct vcpu *v)
-         vmx_vmcs_reload(v);
+ /* 
+  * On each context switch, save the necessary FPU info of VCPU being switch 
+  * out. It dispatches saving operation based on CPU's capability.
+diff --git a/xen/arch/x86/include/asm/i387.h b/xen/arch/x86/include/asm/i387.h
+index 652d7ad2deb6..da0c7e945f95 100644
+--- a/xen/arch/x86/include/asm/i387.h
++++ b/xen/arch/x86/include/asm/i387.h
+@@ -28,7 +28,6 @@ struct ix87_env {
+ };
+ 
+ void vcpu_restore_fpu_nonlazy(struct vcpu *v, bool need_stts);
+-void vcpu_restore_fpu_lazy(struct vcpu *v);
+ void vcpu_save_fpu(struct vcpu *v);
+ void save_fpu_enable(void);
+ int vcpu_init_fpu(struct vcpu *v);
+diff --git a/xen/arch/x86/pv/misc-hypercalls.c b/xen/arch/x86/pv/misc-hypercalls.c
+index 7e915d86b724..34a0717540a9 100644
+--- a/xen/arch/x86/pv/misc-hypercalls.c
++++ b/xen/arch/x86/pv/misc-hypercalls.c
+@@ -42,8 +42,7 @@ long do_fpu_taskswitch(int set)
+     else
+     {
+         v->arch.pv.ctrlreg[0] &= ~X86_CR0_TS;
+-        if ( v->fpu_dirtied )
+-            clts();
++        clts();
      }
  
--    if ( !v->arch.fully_eager_fpu )
--        vmx_fpu_leave(v);
-     vmx_save_guest_msrs(v);
-     vmx_restore_host_msrs();
-     vmx_save_dr(v);
-@@ -1771,17 +1733,6 @@ static void cf_check vmx_update_guest_cr(
-         else
-             nvmx_set_cr_read_shadow(v, 0);
+     return 0;
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index b6b119769722..0565c576ecd6 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -2045,15 +2045,21 @@ void asmlinkage do_device_not_available(struct cpu_user_regs *regs)
+     }
  
--        if ( !(v->arch.hvm.guest_cr[0] & X86_CR0_TS) )
--        {
--            if ( v != current )
--            {
--                if ( !v->arch.fully_eager_fpu )
--                    hw_cr0_mask |= X86_CR0_TS;
--            }
--            else if ( v->arch.hvm.hw_cr[0] & X86_CR0_TS )
--                vmx_fpu_enter(v);
--        }
+ #ifdef CONFIG_PV
+-    vcpu_restore_fpu_lazy(curr);
 -
-         realmode = !(v->arch.hvm.guest_cr[0] & X86_CR0_PE);
- 
-         if ( !vmx_unrestricted_guest(v) &&
-@@ -2915,7 +2866,6 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
-     .update_guest_cr      = vmx_update_guest_cr,
-     .update_guest_efer    = vmx_update_guest_efer,
-     .cpuid_policy_changed = vmx_cpuid_policy_changed,
--    .fpu_leave            = vmx_fpu_leave,
-     .set_guest_pat        = vmx_set_guest_pat,
-     .get_guest_pat        = vmx_get_guest_pat,
-     .set_tsc_offset       = vmx_set_tsc_offset,
-@@ -2927,7 +2877,6 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
-     .cpu_up               = vmx_cpu_up,
-     .cpu_down             = vmx_cpu_down,
-     .wbinvd_intercept     = vmx_wbinvd_intercept,
--    .fpu_dirty_intercept  = vmx_fpu_dirty_intercept,
-     .msr_read_intercept   = vmx_msr_read_intercept,
-     .msr_write_intercept  = vmx_msr_write_intercept,
-     .handle_cd            = vmx_handle_cd,
-@@ -3281,20 +3230,6 @@ void update_guest_eip(void)
-         hvm_inject_hw_exception(X86_EXC_DB, X86_EVENT_NO_EC);
- }
- 
--static void cf_check vmx_fpu_dirty_intercept(void)
--{
--    struct vcpu *curr = current;
--
--    vmx_fpu_enter(curr);
--
--    /* Disable TS in guest CR0 unless the guest wants the exception too. */
--    if ( !(curr->arch.hvm.guest_cr[0] & X86_CR0_TS) )
--    {
--        curr->arch.hvm.hw_cr[0] &= ~X86_CR0_TS;
--        __vmwrite(GUEST_CR0, curr->arch.hvm.hw_cr[0]);
--    }
--}
--
- static void vmx_dr_access(unsigned long exit_qualification,
-                           struct cpu_user_regs *regs)
- {
-@@ -4543,10 +4478,7 @@ void asmlinkage vmx_vmexit_handler(struct cpu_user_regs *regs)
-                 domain_pause_for_debugger();
-             }
-             break;
--        case X86_EXC_NM:
--            TRACE(TRC_HVM_TRAP, vector);
--            vmx_fpu_dirty_intercept();
--            break;
+-    if ( curr->arch.pv.ctrlreg[0] & X86_CR0_TS )
++    if ( !(curr->arch.pv.ctrlreg[0] & X86_CR0_TS) )
+     {
+-        pv_inject_hw_exception(X86_EXC_NM, X86_EVENT_NO_EC);
+-        curr->arch.pv.ctrlreg[0] &= ~X86_CR0_TS;
++        ASSERT_UNREACHABLE();
++        domain_crash(curr->domain);
++        return;
+     }
+-    else
+-        TRACE_TIME(TRC_PV_MATH_STATE_RESTORE);
 +
-         case X86_EXC_PF:
-             __vmread(EXIT_QUALIFICATION, &exit_qualification);
-             __vmread(VM_EXIT_INTR_ERROR_CODE, &ecode);
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 38952f06961e..e4cdfe55c18e 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1238,9 +1238,6 @@ static void virtual_vmentry(struct cpu_user_regs *regs)
-     regs->rsp = get_vvmcs(v, GUEST_RSP);
-     regs->rflags = get_vvmcs(v, GUEST_RFLAGS);
- 
--    /* updating host cr0 to sync TS bit */
--    __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
--
-     /* Setup virtual ETP for L2 guest*/
-     if ( nestedhvm_paging_mode_hap(v) )
-         /* This will setup the initial np2m for the nested vCPU */
-@@ -1468,9 +1465,6 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
-     /* VM exit clears all bits except bit 1 */
-     regs->rflags = X86_EFLAGS_MBS;
- 
--    /* updating host cr0 to sync TS bit */
--    __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
--
-     if ( cpu_has_vmx_virtual_intr_delivery )
-         nvmx_update_apicv(v);
- 
-@@ -2458,19 +2452,14 @@ int nvmx_n2_vmexit_handler(struct cpu_user_regs *regs,
-         __vmread(VM_EXIT_INTR_INFO, &intr_info);
-         vector = intr_info & INTR_INFO_VECTOR_MASK;
-         /*
--         * decided by L0 and L1 exception bitmap, if the vetor is set by
--         * both, L0 has priority on #PF and #NM, L1 has priority on others
-+         * decided by L0 and L1 exception bitmap, if the vector is set by
-+         * both, L0 has priority on #PF, L1 has priority on others
-          */
-         if ( vector == X86_EXC_PF )
-         {
-             if ( paging_mode_hap(v->domain) )
-                 nvcpu->nv_vmexit_pending = 1;
-         }
--        else if ( vector == X86_EXC_NM )
--        {
--            if ( v->fpu_dirtied )
--                nvcpu->nv_vmexit_pending = 1;
--        }
-         else if ( (intr_info & valid_mask) == valid_mask )
-         {
-             exec_bitmap = get_vvmcs(v, EXCEPTION_BITMAP);
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-index 879ec10cefd0..88bded5190c9 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -149,8 +149,6 @@ struct vmx_vcpu {
-     DECLARE_BITMAP(eoi_exit_bitmap, X86_IDT_VECTORS);
-     struct pi_desc       pi_desc;
- 
--    unsigned long        host_cr0;
--
-     /* Do we need to tolerate a spurious EPT_MISCONFIG VM exit? */
-     bool                 ept_spurious_misconfig;
- 
++    /*
++     * For better or worse, Xen's ABI with PV guests always clears TS on an #NM
++     * exception. Classic-xen Linux depends on this.
++     */
++    clts();
++    curr->arch.pv.ctrlreg[0] &= ~X86_CR0_TS;
++
++    pv_inject_hw_exception(X86_EXC_NM, X86_EVENT_NO_EC);
+ #else
+     ASSERT_UNREACHABLE();
+ #endif
 -- 
 2.53.0
 
