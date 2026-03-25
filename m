@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA897109C032
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 14:59:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1262515.1555016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C7D109C02F
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 15:07:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1262572.1555024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5PhA-00047B-An; Wed, 25 Mar 2026 14:58:56 +0000
+	id 1w5PpR-00070L-87; Wed, 25 Mar 2026 15:07:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1262515.1555016; Wed, 25 Mar 2026 14:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 1262572.1555024; Wed, 25 Mar 2026 15:07:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5PhA-000471-4p; Wed, 25 Mar 2026 14:58:56 +0000
-Received: by outflank-mailman (input) for mailman id 1262515;
- Wed, 25 Mar 2026 14:58:54 +0000
+	id 1w5PpR-00070E-5E; Wed, 25 Mar 2026 15:07:29 +0000
+Received: by outflank-mailman (input) for mailman id 1262572;
+ Wed, 25 Mar 2026 15:07:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1w5Ph7-0003yr-Sl
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 14:58:54 +0000
+ (envelope-from <jgross@suse.com>) id 1w5PpP-000707-TA
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:07:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5Ph7-00GX2B-8V
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:58:53 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1w5PpP-00Eqx6-8v
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 16:07:27 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69c3f81e-bab6-0a2a0a5309dd-0a2a450ca2c4-36
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:58:53 +0100
-Received: from [40.107.201.38]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <roger.pau@citrix.com>)
- id 69c3f82b-f93d-0a2a450c0019-286bc9263638-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:58:52 +0100
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by SA1PR03MB8032.namprd03.prod.outlook.com (2603:10b6:806:45a::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.25; Wed, 25 Mar
- 2026 14:58:24 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9745.019; Wed, 25 Mar 2026
- 14:58:49 +0000
+ (envelope-from <jgross@suse.com>)
+ id 69c3fa2d-5cb7-0a2a0a5109dd-0a2a4508c25e-14
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 16:07:27 +0100
+Received: from [209.85.208.43] (helo=mail-ed1-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <jgross@suse.com>)
+ id 69c3f722-1950-0a2a45080019-d155d02bb58a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:54:26 +0100
+Received: by mail-ed1-f43.google.com with SMTP id
+ 4fb4d7f45d1cf-6694c9c02c5so6255441a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 07:54:26 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-668cfdb4659sm6234664a12.13.2026.03.25.07.54.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Mar 2026 07:54:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,642 +55,272 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CxTpgdybzIUTejkbmW1/tQr7jiS8PiFL0U97Q4uYeWrJlhYZZGeBHfZalnOI5Y3HVAB0+zuLZs2f1vGhv3BLrnbzX4TyLw4+dQhdkCstESJ+fopwaL8KIuVOUDbXrFUvrY1LAj5Y+YXpTB7yBBcWKUaAOu83WCjv42GSFbZGJyvLKhUrq8ndL6aKbOGk45uIJxabWWCwFmp3XDZdi4KkozCuUqrEHP8VZOlN0C7o/Eg73FO3waFxEUhS71mQqMWbbR3irf0yM9cJW2uXAvWj7edk1jYKqBgKSDPNYzgm7M8t6D1dbGhe1iyBHX4gT2TWvk/5lKHcrIku5QqIC6srnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=psSwTiMHxfUat3/JIkx9r7muILzs13+b/MhPgdlVn7k=;
- b=qpA1VTLSndzxbdwh5VlyKU6JkXJp1r/KdP8T/KtH7ltMFyRd76H0oR1+ivzhAh4yIkLRqkmJgcUE2Lv7axA2HSgvpbOekb064Pv+agOwq1timDBSPwlM+GJp9iFvH5W52ZgK3r9UVhE1K+Hsg+BAcEN4TkWpT8PiRTrU0uXcXF19Ppw6s/hzPWDit65zLhp7YNbN2e6P6jrhoQLBSuxGbqiVCiXxNkKO56g3+hqRQD4C4NSpLpp80ND1k8Dex6VJKX5YBkUMgOe+DsdyWGtZfKZY1llNcivV+Q64RRZ7tGuCbn+IJJiY4dhdrr5aRAwPxTZmNYdYcSxkFlt1Omd73Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=psSwTiMHxfUat3/JIkx9r7muILzs13+b/MhPgdlVn7k=;
- b=xM/S7Bc9h/QDsbJUbuKYOIpjL6rp9GHT54yZNLURHAXKd+KSOnhWoMSa8kqNGk18jynh5dFU1xs199vq2ulupttWmSEjuqEvZd0DPIdwKTfnbQ9DqwjgHoRW92yu8QSo4kBG1xNWaDMwPkj5auI9vU44gIcZc9+tOZFoDGnpjZQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 4/4] xen/uart: enable parsing ACPI SPCR on x86
-Date: Wed, 25 Mar 2026 15:58:24 +0100
-Message-ID: <20260325145824.31601-5-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260325145824.31601-1-roger.pau@citrix.com>
-References: <20260325145824.31601-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA3P292CA0068.ESPP292.PROD.OUTLOOK.COM
- (2603:10a6:250:49::6) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1774450466; x=1775055266; darn=lists.xenproject.org;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=HYAHAWzJvOJE6VRHhQ6GA5prEi6dP5vy8cKS5t0jXc0=;
+        b=GtG6tuj95gFBEOrz+/USNyqVmF0ZTI3LBZ6RuAnLIiSWKoThPAxr7BjqNOw3COTk1a
+         3vXi0SoNJywtvkMGgm0vI8Ga92XH848w61g18FqOk7NX5Duc7lPMW9vXI6p4iLj6vWQS
+         djFe9YyvpKXc0yP30KKEOhLuTHnSmCEXGuwrMz+3ItoVmjnAzHi6kKTwq3J9JhdXkmzA
+         uYLwRvhM2Q6cA+QAQO8kfoOQzjDt4G41zXPBI2p60kyx8Oox+Q0HEHt8rCbwrYkoeJdU
+         2uI2AdnEfzur5zb8+zuxIQq1fOnPHO3igVMVYCIEj1Vg8FWyU1E8/753ImntLHZpQbOv
+         ILBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774450466; x=1775055266;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HYAHAWzJvOJE6VRHhQ6GA5prEi6dP5vy8cKS5t0jXc0=;
+        b=UKWVuGnkTVxOnx2BXvFKbOco4F5REBDY3j5oqqcDuxPT0KV+5mG/Ct+CCFAbTADkfz
+         Nxxt8EWIzfD8et5DJ+a0pcS5kv4ni/7p7n/OnFq8nD9GVojX/oWd3jqRAJxGwnnkcwdy
+         9r+mL1sddfZCWkfMrrD5Qt6l8ACk5kpXvPVuE2ht6RrLV1wCYymzC1AdGyb9Ez3zmzZO
+         wn9y8lso1yexyKqVpftCLP9OoeLfG0X/8HADpMIQAXI997hgHeN5v3AdZCfgNVSHGO2j
+         kSLQmhVpBOWEAnn90pAC9LjylprqPv86Q4b/uDM4Gt6N7VnJ98qyDRwbLKgcmli++Yr3
+         HJ0g==
+X-Forwarded-Encrypted: i=1; AJvYcCVAAWVtSqd5T23Hl/jkwnArX1kiZTNpYxxNHp/L/7Ye+cVPddW8o1Du4gGgNfKR5ffylkG5iX3GSXU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yze8zyJu1UAtZPeOi9WfO0SjaHC+zgB9RwYp5avUD1pZ+xOaCbo
+	Kc+J9cHK5d91jYacx1XsG84OozssPIfDKx2uM2/4LQluuE9807rBEiUjXn5Dl6WXQt8=
+X-Gm-Gg: ATEYQzwXkGJSX/3mk4MSpEv4vwgjyXIdxMC7wRnJyRRfbiEAaqdmEX9br4t+kqSsii9
+	+6HRf3H8PMAkcUZFTuTto2gMaR/U79dLtTigqguBnZlkr8zbRcDXE28N2E9UsCNlOr7dn+KsR8f
+	KR4qCrYVeWFwTH5gSKXAUWWpG8UVVTe8pgyDCaNuVVwCIjrh/dEfoLQCtpzw2XtzIekcKNrGo/m
+	6Gh4IiUIJptCMJoV0zx/7OrB8tEvoSVb3m/XGxZxp4Ok9a0WGuWL9TXF5E39mgO+IA+aIJ4F/LT
+	LS/QEnuodczf5TthMZJAYibb7jdYyzR6fAdBKInFd57LHSupefLQRuPhrtCLTXABvCQB25uUxfx
+	A+FQZJAfjTJfQMFUttChqlgjsIgAHCsqtcHO1QFwD3cWngH9OkFypQGycRjgAdvAzAVuzWSJU2o
+	zPupAPP9UqVlqboa+8nldmWxEofoKdXQWIXJUm6aVMkpH42/YtVa3s4NyepqusC2V0A9NUAkETB
+	g7aX7X1Yc4+gVKMAcOSc1qbSNTA0dGfrcwfLwRPwFa/l9zQRPh1cw==
+X-Received: by 2002:a05:6402:5213:b0:668:488a:d3da with SMTP id 4fb4d7f45d1cf-66a826cd5fbmr2295364a12.25.1774450465604;
+        Wed, 25 Mar 2026 07:54:25 -0700 (PDT)
+Message-ID: <bf76d5d5-5b3f-45fc-93e4-6bff07e60288@suse.com>
+Date: Wed, 25 Mar 2026 15:54:24 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|SA1PR03MB8032:EE_
-X-MS-Office365-Filtering-Correlation-Id: 242e09b4-95b9-460a-d95b-08de8a7f058e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	pWECrpdXnbhs5XNshngbPzddDPy25r6EmyRmdUSo8OXlnCJlUfP3ax827uZnbkQspd+MgXiUSXF1rNN5zrbb4azPPDk1treww7sMrNFts6PcruQ+Nmbn7pc17DpYpT0MwbzTYD4iBx2Ozqyg0J2dRqqpfkZMaTBrmOZKKj0BIRG12U8NskYP713LNBZNlLnPgCe9nKK4bqqeFFWo+ylWcDljUsVeynkXM38NlbYYWX3IprDiZXW6ULj3RUnwux+Umfu20teCVrmLFw0Oip56LdyE5lITW41wC03F8T1cwPIe+YCuG5YFahA68QARxjayoxSBmuryysPsArY2ZWAhGA1PJptmPWGS9v3GupYS8LKn3BuTjpfE+CCd3Bt1bow/8ptvdegoUIDzwO53BFRhZKwVu7wK0E0Jbkp2Kw0skThlRniK7pgkbnYAyqzq4wy/PLJA7ZS/BCrsCLicM7Lp8ntr8y5ei+qHoz3kBU9PcftEUqCk59ayMXw48DxO1OWvd+eRFPgHtowXj+VD99VP0ObdGrich7INfQJXEc8BQDNPYNpLU/vwob/nz3WJ2miKjuKOvGzB3gNMYXaXvyE2JBF9b8KRG7j0xpp7r9StdriI08d2z/fUNPsi590UtJJcxURkeKWIjyx4uxu3Dlb1vOqjXq7yeUZNAdJsIxd9Nv2Sj/Umwo2O6TAm0a+o/UWRwf7K8G5siFPfullKuNDDTVp3g8onp6Hd+d6B1OAb44U=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZmRyaExsT3l3Q0ZtZzVsbnBUUTQ2S0FZU1ArS3VPQThMVDNtYklDVTV3ZU5n?=
- =?utf-8?B?YzcrRGhWOGNkeGdmbjV2c0IzTk5RYUZuWEVMVmhPZWZUZTBDZDN6eDhxNFpZ?=
- =?utf-8?B?Qk9jR1o0ZkhuVk4zNTFtbytvMUhmaE1xNmxJODFZTEMxRmxuQ2QyT08veVVp?=
- =?utf-8?B?ZFJKRzdyRXFZQlJ4bXlINlV3Qm5wbUFuR294cE9admdLNU02WXQ1YzA4eWVV?=
- =?utf-8?B?SmtGZXhLNnlBWm1DUlo5R1BZMFNYYSswU0tJUkYwdVYzMkE2V0dVaVQwNElN?=
- =?utf-8?B?RXViMFFYZ3RQRU5MYXVma1FKcmM5Q0hsNTQ3V1I2OUhPNmxTV2tKeVo1QUdi?=
- =?utf-8?B?YXo4QVh0cVVJaGgvUlZ6SjdJK2J1QndPSzBQT2l6YkRiQmF0SER2MDhlM282?=
- =?utf-8?B?MW4xZlRUTm5TRlpTR1pOc2k4VGZaeFRNYzh5c3c3aTRsb0FCcTVUQXVKNFBa?=
- =?utf-8?B?M3dWQjRLdnpCek9mamV0NGtuMWZ3MERFTzB2ZzNzUEdLbTl1Qmg5VVIzaDM2?=
- =?utf-8?B?S0VmeE1DSjkrSEJwdE1NcUpVb0g4SEF4TUdDRVNxa1VNRERNZWZBTVVqVFBh?=
- =?utf-8?B?NHRUUnFlSjdtOGFhdXBQZVh0T0RyNEVCMys5NGhpQldGM05YaFUyYStZMGVU?=
- =?utf-8?B?YStqOEQ4NEVpa1JuN2VxQ0dmazlaak1mSGVwWVpGOTUvd2xOWWJyRlpWc28z?=
- =?utf-8?B?UzNhdTV1aUJGU0JYWFhJajBuQmhRVXlEWDNCd1V4ZkQ0TFFUNFVIQ0UxS2E5?=
- =?utf-8?B?M0l0TWdMMndtY0syK0hUdlZza29DRnFCdmkxaG9yVzNqdi8wN2dtc1NwVm9y?=
- =?utf-8?B?cHJoQ3VRM3JpWUw2eXVQeUVEd0dXcGFvdXZVVWRRRzladDA1STJmbG9lazZG?=
- =?utf-8?B?dE16bHlWa0dSSTNlSlBQZ0d2NnpYNHZHeTlYOHdXOEg1LzhiY3UwRXhVeCtF?=
- =?utf-8?B?NlJ1WnBweFVZdkpFb0hvditTVWFUMEhGT1lWRC9RUTBXeTExakhSWHc0SXhs?=
- =?utf-8?B?VzAxMU1GYkEwWkdrWDZJOWpNSm5PcnlKVFFrd2VUUW9ibjdvK2trSjY5OFRs?=
- =?utf-8?B?c2pVTzBmVjJKRE9OSkwybzJvUXY5c2xSSkF1bS9vaWdYeFd1WFd0dTZheU5k?=
- =?utf-8?B?eTY0TUNCL2kwQS9xSVFKUkhjd0tsVzBqUVRMY3JCd1Y0am5kY0pOckV4VmxH?=
- =?utf-8?B?a3ZkeCtPQVZsdzJ1SGhrS0I2M1BDQzQ5MVJlYk1XblIyWWV5V2JDbFQxZHlS?=
- =?utf-8?B?eSthdko3UmJ3UEdnc0tLSllxVUc0UUJmaVRlenljK05xTHc0NjNYNkRjaDZk?=
- =?utf-8?B?NnVXK09oaXdtNWs2RmM5M1NKSkdpR0pxbitXcEVGNU5HWUpsUCtxMThZc2Fi?=
- =?utf-8?B?WEFmSVVvNWdadjBDNkYzaytuenNXSVc4UkpsYUpMd1Q5US94Szg2T29wbklS?=
- =?utf-8?B?M01SdFoxcXAwTW1kMUZTUmR4L3ptcCtpak5YYk8rREkvR2VlbENiMk9RREE1?=
- =?utf-8?B?bml1cXA0U1l4WEtLWGtqdDRwazltOFA0VkFZQmJybVpSc21ROFNtQnM5N1g0?=
- =?utf-8?B?TWR4a0Y5SEcxY3BZajE5K3dRNEJsWERjTnB4VHdqNVJmRWdYRmtKWHk1dVZK?=
- =?utf-8?B?YllpV1h5SW1OZm9TbzdkaVo2cFBPM1Q0MjduV3Rpd3kzUWVSUGNtbEExMUlo?=
- =?utf-8?B?SG85SFdaaW9qY3UyM2pDbWRIOWl4Vk1oVzJUTlhoL0laV1YvRmdCRE1MMWpW?=
- =?utf-8?B?OE1kaENrbmIwYnBScC80TEwwb1ZxdUdIMEw4SUN1dFhjdVZoam15K09rbU9K?=
- =?utf-8?B?MFgyZE9WTVJhZ3lqTkExYlJtc2NCRFJ2a2ZiYzNPRFdlZnVBQlkvdGhCODJH?=
- =?utf-8?B?SVRsS3BCcHM0OVpLSzAzcWJWWHduQklIOGR2RVphTjcxQkhxd1FudU81cUNF?=
- =?utf-8?B?WE5SRHZaVGlHQ3hDVWp3clYwb1BwTkJzVk4wSWYzYXNMOExUSXFnVHRDRnc3?=
- =?utf-8?B?T3dUU3Q3a0R4cWpDK25ZZk1NS3kycVRreXJtVm8vK0hoa2FYb00rWUhyc2RT?=
- =?utf-8?B?L2RGL1lIQW9JTEdOY3BtbTBwUjdBQ0xxazlQZ2d1aFlUSUJCREppMDY1Smcv?=
- =?utf-8?B?WkZkQW9KVFBvQ1Q3N1A4T2E3Tk56SlJETFBmbm1DbGRIRlNTTFZYRy94WVJR?=
- =?utf-8?B?Z3hDSnhUTTFZZmJkTG1uRm9oanE2b2grMmNXQ1NDL21VeGRvcldYOTdMejhS?=
- =?utf-8?B?TU1rcG5ZV0dvT1dKQWNYUWxscHN5Q2ZsNVJ2c2lSSm9IMVQ5UkN0VVdUVXlI?=
- =?utf-8?B?V3VaQThVdEd2OVhFeTFwTFRyU3Y1YWhHSFNjUnZpcllFcGt4TWpGQT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 242e09b4-95b9-460a-d95b-08de8a7f058e
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 14:58:49.3472
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Nm+zvVcPwCbyw6kQBjFDrAp832L+UOkY2HzhOtIMem/u35kgrd/A/JPUNhJbxAHMaCkrtiHhIazPKl0wuetJeQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB8032
-X-purgate-ID: tlsNG-d25034/1774450733-F6EAB734-CD2B7F58/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] arinc653: don't assume Dom0 is the control domain
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Nathan Studer <nathan.studer@dornerworks.com>,
+ Stewart Hildebrand <stewart@stew.dk>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <89d17a24-0a1f-4f3f-ac2f-f3701a8d78dd@suse.com>
+ <3a491956-81a6-4c7e-acb0-14f135fc5596@suse.com>
+ <e0031df1-12a6-4459-a670-fbcbca13368a@suse.com>
+ <d7af5c2d-f700-4a16-bc55-750cd7f5ba1b@suse.com>
+Content-Language: en-US
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <d7af5c2d-f700-4a16-bc55-750cd7f5ba1b@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Mw0D29h3sG4Q0oIlI3MJbP1o"
+X-purgate-ID: tlsNG-c1860d/1774450466-F24E6726-5A4B9F2A/0/0
 X-purgate-type: clean
-X-purgate-size: 18677
+X-purgate-size: 11191
 
-Introduce extra logic to allow parsing ACPI tables extra early, and use it
-to parse the ACPI SPCR table and obtain the serial configuration.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Mw0D29h3sG4Q0oIlI3MJbP1o
+Content-Type: multipart/mixed; boundary="------------nAngyBcelk0Y2H3NUlOYgmZh";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Nathan Studer <nathan.studer@dornerworks.com>,
+ Stewart Hildebrand <stewart@stew.dk>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Message-ID: <bf76d5d5-5b3f-45fc-93e4-6bff07e60288@suse.com>
+Subject: Re: [PATCH v2 2/3] arinc653: don't assume Dom0 is the control domain
+References: <89d17a24-0a1f-4f3f-ac2f-f3701a8d78dd@suse.com>
+ <3a491956-81a6-4c7e-acb0-14f135fc5596@suse.com>
+ <e0031df1-12a6-4459-a670-fbcbca13368a@suse.com>
+ <d7af5c2d-f700-4a16-bc55-750cd7f5ba1b@suse.com>
+In-Reply-To: <d7af5c2d-f700-4a16-bc55-750cd7f5ba1b@suse.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
 
-This is gated to the "acpi" device type being set in "com1" on the Xen
-command line.  Note that there can only be one serial device described in
-the SPCR, so limit it's usage to com1 exclusively for the time being.
+--------------nAngyBcelk0Y2H3NUlOYgmZh
+Content-Type: multipart/mixed; boundary="------------ZdTaCr2GwlvQF0UofizSQ6jk"
 
-I can't test the interrupt information parsing on my system, as the
-interrupt is set to GSI with a value of 0xff, which is outside of the range
-of GSIs available on the system.  I've also assumed that the interrupt
-being 0xff is used to signal not interrupt setup (just like the Interrupt
-Pin register on PCI headers).
+--------------ZdTaCr2GwlvQF0UofizSQ6jk
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-WIP/RFC, not sure whether there's interest in attempting to pursue this
-further on x86.  So far the device I have is also exposed on the PCI bus
-aside from SPCR, so using com1=device=amt also works to detect it.
+T24gMjUuMDMuMjYgMTU6MTgsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAyNS4wMy4yMDI2
+IDE0OjM4LCBKw7xyZ2VuIEdyb8OfIHdyb3RlOg0KPj4gT24gMjUuMDMuMjYgMTM6NTQsIEph
+biBCZXVsaWNoIHdyb3RlOg0KPj4+IExlYXZpbmcgYXNpZGUgaGlnaGx5IGRpc2FnZ3JlZ2F0
+ZWQgZW52aXJvbm1lbnRzLCB0aGUgY29udHJvbCBkb21haW4gaXMNCj4+PiB3aGF0IHdpbGwg
+aW52b2tlIFhFTl9TWVNDVExfU0NIRURPUF9wdXRpbmZvLiBJdHMgdkNQVS1zIHRoZXJlZm9y
+ZSBuZWVkIHRvDQo+Pj4gYmUgYWJsZSB0byBydW4gdW5jb25kaXRpb25hbGx5LCBub3QgdGhv
+c2Ugb2YgdGhlIGRvbWFpbiB3aXRoIElEIDAgKHdoaWNoDQo+Pj4gbWF5IG5vdCBleGlzdCBh
+dCBhbGwpLg0KPj4+DQo+Pj4gRml4ZXM6IDlmMGM2NThiYWVkYyAoImFyaW5jOiBhZGQgY3B1
+LXBvb2wgc3VwcG9ydCB0byBzY2hlZHVsZXIiKQ0KPj4+IFNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4+DQo+PiBSZXZpZXdlZC1ieTogSnVlcmdl
+biBHcm9zcyA8amdyb3NzQHN1c2UuY29tPg0KPiANCj4gVGhhbmtzLg0KPiANCj4+PiAtLS0N
+Cj4+PiBUaGVyZSBiZWluZyBubyAiZWxzZSIgdG8gdGhlIGlmKCksIHdoYXQgYWJvdXQgb3Ro
+ZXIgY29udHJvbCBkb21haW4gdkNQVS1zPw0KPj4NCj4+IGE2NTNzY2hlZF9hbGxvY191ZGF0
+YSgpIGlzIGNhbGxlZCBmb3IgYWxsIHVuaXRzIG9mIGEgZG9tYWluLg0KPiANCj4gWWVzLCBh
+bmQgd2hhdCBpZiBmb3IgdGhlIGxhc3QgZmV3IG5vIHZhY2FudCBzbG90IGlzIGF2YWlsYWJs
+ZT8gV2l0aCBvbmUgdkNQVQ0KPiBwZXIgdW5pdCBhbmQgRG9tMCBoYXZpbmcgNjUgdkNQVS1z
+LCB0aGlzIHdvdWxkIGFscmVhZHkgYmUgYSBwcm9ibGVtIGFpdWkuDQo+IEFuZCBBUklOQzY1
+M19NQVhfRE9NQUlOU19QRVJfU0NIRURVTEUgY2FuJ3QgZXZlbiBiZSBjaGFuZ2VkIGVhc2ls
+eSwgYXMgaXQncw0KPiBiYWtlZCBpbnRvIHRoZSBzeXNjdGwgcHVibGljIGhlYWRlciAod2hl
+biBzdWNoIGFuIHVwcGVyIGJvdW5kIHNob3VsZCByZWFsbHkNCj4gYmUgYW4gaW1wbGVtZW50
+YXRpb24gZGV0YWlsLCBtYXliZSBhIEtjb25maWcgc2V0dGluZykuIFlldCB0aGVuIGV2ZW4g
+dGhlDQo+ICJET01BSU5TIiBpbiB0aGUgbmFtZSBpcyBjb25mdXNpbmcsIHdoZW4gaXQgbGlt
+aXRzIHRoZSBudW1iZXIgb2YgdW5pdHMgd2hpY2gNCj4gY2FuIGJlIGRlYWx0IHdpdGguDQoN
+CkFGQUlVSSB0aGUgYXJpbmM2NTMgc2NoZWR1bGVyIGlzIG1lYW50IHRvIHNlcnZlIGEgc2lu
+Z2xlIHBoeXNpY2FsIGNwdSBvbmx5Lg0KV2l0aCBjb3JlIHNjaGVkdWxpbmcgdGhpcyBjYW4g
+YmUgZXh0ZW5kZWQgdG8gYSBjb3JlIG9yIGEgc29ja2V0LCBidXQgdGhpcw0Kd29uJ3QgaW5j
+cmVhc2UgdGhlIG51bWJlciBvZiB1bml0cywgb2YgY291cnNlLg0KDQpJIGFncmVlIHRoYXQg
+dGhlcmUgc2hvdWxkIGJlIHNhZmV0eSBjaGVja3MgYWRkZWQgdG8gZW5zdXJlIHRoaXMgYXNz
+dW1wdGlvbg0KaXNuJ3QgdmlvbGF0ZWQsIGJ1dCBPVE9IIHRoZSBhcmluYzY1MyBzY2hlZHVs
+ZXIgaXMgZm9yIHZlcnkgc3BlY2lhbCBzZXR1cHMNCm9ubHkuDQoNCj4gDQo+IEltbyBhdCB0
+aGUgdmVyeSwgdmVyeSBsZWFzdCBub3QgYmVpbmcgYWJsZSB0byBkZWFsIHdpdGggYWxsIERv
+bTAgLyBjdGxkb20NCj4gdkNQVS1zIHNob3VsZCBiZSBsb2dnZWQuDQoNCkkgYWdyZWUuDQoN
+Cj4gDQo+Pj4gQW5kIHdoeSBhcmUgdGhleSBhZGRlZCB0byBhbGwgc2NoZWR1bGVyIGluc3Rh
+bmNlcz8NCj4+DQo+PiBXaGF0IGRvIHlvdSBtZWFuIHdpdGggImFkZGVkIHRvIGFsbCBzY2hl
+ZHVsZXIgaW5zdGFuY2VzIj8NCj4+DQo+PiBhNjUzc2NoZWRfYWxsb2NfdWRhdGEoKSB3aWxs
+IGJlIGNhbGxlZCBvbmx5IGZvciB0aGUgdW5pdHMgb2YgYSBkb21haW4gYmVpbmcNCj4+IGlu
+IHRoZSBpbnN0YW5jZSAoaS5lLiBjcHVwb29sKSBkZXNpZ25hdGVkIGJ5IHRoZSBvcHMgcGFy
+YW1ldGVyLg0KPiANCj4gUGVyaGFwcyB0aGUgcXVlc3Rpb24gaXMgYSByZXN1bHQgb2YgbWUg
+YmVpbmcgY29uZnVzZWQuIE15IHVuZGVyc3RhbmRpbmcgd2FzDQo+IHRoYXQgYTY1M3NjaGVk
+X2FsbG9jX3VkYXRhKCkgaXMgc3VwcG9zZWQgdG8gYmUgc2V0dGluZyB1cCBwZXItdW5pdCBk
+YXRhLA0KPiBub3QgcGVyLXNjaGVkdWxlciBpbnN0YW5jZSBzdHVmZi4gWWV0IHRoZSBsYXR0
+ZXIgaXMgd2hhdCBsb29rcyB0byBiZQ0KPiBoYXBwZW5pbmcgaW4gdGhlIERvbTAgKG5vdyBj
+b250cm9sLWRvbWFpbikgc3BlY2lmaWMgYmxvY2sgb2YgY29kZS4NCg0KSSBkb24ndCB0aGlu
+ayBzby4NCg0KRG9tMCBpcyBzcGVjaWFsLCBhcyBpdCBuZWVkcyB0byBiZSBmdW5jdGlvbmFs
+IHdpdGhvdXQgc29tZW9uZSBoYXZpbmcNCnVwbG9hZGVkIHRoZSBzY2hlZHVsaW5nIHRhYmxl
+LiBJbiBjYXNlIGRvbTAgaXNuJ3QgaW4gdGhlIGNwdXBvb2wgb2YgdGhlDQphcmluYzY1MyBz
+Y2hlZHVsZXIsIHRoZXJlIHdvbid0IGJlIGFueSBkb20wLXNwZWNpZmljIGVudHJpZXMuDQoN
+Cg0KSnVlcmdlbg0K
+--------------ZdTaCr2GwlvQF0UofizSQ6jk
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Posting it kind of early to know whether I should try to polish it for
-submission or we are happy with not having this on x86.
----
- docs/misc/xen-command-line.pandoc |   8 +-
- xen/drivers/acpi/tables/tbutils.c | 131 +++++++++++++++----
- xen/drivers/char/ns16550.c        | 202 +++++++++++++++++++++++-------
- xen/include/acpi/actables.h       |   5 +
- xen/include/acpi/actbl2.h         |  10 ++
- 5 files changed, 282 insertions(+), 74 deletions(-)
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index ebdca007d26b..12e1965cfb60 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -349,7 +349,7 @@ ACPI indicating none to be there.
- 
- ### com1 (x86)
- ### com2 (x86)
--> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<port-bdf>][,[<bridge-bdf>]]]]]]`
-+> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt|acpi][,[<irq>|msi][,[<port-bdf>][,[<bridge-bdf>]]]]]]`
- 
- Both option `com1` and `com2` follow the same format.
- 
-@@ -379,6 +379,8 @@ Both option `com1` and `com2` follow the same format.
-   avoiding Intel AMT devices.
- * `amt` indicated that Xen should scan the PCI bus for the UART,
-   including Intel AMT devices if present.
-+* `acpi` indicates Xen should use ACPI information (from SPCR table) if present
-+  to configure the serial console.  This option is only supported for com1.
- 
- A typical setup for most situations might be `com1=115200,8n1`
- 
-@@ -403,9 +405,9 @@ The accepted name keywords for name=value pairs are:
- * `clock-hz`- accepts large integers to setup UART clock frequencies.
-               Do note - these values are multiplied by 16.
- * `data-bits` - integer between 5 and 8
--* `dev` - accepted values are `pci` OR `amt`. If this option
-+* `dev` - accepted values are `pci`, `amt` or `acpi`. If this option
-           is used to specify if the serial device is pci-based. The io_base
--          cannot be specified when `dev=pci` or `dev=amt` is used.
-+          cannot be specified when `dev=pci|amt|acpi` is used.
- * `io-base` - accepts integer which specified IO base port for UART registers
- * `irq` - IRQ number to use
- * `parity` - accepted values are same as positional parameters
-diff --git a/xen/drivers/acpi/tables/tbutils.c b/xen/drivers/acpi/tables/tbutils.c
-index 458989abea99..c5eb6b1fc523 100644
---- a/xen/drivers/acpi/tables/tbutils.c
-+++ b/xen/drivers/acpi/tables/tbutils.c
-@@ -341,39 +341,20 @@ acpi_tb_get_root_table_entry(u8 * table_entry,
- 	}
- }
- 
--/*******************************************************************************
-- *
-- * FUNCTION:    acpi_tb_parse_root_table
-- *
-- * PARAMETERS:  Rsdp                    - Pointer to the RSDP
-- *              Flags                   - Flags
-- *
-- * RETURN:      Status
-- *
-- * DESCRIPTION: This function is called to parse the Root System Description
-- *              Table (RSDT or XSDT)
-- *
-- * NOTE:        Tables are mapped (not copied) for efficiency. The FACS must
-- *              be mapped and cannot be copied because it contains the actual
-- *              memory location of the ACPI Global Lock.
-- *
-- ******************************************************************************/
--
--acpi_status __init
--acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
-+static acpi_status __init
-+acpi_tb_get_root_table(acpi_physical_address rsdp_address,
-+	               struct acpi_table_header **out_table,
-+		       unsigned int *entry_size)
- {
- 	struct acpi_table_rsdp *rsdp;
- 	acpi_native_uint table_entry_size;
--	acpi_native_uint i;
--	u32 table_count;
- 	struct acpi_table_header *table;
- 	acpi_physical_address address;
- 	acpi_physical_address rsdt_address = 0;
- 	u32 length;
--	u8 *table_entry;
- 	acpi_status status;
- 
--	ACPI_FUNCTION_TRACE(tb_parse_root_table);
-+	ACPI_FUNCTION_TRACE(tb_get_root_table);
- 
- 	/*
- 	 * Map the entire RSDP and extract the address of the RSDT or XSDT
-@@ -454,6 +435,42 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
- 		return_ACPI_STATUS(status);
- 	}
- 
-+	*out_table = table;
-+	*entry_size = table_entry_size;
-+	return_ACPI_STATUS(AE_OK);
-+}
-+
-+/*******************************************************************************
-+ *
-+ * FUNCTION:    acpi_tb_parse_root_table
-+ *
-+ * PARAMETERS:  Rsdp                    - Pointer to the RSDP
-+ *              Flags                   - Flags
-+ *
-+ * RETURN:      Status
-+ *
-+ * DESCRIPTION: This function is called to parse the Root System Description
-+ *              Table (RSDT or XSDT)
-+ *
-+ * NOTE:        Tables are mapped (not copied) for efficiency. The FACS must
-+ *              be mapped and cannot be copied because it contains the actual
-+ *              memory location of the ACPI Global Lock.
-+ *
-+ ******************************************************************************/
-+
-+acpi_status __init
-+acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
-+{
-+	struct acpi_table_header *table;
-+	unsigned int table_count, table_entry_size, i;
-+	void *table_entry;
-+	acpi_status status;
-+
-+	status = acpi_tb_get_root_table(rsdp_address, &table,
-+	                                &table_entry_size);
-+	if (!ACPI_SUCCESS(status))
-+		  return_ACPI_STATUS(status);
-+
- 	/* Calculate the number of tables described in the root table */
- 
- 	table_count =
-@@ -502,7 +519,7 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
- 	 * It is not possible to map more than one entry in some environments,
- 	 * so unmap the root table here before mapping other tables
- 	 */
--	acpi_os_unmap_memory(table, length);
-+	acpi_os_unmap_memory(table, table->length);
- 
- 	/*
- 	 * Complete the initialization of the root table array by examining
-@@ -523,3 +540,67 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
- 
- 	return_ACPI_STATUS(AE_OK);
- }
-+
-+acpi_status __init
-+acpi_early_get_table(const char *signature, acpi_native_uint instance,
-+                     struct acpi_table_header **out_table)
-+{
-+	static acpi_physical_address __initdata table_addr[128];
-+	static unsigned int __initdata table_count;
-+	static unsigned int __initdata table_entry_size;
-+	unsigned int i;
-+
-+	ACPI_FUNCTION_TRACE(tb_early_get_table);
-+
-+	if (!table_count) {
-+		struct acpi_table_header *table;
-+		void *table_entry;
-+		acpi_status status;
-+		acpi_physical_address rsdp_address = acpi_os_get_root_pointer();
-+
-+		if (!rsdp_address)
-+			return_ACPI_STATUS(AE_NOT_FOUND);
-+
-+		status = acpi_tb_get_root_table(rsdp_address, &table,
-+			                        &table_entry_size);
-+		if (!ACPI_SUCCESS(status))
-+			return_ACPI_STATUS(status);
-+
-+		/* Calculate the number of tables described in the root table */
-+		table_count = (table->length - sizeof(*table)) / table_entry_size;
-+
-+		if (table_count > ARRAY_SIZE(table_addr)) {
-+			table_count = 0;
-+			return_ACPI_STATUS(AE_NO_MEMORY);
-+		}
-+
-+		table_entry = ACPI_CAST_PTR(uint8_t, table) + sizeof(*table);
-+
-+		for (i = 0; i < table_count; i++) {
-+			table_addr[i] =
-+			      acpi_tb_get_root_table_entry(table_entry,
-+			                                   table_entry_size);
-+			table_entry += table_entry_size;
-+		}
-+
-+		acpi_os_unmap_memory(table, table->length);
-+	}
-+
-+	for (i = 0; i < table_count; i++) {
-+		struct acpi_table_header *header =
-+		      acpi_os_map_memory(table_addr[i], sizeof(*header));
-+
-+		if (ACPI_COMPARE_NAME(header->signature, signature)) {
-+			unsigned int len = header->length;
-+
-+			acpi_os_unmap_memory(header, sizeof(*header));
-+			*out_table = acpi_os_map_memory(table_addr[i], len);
-+
-+			return_ACPI_STATUS(AE_OK);
-+		}
-+
-+		acpi_os_unmap_memory(header, sizeof(*header));
-+	}
-+
-+	return_ACPI_STATUS(AE_NOT_FOUND);
-+}
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 9cd3e471bfa5..606dd404fd76 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -1375,6 +1375,136 @@ static void enable_exar_enhanced_bits(const struct ns16550 *uart)
- 
- #endif /* CONFIG_HAS_PCI */
- 
-+#ifdef CONFIG_ACPI
-+#include <acpi/acpi.h>
-+#include <acpi/actables.h>
-+
-+#include <xen/acpi.h>
-+
-+static int __init acpi_uart_config(struct ns16550 *uart, unsigned int idx)
-+{
-+    struct acpi_table_header *table;
-+    struct acpi_table_spcr *spcr;
-+    acpi_status status;
-+    int rc = 0;
-+
-+    /*
-+     * SPCR specifies a single port, expect it to be configured at position 0
-+     * in the uart array.
-+     */
-+    if ( idx )
-+        return -EXDEV;
-+
-+    if ( system_state <= SYS_STATE_early_boot )
-+        status = acpi_early_get_table(ACPI_SIG_SPCR, 0, &table);
-+    else
-+        status = acpi_get_table(ACPI_SIG_SPCR, 0, &table);
-+
-+    if ( ACPI_FAILURE(status) )
-+    {
-+        printk(XENLOG_ERR "Failed to find or parse ACPI SPCR table\n");
-+        return -ENODEV;
-+    }
-+
-+    spcr = container_of(table, struct acpi_table_spcr, header);
-+
-+    rc = -EDOM;
-+    if ( spcr->interface_type != ACPI_DBG2_16550_COMPATIBLE )
-+    {
-+        printk(XENLOG_ERR "Incompatible ACPI SPCR UART interface %u\n",
-+               spcr->interface_type);
-+        goto out;
-+    }
-+
-+    if ( spcr->serial_port.space_id != ACPI_ADR_SPACE_SYSTEM_MEMORY &&
-+         (IS_ENABLED(CONFIG_ARM) ||
-+          spcr->serial_port.space_id != ACPI_ADR_SPACE_SYSTEM_IO) )
-+    {
-+        printk(XENLOG_ERR "Incompatible ACPI SPCR UART address space %u\n",
-+               spcr->serial_port.space_id);
-+        goto out;
-+    }
-+
-+    if ( !spcr->serial_port.address )
-+    {
-+        printk(XENLOG_ERR "ACPI SPCR console redirection disabled\n");
-+        goto out;
-+    }
-+
-+    uart->io_base = spcr->serial_port.address;
-+    uart->io_size = DIV_ROUND_UP(spcr->serial_port.bit_width, BITS_PER_BYTE);
-+    uart->reg_shift = spcr->serial_port.bit_offset;
-+
-+    uart->parity = spcr->parity;
-+    uart->stop_bits = spcr->stop_bits;
-+    uart->data_bits = 8;
-+
-+    if ( uart->baud == BAUD_AUTO && spcr->baud_rate )
-+    {
-+        switch ( spcr->baud_rate )
-+        {
-+        case ACPI_SPCR_BAUD_9600:
-+            uart->baud = 9600;
-+            break;
-+
-+        case ACPI_SPCR_BAUD_19200:
-+            uart->baud = 19200;
-+            break;
-+
-+        case ACPI_SPCR_BAUD_57600:
-+            uart->baud = 57600;
-+            break;
-+
-+        case ACPI_SPCR_BAUD_115200:
-+            uart->baud = 115200;
-+            break;
-+
-+        default:
-+            printk(XENLOG_WARNING
-+                   "Ignoring invalid baud rate %u in ACPI SPCR\n",
-+                   spcr->baud_rate);
-+        }
-+    }
-+
-+    if ( IS_ENABLED(CONFIG_X86) )
-+    {
-+        /* Use polling mode by default. */
-+        uart->irq = 0;
-+
-+        if ( (spcr->interrupt_type & ACPI_SPCR_INTR_TYPE_IO_APIC) &&
-+             spcr->interrupt < 0xff )
-+            uart->irq = spcr->interrupt;
-+        else if ( (spcr->interrupt_type & ACPI_SPCR_INTR_TYPE_PC_AT) &&
-+                  ((spcr->pc_interrupt >=  2 && spcr->pc_interrupt <=  7) ||
-+                   (spcr->pc_interrupt >=  9 && spcr->pc_interrupt <= 12) ||
-+                   (spcr->pc_interrupt >= 14 && spcr->pc_interrupt <= 15)) )
-+            uart->irq = spcr->pc_interrupt;
-+    }
-+
-+#ifdef CONFIG_ARM
-+    /* The trigger/polarity information is not available in spcr. */
-+    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-+    uart->irq = spcr->interrupt;
-+#endif /* CONFIG_ARM */
-+
-+#ifdef CONFIG_HAS_PCI
-+    if ( spcr->pci_device_id != 0xffff && spcr->pci_vendor_id != 0xffff )
-+    {
-+        uart->ps_bdf_enable = true;
-+        uart->pci_device = PCI_SBDF(spcr->pci_segment, spcr->pci_bus,
-+                                    spcr->pci_device, spcr->pci_function);
-+    }
-+#endif /* CONFIG_HAS_PCI */
-+
-+    rc = 0;
-+
-+ out:
-+    if ( system_state <= SYS_STATE_early_boot )
-+        acpi_os_unmap_memory(&spcr, spcr->header.length);
-+    return rc;
-+}
-+#endif /* CONFIG_ACPI */
-+
- /*
-  * Configure serial port with a string:
-  *   <baud>[/<base_baud>][,DPS[,<io-base>[,<irq>[,<port-bdf>[,<bridge-bdf>]]]]].
-@@ -1539,6 +1669,15 @@ static bool __init parse_positional(struct ns16550 *uart, char **str)
-             conf += 3;
-         }
-         else
-+#endif
-+#ifdef CONFIG_ACPI
-+        if ( strncmp(conf, "acpi", 4) == 0 )
-+        {
-+            if ( acpi_uart_config(uart, uart - ns16550_com) )
-+                return true;
-+            conf += 4;
-+        }
-+        else
- #endif
-         {
-             uart->io_base = simple_strtoull(conf, &conf, 0);
-@@ -1643,8 +1782,17 @@ static bool __init parse_namevalue_pairs(char *str, struct ns16550 *uart)
-             uart->reg_width = simple_strtoul(param_value, NULL, 0);
-             break;
- 
--#ifdef CONFIG_HAS_PCI
-         case device:
-+#ifdef CONFIG_ACPI
-+            if ( strncmp(param_value, "acpi", 3) == 0 )
-+            {
-+                acpi_uart_config(uart, uart - ns16550_com);
-+                dev_set = true;
-+                break;
-+            }
-+            else
-+#endif /* CONFIG_ACPI */
-+#ifdef CONFIG_HAS_PCI
-             if ( strncmp(param_value, "pci", 3) == 0 )
-             {
-                 pci_uart_config(uart, 1/* skip AMT */, uart - ns16550_com);
-@@ -1656,9 +1804,11 @@ static bool __init parse_namevalue_pairs(char *str, struct ns16550 *uart)
-                 dev_set = true;
-             }
-             else
-+#endif /* CONFIG_HAS_PCI */
-                 PARSE_ERR_RET("Unknown device type %s\n", param_value);
-             break;
- 
-+#if CONFIG_HAS_PCI
-         case port_bdf:
-         {
-             unsigned int b, d, f;
-@@ -1680,7 +1830,7 @@ static bool __init parse_namevalue_pairs(char *str, struct ns16550 *uart)
-             uart->pb_bdf_enable = true;
-             break;
-         }
--#endif
-+#endif /* CONFIG_HAS_PCI */
- 
-         default:
-             PARSE_ERR_RET("Invalid parameter: %s\n", token);
-@@ -1845,8 +1995,6 @@ DT_DEVICE_END
- #endif /* HAS_DEVICE_TREE_DISCOVERY */
- 
- #if defined(CONFIG_ACPI) && defined(CONFIG_ARM)
--#include <xen/acpi.h>
--
- static int __init ns16550_acpi_uart_init(const void *data)
- {
-     struct acpi_table_header *table;
-@@ -1857,51 +2005,13 @@ static int __init ns16550_acpi_uart_init(const void *data)
-      * Only support one UART on ARM which happen to be ns16550_com[0].
-      */
-     struct ns16550 *uart = &ns16550_com[0];
--
--    status = acpi_get_table(ACPI_SIG_SPCR, 0, &table);
--    if ( ACPI_FAILURE(status) )
--    {
--        printk("ns16550: Failed to get SPCR table\n");
--        return -EINVAL;
--    }
--
--    spcr = container_of(table, struct acpi_table_spcr, header);
--
--    if ( unlikely(spcr->serial_port.space_id != ACPI_ADR_SPACE_SYSTEM_MEMORY) )
--    {
--        printk("ns16550: Address space type is not mmio\n");
--        return -EINVAL;
--    }
--
--    /*
--     * The serial port address may be 0 for example
--     * if the console redirection is disabled.
--     */
--    if ( unlikely(!spcr->serial_port.address) )
--    {
--        printk("ns16550: Console redirection is disabled\n");
--        return -EINVAL;
--    }
-+    int rc;
- 
-     ns16550_init_common(uart);
- 
--    /*
--     * The baud rate is pre-configured by the firmware.
--     * And currently the ACPI part is only targeting ARM so the flow_control
--     * field and all PCI related ones which we do not care yet are ignored.
--     */
--    uart->baud = BAUD_AUTO;
--    uart->data_bits = 8;
--    uart->parity = spcr->parity;
--    uart->stop_bits = spcr->stop_bits;
--    uart->io_base = spcr->serial_port.address;
--    uart->io_size = DIV_ROUND_UP(spcr->serial_port.bit_width, BITS_PER_BYTE);
--    uart->reg_shift = spcr->serial_port.bit_offset;
--    uart->reg_width = spcr->serial_port.access_width;
--
--    /* The trigger/polarity information is not available in spcr. */
--    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
--    uart->irq = spcr->interrupt;
-+    rc = acpi_uart_config(uart, 0);
-+    if ( rc )
-+        return rc;
- 
-     uart->vuart.base_addr = uart->io_base;
-     uart->vuart.size = uart->io_size;
-diff --git a/xen/include/acpi/actables.h b/xen/include/acpi/actables.h
-index 527e1c9f9b9d..afb808998825 100644
---- a/xen/include/acpi/actables.h
-+++ b/xen/include/acpi/actables.h
-@@ -104,4 +104,9 @@ acpi_tb_install_table(acpi_physical_address address,
- acpi_status
- acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags);
- 
-+/* Get a table early, before acpi_tb_parse_root_table() is called. */
-+acpi_status
-+acpi_early_get_table(const char *signature, acpi_native_uint instance,
-+                     struct acpi_table_header **out_table);
-+
- #endif				/* __ACTABLES_H__ */
-diff --git a/xen/include/acpi/actbl2.h b/xen/include/acpi/actbl2.h
-index ee96e990d636..923c784e8bd5 100644
---- a/xen/include/acpi/actbl2.h
-+++ b/xen/include/acpi/actbl2.h
-@@ -1037,6 +1037,16 @@ struct acpi_table_spcr {
- 
- #define ACPI_SPCR_DO_NOT_DISABLE    (1)
- 
-+/* Masks for interrupt_type field above */
-+#define ACPI_SPCR_INTR_TYPE_PC_AT   0x01
-+#define ACPI_SPCR_INTR_TYPE_IO_APIC 0x02
-+
-+/* Values for the baud_rate field above */
-+#define ACPI_SPCR_BAUD_9600         3
-+#define ACPI_SPCR_BAUD_19200        4
-+#define ACPI_SPCR_BAUD_57600        5
-+#define ACPI_SPCR_BAUD_115200       7
-+
- /*******************************************************************************
-  *
-  * SPMI - Server Platform Management Interface table
--- 
-2.51.0
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
+--------------ZdTaCr2GwlvQF0UofizSQ6jk--
+
+--------------nAngyBcelk0Y2H3NUlOYgmZh--
+
+--------------Mw0D29h3sG4Q0oIlI3MJbP1o
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmnD9yEFAwAAAAAACgkQsN6d1ii/Ey+M
+VwgAkmM94PS7Df/V7v2rU3kyYBZjCBzxKpsvmK+Y6Ap+wppByDZquoHIWIsktFFlbhsNf/s4qcIe
+iRvMu0ZYGt+ZEo8j0Ob+9cd6xmHgbUBvs/TXQlq7OwPMlKrE9HqC9tCSPDYPtCygPlmkADqk8s+M
+7m665zOBACDVi2A6un78x7TEU2Qsxr78bRBHJSc4JNYCI3ifFQXIJHrbGqroAiaHPULCvrvaBvRG
+xN9ZlBsMXgsKX9b/J8tmm016BpwHNnsBJmHKl7vMKfM3sjsCJqV/mbQAA9NZvtsbVbogbRNd0Yi/
+WO+otAqQo+NxLhmOBWevnrCPjxIvGqR8SkJXI4Yglw==
+=hzXZ
+-----END PGP SIGNATURE-----
+
+--------------Mw0D29h3sG4Q0oIlI3MJbP1o--
 
