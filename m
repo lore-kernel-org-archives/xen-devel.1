@@ -4,40 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D84106B506
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 12:10:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1262134.1554781 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2877C106B50C
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 12:10:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261898.1554771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5N3P-0001NF-QA; Wed, 25 Mar 2026 12:09:43 +0000
+	id 1w5N3P-0001ER-Av; Wed, 25 Mar 2026 12:09:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1262134.1554781; Wed, 25 Mar 2026 12:09:43 +0000
+Received: by outflank-mailman (output) from mailman id 1261898.1554771; Wed, 25 Mar 2026 12:09:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5N3P-0001LL-Lv; Wed, 25 Mar 2026 12:09:43 +0000
-Received: by outflank-mailman (input) for mailman id 1262134;
- Wed, 25 Mar 2026 12:03:02 +0000
+	id 1w5N3P-0001EK-8K; Wed, 25 Mar 2026 12:09:43 +0000
+Received: by outflank-mailman (input) for mailman id 1261898;
+ Wed, 25 Mar 2026 10:18:25 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhaoguohan@kylinos.cn>) id 1w5Mww-0000e6-0Y
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 12:03:02 +0000
+ (envelope-from <eperezma@redhat.com>) id 1w5LJh-0000qR-6O
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:18:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5Mwv-004h1T-Cs
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 13:03:01 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1w5LJg-00FbXh-IQ
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:18:24 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhaoguohan@kylinos.cn>)
- id 69c3cef4-bab6-0a2a0a5309dd-0a2a4501a90a-8
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 13:03:00 +0100
-Received: from [124.126.103.232] (helo=mailgw.kylinos.cn)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <zhaoguohan@kylinos.cn>)
- id 69c3ceef-6400-0a2a45010019-7c7e67e8c0b0-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 13:03:00 +0100
-Received: from localhost.localdomain [(10.44.16.150)] by mailgw.kylinos.cn
- (envelope-from <zhaoguohan@kylinos.cn>)
- (Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
- with ESMTP id 1348781306; Wed, 25 Mar 2026 20:02:48 +0800
+ (envelope-from <eperezma@redhat.com>)
+ id 69c3b660-bab6-0a2a0a5309dd-0a2a4506a894-42
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:18:24 +0100
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <eperezma@redhat.com>)
+ id 69c3b66f-3034-0a2a45060019-aa0a817c8cdd-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:18:24 +0100
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-77-akHOpxKhN6WAkXex-vokJg-1; Wed, 25 Mar 2026 06:18:21 -0400
+Received: by mail-yw1-f197.google.com with SMTP id
+ 00721157ae682-79868381229so25442097b3.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 03:18:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,71 +52,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-X-UUID: 8ade3388284211f1a21c59e7364eecb8-20260325
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.11,REQID:140d25ea-eb09-4808-8438-de17a524f1a1,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:89c9d04,CLOUDID:ab8db2c8cd2d23d717ed6e4592da157a,BulkI
-	D:nil,BulkQuantity:0,Recheck:0,SF:102|850|898,TC:nil,Content:0|15|50,EDM:-
-	3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,A
-	V:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 8ade3388284211f1a21c59e7364eecb8-20260325
-X-User: zhaoguohan@kylinos.cn
-From: GuoHan Zhao <zhaoguohan@kylinos.cn>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	GuoHan Zhao <zhaoguohan@kylinos.cn>
-Subject: [PATCH] xen/privcmd: unregister xenstore notifier on module exit
-Date: Wed, 25 Mar 2026 20:02:46 +0800
-Message-ID: <20260325120246.252899-1-zhaoguohan@kylinos.cn>
-X-Mailer: git-send-email 2.43.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1774433903;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HBOh/aoPlGxYDPbqkk5UK0G4/ytz0Hu0GxFXOarsu9g=;
+	b=G8h17s9J2A17bpLlEZzx+cMqFoWKBjIwok/JGT+oyiL2v93hAn+uN4vWrMqf/bS6njEgQZ
+	u/PfmWYtA1Zr7nKpg3Jdk67X9os+pigzYkdnyW9CLjLrczbeon9GJdjPgZx2NPVKG7HjvA
+	ZB6mXl8lDGE/G9qCrGITbXOUFGU7xCk=
+X-MC-Unique: akHOpxKhN6WAkXex-vokJg-1
+X-Mimecast-MFC-AGG-ID: akHOpxKhN6WAkXex-vokJg_1774433901
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774433901; x=1775038701;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=HBOh/aoPlGxYDPbqkk5UK0G4/ytz0Hu0GxFXOarsu9g=;
+        b=DpB3+lYwaPUyElstlPgRPrxK9aUuvI37CSomPUUcejou1IIRkGWRgHfT9M8NavMYJ8
+         CBxUIgLCgtq+dXDcx0QzcPnwPlxlYA+xRV3+jL5nmGwILNAwkQgSKApqXi8sxD56NL6c
+         Ael2tjPlDukHSqL0vPzLnZ3KHDTwbCXPTfNlw+cKVrQp4wc3jA2SfJoc2T4H0OZOL1PI
+         ndP6GEBc3yxcv+bo+cEbchJ0YCeTv4ArKTiKwtZ2qdOTclMKUk5AoN3c475Lx/zc6XZ4
+         YCb8YRmnFZkMglS7kwHkZDLkcFiMP9GTzP9kreNeY09Z9BqWhcSIgCllQ4CbYRwpkcOm
+         nDJw==
+X-Forwarded-Encrypted: i=1; AJvYcCWyOQQevRGadJTT3JXKpQFEiRSZ/qMHukI4o4tifl0olaMNnCBY6PGRhgjtXpEvE5ANd4jw1lHt5CQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyLxND0oYUtIGVAxXzxugnJASUV5hWGIEGtux+jR4yKMmBq1Ptv
+	BQt9tG9nbbSnJ/n/rhqcxvPD/SZOJGYdJIwL4ohMG5D0FbTG4TxL9fcmlT93n8CdaYUwAizn0kz
+	ABwma2DzbLCSc07aBorTUxRmeLS2DtmXNbQaOzmijNWf/NlHTronR+JO7xBbHMnYBTnBkPY/Yjv
+	+1W0t3jRefulpfpT6gRokTPbIKUS5IDfDrgmAWE1RwPXk=
+X-Gm-Gg: ATEYQzzD90d+PEWf+s9J8JTzBcmcJcgl1K/ie9txw/gQQG/CtS0dFvjoHZk9TcswH1H
+	HllK03lsJSz443seFCyvzr3WnqS+k7bqfWsx8tQLvv3cGD59GRb5xNdD7F4orsvvMHadkMe4fN2
+	X9m0/lKvmFug6fpXU2YyEfsrSrxUIjsDCrZXtGE4ICkUOuhkzMuPIOGNeR4gNv27HDFjO621aiO
+	9oGsw==
+X-Received: by 2002:a53:acd1:0:20b0:64c:9f60:19d4 with SMTP id 956f58d0204a3-64ed77ef1ecmr4805254d50.8.1774433900686;
+        Wed, 25 Mar 2026 03:18:20 -0700 (PDT)
+X-Received: by 2002:a53:acd1:0:20b0:64c:9f60:19d4 with SMTP id
+ 956f58d0204a3-64ed77ef1ecmr4805242d50.8.1774433900219; Wed, 25 Mar 2026
+ 03:18:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1774440180-22EE2DF3-3651D3B0/0/0
+References: <20260324005919.2408620-1-dakr@kernel.org> <20260324005919.2408620-9-dakr@kernel.org>
+In-Reply-To: <20260324005919.2408620-9-dakr@kernel.org>
+From: Eugenio Perez Martin <eperezma@redhat.com>
+Date: Wed, 25 Mar 2026 11:17:43 +0100
+X-Gm-Features: AaiRm50qMzjkKEJ7Fkr-Roi7I1a_DrzOw3E963yu_3LAy7xQt4ygKXGG9Px12Pc
+Message-ID: <CAJaqyWeuvD+XntgE9q4epQELpYYTOs1CznFn_tuOxeh_LurrcA@mail.gmail.com>
+Subject: Re: [PATCH 08/12] vdpa: use generic driver_override infrastructure
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Russell King <linux@armlinux.org.uk>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Ioana Ciornei <ioana.ciornei@nxp.com>, 
+	Nipun Gupta <nipun.gupta@amd.com>, Nikhil Agarwal <nikhil.agarwal@amd.com>, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+	Bjorn Helgaas <bhelgaas@google.com>, Armin Wolf <W_Armin@gmx.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Mathieu Poirier <mathieu.poirier@linaro.org>, 
+	Vineeth Vijayan <vneethv@linux.ibm.com>, Peter Oberparleiter <oberpar@linux.ibm.com>, 
+	Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
+	Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, 
+	Sven Schnelle <svens@linux.ibm.com>, Harald Freudenberger <freude@linux.ibm.com>, 
+	Holger Dengler <dengler@linux.ibm.com>, Mark Brown <broonie@kernel.org>, 
+	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Alex Williamson <alex@shazbot.org>, 
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, linux-kernel@vger.kernel.org, 
+	driver-core@lists.linux.dev, linuxppc-dev@lists.ozlabs.org, 
+	linux-hyperv@vger.kernel.org, linux-pci@vger.kernel.org, 
+	platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org, 
+	linux-spi@vger.kernel.org, virtualization@lists.linux.dev, 
+	kvm@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	linux-arm-kernel@lists.infradead.org, Gui-Dong Han <hanguidong02@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: SBdhpUkHwzTBhfqiubrRuwpH8nm53Y2Dhu-p-cVttc0_1774433901
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-16d1c6/1774433904-7998F1C2-2706C7ED/0/0
 X-purgate-type: clean
-X-purgate-size: 1111
+X-purgate-size: 4897
 
-Commit 453b8fb68f36 ("xen/privcmd: restrict usage in
-unprivileged domU") added a xenstore notifier to defer setting the
-restriction target until Xenstore is ready.
+On Tue, Mar 24, 2026 at 2:00=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
+wrote:
+>
+> When a driver is probed through __driver_attach(), the bus' match()
+> callback is called without the device lock held, thus accessing the
+> driver_override field without a lock, which can cause a UAF.
+>
+> Fix this by using the driver-core driver_override infrastructure taking
+> care of proper locking internally.
+>
+> Note that calling match() from __driver_attach() without the device lock
+> held is intentional. [1]
+>
+> Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kern=
+el.org/ [1]
+> Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
+> Closes: https://bugzilla.kernel.org/show_bug.cgi?id=3D220789
+> Fixes: 539fec78edb4 ("vdpa: add driver_override support")
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>  drivers/vdpa/vdpa.c  | 48 +++++---------------------------------------
+>  include/linux/vdpa.h |  4 ----
+>  2 files changed, 5 insertions(+), 47 deletions(-)
+>
 
-XEN_PRIVCMD can be built as a module, but privcmd_exit() leaves that
-notifier behind. Balance the notifier lifecycle by unregistering it on
-module exit.
+Consolidate this logic is great, thanks!
 
-This is harmless even if xenstore was already ready at registration
-time and the notifier was never queued on the chain.
+> diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+> index 34874beb0152..caf0ee5d6856 100644
+> --- a/drivers/vdpa/vdpa.c
+> +++ b/drivers/vdpa/vdpa.c
+> @@ -67,57 +67,20 @@ static void vdpa_dev_remove(struct device *d)
+>
+>  static int vdpa_dev_match(struct device *dev, const struct device_driver=
+ *drv)
+>  {
+> -       struct vdpa_device *vdev =3D dev_to_vdpa(dev);
+> +       int ret;
+>
+>         /* Check override first, and if set, only use the named driver */
+> -       if (vdev->driver_override)
+> -               return strcmp(vdev->driver_override, drv->name) =3D=3D 0;
+> +       ret =3D device_match_driver_override(dev, drv);
+> +       if (ret >=3D 0)
+> +               return ret;
+>
+>         /* Currently devices must be supported by all vDPA bus drivers */
+>         return 1;
 
-Fixes: 453b8fb68f3641fe ("xen/privcmd: restrict usage in unprivileged domU")
-Signed-off-by: GuoHan Zhao <zhaoguohan@kylinos.cn>
----
- drivers/xen/privcmd.c | 3 +++
- 1 file changed, 3 insertions(+)
+Nit: Maybe all of this can be replaced by
+abs(device_match_driver_override(dev,drv))? Or maybe we're putting too
+much in the same line.
 
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index bbf9ee21306c..15ba592236e8 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -1765,6 +1765,9 @@ static int __init privcmd_init(void)
- 
- static void __exit privcmd_exit(void)
- {
-+	if (!xen_initial_domain())
-+		unregister_xenstore_notifier(&xenstore_notifier);
-+
- 	privcmd_ioeventfd_exit();
- 	privcmd_irqfd_exit();
- 	misc_deregister(&privcmd_dev);
--- 
-2.43.0
+Either way,
+
+Acked-by: Eugenio P=C3=A9rez <eperezma@redhat.com>
+
+Thanks!
+
+
+
+
+>  }
+>
+> -static ssize_t driver_override_store(struct device *dev,
+> -                                    struct device_attribute *attr,
+> -                                    const char *buf, size_t count)
+> -{
+> -       struct vdpa_device *vdev =3D dev_to_vdpa(dev);
+> -       int ret;
+> -
+> -       ret =3D driver_set_override(dev, &vdev->driver_override, buf, cou=
+nt);
+> -       if (ret)
+> -               return ret;
+> -
+> -       return count;
+> -}
+> -
+> -static ssize_t driver_override_show(struct device *dev,
+> -                                   struct device_attribute *attr, char *=
+buf)
+> -{
+> -       struct vdpa_device *vdev =3D dev_to_vdpa(dev);
+> -       ssize_t len;
+> -
+> -       device_lock(dev);
+> -       len =3D sysfs_emit(buf, "%s\n", vdev->driver_override);
+> -       device_unlock(dev);
+> -
+> -       return len;
+> -}
+> -static DEVICE_ATTR_RW(driver_override);
+> -
+> -static struct attribute *vdpa_dev_attrs[] =3D {
+> -       &dev_attr_driver_override.attr,
+> -       NULL,
+> -};
+> -
+> -static const struct attribute_group vdpa_dev_group =3D {
+> -       .attrs  =3D vdpa_dev_attrs,
+> -};
+> -__ATTRIBUTE_GROUPS(vdpa_dev);
+> -
+>  static const struct bus_type vdpa_bus =3D {
+>         .name  =3D "vdpa",
+> -       .dev_groups =3D vdpa_dev_groups,
+> +       .driver_override =3D true,
+>         .match =3D vdpa_dev_match,
+>         .probe =3D vdpa_dev_probe,
+>         .remove =3D vdpa_dev_remove,
+> @@ -132,7 +95,6 @@ static void vdpa_release_dev(struct device *d)
+>                 ops->free(vdev);
+>
+>         ida_free(&vdpa_index_ida, vdev->index);
+> -       kfree(vdev->driver_override);
+>         kfree(vdev);
+>  }
+>
+> diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
+> index 2bfe3baa63f4..782c42d25db1 100644
+> --- a/include/linux/vdpa.h
+> +++ b/include/linux/vdpa.h
+> @@ -72,9 +72,6 @@ struct vdpa_mgmt_dev;
+>   * struct vdpa_device - representation of a vDPA device
+>   * @dev: underlying device
+>   * @vmap: the metadata passed to upper layer to be used for mapping
+> - * @driver_override: driver name to force a match; do not set directly,
+> - *                   because core frees it; use driver_set_override() to
+> - *                   set or clear it.
+>   * @config: the configuration ops for this device.
+>   * @map: the map ops for this device
+>   * @cf_lock: Protects get and set access to configuration layout.
+> @@ -90,7 +87,6 @@ struct vdpa_mgmt_dev;
+>  struct vdpa_device {
+>         struct device dev;
+>         union virtio_map vmap;
+> -       const char *driver_override;
+>         const struct vdpa_config_ops *config;
+>         const struct virtio_map_ops *map;
+>         struct rw_semaphore cf_lock; /* Protects get/set config */
+> --
+> 2.53.0
+>
 
 
