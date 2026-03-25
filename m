@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C2EEFEC11B
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 10:37:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261916.1554636 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C15DFEC11B
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 10:41:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261930.1554656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Lc9-0003U9-UT; Wed, 25 Mar 2026 10:37:29 +0000
+	id 1w5Lfe-0005Qp-KD; Wed, 25 Mar 2026 10:41:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261916.1554636; Wed, 25 Mar 2026 10:37:29 +0000
+Received: by outflank-mailman (output) from mailman id 1261930.1554656; Wed, 25 Mar 2026 10:41:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Lc9-0003U2-Re; Wed, 25 Mar 2026 10:37:29 +0000
-Received: by outflank-mailman (input) for mailman id 1261916;
- Wed, 25 Mar 2026 10:37:27 +0000
+	id 1w5Lfe-0005Qi-Fc; Wed, 25 Mar 2026 10:41:06 +0000
+Received: by outflank-mailman (input) for mailman id 1261930;
+ Wed, 25 Mar 2026 10:41:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1w5Lc7-0003Tw-Jt
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:37:27 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w5Lfd-0005DO-F8
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:41:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5Lc6-00CDEz-Vt
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:37:27 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w5Lfc-00CENL-RF
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:41:04 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 69c3bae0-2eae-0a2a0a5409dd-0a2a4505b816-26
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:37:26 +0100
-Received: from [52.101.201.35]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 69c3bae4-5aeb-0a2a45050019-3465c923774a-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:37:26 +0100
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by CH0PR03MB6052.namprd03.prod.outlook.com (2603:10b6:610:bf::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Wed, 25 Mar
- 2026 10:37:16 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%7]) with mapi id 15.20.9745.019; Wed, 25 Mar 2026
- 10:37:16 +0000
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69c3bbb7-e002-0a2a0a5209dd-0a2a450bd7b6-32
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:04 +0100
+Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69c3bbc0-ef63-0a2a450b0019-d155d035b01a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:04 +0100
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-667f8794e97so10873664a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 03:41:04 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.25.73]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b9832f8be14sm798491866b.17.2026.03.25.03.41.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Mar 2026 03:41:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,220 +52,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AnjR8Br1oNeRYamYqaeptcsjcM+ORLBgonCk6EJb35zt/pzO0qnuebcHpoEc9grb096YBbXdUg15DK/PBneB5mVP3HBtVcE+r3kQbXrKwqDJjLgF4WMzmlUgoP9+y0vW8t3DHHzdtbA6v0vllTeV2+Zhq6sTPb8yrZMMbNMftt6Ppg4rsRwg3qhwIXd1ZKsxunAdqhu8rXb2PpYq9pevGiNIpeLHnKWGh3TED5QjwfItcDooR3qih9DfaNygFN0E4QPtwo2/nqg5+1mK+OshJSnfWFD3LKs7HB7AgohxDwbHh/1+I/RTA+73kT/SR88E7xjj8NavSY+vL6PWTXrpQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OB0QI9da2qSM09sqEfgTvllWC+wma82Oqe1TiKZfULY=;
- b=Wqb+u4WcBepn9nvj5VPkmFXjf1fos1nVD9/9+gEbDysmFRDkA6DoEty8fasB/1z86ULY0pux9nz/mG/T2WYuJjpTA5VGEPoiUOR2UAYGQJduRn92tskq0YfpCIfFuEcGkQamvxtTlZP9scCK6JpZpPRQCjd0gpiwDKwHPYXp7OQRR1TAYlPQrgsdHLKk1lYQVGYHAflQPfdCpfbCzQ2wNCEDjFc2Qbgt1QGcHPVbjk0eAxHGL98WfmK/60TbDOoebwyYnfbDSwU8ZDzze+NIKXyFx84zcbnHjFPttVYGXLCKLtAJ8Whtl9Fm1h1ls4yBfGlzISO69bcI6barZUsG8A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OB0QI9da2qSM09sqEfgTvllWC+wma82Oqe1TiKZfULY=;
- b=0SlebMSkcrmkdbdlewny8pmp2dXWkkjqibrs1QnAFnZzmdeN4qbqVjh+D2QhcYrMqVLm9o1sk/nB+DFCm2k5v6+ZA0q0D2DSmRv93A7a/cZMMh7FalIbDc+fw9OKYnHA4amEbQHNY7yrTcbAGo1QLpp9Iz1PhhXe6ZonXVPpcJE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <68469e6b-33c8-4020-bd8b-75afe8f6570a@citrix.com>
-Date: Wed, 25 Mar 2026 10:36:03 +0000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/9] x86/domain: Ensure a vCPU's FPU is reset early
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <20260324181937.2465574-1-ross.lagerwall@citrix.com>
- <20260324181937.2465574-2-ross.lagerwall@citrix.com>
- <0471e754-9ea7-4fb5-b573-b770713b2f53@citrix.com>
-Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <0471e754-9ea7-4fb5-b573-b770713b2f53@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0691.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:37b::19) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774435264; x=1775040064; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JH93Di2V3lm2/5shCb0uuFhGc+gxIZ87omGm1UV+NOQ=;
+        b=BrdwNUT0DUELUeYGQ+x4+zIw1Ckhb8sSJqKQEQbpfVMWzvfH0pqdrllpEw4TrbtRsu
+         BdEOIKbgTmzoxDaHQyJbEqLBM80FAWt/B2vcUE+6zIGrgsRcFoJsrejSOrgNWQFu+/wn
+         FwfsixoBN1UKsSJCMQpxmSZvOg1AAyZYusA9VtXPm0+0wTF/4r2Ab/a/336SupF4q4Og
+         UswEpvhVJo3S/NRjPgK/c19pM/CSbjFjWHOQ9SjKFjNvWYyVVHco0YuobuTgV5SgZCB6
+         OB3eGCB08z4H3pNifHFCq+4dEAXKCwo2H83R4DToIPo3Z9DoExVOxvz2FNjouGmN1BVt
+         NmTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774435264; x=1775040064;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=JH93Di2V3lm2/5shCb0uuFhGc+gxIZ87omGm1UV+NOQ=;
+        b=Eu04sQtK+Z1EeeD7mtvD+JYINKT8nQtZW+A0eOqbqiGDM3B+Zv+MsbXHI1zVgTjYvv
+         gfU+zRXaafSwmQMR4Z0O7Ntd9hWSTg/Q805VZrUI89/qwIVBjLEcycw1NSXDsfbcm1b6
+         RCOENv9nXWol+KdZ5p5WWWtL3FhyaoMFbCvq7GlsgHWE2+99L6npW6K7/6ZBJuSHUo2d
+         B1lh/0datiQATtAXwT+UTKqTbdr6g6/1kvrt+t8eJYR6kNKgsOeLZWDhMrlYinwcPAjY
+         GfGFjWc/XSC4R/cpw5hglk4KBh3wURcKIiT3xdDo+85o2Fv+dcvCUv/5DsE9WqsxuWZm
+         H7LQ==
+X-Gm-Message-State: AOJu0Yz6wy1OPRW0AuAgccqrNJkdgcONxF2vpRhuWCasdomGPSKf95hu
+	ocfE/F1BbqoVuVGqTQxrZALyK+DCvi1cfN0f2eIkxN4TeUa538YEdIdzRXK2bw==
+X-Gm-Gg: ATEYQzzljgXEGdQTlm7FlibIG3QQC3EmSVnECX77X2TGzxSuOgqg0VskoSEPWqGFNrR
+	iJcO0C7RVkMgGzbUho47P7sbGJteN3Tcd8Mbmng/TkK2cvV2EYlifnTWEa/GPNN9wdGDX1FdPl/
+	2vcNhd9ZWJBj58M7FpkrkTqpBMQyWJWkl/TZWXpsDV3ng/wk/1uUHmJwO9ij+ctg4O0uSO7AaM3
+	5xh+Jsak9MsWtlHNhgRJrtSL6xNB87JMvQFYJUCShgFM+LUpw6hrzH5/oT1QCalmxKfiM5w9aF9
+	RQlJING16n+SAUyVFyOl4gY3OqsHIUf4oVnpDLtQpmiZUyUY7iR3bf+3T88pi6VeMUTjKV3ijgQ
+	Vzr3GHM5040XDuVwRjZSidn64iHFztzgMiuSMjNStVoFY3/zXZdXA4Jqq1R7XzrtPd8vgyTFdF9
+	m/jrTo9MsreaTgi9xCAQXeZIBXyQ==
+X-Received: by 2002:a17:907:e113:b0:b97:1d24:bfd7 with SMTP id a640c23a62f3a-b9a3f166610mr163314766b.6.1774435263745;
+        Wed, 25 Mar 2026 03:41:03 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 1/4] xen/arm: its: collect quirk flags and honor dma-noncoherent
+Date: Wed, 25 Mar 2026 12:38:30 +0200
+Message-ID: <5b68fa0a8403ea60db3047f6505876bc03a41f3f.1774431310.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1774431310.git.mykola_kvach@epam.com>
+References: <cover.1774431310.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CH0PR03MB6052:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef861b0a-101c-40c3-35dc-08de8a5a7bec
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	+JVw/hvRfIyg2FOQe705MG8ENeQRNJw1qREjF2nGO5iK0M8akTsM81RYV2cQRJjz9JsoRGxk4GnTFpFBv6OLAhmmvoOqFzQ9m/KZ+eQzG+xrorrHKPfDXW/3xdCkOcAmzgWGduDe0Jr4fanzFwmugP9d/E3rBU+OqfhFcyCdwKsjCX47Gb5s205dhka1k5v2vR9H4PQwnEZbhTcEN7eaW27mAzHuFQV3mI/4hN0y02adstUcdD+wS1e2gdOm9MnD6QFJRqkLXMdKTGouT+S/4oBbk3880uiL5awBS7Fv+4zYd6CBdxLzFDaJ3Z1Abkekrq8XzZFGmeoithFxitZafxTouADFIibRCi7JV1G8uWH1V02HjRTBLKbWeFoiXq2pjHPVNFZ8MMXCz+iqqy3g5rn5JM+JlctrASjOhvZqFPWj3JkH9CwZ4/gVEUATHQwRfVdkFnMouMGzT6pUrVqJ4LgxZDgHCAfgin9f4bfsle1Teuws4BRkF7MLcALij0aXhFEXfkbcQ+poEQWQJBcxdvkSuCakHmGSvv7iojYEx4m0Mv1Jc1QqUartY8Hm+2BzGWYU6BdWAGMMuePgyNHDdIZSGSaqD/VgdygdEUXfstaTOlZv9itNdkI6jaqvBDg/j1tqejg2u1Do90lSn/LqTqRW4wxTGBNnLsOcVs/ovyJE+/ltLGSVedhQ9KkmzIab
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dEhadmo1bDRKdDV6WnZmLzVVZ0gvZjRBY054dEpTTlRzNEtJUkRUWU9mWElG?=
- =?utf-8?B?ODh6UlgxK2tpcDFJQlVEelJqS2NJcEZHRVVrM3Z6bVBXN3p0UWMrazNkYWJM?=
- =?utf-8?B?bjJwbGhENElHSzZ6NGN5TERTQ09ncWZFUUp5WThmeHA5c1J2RDVDMll6cWdD?=
- =?utf-8?B?RHhvdWRwdFdLMGMwWU9UeWJLMnhLYXI2OHFWT3YvaGIxZGJ1VHhuT0ZZQnBv?=
- =?utf-8?B?MmViSkxrcXFhWWxBTDFUN0JOZUJMeGMreDhVVXYzSmxYNUNVdHJvV0ZRWk1v?=
- =?utf-8?B?NXpmUGIrQnFDVTUvbUozTlN0eDVRZHdOMWR4WUl1OC9YUU56MkpUOWpTbHk4?=
- =?utf-8?B?cVhKK0VQQnNjbTVTWmo3VE1vejZmTHQxQ1M2a0phd0Yzbkp0WUFLRU4ybW1X?=
- =?utf-8?B?VWU4bUhhdFFsUXFFazJvMTJlRm9lUFl5V2N6VzR6dzQrbEU1Q3Z0dld5MHlY?=
- =?utf-8?B?UHIzcFhudWM3YTY4QnQyOXZOREhtT3ZtWE0zYlJYeENySXBHV3VpV3VOanF1?=
- =?utf-8?B?eWdpZU9aUkQvWEpFLzVkemErNUhWemJJNGJQZUlSYlpkcU5jMlZzQm8yYmFk?=
- =?utf-8?B?UEF5a0RuS0FmaWlxQXdBb1E4bnNlb3FLaUdUTW5iNTdkUXIybC95c0tHRjlY?=
- =?utf-8?B?Q2R5Y3l5eXVTd0p6Yzd2MFJlQkJUTDdSQzd0b1YwSVN0a2Fnbit3WDhiaUQx?=
- =?utf-8?B?YnJyQXpJUTlYNnJqc0YrYWc3ZUZyVXNLNnNlU25ydll2dmYvTC85WGk0UFNF?=
- =?utf-8?B?NkNzOHZ0YUdmelZaMHFBN2xrRHRBRkpqWDZnam15c2RIR3NxRHlGT2k5MGE2?=
- =?utf-8?B?cXJVajUyTEVRNnlEcWJ2TkloRkgzbDQ0eUU5T0FrTlZqZ1REMkk0Z3FSeG9M?=
- =?utf-8?B?OUtPV1J6bDMyckNtL09DL0pSc0VOa3pyOTNwM1NMMmhzdENSOTQzVUhXK01Q?=
- =?utf-8?B?YkRqenlrK09VdG13bUVpYkNucWRFdWU3U3ZBR0xpVHptVVozdlVlbkkwd211?=
- =?utf-8?B?clp3TnlsbVI2N243MThuZGQ5eEdWWlV2RXdDTzkxUEJkRXdQVXh6ekZ3b25y?=
- =?utf-8?B?bEMwbU9zdDZ3dXpTYnhhSldkY3VKTHRzV0VTZ3k4WlNTQ0RVaUhnQzF1MzhU?=
- =?utf-8?B?MloxYnZ6WEFBYU1MWWM4K3dTV2JjUjBzWWNQelh2UC9JQnlaYkt1OU9KMFFs?=
- =?utf-8?B?eXNVNkVxRkRxNVZsQktXaWc1TitnNlRTU3U1MTJkdDQ4TDgvMzdmazF0VG1n?=
- =?utf-8?B?Q3F0aGJZajNSc1N0MmJKbTRraG1BM1BiMTU3cVgzMzFXQ093SkNLaWV3YUpG?=
- =?utf-8?B?dzE1YytDVTQ2UVRQcm1mTHh5Y0F0MFpuTFdNSHIwcnZQTTBJQkhJZ2RZWWho?=
- =?utf-8?B?RHE3U0JsanZzbEtMb2EweUNiU1lVcFpxMEhGWXp1ajBFclBSQWZ1WHJUYWhO?=
- =?utf-8?B?LzFQNjBkR1ZCdEh0NnFIMXIvQkpLV2Jhc0NMOUFyeFpGUTZ5YlRmSTRtUFQr?=
- =?utf-8?B?Vko4L3lxUVhFSFFqbTZROXpQOEk0dGk1aG1CeWJpL01zbWFGelN0dVZXNjhK?=
- =?utf-8?B?NUhpSE92b25wR0VLajZsNmZUOHZZRFVLODl0c3plc0VocEZlVFFDRUlLWmcr?=
- =?utf-8?B?OC8yZVhmRFRVV0ZzNEsvc1R3YXVMbXhKU3drcEhEM3pURUphTVJscERtR1dL?=
- =?utf-8?B?NkJPSkhtcEx5T25nSW9ZZEc1M1JPYXF6UmR1WDAybnkrSVhPbUVBeGtVM2tN?=
- =?utf-8?B?WEcxMERZdDlsSzg5NWlKbElHMURyZEY2cUFDL2d6TmlWWi9yREU1eDIrSEE1?=
- =?utf-8?B?bDJ4aTVMZDNMZC9BeHcyTXZHSldQdzlwTFk5SmVHSkpsY1VWcFN0alZxY1By?=
- =?utf-8?B?UnVLck1qYXhrUDcycDFGcXhkL1lsaisxcGkxTWdkZmtyTkI0NndTUmdudzVw?=
- =?utf-8?B?RVFkTXZRVXd1NVNzZ2lzc1dzTWNhQWdCbno4dmN0Q2I1TE9td0xrdHZnOTU3?=
- =?utf-8?B?VjVTcllteURMZFF1RmhqT2tjQjFoUHZRWnZWVW5YcTQyUUJMN3B0aGliT2Jv?=
- =?utf-8?B?VzQzQXpGZGtZT2VQUDNpWHhoOGpVT1RQRmNMaSs5TTlZMWFMUUt1Y0pwclFP?=
- =?utf-8?B?cXlaRzVRbnJ0WHNBdnNZcmZrRVVDR2F6U3gxRlhSeE0xeFc2SFFYTmZqeFBu?=
- =?utf-8?B?dit4SjFGWkd6MERXenFSYzBVKzlSK0ZsWVRPcFM2K2Mrcy9sRmt6Wng0R3Y4?=
- =?utf-8?B?UEZBR3c0VEpsUnEvMkRZb3MzZEJIYVZORnZFc0cybzNFWDU4azVrQjVKdDhJ?=
- =?utf-8?B?T3FRY1Mvcm1qQUprMHhQRThNZ3hqTmFGWGhrRmRNQllZdDZ6SHdlTmVrcVpY?=
- =?utf-8?Q?9d23as5hACym8Dds=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef861b0a-101c-40c3-35dc-08de8a5a7bec
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 10:37:16.5735
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: opwcYXo1tMq+U+OJVFPbOhgqNjQwpMrxpY5P1zrt0HobukQAPQLw0WG3fQxyPuu7Nb8eLlqk+wGSHiKqGybsdutpzlT1JPrKCVjJrYheJJA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR03MB6052
-X-purgate-ID: tlsNG-c201ff/1774435046-2368D488-440F7024/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1774435264-A000B112-B5D61A7C/0/0
 X-purgate-type: clean
-X-purgate-size: 4225
+X-purgate-size: 4195
 
-On 3/24/26 11:02 PM, Andrew Cooper wrote:
-> On 24/03/2026 6:19 pm, Ross Lagerwall wrote:
->> When using eager-fpu, a vCPU's FPU is always marked as initialized on
->> context switch but it is possible that neither vcpu_reset_fpu() nor
->> vcpu_setup_fpu() has been called on it.
-> 
-> How?
-> 
-> I don't think a PV vCPU can.  You cannot VCPUOP_up a vCPU for which
-> v->is_initialised is false, and setting is_initialised involves either
-> giving a good FPU, or taking the "reset" path.
-> 
-> An HVM use of VCPUOP_initialise only passes basic state, so can be used
-> to set v->is_initialised without touching the FPU state.
-> 
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Yes, then a subsequent VCPUOP_up allows the VCPU to be scheduled.
-vcpu_restore_fpu_nonlazy(), called on context switch, always sets
-fpu_initialised to 1 in the eager-fpu case. I confirmed this happens
-with some debug logging during VM start:
+Replace the per-quirk init callback with declarative flags in
+struct its_quirk, and introduce gicv3_its_collect_quirks() to gather
+the effective workaround flags from both the IIDR-matched quirk entry
+and the "dma-noncoherent" device-tree property.
 
-[  106.281001] vcpu_init_fpu vCPU 1 (fpu_initialised is 0)
-[  110.088015] vcpu_restore_fpu_nonlazy vCPU 1 (set fpu_initialised to 1)
-[  110.088155] vcpu_restore_fpu_nonlazy vCPU 1 (set fpu_initialised to 1)
-[  110.088518] vcpu_restore_fpu_nonlazy vCPU 1 (set fpu_initialised to 1)
-[  110.356216] vcpu_reset_fpu vCPU 1 (set fpu_initialised to 0)
-[  110.356236] vcpu_restore_fpu_nonlazy vCPU 1 (set fpu_initialised to 1)
-...
+This lets non-coherent platforms force non-cacheable ITS table
+attributes even when no IIDR quirk entry matches.
 
-> 
->>   If that happens,
->> arch_get_info_guest() would return a block of all 0's for the FPU
->> context claiming it to be valid.
->>
->> Fix this by calling vcpu_reset_fpu() during vCPU creation.
->>
->> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-> 
-> The phrasing is a bit awkward, and the function names don't help, but it
-> is something we're going to have to address properly when doing nested virt.
-> 
-> (A minor tangent which is relevant to where we want to end up)
-> 
-> https://sandpile.org/x86/initial.htm
-> 
-> #RESET and #INIT used to be a physical pins, but are just a message on
-> the fabric. Either way they're events which alter state in well defined
-> ways.
-> 
->  From Xen's point of view, vcpu_create() is the only #RESET-like thing
-> we've got.  If we didn't model crash/reboot as constructing a new
-> domain, that would be the other place to use #RESET.
-> 
-> #INIT exists explicitly for HVM guests, via the APIC interface.  Xen has
-> no working model of this because HVM guests were built on PV which
-> wasn't modelled on how CPUs work.
-> 
-> v->is_initialised is a PV-ism which has infected x86 HVM and non-x86
-> architectures too.  The key thing which PV vCPUs need that doesn't work
-> like CPUs in the slightest is the chosen vCR3 (and vCR1 for PV64) need
-> to refer to a property typed L4/L3 pagetable, and PV guests can't take a
-> type ref on 0.
-> 
-> 
-> Anyway, returning from the tangent ...
-> 
->> ---
->> New in v2
->>
->>   xen/arch/x86/domain.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
->> index 9ba2774762cc..82da1c5d7b38 100644
->> --- a/xen/arch/x86/domain.c
->> +++ b/xen/arch/x86/domain.c
->> @@ -522,6 +522,8 @@ int arch_vcpu_create(struct vcpu *v)
->>           if ( (rc = vcpu_init_fpu(v)) != 0 )
->>               return rc;
->>   
->> +        vcpu_reset_fpu(v);
->> +
-> 
-> ... this really should be part of allocating the memory.
-> 
-> First, we should never have the backing memory in the wrong state, and
-> second, the idle vCPU doesn't take this path.  i.e. in
-> xstate_alloc_save_area().
-> 
-> Looking into this asks more questions.
-> 
-> xstate_alloc_save_area() does set some of the backing state, but misses
-> FXSAVE_FTW_RESET.  That's easy enough to fix, and turns out to address
-> my original concern.
-> 
-> vcpu_reset_fpu() sets v->fpu_initialised = false.  Doesn't this defeat
-> the point of this patch?
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ xen/arch/arm/gic-v3-its.c | 70 ++++++++++++++++++++++++---------------
+ 1 file changed, 43 insertions(+), 27 deletions(-)
 
-No, since it means the backing memory has been properly initialised by
-the time fpu_initalised gets unilaterally set in
-vcpu_restore_fpu_nonlazy()...
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 9ba068c46f..00524b43a3 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -57,71 +57,87 @@ struct its_device {
+  */
+ struct its_quirk {
+     const char *desc;
+-    bool (*init)(struct host_its *hw_its);
+     uint32_t iidr;
+     uint32_t mask;
++    uint32_t flags;
+ };
+ 
+ static uint32_t __ro_after_init its_quirk_flags;
+ 
+-static bool gicv3_its_enable_quirk_gen4(struct host_its *hw_its)
+-{
+-    its_quirk_flags |= HOST_ITS_WORKAROUND_NC_NS |
+-        HOST_ITS_WORKAROUND_32BIT_ADDR;
+-
+-    return true;
+-}
+-
+ static const struct its_quirk its_quirks[] = {
+     {
+-        .desc	= "R-Car Gen4",
+-        .iidr	= 0x0201743b,
+-        .mask	= 0xffffffffU,
+-        .init	= gicv3_its_enable_quirk_gen4,
++        .desc  = "R-Car Gen4",
++        .iidr  = 0x0201743b,
++        .mask  = 0xffffffffU,
++        .flags = HOST_ITS_WORKAROUND_NC_NS |
++                 HOST_ITS_WORKAROUND_32BIT_ADDR,
+     },
+     {
+         /* Sentinel. */
+     }
+ };
+ 
+-static struct its_quirk* gicv3_its_find_quirk(uint32_t iidr)
++static const struct its_quirk *gicv3_its_find_quirk(uint32_t iidr)
+ {
+-    const struct its_quirk *quirks = its_quirks;
++    const struct its_quirk *quirk = its_quirks;
+ 
+-    for ( ; quirks->desc; quirks++ )
++    for ( ; quirk->desc; quirk++ )
+     {
+-        if ( quirks->iidr == (quirks->mask & iidr) )
+-            return (struct its_quirk *)quirks;
++        if ( quirk->iidr != (quirk->mask & iidr) )
++            continue;
++
++        return quirk;
+     }
+ 
+     return NULL;
+ }
+ 
+-static void gicv3_its_enable_quirks(struct host_its *hw_its)
++static uint32_t gicv3_its_collect_quirks(const struct host_its *hw_its,
++                                         const struct its_quirk **matched_quirk)
+ {
++    const struct its_quirk *quirk;
++    uint32_t flags = 0;
+     uint32_t iidr = readl_relaxed(hw_its->its_base + GITS_IIDR);
+-    const struct its_quirk *quirk = gicv3_its_find_quirk(iidr);
+ 
+-    if ( quirk && quirk->init(hw_its) )
++    quirk = gicv3_its_find_quirk(iidr);
++    if ( quirk )
++        flags |= quirk->flags;
++
++    if ( hw_its->dt_node &&
++         dt_property_read_bool(hw_its->dt_node, "dma-noncoherent") )
++        flags |= HOST_ITS_WORKAROUND_NC_NS;
++
++    if ( matched_quirk )
++        *matched_quirk = quirk;
++
++    return flags;
++}
++
++static void gicv3_its_enable_quirks(struct host_its *hw_its)
++{
++    const struct its_quirk *quirk;
++
++    its_quirk_flags = gicv3_its_collect_quirks(hw_its, &quirk);
++
++    if ( quirk )
+         printk("GICv3: enabling workaround for ITS: %s\n", quirk->desc);
+ }
+ 
+ static void gicv3_its_validate_quirks(void)
+ {
+-    const struct its_quirk *quirk = NULL, *prev = NULL;
++    uint32_t quirks, prev_quirks;
+     const struct host_its *hw_its;
+ 
+     if ( list_empty(&host_its_list) )
+         return;
+ 
+     hw_its = list_first_entry(&host_its_list, struct host_its, entry);
+-    prev = gicv3_its_find_quirk(readl_relaxed(hw_its->its_base + GITS_IIDR));
++    prev_quirks = gicv3_its_collect_quirks(hw_its, NULL);
+ 
+-    list_for_each_entry(hw_its, &host_its_list, entry)
++    list_for_each_entry_continue(hw_its, &host_its_list, entry)
+     {
+-        quirk = gicv3_its_find_quirk(readl_relaxed(hw_its->its_base + GITS_IIDR));
+-        BUG_ON(quirk != prev);
+-        prev = quirk;
++        quirks = gicv3_its_collect_quirks(hw_its, NULL);
++        BUG_ON(quirks != prev_quirks);
+     }
+ }
+ 
+-- 
+2.43.0
 
-> 
-> Maybe it's easiest just to fix FXSAVE_FTW_RESET and then purge the
-> booleans in the way this series does.  I don't think trying to unpick
-> any other bugfixes is going to be fruitful.
-> 
-
-... but yes, that does seem like the best way to fix this.
-
-Ross
 
