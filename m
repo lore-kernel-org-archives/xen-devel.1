@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E393EFEA808
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 10:41:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261929.1554647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CBFB103A9A3
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 10:41:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261931.1554664 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Lfd-0005DW-DT; Wed, 25 Mar 2026 10:41:05 +0000
+	id 1w5Lff-0005fH-UY; Wed, 25 Mar 2026 10:41:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261929.1554647; Wed, 25 Mar 2026 10:41:05 +0000
+Received: by outflank-mailman (output) from mailman id 1261931.1554664; Wed, 25 Mar 2026 10:41:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Lfd-0005DP-8l; Wed, 25 Mar 2026 10:41:05 +0000
-Received: by outflank-mailman (input) for mailman id 1261929;
- Wed, 25 Mar 2026 10:41:04 +0000
+	id 1w5Lff-0005f7-R0; Wed, 25 Mar 2026 10:41:07 +0000
+Received: by outflank-mailman (input) for mailman id 1261931;
+ Wed, 25 Mar 2026 10:41:06 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w5Lfc-0005DI-6P
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:41:04 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w5Lfe-0005SP-Sq
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:41:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5Lfa-00CE42-0i
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:41:03 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1w5Lfc-00CE42-N8
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:41:06 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69c3bbbf-5cb7-0a2a0a5109dd-0a2a4504cc78-0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:03 +0100
-Received: from [209.85.218.53] (helo=mail-ej1-f53.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69c3bbb7-5cb7-0a2a0a5109dd-0a2a4501c0c6-22
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:06 +0100
+Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69c3bbbf-c823-0a2a45040019-d155da35e92f-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:03 +0100
-Received: by mail-ej1-f53.google.com with SMTP id
- a640c23a62f3a-b982d56dac4so371595666b.3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 03:41:03 -0700 (PDT)
+ id 69c3bbc2-6400-0a2a45010019-d155d035c405-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:41:06 +0100
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-667de793310so4106970a12.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 03:41:06 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.25.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9832f8be14sm798491866b.17.2026.03.25.03.41.01
+ a640c23a62f3a-b9832f8be14sm798491866b.17.2026.03.25.03.41.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 03:41:01 -0700 (PDT)
+ Wed, 25 Mar 2026 03:41:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,41 +52,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774435263; x=1775040063; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=D9IUgVkMnSvSpiMpIQOwgKjrrKDZg8TzP8a6gJHM7DE=;
-        b=H8ie4G8IP6S4hm1pm/ZJWOQezPUlzTtMk8GaObQOWP9otttXTHq1BnD9xhmvRNCdVT
-         W1Z0ylP+1jO8QU4lrqEjW4uwSiRhklx4gSsJJMb/w1iN3wYJkMIaHnenSMBHzZJ6XLl2
-         IhHjSNfV9efwlW4OmoJK3Q4asoZGiJjZNFmwIxD0nJyMn9TvR+PqPltasnf2N7Izx22x
-         D4QoaYbjMEV9KpSadcrmfSuFgMb65oDnQdrJS0pKiQSafCZ5/CoRHF8jjnV72gu5wV8S
-         o5tqzpZLeH4MmKk/L5Rw+TgPymYQs2bRHdo9r4rmG/2FWSHkOPekFw4kf6qXdU1Ks272
-         ttIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774435263; x=1775040063;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1774435265; x=1775040065; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=D9IUgVkMnSvSpiMpIQOwgKjrrKDZg8TzP8a6gJHM7DE=;
-        b=e8lVpZrwhQh36xjRcNoqreLDz8CAYxVc9ervBmjeXXuC0781cJeu8FezV183Xi8uY1
-         RzxgH6Ph2Cp2CpShd/XF3rvIWgl5WL83WWQOmzJEzx+OpEreKvVvCdEsTTs9CHi27H/e
-         H9xjEfe8DpBXeFgVB2lSvfvgu3H2FpUYC+QQaeHiDjzoim0max7MmSY4TUVhafIGlc7q
-         paz0cdKEjWyaRjMxC8dZHxNGnH3xcWZCCo6zA8IlbLn7r5XiVODTgCUPQ/6fF1l7IBUU
-         hFffICfq5oZF2Wwmb0d8BJQwX61gtQ2s6nGhfgdlpeObqB0LcuJQysI1NAjIQL76A3YU
-         JObQ==
-X-Gm-Message-State: AOJu0YzytxEQ8jVQquwVCaOrgyw2bXTwoI30Qb+1zDXcSqLu7pLk/H8N
-	Aopd2nPeWvqEaEz+i+qXMymRxY9SNVCCLWWkSNcAGrjhRCfODS6FfbZfoEYfNA==
-X-Gm-Gg: ATEYQzy9wTPHlXgILRFe8tFsvzynrp7a4U+ntIRhGRgcQG5jY5Jl3nkka9fy5vRU+uJ
-	sDSWm5g2N+hEdiDjMlQKssrTpp4DqSH6c9A2DqGtlskYPZHx4WfLJugalFEXg9C50RaVjl6OznC
-	WVVTzlFGFKyFbCQ7ktNKSgX4rwAKfNF1tS65FTOjKM/N0ycITSvJ6WYPQFWrRkgjgAa9eVflaWu
-	4FIcc7MFJ3GbpypJs457V7Cv34m4dzbrs+yx+nn99Td761KPw5LIetwT1oStD3L9LZ3IGH/KM8b
-	7vsT8/pntgmQNi/1tuou75CA2X4yRmjtEUrGyVPsAnpI4CZYvoMFa4MP8Scd4TxsKTiOSKi7Lbd
-	ltj0lwtzoSsPXWVPCJ+EYmndHwg/ZvCALKOYS74JItQw5qGo+UV/BueiiL+R0DjIu9eEHAP9oGt
-	4IAC93ATjo58/HUuGVGdsQV+6/M3czwbniv6Fn
-X-Received: by 2002:a17:907:7b9c:b0:b98:47a3:b41 with SMTP id a640c23a62f3a-b9a5420da89mr250828866b.29.1774435262349;
-        Wed, 25 Mar 2026 03:41:02 -0700 (PDT)
+        bh=CikO432tEUr8bFn5h+cx0SZD0cYZGcKrs8DBIckuAUw=;
+        b=Ox2knnDiceog+aUcmcN1wGAS7FWppjuBH4ATtPiVz1+cftsBSZiivqwebKm9dj8hZ5
+         eN0gtlda9SAJU0VTbl+3IY7Xu+DmwCTkF4WraGbKqn6UA1qwvLwvNcanRR/ccqOAe9Cw
+         pWS2aFGaL0DqviBgcAFJIcmXokxjAYrgeMG6b9dA+N8PkxiUZpkJYqu9H1yTOfGMLrkN
+         oMYug/Ptde0k0HYKprrAu5lDAh6dIy09HstRvrpIJ79aptFEf49nORf3cqd8edqGPnb/
+         Rkn00+PMwQ6u2cibQ9EE/TL+DhgxEE+4c2lrxsT0rIGw5ExxITsWr3gWwVdUzBwl/X6N
+         sQGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774435265; x=1775040065;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=CikO432tEUr8bFn5h+cx0SZD0cYZGcKrs8DBIckuAUw=;
+        b=siSna0PFoZGIyBOilBs8UvRH6Pa+TzO/634SdUtqXC3zgF//VgtoP+Y2vnSSERD4KC
+         ld1lgfr0/urCrVl4iUyJ6GhP6nDrdnL1QXhZWQsOfpJ4/ObroU7RErIVBlQiVEKaulTV
+         A6oV1tn4U2y3nk8GQk+iBg9v0Vs1P/l7lS+oHLgmHqbGkjmKcFLe7BqgN9lcsEqWdvIj
+         X8Gl3vwjIyFUr+qpi6lf8h8SjvLwoTn8R8QqfoHJ4dy4CcHTYnB/FWZylHAL3dGjTklB
+         V5rr/5TK3sA0fxmu0W99Xge0DvD4JIIvenXgZQcPmNntBNlbbuk2RFIEG0C/9yoksIzD
+         lmmQ==
+X-Gm-Message-State: AOJu0YyvI9SaBEmL8W0zrPjQ4TaLjEMCb2whsgkYJHZE8LscIpX8cyhS
+	AvETbLVT76rtti7uQWxNZTVcQbd/rNa0Qk01TRaHZ9SqZ3Y9a6No00EJKY6jxQ==
+X-Gm-Gg: ATEYQzwcsch9fOf9t64vB3+QJD7gbphPdp4jPgOf5XQndoguolajMvrm4+VbvdkzFbV
+	z4lDyIy7L4PsGsiQkUCvpTcesiUMBSXRTKYzR5reWRrL8jHPhVd4NkchvjpVg5pY/P+Q0+NiFAL
+	qJGNXSQHOH6aHWG4d1N71MD5zuidCcWMqy3LH0zZqgAoNmhYO2R2aDvXvBKHR/TnZOEN1fPsSas
+	gACor6ByAMhclMOD2wLbRUaz4rgLRSU7DX0sZE42/JB1vQKYlR0OdxCBicE43IO8Uqhs7RrGZbU
+	ps2dBt9gDC30eLixHZgpPdAwaRv42kBTaWf3XxWWf1uMnQUbGjy0h1n/Co/F5Nz0/vpHWto8fkc
+	QwtEJIJA5KlWKI7pMToz/h9vdd2Xrdm7QtMEuSNEbbeVD/2zrjbW0qjyiZ3HlxXyo3xT1Zc3L86
+	J5ZWVL1mfKGqlRgDc1gekQBTbRVQ==
+X-Received: by 2002:a17:907:9626:b0:b9b:e5d:71db with SMTP id a640c23a62f3a-b9b0e5d86c4mr157328866b.46.1774435265134;
+        Wed, 25 Mar 2026 03:41:05 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,46 +96,98 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 0/4] xen/arm: ITS quirk handling fixes and board-specific matches
-Date: Wed, 25 Mar 2026 12:38:29 +0200
-Message-ID: <cover.1774431310.git.mykola_kvach@epam.com>
+Subject: [PATCH 2/4] xen/arm: its: add platform match callback for ITS quirks
+Date: Wed, 25 Mar 2026 12:38:31 +0200
+Message-ID: <10da5cf38dded9c3373c4b0ba54d7f7a7b2fd98f.1774431311.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1774431310.git.mykola_kvach@epam.com>
+References: <cover.1774431310.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1774435263-B9A869D1-A6E38444/0/0
+X-purgate-ID: tlsNG-d62444/1774435266-21CFBDF3-3AE12AE1/0/0
 X-purgate-type: clean
-X-purgate-size: 1399
+X-purgate-size: 2594
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-This series cleans up ARM GICv3 ITS quirk handling and fixes the point at
-which quirk-derived memory attributes become visible to the LPI setup path.
+Extend ITS quirk lookup with an optional match callback so that
+platforms sharing the same IIDR can still be distinguished.
 
-The first patch switches the quirk handling from per-entry init callbacks to
-declarative flags and folds in the DT dma-noncoherent property when deriving
-the effective ITS attributes.
+Use the board compatible string to positively identify Renesas R-Car
+Gen4 before applying ITS workaround flags, preventing false matches
+on other SoCs that happen to use the same GIC IP block.
 
-The second patch extends quirk matching with an optional platform callback so
-that boards sharing the same IIDR can still be distinguished reliably. This
-is then used by the third patch to add the Orange Pi 5 ITS quirk for
-RK3588/RK3588S boards.
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ xen/arch/arm/gic-v3-its.c | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
-Finally, the last patch moves ITS quirk discovery and validation earlier in
-the boot flow, before host LPI tables are initialized, so the boot CPU does
-not allocate and program LPI data structures with default attributes when the
-platform requires different ones.
-
-Mykola Kvach (4):
-  xen/arm: its: collect quirk flags and honor dma-noncoherent
-  xen/arm: its: add platform match callback for ITS quirks
-  xen/arm: its: add Orange Pi 5 ITS quirk
-  xen/arm: its: pre-initialize ITS quirks before LPI setup
-
- xen/arch/arm/gic-v3-its.c             | 129 +++++++++++++++++++-------
- xen/arch/arm/gic-v3.c                 |   7 ++
- xen/arch/arm/include/asm/gic_v3_its.h |   5 +
- 3 files changed, 107 insertions(+), 34 deletions(-)
-
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 00524b43a3..c40629731f 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -57,6 +57,7 @@ struct its_device {
+  */
+ struct its_quirk {
+     const char *desc;
++    bool (*match)(const struct host_its *hw_its);
+     uint32_t iidr;
+     uint32_t mask;
+     uint32_t flags;
+@@ -64,11 +65,24 @@ struct its_quirk {
+ 
+ static uint32_t __ro_after_init its_quirk_flags;
+ 
++static bool gicv3_its_match_quirk_gen4(const struct host_its *hw_its)
++{
++    if ( !hw_its->dt_node )
++        return false;
++
++    if ( !dt_machine_is_compatible("renesas,r8a779f0") &&
++         !dt_machine_is_compatible("renesas,r8a779g0") )
++        return false;
++
++    return true;
++}
++
+ static const struct its_quirk its_quirks[] = {
+     {
+         .desc  = "R-Car Gen4",
+         .iidr  = 0x0201743b,
+         .mask  = 0xffffffffU,
++        .match = gicv3_its_match_quirk_gen4,
+         .flags = HOST_ITS_WORKAROUND_NC_NS |
+                  HOST_ITS_WORKAROUND_32BIT_ADDR,
+     },
+@@ -77,7 +91,8 @@ static const struct its_quirk its_quirks[] = {
+     }
+ };
+ 
+-static const struct its_quirk *gicv3_its_find_quirk(uint32_t iidr)
++static const struct its_quirk *gicv3_its_find_quirk(
++    const struct host_its *hw_its, uint32_t iidr)
+ {
+     const struct its_quirk *quirk = its_quirks;
+ 
+@@ -86,7 +101,8 @@ static const struct its_quirk *gicv3_its_find_quirk(uint32_t iidr)
+         if ( quirk->iidr != (quirk->mask & iidr) )
+             continue;
+ 
+-        return quirk;
++        if ( !quirk->match || quirk->match(hw_its) )
++            return quirk;
+     }
+ 
+     return NULL;
+@@ -99,7 +115,7 @@ static uint32_t gicv3_its_collect_quirks(const struct host_its *hw_its,
+     uint32_t flags = 0;
+     uint32_t iidr = readl_relaxed(hw_its->its_base + GITS_IIDR);
+ 
+-    quirk = gicv3_its_find_quirk(iidr);
++    quirk = gicv3_its_find_quirk(hw_its, iidr);
+     if ( quirk )
+         flags |= quirk->flags;
+ 
 -- 
 2.43.0
 
