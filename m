@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02021109C033
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 14:51:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1262428.1554961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1110109C029
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 14:56:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1262496.1554970 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5PZg-0001vG-4p; Wed, 25 Mar 2026 14:51:12 +0000
+	id 1w5PeU-0002V7-MJ; Wed, 25 Mar 2026 14:56:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1262428.1554961; Wed, 25 Mar 2026 14:51:12 +0000
+Received: by outflank-mailman (output) from mailman id 1262496.1554970; Wed, 25 Mar 2026 14:56:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5PZg-0001v9-1B; Wed, 25 Mar 2026 14:51:12 +0000
-Received: by outflank-mailman (input) for mailman id 1262428;
- Wed, 25 Mar 2026 14:16:07 +0000
+	id 1w5PeU-0002V0-Im; Wed, 25 Mar 2026 14:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 1262496;
+ Wed, 25 Mar 2026 14:56:08 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <aydenbottos12@gmail.com>) id 1w5P1j-0003l4-M9
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 14:16:07 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w5PeS-0002Uu-NR
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 14:56:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5P1h-00Cxa0-23
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:16:06 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1w5PeR-000pLk-US
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:56:07 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <aydenbottos12@gmail.com>)
- id 69c3ee1c-bab6-0a2a0a5309dd-0a2a45068d6c-34
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:16:06 +0100
-Received: from [209.85.160.45] (helo=mail-oa1-f45.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <aydenbottos12@gmail.com>)
- id 69c3ee25-3034-0a2a45060019-d155a02db8d6-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:16:06 +0100
-Received: by mail-oa1-f45.google.com with SMTP id
- 586e51a60fabf-40946982a78so2094151fac.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 07:16:05 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69c3f77f-2eae-0a2a0a5409dd-0a2a4508a824-24
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:56:07 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <jbeulich@suse.com>)
+ id 69c3f787-1950-0a2a45080019-d155dd36a8b9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 15:56:07 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-43b467dcf0bso673286f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 07:56:07 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b919cf2c8sm245027f8f.20.2026.03.25.07.56.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Mar 2026 07:56:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,156 +53,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1774448164; cv=none;
-        d=google.com; s=arc-20240605;
-        b=PkiGqVneoTAN8tT6/3QfKjxN4t4IpqHI375XykqZCGLWvPYFNIC3sp67A4aoOBCVkn
-         U2PyXrklrhbSaTTESZykcwnfAAjn61wgQ1Z8iOD1u/yJnVupCTEEIYVyywrrO63r56gL
-         FWEGc0WtPyD8dggd/f58ccKjT4SeNo+JnnWz8gxrhleJKznHyPUcdG6QsEIvd4pg+PsQ
-         OLbctyM1c33peAr6H/cdtPezAX0eYIZkQyG+VR+ziRCmDPMXt1tW+HhuqdmlFfEM6+Ay
-         S07f2/cvwSC53mYHZbdCDPggNnEj9FzpP4agHEwqeRPzUWBwLejnXTPX28l1ZacS7aaA
-         MDBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=r7y6YKolCJv5+RCixJGv6yuwL2cEKqM475jxEEtn/XU=;
-        fh=g1WkAsZ2h5zzPyv9sSr+bkKXIKzQT0CMUrA/Ka8vWHk=;
-        b=OkjO2PL677FWqSWeqkcAt7CjYNuWLGx77gZ3OAGoZAhsgRsNqZIM8R51QseWvaZ6/o
-         +gjeqTdobjMQtStevKF/NA+crjM+cNisDCUJ05qOJ+OLHiCqXnzJa2lUPZFVnVnxlHlp
-         wfcy7uyhuawbEV1PakV0PTPvjXfnuEv1mN81lEWfQUjy7ABXBKaG0/sWrGrJeSoAujoW
-         MDwEKvZKF0qHvsU84b4nGgPAWAck0clIkIYWIaGDfYY59f29JViD0jXBq7hkj2BnjTV0
-         18zaID6zGx8MU/cq7CQP/1+utzIO3xKC0WrU7HGKSdcgmhRtDLx0awOpRUfmf/2gEyJg
-         53Pg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774448164; x=1775052964; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=r7y6YKolCJv5+RCixJGv6yuwL2cEKqM475jxEEtn/XU=;
-        b=mPGQTbDg7iuLa9hEoVDZ59eYdg/ET3bGHDsA6yr7dxcFc70v3ATaapCzzeZHw99Iui
-         9OtkLfNpaEQHI8xTpS4tG3kgK6Kdn1AdQvM8wg/3yKNfh/Rcz3i6Ce8vZJAbDJ1z1LGp
-         2/g59PFsDMa20N8sozVmHJFED+HJjLGmXsUs4I4EOaZMXWlLn+aGRGC1JO3pPb691DuC
-         01Zu5lWe0IUW/GbHCxg1cKXeeoAwm5diUgaFoLCsC5WGwnSAvTt2gUQAllqP6ZG5RKAQ
-         f0/ubOUXNIqNb0P/WRYOY/pWfzCCueYbdN6Kjs8gewxrKnfwE9vhtCf8ta/Htqtl3n07
-         hHtg==
+        d=suse.com; s=google; t=1774450567; x=1775055367; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=KSBQDY5YAbV8oot7jmEyT9W2PVJxD7+iZuvlPSORLZ0=;
+        b=Ns+pMblJaERDBuMdRAP+1qAVZnEadXvjW45cbcohVYVdb+rzIIQJLkqe4usvWtqO+O
+         g20BOxQUR1mpVRYa5ZK/FKSPICuRYXc89eaJxLjkYT696Nx33WBqVkfYeNeBEG7SokNo
+         JryPbsLUAxlhd0+rR8vAoCG9CISL+CjyUOZrz57CVZw7I0f0MNzhEOT/h3YNSzN508zy
+         y1I49mC6Natbo3/w60vXCeDps80TnbRD7k/bGsstWdIqfkJWRMKuhuFvEwIDXALWkrEw
+         9anlUw9AJHAu3UNgAMGgI7wadZW8CssIm3wiJKOdrXM7LYA5R3dhY4Ckk4KLfNRQ7Lpe
+         xcJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774448164; x=1775052964;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=r7y6YKolCJv5+RCixJGv6yuwL2cEKqM475jxEEtn/XU=;
-        b=TQnm1F/s7lUlyBsfUsI8XP0Dxdm2tUevbWzz6TgolPIcaa1g63nLeh8nXk+/NFe0fl
-         OroeoLgucJQaR1n4w/xVce82oOX6T6pJ/90dElH9DVrSH7s4u+G+KoT/iiHP1RoUU5JS
-         y6ndMFskjMZFprSjjGTnOXdsj8qrbFjgs67v1uss1xRcOPxJHjpMjd5IUtmdhO/YAiya
-         efRvMZeAGI/rvJ1BSS6aqu9FH51yATRtbCnqADPCH0AEj6NWPm5Yc4WneRWf9DWqbcPo
-         6srX/1bGbT/68RWxurtk8gT4zfq739XfWUzGl9O7o0JAeDzzxuy8ty+4x8U5qqllKcRi
-         sFXQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXvaMndhgb9Cq0SjhhjosvhvVBIANtguftoXuG3kNtcbiUxVLvzE8ynIGlKyMGQ1CZWKldi6kPW6t8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwO6SpAJWD1ixh9AQvK83BhSH4bA4toXCxcUHe1KpgTtLpKCFAH
-	vkIE9SO77iA+HBuwMngBxQe6MPoSvz2enWKHflG4MqG5oO0Pm9Ikqd8Eq0v9l3As0xJsLjEWXiY
-	8m3+xo79OuQbcsJFux8CeaafMMbpoYLQ=
-X-Gm-Gg: ATEYQzyhGroAzStKck2GMZt2JasO17UN3k2aOXjts1TYbU3UPVi0eh41EZiEvtAUKmv
-	sIi8TrkpAuK6uygb+/zOClLtvMtgepxJjbEYzm0H+HAtS7Qy+bLo45+1DaRiF54fdBrwcrfqTF+
-	ZdMsVmuIhDjg0r7lzuSl5zQB+8S+83IxOLb21gdVeX9HZxTWqa+5x06pxue7v7MJ/TGsbL6MK9/
-	pss0fhZuHWOEVz8ZBr0yqahBKsmNx69QNludU1GHgCYIRGAUc8EJbeJNTGAPTkpMUD2vf7f3cnc
-	vCR2sb4+XWErxVGCqvchucu2vjRUgZyvCuZcvRZ1YV2HJke/abM=
-X-Received: by 2002:a05:6871:3a28:b0:41c:4849:38b9 with SMTP id
- 586e51a60fabf-41ca6d6a4c3mr2111306fac.5.1774448164335; Wed, 25 Mar 2026
- 07:16:04 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774450567; x=1775055367;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KSBQDY5YAbV8oot7jmEyT9W2PVJxD7+iZuvlPSORLZ0=;
+        b=j8A3AyiJZGJxF4xsS9XllkQ9NAmiaPNKeR6QBa9IAhLoSkZsedLLrA5/8l76wuswLw
+         w08KiIFDhNgaQUKcgmo568SLsUK7TpfRHpo0k+fa94LCBIhoI/eMsSFuNj/BcQCHvWd7
+         e2CASlwj9lEyK6xOoYV7yXqWMB9iePxDLAFCcxTxtt5rorRbCKYUXyv0YE+2VFd3gsyx
+         i/0V9L/B+G/tpzCBohybjK9Tq5OlNSZEEowplbP+07EHokcfrcoxu2T8rNKL4SUn5LZi
+         5C6INOTB//AwLfz8yX8lo2QVL/G0btQ4DCBQ7/cGPhm2OINmQGU6zjiRfwjsJHUyMNr1
+         eqww==
+X-Forwarded-Encrypted: i=1; AJvYcCXuLIeJPEl9ktqlcwN2lhWO0ueLCrDPzn+IW0M0/BcWKXTdHjmzs0iA6RgfMVW4bdZjXLdzOldNMaQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyW6Pjdi1HL8ROo9f7aUkv0LmVKGPtKfqFYIaY4IfvF1hCN0N2B
+	Q7a+PW1wIdRaGxLBrq9PfTVcbstpZsMqaGgC/fezh5nhVQIMObpyPoGg9iiHR+bPAQ==
+X-Gm-Gg: ATEYQzzonnqhm6a9smBVo94zPbzDdWmyDGs3ZkYrJCwGwaioKDTGE2/szGza+IO17KM
+	EUC+4DM0V3NAw3CC1pv7dchUMWmFLJLxwgbN5K7DTC2AU60w3uILGlBYSrqf5k56cSWObDEc8zW
+	8H7iDpReu3K+QhpBpRmvjJdlJHWq9FSji1YD4geZujOfsdq1J6aa+zHBEka3RQcY92w8Mr8mayJ
+	GOcgqrDy3oHXEa76uQBBTMWS2QmhIseoMgzzdQ5q6u4Im2UN5/wzezn7oj8btTElUIYvT9UtR/h
+	BTWJ02WfqMBb71SLGikbKbuEKRbzuiJIg4vFemijzUhALJIqzX7+sUIyTQblAGT0sWLQWnIm5uO
+	rRws9pK+YpL8dTa4Khr9UrsTrRXf8ez4e9qMYvaXXujlbbtGRRiodDME14EX9GcrdZtuDpf3aDS
+	flyRCEiljD0QlyRNs79vq1ltbku9bxksNteeLsc+rES3XhP1cbb0WMWnhbFDQ9omvs9YhsN8IMA
+	VocuerAMANcp3E=
+X-Received: by 2002:a5d:6f0b:0:b0:439:ccd7:cdcc with SMTP id ffacd0b85a97d-43b80592b2amr10890169f8f.18.1774450567028;
+        Wed, 25 Mar 2026 07:56:07 -0700 (PDT)
+Message-ID: <73c705eb-95f9-456c-ba0b-c6e0f7730ef1@suse.com>
+Date: Wed, 25 Mar 2026 15:56:05 +0100
 MIME-Version: 1.0
-References: <20260325100803.6640-1-roger.pau@citrix.com> <20260325100803.6640-2-roger.pau@citrix.com>
- <ab36ce57-2067-4f1a-8384-403e015732dd@suse.com>
-In-Reply-To: <ab36ce57-2067-4f1a-8384-403e015732dd@suse.com>
-From: Ayden Bottos <aydenbottos12@gmail.com>
-Date: Thu, 26 Mar 2026 01:15:52 +1100
-X-Gm-Features: AQROBzBfCfuizWLiShRP0VGdIuXL2zuUtpdad1ADypykvE1mouKdJNmF1GNiB5Q
-Message-ID: <CAMAzJ6GmqZpwCCnVh3nk4u0ddwtJCiF9DbdmP=ybsm1F3f2_tA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] xen/mm: don't unconditionally clear PGC_need_scrub in alloc_heap_pages()
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Roger Pau Monne <roger.pau@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1774448166-B30951C2-E9C2566E/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] xen/mm: do not assign pages to a domain until they
+ are scrubbed
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260325100803.6640-1-roger.pau@citrix.com>
+ <20260325100803.6640-3-roger.pau@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260325100803.6640-3-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1774450567-E80BE726-F607F77B/0/0
 X-purgate-type: clean
-X-purgate-size: 3015
+X-purgate-size: 3124
 
-This looks good to me. I would also add a brief comment in mm.h to
-make the contract clearer for future callers: MEMF_keep_scrub is an
-internal allocator flag and only valid together with MEMF_no_scrub.
+On 25.03.2026 11:08, Roger Pau Monne wrote:
+> ---
+> I've attempted various different ways to solve this, but they all ended up
+> being impossible.
+> 
+>  * Prevent non-scrubbed pages from getting extra refcounts (iow: make
+>    get_page() fail for them).  This seemed nice, but the cleanup using
+>    put_page_alloc_ref() was impossible as non-scrubbed pages would return
+>    failure in get_page(), and so I couldn't take the extra reference ahead
+>    of calling put_page_alloc_ref().
 
-On Thu, Mar 26, 2026 at 12:37=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wr=
-ote:
->
-> On 25.03.2026 11:08, Roger Pau Monne wrote:
-> > alloc_heap_pages() will unconditionally clear PGC_need_scrub, even when
-> > MEMF_no_scrub is requested.  This is kind of expected as otherwise some
-> > callers will assert on seeing non-expected flags set on the count_info
-> > field.
-> >
-> > Introduce a new MEMF bit to signal to alloc_heap_pages() that non-scrub=
-bed
-> > pages should keep the PGC_need_scrub bit set. This fixes returning dirt=
-y
-> > pages from alloc_domheap_pages() without the PGC_need_scrub bit set for
-> > populate_physmap() to consume.
-> >
-> > With the above change alloc_domheap_pages() needs an adjustment to cope
-> > with allocated pages possibly having the PGC_need_scrub set.
-> >
-> > Fixes: 83a784a15b47 ("xen/mm: allow deferred scrub of physmap populate =
-allocated pages")
-> > Reported-by: Ayden Bottos <aydenbottos12@gmail.com>
-> > Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
->
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> with one nit (minor request) at the bottom.
->
-> > ---
-> > This issue was initially reported to the Xen Security Team, and it did =
-turn
-> > out to not require an XSA only because the code hasn't been part of any
-> > release, otherwise an XSA would have been issued.
-> >
-> > The Security Team would like to thanks Ayden for the prompt report.
-> >
-> > In the scrubbing loop in alloc_heap_pages() i should better be unsigned
-> > long.
->
-> This issue is wider than just that function. As long as MAX_ORDER <=3D BI=
-TS_PER_INT,
-> I think we could have all such loops consistently use unsigned int induct=
-ion
-> variables. But of course switching to unsigned long would be okay as well=
-, just
-> perhaps a little less efficient on (at least) x86. My main wish would be =
-for all
-> of those variables to be consistent in type (and hence all involved liter=
-al
-> number suffixes also being consistently U or UL).
->
-> > --- a/xen/include/xen/mm.h
-> > +++ b/xen/include/xen/mm.h
-> > @@ -208,6 +208,8 @@ struct npfec {
-> >  #define  MEMF_no_refcount (1U<<_MEMF_no_refcount)
-> >  #define _MEMF_populate_on_demand 1
-> >  #define  MEMF_populate_on_demand (1U<<_MEMF_populate_on_demand)
-> > +#define _MEMF_keep_scrub  2
-> > +#define  MEMF_keep_scrub  (1U<<_MEMF_keep_scrub)
-> >  #define _MEMF_no_dma      3
-> >  #define  MEMF_no_dma      (1U<<_MEMF_no_dma)
-> >  #define _MEMF_exact_node  4
->
-> Irrespective of all the similar issues in surrounding code, may I ask tha=
-t << be
-> surrounded by blanks in the new addition, to conform to ./CODING_STYLE?
->
-> As an aside, I wonder whether we really need the separate _MEMF_keep_scru=
-b, but
-> the same likely applies to most other _MEMF_*.
->
-> Jan
+A special-case variant of get_page() could be introduced, but maybe that
+would still be overly fragile.
+
+When we discussed this, what I had proposed didn't require use of get_page()
+though. assign_pages() would install two general references (plus one type
+ref for PGT_writable) in this special case. To free, you'd call
+put_page_alloc_ref() followed by put_page_and_type().
+
+That said, the patch here is still less intrusive than I feared, so I'm not
+asking to re-work this again.
+
+>  * Disallow XENMEM_decrease_reservation until the domain has finished
+>    creation would fix the issue of pages being freed while pending scrub,
+>    but it's not clear there might be other usages that would be problematic,
+>    as get_page() on non-scrubbed pages would still return success.
+
+I agree this is of concern.
+
+> --- a/xen/common/memory.c
+> +++ b/xen/common/memory.c
+> @@ -388,6 +388,12 @@ static void populate_physmap(struct memop_args *a)
+>                              goto out;
+>                          }
+>                      }
+> +
+> +                    if ( assign_page(page, a->extent_order, d, memflags) )
+> +                    {
+> +                        free_domheap_pages(page, a->extent_order);
+
+The pages don't have an owner set yet, so that function will go straight
+to free_heap_pages(), needlessly passing "true" as last argument. Correct,
+but (for large pages, which the stashing is about) highly inefficient.
+
+> --- a/xen/common/page_alloc.c
+> +++ b/xen/common/page_alloc.c
+> @@ -2699,7 +2699,13 @@ struct page_info *alloc_domheap_pages(
+>                                    memflags, d)) == NULL)) )
+>           return NULL;
+>  
+> -    if ( d && !(memflags & MEMF_no_owner) )
+> +    /*
+> +     * Don't add pages with the PGC_need_scrub bit set to the domain, the
+> +     * caller must clean the bit and then manually call assign_pages().
+> +     * Otherwise pages with the PGC_need_scrub would be reachable using
+> +     * get_page().
+> +     */
+
+How about replacing the latter "with the PGC_need_scrub" by "still subject
+to scrubbing"?
+
+> +    if ( d && !(memflags & MEMF_no_owner) && !(memflags & MEMF_keep_scrub) )
+>      {
+>          if ( memflags & MEMF_no_refcount )
+>          {
+
+This no-refcount code isn't repeated at the new call site of assign_page().
+It's not needed there, yes, but wouldn't we better allow this to be taken
+care of right here, moving the MEMF_keep_scrub check immediately ahead of
+the call to assign_page()?
+
+Otherwise should we reject (much earlier) MEMF_no_refcount used together
+with MEMF_keep_scrub?
+
+Jan
 
