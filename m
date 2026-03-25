@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB62BFEA839
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 09:52:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1261837.1554592 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E62B3FEA83B
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 10:15:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1261859.1554610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Kuj-0003HE-Kl; Wed, 25 Mar 2026 09:52:37 +0000
+	id 1w5LGF-0007CA-Mp; Wed, 25 Mar 2026 10:14:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1261837.1554592; Wed, 25 Mar 2026 09:52:37 +0000
+Received: by outflank-mailman (output) from mailman id 1261859.1554610; Wed, 25 Mar 2026 10:14:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5Kuj-0003H7-H7; Wed, 25 Mar 2026 09:52:37 +0000
-Received: by outflank-mailman (input) for mailman id 1261837;
- Wed, 25 Mar 2026 09:52:36 +0000
+	id 1w5LGF-0007C3-J5; Wed, 25 Mar 2026 10:14:51 +0000
+Received: by outflank-mailman (input) for mailman id 1261859;
+ Wed, 25 Mar 2026 10:14:50 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69c3b062.v1-14bbfae5b9ba48c48016e920f26295b8@bounce.vates.tech>)
- id 1w5Kui-0003H1-FZ
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 09:52:36 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger.pau@citrix.com>) id 1w5LGE-00077S-5z
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:14:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5Kug-00C2yo-9i
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 10:52:35 +0100
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69c3b062.v1-14bbfae5b9ba48c48016e920f26295b8@bounce.vates.tech>)
- id 69c3b060-5cb7-0a2a0a5109dd-0a2a450ab64c-10
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 10:52:35 +0100
-Received: from [198.2.132.30] (helo=mail132-30.atl131.mandrillapp.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from
- <bounce-md_30504962.69c3b062.v1-14bbfae5b9ba48c48016e920f26295b8@bounce.vates.tech>)
- id 69c3b062-1772-0a2a450a0019-c602841ee076-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 10:52:35 +0100
-Received: from pmta09.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail132-30.atl131.mandrillapp.com (Mailchimp) with ESMTP id
- 4fghz63BVTzP0K4yd
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 09:52:34 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 14bbfae5b9ba48c48016e920f26295b8; Wed, 25 Mar 2026 09:52:34 +0000
+ id 1w5LGD-009Md1-Hw
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 11:14:49 +0100
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <roger.pau@citrix.com>)
+ id 69c3b598-5cb7-0a2a0a5109dd-0a2a4506b42c-6
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:14:49 +0100
+Received: from [52.101.56.18]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <roger.pau@citrix.com>)
+ id 69c3b596-3034-0a2a45060019-3465381247db-4
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 11:14:48 +0100
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
+ by DM4PR03MB6909.namprd03.prod.outlook.com (2603:10b6:8:44::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Wed, 25 Mar
+ 2026 10:14:45 +0000
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9745.019; Wed, 25 Mar 2026
+ 10:14:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,119 +55,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1774432354; x=1774702354;
-	bh=UaxZica+m1LUQHGkzYfJ1+kqnXdJBmBtC5PuT3IRKuc=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=KoZO8QbzfTcB/A2lvA2Ohl9BPqfIwjvwyrCyW+557NlgNk15fiHj1D9w5PR95LRvL
-	 cSrgIVOXOKUc772OPX2p0AwGvQg4Hy+JfDM5K3FM1OwfFja2ycNrBQhStodmzFomZW
-	 eOwwOHhi3pNPXfP4iw2cPwluQtvwVgoozWYsRtfhMlPrzbJ/bbi4T6Gvu4WkGEVfPE
-	 7uvtG1IXQFKlZVUt3PR0yHMsEZskrslokZfzhylb+stNU6GTHGK3dDLHLRUPzcN+7z
-	 xaLnFc/Uaf5tbAamOxPcUeBq66+wv4RYUCucM6rJqgVamwyvLKNbIqX8n3eZHEMfkC
-	 YBGvMEhRbpfRA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1774432354; x=1774692854; i=teddy.astie@vates.tech;
-	bh=UaxZica+m1LUQHGkzYfJ1+kqnXdJBmBtC5PuT3IRKuc=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=qO7ETy4sAC9m6AVduv6MVBrin3g0wC0iqzQuYiGeLPJSUpfs+jA6iupVHrLAX10m8
-	 33mSvuVzlPXxJINx/MAFNTTHO+aL1yKarjrRQ6se4IIq2D8ORBU+WbKml7s1xbOiIl
-	 pKQlvk5ABfbtbic062rZdodwWeoK53g3Hv1TXK8h89QhLznG8cYK1mttz0mvWJy85x
-	 a9iAgHbdtMOoDCK1nv2X8EWnZT3aljxssAnPUpionpq5EK9i36WQSPVDAGgYrQweF1
-	 lZfezYTnwR5BA5dleaktp2GIyfMo+QcWk1zzfhVoeys6ttWJnvhHgbRulwSQ+Um4QC
-	 Yk9weToOGREIg==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=204/6]=20x86/vpmu:=20Sanitise=20Intel=20PMU=20version?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1774432353580
-Message-Id: <1bb2df7c-aabb-4449-9a77-8449b0d1a6cb@vates.tech>
-To: "Jan Beulich" <jbeulich@suse.com>
-Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <cover.1773160025.git.teddy.astie@vates.tech> <dcd278658139976d1af92b4d201c17e12cf7eb2b.1773160025.git.teddy.astie@vates.tech> <0857c00d-f11e-4b84-8988-e7a096aa55f5@suse.com>
-In-Reply-To: <0857c00d-f11e-4b84-8988-e7a096aa55f5@suse.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.14bbfae5b9ba48c48016e920f26295b8?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260325:md
-Date: Wed, 25 Mar 2026 09:52:34 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QaFV3PKRxOkTSwq6Cg7GvCGBAyFbn5ChnZGyhH1VFqoODWZWa8gtS+Y/1OWbRFgAKUAhqhHUVp1afYC63IzPUPI3r7m9Bcc4xACFbecvtsvUyHrZHKt4l64xjOMXLM9jZ1JOklKuesnfAT+5EWh3b3ijdPpmqWbKIbY9FIi/8G+NEvHGJYQG1JrequqzTrDQZGXPp6dy9RkMH2zlCT90yvIlglT7fkBX9M0H4VCoGqvoQ+lfOTQMnM2wiF9ARkiCqr3+bret5oWZd2mDOyzFbNchWUl1+vDyAiRelqTo8zLN18QaJXMHlt8PPO27XIhwN/GCaxUpN2rxW4qrGfsPaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mjvhhxyU4hEONnorl8Vk2zeEBhj4jDACdC0hApD8M4M=;
+ b=j5776z7D6fJiao2nv9KUdB8xelQvLxmtVYzAyJwjKlu7pjJhUjtge0piuq9uwENo7G3U+vMtbjnCzizkMhf9BHnfWA6Xm341f+CmjftF2uLYNAynAQIjAqt67j8XVwYO49lAUiSoUT89YonXOGwiQbvbz1j+gh2YAHZ3yWNWvoExogZcE2rtx7KQOynd2ghY5eOwovzKsynEj/50htD4WTwefl/VVg2QmN9KAFH7lO3/i45CIPGcUbCQoSZJXklnB0ufMQNfk/x5P9DRzwoDQe4QF4h/sKFoh2nAgceCbeaWKu9B1AD4x36Zvxs1cbPzJiRq/1SZ7P2a49RCaQ55Og==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mjvhhxyU4hEONnorl8Vk2zeEBhj4jDACdC0hApD8M4M=;
+ b=cPaFDUHG9MjT6VJBEud7orRA6Uh7DSks66KPlfkEL4G4W572LrkAE45DKW+LkiaZeJsUJsFNCvzYPkVfwyWxot9jIh8vTu5XlnYqrA0ll2Zk4DnJiSMs4S3/9Rkwv3KTHZX1x6shVcrf2fJMBpoEalKfpaXmtfAZAbvfGU76Eo8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Ayden Bottos <aydenbottos12@gmail.com>
+Subject: [PATCH 1/2] xen/mm: don't unconditionally clear PGC_need_scrub in alloc_heap_pages()
+Date: Wed, 25 Mar 2026 11:08:02 +0100
+Message-ID: <20260325100803.6640-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260325100803.6640-1-roger.pau@citrix.com>
+References: <20260325100803.6640-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA4P292CA0009.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:2d::6) To CH7PR03MB7860.namprd03.prod.outlook.com
+ (2603:10b6:610:24e::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1774432355-BE691900-D3F13F7E/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DM4PR03MB6909:EE_
+X-MS-Office365-Filtering-Correlation-Id: be4cced3-0406-43f1-7d25-08de8a5756b7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	iVGHhCd87QH5RkXlmNOr1hu925CKbMbUpil1Gu+Zd+lNDBRCs9eWbbyxpq2NbnWlqf6J/YTJ2qPvjCulGi9O41iyl7h35ao+iE0pAat10EYB1bavhakjxmC3VGmch0cyVaONjBgVIZ4HuQgJsK9ZvzDtX9WWRVooOah0WiSphYBjDgLObZst1m4d0qFMcI3iOYEf2kwz+1Cvn5J3xDr6iS3L4Cr+Jx/4SZhkNKFwGomaKe+E1QeatzVOuVHLwTqsvoM2FBPfjwZs/dXI5L9jFAio2F8275M7edM9eGS9FvaNtOvKFBrOzfSk7Dlt+pe1FpSvNxeADWiw9UB8mzGxldFNwcjLtBm024dR6ESRbJK7i0knbps4BzUGoRWQskvO4VYLdOFwYUxWYxkX0MBiINEoBA8wYsnODiinYxErc/ja4GUsHcBeJY19QxhdnFQ0zZj0T76aohRshTfp14E02a+h62bzuL/E4sfe72EbTW+wWUmxL/K6vvNuLAWv3mzMW3LY8TCCnIO94PtmIswQLICIaYsNmC/SJ81je3CC97O1sVtBTOql1+6JJBwbdEJq3f3yeoaeP+Ye39mrIo5rnnbP3KNS1wQEdOhsYZ8Eu1n8WnFyEse4/z6Ld4BCm9SFfd7M3uF1MQOp6LHwVIjUfxWQwrKXGYdpFC3jGGHkFwocWhSSf4ssuOx2B4HFsSu0jfUF3r/oX/3mSRxaIUihffYnf87PRGrCwxi8ToH9sfQ=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Tm8zcmxxdE5sVS93M2pkSXBDRzZsWER2TW0vRmJvS3RJK0JlUE9XSmExQlcx?=
+ =?utf-8?B?cm1QSEFHSDNYYUpKVzA1alBrRnEzbVpDZUEwM1AraUFvVHFPTWhsOGQydGU0?=
+ =?utf-8?B?YXhsMDg5aWNucnBpMWc3UWtoL3RORmd5ZlQ1UExqbnpVM2UxRGl2UFVtZXVs?=
+ =?utf-8?B?cUtoWnh6VUlXc0FzaXpJTE0vSEFLS0s4b0JLSmhySm1FaXA2dG1CaXpFWFRG?=
+ =?utf-8?B?c0xKekRrOGhkUWNSRmNxT0dmZEJzR0NRYTFwT2FzOFVtUEJEVEVCQVQ1a3Fo?=
+ =?utf-8?B?K2JUTXQ0dE5wai9YTXAzY3NReFkreUpXelpBdlExMDhRVERkR3hSZjhpbCtO?=
+ =?utf-8?B?dkpOVE8wY3ZxcUxoMUtlZFJ1TmpHZEV6OG5NY1J5em15Qit3OXlZZm5pQzd5?=
+ =?utf-8?B?eGs0c1gwa0xiaFBkU2N2dkF6ZGdVcG53NTZsOXlDSWJ5c0p2SDFlOVl4Z01x?=
+ =?utf-8?B?bWthc3VOdU9vdWtTNENZS1FFaWRseUxFMUxFUHdMQVRJVWtXVmRYM3JXN09n?=
+ =?utf-8?B?OG1UVVRmUkJZVGE0c3QzWTdGcmVhcEFRL3JFSWZVMFR4RS92bjBzVzMwcWha?=
+ =?utf-8?B?TjZnbE5jWlRPV09pa0h4WjhDVUZSdm5EMFdNYWx0UUFBL1lPNDI1Rmx4YnZl?=
+ =?utf-8?B?LzdJVzZxcDk4Sm41b3VvbDNhUWRNbzk4SkhiRllNdXdTekxuYXphTVBpS1U3?=
+ =?utf-8?B?cFVVblFNQzVERjd0QVE2VHpwRGF4RUVIQWJRSHhKS25raWx4QkhpZ0h1am5M?=
+ =?utf-8?B?OS9FWlBwRDM1ZUtwTzYxZ3BVcDFoejEreG12MTlBdHQ5ZUExYmd3dUcxRllm?=
+ =?utf-8?B?bG1oMlFMejM1NWxDLzEzTFBxT2JxSzlIOHBxcGc1K2FmQVNwT1Q0K1dwenI0?=
+ =?utf-8?B?bFJGSFBLRkdXdVRIUWdoRkZRS2VrcEt5VjcwYjUwWDNERzViMzdRMDRzZy9Y?=
+ =?utf-8?B?a2ppMVdqcklDbmIvQkEvclhwajNVOXRjMnl5Y1NYNjBEQi9IOXJBWWN6eFZZ?=
+ =?utf-8?B?VlNCVWhTdEJPR3k0OWJLQWFrZzFqUnc5ZVppc3JQekNyWXhBdnJibnhDUGdL?=
+ =?utf-8?B?MS8zUkkvZXA5cUptbDlPM3kxNlIzdk5sRE05bnkyU0Q0aU5NLzV4c2JCSEFl?=
+ =?utf-8?B?WEZrWnVCRWl3bCtzemJBRnVaYW5YamxMNWtyVXBQQmJ4WmJFNkRJdzhVRzVS?=
+ =?utf-8?B?SnNpV0Q3eUgzdTJjdmV1M1l1OGhtTk1NY282TVFhSWxaV001ZklUN3dueUZ6?=
+ =?utf-8?B?bG5OUjFDbFRQcnk5MnNrVkVpWDQxaUlaMWFSRHhUZjRFSXZLWit4djh3SVNF?=
+ =?utf-8?B?c3FkSXNNNUFlaDlXa2w3L1pzbk11MnlsSlFDRW1iRlhQTzR5bVhxMXBIVGxN?=
+ =?utf-8?B?anUydGljWW1sK2dhelJ5dkd3Nkp0VzBtaDhINEpsR2N1ZWVkMlNsQktITkVH?=
+ =?utf-8?B?b0Ric2FDMG1mQzRHWDBhZzdlUjUxcmFScGJiNlhQYUJrRmExQ0tVdHRERUpI?=
+ =?utf-8?B?L1RqanpTcWQ1QzRzY2orQ1FjelhYWXVhd1lDcmxZWEluWFRxWnpHTWM5ODM0?=
+ =?utf-8?B?STdMWUtEUks1cVlSTzNVUVB1VUFETE0wZUVVMmFvRkJndU8xTzk0TmZsY09a?=
+ =?utf-8?B?WDNWdGQ1cmlKaytleXA2Zk9MYkdoZUp5aVRPajMreHFSazdPUGlaakFzbjFC?=
+ =?utf-8?B?T2JPb2xiRHp4UHRYOVlTbXREb3k1ME96bnBGVWcrbzJ2YTd2OUd3RnY5QmRs?=
+ =?utf-8?B?YXFYTVdTZHhBWVU1WHp5dTJPZVRZd0lmS0NGUE9rcmJHZnlXZ2JuUytuRHZS?=
+ =?utf-8?B?bnZzT2hJY1lYaWJyeHpyb0NVUXNuNzYvS0N5bHdHbENWUWhtVE1qV0tIb2NQ?=
+ =?utf-8?B?bkc1WldhWFVXanhWS3BiWFlhVEQ4bGx5Si9DZ3hHY0JPU2FEaHJjNk0vRVFo?=
+ =?utf-8?B?YktzejBkT25ucWU2dWcwSXNwQk00VDh1ZUxpQ3F5ZjVhUjNlaDFvN1VZaXc3?=
+ =?utf-8?B?NEVQVlk4OFVFczlodkM4dW5Ib2o2YWxxSEhGMjdmb3h2Q3hvMUl3eHdrZmt5?=
+ =?utf-8?B?UWlFRTJCRE1SSTBuOEZCZ0VnOWZ1OEMxeVpsZGpWNEplTUluSEoyZU5sRHdE?=
+ =?utf-8?B?Yjk5Z0wxTlNrL0lGaGtEM05NRDM2ekNnYkg3Z2ZwMkkxYzJyU0ZpZGZpWnlJ?=
+ =?utf-8?B?S2JZTkJ6cXJXVGVGcVVaTm5YYnlrUjM5eVBaWTdEb21iZDBMcmRtL1RXNnFS?=
+ =?utf-8?B?MmJpb2c2WmcraEhvcnpIQTV0ZFlZRkplRjNUM1FRdWFPRDl1dTVZME5HZ3pa?=
+ =?utf-8?B?WjRSYUc0aWxkSUtvSHI0UUc1aVVWMHdTbFFwNmdtYmxwWVNRQWdFUT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: be4cced3-0406-43f1-7d25-08de8a5756b7
+X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 10:14:45.6516
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JphPsZor5u3LHerGmxn0AQU9oFnJRLHk3btoM5w+Oo0DOj1LQCCwDGipQcl9RmDi/9B7Uopc942TZ8nnFZcwmg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6909
+X-purgate-ID: tlsNG-16d1c6/1774433688-83B9E1C2-A195B7EA/0/0
 X-purgate-type: clean
-X-purgate-size: 1934
+X-purgate-size: 4934
 
-Le 24/03/2026 =C3=A0 17:03, Jan Beulich a =C3=A9crit=C2=A0:
-> On 10.03.2026 17:44, Teddy Astie wrote:
->> --- a/xen/arch/x86/cpu-policy.c
->> +++ b/xen/arch/x86/cpu-policy.c
->> @@ -253,6 +253,33 @@ static void recalculate_xstate(struct cpu_policy *p=
-)
->>       }
->>   }
->>   
->> +static void sanitise_vpmu(struct cpu_policy *p)
->> +{
->> +switch ( p->x86_vendor )
-> 
-> Nit: Lack of indentation.
-> 
->> +    {
->> +    case X86_VENDOR_INTEL:
->> +        if ( !p->basic.pmu.version )
->> +            return;
-> 
-> Better use "break", but: Why is this check needed anyway? Nothing ...
-> 
+alloc_heap_pages() will unconditionally clear PGC_need_scrub, even when
+MEMF_no_scrub is requested.  This is kind of expected as otherwise some
+callers will assert on seeing non-expected flags set on the count_info
+field.
 
-My idea was to return early if there is no version (keeping everything 
-0). But as I only added checks for PMU version in this patch, this is 
-effectively redundant at this moment.
+Introduce a new MEMF bit to signal to alloc_heap_pages() that non-scrubbed
+pages should keep the PGC_need_scrub bit set. This fixes returning dirty
+pages from alloc_domheap_pages() without the PGC_need_scrub bit set for
+populate_physmap() to consume.
 
-Although, "x86/vpmu: Limit to using supported general/fixed counters" 
-makes some additional adjustments to the CPUID if pmu.version !=3D 0 
-making it non redundant anymore.
+With the above change alloc_domheap_pages() needs an adjustment to cope
+with allocated pages possibly having the PGC_need_scrub set.
 
-But yes, it wants 'break' here.
+Fixes: 83a784a15b47 ("xen/mm: allow deferred scrub of physmap populate allocated pages")
+Reported-by: Ayden Bottos <aydenbottos12@gmail.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+This issue was initially reported to the Xen Security Team, and it did turn
+out to not require an XSA only because the code hasn't been part of any
+release, otherwise an XSA would have been issued.
 
->> +        /*
->> +         * Expose up to PMU version 2
->> +         *
->> +         * PMU version 3 introduced the AnyThread bit we don't want
->> +         * to support (see "AnyThread Counting and Software Evolution"
->> +         * regarding notes with virtualization). This is the only known
->> +         * feature introduced in PMU version 3.
->> +         *
->> +         * PMU version 5 deprecated AnyThread, and introduced a CPUID
->> +         * bit (ANYTHREAD_DEPRECATION) to indicate that this bit isn't =
-supported.
->> +         * That CPUID bit should be set for PMU version 5.
->> +         */
->> +        if ( p->basic.pmu.version > 2 )
->> +            p->basic.pmu.version =3D 2;
->> +
->> +        break;
->> +    }
-> 
-> ... here breaks if it was dropped.
-> 
-> Jan
-> 
+The Security Team would like to thanks Ayden for the prompt report.
 
-Teddy
+In the scrubbing loop in alloc_heap_pages() i should better be unsigned
+long.
+---
+ xen/common/memory.c     |  3 ++-
+ xen/common/page_alloc.c | 31 ++++++++++++++++++++++---------
+ xen/include/xen/mm.h    |  2 ++
+ 3 files changed, 26 insertions(+), 10 deletions(-)
 
-
---
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 918510f287a0..f0ff1311881c 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -345,7 +345,8 @@ static void populate_physmap(struct memop_args *a)
+                 unsigned int scrub_start = 0;
+                 unsigned int memflags =
+                     a->memflags | (d->creation_finished ? 0
+-                                                        : MEMF_no_scrub);
++                                                        : (MEMF_no_scrub |
++                                                           MEMF_keep_scrub));
+                 nodeid_t node =
+                     (a->memflags & MEMF_exact_node) ? MEMF_get_node(a->memflags)
+                                                     : NUMA_NO_NODE;
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 588b5b99cbc7..1316dfbd15ee 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -989,6 +989,8 @@ static struct page_info *alloc_heap_pages(
+     ASSERT(zone_lo <= zone_hi);
+     ASSERT(zone_hi < NR_ZONES);
+ 
++    ASSERT(!(memflags & MEMF_keep_scrub) || (memflags & MEMF_no_scrub));
++
+     if ( unlikely(order > MAX_ORDER) )
+         return NULL;
+ 
+@@ -1110,17 +1112,26 @@ static struct page_info *alloc_heap_pages(
+     {
+         bool cold = d && d != current->domain;
+ 
+-        for ( i = 0; i < (1U << order); i++ )
++        if ( !(memflags & MEMF_no_scrub) )
+         {
+-            if ( test_and_clear_bit(_PGC_need_scrub, &pg[i].count_info) )
++            for ( i = 0; i < (1U << order); i++ )
+             {
+-                if ( !(memflags & MEMF_no_scrub) )
++                if ( test_and_clear_bit(_PGC_need_scrub, &pg[i].count_info) )
++                {
+                     scrub_one_page(&pg[i], cold);
+-
+-                dirty_cnt++;
++                    dirty_cnt++;
++                }
++                else
++                    check_one_page(&pg[i]);
+             }
+-            else if ( !(memflags & MEMF_no_scrub) )
+-                check_one_page(&pg[i]);
++        }
++        else
++        {
++            for ( i = 0; i < (1U << order); i++ )
++                if ( (memflags & MEMF_keep_scrub)
++                     ? test_bit(_PGC_need_scrub, &pg[i].count_info)
++                     : test_and_clear_bit(_PGC_need_scrub, &pg[i].count_info) )
++                    dirty_cnt++;
+         }
+ 
+         if ( dirty_cnt )
+@@ -2696,8 +2707,10 @@ struct page_info *alloc_domheap_pages(
+ 
+             for ( i = 0; i < (1UL << order); i++ )
+             {
+-                ASSERT(!pg[i].count_info);
+-                pg[i].count_info = PGC_extra;
++                ASSERT(!(pg[i].count_info &
++                         ~((memflags & MEMF_keep_scrub) ? PGC_need_scrub
++                                                        : 0UL)));
++                pg[i].count_info |= PGC_extra;
+             }
+         }
+         if ( assign_page(pg, order, d, memflags) )
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index d80bfba6d393..0639fc0d21fb 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -208,6 +208,8 @@ struct npfec {
+ #define  MEMF_no_refcount (1U<<_MEMF_no_refcount)
+ #define _MEMF_populate_on_demand 1
+ #define  MEMF_populate_on_demand (1U<<_MEMF_populate_on_demand)
++#define _MEMF_keep_scrub  2
++#define  MEMF_keep_scrub  (1U<<_MEMF_keep_scrub)
+ #define _MEMF_no_dma      3
+ #define  MEMF_no_dma      (1U<<_MEMF_no_dma)
+ #define _MEMF_exact_node  4
+-- 
+2.51.0
 
 
