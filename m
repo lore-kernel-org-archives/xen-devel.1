@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81C0109C034
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 15:33:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1262647.1555078 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F95109C02F
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2026 15:44:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1262666.1555087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5QEA-0005sv-Cj; Wed, 25 Mar 2026 15:33:02 +0000
+	id 1w5QP7-00085v-AL; Wed, 25 Mar 2026 15:44:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1262647.1555078; Wed, 25 Mar 2026 15:33:02 +0000
+Received: by outflank-mailman (output) from mailman id 1262666.1555087; Wed, 25 Mar 2026 15:44:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5QEA-0005so-AB; Wed, 25 Mar 2026 15:33:02 +0000
-Received: by outflank-mailman (input) for mailman id 1262647;
- Wed, 25 Mar 2026 15:33:01 +0000
+	id 1w5QP7-00085o-7a; Wed, 25 Mar 2026 15:44:21 +0000
+Received: by outflank-mailman (input) for mailman id 1262666;
+ Wed, 25 Mar 2026 15:44:20 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w5QE9-0005sG-Es
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:33:01 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w5QP5-00085i-Vn
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 15:44:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5QE8-00EwGl-Qx
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 16:33:00 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1w5QP5-00HHu8-7z
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2026 16:44:19 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69c4001a-2eae-0a2a0a5409dd-0a2a450bada4-40
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 16:33:00 +0100
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69c402c9-5cb7-0a2a0a5109dd-0a2a450aafe0-28
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 16:44:18 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <jbeulich@suse.com>)
- id 69c4002c-ef63-0a2a450b0019-d155802de9f5-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 16:33:00 +0100
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-486fba7ce4cso25829465e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 08:33:00 -0700 (PDT)
+ id 69c402d2-1772-0a2a450a0019-d1558030ccd2-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 16:44:18 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-48540d21f7dso36245e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2026 08:44:18 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-487166064fasm24974355e9.7.2026.03.25.08.32.58
+ ffacd0b85a97d-43b919cf1c4sm566552f8f.23.2026.03.25.08.44.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Mar 2026 08:32:59 -0700 (PDT)
+ Wed, 25 Mar 2026 08:44:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,58 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774452780; x=1775057580; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1774453458; x=1775058258; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=HLYlgYBKLFRnwkXnkX7u1E2r2oZ3laV5P0pZmrN32dU=;
-        b=BI7xP61plQHprZDXm8L9FMuTv519zs1tycxQ1Ge4utQCaXBnhAx5QtZxYT1fqQOI/E
-         3SYFgw4NBpNQ9dLD37NsGpS74l0C/sBAn3DADt5cskITzumLkQtGQqP8h6NdqeSqE3Hs
-         iooMIGQGLQYPRFRNmA4eJB9JowZT84wSl5e87u/btCPSKvShFdOoBHpRaX34v1B/AC9v
-         xeA17THESxoEgEAiOqlb+qhHmguo98k85S5PKI5FA1+Ys+xer4MJFTr9IN4pHEkLz09w
-         GX1YRR3kvnzmYLOBF9P4PA46zg2MWShh7itBaEIdJYkE5WafuHqBk9vc7b7e3YpliljC
-         DKGw==
+        bh=KAXkFHitePAjIh78QIydTDK9P765JV4CvSKwPMwQLgI=;
+        b=UOPaz+mg2br8JwegKLGF9v5a88P0uO8JxBziXoTxKq5EMS4Oe7++/+0Qh9LMf7uqdi
+         NKVO2jinToZ06S13gLthE9KFDmWSxG4plimM8lcW0PeOfjC95AhWy2A1r9y5inFLLov0
+         clxwm9F62fFyIidiCee9ep4vjtl96Y2Mbl9W0Dsf492J0wFbQQU+3ZUH/1eB1XNf3oIl
+         gsqdexys3d3RFhdJEPY/rlT+ctVMSUkNS8KwJUiivr23q6Npc0ga54CRrVlSt3b47W0a
+         B6ZWhorwG5c0iYH3OZWfClTgHwzzY5hSy6qAkVvzgTYYWIKtDr5hFwaYkmV17DSFkbqK
+         nz1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774452780; x=1775057580;
+        d=1e100.net; s=20251104; t=1774453458; x=1775058258;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HLYlgYBKLFRnwkXnkX7u1E2r2oZ3laV5P0pZmrN32dU=;
-        b=bZIUWChtqIVmvLbl+02kW0PZ5UHgNsQPLm/BEXW7kaaOBfH7JmUKmghCq7ajx5PYp6
-         xcPJ79JtGbR/jJDaLNbE6OeK7iVojmS/BnMhJVJSYMuhKgLPTZay8h5+8YbRim7ZBhXx
-         JWRhX5AqdvnJCpkwagkCEzZFrMFf9GprnzzOJTUMvz5FswhAIsbLvSCJzOMyCsws1CXm
-         +OqsDGG8QXC1NeHiBO6GkXE4+NVcjnbpZ6aBmMTsk5EkAzcZW6WowMW471IvrMylfW/8
-         By58Q0NI6B3NrjQSCzitYIj6oIFNt65i2613ryowqV7COBPueVcCIScgIfDkPajqknqP
-         jrDQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVwKiiuIsRpUKLO9mcVv878kHaQAjNIRcWX6Ryqhnq4f3a3EZIuYzHklTWEg53riKb698K0/guPhdA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyB9kZyTbzMZKw3LNrp0+TTNrAWXM9FUpCDrqjdEIncwptmUfwq
-	/IoqAWcxMfOgZARxvJHXDlz3fJEd/M0JAZStbgz5OaUvsetRc1sorVaAFTfuJs44Ig==
-X-Gm-Gg: ATEYQzzGmjTUlLSv2XQMUKaNOieDAn/Uri2i8ctxVzYmD7p5BaYYI2Dxe0M++eOoh/F
-	lNFwMdbLoGjQAEfCTe2NroBXMHxIES1iu05kduQm/oe/JglbAPpWy55rivilSZxKCsqo6GTuYB8
-	JRhUm77w75oBjYDpaFnvDa7bfNYk4H2JT8VCZ3msqO0sONQM44AHV3ZaL1sdC6QVcpR8SMyghNt
-	YOWdcUoEURJMITXKdgsCOlJvXx+Ply339aRN1xCg12tGIv5B3oWEIKd2L+IkCOJcCUwcD+qN7rs
-	aXpQuFyiOewvf8sTqRokh2t7MCOMjHXxP+3MJfwAGXdzDX+rkKIeJ6cUhZ8zMfH0pzSvYI7e2kS
-	3lhr1uAncHXBP4C5BFaul3sNLLG7liu0uqPHhK2s9TvWQtY1u4XDZcd7GGQ6FwALLul4yobErcs
-	5VHLbIbMhRaG8f1mqsyWkjTqM6iwvg2fCq9dfMFU3Z+u7hMTVHUUfVqdr5BTy5NE9Uz9DvidKZv
-	p68Gg1RlPcOjI0NGjy6T8+AOQ==
-X-Received: by 2002:a05:600c:154a:b0:485:3b00:f939 with SMTP id 5b1f17b1804b1-48715fd617dmr65148585e9.8.1774452779573;
-        Wed, 25 Mar 2026 08:32:59 -0700 (PDT)
-Message-ID: <48fb6a91-6515-4526-a46b-712325221a87@suse.com>
-Date: Wed, 25 Mar 2026 16:32:57 +0100
+        bh=KAXkFHitePAjIh78QIydTDK9P765JV4CvSKwPMwQLgI=;
+        b=k/HlS2bw2yuwhMEy1Jwu89NcN0TluXYbH8zIzpDBjn4Ga5sgT/2Fh3cL4Za+j4x2Kg
+         8+GhU+CzIlbVF8Z2QP92D4kfvPgD3aN5583qxt5b7UM/12PV23FpBm5ohIMhWUB1/nNj
+         XygHtuLDpT7wGgZtauEzNv3e9E8Sx09X/IlWf5x1yEBKVQ81xRVwfb5pPAR8+ncY7w/Y
+         Qp5Hx/EjOvX7ctLjFXDnzAqNt2CvLmkOLfZepvZY64aQYk0QqKLb78+6c4HpqEvz/pSt
+         IMpz9mU+xEsVKf3/y/zQvun0LoAVkrVW0SEbPsu6hd//LlIobHalZ5/h8ZlOtlgJipn3
+         xvHA==
+X-Forwarded-Encrypted: i=1; AJvYcCWFmXlPF2YsTUelimgCBkUpmqjCBnq0Dllb1wU+KuCUBmED0eI//+wORb1rgzKWdUqtRgTj+PVr8RM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwWn7M5MahSAlDalMyUUIyHLM3CvuXwgliLsSj6zJNYkEhgSwP4
+	1HI98wA1rHiJT0xF63UzL919Bu+YEOlKvZvCohwWvXoL9RaEhsUB613dCi0D8wMTTw==
+X-Gm-Gg: ATEYQzwn/Idy3cEG+s4NvF1QJ/MkUFAMphiFIAumobYZ40ILP2AIBCUK1P+UQVpj3kp
+	7GmsVtfrfYQX4eqygwTgblzEny4K/C7XFphIf8MfVlIYuZnwgVWgOzn8RmTVVdrSqzsmCMcdvyE
+	aj7jhO1Yw0mv10htzTE2cqo7QyWMw2H3p3mNtgx2AXt1gsvLt3wSOV0V57WuOpBA+s9U2FnovAJ
+	2xF6ur3YP0ZtXljS1j1mtpNDdIlKy3cHKLTrishAp21T307C/PJFZEx7owUCSUNOc1im8OF0M6j
+	hJk+Rydj67C5sv3VvPLNZitVBi8L/qCudFpWFGsh2sUvjb2DHnxcOHOPb9dJd9UPdDLbMivttRQ
+	zUmhlCoGn+OiZhD16wkrM2MjfEy8S6kxTeC1WNRoFrliU7sLIu8Jrk4rm91Uy6j6ap6zxdOkGbu
+	TiukXsbl75v/fsxLGGp+r7bViL2kCqF8yD6ec3+gQIHDukDYWP+aXiE1JhZrVKHScKBdFt0NdwO
+	q7MRpZimnhV3fAvOkx7lvZmGg==
+X-Received: by 2002:a05:600c:c4a4:b0:485:1878:7b8c with SMTP id 5b1f17b1804b1-48716056512mr55924185e9.18.1774453458218;
+        Wed, 25 Mar 2026 08:44:18 -0700 (PDT)
+Message-ID: <5e121a98-fcd1-4d20-aa6c-a02af7f7eef4@suse.com>
+Date: Wed, 25 Mar 2026 16:44:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/3] x86/efi: Add BGRT image preservation
- infrastructure
-To: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v5 2/3] x86/acpi: Integrate BGRT preservation with status
+ reporting
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Cc: Soumyajyotii Ssarkar <soumyajyotisarkar23@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  "Daniel P . Smith" <dpsmith@apertussolutions.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, sarkarsoumyajyoti23@gmail.com,
- xen-devel@lists.xenproject.org
+ sarkarsoumyajyoti23@gmail.com, xen-devel@lists.xenproject.org
 References: <20260324123312.11076-1-soumyajyotisarkar23@gmail.com>
- <20260324123312.11076-2-soumyajyotisarkar23@gmail.com>
+ <20260324123312.11076-3-soumyajyotisarkar23@gmail.com>
+ <751e1d3e-d95a-4129-8baa-450a53d15efa@suse.com> <acQADhcNzkVBm3C3@mail-itl>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,52 +133,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260324123312.11076-2-soumyajyotisarkar23@gmail.com>
+In-Reply-To: <acQADhcNzkVBm3C3@mail-itl>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1774452780-986BE112-5BD0683F/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1774453458-51488900-E3EBB464/0/0
 X-purgate-type: clean
-X-purgate-size: 1089
+X-purgate-size: 2245
 
-On 24.03.2026 13:33, Soumyajyotii Ssarkar wrote:
-> @@ -747,6 +751,133 @@ static void __init efi_relocate_esrt(EFI_SYSTEM_TABLE *SystemTable)
->      efi_bs->FreePool(memory_map);
->  }
+On 25.03.2026 16:32, Marek Marczykowski-Górecki wrote:
+> On Wed, Mar 25, 2026 at 04:16:25PM +0100, Jan Beulich wrote:
+>> On 24.03.2026 13:33, Soumyajyotii Ssarkar wrote:
+>>> @@ -327,6 +328,11 @@ static int __init cf_check acpi_parse_hpet(struct acpi_table_header *table)
+>>>  	return 0;
+>>>  }
+>>>
+>>> +/*
+>>> + * Invalidate BGRT if image is in conventional RAM (preservation failed).
+>>> + * If preservation succeeded, image is in EfiACPIReclaimMemory, which
+>>> + * won't match RAM_TYPE_CONVENTIONAL check, so table remains valid.
+>>> + */
+>>>  static int __init cf_check acpi_invalidate_bgrt(struct acpi_table_header *table)
+>>>  {
+>>>  	struct acpi_table_bgrt *bgrt_tbl =
+>>> @@ -754,5 +760,7 @@ int __init acpi_boot_init(void)
+>>>
+>>>  	acpi_table_parse(ACPI_SIG_BGRT, acpi_invalidate_bgrt);
+>>>
+>>> +	efi_bgrt_status_info();
+>>> +
+>>>  	return 0;
+>>>  }
+>>
+>> Does this really need doing from here? If you called it ...
+>>
+>>> --- a/xen/common/efi/boot.c
+>>> +++ b/xen/common/efi/boot.c
+>>> @@ -1911,6 +1911,22 @@ static bool __init cf_check rt_range_valid(unsigned long smfn, unsigned long emf
+>>>      return true;
+>>>  }
+>>>
+>>> +void __init efi_bgrt_status_info(void)
+>>> +{
+>>> +    if ( !efi_enabled(EFI_BOOT) )
+>>> +        return;
+>>> +
+>>> +    if ( bgrt_info.preserved )
+>>> +    {
+>>> +        printk(XENLOG_INFO "EFI: BGRT image preserved: %lu KB\n",
+>>> +               bgrt_info.size / 1024);
+>>> +        printk(XENLOG_INFO "EFI: BGRT relocated from %p to %p\n",
+>>> +               bgrt_info.old_addr, bgrt_info.new_addr);
+>>> +    }
+>>> +    else if ( bgrt_info.failure_reason[0] )
+>>> +        printk(XENLOG_WARNING "EFI: BGRT preservation failed: %s\n",
+>>> +               bgrt_info.failure_reason);
+>>> +}
+>>>
+>>>  void __init efi_init_memory(void)
+>>>  {
+>>
+>> ... out of this function, it could be static and no stub (misplaced in
+>> the earlier patch) would be needed either.
 > 
-> +typedef struct {
-> +    UINT16 signature;
-> +    UINT32 file_size;
-> +    UINT16 reserved[2];
-> +    UINT32 data_offset;
-> +} __attribute__((packed)) BMP_HEADER;
-> +
-> +static __initdata struct {
-> +    bool preserved;
-> +    const void *old_addr;
-> +    const void *new_addr;
-> +    UINTN size;
-> +    const char *failure_reason;
-> +} bgrt_info = {
-> +    /* We would prefer the failure_reason to print */
-> +    .failure_reason = "",
-> +};
+> It was here before, and I complained about it, because it printed the
+> invalidation reason way later than the actual invalidation.
 
-Noticed only while looking at patch 3: With this initializer, ...
-
-> +static void __init efi_preserve_bgrt_img(void)
-> +{
-> +    struct acpi_table_bgrt *bgrt;
-> +    const BMP_HEADER *bmp;
-> +    const void *old_image;
-> +    void *new_image;
-> +    UINTN image_size;
-> +    EFI_STATUS status;
-> +    UINT8 checksum;
-> +    unsigned int i;
-> +
-> +    bgrt_info.preserved = false;
-
-... why would this be needed?
+Sadly now I complain about this call out of acpi_boot_init(). What's wrong
+with logging the BGRT stuff together with the memory map?
 
 Jan
 
