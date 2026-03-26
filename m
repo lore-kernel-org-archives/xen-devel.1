@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B9210AB808
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2026 19:04:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1264706.1556100 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4640510AB808
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2026 19:04:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1264707.1556110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5q0W-0003Ad-2h; Thu, 26 Mar 2026 19:04:40 +0000
+	id 1w5q0X-0003PW-A1; Thu, 26 Mar 2026 19:04:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1264706.1556100; Thu, 26 Mar 2026 19:04:40 +0000
+Received: by outflank-mailman (output) from mailman id 1264707.1556110; Thu, 26 Mar 2026 19:04:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w5q0V-0003AW-WD; Thu, 26 Mar 2026 19:04:40 +0000
-Received: by outflank-mailman (input) for mailman id 1264706;
- Thu, 26 Mar 2026 19:04:38 +0000
+	id 1w5q0X-0003PL-6m; Thu, 26 Mar 2026 19:04:41 +0000
+Received: by outflank-mailman (input) for mailman id 1264707;
+ Thu, 26 Mar 2026 19:04:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1w5q0U-0003AD-Gx
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2026 19:04:38 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1w5q0V-0003AJ-GU
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2026 19:04:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w5q0T-00EqAi-TJ
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2026 20:04:37 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1w5q0U-0043KZ-T1
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2026 20:04:38 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 69c58324-5cb7-0a2a0a5109dd-0a2a450395bc-42
- for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 20:04:37 +0100
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69c58327-bab6-0a2a0a5309dd-0a2a4505d758-38
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 20:04:38 +0100
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 69c58345-1947-0a2a45030019-d1558035c026-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 20:04:37 +0100
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-486ff3a0fc1so13386215e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 12:04:37 -0700 (PDT)
+ id 69c58346-5aeb-0a2a45050019-d155802ce5fe-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 20:04:38 +0100
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso12186045e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2026 12:04:38 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48725eb1ca0sm2176755e9.6.2026.03.26.12.04.35
+ 5b1f17b1804b1-48725eb1ca0sm2176755e9.6.2026.03.26.12.04.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 12:04:35 -0700 (PDT)
+ Thu, 26 Mar 2026 12:04:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,40 +53,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1774551877; x=1775156677; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6y6WWaL0iQNCXHUAe5+30mnNmp1Rpaojczrt0DLvOSc=;
-        b=DQaRMuVxu8z75MiyScgyANIDWsRSpuJmCA3aeE4KtMxruP1pWyZW9gaoKh7WXbDWct
-         DiszVrreCcT8gS1JkQ6Co1he8SCbYQTUnU5YdJtnroMN7nMbyCfVEFMOzrbXePaPq/S5
-         sHHrQAL97WLZHshfOr/yO7Lr/yd+WQujim/YY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774551877; x=1775156677;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1774551878; x=1775156678; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6y6WWaL0iQNCXHUAe5+30mnNmp1Rpaojczrt0DLvOSc=;
-        b=dW1vI/P67iwI5ybgD23qS7Iu1la1OjzLULz7qAKxm5CsP1BnpXHzGfcRy+O2QsDMlD
-         b6Gd+zKvXJVSTmrIn/vJZ6q1GRq+Eodg9RWBD1kJIxEr5lWG/fgTCaIEPhEiLWa619OU
-         3gOnPAaGOnqS80Q/Kzg631FmjLrB5uv/49U5gRjLsQzfRV7a8LdOwqvwfF9QZxSbh4oO
-         Tgl9VoOXMIcSd2nRejM+2H/oeVTsHlWQl5pxs8OmMjTdniLsA+ORUxFObMgw6E7q4AEN
-         6bSet9jfjrS10K5ZjP4NjRGFly6hJ5Wk7BHw39ebWzZ28mYR2ljfUg2vKZRZkY4AWlSG
-         7Jpg==
-X-Gm-Message-State: AOJu0Yz02HaAD91mMmB6K/hTUSKn2q8BcD2qKUojgKEKuHRz2azEI7Zx
-	zarCWMuogdY1j+oapf1oE5qvmR1lDKfMYZUgiSPCBdeVgZlvjyb9nJ2FTiW0xSvJEtBTcBzn8/U
-	s4rkl
-X-Gm-Gg: ATEYQzxrdAwiN/a++SU+GPfoxXhpr5dJUuYH4herrZu+lYNr3VSEIxT9fhQH4yXQsO2
-	73LZwmHnB1JVRBV3LjtLU8nQAuqvV+GywE0CnPJ7T26x7D1Rn6HULEXUw47eK5n9etgKIL8+J5w
-	aNmwFYKnr52y0RAJKoylnH4HouvJO/t2PnETxUxK1l5YaiOFR3AFRaVFh0UUptlnE7AM3Mzz8zB
-	J5K7KVqtdgTNYhzCqoDHSP11w5LyqQmd8JQbszBe4iT5AgJTtNqqDeQLlLDCXAQFd8u0JwimwUD
-	a27H90xbutFDk7R6t++nh4dYjSw1itkmqeMIRyAkedyXEcN3MaPc/mQQPjfgqtXYzmzTeVj3YT7
-	HE3cbTf3ukLuSsMdymJyPS8PjHiva/DDLkc8FWQ8J+jzafHxY4ZV2I7u0KyI5MyQLo0tWJB2ryr
-	o3nETPj6jeh8zVtW0P7mgn/d6qplUK4h9vdZOqS1LNxB3dAdM09ODXO/OQMnhIPSCXNrKJrMmi4
-	Xz+
-X-Received: by 2002:a05:600c:3b12:b0:485:419c:4eba with SMTP id 5b1f17b1804b1-48715fc3286mr134173975e9.1.1774551876282;
-        Thu, 26 Mar 2026 12:04:36 -0700 (PDT)
+        bh=Www+RzVGJQAg3udnubMZP5EQ5/tKE2rrKmnAefzSxeg=;
+        b=CZ51ZSsBT/lVikJbUUVBpMAVwUD3LHM3bzH+fwS1fEOktCRzRkDrcGu9tEQ44UJAzP
+         EgeicF38SncSv1R8bkMe3MFFB2sOGqYX3hkvCDozflUbd+QrdFZ4nPAMQQ8iqT8DPIVc
+         wwZ0jFxAGoAT8g9FdwZ93x37Gy+KZNyIZ+zsc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774551878; x=1775156678;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Www+RzVGJQAg3udnubMZP5EQ5/tKE2rrKmnAefzSxeg=;
+        b=fT6IXdSrFvUhp5+OJgINvYBNNuid+UC4erbRvpgLvkhuZYLoXQeHQsCsbs862tdBY2
+         lSt0I2965xAFQ4NjkXIpYjU/RhWSzmdP12a3+4MkcbCu7HJ1rRKLYrKMfyhwlGWQfG0B
+         KJT712kAz2ZYmRY9BwjY3sOQNf9yZRj4rIEddgsDqWPq42rDlb6O8DijHuVx1kNwr3PD
+         Etg3rPZURA7a9npfcFcalmpOPGeemalOwjRJ1tAsj9DHBfMDsfleOGK4EhwkhW7TGCV4
+         3JjsB1dHBteGUMN/wBoiJ+FG4rOPkwJUPbLdazE+ezOd38iP8hrRGFuY+tU7dwhv7LxX
+         /zqg==
+X-Gm-Message-State: AOJu0Yz/cujAGm1O9xxgC+fvjGNaPL0LOtGZXfPs2cfnmG39G3m7KXts
+	G7zwCLBzzg9arYk53dnXMXfu/66m2pAyzdE74AIgZjgFKX+/U2am7+21fT3cQjmXUCTQDso/rnJ
+	+P15V
+X-Gm-Gg: ATEYQzziGhxZVN71TVsh9vUCETZDxd8V9jEKdEu93Ztrzt7R89ofBEdgn0XRDHiFBuF
+	r7FP4PUDbYeV5LT6T9HcF5UxIV6b/zYLQO4lFy18mCzJn6q00Y4TZDQeGZAl9Cga9Q12B7VDpfy
+	vnve/rDI9/ddv/AxC5SpDfDWIuUHBXG/zLocT6Inst46GG5U9ojwkUeE0t2kOaKBpwCx1/l+m6e
+	b8T5RzLzwM3bxaywAAMZNQpSMBlcSpSQW+PrefU57Oro3VDm9QJXLqkifDei3BgyhnrtZG8F+ns
+	uAbuObhNGnD16QlMWi9GLT3RtuC/afE1aYyQTeaFebSY0Wd7dJn/XOwswoC0FkoJXnWXLkfHl6l
+	p+IvRxbkN4ZtO3EBRyJettgTasuVxL3Rd+MywrIEsOypSs6tdUIgw6wvp4gT7KnRGhcwh4Lagf5
+	EucYMy7HBswyFHL241TL/Mj5Zmoq6bWbWoWrd3jGTRpfY9SZsFHyUiZN70jAwxoDU0jyc3jJiP8
+	U+p
+X-Received: by 2002:a05:600c:3515:b0:486:fe39:28b7 with SMTP id 5b1f17b1804b1-48715fd99admr129967535e9.9.1774551877252;
+        Thu, 26 Mar 2026 12:04:37 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -98,27 +99,88 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/2] x86/fpu: Lazy FPU removal prep
-Date: Thu, 26 Mar 2026 19:04:27 +0000
-Message-Id: <20260326190429.1156367-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/2] docs/hypfs: Adjust the hypfs layout example
+Date: Thu, 26 Mar 2026 19:04:28 +0000
+Message-Id: <20260326190429.1156367-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260326190429.1156367-1-andrew.cooper3@citrix.com>
+References: <20260326190429.1156367-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1774551877-E949872C-0E9B8E07/0/0
+X-purgate-ID: tlsNG-c201ff/1774551878-80F55488-CAC67424/0/0
 X-purgate-type: clean
-X-purgate-size: 399
+X-purgate-size: 3478
 
-Two patches to go ahead of Ross's removal series to simplify things a bit.
+The controls for cpu-bugs were ultimately not taken.  As the paths are
+documented fully below, pick only a small subset for the example.  Include
+cpupool/ as it exists now.
 
-Andrew Cooper (2):
-  docs/hypfs: Adjust the hypfs layout example
-  x86/fpu: Initialise FTW as well as FCW in xstate_alloc_save_area()
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Juergen Gross <jgross@suse.com>
+CC: Ross Lagerwall <ross.lagerwall@citrix.com>
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 
+This is mainly so the patch making eager-fpu unconditional doesn't contain a
+hunk editing this file with no associated hypfs logic changes.
+---
  docs/misc/hypfs-paths.pandoc | 37 +++++++-----------------------------
- xen/arch/x86/xstate.c        |  3 ++-
- 2 files changed, 9 insertions(+), 31 deletions(-)
+ 1 file changed, 7 insertions(+), 30 deletions(-)
 
+diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
+index e86f7d0dbef9..dd089d90df53 100644
+--- a/docs/misc/hypfs-paths.pandoc
++++ b/docs/misc/hypfs-paths.pandoc
+@@ -89,36 +89,13 @@ the hypervisors, and in different configurations.  Specifically:
+ A populated Xen hypervisor file system might look like the following example:
+ 
+     /
+-        buildinfo/           directory containing build-time data
+-            config           contents of .config file used to build Xen
+-        cpu-bugs/            x86: directory of cpu bug information
+-            l1tf             "Vulnerable" or "Not vulnerable"
+-            mds              "Vulnerable" or "Not vulnerable"
+-            meltdown         "Vulnerable" or "Not vulnerable"
+-            spec-store-bypass "Vulnerable" or "Not vulnerable"
+-            spectre-v1       "Vulnerable" or "Not vulnerable"
+-            spectre-v2       "Vulnerable" or "Not vulnerable"
+-            mitigations/     directory of mitigation settings
+-                bti-thunk    "N/A", "RETPOLINE", "LFENCE" or "JMP"
+-                spec-ctrl    "No", "IBRS+" or "IBRS-"
+-                ibpb         "No" or "Yes"
+-                l1d-flush    "No" or "Yes"
+-                md-clear     "No" or "VERW"
+-                l1tf-barrier "No" or "Yes"
+-            active-hvm/      directory for mitigations active in hvm doamins
+-                msr-spec-ctrl "No" or "Yes"
+-                rsb          "No" or "Yes"
+-                eager-fpu    "No" or "Yes"
+-                md-clear     "No" or "Yes"
+-            active-pv/       directory for mitigations active in pv doamins
+-                msr-spec-ctrl "No" or "Yes"
+-                rsb          "No" or "Yes"
+-                eager-fpu    "No" or "Yes"
+-                md-clear     "No" or "Yes"
+-                xpti         "No" or list of "dom0", "domU", "PCID-on"
+-                l1tf-shadow  "No" or list of "dom0", "domU"
+-        params/              directory with hypervisor parameter values
+-                             (boot/runtime parameters)
++      buildinfo/             directory containing build-time data
++        config               contents of .config file used to build Xen
++      cpupool/               directory containing CPU Pool data
++        0/                   directory for cpupool 0
++          sched-gran         "cpu", "core" or "socket"
++      params/                directory with hypervisor parameter values
++        loglvl               "none", "error", "warning", "info", "all"
+ 
+ ## General Paths
+ 
 -- 
 2.39.5
 
