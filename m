@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 252D110BA432
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 07:56:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1265115.1556209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4180610BA437
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 07:56:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1265113.1556192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w6236-0001vF-E0; Fri, 27 Mar 2026 07:56:08 +0000
+	id 1w6231-0001Q1-O3; Fri, 27 Mar 2026 07:56:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1265115.1556209; Fri, 27 Mar 2026 07:56:08 +0000
+Received: by outflank-mailman (output) from mailman id 1265113.1556192; Fri, 27 Mar 2026 07:56:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w6236-0001v5-9W; Fri, 27 Mar 2026 07:56:08 +0000
-Received: by outflank-mailman (input) for mailman id 1265115;
- Fri, 27 Mar 2026 07:56:07 +0000
+	id 1w6231-0001Pu-Jr; Fri, 27 Mar 2026 07:56:03 +0000
+Received: by outflank-mailman (input) for mailman id 1265113;
+ Fri, 27 Mar 2026 07:56:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <penny.zheng@amd.com>) id 1w6235-0001th-6J
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 07:56:07 +0000
+ (envelope-from <penny.zheng@amd.com>) id 1w6230-0001PM-57
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 07:56:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w6233-001U1q-0Q
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 08:56:06 +0100
+ id 1w622x-001U1q-Q6
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 08:56:01 +0100
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <penny.zheng@amd.com>)
- id 69c63810-5cb7-0a2a0a5109dd-0a2a450599c4-16
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:06 +0100
-Received: from [40.93.195.1]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
+ id 69c63810-5cb7-0a2a0a5109dd-0a2a450599c4-2
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:01 +0100
+Received: from [52.101.85.62]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <penny.zheng@amd.com>)
- id 69c63814-5aeb-0a2a45050019-285dc301fdaa-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:06 +0100
-Received: from DM6PR12CA0001.namprd12.prod.outlook.com (2603:10b6:5:1c0::14)
- by BN3PR12MB9593.namprd12.prod.outlook.com (2603:10b6:408:2cb::11) with
+ id 69c6380f-5aeb-0a2a45050019-3465553e1339-3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:00 +0100
+Received: from DM6PR12CA0031.namprd12.prod.outlook.com (2603:10b6:5:1c0::44)
+ by PH7PR12MB9174.namprd12.prod.outlook.com (2603:10b6:510:2ed::9) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Fri, 27 Mar
- 2026 07:56:00 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.8; Fri, 27 Mar
+ 2026 07:55:54 +0000
 Received: from DS3PEPF000099DD.namprd04.prod.outlook.com
- (2603:10b6:5:1c0:cafe::a) by DM6PR12CA0001.outlook.office365.com
- (2603:10b6:5:1c0::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.23 via Frontend Transport; Fri,
- 27 Mar 2026 07:55:59 +0000
+ (2603:10b6:5:1c0:cafe::68) by DM6PR12CA0031.outlook.office365.com
+ (2603:10b6:5:1c0::44) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.22 via Frontend Transport; Fri,
+ 27 Mar 2026 07:55:53 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
  DS3PEPF000099DD.mail.protection.outlook.com (10.167.17.199) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 07:56:00 +0000
+ 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 07:55:53 +0000
 Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Fri, 27 Mar 2026 02:55:56 -0500
+ 15.2.2562.17; Fri, 27 Mar 2026 02:55:50 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,20 +66,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=blHN6y9jzhIuJGYzhqPjqNlrZAPN/fD+ljVWlyYBeQKvySE1ePd9STgaggr/qq/GZBzNpJS4LFHa1B0rIQIZS/Zw+k2pmgUA43XVCAMPGfRn+qqjIVvIlckbPHsqqZ6OT3sEprIlNcoCHWbCsrmj9gakT0SzPT4LBhSFHzeZwa109lPmPCsTr1agYMdoD01AanoJXGnH3Db7VuU/LvTwDM8EUemti+Gg/PrrusS+ysYrMyxCFMM56LaM2+jax6P0a+L9OtMoH0xyqpg3nzFGMJNHGpa7A7cQI1qXExe96JrWQP33id75fXtpwrhzfNajBKPHpO0vlLs08x2qwdFvCw==
+ b=uNoEnqCNMGfN08G61n00dAavKvL08z0Delr1E2gLDi8QtHiRll6fy6nFRjHsLQpXoFLwHC+embdvi5JoDG57tRq/a1jZE4/IEit7L8qUyvqrjK/K3SIv2UprSiUwJgNoTpSu6XiTcRNcaEMJW/lAc4r0sI00l0xJSaaEFVHafCNfjFNAtg9bPcbrWhqP57cHn3FJNr/3yw/EevZP4+Ca+yqW12jH+WduzV+sTtCu7a57jmHLG8dnK2e5FUc67uYt9oAKMTnaCIID14mxDUBxTYMaiqvap/r8COjO85kAofAp8hIBc1Pfi/h7NRLX1u1AZk8Mmbi+ixRGeVCywwHmmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l83BYNp+aMnzNw6sbx4zGflMnyM8f979yRPcRxeM/Wc=;
- b=CLhB4GCjRCB3cnQjZ6SL81WyE0IJezNKN5f867ZxoyOUmUHOCjyhVrax0RW4MF1nKZKZEQiCRM2xjHAOcaGupEONkIRou1qrHk55rzICrtdMp+w6GBVDWTen6/f1K4vjpDH7Qp/MVPUjkXnpgoTxPi1xzDMcJ745OMfKOS2sCkKD7XReiotBBRVJ9NE13KNObbwnHCp45b1VESJfCcmwgb+0icSR+iVhkWrf8g3X2IyYqdxrrCXjv6GTQVlAmru8zSD9LIjFKg0dCkWtcABRdEklKAGoWAgrdOsMbpPBcPsD4SLDpjzN6R7beT/3fFP//GcC9c94E57kta4hb1G6Jw==
+ bh=YAfPwcQ9WQkre89jhdMSQOFTVOhS6f3es3Xfay/BKB8=;
+ b=I2Rel786idscsezSDB46Ya8tfyx+y99eXMBzvM4J+SAj6Rb3UMPHo69+JqXUE9zmbNJYy3nP3rXp8Ov1/ZlLnBsAw/+XZ1iEkBasagKr/xAqsYjzmraIqGO1bl0wdR/rFZ0M1G5GKOnlN7mB5YGRxjeU/nLBTh+2pbpwjk8mgwgwFTds0cJ/AjKsi8OLNE/lN902hcpaTn6biJUB9ViwKxDBvvdr0TsQm95j4rYUqB/2mOX4Pyd3m/TjpmcXOC4WyMYW6vZKzj+rUvxQnvrJtSJ8obg7p8pTcvb92x1qoeYb1+TRq0C1i/YbRod5S619iyLk1U4SitYFwMDQPGY7Jw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l83BYNp+aMnzNw6sbx4zGflMnyM8f979yRPcRxeM/Wc=;
- b=P1x2hj4Ruelvo/clAEPWhYWebSiVY5PeI+9cCOaT1Q0DDq7nKOAXhNxd6zyZYLkxbT1BPJo1WRATYbLknIqxBYp9oab7PjrQPzk2FrTskvhTjZtZozAT6KJTLy0d0s3UkQwFW7VALzlAeUo2EnKI5a9lXTel6Ag0FGl6cNgbDso=
+ bh=YAfPwcQ9WQkre89jhdMSQOFTVOhS6f3es3Xfay/BKB8=;
+ b=add8h5DK7EnfMbTLPQm1+DbYu7NEBy7JJskCBMZev3ClIeCa34l6fhC4CZOz/P//TBwXdUd09dXHN8e9kzak7kUW2YamRO+9Glbg1OJv4N46GTd05hWJXaN/cRT/13wEas6IJ37bEFbwpA09pdGAdICjEtFkqjEfVTW7k4TNvQU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -91,13 +91,10 @@ To: <xen-devel@lists.xenproject.org>, <alejandro.garciavallejo@amd.com>
 CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Penny Zheng <penny.zheng@amd.com>
-Subject: [PATCH v1 3/3] xen/arm: fix mfn_to_gfn() usage in memory_exchange()
-Date: Fri, 27 Mar 2026 15:50:25 +0800
-Message-ID: <20260327075025.3008606-4-Penny.Zheng@amd.com>
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Penny Zheng <penny.zheng@amd.com>
+Subject: [PATCH v1 1/3] xen/arm: generalize per-page GFN storage beyond xenheap pages
+Date: Fri, 27 Mar 2026 15:50:23 +0800
+Message-ID: <20260327075025.3008606-2-Penny.Zheng@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260327075025.3008606-1-Penny.Zheng@amd.com>
 References: <20260327075025.3008606-1-Penny.Zheng@amd.com>
@@ -109,95 +106,128 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DD:EE_|BN3PR12MB9593:EE_
-X-MS-Office365-Filtering-Correlation-Id: 030b24cd-9b52-4120-8851-08de8bd6495b
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DD:EE_|PH7PR12MB9174:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fc710ff-bd1e-4720-6a11-08de8bd64561
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700016|376014|22082099003|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	XGCfPDFJjj0q+KsZOsa9QmBSzxUgwYzTe4zabtLozCVEGSV3JIodl9KbNBATcu3H6NdQw9DaPUhYo0OnHBUEILX7Smgf6DBJWPZrVlgePxtsTn3RNdgbSfDazueQ9JtHsBQdI6Zzf+MGT096aSiwkfrbTD3/5beMTpXou/U4e7drSotSTzgtp9Yt0O6bkIZhY7N0DGC+DPmKeWwGDaEcD0ld9fngIp3ngJK9N6FAXGMddzqjBuy6vCg5RTsZOgAC7hhnPbakB2g8+a2P+0jrujxax9q0oXYSddLqhw0Phc3WXga4CXGoWaHnz0pOsq3Doa2SWY8rV3+HwNt7mvM1T21fhUtqthXhmgAQX0dX+PbMBJTujzeUwfdBNqxgWXXVeciqt5PmwNMh7dCrmid80afoUC7B48twLR1Uq+kNyJ4evExv4wNDXJubKAH4m6Ie5WxeImgeVWYaeTqfNQWhBKBcfKacHikUNLBMNwjaj+Pq158HsdXFU5owIoLMW64KwgECsFES0tWcjpzK00UAku+B1rqqk7SfvHdfHE7kpMeiEHCmWqRiY5p1CFyU4ZuwaOp8qwcB7qy6QoMX1YlyHtUBlk6YYHHY4eE1zeQbPkb25FF8/q/z/dEefvDt0DsX9Mp5ocvyIfDbFtJ/wNN9eICxUmZHZdD9xy+/Yyv0NjBeAlECpid1dAuEfHb8CoTmBYNT64UlThOs6qafzqA/VBUASnghmFaLQKH85KsuBEnV59ede8lDW3UncBgkIjird6HmoVOYIe+vLQpaFoIY0A==
+	EsNfP2mNFa8Tdtg52bILYkE53UStOkl/y+hFLXK1wC42iW+lNwWlafhRTKb2J1puWfhH48C7POwIQpF/qA9qSyNrziadplzDp9nKKv0S1ahmzdxFPRzclhxcHt7aHmxgAnldpb4rBuU075bzf0C6sZ3DGaPC5gxzb3p5el6MATjueFlu4tA2bko1JdnEuRbrvz7UKGr4JBp9QrVvQsb6TJZ98WPaWF4+NLB7u4DuvhJ6ceJmjv+hUKlHp3+STRJyGgKIgWKUsQHbyIM0hTy7v+wvJ1/MIDRG4e8/yBk546OT0hk6Avl2dAp0CUmbK9XoaENmKTpbeAnJ6yJB36ifkg3Js7yryb6e7KEagL2nxvfeszOvoC2RSwMVr8+q0KRLCY1FAera7G2EuueNDk9tX3slnFgGn9ADEP/Blnbn6RC6xoWJQQC/1e8sxh6rNJNfkBgK0OeD9GEjLj1yh/vhqbFhAs5svS0hcnJCBPlJEfzpZ4ARN95o28DlC7O2F9byaLAKXFPjCo/1f+zrJpzE7rP8bKnzrWrywx5thNTkY1peZwnbFhUzWGRVqQzMTqTDIT971qPTAnW4uVxuCs6QpMN3l1ynsJt6VHikF0QxxESkryYZyUXTlFPBp15db/TefQcMYpNl7JYq+61h+7NDzCN91BSscGEKnkZtq8snFvptJf/6f/XPwpAAFICrl71ySWVoM5ZJCL91zJUKVN4MybqLYAa4B/mqkTE4LVgi0MvNJX7LaWyt8IzcQAnp2hdi1G154FfZcjawNp3ImXryOg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	QPCjrOfrHFcz3+dQDJc8dYBxXaM8THu72CB3MWgm1q2qdmRa3jzFcdyiYiJ/THNF38+ZhGHB0asMY9zLfDQ4mrWyJO8CCCzMqXTOfYaUmiRPZMLt9U0FxnWdH2oar0ni5EN/ZGnTXxqANCVCNU+c2AZZtHR2EiBf/xrI0Mz9i6y5vIvAchji8G6/CXPZuD/yAXffpXNKq8QRlkNkj4D5Mdo5gmZGQLTm06yrQsWeq36v5C+IJaWShZ4+58/1J3Zn4tmsvsL3/Gi8Ujodg+d5Kd6sd7ysIwnonsgq12ZY11L39VwRcbHOqBMYHwaUXAY9TNqUGVsz8Ag77O9QE1XOmIn74+/4EVc9+Xntd5gNBFC5vPI+s52jkUFDId49WLdx9iqX2XZ1zl1A2dMj9qZ/D2H5tSrJo15esqkPyzdIbiJTIHJ7wTIz0P5TPfv9RHZE
+	4f83CXG7K+yjcPrkVabmky5LMIMSIBD3vUmnG+YA6bwkddrpMRwf/8MW+Xa6T2NYLnDOH6dP9GDSVVN9/BEhXEvYt3xXHQOmR1ASgHXMwxK0lJWLlqBoZ+H19Boyn88dYTg1Z+RH5m99OVNMZyZbn1xwjoCXI2Kp9ldobmq61+VquFGFVxevDhBqbCalM6uV892/YoCiv763uJ1gIhb8+Lz/U0BbxBAs3M4uh4Gm6/Q9y+TR1wXKVyY/VE4840PBEo1UAGReO8G2XO3ioDIoLnat3lKh3NI+4qA98iKksulAYfkwKCUaWpHMRRdhZa4tW5UnkzW6OWcp31AE6B/UNYu7dAVPLCUs7dJx1I273T1iDiiSyXRIU6bPbjcEVmjuTgTmulJgOvb46XYhTJqi7XwonNMj3CyIn9PDDsP95Lq3C/t/At4yhPKadVzZ4Z2b
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 07:56:00.2670
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 07:55:53.5689
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 030b24cd-9b52-4120-8851-08de8bd6495b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fc710ff-bd1e-4720-6a11-08de8bd64561
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	DS3PEPF000099DD.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR12MB9593
-X-purgate-ID: tlsNG-c201ff/1774598166-80769488-C032C8C8/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9174
+X-purgate-ID: tlsNG-c201ff/1774598161-81156488-BDD22C9E/0/0
 X-purgate-type: clean
-X-purgate-size: 2523
+X-purgate-size: 3611
 
-On ARM, the only callsite of mfn_to_gfn() is in memory_exchange(). Although
-memory_exchange() is actually not reachable on ARM because steal_page() always
-returns -EOPNOTSUPP. We still need to fix it here to ensure correctness once
-steal_page() is implemented for ARM in the future, and avoid propagating
-broken usage.
+As preparation for fixing mfn_to_gfn() on ARM, we extend the existing GFN
+field in page_info's type_info to be usable for not only xenheap ones.
+Another usage will be introduced later for stolen pages in memory exchaging.
 
-Fixing it with the following steps:
-- Recording the GFN into the page's type_info via page_set_gfn() at stolen time
-- Retrieving it via page_get_gfn() at consume time instead of mfn_to_gfn().
+Introduce general-purpose page_get_gfn() and page_set_gfn() helpers
+that read and write the GFN stored in type_info. The old
+page_get_xenheap_gfn() and page_set_xenheap_gfn() are retained as thin
+wrappers with their xenheap ASSERTs, so all current callers remain unchanged.
 
-With the only call site removed in ARM, mfn_to_gfn() macro is no longer
-referenced and could be removed in ARM.
+Also introduce PGT_INVALID_GFN as the general sentinel, with
+PGT_INVALID_XENHEAP_GFN aliased to it for backward compatibility.
 
 Signed-off-by: Penny Zheng <penny.zheng@amd.com>
 ---
- xen/arch/arm/include/asm/mm.h |  1 -
- xen/common/memory.c           | 11 +++++++++++
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ xen/arch/arm/include/asm/mm.h | 37 +++++++++++++++++++++++------------
+ 1 file changed, 25 insertions(+), 12 deletions(-)
 
 diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 8d61b74e4f..14cb3c3dfa 100644
+index 72a6928624..d1873ec212 100644
 --- a/xen/arch/arm/include/asm/mm.h
 +++ b/xen/arch/arm/include/asm/mm.h
-@@ -307,7 +307,6 @@ struct page_info *get_page_from_gva(struct vcpu *v, vaddr_t va,
+@@ -113,18 +113,21 @@ struct page_info
+ #define PGT_count_mask    PG_mask(3, 3)
  
- /* Xen always owns P2M on ARM */
- #define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
--#define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
- #define shared_info_to_gfn(d) \
-     page_get_xenheap_gfn(virt_to_page((d)->shared_info))
+ /*
+- * Stored in bits [28:0] (arm32) or [60:0] (arm64) GFN if page is xenheap page.
++ * Stored in bits [28:0] (arm32) or [60:0] (arm64) GFN if page is xenheap page,
++ * or stolen ones in memory exchanging.
+  */
+ #define PGT_gfn_width     PG_shift(3)
+ #define PGT_gfn_mask      ((1UL<<PGT_gfn_width)-1)
  
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 918510f287..5c462c302d 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -814,6 +814,13 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
-                     goto fail;
-                 }
+-#define PGT_INVALID_XENHEAP_GFN   _gfn(PGT_gfn_mask)
++#define PGT_INVALID_GFN           _gfn(PGT_gfn_mask)
++#define PGT_INVALID_XENHEAP_GFN   PGT_INVALID_GFN
  
-+#ifndef CONFIG_X86
-+                /*
-+                 * Record the GFN in the page's type_info,
-+                 * so that we can retrieve it later when consuming the page.
-+                 */
-+                page_set_gfn(page, _gfn(gmfn + k));
-+#endif
-                 page_list_add(page, &in_chunk_list);
- #ifdef CONFIG_X86
-                 put_gfn(d, gmfn + k);
-@@ -849,7 +856,11 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
-             gfn_t gfn;
+ /*
+  * An arch-specific initialization pattern is needed for the type_info field
+- * as it's GFN portion can contain the valid GFN if page is xenheap page.
++ * as it's GFN portion can contain the valid GFN if page is xenheap page, or
++ * stolen in memory exchanging.
+  */
+-#define PGT_TYPE_INFO_INITIALIZER   gfn_x(PGT_INVALID_XENHEAP_GFN)
++#define PGT_TYPE_INFO_INITIALIZER   gfn_x(PGT_INVALID_GFN)
  
-             mfn = page_to_mfn(page);
-+#ifdef CONFIG_X86
-             gfn = mfn_to_gfn(d, mfn);
-+#else
-+            gfn = page_get_gfn(page);
-+#endif
-             /* Pages were unshared above */
-             BUG_ON(SHARED_M2P(gfn_x(gfn)));
-             if ( guest_physmap_remove_page(d, gfn, mfn, 0) )
+  /* Cleared when the owning guest 'frees' this page. */
+ #define _PGC_allocated    PG_shift(1)
+@@ -338,28 +341,38 @@ unsigned int arch_get_dma_bitsize(void);
+  * that requirement (risk of deadlock, lock inversion, etc) it is important
+  * to make sure that all non-protected updates to this field are atomic.
+  */
+-static inline gfn_t page_get_xenheap_gfn(const struct page_info *p)
++static inline gfn_t page_get_gfn(const struct page_info *p)
+ {
+     gfn_t gfn_ = _gfn(ACCESS_ONCE(p->u.inuse.type_info) & PGT_gfn_mask);
+ 
+-    ASSERT(is_xen_heap_page(p));
+-
+-    return gfn_eq(gfn_, PGT_INVALID_XENHEAP_GFN) ? INVALID_GFN : gfn_;
++    return gfn_eq(gfn_, PGT_INVALID_GFN) ? INVALID_GFN : gfn_;
+ }
+ 
+-static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
++static inline void page_set_gfn(struct page_info *p, gfn_t gfn)
+ {
+-    gfn_t gfn_ = gfn_eq(gfn, INVALID_GFN) ? PGT_INVALID_XENHEAP_GFN : gfn;
++    gfn_t gfn_ = gfn_eq(gfn, INVALID_GFN) ? PGT_INVALID_GFN : gfn;
+     unsigned long x, nx, y = p->u.inuse.type_info;
+ 
+-    ASSERT(is_xen_heap_page(p));
+-
+     do {
+         x = y;
+         nx = (x & ~PGT_gfn_mask) | gfn_x(gfn_);
+     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
+ }
+ 
++static inline gfn_t page_get_xenheap_gfn(const struct page_info *p)
++{
++    ASSERT(is_xen_heap_page(p));
++
++    return page_get_gfn(p);
++}
++
++static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
++{
++    ASSERT(is_xen_heap_page(p));
++
++    page_set_gfn(p, gfn);
++}
++
+ #endif /*  __ARCH_ARM_MM__ */
+ /*
+  * Local variables:
 -- 
 2.43.0
 
