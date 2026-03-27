@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B39D010ED669
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 12:48:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1265567.1556400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD5310ED66E
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 12:51:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1265592.1556418 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w66bW-0000Gq-7O; Fri, 27 Mar 2026 12:47:58 +0000
+	id 1w66en-0002SZ-0k; Fri, 27 Mar 2026 12:51:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1265567.1556400; Fri, 27 Mar 2026 12:47:58 +0000
+Received: by outflank-mailman (output) from mailman id 1265592.1556418; Fri, 27 Mar 2026 12:51:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w66bW-0000Gj-4a; Fri, 27 Mar 2026 12:47:58 +0000
-Received: by outflank-mailman (input) for mailman id 1265567;
- Fri, 27 Mar 2026 12:47:56 +0000
+	id 1w66em-0002SS-UJ; Fri, 27 Mar 2026 12:51:20 +0000
+Received: by outflank-mailman (input) for mailman id 1265592;
+ Fri, 27 Mar 2026 12:51:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <oleksii.kurochko@gmail.com>) id 1w66bU-0000Gd-Mt
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 12:47:56 +0000
+ (envelope-from <jgross@suse.com>) id 1w66el-0002SM-QZ
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 12:51:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w66bU-008Gwh-2b
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 13:47:56 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w66el-006iA4-5U
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 13:51:19 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69c67c7a-e002-0a2a0a5209dd-0a2a4505dc78-10
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 13:47:56 +0100
-Received: from [209.85.218.52] (helo=mail-ej1-f52.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69c67c7b-5aeb-0a2a45050019-d155da34a96a-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 13:47:55 +0100
-Received: by mail-ej1-f52.google.com with SMTP id
- a640c23a62f3a-b980b35534eso479465266b.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 05:47:55 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
- [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-66ad6a4c4b3sm2225062a12.22.2026.03.27.05.47.53
+ (envelope-from <jgross@suse.com>)
+ id 69c67d45-5cb7-0a2a0a5109dd-0a2a45039146-8
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 13:51:19 +0100
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <jgross@suse.com>)
+ id 69c67d46-1947-0a2a45030019-d1558034f00b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 13:51:18 +0100
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4852afd42ceso16067205e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 05:51:18 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48727189cd1sm15062955e9.29.2026.03.27.05.51.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Mar 2026 05:47:54 -0700 (PDT)
+ Fri, 27 Mar 2026 05:51:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,393 +55,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774615675; x=1775220475; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=G1JZ7x4TFZ9YUUsRHNL827EegWnaHOoVxvnjo4qZ/vc=;
-        b=KG3jd4XriBqlzXsU0KdFgG7nOHd9/rXBCtef1NKYTAZLJl2bfvml8tRtTi9BjEEyLY
-         ZjCaf9Pd/EMl8DOt/vuzQBe4vyoyKr7+psQGG0zL0PLNTLw/e/XymA+ceazuX9ID3rU3
-         AFgQ3oAYygF2pLYlAKkhrn3GAtDP6bYGUJdHHfiSa1AhPwdnf+3J+Id1Ps7EzrGUasBu
-         aZn0YowdjB8Ym87vfjUyuUkjebQTdbMdYbruRM7xzUrueGrufcf031hhI3rqiL1VyE8g
-         IaYV0BPKjo7jwvPSwfAQWYIzkgJLohY9VyrT9CtNvTt56UUPSmqHNaAuZEV5AiHDY0uB
-         Z3LQ==
+        d=suse.com; s=google; t=1774615878; x=1775220678; darn=lists.xenproject.org;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=SckRGSf6TTBxZUFG7HmhvZkcg5DfrpwMyToGdndXJJ0=;
+        b=SIbFtVd54eQAbv3ikX+l3gPLd25m8o9PKoer1Z9wStWFDKvbrWOymWD+a/1OOk7+/L
+         uB0qWd+YxvgdljB5awVuvlEQLCSVmpGimthqc9fbnRzl0bRLrun2vjsV5fMEc+dnLGw7
+         s92RuYb+62VGGKGxIO4nEtmycxSAZek4Kb+TBUBx4kxZybEk7n/ibPKg3rai34t2d6B5
+         N93263yANgaATtFq68Xg0RkPQKkDoPjUqBn+2ezJcvLX5FEJX85NOmmBb3QJVoIMsbXg
+         MDJIAbCelgUDHsrFDDSQ3AdzZogCTrJxC2JCTdWggX11r3xmQ7b8jaEVnF5ISB1REBeD
+         RQvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774615675; x=1775220475;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=G1JZ7x4TFZ9YUUsRHNL827EegWnaHOoVxvnjo4qZ/vc=;
-        b=QzKIPACzJII+OsJEVS9iH3fKx7G/Xq0GRTpJ7bc7ZSxGoK2JcOJlcLPHTyMXmg55CB
-         KS/DBuOJgn8toUwYULFQXlf74DHsbyZpMRPw582FGi96b/dTVwyb2Jk9gXJB6D8CZ4+J
-         60O+CQ4RrYLM9Sbc4+anMlFwHppEzOBvfhlC+P4Z85Fdj9UBiUPsdUtqFLck58JomWFP
-         yP+0G/iSI5yA+UGvumBKAv76kwQ5HLzaoDDVsIF+ZPPOGuvFz6lD8Zu8K6YHqr4xzIv0
-         ihKeJ0uO+w7nwQHuQd4ckEor+uzp5znsfIgn4OX7QflTe/+6Bref5ZholOk6HphVQwUt
-         y+OA==
-X-Forwarded-Encrypted: i=1; AJvYcCXWSyMF2u+O6f29dWbD4sivDEEWE+6LXx5AIVgj4EUnTmzPlUGBkBlmJdK9JScylLDGbnMoB8nmWgg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzHZi6myfaGZ2gym6qa6es+sR0PIJ7DKoqapuXtQSO8c8RqEKEt
-	A/WmDeMcCK/biOJ5++wuQu74qzS/8uPfyvD326K7LnLQlfpAVZdS/zfz
-X-Gm-Gg: ATEYQzyvjRjjeVf7dgLQeGdXV6kPkcgxJ6nDG1ox1s/UM5FdkH9EFQFBZOqLZJNtSR1
-	+I0wtQdrIC1gPo5cXEPN+StOITtvqGEs4S+o4JK18TY2PN0fu7WHYH8qi5xl/0jQUkS+bLdQSEM
-	rgZkZ1jEi3OKFa+inKLQq/V6qNB+4Bf5n1kB0fbIodd+qZCwSj2PDVdjcMy5r6cLUQXBAM3wtI8
-	Mm+ZkMzzAlq1P4NHHq+1QtdLuZM4U5tP/WdUhN+4CbgS+yqWGlO2cS25dSxz/I2gN4VRvH0Xl1q
-	iB1OkRYVcA3ympIf+1QPaAiG1TGld2tcczvM8Vts/8J2sme1oMChfo3XCenv6DU8DpGCJCFB5JJ
-	R912ThTG+pN4hUduB1PZGSlCOqy+yykNaOsLVBG0/B3utVRRGlVCzv2H7oV9eL8fWH+08E74D6F
-	5Ee50+6sYczbh5A0Hce/GZM49xaOW3y0NRtuLngHDgcr47zMRfcaNzMjXm/43QnCf0Ro8H3d4UF
-	50=
-X-Received: by 2002:a17:907:2d8a:b0:b98:f1d:6a63 with SMTP id a640c23a62f3a-b9b2e5921bbmr345986566b.9.1774615674917;
-        Fri, 27 Mar 2026 05:47:54 -0700 (PDT)
-Message-ID: <09c5badb-f58b-4331-8138-cba99eba17b0@gmail.com>
-Date: Fri, 27 Mar 2026 13:47:53 +0100
+        d=1e100.net; s=20251104; t=1774615878; x=1775220678;
+        h=in-reply-to:autocrypt:from:content-language:references:cc:to
+         :subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SckRGSf6TTBxZUFG7HmhvZkcg5DfrpwMyToGdndXJJ0=;
+        b=XE2Tz5mYIUHl+TgCnUp3GPH3+T1zUkVG1uHQOa/eXwCfsJ7UNjeYqP3G1UHZt5nT2e
+         II99IG+HX3TOEvKPShiIzgoBD9Tc9xYMEXoL78ZwpXyVHFF4OQVVHzaBeVDcb7Irpafb
+         Lf1Kcwg8HJ4iCyweTxg/dVanV10jFut6ANFyuGJz5E+6I7CSn3z+1S0ou17BAMAyu7pg
+         zV5k6MnZJFqVFlU6vUM8PKwZVi6sfvTXnQXV6LFIrP6N61wOiZWhu3io87WgGtNKKvgj
+         W1s3Wyscow5/9K1BdHW56V1uH7KqhIdaUTlFKezvjiqQclzGu/kuIuawJnKkeBnqpDGr
+         JIWw==
+X-Forwarded-Encrypted: i=1; AJvYcCXALY7JldFcnR1wzvGPPpJ9fRIDREKLnpI/v2Q77I+O8BHN1QjxKVFREhLgk5G/3M/CV6HEpm0Srkk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwLzB7O9oh9PqRMmqw/mico2qxxhINuH90HBXgbKU/0w0+/wGNE
+	/m2v73WwnUedvZ5DwAyaJ040zBFwpOIvH1+vVndemZbW7758kC3OfOHLUQV5U9gLD+w=
+X-Gm-Gg: ATEYQzx7+QT6PbyWsVU3SF8RFlXweReqs1x7EBCVIC+QgS1hOpzRgC6U2Y5XGj9w+nW
+	S5TJ0gr+LkwG/Ah9t0WGTfXaDPyWBeaVxr4WwEMMNik8+ik4QIN8fimW+etvWWUheoeKVC+mbJi
+	SFtRdpmTT0Vb/Y1ZYffPNPXsR5X1MJKOdZtnk3jGnQfuEQAiKYlT9EYnmZ9wD2fpV9gRRiNbQvc
+	fGfNQomFy0estxWiS4KSqFmZFWLXt0Y/wFdpeclRRfNurCbkbqpUZYsgcDEyna0HVaU/iaFZd6/
+	Ks9lMzrDdzVhiwP6f+Peq2Ps/rKZtDK3B+9+25+5tY0PQw4J4Vbb4zZHyZ7N1xXrnYOh0lskp3k
+	1zYqwppucNBy8/pJ/WFiKJ25R5NAGynpog2sSRTPVd9nmP42LPo4n4NmBqTyM4/uR5PAYfdHAX/
+	n3xHW/zyBixc3J+7nhjd9ZI0akI/GlO1dZZu2Z2ofqJdmDfOfc2Mwk7aS7sb5FoLCfBUZNkyxG8
+	TMVK0Po6isLRLrbkxe7+tm7ae5oipdo7sFzyYYsSBCzPnQux3apyg==
+X-Received: by 2002:a05:600c:1d1c:b0:483:7903:c3b1 with SMTP id 5b1f17b1804b1-48727efacb3mr37802375e9.20.1774615878339;
+        Fri, 27 Mar 2026 05:51:18 -0700 (PDT)
+Message-ID: <7e21c108-f747-4805-8904-b116bf04be89@suse.com>
+Date: Fri, 27 Mar 2026 13:51:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] xen/riscv: add exception table support
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1773419622.git.oleksii.kurochko@gmail.com>
- <c6d30625371d56bb8345c987ac6d8095cc7301d2.1773419622.git.oleksii.kurochko@gmail.com>
- <db8fd1fa-2db4-4df4-8e21-1412783786b2@suse.com>
+Subject: Re: [PATCH v3] xen/sched: validate RTDS putinfo period and budget
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+ Meng Xu <mengxu@cis.upenn.edu>
+References: <06fbc96288c6aba60369914c2cdbc656ca32fcf8.1774611038.git.oleksii_moisieiev@epam.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <db8fd1fa-2db4-4df4-8e21-1412783786b2@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1774615675-81D5C488-6C13E4F5/0/0
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <06fbc96288c6aba60369914c2cdbc656ca32fcf8.1774611038.git.oleksii_moisieiev@epam.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------mGWDMak0AFJ5fCbzeXNA2PzL"
+X-purgate-ID: tlsNG-33051d/1774615879-49E5B72C-7748545E/0/0
 X-purgate-type: clean
-X-purgate-size: 10888
+X-purgate-size: 8687
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------mGWDMak0AFJ5fCbzeXNA2PzL
+Content-Type: multipart/mixed; boundary="------------851aCZfoFMbQORZHgbqNyCMR";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+ Meng Xu <mengxu@cis.upenn.edu>
+Message-ID: <7e21c108-f747-4805-8904-b116bf04be89@suse.com>
+Subject: Re: [PATCH v3] xen/sched: validate RTDS putinfo period and budget
+References: <06fbc96288c6aba60369914c2cdbc656ca32fcf8.1774611038.git.oleksii_moisieiev@epam.com>
+In-Reply-To: <06fbc96288c6aba60369914c2cdbc656ca32fcf8.1774611038.git.oleksii_moisieiev@epam.com>
 
+--------------851aCZfoFMbQORZHgbqNyCMR
+Content-Type: multipart/mixed; boundary="------------3JwH9fE6pjrrowzAiv4koBDy"
 
-On 3/24/26 3:04 PM, Jan Beulich wrote:
-> On 13.03.2026 17:44, Oleksii Kurochko wrote:
->> Introduce exception table handling for RISC-V so faults from selected
->> instructions can be recovered via fixup handlers instead of being
->> treated as fatal.
->>
->> Add the RISC-V exception table format, sorting at boot to allow binary
->> search used furthuer, and lookup from the trap handler. Update the
->> linker script to emit the .ex_table section using introduced common
->> EX_TABLE macro shared with other architectures.
->>
->> Also, the __start___ext_table is aligned now by POINTER_ALIGN instead
->> of just using hard-coded 8 as there is no too much sense to align
->> __start___ext_table by 8 for 32-bit systems.
-> 
-> Nit: The identifier named here twice isn't correct (extra 't').
-> 
->> This implementation is based on Linux 6.16.
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> ---
->> Open question:
->>
->> With some renaming the following could be generic, at least, between
->> x86 and RISC-V:
->>   - ASM_EXTABLE() definition
->>   - All what is conencted with sort_extable().
->>   - With some change of how x86 searchs an extension this cmp_ex_search()
->>     could also go to common file.
->>
->> Does it make sense to introduce xen/extable.h and common/extable.c?
-> 
-> Maybe, but not right here. Already the introduction of EX_TABLE for
-> linker script use might better have been broken out.
-> 
-> Seeing the names you suggest here, ...
-> 
->> ---
->>   xen/arch/riscv/Kconfig                |  1 +
->>   xen/arch/riscv/Makefile               |  1 +
->>   xen/arch/riscv/extables.c             | 85 +++++++++++++++++++++++++++
->>   xen/arch/riscv/include/asm/extables.h | 72 +++++++++++++++++++++++
->>   xen/arch/riscv/setup.c                |  3 +
->>   xen/arch/riscv/traps.c                |  3 +
->>   xen/arch/riscv/xen.lds.S              |  3 +
->>   xen/arch/x86/xen.lds.S                |  6 +-
->>   xen/include/xen/xen.lds.h             | 10 ++++
->>   9 files changed, 179 insertions(+), 5 deletions(-)
->>   create mode 100644 xen/arch/riscv/extables.c
->>   create mode 100644 xen/arch/riscv/include/asm/extables.h
-> 
-> ... is there a reason you use plural in the name here?
+--------------3JwH9fE6pjrrowzAiv4koBDy
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-No, I'll use singular form.
+T24gMjcuMDMuMjYgMTI6MzEsIE9sZWtzaWkgTW9pc2llaWV2IHdyb3RlOg0KPiBUaGUgUlRE
+UyBkb21haW4td2lkZSBYRU5fRE9NQ1RMX1NDSEVET1BfcHV0aW5mbyBwYXRoIG9ubHkgY2hl
+Y2tzIGZvcg0KPiB6ZXJvIHZhbHVlcyBiZWZvcmUgYXBwbHlpbmcgcGVyaW9kIGFuZCBidWRn
+ZXQgdG8gYWxsIHZDUFVzIGluIHRoZQ0KPiBkb21haW4uDQo+IA0KPiBUaGlzIGlzIHdlYWtl
+ciB0aGFuIHRoZSBwZXItdkNQVSBYRU5fRE9NQ1RMX1NDSEVET1BfcHV0dmNwdWluZm8gcGF0
+aCwNCj4gd2hpY2ggYWxyZWFkeSByZWplY3RzIHZhbHVlcyBiZWxvdyB0aGUgbWluaW11bSwg
+YWJvdmUgdGhlIG1heGltdW0sIGFuZA0KPiBjYXNlcyB3aGVyZSBidWRnZXQgZXhjZWVkcyBw
+ZXJpb2QuDQo+IA0KPiBVc2UgdGhlIHNhbWUgdmFsaWRhdGlvbiBydWxlcyBmb3IgcHV0aW5m
+byBhcyBmb3IgcHV0dmNwdWluZm8sIHNvDQo+IGludmFsaWQgZG9tYWluLXdpZGUgdXBkYXRl
+cyBhcmUgcmVqZWN0ZWQgd2l0aCAtRUlOVkFMIGluc3RlYWQgb2YgYmVpbmcNCj4gYXBwbGll
+ZCBpbmNvbnNpc3RlbnRseS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzaWkgTW9pc2ll
+aWV2IDxvbGVrc2lpX21vaXNpZWlldkBlcGFtLmNvbT4NCj4gLS0tDQo+IA0KPiBDaGFuZ2Vz
+IGluIHYzOg0KPiAtIGNoYW5nZWQgcnRfdmFsaWRhdGVfcGFyYW1zIGlucHV0IHRvIGdldCBz
+dHJ1Y3QgaW5zdGVhZCBvZg0KPiBwZXJpb2QgYW5kIGJ1ZGdldA0KPiAtIGltcHJvdmVkIGNv
+ZGUgcmVhZGFiaWxpdHkNCj4gDQo+IENoYW5nZXMgaW4gdjI6DQo+IC0gaW50cm9kdWNlIHJ0
+X3ZhbGlkYXRlX3BhcmFtcyBoZWxwZXIgZnVuY3Rpb24gdG8gY2hlY2sgcGVyaW9kIGFuZCBi
+dWRnZXQNCj4gDQo+ICAgeGVuL2NvbW1vbi9zY2hlZC9ydC5jIHwgMzcgKysrKysrKysrKysr
+KysrKysrKysrKysrLS0tLS0tLS0tLS0tLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyNCBpbnNl
+cnRpb25zKCspLCAxMyBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS94ZW4vY29t
+bW9uL3NjaGVkL3J0LmMgYi94ZW4vY29tbW9uL3NjaGVkL3J0LmMNCj4gaW5kZXggN2IxZjY0
+YTc3OS4uYzE2MWJmN2Y3OCAxMDA2NDQNCj4gLS0tIGEveGVuL2NvbW1vbi9zY2hlZC9ydC5j
+DQo+ICsrKyBiL3hlbi9jb21tb24vc2NoZWQvcnQuYw0KPiBAQCAtMTM2Miw2ICsxMzYyLDIz
+IEBAIG91dDoNCj4gICAgICAgdW5pdF9zY2hlZHVsZV91bmxvY2tfaXJxKGxvY2ssIHVuaXQp
+Ow0KPiAgIH0NCj4gICANCj4gK3N0YXRpYyBpbnQNCj4gK3J0X3ZhbGlkYXRlX3BhcmFtcyhz
+dHJ1Y3QgeGVuX2RvbWN0bF9zY2hlZF9ydGRzICpydGRzLA0KPiArICAgICAgICAgICAgICAg
+ICAgIHNfdGltZV90ICpwZXJpb2QsIHNfdGltZV90ICpidWRnZXQpDQo+ICt7DQo+ICsgICAg
+c190aW1lX3QgcCA9IE1JQ1JPU0VDUyhydGRzLT5wZXJpb2QpOw0KPiArICAgIHNfdGltZV90
+IGIgPSBNSUNST1NFQ1MocnRkcy0+YnVkZ2V0KTsNCj4gKw0KPiArICAgIGlmICggcCA+IFJU
+RFNfTUFYX1BFUklPRCB8fCBiIDwgUlREU19NSU5fQlVER0VUIHx8DQo+ICsgICAgICAgICBi
+ID4gcCB8fCBwIDwgUlREU19NSU5fUEVSSU9EICkNCg0KVGhpcyBzZXF1ZW5jZSBvZiB0ZXN0
+cyBtYWtlcyBpdCBoYXJkZXIgdG8gcmVhZCB0aGFuIG5lY2Vzc2FyeS4NCg0KQ291bGQgeW91
+IHBsZWFzZSByZWFycmFuZ2UgdG86DQoNCisgICAgaWYgKCBwIDwgUlREU19NSU5fUEVSSU9E
+IHx8IHAgPiBSVERTX01BWF9QRVJJT0QgfHwNCisgICAgICAgICBiIDwgUlREU19NSU5fQlVE
+R0VUIHx8IGIgPiBwICkNCg0KVGhpcyBtYWtlcyBpdCByYXRoZXIgb2J2aW91cyB3aGF0IHRo
+ZSBhbGxvd2VkIHJhbmdlcyBhcmUuDQoNCldpdGggdGhpcyBhbmQgdGhlICJjb25zdCIgYWRk
+ZWQgbWVudGlvbmVkIGJ5IEphbiB5b3UgY2FuIGFkZCBteToNCg0KUmV2aWV3ZWQtYnk6IEp1
+ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCg0KDQpKdWVyZ2VuDQo=
+--------------3JwH9fE6pjrrowzAiv4koBDy
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-I called it tables as potentially I will need a different types of 
-exception table, so I counted different types as different exception tables.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-> 
->> --- a/xen/arch/riscv/Makefile
->> +++ b/xen/arch/riscv/Makefile
->> @@ -3,6 +3,7 @@ obj-y += cpufeature.o
->>   obj-y += domain.o
->>   obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
->>   obj-y += entry.o
->> +obj-$(CONFIG_HAS_EX_TABLE) += extables.o
-> 
-> Simply obj-y please as long as the select is unconditional.
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-I see your point and at the moment there is no also other options how
-to handle case(s) for which exception table is introduced now. But if 
-potentially another mechanism will be introduced what will be the point 
-to have extable.o code in the final binary?
+--------------3JwH9fE6pjrrowzAiv4koBDy--
 
-> 
->> --- /dev/null
->> +++ b/xen/arch/riscv/extables.c
->> @@ -0,0 +1,85 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +
->> +#include <xen/init.h>
->> +#include <xen/bsearch.h>
->> +#include <xen/lib.h>
->> +#include <xen/sort.h>
->> +#include <xen/virtual_region.h>
->> +
->> +#include <asm/extables.h>
->> +#include <asm/processor.h>
->> +
->> +#define EX_FIELD(ptr, field) ((unsigned long)&(ptr)->field + (ptr)->field)
->> +
->> +static inline unsigned long ex_insn(const struct exception_table_entry *ex)
->> +{
->> +    return EX_FIELD(ex, insn);
->> +}
->> +
->> +static inline unsigned long ex_fixup(const struct exception_table_entry *ex)
->> +{
->> +    return EX_FIELD(ex, fixup);
->> +}
->> +
->> +static void __init cf_check swap_ex(void *a, void *b)
->> +{
->> +    struct exception_table_entry *x = a, *y = b, tmp;
->> +    int delta = b - a;
-> 
-> Better play safe and use "long" (as we have it for x86)?
+--------------851aCZfoFMbQORZHgbqNyCMR--
 
-It makes sense. Lets switch to "long".
+--------------mGWDMak0AFJ5fCbzeXNA2PzL
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-> 
->> +    tmp = *x;
->> +    x->insn = y->insn + delta;
->> +    y->insn = tmp.insn - delta;
->> +
->> +    x->fixup = y->fixup + delta;
->> +    y->fixup = tmp.fixup - delta;
->> +}
->> +
->> +static int __init cf_check cmp_ex_sort(const void *a, const void *b)
->> +{
->> +    const unsigned long l = ex_insn(a);
->> +    const unsigned long r = ex_insn(b);
->> +
->> +    /* avoid overflow */
->> +    return (l > r) - (l < r);
->> +}
->> +
->> +void __init sort_extable(void)
-> 
-> Better account for live-patching right away (see corresponding x86 code)?
+-----BEGIN PGP SIGNATURE-----
 
-I will introduce then void init_or_livepatch sort_exception_table(...) 
-and re-use it inside sort_extable() with renaming it to 
-sort_exception_tables() to take into account live-patching which 
-requires sort_exception_table().
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmnGfUUFAwAAAAAACgkQsN6d1ii/Ey+S
+6Qf+KCJLWpgdV2wtXkXAOqjU9Cb36rJlefMLZEW36K9c1c1WXUWa1F/PKvQiClWhRAvCzIPcIEZW
+/k4FHM1S73B7OYTCETcGaNzjdQlWtq7etZ6855RezgropNeln8/PZ9+8jHR4FVgsPOj1BFexOsAx
+ELJl2pSJo7HfrpllmPjTEZtDW+/w9wnskSF7jBmTgnW12zmw3AGdlwY1jbo5xmTpFLqYgZ2WVvEX
+HZ8yIalrjKxGFZ/9Q0oxlm7onUP9ydmDjMghFAIzSwXE5MeB0x+dUvgLdvqLkRm/E/QvwsshzyGB
+dmpitpDktavOr86/LICqIyRvoV6gV4j8I4PcvsR5Qw==
+=NeA0
+-----END PGP SIGNATURE-----
 
-> 
->> +{
->> +    sort(__start___ex_table,  __stop___ex_table - __start___ex_table,
->> +         sizeof(struct exception_table_entry), cmp_ex_sort, swap_ex);
->> +}
->> +
->> +static int cf_check cmp_ex_search(const void *key, const void *elt)
->> +{
->> +    const unsigned long k = *(const unsigned long *)key;
-> 
-> The deref here looks to be needed solely because you pass &pc into bsearch().
-> Generally I'd expect both search functions to be pretty similar (if already
-> distinct ones are needed, which indeed looks to make things easier here).
-
-The stuff is easier with such implementation.
-
-We could really drop cmp_ex_search() if to pass struct 
-exception_table_entry instead of (unsigned long *) so the following will 
-allow to drop cmp_ex_search():
-
-@@ -78,12 +78,15 @@ bool fixup_exception(struct cpu_user_regs *regs)
-      unsigned long pc = regs->sepc;
-      const struct virtual_region *region = find_text_region(pc);
-      const struct exception_table_entry *ex;
-+    struct exception_table_entry key;
-
-      if ( !region || !region->ex )
-          return false;
-
--    ex = bsearch(&pc, region->ex, region->ex_end - region->ex,
--                 sizeof(struct exception_table_entry), cmp_ex_search);
-+    key.insn = pc - (unsigned long)&key.insn;
-+
-+    ex = bsearch(&key, region->ex, region->ex_end - region->ex,
-+                 sizeof(struct exception_table_entry), cmp_ex_sort 
-/*cmp_ex_search*/);
-
-Also, then I will rename l and r variable inside cmp_ex_sort() to
-insn_a and insn_b.
-
-> 
->> +    const unsigned long insn = ex_insn(elt);
->> +
->> +    /* avoid overflow */
->> +    return (k > insn) - (k < insn);
->> +}
->> +
->> +static bool ex_handler_fixup(const struct exception_table_entry *ex,
->> +			                 struct cpu_user_regs *regs)
-> 
-> Nit: Bad indentation.
-> 
->> +{
->> +	regs->sepc = ex_fixup(ex);
->> +
->> +	return true;
-> 
-> Nit: Bad use of hard tabs.
-> 
-> And then - why the boolean return type, when this can't fail anyway?
-
-As potentially we could have other handlers which might return not only 
-true, so it will be easier to handle return type inside fixup_exception().
-
-But if you think there is no any sense to have for handlers the same 
-signature then I am also return void instead of bool for 
-ex_handler_fixup().
-
-> 
->> --- /dev/null
->> +++ b/xen/arch/riscv/include/asm/extables.h
->> @@ -0,0 +1,72 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +
->> +#ifndef ASM__RISCV__ASM_EXTABLES_H
->> +#define ASM__RISCV__ASM_EXTABLES_H
->> +
->> +#ifdef __ASSEMBLER__
->> +
->> +#define ASM_EXTABLE(insn, fixup)    \
->> +    .pushsection .ex_table, "a";    \
->> +    .balign     4;                  \
->> +    .long		((insn) - .);       \
->> +    .long		((fixup) - .);      \
-> 
-> Nit: More uses of hard tabs. Maybe that alone is the reason for the mis-aligned
-> trailing backslashes.
-> 
->> +    .popsection;
->> +.endm
-> 
-> I can't spot the corresponding .macro. What's going on here?
-
-Good question... It was:
-
-.macro asm_extable, insn, fixup
-     ASM_EXTABLE(\insn, \fixup)
-.endm
-
->> +
->> +/*
->> + * The exception table consists of pairs of relative offsets: the first
->> + * is the relative offset to an instruction that is allowed to fault,
->> + * and the second is the relative offset at which the program should
->> + * continue. No registers are modified, so it is entirely up to the
->> + * continuation code to figure out what to do.
-> 
-> And the program counter is not a register?
-It is. "No register" meant no general purpose register. I will reprase 
-this part to:
-
-No general-purpose registers are modified by the exception handling 
-mechanism itself, so it is up to the fixup code to handle any necessary 
-state cleanup.
-
-Or it could be just dropped.
-
-> 
->> + * All the routines below use bits of fixup code that are out of line
->> + * with the main instruction path.  This means when everything is well,
->> + * we don't even have to jump over them.  Further, they do not intrude
->> + * on our cache or tlb entries.
-> 
-> What is this paragraph about? There's nothing "below" which I can
-> associate this with.
-
-It is orphaned from Linux (generally it is about that some functions 
-from uaccess.h are using ASM_EXTABLE, the similar for Xen has in 
-x86/uaccess.h). I'll rephrase it to:
-  * The exception table and fixup code live out of line with the main
-  * instruction path. This means when everything is well, we don't even
-  * have to jump over them. Further, they do not intrude on our cache or
-  * tlb entries.
-
-> 
->> + */
->> +struct exception_table_entry {
->> +	int32_t insn, fixup;
->> +};
->> +
->> +extern struct exception_table_entry __start___ex_table[];
->> +extern struct exception_table_entry __stop___ex_table[];
->> +
->> +#ifdef CONFIG_HAS_EX_TABLE
-> 
-> Why, when this is a RISC-V specific header and HAS_EX_TABLE is selected
-> unconditionally?
-
-To handle the potential in future case that CONFIG_HAS_EX_TABLE will 
-become conditional.
-I thought that it makes sense to be in sync with common/virtual_region.c 
-also uses ifdef around exception table related information.
-
-> 
->> --- a/xen/include/xen/xen.lds.h
->> +++ b/xen/include/xen/xen.lds.h
->> @@ -219,4 +219,14 @@
->>   #define VPCI_ARRAY
->>   #endif
->>   
->> +#ifdef CONFIG_HAS_EX_TABLE
-> 
-> No real need for this?
-
-Here I can agree that there is not reason as if CONFIG_HAS_EX_TABLE is n
-then no one is expected to use exception table so the section is empty 
-and don't occupy any extra space in binary (except potentially some 
-space because of alignment).
-
-
-> 
->> +#define EX_TABLE                  \
->> +        . = ALIGN(POINTER_ALIGN); \
-> 
-> Strictly speaking the original 8 (in x86 code) as much as this is more
-> than we need - each element is a struct of 2 4-byte entities, after all.
-
-For the  current struct - yes, we can do . = ALIGN(4) but if the 
-architecture will add uint64_t inside (or unsigned long) shouldn't we 
-then have ALIGN(POINTER_ALIGN)?
-
-Thanks.
-
-~ Oleksii
-
+--------------mGWDMak0AFJ5fCbzeXNA2PzL--
 
