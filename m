@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9519C10ED679
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 13:47:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1265677.1556476 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5669910ED674
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 13:55:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1265692.1556498 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w67Wn-0002yI-Ds; Fri, 27 Mar 2026 13:47:09 +0000
+	id 1w67ep-00059H-GS; Fri, 27 Mar 2026 13:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1265677.1556476; Fri, 27 Mar 2026 13:47:09 +0000
+Received: by outflank-mailman (output) from mailman id 1265692.1556498; Fri, 27 Mar 2026 13:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w67Wn-0002yB-Ai; Fri, 27 Mar 2026 13:47:09 +0000
-Received: by outflank-mailman (input) for mailman id 1265677;
- Fri, 27 Mar 2026 13:47:08 +0000
+	id 1w67ep-000598-CI; Fri, 27 Mar 2026 13:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 1265692;
+ Fri, 27 Mar 2026 13:55:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w67Wm-0002xd-8D
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 13:47:08 +0000
+ (envelope-from <roger.pau@citrix.com>) id 1w67eo-0004vU-2d
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 13:55:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w67Wl-002rfW-4Y
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 14:47:07 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1w67en-00006j-Ef
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 14:55:25 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69c68a4b-2eae-0a2a0a5409dd-0a2a4507c436-42
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 14:47:07 +0100
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <jbeulich@suse.com>)
- id 69c68a5a-fd74-0a2a45070019-d1558035c515-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 14:47:06 +0100
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-486fd3a577eso19108745e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 06:47:06 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-487271be661sm15312185e9.35.2026.03.27.06.47.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Mar 2026 06:47:05 -0700 (PDT)
+ (envelope-from <roger.pau@citrix.com>)
+ id 69c68c44-2eae-0a2a0a5409dd-0a2a4502830e-14
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 14:55:25 +0100
+Received: from [52.101.48.23]
+ (helo=MW6PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <roger.pau@citrix.com>)
+ id 69c68c4a-63bb-0a2a45020019-346530175dc9-4
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 14:55:25 +0100
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
+ by DM6PR03MB5370.namprd03.prod.outlook.com (2603:10b6:5:249::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Fri, 27 Mar
+ 2026 13:55:22 +0000
+Received: from CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
+ ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9745.024; Fri, 27 Mar 2026
+ 13:55:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,191 +55,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774619226; x=1775224026; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=mrsqabFDGCS4QDEge6h/NqjrtgpOfCibn08AUIYnCPE=;
-        b=BIcTD56a67ikJecaGND66/fiAYwbZjzWK64GYaZQ1wBExWeGmlqJrg/309t+n3AfJE
-         UPFaDvlYwNKVcBmVOskMmJ1x133MfgTtba0rwrUNFdDpenpaVSLoyDhurI3WLIJwWzKH
-         94keoV6SHqfa6HXIOQy1aYO3nFiKZuP/FkSomyPVcFDBCqGcUNTW2wWSz8q9ibQjLxzf
-         090XKwEwSRd/Ajocola/3hV+UIinanfUzAS9tu2Unlm2jMJIX1Y4i/uq65VqfYsXXSlg
-         +E3euTYszqWNWJ90bD36dCgUZSi9tT00sT2cGxC0MmTWVjRs/3qCubBnpWRI+dF53QQZ
-         uUoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774619226; x=1775224026;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mrsqabFDGCS4QDEge6h/NqjrtgpOfCibn08AUIYnCPE=;
-        b=f+sjXNfJuwenVo8r3gs34syzPIWZT1USvAKRo9cgV8AtqFp0OKlYCtwLjHH7fCtMbf
-         E/I6zgONsyfPD1bNFeaooz9XOol6v8jWW3ovr+IYp1owvtohchCWockxY8SullyduU+8
-         rTSBegjznCoB23d8EWW+KBjgKC0wNnPv0RHZDSSVtX5clHXes7IVIOa6AsjXd3hfS2O1
-         I5HFXoavd1/AuLwwCR5y3iiWlNnCjTRoKStSsXjQ/BeOojy/R+LwqpCBNTaamy9XDhF/
-         v1FzeLSqqnUXTV3Pdj47kfm8Qw9HXJBretQ5V/Q9xYMmLrS/WcueP+MyKaPr1MLMdJIo
-         psJw==
-X-Forwarded-Encrypted: i=1; AJvYcCXIJIJoPLYYnTauq+80WC3qHB7+8EQ76WIRCDCgk9BOnZPGEEHndqs2mwZYaQV360L7rCAVs/xT5zc=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwOUc5UC5xVsPCXjIqqA2ifTws6M/2DcxUkLfAwP9DfIquQm3gJ
-	tqyWIpXg1JX9EUSgU+1fou5yEjXl4MOyonoG+f4urO5igvNpjHjgPPaZn2Y6xae7Gw==
-X-Gm-Gg: ATEYQzwxuMdHOKtzCPPstZFvgQgWDV5CVA+tZGIhELqNC92AStZK0hBpP+PAYO186ZS
-	Jbtr/d9mGeaSysZTKOhaYJOOR+HgBFzE4MAaIQC0Tmaz5Vu4fzYDvcU61brVEPfcLfl/dcETovf
-	HTcJvi2Ed/72eX8zMllAdo/ZCkCz8ty7ZjBaUbCDqau3yAnu5jTAsSUguz0B92rZpaM1TBu2C+6
-	BPEH5U1tmT/ii+NwKtKbCLQRurQcTr5VQRnkIpbN4L9mHR87MBbQFcC1XEr+tyOeLvGUGhT1kpr
-	8kzUbAsJwHWlaZKhOr9P2+9gqxFOeSeQNh+WQv+vEGX2BeBE/JCNd/64C4BQQ3fW1swkZy+Yxpz
-	ZrjIYigFz/ejl1y94FOU9OnXh+C5IcnxFtoPBRLK6Ze1tpXJv6bKF5j+vF5x4TuBcTPwP2Psm08
-	RnJoeIR/LT5CUlYb7l10crCj37gPanymeeow90hjK3j9AoZuWCVhvlbA8R+sQa3hwJ0i3atOCUu
-	E7+ITiUDCOcRVqLPP7iGAwaog==
-X-Received: by 2002:a05:600c:3d87:b0:487:1fbf:e0a1 with SMTP id 5b1f17b1804b1-48727d5a2bamr42394035e9.4.1774619226373;
-        Fri, 27 Mar 2026 06:47:06 -0700 (PDT)
-Message-ID: <d7ef8378-9cce-4be6-b513-7dede80fe7d0@suse.com>
-Date: Fri, 27 Mar 2026 14:47:04 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] xen/riscv: add exception table support
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1773419622.git.oleksii.kurochko@gmail.com>
- <c6d30625371d56bb8345c987ac6d8095cc7301d2.1773419622.git.oleksii.kurochko@gmail.com>
- <db8fd1fa-2db4-4df4-8e21-1412783786b2@suse.com>
- <09c5badb-f58b-4331-8138-cba99eba17b0@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <09c5badb-f58b-4331-8138-cba99eba17b0@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aVhh2QX+IfrMB81zqosvz2AgZ8kClcAdXh+8N8BudTc3ZaPZJ5cUsozEVe/yeGIe+V7eSo240RfUKmzFnfr2SNbCmwuUqp39bfhS9dCUJlaQmQLfvikogv1uj1pFGDHbG9NL3iPPjQHnA/oJna7UdSEwti5AFuAF+o2VY+2Rge8k+Cd+xTGJ5SfXqeDAoRvircIYPB/i2zdngqya1lk8/y2n6dY56ZTnTRXUgAHVfiumM0dYLUmdtuRvhw0hRv7zXv8C5xTDuPQKDsnHJsk0/sq0UTwcvXrbXc3ZxfTAqvNLAmt3sxeOcTUqrs1/a1ATeGPN5B6I4GwiTV5rV/h7mg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bhmHBEQUQsV67sJGN1j2fx0kLUU8zzBp+J69Zw8ktbA=;
+ b=Ht1/9ru79fgMP5zfyG4oyj93khxvw5MuFXFDfM2nPUR9azKupcdyTWN3MYcNBmtHkMXyKBG1PS5sgBzm2OMuZBbPEpMCICDSaEmbLLpCOFW1VCaSNvhUBJnGYL1VGVAsSJRbK/HMNeuqrNX9l7SKKPE5B8rnFdXzi+44zDz9lNNpnEfEO2xcyt8X+WncolplbNIAraqjWMzEFpvQtchG5WcwRwlUsf5DjYtShZJLMS8/90A3eOZfPmAYEXSdrIFyNhUP26qcS0KRUQ63Kfku35ZIUreBujCWZOgP95jm4R3XrEgfALocXry7HHSok587e2VmJPoWXpb7LtIhBZlL3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bhmHBEQUQsV67sJGN1j2fx0kLUU8zzBp+J69Zw8ktbA=;
+ b=XKI9qy6IZK6WMjvyrpsPLC0Yni1gKJEcl22GXh7sx96ks3sHicK3tuP99ldhGjfrUWyeS5WuirLhnsuu1BU37ayQduZ5L17Bo1s5Fc9sXodeNFxsXQPoTVR6pK5l+yq8gOCe6FSsY+ulNfihrjV8uShXwyvDDxbG2DrhdaFF46k=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 1/3] xen/uart: uniformly set ->ps_bdf_enable for all PCI serial devices
+Date: Fri, 27 Mar 2026 14:54:18 +0100
+Message-ID: <20260327135420.7246-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260327135420.7246-1-roger.pau@citrix.com>
+References: <20260327135420.7246-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1774619226-56CAA303-226EAB3F/0/0
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA3P292CA0039.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:46::8) To CH7PR03MB7860.namprd03.prod.outlook.com
+ (2603:10b6:610:24e::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|DM6PR03MB5370:EE_
+X-MS-Office365-Filtering-Correlation-Id: 83a00c15-36b4-40b7-03e2-08de8c087d70
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	NOwHscqcH+XD5bhZI+aX/sOj7EI8SuBEMJCPnRex+/YIZKvKzxSnVE28jA7Ko8jpeCePZh/3s1dt2c3rq7QXUDlt2amDDuNts7sYs8H0A1Ca/rM2HNrARkSzqHvwJ2dkJwFPfjTcdFTGR6eSZWlMpCKMxlG9Us9vybdr9aEA0+xzy6IKxEybpYmeuL5v9RpDZ19eOQCoyzW19TphdyuHEiKMLyzQlMvS5DwrS4CKJErbirYveoabyZzYmyjfZB5QAMbHjKt+o7hVMX1F7SHtCQ0mGNHwetXmB424nKBCh4Mi9QO2JyY757wDjmJoionKXNjGOrdd7SuilALspQlI/NSHt0Scb5kPuZ8eyvG2aMZ/5BCOULdnqkZB7oTC6s+yHGM/mtvz6bQfI7fWbh6RpPhFLv5pFZM+zmlEo/uVKZU2GDAMGP/Nsi+XZb221cf4lFiSom+SmXv0DZw/A1MrEJZ0iKCB59Ijs//whkeG3TUrmiBWkEtgbNCTtpEvJhIQi+bljWbYjVxOV129GJVcanv1mANqbCFVeLpuDRfOi2UQwhejLLJcV5JvVEqLlzUkb6U6F+TKqkMukA4kA197YaKpSIb2n3qMwuUmQsSy4z0ZxokoaeWG/HGNGjC1MYAyeg8VQyGFd85kGAMRJJIiuBCb/nB/OaAD069+q1flY+OFMu2NwBJ6xlj6oiYI4P7B6QwC2DvkgWaYBRu2wjnSro7JgJZnSlS3KXEbTdazCJU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?RWI3UFd6VWFDeDBQSzJnNVZ1ZWtsUXAxakVQYUp3Ujh4Vm5XbVNYUzJWOU5s?=
+ =?utf-8?B?aDlpOGpWdEdiSlRNQ1E4eVZ4MHBPZjdEREg2dmZoRXZBN0N1WmRINmo1ZGE3?=
+ =?utf-8?B?cmZZVE5RazhPMUM5T0RDOXFZR1VUcUZjbm0wM2pSRGI1NlR0TkJlNWUxcmVa?=
+ =?utf-8?B?MHUvRjc3S0tRbzllS0dxQUo0MmRRWmRHWmF0VlhnQW1aUXRNQ1l6a0FKSzJi?=
+ =?utf-8?B?L29aNlBtSnVDOURWWFJrUC9tTmRGUEd5a1RwenJGeHhuOFIreEtqN2VSM2Rj?=
+ =?utf-8?B?c3pleGhyRzd2MXU3UjVQQzZUSjVvcHd4a3FjTHF1RlZaMzB3cnZzR3ZXZW5J?=
+ =?utf-8?B?TnBkdkYybGxjM1lyZWtaeER5am1KSEh5ZEdGd2p0VW1PN2N6NGpJVkRIamU3?=
+ =?utf-8?B?d3BWQ1pBdjZ4eUV0TDY5ejlTTFFmaVIrcmV1S3RlQWloZTJxeDlpcWdrM1ZP?=
+ =?utf-8?B?VU11WDVQNXZwelpNcDBLd1ZDQS9wNUhDUzl3WnlUMURhSGpiL1AvU21XZnU2?=
+ =?utf-8?B?ZjNCbU5CTkxaYllQOHI0YW5kclUzdmtZUXBXRTRja1JNMmVVcmlWSGJla29I?=
+ =?utf-8?B?ZFBmU3RuRmYyd3ZUN2trUXVuaDBKS3JsS05DejJ4U2Qza3hVWjd3WFRJS0U0?=
+ =?utf-8?B?cCttVXl0Q0VyUGhsblptZ24yMGh1alZCTElSWnpJbnFoYUMrVGpMbEtCeVRI?=
+ =?utf-8?B?dWxPYjZTTmRhaTViNUYwS1VRNXJ1WWJvTWozSXNwM3FEZDEyVyt4VHRLa2VE?=
+ =?utf-8?B?TVZ1My9vT1YrTGxRUFUxczR0dmZodnRQdkFydVJhYVB6VXh1YXptUTViVjg1?=
+ =?utf-8?B?KzBPVzY5NjJuOFFUbFVWamZUaDNjOVQrQ21qVUtiY0xJdlcrS2xNZEFVRXVR?=
+ =?utf-8?B?S2R5TXhMZEhvSi8rakk1ZVgwQTlOYjlGd0MvU05Oai9EY01BWHI4NG5qcDlh?=
+ =?utf-8?B?YU8wQ3l2aVhmK0lNREM4eWNPWHVUUnliU2ZsUGxmQi9qMmNxZ3NINFpaeTVs?=
+ =?utf-8?B?ODhSMENIN1JVWEc4dEV4OUFJelNVeFBBRmgwYXhMNmtoMHBQcVlCZjF3T0tE?=
+ =?utf-8?B?OVBWemIzdStpOXphYmlHMW82aHh4Yi96OXJVdXdSN0d1NUUwTlNiZzBsbkEw?=
+ =?utf-8?B?Kzd3aWFPdDlhS2JYcHM2N0tZNzZrakZWbFBHaEJoUm1Lb0kvRXBlQVYzcW8x?=
+ =?utf-8?B?RDFZb3RVM0hVZmxVbUZpMi9pS1ZxR2NjS1B2QXE3THcyeERGcmhpeXdveEdF?=
+ =?utf-8?B?dGV6OER6a3V4bklZOVJpdlYxNlNmNkVrVnZyUCtnandXMVY2RHIxSXFyRyt2?=
+ =?utf-8?B?L29rWkpZb0ZadzRaQXZ1VHE3WEV6d0MvNkM3QW8xaUs1Z1dQWFFoNHl6azYr?=
+ =?utf-8?B?ZGI4QjB0a3JkMUQ1M0FnL0Vwemc1L2F3UVYrWCtOK1JIWXNiejRScW9XQmoz?=
+ =?utf-8?B?YTIxTnVzSE8zRTJ1cldCRHpneURWOVA3bGhwY1Zyby85c2hsYWlONGtOWkpq?=
+ =?utf-8?B?QzljZ2VyVmVKVmY4eFpweElKa0lLTG5lemFHZ1lKeTN4VUh0Y29pWWNCcFRN?=
+ =?utf-8?B?QTRCR21TSXZPT3VvcHhCb0hoY1k5Z0h5S0J2d1dWejY1NlpScFdDV2JHemgz?=
+ =?utf-8?B?b1J6WTJWMlJQeWtXSHJ4aFp4WVY0dXlLZHVlNFNQY0xNOW9lcHBicll1cWov?=
+ =?utf-8?B?MEFIQWFmSGVZVkdIYXJkdzdGd25RNFdhZ1BjMXJGc0o5QlFLcFJVOVhiNXFI?=
+ =?utf-8?B?bkVOMjE5THo1d3ZPelFwdzkzay9ZNSsxbU9ZeDdLaFJ0TEpuSkZyaW5GZlBn?=
+ =?utf-8?B?N0hJVHhOQ3BvaTQzWE52dGhtZ3pwRHdBc01yY0pOd3B5TW9sK1d2UDA3YTNK?=
+ =?utf-8?B?K1d6b2h0L0pkZ2lwMFZJVHVmSEt1L0xvaTRTZXZPYUFUNTF4M29zc2M0YURB?=
+ =?utf-8?B?WFNMQnBObU9BUFZ4ZlZTNFl6eWQ0cCtLY21RU0Z1bFBUblQ5UWh1bmt2bWdk?=
+ =?utf-8?B?TXpOY1owbkQ0N2t1V1ZGRTY5Smw4SGVJckFraW5KZnhsRzU2cGpyRVhydE5s?=
+ =?utf-8?B?U0FXY0laNnVjdWFJWEpXdmJXUWl1UzJVQkYvY21HOW5yZDdJT2hsRXRDbFhh?=
+ =?utf-8?B?N2RaTzc1aDFGdDdmVkg1bjFpMksyQVBLSHI1RGhwbkpvTm1TZVdHd0lTRWtr?=
+ =?utf-8?B?TjFqVjhDTE5kL05wWjhOVnV1MnZkbzBYNzZtMVM3NU9FTko0TlU0ODhSSUJv?=
+ =?utf-8?B?VW5ySXlNM1BibWFiY2lkVDFLOHV6b1M2bERaOExoMVVKRXhUMkNrTkpJcXdQ?=
+ =?utf-8?B?UnhKQUtvV1I4KzV4UndsalBYWVFqRGF1Q1cyTmJuWmtrd0xNcTh6UT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83a00c15-36b4-40b7-03e2-08de8c087d70
+X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 13:55:22.7281
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PNpSKzt9a3WtLHeIsZM/NpMm2FXkV9+ffuZ08Q4kgc+StoZaDyxu72b1IjdX9SpenJfio/vTKta12JnbzZufnQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5370
+X-purgate-ID: tlsNG-720697/1774619725-6957CDB8-C56201F6/0/0
 X-purgate-type: clean
-X-purgate-size: 3489
+X-purgate-size: 2508
 
-On 27.03.2026 13:47, Oleksii Kurochko wrote:
-> On 3/24/26 3:04 PM, Jan Beulich wrote:
->> On 13.03.2026 17:44, Oleksii Kurochko wrote:
->>> --- a/xen/arch/riscv/Makefile
->>> +++ b/xen/arch/riscv/Makefile
->>> @@ -3,6 +3,7 @@ obj-y += cpufeature.o
->>>   obj-y += domain.o
->>>   obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
->>>   obj-y += entry.o
->>> +obj-$(CONFIG_HAS_EX_TABLE) += extables.o
->>
->> Simply obj-y please as long as the select is unconditional.
-> 
-> I see your point and at the moment there is no also other options how
-> to handle case(s) for which exception table is introduced now. But if 
-> potentially another mechanism will be introduced what will be the point 
-> to have extable.o code in the final binary?
+Auto-discovered serial PCI devices when using device=amt|pci won't get
+->ps_bdf_enable, and as such some of the logic (like making sure the
+respective BARs are enabled) won't be applied to them.
 
-I'd like to suggest to keep things simple as long as they are simple. It
-might be different if you firmly knew the other variant is going to be
-needed pretty soon.
+Fix by unconditionally setting ->ps_bdf_enable for all PCI serial devices,
+and removing the special case that was done in some places by checking
+whether the ->bar was set.  This also allows simplifying the logic in
+pci_serial_early_init().
 
->>> +static bool ex_handler_fixup(const struct exception_table_entry *ex,
->>> +			                 struct cpu_user_regs *regs)
->>
->> Nit: Bad indentation.
->>
->>> +{
->>> +	regs->sepc = ex_fixup(ex);
->>> +
->>> +	return true;
->>
->> Nit: Bad use of hard tabs.
->>
->> And then - why the boolean return type, when this can't fail anyway?
-> 
-> As potentially we could have other handlers which might return not only 
-> true, so it will be easier to handle return type inside fixup_exception().
-> 
-> But if you think there is no any sense to have for handlers the same 
-> signature then I am also return void instead of bool for 
-> ex_handler_fixup().
+Fixes: 9738db88f68f ("xen: Automatically find serial port on PCI/PCIe and AMT devices.")
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - New in this version.
+---
+ xen/drivers/char/ns16550.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-It's not like there's no sense in that at all, but again - let's keep things
-simple as long as they are simple.
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index d384f1c69d2c..d05dc506ed9c 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -283,7 +283,10 @@ static int cf_check ns16550_getc(struct serial_port *port, char *pc)
+ static void pci_serial_early_init(struct ns16550 *uart)
+ {
+ #ifdef NS16550_PCI
+-    if ( uart->bar && uart->io_base >= 0x10000 )
++    if ( !uart->ps_bdf_enable )
++        return;
++
++    if ( uart->io_base >= 0x10000 )
+     {
+         pci_conf_write16(PCI_SBDF(0, uart->ps_bdf[0], uart->ps_bdf[1],
+                                   uart->ps_bdf[2]),
+@@ -291,9 +294,6 @@ static void pci_serial_early_init(struct ns16550 *uart)
+         return;
+     }
+ 
+-    if ( !uart->ps_bdf_enable || uart->io_base >= 0x10000 )
+-        return;
+-
+     if ( uart->pb_bdf_enable )
+         pci_conf_write16(PCI_SBDF(0, uart->pb_bdf[0], uart->pb_bdf[1],
+                                   uart->pb_bdf[2]),
+@@ -440,7 +440,7 @@ static void __init cf_check ns16550_init_postirq(struct serial_port *port)
+         unsigned int, 1, (bits * uart->fifo_size * 1000) / uart->baud);
+ 
+ #ifdef NS16550_PCI
+-    if ( uart->bar || uart->ps_bdf_enable )
++    if ( uart->ps_bdf_enable )
+     {
+         if ( uart->param && uart->param->mmio &&
+              rangeset_add_range(mmio_ro_ranges, PFN_DOWN(uart->io_base),
+@@ -1335,6 +1335,7 @@ pci_uart_config(struct ns16550 *uart, bool skip_amt, unsigned int idx)
+                 if ( param->fifo_size )
+                     uart->fifo_size = param->fifo_size;
+ 
++                uart->ps_bdf_enable = true;
+                 uart->ps_bdf[0] = b;
+                 uart->ps_bdf[1] = d;
+                 uart->ps_bdf[2] = f;
+-- 
+2.51.0
 
->>> +struct exception_table_entry {
->>> +	int32_t insn, fixup;
->>> +};
->>> +
->>> +extern struct exception_table_entry __start___ex_table[];
->>> +extern struct exception_table_entry __stop___ex_table[];
->>> +
->>> +#ifdef CONFIG_HAS_EX_TABLE
->>
->> Why, when this is a RISC-V specific header and HAS_EX_TABLE is selected
->> unconditionally?
-> 
-> To handle the potential in future case that CONFIG_HAS_EX_TABLE will 
-> become conditional.
-> I thought that it makes sense to be in sync with common/virtual_region.c 
-> also uses ifdef around exception table related information.
-
-But that's common code, which has to deal with mixed needs of the various
-architectures.
-
->>> --- a/xen/include/xen/xen.lds.h
->>> +++ b/xen/include/xen/xen.lds.h
->>> @@ -219,4 +219,14 @@
->>>   #define VPCI_ARRAY
->>>   #endif
->>>   
->>> +#ifdef CONFIG_HAS_EX_TABLE
->>
->> No real need for this?
-> 
-> Here I can agree that there is not reason as if CONFIG_HAS_EX_TABLE is n
-> then no one is expected to use exception table so the section is empty 
-> and don't occupy any extra space in binary (except potentially some 
-> space because of alignment).
-> 
-> 
->>
->>> +#define EX_TABLE                  \
->>> +        . = ALIGN(POINTER_ALIGN); \
->>
->> Strictly speaking the original 8 (in x86 code) as much as this is more
->> than we need - each element is a struct of 2 4-byte entities, after all.
-> 
-> For the  current struct - yes, we can do . = ALIGN(4) but if the 
-> architecture will add uint64_t inside (or unsigned long) shouldn't we 
-> then have ALIGN(POINTER_ALIGN)?
-
-Along the lines of what I said above, here things want to be consistent.
-The alignment effected should be possible to justify by just what is in
-the tree, without resorting to any unknown future.
-
-Jan
 
