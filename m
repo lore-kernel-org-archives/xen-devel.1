@@ -4,62 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ACF110BA431
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 07:31:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1265097.1556173 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBB5810BA432
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2026 07:56:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1265114.1556200 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w61eX-0006AN-HY; Fri, 27 Mar 2026 07:30:45 +0000
+	id 1w6232-0001e1-VF; Fri, 27 Mar 2026 07:56:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1265097.1556173; Fri, 27 Mar 2026 07:30:45 +0000
+Received: by outflank-mailman (output) from mailman id 1265114.1556200; Fri, 27 Mar 2026 07:56:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w61eX-0006AG-Db; Fri, 27 Mar 2026 07:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 1265097;
- Fri, 27 Mar 2026 07:30:44 +0000
+	id 1w6232-0001du-RL; Fri, 27 Mar 2026 07:56:04 +0000
+Received: by outflank-mailman (input) for mailman id 1265114;
+ Fri, 27 Mar 2026 07:56:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1w61eW-0006A4-4I
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 07:30:44 +0000
+ (envelope-from <penny.zheng@amd.com>) id 1w6231-0001Pc-7t
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 07:56:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w61eV-004qDc-5E
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 08:30:43 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1w6230-005b5O-Jw
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2026 08:56:02 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69c6321b-5cb7-0a2a0a5109dd-0a2a4502e652-38
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:30:42 +0100
-Received: from [52.101.53.6]
- (helo=BL0PR03CU003.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69c6321f-63bb-0a2a45020019-34653506b7bf-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:30:40 +0100
-Received: from BYAPR02CA0031.namprd02.prod.outlook.com (2603:10b6:a02:ee::44)
- by DS7PR12MB6240.namprd12.prod.outlook.com (2603:10b6:8:94::13) with
+ (envelope-from <penny.zheng@amd.com>)
+ id 69c63812-2eae-0a2a0a5409dd-0a2a4501a130-0
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:02 +0100
+Received: from [40.107.208.21]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <penny.zheng@amd.com>)
+ id 69c63810-6400-0a2a45010019-286bd015fa4b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Mar 2026 08:56:02 +0100
+Received: from DS7PR03CA0185.namprd03.prod.outlook.com (2603:10b6:5:3b6::10)
+ by SAWPR12MB999140.namprd12.prod.outlook.com (2603:10b6:806:4e2::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.8; Fri, 27 Mar
- 2026 07:30:35 +0000
-Received: from SJ1PEPF000023CF.namprd02.prod.outlook.com
- (2603:10b6:a02:ee:cafe::1e) by BYAPR02CA0031.outlook.office365.com
- (2603:10b6:a02:ee::44) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.33 via Frontend Transport; Fri,
- 27 Mar 2026 07:30:35 +0000
+ 2026 07:55:57 +0000
+Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::a3) by DS7PR03CA0185.outlook.office365.com
+ (2603:10b6:5:3b6::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.22 via Frontend Transport; Fri,
+ 27 Mar 2026 07:55:57 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000023CF.mail.protection.outlook.com (10.167.244.11) with Microsoft
+ DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 07:30:35 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 27 Mar
- 2026 02:30:35 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 27 Mar
- 2026 02:30:34 -0500
-Received: from [10.71.194.215] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Fri, 27 Mar 2026 02:30:33 -0500
+ 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 07:55:57 +0000
+Received: from penny-System-Product-Name.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Fri, 27 Mar 2026 02:55:53 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,225 +66,137 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TxsyZx4SfZ5Z0I6LWyHCoQrxWBu7Bs8/cv5wVkccyBznngoChRhZnWZc5woApYXYoPXBHLMwg3e6C6dCK9QnnbQqS5YIoyZlSyUSskaJqfeRsIblfWCt+BlFuLWKIYn9Ls1aGMdWEFr5e1G47zQ20p6SHbAW33rFHmgvaC9AM1OZEjdNafiPCfcndH94LjfyEpp0pNkt17zcrJp9WCCYVH+cis3Ck3O0jFp9U3/ITFaRhAkCfDDoW3PqcXXOx7rAT2l1s5zoPTp9SQWB+H0ECdnH/Mm6rrWKiNCNeD/UdW6Dd/4hX8Nu1gFyu517r69nuvTL0G8YtHv0iom2mF3dSg==
+ b=zC7SEEq8vWMuIDXfUO6udV4HiArIfhki+36Log5uAKhImzKgYV90Ok3uj3zI4IUcPCAY56/taL4+zFkCLjRD2NYaqa3QM4jYmkIDvIhs8htOYZgUCAMn/qqNBHjqsK9GKqn1eSb+n7bYAVTeKzpyaE/NfIeHA6+L9h/8FiYKxouV17UXLhtzhVQKTceY7b60rMBs8mn8Jyt+eL0XTgui7pFVjV/xjT2O/fT0c3LZUJaCrD4kTXrlPz2ADW6qVmNwFv1kNezLu7UCDtjRwEK5lZwif7K8WUwmQ7x7TI3L3V9etKPTcMSEaL185K81M9SlqmxYykLm6SlmbmmtjeL7Tg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B+x7CuKT81cEFIO+nKmHwglHzpWdK98meyNdtzmteFU=;
- b=xut/VQIwaOfwSa47jAlSSsFUeNu7A34y4igHu2FOnxfr1qpcLLDVbjkSXZIWcmx/1ZdLnYCM9wjMMHPAJJLv3QHAS96InmaqKDx0HUJJjFIthP9j0FQTCzN91h9nMZp8rZcGZHyi7z+3m4GVjEQC4z0/3qcV+QeI0KVIfq7uweZwRX1WzWmdu4jbc+PXbvra0lFD5WSe4Dk6D8x/l6VhAWjXnNES7O9YejiXbAWfbO+TcfgGh+BYBIAU+SqxYEHPJmeVWsOKWBDLUQkmok1jLEF2bhPCAoLyuZaDEFDk52c1vVVTmLPvvrkrDZ6gdlFHKT2kGamVcVQKb3EvqUh0/g==
+ bh=FNsX0tz7KlxvUQL2XaR7OMvrzRJaltI17tS9Ud2WDAA=;
+ b=XnZ/PWz+cBLW9r1WryD3oMmzYX2IEDIKBHx+bEO+Ys5VyhWOHPjVrm64ZDf7/3lA5iTJnnUQaOyi7+Is5lsyc6na6fCHVB97A5XClKHzjjwk22oGGJHnRfVi9snrePBBQLEktfBPRjmGaI3PdpiHikTclwr5ChRHdQy7qfpwPQ6lOsDNIMdTq7vjbv/vfLDU4lf9e4uOLijV8bTBcsUzjCDd13ZolDxjIDMnHr9iptjzxFzjDWf+rLKWUZav2vdYLvaqsUe0cNxkbB6ygiHxeRsO4ORJ9DsorlxaHVxiesKx/x7Nmfasu/lgPxsJR5sFsgenKDnZx+d+NJiO08UlJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B+x7CuKT81cEFIO+nKmHwglHzpWdK98meyNdtzmteFU=;
- b=IPfFn04kUBYC4iAVM6b9vfH64K/ejc1kwiatReK9z0PzJcg1B1+1MDAYXe2E/mnoG06EGJanu7M94ah5RBa2L67cgbrcnVs52llUjljLUV6TeO9WWYxJ7Ied35VBZ6E4oZklB6duEiMlhfLHMXbp+W7KdkqF2J/Fp3zhL1YacXw=
+ bh=FNsX0tz7KlxvUQL2XaR7OMvrzRJaltI17tS9Ud2WDAA=;
+ b=B2b50Wg0e0a9j9P2GwUQN1CRcuFyVI2X776RCK6okwsE390SiypyNBuhE/gV2aS8Ydt0p+JTLhJv2d/bmyZSPbg5+4FwUsygCF4ckDJU6gVsOCzcukDSs3qcEI05Bz+khLaQji8iTHhPOPtzUsawj0LVv/ifRZOPpcW9/OYy9k0=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <618e3227-10c7-46e4-9328-3d7d981fddfa@amd.com>
-Date: Fri, 27 Mar 2026 08:30:33 +0100
+From: Penny Zheng <Penny.Zheng@amd.com>
+To: <xen-devel@lists.xenproject.org>, <alejandro.garciavallejo@amd.com>
+CC: <ray.huang@amd.com>, Penny Zheng <Penny.Zheng@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Penny Zheng <penny.zheng@amd.com>
+Subject: [PATCH v1 2/3] xen: introduce shared_info_to_gfn()
+Date: Fri, 27 Mar 2026 15:50:24 +0800
+Message-ID: <20260327075025.3008606-3-Penny.Zheng@amd.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260327075025.3008606-1-Penny.Zheng@amd.com>
+References: <20260327075025.3008606-1-Penny.Zheng@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Increase DOM0_FDT_EXTRA_SIZE to support max
- reserved memory banks
-To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <20260326131535.662466-1-oleksandr_tyshchenko@epam.com>
- <29769bd9-8410-417b-9ad8-84131956db57@amd.com>
- <7d52cf29-c0bb-4e39-ae10-2b43f3e8e921@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <7d52cf29-c0bb-4e39-ae10-2b43f3e8e921@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CF:EE_|DS7PR12MB6240:EE_
-X-MS-Office365-Filtering-Correlation-Id: ceb3e295-f40b-4bc2-4518-08de8bd2bcac
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|SAWPR12MB999140:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd6f8299-73fd-4ca5-5474-08de8bd64775
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|376014|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|376014|82310400026|1800799024|56012099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	Y/4NbRb9Hid1iNJdyh2l9ov7W1dNqPIrjSiYntvGvLp9IML86w293pP/yyebQ8V+UHNmonHmemWENIRlS0e2GagQzPlNlSCBp5UZqAbmJrqTMSFRnH2NTqxhH6pxRvuFBLel5NojBNEbMfdeaEsgYavlSZ8DvInRHoGn4MaBJyy4EB7aCucuvAZRvufqyGzTl/2GbiczFqAg9YgJoLHSswaZJ2wH0I59R+StU+tDuzcnBbrx2smKeabT7tF1r8c4YZ/fl5D1kQe0pVTvsAs985Gp78VzLgeV63Z9Znb4t7V5yTvceYQCw3INJDczODB/+D8yjpyDr+Ioh+ooNkgO+5gNr3iLJogHc7FvkWy51IU8lJ4PWjfh/BBs03XdYOoISvzXim0+INUfS9Z6L+QsiaJy5OtQlhifa30NIHBT6x0H2S3a2YoAIl5U7uGleDCqAy5qc6hGD5buAnvXvhZwc2LDaPG3xz1/hVgtu1gWRjJvmNezQP5qGSnkLqJbiCRPJQhj1ux+a5GJ//BQBt3gYu74WakBGPjyCs4IOapgK0UdiJhOOzZAAk3clU8EdgP9zYA/oUPChPWKN98i1S9NbCT5SBOdB+dz7M8fjPUH+YKvoF353CriS9irA4NAlPqOX8uSBRcJquoXOi27Q5AB0NSyand2mttvtnddbfZZm5QFnrRAQjABOq4uHPluSn6TezlmfzzxOqGxCo8LOXJ2kXrQuS28zswFQvhicqxuSdYl1DbYgbFTLm3wqPaZ7FjhKa5JzrGXZKgfyZ+T0Nw5cA==
+	xYmsDNwZFSenjicddY0Wln64GqMWPMXmkMfFANZkyp3fVTpRyUvjrIiyNTJM8ByjDWFgocA0DzL+cRkP/CPdGd1YD92a3Mer7fVjJvEtE7QE9pwmaZQFOOF664rWrJEKbqQFfLARZKqc9xCfmSxO20IdAWwxhWhcqOdYdB5c16s5/6EqgRa5gwMx3sq+P7gqWc33KGWth0q6646wJEfNmLgqSN2043dSffRlrldfb5OBo0I5pwkbtA0Epp44b6ZLhFPi8w76yGEsaMCjs05xQLLviRvQd/82B8uW91sdKStu+40KePn0jRoXAmRdYFRrufuOwDwzmyvDIsdVaopzwjE6nCs+G3vp5xgldiLwVRIBAbUVfyWkrJMWizMzZhyQkqGQe6bfUuT2DmhbWp8rNw08hY98mIKT4gprusky+spsy39Qs/mW9OMXYhxb6mmqiY2pTFmrU7CNv3wdmDO8ahipkL3a8nmzNGsE4YNgBHZo/9LWvGa4K+nFraE58I+FLemg/bdINX/oK2Ro4d3gJEB0ZwQhrJ7/2Ipvb1qIvChmA1vBYdzjaBZy9VtqNCMn1bASGf0uc1ULDLTJ4CiN49Bi4RRtPBBd7lvUs1q1Gj/XXyrGI1k1s3Kmf+Jx2UjgYFIJEYJe6MkzCnA4gJaXm2PsNXhBhyDZOA0q7y0LZFfddYWmiOTCcCiRik/PTZAArnj4MrbfTtC10e09L8whVaWH9wFVScnN77yvOSGHUd6xq++SnxOqZ/yrJukphmOJ8ancOakr8T49WXzYHFB9wQ==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	oljLyuOXxRTwKYX7vPq/tGuGrCwbEx57jfY0R5JLhSmCQRKGq4bIcAvScqsVAVpPS+gAtCaifuGDl+ew3+hDVMHCfh+l+Icl62SV100jJnNsXtTWwHwUxX4709ESMPiRCfsp6qgtiCdeaO4Lfdz+0yRr7LOQ6IJWdx3LaxX8a6orfSH7LOHP765O/zDqy0M359fgkQWoEEtmhVKOXMUVO9PhBi3YV24UdvXPtCs8tJQKnn+vtwnI8KlDV1Nt1mGXi7G3GqPGXwijx6pbdOqIR+znnzbF042/WL/eEvIiYqKVH1+kc1HauTWWG4Ued9PZqlOWPyAoM1WlqrXro+7vX7+KNZBpjwdxcFJ/mVrVaWxNUBnCQKHKivi+1+njBREQK/UmlG80t+eXvddSTI19dEUYog7aM7ItNsXmmD6uZgWVzEuG89DPMFbW3qnVuf7O
+	A8VTo/pORTP+2pYrrybf9YerEAoonv7n36O3olGpMIFEwgB8794FhGQbqqe+YhATuqTUYSSIZxkXXe93IBxocspCL4FskCDEdlmGoFYlDx7l1zA+NrMr5n81ncvodb7b6CIxPFQV35atiuKOnaXaZ/2ivybZzUFbz/8FK1zGw3DTXPJtxARL2EON2qxuLkD3Sa1lctIZKIuX+l95rOIvK+cwi2o0Epnu4A4TtM6Gs8TpfATl04mFyXVkNgY8U7ovXobI/TcSucvgvq++M+MFtl5aWumaoU3GDqTszrhQeCWhFaGn892vYu1CxbqHRWjNK8GRX7jzue/wOqe/Nb4p83cf3wAWgMM0K573ubPCjjM9/OaY0rDh/pxExhuOf7yUMy1KHeOfViEIK982IcdXY6ieB4MiYkjZTW9fH3Xj7M+j2Rhm04RP/tSQjww/GCg7
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 07:30:35.6847
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 07:55:57.0627
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ceb3e295-f40b-4bc2-4518-08de8bd2bcac
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd6f8299-73fd-4ca5-5474-08de8bd64775
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023CF.namprd02.prod.outlook.com
+	DS3PEPF000099DC.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6240
-X-purgate-ID: tlsNG-720697/1774596640-BDA9CDB8-CF96DBAB/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAWPR12MB999140
+X-purgate-ID: tlsNG-d62444/1774598162-48A14DF3-E19205C8/0/0
 X-purgate-type: clean
-X-purgate-size: 6255
+X-purgate-size: 2550
 
+On ARM, mfn_to_gfn() is a simple identity macro that actually does not return
+the correct GFN for domains other than direct-map ones, so getdomaininfo() is
+returning the wrong shared_info_frame on ARM.
 
+Introduce a common shared_info_to_gfn(d) macro to output correct GFN for both
+ARM and x86 in getdomaininfo():
+- ARM: uses page_get_xenheap_gfn() to read the stored GFN
+- x86: simply wraps the existing mfn_to_gfn() solution which consults the M2P
+       table
 
-On 26/03/2026 20:03, Oleksandr Tyshchenko wrote:
-> 
-> 
-> On 3/26/26 18:50, Orzel, Michal wrote:
-> 
-> Hello Michal
-> 
->>
->>
->> On 26/03/2026 14:15, Oleksandr Tyshchenko wrote:
->>> Xen fails to construct the hardware domain's device tree with
->>> FDT_ERR_NOSPACE (-3) when the host memory map is highly fragmented
->>> (e.g., numerous reserved memory regions).
->>>
->>> This occurs because DOM0_FDT_EXTRA_SIZE underestimates the space
->>> required for the generated extra /memory node. make_memory_node()
->> Where does this extra /memory node come from? If this is for normal reserved
->> memory regions, they should be present in the host dtb and therefore accounted
->> by fdt_totalsize (the host dtb should have reserved regions described in /memory
->> and /reserved-memory. Are you trying to account for static shm regions?
-> 
-> 
-> I might have misunderstood something, but here is my analysis:
-> 
-> The extra /memory node is generated by Xen itself in handle_node() -> 
-> make_memory_node() (please refer to the if ( reserved_mem->nr_banks > 0 
-> ) check).
-> 
-> Even though the normal reserved memory regions are present in the host 
-> DTB (and thus accounted for in fdt_totalsize), Xen generates a new 
-> /memory node specifically for the hardware domain to describe these 
-> regions as reserved but present in the memory map. And since this node 
-> is generated at runtime (it is not a direct copy from the host DTB),
-> its size must be covered by DOM0_FDT_EXTRA_SIZE.
-Yes, but the original DTB should also have these reserved regions described in
-/memory nodes, thus taking up some space that is already accounted in
-fdt_totalsize. Are you trying to say that in host DTB, these reserved ranges fit
-nicely into e.g. a single /memory node range (i.e. a single reg pair covering
-most of the RAM)? I can see that it might be possible but the commit msg needs
-to be clear about it. As of now, it reads as if the problem occured always when
-there are multiple reserved memory regions. That's not true if a host DTB
-generates one /memory per one /reserved.
+Suggested-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Signed-off-by: Penny Zheng <penny.zheng@amd.com>
+---
+ xen/arch/arm/include/asm/mm.h  | 2 ++
+ xen/arch/x86/include/asm/p2m.h | 3 +++
+ xen/common/domctl.c            | 3 +--
+ 3 files changed, 6 insertions(+), 2 deletions(-)
 
-Another issue is with the static shm nodes. User specifies the regions in the
-domain configuration and Xen creates *additional* nodes under /reserved and
-/memory that afaict we don't account for.
-
-> 
-> For the instance, 10 reserved regions:
-> 
-> (XEN) RAM: 0000000040000000 - 000000007fffffff
-> (XEN)
-> (XEN) MODULE[0]: 0000000043200000 - 000000004330afff Xen
-> (XEN) MODULE[1]: 0000000043400000 - 0000000043402fff Device Tree
-> (XEN) MODULE[2]: 0000000042e00000 - 000000004316907f Ramdisk
-> (XEN) MODULE[3]: 0000000040400000 - 0000000042d2ffff Kernel
-> (XEN)  RESVD[0]: 0000000040009000 - 0000000040009fff
-> (XEN)  RESVD[1]: 0000000040008000 - 0000000040008fff
-> (XEN)  RESVD[2]: 0000000040007000 - 0000000040007fff
-> (XEN)  RESVD[3]: 0000000040006000 - 0000000040006fff
-> (XEN)  RESVD[4]: 0000000040005000 - 0000000040005fff
-> (XEN)  RESVD[5]: 0000000040004000 - 0000000040004fff
-> (XEN)  RESVD[6]: 0000000040003000 - 0000000040003fff
-> (XEN)  RESVD[7]: 0000000040002000 - 0000000040002fff
-> (XEN)  RESVD[8]: 0000000040001000 - 0000000040001fff
-> (XEN)  RESVD[9]: 0000000040000000 - 0000000040000fff
-> ...
-> 
->  From make_memory_node():
-> 
-> (XEN) Create memory node
-> (XEN)   Bank 0: 0x50000000->0x70000000
-> (XEN) (reg size 4, nr cells 4)
-> 
-> 
-> 
-> (XEN) Create memory node
-> (XEN)   Bank 0: 0x40009000->0x4000a000
-> (XEN)   Bank 1: 0x40008000->0x40009000
-> (XEN)   Bank 2: 0x40007000->0x40008000
-> (XEN)   Bank 3: 0x40006000->0x40007000
-> (XEN)   Bank 4: 0x40005000->0x40006000
-> (XEN)   Bank 5: 0x40004000->0x40005000
-> (XEN)   Bank 6: 0x40003000->0x40004000
-> (XEN)   Bank 7: 0x40002000->0x40003000
-> (XEN)   Bank 8: 0x40001000->0x40002000
-> (XEN)   Bank 9: 0x40000000->0x40001000
-> (XEN) (reg size 4, nr cells 40)
-> 
->>
->>> aggregates all reserved regions into a single reg property. With
->>> NR_MEM_BANKS (256) and 64-bit address/size cells, this property
->>> can grow up to 4KB (256 * 16), easily overflowing the allocated
->>> buffer.
->>>
->>> Fix this by increasing DOM0_FDT_EXTRA_SIZE to account for
->>> the worst-case size: NR_MEM_BANKS * 16 bytes.
->>>
->>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>> ---
->>> Just to be clear, I have not seen a real-world issue with this.
->>> The issue was observed during testing of limit conditions.
->>> With this patch applied, Xen successfully boots the hardware domain,
->>> exposing 256 reserved memory regions to it (using a synthetically
->>> generated configuration).
->>> ---
->>> ---
->>>   xen/arch/arm/domain_build.c | 6 ++++--
->>>   1 file changed, 4 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
->>> index e8795745dd..7f9f0f5510 100644
->>> --- a/xen/arch/arm/domain_build.c
->>> +++ b/xen/arch/arm/domain_build.c
->>> @@ -100,9 +100,11 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
->>>   /*
->>>    * Amount of extra space required to dom0's device tree.  No new nodes
->> This comment would want to be updated because since its introduction things have
->> changed. Even the 128 came up as a result of adding /hypervisor node.
-> 
-> You are right. I suggest the following wording:
-> 
-> Amount of extra space required to dom0's device tree.
-> This covers nodes generated by Xen, which are not directly copied
-> from the host DTB. It is calculated as:
->   - Space for /hypervisor node (128 bytes).
->   - One terminating reserve map entry (16 bytes).
->   - Space for a generated memory node covering all possible reserved
->     memory regions (NR_MEM_BANKS * 16 bytes).
-> 
-> 
->>
->>>    * are added (yet) but one terminating reserve map entry (16 bytes) is
->>> - * added.
->>> + * added. Plus space for an extra memory node to cover all possible reserved
->>> + * memory regions (2 addr cells + 2 size cells).
->>>    */
->>> -#define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry))
->>> +#define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry) + \
->>> +    (NR_MEM_BANKS * 16))
->>>   
->>>   unsigned int __init dom0_max_vcpus(void)
->>>   {
->>
->> ~Michal
->>
-
-~Michal
-
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index d1873ec212..8d61b74e4f 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -308,6 +308,8 @@ struct page_info *get_page_from_gva(struct vcpu *v, vaddr_t va,
+ /* Xen always owns P2M on ARM */
+ #define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
+ #define mfn_to_gfn(d, mfn) ((void)(d), _gfn(mfn_x(mfn)))
++#define shared_info_to_gfn(d) \
++    page_get_xenheap_gfn(virt_to_page((d)->shared_info))
+ 
+ /* Arch-specific portion of memory_op hypercall. */
+ long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index 3a5a5fd43c..725403b28f 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -582,6 +582,9 @@ static inline gfn_t mfn_to_gfn(const struct domain *d, mfn_t mfn)
+         return _gfn(mfn_x(mfn));
+ }
+ 
++#define shared_info_to_gfn(d) \
++    mfn_to_gfn((d), _mfn(virt_to_mfn((d)->shared_info)))
++
+ #ifdef CONFIG_ALTP2M
+ #define AP2MGET_prepopulate true
+ #define AP2MGET_query false
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index 93738931c5..284926aa61 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -104,8 +104,7 @@ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info)
+ #ifdef CONFIG_MEM_PAGING
+     info->paged_pages       = atomic_read(&d->paged_pages);
+ #endif
+-    info->shared_info_frame =
+-        gfn_x(mfn_to_gfn(d, _mfn(virt_to_mfn(d->shared_info))));
++    info->shared_info_frame = gfn_x(shared_info_to_gfn(d));
+     BUG_ON(SHARED_M2P(info->shared_info_frame));
+ 
+     info->cpupool = cpupool_get_id(d);
+-- 
+2.43.0
 
 
