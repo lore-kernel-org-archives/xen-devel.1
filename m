@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6279810D14A9
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 12:00:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1267448.1556931 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C07110D14A6
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 12:00:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1267452.1556959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7BHf-0000FO-36; Mon, 30 Mar 2026 11:59:55 +0000
+	id 1w7BHh-0000pe-AF; Mon, 30 Mar 2026 11:59:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1267448.1556931; Mon, 30 Mar 2026 11:59:55 +0000
+Received: by outflank-mailman (output) from mailman id 1267452.1556959; Mon, 30 Mar 2026 11:59:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7BHe-0000FH-W9; Mon, 30 Mar 2026 11:59:54 +0000
-Received: by outflank-mailman (input) for mailman id 1267448;
- Mon, 30 Mar 2026 11:59:53 +0000
+	id 1w7BHh-0000oS-4E; Mon, 30 Mar 2026 11:59:57 +0000
+Received: by outflank-mailman (input) for mailman id 1267452;
+ Mon, 30 Mar 2026 11:59:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1w7BHc-0000F3-TR
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 11:59:53 +0000
+ (envelope-from <Mykyta_Poturai@epam.com>) id 1w7BHf-0000HC-Cl
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 11:59:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7BHb-003QIn-Ua
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 13:59:51 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1w7BHe-00CdRq-Oc
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 13:59:54 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 69ca65a8-2eae-0a2a0a5409dd-0a2a4509bac8-38
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:51 +0200
-Received: from [52.101.66.84]
- (helo=DUZPR83CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69ca65af-bab6-0a2a0a5309dd-0a2a4503af12-42
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:54 +0200
+Received: from [52.101.70.120]
+ (helo=AS8PR04CU009.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 69ca65b7-e484-0a2a45090019-34654254c0bd-3
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:51 +0200
+ id 69ca65ba-1947-0a2a45030019-346546784220-4
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:54 +0200
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by PA4PR03MB6847.eurprd03.prod.outlook.com
- (2603:10a6:102:eb::5) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:102:30d::12) by GV1PR03MB8639.eurprd03.prod.outlook.com
+ (2603:10a6:150:95::12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
- 2026 11:59:49 +0000
+ 2026 11:59:52 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.20.9745.027; Mon, 30 Mar 2026
- 11:59:49 +0000
+ 11:59:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,36 +57,33 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BwPh2pPLeNyySPkiQaNd8fxmzTf+vZuT/R8mdzKu8rbDFXkDGdSvjUuBQ2dFGdI8koRQDXFKwhOuS96JYkUVrd/ylrQ15YmQkmanUaAK15OGSl1sLxYgeRBZojrutNd6wp/H5w1c/fad9ZnAgNGOme1lN5Jr0E8caqnAqXPHkIdEyF2j9cgk0ldHmbw8DddHJ9eF6qoU5Js/xSm9HXzXdTqrLd8z4B3KDbcDFF5k3VJ8lokoObkV2sfJHA9YO7CJEBrTJBW9+kbqdgaS9beFGEWtDx9y7RZ0ypeYizbbiCh5d1tqfzXawbXFEsjhTrtZKbtlCLDUzEjRWiYUy9w3bg==
+ b=hIc499sFUw8lkh0bZ9WPSTPEF/tZbScmczs5jRBtBQXZYHpb7WPfRKFzqbDZ6JFmUsdT4sZshblvXnbsYza5WWt7XjlkUOAnElEAwGukPjwcYDjE4fdqMtWi4yaqCLkPHdF1cTOilVaeLebFUNM/WSMA/Y+T6vY/jygc8/Sj5uo+7P8Mvp6FZR6IDuDpMSjyBPTb9xpw0XW+u8Cxcw1B4XmOB6o7vLEjlwULV+uJFhN7DFOL5BxS4Vu9sRnuIFph4fjMM35kT0W1Xrj+cxplc3xeXCemheQPXMVn8iKs010r93Vi1BqmjrgfURrUEAer+tM35p17OzFk9xFp0PtqpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MQjhq1ZOYxXuFsg+35Krc2rMKNWMSZXODxY3onBl7+c=;
- b=ZgHtO57SnnMmKHTMUVIlZEwUxbzQUBdixYANRkJnw10twlMP6mTs1xhuxlfsQejwHPCuoSYeRirHHIPNxKJRZK9q4eNM/Jb4UJjNnOu5kA6XnXtj47NC46n2sWaOAzHtPgwtmU+ms2i2JExfmr7/adsC73NMhND/yNsz3hZ6oZw0vSgkjAl3Qk9KLxr+3QdJ+lL3YDpauZDlb4TUf+qktYfRCihdJjovP4E4pbs/DTI/JbCvioPlA9lyFFWupcIDu6iPWdvqvfbSbf1DarpPMyfvCu/CJ2SV4tSxWVbWhbCdboDGZijVdilSX5voLdSVlN3/iwU/j/UClwQAVNxlNA==
+ bh=UVva9UsjGtzKa4kTaxsRcqz3Xro518EwThLU9bHiHLQ=;
+ b=oaIwkaXabe6VckHHSaH6mrkZ2P6WFkYm2l8trGBDSaPOKEEVtOtoDKiJR/T/mdUvG9ELXvccr8fJHGs+pDesQd4QdSaq/0xYrUk6eRu/3ik4xyflHabrKF9X17ZVfcp8oIUzQF7Z9ZEvroprgzw2SWIo0NxFHpg981SYJ2Cp87QC0DJPrqSAACiI4JoLCRYJMda3yqclDe9inaWhGaVJ4OfEzI8VehtBkStJ6MbDYoPEkSKJdIVy0ioOXlKIEDJpt/R92A4AHLn7C1i2FTc6ltegXwFjk1+ei8pv3ZcHBYSFinc4lIbToydoZADOtHOzFJ4DNyD+Zs501/qxhh9TDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MQjhq1ZOYxXuFsg+35Krc2rMKNWMSZXODxY3onBl7+c=;
- b=t5zJc7fgDX9LbJ8D/2ZpK8HrQKs7r+uHtQbt8bOKSUmirply/3dC+QrDaamcrozoKn0bPmFbnyUJHchtMC5NhEqZE0ykqMcwj8jk5LJ1KgVSUP/owpYpnmT8Hp/IDE+TstXAw+e/x5+J4TK+oWoOm9ETOcaL0+hmCS/txm8lek95nOK3HUALNDXKB93ibuivE6uv5DtBcxEXgOpRKAK6Qwd/gJIO9SanEwl3/wgzRctk9dQ3XsrTjl4UY4UhDAclosc2B/ZUC0YAa60fbQNNUpTxOp5IJFv+m8Qbp269WxrzC3RnTPo5isijCfSpOW9OQo1X10acxD7L5E306fALqw==
+ bh=UVva9UsjGtzKa4kTaxsRcqz3Xro518EwThLU9bHiHLQ=;
+ b=VyiCBU3WxecZXxOV+u6HH58eb8bIXiu3ksJ5dhDx0qzUlr2TRdq6sjss2uo+MkKiHYfGbUmMmx/5aRyYC17aTLeZUqRCal7Yby7b3gmP+KXkjHiSpM2rVSbyJwSdYaGdY0vn2ZwklJlMTVK3olxFQ2qcy4zXzPP2YtPcWi0QLPGmy9zYMGrJU48ep5NTHZuwF/Lq/LLYN0hZP8i81RniNPFOd3iFU4wW72PNVGqcySNZb2MHNRdwZgw0bJB+C5nO1TCw9vJs2f9EtAdpaFJ5BYfdMImykK1XUdPUihV1Pgkga+icsHPWXtgMoqln/ufH+nMbUZJRG/TvvV561azzqw==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Timothy
- Pearson <tpearson@raptorengineering.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Oleksii
- Kurochko <oleksii.kurochko@gmail.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, Juergen Gross <jgross@suse.com>
-Subject: [PATCH v7 0/6] Implement CPU hotplug on Arm
-Thread-Topic: [PATCH v7 0/6] Implement CPU hotplug on Arm
-Thread-Index: AQHcwDy1/SbobzFSYEOfZMP9koGeVg==
-Date: Mon, 30 Mar 2026 11:59:49 +0000
-Message-ID: <cover.1774871881.git.mykyta_poturai@epam.com>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH v7 5/6] tools: Allow building xen-hptool without
+ CONFIG_MIGRATE
+Thread-Topic: [PATCH v7 5/6] tools: Allow building xen-hptool without
+ CONFIG_MIGRATE
+Thread-Index: AQHcwDy3LJnr4T20vUWAas874pXmiw==
+Date: Mon, 30 Mar 2026 11:59:52 +0000
+Message-ID:
+ <73db845e6617130966a565cdca6274db4cb46428.1774871881.git.mykyta_poturai@epam.com>
+References: <cover.1774871881.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1774871881.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -94,133 +91,132 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PA4PR03MB6847:EE_
-x-ms-office365-filtering-correlation-id: 03c07f55-5c41-4716-eaef-08de8e53d85b
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|GV1PR03MB8639:EE_
+x-ms-office365-filtering-correlation-id: a55796dc-0cfa-40eb-83a6-08de8e53da0b
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|376014|7416014|1800799024|56012099003|18002099003|38070700021;
+ BCL:0;ARA:13230040|376014|366016|1800799024|38070700021|22082099003|18002099003|56012099003;
 x-microsoft-antispam-message-info:
- eTBr1rJYGVd3Z4KuyC2C6YBMzSGcjqAE+V0LLqkinW+ccxrQf6uze2psO+1+teB2Oga3vxZHo4paGjewbxRcyaaRA5k1lhdXu+Y/r6lMeQubfX0pWujR8jXjr5nWY2SSU1Eb1YDUdOO5TlyU0XCOXMqQpQvZcNkRkbTtpHyRgYhys+IsJyF8qwgiJnV7xoQgmxVv52wNq/pZzw+p2IQkJHUbK8Cy94c2z3doEAMSxgAqZdFcvZ0OmqUmRI9uI0jGYPHzbgSJ8otpHm1lMDMGd8beBXv8eciXOeM3hbg96AYCQlOzkLZ1ZGQIx21u49JPzNDUMQMo2TjotoK2GsL+W3kunCotkjeorcIfSWg/kCj9YwltGejmenogP+Aw7XGXw1cgzGQtkPy5fozkeeMs0d7/VG0b5B9ydNKo+HhmzCPnthMVeXeWVmzdSURH6ZK1cvOB4ajcvMahZoBSvKVzKY1Jg9vgFOrh2+84hzmETrhcG9TXcsaWgPDUovRfjTio4g/ZzOGbEIbmR7wHIRfG//SyOdKOtNu5OWQvc/ag4viZwC3PFKzfAxFKJEQW2OtZYn9WviW4o/g+RZsr74Y1xDua6aaNNJujk3GFpXXYpYw+O5g1UfXLXbCaG9LLKB9BEjaDx3QSKqOhkSsoc86bLcvNuDLicZyIhs4OPXCtepz8SCbKk2uPyU8IbRqunf+4vNsuNkE5qkxqXAO8VZ/caMZIaa3WFZZtTYfsHCz0tZoIyuwoPTdqlmApct1bjJK/rs4+v6aVwFfqWsrexk9ySJGw4lcUkCCf3kom+wc3GDQ=
+ Nf361VG/sV0FUImvp1vegKN61Dz8HAKlLKRNyVnOK5cWaosrjE4TRY8z1pVG3DC0rxn0Rw14J7+LbjAyb8A2l5NifFT91sODAtaVY+IslGMNmoqu5ZfqxnFtGC84kUy50c3b37EmsGEEPzaJesVoTkOX6zYFDlHjZaqFBMlLbBbRAPfWy+FL94pty6BjTA51qTi3pC1/91a7aEhjrC57Bzq8LaTPp0Uy8AdeduMCSFNlEG6tGZYIsLCBt06aZ4MTCB++C4juPgKPiI0ltfrmkGvw70InDhBsWY3GsNgibk9OUh/Ic5rTynSVVmoKapxbe9Z3aiEpvaiazmYeCbkEgYb/d5/Yw9CHYt/RjBUnVdMchz3Avng6jdexJP9uNGmhbzJU08xiN6a2vShqjZ7MGmRHJXbyJsCDqBlwc6oh5I7JIf6zYSqPXB4Incf2ognHzhhXY0rtPlWZb0QEbCvja+EiH4tdWS52yGtiXpwLT4DHPQRaB2cO/oPLylZHOkPJRxRxY9WVl8PB0DJJDja0K2Fs/I5ORbIXhkEKtDcskiD7bb3ynHLVmpcT2UwH8Q5wkkM069ykBnm0dJajtsmvEmx1AE/nt7RZ5GAeKLl3AHH3pETEt/1tdtl9Vc4EBCZxf686hi8BByWC79dEzU2qhzG15ZRi8bRlQeV6gBhAGgMH81ejj+OZg+nZGFFn3us7pZg4a4VP9EGt0OsE3i3v4AqCFfMoytg9vy0ptChR5U7ghbcG90LKuiqGBmAq58XAv4T3aZIois9hsIWHah/06NnZaDVVjFtPzn+M0B7JZJg=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(56012099003)(18002099003)(38070700021);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?boUnFz6qCNMN3/p7sFeL29fAdlaNQFq99qzjZbwyZhOlCwH6HFqBvvnj9Y?=
- =?iso-8859-1?Q?HHBTqP/7CuljramSpxuqubk1C65yJUDjrPi3+RwnbJgkk1poeSiHjUMEPr?=
- =?iso-8859-1?Q?WocvDoxlS2/D8Sb5iPWYTTDInkOC979LYWOkVFxZ4H6eiiPfZDrzm8LfTW?=
- =?iso-8859-1?Q?P/a7cZZkF6UnwAvWuigUaBDAwOKJmCaRs0cei5KemaSTmKUas7TXxmV1zS?=
- =?iso-8859-1?Q?KKRabBqFUBcnmJkaeyDVWRZnFd67d7Q+AY7lWY/bSkh9jh5a35QZvIzpIM?=
- =?iso-8859-1?Q?VEq6QvVmjwAK5A9uIdiaSU65G1I+94PW9UjQSXS58DAKmkyuR6NWpYtpQc?=
- =?iso-8859-1?Q?ih6QSEii0Eiw4f48ez9B/30eUeU3mT3EvsClMa+DGYiFhDZNy1y1p9K3Xs?=
- =?iso-8859-1?Q?aRhBQLxvj75aTWMeXjwOGn4Cnku8h+4XnJGFQEK70VmnS0nQQmThiMg6bp?=
- =?iso-8859-1?Q?fHqftAD4lXEY+d6p4uIJZr1PcKtt+DjgNXhxRIBBkHsm5ZRXAIvP5xhoic?=
- =?iso-8859-1?Q?ib50tHWu+vZBz636fGsi+jlOnuebZBxfRC6xyAevUhWoJB6iN8DZjFGsx7?=
- =?iso-8859-1?Q?BAhQ75TOnLBLh9/OCti4bLNB9fYK62JyUGmMeRyhK02XlPl+3T7pFfIiE+?=
- =?iso-8859-1?Q?oa+vWOF9H4vYJGuN1MUJDabCw0NXMQn6uyL5aUT5VLhl8j1KvmfDB6Aipx?=
- =?iso-8859-1?Q?r2jqSh//6Q+3mDuh0NMgOEJVvY/v/Np6ZPiidDDq680S2sTfW7iOjuOVlM?=
- =?iso-8859-1?Q?Cw7Hr4AqUT+fziN5HtdmaMvSFUnpwnNHyzEX6JJJppVq14+4+g7ApJ9YbM?=
- =?iso-8859-1?Q?mHZd+5BIZd5PaTXrxGZMQ7uXKi05B64G3LTi6Sj+xC30XjahueKLJtYpbU?=
- =?iso-8859-1?Q?kjTJ1lMIoc9/Mvla8N/YBWAuYZGOJ7zuOg612DPychtWbj2r1uZ1+Bryg8?=
- =?iso-8859-1?Q?EPXnwN0vWE8nbBoQYuCBzWzhvM6f3uAMQtP2TYBNeVmmtCFXZJydvWxhsI?=
- =?iso-8859-1?Q?+Pm1DFPz9fncdd2L5cDrRO0lEN/Myxg9DddwBhs7GqnmyhzUZF1mQuPi9z?=
- =?iso-8859-1?Q?lcdX6ZNY9c2wBZkWvXE6pmFgdBc7OM+SNj/DELlDI4DOWyyCUbd1KAjeWa?=
- =?iso-8859-1?Q?8r0Z1p0Hd6FbBXZFx2jHrB06d4T+VN9fZeTlLQujyFLE2HH0UwbJSW4zzC?=
- =?iso-8859-1?Q?N2mTIGcUJrW9kQLS7Oxma6O+LuibAjKAkOiuBt66fjBAUmY4OYfPTLgpRm?=
- =?iso-8859-1?Q?Gs0plGDVL/hFTLwT+xBesi9b2jAfvpTuSBFhzLGVv+OSwIr7edgh/yofIu?=
- =?iso-8859-1?Q?yX8im7aFzgKb4OLXGT7VRhRouoZbgFUz94b1eX6euKVX93jJFddhqABXPT?=
- =?iso-8859-1?Q?9BgfPa2Aytr+CbsBFnxnfW2B5/xH/wO5Ko/pIJlEyqxC97A4Kx3Ab7o8gs?=
- =?iso-8859-1?Q?QhVZhuYs9imtzQu9tji0aHhdB2/2fYdX05YLkib+S54FvQZQvzdWK9mcQ2?=
- =?iso-8859-1?Q?E5ugt0b7qRt1SZEDhFsK+9A88Imhk4RkV+qj7VisbvsePNVafjM9KglRZf?=
- =?iso-8859-1?Q?G+OlRePoulRRSuhSXMyQZU+1hAEkMQwe6YxTOtKG/DO9WSqRu/tlrNtmx3?=
- =?iso-8859-1?Q?sBMrKli5kPTZqsG7vbowYs5pNNs+PAncZqyTP3+7cOkYIgH+7WFSuOxuAB?=
- =?iso-8859-1?Q?8vVNisQCFDDIulTob4dxjCJXuDOcXQeub4RkUArS6B+f70b93O0jpOSX9U?=
- =?iso-8859-1?Q?YWbLgzpTt9uCzFVmyntkaF1YDlm6UucxacensU/HiGc9SHxXum+0kPR2mo?=
- =?iso-8859-1?Q?FeSulVYBvUavkXf0bKbdZxZEWjAsY60=3D?=
+ =?iso-8859-1?Q?pkQu8vurc0ihZimgWYMKjGaHrjHwWPfG4ouLCLax5yHS2SdmMN/zFk8/7u?=
+ =?iso-8859-1?Q?yQPMPPNNGgu8yEW34tKxEQ+sG1TmGZqz+WrDPdIUOhqkhQj2IRyQ6dImdN?=
+ =?iso-8859-1?Q?PdyjHfqYEAFSRGcAgFemIKEQtMc111+7mVM9OYL47HNEpHXcKPlM6gdSzc?=
+ =?iso-8859-1?Q?Mg09w+VVmVz/+DgeTiqjMztqe/MNnlSMiT6qtierHFfLb7gqd0bEqN6n6g?=
+ =?iso-8859-1?Q?PQGQdvB9nLTg1rU+cZ1INe2qJXBt7/S3SOYz6/G7eubEoa8yGefep1/OPX?=
+ =?iso-8859-1?Q?1U2Aom/hXQfQyK/cZP8FUdLrhwwOY0+Ok9DLte25aeOsfZ1/Kzrt/R/LH+?=
+ =?iso-8859-1?Q?V7J/e8LcnVoZkRhvBUk1inaMqE76fOYTBZzMr6C5y2oEIXvjABHQHxqqMi?=
+ =?iso-8859-1?Q?zOT+JufZdBtxZ6LrfxQ4EJculTQo+sx15gb95hm0btm18NIspYxBcLjcXS?=
+ =?iso-8859-1?Q?65bap9uwuJVQ6vEXZW8dxDbwHKVOicy8E5O/A+GEx5HRXRqWUb6IOI4bJm?=
+ =?iso-8859-1?Q?aPw6sdw/5EVl67PI3P5hXBqxsvzEaGN4apiYzqOJAZSMFgm4sVJmbkTAJu?=
+ =?iso-8859-1?Q?+ML//r0c5G6YvDeHXIzkfKcDlCt4auSnaoYKhueQYo9brKtlBfib4uNjm6?=
+ =?iso-8859-1?Q?cQMoxhJske+52VCLjyhUnpX+bJbXzmofL+relwWR715w8b+hgEdg6R/29t?=
+ =?iso-8859-1?Q?LiDvpWdFR7ArDueMx5W/aSqfhtcK9LBK4w2CZu9BiYmK71eWJCdoyVMvkv?=
+ =?iso-8859-1?Q?poE7MPKYJGin5fIVTPhmWnmekeWI2cv5Q6+1sSZtLQxAl0LJW64KBOqI5U?=
+ =?iso-8859-1?Q?BIxK9+vF98utuu+z+D3FPMfKPbCsKJKCQQm1GdTea5+HGTCj6lfHLY9QzU?=
+ =?iso-8859-1?Q?cVfpvtB63irfGhVUOGDWc48kr/xgDpB9EYSx6K2eCTV1IrtYtH9Gpds3DR?=
+ =?iso-8859-1?Q?WpwY/R1EN+8y+9hKPDO4qzje7lz4pnDAFK2nlsCAWartSKZSx/HzOEE9bj?=
+ =?iso-8859-1?Q?yONNljgcLy5EbBKL3h5bBOh6bNe6/bqen/fMmwmUoj0QLLzdfPQzo/sBdu?=
+ =?iso-8859-1?Q?PUtQzSwp5+RJpb9YPP2AiuDcK3h7mHpCh9XIt+tIwGUulf+xdtM3Dmm4gC?=
+ =?iso-8859-1?Q?Bort6sbHwNSA+8CW8C9a2BtqogvVHHArdmp6JKV0INN36uS46y60X3lmT6?=
+ =?iso-8859-1?Q?t0FLUZ03w5v/KxwZwcwHJjErXrRKTmfhFfjYonYCrZRCub6zNTTnyXEr32?=
+ =?iso-8859-1?Q?8by4kU1NVylBxMWy1SKtGU9P+sFJS/6M6p+jVn3ic8cSv2U60OSp3EUoEv?=
+ =?iso-8859-1?Q?D7SJeskd3EcQAIlXrQ2tIgLrH9aPrRWWmetREm9Mefk4hDthhHOCJ4o3Yy?=
+ =?iso-8859-1?Q?hMsv9RKyXE2xuLNOZciCVFu8v0BaWHbw93m3ansxOA0G/Xd9ba/n3R8EjE?=
+ =?iso-8859-1?Q?3YxnSzsqTM8nmkBqcvcqJQcRUh6+6RqE3WygbCnquGJYd7cCHFepVOSmJi?=
+ =?iso-8859-1?Q?4Kulvbvm0qLueZfEMFF36qsXMe61Qjf9gIOuX+Z3wMPJPThNaGtRLKv5T/?=
+ =?iso-8859-1?Q?H2GuVq8ib1VIGuSA9mZ3iuod49kv45i41eRTlWhJ8zG9tgt5fun0LMIFRz?=
+ =?iso-8859-1?Q?IE57cMDsO7lpBQvkceSChhpq5gRUUoU5UXKCVqoAazMQFmADA3LhjKul9W?=
+ =?iso-8859-1?Q?dFtZS0yl2Ca7Fl1tyryr9KaZT4cGW+fmep9QVTpSFOJ0ysvn3PGLPQ3QHE?=
+ =?iso-8859-1?Q?43wIInjjFf3tSEDE+2sEog0ejK392+jThApzCWAIEvgCbS6eRFCABe8XR3?=
+ =?iso-8859-1?Q?lLTzEPyxyfWKx9AZe1W8ifY34xty618=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03c07f55-5c41-4716-eaef-08de8e53d85b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Mar 2026 11:59:49.5871
+X-MS-Exchange-CrossTenant-Network-Message-Id: a55796dc-0cfa-40eb-83a6-08de8e53da0b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Mar 2026 11:59:52.1375
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4pyTL2G3DQ5ij9MSVkfVkJ0EDMoTiqBCFppu4CHK2R/Df1RCoKxrMH8sZBhWSBqcqroktOFPz0dyWA8uAb8o6A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6847
-X-purgate-ID: tlsNG-bad1c0/1774871991-6894EA73-20CC0BB4/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: Ek5dL2mc6Wu9WnJ+VuYQVkSO0YEG4cqWg85oR1lNr/Tb+51h2r+RgBJDlMNc0pSI3jIdvWShUjf9m5nDplv4OA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB8639
+X-purgate-ID: tlsNG-33051d/1774871994-EAE8572C-4DE07EC7/0/0
 X-purgate-type: clean
-X-purgate-size: 2214
+X-purgate-size: 1989
 
-This series implements support for CPU hotplug/unplug on Arm. To achieve th=
-is,
-several things need to be done:
+With CPU hotplug sysctls implemented on Arm it becomes useful to have a
+tool for calling them.
 
-1. XEN_SYSCTL_CPU_HOTPLUG_* calls implemented on Arm64.
-2. Enabled building of xen-hptool.
-3. Migration of irqs from dying CPUs implemented.
+According to the commit history it seems that putting hptool under
+config MIGRATE was a measure to fix IA64 build. As IA64 is no longer
+supported it can now be brought back. So build it unconditionally.
 
-Tested on QEMU and R-Car Gen5 HW.
-
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+---
 v6->v7:
-* new patch "Kconfig: Make cpu hotplug configurable
+* no changes
 
 v5->v6:
-* see individual patches
+* don't change order in Makefile
 
 v4->v5:
-* drop merged patches
-* combine "smp: Move cpu_up/down helpers to common code" with=20
-  "arm/sysctl: Implement cpu hotplug ops"
-* see individual patches
+* make hptool always build
 
 v3->v4:
-* add irq migration patches
-* see individual patches
+* no changes
 
 v2->v3:
-* add docs
+* no changes
 
 v1->v2:
-* see individual patches
+* switch to configure from legacy config
+---
+ tools/libs/guest/Makefile.common | 2 +-
+ tools/misc/Makefile              | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Mykyta Poturai (6):
-  arm/irq: Keep track of irq affinities
-  arm/irq: Migrate IRQs during CPU up/down operations
-  Kconfig: Make cpu hotplug configurable
-  arm/sysctl: Implement cpu hotplug ops
-  tools: Allow building xen-hptool without CONFIG_MIGRATE
-  docs: Document CPU hotplug
-
- SUPPORT.md                        |  1 +
- docs/misc/cpu-hotplug.txt         | 97 +++++++++++++++++++++++++++++++
- tools/libs/guest/Makefile.common  |  2 +-
- tools/misc/Makefile               |  2 +-
- xen/arch/arm/gic-vgic.c           |  2 +
- xen/arch/arm/include/asm/irq.h    |  6 ++
- xen/arch/arm/irq.c                | 68 +++++++++++++++++++++-
- xen/arch/arm/smp.c                |  9 +++
- xen/arch/arm/smpboot.c            |  7 +++
- xen/arch/arm/vgic.c               | 14 ++++-
- xen/arch/arm/vgic/vgic-mmio-v2.c  | 11 ++--
- xen/arch/arm/vgic/vgic.c          | 21 ++++---
- xen/arch/ppc/stubs.c              |  4 ++
- xen/arch/riscv/stubs.c            |  5 ++
- xen/arch/x86/include/asm/smp.h    |  3 -
- xen/arch/x86/platform_hypercall.c | 12 ++++
- xen/arch/x86/smp.c                | 33 +----------
- xen/arch/x86/sysctl.c             | 24 +++++---
- xen/common/Kconfig                |  8 +++
- xen/common/smp.c                  | 35 +++++++++++
- xen/common/sysctl.c               | 42 +++++++++++++
- xen/include/xen/smp.h             |  4 ++
- xen/xsm/flask/hooks.c             |  2 -
- 23 files changed, 348 insertions(+), 64 deletions(-)
- create mode 100644 docs/misc/cpu-hotplug.txt
-
+diff --git a/tools/libs/guest/Makefile.common b/tools/libs/guest/Makefile.c=
+ommon
+index b928a4a246..03dfcee7fa 100644
+--- a/tools/libs/guest/Makefile.common
++++ b/tools/libs/guest/Makefile.common
+@@ -7,6 +7,7 @@ OBJS-y +=3D xg_private.o
+ OBJS-y +=3D xg_domain.o
+ OBJS-y +=3D xg_suspend.o
+ OBJS-y +=3D xg_resume.o
++OBJS-y +=3D xg_offline_page.o
+ ifeq ($(CONFIG_MIGRATE),y)
+ OBJS-y +=3D xg_sr_common.o
+ OBJS-$(CONFIG_X86) +=3D xg_sr_common_x86.o
+@@ -17,7 +18,6 @@ OBJS-$(CONFIG_X86) +=3D xg_sr_save_x86_pv.o
+ OBJS-$(CONFIG_X86) +=3D xg_sr_save_x86_hvm.o
+ OBJS-y +=3D xg_sr_restore.o
+ OBJS-y +=3D xg_sr_save.o
+-OBJS-y +=3D xg_offline_page.o
+ else
+ OBJS-y +=3D xg_nomigrate.o
+ endif
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 6ee783f43e..5a206133f7 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -16,7 +16,7 @@ INSTALL_BIN                    +=3D xencov_split
+ INSTALL_BIN +=3D $(INSTALL_BIN-y)
+=20
+ # Everything to be installed in regular sbin/
+-INSTALL_SBIN-$(CONFIG_MIGRATE) +=3D xen-hptool
++INSTALL_SBIN                   +=3D xen-hptool
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-hvmcrash
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-hvmctx
+ INSTALL_SBIN-$(CONFIG_X86)     +=3D xen-lowmemd
 --=20
 2.51.2
 
