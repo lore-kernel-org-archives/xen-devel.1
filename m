@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76281061B0F
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 16:18:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1267859.1557335 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88BBF1061B15
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 16:29:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1268030.1557379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7FJA-0001P0-Um; Mon, 30 Mar 2026 16:17:44 +0000
+	id 1w7FU8-0005Yb-2r; Mon, 30 Mar 2026 16:29:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1267859.1557335; Mon, 30 Mar 2026 16:17:44 +0000
+Received: by outflank-mailman (output) from mailman id 1268030.1557379; Mon, 30 Mar 2026 16:29:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7FJA-0001Ot-Rt; Mon, 30 Mar 2026 16:17:44 +0000
-Received: by outflank-mailman (input) for mailman id 1267859;
- Mon, 30 Mar 2026 16:17:43 +0000
+	id 1w7FU8-0005YU-0A; Mon, 30 Mar 2026 16:29:04 +0000
+Received: by outflank-mailman (input) for mailman id 1268030;
+ Mon, 30 Mar 2026 16:29:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <edwin.torok@citrix.com>) id 1w7FJ9-0001Bl-Ab
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 16:17:43 +0000
+ (envelope-from <dakr@kernel.org>) id 1w7FU6-0005YO-HK
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 16:29:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7FJ7-00C3GE-4l
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 18:17:42 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1w7FU5-004L0x-Bn
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 18:29:01 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <edwin.torok@citrix.com>)
- id 69caa218-2eae-0a2a0a5409dd-0a2a450bb5da-32
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:42 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <edwin.torok@citrix.com>)
- id 69caa225-ef63-0a2a450b0019-a0658308eac0-3
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:42 +0200
-Received: from localhost.localdomain (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id CAD8141B6C80;
- Mon, 30 Mar 2026 12:17:05 -0400 (EDT)
+ (envelope-from <dakr@kernel.org>)
+ id 69caa493-5cb7-0a2a0a5109dd-0a2a450c8b36-44
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:29:01 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <dakr@kernel.org>)
+ id 69caa4cc-f93d-0a2a450c0019-ac6904feac1a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:29:00 +0200
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 3C334600CB;
+ Mon, 30 Mar 2026 16:28:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2732FC4CEF7;
+ Mon, 30 Mar 2026 16:28:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,55 +50,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/5] README: update minimum make to 4.1
-Date: Mon, 30 Mar 2026 17:17:24 +0100
-Message-ID: <4bbe4e23abcd5b1b32204d391bdd593205b89201.1774886602.git.edwin.torok@citrix.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1774886602.git.edwin.torok@citrix.com>
-References: <cover.1774886602.git.edwin.torok@citrix.com>
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:Cc:To:From:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774888138;
+	bh=HnR3T8HyhR5zh3UidQc9tY5GP+iCNJ+9G4eesNsn66c=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=P/3XWocfTvHDzL/TvgnY90VGL4nSlLd5QBe5hsYLKubBK3nWHOJaPjPq5JQAaRhM8
+	 iAGk5KjaD3ik9GNqL6YSdRdGeXxBgLs24zJtsj3e6fxOpDbi7ZZd8I/d1cyMypX8NE
+	 2XOL2YHA8im3TC/6MZc4CKSvIWYdWZeBHcvNBDXSWRJJuejsAH9jaZzQRbryV+m5kG
+	 lnPI2WxSgVXB97c4laa/t/vZgU3QAb4tmja9ypMEFSoxTNm4EFRWFco06IOLdeGzNC
+	 AdWvpkXe36xoTq6sFQYDIMUXUgS6vorYizdKVDGjM2rmv+ZiFnuwAzo46ijHVV7DUf
+	 PA+6jJae0BAbA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1774887462-9A0B1112-A397F903/0/0
+Date: Mon, 30 Mar 2026 18:28:48 +0200
+Message-Id: <DHG9BXUEUEU4.2DTNLE8Z61DKX@kernel.org>
+Subject: Re: [PATCH 05/12] PCI: use generic driver_override infrastructure
+Cc: "Russell King" <linux@armlinux.org.uk>, "Greg Kroah-Hartman"
+ <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ "Ioana Ciornei" <ioana.ciornei@nxp.com>, "Nipun Gupta"
+ <nipun.gupta@amd.com>, "Nikhil Agarwal" <nikhil.agarwal@amd.com>, "K. Y.
+ Srinivasan" <kys@microsoft.com>, "Haiyang Zhang" <haiyangz@microsoft.com>,
+ "Wei Liu" <wei.liu@kernel.org>, "Dexuan Cui" <decui@microsoft.com>, "Long
+ Li" <longli@microsoft.com>, "Bjorn Helgaas" <bhelgaas@google.com>, "Armin
+ Wolf" <W_Armin@gmx.de>, "Bjorn Andersson" <andersson@kernel.org>, "Mathieu
+ Poirier" <mathieu.poirier@linaro.org>, "Vineeth Vijayan"
+ <vneethv@linux.ibm.com>, "Peter Oberparleiter" <oberpar@linux.ibm.com>,
+ "Heiko Carstens" <hca@linux.ibm.com>, "Vasily Gorbik" <gor@linux.ibm.com>,
+ "Alexander Gordeev" <agordeev@linux.ibm.com>, "Christian Borntraeger"
+ <borntraeger@linux.ibm.com>, "Sven Schnelle" <svens@linux.ibm.com>, "Harald
+ Freudenberger" <freude@linux.ibm.com>, "Holger Dengler"
+ <dengler@linux.ibm.com>, "Mark Brown" <broonie@kernel.org>, "Michael S.
+ Tsirkin" <mst@redhat.com>, "Jason Wang" <jasowang@redhat.com>, "Xuan Zhuo"
+ <xuanzhuo@linux.alibaba.com>, =?utf-8?q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>, "Alex Williamson" <alex@shazbot.org>, "Juergen
+ Gross" <jgross@suse.com>, "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>, "Christophe Leroy
+ (CS GROUP)" <chleroy@kernel.org>, <linux-kernel@vger.kernel.org>,
+ <driver-core@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
+ <linux-hyperv@vger.kernel.org>, <linux-pci@vger.kernel.org>,
+ <platform-driver-x86@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+ <linux-remoteproc@vger.kernel.org>, <linux-s390@vger.kernel.org>,
+ <linux-spi@vger.kernel.org>, <virtualization@lists.linux.dev>,
+ <kvm@vger.kernel.org>, <xen-devel@lists.xenproject.org>,
+ <linux-arm-kernel@lists.infradead.org>, "Gui-Dong Han"
+ <hanguidong02@gmail.com>
+To: "Bjorn Helgaas" <helgaas@kernel.org>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20260324005919.2408620-6-dakr@kernel.org>
+ <20260326180825.GA1330769@bhelgaas>
+In-Reply-To: <20260326180825.GA1330769@bhelgaas>
+X-purgate-ID: tlsNG-d25034/1774888141-6E0B0734-E2663AF9/0/0
 X-purgate-type: clean
-X-purgate-size: 905
+X-purgate-size: 1460
 
-Using .DEFAULT_GOAL requires at least GNU make 3.81.
-It was suggested to update make to match ~2015 era gcc/binutils, hence
-4.1.
+On Thu Mar 26, 2026 at 7:08 PM CET, Bjorn Helgaas wrote:
+> On Tue, Mar 24, 2026 at 01:59:09AM +0100, Danilo Krummrich wrote:
+>> When a driver is probed through __driver_attach(), the bus' match()
+>> callback is called without the device lock held, thus accessing the
+>> driver_override field without a lock, which can cause a UAF.
+>>=20
+>> Fix this by using the driver-core driver_override infrastructure taking
+>> care of proper locking internally.
+>>=20
+>> Note that calling match() from __driver_attach() without the device lock
+>> held is intentional. [1]
+>>=20
+>> Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@ker=
+nel.org/ [1]
+>> Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
+>> Closes: https://bugzilla.kernel.org/show_bug.cgi?id=3D220789
+>> Fixes: 782a985d7af2 ("PCI: Introduce new device binding path using pci_d=
+ev.driver_override")
+>> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+>> ---
+>>  drivers/pci/pci-driver.c           | 11 +++++++----
+>>  drivers/pci/pci-sysfs.c            | 28 ----------------------------
+>>  drivers/pci/probe.c                |  1 -
+>>  include/linux/pci.h                |  6 ------
+>
+> For the above:
+>
+> Acked-by: Bjorn Helgaas <bhelgaas@google.com>
+>
+> "driver_override" is mentioned several places in
+> Documentation/ABI/testing/sysfs-bus-*.  I assume this series doesn't
+> change the behavior documented there?
 
-Signed-off-by: Edwin Török <edwin.torok@citrix.com>
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Link: https://lore.kernel.org/xen-devel/c0ba57bb-0d86-4209-b019-daf8328b5205@suse.com/
----
- README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/README b/README
-index 889a4ea906..af1f539d29 100644
---- a/README
-+++ b/README
-@@ -35,7 +35,7 @@ Second, there are a number of prerequisites for building a Xen source
- release. Make sure you have all the following installed, either by
- visiting the project webpage or installing a pre-built package
- provided by your OS distributor:
--    * GNU Make v3.80 or later
-+    * GNU Make v4.1 or later
-     * C compiler and linker:
-       - For x86:
-         - GCC 5.1 or later
--- 
-2.47.3
-
+Correct, none of this is altered.
 
