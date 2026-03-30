@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B757410D14AA
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 12:00:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1267449.1556937 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8350110D14AA
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 12:14:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1267525.1556995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7BHf-0000IC-CZ; Mon, 30 Mar 2026 11:59:55 +0000
+	id 1w7BVG-0006bf-K4; Mon, 30 Mar 2026 12:13:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1267449.1556937; Mon, 30 Mar 2026 11:59:55 +0000
+Received: by outflank-mailman (output) from mailman id 1267525.1556995; Mon, 30 Mar 2026 12:13:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7BHf-0000Hm-6m; Mon, 30 Mar 2026 11:59:55 +0000
-Received: by outflank-mailman (input) for mailman id 1267449;
- Mon, 30 Mar 2026 11:59:53 +0000
+	id 1w7BVG-0006bY-Gk; Mon, 30 Mar 2026 12:13:58 +0000
+Received: by outflank-mailman (input) for mailman id 1267525;
+ Mon, 30 Mar 2026 12:13:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1w7BHc-0000F4-WF
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 11:59:53 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <bounce-md_30504962.69ca6902.v1-42acbbf6014e4024bb2f48564484fbd8@bounce.vates.tech>)
+ id 1w7BVE-0006bS-W4
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 12:13:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7BHc-003QIn-8F
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 13:59:52 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 69ca65a8-2eae-0a2a0a5409dd-0a2a4509bac8-40
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:52 +0200
-Received: from [52.101.66.84]
- (helo=DUZPR83CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 69ca65b7-e484-0a2a45090019-34654254c0bd-4
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 13:59:52 +0200
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by PA4PR03MB6847.eurprd03.prod.outlook.com
- (2603:10a6:102:eb::5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
- 2026 11:59:50 +0000
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.20.9745.027; Mon, 30 Mar 2026
- 11:59:50 +0000
+ id 1w7BVE-003vEH-Bf
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 14:13:56 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <bounce-md_30504962.69ca6902.v1-42acbbf6014e4024bb2f48564484fbd8@bounce.vates.tech>)
+ id 69ca68fb-bab6-0a2a0a5309dd-0a2a4508b11c-42
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 14:13:56 +0200
+Received: from [198.2.179.37] (helo=mail179-37.suw41.mandrillapp.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from
+ <bounce-md_30504962.69ca6902.v1-42acbbf6014e4024bb2f48564484fbd8@bounce.vates.tech>)
+ id 69ca6902-1950-0a2a45080019-c602b325dd49-3
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 14:13:55 +0200
+Received: from pmta12.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail179-37.suw41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fkqst4cJXzG0CBMd
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 12:13:54 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 42acbbf6014e4024bb2f48564484fbd8; Mon, 30 Mar 2026 12:13:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,320 +53,265 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IXKq9730CIG8FDs14n6+zIQP3QWBKuUeE9//gOy6VPERJ47vRa6VCMJ4fPuWbPXtCT3XHGIO2KHfvOMho2d8dXf1qHfbG8DmefpI8y0HCIE55Pjvc95n06AMPyy8TI8xxgGg89L/tiXimI307krVDafL2YeC5++G605zg6AWiMz7bbB7xgZtcihblLX+UZLNF6uJ/CdOoR1TaEXG73iKSqRI8kS9enclgKutv0sGOcdnSSFP/5UuUEy8GuGS+3DJ8juHOlW+zys5ra5KT8n8tZn7W+szyYu//ouyaob1agGQtIpk8C1bSZYk+vt8HAc7a5RSH3mIkth3CGLZYvXZlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v1iQlWpWUlX2W69fYSmCagQKGYvJZO6E1KFm/axIUUg=;
- b=g8ov3+pshNY746ORxGglTCSQNSJXjM7mwsVFK9EUrb5p8EDd6919GA3u7P+ULvEaQm6uAv774O/fyP5DMTEzR/VTFT1lof3g9NxMdpbMftfNzAF+lysxqiuaZAGLLpYPt0RyKuBxRQvcwML5WrAt8TnSYYoxvwrrp/0tkn2kXX/LgwQ4eWFj0I4tNhn5cIpwDR0a7Nrb9VrDZh+sBFIkHbsnrACJuFUgw4DDQIQkvhAzNs8+NxkYEt01qcpGk+/Bt0Wwm1x2BVgswpMZ1VlKdg575TtV5H4kPluK9VkjZoEoW3y5a4Z6X7yy5WLE1JIcdEaOvMC5+Xt5YDdxuz/7mw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=v1iQlWpWUlX2W69fYSmCagQKGYvJZO6E1KFm/axIUUg=;
- b=DvL2aOqrRNw73RDbq7Q/Sx5ZJCzV33PWcpajV+fIi9Q6VzbzmKBggdkWlVvwVrCtsfYsvyL/Ekh6H3laI68IPxWeYVi6BWjmyfCxXFL6oeCI3kj6s2BYjVTV289Yx5JM14/gNkm0imJ5NXuPzjvQvJBaxvjFY3+0p1nM0fHOvsEqJ62FS2KOhqetEyR4YYYket9YqVEWfXD6KTIweFotVw6JssyDAnKWf2XXLfBGFa3J0z5R8AEMf4EP/O5lp0YH1khV37qcje3p60aay345F6Br0mX0amMYOVF5r8z3H6E6angVLAREJOrRUw63kwbF0hVvk+wEor3Q0iU+BqLmMg==
-From: Mykyta Poturai <Mykyta_Poturai@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v7 1/6] arm/irq: Keep track of irq affinities
-Thread-Topic: [PATCH v7 1/6] arm/irq: Keep track of irq affinities
-Thread-Index: AQHcwDy2nbDObKGCpEa2H43UsrK34Q==
-Date: Mon, 30 Mar 2026 11:59:50 +0000
-Message-ID:
- <0ff697dc791aeb6c2a44db93b862ec381a1e7468.1774871881.git.mykyta_poturai@epam.com>
-References: <cover.1774871881.git.mykyta_poturai@epam.com>
-In-Reply-To: <cover.1774871881.git.mykyta_poturai@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PA4PR03MB6847:EE_
-x-ms-office365-filtering-correlation-id: be2a7249-5093-41c6-186a-08de8e53d8b2
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|376014|1800799024|56012099003|18002099003|22082099003|38070700021;
-x-microsoft-antispam-message-info:
- gnBdlEtCEzoZajGMVs650NqjZddKBJRCPWOQvPVytpSzXPrPDTU9ePLwMSF+3vzD3LGVAM9QGG3yYcVHJY7+b7h/gclyAWW2ZBG5kKtkIAo/EXRwBwttgBSLO8cqKHWGsUvJlwwWWWgs9AqjJbk4qyjykjyHpmPlNv30fC63T9jb46MaPhBZ09EM55WZwxDe8OjliL3tYMc5vnA3pwCbtADLNaWGG+sx7WC0f48FTaG/K2ocDXH4DtmpSHBL2oKEUqEVRCaLPHLYIwiIN2FHp2d5iGFMlci7WT37isH/dQWnjHh0FQG2My5Y85LApPZBmfwspmlsfNxaQmI9JiWryAaRmgvsMp5LYLkCouUs5k6QN8Frm2D3misxTDYg0cvDmsaN2O+/S3QS/ZhGxmZ7Ap/YrIEAvscof5JSzAme/p4tXy/SRpwP79hXNEdsQM4TDrfu45QWYbJds16ktFli0wb6cWDdZ2/T1XEc+c3RBveLGlyOnet9m+ojBWM9pAb6CGtpVbnbvLhmveN5gLu8QUviwTO3ddV3q84bO9nr+QUMstkfvUyBVeRBWN9tTs3JeVpge/LofTxNl/XOo8fTbOxGm0aPQJ599AE0TdpkSK9/HFUtOX+P339NW3G3nnByQ0MOZaHlJZl7iMXdG7ow043snTUzgIXfwEIe+omNTJ10yhKCPnoL8v1nEMUNdtGNa9xclAPISpUKS0RRQnVpq6e7JmbeOKF8MIswCXLsJkyCVusxuuxXK6wrnuCz/8Yd46M7998xter9Sk3hQpdG1fpQkXMQanDedDuVgR/pFds=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(56012099003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?TuSvTM3f6ViM80kTjl/9Z+e29tfyMPyps358Ahtc7FnNYkwcqav+kcro3c?=
- =?iso-8859-1?Q?AgIZER/z1ALKyCTCfQINEBoRPE36CtD3FOxdkRFJKLnagHHKWqxyFJNIaP?=
- =?iso-8859-1?Q?9DacwkpS1Zg7+RfaxE2yEjM9oEwwCEV9BybTckx+SBF+EgkfJ8c7PThTsX?=
- =?iso-8859-1?Q?R5yMPldfPRLzkQ+RYsJEvIWP7aOzuAOoAf41R3Zhw4pGpMbf+5JrTj54uc?=
- =?iso-8859-1?Q?EiM/fxN4GZhuueJRfWJJNu9dueup+xMOWtP7IxqJuz18bNJ9gpzp6Ho7sa?=
- =?iso-8859-1?Q?HqJ/vxtyPpZL4jSP0c7sefkD4cQx03trFZx7D7242qQlgrButyow3iRXBU?=
- =?iso-8859-1?Q?+CAs7CpBhwgLCj40jka+xjk4w+aX4QMIDHPnB3eZQLYBdXuz7gvY8l49IQ?=
- =?iso-8859-1?Q?CAC4lXtW77+2025USmeXZheaNeTdlzzahjyyRbqsRF7pav9PFuqRVS1jKN?=
- =?iso-8859-1?Q?KMni4NCxMg/Iek+5CHnRuTzMgr3+eEuclNC8XntzjQrgZyRZ5JOk6Vu2y0?=
- =?iso-8859-1?Q?90/aBIgQ/ItgzdMFiz/ETw/MFUimS2gOO8Qxa3rYoxxtp9eySKhKaRhTdt?=
- =?iso-8859-1?Q?qUhOCJ4vOfSC96qoOBAl1o8HAsEkF1G0mpz47sBfhTvVdyjZezs/c0IxDS?=
- =?iso-8859-1?Q?NJXCOj196UrBVebNX8g0S+IKNN/6b/IYsUpEnNEPO+pnKOwWf7cf/jND17?=
- =?iso-8859-1?Q?PKw8aAua63VXYb+ZEJnsvBC7t8clr5aXItG9xZQKFAgY86np3bXTxkbsoA?=
- =?iso-8859-1?Q?SYrwLY4bN1sE52HdnJdW2QjE2Ikc929LMyp494Rdnsx2DGvFo2Yi+uQYe+?=
- =?iso-8859-1?Q?xqmBqv56kNfDmeMIcLfKZR1e0gJ9h6Wx/Sd//qLpv8j9YhbTWBOaWd8fR2?=
- =?iso-8859-1?Q?rZZ61EWLiSyv805IixHA0xoOEkI5Y0AghoQ6F7/j9FSRPEAdfX9426285w?=
- =?iso-8859-1?Q?n05JaP8CP8dfpY0rr6P3fosEQK2JxACZCfTuf6GAPnl2FxRCp/DVn/cMlN?=
- =?iso-8859-1?Q?czmVvAPqkv2kiwlARGVW1kMJQOcpJ3wdiUbDT/OVQEnzooC1Ct87zvpbwF?=
- =?iso-8859-1?Q?affhfLqn01PFxbKORiEBUYqwHVmHc0EZ0P2qr+4dDpIpliLL+pE0L8qgYF?=
- =?iso-8859-1?Q?umN4C94DEP73IdXY7wp+W29Z+QMJYyV24ztGAfXfCb6wPa6Uo1LUnI3fAf?=
- =?iso-8859-1?Q?wxTc5ne0aBxXLg5fAIY2/xPbBIAt3YmE3MS/JNaUbWJhumCxWl4yW+62IY?=
- =?iso-8859-1?Q?5JoMbKKBccDtpb/JHWtCmQ5JPdmKmf4RyDkx724NWh6ku2WNx5abEe2tox?=
- =?iso-8859-1?Q?AlqEu8zpjetaSnwpnCJY6GTgoGN/1N6gWE0rQ0LfAqRmOU90OZk3QeLdHJ?=
- =?iso-8859-1?Q?faWjpQ6DCqvac4l/0MRcxd8JcTcsUHvBI8cJNHYANMFPJgKbuO15eoQdaP?=
- =?iso-8859-1?Q?cX3w3eWzPhEPsqn+sTweKbsAkwUrJG2jiaQjBpdv0foTfpwy9Mu0ZzpzI4?=
- =?iso-8859-1?Q?S6oCCnc4psfe9kZcmU7NL10v9HMj3eYOw/3zmY+TLPKVNp5/gf0UcHXXP/?=
- =?iso-8859-1?Q?u2UBLaWhIfOG3LqWXYSlCv6q6cTy34aiDLVrU2WNL20eti4OstNkqT6pmS?=
- =?iso-8859-1?Q?jR2KKbFPy4ivyll2t20xteGcnc+w8YcUA6psT73QVLpVRaQOAMoV/aiYTj?=
- =?iso-8859-1?Q?p6NceTLZ+Sk7M//7crq9oS61CDz+F1lAZUnoqIZjUPD9lodUZ9BBjlOFel?=
- =?iso-8859-1?Q?qv+m+gWRIopca3IAKDISjfKlrlICsl8jsPc0Xw5joHwadIelMz75maFibs?=
- =?iso-8859-1?Q?/FkeU+YdUw5cK+WTr1pIgBYtCgTIfDw=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:Message-Id:To:References:Cc:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:Message-Id:To:References:Cc:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1774872834; x=1775142834;
+	bh=8/UEoCpZgSsa/b7GuIF8NEs0PMrAel8kk9xZN9ljZb4=;
+	h=From:Subject:Message-Id:To:References:Cc:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=RSV7sX3WkfWGHnsfyQghtG8deP1aTV1h9tcowxjf/4kdRwGvFCNyiNNBOq1XQlwRT
+	 Gp+8lqEcpcYn4Eyy/GVpTJtHjDLnGmfYkRafyXnInywCazCCQ+mwNIWGKiBACdsUlx
+	 tP7h6LjCy4UP8EOKnGqRL1oej9eeUw3OgdN/p2KQc2dP5azlnNQ5Q5A+hDrbxG1AOj
+	 3WZsYJ8LyfweLDncqqJ1kepSuMI/snqj2D7mD1QxkfJhViyHkEgApKN+RryitqtXu3
+	 dnnw2m9Jeo9iH4I62zdVxYj70UEWPvLJ7fDr0wCnUkF8jR4CKiPdAuvvsVXWNdOb2V
+	 XTtKfch6Tt+Lw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1774872834; x=1775133334; i=teddy.astie@vates.tech;
+	bh=8/UEoCpZgSsa/b7GuIF8NEs0PMrAel8kk9xZN9ljZb4=;
+	h=From:Subject:Message-Id:To:References:Cc:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=FjfHojRPHKxVbVOirgIkXCEiz3LY3QjJRReQeqIf7oU0QS3mAaQeIGjS4pHxeqApm
+	 Xd+OZorH7atLW/vSfNqZEhGlC71mEy/v4h+7Gr4TkT+fwKUKsZvFaJc+2etaLlTkjY
+	 JEvaj/sPe+qYBCmVXaVUlqJRrBc1WlUdttYQNvlDKVj+FfMvDdDMAED7cSF9QKGnTf
+	 KZwaHjbUxWTK/rLKIYE3Ifb4GFIdKic/5DIUqCNqy569dbOFjHplrvLcKPLlHHSYIx
+	 1hDS1quLmMHiJ0az4t14q7R++yc61vt7b9v0VICMtxPsaqmqncC/UtzgxmLc2ZgpuD
+	 xZLrOlnuCxDGA==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20Mapping=20non-pinned=20memory=20from=20one=20Xen=20domain=20into=20another?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1774872833084
+Message-Id: <bd136f57-3d16-482a-9014-be44183bc86f@vates.tech>
+To: "Demi Marie Obenour" <demiobenour@gmail.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, "Val Packett" <val@invisiblethingslab.com>, "Ariadne Conill" <ariadne@ariadne.space>
+References: <84462c4b-7813-4ad1-aeb2-862ae4f3a627@gmail.com>
+Cc: "Xen developer discussion" <xen-devel@lists.xenproject.org>
+In-Reply-To: <84462c4b-7813-4ad1-aeb2-862ae4f3a627@gmail.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.42acbbf6014e4024bb2f48564484fbd8?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260330:md
+Date: Mon, 30 Mar 2026 12:13:54 +0000
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: be2a7249-5093-41c6-186a-08de8e53d8b2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Mar 2026 11:59:50.2131
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WTQ6777rsV0tXglTjQKIm//O4hlULHrdbL8t16ASMvrV4G+rhd+2JhZL83A3bvIYUePA1C6olV28loJqq4O45g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6847
-X-purgate-ID: tlsNG-bad1c0/1774871992-69D44A73-30B83DD5/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c1860d/1774872836-F0E1B726-9ACFCCC3/0/0
 X-purgate-type: clean
-X-purgate-size: 7495
+X-purgate-size: 10061
 
-Currently on Arm the desc->affinity mask of an irq is never updated,
-which makes it hard to know the actual affinity of an interrupt. Fix
-this by updating the field in irq_set_affinity. Changing desc->affinity
-requires desc->lock to be held, so add an assertion to ensure that
-callers of irq_set_affinity are doing so correctly.
+(back to the original problem)
 
-With desc->lock now being required for irq_set_affinity, add locking
-around calls to it where it was missing.
+Le 24/03/2026 =C3=A0 15:17, Demi Marie Obenour a =C3=A9crit=C2=A0:
+> Here is a proposed design document for supporting mapping GPU VRAM
+> and/or file-backed memory into other domains.  It's not in the form of
+> a patch because the leading + characters would just make it harder to
+> read for no particular gain, and because this is still RFC right now.
+> Once it is ready to merge, I'll send a proper patch.  Nevertheless,
+> you can consider this to be
+> 
+> Signed-off-by: Demi Marie Obenour <demiobenour@gmail.com>
+> 
+> This approach is very different from the "frontend-allocates"
+> approach used elsewhere in Xen.  It is very much Linux-centric,
+> rather than Xen-centric.  In fact, MMU notifiers were invented for
+> KVM, and this approach is exactly the same as the one KVM implements.
+> However, to the best of my understanding, the design described here is
+> the only viable one.  Linux MM and GPU drivers require it, and changes
+> to either to relax this requirement will not be accepted upstream.
+> ---
+> # Memory lending: Mapping pageable memory, such as GPU VRAM, from one Xen=
+ domain into another
+> 
 
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+(...)
 
----
-v6->v7:
-* update commit message
-* fix possible locking on null desc
-* collect RBs
+> ## Informing drivers that they must stop using memory: MMU notifiers
+> 
+> Kernel drivers, such as xen_privcmd, in the same domain that has
+> the GPU (the "host") may map GPU memory buffers.  However, they must
+> register an *MMU notifier*.  This is a callback that Linux core memory
+> management code ("MM") uses to tell the driver that it must stop
+> all accesses to the memory.  Once the memory is no longer accessed,
+> Linux assumes it can do whatever it wants with this memory:
+> 
+> - The GPU driver can move it from VRAM to system RAM or visa versa,
+>    move it within VRAM or system RAM, or it temporarily inaccessible
+>    so that other VRAM can be accessed.
+> - MM can swap the page out to disk/zram/etc.
+> - MM can move the page in system RAM to create huge pages.
+> - MM can write the pages out to their backing files and then free them.
+> - Anything else in Linux can do whatever it wants with the memory.
+> 
+> Suspending access to memory is not allowed to block indefinitely.
+> It can sleep, but it must finish in finite time regardless of what
+> userspace (or other VMs) do.  Otherwise, bad things (which I believe
+> includes deadlocks) may result.  I believe it can fail temporarily,
+> but permanent failure is also not allowed.  Once the MMU notifier
+> has succeeded, userspace or other domains **must not be allowed to
+> access the memory**.  This would be an exploitable use-after-free
+> vulnerability.
+> 
+> Due to these requirements, MMU notifier callbacks must not require
+> cooperation from other guests.  This means that they are not allowed to
+> wait for memory that has been granted to another guest to no longer
+> be mapped by that guest.  Therefore, MMU notifiers and the use of
+> grant tables are inherently incompatible.
+> 
+> ## Memory lending: A different approach
+> 
+> Instead, xen_privcmd must use a different hypercall to _lend_ memory to
+> another domain (the "guest").  When MM triggers the guest MMU notifier,
+> xen_privcmd _tells_ Xen (via hypercall) to revoke the guest's access
+> to the memory.  This hypercall _must succeed in bounded time_ even
+> if the guest is malicious.
+> 
+> Since the other guests are not aware this has happened, they will
+> continue to access the memory.  This will cause p2m faults, which
+> trap to Xen.  Xen normally kills the guest in this situation which is
+> obviously not desired behavior.  Instead, Xen must pause the guest
+> and inform the host's kernel.  xen_privcmd will have registered a
+> handler for such events, so it will be informed when this happens.
+> 
+> When xen_privcmd is told that a guest wants to access the revoked
+> page, it will ask core MM to make the page available.  Once the page
+> _is_ available, core MM will inform xen_privcmd, which will in turn
+> provide a page to Xen that will be mapped into the guest's stage 2
+> translation tables.  This page will generally be different than the
+> one that was originally lent.
+> 
+> Requesting a new page can fail.  This is usually due to rare errors,
+> such as a GPU being hot-unplugged or an I/O error faulting pages
+> from disk.  In these cases, the old content of the page is lost.
+> 
+> When this happens, xen_privcmd can do one of two things:
+> 
+> 1. It can provide a page that is filled with zeros.
+> 2. It can tell Xen that it is unable to fulfill the request.
+> 
+> Which choice it makes is under userspace control.  If userspace
+> chooses the second option, Xen injects a fault into the guest.
+> It is up to the guest to handle the fault correctly.
+> 
 
-v5->v6:
-* add missing locking around irq_set_affinity calls
+To me there are multiples problems :
+- mapping a host-owned page into the guest
+- make such mapping "non-persistent", i.e letting Linux discard it
+- tracking guest access to such "non-existent mappings" (to remap it)
 
-v4->v5:
-* add locking
+All problems could be mixed into a single solution, but I don't think 
+it's a good idea, that means various kind of MM events for Linux could 
+originate from Xen. There is also the "process disappeared" situation 
+that could cause of lof of problems for the kernel. In KVM, the guest 
+existence is tied to the process by construction but with Xen, things 
+are different.
+But I think at least for the virtio-gpu use-case, these can be separated.
 
-v3->v4:
-* patch introduced
----
- xen/arch/arm/gic-vgic.c          |  2 ++
- xen/arch/arm/irq.c               |  9 +++++++--
- xen/arch/arm/vgic.c              | 14 ++++++++++++--
- xen/arch/arm/vgic/vgic-mmio-v2.c | 11 +++++------
- xen/arch/arm/vgic/vgic.c         | 21 +++++++++++++--------
- 5 files changed, 39 insertions(+), 18 deletions(-)
+Here is a approach (multiples parties) :
 
-diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
-index ea48c5375a..5253caf002 100644
---- a/xen/arch/arm/gic-vgic.c
-+++ b/xen/arch/arm/gic-vgic.c
-@@ -232,7 +232,9 @@ static void gic_update_one_lr(struct vcpu *v, int i)
-             if ( test_bit(GIC_IRQ_GUEST_MIGRATING, &p->status) )
-             {
-                 struct vcpu *v_target =3D vgic_get_target_vcpu(v, irq);
-+                spin_lock(&p->desc->lock);
-                 irq_set_affinity(p->desc, cpumask_of(v_target->processor))=
-;
-+                spin_unlock(&p->desc->lock);
-                 clear_bit(GIC_IRQ_GUEST_MIGRATING, &p->status);
-             }
-         }
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 73e58a5108..7204bc2b68 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -216,10 +216,15 @@ static inline struct domain *irq_get_domain(struct ir=
-q_desc *desc)
-     return irq_get_guest_info(desc)->d;
- }
-=20
-+/* Must be called with desc->lock held */
- void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
- {
--    if ( desc !=3D NULL )
--        desc->handler->set_affinity(desc, mask);
-+    if ( desc =3D=3D NULL )
-+        return;
-+
-+    ASSERT(spin_is_locked(&desc->lock));
-+    cpumask_copy(desc->affinity, mask);
-+    desc->handler->set_affinity(desc, mask);
- }
-=20
- int request_irq(unsigned int irq, unsigned int irqflags,
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index 6647071ad4..c59f6873db 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -445,7 +445,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
-=20
-     if ( list_empty(&p->inflight) )
-     {
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         return true;
-     }
-@@ -453,7 +455,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
-     if ( !list_empty(&p->lr_queue) )
-     {
-         vgic_remove_irq_from_queues(old, p);
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         vgic_inject_irq(new->domain, new, irq, true);
-         return true;
-@@ -473,6 +477,7 @@ void arch_move_irqs(struct vcpu *v)
-     struct domain *d =3D v->domain;
-     struct pending_irq *p;
-     struct vcpu *v_target;
-+    unsigned long flags;
-     int i;
-=20
-     /*
-@@ -494,7 +499,13 @@ void arch_move_irqs(struct vcpu *v)
-         p =3D irq_to_pending(v_target, virq);
-=20
-         if ( v_target =3D=3D v && !test_bit(GIC_IRQ_GUEST_MIGRATING, &p->s=
-tatus) )
-+        {
-+            if ( !p->desc )
-+                continue;
-+            spin_lock_irqsave(&p->desc->lock, flags);
-             irq_set_affinity(p->desc, cpu_mask);
-+            spin_unlock_irqrestore(&p->desc->lock, flags);
-+        }
-     }
- }
-=20
-@@ -574,8 +585,8 @@ void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsig=
-ned int n)
-         spin_unlock_irqrestore(&v_target->arch.vgic.lock, flags);
-         if ( p->desc !=3D NULL )
-         {
--            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             spin_lock_irqsave(&p->desc->lock, flags);
-+            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             /*
-              * The irq cannot be a PPI, we only support delivery of SPIs
-              * to guests.
-@@ -944,4 +955,3 @@ void vgic_check_inflight_irqs_pending(struct vcpu *v, u=
-nsigned int rank, uint32_
-  * indent-tabs-mode: nil
-  * End:
-  */
--
-diff --git a/xen/arch/arm/vgic/vgic-mmio-v2.c b/xen/arch/arm/vgic/vgic-mmio=
--v2.c
-index b7c2d7ce99..fc04741ca1 100644
---- a/xen/arch/arm/vgic/vgic-mmio-v2.c
-+++ b/xen/arch/arm/vgic/vgic-mmio-v2.c
-@@ -159,24 +159,23 @@ static void vgic_mmio_write_target(struct vcpu *vcpu,
-     for ( i =3D 0; i < len; i++ )
-     {
-         struct vgic_irq *irq =3D vgic_get_irq(vcpu->domain, NULL, intid + =
-i);
-+        struct irq_desc *desc =3D irq_to_desc(irq->hwintid);
-=20
--        spin_lock_irqsave(&irq->irq_lock, flags);
-+        spin_lock_irqsave(&desc->lock, flags);
-+        spin_lock(&irq->irq_lock);
-=20
-         irq->targets =3D (val >> (i * 8)) & cpu_mask;
-         if ( irq->targets )
-         {
-             irq->target_vcpu =3D vcpu->domain->vcpu[ffs(irq->targets) - 1]=
-;
-             if ( irq->hw )
--            {
--                struct irq_desc *desc =3D irq_to_desc(irq->hwintid);
--
-                 irq_set_affinity(desc, cpumask_of(irq->target_vcpu->proces=
-sor));
--            }
-         }
-         else
-             irq->target_vcpu =3D NULL;
-=20
--        spin_unlock_irqrestore(&irq->irq_lock, flags);
-+        spin_unlock(&irq->irq_lock);
-+        spin_unlock_irqrestore(&desc->lock, flags);
-         vgic_put_irq(vcpu->domain, irq);
-     }
- }
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index b2c0e1873a..1c44236c4f 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -812,22 +812,27 @@ void arch_move_irqs(struct vcpu *v)
-     {
-         struct vgic_irq *irq =3D vgic_get_irq(d, NULL, i + VGIC_NR_PRIVATE=
-_IRQS);
-         unsigned long flags;
-+        irq_desc_t *desc;
-=20
-         if ( !irq )
-             continue;
-=20
--        spin_lock_irqsave(&irq->irq_lock, flags);
--
--        /* Only hardware mapped vIRQs that are targeting this vCPU. */
--        if ( irq->hw && irq->target_vcpu =3D=3D v)
-+        if ( !irq->hw )
-         {
--            irq_desc_t *desc =3D irq_to_desc(irq->hwintid);
-+            vgic_put_irq(d, irq);
-+            continue;
-+        }
-=20
-+        desc =3D irq_to_desc(irq->hwintid);
-+        spin_lock_irqsave(&desc->lock, flags);
-+        spin_lock(&irq->irq_lock);
-+
-+        /* Only hardware mapped vIRQs that are targeting this vCPU. */
-+        if ( irq->target_vcpu =3D=3D v )
-             irq_set_affinity(desc, cpumask_of(v->processor));
--        }
-=20
--        spin_unlock_irqrestore(&irq->irq_lock, flags);
--        vgic_put_irq(d, irq);
-+        spin_unlock(&irq->irq_lock);
-+        spin_unlock_irqrestore(&desc->lock, flags);
-     }
- }
-=20
---=20
-2.51.2
+The first 2 problems can be solved in a "simple" way, just make a 
+"reverse foreign map" with a MMU notifier attached to it. If Linux wants 
+to discard the mapping, the remote mapping in the guest is unmapped.
+(something still needs to be done for doing that for VRAM)
+
+The 3rd one is a bit trickier. It's mostly a result of the 2nd problem 
+e.g swap or RAM/VRAM migration. The page has disappeared in the guest. 
+That could be dealt with a slightly modified ioreq server, but instead 
+of responding to read/writes, it would just act on "accesses" (it's 
+mostly to avoid having to emulate the read/writes in the device model).
+
+So overall, pages are mapped but "may disappears" (by kernel) and device 
+model (e.g QEMU) would need to remap them explicitly if that happens and 
+guest needs it.
+
+What do you think ?
+
+> ## Restrictions on lent memory
+> 
+> Lent memory is still considered to belong to the lending domain.
+> The borrowing domain can only access it via its p2m.  Hypercalls made
+> by the borrowing domain act as if the borrowed memory was not present.
+> This includes, but is not limited to:
+> 
+> - Using pointers to borrowed memory in hypercall arguments.
+> - Granting borrowed memory to other VMs.
+> - Any other operation that depends on whether a page is accessible
+>    by a domain.
+> 
+> Furthermore:
+> 
+> - Borrowed memory isn't mapped into the IOMMU of any PCIe devices
+>    the guest has attached, because IOTLB faults generally are not
+>    replayable.
+> 
+> - Foreign mapping hypercalls that reference lent memory will fail.
+>    Otherwise, the domain making the foreign mapping hypercall could
+>    continue to access the borrowed memory after the lease had been
+>    revoked.  This is true even if the domain performing the foreign
+>    mapping is an all-powerful dom0.  Otherwise, an emulated device
+>    could access memory whose lease had been revoked.
+> 
+> This also means that live migration of a domain that has borrowed
+> memory requires cooperation from the lending domain.  For now, it
+> will be considered out of scope.  Live migration is typically used
+> with server workloads, and accelerators for server hardware often
+> support SR-IOV.
+> 
+> ## Where will lent memory appear in a guest's address space?
+> 
+> Typically, lent memory will be an emulated PCI BAR.  It may be emulated
+> by dom0 or an alternate ioreq server.  However, it is not *required*
+> to be a PCI BAR.
+> 
+> ## Privileges required for memory lending
+> 
+> For obvious reasons, the domain lending the memory must be privileged
+> over the domain borrowing it.  The lending domain does not inherently
+> need to be privileged over the whole system.  However, supporting
+> situations where the providing domain is not dom0 will require
+> extensions to Xen's permission model, except for the case where the
+> providing domain only serves a single VM.
+> 
+> Memory lending hypercalls are not subject to the restrictions of
+> XSA-77.  They may safely be delegated to VMs other than dom0.
+> 
+> ## Userspace API
+> 
+> To the extent possible, the memory lending API should be similar
+> to KVM's uAPI.  Ideally, userspace should be able to abstract over
+> the differences.  Using the API should not require root privileges
+> or be equivalent to root on the host.  It should only require a file
+> descriptor that only allows controlling a single domain.
+> 
+> ## Future directions: Creating & running Xen VMs without special privileg=
+es
+> 
+> With the exception of a single page used for hypercalls, it is
+> possible for a Xen domain to *only* have borrowed memory.  Such a
+> domain can be managed by an entirely unprivileged userspace process,
+> just like it would manage a KVM VM.  Since the "host" in this scenario
+> only needs privilege over a domain it itself created, it is possible
+> (once a subset of XSA-77 restrictions are lifted) for this domain
+> to not actually be dom0.
+> 
+> Even with XSA-77, the domain could still request dom0 to create and
+> destroy the domain on its behalf.  Qubes OS already allows unprivileged
+> guests to cause domain creation and destruction, so this does not
+> introduce any new Xen attack surface.
+> 
+> This could allow unprivileged processes in a domU to create and manage
+> sub-domUs, just as if the domU had nested virtualization support and
+> KVM was used.  However, this should provide significantly better
+> performance than nested virtualization.
+
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
+
 
