@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 089CC1061B13
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 16:17:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1267858.1557326 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162E51061B16
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2026 16:17:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1267861.1557352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7FJ9-0001By-OH; Mon, 30 Mar 2026 16:17:43 +0000
+	id 1w7FJD-0001rA-Bv; Mon, 30 Mar 2026 16:17:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1267858.1557326; Mon, 30 Mar 2026 16:17:43 +0000
+Received: by outflank-mailman (output) from mailman id 1267861.1557352; Mon, 30 Mar 2026 16:17:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7FJ9-0001Br-L0; Mon, 30 Mar 2026 16:17:43 +0000
-Received: by outflank-mailman (input) for mailman id 1267858;
- Mon, 30 Mar 2026 16:17:41 +0000
+	id 1w7FJD-0001qx-8d; Mon, 30 Mar 2026 16:17:47 +0000
+Received: by outflank-mailman (input) for mailman id 1267861;
+ Mon, 30 Mar 2026 16:17:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <edwin.torok@citrix.com>) id 1w7FJ7-0001Bc-NH
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 16:17:41 +0000
+ (envelope-from <edwin.torok@citrix.com>) id 1w7FJC-0001qM-MM
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 16:17:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7FJ6-00Ey33-L7
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 18:17:40 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1w7FJC-00Ey33-2S
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 18:17:46 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <edwin.torok@citrix.com>)
- id 69caa212-e002-0a2a0a5209dd-0a2a450cba5a-36
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:40 +0200
+ id 69caa20a-e002-0a2a0a5209dd-0a2a4506932c-46
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:45 +0200
 Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <edwin.torok@citrix.com>)
- id 69caa223-f93d-0a2a450c0019-a0658308eab6-3
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:40 +0200
+ id 69caa229-3034-0a2a45060019-a0658308c6cc-3
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 18:17:45 +0200
 Received: from localhost.localdomain (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id 7358541B69BC;
- Mon, 30 Mar 2026 12:17:03 -0400 (EDT)
+ by na1pdmzitismtp01.tibco.com (Postfix) with ESMTPS id 48A5541B6C97;
+ Mon, 30 Mar 2026 12:17:09 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,55 +58,108 @@ Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v1 0/5] run unit tests in the CI
-Date: Mon, 30 Mar 2026 17:17:23 +0100
-Message-ID: <cover.1774886602.git.edwin.torok@citrix.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 3/5] tools/test: introduce a 'make check' rule
+Date: Mon, 30 Mar 2026 17:17:26 +0100
+Message-ID: <aa855bc8e8721bd799c7699525b68d67430eb9cb.1774886602.git.edwin.torok@citrix.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <cover.1774886602.git.edwin.torok@citrix.com>
+References: <cover.1774886602.git.edwin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1774887460-6D4B6734-EA63D5D6/0/0
+X-purgate-ID: tlsNG-16d1c6/1774887465-83B9E1C2-3787F03A/0/0
 X-purgate-type: clean
-X-purgate-size: 1662
+X-purgate-size: 2779
 
-Currently the unit tests aren't run in the CI during the build.
-Introduce a 'make check' rule that can run them all (in parallel if `-j`
-is specified).
+It runs all unit tests (those that do not require xenctrl) in parallel.
+The for loop fragment from tools/Rules.mk is not used, because that
+serializes make invocations in subdirectories (tested by inserting a
+'sleep 5' into the 'run' rules).
 
-To make reading the CI output easier make's `-O` flag is used (which
-buffers output per target, making it obvious which command failed).
+There might be dependencies between directories in tools/,
+but all tests are independent and can be built and run in parallel.
 
-TBD: what is the actual minimum version of binutils required by the
-existing tests, because Ubuntu 16.04 with binutil 2.26.1 failed.
-That version of Ubuntu is EoL in a few days, so it is dropped from the CI build step.
-The actual containers and the xilinx-arm64 jobs are kept for now
-(although these should be updated to use bionic).
+Signed-off-by: Edwin Török <edwin.torok@citrix.com>
+---
+ Makefile             |  4 ++++
+ tools/Makefile       |  4 ++++
+ tools/Rules.mk       |  2 +-
+ tools/tests/Makefile | 20 +++++++++++++++++++-
+ 4 files changed, 28 insertions(+), 2 deletions(-)
 
-A followup patch series will rearrange the unit test make rules,
-so it is useful to test that all the unit tests worked both prior and
-following that change on all supported platforms in the CI.
-
-For convenience this series is also available as a git repository:
-https://gitlab.com/xen-project/people/edwintorok/xen/-/tree/private/edvint/run-ci?ref_type=heads
-
-Edwin Török (5):
-  README: update minimum make to 4.1
-  CI: drop Ubuntu 16.04
-  tools/test: introduce a 'make check' rule
-  automation/scripts/build: run unit tests in the CI
-  automation/scripts/build: group command output from parallel jobs
-
- Makefile                        |  4 ++++
- README                          |  2 +-
- automation/gitlab-ci/build.yaml | 10 ----------
- automation/scripts/build        | 10 ++++++----
- tools/Makefile                  |  4 ++++
- tools/Rules.mk                  |  2 +-
- tools/tests/Makefile            | 20 +++++++++++++++++++-
- 7 files changed, 35 insertions(+), 17 deletions(-)
-
+diff --git a/Makefile b/Makefile
+index 67b71ac3d4..ca7ec58c99 100644
+--- a/Makefile
++++ b/Makefile
+@@ -50,6 +50,10 @@ install: $(TARGS_INSTALL)
+ .PHONY: build
+ build: $(TARGS_BUILD)
+ 
++.PHONY: check
++check:
++	$(MAKE) -C tools check
++
+ .PHONY: build-xen
+ build-xen:
+ 	$(MAKE) -C xen build
+diff --git a/tools/Makefile b/tools/Makefile
+index 6ecf7c0da8..7f6c29965d 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -55,6 +55,10 @@ endif
+ .PHONY: build all
+ build all: subdirs-all
+ 
++.PHONY: check
++check:
++	$(MAKE) -C tests check
++
+ .PHONY: install
+ install:
+ 	$(INSTALL_DIR) -m 700 $(DESTDIR)$(XEN_DUMP_DIR)
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index d9b9c740e9..abb1cbd783 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -194,7 +194,7 @@ subdirs-all subdirs-clean subdirs-install subdirs-distclean subdirs-uninstall: .
+ 		$(MAKE) subdir-$(patsubst subdirs-%,%,$@)-$$subdir; \
+ 	done
+ 
+-subdir-all-% subdir-clean-% subdir-install-% subdir-uninstall-%: .phony
++subdir-all-% subdir-clean-% subdir-install-% subdir-uninstall-% subdir-run-%: .phony
+ 	$(MAKE) -C $* $(patsubst subdir-%-$*,%,$@)
+ 
+ subdir-distclean-%: .phony
+diff --git a/tools/tests/Makefile b/tools/tests/Makefile
+index 6477a4386d..d73a6d7cfb 100644
+--- a/tools/tests/Makefile
++++ b/tools/tests/Makefile
+@@ -17,5 +17,23 @@ ifneq ($(clang),y)
+ SUBDIRS-$(CONFIG_X86) += x86_emulator
+ endif
+ 
+-.PHONY: all clean install distclean uninstall
++.PHONY: all clean install distclean uninstall check
+ all clean distclean install uninstall: %: subdirs-%
++
++# Subset of SUBDIRS that do not depend on xenctrl
++# Thus these tests can be run in the CI directly,
++# or on the developer's machine.
++
++SUBDIRS_CHECK-y :=
++SUBDIRS_CHECK-y += domid
++SUBDIRS_CHECK-y += pdx
++SUBDIRS_CHECK-y += rangeset
++SUBDIRS_CHECK-y += vpci
++
++SUBDIRS_CHECK-$(CONFIG_X86) += cpu-policy
++ifneq ($(clang),y)
++SUBDIRS_CHECK-$(CONFIG_X86) += x86_emulator
++endif
++
++# Ensure tests can run in parallel, the for loop in ../Rules.mk would serialize them
++check: $(foreach subdir,$(SUBDIRS_CHECK-y),subdir-run-$(subdir))
 -- 
 2.47.3
 
