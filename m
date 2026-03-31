@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96664109B477
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 14:28:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269009.1558167 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3449B109B46F
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 14:45:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269026.1558177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7a5A-00082q-Gz; Tue, 31 Mar 2026 14:28:40 +0000
+	id 1w7aKp-0002Vv-Rd; Tue, 31 Mar 2026 14:44:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269009.1558167; Tue, 31 Mar 2026 14:28:40 +0000
+Received: by outflank-mailman (output) from mailman id 1269026.1558177; Tue, 31 Mar 2026 14:44:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7a5A-00082j-E2; Tue, 31 Mar 2026 14:28:40 +0000
-Received: by outflank-mailman (input) for mailman id 1269009;
- Tue, 31 Mar 2026 14:28:39 +0000
+	id 1w7aKp-0002Vo-No; Tue, 31 Mar 2026 14:44:51 +0000
+Received: by outflank-mailman (input) for mailman id 1269026;
+ Tue, 31 Mar 2026 14:44:50 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w7a59-00082d-7V
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 14:28:39 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w7aKo-0002VP-Qn
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 14:44:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7a58-00Fcay-JT
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 16:28:38 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1w7aKm-00FjsE-9v
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 16:44:49 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69cbd9fd-5cb7-0a2a0a5109dd-0a2a450ac636-42
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:28:38 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ id 69cbddd8-5cb7-0a2a0a5109dd-0a2a4503cf10-14
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:44:49 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <jbeulich@suse.com>)
- id 69cbda16-1772-0a2a450a0019-d155dd36e9f3-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:28:38 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-43b95e5b3afso3375189f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 07:28:38 -0700 (PDT)
+ id 69cbdde1-1947-0a2a45030019-d1558033c04d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:44:49 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-486ff3a0fc1so53100735e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 07:44:49 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d14c53928sm183131f8f.5.2026.03.31.07.28.37
+ 5b1f17b1804b1-4887c8bc9dcsm28618355e9.6.2026.03.31.07.44.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 31 Mar 2026 07:28:37 -0700 (PDT)
+ Tue, 31 Mar 2026 07:44:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774967318; x=1775572118; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1774968289; x=1775573089; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=fH4wRtKzVIgGDJpY+fPXM+Nbj9QYXXdWqVlW01wy9mE=;
-        b=TXaGQPa/nDjylBwYtHaj3k21m04DpMh+qHWwhhFpd7aB8vm5EXrxTakhIVdT9+kN3D
-         B1R36tF+09d/xr7ae7wZZdx9bcN86NRQ/EyO1OCHkDBu0mUFnSkwKQ7jtVTmwUo1RoHX
-         5uTh5eWlwMxpd28AheLVkUw6xTCC5AbzwiQ/0Urx9YWV0b7mumo76gpmIV869D9xYcmU
-         bl+zHiMmcED+jhQLc0OYHBb81L5ApX0EMjGe045W2iU13mrKQvc4gf0yHdsYU0QPrD93
-         MuVCGbliU6TwcArkOVu7PGRSe5uqCevHBMPariFmMNOaX9DEStUatz+bMb9U5Hie45SV
-         PrnQ==
+        bh=JNHDtr7WCG8iOLY51gB6FQhLwm54QF/rV8nNNDxSmTg=;
+        b=SZnBq2wah/UIS+PZ8bKYQw0SKJQMt4DXrfoslloWA19TFkUv/0ZuISej9eR6fTOO+X
+         FNvWZ8nhKp8FokBm/PWTRwl8ZsmCsgjrm4dEIEKLXxV0mjPLg/r901LIY0+vDifvSzsc
+         UBImAbH8qdbBRd4urfs3VDZfqohtAVi9aYUd/HnkUpaheSCjXQp/69YwW+C7MBG7Cri3
+         XXUgZCfhZS/AIUD9awHQaCFy1ZJZDR3PFcWjh8t+HFKVJ4fSjsdW5GACmtmCUZEiAJJd
+         iY1jGpXW79VlavM42rNLgbfm2G4W2tI1WuHIqNi9Xr4vty8XqLYdivWdTdmmEoP8VJcq
+         IuCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774967318; x=1775572118;
+        d=1e100.net; s=20251104; t=1774968289; x=1775573089;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fH4wRtKzVIgGDJpY+fPXM+Nbj9QYXXdWqVlW01wy9mE=;
-        b=eyR4DjpN0Urocfjxa6uMG9gPEHYNWzBTnFB7F2SKnJf675MymvqLDCmv3wj5LthmNE
-         LnyfDxyofuoVpLGja7taTxHwczVD5Zz2OvqI1wi6omv492d/18s1VhHDfYv/xPNXuun5
-         5aL4K7P4Pt3/n6FJCSnYgwz1KMA+8NL6drGdTFcBuujcO4R/rMSRXtdY3vJsx+7vlVq9
-         I6tQK1t57bsayvHevxuR+BIoV+P+JDo05ekgsGCCTcMcU7EhT3s6S469sq7KK3bWpMiE
-         kx+QT0civREzBIpK79AsBMvv8LBDIbxoI3T1fyv6kLDSL6BbBlhG8dkvHXMxnH5q0mm2
-         NkQw==
-X-Forwarded-Encrypted: i=1; AJvYcCXPKb0jVsWBdKrgyDiRgjO7/ap9GfGNQgnHJ20SmAUMiiBD0MslNOkLi4ObQnpse8ubMDbbHIRzvFs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxxdqlPepfrr1t9DtOG1PmjjX7LcG/oaIhNnJtljHBABQwOE278
-	62czT5qnHGI4u7noD1eu/3pdu/dlo8J8vuUOzNQ92XFeI1XvTZkyg8Fd+05sMGtpkw==
-X-Gm-Gg: ATEYQzzptkI1+y5/36EmG0IjtgKAZHnu1Nu6TD6l0hKdm05VkQpBgzxcUHKbpj/hFiT
-	hrqY/RNv48jdQlJBFsD4pKGwBBMoUAfWk52o/isAlhl8tn//4L/iK8Kg/I/hDxiwQ6pmjTe4Fsq
-	rVRZTkBZe5VrM+FJwIT7U9iYP+hQOX7z5nMOTAmmBlIr0nk0PpI/cgWfPnWGFERZU7oDTf/2xnp
-	1DNQr+x98N9rY81wJTg95j+iWmIT3N9t1LDke4u5d0kit2y+oUOAhvbIWHO033YvATUFPi5dDEx
-	sSYwb4jaLXXFwGpF76svqyuvNJxI1CH4C7zIM+gza7m0ZqSdSTLaJFaBofK/kFW8xWiQdLUhvxG
-	brt+iRGEX8gWB4t3roC/la5Lh+OcEsPhf6sUaivKQNVH/8pl7GucGMyTEad0nIRUuvzNhvGU5xc
-	9naSh9agwH0qKSVem7+ZmNRoIjR43QwJsggLN4J6y4DHwix4SsF6OOaW3kh7oMD/zGwMvPFsHnm
-	J8IUjF9VSkfBgA=
-X-Received: by 2002:a5d:5f50:0:b0:43b:9a9f:8956 with SMTP id ffacd0b85a97d-43b9e99d921mr29169837f8f.22.1774967317766;
-        Tue, 31 Mar 2026 07:28:37 -0700 (PDT)
-Message-ID: <e4454dd5-0d17-4748-b2fa-67634e664667@suse.com>
-Date: Tue, 31 Mar 2026 16:28:36 +0200
+        bh=JNHDtr7WCG8iOLY51gB6FQhLwm54QF/rV8nNNDxSmTg=;
+        b=CAg5uV+QTutXZh9nbm9N9x6aGCXE4qM1CZKNuWEwnOvdrA0mWxmcW0cXnazTJ3N3Ei
+         iwtbARaw54GCyKoZc5crJR7lB9RZDcg4ckmZkOg2c0ZiS8tkaz+9n2uzQA6/ErpWXub6
+         AhoZj3aADnaHWVMOjRnd5e0BPtcl2OhaFbD13n5hQqJsHyh5HF9eBYobPVGCl6FI9SwR
+         jNDAiAOAENe4ZT2/iEb87Et6Pe11R36ZugxfIp21l/cAKL30bLvjg+nynMFOjCV+5KTl
+         q7vIBSeeItF5k/HZkF67bhMI4lnp2XvZRayB85DxppiwFXxLC3CykqWC6Yh/dpK2ono7
+         z1Ag==
+X-Forwarded-Encrypted: i=1; AJvYcCWhIQwiFxpAvzVzX35YfKo5TVio10A6EBLEh1KRJ3nplxlEcD4XaMh9Wmdy/mN/MLRlT21ziCesfig=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzKogfmd+AQXlWO/yWEHzbrqLP7uKUm8ujl0TNpZkOIqNv0AqW4
+	Pobg62d/9ZpAVk0euW1WDhvpfbKsvWrMrDdpEk83jwuwccJMPm2M3wK2WIHeOAXTSw==
+X-Gm-Gg: ATEYQzzlbHLXei/FBAsIALfnjvB9LO6bwgCCuALaoAeqx5ckE/b0aLOeuyft++YWPFB
+	C6u79vb2NpuOHynwEtv9aho/x0bDBOvDrTQd9AHPSKjl2rDT+Ncc2AiV01d1gD0AFvgXygsSz8L
+	TsqfMcNNJUR/flk7WGSbuhNNG1Ki6+MIBilP3ZP/3hSDE16mAtmZy3CM6AmirYuC1ez7uNXvbKw
+	4Co8jKfu/VotzkBMGoKVyBPR9pe1LI5DB6Fk98fnGnU+aPN5Jq1zRxS0Bydu45vAOm7kO83peQk
+	JvQO1nUoXJWOicaCdiJ9VYLXfDBKr8uhrQk+VRGeaOXPBVcuWe9gJ9INi1FzGDDB1EacoPeaj4Y
+	CpTNy+sUqOeWySFkrM2fOmLY10rRTxwCFnXZ1X+4RAia5XOQ/X0xuBLdMTfSZ2kZNDlI8gufR/o
+	vhjewy8TH8in7nHiUhlrPPbiDpMBHXhrfBLTRZU/7m4BYxpaCz/B9/ydp2eOwOKWlxI8GSTyASW
+	czIM78yZh2cNtw=
+X-Received: by 2002:a05:600c:8819:b0:485:3ff1:d5c5 with SMTP id 5b1f17b1804b1-48727d55fc3mr283673715e9.7.1774968288955;
+        Tue, 31 Mar 2026 07:44:48 -0700 (PDT)
+Message-ID: <977bc84d-cd7e-4362-9eb8-05d56b364d2b@suse.com>
+Date: Tue, 31 Mar 2026 16:44:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] pci/iommu: Check that IOMMU supports removing
- devices
+Subject: Re: [PATCH v2 6/8] vpci: add SR-IOV support for PVH Dom0
 To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <cover.1772806036.git.mykyta_poturai@epam.com>
- <0ba0f0a8a7db5c762fa59e2eec627199c023f8b9.1772806036.git.mykyta_poturai@epam.com>
+ <b4c86444970a65f56d20203fd77ee368e1eebfb9.1772806036.git.mykyta_poturai@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,45 +129,93 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <0ba0f0a8a7db5c762fa59e2eec627199c023f8b9.1772806036.git.mykyta_poturai@epam.com>
+In-Reply-To: <b4c86444970a65f56d20203fd77ee368e1eebfb9.1772806036.git.mykyta_poturai@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1774967318-53A9B900-15C74EB5/0/0
+X-purgate-ID: tlsNG-33051d/1774968289-49A5972C-50D41E06/0/0
 X-purgate-type: clean
-X-purgate-size: 1353
+X-purgate-size: 3252
 
 On 09.03.2026 12:08, Mykyta Poturai wrote:
-> before trying to remove them.
-> Some IOMMU platforms, such as SMMU-V3 and IPMMU-VMSA don't support
-> removing devices. Trying to call remove_device will result in a crash.
-> So check that platform_ops have remove_device set before calling it.
-
-Hmm, but both have .add_device populated. They ought to support
-.remove_device, especially if ...
-
-> --- a/xen/drivers/passthrough/pci.c
-> +++ b/xen/drivers/passthrough/pci.c
-> @@ -1545,6 +1545,12 @@ static int iommu_remove_device(struct pci_dev *pdev)
->      if ( !is_iommu_enabled(pdev->domain) )
->          return 0;
->  
-> +    if ( !hd->platform_ops->remove_device )
+> +static void cf_check control_write(const struct pci_dev *pdev, unsigned int reg,
+> +                                   uint32_t val, void *data)
+> +{
+> +    unsigned int sriov_pos = reg - PCI_SRIOV_CTRL;
+> +    struct vpci_sriov *sriov = pdev->vpci->sriov;
+> +    struct callback_data *cb = NULL;
+> +    uint16_t control = pci_conf_read16(pdev->sbdf, reg);
+> +    bool mem_enabled = control & PCI_SRIOV_CTRL_MSE;
+> +    bool new_mem_enabled = val & PCI_SRIOV_CTRL_MSE;
+> +    bool enabled = control & PCI_SRIOV_CTRL_VFE;
+> +    bool new_enabled = val & PCI_SRIOV_CTRL_VFE;
+> +
+> +    ASSERT(!pdev->info.is_virtfn);
+> +
+> +    if ( new_enabled == enabled && new_mem_enabled == mem_enabled )
 > +    {
-> +        printk(XENLOG_ERR "IOMMU: remove_device not supported by platform\n");
-> +        return -EOPNOTSUPP;
+> +        pci_conf_write16(pdev->sbdf, reg, val);
+> +        return;
 > +    }
 > +
->      for ( devfn = pdev->devfn ; pdev->phantom_stride; )
->      {
->          int rc;
+> +    cb = xzalloc(struct callback_data);
+> +
+> +    if ( !cb )
+> +    {
+> +        gprintk(XENLOG_ERR,
+> +                "%pp: Unable to allocate memory for SR-IOV enable\n",
+> +                pdev);
+> +        return;
+> +    }
+> +
+> +    cb->pdev = pdev;
+> +    cb->pos = sriov_pos;
+> +    cb->value = val;
+> +    cb->map = new_mem_enabled && !mem_enabled;
+> +    cb->unmap = !new_mem_enabled && mem_enabled;
+> +    cb->enable = new_enabled && !enabled;
+> +    cb->disable = !new_enabled && enabled;
+> +
+> +    current->vpci.task = WAIT;
+> +    current->vpci.wait.callback = control_write_cb;
+> +    current->vpci.wait.data = cb;
+> +    current->vpci.wait.end = NOW();
+> +
+> +    if ( cb->enable )
+> +    {
+> +        size_vf_bars((struct pci_dev *)pdev, sriov_pos);
 
-... this is for PCI. (I'm simply not qualified to discuss DT.) This
-being in the SR-IOV series, I have to assume for the change to be about
-a PF de-configuring its VFs. This imo shouldn't end in -EOPNOTSUPP. In
-fact PHYSDEVOP_pci_device_remove serves largely as a notification -
-please check the xen_remove_device() use in Linux. That is, the device
-is going to be gone anyway, and hence we'd better take care of that fact
-in Xen.
+No casting away of const, please. See Misra rule 11.8.
+
+> +        /*
+> +         * Only update the number of active VFs when enabling, when
+> +         * disabling use the cached value in order to always remove the same
+> +         * number of VFs that were active.
+> +         */
+> +        sriov->num_vfs = pci_conf_read16(pdev->sbdf,
+> +                                         sriov_pos + PCI_SRIOV_NUM_VF);
+> +        /*
+> +         * NB: VFE needs to be enabled before calling pci_add_device so Xen
+> +         * can access the config space of VFs. FIXME casting away const-ness
+> +         * to modify vf_rlen
+> +         */
+> +        pci_conf_write16(pdev->sbdf, reg, control | PCI_SRIOV_CTRL_VFE);
+> +        /*
+> +         * The spec states that the software must wait at least 100ms before
+> +         * attempting to access VF registers when enabling virtual functions
+> +         * on the PF.
+> +         */
+> +
+> +        current->vpci.wait.end = NOW() + MILLISECS(100);
+
+Aren't you effectively busy-waiting for these 100ms, by simply returning "true"
+from vpci_process_pending() until the time has passed? This imo is a no-go. You
+want to set a timer and put the vCPU to sleep, to wake it up again when the
+timer has expired. That'll then eliminate the need for the not-so-nice patch 4.
+
+Question is whether we need to actually go this far (right away). I expect you
+don't mean to hand PFs to DomU-s. As long as we keep them in the hardware
+domain, can't we trust it to set things up correctly, just like we trust it in
+a number of other aspects?
 
 Jan
 
