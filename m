@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D6E109B485
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 14:55:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269050.1558195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA6A109B47B
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 15:03:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269061.1558203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7aVA-0004xB-6U; Tue, 31 Mar 2026 14:55:32 +0000
+	id 1w7acJ-0006p1-R0; Tue, 31 Mar 2026 15:02:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269050.1558195; Tue, 31 Mar 2026 14:55:32 +0000
+Received: by outflank-mailman (output) from mailman id 1269061.1558203; Tue, 31 Mar 2026 15:02:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7aVA-0004x3-1H; Tue, 31 Mar 2026 14:55:32 +0000
-Received: by outflank-mailman (input) for mailman id 1269050;
- Tue, 31 Mar 2026 14:55:30 +0000
+	id 1w7acJ-0006ou-Ns; Tue, 31 Mar 2026 15:02:55 +0000
+Received: by outflank-mailman (input) for mailman id 1269061;
+ Tue, 31 Mar 2026 15:02:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w7aV7-0004wx-RS
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 14:55:29 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w7acJ-0006oo-87
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 15:02:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7aV6-00HFEB-TJ
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 16:55:28 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1w7acI-00HGu1-Jy
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 17:02:54 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69cbe053-2eae-0a2a0a5409dd-0a2a4501875a-26
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:55:28 +0200
+ id 69cbe214-5cb7-0a2a0a5109dd-0a2a45039f52-24
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:02:54 +0200
 Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <jbeulich@suse.com>)
- id 69cbe060-6fc9-0a2a45010019-d1558030d92e-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:55:28 +0200
+ id 69cbe21e-1947-0a2a45030019-d1558030d486-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:02:54 +0200
 Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4852b81c73aso49807015e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 07:55:28 -0700 (PDT)
+ 5b1f17b1804b1-4852a9c6309so49282415e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 08:02:54 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887ad706d4sm19498575e9.8.2026.03.31.07.55.27
+ 5b1f17b1804b1-4887adc5690sm32151685e9.2.2026.03.31.08.02.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 31 Mar 2026 07:55:27 -0700 (PDT)
+ Tue, 31 Mar 2026 08:02:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774968928; x=1775573728; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1774969374; x=1775574174; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=wa74cH9IxdWKMW02DtpK07bgmhYZjiyqGaepjoiq7yA=;
-        b=eeto2/176HpdyrqMHDyU8/TbQ33Yv+RXI/UXxehBAxpGo691R/r1hylGX9OhVkoI7M
-         JDsOYN0y/78pRxAgeqp7XtL/fs84KFV7lTbEe+E5oGvcx6Alqqe+yMEnLho5G2f+imAL
-         n9J4K6YrB+NBOYNDrymCSfxs5oWLG+l2gPUgU6oBPynXl1Yg6VIdv8FZ+R7U3vbPaKN+
-         GO2gphfUYEMceAJwuiKmDDLWDjQPmFE9aXUgyqRw2+0VoufM5KIJE1UQJHCthPMnJBMS
-         nUZneuUqEN93K+NWzkvLvu6O7ozA+bv22SSelIIzS/jkkbOz0x2uo2PbIyBhTOTIR7kV
-         p7vw==
+        bh=Uev4nSdenuKcsR/y5Q48D1UtxhwbVJygbdeoloBJ2K4=;
+        b=JGjJCfjbeB41qUgz4M6Bw4PWSqePmCL1jeWgDcsrAoxUF0YHwx0I8+kXnmHfvKxvtG
+         jIfaDcFX0q3oIHfCVJ/+GmaLp8oNu0+uknyg9/7TrZsdQo8DARmGJSa6npHO5ady6Gxc
+         HbeVtm6hE0olQeI5AhSQmUJ5S37A/WQxiseurFtQFZoNf7RqV6wDWt+U3KVrGd5tWq8e
+         ebi+7RW8ZBENRckLGelYTEznxuND8i2hbjE8eSeS3LPRMB94UFrD5xT5ezbebATUwjVm
+         w9cuz6qqJfN6/OmFy/yl5J570PWXmsuBfx0x+hbFK8L4o/0nVezmuzehPJk0Hvdm8XCV
+         OReA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774968928; x=1775573728;
+        d=1e100.net; s=20251104; t=1774969374; x=1775574174;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wa74cH9IxdWKMW02DtpK07bgmhYZjiyqGaepjoiq7yA=;
-        b=o+9O31WhMPopMqRUxS/1xWJpJn8p1WUDlQ5K0cfvSR5JSDi9OIn8iyxKzBfYFYo1vC
-         APo/38pj13RNJAdQZJvDPUhOdrTgUS0E6f03wo1v8IzJJ3ttbf7Mv98dP10saDpclw6+
-         ZJpkXS4V1y3AXZkvgzW7r6h1bHbHz/1YFnv/VS5Nmy8093xo6x6o+MqNjri07of5eyWo
-         DUYbIWUXG4Mxi9f36ak0D3bZ67oub86OTIyzJ1D8baH0DsDUwt06WSa/wMCt4kW6Kanm
-         sGpPr9YzM4OJ855n4eEGgs7s2PGTCv5rfCDqDKpSooUQeHT+wudwDmnkLFByKIgYRNyX
-         fLbA==
-X-Forwarded-Encrypted: i=1; AJvYcCWzswzFkIf92cuJFMHmIVzek47SCKgh5lZMGVWNfAVA7ofLpsPOLgZmnyqJc+Kw25M82OBgKv58jQ8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx4EIWB/Wb/daxefOBzeBPN4AouPvPrprH2W9oCbvhAn45YR4qR
-	a7gldV7L3fAJTkJJSeFSgWZ4+ocfU9HpgwxOSZ3C0xXDO0hFy3iEc04TxWqzQoKABQ==
-X-Gm-Gg: ATEYQzz/39quYslBWnVUm6Q0T4MoNklHyXkeuz1Iv2xZD/MyrSPVbGpic3WXbuqfih1
-	u0U6JC13KHo+GB8i65/wAbpAKE9P6gVzSKuPqdh3Ip9FTzbT58Vu6pOnWl9VsD99UGaxcQxYFtp
-	wRVp3O1qxnrVfda1gHe6mnMgKRi226zw3f6V3D2KF8X5MMGt/GPHQJi8rCFT4vZ/Ghv+KqpzcQU
-	dZ/Gqi30M91IZDFn4P8VYfqt6LrI6NJkMbXxMYEqHd02NT7AFA+/nmR/EzB9G6h9DCl/L/Gma/z
-	SMJcN7k/AtZEUKgaLEVnqszHfySbBFLs5olUWhvMY6ESl4dZVhQ0fMWmue5VKKX9NOPsjbwcUWy
-	PBsyCclM/yAHQxe1pJ5eyVuQ5gqnrOXRpknD7OdsG2qeR7VNRQ6FM1uzQHbPFmK65eJMtfA/gKO
-	MqOO8lARcHUNql84p8HmFnfBEUH9lqPHArdzCNkAPOoXvsS4+1jAiqNTDf+/7bAmxBiXYXJAGvo
-	z0S5681zgmiGtQ=
-X-Received: by 2002:a05:600c:608b:b0:485:557d:9fe with SMTP id 5b1f17b1804b1-48727efc9cdmr287528225e9.12.1774968927988;
-        Tue, 31 Mar 2026 07:55:27 -0700 (PDT)
-Message-ID: <f546ae19-2107-469e-847b-7a4cde2c95fd@suse.com>
-Date: Tue, 31 Mar 2026 16:55:26 +0200
+        bh=Uev4nSdenuKcsR/y5Q48D1UtxhwbVJygbdeoloBJ2K4=;
+        b=LPPf3MJQn1vnFTD0wLw3eLqK6FjM83H65bm3BiIdL20vEl17+rhoO/89VqcV8JaS42
+         dNGTxWMUd9VVxV0OR7iAoEQbweKYS6hHhc24DU813LQHDQpMgLFCVStQtGiGj1uinPKg
+         8W3vIw4c/QBscuHD9angJ0WWFm9oGopRcWFsp3tevYDpmCymQ567gqlHt6+Sf4Z3yHWU
+         VAswdgRArG4MnaY//uBR9WTmI8CBjWCpNrDyIc+QWaRBsqazCQi6ZQlDpclZGH+y0uTz
+         BVPAIpp/IQ8sRB+ysvdYabpX//LpJBbsgosCmegZ5pt59MNacQQRLKra1m0Yl/Sl0g52
+         IEIA==
+X-Forwarded-Encrypted: i=1; AJvYcCVjkfaY3m5NUk68XYaCsGKXUd8JmQ7+ZZOJTYo3Bso/IsE+mdhhrZma+cTCJPngSnF3Oj5O82kcMlA=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwyLeCQLF0SQsmfdMcGQBQszTT+OqcZM3+OBkDbJYcfetswyxvN
+	TguxoodNuptQj7X1NPnzJ3uae8a7nYbwZ8L88PqEGSiukR3KberujR8fgNw5/u8pYg==
+X-Gm-Gg: ATEYQzytD6GK6YwzBb31dYxX69ozLIz9ryzLCPcQucI25sggm0CigHPUdie6dDb75xU
+	eQgvqoDLH4mGo6Fivm91bEtbQRKRs9NDARKiK6uW5rjxksZFb1sv8MOKvSMaGLN78IpsuCT1QPJ
+	VKP4DxzyZmHHmaYQdPGS6UX1O6trbMTv2j19KDGXbixNw3NJPhJDQxRQNWRlSrLCqYmH0nEmZ7Q
+	rKlH0GYT6+DGJ6p0yhhFSYIY1zGa3Tkg8JNcu0azw86gdzzeX1tpPde1kKfmhD/3zTb7bbJA51x
+	51UI6mXMVaTCxPmy3/PDK2V7ucRtdY5/2MRoIje219q1aGT7g8oAFM0HrnPTpqAl8pi/pCIIUWc
+	o4eXJfoj3JTkPubpta8v0s2G+A9vTe74gprtx81/ysUQHJ/qKTYByUBhlKxVxzOHdmGjXQXrkkU
+	FUhRTXecIvDdPN2v3saOnV2dUjAJdpn5ByBoeLaCgMN9b341BV+heymRmhKU7mDMtVZmO2lGQWp
+	az4Mp/JOk7cO4c=
+X-Received: by 2002:a05:600c:8b2a:b0:485:3dfc:57c with SMTP id 5b1f17b1804b1-48727f5fe97mr292619545e9.21.1774969373785;
+        Tue, 31 Mar 2026 08:02:53 -0700 (PDT)
+Message-ID: <f6c3560a-1b2f-47a4-9386-77d688abba75@suse.com>
+Date: Tue, 31 Mar 2026 17:02:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/8] vpci: add a wait operation to the vpci vcpu
- pending actions
+Subject: Re: [PATCH v2 7/8] vpci: add SR-IOV support for DomUs
 To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>,
+Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <cover.1772806036.git.mykyta_poturai@epam.com>
- <ec941fbf4f8bde23fc3867e47f5ada028f8003aa.1772806036.git.mykyta_poturai@epam.com>
+ <4df03dab1dc6ce3ac7524b9f06641bc90889f743.1772806036.git.mykyta_poturai@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,167 +128,82 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ec941fbf4f8bde23fc3867e47f5ada028f8003aa.1772806036.git.mykyta_poturai@epam.com>
+In-Reply-To: <4df03dab1dc6ce3ac7524b9f06641bc90889f743.1772806036.git.mykyta_poturai@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1774968928-B72F1185-174D8B41/0/0
+X-purgate-ID: tlsNG-33051d/1774969374-EAC8472C-6B3AE64D/0/0
 X-purgate-type: clean
-X-purgate-size: 5826
+X-purgate-size: 2941
 
 On 09.03.2026 12:08, Mykyta Poturai wrote:
-> --- a/xen/drivers/vpci/header.c
-> +++ b/xen/drivers/vpci/header.c
-> @@ -175,76 +175,92 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
+> From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> 
+> SR-IOV virtual functions have simplified configuration space such as
+> Vendor ID is derived from the physical function and Device ID comes
+> from SR-IOV extended capability.
+> Emulate those, so we can provide VID/DID pair for guests which use PCI
+> passthrough for SR-IOV virtual functions.
+
+Why do we need to emulate what hardware would do anyway? These are r/o
+fields, so likely okay to expose directly to a domain?
+
+> --- a/xen/drivers/vpci/sriov.c
+> +++ b/xen/drivers/vpci/sriov.c
+> @@ -303,6 +303,63 @@ int vf_init_header(struct pci_dev *vf_pdev)
+>      sriov_pos = pci_find_ext_capability(pf_pdev, PCI_EXT_CAP_ID_SRIOV);
+>      ctrl = pci_conf_read16(pf_pdev->sbdf, sriov_pos + PCI_SRIOV_CTRL);
 >  
->  bool vpci_process_pending(struct vcpu *v)
->  {
-> -    const struct pci_dev *pdev = v->vpci.pdev;
-> -    struct vpci_header *header = NULL;
-> -    unsigned int i;
-> -
-> -    if ( !pdev )
-> -        return false;
-> -
-> -    read_lock(&v->domain->pci_lock);
-> -
-> -    if ( !pdev->vpci || (v->domain != pdev->domain) )
-> +    switch ( v->vpci.task )
->      {
-> -        v->vpci.pdev = NULL;
-> -        read_unlock(&v->domain->pci_lock);
-> -        return false;
-> -    }
-> -
-> -    header = &pdev->vpci->header;
-> -    for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-> +    case MODIFY_MEMORY:
->      {
-> -        struct vpci_bar *bar = &header->bars[i];
-> -        struct rangeset *mem = v->vpci.bar_mem[i];
-> -        struct map_data data = {
-> -            .d = v->domain,
-> -            .map = v->vpci.cmd & PCI_COMMAND_MEMORY,
-> -            .bar = bar,
-> -        };
-> -        int rc;
-> +        const struct pci_dev *pdev = v->vpci.memory.pdev;
-> +        struct vpci_header *header = NULL;
+> +#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
+> +    if ( pf_pdev->domain != vf_pdev->domain )
+
+Is there anything speaking against the (preferred) use of
+IS_ENABLED(CONFIG_HAS_VPCI_GUEST_SUPPORT) here?
+
+> +    {
+> +        uint16_t vid = pci_conf_read16(pf_pdev->sbdf, PCI_VENDOR_ID);
+> +        uint16_t did = pci_conf_read16(pf_pdev->sbdf,
+> +                                       sriov_pos + PCI_SRIOV_VF_DID);
+> +        struct vpci_bar *bars = vf_pdev->vpci->header.bars;
 > +        unsigned int i;
->  
-> -        if ( rangeset_is_empty(mem) )
-> -            continue;
-> +        if ( !pdev )
-> +            break;
->  
-> -        rc = rangeset_consume_ranges(mem, map_range, &data);
-> +        read_lock(&v->domain->pci_lock);
->  
-> -        if ( rc == -ERESTART )
-> +        if ( !pdev->vpci || (v->domain != pdev->domain) )
->          {
-> +            v->vpci.memory.pdev = NULL;
->              read_unlock(&v->domain->pci_lock);
-> -            return true;
-> +            break;
->          }
->  
-> -        if ( rc )
-> +        header = &pdev->vpci->header;
-> +        for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
->          {
-> -            spin_lock(&pdev->vpci->lock);
-> -            /* Disable memory decoding unconditionally on failure. */
-> -            modify_decoding(pdev, v->vpci.cmd & ~PCI_COMMAND_MEMORY,
-> -                            false);
-> -            spin_unlock(&pdev->vpci->lock);
-> +            struct vpci_bar *bar = &header->bars[i];
-> +            struct rangeset *mem = v->vpci.bar_mem[i];
-> +            struct map_data data = {
-> +                .d = v->domain,
-> +                .map = v->vpci.memory.cmd & PCI_COMMAND_MEMORY,
-> +                .bar = bar,
-> +            };
-> +            int rc;
 > +
-> +            if ( rangeset_is_empty(mem) )
-> +                continue;
->  
-> -            /* Clean all the rangesets */
-> -            for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-> -                if ( !rangeset_is_empty(v->vpci.bar_mem[i]) )
-> -                     rangeset_purge(v->vpci.bar_mem[i]);
-> +            rc = rangeset_consume_ranges(mem, map_range, &data);
->  
-> -            v->vpci.pdev = NULL;
-> +            if ( rc == -ERESTART )
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_VENDOR_ID, 2, (void *)(uintptr_t)vid);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_DEVICE_ID, 2, (void *)(uintptr_t)did);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        /* Hardcode multi-function device bit to 0 */
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
+> +                               PCI_HEADER_TYPE, 1,
+> +                               (void *)PCI_HEADER_TYPE_NORMAL);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        rc = vpci_add_register(vf_pdev->vpci, vpci_hw_read32, NULL,
+> +                               PCI_CLASS_REVISION, 4, NULL);
+> +        if ( rc )
+> +            return rc;
+> +
+> +        for ( i = 0; i < PCI_SRIOV_NUM_BARS; i++ )
+> +        {
+> +            switch ( pf_pdev->vpci->sriov->vf_bars[i].type )
 > +            {
-> +                read_unlock(&v->domain->pci_lock);
-> +                return true;
-> +            }
->  
-> -            read_unlock(&v->domain->pci_lock);
-> +            if ( rc )
-> +            {
-> +                spin_lock(&pdev->vpci->lock);
-> +                /* Disable memory decoding unconditionally on failure. */
-> +                modify_decoding(pdev, v->vpci.memory.cmd & ~PCI_COMMAND_MEMORY,
-> +                                false);
-> +                spin_unlock(&pdev->vpci->lock);
-> +
-> +                /* Clean all the rangesets */
-> +                for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-> +                    if ( !rangeset_is_empty(v->vpci.bar_mem[i]) )
-> +                        rangeset_purge(v->vpci.bar_mem[i]);
-> +
-> +                v->vpci.memory.pdev = NULL;
-> +
-> +                read_unlock(&v->domain->pci_lock);
->  
-> -            if ( !is_hardware_domain(v->domain) )
-> -                domain_crash(v->domain);
-> +                if ( !is_hardware_domain(v->domain) )
-> +                    domain_crash(v->domain);
->  
-> -            return false;
+> +            case VPCI_BAR_MEM32:
+> +            case VPCI_BAR_MEM64_LO:
+> +            case VPCI_BAR_MEM64_HI:
+> +                rc = vpci_add_register(vf_pdev->vpci, vpci_guest_mem_bar_read,
+> +                                       vpci_guest_mem_bar_write,
+> +                                       PCI_BASE_ADDRESS_0 + i * 4, 4, &bars[i]);
+> +                if ( rc )
+> +                    return rc;
 > +                break;
-> +            }
->          }
-> -    }
-> -    v->vpci.pdev = NULL;
-> +        v->vpci.memory.pdev = NULL;
->  
-> -    spin_lock(&pdev->vpci->lock);
-> -    modify_decoding(pdev, v->vpci.cmd, v->vpci.rom_only);
-> -    spin_unlock(&pdev->vpci->lock);
-> +        spin_lock(&pdev->vpci->lock);
-> +        modify_decoding(pdev, v->vpci.memory.cmd, v->vpci.memory.rom_only);
-> +        spin_unlock(&pdev->vpci->lock);
->  
-> -    read_unlock(&v->domain->pci_lock);
-> +        read_unlock(&v->domain->pci_lock);
-> +
-> +        break;
-> +    }
-> +    case WAIT:
-> +        if ( NOW() < v->vpci.wait.end )
-> +            return true;
-> +        v->vpci.wait.callback(v->vpci.wait.data);
-> +        break;
+> +            default:
 
-As just indicated in reply to patch 6, busy waiting isn't really acceptable.
-This is even more so when the waiting exceeds the typical length of a
-scheduling timeslice.
-
-In that other reply I said to put the vCPU to sleep, but you need to be careful
-there too: The domain may not expect its vCPU to not make any progress for such
-an extended period of time. This may need doing entirely differently: Once the
-command register was written, you may want to record the time after which
-accesses to the VF registers are permitted. Earlier accesses would simply be
-terminated. You may still additionally need a timer, in order to kick off BAR
-mapping after that time. (Yet better would  be if the BAR mapping could be
-done during those 100ms. After all that may be a reason why this long a delay
-is specified: Firmware on the device may also require some time to set up the
-BARs accordingly.)
+Nit: Blank lines please between non-fall-through case blocks.
 
 Jan
 
