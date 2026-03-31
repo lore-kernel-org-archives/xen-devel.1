@@ -4,43 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C8E109B47B
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 15:03:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269062.1558211 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0362109B48C
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 15:14:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269084.1558221 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7acO-00072Z-0e; Tue, 31 Mar 2026 15:03:00 +0000
+	id 1w7anT-0000vv-3A; Tue, 31 Mar 2026 15:14:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269062.1558211; Tue, 31 Mar 2026 15:02:59 +0000
+Received: by outflank-mailman (output) from mailman id 1269084.1558221; Tue, 31 Mar 2026 15:14:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7acN-00072S-U2; Tue, 31 Mar 2026 15:02:59 +0000
-Received: by outflank-mailman (input) for mailman id 1269062;
- Tue, 31 Mar 2026 15:02:59 +0000
+	id 1w7anT-0000vj-0S; Tue, 31 Mar 2026 15:14:27 +0000
+Received: by outflank-mailman (input) for mailman id 1269084;
+ Tue, 31 Mar 2026 15:14:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ilpo.jarvinen@linux.intel.com>) id 1w7acM-000723-MM
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 15:02:59 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1w7anR-0000un-NX
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 15:14:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7acM-008jFp-2C
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 17:02:58 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w7anQ-008DAD-UZ
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 17:14:24 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ilpo.jarvinen@linux.intel.com>)
- id 69cbe218-2eae-0a2a0a5409dd-0a2a4505be9e-30
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:02:56 +0200
-Received: from [192.198.163.9] (helo=mgamail.intel.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <ilpo.jarvinen@linux.intel.com>)
- id 69cbe21e-5aeb-0a2a45050019-c0c6a30982d7-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:02:56 +0200
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
- by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Mar 2026 08:02:53 -0700
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost)
- ([10.245.244.6])
- by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Mar 2026 08:02:37 -0700
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69cbe4bb-2eae-0a2a0a5409dd-0a2a45088716-46
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:14:24 +0200
+Received: from [40.93.201.17]
+ (helo=CY3PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69cbe4ce-1950-0a2a45080019-285dc911191b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 17:14:24 +0200
+Received: from MN2PR07CA0017.namprd07.prod.outlook.com (2603:10b6:208:1a0::27)
+ by CH1PPF4CBE7339A.namprd12.prod.outlook.com
+ (2603:10b6:61f:fc00::60e) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.10; Tue, 31 Mar
+ 2026 15:14:16 +0000
+Received: from BN1PEPF00005FFF.namprd05.prod.outlook.com
+ (2603:10b6:208:1a0:cafe::52) by MN2PR07CA0017.outlook.office365.com
+ (2603:10b6:208:1a0::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.29 via Frontend Transport; Tue,
+ 31 Mar 2026 15:14:16 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN1PEPF00005FFF.mail.protection.outlook.com (10.167.243.231) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9745.21 via Frontend Transport; Tue, 31 Mar 2026 15:14:16 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 31 Mar
+ 2026 10:14:15 -0500
+Received: from [10.71.194.215] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Tue, 31 Mar 2026 10:14:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,204 +67,241 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=Intel header.d=intel.com header.i="@intel.com" header.h="From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:MIME-Version"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1774969376; x=1806505376;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=lKc0nR0+3UMuWZyWz6l9MjXgdkdLagd8O+NJe9KaxV4=;
-  b=F+VgHQWfalgDZR7+DXUrOTZbIFCO9gX3e0aVFmlQkhph+bZPKjQOLol8
-   ryixn/jEJ3gHgKULmO5Jeffxxs6C8teDBbz9U3rkydZoeiLkeNVDKQq8C
-   E3JaqdlsglB2zmIhcPtROCVTmWWP2XYvs+XJWy9En8ElVd0GQAdm9cyyN
-   sbcY0i5+z1dAfaPQVzI4Gj2GuUV15lq+xMYLbKqQesmRVvNq3595hVp7n
-   cJ7MjLt5OQWnOmMZQw/Qi7jO19cuuqH4f5FFrCheZv6WCF66F7F12e31n
-   fXew6N8oYYJNjqHPLY7UETBKSPU6ZbrHgefuvnTCmrPIOaeWp5q6+rIr4
-   A==;
-X-CSE-ConnectionGUID: LIGBrtE1QUmVGo4tiRwZzA==
-X-CSE-MsgGUID: dJNhuoN1S+S4Fh2xlD85+Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11745"; a="86682249"
-X-IronPort-AV: E=Sophos;i="6.23,152,1770624000"; 
-   d="scan'208";a="86682249"
-X-CSE-ConnectionGUID: JHiKH3CWRemnPBHhcWS24A==
-X-CSE-MsgGUID: Gcx1iYgWQJaJHg3SKbkrBg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,152,1770624000"; 
-   d="scan'208";a="221527611"
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Tue, 31 Mar 2026 18:02:33 +0300 (EEST)
-To: Danilo Krummrich <dakr@kernel.org>
-cc: Russell King <linux@armlinux.org.uk>, 
-    Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-    "Rafael J. Wysocki" <rafael@kernel.org>, 
-    Ioana Ciornei <ioana.ciornei@nxp.com>, Nipun Gupta <nipun.gupta@amd.com>, 
-    Nikhil Agarwal <nikhil.agarwal@amd.com>, 
-    "K. Y. Srinivasan" <kys@microsoft.com>, 
-    Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-    Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-    Bjorn Helgaas <bhelgaas@google.com>, Armin Wolf <W_Armin@gmx.de>, 
-    Bjorn Andersson <andersson@kernel.org>, 
-    Mathieu Poirier <mathieu.poirier@linaro.org>, 
-    Vineeth Vijayan <vneethv@linux.ibm.com>, 
-    Peter Oberparleiter <oberpar@linux.ibm.com>, 
-    Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
-    Alexander Gordeev <agordeev@linux.ibm.com>, 
-    Christian Borntraeger <borntraeger@linux.ibm.com>, 
-    Sven Schnelle <svens@linux.ibm.com>, 
-    Harald Freudenberger <freude@linux.ibm.com>, 
-    Holger Dengler <dengler@linux.ibm.com>, Mark Brown <broonie@kernel.org>, 
-    "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
-    Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
-    =?ISO-8859-15?Q?Eugenio_P=E9rez?= <eperezma@redhat.com>, 
-    Alex Williamson <alex@shazbot.org>, Juergen Gross <jgross@suse.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-    "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
-    LKML <linux-kernel@vger.kernel.org>, driver-core@lists.linux.dev, 
-    linuxppc-dev@lists.ozlabs.org, linux-hyperv@vger.kernel.org, 
-    linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
-    linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-    linux-s390@vger.kernel.org, linux-spi@vger.kernel.org, 
-    virtualization@lists.linux.dev, kvm@vger.kernel.org, 
-    xen-devel@lists.xenproject.org, linux-arm-kernel@lists.infradead.org, 
-    Gui-Dong Han <hanguidong02@gmail.com>
-Subject: Re: [PATCH 06/12] platform/wmi: use generic driver_override
- infrastructure
-In-Reply-To: <20260324005919.2408620-7-dakr@kernel.org>
-Message-ID: <f15629e4-ef8f-b1b6-0158-064f40f111da@linux.intel.com>
-References: <20260324005919.2408620-1-dakr@kernel.org> <20260324005919.2408620-7-dakr@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hDhlhE/0s/EPFaedOOd+Pas4PJq2IcryWr0BByishYp/5m/CTlYVeiaYkOV0nuj2Z6dnwePDyM/If7nyTXjuht2eKoiyzuBkqbzTcsR2LpseRfUHcVyExtHX1yeyVBoybK/T4KMF7DOY5809B1RpaTNLQLAMpxjQyFnzPGqd3cAhhdPMxWInK4xTh4cyY+5+4eSKVNBAOusnwuCkfkhDb6rqljQfMnt+GqkG98/qZbJ3+RpfoFyxnaKkjda+rukQxTg1uDHruQznU3MAIL15aR9BBygcwbPYl3B48sIyVtBoYJB+QVJzwmdNpB/6jNcsRpuJS3HMDDGJvM9+2Yt0OA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mMmZ8twaCp7Axb1ZfHLhjkGZVxF27h8/re92RhbYGiw=;
+ b=ioLjAQ4oESVB8MUOLxdnDX4P7cKBVJU5Mx0X/DRXmxlJo2SxXlWaZCxI7l2KaRsFBCpi4gYKKyTAk8bJ4nbOO5zUcTgrIu0+GPKw4Nu7lu7g1FyP4XR++4HNFyktvCxmCsr5gKogAchTN8pxS+ql3XLezjn46AoYC4dj3DpMyW6a0PR9rs34OsztVh660Oil7FB0HiaN0NLZIY6FUC41SwArb+Xk2xKinfNKHZaauMh4NB0DTXD11+XFEyujRZnkkaULwfVHoXtctUqgoVKt4+wbQzRazwrifl1GapCmUcaR2/K7CyzLUeFmEeQx62LHOxGvhVBW7ykykvFt5UsEcQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mMmZ8twaCp7Axb1ZfHLhjkGZVxF27h8/re92RhbYGiw=;
+ b=D4m+JQYcJKYluAOMACtkCVq6MIH0MioNZ7RYNpDAxvS14olREh5pc+CC8GnMXbEA6h+P+sZ7sVKP0yzp6KpqvjDDP8/zaOGsw44XiGPsbRrgflnw5RpiMg8zWQP3bNYzRe8oPxOoIzWrHFvijE7QhByMGkfy0X318ijIozwG6pk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <29922538-f20f-40e1-8ed2-5913b421008b@amd.com>
+Date: Tue, 31 Mar 2026 17:14:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-purgate-ID: tlsNG-c201ff/1774969376-9F283488-BFCDF2BC/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/arm: Increase DOM0_FDT_EXTRA_SIZE to support max
+ reserved memory banks
+To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20260326131535.662466-1-oleksandr_tyshchenko@epam.com>
+ <29769bd9-8410-417b-9ad8-84131956db57@amd.com>
+ <7d52cf29-c0bb-4e39-ae10-2b43f3e8e921@epam.com>
+ <618e3227-10c7-46e4-9328-3d7d981fddfa@amd.com>
+ <89782bb0-d910-49b8-9a7d-83c3cf38d442@epam.com>
+ <c8e8fbd1-33f8-469f-96c4-22d384196cdb@amd.com>
+ <4d18fa65-fb01-40ac-9354-023f243f7f41@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <4d18fa65-fb01-40ac-9354-023f243f7f41@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFF:EE_|CH1PPF4CBE7339A:EE_
+X-MS-Office365-Filtering-Correlation-Id: f41c5d8f-5a16-4aac-f0be-08de8f382cda
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	E46HRrGSzmrOhnlVu7Igjq/iul/buydZYyrPoBQWJ93vcQXYBqrwQZaYyJQlahJGWWEMaVFqXl/wp68pmSHEZEN6nV9oR6DyyfzfrfJjVGSWR74of4bHtxyuOPKOLM4WpOQAQF4AYgmluwzd6w5vKCyORrCQi15BNZuVctOmqekKvtymMAIbJ15te7OV2iTPPIeomns2cmoUqEbBNXz6D78yZGRUDb+Wih4pbETVDzKyn6/jYB9UomATuqPkT5ncaDEg2f37SOEwpSCYciNYNYi2kRt3//Kf9AV9FdhR3y3FQ9MKIuF97edxuIbAcbMCzr71UZONe/eVArr52v2gJudIxrwjha7I2YNOYBar7Jgl9479Ss5rwPZaLy2So1OPM2wnl6+enOENY447RQ+JSOJfZXXTaGGX6FXJmlM0lET0ZdJcyKudWPjWXG2g4n6MZUfTNhjFQGp8BG9553T19MMeB89YfOLW96q0jkl34hpSMw1lUSKs7/Zl5pidHQe/Qy67Tab9IwjMqM6mqvHkdl7qcxy36NOiuywj810k8rWy+VfcMP8nQZ5YJbELs7q67HUDR41UkmMVPEo5x7LJWEnGLWZuklF6n1QoGu7+yA4k9zCi4uwjJUYoeWbZWHsRG5YTRcmyH7VhPbI+znjYiA7m27zpExLfC7TUgq5/5qoWkl78EYrdSQM3h47mrpbR/fztZwkItyzIJSeN5ZpSQLLlfykakEWtiHCPCfDhyFt8NxK1ELfQqCS6ajxVyH6TAw/wGeuCyZbB7+Co8vewjQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	G52t9YdrkO2slIJE44G3ba4/BJq+u4u5pIUQ/F6lFYwL3d2DC7ONgUHThmK+vBzAZWDbR3+fpfTOBUn8EPbnooKstAuwSP+PNgrO29FES3q5grI2h7UZGIg9YMcyW/zvwQeHLOFbUVrzO6kihZ5qYNieDRmywXHiUCfT3IuePzdiXOaNBRZvjfFk2WNqbPaGfUcFTy5Sjy+Rd70lvf/v92gKPAREGfTpaDpTN7WZ8n+oy56whXQ69StWyk5/jtetL+tX4xnRzKfCy6TXc46k4WyIEgA/Da5soqaxsFm/ixee3SDGrR5z2gHkqhzfq43vuLQ0F1sbkTvR1T7bB6H6+wkmlWtLRmpUqBbneOqycH8TRfQiwWvcbgFzJbokT9EwTr8K7ZTGWTXmYkiffl6uoQ+t+qYm5tWOiBMtyHJJEeDAEa7XjYa5ladNOLg7qMSN
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 15:14:16.6225
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f41c5d8f-5a16-4aac-f0be-08de8f382cda
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00005FFF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF4CBE7339A
+X-purgate-ID: tlsNG-c1860d/1774970064-E3297726-5E6FE088/0/0
 X-purgate-type: clean
-X-purgate-size: 4261
+X-purgate-size: 6758
 
-On Tue, 24 Mar 2026, Danilo Krummrich wrote:
 
-> When a driver is probed through __driver_attach(), the bus' match()
-> callback is called without the device lock held, thus accessing the
-> driver_override field without a lock, which can cause a UAF.
-> 
-> Fix this by using the driver-core driver_override infrastructure taking
-> care of proper locking internally.
-> 
-> Note that calling match() from __driver_attach() without the device lock
-> held is intentional. [1]
-> 
-> Link: https://lore.kernel.org/driver-core/DGRGTIRHA62X.3RY09D9SOK77P@kernel.org/ [1]
-> Reported-by: Gui-Dong Han <hanguidong02@gmail.com>
-> Closes: https://bugzilla.kernel.org/show_bug.cgi?id=220789
-> Fixes: 12046f8c77e0 ("platform/x86: wmi: Add driver_override support")
-> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
-> ---
->  drivers/platform/wmi/core.c | 36 +++++-------------------------------
->  include/linux/wmi.h         |  4 ----
->  2 files changed, 5 insertions(+), 35 deletions(-)
-> 
-> diff --git a/drivers/platform/wmi/core.c b/drivers/platform/wmi/core.c
-> index b8e6b9a421c6..750e3619724e 100644
-> --- a/drivers/platform/wmi/core.c
-> +++ b/drivers/platform/wmi/core.c
-> @@ -842,39 +842,11 @@ static ssize_t expensive_show(struct device *dev,
->  }
->  static DEVICE_ATTR_RO(expensive);
->  
-> -static ssize_t driver_override_show(struct device *dev, struct device_attribute *attr,
-> -				    char *buf)
-> -{
-> -	struct wmi_device *wdev = to_wmi_device(dev);
-> -	ssize_t ret;
-> -
-> -	device_lock(dev);
-> -	ret = sysfs_emit(buf, "%s\n", wdev->driver_override);
-> -	device_unlock(dev);
-> -
-> -	return ret;
-> -}
-> -
-> -static ssize_t driver_override_store(struct device *dev, struct device_attribute *attr,
-> -				     const char *buf, size_t count)
-> -{
-> -	struct wmi_device *wdev = to_wmi_device(dev);
-> -	int ret;
-> -
-> -	ret = driver_set_override(dev, &wdev->driver_override, buf, count);
-> -	if (ret < 0)
-> -		return ret;
-> -
-> -	return count;
-> -}
-> -static DEVICE_ATTR_RW(driver_override);
-> -
->  static struct attribute *wmi_attrs[] = {
->  	&dev_attr_modalias.attr,
->  	&dev_attr_guid.attr,
->  	&dev_attr_instance_count.attr,
->  	&dev_attr_expensive.attr,
-> -	&dev_attr_driver_override.attr,
->  	NULL
->  };
->  ATTRIBUTE_GROUPS(wmi);
-> @@ -943,7 +915,6 @@ static void wmi_dev_release(struct device *dev)
->  {
->  	struct wmi_block *wblock = dev_to_wblock(dev);
->  
-> -	kfree(wblock->dev.driver_override);
->  	kfree(wblock);
->  }
->  
-> @@ -952,10 +923,12 @@ static int wmi_dev_match(struct device *dev, const struct device_driver *driver)
->  	const struct wmi_driver *wmi_driver = to_wmi_driver(driver);
->  	struct wmi_block *wblock = dev_to_wblock(dev);
->  	const struct wmi_device_id *id = wmi_driver->id_table;
-> +	int ret;
->  
->  	/* When driver_override is set, only bind to the matching driver */
-> -	if (wblock->dev.driver_override)
-> -		return !strcmp(wblock->dev.driver_override, driver->name);
-> +	ret = device_match_driver_override(dev, driver);
-> +	if (ret >= 0)
-> +		return ret;
->  
->  	if (id == NULL)
->  		return 0;
-> @@ -1076,6 +1049,7 @@ static struct class wmi_bus_class = {
->  static const struct bus_type wmi_bus_type = {
->  	.name = "wmi",
->  	.dev_groups = wmi_groups,
-> +	.driver_override = true,
->  	.match = wmi_dev_match,
->  	.uevent = wmi_dev_uevent,
->  	.probe = wmi_dev_probe,
-> diff --git a/include/linux/wmi.h b/include/linux/wmi.h
-> index 75cb0c7cfe57..14fb644e1701 100644
-> --- a/include/linux/wmi.h
-> +++ b/include/linux/wmi.h
-> @@ -18,16 +18,12 @@
->   * struct wmi_device - WMI device structure
->   * @dev: Device associated with this WMI device
->   * @setable: True for devices implementing the Set Control Method
-> - * @driver_override: Driver name to force a match; do not set directly,
-> - *		     because core frees it; use driver_set_override() to
-> - *		     set or clear it.
->   *
->   * This represents WMI devices discovered by the WMI driver core.
->   */
->  struct wmi_device {
->  	struct device dev;
->  	bool setable;
-> -	const char *driver_override;
->  };
->  
->  /**
-> 
 
-Hi,
+On 31/03/2026 16:10, Oleksandr Tyshchenko wrote:
+> 
+> 
+> On 3/31/26 11:12, Orzel, Michal wrote:
+> 
+> Hello Michal
+> 
+> 
+>>
+>>
+>> On 27/03/2026 13:23, Oleksandr Tyshchenko wrote:
+>>>
+>>>
+>>> On 3/27/26 09:30, Orzel, Michal wrote:
+>>>
+>>> Hello Michal
+>>>
+>>>>
+>>>>
+>>>> On 26/03/2026 20:03, Oleksandr Tyshchenko wrote:
+>>>>>
+>>>>>
+>>>>> On 3/26/26 18:50, Orzel, Michal wrote:
+>>>>>
+>>>>> Hello Michal
+>>>>>
+>>>>>>
+>>>>>>
+>>>>>> On 26/03/2026 14:15, Oleksandr Tyshchenko wrote:
+>>>>>>> Xen fails to construct the hardware domain's device tree with
+>>>>>>> FDT_ERR_NOSPACE (-3) when the host memory map is highly fragmented
+>>>>>>> (e.g., numerous reserved memory regions).
+>>>>>>>
+>>>>>>> This occurs because DOM0_FDT_EXTRA_SIZE underestimates the space
+>>>>>>> required for the generated extra /memory node. make_memory_node()
+>>>>>> Where does this extra /memory node come from? If this is for normal reserved
+>>>>>> memory regions, they should be present in the host dtb and therefore accounted
+>>>>>> by fdt_totalsize (the host dtb should have reserved regions described in /memory
+>>>>>> and /reserved-memory. Are you trying to account for static shm regions?
+>>>>>
+>>>>>
+>>>>> I might have misunderstood something, but here is my analysis:
+>>>>>
+>>>>> The extra /memory node is generated by Xen itself in handle_node() ->
+>>>>> make_memory_node() (please refer to the if ( reserved_mem->nr_banks > 0
+>>>>> ) check).
+>>>>>
+>>>>> Even though the normal reserved memory regions are present in the host
+>>>>> DTB (and thus accounted for in fdt_totalsize), Xen generates a new
+>>>>> /memory node specifically for the hardware domain to describe these
+>>>>> regions as reserved but present in the memory map. And since this node
+>>>>> is generated at runtime (it is not a direct copy from the host DTB),
+>>>>> its size must be covered by DOM0_FDT_EXTRA_SIZE.
+>>>> Yes, but the original DTB should also have these reserved regions described in
+>>>> /memory nodes, thus taking up some space that is already accounted in
+>>>> fdt_totalsize. Are you trying to say that in host DTB, these reserved ranges fit
+>>>> nicely into e.g. a single /memory node range (i.e. a single reg pair covering
+>>>> most of the RAM)?
+>>>
+>>> yes
+>>>
+>>>
+>>>    I can see that it might be possible but the commit msg needs
+>>>> to be clear about it. As of now, it reads as if the problem occured always when
+>>>> there are multiple reserved memory regions. That's not true if a host DTB
+>>>> generates one /memory per one /reserved.
+>>>
+>>> Yes, you are correct that the total size depends on how the host DTB is
+>>> structured compared to how Xen regenerates it at runtime. So, the issue
+>>> can arise if host DTB represents RAM using a single, large reg entry or
+>>> a few entries.
+>>>
+>>> ***
+>>>
+>>> I will update the commit message to clarify that, something like below:
+>>>
+>>> Xen fails to construct the hardware domain's device tree with
+>>> FDT_ERR_NOSPACE (-3) when the host memory map is highly fragmented
+>>> (e.g., numerous reserved memory regions) and the host DTB represents
+>>> RAM compactly (e.g., a single reg pair or just a few).
+>>>
+>>> This occurs because DOM0_FDT_EXTRA_SIZE underestimates the space
+>>> required for the generated extra /memory node. While the host DTB
+>>> might represent RAM compactly, make_memory_node() aggregates
+>>> all reserved regions into a single reg property.
+>>> With NR_MEM_BANKS (256) and 64-bit address/size cells, this property
+>>> can grow up to 4KB (256 * 16), easily exceeding the space originally
+>>> occupied by the host DTB's nodes plus the current padding, thereby
+>>> overflowing the allocated buffer.
+>> This reads better.
+> 
+> ok
+> 
+> 
+>>
+>>>
+>>>
+>>>>
+>>>> Another issue is with the static shm nodes. User specifies the regions in the
+>>>> domain configuration and Xen creates *additional* nodes under /reserved and
+>>>> /memory that afaict we don't account for.
+>>>
+>>> Yes, you are right.
+>>>
+>>> Since these SHM sub-nodes and properties are generated purely from the
+>>> Xen domain configuration and are not present in the host DTB, they have
+>>> zero space allocated for them in fdt_totalsize.
+>>>
+>>> So we need to redefine the macro. I propose the following formula that
+>>> separates the range data (16 bytes per bank in /memory) from the node
+>>> overhead (160 bytes per SHM region):
+>> What is included in these 160 bytes? Did you manually check all fdt functions
+>> inside make_shm_resv_memory_node?
+> 
+> According to my calculations (which, of course, might be not precise):
+> 
+> - FDT_BEGIN_NODE + xen-shmem@ffffffffffffffff\0 (27b padded to 28): 32 bytes
+> - compatible (12b header + 21b string padded to 24): 36 bytes
+> - reg (12b header + 16b payload [4 cells]): 28 bytes
+> - xen,id (12b header + 16b max string [15 chars + \0]): 28 bytes
+> - xen,offset (12b header + 8b payload): 20 bytes
+> - FDT_END_NODE: 4 bytes
+> Total exact node payload: 148 bytes. I also added 12-byte margin (so it 
+> gets rounded up to the nearest 16-byte boundary).
+> 
+>>
+>>>
+>>> #define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry) + \
+>>>                               (NR_MEM_BANKS * 16) +                    \
+>>>                               (NR_SHMEM_BANKS * 160))
+>> I think you only accounted for shm nodes under /reserved-memory. As any other
+>> reserved memory node, they are also added to /memory reg property (see
+>> DT_MEM_NODE_REG_RANGE_SIZE).
+> 
+> You are right, and I completely missed this in my original calculation. 
+> I mistakenly believed (NR_MEM_BANKS * 16) would cover the entire 
+> capacity of the /memory node's reg.
+> 
+> The shm_mem_node_fill_reg_range() appends the shared memory banks 
+> directly into the main /memory node's reg. Each SHM bank adds 16 bytes 
+> (4 cells = 16 bytes) to the main memory node.
+> 
+> So, I will refine the macro to explicitly reflect both the 160-byte 
+> discrete sub-node and the 16-byte extra to the /memory node:
+> 
+> #define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry) + \
+>                               (NR_MEM_BANKS * 16) +                    \
+>                               (NR_SHMEM_BANKS * (160 + 16)))
+> 
+> Or wait, we can actually drop the SHM overhead entirely when 
+> CONFIG_STATIC_SHM=n:
+> 
+> #define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry) + \
+>                               (NR_MEM_BANKS * 16) +                    \
+>                               (IS_ENABLED(CONFIG_STATIC_SHM) ?         \
+>                               (NR_SHMEM_BANKS * (160 + 16)) : 0))
+Yes, the CONFIG was my next question. I'm ok with this solution.
 
-I tried applying this to platform-drivers tree but it failed to compile so 
-I ended up dropping the changed.
-
--- 
- i.
+~Michal
 
 
