@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2886C10F92EF
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 19:04:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269259.1558356 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8903910F92F0
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 19:04:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269262.1558371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7eO9-0004yP-22; Tue, 31 Mar 2026 19:04:33 +0000
+	id 1w7eOA-0005JW-OM; Tue, 31 Mar 2026 19:04:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269259.1558356; Tue, 31 Mar 2026 19:04:33 +0000
+Received: by outflank-mailman (output) from mailman id 1269262.1558371; Tue, 31 Mar 2026 19:04:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7eO8-0004yG-Uk; Tue, 31 Mar 2026 19:04:32 +0000
-Received: by outflank-mailman (input) for mailman id 1269259;
- Tue, 31 Mar 2026 19:04:31 +0000
+	id 1w7eOA-0005Ip-Ji; Tue, 31 Mar 2026 19:04:34 +0000
+Received: by outflank-mailman (input) for mailman id 1269262;
+ Tue, 31 Mar 2026 19:04:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1w7eO7-0004fy-8X
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 19:04:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1w7eO9-0004zj-BA
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 19:04:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7eO6-002qYo-Jw
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 21:04:30 +0200
+ id 1w7eO8-001kxS-NR
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 21:04:32 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69cc1aa3-2eae-0a2a0a5409dd-0a2a450ba5fc-40
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:30 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ id 69cc1ac0-bab6-0a2a0a5309dd-0a2a450ba29c-0
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:32 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69cc1abe-ef63-0a2a450b0019-d155802ac901-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:30 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-48558d6ef83so61121765e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 12:04:30 -0700 (PDT)
+ id 69cc1ac0-ef63-0a2a450b0019-d1558035cc59-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:32 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-48540d21f7dso73088655e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 12:04:32 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887e80a6ebsm66704905e9.6.2026.03.31.12.04.28
+ 5b1f17b1804b1-4887e80a6ebsm66704905e9.6.2026.03.31.12.04.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 12:04:29 -0700 (PDT)
+ Tue, 31 Mar 2026 12:04:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774983870; x=1775588670; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1774983872; x=1775588672; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ES6McZgHHUK3/JfDJnTNyyxwZ5gq9pJEFKhOZMJXQbQ=;
-        b=P9gcmbtxtyitWUWixZ3vvGuxg6sJ1cr9HaRZOdUkn+dNE+g1mdHIe4Vw4jU9FQ7oLd
-         YrrK/KNiwMDPMi7ccSbi3ti8lybmF1O+OFAn5EDPVNYE3F5pG6ZyvN2u7SQnsAWwPCjf
-         Ym2rYIrVpfBO+VsfVFmW1AICCrH7AE+5NK1bkNlV6vsdd+YC+XndrFTT7Uck0FNDDBvb
-         MiAoVXo44rCFeMkn+EVHX3PAu0cPRe49UGrWdyhHE1DkYgFUQKAUQP7DUcHWgBkB/IyF
-         4kVomkdmWbrLyG/9zwBxMZzJmVtOQWPmYs/086asFVJQl9PrNg5KrGt6NaSgB3YcVr1g
-         MzMA==
+        bh=5wIJCzxQUgbccKwE9h7kA0JQ/lmT/FyjEkSXHOWHMIM=;
+        b=J/q2I9aDKG3dYITZ/eEDII7l5hHiHyuGKfXVC1n6hf26W0FdJo8+4hQOkPd6954eLG
+         x7vsAHhLfJVXu60HWGSZlISFwzinpwZEUqgWtA7bSpv0B/8nlcIXfTrvkUqUL3ApIUmw
+         RcIGrVKIO3+tP1r3bVkulDMZ7gKkThdHgVEpYs3DSsrBz+kEl4FNXpcn8yFrCpdAdyrk
+         31XTJL5LZyfAZBJEGM+idMeyfbc3ittCfuzdpigGQe8WaCR2v8RuxFuNQfomoZVBOwFj
+         Mxhcp1zP+RWC6wLbcBQ5Nzv4hft4l0rCowU6eRkz637NagTpni8c9IVUa2Zr+fAXggW6
+         XbWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774983870; x=1775588670;
+        d=1e100.net; s=20251104; t=1774983872; x=1775588672;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ES6McZgHHUK3/JfDJnTNyyxwZ5gq9pJEFKhOZMJXQbQ=;
-        b=MKQO/Plvw44NBVFoa7V4RdNVscVN/p1/R3Z1Yw1m2qPfUpiaA0H1tnyuSzgSJPIZv0
-         21HpOscy7FZDpVbA/dCr1VVaawATD7GkalMMfflpxwZWrZ78gUewYajgunIqSqlA+/vd
-         +w2lIh3X4fG7grEneRu8TIWjQZnfu1I9B2SRpzAVpp6t2MBrU4F2GJpNUwSoMstmh6LH
-         genLq32336JxJnGrk5+opRLBVZDxT+Vkb1PFVKRoYGwL6SxXdDz1eRQQvP7/+xQeOJKV
-         twIkNtOolyk9pTxgNEaC5aTuLXH43RY3g3Vk/TMCGoHplbtqVncoyv3EBzsfwwNljncE
-         fviA==
-X-Gm-Message-State: AOJu0YyXY4dSyKTjxfKYxOl2pT+oJ4wtHqybke+b/CXE1rhkpC0EmAYQ
-	4ZQ6shy5BiaWo4s0+or6rFmJo5g+7S9U7dVdBpWS/sbOMfDWEQ4wUU/U1cU1Nw==
-X-Gm-Gg: ATEYQzxxlGbjyMdzhB4q8azOLTurb5aG03/fNu8LDqNkfMWEtvhUvnilVdFuzpR1vtE
-	pF6eZcL6x36yPogJ17pto4yiJq9c25utRFC6lYoFzjyyAePhoeIehTDMWhNOVanO4yrf17yf05W
-	FyXyLIizOvT8xjNaSHtIP582aPYGdUVJE7h7Ew1liGMbW6Z8ybAGocuxpXG9bfjYHWkq2QC95Nn
-	wge+jHOBftij8QykAEZfzLYLHrVI2K8dEG6kvj8yehgwiSROwMVSJSyosDOmtFsl/oLCXIefbWo
-	v/ipt8Zh2qkorXsE7mofN0QNMEiN46wImMNvh2eZJ3LNc4HZiWHGi6Bi16+6V660H57beVmpGUo
-	gFypdFNrChBRdAwGyfmhWxrFjYjbSfiRGLTKnv/sUram3bdQiC1GHaqkR1H2TTAkDxNI9AIuG0c
-	xtP1YDBVAaBnnC6kIsPMfp7GHHcQLl8FCWesZFCbEKZkVW8oCPVpT2db6RTwqSCprOJUh7pA3xI
-	Vju
-X-Received: by 2002:a05:600c:4fcb:b0:485:3e20:4013 with SMTP id 5b1f17b1804b1-488835d539cmr9040015e9.28.1774983869606;
-        Tue, 31 Mar 2026 12:04:29 -0700 (PDT)
+        bh=5wIJCzxQUgbccKwE9h7kA0JQ/lmT/FyjEkSXHOWHMIM=;
+        b=Ly2fQT9KXUzxkaeEh4jBCStGNEFdBqfboNUifc6tb/PJew99glUQdl/OSDIcscnMsd
+         WqBLryxfY3Nd+a/l5oW7qWF6j1Id7GdrkdvOdcUcS/PBRnSupxrdOJGdkAtHjH3ggcUc
+         yb30XpvipKuM0iPz7O7X8rBb8fzI0I8EaXrVvDYUTZcrqJNLTUudGb2NOQmhE8JeGHYj
+         AhCuFQzktyARC+LyfaFDDTxSnXxpFpFR1ZfQMiqxusw/+qTt9VVpO8vV0kqXwfMA4Luv
+         mliEg7PvqmNZLH2F76JhfxpYYNKhAy41/NivYnPXokcqGtcSzWHjQRocq0cmVWiPNTTS
+         GBwQ==
+X-Gm-Message-State: AOJu0YzFmq7bEr1TUUr45yt5jHKljqlmCneuxc+FBssPL+nSzJ176/gm
+	oWsBNPN1HCBJ7Hijkr8TmuYcgFL16892EarLjq3fuO3BQ8MPfv1Lm58WJ7tKbg==
+X-Gm-Gg: ATEYQzy0SckG6iGrwlzAxfvfU+tBaujQhO5L7rK6vVnnHeFgP73VldTVkMSqJIfVy5Q
+	9uVZlJlCEcAJPFcXQqKaPmMnGrNjzlaCfE4mFvycrksm6HrwQBqBOY42IqW0JARR+ipdaKENP8c
+	AvCksajPrbw7FjDDl7yuKhYw8uz4TRVod3PyNrCUF2EmquAi+ZUGNPnyXpRdGJIXngqr821LIsc
+	zHeblJl1bZRA0fAt0YQ1ZL26yLS+xAxt9Y3EdXcHog6Cr3uIxukIvZqmF+s0ucqHLNMHmJNNDNR
+	aY7gSngZTdFEeCx7l5t9nXksSjCxSvYdmtYtcef5LGPFrElJb6kA7wOk9uVHub+doXQpvb3TI/R
+	CBo5cky3BU7EFtkKn9zx51Hnb36+ep5s8g4+JEyO9MOb/KAFXxYOUbQmXOsZS+aSBtdQE5/oPCl
+	LBsJkq3CR+/oaw6QCcS7HaLfYGs9DkOZMCSmthDA6pGMPRJ0VEaabzWOit7HAXtJi5Jg==
+X-Received: by 2002:a05:600c:821a:b0:486:fdba:f5db with SMTP id 5b1f17b1804b1-48883307a37mr12050905e9.0.1774983871796;
+        Tue, 31 Mar 2026 12:04:31 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,100 +101,90 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 2/4] xen/riscv: add csr_read_safe() helper
-Date: Tue, 31 Mar 2026 21:04:17 +0200
-Message-ID: <f870d5def964ee06471d6dde0f66d6585eb5ca36.1774863161.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 4/4] xen/riscv: init_csr_masks()-related improvements
+Date: Tue, 31 Mar 2026 21:04:19 +0200
+Message-ID: <8eb8327bfb2f273cd0fa32ba65e84bb79e8607d4.1774863161.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1774863161.git.oleksii.kurochko@gmail.com>
 References: <cover.1774863161.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1774983870-9AEAA112-8A09532A/10/73395122804
+X-purgate-ID: tlsNG-42698a/1774983872-BBEA2112-8AF259C0/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2490
+X-purgate-size: 2953
 
-Accessing some CSRs may trap when the corresponding extension is not
-implemented or enabled. Introduce csr_read_safe() which attempts to
-read a CSR and relies on the exception table mechanism to safely recover
-if the access faults.
+There is no reason to use _UL() in define-s sitting in C file hence use UL
+suffix instead.
 
-This helper allows Xen to probe CSR availability without taking a fatal
-trap and will be used for feature detection during early boot as we
-can't always rely on what is in riscv,isa string in DTS.
+Drop 3d argument of INIT_CSR_MASK() and INIT_RO_ONE_MASK() to reduce risk
+of incomplete editing after copy-and-paste, or other typo-ing.
 
-While touching the header, reorder the include directives to follow the
-usual Xen style.
+Use _VALID_ infix instead of _AVAIL_ as the mask identifies architecturally
+defined bits, not bits available for software use.
 
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v2:
- - s/extables.h/extable.h.
- - s/csr_allowed_read/csr_read_safe() to follow the common nomenclature.
- - asm/asm_inline in csr_allowed_safe().
- - Drop the comment inside csr_allowed_safe().
- - Add ifdef CONFIG_CC_HAS_ASM_GOTO_OUTPUT
- - Drop memory clobber as a memory which is going to be changed is explicitly
-   mentioned in output list.
- - Rename local variable error to allowed.
----
- xen/arch/riscv/include/asm/csr.h | 36 +++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+ xen/arch/riscv/domain.c | 29 +++++++++++++++--------------
+ 1 file changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
-index 01876f828981..1d47f70f7251 100644
---- a/xen/arch/riscv/include/asm/csr.h
-+++ b/xen/arch/riscv/include/asm/csr.h
-@@ -6,8 +6,10 @@
- #ifndef ASM__RISCV__CSR_H
- #define ASM__RISCV__CSR_H
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index c327f44d07ca..c77be3b827eb 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -42,10 +42,10 @@ struct csr_masks {
  
--#include <asm/asm.h>
- #include <xen/const.h>
-+
-+#include <asm/asm.h>
-+#include <asm/extable.h>
- #include <asm/riscv_encoding.h>
+ static struct csr_masks __ro_after_init csr_masks;
  
- #ifndef __ASSEMBLER__
-@@ -78,6 +80,38 @@
-                            : "memory" );                        \
- })
+-#define HEDELEG_AVAIL_MASK ULONG_MAX
+-#define HIDELEG_AVAIL_MASK ULONG_MAX
+-#define HENVCFG_AVAIL_MASK _UL(0xE0000003000000FF)
+-#define HSTATEEN0_AVAIL_MASK _UL(0xDE00000000000007)
++#define HEDELEG_VALID_MASK ULONG_MAX
++#define HIDELEG_VALID_MASK ULONG_MAX
++#define HENVCFG_VALID_MASK 0xe0000003000000ffUL
++#define HSTATEEN0_VALID_MASK 0xde00000000000007UL
  
-+static always_inline bool csr_read_safe(unsigned long csr,
-+                                        unsigned long *val)
-+{
-+#ifdef CONFIG_CC_HAS_ASM_GOTO_OUTPUT
-+    asm_inline goto (
-+        "1: csrr %[val], %[csr]\n"
-+        ASM_EXTABLE(1b, %l[fault])
-+        : [val] "=&r" (*val)
-+        : [csr] "i" (csr)
-+        :
-+        : fault );
-+
-+    return true;
-+
-+ fault:
-+    return false;
-+#else
-+    bool allowed = false;
-+
-+    asm_inline volatile (
-+        "1: csrr %[val], %[csr]\n"
-+        "   li %[allowed], 1\n"
-+        "2:\n"
-+        ASM_EXTABLE(1b, 2b)
-+        : [val] "=&r" (*val), [allowed] "+r" (allowed)
-+        : [csr] "i" (csr)
-+        : );
-+
-+    return allowed;
-+#endif
-+}
-+
- #endif /* __ASSEMBLER__ */
+ void __init init_csr_masks(void)
+ {
+@@ -57,25 +57,26 @@ void __init init_csr_masks(void)
+      * fields that must be preserved. Any write to the full register must
+      * therefore retain the original values of those fields.
+      */
+-#define INIT_CSR_MASK(csr, field, mask) do { \
+-        register_t old = csr_read_set(CSR_ ## csr, mask); \
++#define INIT_CSR_MASK(csr, field) do { \
++        register_t old = csr_read_set(CSR_ ## csr, csr ## _VALID_MASK); \
+         csr_masks.field = csr_swap(CSR_ ## csr, old); \
+     } while (0)
  
- #endif /* ASM__RISCV__CSR_H */
+-#define INIT_RO_ONE_MASK(csr, field, mask) do { \
+-        register_t old = csr_read_clear(CSR_ ## csr, mask); \
+-        csr_masks.ro_one.field = csr_swap(CSR_ ## csr, old) & mask; \
++#define INIT_RO_ONE_MASK(csr, field) do { \
++        register_t old = csr_read_clear(CSR_ ## csr, csr ## _VALID_MASK); \
++        csr_masks.ro_one.field = csr_swap(CSR_ ## csr, old) & \
++                                 csr ## _VALID_MASK; \
+     } while (0)
+ 
+-    INIT_CSR_MASK(HEDELEG, hedeleg, HEDELEG_AVAIL_MASK);
+-    INIT_CSR_MASK(HIDELEG, hideleg, HIDELEG_AVAIL_MASK);
++    INIT_CSR_MASK(HEDELEG, hedeleg);
++    INIT_CSR_MASK(HIDELEG, hideleg);
+ 
+-    INIT_CSR_MASK(HENVCFG, henvcfg, HENVCFG_AVAIL_MASK);
++    INIT_CSR_MASK(HENVCFG, henvcfg);
+ 
+     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+     {
+-        INIT_CSR_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
+-        INIT_RO_ONE_MASK(HSTATEEN0, hstateen0, HSTATEEN0_AVAIL_MASK);
++        INIT_CSR_MASK(HSTATEEN0, hstateen0);
++        INIT_RO_ONE_MASK(HSTATEEN0, hstateen0);
+     }
+ 
+ #undef INIT_CSR_MASK
 -- 
 2.53.0
 
