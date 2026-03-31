@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FC3FF60DC
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 08:08:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1268097.1557822 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99AFCFF60DC
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 08:10:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1268596.1557831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7U8f-0000Nk-Pa; Tue, 31 Mar 2026 08:07:53 +0000
+	id 1w7UBB-0001yW-AC; Tue, 31 Mar 2026 08:10:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1268097.1557822; Tue, 31 Mar 2026 08:07:53 +0000
+Received: by outflank-mailman (output) from mailman id 1268596.1557831; Tue, 31 Mar 2026 08:10:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7U8f-0000Nb-Mu; Tue, 31 Mar 2026 08:07:53 +0000
-Received: by outflank-mailman (input) for mailman id 1268097;
- Mon, 30 Mar 2026 20:10:59 +0000
+	id 1w7UBB-0001yP-7f; Tue, 31 Mar 2026 08:10:29 +0000
+Received: by outflank-mailman (input) for mailman id 1268596;
+ Tue, 31 Mar 2026 08:10:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex@shazbot.org>) id 1w7Iws-0008VT-QY
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 20:10:59 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w7UBA-0001yJ-8l
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 08:10:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7Iwq-00CWRB-Kk
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2026 22:10:58 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1w7UB8-00E7Gv-2y
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 10:10:27 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <alex@shazbot.org>)
- id 69cad884-2eae-0a2a0a5409dd-0a2a4508e9e4-14
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 22:10:57 +0200
-Received: from [103.168.172.141] (helo=flow-a6-smtp.messagingengine.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <alex@shazbot.org>)
- id 69cad8d0-1950-0a2a45080019-67a8ac8d8c99-3
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2026 22:10:57 +0200
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailflow.phl.internal (Postfix) with ESMTP id 32B1F1380404;
- Mon, 30 Mar 2026 16:10:56 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Mon, 30 Mar 2026 16:10:56 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 30 Mar 2026 16:10:52 -0400 (EDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69cb816d-2eae-0a2a0a5409dd-0a2a4505eb4e-48
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 10:10:27 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
+ (envelope-from <jbeulich@suse.com>)
+ id 69cb8173-5aeb-0a2a45050019-d155dd2cd8cd-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 10:10:27 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-43cfce3a195so1145071f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 01:10:27 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43cf21f173dsm28782924f8f.15.2026.03.31.01.10.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 31 Mar 2026 01:10:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,176 +53,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=shazbot.org header.i="@shazbot.org" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1774901456;
-	 x=1774908656; bh=l6vFZymkQIpCjGyZZ0waTIjtR5dYu9l/RauB0EHs2cg=; b=
-	p3Q7z9HDaMO9l49KzGyd6QCozBDRkYMrNAMT016WX/fHIPodDvJbWxfN7o7Rq7vD
-	ssq4dL3KEVXFE49rB8recUd5fVpSerRill0EPB9eG2k4c2akGO+Qp/G8D31RmPbX
-	7TlkrNox2UjWyTlfcttMC7E71kdY+trnef5Hm61drgcfUPakTcCNL6kKwNKjRSBV
-	U1uiNaG+fKZAZmTv0+H0872Gvi06OSqLLzx0vsDX2qjVrQBFMlsZacR2mbGsDkc/
-	gT6xVnpGv8MRHmzJBZo58FBd6w5IU+6ogcmojJLtPY3KydD8fWurT3VIXthGtQVM
-	kQSao6bXLTSzYllu1/tldQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1774901456; x=
-	1774908656; bh=l6vFZymkQIpCjGyZZ0waTIjtR5dYu9l/RauB0EHs2cg=; b=C
-	AP30HzcjqUcGAYtq0Vy0npz+WQZ0xoM+V3KrqPMrmRQ5BSmU53GGUiyx5E4wI6yA
-	FyTr5/p4paazsu/Iipz8yYZU+1phMDKI7hagtD986FHeu0o1F4zYmBZsEakuW92m
-	weI9ASAX8aFEL8Rs0Uec3ctb/HnJ1MgKC92d8MBdvS6OH7G3ewGRc0+tfGddZ4Gk
-	WxhrjWBcLoGs93zMy/odTXwHEJHh5W5FS+Et9LrpEfOcBRgJ0bBAStrIpl6DkWE0
-	Q7ETKFm9iu5onjWSvKFXn0ELTMMUBd/OPVAOOtwXaNWNshQ6cuB1Amc/2nwRZfpT
-	eHg87urYI5Ec6Lkq0sXvA==
-X-ME-Sender: <xms:z9jKafG3C1ppH9T_m6ALHXE4Xg8LRK7hBmf8rBxsDTwjV0YmtGN7zQ>
-    <xme:z9jKafRfVIq8DMXZsvpeUjwD446zuGALRlY6oTA_zptsdyXkE-2d-NbNcA082cKf0
-    ss8FY21mgRpxHw-PTPA5PC2K5vCU9145ou0r7AQwqll0ampOmU>
-X-ME-Received: <xmr:z9jKaX5EMTRV_NaboCc_h79atFYxCsQIiTsRvvS3id2SmTFWS4FBTgmuiO8>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdeffeelledtucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkjghfofggtgfgsehtjeertdertddvnecuhfhrohhmpeetlhgvgicu
-    hghilhhlihgrmhhsohhnuceorghlvgigsehshhgriigsohhtrdhorhhgqeenucggtffrrg
-    htthgvrhhnpeekheejieetffefueeiteejtdejffdvleelvdeuvdffvdefteeghfevkeeu
-    vdefvdenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivg
-    eptdenucfrrghrrghmpehmrghilhhfrhhomheprghlvgigsehshhgriigsohhtrdhorhhg
-    pdhnsggprhgtphhtthhopeehuddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepug
-    grkhhrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehjghhgseiiihgvphgvrdgtrgdp
-    rhgtphhtthhopehlihhnuhigsegrrhhmlhhinhhugidrohhrghdruhhkpdhrtghpthhtoh
-    epghhrvghgkhhhsehlihhnuhigfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohep
-    rhgrfhgrvghlsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehiohgrnhgrrdgtihhorh
-    hnvghisehngihprdgtohhmpdhrtghpthhtohepnhhiphhunhdrghhuphhtrgesrghmugdr
-    tghomhdprhgtphhtthhopehnihhkhhhilhdrrghgrghrfigrlhesrghmugdrtghomhdprh
-    gtphhtthhopehkhihssehmihgtrhhoshhofhhtrdgtohhm
-X-ME-Proxy: <xmx:z9jKaXPahdSu6NAxzDLCWHFq0SjTPnbaOV6q1JEVDN1n0TGZgvSOLg>
-    <xmx:z9jKaYs_pZi1AKnrgY4kd6IlWW19DwfnZAklgCAjMJf5o-edI-wG2g>
-    <xmx:z9jKaebkSHmk2-FfV3M99S1E_Kbm3scLKfLmyO_zzcLIBxoGL3vJxQ>
-    <xmx:z9jKacg_NAD9M03CgHB8mak7EEebVzjqapJHxaBa4zGAHu1ISFIb7w>
-    <xmx:0NjKafrBqSu7i3ficH69WDNrAzczvh4pW1jhPhZmK7WHcIBXnovlo-fr>
-Feedback-ID: i03f14258:Fastmail
-Date: Mon, 30 Mar 2026 14:10:50 -0600
-From: Alex Williamson <alex@shazbot.org>
-To: "Danilo Krummrich" <dakr@kernel.org>
-Cc: "Jason Gunthorpe" <jgg@ziepe.ca>, "Russell King" <linux@armlinux.org.uk>,
- "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- "Ioana Ciornei" <ioana.ciornei@nxp.com>,
- "Nipun Gupta" <nipun.gupta@amd.com>,
- "Nikhil Agarwal" <nikhil.agarwal@amd.com>,
- "K. Y. Srinivasan" <kys@microsoft.com>,
- "Haiyang Zhang" <haiyangz@microsoft.com>, "Wei Liu" <wei.liu@kernel.org>,
- "Dexuan Cui" <decui@microsoft.com>, "Long Li" <longli@microsoft.com>,
- "Bjorn Helgaas" <bhelgaas@google.com>, "Armin Wolf" <W_Armin@gmx.de>,
- "Bjorn Andersson" <andersson@kernel.org>,
- "Mathieu Poirier" <mathieu.poirier@linaro.org>,
- "Vineeth Vijayan" <vneethv@linux.ibm.com>,
- "Peter Oberparleiter" <oberpar@linux.ibm.com>,
- "Heiko Carstens" <hca@linux.ibm.com>,
- "Vasily Gorbik" <gor@linux.ibm.com>,
- "Alexander Gordeev" <agordeev@linux.ibm.com>,
- "Christian Borntraeger" <borntraeger@linux.ibm.com>,
- "Sven Schnelle" <svens@linux.ibm.com>,
- "Harald Freudenberger" <freude@linux.ibm.com>,
- "Holger Dengler" <dengler@linux.ibm.com>,
- "Mark Brown" <broonie@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
- "Jason Wang" <jasowang@redhat.com>,
- "Xuan Zhuo" <xuanzhuo@linux.alibaba.com>,
- Eugenio =?UTF-8?B?UMOpcmV6?= <eperezma@redhat.com>,
- "Juergen Gross" <jgross@suse.com>,
- "Stefano Stabellini" <sstabellini@kernel.org>,
- "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- <linux-kernel@vger.kernel.org>, <driver-core@lists.linux.dev>,
- <linuxppc-dev@lists.ozlabs.org>, <linux-hyperv@vger.kernel.org>,
- <linux-pci@vger.kernel.org>, <platform-driver-x86@vger.kernel.org>,
- <linux-arm-msm@vger.kernel.org>, <linux-remoteproc@vger.kernel.org>,
- <linux-s390@vger.kernel.org>, <linux-spi@vger.kernel.org>,
- <virtualization@lists.linux.dev>, <kvm@vger.kernel.org>,
- <xen-devel@lists.xenproject.org>, <linux-arm-kernel@lists.infradead.org>,
- "Gui-Dong Han" <hanguidong02@gmail.com>, alex@shazbot.org
-Subject: Re: [PATCH 05/12] PCI: use generic driver_override infrastructure
-Message-ID: <20260330141050.2cb47bd9@shazbot.org>
-In-Reply-To: <DHGATG6LJOM1.2AI7BYQ2O4DFU@kernel.org>
-References: <20260324005919.2408620-1-dakr@kernel.org>
-	<20260324005919.2408620-6-dakr@kernel.org>
-	<DHGATG6LJOM1.2AI7BYQ2O4DFU@kernel.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1774944627; x=1775549427; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=zavHZ64gGJLvkBKJjtgezSK0/rl3jKjwmCPlWT6kZ14=;
+        b=BRz8NSV8wVL6pTBt3QvcGZoEyCv4Hh7QaUg8NlJ7EwjIY53QcgIWZ0DUUZcdi6Wo43
+         WVuLcmLhus0B/skA5ZZXRah0MucodWz9k42aBIAn5CAEVn5yK+L3uvjU68kY16RA1N6L
+         rcT9mj4Cp9NsL8ZunmtpAxO35OMcbUIwQYoqKK6O1ID2VR05oATPu8Z1VZPUfV4hrgEF
+         K2UxXoXhMt9F2+/wElOgqIlUUKcb+wMfYfIw4isVohD7yfealSTinx2tZ2josQ9Vb3VV
+         C9fnHDc+1khwqbx7rCGdgqqk38oMaVlmoYdWhLYbYqVeNJ+2cP7Da543mh0hZ92eZJUi
+         wkig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774944627; x=1775549427;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zavHZ64gGJLvkBKJjtgezSK0/rl3jKjwmCPlWT6kZ14=;
+        b=H+fK+HCvozMIr9+41MIawqqJpulh40oB96EKMVuNDY1pmOTaGt5k5FQxtQ9alXWNxM
+         a0QrvUKBlTvBOvTClpbLpZF5Wc3Xew6bX0uw0qFTwuI4FnUQWc/rQjWbrBS36YptE99S
+         N8w0/3UGqqty68cGwXI11i3kNHXqqkw9OBs+3dNhcG5bGa4MFH+o/eBPMQiLlJG67Iu/
+         V7NOIcwPUb0hKqIE04ydLA8UsOGgUWTaFQRXAm70NEWIcYLxB+x8D9WY6+hdVwIAgcPf
+         jEo7HA2hhx7UGULii4i+zD4XWDKR2WbZGlxEampTcaVgLnXPR/VmD7ASLGHhMgiUSRV+
+         m9Nw==
+X-Forwarded-Encrypted: i=1; AJvYcCUJwO78gqPaSTNJ7l87aNcrkSPsGGKpZdV+wHg8ZWae2fHWFtvnGSxh/SF555mL6eE0mi7gowi4xOI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwJPmXW9q/ajpnFu9gQzow8kWmLonEnLrmA6ef1Y7XogKB+Lrkp
+	XqgD+GBA1JNz8rNyqs30Qr7WrMxr7izkAZ5vjrwSqv/z2I0f92kxuxWgFqcsHrH62Q==
+X-Gm-Gg: ATEYQzw+XU3C8T1jdWI8IFfULBz4cKa1hFFXedy4wa4JeoccXo8qykZ0ySaUs/uQ98M
+	V8r04ROPZswb8yVLTaF+b+DzaX0s7cOhU/u5jP4DiNXNaf4sTXHMNajqFZ1w2pvxY8JwAUuFGry
+	Dhf4b644Eutt+UmNMyN9E63SX7Vg8LNXUIgqcIK9CvCtYNeUFYCggKccaBIT59T7/a7pSywupo/
+	jEh2zohxxmWU7T0NCQUj6MBiU9nGtGMMPZeyuuZ4ty8yEQLhSs1JnPSEpJHBBaKRPZkQ4Ul/nec
+	d+BD/v77sFq6ARaRdKF0exMNulo8baU6s5/n4qNkV1mt0bp+mxy5Me9Ba7CtntXi6DyBZqTNLRW
+	v6WnCYvxxgOTgJ6YhjikkOZE3Ij0xCp6OtXg/DLVihI6T9PMAwJL36pWYG4KTal3m1+Pv0NjhSi
+	GUik7ararJdLtsYaxQaAppp9Bw+GWHQgqQiWZ5Uxr5lewwZ3kU8D/eL6rwL+nJMToJiZV7HHvM+
+	tJunM9ZOaDwUy4=
+X-Received: by 2002:a05:6000:310d:b0:43d:262:c97b with SMTP id ffacd0b85a97d-43d0262ca87mr9450947f8f.41.1774944627011;
+        Tue, 31 Mar 2026 01:10:27 -0700 (PDT)
+Message-ID: <5b1e5de7-b2b0-4dae-bbe6-03809637d239@suse.com>
+Date: Tue, 31 Mar 2026 10:10:25 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/sched: rtds: prevent extratime priority_level
+ wraparound
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
+ Juergen Gross <jgross@suse.com>, Meng Xu <mengxu@cis.upenn.edu>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <b6e65a9fb94d581a31e1d06b241522c17a7863cc.1774943670.git.oleksii_moisieiev@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <b6e65a9fb94d581a31e1d06b241522c17a7863cc.1774943670.git.oleksii_moisieiev@epam.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1774901457-F2CEA726-643CC462/0/0
+X-purgate-ID: tlsNG-c201ff/1774944627-20A97488-C72123EA/0/0
 X-purgate-type: clean
-X-purgate-size: 2764
+X-purgate-size: 888
 
-On Mon, 30 Mar 2026 19:38:41 +0200
-"Danilo Krummrich" <dakr@kernel.org> wrote:
-
-> (Cc: Jason)
+On 31.03.2026 09:54, Oleksii Moisieiev wrote:
+> In RTDS, burn_budget() increments priority_level for extratime units
+> whenever cur_budget is exhausted. As priority_level is unsigned and was
+> unbounded, it could eventually overflow to 0.
 > 
-> On Tue Mar 24, 2026 at 1:59 AM CET, Danilo Krummrich wrote:
-> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-> > index d43745fe4c84..460852f79f29 100644
-> > --- a/drivers/vfio/pci/vfio_pci_core.c
-> > +++ b/drivers/vfio/pci/vfio_pci_core.c
-> > @@ -1987,9 +1987,8 @@ static int vfio_pci_bus_notifier(struct notifier_block *nb,
-> >  	    pdev->is_virtfn && physfn == vdev->pdev) {
-> >  		pci_info(vdev->pdev, "Captured SR-IOV VF %s driver_override\n",
-> >  			 pci_name(pdev));
-> > -		pdev->driver_override = kasprintf(GFP_KERNEL, "%s",
-> > -						  vdev->vdev.ops->name);
-> > -		WARN_ON(!pdev->driver_override);
-> > +		WARN_ON(device_set_driver_override(&pdev->dev,
-> > +						   vdev->vdev.ops->name));  
+> A wrapped value of 0 is the highest RTDS priority, so an extratime unit
+> could unexpectedly regain top priority and preempt units with active
+> real-time reservations, violating EDF intent.
 > 
-> Technically, this is a change in behavior. If vdev->vdev.ops->name is NULL, it
-> will trigger the WARN_ON(), whereas before it would have just written "(null)"
-> into driver_override.
-
-It's worse than that.  Looking at the implementation in [1], we have:
-
-+static inline int device_set_driver_override(struct device *dev, const char *s)
-+{
-+	return __device_set_driver_override(dev, s, strlen(s));
-+}
-
-So if name is NULL, we oops in strlen() before we even hit the -EINVAL
-and WARN_ON().
-
-I don't believe we have any vfio-pci variant drivers where the name is
-NULL, but kasprintf() handling NULL as "(null)" was a consideration in
-this design, that even if there is no name the device is sequestered
-with a driver_override that won't match an actual driver.
-
-> I assume that vfio_pci_core drivers are expected to set the name in struct
-> vfio_device_ops in the first place and this code (silently) relies on this
-> invariant?
-
-We do expect that, but it was previously safe either way to make sure
-VFs are only bound to the same ops driver or barring that, at least
-don't perform a standard driver match.  The last thing we want to
-happen automatically is for a user owned PF to create SR-IOV VFs that
-automatically bind to native kernel drivers.
- 
-> Alex, Jason: Should we keep this hunk above as is and check for a proper name in
-> struct vfio_device_ops in vfio_pci_core_register_device() with a subsequent
-> patch?
-
-Given the oops, my preference would be to roll it in here.  This change
-is what makes it a requirement that name cannot be NULL, where this was
-safely handled with kasprintf().  Thanks,
-
-Alex
-
-
-[1] https://lore.kernel.org/all/20260302002729.19438-2-dakr@kernel.org/
-
+> Fix this by saturating priority_level at RTDS_MAX_PRIORITY_LEVEL instead
+> of incrementing unconditionally. Budget refill semantics are unchanged.
 > 
-> >  	} else if (action == BUS_NOTIFY_BOUND_DRIVER &&
-> >  		   pdev->is_virtfn && physfn == vdev->pdev) {
-> >  		struct pci_driver *drv = pci_dev_driver(pdev);  
+> Normal behavior is unchanged. Once saturated, priority_level remains at
+> the lowest priority until the next period update resets it.
+> 
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 
+From the description, this looks to want to have a Fixes: tag added.
+
+Jan
 
