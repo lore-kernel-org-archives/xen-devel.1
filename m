@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45DB610F9311
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 23:29:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269509.1558563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D40E10F930A
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 23:29:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269511.1558572 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7iWo-0000Ty-9R; Tue, 31 Mar 2026 23:29:46 +0000
+	id 1w7iWp-0000jQ-Iu; Tue, 31 Mar 2026 23:29:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269509.1558563; Tue, 31 Mar 2026 23:29:46 +0000
+Received: by outflank-mailman (output) from mailman id 1269511.1558572; Tue, 31 Mar 2026 23:29:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7iWo-0000Tn-55; Tue, 31 Mar 2026 23:29:46 +0000
-Received: by outflank-mailman (input) for mailman id 1269509;
- Tue, 31 Mar 2026 23:29:45 +0000
+	id 1w7iWp-0000id-Eh; Tue, 31 Mar 2026 23:29:47 +0000
+Received: by outflank-mailman (input) for mailman id 1269511;
+ Tue, 31 Mar 2026 23:29:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1w7iWn-0000E7-4U
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 23:29:45 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1w7iWo-0000Ss-8j
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 23:29:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7iWm-004YwC-HK
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 01:29:44 +0200
+ id 1w7iWn-004YwC-Lb
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 01:29:45 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69cc58e6-bab6-0a2a0a5309dd-0a2a4509c0a6-4
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 01:29:44 +0200
-Received: from [103.168.172.149] (helo=fout-a6-smtp.messagingengine.com)
+ id 69cc58e6-bab6-0a2a0a5309dd-0a2a4509c0a6-6
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 01:29:45 +0200
+Received: from [103.168.172.153] (helo=fhigh-a2-smtp.messagingengine.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69cc57f7-e484-0a2a45090019-67a8ac95bff9-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 01:25:43 +0200
-Received: from phl-compute-07.internal (phl-compute-07.internal [10.202.2.47])
- by mailfout.phl.internal (Postfix) with ESMTP id D5E65EC0258;
- Tue, 31 Mar 2026 19:25:42 -0400 (EDT)
+ id 69cc57f8-e484-0a2a45090019-67a8ac99dbef-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 01:25:45 +0200
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 2F7CB14001F5;
+ Tue, 31 Mar 2026 19:25:44 -0400 (EDT)
 Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-07.internal (MEProxy); Tue, 31 Mar 2026 19:25:42 -0400
+ by phl-compute-05.internal (MEProxy); Tue, 31 Mar 2026 19:25:44 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 31 Mar 2026 19:25:41 -0400 (EDT)
+ 31 Mar 2026 19:25:43 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,54 +52,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm1; t=1774999542; x=1775085942; bh=ipNBzb/xPe
-	pZOkJie58FqxMbev+ybK+wfGHJYYApMdY=; b=jw0x53EBBypN7RvSLbdGjHu4/r
-	tLu5F1nXEmX3pkfsAwT4prTFVFIXM8XcXP/PjmDXn57UVSsEkHQTh0j+Or0Cion+
-	wjLBIVjSWpKdjhDUPhjixajIJC2pv31gUq5NG0RxES3iCOW7YmYamOrgYLOYH646
-	1dy6xYPcVNikiONkVKixc2w3/oY7HVuY6j1lBY91GFwo+KKSbQY+NNgLNnh9bhWI
-	Zh7Y/jGn1BsE734WJlM3Qx9nZZlysuYWDjqGqU2Iqqi9bUA/RGaoooLuxE1kanaq
-	O+LaRpTJu3U5lQo6ZZjwftFXyl9S+McBJF6ynpIifyPlNc/Xguoz5iiA2A1Q==
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to; s=fm1; t=1774999544; x=1775085944; bh=EGvzpeUslV4ZxMlxG03hV
+	fjuVidhGwwNq/GPCltvYJ4=; b=Ls52G0QdJcaWb2xaTKwVJSZWV/9gAtVPvZvCR
+	2S6v5sYzLCNiL5qawm9t4FWA0kyDQyJSNSddYB3L1FrNbjneArsBAHa1YjmwiOuY
+	bepxcdi1mEChLAVJ+lUFB6R+mjtvM4NxBkhSn6LIvwKmBTvelxBWN0dVKY+z+7+d
+	5myw5NFSBOMl3DHPXxnbIame3D8oXvAGfffVX+fmaJqUBf2VnKUUj1snstWRUSSb
+	PmQ43JJtSewe2RbdcQhQcZdufGJ9HthMFPHN4vnIUNZcI2ytT4rDD0OvciqWxA/r
+	ac/yumO1cmzJ9tx5bvXjtSKEpBzK8BEyveXuvaamTUOzQMW9A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1774999542; x=
-	1775085942; bh=ipNBzb/xPepZOkJie58FqxMbev+ybK+wfGHJYYApMdY=; b=T
-	ijCnAJPBv0ZA594hOZsW8WXPxJHQj5sLOkxLq7vP7tECYinH8WSysj8D9b+ybSJ3
-	oWu1tuwEogyWlRKsZUBJBC8DvvIkmVkGCyStbU/mSXbbp48QDF+1SHYJFAjEvLXl
-	jXg1Gd0bB/7rUA4BfljnJJrUtcXA9qS/SJZLDDIsmG6N3Ys5SBJ/0HDT+dXhHMVZ
-	iuScjV+OnJ4mqEdB/9bWW2ovv8SgbLHsdoNBznf2kK5Vq9BO74/aEPTb+/xM5R+4
-	Snz5UYtj8UGtPSz3cgM8XHoU1OJ3M75tUzUrAtvc8vujXUQ0X5bfbiRACL1iy6wu
-	5YeDYYglwrC3o+jLwaRJA==
-X-ME-Sender: <xms:9lfMaWzZ_nTHfFPaWNuiD0A0iVeFGOrGnzvArl_PDKCJ-y6vem0RfQ>
-    <xme:9lfMaZKBlvr0j3Va-j61_w6K7r7KUu9NWNeL1n0hYjfDIqFczoob_egtFwmbrd_OK
-    Dk8FjlueFFU3LsVPoIdGwr7kU6SLjnLRZj_cGena9TM_dseIg>
-X-ME-Received: <xmr:9lfMaQrqKJwsAZwxb61QZzzRcRnZC84uqEQjp2ZFhbaX6luiyWvYdQsJFA>
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to:x-me-proxy:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; t=1774999544; x=1775085944; bh=E
+	GvzpeUslV4ZxMlxG03hVfjuVidhGwwNq/GPCltvYJ4=; b=rf1sG/rCeeL5suX1a
+	MdzAm6zyUJINxOYTvlfF8FTHBY8KsRUvphf6Sm5r8yJCw23MHBTo2iM7JUreqeoF
+	1lGuaiZ4AVxpULVCChSqBoBarTC0ImQ6telNjfkIy5xYEBdx7P8kI2Y3MIN/52x9
+	IHSjJ4TxIUSmg2+52LGQVTOp/Q2qQBcbte/MTpERc0CwQbbQJWF55s32k4Da5dw6
+	4PVZF6u4NBfiblEtOE4G2cmqo4SoUEFOUVbBk1JLV91wLZ/gymj8/MmIdPCWkBmo
+	KdBzjcmH4niWHC4CrhJ5puywS3+IA+BPedx57lYvkuKLdhSAtkLaXO0x/m4TT46g
+	dJXXQ==
+X-ME-Sender: <xms:-FfMaVB-bQDhv332LzUEhg96-0iyECrZFc5pr0_TIWMeBC4Dg5hq6g>
+    <xme:-FfMaaaOB3vzEi8vDBV2T_k-6by6KJv4Dk2ibJ2S9pjkHx-zQ5YO1m1BrUFtiK4wz
+    ZtEdPVcF3RtFeTCYxDsnpAQb-0BfLRFpgNj4BxHHZMzjvbfmA>
+X-ME-Received: <xmr:-FfMaY5ze0T7wozkOynogwgfGdDclUIEVcH6ffiDlOtOT61Wa4WM1ulgow>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdduheduucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
     lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
-    ephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghkucfo
-    rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
-    hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgueduhefg
-    vdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlhhushhtvg
-    hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhn
-    vhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtthhopeehpdhmoh
-    guvgepshhmthhpohhuthdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdig
-    vghnphhrohhjvggtthdrohhrghdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvg
-    hrnhgvlhdrohhrghdprhgtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghithhr
-    ihigrdgtohhmpdhrtghpthhtohepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhih
-    hnghhslhgrsgdrtghomhdprhgtphhtthhopegtrghrughovgestggrrhguohgvrdgtohhm
-X-ME-Proxy: <xmx:9lfMaYLMiTLcexU6m--OwOrA2pBu6EIfgRXyX-9YRzhZq1SX1f938A>
-    <xmx:9lfMaVScVsuV30TKxKaoJ94krKKORO_SFrfplwFxKSXclj-p0UcHPw>
-    <xmx:9lfMaXthwF0cslKPfca5VPgO5UVMaZwgFdmI3QRsH4XIETL_BW5l-g>
-    <xmx:9lfMaWZLG6Dv_hcWzypXNhRI9fKcCeR3xPInrzKt7uqqQkFqPv7hQw>
-    <xmx:9lfMaa-JDwtU7wZ5yn2fmVg4LjJfO-B8k8EEKFSDTnLYVXns2M7DvhmJ>
+    ephffvvefufffkofgjfhgggfestdekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgr
+    rhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsih
+    gslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepveeljeefhedv
+    vddvieevfeejgfethfeutdejteevueffjeegkeevtddthefhgfdtnecuvehluhhsthgvrh
+    fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhv
+    ihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmhhoug
+    gvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigv
+    nhhprhhojhgvtghtrdhorhhgpdhrtghpthhtohepshhsthgrsggvlhhlihhniheskhgvrh
+    hnvghlrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhi
+    gidrtghomhdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinh
+    hgshhlrggsrdgtohhmpdhrtghpthhtoheptggrrhguohgvsegtrghrughovgdrtghomh
+X-ME-Proxy: <xmx:-FfMabbx6kJu-6cTG4AAU1GE7zKWY0SR4s80GWUyqzZp_WFeVMrdmA>
+    <xmx:-FfMaXgrEHDVJkbdOj7HVCRtQkQAK-6DpThOtjnez4lt9NezAkw8aA>
+    <xmx:-FfMac-rjGTqzgI7yq4-1wz_8RmxyRmRdJg_td7D0PdWPqRyHH8yjw>
+    <xmx:-FfMaSppTm0mChi_QShOSQIZq9LK6L2mibfMq9y1K5VPx5NoPf09jw>
+    <xmx:-FfMaYOhnPDsjYWoZlWig6WfWcnCmX1gXvl8QBs9dlPlFzQSwWG48GpR>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -107,45 +107,35 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v2 5/6] CI: setup SSH key
-Date: Wed,  1 Apr 2026 01:24:54 +0200
-Message-ID: <5d11a521db04134f8917c990a494ba8ce44548b9.1774999414.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v2 6/6] [DO NOT MERGE] CI: example how to use ssh to extract logs
+Date: Wed,  1 Apr 2026 01:24:55 +0200
+Message-ID: <0e03180b8e69830df0d54b0a332b0f1fc88192d1.1774999414.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.ca38f9571ab23e254a985ecfd4715235675aa06e.1774999414.git-series.marmarek@invisiblethingslab.com>
 References: <cover.ca38f9571ab23e254a985ecfd4715235675aa06e.1774999414.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1774999544-5BAA4A73-EAD71CC2/13/0
+X-purgate-ID: tlsNG-bad1c0/1774999545-6AB41A73-B6E458B4/13/0
 X-purgate-type: clean
-X-purgate-size: 957
+X-purgate-size: 696
 
-Generate fresh key for a job, and add its public part to dom0's
-authorized_keys file.
-This allows the test controller to use SSH without any password prompt.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
-New in v2
----
- automation/scripts/qubes-x86-64.sh | 4 ++++
- 1 file changed, 4 insertions(+)
+ automation/scripts/qubes-x86-64.sh | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
-index 91c0d5bec829..745fce6f9134 100755
+index 745fce6f9134..1cfe03d68747 100755
 --- a/automation/scripts/qubes-x86-64.sh
 +++ b/automation/scripts/qubes-x86-64.sh
-@@ -246,6 +246,10 @@ chmod +x etc/local.d/xen.start
- mkdir -p etc/xen
- echo "$domU_config" > etc/xen/domU.cfg
+@@ -296,6 +296,8 @@ export TEST_LOG="smoke.serial"
+ export TEST_TIMEOUT="$timeout"
+ ./automation/scripts/console.exp |& sed 's/\r\+$//'
+ TEST_RESULT=$?
++ssh -o StrictHostKeyChecking=no root@$SUT_ADDR xl dmesg || :
++ssh -o StrictHostKeyChecking=no root@$SUT_ADDR dmesg || :
  
-+mkdir -p root/.ssh
-+ssh-keygen -t ed25519 -N '' -f ~/.ssh/id_ed25519
-+cp ~/.ssh/id_ed25519.pub root/.ssh/authorized_keys
-+
- mkdir -p etc/default
- echo "XENCONSOLED_TRACE=all" >> etc/default/xencommons
- echo "QEMU_XEN=/bin/false" >> etc/default/xencommons
+ if [ -n "$retrieve_xml" ]; then
+     nc -w 10 "$SUT_ADDR" 8080 > tests-junit.xml </dev/null
 -- 
 git-series 0.9.1
 
