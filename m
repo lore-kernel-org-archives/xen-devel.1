@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58EAC109B477
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 14:45:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269024.1558184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D6E109B485
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 14:55:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269050.1558195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7aLR-0002xB-34; Tue, 31 Mar 2026 14:45:29 +0000
+	id 1w7aVA-0004xB-6U; Tue, 31 Mar 2026 14:55:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269024.1558184; Tue, 31 Mar 2026 14:45:29 +0000
+Received: by outflank-mailman (output) from mailman id 1269050.1558195; Tue, 31 Mar 2026 14:55:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7aLR-0002x4-0D; Tue, 31 Mar 2026 14:45:29 +0000
-Received: by outflank-mailman (input) for mailman id 1269024;
- Tue, 31 Mar 2026 14:44:07 +0000
+	id 1w7aVA-0004x3-1H; Tue, 31 Mar 2026 14:55:32 +0000
+Received: by outflank-mailman (input) for mailman id 1269050;
+ Tue, 31 Mar 2026 14:55:30 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frank.li@nxp.com>) id 1w7aK7-0002TF-DY
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 14:44:07 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w7aV7-0004wx-RS
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 14:55:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7aK5-00FjaW-0n
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 16:44:06 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1w7aV6-00HFEB-TJ
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 16:55:28 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frank.li@nxp.com>)
- id 69cbdda7-bab6-0a2a0a5309dd-0a2a4504b2cc-34
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:44:06 +0200
-Received: from [40.107.162.50]
- (helo=PA4PR04CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <frank.li@nxp.com>)
- id 69cbddb6-c823-0a2a45040019-286ba23251b5-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:44:06 +0200
-Received: from PA4PR04MB9366.eurprd04.prod.outlook.com (2603:10a6:102:2a9::8)
- by PA1PR04MB10964.eurprd04.prod.outlook.com (2603:10a6:102:490::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
- 2026 14:44:03 +0000
-Received: from PA4PR04MB9366.eurprd04.prod.outlook.com
- ([fe80::75e4:8143:ddbc:6588]) by PA4PR04MB9366.eurprd04.prod.outlook.com
- ([fe80::75e4:8143:ddbc:6588%6]) with mapi id 15.20.9745.027; Tue, 31 Mar 2026
- 14:44:03 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 69cbe053-2eae-0a2a0a5409dd-0a2a4501875a-26
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:55:28 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <jbeulich@suse.com>)
+ id 69cbe060-6fc9-0a2a45010019-d1558030d92e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 16:55:28 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4852b81c73aso49807015e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 07:55:28 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4887ad706d4sm19498575e9.8.2026.03.31.07.55.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 31 Mar 2026 07:55:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,158 +53,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=nxp.com header.i="@nxp.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AdYsGRhqRDD4FOd4IEbXR8BfmHiufSGLIQP420ghXe32R4WwVUQTVClzJ/1+7BvKQlkKk1M5TmhQWdd7XTb0XdLWeCTKGkOtKoP9dZ9wIMtC0so8EOW554J0mjzqjYGTkgqluanYZJH5fg4L64I5iN2RihtTiN/Hxll0oFs2JsbsRo+UVOWMz9WT4Jf5rbXOR/dms1uzqugkILAO1eddPho6oho3IHrIm2+VJEz7mvKW9Y0eNq2gPmvraH6pGTHYwvEcGXF5WyBOZOtEPEhrrvEweLesv3BSCkQ0ewgxGq5ddFzXrTzQhOj+aDf5ye+LgXClFDDr1PtNJ6iQ0ja3bw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5rjP5iBsy8kPlzbvdsL0bTiLtesZG/Q20ju5pr8bjOM=;
- b=JKB1te1GuyhYGbAB2/mjOavy3vmsXHwiuME8EBLDFxIUnR8S3v9hjNEC07E2YiOeuEgYgVX+kU0ZAH4Uj+MFdzLJfpInYkeqJFzpQMM/RBk0sJ4X9bM2GAgAd6rQil7tuep5aY6cOe2CJx0Ehh8gEW8VGiymsZq2j+J9eJHqdxSAtm4t2ApAzeda74PQle4LEfArJn6cl1Dt5DnuKv1NEqoGzYYtuQTXQjisPGsDSR7wg0c0DbVsBYrcUNyHA/jgkCxahwHIpYsdbdrYqwXldl0Wx8fB+dwv7c9KNGrE4HOfq5S0/3HWQIqru2QZrmn8fOutjN6Nqh3eRyVKH33Arw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5rjP5iBsy8kPlzbvdsL0bTiLtesZG/Q20ju5pr8bjOM=;
- b=XLm123qMbXdIcdERP9LJSClEFYgOIdUeYok6fwMk2NASndipY4t8+DWkE8m5wiUSnmExz8SKaRvcbInQr0KveVlZn+9M+psW0vtl/HJBXS8+5sCQVn72jr7UnjAOtOwqFv4okEC3clOsPGfxYwL+N3RSLDnk6xe/YBwJn6ABPVRwAVrG+IYK8IzQDVoGOBJyqWOZkLHOu/IOc3SV2YVEiGfbV4zmMeziG5/n+RWdnN298WrCq1QqVkvFjpQC4h2Fl5TItT0mkZX8VYWv5IlWgax3dRzusJe6xg+G4Ofx37lzAmo7Goac5oEMDf53m/R6QTAl9KhkWiG24s3MKxW5Ow==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Date: Tue, 31 Mar 2026 10:43:53 -0400
-From: Frank Li <Frank.li@nxp.com>
-To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-Cc: Nipun Gupta <nipun.gupta@amd.com>,
-	Nikhil Agarwal <nikhil.agarwal@amd.com>,
-	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>, Marc Zyngier <maz@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Richard Zhu <hongxing.zhu@nxp.com>,
-	Lucas Stach <l.stach@pengutronix.de>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-	Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-pci@vger.kernel.org, imx@lists.linux.dev,
-	xen-devel@lists.xenproject.org, linux-arm-msm@vger.kernel.org,
-	Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
-Subject: Re: [PATCH v12 2/3] of: Factor arguments passed to of_map_id() into
- a struct
-Message-ID: <acvdqQvcitLTCZbm@lizhi-Precision-Tower-5810>
-References: <20260331-parse_iommu_cells-v12-0-decfd305eea9@oss.qualcomm.com>
- <20260331-parse_iommu_cells-v12-2-decfd305eea9@oss.qualcomm.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260331-parse_iommu_cells-v12-2-decfd305eea9@oss.qualcomm.com>
-X-ClientProxiedBy: SA9PR13CA0007.namprd13.prod.outlook.com
- (2603:10b6:806:21::12) To PA4PR04MB9366.eurprd04.prod.outlook.com
- (2603:10a6:102:2a9::8)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1774968928; x=1775573728; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=wa74cH9IxdWKMW02DtpK07bgmhYZjiyqGaepjoiq7yA=;
+        b=eeto2/176HpdyrqMHDyU8/TbQ33Yv+RXI/UXxehBAxpGo691R/r1hylGX9OhVkoI7M
+         JDsOYN0y/78pRxAgeqp7XtL/fs84KFV7lTbEe+E5oGvcx6Alqqe+yMEnLho5G2f+imAL
+         n9J4K6YrB+NBOYNDrymCSfxs5oWLG+l2gPUgU6oBPynXl1Yg6VIdv8FZ+R7U3vbPaKN+
+         GO2gphfUYEMceAJwuiKmDDLWDjQPmFE9aXUgyqRw2+0VoufM5KIJE1UQJHCthPMnJBMS
+         nUZneuUqEN93K+NWzkvLvu6O7ozA+bv22SSelIIzS/jkkbOz0x2uo2PbIyBhTOTIR7kV
+         p7vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774968928; x=1775573728;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wa74cH9IxdWKMW02DtpK07bgmhYZjiyqGaepjoiq7yA=;
+        b=o+9O31WhMPopMqRUxS/1xWJpJn8p1WUDlQ5K0cfvSR5JSDi9OIn8iyxKzBfYFYo1vC
+         APo/38pj13RNJAdQZJvDPUhOdrTgUS0E6f03wo1v8IzJJ3ttbf7Mv98dP10saDpclw6+
+         ZJpkXS4V1y3AXZkvgzW7r6h1bHbHz/1YFnv/VS5Nmy8093xo6x6o+MqNjri07of5eyWo
+         DUYbIWUXG4Mxi9f36ak0D3bZ67oub86OTIyzJ1D8baH0DsDUwt06WSa/wMCt4kW6Kanm
+         sGpPr9YzM4OJ855n4eEGgs7s2PGTCv5rfCDqDKpSooUQeHT+wudwDmnkLFByKIgYRNyX
+         fLbA==
+X-Forwarded-Encrypted: i=1; AJvYcCWzswzFkIf92cuJFMHmIVzek47SCKgh5lZMGVWNfAVA7ofLpsPOLgZmnyqJc+Kw25M82OBgKv58jQ8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx4EIWB/Wb/daxefOBzeBPN4AouPvPrprH2W9oCbvhAn45YR4qR
+	a7gldV7L3fAJTkJJSeFSgWZ4+ocfU9HpgwxOSZ3C0xXDO0hFy3iEc04TxWqzQoKABQ==
+X-Gm-Gg: ATEYQzz/39quYslBWnVUm6Q0T4MoNklHyXkeuz1Iv2xZD/MyrSPVbGpic3WXbuqfih1
+	u0U6JC13KHo+GB8i65/wAbpAKE9P6gVzSKuPqdh3Ip9FTzbT58Vu6pOnWl9VsD99UGaxcQxYFtp
+	wRVp3O1qxnrVfda1gHe6mnMgKRi226zw3f6V3D2KF8X5MMGt/GPHQJi8rCFT4vZ/Ghv+KqpzcQU
+	dZ/Gqi30M91IZDFn4P8VYfqt6LrI6NJkMbXxMYEqHd02NT7AFA+/nmR/EzB9G6h9DCl/L/Gma/z
+	SMJcN7k/AtZEUKgaLEVnqszHfySbBFLs5olUWhvMY6ESl4dZVhQ0fMWmue5VKKX9NOPsjbwcUWy
+	PBsyCclM/yAHQxe1pJ5eyVuQ5gqnrOXRpknD7OdsG2qeR7VNRQ6FM1uzQHbPFmK65eJMtfA/gKO
+	MqOO8lARcHUNql84p8HmFnfBEUH9lqPHArdzCNkAPOoXvsS4+1jAiqNTDf+/7bAmxBiXYXJAGvo
+	z0S5681zgmiGtQ=
+X-Received: by 2002:a05:600c:608b:b0:485:557d:9fe with SMTP id 5b1f17b1804b1-48727efc9cdmr287528225e9.12.1774968927988;
+        Tue, 31 Mar 2026 07:55:27 -0700 (PDT)
+Message-ID: <f546ae19-2107-469e-847b-7a4cde2c95fd@suse.com>
+Date: Tue, 31 Mar 2026 16:55:26 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB9366:EE_|PA1PR04MB10964:EE_
-X-MS-Office365-Filtering-Correlation-Id: 238e6cc5-6b23-42b7-8b74-08de8f33f3ae
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|52116014|19092799006|7416014|366016|38350700014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	s+KiA0MI42oQZjz97rmpPSQpWToS2IRv5hA0wHFEfQ66xgsjPtoOj9ZMmslrUM076pQAWJvYsHrvyebukhsQ4XAJM0x8O6BXX2ThzbrWO7mZoEH19gL6CoGyh0GlJFkpg6aua4BGZ6iexITGS74I7lVFSD8iryLffh+f3zIymaPL0VpY10HItZbSpNwUhBJMZrNw6jOUjQbf6rdChQYUsOtbHt7zZ6gq1tr4GqKrcP7brmUv9qY/aqXkJyZEZmRFrwBE+9qci02UHmSc2Dxb5vjbIUTDfmRYLD5DQv6J+4pQ+B7ybsJmamaaOyQySdUABFrxi39veWV7dRYlA1g3EKGxQUEy2VuGhori2AXujb41clpsUDX0ZC/LEvZv1KSeeVdE2WtYg3/775tjh6psWWIDeuWNAKXhJAlTaLgLmT772D7qNn5E9l3r8gBnwYfpd7j/Pg4Gw8+gNIw6dl+zhC7GsXYX2o0JYRYe1lHikufyEb0wf2kzwqGfaMIGu85m3JmIujt5iqX/41X5axuxKJ+Lr9HcXRXL7uS62awNx5kOmAfp+cA9mwgWxGeBgnkiRyI1dCGQQ6Y1iyDdJGWvWs1Fd2TnaCCd3jEcGgo31etGPcBr0rrZWjvLlK1S4s088ncYmX7jveSGvWeC22lnFigMWvlBl7Pv9LNo59jxDXG6JVKFYS0sMMrnGMwySLXlLo7oqTJe4CHXYAg4pNh0Vg2OxRx/xwZxX8msLiFnQPzh5UdBxoxRWGn2sRjE0QpirfG6FVA3eLQScmd8ttAH/wvXFKDHg9J203L5SbCpd10=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR04MB9366.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(52116014)(19092799006)(7416014)(366016)(38350700014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?2iT9OHtHa+9bxUiNicBG0P/R6shQ/HaKVFFsEx/BcChqdn2hP08875nETbBY?=
- =?us-ascii?Q?8YQXh8M+Lq/Dc9PmWbMKeS6gk3m76p9SutE/+pCFHdLq8eAXlwYkIhm25Yvb?=
- =?us-ascii?Q?3k01D2Y0O+idAWzrbaTOGf4djc9rR7Hco89NznpwSSrxN7zxnQ3o0qfEy2/O?=
- =?us-ascii?Q?ZfdmNyoV433YFVUn2gaobRCr/K2e7+etGyjEWyfbxude9W+zhDFy9vjADNW7?=
- =?us-ascii?Q?n+6bncInM9l+tq4QUE0qQ+MYwsluE6r1pV2WAnn7EFHC1nbEo4yL+CjlgdJF?=
- =?us-ascii?Q?LkMhcYkH6Gqnw+87spICB1Agvr8DMwBMTNcqAFcvYHErR/QFlC9dBKacUlOj?=
- =?us-ascii?Q?fexhAH5qjYnXRRGsu2qtsIlwPKxBXmdur6LGhqi2m3qA+F/h2up6ux+9GNGK?=
- =?us-ascii?Q?5MIcbSh2W+6BO/TGpIcyrrhA/RrCQ6RKLLod50qo+FJfnDT8S0lupzDCszhC?=
- =?us-ascii?Q?ca0g3wxK9v+5TzwRzyobZMtze/QsZLZeeSrSN/s1u+Xr1IZWQcLSkswEGxqD?=
- =?us-ascii?Q?dXUzom5siSa/hCgVDYPMbi1D7CySRMFO1bDfb7g5f4MyPMURfDkPJVTfrIbc?=
- =?us-ascii?Q?DySVh8F8KTTkTzzFco0S121SLcD7hEDYIinqZVA6YatZQvu21HKik85kgKCK?=
- =?us-ascii?Q?Qih0BGi1es8UjMnf6qVmkBjqPcGGbUt+Ab9QJ2PbuW98Bmsk1IR1qrCnU4pO?=
- =?us-ascii?Q?A+WVAVTHUrjm+YMbp6Vj+0sugzC2+FV+IEWfGoUdlLNR8gmGh3rPAVN0vgKU?=
- =?us-ascii?Q?x8J4l5K8tEHSDXVaAq5EFMIbuwvmdZhCkr3857r6id0jyqMYnJ+WlGOiz052?=
- =?us-ascii?Q?6G/P4THBPjglA5biZc40FOkgZskw3TA1TG0FhRBRcWI5lcI3LKGzR0/w9yQ6?=
- =?us-ascii?Q?PI4a/D3TL3uGVZAfSwSC7cl8hWmRdUsVg6qy6onXnCT2Gs660pFDeCIUta4R?=
- =?us-ascii?Q?UUtIrkSGnDajFE92f8sgjKndjCIs+YSeWzXsdGrEP/Mini730vGxoLmNhuxU?=
- =?us-ascii?Q?l7IpdFMhTWH9AJw4Aqu6esRNdRKjJda5K9QsTezbVze0MzD469dPxZmwou9W?=
- =?us-ascii?Q?DJDjt0WfDEZJZyeaOpgR2VY6S0uk3kEsgk60LLcNm+sjPDuFwuC7CYMhOWaS?=
- =?us-ascii?Q?RwZSO0N0YhqxRtEKbriw6UbxrJ59IIwg+d9BdhSGB3U5Omy3xTW9jANTeXvu?=
- =?us-ascii?Q?Lpqf0UCJFae2MKBtBPHMk92yum9q/LFrIviKQzxoWszSznZ/+ZU2eYhgaNRp?=
- =?us-ascii?Q?Nb+yFP5GsfRLNBiWCEeVeJoD+i+8qzI0z7fvN5xRV2Q7HiJGZsicyieNDR0W?=
- =?us-ascii?Q?PJAR4hs2scosJne9NJZOlsh6KhBlcPjOyU7FUUJiaiWMeEDGG9XZb0navxRL?=
- =?us-ascii?Q?qSkZ51JRPmtejfhBr9fknmjREAR0JyL7fqGK0idQkmeDkZ/P4ZDwR0RK6/P5?=
- =?us-ascii?Q?qnyQUUjmF3G9gtHRp+3CmSnF0wfOLaGOUcu61W/yAVm0FMG1xURayDls+1/i?=
- =?us-ascii?Q?XZ+8ApOEGspIXbvX2mIoP+EWiBw3XiGdx2aUm277x72oSIgOkl5PdzagQwww?=
- =?us-ascii?Q?NJF84rfOgLEIHW91NEasYiqsE8aP43OGoD1i5gyBL5IRCi7RqdEWhhMmnQKh?=
- =?us-ascii?Q?ezClV6M0/ZDd1lMN68+OUJjAdCQ0riWdwr9wIaCBg8jhw6axWXAMfTL9QNbQ?=
- =?us-ascii?Q?AnKeRtx67LOv7ATbuRAP9nH19A5GPWGmH4Ypw0eShktvT4y5?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 238e6cc5-6b23-42b7-8b74-08de8f33f3ae
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB9366.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 14:44:02.9815
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bivlZCOpDITUUh4tp669044ekslH3QourhUFHd2mfBsju1B1zO8ghXCYuVQ+4SwORLuIHvnCqGNFkexd92bU6Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10964
-X-purgate-ID: tlsNG-ebf023/1774968246-BA0839D1-90E44445/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/8] vpci: add a wait operation to the vpci vcpu
+ pending actions
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1772806036.git.mykyta_poturai@epam.com>
+ <ec941fbf4f8bde23fc3867e47f5ada028f8003aa.1772806036.git.mykyta_poturai@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ec941fbf4f8bde23fc3867e47f5ada028f8003aa.1772806036.git.mykyta_poturai@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1774968928-B72F1185-174D8B41/0/0
 X-purgate-type: clean
-X-purgate-size: 1834
+X-purgate-size: 5826
 
-On Tue, Mar 31, 2026 at 07:34:47PM +0530, Vijayanand Jitta wrote:
-> From: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
->
-> Change of_map_id() to take a pointer to struct of_phandle_args
-> instead of passing target device node and translated IDs separately.
-> Update all callers accordingly.
->
-> Add an explicit filter_np parameter to of_map_id() and of_map_msi_id()
-> to separate the filter input from the output. Previously, the target
-> parameter served dual purpose: as an input filter (if non-NULL, only
-> match entries targeting that node) and as an output (receiving the
-> matched node with a reference held). Now filter_np is the explicit
-> input filter and arg->np is the pure output.
->
-> Previously, of_map_id() would call of_node_put() on the matched node
-> when a filter was provided, making reference ownership inconsistent.
-> Remove this internal of_node_put() call so that of_map_id() now always
-> transfers ownership of the matched node reference to the caller via
-> arg->np. Callers are now consistently responsible for releasing this
-> reference with of_node_put(arg->np) when done.
->
-> Suggested-by: Rob Herring (Arm) <robh@kernel.org>
-> Suggested-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
-> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-> ---
->  drivers/cdx/cdx_msi.c                    |  7 ++--
->  drivers/iommu/of_iommu.c                 |  4 +-
->  drivers/irqchip/irq-gic-its-msi-parent.c | 11 ++++--
->  drivers/of/base.c                        | 68 +++++++++++++++++---------------
->  drivers/of/irq.c                         | 10 ++++-
->  drivers/pci/controller/dwc/pci-imx6.c    | 32 +++++++--------
->
-> for imx part.
->
-> Reviewed-by: Frank Li <Frank.Li@nxp.com>
+On 09.03.2026 12:08, Mykyta Poturai wrote:
+> --- a/xen/drivers/vpci/header.c
+> +++ b/xen/drivers/vpci/header.c
+> @@ -175,76 +175,92 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
+>  
+>  bool vpci_process_pending(struct vcpu *v)
+>  {
+> -    const struct pci_dev *pdev = v->vpci.pdev;
+> -    struct vpci_header *header = NULL;
+> -    unsigned int i;
+> -
+> -    if ( !pdev )
+> -        return false;
+> -
+> -    read_lock(&v->domain->pci_lock);
+> -
+> -    if ( !pdev->vpci || (v->domain != pdev->domain) )
+> +    switch ( v->vpci.task )
+>      {
+> -        v->vpci.pdev = NULL;
+> -        read_unlock(&v->domain->pci_lock);
+> -        return false;
+> -    }
+> -
+> -    header = &pdev->vpci->header;
+> -    for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+> +    case MODIFY_MEMORY:
+>      {
+> -        struct vpci_bar *bar = &header->bars[i];
+> -        struct rangeset *mem = v->vpci.bar_mem[i];
+> -        struct map_data data = {
+> -            .d = v->domain,
+> -            .map = v->vpci.cmd & PCI_COMMAND_MEMORY,
+> -            .bar = bar,
+> -        };
+> -        int rc;
+> +        const struct pci_dev *pdev = v->vpci.memory.pdev;
+> +        struct vpci_header *header = NULL;
+> +        unsigned int i;
+>  
+> -        if ( rangeset_is_empty(mem) )
+> -            continue;
+> +        if ( !pdev )
+> +            break;
+>  
+> -        rc = rangeset_consume_ranges(mem, map_range, &data);
+> +        read_lock(&v->domain->pci_lock);
+>  
+> -        if ( rc == -ERESTART )
+> +        if ( !pdev->vpci || (v->domain != pdev->domain) )
+>          {
+> +            v->vpci.memory.pdev = NULL;
+>              read_unlock(&v->domain->pci_lock);
+> -            return true;
+> +            break;
+>          }
+>  
+> -        if ( rc )
+> +        header = &pdev->vpci->header;
+> +        for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+>          {
+> -            spin_lock(&pdev->vpci->lock);
+> -            /* Disable memory decoding unconditionally on failure. */
+> -            modify_decoding(pdev, v->vpci.cmd & ~PCI_COMMAND_MEMORY,
+> -                            false);
+> -            spin_unlock(&pdev->vpci->lock);
+> +            struct vpci_bar *bar = &header->bars[i];
+> +            struct rangeset *mem = v->vpci.bar_mem[i];
+> +            struct map_data data = {
+> +                .d = v->domain,
+> +                .map = v->vpci.memory.cmd & PCI_COMMAND_MEMORY,
+> +                .bar = bar,
+> +            };
+> +            int rc;
+> +
+> +            if ( rangeset_is_empty(mem) )
+> +                continue;
+>  
+> -            /* Clean all the rangesets */
+> -            for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+> -                if ( !rangeset_is_empty(v->vpci.bar_mem[i]) )
+> -                     rangeset_purge(v->vpci.bar_mem[i]);
+> +            rc = rangeset_consume_ranges(mem, map_range, &data);
+>  
+> -            v->vpci.pdev = NULL;
+> +            if ( rc == -ERESTART )
+> +            {
+> +                read_unlock(&v->domain->pci_lock);
+> +                return true;
+> +            }
+>  
+> -            read_unlock(&v->domain->pci_lock);
+> +            if ( rc )
+> +            {
+> +                spin_lock(&pdev->vpci->lock);
+> +                /* Disable memory decoding unconditionally on failure. */
+> +                modify_decoding(pdev, v->vpci.memory.cmd & ~PCI_COMMAND_MEMORY,
+> +                                false);
+> +                spin_unlock(&pdev->vpci->lock);
+> +
+> +                /* Clean all the rangesets */
+> +                for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+> +                    if ( !rangeset_is_empty(v->vpci.bar_mem[i]) )
+> +                        rangeset_purge(v->vpci.bar_mem[i]);
+> +
+> +                v->vpci.memory.pdev = NULL;
+> +
+> +                read_unlock(&v->domain->pci_lock);
+>  
+> -            if ( !is_hardware_domain(v->domain) )
+> -                domain_crash(v->domain);
+> +                if ( !is_hardware_domain(v->domain) )
+> +                    domain_crash(v->domain);
+>  
+> -            return false;
+> +                break;
+> +            }
+>          }
+> -    }
+> -    v->vpci.pdev = NULL;
+> +        v->vpci.memory.pdev = NULL;
+>  
+> -    spin_lock(&pdev->vpci->lock);
+> -    modify_decoding(pdev, v->vpci.cmd, v->vpci.rom_only);
+> -    spin_unlock(&pdev->vpci->lock);
+> +        spin_lock(&pdev->vpci->lock);
+> +        modify_decoding(pdev, v->vpci.memory.cmd, v->vpci.memory.rom_only);
+> +        spin_unlock(&pdev->vpci->lock);
+>  
+> -    read_unlock(&v->domain->pci_lock);
+> +        read_unlock(&v->domain->pci_lock);
+> +
+> +        break;
+> +    }
+> +    case WAIT:
+> +        if ( NOW() < v->vpci.wait.end )
+> +            return true;
+> +        v->vpci.wait.callback(v->vpci.wait.data);
+> +        break;
+
+As just indicated in reply to patch 6, busy waiting isn't really acceptable.
+This is even more so when the waiting exceeds the typical length of a
+scheduling timeslice.
+
+In that other reply I said to put the vCPU to sleep, but you need to be careful
+there too: The domain may not expect its vCPU to not make any progress for such
+an extended period of time. This may need doing entirely differently: Once the
+command register was written, you may want to record the time after which
+accesses to the VF registers are permitted. Earlier accesses would simply be
+terminated. You may still additionally need a timer, in order to kick off BAR
+mapping after that time. (Yet better would  be if the BAR mapping could be
+done during those 100ms. After all that may be a reason why this long a delay
+is specified: Firmware on the device may also require some time to set up the
+BARs accordingly.)
+
+Jan
 
