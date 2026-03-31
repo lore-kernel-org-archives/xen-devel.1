@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D80110F92F1
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 19:04:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269257.1558337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1085410F92EE
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2026 19:19:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269308.1558383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7eO6-0004XW-FZ; Tue, 31 Mar 2026 19:04:30 +0000
+	id 1w7ebz-0000Yu-U9; Tue, 31 Mar 2026 19:18:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269257.1558337; Tue, 31 Mar 2026 19:04:30 +0000
+Received: by outflank-mailman (output) from mailman id 1269308.1558383; Tue, 31 Mar 2026 19:18:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7eO6-0004XP-Cj; Tue, 31 Mar 2026 19:04:30 +0000
-Received: by outflank-mailman (input) for mailman id 1269257;
- Tue, 31 Mar 2026 19:04:29 +0000
+	id 1w7ebz-0000Yn-RI; Tue, 31 Mar 2026 19:18:51 +0000
+Received: by outflank-mailman (input) for mailman id 1269308;
+ Tue, 31 Mar 2026 19:18:50 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1w7eO5-0004XI-KY
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 19:04:29 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <alex@shazbot.org>) id 1w7eby-0000Yh-1e
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 19:18:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7eO4-001kxS-Im
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 21:04:28 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1w7ebw-0044D0-S6
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2026 21:18:48 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69cc1ab2-bab6-0a2a0a5309dd-0a2a4507bd8c-10
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:28 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69cc1abc-fd74-0a2a45070019-d1558036dd31-3
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:04:28 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4887f49ec5aso13454325e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 12:04:28 -0700 (PDT)
-Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887e80a6ebsm66704905e9.6.2026.03.31.12.04.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 12:04:27 -0700 (PDT)
+ (envelope-from <alex@shazbot.org>)
+ id 69cc1dc6-2eae-0a2a0a5409dd-0a2a4501e460-48
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:18:48 +0200
+Received: from [202.12.124.139] (helo=flow-b4-smtp.messagingengine.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <alex@shazbot.org>)
+ id 69cc1e16-6fc9-0a2a45010019-ca0c7c8bdac5-3
+ for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 21:18:47 +0200
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailflow.stl.internal (Postfix) with ESMTP id D592A130008E;
+ Tue, 31 Mar 2026 15:18:43 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-05.internal (MEProxy); Tue, 31 Mar 2026 15:18:45 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 31 Mar 2026 15:18:38 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,115 +52,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774983868; x=1775588668; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=845HDfVTBoc7mrrFu9xgBwD2zq28tgaJ6wnc45Ubl+s=;
-        b=o8ieWmoC+nHyQHq9M1oHNs6uq4eMzJhGQLHF0fO8m9bgv39N5SIoSahaU30QqpLe6w
-         FCtaXN5dAdeuzZdmYl6oxI9EvCYMcEHtrRp6vYUxZBT1JZQ90yllLZW2MA5m0DjIurgv
-         4DrKYpx1U+rVcKLuLYdpoGnDLgV5slxZGZhSZiCY1gH2Zaplxkw02PAv2LLG/Q0kh8fP
-         4Lwh/fzdmLd+BRmbFV3kvs5XXv5P93iIxvuYgfQlZZh02B+yVXC6gpqTmzbVRvC+vNOz
-         SMXlYE6n5ORVSizXJbCrVzvIq0eTm7h14Dv5JPPwpsuHiGGUVoErhhI1SuDCAMyj6dbJ
-         iBtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774983868; x=1775588668;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=845HDfVTBoc7mrrFu9xgBwD2zq28tgaJ6wnc45Ubl+s=;
-        b=cc4IoFJnIjBjg+th1IR1ZRxv2d+9DinK+qdXDAlNBPbSYCh20VSXzBt8sD6X1v8bRv
-         3nzge1LCjWcWfCMg2ATr7MtExnWh7cYA1Ep7KIbEDm4ht1l94IwBExOKXwbLcPkP7gl/
-         rmZqQWldSuDEV72eDRT+oHlGCOr5Z2d87TtLUQmKcBVdxn1pQYPMkVAqWx+rffsc6NKK
-         gvJpQRPGBMU6rLM5lIkJs8htJdj6sKkPUeN/JVuaAj5sDULFWeYWPpYXpLPuFVTEB/SU
-         KbgdagI+itc4C2wrRzrwHoYxi1fw8epwwMx7t8QDgAVdZ7lD+VGMuonGmP7WzthAlDva
-         zckA==
-X-Gm-Message-State: AOJu0Yy8BYVXbcc/7iMWk2QNi3rP3waOC/17te5ipeLdt6Wtmu/2pcx4
-	cbZL14dzZmUMny8U6USlO6HlO9D80d6znpGfoF9/FpTFQeS+3uJ4lB1WOd/tZg==
-X-Gm-Gg: ATEYQzxy9gguzOy9aF1WOLXy0ehJowlesXmEjt77uM9NEk+KXMdVo+0AmxDqkChpnyV
-	7OV7D7JaX/H54x8Cu5qMAnM5oi6L1tjrBftOn4TE6LWJZzC6WWARiYSZ1ewi2f7emxN0fm4pZ3H
-	IAAEOgIRuPHrcbe4aUl4U6l/fiIuJmZap7ocUZkb+nrp7dxLE0ZddsGxn1U5RoC5Fx+EWeG49e1
-	mOzAxAKWR6jLWbmZ2MJNE2sMTQ5/gnQ3orheI9G88y2/BY1ujFo8bI+V0nxl6RytTLj1jpal2fa
-	0TP2lHCypSiJBNReIn/xa57n7ez3kBTFZkffev80wS0AJ42RNbJ4IHsq39IrZPDcwqTJ7tEQdFz
-	JNsBbsqUoU1PGtIu6KECbqTfqBf/ziKyfPUagN0tInbnbKJpdgcFJryKYrBMglUfWNHkREUszK1
-	nUumZPgNFy9tVxCEn99Mhygfq1ECehXQABb5QZ03MN9T12m0UOIZPdmXGuo/+UyWqd+w==
-X-Received: by 2002:a05:600c:1d0f:b0:485:30f7:6e88 with SMTP id 5b1f17b1804b1-488835a59a3mr8518325e9.31.1774983867440;
-        Tue, 31 Mar 2026 12:04:27 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/4]  RISCV: Intrdouce SSTC support in Xen
-Date: Tue, 31 Mar 2026 21:04:15 +0200
-Message-ID: <cover.1774863161.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=shazbot.org header.i="@shazbot.org" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1774984723;
+	 x=1774991923; bh=e2GLgeMPntSzKQd7unYxJVNrGT++Ey/+j0e558YaVKo=; b=
+	Jix2YZqPgfjz22R+GBZTSkmM/A+yTGqbP2D7RrPJTBlHCtwUy2TreQYJzy0FYt4E
+	mn6iGMSZZUAvgOUzmgtxkvDhEQqNq9so/LsT2uXs0WUjbk/iVyGgezKLdcntmYCJ
+	j1mTHgBbF1XmhYE9OLcmwaqRwm079G64C6NXLlTJGqXGDGeTuyvQuKL+LrxHsVyt
+	h07JL26/s5vAaqvA+uFn5EtvqWaXeuVPLWaay4hdvRDT/GeDy5zchULu+Xf5bCKw
+	aMCGUFvWJ4r5sa9ylZo53CH1LtcUihVM+4twawyn4uPT0avFIdaMYMGGz87cRj5W
+	75pcl2tsTe5q72qXomhEng==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1774984723; x=
+	1774991923; bh=e2GLgeMPntSzKQd7unYxJVNrGT++Ey/+j0e558YaVKo=; b=q
+	Pkl0NIe505sDev2vE+9dEjJ2QQvY24shKDHRjyi5iJrJ3lhJmCH83R7Ej6uIsdKx
+	Ah2qPK0lawqj3n8MX9UbaZlR8zOv0eboHPEu2zTV9Ar46wm3SvS5yBG219IjmBDw
+	/8aE106Yb9iAY8X18cayks75OdeneZOPyq2pnCyvpFrGdunxzgrlbZPAQhHCnM3H
+	MhJM8//IeSYiIyV967PwBaCx9UybPaAajGdNOPqf34786RvJS1R2NeBhzECYdV9r
+	Hhp4kbOPpgzUg+fw9gf2jEWED5P2y3OiIotVEJPhPvUaSmHyFEthzrD5syHkfCDz
+	oj1hrBx1gCRLurULKhEqQ==
+X-ME-Sender: <xms:Eh7MaYVXhSLS49doWxNbldxcSkPJQ2lBgD6S-cXj9ML6P8DuIhi54A>
+    <xme:Eh7MaY3CTvPt8pC-6__rnVlJHk3AMpws04d9x1eLmygsx9xxcOKA3tvfX2RGrzeid
+    3eITD6bgIngUTpBItaVYS7mKstrqZdkyduHlmJydVKX9r92pk1CAA>
+X-ME-Received: <xmr:Eh7MaWAMOBeQDrW_EEEiAtExZoJg9HXrtPbMbrU13INIpg2pRTwgJd0Tapg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddutddvucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
+    lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
+    epfffhvfevuffkjghfofggtgfgsehtjeertdertddvnecuhfhrohhmpeetlhgvgicuhghi
+    lhhlihgrmhhsohhnuceorghlvgigsehshhgriigsohhtrdhorhhgqeenucggtffrrghtth
+    gvrhhnpedvkeefjeekvdduhfduhfetkedugfduieettedvueekvdehtedvkefgudegveeu
+    ueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrlh
+    gvgiesshhhrgiisghothdrohhrghdpnhgspghrtghpthhtohephedupdhmohguvgepshhm
+    thhpohhuthdprhgtphhtthhopegurghkrheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoh
+    epjhhgghesiihivghpvgdrtggrpdhrtghpthhtoheplhhinhhugiesrghrmhhlihhnuhig
+    rdhorhhgrdhukhdprhgtphhtthhopehgrhgvghhkhheslhhinhhugihfohhunhgurghtih
+    honhdrohhrghdprhgtphhtthhopehrrghfrggvlheskhgvrhhnvghlrdhorhhgpdhrtghp
+    thhtohepihhorghnrgdrtghiohhrnhgvihesnhigphdrtghomhdprhgtphhtthhopehnih
+    hpuhhnrdhguhhpthgrsegrmhgurdgtohhmpdhrtghpthhtohepnhhikhhhihhlrdgrghgr
+    rhifrghlsegrmhgurdgtohhmpdhrtghpthhtohepkhihshesmhhitghrohhsohhfthdrtg
+    homh
+X-ME-Proxy: <xmx:Eh7MaXq2mlnlOelEQan96Ie-hgy-LAK8CHBHQdkG7r27nkHcaWiIbg>
+    <xmx:Eh7Mab_KIxvqr4OxQc5evz-T_S8zOMbzrx08jzw5C5b7mvco3Iesuw>
+    <xmx:Eh7MaefX2P0crsZiJ44xT0eYo0t5zG2qKmdKMy8HHuopFTELtHeNKg>
+    <xmx:Eh7MaRJs8ye8aup8P2JAiOncajQ7Ro6xy3heBDnJcGy9BvoI7oIX_g>
+    <xmx:Ex7MaSUwhQGLpsFOIWtvVzTCvrLLbvifdUNGQI9PxQ_RqFwZ-CC-1T0v>
+Feedback-ID: i03f14258:Fastmail
+Date: Tue, 31 Mar 2026 13:18:37 -0600
+From: Alex Williamson <alex@shazbot.org>
+To: "Danilo Krummrich" <dakr@kernel.org>, "Jason Gunthorpe" <jgg@ziepe.ca>
+Cc: "Russell King" <linux@armlinux.org.uk>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ "Ioana Ciornei" <ioana.ciornei@nxp.com>,
+ "Nipun Gupta" <nipun.gupta@amd.com>,
+ "Nikhil Agarwal" <nikhil.agarwal@amd.com>,
+ "K. Y. Srinivasan" <kys@microsoft.com>,
+ "Haiyang Zhang" <haiyangz@microsoft.com>, "Wei Liu" <wei.liu@kernel.org>,
+ "Dexuan Cui" <decui@microsoft.com>, "Long Li" <longli@microsoft.com>,
+ "Bjorn Helgaas" <bhelgaas@google.com>, "Armin Wolf" <W_Armin@gmx.de>,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Mathieu Poirier" <mathieu.poirier@linaro.org>,
+ "Vineeth Vijayan" <vneethv@linux.ibm.com>,
+ "Peter Oberparleiter" <oberpar@linux.ibm.com>,
+ "Heiko Carstens" <hca@linux.ibm.com>,
+ "Vasily Gorbik" <gor@linux.ibm.com>,
+ "Alexander Gordeev" <agordeev@linux.ibm.com>,
+ "Christian Borntraeger" <borntraeger@linux.ibm.com>,
+ "Sven Schnelle" <svens@linux.ibm.com>,
+ "Harald Freudenberger" <freude@linux.ibm.com>,
+ "Holger Dengler" <dengler@linux.ibm.com>,
+ "Mark Brown" <broonie@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "Jason Wang" <jasowang@redhat.com>,
+ "Xuan Zhuo" <xuanzhuo@linux.alibaba.com>,
+ Eugenio =?UTF-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+ "Juergen Gross" <jgross@suse.com>,
+ "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ <linux-kernel@vger.kernel.org>, <driver-core@lists.linux.dev>,
+ <linuxppc-dev@lists.ozlabs.org>, <linux-hyperv@vger.kernel.org>,
+ <linux-pci@vger.kernel.org>, <platform-driver-x86@vger.kernel.org>,
+ <linux-arm-msm@vger.kernel.org>, <linux-remoteproc@vger.kernel.org>,
+ <linux-s390@vger.kernel.org>, <linux-spi@vger.kernel.org>,
+ <virtualization@lists.linux.dev>, <kvm@vger.kernel.org>,
+ <xen-devel@lists.xenproject.org>, <linux-arm-kernel@lists.infradead.org>,
+ "Gui-Dong Han" <hanguidong02@gmail.com>, alex@shazbot.org
+Subject: Re: [PATCH 05/12] PCI: use generic driver_override infrastructure
+Message-ID: <20260331131837.6a9fe9ec@shazbot.org>
+In-Reply-To: <DHGTLY0FJWD2.2VLT6NQWF97YY@kernel.org>
+References: <20260324005919.2408620-1-dakr@kernel.org>
+	<20260324005919.2408620-6-dakr@kernel.org>
+	<DHGATG6LJOM1.2AI7BYQ2O4DFU@kernel.org>
+	<20260330141050.2cb47bd9@shazbot.org>
+	<DHGT9XCG8Y96.3IB1EI6FF1ZDZ@kernel.org>
+	<DHGTLY0FJWD2.2VLT6NQWF97YY@kernel.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1774983868-5CD87303-5992864A/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2399
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1774984728-B66F7185-66D071AA/0/0
+X-purgate-type: clean
+X-purgate-size: 4400
 
-This patch series is created based on [1] and the aim is to make Xen properly
-works when SSTC extension is available.
+On Tue, 31 Mar 2026 10:22:14 +0200
+"Danilo Krummrich" <dakr@kernel.org> wrote:
 
-It is needed to do in this way as OpenSBI doesn't pass that it supports SSTC
-by DTS to Xen and there is no easy way to turn off support of SSTC support.
+> On Tue Mar 31, 2026 at 10:06 AM CEST, Danilo Krummrich wrote:
+> > On Mon Mar 30, 2026 at 10:10 PM CEST, Alex Williamson wrote:  
+> >> On Mon, 30 Mar 2026 19:38:41 +0200
+> >> "Danilo Krummrich" <dakr@kernel.org> wrote:
+> >>  
+> >>> (Cc: Jason)
+> >>> 
+> >>> On Tue Mar 24, 2026 at 1:59 AM CET, Danilo Krummrich wrote:  
+> >>> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> >>> > index d43745fe4c84..460852f79f29 100644
+> >>> > --- a/drivers/vfio/pci/vfio_pci_core.c
+> >>> > +++ b/drivers/vfio/pci/vfio_pci_core.c
+> >>> > @@ -1987,9 +1987,8 @@ static int vfio_pci_bus_notifier(struct notifier_block *nb,
+> >>> >  	    pdev->is_virtfn && physfn == vdev->pdev) {
+> >>> >  		pci_info(vdev->pdev, "Captured SR-IOV VF %s driver_override\n",
+> >>> >  			 pci_name(pdev));
+> >>> > -		pdev->driver_override = kasprintf(GFP_KERNEL, "%s",
+> >>> > -						  vdev->vdev.ops->name);
+> >>> > -		WARN_ON(!pdev->driver_override);
+> >>> > +		WARN_ON(device_set_driver_override(&pdev->dev,
+> >>> > +						   vdev->vdev.ops->name));    
+> >>> 
+> >>> Technically, this is a change in behavior. If vdev->vdev.ops->name is NULL, it
+> >>> will trigger the WARN_ON(), whereas before it would have just written "(null)"
+> >>> into driver_override.  
+> >>
+> >> It's worse than that.  Looking at the implementation in [1], we have:
+> >>
+> >> +static inline int device_set_driver_override(struct device *dev, const char *s)
+> >> +{
+> >> +	return __device_set_driver_override(dev, s, strlen(s));
+> >> +}
+> >>
+> >> So if name is NULL, we oops in strlen() before we even hit the -EINVAL
+> >> and WARN_ON().  
+> >
+> > This was changed in v2 [2] and the actual code in-tree is
+> >
+> > 	static inline int device_set_driver_override(struct device *dev, const char *s)
+> > 	{
+> > 		return __device_set_driver_override(dev, s, s ? strlen(s) : 0);
+> > 	}
+> >
+> > so it does indeed return -EINVAL for a NULL pointer.
 
-Also, as a part of this patch series intrdouce suggested [2] by Jan B.
-improvements of init_csr_masks().
+Ok, good.
 
-[1] https://lore.kernel.org/xen-devel/cover.1772814110.git.oleksii.kurochko@gmail.com/T/#mc14576ef43a83b344c5f31626005b995e2ccbeaa
-[2] https://lore.kernel.org/xen-devel/cover.1772814110.git.oleksii.kurochko@gmail.com/T/#m9c18d2d7a98958befec16419f5deccc40f6c8c3e
+> >> I don't believe we have any vfio-pci variant drivers where the name is
+> >> NULL, but kasprintf() handling NULL as "(null)" was a consideration in
+> >> this design, that even if there is no name the device is sequestered
+> >> with a driver_override that won't match an actual driver.
+> >>  
+> >>> I assume that vfio_pci_core drivers are expected to set the name in struct
+> >>> vfio_device_ops in the first place and this code (silently) relies on this
+> >>> invariant?  
+> >>
+> >> We do expect that, but it was previously safe either way to make sure
+> >> VFs are only bound to the same ops driver or barring that, at least
+> >> don't perform a standard driver match.  The last thing we want to
+> >> happen automatically is for a user owned PF to create SR-IOV VFs that
+> >> automatically bind to native kernel drivers.
+> >>    
+> >>> Alex, Jason: Should we keep this hunk above as is and check for a proper name in
+> >>> struct vfio_device_ops in vfio_pci_core_register_device() with a subsequent
+> >>> patch?  
+> >>
+> >> Given the oops, my preference would be to roll it in here.  This change
+> >> is what makes it a requirement that name cannot be NULL, where this was
+> >> safely handled with kasprintf().  
+> >
+> > Again, no oops here. :)
+> >
+> > I still think it makes more sense to fail early in
+> > vfio_pci_core_register_device(), rather than silently accept "(null)" in
+> > driver_override. It also doesn't seem unreasonable with only the WARN_ON(), but
+> > I can also just add vdev->vdev.ops->name ?: "(null)".  
+> 
+> (Or just skip the call if !vdev->vdev.ops->name, as a user will read "(null)"
+> from sysfs either way.)
 
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2417456208
+Hmm, I suppose they would, but there's a fundamental difference between
+driver_override being set to "(null)" vs being NULL and only
+interpreted as "(null)" via show.  The former would prevent ID table
+matching, the latter would not.  The former is what was intended here,
+without realizing both look the same through sysfs and present a
+difficult debugging challenge.
 
-Also, I've manually ran QEMU with SSTC=on/off and built Xen with a newer RISC-V
-compileer (in comparison with the version used by CI's docker container) to
-verify CONFIG_CC_HAS_ASM_GOTO_OUTPUT branch inside csr_read_safe().
+Given no oops for strlen() now and no known in-kernel drivers with a
+NULL name, I can post a patch that rejects a NULL name in the ops
+structure in vfio_pci_core_register_device(), avoiding the entire
+situation.
 
----
-Changes in v2:
- - Address the comments from ML.
----
+For this,
 
-Oleksii Kurochko (4):
-  xen/riscv: add exception table support
-  xen/riscv: add csr_allowed_read() helper
-  xen/riscv: allow Xen to use SSTC while hiding it from guests
-  xen/riscv: init_csr_masks()-related improvements
+Acked-by: Alex Williamson <alex@shazbot.org>
 
- xen/arch/riscv/Kconfig                      |  1 +
- xen/arch/riscv/Makefile                     |  1 +
- xen/arch/riscv/cpufeature.c                 | 33 ++++++++
- xen/arch/riscv/domain.c                     | 29 +++----
- xen/arch/riscv/extable.c                    | 85 +++++++++++++++++++++
- xen/arch/riscv/include/asm/bug.h            |  2 +
- xen/arch/riscv/include/asm/cpufeature.h     |  1 +
- xen/arch/riscv/include/asm/csr.h            | 36 ++++++++-
- xen/arch/riscv/include/asm/extable.h        | 58 ++++++++++++++
- xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
- xen/arch/riscv/setup.c                      |  3 +
- xen/arch/riscv/time.c                       | 34 +++++----
- xen/arch/riscv/traps.c                      |  5 ++
- xen/arch/riscv/vtimer.c                     |  7 +-
- xen/arch/riscv/xen.lds.S                    |  3 +
- xen/arch/x86/xen.lds.S                      |  6 +-
- xen/include/xen/xen.lds.h                   |  6 ++
- 17 files changed, 277 insertions(+), 35 deletions(-)
- create mode 100644 xen/arch/riscv/extable.c
- create mode 100644 xen/arch/riscv/include/asm/extable.h
-
--- 
-2.53.0
-
+Thanks,
+Alex
 
