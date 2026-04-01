@@ -4,44 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 382D2107636D
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 06:29:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269714.1558626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1063D35140
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 06:42:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269724.1558635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7p4m-0007Hi-Bt; Wed, 01 Apr 2026 06:29:16 +0000
+	id 1w7pH0-0001vO-DM; Wed, 01 Apr 2026 06:41:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269714.1558626; Wed, 01 Apr 2026 06:29:16 +0000
+Received: by outflank-mailman (output) from mailman id 1269724.1558635; Wed, 01 Apr 2026 06:41:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7p4m-0007Hb-98; Wed, 01 Apr 2026 06:29:16 +0000
-Received: by outflank-mailman (input) for mailman id 1269714;
- Wed, 01 Apr 2026 06:29:14 +0000
+	id 1w7pH0-0001vH-Ab; Wed, 01 Apr 2026 06:41:54 +0000
+Received: by outflank-mailman (input) for mailman id 1269724;
+ Wed, 01 Apr 2026 06:41:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w7p4k-0007HV-Mt
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 06:29:14 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1w7pGz-0001vB-7S
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 06:41:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7p4j-005R2s-OG
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 08:29:13 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1w7pGy-00AiXb-4V
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 08:41:52 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69ccbb32-e002-0a2a0a5209dd-0a2a4502c4d4-6
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 08:29:13 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.55.2)
- (envelope-from <jbeulich@suse.com>)
- id 69ccbb39-63bb-0a2a45020019-d1558030ec58-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 08:29:13 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-486507134e4so73107455e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 31 Mar 2026 23:29:13 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887e83e906sm85638505e9.8.2026.03.31.23.29.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 31 Mar 2026 23:29:12 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69ccbe1b-5cb7-0a2a0a5109dd-0a2a4501c866-32
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 08:41:51 +0200
+Received: from [52.101.53.54]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69ccbe2e-6fc9-0a2a45010019-346535368321-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 08:41:51 +0200
+Received: from CH2PR03CA0011.namprd03.prod.outlook.com (2603:10b6:610:59::21)
+ by DM4PR12MB7600.namprd12.prod.outlook.com (2603:10b6:8:108::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
+ 2026 06:41:45 +0000
+Received: from CH1PEPF0000AD74.namprd04.prod.outlook.com
+ (2603:10b6:610:59:cafe::f1) by CH2PR03CA0011.outlook.office365.com
+ (2603:10b6:610:59::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
+ 1 Apr 2026 06:41:45 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000AD74.mail.protection.outlook.com (10.167.244.52) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9745.21 via Frontend Transport; Wed, 1 Apr 2026 06:41:45 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 1 Apr
+ 2026 01:41:44 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 1 Apr
+ 2026 01:41:44 -0500
+Received: from [10.71.194.215] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 1 Apr 2026 01:41:43 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,148 +71,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775024953; x=1775629753; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=8Bmie9qj6MlGel6w/+sZbpTxj82sDgs07ODjWhFHiCQ=;
-        b=SbP69BvZuSPscGsD8sRgOyN0AO4C1jUGN+TT7tFHp1F14iOLINfs1RSdP6FEXHckSq
-         kQEYIHlN4hD9oqOCg2MmytYx1ODMLZ05BGBGWnIN2SH8MIk+tgk7NS+W8+L5e4uHr3mQ
-         /ghh9uoXHwU+me7CDHf39uEdpKegvai6wxQ3LNDtnWvpoX4mRjgofMDWXyxg06K7lAWI
-         c9XEwO7Pkjz4T5A8MHY5xqf9vLp1pahl99eFArKW7d6HGHBhycH5dpNi6sCbpquCZ4tW
-         sS7CvPSXoBSL/X0D6mz7HMokgzdTGMv+OEx1u/9+U6hyK46m3RnGcyhJTBMYDGS2sz7/
-         I2gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775024953; x=1775629753;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8Bmie9qj6MlGel6w/+sZbpTxj82sDgs07ODjWhFHiCQ=;
-        b=NWNOmLNiyTKve3usXU3b695OH4mFBx9sqfTTuZ7QNH2fY+nzaBodNAmGRFsufg5cmd
-         ZqQbn0zsBso+iGoLef5REeHdJCHze2K3XK+zjDGfAfUzVPjRoF7o0o8U5IpvMPbRLFL9
-         dSmjhZ4R8smtxnMcVWidKL9CF6zPAnslsUT9iby2j6LH+afo+4i/h0L0gq3toZnS/J3h
-         q2ky2mv2Hp8bjJ2pH+2jzvN+CZRP2G3oGeiPJ/JBCwvjy1FlMfMtBQ2mkXlyVk0CXG+6
-         VRhV5sTv9+9Q197mznYMNwZh8gACT1V6XwFfsl3El5Xqc8j8cErnjV9XtLteNH9kOJaA
-         LJSg==
-X-Forwarded-Encrypted: i=1; AJvYcCUFkYSQ57mHdqxf9P7fTUYTUzfPrV0MA88S7RCRjgMZI0UEKFAxx9ydW56SSf8W2LqpG+iFjjbqPTk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyuQYzPzx4lDKJAm/MTe/L/wQLLHB5n/AOD2/oileEgSF6aT4hB
-	HLkFYT2nCRJDmyUxKJ2i+Jb22WPburM4e9nsoZnhfPcJ9JdFdHZf9vMy6Jpoam9B5g==
-X-Gm-Gg: ATEYQzwyHw/QP+EQb0AXFPqcvhLuUYvnK7qElTcS+qEMJ9w5cRneTlSCVpH6SMkO4ig
-	Tb/S78QpJWuF6xt/KPY5EpdimGCWZUxj/R6wx94wgXUdyl5gzyl14JA2792UHC5c/rddMQTG5eR
-	+XQphCGjkQ3ORpGnfdwK7oQ+7tR5nnAWqLofaQEg/0JTw93+o5OJfCxXrCw5Ygns/DajnXqRv7w
-	/FR/3LVEf/m7uBLuYa+RkuT3VpfMMWWgE/K4aWUl88RvhReP5zdL3VjiIHUX7tHkW2uONx9RyID
-	bhWlSmYYCidDDJMx7uwp91r+v1OlIMnJZeDACWYkiXhj5OfNE2GrQHIU/aYY2S5R0e7vr8HEBHM
-	IPq/IhD2y4niYLhS3bozQUDnYvccpC4YdIMrhoa4Fj19FZGEotPIoayfJJ498JpSb3++Y31bAM/
-	UpkezI1pKvxLzHZjntRqTpWZMn1OKfIdAExp4ZVJX5Hl9lepGhUiSSD74EyXFJbZhEn/3boEPBd
-	w6YzVyTFYJI5hA=
-X-Received: by 2002:a05:600c:4f94:b0:487:338:b4f3 with SMTP id 5b1f17b1804b1-4888359cec9mr31653315e9.17.1775024952916;
-        Tue, 31 Mar 2026 23:29:12 -0700 (PDT)
-Message-ID: <dc5550d7-5a2d-4ca1-85de-5a17c24aeac4@suse.com>
-Date: Wed, 1 Apr 2026 08:29:11 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o6us/gOvgPv94gROrBjlXupBHM+qtmB3Tirfg0ZTe6ptsLJgy9jyEo8h37MgPe1M9sueMcc21v6N7Rx3Szj156TCkcjS5epmGnTpA3jriTi11c+eIa+7cd2s9wfBPVVrMeHBOR45t5bhQPx8tBDN1Iuzk5WIaMRwFWzYbfM0nKxY+fJw9BokcpNAZDErnjCDfkbJRcCmo/rtHJsQ5aU0lvo511EUbZNNRSJSIWDngebblO9BZbDdREbI646IeBV8IiyNjgecY6jkSipTOnZPHFJMB2CafETOLIB6W/hmiVTQKIadLcV9Mvvb2PvZ2O4xMmGkm/9DW5jIL+Z83WrWPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s4UkN+7fTYVnKhgG0cXQ4SEnlwNdVk3op25ukMyHf0A=;
+ b=VYf2eO8+h6jdjiAU0hTTcQEti5gMNN1gxg8mfO/2GBfGrqG8W8lFu6q8IoQtpUOlYHR6wLZP8vYLjNd0KwE4QvW9bucvjAXJ1eeecPMDXkrGqg5sWAWZJq4qIEDwP77APx4K8IGJtoL0j4E5rtl43ULv7+LM3mcTXrSy/8sYakqa/xML2CvTtqo0Rz8rIzW3mDWcDfH0Gez2kbN/kJh5YHpMu7WXfNYyDBBn1xeJBBWRVUxclB9s3A9/CsLJQNGpvtEmtATHVhyCMEa9Y69Y/gDiEviYFHC8+etkqvYvNfeuWQh2q3A192EpiOVQsjjUNbUwKp9lmIzW0eohCzc2/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=s4UkN+7fTYVnKhgG0cXQ4SEnlwNdVk3op25ukMyHf0A=;
+ b=d6gaBRU6RI6+J4xvX49r/QLaf1dkfI3KcFyWkDwbzdNfyY3uNJj0o45Rj7tMk1AyzcmFGbjEzz8iA6uASlQmTdhI9/8ODM0aLEj77Ut83ZU/WsfTzYuRi1BHNVnnkm3EZEVP3xz0eHGPHlUetzWOiKcGiUwgYXAO8eqJRuOA+sQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <7d4791ee-05cb-490a-a209-a84a6531f0ca@amd.com>
+Date: Wed, 1 Apr 2026 08:41:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/arm: vpsci: ignore upper 32 bits for SMC32 PSCI
- arguments
-To: Mykola Kvach <xakep.amatop@gmail.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <e1d18d55557ebe232fd62174f186b1cf228e48e5.1774981189.git.mykola_kvach@epam.com>
+Subject: Re: [PATCH V2] xen/arm: Increase DOM0_FDT_EXTRA_SIZE to support max
+ reserved memory banks
+To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <20260331154309.2921483-1-oleksandr_tyshchenko@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <e1d18d55557ebe232fd62174f186b1cf228e48e5.1774981189.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20260331154309.2921483-1-oleksandr_tyshchenko@epam.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1775024953-69371DB8-BDD92897/0/0
+Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD74:EE_|DM4PR12MB7600:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd99f44a-2846-4afe-7906-08de8fb9bde4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|36860700016|82310400026|1800799024|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	h3RRgJUQCnZOhC2ZOt9/OQOxWKzw74odFn5Moo8IZlcfZReEDSqrd46gbXJKRnshu7kGJlIUVP3pqq6M72QeILGQxsxSQp+keXg1lW909QGmqfE/Ixa3CAouFG+OQ+eB7UF0FDCGu9Mb2vKAADa9jOZOwME6gpENhWTMbmCotpFFVPt/SJO3csm1aPZ9WEEl7cDL7cw0NZNkwW2Y0RQy8FdPmjFSQBM1Y3cKMlE5FMCMdM97Bt7n+xtcidv1BC/wMjxSZGB7KlNvmJE7gtFVYG6e0nm2JD6sWGRbibAWb6Sxfk1V3EZAGwWuSCsTlw+MiX8i6SdJQZgrzlzC5K/n/QsMjFC07zp9jyhyw8USBb625AAwiUBBWEvYlRrqMzX8nNithDMkaT9ZY5Rkn0BS9UNJ9DlVitmhnMPLtdrzmgiL/OcQliU1vme+epca6uBikNEqiwHX6BERHS0q0FVXWt6b4LYjAElwoaCCf2zmUBszMOIMivJ+045P8danMbRUOzNgwtBfgZcjuQiu7srvehNKKKhLE0YS0x2MgSeIGXNKEMHrpkWuKgqmHm6PlNr68Nn0THZiGRzjr/c04lYNoU15gGSXGtlqsdjbK3IqMl6rEcvKj+70xJYlfhW7xphgZJOftm8551SrjcXMpHPfxk7uopugCsShArpYOiBVHX0oLfJy0ft4KPFFhuv+H7gUcoAlSnmcZ/zQbi1lUUOZbi+njiH2AqVOBJW2xmWFpRtvGUxFrldpcipS2cHjqu49EyEpONw/0Qro9N2oCLaV1w==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	DlQCr94BEl/KEkk5oTQwnoMG2k92x9dzjuBOsMC1G3kANoJI2r2fGEUo5F1cqokj1tanV84IkilF30p5uFpBu5VI6p3Swkxm8KBBw8vrDlRy75ZZZEfFFkjNeSIzPxHIY7XmKhp9yxOWNgfcI/E282J1W862JwzxIPreA/TgprzLPipBoDp8/8ZOr+yC2r4cR2QRP40I6Z2uXHnAQACcpT3ayUaQumZreE94/oS7z9BxDIoH0ocbMtemKXzq6qNBZ37FG05IcANhxgV8b1wnCpd0DgUJvVDnx2VnzY3P09CqI0fvu9VJmIibIep6mF/5JcMYnGx3XKxet/Yw4jCZjcwgu7zyCdIOSnECXw9hfF5kThgv2xTRPQrZj25erOyZvTKYeV0RdCkS9BTCztRHNBIBNkkLssWoF9wBV16BOi9pvO94wjdsRfCsm2GmhnMj
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 06:41:45.0231
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd99f44a-2846-4afe-7906-08de8fb9bde4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000AD74.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7600
+X-purgate-ID: tlsNG-d62444/1775025711-B4358185-4BB7D0BD/0/0
 X-purgate-type: clean
-X-purgate-size: 2350
+X-purgate-size: 3402
 
-On 31.03.2026 20:31, Mykola Kvach wrote:
-> From: Mykola Kvach <mykola_kvach@epam.com>
-> 
-> SMCCC DEN0028G, section 3.1, states that for AArch64 SMC/HVC calls
-> using Wn, only the least significant 32 bits are significant and the
-> upper 32 bits must be ignored by the implementation.
-> 
-> So for SMC32 PSCI calls, Xen must not treat non-zero upper bits in the
-> argument registers as an error. Instead, they should be discarded when
-> decoding the arguments.
-> 
-> Arm ARM DDI 0487J.a (D1-5406) also notes that the upper 32 bits may be
-> implementation defined when entering from AArch32. Xen zeros them on
-> entry, but that guarantee is only relevant for 32-bit domains.
-> 
-> Update PSCI v0.2+ CPU_ON, CPU_SUSPEND, AFFINITY_INFO and SYSTEM_SUSPEND
-> to read SMC32 arguments via PSCI_ARG32(), while keeping the SMC64
-> handling unchanged.
-> 
-> No functional change is intended for PSCI 0.1.
-> 
-> Suggested-by: Julien Grall <julien@xen.org>
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-I thought I might as well include this in my next commit sweep, but isn't
-this R-b being invalidated by ...
 
+On 31/03/2026 17:43, Oleksandr Tyshchenko wrote:
+> From: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
+> 
+> Xen fails to construct the hardware domain's device tree with
+> FDT_ERR_NOSPACE (-3) when the host memory map is highly fragmented
+> (e.g., numerous reserved memory regions) and the host DTB represents
+> RAM compactly (e.g., a single reg pair or just a few).
+> 
+> This occurs because DOM0_FDT_EXTRA_SIZE underestimates the space
+> required for an extra /memory node. While the host DTB might
+> represent RAM compactly, make_memory_node() aggregates all
+> reserved regions into a single reg property. With NR_MEM_BANKS (256)
+> and 64-bit address/size cells, this property can grow up to
+> 4KB (256 * 16), easily exceeding the space originally occupied by
+> the host DTB's nodes plus the current padding, thereby overflowing
+> the allocated buffer.
+> 
+> Additionally, the SHM regions require space for discrete sub-nodes
+> under /reserved-memory node, as well as an appendage to the
+> main /memory node. Each of the up to NR_SHMEM_BANKS (32) regions
+> triggers the creation of a sub-node with properties (compatible,
+> reg, xen,id, and xen,offset). These runtime-generated sub-nodes
+> require approximately 142 bytes each, while the appendage consumes
+> an additional 16 bytes per region.
+> 
+> Fix this by increasing DOM0_FDT_EXTRA_SIZE to account for fragmented
+> reg properties (NR_MEM_BANKS * 16), the discrete SHM sub-nodes, and
+> the SHM appendage to the /memory node (NR_SHMEM_BANKS * (160 + 16)).
+> The SHM overhead is conditionally evaluated to avoid over-allocating
+> memory when CONFIG_STATIC_SHM=n.
+> 
+> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > ---
-> v3:
->  - use PSCI_ARG_CONV for SYSTEM_SUSPEND
-
-... this change. That's ...
-
-> @@ -422,14 +427,8 @@ bool do_vpsci_0_2_call(struct cpu_user_regs *regs, uint32_t fid)
->      case PSCI_1_0_FN32_SYSTEM_SUSPEND:
->      case PSCI_1_0_FN64_SYSTEM_SUSPEND:
->      {
-> -        register_t epoint = PSCI_ARG(regs, 1);
-> -        register_t cid = PSCI_ARG(regs, 2);
-> -
-> -        if ( fid == PSCI_1_0_FN32_SYSTEM_SUSPEND )
-> -        {
-> -            epoint &= GENMASK(31, 0);
-> -            cid &= GENMASK(31, 0);
-> -        }
-> +        register_t epoint = PSCI_ARG_CONV(regs, 1, is_conv_64);
-> +        register_t cid = PSCI_ARG_CONV(regs, 2, is_conv_64);
+>   V2:
+>    - update commit description
+>    - update in-code comment
+>    - update macro
+> ---
+> ---
+>  xen/arch/arm/domain_build.c | 18 ++++++++++++++----
+>  1 file changed, 14 insertions(+), 4 deletions(-)
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 3cd251beed..07f331eac8 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -98,11 +98,21 @@ int __init parse_arch_dom0_param(const char *s, const char *e)
+>  #endif
 >  
->          perfc_incr(vpsci_system_suspend);
->          PSCI_SET_RESULT(regs, do_psci_1_0_system_suspend(epoint, cid));
+>  /*
+> - * Amount of extra space required to dom0's device tree.  No new nodes
+> - * are added (yet) but one terminating reserve map entry (16 bytes) is
+> - * added.
+> + * Amount of extra space required to dom0's device tree. This covers
+> + * nodes generated by Xen, which are not directly copied from the host DTB.
+> + * It is calculated as:
+> + *  - Space for /hypervisor node (128 bytes).
+> + *  - The reserve map terminator (16 bytes).
+> + *  - Space for a generated /memory node covering all possible reserved
+> + *    memory regions (NR_MEM_BANKS * 16).
+> + *  - Space for a generated /reserved-memory node with discrete SHM sub-nodes,
+> + *    plus the appendage to the main /memory node (NR_SHMEM_BANKS * (160 + 16)
+> + *    bytes). This overhead is dropped when CONFIG_STATIC_SHM is disabled.
+>   */
+> -#define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry))
+> +#define DOM0_FDT_EXTRA_SIZE (128 + sizeof(struct fdt_reserve_entry) + \
+> +                             (NR_MEM_BANKS * 16) +                    \
+NIT: alignment. I'll fix on commit
 
-... this hunk aiui, which is far from merely cosmetic imo. While
-behavior looks to remain the same for PSCI_1_0_FN32_SYSTEM_SUSPEND, it
-clearly changes for PSCI_1_0_FN64_SYSTEM_SUSPEND. That may be intended
-and for the better, but the change clearly wasn't reviewed by Bertrand,
-nor - when offering the R-b - did he ask for this extra change.
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-Jan
+~Michal
+
 
