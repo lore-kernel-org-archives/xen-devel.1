@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B6010F6FDC
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1755D35165
 	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 16:36:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1270701.1559282 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1270704.1559299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7yXh-0007iX-On; Wed, 01 Apr 2026 16:35:45 +0000
+	id 1w7yXn-0008CE-70; Wed, 01 Apr 2026 16:35:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1270701.1559282; Wed, 01 Apr 2026 16:35:45 +0000
+Received: by outflank-mailman (output) from mailman id 1270704.1559299; Wed, 01 Apr 2026 16:35:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7yXh-0007iQ-Lf; Wed, 01 Apr 2026 16:35:45 +0000
-Received: by outflank-mailman (input) for mailman id 1270701;
- Wed, 01 Apr 2026 16:35:44 +0000
+	id 1w7yXn-0008C3-3x; Wed, 01 Apr 2026 16:35:51 +0000
+Received: by outflank-mailman (input) for mailman id 1270704;
+ Wed, 01 Apr 2026 16:35:50 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1w7yXg-0007i3-DZ
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:35:44 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1w7yXl-0008Aa-RT
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:35:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7yXf-00CBO7-NK
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 18:35:43 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1w7yXl-0069XP-79
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 18:35:49 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 69cd4956-2eae-0a2a0a5409dd-0a2a450c89f0-6
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 18:35:43 +0200
-Received: from [52.101.43.11]
- (helo=SJ2PR03CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69cd495f-bab6-0a2a0a5309dd-0a2a4501c264-6
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 18:35:49 +0200
+Received: from [40.107.201.65]
+ (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 69cd495d-f40c-0a2a450c0019-34652b0b80af-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 18:35:43 +0200
+ id 69cd4963-6fc9-0a2a45010019-286bc941a3f8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 18:35:48 +0200
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
  by BY5PR03MB5112.namprd03.prod.outlook.com (2603:10b6:a03:1e9::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
- 2026 16:35:38 +0000
+ 2026 16:35:45 +0000
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096%7]) with mapi id 15.20.9769.016; Wed, 1 Apr 2026
- 16:35:38 +0000
+ 16:35:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,120 +57,230 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dm5WlS4fHjM4OOi5FDFbF8EwnFfo79vrL5EziX9KsAQfnj7drgl3CCcjMUHU0Gb9SB5B4A4FyRWoMZcbjwsGI+OBc59Eyg92Ugn9fDVlp4D8zR7tLpbCbXFOqU46GfdYOjj9O4hxLpkmJ4K13TerGI+XGd0GxfQ1z28ZFpvb6iuZSIhbhR0X0mtt7Z4gERatJfnUqyMWEEDplgiCPdZ0/vqqblPLUnBZOnQh43j9eOkeAtLACc6nkkYK25ToqxHpHxkU0cblqzy+HFt4xbSSCJ5VbKfOi4fDajEbSGyScrMAMAdYuuyh0loagq+pTePT+fuDjbN5a0LU4Gab6WCrWQ==
+ b=FzkubG7x01jqCjp86iqQ2iB8wDKOhRnSAF/m6pprcFpllhy/POQoFrHxpq7WetPyyhsA4bCm95nIpbzq+hrQCK7uubRm8WiP1iMm0TBA0wDEyfte1M+pBkVkuUQR0giDS9dz7pruX6EbbDgeOIU6nanwBRmLTGDm0l6KUbpQ2QZU0POU1G9yxKAsEyHy5WhsVxFOc3ajQFDP6rDDonlCNyrqEB5XP1ct/8P//JW8Tn/XulxpG8fru86ssj+roz2gMXpYgKNAY8g2NNuuLnvmKhSVzTaUHxmmP8brV3y+SM94CZPJt35XsL0Ja0TTSH1AywAKJbQAtrbGXwr7GfrGDw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z1T0p5+LO56SqZhy9doBFm6QObAwtVsf6lJgM5eq988=;
- b=Fh/QkfRMfQAqyi7datx7mqaalM3qztSmCYrJqApm26/WIqpvwqgiczBUB+Ry7oF4AtX9Pw+N1eEh2PUVYGMDyxIRKGGRhpM39jqVqE/t+YdKqGVaXIwre3BgQZTeqCcaCIYNSmvZ2V0ax2tL53H5VSgjawueBaC39iVAl22IZZiPhSaHd0LhERHmWmIGiHuocoSXqguUcsBbTnqaX1qW4xHbBlVJcZGiqO1r6xrsIBbfdUVpyI6JaZ4t9zrX1597lik72mF/oxS4uPc2HuxhJcbA3O7oc+8qBzKLlq97XA4amo8Ngv5QUH6tT85pQyLBx6yjTNflHfD54GoUpbYY+w==
+ bh=Nwao3VQk3x8O9KAMQNctVeFtFJMAsjfx9O8DsNd7b8k=;
+ b=jKF0EFuWOZs0hzeDsWUhl9FnBF7xFlwsX1NKWNlp0hS4TVXoJV7G4F1dfixTTNsv3LvTWVZLiYwSayhLdsMgK+gtLK8kZZlDxyl92EnPVUDZIoxKz+Qx2ebf8vXpj37h6YrM2qn3Owy0+OUNEXL1CNTT77L0FgCf2DcGZq4y1Lf/C9HB5UoVlUd2fi9KLcTwWiRpcwifARNEOn9vHvTawg3I/LzWk11JyKyDRA/DE18jS75/VVIHVmVvsz3H+HJkKVUpSkjNTAlwXJaGZnuc/MAzAQ2+IeVr5MFoZWprJ6n3MZFodW+wV7sYVyWpLznCUdcN5jev2brjF/piKjm87Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z1T0p5+LO56SqZhy9doBFm6QObAwtVsf6lJgM5eq988=;
- b=CVc9N8aQFQ2JhmBzcJtvLL8XehryxVXLwX5qtpJT8U+zzwoGiPu2otNn0n1+bQq7FfMGeMPpNR56rnCZTtOj2Bt9CZgjFD2QBMuUs0x1F98ixOQans136WUD1kuuW0oiR323rZ9YrBHnGx67j8I1f7JFgVDP71XI/srwwVgR3vU=
+ bh=Nwao3VQk3x8O9KAMQNctVeFtFJMAsjfx9O8DsNd7b8k=;
+ b=k1Yyv+XuRt4UMAYgAQb4UMBxNSD3hXo1+DZHEB6Txal/Pzf8PTJQOXXWT6G60wJSL5r7AGRhzWiNDQzie8ai5y0CQYn3wttdT6dOzJaXYQliKCavX7tX1VUBKsplXGYasgLpqgqTuh5XHIjDAGL3Uwpr9ADIB8NfgLxPdGan6Lk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v1 1/3] x86/hap: Wait for remote CPUs during TLB flush
-Date: Wed,  1 Apr 2026 17:35:19 +0100
-Message-ID: <20260401163521.3603665-2-ross.lagerwall@citrix.com>
+Subject: [PATCH v1 3/3] x86/smp: Rewrite TLB flush using on_selected_cpus()
+Date: Wed,  1 Apr 2026 17:35:21 +0100
+Message-ID: <20260401163521.3603665-4-ross.lagerwall@citrix.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260401163521.3603665-1-ross.lagerwall@citrix.com>
 References: <20260401163521.3603665-1-ross.lagerwall@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: LO3P123CA0025.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:388::14) To CH8PR03MB8274.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO3P123CA0019.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:388::15) To CH8PR03MB8274.namprd03.prod.outlook.com
  (2603:10b6:610:2ba::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|BY5PR03MB5112:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75715495-99f5-435a-4553-08de900cb4c7
+X-MS-Office365-Filtering-Correlation-Id: a74a36f5-2417-4b91-bb66-08de900cb946
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|376014|1800799024|366016|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	KCF9f2TOKbqJCvkNmhLY1vW2fq8LjdPpNA82AyHHq7DKmxpgQW22DrQoB67e9r7ws+cnrSd0r8Y+RGlyKWOgmDcOCljU3erHZOXMQWPbwMGPrEYkPctOByP6txO+WFvWnQqnGOLYCp4fV/QRzTtEUcUS3Fky7qF1+fQfYbtSGjtaEAHxTxb22g8ahbgjXzWNaX92EL7VLMFfordcuyZVFRzmM44aCNXWW6Z1EkkjI3lDgMvPEBN11KuU2akMp5NiJioR/zTHbRwz6NWwXi7XmFH062HpGgaKlE+P8RbRKPzCWpGV1H7fJaSm71o3ZhI0V/2btXmoC+w/Mbj5FeXYX46TlWIhdkMUGB8vVTIWR+lsynTKpI/zvP3H7HrrowKujqv0l6vp5bYvbVta6rZPQF+fatRIbppszJkeHClE61H4zR74rIAWl/j/iGf7iy9DRHWcPKEW3Oa4lEiLLsaXHkv7UWW4HaxtrcjGP7NUWDJZHyLuiwWj9FV09k9OpAOljppBrM8sxIupIy94cmvkQ4dkUokKiU47LibpqlN9v+3qj0ApRrYlhDR0Z81ciZNlRd3kko7/hUar2sbuOBd7N0HLbOoTFbblJQ5Sv2LgatB+QLpVXDKd6Fa7tjHym5l7GSx5RpTrZl38i2jUOIQ2DgYVexxyPUx7VMorgpa02DBlhm13lOlg9uS78eFwWrDnZ5sHXkzm6hU8cuq8cJxxhFMCw/eSOjWgZ7qo47VgtF4=
+	FKqRE24Qw9sDzywarSFJksyfGnIY/EUkSTHXinHunQOLqMxPm2SoONY+MFCQ4JNO0uoyL+uQdnjLK1/S0M/4/8lRD/eVR1GTGF484l3+z1j9f1+MzSqzy1JNPNQRCG9NjCUK0ncbfj/CFugh6PXgHsNOpKSrEemWWJJoxTJIU9J68Z1E0F9YLuSLxquis1VRVYAlAoEew4rCS4nAgkn+mJNoDeUB1ImHOH/vdGtgr+p+fhRt/cJdAqPl70eaxInEQ49hb4hV22m+t2J+Y1pvJDosvRduBbtjUkGv6tKAvV6TFj6KX8rH5m+X11MXDyAaPVJr+tOGsz09afcaJo1yKmDspUrBDTSDn+Y9WPDokEiU/qyvres7eFJKLB5fqlYfBxfFH4sQeOvagDGrP/O6DHXhSuzTpuE+RhRaF/1FtR01FYAWVpxV5S/2xeAZPjpuwzx/k6QG+yWnHGhzQWcMW0ozycqXhQlUn7GjDHKjIA3626y7UN9xq5suVZmeZYCM3rB3zO1Hamsi4G5diaPlPiQw8NaSYueOmPcQpE3O3TxBmogQkfj+DWzp25WSQmyGHyaTtzfgI2AMstTwLvTGJpKntIg14+278fQst0OUUwbxAwM6kOIXHMBEZGMzNfeEGk1WkCGzGQJoHujwat63b516OVbunlBzZDhwesN4NxDTmbolwnz7nnlBC+RqoAe674p3wQMGDtRmKEMlqiyVnr0owFfYyoytMC7aPrhgCeE=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?D2zLYzOLwBYy2RypqSDOxpT1NaYm8jrSzfLrlD/yICkhnNioS5ZJdnGg1lBQ?=
- =?us-ascii?Q?DYjUoX9/zT54U5pCfZA8X/s4ebNFSY0+lel5bZ7CjW1shaslqXX4IPSJojSt?=
- =?us-ascii?Q?WT/NlTKs1cwYShIsqPgDgtBZ6Ljm2ANNxm7xIouwvrIY+OUmn4zyJKMLWnGH?=
- =?us-ascii?Q?+G6o51G/Uvb2yxKTMMSiuAujuIP3WPxMRtUYVZL6Za7+HriwyluiKvo4pbnx?=
- =?us-ascii?Q?BIkvh6lLZMua6yDCdBwcBPEVXjf1mc2Fy/DSotahcPTKnRTcMyEU7D37Chkz?=
- =?us-ascii?Q?4nKcSN6oCveLvPHCQ0eltdP7GmXg3VjuoNdyORNL7YjI1tmLWRQZwBJGQOBu?=
- =?us-ascii?Q?Akgr250gHjZlDBBpiDy138yBs7z3S+vhnINdMheYgr02KRSC0dQENKn2xWXN?=
- =?us-ascii?Q?tpLCjV5n3moI95ng/TQHq0VEEGl1K4t3OrnDQfwxfz6/y6f4MroCYIZ6OZ6o?=
- =?us-ascii?Q?4bJkZ/YUS1NNUaMMn7dPDh6wEz2OUEIsoDgfuHspQlQl1lnv4cXu+7paG+AA?=
- =?us-ascii?Q?t+yL0A8HfD/HS3LvoFWKl+dCoKWR82UTObKXDSmIZKqtbXZgABzsyCYoYkr4?=
- =?us-ascii?Q?oip09CCYHI8gw5Wf3XIoukdjR5rcd6FSwN/y6dGXcexjZDlheyJ5yTAG+w46?=
- =?us-ascii?Q?ZgD8GsKZ+ZZU9pUVuNbzKJi8KRY9uByKdVqvPNOxUbl84JgdLly9fSk5x3nD?=
- =?us-ascii?Q?c8e49HjoHiOCCn94QKz6WzXT5aZPxNvH0HyqI71kvVICs/1o6yD9O+Fh5iZS?=
- =?us-ascii?Q?+y9TMkPe3D1AVSXIZW7Ay8XGne/t1KTmBplgKdffaxS0mrrAcEEJstF0fkYm?=
- =?us-ascii?Q?xhfgNxs2iPW/QQEPgQ+7mtbU8Ef3NrblPSig6EW3ZDSH7liBHhvKI+S78ZQ4?=
- =?us-ascii?Q?SfgcrZNXLro/vMdFhVJEOG7hfd17hld7JpPYVLy/Ukwotu7B7zVKSMPKKZLH?=
- =?us-ascii?Q?2rH8N5JvX7bgDf4Gqek3sDsUjAmeMj7u4oqon1OrefUBSLY510EyK9jhbzlf?=
- =?us-ascii?Q?ejM9Kkz9gv/dkdXR3Vqyz2Kc0cqdeZRC9tuKJ9X80FgZuYJ71No0VutFiLI9?=
- =?us-ascii?Q?P2RNRLduFqzyGIS2k3rSSLJ08946o3ANjgN2wUy9cOi9nHtSJYooxkThzcD+?=
- =?us-ascii?Q?WlA74MNhaBB9j7pSkGh3VtD6ns/VvsgA6r+QII/neq4IXIIR2WA3IxOsOVwJ?=
- =?us-ascii?Q?qOrJJNW3d3kDE3LhMza/E60ELM0YmXEdlWnxebjXgbSdklDUpJoe9PluoB4y?=
- =?us-ascii?Q?fe2eMp+Dj84qdPQ96HhzmbsSkgDXAS/vsBrzZx12Jnfh3AJeB5g7PZs+yLwe?=
- =?us-ascii?Q?fOvlCPMI+uStBzxZp9akuFLahpjN55Yb9hApv9AnndIJayaLWLEGsgRcs/O1?=
- =?us-ascii?Q?+8TUoImkCA3eBDMKFWADoSRm1pdfHkbdQtyxgmWKKAXEmUurKVwbRRStKqm2?=
- =?us-ascii?Q?7+vY9+B6GN+QH6+76tX2aZGLCBEfYRRAMmpfeUiF4Z7a7l2ApjlFvhzoc62S?=
- =?us-ascii?Q?TRHpjYVS1XDbQg2qiHQlejoe3eOIXtpy2+s4SfMWEMtauKJwGlYyTdryR1/w?=
- =?us-ascii?Q?hNXeUP0U7lpb5PDOHR6kp0bUCMtJ6xokoHaZ6CAOyOKzrz3EOqLUsX28hrsQ?=
- =?us-ascii?Q?FSVfKI3kPm7H44vBtMaFcgGfO1hahkLQIHDTJR6Yf68b2NoW3rU+jwg9vpjH?=
- =?us-ascii?Q?VsgHOXm4Frs0OVy+kyk5gpM5NK6sAtkV2CzxJjkmnpmr+peXQ7Y04F+13LuK?=
- =?us-ascii?Q?h1GG5vffkjWKFLz56ad4XJS7NaFZHNo=3D?=
+	=?us-ascii?Q?0PzGTcdyM1Zh7HsNyAaI8RdZAT/bWPxn4/6K4zDC+zamZ9d+WMm2Q4v+cQCu?=
+ =?us-ascii?Q?mCSDIPXlx/Cy0OMRvKYT3J2hRfWbT/OHRkqXYv9O4//dVRcVWyJvxizNqEUt?=
+ =?us-ascii?Q?U0aEcz7xMO4F8CQkul92bsOaPMMpYYXhDEehCXjU4vXFnGoK4biyPKKsZtHV?=
+ =?us-ascii?Q?bgsxIU6qkuQ8/0akU+LnuxifxXyW8yKUv/HoouMpkhd9j9MYqcR36zSl88Xz?=
+ =?us-ascii?Q?0wk7aB/Z9JAiGlhTcXtMT6XfHvRNJH87k27wDjvS2ov1QNTvirvzkMMGwNyv?=
+ =?us-ascii?Q?nadfTkIVMAHvlkfXrgV1rlVgGhJnWbaxeYPVcjwLxadugk6VN8w+DlPhB1l4?=
+ =?us-ascii?Q?A74VuJDXbj58+afAlgUhwXsO2NHzYCjTQWawvx/OFEDkTdmVUdJwNNbCRyLT?=
+ =?us-ascii?Q?JUflCPgdNQHTeGDaMnIhBHWfTV6h2ct/9VqsYWvKVbza9+O6ZzwQr1GZ/dT+?=
+ =?us-ascii?Q?EzK3szzMsQl+5IDYrC2dihAllA7wMDoF9ZS67a41yfszT6+GrwbmTo4O7AV2?=
+ =?us-ascii?Q?eD4ij38xLs7V+W4V69rXdduEEsR3W8sgf68+0yizrYyXkvQpcD03JT/WAWJg?=
+ =?us-ascii?Q?p/ippJyORCWu0bxZ14wDtdjmr/1x8eJspMFLVScZMnkK5cOMELa060zKuIJm?=
+ =?us-ascii?Q?xlBkPZ7cEAHcaTnI9mjYyLUA0UxZo45lZw+gDaTiKSealahwyTsQ/exI6+t6?=
+ =?us-ascii?Q?g2iX7unA/EfQbX2gNYnySVifCsWvJr+kbGAklEP+lVcVg0O9CLhLQocxrLOs?=
+ =?us-ascii?Q?4FZG7bp/p3/j/KIxgNezo6jlEUYMVZMdhyw1kn71guWECzQNl1rF4wmi9n1A?=
+ =?us-ascii?Q?ACQN833yDsadjCivmTWVzpjIrs7HlDPKd7ytVZ6Fw9nFpvL1Vzgfl1LAhIn7?=
+ =?us-ascii?Q?P08dAxbROMMfLh84sDrcwAUYuGY3sKPAGUcU1yY6YfUo4wi6Yak4lPhQKhzr?=
+ =?us-ascii?Q?lXS8LfIJSF5Rr46KouIPpNRJ1+FogiIMqppuHx+0tJVd5heUFh01PFVZe+Al?=
+ =?us-ascii?Q?zTWRYqJriH52rTFtHLS43d4+q92UXibcUxVMxKymHYYId2+XHtg+QSULP81h?=
+ =?us-ascii?Q?GDXPvLB7u2gcShZQy1UoBgL643g/eCpAJmj54x+2WiPuF1FzcCwCBehZiSA6?=
+ =?us-ascii?Q?5zLANIJXS4in8MvHax3vva7jjRuyDrbj99kSQwqzXcIyq9anqXC8g8GCIRE/?=
+ =?us-ascii?Q?KgoIFbhjj5HZunhtpoZRDyUKCZ8e+3szCEbUlkiiBh+rkOpEDlaKwlz2mIoz?=
+ =?us-ascii?Q?Y9epe5bExnF3FnP9/NlELvLgTXQcq5dOPZhB3uLvHCE817heI/581soMmYhL?=
+ =?us-ascii?Q?FBmalt53Mi238hruHgnF6xHR0CnU4LuHBSa+AfxaJuvAKaxd+1d6uexaxjIp?=
+ =?us-ascii?Q?5hKx/EL1eAGxbGgCGWQw8gM6VhB6Kfy890/VPqdtA7Vcgk5pd/NhpMnT7F2x?=
+ =?us-ascii?Q?j4/deKDdf2S9b6oCTJqaJy+BXOyy9Y/cbnT1x6AANyznHyEa6Qz8WCjPPpb9?=
+ =?us-ascii?Q?dRDhorNz/EyzxZqGu+9udwzHwvSqtdWJ+cY933xD6sl8oWtvdbSd5UwVU9Ri?=
+ =?us-ascii?Q?kdf2TujlidTQaMbIu3Y1r5Rutthn1iMU6++VrTJzAnk7hRg9rsSTwqGfhdcj?=
+ =?us-ascii?Q?4dtaHsiKKLf+cYH2HOj3KhabLjlLAvYWqRvVCvIYZptqJrVgslqBeSGJIoCM?=
+ =?us-ascii?Q?wo4frkeZlMdCxtNJwD6VwtQAvq7XcNb2vxLZqkWUq3oXB4CsSQWz0bSrubY9?=
+ =?us-ascii?Q?uICYAe13CdahNbvYto4bkCAuSSEQJkU=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75715495-99f5-435a-4553-08de900cb4c7
+X-MS-Exchange-CrossTenant-Network-Message-Id: a74a36f5-2417-4b91-bb66-08de900cb946
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 16:35:38.0872
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 16:35:45.6302
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Va4nqss4ns8eB8wLtbUWyn47XXAAGGeFNP3e7SEwOSFRF/20S3PsJdH6OsTFinHP32i/r7HFuVgbfbEOm75HrYwALVw1Ap5bP8RnP8BXrbY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: BplmDTxuO12Q9SNyWGePvYkQlXOHwDVob3T2YI65K9pLaSC5GOzx6fHXxuVWDnu9SGHNzdR6xoEF/oMu6eYb6JPfKdC0/Wq/ur11Y21/49k=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5112
-X-purgate-ID: tlsNG-d25034/1775061343-FFF42A3D-A6CB9E5C/0/0
+X-purgate-ID: tlsNG-d62444/1775061349-B76FF185-C6A02C0C/0/0
 X-purgate-type: clean
-X-purgate-size: 950
+X-purgate-size: 5405
 
-A future change to on_selected_cpus() will change the semantics of the
-wait parameter so that it doesn't wait for remote CPUs to "check in" if
-wait == 0. Adjust the call here to retain the existing behaviour so it
-continues to wait for the remote CPUs to VMExit.
+With on_selected_cpus() rewritten to avoid taking a global lock, also
+use it for TLB flushes rather than the existing hand-rolled
+functionality.
+
+This improves performance by allowing TLB flushes on behalf of different
+guests to happen at the same time.
 
 Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
- xen/arch/x86/mm/hap/hap.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/xentrace/xenalyze.c              |  2 --
+ xen/arch/x86/include/asm/irq-vectors.h |  1 -
+ xen/arch/x86/include/asm/irq.h         |  1 -
+ xen/arch/x86/smp.c                     | 30 +++++++++++---------------
+ xen/arch/x86/smpboot.c                 |  1 -
+ 5 files changed, 13 insertions(+), 22 deletions(-)
 
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index 5ccb80bda5d3..fb48e470bbf5 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -763,7 +763,7 @@ static bool cf_check flush_tlb(const unsigned long *vcpu_bitmap)
-      * not currently running will already be flushed when scheduled because of
-      * the ASID tickle done in the loop above.
-      */
--    on_selected_cpus(mask, NULL, NULL, 0);
-+    on_selected_cpus(mask, NULL, NULL, 1);
+diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
+index 876d59d42ca5..a32f5f378a84 100644
+--- a/tools/xentrace/xenalyze.c
++++ b/tools/xentrace/xenalyze.c
+@@ -866,7 +866,6 @@ const char * hvm_svm_exit_reason_name[HVM_SVM_EXIT_REASON_MAX] = {
+ /* General hvm information */
+ #define SPURIOUS_APIC_VECTOR  0xff
+ #define ERROR_APIC_VECTOR     0xfe
+-#define INVALIDATE_TLB_VECTOR 0xfd
+ #define EVENT_CHECK_VECTOR    0xfc
+ #define CALL_FUNCTION_VECTOR  0xfb
+ #define THERMAL_APIC_VECTOR   0xfa
+@@ -878,7 +877,6 @@ const char * hvm_svm_exit_reason_name[HVM_SVM_EXIT_REASON_MAX] = {
+ const char * hvm_extint_vector_name[EXTERNAL_INTERRUPT_MAX] = {
+     [SPURIOUS_APIC_VECTOR] = "SPURIOS_APIC",
+     [ERROR_APIC_VECTOR] =    "ERROR_APIC",
+-    [INVALIDATE_TLB_VECTOR]= "INVALIDATE_TLB",
+     [EVENT_CHECK_VECTOR]=    "EVENT_CHECK",
+     [CALL_FUNCTION_VECTOR]=  "CALL_FUNCTION",
+     [THERMAL_APIC_VECTOR]=   "THERMAL_APIC",
+diff --git a/xen/arch/x86/include/asm/irq-vectors.h b/xen/arch/x86/include/asm/irq-vectors.h
+index d75d1c56716a..a1eb160d500b 100644
+--- a/xen/arch/x86/include/asm/irq-vectors.h
++++ b/xen/arch/x86/include/asm/irq-vectors.h
+@@ -4,7 +4,6 @@
+ /* Processor-initiated interrupts are all high priority. */
+ #define SPURIOUS_APIC_VECTOR	0xff
+ #define ERROR_APIC_VECTOR	0xfe
+-#define INVALIDATE_TLB_VECTOR	0xfd
+ #define EVENT_CHECK_VECTOR	0xfc
+ #define CALL_FUNCTION_VECTOR	0xfb
+ #define LOCAL_TIMER_VECTOR	0xfa
+diff --git a/xen/arch/x86/include/asm/irq.h b/xen/arch/x86/include/asm/irq.h
+index 7315150b66b4..57cf2f23eb8d 100644
+--- a/xen/arch/x86/include/asm/irq.h
++++ b/xen/arch/x86/include/asm/irq.h
+@@ -111,7 +111,6 @@ extern int opt_irq_vector_map;
+ #define platform_legacy_irq(irq)	((irq) < NR_ISA_IRQS)
  
-     return true;
+ void cf_check event_check_interrupt(void);
+-void cf_check invalidate_interrupt(void);
+ void cf_check call_function_interrupt(void);
+ void cf_check irq_move_cleanup_interrupt(void);
+ 
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index 7936294f5fcd..a2a9abbb2f4e 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -242,21 +242,20 @@ void cf_check send_IPI_mask_phys(const cpumask_t *mask, int vector)
+     local_irq_restore(flags);
+ }
+ 
+-static DEFINE_SPINLOCK(flush_lock);
+-static cpumask_t flush_cpumask;
+-static const void *flush_va;
+-static unsigned int flush_flags;
++struct flush_data {
++    const void *va;
++    unsigned int flags;
++};
+ 
+-void cf_check invalidate_interrupt(void)
++static void cf_check invalidate_cb(void *info)
+ {
+-    unsigned int flags = flush_flags;
+-    ack_APIC_irq();
+-    perfc_incr(ipis);
++    struct flush_data *data = info;
++    unsigned int flags = data->flags;
++
+     if ( (flags & FLUSH_VCPU_STATE) && __sync_local_execstate() )
+         flags &= ~(FLUSH_TLB | FLUSH_TLB_GLOBAL | FLUSH_ROOT_PGTBL);
+     if ( flags & ~(FLUSH_VCPU_STATE | FLUSH_ORDER_MASK) )
+-        flush_area_local(flush_va, flags);
+-    cpumask_clear_cpu(smp_processor_id(), &flush_cpumask);
++        flush_area_local(data->va, flags);
+ }
+ 
+ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
+@@ -275,21 +274,18 @@ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
+     if ( (flags & ~FLUSH_ORDER_MASK) &&
+          !cpumask_subset(mask, cpumask_of(cpu)) )
+     {
++        cpumask_t flush_cpumask;
++        struct flush_data data = { .va = va, .flags = flags };
++
+         if ( cpu_has_hypervisor &&
+              !(flags & ~(FLUSH_TLB | FLUSH_TLB_GLOBAL | FLUSH_VA_VALID |
+                          FLUSH_ORDER_MASK)) &&
+              !hypervisor_flush_tlb(mask, va, flags) )
+             return;
+ 
+-        spin_lock(&flush_lock);
+         cpumask_and(&flush_cpumask, mask, &cpu_online_map);
+         cpumask_clear_cpu(cpu, &flush_cpumask);
+-        flush_va      = va;
+-        flush_flags   = flags;
+-        send_IPI_mask(&flush_cpumask, INVALIDATE_TLB_VECTOR);
+-        while ( !cpumask_empty(&flush_cpumask) )
+-            cpu_relax();
+-        spin_unlock(&flush_lock);
++        on_selected_cpus(&flush_cpumask, invalidate_cb, &data, 1);
+     }
+ }
+ 
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 491cbbba33ae..51e6982a1d25 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -1482,6 +1482,5 @@ void __init smp_intr_init(void)
+     /* Direct IPI vectors. */
+     set_direct_apic_vector(IRQ_MOVE_CLEANUP_VECTOR, irq_move_cleanup_interrupt);
+     set_direct_apic_vector(EVENT_CHECK_VECTOR, event_check_interrupt);
+-    set_direct_apic_vector(INVALIDATE_TLB_VECTOR, invalidate_interrupt);
+     set_direct_apic_vector(CALL_FUNCTION_VECTOR, call_function_interrupt);
  }
 -- 
 2.53.0
