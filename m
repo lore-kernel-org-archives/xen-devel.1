@@ -4,62 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD57810F6FBD
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 14:58:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1270545.1559193 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45BD310F6FC2
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 14:58:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1270546.1559201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7x1d-0003iB-Jz; Wed, 01 Apr 2026 14:58:33 +0000
+	id 1w7x1i-0003zG-Ou; Wed, 01 Apr 2026 14:58:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1270545.1559193; Wed, 01 Apr 2026 14:58:33 +0000
+Received: by outflank-mailman (output) from mailman id 1270546.1559201; Wed, 01 Apr 2026 14:58:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7x1d-0003i3-EW; Wed, 01 Apr 2026 14:58:33 +0000
-Received: by outflank-mailman (input) for mailman id 1270545;
- Wed, 01 Apr 2026 14:58:32 +0000
+	id 1w7x1i-0003z6-Lw; Wed, 01 Apr 2026 14:58:38 +0000
+Received: by outflank-mailman (input) for mailman id 1270546;
+ Wed, 01 Apr 2026 14:58:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1w7x1b-0003hW-V0
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 14:58:32 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1w7x1h-0003xe-8X
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 14:58:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7x1b-001u1t-Ag
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:58:31 +0200
+ id 1w7x1g-001u1t-KT
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:58:36 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Michal.Orzel@amd.com>)
- id 69cd328b-5cb7-0a2a0a5109dd-0a2a45099c52-8
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:58:30 +0200
-Received: from [40.93.201.23]
- (helo=CY3PR05CU001.outbound.protection.outlook.com)
+ id 69cd328b-5cb7-0a2a0a5109dd-0a2a45099c52-14
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:58:36 +0200
+Received: from [40.93.194.21]
+ (helo=SN4PR0501CU005.outbound.protection.outlook.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <Michal.Orzel@amd.com>)
- id 69cd3295-bf79-0a2a45090019-285dc917bd8a-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:58:30 +0200
-Received: from CH0PR04CA0080.namprd04.prod.outlook.com (2603:10b6:610:74::25)
- by IA1PR12MB9523.namprd12.prod.outlook.com (2603:10b6:208:595::18)
+ id 69cd329a-bf79-0a2a45090019-285dc215fbb0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:58:35 +0200
+Received: from PH7P220CA0059.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:32b::23)
+ by PH7PR12MB7235.namprd12.prod.outlook.com (2603:10b6:510:206::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.18; Wed, 1 Apr
- 2026 14:58:23 +0000
-Received: from CH2PEPF00000149.namprd02.prod.outlook.com
- (2603:10b6:610:74:cafe::93) by CH0PR04CA0080.outlook.office365.com
- (2603:10b6:610:74::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
- 1 Apr 2026 14:58:23 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH2PEPF00000149.mail.protection.outlook.com (10.167.244.106) with Microsoft
+ 2026 14:58:25 +0000
+Received: from SN1PEPF000397B0.namprd05.prod.outlook.com
+ (2603:10b6:510:32b:cafe::1) by PH7P220CA0059.outlook.office365.com
+ (2603:10b6:510:32b::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.31 via Frontend Transport; Wed,
+ 1 Apr 2026 14:58:18 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SN1PEPF000397B0.mail.protection.outlook.com (10.167.248.54) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 14:58:22 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 1 Apr
- 2026 09:58:22 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 1 Apr
- 2026 09:58:22 -0500
+ 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 14:58:25 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 1 Apr
+ 2026 09:58:25 -0500
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Wed, 1 Apr 2026 09:58:20 -0500
+ via Frontend Transport; Wed, 1 Apr 2026 09:58:23 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,126 +69,192 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BFlQpEVCUBJhdVIdHrGMAfcHEr5+bhfxDG8kD5PfwF6ZROOhkhMVptqfNLFN/JTi+Xl1DaM05l6cMYPI+sN7htLtQrdwdqs8Kmuh0JIl2Yp75L5GsgBMEk0ELM0W/1t/hXTrRTUR5+Jp15DLvKPRSHFNQcbfeS+l+IKGL4HcJxZp/KisVm0JehBLhoXs3EfirYj6LgLdTtpdDKL+EwLf40X2IkbaDz4XQh4g2ND/KNiNrDur6uL2eBe7++Mfp221p0ay9ApJQTggUrNtrJHke0hUut/05SljehjQlDvT2++Hxe4R0i+AufZ8x8EAhzaERoTJ4oQGKgRXKpXbLJ0g8g==
+ b=vshDJzq/1FUERdJW0zOu2eT2OixXCDRJ4A4TZQe3PDypbEF2wDzmIdHrWrpwiV2hznn3DnvkYomqJKzrwKBfxdnXsXFUtsavKOelNK6g7jX6Ds5DsgXO7faWKiPe32ZtfRvI7zOItP8+d/IQTKOiLM8Ap9kwbSZb195FDQUmi/OXEx043rH4ceR9/Ny4Cbz2gWtlwHhiiUG/8bQaXqRZBpie6ibl7cbQmbviKbUZDV1poKsK83iz7sveOMrsdPW1WONjVpQfndbCCLaXCcYWQWPgxzPcnEzp2zgd9akTee4vhTZhi2+vhJ7umiVLQUneHj8fMY/GHtFijQkSUkrNXw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uo2M5ShFMFkpBNGfNOdv7BCV8+gKP2tZKik3PjF1G/I=;
- b=jq2hevditdIQzA19X/ZKQ9AQNAwJ37wfaUkJIANEbTb+KdQP4IYdsUOstWyHEt7EOdT085obF8bk2z/xvHnm6Nc0pIiwOdZI5UeW9T7Q6oOoi4dIDOS5JTt8xLATod2iKzKtrgWUidIJztvCr1VpIwy2mDaZy8gV7uisTNBwdX6BduR/IqihkGo4QptlHHlNbQ30OLjgwp914YdTb6KJBaDPenHjQgfguF6gPIG1vgpLJ0AuBPOz0YqTFOKL36Nv01o0qSuDEVOXVU/e2NT1RQAlkMTOjR+7hKzRarIoxIMAjOda9TK58iyo5r1mqtqN2P7m4LX6KCqk5HvwUt+wsw==
+ bh=B/HuOQxA0RHFb08ApkVbZL0fHFl6S6/91W7UGQFdUAk=;
+ b=HonZ5FwcO+J247mAGfzHa1sXEYCuEjJG7Mr8LdH7yLV9fVt4MNm0NVZcdBebyl2GcizZX43PADyEon8QPKb0RQTOXoQMwdyz2OYUzc+/G9nCZelJehUgO2xctx4VMg/RlhDMYxz3oyZGab4P3n7ZMt/QtfH4Uyuv+ysPzg4B1qXoKyzGCHK7LPIVBM2cP92/rVaeyXQL2GC/uLEfbFxuy2xft4p7Gx5XtWXHU7zCp4uuIRZBDl63Di9Uj3kDU4ceF8yNturUIUbuh8jCo/X0X5YyLvufX/Nie9rDuiJCWcBGoTdJQi82PiboBePU0gNptawNbzyJPHvPsltMXFCz/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uo2M5ShFMFkpBNGfNOdv7BCV8+gKP2tZKik3PjF1G/I=;
- b=hi+iS+E+pEc9Vd75ZNMkbwzBz1tJJn8JUDaP4Xm08TBsnWXMruDcUnC+TmTGdJL5uHZMu2lnViWjwdMPmJ/9Kto0Fh8CE+rvF5j3KDfEpQr/9je2q/YpE7RPl170nUIvbvELhTajFKmYkh1sde09hfMve5tMLei41ZCQ0wvBZks=
+ bh=B/HuOQxA0RHFb08ApkVbZL0fHFl6S6/91W7UGQFdUAk=;
+ b=IcCllfrW6PPIK06LU5ktab2JXZ7Kl3W/oExQI1V/+XGB0b4X4tipoIgJd8pOPAvuYV49YQ7PTdbI+o80heM1/UaXXj+mxiQ714k6T52gX03MSr+HDlePHBQFJ44dqytWepNHjOpIT4bKGKXQmftYPX8RrEH67nPi9O0WdqN5Uvs=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/3] xen/arm: acpi: Rename local acpi_size to avoid shadowing typedef
-Date: Wed, 1 Apr 2026 16:58:14 +0200
-Message-ID: <20260401145816.169557-2-michal.orzel@amd.com>
+Subject: [PATCH 3/3] xen/arm: vpci: Move content of xen/arch/arm/vpci.h to arch header
+Date: Wed, 1 Apr 2026 16:58:16 +0200
+Message-ID: <20260401145816.169557-4-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260401145816.169557-1-michal.orzel@amd.com>
 References: <20260401145816.169557-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000149:EE_|IA1PR12MB9523:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4920bb35-0988-49b5-d3d7-08de8fff1eb6
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B0:EE_|PH7PR12MB7235:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9bfc84cb-a4bd-472b-52a3-08de8fff205f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|36860700016|1800799024|18002099003|56012099003|22082099003;
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|1800799024|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	4IPKsd9U65PeYPDvfCJ4sdHcosoLG0GH0QixQPntgIxjuxSXzQwtlLRpAViJzlq1PjbrVDpaQOMhosHeNO3kNefMlHzHVDdwDZ9vDaj0JOMskFn+rvlbMoIQhGn3aUHIgeVCRCDBED/1smbs7ZsLZKHOahxjvSJ63gvMlJ7VfJCcA79XJKlm4zRdwEjHPH5nL+viMlhU4VNFQY/2ceXS2e5j6RoBfG81lLUjmfrqSKzW1ka62JLcgC1YhDoArH6deKiEjAPULmbhCdwQI+d84hR8qu7+hmJMw9i1tbxtV7H0Quc2C/JVzjJiLJSQq2ZfMqYF7gRCkbkac9RB4ADDEkYGUhMRoQBZJlaRVT/CREg9fdy89XHVP4qNCXIld8fP8VccdUxKnh4OGA0iV9Sh6M2u9DtUBXo7cBH8aOCvQBbXmpfFlgoM5csEBEtcy7wpoOs/vQncnIZnhbu0KZ+1mTEYIrwUQjW9PD6YGuOsyt32G8SGgcfornhoo/WAUd1IjCap/vnG9MpF+efwStq3EAfLp1X6SYwsSd3SlT5eALW8+/qO+qlPSiPPepqOBIkuR5bQ9tmPae+t9lRCN+/MvzuYI57uj6LvVtyub7JRpx66QJsn75yIdQu141x0WiijiQtvcIMtGil9gdOUxFHzpUWzRN0vHqkFSja9r3XS59Pfu0OE+wYWwerHFJAllEUpAyPjlKzoG7Gvxa1SYqaDCbsUCCSXp31DXw1n5P4Qe2cKPTEBxFMI5HOscGrwSAAWyl2kCFrS6IST6nBc5Lg7Kg==
+	c/mEPU9RjHryXAPoPXBb+PQeogepqtvCkH1itRG+ng4DoE5DBJFxVobuTFcsVqzrmPNOdcsd3VjFn7NVeaw4NZDnXKSFJJoDfhq5LRmruNAaMuhW1ad75RV3U9QIW3uZR3Myyvwr/itHNbYem0LxuGsHQP9gh350i+vvruk9t+zmzgsr70gZVIQIRAjPSemmIkUcMhsLbGUN8VGZFZpHGNxhTDDaY5zARLcIeRs+N5PuVroGRfdefG4qbofa6jmHxhmw8tPRI3Z8HJejGToq9yDOvS0JlDWG2xy84qhldfu0kIlq/10SCEP0gmpQzumlIH1PvLliWueDLtAHZWOXHJoT6UTMBD+Tx32CVbvyuD6FFBKpTZloWQH6MkctZV7aMea0Nz9kBL5BtPDriqU9Nf5L6TlBX0tXXhZeEKJtUMw0vZwi+aJyPIhmOmKNLQR/+ipxwmMXF9KpBLF4uVuX/nW7txWsCvCVbpWsPLsLhlcyE5aORa9HxjBBtujUNuSBb+ibl8j1KbarfNKe+b8jDC+YQblQTZOZ+yOjTRZQowwSueJWjINAZLpGUJTDhpGfe37EBzDuL0RYdQAF58WRmZm+SbejhWeVz9YyM+NPm2aOVR1EmvykWe072a9SvpeZ+Hc+9Tiig9mK4qbS7ZwRpz9kp2m3R7sV7/eZv6qffJo6Ej8uknzFPtBPi9pkTRuGLIlOVQk1yR79gUfKaV/bzGSkxKNaD1gdEvNjJtQ9zL5xSdCQLEu5NO36V47P4UZISACKnQN6fva3mkMNR8Q8cA==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	MdIC+eLYGsSz9HVa3WNUwB4SBMVQ1V7IFjIqh9OIEu7eb8uKsbU48RZVpbkkVlj1TTusILNq9uCT/6iLCQqiGtGiCKvkgVBoDZp/VmM3AIzX/0utsfwYC5aQJUhJvZwTVK+YfAf6QXokRN/7v5RM2HkPv3N74GPc1cCrYpGnSn1ve9M5ko/7oE30OY2z7pdb0zS6N9TddwVyLn9NuG7Ce7Qkx9dLHRbnWlNdoJUW5RJyB96yNJKMbsYSDwsnZM5kvxp2xU61PLBNfeTQgzv7vjrQl8FW7mmSDi7CFVkLHDG28Kqqfz7TJ2xr6181JemPY9oeTl34u38+qGT2m8n/svVCwD/DbH1g5Z/NHoUQlRKXI0OU8M6N52PckjeJoCgDRaBbKfYO7F/WZ9zqyTWMLLi1vipVVY5dpYX8SX66oVfTJfQi7dL7G9kFjbjCkk3J
+	nsSG0nyfapMxnBAK2ag+8i+B5zRzLhMsVCz615KbxFaxVF8DovMuoLVkYemtMrJqHS6NemZvnHGREx7CEKWfJrUbXT8t3uH1NWDC9sBvMZKizCir25TZ8tu61Vo0J7md0oomCFzDDb1HwYMvfgeY6YwwZ4BcxNBBo6MY2nfimdHMtHtOMKzc6ThAzm2riyfKXn6IBrXktU2MP1QFuS1UgE1MmaysN2jMrCfHbxcXOgzue4W0nTPoNywk7qmfC+GT1eSE44TpxLLzIEYH7NswLD7fY+2ringWoUo3KeEQzUV3hK99LS42SBSlw1JDPAWed0kauIEoBKWbyMmQT+6hH/gGt5A7fpp7u1zced24Q/QMGdLBrFxh7GZbo2C74RZwnh8Py5FXRJJ6Fe0570vR5Cpg8U4cUYPTkQykRO6aESGDKinfNTqSDJg7mvOoxwFe
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 14:58:22.7348
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 14:58:25.5138
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4920bb35-0988-49b5-d3d7-08de8fff1eb6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9bfc84cb-a4bd-472b-52a3-08de8fff205f
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF00000149.namprd02.prod.outlook.com
+	SN1PEPF000397B0.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB9523
-X-purgate-ID: tlsNG-bad1c0/1775055510-5734C152-E07CEAC3/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7235
+X-purgate-ID: tlsNG-bad1c0/1775055516-55F56152-6D3BC427/0/0
 X-purgate-type: clean
-X-purgate-size: 2215
+X-purgate-size: 3589
 
-Rename the local variable acpi_size to acpi_len in
-estimate_acpi_efi_size() to avoid shadowing the acpi_size typedef
-from xen/include/acpi/actypes.h.
+Move domain_vpci_init() and domain_vpci_get_num_mmio_handlers()
+declarations from the private xen/arch/arm/vpci.h into the public
+xen/arch/arm/include/asm/vpci.h, and remove the now redundant
+private header.
 
-This resolves a MISRA C Rule 5.6 violation.
+Update domain.c to include <asm/vpci.h> instead of the removed private
+header.
+
+This ensures the declarations are visible where the functions are
+defined, resolving a MISRA C Rule 8.4 violation.
 
 Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
- xen/arch/arm/acpi/domain_build.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+I'm moving a file with GPL2+ license to a file with GPL2-only. I consider this
+ok in this case becase the copyright on a file with just prototypes does not
+make any sense and a license text was most likely blindly copy-pasted like for
+most of the files in that era.
+---
+ xen/arch/arm/domain.c           |  2 +-
+ xen/arch/arm/include/asm/vpci.h | 18 ++++++++++++++
+ xen/arch/arm/vpci.h             | 42 ---------------------------------
+ 3 files changed, 19 insertions(+), 43 deletions(-)
+ delete mode 100644 xen/arch/arm/vpci.h
 
-diff --git a/xen/arch/arm/acpi/domain_build.c b/xen/arch/arm/acpi/domain_build.c
-index 1c3555d814cc..5a117001ef11 100644
---- a/xen/arch/arm/acpi/domain_build.c
-+++ b/xen/arch/arm/acpi/domain_build.c
-@@ -447,18 +447,18 @@ static int __init acpi_create_fadt(struct domain *d, struct membank tbl_add[])
- static int __init estimate_acpi_efi_size(struct domain *d,
-                                          const struct kernel_info *kinfo)
- {
--    size_t efi_size, acpi_size, madt_size;
-+    size_t efi_size, acpi_len, madt_size;
-     u64 addr;
-     struct acpi_table_rsdp *rsdp_tbl;
-     struct acpi_table_header *table;
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 581f82bddd48..26380a807cad 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -31,10 +31,10 @@
+ #include <asm/tee/tee.h>
+ #include <asm/vfp.h>
+ #include <asm/vgic.h>
++#include <asm/vpci.h>
+ #include <asm/vpsci.h>
+ #include <asm/vtimer.h>
  
-     efi_size = estimate_efi_size(kernel_info_get_mem_const(kinfo)->nr_banks);
+-#include "vpci.h"
+ #include "vuart.h"
  
--    acpi_size = ROUNDUP(sizeof(struct acpi_table_fadt), 8);
--    acpi_size += ROUNDUP(sizeof(struct acpi_table_stao), 8);
-+    acpi_len = ROUNDUP(sizeof(struct acpi_table_fadt), 8);
-+    acpi_len += ROUNDUP(sizeof(struct acpi_table_stao), 8);
+ DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
+diff --git a/xen/arch/arm/include/asm/vpci.h b/xen/arch/arm/include/asm/vpci.h
+index db04687fc099..0cc6f5a10532 100644
+--- a/xen/arch/arm/include/asm/vpci.h
++++ b/xen/arch/arm/include/asm/vpci.h
+@@ -2,6 +2,9 @@
+ #ifndef ARM_VPCI_H
+ #define ARM_VPCI_H
  
-     madt_size = gic_get_hwdom_madt_size(d);
--    acpi_size += ROUNDUP(madt_size, 8);
-+    acpi_len += ROUNDUP(madt_size, 8);
++struct domain;
++
++#ifdef CONFIG_HAS_VPCI
+ /* Arch-specific MSI data for vPCI. */
+ struct vpci_arch_msi {
+ };
+@@ -10,4 +13,19 @@ struct vpci_arch_msi {
+ struct vpci_arch_msix_entry {
+ };
  
-     addr = acpi_os_get_root_pointer();
-     if ( !addr )
-@@ -484,12 +484,12 @@ static int __init estimate_acpi_efi_size(struct domain *d,
-     }
- 
-     /* Add place for STAO table in XSDT table */
--    acpi_size += ROUNDUP(table->length + sizeof(u64), 8);
-+    acpi_len += ROUNDUP(table->length + sizeof(u64), 8);
-     acpi_os_unmap_memory(table, sizeof(struct acpi_table_header));
- 
--    acpi_size += ROUNDUP(sizeof(struct acpi_table_rsdp), 8);
-+    acpi_len += ROUNDUP(sizeof(struct acpi_table_rsdp), 8);
-     d->arch.efi_acpi_len = PAGE_ALIGN(ROUNDUP(efi_size, 8)
--                                      + ROUNDUP(acpi_size, 8));
-+                                      + ROUNDUP(acpi_len, 8));
- 
-     return 0;
- }
++
++int domain_vpci_init(struct domain *d);
++unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d);
++#else
++static inline int domain_vpci_init(struct domain *d)
++{
++    return 0;
++}
++
++static inline unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d)
++{
++    return 0;
++}
++#endif /* CONFIG_HAS_VPCI */
++
+ #endif /* ARM_VPCI_H */
+diff --git a/xen/arch/arm/vpci.h b/xen/arch/arm/vpci.h
+deleted file mode 100644
+index 3c713f3fcdb5..000000000000
+--- a/xen/arch/arm/vpci.h
++++ /dev/null
+@@ -1,42 +0,0 @@
+-/*
+- * xen/arch/arm/vpci.h
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- */
+-
+-#ifndef __ARCH_ARM_VPCI_H__
+-#define __ARCH_ARM_VPCI_H__
+-
+-#ifdef CONFIG_HAS_VPCI
+-int domain_vpci_init(struct domain *d);
+-unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d);
+-#else
+-static inline int domain_vpci_init(struct domain *d)
+-{
+-    return 0;
+-}
+-
+-static inline unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d)
+-{
+-    return 0;
+-}
+-#endif
+-
+-#endif /* __ARCH_ARM_VPCI_H__ */
+-
+-/*
+- * Local variables:
+- * mode: C
+- * c-file-style: "BSD"
+- * c-basic-offset: 4
+- * indent-tabs-mode: nil
+- * End:
+- */
 -- 
 2.43.0
 
