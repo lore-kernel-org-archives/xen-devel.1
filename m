@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCE910F6FA1
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 14:38:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1270476.1559138 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7945F10F6FB5
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 14:44:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1270497.1559147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7wiZ-000635-Iz; Wed, 01 Apr 2026 14:38:51 +0000
+	id 1w7wnw-0007ks-Ag; Wed, 01 Apr 2026 14:44:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1270476.1559138; Wed, 01 Apr 2026 14:38:51 +0000
+Received: by outflank-mailman (output) from mailman id 1270497.1559147; Wed, 01 Apr 2026 14:44:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7wiZ-00062y-GM; Wed, 01 Apr 2026 14:38:51 +0000
-Received: by outflank-mailman (input) for mailman id 1270476;
- Wed, 01 Apr 2026 14:38:49 +0000
+	id 1w7wnw-0007kl-7x; Wed, 01 Apr 2026 14:44:24 +0000
+Received: by outflank-mailman (input) for mailman id 1270497;
+ Wed, 01 Apr 2026 14:44:23 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w7wiX-00062Y-NJ
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 14:38:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1w7wnv-0007kf-KB
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 14:44:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7wiX-00GO0h-39
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:38:49 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1w7wnt-001y0G-B6
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 16:44:22 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69cd2dec-bab6-0a2a0a5309dd-0a2a4503909c-26
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:38:49 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <jbeulich@suse.com>)
- id 69cd2df7-02b3-0a2a45030019-d1558032f1ad-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:38:47 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-486fb14227cso92586735e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 07:38:47 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887e735532sm150995725e9.0.2026.04.01.07.38.46
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69cd2f29-bab6-0a2a0a5309dd-0a2a450786ee-44
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:44:22 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69cd2f46-ba2d-0a2a45070019-d155dd2ac8e5-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 16:44:22 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-43cfb723793so2297343f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 07:44:22 -0700 (PDT)
+Received: from ?IPV6:2a01:cb15:80df:da00:6d45:ff60:3ad6:d7fa?
+ ([2a01:cb15:80df:da00:6d45:ff60:3ad6:d7fa])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43d1e1fe0b0sm420081f8f.0.2026.04.01.07.44.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Apr 2026 07:38:46 -0700 (PDT)
+ Wed, 01 Apr 2026 07:44:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,141 +53,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775054327; x=1775659127; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=+sVZ8lyJfZymR2sAcSNbJsyX80kljhnFPnQXAv2d0zM=;
-        b=AEeNqN2PPtPr4cyO1PJqbUwDqoG1SC5NJ5GmGGwM9RH+dB7Zy9ymfULq5FjxaoC50g
-         ZQrlpFT249y3zdtwJXoeBQr9Odd/bdp+vmgqeWgpBZDy3AB1AT6KEDJ4r5Fkgcyc8rfV
-         23vYGKePUNhp8UNdB7aUr8EqDMN5C+UpjqFz3cmFD33l4/3zJsGFwL58aVxNVPYmwyv2
-         jNFUxvj8gpJrN7O0tCm0pxBazb41U/H50F5f8wZpmmg6cw4isOR2SvWtjhpPLnx2aKWy
-         YVCNxmjZIvj3L462OVoxTtdtTKJVMvwBykgxPFk6Oeyy1n5wjrms0sE5dftPAXA7A2X9
-         Ld1g==
+        d=gmail.com; s=20251104; t=1775054662; x=1775659462; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=dpiVB9dBVzghSP8aA3dpY/N1hXuz4Q4Khlfyme9aK48=;
+        b=nhVh6e+mAWTE74hW4ZLkGfxwOpjo4nRrrDraMFSCjAQEDwvtHTSq6aIK+5/Fm39InB
+         LaLz29WWbYy1FPgCe23C0TGj9xocT0aRalcdT82NAI/Rp49asbZnmxFnLlQqUP+DE8EM
+         9U0q0c4pci30/57Va7ZpHuySsuC6J3xHcEnKuZRFeCsEN8T7a2rHDaiFOn2rbgXvigPA
+         VPN2eiAycitVfAGt5lIyc9wGzyl5Aap+NwhE6Hi+Nl1w2+sQT0MTu2zOZss6q6fCHsPa
+         lLcc9xBeOHovniF4LvEIc9fh6s94ct9hXAPbp7TsJE7aYcMjdG+gMT+5lEKEExO3j8B5
+         rqlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775054327; x=1775659127;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+sVZ8lyJfZymR2sAcSNbJsyX80kljhnFPnQXAv2d0zM=;
-        b=ktXctLgIWj6HxEnoCBQ2oBHkDNkTwG4Yb7JajeNO8kfiDMAotg5JZHtdMjtXtvi2zL
-         8U+rMWEDHlrZKIGkVDcJyIivy7g3YyI92H5TDJDB0dbgzCGXJPAvfkSk/rEqZtOf2shn
-         OgLpzRfUfnwMwfJsnuYtQDl29DHeGgpRIaLSPuHZO0yz1LYAhxqLYwjyG46lMIyfSw0L
-         0k08SrKHgFC0c37w6rCZDUcfwN0G0Cplt0ADivQNyHICdWs7sgTIhMsHfhPWftLrn7Hi
-         1Wwg/14d+9lPjBQbzuNPgGh0sgSCDnhA6xlaTDKTjyjlYAtyezvYjaC8jFg3hgKJmslb
-         RFlw==
-X-Forwarded-Encrypted: i=1; AJvYcCVmqZlLL9EeiB+Yd82qHgd+XHaMGmluriRBGm0uFPAFPQYxiixPxB3AlmLs5f3zKNmI3XKlz349O94=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyFH8NGypscyxW1KTWTfM8v5d246nZ27Q3gcvrZagBh1i91xrN6
-	tDNSK96zIal87o5girpit1l4vdnr4hz5UppqFNwG0v6Fc4+dAOVgJs2Bng2hcYDYwQ==
-X-Gm-Gg: ATEYQzzYx6W+SWC3EInu83iiOcMtg14QNUu+WrMJelA46R0L0XLskdND/ykp7Io5QHO
-	xWChfpwacZfVA6ThGkxadS4IqWtyUWf/zSWS665saAUHmRewSEim9xaK7E6YMA1L305mx+XJHFR
-	ZVSaCkRAFrt9XslAE0DUWsDTjGzOWCS79y9GV3h8SUeSIEgUTpH6oiUsWhnB/vS9Jrysp0TbM6f
-	gLE3dS+xYWLfIvexIUDrKK9/i4UPdH0gzYX2Um4lndfo8Gjbjvgzd5u2L6x0+AoS8DFqN9NFYYz
-	9v4TbRvkwPZmjq7f1pJwUJgQmquepR0QSnkwbrfNZmWCwHcRtJyfgRhQ46/3kxfIesC+iA+jPFu
-	mYLivJDGa9GHZYbXe7PXW1Ui/w6U2g30a9VGgHvlviCZu42ls9WkAuSxh7pvtE+lJtZd9z4wgao
-	vEmxPw7v9EkIoOdbL85DYb3IjHPWdp9/s7xAM7MaVSPHRpLluVnvrxFQ6sD6FkEUU2lh7gMml/u
-	gk1uxi/uJCpTBk=
-X-Received: by 2002:a05:600c:1388:b0:485:379b:57bb with SMTP id 5b1f17b1804b1-48883569e7fmr66375565e9.3.1775054326960;
-        Wed, 01 Apr 2026 07:38:46 -0700 (PDT)
-Message-ID: <9b3cd2ba-869b-4757-8bcd-51abad61b9f9@suse.com>
-Date: Wed, 1 Apr 2026 16:38:45 +0200
+        d=1e100.net; s=20251104; t=1775054662; x=1775659462;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dpiVB9dBVzghSP8aA3dpY/N1hXuz4Q4Khlfyme9aK48=;
+        b=kzPHLkQVP/lW0djHoIG+SwjokvyS5rgZHS9ztz/YM+19mvikMaKU5OIiNV+lxmTWas
+         CjJhSBW95rmEph1x3WPM24SsxUabcyOYy/GUHvY7Dkw2FIGAEoQFNeqTfVy/SN8yzbrC
+         BN2Y7C/+10P0NFac9LTIJcY2sZnxDCSinGht6CQLC7BDHP5GItXfyYJ12JsjfYFqdGCT
+         oGgiIJbG9cX7ZAQgx79Bs1yzSvbnNTsxQkO0hj5TdkEPcNWswteFk45mZf9nZoWpP8Nc
+         te2TIHxPMT0p0DQ/YlWrEzx5tnVNpi6F+CalpB3FptUi+eSSwbdf2K+H84qTJFyO/qIH
+         ishg==
+X-Forwarded-Encrypted: i=1; AJvYcCXOOINzR0lEpCsjH4BbkZjxzkqIN02Ci5BazFxJdzz6jafUHchdg9KEKFOqola3mgXT64uA4lT3ph0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywy9SDAg1EIUQTJN8BubtA4MInyB6snIEkhQkOB/KJcG6MoQuJw
+	4Gmkp9GwUuqs0gK165Wqu1VCutVckbjYswkAubjaR5SYaZV1Hg9bDV/t
+X-Gm-Gg: ATEYQzzVVq5sWbZiQaMS4awSnzY8H0G/MM6tW3Wx0cGqyTmooGOVBWBi/cRsC9U/fuO
+	HkKeafRoTonOvYUWb3IEy0ULuDT4oAu/QJBOyRqWnZXPoOroT2J9IUPc69ihLt1OcgpiNaf9IRM
+	fDgtHLzB0ggH+QtxY7xktN7ssBOMRu1iTS+JIs/McyFipirZC7XyK8cyfXGEhOv84jNSHSydGRl
+	sQN6uGMxngbxkfmJQFXr6U3CtORIMuxdEX1+BvxgiNIGMn6BLql5Uc76GsI8y3e0ngQL2a9tLeR
+	Kob0MD2Ixbk0cks21BFg2XArqpBA6HSnq5SyffqYEYhH9B+RCiwfU0GbF/bLtRJ32lQhSO/pYNo
+	w1iHz4jGkEhJNy5ZZVW2Yd90hCQeS0YmfsnidmbwxfyOq5dOJi79Ft132HWdKb1xC6WINEDrs/e
+	MeA8vqbndMggeqSZcKdOK9tid9V4f0EYH6Zom8oKCfB9gbhEYjA+EuAdCAKPWOfFb3Ar31sqjlB
+	ol0Q/f0AAQ=
+X-Received: by 2002:a05:6000:40ce:b0:43b:3cdc:9429 with SMTP id ffacd0b85a97d-43d15047f05mr7676711f8f.1.1775054662005;
+        Wed, 01 Apr 2026 07:44:22 -0700 (PDT)
+Message-ID: <7fd90eb0-1fe3-4985-83a1-1d0830ccbd6f@gmail.com>
+Date: Wed, 1 Apr 2026 16:44:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 09/27] xen/riscv: implement make_intc_domU_node()
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v2 07/11] xen: move domain_use_host_layout() to common
+ code
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
- <7a7f1430090eaf50cc3bff25e894c13404bffad5.1773157782.git.oleksii.kurochko@gmail.com>
+ xen-devel@lists.xenproject.org
+References: <cover.1774281309.git.oleksii.kurochko@gmail.com>
+ <533d01db2b36b8357cd87e99a64a6e66dbdd1db4.1774281309.git.oleksii.kurochko@gmail.com>
+ <6df9470e-4969-48d1-bf0c-c6569a5e5577@suse.com>
+ <57581b7d-cb9f-444c-9321-63b2fc3d09f0@gmail.com>
+ <d1288db4-2001-4914-919f-b613fd607bcc@suse.com>
+ <d67b2856-bf93-4254-afa1-745dc37e0623@gmail.com>
+ <38d93a26-dfce-4d4e-a1d2-c4e8d13c4ead@gmail.com>
+ <a57b4cee-e230-4fc5-a7a6-a62635b54a76@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7a7f1430090eaf50cc3bff25e894c13404bffad5.1773157782.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1775054327-41D16C9A-8255C78B/0/0
-X-purgate-type: clean
-X-purgate-size: 1659
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <a57b4cee-e230-4fc5-a7a6-a62635b54a76@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1775054662-1175241E-4E53ADC2/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2015
 
-On 10.03.2026 18:08, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/dom0less-build.c
-> +++ b/xen/arch/riscv/dom0less-build.c
-> @@ -3,6 +3,15 @@
->  #include <xen/fdt-kernel.h>
->  #include <xen/init.h>
->  
-> +#include <asm/intc.h>
-> +
-> +int __init make_intc_domU_node(struct kernel_info *kinfo)
-> +{
-> +    intc_make_domu_dt_node(kinfo);
-> +
-> +    return 0;
-> +}
 
-Is this wrapper really needed? Can't what's intc_make_domu_dt_node() right
-now become make_intc_domU_node()?
 
-> @@ -41,6 +41,10 @@ struct intc_hw_operations {
->  
->      /* handle external interrupt */
->      void (*handle_interrupt)(struct cpu_user_regs *regs);
-> +
-> +    /* Create interrupt controller node for domain */
-> +    int (*make_dom_dt_node)(const struct kernel_info *kinfo,
-> +                            const struct dt_device_node *intc);
+On 4/1/26 7:59 AM, Jan Beulich wrote:
+> On 31.03.2026 21:49, Oleksii Kurochko wrote:
+>> On 3/31/26 6:32 PM, Oleksii Kurochko wrote:
+>>>>>>> @@ -2544,6 +2544,12 @@ void thaw_domains(void)
+>>>>>>>     #endif /* CONFIG_SYSTEM_SUSPEND */
+>>>>>>> +bool domain_use_host_layout(struct domain *d)
+>>>>>>> +{
+>>>>>>> +    return is_domain_direct_mapped(d) ||
+>>>>>>> +           (paging_mode_translate(d) && is_hardware_domain(d));
+>>>>>>> +}
+>>>>>>
+>>>>>> The placement of paging_mode_translate() doesn't match ...
+>>>>>>
+>>>>>>> --- a/xen/include/xen/domain.h
+>>>>>>> +++ b/xen/include/xen/domain.h
+>>>>>>> @@ -62,6 +62,22 @@ void domid_free(domid_t domid);
+>>>>>>>     #define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+>>>>>>>     #define is_domain_using_staticmem(d) ((d)->cdf & CDF_staticmem)
+>>>>>>> +/*
+>>>>>>> + * Is the auto-translated domain using the host memory layout?
+>>>>>>> + *
+>>>>>>> + * domain_use_host_layout() is always False for PV guests.
+>>>>>>
+>>>>>> ... the description of the function.
+>>>>>
+>>>>> But why the placement should be different?
+>>>>
+>>>> If you focus on auto-translated, then imo paging_mode_translate()
+>>>> better would guard everything.
+>>>
+>>> Then it make sense to do in the following way:
+>>>    bool domain_use_host_layout(struct domain *d)
+>>>    {
+>>> -    return is_domain_direct_mapped(d) ||
+>>> -           (paging_mode_translate(d) && is_hardware_domain(d));
+>>> +    return paging_mode_translate(d) &&
+>>> +           (is_domain_direct_mapped(d) || is_hardware_domain(d));
+>>>    }
+>>
+>> This is not really correct.
+> 
+> ... because of ... ? (After all, then the comment isn't correct either.)
 
-An __init-only hook is somewhat risky, just to mention it. In IOMMU code
-besides struct iommu_ops we have struct iommu_init_ops, just to give an
-example of where the same could have been the case.
+I thought it could break what Arm had before when 
+paging_mode_translate() is false, but it is always true for Arm, so with 
+paging_mode_translate() being true, the new definition is equivalent to 
+what it had before. So looks goods.
 
-> --- a/xen/arch/riscv/intc.c
-> +++ b/xen/arch/riscv/intc.c
-> @@ -67,3 +67,11 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
->      intc_set_irq_type(desc, desc->arch.type);
->      intc_set_irq_priority(desc, priority);
->  }
-> +
-> +int __init intc_make_domu_dt_node(const struct kernel_info *kinfo)
-> +{
-> +    if ( intc_hw_ops && intc_hw_ops->make_dom_dt_node )
-> +        return intc_hw_ops->make_dom_dt_node(kinfo, intc_hw_ops->info->node);
-> +
-> +    return -ENOSYS;
+~ Oleksii
 
-How do you justify this choice of return value? This isn't even a hypercall
-handler.
 
-Jan
+> 
+> Jan
+
 
