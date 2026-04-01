@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3AED3515B
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 08:17:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1269879.1558746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4A6D3515A
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Apr 2026 08:17:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1269885.1558797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7qky-0005Ef-8m; Wed, 01 Apr 2026 08:16:56 +0000
+	id 1w7ql6-0006UN-CI; Wed, 01 Apr 2026 08:17:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1269879.1558746; Wed, 01 Apr 2026 08:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 1269885.1558797; Wed, 01 Apr 2026 08:17:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w7qky-0005EY-5G; Wed, 01 Apr 2026 08:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 1269879;
- Wed, 01 Apr 2026 08:16:55 +0000
+	id 1w7ql5-0006Sh-Vy; Wed, 01 Apr 2026 08:17:03 +0000
+Received: by outflank-mailman (input) for mailman id 1269885;
+ Wed, 01 Apr 2026 08:17:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <fengchengwen@huawei.com>) id 1w7qkw-0005EK-OQ
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 08:16:55 +0000
+ (envelope-from <fengchengwen@huawei.com>) id 1w7ql4-0006M0-MF
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 08:17:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w7qkv-003Uhh-By
- for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 10:16:54 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1w7ql4-003Ul3-0o
+ for xen-devel@lists.xenproject.org; Wed, 01 Apr 2026 10:17:02 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <fengchengwen@huawei.com>)
- id 69ccd468-5cb7-0a2a0a5109dd-0a2a4502cf5e-48
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 10:16:53 +0200
-Received: from [113.46.200.219] (helo=canpmsgout04.his.huawei.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69ccd472-5cb7-0a2a0a5109dd-0a2a4501cb74-40
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 10:17:01 +0200
+Received: from [113.46.200.222] (helo=canpmsgout07.his.huawei.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <fengchengwen@huawei.com>)
- id 69ccd472-42fa-0a2a45020019-712ec8dbfa84-3
- for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 10:16:52 +0200
-Received: from mail.maildlp.com (unknown [172.19.163.0])
- by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4flyNC08FCz1prLN;
- Wed,  1 Apr 2026 16:10:35 +0800 (CST)
+ id 69ccd47a-6fc9-0a2a45010019-712ec8de30dc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Apr 2026 10:17:01 +0200
+Received: from mail.maildlp.com (unknown [172.19.163.127])
+ by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4flyNS2tVFzLlXm;
+ Wed,  1 Apr 2026 16:10:48 +0800 (CST)
 Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
- by mail.maildlp.com (Postfix) with ESMTPS id 9190740537;
- Wed,  1 Apr 2026 16:16:47 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 6117940572;
+ Wed,  1 Apr 2026 16:16:57 +0800 (CST)
 Received: from localhost.localdomain (10.50.163.32) by
  kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Wed, 1 Apr 2026 16:16:45 +0800
+ 15.2.1544.11; Wed, 1 Apr 2026 16:16:55 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,10 +59,10 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim header.
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=c9AlrYXsxBFF3IzNBDnKrFfgKSQZlOG3wlCt2foyY+Y=;
-	b=s0jHWYuxfoxkRN+t4KseYGhpk5P2m2+oPxvld1K2wRhg/xq/KJ6rPLjiy3A+eHJcZDd4LECJR
-	hk2c9oJcG9N70ZRCYC/HPCz/7V6gQufIs9IC6ExJohMMFTan9KIJsB7lPAuY/r27HFSh7GQcO9C
-	uY27gGt24m7NlqDK+Rfdv9c=
+	bh=zauzEDoW1iZZVg1rc8HmzuZCwLSftmOLfB8Jb8RY2BQ=;
+	b=J5TZKxoHIReSEQmbTRfXFVLNZ+/IUwuE+uW11i8+jkMuLeZGtwJVXLQfuq4LHOSczhwfghmzc
+	YFCMaPt2RTCEgwugJISj0LKEbk2ZW0qVVKN1TRrnTPUfnEonx2LqeBG0wXshmZawXX2M7xbOaMf
+	BcPDzWOBbKROUN5RO0vtU+I=
 From: Chengwen Feng <fengchengwen@huawei.com>
 To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
 	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
@@ -96,85 +96,58 @@ CC: Jonathan Corbet <corbet@lwn.net>, WANG Xuerui <kernel@xen0n.name>, Thomas
 	<xen-devel@lists.xenproject.org>, <linux-acpi@vger.kernel.org>,
 	<linux-perf-users@vger.kernel.org>, <stable@vger.kernel.org>,
 	<x86@kernel.org>
-Subject: [PATCH RESEND v10 0/8] ACPI: Unify CPU UID interface and fix ARM64 TPH steer-tag issue
-Date: Wed, 1 Apr 2026 16:16:32 +0800
-Message-ID: <20260401081640.26875-1-fengchengwen@huawei.com>
+Subject: [PATCH RESEND v10 6/8] perf: arm_cspmu: Switch to acpi_get_cpu_uid() from get_acpi_id_for_cpu()
+Date: Wed, 1 Apr 2026 16:16:38 +0800
+Message-ID: <20260401081640.26875-7-fengchengwen@huawei.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20260401081640.26875-1-fengchengwen@huawei.com>
+References: <20260401081640.26875-1-fengchengwen@huawei.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.50.163.32]
 X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
  kwepemk500009.china.huawei.com (7.202.194.94)
-X-purgate-ID: tlsNG-720697/1775031413-ADD38CD1-8503821E/0/0
+X-purgate-ID: tlsNG-d62444/1775031421-B7CFA185-2B2C221B/0/0
 X-purgate-type: clean
-X-purgate-size: 2769
+X-purgate-size: 1347
 
-This patchset unifies ACPI Processor UID retrieval across
-arm64/loongarch/riscv/x86 via acpi_get_cpu_uid() (with input validation)
-and fixes ARM64 CPU steer-tag retrieval failure in PCI/TPH:
+Update arm_cspmu to use acpi_get_cpu_uid() instead of
+get_acpi_id_for_cpu(), aligning with unified ACPI CPU UID interface.
 
-1-4: Add acpi_get_cpu_uid() for arm64/loongarch/riscv/x86 (update
-     respective users)
-5: Centralize acpi_get_cpu_uid() declaration in include/linux/acpi.h
-6: Clean up perf/arm_cspmu
-7: Clean up ACPI/PPTT and remove unused get_acpi_id_for_cpu()
-8: Pass ACPI Processor UID to Cache Locality _DSM
+No functional changes are introduced by this switch (valid inputs retain
+original behavior).
 
-The interface refactor ensures consistent CPU UID retrieval across
-architectures (no functional changes for valid inputs) and provides the
-unified interface required for the ARM64 TPH fix
-
+Cc: stable@vger.kernel.org
+Signed-off-by: Chengwen Feng <fengchengwen@huawei.com>
+Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 ---
-Changes in v10-resend:
-- Add Catalin's ack-by for arm64 commit
-- Add CC to x86@kernel.org
+ drivers/perf/arm_cspmu/arm_cspmu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Changes in v10:
-- Refine commit header&log according to Punit's and Bjorn's review
-- Split perf/arm_cspmu as a separate commit which address Punit's
-  review
-
-Changes in v9:
-- Address Bjorn's review: split commits to each platform so that make
-  them easy to review
-
-Changes in v8:
-- Moving arm64's get_cpu_for_acpi_id() to kernel/acpi.c which address
-  Jeremy's review
-
-Chengwen Feng (8):
-  arm64: acpi: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-  LoongArch: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-  RISC-V: ACPI: Add acpi_get_cpu_uid() for unified ACPI CPU UID
-    retrieval
-  x86/acpi: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-  ACPI: Centralize acpi_get_cpu_uid() declaration in
-    include/linux/acpi.h
-  perf: arm_cspmu: Switch to acpi_get_cpu_uid() from
-    get_acpi_id_for_cpu()
-  ACPI: PPTT: Use acpi_get_cpu_uid() and remove get_acpi_id_for_cpu()
-  PCI/TPH: Pass ACPI Processor UID to Cache Locality _DSM
-
- Documentation/PCI/tph.rst          |  4 +--
- arch/arm64/include/asm/acpi.h      | 17 +---------
- arch/arm64/kernel/acpi.c           | 30 ++++++++++++++++++
- arch/loongarch/include/asm/acpi.h  |  5 ---
- arch/loongarch/kernel/acpi.c       |  9 ++++++
- arch/riscv/include/asm/acpi.h      |  4 ---
- arch/riscv/kernel/acpi.c           | 16 ++++++++++
- arch/riscv/kernel/acpi_numa.c      |  9 ++++--
- arch/x86/include/asm/cpu.h         |  1 -
- arch/x86/include/asm/smp.h         |  1 -
- arch/x86/kernel/acpi/boot.c        | 20 ++++++++++++
- arch/x86/xen/enlighten_hvm.c       |  5 +--
- drivers/acpi/pptt.c                | 50 ++++++++++++++++++++++--------
- drivers/acpi/riscv/rhct.c          |  7 ++++-
- drivers/pci/tph.c                  | 16 +++++++---
- drivers/perf/arm_cspmu/arm_cspmu.c |  6 ++--
- include/linux/acpi.h               | 11 +++++++
- include/linux/pci-tph.h            |  4 +--
- 18 files changed, 158 insertions(+), 57 deletions(-)
-
+diff --git a/drivers/perf/arm_cspmu/arm_cspmu.c b/drivers/perf/arm_cspmu/arm_cspmu.c
+index 34430b68f602..ed72c3d1f796 100644
+--- a/drivers/perf/arm_cspmu/arm_cspmu.c
++++ b/drivers/perf/arm_cspmu/arm_cspmu.c
+@@ -1107,15 +1107,17 @@ static int arm_cspmu_acpi_get_cpus(struct arm_cspmu *cspmu)
+ {
+ 	struct acpi_apmt_node *apmt_node;
+ 	int affinity_flag;
++	u32 cpu_uid;
+ 	int cpu;
++	int ret;
+ 
+ 	apmt_node = arm_cspmu_apmt_node(cspmu->dev);
+ 	affinity_flag = apmt_node->flags & ACPI_APMT_FLAGS_AFFINITY;
+ 
+ 	if (affinity_flag == ACPI_APMT_FLAGS_AFFINITY_PROC) {
+ 		for_each_possible_cpu(cpu) {
+-			if (apmt_node->proc_affinity ==
+-			    get_acpi_id_for_cpu(cpu)) {
++			ret = acpi_get_cpu_uid(cpu, &cpu_uid);
++			if (ret == 0 && apmt_node->proc_affinity == cpu_uid) {
+ 				cpumask_set_cpu(cpu, &cspmu->associated_cpus);
+ 				break;
+ 			}
 -- 
 2.17.1
 
