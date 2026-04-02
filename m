@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21293D39410
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1271537.1559723 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D95D39410
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1271546.1559732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaP-0006U2-Gm; Thu, 02 Apr 2026 10:47:41 +0000
+	id 1w8FaR-0006uD-Ld; Thu, 02 Apr 2026 10:47:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1271537.1559723; Thu, 02 Apr 2026 10:47:41 +0000
+Received: by outflank-mailman (output) from mailman id 1271546.1559732; Thu, 02 Apr 2026 10:47:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaO-0006RL-IG; Thu, 02 Apr 2026 10:47:40 +0000
-Received: by outflank-mailman (input) for mailman id 1271537;
- Thu, 02 Apr 2026 10:47:39 +0000
+	id 1w8FaR-0006sC-4i; Thu, 02 Apr 2026 10:47:43 +0000
+Received: by outflank-mailman (input) for mailman id 1271546;
+ Thu, 02 Apr 2026 10:47:41 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w8FaM-00067Z-PE
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:38 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w8FaP-0006V5-2R
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w8FaM-00Ej0u-4t
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:38 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w8FaO-009qA7-Ef
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:40 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce4947-2eae-0a2a0a5409dd-0a2a4505b638-12
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:38 +0200
+ id 69ce4948-e002-0a2a0a5209dd-0a2a450c8ce0-20
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:40 +0200
 Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce494a-3760-0a2a45050019-d155da2da5b5-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:38 +0200
+ id 69ce494c-f40c-0a2a450c0019-d155da2db009-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:40 +0200
 Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-b9a0762ed5fso112580866b.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:38 -0700 (PDT)
+ a640c23a62f3a-b8f97c626aaso122290666b.2
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:40 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.36
+ a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 03:47:36 -0700 (PDT)
+ Thu, 02 Apr 2026 03:47:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775126857; x=1775731657; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775126860; x=1775731660; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zPqg0vXhWWH1w1hlbbZTkVgax5cKCfDJE6WmuksoUYo=;
-        b=XzNNXBZ0XzWFnGtiBZ1yT3Mphevk23hj5Lzrx0nbE/kKI0Kd6lkbAs4bNnRgse3cOl
-         BVX2smmpF5UqejCDojw+b3v3bpeLIeaY5poKd2LGN+m6EEg4Z6pa0q8RBmRePnMFvEjk
-         xPqnhAhSeDJ5+FqKn3Cz6MOVJjOvuF5m5BTqNK0hJ/XJXgAcN0SQT5Y3odwjhO/h/HcM
-         fiu6IeEWNTh4N2hh7AdxvXtwFkcw1XNH2ehMxtuE0lydLq3A0QtCRga98qdC4CwgEVu0
-         044j0x/l9N4kMyS9G4o18D4/ywWIYf/yQL9xB1xc743Mrj5EwRfwYiIdvZJGmIeqrjmW
-         00fg==
+        bh=PNu7eJ7Z0b3llwWlHGEbTagm+9rNR0YOT8JLveV1JGo=;
+        b=KbGPLCldm1ssHRBbB1PjHxZV4J4qieBqYD1xDaTjCJl7e/yJ//qd0XEpJR2zRdSocS
+         ZQAWJrK5m0bDoHP/uXSNJcZ8y/o6gJmTEVvTu1iTsOPqTkLYcZsBE1qgj9jxspDQz1L4
+         5krMpNBx/Gd8K4HFKZ8ZPKTMWHQvWIWY2lUQ0mz94SVgV5Y9KtvggPCt1vduNCVSArA7
+         D2CcmNA5n9YAR/z1kWbyR/THqBftvr5xnIb5ONiyndhVwgwBwfJ/HVqX1J2/HYAQDT4o
+         rdP2ap/v7LySDZn7g7IDeOati7/MKyRR7OQtmNjg/L7A5ThJl5FWnsxAgaLZWhQLoHyE
+         emCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775126857; x=1775731657;
+        d=1e100.net; s=20251104; t=1775126860; x=1775731660;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=zPqg0vXhWWH1w1hlbbZTkVgax5cKCfDJE6WmuksoUYo=;
-        b=MFDW1hOZmdwkhYwFXb/iV4a3OsW+icPDVCZ71xYZxBYE87ZKFahTNlKruEVvRdmDD3
-         rNNvr2tYD9ZSDQSKKV2CmvBgzOGeuhas54bBXNOyf0szn84Suzq3OKAGfhfYnf7qHAuY
-         L727wWKLIE5cYZCQuEYvuI+Xr4SfEb+TooOxQhpzpK+RiXylpkmLdI39MGYCd0Sec3nh
-         3BxPuNFORmr5Tss6Am0TUCxF6aOkD7ykJfRxleM1CVyfllUDOMKdt0Y60rsMmGZAqlf1
-         w9n59HD5nc2Z48tWqTB9PlUWhwO84RVMcr45llWE30eJOYKZmPPux3QBH3Lpkgdhe+++
-         IYvw==
-X-Gm-Message-State: AOJu0Yws0fxml572L6y7c59gdQbXlu4MXPTNWXHbpL0//AbjS+QDLrYa
-	XxEOVG0Y7WeLFX8lITdx2Tu8nr4a+Hl+K9puPB9oiuPDZHkI6xCcKbvgUxEhEQrz
-X-Gm-Gg: ATEYQzwHtZUkKsviNXdX3X+dd2X1K67kgj3P/lbhGWi2Ft/T6uYs1m9yObm0zQ8NJdB
-	ROY/tmdEMuNCjt0gyoIgvk7Eq6wiFws6ze24LrojsYWFOkd6teo+7Fz7qsCTsrYPR3GSAqU0f9v
-	VOAuAXrzLm79qSLbdQnvqgNLe8+k33PX9Ndb8K4ekJBVVQUaJQITpcA/GiAbsqnfd4U7GglFJdF
-	mY9ughY6Oo4wmZjh2ZoPDfNxftA6j1UV0KfODNK7V602yqFaJ0rywDd/2z9lptQSsDy/gY3DDOc
-	JTvHiKiSqp9CvtHZrsOEGHQ9cPaqWPMLnTCGJL9KuEh42iS9TCYLOSy/CCoNl43K1qBjJ5W4DkD
-	p5qO18Y0IpmjDetYwh5dYZz7NoEBueZdOnjDoaDIeiN5JAtqH8FU5Ln/lc18KjU6HhX+9uuvitm
-	h8Fi1F+vMyYHoAohm0elXluPSNSg==
-X-Received: by 2002:a17:907:c22:b0:b98:f1d:6a63 with SMTP id a640c23a62f3a-b9c46e25d10mr98516666b.9.1775126857055;
-        Thu, 02 Apr 2026 03:47:37 -0700 (PDT)
+        bh=PNu7eJ7Z0b3llwWlHGEbTagm+9rNR0YOT8JLveV1JGo=;
+        b=YNat4XG4aWdaWH4ArFu/kAToUf/pXRrJZBWnvxoTo3yNXtNgTF6COzGO6hMxrudAjo
+         9XnmXlU8NzIWR+1d7UDFUGXwY+ZTWoLIwKzZQ7HdWeH5Df+NtgQmw1JAGr4xHEnCg8H0
+         NsCOBggaawCAdWTIW9V01dPrfn0pUg+gqJgmJMYG+jABVuCohhK5miN684YQEBxa+FQ+
+         qKr43TcwMVR+h/r0QqZsyi7QcUUZ3JKcett6rysAREs70Gg8dcl6MSDjfoQH6Z2YIVG1
+         Zq1bcHr3nospWcJJdwLgCQ0s79hFaj5K0zypZWvHH6VcnPOWVp1N7pN3yaqtAb+TFuyQ
+         TqDQ==
+X-Gm-Message-State: AOJu0YxOKPtSQmRzA9cWSgOCOVuPGrqOgFX3tsP4L/gnHgMf3BKVWXkG
+	nV248zl47P3pUHLnGI0C3csMi6tRqugP+OUEHlZsmuzkowiBRRPBQzNQtnr26ejn
+X-Gm-Gg: ATEYQzxnLd9O2cxo0RJ9n88S8VczcX1T+qFGxTSocNYiZzM57/bHoO04XGNf9irtKk5
+	iq1T3rbl2HEeTyqfbdcQevZKcdSnYljRZLX+C/3LUoESMmYTdPMP65rEB+a49vV5ryxQza5syRA
+	NV7xQbssNwLG5HWjwW5T8AuKQejS/m8z5cuFVOt34jjPq9KL++/SfGX44t6AAhtcPRFlLScTZEd
+	sTQ1AhHPKxQFx9LmMJzpQZ0/Doh2QW4Be4zsdO4CK5VFbyzYNClDVDrJhrdXkiW7a58E036GS8T
+	lQkez+/rnFNLoFu+raeKr5OI7UauNIvevYnFAaDLp6DpGz1gokEa7hQibHSrp81nHB8oovsAm15
+	jei8vtho8CTtJL67kCdxQmoNq3C2i+BMYmWJqGGlao7Vixow9bYdeV9asyVBnJKln7YjnCoVff9
+	Z/XQPh3KrD7aoGhsflb2EHg8z5d1CkHSynLZM1
+X-Received: by 2002:a17:907:6d16:b0:b9c:4248:7773 with SMTP id a640c23a62f3a-b9c42487e4amr138809366b.26.1775126859321;
+        Thu, 02 Apr 2026 03:47:39 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,243 +95,457 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v8 11/13] xen/arm: Save/restore context on suspend/resume
-Date: Thu,  2 Apr 2026 13:45:12 +0300
-Message-ID: <f87a2bcb6b09e95e07e51c27541ad91406e849d1.1775125380.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v8 13/13] xen/arm: Add support for system suspend triggered by hardware domain
+Date: Thu,  2 Apr 2026 13:45:14 +0300
+Message-ID: <9b0f8922cd33df2b8e8038d639c1b8d8d73ce401.1775125380.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775125380.git.mykola_kvach@epam.com>
 References: <cover.1775125380.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1775126858-3979296F-423BE752/0/0
+X-purgate-ID: tlsNG-d25034/1775126860-FFF42A3D-F1949B49/0/0
 X-purgate-type: clean
-X-purgate-size: 7252
+X-purgate-size: 14142
 
 From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-The context of CPU general purpose and system control registers must be
-saved on suspend and restored on resume. This is implemented in
-prepare_resume_ctx and before the return from the hyp_resume function.
-The prepare_resume_ctx must be invoked just before the PSCI system suspend
-call is issued to the ATF. The prepare_resume_ctx must return a non-zero
-value so that the calling 'if' statement evaluates to true, causing the
-system suspend to be invoked. Upon resume, the context saved on suspend
-will be restored, including the link register. Therefore, after
-restoring the context, the control flow will return to the address
-pointed to by the saved link register, which is the place from which
-prepare_resume_ctx was called. To ensure that the calling 'if' statement
-does not again evaluate to true and initiate system suspend, hyp_resume
-must return a zero value after restoring the context.
+Trigger Xen suspend when the hardware domain initiates suspend via
+SHUTDOWN_suspend. Redirect system suspend to CPU#0 to ensure the
+suspend logic runs on the boot CPU, as required.
 
-Note that the order of saving register context into cpu_context structure
-must match the order of restoring.
+Introduce full suspend/resume infrastructure gated by CONFIG_SYSTEM_SUSPEND,
+including logic to:
+ - disable and enable non-boot physical CPUs
+ - freeze and thaw domains
+ - suspend and resume the GIC, timer, iommu and console
+ - maintain system state before and after suspend
 
-Support for ARM32 is not implemented. Instead, compilation fails with a
-build-time error if suspend is enabled for ARM32.
+On boot, init_ttbr is normally initialized during secondary CPU hotplug.
+On uniprocessor systems, this would leave init_ttbr uninitialized,
+causing resume to fail. To address this, the boot CPU now sets init_ttbr
+during suspend.
+
+Remove the restriction in the vPSCI interface preventing suspend from the
+hardware domain.
+
+Select HAS_SYSTEM_SUSPEND for ARM_64.
+
+Introduce CONFIG_HAS_HWDOM_SYSTEM_SUSPEND as an architecture-selected
+capability for platforms where the hardware domain survives
+SHUTDOWN_suspend without hwdom_shutdown(). ARM_64 selects it with
+SYSTEM_SUSPEND enabled; other architectures keep the existing behaviour.
+
+Note: the code is behind CONFIG_HAS_SYSTEM_SUSPEND, which is currently only
+selected when UNSUPPORTED is set and when MPU isn't set, so the functionality
+is built but disabled by default.
 
 Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
 Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in v8:
-- fix alignments in code
+Changes in V8:
+- Add a pre-suspend check in system_suspend() after scheduler_disable()
+  to require all domains to be in the shut down state with
+  SHUTDOWN_suspend before proceeding with the global suspend flow.
+- Drop the common-level depends on !ARM_64 || !SYSTEM_SUSPEND from
+  CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND and model the ARM64 suspend
+  case with an arch-selected capability instead.
+- Rename CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND to CONFIG_HAS_HWDOM_SYSTEM_SUSPEND.
+- Rename need_hwdom_shutdown() to want_hwdom_shutdown().
 
-Changes in v7:
-- no changes
+Changes in V7:
+- Control domain is responsible for host suspend
+- Move the is_hardware_domain check into host_system_suspend()
+- Add an empty inline host_system_suspend() function when SYSTEM_SUSPEND
+  config is disabled
+- Use IS_ENABLED() for config checking instead of #ifdef
+- Replace #ifdef checks in domain_shutdown() with IS_ENABLED() to simplify
+  control flow.
+- Factor hardware domain shutdown condition into a helper
+  (need_hwdom_shutdown()) to avoid preprocessor directives inside the function.
+- Squash with iommu suspend/resume commit
 ---
- xen/arch/arm/Makefile              |  1 +
- xen/arch/arm/arm64/head.S          | 90 +++++++++++++++++++++++++++++-
- xen/arch/arm/include/asm/suspend.h | 26 +++++++++
- xen/arch/arm/suspend.c             | 14 +++++
- 4 files changed, 130 insertions(+), 1 deletion(-)
- create mode 100644 xen/arch/arm/suspend.c
+ xen/arch/arm/Kconfig               |   2 +
+ xen/arch/arm/include/asm/mm.h      |   2 +
+ xen/arch/arm/include/asm/suspend.h |   7 +-
+ xen/arch/arm/mmu/smpboot.c         |   2 +-
+ xen/arch/arm/suspend.c             | 181 +++++++++++++++++++++++++++++
+ xen/arch/arm/vpsci.c               |  12 +-
+ xen/common/Kconfig                 |   3 +
+ xen/common/domain.c                |   7 +-
+ xen/drivers/passthrough/arm/smmu.c |  10 ++
+ 9 files changed, 220 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 69200b2728..c36158271a 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -51,6 +51,7 @@ obj-y += setup.o
- obj-y += shutdown.o
- obj-y += smp.o
- obj-y += smpboot.o
-+obj-$(CONFIG_SYSTEM_SUSPEND) += suspend.o
- obj-$(CONFIG_SYSCTL) += sysctl.o
- obj-y += time.o
- obj-y += traps.o
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 596e960152..2cb02ee314 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -562,6 +562,52 @@ END(efi_xen_start)
- #endif /* CONFIG_ARM_EFI */
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 2f2b501fda..c2e63ce8ff 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -8,6 +8,8 @@ config ARM_64
+ 	depends on !ARM_32
+ 	select 64BIT
+ 	select HAS_FAST_MULTIPLY
++	select HAS_HWDOM_SYSTEM_SUSPEND if SYSTEM_SUSPEND
++	select HAS_SYSTEM_SUSPEND if !MPU && UNSUPPORTED
+ 	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
  
- #ifdef CONFIG_SYSTEM_SUSPEND
-+/*
-+ * int prepare_resume_ctx(struct cpu_context *ptr)
-+ *
-+ * x0 - pointer to the storage where callee's context will be saved
-+ *
-+ * CPU context saved here will be restored on resume in hyp_resume function.
-+ * prepare_resume_ctx shall return a non-zero value. Upon restoring context
-+ * hyp_resume shall return value zero instead. From C code that invokes
-+ * prepare_resume_ctx, the return value is interpreted to determine whether
-+ * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
-+ */
-+FUNC(prepare_resume_ctx)
-+        /* Store callee-saved registers */
-+        stp   x19, x20, [x0], #16
-+        stp   x21, x22, [x0], #16
-+        stp   x23, x24, [x0], #16
-+        stp   x25, x26, [x0], #16
-+        stp   x27, x28, [x0], #16
-+        stp   x29, lr, [x0], #16
-+
-+        /* Store stack-pointer */
-+        mov   x2, sp
-+        str   x2, [x0], #8
-+
-+        /* Store system control registers */
-+        mrs   x2, VBAR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, VTCR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, VTTBR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, TPIDR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, MDCR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, HSTR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, CPTR_EL2
-+        str   x2, [x0], #8
-+        mrs   x2, HCR_EL2
-+        str   x2, [x0], #8
-+
-+        /* prepare_resume_ctx must return a non-zero value */
-+        mov   x0, #1
-+        ret
-+END(prepare_resume_ctx)
+ config ARM
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 72a6928624..87b54a55dc 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -360,6 +360,8 @@ static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
+     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
+ }
  
- FUNC(hyp_resume)
-         /* Initialize the UART if earlyprintk has been enabled. */
-@@ -580,7 +626,49 @@ FUNC(hyp_resume)
-         b     enable_secondary_cpu_mm
- 
- mmu_resumed:
--        b .
-+        /* Now we can access the cpu_context, so restore the context here */
-+        ldr   x0, =cpu_context
++void set_init_ttbr(lpae_t *root);
 +
-+        /* Restore callee-saved registers */
-+        ldp   x19, x20, [x0], #16
-+        ldp   x21, x22, [x0], #16
-+        ldp   x23, x24, [x0], #16
-+        ldp   x25, x26, [x0], #16
-+        ldp   x27, x28, [x0], #16
-+        ldp   x29, lr, [x0], #16
-+
-+        /* Restore stack pointer */
-+        ldr   x2, [x0], #8
-+        mov   sp, x2
-+
-+        /* Restore system control registers */
-+        ldr   x2, [x0], #8
-+        msr   VBAR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   VTCR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   VTTBR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   TPIDR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   MDCR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   HSTR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   CPTR_EL2, x2
-+        ldr   x2, [x0], #8
-+        msr   HCR_EL2, x2
-+        isb
-+
-+        /*
-+         * Since context is restored return from this function will appear
-+         * as return from prepare_resume_ctx. To distinguish a return from
-+         * prepare_resume_ctx which is called upon finalizing the suspend,
-+         * as opposed to return from this function which executes on resume,
-+         * we need to return zero value here.
-+         */
-+        mov   x0, #0
-+        ret
- END(hyp_resume)
- 
- #endif /* CONFIG_SYSTEM_SUSPEND */
+ #endif /*  __ARCH_ARM_MM__ */
+ /*
+  * Local variables:
 diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-index 31a98a1f1b..c127fa3d78 100644
+index c127fa3d78..c36ba23b10 100644
 --- a/xen/arch/arm/include/asm/suspend.h
 +++ b/xen/arch/arm/include/asm/suspend.h
-@@ -3,6 +3,8 @@
- #ifndef ARM_SUSPEND_H
- #define ARM_SUSPEND_H
+@@ -38,7 +38,12 @@ extern struct cpu_context cpu_context;
  
-+#include <xen/types.h>
+ int prepare_resume_ctx(struct cpu_context *ptr);
+ void hyp_resume(void);
+-#endif /* CONFIG_SYSTEM_SUSPEND */
++void host_system_suspend(struct domain *d);
 +
- struct domain;
- struct vcpu;
- struct vcpu_guest_context;
-@@ -14,6 +16,30 @@ struct resume_info {
- 
- void arch_domain_resume(struct domain *d);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+#ifdef CONFIG_ARM_64
-+struct cpu_context {
-+    register_t callee_regs[12];
-+    register_t sp;
-+    register_t vbar_el2;
-+    register_t vtcr_el2;
-+    register_t vttbr_el2;
-+    register_t tpidr_el2;
-+    register_t mdcr_el2;
-+    register_t hstr_el2;
-+    register_t cptr_el2;
-+    register_t hcr_el2;
-+} __aligned(16);
-+#else
-+#error "Define cpu_context structure for arm32"
++#else /* !CONFIG_SYSTEM_SUSPEND */
++
++static inline void host_system_suspend(struct domain *d) { (void)d; }
 +#endif
-+
-+extern struct cpu_context cpu_context;
-+
-+int prepare_resume_ctx(struct cpu_context *ptr);
-+void hyp_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
+ 
  #endif /* ARM_SUSPEND_H */
  
- /*
+diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
+index 37e91d72b7..ff508ecf40 100644
+--- a/xen/arch/arm/mmu/smpboot.c
++++ b/xen/arch/arm/mmu/smpboot.c
+@@ -72,7 +72,7 @@ static void clear_boot_pagetables(void)
+     clear_table(boot_third);
+ }
+ 
+-static void set_init_ttbr(lpae_t *root)
++void set_init_ttbr(lpae_t *root)
+ {
+     /*
+      * init_ttbr is part of the identity mapping which is read-only. So
 diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-new file mode 100644
-index 0000000000..e38566b0b7
---- /dev/null
+index e38566b0b7..4d1289776b 100644
+--- a/xen/arch/arm/suspend.c
 +++ b/xen/arch/arm/suspend.c
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
+@@ -1,9 +1,190 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <asm/psci.h>
+ #include <asm/suspend.h>
+ 
++#include <public/sched.h>
++#include <xen/console.h>
++#include <xen/cpu.h>
++#include <xen/errno.h>
++#include <xen/iommu.h>
++#include <xen/sched.h>
++#include <xen/tasklet.h>
 +
+ struct cpu_context cpu_context = {};
+ 
++static int can_system_suspend(void)
++{
++    int ret = 0;
++    struct domain *d;
++
++    rcu_read_lock(&domlist_read_lock);
++
++    for_each_domain ( d )
++    {
++        bool domain_suspended;
++
++        spin_lock(&d->shutdown_lock);
++        domain_suspended = d->is_shut_down &&
++                           d->shutdown_code == SHUTDOWN_suspend;
++        spin_unlock(&d->shutdown_lock);
++
++        if ( domain_suspended )
++            continue;
++
++        printk(XENLOG_ERR
++               "System suspend requires all domains to be shut down for suspend (dom%d: isn't in suspend state)\n",
++               d->domain_id);
++
++        ret = -EBUSY;
++        break;
++    }
++
++    rcu_read_unlock(&domlist_read_lock);
++
++    return ret;
++}
++
++/* Xen suspend. data identifies the domain that initiated suspend. */
++static void system_suspend(void *data)
++{
++    int status;
++    unsigned long flags;
++    struct domain *d = (struct domain *)data;
++
++    BUG_ON(system_state != SYS_STATE_active);
++
++    system_state = SYS_STATE_suspend;
++
++    printk("Xen suspending...\n");
++
++    freeze_domains();
++    scheduler_disable();
++
++    status = can_system_suspend();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_scheduler;
++    }
++
++    /*
++     * Non-boot CPUs have to be disabled on suspend and enabled on resume
++     * (hotplug-based mechanism). Disabling non-boot CPUs will lead to PSCI
++     * CPU_OFF to be called by each non-boot CPU. Depending on the underlying
++     * platform capabilities, this may lead to the physical powering down of
++     * CPUs.
++     */
++    status = disable_nonboot_cpus();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_nonboot_cpus;
++    }
++
++    time_suspend();
++
++    status = iommu_suspend();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_time;
++    }
++
++    console_start_sync();
++    status = console_suspend();
++    if ( status )
++    {
++        dprintk(XENLOG_ERR, "Failed to suspend the console, err=%d\n", status);
++        system_state = SYS_STATE_resume;
++        goto resume_end_sync;
++    }
++
++    local_irq_save(flags);
++    status = gic_suspend();
++    if ( status )
++    {
++        system_state = SYS_STATE_resume;
++        goto resume_irqs;
++    }
++
++    set_init_ttbr(xen_pgtable);
++
++    /*
++     * Enable identity mapping before entering suspend to simplify
++     * the resume path
++     */
++    update_boot_mapping(true);
++
++    if ( prepare_resume_ctx(&cpu_context) )
++    {
++        status = call_psci_system_suspend();
++        /*
++         * If suspend is finalized properly by above system suspend PSCI call,
++         * the code below in this 'if' branch will never execute. Execution
++         * will continue from hyp_resume which is the hypervisor's resume point.
++         * In hyp_resume CPU context will be restored and since link-register is
++         * restored as well, it will appear to return from prepare_resume_ctx.
++         * The difference in returning from prepare_resume_ctx on system suspend
++         * versus resume is in function's return value: on suspend, the return
++         * value is a non-zero value, on resume it is zero. That is why the
++         * control flow will not re-enter this 'if' branch on resume.
++         */
++        if ( status )
++            dprintk(XENLOG_WARNING, "PSCI system suspend failed, err=%d\n",
++                    status);
++    }
++
++    system_state = SYS_STATE_resume;
++    update_boot_mapping(false);
++
++    gic_resume();
++
++ resume_irqs:
++    local_irq_restore(flags);
++
++    console_resume();
++ resume_end_sync:
++    console_end_sync();
++
++    iommu_resume();
++
++ resume_time:
++    time_resume();
++
++ resume_nonboot_cpus:
++    /*
++     * The rcu_barrier() has to be added to ensure that the per cpu area is
++     * freed before a non-boot CPU tries to initialize it (_free_percpu_area()
++     * has to be called before the init_percpu_area()). This scenario occurs
++     * when non-boot CPUs are hot-unplugged on suspend and hotplugged on resume.
++     */
++    rcu_barrier();
++    enable_nonboot_cpus();
++
++ resume_scheduler:
++    scheduler_enable();
++    thaw_domains();
++
++    system_state = SYS_STATE_active;
++
++    printk("Resume (status %d)\n", status);
++
++    domain_resume(d);
++}
++
++static DECLARE_TASKLET(system_suspend_tasklet, system_suspend, NULL);
++
++void host_system_suspend(struct domain *d)
++{
++    system_suspend_tasklet.data = (void *)d;
++    /*
++     * The suspend procedure has to be finalized by the pCPU#0 (non-boot pCPUs
++     * will be disabled during the suspend).
++     */
++    tasklet_schedule_on_cpu(&system_suspend_tasklet, 0);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+index bd87ec430d..8fb9172186 100644
+--- a/xen/arch/arm/vpsci.c
++++ b/xen/arch/arm/vpsci.c
+@@ -5,6 +5,7 @@
+ 
+ #include <asm/current.h>
+ #include <asm/domain.h>
 +#include <asm/suspend.h>
+ #include <asm/vgic.h>
+ #include <asm/vpsci.h>
+ #include <asm/event.h>
+@@ -232,8 +233,7 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+     if ( is_64bit_domain(d) && is_thumb )
+         return PSCI_INVALID_ADDRESS;
+ 
+-    /* SYSTEM_SUSPEND is not supported for the hardware domain yet */
+-    if ( is_hardware_domain(d) )
++    if ( !IS_ENABLED(CONFIG_SYSTEM_SUSPEND) && is_hardware_domain(d) )
+         return PSCI_NOT_SUPPORTED;
+ 
+     /* Ensure that all CPUs other than the calling one are offline */
+@@ -266,6 +266,9 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+             "SYSTEM_SUSPEND requested, epoint=%#"PRIregister", cid=%#"PRIregister"\n",
+             epoint, cid);
+ 
++    if ( is_control_domain(d) )
++        host_system_suspend(d);
 +
-+struct cpu_context cpu_context = {};
+     return rc;
+ }
+ 
+@@ -290,7 +293,10 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+         return 0;
+     case PSCI_1_0_FN32_SYSTEM_SUSPEND:
+     case PSCI_1_0_FN64_SYSTEM_SUSPEND:
+-        return is_hardware_domain(current->domain) ? PSCI_NOT_SUPPORTED : 0;
++        if ( IS_ENABLED(CONFIG_SYSTEM_SUSPEND) ||
++             !is_hardware_domain(current->domain) )
++            return 0;
++        fallthrough;
+     default:
+         return PSCI_NOT_SUPPORTED;
+     }
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 0a20aa0a12..feb1336f46 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -137,6 +137,9 @@ config HAS_EX_TABLE
+ config HAS_FAST_MULTIPLY
+ 	bool
+ 
++config HAS_HWDOM_SYSTEM_SUSPEND
++	bool
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ config HAS_IOPORTS
+ 	bool
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index bb9e210c28..d3edfb2a13 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1375,6 +1375,11 @@ void __domain_crash(struct domain *d)
+     domain_shutdown(d, SHUTDOWN_crash);
+ }
+ 
++static inline bool want_hwdom_shutdown(uint8_t reason)
++{
++    return !IS_ENABLED(CONFIG_HAS_HWDOM_SYSTEM_SUSPEND) ||
++           reason != SHUTDOWN_suspend;
++}
+ 
+ int domain_shutdown(struct domain *d, u8 reason)
+ {
+@@ -1391,7 +1396,7 @@ int domain_shutdown(struct domain *d, u8 reason)
+         d->shutdown_code = reason;
+     reason = d->shutdown_code;
+ 
+-    if ( is_hardware_domain(d) )
++    if ( is_hardware_domain(d) && want_hwdom_shutdown(reason) )
+         hwdom_shutdown(reason);
+ 
+     if ( d->is_shutting_down )
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 22d306d0cb..45f29ef8ec 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2947,6 +2947,13 @@ static void arm_smmu_iommu_domain_teardown(struct domain *d)
+ 	xfree(xen_domain);
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++static int arm_smmu_suspend(void)
++{
++	return -ENOSYS;
++}
++#endif
++
+ static const struct iommu_ops arm_smmu_iommu_ops = {
+     .page_sizes = PAGE_SIZE_4K,
+     .init = arm_smmu_iommu_domain_init,
+@@ -2960,6 +2967,9 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
+     .map_page = arm_iommu_map_page,
+     .unmap_page = arm_iommu_unmap_page,
+     .dt_xlate = arm_smmu_dt_xlate_generic,
++#ifdef CONFIG_SYSTEM_SUSPEND
++    .suspend = arm_smmu_suspend,
++#endif
+ };
+ 
+ static struct arm_smmu_device *find_smmu(const struct device *dev)
 -- 
 2.43.0
 
