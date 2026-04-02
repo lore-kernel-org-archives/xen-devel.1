@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 380B8CC6B33
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 08:48:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1271323.1559532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418F8CC6B36
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 08:50:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1271334.1559542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8DiW-0000y7-MV; Thu, 02 Apr 2026 08:47:56 +0000
+	id 1w8DkR-0001Us-1b; Thu, 02 Apr 2026 08:49:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1271323.1559532; Thu, 02 Apr 2026 08:47:56 +0000
+Received: by outflank-mailman (output) from mailman id 1271334.1559542; Thu, 02 Apr 2026 08:49:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8DiW-0000y0-JC; Thu, 02 Apr 2026 08:47:56 +0000
-Received: by outflank-mailman (input) for mailman id 1271323;
- Thu, 02 Apr 2026 08:47:55 +0000
+	id 1w8DkQ-0001Ul-U9; Thu, 02 Apr 2026 08:49:54 +0000
+Received: by outflank-mailman (input) for mailman id 1271334;
+ Thu, 02 Apr 2026 08:49:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1w8DiV-0000xu-Hu
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 08:47:55 +0000
+ (envelope-from <jbeulich@suse.com>) id 1w8DkP-0001Ud-5Y
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 08:49:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w8DiU-007MfG-SW
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:54 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1w8DkO-001Ewa-7E
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:49:52 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69ce2d2c-bab6-0a2a0a5309dd-0a2a45058858-34
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 10:47:54 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69ce2daa-e002-0a2a0a5209dd-0a2a45089892-34
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 10:49:52 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <jbeulich@suse.com>)
- id 69ce2d3a-3760-0a2a45050019-d155802ca8c1-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 10:47:54 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso18173545e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 01:47:54 -0700 (PDT)
+ id 69ce2daf-fab6-0a2a45080019-d155dd31d47f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 10:49:52 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-43cfbd17589so510493f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 01:49:52 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887eb5aff3sm248494055e9.15.2026.04.02.01.47.53
+ ffacd0b85a97d-43d1e4e221bsm5930563f8f.29.2026.04.02.01.49.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Apr 2026 01:47:53 -0700 (PDT)
+ Thu, 02 Apr 2026 01:49:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,59 +53,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775119674; x=1775724474; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=+/dIpSUX6m9AHy1yu7JbuA+PtyXNUucVXR5mC8rj3HI=;
-        b=JhfeVGDSgVz3cpPBJV8zYTqfBG6reeVoEghPU84RUHqR4PzswF1bU5ffoG92QB/kGR
-         Brk01gVjJuDJMy5YDSQ9gc0Mb2aagWR96+5aAxtcNk0Uk3sCAf0uNBaUOEFozps4ARLV
-         fdqBeZDnkrSGOdwkXHHcFe1L+ioH76/Mus9W39hVkSxX9CvT0KHD4pCWhHc9wuCSgyyE
-         FJN9KhYWPtIzqeSl1+RG+lE84ItM68i9CCkP50+Q46OKDFJeCk01w2X8Q3VFLRsT7eni
-         NPP+/NDwidtRmYqUjTFvCafoTlQRexB1n0P8QAARSB/rgrqr9CIb/5CWKt3kQXeI6UPZ
-         Dw1A==
+        d=suse.com; s=google; t=1775119791; x=1775724591; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=PJvtI6OmRB2GyErsUGjwbuj7RD4YiReTnFi8H3i0LD0=;
+        b=QLKZ6OXnwtN0iUirZBsRxQ7m/fbgB96l8z0b/VpBpux4Cxealn4qjy1qwhMq0JJhzH
+         thTtURpYE92i3RHdhGCxTDGZ9/OAmPrd3pVrVQYhGK+wNbMZBWX+6wNWjNUI1ESKzfiN
+         WD13KVA6VlrI+aifwBj0vxexV5IFoievod/eNL0SHccGV8jIeUR/k/uVKtTu5mb+3l3g
+         ef0SgwXm3tjvdYxH5t4lvnf9P9/Z6NhH8gceBdGKmMBhmtyTuewxckk48QmYqavukBTw
+         Xcpwa8naWyuUVBeUFCZQZDVbr11LwvMY7wuyU+nawDTlZfmOWCXP79ELx45OoSIT0/Gg
+         O13Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775119674; x=1775724474;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1775119791; x=1775724591;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+/dIpSUX6m9AHy1yu7JbuA+PtyXNUucVXR5mC8rj3HI=;
-        b=TQoaUG+M+JPZ4xSXb7Ic15HeTD8V9BYoNOw/wQ5PKr98K3jUrKl7P5fdFXxRWlpdci
-         2Iw1TUduUwVVoxGXzeDBKcwm67PrUoeCSF6GsNDiztgOxKJ2ROfbLAKi/mfPV71kJWt0
-         pIGsxgfoktjibUclA7aP7+JNnK4mzWv611DuwrOjkRfSSKU2MPByOfWdbxUlCv6So37z
-         kXwhD3XqT3brfzL7fnbiu+pFeV7L9o4MRBMz1YGOrfH5K71QaV+wHSK0dqMSnB9TxvzT
-         hUatLyPvZ+lEr1XqUxuE82Zq+d7q5arFETUOlcr1dtRTqJAtxucYZqvkxsqE5Q1wOwyQ
-         Obow==
-X-Gm-Message-State: AOJu0YzL3s6o1v6UhLwEYrN3BJ38TLnLj++laSxfPyBXzsASsLAgIdvR
-	ZqW+YQRY0UbIioIwA1Lrvil0/GjLVsf5KL3D4nP8AJs8lAKRF4B+h7JZXorQXYSnsg==
-X-Gm-Gg: ATEYQzwEL7/q4yrzgVFQTjxYROHdX+fCPpEiIqQb9IwadrjPnswMnisbQ9bbOP1x1Yn
-	nm4+FCmbqAbm096JnPByO1njL6mdQQKL5lXZMKxC4d/4d6S65vQNbHut9YdgzFlhvs9yVzFy/qb
-	RwwzKxcqAz9oSauWo6XLpXaREp4FH4l8EfOFaU+hGrHZ+HrPb0k57FMkOVilFsmRbruVfGev+Cw
-	CLWI7f+88aEvxf93s+3U00xYDcqHIcZNGRYtmoAzUtkqh/+3XyTzPX7xaOXVOWVA2NDQH++QTIO
-	rzzdfi83KjALrsfPn6Lq6i9wJ4HXbJlJFdu5PlRx43T93KJZQw1+n/eMVZjhGL9ipNOyqCwt/20
-	INZ63V19eQ5QPD+ZKJ4vU9ODpKnG7WtTCot87uGh/Vu0Z4yDjFt7YqkT8LgDvC6SSjKQ9WBER3F
-	13cCXEeuAkVxV2LXb/d1EzxIOEXjkg29/Ma00dQWuPnryPTduZ9CJkRodt+WOOKcR6MsPg7/fHn
-	UTrWYPkY6gaqcw=
-X-Received: by 2002:a05:600c:3b0a:b0:486:f893:56c6 with SMTP id 5b1f17b1804b1-4888e09ba82mr21701295e9.10.1775119674150;
-        Thu, 02 Apr 2026 01:47:54 -0700 (PDT)
-Message-ID: <97bfb299-a465-48a3-a036-f217de683c2c@suse.com>
-Date: Thu, 2 Apr 2026 10:47:53 +0200
+        bh=PJvtI6OmRB2GyErsUGjwbuj7RD4YiReTnFi8H3i0LD0=;
+        b=Xs86FW1XhxsuixQXO8tpd002T0jx6GN+a7bv4nVbdk0bF5vAAXQvP6ECh8uGWKu8u7
+         3ldEFbhjOT1H2R+LzYn9islGMQ9YjLSPXZfxUS56Ra2tleGQKm5089LYYUVDc+FkpYcB
+         I3IbPKWtAdq+gpOteAZKBpvZDYFavoLEtrc77sdJ/tTGZqqCzLUPvAug/EEte029Mp1g
+         gW0RpPZm3xVG9yUnvT/RDRrgZFjXEotCPvmgRhoREqidz8jcKMFAA+g0GYnLyQ71VJVy
+         Z1f0NAjngv5HwgHCMZy5oJRHz8f8I1+VqUvfXBCDWTtiQqnluvc+FsMZMhTV9Y6IWXzH
+         +nkg==
+X-Forwarded-Encrypted: i=1; AJvYcCXF9QCnTTMg2tcCSl1OLunR9ULXFCS0Jeu0UvXkvq54gKJ2Ev73KLg5nSTw+KO7YoJhbNQZ4uXohks=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzNnDNkCruwBDPs9Vy1CWDYV8EL9vqShfvdnT7MrdOzfXwW28S/
+	5HAAS44sKyj4YIVXzL4ymnf9OXvd/aB1McnKInje7Gvx3FeK/RnOW+Z/U74Q7hdzbw==
+X-Gm-Gg: ATEYQzwWKu77kMpcj/IvZMcjFy2rS/If4QuygWADKCYkyvRNtE7Z2OjSksh2eXg8+r1
+	H1xtnpBlprtKolQjpt3A/7WSJoaeBAw0TgcJLfcBd+XVrW1zQvybPlS/PQ5q5oBaZsKk+DWYPuu
+	5MxWN8Ie1sLT89DlqzNDutCZrOlFnlchJ8EMiwl3CR+h+8fLU75ty5Fy6BC38VOKhwQ2hXUYehV
+	tc7eyL8PkypwS2rg5WDkPB0oyuS0p9BGK7s1Ia0tH0f20hhMlRUzUgESDxEaXzmlXg6l96XUvzR
+	tUrnbNr2xtvi0JC0itODmn91L1IJJOKD1g8q7yi5r/kgWkphzPgsXRisI0kC001m76bVLyRSZ1A
+	7GduDT1q8Zsul29uv4YbN1wlmfiqrPvOH8Xm7WP49XVwKsojyAehcgslzlZ8YWg4hvqJPz/RY4a
+	Uq4kgwSPrID/KAT54hraTf9e+ySozK+d7oXiPVwZCZiO5tO2/1lw7jPN8DE+g/SErzKPIoCA1+V
+	UlrGiRYtThDke8=
+X-Received: by 2002:a05:6000:230c:b0:43b:4273:a6ce with SMTP id ffacd0b85a97d-43d1504d2b4mr12438444f8f.3.1775119791495;
+        Thu, 02 Apr 2026 01:49:51 -0700 (PDT)
+Message-ID: <b0f721a9-42ba-4e71-8250-83fcfcec2313@suse.com>
+Date: Thu, 2 Apr 2026 10:49:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: IOMMU faults after S3
-From: Jan Beulich <jbeulich@suse.com>
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-References: <acZZmGXIJlmN3KGm@mail-itl>
- <e8bbaae2-5cff-4549-9f27-fbbda7346f60@suse.com>
- <090b8b8f-141b-4a24-92eb-879c0a0c73e1@suse.com> <ac2nibFfvGm_7elv@mail-itl>
- <933a3e95-33d2-4e20-a4d5-2d8b20c2da7f@suse.com> <ac4kCq87SQSc6ddV@mail-itl>
- <aa6910f1-365a-4534-b229-9730b3aede02@suse.com>
+Subject: Re: [PATCH v1 0/3] Lockless SMP function call and TLB flushing
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260401163521.3603665-1-ross.lagerwall@citrix.com>
+ <94b2e444-844a-4d34-9c9f-de0b9e6e23b1@suse.com>
+ <17c4e7b4-297a-4bf9-9160-659723d15e48@citrix.com>
 Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -129,29 +131,67 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aa6910f1-365a-4534-b229-9730b3aede02@suse.com>
+In-Reply-To: <17c4e7b4-297a-4bf9-9160-659723d15e48@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1775119674-3153B96F-47482C8D/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1775119792-94962497-DF860817/0/0
 X-purgate-type: clean
-X-purgate-size: 925
+X-purgate-size: 2881
 
-On 02.04.2026 10:39, Jan Beulich wrote:
-> On 02.04.2026 10:08, Marek Marczykowski-Górecki wrote:
->> The xl dmesg output (from MTL this time):
+On 02.04.2026 10:40, Ross Lagerwall wrote:
+> On 4/2/26 7:09 AM, Jan Beulich wrote:
+>> On 01.04.2026 18:35, Ross Lagerwall wrote:
+>>> We have observed that the TLB flush lock can be a point of contention for
+>>> certain workloads, e.g. migrating 10 VMs off a host during a host evacuation.
+>>>
+>>> Performance numbers:
+>>>
+>>> I wrote a synthetic benchmark to measure the performance. The benchmark has one
+>>> or more CPUs in Xen calling on_selected_cpus() with between 1 and 64 CPUs in
+>>> the selected mask. The executed function simply delays for 500 microseconds.
+>>>
+>>> The table below shows the % change in execution time of on_selected_cpus():
+>>>
+>>>                    1 thread   2 threads    4 threads
+>>> 1 CPU in mask     0.02       -35.23       -51.18
+>>> 2 CPUs in mask    0.01       -47.20       -69.27
+>>> 4 CPUs in mask    -0.02      -42.40       -66.55
+>>> 8 CPUs in mask    -0.03      -47.82       -68.39
+>>> 16 CPUs in mask   0.12       -41.95       -58.26
+>>> 32 CPUs in mask   0.02       -25.43       -39.35
+>>> 64 CPUs in mask   0.00       -24.70       -37.83
+>>>
+>>> With 1 thread (i.e. no contention), there is no regression in execution time.
+>>> With multiple threads, as expected there is a significant improvement in
+>>> execution time.
+>>>
+>>> As a more practical benchmark to simulate host evacuation, I measured the
+>>> memory dirtying rate across 10 VMs after enabling log dirty (on an AMD system,
+>>> so without PML). The rate increased by 16% with this patch series, even
+>>> after the recent deferred TLB flush changes.
 >>
->>     (XEN) [  123.477511] Entering ACPI S3 state.
->>     (XEN) [18446743903.571842] _disable_pit_irq:2649: using_pit: 0, cpu_has_apic: 1
->>     (XEN) [18446743903.571856] _disable_pit_irq:2659: cpuidle_using_deep_cstate: 1, boot_cpu_has(X86_FEATURE_XEN_ARAT): 0
+>> Is this a positive thing though? In the context of some related work something
+>> similar was mentioned iirc, accompanied by stating that this is actually
+>> problematic. A guest in log-dirty mode generally wants to be making progress,
+>> but also wants to be throttled enough to limit re-dirtying, such that
+>> subsequent iterations (in particular the final one) of page contents
+>> migration won't have to process overly many pages a 2nd time.
 > 
-> XEN_ARAT being off is the one odd aspect here. That'll want tracking down
-> separately. As per xen-cpuid output (below) ARAT is available.
+> In the context of a real migration, both the process copying the pages
+> out of the guest and the guest itself will be hitting the TLB flush lock
+> so reducing that bottleneck may increase throughput on both sides.
+> Whether or not the overall migration time increases or decreases depends
+> on many factors (number of migrations in parallel, the rate the guest is
+> dirtying memory, the line speed of the NIC, whether PML is used, ...)
+> which is why I measured a more controlled scenario to demonstrate the
+> change.
+> 
+> IMO throttling of a guest during a migration should be something
+> intentional and controlled by userspace policy rather than a side effect
+> of some internal global locks.
 
-For this you may want to also add logging to intel_init_arat(): Since opt_arat
-can be false only due to command line option use, it can only be the function
-not being called (which looks impossible on plain staging code), or cpu_has_arat
-being false despite the xen-cpuid output that you supplied earlier (inexplicable
-as well, at least for now).
+I definitely agree here, but side effects going away may make it necessary to
+add such explicit throttling.
 
 Jan
 
