@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97377D39411
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD566D39414
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1271520.1559634 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1271525.1559674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaD-00045P-Di; Thu, 02 Apr 2026 10:47:29 +0000
+	id 1w8FaH-00055g-PN; Thu, 02 Apr 2026 10:47:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1271520.1559634; Thu, 02 Apr 2026 10:47:29 +0000
+Received: by outflank-mailman (output) from mailman id 1271525.1559674; Thu, 02 Apr 2026 10:47:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaD-00044A-Ah; Thu, 02 Apr 2026 10:47:29 +0000
-Received: by outflank-mailman (input) for mailman id 1271520;
- Thu, 02 Apr 2026 10:47:28 +0000
+	id 1w8FaH-00054u-KI; Thu, 02 Apr 2026 10:47:33 +0000
+Received: by outflank-mailman (input) for mailman id 1271525;
+ Thu, 02 Apr 2026 10:47:32 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w8FaC-0003yr-3q
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:28 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w8FaG-0004dR-6T
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w8FaB-009q68-FZ
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:27 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1w8FaF-009qA7-JE
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:31 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce493f-e002-0a2a0a5209dd-0a2a450a8a2e-0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:27 +0200
-Received: from [209.85.218.46] (helo=mail-ej1-f46.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69ce4932-e002-0a2a0a5209dd-0a2a450cd128-32
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:31 +0200
+Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce493f-ee98-0a2a450a0019-d155da2edc71-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:27 +0200
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-b9c280322e0so86796966b.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:27 -0700 (PDT)
+ id 69ce4943-f40c-0a2a450c0019-d155da29cd5e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:31 +0200
+Received: by mail-ej1-f41.google.com with SMTP id
+ a640c23a62f3a-b9910707d82so95092866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:31 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.25
+ a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 03:47:25 -0700 (PDT)
+ Thu, 02 Apr 2026 03:47:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775126846; x=1775731646; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775126850; x=1775731650; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Q0cUh9DunvbioAZLIRhQfJTs0EihHFj+/wkrJJoLmJs=;
-        b=DgsaPB8gZzUseSYFpEQGPQeE1chIRot2lr90k5iTVS6HNsRvjL3FdDv9QcOPCABT/P
-         A1uq2WUW68cKqRyyEpnDc/+DjEbG4e+8Ckbkvt60Xup+8z3aJXEx7pIhTO/PulvORb0M
-         9bEHd0M4vf8yhjWS/WAfyuhw8JOuZhfSSQfWxX+O8iYaJ63cucfQCkGwnaCorqVfJnro
-         XKEz2jTeXX6KIgAYP8n/agVJpnNx8vREO4etwfGlzvoioHL5GeQ7LAeMqERcZ32dPl2M
-         uiVN5oiWafmVmjIVEsmSZiJhZATbMvVdWF3+M8mT7eKayh9En1uGB2fN6AX/IyotDxQW
-         0MSQ==
+        bh=qk9ILGeqhLaxN17ATAwS/XwCMf4ZnQc5O/7gi3JtyMs=;
+        b=W2Opd3NOXDhqwaHjQ8eyEy6U8TOtgVfW0ynPPf7Fd9T/NOFIQ0to/UC5HxhgoxJyI3
+         lgzK7pP/tpks1HUR6xY9FN1X56jp6+ETN3wYpcYMjmJcrE38QhXcIKUOt8D8BlLtTYrm
+         IdlqM1fJHt3YE+y/EmXU8biawm+fQMT+8Rxz0TrigSbwjXwwpb7q3/m0NYk8935fndcG
+         x53BXqZy3srjMaU633N+S6int/NTI09Dqf+dTxlSq7gFDfIHVdCOGweFCJ4UOoKpPCTf
+         VZWWtY7G6j+yVi6qpbqc1aM8gtCKFu7/KLos/96hARe0ZqWVNZJIjIOZ79Bm9Kq3HSFF
+         gjHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775126846; x=1775731646;
+        d=1e100.net; s=20251104; t=1775126850; x=1775731650;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Q0cUh9DunvbioAZLIRhQfJTs0EihHFj+/wkrJJoLmJs=;
-        b=gZytgkB6vKqyY+dzHO/Y3UaM+13tJKlw+dFJNCQWe4CbX+lN/K3foXvpeQ1v0NimgN
-         lDJLqERFzNfYbYX1xuADkMxedSkSoUA7UPPwuX1DGXe6V66HgXcFYRW9mEAnJl+Uvaaj
-         PPE/OJlEmmHDhyhxcJccJQP9EoBRJp68++qQNoOe4ukupiH/xj4i/L2jxANYSmKeYusA
-         lCgqxqfZDv/06LKUjvuX3swEwaGydpc0/JCt3oklcU24MnPUy541RFtsv0garZQfqaIb
-         ihujNOBI4UYDa4GQF13vsd/G1WD2fcCBn8yyr64zldZTxX/pt7f8CSp61j+dHP7rcWav
-         /Jhw==
-X-Gm-Message-State: AOJu0YzSR2/+zYY8IW1ws+/2d3y6DFr9rR8PE/UJX+h7fjoOpPtDg5Ed
-	4iLjluHt81Mwyq+cwZq5jsWhoEzgHS/iZEqWNzP+W6eHjKchjm9t7P19EdhUZkwJ
-X-Gm-Gg: ATEYQzycnmdYyIMhm/MJPwYLF7L3O+oWUJka+LdoaEBitdbYA/okopmmhNwrx5lgvRS
-	h9ZJ5iOE1dUSnTPBAd2IftxPwQfdbv+pPYlBXl5xFFMa6ov9FaqLK+I3WSyNQYSDSiW2bGRKWm2
-	k1VbNk04LOngCGVLpGG9DyXsU/kp+P9w7wxFZbbb6K7e85F1YcTZ/zhe74v5c4rgxzJsY6KXVxX
-	l9095o1BJELbpFn7mhDC93VWriz3fQ9YY5wZ/s1WKcqMI4NNT9+oV1Nu7jorJltelUl0To31mTv
-	35VK/XDlqbANtbZrFFyLXP9aPpXObSfY+r0ivWzeWzebKZYL1UYRpRX9eVd8eL2ldawfO3y0b8d
-	crrn4WGwjHF9VP3d8uyOZlNleA61UH4Ix+ESMSKd30VA1lj+gcS+ufhAEGc6ucwQwxXrWqhEg3X
-	T34dyHGRmq96oUkzG0CDdUvPc/K+2wrEOt2hJj
-X-Received: by 2002:a17:907:724d:b0:b97:98b3:67ce with SMTP id a640c23a62f3a-b9c13b3ccc9mr480119866b.32.1775126845902;
-        Thu, 02 Apr 2026 03:47:25 -0700 (PDT)
+        bh=qk9ILGeqhLaxN17ATAwS/XwCMf4ZnQc5O/7gi3JtyMs=;
+        b=UTu3MV1++V0XV6ubyzlS37DUYWZQEC7Hb3iONDj7F5LxaJkqnjXG0k2nBvcFyq/b75
+         yvKLHLfo7ZF+iVa98/dubLF+gZu23ICxRc53vAPaJHHHI1L+l9aYcfpdsT1IB6GfwCqb
+         nWUpwgRqKvC3svXWEU34GqpFf19NaAY33blRRLhfY3vo6TrxQPcd4VzTw7veryglP7gf
+         nZkZidzT3v8Rw8lI+1Q1+pI7CxLk//NpnLUAjfqp1MEtDE+jkcy4KZ66udj2kTdtqZcG
+         YQGvieGENvp2DVJYSFYIoRHvWPLW1Qb4/EmZME0z2DlZlOsuJqcEQjHdSU/d3pGgGkzd
+         J9aA==
+X-Gm-Message-State: AOJu0Ywicsxvk28ncZC9mwKYtqpHqA1BruQUwhxuOcAwPmW2btH+OcUT
+	4R+BQhjgP+CG/IvyHNGOAkWn2ne51pqgNX6VJRnOy+Ip4MYMAknCLTQ7PqCoGHET
+X-Gm-Gg: ATEYQzxAOeTpy4iksfHwyIe24RYxH0ZLuVgZslhLrVNIVaegd+4BDpqFZiHqZrJSMur
+	ziNXD91CgA0HKYO7K8n8GvM3cEEIe4+Czv9aPzIZLgeIGM7iD6g5Aut4qa+rwvTp2R/AvaThuWJ
+	J6dj1bhCEJZIcPTwcSgYAylzN2jSSzfJRf6JREyoo1oGsDgibPdNBtUHM4EyY6BSkIfg253acef
+	Pyuc3mksGqmWexInwnrQ6VnB3IW7WmzF0FgoBqL7w4hzKocDA2OXPmFq4b5waaHE9hKEEOaDIOe
+	bNl4x8Xs5G/JY4JBrafI1JW7j2eKTB93OoK88a6e4an0HP8ci4CT41rYbN5DgM4uVfL3mS6t7MU
+	Pd+4H5hCboc8zZwjFpunCaQHs4AdlU7cAikkWw9UyF5H6W5letnvXOOfFCI0DsiPGlpBvn9oBMr
+	4+65b2aYxZHXxjEJPges2H07x22w==
+X-Received: by 2002:a17:907:1c85:b0:b93:7d70:20a0 with SMTP id a640c23a62f3a-b9c137a08acmr482815566b.4.1775126850107;
+        Thu, 02 Apr 2026 03:47:30 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -96,145 +96,334 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v8 01/13] xen/arm: Add suspend and resume timer helpers
-Date: Thu,  2 Apr 2026 13:45:02 +0300
-Message-ID: <9b5e454f55d20d3e81771da53ae06fb511bd198e.1775125380.git.mykola_kvach@epam.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v8 05/13] xen/arm: gic-v3: add ITS suspend/resume support
+Date: Thu,  2 Apr 2026 13:45:06 +0300
+Message-ID: <5a42b7c32fadf21262b8342f27e685916d0e5812.1775125380.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775125380.git.mykola_kvach@epam.com>
 References: <cover.1775125380.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1775126847-0F3490B1-23AF1613/0/0
+X-purgate-ID: tlsNG-d25034/1775126851-FE74EA3D-D1CDCDD3/0/0
 X-purgate-type: clean
-X-purgate-size: 5007
+X-purgate-size: 9675
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Timer interrupts must be disabled while the system is suspended to prevent
-spurious wake-ups. Suspending timers in Xen consists of disabling the
-physical timer and the hypervisor timer on the current CPU. The virtual
-timer does not need explicit handling here, as it is already disabled on
-vCPU context switch and its state is restored per-vCPU on the next context
-restore.
+Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
+working after firmware powers the GIC down. Snapshot the CPU interface,
+distributor and last-CPU redistributor state, disable the ITS to cache its
+CTLR/CBASER/BASER registers, then restore everything and re-arm the
+collection on resume.
 
-Resuming consists of raising TIMER_SOFTIRQ, which prompts the generic
-timer code to reprogram the hypervisor timer with the correct timeout.
+Add list_for_each_entry_continue_reverse() in list.h for the ITS suspend
+error path that needs to roll back partially saved state.
 
-Xen does not use or expose the physical timer, so it remains disabled
-across suspend/resume.
-
-Introduce a new helper, disable_phys_hyp_timers(), to encapsulate disabling
-of the physical and hypervisor timers.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+Based on Linux commit dba0bc7b76dc ("irqchip/gic-v3-its: Add ability to save/restore ITS state")
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-Changes in V7:
-  - Dropped EL1/EL2 wording; use "physical timer" and "hypervisor timer"
-  - Renamed helper to disable_phys_hyp_timers() to reflect its actual scope
-  - Clarified virtual timer handling (disabled on vCPU switch-out, restored on
-    context restore) and added comments in suspend/resume paths
-  - Added resume comment explaining which timers are restored by TIMER_SOFTIRQ
+Changes in V8:
+- Reword the CBASER/CWRITER comment to match Xen and drop the stale Linux
+  cmd_write reference.
+- Clarify the list_for_each_entry_continue_reverse() comment.
+- Factor out per-ITS helpers for collection setup and resume.
+- Restore each ITS and re-establish its collection mapping in the same
+  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
+  un-restored instance.
+- panic in case when resume of an ITS failed
+- cleanup baser cache during suspend
 ---
- xen/arch/arm/include/asm/time.h |  5 ++++
- xen/arch/arm/time.c             | 44 ++++++++++++++++++++++++++++-----
- 2 files changed, 43 insertions(+), 6 deletions(-)
+ xen/arch/arm/gic-v3-its.c             | 126 ++++++++++++++++++++++++--
+ xen/arch/arm/gic-v3.c                 |  15 ++-
+ xen/arch/arm/include/asm/gic_v3_its.h |  23 +++++
+ xen/include/xen/list.h                |  14 +++
+ 4 files changed, 166 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
-index c194dbb9f5..9313b157ea 100644
---- a/xen/arch/arm/include/asm/time.h
-+++ b/xen/arch/arm/include/asm/time.h
-@@ -105,6 +105,11 @@ void preinit_xen_time(void);
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 9ba068c46f..fe2865eac9 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
+     return its_send_command(its, cmd);
+ }
  
- void force_update_vcpu_system_time(struct vcpu *v);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+void time_suspend(void);
-+void time_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- #endif /* __ARM_TIME_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index a12912a106..f91dc64099 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -296,6 +296,14 @@ static void check_timer_irq_cfg(unsigned int irq, const char *which)
- static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_hyp);
- static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_virt);
- 
-+/* Disable physical and hypervisor timers on the current CPU */
-+static inline void disable_phys_hyp_timers(void)
++static int gicv3_its_setup_collection_single(struct host_its *its,
++                                             unsigned int cpu)
 +{
-+    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
-+    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
-+    isb();
++    int ret;
++
++    ret = its_send_cmd_mapc(its, cpu, cpu);
++    if ( ret )
++        return ret;
++
++    ret = its_send_cmd_sync(its, cpu);
++    if ( ret )
++        return ret;
++
++    return gicv3_its_wait_commands(its);
 +}
 +
- /* Set up the timer interrupt on this CPU */
- void init_timer_interrupt(void)
+ /* Set up the (1:1) collection mapping for the given host CPU. */
+ int gicv3_its_setup_collection(unsigned int cpu)
  {
-@@ -306,9 +314,7 @@ void init_timer_interrupt(void)
-     WRITE_SYSREG64(0, CNTVOFF_EL2);     /* No VM-specific offset */
-     /* Do not let the VMs program the physical timer, only read the physical counter */
-     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
--    isb();
-+    disable_phys_hyp_timers();
+@@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
  
-     hyp_action->name = "hyptimer";
-     hyp_action->handler = htimer_interrupt;
-@@ -333,9 +339,7 @@ void init_timer_interrupt(void)
-  */
- static void deinit_timer_interrupt(void)
- {
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Disable physical timer */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Disable hypervisor's timer */
--    isb();
-+    disable_phys_hyp_timers();
- 
-     release_irq(timer_irq[TIMER_HYP_PPI], NULL);
-     release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
-@@ -375,6 +379,34 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
-     /* XXX update guest visible wallclock time */
+     list_for_each_entry(its, &host_its_list, entry)
+     {
+-        ret = its_send_cmd_mapc(its, cpu, cpu);
+-        if ( ret )
+-            return ret;
+-
+-        ret = its_send_cmd_sync(its, cpu);
+-        if ( ret )
+-            return ret;
+-
+-        ret = gicv3_its_wait_commands(its);
++        ret = gicv3_its_setup_collection_single(its, cpu);
+         if ( ret )
+             return ret;
+     }
+@@ -1209,6 +1217,106 @@ int gicv3_its_init(void)
+     return 0;
  }
  
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+void time_suspend(void)
++int gicv3_its_suspend(void)
 +{
-+    /* CNTV already disabled by virt_timer_save() during vcpu context switch. */
-+    disable_phys_hyp_timers();
++    struct host_its *its;
++    int ret;
++
++    list_for_each_entry(its, &host_its_list, entry)
++    {
++        unsigned int i;
++        void __iomem *base = its->its_base;
++
++        its->suspend_ctx.ctlr = readl_relaxed(base + GITS_CTLR);
++        ret = gicv3_disable_its(its);
++        if ( ret )
++        {
++            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++            goto err;
++        }
++
++        its->suspend_ctx.cbaser = readq_relaxed(base + GITS_CBASER);
++
++        for (i = 0; i < GITS_BASER_NR_REGS; i++)
++        {
++            uint64_t baser = readq_relaxed(base + GITS_BASER0 + i * 8);
++
++            its->suspend_ctx.baser[i] = 0;
++
++            if ( !(baser & GITS_VALID_BIT) )
++                continue;
++
++            its->suspend_ctx.baser[i] = baser;
++        }
++    }
++
++    return 0;
++
++ err:
++    list_for_each_entry_continue_reverse(its, &host_its_list, entry)
++        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTLR);
++
++    return ret;
 +}
 +
-+void time_resume(void)
++static int gicv3_its_resume_single(struct host_its *its, unsigned int cpu)
 +{
++    void __iomem *base = its->its_base;
++    unsigned int i;
++    int ret;
++
 +    /*
-+     * Raising TIMER_SOFTIRQ triggers generic timer code to reprogram the
-+     * hypervisor timer with the correct timeout (not known here).
-+     *
-+     * Xen doesn't use or expose the physical timer, so it remains disabled
-+     * across suspend/resume.
-+     *
-+     * The virtual timer state is restored per-vCPU on the next context switch.
-+     *
-+     * No further action is needed to restore timekeeping after power down,
-+     * since the system counter is unaffected. See ARM DDI 0487 L.a, D12.1.2
-+     * "The system counter must be implemented in an always-on power domain."
++     * Make sure that the ITS is disabled. If it fails to quiesce,
++     * don't restore it since writing to CBASER or BASER<n>
++     * registers is undefined according to the GIC v3 ITS
++     * Specification.
 +     */
-+    raise_softirq(TIMER_SOFTIRQ);
++    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
++    ret = gicv3_disable_its(its);
++    if ( ret )
++        return ret;
++
++    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
++
++    /*
++     * Writing CBASER resets CREADR to 0, so reset CWRITER to
++     * keep the command queue pointers aligned.
++     */
++    writeq_relaxed(0, base + GITS_CWRITER);
++
++    /* Restore GITS_BASER from the value cache. */
++    for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
++    {
++        uint64_t baser = its->suspend_ctx.baser[i];
++
++        if ( !(baser & GITS_VALID_BIT) )
++            continue;
++
++        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
++    }
++
++    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++
++    return gicv3_its_setup_collection_single(its, cpu);
++}
++
++void gicv3_its_resume(void)
++{
++    struct host_its *its;
++    unsigned int cpu = smp_processor_id();
++    int ret;
++
++    list_for_each_entry(its, &host_its_list, entry)
++    {
++        ret = gicv3_its_resume_single(its, cpu);
++        if ( ret )
++            panic("GICv3: ITS@%"PRIpaddr": failed to restore during resume: %d\n",
++                   its->addr, ret);
++    }
 +}
 +
 +#endif /* CONFIG_SYSTEM_SUSPEND */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index d182a71478..ef8318dd50 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -862,7 +862,7 @@ static bool gicv3_enable_lpis(void)
+     return true;
+ }
+ 
+-static int __init gicv3_populate_rdist(void)
++static int gicv3_populate_rdist(void)
+ {
+     int i;
+     uint32_t aff;
+@@ -932,7 +932,7 @@ static int __init gicv3_populate_rdist(void)
+                     ret = gicv3_lpi_init_rdist(ptr);
+                     if ( ret && ret != -ENODEV && ret != -EBUSY )
+                     {
+-                        printk("GICv3: CPU%d: Cannot initialize LPIs: %u\n",
++                        printk("GICv3: CPU%d: Cannot initialize LPIs: %d\n",
+                                smp_processor_id(), ret);
+                         break;
+                     }
+@@ -2101,10 +2101,14 @@ static int gicv3_suspend(void)
+ 
+     gicv3_disable_interface();
+ 
+-    ret = gicv3_disable_redist();
++    ret = gicv3_its_suspend();
+     if ( ret )
+         goto out_enable_iface;
+ 
++    ret = gicv3_disable_redist();
++    if ( ret )
++        goto out_its_resume;
 +
- static int cpu_time_callback(struct notifier_block *nfb,
-                              unsigned long action,
-                              void *hcpu)
+     /* Save GICR configuration */
+     gicv3_redist_wait_for_rwp();
+ 
+@@ -2140,6 +2144,9 @@ static int gicv3_suspend(void)
+ 
+     return 0;
+ 
++ out_its_resume:
++    gicv3_its_resume();
++
+  out_enable_iface:
+     gicv3_hyp_enable(true);
+     WRITE_SYSREG(gicv3_ctx.cpu.ctlr, ICC_CTLR_EL1);
+@@ -2212,6 +2219,8 @@ static void gicv3_resume(void)
+ 
+     gicv3_redist_wait_for_rwp();
+ 
++    gicv3_its_resume();
++
+     WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
+     isb();
+ 
+diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
+index 081bd19180..3ca74435c8 100644
+--- a/xen/arch/arm/include/asm/gic_v3_its.h
++++ b/xen/arch/arm/include/asm/gic_v3_its.h
+@@ -129,6 +129,13 @@ struct host_its {
+     spinlock_t cmd_lock;
+     void *cmd_buf;
+     unsigned int flags;
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct suspend_ctx {
++        uint32_t ctlr;
++        uint64_t cbaser;
++        uint64_t baser[GITS_BASER_NR_REGS];
++    } suspend_ctx;
++#endif
+ };
+ 
+ /* Map a collection for this host CPU to each host ITS. */
+@@ -205,6 +212,11 @@ uint64_t gicv3_its_get_cacheability(void);
+ uint64_t gicv3_its_get_shareability(void);
+ unsigned int gicv3_its_get_memflags(void);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++int gicv3_its_suspend(void);
++void gicv3_its_resume(void);
++#endif
++
+ #else
+ 
+ #ifdef CONFIG_ACPI
+@@ -272,6 +284,17 @@ static inline int gicv3_its_make_hwdom_dt_nodes(const struct domain *d,
+     return 0;
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++static inline int gicv3_its_suspend(void)
++{
++    return 0;
++}
++
++static inline void gicv3_its_resume(void)
++{
++}
++#endif
++
+ #endif /* CONFIG_HAS_ITS */
+ 
+ #endif
+diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
+index 98d8482dab..2aab274157 100644
+--- a/xen/include/xen/list.h
++++ b/xen/include/xen/list.h
+@@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_head *list,
+          &(pos)->member != (head);                                        \
+          (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
+ 
++/**
++ * list_for_each_entry_continue_reverse - iterate backwards from the given point
++ * @pos:    the type * to use as a loop cursor.
++ * @head:   the head for your list.
++ * @member: the name of the list_head within the struct.
++ *
++ * Iterate over list of given type backwards, starting from the element previous
++ * to the current one in list order.
++ */
++#define list_for_each_entry_continue_reverse(pos, head, member)           \
++    for ((pos) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
++         &(pos)->member != (head);                                        \
++         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
++
+ /**
+  * list_for_each_entry_from - iterate over list of given type from the
+  *                            current point
 -- 
 2.43.0
 
