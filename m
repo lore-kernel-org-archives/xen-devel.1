@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD566D39414
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1271525.1559674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21293D39410
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1271537.1559723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaH-00055g-PN; Thu, 02 Apr 2026 10:47:33 +0000
+	id 1w8FaP-0006U2-Gm; Thu, 02 Apr 2026 10:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1271525.1559674; Thu, 02 Apr 2026 10:47:33 +0000
+Received: by outflank-mailman (output) from mailman id 1271537.1559723; Thu, 02 Apr 2026 10:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaH-00054u-KI; Thu, 02 Apr 2026 10:47:33 +0000
-Received: by outflank-mailman (input) for mailman id 1271525;
- Thu, 02 Apr 2026 10:47:32 +0000
+	id 1w8FaO-0006RL-IG; Thu, 02 Apr 2026 10:47:40 +0000
+Received: by outflank-mailman (input) for mailman id 1271537;
+ Thu, 02 Apr 2026 10:47:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w8FaG-0004dR-6T
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:32 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w8FaM-00067Z-PE
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w8FaF-009qA7-JE
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:31 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1w8FaM-00Ej0u-4t
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:38 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce4932-e002-0a2a0a5209dd-0a2a450cd128-32
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:31 +0200
-Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69ce4947-2eae-0a2a0a5409dd-0a2a4505b638-12
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:38 +0200
+Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce4943-f40c-0a2a450c0019-d155da29cd5e-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:31 +0200
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-b9910707d82so95092866b.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:31 -0700 (PDT)
+ id 69ce494a-3760-0a2a45050019-d155da2da5b5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:38 +0200
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-b9a0762ed5fso112580866b.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:38 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.28
+ a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 03:47:29 -0700 (PDT)
+ Thu, 02 Apr 2026 03:47:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775126850; x=1775731650; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775126857; x=1775731657; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qk9ILGeqhLaxN17ATAwS/XwCMf4ZnQc5O/7gi3JtyMs=;
-        b=W2Opd3NOXDhqwaHjQ8eyEy6U8TOtgVfW0ynPPf7Fd9T/NOFIQ0to/UC5HxhgoxJyI3
-         lgzK7pP/tpks1HUR6xY9FN1X56jp6+ETN3wYpcYMjmJcrE38QhXcIKUOt8D8BlLtTYrm
-         IdlqM1fJHt3YE+y/EmXU8biawm+fQMT+8Rxz0TrigSbwjXwwpb7q3/m0NYk8935fndcG
-         x53BXqZy3srjMaU633N+S6int/NTI09Dqf+dTxlSq7gFDfIHVdCOGweFCJ4UOoKpPCTf
-         VZWWtY7G6j+yVi6qpbqc1aM8gtCKFu7/KLos/96hARe0ZqWVNZJIjIOZ79Bm9Kq3HSFF
-         gjHg==
+        bh=zPqg0vXhWWH1w1hlbbZTkVgax5cKCfDJE6WmuksoUYo=;
+        b=XzNNXBZ0XzWFnGtiBZ1yT3Mphevk23hj5Lzrx0nbE/kKI0Kd6lkbAs4bNnRgse3cOl
+         BVX2smmpF5UqejCDojw+b3v3bpeLIeaY5poKd2LGN+m6EEg4Z6pa0q8RBmRePnMFvEjk
+         xPqnhAhSeDJ5+FqKn3Cz6MOVJjOvuF5m5BTqNK0hJ/XJXgAcN0SQT5Y3odwjhO/h/HcM
+         fiu6IeEWNTh4N2hh7AdxvXtwFkcw1XNH2ehMxtuE0lydLq3A0QtCRga98qdC4CwgEVu0
+         044j0x/l9N4kMyS9G4o18D4/ywWIYf/yQL9xB1xc743Mrj5EwRfwYiIdvZJGmIeqrjmW
+         00fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775126850; x=1775731650;
+        d=1e100.net; s=20251104; t=1775126857; x=1775731657;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=qk9ILGeqhLaxN17ATAwS/XwCMf4ZnQc5O/7gi3JtyMs=;
-        b=UTu3MV1++V0XV6ubyzlS37DUYWZQEC7Hb3iONDj7F5LxaJkqnjXG0k2nBvcFyq/b75
-         yvKLHLfo7ZF+iVa98/dubLF+gZu23ICxRc53vAPaJHHHI1L+l9aYcfpdsT1IB6GfwCqb
-         nWUpwgRqKvC3svXWEU34GqpFf19NaAY33blRRLhfY3vo6TrxQPcd4VzTw7veryglP7gf
-         nZkZidzT3v8Rw8lI+1Q1+pI7CxLk//NpnLUAjfqp1MEtDE+jkcy4KZ66udj2kTdtqZcG
-         YQGvieGENvp2DVJYSFYIoRHvWPLW1Qb4/EmZME0z2DlZlOsuJqcEQjHdSU/d3pGgGkzd
-         J9aA==
-X-Gm-Message-State: AOJu0Ywicsxvk28ncZC9mwKYtqpHqA1BruQUwhxuOcAwPmW2btH+OcUT
-	4R+BQhjgP+CG/IvyHNGOAkWn2ne51pqgNX6VJRnOy+Ip4MYMAknCLTQ7PqCoGHET
-X-Gm-Gg: ATEYQzxAOeTpy4iksfHwyIe24RYxH0ZLuVgZslhLrVNIVaegd+4BDpqFZiHqZrJSMur
-	ziNXD91CgA0HKYO7K8n8GvM3cEEIe4+Czv9aPzIZLgeIGM7iD6g5Aut4qa+rwvTp2R/AvaThuWJ
-	J6dj1bhCEJZIcPTwcSgYAylzN2jSSzfJRf6JREyoo1oGsDgibPdNBtUHM4EyY6BSkIfg253acef
-	Pyuc3mksGqmWexInwnrQ6VnB3IW7WmzF0FgoBqL7w4hzKocDA2OXPmFq4b5waaHE9hKEEOaDIOe
-	bNl4x8Xs5G/JY4JBrafI1JW7j2eKTB93OoK88a6e4an0HP8ci4CT41rYbN5DgM4uVfL3mS6t7MU
-	Pd+4H5hCboc8zZwjFpunCaQHs4AdlU7cAikkWw9UyF5H6W5letnvXOOfFCI0DsiPGlpBvn9oBMr
-	4+65b2aYxZHXxjEJPges2H07x22w==
-X-Received: by 2002:a17:907:1c85:b0:b93:7d70:20a0 with SMTP id a640c23a62f3a-b9c137a08acmr482815566b.4.1775126850107;
-        Thu, 02 Apr 2026 03:47:30 -0700 (PDT)
+        bh=zPqg0vXhWWH1w1hlbbZTkVgax5cKCfDJE6WmuksoUYo=;
+        b=MFDW1hOZmdwkhYwFXb/iV4a3OsW+icPDVCZ71xYZxBYE87ZKFahTNlKruEVvRdmDD3
+         rNNvr2tYD9ZSDQSKKV2CmvBgzOGeuhas54bBXNOyf0szn84Suzq3OKAGfhfYnf7qHAuY
+         L727wWKLIE5cYZCQuEYvuI+Xr4SfEb+TooOxQhpzpK+RiXylpkmLdI39MGYCd0Sec3nh
+         3BxPuNFORmr5Tss6Am0TUCxF6aOkD7ykJfRxleM1CVyfllUDOMKdt0Y60rsMmGZAqlf1
+         w9n59HD5nc2Z48tWqTB9PlUWhwO84RVMcr45llWE30eJOYKZmPPux3QBH3Lpkgdhe+++
+         IYvw==
+X-Gm-Message-State: AOJu0Yws0fxml572L6y7c59gdQbXlu4MXPTNWXHbpL0//AbjS+QDLrYa
+	XxEOVG0Y7WeLFX8lITdx2Tu8nr4a+Hl+K9puPB9oiuPDZHkI6xCcKbvgUxEhEQrz
+X-Gm-Gg: ATEYQzwHtZUkKsviNXdX3X+dd2X1K67kgj3P/lbhGWi2Ft/T6uYs1m9yObm0zQ8NJdB
+	ROY/tmdEMuNCjt0gyoIgvk7Eq6wiFws6ze24LrojsYWFOkd6teo+7Fz7qsCTsrYPR3GSAqU0f9v
+	VOAuAXrzLm79qSLbdQnvqgNLe8+k33PX9Ndb8K4ekJBVVQUaJQITpcA/GiAbsqnfd4U7GglFJdF
+	mY9ughY6Oo4wmZjh2ZoPDfNxftA6j1UV0KfODNK7V602yqFaJ0rywDd/2z9lptQSsDy/gY3DDOc
+	JTvHiKiSqp9CvtHZrsOEGHQ9cPaqWPMLnTCGJL9KuEh42iS9TCYLOSy/CCoNl43K1qBjJ5W4DkD
+	p5qO18Y0IpmjDetYwh5dYZz7NoEBueZdOnjDoaDIeiN5JAtqH8FU5Ln/lc18KjU6HhX+9uuvitm
+	h8Fi1F+vMyYHoAohm0elXluPSNSg==
+X-Received: by 2002:a17:907:c22:b0:b98:f1d:6a63 with SMTP id a640c23a62f3a-b9c46e25d10mr98516666b.9.1775126857055;
+        Thu, 02 Apr 2026 03:47:37 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,335 +95,243 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v8 05/13] xen/arm: gic-v3: add ITS suspend/resume support
-Date: Thu,  2 Apr 2026 13:45:06 +0300
-Message-ID: <5a42b7c32fadf21262b8342f27e685916d0e5812.1775125380.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v8 11/13] xen/arm: Save/restore context on suspend/resume
+Date: Thu,  2 Apr 2026 13:45:12 +0300
+Message-ID: <f87a2bcb6b09e95e07e51c27541ad91406e849d1.1775125380.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775125380.git.mykola_kvach@epam.com>
 References: <cover.1775125380.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1775126851-FE74EA3D-D1CDCDD3/0/0
+X-purgate-ID: tlsNG-c201ff/1775126858-3979296F-423BE752/0/0
 X-purgate-type: clean
-X-purgate-size: 9675
+X-purgate-size: 7252
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
-working after firmware powers the GIC down. Snapshot the CPU interface,
-distributor and last-CPU redistributor state, disable the ITS to cache its
-CTLR/CBASER/BASER registers, then restore everything and re-arm the
-collection on resume.
+The context of CPU general purpose and system control registers must be
+saved on suspend and restored on resume. This is implemented in
+prepare_resume_ctx and before the return from the hyp_resume function.
+The prepare_resume_ctx must be invoked just before the PSCI system suspend
+call is issued to the ATF. The prepare_resume_ctx must return a non-zero
+value so that the calling 'if' statement evaluates to true, causing the
+system suspend to be invoked. Upon resume, the context saved on suspend
+will be restored, including the link register. Therefore, after
+restoring the context, the control flow will return to the address
+pointed to by the saved link register, which is the place from which
+prepare_resume_ctx was called. To ensure that the calling 'if' statement
+does not again evaluate to true and initiate system suspend, hyp_resume
+must return a zero value after restoring the context.
 
-Add list_for_each_entry_continue_reverse() in list.h for the ITS suspend
-error path that needs to roll back partially saved state.
+Note that the order of saving register context into cpu_context structure
+must match the order of restoring.
 
-Based on Linux commit dba0bc7b76dc ("irqchip/gic-v3-its: Add ability to save/restore ITS state")
+Support for ARM32 is not implemented. Instead, compilation fails with a
+build-time error if suspend is enabled for ARM32.
+
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in V8:
-- Reword the CBASER/CWRITER comment to match Xen and drop the stale Linux
-  cmd_write reference.
-- Clarify the list_for_each_entry_continue_reverse() comment.
-- Factor out per-ITS helpers for collection setup and resume.
-- Restore each ITS and re-establish its collection mapping in the same
-  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
-  un-restored instance.
-- panic in case when resume of an ITS failed
-- cleanup baser cache during suspend
----
- xen/arch/arm/gic-v3-its.c             | 126 ++++++++++++++++++++++++--
- xen/arch/arm/gic-v3.c                 |  15 ++-
- xen/arch/arm/include/asm/gic_v3_its.h |  23 +++++
- xen/include/xen/list.h                |  14 +++
- 4 files changed, 166 insertions(+), 12 deletions(-)
+Changes in v8:
+- fix alignments in code
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 9ba068c46f..fe2865eac9 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
-     return its_send_command(its, cmd);
- }
+Changes in v7:
+- no changes
+---
+ xen/arch/arm/Makefile              |  1 +
+ xen/arch/arm/arm64/head.S          | 90 +++++++++++++++++++++++++++++-
+ xen/arch/arm/include/asm/suspend.h | 26 +++++++++
+ xen/arch/arm/suspend.c             | 14 +++++
+ 4 files changed, 130 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/arm/suspend.c
+
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 69200b2728..c36158271a 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -51,6 +51,7 @@ obj-y += setup.o
+ obj-y += shutdown.o
+ obj-y += smp.o
+ obj-y += smpboot.o
++obj-$(CONFIG_SYSTEM_SUSPEND) += suspend.o
+ obj-$(CONFIG_SYSCTL) += sysctl.o
+ obj-y += time.o
+ obj-y += traps.o
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 596e960152..2cb02ee314 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -562,6 +562,52 @@ END(efi_xen_start)
+ #endif /* CONFIG_ARM_EFI */
  
-+static int gicv3_its_setup_collection_single(struct host_its *its,
-+                                             unsigned int cpu)
-+{
-+    int ret;
+ #ifdef CONFIG_SYSTEM_SUSPEND
++/*
++ * int prepare_resume_ctx(struct cpu_context *ptr)
++ *
++ * x0 - pointer to the storage where callee's context will be saved
++ *
++ * CPU context saved here will be restored on resume in hyp_resume function.
++ * prepare_resume_ctx shall return a non-zero value. Upon restoring context
++ * hyp_resume shall return value zero instead. From C code that invokes
++ * prepare_resume_ctx, the return value is interpreted to determine whether
++ * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
++ */
++FUNC(prepare_resume_ctx)
++        /* Store callee-saved registers */
++        stp   x19, x20, [x0], #16
++        stp   x21, x22, [x0], #16
++        stp   x23, x24, [x0], #16
++        stp   x25, x26, [x0], #16
++        stp   x27, x28, [x0], #16
++        stp   x29, lr, [x0], #16
 +
-+    ret = its_send_cmd_mapc(its, cpu, cpu);
-+    if ( ret )
-+        return ret;
++        /* Store stack-pointer */
++        mov   x2, sp
++        str   x2, [x0], #8
 +
-+    ret = its_send_cmd_sync(its, cpu);
-+    if ( ret )
-+        return ret;
++        /* Store system control registers */
++        mrs   x2, VBAR_EL2
++        str   x2, [x0], #8
++        mrs   x2, VTCR_EL2
++        str   x2, [x0], #8
++        mrs   x2, VTTBR_EL2
++        str   x2, [x0], #8
++        mrs   x2, TPIDR_EL2
++        str   x2, [x0], #8
++        mrs   x2, MDCR_EL2
++        str   x2, [x0], #8
++        mrs   x2, HSTR_EL2
++        str   x2, [x0], #8
++        mrs   x2, CPTR_EL2
++        str   x2, [x0], #8
++        mrs   x2, HCR_EL2
++        str   x2, [x0], #8
 +
-+    return gicv3_its_wait_commands(its);
-+}
-+
- /* Set up the (1:1) collection mapping for the given host CPU. */
- int gicv3_its_setup_collection(unsigned int cpu)
- {
-@@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
++        /* prepare_resume_ctx must return a non-zero value */
++        mov   x0, #1
++        ret
++END(prepare_resume_ctx)
  
-     list_for_each_entry(its, &host_its_list, entry)
-     {
--        ret = its_send_cmd_mapc(its, cpu, cpu);
--        if ( ret )
--            return ret;
--
--        ret = its_send_cmd_sync(its, cpu);
--        if ( ret )
--            return ret;
--
--        ret = gicv3_its_wait_commands(its);
-+        ret = gicv3_its_setup_collection_single(its, cpu);
-         if ( ret )
-             return ret;
-     }
-@@ -1209,6 +1217,106 @@ int gicv3_its_init(void)
-     return 0;
- }
+ FUNC(hyp_resume)
+         /* Initialize the UART if earlyprintk has been enabled. */
+@@ -580,7 +626,49 @@ FUNC(hyp_resume)
+         b     enable_secondary_cpu_mm
+ 
+ mmu_resumed:
+-        b .
++        /* Now we can access the cpu_context, so restore the context here */
++        ldr   x0, =cpu_context
++
++        /* Restore callee-saved registers */
++        ldp   x19, x20, [x0], #16
++        ldp   x21, x22, [x0], #16
++        ldp   x23, x24, [x0], #16
++        ldp   x25, x26, [x0], #16
++        ldp   x27, x28, [x0], #16
++        ldp   x29, lr, [x0], #16
++
++        /* Restore stack pointer */
++        ldr   x2, [x0], #8
++        mov   sp, x2
++
++        /* Restore system control registers */
++        ldr   x2, [x0], #8
++        msr   VBAR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   VTCR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   VTTBR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   TPIDR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   MDCR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   HSTR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   CPTR_EL2, x2
++        ldr   x2, [x0], #8
++        msr   HCR_EL2, x2
++        isb
++
++        /*
++         * Since context is restored return from this function will appear
++         * as return from prepare_resume_ctx. To distinguish a return from
++         * prepare_resume_ctx which is called upon finalizing the suspend,
++         * as opposed to return from this function which executes on resume,
++         * we need to return zero value here.
++         */
++        mov   x0, #0
++        ret
+ END(hyp_resume)
+ 
+ #endif /* CONFIG_SYSTEM_SUSPEND */
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+index 31a98a1f1b..c127fa3d78 100644
+--- a/xen/arch/arm/include/asm/suspend.h
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -3,6 +3,8 @@
+ #ifndef ARM_SUSPEND_H
+ #define ARM_SUSPEND_H
+ 
++#include <xen/types.h>
++
+ struct domain;
+ struct vcpu;
+ struct vcpu_guest_context;
+@@ -14,6 +16,30 @@ struct resume_info {
+ 
+ void arch_domain_resume(struct domain *d);
  
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+int gicv3_its_suspend(void)
-+{
-+    struct host_its *its;
-+    int ret;
++#ifdef CONFIG_ARM_64
++struct cpu_context {
++    register_t callee_regs[12];
++    register_t sp;
++    register_t vbar_el2;
++    register_t vtcr_el2;
++    register_t vttbr_el2;
++    register_t tpidr_el2;
++    register_t mdcr_el2;
++    register_t hstr_el2;
++    register_t cptr_el2;
++    register_t hcr_el2;
++} __aligned(16);
++#else
++#error "Define cpu_context structure for arm32"
++#endif
 +
-+    list_for_each_entry(its, &host_its_list, entry)
-+    {
-+        unsigned int i;
-+        void __iomem *base = its->its_base;
++extern struct cpu_context cpu_context;
 +
-+        its->suspend_ctx.ctlr = readl_relaxed(base + GITS_CTLR);
-+        ret = gicv3_disable_its(its);
-+        if ( ret )
-+        {
-+            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-+            goto err;
-+        }
-+
-+        its->suspend_ctx.cbaser = readq_relaxed(base + GITS_CBASER);
-+
-+        for (i = 0; i < GITS_BASER_NR_REGS; i++)
-+        {
-+            uint64_t baser = readq_relaxed(base + GITS_BASER0 + i * 8);
-+
-+            its->suspend_ctx.baser[i] = 0;
-+
-+            if ( !(baser & GITS_VALID_BIT) )
-+                continue;
-+
-+            its->suspend_ctx.baser[i] = baser;
-+        }
-+    }
-+
-+    return 0;
-+
-+ err:
-+    list_for_each_entry_continue_reverse(its, &host_its_list, entry)
-+        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTLR);
-+
-+    return ret;
-+}
-+
-+static int gicv3_its_resume_single(struct host_its *its, unsigned int cpu)
-+{
-+    void __iomem *base = its->its_base;
-+    unsigned int i;
-+    int ret;
-+
-+    /*
-+     * Make sure that the ITS is disabled. If it fails to quiesce,
-+     * don't restore it since writing to CBASER or BASER<n>
-+     * registers is undefined according to the GIC v3 ITS
-+     * Specification.
-+     */
-+    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
-+    ret = gicv3_disable_its(its);
-+    if ( ret )
-+        return ret;
-+
-+    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
-+
-+    /*
-+     * Writing CBASER resets CREADR to 0, so reset CWRITER to
-+     * keep the command queue pointers aligned.
-+     */
-+    writeq_relaxed(0, base + GITS_CWRITER);
-+
-+    /* Restore GITS_BASER from the value cache. */
-+    for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
-+    {
-+        uint64_t baser = its->suspend_ctx.baser[i];
-+
-+        if ( !(baser & GITS_VALID_BIT) )
-+            continue;
-+
-+        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
-+    }
-+
-+    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-+
-+    return gicv3_its_setup_collection_single(its, cpu);
-+}
-+
-+void gicv3_its_resume(void)
-+{
-+    struct host_its *its;
-+    unsigned int cpu = smp_processor_id();
-+    int ret;
-+
-+    list_for_each_entry(its, &host_its_list, entry)
-+    {
-+        ret = gicv3_its_resume_single(its, cpu);
-+        if ( ret )
-+            panic("GICv3: ITS@%"PRIpaddr": failed to restore during resume: %d\n",
-+                   its->addr, ret);
-+    }
-+}
-+
++int prepare_resume_ctx(struct cpu_context *ptr);
++void hyp_resume(void);
 +#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ #endif /* ARM_SUSPEND_H */
  
  /*
-  * Local variables:
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index d182a71478..ef8318dd50 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -862,7 +862,7 @@ static bool gicv3_enable_lpis(void)
-     return true;
- }
- 
--static int __init gicv3_populate_rdist(void)
-+static int gicv3_populate_rdist(void)
- {
-     int i;
-     uint32_t aff;
-@@ -932,7 +932,7 @@ static int __init gicv3_populate_rdist(void)
-                     ret = gicv3_lpi_init_rdist(ptr);
-                     if ( ret && ret != -ENODEV && ret != -EBUSY )
-                     {
--                        printk("GICv3: CPU%d: Cannot initialize LPIs: %u\n",
-+                        printk("GICv3: CPU%d: Cannot initialize LPIs: %d\n",
-                                smp_processor_id(), ret);
-                         break;
-                     }
-@@ -2101,10 +2101,14 @@ static int gicv3_suspend(void)
- 
-     gicv3_disable_interface();
- 
--    ret = gicv3_disable_redist();
-+    ret = gicv3_its_suspend();
-     if ( ret )
-         goto out_enable_iface;
- 
-+    ret = gicv3_disable_redist();
-+    if ( ret )
-+        goto out_its_resume;
+diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+new file mode 100644
+index 0000000000..e38566b0b7
+--- /dev/null
++++ b/xen/arch/arm/suspend.c
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +
-     /* Save GICR configuration */
-     gicv3_redist_wait_for_rwp();
- 
-@@ -2140,6 +2144,9 @@ static int gicv3_suspend(void)
- 
-     return 0;
- 
-+ out_its_resume:
-+    gicv3_its_resume();
++#include <asm/suspend.h>
 +
-  out_enable_iface:
-     gicv3_hyp_enable(true);
-     WRITE_SYSREG(gicv3_ctx.cpu.ctlr, ICC_CTLR_EL1);
-@@ -2212,6 +2219,8 @@ static void gicv3_resume(void)
- 
-     gicv3_redist_wait_for_rwp();
- 
-+    gicv3_its_resume();
++struct cpu_context cpu_context = {};
 +
-     WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
-     isb();
- 
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
-index 081bd19180..3ca74435c8 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -129,6 +129,13 @@ struct host_its {
-     spinlock_t cmd_lock;
-     void *cmd_buf;
-     unsigned int flags;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct suspend_ctx {
-+        uint32_t ctlr;
-+        uint64_t cbaser;
-+        uint64_t baser[GITS_BASER_NR_REGS];
-+    } suspend_ctx;
-+#endif
- };
- 
- /* Map a collection for this host CPU to each host ITS. */
-@@ -205,6 +212,11 @@ uint64_t gicv3_its_get_cacheability(void);
- uint64_t gicv3_its_get_shareability(void);
- unsigned int gicv3_its_get_memflags(void);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+int gicv3_its_suspend(void);
-+void gicv3_its_resume(void);
-+#endif
-+
- #else
- 
- #ifdef CONFIG_ACPI
-@@ -272,6 +284,17 @@ static inline int gicv3_its_make_hwdom_dt_nodes(const struct domain *d,
-     return 0;
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+static inline int gicv3_its_suspend(void)
-+{
-+    return 0;
-+}
-+
-+static inline void gicv3_its_resume(void)
-+{
-+}
-+#endif
-+
- #endif /* CONFIG_HAS_ITS */
- 
- #endif
-diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
-index 98d8482dab..2aab274157 100644
---- a/xen/include/xen/list.h
-+++ b/xen/include/xen/list.h
-@@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_head *list,
-          &(pos)->member != (head);                                        \
-          (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
- 
-+/**
-+ * list_for_each_entry_continue_reverse - iterate backwards from the given point
-+ * @pos:    the type * to use as a loop cursor.
-+ * @head:   the head for your list.
-+ * @member: the name of the list_head within the struct.
-+ *
-+ * Iterate over list of given type backwards, starting from the element previous
-+ * to the current one in list order.
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
 + */
-+#define list_for_each_entry_continue_reverse(pos, head, member)           \
-+    for ((pos) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
-+         &(pos)->member != (head);                                        \
-+         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
-+
- /**
-  * list_for_each_entry_from - iterate over list of given type from the
-  *                            current point
 -- 
 2.43.0
 
