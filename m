@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA516D39413
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1271526.1559682 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97377D39411
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2026 10:47:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1271520.1559634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaJ-0005NL-6z; Thu, 02 Apr 2026 10:47:35 +0000
+	id 1w8FaD-00045P-Di; Thu, 02 Apr 2026 10:47:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1271526.1559682; Thu, 02 Apr 2026 10:47:35 +0000
+Received: by outflank-mailman (output) from mailman id 1271520.1559634; Thu, 02 Apr 2026 10:47:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1w8FaJ-0005N0-3l; Thu, 02 Apr 2026 10:47:35 +0000
-Received: by outflank-mailman (input) for mailman id 1271526;
- Thu, 02 Apr 2026 10:47:33 +0000
+	id 1w8FaD-00044A-Ah; Thu, 02 Apr 2026 10:47:29 +0000
+Received: by outflank-mailman (input) for mailman id 1271520;
+ Thu, 02 Apr 2026 10:47:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1w8FaH-0004vd-62
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:33 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1w8FaC-0003yr-3q
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 10:47:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1w8FaG-00Ej0u-IP
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:32 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1w8FaB-009q68-FZ
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2026 12:47:27 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce493d-2eae-0a2a0a5409dd-0a2a450be30c-20
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:32 +0200
-Received: from [209.85.208.46] (helo=mail-ed1-f46.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69ce493f-e002-0a2a0a5209dd-0a2a450a8a2e-0
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:27 +0200
+Received: from [209.85.218.46] (helo=mail-ej1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <xakep.amatop@gmail.com>)
- id 69ce4944-bca8-0a2a450b0019-d155d02eadcf-3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:32 +0200
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-65c4152313fso1006449a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:32 -0700 (PDT)
+ id 69ce493f-ee98-0a2a450a0019-d155da2edc71-3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 12:47:27 +0200
+Received: by mail-ej1-f46.google.com with SMTP id
+ a640c23a62f3a-b9c280322e0so86796966b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2026 03:47:27 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.38]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.30
+ a640c23a62f3a-b9c3d028955sm76392366b.61.2026.04.02.03.47.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 03:47:30 -0700 (PDT)
+ Thu, 02 Apr 2026 03:47:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,86 +54,187 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775126852; x=1775731652; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775126846; x=1775731646; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Tm0K7gfsRpBFVrENvrubslPphiODpeHwAJ+aZ5FZLuc=;
-        b=HFYnDybK1UebaDizt6eZk5c/4D3c+mPJXXC6AbSiViBhbZG5antkrqTM9lJUkh3ZGD
-         neu0txMAzrokKucmGjVz+qCAU5oPoVFHgNO00ejSQdWPWJabozdybnkBVIc+46aD7KFc
-         kRN//S1D/0uVC/AZywsm+MRozj4nEvC6ZWn2eLHKsxOcb9Zn0c4bmO9as6M5B9h/oQBF
-         rRpkkoiBCRplhwBANaIGo64VeXvlgUNXvAVtelFJKnWwuQBXOqNpN6tnE6O3U+mdY6EI
-         KhjTUuYCukQ3n5RW1ViuDMKzTrgp0O9s5zbe2xbOkeX+jiXzzsVJLmH/yub36nb/uTS9
-         HsXg==
+        bh=Q0cUh9DunvbioAZLIRhQfJTs0EihHFj+/wkrJJoLmJs=;
+        b=DgsaPB8gZzUseSYFpEQGPQeE1chIRot2lr90k5iTVS6HNsRvjL3FdDv9QcOPCABT/P
+         A1uq2WUW68cKqRyyEpnDc/+DjEbG4e+8Ckbkvt60Xup+8z3aJXEx7pIhTO/PulvORb0M
+         9bEHd0M4vf8yhjWS/WAfyuhw8JOuZhfSSQfWxX+O8iYaJ63cucfQCkGwnaCorqVfJnro
+         XKEz2jTeXX6KIgAYP8n/agVJpnNx8vREO4etwfGlzvoioHL5GeQ7LAeMqERcZ32dPl2M
+         uiVN5oiWafmVmjIVEsmSZiJhZATbMvVdWF3+M8mT7eKayh9En1uGB2fN6AX/IyotDxQW
+         0MSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775126852; x=1775731652;
+        d=1e100.net; s=20251104; t=1775126846; x=1775731646;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Tm0K7gfsRpBFVrENvrubslPphiODpeHwAJ+aZ5FZLuc=;
-        b=FlAzh8urW6VtDmpUrQ4PIzbfsw8YxRyC0u6808JRJo0JZGDcST3X4FB7izpnd+OmP/
-         tiOZCgyqtnvKfHJOyqjhbNVn/lbYJ78gBTIfaA61mDLrowRxq6xdMwOFxrPoRLFX2Dyg
-         elqeBC2BIIut92kS1thTWZHx1ZuLUqf4byz6zMdm0ga5hCicFvbeg4jS21GJG3wMLit4
-         ymhdeg3ihvs1Q7n3HxSxkMpxJTSatorShWhTdLHZ+xtEt/IRkXWIxcWtQXebiTtvyGF4
-         0h1NIDhLNxMvAle+UsvRJyiR5gHC3B9D8zRnsqYJEWz9kWNpS3bwiPABDWAjoQYBgpUL
-         B4LQ==
-X-Gm-Message-State: AOJu0YzDWOsv2om6poBHpliKwqJTujoEwPNq4xMV2CKCqe+YSVi8QIqC
-	LFb7k1TuJj1v1+V4uuTldCLy/tE1Vgp04NiIXl10ear8U+Tscf5G2oBxUiG9sQ7N
-X-Gm-Gg: ATEYQzzCqvHHryOIyPZlc0Jc1lLNhDkoNbLXIVl4tt/uNWAe/oKqOHEln4HuWOI1wSn
-	pt1bxl6S5bJqKjj34NMcPejC8+HHwi6Z9gcgiMR65aYnEsm5x3M66jN2Ala/+m1vyrVve7QMvEa
-	7047Hj6qnT/Gu3oAKcItDtMkRmDLrYfAn+SU+E7FDSumGInnIeeXiQgfmYyBT72zSbGdVj2pqQ+
-	rhFUPRsc0lhZIIcoX3SzPteQp6C09i2HwBe7k5kcDL9H9+VMcZrNsDHtEsItdyVWFGC9vIuPItn
-	YPBXQAxKr6B9w65gMSVMeNMGIq1ZWwFMQ/92fVCG68nTnYuEKzpq9LBkmG+myCfgUZ8mMjjav6A
-	kgM/UwEtUrcz3peVq7q2w44UkeDSC2Jwf8y+b+YkcLhzAZVFZm4BduBKcLE/1PHYYgKs0/As3+V
-	neZpebnNnjMkaT+Tx/A9yMlPX1RQ==
-X-Received: by 2002:a17:906:6207:b0:b98:3d79:40c1 with SMTP id a640c23a62f3a-b9c13b0a2f2mr479932666b.33.1775126851612;
-        Thu, 02 Apr 2026 03:47:31 -0700 (PDT)
+        bh=Q0cUh9DunvbioAZLIRhQfJTs0EihHFj+/wkrJJoLmJs=;
+        b=gZytgkB6vKqyY+dzHO/Y3UaM+13tJKlw+dFJNCQWe4CbX+lN/K3foXvpeQ1v0NimgN
+         lDJLqERFzNfYbYX1xuADkMxedSkSoUA7UPPwuX1DGXe6V66HgXcFYRW9mEAnJl+Uvaaj
+         PPE/OJlEmmHDhyhxcJccJQP9EoBRJp68++qQNoOe4ukupiH/xj4i/L2jxANYSmKeYusA
+         lCgqxqfZDv/06LKUjvuX3swEwaGydpc0/JCt3oklcU24MnPUy541RFtsv0garZQfqaIb
+         ihujNOBI4UYDa4GQF13vsd/G1WD2fcCBn8yyr64zldZTxX/pt7f8CSp61j+dHP7rcWav
+         /Jhw==
+X-Gm-Message-State: AOJu0YzSR2/+zYY8IW1ws+/2d3y6DFr9rR8PE/UJX+h7fjoOpPtDg5Ed
+	4iLjluHt81Mwyq+cwZq5jsWhoEzgHS/iZEqWNzP+W6eHjKchjm9t7P19EdhUZkwJ
+X-Gm-Gg: ATEYQzycnmdYyIMhm/MJPwYLF7L3O+oWUJka+LdoaEBitdbYA/okopmmhNwrx5lgvRS
+	h9ZJ5iOE1dUSnTPBAd2IftxPwQfdbv+pPYlBXl5xFFMa6ov9FaqLK+I3WSyNQYSDSiW2bGRKWm2
+	k1VbNk04LOngCGVLpGG9DyXsU/kp+P9w7wxFZbbb6K7e85F1YcTZ/zhe74v5c4rgxzJsY6KXVxX
+	l9095o1BJELbpFn7mhDC93VWriz3fQ9YY5wZ/s1WKcqMI4NNT9+oV1Nu7jorJltelUl0To31mTv
+	35VK/XDlqbANtbZrFFyLXP9aPpXObSfY+r0ivWzeWzebKZYL1UYRpRX9eVd8eL2ldawfO3y0b8d
+	crrn4WGwjHF9VP3d8uyOZlNleA61UH4Ix+ESMSKd30VA1lj+gcS+ufhAEGc6ucwQwxXrWqhEg3X
+	T34dyHGRmq96oUkzG0CDdUvPc/K+2wrEOt2hJj
+X-Received: by 2002:a17:907:724d:b0:b97:98b3:67ce with SMTP id a640c23a62f3a-b9c13b3ccc9mr480119866b.32.1775126845902;
+        Thu, 02 Apr 2026 03:47:25 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v8 06/13] xen/arm: tee: keep init_tee_secondary() for hotplug and resume
-Date: Thu,  2 Apr 2026 13:45:07 +0300
-Message-ID: <666917e8e8e435640c272c19908f412c315b2dc6.1775125380.git.mykola_kvach@epam.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v8 01/13] xen/arm: Add suspend and resume timer helpers
+Date: Thu,  2 Apr 2026 13:45:02 +0300
+Message-ID: <9b5e454f55d20d3e81771da53ae06fb511bd198e.1775125380.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775125380.git.mykola_kvach@epam.com>
 References: <cover.1775125380.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1775126852-1714D2A1-F11E7718/0/0
+X-purgate-ID: tlsNG-4011c0/1775126847-0F3490B1-23AF1613/0/0
 X-purgate-type: clean
-X-purgate-size: 892
+X-purgate-size: 5007
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-init_tee_secondary() was marked __init and freed after boot. Calling it
-from the CPU hotplug/resume path then executed discarded code, which
-could crash Xen. Drop __init so the TEE mediator secondary init can run
-safely on hotplugged and resumed CPUs.
+Timer interrupts must be disabled while the system is suspended to prevent
+spurious wake-ups. Suspending timers in Xen consists of disabling the
+physical timer and the hypervisor timer on the current CPU. The virtual
+timer does not need explicit handling here, as it is already disabled on
+vCPU context switch and its state is restored per-vCPU on the next context
+restore.
 
+Resuming consists of raising TIMER_SOFTIRQ, which prompts the generic
+timer code to reprogram the hypervisor timer with the correct timeout.
+
+Xen does not use or expose the physical timer, so it remains disabled
+across suspend/resume.
+
+Introduce a new helper, disable_phys_hyp_timers(), to encapsulate disabling
+of the physical and hypervisor timers.
+
+Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/tee/tee.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in V7:
+  - Dropped EL1/EL2 wording; use "physical timer" and "hypervisor timer"
+  - Renamed helper to disable_phys_hyp_timers() to reflect its actual scope
+  - Clarified virtual timer handling (disabled on vCPU switch-out, restored on
+    context restore) and added comments in suspend/resume paths
+  - Added resume comment explaining which timers are restored by TIMER_SOFTIRQ
+---
+ xen/arch/arm/include/asm/time.h |  5 ++++
+ xen/arch/arm/time.c             | 44 ++++++++++++++++++++++++++++-----
+ 2 files changed, 43 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/arm/tee/tee.c b/xen/arch/arm/tee/tee.c
-index 8501443c8e..00e561fc78 100644
---- a/xen/arch/arm/tee/tee.c
-+++ b/xen/arch/arm/tee/tee.c
-@@ -128,7 +128,7 @@ static int __init tee_init(void)
+diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+index c194dbb9f5..9313b157ea 100644
+--- a/xen/arch/arm/include/asm/time.h
++++ b/xen/arch/arm/include/asm/time.h
+@@ -105,6 +105,11 @@ void preinit_xen_time(void);
  
- presmp_initcall(tee_init);
+ void force_update_vcpu_system_time(struct vcpu *v);
  
--void __init init_tee_secondary(void)
-+void init_tee_secondary(void)
++#ifdef CONFIG_SYSTEM_SUSPEND
++void time_suspend(void);
++void time_resume(void);
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ #endif /* __ARM_TIME_H__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+index a12912a106..f91dc64099 100644
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -296,6 +296,14 @@ static void check_timer_irq_cfg(unsigned int irq, const char *which)
+ static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_hyp);
+ static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_virt);
+ 
++/* Disable physical and hypervisor timers on the current CPU */
++static inline void disable_phys_hyp_timers(void)
++{
++    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
++    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
++    isb();
++}
++
+ /* Set up the timer interrupt on this CPU */
+ void init_timer_interrupt(void)
  {
-     if ( cur_mediator && cur_mediator->ops->init_secondary )
-         cur_mediator->ops->init_secondary();
+@@ -306,9 +314,7 @@ void init_timer_interrupt(void)
+     WRITE_SYSREG64(0, CNTVOFF_EL2);     /* No VM-specific offset */
+     /* Do not let the VMs program the physical timer, only read the physical counter */
+     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
+-    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
+-    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
+-    isb();
++    disable_phys_hyp_timers();
+ 
+     hyp_action->name = "hyptimer";
+     hyp_action->handler = htimer_interrupt;
+@@ -333,9 +339,7 @@ void init_timer_interrupt(void)
+  */
+ static void deinit_timer_interrupt(void)
+ {
+-    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Disable physical timer */
+-    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Disable hypervisor's timer */
+-    isb();
++    disable_phys_hyp_timers();
+ 
+     release_irq(timer_irq[TIMER_HYP_PPI], NULL);
+     release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
+@@ -375,6 +379,34 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
+     /* XXX update guest visible wallclock time */
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++void time_suspend(void)
++{
++    /* CNTV already disabled by virt_timer_save() during vcpu context switch. */
++    disable_phys_hyp_timers();
++}
++
++void time_resume(void)
++{
++    /*
++     * Raising TIMER_SOFTIRQ triggers generic timer code to reprogram the
++     * hypervisor timer with the correct timeout (not known here).
++     *
++     * Xen doesn't use or expose the physical timer, so it remains disabled
++     * across suspend/resume.
++     *
++     * The virtual timer state is restored per-vCPU on the next context switch.
++     *
++     * No further action is needed to restore timekeeping after power down,
++     * since the system counter is unaffected. See ARM DDI 0487 L.a, D12.1.2
++     * "The system counter must be implemented in an always-on power domain."
++     */
++    raise_softirq(TIMER_SOFTIRQ);
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ static int cpu_time_callback(struct notifier_block *nfb,
+                              unsigned long action,
+                              void *hcpu)
 -- 
 2.43.0
 
