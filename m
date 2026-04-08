@@ -4,44 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118441073C8C
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2026 10:30:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1275659.1561418 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A161073C8B
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2026 10:38:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1275669.1561428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAQAz-0004BZ-Ud; Wed, 08 Apr 2026 10:30:25 +0000
+	id 1wAQIb-0004pl-MQ; Wed, 08 Apr 2026 10:38:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1275659.1561418; Wed, 08 Apr 2026 10:30:25 +0000
+Received: by outflank-mailman (output) from mailman id 1275669.1561428; Wed, 08 Apr 2026 10:38:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAQAz-0004BS-Rd; Wed, 08 Apr 2026 10:30:25 +0000
-Received: by outflank-mailman (input) for mailman id 1275659;
- Wed, 08 Apr 2026 10:30:24 +0000
+	id 1wAQIb-0004pe-Jh; Wed, 08 Apr 2026 10:38:17 +0000
+Received: by outflank-mailman (input) for mailman id 1275669;
+ Wed, 08 Apr 2026 10:38:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wAQAx-0004BM-SZ
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 10:30:23 +0000
+ (envelope-from <kevin.brodsky@arm.com>) id 1wAQIa-0004pW-05
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 10:38:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAQAv-005Dp1-M6
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 12:30:23 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wAQIV-001bk2-U1
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 12:38:11 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69d62e39-2eae-0a2a0a5409dd-0a2a4502d408-40
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 12:30:23 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <jbeulich@suse.com>)
- id 69d62e3e-42fa-0a2a45020019-d155dd32bd2c-3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 12:30:22 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-43cfd96354aso3747033f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 03:30:22 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d1e4d27a8sm58069456f8f.17.2026.04.08.03.30.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Apr 2026 03:30:21 -0700 (PDT)
+ (envelope-from <kevin.brodsky@arm.com>)
+ id 69d6300c-5cb7-0a2a0a5109dd-0a2a450c9eb8-22
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 12:38:11 +0200
+Received: from [217.140.110.172] (helo=foss.arm.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.0)
+ (envelope-from <kevin.brodsky@arm.com>)
+ id 69d63012-f40c-0a2a450c0019-d98c6eacbd6a-1
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 12:38:10 +0200
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E09153161;
+ Wed,  8 Apr 2026 03:38:03 -0700 (PDT)
+Received: from [10.57.32.84] (unknown [10.57.32.84])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7F14B3F632;
+ Wed,  8 Apr 2026 03:38:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,126 +51,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775644222; x=1776249022; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y2Pf94YWijPYUnVaNF1+VESWUoq9N5V67EaNnKmtQhk=;
-        b=cCdaPU4aP+IISF9JH8U9nEiCU4Wogr1VMXQ0HenuA69hL3OkuvSMT0ydmhHk5dGxNB
-         4ft/s8joiSppHziDj9QzA5pv90FG5KMZZ3lE51UfTrzlsSK4QW1eVQEhQwCVCYMT3+EO
-         yn4hlHINzVujFlShQdZV4ihyIXBXg+ReawPJnuJTtrSPnqBcp/WfURODu6lNiQg8uDW9
-         9ntINxzYIIBQ8r6Vu6a3e+nBtvnJ/RYOw1GXQYcdvLFFe6ZMmLTgdZEi/VN+DntWTgYp
-         FuxvcLiBhFwvVYB3w4F+ueuNe0Q753DY0J+IuNPMvnIH2voP3IcF7cgGMTjbTUiR0/UR
-         Q86Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775644222; x=1776249022;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Y2Pf94YWijPYUnVaNF1+VESWUoq9N5V67EaNnKmtQhk=;
-        b=CXOZc8bs0uC0Mi3lukUblUIrwrACU8Qc1D+GR2bW+l7KzJ2TTaq0PcrG9ECal71Ojl
-         mW7gdIlD73O8roWSFJgEDFx0pcaHVNUf45WP5HiOro0WxD/PbYIdTOWfNtyPMYAegJvX
-         G84AQcjJM8nbFjXTVV1zN1OAClV+EBrMNdkFfKS3krAgWNiWNj1qi9IwEWH24gR1RgKR
-         h/m64fRSK++dApghiX2ZGOR2PsUFDQgU3j+wyKhtPDbmqK/S3MaP9Eob3XrWRS7EK0xM
-         fDWos8Y4+yJlP2N9NPf2PZmTQwMd5RlVZkCWzw1H37iz6IzwbD7dZGd/7XxqH2LAXLff
-         vkvA==
-X-Forwarded-Encrypted: i=1; AJvYcCVlxGsnE2YKG3KAHj8XqDf+3ymoWFPKFO/y3Jhb8g2+KdFEVkP5uRI4X7SLwHcZlHfPCr3IqBwaeQA=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxV8wRJm5zR2TMw4xGF1qnEih26FcYTnRFlntrbxmASnTZz9eCH
-	A9XWHwt/Jh81bT5kiV7vf2MDx9rZtXOItwNu9pyr3GGrIWh8loyH+kEq0hGis+v5oA==
-X-Gm-Gg: AeBDievXWWRuEtvr2tLYvHgt21lt96f24BQqNuo7vZwncYaErurEm/pUINRhpMol5UH
-	s5ZgNiG5nHUPvgLqbPmzKMZx6g+D4C48JOzwBjTjykFnFOKpYYugy+sMvX05Qq+AS462MHLGkWs
-	3dNXZzRSdvwFBc80Ueb3a6iJ9/zOE+dwlOnsiZ6DoK1WIy56a5bs8c8KDj+RMttqxZ+9CwHwGb/
-	+l0iVmnI1QRIz/iGtJYVycnxvDdPSP1ugP1i6h2iFcejMWwGm2h5B8pJQHfg45n9HXKunKsx9kE
-	Ckz4wPin1IMzM+U3THoEebkS1b7shrbeYtPKg4Mt5FSbr/40A8ntuLAy8PVDyGAXnfg0Ur2KrmB
-	7zvcma9qvBOkfLla7iFGc5mr5m+awZiww24MFC4TuBsSW368PwKseaOFzMPjxDmOSfhJ9SbFq4M
-	cdoWRqpuMy5lOHeK3fGBmujbsO3bBxgVa1o4iLmZb4kDUHjTj2NbcIikHYDBlnvRSikiHyK59Do
-	esvcTkbA0e7z+M=
-X-Received: by 2002:a05:6000:1789:b0:43c:f969:2e1 with SMTP id ffacd0b85a97d-43d29276481mr30118680f8f.6.1775644221542;
-        Wed, 08 Apr 2026 03:30:21 -0700 (PDT)
-Message-ID: <0463fd32-ffac-482b-a58b-d457389e9157@suse.com>
-Date: Wed, 8 Apr 2026 12:30:20 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1775644689; bh=RbEAcqkGAzhWYYGDpNUfMtQ/+eT1N+kit4vG5ASyXOQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=N+msIMnXHv+BtqjbmyFmNQx/03MDaRVEtDG3zltALUtkZ6HtWowAYb6mAu7FhOGbe
+	 kFfe5JkjGOIVvtG2js3xVrqJymQgLWp0h3I89vgh5kitbjMOZa80e5iJiA72gC8ZYl
+	 4eUrwpkPNnIEZpEdrGkPDGbiR2CBz6aN+prqL3t0=
+Message-ID: <756bcd3b-51c1-4ee4-bb09-4c0c0514764c@arm.com>
+Date: Wed, 8 Apr 2026 12:38:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/x86: Check supported features even for PVH dom0
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Frediano Ziglio <freddy77@gmail.com>,
- Frediano Ziglio <frediano.ziglio@cloud.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <20260402155512.80170-1-frediano.ziglio@cloud.com>
- <eb6e0314-423b-412e-af29-c423463d78dd@suse.com>
- <adYsZsPP8HOLeY1g@wifi-campus-l-10-3-197-236.u-ga.fr>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <adYsZsPP8HOLeY1g@wifi-campus-l-10-3-197-236.u-ga.fr>
+Subject: Re: kernel BUG around vmap/vfree -
+ xen_enter_lazy_mmu()/xen_leave_lazy_mmu() - Linux 7.0-rc1
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+References: <aaBH3EAchUwKhrUA@mail-itl>
+ <c2f973a0-fcb5-48ea-9638-cd73fa3e37ce@citrix.com>
+ <c712c06f-7fcf-4876-b2d7-f2b7bc6f0dea@suse.com> <adIuP7-sNwuOid80@mail-itl>
+ <5d068304-837d-4aef-b8a7-87c91ccf96b4@arm.com> <adXBwU9KAdb2gNeB@mail-itl>
+From: Kevin Brodsky <kevin.brodsky@arm.com>
+Content-Language: en-GB
+In-Reply-To: <adXBwU9KAdb2gNeB@mail-itl>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1775644222-AED20CD1-3697A19D/0/0
+X-purgate-ID: tlsNG-d25034/1775644690-83F42A3D-C100407C/0/0
 X-purgate-type: clean
-X-purgate-size: 1513
+X-purgate-size: 5523
 
-On 08.04.2026 12:22, Roger Pau Monné wrote:
-> On Tue, Apr 07, 2026 at 08:56:03AM +0200, Jan Beulich wrote:
->> On 02.04.2026 17:55, Frediano Ziglio wrote:
->>> --- a/xen/arch/x86/dom0_build.c
->>> +++ b/xen/arch/x86/dom0_build.c
->>> @@ -320,6 +320,20 @@ unsigned long __init dom0_paging_pages(const struct domain *d,
->>>      return DIV_ROUND_UP(memkb, 1024) << (20 - PAGE_SHIFT);
->>>  }
->>>  
->>> +int __init dom0_check_parms(
+On 08/04/2026 04:47, Marek Marczykowski-Górecki wrote:
+>> That may well be the case - it seems that xen_enter_lazy_mmu() is called
+>> while already in lazy MMU mode (first splat), and xen_leave_lazy_mmu()
+>> is called without being in lazy MMU mode (second splat). I expect this
+>> is something specific to Xen, which I didn't get the chance to test.
 >>
->> I understand the "dom0" in the name is owing to the filename and perhaps
->> adjacent other similar functions, yet ...
->>
->>> +    struct domain *d, const struct elf_dom_parms *parms)
->>> +{
->>> +    if ( parms->elf_notes[XEN_ELFNOTE_SUPPORTED_FEATURES].type == XEN_ENT_NONE )
->>> +        return 0;
->>> +
->>> +    if ( is_hardware_domain(d) && !test_bit(XENFEAT_dom0, parms->f_supported) )
->>
->> ... if this was about solely Dom0, no is_hardware_domain() should be present
->> here. Maybe s/dom0/initdom/ ?
-> 
-> I think the naming of the feature flag is not very useful TBH.  What
-> is the kernel really advertising when setting XENFEAT_dom0?  I've
-> assumed it was the capability of running as a hardware domain, which
-> requires a different set of functionality inside of the kernel to deal
-> with hardware devices.
+>> Looking at the series again I don't see anything obviously wrong, but I
+>> think the riskiest change is commit 291b3abed657 ("x86/xen: use
+>> lazy_mmu_state when context-switching") - worth trying to revert it.
+> With that reverted (on top of 7.0-rc6, didn't updated to rc7 yet), I
+> still got panic, although might be a bit different one:
+>
+> [    8.099973] BUG: unable to handle page fault for address: ffff888008000670
+> [    8.100004] #PF: supervisor write access in kernel mode
+> [    8.100021] #PF: error_code(0x0003) - permissions violation
+> [    8.100037] PGD 3a00067 P4D 3a00067 PUD 3a01067 PMD 7cd7063 PTE 8000000008000021
+> [    8.100063] Oops: Oops: 0003 [#1] SMP PTI
+> [    8.100079] CPU: 0 UID: 0 PID: 226 Comm: kworker/0:2 Not tainted 7.0.0-0.rc6.1.qubes.1001.fc41.x86_64 #1 PREEMPT(full) 
+> [    8.100110] Workqueue: events do_free_init
+> [    8.100126] RIP: 0010:native_set_pte+0x4/0x10
+> [    8.100145] Code: 00 03 c3 cc cc cc cc 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa <48> 89 37 c3 cc cc cc cc 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90
+> [    8.100195] RSP: 0018:ffffc90000c97c48 EFLAGS: 00010287
+> [    8.100212] RAX: e00c4f3d8b48c03e RBX: ffff888008000670 RCX: e00000000000003e
+> [    8.100234] RDX: e00c4f3d8b48c13e RSI: e00c4f3d8b48c03e RDI: ffff888008000670
+> [    8.100260] RBP: e00c4f3d8b48c13e R08: 0000000000000000 R09: 0000000000000001
+> [    8.100282] R10: 0000003b0c274b73 R11: e00000000000013e R12: ffffc90000c97cf0
+> [    8.100304] R13: ffffffffc04ce000 R14: fffc4f3d8b48cfff R15: e00000000000013e
+> [    8.100327] FS:  0000000000000000(0000) GS:ffff888094e81000(0000) knlGS:0000000000000000
+> [    8.100350] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [    8.100369] CR2: ffff888008000670 CR3: 000000000242e003 CR4: 00000000001706f0
+> [    8.100394] Call Trace:
+> [    8.100404]  <TASK>
+> [    8.100413]  __change_page_attr+0x24f/0x350
+> [    8.100429]  __change_page_attr_set_clr+0x61/0xd0
+> [    8.100446]  change_page_attr_set_clr+0x103/0x1a0
+> [    8.100467]  set_memory_nx+0x39/0x50
+> [    8.100481]  __execmem_cache_free+0x35/0xb0
+> [    8.100496]  execmem_free+0x9f/0x180
+> [    8.100510]  ? nft_chain_nat_exit+0xe70/0xe70 [nft_chain_nat]
+> [    8.100531]  do_free_init+0x2e/0x60
+> [    8.100545]  process_one_work+0x198/0x390
+> [    8.100559]  worker_thread+0x1af/0x320
+> [    8.100573]  ? __pfx_worker_thread+0x10/0x10
+> [    8.103338]  kthread+0xe3/0x120
+> [    8.103355]  ? __pfx_kthread+0x10/0x10
+> [    8.103369]  ret_from_fork+0x19e/0x260
+> [    8.103384]  ? __pfx_kthread+0x10/0x10
+> [    8.103397]  ret_from_fork_asm+0x1a/0x30
+> [    8.103412]  </TASK>
+> [    8.103421] Modules linked in: xenfs nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_redir nft_ct nft_chain_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables binfmt_misc intel_rapl_msr intel_rapl_common ghash_clmulni_intel xen_netfront xen_privcmd xen_gntdev xen_gntalloc xen_blkback xen_evtchn fuse loop nfnetlink ip_tables overlay xen_blkfront
+> [    8.103529] CR2: ffff888008000670
+> [    8.103542] ---[ end trace 0000000000000000 ]---
+> [    8.103558] RIP: 0010:native_set_pte+0x4/0x10
+> [    8.103576] Code: 00 03 c3 cc cc cc cc 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa <48> 89 37 c3 cc cc cc cc 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90
+> [    8.103625] RSP: 0018:ffffc90000c97c48 EFLAGS: 00010287
+> [    8.103641] RAX: e00c4f3d8b48c03e RBX: ffff888008000670 RCX: e00000000000003e
+> [    8.103664] RDX: e00c4f3d8b48c13e RSI: e00c4f3d8b48c03e RDI: ffff888008000670
+> [    8.103686] RBP: e00c4f3d8b48c13e R08: 0000000000000000 R09: 0000000000000001
+> [    8.103708] R10: 0000003b0c274b73 R11: e00000000000013e R12: ffffc90000c97cf0
+> [    8.103730] R13: ffffffffc04ce000 R14: fffc4f3d8b48cfff R15: e00000000000013e
+> [    8.103753] FS:  0000000000000000(0000) GS:ffff888094e81000(0000) knlGS:0000000000000000
+> [    8.103775] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [    8.103794] CR2: ffff888008000670 CR3: 000000000242e003 CR4: 00000000001706f0
+> [    8.103820] Kernel panic - not syncing: Fatal exception
+> [    8.103929] Kernel Offset: disabled
 
-Yes, that's my understanding.
+That is probably the same root cause indeed (lazy MMU appearing disabled
+in __xet_set_pte() while it should be enabled).
 
-> We might want to take this opportunity to clarify in the headers what
-> XENFEAT_dom0 means.
+>> If
+>> that doesn't help, I'd suggest bisecting the following range:
+>> 58852f24f956..291b3abed657
+> It will take some time, as the issue doesn't happen every time.
 
-I'm not opposed, yet this isn't directly related to giving the function
-an appropriate name.
+Understood. Here are the commits that are expected to have a functional
+effect on x86 (in reverse chronological order):
+- 291b3abed657 ("x86/xen: use lazy_mmu_state when context-switching")
+- 5ab246749569 ("mm: enable lazy_mmu sections to nest")
+- 9273dfaeaca8 ("mm: bail out of lazy_mmu_mode_* in interrupt context")
+- 66bdd779d344 ("x86/xen: simplify flush_lazy_mmu()")
 
-Jan
+Hope that helps, let me know if you have any further information. It
+would be worth enabling CONFIG_DEBUG_VM and then checking if any WARN()
+splat appears in the log.
+
+- Kevin
 
