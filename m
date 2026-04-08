@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B851073CB0
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2026 13:11:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1276098.1561699 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 256111073CB4
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2026 13:13:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1276115.1561708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wASgK-0000b4-EF; Wed, 08 Apr 2026 13:10:56 +0000
+	id 1wASit-00018x-S1; Wed, 08 Apr 2026 13:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1276098.1561699; Wed, 08 Apr 2026 13:10:56 +0000
+Received: by outflank-mailman (output) from mailman id 1276115.1561708; Wed, 08 Apr 2026 13:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wASgK-0000ax-AY; Wed, 08 Apr 2026 13:10:56 +0000
-Received: by outflank-mailman (input) for mailman id 1276098;
- Wed, 08 Apr 2026 13:10:55 +0000
+	id 1wASit-00018q-P6; Wed, 08 Apr 2026 13:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 1276115;
+ Wed, 08 Apr 2026 13:13:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wASgJ-0000ak-HB
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 13:10:55 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <bounce-md_30504962.69d6547c.v1-1e0d2cfd041d4ac49ab68c2a468eb9b5@bounce.vates.tech>)
+ id 1wASis-00018g-Qs
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 13:13:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wASgI-005LQL-TP
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 15:10:54 +0200
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69d653c9-bab6-0a2a0a5309dd-0a2a4505adcc-34
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 15:10:54 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <jbeulich@suse.com>)
- id 69d653de-3760-0a2a45050019-d155802db8a5-3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 15:10:54 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-488a88aeec9so50971605e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 06:10:54 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d1e4d282esm58133102f8f.18.2026.04.08.06.10.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Apr 2026 06:10:53 -0700 (PDT)
+ id 1wASis-007v1I-4F
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2026 15:13:34 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <bounce-md_30504962.69d6547c.v1-1e0d2cfd041d4ac49ab68c2a468eb9b5@bounce.vates.tech>)
+ id 69d6547d-e002-0a2a0a5209dd-0a2a4501c2c6-2
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 15:13:34 +0200
+Received: from [198.2.178.25] (helo=mail178-25.suw51.mandrillapp.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from
+ <bounce-md_30504962.69d6547c.v1-1e0d2cfd041d4ac49ab68c2a468eb9b5@bounce.vates.tech>)
+ id 69d6547c-6fc9-0a2a45010019-c602b219371b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 15:13:33 +0200
+Received: from pmta13.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail178-25.suw51.mandrillapp.com (Mailchimp) with ESMTP id
+ 4frNmX3Pv1z4f4SRY
+ for <xen-devel@lists.xenproject.org>; Wed,  8 Apr 2026 13:13:32 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 1e0d2cfd041d4ac49ab68c2a468eb9b5; Wed, 08 Apr 2026 13:13:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,93 +53,203 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Autocrypt:Content-Language:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775653854; x=1776258654; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=/EqXdAz4Z1r0fJ2IUFEFv5ntaUz0uYkqQDuLdrMcrSo=;
-        b=JL7J3StYdYbIZakCkXbksjnuCN5Do61v+51QhURC23iW6R6Smz4tk0LM/TNG+DULmb
-         m1DmfMCR3Czydd0bRW/XD8JcYkCglMZJ5iBI972yU0x2le/Au+ezE/Isozyw00Vu0hu7
-         sOQT46GZmU9zorPiqf8pSkL/ewcZ+nFTNbP+3KjD8nxVN1GBJSec0T8N0uoESqC+6pUg
-         HVeaWtY/9qfpIeWDN5F8LILr+7zyM5k5NP1qCkKoqMOfRC622yISfe4tlb5kRgGmFXk7
-         SV1XtrKW7KTqxomiHfh1XQJhBz4+m4cj3I+SICV4wpuUPN0So5IXLDrYavh1oy4CJZsn
-         ZTSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775653854; x=1776258654;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=/EqXdAz4Z1r0fJ2IUFEFv5ntaUz0uYkqQDuLdrMcrSo=;
-        b=M8FEP12JS6ovDdah5bkYZHk2jP4beC86RgmFsF/y3Vz9IbPYh6JulZQwXTDNQbfs0I
-         5Sl4/nffvHRqvCoAsQC9e1s3QxMy9ff8VoNZSkhVOQOFglnyp9hMXfRESnZQpBUaZb4M
-         r6hKHVNYLc5MQDosFkyBrXTwxWcNg96gwaD8rjoedWicc2KKvWPkWZa8/a1m7LzLZ0i4
-         2WeIj1Yrsle3Ctn1Ue25SGibc63Wfsy8NpJLF2CnEjoWrksGh5ZzSgyzD0++j8azlehP
-         3tz1+iBkYnhdoZZRlmib7eORQmDupU3alrHUICJkvn6DbzNosKtmANI/im6XhSWR3Suv
-         MenQ==
-X-Gm-Message-State: AOJu0Yy4nPU0iJyvlk7zyiJnEOZRsmi11f79lKJZFERGNO7hPFECt5ih
-	fhj4wBEnpBPYJ5mXLY7evINIpzaZZsaDPfMYK6F5XkRXnTOLqMdDf0xq/BQfnxqcHA==
-X-Gm-Gg: AeBDieu92FE/GCoO0LRyRYMOTvSveini+/0MD3M+0EJboxUcu7yIA/AFpK4CsD4oY48
-	F3UU0jNiDKhrIPXfrQOzvHHACOaE8Ndf3HsywhXnb6qFIb8QlvqXwL/Bghxxm4z4ooItuTbMspA
-	wISA40ZA71Xw8MjAdE0Odv06XZfqD4PABxyUcVrmmrmiYHUlhPtfY2X6Iu/eaIhFL9KQ2SC+uMR
-	aUoVm2JWxlnZiAgCjrjOFomh+U8e/ajpbkOhINbbP/e4pATgebUAxhwJcsAJYtMBGBrqmJOfus6
-	Fao78rm91Xzlb7ffhN9QGgJ8saAxARaApY1czVXjHF5La2F0PS91COnf5afyjgAjBHE9uhycCEJ
-	P3nfwIaz+bQ0SP8H/PJ6AXH4byrgOI6/xtfUm63zfajBIO5YjS0f2vlMWrhCGIvggAc+PwrJf7a
-	uGMHIUJjYN0HrxPonK8yRUGWKPI3vEGAAOKloritzW2eLldjr2UFJlmfPCs07ZIsSTddl/3TPTx
-	Kvmj6UXqn54sKeXlu6va0ujDA==
-X-Received: by 2002:a05:600c:4593:b0:485:33ad:3c9f with SMTP id 5b1f17b1804b1-488997de1c6mr325627405e9.25.1775653854286;
-        Wed, 08 Apr 2026 06:10:54 -0700 (PDT)
-Message-ID: <13f9a1c9-5722-44cc-b044-6bdbc7e845a9@suse.com>
-Date: Wed, 8 Apr 2026 15:10:53 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1775654012; x=1775924012;
+	bh=/AOHxtvS+brt5jEvLfI+mHBuRJlyZx+552KE9mHGmIQ=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=cyhp/qIK6HnbmHn3fp3jVdsc+/Kyk/WDttzB6DGFaQ+Pf6Kd8CT+3RM6IkRKUWq9Y
+	 9lc5i0LMU3G3nXJJS9Vu9j58K+2ID3zIc3TJ7m8IvgJ7UAt+v6G7bKF9zhgcq+pVcu
+	 jc+gChrJh5SFJ5U36x1eN33iWXe2Zkos10USRbvWZ/iLW4CfEWYS+9Df3vD1v7bD7A
+	 ulxmCK/g5W/s8KGaD+feEbAmUUHx0JW7/23GnQkqmrq6/nfVYbCHNaZWpI6/bL1RZ6
+	 7ohZolikaah19E2lE/r27SrhG3gg9ujF0oDo6dfX/KDdtufvWBLpyT4o229+kVaVRY
+	 qUNfb2MOWgWsw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1775654012; x=1775914512; i=teddy.astie@vates.tech;
+	bh=/AOHxtvS+brt5jEvLfI+mHBuRJlyZx+552KE9mHGmIQ=;
+	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=iYrcCps/v24Da/gW0CO2IHbl4YN30T983MHVkLagDnT93OYJjR/S+VDTG8KmbJCrK
+	 D/EKM3yWUA/7u9Z6rx1BvGQ/8s1hhklhhQioTkta3QGY/0dp87D8QBG8T9wNP6u1tZ
+	 Fj4xYqHp4BPs4nL55XhBrl3n+Dzw8V5QMD8+cIVApwIYOYpcOKg0hcj53bmdwS4JCb
+	 e39xIiXHa5GLSqvS3w62Wf16jS5LzXOSWK3d0JhYeBVktPsVfhz1HS1wpgo7JkqgvQ
+	 aQM4ZMs+V3WA8lBOxJLW8ybLzJ/0qTSpiMXMi6siWRvyOimRk7GXUxex/Kfrz/oVMs
+	 h20HWg9ZUNIEw==
+From: "Teddy Astie" <teddy.astie@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=20v10]=20xenpm:=20Add=20get-core-temp=20subcommand?=
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1775654009868
+Message-Id: <9bad4d4c-b6db-4cce-b43b-2970d333c0ce@vates.tech>
+To: "Jan Beulich" <jbeulich@suse.com>
+Cc: "Oleksii Kurochko" <oleksii.kurochko@gmail.com>, "Community Manager" <community.manager@xenproject.org>, "Anthony PERARD" <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
+References: <22bcde2914c0303b2c594485542af19d2952e782.1775570823.git.teddy.astie@vates.tech> <a9b21308-18f6-41ab-9ba6-1c2874cee86b@suse.com>
+In-Reply-To: <a9b21308-18f6-41ab-9ba6-1c2874cee86b@suse.com>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.1e0d2cfd041d4ac49ab68c2a468eb9b5?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260408:md
+Date: Wed, 08 Apr 2026 13:13:32 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jan Beulich <jbeulich@suse.com>
-Subject: Xen 4.21.1 released
-To: xen-announce@lists.xenproject.org
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1775653854-2233C96F-1AF07233/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-d62444/1775654014-BC967185-C1FBC070/0/0
 X-purgate-type: clean
-X-purgate-size: 449
+X-purgate-size: 4252
 
-All,
+Le 08/04/2026 =C3=A0 14:36, Jan Beulich a =C3=A9crit=C2=A0:
+> On 07.04.2026 16:10, Teddy Astie wrote:
+>> --- a/CHANGELOG.md
+>> +++ b/CHANGELOG.md
+>> @@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keep=
+achangelog.com/en/1.0.0/)
+>>        mitigate (by rate-limiting) the system wide impact of an HVM gues=
+t
+>>        misusing atomic instructions.
+>>      - Support for CPIO microcode in discrete multiboot modules.
+>> +   - Introduce get-core-temp to xenpm to query CPU temperatures on Inte=
+l
+>> +     platforms.
+> 
+> Would you mind inserting "command" or "option" before "to xenpm"?
+> 
 
-we're pleased to announce the release of another bug fixing Xen version. (A
-little late, sorry.)
+Some like
+ > Introduce get-core-temp option to xenpm command ... ?
 
-Xen 4.21.1 is available from its git repository
-http://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=refs/heads/stable-4.21
-(tag RELEASE-4.21.1) or from the XenProject download page
-https://xenproject.org/resources/downloads/.
+(or something like that)
 
-We recommend all users of the 4.21 stable series to update to this first
-point release.
+I don't have any issue with rewording it.
 
-Regards, Jan
+>> @@ -1354,6 +1358,121 @@ void enable_turbo_mode(int argc, char *argv[])
+>>                   errno, strerror(errno));
+>>   }
+>>   
+>> +static int fetch_dts_temp(xc_interface *xch, uint32_t cpu, bool package=
+, int *temp)
+>> +{
+>> +    xc_resource_entry_t entries[] =3D {
+>> +        { .idx =3D package ? MSR_PACKAGE_THERM_STATUS : MSR_IA32_THERM_=
+STATUS },
+>> +        { .idx =3D MSR_TEMPERATURE_TARGET },
+>> +    };
+>> +    struct xc_resource_op ops =3D {
+>> +        .cpu =3D cpu,
+>> +        .entries =3D entries,
+>> +        .nr_entries =3D ARRAY_SIZE(entries),
+>> +    };
+>> +    int tjmax;
+>> +
+>> +    int ret =3D xc_resource_op(xch, 1, &ops);
+>> +
+>> +    switch ( ret )
+>> +    {
+>> +    case 0:
+>> +        /* This CPU isn't online or can't query this MSR */
+>> +        errno =3D ENODATA;
+>> +        return -1;
+>> +
+>> +    case 1:
+>> +    {
+>> +        /*
+>> +         * The CPU doesn't support MSR_TEMPERATURE_TARGET, we assume it=
+'s 100
+>> +         * which is correct aside a few selected Atom CPUs. Check Linux
+>> +         * kernel's coretemp.c for more information.
+>> +         */
+>> +        static bool has_reported_once =3D false;
+>> +
+>> +        if ( !has_reported_once )
+>> +        {
+>> +            fprintf(stderr, "MSR_TEMPERATURE_TARGET is not supported, a=
+ssume "
+>> +                            "tjmax =3D 100, readings may be incorrect.\=
+n");
+>> +            has_reported_once =3D true;
+>> +        }
+>> +
+>> +        tjmax =3D 100;
+>> +        break;
+>> +    }
+>> +
+>> +    case 2:
+>> +        tjmax =3D (entries[1].val >> 16) & 0xff;
+>> +        break;
+>> +
+>> +    default:
+>> +        if ( ret > 0 )
+>> +        {
+>> +            fprintf(stderr, "Got unexpected xc_resource_op return value=
+: %d", ret);
+>> +            errno =3D EINVAL;
+>> +        }
+>> +        return -1;
+>> +    }
+>> +
+>> +    *temp =3D tjmax - ((entries[0].val >> 16) & 0xff);
+>> +    return 0;
+>> +}
+>> +
+>> +static void get_core_temp(int argc, char *argv[])
+>> +{
+>> +    int temp =3D -1, cpu =3D -1;
+> 
+> cpu's initializer is needed, but why would temp need one? You rely on ...
+> 
+>> +    unsigned int socket;
+>> +    bool has_data =3D false;
+>> +
+>> +    if ( argc > 0 )
+>> +        parse_cpuid(argv[0], &cpu);
+>> +
+>> +    if ( cpu !=3D -1 )
+>> +    {
+>> +        if ( fetch_dts_temp(xc_handle, cpu, false, &temp) )
+>> +        {
+>> +            fprintf(stderr, "Unable to fetch temperature (%d - %s)\n",
+>> +                    errno, strerror(errno));
+>> +            exit(EXIT_FAILURE);
+>> +        }
+>> +        else
+>> +            printf("CPU%d: %d=C2=B0C\n", cpu, temp);
+>> +        return;
+>> +    }
+>> +
+>> +    /* Per socket measurement */
+>> +    for ( socket =3D 0, cpu =3D 0; cpu < max_cpu_nr;
+>> +          socket++, cpu +=3D physinfo.cores_per_socket * physinfo.threa=
+ds_per_core )
+>> +    {
+>> +        if ( fetch_dts_temp(xc_handle, cpu, true, &temp) )
+> 
+> ... fetch_dts_temp() to always update it in the success case anyway, both=
+ here and
+> in the other loop further down.
+> 
+
+Indeed, that's not really required anymore.
+
+> Other than this (happy to adjust while committing, provided you agree):
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> 
+
+Looks good to me with the changes.
+
+> Jan
+> 
+
+Teddy
+
+
+--
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
+
 
