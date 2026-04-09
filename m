@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB0910FC456
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 00:13:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1276623.1561984 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE2910FC465
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 01:43:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1276634.1561993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAd1c-0005mE-Ts; Thu, 09 Apr 2026 00:13:36 +0000
+	id 1wAeQ9-0000al-4h; Thu, 09 Apr 2026 01:43:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1276623.1561984; Thu, 09 Apr 2026 00:13:36 +0000
+Received: by outflank-mailman (output) from mailman id 1276634.1561993; Thu, 09 Apr 2026 01:43:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAd1c-0005m7-Qp; Thu, 09 Apr 2026 00:13:36 +0000
-Received: by outflank-mailman (input) for mailman id 1276623;
- Thu, 09 Apr 2026 00:13:35 +0000
+	id 1wAeQ9-0000ae-1s; Thu, 09 Apr 2026 01:43:01 +0000
+Received: by outflank-mailman (input) for mailman id 1276634;
+ Thu, 09 Apr 2026 01:43:00 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien.grall.oss@gmail.com>) id 1wAd1b-0005m1-CB
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 00:13:35 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1wAeQ8-0000aY-2z
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 01:43:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAd1a-009EU6-G0
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 02:13:34 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wAeQ6-007il5-9Z
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 03:42:58 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <julien.grall.oss@gmail.com>)
- id 69d6eeeb-e002-0a2a0a5209dd-0a2a45049702-32
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 02:13:34 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <julien.grall.oss@gmail.com>)
- id 69d6ef2e-bb33-0a2a45040019-d155dd31e127-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 02:13:34 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-43b87970468so192957f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Apr 2026 17:13:34 -0700 (PDT)
+ (envelope-from <sstabellini@kernel.org>)
+ id 69d703bc-e002-0a2a0a5209dd-0a2a4505a344-38
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 03:42:58 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <sstabellini@kernel.org>)
+ id 69d70421-3760-0a2a45050019-ac6904feddd6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 03:42:58 +0200
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 8D41F600AD;
+ Thu,  9 Apr 2026 01:42:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 805F3C19421;
+ Thu,  9 Apr 2026 01:42:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,108 +50,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1775693614; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Q0/lYVaKlVdBlwOJnNl1FVkd00ZQsQIte56hhogctLplwrjqT+qebBIP18mwVGcXO1
-         l7z4DNxVCRWsVs3s9iLk4EIt9WWiJp1sVIlD/G7Ht/f9cETYcJ7RbV/HhdZCSt8Gg8TG
-         7keNgRSfpQZlsF1rxBplQAJS+lREj/bVedkNHzCpZMoPLHPlF/d0JlheRw1w11prqJWL
-         l5+Z0AB4nrh9bQ6nEkMVv2AvItOiz94gUW44d+azs9UyCiY0bpbFrV22xNuBqVxlow6u
-         w+fTYDG4d9eIH+6VIa5y686LMAjtizzIoAXZDMqDi1ilmTfHErbsf3nOr4Ntr9RxVpK8
-         83tg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=YoBKR9yBDlNC21/0O3XNShWG2QOL440fpgoI5foBZeY=;
-        fh=3nwizXhm5seTzn3SGLW2vYNrFe138cEImF99vpnv6Gs=;
-        b=PHXQr2lDFMEoDxaI7D2NFV9xwKPREBo0qzj4hWpB/+A29xwQrsfKqeSs3I5YwpWKcA
-         yxxsecBtPddlnjuaYA/29qNpbKP0lQfpIh4ErBbkFPMxzKAUvseqrn8S0fh0QTe9OUl0
-         pnUJm38d/t7i7ILsC0pF7duVKfUS4a9lia3T64PT/WOT/boRpSwTVbthKI9K/ysr8DGo
-         UwxTMRkSs05ge6gX4fD8ix6i1PNmi11FeroG5sEJTuFR6R3UDD2gL3LaOeSolQaqRdT9
-         7BfTvUS4RLyhv8OaoFKMyEgHvldF1ZSuGKKr/IEDHMSQCSR7OqBF+0i3SevhwBeUgQZ4
-         926Q==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775693614; x=1776298414; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=YoBKR9yBDlNC21/0O3XNShWG2QOL440fpgoI5foBZeY=;
-        b=romJroC8cUuTW3L0mRsbg/UJUKtL46QQzfhd6T/7cQmlfa6eAaUXHVWENZVq/6keQL
-         gZWQECVjli2jGcSteAPL2x7eK1DTpQ1iDOUMSblsyKYhT+BkjAbQ6xD6R8LCNt54R0Jz
-         wl3MGMQIK8K+4jGvlPfZchR/BlSvG4vk4A0gQbJKwGfjfN2pPtxvnxL9mK2MeJgsOvs7
-         rptGppz/b5GL/AK5v49ouo6gl+FcN+wyYXyRScEvswkM2j/jzmp1LqTafjFDS7NcXxwp
-         g9AqjU/HFyx7Wnpo+fpqxxCT4VTEtWjdZANCuhGUN0pmp3h00Oj8n8/hG9ijJze0IY0k
-         Qn+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775693614; x=1776298414;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YoBKR9yBDlNC21/0O3XNShWG2QOL440fpgoI5foBZeY=;
-        b=n5+yTPv55vwgy7Ba/nKiEUEitvINJnsxWZiNXFHkJ1sjhj/sFUqpIl53Mn9Y4Kighw
-         A4FfVS/pv5Qzneu1FOyS06kuNCgud7wZTPDx5ecg3AP1dDhlSASnbQ+KwxznMEbiK7vO
-         kQPVp9BVEvruREZncg3oVydQo5Ll/N8zO2yz6doYqqczP+682bOvVbQ2PjltXqlWf2ZH
-         hwpcDockkeJQzZWA3XqvLKJdQP0+jOHNnUdB1DVU+3rmjF44qIlFZxNAwHSGIAvZqfQ0
-         AlbwT5Pt6S23Q2cbRNbmd4936ukLliqOla/anFkY+HmIbVpH1EvFQpEIHWhat3fbvpUr
-         YVvA==
-X-Forwarded-Encrypted: i=1; AJvYcCWY/d6Pqo4roOli91J6++oW4GCc8KrpJyIhplz6uwlIPnT3XDUhgbwAy8zoU4hdiYKdSwdQlQAziSE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yz3bUoM/fCxcnu1bFIx4jYO54Gb1ndMhF/pF/luKU5WkHOXS48Z
-	Wjpv+oaLI8o1TsXdBDrCezZRDFz5Qx+HpoYDMwiLqNY4/XMJ+mAXk4ai2lIP+BSCCnuhXCz/g4V
-	Sxpukc4zXgOMXCQXsZ09E7FoEz2aH5iNFY6TwLJRzSCrppr5mwZkRP+eOehurkuCbiCFSi/I=
-X-Gm-Gg: AeBDiet7swDMbWNdwTgxzy8nTid7amc/QjxTLetzZvTeoQptjX4fuVZBgKvZjijkMZs
-	Lk+o09G6sYepHBUDuwvIpJfEgtN6CpisqBxata8pgZZpgzZhi8fkQIUONh2NxPfokAQnR8/5WKn
-	i0gWDNCl2oDgqHMPX+IJGIomsc2VeUAPPvYJWtkSyzb2qZ3zoIX6288BMAPYdpxWLY+fbbjTCgr
-	L4bTDfqL4wsN038NtF4+S2AOkNi55Osv2miPZioGcmx7l2P2kdkxsytRbH2rvx6OdTUv7ks7aOU
-	GEyEQpAA
-X-Received: by 2002:a05:6000:18a5:b0:439:b858:1d28 with SMTP id
- ffacd0b85a97d-43d292cd1d1mr34630107f8f.26.1775693613753; Wed, 08 Apr 2026
- 17:13:33 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1775698976;
+	bh=IDbGrUYW1qx3z77VZ3kqZ5LKwaE7kx9+w/skuTHAltM=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=XybisJgRQ3EAAJXHnGoEZDOt4Fk6mszHaP69xkbaVBwYl1b/wU6Hu8qlEhgV6PQRj
+	 E4j9fcEXSE/yjjpniPaD3AzRK/DDAVzpODFsyVba15BXImQyvrAp8PSHXffLdOlDVJ
+	 dJ1IRR0RwDySXrx64m74/nBRQu+ffvlPFhEncYwuYTndF2/ot6iu9sxZsaWJtRXFRT
+	 UUcfrJ+GmZiOmWfgCwCcPGxPTjazub1hHOjXs1mgpraq6D4qaduJ/8Loyyqhv7O7C5
+	 3jWItOzyjRtif4nvTGB6i9zg/rowMPQTxb7nBO46BE7esdxFBsJCCfmpdbSoJOrT14
+	 gi6PaQ/ZB0tqg==
+Date: Wed, 8 Apr 2026 18:42:54 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: GuoHan Zhao <zhaoguohan@kylinos.cn>
+cc: jgross@suse.com, sstabellini@kernel.org, oleksandr_tyshchenko@epam.com, 
+    xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] xen/manage: unwind partial shutdown watcher setup on
+ error
+In-Reply-To: <20260407022443.12971-1-zhaoguohan@kylinos.cn>
+Message-ID: <alpine.DEB.2.22.394.2604081842470.2873990@ubuntu-linux-20-04-desktop>
+References: <20260407022443.12971-1-zhaoguohan@kylinos.cn>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-References: <20260318140900.3795710-1-ayan.kumar.halder@amd.com> <D28202A5-EA01-4AE7-816C-FE3B703605F6@arm.com>
-In-Reply-To: <D28202A5-EA01-4AE7-816C-FE3B703605F6@arm.com>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Thu, 9 Apr 2026 09:13:22 +0900
-X-Gm-Features: AQROBzB_v07FpIBvBExmtHpqxpPGzn_2e-9xcUzS7-iF0zqngYxJcJsIUpoMjQU
-Message-ID: <CAJ=z9a3cOSMyhPNnAzMaqR2kszmUCgJWKz03FOfNBkFxZ6byPQ@mail.gmail.com>
-Subject: Re: [PATCH v2] xen: gic-v3: Introduce CONFIG_GICV3_NR_LRS
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: Ayan Kumar Halder <ayan.kumar.halder@amd.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>, 
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: multipart/alternative; boundary="00000000000013eb8c064efbe3c9"
-X-purgate-ID: tlsNG-ebf023/1775693614-3253B51B-F630AE15/0/0
+Content-Type: text/plain; charset=US-ASCII
+X-purgate-ID: tlsNG-c201ff/1775698978-3173A96F-FF6118A3/0/0
 X-purgate-type: clean
-X-purgate-size: 973
+X-purgate-size: 892
 
---00000000000013eb8c064efbe3c9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, 7 Apr 2026, zhaoguohan@kylinos.cn wrote:
+> From: GuoHan Zhao <zhaoguohan@kylinos.cn>
+> 
+> setup_shutdown_watcher() registers shutdown_watch first, then the sysrq
+> watch, and finally publishes the supported feature-* nodes in xenstore.
+> If sysrq watch registration fails, or xenbus_printf() fails after one or
+> more feature nodes were created, the function returns immediately without
+> undoing the earlier setup.
+> 
+> This leaves the system in a partially initialized state, with registered
+> watches and/or stale xenstore entries despite the function reporting
+> failure.
+> 
+> Unwind the partial setup before returning an error by unregistering any
+> watches that were already registered and removing feature nodes that were
+> already published.
+> 
+> Signed-off-by: GuoHan Zhao <zhaoguohan@kylinos.cn>
 
-=F0=9F=98=8A
-
-Julien Grall reacted via Gmail
-<https://www.google.com/gmail/about/?utm_source=3Dgmail-in-product&utm_medi=
-um=3Det&utm_campaign=3Demojireactionemail#app>
-
---00000000000013eb8c064efbe3c9
-Content-Type: text/vnd.google.email-reaction+json; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-{
-  "emoji": "=F0=9F=98=8A",
-  "version": 1
-}
---00000000000013eb8c064efbe3c9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><p style=3D"font-size:50px;margin-top:0;margin-bottom:0">=F0=9F=98=8A<=
-/p><p style=3D"margin-top:10px;margin-bottom:0">Julien Grall reacted via <a=
- href=3D"https://www.google.com/gmail/about/?utm_source=3Dgmail-in-product&=
-amp;utm_medium=3Det&amp;utm_campaign=3Demojireactionemail#app">Gmail</a></p=
-></div>
-
---00000000000013eb8c064efbe3c9--
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
