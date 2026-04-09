@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCD3CE98FD2
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 16:21:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1277969.1563027 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6DBF364A9
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 17:35:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1278037.1563053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAs7v-0006Lp-87; Thu, 09 Apr 2026 16:21:07 +0000
+	id 1wAtHu-00088i-W7; Thu, 09 Apr 2026 17:35:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1277969.1563027; Thu, 09 Apr 2026 16:21:07 +0000
+Received: by outflank-mailman (output) from mailman id 1278037.1563053; Thu, 09 Apr 2026 17:35:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAs7v-0006Li-4H; Thu, 09 Apr 2026 16:21:07 +0000
-Received: by outflank-mailman (input) for mailman id 1277969;
- Thu, 09 Apr 2026 16:21:06 +0000
+	id 1wAtHu-00088b-TU; Thu, 09 Apr 2026 17:35:30 +0000
+Received: by outflank-mailman (input) for mailman id 1278037;
+ Thu, 09 Apr 2026 17:35:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69d7d1ef.v1-79112c74a4eb403bb19f7e2d994d5317@bounce.vates.tech>)
- id 1wAs7t-0006LW-VW
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:21:05 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <olekstysh@gmail.com>) id 1wAtHs-00088V-Ub
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 17:35:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAs7t-00AE9I-BP
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 18:21:05 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69d7d1ef.v1-79112c74a4eb403bb19f7e2d994d5317@bounce.vates.tech>)
- id 69d7d1e5-5cb7-0a2a0a5109dd-0a2a450ae60c-16
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:05 +0200
-Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from
- <bounce-md_30504962.69d7d1ef.v1-79112c74a4eb403bb19f7e2d994d5317@bounce.vates.tech>)
- id 69d7d1f0-ee98-0a2a450a0019-c602bb0ee608-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:05 +0200
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4fs4tR3b3xz8XS2Rn
- for <xen-devel@lists.xenproject.org>; Thu,  9 Apr 2026 16:21:03 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 79112c74a4eb403bb19f7e2d994d5317; Thu, 09 Apr 2026 16:21:03 +0000
+ id 1wAtHr-006HS6-U1
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 19:35:27 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <olekstysh@gmail.com>)
+ id 69d7e35d-e002-0a2a0a5209dd-0a2a4508dba6-4
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 19:35:27 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <olekstysh@gmail.com>)
+ id 69d7e35f-fab6-0a2a45080019-d1558032d454-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 19:35:27 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4852a9c6309so11306795e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 10:35:27 -0700 (PDT)
+Received: from [10.17.80.122] (ll-22.209.223.85.sovam.net.ua. [85.223.209.22])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488d5b3d4dbsm5917455e9.14.2026.04.09.10.35.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Apr 2026 10:35:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,136 +53,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="thierry.escande@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1775751663; x=1776021663;
-	bh=Nz9cFB5Mcx1tT5bpJb3P1KzNsuuko5bfszc5bYglBPc=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=LSkNrZLdzHFgCWHDR4OlVLnNFiaF4Kw5htG77yaS9aPysISMCILfP+HQpgYMuEvYA
-	 LXbrAMd9LzWzgU3LiRZxyS9uREgEvSjZcZhUrUEcvbr44nvVP44x8oLj8LJ0BgNSpH
-	 4jUmRLObZfWGdmC/LnqP76PYgyvAgXGF6SXMueyJrjXQ1MOl5ir+k2ZpPhjCHIV+oX
-	 xjeC813O3PL/JmUlh4YO0Tw1xcpVWYb/gqniBaqDKEGZcZDNMI2EjJfbZeId6qVpO0
-	 US7HpKFXirzpRT4rZKEtCGKNWZZnpUKIp+8WkK3BIqwT3gxpkNkBnJoh4HvR5GGu3O
-	 ByWfZv3vw8EAg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1775751663; x=1776012163; i=thierry.escande@vates.tech;
-	bh=Nz9cFB5Mcx1tT5bpJb3P1KzNsuuko5bfszc5bYglBPc=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=UhweX3OBt8mayspvrUrkiNjyHDQSwbhUVgmgFC7ItbpcV0Lmz000p0vSXDtH2J3+5
-	 4JnKc0F91sND+7RALcebEHTaAuPn29IFxLu5NQDl2ZudvTnJhYSb01rtixKkjkXSWz
-	 rH8OCUXxl4MIOxEwPbjWfmE6qTe3TqANaMaSBX5wfFcUpA7fV8hqprgNB9Orgk/KFV
-	 55BTsseTefHteKUpMVZWH4kcqXa28rzPnAustlvBFXbHLzUPTAzj2NInv4xDig12eD
-	 BXQpsRzf/KZNud/mBak3z0iM/3Kd25bvAxlfd/+T+8GI+A3WVotFbvfqAZbBiYHRWE
-	 tU+9e4jj7EhKg==
-From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20v2=201/3]=20xl:=20Add=20pci=20device=20hotplug=20option?=
-X-Mailer: git-send-email 2.53.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1775751662747
-To: xen-devel@lists.xenproject.org
-Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>, "=?utf-8?Q?Daniel=20P=20.=20Berrang=C3=A9?=" <berrange@redhat.com>, "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>
-Message-Id: <20260409162000.1102680-2-thierry.escande@vates.tech>
-In-Reply-To: <20260409162000.1102680-1-thierry.escande@vates.tech>
-References: <20260409162000.1102680-1-thierry.escande@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.79112c74a4eb403bb19f7e2d994d5317?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260409:md
-Date: Thu, 09 Apr 2026 16:21:03 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1775756127; x=1776360927; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=zASOO5sUbm0qt4ARyAXDLmKxNyG8XSmbIY+ZXxkGWOw=;
+        b=CV64k2KAK+FFO2rd0Fz/z4/Sir5jEyCjcXhWYFlMi6vD1ECcqbb0pw9212qNgYPq3G
+         Mh02/wBsGA15OFBzJheqUgyBN6XyxlKvM42F4sfk6SU+u3k6XWsVUvIdZy0LGyNigf3G
+         XaQzcCGS5dYx25mazT+XFunVCgpQmXHHD+n7TobV0NvwE2DSOpdQNLGBd3r2YlS9iztS
+         /cic5JEz/rsStQbiwd20VK5/ejPk7lDJx7Rzj0lztG2RcAy5MTaV4QtwuTr0uvDyDfgK
+         fMTQekkRwq28rFX4/XlYr5nYsa8HIg+8GwR1KqSp110wSKQKlFCj4mOUf4Aynf4BQ8Kh
+         x2Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775756127; x=1776360927;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zASOO5sUbm0qt4ARyAXDLmKxNyG8XSmbIY+ZXxkGWOw=;
+        b=Si2TNClclQIwah2Ck09MwB0pdNmp2plZkGyOlNN57i3r5zLN2uDUOpMWQoEbX2fTYQ
+         MQRL7n0996MnhoheesshXpQjWMFx1xJb47MUakuDA4yNVVEGSKgmkUDnuinvr6eE/fXN
+         jJ7CIfCVSuuf6/zhxFBexDKYlNvOxU1yqFXSIx2AKwxZb5LhBJdAoCigUVZEgveoHUT4
+         8dgClMO7z+omI65oioSUi5JqV/Rme+bXLdBlU2ZBIJMX3L302qzgfrvhXQGRhhkw5LxE
+         353oujKJLTgTpkBY4LmCdwh69hBfP8ev4yhRJG0aPGe1at3R8KPssqxL2A2BMRQjZal+
+         A3mQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWMaLH00o8BxYB6py7+FnX9zhgsDOW+O1UhducO5R9w8U469X1UbFBLsFYWomw66FH8H5DY8bNwUlg=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzZ84RQ8361exHNJBLCUs8S+kSAIQazVxy1WG73e5dfXZxkHg0P
+	huVeND1tR43dvXJaYv4g1JLvPtgug+PasK/E8bwDROfFRHmhQZXh0oiV
+X-Gm-Gg: AeBDietEpjSQ2rAC8RGwDOdXicXwYwk0wtUhh25GSunsW8O04GmuHqc0WZ8Bab4aS3P
+	82V+F9GJH3o/oYr28Y4KsjW3za0spNW6HPL+J+H+VKXXff/RWBUSM4vih4uU3LYi5jbldsSLNP6
+	3ZW+Oy6MQfie6Cpkt4frm9kjEWr3GYSlgVJ+hxQHHOaGeOhpsBaPZXFAZj1vCFMW9UqmmcrNg8P
+	mMYdxq5HJQ01NSfgQ2RxRrqrJVsmrd0O3bpxUlCTCPpsKkell+rFHGV6kgAuA3Nk/RLn8PYayY2
+	I7V/C55kz1Be2kXhtazg0qBdQVZUHNAgof7VDQzJsL1dj8x78kiH2WAh1p0YciDgHHZeaaEXpcw
+	2ES0qr75F4wFQJ4Ec/T5Nk5XK5OKcFx43snY412XwUyGLBLp4OLqEyBWN4uMTRoU4kmjwsy6jGy
+	dudYhtlGSIM07/r9YsnTY8ji5RqmVbET7JC1MXMa3w7RN7Q+Px4h/RQc0=
+X-Received: by 2002:a05:600c:4751:b0:485:ae14:8191 with SMTP id 5b1f17b1804b1-488ccf3e8c2mr61648795e9.5.1775756127072;
+        Thu, 09 Apr 2026 10:35:27 -0700 (PDT)
+Message-ID: <29d475b6-405a-4859-bc96-57ea58eadbae@gmail.com>
+Date: Thu, 9 Apr 2026 20:35:25 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 3/6] Kconfig: Make cpu hotplug configurable
+To: Jan Beulich <jbeulich@suse.com>, Mykyta Poturai <Mykyta_Poturai@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1774871881.git.mykyta_poturai@epam.com>
+ <f3c523ef5b94e930902016d69b440032c9e6c3bd.1774871881.git.mykyta_poturai@epam.com>
+ <e37330f7-96ca-41a9-81b1-14d7f3947dd6@suse.com>
+ <00a42bdd-8d9b-4828-b789-8d6163c0314c@epam.com>
+ <3bd1b2a8-475d-411a-bbe0-61b251079558@suse.com>
+Content-Language: en-US
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+In-Reply-To: <3bd1b2a8-475d-411a-bbe0-61b251079558@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1775751665-C481C0B1-8F0CA5CE/0/0
+X-purgate-ID: tlsNG-c1860d/1775756127-75F52497-0A35297E/0/0
 X-purgate-type: clean
-X-purgate-size: 2915
-
-This option is used to passthrough PCI devices using the Qemu command
-line (-device driver,...) instead of the QMP hot-plug mechanism.
-
-This is needed for Q35 support since its PCI root bus doesn't support
-hotplugging.
-
-If not specified, the default behavior is to use hotplug via QMP.
-
-Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
----
-v2: no change
----
- tools/libs/light/libxl_types.idl | 1 +
- tools/libs/util/libxlu_pci.c     | 2 ++
- tools/xl/xl_parse.c              | 5 +++++
- 3 files changed, 8 insertions(+)
-
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index a7893460f0..aca0e93793 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -922,6 +922,7 @@ libxl_device_pci = Struct("device_pci", [
-     ("seize", bool),
-     ("rdm_policy", libxl_rdm_reserve_policy),
-     ("name", string),
-+    ("hotplug", bool),
-     ])
- 
- libxl_device_rdm = Struct("device_rdm", [
-diff --git a/tools/libs/util/libxlu_pci.c b/tools/libs/util/libxlu_pci.c
-index 294482c6d7..f6440c878b 100644
---- a/tools/libs/util/libxlu_pci.c
-+++ b/tools/libs/util/libxlu_pci.c
-@@ -192,6 +192,8 @@ int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pci,
-             name_present = true;
-             pci->name = strdup(val);
-             if (!pci->name) ret = ERROR_NOMEM;
-+        } else if (!strcmp(key, "hotplug")) {
-+            pci->hotplug = atoi(val);
-         } else {
-             XLU__PCI_ERR(cfg, "Unknown PCI_SPEC_STRING option: %s", key);
-             ret = ERROR_INVAL;
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 48c72dce9c..7ea2a76662 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1361,6 +1361,7 @@ void parse_config_data(const char *config_source,
-     int pci_msitranslate = 0;
-     int pci_permissive = 0;
-     int pci_seize = 0;
-+    int pci_hotplug = 1;
-     int i, e;
-     int num_llc_colors;
-     int num_xs_quota;
-@@ -1699,6 +1700,9 @@ void parse_config_data(const char *config_source,
-     if (!xlu_cfg_get_long (config, "pci_seize", &l, 0))
-         pci_seize = l;
- 
-+    if (!xlu_cfg_get_long (config, "pci_hotplug", &l, 0))
-+        pci_hotplug = l;
-+
-     if (!xlu_cfg_get_string(config, "rdm", &buf, 0)) {
-         libxl_rdm_reserve rdm;
-         if (!xlu_rdm_parse(config, &rdm, buf)) {
-@@ -1720,6 +1724,7 @@ void parse_config_data(const char *config_source,
-             pci->power_mgmt = pci_power_mgmt;
-             pci->permissive = pci_permissive;
-             pci->seize = pci_seize;
-+            pci->hotplug = pci_hotplug;
-             /*
-              * Like other pci option, the per-device policy always follows
-              * the global policy by default.
--- 
-2.53.0
+X-purgate-size: 2475
 
 
 
---
-Thierry Escande | Vates XCP-ng Developer
+On 4/8/26 15:27, Jan Beulich wrote:
+> On 08.04.2026 14:21, Mykyta Poturai wrote:
 
-XCP-ng & Xen Orchestra - Vates solutions
+Hello all.
 
-web: https://vates.tech
+>> On 3/30/26 15:19, Jan Beulich wrote:
+>>> On 30.03.2026 13:59, Mykyta Poturai wrote:
+>>>> For the purposes of certification, we want as little code as possible to
+>>>> be unconditionally compiled in. Make CPU hotplug and SMT operations
+>>>> configurable to ease the process. This will also help with introducing
+>>>> CPU hotplug on Arm, where it needs to be configurable.
+>>>>
+>>>> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+>>>
+>>> Looks largely okay from a technical pov; one nit and one (repeated) remark
+>>> below.
+>>>
+>>>> --- a/xen/arch/x86/sysctl.c
+>>>> +++ b/xen/arch/x86/sysctl.c
+>>>> @@ -53,6 +53,11 @@ static long cf_check smt_up_down_helper(void *data)
+>>>>        unsigned int cpu, sibling_mask = boot_cpu_data.x86_num_siblings - 1;
+>>>>        int ret = 0;
+>>>>    
+>>>> +    if ( !IS_ENABLED(CONFIG_CPU_HOTPLUG) )
+>>>> +    {
+>>>> +        ASSERT_UNREACHABLE();
+>>>> +        return -EOPNOTSUPP;
+>>>> +    }
+>>>>        opt_smt = up;
+>>>
+>>> Another blank line above this one perhaps?
+>>>
+>>>> --- a/xen/common/Kconfig
+>>>> +++ b/xen/common/Kconfig
+>>>> @@ -637,6 +637,14 @@ config SYSTEM_SUSPEND
+>>>>    
+>>>>    	  If unsure, say N.
+>>>>    
+>>>> +config CPU_HOTPLUG
+>>>> +	bool "CPU online/offline support"
+>>>> +	depends on X86
+>>>> +	default y
+>>>> +	help
+>>>> +	  Enable support for bringing CPUs online and offline at runtime. On
+>>>> +	  X86 this is required for disabling SMT.
+>>>
+>>> The name of this option may need input from others; I'm not quite convinced
+>>> that this is a good name, as there's no true "hot-plugging" involved here.
+>>> IOW I fear the present name is misleading.
+>>
+>> My first idea was "CONFIG_RUNTIME_CPU_CONTROL" I can switch back to it.
+> 
+> I could live with that, for at least not being misleading. CPU_ONLINE or
+> CPU_ONLINE_OFFLINE might be another option, possibly better suited to
+> later become a dependency (select) of a true CPU_HOTPLUG. As said, input
+> from others may be helpful.
+
+To me, CONFIG_RUNTIME_CPU_CONTROL sounds a little bit vague. Although we 
+are indeed controlling CPUs at runtime, "control" could also mean 
+cpufreq, power management, affinity pinning. I think 
+CONFIG_CPU_ONLINE_OFFLINE is more precise, as it is clear from the name 
+that we are transitioning CPUs between online and offline states.
+
+
+> 
+> Jan
+> 
 
 
