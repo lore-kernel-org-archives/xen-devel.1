@@ -4,58 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02978F31E24
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 14:39:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1277621.1562770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0397F31E21
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 14:45:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1277635.1562779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAqXe-0000am-Cs; Thu, 09 Apr 2026 14:39:34 +0000
+	id 1wAqdJ-000277-SD; Thu, 09 Apr 2026 14:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1277621.1562770; Thu, 09 Apr 2026 14:39:34 +0000
+Received: by outflank-mailman (output) from mailman id 1277635.1562779; Thu, 09 Apr 2026 14:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAqXe-0000af-AJ; Thu, 09 Apr 2026 14:39:34 +0000
-Received: by outflank-mailman (input) for mailman id 1277621;
- Thu, 09 Apr 2026 14:39:33 +0000
+	id 1wAqdJ-000270-Pe; Thu, 09 Apr 2026 14:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1277635;
+ Thu, 09 Apr 2026 14:45:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wAqXd-0000aZ-1b
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 14:39:33 +0000
+ (envelope-from <corbet@lwn.net>) id 1wAqdI-00026u-LL
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 14:45:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAqXc-009xtw-Ck
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:39:32 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wAqdF-009cz4-Uu
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:45:23 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69d7ba1d-2eae-0a2a0a5409dd-0a2a45059bf0-14
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 16:39:31 +0200
-Received: from [52.101.57.0]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69d7ba22-3760-0a2a45050019-34653900f18f-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 16:39:31 +0200
-Received: from BL1P222CA0015.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:2c7::20)
- by LVUPR12MB999162.namprd12.prod.outlook.com (2603:10b6:408:3a2::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.16; Thu, 9 Apr
- 2026 14:39:29 +0000
-Received: from MN1PEPF0000F0E4.namprd04.prod.outlook.com
- (2603:10b6:208:2c7:cafe::dd) by BL1P222CA0015.outlook.office365.com
- (2603:10b6:208:2c7::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.41 via Frontend Transport; Thu,
- 9 Apr 2026 14:39:29 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- MN1PEPF0000F0E4.mail.protection.outlook.com (10.167.242.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Thu, 9 Apr 2026 14:39:29 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 9 Apr
- 2026 09:39:28 -0500
-Received: from [10.252.147.171] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
- Transport; Thu, 9 Apr 2026 09:39:27 -0500
+ (envelope-from <corbet@lwn.net>)
+ id 69d7bb78-bab6-0a2a0a5309dd-0a2a4506bb4c-44
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 16:45:23 +0200
+Received: from [45.79.88.28] (helo=ms.lwn.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <corbet@lwn.net>)
+ id 69d7bb81-0df0-0a2a45060019-2d4f581ca456-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 16:45:22 +0200
+Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net
+ [71.229.227.126])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1)
+ server-digest SHA256) (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 33E0F40B2D;
+ Thu,  9 Apr 2026 14:45:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,141 +52,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JqR/XddnOhOFE94YO8IbhZr2xXVHWa8kpTjr0tDbM0g16hBImc93GiQBm7kw0XOsya0GTovRdt5uuolxmwuyLiYCUmM7X2KNBUgv7LcqHuxImPBVi/KqlUzmFS8j0TuZPJMGyAOjSv8ly2Yf+cUQvIIrLGXNGEL3Wbr9frT3Q46Hzk1Rjx9+bK6/2PqIyWCXGpmy0/toXBJVeRHlrI+0CmhRqUq+XMosVFZ+ki9wsNSFK7JDH2Sm+ClIRWEI2H9PVJaWE7YjANXRuijT1cOOjJK6jaDyVhbOqVynFWy7HhJqSRiFOr48npoL/UFg09cf8jx1YpOLrKEUnsH/oFSWWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jqm/d4wMbEQ/ud4emWG3Tsk3IJS83pXyHnPaPmPqBJQ=;
- b=G2rFIaTrdPLRafayCHvvgjw8lCJNkK7ssy+0LECA+bzgaCt7sfnwtVbuKsDEm3FBIsYaLDA7vHI28IfJEk/g7+MCi04mi5OSGvFroJgSZFe6SxZdUXAnFbTVBJ6At/rm8H7RZPIGs6MvA6eoxBfY5D/b0xiSXd9AVR38l78S0HIY/HPpWWiFkFBzTURWd4JzIJUXpOGyRYZSCxgfWnI7/5+wCYpYFoVZRKS9MnonvKvMmxrxCWVYJhCnzXtObA7owS023/wtxMO0whwSKDzz4L4NwNzkVbVR35jiFv5FMGjf3+rEhIsnMFmiPr6WoPwMFgUK4NW48DINpLqq8xikDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jqm/d4wMbEQ/ud4emWG3Tsk3IJS83pXyHnPaPmPqBJQ=;
- b=S7Sjz39yOU/xOMy8OeOT+lHoCF06UP6mvdFgmZpr3TusnQ+eVrAKu/tnipfODaiCBWXWf5l7cZ2O4cJjZci18Nbati55tuu+BtZaazf+GRuQP+bq1zsosxpR00S6jZ8lxpBoUAzIkObdZ4RUbfgFs5wYfHU27PPgy7KdKePP0AY=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <31be1ea4-ac65-43b1-80c0-7e1a8a8723ab@amd.com>
-Date: Thu, 9 Apr 2026 16:39:22 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20201203 header.d=lwn.net header.i="@lwn.net" header.h="From:To:Cc:Subject:In-Reply-To:References:Date"
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 33E0F40B2D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1775745920; bh=9UjJsJZfwJanCZGABshmZ68foQfId21dwyXnZXsn0Gw=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=M1oTRvPKdFlczPjiNIi/kCOEUebV1SXduyRsOHJpL6K0vbeF7garYUzALbfVlNJ4K
+	 vYb5oD+VFS1redUL+alhViqUA7Azlm07SoiQuXZZlwRqT+qrjdv2/ieKdX7WRLJ2ej
+	 bU5jiQnxytqPyM5rusfbuut+ov9uLPaL3OscGK1qaclZ8FP160BA7mZiw1TtzfSfI0
+	 wuO00U1Oqh/CUoQ0yrke2WSt2Ab0iRWzeuAfEn//CzU9PUcWjIiVWoYJaqWIouQZsj
+	 b+i6lOmTcZVE1487sabU7Vfjgpps3XWTp9w9T3+XQyBQPrCVyMxdsNPjrqVlDN6vSI
+	 BWvIqbZO4KlSQ==
+From: Jonathan Corbet <corbet@lwn.net>
+To: Shubham Chakraborty <chakrabortyshubham66@gmail.com>, jgross@suse.com
+Cc: sstabellini@kernel.org, boris.ostrovsky@oracle.com,
+ linux-doc@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org, Shubham Chakraborty
+ <chakrabortyshubham66@gmail.com>
+Subject: Re: [PATCH v2] docs: sysctl: Add documentation for /proc/sys/xen/
+In-Reply-To: <20260304150419.16738-1-chakrabortyshubham66@gmail.com>
+References: <20260304150419.16738-1-chakrabortyshubham66@gmail.com>
+Date: Thu, 09 Apr 2026 08:45:19 -0600
+Message-ID: <87fr54b3b4.fsf@trenco.lwn.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] xen/drivers/char/pl011: fix IRQ registration
- failure propagation
-To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1775742562.git.oleksii_moisieiev@epam.com>
- <9148b1721adfacf20c5621eb583f6fe87dead767.1775742562.git.oleksii_moisieiev@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <9148b1721adfacf20c5621eb583f6fe87dead767.1775742562.git.oleksii_moisieiev@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E4:EE_|LVUPR12MB999162:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95e302cc-b0b1-4729-f312-08de9645ce44
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	RtwQpTCt9AjrnNedVGIoRMnxy3X+LiaJpFdT5CZcE4trV8si58sH7HJr26mtJyBUIPkgNekrjfgSYUbnLVJFiduyQGBPyya/ohYEKHXQ1SKcWiFtYexs/IxInigOoK0wYaMw9eHePxnR69DDqV5GNhGajB+GJWIBU43rF1AGq6evqmoLMmiGaaVyDLGKKU42OwCwnReWG9hlgiVPN1Tk9M/3rDm9z/S51hJQrfoUTMoXPfXAvloFa82W0KrnfXLFh9EQo7eLvE58aImhv0lp5d9bb52RrUj9ULnHVl6DVlwQ2VOQkd/SwbXcODiM8c5ThlR32YT2beQcTucJqyicQbXkW5SfwHsoYYPC07ff9PflQR+3UT7VDkFRJZVPnMlogFvvdLZ2v1yYzq2O7xZxRMKoiVifWLmdDdVzfpANY+Bcj+e+C8iPtkwuZYxNjbUd20xl/iTrOvnZhCtC0d4bUmA5e4pJmg4oZbmQSW8ysjQ9dJe+e5f5FmIXGOz8qWjxa2MZlxPnCzHM1jQxwUIeuQ9hApG4phA+J34yHR5FkX1j6gQAz7ceJHYD0n8We3TekLtT05MX1hO69GZLi5yJHtLjpPtXZXA6QYNLYR/Q4K3de66Q7wpuPXTMTosz4Kybsi6bCig2GYROdugeESYGg1zKwBKlgKVlm5/6NdZwT8dZMGDzjw7ngkbRclCyW85mD2wAOswFajsiGoguZ1ALFr1dJcWBTkLC2ZvN2NnyS3vz9leagS00TtsHE14lTZhL2ZkBiCwtNQXm6+dEJRTLTw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	O4zuGNPe09SEC9toV+cmxJQlHUGsDvtOPvimo7y8E+iQvPuHr8wAnCEfYlkOTFDOHQXpJyPfwVTwvTcRySdedoyywfB9M/UTC3dJAhxMQ4kJ8oriFm6mlTQEuBV/quKC+7FsveYZMZKq9+vyNGBghatz1W2R4oif2aTHvnC5X7qbCuVtFFsvSZYakikzN27xregLMr9GLeZe9eoy1ANVMDStRffxkfMYXM3W+aA8KbKsko3JfEx0uNXyt0cgDG/ePrKxfXkqPCTzgwwfdSo6ltD2Do6zdK0gqTwfRx0bKVdV0CxwUDhrXIKluQ0i1dOKi3z01SCr/eF1LhhuNe5L5zz2N+y2syom8ykCMoqLsVnylo7zjiYHUbgQ5K4oeM07xsE2h79umaEwL4D989hAFIlhe+ftLMmjTIoOzSEk6m3irIFkYBUlcolqPUIvXbWq
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 14:39:29.0273
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95e302cc-b0b1-4729-f312-08de9645ce44
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MN1PEPF0000F0E4.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVUPR12MB999162
-X-purgate-ID: tlsNG-c201ff/1775745571-3252396F-7C0479B2/0/0
+Content-Type: text/plain
+X-purgate-ID: tlsNG-16d1c6/1775745923-AF5383D8-161F3CAB/0/0
 X-purgate-type: clean
-X-purgate-size: 2675
+X-purgate-size: 847
 
+Shubham Chakraborty <chakrabortyshubham66@gmail.com> writes:
 
-
-On 09/04/2026 15:50, Oleksii Moisieiev wrote:
-> In pl011_init_postirq(), two code paths could reach the
-> interrupt-unmask write to IMSC without a handler being registered:
-> 
-> - When no valid IRQ number was provided (uart->irq <= 0), the original
->   positive-condition guard (if uart->irq > 0) skipped the irqaction
->   setup but still fell through to the IMSC write, unmasking
->   RTI|OEI|BEI|PEI|FEI|TXI|RXI with no handler installed.
-> 
-> - When setup_irq() returned an error, only an error message was
->   printed and execution continued to the IMSC write, arming all
->   hardware interrupt lines with no handler to service them. On
->   platforms where the GIC receives these asserted lines, the result
->   is either repeated spurious-interrupt warnings or an unhandled
->   interrupt fault.
-> 
-> Restructure pl011_init_postirq() to use early returns: return
-> immediately when no valid IRQ is provided, and return after logging
-> the error when setup_irq() fails. The interrupt-enable write to IMSC
-> is only reached when IRQ registration succeeds.
-> 
-> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Add documentation for the Xen hypervisor sysctl controls in
+> /proc/sys/xen/balloon/.
+>
+> Documents the hotplug_unpopulated tunable (available when
+> CONFIG_XEN_BALLOON_MEMORY_HOTPLUG is enabled) which controls
+> whether unpopulated memory regions are automatically hotplugged
+> when the Xen balloon driver needs to reclaim memory.
+>
+> The documentation is based on source code analysis of
+> drivers/xen/balloon.c.
+>
+> Signed-off-by: Shubham Chakraborty <chakrabortyshubham66@gmail.com>
 > ---
-> 
-> 
-> 
->  xen/drivers/char/pl011.c | 17 +++++++++++------
->  1 file changed, 11 insertions(+), 6 deletions(-)
-> 
-> diff --git a/xen/drivers/char/pl011.c b/xen/drivers/char/pl011.c
-> index 5f9913367d..918b9d4d4a 100644
-> --- a/xen/drivers/char/pl011.c
-> +++ b/xen/drivers/char/pl011.c
-> @@ -150,13 +150,18 @@ static void __init pl011_init_postirq(struct serial_port *port)
->      struct pl011 *uart = port->uart;
->      int rc;
->  
-> -    if ( uart->irq > 0 )
-> +    /* Don't unmask interrupts if no valid irq was provided */
-> +    if ( uart->irq <= 0 )
-> +        return;
-> +
-> +    uart->irqaction.handler = pl011_interrupt;
-> +    uart->irqaction.name    = "pl011";
-> +    uart->irqaction.dev_id  = port;
-> +    if ( (rc = setup_irq(uart->irq, 0, &uart->irqaction)) != 0 )
->      {
-> -        uart->irqaction.handler = pl011_interrupt;
-> -        uart->irqaction.name    = "pl011";
-> -        uart->irqaction.dev_id  = port;
-> -        if ( (rc = setup_irq(uart->irq, 0, &uart->irqaction)) != 0 )
-> -            printk("ERROR: Failed to allocate pl011 IRQ %d\n", uart->irq);
-> +        printk("ERROR: Failed to allocate pl011 IRQ %d\n", uart->irq);
-> +        /* Do not unmask interrupts if irq handler wasn't set */
-> +        return;
->      }
->  
->      /* Clear pending error interrupts */
-I think we should clear pending errors every time. Other than that, the patch is
-ok. Provided the remark is addressed:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+>  Documentation/admin-guide/sysctl/index.rst |  3 ++-
+>  Documentation/admin-guide/sysctl/xen.rst   | 31 ++++++++++++++++++++++
+>  2 files changed, 33 insertions(+), 1 deletion(-)
+>  create mode 100644 Documentation/admin-guide/sysctl/xen.rst
 
-~Michal
+Applied, thanks.
 
-
+jon
 
