@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A97F31E51
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 15:56:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1277948.1563008 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E43E98FD2
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 16:21:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1277970.1563035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wArjU-0001N0-4F; Thu, 09 Apr 2026 15:55:52 +0000
+	id 1wAs7y-0006an-Gj; Thu, 09 Apr 2026 16:21:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1277948.1563008; Thu, 09 Apr 2026 15:55:52 +0000
+Received: by outflank-mailman (output) from mailman id 1277970.1563035; Thu, 09 Apr 2026 16:21:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wArjU-0001Mt-1V; Thu, 09 Apr 2026 15:55:52 +0000
-Received: by outflank-mailman (input) for mailman id 1277948;
- Thu, 09 Apr 2026 15:55:51 +0000
+	id 1wAs7y-0006ag-E3; Thu, 09 Apr 2026 16:21:10 +0000
+Received: by outflank-mailman (input) for mailman id 1277970;
+ Thu, 09 Apr 2026 16:21:09 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1wArjS-0001Mn-T2
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 15:55:51 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <bounce-md_30504962.69d7d1f3.v1-2d68c2e86b134086aff945f8d500e260@bounce.vates.tech>)
+ id 1wAs7x-0006Zr-6L
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:21:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wArjS-00AAaV-8o
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 17:55:50 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 69d7cc05-2eae-0a2a0a5409dd-0a2a450aa1f2-4
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 17:55:50 +0200
-Received: from [52.101.72.116]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 69d7cc05-ee98-0a2a450a0019-346548743556-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 17:55:50 +0200
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
- by AS4PR03MB8554.eurprd03.prod.outlook.com (2603:10a6:20b:581::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Thu, 9 Apr
- 2026 15:55:48 +0000
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba%3]) with mapi id 15.20.9745.035; Thu, 9 Apr 2026
- 15:55:48 +0000
+ id 1wAs7w-002Kv1-IN
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 18:21:08 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <bounce-md_30504962.69d7d1f3.v1-2d68c2e86b134086aff945f8d500e260@bounce.vates.tech>)
+ id 69d7d1c8-2eae-0a2a0a5409dd-0a2a450295e2-42
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:08 +0200
+Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from
+ <bounce-md_30504962.69d7d1f3.v1-2d68c2e86b134086aff945f8d500e260@bounce.vates.tech>)
+ id 69d7d1f3-42fa-0a2a45020019-c602bb0e046b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:08 +0200
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fs4tW0whgz8XWZyF
+ for <xen-devel@lists.xenproject.org>; Thu,  9 Apr 2026 16:21:07 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 2d68c2e86b134086aff945f8d500e260; Thu, 09 Apr 2026 16:21:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,132 +53,293 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xT8PivgopX8B6HK+EUR5dsMctaG8muPrUQl6BbSLRQxFbon6iOJtFSpd7uLfhoyVp6XTRriepBJxV1vxnslkrqKkjW7QlG4SshfT0+meM6c1gKXL3sthRo3C+lpwrBN9dpEi1P7tzpiPO+LLvXK9ZIvHJxL9/Jk5Wfc6c1tLfe3D4tUMJQ1TuDxXpM0d/0/wdaf24lXMGonTjyvfM3yVqz0Ov55l6rgcDuoTOURWEmKrpBnYd6SaAlGf3LhKU11Oj2S77nakf4LUekOwPuulVpx4wAc2DBTLIVYlJ6niYzR7M0ER6yS8OI5x7icG3tnRFiYY9WYTr08RDaRuVNrlNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gYFqiYL2RWaSj5UTs0yxhxZbv/2e+rgrJDmULLs0AUs=;
- b=FhaXJnZGsWeVyN/9fHL/BrJ1HwIcI8HHUfICRxW69ri/onLGPsHxszSFsHMh/yZyZmYJ8u/E113/u7Hk8zVQjh39UOcfQDcLaSchy8X95xyjMOrFaPBU05OYSr8Hnqmh1xGpjnE9AazC4mKXLhiLCiBPcrWCozUoszl75V33+wxzLZr9NBpMhMRmRsdd3tFTtpgksR+Ei2E1lxeetSY8St+hUz5+v7i2BJzo0qpNsf3DSzDZ8LHKwNNL9bOa9Nc14NR4TNHmMovCDrhhxAoKBt/T0I4DPMsG4dN64OKdlmaZXKDiy9tS4KlmguU9oNqOPK/Xd5S+LnM89I2/9CSBnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gYFqiYL2RWaSj5UTs0yxhxZbv/2e+rgrJDmULLs0AUs=;
- b=n5idw0ejnJfoz3RQ43zX2oe+0fiD9t+VMgKwF73mo2ri443NqAQfmEK9/MKanbmO2tKebrHr3Pn2F6WZkLdr8sF5sg+cvRBQFzzF4wOP+2hgmgkenstjrUXBMig5K69nadX/tchZ9dpF6jjv+CBM4JBc6NpajSewoGz51GLaT48MsHJrmmUpcvApcfnIPpoaCfrGtcWqPCuKJ4VUX1zxQGXSmZ9BhRA/7t/XKjEuc8x2Y6SifsQH4IGUQeQOoElxtYJKwu1DFyqwYyhxNATStB4gis7Q9ZBTQmJ/KWxBBRQrceCi96KgjGky4Llp1Y5q+T3jrQcZSG+lq5vtrilseQ==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Juergen Gross
-	<jgross@suse.com>
-Subject: [PATCH] hypfs: remove unreachable statement in the
- 'hypfs_get_entry_rel()'
-Thread-Topic: [PATCH] hypfs: remove unreachable statement in the
- 'hypfs_get_entry_rel()'
-Thread-Index: AQHcyDlVyOevPxMGvE2K9zY95LxHDw==
-Date: Thu, 9 Apr 2026 15:55:48 +0000
-Message-ID:
- <341811ced2943fb79d0235c27781c564c7bdaf02.1775749146.git.dmytro_prokopchuk1@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|AS4PR03MB8554:EE_
-x-ms-office365-filtering-correlation-id: 6614684a-d48f-45ac-9200-08de965077ca
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|42112799006|38070700021|18002099003|56012099003;
-x-microsoft-antispam-message-info:
- 88KXu5Bz/Ik+huN8MZoQuJBNT5Vb40kAeKmQ7U28Ji0hhhkQESGPT8MRBKORgfFYMcTdcCnqvoUnHgIJCyZXyUI08svOQdGtvE+Z3MB57epNAex1qUhAvrXqtXop2zqjmyoXyEmihBUJabY87RxPqnt3kmYyzMcgeVff4w86BvdIRwOIItJmWS+6aWJDMHld1k6Ovp/dGzqajy5S7ELpWSZq4VnOikLL/iXnfz7H2JibJQOn00lM0Szds4A+vRvMEUs5ZhzOay/lP07TnMafi9hdwE9qgkB1tmwcDAhIjXmKfqgFN102Y+4dhw9rMW2ofR9YKmBrofVp5O2hdWbAg6jtQ0Sctfs2G2dW6glAY23nVUaNFRKLpxHtVNZk1sHfbJyHHqsVYgYJyJ0GCfF6lcBl2U3bSzEXcn/OQ2IpLoPQPZInk8zQZk6uC3eBdn9BNqeRnLANfFL/mhbnmXWHN+I85oXuTbWtUT3R/lsYMsPNDMo2B1w1n3Q7gGPlYVcmzwPVa9Aic6N9JkzDMfB4DEHRSYBSXfKeOTeawsM6X//xiWekW/9J3LMvKIpXKF1ds47vi87VU634r3cdJvaqXK//Bt0mr7VnrFqA4m7FiuMBoZydK1etjSXqXGYTzYrgrjhyVEcR700ehxiGBuU44G2+AzAcKOWHr7KQsFr99NUri5KHM+vsZfmnw4/1M6pWkJaycnf1vYqJtnltawzut42rFK1K5FlbCV056rr2G1BbxE/96a+XqYh+nxfdzR6yMHzzHELIwn7r/JQcl8Y2YQbu8LXY9Mf4qfTSUhF4B4s=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(42112799006)(38070700021)(18002099003)(56012099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?zdAU1n9VqxciFQuOQZ+CDdUmkYwFJy6IoB2l6fIILJNk0v26tCy/TSKuqb?=
- =?iso-8859-1?Q?bpdayYKzrPsD58T1SJGLbxS4qHEmUAWSBXdcr/tornM4d9jbZiJyn9QiF4?=
- =?iso-8859-1?Q?ihS9q5sVroad4OASmhH1vPskOOaaLvWhhHzulwq7/LAfl+ZWNgpoysckEM?=
- =?iso-8859-1?Q?2y4bIBswk7P+3njgKhuEcZUICPiFTyF+2tlGNrR8g9H5ic6QpY3+s894Od?=
- =?iso-8859-1?Q?RBNroYrCmnoWC6OchgVAV0uS9MLxRJG64ZeMZ1s++J5kIvrRvTEFp1m5RT?=
- =?iso-8859-1?Q?y7JuHr5ONJisdpnavmh2tt8vXU41ixW612ku+jcI7vn+xoK4cjMPH1G1G2?=
- =?iso-8859-1?Q?wON+9nGc2zk3LG4fwMj7gV2AF+8OJxtJhKG2NbLahiQ/eDxM/zADUvSVy/?=
- =?iso-8859-1?Q?dQeBlUvtnIKbp3GvsoamFGF6aUE8r7Az5pvSxX6/s9L09d1RxdKyngY8r5?=
- =?iso-8859-1?Q?VuqzMVCHo+y/Xn8l+I4PkhqHsIYczgi0EB8GTCgN25KDYlZGBYk6+jjs0K?=
- =?iso-8859-1?Q?LNkIcSB9fYZjvhvUnEp7MAm7WJA/8SGTSFEdKF1EGDoCFoAgQGIWTCIh7C?=
- =?iso-8859-1?Q?HT26G5aks2TJKjJ8Zh5Y54zSjQWrdR7P2wqmMng/aXCx/bWmEzrvb3jcNE?=
- =?iso-8859-1?Q?RhJSEeJm4+LGJlz4/v3o8UPnPbZA7nlC+d5g2ikvzfxj2sTpqYT3aaXkfU?=
- =?iso-8859-1?Q?I+MpP9oJNm041EqgF+QQBM+nSnLuLIoQDWhysevJk6C+5+IaC2Q4y/27GE?=
- =?iso-8859-1?Q?3Kd2koo9HhsyaxPI3J3N2xKuoZmZ8BlWkCInzxlvD87lZuzZf6tn4cEJZ2?=
- =?iso-8859-1?Q?rRCLoY7uiKjY4jwSSgFddPOsfxESf1+mVMPkca0ZwztwOFnQgfSXT92nXn?=
- =?iso-8859-1?Q?rsxJFib7jALeq8jGDH28tNcxrclRbAqEzahDYo37nsPxbytfEfTdwP18pZ?=
- =?iso-8859-1?Q?S3Dw+LnXKdTPfFzjAYBfq6pX+rgRfIFWc0XYzrB8F48Ud9pWIJffpzJX5L?=
- =?iso-8859-1?Q?1H39vjXEuiWUAgCyPGSvkQpPvlYk3EG/AFLJyM6GHkeJ0UTMVNOsXYk3Zz?=
- =?iso-8859-1?Q?zvxIz9E8LU/FpPrDPwA1tnLHtk8nxTU4Jy+NViTGu4QyRYyIMn7tmfrejw?=
- =?iso-8859-1?Q?97GC65Qnhlz/NDOlqvtM0xQsBxV2ZuxqkMuCXbO9sdUkCCerpaTjxcsQLT?=
- =?iso-8859-1?Q?30t+avRasIOUQcw0lqZHwdv8eG2z0FMkJdCvkSYIlhHQfo75DDcGMo32EG?=
- =?iso-8859-1?Q?a2O5eS9xDeXId9JTmCE083n1cwA+24Tq7BwlSWCI9W9yse7GZZ88OEt0h3?=
- =?iso-8859-1?Q?fvRvng7go2estFJS7JrX/t652oqbOFPH5i0Qxo6pfXdw+TnNntX3TVvoAn?=
- =?iso-8859-1?Q?Dhp9h0Lngtw3jsTDf2La3nPyCdKU4pfEfmcNLeyQrRnxvPSO27ALqokd0o?=
- =?iso-8859-1?Q?FF4y4lQq1OzesX3j1a89RfcsM91W9bncvlsVhQ8wuuCuJtwlPTD/cbQF2p?=
- =?iso-8859-1?Q?ja2C+vMGOM5EOPr0nyDqZEmVttSFdUuuS8atii0K5J2IIqUfIy247jbj6U?=
- =?iso-8859-1?Q?BiMm8OWNadTg+wCqV/NGuH+EJDuEMersW92BAfCfd3qPehhDVqjbWjLZq3?=
- =?iso-8859-1?Q?OvuUHy3kqBO7MQeaCZ7+magd1/oRgtGIAobV9nhd1UeUbjnNfcpusus6Sm?=
- =?iso-8859-1?Q?eoW0+T5ui666UDQSSqosSZO/geV/TdxgfENGiSLPKu1Q5p/Z7UvNzYoXXx?=
- =?iso-8859-1?Q?h6ZjgxSv74zasKlGyqy+WY5xYmQbVCF5zkrvN+A5Xmk89sElY8SYyljV2r?=
- =?iso-8859-1?Q?ztEmY/3teRU4NRzIAT40UD/0C91PwlY=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="thierry.escande@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1775751667; x=1776021667;
+	bh=0UnZsd6VMv3nhahDJTmKjpYZpYAGnJoqucRzautn7QA=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=qbefgWiqvZErQ9/ybAH4YbWRSO4lAPnBrUa9n60XJtZ+FaQUBpuwIZGQtJ7wf6jAd
+	 20TesU2SbQbkXhU62M5LdTgbHooW1tgnnR7gwxu26BfYWdhY6aMCADgQgzedyVCZ87
+	 66eKLmn73R33tJZyoTsN0uZiJdZOjKJl+RUuKfNbWbn0H5io3aBCgN+YDWwWFKxQdU
+	 tfuefmUyuxSETWquPkU3CiwC2owPqjVYKu45uqaEYjJydRabwHdLB6ltPf3+tDr3Dj
+	 tW6PwzhDXhM+d8lIIDRo4y7Q1DYq+x06dbvwP3paBdQq68ySheMhO+KbuCW4/e0bRX
+	 x89LfC7f55tSQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1775751667; x=1776012167; i=thierry.escande@vates.tech;
+	bh=0UnZsd6VMv3nhahDJTmKjpYZpYAGnJoqucRzautn7QA=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=UReoS+ahOd18SgPZmRFWbbfx0xIgFHLHhSfxKjnlXGUAz8e9dg+UGV6vPiv4EVfPC
+	 oucDswE963viLI8gwfSxOx70oy6L+EiNoIOxpwH8pGE+FWaSvLPOEK1bRfDVrfCWFQ
+	 cePt3vjSVZW1vUH7M+lW2EVq6+j/HyFFPCWZTnToXJ3+G7x8Bo+HbsnllxIcdhsVnZ
+	 JmwZJh5cQdd0yA3ROgHTrEW2fcsaxMtTUNMUPVJx+kroQtbbd83VLrzqGBUZyOIJzp
+	 nc4MyShmXadcHSABuafEuOlqgfQVF2Stk6VFKI3BgLM5Fdzo6WVP6gNoYqG6ovFcvG
+	 7JinwSTsMZz8A==
+From: "Thierry Escande" <thierry.escande@vates.tech>
+Subject: =?utf-8?Q?[RFC=20PATCH=20v2=202/3]=20libxl:=20Allow=20PCI=20device=20passthrough=20using=20-device=20Qemu=20command=20line?=
+X-Mailer: git-send-email 2.53.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1775751666400
+To: xen-devel@lists.xenproject.org
+Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>, "=?utf-8?Q?Daniel=20P=20.=20Berrang=C3=A9?=" <berrange@redhat.com>, "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>
+Message-Id: <20260409162000.1102680-3-thierry.escande@vates.tech>
+In-Reply-To: <20260409162000.1102680-1-thierry.escande@vates.tech>
+References: <20260409162000.1102680-1-thierry.escande@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.2d68c2e86b134086aff945f8d500e260?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260409:md
+Date: Thu, 09 Apr 2026 16:21:07 +0000
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6614684a-d48f-45ac-9200-08de965077ca
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Apr 2026 15:55:48.4284
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: lS67aZYnXbTk9EexmvHQsh8SI6OWSAwhpme+fh7kFjk/8/qwgT+SSFm57vjKq2oRsVCW59jXlStGogIAAMWxwTY2+w6JksfEcK2U6y63Upc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8554
-X-purgate-ID: tlsNG-4011c0/1775750150-0FD420B1-D8A2D9CA/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1775751668-AE926CD1-767AF0B8/0/0
 X-purgate-type: clean
-X-purgate-size: 1132
+X-purgate-size: 8941
 
-The statement 'return ERR_PTR(-ENOENT);' on the final line of the function
-'hypfs_get_entry_rel()' is unreachable because the logic within the infinit=
-e
-loop 'for (;;)' provides all possible exit paths for the function. So there
-is no execution path to exit the loop and reach the final that statement.
+This change makes use of the new option 'hotplug' for host PCI devices
+passthrough'd to the guest. If hotplug=0 is used in the pci device
+configuration table, the device will be attached to the guest using the
+Qemu command line as '-device xen-pci-passthrough,hostaddr=...'
 
-Remove that statement. This also fixes MISRA C Rule 2.1 which states:
-"A project shall not contain unreachable code".
+The host device configuration is passed to the -device option as a json
+array, just like it's done for hotplug using QMP. The json array is
+created by a new internal function libxl__device_pci_get_qmp_json() that
+is also used by pci_add_qmp_device_add().
 
-Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+Then, instead of sending the 'device_add' command, the device_add
+callback is called to perform the 'query-pci' check to make sure the
+passthrough'd device is present.
+
+In the same way at shutdown, the device is not removed using QMP and
+only the pci_remove_done() function is called.
+
+As with QMP, the use of the 'hotplug=0' option honors the 'seize' option
+by adding the PCI device to the assignable list if needed.
+
+Example use:
+ pci = [ "00:03.0,seize=1,hotplug=0" ]
+
+Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
 ---
-Test CI pipeline:
-https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2440991088
+v2:
+- Add support for YAJL json parser
 ---
- xen/common/hypfs.c | 2 --
- 1 file changed, 2 deletions(-)
+ tools/include/libxl.h             |  1 +
+ tools/libs/light/libxl_dm.c       | 80 +++++++++++++++++++++++++++++++
+ tools/libs/light/libxl_internal.h |  2 +
+ tools/libs/light/libxl_pci.c      | 41 ++++++++++++----
+ 4 files changed, 114 insertions(+), 10 deletions(-)
 
-diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
-index cdf4ee0171..fea74d66e1 100644
---- a/xen/common/hypfs.c
-+++ b/xen/common/hypfs.c
-@@ -347,8 +347,6 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct h=
-ypfs_entry_dir *dir,
-         path =3D end + 1;
-         dir =3D container_of(entry, struct hypfs_entry_dir, e);
-     }
--
--    return ERR_PTR(-ENOENT);
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 7c098edab6..66fb07ad67 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -2666,6 +2666,7 @@ int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci, int r
+ int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
+ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
+ void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num);
++bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci);
+ 
+ /* CPUID handling */
+ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str);
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index 511ec76a65..4f4781b36d 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -1169,6 +1169,86 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+                     }
+                 }
+             }
++
++            if (guest_config->num_pcidevs) {
++                libxl_ctx *ctx = libxl__gc_owner(gc);
++                libxl_device_pci *pci;
++                libxl__json_object *qmp_json;
++                char *json_str;
++#ifdef HAVE_LIBJSONC
++                json_object *jso;
++                const char *buf;
++#elif defined(HAVE_LIBYAJL)
++                yajl_gen hand;
++                /* memory for 'buf' is owned by 'hand' */
++                const unsigned char *buf;
++                libxl_yajl_length len;
++#else
++#               error Missing JSON library
++#endif
++
++                for (i = 0; i < guest_config->num_pcidevs; i++) {
++                    pci = &guest_config->pcidevs[i];
++
++                    if (pci->hotplug)
++                        continue;
++
++                    if (!libxl_pci_assignable(ctx, pci) && pci->seize) {
++                        rc = libxl_device_pci_assignable_add(ctx, pci, 1);
++                        if (rc)
++                            return rc;
++                    }
++
++                    qmp_json = libxl__device_pci_get_qmp_json(gc, pci);
++
++#ifdef HAVE_LIBJSONC
++                    rc = libxl__json_object_to_json_object(gc, &jso, qmp_json);
++                    if (rc)
++                        return rc;
++
++                    buf = json_object_to_json_string_ext(jso,
++                                                         JSON_C_TO_STRING_PLAIN);
++                    if (!buf) {
++                        json_object_put(jso);
++                        return ERROR_NOMEM;
++                    }
++#elif defined(HAVE_LIBYAJL)
++                    hand = libxl_yajl_gen_alloc(NULL);
++                    if (!hand) {
++                        return ERROR_NOMEM;
++                    }
++#if HAVE_YAJL_V2
++                    /* Disable beautify for data sent to QEMU */
++                    yajl_gen_config(hand, yajl_gen_beautify, 0);
++#endif
++
++                    rc = libxl__json_object_to_yajl_gen(gc, hand, qmp_json);
++                    if (rc) {
++                        yajl_gen_free(hand);
++                        return rc;
++                    }
++
++                    rc = yajl_gen_get_buf(hand, &buf, &len);
++                    if (rc != yajl_gen_status_ok) {
++                        yajl_gen_free(hand);
++                        return rc;
++                    }
++#endif
++
++                    json_str = libxl__strdup(gc, (const char *)buf);
++                    if (json_str)
++                        flexarray_vappend(dm_args, "-device", json_str, NULL);
++
++#ifdef HAVE_LIBJSONC
++                    json_object_put(jso);
++#elif defined(HAVE_LIBYAJL)
++                    yajl_gen_free(hand);
++#endif
++
++                    if (!json_str)
++                        return ERROR_NOMEM;
++                }
++            }
+         }
+ 
+         if (libxl_defbool_val(b_info->u.hvm.nographic) && (!sdl && !vnc)) {
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index b65e0064b9..06b5a14409 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -1729,6 +1729,8 @@ _hidden int libxl__device_pci_setdefault(libxl__gc *gc, uint32_t domid,
+                                          libxl_device_pci *pci, bool hotplug);
+ _hidden bool libxl__is_igd_vga_passthru(libxl__gc *gc,
+                                         const libxl_domain_config *d_config);
++_hidden libxl__json_object *libxl__device_pci_get_qmp_json(libxl__gc *gc,
++                                                         libxl_device_pci *pci);
+ 
+ /* from libxl_dtdev */
+ 
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index 49d272d0de..3ef2c43412 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -1098,16 +1098,10 @@ out:
+     pci_add_dm_done(egc, pas, rc); /* must be last */
  }
-=20
- static struct hypfs_entry *hypfs_get_entry(const char *path)
---=20
-2.43.0
+ 
+-static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
++libxl__json_object *libxl__device_pci_get_qmp_json(libxl__gc *gc,
++                                                   libxl_device_pci *pci)
+ {
+-    STATE_AO_GC(pas->aodev->ao);
+     libxl__json_object *args = NULL;
+-    int rc;
+-
+-    /* Convenience aliases */
+-    libxl_domid domid = pas->domid;
+-    libxl_device_pci *pci = &pas->pci;
+-    libxl__ev_qmp *const qmp = &pas->qmp;
+ 
+     libxl__qmp_param_add_string(gc, &args, "driver",
+                                 "xen-pci-passthrough");
+@@ -1134,11 +1128,30 @@ static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
+     if (pci->permissive)
+         libxl__qmp_param_add_bool(gc, &args, "permissive", true);
+ 
++    return args;
++}
++
++static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
++{
++    STATE_AO_GC(pas->aodev->ao);
++    libxl__json_object *args = NULL;
++    int rc = 0;
++
++    /* Convenience aliases */
++    libxl_domid domid = pas->domid;
++    libxl_device_pci *pci = &pas->pci;
++    libxl__ev_qmp *const qmp = &pas->qmp;
++
++    args = libxl__device_pci_get_qmp_json(gc, pci);
++
+     qmp->ao = pas->aodev->ao;
+     qmp->domid = domid;
+     qmp->payload_fd = -1;
+     qmp->callback = pci_add_qmp_device_add_cb;
+-    rc = libxl__ev_qmp_send(egc, qmp, "device_add", args);
++    if (pci->hotplug)
++        rc = libxl__ev_qmp_send(egc, qmp, "device_add", args);
++    else
++        pci_add_qmp_device_add_cb(egc, qmp, NULL, 0);
+     if (rc) goto out;
+     return;
+ 
+@@ -1509,7 +1522,7 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
+     return AO_INPROGRESS;
+ }
+ 
+-static bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
++bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
+ {
+     libxl_device_pci *pcis;
+     int num;
+@@ -1820,6 +1833,14 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
+     libxl_domain_type type = libxl__domain_type(gc, domid);
+     libxl_device_pci *pci = &prs->pci;
+     int rc, num;
++
++    /* Passthrough'd device has been passed to Qemu command line so there is
++     * no need to remove it via QMP */
++    if (!pci->hotplug) {
++        pci_remove_done(egc, prs, 0);
++        return;
++    }
++
+     pcis = libxl_device_pci_list(ctx, domid, &num);
+     if (!pcis) {
+         rc = ERROR_FAIL;
+-- 
+2.53.0
+
+
+
+--
+Thierry Escande | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
+
 
