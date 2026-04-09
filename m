@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA401F31E5F
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 16:21:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1277968.1563017 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF62EF31E5F
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 16:21:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1277972.1563045 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAs7r-00068k-05; Thu, 09 Apr 2026 16:21:03 +0000
+	id 1wAs82-0006s9-PL; Thu, 09 Apr 2026 16:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1277968.1563017; Thu, 09 Apr 2026 16:21:02 +0000
+Received: by outflank-mailman (output) from mailman id 1277972.1563045; Thu, 09 Apr 2026 16:21:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAs7q-00068d-Tm; Thu, 09 Apr 2026 16:21:02 +0000
-Received: by outflank-mailman (input) for mailman id 1277968;
- Thu, 09 Apr 2026 16:21:01 +0000
+	id 1wAs82-0006ry-L6; Thu, 09 Apr 2026 16:21:14 +0000
+Received: by outflank-mailman (input) for mailman id 1277972;
+ Thu, 09 Apr 2026 16:21:13 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69d7d1e9.v1-f49911ee17314b0195681d17125076d7@bounce.vates.tech>)
- id 1wAs7o-00068X-TL
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:21:00 +0000
+ <bounce-md_30504962.69d7d1f7.v1-739e440ecbe14cfe85700eac099145f7@bounce.vates.tech>)
+ id 1wAs81-0006qc-PY
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 16:21:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAs7n-00BrtN-Ko
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 18:20:59 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wAs81-00AE9I-5G
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 18:21:13 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69d7d1e9.v1-f49911ee17314b0195681d17125076d7@bounce.vates.tech>)
- id 69d7d1c8-e002-0a2a0a5209dd-0a2a450ca1ae-38
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:20:59 +0200
-Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ <bounce-md_30504962.69d7d1f7.v1-739e440ecbe14cfe85700eac099145f7@bounce.vates.tech>)
+ id 69d7d1e5-5cb7-0a2a0a5109dd-0a2a450ae60c-38
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:13 +0200
+Received: from [198.2.187.1] (helo=mail187-1.suw11.mandrillapp.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from
- <bounce-md_30504962.69d7d1e9.v1-f49911ee17314b0195681d17125076d7@bounce.vates.tech>)
- id 69d7d1ea-f40c-0a2a450c0019-c602bb0ebbe0-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:20:59 +0200
+ <bounce-md_30504962.69d7d1f7.v1-739e440ecbe14cfe85700eac099145f7@bounce.vates.tech>)
+ id 69d7d1f7-ee98-0a2a450a0019-c602bb01ba26-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 18:21:12 +0200
 Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4fs4tK5CfXz8XRsB5
- for <xen-devel@lists.xenproject.org>; Thu,  9 Apr 2026 16:20:57 +0000 (GMT)
+ by mail187-1.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4fs4tb59lKzBsTvmW
+ for <xen-devel@lists.xenproject.org>; Thu,  9 Apr 2026 16:21:11 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- f49911ee17314b0195681d17125076d7; Thu, 09 Apr 2026 16:20:57 +0000
+ 739e440ecbe14cfe85700eac099145f7; Thu, 09 Apr 2026 16:21:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,102 +52,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="thierry.escande@vates.tech" header.h="From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="thierry.escande@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1775751657; x=1776021657;
-	bh=Qjx6OsI44qGGL/jcmYHV+NmV+OqiXfQQzBrw/BNMPf4=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=HofsryFQHdR+feHc5iaw9Zxa19cuNLhWrnJX31KeOiC0qXOV446YG5+Icjd0Po9dM
-	 Z/wAvlqhyXmNtO7zE7ILdIivK7YbJKKNvSg6dYP5xYgekjCiaDGSDbYun6k/n7fYz2
-	 +834G6QEA6oCRkh226IbtZhK5CAr0SLLgjbf5VngNMcgU3bGjArB5qKi22NKWu+Tc+
-	 J10fWO46UQHmLx0690MbRYKBg9PVNmarJMq7A3CoWSfgp3rpsIJb5bK4umfgJCXncL
-	 nfLR3om7+OU/xzyUuTyf1A+WcBFwwK0v2abj3oGOWQIijYWjE2UNr3PlmcQ5OJ9Fsc
-	 OmODCgkk8Qw4w==
+	s=mte1; t=1775751671; x=1776021671;
+	bh=aEGweMh3nn2we8a8H+DP/OH/jK1OTcDX5edzheCVTKg=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=uviAdraaIAKgWK8MUDWijOltDBdI1GTWJU2WJf2RYEcBk9sbLaJUki4KiXpLBTAy8
+	 gii4EYYFY7lYGOQDkbb8QKel0ffAssf2VN/YBD5drts0cHD4UwsrUzwYeVe5J6e8en
+	 Yd//ppt5++PUn4M8R5zWqfxR8W0dvJ6NlzgljxNdEnn+oZo91sp4MjkbPpOgzlsWXq
+	 CnMV01CQpj3W2SCk2TzXf11kliUbfdr5FQBed7A6h6MGgacG0v8JJTM6aMSuGlz21S
+	 XvUT1sRuFgg+KxEQoksvFqUpRZRjm5yTo4kVFvXjdOlXSuqOR0/624Y50A1Jg4PJhs
+	 +CkGytnLNCPaw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1775751657; x=1776012157; i=thierry.escande@vates.tech;
-	bh=Qjx6OsI44qGGL/jcmYHV+NmV+OqiXfQQzBrw/BNMPf4=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=urnu/pF++2Gd1Ga/OhMH0WCTMQZLOHoFATGfVsEWDefu5LfPHY26HWdwwAkW2ZfTk
-	 geYXYbXcUJcBZzFkZIBKpex/+UkNjTkOA3jlZTZG1X1lgTJbN/9RdvB3YRiEUjyavs
-	 LHqwgkGTrlTyKuc+1uDBvFdqkcx+GtApGXOzSoDz2f7+nV3WXL227Blaex6dGB6gRQ
-	 oY7p8vgebHaXDALmB79NDVQPpcF2WU7BoT9fxbcc0E7YOxd/z6pZwTRkK9U4QmTueP
-	 Kjptqrd7eOgwrq+6WcEwqW42l/Dhe4DtMuLW6LImpOV1krbkxOncC5cBtqVk3XKCfl
-	 p6nsnHA2T5wEQ==
+	t=1775751671; x=1776012171; i=thierry.escande@vates.tech;
+	bh=aEGweMh3nn2we8a8H+DP/OH/jK1OTcDX5edzheCVTKg=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=Uj1FqENKAg7IoF81l92a47OI80P0/OeB7Yg+6CMgJEs4O+ZHR+j8wDXA3PD1AWiDU
+	 thRbtqACKW6mceDiXYfeP26QdQ13IMbGfyx5vIuNB+L7Donnookv4OBJb8oB+5zCUx
+	 8E6vLX2xPfFoe/sxgldszo3bslDB4owDSGU7Z9HM1B9tEuE4gbuPZIHLMVi+c8wsdi
+	 848XybE4XI9ilb8y3DGcCNFzYAzRn/pZgGmtS/72LONZZ1n6rPOcQDSIZpcdB1zlO9
+	 86x/fss8OIjtxQrwdfvj9QO/pCofltGMPGZFtNnwqy4LDIav5tNxju3nz7mv+qklvF
+	 kF3z2YsJT1n7A==
 From: "Thierry Escande" <thierry.escande@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=20v2=200/3]=20xl:=20Allow=20PCI=20devices=20to=20be=20passthrough'd=20via=20Qemu=20command=20line?=
+Subject: =?utf-8?Q?[RFC=20PATCH=20v2=203/3]=20docs:=20provide=20description=20for=20pci=20hotplug=20option?=
 X-Mailer: git-send-email 2.53.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1775751656801
+X-Bm-Transport-Timestamp: 1775751671088
 To: xen-devel@lists.xenproject.org
 Cc: "Thierry Escande" <thierry.escande@vates.tech>, "Anthony PERARD" <anthony.perard@vates.tech>, "Juergen Gross" <jgross@suse.com>, "=?utf-8?Q?Daniel=20P=20.=20Berrang=C3=A9?=" <berrange@redhat.com>, "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>
-Message-Id: <20260409162000.1102680-1-thierry.escande@vates.tech>
+Message-Id: <20260409162000.1102680-4-thierry.escande@vates.tech>
+In-Reply-To: <20260409162000.1102680-1-thierry.escande@vates.tech>
+References: <20260409162000.1102680-1-thierry.escande@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.f49911ee17314b0195681d17125076d7?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.739e440ecbe14cfe85700eac099145f7?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260409:md
-Date: Thu, 09 Apr 2026 16:20:57 +0000
+Date: Thu, 09 Apr 2026 16:21:11 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1775751659-81756A3D-CD9AFF73/0/0
+X-purgate-ID: tlsNG-4011c0/1775751673-0DB550B1-350197DB/0/0
 X-purgate-type: clean
-X-purgate-size: 2517
+X-purgate-size: 1897
 
-This series adds support for a new 'hotplug' option for PCI devices to be
-passthrough'd to guests.
+This patch adds description for the 'hotplug' PCI option, allowing
+devices to be attached to the guest using the legacy QMP hotplug
+mechanism or by passing them to the Qemu command line using '-device'.
 
-The current mechanism for device passthrough uses QMP device_add command
-to hot-plug PCI devices to the guest Qemu instance. This is an issue for
-guests running on Q35 chipset (preliminary support posted at [1]) since the
-Q35 PCI root bus does not support hotplug. Devices could be hotplugged to
-a secondary PCI bus but Xen only support 1 PCI bus for now.
+Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
+---
+v2: no change
+---
+ docs/man/xl-pci-configuration.5.pod | 17 +++++++++++++++++
+ docs/man/xl.cfg.5.pod.in            |  6 ++++++
+ 2 files changed, 23 insertions(+)
 
-The 'hotplug' option allows to control how devices are attached to the
-guest, either by using the legacy QMP mechanism (this is the default) or by
-passing it directly to the Qemu command line using xen-pci-passthrough
-device.
-
-Example usage in cfg file:
- pci = [ "00:03.0,seize=1,hotplug=0" ]
-
-Since Qemu -device option accepts parameters in json format, this
-patchset adds a new internal function libxl__device_pci_get_qmp_json() that
-generates the device json object used for both QMP hotplug and command line
-passing.
-Also, the function libxl_pci_assignable() is made available from libxl.h
-for access in libxl_dm.c. I don't know if it's ok to make it public or if
-it should stay private. Maybe it should be renamed as
-libxl_device_pci_assignable() to match the other PCI device APIs.
-
-This has been successfully tested on Xen 4.22-dev and Qemu 10.0 running
-Debian VMs in both Bios and UEFI mode with a passthrough'd nvme disk.
-Disabling the hotplug mechanism might be made mandatory for Q35 machines
-later, once Q35 support is merged upstream.
-
-[1] https://lore.kernel.org/xen-devel/20260313163455.790692-1-thierry.escande@vates.tech/
-
-Changes in v2:
-- Add support for YAJL json parser
-
-Thierry Escande (3):
-  xl: Add pci device hotplug option
-  libxl: Allow PCI device passthrough using -device Qemu command line
-  docs: provide description for pci hotplug option
-
- docs/man/xl-pci-configuration.5.pod | 17 ++++++
- docs/man/xl.cfg.5.pod.in            |  6 +++
- tools/include/libxl.h               |  1 +
- tools/libs/light/libxl_dm.c         | 80 +++++++++++++++++++++++++++++
- tools/libs/light/libxl_internal.h   |  2 +
- tools/libs/light/libxl_pci.c        | 41 +++++++++++----
- tools/libs/light/libxl_types.idl    |  1 +
- tools/libs/util/libxlu_pci.c        |  2 +
- tools/xl/xl_parse.c                 |  5 ++
- 9 files changed, 145 insertions(+), 10 deletions(-)
-
+diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
+index 0691f06ad3..8b664173cb 100644
+--- a/docs/man/xl-pci-configuration.5.pod
++++ b/docs/man/xl-pci-configuration.5.pod
+@@ -166,6 +166,23 @@ dom0 without confirmation.  Please use with care.
+ 
+ =back
+ 
++=item B<hotplug>=I<BOOLEAN>
++
++=over 4
++
++=item Description
++
++Tells L<xl(1)> to use QMP hotplug mechanism to attach assignable device to
++the guest, or to pass it via Qemu command line using
++'B<-device xen-pci-passthrough,...>'. The default is to use the legacy QMP
++mechanism.
++
++=item Default Value
++
++1
++
++=back
++
+ =item B<power_mgmt>=I<BOOLEAN>
+ 
+ =over 4
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 3aac0bc4fb..181aaffa0f 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -1230,6 +1230,12 @@ B<(HVM only)> Changes the default value of B<power_mgmt> for all PCI
+ devices passed through to this VM. See B<power_mgmt>
+ above.
+ 
++=item B<pci_hotplug=BOOLEAN>
++
++B<(HVM only)> Changes the default value of B<hotplug> for all PCI
++devices passed through to this VM. See L<xl-pci-configuration(5)> for
++more details.
++
+ =item B<gfx_passthru=BOOLEAN|"STRING">
+ 
+ Enable graphics device PCI passthrough. This option makes an assigned
 -- 
 2.53.0
 
