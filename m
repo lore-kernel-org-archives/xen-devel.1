@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45151E9DE5B
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 07:54:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1276748.1562065 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349C7E9DE5F
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2026 07:58:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1276761.1562084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAkDY-00032k-Ny; Thu, 09 Apr 2026 07:54:24 +0000
+	id 1wAkHY-0004Bd-Kn; Thu, 09 Apr 2026 07:58:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1276748.1562065; Thu, 09 Apr 2026 07:54:24 +0000
+Received: by outflank-mailman (output) from mailman id 1276761.1562084; Thu, 09 Apr 2026 07:58:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wAkDY-00032d-LL; Thu, 09 Apr 2026 07:54:24 +0000
-Received: by outflank-mailman (input) for mailman id 1276748;
- Thu, 09 Apr 2026 07:54:23 +0000
+	id 1wAkHY-0004BS-FN; Thu, 09 Apr 2026 07:58:32 +0000
+Received: by outflank-mailman (input) for mailman id 1276761;
+ Thu, 09 Apr 2026 07:58:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wAkDX-00032Q-A9
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 07:54:23 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wAkHX-0004As-It
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 07:58:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wAkDW-00AFDC-MO
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 09:54:22 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wAkHW-004XTq-VN
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2026 09:58:30 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69d75b28-2eae-0a2a0a5409dd-0a2a45088884-20
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 09:54:22 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d75c16-5cb7-0a2a0a5109dd-0a2a450bde08-42
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 09:58:30 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <jbeulich@suse.com>)
- id 69d75b2e-fab6-0a2a45080019-d155802cacb0-3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 09:54:22 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-488a14c31eeso4124665e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 00:54:22 -0700 (PDT)
+ id 69d75c26-bca8-0a2a450b0019-d1558029e0ed-3
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 09:58:30 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so8282835e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Apr 2026 00:58:30 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488cd0b4829sm32801845e9.3.2026.04.09.00.54.21
+ 5b1f17b1804b1-488ccfbbb7fsm29755565e9.0.2026.04.09.00.58.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Apr 2026 00:54:21 -0700 (PDT)
+ Thu, 09 Apr 2026 00:58:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,61 +55,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1775721262; x=1776326062; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1775721510; x=1776326310; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=cqQRtGw6ycdUYGge6A3hIwEg7V8pLTnNdK0y3Eae7bU=;
-        b=czkcEDuB/ElGjrPSdPX8EtPIruSfPoyxbB1VhEJjealBt/BcDvx91A4Z1aI/qt5E3T
-         Cz+yep8Nziod7LurLxRfLSNybtaN+PhMj6mI564RAPVjEIvXt6ZBaEwaHKJs0EEA8QW3
-         ZtXU+SM+iosuzNvdMct1olgU0uGfTjuYYmC0tKl3hogsf0N6tVaIEssGziGU1gijrFdx
-         w632IUReFAp5jM1/EaeHm6m21Nnb1+1mrUS5ctRwqc9tKxeQBpBuDI+cHCrUmrerx2RJ
-         eeA3zN2McprGWuxRQF3Yk3yOHOsJegCFmtFUGA+2Stam6qnZr8lk0PCKuSBhpoKQjDwh
-         dKYg==
+        bh=q1X4cwP96GL4JxfESvU/b8wpEscDe3VPj2Leviv73Gc=;
+        b=Rx/Y2VAH28zQUuxi9UGK+D/Shd0k6f8Yh1W3al7ms3wd2wdTgCGf4QLD0sm5JxwN0h
+         RwhJU8HW32IvC4Ef2DLiHTbQm4/43qMWp4uMF5BhBY232oR4gci+6vf7+BtSe1XBMF87
+         Wpi6lQIflOwX8esf5Yd5TAm3EqBhNoaATL12NW7Op3a+WdOY7n1fA3dPTlTmBDWuMSfr
+         5BjR5Hv8o6UsSZ7JBFXpSl6DvMb2GT6LznEHY6GDigt2lzO8kMPXAgnMg3l1jRWbpHaS
+         xAaRg4cDyNzo5bpK1nGxPe0/RpV4vSwSVaovRyQHvYBWrCp+sb1MA3IgDtb8S692ZHpI
+         V55g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775721262; x=1776326062;
+        d=1e100.net; s=20251104; t=1775721510; x=1776326310;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cqQRtGw6ycdUYGge6A3hIwEg7V8pLTnNdK0y3Eae7bU=;
-        b=gfEMUg4DqDR9L47ZZOHLYinVqmPfLMAGJ4C3J7uT8sf7Iqr7yyydZp58zcnEW02PeM
-         BerTq6KqwXZMPwZMazFRloN/TqaGV1I4sTDJ/w8V3XbBsOrc/7z+cp4ZkLPXbFLGNTHa
-         3fYcSjL0ZYbAQluaTTeKiPN2mkTWEWrFH+crX03R28m2A6rFeF60rZJWuBMszB9NM1HY
-         Nh5RkIoQ30NHgmhS6pQkyXbILb4bIk3AvYsfAk3zmJj6JM5pz4iqjESoiF4d4op+GrnF
-         ChQgOUPSXIXqqNuSFXZTyE5GFKlcpCYUxWpvKeh7oC7prRNWQHsmZ2gLHqDNX4/w+TmD
-         wtyA==
-X-Gm-Message-State: AOJu0Yw7P9mcnqk0pKgk5obEZn7GT4Gv+zh4B4ZblT6ORyDVMdZc/Pfx
-	TaSwP9Dm1eWO+04UyicionsEXlu52/eTQ3he7czeD9dO2eIJkG0Sj14HKsvh1hce8Q==
-X-Gm-Gg: AeBDieun89+78j9e51ZzBMnXpq4VUYUSK5SnBBAG0TGSYaiesn+2sQ4CBvgocmDPG1t
-	uEl28aTAr8kx0mSRWMXQDyaw50Ve/zIMXNkvch8aZUZ/C5wKw0RBD6H7bVBgbEsIOtNzWFyCczT
-	D6c54xq7Pg5QGBuJ9QaTwsemtNIhQTTBIFYFDYHNQqyw9mdAiIMMKOrQ7wJeUSiH9NK7Rrdywzq
-	JRvngyn8oUuOCGMwNwVqsde5AhaY4Ld2yK0qbb/IEwThfntWI0kOkOyEYvGgT2jV8+LLHgoIHBS
-	qbZau0sYdPEPDtMs/KIN6E77QXkMzbHXxf85vlFT6sgc71ry05zFPYGb2YFf3DjnLKd88V9dETO
-	h41Bn1LFg0CAJ0zwQVwbSSf90xHp9XTQxqzg7nCOyGbXPS/3rcyJermmyhgHpERi3X6IsWnsF/E
-	uwci/PXli/uTl1VgaisWtklGg4U92RO8ctSGzJPm4/iahL6z+KPg96pTZuyB7nyfwwOavehVPHo
-	MevclV3bzvVEck=
-X-Received: by 2002:a05:600c:5292:b0:485:2a85:e5ec with SMTP id 5b1f17b1804b1-488996e0ce0mr357321395e9.2.1775721261836;
-        Thu, 09 Apr 2026 00:54:21 -0700 (PDT)
-Message-ID: <357c0692-1ed9-4bda-ae9a-729153d7cd93@suse.com>
-Date: Thu, 9 Apr 2026 09:54:19 +0200
+        bh=q1X4cwP96GL4JxfESvU/b8wpEscDe3VPj2Leviv73Gc=;
+        b=O+ylm+tFOqsQQwwKK0qZ/+/2L/vtw2QMmW7WHw/AauMFiClXkv7f2UHLn0xS0JaZzA
+         d4boYA1eN+6ar0XXVLX9hbvi63d/8su2+XkiFZS0z1J5pxlYJFaKmed/9nJA86o6bGkQ
+         nvoqQ/9EHJaM5OA4mhV+71o61EgN24pt8SWmhKfAQPFAd/ay8No56DWz0NW4i2koJrtz
+         u84Vx7gwXhD51mLvVWtrmkBr8+HFqhO8mhFxdLYLAlCbrvZRDxBwKvrkzG0xdReKu72R
+         iCMm7FP/gBYvkuYxcfHA9I6Fq6pfvCTll2FJjr5ee1Hi1VCcL8N+XfRQOMHO3DVc7fXG
+         W2QA==
+X-Gm-Message-State: AOJu0YxfRIXtMbDYrAr7Tvb0nm3dplQuVL/9OEoh7xcN2GmGRSrA84Rp
+	ESFm4EEeivvYytAeSrsqF7Y0+Ug19Q2TFsaoR4+WSGQM3YxCMDBHgpzZqSLiXIupHw==
+X-Gm-Gg: AeBDiet1PlbLKEfzBPrW+A4pNxDnyPWoN4z8iTNkwyI/H3iU9aC7LeyhFR7hpJTWC99
+	A7cZp7I7vPxwRoDTrI2k4eFRyvIwHBzDCm1DzYckBekzVEDM4SrtkeS/RTcaL+rEIde9Bhh4/Iw
+	dPHcFlJ48HHNpVQR8AoGRGRGW1JLIW31Gd0kry/M40BhLg5inTFTovHL1UEwomdxKqXQ5RgKhYw
+	T4stx1qZ5J6lTjDimbUQvl1zS3we5r/DzmHDlB0S6XN2cA2JqpyjqSpBjeCKCDEzxuO/V0znf4k
+	O0xtxHoqKraXaxFWUVEHFuotW5aWW2krL5RVomfo86S/mt1ujxRwA1zdiS1m9iqhYL6ncMgju02
+	Be4lLr+QnZrsmynQtfsjgKWAqGhquoCU8xoo2aFqciv/Xzfm6VVx6E8b10c/LyiuYzKp995epG/
+	1EvwbP9qsFk5yGAjL6yqqqAI4BLtwH1AVp5hfBTlHob01qylJHKexs7PV2R157ibMorrJ+eaJxg
+	jyNQUbi+ZpnlX4=
+X-Received: by 2002:a05:600c:5292:b0:488:8c89:cfaa with SMTP id 5b1f17b1804b1-488996b021fmr370621505e9.3.1775721510273;
+        Thu, 09 Apr 2026 00:58:30 -0700 (PDT)
+Message-ID: <17abf692-2b49-4f34-b09d-31e6a1741550@suse.com>
+Date: Thu, 9 Apr 2026 09:58:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 1/2] make ioremap_attr() common
-To: Luca Fancellu <Luca.Fancellu@arm.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
  Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
  Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 References: <145299a0-b25c-4612-82c6-9401a2f88ad2@suse.com>
  <72526f3a-726a-4a1e-8d80-1a336175c1af@suse.com>
- <DF8F0F78-1DBA-41B9-8055-4CD3622F6929@arm.com>
+ <addasqowkczVjsE4@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,82 +135,47 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <DF8F0F78-1DBA-41B9-8055-4CD3622F6929@arm.com>
+In-Reply-To: <addasqowkczVjsE4@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1775721262-76151497-62D24157/0/0
+X-purgate-ID: tlsNG-42698a/1775721510-EED4F2A1-8C47931F/0/0
 X-purgate-type: clean
-X-purgate-size: 2562
+X-purgate-size: 1387
 
-On 09.04.2026 09:26, Luca Fancellu wrote:
-> Hi Jan,
-> 
->> On 8 Apr 2026, at 13:07, Jan Beulich <jbeulich@suse.com> wrote:
->>
+On 09.04.2026 09:52, Roger Pau Monné wrote:
+> On Wed, Apr 08, 2026 at 02:07:23PM +0200, Jan Beulich wrote:
 >> This core backing function is uniform; what varies across architectures
 >> are the attributes passed and hence the wrappers around it. Yet of course
 >> extra checking or special handling may be needed per arch, so introduce a
 >> suitable hook.
 >>
 >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+Thanks.
+
+> Just looked at the common and x86 bits, both LGTM.
+
+I'll transcribe this into
+
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com> # x86, common
+
 >> ---
 >> Declarations (or inline counterparts) aren't being moved around, to avoid
 >> the need to touch source files using the functions. Quite possibly they
 >> want to consistently go into xen/io.h and asm/io.h.
 >>
 >> Of course ioremap.c could also go into lib/.
->>
->> For RISC-V the wrappers likely should become inline functions?
->>
->> PPC doesn't reference any of the functions just yet, so gets only a
->> declaration.
->>
->> For Arm, a TODO item is deliberately retained, yet seeing the use of
->> ioremap_wc() in domain building (which by itself is questionable, see next
->> patch) I wonder if that's even feasible as long as we don't have
->> memremap() or alike.
->> ---
->> v2: Use conditional operator in ioremap_attr()'s final return. Re-base and
->>    leverage that to simplify ioremap_attr() itself.
->>
->> --- a/xen/arch/arm/include/asm/io.h
->> +++ b/xen/arch/arm/include/asm/io.h
->> @@ -1,6 +1,8 @@
->> #ifndef _ASM_IO_H
->> #define _ASM_IO_H
->>
->> +#include <xen/mm-types.h>
->> +
->> #if defined(CONFIG_ARM_32)
->> # include <asm/arm32/io.h>
->> #elif defined(CONFIG_ARM_64)
->> @@ -9,6 +11,16 @@
->> # error "unknown ARM variant"
->> #endif
->>
->> +#ifdef CONFIG_MPU
->> +void __iomem *mpu_ioremap_attr(paddr_t start, size_t len, pte_attr_t flags);
->> +#define arch_ioremap_attr mpu_ioremap_attr
->> +#else
->> +/*
->> + * ioremap_attr() should only be used to remap device address ranges.
->> + * TODO: Add an arch hook to verify this assumption.
->> + */
->> +#endif
 > 
-> I find a bit strange to have an #else with only a comment, but to be fair I’m not sure where this
-> comment can be put otherwise.
+> Maybe I'm missing the point, but what's the benefit for it to go into
+> lib/?  Is there any realistic scenario where we might have a
+> functional hypervisor build that doesn't require ioremap?
 
-That's the issue: I don't want to lose the comment, but I also didn't
-see a good place to put it. Having it here means it can be replaced by
-a single patch hunk, whenever the TODO is going to be addressed.
-
-> For the Arm and common part, I’ve also tested on Arm64 MMU, Arm32 MMU, Arm64 MPU on virtual platforms:
-> 
-> Reviewed-by: Luca Fancellu <luca.fancellu@arm.com> # arm, common
-> Tested-by: Luca Fancellu <luca.fancellu@arm.com> # arm, common
-
-Thanks.
+Well, the difference likely is between "in principle" vs "in practice". In
+principle a lot of code could really be regarded "library" like. In practice
+whether to put code in lib/ really matters for stuff which may only be
+needed in certain configurations.
 
 Jan
 
