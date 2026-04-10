@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C41BCF459F8
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279434.1563928 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D80F459EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 17:02:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1279586.1563958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECc-00011S-1g; Fri, 10 Apr 2026 15:55:26 +0000
+	id 1wBFFL-00072I-P1; Fri, 10 Apr 2026 17:02:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279434.1563928; Fri, 10 Apr 2026 15:55:25 +0000
+Received: by outflank-mailman (output) from mailman id 1279586.1563958; Fri, 10 Apr 2026 17:02:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECb-00010H-No; Fri, 10 Apr 2026 15:55:25 +0000
-Received: by outflank-mailman (input) for mailman id 1279434;
- Fri, 10 Apr 2026 15:55:24 +0000
+	id 1wBFFL-00072B-L4; Fri, 10 Apr 2026 17:02:19 +0000
+Received: by outflank-mailman (input) for mailman id 1279586;
+ Fri, 10 Apr 2026 16:40:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECZ-0000go-Vt
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:23 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <ruslichenko.r@gmail.com>) id 1wBEud-0004ce-Ol
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 16:40:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBECZ-00Cgsb-BJ
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:23 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wBEud-00GILx-4t
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 18:40:55 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d6a-e002-0a2a0a5209dd-0a2a4507c022-4
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:23 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d6b-ba2d-0a2a45070019-d155802ac91f-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:23 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-488b8bc6bc9so15801995e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:23 -0700 (PDT)
-Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.21
+ (envelope-from <ruslichenko.r@gmail.com>)
+ id 69d92808-e002-0a2a0a5209dd-0a2a4509c3b6-20
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 18:40:55 +0200
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <ruslichenko.r@gmail.com>)
+ id 69d92816-bf79-0a2a45090019-d155dd35e810-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 18:40:55 +0200
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-43cf7683a28so1518543f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 09:40:55 -0700 (PDT)
+Received: from thinkpad-t470s.. (93-138-230-56.adsl.net.t-com.hr.
+ [93.138.230.56]) by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-43d63de2a74sm9148616f8f.3.2026.04.10.09.40.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:55:22 -0700 (PDT)
+ Fri, 10 Apr 2026 09:40:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,146 +53,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775836522; x=1776441322; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=j/LD+Q0Pk+2kpOMYSoWm4Kl0NPbf+mdTSKTiw89GJZY=;
-        b=NS3KKP6d9Lf0fLcTNYe9rrRWHhAl/mMHQNBT30DY00SlZK9DezZLP4xT+2fzpjjxLi
-         sAhWQZYF046B74ioVBvGtEiET7fBNm80/IYzswi5EWhBxtz8VG5n6jTLFrU82xhdGVSc
-         yFu4fmEAPSGM5yxLJBth/1NYXq0tK9Ty/SPBLJVPV5M5EclwEPfniJ4qcp2SPLHWGy1v
-         uZ9Y7bcGIzoT1vmPLP9IZ2KHV/2ppkIKc9+Uo6lj03G1QFoZJ2O0BwB8diRHAdWiomsk
-         Beq58GP7deZd9O1QmMXZRKmemYCEgn6vFeq75bf1bm8cvGjMsWfAxuWPzQiEeUknxU9q
-         hviQ==
+        d=gmail.com; s=20251104; t=1775839254; x=1776444054; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=i2MeOwOQ0HpzPcQqHFqvJhQPkk3zuHdR2kp1S4waI/Y=;
+        b=NFd8cvwowwrgrHBayC1FeAFp5rfctjN3P3lIzetmZT07Y8fnV2XY54bTusXlwb3D5z
+         GNhaoQX2GbBNfKdi3xlNXWxdazkh9WsirjkSfcx2xHLvur9tziXbbrRYWYEkb+MaFb2t
+         1rOXA+qKvnqtXNQEXqv3XVsvoACa64mnPcuEBk9LCUC6ZlKkMIYFvCZufkF1Rrqf+8nJ
+         9uULkOXM1Dlcvbq68IVzyxEvgtuMksL/DDDmLgjRcEpE1MLVUoqTvwrLtizFJVzwvCpq
+         +vdNU1ZLBbEIrvm9mP/6Pk+hDkXlRC+Xf/qSN8Vt1xBcte9zW3M2/+yKRfCHep9PV8dl
+         TGtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775836522; x=1776441322;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=j/LD+Q0Pk+2kpOMYSoWm4Kl0NPbf+mdTSKTiw89GJZY=;
-        b=mwyL6u975ZoORfknTgQKadglSUE0RjfMh+6osljlQU8/pq6D17QFI7XqCGA1gWKMO8
-         NFN/BJq/Cyu8Pr2bEHyfOYzrsw3D3QFL9xlUEJ/2qEiN0zB5KwGOIkHMQS7wWoZWTx60
-         MfgK1eNmjcylc7Ja4vtdOqtfsaYaHnYu6fzgLprAOxqU9Lq2AuJPg9N/bEgg8fJ8gcTx
-         7HVzqVVJvXIs4k8C1V4jM7uLSfa1w4lqNE+Lr5RQvUzSroWB5YoxNA0Zybu5DcyZoTzc
-         VLOmdQVo5spqv7OuyoJIUiA3hnHtdsHHXxyPhCfvyjuCr5YVL6aDN6p/y+9NhQme1gzc
-         B60A==
-X-Gm-Message-State: AOJu0YxvBFAhG9137LLKdRy0iV8ScdXOcwWAlVEABEejqxQ1NJ1jCbB5
-	ziMxkRpTKvDfDsxTDJybK8gO+OEEgxqlB0fXJac9kHL8gI6+5yCfmJ/PbShLeA==
-X-Gm-Gg: AeBDiet7w8Bp3XDzJYLynH8UB8BwSDyDDEVd/JW4ozupOA8nx3UafKDgzheJnQ4+sY9
-	kEUomgl/n0/Yph/kRKpq3jsQjKPlbbOsYlCvNBYJs/IHwgdQNqkzni42Y24P1hlgLwYmnNkQBAw
-	z/GAeEtIkK5lh289XCsTvh6YOyktnnn2mSIGAwcF7kcLaVHOpsCO7KOWXO3FPRoBD39KcfBlIeu
-	rMonk0thhf25ifK7/3rUDbdhL88IkXysr5P+tSCqGnvnBvk/mvbT0bek36XJz8by20nEFNGXj+F
-	1XUA8y75jKkyrWKk2ZDCoqTbkXD89J0C0DlAPkY4vwGXaSxEZ4RNVnkDX/qbybloPthCAmV9tF5
-	KBXwNGhPIeQR53CT2LoQTiD1/tGykFWZdxQDgtFIZf/vd5wHXec7lhkhyRrirAMbbMpONOBw3g7
-	sL0ieorlPsx4tS0xUZVP2UKSQx0EPTvonwSzvEaSpeRJaeb2Dd18NnNhr9usqhXqiqPw==
-X-Received: by 2002:a05:600c:8907:b0:488:ab1d:dcc5 with SMTP id 5b1f17b1804b1-488d6ac1bafmr31367345e9.27.1775836522434;
-        Fri, 10 Apr 2026 08:55:22 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20251104; t=1775839254; x=1776444054;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=i2MeOwOQ0HpzPcQqHFqvJhQPkk3zuHdR2kp1S4waI/Y=;
+        b=ct8I4oN+oNlkR3H/nhpMQp7H6ToQouEZul0MwMCeJMTL4LzkWZWaGATuxBwm7gWh4v
+         vmvW8OKyRq2lLt9mqGaZCNEJNBUkNs04Ve49M3pi+1YqDnevMsgGbLCCBOgKvoy9BRbK
+         +LMES04Ce54rIJWTxK5nIh8exqkrI40vdC2UwYOpu53//HxxgyIslfcxR++p+CMDCSwb
+         PybPrdqgcy8PAKFKoGI2rkjxR+n3WMDsHZ4Kh+Yei1kyYCBA7q0rP/QancDQhB1GPNCz
+         dY+gzctjVgFV68hw1oN2oqroHmxYH3PdAjeN20VPIPlfDe1R6f6wZadr0VJfPgRfH5Vl
+         sikg==
+X-Gm-Message-State: AOJu0Yw9MpYrVas/qWT1Okp+8fQ6ZLc9LGMQvOLFqo8htkYh6nTrL10m
+	lY3XVf+KxufDHG8VpqdYR7fJxqfCoVoGwaJB5qn3iVK6HKhZxlI/4+hQLEjtCLeh
+X-Gm-Gg: AeBDietOq6Lnk347PS0e0J/VLDVaBqhZlVb7nV5U59hD55KigXi0AMQGRh0x1tH1NQH
+	86QneOHQlYJsDPJzms9spxUA+YcX15+z6jGplUyi+oP1k4BeB8ykuOryiFKjtFoMizAc4HVvbSd
+	CUaAoMGVZM7GgiRjqcFzOU+JvaNY2hvAMhAQP6k9rbX5YzYYynj9LtpN6mDdUn8CTaRL0lc25u0
+	WihXEU0WOGErWzTj/U47zuNocr/5CKG9Pv0TL6rbpwaxAv41jZrMQQd+gAAk24tvmuzbTp0036o
+	PqYShDv2h3saAxC9bP+bQRAQNpWi/DEEGllK5OWQGkVAoJiOZAtIW7T9Wjy+CpBtWp4a9mSvbB9
+	ggWklPiLe0RNB4eTUgxSgtL7ph9+uC3ytaZV/7WgRd6Dlb8a3oDDM3YgCZcKPojd1+54aMdpy7N
+	Nbk6HGkw1DQoLO1iiJWbSfp/+fUoWEQOxHU68Cs0JzU2Ns/W9exD95itsXLbsHuPb1Q0Y=
+X-Received: by 2002:a05:6000:611:b0:43d:613:33d8 with SMTP id ffacd0b85a97d-43d642b9e4amr6075919f8f.29.1775839253942;
+        Fri, 10 Apr 2026 09:40:53 -0700 (PDT)
+From: Ruslan Ruslichenko <ruslichenko.r@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 11/12] xen/riscv: add definition of guest RAM banks
-Date: Fri, 10 Apr 2026 17:54:57 +0200
-Message-ID: <8280fe1a5effacd595d3dd69b2b11e06226411b2.1775836193.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
-References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
+Cc: volodymyr_babchuk@epam.com,
+	Ruslan_Ruslichenko@epam.com,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Juergen Gross <jgross@suse.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: [PATCH] xen/sched: fix scheduler callback verification on init
+Date: Fri, 10 Apr 2026 18:40:39 +0200
+Message-ID: <20260410164039.1000284-1-ruslichenko.r@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1775836523-8955341E-457CF58A/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3066
+X-purgate-ID: tlsNG-bad1c0/1775839255-5CDF7152-028EBDF8/0/0
+X-purgate-type: clean
+X-purgate-size: 1916
 
-The dom0less solution uses defined RAM banks as compile-time constants,
-so introduce macros to describe guest RAM banks.
+From: Ruslan Ruslichenko <Ruslan_Ruslichenko@epam.com>
 
-The reason for 2 banks is that there is typically always a use case for
-low memory under 4 GB, but the bank under 4 GB ends up being small because
-there are other things under 4 GB it can conflict with (interrupt
-controller, PCI BARs, etc.). So a second bank is added above that MMIO
-region (starting at 8 GiB) to provide the remaining RAM; the gap between
-the two banks also exercises code paths handling discontiguous memory.
-For Sv32 guests (34-bit GPA, 16 GiB addressable), bank0 provides 2 GB
-(2–4 GB) and the first 8 GB of bank1 (8–16 GB) is accessible.
+During core scheduler initialization, each registered scheduler
+is sanity tested in two steps:
 
-Extended regions are useful for RISC-V: they could be used to provide a
-"space" for Linux to map grant mappings.
+- it must provide required callbacks (e.g. init, do_schedule).
+- if global_init callback is present, it must succeed.
 
-Despite the fact that for every guest MMU mode the GPA could be up
-to 56 bits wide (except Sv32 whose GPA is 34 bits), the combined size
-of both banks is limited to 1018 GB as it is more than enough for most
-use cases.
+If any of the steps fail, scheduler entry is cleared in global
+'schedulers' array.
 
-Add inclusion of asm/guest-layout.h to asm/domain.h to make dom0less
-common code build happy.
+However, in the current implementation, if verification fails during
+the first step, the scheduler entry is cleared but verification
+sequence is not interrupted. This lead to NULL pointer dereference
+when subsequent required callbacks verified, and possible during
+the second step.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+The patch fixes the crashes by adding check inside sched_test_func
+macro and skipping the call to a global_init if first step did not pass.
+
+Signed-off-by: Ruslan Ruslichenko <Ruslan_Ruslichenko@epam.com>
 ---
-Changes in v3:
- - Move GUEST_RAM*-related defines to asm/p2m.h instead of public header.
----
-Changes in v2:
- - New patch.
----
- xen/arch/riscv/include/asm/domain.h       |  1 +
- xen/arch/riscv/include/asm/guest-layout.h | 23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/guest-layout.h
+ xen/common/sched/core.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 6c48bf13111d..6044ce0feee0 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -7,6 +7,7 @@
- #include <xen/xmalloc.h>
- #include <public/hvm/params.h>
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index a57d5dd929..4270c89491 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -3017,7 +3017,7 @@ void __init scheduler_init(void)
+     for ( i = 0; i < NUM_SCHEDULERS; i++)
+     {
+ #define sched_test_func(f)                               \
+-        if ( !schedulers[i]->f )                         \
++        if ( schedulers[i] && !schedulers[i]->f )        \
+         {                                                \
+             printk("scheduler %s misses .%s, dropped\n", \
+                    schedulers[i]->opt_name, #f);         \
+@@ -3034,6 +3034,9 @@ void __init scheduler_init(void)
  
-+#include <asm/guest-layout.h>
- #include <asm/p2m.h>
- #include <asm/vtimer.h>
+ #undef sched_test_func
  
-diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
-new file mode 100644
-index 000000000000..68d95a09394c
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/guest-layout.h
-@@ -0,0 +1,23 @@
-+#ifndef ASM_RISCV_GUEST_LAYOUT_H
-+#define ASM_RISCV_GUEST_LAYOUT_H
++        if ( !schedulers[i] )
++            continue;
 +
-+#include <public/xen.h>
-+
-+#define GUEST_RAM_BANKS   2
-+
-+/*
-+ * The way to find the extended regions (to be exposed to the guest as unused
-+ * address space) relies on the fact that the regions reserved for the RAM
-+ * below are big enough to also accommodate such regions.
-+ */
-+#define GUEST_RAM0_BASE   xen_mk_ullong(0x80000000) /* 2GB of low RAM @ 2GB */
-+#define GUEST_RAM0_SIZE   xen_mk_ullong(0x80000000)
-+
-+#define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016 GB of RAM @ 8GB */
-+#define GUEST_RAM1_SIZE   xen_mk_ullong(0xFE00000000)
-+
-+/* TODO: allocate these all dynamically */
-+#define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
-+#define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
-+
-+#endif /* ASM_RISCV_GUEST_LAYOUT_H */
+         if ( schedulers[i]->global_init && schedulers[i]->global_init() < 0 )
+         {
+             printk("scheduler %s failed initialization, dropped\n",
 -- 
-2.53.0
+2.43.0
 
 
