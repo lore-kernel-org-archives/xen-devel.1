@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E4AF459F3
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:45:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279396.1563824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF6DF459F6
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1279415.1563848 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBE2v-0004uJ-IH; Fri, 10 Apr 2026 15:45:25 +0000
+	id 1wBECR-00073M-1v; Fri, 10 Apr 2026 15:55:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279396.1563824; Fri, 10 Apr 2026 15:45:25 +0000
+Received: by outflank-mailman (output) from mailman id 1279415.1563848; Fri, 10 Apr 2026 15:55:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBE2v-0004uC-FB; Fri, 10 Apr 2026 15:45:25 +0000
-Received: by outflank-mailman (input) for mailman id 1279396;
- Fri, 10 Apr 2026 15:45:24 +0000
+	id 1wBECQ-00072l-Sd; Fri, 10 Apr 2026 15:55:14 +0000
+Received: by outflank-mailman (input) for mailman id 1279415;
+ Fri, 10 Apr 2026 15:55:13 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBE2u-0004u6-8R
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:45:24 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECP-0006xl-DC
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBE2t-009K4U-KT
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:45:23 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wBECN-00Cwd5-7o
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:12 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91b00-bab6-0a2a0a5309dd-0a2a4503b300-48
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:45:23 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d91d56-bab6-0a2a0a5309dd-0a2a450cb636-16
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:12 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91b13-02b3-0a2a45030019-d1558033d46b-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:45:23 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4852a9c6309so21049325e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:45:23 -0700 (PDT)
+ id 69d91d60-f40c-0a2a450c0019-d1558032cce8-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:12 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-488971db0fdso21891455e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:12 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d58a8445sm77111195e9.6.2026.04.10.08.45.21
+ 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:45:22 -0700 (PDT)
+ Fri, 10 Apr 2026 08:55:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,420 +52,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775835923; x=1776440723; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=92qdXREBVwsG+a0SGoPjpWEPYqqewbVtYm4T62FIQ3Y=;
-        b=eL9rg+y53pajxd9Lvfi9yQXdtJchUuCyuXn1DvtbdRnEOe7PgEtPtz6pLlESVcLHPI
-         y1R0uSWUDQi6Ef/KuHM2nAI1DiUcjAQOfVgDedntv/E2UiOE5Qx/b4N2nJf0LZ5cLrbK
-         ja3HPaJ7u+n3XPENjiXIhLm13PmA2l+RzKc/tQBaOFoVXXzu65bVkiDk5XsDXy/ahtIL
-         E4f5UO4swk0qjBkqUyaxRq5OIaqELYVYjEhUGn19CEONcqRJiZ3lC7vv7BLxqyb7u8/3
-         rZnC/0Xmpvu1f/+icviFbRfDsDYS6IcgMWA0SIdQhTXtOjMy8KjaOt/uQ1eYvj1dQx5M
-         ZSVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775835923; x=1776440723;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1775836512; x=1776441312; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=92qdXREBVwsG+a0SGoPjpWEPYqqewbVtYm4T62FIQ3Y=;
-        b=lvLgOYPRH2dHDvxxxj7CYFWCv1ZnSRpAozYnrDtk05Gd1Q8/NpK/z7nGatjMCmwi6C
-         EYeuFE9K6pbgxmK8Ev6bw7YXC+sso7UHPvvzgsaJtaMS1584d5bVUpUlPlsy3uY7cxzd
-         l8GWbmUHjoS+e9FSOtY+pfMGoBT0uDIhITLQaKwbvG2pTzvPYjmOIWE5qysQuNaRHpJm
-         kPoC9ODNqFJtcVXm1hro4NCEq/c0ywDevV5AFpENmhC8/WpibKQDif6Nb+VnxqC1rO2d
-         bfc/ipYJpG4gvxAm31dBtVIjp2yE3wrLvtQiEMt7nug2mOe1ZdhlTuormVblyBA1bSeE
-         tBXg==
-X-Gm-Message-State: AOJu0YwAtqSWnkdFRkeb8OAXg5RYirMg4UfM1MmDpeizpAAa37+c6aSq
-	2PCNQVjNAk52xfllxEYcgxmOjaiATlqYkNhPiDrj6wjayiE2a68VHOTm8KJaRQ==
-X-Gm-Gg: AeBDies/dmz7DqYl1Hwd942MeSQylK34PbygMNuFM0vuHTsmP1JnNFfz/hqDQipsapp
-	6DOuzaIg91e2IgSC9SFeWCDAn4aDhok7iYLjIyFUAN3S9ngJyVzeGxn9XSE0VPypzftMrNQHr2T
-	alOOnufkHlBERTjKTAZXGRxrmN1Edt85jzbJd8JZ2mK1RGLudR4HpB5+IgJrhj01n6JpJBXq+5x
-	yAdqcLbYwyKKlfeFHMkVnvyl62LkLHEyp5mPKmIY7aTveHYZU30gxdUN0VBVbB1l0w4uJ5z1Ua1
-	GHxEisAofPVeD/X5BKlo4t0ao7AJ5fyAWOMsD4eXyFGcSXqNOC5PzwjW4KXHkHRsdO31lxZuClK
-	2x+zwLVovmecKAuRDopcCYAoV2SE8X1c44+Xd8EomexlkCdBVZbh1D4fVZ4g9dAFu6rxjmq0gIU
-	aaLFj+4mqAAnu6EtXAuxoZTvEHwdmBq88S6BBHlYiJGfOZeyH40aAUvnSKrRNDEaEt0A==
-X-Received: by 2002:a05:600d:d:b0:485:ae14:8191 with SMTP id 5b1f17b1804b1-488d67b8da2mr38326035e9.5.1775835922606;
-        Fri, 10 Apr 2026 08:45:22 -0700 (PDT)
+        bh=Kn185YypiDfOEWixrDVwqtteBm6bdiTVXiEGngdxI1A=;
+        b=WMjkiq7nWY1QPOmYYFMstz0ihWMUut040lCHgRvWX7Tsgbf+SA4XlDOQ42/wqAq9Iu
+         B32nDvUR48VyZ92ve75jF1EoVkvNvuVtnL02crGza3F7k/ZmLmz560aT7qs1FKZua5V5
+         YujsCIdvEZkLRt0p/gTHvZzPJjQ74ZbkvwbZjDoBpkmpJjXk71TQ5YVpj+LLVt7pDJXh
+         L1S2wKC86vySSdioa07VX+WmyJJw9z87RoaIGBWkbsD5pVsxNwBA1OXn/32H7ARUP0Pn
+         gjt8ahAJzyW6qpmT31XtPYrOQajiPE9uHLJMbrO5M4/iccsVkqbQlNk355q7hxUk3/gl
+         VSaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775836512; x=1776441312;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Kn185YypiDfOEWixrDVwqtteBm6bdiTVXiEGngdxI1A=;
+        b=ejsvwEFcLtaUJrlaa9Gx3JOUIB1MyUqDJ51erhVeuY2IMp9yHMC7gu4VBkWMUvgW3q
+         IMU1+7qhD/ZjESqZc4vPQzELTrIIL44YZzb/xREoNWKrTwYWa9irHbJ2DJkFBd3a8qxK
+         HS7Qo5KxRc4Ik7nurrgQW5Ftj7MEfSJT3U9FG49zofEpfXbYD+cAiUpqOmm4b8znB7CM
+         CHDVp6I5F4hT3+dNw3wzSSkju26LaRx0huy7KJlezzm6nzMSUfcgyRtajk/3dD6KRU4N
+         SoWGFgoYz89caXx3P4Fc7aUi8KAdeUwGIFzNYy4FHsW970Hu61+BVFqLAug3B50x4Vch
+         1bUg==
+X-Gm-Message-State: AOJu0YxwX8c2vSUslPaS9fZCpO6zBOklusSozm9UpBm2DP4pByEW/Bs5
+	oNXTsj/ETrY3kV4NSEEvPnv/u+TX/y9O28F5QXEzvgil5NjY0CYG1siRGbY3ag==
+X-Gm-Gg: AeBDiesf5UjMtT6c04JsHKu4o67YBDjOBWcqT8RcUpBG+sAoB1+xnQB9ezHckSaI/jZ
+	nxh5jjD0/ww0WrpL5lgVziz5qjS5JN2F+3IPU+n7mxAcrOP6lLlWIKxhagg7Pwhj+qNCMahCdnd
+	Ekl7cG9D5n+zg6G/ahavx1nffhAKY8ZSViv02O1xP5n0fJlLjXu2xAF+T6asYqyJjKbshAv9Za6
+	7OVMGXeQ2xJUVKjaaoO+pQFznqU5Cdxdq5HxhfVKy7EzbHKS23dbCUUtLlrR9XTksFtg1iujHGV
+	pf69ByYtINBTJaLGTJymw7deJda94a0btiiGRyvIVLuZDZSkjkjh3Mb0BIf4VBgrC4xekrLdEb0
+	BVwHEFJNakIJI445dwcIIBUd3kbgTJtHnC05QiNgHf083e5WBlQszr+apo4+D1b6lZQPGBM1AY1
+	P3LGS9uZhiwAhe8AFoBw0zlE3yfvSELOFY0A3I0sdvVHGG2kOv/S4FATACA+Tjw9dv9A==
+X-Received: by 2002:a05:600c:5249:b0:485:7f02:afd5 with SMTP id 5b1f17b1804b1-488d680079bmr45339755e9.13.1775836511858;
+        Fri, 10 Apr 2026 08:55:11 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] xen/riscv: allow Xen to use SSTC while hiding it from guests
-Date: Fri, 10 Apr 2026 17:45:12 +0200
-Message-ID: <eba232ac5a338332ddedc2cb084e0c04ee8744c2.1775835741.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 02/12] xen: fix len type for guest copy functions
+Date: Fri, 10 Apr 2026 17:54:48 +0200
+Message-ID: <9154aea41a11bc0ba95ad15c217db79d029dd119.1775836193.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
+References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1775835923-41914C9A-FA4B47EF/10/73395122804
+X-purgate-ID: tlsNG-d25034/1775836512-8254FA3D-75CFC99F/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 13274
+X-purgate-size: 4947
 
-OpenSBI currently does not advertise the SSTC extension via the device
-tree, so if SSTC support is detected by Xen the riscv_isa bitmap is updated
-manually. Furthermore, removing the "sstc" string from riscv,isa is not
-a reliable way to disable SSTC, because OpenSBI probes support by
-attempting to access CSR_STIMECMP.
+Widen the len argument of copy_to_guest_phys_flush_dcache() and the
+copy_to_guest_phys_cb typedef from unsigned int to unsigned long, as
+the function can be used to copy large blobs such as the initrd which
+may exceed 4GB. Update the internal copy_guest() len argument to
+unsigned long accordingly.
 
-Introduce a runtime probe in Xen to determine whether SSTC is available.
-The probe attempts to read CSR_STIMECMP using csr_read_safe(). If the
-access succeeds, SSTC is considered available; if a trap occurs, it is
-treated as unsupported.
+Change the type for local variable size in copy_guest() to avoid
+compilation error because of type mismatch.
 
-When SSTC is detected, Xen may use it internally to program timers.
-However, the extension is not exposed to guests because the required
-context switch handling for the SSTC CSRs is not yet implemented.
+raw_* wrappers above copy_guest() keep returning unsigned long to
+avoid type narrowing; it is not an issue for raw_*'s len argument
+to remain 'unsigned int' since the assignment to copy_guest()'s wider
+unsigned long parameter is safe and there is no raw_* users who
+are using a value bigger than what can fit into 'unsigned int'.
 
-Note: clearing RISCV_ISA_EXT_sstc from the DTS riscv,isa property is
-deferred to a follow-up patch. Also, the corresponding HENVCFG bit is
-not set so guests fall back to the SBI timer interface. Timer requests
-are then handled by Xen via the usual SBI interception path.
-
-Introduce set_xen_timer() to abstract how the timer is programmed,
-either via the SSTC extension or an SBI call.
-
-Drop sbi_set_timer() as it is more than enough to have only introduced
-set_xen_timer().
-
-Drop "SBI v0.2 TIME extension detected" message to avoid confusion
-which set timer function is really used.
-
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2437772678
-
-
-Also, I've manually ran QEMU with SSTC=on/off and built Xen with a newer RISC-V
-compileer (in comparison with the version used by CI's docker container) to
-verify CONFIG_CC_HAS_ASM_GOTO_OUTPUT branch inside csr_read_safe().
----
 Changes in v3:
- - Reword print message when SSTC extension is detected.
- - s/__clear_bit/__set_bit() for the case when SSTC is detected in
-   riscv_fill_hwcap().
-   Update also the comment above __set_bit().
- - Drop BUG_ON()s in vtimer.c.
- - s/printk/dprintk for the message: SSTC detected...
- - Drop sbi_set_timer global variable, it is enough just to have set_xen_timer.
- - As we set bit in riscv_isa bitmap there is no need to use csr_read_safe(CSR_STIMECMP) second time.
- - Move init of CSR_VSTIMECMP in preinit_xen_time as it looks more correct place.
- - Update the commit message.
+ - Correct the declaration of copy_to_guest_phys_cb() instead of return
+   'unsigned int' to be in sync with len argument, the type of len argument
+   is changed on 'unsigned long' as initrd could be pretty big and also its
+   size is stroed in 'paddr_t' which is 'unsigned long'.
+ - Update copy_guest() prototype to avoid trancation bug for len argument.
+ - Revert prototype changes for raw_* wrappers above copy_guest() as they
+   should keep returning unsigned long to avoid type narrowing; it is not
+   an issue for raw_*'s len argument to remain 'unsigned int' since the
+   assignment to copy_guest()'s wider unsigned long parameter is safe.
+ - Change the type for local variable size in copy_guest() to avoid
+   compilation error because of type mismatch.
+ - Add Reported-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v2:
- - Minor style fixes.
- - Drop from vcpu_csr_init() setting of SSTC bit in HENVCFG register. Add it
-   back when SSTC for guests will be available.
- - Add static to set_xen_timer function pointer.
- - Refactor sstc_set_xen_timer().
- - s/csr_allowed_read/csr_read_safe()
+ - New patch.
 ---
- xen/arch/riscv/cpufeature.c                 | 18 ++++++++
- xen/arch/riscv/include/asm/cpufeature.h     |  1 +
- xen/arch/riscv/include/asm/riscv_encoding.h |  2 +
- xen/arch/riscv/include/asm/sbi.h            | 18 --------
- xen/arch/riscv/include/asm/time.h           |  3 ++
- xen/arch/riscv/sbi.c                        | 29 ++++++++++---
- xen/arch/riscv/time.c                       | 48 ++++++++++++++-------
- xen/arch/riscv/vtimer.c                     |  1 +
- 8 files changed, 81 insertions(+), 39 deletions(-)
+ xen/arch/arm/guestcopy.c                | 6 +++---
+ xen/arch/arm/include/asm/guest_access.h | 2 +-
+ xen/include/xen/fdt-domain-build.h      | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index 03e27b037be0..92235fdfd5ab 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -17,6 +17,7 @@
- #include <xen/sections.h>
+diff --git a/xen/arch/arm/guestcopy.c b/xen/arch/arm/guestcopy.c
+index fdb06422b8e9..ca0f72a80bff 100644
+--- a/xen/arch/arm/guestcopy.c
++++ b/xen/arch/arm/guestcopy.c
+@@ -53,7 +53,7 @@ static struct page_info *translate_get_page(copy_info_t info, uint64_t addr,
+     return page;
+ }
  
- #include <asm/cpufeature.h>
-+#include <asm/csr.h>
- 
- #ifdef CONFIG_ACPI
- # error "cpufeature.c functions should be updated to support ACPI"
-@@ -139,6 +140,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
-     RISCV_ISA_EXT_DATA(smaia),
-     RISCV_ISA_EXT_DATA(smstateen),
-     RISCV_ISA_EXT_DATA(ssaia),
-+    RISCV_ISA_EXT_DATA(sstc),
-     RISCV_ISA_EXT_DATA(svade),
-     RISCV_ISA_EXT_DATA(svpbmt),
- };
-@@ -483,6 +485,7 @@ void __init riscv_fill_hwcap(void)
-     unsigned int i;
-     const size_t req_extns_amount = ARRAY_SIZE(required_extensions);
-     bool all_extns_available = true;
-+    unsigned long tmp;
- 
-     riscv_fill_hwcap_from_isa_string();
- 
-@@ -495,6 +498,21 @@ void __init riscv_fill_hwcap(void)
-         panic("HW capabilities parsing failed: %s\n", failure_msg);
-     }
- 
-+    if ( csr_read_safe(CSR_STIMECMP, &tmp) )
-+    {
-+        dprintk(XENLOG_DEBUG,
-+                "SSTC detected; supported for Xen use, but not for guests\n");
-+
-+        /*
-+         * As there is no any guarantee that SSTC will be added to riscv,isa
-+         * property by OpenSBI(it doesn't add it now) or whatever ran before
-+         * Xen, it is needed to set this bit manually.
-+         *
-+         * Guest isolation is maintained by not setting ENVCFG_STCE in henvcfg.
-+         */
-+        __set_bit(RISCV_ISA_EXT_sstc, riscv_isa);
-+    }
-+
-     for ( i = 0; i < req_extns_amount; i++ )
+-static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
++static unsigned long copy_guest(void *buf, uint64_t addr, unsigned long len,
+                                 copy_info_t info, unsigned int flags)
+ {
+     /* XXX needs to handle faults */
+@@ -65,7 +65,7 @@ static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
+     while ( len )
      {
-         const struct riscv_isa_ext_data ext = required_extensions[i];
-diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
-index ef02a3e26d2c..0c48d57a03bb 100644
---- a/xen/arch/riscv/include/asm/cpufeature.h
-+++ b/xen/arch/riscv/include/asm/cpufeature.h
-@@ -38,6 +38,7 @@ enum riscv_isa_ext_id {
-     RISCV_ISA_EXT_smaia,
-     RISCV_ISA_EXT_smstateen,
-     RISCV_ISA_EXT_ssaia,
-+    RISCV_ISA_EXT_sstc,
-     RISCV_ISA_EXT_svade,
-     RISCV_ISA_EXT_svpbmt,
-     RISCV_ISA_EXT_MAX
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index dd15731a86fa..d0d60ba15e62 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -396,6 +396,8 @@
- #define CSR_VSTVAL			0x243
- #define CSR_VSIP			0x244
- #define CSR_VSATP			0x280
-+#define CSR_VSTIMECMP		0x24d
-+#define CSR_VSTIMECMPH		0x25d
+         void *p;
+-        unsigned int size = min(len, (unsigned int)PAGE_SIZE - offset);
++        unsigned long size = min_t(unsigned long, len, PAGE_SIZE - offset);
+         struct page_info *page;
  
- /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
- #define CSR_HVIEN			0x608
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index ed7af200288f..1952868e963c 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -13,7 +13,6 @@
- #define ASM__RISCV__SBI_H
- 
- #include <xen/cpumask.h>
--#include <xen/sections.h>
- 
- /* SBI-defined implementation ID */
- #define SBI_XEN_IMPID 7
-@@ -139,23 +138,6 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
- int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
-                                 size_t size, unsigned long vmid);
- 
--/*
-- * Programs the clock for next event at (or after) stime_value. stime_value is
-- * in absolute time. This function must clear the pending timer interrupt bit
-- * as well.
-- *
-- * If the supervisor wishes to clear the timer interrupt without scheduling the
-- * next timer event, it can either request a timer interrupt infinitely far
-- * into the future (i.e., (uint64_t)-1), or it can instead mask the timer
-- * interrupt by clearing sie.STIE CSR bit.
-- *
-- * The stime_value parameter represents absolute time measured in ticks.
-- *
-- * This SBI call returns 0 upon success or an implementation specific negative
-- * error code.
-- */
--extern int (* __ro_after_init sbi_set_timer)(uint64_t stime_value);
--
- /*
-  * Initialize SBI library
-  *
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-index be3875b9984e..4d68900151a7 100644
---- a/xen/arch/riscv/include/asm/time.h
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -4,6 +4,7 @@
- 
- #include <xen/bug.h>
- #include <xen/muldiv64.h>
-+#include <xen/sections.h>
- 
- #include <asm/csr.h>
- 
-@@ -26,6 +27,8 @@ static inline cycles_t get_cycles(void)
- 
- void preinit_xen_time(void);
- 
-+extern int (* __ro_after_init set_xen_timer)(uint64_t deadline);
-+
- #endif /* ASM__RISCV__TIME_H */
- 
- /*
-diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
-index b4a7ae6940c1..3576e26033a5 100644
---- a/xen/arch/riscv/sbi.c
-+++ b/xen/arch/riscv/sbi.c
-@@ -22,6 +22,7 @@
- 
- #include <asm/processor.h>
- #include <asm/sbi.h>
-+#include <asm/time.h>
- 
- static unsigned long __ro_after_init sbi_spec_version = SBI_SPEC_VERSION_DEFAULT;
- 
-@@ -249,6 +250,21 @@ static int (* __ro_after_init sbi_rfence)(unsigned long fid,
-                                           unsigned long arg4,
-                                           unsigned long arg5);
- 
-+/*
-+ * Programs the clock for next event at (or after) stime_value. stime_value is
-+ * in absolute time. This function must clear the pending timer interrupt bit
-+ * as well.
-+ *
-+ * If the supervisor wishes to clear the timer interrupt without scheduling the
-+ * next timer event, it can either request a timer interrupt infinitely far
-+ * into the future (i.e., (uint64_t)-1), or it can instead mask the timer
-+ * interrupt by clearing sie.STIE CSR bit.
-+ *
-+ * The stime_value parameter represents absolute time measured in ticks.
-+ *
-+ * This SBI call returns 0 upon success or an implementation specific negative
-+ * error code.
-+ */
- static int cf_check sbi_set_timer_v02(uint64_t stime_value)
+         page = translate_get_page(info, addr, flags & COPY_linear,
+@@ -136,7 +136,7 @@ unsigned long raw_copy_from_guest(void *to, const void __user *from,
+ unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
+                                               paddr_t gpa,
+                                               void *buf,
+-                                              unsigned int len)
++                                              unsigned long len)
  {
-     struct sbiret ret;
-@@ -264,6 +280,10 @@ static int cf_check sbi_set_timer_v02(uint64_t stime_value)
-     return sbi_err_map_xen_errno(ret.error);
- }
+     return copy_guest(buf, gpa, len, GPA_INFO(d),
+                       COPY_to_guest | COPY_ipa | COPY_flush_dcache);
+diff --git a/xen/arch/arm/include/asm/guest_access.h b/xen/arch/arm/include/asm/guest_access.h
+index 18c88b70d7ec..c13cbec55b65 100644
+--- a/xen/arch/arm/include/asm/guest_access.h
++++ b/xen/arch/arm/include/asm/guest_access.h
+@@ -14,7 +14,7 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
+ unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
+                                               paddr_t gpa,
+                                               void *buf,
+-                                              unsigned int len);
++                                              unsigned long len);
  
-+/*
-+ * Legacy SBI v0.1 SET_TIMER; functionally equivalent to sbi_set_timer_v02
-+ * from Xen's perspective.
-+ */
- static int cf_check sbi_set_timer_v01(uint64_t stime_value)
- {
-     struct sbiret ret;
-@@ -279,8 +299,6 @@ static int cf_check sbi_set_timer_v01(uint64_t stime_value)
-     return sbi_err_map_xen_errno(ret.error);
- }
+ int access_guest_memory_by_gpa(struct domain *d, paddr_t gpa, void *buf,
+                                uint32_t size, bool is_write);
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index 886a85381651..1d9e77df0eb3 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -47,7 +47,7 @@ static inline int get_allocation_size(paddr_t size)
+ typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
+                                                paddr_t gpa,
+                                                void *buf,
+-                                               unsigned int len);
++                                               unsigned long len);
  
--int (* __ro_after_init sbi_set_timer)(uint64_t stime_value) = sbi_set_timer_v01;
--
- int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
-                           size_t size)
- {
-@@ -360,10 +378,9 @@ int __init sbi_init(void)
-         }
- 
-         if ( sbi_probe_extension(SBI_EXT_TIME) > 0 )
--        {
--            sbi_set_timer = sbi_set_timer_v02;
--            dprintk(XENLOG_INFO, "SBI v0.2 TIME extension detected\n");
--        }
-+            set_xen_timer = sbi_set_timer_v02;
-+        else
-+            set_xen_timer = sbi_set_timer_v01;
-     }
-     else
-         panic("Ooops. SBI spec version 0.1 detected. Need to add support");
-diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
-index 7efa76fdbcb1..80f0e9ddae6a 100644
---- a/xen/arch/riscv/time.c
-+++ b/xen/arch/riscv/time.c
-@@ -7,12 +7,24 @@
- #include <xen/time.h>
- #include <xen/types.h>
- 
-+#include <asm/cpufeature.h>
- #include <asm/csr.h>
--#include <asm/sbi.h>
- 
- unsigned long __ro_after_init cpu_khz; /* CPU clock frequency in kHz. */
- uint64_t __ro_after_init boot_clock_cycles;
- 
-+static int cf_check sstc_set_xen_timer(uint64_t deadline)
-+{
-+    csr_write(CSR_STIMECMP, deadline);
-+#ifdef CONFIG_RISCV_32
-+    csr_write(CSR_STIMECMPH, deadline >> 32);
-+#endif
-+
-+    return 0;
-+}
-+
-+int (* __ro_after_init set_xen_timer)(uint64_t deadline);
-+
- s_time_t get_s_time(void)
- {
-     uint64_t ticks = get_cycles() - boot_clock_cycles;
-@@ -61,20 +73,7 @@ int reprogram_timer(s_time_t timeout)
-     if ( deadline <= now )
-         return 0;
- 
--    /*
--     * TODO: When the SSTC extension is supported, it would be preferable to
--     *       use the supervisor timer registers directly here for better
--     *       performance, since an SBI call and mode switch would no longer
--     *       be required.
--     *
--     *       This would also reduce reliance on a specific SBI implementation.
--     *       For example, it is not ideal to panic() if sbi_set_timer() returns
--     *       a non-zero value. Currently it can return 0 or -ENOSUPP, and
--     *       without SSTC we still need an implementation because only the
--     *       M-mode timer is available, and it can only be programmed in
--     *       M-mode.
--     */
--    if ( (rc = sbi_set_timer(deadline)) )
-+    if ( (rc = set_xen_timer(deadline)) )
-         panic("%s: timer wasn't set because: %d\n", __func__, rc);
- 
-     /* Enable timer interrupt */
-@@ -91,4 +90,23 @@ void __init preinit_xen_time(void)
-         panic("%s: ACPI isn't supported\n", __func__);
- 
-     boot_clock_cycles = get_cycles();
-+
-+    /* set_xen_timer must have been set by sbi_init() already */
-+    ASSERT(set_xen_timer);
-+
-+    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_sstc) )
-+    {
-+        set_xen_timer = sstc_set_xen_timer;
-+
-+        /*
-+         * A VS-timer interrupt becomes pending whenever the value of
-+         * (time + htimedelta) is greater than or equal to vstimecmp CSR.
-+         * Thereby to avoid spurious VS-timer irqs set vstimecmp CSR to
-+         * ULONG_MAX.
-+         */
-+        csr_write(CSR_VSTIMECMP, ULONG_MAX);
-+#ifdef CONFIG_RISCV_32
-+        csr_write(CSR_VSTIMECMPH, ULONG_MAX);
-+#endif
-+    }
- }
-diff --git a/xen/arch/riscv/vtimer.c b/xen/arch/riscv/vtimer.c
-index afd8a53a7387..d5a8dfcb2edb 100644
---- a/xen/arch/riscv/vtimer.c
-+++ b/xen/arch/riscv/vtimer.c
-@@ -4,6 +4,7 @@
- #include <xen/sched.h>
- #include <xen/timer.h>
- 
-+#include <asm/cpufeature.h>
- #include <asm/vtimer.h>
- 
- static void vtimer_expired(void *data)
+ void initrd_load(struct kernel_info *kinfo,
+                  copy_to_guest_phys_cb cb);
 -- 
 2.53.0
 
