@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69354F459F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279418.1563868 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379E5F459F7
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1279422.1563896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECT-0007hP-Ka; Fri, 10 Apr 2026 15:55:17 +0000
+	id 1wBECX-0008Sj-1Z; Fri, 10 Apr 2026 15:55:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279418.1563868; Fri, 10 Apr 2026 15:55:17 +0000
+Received: by outflank-mailman (output) from mailman id 1279422.1563896; Fri, 10 Apr 2026 15:55:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECT-0007hE-HA; Fri, 10 Apr 2026 15:55:17 +0000
-Received: by outflank-mailman (input) for mailman id 1279418;
- Fri, 10 Apr 2026 15:55:15 +0000
+	id 1wBECW-0008SG-Qh; Fri, 10 Apr 2026 15:55:20 +0000
+Received: by outflank-mailman (input) for mailman id 1279422;
+ Fri, 10 Apr 2026 15:55:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECR-0007EN-Iz
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECV-0007xm-6l
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBECP-00Cwd5-DQ
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:14 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wBECU-00DRfX-Io
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:18 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d56-bab6-0a2a0a5309dd-0a2a450cb636-26
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:14 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d91d5e-5cb7-0a2a0a5109dd-0a2a450183fa-18
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:18 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d62-f40c-0a2a450c0019-d155802dc8a2-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:14 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-48897fd88ebso23326085e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:14 -0700 (PDT)
+ id 69d91d66-6fc9-0a2a45010019-d1558030c4d2-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:18 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-488c2690057so21734005e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:18 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.13
+ 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:55:13 -0700 (PDT)
+ Fri, 10 Apr 2026 08:55:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775836514; x=1776441314; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775836518; x=1776441318; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sTRi4YH+C2jL1DPdQVnyL1+s27z+ZRb1KNlQ9e7rLKA=;
-        b=s/ADolDC1igUBrDPOfb0FyBbtLgF20pDCtb70tfFOXxjW34DJUjmeIpWcZUCgaQGgh
-         Y5qPFZp4pfhZyNi7/+GCs5Pdu1w3LFm2W9SG/rg6yAPNxQTd6AOHb7RxCuOcbgCIfryk
-         1k1fCeVRwTzybMTvNOVzzs08ju0cOG/k53w/FqY9KgCNqYF9LPtaT4PhBRvBVPdlpyRC
-         ZDckx2a+gjiHdbhPfbuu4uDywDtuLgvn5fc7SQAN70RKuUde2GreZYLiUWX3EcfuLMWu
-         d9ECxqwsJM1a3tH/QtOxMbmtFc5aIaUCsDy92SGc+UWDKs9VYEWBPCAkUtVXqksZj3go
-         YHqw==
+        bh=/4qhZ+8GYYcp7jmfiAyFTdQWpQtMp/eabTrs/ZmAwow=;
+        b=pjSsxaFKtWTHxQ/sRV6fUzOTfKcWByj49lHDgoRo7NJx7KJHtcSDnUX5SOdTjhK5Uj
+         UpMOgELMNUBUjiELa09Mc625OeqglUYEJJoTo0nzSKtrbzvv/KLeqU78PtJ80Cxl6U4q
+         y4uMDM7JEhl45B/sMrHt+nPUtJop1Vf9D9idOP4zeeLLTWSbJiwzOxvCM5MvelGKGohr
+         Jek5RQNDjgzkHDy4zZDJ8z15DdrKhkVOV2zf38PupwO2Q92cvlf0vJ74daNqMVwilEXT
+         4rjE58cwlpwi/rw8n1eqAcnnwm+19AbFRx3qxDBwQXZK+NOukSulCYqrN5syGakQADLD
+         FD3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775836514; x=1776441314;
+        d=1e100.net; s=20251104; t=1775836518; x=1776441318;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=sTRi4YH+C2jL1DPdQVnyL1+s27z+ZRb1KNlQ9e7rLKA=;
-        b=QSmsXq6xlY8fO41BZfN/YyvJ03QAO8P7sd4t80ENciSQxkBUtdX2cfLaw2Ue6VvDpW
-         IJw5AcKy9+XsGA5uf+bTz90uX7fzhxAUMLge8CdtUY+rH5LGi4Ein+hY+F4HT4wESuaZ
-         pqcVr0pMmmx/pJFS68ZSzwW2sDAjVgtAano4C11vQs+IarZj6+hgisFv+kqaNFswumj9
-         GljOzpmQXCCGSQyCHFWwFSmh0RdrTGGkEsyGSStD/bivqZyCtj2IQph8bjHpa/CjV/+y
-         TKIEbkAwqiOH0rFsR5Z384JgZ2tfgrvQM2yhfoajVvKkxfGnoDzEOBoAgY+LTmbQ24UV
-         QXWw==
-X-Gm-Message-State: AOJu0YxRgERfs3ZPJ9PfmGhzGap3LbvEgc0VEBz/hxJbVR9dZg6VvcDq
-	nqWjmMUymYKGiaqrEPJYbmpiD62ki7AO0A+IOpuYnkFDFCyLY4DCNLGFbvawqQ==
-X-Gm-Gg: AeBDieuspLs7cDOb9Xtz6o2VKI1yCFL0cGf9XyulyV4p1MkqiNrp4Cp6UJgh3V9N91T
-	BvXbob6g3Sa+FGYu6cW4tOM5pj2+5laNO8wDOyrZtlCol3lZC+P5ic+Cbj4sT65/yGnTSW8fOys
-	dmtT/ZCZiVVhENJmCerg9TR+P1Efhdr0S2tRo88J4Pyh7fkOShVNezr9/Z4foYknQu14j3IVIiX
-	Y0x+0U+AvVh5IJDRow1lRc+P8Z3MdY+Y2jFlY3Goe4iTTsnyh49mngT9yk+LISZ9gdpne2MjYEM
-	8QaB7bODFzvzMf2l6xMqwAl8ZbjYrv6855W24T9v/rl0mAoOTBz9buKJ6izfDvuRA4V9Y06ECkq
-	GKyhqE9Z+akUvCipjZousPEae5vmEflJACgzaQAm5sosjwoqx7TTJOzo1TUrNe7VY7BNvR8BJcw
-	bYI3mpfVXF/Mwbzh9DI82ICqzKmd1lRaTsSYSbERrWK2BoRJhHShRDujRTWz3QGrQXREkptOvEv
-	Fjn
-X-Received: by 2002:a05:600c:34cd:b0:487:575:5e1 with SMTP id 5b1f17b1804b1-488d68c2cb4mr48418635e9.24.1775836514072;
-        Fri, 10 Apr 2026 08:55:14 -0700 (PDT)
+        bh=/4qhZ+8GYYcp7jmfiAyFTdQWpQtMp/eabTrs/ZmAwow=;
+        b=Qhe+/wDInL3gDiYnSPOQ360OoRAxT8rwdGf0KJVE4E+5He1v09pOnzJTQ48HHFqCHl
+         ljagoaJ+ggnelIT7ItbDiJT6EKqdq8TIoHygCeA3Lq+53UGQ2qLO87FlgUhjxPxYFJRg
+         vEQn/LoFHUBl7huQTE23AKwT6f6c5/zH6REQWFqvaiyyoqIuDsaktNUnPkR4ZPpAITMR
+         jEwRBYkaCYwc6oH+Wukgy460p3ykKy2Dzs7fA7sI9fZ6PE+Kshc/tVTYHwr8f2iPDs29
+         MQ7ECrUJ/DSXY0tr8EQSU1vE4mt7NMYkNLehsEOQ4+utGVSjPecAf1HAGASbqV0yRC77
+         Qm/Q==
+X-Gm-Message-State: AOJu0YzQMeEqe+q2h6ft032AIj0a8TUfViJ5uDmV090kOszlxp0xpVwT
+	euPXpA/ivRoYpS4ybkYk0vZCVxnvHBeV3U2uyasNnFyyNgXq6CWZRdh7c/9m0g==
+X-Gm-Gg: AeBDievIVYZHwTP2Xv3NqZgs92eaN9wYNODsa2+L2V86LiKjwjudOJP1MIUeeFxDg35
+	pHViMzp8PjwCdCJiRI41OiGLagehV2AAbEvkDr/QjoqL+A9LKrx2e6u0PFSwHRAq0fJ2b2JW02X
+	CMnuo19Bx1EOyyqCiLUPHV1FlDt+iq7Ubr0NVoG75S/audCFdStYMrRbmzS/avTrvSpRTeCYbfe
+	JPME+JmdNqEiryIQAslKapPYN8CQ8+3j6e4trOJgsiB+RDlyiUgaFgJQdhxWqBQ4T3kQZf4nMbY
+	0qdCpcXHyFDoNA1y1ri0ZLi1F1kDlHjqWdGB7H20qLvKDG3kH3G+/b8ZP4sXXOM0GzHkJ27bEoF
+	XVbD4NseqXWdFOj+7/9C7mBGAz3c9kXISU2T1yfMjAAEaPYEM2bDLAbhFEJd716plZnnANFTGCd
+	JR5uGe+o3MQtw3l9LgeZGtfFqnVYIidGAhge957/RdpFR8wl0J7NpWaonvdiJhFkPBAQ==
+X-Received: by 2002:a05:600c:4e4d:b0:485:3193:6ddb with SMTP id 5b1f17b1804b1-488d6808507mr49943295e9.3.1775836517625;
+        Fri, 10 Apr 2026 08:55:17 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,230 +101,157 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 04/12] xen/dom0less: rename kernel_zimage_probe() to kernel_image_probe()
-Date: Fri, 10 Apr 2026 17:54:50 +0200
-Message-ID: <b7574a2ac5669e46c02daf58865be3765b3beac5.1775836193.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 07/12] xen: introduce domain-layout.h with common domain_use_host_layout()
+Date: Fri, 10 Apr 2026 17:54:53 +0200
+Message-ID: <2057380b431df202adedf852ad492dd0f156f863.1775836193.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1775836514-FF547A3D-4A6AEDB5/10/73395122804
+X-purgate-ID: tlsNG-d62444/1775836518-154EE185-F1932820/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 7698
+X-purgate-size: 5440
 
-The helper kernel_zimage_probe() is referenced from common code
-(xen/common/device-tree/kernel.c), but its name is tied to the zImage
-format which is specific to Arm (from architectures supported by Xen).
+domain_use_host_layout() is not architecture-specific and may be needed
+on x86 [1]. Replace the ARM-specific macro in asm/domain.h with a common
+static inline in a new dedicated header, xen/domain-layout.h.
 
-Other architectures supported by Xen, such as RISC-V, do not use the
-zImage format and instead rely on other kernel image types (e.g. Image
-or compressed Image variants: Image.gz, etc). Using "zimage" in the
-name is therefore misleading in architecture-independent code.
+xen/domain.h would be the natural home, but placing it there would
+require including xen/paging.h (for paging_mode_translate()) and
+xen/sched.h (for is_hardware_domain()), which would introduce circular
+dependencies. A separate header that callers opt into avoids this.
 
-Rename kernel_zimage_probe() to kernel_image_probe() and update the
-associated structure field from "zimage" to "image" to reflect that the
-code handles generic kernel images rather than the zImage format
-specifically.
+Adjust the implementation to take paging_mode_translate() into account
+so it works correctly for all architectures, including x86. Some extra
+details about implementation [2] and [3].
 
-No functional change intended.
+[1] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602161038120.359097@ubuntu-linux-20-04-desktop/
+[2] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602271742400.3148344@ubuntu-linux-20-04-desktop/
+[3] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602271750190.3148344@ubuntu-linux-20-04-desktop/
 
-Reported-by: Jan Beulich <jbeulich@suse.com>
+Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - Nothing changed. Only rebase.
+ - Make argument of domain_use_host_layout() const.
+ - Create a separate header to avoid circular heder dependecy and making
+   domain_use_host_layour() as static inline.
+ - Rework domain_use_host_layout() to be protected by paging_mode_translate().
+ - Update the commit message.
 ---
 Changes in v2:
- - new patch.
+ - Drop ifdef around defintion of domain_use_host_layout() as it
+   was suggested generic version. It could be returned back when
+   the real use case for it will appear.
+ - Add Suggested-by: and update the commit message.
+ - Make domain_use_host_layout() function instead of macros to
+   avoid ciclular header dependecies. Look at more details in
+   the commit message.
 ---
- xen/arch/arm/kernel.c           | 48 ++++++++++++++++-----------------
- xen/common/device-tree/kernel.c |  2 +-
- xen/include/xen/fdt-kernel.h    |  4 +--
- 3 files changed, 27 insertions(+), 27 deletions(-)
+ xen/arch/arm/domain_build.c           |  1 +
+ xen/arch/arm/include/asm/domain.h     | 14 --------------
+ xen/arch/arm/vgic-v3.c                |  1 +
+ xen/common/device-tree/domain-build.c |  1 +
+ xen/include/xen/domain-layout.h       | 28 +++++++++++++++++++++++++++
+ 5 files changed, 31 insertions(+), 14 deletions(-)
+ create mode 100644 xen/include/xen/domain-layout.h
 
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index 7544fd50a20f..3c613cdb233f 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -101,8 +101,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
-     paddr_t load_addr;
- 
- #ifdef CONFIG_ARM_64
--    if ( (info->arch.type == DOMAIN_64BIT) && (info->zimage.start == 0) )
--        return mem->bank[0].start + info->zimage.text_offset;
-+    if ( (info->arch.type == DOMAIN_64BIT) && (info->image.start == 0) )
-+        return mem->bank[0].start + info->image.text_offset;
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 6c17a84b2633..60a7cbf915a5 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2,6 +2,7 @@
+ #include <xen/init.h>
+ #include <xen/bootinfo.h>
+ #include <xen/compile.h>
++#include <xen/domain-layout.h>
+ #include <xen/dom0less-build.h>
+ #include <xen/fdt-domain-build.h>
+ #include <xen/fdt-kernel.h>
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index ffe5d0d9f0a6..f95ad1285e6e 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -30,20 +30,6 @@ enum domain_type {
+ #define is_64bit_domain(d) (0)
  #endif
  
-     /*
-@@ -111,19 +111,19 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
-      * and above 32MiB. Load it as high as possible within these
-      * constraints, while also avoiding the DTB.
-      */
--    if ( info->zimage.start == 0 )
-+    if ( info->image.start == 0 )
-     {
-         paddr_t load_end;
+-/*
+- * Is the domain using the host memory layout?
+- *
+- * Direct-mapped domain will always have the RAM mapped with GFN == MFN.
+- * To avoid any trouble finding space, it is easier to force using the
+- * host memory layout.
+- *
+- * The hardware domain will use the host layout regardless of
+- * direct-mapped because some OS may rely on a specific address ranges
+- * for the devices.
+- */
+-#define domain_use_host_layout(d) (is_domain_direct_mapped(d) || \
+-                                   is_hardware_domain(d))
+-
+ struct vtimer {
+     struct vcpu *v;
+     int irq;
+diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
+index 77aab5c3c293..77517c303061 100644
+--- a/xen/arch/arm/vgic-v3.c
++++ b/xen/arch/arm/vgic-v3.c
+@@ -10,6 +10,7 @@
+  */
  
-         load_end = mem->bank[0].start + mem->bank[0].size;
-         load_end = MIN(mem->bank[0].start + MB(128), load_end);
+ #include <xen/bitops.h>
++#include <xen/domain-layout.h>
+ #include <xen/init.h>
+ #include <xen/irq.h>
+ #include <xen/lib.h>
+diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
+index 540627b74e96..e706a6173ba6 100644
+--- a/xen/common/device-tree/domain-build.c
++++ b/xen/common/device-tree/domain-build.c
+@@ -1,6 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
  
--        load_addr = load_end - info->zimage.len;
-+        load_addr = load_end - info->image.len;
-         /* Align to 2MB */
-         load_addr &= ~((2 << 20) - 1);
-     }
-     else
--        load_addr = info->zimage.start;
-+        load_addr = info->image.start;
- 
-     return load_addr;
- }
-@@ -131,8 +131,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
- static void __init kernel_zimage_load(struct kernel_info *info)
- {
-     paddr_t load_addr = kernel_zimage_place(info);
--    paddr_t paddr = info->zimage.kernel_addr;
--    paddr_t len = info->zimage.len;
-+    paddr_t paddr = info->image.kernel_addr;
-+    paddr_t len = info->image.len;
-     void *kernel;
-     int rc;
- 
-@@ -215,7 +215,7 @@ int __init kernel_uimage_probe(struct kernel_info *info,
-         return -EOPNOTSUPP;
-     }
- 
--    info->zimage.start = be32_to_cpu(uimage.load);
-+    info->image.start = be32_to_cpu(uimage.load);
-     info->entry = be32_to_cpu(uimage.ep);
- 
-     /*
-@@ -224,20 +224,20 @@ int __init kernel_uimage_probe(struct kernel_info *info,
-      * independent image. That means Xen is free to load such an image at
-      * any valid address.
-      */
--    if ( info->zimage.start == 0 )
-+    if ( info->image.start == 0 )
-         printk(XENLOG_INFO
-                "No load address provided. Xen will decide where to load it.\n");
-     else
-         printk(XENLOG_INFO
-                "Provided load address: %"PRIpaddr" and entry address: %"PRIpaddr"\n",
--               info->zimage.start, info->entry);
-+               info->image.start, info->entry);
- 
-     /*
-      * If the image supports position independent execution, then user cannot
-      * provide an entry point as Xen will load such an image at any appropriate
-      * memory address. Thus, we need to return error.
-      */
--    if ( (info->zimage.start == 0) && (info->entry != 0) )
-+    if ( (info->image.start == 0) && (info->entry != 0) )
-     {
-         printk(XENLOG_ERR
-                "Entry point cannot be non zero for PIE image.\n");
-@@ -257,13 +257,13 @@ int __init kernel_uimage_probe(struct kernel_info *info,
-         if ( rc )
-             return rc;
- 
--        info->zimage.kernel_addr = mod->start;
--        info->zimage.len = mod->size;
-+        info->image.kernel_addr = mod->start;
-+        info->image.len = mod->size;
-     }
-     else
-     {
--        info->zimage.kernel_addr = addr + sizeof(uimage);
--        info->zimage.len = len;
-+        info->image.kernel_addr = addr + sizeof(uimage);
-+        info->image.len = len;
-     }
- 
-     info->load = kernel_zimage_load;
-@@ -289,7 +289,7 @@ int __init kernel_uimage_probe(struct kernel_info *info,
-      * Thus, Xen uses uimage.load attribute to determine the load address and
-      * zimage.text_offset is ignored.
-      */
--    info->zimage.text_offset = 0;
-+    info->image.text_offset = 0;
- #endif
- 
-     return 0;
-@@ -338,10 +338,10 @@ static int __init kernel_zimage64_probe(struct kernel_info *info,
-     if ( (end - start) > size )
-         return -EINVAL;
- 
--    info->zimage.kernel_addr = addr;
--    info->zimage.len = end - start;
--    info->zimage.text_offset = zimage.text_offset;
--    info->zimage.start = 0;
-+    info->image.kernel_addr = addr;
-+    info->image.len = end - start;
-+    info->image.text_offset = zimage.text_offset;
-+    info->image.start = 0;
- 
-     info->load = kernel_zimage_load;
- 
-@@ -389,10 +389,10 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
-         }
-     }
- 
--    info->zimage.kernel_addr = addr;
-+    info->image.kernel_addr = addr;
- 
--    info->zimage.start = start;
--    info->zimage.len = end - start;
-+    info->image.start = start;
-+    info->image.len = end - start;
- 
-     info->load = kernel_zimage_load;
- 
-@@ -403,7 +403,7 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
-     return 0;
- }
- 
--int __init kernel_zimage_probe(struct kernel_info *info, paddr_t addr,
-+int __init kernel_image_probe(struct kernel_info *info, paddr_t addr,
-                                paddr_t size)
- {
-     int rc;
-diff --git a/xen/common/device-tree/kernel.c b/xen/common/device-tree/kernel.c
-index 28096121a52d..cfa27464f0fc 100644
---- a/xen/common/device-tree/kernel.c
-+++ b/xen/common/device-tree/kernel.c
-@@ -235,7 +235,7 @@ int __init kernel_probe(struct kernel_info *info,
-     if ( rc && rc != -EINVAL )
-         return rc;
- 
--    rc = kernel_zimage_probe(info, mod->start, mod->size);
-+    rc = kernel_image_probe(info, mod->start, mod->size);
- 
-     return rc;
- }
-diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
-index 33a60597bb4d..2af3bd5f0722 100644
---- a/xen/include/xen/fdt-kernel.h
-+++ b/xen/include/xen/fdt-kernel.h
-@@ -56,7 +56,7 @@ struct kernel_info {
-             paddr_t text_offset; /* 64-bit Image only */
- #endif
-             paddr_t start; /* Must be 0 for 64-bit Image */
--        } zimage;
-+        } image;
-     };
- 
- #if __has_include(<asm/kernel.h>)
-@@ -122,7 +122,7 @@ void kernel_load(struct kernel_info *info);
- 
- int kernel_decompress(struct boot_module *mod, uint32_t offset);
- 
--int kernel_zimage_probe(struct kernel_info *info, paddr_t addr, paddr_t size);
-+int kernel_image_probe(struct kernel_info *info, paddr_t addr, paddr_t size);
- 
- /*
-  * uImage isn't really used nowadays thereby leave kernel_uimage_probe()
+ #include <xen/bootinfo.h>
++#include <xen/domain-layout.h>
+ #include <xen/fdt-domain-build.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+diff --git a/xen/include/xen/domain-layout.h b/xen/include/xen/domain-layout.h
+new file mode 100644
+index 000000000000..15cbb1813c8a
+--- /dev/null
++++ b/xen/include/xen/domain-layout.h
+@@ -0,0 +1,28 @@
++#ifndef __XEN_DOMAIN_LAYOUT_H__
++#define __XEN_DOMAIN_LAYOUT_H__
++
++#include <xen/domain.h>
++#include <xen/paging.h>
++#include <xen/sched.h>
++
++/*
++ * Is a domain using the host memory layout?
++ *
++ * domain_use_host_layout() is always False for PV guests.
++ *
++ * Direct-mapped domains (autotranslated domains with memory allocated
++ * contiguously and mapped 1:1 so that GFN == MFN) are always using the
++ * host memory layout to avoid address clashes.
++ *
++ * The hardware domain will use the host layout (regardless of
++ * direct-mapped) because some OS may rely on specific address ranges
++ * for the devices. PV Dom0, like any other PV guests, has
++ * domain_use_host_layout() returning False.
++ */
++static inline bool domain_use_host_layout(const struct domain *d)
++{
++    return paging_mode_translate(d) &&
++           (is_domain_direct_mapped(d) || is_hardware_domain(d));
++}
++
++#endif /* __XEN_DOMAIN_LAYOUT_H__ */
 -- 
 2.53.0
 
