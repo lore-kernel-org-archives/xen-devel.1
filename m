@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF6DF459F6
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279415.1563848 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38552F459F6
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1279420.1563884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECR-00073M-1v; Fri, 10 Apr 2026 15:55:15 +0000
+	id 1wBECV-000819-E6; Fri, 10 Apr 2026 15:55:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279415.1563848; Fri, 10 Apr 2026 15:55:15 +0000
+Received: by outflank-mailman (output) from mailman id 1279420.1563884; Fri, 10 Apr 2026 15:55:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECQ-00072l-Sd; Fri, 10 Apr 2026 15:55:14 +0000
-Received: by outflank-mailman (input) for mailman id 1279415;
- Fri, 10 Apr 2026 15:55:13 +0000
+	id 1wBECV-00080C-4q; Fri, 10 Apr 2026 15:55:19 +0000
+Received: by outflank-mailman (input) for mailman id 1279420;
+ Fri, 10 Apr 2026 15:55:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECP-0006xl-DC
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:13 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECU-0007kD-06
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBECN-00Cwd5-7o
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:12 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wBECT-00DRfX-CL
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:17 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d56-bab6-0a2a0a5309dd-0a2a450cb636-16
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:12 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d91d5e-5cb7-0a2a0a5109dd-0a2a450183fa-12
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:17 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d60-f40c-0a2a450c0019-d1558032cce8-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:12 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-488971db0fdso21891455e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:12 -0700 (PDT)
+ id 69d91d65-6fc9-0a2a45010019-d1558029c9ce-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:17 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-488b8bc6bc9so15800415e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:17 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.10
+ 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:55:11 -0700 (PDT)
+ Fri, 10 Apr 2026 08:55:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775836512; x=1776441312; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775836517; x=1776441317; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Kn185YypiDfOEWixrDVwqtteBm6bdiTVXiEGngdxI1A=;
-        b=WMjkiq7nWY1QPOmYYFMstz0ihWMUut040lCHgRvWX7Tsgbf+SA4XlDOQ42/wqAq9Iu
-         B32nDvUR48VyZ92ve75jF1EoVkvNvuVtnL02crGza3F7k/ZmLmz560aT7qs1FKZua5V5
-         YujsCIdvEZkLRt0p/gTHvZzPJjQ74ZbkvwbZjDoBpkmpJjXk71TQ5YVpj+LLVt7pDJXh
-         L1S2wKC86vySSdioa07VX+WmyJJw9z87RoaIGBWkbsD5pVsxNwBA1OXn/32H7ARUP0Pn
-         gjt8ahAJzyW6qpmT31XtPYrOQajiPE9uHLJMbrO5M4/iccsVkqbQlNk355q7hxUk3/gl
-         VSaw==
+        bh=jesQc90kE0KVLHrdzzOKKDZHPJckxKYzRoNevvlkGgU=;
+        b=mayyM5qlzM//SwrYlQ1Kzb40LKMWwYnfzPJERr22dj6S5bwEdYdASQ6LDwfoZURrW2
+         vTqI395p6uEMTwrhf9Ix31V1H/c5BtWFxU48lyekTQJvHJPBY3Skae2T1NQ0fnE0EtvH
+         lMR/tRUWAnvc6KKRgneOH4XsDdEwFJCjzXnElsqeMdj6+wzX0PR+3DtpGkyI04HXrBNN
+         76c00vtHn2AEzY8Vr8ucr5Sm8h797Zzwl9sPKpiloan38CfyQaIDnsDzK7FB6F+CPdDn
+         JlzaatcHSOLFLScbCzkQf++elg2pvocNxPGoS1PDKCKo8138h3zVOziL49ArD9HDhczY
+         hVZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775836512; x=1776441312;
+        d=1e100.net; s=20251104; t=1775836517; x=1776441317;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Kn185YypiDfOEWixrDVwqtteBm6bdiTVXiEGngdxI1A=;
-        b=ejsvwEFcLtaUJrlaa9Gx3JOUIB1MyUqDJ51erhVeuY2IMp9yHMC7gu4VBkWMUvgW3q
-         IMU1+7qhD/ZjESqZc4vPQzELTrIIL44YZzb/xREoNWKrTwYWa9irHbJ2DJkFBd3a8qxK
-         HS7Qo5KxRc4Ik7nurrgQW5Ftj7MEfSJT3U9FG49zofEpfXbYD+cAiUpqOmm4b8znB7CM
-         CHDVp6I5F4hT3+dNw3wzSSkju26LaRx0huy7KJlezzm6nzMSUfcgyRtajk/3dD6KRU4N
-         SoWGFgoYz89caXx3P4Fc7aUi8KAdeUwGIFzNYy4FHsW970Hu61+BVFqLAug3B50x4Vch
-         1bUg==
-X-Gm-Message-State: AOJu0YxwX8c2vSUslPaS9fZCpO6zBOklusSozm9UpBm2DP4pByEW/Bs5
-	oNXTsj/ETrY3kV4NSEEvPnv/u+TX/y9O28F5QXEzvgil5NjY0CYG1siRGbY3ag==
-X-Gm-Gg: AeBDiesf5UjMtT6c04JsHKu4o67YBDjOBWcqT8RcUpBG+sAoB1+xnQB9ezHckSaI/jZ
-	nxh5jjD0/ww0WrpL5lgVziz5qjS5JN2F+3IPU+n7mxAcrOP6lLlWIKxhagg7Pwhj+qNCMahCdnd
-	Ekl7cG9D5n+zg6G/ahavx1nffhAKY8ZSViv02O1xP5n0fJlLjXu2xAF+T6asYqyJjKbshAv9Za6
-	7OVMGXeQ2xJUVKjaaoO+pQFznqU5Cdxdq5HxhfVKy7EzbHKS23dbCUUtLlrR9XTksFtg1iujHGV
-	pf69ByYtINBTJaLGTJymw7deJda94a0btiiGRyvIVLuZDZSkjkjh3Mb0BIf4VBgrC4xekrLdEb0
-	BVwHEFJNakIJI445dwcIIBUd3kbgTJtHnC05QiNgHf083e5WBlQszr+apo4+D1b6lZQPGBM1AY1
-	P3LGS9uZhiwAhe8AFoBw0zlE3yfvSELOFY0A3I0sdvVHGG2kOv/S4FATACA+Tjw9dv9A==
-X-Received: by 2002:a05:600c:5249:b0:485:7f02:afd5 with SMTP id 5b1f17b1804b1-488d680079bmr45339755e9.13.1775836511858;
-        Fri, 10 Apr 2026 08:55:11 -0700 (PDT)
+        bh=jesQc90kE0KVLHrdzzOKKDZHPJckxKYzRoNevvlkGgU=;
+        b=A0GbsWhKoPYabwdRP2Ii25zn8TCaiC/Wf/teB7phvYfCQ4OUOTm6KDsLHrIWMDOuqO
+         QkX7SmWDCJ6DmMWn6yYm1r5mXhhF95F8abJOwb8VavanljNqKE/fLZNDvrbMRslLzLm1
+         2tYOGBRMJJCTOcOalD3B1Xpe8PWIUWLs5csSbVMk6lGUtFLBpY6TUo8HaZSq6mLmUlqq
+         Y7HSlZPE2t3GPyuKXXgyUpY50C63tWL9N4VomaT3cwFl6dlrEIqp3Qm59h67cdOxwhab
+         iTmepCg92hRbg8h1C9ELySuJWdmRXejIxikRR0jiBFkvpwGw+ZRMmuwstjOBQc5YoIcF
+         7pyQ==
+X-Gm-Message-State: AOJu0YyCuACEDO/dyFxuQJSE1c+9nHV4qyWdoGrsJ/Fo/IVxl0vhQKmq
+	3MuDa8KSFmbjGYrpyRutK/0ID4yL4ko+qA1DydCyFsWcvWIY9G1ymGG4Wxezbg==
+X-Gm-Gg: AeBDieu7HkCf+U9rebNZMpt1/OD0ZWhvMUIieFw9TVPJOxauV2Fd89lKAB5P7wscZ4p
+	6vPFsQF40NIHkSZt8GD6GczvB6bICLldlMAUq1vVbrHu0m4mf8ly/5ydgC1y3KCuZvSN4kWqJIQ
+	lxx5g/LhN1cv7utAhd5toABEX0dJ0Ggf47ubkTBmR8qQNp61HIaBrTWbVN4OXUqBMGLNrDqTbnv
+	DdKgitEopNIXEiy1MMi0iBVLTPjZu53YDbMwVx+TlNOnOYwyKefbZ1qXqHvjZppSZmzleEVcGQC
+	riyIRZfF+L4B+uakCGgBgWQVnX0FWiw9DnnOjDWqXlRjwYnhIvc5J9GEOy6TiY3uKdZaxEPaYaz
+	Y6YkTbPMOY3OdqpX9PbxKFhg5umnA3OTjOcZYceUMsOkRNLYokE7SJFSf3BKCkHwWflC6jDHPHF
+	XRApIv9ohoIOxv4jUb4Ejorq4H50gr0hAc0lTDkGZ2oWf38qxBlxMgfUiitOZY2mxSKw==
+X-Received: by 2002:a05:600c:a105:b0:486:af22:4a2a with SMTP id 5b1f17b1804b1-488d681f281mr33975715e9.7.1775836516480;
+        Fri, 10 Apr 2026 08:55:16 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -101,115 +101,57 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 02/12] xen: fix len type for guest copy functions
-Date: Fri, 10 Apr 2026 17:54:48 +0200
-Message-ID: <9154aea41a11bc0ba95ad15c217db79d029dd119.1775836193.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 06/12] xen: move declaration of fw_unreserved_regions() to common header
+Date: Fri, 10 Apr 2026 17:54:52 +0200
+Message-ID: <fda4e7d9cdb8eb197d7e61c100ca4f7d1aac7b2c.1775836193.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1775836512-8254FA3D-75CFC99F/10/73395122804
+X-purgate-ID: tlsNG-d62444/1775836517-B4967185-119067A8/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4947
+X-purgate-size: 1452
 
-Widen the len argument of copy_to_guest_phys_flush_dcache() and the
-copy_to_guest_phys_cb typedef from unsigned int to unsigned long, as
-the function can be used to copy large blobs such as the initrd which
-may exceed 4GB. Update the internal copy_guest() len argument to
-unsigned long accordingly.
+Since the implementation of fw_unreserved_regions() is in common code, move
+its declaration to xen/bootinfo.h.
 
-Change the type for local variable size in copy_guest() to avoid
-compilation error because of type mismatch.
-
-raw_* wrappers above copy_guest() keep returning unsigned long to
-avoid type narrowing; it is not an issue for raw_*'s len argument
-to remain 'unsigned int' since the assignment to copy_guest()'s wider
-unsigned long parameter is safe and there is no raw_* users who
-are using a value bigger than what can fit into 'unsigned int'.
-
-Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in v3:
- - Correct the declaration of copy_to_guest_phys_cb() instead of return
-   'unsigned int' to be in sync with len argument, the type of len argument
-   is changed on 'unsigned long' as initrd could be pretty big and also its
-   size is stroed in 'paddr_t' which is 'unsigned long'.
- - Update copy_guest() prototype to avoid trancation bug for len argument.
- - Revert prototype changes for raw_* wrappers above copy_guest() as they
-   should keep returning unsigned long to avoid type narrowing; it is not
-   an issue for raw_*'s len argument to remain 'unsigned int' since the
-   assignment to copy_guest()'s wider unsigned long parameter is safe.
- - Change the type for local variable size in copy_guest() to avoid
-   compilation error because of type mismatch.
- - Add Reported-by: Jan Beulich <jbeulich@suse.com>
+Changes in v2-v3:
+ - Nothing changed. Only rebase.
 ---
-Changes in v2:
- - New patch.
----
- xen/arch/arm/guestcopy.c                | 6 +++---
- xen/arch/arm/include/asm/guest_access.h | 2 +-
- xen/include/xen/fdt-domain-build.h      | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ xen/arch/arm/include/asm/setup.h | 3 ---
+ xen/include/xen/bootinfo.h       | 4 ++++
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/guestcopy.c b/xen/arch/arm/guestcopy.c
-index fdb06422b8e9..ca0f72a80bff 100644
---- a/xen/arch/arm/guestcopy.c
-+++ b/xen/arch/arm/guestcopy.c
-@@ -53,7 +53,7 @@ static struct page_info *translate_get_page(copy_info_t info, uint64_t addr,
-     return page;
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 899e33925ca4..0d29b46ea52b 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -43,9 +43,6 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
+ void create_dom0(void);
+ 
+ void discard_initial_modules(void);
+-void fw_unreserved_regions(paddr_t s, paddr_t e,
+-                           void (*cb)(paddr_t ps, paddr_t pe),
+-                           unsigned int first);
+ 
+ void init_pdx(void);
+ void setup_mm(void);
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+index f834f1957155..dbf492c2e36e 100644
+--- a/xen/include/xen/bootinfo.h
++++ b/xen/include/xen/bootinfo.h
+@@ -210,4 +210,8 @@ static inline struct membanks *membanks_xzalloc(unsigned int nr,
+     return banks;
  }
  
--static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
-+static unsigned long copy_guest(void *buf, uint64_t addr, unsigned long len,
-                                 copy_info_t info, unsigned int flags)
- {
-     /* XXX needs to handle faults */
-@@ -65,7 +65,7 @@ static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
-     while ( len )
-     {
-         void *p;
--        unsigned int size = min(len, (unsigned int)PAGE_SIZE - offset);
-+        unsigned long size = min_t(unsigned long, len, PAGE_SIZE - offset);
-         struct page_info *page;
- 
-         page = translate_get_page(info, addr, flags & COPY_linear,
-@@ -136,7 +136,7 @@ unsigned long raw_copy_from_guest(void *to, const void __user *from,
- unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
-                                               paddr_t gpa,
-                                               void *buf,
--                                              unsigned int len)
-+                                              unsigned long len)
- {
-     return copy_guest(buf, gpa, len, GPA_INFO(d),
-                       COPY_to_guest | COPY_ipa | COPY_flush_dcache);
-diff --git a/xen/arch/arm/include/asm/guest_access.h b/xen/arch/arm/include/asm/guest_access.h
-index 18c88b70d7ec..c13cbec55b65 100644
---- a/xen/arch/arm/include/asm/guest_access.h
-+++ b/xen/arch/arm/include/asm/guest_access.h
-@@ -14,7 +14,7 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
- unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
-                                               paddr_t gpa,
-                                               void *buf,
--                                              unsigned int len);
-+                                              unsigned long len);
- 
- int access_guest_memory_by_gpa(struct domain *d, paddr_t gpa, void *buf,
-                                uint32_t size, bool is_write);
-diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
-index 886a85381651..1d9e77df0eb3 100644
---- a/xen/include/xen/fdt-domain-build.h
-+++ b/xen/include/xen/fdt-domain-build.h
-@@ -47,7 +47,7 @@ static inline int get_allocation_size(paddr_t size)
- typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
-                                                paddr_t gpa,
-                                                void *buf,
--                                               unsigned int len);
-+                                               unsigned long len);
- 
- void initrd_load(struct kernel_info *kinfo,
-                  copy_to_guest_phys_cb cb);
++void fw_unreserved_regions(paddr_t s, paddr_t e,
++                           void (*cb)(paddr_t ps, paddr_t pe),
++                           unsigned int first);
++
+ #endif /* XEN_BOOTINFO_H */
 -- 
 2.53.0
 
