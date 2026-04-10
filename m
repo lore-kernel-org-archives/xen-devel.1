@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9FA2F459F8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F073CF459F5
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279438.1563932 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1279427.1563911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECc-000179-P8; Fri, 10 Apr 2026 15:55:26 +0000
+	id 1wBECY-0000Ps-Tb; Fri, 10 Apr 2026 15:55:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279438.1563932; Fri, 10 Apr 2026 15:55:26 +0000
+Received: by outflank-mailman (output) from mailman id 1279427.1563911; Fri, 10 Apr 2026 15:55:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECc-000159-Be; Fri, 10 Apr 2026 15:55:26 +0000
-Received: by outflank-mailman (input) for mailman id 1279438;
- Fri, 10 Apr 2026 15:55:25 +0000
+	id 1wBECY-0000Pc-M9; Fri, 10 Apr 2026 15:55:22 +0000
+Received: by outflank-mailman (input) for mailman id 1279427;
+ Fri, 10 Apr 2026 15:55:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECb-0000sc-2l
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:25 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECX-0008WP-Ia
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBECa-00Cgsb-Eg
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:24 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wBECW-00Cgsb-UD
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:20 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d5d-e002-0a2a0a5209dd-0a2a4508b042-36
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:24 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d91d56-e002-0a2a0a5209dd-0a2a4507d84e-46
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:20 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d6c-fab6-0a2a45080019-d1558036acec-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:24 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-488a14c31eeso17205725e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:24 -0700 (PDT)
+ id 69d91d68-ba2d-0a2a45070019-d155802fb157-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:20 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4888375f735so21725865e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:20 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.22
+ 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:55:23 -0700 (PDT)
+ Fri, 10 Apr 2026 08:55:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,92 +54,110 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775836524; x=1776441324; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775836520; x=1776441320; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=harNJKN/3/ApQ6euFfpXmy5P6ZKtKwJXsuo2nm4shJQ=;
-        b=g1sD7/Uo4PcCSc/3eYqqGLtCoyRxAiXEETYpTJ2cis30caJWidGoI69X0eSJJfWo3j
-         jPVHS0qwFhhO6dG9skh7rfH9tr+tFbBdAtw5dOEFyjpB0TsPP7qykgA7zYPUkOPAM8Jd
-         YUMnPWcAOCa3y1BUywz7PB6QD04jMsDwLHW9mnwSOyDFBQBXl4sKw7F8SbAlmEbI9CrI
-         su4P8czBieEaGXYVdZEIaRers5sxmUb5ExekY8zPSpVIWCKntGEOdsj/BarL5yBZWIMF
-         qn6Bt/PiqUu2crkb86czStbKHHSftzN7YGbZbNqyjxQVROpxLvO2jyfUKeFIror97ZvR
-         1b8w==
+        bh=p2w7cswF8WNoXf2rJsjt6cpxdm36ufdLhJBaAPtDOQc=;
+        b=jaHo8NAkm7wMWRH5gBep5jkdIplGx0IrKAEQTIiwzsiu2VTyHAbSz6LKYYC+6MzwSD
+         kI/kYuyhV9qUtpF6w1RfkAWLXNU0FZq5JXADK/j9FcBxfJk0eQ/whibVNPjjpXMd9C5A
+         UEP2KqWAOyuidiT6xWfkbZIGbTyOv35FTXpdpNqOpioTPB2+j6ZxAZuyzWKtfLpDdbyF
+         K6uAKP0ZvGs2HONoLkuMlfnHPTqzxjgdNGEoaTnItiYPT1GKT6UvyUBqgUba0MWBHxyN
+         ZoMU218BpP/xj6h/u/IlpvoEEmhOKTXRtcHCQzNy8Ul+o9sm3sPKXk+QLom+or9Ufl2A
+         96oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775836524; x=1776441324;
+        d=1e100.net; s=20251104; t=1775836520; x=1776441320;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=harNJKN/3/ApQ6euFfpXmy5P6ZKtKwJXsuo2nm4shJQ=;
-        b=Zon3tPA35X/Oc8++38i2Bvo1+Hq6KH2109vHSqEhlw3Vdd0IoRpuksNqmttHz2rSWt
-         0sVR7USlghABEcEmpnOwu+PKafeCSnh/G349tgjiUFKGQQU+IgMrz+uE7MO58s1m9XVP
-         BGS839c+MMRxX9XlJr5Q5KBHvCfsCWqc3Z/tdGwIBH5bMmaDF3qae1oTX7o6i7PU/gZe
-         qwh5yCI1hh5T2TNi5P9TEMHRy32/Ccad/Le+ZP/qgYv2QzKukKT58Po+YkICBMxKLfnS
-         tKRn1PkGML9Q8xnCNo8eTjNB4rmna0AylTZLs079u7htNHypMHp/yZaKRzcX3r02Ts5A
-         tscw==
-X-Gm-Message-State: AOJu0YxWpM8XzRuoqiRV1MnWLvpH4G8HkVx2TBOfhDO8TyJrC+h3TRC2
-	dCYv25CkvuGX0YVBPKhTNnvdzUg4uta0b26kNmBnjvcTSgjMjtnTofioh7XTxg==
-X-Gm-Gg: AeBDievad738q1r/4nwGez8WdW1/NICeZ9SGTU83nSEUPxeIigrKOObP/2+NHBjvlyK
-	7XncSEvxsj/0+Xha+GXOIaiBuymb/6gi1nfdubr/pXlET4vJQ8CfHJ1eWXHw20unnLdnLSwWAii
-	MwLyx3KHZh1e4/MubphsEX+cdEEcarhXG88Yxhj7X/v0nCGUPWfH7moATH89zVTbKARaxXaJuTA
-	cRB6QrLIlqtSedCEudmwBe37Nz67lI+HwELb574ueZXM32BN/YUUnGUgk5Bn+/BAiqvZ8SnGUVa
-	Ti0g4K0sY2uPG+xhm8adc88RU2Ov5mcbdb7Mj3bu0jMtxXll5TlmF5Hl/mzTy16poma6w9n1DuD
-	XKcgxoXjpntyg85QKGGwqQ96CDu2MEBIjFWbj5HTiVSax9kwBtJ4OH31x1ZfRcejTn7EW6fY+ho
-	3yO8sTgoeXV9ilEEF5EubBjOw4QQ7dYHuwWPGXDbLD4nEqyMMzezQyPJAetBLNgwYrmw==
-X-Received: by 2002:a05:600c:3b96:b0:488:b098:b653 with SMTP id 5b1f17b1804b1-488d67f0a8amr49856885e9.13.1775836523657;
-        Fri, 10 Apr 2026 08:55:23 -0700 (PDT)
+        bh=p2w7cswF8WNoXf2rJsjt6cpxdm36ufdLhJBaAPtDOQc=;
+        b=eTuGk47jVzVPnrNdSp3q5qJw2zs4UbUbV/vM5TMXnvBA38v8CNrkTSxMJMNN2XGlRX
+         17oHsWjdHCavSo7pQiRQFlXQAkkakYYYRsXd1bwdv5gavIfeVghAgrh232Jc/HRB/IZo
+         wHh7UbCJxQi4RCyQRVP+2bC2qqYSupewfbt0VRZWWSFYpv1ffche198jtELLK/MHbv1H
+         3uu5hwvrtMAJdwzbg1s12+ei7km1LG3Kw1o6yzd/ycz7TV1eiSUoAjkFY80Q0xoY1Mz7
+         GzjgoqU+cISKed5WhWVnwkBs42Db9yKK/Lzia2DZokwFtn8XRvmW1Ck3sxTdm8Cf/Vye
+         xhIA==
+X-Gm-Message-State: AOJu0YzlsYbEW63VSXl/2ezUeMR3UgR2x0uBK0jWcOcmzaJhNO9lOsAx
+	E3rK+eOa1J6u06Jdbd2YV+ASF4mAltSP0m9ypZ0VySZbCd3Uk7DwOvnmRcZ36w==
+X-Gm-Gg: AeBDiesxPNykQ3F+L0Rz7/Ec0+nNBbgCnZv/zmQgFNZF7gQieFPb1L8wyF4df+tgm9g
+	/FpEm0ym4McLuiuX+YEerbNJgsB1psjwTZmtL4pByDX8If/CC5ODts00F5W7a5NVgv83pvbeX5Y
+	OSddRRw/Q5N3VTGeFSG4nDuf3/QwDQHFwEa9tvZY+3EeD10/rYRtbYZ7sUK7xGIFAkA8sOcl7Of
+	OK5dIKIqbeQH+fdPtW+PLVZQJfCUtVN6nsR9cOV2ZAfUKzEfml4a0//FMI4pZCN7w7vOJEpb6HX
+	HR++bSJi3/UnUH5vAcloWxcC7MPMULYznugGhlCs65bBo0lm9PHfUFFi4HhQqSMyZRdM35o95R+
+	opmqHWD+o0oXBibTLHDMtVQqYyLSLdMXwXrdF5Ww/e3KrIhXdBnJ4dAq/srh4y7us46/RdrxAMd
+	b7OI8sNnqe83DcXXlGfrxt/se+UvCx6S+oedESRgfnAYoXXAvuNjSCG86KtsLs41Q6aA==
+X-Received: by 2002:a05:600c:45cf:b0:483:8062:b2f with SMTP id 5b1f17b1804b1-488d67b8dddmr46635465e9.6.1775836519900;
+        Fri, 10 Apr 2026 08:55:19 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 12/12] xen/riscv: enable DOMAIN_BUILD_HELPERS
-Date: Fri, 10 Apr 2026 17:54:58 +0200
-Message-ID: <ad7eb62c8953a5dba09f285124251dab2f48cbab.1775836193.git.oleksii.kurochko@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v3 09/12] xen: rename p2m_ipa_bits to p2m_gpa_bits
+Date: Fri, 10 Apr 2026 17:54:55 +0200
+Message-ID: <ebfa4d838f0774b0b18addafb6ed2ce90c9eaeef.1775836193.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1775836524-F5F52497-48010394/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1775836520-8B74241E-4D9E4FF8/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 851
+X-purgate-size: 1710
 
-Everything is ready to enable DOMAIN_BUILD_HELPER which are necessary
-for dom0less common code. So enable it.
+The IPA terminology is Arm-specific, so rename p2m_ipa_bits to
+p2m_gpa_bits to use architecture-neutral naming in
+xen/common/device-tree/ code.
 
+No functional changes.
+
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Introduce #define p2m_gpa_bits p2m_ipa_bits for Arm instead of
+   renaming of p2m_ipa_bits to p2m_gpa_bits to keep Arm part of
+   changes clearer and keep using Arm-specific terminolgy inside
+   Arm code.
 ---
 Changes in v2:
- - Move introduction of p2m_ipa_bits to separate patch.
- - Move to separate patch introduction of guest banks constansts.
+ - New patch.
 ---
- xen/arch/riscv/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ xen/arch/arm/include/asm/p2m.h        | 2 ++
+ xen/common/device-tree/domain-build.c | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index a5e87c1757f7..41426c205292 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -1,5 +1,6 @@
- config RISCV
- 	def_bool y
-+	select DOMAIN_BUILD_HELPERS
- 	select FUNCTION_ALIGNMENT_16B
- 	select GENERIC_BUG_FRAME
- 	select GENERIC_UART_INIT
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 010ce8c9ebbd..7957dbd96e57 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -14,6 +14,8 @@
+ /* Holds the bit size of IPAs in p2m tables.  */
+ extern unsigned int p2m_ipa_bits;
+ 
++#define p2m_gpa_bits p2m_ipa_bits
++
+ #define MAX_VMID_8_BIT  (1UL << 8)
+ #define MAX_VMID_16_BIT (1UL << 16)
+ 
+diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
+index e706a6173ba6..30625a33ef08 100644
+--- a/xen/common/device-tree/domain-build.c
++++ b/xen/common/device-tree/domain-build.c
+@@ -221,7 +221,7 @@ int __init find_unallocated_memory(const struct kernel_info *kinfo,
+     }
+ 
+     start = 0;
+-    end = (1ULL << p2m_ipa_bits) - 1;
++    end = (1ULL << p2m_gpa_bits) - 1;
+     res = rangeset_report_ranges(unalloc_mem, PFN_DOWN(start), PFN_DOWN(end),
+                                  cb, free_regions);
+     if ( res )
 -- 
 2.53.0
 
