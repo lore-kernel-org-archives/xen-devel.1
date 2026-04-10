@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF32BF459F9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69354F459F5
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Apr 2026 15:55:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1279414.1563842 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1279418.1563868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECQ-00070B-PV; Fri, 10 Apr 2026 15:55:14 +0000
+	id 1wBECT-0007hP-Ka; Fri, 10 Apr 2026 15:55:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1279414.1563842; Fri, 10 Apr 2026 15:55:14 +0000
+Received: by outflank-mailman (output) from mailman id 1279418.1563868; Fri, 10 Apr 2026 15:55:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wBECQ-000702-KQ; Fri, 10 Apr 2026 15:55:14 +0000
-Received: by outflank-mailman (input) for mailman id 1279414;
- Fri, 10 Apr 2026 15:55:12 +0000
+	id 1wBECT-0007hE-HA; Fri, 10 Apr 2026 15:55:17 +0000
+Received: by outflank-mailman (input) for mailman id 1279418;
+ Fri, 10 Apr 2026 15:55:15 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECO-0006mB-Ch
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:12 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wBECR-0007EN-Iz
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 15:55:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wBECM-00Cwd5-71
- for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:11 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wBECP-00Cwd5-DQ
+ for xen-devel@lists.xenproject.org; Fri, 10 Apr 2026 17:55:14 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d5e-bab6-0a2a0a5309dd-0a2a450abe1c-6
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:11 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ id 69d91d56-bab6-0a2a0a5309dd-0a2a450cb636-26
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:14 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69d91d5f-ee98-0a2a450a0019-d1558033c175-3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:11 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4838c15e3cbso19690445e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:11 -0700 (PDT)
+ id 69d91d62-f40c-0a2a450c0019-d155802dc8a2-3
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 17:55:14 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-48897fd88ebso23326085e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Apr 2026 08:55:14 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.09
+ 5b1f17b1804b1-488d5b3c597sm78285605e9.12.2026.04.10.08.55.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 08:55:10 -0700 (PDT)
+ Fri, 10 Apr 2026 08:55:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,140 +54,278 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775836511; x=1776441311; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1775836514; x=1776441314; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MSz7tlr6rhlyBnCcpNqgWXaL+9iidsazDOLEUrgU1Kw=;
-        b=hkRvH8V/UMxke5UZ1Lwi2OAgzeNI7sqEUD29pCsTTe3itNieOme7Hc3EAA7NjFTIRl
-         Vg/GC34oJLhcnG5KGK7lsg7PxSvrqKtId9ybvREqAuXukabeuDRnKZRIU5X/GxoZpeQm
-         ql6rx8xuh9TO2fzSn/4WFVXF+tfUiXvedGj+m0N/AB18Djdp8ZXCszgIPQv6jXF0/S8V
-         INQpZ6O/T3kbmakXPUOd4WQfgh0JGJE605R6pZC3Hj18o0MyZ9EYTsLZ2LbFKzHJzVw7
-         IPU0J+PwNdw01LreR+X4H5Yxaybv5St5PrzwUUWDrInkv9Kf4Tnzj5tdO8o9OgJwf/PS
-         dMCQ==
+        bh=sTRi4YH+C2jL1DPdQVnyL1+s27z+ZRb1KNlQ9e7rLKA=;
+        b=s/ADolDC1igUBrDPOfb0FyBbtLgF20pDCtb70tfFOXxjW34DJUjmeIpWcZUCgaQGgh
+         Y5qPFZp4pfhZyNi7/+GCs5Pdu1w3LFm2W9SG/rg6yAPNxQTd6AOHb7RxCuOcbgCIfryk
+         1k1fCeVRwTzybMTvNOVzzs08ju0cOG/k53w/FqY9KgCNqYF9LPtaT4PhBRvBVPdlpyRC
+         ZDckx2a+gjiHdbhPfbuu4uDywDtuLgvn5fc7SQAN70RKuUde2GreZYLiUWX3EcfuLMWu
+         d9ECxqwsJM1a3tH/QtOxMbmtFc5aIaUCsDy92SGc+UWDKs9VYEWBPCAkUtVXqksZj3go
+         YHqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775836511; x=1776441311;
+        d=1e100.net; s=20251104; t=1775836514; x=1776441314;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=MSz7tlr6rhlyBnCcpNqgWXaL+9iidsazDOLEUrgU1Kw=;
-        b=dt6sdg9BVxKEd4BpZpyuzZUuxmdla3b4BofA9WHqgGcN+mhMlQxPbfoKN0wmVY8VUp
-         tZgGHDSMNOrV59XiknF1SYmwTl9VvviW/YT3i5+Yi7qNcg7L8t3Utoxv/7ocvAW3/iWy
-         O9pkhu0UBKdOS+SF8GYXmkTiXoTN3Q5e4q9yZJpHXh5FSGeYPrYZ1/kgQkB9VziT65DM
-         /EWflfYDuZmYiTmnGFsbgA52Hf54c4B2qCNjTSjWijOcbAz3FUQx8gfNZLkbAgRx2+b2
-         T/7bO8eddLXypU4iS2dyzX+eQQa+MdcqG7bqLnFsGkXqzjczBqOKy89tYggEA7Q+Apv4
-         zcWw==
-X-Gm-Message-State: AOJu0YwrqLSP8cVfERwMt1qomEvtaYCevJd9l8BF6wOySJky+RGiIR7q
-	tuoTLYAtVYz7kgYBKheatPsZJw3lQ08CaAJC1JXONVkF1PDdWlKaxwRwapvJgw==
-X-Gm-Gg: AeBDiev67pnAEQgFEWo0ghAKMhFtjZsftWc833YSkNx40YbWcIECY9rEIxwWAYK9uuG
-	Tgft9YInLQM9IfaAnI0AfjH8S84FMvMr50NtK52+/esfdbN/IyGunR3NYWcX3j7JoueefKSP+BJ
-	jhsOC/n+H8GGzNhFg+JltLLShHKQIjtBJlhSGXJd6rPKv2Gg8/ci9y/3YQW82OIjHkd2Ihwnwd2
-	uYyiLSHtB3mSBKbCqZC02GonhJXfIx2afV/ydV/l5Ce1L4VJ1c5bZ36gNbVk9K3s3ndaa0Aj0rk
-	DOcDVi8CqqG9SWcTx7+vg/dJa3Afox7t5Nm1tUsj5Tvx+VhpFRrjL8MxPP9PzQurMW1R4t1UNDT
-	UxUs/WxqOpJGXJGEdsLpVzA+WKeH9Ia3eXbsURz/JxW/w6gOOvipMvPW6c87MiRHRhC2bqADq48
-	WXCrdDP7Bi+4hpiUMUfG/n45owLDOSRyJthppM+YL7OxetCVCr1Bw0gpQXgrNMoOHmOA==
-X-Received: by 2002:a05:600d:1c:b0:487:1108:48bc with SMTP id 5b1f17b1804b1-488d6836d87mr38497135e9.17.1775836510630;
-        Fri, 10 Apr 2026 08:55:10 -0700 (PDT)
+        bh=sTRi4YH+C2jL1DPdQVnyL1+s27z+ZRb1KNlQ9e7rLKA=;
+        b=QSmsXq6xlY8fO41BZfN/YyvJ03QAO8P7sd4t80ENciSQxkBUtdX2cfLaw2Ue6VvDpW
+         IJw5AcKy9+XsGA5uf+bTz90uX7fzhxAUMLge8CdtUY+rH5LGi4Ein+hY+F4HT4wESuaZ
+         pqcVr0pMmmx/pJFS68ZSzwW2sDAjVgtAano4C11vQs+IarZj6+hgisFv+kqaNFswumj9
+         GljOzpmQXCCGSQyCHFWwFSmh0RdrTGGkEsyGSStD/bivqZyCtj2IQph8bjHpa/CjV/+y
+         TKIEbkAwqiOH0rFsR5Z384JgZ2tfgrvQM2yhfoajVvKkxfGnoDzEOBoAgY+LTmbQ24UV
+         QXWw==
+X-Gm-Message-State: AOJu0YxRgERfs3ZPJ9PfmGhzGap3LbvEgc0VEBz/hxJbVR9dZg6VvcDq
+	nqWjmMUymYKGiaqrEPJYbmpiD62ki7AO0A+IOpuYnkFDFCyLY4DCNLGFbvawqQ==
+X-Gm-Gg: AeBDieuspLs7cDOb9Xtz6o2VKI1yCFL0cGf9XyulyV4p1MkqiNrp4Cp6UJgh3V9N91T
+	BvXbob6g3Sa+FGYu6cW4tOM5pj2+5laNO8wDOyrZtlCol3lZC+P5ic+Cbj4sT65/yGnTSW8fOys
+	dmtT/ZCZiVVhENJmCerg9TR+P1Efhdr0S2tRo88J4Pyh7fkOShVNezr9/Z4foYknQu14j3IVIiX
+	Y0x+0U+AvVh5IJDRow1lRc+P8Z3MdY+Y2jFlY3Goe4iTTsnyh49mngT9yk+LISZ9gdpne2MjYEM
+	8QaB7bODFzvzMf2l6xMqwAl8ZbjYrv6855W24T9v/rl0mAoOTBz9buKJ6izfDvuRA4V9Y06ECkq
+	GKyhqE9Z+akUvCipjZousPEae5vmEflJACgzaQAm5sosjwoqx7TTJOzo1TUrNe7VY7BNvR8BJcw
+	bYI3mpfVXF/Mwbzh9DI82ICqzKmd1lRaTsSYSbERrWK2BoRJhHShRDujRTWz3QGrQXREkptOvEv
+	Fjn
+X-Received: by 2002:a05:600c:34cd:b0:487:575:5e1 with SMTP id 5b1f17b1804b1-488d68c2cb4mr48418635e9.24.1775836514072;
+        Fri, 10 Apr 2026 08:55:14 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 01/12] xen/riscv: implement get_page_from_gfn()
-Date: Fri, 10 Apr 2026 17:54:47 +0200
-Message-ID: <e32db25650546146594635821441494ee86648e9.1775836193.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 04/12] xen/dom0less: rename kernel_zimage_probe() to kernel_image_probe()
+Date: Fri, 10 Apr 2026 17:54:50 +0200
+Message-ID: <b7574a2ac5669e46c02daf58865be3765b3beac5.1775836193.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1775836511-C58140B1-46DD9E41/10/73395122804
+X-purgate-ID: tlsNG-d25034/1775836514-FF547A3D-4A6AEDB5/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3227
+X-purgate-size: 7698
 
-The function is implemented out-of-line rather than as a static inline,
-to avoid header ordering issues where struct domain is incomplete when
-asm/p2m.h is included, leading to build failures:
-  In file included from ./arch/riscv/include/asm/domain.h:10,
-                   from ./include/xen/domain.h:16,
-                   from ./include/xen/sched.h:11,
-                   from ./include/xen/event.h:12,
-                   from common/cpu.c:3:
-  ./arch/riscv/include/asm/p2m.h: In function 'get_page_from_gfn':
-  ./arch/riscv/include/asm/p2m.h:50:33: error: invalid use of undefined type 'struct domain'
-     50 | #define p2m_get_hostp2m(d) (&(d)->arch.p2m)
-        |                                 ^~
-  ./arch/riscv/include/asm/p2m.h:180:38: note: in expansion of macro 'p2m_get_hostp2m'
-    180 |         return p2m_get_page_from_gfn(p2m_get_hostp2m(d), _gfn(gfn), t);
-        |                                      ^~~~~~~~~~~~~~~
-  make[2]: *** [Rules.mk:253: common/cpu.o] Error 1
-  make[1]: *** [build.mk:72: common] Error 2
-  make: *** [Makefile:623: xen] Error 2
+The helper kernel_zimage_probe() is referenced from common code
+(xen/common/device-tree/kernel.c), but its name is tied to the zImage
+format which is specific to Arm (from architectures supported by Xen).
 
+Other architectures supported by Xen, such as RISC-V, do not use the
+zImage format and instead rely on other kernel image types (e.g. Image
+or compressed Image variants: Image.gz, etc). Using "zimage" in the
+name is therefore misleading in architecture-independent code.
+
+Rename kernel_zimage_probe() to kernel_image_probe() and update the
+associated structure field from "zimage" to "image" to reflect that the
+code handles generic kernel images rather than the zImage format
+specifically.
+
+No functional change intended.
+
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - As nothing is called get_page_from_gfn() for system domains, leave only
-   handling of not system domains.
+ - Nothing changed. Only rebase.
 ---
 Changes in v2:
- - Align implemntation with Arm's get_page_from_gfn().
- - Update the first comment about DOMID_XEN to mention that isn't "normal"
-   domain instead of no-autotranslated.
- - Drop footer after commit message.
+ - new patch.
 ---
- xen/arch/riscv/include/asm/p2m.h |  8 ++------
- xen/arch/riscv/p2m.c             | 13 +++++++++++++
- 2 files changed, 15 insertions(+), 6 deletions(-)
+ xen/arch/arm/kernel.c           | 48 ++++++++++++++++-----------------
+ xen/common/device-tree/kernel.c |  2 +-
+ xen/include/xen/fdt-kernel.h    |  4 +--
+ 3 files changed, 27 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
-index 60f27f9b347e..54ea67990f06 100644
---- a/xen/arch/riscv/include/asm/p2m.h
-+++ b/xen/arch/riscv/include/asm/p2m.h
-@@ -164,12 +164,8 @@ typedef unsigned int p2m_query_t;
- #define P2M_ALLOC    (1u<<0)   /* Populate PoD and paged-out entries */
- #define P2M_UNSHARE  (1u<<1)   /* Break CoW sharing */
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 7544fd50a20f..3c613cdb233f 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -101,8 +101,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
+     paddr_t load_addr;
  
--static inline struct page_info *get_page_from_gfn(
--    struct domain *d, unsigned long gfn, p2m_type_t *t, p2m_query_t q)
--{
--    BUG_ON("unimplemented");
--    return NULL;
--}
-+struct page_info *get_page_from_gfn(struct domain *d, unsigned long gfn,
-+                                    p2m_type_t *t, p2m_query_t q);
+ #ifdef CONFIG_ARM_64
+-    if ( (info->arch.type == DOMAIN_64BIT) && (info->zimage.start == 0) )
+-        return mem->bank[0].start + info->zimage.text_offset;
++    if ( (info->arch.type == DOMAIN_64BIT) && (info->image.start == 0) )
++        return mem->bank[0].start + info->image.text_offset;
+ #endif
  
- static inline void memory_type_changed(struct domain *d)
- {
-diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
-index 89e5db606fc8..d63697c89a1a 100644
---- a/xen/arch/riscv/p2m.c
-+++ b/xen/arch/riscv/p2m.c
-@@ -1534,3 +1534,16 @@ void p2m_handle_vmenter(void)
-      * won't be reused until need_flush is set to true.
+     /*
+@@ -111,19 +111,19 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
+      * and above 32MiB. Load it as high as possible within these
+      * constraints, while also avoiding the DTB.
       */
+-    if ( info->zimage.start == 0 )
++    if ( info->image.start == 0 )
+     {
+         paddr_t load_end;
+ 
+         load_end = mem->bank[0].start + mem->bank[0].size;
+         load_end = MIN(mem->bank[0].start + MB(128), load_end);
+ 
+-        load_addr = load_end - info->zimage.len;
++        load_addr = load_end - info->image.len;
+         /* Align to 2MB */
+         load_addr &= ~((2 << 20) - 1);
+     }
+     else
+-        load_addr = info->zimage.start;
++        load_addr = info->image.start;
+ 
+     return load_addr;
  }
-+
-+struct page_info *get_page_from_gfn(struct domain *d, unsigned long gfn,
-+                                    p2m_type_t *t, p2m_query_t q)
-+{
-+    /*
-+     * system domains are domains which doesn't have p2m translation tables,
-+     * so they can't use p2m_get_page_from_gfn() and extra care should be
-+     * done for them.
-+     */
-+    ASSERT(!is_system_domain(d));
-+
-+    return p2m_get_page_from_gfn(p2m_get_hostp2m(d), _gfn(gfn), t);
-+}
+@@ -131,8 +131,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
+ static void __init kernel_zimage_load(struct kernel_info *info)
+ {
+     paddr_t load_addr = kernel_zimage_place(info);
+-    paddr_t paddr = info->zimage.kernel_addr;
+-    paddr_t len = info->zimage.len;
++    paddr_t paddr = info->image.kernel_addr;
++    paddr_t len = info->image.len;
+     void *kernel;
+     int rc;
+ 
+@@ -215,7 +215,7 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+         return -EOPNOTSUPP;
+     }
+ 
+-    info->zimage.start = be32_to_cpu(uimage.load);
++    info->image.start = be32_to_cpu(uimage.load);
+     info->entry = be32_to_cpu(uimage.ep);
+ 
+     /*
+@@ -224,20 +224,20 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+      * independent image. That means Xen is free to load such an image at
+      * any valid address.
+      */
+-    if ( info->zimage.start == 0 )
++    if ( info->image.start == 0 )
+         printk(XENLOG_INFO
+                "No load address provided. Xen will decide where to load it.\n");
+     else
+         printk(XENLOG_INFO
+                "Provided load address: %"PRIpaddr" and entry address: %"PRIpaddr"\n",
+-               info->zimage.start, info->entry);
++               info->image.start, info->entry);
+ 
+     /*
+      * If the image supports position independent execution, then user cannot
+      * provide an entry point as Xen will load such an image at any appropriate
+      * memory address. Thus, we need to return error.
+      */
+-    if ( (info->zimage.start == 0) && (info->entry != 0) )
++    if ( (info->image.start == 0) && (info->entry != 0) )
+     {
+         printk(XENLOG_ERR
+                "Entry point cannot be non zero for PIE image.\n");
+@@ -257,13 +257,13 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+         if ( rc )
+             return rc;
+ 
+-        info->zimage.kernel_addr = mod->start;
+-        info->zimage.len = mod->size;
++        info->image.kernel_addr = mod->start;
++        info->image.len = mod->size;
+     }
+     else
+     {
+-        info->zimage.kernel_addr = addr + sizeof(uimage);
+-        info->zimage.len = len;
++        info->image.kernel_addr = addr + sizeof(uimage);
++        info->image.len = len;
+     }
+ 
+     info->load = kernel_zimage_load;
+@@ -289,7 +289,7 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+      * Thus, Xen uses uimage.load attribute to determine the load address and
+      * zimage.text_offset is ignored.
+      */
+-    info->zimage.text_offset = 0;
++    info->image.text_offset = 0;
+ #endif
+ 
+     return 0;
+@@ -338,10 +338,10 @@ static int __init kernel_zimage64_probe(struct kernel_info *info,
+     if ( (end - start) > size )
+         return -EINVAL;
+ 
+-    info->zimage.kernel_addr = addr;
+-    info->zimage.len = end - start;
+-    info->zimage.text_offset = zimage.text_offset;
+-    info->zimage.start = 0;
++    info->image.kernel_addr = addr;
++    info->image.len = end - start;
++    info->image.text_offset = zimage.text_offset;
++    info->image.start = 0;
+ 
+     info->load = kernel_zimage_load;
+ 
+@@ -389,10 +389,10 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
+         }
+     }
+ 
+-    info->zimage.kernel_addr = addr;
++    info->image.kernel_addr = addr;
+ 
+-    info->zimage.start = start;
+-    info->zimage.len = end - start;
++    info->image.start = start;
++    info->image.len = end - start;
+ 
+     info->load = kernel_zimage_load;
+ 
+@@ -403,7 +403,7 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
+     return 0;
+ }
+ 
+-int __init kernel_zimage_probe(struct kernel_info *info, paddr_t addr,
++int __init kernel_image_probe(struct kernel_info *info, paddr_t addr,
+                                paddr_t size)
+ {
+     int rc;
+diff --git a/xen/common/device-tree/kernel.c b/xen/common/device-tree/kernel.c
+index 28096121a52d..cfa27464f0fc 100644
+--- a/xen/common/device-tree/kernel.c
++++ b/xen/common/device-tree/kernel.c
+@@ -235,7 +235,7 @@ int __init kernel_probe(struct kernel_info *info,
+     if ( rc && rc != -EINVAL )
+         return rc;
+ 
+-    rc = kernel_zimage_probe(info, mod->start, mod->size);
++    rc = kernel_image_probe(info, mod->start, mod->size);
+ 
+     return rc;
+ }
+diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
+index 33a60597bb4d..2af3bd5f0722 100644
+--- a/xen/include/xen/fdt-kernel.h
++++ b/xen/include/xen/fdt-kernel.h
+@@ -56,7 +56,7 @@ struct kernel_info {
+             paddr_t text_offset; /* 64-bit Image only */
+ #endif
+             paddr_t start; /* Must be 0 for 64-bit Image */
+-        } zimage;
++        } image;
+     };
+ 
+ #if __has_include(<asm/kernel.h>)
+@@ -122,7 +122,7 @@ void kernel_load(struct kernel_info *info);
+ 
+ int kernel_decompress(struct boot_module *mod, uint32_t offset);
+ 
+-int kernel_zimage_probe(struct kernel_info *info, paddr_t addr, paddr_t size);
++int kernel_image_probe(struct kernel_info *info, paddr_t addr, paddr_t size);
+ 
+ /*
+  * uImage isn't really used nowadays thereby leave kernel_uimage_probe()
 -- 
 2.53.0
 
