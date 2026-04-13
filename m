@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E7AEBFD1B
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Apr 2026 08:44:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1280933.1564015 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77CEBEBFD16
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Apr 2026 08:49:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1280945.1564024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCCtf-0006k7-J8; Mon, 13 Apr 2026 08:43:55 +0000
+	id 1wCCyT-0007Kg-4w; Mon, 13 Apr 2026 08:48:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1280933.1564015; Mon, 13 Apr 2026 08:43:55 +0000
+Received: by outflank-mailman (output) from mailman id 1280945.1564024; Mon, 13 Apr 2026 08:48:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCCtf-0006k0-Fu; Mon, 13 Apr 2026 08:43:55 +0000
-Received: by outflank-mailman (input) for mailman id 1280933;
- Mon, 13 Apr 2026 08:43:54 +0000
+	id 1wCCyT-0007KZ-1u; Mon, 13 Apr 2026 08:48:53 +0000
+Received: by outflank-mailman (input) for mailman id 1280945;
+ Mon, 13 Apr 2026 08:48:52 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wCCte-0006ju-Jn
- for xen-devel@lists.xenproject.org; Mon, 13 Apr 2026 08:43:54 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wCCyS-0007KT-FQ
+ for xen-devel@lists.xenproject.org; Mon, 13 Apr 2026 08:48:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wCCtd-00Bb9a-SS
- for xen-devel@lists.xenproject.org; Mon, 13 Apr 2026 10:43:53 +0200
+ id 1wCCyR-00Bcm9-R8
+ for xen-devel@lists.xenproject.org; Mon, 13 Apr 2026 10:48:51 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69dcacc7-bab6-0a2a0a5309dd-0a2a450495c4-10
- for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 10:43:53 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ id 69dcadf1-2eae-0a2a0a5409dd-0a2a45048b8c-6
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 10:48:51 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69dcacc9-bb33-0a2a45040019-d155dd31c52f-3
- for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 10:43:53 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-43d572f7437so2632765f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 01:43:53 -0700 (PDT)
+ id 69dcadf3-bb33-0a2a45040019-d1558030dd26-3
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 10:48:51 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4887f49ec5aso51009365e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Apr 2026 01:48:51 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
  [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d7a6054dfsm4984799f8f.17.2026.04.13.01.43.51
+ 5b1f17b1804b1-488d58bb830sm288502705e9.7.2026.04.13.01.48.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Apr 2026 01:43:52 -0700 (PDT)
+ Mon, 13 Apr 2026 01:48:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,51 +52,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776069833; x=1776674633; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=mcPTLLRyjpLLJeDzkteXckkWflgWGJ+66+DAF24dZnE=;
-        b=CoM5NDvd4BZL43ibZUG5lWLiBgTPSJll1d0O+KakuHjzriWJfPgsuNAemDyLMuuyv+
-         9bWjTGMaDFPMAj6k8tFYZyQTUVViwH84Um3KapwLoLHdblao1x9sI9fIC+MQIyEs5O5w
-         aQ28w6qDGGSdKM546pbPvn4+atDRGm2ybU5p80cO+W+kILrRXo6t1UESxguo7r11Z7NO
-         xwy8Q994kKwEVoj8LQV5ambgLL/fLGVQUYNudcN9wFLO7xLwomUG+Ms8ravaCXR14q1w
-         zwtWlms0wQXhWJx6etff2wyayG72d4H3r0+ys4xEyE5q3l1TgneBH7E0TgpB5jcO0z2G
-         rb9Q==
+        d=gmail.com; s=20251104; t=1776070131; x=1776674931; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=tBPueUyGFRga8AEhs67/Xn6+SE364MXzEAQfF5xNnc0=;
+        b=lfMdUZKLOJo+kaCvxB6THHfP4DzSridQMKquv0YS4ceDmo9bZxJ5kVhD573l9kge1E
+         krPOuThc1wcUEf/VenzcW0JJ1E4zb+TL8v++VhvhVdx+6Nj/Ly6UIS8OfK9UZrxTsDvs
+         K8xbgfNVn7uzIiDVb7As2f2f+zEiE9htBLGBzf3D7GpM8bHmevgRUE57b87+dpg/3U0F
+         GQPEpC3FxCVvIiQi/qYqAT8UkAEnh5JcHiDgyXaMzvfe4CfxZ1x+3T4KyjJIxahc99BL
+         ZgFz7cNaieE+o30kwzCco49faVCBoY3ZWzq7Z/Tljhw+g67I9Pz2QVIeZ9evgsx28NmN
+         X3Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776069833; x=1776674633;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mcPTLLRyjpLLJeDzkteXckkWflgWGJ+66+DAF24dZnE=;
-        b=DY9uiciCkIhxjR74/32sXoZ86xsqQvs632dfIiaXcDHR4UTDyR8Ix2nvNl7LOgaW2J
-         ijyxQElnFSgpRIcydxUzRucIijP4NddXwJoo7Y04vHGSdvgj62vLj3gIVQlbM0wQjKkO
-         W6TnMwzYTj7asHNdJZaV+PDWVwH+uqh+AuPtm8GeJo2w5XIMj2MbTWRgdTL0DWrBt4Y6
-         TNimBzMQDhFfCCcfSN7ZgZxQQDnkkjnybY7lW36LaqJTSZkXbneSKKek8EFoCSr5S2dg
-         hlp+1uekXgAa/nEeZE7c2nR0fHKdPP0a1y1K1EEh1Q4JpSn0PSHwEYeRtsYOMIIIi1sF
-         dBrw==
-X-Forwarded-Encrypted: i=1; AFNElJ8U+5Ass6y+Yy6qePOxWBLIje/xfCorkbCOqGUYkgZLDq6jRj1+jm2QApEkBDmvd44/CP7acQLO7xI=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx12NdLNGpEkUi4VfHKMuKRfW5MBTGQRhWm7ISSqIffUb6w6NFP
-	SFSrOACUP3H2KZzsYqMrSSVtNam3jsaW3K8qOyRl2cN72IQxEnpVsrt3
-X-Gm-Gg: AeBDiesbGymfXdwCo1v0Sfw1Pqqw8cXxOjGU6Oac2zOC7XMFVXjd9r715O+YtG4rHes
-	3RirMi6QngKvRD4ex9CJ17gbdUhoabbja0D6jkuHtE00DYFDrXiO3YWkvYNYr3QLxMQ/LzallrY
-	BfEanhAJdK9NZW60s3LMMuPaw19w5b/IHE4ZWvpz+QIwwvwdYUf+ffwop96AgLQiKfn/71XYO6g
-	NP5vNKjJqC532gTpJo85mteE9/OKedF5aSz/CyCG3jqI1Ip7NKU8j8Uh359RDSJ1+BQxOdS8MQw
-	enbe89hwyHb3r/FyV9AoDurSGwCjG23ovVihxuQCR3CigsT4vXpxkt8BO1Y0bApX7xEYj5niyir
-	zGQP4KYHJpQ+L3AKb6DcGdvvYvwcBLUfuaUjTwysCq4grcFoOtSlRWmqxb+GNcQ1G5rFI5Egl8G
-	1fnuBB66LHn47gM/XqIxqKVuLwLJf2bGkLnU2hthfOBtUmpD50o8D1/39RAU3/af+8H34jbsFAJ
-	OA=
-X-Received: by 2002:a05:6000:2886:b0:43b:4982:fc73 with SMTP id ffacd0b85a97d-43d642c77cemr18408832f8f.25.1776069832830;
-        Mon, 13 Apr 2026 01:43:52 -0700 (PDT)
-Message-ID: <9fd04b0f-3b04-4f1e-ac63-de0fca57d466@gmail.com>
-Date: Mon, 13 Apr 2026 10:43:51 +0200
+        d=1e100.net; s=20251104; t=1776070131; x=1776674931;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=tBPueUyGFRga8AEhs67/Xn6+SE364MXzEAQfF5xNnc0=;
+        b=Xf/+e4m4q7fKsZpKx0Es69CPnS2xsKSQqbVXbGT0nv5wg0grVUvLU4Rh51Lw19uGgZ
+         G2lVBbLjYG06pzZB8rPn/XAV2UOCOoH9peNwUn7u41axBSkFNHSC5lsdDjlQjB5CE/KY
+         i7SsDWXUbJm88IMfb7cxFxyA7bMbn4JS/V/q8dyrfHpkJmmmQApNWQg2k1bfJie21Jel
+         vxsTnb2VjT9d4WZRzdwFlwzt+zruhp9ZzxXEdYkwowjDSp3uvi+4UCIS53ptg9stz8Gv
+         7IB0+8zD+ZQyUaJJXwgBpMVFppTOXRHplA2wkekU/gMGF5TUDEODOn7bpf5Y9fH/7BKH
+         skSA==
+X-Forwarded-Encrypted: i=1; AFNElJ+jERDO8G2R0oqChLYS8LmfEYi+zLdsC9uQfs5SK4lyLyct9dYxGHJKF4EXEE8zEwFoAwPt6aA/WgE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw0TH2IfC83htQk+qQ0qpIWTaVmfj9LlQh82r90fDCrmm+hWCOo
+	HAUHeU3RIsCkWfdkCTeBzlimmU6R8Wg4e03YmbVbgaO7soIxr7m4fX30
+X-Gm-Gg: AeBDiesT/046v/heXFAiQJNzlev99rb0+X+1ec80i+Yh57Wp7VLaOD4VO5k0HIg9PBc
+	kpYD+z0+Z8s/5CIs2U89VdyaD4H+cZul1qplkUot5P0w3BHdKkhxfzK10dE9BglGq4spztGarFP
+	FmBs2cCep1vQrLeqnyV/SvNAGkMIqef/i15z5zpkfbhTwpDfXlbxKxXIjC8fpl71/CHKFZPjQU/
+	fKC7FoZU24j0XV0jNn8wxBgCA1qVINYh6fAgPh4OmJN6e+D+h7JaeNhhP2Qn99idfk7uzxgH79h
+	JiCn/zExho3cEMXHpTDM3hooGaTflWBv2jO8vScxFYiH2zozN//QQe7XekqgeKD/0KlImYPM+gN
+	3stfuLUmpGyXgCkv16qO0bu/lyMcCypzjQfvmrT6zAz/cWIX5OlyiUKqBO78A3161MKbRXyY1F2
+	9HJc01xrthT+lBAGxTt9RNx7KfBX+gi96iRKfkd7yILm+AHz3eZCROrs3wTewuooocnyPH98Alg
+	k6gz9XFSRZyYg==
+X-Received: by 2002:a05:600c:34cc:b0:488:869c:edaf with SMTP id 5b1f17b1804b1-488d67d882cmr177827655e9.8.1776070131088;
+        Mon, 13 Apr 2026 01:48:51 -0700 (PDT)
+Message-ID: <004619ae-2b07-4ca0-bbd6-b023b5351f01@gmail.com>
+Date: Mon, 13 Apr 2026 10:48:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 11/27] xen/riscv: create APLIC DT node for guest
  domains
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -109,133 +109,37 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
  <462b5f7dbe4e5084a35fb869b59327c6c92d1fbf.1773157782.git.oleksii.kurochko@gmail.com>
  <362d1e3a-409c-40ab-8d2c-36dc30a04b88@suse.com>
+ <9fd04b0f-3b04-4f1e-ac63-de0fca57d466@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <362d1e3a-409c-40ab-8d2c-36dc30a04b88@suse.com>
+In-Reply-To: <9fd04b0f-3b04-4f1e-ac63-de0fca57d466@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1776069833-B0F2E51B-88ED3C28/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1776070131-3353351B-EC74DD9A/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3698
+X-purgate-size: 863
 
 
 
-On 4/1/26 5:16 PM, Jan Beulich wrote:
-> On 10.03.2026 18:08, Oleksii Kurochko wrote:
->> @@ -295,6 +297,85 @@ static void cf_check aplic_set_irq_type(struct irq_desc *desc,
->>       spin_unlock(&aplic.lock);
->>   }
->>   
->> +static int __init cf_check aplic_make_dom_dt_node(
->> +                                    const struct kernel_info *kinfo,
->> +                                    const struct dt_device_node *aplic_node)
+On 4/13/26 10:43 AM, Oleksii Kurochko wrote:
+>>> +        return res;
+>>> +
+>>> +    data = dt_get_property(aplic_node, "#interrupt-cells", &len);
+>>> +    if ( !data )
+>>> +    {
+>>> +        printk("%s: Can't find '#interrupt-cells' property\n",
+>>> +               aplic_node->full_name);
+>>> +        return -FDT_ERR_XEN(ENOENT);
+>>> +    }
+>>
+>> Again, pull this up to be first in the function?
 > 
-> Nit: Entirely bogus indentation.
-> 
->> +{
->> +    uint32_t len;
->> +    const __be32 *regs;
->> +    const void *data = NULL;
-> 
-> Again, why the initializer?
+> Agree, it makes sense to move it up.
 
-No real need, I will drop.
-
-> 
->> +    int res = 0;
->> +    void *fdt = kinfo->fdt;
->> +
->> +    res = imsic_make_dt_node(kinfo);
->> +    if ( res )
->> +        return res;
->> +
->> +    res = fdt_begin_node(fdt, aplic_node->full_name);
->> +    if (res)
-> 
-> Nit: Style.
-> 
->> +        return res;
->> +
->> +    data = dt_get_property(aplic_node, "#interrupt-cells", &len);
->> +    if ( !data )
->> +    {
->> +        printk("%s: Can't find '#interrupt-cells' property\n",
->> +               aplic_node->full_name);
->> +        return -FDT_ERR_XEN(ENOENT);
->> +    }
-> 
-> Again, pull this up to be first in the function?
-
-Agree, it makes sense to move it up.
-
-> 
->> +    res = fdt_property(fdt, "#interrupt-cells", data, len);
->> +    if ( res )
->> +        return res;
-> 
-> So host properties are again directly handed through to the guest?
-
-I am not sure that it can be different from what host has.
-
-> Shouldn't the number of interrupts (aiui that's the "number of cells"
-> here) a guest gets be independent from the host it runs one?
-
-The #interrupt-cells property specifies how many 32-bit values (cells) 
-are used to encode a single interrupt specifier when referencing this 
-interrupt controller from another device node.
-In this APLIC schema, it's fixed at const: 2, meaning every interrupt 
-reference requires exactly two cells — typically:
-
-Cell 1 — the interrupt source number (which of the riscv,num-sources 
-wired inputs)
-Cell 2 — the interrupt type/trigger flags (e.g. edge vs. level, active 
-high/low)
-
-So when a device node writes something like interrupts = <42 1>, the 
-interrupt controller knows to interpret that as "source 42, trigger type 
-1" because #interrupt-cells = <2> told it to consume two cells per 
-specifier.
-
-
-> 
->> +    regs = dt_get_property(aplic_node, "reg", &len);
->> +    if ( !regs )
->> +    {
->> +        printk("%s: Can't find 'reg' property\n", aplic_node->full_name);
->> +        return -FDT_ERR_XEN(ENOENT);
->> +    }
->> +
->> +    res = fdt_property(fdt, "reg", regs, len);
->> +    if ( res )
->> +        return res;
->> +
->> +    data = dt_get_property(aplic_node, "riscv,num-sources", &len);
->> +    if ( !data )
->> +    {
->> +        printk("%s: Can't find 'riscv,num-sources' property\n",
->> +                aplic_node->full_name);
->> +        return -FDT_ERR_XEN(ENOENT);
->> +    }
->> +
->> +    res = fdt_property(fdt, "riscv,num-sources", data, len);
->> +    if ( res )
->> +        return res;
-> 
-> Or maybe this is the number of interrupts?
-
-This is the total count of hardware interrupt lines wired into this 
-APLIC domain.
-
-It could be independent from the host it runs one but looking at the 
-possible range [1,1023] for this property if we will put for a guest 
-lets say 22 but new host support only 20 when we will be in a trouble 
-anyway.
-
-It seems like it is another one thing where it will be needed to check 
-that new host has enough number of interrupts and then just deny 
-migration to such host.
-
-Thanks.
+But on other hand, there are several time used the same construction 
+dt_get_propety() from host aplic node then write this property to guest 
+aplic node, then maybe we want to keep this dt_get_property(aplic_node, 
+"#interrupt-cells", &len); where it is now to have the same visually 
+construction way of guest device tree properties.
 
 ~ Oleksii
 
