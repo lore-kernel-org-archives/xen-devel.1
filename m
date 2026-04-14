@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1176BF9D0F7
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 20:25:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282096.1564811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D38DFF9D0F2
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 20:25:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282089.1564793 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJa-0006y1-I6; Tue, 14 Apr 2026 20:24:54 +0000
+	id 1wCkJV-0006KB-SR; Tue, 14 Apr 2026 20:24:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282096.1564811; Tue, 14 Apr 2026 20:24:54 +0000
+Received: by outflank-mailman (output) from mailman id 1282089.1564793; Tue, 14 Apr 2026 20:24:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJa-0006x3-Dq; Tue, 14 Apr 2026 20:24:54 +0000
-Received: by outflank-mailman (input) for mailman id 1282096;
- Tue, 14 Apr 2026 20:24:53 +0000
+	id 1wCkJV-0006K0-OO; Tue, 14 Apr 2026 20:24:49 +0000
+Received: by outflank-mailman (input) for mailman id 1282089;
+ Tue, 14 Apr 2026 20:24:48 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1wCkJZ-0006tP-Ba
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 20:24:53 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJU-0006Ev-EY
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 20:24:48 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJZ-001nU6-00;
- Tue, 14 Apr 2026 20:24:53 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJT-001nTl-2o;
+ Tue, 14 Apr 2026 20:24:47 +0000
 Received: from [2a02:8012:3a1:0:6452:fdce:8dbd:9a39]
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJY-0036wi-2l;
- Tue, 14 Apr 2026 20:24:52 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJT-0036wi-2K;
+ Tue, 14 Apr 2026 20:24:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,27 +44,30 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=09cHly2BqHYGkH46vKnOx07jfMK6IV594uDYR5Bmswg=; b=dYthwWWTRu8t31JD9TpxyWNo7w
-	QY+H99Bw3+5QPpBIWWOA3jlT+6y4HdchpYCCrbLgI465eaik4BAfQhHRZl0qpHiDjt/YLovGusv5G
-	0Am67lhsAW2Oeox2scP6A3dTT728WvBpdv9HozZRPc4cuIQVA3TwGj2tl05n1ks3DDI0=;
-Message-ID: <5aa739f7-dba0-42bf-beb3-594c53fdb868@xen.org>
-Date: Tue, 14 Apr 2026 17:18:19 +0900
+	bh=9YaZxjoKz18ZaT0K7IsqTa9f9VS7PwBgIblFZCsgu/c=; b=3vV5BhkS3eXiLHMLnktLSgq4hK
+	/y4zHUPJ9mEJevevpbBBm8Aze90H9YZAv87xN8sf0V9jpMaYEa59jOa/OrTBvR1+ioXnK06wKd9xW
+	szSCbYPlIT/RmsCQ6HvJi0/ydaR7vl92rMitSjsCowkvCWeXBTbWsbIaSaCK/RppOo9Y=;
+Message-ID: <4d00797b-fe24-43d6-9ada-42426bcdab30@xen.org>
+Date: Tue, 14 Apr 2026 16:18:11 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 09/23] xen/arm: vsmmuv3: Add support for cmdqueue
- handling
+Subject: Re: [PATCH v3 07/23] xen/arm: vIOMMU: Add cmdline boot option "viommu
+ = <string>"
 Content-Language: en-GB
 To: Milan Djokic <milan_djokic@epam.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Rahul Singh <rahul.singh@arm.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <cover.1774918270.git.milan_djokic@epam.com>
- <b223a8bb3e4d8771fc643c324a692a2639a91c12.1774918270.git.milan_djokic@epam.com>
+ <5d86efa38ca99439153822fa19064bda6843fdc2.1774918270.git.milan_djokic@epam.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <b223a8bb3e4d8771fc643c324a692a2639a91c12.1774918270.git.milan_djokic@epam.com>
+In-Reply-To: <5d86efa38ca99439153822fa19064bda6843fdc2.1774918270.git.milan_djokic@epam.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -73,179 +76,130 @@ Hi Milan,
 On 31/03/2026 10:52, Milan Djokic wrote:
 > From: Rahul Singh <rahul.singh@arm.com>
 > 
-> Add support for virtual cmdqueue handling for guests
+> Add cmdline boot option "viommu = <string>" to enable or disable the
+> virtual iommu support for guests on ARM (only viommu="smmuv3" supported
+> for now).
 
-This commit message is quite light. There are quite a few pitfalss with 
-the command queue because it can be long running which require some 
-explaining on the plan to handle it.
+In Xen terminology, 'guests' refers to domUs. IOW, this doesn't include 
+dom0. Is this what you meant? If so, how would you enable it for dom0?
 
-If this is delayed for later, then it would be useful to document in the 
-code what's missing so it is easier to know whether the vSMMUv3 
-implementation can be security supported (I assume this will be the goal).
+That said, is there any particular reason why this can't be 
+automatically enabled based on the SMMUv3 discovered?
 
 > 
 > Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 > Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 > ---
->   xen/drivers/passthrough/arm/vsmmu-v3.c | 101 +++++++++++++++++++++++++
->   1 file changed, 101 insertions(+)
+>   docs/misc/xen-command-line.pandoc      |  9 +++++++++
+>   xen/arch/arm/include/asm/viommu.h      | 12 ++++++++++++
+>   xen/drivers/passthrough/arm/viommu.c   | 11 +++++++++++
+>   xen/drivers/passthrough/arm/vsmmu-v3.c |  3 +++
+>   4 files changed, 35 insertions(+)
 > 
+> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+> index 6c77129732..6531c2355c 100644
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -2850,6 +2850,15 @@ The optional `keep` parameter causes Xen to continue using the vga
+>   console even after dom0 has been started.  The default behaviour is to
+>   relinquish control to dom0.
+>   
+> +### viommu (arm)
+> +> `= <string>`
+> +
+> +> Default: ``
+> +
+> +Flag to enable or disable support for the virtual IOMMU for guests. Disabled by
+> +default. Enable by specifying target IOMMU type (if supported). Only "smmuv3"
+> +IOMMU emulation supported at this point.
+> +
+>   ### viridian-spinlock-retry-count (x86)
+>   > `= <integer>`
+>   
+> diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
+> index 2a6742de73..ed338fe0ec 100644
+> --- a/xen/arch/arm/include/asm/viommu.h
+> +++ b/xen/arch/arm/include/asm/viommu.h
+> @@ -10,6 +10,7 @@
+>   #include <public/xen.h>
+>   
+>   extern struct list_head host_iommu_list;
+> +extern char viommu[];
+>   
+>   /* data structure for each hardware IOMMU */
+>   struct host_iommu {
+> @@ -50,6 +51,12 @@ uint16_t viommu_get_type(void);
+>   void add_to_host_iommu_list(paddr_t addr, paddr_t size,
+>                               const struct dt_device_node *node);
+>   
+> +static always_inline bool is_viommu_enabled(void)
+
+Regardless what Luca wrote, why do we need to force "always_inline"?
+
+> +{
+> +    /* only smmuv3 emulation supported */
+> +    return !strcmp(viommu, "smmuv3");
+> +}
+> +
+>   #else
+>   
+>   static inline uint8_t viommu_get_type(void)
+> @@ -76,6 +83,11 @@ static inline void add_to_host_iommu_list(paddr_t addr, paddr_t size,
+>       return;
+>   }
+>   
+> +static always_inline bool is_viommu_enabled(void)
+> +{
+> +    return false;
+> +}
+> +
+>   #endif /* CONFIG_ARM_VIRTUAL_IOMMU */
+>   
+>   #endif /* __ARCH_ARM_VIOMMU_H__ */
+> diff --git a/xen/drivers/passthrough/arm/viommu.c b/xen/drivers/passthrough/arm/viommu.c
+> index 53ae46349a..5f5892fbb2 100644
+> --- a/xen/drivers/passthrough/arm/viommu.c
+> +++ b/xen/drivers/passthrough/arm/viommu.c
+> @@ -3,6 +3,7 @@
+>   #include <xen/errno.h>
+>   #include <xen/init.h>
+>   #include <xen/irq.h>
+> +#include <xen/param.h>
+>   #include <xen/types.h>
+>   
+>   #include <asm/viommu.h>
+> @@ -38,8 +39,18 @@ void add_to_host_iommu_list(paddr_t addr, paddr_t size,
+>       list_add_tail(&iommu_data->entry, &host_iommu_list);
+>   }
+>   
+> +/* By default viommu is disabled.
+> + * If enabled, 'viommu' param indicates type (smmuv3 is only supported type atm)
+> + */
+> +char __read_mostly viommu[10] = "";
+> +string_param("viommu", viommu);
+> +
+>   int domain_viommu_init(struct domain *d, uint16_t viommu_type)
+>   {
+> +    /* Enable viommu when it has been enabled explicitly (viommu="smmuv3"). */
+> +    if ( !is_viommu_enabled() )
+ > +        return 0;> +
+>       if ( viommu_type == XEN_DOMCTL_CONFIG_VIOMMU_NONE )
+>           return 0;
+>   
 > diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> index 3ae1e62a50..02fe6a4422 100644
+> index 6b4009e5ef..e36f200ba5 100644
 > --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
 > +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> @@ -1,5 +1,6 @@
->   /* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
->   
-> +#include <xen/guest_access.h>
->   #include <xen/param.h>
->   #include <xen/sched.h>
->   #include <asm/mmio.h>
-> @@ -25,6 +26,26 @@
->   /* Struct to hold the vIOMMU ops and vIOMMU type */
->   extern const struct viommu_desc __read_mostly *cur_viommu;
->   
-> +/* SMMUv3 command definitions */
-> +#define CMDQ_OP_PREFETCH_CFG    0x1
-> +#define CMDQ_OP_CFGI_STE        0x3
-> +#define CMDQ_OP_CFGI_ALL        0x4
-> +#define CMDQ_OP_CFGI_CD         0x5
-> +#define CMDQ_OP_CFGI_CD_ALL     0x6
-> +#define CMDQ_OP_TLBI_NH_ASID    0x11
-> +#define CMDQ_OP_TLBI_NH_VA      0x12
-> +#define CMDQ_OP_TLBI_NSNH_ALL   0x30
-> +#define CMDQ_OP_CMD_SYNC        0x46
-> +
-> +/* Queue Handling */
-> +#define Q_BASE(q)       ((q)->q_base & Q_BASE_ADDR_MASK)
-> +#define Q_CONS_ENT(q)   (Q_BASE(q) + Q_IDX(q, (q)->cons) * (q)->ent_size)
-> +#define Q_PROD_ENT(q)   (Q_BASE(q) + Q_IDX(q, (q)->prod) * (q)->ent_size)
-> +
-> +/* Helper Macros */
-> +#define smmu_get_cmdq_enabled(x)    FIELD_GET(CR0_CMDQEN, x)
-> +#define smmu_cmd_get_command(x)     FIELD_GET(CMDQ_0_OP, x)
-> +
->   /* virtual smmu queue */
->   struct arm_vsmmu_queue {
->       uint64_t    q_base; /* base register */
-> @@ -49,8 +70,80 @@ struct virt_smmu {
->       uint64_t    gerror_irq_cfg0;
->       uint64_t    evtq_irq_cfg0;
->       struct      arm_vsmmu_queue evtq, cmdq;
-> +    spinlock_t  cmd_queue_lock;
->   };
->   
-> +/* Queue manipulation functions */
-> +static bool queue_empty(struct arm_vsmmu_queue *q)
-> +{
-> +    return Q_IDX(q, q->prod) == Q_IDX(q, q->cons) &&
-> +           Q_WRP(q, q->prod) == Q_WRP(q, q->cons);
-> +}
-> +
-> +static void queue_inc_cons(struct arm_vsmmu_queue *q)
-> +{
-> +    uint32_t cons = (Q_WRP(q, q->cons) | Q_IDX(q, q->cons)) + 1;
-> +    q->cons = Q_OVF(q->cons) | Q_WRP(q, cons) | Q_IDX(q, cons);
-> +}
-> +
-> +static void dump_smmu_command(uint64_t *command)
-> +{
-> +    gdprintk(XENLOG_ERR, "cmd 0x%02llx: %016lx %016lx\n",
-> +             smmu_cmd_get_command(command[0]), command[0], command[1]);
-
-I would consider using gprintk() because this could be useful even in 
-non-production build.
-
-> +}
-> +static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
-> +{
-> +    struct arm_vsmmu_queue *q = &smmu->cmdq;
-> +    struct domain *d = smmu->d;
-> +    uint64_t command[CMDQ_ENT_DWORDS];
-> +    paddr_t addr;
-> +
-> +    if ( !smmu_get_cmdq_enabled(smmu->cr[0]) )
-> +        return 0;
-> +
-> +    while ( !queue_empty(q) )
- > +    {> +        int ret;
-> +
-> +        addr = Q_CONS_ENT(q);
-> +        ret = access_guest_memory_by_gpa(d, addr, command,
-> +                                         sizeof(command), false);
-> +        if ( ret )
-> +            return ret;
-> +
-> +        switch ( smmu_cmd_get_command(command[0]) )
-> +        {
-> +        case CMDQ_OP_CFGI_STE:
-> +            break;
-> +        case CMDQ_OP_PREFETCH_CFG:
-> +        case CMDQ_OP_CFGI_CD:
-> +        case CMDQ_OP_CFGI_CD_ALL:
-> +        case CMDQ_OP_CFGI_ALL:
-> +        case CMDQ_OP_CMD_SYNC:
-
-Is this empty because there is nothing to do? Or is this empty because 
-they are not yet implemented?
-
-> +            break;
-> +        case CMDQ_OP_TLBI_NH_ASID:
-> +        case CMDQ_OP_TLBI_NSNH_ALL:
-> +        case CMDQ_OP_TLBI_NH_VA:
-> +            if ( !iommu_iotlb_flush_all(smmu->d, 1) )
-
-This is quite a bigger hammer when the guest may only want to flush the 
-S1 TLB for a single device. I am ok for now, but it would be good to add 
-a TODO for optimizing it.
-
-> +                break;
-> +        default:
-> +            gdprintk(XENLOG_ERR, "vSMMUv3: unhandled command\n");
-> +            dump_smmu_command(command);
-> +            break;
-> +        }
-> +
-> +        if ( ret )
-> +        {
-> +            gdprintk(XENLOG_ERR,
-> +                     "vSMMUv3: command error %d while handling command\n",
-> +                     ret);
-> +            dump_smmu_command(command);
-> +        }
-> +        queue_inc_cons(q);
-> +    }
-> +    return 0;
-> +}
-> +
->   static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
->                                 register_t r, void *priv)
+> @@ -105,6 +105,9 @@ void __init vsmmuv3_set_type(void)
 >   {
-> @@ -104,9 +197,15 @@ static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
->           break;
+>       const struct viommu_desc *desc = &vsmmuv3_desc;
 >   
->       case VREG32(ARM_SMMU_CMDQ_PROD):
-> +        spin_lock(&smmu->cmd_queue_lock);
->           reg32 = smmu->cmdq.prod;
->           vreg_reg32_update(&reg32, r, info);
->           smmu->cmdq.prod = reg32;
-> +
-> +        if ( arm_vsmmu_handle_cmds(smmu) )
-> +            gdprintk(XENLOG_ERR, "error handling vSMMUv3 commands\n");
-> +
-> +        spin_unlock(&smmu->cmd_queue_lock);
->           break;
->   
->       case VREG32(ARM_SMMU_CMDQ_CONS):
-> @@ -326,6 +425,8 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr, paddr_t size)
->       smmu->evtq.q_base = FIELD_PREP(Q_BASE_LOG2SIZE, SMMU_EVTQS);
->       smmu->evtq.ent_size = EVTQ_ENT_DWORDS * DWORDS_BYTES;
->   
-> +    spin_lock_init(&smmu->cmd_queue_lock);
-> +
->       register_mmio_handler(d, &vsmmuv3_mmio_handler, addr, size, smmu);
->   
->       /* Register the vIOMMU to be able to clean it up later. */
+> +    if ( !is_viommu_enabled() )
+
+This is likely going to go wrong in the future if we add support for 
+other vIOMMU in the future. If we decide to continue using the command 
+line option (see above), you would want want an helper to return the 
+selected emulation and check against SMMUv3 here.
 
 Cheers,
 
