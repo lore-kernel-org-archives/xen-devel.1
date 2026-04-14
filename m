@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 011CDF9D0F7
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 20:24:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282079.1564748 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E8DF9D0F1
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 20:24:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282087.1564784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJD-0004zD-Jo; Tue, 14 Apr 2026 20:24:31 +0000
+	id 1wCkJT-00063O-Kp; Tue, 14 Apr 2026 20:24:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282079.1564748; Tue, 14 Apr 2026 20:24:31 +0000
+Received: by outflank-mailman (output) from mailman id 1282087.1564784; Tue, 14 Apr 2026 20:24:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJD-0004z6-Gs; Tue, 14 Apr 2026 20:24:31 +0000
-Received: by outflank-mailman (input) for mailman id 1282079;
- Tue, 14 Apr 2026 20:24:29 +0000
+	id 1wCkJT-00063D-Gw; Tue, 14 Apr 2026 20:24:47 +0000
+Received: by outflank-mailman (input) for mailman id 1282087;
+ Tue, 14 Apr 2026 20:24:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1wCkJB-0004z0-SP
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 20:24:29 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJS-0005oE-5y
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 20:24:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJB-001nSu-0Z;
- Tue, 14 Apr 2026 20:24:29 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJM-001nTQ-1v;
+ Tue, 14 Apr 2026 20:24:40 +0000
 Received: from [2a02:8012:3a1:0:6452:fdce:8dbd:9a39]
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJA-0036wi-36;
- Tue, 14 Apr 2026 20:24:29 +0000
+ (envelope-from <julien@xen.org>) id 1wCkJM-0036wi-1G;
+ Tue, 14 Apr 2026 20:24:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,74 +44,78 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=JVdik3zfubZEJqj2xS+6s9d1Kw5jWMMJH4KgQvL21Oc=; b=YAcauW58vGNSbNj9xQqUAK1Z3q
-	LBQn16esHGukWatzeK1GO5mLpcW6f6PO7lNyqhkNKoK2OB6xO0/EF10kaCknxL6x/X80dGVNS3koe
-	1BFMeHqpKygjAu4eJ8nfF8gQjNFvzgjVo9BGTIqt0XNsou4PGPCzgR+ue0mrwxiLulDo=;
-Message-ID: <f92207ec-0f7a-464e-93a9-e0e9ee3a2cfa@xen.org>
-Date: Tue, 14 Apr 2026 15:06:42 +0900
+	bh=hM9fqT/J7mb5lZTQsjxgjpy1ycoQF+7u90mM95CalWM=; b=Dm8u9zuf+yTX0fLInCjfU/PmV2
+	DqZjhx7HaqZmEJBzDsqTredSOH9YuXb9UOuAyQRViXz6wUbLiBanG6nc5zSQMvN8TZ9nZE0Ha2SK6
+	Rfulx3dPGtjWGTZfd/GD4+d6twJM02AXsbULOg07kJPVDCoLqYBus/IJnx4tXzk8rmPM=;
+Message-ID: <75f9ccb1-e7e8-419c-9359-7779c5662a02@xen.org>
+Date: Tue, 14 Apr 2026 15:26:14 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/23] xen/arm: smmuv3: Alloc io_domain for each device
+Subject: Re: [PATCH v1 02/27] xen/riscv: Implement construct_domain()
 Content-Language: en-GB
-To: Milan Djokic <milan_djokic@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Rahul Singh <rahul.singh@arm.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1774918270.git.milan_djokic@epam.com>
- <78e4f2e2c68cdb75aa1c0dd7e8b456c03aa2fe6f.1774918270.git.milan_djokic@epam.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
+ <3a86599284108e6f2a27488a03145f8dd1b71def.1773157782.git.oleksii.kurochko@gmail.com>
+ <cd1fa52a-0ff2-4b7f-9b0b-c33b6a01b6c8@suse.com>
+ <95fc62d9-cfd4-4b75-a9b0-7e90c9ba1095@gmail.com>
+ <c3e20570-6dbf-4dd9-86de-d334e0f71f3a@suse.com>
+ <2926ad08-39c8-4559-bb40-7231c69d9a65@gmail.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <78e4f2e2c68cdb75aa1c0dd7e8b456c03aa2fe6f.1774918270.git.milan_djokic@epam.com>
+In-Reply-To: <2926ad08-39c8-4559-bb40-7231c69d9a65@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Milan,
+Hi,
 
-On 31/03/2026 10:52, Milan Djokic wrote:
-> From: Rahul Singh <rahul.singh@arm.com>
+On 09/04/2026 22:39, Oleksii Kurochko wrote:
+>>>>> +    BUG_ON(v->is_initialised);
+>>>>> +
+>>>>> +    kernel_load(kinfo);
+>>>>> +    initrd_load(kinfo, copy_to_guest_phys);
+>>>>> +    dtb_load(kinfo, copy_to_guest_phys);
+>>>> These all return void, despite this also being used for non-Dom0. Is it
+>>>> really fatal to a dom0less system if one out of many domains fail to be
+>>>> built?
+>>> For a dom0less system, my opinion is that it should not be fatal, it
+>>> should simply ignore a domain that fails to build and continue with the
+>>> rest. However, with the current common dom0less code it will just
+>>> panic(). This is a behavior I would like to change and it is on my TODO
+>>> list.
+>>>
+>>> Regarding the functions returning void, this is because all of them
+>>> currently call panic() on failure, which I expect will need to change in
+>>> order to ignore a domain that fails to build in dom0less mode.
+>>>
+>>> For the current implementation of the common dom0less code this is fine,
+>>> but I agree it should be addressed in a separate patch series.
+>>>
+>>>    Especially when, despite the name, there is a Dom0?
+>>>
+>>> For this case, a failure there should indeed be fatal, so panic() is
+>>> appropriate.
+>> I think you misunderstood. I wasn't referring to the building of Dom0
+>> failing. Was rather emphasizing that when there is a Dom0, failure to
+>> create a DomU likely should even less so be fatal, as Dom0 could later
+>> rectify the situation.
 > 
-> In current implementation io_domain is allocated once for each xen
-> domain as Stage2 translation is common for all devices in same xen
-> domain.
-> 
-> Nested stage supports S1 and S2 configuration at the same time. Stage1
-> translation will be different for each device as linux kernel will
-> allocate page-table for each device.
-> 
-> Alloc io_domain for each device so that each device can have different
-> Stage-1 and Stage-2 configuration structure.
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
-> ---
->   xen/drivers/passthrough/arm/smmu-v3.c | 13 +++++++++++--
->   1 file changed, 11 insertions(+), 2 deletions(-)
-> 
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index f9c6837919..19e55b6c9b 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -2809,11 +2809,13 @@ static struct arm_smmu_device *arm_smmu_get_by_dev(const struct device *dev)
->   static struct iommu_domain *arm_smmu_get_domain(struct domain *d,
->   				struct device *dev)
->   {
-> +	unsigned long flags;
+> Oh, okay, then it is really less fatal if DomU creation will fail in the 
+> case of Dom0.
 
-In Xen, we are trying to limit the scope of local variables. AFAICT, 
-this is only used within the loop below. So this can be defined later. 
-Same ...
+I am not sure I agree with this statement. The goal of dom0less is to 
+not have a dom0 at all. So there is no way to rectify after the fact.
 
->   	struct iommu_domain *io_domain;
->   	struct arm_smmu_domain *smmu_domain;
->   	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
->   	struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
->   	struct arm_smmu_device *smmu = arm_smmu_get_by_dev(fwspec->iommu_dev);
-> +	struct arm_smmu_master *master;
-
-... here. Also, AFAICT, ``master`` is not meant ot be modified. So 
-shouldn't this be 'const'?
+At least on Arm, we took the stance that boot failures are fatal because 
+this is a clear signal that something went wrong. It may be more 
+difficult to notice if you continue to boot.
 
 Cheers,
 
