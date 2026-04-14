@@ -4,52 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 554ECED7B91
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 09:19:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1281498.1564387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FBD4ED7B92
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 09:23:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1281510.1564395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCZuv-00022x-QZ; Tue, 14 Apr 2026 09:18:45 +0000
+	id 1wCZz6-0003bs-DQ; Tue, 14 Apr 2026 09:23:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1281498.1564387; Tue, 14 Apr 2026 09:18:45 +0000
+Received: by outflank-mailman (output) from mailman id 1281510.1564395; Tue, 14 Apr 2026 09:23:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCZuv-00022q-ND; Tue, 14 Apr 2026 09:18:45 +0000
-Received: by outflank-mailman (input) for mailman id 1281498;
- Tue, 14 Apr 2026 09:18:44 +0000
+	id 1wCZz6-0003bl-AU; Tue, 14 Apr 2026 09:23:04 +0000
+Received: by outflank-mailman (input) for mailman id 1281510;
+ Tue, 14 Apr 2026 09:23:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1wCZuu-00022k-7h
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 09:18:44 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wCZz4-0003bf-KI
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 09:23:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wCZus-00FhFb-Re
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 11:18:42 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wCZz4-008mOs-05
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 11:23:02 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 69de0668-bab6-0a2a0a5309dd-0a2a4501b2c6-46
- for <xen-devel@lists.xenproject.org>; Tue, 14 Apr 2026 11:18:42 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <berrange@redhat.com>)
- id 69de0671-6fc9-0a2a45010019-aa0a817c78fb-3
- for <xen-devel@lists.xenproject.org>; Tue, 14 Apr 2026 11:18:42 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-651-rTsOmLJ1OXS-Dp8JHnGxGg-1; Tue,
- 14 Apr 2026 05:18:37 -0400
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1B7F3195609E; Tue, 14 Apr 2026 09:18:36 +0000 (UTC)
-Received: from redhat.com (headnet01.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.101])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 603AD195608E; Tue, 14 Apr 2026 09:18:34 +0000 (UTC)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69de076e-e002-0a2a0a5209dd-0a2a450b9aba-44
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Apr 2026 11:23:01 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69de0775-bca8-0a2a450b0019-d1558032d943-3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Apr 2026 11:23:01 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4852b81c73aso50445035e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Apr 2026 02:23:01 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
+ [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488ede1e050sm61093025e9.5.2026.04.14.02.23.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Apr 2026 02:23:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,83 +52,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1776158321;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=OmtXZQeMRh+rctyuoTSEkZL1cxFBhrRFLX3Pl/Sx4gY=;
-	b=iIJKCCw3AccmdxsXljI/a/zzQY6TYsW2MW0mp06h1WARreOc5wQusndsvyWqBL6Oo8cgwT
-	j6xdyJC4h7dvWz66lRjS15asLExcRPalR+axXf+ezndFs2w9WVDL85G3BStP/y78NKg9nv
-	b6VLxhxeiScgPoRVtKYgmzEeQ1eDziY=
-X-MC-Unique: rTsOmLJ1OXS-Dp8JHnGxGg-1
-X-Mimecast-MFC-AGG-ID: rTsOmLJ1OXS-Dp8JHnGxGg_1776158316
-Date: Tue, 14 Apr 2026 10:18:30 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: Thierry Escande <thierry.escande@vates.tech>,
-	xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH v3 2/3] libxl: Allow PCI device passthrough using
- -device Qemu command line
-Message-ID: <ad4GZpUdtbf1I4hA@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20260410150333.1533568-1-thierry.escande@vates.tech>
- <20260410150333.1533568-3-thierry.escande@vates.tech>
- <ece34618-f527-455d-a6fe-c964aa1f4878@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:Content-Language:References:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776158581; x=1776763381; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=gyW1eNfX7+FHuCieG0wIqF5U3m34SVn5rEwevC5SNFQ=;
+        b=mz5nbcFvR2ky6PaaPsNicNpO99AweKfZC7MF/aouf8jhZ2EMSyVVDPmjcdyUSXKBfA
+         U0ddVKil1I/u+SOn4Nn7ivf/f5LC3wPITtC+i/Mxcv1HQuiuGaXQJ7/+HEi+ZsIyS3/C
+         I8GR+9+LSk9EjG40iJ+ibulK9WaGKjumkSifJXr//VqmSEjm0L+QhXPYTFvWLrsrsYP5
+         2Bmh3H5wBLpIsWqi3E4M2N+YZ+gI1un3EN0cyDXbq9isaDnXHtjIoPdyaLkojf2iowv5
+         /lD/L8yYBaoAuyBlR4KXyixcROrNe0eFb5ZYuWcVEpPh4Wxg6UngS18JmU0neKN82ter
+         Qw3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776158581; x=1776763381;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gyW1eNfX7+FHuCieG0wIqF5U3m34SVn5rEwevC5SNFQ=;
+        b=YCOVRb8axZOdq9wVwpbEwmPyuYGlvZxF4pBCMuaO6Sq0HV1RtBSkK80meTHvoReWVO
+         44330ivmxxogkoyucLkFwSSsrwfI2CuVaJ1h0E8cDrD4NCv//+e5wjK6TfJkO5tL9WgM
+         jj5uhBZMAmsUBFt7CfFzh1/GADBXg2tE4fzztQLFf8h9HFtgvQDrtXY7uys8vqOwa0sQ
+         OOoCz79LacXowMKTosfKXCvObxJ3rGxzehPLIEAIeGDeccTGeDS/eXuWdK7lli8ECNXf
+         7vc2qtDy/0iZug/+ZkTOnVhY0j32mhLAV2KIZek9cANb25k9IJCWOFob0RDRLK+J+7ru
+         /j6A==
+X-Forwarded-Encrypted: i=1; AFNElJ/SAnPOCC8hpZPkC2q+pY98xY5kTU9rQxw83SVdvQp5Axk4jb7NB3Xd4ETCjNh8sjIOM/tPg5i+HGE=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyQTglzXUfSy8u3avI+jFVCQIESgD9QAFSeBnlKwVG3pVRMqsaW
+	TG4bCoALO53rpx7JkXIjyOEX/j1vTvXqiQRN/lNBFGALiLHtg0K/Yd3Q
+X-Gm-Gg: AeBDievpj8AhxH98ukhPUN2hwyNCx9oYT7TbxmVK1tzkwF9sL2p7qA32Iv76Opofd+e
+	7AtbQPu5PiZVLvavRTD7SL7EFdEdLcV7o1PsobpEpWDrkpg4kj9VYY4kx1yI6xrHC878iw+jI3m
+	sPa3Hk/reQnhRZUUksZ21TeNsTvVoHB7jF82mwrcgxcQ01dMnm44Z5c0CYvSFukxqk2vf274GwV
+	Wm+mDBcXlsYIcRn16LL0dhm1yydYj52dkDCkjpav4ug903YdYcYKvrK5mQRmPdZxOg98ymASOv7
+	KgfbARTmfEy5Vr3oJKleq1ogW/RxVU6+3IndCz9GNAvQV0HLUImeSgMOLPjUlqgK2cObj7CrVHP
+	Su0EeVxVecc9vJFotgAWwg1rBKJwzGG0Ew02OcE6pMf7ufPtPm00Vub4zWSwb6xTJx4FhK1MALb
+	7LavmqKEE9F5SYAw2a/WTze7x7wNXYZgewm1on4ExGJDcxNVdCf9uhL1VfBLwsc3aUbDmeap/It
+	3nb33mfDHd89GDUhRtAv2e4
+X-Received: by 2002:a05:600c:8b38:b0:488:be58:bb77 with SMTP id 5b1f17b1804b1-488d6890ee3mr206590465e9.30.1776158581098;
+        Tue, 14 Apr 2026 02:23:01 -0700 (PDT)
+Message-ID: <2f555a8b-d058-41ca-80f8-ce3dc08edfbe@gmail.com>
+Date: Tue, 14 Apr 2026 11:22:59 +0200
 MIME-Version: 1.0
-In-Reply-To: <ece34618-f527-455d-a6fe-c964aa1f4878@vates.tech>
-User-Agent: Mutt/2.2.14 (2025-02-20)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: xv42_pn1bDFyYsTJpSaxrf8hxdO54BckhQ3lEAUkun8_1776158316
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1776158322-B78FC185-67B3D50F/0/0
-X-purgate-type: clean
-X-purgate-size: 1688
+User-Agent: Mozilla Thunderbird
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v1 14/27] xen/riscv: introduce per-vCPU IMSIC state
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
+ <8196fa8f000e384af697a44cb3d50ece966e82a7.1773157782.git.oleksii.kurochko@gmail.com>
+ <1f5e262d-da1f-49a2-8e89-87fb714e51bf@suse.com>
+Content-Language: en-US
+In-Reply-To: <1f5e262d-da1f-49a2-8e89-87fb714e51bf@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1776158581-F67C42A1-C14602A6/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5476
 
-On Tue, Apr 14, 2026 at 08:59:52AM +0000, Teddy Astie wrote:
-> Le 10/04/2026 à 17:06, Thierry Escande a écrit :
-> > This change makes use of the new option 'hotplug' for host PCI devices
-> > passthrough'd to the guest. If hotplug=0 is used in the pci device
-> > configuration table, the device will be attached to the guest using the
-> > Qemu command line as '-device xen-pci-passthrough,hostaddr=...'
-> > 
-> > The host device configuration is passed to the -device option as a json
-> > array, just like it's done for hotplug using QMP. The json array is
-> > created by a new internal function libxl__device_pci_get_qmp_json() that
-> > is also used by pci_add_qmp_device_add().
+
+
+On 4/2/26 1:31 PM, Jan Beulich wrote:
+> On 10.03.2026 18:08, Oleksii Kurochko wrote:
+>> Each vCPU interacting with the IMSIC requires state to track the
+>> associated guest interrupt file and its backing context.
+>>
+>> Introduce a per-vCPU structure to hold IMSIC-related state, including
+>> the guest interrupt file identifier and the CPU providing the backing
+>> VS-file. Access to the guest file identifier is protected by a lock.
+>>
+>> Initialize this structure during vCPU setup and store it in arch_vcpu.
+>> The initial state marks the VS-file as software-backed until it becomes
+>> associated with a physical CPU.
+>>
+>> Add helpers to retrieve and update the guest interrupt file identifier.
 > 
-> If (in this specific case) we're not using QMP anymore, I think 
-> libxl__device_pci_get_qmp_json should lose the "qmp" qualification.
-> (unless QEMU also considers JSON-formatted command-line paramters as QMP)
+> Yet again a functions with no callers.
 
-FWIW, from the QEMU POV, 'QMP' refers to the monitor protocol,
-whose specification is defined using the 'QAPI' schema language.
-
-QEMU is increasing enabling use of JSON on the command line, by
-having the CLI args parsed using 'QAPI' visitors. In these cases,
-the 'QAPI' data structures are shared between the command line
-and QMP in most cases.
-
-IOW, in this case, perhaps "qapi_json" is a more accurate name
-than 'qmp_json' if libxl is returning a JSON doc that represents
-an object defined using QAPI.
+They will be called in follow-up patches.
 
 
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+> 
+>> --- a/xen/arch/riscv/imsic.c
+>> +++ b/xen/arch/riscv/imsic.c
+>> @@ -59,6 +59,29 @@ do {                            \
+>>       csr_clear(CSR_SIREG, v);    \
+>>   } while (0)
+>>   
+>> +unsigned int vcpu_guest_file_id(const struct vcpu *v)
+>> +{
+>> +    struct imsic_state *imsic_state = v->arch.imsic_state;
+>> +    unsigned long flags;
+>> +    unsigned int vsfile_id;
+>> +
+>> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+>> +    vsfile_id = imsic_state->guest_file_id;
+>> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+> 
+> What purpose does this locking have? Already ...
+> 
+>> +    return vsfile_id;
+> 
+> ... here the value can be stale, if indeed there is a chance of races.
+> Did you perhaps mean to use ACCESS_ONCE() here and where the value is
+> set?
 
+ACCESS_ONCE() isn't guarantee only compiler re-ordering (as basically it 
+is just volatile-related stuff inisde the macros)?
+
+Generally, I think that that guest_file_id is needed to be updated only 
+during migration of vCPU from one pCPU to another and I expect that 
+during this migration vCPU isn't active, so no one will want to read 
+imsic_state->guest_file_id. But on the other hand, there is:
+   bool imsic_has_interrupt(const struct vcpu *vcpu)
+   {
+   ...
+     /*
+      * The IMSIC SW-file directly injects interrupt via hvip so
+      * only check for interrupt when IMSIC VS-file is being used.
+      */
+
+     read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+     if ( imsic_state->vsfile_pcpu != NR_CPUS )
+         ret = !!(csr_read(CSR_HGEIP) & BIT(imsic_state->guest_file_id, 
+UL));
+     read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+   ...
+   }
+which I think could be called in parallel with with migration, so then 
+still lock are needed.
+
+> 
+>> @@ -315,6 +338,25 @@ static int imsic_parse_node(const struct dt_device_node *node,
+>>       return 0;
+>>   }
+>>   
+>> +int __init vcpu_imsic_init(struct vcpu *v)
+> 
+> __init for a function involved in setting up a vCPU?
+
+Yes, it will be used during creationg of a vCPU.
+
+> 
+>> +{
+>> +    struct imsic_state *imsic_state;
+>> +
+>> +    /* Allocate IMSIC context */
+>> +    imsic_state = xvzalloc(struct imsic_state);
+>> +    if ( !imsic_state )
+>> +        return -ENOMEM;
+>> +
+>> +    v->arch.imsic_state = imsic_state;
+>> +
+>> +    /* Setup IMSIC context  */
+>> +    rwlock_init(&imsic_state->vsfile_lock);
+>> +
+>> +    imsic_state->guest_file_id = imsic_state->vsfile_pcpu = NR_CPUS;
+> 
+> Iirc Misra dislikes such double assignments, so better avoid them right away.
+> (As per a comment at the bottom this may need splitting anyway.)
+> 
+>> --- a/xen/arch/riscv/include/asm/domain.h
+>> +++ b/xen/arch/riscv/include/asm/domain.h
+>> @@ -52,6 +52,8 @@ struct arch_vcpu {
+>>   
+>>       struct vtimer vtimer;
+>>   
+>> +    struct imsic_state *imsic_state;
+> 
+> Just like it's "vtimer", perhaps also "vimsic_state" for both the field
+> and the struct tag?
+
+Makes sense. Lets rename this field and tag.
+
+> 
+>> @@ -64,8 +65,20 @@ struct imsic_config {
+>>       spinlock_t lock;
+>>   };
+>>   
+>> +struct imsic_state {
+>> +    /* IMSIC VS-file */
+>> +    rwlock_t vsfile_lock;
+>> +    unsigned int guest_file_id;
+>> +    /*
+>> +     * (vsfile_pcpu >= 0) => h/w IMSIC VS-file
+>> +     * (vsfile_pcpu == NR_CPUS) => s/w IMSIC SW-file
+>> +     */
+>> +    unsigned long vsfile_pcpu;
+> 
+> And why unsigned long, when unsigned int will do (as about everywhere else
+> for CPU numbers)? That'll also shrink the structure size by 8 bytes.
+
+Originally, IIRC mhartid register is unsigned long, so potentially we 
+could have amount of pCPU up to what fit into unsigned long.
+
+But know I see that AIA limits amount of pCPUs to 16,384 harts. So we 
+could really use unsigned int here.
+
+> 
+> As to the comment - as per vcpu_imsic_init() NR_CPUS also has some special
+> meaning for guest_file_id, yet there's no comment there. How do file ID and
+> NR_CPUS fit together anyway?
+
+Agree, it looks incorrect. I tried to avoid introduction of "#define 
+GIELEN_MAX 64".
+As an option I can use UINT_MAX as init value for guest_file_id or even 
+better just use 0 as it basically means that SW-file should be used.
+
+The idea is that if s/w IMSIC SW-file is used that it doesn't sit on any 
+pCPU, so we should have some marker to show that and NR_CPUS should be fine.
+
+As a result guest_file_id should be init-ed with 0 (and it will be by 
+default as xvzalloc() is used for allocation) and ->vsfile_pcpu inits 
+with NR_CPUS. Also, I will add a comment above guest_file_id.
+
+Thanks.
+
+~ Oleksii
 
