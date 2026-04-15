@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 188B6F419A5
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 13:32:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282449.1565039 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FCAF419A5
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 13:32:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282448.1565029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD0Lw-0000XS-S6; Wed, 15 Apr 2026 13:32:24 +0000
+	id 1wD0Lr-0000Gj-Ko; Wed, 15 Apr 2026 13:32:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282449.1565039; Wed, 15 Apr 2026 13:32:24 +0000
+Received: by outflank-mailman (output) from mailman id 1282448.1565029; Wed, 15 Apr 2026 13:32:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD0Lw-0000XL-PS; Wed, 15 Apr 2026 13:32:24 +0000
-Received: by outflank-mailman (input) for mailman id 1282449;
- Wed, 15 Apr 2026 13:32:22 +0000
+	id 1wD0Lr-0000Gc-Hv; Wed, 15 Apr 2026 13:32:19 +0000
+Received: by outflank-mailman (input) for mailman id 1282448;
+ Wed, 15 Apr 2026 13:32:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69df9364.v1-549f1328209a4bf6a574e4c88ba3cd82@bounce.vates.tech>)
- id 1wD0Lu-0000Vi-R3
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:32:22 +0000
+ <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
+ id 1wD0Lq-0000GL-Or
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:32:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wD0Lu-002WU8-7f
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 15:32:22 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wD0Lq-00DDma-1o
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 15:32:18 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69df9364.v1-549f1328209a4bf6a574e4c88ba3cd82@bounce.vates.tech>)
- id 69df935d-bab6-0a2a0a5309dd-0a2a45068222-44
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:22 +0200
-Received: from [198.2.186.1] (helo=mail186-1.suw21.mandrillapp.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
+ id 69df9357-e002-0a2a0a5209dd-0a2a4501b888-48
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:18 +0200
+Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <bounce-md_30504962.69df9364.v1-549f1328209a4bf6a574e4c88ba3cd82@bounce.vates.tech>)
- id 69df9365-0df0-0a2a45060019-c602ba012713-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:21 +0200
-Received: from pmta10.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail186-1.suw21.mandrillapp.com (Mailchimp) with ESMTP id 4fwhs05lXXzBsV0jL
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:32:20 +0000 (GMT)
+ <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
+ id 69df9360-c1f2-0a2a45010019-c602bb0eba87-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:17 +0200
+Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fwhrw3phtz8XSHSC
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:32:16 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 549f1328209a4bf6a574e4c88ba3cd82; Wed, 15 Apr 2026 13:32:20 +0000
+ 2f204a884a51440aa20c387e5f905bb7; Wed, 15 Apr 2026 13:32:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,257 +55,153 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776259940; x=1776529940;
-	bh=6GgW9zqjU7eafFgo+aMF5dqgD8VnWAi/yFVJIMHbHCg=;
+	s=mte1; t=1776259936; x=1776529936;
+	bh=V1xNEuLkT/UoGYapzOaT2ccLIg+S5oeSeb8h+8Yriq0=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=M/DcqyVjR/cY6vyn1nwNEyOdFK41VqfPRkEf8M2hmsDIRAFT8OsZ/mMoK9FpeSdCu
-	 M4XM5s9vYiVDx7WOixvesMgEEsvJ3iEWNPEn8LAFoUvH2eXy28TGFtJyDiRmxjmaJI
-	 SiuAe+e61IuADQEmQc7TtAUGSyoWO+z2PWz9EnR4XLHjdFDSx0He8zcdVD/pBV7o7u
-	 8+VgCnCQ02WSqJn81P0c7+zRQPJHTKn89PACppphLIRwwDjroL3TQAK/icmlLEDrLU
-	 Fnf1ZH+nWfbnPhD57jfaC4XnPr4ndRFz/NHFxKgtH1tuMFJFsWyNL/69Mnh7wLBxJb
-	 bgxaTo/QXk82w==
+	b=WXZh8Dzd8Jh/HUh0lgwEq2jolZ+EXZZ7ZvGjDjnMle6r3u7Zrw44uVMOCQml9LTay
+	 j3+E734Z/i7cr7aEbZu8QrOq75ZZ8u27s9OPQi3lttmksmCcKgdh/C0zwEOAF3R/x8
+	 EcFhVuDLe7KZS4l+suQkXOJH6FQ5BeY4cjehcHjwQECprEnySKOKoxby4G0hKGFiCI
+	 acGELDQbHM4RFVy1tnccCtM6YIUJXzdrqdJMLZ5TsSck9YqL49VyeJamgPAFEvYpMt
+	 WP0dIuE7bT0d+WSPb+fC4ArvJ6eql1bA0F1y13iZgxDHw2mMUK6wpC92Bh7oXsjcIM
+	 LqVKnwMiAY6Mw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776259940; x=1776520440; i=teddy.astie@vates.tech;
-	bh=6GgW9zqjU7eafFgo+aMF5dqgD8VnWAi/yFVJIMHbHCg=;
+	t=1776259936; x=1776520436; i=teddy.astie@vates.tech;
+	bh=V1xNEuLkT/UoGYapzOaT2ccLIg+S5oeSeb8h+8Yriq0=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=jithJSCaP3cYKzWK9+hoC7D6Nl4asINeWNx5+ssXORJ6d6cfKP2b9rHme4Nl1PnnW
-	 zRsj6HYHAFchkQNHVhBL22Tj+TvmyC/+2/dpX2GEf9anFD1N6HqtMmrxAsTsCpSKFG
-	 S5Oedq0nfY7ebLatQHsX2xq/HN0jr2qskwpSJp2Roc60xhwCF/KZJxta2skzvJU6TN
-	 YUgrgDzLBKUpcT9GBtQodtK4jG8C1EtfU0LoolYWoIrj6rQAaMSpWhQFPO2J7HogEh
-	 4FIcUXORTsJLaUF5Lucy6JUMInZAe+bb/1rZ00JOBqX4zl9koGel8mEonC6I05kDVI
-	 DpWuXF/w4DvLw==
+	b=QqmXDzKPu0zPeEW63cqKXrsHH/05zS9IyAZVmh4ynlQ6NM3HoYbDH7vKPhF2b2hO6
+	 JbAUd+ssbjHpS4jvZ/kGHPnhzeEqmuYLRZV/EjofnYLBwFXgUbQlhaBjTruq5mu4Zz
+	 BaX4mk+Uqlg5OmcorAOMDhndUvYIpKeg9HyKrUgDbA5UDr1YKJUandjrSuayg2SILl
+	 KQu6g0R7buUUn92ddGU3a/luHF2d+YmAqbd8csK/b5AqoMjMqxA3Eemi1zjKoN/WgE
+	 M+JTHsWMg0L4ESL+tSBQ9cUyl73F4HzvrJBoyuc+VQ7XSkAeGjrGcChoQR/RkMM5e3
+	 4GlwhHOp9Bbww==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=204/7]=20x86:=20Set=20v->needs=5Ftlb=5Fflush=20when=20needed?=
+Subject: =?utf-8?Q?[RFC=20PATCH=202/7]=20common:=20Track=20latest=20pCPU=20that=20ran=20the=20vCPU?=
 X-Mailer: git-send-email 2.52.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776259938505
+X-Bm-Transport-Timestamp: 1776259935319
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Jason Andryuk" <jason.andryuk@amd.com>, "Tim Deegan" <tim@xen.org>
-Message-Id: <3415abe736e46b3f36ccb045aa5144a371774fba.1776259594.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Jason Andryuk" <jason.andryuk@amd.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
+Message-Id: <f127344e083d224d2203b83c701375ca15e6368b.1776259594.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1776259594.git.teddy.astie@vates.tech>
 References: <cover.1776259594.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.549f1328209a4bf6a574e4c88ba3cd82?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.2f204a884a51440aa20c387e5f905bb7?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260415:md
-Date: Wed, 15 Apr 2026 13:32:20 +0000
+Date: Wed, 15 Apr 2026 13:32:16 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1776259942-5FB3B3D8-53BADBDA/0/0
+X-purgate-ID: tlsNG-d62444/1776259938-B5E6BFF4-9814C635/0/0
 X-purgate-type: clean
-X-purgate-size: 7788
+X-purgate-size: 3524
 
-Sets v->needs_tlb_flush in where a tlb flush is expected
-to be scheduled on the vCPU.
+Track on which pCPU each vCPU of a domain ran. This will
+be used to know whether a TLB flush is required or not
+when the vCPU is migrated on another pCPU.
 
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
-The goal here is to avoid too much noise in [1], hence it currently
-cohexists with hvm_asid_flush_vcpu(), but [1] will drop
-hvm_asid_flush_vcpu() and only keep needs_tlb_flush.
+I wonder if there is a way to move 
 
-[1] x86/hvm: Transition to needs_tlb_flush logic, use  per-domain ASID
+    curr->domain->latest_vcpu[cpu] = curr->vcpu_id
 
- xen/arch/x86/flushtlb.c        | 4 ++++
- xen/arch/x86/hvm/emulate.c     | 1 +
- xen/arch/x86/hvm/hvm.c         | 1 +
- xen/arch/x86/hvm/svm/svm.c     | 5 +++++
- xen/arch/x86/hvm/vmx/vmcs.c    | 1 +
- xen/arch/x86/hvm/vmx/vmx.c     | 3 +++
- xen/arch/x86/hvm/vmx/vvmx.c    | 1 +
- xen/arch/x86/mm/p2m.c          | 4 ++++
- xen/arch/x86/mm/paging.c       | 1 +
- xen/arch/x86/mm/shadow/multi.c | 1 +
- 10 files changed, 22 insertions(+)
+into a (at least more) common code ?
 
-diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
-index 23721bb52c..8ee2385bba 100644
---- a/xen/arch/x86/flushtlb.c
-+++ b/xen/arch/x86/flushtlb.c
-@@ -324,7 +324,11 @@ unsigned int guest_flush_tlb_flags(const struct domain *d)
- void guest_flush_tlb_mask(const struct domain *d, const cpumask_t *mask)
- {
-     unsigned int flags = guest_flush_tlb_flags(d);
-+    struct vcpu *v;
- 
-     if ( flags )
-         flush_mask(mask, flags);
-+
-+    for_each_vcpu(d, v)
-+        v->needs_tlb_flush = true;
- }
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index f3aae158e9..3bc1d321cc 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2657,6 +2657,7 @@ static int cf_check hvmemul_tlb_op(
-         if ( x86emul_invpcid_type(aux) != X86_INVPCID_INDIV_ADDR )
-         {
-             hvm_asid_flush_vcpu(current);
-+            current->needs_tlb_flush = true;
-             break;
-         }
-         aux = x86emul_invpcid_pcid(aux);
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4a81afce02..0f0b0e242f 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1613,6 +1613,7 @@ int hvm_vcpu_initialise(struct vcpu *v)
-     struct domain *d = v->domain;
- 
-     hvm_asid_flush_vcpu(v);
-+    v->needs_tlb_flush = true;
- 
-     spin_lock_init(&v->arch.hvm.tm_lock);
-     INIT_LIST_HEAD(&v->arch.hvm.tm_list);
+ xen/arch/x86/hvm/svm/svm.c | 3 +++
+ xen/arch/x86/hvm/vmx/vmx.c | 3 +++
+ xen/common/domain.c        | 8 ++++++++
+ xen/include/xen/sched.h    | 4 ++++
+ 4 files changed, 18 insertions(+)
+
 diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 58e927ae04..64c08432fd 100644
+index ced6166847..58e927ae04 100644
 --- a/xen/arch/x86/hvm/svm/svm.c
 +++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -138,6 +138,8 @@ static void cf_check svm_update_guest_cr(
-         {
-             if ( !(flags & HVM_UPDATE_GUEST_CR3_NOFLUSH) )
-                 hvm_asid_flush_vcpu(v);
-+                
-+            v->needs_tlb_flush = true;
-         }
-         else if ( nestedhvm_vmswitch_in_progress(v) )
-             ; /* CR3 switches during VMRUN/VMEXIT do not flush the TLB. */
-@@ -944,6 +946,7 @@ static void noreturn cf_check svm_do_resume(void)
-         hvm_migrate_pirqs(v);
-         /* Migrating to another ASID domain.  Request a new ASID. */
-         hvm_asid_flush_vcpu(v);
-+        v->needs_tlb_flush = true;
-     }
+@@ -967,6 +967,7 @@ void asmlinkage svm_vmenter_helper(void)
+     const struct cpu_user_regs *regs = guest_cpu_user_regs();
+     struct vcpu *curr = current;
+     struct vmcb_struct *vmcb = curr->arch.hvm.svm.vmcb;
++    unsigned int cpu = smp_processor_id();
  
-     if ( !vcpu_guestmode && !vlapic_hw_disabled(vlapic) )
-@@ -2306,6 +2309,8 @@ static void cf_check svm_invlpg(struct vcpu *v, unsigned long linear)
- {
-     /* Safe fallback. Take a new ASID. */
-     hvm_asid_flush_vcpu(v);
-+    /* Schedule a tlb flush on the VCPU. */
-+    v->needs_tlb_flush = true;
- }
+     ASSERT(hvmemul_cache_disabled(curr));
  
- static bool cf_check svm_get_pending_event(
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 8e52ef4d49..4efe13e07f 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -1904,6 +1904,7 @@ void cf_check vmx_do_resume(void)
-         v->arch.hvm.vmx.hostenv_migrated = 1;
+@@ -977,6 +978,8 @@ void asmlinkage svm_vmenter_helper(void)
  
-         hvm_asid_flush_vcpu(v);
-+        v->needs_tlb_flush = true;
-     }
+     svm_sync_vmcb(curr, vmcb_needs_vmsave);
  
-     debug_state = v->domain->debugger_attached
++    curr->domain->latest_vcpu[cpu] = curr->vcpu_id;
++
+     vmcb->rax = regs->rax;
+     vmcb->rip = regs->rip;
+     vmcb->rsp = regs->rsp;
 diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index ec0a790336..0e4f9f9c3d 100644
+index 269ca56433..ec0a790336 100644
 --- a/xen/arch/x86/hvm/vmx/vmx.c
 +++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -1511,6 +1511,7 @@ static void cf_check vmx_handle_cd(struct vcpu *v, unsigned long value)
+@@ -4934,6 +4934,7 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
+     u32 new_asid, old_asid;
+     struct hvm_vcpu_asid *p_asid;
+     bool need_flush;
++    unsigned int cpu = smp_processor_id();
  
-             wbinvd();               /* flush possibly polluted cache */
-             hvm_asid_flush_vcpu(v); /* invalidate memory type cached in TLB */
-+            v->needs_tlb_flush = true; /* invalidate memory type cached in TLB */
-             v->arch.hvm.vmx.cache_mode = CACHE_MODE_NO_FILL;
-         }
-         else
-@@ -1520,6 +1521,7 @@ static void cf_check vmx_handle_cd(struct vcpu *v, unsigned long value)
-             if ( !is_iommu_enabled(v->domain) || iommu_snoop )
-                 vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, VMX_MSR_RW);
-             hvm_asid_flush_vcpu(v); /* no need to flush cache */
-+            v->needs_tlb_flush = true;
-         }
-     }
- }
-@@ -1872,6 +1874,7 @@ static void cf_check vmx_update_guest_cr(
+     ASSERT(hvmemul_cache_disabled(curr));
  
-         if ( !(flags & HVM_UPDATE_GUEST_CR3_NOFLUSH) )
-             hvm_asid_flush_vcpu(v);
-+        v->needs_tlb_flush = true;
-         break;
+@@ -4977,6 +4978,8 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
+     if ( unlikely(need_flush) )
+         vpid_sync_all();
  
-     default:
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index e4cdfe55c1..16d6f1d61b 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1254,6 +1254,7 @@ static void virtual_vmentry(struct cpu_user_regs *regs)
-         if ( nvmx->guest_vpid != new_vpid )
-         {
-             hvm_asid_flush_vcpu_asid(&vcpu_nestedhvm(v).nv_n2asid);
-+            v->needs_tlb_flush = true;
-             nvmx->guest_vpid = new_vpid;
-         }
-     }
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index fddecdf978..910623ac93 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -25,6 +25,7 @@
- #include <asm/p2m.h>
- #include <asm/mem_sharing.h>
- #include <asm/hvm/nestedhvm.h>
-+#include <asm/hvm/vcpu.h>
- #include <asm/altp2m.h>
- #include <asm/vm_event.h>
- #include <xsm/xsm.h>
-@@ -1439,6 +1440,7 @@ p2m_flush(struct vcpu *v, struct p2m_domain *p2m)
-     vcpu_nestedhvm(v).nv_p2m = NULL;
-     p2m_flush_table(p2m);
-     hvm_asid_flush_vcpu(v);
-+    v->needs_tlb_flush = true;
- }
++    currd->latest_vcpu[cpu] = curr->vcpu_id;
++
+     if ( paging_mode_hap(curr->domain) )
+     {
+         struct ept_data *ept = &p2m_get_hostp2m(currd)->ept;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index bb9e210c28..7867166411 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -758,6 +758,7 @@ static void _domain_destroy(struct domain *d)
+     rangeset_domain_destroy(d);
  
- void
-@@ -1498,6 +1500,7 @@ static void assign_np2m(struct vcpu *v, struct p2m_domain *p2m)
- static void nvcpu_flush(struct vcpu *v)
- {
-     hvm_asid_flush_vcpu(v);
-+    v->needs_tlb_flush = true;
-     vcpu_nestedhvm(v).stale_np2m = true;
- }
+     free_cpumask_var(d->dirty_cpumask);
++    xfree(d->latest_vcpu);
  
-@@ -1618,6 +1621,7 @@ void np2m_schedule(int dir)
-             {
-                 /* This vCPU's np2m was flushed while it was not runnable */
-                 hvm_asid_flush_core();
-+                curr->needs_tlb_flush = true;
-                 vcpu_nestedhvm(curr).nv_p2m = NULL;
-             }
-             else
-diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-index 2396f81ad5..b0b3bef753 100644
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -939,6 +939,7 @@ void paging_update_nestedmode(struct vcpu *v)
-         /* TODO: shadow-on-shadow */
-         v->arch.paging.nestedmode = NULL;
-     hvm_asid_flush_vcpu(v);
-+    v->needs_tlb_flush = true;
- }
+     xsm_free_security_domain(d);
  
- int __init paging_set_allocation(struct domain *d, unsigned int pages,
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index 80cd3299fa..2df2842138 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -3165,6 +3165,7 @@ sh_update_linear_entries(struct vcpu *v)
-      * without this change, it would fetch the wrong value due to a stale TLB.
-      */
-     sh_flush_local(d);
-+    v->needs_tlb_flush = true;
- }
+@@ -992,6 +993,13 @@ struct domain *domain_create(domid_t domid,
+     if ( !zalloc_cpumask_var(&d->dirty_cpumask) )
+         goto fail;
  
- static pagetable_t cf_check sh_update_cr3(struct vcpu *v, bool noflush)
++    err = -ENOMEM;
++    d->latest_vcpu = xmalloc_array(int, nr_cpu_ids);
++    if ( !d->latest_vcpu )
++        goto fail;
++    for (unsigned int i = 0; i < nr_cpu_ids; i++)
++        d->latest_vcpu[i] = -1;
++
+     rangeset_domain_initialise(d);
+ 
+     if ( is_idle_domain(d) )
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 212c7d765c..4b8ae21b51 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -567,6 +567,10 @@ struct domain
+     /* Bitmask of CPUs which are holding onto this domain's state. */
+     cpumask_var_t    dirty_cpumask;
+ 
++    /* Mapping of the latest vCPU that ran on a specific CPU
++     * (-1 if the vCPU hasn't ran yet) */
++    int *latest_vcpu;
++
+     struct arch_domain arch;
+ 
+     void *ssid; /* sHype security subject identifier */
 -- 
 2.52.0
 
