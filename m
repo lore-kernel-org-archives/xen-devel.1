@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0792F42100
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 17:40:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282686.1565208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18203F419B9
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 17:46:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282694.1565216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD4E2-0000GT-MY; Wed, 15 Apr 2026 17:40:30 +0000
+	id 1wD4JG-0000pD-7o; Wed, 15 Apr 2026 17:45:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282686.1565208; Wed, 15 Apr 2026 17:40:30 +0000
+Received: by outflank-mailman (output) from mailman id 1282694.1565216; Wed, 15 Apr 2026 17:45:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD4E2-0000GK-I8; Wed, 15 Apr 2026 17:40:30 +0000
-Received: by outflank-mailman (input) for mailman id 1282686;
- Wed, 15 Apr 2026 17:40:29 +0000
+	id 1wD4JG-0000p6-4M; Wed, 15 Apr 2026 17:45:54 +0000
+Received: by outflank-mailman (input) for mailman id 1282694;
+ Wed, 15 Apr 2026 17:45:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wD4E1-0000GE-JY
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 17:40:29 +0000
+ (envelope-from <bernhard.kaindl@citrix.com>) id 1wD4JF-0000oy-CK
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 17:45:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wD4Dz-003782-LH
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 19:40:28 +0200
+ id 1wD4JE-00Dvab-Ly
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 19:45:52 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69dfcd69-5cb7-0a2a0a5109dd-0a2a4505cabe-42
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 19:40:27 +0200
-Received: from [202.12.124.157] (helo=fhigh-b6-smtp.messagingengine.com)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 69dfceaf-2eae-0a2a0a5409dd-0a2a4505d5e0-30
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 19:45:52 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69dfcd89-3760-0a2a45050019-ca0c7c9dd7e7-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 19:40:26 +0200
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 600147A0227;
- Wed, 15 Apr 2026 13:40:25 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Wed, 15 Apr 2026 13:40:25 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 15 Apr 2026 13:40:22 -0400 (EDT)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 69dfcecf-3760-0a2a45050019-a06583098b08-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 19:45:52 +0200
+Received: from debian.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 7B8CB81C0CF2;
+ Wed, 15 Apr 2026 13:44:57 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,199 +48,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1776274825;
-	 x=1776361225; bh=s3XtCFscdlXN7iNA/z6lXwyh+C6EF+xDAafKYuN191g=; b=
-	h7XYXW5ohqP5fTkawCmdoTKM8FMi/Xi5tiSorkwnL8Jp2qBWOKRNJvmL6MygEZgC
-	HsZy+yFoToa2ux+am/Z+q/bLY5FTCa8wddjA2vPSSCMq+NqVMZ5ihorhsnNbu0ct
-	Bn002wlTEt9ng3tCQ7hjgU2oqsFLChvuZN+wpPWn6bTCgdl/4lhQT87IAVgcG9JG
-	C5THSo+8DStYWUPgSKxLZF0MlSTcgG1GtX8qmQcloqo7f4gdkt0vY2+A6/nasZai
-	tF+tTseWmUR4GNdQfjTqfDSxro6lQBG1MU5p1WA8Os6o9Z752bGJKn6H5GjIigZp
-	Bwg9yz/h0iHyjj8MjzLcXQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1776274825; x=1776361225; bh=s3XtCFscdlXN7iNA/z6lXwyh+C6EF+xDAaf
-	KYuN191g=; b=SEt6Iq+Ej6w9OLnQhoiDNtpyx8BFOKXrGkJNy80UG5UEuqGugH4
-	U810k5YOMdmY9Rq9xzbMffeOf071wKb0p35xKCnhYzVL1blUiTkAUtzJi9O4iLHw
-	/fQFHG/PrFsImSV+z2Vm/qOiiHeQNrT9yHBjhv/TtLGkAUoDj+Ldjw2u9a8/3FWT
-	6+0YWo3+Ma/s/jQFwkq9OHhvePEC8p/tDu1J7PPfLkSMU86LLTRmELhyx6UcOno0
-	Kq5vfmat/iLZwHdGGVmH2YIjgmbEnk+BykKctPzUYex/tK91QR3osm3ABv1nG+75
-	AOyySvst3bSerVK6fdync+Te1f52AeZUSDg==
-X-ME-Sender: <xms:iM3fadXs0aa9p0_6BRNzg02-nMToXkSv-mHPOplDu3AX4Zeyy1lECQ>
-    <xme:iM3faUcbssfcSY_rQIMMUa1G3evzFpcj-aZGKnD5Cce0e5kKpfheoXNlTS1uL5vUK
-    HbjbwTe2AUDmZpbCjR1gP8EzXB9OD9b9WF90_a80Y_Q1_oL2g>
-X-ME-Received: <xmr:iM3faRv63WXyWLAmC9PDb8ryYUvgsNdjItIHiDWwbNLAbNvR7tz0yyDeqlL_>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdeggeejudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghkucfo
-    rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
-    hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeehfeejueej
-    teefhedtgfefhfdugeehgfektdejieejteekuddtgefhudekfefggfenucffohhmrghinh
-    epkhgvrhhnvghlrdhorhhgpdhgihhtlhgrsgdrtghomhdpvhgrthgvshdrthgvtghhnecu
-    vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrg
-    hrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthht
-    ohephedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoheprghnthhhohhnhidrphgvrh
-    grrhgusehvrghtvghsrdhtvggthhdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhs
-    thhsrdigvghnphhrohhjvggtthdrohhrghdprhgtphhtthhopegrnhgurhgvfidrtghooh
-    hpvghrfeestghithhrihigrdgtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhnihes
-    khgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhoghgvrhdrphgruhestghithhrihigrd
-    gtohhm
-X-ME-Proxy: <xmx:iM3fab_pvE5qqMs6CdShS1KQ_4oIlH_rRWLKRyIW6khiYV3l4sEOXQ>
-    <xmx:iM3faU3dmpPzC1WGJr7inZksqyHEG3dHGYH4A6hdlmyyZSjFsAMPyg>
-    <xmx:iM3faYDBu8heSzI1NfmoVm52GGY8cp1L0u-Zlo-SQW559ohsH2xDJw>
-    <xmx:iM3faYerA-DpAB81opqHZltx5kbd8QFbvwRdyWvWWiIVBkrLpeezfw>
-    <xmx:ic3faWmfx19u_xFrs3SrGCMpPFF5ZJWzlkcnUjKC6QSN_IjhBhLkYsDL>
-Feedback-ID: i1568416f:Fastmail
-Date: Wed, 15 Apr 2026 19:40:19 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v3 09/13] Add trigger-test job, to run
- test on a Linux built from a branch/tag
-Message-ID: <ad_Ng5TryP3Nj6em@mail-itl>
-References: <cover.bd2e5bd58e4b316c9c1042b1ca8db51b81fb7ea7.1774999132.git-series.marmarek@invisiblethingslab.com>
- <9893108225500bb841a39918942bc9267e62b6af.1774999132.git-series.marmarek@invisiblethingslab.com>
- <ad-WTdnAdOzcUkze@l14>
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 0/4] xen/mm: Host-side unit/integration test framework for page_alloc.c
+Date: Wed, 15 Apr 2026 18:34:55 +0100
+Message-Id: <cover.1776273656.git.bernhard.kaindl@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="CaGGDZKULuvCeH9e"
-Content-Disposition: inline
-In-Reply-To: <ad-WTdnAdOzcUkze@l14>
-X-purgate-ID: tlsNG-c201ff/1776274827-2292196F-228500A5/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1776275152-21B3896F-8A0D6962/0/0
 X-purgate-type: clean
-X-purgate-size: 4409
+X-purgate-size: 4597
 
+Hi all,
 
---CaGGDZKULuvCeH9e
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 15 Apr 2026 19:40:19 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v3 09/13] Add trigger-test job, to run
- test on a Linux built from a branch/tag
+This patch series adds a host-side unit and integration test framework
+for the Xen page allocator in xen/common/page_alloc.c.
 
-On Wed, Apr 15, 2026 at 01:44:47PM +0000, Anthony PERARD wrote:
-> On Wed, Apr 01, 2026 at 01:21:59AM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > When scheduling pipeline in test-artifacts repo, it can get also
-> > TEST_TRIGGER_REPO and TEST_TRIGGER_BRANCH variables, to trigger relevant
-> > pipeline to test just built artifacts.
-> > Pass ARTIFACTS_REPO+ARTIFACTS_BRANCH to the child pipeline to ensure it
-> > fetches artifacts from the right job.
-> > For example, to build linux-next and test Xen staging on it, the
-> > pipeline could be triggered with:
-> >
-> >     LINUX_GIT_URL=3Dhttps://git.kernel.org/pub/scm/linux/kernel/git/nex=
-t/linux-next.git
-> >     LINUX_GIT_VERSION=3Dmaster
-> >     TEST_TRIGGER_REPO=3Dxen-project/hardware/xen
-> >     TEST_TRIGGER_BRANCH=3Dstaging
-> >
-> > The triggered xen test pipeline will skip most build jobs.
-> >
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
->=20
-> You might want to add that this depends on two patch for the xen repo,
-> for the trigger to do the expected tests:
->     CI: make test-artifacts repo/branch/job customizable
->     ci: introduce BUILD_FOR_TESTS_ONLY
->=20
-> > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > index 62b2a24e7faf..9d90a8f57ff8 100644
-> > --- a/.gitlab-ci.yml
-> > +++ b/.gitlab-ci.yml
-> > @@ -105,3 +110,18 @@ linux-git-x86_64:
-> >  microcode-x86:
-> >    extends: .x86_64-artifacts
-> >    script: ./scripts/x86-microcode.sh
-> > +
-> > +trigger-test:
-> > +  stage: deploy
-> > +  trigger:
-> > +    project: $TEST_TRIGGER_REPO
-> > +    branch: $TEST_TRIGGER_BRANCH
-> > +    strategy: mirror
-> > +  variables:
-> > +    ARTIFACTS_REPO: $CI_PROJECT_PATH
-> > +    ARTIFACTS_BRANCH: $CI_COMMIT_REF_NAME
-> > +    LINUX_JOB_X86_64: linux-git-x86_64
-> > +    LINUX_JOB_ARM64: linux-git-arm64
-> > +    BUILD_FOR_TESTS_ONLY: 1
->=20
-> Can we add this?
->   inherit:
->     variables: false
->=20
-> Otherwise, as I understand, the triggered pipeline will also use the
-> global variables, like TEST_TRIGGER_REPO, LINUX_GIT_VERSION, ... Or I
-> could be wrong because we don't set a default value and the are only
-> manual/scheduled pipeline variable.
->=20
-> https://docs.gitlab.com/ci/yaml/#trigger
-> > CI/CD variables defined in a top-level variables section (globally) or
-> > in the trigger job are forwarded to the downstream pipeline as trigger
-> > variables.
->=20
-> https://docs.gitlab.com/ci/pipelines/downstream_pipelines/#prevent-defaul=
-t-variables-from-being-passed
+Using this framework, it also adds a host-side integration test suite
+for memory claims, including NUMA-aware claim sets.
 
-Hm, yes, inherit:variables:false might be needed if we'd want to avoid
-passing those variables. But, TBH I'm not sure if we want to avoid that
-- it might be useful at some point to get LINUX_GIT_VERSION there, for
-example.=20
+This test suite complements the functional system tests submitted as
+part of the NUMA-aware claims v6 series yesterday.
 
-> I'm not sure if the inherit:variables:false is needed, so:
-> Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
->=20
-> Thanks,
->=20
->=20
-> --
-> Anthony Perard | Vates XCP-ng Developer
->=20
-> XCP-ng & Xen Orchestra - Vates solutions
->=20
-> web: https://vates.tech
->=20
->=20
+The purpose is to verify the behaviour of the page allocator when
+multi-node claim sets are present in situations that are easier to
+create and validate in isolation, with full control over a synthetic
+Xen heap state and visibility into the claim state of domains as
+claims are made and redeemed through heap allocation.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+This series depends on the NUMA claims v6 series, which introduced
+NUMA-aware claim sets which I submitted yesterday:
 
---CaGGDZKULuvCeH9e
-Content-Type: application/pgp-signature; name=signature.asc
+[PATCH v6 0/7] xen/mm: Introduce NUMA-aware claim sets for domains
+https://lists.xen.org/archives/html/xen-devel/2026-04/msg00587.html
+https://patchwork.kernel.org/project/xen-devel/list/?series=1081139
 
------BEGIN PGP SIGNATURE-----
+Its design is described in this design document submitted yesterday:
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmnfzYMACgkQ24/THMrX
-1yx8Xwf/XSWAbi0mIjPs1NEu6gFMy2T5CYBtFs5hZkffz7lLVAKUbS5PHBLsMBKh
-98gCov1nT1b9ZYVhEB/0fDjhMF4LyQNOhD/flAkcBR/iLSaz9jftt9u0qdeXRBjx
-FBTSxsLT4NvthLgUB+hcFJfGY2/2IWsznVTLkg58UnLnCEiLyie7ovMbHTRgvN2H
-C+a5+4YrnCEU6XdLRDSYmMEhcgmZZQKybGZgy7i8+68zrJT85CL33yElh4W0jhja
-1mFVrOYHz4ZlHVti4HYF8TILSF5ck8L3mmW9NHiL2VQ1ZEz6YTiBmGgOHUL/CJYF
-A/VFCVCHiAM4UJM24XtD6TE+mzLigw==
-=qeFz
------END PGP SIGNATURE-----
+[PATCH v2] docs: Draft Design Document for NUMA-aware claim sets
+https://lists.xen.org/archives/html/xen-devel/2026-04/msg00569.html
+https://patchwork.kernel.org/project/xen-devel/list/?series=1081047
 
---CaGGDZKULuvCeH9e--
+Patch summary:
+
+1. tools/tests/alloc: Add test framework for xen/common/page_alloc.c
+2. tools/tests/alloc: Add integration tests for claims and claim sets
+3. tools/tests/alloc: Add tests for offlining with claims present
+4. xen/mm: Fix recalling claims when offlining pages if needed
+
+Thanks,
+
+  Bernhard Kaindl
+
+---
+PS: The bug fixed in the last commit of this series affects global
+outstanding claims as implemented in current Xen master as well.
+
+However, this only arises when Xen offlines pages. Page offlining
+code in current Xen still has known limitations, particularly when
+offlining pages from larger buddies, and should be avoided in the
+interest of heap integrity.
+
+That said, this test framework makes it possible to run targeted
+test cases on a synthetic Xen heap and observe logged changes
+to the heap during page offlining.
+
+That should make further offlining fixes easier to validate, both by
+checking the test results and by inspecting the resulting heap state.
+
+If you are interested in that, the next series will add a test suite
+for offlining pages using this test framework. That should make it
+possible to observe the effects of the bugs and the corresponding
+fixes on any machine able to compile Xen source code.
+
+Bernhard Kaindl (4):
+  tools/tests/alloc: Unit and Integration Test Framework for
+    page_alloc.c
+  tools/tests/alloc: Add integration test suite for memory claims
+  tools/tests/alloc: Add tests for offlining with claims present
+  xen/mm: Recall claims when offlining pages if needed
+
+ tools/tests/Makefile                        |   1 +
+ tools/tests/alloc/.gitignore                |   6 +
+ tools/tests/alloc/Makefile                  | 141 ++++++
+ tools/tests/alloc/README.rst                |  31 ++
+ tools/tests/alloc/check-asserts.h           | 347 +++++++++++++++
+ tools/tests/alloc/harness.h                 |  69 +++
+ tools/tests/alloc/hypervisor-macros.h       | 101 +++++
+ tools/tests/alloc/libtest-page_alloc.h      | 356 +++++++++++++++
+ tools/tests/alloc/mock-page_list.h          | 307 +++++++++++++
+ tools/tests/alloc/page_alloc-wrapper.h      | 465 ++++++++++++++++++++
+ tools/tests/alloc/page_alloc_shim.h         | 433 ++++++++++++++++++
+ tools/tests/alloc/test-claims_basic.c       | 230 ++++++++++
+ tools/tests/alloc/test-claims_numa_redeem.c | 201 +++++++++
+ tools/tests/alloc/test-offlining-claims.c   | 102 +++++
+ xen/common/page_alloc.c                     |  42 ++
+ 15 files changed, 2832 insertions(+)
+ create mode 100644 tools/tests/alloc/.gitignore
+ create mode 100644 tools/tests/alloc/Makefile
+ create mode 100644 tools/tests/alloc/README.rst
+ create mode 100644 tools/tests/alloc/check-asserts.h
+ create mode 100644 tools/tests/alloc/harness.h
+ create mode 100644 tools/tests/alloc/hypervisor-macros.h
+ create mode 100644 tools/tests/alloc/libtest-page_alloc.h
+ create mode 100644 tools/tests/alloc/mock-page_list.h
+ create mode 100644 tools/tests/alloc/page_alloc-wrapper.h
+ create mode 100644 tools/tests/alloc/page_alloc_shim.h
+ create mode 100644 tools/tests/alloc/test-claims_basic.c
+ create mode 100644 tools/tests/alloc/test-claims_numa_redeem.c
+ create mode 100644 tools/tests/alloc/test-offlining-claims.c
+
+-- 
+2.39.5
+
 
