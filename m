@@ -4,43 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388D5F41998
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 12:14:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282378.1564975 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0050F4199E
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 12:22:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282390.1564985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCz8Z-000457-8n; Wed, 15 Apr 2026 12:14:31 +0000
+	id 1wCzGW-0005tz-1I; Wed, 15 Apr 2026 12:22:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282378.1564975; Wed, 15 Apr 2026 12:14:31 +0000
+Received: by outflank-mailman (output) from mailman id 1282390.1564985; Wed, 15 Apr 2026 12:22:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCz8Z-000450-69; Wed, 15 Apr 2026 12:14:31 +0000
-Received: by outflank-mailman (input) for mailman id 1282378;
- Wed, 15 Apr 2026 12:14:30 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
- id 1wCz8Y-00044u-BS
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 12:14:30 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wCz8X-00CW1w-OU
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 14:14:29 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
- id 69df8125-2eae-0a2a0a5409dd-0a2a450ca6aa-0
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 14:14:29 +0200
-Received: from [198.2.187.1] (helo=mail187-1.suw11.mandrillapp.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from
- <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
- id 69df8124-f40c-0a2a450c0019-c602bb01cb3a-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 14:14:29 +0200
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-1.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4fwfks5LG6zBsXrPp
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 11:56:53 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 915fc230090640e9a53f57400ec0dcc2; Wed, 15 Apr 2026 11:56:53 +0000
+	id 1wCzGV-0005ts-Up; Wed, 15 Apr 2026 12:22:43 +0000
+Received: by outflank-mailman (input) for mailman id 1282390;
+ Wed, 15 Apr 2026 12:22:43 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1wCzGV-0005tm-0d
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 12:22:43 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1wCzGU-003DMY-06;
+ Wed, 15 Apr 2026 12:22:42 +0000
+Received: from [2a02:8012:3a1:0:6452:fdce:8dbd:9a39]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1wCzGT-0042rr-2b;
+ Wed, 15 Apr 2026 12:22:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,74 +41,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="anthony.perard@vates.tech" header.h="From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776254213; x=1776524213;
-	bh=w7uZ9Pb+etRnkvD6kyJuXnCt2Zq8CjZnHSza/rI5GdI=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=CQHqUMsCz6G6y5IuNR+Sj2zG5LEwONvitxLNgNI3QhjufdiqpbMwzc4UTFkcenuda
-	 dx3c/4uuYk90YHErDBqBXdJCaLGvbejQThiZRslsskyUIBIkKLprHOiXK3M7KqA+uI
-	 RbfLLPJSF2Alse9HnaspqiJPPQxAaGa7kd8KmXHoWcXbhw57aFrGSG8wQgUHJhljTt
-	 E+Bw3wM9919AcSdt8x0BCbRJAnuUWP07LshEYguQoJ13Grmd8GWafXCPvZ2I8CkoIh
-	 YmIBLvanAbLcMImEg4cgCwizpY/CSrZz57eXtM1FRSDZNGVEGpFE9ncOqGoEUi6k/z
-	 5Rv3wBa+hny7Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776254213; x=1776514713; i=anthony.perard@vates.tech;
-	bh=w7uZ9Pb+etRnkvD6kyJuXnCt2Zq8CjZnHSza/rI5GdI=;
-	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=T0S1DsUYhLnqa9/Yv0iIocuwYGYX60zgSFOAlpTVSXUEvtT7ih44ubaytqKwM9Vjj
-	 4hNt43RfQ/gNA3zeF32qqP3pUp832EDW+7UGb1paN/bteN7g7LmewWxYmx/UT2VBqq
-	 FGQHEMyVHQAPEai+595Fkhj+6aia1GOiKwVvtWT0N+AAOAiDDbCs7gBqAI7IbjxYH3
-	 crBRKgBpJPkOO7V8zUSlAFuOofZSh5YV3vs0dpuB6Yfsi1AH0mE0R5Ty/MQcW7Jl5A
-	 L3oulOXdlcLiqCx7Ij1IU+7s0/wVah8mteTWg3jvAZjthzD9o6svPnfR/zDKtplQeP
-	 c0Poy23ZtRFjw==
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20test-artifacts=20v3=2004/13]=20Add=20linux-6.12.79-x86=5F64?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776254212591
-To: "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <ad99BL-v7fOAdqH8@l14>
-References: <cover.bd2e5bd58e4b316c9c1042b1ca8db51b81fb7ea7.1774999132.git-series.marmarek@invisiblethingslab.com> <b53df707293f8907f5bb28a6d7380c28236b2637.1774999132.git-series.marmarek@invisiblethingslab.com>
-In-Reply-To: <b53df707293f8907f5bb28a6d7380c28236b2637.1774999132.git-series.marmarek@invisiblethingslab.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.915fc230090640e9a53f57400ec0dcc2?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260415:md
-Date: Wed, 15 Apr 2026 11:56:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=9OxsrBbnph6Lh14GYqegueMdJ+lWozdPjhaBtj9/v4o=; b=3VCHho85Y2SnHT8OuFc2Xm8zE9
+	+9vVQkndkQRQOSFJnu/nVe2y5NvQmvJ7gbQfngTmlDmWm0pQDYXKbwPRnnODzu5a25LVM7E1j/rBM
+	4Gb9qfF+CKOTje041BSgxj5U+ehoCQqXCICXK//x4BLj7mT5segt0FumlDmYsTdp6a4M=;
+Message-ID: <aa00c8d8-f20b-46ab-9a69-039d1016a1b8@xen.org>
+Date: Wed, 15 Apr 2026 13:22:39 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1776255269-FE350A3D-D26C1ADC/0/0
-X-purgate-type: clean
-X-purgate-size: 480
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] xen/dt-overlay: fix double-free of rangesets on
+ attach failure
+Content-Language: en-GB
+To: Gyujeong Jin <wlsrbwjd7232@gmail.com>, Michal Orzel <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>
+References: <20260415113700.107915-1-michal.orzel@amd.com>
+ <20260415113700.107915-2-michal.orzel@amd.com>
+ <CANrF8CEDV5m1Jap0kBoa3sOXD2GV6PAYumfV9rgL2c70nZa=tg@mail.gmail.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <CANrF8CEDV5m1Jap0kBoa3sOXD2GV6PAYumfV9rgL2c70nZa=tg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Apr 01, 2026 at 01:21:54AM +0200, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> +linux-6.12.60-x86_64:
-> +  extends: .x86_64-artifacts
-> +  script: ./scripts/build-linux.sh "6.12.60"
+Hi Gyujeong,
 
-I've got:
-    $ ./scripts/build-linux.sh "6.12.60"
-    LINUX_VERSION must be set
+On 15/04/2026 12:48, Gyujeong Jin wrote:
+> Thanks for your efforts.
+> 
+> I’ve seen some advisories that received cve here.
+> https://xenbits.xen.org/xsa/ <https://xenbits.xen.org/xsa/>
+> 
+> Can I receive a cve for this report?
 
-Linux version want's to be in a env variable, not an argument.
+Thank you for the original report. The security team doesn't issue any 
+CVE when there is no associated XSA.
 
-Cheers,
+Best regards,
 
-
---
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
+-- 
+Julien Grall
 
 
