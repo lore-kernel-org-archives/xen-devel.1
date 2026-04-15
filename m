@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FCAF419A5
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 13:32:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282448.1565029 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D579F419B6
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 13:32:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282456.1565053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD0Lr-0000Gj-Ko; Wed, 15 Apr 2026 13:32:19 +0000
+	id 1wD0M4-0000yz-MS; Wed, 15 Apr 2026 13:32:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282448.1565029; Wed, 15 Apr 2026 13:32:19 +0000
+Received: by outflank-mailman (output) from mailman id 1282456.1565053; Wed, 15 Apr 2026 13:32:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wD0Lr-0000Gc-Hv; Wed, 15 Apr 2026 13:32:19 +0000
-Received: by outflank-mailman (input) for mailman id 1282448;
- Wed, 15 Apr 2026 13:32:18 +0000
+	id 1wD0M4-0000xS-Ix; Wed, 15 Apr 2026 13:32:32 +0000
+Received: by outflank-mailman (input) for mailman id 1282456;
+ Wed, 15 Apr 2026 13:32:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
- id 1wD0Lq-0000GL-Or
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:32:18 +0000
+ <bounce-md_30504962.69df936d.v1-0c12d93e9f5c4829941f2040aaaea336@bounce.vates.tech>)
+ id 1wD0M3-0000rk-IL
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:32:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wD0Lq-00DDma-1o
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 15:32:18 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wD0M2-006OmM-UK
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 15:32:30 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
- id 69df9357-e002-0a2a0a5209dd-0a2a4501b888-48
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:18 +0200
+ <bounce-md_30504962.69df936d.v1-0c12d93e9f5c4829941f2040aaaea336@bounce.vates.tech>)
+ id 69df936d-e002-0a2a0a5209dd-0a2a4508b786-8
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:30 +0200
 Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from
- <bounce-md_30504962.69df9360.v1-2f204a884a51440aa20c387e5f905bb7@bounce.vates.tech>)
- id 69df9360-c1f2-0a2a45010019-c602bb0eba87-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:17 +0200
+ <bounce-md_30504962.69df936d.v1-0c12d93e9f5c4829941f2040aaaea336@bounce.vates.tech>)
+ id 69df936d-fab6-0a2a45080019-c602bb0e6efc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 15:32:30 +0200
 Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
  by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4fwhrw3phtz8XSHSC
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:32:16 +0000 (GMT)
+ 4fwhs93YTkz8XSS6N
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:32:29 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 2f204a884a51440aa20c387e5f905bb7; Wed, 15 Apr 2026 13:32:16 +0000
+ 0c12d93e9f5c4829941f2040aaaea336; Wed, 15 Apr 2026 13:32:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,153 +55,100 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776259936; x=1776529936;
-	bh=V1xNEuLkT/UoGYapzOaT2ccLIg+S5oeSeb8h+8Yriq0=;
+	s=mte1; t=1776259949; x=1776529949;
+	bh=PxrQtMDpZ4zK9NM/vPWDKrs+JHdyCRhp9oAg6MOgvbY=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=WXZh8Dzd8Jh/HUh0lgwEq2jolZ+EXZZ7ZvGjDjnMle6r3u7Zrw44uVMOCQml9LTay
-	 j3+E734Z/i7cr7aEbZu8QrOq75ZZ8u27s9OPQi3lttmksmCcKgdh/C0zwEOAF3R/x8
-	 EcFhVuDLe7KZS4l+suQkXOJH6FQ5BeY4cjehcHjwQECprEnySKOKoxby4G0hKGFiCI
-	 acGELDQbHM4RFVy1tnccCtM6YIUJXzdrqdJMLZ5TsSck9YqL49VyeJamgPAFEvYpMt
-	 WP0dIuE7bT0d+WSPb+fC4ArvJ6eql1bA0F1y13iZgxDHw2mMUK6wpC92Bh7oXsjcIM
-	 LqVKnwMiAY6Mw==
+	b=oVZdRPBp1MTtk98qliB0H0nRsGwTVPFph7/ZjEQ8768eeQDmTSSpYfKFvHrtQcaUa
+	 4uOZj7xW/xq1MqSXcerjQg9gsiAyW5mbPTHDDDkqe0ZC5qpxdPhpmKOvXMNZH5VGgG
+	 dES0Sf3STEa6vMnvcvmd5tEEfnyyYj0MuUlfyobpEtOjYTqL7HvjqFdlF6zLoqjg7w
+	 EMkQKCfjBbh5zlfQ+GXRnfau5rMnHMuoqXQgvdf/siTEMysaQKYFBiGZ6heUKM9hFz
+	 ig2rE/idtKk1q03yMD56Jr0cWowqNZ9kHIm/zBJztOp2/lkR8MBeW/a1hx8AN+sO9T
+	 U1/24lnP1qJVA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776259936; x=1776520436; i=teddy.astie@vates.tech;
-	bh=V1xNEuLkT/UoGYapzOaT2ccLIg+S5oeSeb8h+8Yriq0=;
+	t=1776259949; x=1776520449; i=teddy.astie@vates.tech;
+	bh=PxrQtMDpZ4zK9NM/vPWDKrs+JHdyCRhp9oAg6MOgvbY=;
 	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=QqmXDzKPu0zPeEW63cqKXrsHH/05zS9IyAZVmh4ynlQ6NM3HoYbDH7vKPhF2b2hO6
-	 JbAUd+ssbjHpS4jvZ/kGHPnhzeEqmuYLRZV/EjofnYLBwFXgUbQlhaBjTruq5mu4Zz
-	 BaX4mk+Uqlg5OmcorAOMDhndUvYIpKeg9HyKrUgDbA5UDr1YKJUandjrSuayg2SILl
-	 KQu6g0R7buUUn92ddGU3a/luHF2d+YmAqbd8csK/b5AqoMjMqxA3Eemi1zjKoN/WgE
-	 M+JTHsWMg0L4ESL+tSBQ9cUyl73F4HzvrJBoyuc+VQ7XSkAeGjrGcChoQR/RkMM5e3
-	 4GlwhHOp9Bbww==
+	b=mmEcEjbID8EA1NDPxstRncJDX6FMeMCENCqKnJYaTtJyyqoR/i32ckL1o+Xfor5pH
+	 leYnLEKkPK5G4ORftlm/I0yqLKjBDA0F7zGbCS61tx3D+/MkbztTWv1LqBExPOjKSl
+	 lSsOHKPmg5Le9lO+ZNuDc+G0Wj8a3AmexFd7zRjQ3dO9YyA4gMk0F4t99Ljqd2azIu
+	 ZsUIqy4YN3hyUjL3+CvnNxceBhVtEzmKhJWAem6/oGC2eDv1U+2q35KogEVwEkT7dE
+	 zF3lFgkPZx6p70oqGz92bRn7VEAJ/Ca7L6dKnypK97VBTidmFMxc5/6JpVwyzc9jHx
+	 VMnp0wnAp0vww==
 From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[RFC=20PATCH=202/7]=20common:=20Track=20latest=20pCPU=20that=20ran=20the=20vCPU?=
+Subject: =?utf-8?Q?[RFC=20PATCH=207/7]=20hvm:=20Allow=20specifying=20a=20prefered=20asid=20minimum?=
 X-Mailer: git-send-email 2.52.0
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776259935319
+X-Bm-Transport-Timestamp: 1776259947257
 To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Jason Andryuk" <jason.andryuk@amd.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
-Message-Id: <f127344e083d224d2203b83c701375ca15e6368b.1776259594.git.teddy.astie@vates.tech>
+Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <1603515ebdf6f7b26d5503c99ab5e5e2ac8fe278.1776259595.git.teddy.astie@vates.tech>
 In-Reply-To: <cover.1776259594.git.teddy.astie@vates.tech>
 References: <cover.1776259594.git.teddy.astie@vates.tech>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.2f204a884a51440aa20c387e5f905bb7?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.0c12d93e9f5c4829941f2040aaaea336?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260415:md
-Date: Wed, 15 Apr 2026 13:32:16 +0000
+Date: Wed, 15 Apr 2026 13:32:29 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1776259938-B5E6BFF4-9814C635/0/0
+X-purgate-ID: tlsNG-c1860d/1776259950-75358497-AD69C7F1/0/0
 X-purgate-type: clean
-X-purgate-size: 3524
+X-purgate-size: 1837
 
-Track on which pCPU each vCPU of a domain ran. This will
-be used to know whether a TLB flush is required or not
-when the vCPU is migrated on another pCPU.
+To avoid clobbering all ASIDs that are below SEV-enabled guest maximum,
+we want to allocate if possible all ASID over a "prefered minimum"
+and fallback to below otherwise.
 
 Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 ---
-I wonder if there is a way to move 
+ xen/arch/x86/hvm/asid.c             | 8 ++++++++
+ xen/arch/x86/include/asm/hvm/asid.h | 1 +
+ 2 files changed, 9 insertions(+)
 
-    curr->domain->latest_vcpu[cpu] = curr->vcpu_id
-
-into a (at least more) common code ?
-
- xen/arch/x86/hvm/svm/svm.c | 3 +++
- xen/arch/x86/hvm/vmx/vmx.c | 3 +++
- xen/common/domain.c        | 8 ++++++++
- xen/include/xen/sched.h    | 4 ++++
- 4 files changed, 18 insertions(+)
-
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index ced6166847..58e927ae04 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -967,6 +967,7 @@ void asmlinkage svm_vmenter_helper(void)
-     const struct cpu_user_regs *regs = guest_cpu_user_regs();
-     struct vcpu *curr = current;
-     struct vmcb_struct *vmcb = curr->arch.hvm.svm.vmcb;
-+    unsigned int cpu = smp_processor_id();
- 
-     ASSERT(hvmemul_cache_disabled(curr));
- 
-@@ -977,6 +978,8 @@ void asmlinkage svm_vmenter_helper(void)
- 
-     svm_sync_vmcb(curr, vmcb_needs_vmsave);
- 
-+    curr->domain->latest_vcpu[cpu] = curr->vcpu_id;
+diff --git a/xen/arch/x86/hvm/asid.c b/xen/arch/x86/hvm/asid.c
+index 1a21125161..4ad3200c96 100644
+--- a/xen/arch/x86/hvm/asid.c
++++ b/xen/arch/x86/hvm/asid.c
+@@ -22,6 +22,9 @@ boolean_param("asid", opt_asid_enabled);
+ bool __read_mostly asid_enabled = false;
+ static unsigned long __ro_after_init *asid_bitmap;
+ static unsigned long __ro_after_init asid_count;
 +
-     vmcb->rax = regs->rax;
-     vmcb->rip = regs->rip;
-     vmcb->rsp = regs->rsp;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 269ca56433..ec0a790336 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4934,6 +4934,7 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
-     u32 new_asid, old_asid;
-     struct hvm_vcpu_asid *p_asid;
-     bool need_flush;
-+    unsigned int cpu = smp_processor_id();
++/* Default minimum ASID to use */
++unsigned long __read_mostly asid_default_min = 0;
+ static DEFINE_SPINLOCK(asid_lock);
  
-     ASSERT(hvmemul_cache_disabled(curr));
+ /*
+@@ -67,6 +70,11 @@ int hvm_asid_alloc(struct hvm_asid *asid)
+         return 0;
+     }
  
-@@ -4977,6 +4978,8 @@ bool asmlinkage vmx_vmenter_helper(const struct cpu_user_regs *regs)
-     if ( unlikely(need_flush) )
-         vpid_sync_all();
- 
-+    currd->latest_vcpu[cpu] = curr->vcpu_id;
++    /* Try to allocate above default minimum */
++    if ( asid_default_min &&
++         !hvm_asid_alloc_range(asid, asid_default_min, asid_count) )
++        return 0;
 +
-     if ( paging_mode_hap(curr->domain) )
-     {
-         struct ept_data *ept = &p2m_get_hostp2m(currd)->ept;
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index bb9e210c28..7867166411 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -758,6 +758,7 @@ static void _domain_destroy(struct domain *d)
-     rangeset_domain_destroy(d);
+     spin_lock(&asid_lock);
+     new_asid = find_first_zero_bit(asid_bitmap, asid_count);
+     if ( new_asid > asid_count )
+diff --git a/xen/arch/x86/include/asm/hvm/asid.h b/xen/arch/x86/include/asm/hvm/asid.h
+index 13ea357f70..e989ebbe8c 100644
+--- a/xen/arch/x86/include/asm/hvm/asid.h
++++ b/xen/arch/x86/include/asm/hvm/asid.h
+@@ -16,6 +16,7 @@ struct hvm_asid {
+ };
  
-     free_cpumask_var(d->dirty_cpumask);
-+    xfree(d->latest_vcpu);
+ extern bool asid_enabled;
++extern unsigned long asid_default_min;
  
-     xsm_free_security_domain(d);
- 
-@@ -992,6 +993,13 @@ struct domain *domain_create(domid_t domid,
-     if ( !zalloc_cpumask_var(&d->dirty_cpumask) )
-         goto fail;
- 
-+    err = -ENOMEM;
-+    d->latest_vcpu = xmalloc_array(int, nr_cpu_ids);
-+    if ( !d->latest_vcpu )
-+        goto fail;
-+    for (unsigned int i = 0; i < nr_cpu_ids; i++)
-+        d->latest_vcpu[i] = -1;
-+
-     rangeset_domain_initialise(d);
- 
-     if ( is_idle_domain(d) )
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 212c7d765c..4b8ae21b51 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -567,6 +567,10 @@ struct domain
-     /* Bitmask of CPUs which are holding onto this domain's state. */
-     cpumask_var_t    dirty_cpumask;
- 
-+    /* Mapping of the latest vCPU that ran on a specific CPU
-+     * (-1 if the vCPU hasn't ran yet) */
-+    int *latest_vcpu;
-+
-     struct arch_domain arch;
- 
-     void *ssid; /* sHype security subject identifier */
+ /* Initialise ASID management distributed across all CPUs. */
+ int hvm_asid_init(unsigned long nasids);
 -- 
 2.52.0
 
