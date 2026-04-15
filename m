@@ -4,62 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 857F2F41993
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 11:37:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282281.1564912 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D848F41993
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 11:49:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282343.1564950 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCyYf-0002rD-TK; Wed, 15 Apr 2026 11:37:25 +0000
+	id 1wCyk0-0007Cj-VK; Wed, 15 Apr 2026 11:49:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282281.1564912; Wed, 15 Apr 2026 11:37:25 +0000
+Received: by outflank-mailman (output) from mailman id 1282343.1564950; Wed, 15 Apr 2026 11:49:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCyYf-0002r6-PH; Wed, 15 Apr 2026 11:37:25 +0000
-Received: by outflank-mailman (input) for mailman id 1282281;
- Wed, 15 Apr 2026 11:37:24 +0000
+	id 1wCyk0-0007Cc-Rj; Wed, 15 Apr 2026 11:49:08 +0000
+Received: by outflank-mailman (input) for mailman id 1282343;
+ Wed, 15 Apr 2026 11:49:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wCyYe-0002d0-7r
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 11:37:24 +0000
+ (envelope-from <wlsrbwjd7232@gmail.com>) id 1wCyjz-0007CW-LF
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 11:49:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wCyYd-00EiIN-Kx
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:37:23 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wCyjz-00CsKN-1u
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:49:07 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69df786a-5cb7-0a2a0a5109dd-0a2a4507bd00-42
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:37:23 +0200
-Received: from [40.107.200.54]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
- (envelope-from <Michal.Orzel@amd.com>)
- id 69df7871-ba2d-0a2a45070019-286bc836ac84-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:37:23 +0200
-Received: from BYAPR02CA0043.namprd02.prod.outlook.com (2603:10b6:a03:54::20)
- by LV2PR12MB5824.namprd12.prod.outlook.com (2603:10b6:408:176::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9791.34; Wed, 15 Apr
- 2026 11:37:15 +0000
-Received: from CO1PEPF00012E80.namprd03.prod.outlook.com
- (2603:10b6:a03:54:cafe::6) by BYAPR02CA0043.outlook.office365.com
- (2603:10b6:a03:54::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.49 via Frontend Transport; Wed,
- 15 Apr 2026 11:37:15 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CO1PEPF00012E80.mail.protection.outlook.com (10.167.249.55) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 15 Apr 2026 11:37:15 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 15 Apr
- 2026 06:37:14 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 15 Apr
- 2026 06:37:14 -0500
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Wed, 15 Apr 2026 06:37:13 -0500
+ (envelope-from <wlsrbwjd7232@gmail.com>)
+ id 69df7b28-2eae-0a2a0a5409dd-0a2a450ba75a-32
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:49:07 +0200
+Received: from [74.125.82.52] (helo=mail-dl1-f52.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <wlsrbwjd7232@gmail.com>)
+ id 69df7b31-bca8-0a2a450b0019-4a7d52349400-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:49:06 +0200
+Received: by mail-dl1-f52.google.com with SMTP id
+ a92af1059eb24-12734af2cdcso566794c88.0
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 04:49:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,121 +48,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eIOVP1pq34duUHo5i2GxCl23UlwJTbMy5nxJphsYdCuqdn5dVU0JNcV4098vB59WAHcF0iABR4g3n7QKCNCECPG9bm5wLfoHjeazfJsI5uCqzps8ZgcTHqObFu5hzsp1oxYu2OUce7vJ7sKTVmHkCQ668T7OH2r6ZaTVy5tRpjTl3R0nGQe5YXZLHv4Pk3yKqsWkHHoDfxD5suCJ8qHGtFRseG4JTMaRqIpzYwvl+4svGX8zscAUG0Df5KBkl7Z0Pan37Z5Sg+BacybO4YUG62XbUC1gZeoWOHiUYHmIkK7Jq8mXt3ZhMrfvSLdN+muHzS4AwraLp6XQI2GKoakALQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EZfueW+bKtEtsepdRhebqYHJ0nLM0ZVvpZlJIzZj62s=;
- b=lEaXK0HisMtgZXPLUUFLrynEtYWUmG0WKOV0n4wsrI0XfBw6r1suvNRQ+RQZtofWWwswN6BTa56+qRHveSwRVcG4EbprDDVOffiblIp6qIHbLstJMGvfE73Qi/ppIZTD2gG8loUFpwmtCz1XCGZi+l4k5AmJgZm0kpSVTXdkANs9SlnrBfRN6lq88ePzXr3CbIA7Vf2+Pe/mrxrE99Vv+wQXccvB4QEaPXnIDjEC+G0wtsOSh9PCJn/gnNv9C3JLOEDBppgQ6Y1d5baMzTQG0QxRtBpTh9k+BP2YaDQynbO5C3FN6NhO7HtrGHvIfhuE+6/vm1lDYI2wg9UVwW3J9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EZfueW+bKtEtsepdRhebqYHJ0nLM0ZVvpZlJIzZj62s=;
- b=OzfMrVrA4AmoDbJP4E59sNfkcNsYP1zvnATR+21kIJLfg2RTjNQLP5MycEUEctk7FXWZllr38SJHtyjWyeJ5EunxLfZ3BsIimrnEGBzlBKnL9f9a4mOCnehPmsxrwNGsZLyF6rxjPXkK9vRg/zxmDzfgWE9+3l1UhKNIuo3LQyY=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 2/6] xen/dt-overlay: fix rangeset leak and dead code in domctl path
-Date: Wed, 15 Apr 2026 13:36:56 +0200
-Message-ID: <20260415113700.107915-3-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260415113700.107915-1-michal.orzel@amd.com>
-References: <20260415113700.107915-1-michal.orzel@amd.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1776253745; cv=none;
+        d=google.com; s=arc-20240605;
+        b=hoX1EA4eaN1rbw6hAXbaL7aKN4xYv6vnfcObrAY8zOb0Zqs4kwLNJXsTzRgHWe8wkY
+         a4SYQUKTHKWT7Q6KhMBuQieh0Tidoxm2qcCJJLkMdIff742NOMZxQoYiaNy71Zl9uE7i
+         84PxOmsFQ/meT6zhatBF1jcqk3WECkz7KsH/aJMDmrJZQSYw/FY5vT4oWygI70M+0ssA
+         n4EfbRLq1TsyjGfPoLlzuDpGLB/y3hl/BBie33fkGOb9UM3AxQx9uzlLYOTkK1JNMtjf
+         3yUk+Zs3Ce7IdpJJD5c5CqDHd0poKq6djMyi/n+CKJEgJcCeNpquArY6KtqoITUSSS1P
+         WmRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=fF0EDgYzvalXVplasDURxrz1JbxTcNnbbzGMmI0mBAw=;
+        fh=55tUfj1WwP7DhKmsv27FhfRdeMgov7mEKJwUGhbYoYE=;
+        b=WMKFdwMTqqa7AZKXDkdHR87vMke0rOrN8nOVXURzU1ttr4b6QDsB1+U28lEi/uUZhW
+         Q0hR5OONG1TQSwGidv2qgdvI5iz6uZZDkc4h6W1Qi7T7/m4JWidFGpP/r3cuZeTZwtyy
+         akDYctfkPMqO5Iq/u+8aqXJay3xI0DS7Dtjf1Wt4l/3zcBGrPcCaSHvTtUOjwbShTs6R
+         AZZK/C38kNYJOQH1BRh6MSUjUNXJ4ohZi7obP9ghC/bjkPofhdSEh41emh1xisKYvfxR
+         B+BlLq04HzT87BnJHWcRHnQ0GQUYUon34Z+IR5NK+XTl/cuZr9Z7s0zW7RD4lT6AV4r7
+         zZ9g==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776253745; x=1776858545; darn=lists.xenproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=fF0EDgYzvalXVplasDURxrz1JbxTcNnbbzGMmI0mBAw=;
+        b=jU+DDmVJ/I9t6Wz/ltxFyPWS2s6sD8tb522lV0r/4Pv8U0KUxjID1PJIYILdMrLAOF
+         0onwJOt40UnAnno66cZiXsbsaTBojOf6pwb2LCVf/JGXF+U+AlxMkwTt/hes+46waqBt
+         c3ZKjWm02moYPWkjL9DDtfEKXm8PouPHeevOXpxOMTv/TwiJFYWsALPwv6SFDGYikhXs
+         dKUzqUiBIRzKKc9SpDmE0rrFBgX8LX2GQwK+7pfDFmmRRzP+RV3nH41KuSryjnKp7u4F
+         TcsSJvepX3kQWe/KdLPVJ6idVpmD6WU+KB88WM48DQ7vRpiUu6M1YkN6jteYpbDMKGDZ
+         V32Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776253745; x=1776858545;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fF0EDgYzvalXVplasDURxrz1JbxTcNnbbzGMmI0mBAw=;
+        b=kamg5K3z8kRTgrl6NrXpLQ+zdjwNyPS5wqgTQLY2mGl9Pv9JljLfo8LQH37/3QwSb5
+         zm8VKr6bB7q6aEx+VT3oDTUVfUBBsFW9TotP2PVPRXJ2GmxWASk7pqjTAEEMsrhwjjBO
+         rEBrtf3J6Yqx4ia3nS04qfRdrJO4dzYgRrdhVF87YiKu0/FkseshpoILp0px66yJZNaD
+         7g4iMiJ0lxeRctLulllO+rYs/XWtqjToM7l3P3aA6+GXUlhX8j6KhJawG4rD1gpMYqzp
+         SqNVPCPQLvNAWNF62rp8Ej8mIUtXL8ejPivLCY4XiyreiybygasYYj4ec7p3kMsx86TK
+         LOoQ==
+X-Gm-Message-State: AOJu0Yw+BFL7bWTkbBEwXzh3eoT9ZfJ7nxKEyRK1iQQOutBw1F0YY5MX
+	6aEbkenySaeIU2oomcIXuECMaeQevNkUL56KNlQ9Jzl4s+Bio7kwNSt9BV0d/VadIGrtYuAy6+5
+	G6b0OzdLBJLOAER0JDjFUT/fQP+QNASM=
+X-Gm-Gg: AeBDieuZdhXM8sCCwWKi10eZ5mhqE7sLxDwPspfw/mzUA2Aglf1yZCeAR1PrVO6oZ1r
+	ekhMsLKoUgH6y5ufyheGZvamH9xQQgBoqD8oTin7D7tmm7ZeBS6pQR4f1OG/GUKnQcMZNxRuvMa
+	QkqpOU7mqNGQzleC5ncS9wlMido5lBHuj9hbqCnN11k5frHOcAQGMapRaER35B9/dfFqDI5cwqu
+	0Q2P7g3skh6K86JPMPgBgN4VFY7JwkqEtmdnh6zVaqHg5PZ4DpoQhLeEt5Kr3k+9F4ZXMTHGJ93
+	4eFEIsYK5QxpV9CLVo23I+I4+CIZWb8=
+X-Received: by 2002:a05:7022:6182:b0:128:d590:2947 with SMTP id
+ a92af1059eb24-12c5d4cb57bmr486048c88.4.1776253744550; Wed, 15 Apr 2026
+ 04:49:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.orzel@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E80:EE_|LV2PR12MB5824:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a18a0f7-b228-4b80-4af8-08de9ae357a7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|376014|1800799024|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	qPO6hjxaGQmUMM0azdX7IAkw1TgaZHb8DRgEvjRavQu0YShdXRCgkYVLVrl0uWVAfOe2FRlRchX+t1tytk6diDC5BW256Fh0hoWD36VkaFd/qvn0iTcSac3PdsBCZvSEwdYaXtgORC30W2cng/Lq6YMuoIzr8bm8ZVLExscF1FaMAMO4mmkYLVWhThjYJ4tQVXvjRxfa2XpIZJLgnTn7x/v6iDZO5O4dhFl7Z4Jh/3RXdqr7/paaXgPOrKMv/pEDkPk8jUMG3ozO2SVPr95bUuhRokF9autwIKbzrQizhcCkv5lNNCMWdIb8jnvDTpFoqDV8EUtzccu+uXbPNbVQn4UmSqJwlDtjJJji8O62C8chZ6mPPAp3l1WQ/ibjx8n51bfujvNmhjc8xm43ufyMTXHHVTts2koAepmomyVjPgSuJTIEeMm4Xf/hodJE8TouLhDTu+XrshSTSa6x+aLgK+rosZlN0Xbf/qT9jqVYnTf9ZqqYwM9TGsxXxrkqDmyMoZd5JFyX/ZAUQoGChRGsc5UkBPpIRmtHAPJdk35umU6JQDblQMXd6WVyj6ViTnEG9GY76n0ZIa2AMW05EpbwC0Su3W9eP5kV2GX8kF/RMUnxc7F28qITxQ5o4kboCSGG//xejKcV2Edss0zbuBmaGvSazMh6dlypELKJEzKWxvXNy6pc6m9/rtREo9ZszAQUtnME880U0uKdP/QNjhcqkSJobRaaD7nBUUKI+ELhKEprzjgSMAqwUIM5XS3NXdWjYARgSdoLgjzEAt2P9iwC1g==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	r8eGcTweoxaoizso/jawi6TBDH9VsDrrV405uLEjr/LX4WjStm3Gh08q8uSuDs8mfBB1vOBlqWE6weWaG0BXC/0ZXtuAeISFaGa9FLO9ODUMex45TSn8P3YnWAUjDUOVyz32K7dUIWB/UL5u026Q/ta4ha43py1rTzzgVpAxSsFFjGEBBxW0wnTASQsHnNYZB5z95PpVrhGxl2pMM3OByQYXOFKNawJ55706RqbcMvMTcQZcPyPjpR1BAIJXWevX9f4lRwVh175V1q78S+sc9imVWY1mZ8TfzEE1L9g61Lo/ALyw90y4sqjVaEwLenS5JEbJgya/Qe6BMcYdIV6M92Bc7JmhCJxDuGr/oZMap4shNu+IPVHItcTftjo6Lzu7cr65Fl0YHH+jF9183IahoBKQyWBH+GCRAT66hP+jI7WsiVcaBWH4g4FhuwTZeov+
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 11:37:15.0932
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a18a0f7-b228-4b80-4af8-08de9ae357a7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF00012E80.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5824
-X-purgate-ID: tlsNG-ef75cf/1776253043-13D4741E-B85B477E/0/0
+References: <20260415113700.107915-1-michal.orzel@amd.com> <20260415113700.107915-2-michal.orzel@amd.com>
+In-Reply-To: <20260415113700.107915-2-michal.orzel@amd.com>
+From: Gyujeong Jin <wlsrbwjd7232@gmail.com>
+Date: Wed, 15 Apr 2026 20:48:53 +0900
+X-Gm-Features: AQROBzDZ2_suPqDuYVx4ON47qTbGVxvMFSHBd9Ap8npzwo9pDkzE10NRof6f6hE
+Message-ID: <CANrF8CEDV5m1Jap0kBoa3sOXD2GV6PAYumfV9rgL2c70nZa=tg@mail.gmail.com>
+Subject: Re: [PATCH 1/6] xen/dt-overlay: fix double-free of rangesets on
+ attach failure
+To: Michal Orzel <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Content-Type: multipart/alternative; boundary="0000000000007995ca064f7e4d7f"
+X-purgate-ID: tlsNG-42698a/1776253746-F43D62A1-F419A566/0/0
 X-purgate-type: clean
-X-purgate-size: 1822
+X-purgate-size: 4671
 
-handle_attach_overlay_nodes() unconditionally creates new rangesets
-without checking whether they already exist from a prior attach. A
-repeated attach for the same overlay leaks the original pair. Reject the
-operation with -EEXIST if rangesets are already present.
+--0000000000007995ca064f7e4d7f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Also, dt_overlay_domctl() early-returns -EOPNOTSUPP for any operation
-other than ATTACH, making the if/else at the bottom unreachable. Remove
-the dead branch.
+Thanks for your efforts.
 
-Fixes: 4c733873b5c2 ("xen/arm: Add XEN_DOMCTL_dt_overlay and device attachment to domains")
-Reported-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- xen/common/device-tree/dt-overlay.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+I=E2=80=99ve seen some advisories that received cve here.
+https://xenbits.xen.org/xsa/
 
-diff --git a/xen/common/device-tree/dt-overlay.c b/xen/common/device-tree/dt-overlay.c
-index 6fa07dbf42a5..3853e6e347fe 100644
---- a/xen/common/device-tree/dt-overlay.c
-+++ b/xen/common/device-tree/dt-overlay.c
-@@ -861,6 +861,13 @@ static long handle_attach_overlay_nodes(struct domain *d,
-         goto out;
-     }
- 
-+    if ( entry->irq_ranges || entry->iomem_ranges )
-+    {
-+        printk(XENLOG_ERR "Overlay is already attached\n");
-+        spin_unlock(&overlay_lock);
-+        return -EEXIST;
-+    }
-+
-     entry->irq_ranges = rangeset_new(d, "Overlays: Interrupts", 0);
-     if (entry->irq_ranges == NULL)
-     {
-@@ -991,10 +998,7 @@ long dt_overlay_domctl(struct domain *d, struct xen_domctl_dt_overlay *op)
-         return -EFAULT;
-     }
- 
--    if ( op->overlay_op == XEN_DOMCTL_DT_OVERLAY_ATTACH )
--        ret = handle_attach_overlay_nodes(d, overlay_fdt, op->overlay_fdt_size);
--    else
--        ret = -EOPNOTSUPP;
-+    ret = handle_attach_overlay_nodes(d, overlay_fdt, op->overlay_fdt_size);
- 
-     xfree(overlay_fdt);
- 
--- 
-2.43.0
+Can I receive a cve for this report?
 
+Thanks.
+
+2026=EB=85=84 4=EC=9B=94 15=EC=9D=BC (=EC=88=98) 20:37, Michal Orzel <micha=
+l.orzel@amd.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+
+> handle_attach_overlay_nodes() destroys the IRQ and IOMEM rangesets on
+> failure but leaves the pointers dangling in the tracker entry. A
+> subsequent handle_remove_overlay_nodes() for the same overlay will call
+> rangeset_consume_ranges() on freed memory followed by a second
+> rangeset_destroy(), resulting in use-after-free and double-free.
+>
+> NULL the pointers after rangeset_destroy() so that remove_nodes() and
+> handle_remove_overlay_nodes() skip the stale entries.
+>
+> Fixes: 4c733873b5c2 ("xen/arm: Add XEN_DOMCTL_dt_overlay and device
+> attachment to domains")
+> Reported-by: Gyujeong Jin <wlsrbwjd7232@gmail.com>
+> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+> ---
+>  xen/common/device-tree/dt-overlay.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/xen/common/device-tree/dt-overlay.c
+> b/xen/common/device-tree/dt-overlay.c
+> index d184186c015e..6fa07dbf42a5 100644
+> --- a/xen/common/device-tree/dt-overlay.c
+> +++ b/xen/common/device-tree/dt-overlay.c
+> @@ -910,7 +910,9 @@ static long handle_attach_overlay_nodes(struct domain
+> *d,
+>      if ( entry )
+>      {
+>          rangeset_destroy(entry->irq_ranges);
+> +        entry->irq_ranges =3D NULL;
+>          rangeset_destroy(entry->iomem_ranges);
+> +        entry->iomem_ranges =3D NULL;
+>      }
+>
+>      return rc;
+> --
+> 2.43.0
+>
+>
+
+--0000000000007995ca064f7e4d7f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Thanks for your efforts.</div><div dir=3D"auto"><br></div=
+><div dir=3D"auto">I=E2=80=99ve seen some advisories that received cve here=
+.</div><div dir=3D"auto"><div style=3D"font-size:inherit"><a href=3D"https:=
+//xenbits.xen.org/xsa/" style=3D"font-size:inherit">https://xenbits.xen.org=
+/xsa/</a></div><br></div><div dir=3D"auto">Can I receive a cve for this rep=
+ort?</div><div dir=3D"auto"><br></div><div dir=3D"auto">Thanks.</div><div><=
+br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=
+=3D"gmail_attr">2026=EB=85=84 4=EC=9B=94 15=EC=9D=BC (=EC=88=98) 20:37, Mic=
+hal Orzel &lt;<a href=3D"mailto:michal.orzel@amd.com">michal.orzel@amd.com<=
+/a>&gt;=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:<br></div><blockquote class=3D=
+"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;borde=
+r-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">han=
+dle_attach_overlay_nodes() destroys the IRQ and IOMEM rangesets on<br>
+failure but leaves the pointers dangling in the tracker entry. A<br>
+subsequent handle_remove_overlay_nodes() for the same overlay will call<br>
+rangeset_consume_ranges() on freed memory followed by a second<br>
+rangeset_destroy(), resulting in use-after-free and double-free.<br>
+<br>
+NULL the pointers after rangeset_destroy() so that remove_nodes() and<br>
+handle_remove_overlay_nodes() skip the stale entries.<br>
+<br>
+Fixes: 4c733873b5c2 (&quot;xen/arm: Add XEN_DOMCTL_dt_overlay and device at=
+tachment to domains&quot;)<br>
+Reported-by: Gyujeong Jin &lt;<a href=3D"mailto:wlsrbwjd7232@gmail.com" tar=
+get=3D"_blank">wlsrbwjd7232@gmail.com</a>&gt;<br>
+Signed-off-by: Michal Orzel &lt;<a href=3D"mailto:michal.orzel@amd.com" tar=
+get=3D"_blank">michal.orzel@amd.com</a>&gt;<br>
+---<br>
+=C2=A0xen/common/device-tree/dt-overlay.c | 2 ++<br>
+=C2=A01 file changed, 2 insertions(+)<br>
+<br>
+diff --git a/xen/common/device-tree/dt-overlay.c b/xen/common/device-tree/d=
+t-overlay.c<br>
+index d184186c015e..6fa07dbf42a5 100644<br>
+--- a/xen/common/device-tree/dt-overlay.c<br>
++++ b/xen/common/device-tree/dt-overlay.c<br>
+@@ -910,7 +910,9 @@ static long handle_attach_overlay_nodes(struct domain *=
+d,<br>
+=C2=A0 =C2=A0 =C2=A0if ( entry )<br>
+=C2=A0 =C2=A0 =C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rangeset_destroy(entry-&gt;irq_ranges);<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 entry-&gt;irq_ranges =3D NULL;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rangeset_destroy(entry-&gt;iomem_ranges);=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 entry-&gt;iomem_ranges =3D NULL;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0return rc;<br>
+-- <br>
+2.43.0<br>
+<br>
+</blockquote></div></div>
+
+--0000000000007995ca064f7e4d7f--
 
