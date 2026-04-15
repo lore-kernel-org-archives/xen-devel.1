@@ -4,32 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6443BF9D0F2
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2026 20:25:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282092.1564801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35CA5F9D0FE
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 02:22:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282156.1564820 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJY-0006ef-8D; Tue, 14 Apr 2026 20:24:52 +0000
+	id 1wCpsh-0002q2-Si; Wed, 15 Apr 2026 02:21:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282092.1564801; Tue, 14 Apr 2026 20:24:52 +0000
+Received: by outflank-mailman (output) from mailman id 1282156.1564820; Wed, 15 Apr 2026 02:21:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCkJY-0006eQ-4k; Tue, 14 Apr 2026 20:24:52 +0000
-Received: by outflank-mailman (input) for mailman id 1282092;
- Tue, 14 Apr 2026 20:24:50 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1wCpsh-0002pu-Nu; Wed, 15 Apr 2026 02:21:31 +0000
+Received: by outflank-mailman (input) for mailman id 1282156;
+ Wed, 15 Apr 2026 02:21:31 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1wCkJW-0006Xg-RI
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2026 20:24:50 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJW-001nTv-1X;
- Tue, 14 Apr 2026 20:24:50 +0000
-Received: from [2a02:8012:3a1:0:6452:fdce:8dbd:9a39]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <julien@xen.org>) id 1wCkJW-0036wi-16;
- Tue, 14 Apr 2026 20:24:50 +0000
+ (envelope-from <joan.bae@boeing.com>) id 1wCpsg-0002po-QL
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 02:21:31 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1wCpse-000XhT-NX
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 04:21:29 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <joan.bae@boeing.com>)
+ id 69def5cb-e002-0a2a0a5209dd-0a2a450288b6-42
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 04:21:27 +0200
+Received: from [130.76.144.163] (helo=clt-mbsout-02.mbs.boeing.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ (envelope-from <joan.bae@boeing.com>)
+ id 69def625-42fa-0a2a45020019-824c90a39098-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 04:21:26 +0200
+Received: from localhost (localhost [127.0.0.1])
+ by clt-mbsout-02.mbs.boeing.net (8.15.2/8.15.2/DOWNSTREAM_MBSOUT) with SMTP id
+ 63F2LO2m009931; Tue, 14 Apr 2026 22:21:24 -0400
+Received: from XCH16-09-08.nos.boeing.com (xch16-09-08.nos.boeing.com
+ [144.115.66.156])
+ by clt-mbsout-02.mbs.boeing.net (8.15.2/8.15.2/8.15.2/UPSTREAM_MBSOUT) with
+ ESMTPS id 63F2Jh07008906
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 14 Apr 2026 22:19:43 -0400
+Received: from XCH19-01-11.nos.boeing.com (144.115.67.131) by
+ XCH16-09-08.nos.boeing.com (144.115.66.156) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.58; Tue, 14 Apr 2026 19:19:42 -0700
+Received: from XCH19-EDGE-C02.nos.boeing.com (130.76.144.198) by
+ XCH19-01-11.nos.boeing.com (144.115.67.131) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Tue, 14 Apr 2026 19:19:42 -0700
+Received: from USG02-CY1-obe.outbound.protection.office365.us (23.103.199.178)
+ by boeing.com (130.76.144.198) with Microsoft SMTP Server
+ (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.39; Tue, 14 Apr
+ 2026 19:19:41 -0700
+Received: from SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:196::15)
+ by BN0P110MB1546.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:185::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
+ 2026 02:19:40 +0000
+Received: from SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM
+ ([fe80::452a:f17:6196:8976]) by SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM
+ ([fe80::452a:f17:6196:8976%4]) with mapi id 15.20.9769.046; Wed, 15 Apr 2026
+ 02:19:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,501 +76,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=QFBLfe5i/9JqZBRgUFAj7nWhiJfRTY56kNhSbwiwTQk=; b=0S9RfB0x6qrJPSFDae9jphUcrr
-	nyjl6xNGf4BS8hZvn7h05Fc1npFScMmKPEJLlg7f+PJdnIN45iYenX5xFcJbo/VaEFimam6Du+hPc
-	Zq8clk9jv2X3Otb/auFuSMV6psCOjfTd6Nw6t7MPo4JZH65g6UBN/wKN5zq3wjeTYuVo=;
-Message-ID: <6d1806aa-b009-407a-9a7a-476f9f4deb70@xen.org>
-Date: Tue, 14 Apr 2026 17:10:37 +0900
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=boeing-s1912 header.d=boeing.com header.i="@boeing.com" header.h="From:To:CC:Subject:Date:References:In-Reply-To"; dkim=pass header.s=selector1-boeing-onmicrosoft-com header.d=boeing.onmicrosoft.com header.i="@boeing.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=boeing.com;
+	s=boeing-s1912; t=1776219684;
+	bh=mh3jw2nNypx/gjnyF2rTr4YGVZIzELOgxhSCK38qGjI=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+	b=ikFxk9BdwUsqJBWc5EtQWH9pcO+O2kBW6Me+Be91LaZjpj1lqC3HwEAXVL5cUspcz
+	 QdX4iAzIwXAEZMGc9sK7Zr842f1PzAuaxZKNXFkngsSbr6/hCyjWoE4VGTog0HJPqh
+	 2gNkfsNHucH9U3+pPEypTlk7ApLj+hN4D5aYUqeRjY4sXZNVN+80VO7FwwC+8LV8mL
+	 3vAV7c2NgKRb4fR3gPu+hJOs0Zb4LgkL9wfqz/sDrci7BXuZw4a0xCDS/6/pUeXvAV
+	 m6kxkjNLANp/IzJoS7Rh0VmS0gtjXC+sYv9zBVN1naRc4/hW77qQLFsLPbSkJO25Pf
+	 eGKuo/77Q9G9Q==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
+ b=rqaHgzA3rsBF9fvGHuzwZoMehVmJAf9IIHmva8eM4/XXmMZhjtyQNGPlojFMEUuSP5EgytMNOZASYcX7gyhrsIflPICm2iVonfiNWRaP/3+A+eUv6GfSufYNOKhmlx9FAZd6rLsq9tMDa9W4ic6mDSll+Co75k4kZcBTrvyFk9wXAcmP/2TbcGKKfY9r7TlcxHmt0pIZi4yqViNO43znpfu57KlVuSpV1TN6RjSgdjJbo8q+Z+ww2eGouwWwkcPj5A4Xulu7pUt0OCc1LAa2mOvfDzbxe6A8+F+bq+Uq5OLsuks6bx9/sUCCPXOZ6ZR6WBBzZknXC8fwgAUN+QgUww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector5401;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mh3jw2nNypx/gjnyF2rTr4YGVZIzELOgxhSCK38qGjI=;
+ b=lNapfPH99MhWizTyuamdF6iSBnvqjgLgBhEYwfdsQid4nwafUhcWMeQcNrOn5nZgSnGZfe9qxsFuSgM7W51OGXJW9c3S5r61c4036gTPiW5airgBULf6+pLOZCCY6Y3YVS9FZG2B0lLv8qNFBha6XVJLkTk899CNpvKzdE/lY9nNpRciSoW/KCSdzcIIixOpdER3W+3iMU6hReKaNkKkdedv5scYlkblTGrOj/hxKfohuLeqihbcwt6PTxWN/sGIffKFQqWJYfniN8GVcEm4zCZQqyHkzRYPEZ1gpQq1gOz5FoDnKBB31c4UVg2YZB2GGZ6YYsiqTSun4o2wEemlhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=boeing.com; dmarc=pass action=none header.from=boeing.com;
+ dkim=pass header.d=boeing.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=boeing.onmicrosoft.com; s=selector1-boeing-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mh3jw2nNypx/gjnyF2rTr4YGVZIzELOgxhSCK38qGjI=;
+ b=PkIoEgUpdZYZtkmhz+1hk4coseO/sRhJwjDlGafwFj6hVHSF/VaqLSMQI9nug1+pAdLb8x0Zbs4LgArNJlkBGJwSLRABR8pVEY9TgAzrVciShhqeVegtAcoP0OH01xok7uoNnooeqUFE5fZ41dGerSfDFhra/KprbVYL6zYn4EI=
+From: "Bae, Joan" <joan.bae@boeing.com>
+To: Julien Grall <julien@xen.org>,
+        "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>,
+        Bertrand Marquis
+	<bertrand.marquis@arm.com>,
+        Michal Orzel <michal.orzel@amd.com>
+Subject: RE: [EXTERNAL] Re: [XEN PATCH] xen/common: validate shared memory
+ guest address overlap with guest RAM
+Thread-Topic: [EXTERNAL] Re: [XEN PATCH] xen/common: validate shared memory
+ guest address overlap with guest RAM
+Thread-Index: AQHcy6n8SUKFV8ls/kGsGA5q0Nlt0bXdycCAgAGZ18A=
+Date: Wed, 15 Apr 2026 02:19:39 +0000
+Message-ID: <SA1P110MB16142073986E51B11EF98CD9FF22A@SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM>
+References: <59dcd094173791926fff212f3f2b86df50b0dc12.1776060772.git.joan.bae@boeing.com>
+ <cfe8b6ae-2f52-47c4-862d-52d648d41895@xen.org>
+In-Reply-To: <cfe8b6ae-2f52-47c4-862d-52d648d41895@xen.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=boeing.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1P110MB1614:EE_|BN0P110MB1546:EE_
+x-ms-office365-filtering-correlation-id: e8e60b48-e995-490e-c9f0-08de9a9572cc
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|56012099003|18002099003|22082099003|38070700021;
+x-microsoft-antispam-message-info: WbFYTB371mM0QeTu25pgMGg8KLpfeLf3Lh0j/xXryUnlxVKLuujjNllJka6DmdWN4qaG3YeUJ65n5iLphQYXOgZ5fSF6sGABzLLd0m7p/l8wyVR3MOSFDhyyXtjtI6IBjZ1PfhbrhD/EP5WJJqgzoJfdrMzgwRflMlHNw13NSoatrH2Erd7aOZZwwJT7U/GsEukVdAwIQ0sBJXn2k4VW4lTkhe/KWWLVXxVLCmgU6vj0lNzj7R63V8MH1iwo6GH2yYUp96f7JpwzPZEeTHfIN/6zJZduap6KDgy1NasRqcfbDsKIjDszQ4wouXkUQmd2HkpozqWFRdTairUpwzQW8pzv55q0zO9c5S5VSpxeG+oZXLYrGhTV8aGsSSi1R8mgUO4ouOysCaaJLnIBG8AK454cTS4tUOjfYt3zT+tKCXHuFCuivjSz6oc+2SWxJLJkXz5raAXNR98F5ij0w+8aqmMpbMPmDLRaBU1xYdjsdZXwuyKS2q37UkdWde7/vPWjP8lKnsTSfAJNAI/KqtOy7JY/MHJ9LBzs6Hw66XjFvS8aOwwmBZYTYdT1Ky9k3mvbcJ4CL+ts+YJGxAtjTorktpLn4119fwCGAasuwyZLTnWvBUABvWS+zo+1szWJac8q/2r4zk3Twh43AsvlnVhZfHcOUWxln45xw0IqNjq9nzCIcO0fMnUBvNXdLjNgB+MaY4ofxXg2CSqdeUmfDJyPYBJumkDiFfPuS6/Z9T/4yCmkcfGXLXciTuIMDua27JGsQ7UsUY6ucXmX34dO1E+UE55c23wHapsGiky+Hp7Ea0w=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(56012099003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?eHVUOEYzUVZ2d1lZQU9uV3ZhMmp6ZjhVWjE3Y1RhOUM3bWt6VVJJaEdHVkVo?=
+ =?utf-8?B?ZkN3alRXWXR5OXB3WHVBMVlPTlY3VDlHd2prblJXejN4aUFRVkJBQklQMjR5?=
+ =?utf-8?B?WGVOUWxsem82WmpFbEQ0WTBCcG51N0ZqUEg4ajEvT0VkdGM1dnRzQ29MdFRD?=
+ =?utf-8?B?bVZyaXErSm8xaEZxTktKMFJTWTBGc2xnVEEzN0Zzdm5RbTYySFVURkNYaFd1?=
+ =?utf-8?B?YnF1MGtDUWc3enFKZ295ekMvVGtMYU0xSW1wdFVUbG9LYmR6U0tSNkRZamRl?=
+ =?utf-8?B?ZzhjN3Q4NWRVY0cvMGxsWWVxdXRldkhOa1pmMk9VUVk0cVJjUHhoNUUrWklH?=
+ =?utf-8?B?QW1FcHdka0hKLzVYaHUzY1ZmcGc0VXpremR6Q0h4SFQyTHp2bldSQ2xXRk56?=
+ =?utf-8?B?ZUJRNmQrZ3FYTGJzVU5BbGZpYVpyNEwzanhtU25BUEh1YTlJNUZQT2NpcGxj?=
+ =?utf-8?B?bC85YnZab3lJZ0ZxRmhtcngxRG9ST2pYbkhzYmZscVBrZ0ZnU21ucmZQVG44?=
+ =?utf-8?B?Sy9JZ21DdzNPOG5XdGRQOVNYelRqWm9IMEtscVY0MXlWVGMxalgrWDArdkVI?=
+ =?utf-8?B?VzMxb3JCZi9hc0Qrd1F5QkVSZURMNXJ6WTBqNGRuSEE4SXIvdUVIbjNzQjZh?=
+ =?utf-8?B?bnpZd0ZrVHF6YmFFNGVvM3R5ckx6WDVnRWZKR054bklNYXlFbnRNblBvTFp5?=
+ =?utf-8?B?LzRDd2QvOERwZWV1bURtMXV5MXUyc1NOamdObHphRmNMN3dEdHBqUTN3SXo2?=
+ =?utf-8?B?ZzR0Z3BMSkdUWjBJYkxYaW5KYllOMXh1YXljUUtkeXlYT1BQOU1Ha3NSWnJ3?=
+ =?utf-8?B?VlprdTFCODYwcTJZaElRUUlQMkE3WjZ0aXBsa1FVbE54NFl1MkxhWnl6aWdR?=
+ =?utf-8?B?WmE4ZjBsZjh1bUs5VGJjOGd4blF3T3ZhNDBnd1BHYkVzOGdvK1NjOTZPQ1Z5?=
+ =?utf-8?B?dVRlcXVwcitVdzdMTGpPeGRDYWhCU0c2ajNlNURkMGhhNzFya0pRb3lLRzhD?=
+ =?utf-8?B?ZHZIc3NEcjBncVlYcGtXazFsaWgwZHBIcithSDBKd3hWeXN3TCtBQjArZ04w?=
+ =?utf-8?B?N2FvaG85WUlZYVBTMVFXNFk4VnNxWnVZOW1EOFpXMEZMM1VFcjFwV0RtUGVa?=
+ =?utf-8?B?SWV3QzUzTHZWcVczNSt4bGhpUVJ0a0RBcG5reHpDRFpDZkk5ZW8vdW1GWDZo?=
+ =?utf-8?B?V20zZGE1d1g3VXZ5QVBpdERDKzdTMytNOHhtaFJjVEM5VDZSQllVWHZYRVhS?=
+ =?utf-8?B?OUVtaWgwclVLQ3lWcmR0MllGY0FKZWhoRUZRWm42bmVsdjd4UlYycTJtOU1p?=
+ =?utf-8?B?OEVaRGxmQVdxZFEzVmxub3p2ejVHVjhTQ05YRTZMelJ4Y0VxeU1pNEtLOTRv?=
+ =?utf-8?B?Uk1ZUWwxL0JyemVsajVScFI5OWxrWFVuakVRbndSSnp3clR6SVVrTWFKSmtp?=
+ =?utf-8?B?T3JiYjZENzZJbHBxWmlGM0FWTy9tK1JOeGh3VUUrUnBPdzJmVmo4dUpxS1Jx?=
+ =?utf-8?B?RDZxTFVIVzdZQ2k0KzhrZGVDUnBFZHNMbDMxSlNkSWh2WkprUFQ4bUU0OFQ5?=
+ =?utf-8?B?RTZLR09rSlJQTnJGTWdXVEE0Z0djSU5nemJvb2JxLzJlUmdDMkhwU1VWL05L?=
+ =?utf-8?B?N3V4NXRzU2M4bTZNRzJ1UnVrVFA5dzhVN3BOakNCM0FGejMrc3VZT3JxOEE1?=
+ =?utf-8?B?SDJxUDd6dkpVWjZQTW84MU9oa2NtZTBOcHE3SHlNM2I5bUhKa1lNYkFDekd6?=
+ =?utf-8?B?eTJjMDFwbk1PSUxHNjVTb3FUMlQ4b09wdlRiS1BxMHhTYmVvZDh5OFJzMzU2?=
+ =?utf-8?B?UXRhTm1VSndIc3JyUHVjT3JnUUdPVlpXeUFLNEFDbVJQTmt2dlBOZGt3OXJR?=
+ =?utf-8?B?QitNNWVNY3lQNjRDUmdnbDBCaHpEWTg5TW1hWllpUis0MW53dExDY0hiWjk0?=
+ =?utf-8?B?WlNCbGZSYks2L2c5N0xOaDJKeVRDNU9Cd2pGMlJuZzBueEVOY0pDUCthMXdh?=
+ =?utf-8?B?UGVzOURWNXlmanllRXFlNThaSS9oTXpTN0lSVTF3WWpDS0ZDZDJqT05PM0xR?=
+ =?utf-8?B?aWpQQ2c1QW1VNlozRDRYTHplMmpTMHdIUFpMNDAzN1lPR2FaYlNGb1ZBTWd5?=
+ =?utf-8?B?bTczcDZaZnptZ1JiUVJOWGFnVFF0T1YycVd1eE95MTlLdHVSU2FWY1ZERnM5?=
+ =?utf-8?Q?ky3v/A1Nh77aK0vy5qCs5eZhmN6iQQkfiHBnvEu38qnT?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/23] xen/arm: vsmmuv3: Add support for registers
- emulation
-Content-Language: en-GB
-To: Milan Djokic <milan_djokic@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Rahul Singh <rahul.singh@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1774918270.git.milan_djokic@epam.com>
- <25adb33c4be3932c2d946cf7757c933eb042476c.1774918270.git.milan_djokic@epam.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <25adb33c4be3932c2d946cf7757c933eb042476c.1774918270.git.milan_djokic@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1P110MB1614.NAMP110.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8e60b48-e995-490e-c9f0-08de9a9572cc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Apr 2026 02:19:39.9633
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: bcf48bba-4d6f-4dee-a0d2-7df59cc36629
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0P110MB1546
+X-OriginatorOrg: boeing.com
+X-TM-AS-GCONF: 00
+X-purgate-ID: tlsNG-720697/1776219687-46D20CD1-23388831/0/0
+X-purgate-type: clean
+X-purgate-size: 3700
 
-Hi Milan,
-
-On 31/03/2026 10:52, Milan Djokic wrote:
-> From: Rahul Singh <rahul.singh@arm.com>
-> 
-> Add initial support for various emulated registers for virtual SMMUv3
-> for guests and also add support for virtual cmdq and eventq.
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
-> ---
->   xen/drivers/passthrough/arm/smmu-v3.h  |   6 +
->   xen/drivers/passthrough/arm/vsmmu-v3.c | 286 +++++++++++++++++++++++++
->   2 files changed, 292 insertions(+)
-> 
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
-> index 3fb13b7e21..fab4fd5a26 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.h
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
-> @@ -60,6 +60,12 @@
->   #define IDR5_VAX			GENMASK(11, 10)
->   #define IDR5_VAX_52_BIT			1
->   
-> +#define ARM_SMMU_IIDR			0x18
-> +#define IIDR_PRODUCTID			GENMASK(31, 20)
-> +#define IIDR_VARIANT			GENMASK(19, 16)
-> +#define IIDR_REVISION			GENMASK(15, 12)
-> +#define IIDR_IMPLEMENTER		GENMASK(11, 0)
-> +
->   #define ARM_SMMU_CR0			0x20
->   #define CR0_ATSCHK			(1 << 4)
->   #define CR0_CMDQEN			(1 << 3)
-> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> index e36f200ba5..3ae1e62a50 100644
-> --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> @@ -3,25 +3,307 @@
->   #include <xen/param.h>
->   #include <xen/sched.h>
->   #include <asm/mmio.h>
-> +#include <asm/vgic-emul.h>
-
-vgic-emul.h is intended to only be used in the vGIC code. I am fine if 
-you want to use it in vsmmu-v3.c but it needs to be renamed. Maybe to 
-vdev-emul.h.
-
->   #include <asm/viommu.h>
-> +#include <asm/vreg.h>
-> +
-> +#include "smmu-v3.h"
-> +
-> +/* Register Definition */
-> +#define ARM_SMMU_IDR2       0x8
-> +#define ARM_SMMU_IDR3       0xc
-> +#define ARM_SMMU_IDR4       0x10
-> +#define IDR0_TERM_MODEL     (1 << 26)
-> +#define IDR3_RIL            (1 << 10)
-> +#define CR0_RESERVED        0xFFFFFC20
-
-AFAIU, this is covering all the bits defined by the SMMU spec. But some 
-of them are optional. Does this mean we will expose those optional features?
-
-> +#define SMMU_IDR1_SIDSIZE   16
-> +#define SMMU_CMDQS          19
-
-Can you add some details how you decided the size of the command and ...
-
-> +#define SMMU_EVTQS          19
-
-... even queues?
-
-> +#define DWORDS_BYTES        8
-> +#define ARM_SMMU_IIDR_VAL   0x12
-
-I am not sure which implementer this is referring to. But how do you 
-plan to handle errata? Are we sure they can always be handled by Xen?
-
->   
->   /* Struct to hold the vIOMMU ops and vIOMMU type */
->   extern const struct viommu_desc __read_mostly *cur_viommu;
->   
-> +/* virtual smmu queue */
-> +struct arm_vsmmu_queue {
-> +    uint64_t    q_base; /* base register */
-> +    uint32_t    prod;
-> +    uint32_t    cons;
-> +    uint8_t     ent_size;
-> +    uint8_t     max_n_shift;
-> +};
-> +
->   struct virt_smmu {
->       struct      domain *d;
->       struct      list_head viommu_list;
-> +    uint8_t     sid_split;
-> +    uint32_t    features;
-> +    uint32_t    cr[3];
-> +    uint32_t    cr0ack;
-> +    uint32_t    gerror;
-> +    uint32_t    gerrorn;
-> +    uint32_t    strtab_base_cfg;
-> +    uint64_t    strtab_base;
-> +    uint32_t    irq_ctrl;
-> +    uint64_t    gerror_irq_cfg0;
-> +    uint64_t    evtq_irq_cfg0;
-> +    struct      arm_vsmmu_queue evtq, cmdq;
->   };
->   
->   static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
->                                 register_t r, void *priv)
->   {
-> +    struct virt_smmu *smmu = priv;
-> +    uint64_t reg;
-> +    uint32_t reg32;
-
-Looking at this helper and the read one, I am bit surprised there is no 
-lock taken nor we check the access size.  Can you explain why?
-
-For instance, we should not allow 64-bit access on 32-bit register. The 
-rest of the size (8-bit and 16-bit) is IMP DEFINED so it may be easier 
-just not allow them.
-
-> +
-> +    switch ( info->gpa & 0xffff )
-> +    {
-> +    case VREG32(ARM_SMMU_CR0):
- > +        reg32 = smmu->cr[0];> +        vreg_reg32_update(&reg32, r, 
-info);
-> +        smmu->cr[0] = reg32;
-> +        smmu->cr0ack = reg32 & ~CR0_RESERVED;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR1):
-> +        reg32 = smmu->cr[1];
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->cr[1] = reg32;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR2):
-> +        reg32 = smmu->cr[2];
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->cr[2] = reg32;
-> +        break;
-> +
-> +    case VREG64(ARM_SMMU_STRTAB_BASE):
-
-Looking at the SMMU spec (6.3.24 in ARM IHI 0070 H.a), the behavior of 
-writing to the register is constrained unpredictable before SMMUv3.2, 
-but after it should be ignored if SMMU_CR0.SMMUEN == 1.
-
-So this implementation would not be valid for SMMUv3.2 and later. For 
-convenience it would be best to just ignore the write (which is also 
-valid for SMMUv3.1 and ealier).
-
-> +        reg = smmu->strtab_base;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->strtab_base = reg;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_STRTAB_BASE_CFG):
-
-Similar to above, there are some conditions when this field can be 
-written (see 6.3.25).
-
-> +        reg32 = smmu->strtab_base_cfg;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->strtab_base_cfg = reg32;
-> +
-> +        smmu->sid_split = FIELD_GET(STRTAB_BASE_CFG_SPLIT, reg32);
-
-The information for sid_split is already stored in 
-``smmu->strtab_base_cfg``. So why do we need to store it differently?
-
-> +        smmu->features |= STRTAB_BASE_CFG_FMT_2LVL;
-
-I haven't checked the rest of the code yet. But from the name, I would 
-assume it indicates whether 2-level stream table is supported. From my 
-understanding of the specification, this is selectable by the guest OS. 
-So why is this unconditionally set?
-
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_BASE):
-
-Similar to above, there are some condition when this field is RO.
-
-> +        reg = smmu->cmdq.q_base;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->cmdq.q_base = reg;
-> +        smmu->cmdq.max_n_shift = FIELD_GET(Q_BASE_LOG2SIZE, smmu->cmdq.q_base);
-> +        if ( smmu->cmdq.max_n_shift > SMMU_CMDQS )
-> +            smmu->cmdq.max_n_shift = SMMU_CMDQS;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_PROD):
-> +        reg32 = smmu->cmdq.prod;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->cmdq.prod = reg32;
-
-AFAIU, this implementation is not yet complete. If so, it would be good 
-to mark it as such with a comment of BUG_ON("Not yet implemented"). Same 
-for everywhere in this file and the rest of the series.
-
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_CONS):
-> +        reg32 = smmu->cmdq.cons;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->cmdq.cons = reg32;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_BASE):
-> +        reg = smmu->evtq.q_base;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->evtq.q_base = reg;
-> +        smmu->evtq.max_n_shift = FIELD_GET(Q_BASE_LOG2SIZE, smmu->evtq.q_base);
-> +        if ( smmu->cmdq.max_n_shift > SMMU_EVTQS )
-> +            smmu->cmdq.max_n_shift = SMMU_EVTQS;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_PROD):
-> +        reg32 = smmu->evtq.prod;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->evtq.prod = reg32;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_CONS):
-> +        reg32 = smmu->evtq.cons;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->evtq.cons = reg32;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IRQ_CTRL):
-> +        reg32 = smmu->irq_ctrl;
-> +        vreg_reg32_update(&reg32, r, info);
-> +        smmu->irq_ctrl = reg32;
-> +        break;
-> +
-> +    case VREG64(ARM_SMMU_GERROR_IRQ_CFG0):
-> +        reg = smmu->gerror_irq_cfg0;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->gerror_irq_cfg0 = reg;
-> +        break;
-> +
-> +    case VREG64(ARM_SMMU_EVTQ_IRQ_CFG0):
-> +        reg = smmu->evtq_irq_cfg0;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->evtq_irq_cfg0 = reg;
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_GERRORN):
-> +        reg = smmu->gerrorn;
-> +        vreg_reg64_update(&reg, r, info);
-> +        smmu->gerrorn = reg;
-> +        break;
-> +
-> +    default:
-> +        printk(XENLOG_G_ERR
-> +               "%pv: vSMMUv3: unhandled write r%d offset %"PRIpaddr"\n",
-
-NIT: The vIOMMU is per-domain so it is sufficient to print "%pd".
-
-> +               v, info->dabt.reg, (unsigned long)info->gpa & 0xffff);
-> +        return IO_ABORT;
-
-Per section 6 of the SMMU:
-
-"
-For all pages except Page 1, undefined register locations are RES0. For 
-Page 1, access to undefined/Reserved
-register locations is CONSTRAINED UNPREDICTABLE and an implementation 
-has one of the following behaviors:
-[...]
-"
-
-Here you seem to implement page0 so the default case should be write 
-ignore and therefore IO_HANDLED should be returned. BTW, you don't seem 
-to handle page1. Is this going to be handled later on?
-
-> +    }
-> +
->       return IO_HANDLED;
->   }
->   
->   static int vsmmuv3_mmio_read(struct vcpu *v, mmio_info_t *info,
->                                register_t *r, void *priv)
->   {
-> +    struct virt_smmu *smmu = priv;
-> +    uint64_t reg;
-> +
-> +    switch ( info->gpa & 0xffff )
-> +    {
-> +    case VREG32(ARM_SMMU_IDR0):
-> +        reg  = FIELD_PREP(IDR0_S1P, 1) | FIELD_PREP(IDR0_TTF, 2) |
-
-As the page-table will be used by the HW, shouldn't TTF reflect what the 
-HW supports? This would allow the vIOMMU to work for 32-bit domains.
-
-> +            FIELD_PREP(IDR0_COHACC, 0) | FIELD_PREP(IDR0_ASID16, 1) |
-
-Here you set COHACC to 0 which means the guest OS will have to clean the 
-cache every time. This is safe everywhere, but it will have an impact on 
-performance. I am not asking to allow COHACC when the HW supports it, 
-but I think a TODO would be worth.
-
-For ASID16, shouldn't the value be based on the HW?
-
-As an aside, I guess we don't allow BTM because we only expose a single 
-vSMMU?
-
-> +            FIELD_PREP(IDR0_TTENDIAN, 0) | FIELD_PREP(IDR0_STALL_MODEL, 1) |
-
-For TTENDIAN, it is the same as above.
-
-For STALL_MODEL, I think 1 is ok.
-
-> +            FIELD_PREP(IDR0_ST_LVL, 1) | FIELD_PREP(IDR0_TERM_MODEL, 1);
-
-Overall, it feels the value set in IDR0 and IDR1 (below) needs some comment.
-
-> +        *r = vreg_reg32_extract(reg, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IDR1):
-> +        reg  = FIELD_PREP(IDR1_SIDSIZE, SMMU_IDR1_SIDSIZE) |
-> +            FIELD_PREP(IDR1_CMDQS, SMMU_CMDQS) |
-> +            FIELD_PREP(IDR1_EVTQS, SMMU_EVTQS);
-> +        *r = vreg_reg32_extract(reg, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IDR2):
-> +        goto read_reserved;
-> +
-> +    case VREG32(ARM_SMMU_IDR3):
-> +        reg  = FIELD_PREP(IDR3_RIL, 0);
-
-I am not sure why we explicitely need to set RIL but not the other fields?
-
- > +        *r = vreg_reg32_extract(reg, info);> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IDR4):
-> +        goto read_impl_defined;
-> +
-> +    case VREG32(ARM_SMMU_IDR5):
-> +        reg  = FIELD_PREP(IDR5_GRAN4K, 1) | FIELD_PREP(IDR5_GRAN16K, 1) |
-> +            FIELD_PREP(IDR5_GRAN64K, 1) | FIELD_PREP(IDR5_OAS, IDR5_OAS_48_BIT);
-
-Similar to the other fields in IDR0, isn't this based on what the HW 
-supports?	
-
-> +        *r = vreg_reg32_extract(reg, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IIDR):
-> +        *r = vreg_reg32_extract(ARM_SMMU_IIDR_VAL, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR0):
-> +        *r = vreg_reg32_extract(smmu->cr[0], info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR0ACK):
-> +        *r = vreg_reg32_extract(smmu->cr0ack, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR1):
-> +        *r = vreg_reg32_extract(smmu->cr[1], info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CR2):
-> +        *r = vreg_reg32_extract(smmu->cr[2], info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_STRTAB_BASE):
-> +        *r = vreg_reg64_extract(smmu->strtab_base, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_STRTAB_BASE_CFG):
-> +        *r = vreg_reg32_extract(smmu->strtab_base_cfg, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_BASE):
-> +        *r = vreg_reg64_extract(smmu->cmdq.q_base, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_PROD):
-> +        *r = vreg_reg32_extract(smmu->cmdq.prod, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_CMDQ_CONS):
-> +        *r = vreg_reg32_extract(smmu->cmdq.cons, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_BASE):
-> +        *r = vreg_reg64_extract(smmu->evtq.q_base, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_PROD):
-> +        *r = vreg_reg32_extract(smmu->evtq.prod, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_EVTQ_CONS):
-> +        *r = vreg_reg32_extract(smmu->evtq.cons, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_IRQ_CTRL):
-> +    case VREG32(ARM_SMMU_IRQ_CTRLACK):
-> +        *r = vreg_reg32_extract(smmu->irq_ctrl, info);
-> +        break;
-> +
-> +    case VREG64(ARM_SMMU_GERROR_IRQ_CFG0):
-> +        *r = vreg_reg64_extract(smmu->gerror_irq_cfg0, info);
-> +        break;
-> +
-> +    case VREG64(ARM_SMMU_EVTQ_IRQ_CFG0):
-> +        *r = vreg_reg64_extract(smmu->evtq_irq_cfg0, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_GERROR):
-> +        *r = vreg_reg64_extract(smmu->gerror, info);
-> +        break;
-> +
-> +    case VREG32(ARM_SMMU_GERRORN):
-> +        *r = vreg_reg64_extract(smmu->gerrorn, info);
-> +        break;
-> +
-> +    default:
-> +        printk(XENLOG_G_ERR
-> +               "%pv: vSMMUv3: unhandled read r%d offset %"PRIpaddr"\n",
-> +               v, info->dabt.reg, (unsigned long)info->gpa & 0xffff);
-> +        return IO_ABORT;
-> +    }
-> +
-> +    return IO_HANDLED;
-> +
-> + read_impl_defined:
-> +    printk(XENLOG_G_DEBUG
-> +           "%pv: vSMMUv3: RAZ on implementation defined register offset %"PRIpaddr"\n",
-> +           v, info->gpa & 0xffff);
-> +    *r = 0;
-> +    return IO_HANDLED;
-> +
-> + read_reserved:
-> +    printk(XENLOG_G_DEBUG
-> +           "%pv: vSMMUv3: RAZ on reserved register offset %"PRIpaddr"\n",
-> +           v, info->gpa & 0xffff);
-> +    *r = 0;
->       return IO_HANDLED;
->   }
->   
-> @@ -39,6 +321,10 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr, paddr_t size)
->           return -ENOMEM;
->   
->       smmu->d = d;
-> +    smmu->cmdq.q_base = FIELD_PREP(Q_BASE_LOG2SIZE, SMMU_CMDQS);
-> +    smmu->cmdq.ent_size = CMDQ_ENT_DWORDS * DWORDS_BYTES;
-> +    smmu->evtq.q_base = FIELD_PREP(Q_BASE_LOG2SIZE, SMMU_EVTQS);
-> +    smmu->evtq.ent_size = EVTQ_ENT_DWORDS * DWORDS_BYTES;
-
-I understand why we initialize ent_size. But I am not sure to understand 
-why we need to initialize q_base. Can you clarify?
-
->   
->       register_mmio_handler(d, &vsmmuv3_mmio_handler, addr, size, smmu);
->   
-
-Cheers,
-
--- 
-Julien Grall
-
+SGkgSnVsaWVuLA0KDQpUaGFuayB5b3UgZm9yIHRoZSByZXZpZXcuIEkgYWdyZWUgdGhhdCB0aGUg
+b3ZlcmxhcCBpc3N1ZSBpcyBub3QgbGltaXRlZCB0byBzaGFyZWQgbWVtb3J5IG92ZXJsYXBwaW5n
+IHdpdGggUkFNLiBJdCBjb3VsZCBoYXBwZW4gd2l0aCBhbnkgUDJNIG1hcHBpbmcgZHVyaW5nIGRv
+bWFpbiBjb25zdHJ1Y3Rpb24uDQoNCkkgcmVzZWFyY2hlZCB0aGUgY2FsbGVycyBvZiBwMm1fc2V0
+X2VudHJ5KCkuIEF0IGEgaGlnaGVyIGxldmVsLCBwMm1faW5zZXJ0X21hcHBpbmcoKSBjYWxsZXJz
+IGNhbiBiZSBjYXRlZ29yaXplZCBpbnRvIHR3byBncm91cHM6IHJ1bnRpbWUgaHlwZXJjYWxscyBh
+bmQgZG9tYWluIGNvbnN0cnVjdGlvbi4NCg0KUnVudGltZSBoeXBlcmNhbGxzIHN1Y2ggYXMgWEVO
+TUVNX3BvcHVsYXRlX3BoeXNtYXAgcmVseSBvbiBvdmVyd3JpdGluZyBleGlzdGluZyBtYXBwaW5n
+cywgc28gdGhleSBtdXN0IGFsbG93IGl0LiBPbiB0aGUgb3RoZXIgaGFuZCwgZG9tYWluIGNvbnN0
+cnVjdGlvbiBjYWxsZXJzIHN1Y2ggYXMgZ3Vlc3RfcGh5c21hcF9hZGRfcGFnZXMoKSBzaG91bGQg
+bm90IGFsbG93IG92ZXJ3cml0aW5nIGV4aXN0aW5nIG1hcHBpbmdzLg0KDQpTaW5jZSBib3RoIGNh
+dGVnb3JpZXMgZGVwZW5kIG9uIHAybV9zZXRfZW50cnkoKSwgYWRkaW5nIGEgYmxhbmtldCBjaGVj
+ayB0aGVyZSB3b3VsZCBicmVhayB0aGUgcnVudGltZSBoeXBlcmNhbGwgcGF0aHMuDQoNCk15IHBs
+YW4gZm9yIHYyIGlzIHRvIGFkZCBhIGNoZWNrZWQgdmFyaWFudCBvZiBwMm1faW5zZXJ0X21hcHBp
+bmcoKSAobmFtZWQgYXMgcDJtX2luc2VydF9tYXBwaW5nX2NoZWNrZWQpIHRoYXQgdmVyaWZpZXMg
+bm8gZXhpc3RpbmcgbWFwcGluZyBpcyBwcmVzZW50IGJlZm9yZSBpbnNlcnRpbmcuIERvbWFpbiBi
+dWlsZCBwYXRocyB3b3VsZCB1c2UgdGhlIGNoZWNrZWQgdmVyc2lvbiwgd2hpbGUgcnVudGltZSBo
+eXBlcmNhbGwgcGF0aHMgcmVtYWluIHVuY2hhbmdlZC4NCg0KSSBhbHNvIG5vdGljZWQgYSByZWxh
+dGVkIFRPRE8gaW4gcDJtLmg6DQovKiBUT0RPOiBBZGQgYSBjaGVjayBpbiBfX3AybV9zZXRfZW50
+cnkoKSB0byBhdm9pZCBjcmVhdGluZyBhIG1hcHBpbmcgaW4NCiogYXJjaF9kb21haW5fY3JlYXRl
+KCkgdGhhdCByZXF1aXJlcyBwMm1fcHV0X2wzX3BhZ2UoKSB0byBiZSBjYWxsZWQuIC8NCg0KVGhp
+cyBzZWVtcyB0byBiZSBhZGRyZXNzaW5nIGEgc2ltaWxhciBjb25jZXJuLiBXb3VsZCB0aGUgYXBw
+cm9hY2ggb2YgYSBjaGVja2VkIHdyYXBwZXIgYXQgdGhlIHAybV9pbnNlcnRfbWFwcGluZygpIGxl
+dmVsIGJlIGFjY2VwdGFibGUsIG9yIHdvdWxkIHlvdSBwcmVmZXIgdGhlIGNoZWNrIGF0IGEgZGlm
+ZmVyZW50IGxldmVsPw0KDQpUaGFuayB5b3UsDQpKb2FuDQoNCj4gRVhUIGVtYWlsOiBiZSBtaW5k
+ZnVsIG9mIGxpbmtzL2F0dGFjaG1lbnRzLg0KPiANCj4gSGkgSm9hbiwNCj4gDQo+IFRoYW5rIHlv
+dSBmb3IgdGhlIHBhdGNoLg0KPiANCj4gT24gMTQvMDQvMjAyNiAwOTo1OSwgSm9hbiBCYWUgd3Jv
+dGU6DQo+PiBDdXJyZW50bHksIHByb2Nlc3Nfc2htKCkgZG9lcyBub3QgY2hlY2sgd2hldGhlciB0
+aGUgZ3Vlc3QgcGh5c2ljYWwNCj4+IGFkZHJlc3Mgb2YgYSBzaGFyZWQgbWVtb3J5IHJlZ2lvbiBv
+dmVybGFwcyB3aXRoIHRoZSBkb21haW4ncyBhbGxvY2F0ZWQNCj4+IFJBTSBiYW5rcy4gTmVpdGhl
+ciBwcm9jZXNzX3NobSgpIG5vciBwMm1fc2V0X2VudHJ5KCkgY2hlY2tzIGZvcg0KPj4gZXhpc3Rp
+bmcgbWFwcGluZ3MsIHNvIHRoZSBSQU0gbWFwcGluZyBpcyBzaWxlbnRseSBvdmVyd3JpdHRlbiBp
+ZiBhIHVzZXINCj4+IHNwZWNpZmllcyBhIGd1ZXN0IHBoeXNpY2FsIGFkZHJlc3MgdGhhdCBmYWxs
+cyB3aXRoaW4gdGhlIGd1ZXN0IFJBTQ0KPj4gcmFuZ2UuIFNpbmNlIGNvbnN0cnVjdF9kb21haW4o
+KSBsb2FkcyB0aGUga2VybmVsIGFmdGVyIHByb2Nlc3Nfc2htKCksDQo+PiB0aGUga2VybmVsIGNh
+biBlbmQgdXAgaW4gc2hhcmVkIG1lbW9yeSBwYWdlcy4gVGhpcyBjYW4gY2F1c2U6IC0gQW5vdGhl
+cg0KPj4gZG9tYWluIGNvcnJ1cHRpbmcgdGhlIGtlcm5lbCB2aWEgc2hhcmVkIG1lbW9yeSB3cml0
+ZSAtIFNpbGVudCBndWVzdA0KPj4gY3Jhc2ggd2l0aCBubyBlcnJvciBtZXNzYWdlIGZyb20gWGVu
+DQo+IA0KPiBUaGlzIHNlZW1zIHRvIGJlIHNvbHZpbmcgb25lIHNwZWNpZmljIGlzc3VlIChSQU0g
+Y2xhc2hpbmcgd2l0aCBzaGFyZWQNCj4gbWVtb3J5KSBidXQgSSBiZWxpZXZlIHRoaXMgY291bGQg
+YWxzbyBoYXBwZW4gd2l0aCBvdGhlciBraW5kIG9mIG1hcHBpbmdzDQo+IGJlY2F1c2UsIGFzIHlv
+dSBzYWlkLCBwMm1fc2V0X2VudHJ5KCkgZG9lc24ndCBjaGVjayBhbnkgb3ZlcmxhcC4NCj4gDQo+
+IFNvIEkgd291bGQgcmF0aGVyIHByZWZlciBpZiB3ZSBzb2x2ZSB0aGUgcHJvYmxlbSBvbmNlIGFu
+ZCBmb3IgYWxsLiBUaGlzDQo+IHdvdWxkIG1lYW4gbW9kaWZ5aW5nIHAybV9zZXRfZW50cnkoKSAo
+b3Igb25lIG9mIGl0cyB0b3AgY2FsbGVyKS4NCj4gQWx0aG91Z2gsIHdlIHdvdWxkIG5lZWQgdG8g
+YmUgY2FyZWZ1bCB0byBub3QgYnJlYWsgbWVtb3J5IGh5cGVyY2FsbHMNCj4gd2hpY2ggbWF5IHJl
+bHkgb24gb3ZlcndyaXRpbmcgZXhpc3RpbmcgbWFwcGluZ3MuDQo+IA0KPiBDaGVlcnMsDQo+DQoN
+ClRoYW5rcywNCkpvYW4gQmFlDQoNCg0K
 
