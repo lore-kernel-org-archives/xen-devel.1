@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EBE7F41996
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 11:58:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1282361.1564966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388D5F41998
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2026 12:14:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1282378.1564975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCyt6-0000nD-Ts; Wed, 15 Apr 2026 11:58:32 +0000
+	id 1wCz8Z-000457-8n; Wed, 15 Apr 2026 12:14:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1282361.1564966; Wed, 15 Apr 2026 11:58:32 +0000
+Received: by outflank-mailman (output) from mailman id 1282378.1564975; Wed, 15 Apr 2026 12:14:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wCyt6-0000n6-RJ; Wed, 15 Apr 2026 11:58:32 +0000
-Received: by outflank-mailman (input) for mailman id 1282361;
- Wed, 15 Apr 2026 11:58:31 +0000
+	id 1wCz8Z-000450-69; Wed, 15 Apr 2026 12:14:31 +0000
+Received: by outflank-mailman (input) for mailman id 1282378;
+ Wed, 15 Apr 2026 12:14:30 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69df7ce6.v1-9c3c2a7e817948e4aa5e830b2a7d3782@bounce.vates.tech>)
- id 1wCyt5-0000n0-M1
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 11:58:31 +0000
+ <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
+ id 1wCz8Y-00044u-BS
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 12:14:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wCyt3-00APm8-G7
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 13:58:31 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wCz8X-00CW1w-OU
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2026 14:14:29 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69df7ce6.v1-9c3c2a7e817948e4aa5e830b2a7d3782@bounce.vates.tech>)
- id 69df7d5a-e002-0a2a0a5209dd-0a2a450ab282-24
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:58:30 +0200
-Received: from [198.2.187.14] (helo=mail187-14.suw11.mandrillapp.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
+ <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
+ id 69df8125-2eae-0a2a0a5409dd-0a2a450ca6aa-0
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 14:14:29 +0200
+Received: from [198.2.187.1] (helo=mail187-1.suw11.mandrillapp.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.0)
  (envelope-from
- <bounce-md_30504962.69df7ce6.v1-9c3c2a7e817948e4aa5e830b2a7d3782@bounce.vates.tech>)
- id 69df7d65-ee98-0a2a450a0019-c602bb0eb902-3
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 13:58:30 +0200
+ <bounce-md_30504962.69df7d05.v1-915fc230090640e9a53f57400ec0dcc2@bounce.vates.tech>)
+ id 69df8124-f40c-0a2a450c0019-c602bb01cb3a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 14:14:29 +0200
 Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-14.suw11.mandrillapp.com (Mailchimp) with ESMTP id
- 4fwfkG6SFPz8XSLZn
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 11:56:22 +0000 (GMT)
+ by mail187-1.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4fwfks5LG6zBsXrPp
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2026 11:56:53 +0000 (GMT)
 Received: from [37.26.189.201] by mandrillapp.com id
- 9c3c2a7e817948e4aa5e830b2a7d3782; Wed, 15 Apr 2026 11:56:22 +0000
+ 915fc230090640e9a53f57400ec0dcc2; Wed, 15 Apr 2026 11:56:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,121 +52,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="anthony.perard@vates.tech" header.h="From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776254182; x=1776524182;
-	bh=WIWJlCYAKOt0EHTWZdN0VepA2MSlrAv0igbJ3uBehFg=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	s=mte1; t=1776254213; x=1776524213;
+	bh=w7uZ9Pb+etRnkvD6kyJuXnCt2Zq8CjZnHSza/rI5GdI=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=FQRaEMZspkHw0E7oZGKsLJ+X6cyXylXGT60UsrNzgQ06REGJXpWYIJInvadwoJ/UC
-	 h3AfB4Omyb/RLVFOuV84MiQIO5bmNjIsuE8kQ/E1kNvw1m3bNCdXgQWqJ1V7kenffr
-	 b/I08Cz1VOhLFVQQgoWYBWNxfrN80J7nde1xnqoYyi1zmAOBQYtoKKn4BRL9YW2k0E
-	 CH/Mipav0KPQFFVUmprEi1DFnoGlp/PTxpPHcnNfVr74xJwRgE+3AZsIjW6d4RbK83
-	 sm0cajmE+0fVYA1PfiEAm95tkk9BbvDHeU6njmXYRdgye70gx0YhCQ5DzAvDfoP/Hx
-	 LwSNbijU1roig==
+	b=CQHqUMsCz6G6y5IuNR+Sj2zG5LEwONvitxLNgNI3QhjufdiqpbMwzc4UTFkcenuda
+	 dx3c/4uuYk90YHErDBqBXdJCaLGvbejQThiZRslsskyUIBIkKLprHOiXK3M7KqA+uI
+	 RbfLLPJSF2Alse9HnaspqiJPPQxAaGa7kd8KmXHoWcXbhw57aFrGSG8wQgUHJhljTt
+	 E+Bw3wM9919AcSdt8x0BCbRJAnuUWP07LshEYguQoJ13Grmd8GWafXCPvZ2I8CkoIh
+	 YmIBLvanAbLcMImEg4cgCwizpY/CSrZz57eXtM1FRSDZNGVEGpFE9ncOqGoEUi6k/z
+	 5Rv3wBa+hny7Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776254182; x=1776514682; i=teddy.astie@vates.tech;
-	bh=WIWJlCYAKOt0EHTWZdN0VepA2MSlrAv0igbJ3uBehFg=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
+	t=1776254213; x=1776514713; i=anthony.perard@vates.tech;
+	bh=w7uZ9Pb+etRnkvD6kyJuXnCt2Zq8CjZnHSza/rI5GdI=;
+	h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
 	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
 	 Subject:From;
-	b=nfuSHcvY9Vpz4mWWc1r0kBUVcj772WAxm6nlGXzTIr7OlX64m0/76nn4JDzs26LvT
-	 WGQgVt5Jt5vWuetfAQlEoQDOcDFYF4PW1tSd/g7k/wobvkltMWYvDunBYpcBwFR9Ps
-	 dJ5hUIxof/4AL1hfLFe8Z1aCdcSz/kGmcVhGGL/i9rydsCdTC0ZGPx+ib9bhC/axAT
-	 eSYuo9LTRnIcS0m/TpTnih2QLUbMIIGSPro6w2j+IPoGGi7AHDZTkf25/yfXM3Ehv1
-	 4DtwumLfdVBTVQg6YqmRPWqKkVuy5aOvkyOhUILxUciZPDwhw4tOMp63mEH3aAkLX/
-	 tYTg8AlzKv1yA==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=201/6]=20xen/dt-overlay:=20fix=20double-free=20of=20rangesets=20on=20attach=20failure?=
+	b=T0S1DsUYhLnqa9/Yv0iIocuwYGYX60zgSFOAlpTVSXUEvtT7ih44ubaytqKwM9Vjj
+	 4hNt43RfQ/gNA3zeF32qqP3pUp832EDW+7UGb1paN/bteN7g7LmewWxYmx/UT2VBqq
+	 FGQHEMyVHQAPEai+595Fkhj+6aia1GOiKwVvtWT0N+AAOAiDDbCs7gBqAI7IbjxYH3
+	 crBRKgBpJPkOO7V8zUSlAFuOofZSh5YV3vs0dpuB6Yfsi1AH0mE0R5Ty/MQcW7Jl5A
+	 L3oulOXdlcLiqCx7Ij1IU+7s0/wVah8mteTWg3jvAZjthzD9o6svPnfR/zDKtplQeP
+	 c0Poy23ZtRFjw==
+From: "Anthony PERARD" <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=20test-artifacts=20v3=2004/13]=20Add=20linux-6.12.79-x86=5F64?=
 X-Bm-Disclaimer: Yes
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776254181615
-Message-Id: <29f94a8b-1c5d-42b6-9887-4303ddf58bd0@vates.tech>
-To: "Gyujeong Jin" <wlsrbwjd7232@gmail.com>, "Michal Orzel" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org, "Stefano Stabellini" <sstabellini@kernel.org>, "Julien Grall" <julien@xen.org>, "Bertrand Marquis" <bertrand.marquis@arm.com>
-References: <20260415113700.107915-1-michal.orzel@amd.com> <20260415113700.107915-2-michal.orzel@amd.com> <CANrF8CEDV5m1Jap0kBoa3sOXD2GV6PAYumfV9rgL2c70nZa=tg@mail.gmail.com>
-In-Reply-To: <CANrF8CEDV5m1Jap0kBoa3sOXD2GV6PAYumfV9rgL2c70nZa=tg@mail.gmail.com>
+X-Bm-Transport-Timestamp: 1776254212591
+To: "=?utf-8?Q?Marek=20Marczykowski-G=C3=B3recki?=" <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, "Andrew Cooper" <andrew.cooper3@citrix.com>, "Stefano Stabellini" <sstabellini@kernel.org>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
+Message-Id: <ad99BL-v7fOAdqH8@l14>
+References: <cover.bd2e5bd58e4b316c9c1042b1ca8db51b81fb7ea7.1774999132.git-series.marmarek@invisiblethingslab.com> <b53df707293f8907f5bb28a6d7380c28236b2637.1774999132.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <b53df707293f8907f5bb28a6d7380c28236b2637.1774999132.git-series.marmarek@invisiblethingslab.com>
 X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.9c3c2a7e817948e4aa5e830b2a7d3782?=
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.915fc230090640e9a53f57400ec0dcc2?=
 X-Mandrill-User: md_30504962
 Feedback-ID: 30504962:30504962.20260415:md
-Date: Wed, 15 Apr 2026 11:56:22 +0000
+Date: Wed, 15 Apr 2026 11:56:53 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1776254310-BED4A0B1-88B86905/0/0
+X-purgate-ID: tlsNG-d25034/1776255269-FE350A3D-D26C1ADC/0/0
 X-purgate-type: clean
-X-purgate-size: 2554
+X-purgate-size: 480
 
-Le 15/04/2026 =C3=A0 13:51, Gyujeong Jin a =C3=A9crit=C2=A0:
-> Thanks for your efforts.
-> 
-> I=E2=80=99ve seen some advisories that received cve here.
-> https://xenbits.xen.org/xsa/ <https://xenbits.xen.org/xsa/>
-> 
-> Can I receive a cve for this report?
-> 
-> Thanks.
-> 
+On Wed, Apr 01, 2026 at 01:21:54AM +0200, Marek Marczykowski-G=C3=B3recki w=
+rote:
+> +linux-6.12.60-x86_64:
+> +  extends: .x86_64-artifacts
+> +  script: ./scripts/build-linux.sh "6.12.60"
 
-Device-tree overlay is marked as "Experimental", hence it's not Security 
-supported so no XSA would be issued, even if it it has security 
-implications for the feature.
+I've got:
+    $ ./scripts/build-linux.sh "6.12.60"
+    LINUX_VERSION must be set
 
-I don't know regarding individual CVEs though.
+Linux version want's to be in a env variable, not an argument.
 
-> 2026=EB=85=84 4=EC=9B=94 15=EC=9D=BC (=EC=88=98) 20:37, Michal Orzel <mic=
-hal.orzel@amd.com 
-> <mailto:michal.orzel@amd.com>>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
-> 
->     handle_attach_overlay_nodes() destroys the IRQ and IOMEM rangesets on
->     failure but leaves the pointers dangling in the tracker entry. A
->     subsequent handle_remove_overlay_nodes() for the same overlay will ca=
-ll
->     rangeset_consume_ranges() on freed memory followed by a second
->     rangeset_destroy(), resulting in use-after-free and double-free.
-> 
->     NULL the pointers after rangeset_destroy() so that remove_nodes() and
->     handle_remove_overlay_nodes() skip the stale entries.
-> 
->     Fixes: 4c733873b5c2 ("xen/arm: Add XEN_DOMCTL_dt_overlay and device
->     attachment to domains")
->     Reported-by: Gyujeong Jin <wlsrbwjd7232@gmail.com
->     <mailto:wlsrbwjd7232@gmail.com>>
->     Signed-off-by: Michal Orzel <michal.orzel@amd.com
->     <mailto:michal.orzel@amd.com>>
->     ---
->      =C2=A0xen/common/device-tree/dt-overlay.c | 2 ++
->      =C2=A01 file changed, 2 insertions(+)
-> 
->     diff --git a/xen/common/device-tree/dt-overlay.c b/xen/common/
->     device-tree/dt-overlay.c
->     index d184186c015e..6fa07dbf42a5 100644
->     --- a/xen/common/device-tree/dt-overlay.c
->     +++ b/xen/common/device-tree/dt-overlay.c
->     @@ -910,7 +910,9 @@ static long handle_attach_overlay_nodes(struct
->     domain *d,
->      =C2=A0 =C2=A0 =C2=A0if ( entry )
->      =C2=A0 =C2=A0 =C2=A0{
->      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rangeset_destroy(entry->irq_ranges=
-);
->     +=C2=A0 =C2=A0 =C2=A0 =C2=A0 entry->irq_ranges =3D NULL;
->      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rangeset_destroy(entry->iomem_rang=
-es);
->     +=C2=A0 =C2=A0 =C2=A0 =C2=A0 entry->iomem_ranges =3D NULL;
->      =C2=A0 =C2=A0 =C2=A0}
-> 
->      =C2=A0 =C2=A0 =C2=A0return rc;
->     -- 
->     2.43.0
-> 
-
-Teddy
+Cheers,
 
 
 --
-Teddy Astie | Vates XCP-ng Developer
+Anthony Perard | Vates XCP-ng Developer
 
 XCP-ng & Xen Orchestra - Vates solutions
 
