@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D10A7F8A154
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 10:04:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1283193.1565469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD377F8A160
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 11:28:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1283232.1565513 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDJaF-0001EJ-2O; Thu, 16 Apr 2026 10:04:27 +0000
+	id 1wDKtH-0003wA-Gs; Thu, 16 Apr 2026 11:28:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1283193.1565469; Thu, 16 Apr 2026 10:04:27 +0000
+Received: by outflank-mailman (output) from mailman id 1283232.1565513; Thu, 16 Apr 2026 11:28:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDJaE-0001EC-V6; Thu, 16 Apr 2026 10:04:26 +0000
-Received: by outflank-mailman (input) for mailman id 1283193;
- Thu, 16 Apr 2026 10:04:25 +0000
+	id 1wDKtH-0003w3-DK; Thu, 16 Apr 2026 11:28:11 +0000
+Received: by outflank-mailman (input) for mailman id 1283232;
+ Thu, 16 Apr 2026 11:28:10 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69e0ad9a.v1-d274f2a866104456a30f2c4c29706734@bounce.vates.tech>)
- id 1wDJaD-0001E6-4q
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 10:04:25 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wDKtF-0003vx-UW
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 11:28:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDJaC-009FEl-AA
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 12:04:24 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69e0ad9a.v1-d274f2a866104456a30f2c4c29706734@bounce.vates.tech>)
- id 69e0b423-bab6-0a2a0a5309dd-0a2a4504df9a-46
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 12:04:24 +0200
-Received: from [198.2.187.1] (helo=mail187-1.suw11.mandrillapp.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <bounce-md_30504962.69e0ad9a.v1-d274f2a866104456a30f2c4c29706734@bounce.vates.tech>)
- id 69e0b427-1dec-0a2a45040019-c602bb011ec8-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 12:04:23 +0200
-Received: from pmta09.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail187-1.suw11.mandrillapp.com (Mailchimp) with ESMTP id 4fxCZL1dGSzBscwFR
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:36:26 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- d274f2a866104456a30f2c4c29706734; Thu, 16 Apr 2026 09:36:26 +0000
+ id 1wDKtF-00GUzC-BR
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 13:28:09 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e0c7c6-2eae-0a2a0a5409dd-0a2a450b8dc4-20
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 13:28:09 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e0c7c9-212f-0a2a450b0019-d1558033f048-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 13:28:09 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-488d2079582so73450555e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 04:28:09 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488f0e9a72csm42587255e9.16.2026.04.16.04.28.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Apr 2026 04:28:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,91 +53,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776332186; x=1776602186;
-	bh=XBI41eIb5EU5Imt0X3QJY323Za5K20vqbhiyQsF2MHc=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=cRWr7WXnNwYozjPEINg3E5OS0lcDqp7ZeTnf/4ocBGc0Yi3b8oZzDcx4rjO8TEZo6
-	 +C8uaSW3RI30R46lLMR+jzOB/VPnlq3oSMeHFky1+3Aj8d+YL0JRgpQ/9QWbHdB6Ya
-	 kTlQWg0ENxDDa4dleNr9E5UQ9vMZdwVcxpCi2j87I2gacNsLW3rv/hQTQKUnr8WKql
-	 GCjYNW3kcvKwMMpC9EJGC43CJbYBgVH7FBGGrLs1LsVjZq+D+upsFgma7hnKK9S0GA
-	 nh54hfQuredN64Z96qMRmKUKyw6OSRTF+F4SllcNbfvx/ah8wv2k4NR9eEU58OQUi8
-	 VToQcfL9aZ/EQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776332186; x=1776592686; i=teddy.astie@vates.tech;
-	bh=XBI41eIb5EU5Imt0X3QJY323Za5K20vqbhiyQsF2MHc=;
-	h=From:Subject:To:Cc:Message-Id:Feedback-ID:Date:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:CC:Date:Subject:From;
-	b=T3J/JuBolgwiwvEsS3HqPwR1e5LcLf1C6aW6xneZcUwET+zeTj0wGn6KP85BFc8N1
-	 +qOzySUgBnteg7s3Wkpq36afJqbLBWFAURGg1jyBEojVHj2Hme1TjYLNpeLkE6jKcZ
-	 S8F7YYCpAM58+09KMChJl9JzGTL9PEL7SZbQab1J8oDHH2+o0C4vQtq+lEVCGV8LKt
-	 SQiwG9GI6yLtl8X/qq5ADhFjz1oTi389zzuYzzBT7zAuxE844aQHpU7GamR4xLBYMB
-	 2Iu02RszTH39pPpvjMb5Ik2kPhKsqoinqXSABUXw+wdkq45PVJBKUVp3OoTdpwlXZy
-	 y8gGpe34lmHcg==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?[PATCH=20v2]=20x86/vmx:=20Avoid=20pausing=20on=20HVM=5FPARAM=5FIDENT=5FPT=20in=20additional=20cases?=
-X-Mailer: git-send-email 2.52.0
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776332185305
-To: xen-devel@lists.xenproject.org
-Cc: "Teddy Astie" <teddy.astie@vates.tech>, "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>
-Message-Id: <10315bf1a012edf4821f7386b3142e56b6c23e34.1776332054.git.teddy.astie@vates.tech>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.d274f2a866104456a30f2c4c29706734?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260416:md
-Date: Thu, 16 Apr 2026 09:36:26 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1776338889; x=1776943689; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=w1dvHbggISbXY1daKgxew8q+wBdaRi4gHqSc4ZF0+Lg=;
+        b=A9JDS8p6et+fvDe8DEmwuuWWplPQVn+3fbFmUygTL/HiNgyBHOIEL1drTXhXv+CAij
+         lQQ6mL2l0lVLhyPuLUVRAmklqt4aEAPiDp46EVFtQPpyFvQXk8IA1l5QqtsC2nqYRO4Z
+         b4Od7p8CfRi6kZNUYE0pWi3joPAxLLeJs2VKo5E1z9CweabgdMuPMoa6K/QzuegcQXrW
+         ekvhX0SM8wKINzGGU0AF+yyMv2F2zqZ/snIu6M21aR3k2HJ3Nkt0fUsWuqnuz+EUOjvT
+         JsBmNjBot5SjEBv3zB717TfPG/YQUl5eakbULnOGkjIXkZ8fIbCkGT80Qf5lYMuYgrT6
+         k7WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776338889; x=1776943689;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=w1dvHbggISbXY1daKgxew8q+wBdaRi4gHqSc4ZF0+Lg=;
+        b=BC9ZHz2srZcq4YtOIvpf6KaYHCOaqxrpnxUjwa900Au3jcHwuLzkTjrbX/wbTboC+A
+         qnIgYFEaAa9Bq+Ck/18By3JYc2JhrJEMqva9zyl0IxFccnilDbOZvWMWNN1zmi86ox+u
+         ML/aY4VEeCQDoo2/3OQpNb5Zz6rNHjv9wy2//EoKVzGoNJUV2gkzJATvu8Uasf+B+nSm
+         qtA4xk08f/T2YToHV/fL6H6tS8NrF8q+4ste38stsSQ8vPFTn4WyaVC3ReHaJhe0B9zl
+         lCSfszIpcGvt/4UI9u27v72oCiQvEgK2HpnA7KRwtSByhB8qaSdKINZI6kwPjjE2fQfC
+         0zxA==
+X-Forwarded-Encrypted: i=1; AFNElJ9QPuzU2IocFuzg/cQOr0TM+kn/nkFrsIRGTTcs5JTecT7iB9MHKj+KLxbcYB6M6CsqQ7XVMDpAlnI=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwxUn6OxuVJB5DMA92RNI32AWZ7x9bDvf/+Cidin+DZCYTtTc+f
+	rEoHCQRY4HjJTcDzqR/a5HRNZcPT4A1pqZrmjZzqGglCbJx1z16t2/W2eJddVQL8Eg==
+X-Gm-Gg: AeBDieuqd2lWxKQUK4M/pqM/Plg6/iYEn8wT4N5Jg3fXjyrf716svCjX3lM6f5FM+3q
+	9yfeok6rbpc1QFR6/mI6w07HxPlmGGZ3i2j4grPPX7OAG445YxiAlCfknCVO3uiWqw6bHwKCEFT
+	bsT+/3BE7Eb3JQaSxCRL1yFE+PHQMRhGjlGTQaU3mKZinlCDS1MP+qXZt0Cz56rYkTUA/GPQKNq
+	PXPyOXhTYUe7uGbd7csjwYJZrfJCIfngylUVoYVs8faGihvaQDtzG9ehMmBCLH7Z+o90kU0kdJy
+	txuftoGd0uNLkyYLVLcygP+tJFVN9owwHhNWhI2HDSFLqkBLmvVIRuuDPWxGdrdnXj7yUPJYtJB
+	8srr4nx8QljKcIg3CeflJyrX6KmfLNo3ARlmTM0144Ywx92NwGQYTPzo+c5DEQE3jjJZDG8ix6G
+	Jnb0DDn7Z6xq7pILkzC53YT/9Js7XPg14VBe04Q6Fptmyhd90PcrQGkpnXfoQUG44WrKyOgQ6DW
+	Q+jX4QZ0uWVduZeSt6ITU65bQ==
+X-Received: by 2002:a05:600c:a306:b0:480:20f1:7aa6 with SMTP id 5b1f17b1804b1-488d68607e8mr251217955e9.21.1776338888579;
+        Thu, 16 Apr 2026 04:28:08 -0700 (PDT)
+Message-ID: <f424bf3a-0113-4c66-b165-8dae82817f24@suse.com>
+Date: Thu, 16 Apr 2026 13:28:11 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1776333864-293773FF-E3D5F8CB/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] x86/time: use native TSC scaling factors when TSC is
+ not scaled
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260414103327.7420-1-roger.pau@citrix.com>
+ <20260414103327.7420-2-roger.pau@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260414103327.7420-2-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1776338889-7D165F3B-2FF5CC75/0/0
 X-purgate-type: clean
-X-purgate-size: 1205
+X-purgate-size: 3325
 
-When settings HVM_PARAM_IDENT_PT, skip domain pausing when :
-- there is no vcpu
-- unrestricted guest capability is used
+On 14.04.2026 12:33, Roger Pau Monne wrote:
+> When running HVM guest in native TSC mode avoid using the recalculated vTSC
+> scaling factors based on the cpu_khz value.  Using the kHz based frequency
+> leads to the TSC scaling values possibly not being the same as the ones
+> used by the per CPU cpu_time->tsc_scale field, which introduces skew
+> between the guest and Xen's calculations of the system time.
+> 
+> On a 2gHz system, where the frequency is possibly detected as 1999999999Hz
+> (note this is a worse-case scenario), the cpu_khz variable will be set to
+> 1999999kHz, and hence 999Hz cycles will be not accounted for per second.
+> Over a second (the time synchronization period), this leads to a skew of:
+> 
+> cycles * 1 / (Hz freq) = 999 / 1999999999 = 499,5ns
+> 
+> So far this has gone unnoticed because the time synchronization rendezvous
+> forces the update of the tsc_timestamp and system_time fields in the vCPU
+> time info area, and hence the skew only accumulates up to the rendezvous
+> period.  Attempting to remove the rendezvous causes the skew to grow
+> unbounded.
+> 
+> Fix by using the native TSC scaling values (as used by Xen) when the guest
+> TSC is not scaled.
+> 
+> Fixes: eab8a90be723 ("x86/time: scale host TSC in pvclock properly")
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> I'm worried about the usage of cpu_khz beyond simple printing it for
+> informational purposes.  Overall I think it would be safer to store the
+> frequency in Hz, as to avoid losing the least significant digits.
+> 
+> In any case, that's a different change.
 
-Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
----
-v2:
- - rebased patches with staging
+I'm not quite sure - improving accuracy is of course a good thing, but will
+we ever be able to do any such calculations error free, when already the
+detected frequency isn't exactly precise?
 
- xen/arch/x86/hvm/hvm.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+> --- a/xen/arch/x86/time.c
+> +++ b/xen/arch/x86/time.c
+> @@ -1710,17 +1710,25 @@ static void collect_time_info(const struct vcpu *v,
+>      else
+>      {
+>          if ( is_hvm_domain(d) && hvm_tsc_scaling_supported )
+> -        {
+>              tsc_stamp            = hvm_scale_tsc(d, t->stamp.local_tsc);
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4a81afce02..61871dbd3e 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4237,11 +4237,13 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
-             rc = -EINVAL;
-         break;
-     case HVM_PARAM_IDENT_PT:
-+        v = domain_vcpu(d, 0);
-+
-         /*
-          * Only actually required for VT-x lacking unrestricted_guest
-          * capabilities.  Short circuit the pause if possible.
-          */
--        if ( paging_mode_shadow(d) || !using_vmx() )
-+        if ( paging_mode_shadow(d) || !using_vmx() || !v || vmx_unrestricted_guest(v)  )
-         {
-             d->arch.hvm.params[index] = value;
-             break;
--- 
-2.52.0
+This is a potentially imprecise calculation. How likely is it that its result
+will indeed ...
 
+> -            u->tsc_to_system_mul = d->arch.vtsc_to_ns.mul_frac;
+> -            u->tsc_shift         = d->arch.vtsc_to_ns.shift;
+> -        }
+>          else
+> -        {
+>              tsc_stamp            = t->stamp.local_tsc;
+> +
+> +        /*
+> +         * HVM guests using the native TSC ratio should use the same per-CPU
+> +         * scaling factors as Xen.  This ensures time keeping is always in sync
+> +         * between Xen and the guest.
+> +         */
+> +        if ( tsc_stamp == t->stamp.local_tsc )
 
+... exactly match t->stamp.local_tsc? Don't we possibly need a (small) error
+margin? (In which case of course the next question would be: How to establish
+such a margin?)
 
---
-Teddy Astie | Vates XCP-ng Developer
+Jan
 
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+> +        {
+>              u->tsc_to_system_mul = t->tsc_scale.mul_frac;
+>              u->tsc_shift         = t->tsc_scale.shift;
+>          }
+> +        else
+> +        {
+> +            u->tsc_to_system_mul = d->arch.vtsc_to_ns.mul_frac;
+> +            u->tsc_shift         = d->arch.vtsc_to_ns.shift;
+> +        }
+>      }
+>  
+>      u->tsc_timestamp = tsc_stamp;
 
 
