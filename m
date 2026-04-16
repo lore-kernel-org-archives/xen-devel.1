@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34917F8A143
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 08:00:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1283056.1565350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84E8F8A140
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 08:15:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1283066.1565361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDHeS-0004AE-LU; Thu, 16 Apr 2026 08:00:40 +0000
+	id 1wDHs7-00060n-QS; Thu, 16 Apr 2026 08:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1283056.1565350; Thu, 16 Apr 2026 08:00:40 +0000
+Received: by outflank-mailman (output) from mailman id 1283066.1565361; Thu, 16 Apr 2026 08:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDHeS-0004A7-If; Thu, 16 Apr 2026 08:00:40 +0000
-Received: by outflank-mailman (input) for mailman id 1283056;
- Thu, 16 Apr 2026 08:00:38 +0000
+	id 1wDHs7-00060g-MM; Thu, 16 Apr 2026 08:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 1283066;
+ Thu, 16 Apr 2026 08:14:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wDHeQ-0004A1-Hx
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 08:00:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wDHs6-00060a-O5
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 08:14:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDHeP-008lFI-E8
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 10:00:37 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wDHs5-004zU6-Eb
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 10:14:45 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e09723-2eae-0a2a0a5409dd-0a2a450581bc-4
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 10:00:37 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e09a70-bab6-0a2a0a5309dd-0a2a4507d11c-26
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 10:14:45 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e09725-aaa8-0a2a45050019-d155dd2adccd-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 10:00:37 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-43cfe71e5d3so5942623f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 01:00:37 -0700 (PDT)
+ id 69e09a75-229c-0a2a45070019-d1558031c0eb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 10:14:45 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-488a9033b2cso92682475e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 01:14:45 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43ead3d5c8fsm12169840f8f.19.2026.04.16.01.00.34
+ 5b1f17b1804b1-488f0ad1e4fsm71315205e9.1.2026.04.16.01.14.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Apr 2026 01:00:35 -0700 (PDT)
+ Thu, 16 Apr 2026 01:14:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,53 +55,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1776326437; x=1776931237; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1776327285; x=1776932085; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=XKZwicmqb2cHpd/GbOmMhjuShjCWstgKPs70YGlsOyY=;
-        b=PsiH7BSAfcFn2hbqfCUVKSeF5HbmqaK7qq8Cno9a/kTjtrTBdImk8Gc5oCtghRezRL
-         RGvftkMJoorQGuZwo0749KxI5E/NjVrA5V+UujwQ8A+lfFKpNIqhjs2e4Mn1JvzGc3Xn
-         9MBkooRCb3SNf9IAy+XKfJazXpevDcsWmfqnP7L6wLNXOyRZdIcfWVJK1bdVjigVlCbu
-         jbpEeGCyByT/tanWzrBSgALw4n/DCh+XUeoiDtA8XHpzcQgS2zwIwrFWE7RuOHuTarZi
-         nKyLQgm3KDFA469MI1+7PXDsjnvrgDkysg3aUbXtiCQjUm/YGBWQdi1K00QRTth3zP4U
-         dbrg==
+        bh=p1QIm5E603AZnHs17+I/8L71jgSjY7rjOHGih7nazO0=;
+        b=OlHuIlEJzqrRnk/Ql7uHITgur9AbFjcNfiGiks9xsUzgkg3qy85QoKnNFhjEyICQr8
+         Ez5axEXMSHQn980IYglT/2G9okL5RVLH+vXkxUqZeBKNSSfe49WQvS4MlIQdWD8esFMd
+         PxaD+eH3H1Yix6aDxjTw3bw63Twvga3cEn1k+rkv58d6oQwycfywYFZKYYC15LeuOu1w
+         pB9vLGnaI+kIhHEPU8/7/SRXipFJplNH3iyyTg747zEbDTZahqBFgx+fGesXYyPZDscL
+         q3x/t+pz31kr51/Y568N+5vgAoHnnUDX/UrPww08hrnoldyJZqxSr6QxKpIYxly+kY0A
+         hdsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776326437; x=1776931237;
+        d=1e100.net; s=20251104; t=1776327285; x=1776932085;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XKZwicmqb2cHpd/GbOmMhjuShjCWstgKPs70YGlsOyY=;
-        b=WAn94WJWmBIPZqJvDoVRdmag7azWe/05294Jd1Sf0GHey+WCw1dkGydumEhZu+ePnl
-         2k2R78kbCpxQ/bVAaLY6KUrJkZqc7xIILlUArrBgnTPF2K2K9rKF5uQGfy+9y2mFTPTK
-         c6o/Z2mhpKDdRFMdO5lWrQO3D9XhlVyPqR8aAlqK6DuqdsmX8rlYLu0sk3U3EvsYnyfP
-         OfFFxaXLO39bS8EwokrtYxB1KMlJrACkiHZ1Jpqy2iX7qYZqzv8SyG0ro9/CwW+vwWMU
-         jp/oMlLFD/sfD34eDJQW6g5zd5BxppkqV3phtMfKTX6VYLpFDX4Dq8u9sKREF2WBogcY
-         VB3w==
-X-Forwarded-Encrypted: i=1; AFNElJ/AzvKtmAuEttyyRkLATh5GImCtz0d18p8mdwkMnB4Ek/nZyOjS1zKSgWGLUTojX9OF7l7sTopE9x0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxX+uUDBuRUXx5iEjQtzZVOvOlGbH3rAeaxsIslomojYRYm7Or4
-	KZjdoraaBu6PSHb9+PYfHMzshHjaHEa3ZAwbBksCzPfsKpUox0/K+XrBlszdzahbXw==
-X-Gm-Gg: AeBDietYSMF6YAO1ko5BYTwwc1j6oPDys1JAZ8dvMdcGdFL5MviTNZf4Cy3AS5K32lX
-	EBwdDDXAxsKhNtB+4Rlr8ORvZYE+vFdBA+UDTxPgYc/kPb7i9d/n5+a1M3Zz/erl5+dBf5x6vjv
-	jqtphLhZpoNmHLspHlJinQiRwN9HHfulQ1LK8g1ylIh+kq+JhV61nAzaamgQTOhMYFgyTTFfr+L
-	BdWr/UzbpUAbPq4v1Z5HjehBRJLqWY0+/td42CJgbCRNdjQ3av7RfNBSOgmb2g3NXtjFEZcpvPg
-	Ss8HYKLw7+ik/c4E+T7x/8VeEAXBgmDC+1wYxQQ2HwwDDf5WQ4A3bbTYpSDlGdaIGKzyujdtNkb
-	/uL1dlfWS4feDl2ZWraDpHviJRT3nQ1dppvBWhXlkSYjHzS7Qdl08BBzBJZdDc0ZPCVLRkvltFq
-	XV5YYTNQo8RRecvboK9hlqyzi3ag2Z/sq6t2JRWzGNRXUIwai9wEBouiCKRbzOWamPsA4s3Th3n
-	A4GiBY+spgA/Ze4pcm7NzP2fg==
-X-Received: by 2002:a05:6000:1a8d:b0:43d:1bf6:30f3 with SMTP id ffacd0b85a97d-43d6424c4f6mr36834838f8f.14.1776326435656;
-        Thu, 16 Apr 2026 01:00:35 -0700 (PDT)
-Message-ID: <4347d816-f838-443c-aaed-5e0bf615bbf9@suse.com>
-Date: Thu, 16 Apr 2026 10:00:37 +0200
+        bh=p1QIm5E603AZnHs17+I/8L71jgSjY7rjOHGih7nazO0=;
+        b=qqL1TEdXecK/GX1I4/3Uqwm1Ap3/GLp1vilA36890ay4Gy7GBSarfHCJATfUxESPrI
+         +7FMUE2skqXu7CgqDrRs71lK2Hu38Agn70NVmei+Ue3cy3Akmvj6LvLeuzONxiev+Inh
+         NjeAAVQYR9OZjJan5m3/w2q5gp6/rHryVXZx/PvShy4pdKo7WDR9ZEIOwYifzwqZhT7O
+         5a0BECacNWhCi2S5vWIfM1jB8Q/gZrawIV2RjeVBT/k2WXyYnEaz++vceHTV0sE38Z2B
+         5tXvBC3vWzjjhpSW03qdV5OcSTC6qvB49+jI6sjob1Ek1PgSr8w5ZRe/PMbGUC0HhVNB
+         /cRg==
+X-Gm-Message-State: AOJu0YxtlA3HxfAj22GH16ZM9FaI+VD565xVjk2hCJdSBn4kS4rBfeeM
+	KbYma1VQ3F9CLxmeV8fSqGg7dMGoC0gk6pc9FZIcoxMicRRm9LHg+tV6vvT3Hk8ayQ==
+X-Gm-Gg: AeBDietdYQ0/rFtrFasXMofRufFMmoQoIr4UiH/zWh2cw+z5HX1RlJa/GOuh9kI0fnE
+	L6YH0sFaSiEh7Fsz7uPaLH9wI1rVnl7PWUd58K7eNHKoDF4vutzZmHIB6NeMYG9FHd7JQyxSZS9
+	Xaf3Jj1+HAdCmNTg2ZEsDCBiQDwBUXxp8F87Twg1tFGTNsO5t4wAX9zAGbdeqTPFrLlp3a6a4hg
+	PYHom17Oi6Hv9P0W/neSbXfNHP/GBURf/Vf+nxp/PHghp2g3jLQTIOUkVeCfyKbZddZjxL6Jfj2
+	cdgnuIxFqjbfXAMgRbO2DmpMtMrbNb6B6zVJo7j38M2FP8d9DlKUBcE8kuN7IZwoD7fMhawrCxo
+	QrQGskNnnktcF2LCe315UL467FA55vYoAV0AmFS6lwg2lYETWZyune1yKhPt74lSB60Yen1LgS1
+	SElSinf8pSO8BRl7HC81JT6/mUcaazccrSyfWphqUFfpJtZoE8+IiN2I1qq5kxn8z+MnsDwujf9
+	S74B5vCt52adfYOJnFZ1XKgQg==
+X-Received: by 2002:a05:600c:a109:b0:488:a977:8de with SMTP id 5b1f17b1804b1-488d6839866mr238187375e9.16.1776327284666;
+        Thu, 16 Apr 2026 01:14:44 -0700 (PDT)
+Message-ID: <3f832c12-5a02-418d-b420-23ed3cf798db@suse.com>
+Date: Thu, 16 Apr 2026 10:14:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/sched: fix scheduler callback verification on init
-To: Ruslan Ruslichenko <ruslichenko.r@gmail.com>
-Cc: volodymyr_babchuk@epam.com, Ruslan_Ruslichenko@epam.com,
- Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
- George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
-References: <20260410164039.1000284-1-ruslichenko.r@gmail.com>
+Subject: Re: [PATCH] hypfs: remove unreachable statement in the
+ 'hypfs_get_entry_rel()'
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
+ Juergen Gross <jgross@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <341811ced2943fb79d0235c27781c564c7bdaf02.1775749146.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,37 +126,28 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260410164039.1000284-1-ruslichenko.r@gmail.com>
+In-Reply-To: <341811ced2943fb79d0235c27781c564c7bdaf02.1775749146.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1776326437-E23D8443-AB5D4AF8/0/0
+X-purgate-ID: tlsNG-ef75cf/1776327285-AE573C48-5BD032FD/0/0
 X-purgate-type: clean
-X-purgate-size: 1001
+X-purgate-size: 631
 
-On 10.04.2026 18:40, Ruslan Ruslichenko wrote:
-> From: Ruslan Ruslichenko <Ruslan_Ruslichenko@epam.com>
-> 
-> During core scheduler initialization, each registered scheduler
-> is sanity tested in two steps:
-> 
-> - it must provide required callbacks (e.g. init, do_schedule).
-> - if global_init callback is present, it must succeed.
-> 
-> If any of the steps fail, scheduler entry is cleared in global
-> 'schedulers' array.
-> 
-> However, in the current implementation, if verification fails during
-> the first step, the scheduler entry is cleared but verification
-> sequence is not interrupted. This lead to NULL pointer dereference
-> when subsequent required callbacks verified, and possible during
-> the second step.
-> 
-> The patch fixes the crashes by adding check inside sched_test_func
-> macro and skipping the call to a global_init if first step did not pass.
-> 
-> Signed-off-by: Ruslan Ruslichenko <Ruslan_Ruslichenko@epam.com>
+On 09.04.2026 17:55, Dmytro Prokopchuk1 wrote:
+> --- a/xen/common/hypfs.c
+> +++ b/xen/common/hypfs.c
+> @@ -347,8 +347,6 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+>          path = end + 1;
+>          dir = container_of(entry, struct hypfs_entry_dir, e);
+>      }
+> -
+> -    return ERR_PTR(-ENOENT);
+>  }
 
-This likely also wants a Fixes: tag.
+How certain are we that no supported compiler in any mode of compilation might
+issue a diagnostic for the then missing "return" at the end of a function
+returning non-void? Imo we might be better off adding ASSERT_UNREACHABLE() and
+keeping the "return" that's there.
 
 Jan
 
