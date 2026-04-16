@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CFAFA0C4E
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 07:50:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1283028.1565333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC04F8A141
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 07:56:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1283035.1565342 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDHUc-0001IW-86; Thu, 16 Apr 2026 07:50:30 +0000
+	id 1wDHZj-0001rO-PV; Thu, 16 Apr 2026 07:55:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1283028.1565333; Thu, 16 Apr 2026 07:50:30 +0000
+Received: by outflank-mailman (output) from mailman id 1283035.1565342; Thu, 16 Apr 2026 07:55:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDHUc-0001IP-4l; Thu, 16 Apr 2026 07:50:30 +0000
-Received: by outflank-mailman (input) for mailman id 1283028;
- Thu, 16 Apr 2026 07:50:28 +0000
+	id 1wDHZj-0001rH-M0; Thu, 16 Apr 2026 07:55:47 +0000
+Received: by outflank-mailman (input) for mailman id 1283035;
+ Thu, 16 Apr 2026 07:55:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wDHUa-0001IJ-QZ
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 07:50:28 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wDHZi-0001rB-Bp
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 07:55:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDHUZ-004srb-KP
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 09:50:27 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wDHZh-004uAU-KK
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 09:55:45 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e094c1-bab6-0a2a0a5309dd-0a2a4502b9a6-14
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:50:27 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e095ff-2eae-0a2a0a5409dd-0a2a4501a7ac-8
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:55:45 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e094c3-af86-0a2a45020019-d1558034dd12-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:50:27 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4887f49ec5aso92438315e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 00:50:27 -0700 (PDT)
+ id 69e09601-c1f2-0a2a45010019-d1558029c1b9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:55:45 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4838c15e3cbso71976625e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 00:55:45 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488f57da2aesm56616015e9.0.2026.04.16.00.50.26
+ 5b1f17b1804b1-488f0eaffaasm38296185e9.23.2026.04.16.00.55.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Apr 2026 00:50:26 -0700 (PDT)
+ Thu, 16 Apr 2026 00:55:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1776325827; x=1776930627; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1776326145; x=1776930945; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=tMXhL46ToYC2144wJofpwWHHdAPTGr07OEbGF3f56j8=;
-        b=JkX1bfIDVS22QpHmcgMYfpc36adLDI01ES+siqTh9Lj74NE7FcOEkuhm1v1XHBbfZF
-         fcZCGVbVV4YIpF2rqbJG+FVDZCGUuSmzEAZ1y6etYgYm86ZOFuQe6lvg3mmMyCszYJjR
-         6exkCldvFfxnU0vBtlXGNPzk6Lkv58mfl3rPPXdz++k1GFuTlMUtKAC55/3OrkTIlZnk
-         n9NtZ2Ns82NDIpm5KhjZ99bNIFUOdW2NsNVEyLDbAj0v2xcNgAWEKuc4uciCeklkaVIM
-         O2ScrPWLJaZve7ooOkpUB+UEc6dUS22+VdnjQzE/hXC+bncMUzvyZdzUSnEXfI1nLxa9
-         1vUw==
+        bh=4QyDIOCsbMq+hB5YoKzP5G/4oefbQcwjMhuS5duvxx4=;
+        b=CjA2iqdIyZCLvSR6ECqoPL/5kdzzTw+oDy7HVH5NYp0+QljO4bdIhePM5Vj8Bxbutr
+         RjwDg3Nart9nJ4zfMb6jJzOY02wNfMFx0hV8eEBkUtNx+PWNpS7PQVG+9BDJZ7VLFk/I
+         KLeorhegcz0jweYn/K3Gsb+MtBEktQY22yGLC3nC3Jcc5BuXvMBD+tGMOAFVr6JOJQnC
+         UdRFxs2JZSkdpAKxX2tTZe0PoxDUfVshxcS0JatOUXV8XOt/adKoF3kcly/2Q1ixfnt4
+         xkBOQQ9U2gj9G5J99udhuhXJVUKqMWQu08t1IAJIqckkC34xURtBEw1WEo0JtRQVMwrD
+         DtpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776325827; x=1776930627;
+        d=1e100.net; s=20251104; t=1776326145; x=1776930945;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tMXhL46ToYC2144wJofpwWHHdAPTGr07OEbGF3f56j8=;
-        b=i1yKWRHwruKMxYFI6nw8Khr4auwMphPk9EkMQtuRlqCbE+bAIPtY8XiVEPGrssBzkX
-         vEXOh5gOCUuoTjUfsXGlVFR+Dt2DAlle8Xl4xElMuJ/V0MFp2U+zXPFM9Cbwi0TNjc7K
-         UMdysjsq+3rPh7iWUH11krgFRIEmsq0/ZnA8Emc13o5Cs6yC9ay71S63K7Xyywz1YxSy
-         Pd7E2oZoPjCMqRVAFyhn0IGatvZLlbwdmgct0pIdfeWFeW/LSSBGRvD/XD5lLXjqp0Bl
-         jrjU79hoQSFsX820iHNa7MPtcUlys7NUoXSKJLoyaEiuQJvlyTksfVroaUMBRwTO3eBU
-         GjSg==
-X-Forwarded-Encrypted: i=1; AFNElJ9aWVhp7c4vM61x0EW9xlHp7GEcxEnoyv+C+xb+mYfaqNDb/BlErRawWmtW4jAKAk9UivYnDLDPYRo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxOLnIggkfFz/qkY3QXVVufGYsjJFwnPxygKHoRlR2523QUIvMO
-	FWSARF95hVAjBZgMmLAcvCc5rladklOMLLmBXKoB7pGjW/YcqsVXRzNFKV7btfsAPg==
-X-Gm-Gg: AeBDieskoXY10mkBN3kLxFlaxI6TdRNwSNisXCepm3L9QI8FFR41hVylndlQBGQ2hXO
-	a7BE1fabxGEuuB26l+yGQ06QrfcyPdNRPq2z469OJPG87bM+CmTYv4sGVKswQIgv/LzyzPLvJAt
-	dLB+j4XicceUdx9/ZEiQirlIrCJ7W3wUsTK7M+brCyYx4qg1Oj6Otz0erhjX0jl3bwV9H38bDBQ
-	2mJrLR8OumSGm1tJinaAd6rkb8XXguw8AbEbjkO15gLqCtw2x//H220mfuCE8dCSH5z7M2hLHyw
-	fgn9DwpiJpUQ99EEjZpfGnrWwtWsQnr+9loURArV4PJKtDV6jxOAGaJ6BJKcGQB9s3otfAKnWlM
-	YK/f2ti9FwX5AViW0YW6xeD6S4/IOS6xDlAxOA2EgGNRg3SlRS4E0/4D1KetZgUMGV8RpIZej6O
-	ebKnzf+XV9QcgW5m0oCLEnORVyshX7IVuPFW1V4Eh5gSqWAiMLKC2f6KMQIck5F2Ol0uTeD7hmG
-	tfLTv9wYOUmoM+BoBd18Bm4Lw==
-X-Received: by 2002:a05:600c:4709:b0:488:ae6c:42c0 with SMTP id 5b1f17b1804b1-488d67d2ab2mr298039035e9.7.1776325826868;
-        Thu, 16 Apr 2026 00:50:26 -0700 (PDT)
-Message-ID: <feee06f0-584a-4b2c-b761-c3b77627c26d@suse.com>
-Date: Thu, 16 Apr 2026 09:50:29 +0200
+        bh=4QyDIOCsbMq+hB5YoKzP5G/4oefbQcwjMhuS5duvxx4=;
+        b=khL9SW8GAkkbPR6L7e6hdNP2pD0O/dPDGQkH9uHTtFJ+WNacEKS58XhyeChtqxQ+yS
+         Hpmja196qSkn5N2EW2eI0+0WBhwH5bcc7tooRG1qIdjMEu2qyPkeGZuB1UtEBquVQQoy
+         EYUU3pxIlXjAxqFxLn809d8seI+ToUfJPptsPV6L0nOr3RDMp6bAO0chzp21R6kluYnm
+         B9qbGI9R1dgFYKnh8QFHMAl++/BWqs17ST/j1AmwuNWcwsyiCfk6lzdmigraQgZTproa
+         Mp3CvUHWWT+mn/KegSQKzTmAy+fPA+7kU6kCjmgfZ6nbbkmyYPhfFyZB7At9e3R8Y5hs
+         irvg==
+X-Forwarded-Encrypted: i=1; AFNElJ/vgRa4GHjMS5GpFlNe/tUx8rBmpHB3cE7FCSfNEl5N7yo6wom2Ubr4y1U2wDqICnrSJOEZAaoRLW4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwgTAN3PgEk9TRU5TvcM2IuGdd4aDsXtNJTuIbkSgmOEqVb8fQ2
+	xy0ik5CedtF9wsP3ozGe28Www/HWCAN4mjGpBLgY+J7B2Kcw5cASwv8ox3Qk13ygpQ==
+X-Gm-Gg: AeBDievQRJFf4ffaVI2FnozTwkMMvY/i229QJ/cg7s3q7x/IEU91yv/3fpEptf0SsaI
+	fFpyKS3uEXdHUQjOw+LMG8DmB7AnCAx7xYZST7T0ofB4AxZQ285cUlYmUAZGa0YDL6oNW6U4BtZ
+	dWc/rXVMcxWch64I0hohT5MNV7sFs+P9kLiGc2WDSGnv03iwmGyu21gYbPA7iy5iQycn/a9ifgC
+	BrcOmZCwcu5p4U3UsXufp2yFcsJGZcwkaceS7AeEiPtKXQcfe2hbTXcSOERcXkJyI4ocv61SdJ4
+	3cv2ZovhP47pwm2Eqe6/iboVkXWD/lAVnSSNMqjgeBa1D8kmuIZVYBEqEfkc0EKNsV14p3tUBDK
+	z8dA+6qUeQ1E5jorRTuFbPOlhIjhj/yWxLYeqE5WZ4aRyHhfpkXAmoqIP9h7TcriajjqZDfe9nk
+	NOq4IPGpaOdIZMilpyqolken8/khs4i3i/eQyVOJRGKf5POjoLub0C3VfEoxu6duHZCxVFiGGDL
+	ZZ2sqCUiUMOjkAhlfSl61x86A==
+X-Received: by 2002:a05:600c:5303:b0:488:b196:d249 with SMTP id 5b1f17b1804b1-488d67bf74fmr331917165e9.5.1776326144980;
+        Thu, 16 Apr 2026 00:55:44 -0700 (PDT)
+Message-ID: <636b5d74-6383-475f-af4c-c4964bb40bde@suse.com>
+Date: Thu, 16 Apr 2026 09:55:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/riscv: allow Xen to use SSTC while hiding it from
- guests
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+Subject: Re: [PATCH 2/2] xen/cpu: round up cpu_khz calculations
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <eba232ac5a338332ddedc2cb084e0c04ee8744c2.1775835741.git.oleksii.kurochko@gmail.com>
- <9eb6c6d9-8e1c-40f6-a44b-579df213bda0@citrix.com>
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260414103327.7420-1-roger.pau@citrix.com>
+ <20260414103327.7420-3-roger.pau@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,56 +134,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9eb6c6d9-8e1c-40f6-a44b-579df213bda0@citrix.com>
+In-Reply-To: <20260414103327.7420-3-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1776325827-82969161-BA3636A7/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1776326145-B6265FF4-04142350/0/0
 X-purgate-type: clean
-X-purgate-size: 1738
+X-purgate-size: 730
 
-On 10.04.2026 19:41, Andrew Cooper wrote:
-> On 10/04/2026 4:45 pm, Oleksii Kurochko wrote:
->> diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
->> index 7efa76fdbcb1..80f0e9ddae6a 100644
->> --- a/xen/arch/riscv/time.c
->> +++ b/xen/arch/riscv/time.c
->> @@ -91,4 +90,23 @@ void __init preinit_xen_time(void)
->>          panic("%s: ACPI isn't supported\n", __func__);
->>  
->>      boot_clock_cycles = get_cycles();
->> +
->> +    /* set_xen_timer must have been set by sbi_init() already */
->> +    ASSERT(set_xen_timer);
->> +
->> +    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_sstc) )
->> +    {
->> +        set_xen_timer = sstc_set_xen_timer;
->> +
->> +        /*
->> +         * A VS-timer interrupt becomes pending whenever the value of
->> +         * (time + htimedelta) is greater than or equal to vstimecmp CSR.
->> +         * Thereby to avoid spurious VS-timer irqs set vstimecmp CSR to
->> +         * ULONG_MAX.
->> +         */
->> +        csr_write(CSR_VSTIMECMP, ULONG_MAX);
->> +#ifdef CONFIG_RISCV_32
->> +        csr_write(CSR_VSTIMECMPH, ULONG_MAX);
->> +#endif
+On 14.04.2026 12:33, Roger Pau Monne wrote:
+> All arches truncate the cpu_khz without taking into account the less
+> significant digits.  Instead use DIV_ROUND_UP() when scaling from Hz to kHz
+> to get as more accurate kHz value.
 > 
-> You've got this pattern twice in this patch alone, and these aren't the
-> only CSRs which are formed of pairs to get a 64bit value in 32bit mode.
-> 
-> Sadly, the numbering isn't consistent for the high constant, but we can
-> let the compiler do most of the hard work for us.
-> 
-> #ifdef CONFIG_RISCV_32
-> # define __csr_write32h(csr, val) csr_write(csr ## H, (val) >> 32)
-> #else
-> # define __csr_write32h(csr, val) (void)(csr, val)
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> While the possibly more accurate value is nice, I'm not sure it's actually
+> fixing any functional bug, and hence the lack of "Fixes:" tag.
 
-Just to mention: Since the comma is an operator here (not a lexical element
-separating function arguments), more parenthesization may be needed for
-Misra's sake.
+With, as suggested by Tu, DIV_ROUND() used instead (which then statistically
+indeed is an improvement in accuracy)
+
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+As it's only statistically, nevertheless there is a risk of (perceived)
+regressions, just to mention it.
 
 Jan
 
