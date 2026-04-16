@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B65F8A149
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 09:15:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1283162.1565441 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B13F8A14D
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2026 09:57:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1283177.1565450 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDIow-0001my-3h; Thu, 16 Apr 2026 09:15:34 +0000
+	id 1wDJTH-0007Qf-60; Thu, 16 Apr 2026 09:57:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1283162.1565441; Thu, 16 Apr 2026 09:15:34 +0000
+Received: by outflank-mailman (output) from mailman id 1283177.1565450; Thu, 16 Apr 2026 09:57:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDIow-0001mr-0h; Thu, 16 Apr 2026 09:15:34 +0000
-Received: by outflank-mailman (input) for mailman id 1283162;
- Thu, 16 Apr 2026 09:15:32 +0000
+	id 1wDJTH-0007QY-2z; Thu, 16 Apr 2026 09:57:15 +0000
+Received: by outflank-mailman (input) for mailman id 1283177;
+ Thu, 16 Apr 2026 09:57:14 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <bounce-md_30504962.69e0a8b1.v1-82e43376dfb5406f84713a8671625188@bounce.vates.tech>)
- id 1wDIou-0001mk-7p
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 09:15:32 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wDJTG-0007QS-0g
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 09:57:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDIot-00Ffgz-HH
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 11:15:31 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <bounce-md_30504962.69e0a8b1.v1-82e43376dfb5406f84713a8671625188@bounce.vates.tech>)
- id 69e0a8ac-5cb7-0a2a0a5109dd-0a2a450a8c64-22
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 11:15:31 +0200
-Received: from [198.2.186.1] (helo=mail186-1.suw21.mandrillapp.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <bounce-md_30504962.69e0a8b1.v1-82e43376dfb5406f84713a8671625188@bounce.vates.tech>)
- id 69e0a8b2-56b3-0a2a450a0019-c602ba01bf5f-3
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 11:15:31 +0200
-Received: from pmta10.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail186-1.suw21.mandrillapp.com (Mailchimp) with ESMTP id 4fxC695vYpzBsVSkP
- for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 09:15:29 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- 82e43376dfb5406f84713a8671625188; Thu, 16 Apr 2026 09:15:29 +0000
+ id 1wDJTE-005Qct-Lj
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2026 11:57:12 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e0b278-e002-0a2a0a5209dd-0a2a450797b0-2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 11:57:12 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e0b278-229c-0a2a45070019-d155dd31d8c0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 11:57:12 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-43cfce3a195so4773139f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Apr 2026 02:57:12 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43ead3d5fd6sm12936089f8f.24.2026.04.16.02.57.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Apr 2026 02:57:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,93 +53,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="teddy.astie@vates.tech" header.h="From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
-	s=mte1; t=1776330929; x=1776600929;
-	bh=ohAvvrLm3IUQdyZ7hOrFWGHujWkJJ6+dNNs/tzY22uo=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=SK2HpgGV3cM26uEHZ0CDPchzqH11+gukeoftOSf7yA7rneKiknJALaAlsDLDzj+u6
-	 EsJg+YfkaZPJx1ydsEL4i5EKecSGBhZFRX8e/P4SMoiuctAdo7t7FBG1Zu7hAbyUef
-	 6wjbHOB9DpSX/2lDx6+ctrmhoF0zLgkCDgKUkVodHpWndUM6zK/KOb6LxP7HUMJnp2
-	 xXXgnNdXho/bkrbfYdmhwc33DqnH6Dgt+1Bb9tmVqIsXQZz5JGP5PrRBKat0mpV+hV
-	 iszTOTX0MPx0xDFMcA/t+pqX0LMtf7GcziX8ac3WC6Slu8DMr5hG8eB1BiEQNVtqx7
-	 RKKIn4D1LWQ+Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
-	t=1776330929; x=1776591429; i=teddy.astie@vates.tech;
-	bh=ohAvvrLm3IUQdyZ7hOrFWGHujWkJJ6+dNNs/tzY22uo=;
-	h=From:Subject:Message-Id:To:Cc:References:In-Reply-To:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=y6CN+Lr0oFqVaPOBFQnGm6DPeoettk7DJttH910jPZlsqylT+haSa534CXmj8LAyH
-	 8RWqjaztWlzD0fj2inTc28WUCWb450FQx0Yn4MB9A/2EfjFrqceGqIqy6PkZ2VPGFp
-	 7t0WCsDDGbUj4ms1HiYVWkO9LbU4BwxWnewUVcbne7+XoQow6Ekw6nKKIVk4dOdmRI
-	 zS7+jYXrvOEUMOoIql+RuMbaVOibtxA2ka44kJM6kFghIzorcOl8uB9nKDsJwfGkBA
-	 +xsvuFitNNibeHpc41haRZwE9h9C3buzKxvwI/JXHwZBwDxV2XBKbff3FoWyNT7vUC
-	 RsusymWYW85pQ==
-From: "Teddy Astie" <teddy.astie@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=201/2]=20vtd:=20Drop=20dead=20check=20for=20permissions=20in=20lookup=5Fpage?=
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776330928805
-Message-Id: <70023321-c799-456f-920f-af7a7344de34@vates.tech>
-To: "Jan Beulich" <jbeulich@suse.com>
-Cc: "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <815edfd0db90859a4ce270d833d9d721ff66e31c.1775814143.git.teddy.astie@vates.tech> <4f9e6615-b9ab-4c2e-9345-100e73eebbb3@suse.com>
-In-Reply-To: <4f9e6615-b9ab-4c2e-9345-100e73eebbb3@suse.com>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.82e43376dfb5406f84713a8671625188?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20260416:md
-Date: Thu, 16 Apr 2026 09:15:29 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1776333432; x=1776938232; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=P1MHw5bnb5+l/wRUhSLooZGFlX+KiX8AA9aEuHgJljo=;
+        b=Fr9lS9hlpQ+iUUtFK5r1Hfik4CEaaiqRI1NM/BgM0JP44egJnKsVJzfOnCGaMCmyoR
+         LPBDpK28gUtfseUAm7G0sUOYeCjg6CyH4xh8qbjADVNLbvcrWsluop9C+K/+WiHCRTU0
+         rlG81xay8IWi3A0aGRmDcNnBk/BbQVgaEPENt7AZHbJsJM10gyxkLo3qQwSskhVrYwzl
+         3zY5Fk4JPPfxS0VvP0xUIwxN72LwrG4KPmNn+JVuTeZHJwHdRJqnR1/5r5Nqfd9BdIlZ
+         MjNJIdozrq8RJ1hmVOiibqtv5gsDuf7ZSFMGbbhIYmLJeltq1WnqMVZiK4P5Yv5Atm6W
+         clDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776333432; x=1776938232;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=P1MHw5bnb5+l/wRUhSLooZGFlX+KiX8AA9aEuHgJljo=;
+        b=SYBYER4BrYheimWrKXbLPt8Wf+PNQ4cC7pzTOiKhUTr8RuSpydY3NB4+//eWRabrro
+         oPd0bL6DYHcj3tMc28Gj+BPHO9pg0wHI3+svHygKGJbvq3G8Fs47m5QFJ1sN+Y80EcyC
+         WNC8cjEiwehMyB9KY5BpRqF1i3ZQ6dzgtuUIs4Fhx9ivKjpocQMRl1vFw+r7xJQZMkVk
+         ExbjaRSLU8L5DZ795pSSjvBK010DcueokRBO9PFSVKbrOUacMJnQpYj3u4csKk5y0JNe
+         KCjjBMCjUJ6Gbg8QEK6mgHfsXkav4BpXK9b5QpuvJpEKmQZ/rdjeDXtt0HC4PgBY2bEP
+         9ueA==
+X-Forwarded-Encrypted: i=1; AFNElJ/249jgSgig79TMJEPoHybo5kX4G6Lbp94meRMtBLwmUs8rmJZCSK71XqBgEmyX6FNX67iMUsd/iA4=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyNT7Cv7QaBiRPYF5CnFc2kFYUjDU6PpRRHrv6jLvyn9tkCAtyV
+	AAIGIG14MAsF9wjK7n2h801r+EN63txf0FQYzWQOTw21xc0iVf69yqeEzqbzlCGTQw==
+X-Gm-Gg: AeBDietvsk+UAsEFbNJu+hPPhvR6S/0wbTSRMHgc436FXjOK+Nz9HzC8cPdHY/UowHK
+	x53EisdvMqdiKZfgB0MSrZp0fPFIUEXZGEsNuhnmAqNHH3eeHNnQt1IZ0QRtz2Q2pLaacgCAWMC
+	3a+W8eZ408YJ6MoW1E3o8mHso0uPymmyXf+TNWgsUTYZb2FGEQ9ARGIQ4zT6rU9mmL9lLLg1jx6
+	3SR7y17X4Tl47JLtPoGLMubAuPfkzymAW/+xCLaKYAaNNQg1EYTdtIqRDsdUtjRlegGXOF6ij18
+	TOkMGkuDQ8/poXxSBkL8ertgrl8FWS/qotDnchmtjjVfb9LegTyIAOwUD/GIGs+aZoCJpt1XEqO
+	CoBq1mUELJGHiVavOhMZMKRrWESo+Yq51p7S9xmgoY919UFpbipHebN74CmxfJd53+IskOgSe9V
+	cHTW6Keg4vWAWqiH3IIsFoQh8m8RPlflEylG2KAbnhVxteyE83CfmggOfAO/fB+rWzPIim03h0H
+	1foODON4gD1IcblM8PZPWRIdQ==
+X-Received: by 2002:a05:6000:18a6:b0:43e:a638:250e with SMTP id ffacd0b85a97d-43ea6382616mr16084712f8f.3.1776333431866;
+        Thu, 16 Apr 2026 02:57:11 -0700 (PDT)
+Message-ID: <344987b1-a293-400d-8c45-af98119f07fe@suse.com>
+Date: Thu, 16 Apr 2026 11:57:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1776330931-469768B7-8E67D747/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] vtd: Drop dead check for permissions in lookup_page
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <815edfd0db90859a4ce270d833d9d721ff66e31c.1775814143.git.teddy.astie@vates.tech>
+ <4f9e6615-b9ab-4c2e-9345-100e73eebbb3@suse.com>
+ <70023321-c799-456f-920f-af7a7344de34@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <70023321-c799-456f-920f-af7a7344de34@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1776333432-15A59C48-634A5507/0/0
 X-purgate-type: clean
-X-purgate-size: 1144
+X-purgate-size: 839
 
-Le 16/04/2026 =C3=A0 10:23, Jan Beulich a =C3=A9crit=C2=A0:
-> On 10.04.2026 12:09, Teddy Astie wrote:
->> `val` comes from `addr_to_dma_page_maddr()` which is a pagetable
->> paddr and doesn't leak the PTE flags in it.
+On 16.04.2026 11:15, Teddy Astie wrote:
+> Le 16/04/2026 à 10:23, Jan Beulich a écrit :
+>> On 10.04.2026 12:09, Teddy Astie wrote:
+>>> `val` comes from `addr_to_dma_page_maddr()` which is a pagetable
+>>> paddr and doesn't leak the PTE flags in it.
+>>
+>> Did you read the comment ahead of the function, in particular the part about
+>> the caller passing 0 for "target"?
+>>
 > 
-> Did you read the comment ahead of the function, in particular the part ab=
-out
-> the caller passing 0 for "target"?
+> Ah ok, the "full PTE contents below PADDR_BITS limit" also includes the 
+> R/W flags, but only in that case.
 > 
+> While I'm on it, there is a corner case here where "full PTE content" is 
+> also at the same time a error condition of this function (if PTE mfn == 
+> 0, we have val < PAGE_SIZE; yet the mapping exists), but that's not the 
+> problem this patch is fixing.
 
-Ah ok, the "full PTE contents below PADDR_BITS limit" also includes the 
-R/W flags, but only in that case.
+Not PTE will have MFN == 0. On x86 at least, MFN 0 is special.
 
-While I'm on it, there is a corner case here where "full PTE content" is 
-also at the same time a error condition of this function (if PTE mfn =3D=3D=
- 
-0, we have val < PAGE_SIZE; yet the mapping exists), but that's not the 
-problem this patch is fixing.
-
->> Rather than returning entries without any permissions, assume they
->> are always r/w.
-> 
-> This wouldn't be any better.
-> 
-
-Not having any permission could confuse the caller that there are no 
-mappings. But it depends mostly on the callers which don't exist yet.
-
-> Jan
-> 
-
-Teddy
-
-
---
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
-
-
+Jan
 
