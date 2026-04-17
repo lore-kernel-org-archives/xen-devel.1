@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2750F436A5
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2026 13:41:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1284302.1566131 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E33F436A4
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2026 13:41:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1284300.1566123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDjRs-0005lk-Lj; Fri, 17 Apr 2026 13:41:32 +0000
+	id 1wDjRr-0005Xi-G5; Fri, 17 Apr 2026 13:41:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1284302.1566131; Fri, 17 Apr 2026 13:41:32 +0000
+Received: by outflank-mailman (output) from mailman id 1284300.1566123; Fri, 17 Apr 2026 13:41:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDjRs-0005ld-J0; Fri, 17 Apr 2026 13:41:32 +0000
-Received: by outflank-mailman (input) for mailman id 1284302;
- Fri, 17 Apr 2026 13:41:31 +0000
+	id 1wDjRr-0005Xb-C4; Fri, 17 Apr 2026 13:41:31 +0000
+Received: by outflank-mailman (input) for mailman id 1284300;
+ Fri, 17 Apr 2026 13:41:30 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bertrand.marquis@arm.com>) id 1wDjRr-0005cp-T0
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 13:41:31 +0000
+ (envelope-from <bertrand.marquis@arm.com>) id 1wDjRq-0005XG-DB
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 13:41:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDjRr-000Ejb-9z
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 15:41:31 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wDjRp-000Ejb-QG
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 15:41:29 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <bertrand.marquis@arm.com>)
- id 69e23878-5cb7-0a2a0a5109dd-0a2a450a8746-26
- for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:31 +0200
+ id 69e23869-5cb7-0a2a0a5109dd-0a2a450688f0-46
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:29 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
  (envelope-from <bertrand.marquis@arm.com>)
- id 69e2388a-56b3-0a2a450a0019-d98c6eacc2a8-1
- for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:31 +0200
+ id 69e23888-7371-0a2a45060019-d98c6eacc488-1
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:29 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 845031516;
- Fri, 17 Apr 2026 06:41:24 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BFB2E1E5E;
+ Fri, 17 Apr 2026 06:41:22 -0700 (PDT)
 Received: from C3HXLD123V.arm.com (unknown [10.57.89.170])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D5E8A3F7D8;
- Fri, 17 Apr 2026 06:41:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 164583F7D8;
+ Fri, 17 Apr 2026 06:41:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,11 +53,11 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1776433290; bh=caqGVxvnjz0bVK6Ez9rNrj5k4WIzyoABx5lWZ62MqVc=;
+	t=1776433288; bh=2EBHRYe3a9Iu2Tcg1hgwEsSiL6lkKJcFnxNSP9Ue5No=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=F/9rK41YnPUbCvUBHCt5U0B3AIRzfayyu4D5MvWYWuc5xGXma+MxvpDDLffQHSAt1
-	 B7Bg4iM3FAywj4XwhUbq14JxtRUZZPfPf8yYJSbdp5KP+U5YjXRuj29S8szj7wmgER
-	 JoceslpxERiNOPD+UNgMD4dmFI7ngoNnufOaX6AY=
+	b=VdYJxFcLI4jsdEtYZSOcScludKGT5YwwMuMO0TwaaXWi1Hgkxt892Fotc+CN25Arq
+	 uRpUQYMjXbKpDSE5fOBcWIAD9XE8w9J02CloxF0T26Qh7gFylIzux2q+Ro2n5PIvfA
+	 P811XWtiGYC16BhHODf+4AbWTwWhWzSMWGbofGO0=
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
@@ -65,161 +65,116 @@ Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 2/6] xen/arm: ffa: Track hypervisor notifications in a bitmap
-Date: Fri, 17 Apr 2026 15:40:50 +0200
-Message-ID: <7053b8c14bbe50cc855dad0a82cde2bb10153d2b.1776266307.git.bertrand.marquis@arm.com>
+Subject: [PATCH 1/6] xen/arm: ffa: Fix NPI injection when vcpu0 is offline
+Date: Fri, 17 Apr 2026 15:40:49 +0200
+Message-ID: <a755456257eff6e4c5bd042ce4b0edff8f6630c1.1776266307.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1776266307.git.bertrand.marquis@arm.com>
 References: <cover.1776266307.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1776433291-CEB778B7-F8329588/0/0
+X-purgate-ID: tlsNG-16d1c6/1776433289-52369D75-B7400893/0/0
 X-purgate-type: clean
-X-purgate-size: 4902
+X-purgate-size: 3302
 
-Hypervisor notifications are currently tracked with a dedicated
-buff_full_pending boolean. That state only represents a single HYP
-notification bit and keeps HYP bitmap handling tied to single-purpose
-bookkeeping.
+RX-buffer-full notifications currently inject the notification pending
+interrupt through vcpu0 only. Secure notification delivery already walks
+the domain's online vCPUs, but the RX-buffer-full path does not. When
+vcpu0 is offline, the notification remains pending and the guest never
+receives it.
 
-Replace the boolean with a hypervisor notification bitmap protected by
-notif_lock. INFO_GET reports pending when the bitmap is non-zero, GET
-returns and clears the HYP bitmap under the lock, and RX-buffer-full
-sets FFA_NOTIF_RX_BUFFER_FULL in the bitmap instead of updating
-separate state.
+Extract the common notification injection path and reuse it from
+ffa_raise_rx_buffer_full(). The shared helper delivers the global
+notification to the first online vCPU and keeps the existing ratelimited
+debug message when none are online.
 
-Initialize and clear the bitmap during domain lifecycle handling, and
-use ctx->ffa_id for bitmap create and destroy so the notification state
-stays tied to the cached FF-A endpoint ID.
+Functional impact: RX-buffer-full notifications are delivered even when
+vcpu0 is offline.
 
-No functional changes.
+Fixes: 3935c705688e ("xen/arm: ffa: Add buffer full notification support")
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa_notif.c   | 46 ++++++++++++++++++++++++++--------
- xen/arch/arm/tee/ffa_private.h |  9 +++++--
- 2 files changed, 43 insertions(+), 12 deletions(-)
+ xen/arch/arm/tee/ffa_notif.c | 45 ++++++++++++++++++++----------------
+ 1 file changed, 25 insertions(+), 20 deletions(-)
 
 diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 07bc5cb3a430..d15119409a25 100644
+index 186e72641237..07bc5cb3a430 100644
 --- a/xen/arch/arm/tee/ffa_notif.c
 +++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -94,8 +94,15 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
+@@ -19,6 +19,29 @@
+ static bool __ro_after_init fw_notif_enabled;
+ static unsigned int __ro_after_init notif_sri_irq;
  
-     notif_pending = test_and_clear_bool(ctx->notif.secure_pending);
-     if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+    {
-         notif_pending |= test_and_clear_bool(ctx->notif.vm_pending);
- 
-+        spin_lock(&ctx->notif.notif_lock);
-+        if ( ctx->notif.hyp_pending )
-+            notif_pending = true;
-+        spin_unlock(&ctx->notif.notif_lock);
-+    }
-+
-     if ( notif_pending )
-     {
-         /* A pending global notification for the guest */
-@@ -174,12 +181,17 @@ void ffa_handle_notification_get(struct cpu_user_regs *regs)
-             w6 = resp.a6;
-     }
- 
--    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) &&
--          flags & FFA_NOTIF_FLAG_BITMAP_HYP &&
--          test_and_clear_bool(ctx->notif.buff_full_pending) )
-+    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-     {
--        ACCESS_ONCE(ctx->notif.vm_pending) = false;
--        w7 = FFA_NOTIF_RX_BUFFER_FULL;
-+        spin_lock(&ctx->notif.notif_lock);
-+
-+        if ( (flags & FFA_NOTIF_FLAG_BITMAP_HYP) && ctx->notif.hyp_pending )
-+        {
-+            w7 = ctx->notif.hyp_pending;
-+            ctx->notif.hyp_pending = 0;
-+        }
-+
-+        spin_unlock(&ctx->notif.notif_lock);
-     }
- 
-     ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
-@@ -207,12 +219,17 @@ int32_t ffa_handle_notification_set(struct cpu_user_regs *regs)
- void ffa_raise_rx_buffer_full(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
-+    uint32_t prev_bitmap;
- 
-     if ( !ctx )
-         return;
- 
--    ACCESS_ONCE(ctx->notif.buff_full_pending) = true;
--    if ( !test_and_set_bool(ctx->notif.vm_pending) )
-+    spin_lock(&ctx->notif.notif_lock);
-+    prev_bitmap = ctx->notif.hyp_pending;
-+    ctx->notif.hyp_pending |= FFA_NOTIF_RX_BUFFER_FULL;
-+    spin_unlock(&ctx->notif.notif_lock);
-+
-+    if ( !(prev_bitmap & FFA_NOTIF_RX_BUFFER_FULL) )
-         inject_notif_pending(d);
- }
- #endif
-@@ -426,12 +443,15 @@ void ffa_notif_init(void)
- 
- int ffa_notif_domain_init(struct domain *d)
- {
-+    struct ffa_ctx *ctx = d->arch.tee;
-     int32_t res;
- 
-+    spin_lock_init(&ctx->notif.notif_lock);
-+    ctx->notif.hyp_pending = 0;
-+
-     if ( fw_notif_enabled )
-     {
--
--        res = ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_vcpus);
-+        res = ffa_notification_bitmap_create(ctx->ffa_id, d->max_vcpus);
-         if ( res )
-             return -ENOMEM;
-     }
-@@ -441,10 +461,16 @@ int ffa_notif_domain_init(struct domain *d)
- 
- void ffa_notif_domain_destroy(struct domain *d)
- {
-+    struct ffa_ctx *ctx = d->arch.tee;
-+
-+    spin_lock(&ctx->notif.notif_lock);
-+    ctx->notif.hyp_pending = 0;
-+    spin_unlock(&ctx->notif.notif_lock);
-+
-     /*
-      * Call bitmap_destroy even if bitmap create failed as the SPMC will
-      * return a DENIED error that we will ignore.
-      */
-     if ( fw_notif_enabled )
--        ffa_notification_bitmap_destroy(ffa_get_vm_id(d));
-+        ffa_notification_bitmap_destroy(ctx->ffa_id);
- }
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index c291f32b56ff..5693772481ed 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -340,9 +340,14 @@ struct ffa_ctx_notif {
-     bool vm_pending;
- 
-     /*
--     * True if domain has buffer full notification pending
-+     * Lock protecting the hypervisor-managed notification state.
-      */
--    bool buff_full_pending;
-+    spinlock_t notif_lock;
++static void inject_notif_pending(struct domain *d)
++{
++    struct vcpu *v;
 +
 +    /*
-+     * Bitmap of pending hypervisor notifications (for HYP bitmap queries).
++     * Since we're only delivering global notification, always
++     * deliver to the first online vCPU. It doesn't matter
++     * which we chose, as long as it's available.
 +     */
-+    uint32_t hyp_pending;
- };
++    for_each_vcpu(d, v)
++    {
++        if ( is_vcpu_online(v) )
++        {
++            vgic_inject_irq(d, v, GUEST_FFA_NOTIF_PEND_INTR_ID, true);
++            return;
++        }
++    }
++
++    if ( printk_ratelimit() )
++        printk(XENLOG_G_DEBUG "%pd: ffa: can't inject NPI, all vCPUs offline\n",
++               d);
++}
++
+ int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
+@@ -190,7 +213,7 @@ void ffa_raise_rx_buffer_full(struct domain *d)
  
- struct ffa_ctx {
+     ACCESS_ONCE(ctx->notif.buff_full_pending) = true;
+     if ( !test_and_set_bool(ctx->notif.vm_pending) )
+-        vgic_inject_irq(d, d->vcpu[0], GUEST_FFA_NOTIF_PEND_INTR_ID, true);
++        inject_notif_pending(d);
+ }
+ #endif
+ 
+@@ -238,7 +261,6 @@ static void notif_vm_pend_intr(uint16_t vm_id)
+ {
+     struct ffa_ctx *ctx;
+     struct domain *d;
+-    struct vcpu *v;
+ 
+     /*
+      * vm_id == 0 means a notifications pending for Xen itself, but
+@@ -277,24 +299,7 @@ static void notif_vm_pend_intr(uint16_t vm_id)
+      * it.
+      */
+     ACCESS_ONCE(ctx->notif.secure_pending) = true;
+-
+-    /*
+-     * Since we're only delivering global notification, always
+-     * deliver to the first online vCPU. It doesn't matter
+-     * which we chose, as long as it's available.
+-     */
+-    for_each_vcpu(d, v)
+-    {
+-        if ( is_vcpu_online(v) )
+-        {
+-            vgic_inject_irq(d, v, GUEST_FFA_NOTIF_PEND_INTR_ID,
+-                            true);
+-            break;
+-        }
+-    }
+-    if ( !v && printk_ratelimit() )
+-        printk(XENLOG_G_DEBUG "%pd: ffa: can't inject NPI, all vCPUs offline\n",
+-               d);
++    inject_notif_pending(d);
+ 
+ out_unlock:
+     rcu_unlock_domain(d);
 -- 
 2.53.0
 
