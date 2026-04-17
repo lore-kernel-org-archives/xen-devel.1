@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDBBF436A4
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2026 13:41:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1284307.1566158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C25F436A4
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2026 13:48:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1284370.1566176 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDjRz-0006ZC-I0; Fri, 17 Apr 2026 13:41:39 +0000
+	id 1wDjYA-0000jx-Qg; Fri, 17 Apr 2026 13:48:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1284307.1566158; Fri, 17 Apr 2026 13:41:39 +0000
+Received: by outflank-mailman (output) from mailman id 1284370.1566176; Fri, 17 Apr 2026 13:48:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wDjRz-0006Yt-DK; Fri, 17 Apr 2026 13:41:39 +0000
-Received: by outflank-mailman (input) for mailman id 1284307;
- Fri, 17 Apr 2026 13:41:37 +0000
+	id 1wDjYA-0000jq-Mk; Fri, 17 Apr 2026 13:48:02 +0000
+Received: by outflank-mailman (input) for mailman id 1284370;
+ Fri, 17 Apr 2026 13:48:01 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bertrand.marquis@arm.com>) id 1wDjRx-0006Hl-97
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 13:41:37 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wDjY9-0000jk-FW
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 13:48:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wDjRw-009kb3-MC
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 15:41:36 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wDjY8-0051Ce-G4
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2026 15:48:00 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bertrand.marquis@arm.com>)
- id 69e23890-e002-0a2a0a5209dd-0a2a450ce252-2
- for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:36 +0200
-Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
- (envelope-from <bertrand.marquis@arm.com>)
- id 69e2388f-62f1-0a2a450c0019-d98c6eacc2d0-1
- for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:41:36 +0200
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BE7E3152B;
- Fri, 17 Apr 2026 06:41:29 -0700 (PDT)
-Received: from C3HXLD123V.arm.com (unknown [10.57.89.170])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 23F323F7D8;
- Fri, 17 Apr 2026 06:41:33 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69e239ef-e002-0a2a0a5209dd-0a2a4507a2a0-46
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:48:00 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69e23a10-229c-0a2a45070019-d155802ec95c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 15:48:00 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-488b8bc6bc9so5022825e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2026 06:48:00 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
+ [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488fbc92a9dsm26669985e9.1.2026.04.17.06.47.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Apr 2026 06:47:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,246 +52,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1776433295; bh=K0L3j6rOuFbocNT0G1KNMjoLTTA4P4wveYKXWHNkbsg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=B/bQ7sOWm1dxec2RmlYkfebzmi/bx9ZcepiAYslRbJWBW4zioVi1baQfMBdZdGO9e
-	 iOsX8RZScJAHJVd/WiJyZMZhoIsRS3//jupKt4dEtgK+DTvoPK9HMnh1zAV9Ezl8AA
-	 M3k7OdCTx034h/uFsaB+kER/aYVcEChWw2C1lEcU=
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH 5/6] xen/arm: ffa: Track VM notification bindings locally
-Date: Fri, 17 Apr 2026 15:40:53 +0200
-Message-ID: <a3e689abc6695c0adbe294ebce7ee0a77bd4b7bf.1776266307.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1776266307.git.bertrand.marquis@arm.com>
-References: <cover.1776266307.git.bertrand.marquis@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776433680; x=1777038480; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Aa1LWwdxzqYrVnza1lGExQ9a9dICBpPyuXLYZjCE2U4=;
+        b=SESmSKgUWmB/Lz+hC8QXxqI+WTJvcqJk3hNmpa+6iHOMBxbH8bcvo7ox237N4PMMuq
+         RAedebUDyyhgdYDYPlOKZ3aOlkEFTVG4pUDltH6a+OAFRdMLf816VfoooU96IAk/yYZs
+         Lbv6Iyl4OAy/Z2beILrgPoNaD+rKia3MlOqpZP7F50iObUw1arnx8/SbaVn1kK7bDRnB
+         x+O1HSAiMJinx5imZl+UvGpm5OY22Mm3uELOQGiUo+cENIWge8MMUm9i2IAAnrlHssHD
+         E5q87ZtZqwCedJOCkuPE+azpKoro7IzzNgTgNLTntHEa0xtZIM3P90wCPTBYH8jxMN/w
+         ERhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776433680; x=1777038480;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Aa1LWwdxzqYrVnza1lGExQ9a9dICBpPyuXLYZjCE2U4=;
+        b=QrPn5AW2ib2Ag06bBlIpAqq/8nkeO+lvxHftFe1jZG/PSyfTnbG9sp/Iw86IAMWbPA
+         4rgU3VDOln6zb6stuChrtW7Z6DBYLmJhh6oJpy7SJkp2XkXaZftmwUNqFwmPjikVo9Ug
+         E6NSD+lzBX6MouxBFjcoRUBhdWjFEFCIKx1mDQvGvjyrP2OwZ4LmbADWsMCRDPGWGnDE
+         052+5KHrjZDLi2Zh6ZXB4f5g9xUYvRbkomywZVJ+A7iQaQxRaWGoBGuy6hmddZYvA8F/
+         o2O2kKe6tOwZ5kpgueU4w9nYK6lA6ITIKjtiqRjfagMhrTLheHTDJRrgPI+DfYpvn8F9
+         orqg==
+X-Forwarded-Encrypted: i=1; AFNElJ+/o02V9+E46F51gyaycFC69NcMaNDX05vVALLSwq62Ww4JBgdRbeMdmMW7D4gKKnMSF0//oH/qLjU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxGiIsNu2V+3xztqtnNZfWRXodK1XDfpTGlwV0OBJI7OxY69zlR
+	hDROivAHaABeIw8Kf8w4RfyKJIkkg14POo+zssIjKn7tJM8N27BCYwGn
+X-Gm-Gg: AeBDies1eHSExaTH11gZQKxqgiCZz34TfT622OgChugzpM3j8LOJrNxidQeFa7jjjiS
+	G9Q1hhEgXsFkH+66ImRXYfmSoGVi00T4X9sbAX0WLjRmHnB9IAysBEvTRftIE7yScqUxiTmqmCz
+	ojpevuFj8Nj1/ZzO2wx+KAMg/uzzhhdygdc/6ayZRd2bTCT8gackWUi4bKcK1up6KA4H2ifgBfE
+	FYZ3zOFwf7Ks7vwUMWNVWs56uBTvJYvm2/VR+145bnxh2BGGnC+jkCaAFNJklAyiwjTaN4yS4ts
+	BUlnk0CW/ETpjKomYLc1NUfi85S/eZ0MCUFZnbrwfTtVulaz9vynW5W0iTbVV1VpJpyahgjIMZc
+	kU/nnOTiFldgYuv4ECaNDQHiGsgKRBV+fLf8wSvCEn+C9Q0GYo+w6FwgE/RkP9SLsL6u1powzsQ
+	k2njNpR4pGezCoysBwiIFCnTpXFRyW7sL8CSTxdfbYd0V2lJ74YoNE4fa0Jx/a6PQNK905ZekFG
+	j0sfjLdY/u5TO5bjfC5uNgi
+X-Received: by 2002:a05:600c:4ecf:b0:488:caed:5cc7 with SMTP id 5b1f17b1804b1-488fb76fddcmr42514015e9.15.1776433679570;
+        Fri, 17 Apr 2026 06:47:59 -0700 (PDT)
+Message-ID: <9bee01f5-8275-4d8e-b217-1b2d2f8fa2e8@gmail.com>
+Date: Fri, 17 Apr 2026 15:47:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1776433296-F620CCF5-86443AD2/0/0
-X-purgate-type: clean
-X-purgate-size: 7406
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 14/27] xen/riscv: introduce per-vCPU IMSIC state
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1773157782.git.oleksii.kurochko@gmail.com>
+ <8196fa8f000e384af697a44cb3d50ece966e82a7.1773157782.git.oleksii.kurochko@gmail.com>
+ <1f5e262d-da1f-49a2-8e89-87fb714e51bf@suse.com>
+ <2f555a8b-d058-41ca-80f8-ce3dc08edfbe@gmail.com>
+ <bd50afd3-6399-4c6b-b05d-d86ee4b8643e@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <bd50afd3-6399-4c6b-b05d-d86ee4b8643e@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1776433680-1585EC48-A9AFF383/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3202
 
-VM-to-VM notifications need receiver-side bind state so Xen can validate
-which sender owns each notification bit. Non-secure BIND and UNBIND
-requests currently have no local state and cannot enforce that contract.
 
-Add per-bit VM notification binding state to struct ffa_ctx_notif and
-use it to handle non-secure BIND and UNBIND requests when
-CONFIG_FFA_VM_TO_VM is enabled. The update helper validates the whole
-request under notif_lock before mutating anything, denies bind or
-unbind when a bit is pending, rejects rebinding to a different sender,
-and keeps rebinding to the same sender idempotent.
 
-Promote vm_pending to a bitmap so the bind logic can reason per
-notification ID, use that bitmap directly when reporting pending state,
-and initialize and clear the new VM notification state during domain
-init and teardown.
+On 4/16/26 2:31 PM, Jan Beulich wrote:
+> On 14.04.2026 11:22, Oleksii Kurochko wrote:
+>> On 4/2/26 1:31 PM, Jan Beulich wrote:
+>>> On 10.03.2026 18:08, Oleksii Kurochko wrote:
+>>>> --- a/xen/arch/riscv/imsic.c
+>>>> +++ b/xen/arch/riscv/imsic.c
+>>>> @@ -59,6 +59,29 @@ do {                            \
+>>>>        csr_clear(CSR_SIREG, v);    \
+>>>>    } while (0)
+>>>>    
+>>>> +unsigned int vcpu_guest_file_id(const struct vcpu *v)
+>>>> +{
+>>>> +    struct imsic_state *imsic_state = v->arch.imsic_state;
+>>>> +    unsigned long flags;
+>>>> +    unsigned int vsfile_id;
+>>>> +
+>>>> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+>>>> +    vsfile_id = imsic_state->guest_file_id;
+>>>> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+>>>
+>>> What purpose does this locking have? Already ...
+>>>
+>>>> +    return vsfile_id;
+>>>
+>>> ... here the value can be stale, if indeed there is a chance of races.
+>>> Did you perhaps mean to use ACCESS_ONCE() here and where the value is
+>>> set?
+>>
+>> ACCESS_ONCE() isn't guarantee only compiler re-ordering (as basically it
+>> is just volatile-related stuff inisde the macros)?
+>>
+>> Generally, I think that that guest_file_id is needed to be updated only
+>> during migration of vCPU from one pCPU to another and I expect that
+>> during this migration vCPU isn't active, so no one will want to read
+>> imsic_state->guest_file_id. But on the other hand, there is:
+>>     bool imsic_has_interrupt(const struct vcpu *vcpu)
+>>     {
+>>     ...
+>>       /*
+>>        * The IMSIC SW-file directly injects interrupt via hvip so
+>>        * only check for interrupt when IMSIC VS-file is being used.
+>>        */
+>>
+>>       read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+>>       if ( imsic_state->vsfile_pcpu != NR_CPUS )
+>>           ret = !!(csr_read(CSR_HGEIP) & BIT(imsic_state->guest_file_id,
+>> UL));
+>>       read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+>>     ...
+>>     }
+>> which I think could be called in parallel with with migration, so then
+>> still lock are needed.
+> 
+> None of this addresses my pointing out that the returned value will be
+> stale by the point the caller gets to look at it.
 
-Functional impact: when CONFIG_FFA_VM_TO_VM is enabled, Xen tracks VM
-notification bindings locally and validates non-secure bind and unbind
-requests against that state.
+Yes, I agree that lock in vcpu_guest_file_id() is useless and it should 
+be on the caller side and used for the whole IMSIC state access. But ...
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- xen/arch/arm/tee/ffa_notif.c   | 97 ++++++++++++++++++++++++++++++----
- xen/arch/arm/tee/ffa_private.h | 15 ++++--
- 2 files changed, 99 insertions(+), 13 deletions(-)
+> Which in turn raises
+> said question about the use of a lock. If you read
+> imsic_state->guest_file_id atomically (i.e. excluding tearing of reads),
+> the value seen / used will be stale as with the lock in use. Unless of
+> course there's yet another aspect hidden somewhere in what is not being
+> explained.
 
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index fff00ca2baec..4def701f0130 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -56,6 +56,54 @@ static int32_t ffa_notif_parse_params(uint16_t dom_id, uint16_t caller_id,
-     return FFA_RET_OK;
- }
- 
-+static int32_t ffa_notif_update_vm_binding(struct ffa_ctx *ctx,
-+                                           uint16_t dest_id, uint64_t bitmap,
-+                                           bool bind)
-+{
-+    unsigned int id;
-+    int32_t ret = FFA_RET_OK;
-+
-+    spin_lock(&ctx->notif.notif_lock);
-+
-+    for ( id = 0; id < FFA_NUM_VM_NOTIF; id++ )
-+    {
-+        if ( !(bitmap & BIT(id, ULL)) )
-+            continue;
-+
-+        if ( ctx->notif.vm_pending & BIT(id, ULL) )
-+        {
-+            ret = FFA_RET_DENIED;
-+            goto out_unlock;
-+        }
-+
-+        if ( bind )
-+        {
-+            if ( ctx->notif.vm_bind[id] != 0 &&
-+                 ctx->notif.vm_bind[id] != dest_id )
-+            {
-+                ret = FFA_RET_DENIED;
-+                goto out_unlock;
-+            }
-+        }
-+        else if ( ctx->notif.vm_bind[id] != dest_id )
-+        {
-+            ret = FFA_RET_DENIED;
-+            goto out_unlock;
-+        }
-+    }
-+
-+    for ( id = 0; id < FFA_NUM_VM_NOTIF; id++ )
-+    {
-+        if ( bitmap & BIT(id, ULL) )
-+            ctx->notif.vm_bind[id] = bind ? dest_id : 0;
-+    }
-+
-+out_unlock:
-+    spin_unlock(&ctx->notif.notif_lock);
-+
-+    return ret;
-+}
-+
- int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
- {
-     struct domain *d = current->domain;
-@@ -76,11 +124,21 @@ int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
-     if ( ret )
-         return ret;
- 
--    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
--        return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
--                               bitmap_lo, bitmap_hi);
-+    if ( FFA_ID_IS_SECURE(dest_id) )
-+    {
-+        if ( fw_notif_enabled )
-+            return ffa_simple_call(FFA_NOTIFICATION_BIND, src_dst, flags,
-+                                   bitmap_lo, bitmap_hi);
- 
--    return FFA_RET_NOT_SUPPORTED;
-+        return FFA_RET_NOT_SUPPORTED;
-+    }
-+
-+    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+        return FFA_RET_NOT_SUPPORTED;
-+
-+    return ffa_notif_update_vm_binding(ctx, dest_id,
-+                                       ((uint64_t)bitmap_hi << 32) | bitmap_lo,
-+                                       true);
- }
- 
- int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
-@@ -99,11 +157,21 @@ int32_t ffa_handle_notification_unbind(struct cpu_user_regs *regs)
-     if ( ret )
-         return ret;
- 
--    if ( FFA_ID_IS_SECURE(dest_id) && fw_notif_enabled )
--        return ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0, bitmap_lo,
--                               bitmap_hi);
-+    if ( FFA_ID_IS_SECURE(dest_id) )
-+    {
-+        if ( fw_notif_enabled )
-+            return ffa_simple_call(FFA_NOTIFICATION_UNBIND, src_dst, 0,
-+                                   bitmap_lo, bitmap_hi);
- 
--    return FFA_RET_NOT_SUPPORTED;
-+        return FFA_RET_NOT_SUPPORTED;
-+    }
-+
-+    if ( !IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-+        return FFA_RET_NOT_SUPPORTED;
-+
-+    return ffa_notif_update_vm_binding(ctx, dest_id,
-+                                       ((uint64_t)bitmap_hi << 32) | bitmap_lo,
-+                                       false);
- }
- 
- void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
-@@ -125,9 +193,10 @@ void ffa_handle_notification_info_get(struct cpu_user_regs *regs)
- 
-     if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-     {
--        notif_pending |= test_and_clear_bool(ctx->notif.vm_pending);
--
-         spin_lock(&ctx->notif.notif_lock);
-+        if ( ctx->notif.vm_pending )
-+            notif_pending = true;
-+
-         if ( ctx->notif.hyp_pending )
-             notif_pending = true;
-         spin_unlock(&ctx->notif.notif_lock);
-@@ -497,10 +566,14 @@ void ffa_notif_init(void)
- int ffa_notif_domain_init(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
-+    unsigned int i;
-     int32_t res;
- 
-     spin_lock_init(&ctx->notif.notif_lock);
-     ctx->notif.secure_pending = false;
-+    ctx->notif.vm_pending = 0;
-+    for ( i = 0; i < FFA_NUM_VM_NOTIF; i++ )
-+        ctx->notif.vm_bind[i] = 0;
-     ctx->notif.hyp_pending = 0;
- 
-     if ( fw_notif_enabled )
-@@ -516,9 +589,13 @@ int ffa_notif_domain_init(struct domain *d)
- void ffa_notif_domain_destroy(struct domain *d)
- {
-     struct ffa_ctx *ctx = d->arch.tee;
-+    unsigned int i;
- 
-     spin_lock(&ctx->notif.notif_lock);
-     ctx->notif.secure_pending = false;
-+    ctx->notif.vm_pending = 0;
-+    for ( i = 0; i < FFA_NUM_VM_NOTIF; i++ )
-+        ctx->notif.vm_bind[i] = 0;
-     ctx->notif.hyp_pending = 0;
-     spin_unlock(&ctx->notif.notif_lock);
- 
-diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_private.h
-index 5693772481ed..6d83afb3d00a 100644
---- a/xen/arch/arm/tee/ffa_private.h
-+++ b/xen/arch/arm/tee/ffa_private.h
-@@ -236,6 +236,11 @@
- #define FFA_NOTIF_INFO_GET_ID_COUNT_MASK    0x1F
- 
- #define FFA_NOTIF_RX_BUFFER_FULL        BIT(0, U)
-+#define FFA_NUM_VM_NOTIF                64U
-+
-+#if FFA_NUM_VM_NOTIF > 64
-+#error "FFA_NUM_VM_NOTIF must be <= 64"
-+#endif
- 
- /* Feature IDs used with FFA_FEATURES */
- #define FFA_FEATURE_NOTIF_PEND_INTR     0x1U
-@@ -334,10 +339,14 @@ struct ffa_ctx_notif {
-     bool secure_pending;
- 
-     /*
--     * True if domain is reported by FFA_NOTIFICATION_INFO_GET to have
--     * pending notifications from VMs (including framework ones).
-+     * Bitmap of pending notifications from VMs (including framework ones).
-+     */
-+    uint64_t vm_pending;
-+
-+    /*
-+     * Source endpoint bound to each VM notification ID (0 means unbound).
-      */
--    bool vm_pending;
-+    uint16_t vm_bind[FFA_NUM_VM_NOTIF];
- 
-     /*
-      * Lock protecting the hypervisor-managed notification state.
--- 
-2.53.0
+... I am not sure that I get this part.
 
+If I am somewhere in migration code where I took write lock to update 
+imsic state (and of course ->guest_file_id as part of it) then if 
+someone else in parallel calls imsic_has_interrupt() then it won't enter 
+critical section where ->guest_file_id is trying to be read so no stale 
+->guest_file_id will be read.
+
+Then does it make sense to use ACCESS_ONCE() during read and write of
+->guest_file_id in such use cases?
+
+~ Oleksii
 
