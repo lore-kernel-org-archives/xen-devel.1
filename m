@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75364F5A8C5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 21:28:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1287539.1568016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2144F5A8BC
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 21:28:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1287547.1568020 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEw9s-0005Cx-Mq; Mon, 20 Apr 2026 21:27:56 +0000
+	id 1wEw9u-0005PI-Hr; Mon, 20 Apr 2026 21:27:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1287539.1568016; Mon, 20 Apr 2026 21:27:56 +0000
+Received: by outflank-mailman (output) from mailman id 1287547.1568020; Mon, 20 Apr 2026 21:27:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEw9s-0005B2-4Z; Mon, 20 Apr 2026 21:27:56 +0000
-Received: by outflank-mailman (input) for mailman id 1287539;
- Mon, 20 Apr 2026 21:27:54 +0000
+	id 1wEw9t-0005Le-L2; Mon, 20 Apr 2026 21:27:57 +0000
+Received: by outflank-mailman (input) for mailman id 1287547;
+ Mon, 20 Apr 2026 21:27:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEw9p-0004hB-Tn
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:27:54 +0000
+ (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEw9r-00052T-Hz
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:27:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEw9p-00CBiW-AK
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:27:53 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wEw9q-009jup-UI
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:27:54 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a14-e002-0a2a0a5209dd-0a2a4507df78-38
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:53 +0200
-Received: from [40.93.195.123]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e69a17-5cb7-0a2a0a5109dd-0a2a45068920-46
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:54 +0200
+Received: from [40.93.196.130]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a57-229c-0a2a45070019-285dc37b68cc-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:52 +0200
-Received: from PH8PR02CA0051.namprd02.prod.outlook.com (2603:10b6:510:2da::21)
- by DS4PR08MB11019.namprd08.prod.outlook.com (2603:10b6:8:2e6::22)
+ id 69e69a55-7371-0a2a45060019-285dc482173d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:51 +0200
+Received: from MN0PR02CA0007.namprd02.prod.outlook.com (2603:10b6:208:530::15)
+ by SJ0PR08MB6750.namprd08.prod.outlook.com (2603:10b6:a03:2d1::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
- 2026 21:27:45 +0000
-Received: from SA2PEPF00003F64.namprd04.prod.outlook.com
- (2603:10b6:510:2da:cafe::b9) by PH8PR02CA0051.outlook.office365.com
- (2603:10b6:510:2da::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Mon, 20 Apr
+ 2026 21:27:40 +0000
+Received: from BL6PEPF0001AB72.namprd02.prod.outlook.com
+ (2603:10b6:208:530:cafe::45) by MN0PR02CA0007.outlook.office365.com
+ (2603:10b6:208:530::15) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:45 +0000
+ 20 Apr 2026 21:27:39 +0000
 Received: from usbth1es003.ebgroup.elektrobit.com (4.79.107.243) by
- SA2PEPF00003F64.mail.protection.outlook.com (10.167.248.39) with Microsoft
+ BL6PEPF0001AB72.mail.protection.outlook.com (10.167.242.165) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48
- via Frontend Transport; Mon, 20 Apr 2026 21:27:44 +0000
+ via Frontend Transport; Mon, 20 Apr 2026 21:27:39 +0000
 Received: from usbth1es003 (localhost [127.0.0.1])
- by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz9D0F7Yz1wdV; 
- Mon, 20 Apr 2026 14:27:44 -0700 (PDT)
-Received: from CO1PR08CU001.outbound.protection.outlook.com
- (mail-co1pr08cu00101.outbound.protection.outlook.com [40.93.10.97])
+ by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz964cSXz1wdS; 
+ Mon, 20 Apr 2026 14:27:38 -0700 (PDT)
+Received: from SJ0PR08CU001.outbound.protection.outlook.com
+ (mail-sj0pr08cu00104.outbound.protection.outlook.com [40.93.1.76])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange secp384r1 server-signature RSA-PSS (2048 bits) server-digest
  SHA256) (No client certificate requested)
  by usbth1es003.ebgroup.elektrobit.com (Postfix) with ESMTPS;
- Mon, 20 Apr 2026 14:27:43 -0700 (PDT)
-Received: from CH0PR03CA0397.namprd03.prod.outlook.com (2603:10b6:610:11b::30)
- by SA1PR08MB7245.namprd08.prod.outlook.com (2603:10b6:806:1a0::17)
- with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 20 Apr 2026 14:27:38 -0700 (PDT)
+Received: from CH5PR05CA0010.namprd05.prod.outlook.com (2603:10b6:610:1f0::22)
+ by DM3PR08MB9136.namprd08.prod.outlook.com (2603:10b6:0:14::14) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
- 2026 21:27:38 +0000
-Received: from CH2PEPF0000009E.namprd02.prod.outlook.com
- (2603:10b6:610:11b:cafe::72) by CH0PR03CA0397.outlook.office365.com
- (2603:10b6:610:11b::30) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:27:26 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:1f0:cafe::54) by CH5PR05CA0010.outlook.office365.com
+ (2603:10b6:610:1f0::22) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:38 +0000
+ 20 Apr 2026 21:27:26 +0000
 Received: from denue6es012.ebgroup.elektrobit.com (213.95.148.172) by
- CH2PEPF0000009E.mail.protection.outlook.com (10.167.244.27) with Microsoft
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:38 +0000
+ 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:26 +0000
 Received: from ubuntu.localdomain (10.10.178.50) by
  denue6es012.ebgroup.elektrobit.com (10.243.160.140) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.35; Mon, 20 Apr 2026 23:27:34 +0200
+ 15.2.2562.35; Mon, 20 Apr 2026 23:27:23 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -90,14 +90,14 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=siMT05Uwv09Sb0ufILysQ31SYkrAOTh3ponchDEMhoxnz7ugCbtG1+6rn6GMAQA+tgYE6t8A3qDKQQ4COLqPChV9rUjtn+l1wKt7oy+lsZGRpL7nrjxOJyShTlILsJEo1tu5q+3NhhF0CpT0EI2FAVxAbV6JQ4YrRjYLpGW5tysqE2EpL/PTAq6rRB9pB2FJYHId06NCOBXOaW8faPcVhsz8qLIiQZXwU+HjqJrkqFyVQ/SMe4D1y1NhBv0zYV3GQMXZkzQCKcgxegMlYxmtrK+mg8yHeWGew8B3Syidr57VIqp/OxoExVP9MxuDxGQI5ic5TQtzJIVIvz1n3Etx9Q==
+ b=ihOxs59k/Y81LOoyE9gQnw8x5u4PA+6c3uOL/qoPUk6jf/ZU83RPknS5TRcdzNYEbJuJ/ayQmgi63DnPXL4aDwBXUScjnH61Wn8doeyZXSNrzh8CeBZcrZ/BRdCALLYCfrBvUolV3pLqdsIrNQfR211ZcfT/3Q/xSZAAvL5dE8qC2x0iu8Wt35vCprQPKuq9IOza/47i1pEo9HUFEwoetocSEeJbkxQEiZVRMcLqdxHJ1GrhrRcWKQ5JNSY1g1qa0LUjZswazVQUQPKRKcQ8owGQGJJhKsHD8ugMQQu1z9u77l7X2bCMAq3VT5SPN+yD6voneyKvpxNDQop307NKww==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/xFPvcddJmAh/7k7Gzv3o+d1z1DGyz3l1lzwxv3F8MY=;
- b=ugvhVGj4Ay4WnvnOUMisvebbStQd50kjCywwjV29bKGyBZrVRfXi0hPuuIzVc5bW109kkBZLpVaHIpdGw4Vo9Xx9gttH+yJwSMFhW2vzlVV2HeI36Lr7o78vzBhkincICBG4HrxYbCEl7GaXsdwGr/BHrcZXz4YuF9mwVSQ8Q1qNbfzLWeHOiYLk5Q4VMgKYY24dCj3kZ9MAA+Bmrrn0WBm4dzzQ1rIqrIsmb1W9dgeLpYqW0y36cEFm22Kd719pm7zRiWt04ITVWECk3VJ32Fyf+7JoGVtFyFjGu+LAmdUp17wx/b5yOhUaiP3THp+mbI3CM1CfO8y4yG4ya4sokg==
+ bh=OAj59kWKN8biXOebnwdzq5ky5bvMG5PNKC5Jot+tZ8s=;
+ b=TNvImQvR9whhxpEpg6mQwNpA5IBekbTjI44dT5tCmyt/Y+vg2QmUIDWVI8lJux8xK1OMgNo7on0B7w+5+gOkNGCDPbRrg3cDfKyhlHzpdglTvvycAV/5qTOD3Z7xa6AunIWIEAmyFQuHVGvYYuF0jfvmf6YVKq+rDB/S9RqQqOCdbiU63VP2/PiSvSMnDpVvAeE+MkMAj4R6LdCJXwY9/IG9EKGuIIxFD+gB4tQ+VeZtIqDhVxX+z14d2aQsR+NzCoIAyqiVd8TpMeKzK1IBl9AT+4Ua/ePVg4dJTAk/jWXcLA/2/L11ZY+qzkfhH53DGaTMJBczyeSiMeMAcN/MTw==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 40.93.10.97) smtp.rcpttodomain=amd.com smtp.mailfrom=elektrobit.com;
+ 40.93.1.76) smtp.rcpttodomain=amd.com smtp.mailfrom=elektrobit.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com; arc=pass (0 oda=1 ltdi=1
@@ -106,22 +106,21 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/xFPvcddJmAh/7k7Gzv3o+d1z1DGyz3l1lzwxv3F8MY=;
- b=iLAIWGyjqNeVtdzRMI3oACsUTGllgi46p32FqZIdA44UnXxoj+ssw4ZlTC6pUuQ73bZawXrkLWsLUiMEqOqxbDNs6aQDdOlFwCvkJX/ttxUxqFj3nEFCTKxqum7Zz4DoyH+/KpYqR1mUKBdxIc6MbHlzH1XCavG+C3oRB732o4I=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.10.97)
+ bh=OAj59kWKN8biXOebnwdzq5ky5bvMG5PNKC5Jot+tZ8s=;
+ b=Cnyc79bWCglclRLJqu4OuHaL2TtDQnEvAXy1UAJmGr26COabSNkg1lq57qYl7gdbwQXlmuCKZWZd0Aa1aLhL+/rochiA816xuWUZwXKVRJWSNJJsfdmJm9NSeRyQcGgVhgAulYCZaErPUxmQFYT+IrDEm5pDd0Vp9dlcBfZ0jCA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.1.76)
  smtp.mailfrom=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com;dmarc=pass action=none header.from=elektrobit.com;
 Received-SPF: Pass (protection.outlook.com: domain of elektrobit.com
- designates 40.93.10.97 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.93.10.97; helo=CO1PR08CU001.outbound.protection.outlook.com;
- pr=C
+ designates 40.93.1.76 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.93.1.76; helo=SJ0PR08CU001.outbound.protection.outlook.com; pr=C
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WDXIgFtlRMMybhj/J02J+6dvwFHFVu47kAvjAJEZh1AdO2edBKhxXLFBs9VoJZgQcKy7hGfv06fsdGSslQ6+dqBr9aJNSZ6ZrmghgCOJ+594XtVTZ7kxdMhIguylrDVHhuHyA5IE/57dIopMQJgfHbgPYsko2GpAyDTsmf2xxAbZ4KfHZxEAVmXnamEoNMMheZWZPdctphnG/v+uBRUTR1BG1FQw4/rqQ1d4uSweUw+aUrOB5pWGnRcSL1ikVSnJ1HAfSg8JBPQ/R5O0DYCvgFDea2p65b5QNqZUqQOgG5IBcu89tCABLcDjdRgBSMV1ScQs5e3aFDxPiNAZAOcppg==
+ b=ZBUykGz/nOSPO6xoDK0nq/cwgurczPVnQrHuXUM12uOavdNJU02fsLOuny0ECvQor1IRPkxdKRvtwMdseE0CjHf8ZpBq3LpdcTL4ubqKehQgsDyPRHOzegFvAFCTQRvnG5UNWkmUIoSeEwKV2qI5B4jymmpv3GPFhqiPlIqcseWlZsbv8NqnuLpoD92mAflXQ3U5KcQgVtJc6FzfStfyHhaCj+Jq0UcjG4WLPJjYfrSewp8CV4G+7CZ+tbIyib85wm8HiRCehSUAlrrPMG/RkDBYFgqTjFSs+CUksSJaJeyjKfO+taZRglzRK+f+N65HpVOhcpg2o1F5d4xQtd7B7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/xFPvcddJmAh/7k7Gzv3o+d1z1DGyz3l1lzwxv3F8MY=;
- b=rQNReQNPmnmeHrubVSsD2RDYqNzoM1HDybeuSWvcEP21n+/l/zEajzpVtf1z5tk6r2ggikQr5eyKE5zjECn9cGTbfs6fnCX0MRdXyYxSWptI/YdG0JM9fCp2O9zlKtUUs2YXpJQo1QAq2zglvwLHGPWEjhOqA1l3Ern3jRK09wotllT11z0YpgZIxbMjefWpdVIbTXpFOvXBLy1rb6JDKN+Ekm0MU0D1VaTszyX4+iXSL8S4hWZoh8oRGATBkKLpUZO7d3cOB9bptR7PjBkJF4POwOJs7X61TOydXQCicIwHkzc1UFKv6bTjuWAzWuuK//IZhK1LV2EZ6NV21KJiFQ==
+ bh=OAj59kWKN8biXOebnwdzq5ky5bvMG5PNKC5Jot+tZ8s=;
+ b=F6rOOSF4/z4NkgvHD1JKx8PCZEdce/yM6NfJ9hQlAKfBpBnGV8airHpJvJJ1CRfuUj48PFc/f140RZZP5oA1z/Yw3CIUulHfFv5pCsGyLuuyVnY9U5/RF13wGCNq6wJCbQj4RBz8cWela+NHZKc13lkNPY+YDnWE1PaMzGMmBBB5AgGthjZ4o9p9IVoBnQbqQexe3okZjINjqI/ujtHj0T1WYYaqk0M2gZamNWWPsxB0K2NI4W1fwyQrUzROfNc0RHyXFvDz/a8ztrBSjKiB3216isDbHEMlvzTZzDuH7Ci9TyTvbYf/oPAYj2REMr6j8d3/yBXVEGclPThqwNohjQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  213.95.148.172) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=elektrobit.com; dmarc=pass (p=quarantine sp=none pct=100)
@@ -130,8 +129,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/xFPvcddJmAh/7k7Gzv3o+d1z1DGyz3l1lzwxv3F8MY=;
- b=iLAIWGyjqNeVtdzRMI3oACsUTGllgi46p32FqZIdA44UnXxoj+ssw4ZlTC6pUuQ73bZawXrkLWsLUiMEqOqxbDNs6aQDdOlFwCvkJX/ttxUxqFj3nEFCTKxqum7Zz4DoyH+/KpYqR1mUKBdxIc6MbHlzH1XCavG+C3oRB732o4I=
+ bh=OAj59kWKN8biXOebnwdzq5ky5bvMG5PNKC5Jot+tZ8s=;
+ b=Cnyc79bWCglclRLJqu4OuHaL2TtDQnEvAXy1UAJmGr26COabSNkg1lq57qYl7gdbwQXlmuCKZWZd0Aa1aLhL+/rochiA816xuWUZwXKVRJWSNJJsfdmJm9NSeRyQcGgVhgAulYCZaErPUxmQFYT+IrDEm5pDd0Vp9dlcBfZ0jCA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 213.95.148.172)
  smtp.mailfrom=elektrobit.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=elektrobit.com;
@@ -141,15 +140,14 @@ Received-SPF: Pass (protection.outlook.com: domain of elektrobit.com
  helo=denue6es012.ebgroup.elektrobit.com; pr=C
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Rose Spangler <Rose.Spangler@elektrobit.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Teddy Astie
-	<teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, "Michal
- Orzel" <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [RFC PATCH v6 24/43] altp2m: Move altp2m_{get,set}_altp2m to common code
-Date: Mon, 20 Apr 2026 17:26:29 -0400
-Message-ID: <20260420212648.208640-17-Rose.Spangler@elektrobit.com>
+CC: Rose Spangler <Rose.Spangler@elektrobit.com>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Sergej Proskurin <proskurin@sec.in.tum.de>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>
+Subject: [RFC PATCH v6 17/43] arm/p2m: Move hostp2m init/teardown to individual functions
+Date: Mon, 20 Apr 2026 17:26:22 -0400
+Message-ID: <20260420212648.208640-10-Rose.Spangler@elektrobit.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
 References: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
@@ -163,253 +161,379 @@ X-EOPAttributedMessage: 1
 X-MS-Exchange-SkipListedInternetSender:
  ip=[213.95.148.172];domain=denue6es012.ebgroup.elektrobit.com
 X-MS-TrafficTypeDiagnostic:
-	CH2PEPF0000009E:EE_|SA1PR08MB7245:EE_|SA2PEPF00003F64:EE_|DS4PR08MB11019:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9a17df29-cfd9-4436-7a52-08de9f23a998
+	CH2PEPF00000099:EE_|DM3PR08MB9136:EE_|BL6PEPF0001AB72:EE_|SJ0PR08MB6750:EE_
+X-MS-Office365-Filtering-Correlation-Id: f019f542-e825-4a2c-dc2b-08de9f23a677
 X-SM-outgoing: yes
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|704162011799003|36860700016|1800799024|376014|82310400026|22082099003|18002099003|56012099003;
+ BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?V/t8OlqgU5UgLVl3ygrlXo1RJD7RaqDhlWshvtr04/fND0YliTWfyeKk+dBy?=
- =?us-ascii?Q?CjcF6cQ2atHLP06F8YEKxbKvvjiJYCDstfzRT38H7PTLd6G8Hga20EyqeDJ3?=
- =?us-ascii?Q?6DsH5q4DsnTo7tRznWaUtswU5g8jI+pYYCKTw0E/F89FoM0QBIsqUrYiT4qt?=
- =?us-ascii?Q?g59aLM6JGwKmMXXBF8+B1ihnoTQXyIlzjgOUzLnkgBu8aDksANWZnkZmNumN?=
- =?us-ascii?Q?r02LIfpws/ZIWtA3v0MAhZi0KVHL2bAWEY886sCuqJR172W9BwsDt5GzkmSN?=
- =?us-ascii?Q?644N3jCkpTCgYFSEzdMAGnGwVIYhe8hY+rvxoyDpzJpS7Duvw9Inf+9LzxA2?=
- =?us-ascii?Q?qUHwuOo9/ETjDMbGa1MEuhVQQyXITGT36+qmjWyKBEdUPUqFua3PO8jij2p/?=
- =?us-ascii?Q?KXRvPfJz+zxa8+QdbXE8v2C86OzT2ay6ravbopMnyWlA2Fjo2IoIAP6Pj2Uy?=
- =?us-ascii?Q?RWKXP4nzwXDR3D5scoTGW0elV+oVyTwTDml6ZrwL2UR1DmYUD38cGSSQLM6+?=
- =?us-ascii?Q?rMIxpkaLgGRsPuodweRpyGvDMVGO9Vk771ssweKh6NWRSv3o81ARRppyzngX?=
- =?us-ascii?Q?8aBHVmaPm/ImH87YnXAgzAYMhg+rJNxvNrlsj2n4nT6Uu50KEt29EHV4j/hr?=
- =?us-ascii?Q?SSdpvq5VvDToz3cF/ajtQdstO3YeMRAB4lUVz7goW/kzOaHNL5KETNt1FD04?=
- =?us-ascii?Q?wQxnSAHqjN+EUyWoQUdmlT5oo6Ktoheq5AuJxyOo5ZqjyWBcBvtUbqqnjOMu?=
- =?us-ascii?Q?KuIaD4nmcSttig++TIbpElHrvVuC1/HjmwOVP1+HKyD+BBeKZt2TIrId1/+7?=
- =?us-ascii?Q?s5LnT5PWUnSLV2xRP1UXwlbYOPjp6n8uMk2aL//OLLRLEXMNXHjvLsrspXqX?=
- =?us-ascii?Q?8fCRb+uwLSgtqKw1YBxTXfkfr1X9LUHgiYvlMDxt6GK2+UYA7NuA02veRZdC?=
- =?us-ascii?Q?N2PL8XKTTvaqh8hcRCJuRel/zvb/IB19QQMEyw2AV+8g3YKZulAjsd/NqkLX?=
- =?us-ascii?Q?TYXF2YHMIVyvFuvjDLD7oqMQ+71poQX5ayW8/JP3EaP1QiD5b0o2TcekySH+?=
- =?us-ascii?Q?1basVZykWM7k3rNtMudy0jeszYXmMi/sqMgQijTAwWaUy1SNRBQ=3D?=
+ =?us-ascii?Q?hQ72XviHDyNLuRAuPLvm5zg4mpBArTiFtPQF0WwlJ3nx0LX25Kge2NIep3hY?=
+ =?us-ascii?Q?Lj4tZMRJgG6//+WuTpdF1evqjRNjkPhbKWrlQeDFyihxa5O2gxAVqftxJgz9?=
+ =?us-ascii?Q?6XPD5p16n5np5D56bm8EvuJdwi65deWFCzzpgdXnZdYbonNwITn7LkuA33uZ?=
+ =?us-ascii?Q?awekqWAnwjTOTjo7bYdQwUilNwjJrMFawyUolWJl5yeLJdH7hJOzZI7S2xn7?=
+ =?us-ascii?Q?KYfld3v1V2AliwyqVKwTYRUpju6+WvFu3WgytIsTlbeBuFOrkwR+Gf3sV+xP?=
+ =?us-ascii?Q?BCMo4Qf1HYTcUNjwj73RH0LzeOa0NjFhTr1tdE85iYZGB3zpqFoY+1qcw20p?=
+ =?us-ascii?Q?m6ycXfGRQfAm2sqmg3MQLaJ/CB1Tbqls3tqiJtj9h9xwr1wPzUZGW3rJLZuP?=
+ =?us-ascii?Q?JtYAPN9Pt9cAryBGhMpIdIa4JdTTnB8GyFqiyL9BIrG+Ou9yNO/TwNRg5HtR?=
+ =?us-ascii?Q?Nh5ZAEHqf8tDEgMJmu/XSi88D1PtOcaZKuRwac8YmAs6Uc6EiCvZdKS7ggFx?=
+ =?us-ascii?Q?cC5AAMzxJph7a2ZdeJvjAw1TJfCtuUZygPnufiVF4AVBlMXvbHwSIsTe0P3W?=
+ =?us-ascii?Q?l9VMRP4D6bNs2IG6UWRAdVsDRqVxVAFMiKZqoc3wkiCyyzt8vK7Ij8slYXYW?=
+ =?us-ascii?Q?2KqwMBJSi4z4+zcmyOxcTJjuK+IEu6WWzjel2uvgDkrwEac7BjPY1WV/Q17k?=
+ =?us-ascii?Q?hDFsletdogjshY8kob3DlQRc9K17WdVDSFZYjXVodv2Bh1ue7GmE6J3OqGp5?=
+ =?us-ascii?Q?1C/Mzwb4+g5wgCvTFITUQdgN1yHpgHZ1tKyMO+U9FJVY55PaGUVMy+oXWyu2?=
+ =?us-ascii?Q?Q5kk9X+EkZ2MOrCg7VcB6V/FRXjFB280RhQS/oKNTtFGzdGz1P2a/YMx+sSS?=
+ =?us-ascii?Q?ler7sWPH470iowZalxzIYgVYEip42zBXDBFqx9PrntvtetbyFXQIQG/GKfAH?=
+ =?us-ascii?Q?P358quTGzl7dnIjL9zg7R/uqTewL408/cVaLkVX0ClNC4bheYUN+/P9nC8o7?=
+ =?us-ascii?Q?8Of9qADmncQVRppylnpgV2YsNyeAY+GilokiZey8J9FA3wLm5xh2z4OpPrIF?=
+ =?us-ascii?Q?IgY+vSNdmp/G80FRtJEHjJEol1zhgjmohsxx8dvY154mSBjJQb9veFDdEBfi?=
+ =?us-ascii?Q?2XuZ4W6nQDo+GbuSAcumODRTVmsH6IUwP+DzN5Bd5SbMQaHzjVS8FB1Hi40W?=
+ =?us-ascii?Q?PQmXa+pClKwo17kOG9dQbjS7URxjtTp6mZyF4g=3D=3D?=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(704162011799003)(36860700016)(1800799024)(376014)(82310400026)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
+ CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-Exchange-RoutingPolicyChecked:
- G9JKct85kmNJ7lKB/CE0Di3Ty4TIH4YJ6m04MNWUbs1eJktKZLP2jnGmQ6Adrpk+5iJA5U2y84/pMT4ASN84w+zqhXUDHjFKbix2flti0FQzVbfxdIvx4tCkDeMjOrnZZYzQp+Vo5svgAmAD/rsZEbiQvBwCWUraDAmuW8tJXrIbPKukmI6ouWd9woYwFcujReoI/q8Gc0jgOwCmbabQpIdbajCrfs0gmncK+HmPqXKBjhxOvBLErN5eX2h/aXUOBw1uHi4OwtTbiY0xMfSGibGWh3iDa7WWnyhPZLQlDy97A/P0z29SMKYZpMGkdGXB4ZON86XDcY73S0r1Ccbrhw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR08MB7245
+ Mg8uG0Er2mVrQ5U5JJlDOHx9HzrX0RrB6izIDtZau4FeWE1+rNe8bUCQ0VqQjxUvEq6DS+Sp9loQO/NRZbpAjokh9hn48h9M7mtjp5Tne6zTCONuKGrAGEFd0FLoxEuVtuBmsokQOmmBBYUdhesncjHMjDXVomZGBqJYivM92Myz6ysawIdCfLoBdZLV4PGHfR8OCvQDb06nSohsymRwYm1WLMjOASAI1TriDQ6s5hClkuokShrcWsGOlS1Z9CDEBWb4O97XiUq+uufU3NlO7JvyN47T7nih1XIXNrTUXjdcPCht6NVGBTimP7ppROwaQtvV6KblT4R8BC1BHmxybw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR08MB9136
 X-MS-Exchange-SkipListedInternetSender:
- ip=[40.93.10.97];domain=CO1PR08CU001.outbound.protection.outlook.com
+ ip=[40.93.1.76];domain=SJ0PR08CU001.outbound.protection.outlook.com
 X-MS-Exchange-ExternalOriginalInternetSender:
- ip=[40.93.10.97];domain=CO1PR08CU001.outbound.protection.outlook.com
+ ip=[40.93.1.76];domain=SJ0PR08CU001.outbound.protection.outlook.com
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- SA2PEPF00003F64.namprd04.prod.outlook.com
+ BL6PEPF0001AB72.namprd02.prod.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	54dda91a-6ba8-4cd8-1232-08de9f23a59e
+	88a44def-d595-48d0-a20a-08de9f239ea8
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|704162011799003|376014|14060799003|36860700016|35042699022|156008|82310400026|1800799024|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|1800799024|376014|14060799003|35042699022|82310400026|156008|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?98LBm2rCc354eHij1TwR0Aw7vJkJFINu24fIJSK5R4pkzRbUl/rs2ujxRdXB?=
- =?us-ascii?Q?n/7XWCsb1fIos2iomZvWsLxCBvxGoHW+47DVxRizpp6zEW6Opms5087Q6xN1?=
- =?us-ascii?Q?rXOJFUcK+fMW9Cr0+y6wrB6gZXDnL1EpC1focekQzXPwsBQ0SEhE/ubaJybI?=
- =?us-ascii?Q?9aPlduYwGN0ige2Wf/TAz8PiQb0JNbE4qB1vaoYPxXgG9+PHy+S4WER3QQQK?=
- =?us-ascii?Q?+WhOVEs5X1OWTkxVFH8W2x2sc4knxjlL836npm8Wn5GFM1Q3wd/QVgTJbIG5?=
- =?us-ascii?Q?DPeo1BDwONHTHZSonPTZbOyVt9iIPyFPxiIXoTVXJvW69CVsGLfl/s+P3+KU?=
- =?us-ascii?Q?Mg+hAoM3eaC38xWZ608WcPx1fIoK87G/awustxyIDdREK/AjfNVHhWpD7nCB?=
- =?us-ascii?Q?CScYahV+ig45mwIK/zglvmfstUirpVhXAjG0PrxoO5C3AiX3LJKdcSc0YEo9?=
- =?us-ascii?Q?7vTsMG469TtpUIAFxPLgiDT9UA6RxmnjsvrspPwGpvDSlfyQTtPmV3GzZWq2?=
- =?us-ascii?Q?nofFeRBZfy45xg7tWHOXDGh4IV8lNihPqvE6FVlghsPDEmGKlIdKuNFUpU0p?=
- =?us-ascii?Q?GiuF8LKQmHa4fOqv/76nJ2VJuYKDsgr3uNYEtDzmzJhkuGbyMJhsnZtviGRa?=
- =?us-ascii?Q?2Sf3nF5eXHy1u08XPmZv0KZ35U0V4zmS9FAA8UFVvKMTULml7jUrAp/JxvVz?=
- =?us-ascii?Q?t1U5aRO7CFssq4HLMXW9H/iRIK+u6mudpeWTMKiiRGupcxLx3NyKYYXwnViG?=
- =?us-ascii?Q?CvZazj/mX+SqqW44jqvJbm8jppUZ8wf1sC83DwPEh7ky12Yhe2TbxI3jn91Q?=
- =?us-ascii?Q?OXhGU3yqWWxzVmjQ4PvPni+boLxot2yt8ZtJrJwUf3rvbYop2Nht3Dew32wk?=
- =?us-ascii?Q?E31XYMT9BPe/0wGE2XdA/vEORFbQYuCUljmXgrdbiFnncUk7X3I61veIEQAi?=
- =?us-ascii?Q?CeXso//SiZhjer6Ac3E5TdD0eJNktW1halUlaKeLPUNThZnGHX6lktpGxcc9?=
- =?us-ascii?Q?7lCqPJf82zI7RsHvlvQV0cppC16DRJy29nB/TBi4Ll2g6wk1eIb02uyHD9Ht?=
- =?us-ascii?Q?Vkwsk46mrlZm/WYr9ULWgE8IT6PO/rQIaO452501D+RL6KuCR7g=3D?=
+	=?us-ascii?Q?77kp6bKmuXKRoQmcTex64ndMlr3Hh6bOB1xhG1km09D704DeIXrW5/nY/kAs?=
+ =?us-ascii?Q?6Yz/QDtAh5W7qn1PtdV+PrUXQ6oZ8aCKhG+Qiw6lTOEJHeErIcb4PKK+3kjp?=
+ =?us-ascii?Q?Gm1c0MgVkHuoMh4wL5pkQfrBbotgNZFcFqBrVYZ5lUCv5XGMQziginNPt9fz?=
+ =?us-ascii?Q?TwG+M1eljfMa42z+CzeRMXDEHqEg2S3HjKTL/O554eXYSMKXe69bShspLzy7?=
+ =?us-ascii?Q?JGWWECzc9QnVYP5cfNjbbpNRNtiQettK0aO/LW0PXU/1jsB420jwk+u0DWiO?=
+ =?us-ascii?Q?fYP9UunYUZWcYqNj64XqC0dVZw8QfXwKhMqZeyOdxw1BeMo0aad5ZOYyYYEZ?=
+ =?us-ascii?Q?Zp3GBuPrAqXulXtugeRWrHZEZvRIA5rHjCTmsBvQ+XIDDD4dltG+kSb6Fq1s?=
+ =?us-ascii?Q?seEOzh6hPnRkf1R6VSLu2zYf4lnWP0rKd4wAd3guBv6ND8Ry83Ynm+xjrFZc?=
+ =?us-ascii?Q?gISzb33I9sh6bgFulVimQ4huTf/g+Ex9oB5/MG3m+iy4/jbQ/K3wM4sKAwnB?=
+ =?us-ascii?Q?Oc1RH9DqoSI2kFTvTNM2E7Oqcyjbg1RHSeZSstJiezxSD0h9ZNdbkOGc5ssk?=
+ =?us-ascii?Q?SAGRCUJM1MPAO5D7P4cDUnmR4H6oMlw16xr1sj3XMB4yC5LRACfUHa8TAba5?=
+ =?us-ascii?Q?k3DCeWAHtf+8DntiqWKPTU9bQCSwJ5tcqWxan+5nvUUStvPfAWbUD6VYoaO+?=
+ =?us-ascii?Q?Dd+T4nrxBIz6AeKoZV64FjqODqbCB/KDt6jof1RKC7mJkMtwLq/bnmhAjhq2?=
+ =?us-ascii?Q?u7KsGmcn22YNO+2t6d+BZ0gmEPefTTRqD1HAmOH9iCiF9GwktzXIUQvcFMyr?=
+ =?us-ascii?Q?KxVbWAKOqTa46QuVQcxaFfjTbQrCE2EQr0vN30FEtUX3IEJlUclBPAnzxUP0?=
+ =?us-ascii?Q?TQe6EJ8/CBWOYlxNerLbqoQ815VAjjEZobcw1jCn11iAwDaCeqqtMcxIcEgx?=
+ =?us-ascii?Q?vU3fJoa+Lzh9GEDDFQGavULrahgbC9SqZZ1LYrm97E9z/eTWu8wz1g70DKPM?=
+ =?us-ascii?Q?BD5grQY9IE2sVKzy7lFaDSxsJ3GzoLtAH5OsjXVho2dPYfUZ09gj/ju94Qdk?=
+ =?us-ascii?Q?bxUdsJzlz8Y+REjahgXNkzpUzfezh7KiTDTsPCm289tr90avM9thxKldt8B7?=
+ =?us-ascii?Q?EKXI9dtPdubJIJ9TVDFWqpzah1Jz+BE10E4/BpO7/ee+h4yRHWLyVjgWJCfx?=
+ =?us-ascii?Q?q9Lm23FoTzgHzV0r/HnX9qf72LD7k+KKACTLYQ=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR08CU001.outbound.protection.outlook.com;PTR:mail-co1pr08cu00101.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704162011799003)(376014)(14060799003)(36860700016)(35042699022)(156008)(82310400026)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR08CU001.outbound.protection.outlook.com;PTR:mail-sj0pr08cu00104.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(14060799003)(35042699022)(82310400026)(156008)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	9/qlWrLr+YlyYXpcgwHtXfMyZE0eH5PfszK7EonwPvd4LKJ7lDWEuHJ9PRiYLXXBDeGQW2gqo4+IheGMsVoun3qz1gp7MCoqJgBLGNP5autS+N81oCB/P+xHOMuXGYoyvo8ICzLMlBUv4KObYmLH9NwgkCsOaQJY6nN45nggaYqN3lWBrnYPNa8vvhZRR2uA00FjjJ90Vue/lPZK8MKcD+qOF880zzo1YeqGiBJU/lSaQBuh96MC9jP7HYmMkrT9+2szF8f+9UD0APFV+QSHuT7Xa+pl1GUliKg5gECbplWL0CHxsxLwYRaiBZ/6Zn2osmDglMWy9MS6LSVGcA4xa4MljG/kOYu847SnaLzR250zsH7A8iRPI0OlT5g3ymPEqsQBdGJFqxlJNssCQ/05BhIedHLN81x9Qe1QR4bz3NPVsbmQ3BRxxcADkYl5BAbM
+	y6iRlWMwn4VT5gL+q4gxQeo4Zb0HB1xdBkWtcg3LEDx+fe/o+9AdPB33UMZVsyaWJnTc1dAydOr0aE0paot9xTOn06HlcVBk0YQqq+y7Uw2ezrZxg0Atr1AyI7QB7R1ph7g63KVNqKBXvQr52wcG0f4LjL30AlRwsOTgLuThP95diKh8XPlMcsp+gKJ6PAYis8f6JmZPmF/YjPxYMQh//DZ5vNVs2AZqo2ZJjHRDfEyYCQEoMNdEI6XhCqTYcZBN1QY6o5NeRDBLeOwI3Z0fzg9YDrt1x3/nW9mjmuXYOcJkAMCpfvS0w5/xxxkjUrguWVuX0LopORmfvHiRcWKGYyaye6BjFq9f7a6aNu+I1qnxUGX5omKVueER9PIRVzBYfwA/fAdZSyBU/E+SvAn1TMIN6ZYA3hXbsWPZEe7SHxPY4XKSiWk+vcRScOI7SeMT
 X-OriginatorOrg: elektrobit.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:44.7741
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:39.4765
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9a17df29-cfd9-4436-7a52-08de9f23a998
+X-MS-Exchange-CrossTenant-Network-Message-Id: f019f542-e825-4a2c-dc2b-08de9f23a677
 X-MS-Exchange-CrossTenant-Id: e764c36b-012e-4216-910d-8fd16283182d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e764c36b-012e-4216-910d-8fd16283182d;Ip=[4.79.107.243];Helo=[usbth1es003.ebgroup.elektrobit.com]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SA2PEPF00003F64.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BL6PEPF0001AB72.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR08MB11019
-X-purgate-ID: tlsNG-ef75cf/1776720473-ADD6FC48-891058A1/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR08MB6750
+X-purgate-ID: tlsNG-16d1c6/1776720471-CF97CD75-9EAC6CB0/0/0
 X-purgate-type: clean
-X-purgate-size: 5044
+X-purgate-size: 10132
 
-This commit moves the altp2m_get_altp2m and altp2m_set_altp2m functions to
-the common code. This make sit possible to use them in other common
-routines (namely, altp2m_vcpu_{initialise,destroy}).
+This commit pulls out generic init/teardown functionality out of "p2m_init"
+and "p2m_teardown" into "p2m_init_one", "p2m_teardown_one", "p2m_free_one",
+and "p2m_flush_table" functions. This allows our future implementation to
+reuse existing code for the initialization/teardown of altp2m views.
 
-This commit contains only code movement, and no change in functionality is
-intended.
+On failure, the p2m_init_one function returns a null pointer. This means
+p2m_init_one doesn't return an error code, which prevents it from
+propagating the exact error from p2m_initialise (specifically, ENOMEM if
+allocation fails and EBUSY if the VMID pool is exhausted). However,
+returning a p2m_domain pointer simplifies usage for callers of
+p2m_init_one, as they can receive an allocated and initialized p2m_domain
+without needing to handle allocation separately. Therefore, the main
+p2m_init function will now return ENOMEM instead of EBUSY when the VMID
+pool is exhausted.
 
-This is commit 1/4 of the altp2m_{get,set}_altp2m phase.
+This is commit 6/12 of the altp2m_init/altp2m_teardown routines phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
+Signed-off-by: Sergej Proskurin <proskurin@sec.in.tum.de>
 ---
-v6: Introduced this patch.
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Julien Grall <julien.grall@arm.com>
 ---
- xen/arch/x86/include/asm/altp2m.h | 35 -------------------------
- xen/arch/x86/include/asm/domain.h |  2 --
- xen/common/altp2m.c               |  1 -
- xen/include/xen/altp2m.h          | 43 +++++++++++++++++++++++++++++++
- 4 files changed, 43 insertions(+), 38 deletions(-)
+v2: Added the function p2m_flush_table to the previous version.
 
-diff --git a/xen/arch/x86/include/asm/altp2m.h b/xen/arch/x86/include/asm/altp2m.h
-index 13017525a62f..a1b078783b3e 100644
---- a/xen/arch/x86/include/asm/altp2m.h
-+++ b/xen/arch/x86/include/asm/altp2m.h
-@@ -64,39 +64,6 @@ static inline uint16_t altp2m_vcpu_idx(const struct vcpu *v)
-  * Alternate p2m: shadow p2m tables used for alternate memory views
-  */
+v3: Removed struct vttbr.
+
+    Moved define INVALID_VTTBR to p2m.h.
+
+    Exported function prototypes of "p2m_flush_table", "p2m_init_one",
+    and "p2m_teardown_one" in p2m.h.
+
+    Extended the function "p2m_flush_table" by additionally resetting
+    the fields lowest_mapped_gfn and max_mapped_gfn.
+
+    Added a "p2m_flush_tlb" call in "p2m_flush_table". On altp2m reset
+    in function "altp2m_reset", it is important to flush the TLBs after
+    clearing the root table pages and before clearing the intermediate
+    altp2m page tables to prevent illegal access to stalled TLB entries
+    on currently active VCPUs.
+
+    Added a check checking whether p2m->root is NULL in p2m_flush_table.
+
+    Renamed the function "p2m_free_one" to "p2m_teardown_one".
+
+    Removed resetting p2m->vttbr in "p2m_teardown_one", as it the p2m
+    will be destroyed afterwards.
+
+    Moved call to "p2m_alloc_table" back to "p2m_init_one".
+
+    Moved the introduction of the type p2m_class_t out of this patch.
+
+    Moved the backpointer to the struct domain out of the struct
+    p2m_domain.
+
+v4: Replaced the former use of clear_and_clean_page in p2m_flush_table
+    by a routine that invalidates every p2m entry atomically. This
+    avoids inconsistencies on CPUs that continue to use the views that
+    are to be flushed (e.g., see altp2m_reset).
+
+    Removed unnecessary initializations in the functions "p2m_init_one"
+    and "p2m_teardown_one".
+
+    Removed the define INVALID_VTTBR as it is not used any more.
+
+    Cosmetic fixes.
+
+v6: Reworked to accommodate the hostp2m being allocated separately from
+    arch_domain.
+
+    Split p2m_teardown_one into p2m_teardown_one and p2m_free_one, with
+    both having the same semantics as their x86 counterparts.
+
+    The previous version of this patch also added code to p2m_flush_table.
+    This has been split out into a separate commit to minimize the number
+    of actual changes in this commit.
+
+    Updated to account for the introduction of p2m_final_teardown.  The
+    code which previously was used to reclaim resources from the hostp2m
+    during p2m_final_teardown was extracted into p2m_free_one. Now,
+    p2m_final_teardown will call p2m_free_one on the hostp2m instead. The
+    check for whether the p2m was actually initialized was moved into
+    p2m_free_one. This means there is a slight behavior change where
+    p2m_teardown_allocation will always be called, even if the p2m_domain
+    was never initialized. I'm not sure if this is really a big deal (it
+    does require the lock to be obtained, but this shouldn't be an issue at
+    final teardown?), but if it is then I can duplicate the check from
+    p2m_free_one to the top of p2m_final_teardown, which would replicate
+    the previous behavior.
+
+    For the sake of making the p2m_init_one function simple to use (and
+    match the x86 function prototype), it returns a null pointer on error
+    rather than an error code. While on x86 an error from p2m_init_one is
+    always due to an ENOMEM return code (from xzalloc, zalloc_cpumask_var),
+    on ARM p2m_initialise (called by p2m_init_one) can actually return
+    EBUSY if the VMID pool is exhausted. Therefore, in this error case the
+    null pointer return value of p2m_init_one obscures the true error code
+    (EBUSY). Callers of p2m_init_one always return ENOMEM when p2m_init_one
+    returns a null pointer, so this error will be propagated up as ENOMEM
+    rather than EBUSY. The alternative to this would be to have callers
+    pass a null **p2m_domain to p2m_init_one while still returning an
+    integer return code. In order to preserve a common altp2m_init routine,
+    this change would also have to be made on x86 (where there wouldn't be
+    any real benefit, the return code is truly only ever ENOMEM).
+    Therefore, it seems like an acceptable tradeoff to me to obscure the
+    error in this case, but if other folks think we should handle this
+    differently than I can revisit this.
+
+    The p2m_teardown_allocation call and p2m_init_one return code changes
+    mentioned above should be the only actual behavior changes in this
+    patch, otherwise it should be just code movement.
+---
+ xen/arch/arm/include/asm/p2m.h | 12 ++++++
+ xen/arch/arm/mmu/p2m.c         | 77 +++++++++++++++++++++++-----------
+ 2 files changed, 65 insertions(+), 24 deletions(-)
+
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 23df91ea13e9..5c6dfe4a9789 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -216,6 +216,18 @@ int p2m_init(struct domain *d);
+ int p2m_teardown(struct domain *d);
+ void p2m_final_teardown(struct domain *d);
  
--/* get current alternate p2m table */
--static inline struct p2m_domain *altp2m_get_altp2m(struct vcpu *v)
--{
--    unsigned int index = vcpu_altp2m(v).p2midx;
--
--    if ( index == INVALID_ALTP2M )
--        return NULL;
--
--    BUG_ON(index >= v->domain->nr_altp2m);
--
--    return v->domain->altp2m_p2m[index];
--}
--
--/* set current alternate p2m table */
--static inline bool altp2m_set_altp2m(struct vcpu *v, unsigned int idx)
--{
--    struct p2m_domain *orig;
--
--    BUG_ON(idx >= v->domain->nr_altp2m);
--
--    if ( idx == vcpu_altp2m(v).p2midx )
--        return false;
--
--    orig = altp2m_get_altp2m(v);
--    BUG_ON(!orig);
--    atomic_dec(&orig->active_vcpus);
--
--    vcpu_altp2m(v).p2midx = idx;
--    atomic_inc(&v->domain->altp2m_p2m[idx]->active_vcpus);
--
--    return true;
--}
--
- /* Switch alternate p2m for a single vcpu */
- bool altp2m_switch_vcpu_by_id(struct vcpu *v, unsigned int idx);
- 
-@@ -178,8 +145,6 @@ static inline int _altp2m_get_effective_entry(struct p2m_domain *ap2m,
-         _altp2m_get_effective_entry(ap2m, gfn, mfn, t, a)
- 
- /* Only declaration is needed. DCE will optimise it out when linking. */
--struct p2m_domain *altp2m_get_altp2m(struct vcpu *v);
--bool altp2m_set_altp2m(struct vcpu *v, unsigned int idx);
- uint16_t altp2m_vcpu_idx(const struct vcpu *v);
- void altp2m_vcpu_initialise(struct vcpu *v);
- void altp2m_vcpu_destroy(struct vcpu *v);
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index f8038087e612..72460e38f581 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -277,8 +277,6 @@ struct paging_vcpu {
- #define MAX_NR_ALTP2M   MAX_EPTP
- #define MAX_NESTEDP2M   10
- 
--#define INVALID_ALTP2M  0xffff
--
- struct p2m_domain;
- struct time_scale {
-     int shift;
-diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
-index 989d8bdcb923..a731ad7cdab8 100644
---- a/xen/common/altp2m.c
-+++ b/xen/common/altp2m.c
-@@ -5,7 +5,6 @@
- #include <xen/xvmalloc.h>
- 
- #include <asm/altp2m.h>
--#include <asm/p2m.h>
- 
- #include <public/hvm/params.h>
- 
-diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
-index 238c7a935586..58e74be6deb0 100644
---- a/xen/include/xen/altp2m.h
-+++ b/xen/include/xen/altp2m.h
-@@ -8,6 +8,10 @@
- 
- #include <public/hvm/hvm_op.h>
- 
-+#include <asm/p2m.h>
++/* Flushes the page table held by the p2m. */
++int p2m_flush_table(struct p2m_domain *p2m);
 +
-+#define INVALID_ALTP2M  0xffff
++/* Initialize the p2m structure. */
++struct p2m_domain *p2m_init_one(struct domain *d);
++
++/* Release resources held by the p2m structure. */
++int p2m_teardown_one(struct p2m_domain *p2m);
++
++/* Free the p2m structure allocation. */
++void p2m_free_one(struct p2m_domain *p2m);
 +
  /*
-  * Common alternate p2m declarations that need to be visible
-  * regardless of CONFIG_ALTP2M
-@@ -27,6 +31,41 @@ static inline bool altp2m_active(const struct domain *d)
-     return d->altp2m_active;
+  * Remove mapping refcount on each mapping page in the p2m
+  *
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 1009f10e5db4..1d598c66450b 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -1444,14 +1444,10 @@ static int p2m_alloc_table(struct domain *d)
+     return 0;
  }
  
-+#ifdef CONFIG_X86
-+/* get current alternate p2m table */
-+static inline struct p2m_domain *altp2m_get_altp2m(struct vcpu *v)
-+{
-+    unsigned int index = vcpu_altp2m(v).p2midx;
+-int p2m_teardown(struct domain *d)
++int p2m_flush_table(struct p2m_domain *p2m)
+ {
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     unsigned long count = 0;
+     struct page_info *pg;
+-    int rc = 0;
+-
+-    p2m_write_lock(p2m);
+ 
+     while ( (pg = page_list_remove_head(&p2m->pages)) )
+     {
+@@ -1460,23 +1456,34 @@ int p2m_teardown(struct domain *d)
+         /* Arbitrarily preempt every 512 iterations */
+         if ( !(count % 512) && hypercall_preempt_check() )
+         {
+-            rc = -ERESTART;
+-            break;
++            return -ERESTART;
+         }
+     }
+ 
++    return 0;
++}
 +
-+    if ( index == INVALID_ALTP2M )
++int p2m_teardown_one(struct p2m_domain *p2m)
++{
++    int rc;
++
++    p2m_write_lock(p2m);
++    rc = p2m_flush_table(p2m);
+     p2m_write_unlock(p2m);
+ 
+     return rc;
+ }
+ 
+-void p2m_final_teardown(struct domain *d)
++int p2m_teardown(struct domain *d)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+ 
+-    /* p2m not actually initialized */
+-    if ( !p2m->domain )
+-        goto free_p2m;
++    return p2m_teardown_one(p2m);
++}
++
++void p2m_final_teardown(struct domain *d)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+ 
+     /*
+      * No need to call relinquish_p2m_mapping() here because
+@@ -1484,18 +1491,27 @@ void p2m_final_teardown(struct domain *d)
+      * where relinquish_p2m_mapping() has been called.
+      */
+ 
+-    ASSERT(page_list_empty(&p2m->pages));
+-
+     while ( p2m_teardown_allocation(d) == -ERESTART )
+         continue; /* No preemption support here */
+     ASSERT(page_list_empty(&d->arch.paging.p2m_freelist));
+ 
++    p2m_free_one(p2m);
++}
++
++void p2m_free_one(struct p2m_domain *p2m)
++{
++    /* p2m not actually initialized */
++    if ( !p2m->domain )
++        goto free_p2m;
++
++    ASSERT(page_list_empty(&p2m->pages));
++
+     if ( p2m->root )
+         free_domheap_pages(p2m->root, P2M_ROOT_ORDER);
+ 
+     p2m->root = NULL;
+ 
+-    p2m_free_vmid(d);
++    p2m_free_vmid(p2m->domain);
+ 
+     radix_tree_destroy(&p2m->mem_access_settings, NULL);
+ 
+@@ -1511,9 +1527,7 @@ static int p2m_initialise(struct domain *d, struct p2m_domain *p2m)
+     unsigned int cpu;
+ 
+     rwlock_init(&p2m->lock);
+-    spin_lock_init(&d->arch.paging.lock);
+     INIT_PAGE_LIST_HEAD(&p2m->pages);
+-    INIT_PAGE_LIST_HEAD(&d->arch.paging.p2m_freelist);
+ 
+     p2m->vmid = INVALID_VMID;
+     p2m->max_mapped_gfn = _gfn(0);
+@@ -1559,22 +1573,37 @@ static int p2m_initialise(struct domain *d, struct p2m_domain *p2m)
+     return 0;
+ }
+ 
+-int p2m_init(struct domain *d)
++struct p2m_domain *p2m_init_one(struct domain *d)
+ {
+     struct p2m_domain *p2m = xzalloc(struct p2m_domain);
+-    int rc;
++
++    if ( !p2m )
 +        return NULL;
 +
-+    BUG_ON(index >= v->domain->nr_altp2m);
++    if ( !p2m_initialise(d, p2m) )
++        return p2m;
 +
-+    return v->domain->altp2m_p2m[index];
++    xfree(p2m);
++    return NULL;
 +}
 +
-+/* set current alternate p2m table */
-+static inline bool altp2m_set_altp2m(struct vcpu *v, unsigned int idx)
++static int p2m_init_hostp2m(struct domain *d)
 +{
-+    struct p2m_domain *orig;
-+
-+    BUG_ON(idx >= v->domain->nr_altp2m);
-+
-+    if ( idx == vcpu_altp2m(v).p2midx )
-+        return false;
-+
-+    orig = altp2m_get_altp2m(v);
-+    BUG_ON(!orig);
-+    atomic_dec(&orig->active_vcpus);
-+
-+    vcpu_altp2m(v).p2midx = idx;
-+    atomic_inc(&v->domain->altp2m_p2m[idx]->active_vcpus);
-+
-+    return true;
-+}
-+#endif
-+
- int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg);
++    struct p2m_domain *p2m = p2m_init_one(d);
  
- #else /* CONFIG_ALTP2M */
-@@ -41,6 +80,10 @@ static inline int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg)
-     return -EOPNOTSUPP;
+     if ( !p2m )
+         return -ENOMEM;
+ 
+-    rc = p2m_initialise(d, p2m);
++    d->arch.p2m = p2m;
++    return 0;
++}
+ 
+-    if ( !rc )
+-        d->arch.p2m = p2m;
+-    else
+-        xfree(p2m);
++int p2m_init(struct domain *d)
++{
++    spin_lock_init(&d->arch.paging.lock);
++    INIT_PAGE_LIST_HEAD(&d->arch.paging.p2m_freelist);
+ 
+-    return rc;
++    return p2m_init_hostp2m(d);
  }
  
-+/* Only declaration is needed. DCE will optimise it out when linking. */
-+struct p2m_domain *altp2m_get_altp2m(struct vcpu *v);
-+bool altp2m_set_altp2m(struct vcpu *v, unsigned int idx);
-+
- #endif /* CONFIG_ALTP2M */
- 
- #endif /* __XEN_ALTP2M_H__ */
+ /*
 -- 
 2.34.1
 
