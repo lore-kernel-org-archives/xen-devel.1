@@ -4,46 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD11F5A8C5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 23:02:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1288222.1568510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 692A3F5A8A2
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 23:34:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1288230.1568520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wExce-0007b4-Jl; Mon, 20 Apr 2026 23:01:44 +0000
+	id 1wEy8F-0003WC-W0; Mon, 20 Apr 2026 23:34:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1288222.1568510; Mon, 20 Apr 2026 23:01:44 +0000
+Received: by outflank-mailman (output) from mailman id 1288230.1568520; Mon, 20 Apr 2026 23:34:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wExce-0007ax-HE; Mon, 20 Apr 2026 23:01:44 +0000
-Received: by outflank-mailman (input) for mailman id 1288222;
- Mon, 20 Apr 2026 23:01:43 +0000
+	id 1wEy8F-0003VV-Su; Mon, 20 Apr 2026 23:34:23 +0000
+Received: by outflank-mailman (input) for mailman id 1288230;
+ Mon, 20 Apr 2026 23:34:22 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgg@ziepe.ca>) id 1wExcc-0007ar-PM
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:01:43 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wEy8D-0003Tl-Pc
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:34:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wExcb-00CNNH-JO
- for xen-devel@lists.xenproject.org; Tue, 21 Apr 2026 01:01:41 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wEy8A-009eSF-DL
+ for xen-devel@lists.xenproject.org; Tue, 21 Apr 2026 01:34:20 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgg@ziepe.ca>)
- id 69e6b04a-2eae-0a2a0a5409dd-0a2a45079480-14
- for <xen-devel@lists.xenproject.org>; Tue, 21 Apr 2026 01:01:41 +0200
-Received: from [209.85.161.46] (helo=mail-oo1-f46.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jgg@ziepe.ca>)
- id 69e6b054-229c-0a2a45070019-d155a12eb56e-3
- for <xen-devel@lists.xenproject.org>; Tue, 21 Apr 2026 01:01:41 +0200
-Received: by mail-oo1-f46.google.com with SMTP id
- 006d021491bc7-6949192b843so350829eaf.1
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:01:40 -0700 (PDT)
-Received: from ziepe.ca ([130.41.10.202]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69493183021sm916652eaf.13.2026.04.20.16.01.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Apr 2026 16:01:38 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
- (envelope-from <jgg@ziepe.ca>) id 1wExcX-0000000F9El-2c2Z;
- Mon, 20 Apr 2026 20:01:37 -0300
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 69e6b784-bab6-0a2a0a5309dd-0a2a450aa3dc-42
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Apr 2026 01:34:19 +0200
+Received: from [40.93.194.57]
+ (helo=SN4PR0501CU005.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 69e6b7f9-56b3-0a2a450a0019-285dc2399429-3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Apr 2026 01:34:19 +0200
+Received: from BN0PR04CA0041.namprd04.prod.outlook.com (2603:10b6:408:e8::16)
+ by IA0PR12MB7602.namprd12.prod.outlook.com (2603:10b6:208:43a::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.15; Mon, 20 Apr
+ 2026 23:34:14 +0000
+Received: from BN3PEPF0000B36E.namprd21.prod.outlook.com
+ (2603:10b6:408:e8:cafe::5b) by BN0PR04CA0041.outlook.office365.com
+ (2603:10b6:408:e8::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
+ 20 Apr 2026 23:34:14 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN3PEPF0000B36E.mail.protection.outlook.com (10.167.243.165) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9870.4 via Frontend Transport; Mon, 20 Apr 2026 23:34:14 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 20 Apr
+ 2026 18:34:14 -0500
+Received: from [172.28.123.27] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Mon, 20 Apr 2026 18:34:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,108 +67,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=ziepe.ca header.i="@ziepe.ca" header.h="In-Reply-To:Content-Disposition:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1776726099; x=1777330899; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=PW4xQG7nqF+lf+D3IisD78kFapb+PoH04igJOs6rmhM=;
-        b=T/YUpw94PDt0+KdHeC2H9DWpCE5pIFPyjuyxa9fOmBKQ0Nd8qHzSlKXvXmc9y4CF3z
-         Nod+6Phu90L+lCyOYESupAfqWSbl5CXxzVMNFKduslcECGV8v3yDGnEndKr6O0xyzmui
-         AR+IW+xoVITsyHabAR4KsQWdXsWTIi68mcnLDjWf6MoYOvX3IS0TnIEHHvx8VwsEri/D
-         4AsnvLiks7qtTllmAiqzQq5ztx7KJGUL+IyjL5Fsp7GFqyHmLL/1Jp2DjLArX/lDqG/i
-         ALdwbCue+m/fjlpysQMzDS/F6E483EwDO70N3NGbow+ksjxnX/iMl8NVHFshbNraRVwZ
-         UPjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776726099; x=1777330899;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PW4xQG7nqF+lf+D3IisD78kFapb+PoH04igJOs6rmhM=;
-        b=DkOI4rVxjf3Tm2nigxXIl9UjPraNkzZgsJxcVQMvXLdC68cH24ER890hGO57vHPcNQ
-         PPXp5XaxE/tYbjdLOMm94rsaGx+tKtzZGImmMkdHQHAVwgUaYv4vcwcMhRabl0T4dnPU
-         4C7/5sGxbBl6sXHoiVSVe/BegmhUu/Rz8ogpfLZ6TxcgIpEhsU00gnz2WRrZ3EW2u8Ux
-         mUEs+ZRfN6xVDD3IBd3k4zy9F0PcJOFxH4U7G+23ac3ff66nIvshY6hjlkZ6Qo7IyM4x
-         ntkqwmYLc9p6WqH/vGCHPIHlfoFDwqEqTIRlRi09TTLElYEk6qIrSI5pWBPVC+OyC3+V
-         n5rg==
-X-Forwarded-Encrypted: i=1; AFNElJ/jNpAQ3LEGhSEPQaQsNYwol70vPwU/YHuvOEiDnnTmiA6HRC75JLwOeLrg0lasKlPCmoS0aiJRse0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwzF+zdXcpA8T/RbP8KpOeWWxoXxnyDkqDNAKpATvpXVefCo6+V
-	pcAKH4hgc6n19jJZ4Xarw5AfDsrawrlzfqz2VYJ54bh66KWwQD5HfwFV+H7aW+0ODHo=
-X-Gm-Gg: AeBDievGBYvus6vmZ04abTZ2SbDtEukBI1wPOuyHX4X2cfmwQJXPvCRLouXvEbMia2l
-	WcsAp69PecHg8xqYK/Hb9a+NLSlnnmYE12pRSdZTuy22ERtJd5UztRZgVxZ4tWzKR1Dq6Xt/NOP
-	1b6vVs9B0Gq3jpJWnws/gCaA3l3cogBnrgkAJrpwCPJYKt9iSfKoi45qP7ujYEfF7EZPPmtEDDp
-	0uLYJis8lp5XG9pJu5yAORMylYca/oI9FshLgFL5lElqcxL8rA+El8uc4q+S8TlhAFfg0mBHUDm
-	WRc6uVl9EotjK+lk25FNH2LBvFFdGFoc9NAqW2MAYzef985xQ3gwlyrkHUz0UkcqaiKE0JoKOPE
-	hTDREMu30HoZIKMzl8/peYUMZXYNpqznuPF76VHfG5wn2HpTFlIB76EV+6cL1xgdWLEnm9D+cD8
-	egEuZlCipu
-X-Received: by 2002:a05:6820:1508:b0:694:9840:843a with SMTP id 006d021491bc7-69498408649mr135366eaf.7.1776726099292;
-        Mon, 20 Apr 2026 16:01:39 -0700 (PDT)
-Date: Mon, 20 Apr 2026 20:01:37 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
-	linux-kernel@vger.kernel.org, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH RFC] xen/swiotlb: avoid arch_sync_dma_* on per-device DMA
- memory
-Message-ID: <20260420230137.GQ2577880@ziepe.ca>
-References: <20260415-xen-swiotlb-v1-1-de24eda3c0fd@nxp.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=n7FCbnkZ5PKewzkupj8L9PTAJYgF2AGiqlkzQvJ9jD92cZhqfGY+b7ccav8I7wlltWtcdl0Iaj62aGlDG3xlGaXpk0XwoPOQWGQ/MwGJQ5k9voUBosqYM48Szxz6plRNzeb4hW4b0m3u4TpF8vz6/e93uTdk3W3un3KNI8/R7YcdSzzVCnKWKazR2hcOUaT4T+/ezLDHlwcmJcfrtmg7QtxN2N+deOsONaHmgXwu09Yy2kch5eD/4JbIzbDYbqMG21KnPsyLTzxRhUSPbevzBdm8X6uDaZiKxP2sD0KPKn3ieo37S+mO0dOisde0GKComNkBT5stGmUN74eHRz/c6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DAXkQR3X09OxLoIp02nG51ZIBJyVPATqCdfSQ3x3tuQ=;
+ b=c41apt8/y430/KG6+1BX8x1kwKTbfexwaTbr6nEmMYqz7yrVy/TJPwZvgbw6GLjPM5eIfJwfQasuv5JLht+2Nu0qk3HMBW7t69vHhEOol1BzNiFCbaO+6D0VmyvutnwZzV/ItdR1uXZnIO2/wLstiiPCsdkFg+nb9Qphhfs8bvFC9vti0pHiwpmuaW0rqLcxHUM6idpi7OsUT7c01Lj8qu3S3RyqgZCkV2hI3FXoCudQtu2ceDyPaTbHQIyT19aC/HHsl0NwnvM/Xfu0CYANR5x1r9c2wepJmfyrCk24jiUOhNt9aMG0ofbmXCgyhRnMSTO7oHeEC99BZt6isBGRBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DAXkQR3X09OxLoIp02nG51ZIBJyVPATqCdfSQ3x3tuQ=;
+ b=TihURjgqUDPQzlkCTb7qij+MaqTT9SwUUWGo3y0sA1cw+bvrbHEASiqvAcoGQMeOpwBIniVWTIeybCknMzi583U5PIHp80T4grnLiEYDqpqlfhdjI8G6w7+bDQ7xUeYMVnWVFClAyDu696i87FaBvUz8sfX4wlptw+oBt0eKPtM=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <cd0f2aec-bac0-493a-98c3-7da0991d6fb1@amd.com>
+Date: Mon, 20 Apr 2026 18:37:49 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260415-xen-swiotlb-v1-1-de24eda3c0fd@nxp.com>
-X-purgate-ID: tlsNG-ef75cf/1776726101-AFB78C48-24534E36/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/8] tools/xenstored: add depth information to watches
+To: Juergen Gross <jgross@suse.com>, <xen-devel@lists.xenproject.org>
+CC: Julien Grall <julien@xen.org>, Anthony PERARD <anthony.perard@vates.tech>
+References: <20260313074751.2904215-1-jgross@suse.com>
+ <20260313074751.2904215-5-jgross@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <20260313074751.2904215-5-jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36E:EE_|IA0PR12MB7602:EE_
+X-MS-Office365-Filtering-Correlation-Id: e190bafb-565d-43e3-ea88-08de9f35555b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700016|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	8tOgjStQjO5mFySfvIke0Dk2Tb10wrj9uJapuRhvz+DNaza98vxpdB106fEPakv/4rQsqXC8w29KTD+n88XdrJFWM35mYDB/3trlCNROM8yaRDenVx/f8mma1F9Ft4VPiMwqhmobmH4IPRKZAUPd3/3n0C4SB+j/RFjf47vn8wOKePHlxyqd1n4rdRtAsKu2dIjKwjAN27ycL4KOYzvMLKwAvkzPw7bFy3/FY8GYFlF3LvKdv4Xt5J5G8JZXexdxQhtQk/CI7ZXzReRQE097rJ65WFrwnRdtjWUSwv8LYSE6feIkxDzvkirUhBABLF4srliGVLDrXPn+njNlHWSYcssaIAP85r8J73qKhOe018OqJ5UcZG4P4baxxlLoOO4dPPSQcpHVKITzcKE723jFEXTHFBYH/PvlNhKJZQ0jReXn2g/7xhE0K6DVy4e5jNAl8njs8X1aocFBlGr5vwTBPBD9+Ryqwf7ISwaaES4gVJj4FKv6u7Kv2BGkhDaDPreOKlxv6hMZdXpPAcA4VmsYYjM1v+PEbM6Bu103pO3gfmrohjLu1iLejuEoBywd52YiSfKqFaKXTcm6fLk0/auc6+R4dfmxmKrrrF6pgssIGffibnUCvtANpj9KcYHwO8AkdcL2JVeVAYCe1teK5nJcGNuEY3hz8Ccc2aMzuUZH7m1knPChMLRU/WYNXATvDlCPm6ymjS2nFYpMAcOYo4EE5xCQRJbzQB2tFdpdQQ1P72MxIeEFxrgQtOqEsy6x92XmVYoVPiTUx+ezIq89EHITXA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	laatSRY+TAXMyV9TLi+M2Sa9bL6plBks2Net4+BGrCpQdYxM3A9kUOe21rS/oMWk0tMSp0HTbJZtUYOOedsnhQlTnV6kpN3vye6G4/U3vfEkA1y+qy1RVLnJGNoDMSBhPVDATqYI5n83ZK85yf5Fg/wzJYHlaRt/aZ/ioK13xV0Mn7cb7wpPu50g9HhCDU90v9uAWRAAfzyjI7/hGMnqncz0peixZ7WEO54/zG/tlFt0xS6n2V43yg+qn6sGZracn5me2iO1PZggLUDNDUu6/e4mNr0dNr4yvXqhv2DS1jfIDBDSoWB9NxlsMJiK0rleYZup66vMLrI9ssB/8EQLOVW/rkAcfgOVSAKstLWVesTTXaNCrm/oCpgBaM6q+0syioX5H8KpkgJ0VEEyw5zFUHoRbSDd26GJJSdczfczilr9NiJdKAw+hAxj8T7IIMKC
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 23:34:14.6946
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e190bafb-565d-43e3-ea88-08de9f35555b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B36E.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7602
+X-purgate-ID: tlsNG-4011c0/1776728059-4596E8B7-5982E9C8/0/0
 X-purgate-type: clean
-X-purgate-size: 2212
+X-purgate-size: 299
 
-On Wed, Apr 15, 2026 at 11:08:36PM +0800, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On 2026-03-13 03:47, Juergen Gross wrote:
+> Add the depth for matching subdirectories of a watch to the watch
+> handling. A depth value of -1 is used for the current model of no
+> limit.
 > 
-> On ARM64, arch_sync_dma_for_{cpu,device}() assumes that the
-> physical address passed in refers to normal RAM that is part of the
-> kernel linear(direct) mapping, as it unconditionally derives a CPU
-> virtual address via phys_to_virt().
-> 
-> With Xen swiotlb, devices may use per-device coherent DMA memory,
-> such as reserved-memory regions described by 'shared-dma-pool',
-> which are assigned to dev->dma_mem. These regions may be marked
-> no-map in DT and therefore are not part of the kernel linear map.
-> In such cases, pfn_valid() still returns true, but phys_to_virt()
-> is not valid and cache maintenance via arch_sync_dma_* will fault.
-> 
-> Prevent this by excluding devices with a private DMA memory pool
-> (dev->dma_mem) from the arch_sync_dma_* fast path, and always
-> fall back to xen_dma_sync_* for those devices to avoid invalid
-> phys_to_virt() conversions for no-map DMA memory while preserving the
-> existing fast path for normal, linear-mapped RAM.
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-I think this is the same sort of weirdness the other two CC threads are
-dealing with.. We already have two different flags indicating the
-cache flush should be skipped, it would make more sense to have the
-swiotlb mangle the flags, just like for cc.
-
-https://lore.kernel.org/r/20260420061415.3650870-1-aneesh.kumar@kernel.org
-
-Then you know that the swiotlb was used and it should flow down to
-here.
-
->   * physical address to use is returned.
-> @@ -262,7 +267,8 @@ static dma_addr_t xen_swiotlb_map_phys(struct device *dev, phys_addr_t phys,
->  
->  done:
->  	if (!dev_is_dma_coherent(dev) && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
-> -		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dev_addr)))) {
-> +		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dev_addr))) &&
-> +		    !dev_has_private_dma_pool(dev)) {
-
-Also this pfn_valid() is totally bogus. Unless DMA_ATTR_MMIO the phys
-must have a struct page, be pfn_valid, etc.
-
-This is why you are getting into trouble here, beacuse swiotlb created
-a non-struct page address and passed it to lower layers without
-setting something like DMA_ATTR_MMIO..
-
-Jason
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
