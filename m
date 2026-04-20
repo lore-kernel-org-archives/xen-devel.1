@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49748F5A8C7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 451A5F5A8BC
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 21:28:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1287568.1568053 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1287588.1568059 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEwA4-0007Jz-8i; Mon, 20 Apr 2026 21:28:08 +0000
+	id 1wEwA6-0007lA-79; Mon, 20 Apr 2026 21:28:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1287568.1568053; Mon, 20 Apr 2026 21:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 1287588.1568059; Mon, 20 Apr 2026 21:28:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEwA2-0007Az-Oq; Mon, 20 Apr 2026 21:28:06 +0000
-Received: by outflank-mailman (input) for mailman id 1287568;
- Mon, 20 Apr 2026 21:28:01 +0000
+	id 1wEwA5-0007hX-73; Mon, 20 Apr 2026 21:28:09 +0000
+Received: by outflank-mailman (input) for mailman id 1287588;
+ Mon, 20 Apr 2026 21:28:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEw9w-0005tQ-9b
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:28:00 +0000
+ (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEwA0-0006mT-VB
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:28:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEw9v-009jup-LJ
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:27:59 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wEwA0-00CBn7-Ar
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:28:04 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a38-5cb7-0a2a0a5109dd-0a2a4509e432-34
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:59 +0200
-Received: from [40.107.209.117]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e69a45-e002-0a2a0a5209dd-0a2a450280e4-30
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:28:04 +0200
+Received: from [40.107.208.75]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a5d-2497-0a2a45090019-286bd1751e28-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:59 +0200
-Received: from PH8PR02CA0047.namprd02.prod.outlook.com (2603:10b6:510:2da::8)
- by DS4PR08MB10703.namprd08.prod.outlook.com (2603:10b6:8:282::5) with
- Microsoft SMTP Server (version=TLS1_2,
+ id 69e69a62-af86-0a2a45020019-286bd04bf5a9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:28:04 +0200
+Received: from BY5PR04CA0030.namprd04.prod.outlook.com (2603:10b6:a03:1d0::40)
+ by CH3PR08MB8803.namprd08.prod.outlook.com (2603:10b6:610:17b::11)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
- 2026 21:27:49 +0000
-Received: from SA2PEPF00003F64.namprd04.prod.outlook.com
- (2603:10b6:510:2da:cafe::34) by PH8PR02CA0047.outlook.office365.com
- (2603:10b6:510:2da::8) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:27:55 +0000
+Received: from MWH0EPF000A6731.namprd04.prod.outlook.com
+ (2603:10b6:a03:1d0:cafe::e9) by BY5PR04CA0030.outlook.office365.com
+ (2603:10b6:a03:1d0::40) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:48 +0000
+ 20 Apr 2026 21:27:55 +0000
 Received: from usbth1es003.ebgroup.elektrobit.com (4.79.107.243) by
- SA2PEPF00003F64.mail.protection.outlook.com (10.167.248.39) with Microsoft
+ MWH0EPF000A6731.mail.protection.outlook.com (10.167.249.23) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48
- via Frontend Transport; Mon, 20 Apr 2026 21:27:48 +0000
+ via Frontend Transport; Mon, 20 Apr 2026 21:27:54 +0000
 Received: from usbth1es003 (localhost [127.0.0.1])
- by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz9H4fdWz1wdS; 
- Mon, 20 Apr 2026 14:27:47 -0700 (PDT)
-Received: from CO1PR08CU001.outbound.protection.outlook.com
- (mail-co1pr08cu00100.outbound.protection.outlook.com [40.93.10.96])
+ by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz9Q4kcBz1wdX; 
+ Mon, 20 Apr 2026 14:27:54 -0700 (PDT)
+Received: from BN1PR07CU003.outbound.protection.outlook.com
+ (mail-bn1pr07cu00302.outbound.protection.outlook.com [40.93.12.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange secp384r1 server-signature RSA-PSS (2048 bits) server-digest
  SHA256) (No client certificate requested)
  by usbth1es003.ebgroup.elektrobit.com (Postfix) with ESMTPS;
- Mon, 20 Apr 2026 14:27:47 -0700 (PDT)
-Received: from CH0PR03CA0026.namprd03.prod.outlook.com (2603:10b6:610:b0::31)
- by LV3PR08MB9527.namprd08.prod.outlook.com (2603:10b6:408:216::6)
- with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 20 Apr 2026 14:27:54 -0700 (PDT)
+Received: from CH0PR03CA0446.namprd03.prod.outlook.com (2603:10b6:610:10e::35)
+ by DS0PR08MB9619.namprd08.prod.outlook.com (2603:10b6:8:1ba::22) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
- 2026 21:27:42 +0000
-Received: from CH2PEPF0000009F.namprd02.prod.outlook.com
- (2603:10b6:610:b0:cafe::fd) by CH0PR03CA0026.outlook.office365.com
- (2603:10b6:610:b0::31) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:27:46 +0000
+Received: from CH2PEPF0000009C.namprd02.prod.outlook.com
+ (2603:10b6:610:10e:cafe::b1) by CH0PR03CA0446.outlook.office365.com
+ (2603:10b6:610:10e::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:42 +0000
+ 20 Apr 2026 21:27:46 +0000
 Received: from denue6es012.ebgroup.elektrobit.com (213.95.148.172) by
- CH2PEPF0000009F.mail.protection.outlook.com (10.167.244.21) with Microsoft
+ CH2PEPF0000009C.mail.protection.outlook.com (10.167.244.24) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:42 +0000
+ 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:46 +0000
 Received: from ubuntu.localdomain (10.10.178.50) by
  denue6es012.ebgroup.elektrobit.com (10.243.160.140) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.35; Mon, 20 Apr 2026 23:27:39 +0200
+ 15.2.2562.35; Mon, 20 Apr 2026 23:27:43 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -90,14 +90,14 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=gRv4ww9L1Usa7X+Fawzo7Wr6zK2cFDuThxr+n+u/GFmwQFZzBCKo75GixfVDVM9t7aWi7ULeIjhpweJ7qBcKQl8xUfvQ9o6ZVhUy/fFGWrUOhhGmc73A5UkB17U9iBP4fpwo1g5uGOkSqD7PcdyrC2CaCyUOR+CdDNLfBHLfXXJay8dsahZvm26srWhjpWrurc1JlAWk88pxqIDUbMBz4h+PJLs9L1nwnekJcSr0VFp4djqCjb/kyjas3Yv4L+rLKL31B1b8m4NqePFTLNHMD5vfXoLNQVf41Sxk0S64trp5O5b8MZHPEGM8fPMa58GRADa9DdpvTImK4q6kAdA7xw==
+ b=KmUHL3giBvDV90PUB9gQ+LCpR0oAsKIwFYcbFiBZipOm1uvMCTSObL/oQzUZgW6ZrRNF19JwiSoBZQYzxkuH17y3OXJMInw7p/uKg+uDF6KWeUqt9p9yDVYUtwrALI78UMNfEpX387TrwL8U48lG/IoZdMw44pAeikr1zalyjGrUZ+yAp8Y+yOicqFGvCMJ6oKO4DF1iP1s3LYnLt3GlbYagZxca7A4lGuLwfSk+JTsDoqnmXADdKJfMT4MiPYcdwHM7FAELn2xqFKtEresaClbGhd/oak+GC/76DcnVr6w7Ck6RyFad6AhiEqNNL6ljQSNnYbInusLwzuVJllLKfQ==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2GKS7huUjzjhqkDR3rg4P6NQTDEiD+t2h7OWKwFuOAU=;
- b=SGrzf7mfF18NFvZMNAeI8iql47DVHd874FawYLTIf3IBLdGRQOeqa0aSLDaro9RsXEWu8IgyiMRXePQwoPp4I7Wck+i8qtk4EsqIsZ1yiH7VnA2bGAXBFA5wQ49UgKxbNIy7iwauZL3qXUu9svrP/gAeRSJxFWIryT9CV+FbHsLugRoRw1aiWG5yNVAr9/7q51tvWtdD3Mk9bz1kDnpXVUG0ww/lkblPAwy0CtzcDxTs5Dk/abEqQkiggUrPXpuLM6cpaEXfUD5Ty+MQeoNWZ1hVZgQsfQrVAolNFN5uJShR9wrMVS87i/hVqAiYLcnMKKA0d+cVppLORmdNN0mpFg==
+ bh=GvY1Hq4hwLu2aLmi7v9CAxN3huVX6llKANSCVnMm0ZU=;
+ b=GGBSb/mLw7P0Qpkk5AaMOIXae8ImBNMRqGFyfaL2xDH/VsqyalQtgUkt/raDruzP0zUVGiDusIDj7hKOBbuSVBWl8GLK/Crpj5Bhch3DC49mOcms/zZffEk78t4UY/GpdZoH31LUx8dh+zjfONOOTUxTkhT3UqwzBz1iovnUQ8drPP0H1og9vlijcFMgdFti8P/V6dvfN1u2i49IpcUqVP2B/9k7+ELPeFv5XkofZ5KkndnwvH0XH2raoj7o9XWVhpr2V4pSoc3vWyX3qNj/n+TjGkypALbBhzcAXdjR0yFD1Nd3gFdMZpTVfLb/ACbdTJTDYRaZ9j9WziVMXijd1A==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 40.93.10.96) smtp.rcpttodomain=amd.com smtp.mailfrom=elektrobit.com;
+ 40.93.12.2) smtp.rcpttodomain=amd.com smtp.mailfrom=elektrobit.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com; arc=pass (0 oda=1 ltdi=1
@@ -106,22 +106,21 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2GKS7huUjzjhqkDR3rg4P6NQTDEiD+t2h7OWKwFuOAU=;
- b=BLexTEX28gMTcpxZjIMstX+Hl7PtBB3G6I2t3suDP1105siAy8ia/oPfFUHevRDDQnxiM7tTXMg1fr70lLT3RCK7ix0gMmwJ7ATnp8I04LKUBKuA/2Ii486RfbtjMDyiQT/fdN9MT/hWlBbLpARSVMlq7SsNhmoVYmbrseVlYUY=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.10.96)
+ bh=GvY1Hq4hwLu2aLmi7v9CAxN3huVX6llKANSCVnMm0ZU=;
+ b=gBLKsFEpBpxDjZYWykV5lZuc+vLLAJwJYcGZRBIRmWkEhf1RGu8SamoYo4++TYUuBSDvhOLSWabQaoFfv6H1VrsHuy6HARPIUmkY8FGY75GgIphFCquWG69qZqQWwQ5IJzBAcb8JOyC1js64hO9xrxJ7I7d7Qxh+y9+oQLAd9E4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.12.2)
  smtp.mailfrom=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com;dmarc=pass action=none header.from=elektrobit.com;
 Received-SPF: Pass (protection.outlook.com: domain of elektrobit.com
- designates 40.93.10.96 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.93.10.96; helo=CO1PR08CU001.outbound.protection.outlook.com;
- pr=C
+ designates 40.93.12.2 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.93.12.2; helo=BN1PR07CU003.outbound.protection.outlook.com; pr=C
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OmIgXfUVb4iPcyPiW3G5+FJ1bwNjE8sLn7wthCfnz50D+frqDl1UmD3HF/zNWurniFW+RlYHl4sqhp0i/RWjT52heq9v+HXQ+Pl5R4ut6mvBS7XvB10fa21w3mSjbi0FjB928jR16BrrAgkUxRS8fCRF1Vm+q4u5hJZo+jhmMRugdzD7ImT8vwntZHw9DQqJ/jxVy0uPAIzPDGhARRQ9kCyOHbwBn/XmrJNSJjo0ux7M26wTkhVwvTo8Vi8hkZ1N6AlQ//jWwk6Lz42Rm1awvgix+RYTzOfXwUmpqaOQeW4x8SDFOym6/vtWpjTbES6gzV3ppo+G9/5JxPj3y63YRw==
+ b=ZJAPAsaPZf+I/CE95epreu456e3g8/wUPnmuc6msVkTaSW53LZ1fItsHA9oqGNheP8gukjyqmq2vI0G8b8jfFQ7eM1++BTQIE1R4m4dyhI4I6id5CMgOF6U8gH/IT/jBGCy+p7ak0jlwbegzZY60UXolOX8tJVecnatGFrupaa+c25zxo9FEF7WJmW7jxCUaG4yjphdvu/S/HigFYKvKkZv4izEu+4cW0TF7ovOKRDraGx3IsEKYBTq8lBWY67d4T6a6qyb/TKV4dyjQg/EnVxeaAe3NMMwGf5w9D5TdIi8dBNphDy3K5jNy+tH52VK7t46fw/7d6Vdbb7mvtGqvQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2GKS7huUjzjhqkDR3rg4P6NQTDEiD+t2h7OWKwFuOAU=;
- b=paMopcHcMB9mZN/H1VcDdbMu7omii1qTQ+DtBmJtOquYXJq6WZHeZzmmCn1QCefU/TIRP4tB06/EDYdaNWImJ7GjUfXWdLdwrzX6bW+Az3CSgsKAO/6PuGTkkDDr9RrHd1+fJtne6PI9J/xjqyYl2g1dNTxg+dU4Rz8ZoSqKfGv9ZJ4O+6ieGS0FY4ceuI96Mbdsg15ZGzPGIjOtwxaF6nKHOokS5RPo7vgDeqwp6VJbUwo7Z7fSI/1goWtS9Ow7gxZ/PVms3GpVdKDu+Q4FB7uyYJE9UkQHC4FbOloDFwPtyk0vvl327HseQBGiyWDVOBQwAAEVG9fA5hpr1x1sKA==
+ bh=GvY1Hq4hwLu2aLmi7v9CAxN3huVX6llKANSCVnMm0ZU=;
+ b=BubyTJy+uuFnZrB9UFpc3mcUWOc5LT0g0lloAqu/VU73OaXzNWQ5Y67D3IMEJKHR7px+JEZQXsiKrwvxTpuMYMlNdAgJxLU5NegLnNEYk4JeU+p1c+zHxhW7KHC6cuhp8aqjLm8mE/5ZwOC7D7yY+YRlzG0XAUt//0UO9gVAyXtog+Be1dnGI1pB4PqQzMr+KkbJ9+40PPp/fzay4MzA5xQiMsEtKIWK+avdE9MGlW9inxIx47XJBivkXksgR0YQfc6OfbWZxciw51HL4Bjc3CH4PudUKoHNex/wLhXKDiW1beVCfqm3mEnYIamlemJUJRr5vRzd5tElVix3dZafCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  213.95.148.172) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=elektrobit.com; dmarc=pass (p=quarantine sp=none pct=100)
@@ -130,8 +129,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2GKS7huUjzjhqkDR3rg4P6NQTDEiD+t2h7OWKwFuOAU=;
- b=BLexTEX28gMTcpxZjIMstX+Hl7PtBB3G6I2t3suDP1105siAy8ia/oPfFUHevRDDQnxiM7tTXMg1fr70lLT3RCK7ix0gMmwJ7ATnp8I04LKUBKuA/2Ii486RfbtjMDyiQT/fdN9MT/hWlBbLpARSVMlq7SsNhmoVYmbrseVlYUY=
+ bh=GvY1Hq4hwLu2aLmi7v9CAxN3huVX6llKANSCVnMm0ZU=;
+ b=gBLKsFEpBpxDjZYWykV5lZuc+vLLAJwJYcGZRBIRmWkEhf1RGu8SamoYo4++TYUuBSDvhOLSWabQaoFfv6H1VrsHuy6HARPIUmkY8FGY75GgIphFCquWG69qZqQWwQ5IJzBAcb8JOyC1js64hO9xrxJ7I7d7Qxh+y9+oQLAd9E4=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 213.95.148.172)
  smtp.mailfrom=elektrobit.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=elektrobit.com;
@@ -146,9 +145,9 @@ CC: Rose Spangler <Rose.Spangler@elektrobit.com>, Andrew Cooper
 	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
  Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [RFC PATCH v6 27/43] arm/altp2m: Add support for altp2m_{get,set}_altp2m
-Date: Mon, 20 Apr 2026 17:26:32 -0400
-Message-ID: <20260420212648.208640-20-Rose.Spangler@elektrobit.com>
+Subject: [RFC PATCH v6 29/43] arm/altp2m: Add support for altp2m_vcpu_{initialise,destroy}
+Date: Mon, 20 Apr 2026 17:26:34 -0400
+Message-ID: <20260420212648.208640-22-Rose.Spangler@elektrobit.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
 References: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
@@ -162,149 +161,188 @@ X-EOPAttributedMessage: 1
 X-MS-Exchange-SkipListedInternetSender:
  ip=[213.95.148.172];domain=denue6es012.ebgroup.elektrobit.com
 X-MS-TrafficTypeDiagnostic:
-	CH2PEPF0000009F:EE_|LV3PR08MB9527:EE_|SA2PEPF00003F64:EE_|DS4PR08MB10703:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d1eabce-c283-4f71-80c4-08de9f23ab9e
+	CH2PEPF0000009C:EE_|DS0PR08MB9619:EE_|MWH0EPF000A6731:EE_|CH3PR08MB8803:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e785e4b-54c3-426f-7e08-08de9f23af79
 X-SM-outgoing: yes
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|704161411799003|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
+ BCL:0;ARA:13230040|704161411799003|36860700016|1800799024|376014|82310400026|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?fDZvZNqybAEEjrpAuowvvLItvFlspzdJAfuU1qoSqZ6XSNH2hRbw2ERHgj4T?=
- =?us-ascii?Q?nvFJNc0qVrDElSbj6ergBXQyKbqcLajgHlULAEUmbUM4ptfNSL8WU/nhLqjr?=
- =?us-ascii?Q?RiIJhFtRcenJXniJVLFQNsHkkOj08CEY0+y+GVzzP/2LWNhzWeloJiGbmq1R?=
- =?us-ascii?Q?c9aU099FjlIcpsrtMnq9JR6WhoY3o03AxNObe6Warqu6H1E3GOaCPDiHrzGT?=
- =?us-ascii?Q?GOWn/x5UzxY0XSbC8C71n2520Be71bIFKbkomTOdO0HBt/gmUN+Xai+wqrFe?=
- =?us-ascii?Q?U4IT46FQHSHieXhi17iZw2e1VgioQQOIsbhtrJm/4efWdHmtkgBg/387N1V8?=
- =?us-ascii?Q?XFJkAP+ndRPZE+xMbIFUIQip8Z+2wu3+G2ysuTbNN3vdfMvKNUaAoAjiIntk?=
- =?us-ascii?Q?zk8QiML3+TQXhsdyvvI75SMebycXLMnZOLfFcD/hsxdMhSNPn65FhOvVQ3pV?=
- =?us-ascii?Q?TM+BAgH2Tfv8+gMaWwoLBxBozSwENSmdOvY/+gaNNb/Ozk17jtS/BwsycT5J?=
- =?us-ascii?Q?7fzGW3rc8iPmPmo2RnNe/Pt7hVDGQeECYURVqf5pWZspjvRLy8xkPqnbfctW?=
- =?us-ascii?Q?BpyQALu8Uag/sT1Z3JQjHH1zNrj3QAalNswB55hm7zUEEX4v8MzFtVaAlMRp?=
- =?us-ascii?Q?5XYQezHsiwHF4UgrATSrRpNhZM/tcqcqlqOCvP+Hh9pPyYQchy2hYkYSzD9l?=
- =?us-ascii?Q?hCmgdfIQbufPHTH9cZMrNiJQqn7VWKa2KIq+tyhNyTp/l0Qdmy9oSa2bZ5rO?=
- =?us-ascii?Q?Ay4uBW5tLGYlw42iU1D8GB13jGoP2FaRndXReI2jaSE21ilMRPSWZOpckUco?=
- =?us-ascii?Q?i7lOUjHgW8dQ7MyjXOU9F85dWo6yFuULgJc4zAWSo5OFb1fi0QhwdraY/Gb8?=
- =?us-ascii?Q?4P3BTfdY45iJqhZCXP/eAvFvMonh7EJix3YdSYcR06n9T1odowCH8qEIsZDJ?=
- =?us-ascii?Q?mENge8/i0DPYqIzUcqySJovuOK/YH32P1pDiFoHpR7bdwwtM8RgzJGD+seVT?=
- =?us-ascii?Q?Kn1BaYhaCHA2+fNAn8tMIqp75RR+3f4Ko63LkefvX/yKoaAhtNH3sFZt4ePq?=
- =?us-ascii?Q?bhVl0u1kPvQEigq0aqv0kg5ISzMD7aDACLBS0MDCOcnfXjMwycEg6CZGCC7M?=
- =?us-ascii?Q?lIwSqWN6Y0Mj?=
+ =?us-ascii?Q?OoOsWKlW9lCvsd3JfNTvs31I+wP7gQHATOD91UTuGQQXHvXA1qcih02asRoI?=
+ =?us-ascii?Q?awwaXPH8AcqtKR2Ld7XBMbG7p5xiaAXTzIF759vSjVMNfbVfobZ+z7IMT1vg?=
+ =?us-ascii?Q?bV/LpD1N9CxpaY9OKEJs5yI46TWGB9Aa4z4geeaKv72tcVmkTHnL+JJeLMLl?=
+ =?us-ascii?Q?pyI5WWLGlSvK4+hMsF+LvwgZWIPMcXwLK0HEfuXIgA+o25kHGvGCV7/LsOUH?=
+ =?us-ascii?Q?7mxVpfc7AAJs31ORonb+2WcY1zcXpLxqs3kjvtDYIzYYxnJVbluQgvl+cp2J?=
+ =?us-ascii?Q?gHaN+4sr9M62S0UmZk4PFmndqvmBLqy7HdT4rK02u2ZWby1iVh0DatKnsC4T?=
+ =?us-ascii?Q?xaNzW1U8A7IinDtZ7vilvuvZYTvOcum9FHM7OR3RSX2QmlACJiQqkEVWL4n5?=
+ =?us-ascii?Q?fg4gYsrlzPjdt77l5Jzm7GQxbp/Pl07DoRz1fv/yYC3orne9F0n7QhPoWyI3?=
+ =?us-ascii?Q?tZ3TqK5GVTNvyeVb0m0GHH6n6Cqp2HCF4ubiq8t5wuyjBPLgFlDLrxQc1Cxr?=
+ =?us-ascii?Q?hsraIUYnRNcITIzOUrhjouHF6ndtQcFZxOacH76PHnoNL4MRWMEwtpt3jVjk?=
+ =?us-ascii?Q?ygmQQUk1Eu6KVz6VMj0JDGrvLacjE+f6oHJwcloDv0zm1m8P3tMrc7nmIU5o?=
+ =?us-ascii?Q?Mv9sniduJIrlvw00sE5vyW2JSxYBnmWsHPdKzqO0lBc+9ZWAfNAGfLmfwmNS?=
+ =?us-ascii?Q?Z3sayZ7xPmrFXvo9+NwxEc/7YnNgxaVSv8YBrm73dEW63zVF5jSg76AM0YU2?=
+ =?us-ascii?Q?IhP0yJRkC1dk4Sn68PfMiPko/PjXXqceyFHMNtPwQ+Ei2xXYm380tzM4WkwO?=
+ =?us-ascii?Q?81q9sKb13gQ2267vpI+GfFsxpXRcD9eae+sMwj4NrwnF8KJBVCRBuz1Ewg1Z?=
+ =?us-ascii?Q?DuA1FVEDYq/DTPy+fDzYWPALFnAEZuG4JBBZ4PsN1bg3QwIHOaa4QWNLujW9?=
+ =?us-ascii?Q?MMPfLU6UVWd4N2Vw1F3rrINjulF3tUpU2YyVq8fYS4UssIoJI3C2HRLonoS5?=
+ =?us-ascii?Q?FSJGY/5EVovT3iwCkza0s1YE/CmGEsnAcNiFHqoxEkyup/M9KCu+bkxMlHuu?=
+ =?us-ascii?Q?mq255K4HE8FzmVKZDPEkjgq5AQGXWv/mnDretqip9qKHi4qudCJuXa+rBTGT?=
+ =?us-ascii?Q?f6g4QCEYGuhl?=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(704161411799003)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+ CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(704161411799003)(36860700016)(1800799024)(376014)(82310400026)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-Exchange-RoutingPolicyChecked:
- XQCKOhPRicV3wtRInKIf0Su/9egsVYxoWONsTklr15000Jug7p3G6TfGYIWmYkk8m2SAUQYnZSvp2M+7EExTOwSXFHrKi/DBr0qyFVBnMuEvq0rfWskDcuDYXAd4n8sWOfBsyYi39Cg//0+bLItsSD2sctZJKR7f9QOl/E98mWoqGKwfoE4BPDDRjMau7gOAFhwbIzeoyunNIJ/qTiixx5TxQ9bqqGEnSvotAxVYMrUWxCHJwMALmoWxjuoQFYP6IWi7i7bsQfxVhtJUIgiygrgIl0+++5IyRWebS5Um6+rPZKeHX3RZ295gIEryScMgeC7vMZehKj20QZfOzHiq5w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR08MB9527
+ OxzzmR/dTB6li+wilIJU/ibAjRBRO8HfMPCgZyLFCsjYj5OVuTG6L67lEh6G+9NDvTTPOhVILE0A2biN0Jyg5lhxJCEaNS4ZUJXrpMurLnjC1dpHMx6kj2kU+IMOsJB3gIOXrsGrcU03RLcYQhT2fODzG8dAdLElCyvHCkSlDXDWfPBCynRWuzK9mOi1dMuNmTA7yRwC/iyRIFPt7FMPTYX4sZf7xioQK2YUWeAmNHSVjwJ3GbbHVaVpZghwz1Xa7grRXP539jp12RnjqtS5ccfaPWNNZYse1f7djV4HmQn7A9T0LrCT7xN0GvAQbOZeg5EMvkTXWBM8xtB4n0GWeg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR08MB9619
 X-MS-Exchange-SkipListedInternetSender:
- ip=[40.93.10.96];domain=CO1PR08CU001.outbound.protection.outlook.com
+ ip=[40.93.12.2];domain=BN1PR07CU003.outbound.protection.outlook.com
 X-MS-Exchange-ExternalOriginalInternetSender:
- ip=[40.93.10.96];domain=CO1PR08CU001.outbound.protection.outlook.com
+ ip=[40.93.12.2];domain=BN1PR07CU003.outbound.protection.outlook.com
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- SA2PEPF00003F64.namprd04.prod.outlook.com
+ MWH0EPF000A6731.namprd04.prod.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	6eee74db-b7a7-4834-310a-08de9f23a835
+	4de98956-961f-42f8-99aa-08de9f23aa6c
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|704161411799003|14060799003|1800799024|82310400026|156008|35042699022|376014|36860700016|56012099003|18002099003|22082099003;
+	BCL:0;ARA:13230040|704161411799003|156008|82310400026|14060799003|35042699022|376014|36860700016|1800799024|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?eTZgEXIC1wnee7RSFKtEsirhmHnnE3FFyo/A8s3ULmV3/F17eyKX6kr7ASEI?=
- =?us-ascii?Q?DFTVsQsRkxOUBW47ZpGXdMI7Ijc46UhRDfBxcSkhwYe6qvTcMD198shpqlNX?=
- =?us-ascii?Q?nMuDCduULhuiYGPu4zfrCDnFS4UgSXM67/uRnczCtzDSw+c6xX8PxiG5XOOy?=
- =?us-ascii?Q?2oo2tJfwYQ0RdYHaHiM1rWbI8gcB/XpowIS1ijt+mr0UKprSyq7/o3MlzGOH?=
- =?us-ascii?Q?13rL+W8h8yB9lfVkXlVeA095xqpbPz4KDPaAiJM3BVsQ4bNdU9IFJEe7ZqRm?=
- =?us-ascii?Q?Ob3WtX53ZVmh+c1VcPKbnygKIhWLxVOlftqdYaehdBLQcds3vVUpM7ReOt2g?=
- =?us-ascii?Q?GTTlAP9zhUdmqDXsT7hgrDZ4NCdrN3Ug6aFnozRETdMsQYdz7LanET5ju/rQ?=
- =?us-ascii?Q?11mvXAINHeKA6kmKUsW7DnphJ2M4cimdtKOyMCXU2T1B1eelQhxTCqY5SuNm?=
- =?us-ascii?Q?la91Jt8wW8GHSABzozy8gNLO8SP5cGiSGY+zKYJQjFnEWu08xmRVE4w3UQ1l?=
- =?us-ascii?Q?XwAl/8Nqve6zoMptpbs2I7Per474vtLAfr5vvCve0sPbe+Qz5c7Qgv8Eu9fo?=
- =?us-ascii?Q?NXPqY6vMh0CywEmUctfBAnz5WhJg6cyJxuN8xDbbUKPvTw870n0byV/v8AGI?=
- =?us-ascii?Q?hTCQ70xVjx2kcIvmGy5HYJxmlrrQQcIramZkgkc0IreMgohvlWIlgnT1UeRe?=
- =?us-ascii?Q?TufCpLiEuSOulOwy/tmYLQsS2Zm5uUPq5KBgR/wmgf2rVOh++AWM+pRcEnEo?=
- =?us-ascii?Q?BrzM3K70iOWcOGVvkuzRxoCGxN1AjRC3cZ13/WAd2uCIYPuL193TOdyQ2Hq0?=
- =?us-ascii?Q?X7A2yC+4kDlwY4KVRtbspC8hvlimVmcR4b+JzJ7Ttjo9Tuqf/pgb+ZyxBN39?=
- =?us-ascii?Q?Rdzo368eB9Eg41u8x4DG+VYBi/etjWypF7BZ2XLTsyvWaH7usVXBaQZSI+3f?=
- =?us-ascii?Q?FNNkds7UHf6nwUDlWomhPMyL3tGGqMAJOE9zwDWqnBpEgDcPJiNMSPs0TUAI?=
- =?us-ascii?Q?/iPpBc/pR3h4FPdYX3aZK9mQbbZU/mQIChC2eQr2WUsatrNkhXSHdYkVReSb?=
- =?us-ascii?Q?BjU0s82uAh0eTcKbRIK9w7Qfof5OayJ9+sFR3QYTFsk2m0qiilXouoqg6NZ2?=
- =?us-ascii?Q?sBZ09axHSUrg?=
+	=?us-ascii?Q?HGZ3I7Fgwwbg1s6VEvotr/Vc0YZJvF7Lzgdo/Thph2JPKXoEj7vveHyovNVK?=
+ =?us-ascii?Q?nETUj5o9pwa+MEW+74kGz1xM2OgN2j3gsMJmVQrt8xULAzjV7lT+pmeEqrKN?=
+ =?us-ascii?Q?b5D4P/QaPY/Cg8IgJkGGBOVpa+P/WaEiHyufmpwFcZyNFR1bL3V8Eo5v9Yu/?=
+ =?us-ascii?Q?OCwAyTMRws8AWIloFFM3LjjHJ0yLOhwjPr9O2S1aHHpjnK8MLY61wfngwR6n?=
+ =?us-ascii?Q?fC5fPl3phGZmTOzkeQMPf8fVb/sUSu7jBKUf/C5SV+OtEc1UJnFg8mRAjN7Y?=
+ =?us-ascii?Q?XWW8yzwFoeIJlVPUPH0uj30QRiOgxLYWjq3G2gq8B0ygXXbvOIAphJfDJns0?=
+ =?us-ascii?Q?Ax/JqI2+j4ODhdmGGfyFDsSv5kriOqQUPL5MP+0dqdnylwQAt/XyY4zeP7u/?=
+ =?us-ascii?Q?du/ldbCs5pbofbWM4Ys3GWVHLUKisJXqVYd5P9TYpRwbuKiLJV8ikmtGO1UL?=
+ =?us-ascii?Q?IUtlAd1/vUD9cnnd1gP1vWFuUGvSugzJgP/79lzvZk/Bq5amgm1EwAxlG6RT?=
+ =?us-ascii?Q?2lnDoY+lRIFD6ntv6YC4tJ2g8LxIBbDSZQdOggQ8gRfvq3yUDtiFKNoMyeLU?=
+ =?us-ascii?Q?5dbu3FeSRJAuyM1sr0/X6rnpzsAgbq8mPDBJSAoMxZvAQdCQ1Ne/m1quuO+w?=
+ =?us-ascii?Q?rR4Y/m1q1dBrJf6SaTDetm/LltO4QkLhB3j5jeKrzSkHZeSSydCDkkvK7BVu?=
+ =?us-ascii?Q?n5DMWkM4sivhNXyV3yGmSYuNb+9y78yIspqCPM4gso1QI4cyCShkJI0lLGI/?=
+ =?us-ascii?Q?6bZzfSEYHFg457g5P8sObdaZI11KWksdjhYPE0ytfwcNoHLN0XtsXlANOyEq?=
+ =?us-ascii?Q?pp5qy9H4AnqTEvGjGOhU7i68uHsyzaJYrmbw2ZVLgugH8rdO3lci9/6P4U0H?=
+ =?us-ascii?Q?aHQ3GBeR0LTXCTY5ndTqI3bW7N4YIIelFhRAAuabCl2mVlJLP1SjIfw3Nfvp?=
+ =?us-ascii?Q?ZLpCMWi/DOOB009cUBmpdX+7DY8dPr8yQ0LInKeSWPHB6VqKuII5xZzqHRd+?=
+ =?us-ascii?Q?hA5YNoowftl90u5iu2e8tI2VmaxLueTmgzNOc/1H0p2qeUL60RTI/VsXRkoD?=
+ =?us-ascii?Q?Op8tUN1FbIWRTvYMpBRNA5JRlrvyXgc93S6wEfIiwYW7bFjqis8IWc7JujK8?=
+ =?us-ascii?Q?qa/0U+QveJ6z?=
 X-Forefront-Antispam-Report:
-	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR08CU001.outbound.protection.outlook.com;PTR:mail-co1pr08cu00100.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704161411799003)(14060799003)(1800799024)(82310400026)(156008)(35042699022)(376014)(36860700016)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN1PR07CU003.outbound.protection.outlook.com;PTR:mail-bn1pr07cu00302.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704161411799003)(156008)(82310400026)(14060799003)(35042699022)(376014)(36860700016)(1800799024)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	7o5W4k0+P0eOej6V+OLjkTYipicnkFZIpdr2V3o64ZnspMXlVL9NkZ1U7CYiZEs4m2hre41mdLO29vgBPMP1vbbVKTkH7VgsE+d9v+Sj+3n9WpnE9nieOOZGFl2nEMxWRvY4kwu8ZJC0lMR9zE6hR/YEo0eKLU+nOIRrOi6t5VKBFWd96o7ZWiP9N891xY6+G3Z/jiq47vidm7ytbwbwZFbSyxDPBAuEe8jaLEugOWs620gQ0ukQmdGZ4CRbFrzGRcu71N1ZMTcp4uhvdtOnniXWf66nfowwhwlj/MazTz/djpdKTxdjDEXhW60rOQkWI+YBlvrH7c39uH8I/X9uzMXjbIGJmKNqDWVjgFTA8F2nuSBstqZkLqjy+ZE62mc8CyworEyrDay9rrYXSjFSl3EBNmbrFKgu/gTw3mIuUz952DgDrp5huIT7uuq0ixZD
+	ZakltMU1mMnE+bRdLJuOgP3hZwlqIBPWQHfg//M8oJvt1MQQRkXjaLQRF0H+gnj4WGLwqFRJv3EJW2a9xI4IKyLGvKGgwYeuTYsONWqTZ/NlgR1fkq/U9ZXV5upMvNflBep1h5NzCVIJZqHP+rREk0mcKzlAwXSU+O0TeHTN86mBHA5pnMAdq7tziScffFdN7r7WnMGG6qwephEFGELSzwoFwlEJf11hivkmeUzuKsZsetIJPGWQT3Ro8oPKuWq3+CyYJ5135bz+w6Y/RVZVl2bV7ab8DpEGjZmziwT4MJYqoH9ZxwqrgeYhmx8MfQiPQCkJNBsXxkZC8HO2/2ptwwqa44OEnK+kHdktH2SmBJl9wQGV7ebGsrUIUQ4UwWB8863vK3cnVJQMgOAiTnzH85KcBwHbzS522Gnv7KrQ06BVCjQJronsY3aPsJrZ2F7g
 X-OriginatorOrg: elektrobit.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:48.1604
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:54.8764
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d1eabce-c283-4f71-80c4-08de9f23ab9e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e785e4b-54c3-426f-7e08-08de9f23af79
 X-MS-Exchange-CrossTenant-Id: e764c36b-012e-4216-910d-8fd16283182d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e764c36b-012e-4216-910d-8fd16283182d;Ip=[4.79.107.243];Helo=[usbth1es003.ebgroup.elektrobit.com]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SA2PEPF00003F64.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-MWH0EPF000A6731.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR08MB10703
-X-purgate-ID: tlsNG-bad1c0/1776720479-8BF7EA53-B364D9E8/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR08MB8803
+X-purgate-ID: tlsNG-720697/1776720484-88EC8161-95025BFE/0/0
 X-purgate-type: clean
-X-purgate-size: 1778
+X-purgate-size: 3182
 
-This commit adds support for altp2m_get_altp2m and altp2m_set_altp2m on
-ARM. The x86-specific VCPU accesses have been replaced with the
-architecture independent functions altp2m_vcpu_idx and altp2m_set_vcpu_idx.
+This commit adds support for the altp2m_vcpu_initialise and
+altp2m_vcpu_destroy functions on ARM. The x86-specific function calls,
+altp2m_vcpu_disable_ve and altp2m_vcpu_update_p2m, are gated with #ifdef
+CONFIG_X86.
 
-This is commit 4/4 of the altp2m_{get,set}_altp2m phase.
+This is commit 2/2 of the altp2m_vcpu_{initialise,destroy} phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
 ---
 v6: Introduced this patch.
----
- xen/include/xen/altp2m.h | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
-index 58e74be6deb0..f5a4d0e60562 100644
---- a/xen/include/xen/altp2m.h
-+++ b/xen/include/xen/altp2m.h
-@@ -8,6 +8,7 @@
+    The equivalent to this patch in the v4/v5 was originally part of the
+    patch named "arm/altp2m: Add HVMOP_altp2m_set_domain_state". In that
+    patch, the check that the VCPU passed to altp2m_vcpu_initialise isn't
+    the current CPU was removed. This was because ARM only implements the
+    external altp2m mode, meaning the current VCPU could never be a VCPU of
+    the guest for which altp2m is being initialized for. Therefore,
+    skipping this check was a slight optimization. I've removed that here
+    because altp2m_vcpu_initialise is only called during an HVMOP, and
+    skipping this check on ARM (especially when x86 also implements the
+    external altp2m mode) causes more confusion than the slight
+    optimization is worth in my view.
+---
+ xen/common/altp2m.c      | 14 ++++++++++----
+ xen/include/xen/altp2m.h |  2 --
+ 2 files changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
+index e699b64678d8..7b80426c7798 100644
+--- a/xen/common/altp2m.c
++++ b/xen/common/altp2m.c
+@@ -11,6 +11,7 @@
+ #include <xsm/xsm.h>
  
- #include <public/hvm/hvm_op.h>
+ #if defined(CONFIG_X86) && defined(CONFIG_HVM)
++#include <asm/hvm/hvm.h>
+ #include <asm/hvm/nestedhvm.h>
+ #endif
  
-+#include <asm/altp2m.h>
- #include <asm/p2m.h>
- 
- #define INVALID_ALTP2M  0xffff
-@@ -31,11 +32,10 @@ static inline bool altp2m_active(const struct domain *d)
-     return d->altp2m_active;
+@@ -59,7 +60,6 @@ void altp2m_teardown(struct domain *d)
+     XVFREE(d->altp2m_p2m);
  }
  
 -#ifdef CONFIG_X86
- /* get current alternate p2m table */
- static inline struct p2m_domain *altp2m_get_altp2m(struct vcpu *v)
+ void altp2m_vcpu_initialise(struct vcpu *v)
  {
--    unsigned int index = vcpu_altp2m(v).p2midx;
-+    unsigned int index = altp2m_vcpu_idx(v);
+     if ( !v->domain->nr_altp2m )
+@@ -68,10 +68,12 @@ void altp2m_vcpu_initialise(struct vcpu *v)
+     if ( v != current )
+         vcpu_pause(v);
  
-     if ( index == INVALID_ALTP2M )
-         return NULL;
-@@ -52,19 +52,18 @@ static inline bool altp2m_set_altp2m(struct vcpu *v, unsigned int idx)
+-    vcpu_altp2m(v).p2midx = 0;
++    altp2m_set_vcpu_idx(v, 0);
+     atomic_inc(&altp2m_get_altp2m(v)->active_vcpus);
  
-     BUG_ON(idx >= v->domain->nr_altp2m);
++#ifdef CONFIG_X86
+     altp2m_vcpu_update_p2m(v);
++#endif
  
--    if ( idx == vcpu_altp2m(v).p2midx )
-+    if ( idx == altp2m_vcpu_idx(v) )
-         return false;
+     if ( v != current )
+         vcpu_unpause(v);
+@@ -90,15 +92,19 @@ void altp2m_vcpu_destroy(struct vcpu *v)
+     if ( (p2m = altp2m_get_altp2m(v)) )
+         atomic_dec(&p2m->active_vcpus);
  
-     orig = altp2m_get_altp2m(v);
-     BUG_ON(!orig);
-     atomic_dec(&orig->active_vcpus);
++#ifdef CONFIG_X86
+     altp2m_vcpu_disable_ve(v);
++#endif
  
--    vcpu_altp2m(v).p2midx = idx;
-+    altp2m_set_vcpu_idx(v, idx);
-     atomic_inc(&v->domain->altp2m_p2m[idx]->active_vcpus);
+-    vcpu_altp2m(v).p2midx = INVALID_ALTP2M;
++    altp2m_set_vcpu_idx(v, INVALID_ALTP2M);
++
++#ifdef CONFIG_X86
+     altp2m_vcpu_update_p2m(v);
++#endif
  
-     return true;
+     if ( v != current )
+         vcpu_unpause(v);
  }
 -#endif
  
- int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg);
+ /*
+  * altp2m operations are envisioned as being used in several different
+diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
+index 7defe6126563..37c875a52327 100644
+--- a/xen/include/xen/altp2m.h
++++ b/xen/include/xen/altp2m.h
+@@ -24,11 +24,9 @@ int altp2m_init(struct domain *d);
+ /* Free altp2m views */
+ void altp2m_teardown(struct domain *d);
+ 
+-#ifdef CONFIG_X86
+ /* Alternate p2m VCPU */
+ void altp2m_vcpu_initialise(struct vcpu *v);
+ void altp2m_vcpu_destroy(struct vcpu *v);
+-#endif
+ 
+ #ifdef CONFIG_ALTP2M
  
 -- 
 2.34.1
