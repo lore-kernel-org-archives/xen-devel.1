@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70644F588DE
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 14:25:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286085.1567195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C57F588DC
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 14:25:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1286087.1567212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEpZ9-0004DV-Qw; Mon, 20 Apr 2026 14:25:35 +0000
+	id 1wEpZD-0004fK-6Q; Mon, 20 Apr 2026 14:25:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286085.1567195; Mon, 20 Apr 2026 14:25:35 +0000
+Received: by outflank-mailman (output) from mailman id 1286087.1567212; Mon, 20 Apr 2026 14:25:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEpZ9-0004DN-O0; Mon, 20 Apr 2026 14:25:35 +0000
-Received: by outflank-mailman (input) for mailman id 1286085;
- Mon, 20 Apr 2026 14:25:34 +0000
+	id 1wEpZD-0004fB-3n; Mon, 20 Apr 2026 14:25:39 +0000
+Received: by outflank-mailman (input) for mailman id 1286087;
+ Mon, 20 Apr 2026 14:25:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luca.fancellu@arm.com>) id 1wEpZ8-0004DG-5Y
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 14:25:34 +0000
+ (envelope-from <luca.fancellu@arm.com>) id 1wEpZB-0004QW-9t
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 14:25:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEpZ7-0049I1-Id
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 16:25:33 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wEpZA-00DjKj-Mp
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 16:25:36 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luca.fancellu@arm.com>)
- id 69e6375a-e002-0a2a0a5209dd-0a2a450481ee-10
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:25:33 +0200
+ id 69e6375d-bab6-0a2a0a5309dd-0a2a45039354-10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:25:36 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
  (envelope-from <luca.fancellu@arm.com>)
- id 69e6375c-1dec-0a2a45040019-d98c6eacb83e-1
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:25:33 +0200
+ id 69e6375f-672d-0a2a45030019-d98c6eac8c36-1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:25:36 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E7D61516;
- Mon, 20 Apr 2026 07:25:26 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E2A321516;
+ Mon, 20 Apr 2026 07:25:29 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 423B13F7B4;
- Mon, 20 Apr 2026 07:25:31 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 373183F7B4;
+ Mon, 20 Apr 2026 07:25:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,80 +51,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1776695132; bh=msE5zKqdYroR2i7+BMMRv2AgU+EIZ5jE7RxEL1s5uwo=;
-	h=From:To:Cc:Subject:Date:From;
-	b=M0lqefgAbq4Tm7Sx10KJ8putI+ayHK52E6dS8/S7b0fHKcukS5YSj1VONT4hcFn5s
-	 qEvOiBh+R1yDiUCrd+pyyuGNyXRE4qUtI7bNdjwrM1/NP0XL49iBWRL7z4ip17KNoj
-	 +wDoVXoDcc16yXwCKndkwp11DWDZAwUHbz2pdc4M=
+	t=1776695135; bh=iv//vNmwKiPVjQpsnbCcSAu2c4KT7uRXnN6HNwH7kRM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=C60P+blvO8zZ4OFaL3RS+PmAMBSRQ+8U/4URgbc7Ivw8aJfCG320v+cCN1h5wellN
+	 WH7EO3gbwuZ+/QAQRjQHbjkbxWgtfOdVToEJ5q+WlVQ09epfIhQTsnDiIT/hA9rTqi
+	 lS7LsTqjA7xVIZfOOQtxPtfidMEcipMIaXbeHYUE=
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	"Oleksii Kurochko" <oleksii.kurochko@gmail.com>
-Subject: [PATCH 0/8] Armv8-R AArch64 MPU support (single core)
-Date: Mon, 20 Apr 2026 15:25:16 +0100
-Message-Id: <20260420142524.1804073-1-luca.fancellu@arm.com>
+	Penny Zheng <penny.zheng@arm.com>,
+	Wei Chen <wei.chen@arm.com>,
+	Hari Limaye <hari.limaye@arm.com>
+Subject: [PATCH 2/8] xen/arm: Implement p2m_get_entry for MPU systems
+Date: Mon, 20 Apr 2026 15:25:18 +0100
+Message-Id: <20260420142524.1804073-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260420142524.1804073-1-luca.fancellu@arm.com>
+References: <20260420142524.1804073-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1776695133-324733FF-C652B545/0/0
+X-purgate-ID: tlsNG-33051d/1776695136-485AB938-8FD3651C/0/0
 X-purgate-type: clean
-X-purgate-size: 2291
+X-purgate-size: 3903
 
-Hi,
+From: Penny Zheng <Penny.Zheng@arm.com>
 
-this serie complete the support for Armv8-R AArch64 MPU support for dom0less
-DomU boot on single core, it also build for Armv8-R AArch32 but the support is
-not complete.
+Implement the function p2m_get_entry for MPU systems, which is
+responsible for looking up an entry in the p2m table.
 
-The serie is based on another serie in the mailing list: "Fifth MPU Series".
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Hari Limaye <hari.limaye@arm.com>
+---
+ xen/arch/arm/include/asm/mpu/p2m.h |  5 ++
+ xen/arch/arm/mpu/p2m.c             | 76 ++++++++++++++++++++++++++++--
+ 2 files changed, 77 insertions(+), 4 deletions(-)
 
-I've spoken with Oleksii and the Arm maintainer to have the possibilty to have
-this on the Xen release, of course provided that maintainers have enough
-bandwidth and depending on the priority of the series to be in.
-
-Asking for Oleksii Ack for the release, the changes in this serie are mostly
-related to MPU apart from few patches that touches common Arm code.
-
-Luca Fancellu (2):
-  arm/mpu: Save/restore guest EL1 MPU-related context
-  arm/mpu: Save/restore VTCR_EL2 on vCPU context switch
-
-Penny Zheng (6):
-  xen/arm: Implement p2m_set_entry for MPU systems
-  xen/arm: Implement p2m_get_entry for MPU systems
-  xen/mpu: enable device passthrough in MPU system
-  arm/mpu: Support vCPU context switch on MPU systems
-  xen/arm: enable MMIO region trap in MPU system
-  xen/arm: dump debug message in MPU system
-
- xen/arch/arm/arm64/mpu/p2m.c                |  17 ++
- xen/arch/arm/domain.c                       |  51 +++-
- xen/arch/arm/include/asm/arm32/mpu.h        |   3 +-
- xen/arch/arm/include/asm/arm64/mpu.h        |   3 +-
- xen/arch/arm/include/asm/domain.h           |  10 +
- xen/arch/arm/include/asm/mm.h               |   3 +
- xen/arch/arm/include/asm/mmu/domain-build.h |   2 +
- xen/arch/arm/include/asm/mmu/mm.h           |  12 +
- xen/arch/arm/include/asm/mpu.h              |   3 +
- xen/arch/arm/include/asm/mpu/cpregs.h       |   7 +
- xen/arch/arm/include/asm/mpu/domain-build.h |   6 +
- xen/arch/arm/include/asm/mpu/mm.h           |  13 +-
- xen/arch/arm/include/asm/mpu/p2m.h          |  25 ++
- xen/arch/arm/include/asm/p2m.h              |   3 +
- xen/arch/arm/mpu/arm32/mm.c                 |  10 +
- xen/arch/arm/mpu/arm64/mm.c                 | 136 +++++++++
- xen/arch/arm/mpu/domain-build.c             |  17 ++
- xen/arch/arm/mpu/mm.c                       | 101 +++++--
- xen/arch/arm/mpu/p2m.c                      | 295 +++++++++++++++++++-
- xen/arch/arm/traps.c                        |  91 ++++--
- 20 files changed, 739 insertions(+), 69 deletions(-)
-
+diff --git a/xen/arch/arm/include/asm/mpu/p2m.h b/xen/arch/arm/include/asm/mpu/p2m.h
+index b9c7be2d9dcc..d0ec8a77a15a 100644
+--- a/xen/arch/arm/include/asm/mpu/p2m.h
++++ b/xen/arch/arm/include/asm/mpu/p2m.h
+@@ -31,6 +31,11 @@ static inline p2m_type_t region_get_p2m(pr_t *pr)
+     return pr->p2m_type;
+ }
+ 
++static inline bool region_is_p2m_valid(pr_t *pr)
++{
++    return (pr->p2m_type != p2m_invalid);
++}
++
+ #endif /* __ARM_MPU_P2M_H__ */
+ 
+ /*
+diff --git a/xen/arch/arm/mpu/p2m.c b/xen/arch/arm/mpu/p2m.c
+index 4a8595b1b25e..681717eacf37 100644
+--- a/xen/arch/arm/mpu/p2m.c
++++ b/xen/arch/arm/mpu/p2m.c
+@@ -135,11 +135,79 @@ int p2m_set_entry(struct p2m_domain *p2m, gfn_t sgfn, unsigned long nr,
+     return __p2m_set_entry(p2m, sgfn, nr, smfn, t, a);
+ }
+ 
+-mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn, p2m_type_t *t,
+-                    p2m_access_t *a, unsigned int *page_order, bool *valid)
++/*
++ * Get the details of guest MPU memory region [gfn, gfn + nr_gfns).
++ *
++ * If the region is mapped, `t` is set to the p2m_type of the region and the
++ * starting MFN is returned.
++ * If the region is not mapped, INVALID_MFN is returned.
++ */
++static mfn_t p2m_get_mpu_region(struct p2m_domain *p2m, gfn_t gfn,
++                                unsigned long nr_gfns, p2m_type_t *type,
++                                bool *valid)
+ {
+-    BUG_ON("unimplemented");
+-    return INVALID_MFN;
++    pr_t *table = NULL;
++    pr_t *region = NULL;
++    uint8_t idx = INVALID_REGION_IDX;
++    gfn_t egfn = gfn_add(gfn, nr_gfns);
++    p2m_type_t optional_type = p2m_invalid;
++    bool optional_valid = false;
++    mfn_t ret = INVALID_MFN;
++
++    ASSERT(p2m_is_locked(p2m));
++
++    /*
++     * Check if the ending gfn is higher than the highest the p2m map
++     * currently holds, or the starting gfn lower than the lowest it holds.
++     */
++    if ( (gfn_x(egfn) > gfn_x(p2m->max_mapped_gfn)) ||
++         (gfn_x(gfn) < gfn_x(p2m->lowest_mapped_gfn)) )
++        goto out;
++
++    table = (pr_t *)page_to_virt(p2m->root);
++    /* The table should always be non-NULL and is always present. */
++    if ( !table )
++        ASSERT_UNREACHABLE();
++
++    if ( is_gfns_mapped(table, p2m->nr_regions, gfn, nr_gfns, &idx) )
++        goto out;
++
++    region = &table[idx];
++    if ( region_is_p2m_valid(region) )
++    {
++        optional_type = region_get_p2m(region);
++        optional_valid = region_is_valid(region);
++    }
++
++    /* Always GFN == MFN on MPU systems. */
++    ret = _mfn(gfn_x(gfn));
++
++out:
++    if ( type )
++        *type = optional_type;
++
++    if ( valid )
++        *valid = optional_valid;
++
++    return ret;
++}
++
++/*
++ * Get the details of a given gfn.
++ *
++ * If the entry is present, the associated MFN will be returned and the
++ * p2m type gets filled up.
++ * If the entry is not present, INVALID_MFN will be returned
++ *
++ * The page_order is meaningless in MPU system, and we keep it here
++ * to be compatible with MMU system.
++ */
++mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
++                    p2m_type_t *t, p2m_access_t *a,
++                    unsigned int *page_order,
++                    bool *valid)
++{
++    return p2m_get_mpu_region(p2m, gfn, 1, t, valid);
+ }
+ 
+ void p2m_dump_info(struct domain *d)
 -- 
 2.34.1
 
