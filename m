@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D323F5A8C0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD4AF5A8BD
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:25:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286485.1567621 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1286479.1567568 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBO-00044q-Hx; Mon, 20 Apr 2026 20:25:26 +0000
+	id 1wEvBK-0002me-Lp; Mon, 20 Apr 2026 20:25:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286485.1567621; Mon, 20 Apr 2026 20:25:26 +0000
+Received: by outflank-mailman (output) from mailman id 1286479.1567568; Mon, 20 Apr 2026 20:25:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBO-00042q-6g; Mon, 20 Apr 2026 20:25:26 +0000
-Received: by outflank-mailman (input) for mailman id 1286485;
- Mon, 20 Apr 2026 19:50:58 +0000
+	id 1wEvBK-0002kN-F8; Mon, 20 Apr 2026 20:25:22 +0000
+Received: by outflank-mailman (input) for mailman id 1286479;
+ Mon, 20 Apr 2026 19:50:56 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue2-0006J2-EH
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:58 +0000
+ (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue0-0006IW-LG
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEue1-004tZC-RT
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:57 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wEue0-00EWC2-1x
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:56 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e68399-2eae-0a2a0a5409dd-0a2a45069f96-6
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
+ id 69e6835b-5cb7-0a2a0a5109dd-0a2a4508c320-28
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:56 +0200
 Received: from [34.202.193.197] (helo=sendmail.purelymail.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e683a0-7371-0a2a45060019-22cac1c5ec9e-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
+ id 69e6839e-63b5-0a2a45080019-22cac1c59c98-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:55 +0200
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -306608446; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 20 Apr 2026 19:50:53 +0000 (UTC)
+ Mon, 20 Apr 2026 19:50:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,25 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=purelymail1 header.d=purelymail.com header.i="@purelymail.com" header.h="Feedback-ID:Received:From:To:Subject:Date"
-DKIM-Signature: a=rsa-sha256; b=muZEtg+9hqCE9Xngud7IsV5yfOov+EcqU29MXHjlBiJJoKKLeG17AyyQMjEuJBE/lFBATMhGh02nsfzoCW0kOcJYx4T8+yqBGXvyEk5Ey53qfQKH3sAP73dkuPX4IQVhqdIwtgpQIgKU9ZEF0yKvA4B6GzMb71LDcckniZKrGw2/flY09Lvmeu6k6yk1p7PN96bBRoHjo/T/N+q6lhxYElm/6ev09NHw/ljoB1mXg9dvx+kS4BuKOUxrOPep8YyYpTyTJ6AHq3c7542Cf7hn2LpF7LQariPVlDYdngpsytm2thifqeygcRnA1Y2m69+/MM7ApUfUNzKmfM7fjWP6RQ==; s=purelymail1; d=purelymail.com; v=1; bh=hBUDJnrzrDzoRhr8LXgAIgyY4sGh7Kuf0/4gA394m2s=; h=Feedback-ID:Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=QHeYVgAjoAe2aeyzRnA9SjAaQGGMS5KFcHverUnPbaE0xdYsYbbfpAzsen8s6X4NnAaGSLFaihsmFazNvfG5+s0lGodMF99KDWyzJUYWXu603latBFwPdEsMHQ44Am9HyLoilxqvTfwGda4pPSyr/FFYsYURtvjALB1FDXc6I7k+ckcIvX+UL52Wqnw2aTUxfSWabc15IHghbn94xmnUOKcTC0AW4fABs+QBOPfxNBmEmtgn52UaA45d9qXuW0qFCm9lzjoLKUrwtlhE6OHuKE+VfTudwjpkxBj7IK5loLZ5DPsHtrVW8kQviM9JkE3FKtq0NIHIOvVeteyX7vZDKA==; s=purelymail1; d=purelymail.com; v=1; bh=SVKLQ6kcKUAU2bennXpDwH0c/FyTIXAe5xYEJVfFFsY=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 685805:22403:null:purelymail
 X-Pm-Original-To: xen-devel@lists.xenproject.org
 From: Rose.Spangler@purelymail.com
 To: xen-devel@lists.xenproject.org
 Cc: Rose Spangler <Rose.Spangler@elektrobit.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Rahul Singh <rahul.singh@arm.com>
-Subject: [RFC PATCH v6 15/43] arm/p2m: Allocate hostp2m with xzalloc
-Date: Mon, 20 Apr 2026 15:50:14 -0400
-Message-Id: <20260420195042.207624-16-Rose.Spangler@purelymail.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Aqib Javaid <Aqib.Javaid@elektrobit.com>
+Subject: [RFC PATCH v6 09/43] altp2m: Move do_altp2m_op to common code
+Date: Mon, 20 Apr 2026 15:50:08 -0400
+Message-Id: <20260420195042.207624-10-Rose.Spangler@purelymail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
 References: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
@@ -71,223 +75,933 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
 Content-Type: text/plain; charset=UTF-8
-X-purgate-ID: tlsNG-16d1c6/1776714657-CE974D75-ECB1B77F/0/0
+X-purgate-ID: tlsNG-c1860d/1776714656-C2B74DB1-90B90380/0/0
 X-purgate-type: clean
-X-purgate-size: 7464
+X-purgate-size: 26850
 
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 
-This commit replaces the concrete p2m_domain member in arch_domain with a
-pointer to p2m_domain, which is allocated with xzalloc during p2m
-initialization.
+This commit moves the altp2m HVMOP implementation to common code, making it
+possible to re-use it across architectures. In this commit, the entire
+implementation is gated behind CONFIG_X86, with no changes to the body of
+do_altp2m_op. A stub implementation is added for ARM, which will be removed
+once do_altp2m_op has been modified to add ARM support.
 
-In the following commits, the altp2m_init and altp2m_teardown routines from
-x86 are be moved to common code. These routines (respectively) allocate and
-free the p2m_domain structs for altp2m views.
+This commit contains only code movement, and no change in functionality is
+intended.
 
-While it would be possible to have special code paths for
-allocating/freeing altp2m views while keeping the hostp2m as an concrete
-member, this results in code duplication and increases complexity without
-any clear benefit. Therefore, switching the hostp2m to be allocated
-separately from arch_domain (similarly to x86) makes it possible to use the
-same functions for both allocation/teardown/freeing of the hostp2m and
-altp2m views.
-
-This is commit 4/12 of the altp2m_init/altp2m_teardown routines phase.
+This is commit 1/2 of the common do_altp2m_op phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
+Signed-off-by: Aqib Javaid <Aqib.Javaid@elektrobit.com>
 ---
 v6: Introduced this patch.
 ---
- xen/arch/arm/domain.c                    |  2 +-
- xen/arch/arm/include/asm/domain.h        |  2 +-
- xen/arch/arm/include/asm/p2m.h           |  2 +-
- xen/arch/arm/mm.c                        |  2 +-
- xen/arch/arm/mmu/p2m.c                   | 27 +++++++++++++++++++++---
- xen/arch/arm/traps.c                     |  2 +-
- xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
- xen/drivers/passthrough/arm/smmu-v3.c    |  2 +-
- xen/drivers/passthrough/arm/smmu.c       |  2 +-
- 9 files changed, 32 insertions(+), 11 deletions(-)
+ xen/arch/x86/hvm/hvm.c   | 400 -------------------------------------
+ xen/common/altp2m.c      | 413 +++++++++++++++++++++++++++++++++++++++
+ xen/include/xen/altp2m.h |  11 ++
+ 3 files changed, 424 insertions(+), 400 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 26380a807cad..be824a5ba18d 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -1099,7 +1099,7 @@ int domain_relinquish_resources(struct domain *d)
-          * We are about to free the intermediate page-tables, so clear the
-          * root to prevent any walk to use them.
-          */
--        p2m_clear_root_pages(&d->arch.p2m);
-+        p2m_clear_root_pages(d->arch.p2m);
-=20
-     PROGRESS(p2m):
-         ret =3D p2m_teardown(d);
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
-omain.h
-index ffe5d0d9f0a6..576dbdec20af 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -72,7 +72,7 @@ struct arch_domain
- #endif
-=20
-     /* Virtual MMU */
--    struct p2m_domain p2m;
-+    struct p2m_domain *p2m;
-=20
-     struct hvm_domain hvm;
-=20
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.=
-h
-index 010ce8c9ebbd..23df91ea13e9 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -410,7 +410,7 @@ static inline int get_page_and_type(struct page_info *p=
-age,
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 5b6e91adce17..4adcc3c49d95 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -4526,406 +4526,6 @@ static int hvmop_get_param(
+     return rc;
  }
 =20
- /* get host p2m table */
--#define p2m_get_hostp2m(d) (&(d)->arch.p2m)
-+#define p2m_get_hostp2m(d) ((d)->arch.p2m)
+-/*
+- * altp2m operations are envisioned as being used in several different
+- * modes:
+- *
+- * - external: All control and decisions are made by an external agent
+- *   running domain 0.
+- *
+- * - internal: altp2m operations are used exclusively by an in-guest
+- *   agent to protect itself from the guest kernel and in-guest
+- *   attackers.
+- *
+- * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
+- *   but makes requests of an agent running outside the domain for
+- *   bigger changes (such as modifying altp2m entires).
+- *
+- * This corresponds to the three values for HVM_PARAM_ALTP2M
+- * (external, mixed, limited). All three models have advantages and
+- * disadvantages.
+- *
+- * Normally hypercalls made by a program in domain 0 in order to
+- * control a guest would be DOMCTLs rather than HVMOPs.  But in order
+- * to properly enable the 'internal' use case, as well as to avoid
+- * fragmentation, all altp2m subops should come under this single
+- * HVMOP.
+- *
+- * Note that 'internal' mode (HVM_PARAM_ALTP2M =3D=3D XEN_ALTP2M_mixed)
+- * has not been evaluated for safety from a security perspective.
+- * Before using this mode in a security-critical environment, each
+- * subop should be evaluated for safety, with unsafe subops
+- * blacklisted in xsm_hvm_altp2mhvm_op().
+- */
+-static int do_altp2m_op(
+-    XEN_GUEST_HANDLE_PARAM(void) arg)
+-{
+-#ifdef CONFIG_ALTP2M
+-    struct xen_hvm_altp2m_op a;
+-    struct domain *d =3D NULL;
+-    int rc =3D 0;
+-    uint64_t mode;
+-
+-    if ( !altp2m_supported() )
+-        return -EOPNOTSUPP;
+-
+-    if ( copy_from_guest(&a, arg, 1) )
+-        return -EFAULT;
+-
+-    if ( a.pad1 || a.pad2 ||
+-         (a.version !=3D HVMOP_ALTP2M_INTERFACE_VERSION) )
+-        return -EINVAL;
+-
+-    switch ( a.cmd )
+-    {
+-    case HVMOP_altp2m_get_domain_state:
+-    case HVMOP_altp2m_set_domain_state:
+-    case HVMOP_altp2m_vcpu_enable_notify:
+-    case HVMOP_altp2m_vcpu_disable_notify:
+-    case HVMOP_altp2m_create_p2m:
+-    case HVMOP_altp2m_destroy_p2m:
+-    case HVMOP_altp2m_switch_p2m:
+-    case HVMOP_altp2m_set_suppress_ve:
+-    case HVMOP_altp2m_set_suppress_ve_multi:
+-    case HVMOP_altp2m_get_suppress_ve:
+-    case HVMOP_altp2m_set_mem_access:
+-    case HVMOP_altp2m_set_mem_access_multi:
+-    case HVMOP_altp2m_get_mem_access:
+-    case HVMOP_altp2m_change_gfn:
+-    case HVMOP_altp2m_get_p2m_idx:
+-    case HVMOP_altp2m_set_visibility:
+-        break;
+-
+-    default:
+-        return -EOPNOTSUPP;
+-    }
+-
+-    d =3D rcu_lock_domain_by_any_id(a.domain);
+-
+-    if ( d =3D=3D NULL )
+-        return -ESRCH;
+-
+-    if ( !is_hvm_domain(d) )
+-    {
+-        rc =3D -EOPNOTSUPP;
+-        goto out;
+-    }
+-
+-    if ( (a.cmd !=3D HVMOP_altp2m_get_domain_state) &&
+-         (a.cmd !=3D HVMOP_altp2m_set_domain_state) &&
+-         !d->altp2m_active )
+-    {
+-        rc =3D -EOPNOTSUPP;
+-        goto out;
+-    }
+-
+-    mode =3D d->arch.hvm.params[HVM_PARAM_ALTP2M];
+-
+-    if ( XEN_ALTP2M_disabled =3D=3D mode )
+-    {
+-        rc =3D -EINVAL;
+-        goto out;
+-    }
+-
+-    if ( d->nr_altp2m =3D=3D 0 )
+-    {
+-        rc =3D -EOPNOTSUPP;
+-        goto out;
+-    }
+-
+-    if ( (rc =3D xsm_hvm_altp2mhvm_op(XSM_OTHER, d, mode, a.cmd)) )
+-        goto out;
+-
+-    switch ( a.cmd )
+-    {
+-    case HVMOP_altp2m_get_domain_state:
+-        a.u.domain_state.state =3D altp2m_active(d);
+-        rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+-        break;
+-
+-    case HVMOP_altp2m_set_domain_state:
+-    {
+-        struct vcpu *v;
+-        bool ostate;
+-
+-        if ( nestedhvm_enabled(d) )
+-        {
+-            rc =3D -EINVAL;
+-            break;
+-        }
+-
+-        rc =3D domain_pause_except_self(d);
+-        if ( rc )
+-            break;
+-
+-        ostate =3D d->altp2m_active;
+-        d->altp2m_active =3D !!a.u.domain_state.state;
+-
+-        /* If the alternate p2m state has changed, handle appropriately */
+-        if ( d->altp2m_active !=3D ostate &&
+-             (ostate || !(rc =3D altp2m_init_by_id(d, 0))) )
+-        {
+-            for_each_vcpu( d, v )
+-            {
+-                if ( !ostate )
+-                    altp2m_vcpu_initialise(v);
+-                else
+-                    altp2m_vcpu_destroy(v);
+-            }
+-
+-            if ( ostate )
+-                altp2m_flush(d);
+-        }
+-        else if ( rc )
+-            d->altp2m_active =3D false;
+-
+-        domain_unpause_except_self(d);
+-        break;
+-    }
+-
+-    case HVMOP_altp2m_vcpu_enable_notify:
+-    {
+-        struct vcpu *v;
+-
+-        if ( a.u.enable_notify.pad ||
+-             a.u.enable_notify.vcpu_id >=3D d->max_vcpus )
+-        {
+-            rc =3D -EINVAL;
+-            break;
+-        }
+-
+-        if ( !cpu_has_vmx_virt_exceptions )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        v =3D d->vcpu[a.u.enable_notify.vcpu_id];
+-
+-        rc =3D altp2m_vcpu_enable_ve(v, _gfn(a.u.enable_notify.gfn));
+-        break;
+-    }
+-
+-    case HVMOP_altp2m_vcpu_disable_notify:
+-    {
+-        struct vcpu *v;
+-
+-        if ( a.u.disable_notify.vcpu_id >=3D d->max_vcpus )
+-        {
+-            rc =3D -EINVAL;
+-            break;
+-        }
+-
+-        if ( !cpu_has_vmx_virt_exceptions )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        v =3D d->vcpu[a.u.enable_notify.vcpu_id];
+-
+-        altp2m_vcpu_disable_ve(v);
+-        break;
+-    }
+-
+-    case HVMOP_altp2m_create_p2m:
+-        rc =3D altp2m_init_next_available(d, &a.u.view.view,
+-                                        a.u.view.hvmmem_default_access);
+-        if ( !rc )
+-            rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+-        break;
+-
+-    case HVMOP_altp2m_destroy_p2m:
+-        rc =3D altp2m_destroy_by_id(d, a.u.view.view);
+-        break;
+-
+-    case HVMOP_altp2m_switch_p2m:
+-        rc =3D altp2m_switch_domain_altp2m_by_id(d, a.u.view.view);
+-        break;
+-
+-    case HVMOP_altp2m_set_suppress_ve:
+-        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
+-            rc =3D -EINVAL;
+-        else
+-        {
+-            gfn_t gfn =3D _gfn(a.u.suppress_ve.gfn);
+-            unsigned int altp2m_idx =3D a.u.suppress_ve.view;
+-            bool suppress_ve =3D a.u.suppress_ve.suppress_ve;
+-
+-            rc =3D p2m_set_suppress_ve(d, gfn, suppress_ve, altp2m_idx);
+-        }
+-        break;
+-
+-    case HVMOP_altp2m_set_suppress_ve_multi:
+-    {
+-        uint64_t max_phys_addr =3D (1UL << d->arch.cpuid->extd.maxphysaddr=
+) - 1;
+-
+-        a.u.suppress_ve_multi.last_gfn =3D min(a.u.suppress_ve_multi.last_=
+gfn,
+-                                             max_phys_addr);
+-
+-        if ( a.u.suppress_ve_multi.pad1 ||
+-             a.u.suppress_ve_multi.first_gfn > a.u.suppress_ve_multi.last_=
+gfn )
+-            rc =3D -EINVAL;
+-        else
+-        {
+-            rc =3D p2m_set_suppress_ve_multi(d, &a.u.suppress_ve_multi);
+-            if ( (!rc || rc =3D=3D -ERESTART) && __copy_to_guest(arg, &a, =
+1) )
+-                rc =3D -EFAULT;
+-        }
+-        break;
+-    }
+-
+-    case HVMOP_altp2m_get_suppress_ve:
+-        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
+-            rc =3D -EINVAL;
+-        else
+-        {
+-            gfn_t gfn =3D _gfn(a.u.suppress_ve.gfn);
+-            unsigned int altp2m_idx =3D a.u.suppress_ve.view;
+-            bool suppress_ve;
+-
+-            rc =3D p2m_get_suppress_ve(d, gfn, &suppress_ve, altp2m_idx);
+-            if ( !rc )
+-            {
+-                a.u.suppress_ve.suppress_ve =3D suppress_ve;
+-                rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+-            }
+-        }
+-        break;
+-
+-    case HVMOP_altp2m_set_mem_access:
+-        if ( !vm_event_is_enabled(current) )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        if ( a.u.mem_access.pad )
+-            rc =3D -EINVAL;
+-        else
+-            rc =3D p2m_set_mem_access(d, _gfn(a.u.mem_access.gfn), 1, 0, 0=
+,
+-                                    a.u.mem_access.access,
+-                                    a.u.mem_access.view);
+-        break;
+-
+-    case HVMOP_altp2m_set_mem_access_multi:
+-        if ( !vm_event_is_enabled(current) )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        if ( a.u.set_mem_access_multi.pad ||
+-             a.u.set_mem_access_multi.opaque > a.u.set_mem_access_multi.nr=
+ )
+-        {
+-            rc =3D -EINVAL;
+-            break;
+-        }
+-
+-        /*
+-         * Unlike XENMEM_access_op_set_access_multi, we don't need any bit=
+s of
+-         * the 'continuation' counter to be zero (to stash a command in).
+-         * However, 0x40 is a good 'stride' to make sure that we make
+-         * a reasonable amount of forward progress before yielding,
+-         * so use a mask of 0x3F here.
+-         */
+-        rc =3D p2m_set_mem_access_multi(d, a.u.set_mem_access_multi.pfn_li=
+st,
+-                                      a.u.set_mem_access_multi.access_list=
+,
+-                                      a.u.set_mem_access_multi.nr,
+-                                      a.u.set_mem_access_multi.opaque,
+-                                      0x3F,
+-                                      a.u.set_mem_access_multi.view);
+-        if ( rc > 0 )
+-        {
+-            a.u.set_mem_access_multi.opaque =3D rc;
+-            rc =3D -ERESTART;
+-            if ( __copy_field_to_guest(guest_handle_cast(arg, xen_hvm_altp=
+2m_op_t),
+-                                       &a, u.set_mem_access_multi.opaque) =
+)
+-                rc =3D -EFAULT;
+-        }
+-        break;
+-
+-    case HVMOP_altp2m_get_mem_access:
+-        if ( !vm_event_is_enabled(current) )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        if ( a.u.mem_access.pad )
+-            rc =3D -EINVAL;
+-        else
+-        {
+-            xenmem_access_t access;
+-
+-            rc =3D p2m_get_mem_access(d, _gfn(a.u.mem_access.gfn), &access=
+,
+-                                    a.u.mem_access.view);
+-            if ( !rc )
+-            {
+-                a.u.mem_access.access =3D access;
+-                rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+-            }
+-        }
+-        break;
+-
+-    case HVMOP_altp2m_change_gfn:
+-        if ( a.u.change_gfn.pad1 || a.u.change_gfn.pad2 )
+-            rc =3D -EINVAL;
+-        else
+-            rc =3D altp2m_change_gfn(d, a.u.change_gfn.view,
+-                                   _gfn(a.u.change_gfn.old_gfn),
+-                                   _gfn(a.u.change_gfn.new_gfn));
+-        break;
+-
+-    case HVMOP_altp2m_get_p2m_idx:
+-    {
+-        struct vcpu *v;
+-
+-        if ( !altp2m_active(d) )
+-        {
+-            rc =3D -EOPNOTSUPP;
+-            break;
+-        }
+-
+-        if ( (v =3D domain_vcpu(d, a.u.get_vcpu_p2m_idx.vcpu_id)) =3D=3D N=
+ULL )
+-        {
+-            rc =3D -EINVAL;
+-            break;
+-        }
+-
+-        a.u.get_vcpu_p2m_idx.altp2m_idx =3D altp2m_vcpu_idx(v);
+-        rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+-        break;
+-    }
+-
+-    case HVMOP_altp2m_set_visibility:
+-    {
+-        unsigned int idx =3D a.u.set_visibility.altp2m_idx;
+-
+-        if ( a.u.set_visibility.pad )
+-            rc =3D -EINVAL;
+-        else if ( !altp2m_active(d) )
+-            rc =3D -EOPNOTSUPP;
+-        else
+-            rc =3D altp2m_set_view_visibility(d, idx, a.u.set_visibility.v=
+isible);
+-        break;
+-    }
+-
+-    default:
+-        ASSERT_UNREACHABLE();
+-        rc =3D -EOPNOTSUPP;
+-        break;
+-    }
+-
+- out:
+-    rcu_unlock_domain(d);
+-
+-    return rc;
+-#else /* !CONFIG_ALTP2M */
+-    return -EOPNOTSUPP;
+-#endif /* CONFIG_ALTP2M */
+-}
+-
+ DEFINE_XEN_GUEST_HANDLE(compat_hvm_altp2m_op_t);
 =20
- static inline bool p2m_vm_event_sanity_check(struct domain *d)
- {
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 6df8b616e464..46f9363ea851 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -116,7 +116,7 @@ bool page_is_offlinable(mfn_t mfn)
-=20
- unsigned long domain_get_maximum_gpfn(struct domain *d)
- {
--    return gfn_x(d->arch.p2m.max_mapped_gfn);
-+    return gfn_x(d->arch.p2m->max_mapped_gfn);
- }
-=20
- void share_xen_page_with_guest(struct page_info *page, struct domain *d,
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 51abf3504fcf..3ecb969a0369 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -5,6 +5,7 @@
- #include <xen/lib.h>
- #include <xen/sched.h>
- #include <xen/softirq.h>
-+#include <xen/xmalloc.h>
-=20
- #include <asm/alternative.h>
- #include <asm/event.h>
-@@ -1475,7 +1476,7 @@ void p2m_final_teardown(struct domain *d)
-=20
-     /* p2m not actually initialized */
-     if ( !p2m->domain )
--        return;
-+        goto free_p2m;
-=20
-     /*
-      * No need to call relinquish_p2m_mapping() here because
-@@ -1499,11 +1500,13 @@ void p2m_final_teardown(struct domain *d)
-     radix_tree_destroy(&p2m->mem_access_settings, NULL);
-=20
-     p2m->domain =3D NULL;
+ /*
+diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
+index 1a4e102324d4..a43b3a3e34b3 100644
+--- a/xen/common/altp2m.c
++++ b/xen/common/altp2m.c
+@@ -1,5 +1,418 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ #include <xen/altp2m.h>
++#include <xen/guest_access.h>
++#include <xen/vm_event.h>
 +
-+free_p2m:
-+    xfree(p2m);
- }
-=20
--int p2m_init(struct domain *d)
-+static int p2m_initialise(struct domain *d, struct p2m_domain *p2m)
- {
--    struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
-     int rc;
-     unsigned int cpu;
-=20
-@@ -1556,6 +1559,24 @@ int p2m_init(struct domain *d)
-     return 0;
- }
-=20
-+int p2m_init(struct domain *d)
++#include <asm/altp2m.h>
++
++#include <public/hvm/params.h>
++
++#include <xsm/xsm.h>
++
++#ifdef CONFIG_X86
++#include <asm/hvm/nestedhvm.h>
++/*
++ * altp2m operations are envisioned as being used in several different
++ * modes:
++ *
++ * - external: All control and decisions are made by an external agent
++ *   running domain 0.
++ *
++ * - internal: altp2m operations are used exclusively by an in-guest
++ *   agent to protect itself from the guest kernel and in-guest
++ *   attackers.
++ *
++ * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
++ *   but makes requests of an agent running outside the domain for
++ *   bigger changes (such as modifying altp2m entires).
++ *
++ * This corresponds to the three values for HVM_PARAM_ALTP2M
++ * (external, mixed, limited). All three models have advantages and
++ * disadvantages.
++ *
++ * Normally hypercalls made by a program in domain 0 in order to
++ * control a guest would be DOMCTLs rather than HVMOPs.  But in order
++ * to properly enable the 'internal' use case, as well as to avoid
++ * fragmentation, all altp2m subops should come under this single
++ * HVMOP.
++ *
++ * Note that 'internal' mode (HVM_PARAM_ALTP2M =3D=3D XEN_ALTP2M_mixed)
++ * has not been evaluated for safety from a security perspective.
++ * Before using this mode in a security-critical environment, each
++ * subop should be evaluated for safety, with unsafe subops
++ * blacklisted in xsm_hvm_altp2mhvm_op().
++ */
++int do_altp2m_op(
++    XEN_GUEST_HANDLE_PARAM(void) arg)
 +{
-+    struct p2m_domain *p2m =3D xzalloc(struct p2m_domain);
-+    int rc;
++    struct xen_hvm_altp2m_op a;
++    struct domain *d =3D NULL;
++    int rc =3D 0;
++    uint64_t mode;
 +
-+    if ( !p2m )
-+        return -ENOMEM;
++    if ( !altp2m_supported() )
++        return -EOPNOTSUPP;
 +
-+    rc =3D p2m_initialise(d, p2m);
++    if ( copy_from_guest(&a, arg, 1) )
++        return -EFAULT;
 +
-+    if ( !rc )
-+        d->arch.p2m =3D p2m;
-+    else
-+        xfree(p2m);
++    if ( a.pad1 || a.pad2 ||
++         (a.version !=3D HVMOP_ALTP2M_INTERFACE_VERSION) )
++        return -EINVAL;
++
++    switch ( a.cmd )
++    {
++    case HVMOP_altp2m_get_domain_state:
++    case HVMOP_altp2m_set_domain_state:
++    case HVMOP_altp2m_vcpu_enable_notify:
++    case HVMOP_altp2m_vcpu_disable_notify:
++    case HVMOP_altp2m_create_p2m:
++    case HVMOP_altp2m_destroy_p2m:
++    case HVMOP_altp2m_switch_p2m:
++    case HVMOP_altp2m_set_suppress_ve:
++    case HVMOP_altp2m_set_suppress_ve_multi:
++    case HVMOP_altp2m_get_suppress_ve:
++    case HVMOP_altp2m_set_mem_access:
++    case HVMOP_altp2m_set_mem_access_multi:
++    case HVMOP_altp2m_get_mem_access:
++    case HVMOP_altp2m_change_gfn:
++    case HVMOP_altp2m_get_p2m_idx:
++    case HVMOP_altp2m_set_visibility:
++        break;
++
++    default:
++        return -EOPNOTSUPP;
++    }
++
++    d =3D rcu_lock_domain_by_any_id(a.domain);
++
++    if ( d =3D=3D NULL )
++        return -ESRCH;
++
++    if ( !is_hvm_domain(d) )
++    {
++        rc =3D -EOPNOTSUPP;
++        goto out;
++    }
++
++    if ( (a.cmd !=3D HVMOP_altp2m_get_domain_state) &&
++         (a.cmd !=3D HVMOP_altp2m_set_domain_state) &&
++         !d->altp2m_active )
++    {
++        rc =3D -EOPNOTSUPP;
++        goto out;
++    }
++
++    mode =3D d->arch.hvm.params[HVM_PARAM_ALTP2M];
++
++    if ( XEN_ALTP2M_disabled =3D=3D mode )
++    {
++        rc =3D -EINVAL;
++        goto out;
++    }
++
++    if ( d->nr_altp2m =3D=3D 0 )
++    {
++        rc =3D -EOPNOTSUPP;
++        goto out;
++    }
++
++    if ( (rc =3D xsm_hvm_altp2mhvm_op(XSM_OTHER, d, mode, a.cmd)) )
++        goto out;
++
++    switch ( a.cmd )
++    {
++    case HVMOP_altp2m_get_domain_state:
++        a.u.domain_state.state =3D altp2m_active(d);
++        rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
++        break;
++
++    case HVMOP_altp2m_set_domain_state:
++    {
++        struct vcpu *v;
++        bool ostate;
++
++        if ( nestedhvm_enabled(d) )
++        {
++            rc =3D -EINVAL;
++            break;
++        }
++
++        rc =3D domain_pause_except_self(d);
++        if ( rc )
++            break;
++
++        ostate =3D d->altp2m_active;
++        d->altp2m_active =3D !!a.u.domain_state.state;
++
++        /* If the alternate p2m state has changed, handle appropriately */
++        if ( d->altp2m_active !=3D ostate &&
++             (ostate || !(rc =3D altp2m_init_by_id(d, 0))) )
++        {
++            for_each_vcpu( d, v )
++            {
++                if ( !ostate )
++                    altp2m_vcpu_initialise(v);
++                else
++                    altp2m_vcpu_destroy(v);
++            }
++
++            if ( ostate )
++                altp2m_flush(d);
++        }
++        else if ( rc )
++            d->altp2m_active =3D false;
++
++        domain_unpause_except_self(d);
++        break;
++    }
++
++    case HVMOP_altp2m_vcpu_enable_notify:
++    {
++        struct vcpu *v;
++
++        if ( a.u.enable_notify.pad ||
++             a.u.enable_notify.vcpu_id >=3D d->max_vcpus )
++        {
++            rc =3D -EINVAL;
++            break;
++        }
++
++        if ( !cpu_has_vmx_virt_exceptions )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        v =3D d->vcpu[a.u.enable_notify.vcpu_id];
++
++        rc =3D altp2m_vcpu_enable_ve(v, _gfn(a.u.enable_notify.gfn));
++        break;
++    }
++
++    case HVMOP_altp2m_vcpu_disable_notify:
++    {
++        struct vcpu *v;
++
++        if ( a.u.disable_notify.vcpu_id >=3D d->max_vcpus )
++        {
++            rc =3D -EINVAL;
++            break;
++        }
++
++        if ( !cpu_has_vmx_virt_exceptions )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        v =3D d->vcpu[a.u.enable_notify.vcpu_id];
++
++        altp2m_vcpu_disable_ve(v);
++        break;
++    }
++
++    case HVMOP_altp2m_create_p2m:
++        rc =3D altp2m_init_next_available(d, &a.u.view.view,
++                                        a.u.view.hvmmem_default_access);
++        if ( !rc )
++            rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
++        break;
++
++    case HVMOP_altp2m_destroy_p2m:
++        rc =3D altp2m_destroy_by_id(d, a.u.view.view);
++        break;
++
++    case HVMOP_altp2m_switch_p2m:
++        rc =3D altp2m_switch_domain_altp2m_by_id(d, a.u.view.view);
++        break;
++
++    case HVMOP_altp2m_set_suppress_ve:
++        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
++            rc =3D -EINVAL;
++        else
++        {
++            gfn_t gfn =3D _gfn(a.u.suppress_ve.gfn);
++            unsigned int altp2m_idx =3D a.u.suppress_ve.view;
++            bool suppress_ve =3D a.u.suppress_ve.suppress_ve;
++
++            rc =3D p2m_set_suppress_ve(d, gfn, suppress_ve, altp2m_idx);
++        }
++        break;
++
++    case HVMOP_altp2m_set_suppress_ve_multi:
++    {
++        uint64_t max_phys_addr =3D (1UL << d->arch.cpuid->extd.maxphysaddr=
+) - 1;
++
++        a.u.suppress_ve_multi.last_gfn =3D min(a.u.suppress_ve_multi.last_=
+gfn,
++                                             max_phys_addr);
++
++        if ( a.u.suppress_ve_multi.pad1 ||
++             a.u.suppress_ve_multi.first_gfn > a.u.suppress_ve_multi.last_=
+gfn )
++            rc =3D -EINVAL;
++        else
++        {
++            rc =3D p2m_set_suppress_ve_multi(d, &a.u.suppress_ve_multi);
++            if ( (!rc || rc =3D=3D -ERESTART) && __copy_to_guest(arg, &a, =
+1) )
++                rc =3D -EFAULT;
++        }
++        break;
++    }
++
++    case HVMOP_altp2m_get_suppress_ve:
++        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
++            rc =3D -EINVAL;
++        else
++        {
++            gfn_t gfn =3D _gfn(a.u.suppress_ve.gfn);
++            unsigned int altp2m_idx =3D a.u.suppress_ve.view;
++            bool suppress_ve;
++
++            rc =3D p2m_get_suppress_ve(d, gfn, &suppress_ve, altp2m_idx);
++            if ( !rc )
++            {
++                a.u.suppress_ve.suppress_ve =3D suppress_ve;
++                rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
++            }
++        }
++        break;
++
++    case HVMOP_altp2m_set_mem_access:
++        if ( !vm_event_is_enabled(current) )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        if ( a.u.mem_access.pad )
++            rc =3D -EINVAL;
++        else
++            rc =3D p2m_set_mem_access(d, _gfn(a.u.mem_access.gfn), 1, 0, 0=
+,
++                                    a.u.mem_access.access,
++                                    a.u.mem_access.view);
++        break;
++
++    case HVMOP_altp2m_set_mem_access_multi:
++        if ( !vm_event_is_enabled(current) )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        if ( a.u.set_mem_access_multi.pad ||
++             a.u.set_mem_access_multi.opaque > a.u.set_mem_access_multi.nr=
+ )
++        {
++            rc =3D -EINVAL;
++            break;
++        }
++
++        /*
++         * Unlike XENMEM_access_op_set_access_multi, we don't need any bit=
+s of
++         * the 'continuation' counter to be zero (to stash a command in).
++         * However, 0x40 is a good 'stride' to make sure that we make
++         * a reasonable amount of forward progress before yielding,
++         * so use a mask of 0x3F here.
++         */
++        rc =3D p2m_set_mem_access_multi(d, a.u.set_mem_access_multi.pfn_li=
+st,
++                                      a.u.set_mem_access_multi.access_list=
+,
++                                      a.u.set_mem_access_multi.nr,
++                                      a.u.set_mem_access_multi.opaque,
++                                      0x3F,
++                                      a.u.set_mem_access_multi.view);
++        if ( rc > 0 )
++        {
++            a.u.set_mem_access_multi.opaque =3D rc;
++            rc =3D -ERESTART;
++            if ( __copy_field_to_guest(guest_handle_cast(arg, xen_hvm_altp=
+2m_op_t),
++                                       &a, u.set_mem_access_multi.opaque) =
+)
++                rc =3D -EFAULT;
++        }
++        break;
++
++    case HVMOP_altp2m_get_mem_access:
++        if ( !vm_event_is_enabled(current) )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        if ( a.u.mem_access.pad )
++            rc =3D -EINVAL;
++        else
++        {
++            xenmem_access_t access;
++
++            rc =3D p2m_get_mem_access(d, _gfn(a.u.mem_access.gfn), &access=
+,
++                                    a.u.mem_access.view);
++            if ( !rc )
++            {
++                a.u.mem_access.access =3D access;
++                rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
++            }
++        }
++        break;
++
++    case HVMOP_altp2m_change_gfn:
++        if ( a.u.change_gfn.pad1 || a.u.change_gfn.pad2 )
++            rc =3D -EINVAL;
++        else
++            rc =3D altp2m_change_gfn(d, a.u.change_gfn.view,
++                                   _gfn(a.u.change_gfn.old_gfn),
++                                   _gfn(a.u.change_gfn.new_gfn));
++        break;
++
++    case HVMOP_altp2m_get_p2m_idx:
++    {
++        struct vcpu *v;
++
++        if ( !altp2m_active(d) )
++        {
++            rc =3D -EOPNOTSUPP;
++            break;
++        }
++
++        if ( (v =3D domain_vcpu(d, a.u.get_vcpu_p2m_idx.vcpu_id)) =3D=3D N=
+ULL )
++        {
++            rc =3D -EINVAL;
++            break;
++        }
++
++        a.u.get_vcpu_p2m_idx.altp2m_idx =3D altp2m_vcpu_idx(v);
++        rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
++        break;
++    }
++
++    case HVMOP_altp2m_set_visibility:
++    {
++        unsigned int idx =3D a.u.set_visibility.altp2m_idx;
++
++        if ( a.u.set_visibility.pad )
++            rc =3D -EINVAL;
++        else if ( !altp2m_active(d) )
++            rc =3D -EOPNOTSUPP;
++        else
++            rc =3D altp2m_set_view_visibility(d, idx, a.u.set_visibility.v=
+isible);
++        break;
++    }
++
++    default:
++        ASSERT_UNREACHABLE();
++        rc =3D -EOPNOTSUPP;
++        break;
++    }
++
++ out:
++    rcu_unlock_domain(d);
 +
 +    return rc;
 +}
-+
++#else
++int do_altp2m_op(
++    XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    return -EOPNOTSUPP;
++}
++#endif
+=20
  /*
-  * The function will go through the p2m and remove page reference when it
-  * is required. The mapping will be removed from the p2m.
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 0c01f37ad6b4..637d27659b20 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -984,7 +984,7 @@ void vcpu_show_registers(struct vcpu *v)
- #endif
+  * Local variables:
+diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
+index b3b21124dd7e..be627152668a 100644
+--- a/xen/include/xen/altp2m.h
++++ b/xen/include/xen/altp2m.h
+@@ -2,8 +2,12 @@
+ #ifndef __XEN_ALTP2M_H__
+ #define __XEN_ALTP2M_H__
 =20
- #ifdef CONFIG_MMU
--    ctxt.vttbr_el2 =3D v->domain->arch.p2m.vttbr;
-+    ctxt.vttbr_el2 =3D v->domain->arch.p2m->vttbr;
- #endif
++#include <xen/errno.h>
++#include <xen/param.h>
+ #include <xen/sched.h>
 =20
-     _show_registers(&v->arch.cpu_info->guest_cpu_user_regs, &ctxt, 1, v);
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthr=
-ough/arm/ipmmu-vmsa.c
-index fa9ab9cb1330..d246c5e59005 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -565,7 +565,7 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_=
-domain *domain)
-      * Use P2M table for this Xen domain.
-      */
-     ASSERT(domain->d !=3D NULL);
--    ttbr =3D page_to_maddr(domain->d->arch.p2m.root);
-+    ttbr =3D page_to_maddr(domain->d->arch.p2m->root);
++#include <public/hvm/hvm_op.h>
++
+ #ifdef CONFIG_ALTP2M
 =20
-     dev_info(domain->mmu->root->dev, "%pd: Set IPMMU context %u (pgd 0x%"P=
-RIx64")\n",
-              domain->d, domain->context_id, ttbr);
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
-h/arm/smmu-v3.c
-index bf153227dbd9..a7fbe58cba77 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1205,7 +1205,7 @@ static int arm_smmu_domain_finalise_s2(struct arm_smm=
-u_domain *smmu_domain,
- =09vtcr->tsz =3D 64 - p2m_ipa_bits;
- =09vtcr->sl =3D 2 - P2M_ROOT_LEVEL;
+ /* Alternate p2m HVM on/off per domain */
+@@ -12,6 +16,8 @@ static inline bool altp2m_active(const struct domain *d)
+     return d->altp2m_active;
+ }
 =20
--=09arm_lpae_s2_cfg.vttbr  =3D page_to_maddr(smmu_domain->d->arch.p2m.root)=
-;
-+=09arm_lpae_s2_cfg.vttbr  =3D page_to_maddr(smmu_domain->d->arch.p2m->root=
-);
++int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg);
++
+ #else /* CONFIG_ALTP2M */
 =20
- =09vmid =3D arm_smmu_bitmap_alloc(smmu->vmid_map, smmu->vmid_bits);
- =09if (vmid < 0)
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/a=
-rm/smmu.c
-index d63c9015510e..0975be2562bb 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -1247,7 +1247,7 @@ static void arm_smmu_init_context_bank(struct arm_smm=
-u_domain *smmu_domain)
- =09/* TTBR0 */
- =09/* Xen: The page table is shared with the P2M code */
- =09ASSERT(smmu_domain->cfg.domain !=3D NULL);
--=09p2maddr =3D page_to_maddr(smmu_domain->cfg.domain->arch.p2m.root);
-+=09p2maddr =3D page_to_maddr(smmu_domain->cfg.domain->arch.p2m->root);
+ static inline bool altp2m_active(const struct domain *d)
+@@ -19,6 +25,11 @@ static inline bool altp2m_active(const struct domain *d)
+     return false;
+ }
 =20
- =09dev_notice(smmu->dev, "d%u: p2maddr 0x%"PRIpaddr"\n",
- =09=09   smmu_domain->cfg.domain->domain_id, p2maddr);
++static inline int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg)
++{
++    return -EOPNOTSUPP;
++}
++
+ #endif /* CONFIG_ALTP2M */
+=20
+ #endif /* __XEN_ALTP2M_H__ */
 --=20
 2.34.1
 
