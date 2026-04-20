@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D029F5A8C4
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:25:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286481.1567589 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E41F5A8BC
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:25:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1286484.1567616 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBM-0003DE-0J; Mon, 20 Apr 2026 20:25:24 +0000
+	id 1wEvBO-0003uH-0f; Mon, 20 Apr 2026 20:25:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286481.1567589; Mon, 20 Apr 2026 20:25:23 +0000
+Received: by outflank-mailman (output) from mailman id 1286484.1567616; Mon, 20 Apr 2026 20:25:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBL-000395-Iv; Mon, 20 Apr 2026 20:25:23 +0000
-Received: by outflank-mailman (input) for mailman id 1286481;
+	id 1wEvBN-0003nl-Ep; Mon, 20 Apr 2026 20:25:25 +0000
+Received: by outflank-mailman (input) for mailman id 1286484;
  Mon, 20 Apr 2026 19:50:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue2-0006Io-1u
+ (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue2-0006Iu-5y
  for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEue1-009YnP-El
+ id 1wEue1-00C1UM-J9
  for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:57 +0200
-Received: from [10.42.69.12] (helo=localhost)
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e68397-bab6-0a2a0a5309dd-0a2a450c91e4-10
+ id 69e6836e-e002-0a2a0a5209dd-0a2a45049232-14
  for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
 Received: from [34.202.193.197] (helo=sendmail.purelymail.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e683a0-62f1-0a2a450c0019-22cac1c58764-3
+ id 69e683a0-1dec-0a2a45040019-22cac1c5d21a-3
  for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -306608446; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 20 Apr 2026 19:50:51 +0000 (UTC)
+ Mon, 20 Apr 2026 19:50:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,25 +49,19 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=purelymail1 header.d=purelymail.com header.i="@purelymail.com" header.h="Feedback-ID:Received:From:To:Subject:Date"
-DKIM-Signature: a=rsa-sha256; b=hLkAmez4qADkQgPiLxVKCyXQHyZXHCXUDQuAtPsEcn5oyyyULtkq23OwHCcGeenyubTn+eD+u8YaFbQcZzR2Op52LtyFZVSLGazBkvPj/t4WhHJ4A7j25n82nN5uAT2hRG56/sZMvRJmjIgFkXZKt7iZ89fQhiLbzI4lW0MU2aev83BQ4cyZ5vvKxXKJm+S41L3wNlj6lVB0pPvMXp23xjH52MXcQQky5zIjIeDGI1QZecNLywtfbkcWe4FjDhyte6PSNIsTftOQONAdu1T9E9V6RB2oS1vO5tGNK6GIQMmvQ1Ine5iS/K6LiIKmBx4WS8zxewRRE09TbK2GuJTW/Q==; s=purelymail1; d=purelymail.com; v=1; bh=v+7IFQCHZ3Oct1VjiErGm8hGsBkg24/rQNxOY8ewkgI=; h=Feedback-ID:Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=nh/3b739kWlXbEwQ2vP9czBWHaEbT/ciL86qmTDx6PuvJ+UpniIuY8UJrFKr2PwwUhUiPGSSEczTs41M23Zlfs4niXXVQbror/q+RTI2hk/T2WOqGQmNYOyRzx460DUaErPhDvSeTwD43H62YE9iDKbdPE1iQ1eUGlPgne5bznGbcaUlOw0kezmUZ0odpV5RwLDCTktOx7pXJUacyjq1o5Tj4ssUrap4R9ALb/QUn4U0S4XcU/+xtwc+wsI4Fig2YZN930DTmWfr7zNNe4AyZkexb0DW7KjSjoFoLmR5APvSldDgzZVH6FMzHiuP559t41sK5tUViqDbh7Am/1EkaQ==; s=purelymail1; d=purelymail.com; v=1; bh=2CcuIQJepfXS1zs62wK057xIURAv8ZCI9/irpntDfIw=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 685805:22403:null:purelymail
 X-Pm-Original-To: xen-devel@lists.xenproject.org
 From: Rose.Spangler@purelymail.com
 To: xen-devel@lists.xenproject.org
 Cc: Rose Spangler <Rose.Spangler@elektrobit.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Sergej Proskurin <proskurin@sec.in.tum.de>
-Subject: [RFC PATCH v6 10/43] altp2m: Add ARM support to do_altp2m_op
-Date: Mon, 20 Apr 2026 15:50:09 -0400
-Message-Id: <20260420195042.207624-11-Rose.Spangler@purelymail.com>
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [RFC PATCH v6 13/43] x86/altp2m: Add lock functions accessible from common code
+Date: Mon, 20 Apr 2026 15:50:12 -0400
+Message-Id: <20260420195042.207624-14-Rose.Spangler@purelymail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
 References: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
@@ -75,151 +69,226 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
 Content-Type: text/plain; charset=UTF-8
-X-purgate-ID: tlsNG-d25034/1776714657-6D161CF5-C07D9204/0/0
+X-purgate-ID: tlsNG-ebf023/1776714657-2A7613FF-26D3FBF8/0/0
 X-purgate-type: clean
-X-purgate-size: 4553
+X-purgate-size: 6637
 
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 
-This commit makes the minimum required changes necessary for do_altp2m_op
-to compile on ARM. All altp2m commands in the switch statement are gated by
-CONFIG_X86, with a default case of returning EOPNOTSUPP. This allows future
-commits to move the #ifdef CONFIG_X86 down as support for ARM is added.
+This commit adds three altp2m_lock functions which wrap the corresponding
+altp2m_list_lock functions present in "mm-locks.h". The "mm-locks.h" file
+is only accessible in x86 code. In order to make altp2m common across
+architectures, it must be possible to acquire the altp2m lock without
+including an x86-specific header file.
 
-Additionally, a call to do_altp2m_op is added in the ARM HVMOP code.
+These functions cannot be static inline like their "mm-locks.h"
+counterparts, since "mm-locks.h" is only included in source files, not
+header files. Therefore, these functions might introduce a slight function
+call overhead over their "mm-locks.h" counterparts. However, the altp2m
+lock is mostly used in init/teardown routines and HVMOP implementations.
+For these cases, the altp2m_list_lock functions have been switched out for
+the altp2m_lock functions so they can be later migrated to common code. The
+only other function using the altp2m lock is altp2m_get_or_propagate, which
+is in the hot path of the page fault handler, so the altp2m_list_lock calls
+have not been replaced for that function.
 
-This is commit 2/2 of the common do_altp2m_op phase.
+This is commit 2/12 of the altp2m_init/altp2m_teardown routines phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
-Signed-off-by: Sergej Proskurin <proskurin@sec.in.tum.de>
 ---
-v6: Replaced patches 2 and 3 from v4/v5 patch set with this patch.
+v6: Introduced this patch.
 
-    Made HVM_PARAM_ALTP2M read-only, following the change to the x86
-    implementation in commit 0291089f6ea8. The DOMCTL to enable altp2m on
-    ARM is implemented in a later commit in this patch series.
+    This seems like the solution which makes the most sense here, but it
+    would be nicer if it could be static inline. I'm also not sure if the
+    "mm-locks.h" functions are really supposed to be exposed outside of
+    their translation unit like this, so feedback on this is appreciated.
 ---
- xen/arch/arm/hvm.c  |  9 +++++++++
- xen/common/altp2m.c | 29 ++++++++++++++---------------
- 2 files changed, 23 insertions(+), 15 deletions(-)
+ xen/arch/x86/include/asm/altp2m.h |  4 +++
+ xen/arch/x86/mm/altp2m.c          | 42 ++++++++++++++++++++-----------
+ 2 files changed, 31 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/arm/hvm.c b/xen/arch/arm/hvm.c
-index 86e49bf47403..7c778795a280 100644
---- a/xen/arch/arm/hvm.c
-+++ b/xen/arch/arm/hvm.c
-@@ -5,6 +5,7 @@
-  * Arch-specific hardware virtual machine abstractions.
-  */
+diff --git a/xen/arch/x86/include/asm/altp2m.h b/xen/arch/x86/include/asm/a=
+ltp2m.h
+index 9c58a396448d..7cff40beb7c6 100644
+--- a/xen/arch/x86/include/asm/altp2m.h
++++ b/xen/arch/x86/include/asm/altp2m.h
+@@ -156,6 +156,10 @@ int p2m_set_suppress_ve_multi(struct domain *d,
+ int p2m_get_suppress_ve(struct domain *d, gfn_t gfn, bool *suppress_ve,
+                         unsigned int altp2m_idx);
 =20
-+#include <xen/altp2m.h>
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/errno.h>
-@@ -23,6 +24,10 @@ static int hvm_allow_set_param(const struct domain *d, u=
-nsigned int param)
++void altp2m_lock_init(struct domain *d);
++void altp2m_lock(struct domain *d);
++void altp2m_unlock(struct domain *d);
++
+ #else
+=20
+ static inline bool altp2m_is_eptp_valid(const struct domain *d,
+diff --git a/xen/arch/x86/mm/altp2m.c b/xen/arch/x86/mm/altp2m.c
+index 2dc84b76b8c1..371bf3f0b8d4 100644
+--- a/xen/arch/x86/mm/altp2m.c
++++ b/xen/arch/x86/mm/altp2m.c
+@@ -129,7 +129,7 @@ int altp2m_init(struct domain *d)
+     struct p2m_domain *p2m;
+     struct p2m_domain *hostp2m =3D p2m_get_hostp2m(d);
+=20
+-    mm_lock_init(&d->arch.altp2m_list_lock);
++    altp2m_lock_init(d);
+     d->altp2m_p2m =3D xvzalloc_array(struct p2m_domain *, d->nr_altp2m);
+=20
+     if ( !d->altp2m_p2m )
+@@ -221,7 +221,7 @@ bool altp2m_switch_vcpu_by_id(struct vcpu *v, unsigned =
+int idx)
+     if ( idx >=3D d->nr_altp2m )
+         return rc;
+=20
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     if ( d->arch.altp2m_eptp[idx] !=3D mfn_x(INVALID_MFN) )
+     {
+@@ -230,7 +230,7 @@ bool altp2m_switch_vcpu_by_id(struct vcpu *v, unsigned =
+int idx)
+         rc =3D 1;
+     }
+=20
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+     return rc;
+ }
+=20
+@@ -348,7 +348,7 @@ void altp2m_flush(struct domain *d)
  {
-     switch ( param )
+     unsigned int i;
+=20
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     for ( i =3D 0; i < d->nr_altp2m; i++ )
      {
-+        /* The following parameters are read-only. */
-+    case HVM_PARAM_ALTP2M:
-+        return -EEXIST;
-+
-         /*
-          * The following parameters are intended for toolstack usage only.
-          * They may not be set by the domain.
-@@ -123,6 +128,10 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARA=
-M(void) arg)
-             rc =3D -EINVAL;
-         break;
+@@ -357,7 +357,7 @@ void altp2m_flush(struct domain *d)
+         d->arch.altp2m_visible_eptp[i] =3D mfn_x(INVALID_MFN);
+     }
 =20
-+    case HVMOP_altp2m:
-+        rc =3D do_altp2m_op(arg);
-+        break;
-+
-     default:
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+ }
+=20
+ static int altp2m_activate_altp2m(struct domain *d, unsigned int idx,
+@@ -409,13 +409,13 @@ int altp2m_init_by_id(struct domain *d, unsigned int =
+idx)
+     if ( idx >=3D d->nr_altp2m )
+         return rc;
+=20
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     if ( d->arch.altp2m_eptp[array_index_nospec(idx, MAX_EPTP)] =3D=3D
+          mfn_x(INVALID_MFN) )
+         rc =3D altp2m_activate_altp2m(d, idx, hostp2m->default_access);
+=20
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+     return rc;
+ }
+=20
+@@ -431,7 +431,7 @@ int altp2m_init_next_available(struct domain *d, uint16=
+_t *idx,
+          !xenmem_access_to_p2m_access(hostp2m, hvmmem_default_access, &a) =
+)
+         return rc;
+=20
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     for ( i =3D 0; i < d->nr_altp2m; i++ )
      {
-         gdprintk(XENLOG_DEBUG, "HVMOP op=3D%lu: not implemented\n", op);
-diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
-index a43b3a3e34b3..6481fae1ed12 100644
---- a/xen/common/altp2m.c
-+++ b/xen/common/altp2m.c
-@@ -9,8 +9,10 @@
-=20
- #include <xsm/xsm.h>
-=20
--#ifdef CONFIG_X86
-+#if defined(CONFIG_X86) && defined(CONFIG_HVM)
- #include <asm/hvm/nestedhvm.h>
-+#endif
-+
- /*
-  * altp2m operations are envisioned as being used in several different
-  * modes:
-@@ -18,13 +20,13 @@
-  * - external: All control and decisions are made by an external agent
-  *   running domain 0.
-  *
-- * - internal: altp2m operations are used exclusively by an in-guest
-- *   agent to protect itself from the guest kernel and in-guest
-- *   attackers.
-+ * - internal (x86 only): altp2m operations are used exclusively by an
-+ *   in-guest agent to protect itself from the guest kernel and
-+ *   in-guest attackers.
-  *
-- * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
-- *   but makes requests of an agent running outside the domain for
-- *   bigger changes (such as modifying altp2m entires).
-+ * - coordinated (x86 only): An in-guest agent handles #VE and VMFUNCs
-+ *   locally, but makes requests of an agent running outside the
-+ *   domain for bigger changes (such as modifying altp2m entires).
-  *
-  * This corresponds to the three values for HVM_PARAM_ALTP2M
-  * (external, mixed, limited). All three models have advantages and
-@@ -97,7 +99,7 @@ int do_altp2m_op(
-=20
-     if ( (a.cmd !=3D HVMOP_altp2m_get_domain_state) &&
-          (a.cmd !=3D HVMOP_altp2m_set_domain_state) &&
--         !d->altp2m_active )
-+         !altp2m_active(d) )
-     {
-         rc =3D -EOPNOTSUPP;
-         goto out;
-@@ -122,6 +124,7 @@ int do_altp2m_op(
-=20
-     switch ( a.cmd )
-     {
-+#ifdef CONFIG_X86
-     case HVMOP_altp2m_get_domain_state:
-         a.u.domain_state.state =3D altp2m_active(d);
-         rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-@@ -394,9 +397,12 @@ int do_altp2m_op(
-             rc =3D altp2m_set_view_visibility(d, idx, a.u.set_visibility.v=
-isible);
+@@ -446,7 +446,7 @@ int altp2m_init_next_available(struct domain *d, uint16=
+_t *idx,
          break;
      }
-+#endif /* CONFIG_X86 */
 =20
-     default:
-+#ifdef CONFIG_X86
-         ASSERT_UNREACHABLE();
-+#endif
-         rc =3D -EOPNOTSUPP;
-         break;
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+     return rc;
+ }
+=20
+@@ -463,7 +463,7 @@ int altp2m_destroy_by_id(struct domain *d, unsigned int=
+ idx)
+         return rc;
+=20
+     rc =3D -EBUSY;
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     if ( d->arch.altp2m_eptp[array_index_nospec(idx, MAX_EPTP)] !=3D
+          mfn_x(INVALID_MFN) )
+@@ -481,7 +481,7 @@ int altp2m_destroy_by_id(struct domain *d, unsigned int=
+ idx)
+         }
      }
-@@ -406,13 +412,6 @@ int do_altp2m_op(
+=20
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+=20
+     domain_unpause_except_self(d);
+=20
+@@ -501,7 +501,7 @@ int altp2m_switch_domain_altp2m_by_id(struct domain *d,=
+ unsigned int idx)
+         return rc;
+=20
+     rc =3D -EINVAL;
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     if ( d->arch.altp2m_visible_eptp[idx] !=3D mfn_x(INVALID_MFN) )
+     {
+@@ -512,7 +512,7 @@ int altp2m_switch_domain_altp2m_by_id(struct domain *d,=
+ unsigned int idx)
+         rc =3D 0;
+     }
+=20
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
+=20
+     domain_unpause_except_self(d);
+=20
+@@ -773,7 +773,7 @@ int altp2m_set_view_visibility(struct domain *d, unsign=
+ed int altp2m_idx,
+ {
+     int rc =3D 0;
+=20
+-    altp2m_list_lock(d);
++    altp2m_lock(d);
+=20
+     if ( !altp2m_is_eptp_valid(d, altp2m_idx) )
+         rc =3D -EINVAL;
+@@ -784,11 +784,23 @@ int altp2m_set_view_visibility(struct domain *d, unsi=
+gned int altp2m_idx,
+         d->arch.altp2m_visible_eptp[array_index_nospec(altp2m_idx, MAX_EPT=
+P)] =3D
+             mfn_x(INVALID_MFN);
+=20
+-    altp2m_list_unlock(d);
++    altp2m_unlock(d);
 =20
      return rc;
  }
--#else
--int do_altp2m_op(
--    XEN_GUEST_HANDLE_PARAM(void) arg)
--{
--    return -EOPNOTSUPP;
--}
--#endif
 =20
++void altp2m_lock_init(struct domain *d) {
++    mm_lock_init(&d->arch.altp2m_list_lock);
++}
++
++void altp2m_lock(struct domain *d) {
++    altp2m_list_lock(d);
++}
++
++void altp2m_unlock(struct domain *d) {
++    altp2m_list_unlock(d);
++}
++
  /*
   * Local variables:
+  * mode: C
 --=20
 2.34.1
 
