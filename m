@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9287DF5A8C5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 21:27:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1287501.1567939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443FAF5A8CA
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 21:28:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1287493.1567908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEw9d-00026F-Pt; Mon, 20 Apr 2026 21:27:41 +0000
+	id 1wEw9Y-0001HG-8f; Mon, 20 Apr 2026 21:27:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1287501.1567939; Mon, 20 Apr 2026 21:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 1287493.1567908; Mon, 20 Apr 2026 21:27:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEw9d-00025a-JY; Mon, 20 Apr 2026 21:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 1287501;
- Mon, 20 Apr 2026 21:27:40 +0000
+	id 1wEw9Y-0001H5-4v; Mon, 20 Apr 2026 21:27:36 +0000
+Received: by outflank-mailman (input) for mailman id 1287493;
+ Mon, 20 Apr 2026 21:27:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEw9c-0001mA-0c
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:27:40 +0000
+ (envelope-from <Rose.Spangler@elektrobit.com>) id 1wEw9W-00019J-GP
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:27:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEw9b-001N4o-DV
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:27:39 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wEw9V-00CBiW-TP
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 23:27:33 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a45-2eae-0a2a0a5409dd-0a2a450beb80-4
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:39 +0200
-Received: from [40.93.198.102]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e69a45-e002-0a2a0a5209dd-0a2a450280e4-0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:33 +0200
+Received: from [52.101.201.123]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@elektrobit.com>)
- id 69e69a49-212f-0a2a450b0019-285dc66613eb-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:39 +0200
-Received: from BL1PR13CA0149.namprd13.prod.outlook.com (2603:10b6:208:2bb::34)
- by DM3PR08MB9498.namprd08.prod.outlook.com (2603:10b6:8:1ad::8) with
+ id 69e69a43-af86-0a2a45020019-3465c97b9be8-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 23:27:33 +0200
+Received: from MN2PR11CA0019.namprd11.prod.outlook.com (2603:10b6:208:23b::24)
+ by DS7PR08MB6848.namprd08.prod.outlook.com (2603:10b6:5:3a5::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Mon, 20 Apr
- 2026 21:27:22 +0000
-Received: from BN1PEPF00005FFC.namprd05.prod.outlook.com
- (2603:10b6:208:2bb:cafe::f8) by BL1PR13CA0149.outlook.office365.com
- (2603:10b6:208:2bb::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
+ 2026 21:27:26 +0000
+Received: from BN1PEPF00006002.namprd05.prod.outlook.com
+ (2603:10b6:208:23b:cafe::f7) by MN2PR11CA0019.outlook.office365.com
+ (2603:10b6:208:23b::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:22 +0000
+ 20 Apr 2026 21:27:26 +0000
 Received: from usbth1es003.ebgroup.elektrobit.com (4.79.107.243) by
- BN1PEPF00005FFC.mail.protection.outlook.com (10.167.243.228) with Microsoft
+ BN1PEPF00006002.mail.protection.outlook.com (10.167.243.234) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48
- via Frontend Transport; Mon, 20 Apr 2026 21:27:21 +0000
+ via Frontend Transport; Mon, 20 Apr 2026 21:27:25 +0000
 Received: from usbth1es003 (localhost [127.0.0.1])
- by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz8m3KKrz1wdP; 
- Mon, 20 Apr 2026 14:27:20 -0700 (PDT)
-Received: from CO1PR07CU001.outbound.protection.outlook.com
- (mail-co1pr07cu00106.outbound.protection.outlook.com [40.93.10.94])
+ by usbth1es003.ebgroup.elektrobit.com (Postfix) with SMTP id 4fzz8s0rPKz1wdR; 
+ Mon, 20 Apr 2026 14:27:25 -0700 (PDT)
+Received: from DM2PR04CU003.outbound.protection.outlook.com
+ (mail-dm2pr04cu00301.outbound.protection.outlook.com [40.93.13.57])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange secp384r1 server-signature RSA-PSS (2048 bits) server-digest
  SHA256) (No client certificate requested)
  by usbth1es003.ebgroup.elektrobit.com (Postfix) with ESMTPS;
- Mon, 20 Apr 2026 14:27:20 -0700 (PDT)
-Received: from CH0PR03CA0432.namprd03.prod.outlook.com (2603:10b6:610:10e::20)
- by LV5PR08MB10848.namprd08.prod.outlook.com (2603:10b6:408:2fc::18)
+ Mon, 20 Apr 2026 14:27:24 -0700 (PDT)
+Received: from CH5PR05CA0012.namprd05.prod.outlook.com (2603:10b6:610:1f0::10)
+ by BN0PR08MB7535.namprd08.prod.outlook.com (2603:10b6:408:15b::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Mon, 20 Apr
- 2026 21:27:13 +0000
-Received: from CH2PEPF0000009C.namprd02.prod.outlook.com
- (2603:10b6:610:10e:cafe::66) by CH0PR03CA0432.outlook.office365.com
- (2603:10b6:610:10e::20) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:27:21 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:1f0:cafe::9f) by CH5PR05CA0012.outlook.office365.com
+ (2603:10b6:610:1f0::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 21:27:13 +0000
+ 20 Apr 2026 21:27:21 +0000
 Received: from denue6es012.ebgroup.elektrobit.com (213.95.148.172) by
- CH2PEPF0000009C.mail.protection.outlook.com (10.167.244.24) with Microsoft
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:12 +0000
+ 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 21:27:18 +0000
 Received: from ubuntu.localdomain (10.10.178.50) by
  denue6es012.ebgroup.elektrobit.com (10.243.160.140) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.35; Mon, 20 Apr 2026 23:27:09 +0200
+ 15.2.2562.35; Mon, 20 Apr 2026 23:27:15 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -90,14 +90,14 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=elektrobit.com header.i="@elektrobit.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=Lp7sUusTmHSJDMxFwE1IK/0xvDD384w0IX5voLuE272foHy8Enhj14hPj+/MCDkuliyAv7VQT2jazrViyHt/boo1748MAEg44p4f7VdTLhp3In85aKnqsn+6BOa3qTne9n8N1HKnu45/0VZN0jHuHICUCmVm7iBMOoggTLvMx7CLFF0j9Zu/SlyteF17nm2FLyaken0HQ5LVK6BCKDWd+qINIuHvbg0iAG1qkdnSCopDqPNF8k/b5K+AsHdHJ6kpIiteu8AYDa4qcQFZcl9ddRVrjod+1zmsuhS+JKuLhSNCPbsTurw5IbtpqAfUVP/ZINtv/g3oli3s9rOgHOB/bw==
+ b=DaNoqRsYFrxyOOBqNNSv9oDCvg5bUOrpRAz+ehf4eE10Q/jPWYRkZnPwYcedSc6OPwTjjJDNkxzodkP59/w9j/uNyTXLZhTxE7zhUbR3/qluxmdJxeKkSAhUfkBtwmPOMm2OLnVsYtustmpg3BFJZeEo7rasTLiUHIkIdnR2/11xT3KRLUxMTZaDWg8pJobIMos1lUlU7AAPZah/LkUKaHFqRk3JSGanQePMCId3rTW3sJ+EsZYJthy90vAuOLJ+pcN3OqlgxHPk50EpPexGVYk7BKHeYCaJ43PhhB5Mxxa5kz8dG9mI1yj/ll+/kgqfO6NsmVT/Iesj8rsYgxAL2A==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=55tm/2wld/ywUdSampZbkiV4LluAQpXTHs92fXHMAOY=;
- b=lMYwt/FnOh82WCrsZ38dIveWmcDZTMqY6Wave9148Tcv7AlU0yTqK1xqTiBjAq3r6qpmOQkxFrm/T1sEkpOiyZYh8e3zxU8lTqJSbKzSWP0FirHy0M2M6UR+Wl9byzqEwlo1SaPDDRZBErBz6XhlShKkeEpHdd8HRq+t/CouvkPbhzD/zyvu6Pn7ZlQaCdVpsWvAt8IL96EpcYMuFRycXxb2c4+E/RGnIrC9CHL2AP8qUSle/W5WY6+BJkwFH2kY2a4+SDjwslTEEmZFe60Yi8wCojUlH9BPOFfHUl6ZXB30vpK8NEbIuz0NRo6P+XQJO2IP8pwE+AxXkg1yosEWLg==
+ bh=mIka6cApKr4tHLkM0UcaDmcfawXuEpYHKEShj03nxYM=;
+ b=B3kcdjBRWcXb8OgpRkxPd8AKIKKw95NdpIwFq2aq82VEw4tlDcW5SJtPzmG+USHHKtaUnFAK5oPsOl0N+nna+YKFqD0SvQD1atI6Wc2ksqwL/6lNcO6eT0Ag7yAvwYRkWiPBzsZ3E4on6FYqoibPkEXTOnW5kESkzhKCDr/aatmtNExUJ6sX8WjRcr645WkxyUrvPlwXjaMLba8ZyfJ89GGcS7lF/4zXSyMPNnak6x4aLlWutZABRtNiP7fh4OqZxcbc68lLF9GocwgSXK9yN0Z+2MHljIlSjh8zq73E8qUOMhDSZiWDnBkjz0OoU9jORemTh+Jtcpp4Cp4tNGatwA==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 40.93.10.94) smtp.rcpttodomain=amd.com smtp.mailfrom=elektrobit.com;
+ 40.93.13.57) smtp.rcpttodomain=citrix.com smtp.mailfrom=elektrobit.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com; arc=pass (0 oda=1 ltdi=1
@@ -106,22 +106,22 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=55tm/2wld/ywUdSampZbkiV4LluAQpXTHs92fXHMAOY=;
- b=o1YKc7JF4FB1FaNDoJ8pEj9SD4rBuF9F2Lob37S0U3UtP/HG9U8JzfJd1sRe+Sv/rra/M7OXZBINNcoOdigDNioAe1JPaR1Ek43W+JPkZMj9Rqd0YxmphS6oKSqGZCylXS78EXUHhiQjpAmuseGxRGn+OvbWzRqTZkD3lrZwoVw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.10.94)
+ bh=mIka6cApKr4tHLkM0UcaDmcfawXuEpYHKEShj03nxYM=;
+ b=Gmj4lRr5Yh7NA54s1Tki+r0woLIEESbL//qdYRqMkXLF+8JLppJHHh3TROFsajslmVpZvGTdtHUhu97ousn9IpyF3/nOaXrlGLGVCFTzmj/Qy8NUw9aB6t28gbK7hAwJF1Mw9Rsi7JlHr0yxp8vL7YFXM+15kcatH3ECGOSO/gA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.93.13.57)
  smtp.mailfrom=elektrobit.com; dkim=pass (signature was verified)
  header.d=elektrobit.com;dmarc=pass action=none header.from=elektrobit.com;
 Received-SPF: Pass (protection.outlook.com: domain of elektrobit.com
- designates 40.93.10.94 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.93.10.94; helo=CO1PR07CU001.outbound.protection.outlook.com;
+ designates 40.93.13.57 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.93.13.57; helo=DM2PR04CU003.outbound.protection.outlook.com;
  pr=C
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TuLPUqkxh6f+J47w5Iwp/5/A62GO0iA58rDG6mh6ewVx+c6semXICO6diy53DGJXmiAuRSVT0vfxFyfM2aOvhuxv/IP6wk142p8iXYc+5xOG0XaNQywjnNDHnoNGHy/LWY3H4YTqOE2VnU1DtDYES7QaI1X8Z3viMcjFcFseKIzdELsn+gB17EWwgOmXU0Y7BXkGmrfHudHTpDOxm8lQlt7KSXpU1tH9ydH8yCL0X6ccIYrKu0kegEzI5li6doSZxM23F1COeGtHVCcUrsg8jPKHrULv5fpuDQPlT+pZ4UVG4/7kbh3e8ykCXxOwpm8Wp1LU6Sfe9N/Q87s7VBm4wQ==
+ b=u6+hHL8Va4+eWz8VNMwXFDSquak96v0djbhqFp+rXr6PnYODtY8t2l3wE0vh6+w+Z1ev9aGHy6iXKAputSxv9pylsSF7hP2fSttWO51AGsmB9knBZmdbAmDqh0twd0kIzutAnaaKapv2oFTFHXt4XWkTVkdtjEp9nUqZeu6993ggJ/8lXnFeKiTJ8cWM+lFYROYl6xYOBp9o6M2eY0NqefI2QeEi2T0RZ6P8V/hFi1tHKIRus43KOsAxcA2X/pYcfogviUGrt4Y3zGPagb7mdsFGtHwLhDd+G+JA3sJvV5PowHKw+N/QPdKQmoLjO8i9sCC64bt/QnG1zocvY1qISw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=55tm/2wld/ywUdSampZbkiV4LluAQpXTHs92fXHMAOY=;
- b=lCberM3/orNIzyMP8hmol19dcvx0V1srt9KyRL3yZR0uayJGfHfeMivvCBL9UahBoX+JIR3LQUSd5hPPsBg0YQmfOXWOF8i11t48MzBv5fwq4UZ5lav15VptzYhwF510IG4z+8cU1FL02JCRFUNcjPVjRQrwBMlzfFrMU0zwl+usI3TNTYOuFH0tI7p9KQXBWSbF+P4eQNN9ntXJsSGa3GvXuG4YT7vsErVTRis1VQgBJwSKCueyDwAXgOtNM7Kh/qBnVPjM9MR++d1Qt5cumZ3W+GnWZPsD47Z9yj1Wv96wR2QauzpDERn0QnFtITZkj/bQarTyZeagccvTvFvq4Q==
+ bh=mIka6cApKr4tHLkM0UcaDmcfawXuEpYHKEShj03nxYM=;
+ b=SUsqa6FraOykBCUxc3KMObSPoA8Z5arTiA7kiQPLca63NNeBsWQfqX3CSb97jbaXZ6xxsIo12bnVyGkf8cMrVqNESSaPOczNXvi2yQHVkBehtcTuaCnoJevtKuA+HRGuw5UxTAcn7wd3gmM97Uf+7Ih7iKxu/AyDpcJ4OOcL22zq7aN6um3/QMGumg4MZqb04Kag2R2BluDSOFsUQ83zQd9Tai5roXv0aYQwDLxl9zZY2IbuzG97oB1yWli2WQmGE9JLUrlcB+wjKL9H8lvifsVpFwuuCxo6ZWS6ENp7kNHqAZMWEoIcQ5WhVA4IIkNALQE9YHwSYkU3W8Bb2EMaTQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  213.95.148.172) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=elektrobit.com; dmarc=pass (p=quarantine sp=none pct=100)
@@ -130,8 +130,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elektrobit.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=55tm/2wld/ywUdSampZbkiV4LluAQpXTHs92fXHMAOY=;
- b=o1YKc7JF4FB1FaNDoJ8pEj9SD4rBuF9F2Lob37S0U3UtP/HG9U8JzfJd1sRe+Sv/rra/M7OXZBINNcoOdigDNioAe1JPaR1Ek43W+JPkZMj9Rqd0YxmphS6oKSqGZCylXS78EXUHhiQjpAmuseGxRGn+OvbWzRqTZkD3lrZwoVw=
+ bh=mIka6cApKr4tHLkM0UcaDmcfawXuEpYHKEShj03nxYM=;
+ b=Gmj4lRr5Yh7NA54s1Tki+r0woLIEESbL//qdYRqMkXLF+8JLppJHHh3TROFsajslmVpZvGTdtHUhu97ousn9IpyF3/nOaXrlGLGVCFTzmj/Qy8NUw9aB6t28gbK7hAwJF1Mw9Rsi7JlHr0yxp8vL7YFXM+15kcatH3ECGOSO/gA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 213.95.148.172)
  smtp.mailfrom=elektrobit.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=elektrobit.com;
@@ -144,13 +144,10 @@ To: <xen-devel@lists.xenproject.org>
 CC: Rose Spangler <Rose.Spangler@elektrobit.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Teddy Astie
-	<teddy.astie@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>, "Michal
- Orzel" <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, Aqib Javaid <Aqib.Javaid@elektrobit.com>
-Subject: [RFC PATCH v6 09/43] altp2m: Move do_altp2m_op to common code
-Date: Mon, 20 Apr 2026 17:26:14 -0400
-Message-ID: <20260420212648.208640-2-Rose.Spangler@elektrobit.com>
+	<teddy.astie@vates.tech>
+Subject: [RFC PATCH v6 12/43] x86/p2m: Move p2m_{init,free}_one declarations to arch header
+Date: Mon, 20 Apr 2026 17:26:17 -0400
+Message-ID: <20260420212648.208640-5-Rose.Spangler@elektrobit.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
 References: <20260420212648.208640-1-Rose.Spangler@elektrobit.com>
@@ -164,983 +161,136 @@ X-EOPAttributedMessage: 1
 X-MS-Exchange-SkipListedInternetSender:
  ip=[213.95.148.172];domain=denue6es012.ebgroup.elektrobit.com
 X-MS-TrafficTypeDiagnostic:
-	CH2PEPF0000009C:EE_|LV5PR08MB10848:EE_|BN1PEPF00005FFC:EE_|DM3PR08MB9498:EE_
-X-MS-Office365-Filtering-Correlation-Id: 256f584b-748e-4060-630e-08de9f239baa
+	CH2PEPF00000099:EE_|BN0PR08MB7535:EE_|BN1PEPF00006002:EE_|DS7PR08MB6848:EE_
+X-MS-Office365-Filtering-Correlation-Id: a5554a6e-0510-4b09-0372-08de9f239e6c
 X-SM-outgoing: yes
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|704162011799003|36860700016|82310400026|7416014|376014|1800799024|56012099003|18002099003|22082099003;
+ BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?O5FCXpEvEa3IGgHzFtD3K25IdgSo6f0NN1jzC1JNpc5hFf6jUM6WtbZpzSZX?=
- =?us-ascii?Q?Do+0snGkyx5SGK7PpxyR7GOZ33LMs0GviwtEC4C90aZ7Rt+ETAq0fpZrkicc?=
- =?us-ascii?Q?4WtxjdOtkOFrD7ljKjI0kp5/Cp0rgypg7s4bat+zYNFIBFKM/vb2JmMP5c5r?=
- =?us-ascii?Q?EVB4HKQ+ThzywMN0CP27a4QqLDcp7lw5NUYQAtaTRx76BDJwYtlf1eWtl6Q+?=
- =?us-ascii?Q?59b6nEzrRkiXHMTXRZB5RLG4d5stNOd3fxQmmUqEbnS0VQv+ws3wvFoHs21v?=
- =?us-ascii?Q?mmLm5bK4UdtguKuph+cp7eOa/jgpq5rJ5NBKPVREB3FQjc/zYO7LaZy62X5X?=
- =?us-ascii?Q?OGclnzRdxgOh9mcc8euMyoHiZGFUwN7XWjDChZ8amlEkRAjh8F0E7o5P+27D?=
- =?us-ascii?Q?pOS3C1dxoj/xsl3JUDBSeXupQkCFjV553QK5J9TJMSJPB85EdL6W3CU04B0B?=
- =?us-ascii?Q?prbdHh+V7OYgFRVpc8iFO7EHY/balqqErlFW7xWIL9cDotd8S/I0Q9V5Ztph?=
- =?us-ascii?Q?lN484F2u2Gl8AWZTknvCsLBxB1AWDSsjaochDuOC//6o166h3rE0nE36J73m?=
- =?us-ascii?Q?gebvFekv4Ye0npIkBikrj3myE2vmGvfOkWWoY9Ujj/Fp7sgZyhW26z+i2u+0?=
- =?us-ascii?Q?ekF5CMf4QWbKOgscxOa8TWFe0RJVm0gzh/1D/xSsDcqJJgl51nvSLY9wkLux?=
- =?us-ascii?Q?l6Pi5gqP+MbGOboWK57yTNzuqf0tgXjPgms6lv+N2Z3C8/ON+KKODDWQ0tui?=
- =?us-ascii?Q?ipmm6feTEv4MkRNkTqPQfyh4Xwcymd9sKPO5nZY7A6JJaDFARyx3vDhir1rm?=
- =?us-ascii?Q?MuWe4ENwRGjPxIaYKlLMispnxYJgetnv4oc4+XG+gTxT/KzfHoa/7fDk4cOa?=
- =?us-ascii?Q?fDs5D+HTrGlec8XCokE90N+J9vyiDDnz5tTdqg8V30nnkRK9HYnY/ejs952o?=
- =?us-ascii?Q?LTtDH4Dm6YcR+/760+BbkI3eydcf/BaCk2+oUm4fcUbu1EoVCmM7PgeWwfRI?=
- =?us-ascii?Q?fx2ekp4MaH9hQ0DcXwbjAv3gA+4SjLYKaWtm+0BLmpxVMrw1L21mhkFG00z9?=
- =?us-ascii?Q?wSjMhYDQ6RmwOmPbxNlDrI3dnLH6VXRhPREHyiN6kG/1Z2KbK8+uistUtE3n?=
- =?us-ascii?Q?LzVi3t22u6+jtCQUGP7V63Xih9e0NynN3A=3D=3D?=
+ =?us-ascii?Q?MmiX7r19sRecRQnpWqyQfixt635jXmAnSav3yTFjeuTmor6AeX/9+rMA0xZV?=
+ =?us-ascii?Q?iIJCzsaossVjL3/J5D4UH8K+nTufnTk6KuexDdzXA0VtLqapI27CTDsNGroL?=
+ =?us-ascii?Q?8UgSPWfY0Z6Z8dFjJDed77Rzx6F9u6tIYdlmYd7nDdbC6/LAJx3JdSPNyZdU?=
+ =?us-ascii?Q?nEkXXu9qi0Ma14BDzme9DZHCyu2bCDOctodC8hauJrBK5h1l+tyVwoHxcbSe?=
+ =?us-ascii?Q?b0EopR+No6h8ybjVZLCTNhQA8gGyqRtNml52CkEWF5RywODBfIHBGclLjK1o?=
+ =?us-ascii?Q?GMpe7YllAo1bLA1pTxG2v0l1QQdKq0MI14XNh0GXKst3uIygEfqCaAL4tHxB?=
+ =?us-ascii?Q?Xsv6mFw2+3P/pIOuL8bN0L0oQCeov03iRbHc3kPPUN2xWrMX1APkmUqtIffT?=
+ =?us-ascii?Q?EZx6saCh1YltKBMpi0CQiLFUk2cITdBkjQ+jeJ639rb3yQeuJO+PEQR/NwtT?=
+ =?us-ascii?Q?kq9+VKVthfUcNDyqagF0w6dj63hdr0j34oU4oGreqdLXpU0ln+FlvE8x4iNt?=
+ =?us-ascii?Q?rYyd8gehdwbhQPPLhlHatljAj/EV5RXHWDGoay+SDgzY4CzsJQDwsLljLbfx?=
+ =?us-ascii?Q?cg9Z0EcXnVkxKWNHg28NdrT8gmU/3yGslKlJcR66gT5NL1jK8MrDPrmfhStX?=
+ =?us-ascii?Q?Qndilfqs0RxrEKE2sKFFrwi+nH5EnRx1/MNQoXk5eRqUEyJgHj2St7e8DJ7r?=
+ =?us-ascii?Q?WO6va1rEqOYrdQ9YPPbmSLYZKPCBQ0aEDYCnwY0Hhpcz/sz/qrNOYGOth/At?=
+ =?us-ascii?Q?j/2qErC7mkDqfmBlXWWmPd5nY+e/X8LMIi8TUebDRXc9C5wi/qvHL/HTK+1+?=
+ =?us-ascii?Q?fRq8LcAg5Gp22UpMGXkHvlrnkjhW3AUMPSUDxJMN1G4Y8IqocbGlVNvonH6h?=
+ =?us-ascii?Q?+LRg+MihN95T8DjHge2UQQ3zEZgFIPW4CJccwt5U6c3zojh2V1h33fH9Ri7+?=
+ =?us-ascii?Q?N+rCg2iycdyKqffAxrbOEZzOBKGVGbGqDg5Ls0kqJkmruQacw83SJVEsd8FY?=
+ =?us-ascii?Q?NM+822M9GQBBXlwhmcUGFnfGKucHIeLRz6ArGcev9afJcPXtngSGQeEiIftW?=
+ =?us-ascii?Q?Ck6vlpLW9vGDzqtKOeIgsu6JdYPax6ymiomjX0rs1f1JB/3Z2gE8rHY2PonH?=
+ =?us-ascii?Q?Ue+lpS0QysAlGJjOvw6V+muPZzoQJJVxkaBi/TtO5yEkdV60lnSRHbgtR4mt?=
+ =?us-ascii?Q?kqTh5Q0GdeFmlCwHTNnj0q5LvceGvhbq7/fomGTQDlErQUuJB45q8WLklNJc?=
+ =?us-ascii?Q?WEpogxBFKJO/X/4b17xC6Y3zFxH0sW2p3oZOqBtutA=3D=3D?=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(704162011799003)(36860700016)(82310400026)(7416014)(376014)(1800799024)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+ CIP:213.95.148.172;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:denue6es012.ebgroup.elektrobit.com;PTR:eth1-fw1-nbg6.eb.noris.de;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-Exchange-RoutingPolicyChecked:
- pv+TFKJYq3q4Mv8AWUit1lHt8X+SjsK7bbvaiHgHjgPtXhpyu9Wa6VX9gLbyNr5OoXWxFwgQ4tc8NsR8REfpiE6izt0w1l3xpJdylN4erXxAGReK5o9JGvIvMCPRHrHjoTHfrKCCiaGePCTmf/Gn1R01Hrnk2cDfZwZXBhYCKFhqKlRWkeQVh2Zqi0tUju4SCaErHftN7BcKCxJJasGF+30JFpk7IRMuntIsuuU5KlQKQYn6vG/VqLreeQKLB7ir/cIbxyFzZ7UWPn7mwBlDyc/gnXcDvo8JJbbWPmCUI7jUz6T2Y/hjiXlvY/7XikxL8M4/YiWkIcHzIr4yfLxiGw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR08MB10848
+ rz9EV0cxbu5ghVAURjsAnKF6tkbC1axgak7v305sL+ac9RBpOJxnNVyP7FR6D9MEWPISl/0RPDPKMAtibw0g+nKj8vEFME2BPpTYwv3tbeRG4R1c+5c79VukP+bPLGqMAs9iPZrQcTzf7X30i3El5eL1Y9wPDoiQlzM0xkJch3dUC5zDYqENkWjwXcDvYn/bzy8C5q35L3gqR2dMzjbwqiTk5hETKmRBu34Lt9bhP9pk+F/rqcdQW6sLkNnThi6S7XaWAg1ex75GvjYRmbULtbBLiYO3N8VqC8CooSD9h9O/sv0x7hcVQ9I9n5UgfvQdEYyo7pmdpr1OXu87cNjW7g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR08MB7535
 X-MS-Exchange-SkipListedInternetSender:
- ip=[40.93.10.94];domain=CO1PR07CU001.outbound.protection.outlook.com
+ ip=[40.93.13.57];domain=DM2PR04CU003.outbound.protection.outlook.com
 X-MS-Exchange-ExternalOriginalInternetSender:
- ip=[40.93.10.94];domain=CO1PR07CU001.outbound.protection.outlook.com
+ ip=[40.93.13.57];domain=DM2PR04CU003.outbound.protection.outlook.com
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- BN1PEPF00005FFC.namprd05.prod.outlook.com
+ BN1PEPF00006002.namprd05.prod.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	afd21eae-b6aa-48d5-9f50-08de9f239676
+	39762365-5891-4995-ed27-08de9f2399f5
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|704162011799003|82310400026|14060799003|35042699022|156008|36860700016|7416014|376014|1800799024|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|14060799003|36860700016|35042699022|376014|82310400026|156008|1800799024|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?WGUdG829WRMO8xzC/5r7NjsPfNa+/q4gGhKpG0KHHFl50080apUEOw4tVSkJ?=
- =?us-ascii?Q?ajlBuD0s60hsll9AswVUeSHLTyl0pApB3PdRI0n7ZkqmR6ATXsKz9LFKE23e?=
- =?us-ascii?Q?/tn/vDl00Kpjrhmad2/79L7Ud5u1pqznHiVcd5jLTJT7lkuaQXX6gY+lWvcW?=
- =?us-ascii?Q?7O3MHFGXUXE45JYS3F7xlQP4eX1URqd6PDpoQbPR2BHCNDQuzJMl0Va2xC72?=
- =?us-ascii?Q?ppr8Om7JmK6orlUjIfDINoS3EgT3SfqDNdqBUkuk7uRwfNgJZ1Oau+9UF3JX?=
- =?us-ascii?Q?+aBpOvmT+uHu8gCPZGElVpILcWDy69yW8t22ocGzq9T3RVqMD3dC7I9TcSMt?=
- =?us-ascii?Q?0YAtpas48EV6A6yPJSZ5JfYbbkcG0h4fTee0JhVL/pVIrYSICodh5YsNNTEI?=
- =?us-ascii?Q?bbNu2MK+3t646SH7Y7d562fYYJ7EG249jMdvio0Dmjgdp3EkUyOn1195mO3+?=
- =?us-ascii?Q?6N5qvxA+Aeqt5bQ9XpkCIMG2KQwXyrCwwIJu4fOuywTGg0o287YE1MeZQOfO?=
- =?us-ascii?Q?JXUOwT40Q4ezMUz2hEcjbtAGgybyO36NWHCBohb95Q4Cs09ndgCmhXFNp/ug?=
- =?us-ascii?Q?U6kG3mLp6XDxO+5ex4VPV8jCTrvG8Dg5BcparTn2NV4PI+Nd0lQkZ8t6W1Vt?=
- =?us-ascii?Q?T0fDisu3+lem+47Td1bGXUFaf8HqCLVbRVbABTnw+YUml2xR0tfxHF4IKBU5?=
- =?us-ascii?Q?s2mkWDH9v78nLcEnTxqzWo8x4neajBdc6MlxKsHPOBLCZRXJZW5b4zgnA98m?=
- =?us-ascii?Q?roaFTEcrYjDiNgEaIlD5X5cbzQzjwUtJWz0lawV4+T9Dk7KXc0Kek1K9/QfE?=
- =?us-ascii?Q?+fI5vEhrtth616NOmlXZ19kJj/E8h7sPmm02h38u6aOF/cTIF3Moei2SNayH?=
- =?us-ascii?Q?tZex8nc3AL7Nn9ug7jmXoFKTJOYMUWLN3RlF/eEI2qXYMlwH2MiBJCDa+Dj+?=
- =?us-ascii?Q?VF4BweLCc0rWlHQ29JaZAd8YUGDcC3v6qvoX4pXZfr4mJqlA6rDH3yIBrzZa?=
- =?us-ascii?Q?4COkp72162nQ4X3/woRWG/qV13dufKsDs/LcWJJrudiOPRqY3w1QusDd5WLq?=
- =?us-ascii?Q?SZtrJD7zXMmHplQOy2G8rxmEIy95M+2pcYeviwlsZxtEiWUnbbkfoMFvnbmp?=
- =?us-ascii?Q?ixjcP428KVZ4MpkBv7A1e+C79NkHpqqdYw=3D=3D?=
+	=?us-ascii?Q?4A518ktgUsUz5kVshBI6ZF/CW3kVrnmlKJx9Dh9FxK+i8ua+Q0d1nhPZc14j?=
+ =?us-ascii?Q?ZZICzMApjzx2qZCRrnab4BJea0Lgp+m8W2MEdc33dsjjici43BCILG3+ypb/?=
+ =?us-ascii?Q?pOJD/oSZTj2RFJybo1xfP+fFUykP8NlsWC1/zjTwZtEP3CVaBDFyUgeZxvQx?=
+ =?us-ascii?Q?MJgaIxF5wG77+VxnZsqWDumldHH4RBuG29JOCTXz2fDe7cs1IIXHNLosrOiU?=
+ =?us-ascii?Q?FL4vjSV5RM4hlZT/Uqg94ANKMnZQ5J6ru1+SY4Z/VKw8iPNYFCX+uz4LOrBI?=
+ =?us-ascii?Q?0H7NiuIUV4gKb19xn5+CFiDJbFKIKEP8vgcdyXa5SdARwSdGMMKh3GzqfYxG?=
+ =?us-ascii?Q?Q+WHlZ/Z+C7b0TTBFxkniU+TTOWAEBOSwuGSCS5wLzaPamJontkviqqGNi3e?=
+ =?us-ascii?Q?HM56lZkjL/hl6hRqWMEt1ROQ50lRLmgMMJu7wirKJnFY3CskdZFUNRipoINE?=
+ =?us-ascii?Q?Fh8/shlVltRN2oDF0rObFip5MY7PyOxYXiD0grSMSgWmGVtA64dQMRqv11w4?=
+ =?us-ascii?Q?9js76SNZ6YrXFM3dUMI8zSruM/JYvLMCVHhM1ic6CtUU5EvVbm+V8n4bwZaW?=
+ =?us-ascii?Q?v31DqTJtEr4l4BVb7Tuu4mJVM5marhpAfS2zHxoqHQ6HhHBZy/LphYY2JkpH?=
+ =?us-ascii?Q?Cirj6jWzIr8I+lItxftcLnzALqtQPf8cnaik7PtT1MV0SYSG0jcPpzwiQEOd?=
+ =?us-ascii?Q?yiKO1D2q/mdS+LRJNzs+tWu7vIzdRq5hJovhW/d3dlms8C9gU79hyBLad8mG?=
+ =?us-ascii?Q?+Bvn6UTQ/gMbSkrUnYkFdJEsnzvNtIiBkCX1V5CRmQnEGczx8bVFP0dA1F2P?=
+ =?us-ascii?Q?yw4Q7iosegw96M/gGZJML+lKvqxcn/Odc2LlCJ//yq0rpqObhj8gW6ymMvR+?=
+ =?us-ascii?Q?0Ccertm9BLb6YOpiw8TMRu+q3az/ZSEORzdZUoo78pioL+GYEU/SFZZLI38e?=
+ =?us-ascii?Q?DqsInvUD9JlI6G/iKhp3Ps6MnyovaXVLpfReZUO9NeijJsWA8WtrMSoZRGjw?=
+ =?us-ascii?Q?pdOMkh9BRSPfqGjxAZlHZ4mQ/9odh6nk0wNJSrl2+HG4OgXmS4d14skEnkUu?=
+ =?us-ascii?Q?UbtDrcRWYuYjDzV3z/Sy3agg+xdF27pf/Qnt4sIjbBbktK4o/Cpd9aEXD6LB?=
+ =?us-ascii?Q?WmB91gUJ/RYyg6iFQ5QMERa2Q2ePYlRFpoFOKeqGpEpX2cy/5CDqRgJn+h2+?=
+ =?us-ascii?Q?a9/YtfMpussM3pbDl/6rdBMjEf8GhmAqLMSpSaY3ke3lwWKaoePyByPUoYC+?=
+ =?us-ascii?Q?FHY6wC0+nEg+cGJoSlT2k/kWAll6dy2FHwS0EO5jjQ=3D=3D?=
 X-Forefront-Antispam-Report:
-	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR07CU001.outbound.protection.outlook.com;PTR:mail-co1pr07cu00106.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704162011799003)(82310400026)(14060799003)(35042699022)(156008)(36860700016)(7416014)(376014)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:4.79.107.243;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM2PR04CU003.outbound.protection.outlook.com;PTR:mail-dm2pr04cu00301.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(14060799003)(36860700016)(35042699022)(376014)(82310400026)(156008)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	b5UanR2p00UfKCA6aaY9tFmf96UpwGCoxOr2tItpeAh9NvVc8czHXZSDhS5v52u8mqaeRjJY/nBCg8v+cym0AO/g1LdQNAbUMXTvjmJ2LEXW3KCby6lfdFrW25n/33ZuXqx+0n0t6JAShhRC+vmUkRgoFGXDfAvupVgVU8aINR+c/+InaNF//f/hc6u+30zNxEWg6zmdzPZhckZ3MkaO4h9HGCQdtrjM4P7MgRIXX9mOHfoZQwLJC1/dPrPND1w+kurmjT4SCnBJ0AN4fr41S+8+uxWiwM18LAf3pVhvEU4yJrl9000PkkMDsrJLBWyVVa+9bchIx2HYz5R/3jEaO/zMxLV+j3D945C09DtR2soJ1ahHrYEF4Cl18ayEHlcBybdbIOCpLQqUGY4uvM56ExQg/9hsFVW2TVq0x4HQFBcSus/KR2dTSmTCpyFsiHhx
+	X1cMaIP4+iCOpV1BCFk+r6jAGZlywFovD704ek1R2PHY3XVfF/Ca2gWYoK6pHWkG2zn9irCEFQSX3FUuxD4IHh8DO+OeU3DSzhtbnXG50I+743J6wJ+j4Tv5+YT7JSJZzNpFmHmqtAuQCQGU5aq+uxTQPq+peScep44K4mViwOqxSQH+8R6tYcqdfIESEQ+j17X5BFeCbcInNSfFo2vhEZhPoiHTpTr3PsoPt30NsYsk7imHP9oC4v+kAdGqxlvvAtadVnn1QdGUbtx1jCAe7zpkDQO1WsHr3TZUszK9humzM9keZjPtmA/twOtWtivF7UNPcAeUTfRqyppY5yL+xcNOmnkjOyjzvRt1Nsgd8+kE8sSRQQ1w2VMv0Gon9FwEDlLOPHSsOMlq+dQvmhpAAEbmMYiN8Fy73zfK49zzwgXwhuFljphnprIwbweGt1Kf
 X-OriginatorOrg: elektrobit.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:21.4081
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 21:27:25.9668
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 256f584b-748e-4060-630e-08de9f239baa
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5554a6e-0510-4b09-0372-08de9f239e6c
 X-MS-Exchange-CrossTenant-Id: e764c36b-012e-4216-910d-8fd16283182d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e764c36b-012e-4216-910d-8fd16283182d;Ip=[4.79.107.243];Helo=[usbth1es003.ebgroup.elektrobit.com]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN1PEPF00005FFC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN1PEPF00006002.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR08MB9498
-X-purgate-ID: tlsNG-42698a/1776720459-0556BF3B-D9AF3AC8/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR08MB6848
+X-purgate-ID: tlsNG-720697/1776720453-89AC2161-AA47EB31/0/0
 X-purgate-type: clean
-X-purgate-size: 26338
+X-purgate-size: 1613
 
-This commit moves the altp2m HVMOP implementation to common code, making it
-possible to re-use it across architectures. In this commit, the entire
-implementation is gated behind CONFIG_X86, with no changes to the body of
-do_altp2m_op. A stub implementation is added for ARM, which will be removed
-once do_altp2m_op has been modified to add ARM support.
+This commit moves the p2m_init_one and p2m_free_one declarations from the
+x86-only p2m.h header file to the asm/p2m.h header. This makes it possible
+to use these functions in the common altp2m init/teardown routines.
 
-This commit contains only code movement, and no change in functionality is
-intended.
-
-This is commit 1/2 of the common do_altp2m_op phase.
+This is commit 1/12 of the altp2m_init/altp2m_teardown routines phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
-Signed-off-by: Aqib Javaid <Aqib.Javaid@elektrobit.com>
 ---
 v6: Introduced this patch.
 ---
- xen/arch/x86/hvm/hvm.c   | 400 -------------------------------------
- xen/common/altp2m.c      | 413 +++++++++++++++++++++++++++++++++++++++
- xen/include/xen/altp2m.h |  11 ++
- 3 files changed, 424 insertions(+), 400 deletions(-)
+ xen/arch/x86/include/asm/p2m.h | 3 +++
+ xen/arch/x86/mm/p2m.h          | 3 ---
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 5b6e91adce17..4adcc3c49d95 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4526,406 +4526,6 @@ static int hvmop_get_param(
-     return rc;
- }
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index 5110b3e77807..ce8eeb751ee9 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -592,6 +592,9 @@ int p2m_alloc_table(struct p2m_domain *p2m);
+ void p2m_teardown(struct p2m_domain *p2m, bool remove_root, bool *preempted);
+ void p2m_final_teardown(struct domain *d);
  
--/*
-- * altp2m operations are envisioned as being used in several different
-- * modes:
-- *
-- * - external: All control and decisions are made by an external agent
-- *   running domain 0.
-- *
-- * - internal: altp2m operations are used exclusively by an in-guest
-- *   agent to protect itself from the guest kernel and in-guest
-- *   attackers.
-- *
-- * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
-- *   but makes requests of an agent running outside the domain for
-- *   bigger changes (such as modifying altp2m entires).
-- *
-- * This corresponds to the three values for HVM_PARAM_ALTP2M
-- * (external, mixed, limited). All three models have advantages and
-- * disadvantages.
-- *
-- * Normally hypercalls made by a program in domain 0 in order to
-- * control a guest would be DOMCTLs rather than HVMOPs.  But in order
-- * to properly enable the 'internal' use case, as well as to avoid
-- * fragmentation, all altp2m subops should come under this single
-- * HVMOP.
-- *
-- * Note that 'internal' mode (HVM_PARAM_ALTP2M == XEN_ALTP2M_mixed)
-- * has not been evaluated for safety from a security perspective.
-- * Before using this mode in a security-critical environment, each
-- * subop should be evaluated for safety, with unsafe subops
-- * blacklisted in xsm_hvm_altp2mhvm_op().
-- */
--static int do_altp2m_op(
--    XEN_GUEST_HANDLE_PARAM(void) arg)
--{
--#ifdef CONFIG_ALTP2M
--    struct xen_hvm_altp2m_op a;
--    struct domain *d = NULL;
--    int rc = 0;
--    uint64_t mode;
--
--    if ( !altp2m_supported() )
--        return -EOPNOTSUPP;
--
--    if ( copy_from_guest(&a, arg, 1) )
--        return -EFAULT;
--
--    if ( a.pad1 || a.pad2 ||
--         (a.version != HVMOP_ALTP2M_INTERFACE_VERSION) )
--        return -EINVAL;
--
--    switch ( a.cmd )
--    {
--    case HVMOP_altp2m_get_domain_state:
--    case HVMOP_altp2m_set_domain_state:
--    case HVMOP_altp2m_vcpu_enable_notify:
--    case HVMOP_altp2m_vcpu_disable_notify:
--    case HVMOP_altp2m_create_p2m:
--    case HVMOP_altp2m_destroy_p2m:
--    case HVMOP_altp2m_switch_p2m:
--    case HVMOP_altp2m_set_suppress_ve:
--    case HVMOP_altp2m_set_suppress_ve_multi:
--    case HVMOP_altp2m_get_suppress_ve:
--    case HVMOP_altp2m_set_mem_access:
--    case HVMOP_altp2m_set_mem_access_multi:
--    case HVMOP_altp2m_get_mem_access:
--    case HVMOP_altp2m_change_gfn:
--    case HVMOP_altp2m_get_p2m_idx:
--    case HVMOP_altp2m_set_visibility:
--        break;
--
--    default:
--        return -EOPNOTSUPP;
--    }
--
--    d = rcu_lock_domain_by_any_id(a.domain);
--
--    if ( d == NULL )
--        return -ESRCH;
--
--    if ( !is_hvm_domain(d) )
--    {
--        rc = -EOPNOTSUPP;
--        goto out;
--    }
--
--    if ( (a.cmd != HVMOP_altp2m_get_domain_state) &&
--         (a.cmd != HVMOP_altp2m_set_domain_state) &&
--         !d->altp2m_active )
--    {
--        rc = -EOPNOTSUPP;
--        goto out;
--    }
--
--    mode = d->arch.hvm.params[HVM_PARAM_ALTP2M];
--
--    if ( XEN_ALTP2M_disabled == mode )
--    {
--        rc = -EINVAL;
--        goto out;
--    }
--
--    if ( d->nr_altp2m == 0 )
--    {
--        rc = -EOPNOTSUPP;
--        goto out;
--    }
--
--    if ( (rc = xsm_hvm_altp2mhvm_op(XSM_OTHER, d, mode, a.cmd)) )
--        goto out;
--
--    switch ( a.cmd )
--    {
--    case HVMOP_altp2m_get_domain_state:
--        a.u.domain_state.state = altp2m_active(d);
--        rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--        break;
--
--    case HVMOP_altp2m_set_domain_state:
--    {
--        struct vcpu *v;
--        bool ostate;
--
--        if ( nestedhvm_enabled(d) )
--        {
--            rc = -EINVAL;
--            break;
--        }
--
--        rc = domain_pause_except_self(d);
--        if ( rc )
--            break;
--
--        ostate = d->altp2m_active;
--        d->altp2m_active = !!a.u.domain_state.state;
--
--        /* If the alternate p2m state has changed, handle appropriately */
--        if ( d->altp2m_active != ostate &&
--             (ostate || !(rc = altp2m_init_by_id(d, 0))) )
--        {
--            for_each_vcpu( d, v )
--            {
--                if ( !ostate )
--                    altp2m_vcpu_initialise(v);
--                else
--                    altp2m_vcpu_destroy(v);
--            }
--
--            if ( ostate )
--                altp2m_flush(d);
--        }
--        else if ( rc )
--            d->altp2m_active = false;
--
--        domain_unpause_except_self(d);
--        break;
--    }
--
--    case HVMOP_altp2m_vcpu_enable_notify:
--    {
--        struct vcpu *v;
--
--        if ( a.u.enable_notify.pad ||
--             a.u.enable_notify.vcpu_id >= d->max_vcpus )
--        {
--            rc = -EINVAL;
--            break;
--        }
--
--        if ( !cpu_has_vmx_virt_exceptions )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        v = d->vcpu[a.u.enable_notify.vcpu_id];
--
--        rc = altp2m_vcpu_enable_ve(v, _gfn(a.u.enable_notify.gfn));
--        break;
--    }
--
--    case HVMOP_altp2m_vcpu_disable_notify:
--    {
--        struct vcpu *v;
--
--        if ( a.u.disable_notify.vcpu_id >= d->max_vcpus )
--        {
--            rc = -EINVAL;
--            break;
--        }
--
--        if ( !cpu_has_vmx_virt_exceptions )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        v = d->vcpu[a.u.enable_notify.vcpu_id];
--
--        altp2m_vcpu_disable_ve(v);
--        break;
--    }
--
--    case HVMOP_altp2m_create_p2m:
--        rc = altp2m_init_next_available(d, &a.u.view.view,
--                                        a.u.view.hvmmem_default_access);
--        if ( !rc )
--            rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--        break;
--
--    case HVMOP_altp2m_destroy_p2m:
--        rc = altp2m_destroy_by_id(d, a.u.view.view);
--        break;
--
--    case HVMOP_altp2m_switch_p2m:
--        rc = altp2m_switch_domain_altp2m_by_id(d, a.u.view.view);
--        break;
--
--    case HVMOP_altp2m_set_suppress_ve:
--        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
--            rc = -EINVAL;
--        else
--        {
--            gfn_t gfn = _gfn(a.u.suppress_ve.gfn);
--            unsigned int altp2m_idx = a.u.suppress_ve.view;
--            bool suppress_ve = a.u.suppress_ve.suppress_ve;
--
--            rc = p2m_set_suppress_ve(d, gfn, suppress_ve, altp2m_idx);
--        }
--        break;
--
--    case HVMOP_altp2m_set_suppress_ve_multi:
--    {
--        uint64_t max_phys_addr = (1UL << d->arch.cpuid->extd.maxphysaddr) - 1;
--
--        a.u.suppress_ve_multi.last_gfn = min(a.u.suppress_ve_multi.last_gfn,
--                                             max_phys_addr);
--
--        if ( a.u.suppress_ve_multi.pad1 ||
--             a.u.suppress_ve_multi.first_gfn > a.u.suppress_ve_multi.last_gfn )
--            rc = -EINVAL;
--        else
--        {
--            rc = p2m_set_suppress_ve_multi(d, &a.u.suppress_ve_multi);
--            if ( (!rc || rc == -ERESTART) && __copy_to_guest(arg, &a, 1) )
--                rc = -EFAULT;
--        }
--        break;
--    }
--
--    case HVMOP_altp2m_get_suppress_ve:
--        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
--            rc = -EINVAL;
--        else
--        {
--            gfn_t gfn = _gfn(a.u.suppress_ve.gfn);
--            unsigned int altp2m_idx = a.u.suppress_ve.view;
--            bool suppress_ve;
--
--            rc = p2m_get_suppress_ve(d, gfn, &suppress_ve, altp2m_idx);
--            if ( !rc )
--            {
--                a.u.suppress_ve.suppress_ve = suppress_ve;
--                rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--            }
--        }
--        break;
--
--    case HVMOP_altp2m_set_mem_access:
--        if ( !vm_event_is_enabled(current) )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        if ( a.u.mem_access.pad )
--            rc = -EINVAL;
--        else
--            rc = p2m_set_mem_access(d, _gfn(a.u.mem_access.gfn), 1, 0, 0,
--                                    a.u.mem_access.access,
--                                    a.u.mem_access.view);
--        break;
--
--    case HVMOP_altp2m_set_mem_access_multi:
--        if ( !vm_event_is_enabled(current) )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        if ( a.u.set_mem_access_multi.pad ||
--             a.u.set_mem_access_multi.opaque > a.u.set_mem_access_multi.nr )
--        {
--            rc = -EINVAL;
--            break;
--        }
--
--        /*
--         * Unlike XENMEM_access_op_set_access_multi, we don't need any bits of
--         * the 'continuation' counter to be zero (to stash a command in).
--         * However, 0x40 is a good 'stride' to make sure that we make
--         * a reasonable amount of forward progress before yielding,
--         * so use a mask of 0x3F here.
--         */
--        rc = p2m_set_mem_access_multi(d, a.u.set_mem_access_multi.pfn_list,
--                                      a.u.set_mem_access_multi.access_list,
--                                      a.u.set_mem_access_multi.nr,
--                                      a.u.set_mem_access_multi.opaque,
--                                      0x3F,
--                                      a.u.set_mem_access_multi.view);
--        if ( rc > 0 )
--        {
--            a.u.set_mem_access_multi.opaque = rc;
--            rc = -ERESTART;
--            if ( __copy_field_to_guest(guest_handle_cast(arg, xen_hvm_altp2m_op_t),
--                                       &a, u.set_mem_access_multi.opaque) )
--                rc = -EFAULT;
--        }
--        break;
--
--    case HVMOP_altp2m_get_mem_access:
--        if ( !vm_event_is_enabled(current) )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        if ( a.u.mem_access.pad )
--            rc = -EINVAL;
--        else
--        {
--            xenmem_access_t access;
--
--            rc = p2m_get_mem_access(d, _gfn(a.u.mem_access.gfn), &access,
--                                    a.u.mem_access.view);
--            if ( !rc )
--            {
--                a.u.mem_access.access = access;
--                rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--            }
--        }
--        break;
--
--    case HVMOP_altp2m_change_gfn:
--        if ( a.u.change_gfn.pad1 || a.u.change_gfn.pad2 )
--            rc = -EINVAL;
--        else
--            rc = altp2m_change_gfn(d, a.u.change_gfn.view,
--                                   _gfn(a.u.change_gfn.old_gfn),
--                                   _gfn(a.u.change_gfn.new_gfn));
--        break;
--
--    case HVMOP_altp2m_get_p2m_idx:
--    {
--        struct vcpu *v;
--
--        if ( !altp2m_active(d) )
--        {
--            rc = -EOPNOTSUPP;
--            break;
--        }
--
--        if ( (v = domain_vcpu(d, a.u.get_vcpu_p2m_idx.vcpu_id)) == NULL )
--        {
--            rc = -EINVAL;
--            break;
--        }
--
--        a.u.get_vcpu_p2m_idx.altp2m_idx = altp2m_vcpu_idx(v);
--        rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--        break;
--    }
--
--    case HVMOP_altp2m_set_visibility:
--    {
--        unsigned int idx = a.u.set_visibility.altp2m_idx;
--
--        if ( a.u.set_visibility.pad )
--            rc = -EINVAL;
--        else if ( !altp2m_active(d) )
--            rc = -EOPNOTSUPP;
--        else
--            rc = altp2m_set_view_visibility(d, idx, a.u.set_visibility.visible);
--        break;
--    }
--
--    default:
--        ASSERT_UNREACHABLE();
--        rc = -EOPNOTSUPP;
--        break;
--    }
--
-- out:
--    rcu_unlock_domain(d);
--
--    return rc;
--#else /* !CONFIG_ALTP2M */
--    return -EOPNOTSUPP;
--#endif /* CONFIG_ALTP2M */
--}
--
- DEFINE_XEN_GUEST_HANDLE(compat_hvm_altp2m_op_t);
++struct p2m_domain *p2m_init_one(struct domain *d);
++void p2m_free_one(struct p2m_domain *p2m);
++
+ /* Add/remove a page to/from a domain's p2m table. */
+ int p2m_add_page(struct domain *d, gfn_t gfn, mfn_t mfn,
+                  unsigned int page_order, p2m_type_t t);
+diff --git a/xen/arch/x86/mm/p2m.h b/xen/arch/x86/mm/p2m.h
+index 64218878067e..be8ed85c2aba 100644
+--- a/xen/arch/x86/mm/p2m.h
++++ b/xen/arch/x86/mm/p2m.h
+@@ -6,9 +6,6 @@
+ #ifndef __ARCH_MM_P2M_H__
+ #define __ARCH_MM_P2M_H__
  
- /*
-diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
-index 1a4e102324d4..a43b3a3e34b3 100644
---- a/xen/common/altp2m.c
-+++ b/xen/common/altp2m.c
-@@ -1,5 +1,418 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- #include <xen/altp2m.h>
-+#include <xen/guest_access.h>
-+#include <xen/vm_event.h>
-+
-+#include <asm/altp2m.h>
-+
-+#include <public/hvm/params.h>
-+
-+#include <xsm/xsm.h>
-+
-+#ifdef CONFIG_X86
-+#include <asm/hvm/nestedhvm.h>
-+/*
-+ * altp2m operations are envisioned as being used in several different
-+ * modes:
-+ *
-+ * - external: All control and decisions are made by an external agent
-+ *   running domain 0.
-+ *
-+ * - internal: altp2m operations are used exclusively by an in-guest
-+ *   agent to protect itself from the guest kernel and in-guest
-+ *   attackers.
-+ *
-+ * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
-+ *   but makes requests of an agent running outside the domain for
-+ *   bigger changes (such as modifying altp2m entires).
-+ *
-+ * This corresponds to the three values for HVM_PARAM_ALTP2M
-+ * (external, mixed, limited). All three models have advantages and
-+ * disadvantages.
-+ *
-+ * Normally hypercalls made by a program in domain 0 in order to
-+ * control a guest would be DOMCTLs rather than HVMOPs.  But in order
-+ * to properly enable the 'internal' use case, as well as to avoid
-+ * fragmentation, all altp2m subops should come under this single
-+ * HVMOP.
-+ *
-+ * Note that 'internal' mode (HVM_PARAM_ALTP2M == XEN_ALTP2M_mixed)
-+ * has not been evaluated for safety from a security perspective.
-+ * Before using this mode in a security-critical environment, each
-+ * subop should be evaluated for safety, with unsafe subops
-+ * blacklisted in xsm_hvm_altp2mhvm_op().
-+ */
-+int do_altp2m_op(
-+    XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    struct xen_hvm_altp2m_op a;
-+    struct domain *d = NULL;
-+    int rc = 0;
-+    uint64_t mode;
-+
-+    if ( !altp2m_supported() )
-+        return -EOPNOTSUPP;
-+
-+    if ( copy_from_guest(&a, arg, 1) )
-+        return -EFAULT;
-+
-+    if ( a.pad1 || a.pad2 ||
-+         (a.version != HVMOP_ALTP2M_INTERFACE_VERSION) )
-+        return -EINVAL;
-+
-+    switch ( a.cmd )
-+    {
-+    case HVMOP_altp2m_get_domain_state:
-+    case HVMOP_altp2m_set_domain_state:
-+    case HVMOP_altp2m_vcpu_enable_notify:
-+    case HVMOP_altp2m_vcpu_disable_notify:
-+    case HVMOP_altp2m_create_p2m:
-+    case HVMOP_altp2m_destroy_p2m:
-+    case HVMOP_altp2m_switch_p2m:
-+    case HVMOP_altp2m_set_suppress_ve:
-+    case HVMOP_altp2m_set_suppress_ve_multi:
-+    case HVMOP_altp2m_get_suppress_ve:
-+    case HVMOP_altp2m_set_mem_access:
-+    case HVMOP_altp2m_set_mem_access_multi:
-+    case HVMOP_altp2m_get_mem_access:
-+    case HVMOP_altp2m_change_gfn:
-+    case HVMOP_altp2m_get_p2m_idx:
-+    case HVMOP_altp2m_set_visibility:
-+        break;
-+
-+    default:
-+        return -EOPNOTSUPP;
-+    }
-+
-+    d = rcu_lock_domain_by_any_id(a.domain);
-+
-+    if ( d == NULL )
-+        return -ESRCH;
-+
-+    if ( !is_hvm_domain(d) )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    if ( (a.cmd != HVMOP_altp2m_get_domain_state) &&
-+         (a.cmd != HVMOP_altp2m_set_domain_state) &&
-+         !d->altp2m_active )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    mode = d->arch.hvm.params[HVM_PARAM_ALTP2M];
-+
-+    if ( XEN_ALTP2M_disabled == mode )
-+    {
-+        rc = -EINVAL;
-+        goto out;
-+    }
-+
-+    if ( d->nr_altp2m == 0 )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    if ( (rc = xsm_hvm_altp2mhvm_op(XSM_OTHER, d, mode, a.cmd)) )
-+        goto out;
-+
-+    switch ( a.cmd )
-+    {
-+    case HVMOP_altp2m_get_domain_state:
-+        a.u.domain_state.state = altp2m_active(d);
-+        rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-+        break;
-+
-+    case HVMOP_altp2m_set_domain_state:
-+    {
-+        struct vcpu *v;
-+        bool ostate;
-+
-+        if ( nestedhvm_enabled(d) )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        rc = domain_pause_except_self(d);
-+        if ( rc )
-+            break;
-+
-+        ostate = d->altp2m_active;
-+        d->altp2m_active = !!a.u.domain_state.state;
-+
-+        /* If the alternate p2m state has changed, handle appropriately */
-+        if ( d->altp2m_active != ostate &&
-+             (ostate || !(rc = altp2m_init_by_id(d, 0))) )
-+        {
-+            for_each_vcpu( d, v )
-+            {
-+                if ( !ostate )
-+                    altp2m_vcpu_initialise(v);
-+                else
-+                    altp2m_vcpu_destroy(v);
-+            }
-+
-+            if ( ostate )
-+                altp2m_flush(d);
-+        }
-+        else if ( rc )
-+            d->altp2m_active = false;
-+
-+        domain_unpause_except_self(d);
-+        break;
-+    }
-+
-+    case HVMOP_altp2m_vcpu_enable_notify:
-+    {
-+        struct vcpu *v;
-+
-+        if ( a.u.enable_notify.pad ||
-+             a.u.enable_notify.vcpu_id >= d->max_vcpus )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        if ( !cpu_has_vmx_virt_exceptions )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        v = d->vcpu[a.u.enable_notify.vcpu_id];
-+
-+        rc = altp2m_vcpu_enable_ve(v, _gfn(a.u.enable_notify.gfn));
-+        break;
-+    }
-+
-+    case HVMOP_altp2m_vcpu_disable_notify:
-+    {
-+        struct vcpu *v;
-+
-+        if ( a.u.disable_notify.vcpu_id >= d->max_vcpus )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        if ( !cpu_has_vmx_virt_exceptions )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        v = d->vcpu[a.u.enable_notify.vcpu_id];
-+
-+        altp2m_vcpu_disable_ve(v);
-+        break;
-+    }
-+
-+    case HVMOP_altp2m_create_p2m:
-+        rc = altp2m_init_next_available(d, &a.u.view.view,
-+                                        a.u.view.hvmmem_default_access);
-+        if ( !rc )
-+            rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-+        break;
-+
-+    case HVMOP_altp2m_destroy_p2m:
-+        rc = altp2m_destroy_by_id(d, a.u.view.view);
-+        break;
-+
-+    case HVMOP_altp2m_switch_p2m:
-+        rc = altp2m_switch_domain_altp2m_by_id(d, a.u.view.view);
-+        break;
-+
-+    case HVMOP_altp2m_set_suppress_ve:
-+        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
-+            rc = -EINVAL;
-+        else
-+        {
-+            gfn_t gfn = _gfn(a.u.suppress_ve.gfn);
-+            unsigned int altp2m_idx = a.u.suppress_ve.view;
-+            bool suppress_ve = a.u.suppress_ve.suppress_ve;
-+
-+            rc = p2m_set_suppress_ve(d, gfn, suppress_ve, altp2m_idx);
-+        }
-+        break;
-+
-+    case HVMOP_altp2m_set_suppress_ve_multi:
-+    {
-+        uint64_t max_phys_addr = (1UL << d->arch.cpuid->extd.maxphysaddr) - 1;
-+
-+        a.u.suppress_ve_multi.last_gfn = min(a.u.suppress_ve_multi.last_gfn,
-+                                             max_phys_addr);
-+
-+        if ( a.u.suppress_ve_multi.pad1 ||
-+             a.u.suppress_ve_multi.first_gfn > a.u.suppress_ve_multi.last_gfn )
-+            rc = -EINVAL;
-+        else
-+        {
-+            rc = p2m_set_suppress_ve_multi(d, &a.u.suppress_ve_multi);
-+            if ( (!rc || rc == -ERESTART) && __copy_to_guest(arg, &a, 1) )
-+                rc = -EFAULT;
-+        }
-+        break;
-+    }
-+
-+    case HVMOP_altp2m_get_suppress_ve:
-+        if ( a.u.suppress_ve.pad1 || a.u.suppress_ve.pad2 )
-+            rc = -EINVAL;
-+        else
-+        {
-+            gfn_t gfn = _gfn(a.u.suppress_ve.gfn);
-+            unsigned int altp2m_idx = a.u.suppress_ve.view;
-+            bool suppress_ve;
-+
-+            rc = p2m_get_suppress_ve(d, gfn, &suppress_ve, altp2m_idx);
-+            if ( !rc )
-+            {
-+                a.u.suppress_ve.suppress_ve = suppress_ve;
-+                rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-+            }
-+        }
-+        break;
-+
-+    case HVMOP_altp2m_set_mem_access:
-+        if ( !vm_event_is_enabled(current) )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        if ( a.u.mem_access.pad )
-+            rc = -EINVAL;
-+        else
-+            rc = p2m_set_mem_access(d, _gfn(a.u.mem_access.gfn), 1, 0, 0,
-+                                    a.u.mem_access.access,
-+                                    a.u.mem_access.view);
-+        break;
-+
-+    case HVMOP_altp2m_set_mem_access_multi:
-+        if ( !vm_event_is_enabled(current) )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        if ( a.u.set_mem_access_multi.pad ||
-+             a.u.set_mem_access_multi.opaque > a.u.set_mem_access_multi.nr )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        /*
-+         * Unlike XENMEM_access_op_set_access_multi, we don't need any bits of
-+         * the 'continuation' counter to be zero (to stash a command in).
-+         * However, 0x40 is a good 'stride' to make sure that we make
-+         * a reasonable amount of forward progress before yielding,
-+         * so use a mask of 0x3F here.
-+         */
-+        rc = p2m_set_mem_access_multi(d, a.u.set_mem_access_multi.pfn_list,
-+                                      a.u.set_mem_access_multi.access_list,
-+                                      a.u.set_mem_access_multi.nr,
-+                                      a.u.set_mem_access_multi.opaque,
-+                                      0x3F,
-+                                      a.u.set_mem_access_multi.view);
-+        if ( rc > 0 )
-+        {
-+            a.u.set_mem_access_multi.opaque = rc;
-+            rc = -ERESTART;
-+            if ( __copy_field_to_guest(guest_handle_cast(arg, xen_hvm_altp2m_op_t),
-+                                       &a, u.set_mem_access_multi.opaque) )
-+                rc = -EFAULT;
-+        }
-+        break;
-+
-+    case HVMOP_altp2m_get_mem_access:
-+        if ( !vm_event_is_enabled(current) )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        if ( a.u.mem_access.pad )
-+            rc = -EINVAL;
-+        else
-+        {
-+            xenmem_access_t access;
-+
-+            rc = p2m_get_mem_access(d, _gfn(a.u.mem_access.gfn), &access,
-+                                    a.u.mem_access.view);
-+            if ( !rc )
-+            {
-+                a.u.mem_access.access = access;
-+                rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-+            }
-+        }
-+        break;
-+
-+    case HVMOP_altp2m_change_gfn:
-+        if ( a.u.change_gfn.pad1 || a.u.change_gfn.pad2 )
-+            rc = -EINVAL;
-+        else
-+            rc = altp2m_change_gfn(d, a.u.change_gfn.view,
-+                                   _gfn(a.u.change_gfn.old_gfn),
-+                                   _gfn(a.u.change_gfn.new_gfn));
-+        break;
-+
-+    case HVMOP_altp2m_get_p2m_idx:
-+    {
-+        struct vcpu *v;
-+
-+        if ( !altp2m_active(d) )
-+        {
-+            rc = -EOPNOTSUPP;
-+            break;
-+        }
-+
-+        if ( (v = domain_vcpu(d, a.u.get_vcpu_p2m_idx.vcpu_id)) == NULL )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        a.u.get_vcpu_p2m_idx.altp2m_idx = altp2m_vcpu_idx(v);
-+        rc = __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
-+        break;
-+    }
-+
-+    case HVMOP_altp2m_set_visibility:
-+    {
-+        unsigned int idx = a.u.set_visibility.altp2m_idx;
-+
-+        if ( a.u.set_visibility.pad )
-+            rc = -EINVAL;
-+        else if ( !altp2m_active(d) )
-+            rc = -EOPNOTSUPP;
-+        else
-+            rc = altp2m_set_view_visibility(d, idx, a.u.set_visibility.visible);
-+        break;
-+    }
-+
-+    default:
-+        ASSERT_UNREACHABLE();
-+        rc = -EOPNOTSUPP;
-+        break;
-+    }
-+
-+ out:
-+    rcu_unlock_domain(d);
-+
-+    return rc;
-+}
-+#else
-+int do_altp2m_op(
-+    XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    return -EOPNOTSUPP;
-+}
-+#endif
+-struct p2m_domain *p2m_init_one(struct domain *d);
+-void p2m_free_one(struct p2m_domain *p2m);
+-
+ void p2m_pod_init(struct p2m_domain *p2m);
  
- /*
-  * Local variables:
-diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
-index b3b21124dd7e..be627152668a 100644
---- a/xen/include/xen/altp2m.h
-+++ b/xen/include/xen/altp2m.h
-@@ -2,8 +2,12 @@
- #ifndef __XEN_ALTP2M_H__
- #define __XEN_ALTP2M_H__
- 
-+#include <xen/errno.h>
-+#include <xen/param.h>
- #include <xen/sched.h>
- 
-+#include <public/hvm/hvm_op.h>
-+
- #ifdef CONFIG_ALTP2M
- 
- /* Alternate p2m HVM on/off per domain */
-@@ -12,6 +16,8 @@ static inline bool altp2m_active(const struct domain *d)
-     return d->altp2m_active;
- }
- 
-+int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg);
-+
- #else /* CONFIG_ALTP2M */
- 
- static inline bool altp2m_active(const struct domain *d)
-@@ -19,6 +25,11 @@ static inline bool altp2m_active(const struct domain *d)
-     return false;
- }
- 
-+static inline int do_altp2m_op(XEN_GUEST_HANDLE_PARAM(void) arg)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
- #endif /* CONFIG_ALTP2M */
- 
- #endif /* __XEN_ALTP2M_H__ */
+ #ifdef CONFIG_HVM
 -- 
 2.34.1
 
