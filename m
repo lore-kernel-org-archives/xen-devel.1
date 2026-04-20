@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18FFFF5A8C7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5661F5A8BE
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:25:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286498.1567648 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1286464.1567511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBS-0004vD-JK; Mon, 20 Apr 2026 20:25:30 +0000
+	id 1wEvBH-0001l3-Kj; Mon, 20 Apr 2026 20:25:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286498.1567648; Mon, 20 Apr 2026 20:25:30 +0000
+Received: by outflank-mailman (output) from mailman id 1286464.1567511; Mon, 20 Apr 2026 20:25:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBQ-0004rZ-Uh; Mon, 20 Apr 2026 20:25:28 +0000
-Received: by outflank-mailman (input) for mailman id 1286498;
- Mon, 20 Apr 2026 19:54:14 +0000
+	id 1wEvBH-0001kw-Hm; Mon, 20 Apr 2026 20:25:19 +0000
+Received: by outflank-mailman (input) for mailman id 1286464;
+ Mon, 20 Apr 2026 19:50:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@purelymail.com>) id 1wEuhC-0006RK-5O
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:54:14 +0000
+ (envelope-from <Rose.Spangler@purelymail.com>) id 1wEudt-0006FL-Mq
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEuhB-008XBJ-IS
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:54:13 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wEuds-00C1KL-LV
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:48 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e6842b-bab6-0a2a0a5309dd-0a2a4501dfd2-48
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:54:13 +0200
+ id 69e68373-5cb7-0a2a0a5109dd-0a2a4502cd0c-12
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:48 +0200
 Received: from [34.202.193.197] (helo=sendmail.purelymail.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e683b0-c1f2-0a2a45010019-22cac1c5ed76-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:51:13 +0200
+ id 69e68397-af86-0a2a45020019-22cac1c584b6-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:48 +0200
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -306608446; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 20 Apr 2026 19:50:58 +0000 (UTC)
+ Mon, 20 Apr 2026 19:50:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,22 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=purelymail1 header.d=purelymail.com header.i="@purelymail.com" header.h="Feedback-ID:Received:From:To:Subject:Date"
-DKIM-Signature: a=rsa-sha256; b=ckCzk1RLU5H7o8z98jVbNDtfQVfZx3Dgw741GYACJI5hgysSvN+Ozn9xSf0uu4iuwrQwTm3N6RmSleU2HQTtR0TDOAK2uI2ywKgBYLOA9nMN0bn8GSpOaKFgs5cDw8y/PGLJvnaMLR+pNzODuL8ep5d6RJu2L5wj4YppD1uk1gNKUQKbHobOUaebMEwE07nLyR5RAO0KM1dWc9LoO41CpL2+q5LSzoeeLurU6d44lXjJ8AcocwNoasw3nL0Lue0VE9e8xOPvvO2Dw8sCsB4DZJfzgsOIQJfa455onP1lGj0Cpp1Qau9P/AsKRQK946Kx2Gr1A1bsZVEE/q24lS696A==; s=purelymail1; d=purelymail.com; v=1; bh=sJtt5sv+KSdQzbFQSigMs7fjAJ9VYApzYG1/06R78L4=; h=Feedback-ID:Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=U7Aj0TmlQMo2OaiARr833Wx8B5UJDkYDILENNQJui75UvlKQU6oEmzSiJ0BjFolip1mlZN84vjT4JUXT3hFYofgGxRdHZabD55DYLpNNaU9qn5va7KJ+gXZsQ5CkYM12zHkn7pmU/DGMCJzbP71DPD1zU7eZqQfq7fJvjOow0VI1ZdT3MKcEpN25tTXVyL2jeLQSxEgcj/27rVu3kmzo8J2dIfDBguYa37GP47bnO4Q6u7aKJX6gJq7ycGXlBbp33jEEjrHIbSvVsKjKwyJTwkSmYl0/ACeYhXiZpjdBeUIEc0N7J0pYgJLC6a6le5OeDibjUnB2qPRAgvdpvuCgGQ==; s=purelymail1; d=purelymail.com; v=1; bh=F9DP5LK5B/VL9yfk52EOu4d/RW0pXvXOczcYQ78lIz8=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 685805:22403:null:purelymail
 X-Pm-Original-To: xen-devel@lists.xenproject.org
 From: Rose.Spangler@purelymail.com
 To: xen-devel@lists.xenproject.org
 Cc: Rose Spangler <Rose.Spangler@elektrobit.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Sergej Proskurin <proskurin@sec.in.tum.de>
-Subject: [RFC PATCH v6 25/43] arm/altp2m: Add altp2m index to arch_vcpu
-Date: Mon, 20 Apr 2026 15:50:24 -0400
-Message-Id: <20260420195042.207624-26-Rose.Spangler@purelymail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC PATCH v6 01/43] altp2m: Add template common altp2m.c/altp2m.h
+Date: Mon, 20 Apr 2026 15:50:00 -0400
+Message-Id: <20260420195042.207624-2-Rose.Spangler@purelymail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
 References: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
@@ -71,65 +72,71 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
 Content-Type: text/plain; charset=UTF-8
-X-purgate-ID: tlsNG-d62444/1776714673-BEA61FF4-CC81A8CE/0/0
+X-purgate-ID: tlsNG-720697/1776714648-81971161-87202937/0/0
 X-purgate-type: clean
-X-purgate-size: 1940
+X-purgate-size: 1865
 
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 
-This commit adds ap2m_idx to the VCPU struct on ARM. This makes it possible
-to track the current altp2m view being used by a VCPU.
+This commit adds an empty common altp2m.c and altp2m.h file to be added to
+in later commits. Creating a commit with just the empty file additions
+makes it easier to reorder later commits which add to these files.
 
-This is commit 2/4 of the altp2m_{get,set}_altp2m phase.
+This commit can be squashed into the first commit which actually adds
+something to altp2m.c/altp2m.h for the actual submission if that would be
+preferred.
+
+This is commit 1/8 of the preparation phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
-Signed-off-by: Sergej Proskurin <proskurin@sec.in.tum.de>
 ---
-v6: This patch was originally part of the "arm/p2m: Add
-    HVMOP_altp2m_set_domain_state" patch from the v4/v5 patch series.
-    It has been extracted into its own commit to make the patch series
-    easier to follow. If it would be preferred, this commit can be squashed
-    into another commit.
-
-    Added support for the CONFIG_ALTP2M option.
+v6: Introduced this patch.
 ---
- xen/arch/arm/include/asm/altp2m.h | 4 +---
- xen/arch/arm/include/asm/domain.h | 5 +++++
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ xen/common/Makefile      |  1 +
+ xen/common/altp2m.c      | 12 ++++++++++++
+ xen/include/xen/altp2m.h |  5 +++++
+ 3 files changed, 18 insertions(+)
+ create mode 100644 xen/common/altp2m.c
+ create mode 100644 xen/include/xen/altp2m.h
 
-diff --git a/xen/arch/arm/include/asm/altp2m.h b/xen/arch/arm/include/asm/a=
-ltp2m.h
-index 5a217f48b103..bc695018e62c 100644
---- a/xen/arch/arm/include/asm/altp2m.h
-+++ b/xen/arch/arm/include/asm/altp2m.h
-@@ -26,9 +26,7 @@ static inline bool altp2m_supported(void)
- /* Alternate p2m VCPU */
- static inline uint16_t altp2m_vcpu_idx(const struct vcpu *v)
- {
--    /* Not implemented yet */
--    BUG();
--    return 0;
-+    return v->arch.ap2m_idx;
- }
-=20
- #else /* CONFIG_ALTP2M */
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
-omain.h
-index 9e69d62086cd..4d497a21b648 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -249,6 +249,11 @@ struct arch_vcpu
-     struct vtimer virt_timer;
-     bool   vtimer_initialized;
-=20
-+#if CONFIG_ALTP2M
-+    /* Alternate p2m index */
-+    uint16_t ap2m_idx;
-+#endif
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 6018e256147f..dbe0094006df 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -1,3 +1,4 @@
++obj-$(CONFIG_ALTP2M) +=3D altp2m.o
+ obj-$(CONFIG_ARGO) +=3D argo.o
+ obj-y +=3D bitmap.o
+ obj-bin-$(CONFIG_SELF_TESTS) +=3D bitops.init.o
+diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
+new file mode 100644
+index 000000000000..1a4e102324d4
+--- /dev/null
++++ b/xen/common/altp2m.c
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#include <xen/altp2m.h>
 +
-     /*
-      * The full P2M may require some cleaning (e.g when emulation
-      * set/way). As the action can take a long time, it requires
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
+new file mode 100644
+index 000000000000..520328fd3fa8
+--- /dev/null
++++ b/xen/include/xen/altp2m.h
+@@ -0,0 +1,5 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __XEN_ALTP2M_H__
++#define __XEN_ALTP2M_H__
++
++#endif /* __XEN_ALTP2M_H__ */
 --=20
 2.34.1
 
