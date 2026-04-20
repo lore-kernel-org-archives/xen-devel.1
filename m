@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68625F5A8BE
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:26:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286514.1567712 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BEBAF5A8BD
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:26:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1286522.1567735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBn-0000IT-5p; Mon, 20 Apr 2026 20:25:51 +0000
+	id 1wEvBs-0001VA-Qv; Mon, 20 Apr 2026 20:25:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286514.1567712; Mon, 20 Apr 2026 20:25:50 +0000
+Received: by outflank-mailman (output) from mailman id 1286522.1567735; Mon, 20 Apr 2026 20:25:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBl-00009I-6R; Mon, 20 Apr 2026 20:25:49 +0000
-Received: by outflank-mailman (input) for mailman id 1286514;
- Mon, 20 Apr 2026 19:55:10 +0000
+	id 1wEvBr-0001Ki-6L; Mon, 20 Apr 2026 20:25:55 +0000
+Received: by outflank-mailman (input) for mailman id 1286522;
+ Mon, 20 Apr 2026 20:20:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@purelymail.com>) id 1wEui5-0006VA-Sw
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:55:10 +0000
+ (envelope-from <Rose.Spangler@purelymail.com>) id 1wEv6h-0001fC-7T
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 20:20:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEui5-00C0mN-9p
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:55:09 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wEv6g-008aEX-6N
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 22:20:34 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e6849d-5cb7-0a2a0a5109dd-0a2a450bd69e-0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:55:09 +0200
+ id 69e68a5b-bab6-0a2a0a5309dd-0a2a4502ab90-30
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 22:20:34 +0200
 Received: from [34.202.193.197] (helo=sendmail.purelymail.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e683ab-212f-0a2a450b0019-22cac1c5c2e6-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:51:08 +0200
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -306608446; 
+ id 69e68a91-af86-0a2a45020019-22cac1c5b4e4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 22:20:34 +0200
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1875363766; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 20 Apr 2026 19:50:57 +0000 (UTC)
+ Mon, 20 Apr 2026 20:20:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,292 +49,128 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=purelymail1 header.d=purelymail.com header.i="@purelymail.com" header.h="Feedback-ID:Received:From:To:Subject:Date"
-DKIM-Signature: a=rsa-sha256; b=YcLB+fWp94ky5pCPnNruujNicg8BuQxICWMz3/BkwTq5ox4j84lmQRhd/i/oJFV+bGrH/feNXuOJKUqWO7iRTJSJvCkQoO7DEhapiVl2SYkjE+kdkZt7F8FqHaXpUrr5ic/CYEiirwTnijxiNkgQnSXBk+OlXjsWW4IJa50rBGNCoT8Fikyua5CIFly1yk1FBT3iKWowcukxfNakHan6jqBuc9ejBefxwfCvbpzCIEpEP9zVwzXBpQpDnX97oU4sMWOSUdFnEH4mPqrqN+CNo/4ZTlCmktbbO8OWwxujmWCkzu+iHTOu3x2F3Xhz1iEeMCu4fPp/+sbYhQH2pNFYAQ==; s=purelymail1; d=purelymail.com; v=1; bh=pik6B7HNWf3xgS0SgW/KnVIMif31sL93P+diA7yc3/I=; h=Feedback-ID:Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=PdndTnfHQ94xnfzXvTReUPZH9BuTxVxJjJfMOnrvVAJpp2crXPdzH7ncAQh+hUcWQEH99tB6zDa0jJxUiZlUnauDxErDjr1on984ww83jTh1+UBefY/uOjmXIDmBvsulNiwtzOOY73NUpAQFV08yu3OZ3pD99wAlnSFDRVnxc8vcgxSgUPSDpw62a/hLP0J3yqQ1cfUkrtJTPzYPsVhrk1DXkoaygccPCk19q/3Q8nvMZPHLTkIYt/AhBNodIYez11A85hQ7m2J0sj3Jv+w50Z0jQG1ojapYfIiqX0Aiz5p2z/SpxM3ITT7+1KFgbdwK+XlZf2V2teg6zH63vIB/XA==; s=purelymail1; d=purelymail.com; v=1; bh=6JpqCKE14Ko8dp6uJ3eg+NGvA3AnOZiNuyDPfwkQfOU=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 685805:22403:null:purelymail
 X-Pm-Original-To: xen-devel@lists.xenproject.org
 From: Rose.Spangler@purelymail.com
 To: xen-devel@lists.xenproject.org
 Cc: Rose Spangler <Rose.Spangler@elektrobit.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Sergej Proskurin <proskurin@sec.in.tum.de>,
-	Aqib Javaid <Aqib.Javaid@elektrobit.com>
-Subject: [RFC PATCH v6 23/43] arm/altp2m: Add support for altp2m init/teardown routines
-Date: Mon, 20 Apr 2026 15:50:22 -0400
-Message-Id: <20260420195042.207624-24-Rose.Spangler@purelymail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC PATCH v6 29/43] arm/altp2m: Add support for altp2m_vcpu_{initialise,destroy}
+Date: Mon, 20 Apr 2026 16:20:12 -0400
+Message-Id: <20260420202026.208110-1-Rose.Spangler@purelymail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
-References: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
 Content-Type: text/plain; charset=UTF-8
-X-purgate-ID: tlsNG-42698a/1776714668-0636CF3B-EAFEFEF9/13/0
+X-purgate-ID: tlsNG-720697/1776716434-8077A161-152131EC/0/0
 X-purgate-type: clean
-X-purgate-size: 7918
+X-purgate-size: 3276
 
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 
-The p2m initialization now invokes initialization routines responsible for
-the allocation and initialization of altp2m structures. The same applies to
-teardown routines.
+This commit adds support for the altp2m_vcpu_initialise and
+altp2m_vcpu_destroy functions on ARM. The x86-specific function calls,
+altp2m_vcpu_disable_ve and altp2m_vcpu_update_p2m, are gated with #ifdef
+CONFIG_X86.
 
-This commit adds the prerequisites for the common altp2m_init and
-altp2m_teardown functions to work on ARM; No further changes were necessary
-other than removing the CONFIG_X86 gating.
-
-This is commit 12/12 of the altp2m_init/altp2m_teardown routines phase.
+This is commit 2/2 of the altp2m_vcpu_{initialise,destroy} phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
-Signed-off-by: Sergej Proskurin <proskurin@sec.in.tum.de>
-Signed-off-by: Aqib Javaid <Aqib.Javaid@elektrobit.com>
 ---
-v2: Shared code between host/altp2m init/teardown functions.
-    Added conditional init/teardown of altp2m.
-    Altp2m related functions are moved to altp2m.c
+v6: Introduced this patch.
 
-v3: Removed locking the altp2m_lock in altp2m_teardown. Locking this
-    lock at this point is unnecessary.
-
-    Removed re-setting altp2m_vttbr, altp2m_p2m, and altp2m_active
-    values in the function "altp2m_teardown". Re-setting these values is
-    unnecessary as the entire domain will be destroyed right afterwards.
-
-    Removed check for "altp2m_enabled" in "p2m_init" as altp2m has not yet
-    been enabled by libxl at this point.
-
-    Removed check for "altp2m_enabled" before tearing down altp2m within
-    the function "p2m_teardown" so that altp2m gets destroyed even if
-    the HVM_PARAM_ALTP2M gets reset before "p2m_teardown" is called.
-
-    Added initialization of the field d->arch.altp2m_active in
-    "altp2m_init".
-
-    Removed check for already initialized vmid's in "altp2m_init_one",
-    as "altp2m_init_one" is now called always with an uninitialized p2m.
-
-    Removed the array altp2m_vttbr[] in struct arch_domain.
-
-v4: Removed initialization of altp2m_p2m[] to NULL in altp2m_init, as
-    the "struct arch_domain" is already initialized to zero.
-
-    We moved the definition of the macro MAX_ALTP2M to a common place in
-    a separate commit.
-
-v6: Reworked to use common altp2m init and teardown routines.
-
-    Added altp2m_lock_init macro for use in altp2m_init.
-
-    Split altp2m initialization in p2m_init into a separate function,
-    p2m_init_altp2m, to more easily gate code behind CONFIG_ALTP2M.
-
-    Pulled in addition of active_vcpus from a later patch in the patch
-    series.
-
-    Split teardown and free of altp2m views into p2m_teardown and
-    p2m_teardown_final (part of altp2m_teardown), respectively.
+    The equivalent to this patch in the v4/v5 was originally part of the
+    patch named "arm/altp2m: Add HVMOP_altp2m_set_domain_state". In that
+    patch, the check that the VCPU passed to altp2m_vcpu_initialise isn't
+    the current CPU was removed. This was because ARM only implements the
+    external altp2m mode, meaning the current VCPU could never be a VCPU of
+    the guest for which altp2m is being initialized for. Therefore,
+    skipping this check was a slight optimization. I've removed that here
+    because altp2m_vcpu_initialise is only called during an HVMOP, and
+    skipping this check on ARM (especially when x86 also implements the
+    external altp2m mode) causes more confusion than the slight
+    optimization is worth in my view.
 ---
- xen/arch/arm/include/asm/altp2m.h |  4 +++
- xen/arch/arm/include/asm/domain.h |  8 ++++++
- xen/arch/arm/include/asm/p2m.h    |  5 ++++
- xen/arch/arm/mmu/p2m.c            | 44 ++++++++++++++++++++++++++++++-
- xen/common/altp2m.c               |  2 --
- xen/include/xen/altp2m.h          |  2 --
- 6 files changed, 60 insertions(+), 5 deletions(-)
+ xen/common/altp2m.c      | 14 ++++++++++----
+ xen/include/xen/altp2m.h |  2 --
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/altp2m.h b/xen/arch/arm/include/asm/a=
-ltp2m.h
-index 698c35427e75..5a217f48b103 100644
---- a/xen/arch/arm/include/asm/altp2m.h
-+++ b/xen/arch/arm/include/asm/altp2m.h
-@@ -19,6 +19,10 @@ static inline bool altp2m_supported(void)
-     return true;
- }
-=20
-+#define altp2m_lock_init(d) spin_lock_init(&(d)->arch.altp2m_lock)
-+#define altp2m_lock(d)      spin_lock(&(d)->arch.altp2m_lock)
-+#define altp2m_unlock(d)    spin_unlock(&(d)->arch.altp2m_lock)
-+
- /* Alternate p2m VCPU */
- static inline uint16_t altp2m_vcpu_idx(const struct vcpu *v)
- {
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/d=
-omain.h
-index 576dbdec20af..9e69d62086cd 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -128,6 +128,14 @@ struct arch_domain
- #endif
-=20
-     struct resume_info resume_ctx;
-+
-+#ifdef CONFIG_ALTP2M
-+    /*
-+     * Lock that protects critical altp2m operations that must not be perf=
-ormed
-+     * concurrently.
-+     */
-+    spinlock_t altp2m_lock;
-+#endif
- }  __cacheline_aligned;
-=20
- struct arch_vcpu
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.=
-h
-index 8ae0cd7ff589..db715c4f8bfc 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -9,6 +9,8 @@
- #include <asm/current.h>
- #include <asm/hsr.h>
-=20
-+#include <asm/atomic.h>
-+
- #define paddr_bits PADDR_BITS
-=20
- /* Holds the bit size of IPAs in p2m tables.  */
-@@ -117,6 +119,9 @@ struct p2m_domain {
-     /* Keeping track on which CPU this p2m was used and for which vCPU */
-     uint8_t last_vcpu_ran[NR_CPUS];
-=20
-+    /* Alternate p2m: count of vcpu's currently using this p2m. */
-+    atomic_t active_vcpus;
-+
-     /* Choose between: host/alternate. */
-     p2m_class_t p2m_class;
- };
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 0d37760ef5d5..04d17e787259 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -1,4 +1,5 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
-+#include <xen/altp2m.h>
- #include <xen/cpu.h>
- #include <xen/domain_page.h>
- #include <xen/ioreq.h>
-@@ -7,6 +8,7 @@
- #include <xen/softirq.h>
- #include <xen/xmalloc.h>
-=20
-+#include <asm/altp2m.h>
- #include <asm/alternative.h>
- #include <asm/event.h>
- #include <asm/flushtlb.h>
-@@ -1486,6 +1488,20 @@ int p2m_teardown(struct domain *d)
- {
-     struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
-=20
-+#ifdef CONFIG_ALTP2M
-+    unsigned int i;
-+    int rc;
-+
-+    d->altp2m_active =3D false;
-+
-+    for ( i =3D 0; i < d->nr_altp2m; i++ )
-+    {
-+        rc =3D p2m_teardown_one(d->altp2m_p2m[i]);
-+        if ( rc )
-+            return rc;
-+    }
-+#endif
-+
-     return p2m_teardown_one(p2m);
- }
-=20
-@@ -1499,6 +1515,9 @@ void p2m_final_teardown(struct domain *d)
-      * where relinquish_p2m_mapping() has been called.
-      */
-=20
-+    if ( altp2m_supported() )
-+        altp2m_teardown(d);
-+
-     while ( p2m_teardown_allocation(d) =3D=3D -ERESTART )
-         continue; /* No preemption support here */
-     ASSERT(page_list_empty(&d->arch.paging.p2m_freelist));
-@@ -1595,6 +1614,24 @@ struct p2m_domain *p2m_init_one(struct domain *d)
-     return NULL;
- }
-=20
-+static int p2m_init_altp2m(struct domain *d)
-+{
-+#ifdef CONFIG_ALTP2M
-+    int rc;
-+
-+    rc =3D altp2m_init(d);
-+    if ( rc )
-+    {
-+        p2m_free_one(p2m_get_hostp2m(d));
-+        return rc;
-+    }
-+
-+    d->altp2m_active =3D false;
-+#endif
-+
-+    return 0;
-+}
-+
- static int p2m_init_hostp2m(struct domain *d)
- {
-     struct p2m_domain *p2m =3D p2m_init_one(d);
-@@ -1608,10 +1645,15 @@ static int p2m_init_hostp2m(struct domain *d)
-=20
- int p2m_init(struct domain *d)
- {
-+    int rc;
-     spin_lock_init(&d->arch.paging.lock);
-     INIT_PAGE_LIST_HEAD(&d->arch.paging.p2m_freelist);
-=20
--    return p2m_init_hostp2m(d);
-+    rc =3D p2m_init_hostp2m(d);
-+    if ( rc )
-+        return rc;
-+
-+    return p2m_init_altp2m(d);
- }
-=20
- /*
 diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
-index cda653b713f0..989d8bdcb923 100644
+index e699b64678d8..7b80426c7798 100644
 --- a/xen/common/altp2m.c
 +++ b/xen/common/altp2m.c
-@@ -15,7 +15,6 @@
+@@ -11,6 +11,7 @@
+ #include <xsm/xsm.h>
+=20
+ #if defined(CONFIG_X86) && defined(CONFIG_HVM)
++#include <asm/hvm/hvm.h>
  #include <asm/hvm/nestedhvm.h>
  #endif
 =20
--#if CONFIG_X86
- int altp2m_init(struct domain *d)
- {
-     unsigned int i;
-@@ -60,7 +59,6 @@ void altp2m_teardown(struct domain *d)
-=20
+@@ -59,7 +60,6 @@ void altp2m_teardown(struct domain *d)
      XVFREE(d->altp2m_p2m);
  }
--#endif /* CONFIG_X86 */
+=20
+-#ifdef CONFIG_X86
+ void altp2m_vcpu_initialise(struct vcpu *v)
+ {
+     if ( !v->domain->nr_altp2m )
+@@ -68,10 +68,12 @@ void altp2m_vcpu_initialise(struct vcpu *v)
+     if ( v !=3D current )
+         vcpu_pause(v);
+=20
+-    vcpu_altp2m(v).p2midx =3D 0;
++    altp2m_set_vcpu_idx(v, 0);
+     atomic_inc(&altp2m_get_altp2m(v)->active_vcpus);
+=20
++#ifdef CONFIG_X86
+     altp2m_vcpu_update_p2m(v);
++#endif
+=20
+     if ( v !=3D current )
+         vcpu_unpause(v);
+@@ -90,15 +92,19 @@ void altp2m_vcpu_destroy(struct vcpu *v)
+     if ( (p2m =3D altp2m_get_altp2m(v)) )
+         atomic_dec(&p2m->active_vcpus);
+=20
++#ifdef CONFIG_X86
+     altp2m_vcpu_disable_ve(v);
++#endif
+=20
+-    vcpu_altp2m(v).p2midx =3D INVALID_ALTP2M;
++    altp2m_set_vcpu_idx(v, INVALID_ALTP2M);
++
++#ifdef CONFIG_X86
+     altp2m_vcpu_update_p2m(v);
++#endif
+=20
+     if ( v !=3D current )
+         vcpu_unpause(v);
+ }
+-#endif
 =20
  /*
   * altp2m operations are envisioned as being used in several different
 diff --git a/xen/include/xen/altp2m.h b/xen/include/xen/altp2m.h
-index 85ef22c2b29e..238c7a935586 100644
+index 7defe6126563..37c875a52327 100644
 --- a/xen/include/xen/altp2m.h
 +++ b/xen/include/xen/altp2m.h
-@@ -13,13 +13,11 @@
-  * regardless of CONFIG_ALTP2M
-  */
-=20
--#ifdef CONFIG_X86
- /* Initialize altp2m views */
- int altp2m_init(struct domain *d);
-=20
+@@ -24,11 +24,9 @@ int altp2m_init(struct domain *d);
  /* Free altp2m views */
  void altp2m_teardown(struct domain *d);
+=20
+-#ifdef CONFIG_X86
+ /* Alternate p2m VCPU */
+ void altp2m_vcpu_initialise(struct vcpu *v);
+ void altp2m_vcpu_destroy(struct vcpu *v);
 -#endif
 =20
  #ifdef CONFIG_ALTP2M
