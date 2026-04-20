@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8EBF588CA
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 14:04:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286002.1567124 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C83F588CA
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 14:07:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1286012.1567131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEpEK-0005wI-GP; Mon, 20 Apr 2026 14:04:04 +0000
+	id 1wEpHm-0006Wq-UG; Mon, 20 Apr 2026 14:07:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286002.1567124; Mon, 20 Apr 2026 14:04:04 +0000
+Received: by outflank-mailman (output) from mailman id 1286012.1567131; Mon, 20 Apr 2026 14:07:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEpEK-0005wB-CV; Mon, 20 Apr 2026 14:04:04 +0000
-Received: by outflank-mailman (input) for mailman id 1286002;
- Mon, 20 Apr 2026 14:04:03 +0000
+	id 1wEpHm-0006Wj-Re; Mon, 20 Apr 2026 14:07:38 +0000
+Received: by outflank-mailman (input) for mailman id 1286012;
+ Mon, 20 Apr 2026 14:07:38 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wEpEJ-0005w5-5Q
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 14:04:03 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wEpHl-0006Wd-SD
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 14:07:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEpEI-008jqn-IJ
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 16:04:02 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wEpHl-007ksc-5Y
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 16:07:37 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e63247-5cb7-0a2a0a5109dd-0a2a450ca7f4-30
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:04:02 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69e63320-2eae-0a2a0a5409dd-0a2a4505aa98-18
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:07:37 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69e63252-62f1-0a2a450c0019-d1558033bcfe-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:04:02 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4896c22fcbaso6459585e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 07:04:02 -0700 (PDT)
+ id 69e63327-aaa8-0a2a45050019-d155802be50f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 16:07:36 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso31416285e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 07:07:36 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4891c08faffsm156295305e9.1.2026.04.20.07.04.00
+ 5b1f17b1804b1-4891c318636sm85644935e9.7.2026.04.20.07.07.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Apr 2026 07:04:01 -0700 (PDT)
+ Mon, 20 Apr 2026 07:07:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,60 +53,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Autocrypt:Content-Language:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1776693842; x=1777298642; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Zz2b3aedKjdY9PGqKELdtxVqQ+BX3mNG+YwacUxTB5s=;
-        b=EWnd7q2NCsLUJ9o6Vo9ZIf0R3MyiP6TIYbVBse0lO8RReQ/UcMQfhfXQtp5Q6XrNI0
-         ycfGzK46urA8VjbOU/cbp0P1zO5BQrF9wbvJrd3cE49Lv1uTVZB9RbKTi5o7YKbJC8x0
-         TKTZM686VJ+FXZta57mYRfY86riAw1ULmx1yNDSGdxj/urGNEGydxB2xy6jfJpgg0mif
-         l140cc4l1+zBQjJRJ7jP1el8hWb0P/DIiTXTLEozbo/5nYGvF9vmcx2fWZVJwZ+8tYtC
-         Qv3Pnkyx3fT+DDPNhUhyPrxDBepH0E7VVDFVTspDZIkdXLZxx0nHGnje8tlkv9K9nsGJ
-         AOiA==
+        d=suse.com; s=google; t=1776694055; x=1777298855; darn=lists.xenproject.org;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=MmTtX6h/IB0UlseOWqSe2tCLnZGFk18XI7fIyrBVkyQ=;
+        b=QM9VEzeJYW3bqxBrn2tZNkHkFtd+LNDQFzy8OCf3Y9AgCcvX+HJkQ3jQqV8g26w5yE
+         W2laiIyLVa+zMHgOfY6xaT6xRhUB9CivONC9N5S1iMnzzfdhV0hft/A0bGjaw4TtDCUu
+         wJJx1G0eH0/4HTmSVyapZssDoDVSRRnrxnke16iIB2EdBGqfV0bQYk+n8VD7agyR6tKI
+         gnpHh4i8qUMrjHZFHtasr0Dih4CHwtS0ezWAHN24P9myDVzz4ODUFtSqls07wHAJb1HR
+         4ju4aKBqtUq2FJkiorzOij4yAo7Kh0CzK8Y0K/OhvavmFMkfIl35S8yJRbSsH3uqz573
+         u4eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776693842; x=1777298642;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Zz2b3aedKjdY9PGqKELdtxVqQ+BX3mNG+YwacUxTB5s=;
-        b=jI5hJvCkR1BrSXs4S0ljQiWG8XjuumbgoRdKzS874ujXanuzPnPhAGDuy13kU87Cry
-         kh9x690HkPK5+S5JxWCBwTbr+1tbZzK5v7iYunRIdZtw8gwiJ/au4lnptgz5fQT+uEOs
-         M44lp6Duf/qXvOmXkyIGazu064qpAapueT+kOs5uP/ckynlD6PtRj/xz9pY1UqV/KwAL
-         /9W3PdTu0IMXqzEcMn7PJChuPKIhw4jgPFQXVCK+afNjgGYkD0RPW/8lmKvehQRBUfru
-         BPGonxX0IjWDA8+MppniuFn8IL/csRuLsXzAOugq2UaM/yV6BWy5c30fmrdz5W8o8sby
-         IuLA==
-X-Forwarded-Encrypted: i=1; AFNElJ/Apgky5aamY4pLahaOQwlPlEhLkxLksYPZ7yNiFGuNF/dtCtNS3vIpbndSmJYI5AoLKabAnT5giw8=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxVHISbfIayojDI2ddn2QkIUdtrMSjZSEPkrmLIuV9/MKu4wttp
-	j2OmZIAX5Xow1CXxF01QCRF6RBeGOiQP9dm8vA0Zr15nfytQEdo9glTGBnC0ibCpRg==
-X-Gm-Gg: AeBDieu/89G/xNf5mEsPn4tbz9CiQzQkB3YfQAA0Twc+xQOmR8bJ/kUgLLnFozQCuC1
-	tQDJe98y1jSke9ElFFNEoD/PjjLj8UQb2B3IiKiob/p3yG7EsuzXYfAq56rwI6TGyCfpBKnTAFx
-	EFi5nI3r7LMvNvgka1sgpm+7JyV23dTqRPA+O75COs+AdTK9lhYchpAW0NwMHHW0to8cCc73Cgr
-	OCc/YMMaxnnOM6a20Tfa0WxAKR/5ZYxK6faHYJGhLFWrJoifChDpHEiy9nTaS8sSD7pqjOpg6Ze
-	XtERonzzUA6oFdfARNnptTBnrL9eEvyrFiYDmgEs1keglWYmm48tdCJwnFm3Wypm1FvyYKbgwT7
-	52vc79mYq2o/vByHbcEjFSzl0Ru+T2ZrlmUoS5Qg8AKupe90WC9/hbg3nq+1v2cYTIf8RB87KvK
-	OxNVwOAgO9K2Gn68Mm/SeKj4vrRw00HIH4wYnXHyR9kDwm5Cd1DKbrDqzAM8wEvtu9izFIzyid8
-	1FFzq+TpluEw6hAyjk4H9paMQ==
-X-Received: by 2002:a05:600c:8b8a:b0:489:149a:f9e7 with SMTP id 5b1f17b1804b1-489149afa2bmr88286285e9.27.1776693841647;
-        Mon, 20 Apr 2026 07:04:01 -0700 (PDT)
-Message-ID: <8f6ac421-8b6e-4655-bff2-bc733da52995@suse.com>
-Date: Mon, 20 Apr 2026 16:04:02 +0200
+        d=1e100.net; s=20251104; t=1776694055; x=1777298855;
+        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=MmTtX6h/IB0UlseOWqSe2tCLnZGFk18XI7fIyrBVkyQ=;
+        b=Vu3PwFXt6xIRAtlrUXL1afwR0vS3uh46eaRKeRw7rPVxV1N22TpW7Pweul+a1Iodh1
+         cc0RnE4n7dJUCh4rJs3bolkz7Nsot9hhnmrrL+/GWs7fsNbMl9LTPLz+dVzrB7LjiBfY
+         VkBR/9QelNZb/OTzAd/dYWJMmv6b23xReqaT/JsotxDqc2VCdvRHWQVtsTF2MD/sytuS
+         LJoC5DfklFpztbxOL9Mi3eBYTYQT0m6AquZOfWdwg5McMsAYYa8/PtTCv3YEJJ7Zp1SA
+         jjQR9ACsdd4/pIhirZ/ZX2HJ0oAngoNSmnWvwKoVAUOU0oOlgoR2eVyAd+XaedsL25sg
+         bdfQ==
+X-Gm-Message-State: AOJu0YyLMgqgp6vAaqEr2eVyZ9O1ShWBunbMI71GbF7+hxGyCrhxL+dU
+	7b+hfk7w4Oe5qvJV+Zg00lMMgNdlqdhbBkkq0WRefufI8/ySP7Rt+esVhQr8kcvOyst3VyLuTvQ
+	Oh0qsOw==
+X-Gm-Gg: AeBDievJrf7cltpKcLK5Pe8WXTjLUvzi2Ekd8f/7cbj4tb4vfl16eC7svQy62iIQQ8f
+	xUAnLvL4wjCR3HjwcZGsmAH8cM/38fAn6qAZ7jXdviiicb/cHFHKjBcLfpnba5Bdfoi+NI9xflG
+	GkLZ3qNr1+LjGiee026z9Oqq5KUwuN7z5MT289Myrf4o6d5sIlVwIUBaPCkcJVy01LF3p/gh7K4
+	xzUKqYhg2ntChORDzfOgtkDDG/ZPc5W1qhCab8COSsp6W5HA+sfpHAXMZW7dP0W43gEy4p8RkJC
+	RVuhGH/WuQpviSXD1ZE4fXublfDygdTBplB0I5RAo2sGzk1tAxPdLyZRy8JLQydLmFlupwQYMib
+	UVriTXDmauwlSizIXDbyjlyHeZxfJp91E2yGJa87BXvInbLppukZ2ZiELQExFP7E2aiEDo9EfoH
+	OIDxkFMPtS89jstQD8UqQUJqWKlqAgX31r52YsSRemwc3y6dzgmvRGsHBEjxa1z/6jR4q0YjwQ9
+	qehq4DBB0oBztPiFfhzxlQCWA==
+X-Received: by 2002:a05:600c:c082:b0:488:b043:5efd with SMTP id 5b1f17b1804b1-488fb75f7a6mr149815695e9.13.1776694055206;
+        Mon, 20 Apr 2026 07:07:35 -0700 (PDT)
+Message-ID: <0099bc30-ce07-496a-b9b2-6d7ca400737b@suse.com>
+Date: Mon, 20 Apr 2026 16:07:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] x86/smp: Rewrite TLB flush using
- on_selected_cpus()
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <20260401163521.3603665-1-ross.lagerwall@citrix.com>
- <20260401163521.3603665-4-ross.lagerwall@citrix.com>
-Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v11] x86emul: support LKGS
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -130,26 +125,274 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260401163521.3603665-4-ross.lagerwall@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1776693842-6EB74CF5-EDE52468/0/0
+X-purgate-ID: tlsNG-c201ff/1776694056-E95A7443-B5C3CEFD/0/0
 X-purgate-type: clean
-X-purgate-size: 596
+X-purgate-size: 9468
 
-On 01.04.2026 18:35, Ross Lagerwall wrote:
-> @@ -275,21 +274,18 @@ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
->      if ( (flags & ~FLUSH_ORDER_MASK) &&
->           !cpumask_subset(mask, cpumask_of(cpu)) )
->      {
-> +        cpumask_t flush_cpumask;
+Provide support for this insn, which is a prereq to FRED. CPUID-wise,
+while its and FRED's enumerators were already introduced, their dependency
+still needs adding.
 
-I think we want to avoid introduction of a new on-stack variable of this
-type. For large NR_CPUS they consume excessively much stack space; it
-wasn't that long ago that (iirc) in HPET code we successfully eliminated
-one.
+While adding a testcase, also add a SWAPGS one. In order to not affect
+the behavior of pre-existing tests, install write_{segment,msr} hooks
+only transiently.
 
-Instead a per-CPU variable of type cpumask_var_t may want using.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+For PV save_segments() would need adjustment, but the insn being
+restricted to ring 0 means PV guests can't use it anyway (unless we
+wanted to emulate it as another privileged insn).
 
-Jan
+I've also dropped the test harness read_segment() change. It generally
+would be correct to have, but isn't needed anymore with neither SWAPGS
+nor LKGS handling using the hook.
+---
+v11: Comment adjustments (to Andrew's liking).
+v10: Drop FRED dependency on LKGS. Replace "best effort unwind". Avoid
+     ->read_segment(). Re-base.
+v9: Re-base.
+v8: Re-base.
+v6: Use MSR constants in test harness. S->s in cpufeatureset.h. Add
+    NMI_SRC feature bits. Re-base.
+v5: Re-base.
+v3: Add dependency on LM. Re-base.
+v2: Use X86_EXC_*. Add comments.
+
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -326,6 +326,7 @@ static const struct {
+     { { 0x00, 0x18 }, { 2, 2 }, T, R }, /* ltr */
+     { { 0x00, 0x20 }, { 2, 2 }, T, R }, /* verr */
+     { { 0x00, 0x28 }, { 2, 2 }, T, R }, /* verw */
++    { { 0x00, 0x30 }, { 0, 2 }, T, R, pfx_f2 }, /* lkgs */
+     { { 0x01, 0x00 }, { 2, 2 }, F, W }, /* sgdt */
+     { { 0x01, 0x08 }, { 2, 2 }, F, W }, /* sidt */
+     { { 0x01, 0x10 }, { 2, 2 }, F, R }, /* lgdt */
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -673,6 +673,10 @@ static int blk(
+     return x86_emul_blk((void *)offset, p_data, bytes, eflags, state, ctxt);
+ }
+ 
++#ifdef __x86_64__
++static unsigned long gs_base, gs_base_shadow;
++#endif
++
+ static int read_segment(
+     enum x86_segment seg,
+     struct segment_register *reg,
+@@ -682,8 +686,25 @@ static int read_segment(
+         return X86EMUL_UNHANDLEABLE;
+     memset(reg, 0, sizeof(*reg));
+     reg->p = 1;
++
++    return X86EMUL_OKAY;
++}
++
++#ifdef __x86_64__
++static int write_segment(
++    enum x86_segment seg,
++    const struct segment_register *reg,
++    struct x86_emulate_ctxt *ctxt)
++{
++    if ( !is_x86_user_segment(seg) )
++        return X86EMUL_UNHANDLEABLE;
++
++    if ( seg == x86_seg_gs )
++        gs_base = reg->base;
++
+     return X86EMUL_OKAY;
+ }
++#endif
+ 
+ static int read_msr(
+     unsigned int reg,
+@@ -696,6 +717,20 @@ static int read_msr(
+         *val = ctxt->addr_size > 32 ? EFER_LME | EFER_LMA : 0;
+         return X86EMUL_OKAY;
+ 
++#ifdef __x86_64__
++    case MSR_GS_BASE:
++        if ( ctxt->addr_size < 64 )
++            break;
++        *val = gs_base;
++        return X86EMUL_OKAY;
++
++    case MSR_SHADOW_GS_BASE:
++        if ( ctxt->addr_size < 64 )
++            break;
++        *val = gs_base_shadow;
++        return X86EMUL_OKAY;
++#endif
++
+     case MSR_TSC_AUX:
+ #define TSC_AUX_VALUE 0xCACACACA
+         *val = TSC_AUX_VALUE;
+@@ -705,6 +740,32 @@ static int read_msr(
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
++#ifdef __x86_64__
++static int write_msr(
++    unsigned int reg,
++    uint64_t val,
++    struct x86_emulate_ctxt *ctxt,
++    bool explicit)
++{
++    switch ( reg )
++    {
++    case MSR_GS_BASE:
++        if ( ctxt->addr_size < 64 || !is_canonical_address(val) )
++            break;
++        gs_base = val;
++        return X86EMUL_OKAY;
++
++    case MSR_SHADOW_GS_BASE:
++        if ( ctxt->addr_size < 64 || !is_canonical_address(val) )
++            break;
++        gs_base_shadow = val;
++        return X86EMUL_OKAY;
++    }
++
++    return X86EMUL_UNHANDLEABLE;
++}
++#endif
++
+ #define INVPCID_ADDR 0x12345678
+ #define INVPCID_PCID 0x123
+ 
+@@ -1339,6 +1400,41 @@ int main(int argc, char **argv)
+         printf("%u bytes read - ", bytes_read);
+         goto fail;
+     }
++    printf("okay\n");
++
++    emulops.write_segment = write_segment;
++    emulops.write_msr     = write_msr;
++
++    printf("%-40s", "Testing swapgs...");
++    instr[0] = 0x0f; instr[1] = 0x01; instr[2] = 0xf8;
++    regs.eip = (unsigned long)&instr[0];
++    gs_base = 0xffffeeeecccc8888UL;
++    gs_base_shadow = 0x0000111122224444UL;
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.eip != (unsigned long)&instr[3]) ||
++         (gs_base != 0x0000111122224444UL) ||
++         (gs_base_shadow != 0xffffeeeecccc8888UL) )
++        goto fail;
++    printf("okay\n");
++
++    printf("%-40s", "Testing lkgs 2(%rdx)...");
++    instr[0] = 0xf2; instr[1] = 0x0f; instr[2] = 0x00; instr[3] = 0x72; instr[4] = 0x02;
++    regs.eip = (unsigned long)&instr[0];
++    regs.edx = (unsigned long)res;
++    res[0]   = 0x00004444;
++    res[1]   = 0x8888cccc;
++    i = cpu_policy.extd.nscb; cpu_policy.extd.nscb = true; /* for AMD */
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.eip != (unsigned long)&instr[5]) ||
++         (gs_base != 0x0000111122224444UL) ||
++         gs_base_shadow )
++        goto fail;
++
++    cpu_policy.extd.nscb = i;
++    emulops.write_segment = NULL;
++    emulops.write_msr     = NULL;
+ #endif
+     printf("okay\n");
+ 
+--- a/tools/tests/x86_emulator/x86-emulate.c
++++ b/tools/tests/x86_emulator/x86-emulate.c
+@@ -85,6 +85,7 @@ bool emul_test_init(void)
+     cpu_policy.feat.invpcid = true;
+     cpu_policy.feat.adx = true;
+     cpu_policy.feat.rdpid = true;
++    cpu_policy.feat.lkgs = true;
+     cpu_policy.feat.wrmsrns = true;
+     cpu_policy.extd.clzero = true;
+ 
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -745,8 +745,12 @@ decode_twobyte(struct x86_emulate_state
+         case 0:
+             s->desc |= DstMem | SrcImplicit | Mov;
+             break;
++        case 6:
++            if ( !(s->modrm_reg & 1) && mode_64bit() )
++            {
+         case 2: case 4:
+-            s->desc |= SrcMem16;
++                s->desc |= SrcMem16;
++            }
+             break;
+         }
+         break;
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -609,6 +609,7 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_avx_vnni()    (ctxt->cpuid->feat.avx_vnni)
+ #define vcpu_has_avx512_bf16() (ctxt->cpuid->feat.avx512_bf16)
+ #define vcpu_has_cmpccxadd()   (ctxt->cpuid->feat.cmpccxadd)
++#define vcpu_has_lkgs()        (ctxt->cpuid->feat.lkgs)
+ #define vcpu_has_wrmsrns()     (ctxt->cpuid->feat.wrmsrns)
+ #define vcpu_has_avx_ifma()    (ctxt->cpuid->feat.avx_ifma)
+ #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -2899,8 +2899,37 @@ x86_emulate(
+                 break;
+             }
+             break;
+-        default:
+-            generate_exception_if(true, X86_EXC_UD);
++
++        case 6: /* lkgs */
++            generate_exception_if((modrm_reg & 1) || vex.pfx != vex_f2,
++                                  X86_EXC_UD);
++            generate_exception_if(!mode_64bit() || !mode_ring0(), X86_EXC_UD);
++            vcpu_must_have(lkgs);
++            fail_if(!ops->read_msr || !ops->write_segment || !ops->write_msr);
++            if ( (rc = ops->read_msr(MSR_SHADOW_GS_BASE, &msr_val,
++                                     ctxt)) != X86EMUL_OKAY ||
++                 (rc = ops->read_msr(MSR_GS_BASE, &sreg.base,
++                                         ctxt)) != X86EMUL_OKAY )
++                goto done;
++            dst.orig_val = sreg.base; /* Preserve current GS Base. */
++            if ( (rc = protmode_load_seg(x86_seg_gs, src.val, false, &sreg,
++                                         ctxt, ops)) != X86EMUL_OKAY )
++                goto done;
++            /* Write new base into SHADOW_GS, zero extended from GDT/LDT. */
++            if ( (rc = ops->write_msr(MSR_SHADOW_GS_BASE, sreg.base,
++                                      ctxt, false)) != X86EMUL_OKAY ||
++                 (sreg.base = dst.orig_val, /* Reinstate original GS Base. */
++                  (rc = ops->write_segment(x86_seg_gs, &sreg,
++                                           ctxt)) != X86EMUL_OKAY) )
++            {
++                /*
++                 * In real hardware, access to the registers cannot fail.  It
++                 * is an error in Xen if the writes fail.
++                 */
++                ASSERT_UNREACHABLE();
++                x86_emul_reset_event(ctxt);
++                generate_exception(X86_EXC_DF, 0);
++            }
+             break;
+         }
+         break;
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -282,7 +282,8 @@ def crunch_numbers(state):
+         # superpages, PCID and PKU are only available in 4 level paging.
+         # NO_LMSL indicates the absense of Long Mode Segment Limits, which
+         # have been dropped in hardware.
+-        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD],
++        LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
++             LKGS],
+ 
+         # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
+         # standard 3DNow in the earlier K6 processors.
 
