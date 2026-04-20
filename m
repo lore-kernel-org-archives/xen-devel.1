@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1DEF588C5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 13:26:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1285909.1567088 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D20DF588C6
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 13:38:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1285955.1567096 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEodo-0007MZ-3L; Mon, 20 Apr 2026 13:26:20 +0000
+	id 1wEopZ-0000qK-3J; Mon, 20 Apr 2026 13:38:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1285909.1567088; Mon, 20 Apr 2026 13:26:20 +0000
+Received: by outflank-mailman (output) from mailman id 1285955.1567096; Mon, 20 Apr 2026 13:38:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEodn-0007MS-Ux; Mon, 20 Apr 2026 13:26:19 +0000
-Received: by outflank-mailman (input) for mailman id 1285909;
- Mon, 20 Apr 2026 13:26:18 +0000
+	id 1wEopY-0000qD-Vh; Mon, 20 Apr 2026 13:38:28 +0000
+Received: by outflank-mailman (input) for mailman id 1285955;
+ Mon, 20 Apr 2026 13:38:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1wEodm-0007M4-LO
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 13:26:18 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wEopX-0000q7-L7
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 13:38:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEodm-00B2Mn-29
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 15:26:18 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wEopX-00DYNK-1h
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 15:38:27 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 69e62968-e002-0a2a0a5209dd-0a2a4506b792-36
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 15:26:18 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 69e62977-7371-0a2a45060019-a0658308d85c-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 15:26:16 +0200
-Received: from debian.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id DFFED420DE01;
- Mon, 20 Apr 2026 09:25:29 -0400 (EDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e62c50-5cb7-0a2a0a5109dd-0a2a4502a32e-12
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 15:38:26 +0200
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69e62c52-af86-0a2a45020019-d155dd30dc98-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 15:38:26 +0200
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-43fde5b81a1so2247468f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 06:38:26 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43fe4e59f97sm32582720f8f.37.2026.04.20.06.38.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Apr 2026 06:38:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,132 +53,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 4/4] xen/mm: Recall claims when offlining pages if needed
-Date: Mon, 20 Apr 2026 14:19:44 +0100
-Message-Id: <ebc02ab7b6fe81946ccf5833a44d57fb4a3239a4.1776690702.git.bernhard.kaindl@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <cover.1776690702.git.bernhard.kaindl@citrix.com>
-References: <cover.1776690702.git.bernhard.kaindl@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1776692306; x=1777297106; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=wTvE3zsOSz8T+uOBTZ/XAGfk/EzcI8LfSRnRscNugZU=;
+        b=Y/ywFqJpKPk8svUzm7XNCmXabE5xjYUIB1aEikLpPJ20KHCuoKf2X7cnOMkYjYtl74
+         L39evY+GDB2ezWW+cBPuqHhC8zJFb3l2V0g12Ag9LDW4dvEm2ipceD3BENOPZSBeNO0Z
+         +HoQ0JX4a6YgYTZaMKkOJFRmXKUDDGUMIRd76Q3C8LFXi5+39wjfihJufABZ6kKniVtZ
+         HhzYYOjYNUVcfr56cv0Siy2LQwo+U/2/3zDdWpyXV3CVtk4LZY33PfHrulu87B3g/xkJ
+         RN57pOYXg/yefdlLRLS9jb1/XfCkRCgcca3gbtHm+Weg0g7cBJR1wkNfPGNhB0sX8ovA
+         z+cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776692306; x=1777297106;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wTvE3zsOSz8T+uOBTZ/XAGfk/EzcI8LfSRnRscNugZU=;
+        b=eZht0TukdqzTds7OlspOFmmlSgSa8jV9VfKzrbKZzgmw34hyVWRAWTGmaSQNAn5YwZ
+         uEcVjFd/Q83WmHQtyddDwbHaRsaW9TMk6rFEiVMHDeOAlDoXij5kZrTzHwbbag8iDrnK
+         aLcXC6DxkcIDAPZQsFFk/Ch8dyxzLmAd/gSqfP6gDBQG18HLNxng50mjEaAck+zwdWdW
+         L0ZjARFFwd+qQRlOLpur0U1E5SgcXst+tjpWI9FSIAxC2jyPqBFcO7drIg5MDQBug5SY
+         7FYIjbs5+m9pBqQd61PA7nmyN21Et/ZKGb/APG4FggJ9ihW5HSEqGY4FIDaE6a37JHHz
+         b/aw==
+X-Forwarded-Encrypted: i=1; AFNElJ9N+YtXBPONPA5uNKLTocwAvVXTlMxaY0ixPCzmTizlUnzNz+sDEoP7wXu+D89Hj6oE1kAixQa8T70=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yya196cX3vtcg4rX2Fd2HaYzJk5tvW+0XyWoXmsISRECMnbbgVS
+	5sTYhvlKZy8zNgAchVo8AunrqJwNBsamHXr5BiRFXEAkXTHlT/Mg4T1bgSMLBlXwXA==
+X-Gm-Gg: AeBDieuwp2kKHXmDhWMA3ce3oZyU3WlfzvkF0biFNV+TJuJMJdDa80FCy7ZrNviBqeb
+	Vu3WLbvYigoSRYDtDlsO5jGLJONY0VFypHdLjGZOQu0M4NRutkljCnXSFSL1nMyhU3l1TJx2ohk
+	LXZtVmdgzMkECwf7Ry9s3HZ0QsZ9RyU0TRH/B+WBiUlPtxPzWo2gfSSFhyEWUiFTMH/8qoS+Lvt
+	k7MMhWF1RWwUilo5Zq0YxOxcioKn4gcZKy52mYYXom1Hix/dvB4y+ojE/ixDlvJ1an7zvTwEYPR
+	68bMOxIWsutfk3ySYdjsbMoJRuu75Cfcg3xId4AB1ckutSKK8FyAxAU2Z7+FUv0m+t1hUWYH9l8
+	giyiYtQQ/MsEYj0Hbqom3k4574AvJvoL/prvslQlz5H0NDQVhHTvNZGR3TKz5pUQus02hwCLP93
+	mEUj4VRgw5UoYuqUh906mEsnRW1arHbzIP+7h3kzOpmciyK5YF+EvyJXyzAuCB9gqa7kPBnlgHk
+	Z+t4pSZJZek8fmRqYLW7rb9fw==
+X-Received: by 2002:a05:6000:2312:b0:43e:aa88:f1a6 with SMTP id ffacd0b85a97d-43fe3e12c58mr21097403f8f.45.1776692306181;
+        Mon, 20 Apr 2026 06:38:26 -0700 (PDT)
+Message-ID: <692cc080-ac6b-442d-b694-8e50e482856a@suse.com>
+Date: Mon, 20 Apr 2026 15:38:26 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1776691576-51361D75-B170C3DC/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 3/3] x86/ioreq: Extend ioreq server to support multiple
+ ioreq pages
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+ <20260420093820.825969-4-julian.vetter@vates.tech>
+ <cd9b42bf-5399-471e-9b86-dcf13eaad9e6@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <cd9b42bf-5399-471e-9b86-dcf13eaad9e6@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1776692306-8A4C5161-DC114E90/0/0
 X-purgate-type: clean
-X-purgate-size: 3980
+X-purgate-size: 802
 
-Fix a bug where offlining pages could cause an unsigned underflow
-in total_avail_pages - outstanding_claims, leading to incorrect
-claim behavior.
+On 20.04.2026 14:49, Teddy Astie wrote:
+> Is there anything that would prevent the use of alloc_domheap_pages() to 
+> allocate a configuous set of pages at once; and vmap_contig() to map it 
+> in one go.
+> That also prevents the ioreq pages from being scattered around.
+> 
+> We would lose a few pages by aligning the size into a order, but that 
+> probably better than the alternatives.
+> 
+> That way, we would only have to keep the base gfn (or first page_info) 
+> and size of the allocation, and don't have to use a array of mfn nor 
+> have to reverse the vmap to track it.
 
-This issue arises when outstanding claims are close to the total
-available pages. It occurse when domain_set_outstanding_claims()
-and domain_install_claim_set effectively do this:
+Well, higher-order allocations can easily fail when there's ample memory
+available. Hence why a goal ought to be to avoid such allocations at
+runtime. That's why we (now) have vmalloc() and xvmalloc().
 
- unsigned long avail_pages = total_avail_pages - outstanding_claims;
-
-When this unsigned subtraction underflows, staking claims can succeed
-even when there is insufficient unclaimed memory for the new claim.
-This leads to a state where claims always succeed, regardless of
-actual memory availability.
-
-To prevent this, recall claims when offlining pages if needed to maintain
-equilibrium between `total_avail_pages` and outstanding claims for global
-and for per-NUMA-node claims.
-
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
----
- tools/tests/alloc/test-offlining-claims.c |  4 ---
- xen/common/page_alloc.c                   | 42 +++++++++++++++++++++++
- 2 files changed, 42 insertions(+), 4 deletions(-)
-
-diff --git a/tools/tests/alloc/test-offlining-claims.c b/tools/tests/alloc/test-offlining-claims.c
-index a0580af82ef5..69a3e8f82e6b 100644
---- a/tools/tests/alloc/test-offlining-claims.c
-+++ b/tools/tests/alloc/test-offlining-claims.c
-@@ -23,9 +23,7 @@ static void test_offlining_with_global_claims(int mfn)
-     ASSERT(status & PG_OFFLINE_OFFLINED);
- 
-     CHECK(FREE_PAGES == 2, "Expect 2 free pages after offlining two pages");
--    EXPECTED_TO_FAIL_BEGIN();
-     CHECK(TOTAL_CLAIMS == 2, "Expect 2 claims after offlining two pages");
--    EXPECTED_TO_FAIL_END(1);
- }
- 
- 
-@@ -53,9 +51,7 @@ static void test_offlining_with_node_claims(int mfn)
-     ASSERT(status & PG_OFFLINE_OFFLINED);
- 
-     CHECK(FREE_PAGES == 2, "Expect 2 free pages after offlining two pages");
--    EXPECTED_TO_FAIL_BEGIN();
-     CHECK(TOTAL_CLAIMS == 2, "Expect 2 claims after offlining two pages");
--    EXPECTED_TO_FAIL_END(1);
- }
- 
- int main(int argc, char *argv[])
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 6101bd6be9a9..adedf6fae590 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1575,6 +1575,48 @@ static int reserve_offlined_page(struct page_info *head)
-         count++;
-     }
- 
-+    if ( count )
-+    {
-+        long recall_pages;
-+        struct domain *d;
-+
-+        /* Ensure that claims on the node are in line with its free memory. */
-+        recall_pages = node_outstanding_claims[node] - node_avail_pages[node];
-+        if ( recall_pages > 0 )
-+            /*
-+             * node_avail_pages slipped below node_outstanding_claims.
-+             * We need to recall claimed pages until the amount of claimed
-+             * memory is in line with the amount of available memory again.
-+             */
-+            for_each_domain ( d )
-+            {
-+                if ( d->claims[node] )
-+                {
-+                    recall_pages -= deduct_node_claims(d, node, recall_pages);
-+                    if ( recall_pages <= 0 )
-+                        break;
-+                }
-+            }
-+
-+        /* Ensure that outstanding claims are in line with available memory. */
-+        recall_pages = outstanding_claims - total_avail_pages;
-+        if ( recall_pages > 0 )
-+            /*
-+             * total_avail_pages slipped below outstanding_claims.
-+             * We need to recall claimed pages until the amount of claimed
-+             * memory is in line with the amount of available memory again.
-+             */
-+            for_each_domain ( d )
-+            {
-+                if ( d->global_claims )
-+                {
-+                    recall_pages -= deduct_global_claims(d, recall_pages);
-+                    if ( recall_pages <= 0 )
-+                        break;
-+                }
-+            }
-+    }
-+
-     return count;
- }
- 
--- 
-2.39.5
-
+Jan
 
