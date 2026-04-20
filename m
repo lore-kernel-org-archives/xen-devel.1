@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 198F4F5A8C2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D029F5A8C4
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 20:25:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1286490.1567639 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1286481.1567589 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBQ-0004kJ-Tp; Mon, 20 Apr 2026 20:25:28 +0000
+	id 1wEvBM-0003DE-0J; Mon, 20 Apr 2026 20:25:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1286490.1567639; Mon, 20 Apr 2026 20:25:28 +0000
+Received: by outflank-mailman (output) from mailman id 1286481.1567589; Mon, 20 Apr 2026 20:25:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEvBQ-0004hL-83; Mon, 20 Apr 2026 20:25:28 +0000
-Received: by outflank-mailman (input) for mailman id 1286490;
- Mon, 20 Apr 2026 19:50:59 +0000
+	id 1wEvBL-000395-Iv; Mon, 20 Apr 2026 20:25:23 +0000
+Received: by outflank-mailman (input) for mailman id 1286481;
+ Mon, 20 Apr 2026 19:50:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue3-0006Jl-AX
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:59 +0000
+ (envelope-from <Rose.Spangler@purelymail.com>) id 1wEue2-0006Io-1u
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 19:50:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEue2-00C1UM-Np
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:58 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wEue1-009YnP-El
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 21:50:57 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e6835b-e002-0a2a0a5209dd-0a2a45099984-32
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:58 +0200
+ id 69e68397-bab6-0a2a0a5309dd-0a2a450c91e4-10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
 Received: from [34.202.193.197] (helo=sendmail.purelymail.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Rose.Spangler@purelymail.com>)
- id 69e683a1-2497-0a2a45090019-22cac1c59ac8-3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:58 +0200
+ id 69e683a0-62f1-0a2a450c0019-22cac1c58764-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 21:50:57 +0200
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -306608446; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 20 Apr 2026 19:50:54 +0000 (UTC)
+ Mon, 20 Apr 2026 19:50:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,22 +49,25 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=purelymail1 header.d=purelymail.com header.i="@purelymail.com" header.h="Feedback-ID:Received:From:To:Subject:Date"
-DKIM-Signature: a=rsa-sha256; b=K8cAlPAo34D/KbfIAwlhMVleLBpBa7d3aFRxOMyHsW+Ig5Gt7WdPk1bTdYrOA48ZusRfG9g5Pqe9Cw5rCefSUaFKusogC6b7fvdnFQhkTxV2nk5jlXSd2O6G33vUBx2waQk/nvWrUhkTq2/lpgHT6Sh5vvaHUheA474xC0VKdse5tMKfOWQrVJOW3WOxCzmD3rJ304Hj53FG2cfC5wQCsu6/WiYBwtE7kMn+pGgcW0TQ0h23QI/SLqFk7LPIttxLw51f+GoVF9onqXxT0vXy+4j0TGfDzeoSUQ+06sqKdUMkMaCqhu7Dj1QPJwIZ7jfNGPErlOnvHVcceu4eJX8rag==; s=purelymail1; d=purelymail.com; v=1; bh=5qX8VqlfLuFzhxCaItkjpTl/pD3HY4nQgg/454o6cjs=; h=Feedback-ID:Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=hLkAmez4qADkQgPiLxVKCyXQHyZXHCXUDQuAtPsEcn5oyyyULtkq23OwHCcGeenyubTn+eD+u8YaFbQcZzR2Op52LtyFZVSLGazBkvPj/t4WhHJ4A7j25n82nN5uAT2hRG56/sZMvRJmjIgFkXZKt7iZ89fQhiLbzI4lW0MU2aev83BQ4cyZ5vvKxXKJm+S41L3wNlj6lVB0pPvMXp23xjH52MXcQQky5zIjIeDGI1QZecNLywtfbkcWe4FjDhyte6PSNIsTftOQONAdu1T9E9V6RB2oS1vO5tGNK6GIQMmvQ1Ine5iS/K6LiIKmBx4WS8zxewRRE09TbK2GuJTW/Q==; s=purelymail1; d=purelymail.com; v=1; bh=v+7IFQCHZ3Oct1VjiErGm8hGsBkg24/rQNxOY8ewkgI=; h=Feedback-ID:Received:From:To:Subject:Date;
 Feedback-ID: 685805:22403:null:purelymail
 X-Pm-Original-To: xen-devel@lists.xenproject.org
 From: Rose.Spangler@purelymail.com
 To: xen-devel@lists.xenproject.org
 Cc: Rose Spangler <Rose.Spangler@elektrobit.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Sergej Proskurin <proskurin@sec.in.tum.de>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [RFC PATCH v6 17/43] arm/p2m: Move hostp2m init/teardown to individual functions
-Date: Mon, 20 Apr 2026 15:50:16 -0400
-Message-Id: <20260420195042.207624-18-Rose.Spangler@purelymail.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Sergej Proskurin <proskurin@sec.in.tum.de>
+Subject: [RFC PATCH v6 10/43] altp2m: Add ARM support to do_altp2m_op
+Date: Mon, 20 Apr 2026 15:50:09 -0400
+Message-Id: <20260420195042.207624-11-Rose.Spangler@purelymail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
 References: <20260420195042.207624-1-Rose.Spangler@purelymail.com>
@@ -72,302 +75,151 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
 Content-Type: text/plain; charset=UTF-8
-X-purgate-ID: tlsNG-bad1c0/1776714658-486A8A53-5272C0EC/0/0
+X-purgate-ID: tlsNG-d25034/1776714657-6D161CF5-C07D9204/0/0
 X-purgate-type: clean
-X-purgate-size: 10277
+X-purgate-size: 4553
 
 From: Rose Spangler <Rose.Spangler@elektrobit.com>
 
-This commit pulls out generic init/teardown functionality out of "p2m_init"
-and "p2m_teardown" into "p2m_init_one", "p2m_teardown_one", "p2m_free_one",
-and "p2m_flush_table" functions. This allows our future implementation to
-reuse existing code for the initialization/teardown of altp2m views.
+This commit makes the minimum required changes necessary for do_altp2m_op
+to compile on ARM. All altp2m commands in the switch statement are gated by
+CONFIG_X86, with a default case of returning EOPNOTSUPP. This allows future
+commits to move the #ifdef CONFIG_X86 down as support for ARM is added.
 
-On failure, the p2m_init_one function returns a null pointer. This means
-p2m_init_one doesn't return an error code, which prevents it from
-propagating the exact error from p2m_initialise (specifically, ENOMEM if
-allocation fails and EBUSY if the VMID pool is exhausted). However,
-returning a p2m_domain pointer simplifies usage for callers of
-p2m_init_one, as they can receive an allocated and initialized p2m_domain
-without needing to handle allocation separately. Therefore, the main
-p2m_init function will now return ENOMEM instead of EBUSY when the VMID
-pool is exhausted.
+Additionally, a call to do_altp2m_op is added in the ARM HVMOP code.
 
-This is commit 6/12 of the altp2m_init/altp2m_teardown routines phase.
+This is commit 2/2 of the common do_altp2m_op phase.
 
 Signed-off-by: Rose Spangler <Rose.Spangler@elektrobit.com>
 Signed-off-by: Sergej Proskurin <proskurin@sec.in.tum.de>
 ---
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Julien Grall <julien.grall@arm.com>
+v6: Replaced patches 2 and 3 from v4/v5 patch set with this patch.
+
+    Made HVM_PARAM_ALTP2M read-only, following the change to the x86
+    implementation in commit 0291089f6ea8. The DOMCTL to enable altp2m on
+    ARM is implemented in a later commit in this patch series.
 ---
-v2: Added the function p2m_flush_table to the previous version.
+ xen/arch/arm/hvm.c  |  9 +++++++++
+ xen/common/altp2m.c | 29 ++++++++++++++---------------
+ 2 files changed, 23 insertions(+), 15 deletions(-)
 
-v3: Removed struct vttbr.
-
-    Moved define INVALID_VTTBR to p2m.h.
-
-    Exported function prototypes of "p2m_flush_table", "p2m_init_one",
-    and "p2m_teardown_one" in p2m.h.
-
-    Extended the function "p2m_flush_table" by additionally resetting
-    the fields lowest_mapped_gfn and max_mapped_gfn.
-
-    Added a "p2m_flush_tlb" call in "p2m_flush_table". On altp2m reset
-    in function "altp2m_reset", it is important to flush the TLBs after
-    clearing the root table pages and before clearing the intermediate
-    altp2m page tables to prevent illegal access to stalled TLB entries
-    on currently active VCPUs.
-
-    Added a check checking whether p2m->root is NULL in p2m_flush_table.
-
-    Renamed the function "p2m_free_one" to "p2m_teardown_one".
-
-    Removed resetting p2m->vttbr in "p2m_teardown_one", as it the p2m
-    will be destroyed afterwards.
-
-    Moved call to "p2m_alloc_table" back to "p2m_init_one".
-
-    Moved the introduction of the type p2m_class_t out of this patch.
-
-    Moved the backpointer to the struct domain out of the struct
-    p2m_domain.
-
-v4: Replaced the former use of clear_and_clean_page in p2m_flush_table
-    by a routine that invalidates every p2m entry atomically. This
-    avoids inconsistencies on CPUs that continue to use the views that
-    are to be flushed (e.g., see altp2m_reset).
-
-    Removed unnecessary initializations in the functions "p2m_init_one"
-    and "p2m_teardown_one".
-
-    Removed the define INVALID_VTTBR as it is not used any more.
-
-    Cosmetic fixes.
-
-v6: Reworked to accommodate the hostp2m being allocated separately from
-    arch_domain.
-
-    Split p2m_teardown_one into p2m_teardown_one and p2m_free_one, with
-    both having the same semantics as their x86 counterparts.
-
-    The previous version of this patch also added code to p2m_flush_table.
-    This has been split out into a separate commit to minimize the number
-    of actual changes in this commit.
-
-    Updated to account for the introduction of p2m_final_teardown.  The
-    code which previously was used to reclaim resources from the hostp2m
-    during p2m_final_teardown was extracted into p2m_free_one. Now,
-    p2m_final_teardown will call p2m_free_one on the hostp2m instead. The
-    check for whether the p2m was actually initialized was moved into
-    p2m_free_one. This means there is a slight behavior change where
-    p2m_teardown_allocation will always be called, even if the p2m_domain
-    was never initialized. I'm not sure if this is really a big deal (it
-    does require the lock to be obtained, but this shouldn't be an issue at
-    final teardown?), but if it is then I can duplicate the check from
-    p2m_free_one to the top of p2m_final_teardown, which would replicate
-    the previous behavior.
-
-    For the sake of making the p2m_init_one function simple to use (and
-    match the x86 function prototype), it returns a null pointer on error
-    rather than an error code. While on x86 an error from p2m_init_one is
-    always due to an ENOMEM return code (from xzalloc, zalloc_cpumask_var),
-    on ARM p2m_initialise (called by p2m_init_one) can actually return
-    EBUSY if the VMID pool is exhausted. Therefore, in this error case the
-    null pointer return value of p2m_init_one obscures the true error code
-    (EBUSY). Callers of p2m_init_one always return ENOMEM when p2m_init_one
-    returns a null pointer, so this error will be propagated up as ENOMEM
-    rather than EBUSY. The alternative to this would be to have callers
-    pass a null **p2m_domain to p2m_init_one while still returning an
-    integer return code. In order to preserve a common altp2m_init routine,
-    this change would also have to be made on x86 (where there wouldn't be
-    any real benefit, the return code is truly only ever ENOMEM).
-    Therefore, it seems like an acceptable tradeoff to me to obscure the
-    error in this case, but if other folks think we should handle this
-    differently than I can revisit this.
-
-    The p2m_teardown_allocation call and p2m_init_one return code changes
-    mentioned above should be the only actual behavior changes in this
-    patch, otherwise it should be just code movement.
----
- xen/arch/arm/include/asm/p2m.h | 12 ++++++
- xen/arch/arm/mmu/p2m.c         | 77 +++++++++++++++++++++++-----------
- 2 files changed, 65 insertions(+), 24 deletions(-)
-
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.=
-h
-index 23df91ea13e9..5c6dfe4a9789 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -216,6 +216,18 @@ int p2m_init(struct domain *d);
- int p2m_teardown(struct domain *d);
- void p2m_final_teardown(struct domain *d);
+diff --git a/xen/arch/arm/hvm.c b/xen/arch/arm/hvm.c
+index 86e49bf47403..7c778795a280 100644
+--- a/xen/arch/arm/hvm.c
++++ b/xen/arch/arm/hvm.c
+@@ -5,6 +5,7 @@
+  * Arch-specific hardware virtual machine abstractions.
+  */
 =20
-+/* Flushes the page table held by the p2m. */
-+int p2m_flush_table(struct p2m_domain *p2m);
++#include <xen/altp2m.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/errno.h>
+@@ -23,6 +24,10 @@ static int hvm_allow_set_param(const struct domain *d, u=
+nsigned int param)
+ {
+     switch ( param )
+     {
++        /* The following parameters are read-only. */
++    case HVM_PARAM_ALTP2M:
++        return -EEXIST;
 +
-+/* Initialize the p2m structure. */
-+struct p2m_domain *p2m_init_one(struct domain *d);
+         /*
+          * The following parameters are intended for toolstack usage only.
+          * They may not be set by the domain.
+@@ -123,6 +128,10 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARA=
+M(void) arg)
+             rc =3D -EINVAL;
+         break;
+=20
++    case HVMOP_altp2m:
++        rc =3D do_altp2m_op(arg);
++        break;
 +
-+/* Release resources held by the p2m structure. */
-+int p2m_teardown_one(struct p2m_domain *p2m);
-+
-+/* Free the p2m structure allocation. */
-+void p2m_free_one(struct p2m_domain *p2m);
+     default:
+     {
+         gdprintk(XENLOG_DEBUG, "HVMOP op=3D%lu: not implemented\n", op);
+diff --git a/xen/common/altp2m.c b/xen/common/altp2m.c
+index a43b3a3e34b3..6481fae1ed12 100644
+--- a/xen/common/altp2m.c
++++ b/xen/common/altp2m.c
+@@ -9,8 +9,10 @@
+=20
+ #include <xsm/xsm.h>
+=20
+-#ifdef CONFIG_X86
++#if defined(CONFIG_X86) && defined(CONFIG_HVM)
+ #include <asm/hvm/nestedhvm.h>
++#endif
 +
  /*
-  * Remove mapping refcount on each mapping page in the p2m
+  * altp2m operations are envisioned as being used in several different
+  * modes:
+@@ -18,13 +20,13 @@
+  * - external: All control and decisions are made by an external agent
+  *   running domain 0.
   *
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index 1009f10e5db4..1d598c66450b 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -1444,14 +1444,10 @@ static int p2m_alloc_table(struct domain *d)
-     return 0;
- }
+- * - internal: altp2m operations are used exclusively by an in-guest
+- *   agent to protect itself from the guest kernel and in-guest
+- *   attackers.
++ * - internal (x86 only): altp2m operations are used exclusively by an
++ *   in-guest agent to protect itself from the guest kernel and
++ *   in-guest attackers.
+  *
+- * - coordinated: An in-guest agent handles #VE and VMFUNCs locally,
+- *   but makes requests of an agent running outside the domain for
+- *   bigger changes (such as modifying altp2m entires).
++ * - coordinated (x86 only): An in-guest agent handles #VE and VMFUNCs
++ *   locally, but makes requests of an agent running outside the
++ *   domain for bigger changes (such as modifying altp2m entires).
+  *
+  * This corresponds to the three values for HVM_PARAM_ALTP2M
+  * (external, mixed, limited). All three models have advantages and
+@@ -97,7 +99,7 @@ int do_altp2m_op(
 =20
--int p2m_teardown(struct domain *d)
-+int p2m_flush_table(struct p2m_domain *p2m)
- {
--    struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
-     unsigned long count =3D 0;
-     struct page_info *pg;
--    int rc =3D 0;
--
--    p2m_write_lock(p2m);
-=20
-     while ( (pg =3D page_list_remove_head(&p2m->pages)) )
+     if ( (a.cmd !=3D HVMOP_altp2m_get_domain_state) &&
+          (a.cmd !=3D HVMOP_altp2m_set_domain_state) &&
+-         !d->altp2m_active )
++         !altp2m_active(d) )
      {
-@@ -1460,23 +1456,34 @@ int p2m_teardown(struct domain *d)
-         /* Arbitrarily preempt every 512 iterations */
-         if ( !(count % 512) && hypercall_preempt_check() )
-         {
--            rc =3D -ERESTART;
--            break;
-+            return -ERESTART;
-         }
-     }
+         rc =3D -EOPNOTSUPP;
+         goto out;
+@@ -122,6 +124,7 @@ int do_altp2m_op(
 =20
-+    return 0;
-+}
-+
-+int p2m_teardown_one(struct p2m_domain *p2m)
-+{
-+    int rc;
-+
-+    p2m_write_lock(p2m);
-+    rc =3D p2m_flush_table(p2m);
-     p2m_write_unlock(p2m);
+     switch ( a.cmd )
+     {
++#ifdef CONFIG_X86
+     case HVMOP_altp2m_get_domain_state:
+         a.u.domain_state.state =3D altp2m_active(d);
+         rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
+@@ -394,9 +397,12 @@ int do_altp2m_op(
+             rc =3D altp2m_set_view_visibility(d, idx, a.u.set_visibility.v=
+isible);
+         break;
+     }
++#endif /* CONFIG_X86 */
+=20
+     default:
++#ifdef CONFIG_X86
+         ASSERT_UNREACHABLE();
++#endif
+         rc =3D -EOPNOTSUPP;
+         break;
+     }
+@@ -406,13 +412,6 @@ int do_altp2m_op(
 =20
      return rc;
  }
-=20
--void p2m_final_teardown(struct domain *d)
-+int p2m_teardown(struct domain *d)
- {
-     struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
-=20
--    /* p2m not actually initialized */
--    if ( !p2m->domain )
--        goto free_p2m;
-+    return p2m_teardown_one(p2m);
-+}
-+
-+void p2m_final_teardown(struct domain *d)
-+{
-+    struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
-=20
-     /*
-      * No need to call relinquish_p2m_mapping() here because
-@@ -1484,18 +1491,27 @@ void p2m_final_teardown(struct domain *d)
-      * where relinquish_p2m_mapping() has been called.
-      */
-=20
--    ASSERT(page_list_empty(&p2m->pages));
--
-     while ( p2m_teardown_allocation(d) =3D=3D -ERESTART )
-         continue; /* No preemption support here */
-     ASSERT(page_list_empty(&d->arch.paging.p2m_freelist));
-=20
-+    p2m_free_one(p2m);
-+}
-+
-+void p2m_free_one(struct p2m_domain *p2m)
-+{
-+    /* p2m not actually initialized */
-+    if ( !p2m->domain )
-+        goto free_p2m;
-+
-+    ASSERT(page_list_empty(&p2m->pages));
-+
-     if ( p2m->root )
-         free_domheap_pages(p2m->root, P2M_ROOT_ORDER);
-=20
-     p2m->root =3D NULL;
-=20
--    p2m_free_vmid(d);
-+    p2m_free_vmid(p2m->domain);
-=20
-     radix_tree_destroy(&p2m->mem_access_settings, NULL);
-=20
-@@ -1511,9 +1527,7 @@ static int p2m_initialise(struct domain *d, struct p2=
-m_domain *p2m)
-     unsigned int cpu;
-=20
-     rwlock_init(&p2m->lock);
--    spin_lock_init(&d->arch.paging.lock);
-     INIT_PAGE_LIST_HEAD(&p2m->pages);
--    INIT_PAGE_LIST_HEAD(&d->arch.paging.p2m_freelist);
-=20
-     p2m->vmid =3D INVALID_VMID;
-     p2m->max_mapped_gfn =3D _gfn(0);
-@@ -1559,22 +1573,37 @@ static int p2m_initialise(struct domain *d, struct =
-p2m_domain *p2m)
-     return 0;
- }
-=20
--int p2m_init(struct domain *d)
-+struct p2m_domain *p2m_init_one(struct domain *d)
- {
-     struct p2m_domain *p2m =3D xzalloc(struct p2m_domain);
--    int rc;
-+
-+    if ( !p2m )
-+        return NULL;
-+
-+    if ( !p2m_initialise(d, p2m) )
-+        return p2m;
-+
-+    xfree(p2m);
-+    return NULL;
-+}
-+
-+static int p2m_init_hostp2m(struct domain *d)
-+{
-+    struct p2m_domain *p2m =3D p2m_init_one(d);
-=20
-     if ( !p2m )
-         return -ENOMEM;
-=20
--    rc =3D p2m_initialise(d, p2m);
-+    d->arch.p2m =3D p2m;
-+    return 0;
-+}
-=20
--    if ( !rc )
--        d->arch.p2m =3D p2m;
--    else
--        xfree(p2m);
-+int p2m_init(struct domain *d)
-+{
-+    spin_lock_init(&d->arch.paging.lock);
-+    INIT_PAGE_LIST_HEAD(&d->arch.paging.p2m_freelist);
-=20
--    return rc;
-+    return p2m_init_hostp2m(d);
- }
+-#else
+-int do_altp2m_op(
+-    XEN_GUEST_HANDLE_PARAM(void) arg)
+-{
+-    return -EOPNOTSUPP;
+-}
+-#endif
 =20
  /*
+  * Local variables:
 --=20
 2.34.1
 
