@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0534F557E6
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 08:50:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1285539.1566541 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E7FF557F8
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2026 09:38:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1285561.1566578 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEkK9-0003VN-1U; Mon, 20 Apr 2026 08:49:45 +0000
+	id 1wEl5S-0001re-71; Mon, 20 Apr 2026 09:38:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1285539.1566541; Mon, 20 Apr 2026 08:49:45 +0000
+Received: by outflank-mailman (output) from mailman id 1285561.1566578; Mon, 20 Apr 2026 09:38:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wEkK8-0003VG-V7; Mon, 20 Apr 2026 08:49:44 +0000
-Received: by outflank-mailman (input) for mailman id 1285539;
- Mon, 20 Apr 2026 08:49:43 +0000
+	id 1wEl5S-0001rU-3N; Mon, 20 Apr 2026 09:38:38 +0000
+Received: by outflank-mailman (input) for mailman id 1285561;
+ Mon, 20 Apr 2026 09:38:36 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Christian.Koenig@amd.com>) id 1wEkK7-0003VA-Cj
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 08:49:43 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <bounce-md_30504962.69e5f418.v1-638eba881eec477b9b9f3a94f3b2a7b1@bounce.vates.tech>)
+ id 1wEl5Q-0001iT-OQ
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 09:38:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wEkK5-00H5QS-9t
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 10:49:41 +0200
+ id 1wEl5O-007TdJ-JO
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2026 11:38:36 +0200
 Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Christian.Koenig@amd.com>)
- id 69e5e896-e002-0a2a0a5209dd-0a2a450584b2-44
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 10:49:40 +0200
-Received: from [52.101.43.20]
- (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <bounce-md_30504962.69e5f418.v1-638eba881eec477b9b9f3a94f3b2a7b1@bounce.vates.tech>)
+ id 69e5f419-2eae-0a2a0a5409dd-0a2a4505e70c-30
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 11:38:36 +0200
+Received: from [198.2.137.11] (helo=mail137-11.atl71.mandrillapp.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Christian.Koenig@amd.com>)
- id 69e5e8a2-aaa8-0a2a45050019-34652b14676e-4
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 10:49:40 +0200
-Received: from SJ0PR12MB5673.namprd12.prod.outlook.com (2603:10b6:a03:42b::13)
- by CH1PPF6D0742E7B.namprd12.prod.outlook.com
- (2603:10b6:61f:fc00::613) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.8; Mon, 20 Apr
- 2026 08:49:34 +0000
-Received: from SJ0PR12MB5673.namprd12.prod.outlook.com
- ([fe80::c3e5:48f8:beb6:ea68]) by SJ0PR12MB5673.namprd12.prod.outlook.com
- ([fe80::c3e5:48f8:beb6:ea68%5]) with mapi id 15.20.9846.014; Mon, 20 Apr 2026
- 08:49:34 +0000
+ (envelope-from
+ <bounce-md_30504962.69e5f418.v1-638eba881eec477b9b9f3a94f3b2a7b1@bounce.vates.tech>)
+ id 69e5f419-aaa8-0a2a45050019-c602890be989-3
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 11:38:35 +0200
+Received: from mta004-md-usw2.delv.a.intuit.com (localhost [127.0.0.1])
+ by mail137-11.atl71.mandrillapp.com (Mailchimp) with ESMTP id
+ 4fzgQw0tbyzDRT7yr
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2026 09:38:32 +0000 (UTC)
+Received: from [37.26.189.201] by mandrillapp.com id
+ 638eba881eec477b9b9f3a94f3b2a7b1; Mon, 20 Apr 2026 09:38:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,181 +53,312 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Jh46c+snIxoX4nH777OfacfINYs2xznCoEmG0piKlnrcFvUC/GIjEdAMvBiZ0I3IfqbA2rdmCozR+gDtG7nwtU7xoMN4tvC6UQViNa2l8HsuTh58S4RRXpZ6PgtL2s5+h322+9y967+9lfGyquJg7i/gHcJrHZbaZMSVkur6ipsWwOZ08ltPP6apEGXwHY2EYrZ6nwwZsJCuI5DLggjUTqskh+huBgjvjDD53sB9dOazGE4s3fyFWLGNbrlSBeeUUC38WXp0sHrZCSXLSe4l27OFeKklmiO9PJkpUPYoGPh28GShXP14UG20TEBKGaJvptfqbilbGprlP5lrYC5M9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zsDrcaNrUkCXNMufmLhSGq4a1iTV4V5vsYmPV2fsJR8=;
- b=oGLQD/7sBNo4UBN0tTrM1QHAcUetvekOTmbcKStsATy9XwmXA0sXCgD5ayE4Apom4xFOImwIXLeUR8bzDqFyMcjvLJnKVLBOvyaBCbMaDA1kHiHsCDgODFYzre16AOWbAqMD+sSVBlpZOZcts3UZn0+QQ53btO7VGhZ1OjXWvdfvIg7uYAMV+FLmQwyXbbJ9+OGnzZTDFULF8ofCs6WDickLVmvUth+8B31NOK0UKmyiVFJAP8Fm5Na6tqi8sgwc2YF85w6Nx1l/wN9PO2ki0t0wTnUhFS9Oqeh8AkeMG9YQuSYt4n4wyn0yfH1mIQ20g5RdJbW4Rv/8Voocxqbdpg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zsDrcaNrUkCXNMufmLhSGq4a1iTV4V5vsYmPV2fsJR8=;
- b=t4FdsTlWK6acs+uLIEv84DvBMpmRRPGGYpIyb2q7tIm2VPWzcr/QbgLbbNEwjFfbi1DdI95N4vvc07OKXvEvZRxnOXBcxq4TekxDNjhZsm2cS0vvc81VULsvB9KKTD7KCaSbMQ+2Qa+YyINI4LGu+k2dMM0fCKOavvM9pr4o3/g=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <8fe8b78b-5294-4319-af92-a4fb00527417@amd.com>
-Date: Mon, 20 Apr 2026 10:49:19 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: Pinned, non-revocable mappings of VRAM: will bad things happen?
-To: Demi Marie Obenour <demiobenour@gmail.com>,
- dri-devel@lists.freedesktop.org,
- Xen developer discussion <xen-devel@lists.xenproject.org>,
- linux-media@vger.kernel.org
-Cc: Val Packett <val@invisiblethingslab.com>,
- Suwit Semal <sumit.semwal@linaro.org>
-References: <a06133f7-3093-4733-9786-bc46c1453e06@gmail.com>
- <b8d04414-18b5-40f7-9ea2-88b30ff5bea0@amd.com>
- <c7865b27-6bf1-4df1-9520-c9ef6b3ef368@gmail.com>
- <4751cf03-d3c1-4d5d-af8e-39ad7c8ffb84@amd.com>
- <7472bfcf-8c22-4ac7-b903-a883cdb8f1c6@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <7472bfcf-8c22-4ac7-b903-a883cdb8f1c6@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MN0PR02CA0016.namprd02.prod.outlook.com
- (2603:10b6:208:530::14) To SJ0PR12MB5673.namprd12.prod.outlook.com
- (2603:10b6:a03:42b::13)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mte1 header.d=mandrillapp.com header.i="@mandrillapp.com" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=mte1 header.d=vates.tech header.i="julian.vetter@vates.tech" header.h="From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:Date:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+	s=mte1; t=1776677912; x=1776947912;
+	bh=DH2Rgk3UV3w32Q7m6Ik6auoISiJxaMmJr2fSdyVJpEU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=Ed2ftxkXhN64xYbsJd+PwScEOEw2zeuk/dOLhV7fe1ZNmwIVnT9EF+R4dcdGAXDX7
+	 fzeogMH7hxYSJGYyOs8H6U4QeGTtdDw9F22j4Dk3XegB/i1tFi9BOCfewy7EwTix9i
+	 qATeicBQTUhvsYyQBU5QbmJ9GcaWlByeDk2Be2bsIKvSAMFo84bkfoqZFETvKf9N4n
+	 bxcwhXNb287bNQUCUDg/BCCNDiCqgZPPTR3YeJfHcMjwCfqsw/3Fd493TheEJ24FID
+	 PiLHDWJHX4m19knP6WlyOioLbYWLibRVajQP3tICxyZ3qbB7Hex7L9w87SbZPS8iMZ
+	 cJ6MoQMPk0kDQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+	t=1776677912; x=1776938412; i=julian.vetter@vates.tech;
+	bh=DH2Rgk3UV3w32Q7m6Ik6auoISiJxaMmJr2fSdyVJpEU=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=VpAhtjFnsEXe2d0hFm7nzdC098AexlXl2cXGfDV9piBTNpb+Ybb9ZE7wITOkILo4x
+	 qfrGsd6jpVbF8U8HwJ8a58xM6nHSdFHyyilCtL5VRmvQHQ+w7zTSnDDYtbEtoCLfMT
+	 Lf6o0cWN1iezd5M7PckORfhl1WS2zAwq/kB2QNY9asKQDbw2yQvcbmxilzu63HualS
+	 juy9nRU0q6sUcy60/Y2DmnvXguKEg7rg34P7ndYH7BkTscYbCrr2RoXIGMtzdo7QxC
+	 cOuf5aY0+zvrjHTdgg9uoHixcUgplnKmRpjhvpdH4N2ztgPr+wXPn3ftDI00wpEKtK
+	 cgxXsrS+Zdgxg==
+From: "Julian Vetter" <julian.vetter@vates.tech>
+Subject: =?utf-8?Q?[PATCH=20v6=203/3]=20x86/ioreq:=20Extend=20ioreq=20server=20to=20support=20multiple=20ioreq=20pages?=
+X-Mailer: git-send-email 2.53.0
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1776677911153
+To: xen-devel@lists.xenproject.org
+Cc: "Jan Beulich" <jbeulich@suse.com>, "Andrew Cooper" <andrew.cooper3@citrix.com>, "=?utf-8?Q?Roger=20Pau=20Monn=C3=A9?=" <roger.pau@citrix.com>, "Anthony PERARD" <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, "Julian Vetter" <julian.vetter@vates.tech>
+Message-Id: <20260420093820.825969-4-julian.vetter@vates.tech>
+In-Reply-To: <20260420093820.825969-1-julian.vetter@vates.tech>
+References: <20260420093820.825969-1-julian.vetter@vates.tech>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,=20including=20all=20headers,=20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.638eba881eec477b9b9f3a94f3b2a7b1?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20260420:md
+Date: Mon, 20 Apr 2026 09:38:32 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR12MB5673:EE_|CH1PPF6D0742E7B:EE_
-X-MS-Office365-Filtering-Correlation-Id: 98689cc9-59bd-445d-e193-08de9eb9be74
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	+XAwL9tin4y75mfpeY78I1nRzW8iBdYspBxw9Pxhl8JrFjDKFS13+gUHoMi8CVYheJxcu53js2XRK0sOlhRywmo7TGlEOs7J8QGlMz26a1djMb4yhD8IF0fe6fipq7edwi0E0aYHzdJF4JYuvB0Y13kY/WREKNXX9kckXNrskc1wAlEyLthOwVwVzkH6bIeyv+H3EbCesHyovZEGiWsz2WBn0rVEzZaiqneiVEpfVKHcfxRe5vkYg+JsDriwypqkshYJysMr/M82x0KDlORYc701byk/wNYESFsEr4jFybig4UH7NunZ+4Kkvs+0TUjhRlxDt/Ek05ad1eMY+aPtdNCQa9rVf6Truq8E0PrYA2aFim4XIAHO3YVdv2M6SQ8vz0bdvb3Ulq4lUSr2J914VzDdTbLc/6tR+8PHiRx/wAxmP9F0nlzNJcgeWBdv+mm/tL/OZ4CgSbhdB2+aTCjWy5xm6YUzeYkN4i7c9ySqE1uHZgENDN/rjhLc6QUeIi4r02u5oRDyZWxpMw1PPo3zaF19kau0oKDkvB5k+c73+4dClsb628YMU2EdQ65ZTOLUgR/Fe9ZHsYrcCSor2OwabGvmkP8uLgeFyWbeVCDEok+xGydMQr2SKgADo7Ef95iH26DArplVb5cUMa+qf1uJy8m8IFwQ7AdInyj/Npj912LiktYqKNmKpUXNGlvo8p+c31GADPkU0G9t7uZs/58D9eClrZswlBi3hlR7f9ydv3s=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR12MB5673.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bWlvSFpLUmNpZGhWb0lZSWg2ZEN5VXBITDZUa3hTRTE4WllTdzJWTFM1NVRY?=
- =?utf-8?B?cmE3UXRRNDFpdFBUbUY1QkE3QUJUWmxaSnJDaU9HaEVMYmN5MTQ5YnFTK1VL?=
- =?utf-8?B?RnNITlFFdEU2SkNsbG5FUHA3Ukd1eDVHdDJDN2NNTU5Wa3B2RWp3NE9jcVND?=
- =?utf-8?B?RElCcnpGNkZ6U3ZnZkFXR3pKaVcweERTbEFQUzRNMjN3NElUNU16YVdPbWdP?=
- =?utf-8?B?and6K1FjbmdRdGFtemk4L2dCRkl6OGxaUWl2SGdTcVBySC9nSVJCTSt6c0JD?=
- =?utf-8?B?UEpOeTRGbVFoVU1WSmxpeDVET1RGQ2FpR2xjK2g3SlFDNWJZSjZadGJ1ZWZt?=
- =?utf-8?B?M3htM3NmQk9mQWlYemtJVW1zNVpiVWVqYzVVU0VpRXVlQjZpU1NkMEgzM2Zi?=
- =?utf-8?B?YUxJK2p4NWRzUzRFMVVMMDAxamlHSmtWdXF3NmZJV3dLZmhjMGYrU0F3Yytp?=
- =?utf-8?B?REFISmMrazBIbUFHSkJ3QkV0UVd2a3IxR28wNFFmUXJHODRRV2JTMWxWNjhS?=
- =?utf-8?B?c2dTbCtMZXNqcjV0VzhzbWNKMVNSbFB1WjI5Z3orbjROTVFLTTZVNVUxMUo5?=
- =?utf-8?B?OFAyUjUzdEI5ZjBRUllDTllYWkxZSC9ud3FCRXptT0FuR0o1aWtOa1ZlbFF0?=
- =?utf-8?B?WTV4VDRheE03QkNESWRRWHBOS2pQQTN0emlxYUdxL1VHTy9EVmh6bGpKcmFW?=
- =?utf-8?B?VTNYYTFMMWo0bG1LMngvMi9GdU53UW5WVWNHSjZVUWowR2M1MU5saVRwSlBF?=
- =?utf-8?B?ekxkQU0wOXBaekNNdm1EaytZNW1qWUx1UWl3V2NRcTFEUGpyQXk5dXA0dmdE?=
- =?utf-8?B?cE5lMldNV0VQUmJ2S2h4dmZDdnA1QmdtL2h1anRUSGxnZFBKZEdvdHE0OEt0?=
- =?utf-8?B?cHBPZUorVkUyamsvcFgzWUROZXRzMVJYNE8zYWM2a3d2NzhxR0I1RGo0WUN5?=
- =?utf-8?B?Q1RNSnl1emxLOUtCcktNTktnSWRwOWxwL3ZTZjBXMkZwNkovSjM4SDRKZGdn?=
- =?utf-8?B?bm05dm1ueTAvSklKSEd5QUE4WTArdis4M1JhcXpZNXhHSTF2TVdHcjBTQzYz?=
- =?utf-8?B?ZnJDd0xDZDJMVWdkcWpEaG81ekdEbk1La0xJTDhCYStEZmVwamtLVEZyZzR3?=
- =?utf-8?B?R00rUlZPTmJNZU1UeWlsQmxUUWl3S2lYL2gveGdaZGd6cVB2WkpRUUhQT0Vw?=
- =?utf-8?B?emNvUTFUZStDa0lrUExOeDJqSEg0Ylg5YlhZWTVEMGxkUlhpUCtsNHp0azV0?=
- =?utf-8?B?SjhTekVya1JxM2JGaTNyakliUFJiZFlDbERIWXJIRkJncWQzZTZSZktrQ2c2?=
- =?utf-8?B?RFlNdFRTejlwQS9hY1QwMGxjME1IbHRoZ2RURmtlendiMER0K2V5TUhwRGto?=
- =?utf-8?B?RjJqN080czlHV2FScVp2T0Nxb2cyVXZCSU4rVHR0bmF4TldqVzgzemQvcVUv?=
- =?utf-8?B?bXlNRU8wS202YnhQRE1jSFpjNklLdFlXZVJtbElUZVJUSW1yK1NDcklJMEcw?=
- =?utf-8?B?cjFoc3A4Y0I4bGdzNVVHVU11WmQzOTVXbmNkVEtWdWFvRzBpR1QwRmsrd0Va?=
- =?utf-8?B?bitlQVJXRFBrRGVUZ0hBQU1hSU12cU01dUtaWjVVaVQzem9GK1JTRFVsb1Ri?=
- =?utf-8?B?MVoxY0Z1enFtYjlPSFRwTWJKbHlGaHJWU0RKclk3b1Z3UENRQlVLWFdzUzVN?=
- =?utf-8?B?bDlvRlFtcGdhVEFBT0N0aWVGaDVheFAvbDgvWllYekVXcGU5WHFBMXg4Vm14?=
- =?utf-8?B?YUtvbXY0UzhpWE5RNTkxSWk5TmVvckZZR2dDdi9MSUUzQ2NPUkh3RmFMNlhh?=
- =?utf-8?B?RGQyeEVPR1NFNTV1ZXhvcWFOK3hWOXdkLzZDYlZuYXVCcEtaRHlhdlVETUVJ?=
- =?utf-8?B?Ty8rNXVYNWRyNFo4aSt4WGgveWxVVEc3TFczUjdLaWF4bDZ3RHUrekpRZFFK?=
- =?utf-8?B?SnBoWTZ1aVRSTXp4Umc5VHoyTjRtZGpQd282VXM1REFsVklZTS9uRnAzRHNa?=
- =?utf-8?B?UTVURUlpaDlMR3JobkYxUjZVRkNNZXVUTmJEYURTdmhIamJ4ajBYRmRoYUd3?=
- =?utf-8?B?YXFmNjR0QjJwSGhsUnRONktHRzFVbHd3SzAyTVQ2TFNsRFhqS01uRENGSm01?=
- =?utf-8?B?S3dxOEFSckh2YjJXRXhtUnptVlVKOUY5aE1HYXprWGt1TXYzVE90enBRcGU0?=
- =?utf-8?B?U3ovYmNVRlNGaDlTUDFpK1pvWG5QVDdqT1J0OWdDVGRwVTJ1dURnZ09mREJG?=
- =?utf-8?B?MGdQTkFRalpTZW9UTDZKYUpPb1hnQ0p5UG5hblFrZHkxRlBGTU90WEhTVzY3?=
- =?utf-8?Q?37HLKVtdCnOfqq24jU?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 98689cc9-59bd-445d-e193-08de9eb9be74
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR12MB5673.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 08:49:33.8690
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L4AOF/wSRw0kWpgFsMG7PMglELLckluyinfWDWX3HxcHZmptE+iGzvQbn09MZPy9
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF6D0742E7B
-X-purgate-ID: tlsNG-c201ff/1776674980-E99A5443-07E0206A/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1776677915-E97A6443-096F3498/0/0
 X-purgate-type: clean
-X-purgate-size: 3532
+X-purgate-size: 8014
 
-On 4/17/26 21:35, Demi Marie Obenour wrote:
-> On 4/17/26 03:53, Christian König wrote:
->> On 4/16/26 18:13, Demi Marie Obenour wrote:
->>> On 4/16/26 05:57, Christian König wrote:
-...
->>> Unless I am
->>> mistaken, client workloads are highly non-uniform: a single game or
->>> compute job might well use more VRAM than every other program on the
->>> system combined.
->>
->> Yeah, perfectly correct.
->>
->>> Are these workloads impossible to make work well with pinning?
->>
->> No, as long as you don't know the workload beforehand, e.g. when you define the limit.
->>
->> I mean that's why basically everybody avoids pinning and assigning fixed amounts of resources.
->>
->> Even if you can make it work technically pinning usually results in a rather bad end user experience.
->>
->> Regards,
->> Christian.
-> 
-> Do drivers and programs assume that they can access VRAM from the CPU?
+As the number of vCPUs grows, a single ioreq page of 128 slots may not
+be sufficient. Add support for allocating and mapping multiple ioreq
+pages so that the ioreq region can scale with d->max_vcpus.
 
-Yes, and that is actually really important for performance.
+Introduce nr_ioreq_pages() to compute the number of pages required for
+a given domain, and IOREQ_NR_PAGES_MAX as a compile-time upper bound
+(based on HVM_MAX_VCPUS).
 
-That's why Alex and I came up with the idea of using the resize able BAR feature to access all of VRAM on modern GPUs.
+ioreq_server_alloc_mfn() is updated to allocate nr_ioreq_pages() pages
+and map them contiguously via vmap().
 
-There are a couple of hacks which have been implemented over the years for exotic platforms were MMIO/VRAM access was problematic. For example on a page fault you use a GPU DMA engine to copy the VRAM buffer into system memory, make the CPU memory access and then copy it back again on demand at the next command submission.
+is_ioreq_server_page() iterates over all ioreq pages when checking
+page ownership. ioreq_server_get_frame() allows callers to retrieve any
+ioreq page by index via the XENMEM_acquire_resource interface.
 
-But all of those hacks are basically just prove of concepts and result in completely unusable performance.
+On x86, the legacy GFN mapping path (hvm_map_ioreq_gfn) is limited to
+a single ioreq page; device models requiring more ioreq slots must use
+the resource mapping interface (XENMEM_acquire_resource).
 
-> Are any of the following reasonable options?
-> 
-> 1. Change the guest kernel to only map (and thus pin) a small subset
->    of VRAM at any given time.  If unmapped VRAM is accessed the guest
->    traps the page fault, evicts an old VRAM mapping, and creates a
->    new one.
+Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+---
+Changes in v6:
+- Adapted the comment to not mention the guest, but the device model
+- Replaced the dynamic allocation for the mfns array by a static array
+- Fixed error handling in ioreq_server_alloc_mfn, using an extra
+  nr_alloc variable to track the already allocated pages
+- Dropped unnecessary void casts
+---
+ xen/arch/x86/hvm/ioreq.c |  8 ++++
+ xen/common/ioreq.c       | 93 ++++++++++++++++++++++++++++------------
+ xen/include/xen/ioreq.h  | 12 ++++++
+ 3 files changed, 86 insertions(+), 27 deletions(-)
 
-Yeah, that could potentially work.
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index 3cabec141c..ee679bdf5a 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
+@@ -166,6 +166,14 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
+     if ( d->is_dying )
+         return -EINVAL;
+ 
++    /*
++     * The legacy GFN path supports only a single ioreq page. Device models
++     * requiring more ioreq slots must use the resource mapping interface
++     * (XENMEM_acquire_resource).
++     */
++    if ( !buf && nr_ioreq_pages(d) > 1 )
++        return -EOPNOTSUPP;
++
+     iorp->gfn = hvm_alloc_ioreq_gfn(s);
+ 
+     if ( gfn_eq(iorp->gfn, INVALID_GFN) )
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index bae9b99c99..3a08e77597 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -261,8 +261,11 @@ bool vcpu_ioreq_handle_completion(struct vcpu *v)
+ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+ {
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+-    struct page_info *page;
+-    mfn_t mfn;
++    unsigned int i, nr_alloc = 0, nr_pages = buf ? 1 : nr_ioreq_pages(s->target);
++    mfn_t mfns[IOREQ_NR_PAGES_MAX] = {};
++    int rc;
++
++    ASSERT(nr_pages <= IOREQ_NR_PAGES_MAX);
+ 
+     if ( iorp->va )
+     {
+@@ -277,11 +280,16 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+         return 0;
+     }
+ 
++    for ( i = 0; i < nr_pages; i++ )
+     {
+-        page = alloc_domheap_page(s->target, MEMF_no_refcount);
++        struct page_info *page = alloc_domheap_page(s->target,
++                                                    MEMF_no_refcount);
+ 
+         if ( !page )
+-            return -ENOMEM;
++        {
++            rc = -ENOMEM;
++            goto fail;
++        }
+ 
+         if ( !get_page_and_type(page, s->target, PGT_writable_page) )
+         {
+@@ -290,41 +298,59 @@ static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
+              * here is a clear indication of something fishy going on.
+              */
+             domain_crash(s->emulator);
+-            return -ENODATA;
++            rc = -ENODATA;
++            goto fail;
+         }
+ 
+-        mfn = page_to_mfn(page);
++        mfns[nr_alloc++] = page_to_mfn(page);
+     }
+-    iorp->va = vmap(&mfn, 1);
++
++    iorp->va = vmap(mfns, nr_pages);
+     if ( !iorp->va )
++    {
++        rc = -ENOMEM;
+         goto fail;
++    }
+ 
+-    clear_page(iorp->va);
++    memset(iorp->va, 0, nr_pages * PAGE_SIZE);
+     return 0;
+ 
+  fail:
+-    put_page_alloc_ref(page);
+-    put_page_and_type(page);
++    while ( nr_alloc-- )
++    {
++        struct page_info *page = mfn_to_page(mfns[nr_alloc]);
++
++        put_page_alloc_ref(page);
++        put_page_and_type(page);
++    }
+ 
+-    return -ENOMEM;
++    return rc;
+ }
+ 
+ static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
+ {
+     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
+-    struct page_info *page;
++    unsigned int i, nr_pages = buf ? 1 : nr_ioreq_pages(s->target);
++    struct page_info *pages[IOREQ_NR_PAGES_MAX];
+     void *va;
+ 
+     if ( !iorp->va )
+         return;
+ 
++    ASSERT(nr_pages <= IOREQ_NR_PAGES_MAX);
++
++    for ( i = 0; i < nr_pages; i++ )
++        pages[i] = vmap_to_page(iorp->va + i * PAGE_SIZE);
++
+     va = iorp->va;
+-    page = vmap_to_page(va);
+     iorp->va = NULL;
+     vunmap(va);
+ 
+-    put_page_alloc_ref(page);
+-    put_page_and_type(page);
++    for ( i = 0; i < nr_pages; i++ )
++    {
++        put_page_alloc_ref(pages[i]);
++        put_page_and_type(pages[i]);
++    }
+ }
+ 
+ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+@@ -337,12 +363,25 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
+ 
+     FOR_EACH_IOREQ_SERVER(d, id, s)
+     {
+-        if ( (s->ioreq.va && vmap_to_page(s->ioreq.va) == page) ||
+-             (s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page) )
++        unsigned int i;
++
++        if ( s->bufioreq.va && vmap_to_page(s->bufioreq.va) == page )
+         {
+             found = true;
+             break;
+         }
++
++        for ( i = 0; i < nr_ioreq_pages(d) && s->ioreq.va; i++ )
++        {
++            if ( vmap_to_page(s->ioreq.va + i * PAGE_SIZE) == page )
++            {
++                found = true;
++                break;
++            }
++        }
++
++        if ( found )
++            break;
+     }
+ 
+     rspin_unlock(&d->ioreq_server.lock);
+@@ -816,26 +855,26 @@ int ioreq_server_get_frame(struct domain *d, ioservid_t id,
+     if ( rc )
+         goto out;
+ 
+-    switch ( idx )
++    if ( idx == XENMEM_resource_ioreq_server_frame_bufioreq )
+     {
+-    case XENMEM_resource_ioreq_server_frame_bufioreq:
+         rc = -ENOENT;
+         if ( !HANDLE_BUFIOREQ(s) )
+             goto out;
+ 
+         *mfn = vmap_to_mfn(s->bufioreq.va);
+         rc = 0;
+-        break;
++    }
++    else if ( idx >= XENMEM_resource_ioreq_server_frame_ioreq(0) &&
++              idx < XENMEM_resource_ioreq_server_frame_ioreq(nr_ioreq_pages(d)) )
++    {
++        unsigned int page_idx = idx - XENMEM_resource_ioreq_server_frame_ioreq(0);
+ 
+-    case XENMEM_resource_ioreq_server_frame_ioreq(0):
+-        *mfn = vmap_to_mfn(s->ioreq.va);
++        ASSERT(page_idx < nr_ioreq_pages(d));
++        *mfn = vmap_to_mfn(s->ioreq.va + page_idx * PAGE_SIZE);
+         rc = 0;
+-        break;
+-
+-    default:
+-        rc = -EINVAL;
+-        break;
+     }
++    else
++        rc = -EINVAL;
+ 
+  out:
+     rspin_unlock(&d->ioreq_server.lock);
+diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
+index d63fa4729e..d2a08c2371 100644
+--- a/xen/include/xen/ioreq.h
++++ b/xen/include/xen/ioreq.h
+@@ -35,6 +35,18 @@ struct ioreq_vcpu {
+     bool             pending;
+ };
+ 
++/*
++ * Maximum number of ioreq pages, based on the maximum number
++ * of vCPUs and the number of ioreq slots per page.
++ */
++#define IOREQ_NR_PAGES_MAX \
++    DIV_ROUND_UP(HVM_MAX_VCPUS, PAGE_SIZE / sizeof(ioreq_t))
++
++static inline unsigned int nr_ioreq_pages(const struct domain *d)
++{
++    return DIV_ROUND_UP(d->max_vcpus, PAGE_SIZE / sizeof(ioreq_t));
++}
++
+ #define NR_IO_RANGE_TYPES (XEN_DMOP_IO_RANGE_PCI + 1)
+ #define MAX_NR_IO_RANGES  256
+ 
+-- 
+2.53.0
 
-This is basically what we do on the host kernel driver when we can't resize the BAR for some reason. In that use case VRAM buffers are shuffled in and out of the CPU accessible window of VRAM on demand.
 
-> 2. Pretend that resizable BAR is not enabled, so the guest doesn't
->    think it can map much of VRAM at once.  If resizable BAR is enabled
->    on the host, it might be possible to split the large BAR mapping
->    in a lot of ways.
 
-That won't work. The userspace parts of the driver stack don't care how large the BAR to access VRAM with the CPU is.
+--
+Julian Vetter | Vates Hypervisor & Kernel Developer
 
-The expectation is that the kernel driver makes thing CPU accessible as needed in the page fault handler.
+XCP-ng & Xen Orchestra - Vates solutions
 
-It is still a good idea for your solution #1 to give the amount of "pin-able" VRAM to the userspace stack as CPU visible VRAM limit so that test cases and applications try to lower their usage of VRAM, e.g. use system memory bounce buffers when possible.
+web: https://vates.tech
 
-> Or does Xen really need to allow the host to handle guest page faults?
-> That adds a huge amount of complexity to trusted and security-critical
-> parts of the system, so it really is a last resort.  Putting the
-> complexity in to the guest virtio-GPU driver is vastly preferable if
-> it can be made to work well.
-
-Well the nested page fault handling KVM offers has proven to be extremely useful. So when XEN can't do this it is clearly lacking an important feature.
-
-But I have one question: When XEN has a problem handling faults from the guest on the host then how does that work for system memory mappings?
-
-There is really no difference between VRAM and system memory in the handling for the GPU driver stack.
-
-Regards,
-Christian.
 
