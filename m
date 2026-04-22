@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14143FAD41A
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 06:02:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1291561.1570438 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80184FAD3E3
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 06:21:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1291096.1570463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFn8v-0000An-Dc; Thu, 23 Apr 2026 06:02:29 +0000
+	id 1wFnRI-0004LE-Nc; Thu, 23 Apr 2026 06:21:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1291561.1570438; Thu, 23 Apr 2026 06:02:29 +0000
+Received: by outflank-mailman (output) from mailman id 1291096.1570463; Thu, 23 Apr 2026 06:21:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFn8v-0000Ag-AX; Thu, 23 Apr 2026 06:02:29 +0000
-Received: by outflank-mailman (input) for mailman id 1291561;
- Thu, 23 Apr 2026 06:02:28 +0000
+	id 1wFnRI-0004Is-J6; Thu, 23 Apr 2026 06:21:28 +0000
+Received: by outflank-mailman (input) for mailman id 1291096;
+ Wed, 22 Apr 2026 20:08:36 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wFn8t-0000Aa-OE
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 06:02:27 +0000
+ (envelope-from <mfo@igalia.com>) id 1wFdsA-0007sV-TL
+ for xen-devel@lists.xenproject.org; Wed, 22 Apr 2026 20:08:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFn8t-00DGoq-1E
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 08:02:27 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wFdsA-008j3F-71
+ for xen-devel@lists.xenproject.org; Wed, 22 Apr 2026 22:08:34 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69e9b5ef-bab6-0a2a0a5309dd-0a2a45078fe8-14
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 08:02:26 +0200
-Received: from [209.85.167.41] (helo=mail-lf1-f41.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69e9b5f2-229c-0a2a45070019-d155a729dc46-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 08:02:26 +0200
-Received: by mail-lf1-f41.google.com with SMTP id
- 2adb3069b0e04-5a3fcb2c718so5292779e87.0
- for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2026 23:02:26 -0700 (PDT)
+ (envelope-from <mfo@igalia.com>)
+ id 69e92ab5-2eae-0a2a0a5409dd-0a2a4503e434-16
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2026 22:08:34 +0200
+Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <mfo@igalia.com>)
+ id 69e92abf-672d-0a2a45030019-d561b338d522-3
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2026 22:08:32 +0200
+Received: from 186-249-145-131.shared.desktop.com.br ([186.249.145.131]
+ helo=[192.168.1.66]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wFdrs-000QN6-Bw; Wed, 22 Apr 2026 22:08:15 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,197 +49,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1776924146; cv=none;
-        d=google.com; s=arc-20240605;
-        b=hMjEb9weXROHPQM+rmOR0GGi+G+PlD/iR4jEFGYoStG39xChCalN0g7aSzGnGex836
-         Bvi9Mf7gVK1MKh/pwPBu71pTHj1x0ISWQWptMi89Wabt+JIk7bBNiQ/qOoaOVcFi/vYc
-         janWTv+nTRLGCxJnh7M1tEw+yWnou/FItNG4dVPQFy6C932mS2sl0S0ANZVkjF6YHncq
-         ySDgiIprtf/O4wAJ0NWTnO1zNI5Y2Bs8y3vvLfXjs/k3xDw3E+RQvxhvwkFf0Md2We4C
-         OgzmQzzPT7DR2qRu2aP0Bbe8ks2rgkGpOX5s6ZIbOOYv1XRAl5EpepEar0kmLkRhPDnT
-         D9lw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nl7cIH8Ft8KrXNepYu/GHtaIZIBfWGZDLBrbsxutfCw=;
-        fh=lnG/EjedhIb/IfplijZjNTuDmIWktIpSdwgeAb6fZ6k=;
-        b=jbpoR02C0gU/a8MID/XbWgmKf2vUNWApjWe5n/BomRt6QsEOWWRxjCRGlkFPLk3xE+
-         OEhaliE0CWOzHKB6U4qXlB7zMbN6X9bTnVzK9aYj7dEC4kX09o/o41hnhKg4ZhPoJG9m
-         quYEtYWm7Vk7Q0otzCeipcvLCOCYRIYyE94+YI7QZAWrCEsr+9s3hQ+g7f9KN7l7fDXv
-         mYELhnIRIpFnjGOqJi5zfYFy1YHK7KTnxIOc2pceLhfPsBZ/uLxV7rEVEHTw9azYK49V
-         r50FIdzdpSMo+BUHnvGOMM8K1C1IBJM8MMwVQ3LLfLA0Cc1end7ezNz0+6DzMEE1Q5ZZ
-         Vi2w==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776924146; x=1777528946; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nl7cIH8Ft8KrXNepYu/GHtaIZIBfWGZDLBrbsxutfCw=;
-        b=WAnyPxb7FAMCXfYq/weamzwH9wchPYYZrd277UK8QVgh/I5AE2fwnMJmPvRiYpxq89
-         vTz73QJHVu70FdUc5m9sAjv/WWgCKy2fVfAA4WsNdstcVoYImIi9FIQGq6vVbgkgAJ8e
-         vjIqqtKjBr8+XiqwFjam/+PURZjWuw/b7ChyRGwkbh1W/G8K1zUBV26X/XWHh53EOzDe
-         DQub5y6niMYbI0Wdy52/qt3JRgGMJW/99KFoOgvKMaZwSknSvRfUeEeqS5U7zIDBGucA
-         JWRBOJGdfqeByljyPd9+3b/XCG4eP7mdqrvs4omegZIA8foHK8RZYcI3WqNz7t4gLruC
-         k6yQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776924146; x=1777528946;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=nl7cIH8Ft8KrXNepYu/GHtaIZIBfWGZDLBrbsxutfCw=;
-        b=CbuF4UzjvRE2r/7e1y/cm+KaEXY/28frOBeGEt0KTbiCjuixl/EzW8VrbrDzi1ult3
-         LT9wgkJUgynuxmD2xnLRHDLi+X6sVJ6uuDvA6yxbtMe+AWEQqtgZTObX+ISuT/Ep3GvE
-         jDLnFvX55/fjiahrkjHusoE3MQwT8PlF2qGxhBG7YHMJvSbpzzEhPP++xOPYPaApgw42
-         +W9iPfSvOzNRWMfcreXV6i+mLRozPdKhOqj2wBpXYO7nOlSTkw2GTXPWFoaNK8AAqYBQ
-         he8EDDRR+X6lM3dQ1r9wT3il9v3WFMEsL0CoAtUeZE2jhoYVTGtuu/5YgaGL4tzQiVdF
-         v8vg==
-X-Gm-Message-State: AOJu0YxP1yXPW3IYN5oKCDnsZyvOcdNMmPiv8iMQNQ/uPFsMBgNXKxgK
-	Pro0VHIvJjgvkO4emotExBe5p1eqAhJTAeszJ3KjSq8SkmzUxFog3IiJGX6+7GzMgd8plP7ql5Q
-	VPCgP/O5kq6xOIjjqlIyoh7eiYHJ9LMU=
-X-Gm-Gg: AeBDiet44kLLl4iECRuVJrlpd3QGnqB9hUbir9+ZwE0l1U5DwQGJvDnWYt9/5hK26qB
-	NMrOWOO+evRBXAbrkU0hwQujFHvA5HkhYFyczQpTLx5o3uadJ9RpV04hijk9pRY8QU1mn1A/Ygf
-	ziZNhOmouEr4VDCx4lsyJrAHcEbAQhSvNGc/NmqvjyRd54U7cOFntA8ynnP1LFk8jdW7fMU0fVe
-	WLCIB4sVQv6eyIg+gqkBbofB2qSEfYlpuI/nsZisFm2/ZN0nGTjcEpKQhdFmvEpXICD7gmteB82
-	0cyLmznjSgvFH/Rh
-X-Received: by 2002:a05:6512:1189:b0:5a2:b59a:5e99 with SMTP id
- 2adb3069b0e04-5a4172e7bdemr8494688e87.22.1776924145838; Wed, 22 Apr 2026
- 23:02:25 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
+	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=RA9NCRHvRWMZ05HmtRD7P4PIYRmUdNmDK10V6p6BTbQ=; b=qJLi6sDvBTykCu2V8Pd4qiCQVV
+	7vsQw17QfzL0Kd/rdPHndsLnjzOhC9NdKRQcQNne0ubu+VDjY5lsuANYoBbMjZSVEWutiW9L1U2SK
+	SBIY0W4fETq7msjk2j3pMscO4SslxkzD22pw4pvg2cIxaSQzGlZ+sqlGHpcclXdsdBWENIz132d4J
+	Nsi26hCgoCcVbwcgolgMHladKClBFenB2PGUlZU2Xp0JCIMyckvkeKXPtI8ZilBbIH+xrFxIb4KTs
+	Ht8lL8s7FFDZmXgkHfLbmkg0jRwpl0tYPY8/XE/8EDGiyvd6hS4nYGX6CYNTPqwoMRIYHKG/MprEg
+	hKcx6o/Q==;
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+Date: Wed, 22 Apr 2026 17:07:46 -0300
+Subject: [PATCH 2/3] x86/cpuid: fix unbootable VMs by really inlining
+ memcmp() in hypervisor_cpuid_base()
 MIME-Version: 1.0
-References: <7c20230fcd388ebe398ce19a21a1cd3c2c73d5fa.1775839987.git.mykola_kvach@epam.com>
- <9cd3e2f1-1b6f-4946-86c2-ff72f34ba138@amd.com>
-In-Reply-To: <9cd3e2f1-1b6f-4946-86c2-ff72f34ba138@amd.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 23 Apr 2026 09:02:14 +0300
-X-Gm-Features: AQROBzCNmduihI4PEKZsBSneyCVeFzRWeRZvzdf9Oyv5svjzLUrGsGIoBl9eQsg
-Message-ID: <CAGeoDV_79OHToZi3+woaGaMGqZZsQq32neEamxVNQ6RdMp502w@mail.gmail.com>
-Subject: Re: [PATCH v2] arm/gicv3: Decode cacheability fields before comparing
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org, Mykola Kvach <mykola_kvach@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Mykyta Poturai <mykyta_poturai@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ef75cf/1776924146-2B979C48-5202E71C/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260422-pvh-kasan-inline-v1-2-7e6194344c92@igalia.com>
+References: <20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com>
+In-Reply-To: <20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com>
+To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
+X-Mailer: b4 0.14.2
+X-purgate-ID: tlsNG-33051d/1776888513-A1D7B938-99EF6E98/0/0
 X-purgate-type: clean
-X-purgate-size: 4396
+X-purgate-size: 1412
 
-Hi Michal,
+Even with __builtin the compiler may decide to use the out of line function
+instead of the inline implementation.
 
-Thank you for the review.
+The existing code is broken with gcc-14/15 but not gcc-12/13 (Ubuntu 25.10)
+and vmlinux no longer boots with CONFIG_PVH if CONFIG_KASAN_GENERIC is set.
 
-On Mon, Apr 13, 2026 at 12:28=E2=80=AFPM Orzel, Michal <michal.orzel@amd.co=
-m> wrote:
->
->
->
-> On 10/04/2026 19:34, Mykola Kvach wrote:
-> > From: Mykola Kvach <mykola_kvach@epam.com>
-> >
-> > GITS_BASER_INNER_CACHEABILITY_MASK and
-> > GICR_PROPBASER_INNER_CACHEABILITY_MASK are shifted masks. Comparing the
-> > masked but unshifted values against GIC_BASER_CACHE_nC, which is an
-> > unshifted enum value, leads to incorrect detection of non-cacheable
-> > GITS_CBASER command queue, GITS_BASER tables, and GICR_PROPBASER
-> > mappings.
-> >
-> > Use MASK_EXTR() to decode these cacheability fields before comparing
-> > against GIC_BASER_CACHE_nC, so the backing memory is flushed when
-> > required.
-> >
-> > Fixes: 8ed8d21373be ("ARM: GICv3 ITS: map ITS command buffer")
-> > Fixes: 05238012b86d ("ARM: GICv3 ITS: allocate device and collection ta=
-ble")
-> > Fixes: c9b939863c89 ("ARM: GICv3: allocate LPI pending and property tab=
-le")
-> > Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > ---
-> > Changes in v2:
-> > - use MASK_EXTR() instead of open-coding the BASER field shift
-> > - fix the analogous PROPBASER cacheability comparison in
-> >   gicv3_lpi_set_proptable()
-> > - fix the CBASER command queue cacheability check as well
-> > ---
-> >  xen/arch/arm/gic-v3-its.c | 6 ++++--
-> >  xen/arch/arm/gic-v3-lpi.c | 3 ++-
-> >  2 files changed, 6 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-> > index 9ba068c46f..e87465d2ff 100644
-> > --- a/xen/arch/arm/gic-v3-its.c
-> > +++ b/xen/arch/arm/gic-v3-its.c
-> > @@ -424,7 +424,8 @@ static void *its_map_cbaser(struct host_its *its)
-> >       * If the command queue memory is mapped as uncached, we need to f=
-lush
-> >       * it on every access.
-> >       */
-> > -    if ( !(reg & GITS_BASER_INNER_CACHEABILITY_MASK) )
-> You don't seem to mention this change. This one does not compare to
-> GIC_BASER_CACHE_nC and checks against 0, which means we are on the safe s=
-ide. If
-> you still want to change it, then you should also look few lines above wh=
-ere we
-> have:
-> if ( (reg & GITS_BASER_SHAREABILITY_MASK) =3D=3D 0 )
->
-> > +    if ( MASK_EXTR(reg, GITS_BASER_INNER_CACHEABILITY_MASK) <=3D
-> > +         GIC_BASER_CACHE_nC )
-> This is a functional change. Previously we where comparing against 0 and =
-now you
-> compare against <=3D 1
+For testing purposes, if the size argument is reduced from 12 to 8 then the
+compiler decides to use the inline implementation; that shows results vary.
 
-You are right, the CBASER hunk is not fixing the same shifted-mask
-comparison bug as the BASER/PROPBASER hunks.
+Switch the builtin to the inline implementation to address it.
 
-My intention was to also handle InnerCache =3D=3D 0b001, which is Normal
-Inner Non-cacheable, so the command queue should need flushing in that
-case as well. I agree this is a separate functional change.
+Fixes: 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
+Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+---
+ arch/x86/include/asm/cpuid/api.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I will drop the CBASER hunk from this patch to keep it focused on the
-BASER/PROPBASER shifted-mask fix. I will send the CBASER change
-separately with a dedicated explanation.
+diff --git a/arch/x86/include/asm/cpuid/api.h b/arch/x86/include/asm/cpuid/api.h
+index 44fa82e1267ce98c7f5f92f69b58f79e235f7261..c3bd1e51067346e817240b484dc0d0e5f02dcc4f 100644
+--- a/arch/x86/include/asm/cpuid/api.h
++++ b/arch/x86/include/asm/cpuid/api.h
+@@ -203,7 +203,7 @@ static inline u32 cpuid_base_hypervisor(const char *sig, u32 leaves)
+ 		 * from PVH early boot code before instrumentation is set up
+ 		 * and memcmp() itself may be instrumented.
+ 		 */
+-		if (!__builtin_memcmp(sig, signature, 12) &&
++		if (!__inline_memcmp(sig, signature, 12) &&
+ 		    (leaves == 0 || ((eax - base) >= leaves)))
+ 			return base;
+ 	}
 
-Best regards,
-Mykola
+-- 
+2.51.0
 
->
-> ~Michal
->
-> >      {
-> >          its->flags |=3D HOST_ITS_FLUSH_CMD_QUEUE;
-> >          printk(XENLOG_WARNING "using non-cacheable ITS command queue\n=
-");
-> > @@ -496,7 +497,8 @@ retry:
-> >          }
-> >          attr =3D regc & BASER_ATTR_MASK;
-> >      }
-> > -    if ( (regc & GITS_BASER_INNER_CACHEABILITY_MASK) <=3D GIC_BASER_CA=
-CHE_nC )
-> > +    if ( MASK_EXTR(regc, GITS_BASER_INNER_CACHEABILITY_MASK) <=3D
-> > +         GIC_BASER_CACHE_nC )
-> >          clean_and_invalidate_dcache_va_range(buffer, table_size);
-> >
-> >      /* If the host accepted our page size, we are done. */
-> > diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
-> > index de5052e5cf..9ee338edc2 100644
-> > --- a/xen/arch/arm/gic-v3-lpi.c
-> > +++ b/xen/arch/arm/gic-v3-lpi.c
-> > @@ -351,7 +351,8 @@ static int gicv3_lpi_set_proptable(void __iomem * r=
-dist_base)
-> >      }
-> >
-> >      /* Remember that we have to flush the property table if non-cachea=
-ble. */
-> > -    if ( (reg & GICR_PROPBASER_INNER_CACHEABILITY_MASK) <=3D GIC_BASER=
-_CACHE_nC )
-> > +    if ( MASK_EXTR(reg, GICR_PROPBASER_INNER_CACHEABILITY_MASK) <=3D
-> > +         GIC_BASER_CACHE_nC )
-> >      {
-> >          lpi_data.flags |=3D LPI_PROPTABLE_NEEDS_FLUSHING;
-> >          /* Update the redistributors knowledge about the attributes. *=
-/
->
 
