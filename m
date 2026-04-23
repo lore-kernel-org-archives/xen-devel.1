@@ -4,44 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08FF2F589D4
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 13:59:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1292137.1570702 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC268F589DB
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 14:47:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1292188.1570715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFua0-0003ta-Vy; Thu, 23 Apr 2026 13:58:56 +0000
+	id 1wFvK4-0003A8-E0; Thu, 23 Apr 2026 14:46:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1292137.1570702; Thu, 23 Apr 2026 13:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 1292188.1570715; Thu, 23 Apr 2026 14:46:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFua0-0003tT-Su; Thu, 23 Apr 2026 13:58:56 +0000
-Received: by outflank-mailman (input) for mailman id 1292137;
- Thu, 23 Apr 2026 13:58:56 +0000
+	id 1wFvK4-0003A1-A1; Thu, 23 Apr 2026 14:46:32 +0000
+Received: by outflank-mailman (input) for mailman id 1292188;
+ Thu, 23 Apr 2026 14:46:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1wFua0-0003tN-1c
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 13:58:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@swg.vates.tech>)
+ id 1wFvK2-00039v-Nx
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 14:46:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFuZz-00BRQ7-EZ
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 15:58:55 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <olekstysh@gmail.com>)
- id 69ea2581-bab6-0a2a0a5309dd-0a2a4507d1b8-46
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 15:58:55 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <olekstysh@gmail.com>)
- id 69ea259f-229c-0a2a45070019-d1558031b5bc-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 15:58:55 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso53402695e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 06:58:55 -0700 (PDT)
-Received: from [192.168.0.112] ([91.123.151.42])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43fe4e4daf2sm52032005f8f.33.2026.04.23.06.58.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Apr 2026 06:58:53 -0700 (PDT)
+ id 1wFvK2-00BDbY-0G
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 16:46:30 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@swg.vates.tech>)
+ id 69ea30bd-bab6-0a2a0a5309dd-0a2a4502d716-28
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 16:46:29 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@swg.vates.tech>)
+ id 69ea30c5-af86-0a2a45020019-b9ff1c229b7f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 16:46:29 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19dbace7684000f373.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 23 Apr 2026 14:46:26 +0000
+Received: from xps13-debian.gpn.vates.fr
+ (lfbn-mon-1-1130-120.w90-48.abo.wanadoo.fr [90.48.233.120])
+ (Authenticated sender: thierry.escande)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 8E74B86015;
+ Thu, 23 Apr 2026 16:46:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,287 +59,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776952735; x=1777557535; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=jtOs/FsZMaCwgHfT225WIJoHwl54zjs3xyeZxIUICp4=;
-        b=jbT7f1GHIlsjJxvfDOiqN2BGZrWFv+/Onb1N7qwlofZ90gZINP14KbUpbMT250Pngh
-         /UdMW9tkIngq47zRPDeghd6RFVYxka6FesF6mkVFp/7ND3BwhfLHTUHZxA29StFQoTIl
-         CADhdWvgye5dxW1EFdL6eSn67w5ztbcPlGVuFfWsHaTTZI7Ja3N3CJGbn3gwb5vGNkKC
-         cGKDkv/P+j3QoXp88Ugh6pl4YwuMlgcrUfUgrhOzd3CHiMGvFdSgwgdgefng3HPbeHle
-         f/t2keoWoPO26nI65yviUGB5x0QP3FK0W+CSF0EQbeQdpIxw6SLrmZz1Og75MoWZ6He2
-         88gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776952735; x=1777557535;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jtOs/FsZMaCwgHfT225WIJoHwl54zjs3xyeZxIUICp4=;
-        b=kQfdMlVhxQZSoDxGSMtiIUCX32NdXVzRFr3FVQ4BSamxO4B4M6ia5R7vkcaA7iLmek
-         mnLNcj2lI8AY6DuZz9dXvAo3NUuoW8FqD/RXs6A7Kgw3wsuAS/b3Xh4Z5GB2TmPuRtd/
-         gHkm/twW5ZolnZXSNpiZqFcwMOxms7CyzxEbu4q41NdPvQerqS5qHypBOuxEwFWr+g+x
-         dGcDrOqK8yvR1LbIUIHNYAf1n1A35BPByITjiXM2JSpbrAawx9wZ6HN0gkHp9YvxpgOC
-         o5++HlNIFkz6eZfxEkz9BGer0wU9byEjhNLGmk6wqdF25kT23ZXAtTf7fMvzNsd6bOwC
-         wFGA==
-X-Forwarded-Encrypted: i=1; AFNElJ/EcJTRH4cdRUdWKO6/bud/klr3/OZvC0AX1g7H6+BCvujgBYJxUqRQGDUmQJMevBM1G5nV7P+NYd0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyKTsfKhPXvg44g/Z0sguHqtoDia3jqj6NvTX6sSUq56y3VTR0I
-	1vKMXtTxfApAK8Aidfp5eYXh1s9LECShLXFl7a/THYRNQgPxNbirG1Om
-X-Gm-Gg: AeBDievuZZev7bBCzb0yzwzC8jwVaJGOZ1ona87kbmPmD7U3vJGQzmWCWXaxj35GRgK
-	JUPC1cvdn3dDdzTSzVjrdlBumZxnxyBb4U2vfQBy8Nf7nPxtqUwUecWRYlTyXcryyKE8wOQGdAr
-	Zxb3UWYzmW+/5GpB1YCdNzGIMJ31Me28Z1cG7R0YBv4p20fEQVMvgT5Dsv+bBmCljv3m+2b65FF
-	oO/dLwymFVhQ0k2zEXnXfAZS2bNGmP1m79eePF4goeezTV8+akt/f0SnZG9p1ovHU18HXuHOR3I
-	T5BfSxoRRkCtkHyq5fNKCyABFN0y91W+J31wnUJQOV4AlM01zzWuaMOUgOCK6Jrcwo5z1COkIQ3
-	8jPbA1Uw3XZnW9MMBYOHEMrPXyH4Xid4WRbsDu1tSWT3eD3gSoJZIf+sFwx9oFLT3t+gQL4cVt6
-	0lWl7ychRbd5nwJHoP+tBg96jpGgD5gxOOsYAq
-X-Received: by 2002:a05:600d:8408:b0:486:ff92:63e5 with SMTP id 5b1f17b1804b1-488fb73dc6fmr311275065e9.6.1776952734418;
-        Thu, 23 Apr 2026 06:58:54 -0700 (PDT)
-Message-ID: <166ff356-2f48-4bb6-bb76-96c0f66ba9be@gmail.com>
-Date: Thu, 23 Apr 2026 16:58:52 +0300
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=lowfzwAIaXv7twmBRREDL/AXqU/wdqNpjErglxPSL1w=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=jay++uS1v9fLVAWBVAOzSJPHFlEjkw3LVHwEjVe9U3EfdH1KR5t9CAisfdsFodJpqgyq6c1D+
+ Mjq/q6tQYwSaMfDES+oCj4BkZoLRGPVp2bHojKsq4MqJDhvhgEaPlMvbUW9eDvyE/IyVTd17bUX
+ e4ko1+16CZFy8vh4AuREvdbJCMlCYge2VQmg2fe+nkaekf4wbBG3FpT4hn0e+F53rg5W0swXOPQ
+ trJkxq20eQ4hVqLVwGbTWE/kgI1nq6BRoblBp+iCtP2X3fpfQA5gzFrUFaY3qPlah9Zh/IZGq5H
+ 5iRaTzkEIY/GU0oojCvbjOdzqaiEa3fb55OJlQozoUFg==
+X-Zone-Loop: 5c73c3e7902362cf8a4029f853949f07dbff3d460e1a
+x-campaign-type: default
+x-transaction-id: 09e24afa-8bc8-4642-bf4c-eb19ce9ac08f
+x-swg-uid: 01-ac788c85-1e37-464a-8870-3cc7c4ac7cce
+X-Mailer: Sweego
+Message-ID:
+ <1776955586.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@vates.tech>
+x-swg-bid: 1776955586.8631fc262581453bbf619ec5b2062170.19dbace7684000f373
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Thierry Escande <thierry.escande@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Thierry Escande <thierry.escande@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>,
+	=?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [RFC PATCH v4 0/6] xl: Allow PCI devices to be passthrough'd via Qemu command line
+Date: Thu, 23 Apr 2026 16:46:10 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/arm: smmuv3: Add support for removing devices
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Rahul Singh <rahul.singh@arm.com>
-References: <d9f90d511208d17f0a98db5d858955f8adfecc03.1776851790.git.mykyta_poturai@epam.com>
-Content-Language: en-US
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <d9f90d511208d17f0a98db5d858955f8adfecc03.1776851790.git.mykyta_poturai@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1776952735-2B57BC48-F0C72AAC/0/0
+Content-Transfert-Encoding: 8bit
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2738.9a73b4bc15a7d56d.19dbace74b2.a262829cedf10721=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1776955585714
+X-purgate-ID: tlsNG-720697/1776955589-81971161-4D35BBA0/0/0
 X-purgate-type: clean
-X-purgate-size: 7445
+X-purgate-size: 3394
+
+---=Part.2738.9a73b4bc15a7d56d.19dbace74b2.a262829cedf10721=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+This series adds new 'hotplug' option for PCI device passthrough=2E
+
+The current mechanism for device passthrough uses QMP device_add command
+to hot-plug PCI devices to the guest Qemu instance=2E This is an issue for
+guests running on Q35 chipset (preliminary support posted at [1]) since th=
+e
+Q35 PCI root bus does not support hotplug=2E Devices could be hotplugged t=
+o
+a secondary PCI bus but Xen only support 1 PCI bus for now=2E
+
+The 'hotplug' option allows to control how devices are attached to the
+guest, either by using the legacy QMP mechanism (this is the default) or b=
+y
+passing them directly to the Qemu command line using xen-pci-passthrough
+device=2E
+
+Example usage in cfg file:
+ pci =3D [ "00:03=2E0,seize=3D1,hotplug=3D0" ]
+
+Since Qemu -device option accepts parameters in json format, this
+patchset adds a new internal function libxl__device_pci_get_qapi_json() th=
+at
+generates the device json object used for both QMP hotplug and command lin=
+e
+passing=2E
+
+Also, to handle the assignable PCI device list, the function
+libxl_pci_assignable() is renamed as libxl_device_pci_assignable() and is
+made available from libxl=2Eh for access in libxl_dm=2Ec=2E 2 other functi=
+ons are
+also exported internally: libxl__pciback_dev_is_assigned() and
+libxl__device_pci_assignable_add()=2E
+
+This has been successfully tested on Xen 4=2E22-dev and Qemu 10=2E0 runnin=
+g
+Debian VMs in both Bios and UEFI mode with a passthrough'd nvme disk=2E
+Disabling the hotplug mechanism might be made mandatory for Q35 machines
+later, once Q35 support is merged upstream=2E
+
+[1] https://lore=2Ekernel=2Eorg/xen-devel/20260313163455=2E790692-1-thierr=
+y=2Eescande@vates=2Etech/
+
+Changes in v2:
+ - Add support for YAJL json parser
+
+Changes in v3:
+ - Move code block of device command line parameters creation
+ - Better handling of pci device assignation
+
+Changes in v4:
+ - Split the refactoring parts of the 2nd patch
+ - Extend libxl__json_object_to_json() and use it to generate the qapi jso=
+n
+   string
+
+Thierry Escande (6):
+  xl: Add an hotplug option for PCI device passthrough
+  libxl: Refactor some PCI device handling functions
+  libxl: Add libxl__device_pci_get_qapi_json() internal API
+  libxl: Extend libxl__json_object_to_json() prototype
+  libxl: Allow PCI device passthrough using -device Qemu command line
+  docs: provide description for pci hotplug option
+
+ docs/man/xl-pci-configuration=2E5=2Epod | 17 +++++++++
+ docs/man/xl=2Ecfg=2E5=2Epod=2Ein            |  6 +++
+ tools/include/libxl=2Eh               |  1 +
+ tools/libs/light/libxl_dm=2Ec         | 33 +++++++++++++++++
+ tools/libs/light/libxl_internal=2Eh   | 12 +++++-
+ tools/libs/light/libxl_json=2Ec       | 11 +++++-
+ tools/libs/light/libxl_pci=2Ec        | 57 ++++++++++++++++++++---------
+ tools/libs/light/libxl_types=2Eidl    |  1 +
+ tools/libs/util/libxlu_pci=2Ec        |  2 +
+ tools/xl/xl_parse=2Ec                 |  5 +++
+ 10 files changed, 123 insertions(+), 22 deletions(-)
+
+--=20
+2=2E53=2E0
 
 
 
-On 4/22/26 12:57, Mykyta Poturai wrote:
+-- 
+Thierry Escande | Vates XCP-ng Developer
 
-Hello Mykyta
+XCP-ng & Xen Orchestra - Vat=
+es solutions
 
-> Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
-> most of the work by disabling ATS and zeroing STEs. Additionally, unset
-> the dt_device_is_protected flag and free no longer needed smmu_master.
-> Free iommu_fwspec for PCI devices only, for DT devices it is handled by
-> generic IOMMU layer.
-> 
-> Rework dt_device_set_protected to accept a boolean parameter, update
-> callsites.
-> 
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> ---
-> Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
-> VFs.
-> 
-> [1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.com/
-> 
-> V2->V3:
-> * free fwspec for pci devices
-> * remove testing note from commit message
-> 
-> V1->V2:
-> * check for phantom functions
-> * simplify pci/dt device split
-> * improve error handling
-> * don't try to free master for unprotected devices
-> * rework dt_device_set_protected
-
-Thanks, this looks much better now. Mostly looks ok to me, but I have 
-several comments.
-
-
-> ---
->   xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
->   xen/drivers/passthrough/arm/smmu-v3.c    | 65 +++++++++++++++++++++++-
->   xen/drivers/passthrough/arm/smmu.c       |  4 +-
->   xen/include/xen/device_tree.h            |  5 +-
->   4 files changed, 70 insertions(+), 6 deletions(-)
-> 
-> diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> index fa9ab9cb13..0648f9b407 100644
-> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> @@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
->           }
->   
->           /* Let Xen know that the master device is protected by an IOMMU. */
-> -        dt_device_set_protected(dev_to_dt(dev));
-> +        dt_device_set_protected(dev_to_dt(dev), true);
->       }
->   #ifdef CONFIG_HAS_PCI
->       if ( dev_is_pci(dev) )
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index bf153227db..a46c421399 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -1493,6 +1493,68 @@ static int arm_smmu_assign_dev(struct domain *d, u8 devfn, struct device *dev,
->   static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
->   				 struct device *dev);
->   
-> +static int arm_smmu_remove_device(u8 devfn, struct device *dev)
-
-Inconsistent devfn type: arm_smmu_remove_device() uses u8,
-but int (*remove_device)(uint8_t devfn, device_t *dev); uses uint8_t.
-
-
-> +{
-> +	struct arm_smmu_master *master;
-> +	struct iommu_fwspec *fwspec;
-> +	struct domain *d = NULL;
-> +
-> +	fwspec = dev_iommu_fwspec_get(dev);
-> +	if ( !fwspec )
-> +		return -ENODEV;
-> +
-> +	master = dev_iommu_priv_get(dev);
-> +	if ( !master )
-> +		return -ENODEV;
-> +
-> +	if ( IS_ENABLED(CONFIG_HAS_PCI) && dev_is_pci(dev) )
-> +	{
-> +		struct pci_dev *pdev = dev_to_pci(dev);
-
-arm_smmu_assign_dev() has ASSERT(pcidevs_locked()) in its PCI path, 
-while arm_smmu_remove_device() does not. pci_remove_device() holds 
-pcidevs_lock() before calling iommu_remove_device().
-
-So, I would add the same assertion here to document the requirement and 
-guard against future callers.
-
-
-
-> +
-> +		/* Ignore calls for phantom functions */
-> +		if ( devfn != pdev->devfn )
-> +			return 0;
-> +
-> +		d = pdev->domain;
-> +	}
-> +	else
-> +	{
-> +		if ( !dt_device_is_protected(dev_to_dt(dev)) )
-> +		{
-> +			dev_err(dev, "Not added to SMMUv3\n");
-> +			return -ENODEV;
-> +		}
-> +
-> +		dt_device_set_protected(dev_to_dt(dev), false);
-> +		if ( master->domain && master->domain->d )
-> +			d = master->domain->d;
-
-Unless I am mistaken, for DT devices, the deassign logic is unreachable 
-dead code. iommu_remove_dt_device() returns -EBUSY if the device is 
-still assigned, guaranteeing master->domain == NULL. This means that ...
-
-
-> +	}
-> +
-> +	if ( d )
-> +	{
-
-  ... this block only has effect for PCI.
-
-
-I would consider adding a comment and ASSERT, something like:
-/*
-  * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
-  * device is still assigned, so d is always NULL on the DT path.
-  */
-ASSERT(dev_is_pci(dev));
-
-
-the rest looks good
-
-
-> +		int ret = arm_smmu_deassign_dev(d, devfn, dev);
-> +		/* This should never fail because we already checked the domain */
-> +		ASSERT(!ret);
-> +	}
-> +
-> +	arm_smmu_disable_pasid(master);
-> +
-> +	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
-> +		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
-> +
-> +	xfree(master);
-> +	dev_iommu_priv_set(dev, NULL);
-> +
-> +	/*
-> +	 * For DT devices the fwspec is freed by iommu subsystem, but for PCI
-> +	 * devices we need to free it here
-> +	 */
-> +	if ( IS_ENABLED(CONFIG_HAS_PCI) && dev_is_pci(dev) )
-> +	    iommu_fwspec_free(dev);
-> +
-> +	return 0;
-> +}
-> +
->   static int arm_smmu_add_device(u8 devfn, struct device *dev)
->   {
->   	int i, ret;
-> @@ -1571,7 +1633,7 @@ static int arm_smmu_add_device(u8 devfn, struct device *dev)
->   		}
->   
->   		/* Let Xen know that the master device is protected by an IOMMU. */
-> -		dt_device_set_protected(dev_to_dt(dev));
-> +		dt_device_set_protected(dev_to_dt(dev), true);
->   	}
->   
->   	dev_info(dev, "Added master device (SMMUv3 %s StreamIds %u)\n",
-> @@ -2867,6 +2929,7 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
->   	.unmap_page		= arm_iommu_unmap_page,
->   	.dt_xlate		= arm_smmu_dt_xlate,
->   	.add_device		= arm_smmu_add_device,
-> +	.remove_device		= arm_smmu_remove_device,
->   };
->   
->   static __init int arm_smmu_dt_init(struct dt_device_node *dev,
-> diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-> index d63c901551..4d2f71f152 100644
-> --- a/xen/drivers/passthrough/arm/smmu.c
-> +++ b/xen/drivers/passthrough/arm/smmu.c
-> @@ -825,7 +825,7 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
->   	if ( !dev_is_pci(dev) )
->   	{
->   		/* Xen: Let Xen know that the device is protected by an SMMU */
-> -		dt_device_set_protected(dev_node);
-> +		dt_device_set_protected(dev_node, true);
->   	}
->   
->   	for (i = 0; i < fwspec->num_ids; ++i) {
-> @@ -862,7 +862,7 @@ static int arm_smmu_dt_remove_device_legacy(struct arm_smmu_device *smmu,
->   
->   	if ( !dev_is_pci(dev) )
->   		/* Protected by dt_host_lock and dtdevs_lock as caller holds these locks. */
-> -		dev_node->is_protected = false;
-> +		dt_device_set_protected(dev_node, false);
->   
->   	kfree(master);
->   	return 0;
-> diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-> index 06d7643622..76ae1e674a 100644
-> --- a/xen/include/xen/device_tree.h
-> +++ b/xen/include/xen/device_tree.h
-> @@ -300,9 +300,10 @@ static inline domid_t dt_device_used_by(const struct dt_device_node *device)
->       return device->used_by;
->   }
->   
-> -static inline void dt_device_set_protected(struct dt_device_node *device)
-> +static inline void dt_device_set_protected(struct dt_device_node *device,
-> +                                           bool protected)
->   {
-> -    device->is_protected = true;
-> +    device->is_protected = protected;
->   }
->   
->   static inline bool dt_device_is_protected(const struct dt_device_node *device)
-
+web: https://vates=2Etech
+---=Part.2738.9a73b4bc15a7d56d.19dbace74b2.a262829cedf10721=---
 
