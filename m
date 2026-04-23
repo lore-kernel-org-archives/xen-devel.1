@@ -4,40 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53241F94CBC
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 06:21:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1291093.1570446 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C0D8F9EDFE
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 07:05:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1291616.1570482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFnRI-00048N-0r; Thu, 23 Apr 2026 06:21:28 +0000
+	id 1wFo7A-0006iV-Qc; Thu, 23 Apr 2026 07:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1291093.1570446; Thu, 23 Apr 2026 06:21:27 +0000
+Received: by outflank-mailman (output) from mailman id 1291616.1570482; Thu, 23 Apr 2026 07:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFnRH-00048G-Tm; Thu, 23 Apr 2026 06:21:27 +0000
-Received: by outflank-mailman (input) for mailman id 1291093;
- Wed, 22 Apr 2026 20:08:35 +0000
+	id 1wFo7A-0006iO-Nw; Thu, 23 Apr 2026 07:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 1291616;
+ Thu, 23 Apr 2026 07:04:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wFdsA-0007sU-TR
- for xen-devel@lists.xenproject.org; Wed, 22 Apr 2026 20:08:35 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wFo78-0006ht-Vv
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 07:04:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFdsA-001TrF-6p
- for xen-devel@lists.xenproject.org; Wed, 22 Apr 2026 22:08:34 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wFo76-00HZdx-NL
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 09:04:42 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mfo@igalia.com>)
- id 69e92aa5-bab6-0a2a0a5309dd-0a2a450ca2b4-20
- for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2026 22:08:34 +0200
-Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <mfo@igalia.com>)
- id 69e92ac0-62f1-0a2a450c0019-d561b338b1ee-3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2026 22:08:33 +0200
-Received: from 186-249-145-131.shared.desktop.com.br ([186.249.145.131]
- helo=[192.168.1.66]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wFdro-000QN6-2I; Wed, 22 Apr 2026 22:08:11 +0200
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69e9c482-5cb7-0a2a0a5109dd-0a2a4503dd0e-32
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 09:04:41 +0200
+Received: from [52.101.85.66]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69e9c488-672d-0a2a45030019-34655542f719-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 09:04:41 +0200
+Received: from PH8P220CA0053.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:2d9::26)
+ by SJ2PR12MB8784.namprd12.prod.outlook.com (2603:10b6:a03:4d0::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.21; Thu, 23 Apr
+ 2026 07:04:34 +0000
+Received: from SA2PEPF00003F62.namprd04.prod.outlook.com
+ (2603:10b6:510:2d9:cafe::2f) by PH8P220CA0053.outlook.office365.com
+ (2603:10b6:510:2d9::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Thu,
+ 23 Apr 2026 07:04:34 +0000
+Received: from satlexmb08.amd.com (165.204.55.251) by
+ SA2PEPF00003F62.mail.protection.outlook.com (10.167.248.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.18 via Frontend Transport; Thu, 23 Apr 2026 07:04:33 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Thu, 23 Apr
+ 2026 02:04:33 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 23 Apr
+ 2026 02:04:33 -0500
+Received: from [10.252.147.171] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Thu, 23 Apr 2026 02:04:31 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,111 +71,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=CG+f99gT7Cze+FGPfBLcF87S5O/36isH7njf38xR63Q=; b=OKwd6A5xLH1bJcdBLDOnv8XZ2i
-	lWl1UWUVu3h86BrLtoFeWCBfpU2bihQEf8FeBcOQ56n6T2kTO/ZzQUVxOh60BnBY8zmH4WsOo9sj2
-	pj1egl1mFkGBZBpZjIrH6aFWFOXTkaJNPiNANr8YsKfqigBdRd3T9/vUw8gN8237zaR//pMRs3Aaw
-	VocJZgfgNK8hun7DHMiw8Y1CSA9E1pK4stZ9xNZkDaLwX+fuBeO+TdkzZwpK5qP8ojYf4hbMqpRir
-	CmX0EGP6b5coLgijMwibBWxbpOAG/HMpmCvfk0rdAWbiuJqQjaebumMcZrYfQB7G1OFqOqKt1X4HB
-	i0BgXmbA==;
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Wed, 22 Apr 2026 17:07:45 -0300
-Subject: [PATCH 1/3] x86/asm, x86/boot: Expose inline memcmp
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vK8LMdjbdx3p1m0cbEZhMPlKMrjPU9zMSri5y8Oeip2oqckDVm+MlBMnPpiPv8q+yS+19d+vluKqaEZwH5ymO7nV6uY7+Z71NnXE7w6ZF5aMvfS6gNaCRr30XT/V2BL6fgjV3VhWbWxyQuthYRXu6O+xiT2NSLizS9sw/6DoP76r39Ag8GZ0+FmkoEKRpW68KRndmQGvJBswu8cDX7zPEB5ECCupLE4DXy+lJWupo1+rDPWFPFGtrq1PSkIDZCACmajjQmyW/LGBpL+mh8P1ptQ4y/xLGLPAOp5+I4XqsynecJ33QGzeoViw1ayiOkQA9AHURBigU07+HeXxwYt3MQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7Z6V0vxoVpbh7739XmUgT+IFt6qAMu1fDUIzhMI2wsY=;
+ b=g+r/9IZZ4TJGJ4QOFtJnMTc7ERDwVgBvKbuB5lK+HaoSM7D0dO5NrCErHz0cMD6fJl4zuM7HOrUmdsM6ia4JV5MA5GAdDA+d/HNQjTmqJkOa2sAjoyw/gOElIfm+mhO8kcILy6kvSqbj2zbTGcFX7dVQjDkE2HGaf5mE4pmLj8rDJtTTZGcoVtT74vhK1zKaWbcmI8NZok8tyzKYODYE5EsAgFrsY/sGnEJ29IQ5JVRl0nC+QyCiNeHa92OnJABbWNUt9vUgrPzRal9JBM6+966512PwFq96X9JfIpnFHTpGsKrxmsER6w5pn2V4+/loiASKbnzbGsBUZY7bBE3mYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 165.204.55.251) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7Z6V0vxoVpbh7739XmUgT+IFt6qAMu1fDUIzhMI2wsY=;
+ b=397Ddub/TkC5Fz4hGTXX7E9PG2l7aNqrmQBKw+b+N4TNKqJYXOgyxUO7t2StQw1eL8veDnjWRY7qT/8uidiucxSqaf/vGVEKXuNPYRL0v7FdgVEHmx2UIjXlnQ+rdJ9MPVHBXHZ9EWFi0hhCm/1X2ofWu6ejwEmY5Flya8T0n8g=
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
+ 165.204.55.251) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=amd.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ amd.com discourages use of 165.204.55.251 as permitted sender)
+Message-ID: <9bfbd603-57a2-4a9b-a4be-5594c15ec8a3@amd.com>
+Date: Thu, 23 Apr 2026 09:04:31 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Arm: device.c is init-only when OVERLAY_DTB=n
+To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+References: <c50219c1-5a23-46d0-bbe3-ab4a871a935b@suse.com>
+ <53b251a1-948d-4c9c-ba0c-6f4fd99b1d6a@citrix.com>
+ <a4345272-872c-4967-92e1-bbf74bf65ac1@suse.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <a4345272-872c-4967-92e1-bbf74bf65ac1@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260422-pvh-kasan-inline-v1-1-7e6194344c92@igalia.com>
-References: <20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com>
-In-Reply-To: <20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com>
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-d25034/1776888514-6E776CF5-316B6DE4/0/0
+Received-SPF: None (SATLEXMB03.amd.com: michal.orzel@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F62:EE_|SJ2PR12MB8784:EE_
+X-MS-Office365-Filtering-Correlation-Id: 50547a52-443b-4721-1c35-08dea10692ee
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	8IhQ3FaTvIpRd+HE0e2aFI48xjS7UsaF9AUFHr73Z0w7A/i8j3Hu8HQSyRT11lRkCACRW6cdlRxGGH4VRE/FJJqegOLNHsHyCqhO1FsSYRwmzxLDXmD//BN3PJVyGLJmdALrYVkEiOs8WLuPGb8eqpUdRyuLK2rl4NQ0Bj06uSRtVZMxtubV2GVo6in4KpPhNFQs9/9ACT+RHlXO/Jubh1+KXlNgxCkUBynIi5lSAQB5m6F/DC3rQB1fM5OyIqS42pQ2ZfgS8btCnxdTxDnybnVfuR1YxfUsFgJEdbtzpw8kf27vWZf6BcbXZwpdq7MQq76eh8oijVtKplPXpW19VmLbUt5xD/hSycPqd41Sc+ICkCSwJi/mss3lZdgeVA8X8YbboaNujr5hlciCXaIuJJ2zeehDDVESzO/SDjLzPVcn3yhCqLljssawsQrcU33Obf8zfVLcUkAW7/vQL1e6yOxuQaA94izrwAoEsWgaW+jVc8TRnFzsqu3yqGxv0q2onoIHIhe+zADudokQkJ7qJvCbMaKxb8Mxe+Yd7kFKQS1BEaod3maiDYjTTxXI1w3PS3hkN/5c6/H9YDPFcdzIfMlISiEyJkcAoyRljVmGJuTnp6t6YqYp2RBiGBlj3fMkkV1ltB6Yvdnvo4iSJjdsPgYlOVLA6Y8Qd8QfwmCweOx4KxIOnnczXVGGNL2CaZMTGlM/DX9gUydeTj29NLde/2dbW+vq6ll2hJAhhj8L1/82lHpydfdl8787REXrB9N10RlVgzt6cDl2eAzyjhUZoQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.55.251;CTRY:CA;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	+rtKFzmECy7qsGsOapfbHuQyq5I2Kc3g/WnSADp5rIGQLsx0Z0RjJsrluwi+v0PjL6HnInO6CsBmyAhe8zyOAaJtF9VCKqkhnoNb0QTmBo4YS1zw2mg9cPyOFGIpnrzGLwzUeZDUfOfD9P5SVnQFfYotqCZf0GWUmfYoCRCcsoNqC1FHBIx4g+lM89VqHcRc2SpGUi1cwJcZ2qE14mifYgekZOFDfrgL21NCPpfR5zB9hFQrA3fzbzgH6oqMox/o+4fXMzG6qCOmkFSsbmRUmA9na3ZwXICogiCJ0OBeGzMdj/ZC2VeQwxp7RUnzu2lFI4PjjBhR6FsmdrDsue/GpIDrz/ScR++bhViKyzjJqensAS6JQtPyceyQljXHCVVJn5d77vyUQmgBjLpPeE3NSFlFNt7m3z6uuu5v8MY3YljsWKOh0zbsR9Ky5LFVtYAI
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 07:04:33.7731
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50547a52-443b-4721-1c35-08dea10692ee
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.55.251];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003F62.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8784
+X-purgate-ID: tlsNG-33051d/1776927881-2A766938-17B3421E/0/0
 X-purgate-type: clean
-X-purgate-size: 2108
+X-purgate-size: 1374
 
-Move the inline memcmp function, currently only available to boot code
-(boot/string.c), into the header with similar inline string functions
-(include/asm/string.h) so it may be reused.
 
-Add a _SETUP guard in string.h so not to include the 32/64-bit specific
-string headers in boot/ code (16-bit, real mode) and avoid build errors.
 
-Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
----
- arch/x86/boot/string.c        |  6 ++----
- arch/x86/include/asm/string.h | 11 +++++++++++
- 2 files changed, 13 insertions(+), 4 deletions(-)
+On 27/02/2026 07:50, Jan Beulich wrote:
+> On 26.02.2026 18:14, Andrew Cooper wrote:
+>> On 26/02/2026 4:28 pm, Jan Beulich wrote:
+>>> --- a/xen/arch/arm/Makefile
+>>> +++ b/xen/arch/arm/Makefile
+>>> @@ -15,7 +15,9 @@ obj-$(CONFIG_HAS_ALTERNATIVE) += alterna
+>>>  obj-y += cpuerrata.o
+>>>  obj-y += cpufeature.o
+>>>  obj-y += decode.o
+>>> -obj-y += device.o
+>>> +device-y := device.init.o
+>>> +device-$(CONFIG_OVERLAY_DTB) := device.o
+>>> +obj-y += $(device-y)
+>>
+>> I know we've argued over this before and not come to a conclusion, but I
+>> still firmly believe this to be an anti-pattern we should expunge.
+>>
+>> obj-y += $(if $(CONFIG_OVERLAY_DTB),device.o,device.init.o)
+> 
+> Whereas I think this one (in its adjusted form to really only accept 'y')
+> is, firmly believing that the "lists everywhere" approach is the more
+> readable and, more importantly, more scalable one. The form you suggest
+> quickly gets to its limits when multiple CONFIG_* need dealing with.
+I must admit that I prefer Andrew approach. It took me less time to understand
+what the line does compared to your solution. I don't want to get involved in a
+discussion about consistency here (for me we can use both depending on number of
+CONFIG_ options), but with the line changed to what Andrew suggests:
 
-diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
-index b25c6a9303b7314d5caf5c9306239811705294fe..bbee78637b349e42e9281d8df50d89d48f4490b9 100644
---- a/arch/x86/boot/string.c
-+++ b/arch/x86/boot/string.c
-@@ -15,6 +15,7 @@
- #include <linux/errno.h>
- #include <linux/limits.h>
- #include <asm/asm.h>
-+#include <asm/string.h>
- #include "ctype.h"
- #include "string.h"
- 
-@@ -31,10 +32,7 @@
- 
- int memcmp(const void *s1, const void *s2, size_t len)
- {
--	bool diff;
--	asm("repe cmpsb"
--	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
--	return diff;
-+	return __inline_memcmp(s1, s2, len);
- }
- 
- /*
-diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
-index 9cb5aae7fba9ffcf0f5af8f939d30467750ccaa9..736a6f6a31f0a68281b4f17415aba0fcd95dc228 100644
---- a/arch/x86/include/asm/string.h
-+++ b/arch/x86/include/asm/string.h
-@@ -2,11 +2,13 @@
- #ifndef _ASM_X86_STRING_H
- #define _ASM_X86_STRING_H
- 
-+#ifndef _SETUP
- #ifdef CONFIG_X86_32
- # include <asm/string_32.h>
- #else
- # include <asm/string_64.h>
- #endif
-+#endif
- 
- static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
- {
-@@ -29,4 +31,13 @@ static __always_inline void *__inline_memset(void *s, int v, size_t n)
- 	return ret;
- }
- 
-+static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_t len)
-+{
-+	bool diff;
-+
-+	asm("repe cmpsb"
-+	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-+	return diff;
-+}
-+
- #endif /* _ASM_X86_STRING_H */
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
--- 
-2.51.0
+~Michal
 
 
