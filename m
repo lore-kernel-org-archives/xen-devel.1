@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0235FDEE20
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 16:12:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1292413.1570906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2287FDEE38
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 17:52:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1292523.1570947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFwem-0001Vj-Cz; Thu, 23 Apr 2026 16:12:00 +0000
+	id 1wFyDs-0002YL-JR; Thu, 23 Apr 2026 17:52:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1292413.1570906; Thu, 23 Apr 2026 16:12:00 +0000
+Received: by outflank-mailman (output) from mailman id 1292523.1570947; Thu, 23 Apr 2026 17:52:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFwem-0001VW-7u; Thu, 23 Apr 2026 16:12:00 +0000
-Received: by outflank-mailman (input) for mailman id 1292413;
- Thu, 23 Apr 2026 16:11:59 +0000
+	id 1wFyDs-0002YE-GP; Thu, 23 Apr 2026 17:52:20 +0000
+Received: by outflank-mailman (input) for mailman id 1292523;
+ Thu, 23 Apr 2026 17:52:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Oleksii_Moisieiev@epam.com>) id 1wFwel-0001Sy-2A
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 16:11:59 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbb7885c7000f373@swg.vates.tech>)
+ id 1wFyDq-0002Y8-1J
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 17:52:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFwek-004X8B-Et
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 18:11:58 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 69ea44cd-5cb7-0a2a0a5109dd-0a2a4503b4ba-2
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 18:11:58 +0200
-Received: from [52.101.65.82]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 69ea44ce-672d-0a2a45030019-346541523953-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 18:11:58 +0200
-Received: from DU5PR03MB10263.eurprd03.prod.outlook.com (2603:10a6:10:519::5)
- by PA4PR03MB6752.eurprd03.prod.outlook.com (2603:10a6:102:ea::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.21; Thu, 23 Apr
- 2026 16:11:42 +0000
-Received: from DU5PR03MB10263.eurprd03.prod.outlook.com
- ([fe80::8c9e:b301:61c0:3908]) by DU5PR03MB10263.eurprd03.prod.outlook.com
- ([fe80::8c9e:b301:61c0:3908%5]) with mapi id 15.20.9846.021; Thu, 23 Apr 2026
- 16:11:42 +0000
+ id 1wFyDn-0026Y1-SU
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 19:52:17 +0200
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbb7885c7000f373@swg.vates.tech>)
+ id 69ea5c1f-5cb7-0a2a0a5109dd-0a2a4504c55c-36
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 19:52:16 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbb7885c7000f373@swg.vates.tech>)
+ id 69ea5c4f-1dec-0a2a45040019-b9ff1c22b0b3-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 19:52:16 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19dbb7885c7000f373.003 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 23 Apr 2026 17:52:11 +0000
+Received: from [192.168.1.200] (lfbn-mon-1-1130-120.w90-48.abo.wanadoo.fr
+ [90.48.233.120]) (Authenticated sender: thierry.escande)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5D9BC86AED;
+ Thu, 23 Apr 2026 19:52:10 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,181 +58,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WaMhlaGHLVRqRK1rmuiHLsU9FNN1BH3/EuraybNZrfFcbaJpltYvLQTBLiDagZxwZIxVmondjR1FVlPozOI51QTByf/GKmH3kGqvpss+xlyiZZCEBLwe0e+agJACjL+ucoxZgJUrQSahuBz8hrGE3tgISYWhOO0sIyv+eHjtIxQHIcECdj08WMxivIph/pJj7mt6tAySViP6x5BEAxHG7A39P98iFZvSUHx3QsHkqfII3TdfEmOciuTUJfUw1FjTvkMMYJBvaM+iHszULuIerYoxjKozg+NeZYXdYVYJHWnCpsi/7XUlci4U/dlplHGcfmwOomAY6Ui+WpA6TN/FEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mvr5mzI9zMbvHinWk6X4HXPCOg0zLvukpXSOGKW0FUg=;
- b=Cc3gTOxEaYjW9SdUCK5XJp5HlhokNH3rY5hLUHI3btX9UBu7VUV2hkQ7H/Gk3vhITz0o0rVbDVHYmEYZVTnSTz+lbj2DagJlRza2+pZVHIBxjTz6Tgr8rwbh3GyKDTKSs64Bq6eM32EBTiqCXn3w7338m4XzY1EUzwzUqpk9KzNFq7Edyl/zudEkM1Zk/qoImhHILtG/jDddTuT/rPnwAB84TOZJwnPuXMrDWqu6I07P8PpgkT89uIFIAISfGZx6YjkEw6tgk4YkZaRvmWk7TGWNinHKH9M3DnpPq4X3zEh+aNbROFX/0kQHnw6xjSTNhuaQM6m3ZNghPzn4Dw6HvA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mvr5mzI9zMbvHinWk6X4HXPCOg0zLvukpXSOGKW0FUg=;
- b=frBAt8e3Y9CReptWl6YW0626v9tI5naQkpsSZmVdhKssjCkJffsiT5r15zBxUM4XeSzJ+jjuJv5UDrN6qAOQwXc51XJ9nmwaH/AWO10lfQenrJZfgBZfjUQElW/TOmOy+d56Yjf0zCc0H9UeigKJhJiDKNsFSXplPYR3/McNS0iXQSe3Nc5F7woC3jTK0cmyJg0yJ0a375povNVljP5zTY39zMk+cqkbfcUlMPUBSSHz9CpUtZA2cGXUS9DzZ0AR+/RYgCu5FQfgtLH8tO/DM02OIgeBNY6hzq+6lG66tYR/dKDXF5Pqpoyi4XZx8b4tvPLy+RirQYv7VjlcVMSLXA==
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>, Julien Grall
-	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Oleksandr Tyshchenko
-	<Oleksandr_Tyshchenko@epam.com>
-Subject: [PATCH v4 3/4] xen/drivers/char/cadence-uart: fix IRQ registration
- failure propagation
-Thread-Topic: [PATCH v4 3/4] xen/drivers/char/cadence-uart: fix IRQ
- registration failure propagation
-Thread-Index: AQHc0zvfVnWwKQ/dg0SioeeuT3c8CA==
-Date: Thu, 23 Apr 2026 16:11:42 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=svyh7iABzxNWCIFS+Y8B4puT50eckbDbd1zj5xN4dF4=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=LwB4qYqTBBllwaefrBVZqywImaNvR1duENNhbyE8McNl1gsBG3CUCU061ClChwBf3d0IqQcAh
+ u4AWR6waK2fN5ACx/ArOFfxKqsm+WP5TCrdMHqA3Rdlac2DFBrf8nTKdvlyCvZSQ0KlFf34GZCF
+ 5mOd1E9Thr3VotCH/VkHXnprHZ/0qPDzgcf10ZoIKokumiIzjtv5TTqFWNpdoz5t2vxdsSbCbcK
+ +kUAHvLlDfuCkvSblLltUSSGNa/odRBrXjZuHITT8LPwvN+MGOAvyj3z0Jtn4PEf+mSg4aEeOkp
+ Cu+Kukrga1YYDStxk/Q0Uo5Wyv+KHG5nvPiPDhLFjvPA==
+X-Zone-Loop: 32f2c00c9b7d3cf44e56917fcd66f2df1a35843bb680
+x-campaign-type: default
+x-transaction-id: bf7e314c-f043-4937-a57c-e22cac454199
+x-swg-uid: 01-2e9171f1-d310-4d4e-abe9-06a1025971dc
+X-Mailer: Sweego
 Message-ID:
- <da5af37c01b39495aac11da15325236904c77a5c.1776960679.git.oleksii_moisieiev@epam.com>
-References: <cover.1776960679.git.oleksii_moisieiev@epam.com>
-In-Reply-To: <cover.1776960679.git.oleksii_moisieiev@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DU5PR03MB10263:EE_|PA4PR03MB6752:EE_
-x-ms-office365-filtering-correlation-id: 301c4b89-c713-4158-644d-08dea153021b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|38070700021|56012099003|22082099003;
-x-microsoft-antispam-message-info:
- LQgckP5heoKs5Qw65LsHv1hFeOuexpPHetEvmGDCO2I4FefVSw7J9Z6186lXtToldrf5OPTqNYAugtoRGwXDq/ibFHvn28AcmDX3ozol0QwJdV0olwRBfOK6iaDAJ4blJD+/mky6QkqXPGxVpP2N8uL4Ugsqd2JqS6uyIeD1SLBsScfVGMZxb35qrWy8SbNByFPSK4toWpfXl3HxumrTVwilawXanCCUYc5IpYnUOE96v3AqKly5J+v3+iAYVoOrHXq7Qj45oazpRFvLXv+IIQLPeUh2/+omzpdBeyib9Ya43zmK4ZxP8ylLUGBXSdyi6ZyJ7Dj46RgNYvCcbqCm72ndcrtgUV3NRNFz9d5C94pzauhlO5JoINTZnQvyMzbDXvS8HA/PvWhWK4T3P+AoE5LOgSvNsjJ1IXUzFhux/TytIVvT/62dPNP6cFMgLo9SyQLR6T2ez+QlXBJFg9jPCX1/MdxIpUJPhMi67HbD7AX2ALhQF7uHwodTY4uT1SZJZ/bKICye0qncD9NDODvm7xE3imnADFqyy4lggpsv3yjKHBaxr6M1EpAaIpZwUy/CjAn7bCfMwOn7uh9qEwUTxoofvA7szFfnP622a8Xe79jXq9t5LoRbfaCMlmNtV+O66O8q4w87jLTZ+9EagDedJy3FO1GuNLuf3M6eRcyInV89JQW+9mjcwbBh+zVIMRlIdTeC5ySsOVT8PucMjSh+rKMkGi2YP4BOB6r+ZhF6MHCYR5koHtWTmjS1Zh5CEvgDzfuIorI/KzYyXRR9QYhGtUFHFmE6FVCQiCVvxTmKmBI=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU5PR03MB10263.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(38070700021)(56012099003)(22082099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?jvKcKlgrBDhh6UEv87etZNSRXnk1JIb7/qPPBw6RUNw+EaZMOycCyA8Kdm?=
- =?iso-8859-1?Q?bXFNEWXUKxWBM1viFi4mpyVmlW3CBjhh96i6IqB2Nm1hk97TlNI5T+QuL1?=
- =?iso-8859-1?Q?5KBAR3jeFvZt7nDiit3JZpnsLOiCyRsNTZCGcO49AokGIa+yrKVh7Y2We7?=
- =?iso-8859-1?Q?AghLRUCT+2NtXqYjoXRJnM8g49blCTKj4GFZAhTzvtWfVkC8eIUdDEYzpP?=
- =?iso-8859-1?Q?ab5KJR/YyRcRIuuLa28/ufrSGZRKOyOACboi8I9zGxY2dGcaoQTzqDpREH?=
- =?iso-8859-1?Q?H2brTfA6ZAmPXmcy2I/AS/Cy6kqCKq0o1zWI1ZmJF6L9nIitU9R29Cqrvi?=
- =?iso-8859-1?Q?DDxBkXz3B8ZyrUtHyJXOzeSGbt45Z4aRhQZmq98SOk07OiVgwXTMuLcIfd?=
- =?iso-8859-1?Q?a4z3Rzx2VMNxWTukWH5mtAO111BhWt6xrn4zbjveolEIHmSAJL+/XS0Pkr?=
- =?iso-8859-1?Q?PftojvC+4ocyvcZR27cUb7Gxf5pY2EfjmedxC4k5BCGpFef84d2JcuqCkA?=
- =?iso-8859-1?Q?D/BhbN20xIX5N8Fk7o1MlUAwFcS6gsJpOqsBT+U0vUtdAkEQC1BvwOQnDO?=
- =?iso-8859-1?Q?IerYn8HAKyEZVT4GVyIWxqAQgp/cX9ul7Hd2/pZ0NPHzJBRIM2Vy6u/nfq?=
- =?iso-8859-1?Q?zGQcuYVUAx76V1nZJgGZPOuK/vPLoIgAVcxLqVWD3xBMDZGX72ANzHHPbM?=
- =?iso-8859-1?Q?wNyMgcY/Pb9GubodAxqssZoZMWal6yuOSLPMVLHhLRq2oczX5WfzKxarYa?=
- =?iso-8859-1?Q?Yu5115eVzgT6J8wXJ3Qp4+jF8B38rGdnoswNHZzxIon9SFitvk7YLqpGjZ?=
- =?iso-8859-1?Q?UrQAEIB50n7pFrwRXRetXz2/jd3FFZPBbwYIgIYojz7wZDemOk9WTAZUt9?=
- =?iso-8859-1?Q?dCVDvaS52ubOuuomkCtAd2CEGF8fYyOlBCmGC2fIyJGO/XSrhKaAYOA5yP?=
- =?iso-8859-1?Q?nQw/gjaDXLxosu2DeMkShaEMCXXngfaXakKgUbIh5UTazn8jb3cVmwriT3?=
- =?iso-8859-1?Q?CA6juof1yO9DATvYWXj2C1umeeV+R8iSFtabC5ow1DFffFvRB9l/oryyAS?=
- =?iso-8859-1?Q?sEbGHNjelsZWdzw131bwk9XfLYrDbHBNqxrh5dD2BAy3JOvodisvHHjgRR?=
- =?iso-8859-1?Q?/1aM5xhpjdXsak4gpbRye4WNIdT1d3SyNUf66OMbjoUFe8RCB7BTCjlqsW?=
- =?iso-8859-1?Q?KoG+j9Bk7aauEoCXuLv9AnxZd1i9eyde6AETiZXWJGTQVJrkA1rXPwVXFs?=
- =?iso-8859-1?Q?Z2r8d5+teCPNaFizdzJQTg8kp/ws8loLBbvzK0BBFUX1kfOrnnFMIeWM94?=
- =?iso-8859-1?Q?Lmr5ERu/CpFqYo6YXGEwUiLTQ6YExKL40wnb9/Z32KF3zw4MPt9prgt+Hr?=
- =?iso-8859-1?Q?E92XtKunJk4yG9rq5myMHi6MlDhKIz29jjOjHkiPl9tYh3oXoL43cVtKha?=
- =?iso-8859-1?Q?p6Ak5nSTz2yYZlhSOoPV+WK4qImCdn6nlSpVhoJQHjzlHGj36CcUfhUosn?=
- =?iso-8859-1?Q?F8NRB+7zw1eHQztlJlKNIqB0wwfMAn1V9m6Sidx851FeWjpLBrfF1Fsoza?=
- =?iso-8859-1?Q?dO72bwoYI46tQlXLH9+xm7iKaOGgfh/LI311gDfbnATyjFRDHZ1/EaHPmR?=
- =?iso-8859-1?Q?GBzciLJF+mz6TOsF7AeGw3u7DKZ7xb3wYp7lrlTzCgVCYXMVhGyi45yg+F?=
- =?iso-8859-1?Q?mIBvoq5s4qlTfyBCUEqCQ2MbF/Z8TeoMGj+wQ+qcX4+au7XlSM8MXrdzt1?=
- =?iso-8859-1?Q?FxqC1LVyJjZDNHoXKusr8bcZepMoAnOkWsYmR3OC9GxIh5fMZj6Fa8+Kp4?=
- =?iso-8859-1?Q?QrTZoiWoztncMyCdYjRAiJQ2O7eRAM8=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ <1776966731.8631fc262581453bbf619ec5b2062170.19dbb7885c7000f373@vates.tech>
+x-swg-bid: 1776966731.8631fc262581453bbf619ec5b2062170.19dbb7885c7000f373
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Thu, 23 Apr 2026 19:52:09 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DU5PR03MB10263.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 301c4b89-c713-4158-644d-08dea153021b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Apr 2026 16:11:42.2002
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PmwOBkVQ0B4+RR4dLsLU9a71VTZJNIakFLnZvuJUm6jjeiMqxmrBmbQzMDpdwXLAxdopvH7KJlUJOSS5bcs6uQtlm8SonX8a9hdIqp/yCPg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6752
-X-purgate-ID: tlsNG-33051d/1776960718-2B161938-A244AA8A/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v4 0/6] xl: Allow PCI devices to be passthrough'd via
+ Qemu command line
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+References: <1776955586.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@vates.tech>
+ <317cac0b-854f-433b-8242-d498cdba6d63@gmail.com>
+Content-Language: en-US
+From: Thierry Escande <thierry.escande@vates.tech>
+In-Reply-To: <317cac0b-854f-433b-8242-d498cdba6d63@gmail.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.27a4.39131a8643359abe.19dbb788311.650115a9ec2631f4=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1776966730513
+X-purgate-ID: tlsNG-ebf023/1776966736-4B3673FF-38DAFA4B/0/0
 X-purgate-type: clean
-X-purgate-size: 2817
+X-purgate-size: 4499
 
-In cuart_init_postirq(), two code paths could reach the
-interrupt-enable write to IER without a handler being registered:
+---=Part.27a4.39131a8643359abe.19dbb788311.650115a9ec2631f4=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-- When no valid IRQ number was provided (uart->irq <=3D 0), the original
-  positive-condition guard (if uart->irq > 0) skipped the irqaction
-  setup but still fell through to the IER write, enabling the receive
-  data interrupt with no handler installed.
 
-- When setup_irq() returned an error, only an error message was
-  printed and execution continued to the IER write, arming the
-  receive hardware interrupt line with no handler to service it. On
-  platforms where the GIC receives this asserted line, the result is
-  either repeated spurious-interrupt warnings or an unhandled
-  interrupt fault.
 
-Restructure cuart_init_postirq() to use early returns in both error
-paths.
+On 4/23/26 17:20, Oleksii Kurochko wrote:
+>=20
+> On 4/23/26 4:46 PM, Thierry Escande wrote:
+>> This series adds new 'hotplug' option for PCI device passthrough=2E
+>>
+>> The current mechanism for device passthrough uses QMP device_add comman=
+d
+>> to hot-plug PCI devices to the guest Qemu instance=2E This is an issue =
+for
+>> guests running on Q35 chipset (preliminary support posted at [1])
+>> since the
+>> Q35 PCI root bus does not support hotplug=2E Devices could be hotplugge=
+d to
+>> a secondary PCI bus but Xen only support 1 PCI bus for now=2E
+>>
+>> The 'hotplug' option allows to control how devices are attached to the
+>> guest, either by using the legacy QMP mechanism (this is the default)
+>> or by
+>> passing them directly to the Qemu command line using xen-pci-passthroug=
+h
+>> device=2E
+>>
+>> Example usage in cfg file:
+>> =C2=A0 pci =3D [ "00:03=2E0,seize=3D1,hotplug=3D0" ]
+>>
+>> Since Qemu -device option accepts parameters in json format, this
+>> patchset adds a new internal function
+>> libxl__device_pci_get_qapi_json() that
+>> generates the device json object used for both QMP hotplug and command
+>> line
+>> passing=2E
+>>
+>> Also, to handle the assignable PCI device list, the function
+>> libxl_pci_assignable() is renamed as libxl_device_pci_assignable() and =
+is
+>> made available from libxl=2Eh for access in libxl_dm=2Ec=2E 2 other
+>> functions are
+>> also exported internally: libxl__pciback_dev_is_assigned() and
+>> libxl__device_pci_assignable_add()=2E
+>>
+>> This has been successfully tested on Xen 4=2E22-dev and Qemu 10=2E0 run=
+ning
+>> Debian VMs in both Bios and UEFI mode with a passthrough'd nvme disk=2E
+>> Disabling the hotplug mechanism might be made mandatory for Q35 machine=
+s
+>> later, once Q35 support is merged upstream=2E
+>>
+>> [1] https://lore=2Ekernel=2Eorg/xen-devel/20260313163455=2E790692-1-
+>> thierry=2Eescande@vates=2Etech/
+>>
+>> Changes in v2:
+>> =C2=A0 - Add support for YAJL json parser
+>>
+>> Changes in v3:
+>> =C2=A0 - Move code block of device command line parameters creation
+>> =C2=A0 - Better handling of pci device assignation
+>>
+>> Changes in v4:
+>> =C2=A0 - Split the refactoring parts of the 2nd patch
+>> =C2=A0 - Extend libxl__json_object_to_json() and use it to generate the
+>> qapi json
+>> =C2=A0=C2=A0=C2=A0 string
+>>
+>> Thierry Escande (6):
+>> =C2=A0=C2=A0 xl: Add an hotplug option for PCI device passthrough
+>> =C2=A0=C2=A0 libxl: Refactor some PCI device handling functions
+>> =C2=A0=C2=A0 libxl: Add libxl__device_pci_get_qapi_json() internal API
+>> =C2=A0=C2=A0 libxl: Extend libxl__json_object_to_json() prototype
+>> =C2=A0=C2=A0 libxl: Allow PCI device passthrough using -device Qemu com=
+mand line
+>> =C2=A0=C2=A0 docs: provide description for pci hotplug option
+>>
+>> =C2=A0 docs/man/xl-pci-configuration=2E5=2Epod | 17 +++++++++
+>> =C2=A0 docs/man/xl=2Ecfg=2E5=2Epod=2Ein=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 6 +++
+>> =C2=A0 tools/include/libxl=2Eh=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
+>> =C2=A0 tools/libs/light/libxl_dm=2Ec=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 | 33 +++++++++++++++++
+>> =C2=A0 tools/libs/light/libxl_internal=2Eh=C2=A0=C2=A0 | 12 +++++-
+>> =C2=A0 tools/libs/light/libxl_json=2Ec=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 11 +++++-
+>> =C2=A0 tools/libs/light/libxl_pci=2Ec=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 | 57 ++++++++++++++++++++---------
+>> =C2=A0 tools/libs/light/libxl_types=2Eidl=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
+>> =C2=A0 tools/libs/util/libxlu_pci=2Ec=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 |=C2=A0 2 +
+>> =C2=A0 tools/xl/xl_parse=2Ec=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 5 +++
+>> =C2=A0 10 files changed, 123 insertions(+), 22 deletions(-)
+>>
+>=20
+> I think we also want to add an item to CHANGELOG=2Emd that it is possibl=
+e
+> to passthrough PCI device via QEMU command line=2E
 
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
----
+Sure, will do=2E
 
-Changes in v4:
-- fix %d to %u since irq is unsigned in cadence uart
-- add R-b
+Thanks,
+Thierry
 
-Changes in v3:
-- clear pending error interrupts before setup_irq call for cadence uart
-- change uart->irq <=3D 0 to uart->irq =3D=3D 0 since irq is unsigned
+> Thanks=2E
+>=20
+> ~ Oleksii
 
- xen/drivers/char/cadence-uart.c | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/xen/drivers/char/cadence-uart.c b/xen/drivers/char/cadence-uar=
-t.c
-index b2f379833f..0f1c3dd461 100644
---- a/xen/drivers/char/cadence-uart.c
-+++ b/xen/drivers/char/cadence-uart.c
-@@ -72,19 +72,25 @@ static void __init cuart_init_postirq(struct serial_por=
-t *port)
-     struct cuart *uart =3D port->uart;
-     int rc;
-=20
--    if ( uart->irq > 0 )
--    {
--        uart->irqaction.handler =3D cuart_interrupt;
--        uart->irqaction.name    =3D "cadence-uart";
--        uart->irqaction.dev_id  =3D port;
--        if ( (rc =3D setup_irq(uart->irq, 0, &uart->irqaction)) !=3D 0 )
--            printk("ERROR: Failed to allocate cadence-uart IRQ %d\n", uart=
-->irq);
--    }
-+    /* Don't unmask interrupts if no valid irq was provided */
-+    if ( uart->irq =3D=3D 0 )
-+        return;
-+
-+    uart->irqaction.handler =3D cuart_interrupt;
-+    uart->irqaction.name    =3D "cadence-uart";
-+    uart->irqaction.dev_id  =3D port;
-=20
-     /* Clear pending error interrupts */
-     cuart_write(uart, R_UART_RTRIG, 1);
-     cuart_write(uart, R_UART_CISR, ~0);
-=20
-+    if ( (rc =3D setup_irq(uart->irq, 0, &uart->irqaction)) !=3D 0 )
-+    {
-+        printk("ERROR: Failed to allocate cadence-uart IRQ %u\n", uart->ir=
-q);
-+        /* Do not unmask interrupts if irq handler wasn't set */
-+        return;
-+    }
-+
-     /* Unmask interrupts */
-     cuart_write(uart, R_UART_IDR, ~0);
-     cuart_write(uart, R_UART_IER, UART_SR_INTR_RTRIG);
---=20
-2.43.0
+
+-- 
+Thierry Escande | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vat=
+es solutions
+
+web: https://vates=2Etech
+---=Part.27a4.39131a8643359abe.19dbb788311.650115a9ec2631f4=---
 
