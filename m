@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F383F589DB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8714CF589DE
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 14:51:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1292212.1570757 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1292211.1570750 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFvOO-0006C1-3C; Thu, 23 Apr 2026 14:51:00 +0000
+	id 1wFvON-00069G-Lz; Thu, 23 Apr 2026 14:50:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1292212.1570757; Thu, 23 Apr 2026 14:51:00 +0000
+Received: by outflank-mailman (output) from mailman id 1292211.1570750; Thu, 23 Apr 2026 14:50:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFvON-0006B6-Qi; Thu, 23 Apr 2026 14:50:59 +0000
-Received: by outflank-mailman (input) for mailman id 1292212;
+	id 1wFvON-000697-JC; Thu, 23 Apr 2026 14:50:59 +0000
+Received: by outflank-mailman (input) for mailman id 1292211;
  Thu, 23 Apr 2026 14:50:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad29220000f373@swg.vates.tech>)
- id 1wFvOM-00068B-Hv
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad285c5000f373@swg.vates.tech>)
+ id 1wFvOM-00068A-DI
  for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 14:50:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFvOL-00F6TN-Uw
+ id 1wFvOL-00F6TN-QG
  for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 16:50:57 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad29220000f373@swg.vates.tech>)
- id 69ea31c9-5cb7-0a2a0a5109dd-0a2a450ab676-16
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad285c5000f373@swg.vates.tech>)
+ id 69ea31c9-5cb7-0a2a0a5109dd-0a2a450ab676-14
  for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 16:50:57 +0200
 Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad29220000f373@swg.vates.tech>)
- id 69ea31d1-56b3-0a2a450a0019-b9ff1c2297ab-4
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dbad285c5000f373@swg.vates.tech>)
+ id 69ea31d1-56b3-0a2a450a0019-b9ff1c2297ab-3
  for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 16:50:57 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19dbad29220000f373.002 for <xen-devel@lists.xenproject.org>
+ 19dbad285c5000f373.002 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 23 Apr 2026 14:50:55 +0000
+ Thu, 23 Apr 2026 14:50:52 +0000
 Received: from xps13-debian.gpn.vates.fr
  (lfbn-mon-1-1130-120.w90-48.abo.wanadoo.fr [90.48.233.120])
  (Authenticated sender: thierry.escande)
- by mail2.vates.fr (Postfix) with ESMTPSA id E0F3F860B1;
- Thu, 23 Apr 2026 16:50:54 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id B477A860B1;
+ Thu, 23 Apr 2026 16:50:51 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,21 +61,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=2WxqC/7NDyEsVp5x99Nl9oXXPdTNIp1S8YTZI5ZJbF8=;
+ q=dns/txt; s=selector1; bh=KwW4d6fYi0KChvPkn7IffskRpGMBiOLh4S1NpTCLRGk=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=D3uTwvshadj9pwDd0Op//RUzAJcG+WoCNd+Sit8erp2UzsFQgxFdHHfThbm577EH4kPTbYYX4
- wMx/7MWUvZjK0wcb2ZWmM4y2EDp4HYnBXS9vDd0P3qq7Lrlqt5dpLdtbTGyCAYMRSPiuOmh9wF+
- JpsvJZHHqkXhfKnGWvCFCWL2krhzjTbFnbjDGgvP7VTxw/wyu7LoQjq585J18LW7Qdpup/NBZgH
- RkQFWjHADnEapKUATTb0EtfpjgNNNTedUG/KZxRmvIJUheflsnypFJbN7n836quWNiVqlACaY94
- eFxxR3B5lRNJBfpTAJkSvphRlw+AY82UjYMuEYJAaooA==
-X-Zone-Loop: c7871ee5573226db0411b0d5c46a7216be9db6eec7aa
+ b=HE2coy3cU39TschWJRYdYq8wFbpLpp7h7EjePCUoWR0rV4oUOEoTjHY1F1hLx3ZX0I+TrptgP
+ XA0G66L6CEBkO+Q1+Y0G6Ong8tZjL4GIBC97sd2Lrg8J0rPC/LXZtgBl0S8n9YDK9IMU3VEwPO9
+ IG38nZWhW7OPBEwspGaKDcvTvj4PN02VOoNzMTq63ftvcs33D3u2MdAzAIGJOVY1lU8hSre4PAd
+ TrziJSI8psId/HM8NyUYBY9Zw1smMaGAxuwFDED7Q4fHh0ua9FeAm58JkoFn+N/btW7BZb4wXfx
+ yYkAqQ9X/JrZB53lB7GYo1k5x5CTgm+g7p1xsa89I/RQ==
+X-Zone-Loop: 0eb424bdcabf1d73c22e5a825d30e8e81a2beb9141bf
 x-campaign-type: default
-x-transaction-id: 38361317-4f1f-42b1-9ee4-7288d10deb3c
-x-swg-uid: 01-523f3e71-0f87-4311-ad55-fa29c2f674b1
+x-transaction-id: ad9a1c9a-cb6a-4453-b392-fd440a969e31
+x-swg-uid: 01-527627f9-4b39-4f05-b98a-58bfae657f9f
 X-Mailer: Sweego
 Message-ID:
- <1776955855.8631fc262581453bbf619ec5b2062170.19dbad29220000f373@vates.tech>
-x-swg-bid: 1776955855.8631fc262581453bbf619ec5b2062170.19dbad29220000f373
+ <1776955852.8631fc262581453bbf619ec5b2062170.19dbad285c5000f373@vates.tech>
+x-swg-bid: 1776955852.8631fc262581453bbf619ec5b2062170.19dbad285c5000f373
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -87,103 +87,108 @@ Cc: Thierry Escande <thierry.escande@vates.tech>,
 	Juergen Gross <jgross@suse.com>,
 	=?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [RFC PATCH v4 4/6] libxl: Extend libxl__json_object_to_json() prototype
-Date: Thu, 23 Apr 2026 16:50:29 +0200
+Subject: [RFC PATCH v4 3/6] libxl: Add libxl__device_pci_get_qapi_json() internal API
+Date: Thu, 23 Apr 2026 16:50:28 +0200
 In-Reply-To: <1776955586.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@vates.tech>
 References: <1776955586.8631fc262581453bbf619ec5b2062170.19dbace7684000f373@vates.tech>
 MIME-Version: 1.0
 Content-Transfert-Encoding: 8bit
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2740.c5deada9ef7a8812.19dbad290c4.414c53236d9cbe01=-"
+Content-Type: multipart/alternative; boundary="-=Part.273f.2e8038414fb5c485.19dbad2845c.4007b31644528610=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1776955855045
-X-purgate-ID: tlsNG-4011c0/1776955857-46D708B7-FA9CBAE9/0/0
+X-Bm-Transport-Timestamp: 1776955851868
+X-purgate-ID: tlsNG-4011c0/1776955857-8127B8B7-A442E7B6/0/0
 X-purgate-type: clean
-X-purgate-size: 3323
+X-purgate-size: 3366
 
----=Part.2740.c5deada9ef7a8812.19dbad290c4.414c53236d9cbe01=-
+---=Part.273f.2e8038414fb5c485.19dbad2845c.4007b31644528610=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The function libxl__json_object_to_json() returns a json object as
-string in a pretty format=2E With support for the new PCI device
-passthrough option hotplug=3D0, the function will be used to generate the
-json string passed to qemu -device command line parameter, but the
-string needs to be in plain format, i=2Ee=2E without carriage return or ta=
-b
-characters=2E
+This function generates the qapi json object for a PCI device to be
+passthrough'd to a guest=2E
 
-This patch adds a 'pretty' parameter to the function to control the
-output string format=2E
+With the new option hotplug=3D0 for PCI passthrough, device parameters
+will be passed using Qemu -device command line option=2E Since -device
+accepts qapi json string, this new function will be used to do so=2E
+
+The code that generates the json object comes from
+pci_add_qmp_device_add() which now also uses this new function=2E
 
 Signed-off-by: Thierry Escande <thierry=2Eescande@vates=2Etech>
 ---
 v4: new patch
 ---
- tools/libs/light/libxl_internal=2Eh |  5 +++--
- tools/libs/light/libxl_json=2Ec     | 11 +++++++++--
- 2 files changed, 12 insertions(+), 4 deletions(-)
+ tools/libs/light/libxl_internal=2Eh |  2 ++
+ tools/libs/light/libxl_pci=2Ec      | 26 ++++++++++++++++++--------
+ 2 files changed, 20 insertions(+), 8 deletions(-)
 
 diff --git a/tools/libs/light/libxl_internal=2Eh b/tools/libs/light/libxl_=
 internal=2Eh
-index b6d764ad00=2E=2Eb87959e44a 100644
+index e87500bf55=2E=2Eb6d764ad00 100644
 --- a/tools/libs/light/libxl_internal=2Eh
 +++ b/tools/libs/light/libxl_internal=2Eh
-@@ -2270,10 +2270,11 @@ _hidden libxl__json_object *libxl__json_parse(libx=
-l__gc *gc_opt, const char *s);
+@@ -1734,6 +1734,8 @@ _hidden int libxl__pciback_dev_is_assigned(libxl__gc=
+ *gc,
+ _hidden int libxl__device_pci_assignable_add(libxl__gc *gc,
+                                              libxl_device_pci *pci,
+                                              int rebind);
++_hidden libxl__json_object *libxl__device_pci_get_qapi_json(libxl__gc *gc=
+,
++                                                         libxl_device_pci=
+ *pci);
 =20
- /* `args` may be NULL */
- _hidden char *libxl__json_object_to_json(libxl__gc *gc,
--                                         const libxl__json_object *args);
-+                                         const libxl__json_object *args,
-+                                         bool pretty);
- /* Always return a valid string, but invalid json on error=2E */
- #define JSON(o) \
--    (libxl__json_object_to_json(gc, (o)) ? : "<invalid-json-object>")
-+    (libxl__json_object_to_json(gc, (o), true) ? : "<invalid-json-object>=
-")
+ /* from libxl_dtdev */
 =20
-   /* Based on /local/domain/$domid/dm-version xenstore key */
- _hidden int libxl__device_model_version_running(libxl__gc *gc, uint32_t d=
-omid);
-diff --git a/tools/libs/light/libxl_json=2Ec b/tools/libs/light/libxl_json=
+diff --git a/tools/libs/light/libxl_pci=2Ec b/tools/libs/light/libxl_pci=
 =2Ec
-index 68f36901c2=2E=2Ec566ec83ff 100644
---- a/tools/libs/light/libxl_json=2Ec
-+++ b/tools/libs/light/libxl_json=2Ec
-@@ -1527,7 +1527,8 @@ out:
- #endif
+index 5551abe0a2=2E=2E5004ca47d9 100644
+--- a/tools/libs/light/libxl_pci=2Ec
++++ b/tools/libs/light/libxl_pci=2Ec
+@@ -1098,16 +1098,10 @@ out:
+     pci_add_dm_done(egc, pas, rc); /* must be last */
+ }
 =20
- char *libxl__json_object_to_json(libxl__gc *gc,
--                                 const libxl__json_object *args)
-+                                 const libxl__json_object *args,
-+                                 bool pretty)
+-static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
++libxl__json_object *libxl__device_pci_get_qapi_json(libxl__gc *gc,
++                                                    libxl_device_pci *pci=
+)
  {
- #ifdef HAVE_LIBJSONC
-     const char *buf;
-@@ -1542,7 +1543,9 @@ char *libxl__json_object_to_json(libxl__gc *gc,
-     if (rc)
-         goto out;
+-    STATE_AO_GC(pas->aodev->ao);
+     libxl__json_object *args =3D NULL;
+-    int rc;
+-
+-    /* Convenience aliases */
+-    libxl_domid domid =3D pas->domid;
+-    libxl_device_pci *pci =3D &pas->pci;
+-    libxl__ev_qmp *const qmp =3D &pas->qmp;
 =20
--    buf =3D json_object_to_json_string_ext(root, JSON_C_TO_STRING_PRETTY)=
-;
-+    buf =3D json_object_to_json_string_ext(root, pretty ?
-+                                               JSON_C_TO_STRING_PRETTY :
-+                                               JSON_C_TO_STRING_PLAIN);
-     if (!buf)
-         goto out;
+     libxl__qmp_param_add_string(gc, &args, "driver",
+                                 "xen-pci-passthrough");
+@@ -1134,6 +1128,22 @@ static void pci_add_qmp_device_add(libxl__egc *egc,=
+ pci_add_state *pas)
+     if (pci->permissive)
+         libxl__qmp_param_add_bool(gc, &args, "permissive", true);
 =20
-@@ -1566,6 +1569,10 @@ out:
-     if (!hand)
-         return NULL;
-=20
-+#if HAVE_YAJL_V2
-+    yajl_gen_config(hand, yajl_gen_beautify, pretty);
-+#endif
++    return args;
++}
 +
-     rc =3D libxl__json_object_to_yajl_gen(gc, hand, args);
-     if (rc)
-         goto out;
++static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
++{
++    STATE_AO_GC(pas->aodev->ao);
++    libxl__json_object *args =3D NULL;
++    int rc =3D 0;
++
++    /* Convenience aliases */
++    libxl_domid domid =3D pas->domid;
++    libxl_device_pci *pci =3D &pas->pci;
++    libxl__ev_qmp *const qmp =3D &pas->qmp;
++
++    args =3D libxl__device_pci_get_qapi_json(gc, pci);
++
+     qmp->ao =3D pas->aodev->ao;
+     qmp->domid =3D domid;
+     qmp->payload_fd =3D -1;
 --=20
 2=2E53=2E0
 
@@ -196,5 +201,5 @@ XCP-ng & Xen Orchestra - Vat=
 es solutions
 
 web: https://vates=2Etech
----=Part.2740.c5deada9ef7a8812.19dbad290c4.414c53236d9cbe01=---
+---=Part.273f.2e8038414fb5c485.19dbad2845c.4007b31644528610=---
 
