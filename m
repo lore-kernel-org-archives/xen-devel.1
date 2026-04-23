@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FF7FDEE48
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 19:05:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1292580.1570956 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E08FDEE47
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 20:04:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1292626.1570973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFzMZ-0005mj-Le; Thu, 23 Apr 2026 19:05:23 +0000
+	id 1wG0Hc-0007Sb-3q; Thu, 23 Apr 2026 20:04:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1292580.1570956; Thu, 23 Apr 2026 19:05:23 +0000
+Received: by outflank-mailman (output) from mailman id 1292626.1570973; Thu, 23 Apr 2026 20:04:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFzMZ-0005mc-Ig; Thu, 23 Apr 2026 19:05:23 +0000
-Received: by outflank-mailman (input) for mailman id 1292580;
- Thu, 23 Apr 2026 19:05:21 +0000
+	id 1wG0Hc-0007SQ-10; Thu, 23 Apr 2026 20:04:20 +0000
+Received: by outflank-mailman (input) for mailman id 1292626;
+ Thu, 23 Apr 2026 20:04:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wFzMX-0005mV-8b
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 19:05:21 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wG0Ha-0007FJ-J6
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 20:04:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFzMW-002tny-FV
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 21:05:20 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wG0HZ-005MS0-W8
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 22:04:18 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69ea6d53-5cb7-0a2a0a5109dd-0a2a4506d3c8-34
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 21:05:20 +0200
-Received: from [40.107.201.66]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69ea6d6e-7371-0a2a45060019-286bc942a7d3-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 21:05:20 +0200
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by CH4PR03MB7724.namprd03.prod.outlook.com (2603:10b6:610:244::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.21; Thu, 23 Apr
- 2026 19:05:16 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9846.019; Thu, 23 Apr 2026
- 19:05:15 +0000
+ (envelope-from <freddy77@gmail.com>)
+ id 69ea7b40-5cb7-0a2a0a5109dd-0a2a4505d46e-4
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 22:04:17 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <freddy77@gmail.com>)
+ id 69ea7b41-aaa8-0a2a45050019-d155dd2ddde8-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 22:04:17 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-43d6fbd0954so5585381f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 13:04:17 -0700 (PDT)
+Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
+ [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43fe4e3a341sm60065442f8f.24.2026.04.23.13.04.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Apr 2026 13:04:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,168 +53,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D/lqSSAD1xhAl+wcPEE2LSIyfroVauP8Bny0zSEvtHkzd/Lm0MbzC29lnv0qw/oZDVTFssrXWZ7WOhN2wUgr0RGgqk2zUx8doAmY3GZe5nAeuy5RJdHbO+mqvB0wBbBtXUFuyNw0SzPhBM/tbTVqjc0rSStox/XFiFfOndPKKcw/z2tU21HwqYjx4w5LAjg1V4dj/IaeqRz6WqevKd4u+CC4PT+F+wK9FVxsSopTM8hTnhVmPVSxLTALuVD4DJTot8QEreDrG8iQhCfEKonwpTzQtoEBp5eiU29AzVkHWg/YW3S0UC6oh5M+DDoARBUZRv3xz5ldGnGkDkOny8iOLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TT4SKwuDeacSLN/BvcsFT0MhedM6/CopzU9IpsvlNhU=;
- b=XUjUCpT4ct2aRuTFZU7xb3jS7H8wsufv9Co5mixYYzyObF8XZQfWMpLIAhuMg6iJpVWlVnApowUJR0KYVgrw7KXjDQ2i/Z1fFzOcUnzoghr9QxMx3Q2ezxdJPjobWSkB5GaRl3s6cULjQoCfcyp4NUzgLj3UKozD6WjpiYnWEgHRo6QbP0hif40eZOKBIZs3VxN5JomMvZujXXPPkTdW1krL9nI/B27w9IlsJxsTJ0ikWq0nkt/PG3VtW+qHuae8P7JuXmaDOOFFL/45q4xZZ/7UvMvzW2ClqNFL3YYhRFqNWFGIaefDQnWDEY+/sJ2dlrOFW7InByq3tD127e7zPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TT4SKwuDeacSLN/BvcsFT0MhedM6/CopzU9IpsvlNhU=;
- b=kpb4gUKqF6XOUlw6PKM7geWVa+HLPcOhsEJtim9jWbH12hHfaTpFRR34I3WKZmW3WXXpLfCSiTQ+EK0/GRUT0S22O6zF2UHv3BHo06WxGkje1SgJrAJZJuAcCxtG5S1Ek6ppKSoPuAhtB6livF2pFwiIakvgqm9kfa9xynZ82v0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776974657; x=1777579457; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XDfhd227o6gGh3k3sHyBHCTFmn0oVFwYEqgY5uwBNT0=;
+        b=UzRiAQxsJHjx+XfeEt5bh3mMBYBaQJOSfi2ngqVL9QnfRV4+8xp9ZWXTCyDW14tB6H
+         uWhdUXNoXwhgw1iQWN4V00BsYCaSyiPQ/4eSXPGIxpe3qkhpsrHXDxhhsYjgeM3LjNiZ
+         DQkgIFh1AS/TEGND6LpgZtCbLdQ69aoyX7Mu2PJWAx7gepVQb6crg01lOH9kr0mUU2sA
+         f5eaagr5SUv9kgXvBfg+tGF7FL4vvUKjugzn2rROqx6/Uvh81S9myPwT7IFk1sF4i4rm
+         SChvMe7jljMe8qJuxZJMfskoFG37BqNjPxh9HzK47JFIfuCaqqMnSxkopC6BQu5686Wf
+         lqNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776974657; x=1777579457;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=XDfhd227o6gGh3k3sHyBHCTFmn0oVFwYEqgY5uwBNT0=;
+        b=jc38qOmdrdgCBSdj73jYiOA3egfjFZz1f3CYhlzuLjOWUQ9Gy7skOxT58UuioxXxVY
+         ez5/Mm2dtJKpXlz1VO5bl6fCy8EZuJzXhd7Z3mRAida95WWlDWiL2jF3pz3UTrGcFLX8
+         Y1LR4Dw+/epgpS050ujjuNS4ALbXCGlAfjkUKNcNLXbsNsmMD1Q1t5e9Mse3qu1HBlp8
+         +xm8+Hx2X1un7dstYWQRo1IPRqw9f5ZuraJZFrhtJe8XhQ2fX8JBp6EDlgJEKEdifE0x
+         DH1vfsTGFUqbZMhWn79sbfzLuBRNf9FiL9w6zpoGu5dol2Tx8wEFwLFS1lVrB4Z5e8Un
+         D1jA==
+X-Gm-Message-State: AOJu0YyKqpFfN7A1XC9ElI/uu2U0Uuj6LaZdlHHFp108Ms4kc6kE2yfn
+	aFWuuPTFuMIhH4TVt2W0Wu6vYNHmFBbfhiYn0Fhy12yXxp15qkkMasLj7oRc2+TA
+X-Gm-Gg: AeBDies2e/ROep9y4NvUDkke8+w+GSz1Ase5+XDCZNXvuBG2vBesKceI+K0KKtD2RyZ
+	uNyzp6dGr24B2RKrRDmqgb94gj8XWupDvsCAPzcyVhQVLTSDWeHAdMJDFUmNXKNwwc/ViWZtI8q
+	zoR1RfPPhTzF5r8JnCwc47hesxC9C2poBSBbaCMoJwfAohAHBPu/kCjc5w6wClh5RxbTIcfKRk6
+	phPwV6jSwxpTX0u2B3gbelbd0E9dgaIfmmFYGe61t09dceqMZdbx4nRR7eWfK/1NpHMm4NSnjZN
+	ufEVYE8w9hnLrPlY2XcsX8YdAHUuo+OtWZcfLWCfs1nKuRF8Pq3VnsJFU61Uz2rTali7dIjh7fH
+	Gt+aHNogSNTWD3Tla2n2K/kYc9RrSkJOChYt3VieqlaNDVA3gTvz8djQ0FtjDRgBdlaTm6Lfglx
+	lzwuGdrZ+M81joyYMvvIb/OeNYBGNrkBOFlccd38bzvoBLibXvTBWDePUc7Vjr8G31v7rckHM1L
+	UQe
+X-Received: by 2002:a5d:64c3:0:b0:43d:309b:9c4f with SMTP id ffacd0b85a97d-43fe3db2d1amr41210620f8f.6.1776974657013;
+        Thu, 23 Apr 2026 13:04:17 -0700 (PDT)
+From: Frediano Ziglio <freddy77@gmail.com>
+X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Bertrand Marquis <bertrand.marquis@arm.com>,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] automation/gitlab: introduce macOS build jobs
-Date: Thu, 23 Apr 2026 21:04:59 +0200
-Message-ID: <20260423190459.93299-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MR1P264CA0137.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:51::21) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 1/4] xenguest: Reduce number of parts in write_split_record
+Date: Thu, 23 Apr 2026 21:03:56 +0100
+Message-ID: <20260423200406.28178-2-frediano.ziglio@cloud.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260423200406.28178-1-frediano.ziglio@cloud.com>
+References: <20260423200406.28178-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|CH4PR03MB7724:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae05a6a8-8971-4ce7-41d2-08dea16b40c9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	nhWViy3buhAySxvO/3TYrS/36Bv5ViWmZXCugIMw54QIwHkSk1mZTtnP0uGuNS1+3tIn/WY9Tfe0UIoWHYumLpGx5OkRTNa/RY/nW+pkqtGg6y+Sgkxiop8gYvDp/zH06QZLX5vev0kKvW36SndVfIEMa0IZFiiCmxTIGD5Gl/enZnOPFoGALOyiSX7+f/e4YU5m0m5z49NR6JcB+bnN2wrPBkHlBJyIR7QEnPTNdh9kcLVB96Z4lYD1Hd9TPX7f4ijhqGWZWP5bsiT+c/TvxgDSv1edgt9N5Gz+6SRkAZxHCBnP/m5iBXi8OxoyClz3MRMaHDXs7FkgJUXVf/ichO/70okl4vZe9SAfWbB6Fq0QMtH2dMuAlT0kLM6dK0hKGqS/ubnllKtEz5cvG8ji4lDuveUbMA/2Ad6Cdca4N+iHU3Nloi69FEOzaA3qjJCbhfTuCb8bRn4EJevo8hbjC/QGp08sLppQBKTBlEZ8VXChp14tZkMElH2U1EAuQ2W8IywI4+2AJDULXGgM5UcQwtFI1fbacGQEN7EA8mYoU2woo51gcEKm0hmAAP33Hb8AVgcOVqt7ieA5sT1GTPGpOdcr3/oXEVwsdjBFR+wuOmrP8dSQbXDCwi+Uzzp8jiawsF7l2gpvzJ0vjMH9GNp0oj+MOPnt1xHX9LqRODETtE9zEQcHqgB01XVbDiwkLJ7/JuilSc8zo8rbvksSwuJ3Bw==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MmFDUzZjdkx3aEsyODhyVnk4ZkRtalR4L1poYjZRYXJSQVE3SjZvZHpqZnZB?=
- =?utf-8?B?cUQ5R3l0bGVuTTIzNkFxTjNxV0pDVUN5OVNVajhoZUFlRitrSjA4TDVPYWwz?=
- =?utf-8?B?b0FmcWQzTVA3N3JtcERQSGFXVkp2d3pwL3czb3p1Sk1CT2wzdEdQWjJ0VHJ6?=
- =?utf-8?B?ZGkwZ0ptNStxQVZVVUVxN1ZxNHdRTjVKSW5IR280YjdzWkNYZVlQNUpTVDBL?=
- =?utf-8?B?NGQxZTYxK3hIRGMrQmtFcE1JVmdENUVDRVBtK1AzWC83aGJib3ovWmN6V3Bx?=
- =?utf-8?B?QzdrczFQWFBuVGJJbFRiSTlPU1U1ZXRzTFJEVkRjNHQyMDNhWTQydTFJMk9k?=
- =?utf-8?B?amdOY2xUbHVHTndvVGFHUk02dWhod3NRMkhuNGVUM3BZMGN2cDZia0pHUlJv?=
- =?utf-8?B?bWFaRDNRNFlvajRkbExxMGR2cHNkZDE2b3lUaG02U0hlSjkrcERQR1I3U3pS?=
- =?utf-8?B?R052ckRQRytJRG8vZHc3c0hUSkkwanlZYTdqMVNOcU9BTy9MSGhQWHVycEc0?=
- =?utf-8?B?MG10VDNyTStGMUc2M21YdUJSZ3VQMjRVV2JjVmF0N0NLdi9XQkFXaFdhNHRh?=
- =?utf-8?B?L2E4YU5VVWtJejlHNCtyUFZFRDFTa0xOQmJmWUJaTnY5eENTV0ZQMk83anly?=
- =?utf-8?B?Ykc0akhrR3NRYTNYUEx5STFXRXpEWFVEcytwcFJablo3QnJxS0hRalVlSkly?=
- =?utf-8?B?Rm5HazI0WlBrMElGekM3SGpQWWVvUitnUVQvbWJNc2JOdWVNWU9LbHJ2U2ta?=
- =?utf-8?B?ZGVoUStvL0dRR3VHQnNnVnZ5TGsrV0gvTXBzVHhNNGFrendacThNN1JsRmo0?=
- =?utf-8?B?bFNEWTU3WW9YNEMwY01YWFdXZnhxLytoNUEwRjhJTlQ3SlVSNzBweTdXY1c1?=
- =?utf-8?B?eDFJdmU4ZTRFRlB2czgzYkxTMEdCUVd6RUtlRDBvVnFSQjhyUm5nRHFPa0Nm?=
- =?utf-8?B?cWIzWlo4L2kxTmVHMkJ4d0lQZnlCQzQydFhJL3lxbmpCZlVidS9LVU5ZYm1O?=
- =?utf-8?B?Y1ZHNUU5cllOdDFJTloyVWlYUGorNXdhVXFPU0MycWJ1ZDRDaDlKZFh1MC9t?=
- =?utf-8?B?R0tNU3RKaGxmYkR2Z0t1cnZETk1iaW1BRnZmTlJaa2hvNzU5ZC8yVEtHWnJk?=
- =?utf-8?B?QXl0aTR6Mk9ZdWovYkUyQ0xDekRjdjJEZDNaTlRjaDhXUEpjZWIyeVBZKy9j?=
- =?utf-8?B?Z2g3bTl0a21qcTZkemVvSTgrdnN0QnFjYnZicEg3aUNxWEJYcXo5K29sdVpP?=
- =?utf-8?B?RWpXVmNNRnI3S1c0MjNwdEN6S2FCVDhGYTBQd3RZMkN3MHlFUVZpekFJU2lj?=
- =?utf-8?B?TU9PNXBhOC9IdjRUck1RRmVPcVJxTDFNaFQ2ZTc4cU0yMmZwUHBHRE8vOTRo?=
- =?utf-8?B?UFBram0vWThhVE1HcU5rZ2dNV2hjbzJhdG00OTlFNmU2bERxeVNSb0k0QWhX?=
- =?utf-8?B?QzJBdkNkVyt5QlNDRm13Nk5USkRaRGV3elNVQWlaZVFaVEpMRm5iV2NZbkdj?=
- =?utf-8?B?STRKdGtTTCs0TWxUVCtNVzNQWG1abGE1SDRpeUI0MXhjaUZjVVlUZXZGUUVp?=
- =?utf-8?B?WTRwVDc4Q2dTRWFZcXVYZytpWGo1RXBwMlNVb0xlTk5pYkNKcFozTUtBYU1L?=
- =?utf-8?B?REhsU3NBNkhzd09ZUkNETW9RM3oxeG03NE1ZT1BJMm4wa1BOVGNld293dWhl?=
- =?utf-8?B?dVhYQ29uMEdQdU1FM2FIdGcyRmJCdnhtanlBbEVxZjNEZS9YWUx0OXpDVjBt?=
- =?utf-8?B?aDhid0pMZFkzWjBoVmJyZW4yMjZ5WjRyeVZWd20vN0l2TDNrbGo4UklGN1Qv?=
- =?utf-8?B?bS9UWGt1eHlNMGJZcjdkN2FWYmxCbDZLdXAyRk5VNU5KOVdWQzlLbmN3Uks5?=
- =?utf-8?B?aFZ6bzJOZG5OaTJvRnRwbkVScmxkZ1N3dmd0UDMyWHdPQm1lNTR2RkRDYVpT?=
- =?utf-8?B?VnNBZGZFNWpuK3ZkRUoyRlVuYkNqOTk4d1pRT1hZVlhtOGIzNEVxbEpucVcx?=
- =?utf-8?B?Ny90TnkzVWpjVjNYWkNSQmJQOWdMRFNhd3VXREFtckJCaFRHL3lTaWVFODha?=
- =?utf-8?B?MlJTTWMzZXE2d0NUeXUwS0FHT2ZEckR5c1Z6dUpzM3NRQW5hcFZwcTd5UmU0?=
- =?utf-8?B?c0lXOCtLVWxzZHBMcUc2YVV1bjZMUk44czhobVNnMEpXL09hL0tGY1UwaFB4?=
- =?utf-8?B?K2dwd3JPRktPaU1pSDUxVStaVkFYRjRLeFh6RWJqbzBCSXFSK3pkZlVUc3Nn?=
- =?utf-8?B?WTZTWDBDWDRNUnE2QjBWaG5SMEhHd2FtaXpWSVJDMDljN3FPOTRyQUJNQ3JK?=
- =?utf-8?B?MlVKN3FrRGpsdDAveU8wQXhheXlVeHJ6RHFxV01vdnhPT0M5eDROdz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae05a6a8-8971-4ce7-41d2-08dea16b40c9
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 19:05:15.6467
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CHK72Xi6WxXDbx+Cx+Lh/96GvOPe3j7muERVgpriPfEv1b/f4NjnI75vKQuMvuujypPnAOU2tJExPVNjo9jvDA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH4PR03MB7724
-X-purgate-ID: tlsNG-16d1c6/1776971120-51D6AD75-B9379BC7/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1776974657-2A374443-FBC3E0F8/0/0
 X-purgate-type: clean
-X-purgate-size: 1962
+X-purgate-size: 1576
 
-With the imminent decommission of CirrusCI we will lose the limited macOS
-build testing done there.  Introduce two Gitlab macOS build jobs that
-reproduce the ones present on CirrusCI.
+From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-According to the "Community programs" Gitlab documentation [0] we get
-50,000 compute minutes per month.  The arm64 job takes ~1m 15s, and the
-x86_64 one ~2m.  I think it's likely enough given the amount of minutes we
-have available.  We might need to reconsider if we add more tasks that
-consume compute minutes.
+Small optimization.
+There's no much sense to split the header in 2 pieces, it will
+just take more time and space to reassemble them in the final
+buffer.
+This also avoids truncating combined_length to 32 bit in case of
+64 bit machines potentially avoiding following record_length check.
+The function become more coherent with following read_record
+function.
 
-[0] https://docs.gitlab.com/subscriptions/community_programs/#gitlab-for-open-source
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
 ---
-Example jobs at:
+ tools/libs/guest/xg_sr_common.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/14064832403
-https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/14064832402
----
- automation/gitlab-ci/build.yaml | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
-
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index eff96beaa5c3..463ed2f96d86 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -815,3 +815,33 @@ debian-13-riscv64-gcc-randconfig:
-     KBUILD_DEFCONFIG: tiny64_defconfig
-     RANDCONFIG: y
-     <<: *riscv-fixed-randconfig
-+
-+# macOS build jobs
-+.macos-26:
-+  <<: *build
-+  tags:
-+    - saas-macos-medium-m1
-+  image: macos-26-xcode-26
-+  variables:
-+    HOMEBREW_NO_AUTO_UPDATE: 1
-+    HOSTCC: clang
-+    HYPERVISOR_ONLY: y
-+    <<: *gcc
-+  script:
-+    - brew install ${CROSS_COMPILE}gcc ${CROSS_COMPILE}binutils
-+    - alias nproc="sysctl -n hw.ncpu"
-+    - ./automation/scripts/build 2>&1 | tee build.log
-+
-+macos-26-x86_64:
-+  extends:
-+    - .macos-26
-+  variables:
-+    XEN_TARGET_ARCH: x86_64
-+    CROSS_COMPILE: x86_64-elf-
-+
-+macos-26-arm64:
-+  extends:
-+    - .macos-26
-+  variables:
-+    XEN_TARGET_ARCH: arm64
-+    CROSS_COMPILE: aarch64-elf-
+diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+index 7ccdc3b1f6..86c148c62f 100644
+--- a/tools/libs/guest/xg_sr_common.c
++++ b/tools/libs/guest/xg_sr_common.c
+@@ -59,11 +59,11 @@ int write_split_record(struct xc_sr_context *ctx, struct xc_sr_record *rec,
+     static const char zeroes[(1u << REC_ALIGN_ORDER) - 1] = { 0 };
+ 
+     xc_interface *xch = ctx->xch;
+-    typeof(rec->length) combined_length = rec->length + sz;
++    size_t combined_length = rec->length + sz;
+     size_t record_length = ROUNDUP(combined_length, REC_ALIGN_ORDER);
++    struct xc_sr_rhdr rhdr = { rec->type, combined_length };
+     struct iovec parts[] = {
+-        { &rec->type,       sizeof(rec->type) },
+-        { &combined_length, sizeof(combined_length) },
++        { &rhdr,            sizeof(rhdr) },
+         { rec->data,        rec->length },
+         { buf,              sz },
+         { (void *)zeroes,   record_length - combined_length },
 -- 
-2.53.0
+2.43.0
 
 
