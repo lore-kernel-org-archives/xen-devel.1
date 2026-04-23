@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A512DF99351
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 08:09:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1291708.1570564 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C40DFF99352
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2026 08:09:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1291715.1570573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFp7M-00063G-Gm; Thu, 23 Apr 2026 08:09:00 +0000
+	id 1wFp7T-0006OJ-Sd; Thu, 23 Apr 2026 08:09:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1291708.1570564; Thu, 23 Apr 2026 08:09:00 +0000
+Received: by outflank-mailman (output) from mailman id 1291715.1570573; Thu, 23 Apr 2026 08:09:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wFp7M-000637-DB; Thu, 23 Apr 2026 08:09:00 +0000
-Received: by outflank-mailman (input) for mailman id 1291708;
- Thu, 23 Apr 2026 08:08:58 +0000
+	id 1wFp7T-0006O3-OA; Thu, 23 Apr 2026 08:09:07 +0000
+Received: by outflank-mailman (input) for mailman id 1291715;
+ Thu, 23 Apr 2026 08:09:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wFp7K-00061r-NF
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 08:08:58 +0000
+ (envelope-from <jgross@suse.com>) id 1wFp7T-0006NT-8D
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 08:09:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wFp7K-000vLh-3W
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 10:08:58 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wFp7S-000vQl-KM
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2026 10:09:06 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 69e9d38e-e002-0a2a0a5209dd-0a2a4505da76-38
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 10:08:58 +0200
+ id 69e9d39c-e002-0a2a0a5209dd-0a2a450688f4-28
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 10:09:06 +0200
 Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jgross@suse.com>)
- id 69e9d399-aaa8-0a2a45050019-c387df83d8fc-3
- for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 10:08:57 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 69e9d3a2-7371-0a2a45060019-c387df83b19c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2026 10:09:06 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1F3E75BCFD;
- Thu, 23 Apr 2026 08:08:55 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0B3A95BCFD;
+ Thu, 23 Apr 2026 08:09:06 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EED32593A3;
- Thu, 23 Apr 2026 08:08:54 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DC22C593B0;
+ Thu, 23 Apr 2026 08:09:05 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 35k3OZbT6WkAXgAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 23 Apr 2026 08:08:54 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id BK6qNKHT6WkJXgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 23 Apr 2026 08:09:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,225 +62,164 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1776931736; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1776931746; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CPBzawWX2g0dpZag7OUw1T+x+kMtwYFiewTeIGA7K/o=;
-	b=bht6oFQjCvijEG82j7+TrxXWjGaD7mp+mdMIov/n+lxBL47Za6FGF+G2DeJv0kc4g1hXwU
-	wIsx39JIy7PnXyx7dAOoAdc/R2Gs0H6lbb1yIgmnItARlIpJZX5NNHGyP2RDZSSe+JPPIf
-	j+3ek9l4qkwpkJUpmuULoeQIIxxPaxs=
+	bh=UsqG9+X/SlnL7BdCX9NqfxTSD27zTpZHRZjBmI+WZ58=;
+	b=sOcM2DmO3hCcSkkSOQqMDHZYE7hbZLXGjCFTeAxkZHtd2fSEBs7jJH1udglCJDU4Xc1oEf
+	bRFKKGOf8H7wUjbiLqbNGg2lyNFRyMFDwZTfpc7g+EEmdsP+y0Hf2gbpJy8OYnFhhxOT+Z
+	VLReKxDQvom9d3+23Tx3fShk69h33+o=
 Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=Qkirx6S0
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1776931735; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1776931746; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CPBzawWX2g0dpZag7OUw1T+x+kMtwYFiewTeIGA7K/o=;
-	b=Qkirx6S0tb+jXp7zMwAk9P/B47ZppVQUjk5pHDIFa9gOKi1rchok6xyGUPpYPhuDy78tbV
-	EIUtUhdqBmCNSBKa9H5blHujl0jRkqUC/DJoc7CKeWBGTlmFUH4ydEY4IDyjnrqvkPbE3P
-	D7hQrwWx+chtG36WrLnCufWz2C69nIo=
+	bh=UsqG9+X/SlnL7BdCX9NqfxTSD27zTpZHRZjBmI+WZ58=;
+	b=sOcM2DmO3hCcSkkSOQqMDHZYE7hbZLXGjCFTeAxkZHtd2fSEBs7jJH1udglCJDU4Xc1oEf
+	bRFKKGOf8H7wUjbiLqbNGg2lyNFRyMFDwZTfpc7g+EEmdsP+y0Hf2gbpJy8OYnFhhxOT+Z
+	VLReKxDQvom9d3+23Tx3fShk69h33+o=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: dmukhin@ford.com,
 	Juergen Gross <jgross@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 2/4] tools/xenstored: add support for "all domains" node permission
-Date: Thu, 23 Apr 2026 10:08:38 +0200
-Message-ID: <20260423080840.530547-3-jgross@suse.com>
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 4/4] tools/xenstored: remove permissions related to dead domain
+Date: Thu, 23 Apr 2026 10:08:40 +0200
+Message-ID: <20260423080840.530547-5-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260423080840.530547-1-jgross@suse.com>
 References: <20260423080840.530547-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_TLS_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_TWO(0.00)[2];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Queue-Id: 1F3E75BCFD
-X-purgate-ID: tlsNG-c201ff/1776931737-E9BA4443-AAF74673/0/0
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_ALL(0.00)[]
+X-purgate-ID: tlsNG-16d1c6/1776931746-50767D75-5A35755B/0/0
 X-purgate-type: clean
-X-purgate-size: 5892
+X-purgate-size: 3648
 
-Add support for using DOMID_ANY in node permissions to indicate that
-all domains are allowed to access the node.
+Wit unprivileged domains now capable to use the @releaseDomain watch,
+there is no reason not to remove any node permissions which relate to
+a domain which has been removed.
 
-Add a new feature bit for indicating the support of DOMID_ANY.
+This resolves a complex scenario where a new domain could inherit the
+permissions of an old one with the same domid.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- docs/man/xl.cfg.5.pod.in        |  4 ++++
- tools/xenstored/core.c          | 19 ++++++++++++++-----
- tools/xenstored/domain.c        | 16 ++++++++++++++--
- tools/xenstored/domain.h        |  3 ++-
- xen/include/public/io/xs_wire.h |  2 ++
- 5 files changed, 36 insertions(+), 8 deletions(-)
+ tools/xenstored/domain.c | 61 ++++++++++++++++++++++++----------------
+ 1 file changed, 36 insertions(+), 25 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 2f77016ecf..d34951edb9 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -746,6 +746,10 @@ Xenstore supports to set watches with a limited depth (depth 0 matches
- only the watched node, depth 1 matches the node and its direct children,
- etc.).
- 
-+=item B<0x00000008>
-+
-+Xenstore supports the B<all domains> node access permission.
-+
- =back
- 
- The features supported by the running Xenstore instance can be retrieved
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index f92fca6e9e..5a621f53ba 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -882,6 +882,16 @@ static int write_node(struct connection *conn, struct node *node,
- 	return ret;
- }
- 
-+/* Check one node permission to match a connection. */
-+static bool perm_allows_conn(const struct connection *conn,
-+			     const struct xs_permissions *p)
-+{
-+	if (p->id == conn->id || (conn->target && p->id == conn->target->id))
-+		return true;
-+
-+	return p->id == DOMID_ANY;
-+}
-+
- unsigned int perm_for_conn(struct connection *conn,
- 			   const struct node_perms *perms)
- {
-@@ -889,14 +899,13 @@ unsigned int perm_for_conn(struct connection *conn,
- 	unsigned int mask = XS_PERM_READ|XS_PERM_WRITE|XS_PERM_OWNER;
- 
- 	/* Owners and tools get it all... */
--	if (!domain_is_unprivileged(conn) || perms->p[0].id == conn->id
--                || (conn->target && perms->p[0].id == conn->target->id))
-+	if (!domain_is_unprivileged(conn) ||
-+	    perm_allows_conn(conn, perms->p))
- 		return (XS_PERM_READ|XS_PERM_WRITE|XS_PERM_OWNER) & mask;
- 
- 	for (i = 1; i < perms->num; i++)
- 		if (!(perms->p[i].perms & XS_PERM_IGNORE) &&
--		    (perms->p[i].id == conn->id ||
--		     (conn->target && perms->p[i].id == conn->target->id)))
-+		    perm_allows_conn(conn, perms->p + i))
- 			return perms->p[i].perms & mask;
- 
- 	return perms->p[0].perms & mask;
-@@ -1832,7 +1841,7 @@ static int do_set_perms(const void *ctx, struct connection *conn,
- 	if (!xenstore_strings_to_perms(perms.p, perms.num, permstr))
- 		return errno;
- 
--	if (domain_alloc_permrefs(&perms))
-+	if (domain_alloc_permrefs(conn, &perms))
- 		return ENOMEM;
- 	if (perms.p[0].perms & XS_PERM_IGNORE)
- 		return ENOENT;
 diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 00875d6b5c..0bd2a1891a 100644
+index 0bd2a1891a..6fbb5c061a 100644
 --- a/tools/xenstored/domain.c
 +++ b/tools/xenstored/domain.c
-@@ -44,7 +44,8 @@
- #endif
- 
- #define XENSTORE_FEATURES	(XENSTORE_SERVER_FEATURE_ERROR |	\
--				 XENSTORE_SERVER_FEATURE_WATCHDEPTH)
-+				 XENSTORE_SERVER_FEATURE_WATCHDEPTH |	\
-+				 XENSTORE_SERVER_FEATURE_DOMID_ANY)
- 
- static xenmanage_handle *xm_handle;
- xengnttab_handle **xgt_handle;
-@@ -1754,8 +1755,12 @@ static bool chk_domain_generation(unsigned int domid, uint64_t gen)
-  * Allocate all missing struct domain referenced by a permission set.
-  * Any permission entries for not existing domains will be marked to be
-  * ignored.
-+ * An DOMID_ANY entry will be marked to be ignored, if the writing
-+ * domain doesn't have the XENSTORE_SERVER_FEATURE_DOMID_ANY enabled. Note
-+ * that Xen tools will never set DOMID_ANY for a guest owned node.
-  */
--int domain_alloc_permrefs(struct node_perms *perms)
-+int domain_alloc_permrefs(const struct connection *conn,
-+			  struct node_perms *perms)
+@@ -569,24 +569,10 @@ static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
+ 				  struct node *node, void *arg)
  {
- 	unsigned int i, domid;
- 	struct domain *d;
-@@ -1763,6 +1768,12 @@ int domain_alloc_permrefs(struct node_perms *perms)
+ 	struct domain *domain = arg;
+-	int ret = WALK_TREE_OK;
+-
+-	if (node->perms[0].id != domain->domid)
+-		return WALK_TREE_OK;
++	bool node_changed = false;
++	unsigned int i;
  
- 	for (i = 0; i < perms->num; i++) {
- 		domid = perms->p[i].id;
-+		if (domid == DOMID_ANY) {
-+			if (!(conn->domain->features &
-+			      XENSTORE_SERVER_FEATURE_DOMID_ANY))
-+				perms->p[i].perms |= XS_PERM_IGNORE;
+-	if (keep_orphans) {
+-		domain_nbentry_dec(NULL, domain->domid);
+-		node->perms[0].id = priv_domid;
+-		node->acc.memory = 0;
+-		domain_nbentry_inc(NULL, priv_domid);
+-		if (write_node_raw(NULL, node->name, node, NODE_MODIFY, true)) {
+-			/* That's unfortunate. We only can try to continue. */
+-			syslog(LOG_ERR,
+-			       "error when moving orphaned node %s to dom0\n",
+-			       node->name);
+-		} else
+-			trace("orphaned node %s moved to dom0\n", node->name);
+-	} else {
++	if (node->perms[0].id == domain->domid && !keep_orphans) {
+ 		if (rm_node(NULL, ctx, node->name)) {
+ 			/* That's unfortunate. We only can try to continue. */
+ 			syslog(LOG_ERR,
+@@ -596,10 +582,38 @@ static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
+ 			trace("orphaned node %s deleted\n", node->name);
+ 
+ 		/* Skip children in all cases in order to avoid more errors. */
+-		ret = WALK_TREE_SKIP_CHILDREN;
++		return WALK_TREE_SKIP_CHILDREN;
+ 	}
+ 
+-	return domain->acc_val[ACC_NODES] ? ret : WALK_TREE_SUCCESS_STOP;
++	if (node->perms[0].id == domain->domid) {
++		domain_nbentry_dec(NULL, domain->domid);
++		node->perms[0].id = priv_domid;
++		node->acc.memory = 0;
++		domain_nbentry_inc(NULL, priv_domid);
++		trace("moving orphaned node %s to dom0\n", node->name);
++		node_changed = true;
++	}
++
++	for (i = 1; i < node->hdr.num_perms; i++) {
++		if (node->perms[i].id != domain->domid)
 +			continue;
++		memmove(node->perms + i, node->perms + i + 1,
++			sizeof(*node->perms) * (node->hdr.num_perms - i - 1));
++		node->hdr.num_perms--;
++		i--;
++		node_changed = true;
++	}
++
++	if (node_changed) {
++		if (write_node_raw(NULL, node->name, node, NODE_MODIFY, true)) {
++			/* That's unfortunate. We only can try to continue. */
++			syslog(LOG_ERR,
++			       "error when writing modified node %s\n",
++			       node->name);
 +		}
- 		d = find_domain_struct(domid);
- 		if (!d) {
- 			if (xenmanage_get_domain_info(xm_handle, domid, NULL,
-@@ -1788,6 +1799,7 @@ int domain_adjust_node_perms(struct node *node)
++	}
++
++	return WALK_TREE_OK;
+ }
  
- 	for (i = 1; i < node->hdr.num_perms; i++) {
- 		if ((perms[i].perms & XS_PERM_IGNORE) ||
-+		    perms[i].id == DOMID_ANY ||
- 		    chk_domain_generation(perms[i].id, node->hdr.generation))
- 			continue;
+ static void domain_tree_remove(struct domain *domain)
+@@ -607,12 +621,9 @@ static void domain_tree_remove(struct domain *domain)
+ 	int ret;
+ 	struct walk_funcs walkfuncs = { .enter = domain_tree_remove_sub };
  
-diff --git a/tools/xenstored/domain.h b/tools/xenstored/domain.h
-index b1cfb5cd82..7dad4849a0 100644
---- a/tools/xenstored/domain.h
-+++ b/tools/xenstored/domain.h
-@@ -116,7 +116,8 @@ const char *get_implicit_path(const struct connection *conn);
-  */
- int domain_adjust_node_perms(struct node *node);
+-	if (domain->acc_val[ACC_NODES]) {
+-		ret = walk_node_tree(domain, NULL, "/", &walkfuncs, domain);
+-		if (ret == WALK_TREE_ERROR_STOP)
+-			syslog(LOG_ERR,
+-			       "error when looking for orphaned nodes\n");
+-	}
++	ret = walk_node_tree(domain, NULL, "/", &walkfuncs, domain);
++	if (ret == WALK_TREE_ERROR_STOP)
++		syslog(LOG_ERR, "error when looking for orphaned nodes\n");
  
--int domain_alloc_permrefs(struct node_perms *perms);
-+int domain_alloc_permrefs(const struct connection *conn,
-+			  struct node_perms *perms);
- 
- /* Quota manipulation */
- int domain_nbentry_inc(struct connection *conn, unsigned int domid);
-diff --git a/xen/include/public/io/xs_wire.h b/xen/include/public/io/xs_wire.h
-index 2e763bc877..d6533a8452 100644
---- a/xen/include/public/io/xs_wire.h
-+++ b/xen/include/public/io/xs_wire.h
-@@ -126,6 +126,8 @@ struct xenstore_domain_interface {
- #define XENSTORE_SERVER_FEATURE_ERROR        2
- /* The XS_WATCH command can be used with a <depth> parameter */
- #define XENSTORE_SERVER_FEATURE_WATCHDEPTH   4
-+/* The capability to use DOMID_ANY for node permissions */
-+#define XENSTORE_SERVER_FEATURE_DOMID_ANY    8
- 
- /* Valid values for the connection field */
- #define XENSTORE_CONNECTED 0 /* the steady-state */
+ 	walk_node_tree(domain, NULL, "@releaseDomain", &walkfuncs, domain);
+ 	walk_node_tree(domain, NULL, "@introduceDomain", &walkfuncs, domain);
 -- 
 2.53.0
 
