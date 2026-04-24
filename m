@@ -4,43 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8BAFED3CD
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2026 13:37:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1293570.1571202 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466F4FED3C9
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2026 13:44:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1293610.1571229 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wGGiO-0002fX-2E; Fri, 24 Apr 2026 13:37:04 +0000
+	id 1wGGpQ-0006B4-EA; Fri, 24 Apr 2026 13:44:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1293570.1571202; Fri, 24 Apr 2026 13:37:04 +0000
+Received: by outflank-mailman (output) from mailman id 1293610.1571229; Fri, 24 Apr 2026 13:44:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wGGiN-0002fM-Uk; Fri, 24 Apr 2026 13:37:03 +0000
-Received: by outflank-mailman (input) for mailman id 1293570;
- Fri, 24 Apr 2026 13:37:02 +0000
+	id 1wGGpQ-0006Ax-BH; Fri, 24 Apr 2026 13:44:20 +0000
+Received: by outflank-mailman (input) for mailman id 1293610;
+ Fri, 24 Apr 2026 13:44:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wGGiM-0002Rg-6C
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 13:37:02 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jgg@ziepe.ca>) id 1wGGpO-0006Ap-JT
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 13:44:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wGGiL-000jjh-JA
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 15:37:01 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wGGpO-00Assh-0C
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 15:44:18 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69eb71fa-5cb7-0a2a0a5109dd-0a2a4509da28-20
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:01 +0200
-Received: from [209.85.167.46] (helo=mail-lf1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69eb71fd-2497-0a2a45090019-d155a72eac6f-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:01 +0200
-Received: by mail-lf1-f46.google.com with SMTP id
- 2adb3069b0e04-5a0faa0d15cso7756722e87.0
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 06:37:01 -0700 (PDT)
-Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5a5241f6583sm3649078e87.39.2026.04.24.06.36.58
+ (envelope-from <jgg@ziepe.ca>)
+ id 69eb73a7-e002-0a2a0a5209dd-0a2a45058eba-40
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:44:17 +0200
+Received: from [209.85.219.42] (helo=mail-qv1-f42.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 69eb73b0-aaa8-0a2a45050019-d155db2ab144-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:44:17 +0200
+Received: by mail-qv1-f42.google.com with SMTP id
+ 6a1803df08f44-89fc4147f2eso87346046d6.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 06:44:17 -0700 (PDT)
+Received: from ziepe.ca
+ (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net.
+ [47.54.130.67]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8b02ac6c3e7sm188611786d6.13.2026.04.24.06.44.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Apr 2026 06:36:59 -0700 (PDT)
+ Fri, 24 Apr 2026 06:44:15 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+ (envelope-from <jgg@ziepe.ca>) id 1wGGpL-00000002Zm3-0EMP;
+ Fri, 24 Apr 2026 10:44:15 -0300
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,248 +57,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=ziepe.ca header.i="@ziepe.ca" header.h="In-Reply-To:Content-Disposition:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777037820; x=1777642620; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YeUlz7Qpf2B9MkICZ3XhoDDRV4QPAj1kbAZBfKIlP24=;
-        b=AYM3+x8i1CyqgPAV+spfNGgmteZh8NLrT9c2BjeeihffZ9QTlsoLIgD/jm1G2RZjSp
-         8dW3nUGFGmz8bpFRF7GPNXoJvS1aSZgeYx/8cxilkHsDZp8vPEskvmpWNhyCWEUfT3kf
-         scMnDXECjyj7uDUeD2Yxyzz5dUDSMfLBI7w5UISBUeXvZqYTGHOA7OZMs31Ux/Smv6Qa
-         y9ddyFuhHEZW6H2NP+UnGQfCPQTWom4d9hd9YK68qLRL/UVXE9JHd6RqMsVRJBS5Bdg7
-         42+/VQQ6up5FMHQ0b7O4mpmO8NMOlXeOa7XYY3qJkZc9GVWQ0ff7A8iHN5S3LLodMfbb
-         qHzA==
+        d=ziepe.ca; s=google; t=1777038256; x=1777643056; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Zv88UvTgiwZqXaUOezK9Ft5EGGZMSyJ0Ff2r4iX0Lmc=;
+        b=GU6Hwu+EOS9412cO5so1hF0OVMNgRl6YCD9GcixQp0LIMFLrepqs1kYdulpnAlD9j7
+         Sy9wp4zTuYkuLApf++FuBBr7PlwnS3eKMfFM1Mg6L93XaG+hqEPsAl+AHvV4jK5EBseI
+         4WYLWarhTGOPMfJNeSVGOpgdFmz/TxXVsK+vq701eVg86621VqVeS19P4pdBSq0B9R11
+         0ojoB0xPolIn6N1iMFX7PH0/o3lyAaqwfBiLpfVOJSeeJKfP7U9rl2eHTzSO9Xq/ONTG
+         89QrV//QAeAP/fxWlhMFO7H7oEbT0XxadTL179KwBIXZ1t/5D9Pk2j+ZZVBYtsve88sT
+         lDrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777037820; x=1777642620;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=YeUlz7Qpf2B9MkICZ3XhoDDRV4QPAj1kbAZBfKIlP24=;
-        b=oyNe639n0aOTOeoVrmtbHDHoAWR+1ylrLIMzFrtv0zexG9o52rizYs2raQpgEoE/hG
-         OxI//jpc2qvrk06oPw7ls4hzvDC/+/cvWIonEkK1RW4Ypkp62aH67XEIQByDxcdEhpiT
-         KS/7Pj6sslUzxoXoUVnpGjT7gYL80LbE7uoW/QPxXJI3qqhh4HCUVvEAAEJsk2NGNeCJ
-         Oqa6YEHcQFWbYlWNU1DK2bUEylD+3vCzYDXlXoPvI85TxTBMhmne6I4Pkdfw8cup1kCe
-         TombQfs9fgXnjU/lW//AxV8MylZYi19VUlL/H8xPLGa5tVyK/mrqzIgiCSPt52Kp7xJJ
-         e/Uw==
-X-Gm-Message-State: AOJu0Yw8MiTY5pSozOQgwefTNr7lXN2RApB3jF1qqJulxKG7SzWf+RWX
-	gn8BdeZK3jXEYM1e0C08QN7YntxZIuzvU7oKiTIrBa4HtwSe/emYfl/Au41ZkA==
-X-Gm-Gg: AeBDievO15GWn7UwZ5s8C9HgaTJtvtVBgPX3/6Yf+l4pi74SqD8XSi+59AWsBoc6FmW
-	HH/2JB/eIjpQUuZAeAwKSu9oxi5yYjD+Wub6viUutzw33sG5oET9qiRGWQQ8GmIMSYLn+EAXyt1
-	UIkPQiYHZHqrs03xrGThv6epNF93Wi5+Ui0qX0P8QhUBaeIpzqGYcMwFzpqFXNFY+2/XohYJMbX
-	+tncqWnXZ4xxz3ghrW/K7ueuOUymn1tdlMlzIL8wSzZv/XMA+Ce2/effljEIjJeJLLlrtRxhmuK
-	pWhQRx5ORtyeDd0F+zq0drY7Jfr6TAPzA5WatnN7XKFTeGF3ki3AgvaiV3ys+Dv/xw0DTjjDEqd
-	2rE8Ifj1JMeW4dEw63G8d71N4yy2VQIiJ8HAyYzyIr10RvPG0CaPEDJ5pbwH5NVM7CWpEbeQTBu
-	tEUsLSdW2P0g08KTFLFlXGAw3fSudIBD0/MeJMCLusrMvqWClvl+tJJNEJgx3D5FwZT1j9lByN/
-	g8S
-X-Received: by 2002:a05:6512:1302:b0:5a3:fe60:471c with SMTP id 2adb3069b0e04-5a4172cb33amr11125558e87.16.1777037820163;
-        Fri, 24 Apr 2026 06:37:00 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+        d=1e100.net; s=20251104; t=1777038256; x=1777643056;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Zv88UvTgiwZqXaUOezK9Ft5EGGZMSyJ0Ff2r4iX0Lmc=;
+        b=qLZrC4d3/vVg4vLTMcHqXj5J1y+YDWFd5+tB+1TR6kKXkBR2ailiou68njkAvQyQkL
+         0NoxuWtDZ28oTHxvC6uroUCIK3JdvPSJCyjL31iOe+vIMk1vkTr9buVTqWZf++Ohr8Yx
+         0Do68/LdOEoCjnYYqdpEhsx56TPbvPRvuSV8JSjk1j20edeX946mGRs16NuBqznQS3mC
+         K1Oi+cIQhvyijDqvi5VbKxuggJk+TX9PL6ztPzmY3IeJZ3idIRoaglYvlhYLJmu3k4kf
+         ZixWwvn8AJyoGZU7qNTaQsBISqbale/ssvSjiJr7Lbor0FX3fdA/eAt3jrWPAqfumKmD
+         wesg==
+X-Forwarded-Encrypted: i=1; AFNElJ/X3tnbR0aCSwsxlvfHdYerA4gjK6TWjWeqfwlfyIbXj0oQ0jpWHF3VAto9fX80YYtiCEcAIRgdqug=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz1ucOpdAEiA6Zh8dSupKx1pcqkT3SAJ9JHb1utZYQFHowKmd3i
+	32BLeQje0YJ7B4QpBCIUQPpv1Zm5ilsOUu/CVhGhNTyP21u0Hi7hp13TUuyWZstOolA=
+X-Gm-Gg: AeBDieu5tKH3adGF1Wp35qzCmSJBdQBgZM9/R+83pwzDOxITXBCcHVmB+XFtiFqyfq5
+	cYjxruABBulA0cIbDcVHA78BOzTOr8AGl+Am9KvPG5EJ5VAlnQAgTylslZ9ghaKkiYr539G/5kX
+	T1mFKn2hH1owRI+DyFsn+f4BhAwMQ5eQ8V7BVjr4/Lpi+llTfQmbHv34Le12K56u30lSwWrPnXb
+	L7hu6cS8oM3l8SfcAu1YQBvgP3/8exFBvogBl5IS8mFC0G6L9j+YCDIhsyPYSzqPSCcNCghwEHj
+	8OiDmVNdX1g21hDsXn5bR5IhRKAu3zhm0xrs1sTOmnkpeCczHEQe7ihI8Fy8kAMSlyJ++NfkVqP
+	ON7NFX0FHKhTffCuqxFfiZ6Z76e8E80tRweScRF3AezR6iwAO9f/qvJKyf66MCEZj1JWFou4woC
+	qPVWW3nLoZCK8QjGri/mEXDWJP8BaKoiJPs+5oANcukC4ZZcgth2MPdfyxd4LzQnmHsOixtOHkb
+	RFmmnWHG5DXS7tGcy3Rkzke+xg=
+X-Received: by 2002:a05:6214:20a8:b0:8ac:a914:c2cd with SMTP id 6a1803df08f44-8b0280808cfmr513452986d6.20.1777038256324;
+        Fri, 24 Apr 2026 06:44:16 -0700 (PDT)
+Date: Fri, 24 Apr 2026 10:44:15 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 1/3] xen/dom0less: introduce next_phandle in struct kernel_info
-Date: Fri, 24 Apr 2026 15:36:49 +0200
-Message-ID: <5e3ffb41fab84b5f1b59ea81e6d267def89e2d65.1776957840.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1776957840.git.oleksii.kurochko@gmail.com>
-References: <cover.1776957840.git.oleksii.kurochko@gmail.com>
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
+	linux-kernel@vger.kernel.org, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH RFC] xen/swiotlb: avoid arch_sync_dma_* on per-device DMA
+ memory
+Message-ID: <20260424134415.GZ3611611@ziepe.ca>
+References: <20260415-xen-swiotlb-v1-1-de24eda3c0fd@nxp.com>
+ <20260420230137.GQ2577880@ziepe.ca>
+ <aesUTxAl2qWZiqoT@shlinux89>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1777037821-92971A53-E7173810/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 6206
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aesUTxAl2qWZiqoT@shlinux89>
+X-purgate-ID: tlsNG-c201ff/1777038257-E1DDB443-69B718B2/0/0
+X-purgate-type: clean
+X-purgate-size: 2065
 
-There are cases where it is necessary to know the next available phandle
-number in order to generate phandles for guest device nodes.
+On Fri, Apr 24, 2026 at 02:57:19PM +0800, Peng Fan wrote:
+> Hi Jason,
+> 
+> On Mon, Apr 20, 2026 at 08:01:37PM -0300, Jason Gunthorpe wrote:
+> >On Wed, Apr 15, 2026 at 11:08:36PM +0800, Peng Fan (OSS) wrote:
+> >> From: Peng Fan <peng.fan@nxp.com>
+> >> 
+> >> On ARM64, arch_sync_dma_for_{cpu,device}() assumes that the
+> >> physical address passed in refers to normal RAM that is part of the
+> >> kernel linear(direct) mapping, as it unconditionally derives a CPU
+> >> virtual address via phys_to_virt().
+> >> 
+> >> With Xen swiotlb, devices may use per-device coherent DMA memory,
+> >> such as reserved-memory regions described by 'shared-dma-pool',
+> >> which are assigned to dev->dma_mem. These regions may be marked
+> >> no-map in DT and therefore are not part of the kernel linear map.
+> >> In such cases, pfn_valid() still returns true, but phys_to_virt()
+> >> is not valid and cache maintenance via arch_sync_dma_* will fault.
+> >> 
+> >> Prevent this by excluding devices with a private DMA memory pool
+> >> (dev->dma_mem) from the arch_sync_dma_* fast path, and always
+> >> fall back to xen_dma_sync_* for those devices to avoid invalid
+> >> phys_to_virt() conversions for no-map DMA memory while preserving the
+> >> existing fast path for normal, linear-mapped RAM.
+> >
+> >I think this is the same sort of weirdness the other two CC threads are
+> >dealing with.. We already have two different flags indicating the
+> >cache flush should be skipped, it would make more sense to have the
+> >swiotlb mangle the flags, just like for cc.
+> >
+> >https://lore.kernel.org/r/20260420061415.3650870-1-aneesh.kumar@kernel.org
+> >
+> >Then you know that the swiotlb was used and it should flow down to
+> >here.
+> 
+> Xen fully implements dev->dma_ops and does not leak hypervisor-specific
+> semantics outside of it.
 
-When a partial FDT (pfdt) is provided, special care is needed during
-initialization of next_phandle, as the pfdt may already contain a dummy
-interrupt controller node with a phandle assigned to it. next_phandle
-must therefore be initialized to one past the highest phandle already
-present in the pfdt, to avoid collisions.
+It may have its own re-implementation but the same remarks apply. The
+flags in attrs should be correct and you should not be putting random
+boolean checks all over the place to make up for incorrect flags.
 
-Since next_phandle may be needed for the very first guest node generated,
-domain_handle_dtb_boot_module() is moved earlier in prepare_dtb_domU().
-The new call site also aligns better with the existing comment stating
-that domain_handle_dtb_boot_module() must be called before the rest of
-the device tree is generated.
-
-Introduce alloc_phandle() to ensure that phandles allocated for guest
-nodes do not overlap the Xen-reserved phandle range.  This helper will
-be used by subsequent patches (by RISC-V at the moment).
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Here is an example of generated guest DTB:
-    cpus {
-    ...
-      cpu@0 {
-    ...
-        interrupt-controller {
-          compatible = "riscv,cpu-intc";
-          #interrupt-cells = <0x1>;
-          interrupt-controller;
-          phandle = <0xfdea>;
-        };
-      };
-    };
-
-    /soc/imsics@28000000 {
-
-      interrupts-extended = <0xfdea 0x9 >;
-
-      phandle = <0xfdeb>;
-    };
-
-    /soc/aplic@d000000 {
-    ...
-      msi-parent = <0xfdeb>;
-      phandle = <0x1>;
-    };
-
-Note that phandle is generated in this example not by get_next_free_phandle().
-
-For non RISC-V people, APLIC is an interrupt controller (something like GIC in
-Arm), IMSIC it is interrupt controller which provides MSI and connects to
-each CPU.
-
-[1] https://www.kernel.org/doc/Documentation/devicetree/bindings/interrupt-controller/riscv%2Ccpu-intc.txt
----
-Changes in v3:
- - Drop BUG_ON(GUEST_PHANDLE_GIC == 1).
- - Update the comment above declaration of next_phandle field of srtuct
-   kernel_info.
----
-Changes in v2:
- - s/free_phandle/next_phandle.
- - s/get_next_free_phandle/alloc_phandle.
----
----
- xen/common/device-tree/dom0less-build.c | 43 ++++++++++++++++++-------
- xen/include/xen/fdt-domain-build.h      |  6 ++++
- xen/include/xen/fdt-kernel.h            |  6 ++++
- 3 files changed, 43 insertions(+), 12 deletions(-)
-
-diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
-index 840d14419da2..9787ee264975 100644
---- a/xen/common/device-tree/dom0less-build.c
-+++ b/xen/common/device-tree/dom0less-build.c
-@@ -389,6 +389,24 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
-     if ( res < 0 )
-         goto out;
- 
-+    /*
-+     * Find the highest phandle in the partial FDT so next_phandle starts
-+     * above it, avoiding collisions with pfdt's own phandle assignments.
-+     */
-+    res = fdt_generate_phandle(pfdt, &kinfo->next_phandle);
-+    if ( res )
-+    {
-+        res = (res == -FDT_ERR_NOPHANDLES) ? -EOVERFLOW : -EINVAL;
-+        goto out;
-+    }
-+
-+    if ( kinfo->next_phandle >= GUEST_PHANDLE_GIC )
-+    {
-+        dprintk(XENLOG_ERR, "Phandle allocation overlaps Xen reserved range\n");
-+        res = -EOVERFLOW;
-+        goto out;
-+    }
-+
-     for ( node_next = fdt_first_subnode(pfdt, 0);
-           node_next > 0;
-           node_next = fdt_next_subnode(pfdt, node_next) )
-@@ -459,6 +477,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     BUILD_BUG_ON(DOMU_DTB_SIZE > SZ_2M);
- 
-     kinfo->phandle_intc = GUEST_PHANDLE_GIC;
-+    kinfo->next_phandle = 1;
- 
- #ifdef CONFIG_GRANT_TABLE
-     kinfo->gnttab_start = GUEST_GNTTAB_BASE;
-@@ -499,6 +518,18 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
-+    /*
-+     * domain_handle_dtb_boot_module() must be called before the rest of the
-+     * device tree is generated because it sets phandle_intc and next_phandle,
-+     * which subsequent node generation depends on.
-+     */
-+    if ( kinfo->dtb )
-+    {
-+        ret = domain_handle_dtb_boot_module(d, kinfo);
-+        if ( ret )
-+            goto err;
-+    }
-+
-     ret = make_chosen_node(kinfo);
-     if ( ret )
-         goto err;
-@@ -516,18 +547,6 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
--    /*
--     * domain_handle_dtb_boot_module has to be called before the rest of
--     * the device tree is generated because it depends on the value of
--     * the field phandle_intc.
--     */
--    if ( kinfo->dtb )
--    {
--        ret = domain_handle_dtb_boot_module(d, kinfo);
--        if ( ret )
--            goto err;
--    }
--
-     ret = make_intc_domU_node(kinfo);
-     if ( ret )
-         goto err;
-diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
-index 886a85381651..fd2ba01ff0f4 100644
---- a/xen/include/xen/fdt-domain-build.h
-+++ b/xen/include/xen/fdt-domain-build.h
-@@ -63,6 +63,12 @@ int find_unallocated_memory(const struct kernel_info *kinfo,
-                                       unsigned long e_gfn,
-                                       void *data));
- 
-+/* Return 0 (invalid phandle) if the Xen-reserved range has been reached */
-+static inline uint32_t alloc_phandle(struct kernel_info *kinfo)
-+{
-+    return kinfo->next_phandle >= GUEST_PHANDLE_GIC ? 0 : kinfo->next_phandle++;
-+}
-+
- #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
- 
- /*
-diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
-index 33a60597bb4d..4d0467bb396a 100644
---- a/xen/include/xen/fdt-kernel.h
-+++ b/xen/include/xen/fdt-kernel.h
-@@ -44,6 +44,12 @@ struct kernel_info {
-     /* Interrupt controller phandle */
-     uint32_t phandle_intc;
- 
-+    /*
-+     * Next free phandle for guest device nodes; do not access directly, use
-+     * alloc_phandle().
-+     */
-+    uint32_t next_phandle;
-+
-     /* loader to use for this kernel */
-     void (*load)(struct kernel_info *info);
- 
--- 
-2.53.0
-
+Jason
 
