@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7C0FED3C9
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2026 13:37:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1293569.1571192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125DDFED3C9
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2026 13:37:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1293572.1571220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wGGiM-0002Rv-RK; Fri, 24 Apr 2026 13:37:02 +0000
+	id 1wGGiQ-00037w-HM; Fri, 24 Apr 2026 13:37:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1293569.1571192; Fri, 24 Apr 2026 13:37:02 +0000
+Received: by outflank-mailman (output) from mailman id 1293572.1571220; Fri, 24 Apr 2026 13:37:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wGGiM-0002Ro-OS; Fri, 24 Apr 2026 13:37:02 +0000
-Received: by outflank-mailman (input) for mailman id 1293569;
- Fri, 24 Apr 2026 13:37:00 +0000
+	id 1wGGiQ-00037m-Dh; Fri, 24 Apr 2026 13:37:06 +0000
+Received: by outflank-mailman (input) for mailman id 1293572;
+ Fri, 24 Apr 2026 13:37:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wGGiK-0002RW-PB
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 13:37:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wGGiP-0002tN-BN
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 13:37:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wGGiK-000jjh-65
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 15:37:00 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wGGiO-00EP4D-OV
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2026 15:37:04 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69eb71f6-5cb7-0a2a0a5109dd-0a2a4508ebfc-26
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:00 +0200
-Received: from [209.85.167.53] (helo=mail-lf1-f53.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69eb71e8-e002-0a2a0a5209dd-0a2a4504ab34-34
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:04 +0200
+Received: from [209.85.167.42] (helo=mail-lf1-f42.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69eb71fb-63b5-0a2a45080019-d155a735d18f-3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:00 +0200
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-5a283c44478so13340032e87.3
- for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 06:37:00 -0700 (PDT)
+ id 69eb7200-1dec-0a2a45040019-d155a72ae9d4-3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 15:37:04 +0200
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-5a62f43b76aso2954889e87.3
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Apr 2026 06:37:04 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5a5241f6583sm3649078e87.39.2026.04.24.06.36.57
+ 2adb3069b0e04-5a5241f6583sm3649078e87.39.2026.04.24.06.37.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Apr 2026 06:36:58 -0700 (PDT)
+ Fri, 24 Apr 2026 06:37:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,42 +52,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777037819; x=1777642619; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0NnGgV5M3igXJCiYnxgULWkuy2e7zrxF4KNcDwNtdnc=;
-        b=ekDjR4ftQ8AAi0XD/AGNmQ9aU0qs7MGjv5RuyYUWMX1ewbvGdq8m8yH0fY91LNDWBn
-         jfdA75G+OSkCRB0OYmuFe6Nros5n8aSVLw+nusEX/v0YRuCwrdjCRxEf0z1FRgGBFbxZ
-         tz8Wq5c6At+VLSH7bBIOEPuYtbDAWvmASL6ulQZQRl2W6uvd/GTMvGcBvBZfxRxpERPE
-         NXQ7n1AmOk5kaH9w3KJCq94jgHv5w3DN6pacHo6AHj/LgDQOZO+SDYRar5zfV7PmGqXE
-         Mlwwf1AFLzNGhx3IOuILRnWdzDhMcVITbG42wsfWjgRcrr1E8TS4b4+qcoTqcWWJy3zt
-         urDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777037819; x=1777642619;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1777037823; x=1777642623; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0NnGgV5M3igXJCiYnxgULWkuy2e7zrxF4KNcDwNtdnc=;
-        b=CSc3Au8H7Tqf3zIBkL9m7dzkZjurV41NliyYixMYJlwoSQl9Uijdu7iitiS4PalLZR
-         G3KYviVr48QWwdZh3SUI7YZCAQ8c+pnv4iiP2V/GwRuwFlTP+5xNFWdiuCLFY5fMW+UJ
-         fKmxabrdXkY9MouXa9Cs0F0AQ3YrzbNGKl6R4/ijeQ/jE5mbS/8jFEi4cWPxjkh/4ZSF
-         OFmJtlM8GwZl9v2xYhvDY8r/aZUe9mkQ55Eux6d8ioyTUrPCy1qp7k+hf1dvu7Bv8AXN
-         yOPJU3lbf8Iq2E87RNDcRo5Z74zCG+woSVKe4aIea03a2RX8Z7dwG8LRb747H7lmP+rU
-         A/Fw==
-X-Gm-Message-State: AOJu0Ywz2mdifGlFjzVegAAYxGitaBDH8eGLfmM6XqNbjQcsPKxV/RWy
-	kURS+2i2N8hp+LNGYS8PqQm4ud1mNdBXrgvgCk5WbxRWkC/2DUg68OLvoz2y5Q==
-X-Gm-Gg: AeBDies3YjhS0kEGgZBIrpgcFQP0hNTOOLnltq8REGUhx7pniBh/X+/ArmAyIiI7e1B
-	xh52L+EWt+Sp6GszjSF291zf91lxOfAYyuStZk0KXuvVK3f8XE7ZAVG7seQ0q2mwHoOa4h53a82
-	afrGqVwmUs17GlGwq1VAL4quI+5b/6H6SrbnO8MuSqHc0SmvIZot3VkDDSUa8N4QP4tOqouQBN1
-	MtlDYxsQ/Kk37iO4nEPolHxbHgRvTf//bW89cP1+t0qt9viY3xPS8av/TOCJisIC2/y8v4WceQu
-	1VXt7cbNz8trNpN+elSJRPXR+ubCGoqvrrlCF++PFtdyRjD4XLrAd6rhHYe947ojtwzdbFcsIBs
-	4NyoGdMraIfl6fVZimGWVWzeLs62/z+CGQCdee31/iBegUBwmAMAt9vTi488QMI/TTqC9EWpZn1
-	YpKJa2w0L17h5+GSGlZ2L9pnAtHYgNSpvVJdac3SyqI33E0la0/Ta800rYdVAfvzuDf6TMuZCBx
-	ooT
-X-Received: by 2002:ac2:4e0a:0:b0:5a4:1672:59d0 with SMTP id 2adb3069b0e04-5a4172c9267mr9627765e87.19.1777037818744;
-        Fri, 24 Apr 2026 06:36:58 -0700 (PDT)
+        bh=faxicMWV0pyOsr9LCBEsD50TaZnCHvDt9RPH9o+wZSY=;
+        b=gnW5SaxfUqA5z44hed2+oJPnTyMvWxoKkVjd+k+QuKu/U4yrJ5TGLpI3hhWJRN+aJz
+         z3aYmvu+0x/OrgCi4URxmkG07ASTsocHQeA97u1mXD2q+1YFyT4KR6cdtf8W1aG3xURT
+         Se+nmov+EA881D92OxSgonXHcnlJirzFrYlxC696DMpCZdcH1F7a+f4h16RgdjrndTmx
+         m7S2r+SzLvTt62Vx3NFwcjtMDPlD94Mry4QcT9/sPrZZkhgTYJtdA2VlC7lKsns4HB9/
+         Clcge+rmo5scP9//mMUCqgY4SX9le9jfsiqCb5kz0XoNLQyBRZBh3oQO6K9Ti7vHsyO+
+         6daw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777037823; x=1777642623;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=faxicMWV0pyOsr9LCBEsD50TaZnCHvDt9RPH9o+wZSY=;
+        b=le0oslk7A5EeUL/F3AG/kTyXhLjb8gqfprOQEk4ECvp17WRRuDVGiuii+dlBUWaPPU
+         i8vArOQdde1GsyzNGHoDCIUiz4mWxArR3Oo0b2YoC23ZabMNsiaJVyBUrWj1IBFe8ujM
+         DT9H7N5l4cFeMsng9PrFhE7gJerAkx/kk9aB3UyFPEyP8No9OQzLV3oQH+uAJEMgyMpH
+         JJvVBTEQrF0ciZNthaLOuxII1CPfCXvZ7oRxqHRAvdSmnHjG3rcFhQhahECjG1oo3veP
+         DvjTggf5EC2t+Xw0n+BP4vdYjXFhHMyoXIXTqsEA02J3XL5tRp9ZEohHkA/DqKhD7/bU
+         +CNA==
+X-Gm-Message-State: AOJu0YyRL4muV+fHWqR9Y/8TPnjWcDKrR3gfiTEQZN9TwhGi62lj7g9M
+	qmmTbFxiku754d4D0rbINGoRjBqaVYRY8JUqX81FnUqDJcLZ2X41tZo9aDh9hg==
+X-Gm-Gg: AeBDievMsd0u/0DypvFvUuW0uvNdL69z9+hGs2ZwWJ18/ZbrhjM0bXwssSkTK8JRE6q
+	0klCfMQTR/B9wGCp1GKuCJsfNHMru4dcDMXAQKqJgilN2L1NeeZtFOuP7J+8ESNqZfESvdUqdgt
+	OGw7F+iAbgknWW0TmPGHC74p9gSgaGUzusEq1TUQS4Ce8+KTJENH7LY5HlWiG9JtsoePoNP46Mz
+	jdUgGAv3iniJ2W93qhlge7QPIq1yU59y0pkfmOffddHlfelSx+KFbGrPZxtA8STwUkAwpoBSbt4
+	bI8CGu/7Lc9eWyanZaJlA9vJOPMW6QvfDZu3zXSyUh/SPaiWSDXpeT/SBjjQKj0w3JDDaja/tQ3
+	hzN5YRUEkBEYQPYK37cEajtAecAi4eTLpjeT8OZGHWWMKGPA1QreRQcbPQwjUahWblN91sbdmwG
+	qWFId51wuS70F4QgLGXemk1qLy2vzT43PvKkd8auuwVwRRfluX+D1tJxHiJR1nHAElewWPvad1J
+	T49
+X-Received: by 2002:a05:6512:154b:20b0:5a3:ff44:f01b with SMTP id 2adb3069b0e04-5a4172e3131mr7107204e87.34.1777037823257;
+        Fri, 24 Apr 2026 06:37:03 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -96,121 +97,365 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 0/3] dom0less: various updates
-Date: Fri, 24 Apr 2026 15:36:48 +0200
-Message-ID: <cover.1776957840.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 3/3] xen: introduce CONFIG_HAS_DOMAIN_TYPE
+Date: Fri, 24 Apr 2026 15:36:51 +0200
+Message-ID: <fa2e255e53fe3aef2075ba8457be5fd4ba9156d1.1776957840.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1776957840.git.oleksii.kurochko@gmail.com>
+References: <cover.1776957840.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1777037820-C0766DB1-20CA3D03/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1777037824-2B5683FF-798A559E/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3979
+X-purgate-size: 11153
 
-This patch series introduces a new field to track not-yet-used phandles as there
-are some use cases where RISC-V needs to know which phandle number could
-be used for generating a device tree node.
+As domain type is part of common code now there is no any reason
+to have architecture-specific set_domain_type() functions so
+it is dropped.
 
-For example, on the RISC-V side in make_cpus_node() [1] it is necessary to know
-which phandle number is unused to use it for device tree node generation.
+Change the guard around access of kinfo->type to CONFIG_HAS_DOMAIN_TYPE
+for consistency. Also, drop and add some parentheses to be aligned
+with the similar if() below.
 
-Here is an example of generated guest DTB:
-    cpus {
-    ...
-      cpu@0 {
-    ...
-        interrupt-controller {
-          compatible = "riscv,cpu-intc";
-          #interrupt-cells = <0x1>;
-          interrupt-controller;
-          phandle = <0xfdea>;
-        };
-      };
-    };
+x86 with CONFIG_64BIT=y shouldn't use is_{32,64}bit_domain() as
+x86 doesn't have support of CONFIG_HAS_DOMAIN_TYPE. Since x86_32 Xen no
+longer builds, the fallback is currently only relevant for arm32.
 
-    /soc/imsics@28000000 {
-
-      interrupts-extended = <0xfdea 0x9 >;
-
-      phandle = <0xfdeb>;
-    };
-
-    /soc/aplic@d000000 {
-    ...
-      msi-parent = <0xfdeb>;
-      phandle = <0x1>;
-    };
-
-Note that phandles for imsic and riscv,cpu-intc are generated in this example
-not by get_next_free_phandle(), that is why they have such big numbers.
-
-For non-RISC-V people, APLIC is an interrupt controller (something like GIC in
-Arm), IMSIC is an interrupt controller that provides MSI and connects to
-each CPU.
-
-So (based on the DTS above) for APLIC, kinfo->phandle_intc is reused, which
-will also be re-used for the device node's interrupt property. For all others, I
-just introduced GUEST_PHANDLE_LAST [2] and used it for generation [3]. But I expect
-that it could be useful for other architectures too so I just moved it to common
-and re-use pfdt to understand what the maximum used phandle is.
-
-[1] https://www.kernel.org/doc/Documentation/devicetree/bindings/interrupt-controller/riscv%2Ccpu-intc.txt
-[2] https://lore.kernel.org/xen-devel/ccd6d21b224b478c88ca5f2fdd2d1dd507671510.1773157782.git.oleksii.kurochko@gmail.com/
-[3] https://lore.kernel.org/xen-devel/fd64b8526a23e9d7775b9b48c5a933b0673c4fba.1773157782.git.oleksii.kurochko@gmail.com/
-           *************************************
-
-Another thing introduced in this patch series is moving domain type to common
-code as several architectures (ARM and RISC-V for now) use them and it
-looks pretty architecture-independent. Also, is_64bit_domain() is used by
-dom0less common code, so I found it useful also to move is_{32,64}bit_domain
-macros to common code.
-
-           *************************************
-
-And the last thing is changing the prototype of make_cpus_node() to be aligned
-with other make_*_node() and since RISC-V will need access to the free_phandle field
-(even if it will be moved to kinfo->arch.free_phandle) and for the reason that
-this ->free_phandle is updated in make_*_node(), the kinfo argument is passed as
-non-const.
-
-CI: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2471778654
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - Rebase on top of staging.
- - Address the comments.
+ - Sort properly HAS_DOMAIN_TYPE in xen/common/Kconfig.
+ - Update the comment above is_*bit_domain() macros.
 ---
 Changes in v2:
- - Address the comments from ML.
+ - Update the commit message.
+ - Move HAS_DOMAIN_TYPE to xen/common/Kconfig.
+ - Return set_domain_type(), move it to xen/fdt-domain-build.h and make it
+   static inline.
+ - s/CONFIG_ARM_64/CONFIG_HAS_DOMAIN for the places where kinfo->type is used.
+ - Drop parantethes around cpu_has_el1_32 in if() and add around
+   (kinfo->type == DOMAIN_32BIT) to be consistent with the similar check below.
+ - Fix comment code style.
+ - Add __packed to definition of enum domain_type
 ---
+---
+ xen/arch/arm/Kconfig               |  1 +
+ xen/arch/arm/arm64/domctl.c        |  4 ++--
+ xen/arch/arm/dom0less-build.c      | 14 --------------
+ xen/arch/arm/domain_build.c        | 12 +++++-------
+ xen/arch/arm/include/asm/domain.h  | 12 ------------
+ xen/arch/arm/include/asm/kernel.h  |  4 ----
+ xen/arch/arm/kernel.c              | 16 ++++++++--------
+ xen/common/Kconfig                 |  3 +++
+ xen/include/xen/dom0less-build.h   |  2 --
+ xen/include/xen/domain.h           | 13 +++++++++++++
+ xen/include/xen/fdt-domain-build.h |  9 +++++++++
+ xen/include/xen/fdt-kernel.h       |  5 +++++
+ xen/include/xen/sched.h            |  4 ++++
+ 13 files changed, 50 insertions(+), 49 deletions(-)
 
-
-Oleksii Kurochko (3):
-  xen/dom0less: introduce next_phandle in struct kernel_info
-  xen/dom0less: pass kernel_info struct instead of fdt to
-    make_cpus_node()
-  xen: introduce CONFIG_HAS_DOMAIN_TYPE
-
- xen/arch/arm/Kconfig                    |  1 +
- xen/arch/arm/arm64/domctl.c             |  4 +--
- xen/arch/arm/dom0less-build.c           | 14 --------
- xen/arch/arm/domain_build.c             | 17 +++++-----
- xen/arch/arm/include/asm/domain.h       | 12 -------
- xen/arch/arm/include/asm/kernel.h       |  4 ---
- xen/arch/arm/kernel.c                   | 16 ++++-----
- xen/common/Kconfig                      |  3 ++
- xen/common/device-tree/dom0less-build.c | 45 ++++++++++++++++++-------
- xen/include/xen/dom0less-build.h        |  2 --
- xen/include/xen/domain.h                | 13 +++++++
- xen/include/xen/fdt-domain-build.h      | 17 +++++++++-
- xen/include/xen/fdt-kernel.h            | 11 ++++++
- xen/include/xen/sched.h                 |  4 +++
- 14 files changed, 98 insertions(+), 65 deletions(-)
-
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 2f2b501fdac4..79622b46a10d 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -7,6 +7,7 @@ config ARM_64
+ 	def_bool y
+ 	depends on !ARM_32
+ 	select 64BIT
++	select HAS_DOMAIN_TYPE
+ 	select HAS_FAST_MULTIPLY
+ 	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
+ 
+diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
+index 8720d126c97d..9e9a29eb1e78 100644
+--- a/xen/arch/arm/arm64/domctl.c
++++ b/xen/arch/arm/arm64/domctl.c
+@@ -21,10 +21,10 @@ static long switch_mode(struct domain *d, enum domain_type type)
+         return -EINVAL;
+     if ( domain_tot_pages(d) != 0 )
+         return -EBUSY;
+-    if ( d->arch.type == type )
++    if ( d->type == type )
+         return 0;
+ 
+-    d->arch.type = type;
++    d->type = type;
+ 
+     if ( is_64bit_domain(d) )
+         for_each_vcpu(d, v)
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index 4181c105389a..6f73c65e5151 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -237,20 +237,6 @@ int __init make_arch_nodes(struct kernel_info *kinfo)
+     return 0;
+ }
+ 
+-/* TODO: make arch.type generic ? */
+-#ifdef CONFIG_ARM_64
+-void __init set_domain_type(struct domain *d, struct kernel_info *kinfo)
+-{
+-    /* type must be set before allocate memory */
+-    d->arch.type = kinfo->arch.type;
+-}
+-#else
+-void __init set_domain_type(struct domain *d, struct kernel_info *kinfo)
+-{
+-    /* Nothing to do */
+-}
+-#endif
+-
+ int __init init_vuart(struct domain *d, struct kernel_info *kinfo,
+                       const struct dt_device_node *node)
+ {
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index a3ff70102376..ad665cd3c045 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1771,15 +1771,15 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+     BUG_ON(d->vcpu[0] == NULL);
+     BUG_ON(v->is_initialised);
+ 
+-#ifdef CONFIG_ARM_64
++#ifdef CONFIG_HAS_DOMAIN_TYPE
+     /* if aarch32 mode is not supported at EL1 do not allow 32-bit domain */
+-    if ( !(cpu_has_el1_32) && kinfo->arch.type == DOMAIN_32BIT )
++    if ( !cpu_has_el1_32 && (kinfo->type == DOMAIN_32BIT) )
+     {
+         printk("Platform does not support 32-bit domain\n");
+         return -EINVAL;
+     }
+ 
+-    if ( is_sve_domain(d) && (kinfo->arch.type == DOMAIN_32BIT) )
++    if ( is_sve_domain(d) && (kinfo->type == DOMAIN_32BIT) )
+     {
+         printk("SVE is not available for 32-bit domain\n");
+         return -EINVAL;
+@@ -1893,10 +1893,8 @@ int __init construct_hwdom(struct kernel_info *kinfo,
+ 
+     iommu_hwdom_init(d);
+ 
+-#ifdef CONFIG_ARM_64
+-    /* type must be set before allocate_memory */
+-    d->arch.type = kinfo->arch.type;
+-#endif
++    set_domain_type(d, kinfo);
++
+     find_gnttab_region(d, kinfo);
+     if ( is_domain_direct_mapped(d) )
+         allocate_memory_11(d, kinfo);
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index ffe5d0d9f0a6..e51baa0557bd 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -18,18 +18,6 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
+ 
+-#ifdef CONFIG_ARM_64
+-enum domain_type {
+-    DOMAIN_32BIT,
+-    DOMAIN_64BIT,
+-};
+-#define is_32bit_domain(d) ((d)->arch.type == DOMAIN_32BIT)
+-#define is_64bit_domain(d) ((d)->arch.type == DOMAIN_64BIT)
+-#else
+-#define is_32bit_domain(d) (1)
+-#define is_64bit_domain(d) (0)
+-#endif
+-
+ /*
+  * Is the domain using the host memory layout?
+  *
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index 7c3b7fde5b64..21f4273fa1b5 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -10,10 +10,6 @@
+ 
+ struct arch_kernel_info
+ {
+-#ifdef CONFIG_ARM_64
+-    enum domain_type type;
+-#endif
+-
+     /* Enable pl011 emulation */
+     bool vpl011;
+ };
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 7544fd50a20f..9395b5af8745 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -100,8 +100,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
+     const struct membanks *mem = kernel_info_get_mem(info);
+     paddr_t load_addr;
+ 
+-#ifdef CONFIG_ARM_64
+-    if ( (info->arch.type == DOMAIN_64BIT) && (info->zimage.start == 0) )
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    if ( (info->type == DOMAIN_64BIT) && (info->zimage.start == 0) )
+         return mem->bank[0].start + info->zimage.text_offset;
+ #endif
+ 
+@@ -268,14 +268,14 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-#ifdef CONFIG_ARM_64
++#ifdef CONFIG_HAS_DOMAIN_TYPE
+     switch ( uimage.arch )
+     {
+     case IH_ARCH_ARM:
+-        info->arch.type = DOMAIN_32BIT;
++        info->type = DOMAIN_32BIT;
+         break;
+     case IH_ARCH_ARM64:
+-        info->arch.type = DOMAIN_64BIT;
++        info->type = DOMAIN_64BIT;
+         break;
+     default:
+         printk(XENLOG_ERR "Unsupported uImage arch type %d\n", uimage.arch);
+@@ -345,7 +345,7 @@ static int __init kernel_zimage64_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-    info->arch.type = DOMAIN_64BIT;
++    info->type = DOMAIN_64BIT;
+ 
+     return 0;
+ }
+@@ -396,8 +396,8 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-#ifdef CONFIG_ARM_64
+-    info->arch.type = DOMAIN_32BIT;
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    info->type = DOMAIN_32BIT;
+ #endif
+ 
+     return 0;
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 0a20aa0a1249..5ff71480eebe 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -128,6 +128,9 @@ config HAS_DEVICE_TREE_DISCOVERY
+ config HAS_DOM0LESS
+ 	bool
+ 
++config HAS_DOMAIN_TYPE
++	bool
++
+ config HAS_DIT # Data Independent Timing
+ 	bool
+ 
+diff --git a/xen/include/xen/dom0less-build.h b/xen/include/xen/dom0less-build.h
+index faaf660424b2..4118dec76c0a 100644
+--- a/xen/include/xen/dom0less-build.h
++++ b/xen/include/xen/dom0less-build.h
+@@ -57,8 +57,6 @@ int init_vuart(struct domain *d, struct kernel_info *kinfo,
+ int make_intc_domU_node(struct kernel_info *kinfo);
+ int make_arch_nodes(struct kernel_info *kinfo);
+ 
+-void set_domain_type(struct domain *d, struct kernel_info *kinfo);
+-
+ int init_intc_phandle(struct kernel_info *kinfo, const char *name,
+                       const int node_next, const void *pfdt);
+ 
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 93c0fd00c1d7..8c898afe74fc 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -13,6 +13,19 @@ struct guest_area {
+     void *map;
+ };
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++enum __packed domain_type {
++    DOMAIN_32BIT,
++    DOMAIN_64BIT,
++};
++#define is_32bit_domain(d) ((d)->type == DOMAIN_32BIT)
++#define is_64bit_domain(d) ((d)->type == DOMAIN_64BIT)
++#elif !defined(CONFIG_64BIT)
++/* At the moment on 32-bit-only platforms all domains are 32-bit. */
++#define is_32bit_domain(d) (true)
++#define is_64bit_domain(d) (false)
++#endif
++
+ #include <asm/domain.h>
+ 
+ typedef union {
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index 0d40d8cfa105..bc7744270c8f 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -7,6 +7,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/fdt-kernel.h>
+ #include <xen/mm.h>
++#include <xen/sched.h>
+ #include <xen/types.h>
+ 
+ struct domain;
+@@ -69,6 +70,14 @@ static inline uint32_t alloc_phandle(struct kernel_info *kinfo)
+     return kinfo->next_phandle >= GUEST_PHANDLE_GIC ? 0 : kinfo->next_phandle++;
+ }
+ 
++static inline void set_domain_type(struct domain *d, struct kernel_info *kinfo)
++{
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    /* Type must be set before allocate memory */
++    d->type = kinfo->type;
++#endif
++}
++
+ #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
+ 
+ /*
+diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
+index 4d0467bb396a..86a37a13048b 100644
+--- a/xen/include/xen/fdt-kernel.h
++++ b/xen/include/xen/fdt-kernel.h
+@@ -9,6 +9,7 @@
+ 
+ #include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
++#include <xen/domain.h>
+ #include <xen/types.h>
+ 
+ #if __has_include(<asm/kernel.h>)
+@@ -65,6 +66,10 @@ struct kernel_info {
+         } zimage;
+     };
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    enum domain_type type;
++#endif
++
+ #if __has_include(<asm/kernel.h>)
+     struct arch_kernel_info arch;
+ #endif
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 212c7d765c3e..00db1da12f21 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -386,6 +386,10 @@ struct domain
+ {
+     domid_t          domain_id;
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    enum domain_type type;
++#endif
++
+     unsigned int     max_vcpus;
+ 
+     uint64_t         unique_id;       /* Unique domain identifier */
 -- 
 2.53.0
 
