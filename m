@@ -4,43 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 211BAFF8860
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 15:35:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1295027.1571734 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FB2FF8868
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 16:11:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1295064.1571756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHNyp-0004wP-LA; Mon, 27 Apr 2026 15:34:39 +0000
+	id 1wHOYV-0004S7-Pe; Mon, 27 Apr 2026 16:11:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1295027.1571734; Mon, 27 Apr 2026 15:34:39 +0000
+Received: by outflank-mailman (output) from mailman id 1295064.1571756; Mon, 27 Apr 2026 16:11:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHNyp-0004w1-Ew; Mon, 27 Apr 2026 15:34:39 +0000
-Received: by outflank-mailman (input) for mailman id 1295027;
- Mon, 27 Apr 2026 15:34:37 +0000
+	id 1wHOYV-0004S0-Mq; Mon, 27 Apr 2026 16:11:31 +0000
+Received: by outflank-mailman (input) for mailman id 1295064;
+ Mon, 27 Apr 2026 16:11:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wHNyn-0004hb-Ql
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:34:37 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mfo@igalia.com>) id 1wHOYV-0004Rp-0E
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 16:11:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHNyn-00GEYf-7e
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 17:34:37 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wHOYU-005Ip3-DK
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 18:11:30 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69ef8208-bab6-0a2a0a5309dd-0a2a4503b6ae-12
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:34:37 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 69ef820d-672d-0a2a45030019-d1558029e86d-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:34:37 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-488ff90d6c7so89008875e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 08:34:37 -0700 (PDT)
-Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc1c0354sm737076355e9.11.2026.04.27.08.34.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 08:34:36 -0700 (PDT)
+ (envelope-from <mfo@igalia.com>)
+ id 69ef8aaa-bab6-0a2a0a5309dd-0a2a45028eee-20
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 18:11:29 +0200
+Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <mfo@igalia.com>)
+ id 69ef8ab0-af86-0a2a45020019-d561b338cfec-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 18:11:29 +0200
+Received: from 186-249-145-131.shared.desktop.com.br ([186.249.145.131]
+ helo=[192.168.1.66]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wHOYF-00305I-4T; Mon, 27 Apr 2026 18:11:14 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,151 +49,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777304076; x=1777908876; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZFryJZfQNF3su1ZPDgCjTPUOxEuDSdOZ8gDsjNuEUkM=;
-        b=LmtuCGoXSm1qEW1SBQgogExYSB5mFiBiHFP3OfLC0zRKZQagY+BDLenOqSH0HsbmhX
-         L9pc3bkg/cTGDaA7TwDZWXAsxsuVXqGuldexOStgAhOcbsWckMV3hxr7YUzaRUJAQ0ov
-         BKU38ixfNuxAXG3DLf9pIlVCmPhX4JV2zxAnitoZ/o5hff4Kq1D4SFa7OpPFr6GfyVHj
-         Nn9asE+xDgwYvKtGR7hD4umjvOYPEDaz15pgdZG7Ys1VwaVCj3ElNBC3t1lluwQ0LO5B
-         naG2S2KH3OxtKvopmwkyA10Rm82jMVk05XWmRZK2S1lYc6onR1q3+iQEBO5uwnbUf82B
-         Ah4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777304076; x=1777908876;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ZFryJZfQNF3su1ZPDgCjTPUOxEuDSdOZ8gDsjNuEUkM=;
-        b=D4lLqkbUCS/0XNxP0ITQ/9BtBGspvCSkN9cIwT4sHf7zepIj8EqGvOaNLDGbuO587O
-         c8iRP7dl64wZKGOxPnLmKXC9Y8NGrd6EbzhqKvV3Qhno+osRWWFn415iAw0GVFnhO7tw
-         EEJqQ39qruFfe9k9OLDpLSTxPhwTaMve+p+PSmJ1GHotpfMwJPADUbj44/ffI4geox0V
-         MbJQgGptGi0E9yMXjTZSVXq6XBhlWZI13LCx1OWnXjHHenukpMcIDpcvd0dZKq3r0eai
-         /qXjd6pZgGZNe+3JPtfMRM7pp5pXCntd5CSnrwUIVu/BVajDB+BIpBI0E8Z2SjJ2oxp1
-         TpaQ==
-X-Gm-Message-State: AOJu0YxUaJaEfmI0rx3m/9XM8g2peEKqPwVAeHaRw84nuCS5H3Fmcgse
-	kVIusI2SLUo5vC2kpbIS1rBelk/0JvTEhT+fvc1pp9jwAJWO9JqUzV+1g44Hdw==
-X-Gm-Gg: AeBDietTAZTK34HpMxDzhmtt+FhEGdBbyejTKlYxh36GQxF6eBypy2H9w38Ija7bHGa
-	CpSv2q8938xHSgQyYMJiy2ehOZpWJMWG18Qtbnm6v6vm8OnH3OWrMx++F8j41lHLVs6281stj7D
-	3hOTHTHFXMwj4mMqqm/g7kVq7/SRNqdBk952EbWodIqghMrtXFFKSW/V5TLJ/3e0tF5G0cCxfLJ
-	+MKSzD/8NeZj8YK93vzPH55ravR/LC1B+GzKLI9UQ0fWRz4uN2MVdaQyVbUuO/S167nK2foNZqi
-	fi3wSMvFQX4y2LE3uzH9Np+w+tk/bERvMKS1Z3uRwUmrvtQSEZZh4QImq3A7oIC49U4g+jr6KQJ
-	wJ5IAbVNO9RzJTjx0Iqhudf7DeMy3+mT5RmHv62feR5ENHxREVA7ozA6pNFZMy120HDe8Ufc5wE
-	tK1uCTialvxjm2pYrzP3CJrbIyfEfcUTWXAcaexORrNVY+WAFwV6SmaP6db365ZtZInmBLG4jws
-	qOO
-X-Received: by 2002:a05:600c:8b55:b0:48a:57e1:d8cc with SMTP id 5b1f17b1804b1-48a57e1d8d4mr407546505e9.9.1777304076329;
-        Mon, 27 Apr 2026 08:34:36 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 2/3] xen/dom0less: pass kernel_info struct instead of fdt to make_cpus_node()
-Date: Mon, 27 Apr 2026 17:34:24 +0200
-Message-ID: <d18b699f54fbd7b303f9dfbcd63e61f7eee8c0f2.1777296786.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1777296786.git.oleksii.kurochko@gmail.com>
-References: <cover.1777296786.git.oleksii.kurochko@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
+	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=Zz/49n6HLOp2S/OeD7sPTmJzkRUr+J7y2sWYsLTQJ/E=; b=bT9QWa2/6EnHf8FMEWzVyJYWdg
+	TndVTUiVOSQd5LUgUvgdaW55vIe5zI5VuKSjfjlU55pSWRKbw3ls2QbctcOEoaEeLcvZbMRGinUcA
+	k4wQSxM7YiAH7YxhMKVKA0YDO/pdXtCgBcL38Lv97jzH2HVlkrEl3BPMyaDLgrmRHr5gGz+8Uobb/
+	PD05O8QljGHOdLYiy5UsNnHfqUkObU0gNRMhZ9g3KIZIn3UFGbhmn9TAmcFQNrwD3O5sbkWHLVwAS
+	EFgTSTfHa+ccp8g4ZIULndckD596O2T7kXh95DWTSDlAvOGi9rNce49LR1RJY/ipOm8hV8zDDsq0u
+	DE1U06mA==;
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+Date: Mon, 27 Apr 2026 13:10:58 -0300
+Subject: [PATCH v2 2/3] x86/cpuid: fix unbootable VMs by really inlining
+ memcmp() in hypervisor_cpuid_base()
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1777304077-2B161938-1B3B62D1/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3249
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260427-pvh-kasan-inline-v2-2-2c57b8dcff6a@igalia.com>
+References: <20260427-pvh-kasan-inline-v2-0-2c57b8dcff6a@igalia.com>
+In-Reply-To: <20260427-pvh-kasan-inline-v2-0-2c57b8dcff6a@igalia.com>
+To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
+X-Mailer: b4 0.14.2
+X-purgate-ID: tlsNG-720697/1777306289-89EC0161-13F85792/0/0
+X-purgate-type: clean
+X-purgate-size: 1458
 
-There are two reasons of this change:
-1. Align prototype with what other make_*_node() are passed.
-2. A follow-up RISC-V patch will call get_next_free_phandle() inside
-   make_cpus_node(), requiring mutable access to kinfo->free_phandle.
+Even with __builtin the compiler may decide to use the out of line function
+instead of the inline implementation.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
----
-Look at the footer to the prev. patch to understand why phandle is needed
-inside cpu node.
----
-Changes in v4:
- - Nothing changed. Only rebase.
----
-Changes in v3:
- - Add Reviewed-by: Michal Orzel <michal.orzel@amd.com>.
----
-Changes in v2:
- - Properly initialize local variable fdt in Arm's
-   make_cpus_node().
----
- xen/arch/arm/domain_build.c             | 5 +++--
- xen/common/device-tree/dom0less-build.c | 2 +-
- xen/include/xen/fdt-domain-build.h      | 2 +-
- 3 files changed, 5 insertions(+), 4 deletions(-)
+The existing code is broken with gcc-14/15 but not gcc-12/13 (Ubuntu 25.10)
+and vmlinux no longer boots with CONFIG_PVH if CONFIG_KASAN_GENERIC is set.
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 6c17a84b2633..a3ff70102376 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -1163,7 +1163,7 @@ int __init make_psci_node(void *fdt)
-     return res;
- }
- 
--int __init make_cpus_node(const struct domain *d, void *fdt)
-+int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
- {
-     int res;
-     const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
-@@ -1177,6 +1177,7 @@ int __init make_cpus_node(const struct domain *d, void *fdt)
-     /* Keep the compiler happy with -Og */
-     bool clock_valid = false;
-     uint64_t mpidr_aff;
-+    void *fdt = kinfo->fdt;
- 
-     dt_dprintk("Create cpus node\n");
- 
-@@ -1625,7 +1626,7 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
-         if ( res )
-             return res;
- 
--        res = make_cpus_node(d, kinfo->fdt);
-+        res = make_cpus_node(d, kinfo);
-         if ( res )
-             return res;
- 
-diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
-index 9787ee264975..6d6882a34b5a 100644
---- a/xen/common/device-tree/dom0less-build.c
-+++ b/xen/common/device-tree/dom0less-build.c
-@@ -534,7 +534,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
--    ret = make_cpus_node(d, kinfo->fdt);
-+    ret = make_cpus_node(d, kinfo);
-     if ( ret )
-         goto err;
- 
-diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
-index fd2ba01ff0f4..0d40d8cfa105 100644
---- a/xen/include/xen/fdt-domain-build.h
-+++ b/xen/include/xen/fdt-domain-build.h
-@@ -25,7 +25,7 @@ int construct_domain(struct domain *d, struct kernel_info *kinfo);
- int construct_hwdom(struct kernel_info *kinfo,
-                     const struct dt_device_node *node);
- int make_chosen_node(const struct kernel_info *kinfo);
--int make_cpus_node(const struct domain *d, void *fdt);
-+int make_cpus_node(const struct domain *d, struct kernel_info *kinfo);
- int make_hypervisor_node(struct domain *d, const struct kernel_info *kinfo,
-                          int addrcells, int sizecells);
- int make_memory_node(const struct kernel_info *kinfo, int addrcells,
+For testing purposes, if the size argument is reduced from 12 to 8 then the
+compiler decides to use the inline implementation; that shows results vary.
+
+Switch the builtin to the inline implementation to address it.
+
+Fixes: 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
+Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/cpuid/api.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/include/asm/cpuid/api.h b/arch/x86/include/asm/cpuid/api.h
+index 44fa82e1267ce98c7f5f92f69b58f79e235f7261..c3bd1e51067346e817240b484dc0d0e5f02dcc4f 100644
+--- a/arch/x86/include/asm/cpuid/api.h
++++ b/arch/x86/include/asm/cpuid/api.h
+@@ -203,7 +203,7 @@ static inline u32 cpuid_base_hypervisor(const char *sig, u32 leaves)
+ 		 * from PVH early boot code before instrumentation is set up
+ 		 * and memcmp() itself may be instrumented.
+ 		 */
+-		if (!__builtin_memcmp(sig, signature, 12) &&
++		if (!__inline_memcmp(sig, signature, 12) &&
+ 		    (leaves == 0 || ((eax - base) >= leaves)))
+ 			return base;
+ 	}
+
 -- 
-2.53.0
+2.51.0
 
 
