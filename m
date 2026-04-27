@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 763A1FF886A
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 13:55:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1294885.1571611 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43495FF886B
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 13:55:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1294882.1571593 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQK-0000lW-6V; Mon, 27 Apr 2026 13:54:56 +0000
+	id 1wHMQG-0000II-IG; Mon, 27 Apr 2026 13:54:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1294885.1571611; Mon, 27 Apr 2026 13:54:56 +0000
+Received: by outflank-mailman (output) from mailman id 1294882.1571593; Mon, 27 Apr 2026 13:54:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQK-0000lP-3j; Mon, 27 Apr 2026 13:54:56 +0000
-Received: by outflank-mailman (input) for mailman id 1294885;
- Mon, 27 Apr 2026 13:54:54 +0000
+	id 1wHMQG-0000IB-FL; Mon, 27 Apr 2026 13:54:52 +0000
+Received: by outflank-mailman (input) for mailman id 1294882;
+ Mon, 27 Apr 2026 13:54:51 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387f6f000f373@swg.vates.tech>)
- id 1wHMQI-0000fU-P2
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 13:54:54 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387cf6000f373@swg.vates.tech>)
+ id 1wHMQF-0000Hk-0a
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 13:54:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHMQI-00G6Ry-5f
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:54:54 +0200
+ id 1wHMQE-00G6M2-Dp
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:54:50 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387f6f000f373@swg.vates.tech>)
- id 69ef6aa6-5cb7-0a2a0a5109dd-0a2a450ab84c-32
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:54 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387cf6000f373@swg.vates.tech>)
+ id 69ef6aa6-5cb7-0a2a0a5109dd-0a2a450ab84c-14
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:50 +0200
 Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387f6f000f373@swg.vates.tech>)
- id 69ef6aa4-56b3-0a2a450a0019-b9ff1c22a053-6
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:54 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387cf6000f373@swg.vates.tech>)
+ id 69ef6aa4-56b3-0a2a450a0019-b9ff1c22a053-4
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:49 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19dcf387f6f000f373.007 for <xen-devel@lists.xenproject.org>
+ 19dcf387cf6000f373.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 27 Apr 2026 13:54:39 +0000
+ Mon, 27 Apr 2026 13:54:38 +0000
 Received: from julian.home (lfbn-lyo-1-414-55.w2-7.abo.wanadoo.fr [2.7.24.55])
  (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 073B087720;
- Mon, 27 Apr 2026 15:54:39 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5C6458716C;
+ Mon, 27 Apr 2026 15:54:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,21 +60,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=W6jJeFHlnxQriqm4ULKsDBrsDCyMY1Q7f5BSbeqFbcU=;
+ q=dns/txt; s=selector1; bh=dvcC1iisULiPGWL7tx4WZYzH+K5ni031hXxYUXeM9FA=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=V7MxvOhePlTFu45csDwAzNIlBwj54zD+mZNspe3ooRDnNb5AyX7Qu1vPEOindNXbMjQCxspVG
- BkQjfF8uKrVMOwqV/NiheLAvajnQIL1i/qliFazKjprdmeXKwdsZPNXrBg+bV7XVpeUK8hqBDEF
- uhCALt/jO8nrTolasJuOoP9CuPXRL+6Tbda7JirHiNuWgAnR+OFAcdRC/RtZV2s50UqlUTvPUF4
- peKDnnVabv6hFmS4Wx1OgTu2Zi7AdK0lPwAzwL7uFVIqxZ+JI2j4UGYmadWhW0jHQ4vWgBUvWnC
- /iW6tuIL/Jyrc3s3uMgP6cEXplgkorQIVwhwxb61xFEA==
-X-Zone-Loop: 6aeb684b3b03ddb97f269851a8e054cfd1874d6a8e8b
+ b=nndc5iGA0DiGhtyIMk+zUdFKEvRAZcfMef0krlgqTReFVE8KCTMfzyDGLs5muIK6t/oE0cpyW
+ jG4XX+kZNeRbrXdsdkobcC+1mlLW1WAoawQKEB/uExnAIBG7cNI5/jHL0z5DkXq6x9Y8oWeDE5T
+ dieOm4qOzeQYUyBPKfdJSGlrEdMsnuOq8FoMz2ton8J9c69kv+RGR8Q1nqO0TRXcY/9ZLilHkBa
+ nxYJUL1OdNyvkSt84TNZYD83mTstQJXA/y7AHyz0AFPe5tEoUvZwuoxW3L/qfgWRRHqBJAPwSeT
+ pj0u8Zgn5LRuHOsxmZdXNGGiFjESbJltSPLH178rklNQ==
+X-Zone-Loop: 5f20e55a77209d63970ab23c5d2a2c0c952228caec54
 x-campaign-type: default
-x-transaction-id: daa0c376-b8c0-4fc2-a6f0-daf148b1cec6
-x-swg-uid: 01-695e8fc4-0d06-4f19-b360-195d6f63116c
+x-transaction-id: ad1e73c4-1169-40cf-a79e-c5e95a7fd737
+x-swg-uid: 01-252a6e3d-1633-4718-85f7-c25b1dcf860e
 X-Mailer: Sweego
 Message-ID:
- <1777298079.8631fc262581453bbf619ec5b2062170.19dcf387f6f000f373@vates.tech>
-x-swg-bid: 1777298079.8631fc262581453bbf619ec5b2062170.19dcf387f6f000f373
+ <1777298079.8631fc262581453bbf619ec5b2062170.19dcf387cf6000f373@vates.tech>
+x-swg-bid: 1777298079.8631fc262581453bbf619ec5b2062170.19dcf387cf6000f373
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -93,142 +93,97 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v4 3/9] x86/passthrough: Extract pt_irq_dpci_setup() from pt_irq_create_bind()
-Date: Mon, 27 Apr 2026 15:54:00 +0200
+Subject: [PATCH v4 1/9] x86/vioapic: Add ioapic_check() to validate IO-APIC state before restore
+Date: Mon, 27 Apr 2026 15:53:58 +0200
 In-Reply-To: <20260427135406.1281424-1-julian.vetter@vates.tech>
 References: <20260427135406.1281424-1-julian.vetter@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2975.a3c70ac1ac8036d.19dcf387e09.478a393e5b10a835=-"
+Content-Type: multipart/alternative; boundary="-=Part.2973.a4b8ae2b085a49c6.19dcf387b7f.2f2b4e9391e281cb=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1777298079241
-X-purgate-ID: tlsNG-4011c0/1777298094-47F798B7-C02DFD8C/0/0
+X-Bm-Transport-Timestamp: 1777298078591
+X-purgate-ID: tlsNG-4011c0/1777298089-47D788B7-C3FFF285/0/0
 X-purgate-type: clean
-X-purgate-size: 4749
+X-purgate-size: 3106
 
----=Part.2975.a3c70ac1ac8036d.19dcf387e09.478a393e5b10a835=-
+---=Part.2973.a4b8ae2b085a49c6.19dcf387b7f.2f2b4e9391e281cb=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-The setup preamble in pt_irq_create_bind(), lazily allocating
-hvm_irq_dpci, looking up the struct pirq, and spinning until any pending
-hvm_dirq_assist softirq has drained, is needed by pt_irq_bind_msi() as
-well=2E Extract it into a static helper pt_irq_dpci_setup() that returns
-with d->event_lock write-locked on success=2E Replace the open-coded goto
-restart loop with a do { } while (true) loop and a continue, making the
-retry structure explicit without a label=2E No functional change=2E
+Register a check callback for the IOAPIC HVM save/restore entry,
+following the pattern established by vpic_check() for the virtual PIC=2E
+The function first verifies the target domain actually has a virtual
+IO-APIC, returning -ENODEV otherwise=2E It then validates individual
+fields of the saved state: the base_address must be non-zero (as 0 is
+never valid for the IO-APIC MMIO window), the APIC ID must fit within
+its 4-bit hardware field, and ioregsel must address a defined register=2E
 
 Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
 ---
 Changes in v4:
-- New patch
-- Split out as a preparatory no-functional-change step to make the diff
-  in patch 5 (pt_irq_bind_msi() interface change) easier to review
+- Replaced the reserved-bit loop from v3 (iterating all redirection
+  table entries and rejecting any with non-zero reserved fields) with
+  targeted named-field validation (base_address !=3D 0, APIC ID < 0xF, and
+  ioregsel addresses a defined register)
+- The extended-destination migration safety check (refusing to restore
+  IO-APIC state with ext_dest_id bits set on a domain that does not
+  advertise XEN_HVM_CPUID_EXT_DEST_ID) is added in patch 8, once the
+  flag exists
 ---
- xen/drivers/passthrough/x86/hvm=2Ec | 54 +++++++++++++++++++++++--------
- 1 file changed, 40 insertions(+), 14 deletions(-)
+ xen/arch/x86/hvm/vioapic=2Ec | 28 +++++++++++++++++++++++++++-
+ 1 file changed, 27 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/passthrough/x86/hvm=2Ec b/xen/drivers/passthrough=
-/x86/hvm=2Ec
-index 691fa1b2c7=2E=2E19463c3406 100644
---- a/xen/drivers/passthrough/x86/hvm=2Ec
-+++ b/xen/drivers/passthrough/x86/hvm=2Ec
-@@ -217,18 +217,22 @@ static struct vcpu *vector_hashing_dest(const struct=
- domain *d,
-     return dest;
+diff --git a/xen/arch/x86/hvm/vioapic=2Ec b/xen/arch/x86/hvm/vioapic=2Ec
+index 7c725f9e47=2E=2E43fb165f84 100644
+--- a/xen/arch/x86/hvm/vioapic=2Ec
++++ b/xen/arch/x86/hvm/vioapic=2Ec
+@@ -594,6 +594,32 @@ int vioapic_get_trigger_mode(const struct domain *d, =
+unsigned int gsi)
+     return vioapic->redirtbl[pin]=2Efields=2Etrig_mode;
  }
 =20
--int pt_irq_create_bind(
--    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
-+/*
-+ * Acquire d->event_lock (write), lazily allocate hvm_irq_dpci if needed,=
- look
-+ * up the struct pirq for @pirq, and drain any pending hvm_dirq_assist so=
-ftirq
-+ * on it before returning=2E Returns 0 with d->event_lock held on success=
-,
-+ * negative errno otherwise (lock not held)=2E
-+ */
-+static int pt_irq_dpci_setup(struct domain *d, unsigned int pirq,
-+                              struct hvm_irq_dpci **hvm_irq_dpci_out,
-+                              struct hvm_pirq_dpci **pirq_dpci_out,
-+                              struct pirq **info_out)
- {
-     struct hvm_irq_dpci *hvm_irq_dpci;
-     struct hvm_pirq_dpci *pirq_dpci;
-     struct pirq *info;
--    int rc, pirq =3D pt_irq_bind->machine_irq;
-=20
--    if ( pirq < 0 || pirq >=3D d->nr_pirqs )
--        return -EINVAL;
--
-- restart:
-+    do
-     {
-         write_lock(&d->event_lock);
-=20
-@@ -238,10 +242,11 @@ int pt_irq_create_bind(
-             unsigned int i;
-=20
-             /*
--             * NB: the hardware domain doesn't use a hvm_irq_dpci struct =
-because
--             * it's only allowed to identity map GSIs, and so the data co=
-ntained in
--             * that struct (used to map guest GSIs into machine GSIs and =
-perform
--             * interrupt routing) is completely useless to it=2E
-+             * NB: the hardware domain doesn't use a hvm_irq_dpci struct
-+             * because it's only allowed to identity map GSIs, and so the
-+             * data contained in that struct (used to map guest GSIs into
-+             * machine GSIs and perform interrupt routing) is completely
-+             * useless to it=2E
-              */
-             hvm_irq_dpci =3D xzalloc(struct hvm_irq_dpci);
-             if ( hvm_irq_dpci =3D=3D NULL )
-@@ -269,15 +274,36 @@ int pt_irq_create_bind(
-          * We MUST check for this condition as the softirq could be sched=
-uled
-          * and hasn't run yet=2E Note that this code replaced tasklet_kil=
-l which
-          * would have spun forever and would do the same thing (wait to f=
-lush out
--         * outstanding hvm_dirq_assist calls=2E
-+         * outstanding hvm_dirq_assist calls)=2E
-          */
-         if ( pt_pirq_softirq_active(pirq_dpci) )
-         {
-             write_unlock(&d->event_lock);
-             cpu_relax();
--            goto restart;
-+            continue;
-         }
--    }
-+
-+        *hvm_irq_dpci_out =3D hvm_irq_dpci;
-+        *pirq_dpci_out =3D pirq_dpci;
-+        *info_out =3D info;
-+        return 0;
-+    } while ( true );
-+}
-+
-+int pt_irq_create_bind(
-+    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
++static int cf_check ioapic_check(const struct domain *d, hvm_domain_conte=
+xt_t *h)
 +{
-+    struct hvm_irq_dpci *hvm_irq_dpci;
-+    struct hvm_pirq_dpci *pirq_dpci;
-+    struct pirq *info;
-+    int rc, pirq =3D pt_irq_bind->machine_irq;
++    const HVM_SAVE_TYPE(IOAPIC) *s;
 +
-+    if ( pirq < 0 || pirq >=3D d->nr_pirqs )
++    if ( !has_vioapic(d) )
++        return -ENODEV;
++
++    s =3D hvm_get_entry(IOAPIC, h);
++    if ( !s )
++        return -ENODATA;
++
++    /* base_address of 0 is never valid for the IO-APIC MMIO window=2E */
++    if ( !s->base_address )
 +        return -EINVAL;
 +
-+    rc =3D pt_irq_dpci_setup(d, pirq, &hvm_irq_dpci, &pirq_dpci, &info);
-+    if ( rc )
-+        return rc;
++    /* IO-APIC APIC ID is a 4-bit field=2E */
++    if ( s->id > 0xf )
++        return -EINVAL;
++
++    /* ioregsel must address a defined register=2E */
++    if ( s->ioregsel > VIOAPIC_REG_RTE0 + (ARRAY_SIZE(s->redirtbl) - 1) *=
+ 2 + 1 )
++        return -EINVAL;
++
++    return 0;
++}
++
+ static int cf_check ioapic_save(struct vcpu *v, hvm_domain_context_t *h)
+ {
+     const struct domain *d =3D v->domain;
+@@ -630,7 +656,7 @@ static int cf_check ioapic_load(struct domain *d, hvm_=
+domain_context_t *h)
+     return 0;
+ }
 =20
-     switch ( pt_irq_bind->irq_type )
-     {
+-HVM_REGISTER_SAVE_RESTORE(IOAPIC, ioapic_save, NULL, ioapic_load, 1,
++HVM_REGISTER_SAVE_RESTORE(IOAPIC, ioapic_save, ioapic_check, ioapic_load,=
+ 1,
+                           HVMSR_PER_DOM);
+=20
+ void vioapic_reset(struct domain *d)
 --=20
 2=2E53=2E0
 
@@ -241,5 +196,5 @@ XCP-ng & Xen Orch=
 estra - Vates solutions
 
 web: https://vates=2Etech
----=Part.2975.a3c70ac1ac8036d.19dcf387e09.478a393e5b10a835=---
+---=Part.2973.a4b8ae2b085a49c6.19dcf387b7f.2f2b4e9391e281cb=---
 
