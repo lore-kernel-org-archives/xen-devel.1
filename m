@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F411FFF8868
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 17:19:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1295196.1571891 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E51FF8860
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 18:22:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1295218.1571900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHPcG-0002qN-61; Mon, 27 Apr 2026 17:19:28 +0000
+	id 1wHQaG-0005Zo-QW; Mon, 27 Apr 2026 18:21:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1295196.1571891; Mon, 27 Apr 2026 17:19:28 +0000
+Received: by outflank-mailman (output) from mailman id 1295218.1571900; Mon, 27 Apr 2026 18:21:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHPcG-0002qG-3I; Mon, 27 Apr 2026 17:19:28 +0000
-Received: by outflank-mailman (input) for mailman id 1295196;
- Mon, 27 Apr 2026 17:19:27 +0000
+	id 1wHQaG-0005Zh-N2; Mon, 27 Apr 2026 18:21:28 +0000
+Received: by outflank-mailman (input) for mailman id 1295218;
+ Mon, 27 Apr 2026 18:21:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chleroy@kernel.org>) id 1wHPcF-0002pV-0A
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 17:19:27 +0000
+ (envelope-from <chleroy@kernel.org>) id 1wHQaG-0005Zb-1i
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 18:21:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHPcE-009MNW-Cz
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 19:19:26 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wHQaE-00DKp2-OU
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 20:21:26 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <chleroy@kernel.org>)
- id 69ef9a9c-2eae-0a2a0a5409dd-0a2a4501bcd8-4
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 19:19:26 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69efa912-2eae-0a2a0a5409dd-0a2a4509a59e-40
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 20:21:26 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <chleroy@kernel.org>)
- id 69ef9a9d-c1f2-0a2a45010019-ac6904fea574-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 19:19:26 +0200
+ id 69efa924-2497-0a2a45090019-aceafc1fc93a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 20:21:26 +0200
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 180046024D;
- Mon, 27 Apr 2026 17:19:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A25EEC2BCB7;
- Mon, 27 Apr 2026 17:19:12 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 46E9540246;
+ Mon, 27 Apr 2026 18:20:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CCCFC2BCB5;
+ Mon, 27 Apr 2026 18:20:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,186 +50,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777310364;
-	bh=xblTv37x9V4gU3cvmA9ILfz6xXNOv0sNe2zU9C6a5nw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=k8kV5Zhk7HZbxy8X7mxqUL5UgTTJPPuuLtSKHKOe5PwbIiNodL9/7ESxRbcOMv4dB
-	 NN/pd897F5mMQZv6MW+RM/3mikWvqmJGQCtupbd6YHiobStaCQu79RRkwt3Bs1rL/A
-	 WmXtcy3vIzgejB2MGSu6MrKJ33itreKKdFlemNypyCUExoUHGXA1bHbqFqaNX4ujdd
-	 iXZiXWTV/w69yfgs2V8e+zdWAilhhtsvDDxzPIT8CbbievjXPmrPwVloE5aoqLKmYP
-	 ca2+sf92YJQm2mLHcpyNlGd6mMQP6QhUed6Hx8vk/CloBjO7tSgz4fayv+CeXka+Fz
-	 NwGM6tvALNVmQ==
-From: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
-To: Yury Norov <ynorov@nvidia.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	David Laight <david.laight.linux@gmail.com>,
-	Thomas Gleixner <tglx@linutronix.de>
-Cc: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	linux-alpha@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-snps-arc@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mips@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	kvm@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	dmaengine@vger.kernel.org,
-	linux-efi@vger.kernel.org,
-	linux-fsi@lists.ozlabs.org,
-	amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	linux-wpan@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	linux-spi@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	linux-staging@lists.linux.dev,
-	linux-serial@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-fsdevel@vger.kernel.org,
-	ocfs2-devel@lists.linux.dev,
-	bpf@vger.kernel.org,
-	kasan-dev@googlegroups.com,
-	linux-mm@kvack.org,
-	linux-x25@vger.kernel.org,
-	rust-for-linux@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	sound-open-firmware@alsa-project.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-openrisc@vger.kernel.org,
-	linux-parisc@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	linux-arch@vger.kernel.org
-Subject: [RFC PATCH v1 9/9] uaccess: Convert small fixed size copy_{to/from}_user() to scoped user access
-Date: Mon, 27 Apr 2026 19:13:50 +0200
-Message-ID: <8780eb2ef80575931a339e5225bc80eb13e9be6c.1777306795.git.chleroy@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1777306795.git.chleroy@kernel.org>
-References: <cover.1777306795.git.chleroy@kernel.org>
+	s=k20201202; t=1777314053;
+	bh=fSfdZ5/fBIJBn92+lTQ8RknrFiSruKk4Zm5FPbyuhQI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=J2scZpbKenpOejPaCkxdr8Fr6c4RornKyxLjF0dKFYhSlw+matCdj3SDWlLeqEo9E
+	 a373XI9Iold2YwxLkAFI1OVkbxbR9JLgxu/comiCZJeBJjQK8IiPFbF3a0OQIu5zFJ
+	 z32D8XDVz5Fo00XfpR09lc3WO+fPx7ont3FOA+TL4jxGM7w1J5Z2cHWcv2Vi05coRU
+	 6lIPjD/Eh4XtMiOh4PUlJfQ+hbcnF50oIaF0Y5is14Jb9Uy7pNbq6e4WVWxwPn3QZF
+	 F5175xYuXBtUSK+HvgeuPZTDTXog5e6524IUP62vgqpWl/U/vR5Pqvo+DbOYeGkne+
+	 cSOzK+yVIhXWw==
+Message-ID: <63a4d0f6-0eb3-48cd-9f98-bf7b223b2606@kernel.org>
+Date: Mon, 27 Apr 2026 20:20:38 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3638; i=chleroy@kernel.org; h=from:subject:message-id; bh=xblTv37x9V4gU3cvmA9ILfz6xXNOv0sNe2zU9C6a5nw=; b=owGbwMvMwCV2d0KB2p7V54MZT6slMWS+nxlr/n9yu2DE7uwkCZGbl0uCp6Y1JLvZTPpz+P/PY xNqPMoaOkpZGMS4GGTFFFmO/+feNaPrS2r+1F36MHNYmUCGMHBxCsBE9HwZ/ns82Ho9PV2Q+7Pp 5fqvs6O/v3YN+3EgL+Wk4b/co1rlkZ8YGVZxmDl7XFiUcmPSTPW14WGSHT6/1u4pcTY2cjD0U7P bzAkA
-X-Developer-Key: i=chleroy@kernel.org; a=openpgp; fpr=10FFE6F8B390DE17ACC2632368A92FEB01B8DD78
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v1 7/9] x86: Add unsafe_copy_from_user()
+To: Yury Norov <ynorov@nvidia.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ David Laight <david.laight.linux@gmail.com>,
+ Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
+ linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
+ sparclinux@vger.kernel.org, linux-um@lists.infradead.org,
+ dmaengine@vger.kernel.org, linux-efi@vger.kernel.org,
+ linux-fsi@lists.ozlabs.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-wpan@vger.kernel.org, netdev@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-spi@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-staging@lists.linux.dev,
+ linux-serial@vger.kernel.org, linux-usb@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
+ ocfs2-devel@lists.linux.dev, bpf@vger.kernel.org,
+ kasan-dev@googlegroups.com, linux-mm@kvack.org, linux-x25@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, linux-sound@vger.kernel.org,
+ sound-open-firmware@alsa-project.org, linux-csky@vger.kernel.org,
+ linux-hexagon@vger.kernel.org, loongarch@lists.linux.dev,
+ linux-m68k@lists.linux-m68k.org, linux-openrisc@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org,
+ linux-arch@vger.kernel.org
+References: <cover.1777306795.git.chleroy@kernel.org>
+ <0ee46bb228d97163fbdc14f2a7c52b93d8bc34ce.1777306795.git.chleroy@kernel.org>
+ <ae-j2_QirCySZD02@yury>
+Content-Language: fr-FR
+From: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
+In-Reply-To: <ae-j2_QirCySZD02@yury>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1777310366-BCC6CFF4-9C02882D/0/0
+X-purgate-ID: tlsNG-bad1c0/1777314086-408AFA53-AF96D79F/0/0
 X-purgate-type: clean
-X-purgate-size: 3640
+X-purgate-size: 3340
 
-copy_{to/from}_user() is a heavy function optimised for copy of large
-blocs of memory between user and kernel space.
 
-When the number of bytes to be copied is known at build time and small,
-using scoped user access removes the burden of that optimisation.
 
-Signed-off-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
----
- include/linux/uaccess.h | 47 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+Le 27/04/2026 à 19:58, Yury Norov a écrit :
+> On Mon, Apr 27, 2026 at 07:13:48PM +0200, Christophe Leroy (CS GROUP) wrote:
+>> At the time being, x86 and arm64 are missing unsafe_copy_from_user().
+> 
+> No, they don't. They (should) rely on a generic implementation from
+> linux/uaccess.h, like every other arch, except for  PPC and RISCV.
+> 
+> But they #define arch_unsafe_get_user, and the unsafe_copy_from_user()
+> becomes undefined conditionally on that.
+> 
+> So please, fix that bug instead of introducing another arch flavor.
+> We'd always choose generic version, unless there's strong evidence
+> that arch one is better.
 
-diff --git a/include/linux/uaccess.h b/include/linux/uaccess.h
-index 33b7d0f5f808..3ac544527af2 100644
---- a/include/linux/uaccess.h
-+++ b/include/linux/uaccess.h
-@@ -50,6 +50,8 @@
-  #define mask_user_address(src) (src)
- #endif
- 
-+#define SMALL_COPY_USER		64
-+
- /*
-  * Architectures should provide two primitives (raw_copy_{to,from}_user())
-  * and get rid of their private instances of copy_{to,from}_user() and
-@@ -191,6 +193,9 @@ _inline_copy_from_user(void *to, const void __user *from, unsigned long n)
- 	return res;
- }
- 
-+static __always_inline __must_check unsigned long
-+_small_copy_from_user(void *to, const void __user *from, unsigned long n);
-+
- extern __must_check unsigned long
- _copy_from_user(void *, const void __user *, unsigned long);
- 
-@@ -207,6 +212,9 @@ _inline_copy_to_user(void __user *to, const void *from, unsigned long n)
- 	return n;
- }
- 
-+static __always_inline __must_check unsigned long
-+_small_copy_to_user(void __user *to, const void *from, unsigned long n);
-+
- extern __must_check unsigned long
- _copy_to_user(void __user *, const void *, unsigned long);
- 
-@@ -215,6 +223,8 @@ copy_from_user_common(void *to, const void __user *from, unsigned long n, bool p
- {
- 	if (!check_copy_size(to, n, false))
- 		return n;
-+	if (!partial && __builtin_constant_p(n) && n <= SMALL_COPY_USER)
-+		return _small_copy_from_user(to, from, n);
- 	if (IS_ENABLED(ARCH_WANTS_NOINLINE_COPY_USER))
- 		return _copy_from_user(to, from, n);
- 	else
-@@ -239,6 +249,8 @@ copy_to_user_common(void __user *to, const void *from, unsigned long n, bool par
- 	if (!check_copy_size(from, n, true))
- 		return n;
- 
-+	if (!partial && __builtin_constant_p(n) && n <= SMALL_COPY_USER)
-+		return _small_copy_to_user(to, from, n);
- 	if (IS_ENABLED(ARCH_WANTS_NOINLINE_COPY_USER))
- 		return _copy_to_user(to, from, n);
- 	else
-@@ -838,6 +850,41 @@ for (bool done = false; !done; done = true)					\
- #define scoped_user_rw_access(uptr, elbl)				\
- 	scoped_user_rw_access_size(uptr, sizeof(*(uptr)), elbl)
- 
-+static __always_inline __must_check unsigned long
-+_small_copy_from_user(void *to, const void __user *from, unsigned long n)
-+{
-+	might_fault();
-+	instrument_copy_from_user_before(to, from, n);
-+	scoped_user_read_access_size(from, n, failed) {
-+		/*
-+		 * Ensure that bad access_ok() speculation will not lead
-+		 * to nasty side effects *after* the copy is finished:
-+		 */
-+		if (!can_do_masked_user_access())
-+			barrier_nospec();
-+		unsafe_copy_from_user(to, from, n, failed);
-+	}
-+	instrument_copy_from_user_after(to, from, n, 0);
-+	return 0;
-+failed:
-+	instrument_copy_from_user_after(to, from, n, n);
-+	return n;
-+}
-+
-+static __always_inline __must_check unsigned long
-+_small_copy_to_user(void __user *to, const void *from, unsigned long n)
-+{
-+	might_fault();
-+	if (should_fail_usercopy())
-+		return n;
-+	instrument_copy_to_user(to, from, n);
-+	scoped_user_write_access_size(to, n, failed)
-+		unsafe_copy_to_user(to, from, n, failed);
-+	return 0;
-+failed:
-+	return n;
-+}
-+
- /**
-  * get_user_inline - Read user data inlined
-  * @val:	The variable to store the value read from user memory
--- 
-2.49.0
+But they both implement the exact same unsafe_copy_to_user(). What is 
+the difference here ?
+
+Should that function become generic too ?
+
+Christophe
+
+> 
+> 
+> Thanks,
+> Yury
+>   
+>> Add it.
+>>
+>> Signed-off-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
+>> ---
+>>   arch/x86/include/asm/uaccess.h | 29 ++++++++++++++++++++++++-----
+>>   1 file changed, 24 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/arch/x86/include/asm/uaccess.h b/arch/x86/include/asm/uaccess.h
+>> index 3a0dd3c2b233..10c458ffa399 100644
+>> --- a/arch/x86/include/asm/uaccess.h
+>> +++ b/arch/x86/include/asm/uaccess.h
+>> @@ -598,7 +598,7 @@ _label:									\
+>>    * We want the unsafe accessors to always be inlined and use
+>>    * the error labels - thus the macro games.
+>>    */
+>> -#define unsafe_copy_loop(dst, src, len, type, label)				\
+>> +#define unsafe_put_loop(dst, src, len, type, label)				\
+>>   	while (len >= sizeof(type)) {						\
+>>   		unsafe_put_user(*(type *)(src),(type __user *)(dst),label);	\
+>>   		dst += sizeof(type);						\
+>> @@ -611,10 +611,29 @@ do {									\
+>>   	char __user *__ucu_dst = (_dst);				\
+>>   	const char *__ucu_src = (_src);					\
+>>   	size_t __ucu_len = (_len);					\
+>> -	unsafe_copy_loop(__ucu_dst, __ucu_src, __ucu_len, u64, label);	\
+>> -	unsafe_copy_loop(__ucu_dst, __ucu_src, __ucu_len, u32, label);	\
+>> -	unsafe_copy_loop(__ucu_dst, __ucu_src, __ucu_len, u16, label);	\
+>> -	unsafe_copy_loop(__ucu_dst, __ucu_src, __ucu_len, u8, label);	\
+>> +	unsafe_put_loop(__ucu_dst, __ucu_src, __ucu_len, u64, label);	\
+>> +	unsafe_put_loop(__ucu_dst, __ucu_src, __ucu_len, u32, label);	\
+>> +	unsafe_put_loop(__ucu_dst, __ucu_src, __ucu_len, u16, label);	\
+>> +	unsafe_put_loop(__ucu_dst, __ucu_src, __ucu_len, u8, label);	\
+>> +} while (0)
+>> +
+>> +#define unsafe_get_loop(dst, src, len, type, label)				\
+>> +	while (len >= sizeof(type)) {						\
+>> +		unsafe_get_user(*(type __user *)(src),(type *)(dst),label);	\
+>> +		dst += sizeof(type);						\
+>> +		src += sizeof(type);						\
+>> +		len -= sizeof(type);						\
+>> +	}
+>> +
+>> +#define unsafe_copy_from_user(_dst,_src,_len,label)			\
+>> +do {									\
+>> +	char *__ucu_dst = (_dst);					\
+>> +	const char __user *__ucu_src = (_src);				\
+>> +	size_t __ucu_len = (_len);					\
+>> +	unsafe_get_loop(__ucu_dst, __ucu_src, __ucu_len, u64, label);	\
+>> +	unsafe_get_loop(__ucu_dst, __ucu_src, __ucu_len, u32, label);	\
+>> +	unsafe_get_loop(__ucu_dst, __ucu_src, __ucu_len, u16, label);	\
+>> +	unsafe_get_loop(__ucu_dst, __ucu_src, __ucu_len, u8, label);	\
+>>   } while (0)
+>>   
+>>   #ifdef CONFIG_CC_HAS_ASM_GOTO_OUTPUT
+>> -- 
+>> 2.49.0
+>>
 
 
