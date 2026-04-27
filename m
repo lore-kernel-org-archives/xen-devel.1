@@ -4,60 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2C9FF8868
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 15:27:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1295016.1571711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F433FF8869
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 15:35:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1295028.1571746 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHNrd-0002tj-3R; Mon, 27 Apr 2026 15:27:13 +0000
+	id 1wHNyq-0005LS-RF; Mon, 27 Apr 2026 15:34:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1295016.1571711; Mon, 27 Apr 2026 15:27:13 +0000
+Received: by outflank-mailman (output) from mailman id 1295028.1571746; Mon, 27 Apr 2026 15:34:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHNrd-0002tc-0d; Mon, 27 Apr 2026 15:27:13 +0000
-Received: by outflank-mailman (input) for mailman id 1295016;
- Mon, 27 Apr 2026 15:27:11 +0000
+	id 1wHNyq-0005LF-O7; Mon, 27 Apr 2026 15:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 1295028;
+ Mon, 27 Apr 2026 15:34:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Luca.Fancellu@arm.com>) id 1wHNrb-0002tU-A0
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:27:11 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wHNyp-0004sz-IL
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:34:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHNra-005tYx-JM
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 17:27:10 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wHNyo-00GEYf-V8
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 17:34:38 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Luca.Fancellu@arm.com>)
- id 69ef8048-2eae-0a2a0a5409dd-0a2a4507a43c-10
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:27:09 +0200
-Received: from [52.101.72.16]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Luca.Fancellu@arm.com>)
- id 69ef804d-229c-0a2a45070019-34654810e918-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:27:09 +0200
-Received: from AS9PR06CA0718.eurprd06.prod.outlook.com (2603:10a6:20b:49f::33)
- by AM8PR08MB5715.eurprd08.prod.outlook.com (2603:10a6:20b:1d7::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 15:27:05 +0000
-Received: from AM4PEPF00027A6C.eurprd04.prod.outlook.com
- (2603:10a6:20b:49f:cafe::e4) by AS9PR06CA0718.outlook.office365.com
- (2603:10a6:20b:49f::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Mon,
- 27 Apr 2026 15:27:05 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AM4PEPF00027A6C.mail.protection.outlook.com (10.167.16.90) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
- via Frontend Transport; Mon, 27 Apr 2026 15:27:05 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
- by AS8PR08MB10077.eurprd08.prod.outlook.com (2603:10a6:20b:63e::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 15:26:00 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323]) by DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323%6]) with mapi id 15.20.9846.025; Mon, 27 Apr 2026
- 15:26:00 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69ef8201-bab6-0a2a0a5309dd-0a2a4506eb28-18
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:34:38 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69ef820e-7371-0a2a45060019-d155802ab08e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 17:34:38 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-483487335c2so102261365e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 08:34:38 -0700 (PDT)
+Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488fc1c0354sm737076355e9.11.2026.04.27.08.34.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 08:34:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,146 +52,426 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=hzNBD8tbCo75YoFLpEFLN0s0MAso36PZKZs7oZtKbTeKkyWdeNTQvYXLvep48AS4ZXW3ibRP73hT9i2zCUTr2sxsbpsA/4xYIGsDJNQRlS2AAIzvQeiTPA081bo6CpcBfW+YPUSo4JKPDDJl4C/TDeVLnfOQeQuweu2YVMtw+zTjAr4Fu5jrkcJ4G+WJ3Nh374M/mjRh7WYzkfxEyMT5radZu1OzEb5veIZRYthbR1Rt9HGCM1Nc7ZoOXuqoCiPmsdkZo8MR6+e3GbQUip7b/9dw3z4ABjIyptSq3v8c9ajpIp1GbmbRvXBbP3v3TfZX0IsPD1YD/eEenoeJR6X6yQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s4ShT6GvlSujcGQUnL7CVoen9wfpB10+b/cLPUQSSlU=;
- b=IwyrY6SbjrpydkzdjLarmos67XINQZhDhOw1HsVPc6O7/Fhc2ifatiNyJ5NXSTK/beEq4xJsgVYxktvHB0yHZGI/Yf9Xfj3zt1quLEuxaH3QOFgyTgfQV9HWM4+Z1f/flLD/mqWjf8RaecmD82amJDlBD8KlyTCNVHuyDEYsSpwPdb2A/ENrklNihG1qdBL5ll8SQw6qHrixSjyNG84336YI4OYgGN7P5eY8p1hgA8vacCZxcW9oWoDlyrh8CLYfzr6z70295+eXH3vmIcX4korjJlpptyOTfBy9vch+sYPqKwi6/H9PGB0WeYFsyYGvE3Qu2W5XwilqcCNWAd6kHw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s4ShT6GvlSujcGQUnL7CVoen9wfpB10+b/cLPUQSSlU=;
- b=MCpvPDoreGZHUWPlf+3sOuD+I+ZTxEEeJrTJnPLAbCaVvKMZjY1jSn6d3yi650A/yihLsHuTy/7Q+tPnk0fbj2PZUGBEEOLL4uonhUY5zvpk5ujDoD4V9bVW7bxddeIzQAhO76t5WAb+3M6Oa+IrvQwqenQOwCVe4VOrcGmbTrw=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UghylKoLGh0KDuIrnxyhTdfkXidFPmVP9XrB/67KdPmzBSGzmtB94/ZXEqiPwJmIAx1XDNQtNip3/BE3wQ6+1fP+01FkCPQPh0ihnn6V12zQPqtBM9oueN3MpNlTLWyEyOlIMt4qwziPvkEwI5ytNHNkZrkctSMOBUfR3U4rXOhar/GnZqgcAz3MNo1B0/dfl/fZjjgQMu4ys4t+NVlRUfpnEosqSa1VZd96htG6ZES515Z/1mTqpPtdZ4Xh0FS5Q/QjbQhfPCr3PG753V+yrwFMEZ53HC1cVrtOWp3LGPbDjWWKiLVctv839rKAeRFzFYJ4WWiEh/7aUspw5ZF8wg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s4ShT6GvlSujcGQUnL7CVoen9wfpB10+b/cLPUQSSlU=;
- b=FrbJVk7qrHZnWIXyxcT2LVbpM2/SHLES/2pSQgD8QcCzAst0bMRje0DTjkkTddSICVr/wuTC2wybCkkBUoCrPrWliuNqeigMF1RCeOi5SqSsrcE5ITPqy2Dc/EQ++RMH0sr5WDGYHlMrOp78sVWbvLaGbwUfDVcg2B9nVH7HxJ6WBPz+dtOd9PDTzKrNS/Ygwe5vhTfj0zn6MnlkngfcoDH7MYdWrjTbvIKnwrcvhBku6WG8J+Z0EMFXpFJl4/mfpUMKc9l1xdxV9u/0ZNHaVcbSjW4GP7lfJQVmnqELskXQ/vNNnPI3yYXgqsHwnSLaLeMpPTsr/phTv8uPL+BVqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s4ShT6GvlSujcGQUnL7CVoen9wfpB10+b/cLPUQSSlU=;
- b=MCpvPDoreGZHUWPlf+3sOuD+I+ZTxEEeJrTJnPLAbCaVvKMZjY1jSn6d3yi650A/yihLsHuTy/7Q+tPnk0fbj2PZUGBEEOLL4uonhUY5zvpk5ujDoD4V9bVW7bxddeIzQAhO76t5WAb+3M6Oa+IrvQwqenQOwCVe4VOrcGmbTrw=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Mykola Kvach <xakep.amatop@gmail.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola
- Kvach <mykola_kvach@epam.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v8 11/13] xen/arm: Save/restore context on suspend/resume
-Thread-Topic: [PATCH v8 11/13] xen/arm: Save/restore context on suspend/resume
-Thread-Index: AQHc1lonfl/HZr0bRU6yMGs4M1GHKA==
-Date: Mon, 27 Apr 2026 15:26:00 +0000
-Message-ID: <BF235081-E9F4-48E1-BDE2-854DBAFAAA7F@arm.com>
-References: <cover.1775125380.git.mykola_kvach@epam.com>
- <f87a2bcb6b09e95e07e51c27541ad91406e849d1.1775125380.git.mykola_kvach@epam.com>
-In-Reply-To:
- <f87a2bcb6b09e95e07e51c27541ad91406e849d1.1775125380.git.mykola_kvach@epam.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3826.700.81.1.6)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	DU2PR08MB7272:EE_|AS8PR08MB10077:EE_|AM4PEPF00027A6C:EE_|AM8PR08MB5715:EE_
-X-MS-Office365-Filtering-Correlation-Id: 10676d10-920f-4394-c849-08dea471700d
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|376014|366016|1800799024|56012099003|18002099003|22082099003|38070700021;
-X-Microsoft-Antispam-Message-Info-Original:
- a/rwLwgr5y8rLdfdwbnyJWejl+B8qgCsyPZBrLMAbrlLtNzAOsEffQWjb/pbjxcBMH1k4xo1mSbupRCO5FJSogklFn4dfZIip1KvpLHTOclgNGmBmzF8OjMb9IE6QVBADxCNEYfAwsbQEzfSHOGGilTVdGGukLgH/2v507Tk7O//IVBkk17ogftBYqClUwDToqarnwEb3lxuam90irgDLY2p8efS4R5Txaay8jW9s5+rknSD/besTDC5pl43z2TZk0cuf9mlXi2pUqJlnY0SE4+ZJ3hHDQwCw3ZAleFLQKvNnjqHhCiP/lsav2qUWHXccDVQlRL393na6pb4IBkfpDW6+zjK9C3anOrGKbX/5V6DP1wmIOrkbaNgfG/Uf5zKaE8t+pLMNJ8lDjmZLqB9e32p1RTgmyCloNzv1CXPvUtLpIOIgdzQY2d6Z9yhwaZGyZ/TQONgBAwd96IEjQ76KA8x0+wEJkFUvc1KU/TENnxBUO7/JBrm8h5OPZduLl86FZHPolQ/xMvYe47dgznxwRXf0IoM8d+HiS192AEnb/dKI+2/2Bnlq4y26D20VQEZqwWF3Ozv9GtmY01vXMcvuceIn3FVsSvWQpa7I/d/zHiKV8wjHqnMrxjcBHgDqhxqepUObX5KtqwsdKd/46gCm0TcVjfXQvkwW3Yw3SlqgdHGRxL3og5iiT/djVYITMT1s1kswbrllk0uhiCYoxviVNI86WkTBdaJp8nserU2wMmEfceiMCS2jrcy2y+45LoFP9Cp1xf7DpS8EsErYJBu4sfEEQ4GjcsJZ3lpCATr9SE=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <E73D316B94ADB54F862ED2AB71004E43@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1777304078; x=1777908878; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XqFH3ZM0YOXaw4rO6uZDoJyrUUgd988+AjZxylZcJqk=;
+        b=hG4hcAXjKDtekz+7N3uQKjRhGgPIXx2Q048Huem2LkP5l0nKZmVCLQ/FIym7iOTqc1
+         wv1pnBrbikxQdhMTVKFi4wBB7vTvkXacDWiN9jYrFq6SxR4O9bq5Uopx0nR5QkjdPj6W
+         8+95iYBVyf1CTDN8qXhLNXgYVySLSCIBPPNTrSHw7WNYg/aCGVTW/faqAqqlB0gO7BSj
+         KiIIzZphk5Ednm9IKUjLuInAPdzIf3rmbem8oZQOymWPayTdSsXZ+el6YpVzeC3o6J3M
+         4nEjbFuhaUxV8iXn7C4RF72EkPMMUuLszZAz26Ea5O1WKDGzQN/Qa5oGG1cR4uhHugx1
+         BUzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777304078; x=1777908878;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=XqFH3ZM0YOXaw4rO6uZDoJyrUUgd988+AjZxylZcJqk=;
+        b=gLlywsGtMp6nyAh7B63xvCHgpvlmlA9sgfsuvreLQDz0fsn0MXCSy3eTsqgNNI09Ut
+         /R23XCufL/3lEi8JvotJ0/ejRFZVPT9AA89ZekN2Q5wFnaQnZ6NPnOg7hELFjncpfHKT
+         evFENNWIn4G89Ixa+9XVVtYspEfaopfyVNnHWRO53DCAkUvatrvgfmlbiYYFSme75N8n
+         DeYLCoK6iH29ZLh6QSemvQLJrzdFEzYdcpKBPfkyWlekZ39Yz22LKwo0dTnNaDv/aNxk
+         kWLiiT6ecBu0yji+RGNjMpGUs6C2o2cGomcWczhrqZ9bWjP4RJChl/GytSuak5bCs44m
+         ByWQ==
+X-Gm-Message-State: AOJu0Yxw92QgSwDA45dnGzV3jLU25Ja084/XuwJnarGdYXC6TfESpV8s
+	f2u3YFlQ0p0jAxRnY6bgAKruqL1hwI3fs2O0WkFSE9yJVesJGcnrEgfxlH8H6A==
+X-Gm-Gg: AeBDiet9CauMc8E6uxXj5IJlTr1j6Fv45PDDr4HX3XOJu6XkSj4msXjnHkMQLaools9
+	yyvUs3ouQlMbRLk/kgfj/wURoOJfrJVHke/IRs8fGXQj+WqECsI05qM6FP6HAD8FTKJOPbbfRr4
+	a5tkPWDaVfxZah/CZKhlvN+uUXJLZPB5xJ10htwKDGkgSPZWvw8en7gy60BfZnYStUAWd66MI2m
+	8tgzb/AZnuKPUC0AHCgIvBKa3ZrZJwnWBRimuRI8VxcDdu15d/WFPzDeWEuXyHgUSdEhN9J/H/h
+	Chto9nAe1DeJ0ymfUVjhSvTvbY54VZ0KfID9PoddI8EO+4N0LMwRCZgavzv7xdqQUOPKefHmlaI
+	SuWypz8tlazz+fwgauIOZbTZ9hVL4rAzhgHk9deBNKu6tZ2HYJwhZUPo0dWqT/PMVPOSU6yooom
+	Fx32W4WcV3kzZTKcydVGSnTsz9mwabUwHbdtoAolSc5nfy3W6MFXSGpJJL+7d7ntzf3tBK5l5A7
+	mMx
+X-Received: by 2002:a05:600c:c177:b0:486:fb0b:ad79 with SMTP id 5b1f17b1804b1-488fb78129emr551476665e9.20.1777304077912;
+        Mon, 27 Apr 2026 08:34:37 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v4 3/3] xen: introduce CONFIG_HAS_DOMAIN_TYPE
+Date: Mon, 27 Apr 2026 17:34:25 +0200
+Message-ID: <7c91e1a705e1046be4af1c5671a8d91cf3557013.1777296786.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1777296786.git.oleksii.kurochko@gmail.com>
+References: <cover.1777296786.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
- P0fdS0X+1iG/eBdWvORxFlq26VKhhigVCp6Z83wiLvtNiFKzkE51iTRxb/54tbEsLHT9ByjcR8Ia3PsZUMr8d4ndJomgmdESxy0HN2BrgCFEH1QHo2ycOJh2NSmuKTYda+qgUdLRPWGNICB9p4F7lbZZ1eM81v05kEZQVoBPnDlNBxzOTzvtdxwlO/O0wB85Hc2Hz5d4CJvDHAYdb7cslcos9zG81QrFQysPMBBPaqMtPUR2XxE3XKBmC/pl15CVoVlpwlzsCkh9i5JRxXIk1+9DBcJlmMYK27pNoXDWQUJP8lSRgo0/HLUWTN8/A2rHBzkIQt7L5+KoZYMTwxAy/g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB10077
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM4PEPF00027A6C.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	603728b6-175f-489b-7f9a-08dea47149b1
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|35042699022|14060799003|82310400026|1800799024|376014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	uZfxt5RSf0SU0jX1rwD7mCzoeueaeIC7IEs/xWmyzOXyD9f5xmfHHvdrOvSfjvnTdVRYSNec1Cq4JU/TWq8BDzJ395g30JYmDT6byXYBFOTfeZpAtC6IV/O/KqmCnPh/L8fvBDxrTStyRPjzkzXFpqKFMkn32f027A3EElzQXwEmYeJ7CLzEM0OFZqz1DOIolkshZUxHHHrI+WABayw6x2158ExXsPJvIVvdY2D3MnEqKpIV/4sdGyvvx2x7qOv2PJmr1ZUYBtTq1cWzMbgXjFoYp8SaiUl+2zJmWWs/0f9S+Ud6yR9dBp9s5TrROO8+STtPoeO2IIWu40JPHhS3TtAfGJ1FyyZG1kQyrAskKqTiaTStWBdm5SMhQ6VVfX1th9OciXPEHhXEDH0IITaZrCW3UbptJKHIgtoWXxIwQKj7wjF29B537Cxvl+bPfVbYgIFGGIGJQpimqHssHkSxxEXY3VAwaSVK0LXPTf8i/IKNfeHSZvpa84wDakLDqLPPdEiooq7ajxt2dswVWMD2Mg6sh1f0om/RJs1aYkj/2aEcviUyKoaGtbt6jlJ5H9reFHwKZs4EPERmEcIx8BjwegA/puNfSVoOLxCLvx62u8PrxKD9F6q/BWmGVPrfuuJKnnKOhdcH1oGNu6CDdrGZPDQngNaW2RSsv1AuKwbimu/t4SWjYXgRkbOARllxSmw06MHh3YiY2hPdWDc25Q7iH9zg0wLzQM2OLF7AVf9EU6SkNON5BU3s04KlxwIloovBtYjWs0WXyuWx77Ls3L8Glw==
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(35042699022)(14060799003)(82310400026)(1800799024)(376014)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	ne29DuKG8nJmoXMDL61WVq4zi0n5RYCr/alsIAKxI+UQQfSix3fWLH2pyqMe/s9n8lRNHHPRSrFcBDDsPkCTQS/b1HiW9kq6jv1HoJubTY1czLR4nlEbbLvHZSh8v0Xp81S6vuXd/N/DdxkYe21VM+lLme+YgA9MFHyvETUYsop/fHO5dlt6A27tMY+TuaSOiENh2MHuXWZSXDq0DTb9eS01NPEQx4XKSnHYN4o284659/0oHjDMY4M75FUYTR+STbidpqWo4zl/cQMr6U0oLHg6pOLNn4W2rLpm+SexbpZoElXfE+plTrXkm1kwx2MSWo8Q340orBLYzDqO/05JeH+NpG+cET4K03+jXIl5iCV24qw691NNfGAX+mWN2h5lNskh+M5Jn42Uud2yr/b8k48Egf0xuOfUnUtIImbhAAm1rc39TzNenvhz2D4w//hM
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 15:27:05.0470
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 10676d10-920f-4394-c849-08dea471700d
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM4PEPF00027A6C.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5715
-X-purgate-ID: tlsNG-ef75cf/1777303629-2B77AC48-2817BC72/0/0
-X-purgate-type: clean
-X-purgate-size: 2398
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1777304078-5156ED75-0A6DE078/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 11569
 
-SGkgTXlrb2xhLA0KDQo+IE9uIDIgQXByIDIwMjYsIGF0IDExOjQ1LCBNeWtvbGEgS3ZhY2ggPHhh
-a2VwLmFtYXRvcEBnbWFpbC5jb20+IHdyb3RlOg0KPiANCj4gRnJvbTogTWlyZWxhIFNpbW9ub3Zp
-YyA8bWlyZWxhLnNpbW9ub3ZpY0BhZ2dpb3MuY29tPg0KPiANCj4gVGhlIGNvbnRleHQgb2YgQ1BV
-IGdlbmVyYWwgcHVycG9zZSBhbmQgc3lzdGVtIGNvbnRyb2wgcmVnaXN0ZXJzIG11c3QgYmUNCj4g
-c2F2ZWQgb24gc3VzcGVuZCBhbmQgcmVzdG9yZWQgb24gcmVzdW1lLiBUaGlzIGlzIGltcGxlbWVu
-dGVkIGluDQo+IHByZXBhcmVfcmVzdW1lX2N0eCBhbmQgYmVmb3JlIHRoZSByZXR1cm4gZnJvbSB0
-aGUgaHlwX3Jlc3VtZSBmdW5jdGlvbi4NCj4gVGhlIHByZXBhcmVfcmVzdW1lX2N0eCBtdXN0IGJl
-IGludm9rZWQganVzdCBiZWZvcmUgdGhlIFBTQ0kgc3lzdGVtIHN1c3BlbmQNCj4gY2FsbCBpcyBp
-c3N1ZWQgdG8gdGhlIEFURi4gVGhlIHByZXBhcmVfcmVzdW1lX2N0eCBtdXN0IHJldHVybiBhIG5v
-bi16ZXJvDQo+IHZhbHVlIHNvIHRoYXQgdGhlIGNhbGxpbmcgJ2lmJyBzdGF0ZW1lbnQgZXZhbHVh
-dGVzIHRvIHRydWUsIGNhdXNpbmcgdGhlDQo+IHN5c3RlbSBzdXNwZW5kIHRvIGJlIGludm9rZWQu
-IFVwb24gcmVzdW1lLCB0aGUgY29udGV4dCBzYXZlZCBvbiBzdXNwZW5kDQo+IHdpbGwgYmUgcmVz
-dG9yZWQsIGluY2x1ZGluZyB0aGUgbGluayByZWdpc3Rlci4gVGhlcmVmb3JlLCBhZnRlcg0KPiBy
-ZXN0b3JpbmcgdGhlIGNvbnRleHQsIHRoZSBjb250cm9sIGZsb3cgd2lsbCByZXR1cm4gdG8gdGhl
-IGFkZHJlc3MNCj4gcG9pbnRlZCB0byBieSB0aGUgc2F2ZWQgbGluayByZWdpc3Rlciwgd2hpY2gg
-aXMgdGhlIHBsYWNlIGZyb20gd2hpY2gNCj4gcHJlcGFyZV9yZXN1bWVfY3R4IHdhcyBjYWxsZWQu
-IFRvIGVuc3VyZSB0aGF0IHRoZSBjYWxsaW5nICdpZicgc3RhdGVtZW50DQo+IGRvZXMgbm90IGFn
-YWluIGV2YWx1YXRlIHRvIHRydWUgYW5kIGluaXRpYXRlIHN5c3RlbSBzdXNwZW5kLCBoeXBfcmVz
-dW1lDQo+IG11c3QgcmV0dXJuIGEgemVybyB2YWx1ZSBhZnRlciByZXN0b3JpbmcgdGhlIGNvbnRl
-eHQuDQo+IA0KPiBOb3RlIHRoYXQgdGhlIG9yZGVyIG9mIHNhdmluZyByZWdpc3RlciBjb250ZXh0
-IGludG8gY3B1X2NvbnRleHQgc3RydWN0dXJlDQo+IG11c3QgbWF0Y2ggdGhlIG9yZGVyIG9mIHJl
-c3RvcmluZy4NCj4gDQo+IFN1cHBvcnQgZm9yIEFSTTMyIGlzIG5vdCBpbXBsZW1lbnRlZC4gSW5z
-dGVhZCwgY29tcGlsYXRpb24gZmFpbHMgd2l0aCBhDQo+IGJ1aWxkLXRpbWUgZXJyb3IgaWYgc3Vz
-cGVuZCBpcyBlbmFibGVkIGZvciBBUk0zMi4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE1pcmVsYSBT
-aW1vbm92aWMgPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTog
-U2FlZWQgTm93c2hhZGkgPHNhZWVkLm5vd3NoYWRpQHhpbGlueC5jb20+DQo+IFNpZ25lZC1vZmYt
-Ynk6IE15a3l0YSBQb3R1cmFpIDxteWt5dGFfcG90dXJhaUBlcGFtLmNvbT4NCj4gU2lnbmVkLW9m
-Zi1ieTogTXlrb2xhIEt2YWNoIDxteWtvbGFfa3ZhY2hAZXBhbS5jb20+DQo+IC0tLQ0KDQpUaGlz
-IHBhdGNoIGxvb2tzIG9rIHRvIG1lLCBJ4oCZbGwgbGVhdmUgbXkgUi1ieSB3aGVuIG1haW50YWlu
-ZXJzIHdpbGwgZ2l2ZSBhbiBvcGluaW9uDQphYm91dCBzcXVhc2hpbmcgdGhpcyBvbmUgd2l0aCB0
-aGUgcHJldmlvdXMgb25lLg0KDQpDaGVlcnMsDQpMdWNhDQoNCg0KDQo=
+As domain type is part of common code now there is no any reason
+to have architecture-specific set_domain_type() functions so
+it is dropped.
+
+Change the guard around access of kinfo->type to CONFIG_HAS_DOMAIN_TYPE
+for consistency. Also, drop and add some parentheses to be aligned
+with the similar if() below.
+
+x86 with CONFIG_64BIT=y shouldn't use is_{32,64}bit_domain() as
+x86 doesn't have support of CONFIG_HAS_DOMAIN_TYPE. Since x86_32 Xen no
+longer builds, the fallback is currently only relevant for arm32.
+
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changes in v4:
+ - Drop enum domain_type type; from Arm's struct arch_domain.
+ - Add Reviewed-by: Michal Orzel <michal.orzel@amd.com>.
+---
+Changes in v3:
+ - Sort properly HAS_DOMAIN_TYPE in xen/common/Kconfig.
+ - Update the comment above is_*bit_domain() macros.
+---
+Changes in v2:
+ - Update the commit message.
+ - Move HAS_DOMAIN_TYPE to xen/common/Kconfig.
+ - Return set_domain_type(), move it to xen/fdt-domain-build.h and make it
+   static inline.
+ - s/CONFIG_ARM_64/CONFIG_HAS_DOMAIN for the places where kinfo->type is used.
+ - Drop parantethes around cpu_has_el1_32 in if() and add around
+   (kinfo->type == DOMAIN_32BIT) to be consistent with the similar check below.
+ - Fix comment code style.
+ - Add __packed to definition of enum domain_type
+---
+ xen/arch/arm/Kconfig               |  1 +
+ xen/arch/arm/arm64/domctl.c        |  4 ++--
+ xen/arch/arm/dom0less-build.c      | 14 --------------
+ xen/arch/arm/domain_build.c        | 12 +++++-------
+ xen/arch/arm/include/asm/domain.h  | 16 ----------------
+ xen/arch/arm/include/asm/kernel.h  |  4 ----
+ xen/arch/arm/kernel.c              | 16 ++++++++--------
+ xen/common/Kconfig                 |  3 +++
+ xen/include/xen/dom0less-build.h   |  2 --
+ xen/include/xen/domain.h           | 13 +++++++++++++
+ xen/include/xen/fdt-domain-build.h |  9 +++++++++
+ xen/include/xen/fdt-kernel.h       |  5 +++++
+ xen/include/xen/sched.h            |  4 ++++
+ 13 files changed, 50 insertions(+), 53 deletions(-)
+
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 2f2b501fdac4..79622b46a10d 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -7,6 +7,7 @@ config ARM_64
+ 	def_bool y
+ 	depends on !ARM_32
+ 	select 64BIT
++	select HAS_DOMAIN_TYPE
+ 	select HAS_FAST_MULTIPLY
+ 	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
+ 
+diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
+index 8720d126c97d..9e9a29eb1e78 100644
+--- a/xen/arch/arm/arm64/domctl.c
++++ b/xen/arch/arm/arm64/domctl.c
+@@ -21,10 +21,10 @@ static long switch_mode(struct domain *d, enum domain_type type)
+         return -EINVAL;
+     if ( domain_tot_pages(d) != 0 )
+         return -EBUSY;
+-    if ( d->arch.type == type )
++    if ( d->type == type )
+         return 0;
+ 
+-    d->arch.type = type;
++    d->type = type;
+ 
+     if ( is_64bit_domain(d) )
+         for_each_vcpu(d, v)
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index 4181c105389a..6f73c65e5151 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -237,20 +237,6 @@ int __init make_arch_nodes(struct kernel_info *kinfo)
+     return 0;
+ }
+ 
+-/* TODO: make arch.type generic ? */
+-#ifdef CONFIG_ARM_64
+-void __init set_domain_type(struct domain *d, struct kernel_info *kinfo)
+-{
+-    /* type must be set before allocate memory */
+-    d->arch.type = kinfo->arch.type;
+-}
+-#else
+-void __init set_domain_type(struct domain *d, struct kernel_info *kinfo)
+-{
+-    /* Nothing to do */
+-}
+-#endif
+-
+ int __init init_vuart(struct domain *d, struct kernel_info *kinfo,
+                       const struct dt_device_node *node)
+ {
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index a3ff70102376..ad665cd3c045 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1771,15 +1771,15 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+     BUG_ON(d->vcpu[0] == NULL);
+     BUG_ON(v->is_initialised);
+ 
+-#ifdef CONFIG_ARM_64
++#ifdef CONFIG_HAS_DOMAIN_TYPE
+     /* if aarch32 mode is not supported at EL1 do not allow 32-bit domain */
+-    if ( !(cpu_has_el1_32) && kinfo->arch.type == DOMAIN_32BIT )
++    if ( !cpu_has_el1_32 && (kinfo->type == DOMAIN_32BIT) )
+     {
+         printk("Platform does not support 32-bit domain\n");
+         return -EINVAL;
+     }
+ 
+-    if ( is_sve_domain(d) && (kinfo->arch.type == DOMAIN_32BIT) )
++    if ( is_sve_domain(d) && (kinfo->type == DOMAIN_32BIT) )
+     {
+         printk("SVE is not available for 32-bit domain\n");
+         return -EINVAL;
+@@ -1893,10 +1893,8 @@ int __init construct_hwdom(struct kernel_info *kinfo,
+ 
+     iommu_hwdom_init(d);
+ 
+-#ifdef CONFIG_ARM_64
+-    /* type must be set before allocate_memory */
+-    d->arch.type = kinfo->arch.type;
+-#endif
++    set_domain_type(d, kinfo);
++
+     find_gnttab_region(d, kinfo);
+     if ( is_domain_direct_mapped(d) )
+         allocate_memory_11(d, kinfo);
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index ffe5d0d9f0a6..b24f02d269be 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -18,18 +18,6 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
+ 
+-#ifdef CONFIG_ARM_64
+-enum domain_type {
+-    DOMAIN_32BIT,
+-    DOMAIN_64BIT,
+-};
+-#define is_32bit_domain(d) ((d)->arch.type == DOMAIN_32BIT)
+-#define is_64bit_domain(d) ((d)->arch.type == DOMAIN_64BIT)
+-#else
+-#define is_32bit_domain(d) (1)
+-#define is_64bit_domain(d) (0)
+-#endif
+-
+ /*
+  * Is the domain using the host memory layout?
+  *
+@@ -62,10 +50,6 @@ struct paging_domain {
+ 
+ struct arch_domain
+ {
+-#ifdef CONFIG_ARM_64
+-    enum domain_type type;
+-#endif
+-
+ #ifdef CONFIG_ARM64_SVE
+     /* max SVE encoded vector length */
+     uint8_t sve_vl;
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index 7c3b7fde5b64..21f4273fa1b5 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -10,10 +10,6 @@
+ 
+ struct arch_kernel_info
+ {
+-#ifdef CONFIG_ARM_64
+-    enum domain_type type;
+-#endif
+-
+     /* Enable pl011 emulation */
+     bool vpl011;
+ };
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 7544fd50a20f..9395b5af8745 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -100,8 +100,8 @@ static paddr_t __init kernel_zimage_place(struct kernel_info *info)
+     const struct membanks *mem = kernel_info_get_mem(info);
+     paddr_t load_addr;
+ 
+-#ifdef CONFIG_ARM_64
+-    if ( (info->arch.type == DOMAIN_64BIT) && (info->zimage.start == 0) )
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    if ( (info->type == DOMAIN_64BIT) && (info->zimage.start == 0) )
+         return mem->bank[0].start + info->zimage.text_offset;
+ #endif
+ 
+@@ -268,14 +268,14 @@ int __init kernel_uimage_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-#ifdef CONFIG_ARM_64
++#ifdef CONFIG_HAS_DOMAIN_TYPE
+     switch ( uimage.arch )
+     {
+     case IH_ARCH_ARM:
+-        info->arch.type = DOMAIN_32BIT;
++        info->type = DOMAIN_32BIT;
+         break;
+     case IH_ARCH_ARM64:
+-        info->arch.type = DOMAIN_64BIT;
++        info->type = DOMAIN_64BIT;
+         break;
+     default:
+         printk(XENLOG_ERR "Unsupported uImage arch type %d\n", uimage.arch);
+@@ -345,7 +345,7 @@ static int __init kernel_zimage64_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-    info->arch.type = DOMAIN_64BIT;
++    info->type = DOMAIN_64BIT;
+ 
+     return 0;
+ }
+@@ -396,8 +396,8 @@ static int __init kernel_zimage32_probe(struct kernel_info *info,
+ 
+     info->load = kernel_zimage_load;
+ 
+-#ifdef CONFIG_ARM_64
+-    info->arch.type = DOMAIN_32BIT;
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    info->type = DOMAIN_32BIT;
+ #endif
+ 
+     return 0;
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 0a20aa0a1249..5ff71480eebe 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -128,6 +128,9 @@ config HAS_DEVICE_TREE_DISCOVERY
+ config HAS_DOM0LESS
+ 	bool
+ 
++config HAS_DOMAIN_TYPE
++	bool
++
+ config HAS_DIT # Data Independent Timing
+ 	bool
+ 
+diff --git a/xen/include/xen/dom0less-build.h b/xen/include/xen/dom0less-build.h
+index faaf660424b2..4118dec76c0a 100644
+--- a/xen/include/xen/dom0less-build.h
++++ b/xen/include/xen/dom0less-build.h
+@@ -57,8 +57,6 @@ int init_vuart(struct domain *d, struct kernel_info *kinfo,
+ int make_intc_domU_node(struct kernel_info *kinfo);
+ int make_arch_nodes(struct kernel_info *kinfo);
+ 
+-void set_domain_type(struct domain *d, struct kernel_info *kinfo);
+-
+ int init_intc_phandle(struct kernel_info *kinfo, const char *name,
+                       const int node_next, const void *pfdt);
+ 
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 93c0fd00c1d7..8c898afe74fc 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -13,6 +13,19 @@ struct guest_area {
+     void *map;
+ };
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++enum __packed domain_type {
++    DOMAIN_32BIT,
++    DOMAIN_64BIT,
++};
++#define is_32bit_domain(d) ((d)->type == DOMAIN_32BIT)
++#define is_64bit_domain(d) ((d)->type == DOMAIN_64BIT)
++#elif !defined(CONFIG_64BIT)
++/* At the moment on 32-bit-only platforms all domains are 32-bit. */
++#define is_32bit_domain(d) (true)
++#define is_64bit_domain(d) (false)
++#endif
++
+ #include <asm/domain.h>
+ 
+ typedef union {
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index 0d40d8cfa105..bc7744270c8f 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -7,6 +7,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/fdt-kernel.h>
+ #include <xen/mm.h>
++#include <xen/sched.h>
+ #include <xen/types.h>
+ 
+ struct domain;
+@@ -69,6 +70,14 @@ static inline uint32_t alloc_phandle(struct kernel_info *kinfo)
+     return kinfo->next_phandle >= GUEST_PHANDLE_GIC ? 0 : kinfo->next_phandle++;
+ }
+ 
++static inline void set_domain_type(struct domain *d, struct kernel_info *kinfo)
++{
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    /* Type must be set before allocate memory */
++    d->type = kinfo->type;
++#endif
++}
++
+ #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
+ 
+ /*
+diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
+index 4d0467bb396a..86a37a13048b 100644
+--- a/xen/include/xen/fdt-kernel.h
++++ b/xen/include/xen/fdt-kernel.h
+@@ -9,6 +9,7 @@
+ 
+ #include <xen/bootinfo.h>
+ #include <xen/device_tree.h>
++#include <xen/domain.h>
+ #include <xen/types.h>
+ 
+ #if __has_include(<asm/kernel.h>)
+@@ -65,6 +66,10 @@ struct kernel_info {
+         } zimage;
+     };
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    enum domain_type type;
++#endif
++
+ #if __has_include(<asm/kernel.h>)
+     struct arch_kernel_info arch;
+ #endif
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 212c7d765c3e..00db1da12f21 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -386,6 +386,10 @@ struct domain
+ {
+     domid_t          domain_id;
+ 
++#ifdef CONFIG_HAS_DOMAIN_TYPE
++    enum domain_type type;
++#endif
++
+     unsigned int     max_vcpus;
+ 
+     uint64_t         unique_id;       /* Unique domain identifier */
+-- 
+2.53.0
+
 
