@@ -4,49 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5C7FF885E
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 13:55:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1294898.1571657 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42629FF8860
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 14:03:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1294968.1571676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQW-0002Cs-0O; Mon, 27 Apr 2026 13:55:08 +0000
+	id 1wHMY4-0006mv-El; Mon, 27 Apr 2026 14:02:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1294898.1571657; Mon, 27 Apr 2026 13:55:07 +0000
+Received: by outflank-mailman (output) from mailman id 1294968.1571676; Mon, 27 Apr 2026 14:02:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQV-0002Ci-QT; Mon, 27 Apr 2026 13:55:07 +0000
-Received: by outflank-mailman (input) for mailman id 1294898;
- Mon, 27 Apr 2026 13:55:06 +0000
+	id 1wHMY4-0006mn-AL; Mon, 27 Apr 2026 14:02:56 +0000
+Received: by outflank-mailman (input) for mailman id 1294968;
+ Mon, 27 Apr 2026 14:02:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3886cc000f373@swg.vates.tech>)
- id 1wHMQT-00025z-PO
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 13:55:05 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Luca.Fancellu@arm.com>) id 1wHMY2-0006mh-MA
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 14:02:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHMQT-00E4x7-5v
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:55:05 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3886cc000f373@swg.vates.tech>)
- id 69ef6ab7-bab6-0a2a0a5309dd-0a2a450acb66-18
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:55:05 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3886cc000f373@swg.vates.tech>)
- id 69ef6aa4-56b3-0a2a450a0019-b9ff1c22a053-11
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:55:05 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19dcf3886cc000f373.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 27 Apr 2026 13:54:41 +0000
-Received: from julian.home (lfbn-lyo-1-414-55.w2-7.abo.wanadoo.fr [2.7.24.55])
- (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id E3A6B87720;
- Mon, 27 Apr 2026 15:54:40 +0200 (CEST)
+ id 1wHMY1-008rv7-VI
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 16:02:53 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Luca.Fancellu@arm.com>)
+ id 69ef6c81-bab6-0a2a0a5309dd-0a2a4505ae5c-32
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 16:02:52 +0200
+Received: from [52.101.69.38]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Luca.Fancellu@arm.com>)
+ id 69ef6c8c-aaa8-0a2a45050019-346545266f32-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 16:02:52 +0200
+Received: from AM9P195CA0025.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:21f::30)
+ by FRZPR08MB11874.eurprd08.prod.outlook.com (2603:10a6:d10:1cc::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
+ 2026 14:02:49 +0000
+Received: from AMS0EPF00000190.eurprd05.prod.outlook.com
+ (2603:10a6:20b:21f:cafe::ac) by AM9P195CA0025.outlook.office365.com
+ (2603:10a6:20b:21f::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Mon,
+ 27 Apr 2026 14:02:49 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS0EPF00000190.mail.protection.outlook.com (10.167.16.213) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
+ via Frontend Transport; Mon, 27 Apr 2026 14:02:49 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
+ by AMCPR08MB11993.eurprd08.prod.outlook.com (2603:10a6:20b:770::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
+ 2026 14:01:47 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::5d34:206f:373:a323]) by DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::5d34:206f:373:a323%6]) with mapi id 15.20.9846.025; Mon, 27 Apr 2026
+ 14:01:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,586 +69,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=p+9OATvIj/CmW54/HXWskK4gEXXexqOmxFd4T2BcwBI=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=RemcQgvYQXTSJZrI5SyVVKerGZZcTNulY8MgmmrR2ydLFFy5p74QkcAkngqTY4Iw3SbRYMZPf
- s8Xcj3bxVHgQ8mH37DGaxYRN4KNuYdFcq4fZH2b8j1H4CYhGfd4vHfkjM2xtj5KK4CRyi7nOm+b
- CiCa1f2icMPqGVItYh182mB33sQTPpjJMprjk4QS1UlIwgX5blEd7Q++on6OjNCt+x0uDOBQVrV
- 2yGQWmth/m24NlbeW2x7opgC1DoKZlsQRGRTBsrOhvMpGz9HnVeUbfBUtcMVrTb8IHhQIMs5USL
- LB72WBhHci4MotF/gUZyAhYtau2zh0zOlxefB7HnGLdw==
-X-Zone-Loop: b524d9d488a76f28a1974740f773b4e2db50bdbe555e
-x-campaign-type: default
-x-transaction-id: 9de87850-e808-416c-9a62-ec43452874a1
-x-swg-uid: 01-c7f1319e-3d48-4a16-98aa-22b149f9a442
-X-Mailer: Sweego
-Message-ID:
- <1777298081.8631fc262581453bbf619ec5b2062170.19dcf3886cc000f373@vates.tech>
-x-swg-bid: 1777298081.8631fc262581453bbf619ec5b2062170.19dcf3886cc000f373
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v4 8/9] hvm/ioreq: Negotiate extended destination ID support per ioreq server
-Date: Mon, 27 Apr 2026 15:54:05 +0200
-In-Reply-To: <20260427135406.1281424-1-julian.vetter@vates.tech>
-References: <20260427135406.1281424-1-julian.vetter@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=Ua7UmduAnPoviMK8B11Fv8VKXz97QNZ0CuFKakKEX895ZOiurPRfSTphu5K9CcT8bE/qSxRL3pHtUEWvD4bVJGEiQN+Oc82vXP924l+NWtNa+z050IgPGcSNasLWjWn4z4ehag05U7eMqKaBeKM6p92nNQaa8mD5KC+oZn7/w5azEdk98LP7cmxu2uYDxFWHbNd2osDOrhPluqrrHhliGdnFWQD5Dcfe0J603UJLbnacg+EegVLbFSU90C7xdXhffvMF2ybUZYSPfov0d6ZVkiD1Ru7hckrWQSEZpd5sB+1Xdvg+COTYSsTrXQyMUNHaRzEt0urSxjmAfx//Xh9ZZQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YcxltaSz8v20VzeeDOwg6Nk5OYGWs/xSbBDt0JMWyv0=;
+ b=J3llXNLRLsZP0Qo7F7vZc5uvHvPwizyFoYe35gU0AYLSTC57+wtHRy+4cz7TEe4VvrNTH9Lg7ETt3PQkSEvAffkxqa6qRG9KPlfXVEQZWhzJf8LJ9I/CN98HjAM+AEe5oLiXucAszVbhhWYTcII0saRSEf0Ny9+lLReW4wQ3GCpHx3GlIpe0OfLz+2saD7/7rSWGyjF1JSVeIEpUkRcovGWT910n9GHx4+j4x9Phb/gRswX4mPZPXbeXSO7H7pcXSG6zYdEUHPlH+2WswkwwRtzus2GoN8t2cidkZ+1ZnOG/Ck5GhPC16SmMUSdpmdYQPixE7W4zEspJck2N/V4AKQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YcxltaSz8v20VzeeDOwg6Nk5OYGWs/xSbBDt0JMWyv0=;
+ b=UD1pNrwsMGCZaa9bBIQhOGIkC8OAerBKMcV6c4tbeAuqYclCzooy3gd9pYPrNOzqlgYUCdVy/rF/WFIo/qqPAhbWQmFeNCttWrsWFmYOcoDfP3ZXN5UdAYvTNZhenrSv5dh8soaZ49ZvY01ETAnxi/9sB1Q0GOT37zMsPwNhgUA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=c8G8M56Y3UGUFCAvNWVthYKB3bfWKNKDPIj+gVH1KZBwhL4LdqZc+wvzDHCmthlg8je+2TgdJpz2TrK9Bwk+vb7Mwvp5Wsm+KAW+dueOO4yQENrnBoFst7NjGQBLnjNJWn9vvWAeG9Sm0PBFnC0G2ifkzQFWktxm5BCGVnM3DDEqjNM9g9JgGvipwNAUp28jXYqvdjY3SUsqAqTG+fQnaJHIanqaqspd7JK2C+oxnAQpCo3ZWWkVtYvpIYfKrmKFtta1WyX2fiT3giT59gg2Md0KtywbOodiNq6PKgmVarMqS2TX7CCP75clOje9KJfqgerV9W2RLpBHNIPS3VCCew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YcxltaSz8v20VzeeDOwg6Nk5OYGWs/xSbBDt0JMWyv0=;
+ b=ObFS3xpVzb7JgTfjhZNLbTX9pKEJHiGG+GzZc7h9zaHRJ9l2XWwPcEOPclk2BndL9hrE4M1HGcouVA3RkT5oiG4uaUquX5ZY7cvsNhEG1vPVyc8/AkI58wcycRB7liV5YBApit5vQYQMv3cJfz79vfcPqwn5r3Ui4bomFz5m/+toIcM7DCa268lz4NecMY0LmEHGIg5NDF9Tu/d9i2ZNghLyf7CVd9aDC5LogDmkT66I58uD7X+ZdLxuqHq8J5yQcM0bfyNNjWy6RvZrqiHKFYMBgcop1waojvU6aLroPXrb9pVBOYC2kkgPgwOEZWZA5ihe+q3wRbOdPXM8ZFC5og==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YcxltaSz8v20VzeeDOwg6Nk5OYGWs/xSbBDt0JMWyv0=;
+ b=UD1pNrwsMGCZaa9bBIQhOGIkC8OAerBKMcV6c4tbeAuqYclCzooy3gd9pYPrNOzqlgYUCdVy/rF/WFIo/qqPAhbWQmFeNCttWrsWFmYOcoDfP3ZXN5UdAYvTNZhenrSv5dh8soaZ49ZvY01ETAnxi/9sB1Q0GOT37zMsPwNhgUA=
+From: Luca Fancellu <Luca.Fancellu@arm.com>
+To: Mykola Kvach <xakep.amatop@gmail.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola
+ Kvach <mykola_kvach@epam.com>, Bertrand Marquis <Bertrand.Marquis@arm.com>,
+	Rahul Singh <Rahul.Singh@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Michal Orzel
+	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v8 09/13] arm/smmu-v3: add suspend/resume handlers
+Thread-Topic: [PATCH v8 09/13] arm/smmu-v3: add suspend/resume handlers
+Thread-Index: AQHc1k5QBMsvUkAtf0yXvEOre8XAaw==
+Date: Mon, 27 Apr 2026 14:01:47 +0000
+Message-ID: <818AEE8A-669C-4BE9-9EF3-92323A749470@arm.com>
+References: <cover.1775125380.git.mykola_kvach@epam.com>
+ <038337ec0e3f1474c6cc6a92090e28c6972e4dc6.1775125380.git.mykola_kvach@epam.com>
+In-Reply-To:
+ <038337ec0e3f1474c6cc6a92090e28c6972e4dc6.1775125380.git.mykola_kvach@epam.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3826.700.81.1.6)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	DU2PR08MB7272:EE_|AMCPR08MB11993:EE_|AMS0EPF00000190:EE_|FRZPR08MB11874:EE_
+X-MS-Office365-Filtering-Correlation-Id: e6ea296f-acd5-4fe8-e4d8-08dea465aaa1
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|366016|1800799024|376014|18096099003|56012099003|18002099003|22082099003|38070700021;
+X-Microsoft-Antispam-Message-Info-Original:
+ dpbPw6PS3OciIBdwt/OelwEoGLWv+g1+xPpP5O20IJ+MdyewVMw7KA2+Wr3naAdJnF2MY8IV2Fusl1ErT3wR4q2ia8wrQlxujXYaDdHsectG3vXv6XmDm5IbOJb4lCmtT7e6cgiN6RVI3QOey/88e99V1JfJ/Ary4LqzfSL5q4dX5BBMY4vwhdt0uwUPfv4dyBNex3lLZpWtwSP9Qv1y6mU6Ihx3zcd5DC3sxFmv8PrpvWLDqYFmwtKrep9p1FpW1PVhbCXgQZeVjqrsWcV61ez29f70n8vv9JbuN9K8yJjs90cC2tbOve56ofSY4BHuKF0VMbZNk23UbkYDsMVHLoH2C9+1TiWFnbc24chVDb4+A0O9AqKFp057ujDb5DvbFK7gABoOMy502Pm1p1jf1avIb3ikqFx6SD8v2YU0rnQ38NSQUmtZ90UbHAoEcTmiqc1oAPn6d6b7drTXy/RZmkBx7zm63aWdzInoJTXIolvJFmhpv2VE+3z9TK4Z6TWH+jFH2XdJubYpKI999F0NKorzjr6CGU7QWGVf0WnN4URLUKexh/zV619zplPVn+rTCWgiTuh0L8GNYYXvLANLYs3uY5sfer3BC+L376xu0WvAjsnwKP/o1hYZZaeiyQq/jgfWrMastjrOzP2Wv50xVPq8lxEa5Z6IyE9ASk+v0g8Z+fOHxBci6lYNuz6/Vcmt6cseOPluBWlfzhqBH5YYmKzH6GEEeDyPiiqtC39RYN/TPC+1uAZ9VBAs2qZVyG3nPcAAXCO2wgPaW5UsX5n8lGcVUkQ1kDSxDXxS/1Hda5I=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18096099003)(56012099003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <B9581F87DAE83B4C88EB9EEDF1DA9A32@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.297a.584af6cfdad57c37.19dcf388578.dac24e8c4e346718=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1777298081144
-X-purgate-ID: tlsNG-4011c0/1777298105-47D788B7-61B6E7A8/0/0
+X-Exchange-RoutingPolicyChecked:
+ bSkd0uLGWD0O2vUkRBLtSu43Pujb3blrQkjAIUwvU+B74Y+y+RK1ftHcnb7Wrl69WO48geLuLoT4XPgsCXLqxoU0QN12FNueYn5LVfMdu50/KthfffmrQcLWUFWi4I5JlRBmQhxG9Kx7/TRFppvFXiMmSUBpTDx6f02qkVYFPwMh7u2l39+kvbt2Yd3cdUw+0oXVMOg4dTnKj2pDq28s+Xxw/hbChJv4H+FsqziAVbSf8rZQ4V2fbtyAaQtq1WrTIhvAvsNXIz8q6iq94hYccq1SGAxBPYwr+Mp2ZlNgAI9H1Pydtqn/iboHVyCGubAQVLZzBLP/w/J3qoxh/amlng==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMCPR08MB11993
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AMS0EPF00000190.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	71cbf7bd-31a1-4658-88ae-08dea4658598
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|35042699022|14060799003|36860700016|1800799024|82310400026|22082099003|18002099003|56012099003|18096099003;
+X-Microsoft-Antispam-Message-Info:
+	mqZdFXK1Li42IefDH0IZcPqPKHv0ljY7zISCwiEPOh0jJ9vVjbNYxqrXVoCpCwJr4kpCXY/1WKR5a7OjM3taKgzHVJ02XtLFUTdqhcjqMFzgsK5em9n23CcxszYOMglZGzU7yF1Z7+SzwROwWazcaRFbJuo/wbA6FF+Ovrm8iKtiCMZr5nSMfDxTJ3RX0A4PsaxAFhI0D20UVvu9coCXcJkN+iVxfmGthdTwpkP90ynNqJPJdD4ZWldio1CIfeLaxC4vUi4sDK/F844v4lNnpeSmDzv6d83d7IKf54T1dx5NL3CIXHsOgMaGXlQAe1INIdxzMOeM36PP2x9govB+D3GyuUAmH9yJo8LRjnd8V8apzf4n63LozGKNjb4htQKZXsGFxEMTgFfqiK/SMV8kE182V/ACzhbNveROJu0iS9RG4SxbcXjtpdZ/BQzDcXDvVYZrC54gwX0cia7xfuz2JSKnadDHVFj2wYkDC1ubK5qS3VeDuUcjL6B1k2E2IUxc7BhRTaXEnNNFqQ8Wb6BnkLLYaW3USKXDjO9pilqfC/Zs0CQP+k2uT92p9FmnkRSvuSXHWuwfUNSNnKnPqWJDiWtPqYEfVk2PJvDVo+v/t1EcnPv2AzZY523g8SFZeDxTyX0SYqh8wPeA2BHVKoEOcB+/KfYNmo+WK7HNInoIl8ibUkV99yC/FjdN7KIDadHhjUEPrEqFdx5bq9zl+8dzJRw7U9bsxeRl84ORW5AptkSPMbb6Hr+YoHNr/9IAt7PGQRgm/6PEt7V2nCapGCh0Gw==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(35042699022)(14060799003)(36860700016)(1800799024)(82310400026)(22082099003)(18002099003)(56012099003)(18096099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	HWTzqYl0H4Sw813m/dTnTPFBCHrV4kMqR9zJSpT3uYQnPykHqqJXODvKJFi7bNjZcZy+ZVyO3sDHywhKfBjQpjH2MMTiQrdjBAQAsc577+GYV1p4GB5k/vCZ5UeBwu0BGNSH51woPPG2IL3o+D+7z8R1GEihOIdOrvq7W5Zj652mWO6lXbklndsQiY2mQyc4IO6CQhppk+/MZrcLrczE8ETliyYG1KhJit4eknKIaAzVbCiQ4pvbTmKVqqpcs/7JqVsHHk49jgNObKIlyOEyWLCqXFLEygPVj8lsVFyhziRqmAMISkLUsgxITvP8TE/6bJgw51kzRWFr/du9IsKXYHp56hdOe9GmSyFsVeGa2KftS0GLdh962pskOOsFwukrBz2kDYwmWDkDyIRJIV/7I2kG80T4VhI84TuC+hZ6fsnHp43WwIdHmtVEiNwZcFaL
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 14:02:49.3469
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6ea296f-acd5-4fe8-e4d8-08dea465aaa1
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AMS0EPF00000190.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRZPR08MB11874
+X-purgate-ID: tlsNG-c201ff/1777298572-E1DDB443-96884617/0/0
 X-purgate-type: clean
-X-purgate-size: 19021
+X-purgate-size: 9850
 
----=Part.297a.584af6cfdad57c37.19dcf388578.dac24e8c4e346718=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Add a per-server capability flag in XEN_DMOP_create_ioreq_server to
-signal extended destination ID support=2E Repurpose the first byte of the
-existing pad[3] as a flags field, and define
-XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID (bit 0) for a server to signal it will
-use XEN_DMOP_bind_pt_msi_irq for all passthrough MSI bindings=2E
-
-Track the flag in struct ioreq_server ext_dest_id=2E
-hvm_ext_dest_id_enabled() returns true only if all registered ioreq
-servers have opted in and at least one server is present=2E A single
-server without the flag is sufficient to suppress the feature=2E
-
-Lock the feature at domain creation time:
-arch_domain_creation_finished() computes the levelled result into struct
-hvm_domain=2Eext_dest_id using OR to preserve any value previously
-restored from an HVM save record=2E After creation_finished,
-arch_ioreq_server_create_check() rejects new servers that lack
-XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID if the feature was already advertised
-to the guest=2E
-
-Persist the locked state in a new HVM_SAVE_TYPE(EXT_DEST_ID) record so
-that migration preserves the guest-visible CPUID bit independently of
-when the device model re-registers its ioreq servers on the destination
-host=2E
-
-On restore, ioapic_check() uses d->arch=2Ehvm=2Eext_dest_id (restored from
-the EXT_DEST_ID record) rather than the per-server dynamic check, since
-the DM has not yet re-registered its servers at that point=2E
-
-Update xendevicemodel_create_ioreq_server() in libxendevicemodel to
-accept the new flags parameter, remove
-xendevicemodel_enable_ext_dest_id(), and fix the
-xc_hvm_create_ioreq_server() compat wrapper to pass zero flags=2E
-
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
----
-Changes in v4:
-- As suggested by Roger, replaced XEN_DMOP_enable_ext_dest_id (v3 patch
-  6), a separate DM op the device model had to call before starting
-  vCPUs, with a flags byte repurposed from the existing pad[3] field of
-  xen_dm_op_create_ioreq_server
-- New XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID flag (bit 0) lets each ioreq
-  server signal support at registration time
-- As suggested by Roger level the feature across all ioreq servers=2E
-  XEN_HVM_CPUID_EXT_DEST_ID is only advertised when every server
-  registered before arch_domain_creation_finished() sets the flag=2E A
-  single server without the flag suppresses the feature for the whole
-  domain!
-- Lock the levelled result at domain creation time and enforce it for
-  servers registered afterwards, preventing a late opt-out from breaking
-  guests that already see the feature in CPUID
-- Persist the locked flag via HVM_SAVE_TYPE(EXT_DEST_ID) so that live
-  migration preserves the guest-visible CPUID bit independently of when
-  the device model registers its ioreq servers on the destination host
----
- tools/include/xendevicemodel=2Eh          |  3 +-
- tools/libs/ctrl/xc_devicemodel_compat=2Ec |  2 +-
- tools/libs/devicemodel/core=2Ec           |  3 +-
- xen/arch/arm/ioreq=2Ec                    |  5 ++++
- xen/arch/x86/domain=2Ec                   | 10 +++++++
- xen/arch/x86/hvm/ioreq=2Ec                | 37 +++++++++++++++++++++++++
- xen/arch/x86/hvm/vioapic=2Ec              | 20 +++++++++++++
- xen/arch/x86/include/asm/hvm/domain=2Eh   |  9 ++++++
- xen/common/ioreq=2Ec                      | 13 +++++++--
- xen/drivers/passthrough/x86/hvm=2Ec       | 13 +++++++++
- xen/include/public/arch-x86/hvm/save=2Eh  | 17 +++++++++++-
- xen/include/public/hvm/dm_op=2Eh          | 16 +++++++++--
- xen/include/xen/ioreq=2Eh                 | 27 ++++++++++++++++++
- 13 files changed, 165 insertions(+), 10 deletions(-)
-
-diff --git a/tools/include/xendevicemodel=2Eh b/tools/include/xendevicemod=
-el=2Eh
-index f15b35fa33=2E=2Ebc6764bd58 100644
---- a/tools/include/xendevicemodel=2Eh
-+++ b/tools/include/xendevicemodel=2Eh
-@@ -44,12 +44,13 @@ int xendevicemodel_close(xendevicemodel_handle *dmod);
-  * @parm domid the domain id to be serviced
-  * @parm handle_bufioreq how should the IOREQ Server handle buffered
-  *                       requests (HVM_IOREQSRV_BUFIOREQ_*)?
-+ * @parm flags bitmask of XEN_DMOP_IOREQ_SERVER_* capability flags=2E
-  * @parm id pointer to an ioservid_t to receive the IOREQ Server id=2E
-  * @return 0 on success, -1 on failure=2E
-  */
- int xendevicemodel_create_ioreq_server(
-     xendevicemodel_handle *dmod, domid_t domid, int handle_bufioreq,
--    ioservid_t *id);
-+    uint8_t flags, ioservid_t *id);
-=20
- /**
-  * This function retrieves the necessary information to allow an
-diff --git a/tools/libs/ctrl/xc_devicemodel_compat=2Ec b/tools/libs/ctrl/x=
-c_devicemodel_compat=2Ec
-index a46011cd17=2E=2E91366e250c 100644
---- a/tools/libs/ctrl/xc_devicemodel_compat=2Ec
-+++ b/tools/libs/ctrl/xc_devicemodel_compat=2Ec
-@@ -11,7 +11,7 @@ int xc_hvm_create_ioreq_server(
-     ioservid_t *id)
- {
-     return xendevicemodel_create_ioreq_server(xch->dmod, domid,
--                                              handle_bufioreq, id);
-+                                              handle_bufioreq, 0, id);
- }
-=20
- int xc_hvm_get_ioreq_server_info(
-diff --git a/tools/libs/devicemodel/core=2Ec b/tools/libs/devicemodel/core=
-=2Ec
-index adf2c41a96=2E=2E49b9bf8a13 100644
---- a/tools/libs/devicemodel/core=2Ec
-+++ b/tools/libs/devicemodel/core=2Ec
-@@ -167,7 +167,7 @@ static int xendevicemodel_op(
-=20
- int xendevicemodel_create_ioreq_server(
-     xendevicemodel_handle *dmod, domid_t domid, int handle_bufioreq,
--    ioservid_t *id)
-+    uint8_t flags, ioservid_t *id)
- {
-     struct xen_dm_op op;
-     struct xen_dm_op_create_ioreq_server *data;
-@@ -179,6 +179,7 @@ int xendevicemodel_create_ioreq_server(
-     data =3D &op=2Eu=2Ecreate_ioreq_server;
-=20
-     data->handle_bufioreq =3D handle_bufioreq;
-+    data->flags =3D flags;
-=20
-     rc =3D xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-     if (rc)
-diff --git a/xen/arch/arm/ioreq=2Ec b/xen/arch/arm/ioreq=2Ec
-index b4211f0159=2E=2Ed45228717a 100644
---- a/xen/arch/arm/ioreq=2Ec
-+++ b/xen/arch/arm/ioreq=2Ec
-@@ -201,6 +201,11 @@ void arch_ioreq_domain_init(struct domain *d)
- {
- }
-=20
-+int arch_ioreq_server_create_check(const struct domain *d, uint8_t flags)
-+{
-+    return 0;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/domain=2Ec b/xen/arch/x86/domain=2Ec
-index 1d458f1372=2E=2E68ff315460 100644
---- a/xen/arch/x86/domain=2Ec
-+++ b/xen/arch/x86/domain=2Ec
-@@ -25,6 +25,7 @@
- #include <xen/init=2Eh>
- #include <xen/iocap=2Eh>
- #include <xen/iommu=2Eh>
-+#include <xen/ioreq=2Eh>
- #include <xen/irq=2Eh>
- #include <xen/kernel=2Eh>
- #include <xen/lib=2Eh>
-@@ -1106,7 +1107,16 @@ int arch_domain_soft_reset(struct domain *d)
- void arch_domain_creation_finished(struct domain *d)
- {
-     if ( is_hvm_domain(d) )
-+    {
-+        /*
-+         * Lock the extended destination ID state=2E OR preserves any val=
-ue
-+         * already restored from an HVM save record (migration path)=2E F=
-or a
-+         * fresh domain, ext_dest_id starts false and the dynamic check
-+         * supplies the levelled result across all registered ioreq serve=
-rs=2E
-+         */
-+        d->arch=2Ehvm=2Eext_dest_id |=3D hvm_ext_dest_id_enabled(d);
-         hvm_domain_creation_finished(d);
-+    }
- }
-=20
- #ifdef CONFIG_COMPAT
-diff --git a/xen/arch/x86/hvm/ioreq=2Ec b/xen/arch/x86/hvm/ioreq=2Ec
-index a5fa97e149=2E=2E894a63c522 100644
---- a/xen/arch/x86/hvm/ioreq=2Ec
-+++ b/xen/arch/x86/hvm/ioreq=2Ec
-@@ -19,6 +19,7 @@
-=20
- #include <asm/hvm/emulate=2Eh>
- #include <asm/hvm/hvm=2Eh>
-+#include <asm/hvm/support=2Eh>
- #include <asm/hvm/vmx/vmx=2Eh>
- #include <asm/msr=2Eh>
-=20
-@@ -325,6 +326,42 @@ void arch_ioreq_domain_init(struct domain *d)
-     register_portio_handler(d, 0xcf8, 4, hvm_access_cf8);
- }
-=20
-+int arch_ioreq_server_create_check(const struct domain *d, uint8_t flags)
-+{
-+    if ( !is_hvm_domain(d) || !d->creation_finished )
-+        return 0;
-+
-+    if ( d->arch=2Ehvm=2Eext_dest_id &&
-+         !(flags & XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID) )
-+        return -EPERM;
-+
-+    return 0;
-+}
-+
-+static int cf_check ext_dest_id_save(struct vcpu *v, hvm_domain_context_t=
- *h)
-+{
-+    struct hvm_hw_ext_dest_id s =3D {
-+        =2Eenabled =3D v->domain->arch=2Ehvm=2Eext_dest_id,
-+    };
-+
-+    return hvm_save_entry(EXT_DEST_ID, 0, h, &s);
-+}
-+
-+static int cf_check ext_dest_id_load(struct domain *d, hvm_domain_context=
-_t *h)
-+{
-+    struct hvm_hw_ext_dest_id s;
-+
-+    if ( hvm_load_entry(EXT_DEST_ID, h, &s) )
-+        return -EINVAL;
-+
-+    d->arch=2Ehvm=2Eext_dest_id =3D s=2Eenabled;
-+
-+    return 0;
-+}
-+
-+HVM_REGISTER_SAVE_RESTORE(EXT_DEST_ID, ext_dest_id_save, NULL,
-+                          ext_dest_id_load, 1, HVMSR_PER_DOM);
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/hvm/vioapic=2Ec b/xen/arch/x86/hvm/vioapic=2Ec
-index 527cc770b7=2E=2E7d037a53e1 100644
---- a/xen/arch/x86/hvm/vioapic=2Ec
-+++ b/xen/arch/x86/hvm/vioapic=2Ec
-@@ -24,6 +24,7 @@
-  *  Ported to xen by using virtual IRQ line=2E
-  */
-=20
-+#include <xen/ioreq=2Eh>
- #include <xen/types=2Eh>
- #include <xen/mm=2Eh>
- #include <xen/xmalloc=2Eh>
-@@ -597,6 +598,7 @@ int vioapic_get_trigger_mode(const struct domain *d, u=
-nsigned int gsi)
- static int cf_check ioapic_check(const struct domain *d, hvm_domain_conte=
-xt_t *h)
- {
-     const HVM_SAVE_TYPE(IOAPIC) *s;
-+    unsigned int i;
-=20
-     if ( !has_vioapic(d) )
-         return -ENODEV;
-@@ -617,6 +619,24 @@ static int cf_check ioapic_check(const struct domain =
-*d, hvm_domain_context_t *h
-     if ( s->ioregsel > VIOAPIC_REG_RTE0 + (ARRAY_SIZE(s->redirtbl) - 1) *=
- 2 + 1 )
-         return -EINVAL;
-=20
-+    /*
-+     * If any RTE uses extended destination ID bits, the EXT_DEST_ID save
-+     * record must have been loaded first (restoring d->arch=2Ehvm=2Eext_=
-dest_id)=2E
-+     * The ioreq server re-registration by the DM happens later, so use t=
-he
-+     * domain-level locked flag rather than the per-server dynamic check=
-=2E
-+     */
-+    for ( i =3D 0; i < ARRAY_SIZE(s->redirtbl); i++ )
-+    {
-+        if ( s->redirtbl[i]=2Efields=2Eext_dest_id && !d->arch=2Ehvm=2Eex=
-t_dest_id )
-+        {
-+            printk(XENLOG_G_ERR "HVM restore: %pd IO-APIC RTE %u has "
-+                                "extended destination ID bits set but "
-+                                "EXT_DEST_ID is not enabled\n",
-+                                d, i);
-+            return -EINVAL;
-+        }
-+    }
-+
-     return 0;
- }
-=20
-diff --git a/xen/arch/x86/include/asm/hvm/domain=2Eh b/xen/arch/x86/includ=
-e/asm/hvm/domain=2Eh
-index abf9bc448d=2E=2E895b2e12ba 100644
---- a/xen/arch/x86/include/asm/hvm/domain=2Eh
-+++ b/xen/arch/x86/include/asm/hvm/domain=2Eh
-@@ -102,6 +102,15 @@ struct hvm_domain {
-=20
-     bool                   is_s3_suspended;
-=20
-+    /*
-+     * True when XEN_HVM_CPUID_EXT_DEST_ID was advertised to the guest=2E=
- Locked
-+     * at domain creation time once every registered ioreq server has opt=
-ed in
-+     * via XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID=2E Persisted in HVM save/res=
-tore so
-+     * migration preserves the guest-visible state independently of when =
-the
-+     * device model re-registers its ioreq servers on the destination hos=
-t=2E
-+     */
-+    bool                   ext_dest_id;
-+
-     /* Compatibility setting for a bug in x2APIC LDR */
-     bool bug_x2apic_ldr_vcpu_id;
-=20
-diff --git a/xen/common/ioreq=2Ec b/xen/common/ioreq=2Ec
-index f5fd30ce12=2E=2E56a7eb8282 100644
---- a/xen/common/ioreq=2Ec
-+++ b/xen/common/ioreq=2Ec
-@@ -641,7 +641,7 @@ static void ioreq_server_deinit(struct ioreq_server *s=
-)
- }
-=20
- static int ioreq_server_create(struct domain *d, int bufioreq_handling,
--                               ioservid_t *id)
-+                               uint8_t flags, ioservid_t *id)
- {
-     struct ioreq_server *s;
-     unsigned int i;
-@@ -683,6 +683,8 @@ static int ioreq_server_create(struct domain *d, int b=
-ufioreq_handling,
-         goto fail;
-     }
-=20
-+    s->ext_dest_id =3D flags & XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID;
-+
-     if ( id )
-         *id =3D i;
-=20
-@@ -1350,11 +1352,16 @@ int ioreq_server_dm_op(struct xen_dm_op *op, struc=
-t domain *d, bool *const_op)
-         *const_op =3D false;
-=20
-         rc =3D -EINVAL;
--        if ( data->pad[0] || data->pad[1] || data->pad[2] )
-+        if ( data->flags & ~XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID ||
-+             data->pad[0] || data->pad[1] )
-+            break;
-+
-+        rc =3D arch_ioreq_server_create_check(d, data->flags);
-+        if ( rc )
-             break;
-=20
-         rc =3D ioreq_server_create(d, data->handle_bufioreq,
--                                 &data->id);
-+                                 data->flags, &data->id);
-         break;
-     }
-=20
-diff --git a/xen/drivers/passthrough/x86/hvm=2Ec b/xen/drivers/passthrough=
-/x86/hvm=2Ec
-index 6fb4f8b7dc=2E=2Ef7f7c02076 100644
---- a/xen/drivers/passthrough/x86/hvm=2Ec
-+++ b/xen/drivers/passthrough/x86/hvm=2Ec
-@@ -21,6 +21,7 @@
- #include <xen/event=2Eh>
- #include <xen/iommu=2Eh>
- #include <xen/cpu=2Eh>
-+#include <xen/ioreq=2Eh>
- #include <xen/irq=2Eh>
- #include <asm/hvm/irq=2Eh>
- #include <asm/io_apic=2Eh>
-@@ -455,6 +456,18 @@ int pt_irq_create_bind(
-         uint64_t msi_addr;
-         uint32_t msi_data;
-=20
-+        /*
-+         * Refuse the old MSI bind path when extended destination IDs are
-+         * in use=2E The caller must use XEN_DMOP_bind_pt_msi_irq instead=
-,
-+         * which passes the raw MSI address so Xen can decode the extende=
-d
-+         * bits=2E This old path only carries an 8-bit destination ID and
-+         * would silently misroute interrupts to vCPUs with APIC IDs > 25=
-5=2E
-+         */
-+        if ( hvm_ext_dest_id_enabled(d) )
-+        {
-+            return -EPERM;
-+        }
-+
-         msi_addr =3D MSI_ADDR_HEADER |
-                    MASK_INSR(MASK_EXTR(gflags, XEN_DOMCTL_VMSI_X86_DEST_I=
-D_MASK),
-                              MSI_ADDR_DEST_ID_MASK) |
-diff --git a/xen/include/public/arch-x86/hvm/save=2Eh b/xen/include/public=
-/arch-x86/hvm/save=2Eh
-index 483097d940=2E=2Edd70ce18c6 100644
---- a/xen/include/public/arch-x86/hvm/save=2Eh
-+++ b/xen/include/public/arch-x86/hvm/save=2Eh
-@@ -627,12 +627,27 @@ struct hvm_msr {
-=20
- #define CPU_MSR_CODE  20
-=20
-+/*
-+ * HVM_SAVE_TYPE(EXT_DEST_ID): domain-level extended MSI destination ID s=
-tate=2E
-+ *
-+ * Records whether the extended destination ID feature was enabled for th=
-is
-+ * domain at the time guest vCPUs were started=2E This allows migration t=
-o
-+ * preserve the setting across hosts without relying on the device model =
-to
-+ * re-register its ioreq servers before the guest's first CPUID query=2E
-+ */
-+struct hvm_hw_ext_dest_id {
-+    uint8_t enabled;
-+    uint8_t pad[7];
-+};
-+
-+DECLARE_HVM_SAVE_TYPE(EXT_DEST_ID, 21, struct hvm_hw_ext_dest_id);
-+
- /* Range 22 - 34 (inclusive) reserved for Amazon */
-=20
- /*
-  * Largest type-code in use
-  */
--#define HVM_SAVE_CODE_MAX 20
-+#define HVM_SAVE_CODE_MAX 21
-=20
- #endif /* __XEN_PUBLIC_HVM_SAVE_X86_H__ */
-=20
-diff --git a/xen/include/public/hvm/dm_op=2Eh b/xen/include/public/hvm/dm_=
-op=2Eh
-index 43571b7713=2E=2E73f33b3c46 100644
---- a/xen/include/public/hvm/dm_op=2Eh
-+++ b/xen/include/public/hvm/dm_op=2Eh
-@@ -39,18 +39,28 @@ typedef uint16_t ioservid_t;
-  * XEN_DMOP_create_ioreq_server: Instantiate a new IOREQ Server for a
-  *                               secondary emulator=2E
-  *
-- * The <id> handed back is unique for target domain=2E The valur of
-+ * The <id> handed back is unique for target domain=2E The value of
-  * <handle_bufioreq> should be one of HVM_IOREQSRV_BUFIOREQ_* defined in
-- * hvm_op=2Eh=2E If the value is HVM_IOREQSRV_BUFIOREQ_OFF then  the buff=
-ered
-+ * hvm_op=2Eh=2E If the value is HVM_IOREQSRV_BUFIOREQ_OFF then the buffe=
-red
-  * ioreq ring will not be allocated and hence all emulation requests to
-  * this server will be synchronous=2E
-+ *
-+ * If <flags> contains XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID, the server will
-+ * use XEN_DMOP_bind_pt_msi_irq for all passthrough MSI bindings, passing
-+ * raw MSI address/data fields so Xen can decode extended destination ID
-+ * bits=2E Once any server sets this flag, Xen will advertise
-+ * XEN_HVM_CPUID_EXT_DEST_ID to the guest=2E Must be set before the guest
-+ * vCPUs are started=2E
-  */
- #define XEN_DMOP_create_ioreq_server 1
-=20
- struct xen_dm_op_create_ioreq_server {
-     /* IN - should server handle buffered ioreqs */
-     uint8_t handle_bufioreq;
--    uint8_t pad[3];
-+    /* IN - server capability flags */
-+    uint8_t flags;
-+#define XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID (1u << 0)
-+    uint8_t pad[2];
-     /* OUT - server id */
-     ioservid_t id;
- };
-diff --git a/xen/include/xen/ioreq=2Eh b/xen/include/xen/ioreq=2Eh
-index e86f0869fa=2E=2Eec78b63942 100644
---- a/xen/include/xen/ioreq=2Eh
-+++ b/xen/include/xen/ioreq=2Eh
-@@ -54,9 +54,35 @@ struct ioreq_server {
-     evtchn_port_t          bufioreq_evtchn;
-     struct rangeset        *range[NR_IO_RANGE_TYPES];
-     bool                   enabled;
-+    bool                   ext_dest_id;
-     uint8_t                bufioreq_handling;
- };
-=20
-+/*
-+ * Return true if every registered ioreq server has opted in to extended
-+ * destination IDs (XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID) and at least one
-+ * server exists=2E A single server without the flag is enough to suppres=
-s
-+ * XEN_HVM_CPUID_EXT_DEST_ID, preventing misrouted interrupts=2E
-+ */
-+static inline bool hvm_ext_dest_id_enabled(const struct domain *d)
-+{
-+    unsigned int i;
-+    bool found =3D false;
-+
-+    for ( i =3D 0; i < MAX_NR_IOREQ_SERVERS; i++ )
-+    {
-+        const struct ioreq_server *s =3D d->ioreq_server=2Eserver[i];
-+
-+        if ( !s )
-+            continue;
-+        if ( !s->ext_dest_id )
-+            return false;
-+        found =3D true;
-+    }
-+
-+    return found;
-+}
-+
- static inline paddr_t ioreq_mmio_first_byte(const ioreq_t *p)
- {
-     return unlikely(p->df) ?
-@@ -137,6 +163,7 @@ bool arch_ioreq_server_destroy_all(struct domain *d);
- bool arch_ioreq_server_get_type_addr(const struct domain *d, const ioreq_=
-t *p,
-                                      uint8_t *type, uint64_t *addr);
- void arch_ioreq_domain_init(struct domain *d);
-+int arch_ioreq_server_create_check(const struct domain *d, uint8_t flags)=
-;
-=20
- #endif /* __XEN_IOREQ_H__ */
-=20
---=20
-2=2E53=2E0
-
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.297a.584af6cfdad57c37.19dcf388578.dac24e8c4e346718=---
+SGkgTXlrb2xhLA0KDQo+IA0KPiBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
+YXJtL3NtbXUtdjMuYyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9zbW11LXYzLmMNCj4g
+aW5kZXggYmYxNTMyMjdkYi4uNzYwN2ZmYzljYSAxMDA2NDQNCj4gLS0tIGEveGVuL2RyaXZlcnMv
+cGFzc3Rocm91Z2gvYXJtL3NtbXUtdjMuYw0KPiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3Vn
+aC9hcm0vc21tdS12My5jDQo+IEBAIC0xODE0LDggKzE4MTQsNyBAQCBzdGF0aWMgaW50IGFybV9z
+bW11X3dyaXRlX3JlZ19zeW5jKHN0cnVjdCBhcm1fc21tdV9kZXZpY2UgKnNtbXUsIHUzMiB2YWws
+DQo+IH0NCj4gDQo+IC8qIEdCUEEgaXMgInNwZWNpYWwiICovDQo+IC1zdGF0aWMgaW50IF9faW5p
+dCBhcm1fc21tdV91cGRhdGVfZ2JwYShzdHJ1Y3QgYXJtX3NtbXVfZGV2aWNlICpzbW11LA0KPiAt
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdTMyIHNldCwgdTMyIGNscikN
+Cj4gK3N0YXRpYyBpbnQgYXJtX3NtbXVfdXBkYXRlX2dicGEoc3RydWN0IGFybV9zbW11X2Rldmlj
+ZSAqc21tdSwgdTMyIHNldCwgdTMyIGNscikNCj4gew0KPiBpbnQgcmV0Ow0KPiB1MzIgcmVnLCBf
+X2lvbWVtICpnYnBhID0gc21tdS0+YmFzZSArIEFSTV9TTU1VX0dCUEE7DQo+IEBAIC0xOTk1LDEw
+ICsxOTk0LDI5IEBAIGVycl9mcmVlX2V2dHFfaXJxOg0KPiByZXR1cm4gcmV0Ow0KPiB9DQo+IA0K
+PiArc3RhdGljIGludCBhcm1fc21tdV9lbmFibGVfaXJxcyhzdHJ1Y3QgYXJtX3NtbXVfZGV2aWNl
+ICpzbW11KQ0KPiArew0KPiArIGludCByZXQ7DQo+ICsgdTMyIGlycWVuX2ZsYWdzID0gSVJRX0NU
+UkxfRVZUUV9JUlFFTiB8IElSUV9DVFJMX0dFUlJPUl9JUlFFTjsNCj4gKw0KPiArIGlmICggc21t
+dS0+ZmVhdHVyZXMgJiBBUk1fU01NVV9GRUFUX1BSSSApDQo+ICsgaXJxZW5fZmxhZ3MgfD0gSVJR
+X0NUUkxfUFJJUV9JUlFFTjsNCj4gKw0KPiArIC8qIEVuYWJsZSBpbnRlcnJ1cHQgZ2VuZXJhdGlv
+biBvbiB0aGUgU01NVSAqLw0KPiArIHJldCA9IGFybV9zbW11X3dyaXRlX3JlZ19zeW5jKHNtbXUs
+IGlycWVuX2ZsYWdzLA0KPiArICAgICAgQVJNX1NNTVVfSVJRX0NUUkwsIEFSTV9TTU1VX0lSUV9D
+VFJMQUNLKTsNCj4gKyBpZiAoIHJldCApDQo+ICsgew0KPiArIGRldl93YXJuKHNtbXUtPmRldiwg
+ImZhaWxlZCB0byBlbmFibGUgaXJxc1xuIik7DQo+ICsgcmV0dXJuIHJldDsNCj4gKyB9DQo+ICsN
+Cj4gKyByZXR1cm4gMDsNCj4gK30NCj4gKw0KPiBzdGF0aWMgaW50IF9faW5pdCBhcm1fc21tdV9z
+ZXR1cF9pcnFzKHN0cnVjdCBhcm1fc21tdV9kZXZpY2UgKnNtbXUpDQo+IHsNCj4gaW50IHJldCwg
+aXJxOw0KPiAtIHUzMiBpcnFlbl9mbGFncyA9IElSUV9DVFJMX0VWVFFfSVJRRU4gfCBJUlFfQ1RS
+TF9HRVJST1JfSVJRRU47DQo+IA0KPiAvKiBEaXNhYmxlIElSUXMgZmlyc3QgKi8NCj4gcmV0ID0g
+YXJtX3NtbXVfd3JpdGVfcmVnX3N5bmMoc21tdSwgMCwgQVJNX1NNTVVfSVJRX0NUUkwsDQo+IEBA
+IC0yMDI4LDIyICsyMDQ2LDcgQEAgc3RhdGljIGludCBfX2luaXQgYXJtX3NtbXVfc2V0dXBfaXJx
+cyhzdHJ1Y3QgYXJtX3NtbXVfZGV2aWNlICpzbW11KQ0KPiB9DQo+IH0NCj4gDQo+IC0gaWYgKHNt
+bXUtPmZlYXR1cmVzICYgQVJNX1NNTVVfRkVBVF9QUkkpDQo+IC0gaXJxZW5fZmxhZ3MgfD0gSVJR
+X0NUUkxfUFJJUV9JUlFFTjsNCj4gLQ0KPiAtIC8qIEVuYWJsZSBpbnRlcnJ1cHQgZ2VuZXJhdGlv
+biBvbiB0aGUgU01NVSAqLw0KPiAtIHJldCA9IGFybV9zbW11X3dyaXRlX3JlZ19zeW5jKHNtbXUs
+IGlycWVuX2ZsYWdzLA0KPiAtICAgICAgQVJNX1NNTVVfSVJRX0NUUkwsIEFSTV9TTU1VX0lSUV9D
+VFJMQUNLKTsNCj4gLSBpZiAocmV0KSB7DQo+IC0gZGV2X3dhcm4oc21tdS0+ZGV2LCAiZmFpbGVk
+IHRvIGVuYWJsZSBpcnFzXG4iKTsNCj4gLSBnb3RvIGVycl9mcmVlX2lycXM7DQo+IC0gfQ0KPiAt
+DQo+IHJldHVybiAwOw0KPiAtDQo+IC1lcnJfZnJlZV9pcnFzOg0KPiAtIGFybV9zbW11X2ZyZWVf
+aXJxcyhzbW11KTsNCj4gLSByZXR1cm4gcmV0Ow0KPiB9DQo+IA0KPiBzdGF0aWMgaW50IGFybV9z
+bW11X2RldmljZV9kaXNhYmxlKHN0cnVjdCBhcm1fc21tdV9kZXZpY2UgKnNtbXUpDQo+IEBAIC0y
+MDU3LDcgKzIwNjAsNyBAQCBzdGF0aWMgaW50IGFybV9zbW11X2RldmljZV9kaXNhYmxlKHN0cnVj
+dCBhcm1fc21tdV9kZXZpY2UgKnNtbXUpDQo+IHJldHVybiByZXQ7DQo+IH0NCj4gDQo+IC1zdGF0
+aWMgaW50IF9faW5pdCBhcm1fc21tdV9kZXZpY2VfcmVzZXQoc3RydWN0IGFybV9zbW11X2Rldmlj
+ZSAqc21tdSkNCj4gK3N0YXRpYyBpbnQgYXJtX3NtbXVfZGV2aWNlX3Jlc2V0KHN0cnVjdCBhcm1f
+c21tdV9kZXZpY2UgKnNtbXUpDQo+IHsNCj4gaW50IHJldDsNCj4gdTMyIHJlZywgZW5hYmxlczsN
+Cj4gQEAgLTIxNjMsMTcgKzIxNjYsOSBAQCBzdGF0aWMgaW50IF9faW5pdCBhcm1fc21tdV9kZXZp
+Y2VfcmVzZXQoc3RydWN0IGFybV9zbW11X2RldmljZSAqc21tdSkNCj4gfQ0KPiB9DQo+IA0KPiAt
+IHJldCA9IGFybV9zbW11X3NldHVwX2lycXMoc21tdSk7DQo+IC0gaWYgKHJldCkgew0KPiAtIGRl
+dl9lcnIoc21tdS0+ZGV2LCAiZmFpbGVkIHRvIHNldHVwIGlycXNcbiIpOw0KDQpXZSBhcmUgbW92
+aW5nIHRoaXMgb25lIHRvIHRoZSBwcm9iZSBhbmQgLi4gDQoNCj4gKyByZXQgPSBhcm1fc21tdV9l
+bmFibGVfaXJxcyhzbW11KTsNCj4gKyBpZiAoIHJldCApDQoNCmNoYW5naW5nIHdpdGggdGhpcyBv
+bmUsIGJ1dCBhcm1fc21tdV9zZXR1cF9pcnFzKCkgYWxzbyBjYWxscyBhcm1fc21tdV9zZXR1cF91
+bmlxdWVfaXJxcygpIHdoaWNoDQpjYWxscyBhcm1fc21tdV9zZXR1cF9tc2lzKCksIGFyZSB3ZSBz
+dXJlIHRoYXQgb24gcmVzdW1lIHdlIHdpbGwgZ2V0IHRoZSBzYW1lIHN0YXRlPw0KDQo+IHJldHVy
+biByZXQ7DQo+IC0gfQ0KPiAtDQo+IC0gLyogSW5pdGlhbGl6ZSB0YXNrbGV0cyBmb3IgdGhyZWFk
+ZWQgSVJRcyovDQo+IC0gdGFza2xldF9pbml0KCZzbW11LT5ldnRxX2lycV90YXNrbGV0LCBhcm1f
+c21tdV9ldnRxX3Rhc2tsZXQsIHNtbXUpOw0KPiAtIHRhc2tsZXRfaW5pdCgmc21tdS0+cHJpcV9p
+cnFfdGFza2xldCwgYXJtX3NtbXVfcHJpcV90YXNrbGV0LCBzbW11KTsNCj4gLSB0YXNrbGV0X2lu
+aXQoJnNtbXUtPmNvbWJpbmVkX2lycV90YXNrbGV0LCBhcm1fc21tdV9jb21iaW5lZF9pcnFfdGFz
+a2xldCwNCj4gLSBzbW11KTsNCj4gDQo+IC8qIEVuYWJsZSB0aGUgU01NVSBpbnRlcmZhY2UsIG9y
+IGVuc3VyZSBieXBhc3MgKi8NCj4gaWYgKGRpc2FibGVfYnlwYXNzKSB7DQo+IEBAIC0yMTgxLDIw
+ICsyMTc2LDE2IEBAIHN0YXRpYyBpbnQgX19pbml0IGFybV9zbW11X2RldmljZV9yZXNldChzdHJ1
+Y3QgYXJtX3NtbXVfZGV2aWNlICpzbW11KQ0KPiB9IGVsc2Ugew0KPiByZXQgPSBhcm1fc21tdV91
+cGRhdGVfZ2JwYShzbW11LCAwLCBHQlBBX0FCT1JUKTsNCj4gaWYgKHJldCkNCj4gLSBnb3RvIGVy
+cl9mcmVlX2lycXM7DQo+ICsgcmV0dXJuIHJldDsNCj4gfQ0KPiByZXQgPSBhcm1fc21tdV93cml0
+ZV9yZWdfc3luYyhzbW11LCBlbmFibGVzLCBBUk1fU01NVV9DUjAsDQo+ICAgICAgQVJNX1NNTVVf
+Q1IwQUNLKTsNCj4gaWYgKHJldCkgew0KPiBkZXZfZXJyKHNtbXUtPmRldiwgImZhaWxlZCB0byBl
+bmFibGUgU01NVSBpbnRlcmZhY2VcbiIpOw0KPiAtIGdvdG8gZXJyX2ZyZWVfaXJxczsNCj4gKyBy
+ZXR1cm4gcmV0Ow0KPiB9DQo+IA0KPiByZXR1cm4gMDsNCj4gLQ0KPiAtZXJyX2ZyZWVfaXJxczoN
+Cj4gLSBhcm1fc21tdV9mcmVlX2lycXMoc21tdSk7DQo+IC0gcmV0dXJuIHJldDsNCj4gfQ0KPiAN
+Cj4gc3RhdGljIGludCBhcm1fc21tdV9kZXZpY2VfaHdfcHJvYmUoc3RydWN0IGFybV9zbW11X2Rl
+dmljZSAqc21tdSkNCj4gQEAgLTI1NTgsMTAgKzI1NDksMjMgQEAgc3RhdGljIGludCBfX2luaXQg
+YXJtX3NtbXVfZGV2aWNlX3Byb2JlKHN0cnVjdCBwbGF0Zm9ybV9kZXZpY2UgKnBkZXYpDQo+IGlm
+IChyZXQpDQo+IGdvdG8gb3V0X2ZyZWU7DQo+IA0KPiArIHJldCA9IGFybV9zbW11X3NldHVwX2ly
+cXMoc21tdSk7DQo+ICsgaWYgKCByZXQgKQ0KPiArIHsNCj4gKyBkZXZfZXJyKHNtbXUtPmRldiwg
+ImZhaWxlZCB0byBzZXR1cCBpcnFzXG4iKTsNCj4gKyBnb3RvIG91dF9mcmVlOw0KPiArIH0NCj4g
+Kw0KPiArIC8qIEluaXRpYWxpemUgdGFza2xldHMgZm9yIHRocmVhZGVkIElSUXMqLw0KPiArIHRh
+c2tsZXRfaW5pdCgmc21tdS0+ZXZ0cV9pcnFfdGFza2xldCwgYXJtX3NtbXVfZXZ0cV90YXNrbGV0
+LCBzbW11KTsNCj4gKyB0YXNrbGV0X2luaXQoJnNtbXUtPnByaXFfaXJxX3Rhc2tsZXQsIGFybV9z
+bW11X3ByaXFfdGFza2xldCwgc21tdSk7DQo+ICsgdGFza2xldF9pbml0KCZzbW11LT5jb21iaW5l
+ZF9pcnFfdGFza2xldCwgYXJtX3NtbXVfY29tYmluZWRfaXJxX3Rhc2tsZXQsDQo+ICsgc21tdSk7
+DQo+ICsNCj4gLyogUmVzZXQgdGhlIGRldmljZSAqLw0KPiByZXQgPSBhcm1fc21tdV9kZXZpY2Vf
+cmVzZXQoc21tdSk7DQo+IGlmIChyZXQpDQo+IC0gZ290byBvdXRfZnJlZTsNCj4gKyBnb3RvIG91
+dF9mcmVlX2lycXM7DQo+IA0KPiAvKg0KPiAqIEtlZXAgYSBsaXN0IG9mIGFsbCBwcm9iZWQgZGV2
+aWNlcy4gVGhpcyB3aWxsIGJlIHVzZWQgdG8gcXVlcnkNCj4gQEAgLTI1NzUsNiArMjU3OSw4IEBA
+IHN0YXRpYyBpbnQgX19pbml0IGFybV9zbW11X2RldmljZV9wcm9iZShzdHJ1Y3QgcGxhdGZvcm1f
+ZGV2aWNlICpwZGV2KQ0KPiANCj4gcmV0dXJuIDA7DQo+IA0KPiArb3V0X2ZyZWVfaXJxczoNCj4g
+KyBhcm1fc21tdV9mcmVlX2lycXMoc21tdSk7DQo+IA0KPiBvdXRfZnJlZToNCj4gYXJtX3NtbXVf
+ZnJlZV9zdHJ1Y3R1cmVzKHNtbXUpOw0KPiBAQCAtMjg1NSw2ICsyODYxLDk2IEBAIHN0YXRpYyB2
+b2lkIGFybV9zbW11X2lvbW11X3hlbl9kb21haW5fdGVhcmRvd24oc3RydWN0IGRvbWFpbiAqZCkN
+Cj4geGZyZWUoeGVuX2RvbWFpbik7DQo+IH0NCj4gDQo+ICsjaWZkZWYgQ09ORklHX1NZU1RFTV9T
+VVNQRU5EDQo+ICsNCj4gK3N0YXRpYyB2b2lkIGFybV9zbW11X3Jlc2V0X2Zvcl9zdXNwZW5kX3Jv
+bGxiYWNrKHN0cnVjdCBhcm1fc21tdV9kZXZpY2UgKnNtbXUpDQo+ICt7DQo+ICsgaW50IHJldCA9
+IGFybV9zbW11X2RldmljZV9yZXNldChzbW11KTsNCj4gKw0KPiArIGlmICggcmV0ICkNCj4gKyBk
+ZXZfZXJyKHNtbXUtPmRldiwgIkZhaWxlZCB0byByZXNldCBkdXJpbmcgc3VzcGVuZCByb2xsYmFj
+azogJWRcbiIsDQo+ICsgcmV0KTsNCj4gK30NCj4gKw0KPiArc3RhdGljIGludCBhcm1fc21tdV9z
+dXNwZW5kKHZvaWQpDQo+ICt7DQo+ICsgc3RydWN0IGFybV9zbW11X2RldmljZSAqc21tdTsNCj4g
+KyBpbnQgcmV0ID0gMDsNCj4gKw0KPiArIGxpc3RfZm9yX2VhY2hfZW50cnkoc21tdSwgJmFybV9z
+bW11X2RldmljZXMsIGRldmljZXMpDQo+ICsgew0KPiArIGJvb2wgd2ZlID0gISEoc21tdS0+ZmVh
+dHVyZXMgJiBBUk1fU01NVV9GRUFUX1NFVik7DQo+ICsNCj4gKyAvKiBBYm9ydCBhbGwgdHJhbnNh
+Y3Rpb25zIGJlZm9yZSBkaXNhYmxlIHRvIGF2b2lkIHNwdXJpb3VzIGJ5cGFzcyAqLw0KPiArIHJl
+dCA9IGFybV9zbW11X3VwZGF0ZV9nYnBhKHNtbXUsIEdCUEFfQUJPUlQsIDApOw0KPiArIGlmICgg
+cmV0ICkNCj4gKyBnb3RvIGZhaWw7DQo+ICsNCj4gKyAvKiBEaXNhYmxlIHRoZSBTTU1VIHZpYSBD
+UjAuRU4gYW5kIGFsbCBxdWV1ZXMgZXhjZXB0IENNRFEgKi8NCj4gKyByZXQgPSBhcm1fc21tdV93
+cml0ZV9yZWdfc3luYyhzbW11LCBDUjBfQ01EUUVOLCBBUk1fU01NVV9DUjAsDQo+ICsgQVJNX1NN
+TVVfQ1IwQUNLKTsNCj4gKyBpZiAoIHJldCApDQo+ICsgew0KPiArIGRldl9lcnIoc21tdS0+ZGV2
+LCAiVGltZWQtb3V0IHdoaWxlIGRpc2FibGluZyBzbW11XG4iKTsNCj4gKyBnb3RvIGZhaWw7DQo+
+ICsgfQ0KPiArDQo+ICsgLyoNCj4gKyAqIEF0IHRoaXMgcG9pbnQgdGhlIFNNTVUgaXMgY29tcGxl
+dGVseSBkaXNhYmxlZCBhbmQgd29uJ3QgYWNjZXNzDQo+ICsgKiBhbnkgdHJhbnNsYXRpb24vY29u
+ZmlnIHN0cnVjdHVyZXMsIGV2ZW4gc3BlY3VsYXRpdmUgYWNjZXNzZXMNCj4gKyAqIGFyZW4ndCBw
+ZXJmb3JtZWQgYXMgcGVyIHRoZSBJSEkwMDcwIHNwZWMgKHNlY3Rpb24gNi4zLjkuNikuDQo+ICsg
+Ki8NCj4gKw0KPiArIC8qIFdhaXQgZm9yIHRoZSBDTURRcyB0byBiZSBkcmFpbmVkIHRvIGZsdXNo
+IGFueSBwZW5kaW5nIGNvbW1hbmRzICovDQo+ICsgcmV0ID0gcXVldWVfcG9sbF9jb25zKCZzbW11
+LT5jbWRxLnEsIHRydWUsIHdmZSk7DQo+ICsgaWYgKCByZXQgKQ0KPiArIHsNCj4gKyBkZXZfZXJy
+KHNtbXUtPmRldiwgIkRyYWluaW5nIHF1ZXVlcyB0aW1lZC1vdXRcbiIpOw0KPiArIGdvdG8gZmFp
+bDsNCj4gKyB9DQoNCnBvbGxpbmcgdGhlIHF1ZXVlIGRvZXNu4oCZdCBnaXZlIHlvdSB0aGUgYXNz
+dXJhbmNlIHRoYXQgYWxsIHByaW9yIGNvbW1hbmRzIGFyZSBjb21wbGV0ZSwNCkkgd291bGQgdXNl
+IGFybV9zbW11X2NtZHFfaXNzdWVfc3luYyBmb3IgdGhhdCBpbnN0ZWFkIG9mIHRoZSBhYm92ZS4N
+Cg0KcmV0ID0gYXJtX3NtbXVfY21kcV9pc3N1ZV9zeW5jKHNtbXUpOw0KaWYgKCByZXQgKQ0KICAg
+IGdvdG8gZmFpbDsNCg0KPiArDQo+ICsgLyogRGlzYWJsZSBldmVyeXRoaW5nICovDQo+ICsgcmV0
+ID0gYXJtX3NtbXVfZGV2aWNlX2Rpc2FibGUoc21tdSk7DQo+ICsgaWYgKCByZXQgKQ0KPiArIGdv
+dG8gZmFpbDsNCj4gKw0KPiArIGRldl9kYmcoc21tdS0+ZGV2LCAiU3VzcGVuZGVkIHNtbXVcbiIp
+Ow0KPiArIH0NCj4gKw0KPiArIHJldHVybiAwOw0KPiArDQo+ICsgZmFpbDoNCj4gKyAvKiBSZXNl
+dCB0aGUgZGV2aWNlIHRoYXQgZmFpbGVkIGFzIHdlbGwgYXMgYW55IGFscmVhZHktc3VzcGVuZGVk
+IG9uZXMuICovDQo+ICsgYXJtX3NtbXVfcmVzZXRfZm9yX3N1c3BlbmRfcm9sbGJhY2soc21tdSk7
+DQo+ICsNCj4gKyBsaXN0X2Zvcl9lYWNoX2VudHJ5X2NvbnRpbnVlX3JldmVyc2Uoc21tdSwgJmFy
+bV9zbW11X2RldmljZXMsIGRldmljZXMpDQo+ICsgYXJtX3NtbXVfcmVzZXRfZm9yX3N1c3BlbmRf
+cm9sbGJhY2soc21tdSk7DQo+ICsNCj4gKyByZXR1cm4gcmV0Ow0KPiArfQ0KPiArDQoNCkNoZWVy
+cywNCkx1Y2ENCg0KDQo=
 
