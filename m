@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81DBFF8861
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D39FF885E
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 10:54:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1294778.1571486 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1294783.1571531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHJbK-0005xG-Id; Mon, 27 Apr 2026 10:54:06 +0000
+	id 1wHJbP-00077p-8A; Mon, 27 Apr 2026 10:54:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1294778.1571486; Mon, 27 Apr 2026 10:54:06 +0000
+Received: by outflank-mailman (output) from mailman id 1294783.1571531; Mon, 27 Apr 2026 10:54:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHJbK-0005x7-Fv; Mon, 27 Apr 2026 10:54:06 +0000
-Received: by outflank-mailman (input) for mailman id 1294778;
- Mon, 27 Apr 2026 10:54:05 +0000
+	id 1wHJbP-00077X-2u; Mon, 27 Apr 2026 10:54:11 +0000
+Received: by outflank-mailman (input) for mailman id 1294783;
+ Mon, 27 Apr 2026 10:54:10 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wHJbJ-0005sG-28
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 10:54:05 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wHJbN-0006pf-SB
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 10:54:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHJbI-00FJ4k-FM
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 12:54:04 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wHJbN-004Ir6-8B
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 12:54:09 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 69ef4034-2eae-0a2a0a5409dd-0a2a4504918c-46
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 12:54:04 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69ef4051-5cb7-0a2a0a5109dd-0a2a4503c4b8-0
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 12:54:09 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 69ef404c-1dec-0a2a45040019-d155802dd452-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 12:54:04 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4852a9c6309so92918585e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 03:54:04 -0700 (PDT)
+ id 69ef4051-672d-0a2a45030019-d1558033c86d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 12:54:09 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4891e5b9c1fso84864145e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 03:54:09 -0700 (PDT)
 Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
  [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a5c4b9e8dsm116133355e9.7.2026.04.27.03.54.02
+ 5b1f17b1804b1-48a5c4b9e8dsm116133355e9.7.2026.04.27.03.54.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 03:54:03 -0700 (PDT)
+ Mon, 27 Apr 2026 03:54:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,136 +55,190 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777287244; x=1777892044; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1777287248; x=1777892048; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A5ou0MaWeF1QaqgGjfxneV8ESfLfmJPSRFjrAyNPQHE=;
-        b=IeEE8Pr3Xk3o/Aca+3DeBcJAuoa4/UJRsw+hETocJYULKwT5EH5uCUhgcf7XYIF/rk
-         06OlGSusuJ3gv4eeQJzfUaCR8vqra+3Yt4GDHgvS3A1cSaaK4b5D8hAtjmEOj2josjsI
-         VDemOfwPZ3YJ3KaNEY6Csiv0ls3tJGhZPlm3TEdLIj/lQJQucaazFOLUkmL6cjhki+Qi
-         r01DFfchQeFcGdsS2iTqMb2oY+X2z0dBIftEaIkVrxBpFgcpJz2AFpOwcrO7Ij9PA2pW
-         Cn94CroDBx76kenrGWHXIe1WL4T7zqJ3NX/7UMqhcydAU6ZoGLEBW+qRO8+Z6IYeuLHx
-         QWWw==
+        bh=RVb1my+fIjS7vfPgLx5O5td6PHPVJPTF5pUCPqufxWI=;
+        b=NXqJPzU1nN0S4FsDtr+l5Puecwi8NQKusSBbu2duK8M7zOcIU/mMc8+I912A5CJwpj
+         kZxVIgXM4uC2clS4KEfQqshT3qpe06dEaBxcHjXogSNQscr2uBf1W6i2zEaEHXovzm1b
+         ZdumLkUHaYJgivL3eiiTNkbsVE+y0de4BKEjlrn88IO1lnCchjUwn4Rh81AFQdIyXX+I
+         zhKKFkC3sOpKxejAL1Xavj1rIWeJNaJ4ITypgTr5ksDg8gyni4X/EYXNtujdtTOFkpz7
+         KrxmyhZHQa+iY3SctOCkV9P5mcGH2mEdH+Z+eq+dhQ9B/b38hV03P9WU9VvHcniY6mqV
+         a9RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777287244; x=1777892044;
+        d=1e100.net; s=20251104; t=1777287248; x=1777892048;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=A5ou0MaWeF1QaqgGjfxneV8ESfLfmJPSRFjrAyNPQHE=;
-        b=apbm9Wa5dFyno7UZtxk8ttgLuH67MJzNJE2irTf4klLpuOWQiRQ948gD2XLzrog1/z
-         iEnYWdd2+ZiIqmIw25/xLXGZj+xL1Cu8kncsv+Z6DlESwYUDp2EzHdTtzaOI54j6fhCg
-         1tbetqTFoN6WuOJlgZFHW1rBqX0Su4kzr6OgfCqZpe455CWZoriLwt8lQAJh10NpnJW0
-         yxIYn0jNxhu2mviWLEhTprc/Tdpt4hsaMi17rN41BZn/dJrV48xeYqKy8tYLKZ4sjYUv
-         Z/niJU04dkSwaIA4UVAl59lfcxoacSdPqIJpcvbfL3+8pO+f8ZQhavdTakYb9mpKg182
-         iZbA==
-X-Gm-Message-State: AOJu0Yxe49nnvK9hIyMNMQ1xHceCvoD+MmGArQeTgGthJ3j5zI7OJ010
-	4VoqaWjAwRyXVYxhGAbfN7dmDCnirWSMk+3eYtcDM0oGFNR+gJWNFz99uNURe8A8
-X-Gm-Gg: AeBDies3GIORC4W/kxz9WWFbafpNZIQNbjrlKK0rMfPnRAsNC2DytECcX6YOILbbO8X
-	ZVkKBROkVlvBCGBpnExqeBi9HVuAE46ndqxRydb7vScHLFHF2M0ESJiwfEu5FXFbpj42oMKSIgl
-	ZHTfHqc6Y+S6PEwF1kD0E+M5S9CJkeMrOZoCXQ+4fb0IX30KW5ck+5uX9F5D2qrRVk04vkU3EQ0
-	lHfN3VR43iPvBBwXm01omuLz/IU1tuaPaxPhDF2/Hv62cJCBDANgVQXLDKS4iADFfuTqnq/qIWA
-	XWQn7ajjydBkj0ITYXup0hC46irPhvtfdQQ27Qo3u9vHdBzjZ3P4tiSgOeZIfAxIsa0I6sD0GIF
-	lB76QxG56vUnQHcl18bsx7NqKubu+ZKXwENPGSCL+Z3V9Iawjt6spEf1EN2juSvEoBIcYko4imw
-	6Khy3TLj9tNwaWOjy1xFjzilsLyDP9ym/jvPaDjTT3w/DUuq5Vg96G7Jn2eYgMOcKZRImi+dAFq
-	d6U
-X-Received: by 2002:a05:600c:46cb:b0:488:a723:ea53 with SMTP id 5b1f17b1804b1-488fb744fbemr610461055e9.7.1777287243489;
-        Mon, 27 Apr 2026 03:54:03 -0700 (PDT)
+        bh=RVb1my+fIjS7vfPgLx5O5td6PHPVJPTF5pUCPqufxWI=;
+        b=K8JNr0BC/AOKJFx4fTrC+c5GYeGGXk7eK1qzucc5cm+uMFT1UEqevZPpcPMbdCo6Yi
+         q41Z/nu9lp47PkbNwKN6HLzhl1q7vEZkSHIg8DBeay4EUDJdHC2LK8ytegFeFoLrO95h
+         qlwVSvxyUCPezFt1+gunT6JlO9PV0c0EaJH4vMwomP6x6zKLAmvLSVFz9vBrE9YaArGH
+         +42Gd59RXAe4M6iWR5ACawA3Xi5vNHcCIlPSXTy4ZJiTSmmRRdtmhE6atGzJ6MIYFl6z
+         DlOXDWBT9K77n8vbwNyJjvtmTmJpRkwvKfkxr0faHsjCp1aFlZn3SLBpBp27ErnevzcJ
+         KpKA==
+X-Gm-Message-State: AOJu0YyNwyYeWO6b+KvuaBjjjoBuaCaKxvYEmQ87gBotWUfiQPd12gj0
+	FAfj21V0lt9M7v0Nf3uUdymckW6+s+6Rf8bCZc61D2AElQ2raYvqTjYxKg4B1OzC
+X-Gm-Gg: AeBDieu76PgTa1ihBT9JAccAe1gSqLUxdnFdB84K7i/zW5Ak20vBo/adsRJWDZVEY4n
+	2mB/nFpLvqExrLszoE6YAURAqAPTIaXHKTLaJLSeNLArOmeSPDs4DtYqb1F+5cKh1AdU9c9NLsz
+	hTNo9KDZs7jKpm06XE/RIOrMmcXdi9AjhYAihDpC2kU8SACjjN0ZRjFqQ4RI2+kNpQ603KzTe//
+	9f3N4dG71pVgdpqqojNbCN7RP0/TwTjXJtdKSRv1BMbs07BQnRN1WYcuDUSpx7EQzzbF8KDL62l
+	a1hmNEIdPJFz6jHRzwhU7a5lPf1mqmgyi9dKo+DxR5wApRMUbtzrLYEghnMyk3jBOu/FISAylqU
+	jvjTm5K9knIelw0QZAZf80lBffWYuquUrx/vQQpKbGmTD/8YCPdzcKXjvNmxJdmpBMFBWdtU0sx
+	oo8prenD9UDGnEhIk/mMrqXR7VqyNZfEMRgB7r8TPaI2qGbDIPzRtqT4wZRcqwGRicLcH2sdvy0
+	686isdL50ftNQc=
+X-Received: by 2002:a05:600c:a08c:b0:48a:563c:c8c0 with SMTP id 5b1f17b1804b1-48a563cd176mr361650105e9.7.1777287248180;
+        Mon, 27 Apr 2026 03:54:08 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 2/7] xenguest: Reduce number of I/O vectors in write_batch
-Date: Mon, 27 Apr 2026 11:53:27 +0100
-Message-ID: <20260427105338.99792-3-frediano.ziglio@cloud.com>
+	Juergen Gross <jgross@suse.com>,
+	Frediano Ziglio <frediano.ziglio@citrix.com>
+Subject: [PATCH v2 7/7] tools/lib/call: cache up to 4 pages in hypercall bounce buffers
+Date: Mon, 27 Apr 2026 11:53:32 +0100
+Message-ID: <20260427105338.99792-8-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260427105338.99792-1-frediano.ziglio@cloud.com>
 References: <20260427105338.99792-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1777287244-32E743FF-D0655396/0/0
+X-purgate-ID: tlsNG-33051d/1777287249-2A378938-ABA77346/0/0
 X-purgate-type: clean
-X-purgate-size: 2573
+X-purgate-size: 4933
 
-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+From: Edwin Török <edwin.torok@citrix.com>
 
-Small optimization.
-Reduce number of pieces passed to writev.
+During migration there are a lot of mmap/munmap calls,
+because `xc_get_pfn_type_batch` exceeds the default hypercall bounce
+buffer cache size, and needs to allocate every time it is called.
 
+`munmap` is slow, especially in a PV Dom0 (takes an emulation fault),
+so is best avoided.
+
+Eventually it'd be good if the memory pool from  xmalloc_tlsf.c
+was reused here, but for now make it handle the commonly encountered
+sizes (so far up to 4 pages).
+
+Signed-off-by: Edwin Török <edwin.torok@citrix.com>
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
 ---
- tools/libs/guest/xg_sr_save.c | 35 ++++++++++++++++-------------------
- 1 file changed, 16 insertions(+), 19 deletions(-)
+ tools/libs/call/buffer.c  | 28 +++++++++++++++++-----------
+ tools/libs/call/core.c    |  3 ++-
+ tools/libs/call/private.h |  8 +++++---
+ 3 files changed, 24 insertions(+), 15 deletions(-)
 
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 3b2c5222e429..1700d819051a 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -97,9 +97,12 @@ static int write_batch(struct xc_sr_context *ctx)
-     void *page, *orig_page;
-     uint64_t *rec_pfns = NULL;
-     struct iovec *iov = NULL; int iovcnt = 0;
--    struct xc_sr_rec_page_data_header hdr = { 0 };
--    struct xc_sr_record rec = {
--        .type = REC_TYPE_PAGE_DATA,
-+    struct {
-+        struct xc_sr_rhdr rec;
-+        struct xc_sr_rec_page_data_header page_data;
-+    } hdrs = {
-+        { .type = REC_TYPE_PAGE_DATA },
-+        { 0 },
-     };
+diff --git a/tools/libs/call/buffer.c b/tools/libs/call/buffer.c
+index 2579b8c71986..15d2f98a6b71 100644
+--- a/tools/libs/call/buffer.c
++++ b/tools/libs/call/buffer.c
+@@ -56,13 +56,13 @@ static void *cache_alloc(xencall_handle *xcall, size_t nr_pages)
+     if ( xcall->buffer_current_allocations > xcall->buffer_maximum_allocations )
+         xcall->buffer_maximum_allocations = xcall->buffer_current_allocations;
  
-     assert(nr_pfns != 0);
-@@ -115,7 +118,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = calloc(nr_pfns, sizeof(*local_pages));
-     /* iovec[] for writev(). */
--    iov = malloc((nr_pfns + 4) * sizeof(*iov));
-+    iov = malloc((nr_pfns + 2) * sizeof(*iov));
- 
-     if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
+-    if ( nr_pages > 1 )
++    if ( nr_pages > ARRAY_SIZE(xcall->buffer_cache) )
      {
-@@ -216,28 +219,22 @@ static int write_batch(struct xc_sr_context *ctx)
-         goto err;
+         xcall->buffer_cache_toobig++;
+     }
+-    else if ( xcall->buffer_cache_nr > 0 )
++    else if ( xcall->buffer_cache_nr[nr_pages-1] > 0 )
+     {
+-        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
++        p = xcall->buffer_cache[nr_pages-1][--xcall->buffer_cache_nr[nr_pages-1]];
+         xcall->buffer_cache_hits++;
+     }
+     else
+@@ -84,10 +84,10 @@ static int cache_free(xencall_handle *xcall, void *p, size_t nr_pages)
+     xcall->buffer_total_releases++;
+     xcall->buffer_current_allocations--;
+ 
+-    if ( nr_pages == 1 &&
+-         xcall->buffer_cache_nr < BUFFER_CACHE_SIZE )
++    if ( nr_pages && nr_pages < ARRAY_SIZE(xcall->buffer_cache) &&
++         xcall->buffer_cache_nr[nr_pages-1] < BUFFER_CACHE_SIZE )
+     {
+-        xcall->buffer_cache[xcall->buffer_cache_nr++] = p;
++        xcall->buffer_cache[nr_pages-1][xcall->buffer_cache_nr[nr_pages-1]++] = p;
+         rc = 1;
      }
  
--    hdr.count = nr_pfns;
-+    hdrs.rec.length = sizeof(hdrs.page_data);
-+    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
-+    hdrs.rec.length += nr_pages * PAGE_SIZE;
+@@ -108,17 +108,23 @@ void buffer_release_cache(xencall_handle *xcall)
+     DBGPRINTF("current allocations:%d maximum allocations:%d",
+               xcall->buffer_current_allocations,
+               xcall->buffer_maximum_allocations);
+-    DBGPRINTF("cache current size:%d",
+-              xcall->buffer_cache_nr);
++    for ( unsigned i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
++    {
++        DBGPRINTF("cache current size[%u pages]:%d", i+1,
++                xcall->buffer_cache_nr[i]);
++    }
+     DBGPRINTF("cache hits:%d misses:%d toobig:%d",
+               xcall->buffer_cache_hits,
+               xcall->buffer_cache_misses,
+               xcall->buffer_cache_toobig);
  
--    rec.length = sizeof(hdr);
--    rec.length += nr_pfns * sizeof(*rec_pfns);
--    rec.length += nr_pages * PAGE_SIZE;
-+    hdrs.page_data.count = nr_pfns;
- 
-     for ( i = 0; i < nr_pfns; ++i )
-         rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
- 
--    iov[0].iov_base = &rec.type;
--    iov[0].iov_len = sizeof(rec.type);
-+    iov[0].iov_base = &hdrs;
-+    iov[0].iov_len = sizeof(hdrs);
- 
--    iov[1].iov_base = &rec.length;
--    iov[1].iov_len = sizeof(rec.length);
-+    iov[1].iov_base = rec_pfns;
-+    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
- 
--    iov[2].iov_base = &hdr;
--    iov[2].iov_len = sizeof(hdr);
--
--    iov[3].iov_base = rec_pfns;
--    iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
--
--    iovcnt = 4;
-+    iovcnt = 2;
- 
-     if ( nr_pages )
+-    while ( xcall->buffer_cache_nr > 0 )
++    for ( unsigned i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
      {
+-        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
+-        osdep_free_pages(xcall, p, 1);
++        while ( xcall->buffer_cache_nr[i] > 0 )
++        {
++            p = xcall->buffer_cache[i][--xcall->buffer_cache_nr[i]];
++            osdep_free_pages(xcall, p, i + 1);
++        }
+     }
+ 
+     cache_unlock(xcall);
+diff --git a/tools/libs/call/core.c b/tools/libs/call/core.c
+index 02c4f8e1aefa..dd8877c1a0bd 100644
+--- a/tools/libs/call/core.c
++++ b/tools/libs/call/core.c
+@@ -14,6 +14,7 @@
+  */
+ 
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #include "private.h"
+ 
+@@ -44,7 +45,7 @@ xencall_handle *xencall_open(xentoollog_logger *logger, unsigned open_flags)
+     xentoolcore__register_active_handle(&xcall->tc_ah);
+ 
+     xcall->flags = open_flags;
+-    xcall->buffer_cache_nr = 0;
++    memset(xcall->buffer_cache_nr, 0, sizeof(xcall->buffer_cache_nr));
+ 
+     xcall->buffer_total_allocations = 0;
+     xcall->buffer_total_releases = 0;
+diff --git a/tools/libs/call/private.h b/tools/libs/call/private.h
+index 9c3aa432efe2..8e6a20897534 100644
+--- a/tools/libs/call/private.h
++++ b/tools/libs/call/private.h
+@@ -31,13 +31,15 @@ struct xencall_handle {
+     Xentoolcore__Active_Handle tc_ah;
+ 
+     /*
+-     * A simple cache of unused, single page, hypercall buffers
++     * A simple cache of unused, small, hypercall buffers
++     * buffer_cache[i]'s size is (i+1) pages
+      *
+      * Protected by a global lock.
+      */
+ #define BUFFER_CACHE_SIZE 4
+-    int buffer_cache_nr;
+-    void *buffer_cache[BUFFER_CACHE_SIZE];
++#define BUFFER_CACHE_NRPAGES 4
++    int buffer_cache_nr[BUFFER_CACHE_NRPAGES];
++    void *buffer_cache[BUFFER_CACHE_NRPAGES][BUFFER_CACHE_SIZE];
+ 
+     /*
+      * Hypercall buffer statistics. All protected by the global
 -- 
 2.53.0
 
