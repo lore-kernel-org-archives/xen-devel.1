@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3958BFF885E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D768FF8869
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Apr 2026 13:55:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1294881.1571584 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1294886.1571621 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQA-0008VV-BI; Mon, 27 Apr 2026 13:54:46 +0000
+	id 1wHMQM-00012H-HF; Mon, 27 Apr 2026 13:54:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1294881.1571584; Mon, 27 Apr 2026 13:54:46 +0000
+Received: by outflank-mailman (output) from mailman id 1294886.1571621; Mon, 27 Apr 2026 13:54:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHMQA-0008VO-8W; Mon, 27 Apr 2026 13:54:46 +0000
-Received: by outflank-mailman (input) for mailman id 1294881;
- Mon, 27 Apr 2026 13:54:45 +0000
+	id 1wHMQM-00011y-C0; Mon, 27 Apr 2026 13:54:58 +0000
+Received: by outflank-mailman (input) for mailman id 1294886;
+ Mon, 27 Apr 2026 13:54:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387bbd000f373@swg.vates.tech>)
- id 1wHMQ9-0008VH-8B
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 13:54:45 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@swg.vates.tech>)
+ id 1wHMQK-0000u8-Um
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 13:54:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHMQ8-00G6M2-JF
- for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:54:44 +0200
+ id 1wHMQK-00G6Ry-BL
+ for xen-devel@lists.xenproject.org; Mon, 27 Apr 2026 15:54:56 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387bbd000f373@swg.vates.tech>)
- id 69ef6a97-5cb7-0a2a0a5109dd-0a2a450a90a8-44
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:44 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@swg.vates.tech>)
+ id 69ef6aa6-5cb7-0a2a0a5109dd-0a2a450ab84c-46
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:56 +0200
 Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf387bbd000f373@swg.vates.tech>)
- id 69ef6aa4-56b3-0a2a450a0019-b9ff1c22a053-3
- for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:44 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@swg.vates.tech>)
+ id 69ef6aa4-56b3-0a2a450a0019-b9ff1c22a053-7
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2026 15:54:56 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19dcf387bbd000f373.007 for <xen-devel@lists.xenproject.org>
+ 19dcf3880b0000f373.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 27 Apr 2026 13:54:38 +0000
+ Mon, 27 Apr 2026 13:54:39 +0000
 Received: from julian.home (lfbn-lyo-1-414-55.w2-7.abo.wanadoo.fr [2.7.24.55])
  (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id E2539865DE;
- Mon, 27 Apr 2026 15:54:37 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 59D328716C;
+ Mon, 27 Apr 2026 15:54:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,23 +58,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=0Ab05w3Cc3n+I13wVZW7ebdwmBh1B9H+TUWiPdGq5RY=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
- b=hUZJV/UxG/DXY7Q8EauK9ziJ/o9/vaV6aUCIfgtk68BL0l3v6s2/G1pEdAuXVPRdvdxJB159Z
- A6J+WWvEfq5RZ36PbaC1wVuiVi/IhFh1r4LaRc2nCZYdY0ctugGRkRiuaMpV2cloOG+H49gu8Gj
- 65qzISNWtIegMzUBEAl9NoUTfwSo583o5GPGpGKWlCwJWrbI9sVg/6rknwDeYu5y/1GrSymbdej
- lOgSRKAH3RDrVKlVBt5EVayww+OC+O0Rj9DUYVtVPuxC0SdOuEjBtjNCztQ531SfVtbJSJsACd3
- IsR0z/WBrJl6hQ4a7ymOxZV0wNMgxFdeLFeppj3e63lw==
-X-Zone-Loop: 56a54a6456f57479f343e5543d2972b35cf9f7d82bab
+ q=dns/txt; s=selector1; bh=L3geqFZf2EA0sdCca0SSrDfeFYuV7PuXhnEkcbG81vc=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=OEv/MLjvvtXXXRwgAcQUWiyCFjyihrh1lRj6bZdpWasH4YNwJpMGB8pv2xmeULxLMyWnaea0W
+ tPZ81AfBaEgJgf30Qmvzr9HRGZV8BMu3QP2tNnl1/icRJ6R2nu1iOzmc8LsdyqP9tPlMjrotAbe
+ GmzUkuKeJjlN5jxSl4cHPz8v80p90lnx9EDALP/RDa5RzKIKkclrv6C00FZfPJRB+xwUKUxrsgm
+ erDGzBWqppQIryCGwluBtQUcy2a5n6xanqy2g8kzoIQcUR7f5qFdGuuIFSMm8WiF84TdXNw+kmV
+ FjFzcfDcS1RGTkakuGKwULalcYMNLW7gitO0/fnmCCgw==
+X-Zone-Loop: 893a72aec607dea6480c80f879ab4fcedcd53e6c2117
 x-campaign-type: default
-x-transaction-id: 1c3fc14c-551e-4a61-9226-e3a507f66146
-x-swg-uid: 01-e1e72c33-c0fb-4343-b56d-cab55ec8025f
+x-transaction-id: 5defd13e-2120-4dbf-b2ab-a7f7caa0a973
+x-swg-uid: 01-2f1486f1-d81c-47e9-8cb7-5f95c3d6f325
 X-Mailer: Sweego
 Message-ID:
- <1777298078.8631fc262581453bbf619ec5b2062170.19dcf387bbd000f373@vates.tech>
-x-swg-bid: 1777298078.8631fc262581453bbf619ec5b2062170.19dcf387bbd000f373
+ <1777298079.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373@vates.tech>
+x-swg-bid: 1777298079.8631fc262581453bbf619ec5b2062170.19dcf3880b0000f373
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -93,98 +93,389 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v4 0/9] x86/hvm: Add Extended MSI destination ID support
-Date: Mon, 27 Apr 2026 15:53:57 +0200
+Subject: [PATCH v4 4/9] x86/passthrough: Extract PT_IRQ_TYPE_MSI body into pt_irq_bind_msi()
+Date: Mon, 27 Apr 2026 15:54:01 +0200
+In-Reply-To: <20260427135406.1281424-1-julian.vetter@vates.tech>
+References: <20260427135406.1281424-1-julian.vetter@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2972.abfc823cf368011e.19dcf3879c2.a24ad5d5067271c8=-"
+Content-Type: multipart/alternative; boundary="-=Part.2976.44099caa86af48ff.19dcf387f5c.f3342a2cfd05b8f2=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1777298078147
-X-purgate-ID: tlsNG-4011c0/1777298084-80A7F8B7-40F03E11/0/0
+X-Bm-Transport-Timestamp: 1777298079580
+X-purgate-ID: tlsNG-4011c0/1777298096-8127B8B7-32EBBA09/0/0
 X-purgate-type: clean
-X-purgate-size: 4541
+X-purgate-size: 13956
 
----=Part.2972.abfc823cf368011e.19dcf3879c2.a24ad5d5067271c8=-
+---=Part.2976.44099caa86af48ff.19dcf387f5c.f3342a2cfd05b8f2=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Thank you very much Roger and Jan for your feedback! I have addressed
-your feedback, see below=2E For me there is only one question, I'm not
-sure if this is what you had in mind Roger when you wrote:
-"Retrofitting the new interface into the old one seems weird=2E  I would
-do it the other way around - implement the old bind domctl on top of
-an interface that's more suited for the new DM op=2E"
-It requires some preparatory work=2E But I tried to make the
-restructunring diffs as easy to review as possible by splitting the
-refactoring into mutliple steps=2E
+No functional change: move the PT_IRQ_TYPE_MSI case of pt_irq_create_bind()
+into a new static helper pt_irq_bind_msi() taking the same gvec/gflags/gta=
+ble
+parameters=2E Restructure pt_irq_create_bind() so the MSI case delegates t=
+o the
+helper and pt_irq_dpci_setup() is called inside each case rather than shar=
+ed=2E
 
 Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
 ---
 Changes in v4:
-- Replaced the v3 approach of extending the XEN_DOMCTL_bind_pt_irq
-  gflags ABI (XEN_DOMCTL_VMSI_X86_EXT_DEST_ID_MASK / VMSI_X86_FULL_DEST)
-  with raw MSI addr + data storage throughout=2E pt_irq_bind_msi() now
-  accepts the raw address + data values and decodes the destination
-  internally=2E No public domctl ABI changes
-- As suggested by Roger, replaced XEN_DMOP_enable_ext_dest_id (v3 patch
-  6, a separate call before domain start) with a flags byte from the
-  existing pad[3] field of XEN_DMOP_create_ioreq_server=2E The new
-  XEN_DMOP_IOREQ_SERVER_EXT_DEST_ID flag lets each server signal support
-  at registration time and allows the feature to be levelled across all
-  servers before arch_domain_creation_finished()
-- Redirect xc_domain_{update,unbind}_msi_irq() in libxenctrl to use the
-  new DM ops, and reject PT_IRQ_TYPE_MSI in
-  XEN_DOMCTL_{bind,unbind}_pt_irq (as suggested by Jan)
-- Add three preparatory no-functional-change commits (patches 2-4) that
-  wrap the restart block in braces, extract pt_irq_dpci_setup(), and
-  extract the PT_IRQ_TYPE_MSI case body into pt_irq_bind_msi(), making
-  the interface change in patch 5 reviewable as a clean diff
-- Rework ioapic_check() to validate named fields (base_address, APIC ID
-  width, ioregsel range) instead of rejecting any non-zero reserved
-  bits, which would have falsely rejected RTEs carrying extended
-  destination IDs
+- New patch
+- Split out as a preparatory no-functional-change step so that the
+  interface change in patch 5 (switching pt_irq_bind_msi() from gvec +
+  gflags to raw MSI addr + data) shows as a clean diff against an
+  already-extracted helper, rather than being tangled with the 'case
+  PT_IRQ_TYPE_MSI' code
 ---
-Julian Vetter (9):
-  x86/vioapic: Add ioapic_check() to validate IO-APIC state before
-    restore
-  x86/passthrough: Wrap pt_irq_create_bind() restart block in braces
-  x86/passthrough: Extract pt_irq_dpci_setup() from pt_irq_create_bind()
-  x86/passthrough: Extract PT_IRQ_TYPE_MSI body into pt_irq_bind_msi()
-  x86/passthrough: Introduce pt_irq_bind_msi() as canonical MSI bind
-    path
-  x86/hvm: Support extended destination IDs in virtual MSI and IO-APIC
-  x86/dmop: Add XEN_DMOP_{bind,unbind}_pt_msi_irq DM ops
-  hvm/ioreq: Negotiate extended destination ID support per ioreq server
-  x86/cpuid: Advertise XEN_HVM_CPUID_EXT_DEST_ID when device model opts
-    in
+ xen/drivers/passthrough/x86/hvm=2Ec | 255 ++++++++++++++++--------------
+ 1 file changed, 140 insertions(+), 115 deletions(-)
 
- tools/include/xendevicemodel=2Eh          |  34 +-
- tools/libs/ctrl/xc_devicemodel_compat=2Ec |   2 +-
- tools/libs/ctrl/xc_domain=2Ec             |  52 ++--
- tools/libs/devicemodel/core=2Ec           |  41 ++-
- xen/arch/arm/ioreq=2Ec                    |   5 +
- xen/arch/x86/cpuid=2Ec                    |  13 +
- xen/arch/x86/domain=2Ec                   |  10 +
- xen/arch/x86/domctl=2Ec                   |  10 +-
- xen/arch/x86/hvm/dm=2Ec                   |  68 ++++
- xen/arch/x86/hvm/ioreq=2Ec                |  37 +++
- xen/arch/x86/hvm/irq=2Ec                  |   9 +-
- xen/arch/x86/hvm/vioapic=2Ec              |  50 ++-
- xen/arch/x86/hvm/vmsi=2Ec                 |  54 +---
- xen/arch/x86/include/asm/hvm/domain=2Eh   |   9 +
- xen/arch/x86/include/asm/hvm/hvm=2Eh      |   4 +-
- xen/arch/x86/include/asm/hvm/irq=2Eh      |   4 +-
- xen/arch/x86/include/asm/hvm/vioapic=2Eh  |  12 +
- xen/arch/x86/include/asm/msi=2Eh          |  18 +-
- xen/common/ioreq=2Ec                      |  13 +-
- xen/drivers/passthrough/x86/hvm=2Ec       | 396 ++++++++++++++----------
- xen/include/public/arch-x86/hvm/save=2Eh  |  21 +-
- xen/include/public/hvm/dm_op=2Eh          |  53 +++-
- xen/include/xen/iommu=2Eh                 |   3 +
- xen/include/xen/ioreq=2Eh                 |  27 ++
- xen/include/xlat=2Elst                    |   2 +
- 25 files changed, 703 insertions(+), 244 deletions(-)
-
+diff --git a/xen/drivers/passthrough/x86/hvm=2Ec b/xen/drivers/passthrough=
+/x86/hvm=2Ec
+index 19463c3406=2E=2Eeff1e8a79e 100644
+--- a/xen/drivers/passthrough/x86/hvm=2Ec
++++ b/xen/drivers/passthrough/x86/hvm=2Ec
+@@ -290,161 +290,186 @@ static int pt_irq_dpci_setup(struct domain *d, uns=
+igned int pirq,
+     } while ( true );
+ }
+=20
+-int pt_irq_create_bind(
+-    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
++static int pt_irq_bind_msi(struct domain *d, uint32_t machine_irq,
++                            uint8_t gvec, uint32_t gflags, uint64_t gtabl=
+e,
++                            bool unmasked)
+ {
+     struct hvm_irq_dpci *hvm_irq_dpci;
+     struct hvm_pirq_dpci *pirq_dpci;
+     struct pirq *info;
+-    int rc, pirq =3D pt_irq_bind->machine_irq;
++    uint8_t dest, delivery_mode;
++    bool dest_mode;
++    int dest_vcpu_id, rc;
++    const struct vcpu *vcpu;
+=20
+-    if ( pirq < 0 || pirq >=3D d->nr_pirqs )
++    if ( machine_irq >=3D (unsigned int)d->nr_pirqs )
+         return -EINVAL;
+=20
+-    rc =3D pt_irq_dpci_setup(d, pirq, &hvm_irq_dpci, &pirq_dpci, &info);
++    rc =3D pt_irq_dpci_setup(d, machine_irq, &hvm_irq_dpci, &pirq_dpci, &=
+info);
+     if ( rc )
+         return rc;
+=20
+-    switch ( pt_irq_bind->irq_type )
++    if ( !(pirq_dpci->flags & HVM_IRQ_DPCI_MAPPED) )
+     {
+-    case PT_IRQ_TYPE_MSI:
+-    {
+-        uint8_t dest, delivery_mode;
+-        bool dest_mode;
+-        int dest_vcpu_id;
+-        const struct vcpu *vcpu;
+-        uint32_t gflags =3D pt_irq_bind->u=2Emsi=2Egflags &
+-                          ~XEN_DOMCTL_VMSI_X86_UNMASKED;
+-
+-        if ( !(pirq_dpci->flags & HVM_IRQ_DPCI_MAPPED) )
++        pirq_dpci->flags =3D HVM_IRQ_DPCI_MAPPED | HVM_IRQ_DPCI_MACH_MSI =
+|
++                           HVM_IRQ_DPCI_GUEST_MSI;
++        pirq_dpci->gmsi=2Egvec =3D gvec;
++        pirq_dpci->gmsi=2Egflags =3D gflags;
++        /*
++         * 'pt_irq_bind_msi' can be called after 'pt_irq_destroy_bind'=2E
++         * The 'pirq_cleanup_check' which would free the structure is onl=
+y
++         * called if the event channel for the PIRQ is active=2E However
++         * OS-es that use event channels usually bind PIRQs to eventds
++         * and unbind them before calling 'pt_irq_destroy_bind' - with th=
+e
++         * result that we re-use the 'dpci' structure=2E This can be
++         * reproduced with unloading and loading the driver for a device=
+=2E
++         *
++         * As such on every 'pt_irq_bind_msi' call we MUST set it=2E
++         */
++        pirq_dpci->dom =3D d;
++        /* bind after hvm_irq_dpci is setup to avoid race with irq handle=
+r */
++        rc =3D pirq_guest_bind(d->vcpu[0], info, 0);
++        if ( rc =3D=3D 0 && gtable )
+         {
+-            pirq_dpci->flags =3D HVM_IRQ_DPCI_MAPPED | HVM_IRQ_DPCI_MACH_=
+MSI |
+-                               HVM_IRQ_DPCI_GUEST_MSI;
+-            pirq_dpci->gmsi=2Egvec =3D pt_irq_bind->u=2Emsi=2Egvec;
+-            pirq_dpci->gmsi=2Egflags =3D gflags;
+-            /*
+-             * 'pt_irq_create_bind' can be called after 'pt_irq_destroy_b=
+ind'=2E
+-             * The 'pirq_cleanup_check' which would free the structure is=
+ only
+-             * called if the event channel for the PIRQ is active=2E Howe=
+ver
+-             * OS-es that use event channels usually bind PIRQs to eventd=
+s
+-             * and unbind them before calling 'pt_irq_destroy_bind' - wit=
+h the
+-             * result that we re-use the 'dpci' structure=2E This can be
+-             * reproduced with unloading and loading the driver for a dev=
+ice=2E
+-             *
+-             * As such on every 'pt_irq_create_bind' call we MUST set it=
+=2E
+-             */
+-            pirq_dpci->dom =3D d;
+-            /* bind after hvm_irq_dpci is setup to avoid race with irq ha=
+ndler*/
+-            rc =3D pirq_guest_bind(d->vcpu[0], info, 0);
+-            if ( rc =3D=3D 0 && pt_irq_bind->u=2Emsi=2Egtable )
+-            {
+-                rc =3D msixtbl_pt_register(d, info, pt_irq_bind->u=2Emsi=
+=2Egtable);
+-                if ( unlikely(rc) )
+-                {
+-                    pirq_guest_unbind(d, info);
+-                    /*
+-                     * Between 'pirq_guest_bind' and before 'pirq_guest_u=
+nbind'
+-                     * an interrupt can be scheduled=2E No more of them a=
+re going
+-                     * to be scheduled but we must deal with the one that=
+ may be
+-                     * in the queue=2E
+-                     */
+-                    pt_pirq_softirq_reset(pirq_dpci);
+-                }
+-            }
++            rc =3D msixtbl_pt_register(d, info, gtable);
+             if ( unlikely(rc) )
+             {
+-                pirq_dpci->gmsi=2Egflags =3D 0;
+-                pirq_dpci->gmsi=2Egvec =3D 0;
+-                pirq_dpci->dom =3D NULL;
+-                pirq_dpci->flags =3D 0;
+-                if ( !info->evtchn )
+-                    pirq_cleanup_check(info, d);
+-                write_unlock(&d->event_lock);
+-                return rc;
++                pirq_guest_unbind(d, info);
++                /*
++                 * Between 'pirq_guest_bind' and before 'pirq_guest_unbin=
+d'
++                 * an interrupt can be scheduled=2E No more of them are g=
+oing
++                 * to be scheduled but we must deal with the one that may=
+ be
++                 * in the queue=2E
++                 */
++                pt_pirq_softirq_reset(pirq_dpci);
+             }
+         }
+-        else
++        if ( unlikely(rc) )
+         {
+-            uint32_t mask =3D HVM_IRQ_DPCI_MACH_MSI | HVM_IRQ_DPCI_GUEST_=
+MSI;
+-
+-            if ( (pirq_dpci->flags & mask) !=3D mask )
+-            {
+-                write_unlock(&d->event_lock);
+-                return -EBUSY;
+-            }
+-
+-            /* If pirq is already mapped as vmsi, update guest data/addr=
+=2E */
+-            if ( pirq_dpci->gmsi=2Egvec !=3D pt_irq_bind->u=2Emsi=2Egvec =
+||
+-                 pirq_dpci->gmsi=2Egflags !=3D gflags )
+-            {
+-                /* Directly clear pending EOIs before enabling new MSI in=
+fo=2E */
+-                pirq_guest_eoi(info);
+-
+-                pirq_dpci->gmsi=2Egvec =3D pt_irq_bind->u=2Emsi=2Egvec;
+-                pirq_dpci->gmsi=2Egflags =3D gflags;
+-            }
++            pirq_dpci->gmsi=2Egflags =3D 0;
++            pirq_dpci->gmsi=2Egvec =3D 0;
++            pirq_dpci->dom =3D NULL;
++            pirq_dpci->flags =3D 0;
++            if ( !info->evtchn )
++                pirq_cleanup_check(info, d);
++            write_unlock(&d->event_lock);
++            return rc;
+         }
+-        /* Calculate dest_vcpu_id for MSI-type pirq migration=2E */
+-        dest =3D MASK_EXTR(pirq_dpci->gmsi=2Egflags,
+-                         XEN_DOMCTL_VMSI_X86_DEST_ID_MASK);
+-        dest_mode =3D pirq_dpci->gmsi=2Egflags & XEN_DOMCTL_VMSI_X86_DM_M=
+ASK;
+-        delivery_mode =3D MASK_EXTR(pirq_dpci->gmsi=2Egflags,
+-                                  XEN_DOMCTL_VMSI_X86_DELIV_MASK);
+-
+-        dest_vcpu_id =3D hvm_girq_dest_2_vcpu_id(d, dest, dest_mode);
+-        pirq_dpci->gmsi=2Edest_vcpu_id =3D dest_vcpu_id;
+-        write_unlock(&d->event_lock);
++    }
++    else
++    {
++        uint32_t mask =3D HVM_IRQ_DPCI_MACH_MSI | HVM_IRQ_DPCI_GUEST_MSI;
+=20
+-        pirq_dpci->gmsi=2Eposted =3D false;
+-        vcpu =3D (dest_vcpu_id >=3D 0) ? d->vcpu[dest_vcpu_id] : NULL;
+-        if ( iommu_intpost )
++        if ( (pirq_dpci->flags & mask) !=3D mask )
+         {
+-            if ( delivery_mode =3D=3D dest_LowestPrio )
+-                vcpu =3D vector_hashing_dest(d, dest, dest_mode,
+-                                           pirq_dpci->gmsi=2Egvec);
+-            if ( vcpu )
+-                pirq_dpci->gmsi=2Eposted =3D true;
++            write_unlock(&d->event_lock);
++            return -EBUSY;
+         }
+-        if ( vcpu && is_iommu_enabled(d) )
+-            hvm_migrate_pirq(pirq_dpci, vcpu);
+=20
+-        /* Use interrupt posting if it is supported=2E */
+-        if ( iommu_intpost )
++        /* If pirq is already mapped as vmsi, update guest data/addr=2E *=
+/
++        if ( pirq_dpci->gmsi=2Egvec !=3D gvec || pirq_dpci->gmsi=2Egflags=
+ !=3D gflags )
+         {
+-            rc =3D hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi=2Egvec)=
+;
++            /* Directly clear pending EOIs before enabling new MSI info=
+=2E */
++            pirq_guest_eoi(info);
+=20
+-            if ( rc )
+-            {
+-                pt_irq_destroy_bind(d, pt_irq_bind);
+-                return rc;
+-            }
++            pirq_dpci->gmsi=2Egvec =3D gvec;
++            pirq_dpci->gmsi=2Egflags =3D gflags;
+         }
++    }
++    /* Calculate dest_vcpu_id for MSI-type pirq migration=2E */
++    dest =3D MASK_EXTR(pirq_dpci->gmsi=2Egflags, XEN_DOMCTL_VMSI_X86_DEST=
+_ID_MASK);
++    dest_mode =3D pirq_dpci->gmsi=2Egflags & XEN_DOMCTL_VMSI_X86_DM_MASK;
++    delivery_mode =3D MASK_EXTR(pirq_dpci->gmsi=2Egflags,
++                               XEN_DOMCTL_VMSI_X86_DELIV_MASK);
++
++    dest_vcpu_id =3D hvm_girq_dest_2_vcpu_id(d, dest, dest_mode);
++    pirq_dpci->gmsi=2Edest_vcpu_id =3D dest_vcpu_id;
++    write_unlock(&d->event_lock);
+=20
+-        if ( pt_irq_bind->u=2Emsi=2Egflags & XEN_DOMCTL_VMSI_X86_UNMASKED=
+ )
++    pirq_dpci->gmsi=2Eposted =3D false;
++    vcpu =3D (dest_vcpu_id >=3D 0) ? d->vcpu[dest_vcpu_id] : NULL;
++    if ( iommu_intpost )
++    {
++        if ( delivery_mode =3D=3D dest_LowestPrio )
++            vcpu =3D vector_hashing_dest(d, dest, dest_mode,
++                                       pirq_dpci->gmsi=2Egvec);
++        if ( vcpu )
++            pirq_dpci->gmsi=2Eposted =3D true;
++    }
++    if ( vcpu && is_iommu_enabled(d) )
++        hvm_migrate_pirq(pirq_dpci, vcpu);
++
++    /* Use interrupt posting if it is supported=2E */
++    if ( iommu_intpost )
++    {
++        struct xen_domctl_bind_pt_irq bind =3D {
++            =2Emachine_irq =3D machine_irq,
++            =2Eirq_type =3D PT_IRQ_TYPE_MSI,
++        };
++
++        rc =3D hvm_pi_update_irte(vcpu, info, pirq_dpci->gmsi=2Egvec);
++        if ( rc )
+         {
+-            unsigned long flags;
+-            struct irq_desc *desc =3D pirq_spin_lock_irq_desc(info, &flag=
+s);
++            pt_irq_destroy_bind(d, &bind);
++            return rc;
++        }
++    }
+=20
+-            if ( !desc )
+-            {
+-                pt_irq_destroy_bind(d, pt_irq_bind);
+-                return -EINVAL;
+-            }
++    if ( unmasked )
++    {
++        struct xen_domctl_bind_pt_irq bind =3D {
++            =2Emachine_irq =3D machine_irq,
++            =2Eirq_type =3D PT_IRQ_TYPE_MSI,
++        };
++        unsigned long flags;
++        struct irq_desc *desc =3D pirq_spin_lock_irq_desc(info, &flags);
+=20
+-            guest_mask_msi_irq(desc, false);
+-            spin_unlock_irqrestore(&desc->lock, flags);
++        if ( !desc )
++        {
++            pt_irq_destroy_bind(d, &bind);
++            return -EINVAL;
+         }
+=20
+-        break;
++        guest_mask_msi_irq(desc, false);
++        spin_unlock_irqrestore(&desc->lock, flags);
+     }
+=20
++    return 0;
++}
++
++int pt_irq_create_bind(
++    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
++{
++    int rc, pirq =3D pt_irq_bind->machine_irq;
++
++    if ( pirq < 0 || pirq >=3D d->nr_pirqs )
++        return -EINVAL;
++
++    switch ( pt_irq_bind->irq_type )
++    {
++    case PT_IRQ_TYPE_MSI:
++        return pt_irq_bind_msi(d, pirq,
++                               pt_irq_bind->u=2Emsi=2Egvec,
++                               pt_irq_bind->u=2Emsi=2Egflags &
++                                   ~XEN_DOMCTL_VMSI_X86_UNMASKED,
++                               pt_irq_bind->u=2Emsi=2Egtable,
++                               !!(pt_irq_bind->u=2Emsi=2Egflags &
++                                  XEN_DOMCTL_VMSI_X86_UNMASKED));
++
+     case PT_IRQ_TYPE_PCI:
+     case PT_IRQ_TYPE_MSI_TRANSLATE:
+     {
++        struct hvm_irq_dpci *hvm_irq_dpci;
++        struct hvm_pirq_dpci *pirq_dpci;
++        struct pirq *info;
+         struct dev_intx_gsi_link *digl =3D NULL;
+         struct hvm_girq_dpci_mapping *girq =3D NULL;
+         unsigned int guest_gsi;
+=20
++        rc =3D pt_irq_dpci_setup(d, pirq, &hvm_irq_dpci, &pirq_dpci, &inf=
+o);
++        if ( rc )
++            return rc;
++
+         /*
+          * Mapping GSIs for the hardware domain is different than doing i=
+t for
+          * an unpriviledged guest, the hardware domain is only allowed to
 --=20
 2=2E53=2E0
 
@@ -197,5 +488,5 @@ XCP-ng & Xen Orch=
 estra - Vates solutions
 
 web: https://vates=2Etech
----=Part.2972.abfc823cf368011e.19dcf3879c2.a24ad5d5067271c8=---
+---=Part.2976.44099caa86af48ff.19dcf387f5c.f3342a2cfd05b8f2=---
 
