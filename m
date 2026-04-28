@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E08FF8877
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1296332.1572777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1773FF8868
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1296343.1572819 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjVd-00068u-94; Tue, 28 Apr 2026 14:33:57 +0000
+	id 1wHjVj-0007F0-5M; Tue, 28 Apr 2026 14:34:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1296332.1572777; Tue, 28 Apr 2026 14:33:57 +0000
+Received: by outflank-mailman (output) from mailman id 1296343.1572819; Tue, 28 Apr 2026 14:34:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjVd-00068g-52; Tue, 28 Apr 2026 14:33:57 +0000
-Received: by outflank-mailman (input) for mailman id 1296332;
- Tue, 28 Apr 2026 14:33:55 +0000
+	id 1wHjVi-0007DO-TT; Tue, 28 Apr 2026 14:34:02 +0000
+Received: by outflank-mailman (input) for mailman id 1296343;
+ Tue, 28 Apr 2026 14:34:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wHjVb-0005q2-KS
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:33:55 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wHjVi-00072P-1g
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:34:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHjVb-000RTW-06
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:33:55 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wHjVh-002KhF-E5
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:34:01 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69f0c548-2eae-0a2a0a5409dd-0a2a4501d626-32
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:54 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f0c542-bab6-0a2a0a5309dd-0a2a450bd8ea-26
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:34:01 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69f0c552-c1f2-0a2a45010019-d1558030e130-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:54 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-488a8ca4aadso159479825e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:33:54 -0700 (PDT)
+ id 69f0c559-212f-0a2a450b0019-d155802ae803-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:34:01 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-488ff90d6c7so98959005e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:34:01 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a774b6300sm19302145e9.16.2026.04.28.07.33.52
+ 5b1f17b1804b1-48a774b6300sm19302145e9.16.2026.04.28.07.33.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 07:33:53 -0700 (PDT)
+ Tue, 28 Apr 2026 07:34:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,208 +54,159 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777386834; x=1777991634; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1777386841; x=1777991641; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HJckSt8P9RqMXs+Zl/HaWVhTtv7+MRR8ow5oSeYh3yY=;
-        b=aJC1bUhZBM9AD45Wb3MiNlGtFtG7eDZCQM2oAj2ssWcEV7FEjGug8IPJsNKFKf73CZ
-         0rvc9jIDmDQMmruswVfd0sZ7ueWKE8bQVwK2y4lA0Y9faeRgVDGZAqZmyEySayLck4dX
-         oWp+wB+IMLGN3WCrJwXbyGWRK9vdbCgon3Hh2n76fk6FlJ+UH4GO5+6q5JXLUMGzFffl
-         XyFkwLm6N9nSI04U7oVBtzKuv4mvKt2205KD1Yzu0P2B44XT/J9D1gW9UWszsJzVWuKP
-         ncriXmvR/E9xN2kKrDE+My20XvM7uvThOqO3N31Og7RY0n6AybjeIcdKYzs6I1YmO7+i
-         UEjQ==
+        bh=2mD4jaSubu8Cvwa+Y6GVJ5L94GrQA3oWYu3F81YJEug=;
+        b=bFwhUnXX54hSZEmkNB9oWPxgLN60qyozC+A0p/p0hVU3a8xNZTPwzpXyGVmNyEIn5c
+         5srCegq0EDZcVIvJZRaFcf06oOHfqykGUr+OMob0c1KZgYvmCnptadoLZhlhQ6OT+T2E
+         v+mLpvue12sAbWn4C3JG3TkKqbYd4dhWv0hhvfeNtUbRBzm1S3FddXpM9c8/zFGlToIa
+         8FLQFlFCFmscUrK7POql8yIPI1bkeZN/8foRvo+xH4nRWzwE052uSqgOkFT2E2ATRNFU
+         I5ElotivXjLhbAcMuglSRW21I6wPHCei0vUiuHKStPibupVKLQdG45eBb+F/kxjVHJCO
+         nC+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777386834; x=1777991634;
+        d=1e100.net; s=20251104; t=1777386841; x=1777991641;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=HJckSt8P9RqMXs+Zl/HaWVhTtv7+MRR8ow5oSeYh3yY=;
-        b=RA67P6BElqwmNTG69n/r7QXsgAPYv0KtCf8IgnQr4yyvuA7C0KNuxI3aYvfBIDj2E6
-         4o5XIn5loUghxa9RLiMAYIYBTTLDO36Wubax6tfjeURJHiFAYRdrsiZEDMf7DUQiWrmG
-         1tRPaij6byl4BAT8P+zVJZwg5eOUKy0JurzWWb+moPtlWbKtBUwZ7BduY8zgYJK5shu9
-         cM59jUKny9IMD9ZflOxxP0UMui7NKT6VPlgtOOIDIlVo2FusS9e+QMcz3gm2HchFseaM
-         XgzuUUaTuB75qjHHaGa8EtPYXtbo1Pyj1B+o++NXDBYKQ3KFDaWIR9LYdlK8oYnBli/0
-         nUeA==
-X-Gm-Message-State: AOJu0YxDTPtSSovlmWF6ItfOMXEfhWXT/qjS7Nvd6TJqD59HocWmXUUm
-	i/bdN+hGjIlFnyemY+6P7fOlOFlsulmWQeqkDE5tH0S40foVyjx8z2WEeNYTdw==
-X-Gm-Gg: AeBDievu8oOpC2LX+h55udKrwlbZppy0Vhg5Z3gDOE8dwOttHsh+xIUiJeJh4275hRJ
-	ijA9dgULWk97bJzt6gUa3Ppwm+/nKtb3YtDzQnaYrk6kWGwQek4OVxdrIWLdyndHFft3UNu9vVr
-	pnNP1Pj3lgnI5Fku7f18sWrAZe/KYvlONqwwijNZss0Ad/x8ckgIwrgj/aJMc9sxYb7iX8yhbi2
-	DlE3Vd0SDbUtpbV4H06VOoa5U54aoiQR8eI8GnPOGqXQ+CV8tB6D7Ssm3orLj5vc0oEC1p/YMDh
-	GYNVBj9B/ZTLTZJkdOfHGsHVXHErWV3SjZZtiz1+2nYoYl+xiKg+rVeF80H5X+aBOfG8zCWe8Bk
-	RTOhA1alY+kmt0zwLsqglZckOjh7ocaXhGj4ZZlu0FS/v8/jUa9u9xl6NQdtuVdrnsE/7N6yqPZ
-	9KZwDN5XZC+8kIAHURd/1oRI3Q0mRUJAWmOwcoBzzUdO34POZBG2c8kab7BjMojkyAHJuKbGfWC
-	HHVNuvHdvnVWZM=
-X-Received: by 2002:a05:600c:3b15:b0:488:9439:881a with SMTP id 5b1f17b1804b1-48a77ae5448mr61360215e9.2.1777386833911;
-        Tue, 28 Apr 2026 07:33:53 -0700 (PDT)
+        bh=2mD4jaSubu8Cvwa+Y6GVJ5L94GrQA3oWYu3F81YJEug=;
+        b=ke0hZX/xm7ytodQ7z/fhekJRok4iqf7l1c9SNaRpUUjlIWl3JjagqqHeoV5MZV/tY3
+         2mUhntLXhEfZNKs8U2RMh3WS3n0/A6xtqYgcLoHnohKCEAEwuvO8bg7DGrvAlAIulbiI
+         CgBko/0ndEwu9pH1DFcXaYPezcVLP2KnUb2nf/7ScaIkUcCQV+qo+aLnpbb6limwZlHb
+         2yndErbfWqDK489x1zK/vw/KrPHHfZLKXOPPp2GgYccxGz3gt+XmiczDX3gvmM1lYCvX
+         7SPZvR6d+AW/+JV55+W7dQT3VfFNHfd5HQpmRAaR5Yh8TXcIyhWhC41s3kqiqzKom6Y1
+         rOTQ==
+X-Gm-Message-State: AOJu0Yy7SRhoK+C7cH5DUvK/7VIy+DTwzIv3SVOP7VFaKzayNyZjO6dj
+	LUTwTkEMQojhuTUuAbud9GjTB8DXzw8QI2oUWYqRL5gD/0Iuyh3kav3dGXjRQA==
+X-Gm-Gg: AeBDies8DaU1H2b9ivr6/pE/zZD+eVZ80nW59nGbcR7kXp2E8u5LtomRXin+9W4uiEs
+	F+V2ls7AAVhB5RSdfb0tJUruWHZCkvyfq3S5SX7OCY2uWT5BrLEjrYA/1veFXu2BX3QzuO+et47
+	eIN+B5FIbxLjiXMJw5fpcSguVNJapGUqWNVB9+ZiyVVw9e685KrR3etXkg864UFX2Drcy0kQvFl
+	wAkxrxzKoCCnu2+YWn1f/6zNpGjVDzF8PxiSwNq+ZR9LFzbJTGw9bWpFDjeHtNOzRtywE/77LyQ
+	2hL4L6PoGbwqmQVxMPFNRmY+beHGzy1YNWJ40z143Y+MRBRt8UjoYliBE0xFj0oWcOVFh4x8akE
+	+cNB7kepPTvhrQefgQ2R3qG+YOf8SOzxhAjQYYKufShDIRn4c7csokyf/8q9Cbd6Gd0uoi+RfqB
+	hc+bcoaEn7mHvpkN6Pv4y0AOonPd6546dRAZh+1eDwqSLuJgjp7xSYtRpOTVRDkcRynac9WJumW
+	f6T
+X-Received: by 2002:a05:600c:1393:b0:488:fd7e:1063 with SMTP id 5b1f17b1804b1-48a77b270efmr54164075e9.29.1777386840489;
+        Tue, 28 Apr 2026 07:34:00 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 04/11] xen: introduce domain-layout.h with common domain_use_host_layout()
-Date: Tue, 28 Apr 2026 16:33:33 +0200
-Message-ID: <2577e757d32f85fb8b3308863e6d7a53d70636dc.1777303844.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 09/11] xen/riscv: introduce p2m_gpa_bits
+Date: Tue, 28 Apr 2026 16:33:38 +0200
+Message-ID: <d073762576102c768a04e704d0d665d0f37fc312.1777303844.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1777303844.git.oleksii.kurochko@gmail.com>
 References: <cover.1777303844.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1777386834-BC410FF4-DCFBBF00/10/73395122804
+X-purgate-ID: tlsNG-42698a/1777386841-7F175F3B-89F095DD/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5464
+X-purgate-size: 3213
 
-domain_use_host_layout() is not architecture-specific and may be needed
-on x86 [1]. Replace the ARM-specific macro in asm/domain.h with a common
-static inline in a new dedicated header, xen/domain-layout.h.
+common/device-tree/domain-build.c uses p2m_gpa_bits to determine the
+upper bound of the GPA space when searching for unused regions, so it
+must be defined when CONFIG_DOMAIN_BUILD_HELPERS=y.
 
-xen/domain.h would be the natural home, but placing it there would
-require including xen/paging.h (for paging_mode_translate()) and
-xen/sched.h (for is_hardware_domain()), which would introduce circular
-dependencies. A separate header that callers opt into avoids this.
+The variable is initialised to PADDR_BITS and narrowed in p2m_init() to
+the GPA width of the selected G-stage mode, allowing an external entity
+(e.g. an IOMMU) to restrict it further if needed.
 
-Adjust the implementation to take paging_mode_translate() into account
-so it works correctly for all architectures, including x86. Some extra
-details about implementation [2] and [3].
+p2m_gpa_bits is a global rather than a per-domain value, which is
+acceptable for now because all domains are required to use the same
+G-stage MMU mode, as dom0less common code allocates it per all
+domains.
 
-[1] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602161038120.359097@ubuntu-linux-20-04-desktop/
-[2] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602271742400.3148344@ubuntu-linux-20-04-desktop/
-[3] https://lore.kernel.org/xen-devel/alpine.DEB.2.22.394.2602271750190.3148344@ubuntu-linux-20-04-desktop/
-
-Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v4:
- - Update the comment above domain_use_host_layout().
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v3:
- - Make argument of domain_use_host_layout() const.
- - Create a separate header to avoid circular heder dependecy and making
-   domain_use_host_layour() as static inline.
- - Rework domain_use_host_layout() to be protected by paging_mode_translate().
+ - Update initialization of p2m_gpa_bits and the comment above.
+ - Rework how p2m_gpa_bits is limited.
  - Update the commit message.
 ---
 Changes in v2:
- - Drop ifdef around defintion of domain_use_host_layout() as it
-   was suggested generic version. It could be returned back when
-   the real use case for it will appear.
- - Add Suggested-by: and update the commit message.
- - Make domain_use_host_layout() function instead of macros to
-   avoid ciclular header dependecies. Look at more details in
-   the commit message.
+ - New patch.
 ---
 ---
- xen/arch/arm/domain_build.c           |  1 +
- xen/arch/arm/include/asm/domain.h     | 14 --------------
- xen/arch/arm/vgic-v3.c                |  1 +
- xen/common/device-tree/domain-build.c |  1 +
- xen/include/xen/domain-layout.h       | 27 +++++++++++++++++++++++++++
- 5 files changed, 30 insertions(+), 14 deletions(-)
- create mode 100644 xen/include/xen/domain-layout.h
+ xen/arch/riscv/include/asm/p2m.h |  3 +++
+ xen/arch/riscv/p2m.c             | 15 +++++++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index ad665cd3c045..1efddc60ef0a 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -2,6 +2,7 @@
- #include <xen/init.h>
- #include <xen/bootinfo.h>
- #include <xen/compile.h>
-+#include <xen/domain-layout.h>
- #include <xen/dom0less-build.h>
- #include <xen/fdt-domain-build.h>
- #include <xen/fdt-kernel.h>
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-index b24f02d269be..46a5cdc0c800 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -18,20 +18,6 @@ struct hvm_domain
-     uint64_t              params[HVM_NR_PARAMS];
- };
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 638c60ddc2f7..0d1dace1a0d8 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -47,6 +47,9 @@
+ #define P2M_LEVEL_MASK(p2m, lvl) \
+     (P2M_TABLE_OFFSET(p2m, lvl) << P2M_GFN_LEVEL_SHIFT(lvl))
  
--/*
-- * Is the domain using the host memory layout?
-- *
-- * Direct-mapped domain will always have the RAM mapped with GFN == MFN.
-- * To avoid any trouble finding space, it is easier to force using the
-- * host memory layout.
-- *
-- * The hardware domain will use the host layout regardless of
-- * direct-mapped because some OS may rely on a specific address ranges
-- * for the devices.
-- */
--#define domain_use_host_layout(d) (is_domain_direct_mapped(d) || \
--                                   is_hardware_domain(d))
--
- struct vtimer {
-     struct vcpu *v;
-     int irq;
-diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
-index 77aab5c3c293..77517c303061 100644
---- a/xen/arch/arm/vgic-v3.c
-+++ b/xen/arch/arm/vgic-v3.c
-@@ -10,6 +10,7 @@
-  */
- 
- #include <xen/bitops.h>
-+#include <xen/domain-layout.h>
- #include <xen/init.h>
- #include <xen/irq.h>
- #include <xen/lib.h>
-diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
-index c51520ebadf9..6949203dacdc 100644
---- a/xen/common/device-tree/domain-build.c
-+++ b/xen/common/device-tree/domain-build.c
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
- #include <xen/bootinfo.h>
-+#include <xen/domain-layout.h>
- #include <xen/fdt-domain-build.h>
- #include <xen/init.h>
- #include <xen/lib.h>
-diff --git a/xen/include/xen/domain-layout.h b/xen/include/xen/domain-layout.h
-new file mode 100644
-index 000000000000..0532a27b44ce
---- /dev/null
-+++ b/xen/include/xen/domain-layout.h
-@@ -0,0 +1,27 @@
-+#ifndef __XEN_DOMAIN_LAYOUT_H__
-+#define __XEN_DOMAIN_LAYOUT_H__
++/* Holds the bit size of GPAs in p2m tables */
++extern unsigned int p2m_gpa_bits;
 +
-+#include <xen/domain.h>
-+#include <xen/paging.h>
-+#include <xen/sched.h>
+ #define paddr_bits PADDR_BITS
+ 
+ /* Get host p2m table */
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 13846bee6a4f..b7c36a75f175 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -11,6 +11,8 @@
+ #include <xen/sections.h>
+ #include <xen/xvmalloc.h>
+ 
++#include <public/domctl.h>
 +
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/flushtlb.h>
+@@ -66,6 +68,12 @@ static const struct gstage_mode_desc gstage_modes[] = {
+ 
+ const struct gstage_mode_desc * __ro_after_init max_gstage_mode = &gstage_modes[0];
+ 
 +/*
-+ * Is a domain using the host memory layout?
-+ *
-+ * domain_use_host_layout() is always False for PV domains (including Dom0).
-+ *
-+ * Direct-mapped domains (autotranslated domains with memory allocated
-+ * contiguously and mapped 1:1 so that GFN == MFN) must use the host
-+ * memory layout since GFN == MFN by definition.
-+ *
-+ * The hardware domain will use the host layout (regardless of
-+ * direct-mapped) because some OS may rely on specific address ranges
-+ * for the devices.
++ * Set to the maximum configured support for GPA bits, so the number of GPA
++ * bits can be restricted by an external entity (e.g. IOMMU).
 + */
-+static inline bool domain_use_host_layout(const struct domain *d)
-+{
-+    return paging_mode_translate(d) &&
-+           (is_domain_direct_mapped(d) || is_hardware_domain(d));
-+}
++unsigned int __ro_after_init p2m_gpa_bits = PADDR_BITS;
 +
-+#endif /* __XEN_DOMAIN_LAYOUT_H__ */
+ static void p2m_free_page(struct p2m_domain *p2m, struct page_info *pg);
+ 
+ static inline void p2m_free_metadata_page(struct p2m_domain *p2m,
+@@ -354,6 +362,7 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+      */
+     static const struct gstage_mode_desc __ro_after_init *m = &gstage_modes[0];
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    unsigned int gpa_bits;
+ 
+     /*
+      * "Trivial" initialisation is now complete.  Set the backpointer so the
+@@ -409,6 +418,12 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+ #   error "Add init of p2m->clean_dcache"
+ #endif
+ 
++    gpa_bits = P2M_GFN_LEVEL_SHIFT(p2m->mode->paging_levels + 1) +
++               P2M_ROOT_EXTRA_BITS;
++
++    if ( gpa_bits < p2m_gpa_bits )
++        p2m_gpa_bits = gpa_bits;
++
+     return 0;
+ }
+ 
 -- 
 2.53.0
 
