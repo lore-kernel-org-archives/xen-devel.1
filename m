@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C34FF885A
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:29:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1296317.1572732 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06292FF886F
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1296331.1572769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjRD-0003dr-Jw; Tue, 28 Apr 2026 14:29:23 +0000
+	id 1wHjVb-0005th-TE; Tue, 28 Apr 2026 14:33:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1296317.1572732; Tue, 28 Apr 2026 14:29:23 +0000
+Received: by outflank-mailman (output) from mailman id 1296331.1572769; Tue, 28 Apr 2026 14:33:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjRD-0003dk-HS; Tue, 28 Apr 2026 14:29:23 +0000
-Received: by outflank-mailman (input) for mailman id 1296317;
- Tue, 28 Apr 2026 14:29:21 +0000
+	id 1wHjVb-0005ta-PJ; Tue, 28 Apr 2026 14:33:55 +0000
+Received: by outflank-mailman (input) for mailman id 1296331;
+ Tue, 28 Apr 2026 14:33:54 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stefanha@gmail.com>) id 1wHjRB-0003dY-M8
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:29:21 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wHjVa-0005fQ-Ie
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:33:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHjRB-005ICZ-1u
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:29:21 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wHjVZ-008e9B-Ur
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:33:53 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <stefanha@gmail.com>)
- id 69f0c43e-bab6-0a2a0a5309dd-0a2a4506e3b8-18
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:29:20 +0200
-Received: from [209.85.208.52] (helo=mail-ed1-f52.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <stefanha@gmail.com>)
- id 69f0c440-7371-0a2a45060019-d155d034d5f7-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:29:20 +0200
-Received: by mail-ed1-f52.google.com with SMTP id
- 4fb4d7f45d1cf-65c0891f4e9so18916159a12.1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:29:20 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69f0c540-e002-0a2a0a5209dd-0a2a4503cd3a-28
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:53 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69f0c551-672d-0a2a45030019-d1558034d159-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:53 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4891cd41959so98298555e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:33:53 -0700 (PDT)
+Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a774b6300sm19302145e9.16.2026.04.28.07.33.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2026 07:33:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,123 +52,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1777386560; cv=none;
-        d=google.com; s=arc-20240605;
-        b=K1IJivccxKULjJ/w/GF3Mk8TDhYejSGnnXK/ETjr499P2aQMgFrC5Qdk0ApWx5u709
-         /QdvcvGGKzWkBk7fFy4CRgRY0haLqikfesnq2IBv87nmp3kEEOwW7yUBbgstzymNdE9j
-         Yyb1sUDo0fFy4ojs2/GMf/+PF9O17WgDbinFahl5Hz924gGn/Ev6c/XPydeJOkftXgTk
-         3+JXl+2MjOk5F8nDTb4EnpWGJfwaw/gkmnOrKUttlj6bghOzv/3BJ1DYSWZ0plWhN44E
-         Uq3kzP1MzkRl8NjUba+hrt9lYnGsUiHy8e9OF0wcbnz3dv+8b+WWDMLGErFTvuystHuX
-         jj4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=YcyG/1F3nXUVyq31n88lbs9OsX49y2JqeErrMkFMYi8=;
-        fh=QcczVRU8FeHZ0xZPa5W4qYL/gA8ra38ED8BZxPhC7DQ=;
-        b=NR/3L9ZTAg2xyIBXpctgyjl+2h/uDugrHy8pEYXNKySPNF1N+/a52DGWZ325suY8V9
-         j5GMsFXU+lOI2hAm5yrhSgX0YTqZIjb4wJFjQglL5cG3oPFKZVfG7M6swSkIYh+1DqsH
-         K7A6oSlF1IA36GApgUvM80LxD165m5RSkzCIYWfvULOuIWxAfCVxFKZ5iNI5rwYAG5a7
-         SpfFX6UGBtmS01MD/VBFV+wIdlVDt1CCxhJCgZC44eKw07EMv11rZtu4YU9TzSxBlgFi
-         68+v6wCF/7eL3RGX/JOYJR15T5aQXgPXWAmECX22k38tiQDSvZlfFEIzMASouUgVJH3B
-         A3Ng==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777386560; x=1777991360; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1777386833; x=1777991633; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YcyG/1F3nXUVyq31n88lbs9OsX49y2JqeErrMkFMYi8=;
-        b=N7S17MKyeBh8dosUyGpJsNL3F5Zsl18sgUtHaaU/SL4meqPygzSAU+47UofPgwtYae
-         Z6upFVtePW4JTAGoUL7eENCmnHT7fA95mcLhqqNOFhao9qH6pFFvk1V0/IEMwjpVrBQR
-         W4+5oYongxQwP2e3cTLDJLlWbCNf+JruzOcWbTGoAFvsYP4KY//aGGsrETo4ko8DPGT1
-         6AP9yy8FAoT8hSjUWUxHF4Isljb3C4kU28TrRiD9HHQbBfDVFFfyhdaJ29LdIb5VZuBI
-         /xjWP4NMJnzPxUd8N2tvKx6ZH3Q7pA31c/ES9vrcfXdw4x7WwaS/XnhV6bYbaumcGPqe
-         EwSQ==
+        bh=rklfHL8DGEAm9CydTFB48ZDQQ+epyIb/xn7d2p7FG4A=;
+        b=HRZoCAygyKY9vYHGPkCpG3e9x7i5aHzZZRHNiyzwCkfK2ESow60vmXFhv8w7Y3ENgO
+         MGz3Q+d9MA9X6gErJw1h+Lt9QTP/WyBVppTM1QCDc4I90DsqPZTCmYFW/l1OAHoA4KvC
+         Q8yrPvT7+x4zQE2JrOCO8koYWZEaqIhvq7hhlgE0b57+ogTj9f8kjvYuzf5CbgdHEU+2
+         fYP4RDrmLn0y2o8qDBeUmuPLx4qBrfXyf7dZj+IHoyo6AwfE0A6cYsorONgWG2dtDvvI
+         PWR+rL5ZUsN2SpLbCzoBqzIwjg5OGbnzx9E9FRg5TP9Ba2QXj/61txARgCn/lsGjbFh0
+         xCXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777386560; x=1777991360;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1777386833; x=1777991633;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=YcyG/1F3nXUVyq31n88lbs9OsX49y2JqeErrMkFMYi8=;
-        b=mru0qFq0M3QrH+AUTnO7hiQlyWYO1lTE+u17uHgpP5KhZ7bmHbRAgMHKriu5hxbmAb
-         aW5J6z2PaEE0c9W/RlW3zmLxscNKFlB6WwUuLSQKoLXlygMo0vQ9n1pMxsivfEMtOVgG
-         s+EVMDp+QuTEyqoyWxHOti8jl7SVnsyhzLkF2YjlaLvSyIGvGhAPXXYkJOHPDDdXPTWg
-         YcEcSNKLzKwP1Cm+9pMS6+XDsTOtoW4nBaj+CWV77c9ECccDz9QQS2C+nG9Is3ynJdm2
-         IL7RnpKZSEtGK1A2lk9FdUPP8JOYy1Z1Fd7vmw7haYNQ9p1kB3XekI1dUCIMtYIO5zk2
-         2ztw==
-X-Forwarded-Encrypted: i=1; AFNElJ8o6HFP5pBxSVdPQLP6kBzkj3cH9iga9gNjJ9JfOo/tr8tesmHDXOIZna+89CNniNP2x4bTbiuNBC0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yy22shlL2GXvdiAArEP4UIukET5wJMYA5rDDgWCPxKIovqomdCW
-	hzoY2cWY+q9gHnWuJlqgfmwNjWIt97F8BdtKvEFVKth8rOzIzCHOLZV5O0xuXzvQkzl3rxlKsTB
-	kQ/ecl3ww1V1l9vFHUoh0AjXdOOLqaoM=
-X-Gm-Gg: AeBDies4RUw/CZ2hMKaaL5nCcOtFx5mIIZuA5z9mwRN0MdYhyumj227fcQoFremXjdp
-	o1IKWCudI+z0w7zgtnNqqElQDiQ6WdW/iwI7NG+mK6H1v9D8ptRv74EA+b2hYM35XtTdiFLu1wa
-	v2M5rgU75iIUgxkQJPdm9bMjBxakKg9CNTI0S5Z30UUmzaAe11uq8rUvzI7OPfjieWH7evsfUhX
-	Rbc0kIXq73ImJyxsaCx/eBeAEzVTNbQFHK0P7fzSped2vT6SfEQzeUXVs4/qdnXwAU6O69smJbG
-	4gWgtzt3EMnJV00lmQbMF1pMuEV4Ei7CYkHdwk+X7uz24oyaYrjJQ4uMg6o=
-X-Received: by 2002:a17:907:c783:b0:ba7:a94d:af83 with SMTP id
- a640c23a62f3a-bb803873d27mr206683366b.31.1777386560049; Tue, 28 Apr 2026
- 07:29:20 -0700 (PDT)
+        bh=rklfHL8DGEAm9CydTFB48ZDQQ+epyIb/xn7d2p7FG4A=;
+        b=Gc2eqSVtJXltaDxKSBCewArmP4uBTB3h7pAN1/2Eb7nIOYEWvGFSwL1HmPAryNLQ6z
+         9HmK0leQGAzHSl6wFzFS8cgE3SGPFFAwSpN65ZRIZJLNC5UKmaiuQDYUgEgGrpig0jrG
+         TQaSU+8bkwfpkuCulWPb0JWNx/N8lQZxzF9frojsMz1JYfdFacAvNUGcne/PaKFO3/kf
+         pACIiyp+FfSLEFqBZH8I3FktLavl+BFFIIascQNMOaDxB6bRqnh/D0jAy7x0hVHvbn/W
+         /MHWrp847/Lte5vsiU7MQDplgCZ6MqF3FjiIC2FQ86vt66aNYmpIEPbCMJw+B6D24gRs
+         QWyA==
+X-Gm-Message-State: AOJu0YxCbxQei+KfFEKIm99Sj1SFhkQTqglA28kW7rgJwunSudiQNQ8p
+	fWSS6GT1hSTO4RBM9ChDguqWDj6wKfUfLX16iWP40AVPKA0E/gAGuZ9jWlXTfQ==
+X-Gm-Gg: AeBDiesKDb40bC5TFMXQ/g0Nf3qNSuSVrkXYiMsjz8aTM5P5XRMvuN4wCEF0mFXxBvd
+	5yhrH+fPxu/AZxwkcDagrYQmrd9BzEYdF0lyMDoR+mzz0z6C57uA/YUW93OhvGX6ndWrKkDzLI+
+	v4NXIOa4hD5L35YXxVrymIT7wgR9Cvsq3zorGiMrvP5GjhCU+BFTifSIDyscLkPoyoxpqlOUc3z
+	TAMboFjQftk+wZ8PnvdC0JmVy9HKiB6Bkuo4eaGmc0pcF965HbvmXsfL83lagdEgHUMuRg6ywG4
+	oziKXHYBxg/PAPk/Pg4fwLBPhGWylxzTS+DCcwT7vz5LpQRa71Sot4GcQfvNTD3gUupyZfkset1
+	XxnkQ1+p1jHgc9gfsq2PsdWR1NX+8Ongj5AhJ+OQRmdakX4Zyi/OTV5ihEFUFn6FBCOpJnS3vDp
+	IIJLbv1dDyLpTneb0m2jGELZwyvBo3bMd9tOGKS0JdK1LjoKV+QeIpi3dUvIQBJEnBst0on/p5p
+	m4J
+X-Received: by 2002:a05:600c:1e8b:b0:48a:f18:ece4 with SMTP id 5b1f17b1804b1-48a77b176b3mr49380825e9.24.1777386832704;
+        Tue, 28 Apr 2026 07:33:52 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v4 03/11] xen: move declaration of fw_unreserved_regions() to common header
+Date: Tue, 28 Apr 2026 16:33:32 +0200
+Message-ID: <2c26370460f0380bed128cbb59de4eacd77a8456.1777303844.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1777303844.git.oleksii.kurochko@gmail.com>
+References: <cover.1777303844.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-References: <20260428081303.990973-1-marcandre.lureau@redhat.com>
- <20260428081303.990973-9-marcandre.lureau@redhat.com> <CAJSP0QUjFupVz1uXuxgxbvTrmf_gqzV6tSg1tmuq_Lp7qGVyjw@mail.gmail.com>
-In-Reply-To: <CAJSP0QUjFupVz1uXuxgxbvTrmf_gqzV6tSg1tmuq_Lp7qGVyjw@mail.gmail.com>
-From: Stefan Hajnoczi <stefanha@gmail.com>
-Date: Tue, 28 Apr 2026 10:29:06 -0400
-X-Gm-Features: AVHnY4JxfR5X49sh3f0xQOBGO5skCikVufW4qo03US3ycxLQlGj8SojUzT_-PqQ
-Message-ID: <CAJSP0QUvg38ga-JeXVxRHxYFTyPjo7QZV2bOBAd7iosrqFJKYQ@mail.gmail.com>
-Subject: Re: [PULL 08/15] ui/console: return completion status from gfx_update callback
-To: marcandre.lureau@redhat.com
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, 
-	Jan Kiszka <jan.kiszka@web.de>, Phil Dennis-Jordan <phil@philjordan.eu>, 
-	Richard Henderson <richard.henderson@linaro.org>, Helge Deller <deller@gmx.de>, 
-	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
-	Gerd Hoffmann <kraxel@redhat.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
-	Samuel Tardieu <sam@rfc1149.net>, =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
-	Aleksandar Rikalo <arikalo@gmail.com>, Laurent Vivier <laurent@vivier.eu>, 
-	Thomas Huth <th.huth+qemu@posteo.eu>, BALATON Zoltan <balaton@eik.bme.hu>, 
-	=?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
-	Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>, 
-	Dmitry Osipenko <dmitry.osipenko@collabora.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
-	Dmitry Fleytman <dmitry.fleytman@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Anthony PERARD <anthony@xenproject.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
-	Alistair Francis <alistair@alistair23.me>, Alex Williamson <alex@shazbot.org>, 
-	=?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
-	"open list:Musicpal" <qemu-arm@nongnu.org>, "open list:sam460ex" <qemu-ppc@nongnu.org>, 
-	"open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1777386560-5377FD75-5B3FC1A3/0/0
-X-purgate-type: clean
-X-purgate-size: 962
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1777386833-A376E938-8B277FDF/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1457
 
-On Tue, Apr 28, 2026 at 10:28=E2=80=AFAM Stefan Hajnoczi <stefanha@gmail.co=
-m> wrote:
->
-> Hi Marc-Andr=C3=A9,
-> This patch changes the .gfx_update callback prototype and fails to
-> compile due to the following recently-merged commit:
->
-> commit 5ef60a3787e8e0dccf30dae3704d4f5249160e7d
-> Author: Yucai Liu <1486344514@qq.com>
-> Date:   Sun Apr 12 19:02:39 2026 +0800
->
->     hw/display: Add i.MX6UL LCDIF device model
+Since the implementation of fw_unreserved_regions() is in common code, move
+its declaration to xen/bootinfo.h.
 
-For reference, here is the CI build failure:
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in v2-v4:
+ - Nothing changed. Only rebase.
+---
+---
+ xen/arch/arm/include/asm/setup.h | 3 ---
+ xen/include/xen/bootinfo.h       | 4 ++++
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-../hw/display/imx6ul_lcdif.c:221:19: error: initialization of =E2=80=98_Boo=
-l
-(*)(void *)=E2=80=99 from incompatible pointer type =E2=80=98void (*)(void =
-*)=E2=80=99
-[-Wincompatible-pointer-types]
-221 | .gfx_update =3D imx6ul_lcdif_update_display,
-| ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-../hw/display/imx6ul_lcdif.c:221:19: note: (near initialization for
-=E2=80=98imx6ul_lcdif_graphic_ops.gfx_update=E2=80=99)
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 899e33925ca4..0d29b46ea52b 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -43,9 +43,6 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
+ void create_dom0(void);
+ 
+ void discard_initial_modules(void);
+-void fw_unreserved_regions(paddr_t s, paddr_t e,
+-                           void (*cb)(paddr_t ps, paddr_t pe),
+-                           unsigned int first);
+ 
+ void init_pdx(void);
+ void setup_mm(void);
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+index f834f1957155..dbf492c2e36e 100644
+--- a/xen/include/xen/bootinfo.h
++++ b/xen/include/xen/bootinfo.h
+@@ -210,4 +210,8 @@ static inline struct membanks *membanks_xzalloc(unsigned int nr,
+     return banks;
+ }
+ 
++void fw_unreserved_regions(paddr_t s, paddr_t e,
++                           void (*cb)(paddr_t ps, paddr_t pe),
++                           unsigned int first);
++
+ #endif /* XEN_BOOTINFO_H */
+-- 
+2.53.0
 
-https://gitlab.com/qemu-project/qemu/-/jobs/14124076225
-
-Stefan
 
