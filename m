@@ -4,39 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4987FF886F
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 17:32:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1296595.1572946 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB9F4FF886D
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 18:05:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1296645.1572976 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHmHq-0001fg-4f; Tue, 28 Apr 2026 17:31:54 +0000
+	id 1wHmoT-0006g7-1V; Tue, 28 Apr 2026 18:05:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1296595.1572946; Tue, 28 Apr 2026 17:31:54 +0000
+Received: by outflank-mailman (output) from mailman id 1296645.1572976; Tue, 28 Apr 2026 18:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHmHq-0001fZ-1F; Tue, 28 Apr 2026 17:31:54 +0000
-Received: by outflank-mailman (input) for mailman id 1296595;
- Tue, 28 Apr 2026 17:31:53 +0000
+	id 1wHmoS-0006es-RU; Tue, 28 Apr 2026 18:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 1296645;
+ Tue, 28 Apr 2026 18:05:36 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1wHmHp-0001fT-JO
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 17:31:53 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1wHmoR-0006bn-Qp; Tue, 28 Apr 2026 18:05:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHmHo-000wxr-Vd
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 19:31:52 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wHmoR-00GyDs-1x; Tue, 28 Apr 2026 20:05:35 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 69f0eeff-5cb7-0a2a0a5109dd-0a2a45048e42-2
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 19:31:52 +0200
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 69f0ef07-1dec-0a2a45040019-a06583098348-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 19:31:52 +0200
-Received: from debian.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 817CC81C9E98;
- Tue, 28 Apr 2026 13:30:51 -0400 (EDT)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 69f0f6e5-2eae-0a2a0a5409dd-0a2a4509b6e4-12
+ for <multiple-recipients>; Tue, 28 Apr 2026 20:05:34 +0200
+Received: from [104.130.215.37] (helo=mail.xenproject.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 69f0f6ec-2497-0a2a45090019-6882d725cb18-3
+ for <multiple-recipients>; Tue, 28 Apr 2026 20:05:34 +0200
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wHmoL-006BvQ-0v;
+ Tue, 28 Apr 2026 18:05:29 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.96)
+ (envelope-from <andrewcoop@xenbits.xen.org>) id 1wHmoL-007C43-0i;
+ Tue, 28 Apr 2026 18:05:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,146 +52,129 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] docs: Hypervisor-Guide: Move Hyperlaunch design docs as needed
-Date: Tue, 28 Apr 2026 18:31:11 +0100
-Message-Id: <3b943ee1ca93abdd70be30965146540975d91888.1777397318.git.bernhard.kaindl@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1777397512-2B7693FF-C1E6B427/0/0
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 489 v1 (CVE-2026-23559,CVE-2026-23560,CVE-2026-23561,CVE-2026-23562,CVE-2026-42486)
+ - Multiple RBAC issues in XAPI
+Message-Id: <E1wHmoL-007C43-0i@xenbits.xenproject.org>
+Date: Tue, 28 Apr 2026 18:05:29 +0000
+X-purgate-ID: tlsNG-bad1c0/1777399534-42573A53-1A14A799/0/0
 X-purgate-type: clean
-X-purgate-size: 3710
+X-purgate-size: 3984
 
-In the Sphinx documentation, the Hyperlaunch Design Documents were stated
-as needing rearranging:
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-They were put into the section that needs rearranging, so rearrange
-them as indicated inside the Hypervisor Guide which aims to describe
-the hypervisor for developers and people interested in the hypervisor.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-This also fixes the glitch where the "1 Hypervisor Design Document" was
-listed in the main menu sidebar and helps to clean up the main menu.
+ Xen Security Advisory CVE-2026-23559,CVE-2026-23560,CVE-2026-23561,CVE-2026-23562,CVE-2026-42486 / XSA-489
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
----
- docs/designs/index.rst              | 15 +++++++++++++++
- docs/designs/launch/hyperlaunch.rst |  4 ++--
- docs/designs/launch/index.rst       | 10 ++++++++++
- docs/hypervisor-guide/index.rst     | 12 ++++++++++--
- docs/index.rst                      |  2 --
- 5 files changed, 37 insertions(+), 6 deletions(-)
- create mode 100644 docs/designs/index.rst
- create mode 100644 docs/designs/launch/index.rst
+                     Multiple RBAC issues in XAPI
 
-diff --git a/docs/designs/index.rst b/docs/designs/index.rst
-new file mode 100644
-index 000000000000..ded12082c622
---- /dev/null
-+++ b/docs/designs/index.rst
-@@ -0,0 +1,15 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Design documents
-+================
-+
-+Design documents and implementation details for the Xen hypervisor.
-+
-+These are intended for developers working on the Xen hypervisor,
-+and for those interested in the internal workings of Xen.
-+
-+.. toctree::
-+   :maxdepth: 2
-+   :numbered: 4
-+
-+   launch/index
-diff --git a/docs/designs/launch/hyperlaunch.rst b/docs/designs/launch/hyperlaunch.rst
-index 3bed36f97637..aa7c2798a380 100644
---- a/docs/designs/launch/hyperlaunch.rst
-+++ b/docs/designs/launch/hyperlaunch.rst
-@@ -2,8 +2,6 @@
- Hyperlaunch Design Document
- ###########################
- 
--.. sectnum:: :depth: 4
--
- This post is a Request for Comment on the included v4 of a design document that
- describes Hyperlaunch: a new method of launching the Xen hypervisor, relating
- to dom0less and work from the Hyperlaunch project. We invite discussion of this
-@@ -13,6 +11,8 @@ Xen Development mailing list.
- 
- 
- .. contents:: :depth: 3
-+   :backlinks: entry
-+   :local:
- 
- 
- Introduction
-diff --git a/docs/designs/launch/index.rst b/docs/designs/launch/index.rst
-new file mode 100644
-index 000000000000..afd845296d30
---- /dev/null
-+++ b/docs/designs/launch/index.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hyperlaunch
-+===========
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   hyperlaunch
-+   hyperlaunch-devicetree
-diff --git a/docs/hypervisor-guide/index.rst b/docs/hypervisor-guide/index.rst
-index 520fe01554ab..9c8033305549 100644
---- a/docs/hypervisor-guide/index.rst
-+++ b/docs/hypervisor-guide/index.rst
-@@ -1,11 +1,19 @@
- .. SPDX-License-Identifier: CC-BY-4.0
- 
--Hypervisor documentation
--========================
-+Hypervisor Guide
-+================
-+
-+The Hypervisor Guide provides an overview of the Xen hypervisor's
-+architecture and design, covering its core components, features,
-+and how it manages resources for :term:`guest` domains.
-+
-+It serves as a comprehensive reference for developers and users interested
-+in understanding the inner workings of the Xen hypervisor.
- 
- .. toctree::
-    :maxdepth: 2
- 
-+   ../designs/index
-    code-coverage
- 
-    x86/index
-diff --git a/docs/index.rst b/docs/index.rst
-index bd87d736b9c3..6b04a077cebd 100644
---- a/docs/index.rst
-+++ b/docs/index.rst
-@@ -62,8 +62,6 @@ Documents in need of some rearranging.
- .. toctree::
-    :maxdepth: 2
- 
--   designs/launch/hyperlaunch
--   designs/launch/hyperlaunch-devicetree
-    misc/xen-makefiles/makefiles
-    misra/index
-    fusa/index
--- 
-2.39.5
+ISSUE DESCRIPTION
+=================
 
+XAPI can configure different users with different roles, using Role
+Based Access Control.  For more details, see:
+
+  https://docs.xenserver.com/en-us/xencenter/current-release/rbac-overview.html#rbac-roles
+
+The pool-admin role is fully privileged.  Notably, users with this role
+can also SSH into the host as root.
+
+The other administrator roles are pool-operator, vm-power-admin and
+vm-admin, each of which are authorised to configure and manage various
+aspects of the system.
+
+Some settings are inadequately restricted, and can be set by a lower
+privilege of administrator than expected.
+
+ * CVE-2026-23559: A vm-admin can set VBD.other_config:backend-local and
+   turn arbitrary files in dom0 into VDIs (virtual disks) and give said
+   disks to a VM they control.  This is an arbitrary read and/or modify
+   of files in dom0.
+
+ * CVE-2026-23560: A vm-admin can set VM.other-config:is_system_domain
+   and mark a VM as a system domain.  System domains are ignored and
+   left running during certain other host/pool operations, and may be
+   hidden from view in tooling.
+
+ * CVE-2026-23561: A vm-admin can set VM.other_config:storage_driver_domain
+   and mark a VM as the storage domain for a particular host storage
+   connection (PBD). Shutting down the VM can cause the PBD to be
+   erroneously marked as unplugged when it is not.
+
+ * CVE-2026-23562: Configuration of PCI passthrough is normally
+   restricted to the pool-admin role.  However one API was missing this
+   check, allowing a vm-admin access to unintended host hardware.
+
+ * CVE-2026-42486: A vm-admin can set the VM.platform:hvm_serial
+   parameter, which should be restricted to the pool-admin role, as it
+   can allow arbitrary dom0 file write.
+
+IMPACT
+======
+
+An authenticated user already granted one of pool-operator,
+vm-power-admin or vm-admin can escalate their privilege to pool-admin.
+
+VULNERABLE SYSTEMS
+==================
+
+Systems running all versions of XAPI are vulnerable.
+
+The vulnerability is only exposed if RBAC is configured for the pool,
+and certain users are assigned the not-fully-privileged administrator
+roles.
+
+MITIGATION
+==========
+
+Disable any users (RBAC subjects) which have been configured with the
+vm-admin, vm-power-admin or pool-operator role.
+
+RESOLUTION
+==========
+
+Fixes can be found in the following pull requests:
+
+  https://github.com/xapi-project/xen-api/pull/7031
+  https://github.com/xapi-project/xen-api/pull/7032
+  https://github.com/xapi-project/xen-api/pull/7033
+  https://github.com/xapi-project/xen-api/pull/7039
+
+NOTE REGARDING LACK OF EMBARGO
+==============================
+
+These issues were disclosed in public.
+
+The researcher claimed 89 vulnerabilities.  Analysis by the XAPI team
+concluded that only 5 were real vulnerabilities, with most being a
+failure to read the RBAC documentation, and several appearing to be AI
+hallucinations.
+
+The researcher also took active steps to prevent coordinated disclosure.
+Due to acting in bad faith, they are explicitly not credited.
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmnw9tkMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZgLUIAMgzABaje/RPPO7lwrp1ERZQhtqy/SPG2dYxE75a
+M6bytAbpj4Y9lgh8IB4QLXDSEfSgjWKxzSGcUi3DpvJI3uiQmSqvAE5XnfRfVHT/
+h1eo0vQ3v8yz5++iiOl2Cq9Qvg9cvMFEXYz8X21+u63KlpOnXjUZ7VpYeRdrbCYs
+n6Id6QU4D/y+3EZne5Xs0JY6Dn8J8SM3ejNjP6OmMFJMoKgSf1nXarQhNcmgvR0G
+a+PRjUWgHAHqfdzjJsyBZLyNwPAQgUM2aDfPqGh8vr9YlE6sWwlxYEeSIGsWzAHu
+oE5iWmYq5O4FUTgf+1ye8PUNbGyzDsJCeGfWeAXvGobQ6aQ=
+=OEJh
+-----END PGP SIGNATURE-----
+
+--=separator--
 
