@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF7CFF885D
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 11:23:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1295605.1572257 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EF3FF8868
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 11:34:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1295616.1572267 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHgWz-0006DF-Vp; Tue, 28 Apr 2026 11:23:09 +0000
+	id 1wHgi6-00084e-VO; Tue, 28 Apr 2026 11:34:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1295605.1572257; Tue, 28 Apr 2026 11:23:09 +0000
+Received: by outflank-mailman (output) from mailman id 1295616.1572267; Tue, 28 Apr 2026 11:34:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHgWz-0006D8-TA; Tue, 28 Apr 2026 11:23:09 +0000
-Received: by outflank-mailman (input) for mailman id 1295605;
- Tue, 28 Apr 2026 11:21:23 +0000
+	id 1wHgi6-00084X-Sh; Tue, 28 Apr 2026 11:34:38 +0000
+Received: by outflank-mailman (input) for mailman id 1295616;
+ Tue, 28 Apr 2026 11:34:38 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <segher@kernel.crashing.org>) id 1wHgVH-00066P-1b
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 11:21:23 +0000
+ (envelope-from <segher@kernel.crashing.org>) id 1wHgi6-00084R-2T
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 11:34:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHgVG-00FmF0-DT
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 13:21:22 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wHgi5-001Sf9-EX
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 13:34:37 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <segher@kernel.crashing.org>)
- id 69f09831-5cb7-0a2a0a5109dd-0a2a4507c0de-0
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 13:21:21 +0200
+ id 69f09b49-bab6-0a2a0a5309dd-0a2a4502d562-10
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 13:34:37 +0200
 Received: from [63.228.1.57] (helo=gate.crashing.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
  (envelope-from <segher@kernel.crashing.org>)
- id 69f09830-229c-0a2a45070019-3fe40139b344-1
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 13:21:20 +0200
+ id 69f09b4c-af86-0a2a45020019-3fe401398880-1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 13:34:37 +0200
 Received: from gate.crashing.org (localhost [127.0.0.1])
- by gate.crashing.org (8.18.1/8.18.1/Debian-2) with ESMTP id 63SBKIxF1057213;
- Tue, 28 Apr 2026 06:20:18 -0500
+ by gate.crashing.org (8.18.1/8.18.1/Debian-2) with ESMTP id 63SBY0U31059939;
+ Tue, 28 Apr 2026 06:34:00 -0500
 Received: (from segher@localhost)
- by gate.crashing.org (8.18.1/8.18.1/Submit) id 63SBKHXo1057211;
- Tue, 28 Apr 2026 06:20:17 -0500
+ by gate.crashing.org (8.18.1/8.18.1/Submit) id 63SBY0B51059937;
+ Tue, 28 Apr 2026 06:34:00 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,12 +53,13 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 X-Authentication-Warning: gate.crashing.org: segher set sender to segher@kernel.crashing.org using -f
-Date: Tue, 28 Apr 2026 06:20:17 -0500
+Date: Tue, 28 Apr 2026 06:34:00 -0500
 From: Segher Boessenkool <segher@kernel.crashing.org>
-To: Yury Norov <ynorov@nvidia.com>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Yury Norov <ynorov@nvidia.com>,
         "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
         Andrew Morton <akpm@linux-foundation.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
         David Laight <david.laight.linux@gmail.com>,
         Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
         Yury Norov <yury.norov@gmail.com>, linux-kernel@vger.kernel.org,
@@ -83,58 +84,40 @@ Cc: Linus Torvalds <torvalds@linux-foundation.org>,
         loongarch@lists.linux.dev, linux-m68k@vger.kernel.org,
         linux-openrisc@vger.kernel.org, linux-parisc@vger.kernel.org,
         linux-sh@vger.kernel.org, linux-arch@vger.kernel.org
-Subject: Re: [RFC PATCH v1 7/9] x86: Add unsafe_copy_from_user()
-Message-ID: <afCX8WlnEFUei1y6@gate>
+Subject: Re: [RFC PATCH v1 2/9] uaccess: Convert INLINE_COPY_{TO/FROM}_USER
+ to kconfig and reduce ifdefery
+Message-ID: <afCbKJg_Cq7yNO9j@gate>
 References: <cover.1777306795.git.chleroy@kernel.org>
- <0ee46bb228d97163fbdc14f2a7c52b93d8bc34ce.1777306795.git.chleroy@kernel.org>
- <ae-j2_QirCySZD02@yury>
- <63a4d0f6-0eb3-48cd-9f98-bf7b223b2606@kernel.org>
- <ae-2yLWSGnfeTvh1@yury>
- <CAHk-=wgPrLy0FR3sEWBYQuNAac1axDASYMnTuPuxEU0WytzL7w@mail.gmail.com>
- <ae_jeJLlVWjJ4sOY@yury>
+ <9fe875d2f55af59c12708336c571a46038528678.1777306795.git.chleroy@kernel.org>
+ <ae-tVFVfx72oCC_i@yury>
+ <f54c3c2b-33da-42a0-80b7-0f6615d930ce@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <ae_jeJLlVWjJ4sOY@yury>
-X-purgate-ID: tlsNG-ef75cf/1777375281-AF57BC48-53D8024A/0/0
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <f54c3c2b-33da-42a0-80b7-0f6615d930ce@citrix.com>
+X-purgate-ID: tlsNG-720697/1777376077-8A0C7161-EBEE8F5C/0/0
 X-purgate-type: clean
-X-purgate-size: 1592
+X-purgate-size: 942
 
-Hi!
-
-On Mon, Apr 27, 2026 at 06:30:16PM -0400, Yury Norov wrote:
-> On Mon, Apr 27, 2026 at 02:52:05PM -0700, Linus Torvalds wrote:
-> > On Mon, 27 Apr 2026 at 12:19, Yury Norov <ynorov@nvidia.com> wrote:
-> > >
-> > > This is what Linus said when added x86 implementation for copy_from_user()
-> > > in c512c69187197:
-> > 
-> > Note that some things have happily changed in the six+ years since...
-> > 
-> > >   That's partly because we have no current users of it, but also partly
-> > >   because the copy_from_user() case is slightly different and cannot
-> > >   efficiently be implemented in terms of a unsafe_get_user() loop (because
-> > >   gcc can't do asm goto with outputs).
-> > 
-> > now everybody can do asm goto with outputs.
-> > 
-> > Yes, it's disabled on older versions, so it's not *always* available,
-> > but all modern versions do it. And if you care about performance, you
-> > won't be using an old compiler.
+On Mon, Apr 27, 2026 at 09:39:33PM +0100, Andrew Cooper wrote:
+> On 27/04/2026 7:39 pm, Yury Norov wrote:
+> > On Mon, Apr 27, 2026 at 07:13:43PM +0200, Christophe Leroy (CS GROUP) wrote:
+> >> Among the 21 architectures supported by the kernel, 16 define both
+> >> INLINE_COPY_TO_USER and INLINE_COPY_FROM_USER while the 5 other ones
+> >> don't define any of the two.
+> >>
+> >> To simplify and reduce risk of mistakes, convert them to a single
+> >> kconfig item named CONFIG_ARCH_WANTS_NOINLINE_COPY which will be
+> > We've got a special word for it: outline. Can you name it
+> > CONFIG_OUTLINE_USERCOPY, or similar?
 > 
-> The minimal GCC version is 8.1, and asm goto with outputs is supported
-> since GCC-11. That would brake the build, if we just switch to using it
-> without "CC_IS_GCC && (GCC_VERSION >= 110100)" guard.
-> 
-> Is it worth to maintain 2 version of the function? I don't know...
+> You can't swap the "in" for "out" like this.  "out of line" is the
+> opposite of "inline" in this context, while "outline" means something
+> different and unrelated.
 
-GCC 11 was released five years and a day ago.  The last GCC 11 release
-(that of 11.5) is not even two years ago though (but there will be no
-more!)
-
-So it would be not conservative at all to require GCC 11 as minimum now,
-some people might even call it a bit aggressive.  But in a year (or
-maybe two) the lay of the land will be rather different.
+Yeah.  Technically much more correct for it is inline vs. functional.
+Not that that term won't be misunderstood as well :-)
 
 
 Segher
