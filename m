@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3452DFF8874
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1296337.1572806 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31036FF886F
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1296328.1572751 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjVh-0006tW-Ad; Tue, 28 Apr 2026 14:34:01 +0000
+	id 1wHjVY-0005Rd-E6; Tue, 28 Apr 2026 14:33:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1296337.1572806; Tue, 28 Apr 2026 14:34:01 +0000
+Received: by outflank-mailman (output) from mailman id 1296328.1572751; Tue, 28 Apr 2026 14:33:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wHjVh-0006sd-1W; Tue, 28 Apr 2026 14:34:01 +0000
-Received: by outflank-mailman (input) for mailman id 1296337;
- Tue, 28 Apr 2026 14:33:59 +0000
+	id 1wHjVY-0005RW-Ax; Tue, 28 Apr 2026 14:33:52 +0000
+Received: by outflank-mailman (input) for mailman id 1296328;
+ Tue, 28 Apr 2026 14:33:51 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wHjVf-0006cZ-Bm
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:33:59 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wHjVX-0005Hz-Hc
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 14:33:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wHjVe-000RTW-Nk
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:33:58 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wHjVV-00H4ZK-Bv
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2026 16:33:50 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69f0c548-2eae-0a2a0a5409dd-0a2a4501d626-48
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:58 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f0c541-5cb7-0a2a0a5109dd-0a2a45029a8e-46
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:50 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69f0c556-c1f2-0a2a45010019-d155802ee026-3
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:58 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-488b0e1b870so196655385e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:33:58 -0700 (PDT)
+ id 69f0c54e-af86-0a2a45020019-d1558033ed58-3
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 16:33:50 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4891e86fabeso127801705e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Apr 2026 07:33:50 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a774b6300sm19302145e9.16.2026.04.28.07.33.56
+ 5b1f17b1804b1-48a774b6300sm19302145e9.16.2026.04.28.07.33.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 07:33:57 -0700 (PDT)
+ Tue, 28 Apr 2026 07:33:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,406 +54,174 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777386838; x=1777991638; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1777386830; x=1777991630; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bJSZfDZmsT3CIOe+qmGhvl/hB/yKGv3ZJ6HZqE/FbGU=;
-        b=FPRkagivTRTkvPrr9DgTrmPJ6A5qzrmzZNs2fIZsLQ8ZPmxEPetYngzYCW0q2XyJ7z
-         NUJ50SXTThw/w2DeUDz4rgRhLghew6Pl8X1DjZ2ejH6sJZG9l4h67h+amrKi1nzIUDlm
-         cwHzpWA4Qq+DPQTe6Lxm9Uk1jLF1M5lvkcAUs77bfbOrCgWMaZEoG5XA5vH3ByfRjtZf
-         d6fChtIOnjeISsNRZLrXz8uE/cK4hxv55dqA+4qYe5se10PD9Q2f8XtvU4nAAPTYq9dY
-         ZyvPoPoSJABf7Mnh8VqYs2W9WZmjKlfIEMYBsKQt/Juu/RNHzLBLgnuG4OGTbYS0lYCy
-         rQqA==
+        bh=W36qV0SA1npKJlsQHzH0mfE/cYCMTL3Qqk5/oPvpTxk=;
+        b=VNh849KylgCiDivitlJHGeNTbHsB/Bjw2xCWB1kn86dqIjjLj+EjxwAwlUaoKbk2eI
+         Lv+UiMIBi3K4DbTbX5b9Bc7vUw7XAX1JvCd8cgMjg1byX8q0NvIuE4GtkcjM7R01elnI
+         d38SLZL4IZHYoXCVV1TrH3XsCFtRuu+aglO16iEN0RsFfPKG35vlbl9h1sHkzslv1onl
+         OUPiJ4Lrn+OZMhvNFKL+sRlWmISSyIv0n3KxaiMmpF3PHd3DPNRl9Fl8lW2GCKJ/XxGo
+         q+ATbDPg2n7L7IiFz+dMsCEyj127DlR3cJ9GLewtY8L/RuX06xcz2/mUBezI2h7MyXWq
+         LTqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777386838; x=1777991638;
+        d=1e100.net; s=20251104; t=1777386830; x=1777991630;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=bJSZfDZmsT3CIOe+qmGhvl/hB/yKGv3ZJ6HZqE/FbGU=;
-        b=PReBikdlPq6Yei4Ymis4ZBQ31q1qRImHjRDjc3+vk2lYEurIluSS+mnfcbAdhpXQa2
-         +jSyMTEVqANq9RkCImBLpYDq3BiRBInUbEFOudZBIIrGoEPowxp4HJy4VkwvrLPhaP6+
-         OdIgzAQqWd/7WNqycIH4JaQPb+iEtes9+89rSehTSkPSF2L6UMsTZcCR2s3jPKdh/5lz
-         E69eyp9F6EpVAZ8Lw5KhpVFPmu6GhfNdhqFowNGC0ARP8QQ8waiwazWaE5KNKYHSUAsb
-         7AcrnMZMEmj4BogITD3uwOftxUMkcfGip58B3GOeedRvKAkLTXqZlvT02WeC37x9gkzg
-         +m2Q==
-X-Gm-Message-State: AOJu0YyiMmXrqVt4dGs2niYM3I29CDM+lCTX82WHn1cRdxRG9Zjucwpe
-	fjVJiuhJiz2AWKiW/xJcL7tEu1eYX6Z+ZAogQLmkgckWukbQDVo5aR41AcaiNg==
-X-Gm-Gg: AeBDieu3g/A6h1TG0H5/O5M/jDbJJgZ8aGFkcUqts8582EC6Ei5i3r/dUtz5wirWQAu
-	GGxwPsfBcref1u97vsjInCf9jFqbWS2OylQ96zMvyFzjcNGzaLxkZE6xon63bPfuN9fsqhQ+P3s
-	efiwrwWNllp0z/0+nwYxxQCELTwodCzM59GBQYZmg/Ah6Bugg5Dbi409ldX5EKJmcannK01YAEI
-	gl8qJtNWF0dUBiD8QQpIqdA7xiXoSzF6evCrWebtkW8zkSAbPlBob8noE6TqTPXh37We5ISoqGr
-	CNbPEkI6YPXLfq7FfLPuQMDAnQp0DK2w7W1C4yFxBW+mnzFW6nARX63iLsgDgU7pEzvfbfsFe2a
-	Vd/z/VD1R2QL6t/oVoF/C4QK+l7SzsxL5nqO20jw1RI34XcuierutEoFmXrFAehyCQ8QBDmLUa7
-	sq8gdEnZOcnfQccCqByZQfYPqk7IhVOil7Gtc2UUqCwa04D0iTr5IsNY8TCwtt/YPav58V4zE54
-	lEG
-X-Received: by 2002:a05:600c:4f92:b0:489:19e9:b139 with SMTP id 5b1f17b1804b1-48a77ae54f4mr52698725e9.1.1777386837671;
-        Tue, 28 Apr 2026 07:33:57 -0700 (PDT)
+        bh=W36qV0SA1npKJlsQHzH0mfE/cYCMTL3Qqk5/oPvpTxk=;
+        b=f+Q++6e7rE1p8OeiVkRVlVrNo5JAMhd01znanWGZPNErOjstAzS5aSWWqNWXpe7wfB
+         98IVpPjV9rNjb+i8qlWtYezjLhbC6O6y4uFRtntgmf4dZenERfOC1W8e5WBog45AqQ6I
+         5Q1YSbEcSHzXBFox89eCAq79pau+RNhj7GpC0cC2KTMwRAm73a4fySiBVsK6AAExuhaE
+         eP8bOv8u2GN2NUx4ChzfmrtGqKQ7Kh1N1aa68b0XoVDNPTzzl1TxO40tkiq5B9ciq1TJ
+         1NnfqtWRaIFBgvg0poG0/3MfkUp0CF4OYbSjE5pqlLAi0EHO9i6Cz46F0JDJlLDAEYD/
+         uWhQ==
+X-Gm-Message-State: AOJu0Yw8ynlV/tJ8IMvYaQLH3sG9OM6y21zdfzDalZVilExJdFQQX0uV
+	nYsvPyT/LLeHsAZoEATwvaKem14vgRHxPHKffqYR711ACSrDIEWY4rFVAunOVg==
+X-Gm-Gg: AeBDieuO5k107UZqWdKgOdRUzIi0KR6O3tfuaVeCL4J8jWhGx15qT301y+HbAycL5vQ
+	9+CWRZokhC/jf0W/9qYgwfu2OS7Zxkf3qKR1S1WBo84/pq82UPpAyluOiPkustLRJsi1eyenYcL
+	vgdt+BXToJ3tO9G9R7WhHCeezDfD+DXgTNXk1LaI7SWpuKZMeGwbOEZ1jO0rBiQwjD3jE0kSsE9
+	9KaH2uDL6qNHlZAOuDAqOKkcTwYTqVdXUEm6MpWoUfjxM+7nk1p7eapshy0JxcLg7GKmDYKITes
+	8eq3RlcY+7bRTO/gxi+23kXibNP5DqNYwavMGVjcDsW+PmPJqYka1Zl9trcP5Ax8YCIN+WQwyvI
+	9bsWy2e09GvauwXF224OkieovIXXrr14W9rL7Dl4sdBqotbI37htauwvo18a0OpMkTtA/1rcK3j
+	rRLV9ZFAlAV00QTXelPxEOh/j7LG/hPFRS/0boaE/ve0Nnj4TLwJXlBPjDudQebgv511oGCyW4X
+	RIw
+X-Received: by 2002:a05:600c:840f:b0:483:7903:c3b1 with SMTP id 5b1f17b1804b1-48a77b21749mr52038275e9.20.1777386829946;
+        Tue, 28 Apr 2026 07:33:49 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 07/11] xen/riscv: add Linux kernel loading support
-Date: Tue, 28 Apr 2026 16:33:36 +0200
-Message-ID: <af89f0b696c5a1ae477dc0903a9a99b84df26f7a.1777303844.git.oleksii.kurochko@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v4 01/11] xen: arm: fix len type for guest copy functions
+Date: Tue, 28 Apr 2026 16:33:30 +0200
+Message-ID: <e29e6176063f8e7c612a4bfa44ac072d7a686b81.1777303844.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1777303844.git.oleksii.kurochko@gmail.com>
 References: <cover.1777303844.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1777386838-B727DFF4-D3108EBD/10/73395122804
+X-purgate-ID: tlsNG-720697/1777386830-82D6F161-7B11A211/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 11996
+X-purgate-size: 5388
 
-Introduce support for loading a Linux kernel Image which is got by
-uncompressing of Image.gz on RISC-V.
+Widen the len argument of copy_to_guest_phys_flush_dcache() and the
+copy_to_guest_phys_cb typedef from unsigned int to unsigned long, as
+the function can be used to copy large blobs such as the initrd which
+may exceed 4GB. Update the internal copy_guest() len argument to
+unsigned long accordingly.
 
-kernel_image_load() and place_modules() currently call panic() on
-failure rather than returning an error. This is because the common
-kernel_load() in common/device-tree/kernel.c does not expect a
-return code. Handling errors gracefully would require a separate
-refactor.
+Change the type for local variable size in copy_guest() to avoid
+compilation error because of type mismatch.
 
-The implementation is based on the Xen Arm kernel loading code.
+raw_* wrappers above copy_guest() keep returning unsigned long to
+avoid type narrowing; it is not an issue for raw_*'s len argument
+to remain 'unsigned int' since the assignment to copy_guest()'s wider
+unsigned long parameter is safe and there is no raw_* users who
+are using a value bigger than what can fit into 'unsigned int'.
 
-text_offset is available for both 32-bit and 64-bit Image, so fix
-that.
-
+Fixes: 2986481b3d9e6 ("xen/arm: guest_copy: Extend the prototype to pass the vCPU")
+Fixes: 5302bd490bea7 ("xen/arm: Introduce copy_to_guest_phys_flush_dcache")
+Fixes: d07b7369aa65b ("xen/common: dom0less: introduce common domain-build.c")
+Reported-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v4:
- - Update the patch subject: add "... Linux kernel ...".
- - Make bi variable unsigned. And use while() instead of for().
- - Update the condition which calculates overlapping of kernel with modules.
- - Reject a malformed image before the loop to avoid wrapping
-   load_addr + image_size in the per-bankcheck below.
- - Use  mathematical representation to print ranges.
- - Use #error instead of just returning unsupported.
- - Update the comment above stuct image in kernel_image64_probe().
+- Add Fixes: tags.
+- Add "arm:" prefix to commit subject.
+- Add Reviewed-by: Jan Beulich <jbeulich@suse.com>.
+- Avoid using of min_t.
+---
+Changes in v3:
+ - Correct the declaration of copy_to_guest_phys_cb() instead of return
+   'unsigned int' to be in sync with len argument, the type of len argument
+   is changed on 'unsigned long' as initrd could be pretty big and also its
+   size is stroed in 'paddr_t' which is 'unsigned long'.
+ - Update copy_guest() prototype to avoid trancation bug for len argument.
+ - Revert prototype changes for raw_* wrappers above copy_guest() as they
+   should keep returning unsigned long to avoid type narrowing; it is not
+   an issue for raw_*'s len argument to remain 'unsigned int' since the
+   assignment to copy_guest()'s wider unsigned long parameter is safe.
+ - Change the type for local variable size in copy_guest() to avoid
+   compilation error because of type mismatch.
+ - Add Reported-by: Jan Beulich <jbeulich@suse.com>
+---
+Changes in v2:
+ - New patch.
 ---
 ---
- xen/arch/riscv/Makefile             |   1 +
- xen/arch/riscv/include/asm/config.h |  13 ++
- xen/arch/riscv/kernel.c             | 242 ++++++++++++++++++++++++++++
- xen/include/xen/fdt-kernel.h        |  11 +-
- 4 files changed, 265 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/riscv/kernel.c
+ xen/arch/arm/guestcopy.c                | 6 +++---
+ xen/arch/arm/include/asm/guest_access.h | 2 +-
+ xen/include/xen/fdt-domain-build.h      | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index cfc3fdf7d208..eecdcbc76867 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -8,6 +8,7 @@ obj-y += guestcopy.o
- obj-y += imsic.o
- obj-y += intc.o
- obj-y += irq.o
-+obj-y += kernel.init.o
- obj-y += mm.o
- obj-y += p2m.o
- obj-y += paging.o
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 0613de008b13..fd69057826e1 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -151,6 +151,19 @@
- extern unsigned long phys_offset; /* = load_start - XEN_VIRT_START */
- #endif
+diff --git a/xen/arch/arm/guestcopy.c b/xen/arch/arm/guestcopy.c
+index fdb06422b8e9..86f1c9d0e318 100644
+--- a/xen/arch/arm/guestcopy.c
++++ b/xen/arch/arm/guestcopy.c
+@@ -53,7 +53,7 @@ static struct page_info *translate_get_page(copy_info_t info, uint64_t addr,
+     return page;
+ }
  
-+/*
-+ * KERNEL_LOAD_ADDR_ALIGNMENT is defined based on paragraph of
-+ * "Kernel location" of boot.rst:
-+ * https://docs.kernel.org/arch/riscv/boot.html#kernel-location
-+ */
-+#if defined(CONFIG_RISCV_32)
-+#define KERNEL_LOAD_ADDR_ALIGNMENT MB(4)
-+#elif defined(CONFIG_RISCV_64)
-+#define KERNEL_LOAD_ADDR_ALIGNMENT MB(2)
-+#else
-+#error "Define KERNEL_LOAD_ADDR_ALIGNMENT"
-+#endif
-+
- #endif /* ASM__RISCV__CONFIG_H */
- /*
-  * Local variables:
-diff --git a/xen/arch/riscv/kernel.c b/xen/arch/riscv/kernel.c
-new file mode 100644
-index 000000000000..dd79f457732d
---- /dev/null
-+++ b/xen/arch/riscv/kernel.c
-@@ -0,0 +1,242 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#include <xen/bug.h>
-+#include <xen/compiler.h>
-+#include <xen/errno.h>
-+#include <xen/fdt-kernel.h>
-+#include <xen/guest_access.h>
-+#include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/mm.h>
-+#include <xen/types.h>
-+#include <xen/vmap.h>
-+
-+#include <asm/setup.h>
-+
-+#define IMAGE64_MAGIC_V2 0x05435352 /* Magic number 2, le, "RSC\x05" */
-+
-+static void __init place_modules(struct kernel_info *info, paddr_t kernbase,
-+                                 paddr_t kernend)
-+{
-+    const struct boot_module *mod = info->bd.initrd;
-+    const struct membanks *banks = kernel_info_get_mem_const(info);
-+    const paddr_t initrd_len = ROUNDUP(mod ? mod->size : 0,
-+                                       KERNEL_LOAD_ADDR_ALIGNMENT);
-+    const paddr_t dtb_len = ROUNDUP(fdt_totalsize(info->fdt),
-+                                    KERNEL_LOAD_ADDR_ALIGNMENT);
-+    const paddr_t modsize = initrd_len + dtb_len;
-+    unsigned int bi = banks->nr_banks;
-+
-+    BUG_ON(modsize < initrd_len);
-+
-+    /*
-+     * Place modules as high in RAM as possible, scanning banks from
-+     * last to first so that the end of the last bank is preferred.
-+     */
-+    while ( bi-- > 0 )
-+    {
-+        const struct membank *bank = &banks->bank[bi];
-+        const paddr_t bank_end = bank->start + bank->size;
-+        paddr_t modbase;
-+
-+        if ( modsize > bank->size )
-+            continue;
-+
-+        modbase = ROUNDDOWN(bank_end - modsize, KERNEL_LOAD_ADDR_ALIGNMENT);
-+
-+        if ( modbase < bank->start )
-+            continue;
-+
-+        /*
-+         * If modules would overlap the kernel, try placing them below it.
-+         */
-+        if ( (modbase < ROUNDUP(kernend, KERNEL_LOAD_ADDR_ALIGNMENT)) &&
-+             (modbase + modsize > kernbase) )
-+        {
-+            modbase = ROUNDDOWN(kernbase - modsize, KERNEL_LOAD_ADDR_ALIGNMENT);
-+            if ( modbase < bank->start )
-+                continue;
-+        }
-+
-+        info->dtb_paddr = modbase;
-+        info->initrd_paddr = modbase + dtb_len;
-+
-+        return;
-+    }
-+
-+    panic("Unable to find suitable location for dtb+initrd\n");
-+}
-+
-+static paddr_t __init kernel_image_place(struct kernel_info *info)
-+{
-+    paddr_t load_addr = INVALID_PADDR;
-+    uint64_t image_size = info->image.image_size ?: info->image.len;
-+    const struct membanks *banks = kernel_info_get_mem_const(info);
-+    unsigned int nr_banks = banks->nr_banks;
-+    unsigned int bi;
-+
-+    dprintk(XENLOG_DEBUG, "nr_banks(%u)\n", nr_banks);
-+
-+    /*
-+     * At the moment, RISC-V's Linux kernel should be always position
-+     * independent based on "Per-MMU execution" of boot.rst:
-+     *   https://docs.kernel.org/arch/riscv/boot.html#pre-mmu-execution
-+     *
-+     * But just for the case when RISC-V's Linux kernel isn't position
-+     * independent it is needed to take load address from
-+     * info->image.start.
-+     *
-+     * If `start` is zero, the Image is position independent.
-+     */
-+    if ( likely(!info->image.start) )
-+    {
-+        for ( bi = 0; bi != nr_banks; bi++ )
-+        {
-+            const struct membank *bank = &banks->bank[bi];
-+            paddr_t bank_start = bank->start;
-+            /*
-+             * According to boot.rst kernel load address should be properly
-+             * aligned:
-+             *   https://docs.kernel.org/arch/riscv/boot.html#kernel-location
-+             *
-+             * As Image in this case is PIC we can ignore
-+             * info->image.text_offset.
-+             */
-+            paddr_t aligned_start = ROUNDUP(bank_start, KERNEL_LOAD_ADDR_ALIGNMENT);
-+            paddr_t bank_end = bank_start + bank->size;
-+            paddr_t bank_size;
-+
-+            if ( aligned_start > bank_end )
-+                continue;
-+
-+            bank_size = bank_end - aligned_start;
-+
-+            dprintk(XENLOG_DEBUG, "bank[%u].start=%"PRIpaddr"\n", bi, bank->start);
-+
-+            if ( image_size <= bank_size )
-+            {
-+                load_addr = aligned_start;
-+                break;
-+            }
-+        }
-+    }
-+    else
-+    {
-+        load_addr = info->image.start + info->image.text_offset;
-+
-+        WARN_ON(!IS_ALIGNED(load_addr, KERNEL_LOAD_ADDR_ALIGNMENT));
-+
-+        /*
-+         * Reject a malformed image before the loop to avoid wrapping
-+         * load_addr + image_size in the per-bank check below by setting
-+         * bi = nr_banks.
-+         *
-+         * image_size covers the kernel from _start (placed at load_addr =
-+         * start + text_offset) through _end.  The alignment gap
-+         * [start, load_addr) is padding and need not lie within a bank.
-+         */
-+        bi = image_size <= (paddr_t)-1 - load_addr ? 0 : nr_banks;
-+        for ( ; bi != nr_banks; bi++ )
-+        {
-+            const struct membank *bank = &banks->bank[bi];
-+            paddr_t bank_start = bank->start;
-+            paddr_t bank_end = bank_start + bank->size;
-+
-+            if ( (load_addr >= bank_start) &&
-+                 (load_addr + image_size <= bank_end) )
-+                break;
-+        }
-+    }
-+
-+    if ( bi == nr_banks )
-+        panic("Failed to place kernel image in any memory bank\n");
-+
-+    info->entry = load_addr;
-+
-+    return load_addr;
-+}
-+
-+static void __init kernel_image_load(struct kernel_info *info)
-+{
-+    int rc;
-+    paddr_t load_addr = kernel_image_place(info);
-+    paddr_t paddr = info->image.kernel_addr;
-+    paddr_t len = info->image.len;
-+    paddr_t effective_size = info->image.image_size ?: len;
-+    void *kernel;
-+
-+    place_modules(info, load_addr, load_addr + effective_size);
-+
-+    printk("Loading Image from %"PRIpaddr" to [%"PRIpaddr",%"PRIpaddr")\n",
-+            paddr, load_addr, load_addr + effective_size);
-+
-+    kernel = ioremap_cache(paddr, len);
-+
-+    if ( !kernel )
-+        panic("Unable to map kernel\n");
-+
-+    /* Move kernel to proper location in guest phys map */
-+    rc = copy_to_guest_phys(info->bd.d, load_addr, kernel, len);
-+
-+    if ( rc )
-+        panic("Unable to copy kernel to proper guest location\n");
-+
-+    iounmap(kernel);
-+}
-+
-+/* Check if the image is a 64-bit Image */
-+static int __init kernel_image64_probe(struct kernel_info *info,
-+                                       paddr_t addr, paddr_t size)
-+{
-+    /* https://www.kernel.org/doc/Documentation/riscv/boot-image-header.rst */
-+    struct {
-+        uint32_t code0;         /* Executable code */
-+        uint32_t code1;         /* Executable code */
-+        uint64_t text_offset;   /* Image load offset, little endian */
-+        uint64_t image_size;    /* Effective Image size, little endian */
-+        uint64_t flags;         /* kernel flags, little endian */
-+        uint32_t version;       /* Version of this header */
-+        uint32_t res1;          /* Reserved */
-+        uint64_t res2;          /* Reserved */
-+        uint64_t magic;         /* Deprecated: Magic number, little endian, "RISCV" */
-+        uint32_t magic2;        /* Magic number 2, little endian, "RSC\x05" */
-+        uint32_t res3;          /* Reserved for PE COFF offset */
-+    } image;
-+    uint64_t effective_size;
-+
-+    if ( size < sizeof(image) )
-+        return -EINVAL;
-+
-+    copy_from_paddr(&image, addr, sizeof(image));
-+
-+    /* Magic v1 is deprecated and may be removed.  Only use v2 */
-+    if ( le32_to_cpu(image.magic2) != IMAGE64_MAGIC_V2 )
-+        return -EINVAL;
-+
-+    effective_size = le64_to_cpu(image.image_size);
-+
-+    if ( effective_size && size > effective_size )
-+        return -EINVAL;
-+
-+    info->image.kernel_addr = addr;
-+    /* Actual size in the binary file */
-+    info->image.len = size;
-+    /* Total memory the kernel occupies at runtime */
-+    info->image.image_size = effective_size;
-+    info->image.text_offset = le64_to_cpu(image.text_offset);
-+    info->image.start = 0;
-+
-+    info->load = kernel_image_load;
-+
-+    return 0;
-+}
-+
-+int __init kernel_image_probe(struct kernel_info *info, paddr_t addr,
-+                              paddr_t size)
-+{
-+#ifdef CONFIG_RISCV_64
-+    return kernel_image64_probe(info, addr, size);
-+#else
-+#   error "Only 64-bit RISC-V is supported"
-+#endif
-+}
-diff --git a/xen/include/xen/fdt-kernel.h b/xen/include/xen/fdt-kernel.h
-index 54be77aa191e..c69da642eba8 100644
---- a/xen/include/xen/fdt-kernel.h
-+++ b/xen/include/xen/fdt-kernel.h
-@@ -59,8 +59,15 @@ struct kernel_info {
-         struct {
-             paddr_t kernel_addr;
-             paddr_t len;
--#if defined(CONFIG_ARM_64) || defined(CONFIG_RISCV_64)
--            paddr_t text_offset; /* 64-bit Image only */
-+#if defined(CONFIG_ARM_64) || defined(CONFIG_RISCV)
-+            /*
-+             * ARM: 64-bit Image only.
-+             * RISC-V: both 32-bit and 64-bit Images.
-+             */
-+            paddr_t text_offset;
-+#endif
-+#if defined(CONFIG_RISCV)
-+            uint64_t image_size; /* Effective size of Image */
- #endif
-             paddr_t start; /* Must be 0 for 64-bit Image */
-         } image;
+-static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
++static unsigned long copy_guest(void *buf, uint64_t addr, unsigned long len,
+                                 copy_info_t info, unsigned int flags)
+ {
+     /* XXX needs to handle faults */
+@@ -65,7 +65,7 @@ static unsigned long copy_guest(void *buf, uint64_t addr, unsigned int len,
+     while ( len )
+     {
+         void *p;
+-        unsigned int size = min(len, (unsigned int)PAGE_SIZE - offset);
++        unsigned long size = min(len, PAGE_SIZE + 0UL - offset);
+         struct page_info *page;
+ 
+         page = translate_get_page(info, addr, flags & COPY_linear,
+@@ -136,7 +136,7 @@ unsigned long raw_copy_from_guest(void *to, const void __user *from,
+ unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
+                                               paddr_t gpa,
+                                               void *buf,
+-                                              unsigned int len)
++                                              unsigned long len)
+ {
+     return copy_guest(buf, gpa, len, GPA_INFO(d),
+                       COPY_to_guest | COPY_ipa | COPY_flush_dcache);
+diff --git a/xen/arch/arm/include/asm/guest_access.h b/xen/arch/arm/include/asm/guest_access.h
+index 18c88b70d7ec..c13cbec55b65 100644
+--- a/xen/arch/arm/include/asm/guest_access.h
++++ b/xen/arch/arm/include/asm/guest_access.h
+@@ -14,7 +14,7 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
+ unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
+                                               paddr_t gpa,
+                                               void *buf,
+-                                              unsigned int len);
++                                              unsigned long len);
+ 
+ int access_guest_memory_by_gpa(struct domain *d, paddr_t gpa, void *buf,
+                                uint32_t size, bool is_write);
+diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
+index bc7744270c8f..6ad9e8fd1642 100644
+--- a/xen/include/xen/fdt-domain-build.h
++++ b/xen/include/xen/fdt-domain-build.h
+@@ -48,7 +48,7 @@ static inline int get_allocation_size(paddr_t size)
+ typedef unsigned long (*copy_to_guest_phys_cb)(struct domain *d,
+                                                paddr_t gpa,
+                                                void *buf,
+-                                               unsigned int len);
++                                               unsigned long len);
+ 
+ void initrd_load(struct kernel_info *kinfo,
+                  copy_to_guest_phys_cb cb);
 -- 
 2.53.0
 
