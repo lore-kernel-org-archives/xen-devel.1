@@ -4,46 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B652FF8875
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2026 10:13:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1297173.1573290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A8AFF8875
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2026 11:01:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1297191.1573299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI1v5-0004j3-53; Wed, 29 Apr 2026 10:13:27 +0000
+	id 1wI2f5-0003OM-Hf; Wed, 29 Apr 2026 11:00:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1297173.1573290; Wed, 29 Apr 2026 10:13:27 +0000
+Received: by outflank-mailman (output) from mailman id 1297191.1573299; Wed, 29 Apr 2026 11:00:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI1v5-0004iw-1S; Wed, 29 Apr 2026 10:13:27 +0000
-Received: by outflank-mailman (input) for mailman id 1297173;
- Wed, 29 Apr 2026 10:13:26 +0000
+	id 1wI2f5-0003OF-EZ; Wed, 29 Apr 2026 11:00:59 +0000
+Received: by outflank-mailman (input) for mailman id 1297191;
+ Wed, 29 Apr 2026 11:00:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wI1v4-0004iq-6Y
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 10:13:26 +0000
+ (envelope-from <Luca.Fancellu@arm.com>) id 1wI2f4-0003O9-5e
+ for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 11:00:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wI1v3-0051zp-7y
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 12:13:25 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wI2f1-002MYY-SP
+ for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 13:00:57 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69f1d9bd-bab6-0a2a0a5309dd-0a2a4502d12e-16
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 12:13:25 +0200
-Received: from [40.93.196.50]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69f1d9c3-af86-0a2a45020019-285dc432177b-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 12:13:24 +0200
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by PH7PR03MB7195.namprd03.prod.outlook.com (2603:10b6:510:244::21)
+ (envelope-from <Luca.Fancellu@arm.com>)
+ id 69f1e4e4-bab6-0a2a0a5309dd-0a2a4508b4ca-20
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 13:00:57 +0200
+Received: from [52.101.66.23]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Luca.Fancellu@arm.com>)
+ id 69f1e4e8-63b5-0a2a45080019-34654217682e-4
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 13:00:57 +0200
+Received: from CWLP123CA0199.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19c::21)
+ by AS8PR08MB9645.eurprd08.prod.outlook.com (2603:10a6:20b:61a::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.27; Wed, 29 Apr
- 2026 10:13:21 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9870.020; Wed, 29 Apr 2026
- 10:13:18 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.18; Wed, 29 Apr
+ 2026 11:00:49 +0000
+Received: from AM2PEPF0001C714.eurprd05.prod.outlook.com
+ (2603:10a6:400:19c:cafe::54) by CWLP123CA0199.outlook.office365.com
+ (2603:10a6:400:19c::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
+ 29 Apr 2026 11:00:49 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AM2PEPF0001C714.mail.protection.outlook.com (10.167.16.184) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
+ via Frontend Transport; Wed, 29 Apr 2026 11:00:48 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
+ by AS1PR08MB7402.eurprd08.prod.outlook.com (2603:10a6:20b:4c6::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.18; Wed, 29 Apr
+ 2026 10:59:42 +0000
+Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::5d34:206f:373:a323]) by DU2PR08MB7272.eurprd08.prod.outlook.com
+ ([fe80::5d34:206f:373:a323%6]) with mapi id 15.20.9846.025; Wed, 29 Apr 2026
+ 10:59:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,208 +69,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=EnGThWMZ2JKhXiegrYtDlDOEywv1Dzio+DpIkCvrf0M4o+Y32R/XkWW2vnhB2100vK+FNmJpp8k1W3umNdHS5KkmV/uYcbPaB1xtztPWiipYWE2SPOzDw+S82eGG0Q5L+UnIqI9Qi7KO7SpW7q7Y0On67LNv0tU3K2tCQWCzoyyQvSepxleqAsukutidBfPJtrpUyvEV7sQoQFhLSdKEOMg3O7tccVMKjetJBm51jZhZo0cKPCnVnu6YdmuwVXBi1AFatway+rrNbwshJXHjrS88e2DESEcftObhUfSq1X+tuF2RZv2woPgpelvw0kYYDPGNKDjDrP17p8NDPqEB5g==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oWl6hUn8dnN4r97Jn4cC62/WM9wERjsWrVDmFzDmdB0=;
+ b=uVY2VR1R5JFStgdqHFTXUC6Je41valN+H6uRGr8u+Pu9kHFWepTYG9+IgPDBAOjBeEzM4Okl6t5/VRmVNg8yG5HWj6E17Q/p/HAbFKpCcUC9AGN1oosPsKb832dGJ9dQPdPh3xuRLfLM1zUKjNU6dqepbU8WA6hh2nB/kl3DcEf8HgzFhAFPdj0Atl8xCZSn7lo7G0OuX59wtD7pvgpicJJ2EwPZtTrMpDNylzWIWa85QVJq+6rcG8t+2NLZDgQoY7H59d4Q9x6IXYvOyZpc2RQS1eUB6ZUIAg7AHTXHbnil0L4uHartEGV8wXVIldOvfW8vOzxwdCinQJoopwMr3A==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oWl6hUn8dnN4r97Jn4cC62/WM9wERjsWrVDmFzDmdB0=;
+ b=hU29RBnd9SxcK38tLfHStzX56jq1Q8ac0aFbxt6C2z5tIlqa/7gQd37kUpfm+xdYG3/QPnodhjY/cCbrXlmaBO6mwwRthvZ4P9dHpuGyek0jSVJ48QmccrdkB8WkII1lUMGCC46vxPMo5Va7wKsGgEyKy27dGoDAgtpdwr8yGQo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pH24UTzWbLJblT8PDPrtYGFT43xhN6FJpWkBtRxnky9f7wvJjKPpNJ6gdh2zDV7W1YRHRtVnEgpzGch20fNVFENegzZhAAzJjqCrw5IiUJSWxr0HJy8aDe0FDTCeEyGsYzMEcPk26zgTx9mPfjG29z4tohtQqMXSfRbo4IuhQX7iBOAu8er+5vN7tULoOsYXTk60RuF2lH/e3DPv+hbMnKlnSd8NvsbXVML8+qOAKPpKZ2VobPaNm0Oa7SGWhq+kIuJrZdbNGdjzJWt33hX5y5c1Y2E1G1HLVY0Eulpz8dAZc1y0WrNEaxSu3P4YodjTwDUIX1ufroEmKonZw+iNAA==
+ b=eFKc5TkqqWUqM0znAOznmtuVE8tze9XCzRk0///YQXjD6GK+7NvBxhtRQgOm40/2VUYzNRGYQc7sU2MrOMBGV1F4//iqRzkXy6LNOllRCoISUUxPh1MxnenpthqxfBpRnQyL5tF/+2wA59jHBAYaJsVw1pw7Tt2zDQm5bNJlP2RxTc25LFrBbnkQx5cWZxCniafDHKxeL4wM3I4TplWyjsheGbrU4ZaII4bUc+jGlHR131fz6Up7b5EYx7GP5O1gkDfIgXObY+STft1GRNPXrKP+3eHwT3za5He2VFAcyYvLJnu5skkFHBHWmkmm5vHi0d5KB+CyL8hF08bnfmjhZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JLhzOF7supAJ3qPCXfKOoAbySdrH7P6vKIlc01aPPqQ=;
- b=JBhYIOKE8viu7PFF3RxPKafCc7QWyiiPzvFgpZ/UGSjyau/39hPJz5BcimFYEhuvkgYcp3rMby4wQXGZBQD5od7g4JuiOGXqaYc5073LwoNQGhqtYYv/Ik4V2zjqJCdHWeZRBE5yCMBd9/m99z4yNHjoTL+2c8w7PIZiEvEQ3lqE7K5BD5j1OWGTkApUXwb2LTmXcYp0fX7Xvh3ely148CSOC/4emtZHaqGW6LVdUGCQe3osOa3jwmbjxfeA62n/EEuUU63xQdMSvcH6xFVIMcyDUr/BAV6KvlGIpnfUwUbfFuTnMf9396HamCP5vYQPQpoOGd5bnw4CPmZJKod6ig==
+ bh=oWl6hUn8dnN4r97Jn4cC62/WM9wERjsWrVDmFzDmdB0=;
+ b=uDsBfMqKd6jLqTJLYGkgyz/SjfisqKniHMkQcwGxhIvT59uIEN07l1NtGCL3QmngrUGnb75KOSqHM3Rjf+mQXDOSe1m83eewSQ9fOruReXEPB+eJk5fJPCSwbqRJaP2XCiYJ47NSFLeyncf0MENuUL+D2kdSukmI9MTBbPKp3I9UtfU3zufcpPapf3xjh8K7g952LJaxryS+Rn96jk0DcNbrfjW+exyp3aGLRnFyB/XgKPMAPEvBjhQUxTdvBFPeTpHoCRT4KBx/vHFzq2R5mIWoJUypJiCZwbksYL5WUJuUw6OxxCyHWeS1KcKyapMK6ohc2vp9+Z5hV7l65T77TA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JLhzOF7supAJ3qPCXfKOoAbySdrH7P6vKIlc01aPPqQ=;
- b=HtDSF6iuHQTtjvB8ojLcBzXR0JCdxhp8IJU+Qy+YFkfKDTQioOWFxUY0lCv1fC35o6rnNCG0cYbuEQvQkTI9/3nDOorH4zyvKl3oPVO0+KovUlVkx4gE7LM/Da89PuI6fixRFMwgihQTfojbXHVzOjfun3xgmpSlzkS5RpppjSw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Wed, 29 Apr 2026 12:13:15 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Thierry Escande <thierry.escande@vates.tech>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Alexey Gerasimenko <x1917x@gmail.com>
-Subject: Re: [PATCH 14/17] libacpi: build ACPI MCFG table if requested
-Message-ID: <afHZutWoJGHoKemZ@macbook.local>
-References: <20260313163455.790692-1-thierry.escande@vates.tech>
- <20260313163455.790692-15-thierry.escande@vates.tech>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260313163455.790692-15-thierry.escande@vates.tech>
-X-ClientProxiedBy: MR1P264CA0051.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:3e::26) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|PH7PR03MB7195:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2960f6d-f0b6-413e-8dae-08dea5d7ef5e
+ bh=oWl6hUn8dnN4r97Jn4cC62/WM9wERjsWrVDmFzDmdB0=;
+ b=hU29RBnd9SxcK38tLfHStzX56jq1Q8ac0aFbxt6C2z5tIlqa/7gQd37kUpfm+xdYG3/QPnodhjY/cCbrXlmaBO6mwwRthvZ4P9dHpuGyek0jSVJ48QmccrdkB8WkII1lUMGCC46vxPMo5Va7wKsGgEyKy27dGoDAgtpdwr8yGQo=
+From: Luca Fancellu <Luca.Fancellu@arm.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Romain
+ Caritey <Romain.Caritey@microchip.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Jan
+ Beulich <jbeulich@suse.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>
+Subject: Re: [PATCH v4 02/11] xen/dom0less: rename kernel_zimage_probe() to
+ kernel_image_probe()
+Thread-Topic: [PATCH v4 02/11] xen/dom0less: rename kernel_zimage_probe() to
+ kernel_image_probe()
+Thread-Index: AQHc1xwVOtsB2tnchEy3Q2x22NSmlrX14DKA
+Date: Wed, 29 Apr 2026 10:59:42 +0000
+Message-ID: <EA0D6439-CA9E-450A-80BA-442A7C8F0A28@arm.com>
+References: <cover.1777303844.git.oleksii.kurochko@gmail.com>
+ <d87dd4f04e3f0d421485091cf434a088f6693641.1777303844.git.oleksii.kurochko@gmail.com>
+In-Reply-To:
+ <d87dd4f04e3f0d421485091cf434a088f6693641.1777303844.git.oleksii.kurochko@gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3826.700.81.1.6)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	DU2PR08MB7272:EE_|AS1PR08MB7402:EE_|AM2PEPF0001C714:EE_|AS8PR08MB9645:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8bd5f8b-ac1a-42b1-a391-08dea5de9245
+x-checkrecipientrouted: true
+nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|7416014|366016|376014|38070700021|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ n3Ry3R7wtrjsgDVOJYp7OrS80lUqo3T1SF0BezRYBpzWIjqElV0bZy8WYi4bZ4XF9DdLOZ8RFEe5PnRoZt1ns6941109MdjqlpFlq9igyAmVUP3clfyJ2tGj3VKZEDfkmFsjoTLGAT8i5cLvmrWAa1a0s0AUoh+3qq19J6/GIrn2q0Sm022kZYWICGzsx4blbj+IXvHAKrHGIIVjPt/F6c9ycJ02JP9IibBXS0Am5sOW8Fan2NRSJSwYY/XDwAogZhIpXW2daqcb0TjV3DoagKQFgyk+LeWzx2aJTWfZJUKUhVsVuEPM2I4TldV4bC1Y0wxj1qAP2UJToIFijrl0EtPivr/aDgJmLUxvmuV21aXQ/gdz82RCTNCtM6s8Fy9Sf42gD7HrHbbHcTrepxTznjC/SChpQEnYm6NsjoyXBI5JbEmNHXkR3yrQXFoxs36yBZZ9Cjp1jPDSSxPd/fLwbl/Vqf2aDQCQdhfNT4Q01WSZL/JXXsFk1RTdsppiVywNS7pOPYfdzVYHUXwJY5cirobJoBAUgxirD7iZZzSZIMBFVGT8kyagF+8r9YnIQZSk3ABOxZ1vrL7fDeMFmTrIiF1Iz9LAsoqMlzMpokAz22y896RbM2ihiQbMLkAeXW6BI3a/1+DwyreG3SerlgdnIDAMO2rgXwvXbqvqxxnKstZvA8zJEZ0xIWxjSLKtkknw4i5KoO33onYd0N9xX2e20FvID2Xz5oEPfB3MBhMIY0KzPgSuVR/S++A9gjhugz+KDmsAwBJ5rp3cs/xIEPuu5BQfTk8NAfVyNp/h6rYsp6I=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(366016)(376014)(38070700021)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <5C6A879BF4D1E845AC43DC14C3E3AD82@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked:
+ CJ/5GjduRz750ORSQlfqINCtviWVH2J1ElqLAprpKFQtM5o589hU/to5rJkSULyjxS8vMjN5PrxPD7Li5ZNDn/2geYuTmXZES5vXHWjyLpQ96tjGhsj2BxktrAgc9xKlrzIORVHIgdN1TKeN2mt7qj/N1rXRYpzyALGGLJubxSlQ2Vl0bb58ZBO+t/jv1H3+Sw5H4WhH9CPAC0IxszMqrzf6R69CAKdn25gG/mccGBz+n9JubzRdHrb2Pj7aXVcZA//Jas4XjJc04Q1pOG0lQ/N8I/7SdNLrphPh7+61iAs2AFeLxEg1FUgNAUcMjCxsCC0Y2xhJRLPR3ktSwZDmmw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7402
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM2PEPF0001C714.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	7cf2ab06-76e3-43f1-2962-08dea5de6a9b
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|18002099003|56012099003|22082099003;
+	BCL:0;ARA:13230040|1800799024|35042699022|36860700016|14060799003|376014|82310400026|7416014|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	bCpVlpOhHnE+ZRdKb3mNu2Hwa4cl5NlF1EYQYOO73iE06Khq7hA4xboqJwwOydAfCGc6PNK5SCfBzu8/9ikFSYr6bFZshkdVraoKyWr3pVdYIrJq6lbctjhztLGlwH8y/PHTRSsm7CUCLx7OEEABhdA8FXlbvNJalsE0vHAifvrAGKDJiYkOXOUm+Al2KiRt9RXRpEnHZC8BNesj8SAhoPVb4EUWu2Y4kSqnctNTBZS2lRsxnpNBdlqio1ZNmVBclTGjf2NW6fQTVdpYigxzopHGSRgwGgiUgaADykDNrKc82h6l+t+AVUGRAbNzsNBG3f+n9fMtUdk5RvQH/ylzrElaX7fVZKMvneZcPJ8Gq9mPcU1uunyDIukcH+S2coglyDivrcvWjg57JwF+h4dXwoXZb3/VOTSndWYfsc1CFA1Wrx8KW2RWUMEam/dgSFPu0XVm8cDkMqe2yITpZCcorEWMl5uJ8E/rYWZmA95byJJd3J/mNWyrUOPESlSPzMhOA0cvwr/y8VIR92auR0BriO/4PLtweSdc7uWqKUv0PbYErOf9fQvWw4GZV1HKSe8pNlCrCANc7ubwvRPhocCVXb8Sj7alqMbnPHPvUOK0GiGsyzWKW6i76cjjrmquYD78nDsmed1bpgAz8/71LI3WnIBT42V1FM7WSb65DeyBCOzddJ+z0JPCtU27+P3WRSc9F05rpHs7O/RwI52b5eA+ToTa+57jf/VWADgMOxk9C0s=
+	gC2rTodMeEffiV4X62W9KvAiR3IURg3dwI/CiR5zEAxcvRE1+HTjBkfu/a/p5uLlGqPG6bN7toS/PlyeFO6SGYvHK0llG+LZhb6P2owUg9tQPcPV3ViVsO9R6LW+tl+prBD6hn2QAJ5WACZP1rp+fteEcDkfrM6QNShsZUWajLXSjse890jd6dfDAXLxsu1vC1VUX9ipSLoq/m0ZutLAHD0c60XUpB3AnBXRBa/bIkDyCDVL/W45LNCzyEpob4tPnw3f/6FdkbZEzO1E44iZ7rBJBzU4oGgutNxd0eHDkxJ7cmud7IgCMJrdVx+HyFSMJFk/iQ0/3PqmCeJEyBjGpDlK7zyqIfFUC4YYlA2swhTUavtNESFEte+RII09NlTMF51cW3OloMd4LtOy61sBg0jEQ6X39F8R0o3ax46yKcLlMo75xMsmbutIMq4BdAhSdm3GlCi62Bbb2JhsDNKX9Wqd6H0R8pXe0E5OrgEyQtdcbrJS88TtHSRP/ZDEm9rYrZqd5sZeZ56I6x+Q6dwNOlKkbhTckDjuaDeltQXSOT83c91XShYXaC47uso6945xLXn0Kslw5zANQvUy0amXT91uXehI9BxCoBv7+dghYa31TgEoAu1LBA0y2hXpbdtgoV9a0lLqowh/gd26hH5JmxBxcek/ni6tghKtIfdfE1Relk1xaH0rxEpo2qGn2V+jfUZyV0aczgekY4+Z1pDDuMzZGKhbndbzOWUh/anZ+Vs=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(35042699022)(36860700016)(14060799003)(376014)(82310400026)(7416014)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SFlPb3dxL0dodjhrdHdaYVlqS09COFgzNGQ4K3VhdlV0WWFjenNXUm41VFE5?=
- =?utf-8?B?RithbU5jN1Y5NEIyTWFqd3NHeFA4dWFxK1RjTzlWWUQweXcyWUtoKzk0amtC?=
- =?utf-8?B?OVNqTUFJSFJBbFNKQ2FkNjB2djBkbnBSN0l0aUlkbGVzU0d6eVVibTJ0c3Zv?=
- =?utf-8?B?eFBFcGo3ZWVGUTdvYVFybTc2WUNqa0k2NGdHckNTQjNvK0R0OHZCRGJXQUNN?=
- =?utf-8?B?TE5BYkEycEEvbVpDYWJiZEs1MlViTG9QSEU1NXNRUEFONHZiSy9Cdml5WXhh?=
- =?utf-8?B?ck01OEZkRUs3Mmd4VkdnSWRmWndiZ2d3Z09Eb042WWhwbVFRZGFVcS9DRVJo?=
- =?utf-8?B?KzdpK1JNQWhNMmF5STJUYTByYUhERkF5dW1icjg5SmZTVEdPNTVkbmg5dk9m?=
- =?utf-8?B?Q0ZyZ0RFc0plMW9PcVJiU2FwOGNFeklNZ2NHY2J3dlNURkpBTkFxdjJWOU92?=
- =?utf-8?B?MTVoTUlBaTBKSGQwa2IwV3dqSlpTUjJTWENPeUx5aVpqaTBIeWpTWnNsV2NG?=
- =?utf-8?B?T1JpM1piK2hUUTU5c1NpVTZkNlAyNUcrVS9hUW1RYk11a1FxOHhtb3E4REZn?=
- =?utf-8?B?eGN4Nnp3SFV5NGZoNklxVm8reUlMcTU0V00zcktoRU4zSWhvUlY3UFBNcEUv?=
- =?utf-8?B?L3BIYTVBcFdOU3Q4a1JFaklzZllwcnl6ZWk3cjJHMGM4YVZyaGlPTTJ4S0wz?=
- =?utf-8?B?MWRlMk5WbVI0UWV1L2FOZzdyaURJNnF1aHo4cVhBZGI0M0s1dVdpRlJiN0dt?=
- =?utf-8?B?bS94bHBYbVNMb3pOOVY5dExNUWRudjB5dG1rQmo1K1VKeUpDMm9WMnk3bS9P?=
- =?utf-8?B?WEtpSnJZNUdua0RVUzk2NzZNV2YzQWxIRnFuendieWM0NFlQaEZyQlZQN3dJ?=
- =?utf-8?B?ZUF6YzRCS013YjRtQmVWSTZXYlluRkl5TkRxVzR0TTBaRFBmeHpzb2w4RlRy?=
- =?utf-8?B?Z0NzU09FbmdvejZiOGFuTDhkUHZIb2FYc0g5S1lwMGhJYmU1d3pLUUVlZXh3?=
- =?utf-8?B?T1FvZGN1RkZxQVBLU0RRNEMrRnlEd1FkcjBTN0NtRUNMQ1U4Z01iTDFXUXlF?=
- =?utf-8?B?ZzVva1NsZlhobk1ObTBVSVExbkxMSlJ3ZktlRmd1cWxJa3B2ZGdYUHNHcVRQ?=
- =?utf-8?B?RUhmdHZjbzBBYy83dWdvVm8zRmJJNm9iZXU2L2tDNyt2NlhZVEoyNXg4ZUNr?=
- =?utf-8?B?Y1N4bGRVSDJkdEpYOCtVY05INDFTU2hIdkl1Q2E1aTgveFlEeHpiaGhCTzla?=
- =?utf-8?B?MVVtRkRHMkRHSVZ6MDVJQ01ibnRMT28xUFNWekxGclVlZERCek9NVkZjWVdF?=
- =?utf-8?B?QWhONzVjN1dvMmxMb0tEU2ZZRlNyWHBHTHI1T3FBUHUydVk2ejFIR0xQN3M5?=
- =?utf-8?B?MU9zd1Rlby9iSjlvSjYycjc1dEVlNHFRU1IxYTN2YUpzWExBc2orYTU0VVVO?=
- =?utf-8?B?UnZhUDFQL2pHRFY1MWo4ZE5aNTluWWpHbVlqVDJYK0ZZY1ZBN0VzcFZJMnBt?=
- =?utf-8?B?cGNheWdINUVQa3E4MUhKQUt4UmNBWmE2QkxqMTJJNW9HT042aGZwZ0wxWkFZ?=
- =?utf-8?B?R0dLM2V1OVZPdDY1WGoyNFIvYnJjMmdHS00zUDJmdUJMZU5qSnBQQkVIMFd5?=
- =?utf-8?B?N29tSHlGOTlCbUtzanVTamtyT2hRSlMzOUlIdm5zWDREcGZieVJhbi9XbDBM?=
- =?utf-8?B?UFd5SVB0ckg1N0NFZ1pKcnVaZ1gxc2tpb3NyYk1CWW5JSTRjbFJnSDUxNzVB?=
- =?utf-8?B?VmYraE5jTG02NTVrUEMzdkVwZjdCa0lPOERwVjgxSW9UQ2srN3AzMUo1M1VS?=
- =?utf-8?B?OU1sV0Y4dUs3RUNKSjN2VEViTm51L3J4eWY0SmVyOTRsZm1yZmNxUkRzVm1v?=
- =?utf-8?B?NFFYUlZUWVZkSE9wVXBDZ2xldFl0MlVxTDhWLzJaL1VWS1o4b0dqcDdnelZx?=
- =?utf-8?B?bjg2cHdKVHZjcWxMRGpaNkJhVDRnSWVtVXdidHh2ZEJTYzJrOFpmS2tWYzds?=
- =?utf-8?B?dEl0alV5MncrY1FLM2QrUVRvNDA3V2dqSmM5TEtsM3c1VklGUUhIVEZzRDVo?=
- =?utf-8?B?MnZJUFB0SnFuNWlKZStRSlpYUjVxZHh4TWc5V2NUcUNnN3U4YTJCRjVnODgz?=
- =?utf-8?B?N1ExWEhqS3RhMVJITEpmanJickI1UlpoRmNhUy9LZ2JlRk9Tb3kxQ1JCYUNK?=
- =?utf-8?B?U3RobTVrMXRGSHdCeGVRbjBZZkkzZ2g1MGhpRy9kVXRHVVVIY2Q1TDVIbW5u?=
- =?utf-8?B?d21hMTYrWGdLNzBISWdmRVhoZ1plaG8wK0JFRFRsSmVFYXlXZzFBbXdveWQ1?=
- =?utf-8?B?ZlpjMEE5KzFtcTk3Zk9yYk9nRThxa21uUU9ZWTQ2Mkp2S0daM1RWQT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2960f6d-f0b6-413e-8dae-08dea5d7ef5e
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 10:13:18.7771
+	0zd1ORJvinb8LkzN41ehLeP2JpfOoODk2KBc5BdrotYwFTRzMxg5lGPFawmnaKdURtPxGdX1VIrgSGBvgcL0nX86GxOvTsLBBuBKGIfC/X7jW9nXzp3pHvXls2iwkBgLJa18jEPJVSsuxYyNny8jD4xvedyvYBN1kDiHOSqczkqL+6hqVun267TA4zuX3FKyj2AkWKijSujudaC82R6o6/41EFb9+T3d3EwhHT2e7ZvbVhjUvHIs6qbi+NI5QmrsNqBog0og5ZO12e0ysJokOtmRmpQGiyyAojLY6xonfoYvZCXGrSgAnAouqZeAecY7Q1XbqVM1JAf96nVJCgff4ihRVLC2qsfA++xJdamSXMTc8LIbKMVNVzwlTfDXfWulbcqXXPxuLNyL7Givj6VnhIIlobDd2G4ggY0UHljSL2BlYif00BuFob4gz3V5xHww
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 11:00:48.7551
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kb6OFUb/PrGV5a3QfFYNOjauBI4CwpJRHVukv7E5N3RKCVJ1+pm3LOsvLnZZoXTkR20uCb0hHwAZMNZsLpJNvw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7195
-X-purgate-ID: tlsNG-720697/1777457605-81772161-4A83587E/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8bd5f8b-ac1a-42b1-a391-08dea5de9245
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM2PEPF0001C714.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB9645
+X-purgate-ID: tlsNG-c1860d/1777460457-38567DB1-70AEBAC8/0/0
 X-purgate-type: clean
-X-purgate-size: 3816
+X-purgate-size: 4465
 
-On Fri, Mar 13, 2026 at 04:35:04PM +0000, Thierry Escande wrote:
-> This adds construct_mcfg() function to libacpi which allows to build MCFG
-> table for a given mmconfig_addr/mmconfig_len pair if the ACPI_HAS_MCFG
-> flag was specified in acpi_config struct.
-> 
-> The maximum bus number is calculated from mmconfig_size using
-> MCFG_SIZE_TO_NUM_BUSES macro (1MByte of MMIO space per bus).
-> 
-> Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
-> Signed-off-by: Thierry Escande <thierry.escande@vates.tech>
-> ---
->  tools/libacpi/acpi2_0.h | 17 ++++++++++++++++
->  tools/libacpi/build.c   | 43 +++++++++++++++++++++++++++++++++++++++++
->  tools/libacpi/libacpi.h |  6 ++++++
->  3 files changed, 66 insertions(+)
-> 
-> diff --git a/tools/libacpi/acpi2_0.h b/tools/libacpi/acpi2_0.h
-> index 51623e2a8a..2b16bd636a 100644
-> --- a/tools/libacpi/acpi2_0.h
-> +++ b/tools/libacpi/acpi2_0.h
-> @@ -442,6 +442,21 @@ struct acpi_20_slit {
->      uint8_t entry[0];
->  };
->  
-> +/*
-> + * PCI Express Memory Mapped Configuration Description Table
-> + */
-> +struct acpi_10_mcfg {
-> +    struct acpi_header header;
-> +    uint8_t reserved[8];
-> +    struct {
-> +        uint64_t base_address;
-> +        uint16_t pci_segment;
-> +        uint8_t  start_pci_bus_num;
-> +        uint8_t  end_pci_bus_num;
-> +        uint32_t reserved;
-> +    } entries[1];
-> +};
-> +
->  /*
->   * Table Signatures.
->   */
-> @@ -457,6 +472,7 @@ struct acpi_20_slit {
->  #define ACPI_2_0_WAET_SIGNATURE ASCII32('W','A','E','T')
->  #define ACPI_2_0_SRAT_SIGNATURE ASCII32('S','R','A','T')
->  #define ACPI_2_0_SLIT_SIGNATURE ASCII32('S','L','I','T')
-> +#define ACPI_MCFG_SIGNATURE     ASCII32('M','C','F','G')
->  
->  /*
->   * Table revision numbers.
-> @@ -472,6 +488,7 @@ struct acpi_20_slit {
->  #define ACPI_1_0_FADT_REVISION 0x01
->  #define ACPI_2_0_SRAT_REVISION 0x01
->  #define ACPI_2_0_SLIT_REVISION 0x01
-> +#define ACPI_1_0_MCFG_REVISION 0x01
->  
->  #pragma pack ()
->  
-> diff --git a/tools/libacpi/build.c b/tools/libacpi/build.c
-> index 95188e217e..90080c76c4 100644
-> --- a/tools/libacpi/build.c
-> +++ b/tools/libacpi/build.c
-> @@ -295,6 +295,37 @@ static struct acpi_20_slit *construct_slit(struct acpi_ctxt *ctxt,
->      return slit;
->  }
->  
-> +static struct acpi_10_mcfg *construct_mcfg(struct acpi_ctxt *ctxt,
-> +                                        const struct acpi_config *config)
-> +{
-> +    struct acpi_10_mcfg *mcfg;
-> +
-> +    /* Warning: this code expects that we have only one PCI segment */
+Hi Oleksii,
 
-Not only one PCI segment, but just one ECAM region.  You could in
-theory have multiple ECAM regions within a single PCI segment.
+>=20
+> diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+> index 9395b5af8745..a5554714cd7b 100644
+> --- a/xen/arch/arm/kernel.c
+> +++ b/xen/arch/arm/kernel.c
+> @@ -101,8 +101,8 @@ static paddr_t __init kernel_zimage_place(struct kern=
+el_info *info)
+>     paddr_t load_addr;
+>=20
+> #ifdef CONFIG_HAS_DOMAIN_TYPE
+> -    if ( (info->type =3D=3D DOMAIN_64BIT) && (info->zimage.start =3D=3D =
+0) )
+> -        return mem->bank[0].start + info->zimage.text_offset;
+> +    if ( (info->type =3D=3D DOMAIN_64BIT) && (info->image.start =3D=3D 0=
+) )
+> +        return mem->bank[0].start + info->image.text_offset;
+> #endif
+>=20
+>     /*
+> @@ -111,19 +111,19 @@ static paddr_t __init kernel_zimage_place(struct ke=
+rnel_info *info)
+>      * and above 32MiB. Load it as high as possible within these
+>      * constraints, while also avoiding the DTB.
+>      */
+> -    if ( info->zimage.start =3D=3D 0 )
+> +    if ( info->image.start =3D=3D 0 )
+>     {
+>         paddr_t load_end;
+>=20
+>         load_end =3D mem->bank[0].start + mem->bank[0].size;
+>         load_end =3D MIN(mem->bank[0].start + MB(128), load_end);
+>=20
+> -        load_addr =3D load_end - info->zimage.len;
+> +        load_addr =3D load_end - info->image.len;
+>         /* Align to 2MB */
+>         load_addr &=3D ~((2 << 20) - 1);
+>     }
+>     else
+> -        load_addr =3D info->zimage.start;
+> +        load_addr =3D info->image.start;
+>=20
+>     return load_addr;
+> }
+> @@ -131,8 +131,8 @@ static paddr_t __init kernel_zimage_place(struct kern=
+el_info *info)
+> static void __init kernel_zimage_load(struct kernel_info *info)
+> {
+>     paddr_t load_addr =3D kernel_zimage_place(info);
+> -    paddr_t paddr =3D info->zimage.kernel_addr;
+> -    paddr_t len =3D info->zimage.len;
+> +    paddr_t paddr =3D info->image.kernel_addr;
+> +    paddr_t len =3D info->image.len;
+>     void *kernel;
+>     int rc;
+>=20
+> @@ -215,7 +215,7 @@ int __init kernel_uimage_probe(struct kernel_info *in=
+fo,
+>         return -EOPNOTSUPP;
+>     }
+>=20
+> -    info->zimage.start =3D be32_to_cpu(uimage.load);
+> +    info->image.start =3D be32_to_cpu(uimage.load);
+>     info->entry =3D be32_to_cpu(uimage.ep);
+>=20
+>     /*
+> @@ -224,20 +224,20 @@ int __init kernel_uimage_probe(struct kernel_info *=
+info,
+>      * independent image. That means Xen is free to load such an image at
+>      * any valid address.
+>      */
+> -    if ( info->zimage.start =3D=3D 0 )
+> +    if ( info->image.start =3D=3D 0 )
+>         printk(XENLOG_INFO
+>                "No load address provided. Xen will decide where to load i=
+t.\n");
+>     else
+>         printk(XENLOG_INFO
+>                "Provided load address: %"PRIpaddr" and entry address: %"P=
+RIpaddr"\n",
+> -               info->zimage.start, info->entry);
+> +               info->image.start, info->entry);
+>=20
+>     /*
+>      * If the image supports position independent execution, then user ca=
+nnot
+>      * provide an entry point as Xen will load such an image at any appro=
+priate
+>      * memory address. Thus, we need to return error.
+>      */
+> -    if ( (info->zimage.start =3D=3D 0) && (info->entry !=3D 0) )
+> +    if ( (info->image.start =3D=3D 0) && (info->entry !=3D 0) )
+>     {
+>         printk(XENLOG_ERR
+>                "Entry point cannot be non zero for PIE image.\n");
+> @@ -257,13 +257,13 @@ int __init kernel_uimage_probe(struct kernel_info *=
+info,
+>         if ( rc )
+>             return rc;
+>=20
+> -        info->zimage.kernel_addr =3D mod->start;
+> -        info->zimage.len =3D mod->size;
+> +        info->image.kernel_addr =3D mod->start;
+> +        info->image.len =3D mod->size;
+>     }
+>     else
+>     {
+> -        info->zimage.kernel_addr =3D addr + sizeof(uimage);
+> -        info->zimage.len =3D len;
+> +        info->image.kernel_addr =3D addr + sizeof(uimage);
+> +        info->image.len =3D len;
+>     }
+>=20
+>     info->load =3D kernel_zimage_load;
+> @@ -289,7 +289,7 @@ int __init kernel_uimage_probe(struct kernel_info *in=
+fo,
+>      * Thus, Xen uses uimage.load attribute to determine the load address=
+ and
+>      * zimage.text_offset is ignored.
 
-> +    mcfg = ctxt->mem_ops.alloc(ctxt, sizeof(*mcfg), 16);
-> +    if ( !mcfg )
-> +        return NULL;
-> +
-> +    memset(mcfg, 0, sizeof(*mcfg));
-> +    mcfg->header.signature        = ACPI_MCFG_SIGNATURE;
-> +    mcfg->header.revision         = ACPI_1_0_MCFG_REVISION;
-> +    mcfg->header.creator_id       = ACPI_CREATOR_ID;
-> +    mcfg->header.creator_revision = ACPI_CREATOR_REVISION;
-> +    mcfg->header.length           = sizeof(*mcfg);
-> +    mcfg->header.oem_revision     = ACPI_OEM_REVISION;
-> +    fixed_strcpy(mcfg->header.oem_id, ACPI_OEM_ID);
-> +    fixed_strcpy(mcfg->header.oem_table_id, ACPI_OEM_TABLE_ID);
-> +
-> +    mcfg->entries[0].base_address      = config->mmconfig_addr;
-> +    mcfg->entries[0].pci_segment       = 0;
-> +    mcfg->entries[0].start_pci_bus_num = 0;
-> +    mcfg->entries[0].end_pci_bus_num   =
-> +        MCFG_SIZE_TO_NUM_BUSES(config->mmconfig_size) - 1;
+Should we update the comment as well?
 
+Also in here:
+https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen/include/xen/fd=
+t-kernel.h;h=3D4d0467bb396a9cf317954fd511469e7f56d67844;hb=3Drefs/heads/sta=
+ging#l111
 
-You might want to check that mmconfig_addr and mmconfig_size are set
-ahead of using them?  Just in case some bogus toolstack/hvmloader sets
-ACPI_HAS_MCFG without correctly populating the fields?
+Cheers,
+Luca
 
-Thanks, Roger.
 
