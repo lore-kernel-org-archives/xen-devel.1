@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88CEFFF8867
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2026 12:07:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1297273.1573349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00ADFFF8877
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2026 12:07:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1297276.1573375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI3gX-0006Rk-Gm; Wed, 29 Apr 2026 12:06:33 +0000
+	id 1wI3gf-000785-58; Wed, 29 Apr 2026 12:06:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1297273.1573349; Wed, 29 Apr 2026 12:06:33 +0000
+Received: by outflank-mailman (output) from mailman id 1297276.1573375; Wed, 29 Apr 2026 12:06:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI3gX-0006Rd-Ci; Wed, 29 Apr 2026 12:06:33 +0000
-Received: by outflank-mailman (input) for mailman id 1297273;
- Wed, 29 Apr 2026 12:06:31 +0000
+	id 1wI3gf-00077t-1L; Wed, 29 Apr 2026 12:06:41 +0000
+Received: by outflank-mailman (input) for mailman id 1297276;
+ Wed, 29 Apr 2026 12:06:40 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wI3gV-0006RX-DV
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 12:06:31 +0000
+ (envelope-from <jgross@suse.com>) id 1wI3gd-00076k-VM
+ for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 12:06:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wI3gU-00FgZi-Py
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 14:06:30 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wI3gd-00CWOJ-BO
+ for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 14:06:39 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 69f1f444-5cb7-0a2a0a5109dd-0a2a4503d97c-12
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 14:06:30 +0200
+ id 69f1f440-bab6-0a2a0a5309dd-0a2a450689ac-40
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 14:06:39 +0200
 Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jgross@suse.com>)
- id 69f1f446-672d-0a2a45030019-c387df838856-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 14:06:30 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 69f1f44f-7371-0a2a45060019-c387df83d28e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 14:06:39 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CF08C5BD5F;
- Wed, 29 Apr 2026 12:06:21 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6EEB45BD15;
+ Wed, 29 Apr 2026 12:06:38 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 94F26593B0;
- Wed, 29 Apr 2026 12:06:21 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 46C11593B0;
+ Wed, 29 Apr 2026 12:06:38 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 1sI2Iz308Wk6VQAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 29 Apr 2026 12:06:21 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id B3krEE708Wm5VQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Wed, 29 Apr 2026 12:06:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,127 +61,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1777464386; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=wbjluDVZotZt60L9F+RyvmJUG+lseQlcgdHyfdTEa3g=;
-	b=VeGvPzIkKRE75NI8Ur7ooVJ618bEDtu+MaEvc7uEL/8HaDzpNXVKFAh3NnI9a4vgn2ctUX
-	k730HN0WxLwrWUlsHwcShi3J++vB9aNyUk6XzPyn5NQr1Af9hQwqZcNVAqOoovrgx88ZUH
-	RvhHXxFJFOX116yDBLEQ5NndFsS5gYs=
+Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: smtp-out2.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1777464381; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=wbjluDVZotZt60L9F+RyvmJUG+lseQlcgdHyfdTEa3g=;
-	b=BLEcjP1eFCX1oX1o9NAHfJsOF4pLKWp+J148YMsmJ95qQv3fJ84J7Y6Vv/oIUnGRjukUQ0
-	z+q5a3WMRUEbw5IbxYaPhkR0V+F+FpqVdmRSd1JX9z1GEYTgIIP1v9B9VcZoSFIXVA8FF3
-	sRQ+zQLe7X8seeVWSuViYE85JnGdoxk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/4] tools/xenstore: fix issue related to XSA-417
-Date: Wed, 29 Apr 2026 14:06:15 +0200
-Message-ID: <20260429120619.1013440-1-jgross@suse.com>
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH v2 3/4] tools/xenstored: allow @releaseDomain watch for all domains
+Date: Wed, 29 Apr 2026 14:06:18 +0200
+Message-ID: <20260429120619.1013440-4-jgross@suse.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260429120619.1013440-1-jgross@suse.com>
+References: <20260429120619.1013440-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_ALL(0.00)[]
-X-purgate-ID: tlsNG-33051d/1777464390-A197D938-9D91CD56/0/0
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Queue-Id: 6EEB45BD15
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-purgate-ID: tlsNG-16d1c6/1777464399-50566D75-6BEF1B58/0/0
 X-purgate-type: clean
-X-purgate-size: 2909
+X-purgate-size: 2688
 
-There is one corner case of XSA-417 which wasn't handled completely
-with the patches back then.
+Currently the @releaseDomain watch is allowed for dom0 only. This is
+problematic for guests which want to give other domains access to
+Xenstore entries, as they have no simple way to tell when such a
+domain is stopped.
 
-The XSA-417 fixes tried to solve the problem, that a new domU would
-inherit access permissions to access Xenstore entries with that domid
-listed in the access rights. In order not to make it easy for a domU
-to query existence of a domid, adding permission for a non-existing
-domain is not rejected by Xenstore. The XSA-417 patches solved that
-problem by adding a flag to a permission entry referencing a not
-existing domain, indicating that the permission should not be
-effective for Xenstore.
+Allow @releaseDomain to be usable by all domains as the default.
 
-One corner case was not handled:
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+ tools/xenstored/core.c | 26 ++++++++++++++++++++------
+ 1 file changed, 20 insertions(+), 6 deletions(-)
 
-Consider guest 1 and guest 2 running. Guest 1 adds guest 2 to be able
-to access a Xenstore entry. Now guest 2 is removed from the system and
-a new guest 3 with the same domid as guest 2 had is being created.
-
-When guest 3 would try now to access the Xenstore entry, it would fail,
-as Xenstore would see that the Xenstore entry is older than guest 3.
-
-But if guest 1 is modifying the permissions of the Xenstore entry
-again, e.g. by adding another domain, the permission entry for guest 2
-would lose its "special flag", resulting in guest 3 now really gaining
-access to the Xenstore entry.
-
-This series is fixing this problem by the following means:
-
-- In order to allow guests to know that a Xenstore entry permission
-  might have gone stale, allow unprivileged guests to receive
-  @releaseDomain watch events. This doesn't open a security hole, as
-  the only knowledge which can by gathered from that change is that a
-  domain is gone, not that a domain with a specific domid is existing.
-
-- When a domain is removed, remove all permissions relating to this
-  domain from all Xenstore entries.
-
-Note that this issue was discussed by the Xen security team and we
-decided not to issue an XSA, as there are no known use cases where one
-unprivileged guest would grant access to its Xenstore nodes to more
-than one other unprivileged guests.
-
-We decided to delay this patch series until the watch depth feature has
-been committed, as with that feature available it is now possible for
-a guest to handle the death of a specific domain in a sane way.
-
-Changes in V2:
-- some minor comments addressed
-
-Denis Mukhin (1):
-  xen/public: introduce DOMID_ANY
-
-Juergen Gross (3):
-  tools/xenstored: add support for "all domains" node permission
-  tools/xenstored: allow @releaseDomain watch for all domains
-  tools/xenstored: remove permissions related to dead domain
-
- docs/man/xl.cfg.5.pod.in        |  4 ++
- tools/xenstored/core.c          | 45 ++++++++++++++-----
- tools/xenstored/domain.c        | 78 +++++++++++++++++++++------------
- tools/xenstored/domain.h        |  3 +-
- xen/include/public/io/xs_wire.h |  2 +
- xen/include/public/xen.h        |  7 +++
- 6 files changed, 100 insertions(+), 39 deletions(-)
-
+diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
+index 7dbcd5daad..d6d462b7bc 100644
+--- a/tools/xenstored/core.c
++++ b/tools/xenstored/core.c
+@@ -2279,19 +2279,19 @@ struct connection *get_connection_by_id(unsigned int conn_id)
+ }
+ 
+ /* We create initial nodes manually. */
+-static void manual_node(const char *name, const char *child)
++static void manual_node_perms(const char *name, const char *child,
++			      struct xs_permissions *perms,
++			      unsigned int n_perms)
+ {
+ 	struct node *node;
+-	struct xs_permissions perms = { .id = priv_domid,
+-					.perms = XS_PERM_NONE };
+ 
+ 	node = talloc_zero(NULL, struct node);
+ 	if (!node)
+ 		barf_perror("Could not allocate initial node %s", name);
+ 
+ 	node->name = name;
+-	node->perms = &perms;
+-	node->hdr.num_perms = 1;
++	node->perms = perms;
++	node->hdr.num_perms = n_perms;
+ 	node->children = (char *)child;
+ 	if (child)
+ 		node->hdr.childlen = strlen(child) + 1;
+@@ -2301,6 +2301,14 @@ static void manual_node(const char *name, const char *child)
+ 	talloc_free(node);
+ }
+ 
++static void manual_node(const char *name, const char *child)
++{
++	struct xs_permissions perms = { .id = priv_domid,
++					.perms = XS_PERM_NONE };
++
++	manual_node_perms(name, child, &perms, 1);
++}
++
+ static unsigned int hash_from_key_fn(const void *k)
+ {
+ 	const char *str = k;
+@@ -2320,6 +2328,11 @@ static int keys_equal_fn(const void *key1, const void *key2)
+ 
+ void setup_structure(bool live_update)
+ {
++	struct xs_permissions perms[] = {
++		{ .id = priv_domid,	.perms = XS_PERM_NONE },
++		{ .id = DOMID_ANY,	.perms = XS_PERM_READ },
++	};
++
+ 	nodes = create_hashtable(NULL, "nodes", hash_from_key_fn, keys_equal_fn,
+ 				 HASHTABLE_FREE_KEY | HASHTABLE_FREE_VALUE);
+ 	if (!nodes)
+@@ -2331,7 +2344,8 @@ void setup_structure(bool live_update)
+ 		manual_node("/", "tool");
+ 		manual_node("/tool", "xenstored");
+ 		manual_node("/tool/xenstored", NULL);
+-		manual_node("@releaseDomain", NULL);
++		manual_node_perms("@releaseDomain", NULL,
++				  perms, ARRAY_SIZE(perms));
+ 		manual_node("@introduceDomain", NULL);
+ 		domain_nbentry_fix(priv_domid, 5);
+ 	}
 -- 
 2.53.0
 
