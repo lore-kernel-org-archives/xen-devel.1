@@ -4,45 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E4DFF886F
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2026 05:44:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1297903.1573596 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA31CCD13D3
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2026 08:12:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1297969.1573604 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wIKC6-0008T5-EY; Thu, 30 Apr 2026 05:44:14 +0000
+	id 1wIMUp-0003ud-LM; Thu, 30 Apr 2026 08:11:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1297903.1573596; Thu, 30 Apr 2026 05:44:14 +0000
+Received: by outflank-mailman (output) from mailman id 1297969.1573604; Thu, 30 Apr 2026 08:11:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wIKC6-0008Sx-As; Thu, 30 Apr 2026 05:44:14 +0000
-Received: by outflank-mailman (input) for mailman id 1297903;
- Thu, 30 Apr 2026 03:26:06 +0000
+	id 1wIMUp-0003uV-H7; Thu, 30 Apr 2026 08:11:43 +0000
+Received: by outflank-mailman (input) for mailman id 1297969;
+ Thu, 30 Apr 2026 08:11:42 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <patchwork-bot+linux-riscv@kernel.org>)
- id 1wII2Q-0005Vc-9T
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 03:26:06 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ddd7187da000f373@swg.vates.tech>)
+ id 1wIMUo-0003u9-5f
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 08:11:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wII2O-005uGt-FF
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 05:26:04 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <patchwork-bot+linux-riscv@kernel.org>)
- id 69f2cb6f-bab6-0a2a0a5309dd-0a2a4501e788-42
- for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 05:26:04 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <patchwork-bot+linux-riscv@kernel.org>)
- id 69f2cbca-c1f2-0a2a45010019-aceafc1f8c02-3
- for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 05:26:03 +0200
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D2DC240317;
- Thu, 30 Apr 2026 03:26:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA274C2BCC6;
- Thu, 30 Apr 2026 03:26:01 +0000 (UTC)
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 02F1A3809A07; Thu, 30 Apr 2026 03:25:18 +0000 (UTC)
+ id 1wIMUn-004hyE-FJ
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 10:11:41 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ddd7187da000f373@swg.vates.tech>)
+ id 69f30eb8-bab6-0a2a0a5309dd-0a2a450c85a2-28
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 10:11:41 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19ddd7187da000f373@swg.vates.tech>)
+ id 69f30ebc-62f1-0a2a450c0019-b9ff1c229d73-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 10:11:41 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19ddd7187da000f373.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 30 Apr 2026 08:11:38 +0000
+Received: from [192.168.1.18] (88-175-170-134.subs.proxad.net [88.175.170.134])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 799C0812E3;
+ Thu, 30 Apr 2026 10:11:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,98 +58,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:Date:References:In-Reply-To:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777519561;
-	bh=S8ESDWn2FV212MQ0O36a6N64V74CpKEgoDR0Cwb1eYo=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=RtcaGla8SJMvzp565cZWG4JA/pd6x2rokqKWLW76DsXVVSBMWfvO7M+j3tfPr4WiS
-	 iYIi3LmvsvftG5YY+oM7g4PvJ9jMSl95DFA2LT7Ri+Y57wvJYObh7grdN4/wFxy9Bp
-	 3dNPBrE0VUHIF5qHqtQDM1L3bZLqpe75efGu9RIosM9YKInDL4ti/opEBCchGSV7Ed
-	 NJ0t/2yQEWiWU4UX0J1SMMnzWayyrY3pGrDTZxRSaZcqhSakDi4GgjEzwKf7uPPJCg
-	 fYiHoJFVnaikAgVqNlokz3BThqsRnYRJYWEnZONwh0eeFUJrF4d3CMi6aMhGsxyQjO
-	 srXFfj2h9HOug==
-Content-Type: text/plain; charset="utf-8"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=K5BjNIf9tFswbQOeYBUyQT6QRAHcFYHBub2Z81jUwUA=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=jPZTmBGDpHx3CzsFlQeJd9hPGpuHvqcmZ4AVvUiyLEYeHdra+By20dyF4BK2rIs69alylUEjL
+ VL4Sll+7kQhYiYhz2+y+Q+HubVftb2RSYJleBUn3wBsitDOWivyLd/qzNVsO+uvN0Q/lX9x9W2H
+ p1KCvySnTsE9etua52aqtqFsFDK+/XRvg+tVTAOh5dXogf2DS1MqJ/kwq6ocKXj6MiaTCfdI0Qb
+ d432sLkyq0DIQkJBivKg+0Vg0+zMEe/SUhkGgGyl4tQPXH6NeWBiBMEOy7KKEVKBAP52x+kXK4u
+ OyDhZI0MMu9kcO12sG49GTjMnVzzn2U1I7vNliloOuBQ==
+X-Zone-Loop: 6dcc421ef085fe90b37f11069ea918596341758269d3
+x-campaign-type: default
+x-transaction-id: 4403762b-e761-4f62-98b1-a2a661b111a6
+x-swg-uid: 01-a5b5fcde-d16a-4aac-891e-b341eb3a09ef
+X-Mailer: Sweego
+Message-ID:
+ <1777536698.8631fc262581453bbf619ec5b2062170.19ddd7187da000f373@vates.tech>
+x-swg-bid: 1777536698.8631fc262581453bbf619ec5b2062170.19ddd7187da000f373
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Thu, 30 Apr 2026 10:11:37 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH RESEND v10 0/8] ACPI: Unify CPU UID interface and fix
- ARM64
- TPH steer-tag issue
-From: patchwork-bot+linux-riscv@kernel.org
-Message-Id: 
- <177751951654.2274119.17258357457134506240.git-patchwork-notify@kernel.org>
-Date: Thu, 30 Apr 2026 03:25:16 +0000
-References: <20260401081640.26875-1-fengchengwen@huawei.com>
-In-Reply-To: <20260401081640.26875-1-fengchengwen@huawei.com>
-To: Chengwen Feng <fengchengwen@huawei.com>
-Cc: linux-riscv@lists.infradead.org, bhelgaas@google.com,
- catalin.marinas@arm.com, will@kernel.org, rafael@kernel.org,
- mark.rutland@arm.com, x86@kernel.org, liuyonglong@huawei.com,
- anshuman.khandual@arm.com, linux-doc@vger.kernel.org, kees@kernel.org,
- linux-pci@vger.kernel.org, dave.hansen@linux.intel.com,
- Eric.VanTassell@amd.com, somnath.kotur@broadcom.com, kai.huang@intel.com,
- kevinloughlin@google.com, punit.agrawal@oss.qualcomm.com, hpa@zytor.com,
- ilkka@os.amperecomputing.com, kernel@xen0n.name, thorsten.blum@linux.dev,
- linux-acpi@vger.kernel.org, corbet@lwn.net, masahiroy@kernel.org,
- si.yanteng@linux.dev, peterz@infradead.org,
- pawan.kumar.gupta@linux.intel.com, linux-arm-kernel@lists.infradead.org,
- xen-devel@lists.xenproject.org, szy0127@sjtu.edu.cn, lenb@kernel.org,
- thomas.lendacky@amd.com, thuth@redhat.com, ryan.roberts@arm.com,
- darwi@linutronix.de, make24@iscas.ac.cn, suzuki.poulose@arm.com,
- james.clark@linaro.org, wei.huang2@amd.com, bwicaksono@nvidia.com,
- loongarch@lists.linux.dev, jonathan.cameron@huawei.com,
- sohil.mehta@intel.com, boris.ostrovsky@oracle.com, xin@zytor.com,
- andrew.gospodarek@broadcom.com, wanghuiqiang@huawei.com, jgross@suse.com,
- wangyuquan1236@phytium.com.cn, seanjc@google.com, guohanjun@huawei.com,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-perf-users@vger.kernel.org, wangzhou1@hisilicon.com, tglx@kernel.org,
- heinrich.schuchardt@canonical.com, chenl311@chinatelecom.cn,
- robin.murphy@arm.com
-X-purgate-ID: tlsNG-d62444/1777519564-BDE6BFF4-FB18EA95/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] virtio-mmio: add xenbus probing
+To: Val Packett <val@invisiblethingslab.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>
+Cc: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Viresh Kumar <viresh.kumar@linaro.org>,
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux.dev
+References: <20260429141339.74472-1-val@invisiblethingslab.com>
+ <1777473712.8631fc262581453bbf619ec5b2062170.19dd9b07146000f373@vates.tech>
+ <fd6493ac-9d3e-475a-a844-6e53b0472820@invisiblethingslab.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+In-Reply-To: <fd6493ac-9d3e-475a-a844-6e53b0472820@invisiblethingslab.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.2fd.57a79a2994658d0b.19ddd718549.d4fe0c9720373f89=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1777536697674
+X-purgate-ID: tlsNG-d25034/1777536701-6E975CF5-37DAD087/0/0
 X-purgate-type: clean
-X-purgate-size: 1965
+X-purgate-size: 4998
 
-Hello:
+---=Part.2fd.57a79a2994658d0b.19ddd718549.d4fe0c9720373f89=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-This series was applied to riscv/linux.git (fixes)
-by Rafael J. Wysocki <rafael.j.wysocki@intel.com>:
+Le 30/04/2026 =C3=A0 06:06, Val Packett a =C3=A9crit=C2=A0:
+>=20
+> On 4/29/26 11:41 AM, Teddy Astie wrote:
+>> Hello,
+>>
+>> Le 29/04/2026 =C3=A0 16:18, Val Packett a =C3=A9crit=C2=A0:
+>>> [=E2=80=A6]
+>>>
+>>> I've been working on porting virtio-mmio support from Arm to x86_64,
+>>> with the goal of running vhost-user-gpu to power Wayland/GPU integrati=
+on
+>>> for Qubes OS=2E (I'm aware of various proposals for alternative virtio
+>>> transports but virtio-mmio seems to be the only one that *is* upstream
+>>> already and just Works=2E=2E) Setting up virtio-mmio through xenbus,=
+=20
+>>> initially
+>>> motivated just by event channels being the only real way to get=20
+>>> interrupts
+>>> working on HVM, turned out to generally be quite pleasant and nice :)
+>> Is it HVM specific, or can we also make it work for PVH (we can actuall=
+y
+>> attach a ioreq server to PVH guests) ?
+>=20
+> Sorry, typo, I did mean PVH of course!
+>=20
+> I've been testing this with PVH guests + PV dom0, with my PV alloc_ioreq=
+=20
+> fix:
+> https://lore=2Ekernel=2Eorg/all/20251126062124=2E117425-1-=20
+> val@invisiblethingslab=2Ecom/
+>=20
+> (Time to resend that one as a non-RFC I guess=E2=80=A6)
+>=20
+> HVM actually does have legacy ISA interrupts (which are often used with=
+=20
+> virtio-mmio on KVM), funnily enough, and I've tried firing those from a=
+=20
+> DMOP but that silly thing didn't work properly=2E
+>=20
+>>> I'd like to get some early feedback for this patch, particularly
+>>> the general stuff:
+>>>
+>>> * is this whole thing acceptable in general?
+>>> * should it be extracted into a different file?
+>>> * (from the Xen side) any input on the xenstore keys, what goes where?
+>>> * anything else to keep in mind?
+>>>
+>>> It does seem simple enough, so hopefully this can be done?
+>>>
+>>> The corresponding userspace-side WIP is available at:
+>>> https://github=2Ecom/QubesOS/xen-vhost-frontend
+>>>
+>>> And the required DMOP for firing the evtchn events will be sent
+>>> to xen-devel shortly as well=2E
+>> Could that be done through evtchn_send (or its userland counterpart) ?
+>=20
+> Actually, yes=E2=80=A6 The use of DMOPs is only dictated by the current =
+Linux=20
+> privcmd=2Ec code (the irqfds created by the kernel react to events by=20
+> executing HYPERVISOR_dm_op with a stored operation), we can avoid the=20
+> need to modify Xen by simply expanding the privcmd driver to make=20
+> "evtchn fds"=2E Sounds good, will do=2E
+>=20
 
-On Wed, 1 Apr 2026 16:16:32 +0800 you wrote:
-> This patchset unifies ACPI Processor UID retrieval across
-> arm64/loongarch/riscv/x86 via acpi_get_cpu_uid() (with input validation)
-> and fixes ARM64 CPU steer-tag retrieval failure in PCI/TPH:
-> 
-> 1-4: Add acpi_get_cpu_uid() for arm64/loongarch/riscv/x86 (update
->      respective users)
-> 5: Centralize acpi_get_cpu_uid() declaration in include/linux/acpi.h
-> 6: Clean up perf/arm_cspmu
-> 7: Clean up ACPI/PPTT and remove unused get_acpi_id_for_cpu()
-> 8: Pass ACPI Processor UID to Cache Locality _DSM
-> 
-> [...]
+Given that the event channel used by device models is exposed through=20
+ioreq=2Evp_eport ("evtchn for notifications to/from device model")=2E I=20
+don't think you need to expand the privcmd interface, and you should be=20
+able to do this instead :
 
-Here is the summary with links:
-  - [RESEND,v10,1/8] arm64: acpi: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-    https://git.kernel.org/riscv/c/7cd5f5659ac8
-  - [RESEND,v10,2/8] LoongArch: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-    https://git.kernel.org/riscv/c/d78ef9d2e1f2
-  - [RESEND,v10,3/8] RISC-V: ACPI: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-    https://git.kernel.org/riscv/c/0c8231994e43
-  - [RESEND,v10,4/8] x86/acpi: Add acpi_get_cpu_uid() for unified ACPI CPU UID retrieval
-    https://git.kernel.org/riscv/c/3cfe889f8965
-  - [RESEND,v10,5/8] ACPI: Centralize acpi_get_cpu_uid() declaration in include/linux/acpi.h
-    https://git.kernel.org/riscv/c/f652d0a4e13c
-  - [RESEND,v10,6/8] perf: arm_cspmu: Switch to acpi_get_cpu_uid() from get_acpi_id_for_cpu()
-    https://git.kernel.org/riscv/c/1ab03189793f
-  - [RESEND,v10,7/8] ACPI: PPTT: Use acpi_get_cpu_uid() and remove get_acpi_id_for_cpu()
-    https://git.kernel.org/riscv/c/a7034e9e4491
-  - [RESEND,v10,8/8] PCI/TPH: Pass ACPI Processor UID to Cache Locality _DSM
-    https://git.kernel.org/riscv/c/abdd2a86535b
+open /dev/xen/evtchn
+perform IOCTL_EVTCHN_BIND_INTERDOMAIN (for each guest vCPU)
+   with remote_domain=3Dguest_domid, remote_port=3Dioreq=2Evp_eport
 
-You are awesome, thank you!
+Then interact with the event channel through IOCTL_EVTCHN_NOTIFY (with=20
+local port given by IOCTL_EVTCHN_BIND_INTERDOMAIN) and read/write on the=
+=20
+file descriptor=2E
+
+I have some experimental Rust code to work with event channels [1], but=20
+I think you can find similar code in multiples places=2E
+
+[1]
+https://github=2Ecom/TSnake41/rust-vmm-xen/blob/redesign-proposal/xen/src/=
+event/mod=2Ers
+https://github=2Ecom/TSnake41/rust-vmm-xen/blob/redesign-proposal/xen-unix=
+/src/event/mod=2Ers
+
+>>> [=2E=2E]
+>>>
+>>> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+>>> index ce5bc0d9ea28=2E=2E56bc2b10526b 100644
+>>> --- a/drivers/virtio/Kconfig
+>>> +++ b/drivers/virtio/Kconfig
+>>> @@ -171,6 +171,13 @@ config VIRTIO_MMIO_CMDLINE_DEVICES
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 If unsure, say 'N'=2E
+>>> +config VIRTIO_MMIO_XENBUS
+>>> +=C2=A0=C2=A0=C2=A0 bool "Memory mapped virtio devices parameter parsi=
+ng"
+>> that text seems to miss the xenbus aspect
+> Yep, didn't change that yet, ack
+>>> [=2E=2E]
+>> In some way, we're defining a new "PV driver" which is a virtio-mmio
+>> one, I guess we can eventually specific some form of protocol that
+>> backend/frontend would need to follow ?
+>=20
+> Right,=C2=A0J=C3=BCrgen mentioned documenting the keys in the xenstore-p=
+aths doc=2E=2E=20
+> would the entire "protocol" (keys + state transition logic) fit into tha=
+t?
+>=20
+> The keys are currently derived from the initial Arm prototype which=20
+> wasn't actually using xenbus properly (the guest driver was configured=
+=20
+> by a device tree node, but the ioreq server used xenstore keys, without=
+=20
+> properly transitioning between states)=2E
+>=20
+>=20
+> Thanks,
+> ~val
+>=20
+>=20
+
+Teddy
+
+
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Teddy Astie | Vates XCP-ng Developer
 
+XCP-ng & Xen Orchestra - Vates s=
+olutions
 
+web: https://vates=2Etech
+---=Part.2fd.57a79a2994658d0b.19ddd718549.d4fe0c9720373f89=---
 
