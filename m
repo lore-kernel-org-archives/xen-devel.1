@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E31ADCCFA13
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2026 16:55:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1297682.1573568 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6880FF886F
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2026 04:01:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1297908.1573577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI8Bi-0000j3-A3; Wed, 29 Apr 2026 16:55:02 +0000
+	id 1wIIaj-0001ws-7n; Thu, 30 Apr 2026 04:01:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1297682.1573568; Wed, 29 Apr 2026 16:55:02 +0000
+Received: by outflank-mailman (output) from mailman id 1297908.1573577; Thu, 30 Apr 2026 04:01:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wI8Bi-0000iw-7K; Wed, 29 Apr 2026 16:55:02 +0000
-Received: by outflank-mailman (input) for mailman id 1297682;
- Wed, 29 Apr 2026 16:55:01 +0000
+	id 1wIIaj-0001wk-1L; Thu, 30 Apr 2026 04:01:33 +0000
+Received: by outflank-mailman (input) for mailman id 1297908;
+ Thu, 30 Apr 2026 04:01:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dda2a3d88000f373@swg.vates.tech>)
- id 1wI8Bg-0000iq-Hu
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 16:55:01 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <val@invisiblethingslab.com>) id 1wIIah-0001we-Ns
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 04:01:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wI8Bf-00DXPO-RK
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2026 18:54:59 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dda2a3d88000f373@swg.vates.tech>)
- id 69f237c2-e002-0a2a0a5209dd-0a2a4508b90a-18
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 18:54:59 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19dda2a3d88000f373@swg.vates.tech>)
- id 69f237e3-63b5-0a2a45080019-b9ff1c22822f-3
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2026 18:54:59 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19dda2a3d88000f373.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 29 Apr 2026 16:54:54 +0000
-Received: from [192.168.1.18] (88-175-170-134.subs.proxad.net [88.175.170.134])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id E2CA986484;
- Wed, 29 Apr 2026 18:54:49 +0200 (CEST)
+ id 1wIIag-007PkR-LM
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2026 06:01:30 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <val@invisiblethingslab.com>)
+ id 69f2d40c-5cb7-0a2a0a5109dd-0a2a4507c7ee-42
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 06:01:30 +0200
+Received: from [103.168.172.149] (helo=fout-a6-smtp.messagingengine.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <val@invisiblethingslab.com>)
+ id 69f2d419-229c-0a2a45070019-67a8ac9580f9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2026 06:01:30 +0200
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfout.phl.internal (Postfix) with ESMTP id 12B8FEC0047;
+ Thu, 30 Apr 2026 00:01:29 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-04.internal (MEProxy); Thu, 30 Apr 2026 00:01:29 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 30 Apr 2026 00:01:25 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,102 +52,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=tPxjCeuXw+PNWa5aL1B7SkZUldWs8bQSo7/uIWCVxQE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=iK33oN+HlKXnuzRGtXmCAs8hQKlIPet7lI2bKWVSeonf/MuGZmlMdnX8BAXYNVTz5atD211NS
- qPNADF9oNZeO1nMFF7ALTYz32OTgaEOQHPJTqTX3mNsjS/oPBdsptElbeyVuSytav+AF00Yy/pX
- vT/rC1+vlEkTmSX575Nbca21DWJldWVvzqqTYi475XUmoCZu3avNSILZabY8LIWqEkiV0PH6vjP
- 86/z9fG/OaFhs/yGqAQCdZZ+Aq63AJO9+AYGlAyqBslVAwnXdckQ3510WGODJvo5JRs+dQ1UkFM
- +ze/4jAzODEZ8PjYz5sUkEBnIjucWS3vDVSbJi3Xuv7g==
-X-Zone-Loop: f5fc6aa7fb3d2a80262c364e8869db00cebd8a22257d
-x-campaign-type: default
-x-transaction-id: acad869d-85a3-4603-b747-bf2ace67da70
-x-swg-uid: 01-f95f651f-3ae0-4cd0-b7b1-e0d56d10c2ba
-X-Mailer: Sweego
-Message-ID:
- <1777481694.8631fc262581453bbf619ec5b2062170.19dda2a3d88000f373@vates.tech>
-x-swg-bid: 1777481694.8631fc262581453bbf619ec5b2062170.19dda2a3d88000f373
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 29 Apr 2026 18:54:49 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm2; t=1777521689; x=1777608089; bh=2ylbdgSEO3
+	g7pTjq5Ngy4PvXfav/Y4wiIhm1YRccQLc=; b=m+rIUvnRjz9/8XoBRi1na6YL0m
+	qtCPtZbQTvHnQiqB9jSXUAA6TwJjlOJoLdVvPYtEIusCCjyA6t4lBfi1O8NEM66A
+	GZR30GH9ZetjhaPGYmY93MGqBUMeeNvezCjsuF5nsWiVt7EVDnCKamRQ3Nv2Jubf
+	EqOGPGVH2tDZFdY9aq/X3Ljso7OAdhH0LQeDGjWGFA74kmOrd8l0e1eOMbnoV7FS
+	kC4+NLoH/LnesKHXQSdGsoM2I1tjl/Dw3VFZKFEC2eJ+3Egts+B6vEjrOThm9Zga
+	NvDPTK9d1lRDwFjU8+uVGJN4YUnJjUxk3JU/AB2XIWCuRI1Ft5jUAFkOFBWg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1777521689; x=
+	1777608089; bh=2ylbdgSEO3g7pTjq5Ngy4PvXfav/Y4wiIhm1YRccQLc=; b=Q
+	pLe9WRYowph1Kl4KLVOS5KSidJSLOTifNzNH/SP7law4UKeAIA+pmlUITiD32ot+
+	jZYGLNVxwkO9br9gYnvnLafM60jLXm7OoPRHUosPcLlfsmnEmt+P3ywLDbMAtexQ
+	KPCyXdSyrx7Kw7Xx+0ZJwO3MeoqCQI1abABbz1Z6c1c8rvOkEyk+Crk/815sgBfY
+	vp4H+LZ0lJy26/nXVf73/iRFxZpqHjV8tgJOcMl+dy/E87rw+S3KVaRv+d6wyoua
+	tESPlHtQCQHVIiIjPjvB9DLkhP1eUM57U6kWE8J4JK87ru0uin9u6n+1OpvHFA9f
+	UENUGHSwFjHky+B/RctIQ==
+X-ME-Sender: <xms:GNTyabX8PBPDfqwgBJY7ZPBDWRtlqfyzR1VU_l90N9jo6MNVknCAxw>
+    <xme:GNTyabxHUKsyUArbro6Ihy9eXSDlLk1eeZ-7kYpfqkLECGeMCHyFvACmfHz0Dhmst
+    7wWPMzqWb56I2GvsV8Um7bq2wgzt0otN8z96JHbjb1thfebfHg>
+X-ME-Received: <xmr:GNTyaS81bMRlVmF02nYmg-sjCwKsTA64eyvXUqWaZhLEnfOLHlFlcM2A8P6YJCu5LA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekieefudcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+    hrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepgggrlhcurfgr
+    tghkvghtthcuoehvrghlsehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqne
+    cuggftrfgrthhtvghrnhepjeehkeffhedvffeffffflefgfeejudejiefhtdeijeeuteei
+    teejtdettdeuleevnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdpghhithhhuhgsrd
+    gtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhep
+    vhgrlhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmpdhnsggprhgtphhtth
+    hopedutddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepthgvugguhidrrghsthhi
+    vgesvhgrthgvshdrthgvtghhpdhrtghpthhtohepmhhsthesrhgvughhrghtrdgtohhmpd
+    hrtghpthhtohepjhgrshhofigrnhhgsehrvgguhhgrthdrtghomhdprhgtphhtthhopeig
+    uhgrnhiihhhuoheslhhinhhugidrrghlihgsrggsrgdrtghomhdprhgtphhtthhopegvph
+    gvrhgviihmrgesrhgvughhrghtrdgtohhmpdhrtghpthhtohepmhgrrhhmrghrvghksehi
+    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdprhgtphhtthhopehvihhrvghshh
+    drkhhumhgrrheslhhinhgrrhhordhorhhgpdhrtghpthhtohepgigvnhdquggvvhgvlhes
+    lhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheplhhinhhugidqkh
+    gvrhhnvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:GNTyaQ9lpwWEvk7D3W8FOh-v8UFvy9LxD077RmK18-iGsxLBpoBz4A>
+    <xmx:GNTyaRXFM_C8bISyB3i7LdjfauPLV9X3t-nWnjGRYfaWm68YS0Qwmg>
+    <xmx:GNTyadeaXKWt2qxuCLhWVSLndggsuCTkf0mnZSRjDKLk7NNMj3f5jQ>
+    <xmx:GNTyaaYyiptX3NkomcuJsJ32POBzihjItVqHl3XfHHuPE-wTrpR3KA>
+    <xmx:GdTyaR_elsMaFCiS5kLMPtw1pVuxe2GZrjMOk0JwWSMBarSfnRE4KbXO>
+Feedback-ID: i001e48d0:Fastmail
+Message-ID: <fd6493ac-9d3e-475a-a844-6e53b0472820@invisiblethingslab.com>
+Date: Thu, 30 Apr 2026 01:01:22 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nestedsvm: Clear GIF when injecting VMEXIT
-To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260423161112.50221-1-ross.lagerwall@citrix.com>
+Subject: Re: [RFC PATCH] virtio-mmio: add xenbus probing
+To: Teddy Astie <teddy.astie@vates.tech>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>
+Cc: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Viresh Kumar <viresh.kumar@linaro.org>,
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux.dev
+References: <20260429141339.74472-1-val@invisiblethingslab.com>
+ <1777473712.8631fc262581453bbf619ec5b2062170.19dd9b07146000f373@vates.tech>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-In-Reply-To: <20260423161112.50221-1-ross.lagerwall@citrix.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2c5.179858d92bc580ea.19dda2a2bba.f9f3b2a504f764f4=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1777481690042
-X-purgate-ID: tlsNG-c1860d/1777481699-C1D6BDB1-E38CF011/0/0
+From: Val Packett <val@invisiblethingslab.com>
+Autocrypt: addr=val@invisiblethingslab.com; keydata=
+ xm8EaFTEiRMFK4EEACIDAwQ+qzawvLuE95iu+QkRqp8P9z6XvFopWtYOaEnYf/nE8KWCnsCD
+ jz82tdbKBpmVOdR6ViLD9tzHvaZ1NqZ9mbrszMXq09VfefoCfZp8jnA2yCT8Y4ykmv6902Ne
+ NnlkVwrNKFZhbCBQYWNrZXR0IDx2YWxAaW52aXNpYmxldGhpbmdzbGFiLmNvbT7CswQTEwkA
+ OxYhBAFMrro+oMGIFPc7Uc87uZxqzalRBQJoVMSJAhsDBQsJCAcCAiICBhUKCQgLAgQWAgMB
+ Ah4HAheAAAoJEM87uZxqzalRlIIBf0cujzfSLhvib9iY8LBh8Tirgypm+hJHoY563xhP0YRS
+ pmqZ6goIuSGpEKcW5mV3egF/TLLAOjsfroWae4giImTVOJvLOsUycxAP4O5b1Qiy+cCGsHKA
+ nCRzrvqnPkyf4OeRznMEaFTEiRIFK4EEACIDAwSffe3tlMmmg3eKVp7SJ+CNZLN0M5qzHSCV
+ dBBkIVvEJo+8SDg4jrx/832rxpvMCz2+x7+OHaeBHKafhOWUccYBLKqV/3nBftxCkbzXDbfY
+ d02BY9H4wBIn0Y3GnwoIXRgDAQkJwpgEGBMJACAWIQQBTK66PqDBiBT3O1HPO7mcas2pUQUC
+ aFTEiQIbDAAKCRDPO7mcas2pUaptAX9f7yUJLGU4C6XjMJvXd8Sz6cGTyxkngPtUyFiNqtad
+ /GXBi3vHKYNfSrdqJ8wmZ8MBgOqWaaa1wE4/3qZU8d4RNR8mF7O40WYK/wdf1ycq1uGad8PN
+ UDOwAqdfvuF3w8QMPw==
+In-Reply-To: <1777473712.8631fc262581453bbf619ec5b2062170.19dd9b07146000f373@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1777521690-2BD7FC48-0F9579A8/0/0
 X-purgate-type: clean
-X-purgate-size: 2016
-
----=Part.2c5.179858d92bc580ea.19dda2a2bba.f9f3b2a504f764f4=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Le 23/04/2026 =C3=A0 18:13, Ross Lagerwall a =C3=A9crit=C2=A0:
-> If L1 executes VMRUN with the GIF set and it fails consistency checks,
-> Xen will inject a VMEXIT and fail the assert checking the GIF is cleared=
-=2E
->=20
-> Instead, clear the GIF when injecting a VMEXIT to match what hardware
-> does=2E
->=20
-> Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualizat=
-ion")
-> Signed-off-by: Ross Lagerwall <ross=2Elagerwall@citrix=2Ecom>
-> ---
->   xen/arch/x86/hvm/svm/nestedsvm=2Ec | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/xen/arch/x86/hvm/svm/nestedsvm=2Ec b/xen/arch/x86/hvm/svm/n=
-estedsvm=2Ec
-> index ef6fa5d23b67=2E=2Ef89b087a1155 100644
-> --- a/xen/arch/x86/hvm/svm/nestedsvm=2Ec
-> +++ b/xen/arch/x86/hvm/svm/nestedsvm=2Ec
-> @@ -733,9 +733,9 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_u=
-ser_regs *regs,
->       struct vmcb_struct *vmcb =3D v->arch=2Ehvm=2Esvm=2Evmcb;
->  =20
->       if ( vmcb->_vintr=2Efields=2Evgif_enable )
-> -        ASSERT(vmcb->_vintr=2Efields=2Evgif =3D=3D 0);
-> +        vmcb->_vintr=2Efields=2Evgif =3D 0;
->       else
-> -        ASSERT(svm->ns_gif =3D=3D 0);
-> +        nestedsvm_vcpu_clgi(v);
->  =20
->       ns_vmcb =3D nv->nv_vvmcx;
->  =20
-
-Looks good to me, though I think we are here looking to make a "guest=20
-CLGI" (clear GIF), so the vGIF specific logic should be collapsed into=20
-nestedsvm_vcpu_clgi() instead of having it as the non-vgif-support case=2E
-(as IIUC, vGIF is a hardware accelration for nested GIF handling ?)
-
-(also making me notice that svm_vmexit_do_{stgi,clgi}() seems to lack=20
-vGIF specific logic)
-
-Teddy
+X-purgate-size: 3318
 
 
--- 
-Teddy Astie | Vates XCP-ng Developer
+On 4/29/26 11:41 AM, Teddy Astie wrote:
+> Hello,
+>
+> Le 29/04/2026 à 16:18, Val Packett a écrit :
+>> […]
+>>
+>> I've been working on porting virtio-mmio support from Arm to x86_64,
+>> with the goal of running vhost-user-gpu to power Wayland/GPU integration
+>> for Qubes OS. (I'm aware of various proposals for alternative virtio
+>> transports but virtio-mmio seems to be the only one that *is* upstream
+>> already and just Works..) Setting up virtio-mmio through xenbus, initially
+>> motivated just by event channels being the only real way to get interrupts
+>> working on HVM, turned out to generally be quite pleasant and nice :)
+> Is it HVM specific, or can we also make it work for PVH (we can actually
+> attach a ioreq server to PVH guests) ?
 
-XCP-ng & Xen Orchestra - Vates s=
-olutions
+Sorry, typo, I did mean PVH of course!
 
-web: https://vates=2Etech
----=Part.2c5.179858d92bc580ea.19dda2a2bba.f9f3b2a504f764f4=---
+I've been testing this with PVH guests + PV dom0, with my PV alloc_ioreq 
+fix:
+https://lore.kernel.org/all/20251126062124.117425-1-val@invisiblethingslab.com/ 
+
+
+(Time to resend that one as a non-RFC I guess…)
+
+HVM actually does have legacy ISA interrupts (which are often used with 
+virtio-mmio on KVM), funnily enough, and I've tried firing those from a 
+DMOP but that silly thing didn't work properly.
+
+>> I'd like to get some early feedback for this patch, particularly
+>> the general stuff:
+>>
+>> * is this whole thing acceptable in general?
+>> * should it be extracted into a different file?
+>> * (from the Xen side) any input on the xenstore keys, what goes where?
+>> * anything else to keep in mind?
+>>
+>> It does seem simple enough, so hopefully this can be done?
+>>
+>> The corresponding userspace-side WIP is available at:
+>> https://github.com/QubesOS/xen-vhost-frontend
+>>
+>> And the required DMOP for firing the evtchn events will be sent
+>> to xen-devel shortly as well.
+> Could that be done through evtchn_send (or its userland counterpart) ?
+
+Actually, yes… The use of DMOPs is only dictated by the current Linux 
+privcmd.c code (the irqfds created by the kernel react to events by 
+executing HYPERVISOR_dm_op with a stored operation), we can avoid the 
+need to modify Xen by simply expanding the privcmd driver to make 
+"evtchn fds". Sounds good, will do.
+
+>> [..]
+>>
+>> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+>> index ce5bc0d9ea28..56bc2b10526b 100644
+>> --- a/drivers/virtio/Kconfig
+>> +++ b/drivers/virtio/Kconfig
+>> @@ -171,6 +171,13 @@ config VIRTIO_MMIO_CMDLINE_DEVICES
+>>    
+>>    	 If unsure, say 'N'.
+>>    
+>> +config VIRTIO_MMIO_XENBUS
+>> +	bool "Memory mapped virtio devices parameter parsing"
+> that text seems to miss the xenbus aspect
+Yep, didn't change that yet, ack
+>> [..]
+> In some way, we're defining a new "PV driver" which is a virtio-mmio
+> one, I guess we can eventually specific some form of protocol that
+> backend/frontend would need to follow ?
+
+Right, Jürgen mentioned documenting the keys in the xenstore-paths doc.. 
+would the entire "protocol" (keys + state transition logic) fit into that?
+
+The keys are currently derived from the initial Arm prototype which 
+wasn't actually using xenbus properly (the guest driver was configured 
+by a device tree node, but the ioreq server used xenstore keys, without 
+properly transitioning between states).
+
+
+Thanks,
+~val
+
 
