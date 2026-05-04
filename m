@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3404DFF885A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49F4FF886F
 	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299771.1574341 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1299767.1574313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgI-0002Dc-9u; Mon, 04 May 2026 12:45:50 +0000
+	id 1wJsgE-0001Ye-FF; Mon, 04 May 2026 12:45:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299771.1574341; Mon, 04 May 2026 12:45:50 +0000
+Received: by outflank-mailman (output) from mailman id 1299767.1574313; Mon, 04 May 2026 12:45:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgI-0002DV-5U; Mon, 04 May 2026 12:45:50 +0000
-Received: by outflank-mailman (input) for mailman id 1299771;
- Mon, 04 May 2026 12:45:49 +0000
+	id 1wJsgE-0001YX-C0; Mon, 04 May 2026 12:45:46 +0000
+Received: by outflank-mailman (input) for mailman id 1299767;
+ Mon, 04 May 2026 12:45:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wJsgH-0002CB-7Q
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgC-0001YK-GY
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgG-001PV9-JB
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:48 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wJsgB-002Q5C-Dt
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:43 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894f0-e002-0a2a0a5209dd-0a2a45018504-40
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:48 +0200
+ id 69f894f6-2eae-0a2a0a5409dd-0a2a45069204-6
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:43 +0200
 Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894fa-c1f2-0a2a45010019-ca0c7c9ae9db-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:47 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 876DC7A0095;
- Mon,  4 May 2026 08:45:46 -0400 (EDT)
+ id 69f894f5-7371-0a2a45060019-ca0c7c9a8653-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:42 +0200
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 5E80E7A0088;
+ Mon,  4 May 2026 08:45:41 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Mon, 04 May 2026 08:45:46 -0400
+ by phl-compute-01.internal (MEProxy); Mon, 04 May 2026 08:45:41 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:45:45 -0400 (EDT)
+ 4 May 2026 08:45:39 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,238 +52,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1777898746; x=1777985146; bh=9tevKSqDRz
-	difcUXtJIijWe/rZ834b3pQcdRCdRtHlc=; b=S9sLNcyvYBrJ5cMZAa85vLBC4W
-	5fJPMRZTwHnEAKUKrtOMgJPGIaL2S79kC26+7Ez8NHnSM+2eYBXsj4g+w+INjFuv
-	v9tdOlWrT+UEOfl8faD7Z2BFmlZ4HLRqlewCSG7sN3OV5SlbbrOE1TXB8EaO/Mbc
-	/pnjq5UsR0wfHBnJbe5bMJFSlyJzyLTo+4frH+HkaM88iBJNrRkdq0umswI2ncOu
-	j8NS26Cxp8+K0awPs49sXyJ091z47S0wsjKTRO9ih0RUT/anmW2/gV7CPKJ/ntL5
-	J6L7ExRDSezhruLu57001pXfp4VFP79PfbZiLfosuayYmlBcnErmBnc4SvGA==
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
+	 t=1777898741; x=1777985141; bh=7iadlLD7o7T5q9oaPaN3Fuvzh8+f85PP
+	/NJE+PPPmb8=; b=eoJL885QK7PYjTCxK/YqPr+jDf092UDw7xOjdXwqCmOTrKhZ
+	OtKUGa0e8GtMNypY1LqKqW81X+pb27tE2fmDJWiZ8Jdb/GHoIxUFUxYR6B/oJZYl
+	l95za0rf+qOQrVVJgnNJ64F8NOhX7Isd5/IO5tMeuXT7ih+qYlTr9A0Xly46LyYu
+	yAl4NamYb9m6owp1ce72ce290TXA0VRKFN//nA4UiX5NZBNZDpvRl0PABTQ+hevO
+	vi0jdhMz3vZJ5eh6ObCpJXivn6Rdl83b2crGarGK+KnbFyhXNI2srQX0bTR2Ji4+
+	6iHjosrWCNvcwLmLv33qmmVMutWepL1cDuMijQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898746; x=
-	1777985146; bh=9tevKSqDRzdifcUXtJIijWe/rZ834b3pQcdRCdRtHlc=; b=Y
-	Myom1NrGaBMFEuUksG3QcTiJDEwZlLtd6e1RhmsspzmZJclQsNsixUIP7odxhgUc
-	8mov59jEGaoFkEIbM8MhCDXFHrzsXi2qquqzIY/nsJ3PjJHhIEclUo5n2oIG9Q4L
-	Hqe4riRcnIj5SsDw/UMmWg3JxiUhRE0If/QBL65pRXkBF7Ig0gXoQa3e7bibo90J
-	l9k72yIRpOvkmbccFkep7yjfAObEEWHA4XMEYP7ySr3aAuf8bcHpkL3ZOZ/hZaE8
-	OEn6yRxj/j6+4+6zOYZNcwdNRxwF9hrC0HlXAmkeK3+oDPL5yRuiV1s1SBHXLV1v
-	hDF85Y+I2SBmZS63vDiaA==
-X-ME-Sender: <xms:-pT4aa6Im53zFJ_7UDPPVRk1yxjGRzuwf3Zo9CCFP5l358RfBXa5Yw>
-    <xme:-pT4aXnH3rObNYUTDYJan_uqDsPf3ivtxf6A8CLJhjwJ-Wdnezdy7MOdymmmJTmGd
-    kEqpr1WqWz7GlmULZZYBkz_FuyOWzSmiQP3l4l5rpUKIr_-PA>
-X-ME-Received: <xmr:-pT4aTT_YNcNS90BIDvGOyCy4SYGWXTTHOntJxkNCglwEH8nhRRpsLR4ZwYZ8zR3rxuiaUMou0JjAdtUaNgRqO0szhBul01-0FR1J5MxN_g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekkecutefuodetggdotefrod
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; t=1777898741; x=1777985141; bh=7iadlLD7o7T5q9oaPaN3Fuvzh8+f
+	85PP/NJE+PPPmb8=; b=Vd5F+0COL/gebIfuXaBDBtot5kzYBBjALdFp2xNmEwap
+	XYwztbLa8AdHG0HAoSNBSroD+6uCKWL94z095gnQuYULnN2PBsrzzJFINek0jZp5
+	nufi5DVBV70DLhuQGurtQ5XOVM5+DOQRACQY5MckERRr1sKD/CobagnoYRHSNdLk
+	TBrD9+kvB6pj4TVIFvn5DVL7LqQ+TCkNWMPd2x8S1SviHBfuJPPUvOw3jiYjssVY
+	E8+sv3kJ8wwlpy8v6qNIUW0ERmgiYfQYRMkjAP+qzNJ+CyCcbwksa+rLAwRYuXrv
+	MefozsU+OlgaJH7Nfc8Pz53vnmqi/OVlzS+d5OVBkw==
+X-ME-Sender: <xms:9JT4aSXOaIKl2NCHYUVdQzYoXU75nbZLa5_xTSBivE8elw4YHS9ryw>
+    <xme:9JT4aaGWA3OkVNT3nyPT2UEvlNHnmLoHwgK6l29C0mrCEZYIb0L32wehsvvvIKaAY
+    mYsmXKgZf0G0HL8ekZA6tK2VIhZxs84x2izAWgv-zkbygqAx1I>
+X-ME-Received: <xmr:9JT4ac3y6DGTUybWnrzqqVRTuh-Brjdl9rsXrg958Z2nVWjBLy6Fu2xN6Ww4RwrreofEazK-BYMtvp5m1hQ1cBAG1lkDAZ-jfeB0W7whoR4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
-    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
-    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohepiedpmh
-    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
-    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
-    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
-    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
-    rdgtohhmpdhrtghpthhtoheprghnthhhohhnhidrphgvrhgrrhgusehvrghtvghsrdhtvg
-    gthh
-X-ME-Proxy: <xmx:-pT4aeHQchlvh7J4mLVf4BDI9PGO74n66wLN1q4fsX4qyxigoG8fRw>
-    <xmx:-pT4aQHlbhFfkFMfPBT6CAK7a8UPTuyD-OHzz93gHxcRpfC-b9RPaQ>
-    <xmx:-pT4aUSGEpinw5D_-sg-m2RfRweqsn2pUzYWy6bHDYnx1PNerPaVUw>
-    <xmx:-pT4aZK5PDFUs5_FryCos4nbHkXpHAlBCRMZ1LgdqzMmwrb9H2K-Lw>
-    <xmx:-pT4aRoesoKHOOHxy9SfCXKFx16_7eVOes8iYd-cfWREnty2-CWiT6Sp>
+    hrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgr
+    rhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsih
+    gslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffeutdekgeeh
+    fedvtdfftdfgffeugfehuefhgeevvdeugeevvefhkeeuveeugeejnecuffhomhgrihhnpe
+    hgihhtlhgrsgdrtghomhdpkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgep
+    tdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslh
+    gvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmhhouggvpehsmhht
+    phhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojh
+    gvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhi
+    gidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghrnhgvlhdrohhrgh
+    dprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthho
+    pehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:9JT4aUNMZVpKgt4z1moEfLeXVX8mmd4G8NU0Jnm4pV8L4jLlIXI0zQ>
+    <xmx:9ZT4aT4EZuuazsay3vsQ0EnFFfPAjB_MotzNPtNtv15K3TPc5noPJA>
+    <xmx:9ZT4aW3KoOXpYJMGfYznIsHO_O8BESI6Pzq0mY8CNYnyhYPy3YV_hA>
+    <xmx:9ZT4acxfQVXJ2SStFGUSR4yoGE8aep8R3cTlhQb09E1hQokW0DE0Hg>
+    <xmx:9ZT4adSKktatCQkd8qxfNTFrUvNUrutdeqSjaGQ9KNxJdHhhMIY5dQ5T>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: [PATCH v4 03/13] Add debian rootfs artifact
-Date: Mon,  4 May 2026 14:35:42 +0200
-Message-ID: <2247b496ddb5fa94fad000bc4be65c2b3fc89b00.1777898148.git-series.marmarek@invisiblethingslab.com>
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 00/13] Changes for several CI improvements
+Date: Mon,  4 May 2026 14:35:39 +0200
+Message-ID: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
-References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1777898748-BC617FF4-CE8D8A4F/10/63158204843
-X-purgate-type: spam
-X-purgate-size: 4332
+X-purgate-ID: tlsNG-16d1c6/1777898743-52D72D75-2D626FAF/0/0
+X-purgate-type: clean
+X-purgate-size: 4887
 
-Will be used as dom0/domU in some tests.
+- Alpine update
+- Debian trixie
+- test arbitrary linux branch
+- Linux stubdom
+- enable SSH access
 
-Install systemd, but set it up to start scripts in /etc/local.d/ too, so
-tests don't need different paths for Alpine and Debian.
+Green pipeline: https://gitlab.com/xen-project/people/marmarek/test-artifacts/-/pipelines/2498055947
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
----
-Changes in v4:
-- disable persistent journal via config
-Changes in v3:
-- fix typo and missing dropbear args
-Changes in v2:
-- Use systemd
-- update to trixie
-- disable systemd-journal-catalog-update.service,
-  systemd-modules-load.service and persistent journal to save boot time
+Example Linux test:
 
----
----
- .gitlab-ci.yml                          |   7 ++-
- images/debian/13-x86_64-base.dockerfile |   4 +-
- scripts/debian-rootfs.sh                | 100 +++++++++++++++++++++++++-
- 3 files changed, 111 insertions(+)
+Linux-next (20260504):
+    https://gitlab.com/xen-project/people/marmarek/test-artifacts/-/pipelines/2496653697
+
+A few genuine failures there:
+- kbl-pci-pv-x86_64-gcc-debug:
+   domU gets:
+
+   (domU) [    0.449203] pcifront pci-0: xenbus: state reset occurred, reconnecting
+   (domU) [    0.449426] pcifront pci-0: 22 freeing event channel 8
+
+   and no PCI device ever appears
+
+- zen3p-pvshim-x86-64-gcc-debug
+
+    [    1.133364] ------------[ cut here ]------------
+    [    1.133398] WARNING: arch/x86/xen/multicalls.c:190 at xen_mc_flush+0x198/0x240, CPU#0: swapper/0/1
+    [    1.133457] Modules linked in:
+    [    1.133488] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.1.0-rc1-next-20260430-gb9303e6bff70 #1 PREEMPT(lazy)
+    [    1.133552] RIP: e030:xen_mc_flush+0x198/0x240
+    [    1.133588] Code: 48 8b 43 10 48 8b 7b 20 4c 8b 53 38 4c 8b 43 40 e8 9d 85 14 01 48 89 43 18 48 85 c0 0f 89 1b ff ff ff 8b 3b be 01 00 00 00 90 <0f> 0b 90 65 8b 0d 02 9a 94 02 89 fa 48 c7 c7 78 b5 c1 82 e8 10 6e
+    [    1.133693] RSP: e02b:ffffc9004000bcc0 EFLAGS: 00010086
+    [    1.133730] RAX: ffffffffffffffff RBX: ffff88801da16c40 RCX: ffff88801da17450
+    [    1.133778] RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
+    [    1.133826] RBP: ffff88801da16c40 R08: 0000000000000000 R09: 0000000000000001
+    [    1.133874] R10: 0000000000007ff0 R11: ffffc90040015fff R12: ffff888006570280
+    [    1.133936] R13: 0000000000000000 R14: ffffc90040016000 R15: 8000000000000073
+    [    1.133992] FS:  0000000000000000(0000) GS:ffff888099e14000(0000) knlGS:0000000000000000
+    [    1.134040] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
+    [    1.134045] CR2: ffffc9000083f000 CR3: 0000000003034000 CR4: 0000000000050660
+    [    1.134045] Call Trace:
+    [    1.134045]  <TASK>
+    [    1.134045]  ? xen_mc_issue+0x24/0x90
+    [    1.134045]  xen_leave_lazy_mmu+0x10/0x50
+    [    1.134045]  vmap_range_noflush+0x54d/0x7b0
+    [    1.134045]  __ioremap_caller.isra.0+0x174/0x290
+    [    1.134045]  ? print_s5_reset_status_mmio+0x1c/0x90
+    [    1.134045]  ? __pfx_print_s5_reset_status_mmio+0x10/0x10
+    [    1.134045]  print_s5_reset_status_mmio+0x1c/0x90
+    [    1.134045]  do_one_initcall+0x58/0x240
+    [    1.134045]  kernel_init_freeable+0x1e2/0x240
+    [    1.134045]  ? __pfx_kernel_init+0x10/0x10
+    [    1.134045]  kernel_init+0x15/0x130
+    [    1.134045]  ret_from_fork+0x17e/0x240
+    [    1.134045]  ? __pfx_kernel_init+0x10/0x10
+    [    1.134045]  ret_from_fork_asm+0x1a/0x30
+    [    1.134045]  </TASK>
+    [    1.134045] ---[ end trace 0000000000000000 ]---
+
+    Kinda similar to https://lore.kernel.org/xen-devel/aaBH3EAchUwKhrUA@mail-itl/
+    (which is still not solved)
+
+- zen3p-smoke-x86-64-dom0pvh-gcc-debug and few other PVH dom0 - dom0 crash without printing panic message
+
+Marek Marczykowski-Górecki (13):
+  Add Alpine 3.23 containers
+  Switch Linux builds to use Alpine 3.23 container
+  Add debian rootfs artifact
+  Enable CONFIG_USB_RTL8152 in kernel for hw12 runner
+  Include git in the ARM64 build container too
+  Support building arbitrary Linux branch/tag/commit
+  Add linux-6.12.79-x86_64
+  Save Linux config to artifacts too
+  Add trigger-test job, to run test on a Linux built from a branch/tag
+  Add linux-stubdom dependencies
+  Prepare grub for booting x86_64 HVM domU from a disk
+  Prepare grub for booting x86_64 HVM domU from a cdrom
+  Setup ssh access to test systems
+
+ .gitlab-ci.yml                             |  82 ++++++++++++++++--
+ containerize                               |   6 +-
+ images/alpine/3.18-arm64-build.dockerfile  |   1 +-
+ images/alpine/3.23-arm64-base.dockerfile   |   6 +-
+ images/alpine/3.23-arm64-build.dockerfile  |  31 +++++++-
+ images/alpine/3.23-x86_64-base.dockerfile  |   6 +-
+ images/alpine/3.23-x86_64-build.dockerfile |  43 +++++++++-
+ images/debian/13-x86_64-base.dockerfile    |   4 +-
+ scripts/alpine-rootfs.sh                   |  24 +++++-
+ scripts/build-linux.sh                     |  26 ++++--
+ scripts/debian-rootfs.sh                   | 100 ++++++++++++++++++++++-
+ 11 files changed, 316 insertions(+), 13 deletions(-)
+ create mode 100644 images/alpine/3.23-arm64-base.dockerfile
+ create mode 100644 images/alpine/3.23-arm64-build.dockerfile
+ create mode 100644 images/alpine/3.23-x86_64-base.dockerfile
+ create mode 100644 images/alpine/3.23-x86_64-build.dockerfile
  create mode 100644 images/debian/13-x86_64-base.dockerfile
  create mode 100755 scripts/debian-rootfs.sh
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 5281c1f..4147be5 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -71,6 +71,13 @@ alpine-3.23-x86_64-rootfs:
-   variables:
-     CONTAINER: alpine:3.23-x86_64-base
- 
-+debian-13-x86_64-rootfs:
-+  extends: .x86_64-artifacts
-+  script:
-+    - ./scripts/debian-rootfs.sh
-+  variables:
-+    CONTAINER: debian:13-x86_64-base
-+
- linux-6.6.56-x86_64:
-   extends: .x86_64-artifacts
-   script: ./scripts/build-linux.sh
-diff --git a/images/debian/13-x86_64-base.dockerfile b/images/debian/13-x86_64-base.dockerfile
-new file mode 100644
-index 0000000..f98355f
---- /dev/null
-+++ b/images/debian/13-x86_64-base.dockerfile
-@@ -0,0 +1,4 @@
-+# syntax=docker/dockerfile:1
-+FROM --platform=linux/amd64 debian:trixie-slim
-+LABEL maintainer.name="The Xen Project"
-+LABEL maintainer.email="xen-devel@lists.xenproject.org"
-diff --git a/scripts/debian-rootfs.sh b/scripts/debian-rootfs.sh
-new file mode 100755
-index 0000000..1da54a5
---- /dev/null
-+++ b/scripts/debian-rootfs.sh
-@@ -0,0 +1,100 @@
-+#!/bin/bash
-+
-+set -eu
-+
-+WORKDIR="${PWD}"
-+COPYDIR="${WORKDIR}/binaries"
-+UNAME=$(uname -m)
-+
-+apt-get update
-+
-+PKGS=(
-+    # System
-+    bridge-utils
-+    dropbear
-+    udev
-+    systemd-sysv
-+    iproute2
-+    inetutils-ping
-+    util-linux
-+    cpio
-+
-+    # Xen toolstack runtime deps
-+    libbz2-1.0
-+    libuuid1
-+    liblzo2-2
-+    liblzma5
-+    libyajl2
-+
-+    # Xen Test Framework
-+    python3
-+
-+    # QEMU
-+    libglib2.0-0
-+    libaio1t64
-+    libpixman-1-0
-+    )
-+
-+case $UNAME in
-+    x86_64)
-+        PKGS+=(
-+            # System
-+            pciutils
-+
-+            # QEMU
-+            libelf1
-+            )
-+        ;;
-+
-+    aarch64)
-+        PKGS+=(
-+            # Xen
-+            libfdt
-+            )
-+        ;;
-+esac
-+
-+apt-get -y install "${PKGS[@]}"
-+
-+# Xen
-+cd /
-+# Minimal ramdisk environment in case of cpio output
-+echo "ttyS0" >> /etc/securetty
-+echo "hvc0" >> /etc/securetty
-+echo "ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100" >> /etc/inittab
-+echo "hvc0::respawn:/sbin/getty -L hvc0 115200 vt100" >> /etc/inittab
-+echo "rc_verbose=yes" >> /etc/rc.conf
-+echo "DROPBEAR_EXTRA_ARGS=\"-R\"" >> /etc/default/dropbear
-+echo > /etc/modules
-+# disable unneded services
-+rm -f etc/systemd/system/timers.target.wants/apt-daily*.timer
-+rm -f etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
-+rm -f usr/lib/systemd/system/sysinit.target.wants/systemd-journal-catalog-update.service
-+rm -f usr/lib/systemd/system/sysinit.target.wants/systemd-modules-load.service
-+# don't need persistent logging, avoid journal flush service
-+mkdir -p etc/systemd/journald.conf.d
-+cat >> etc/systemd/journald.conf.d/storage.conf <<EOF
-+[Journal]
-+Storage=volatile
-+EOF
-+# Tests install a startup script as /etc/local.d/xen.start
-+cat > /etc/rc.local << EOF
-+#!/bin/sh
-+
-+for f in /etc/local.d/*.start; do
-+    \$f
-+done
-+EOF
-+chmod +x /etc/rc.local
-+passwd -d root
-+
-+# Create rootfs
-+cd /
-+{
-+    PATHS="bin etc home init lib lib64 mnt opt root sbin srv tmp usr var"
-+    find $PATHS -print0
-+    echo -ne "dev\0proc\0run\0sys\0"
-+} | cpio -0 -H newc -o | gzip > "${COPYDIR}/rootfs.cpio.gz"
-+
-+# Print the contents for the build log
-+zcat "${COPYDIR}/rootfs.cpio.gz" | cpio -tv
+base-commit: 76894a5929bc604fb5bdb4aff2f94a6a9df68cdb
 -- 
 git-series 0.9.1
 
