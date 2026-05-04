@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49F4FF886F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D22CD343A
 	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299767.1574313 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1299769.1574332 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgE-0001Ye-FF; Mon, 04 May 2026 12:45:46 +0000
+	id 1wJsgG-0001yj-1z; Mon, 04 May 2026 12:45:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299767.1574313; Mon, 04 May 2026 12:45:46 +0000
+Received: by outflank-mailman (output) from mailman id 1299769.1574332; Mon, 04 May 2026 12:45:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgE-0001YX-C0; Mon, 04 May 2026 12:45:46 +0000
-Received: by outflank-mailman (input) for mailman id 1299767;
- Mon, 04 May 2026 12:45:44 +0000
+	id 1wJsgF-0001yc-Vh; Mon, 04 May 2026 12:45:47 +0000
+Received: by outflank-mailman (input) for mailman id 1299769;
+ Mon, 04 May 2026 12:45:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgC-0001YK-GY
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:44 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgF-0001kP-5x
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgB-002Q5C-Dt
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:43 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wJsgE-001PV9-D1
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:46 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894f6-2eae-0a2a0a5409dd-0a2a45069204-6
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:43 +0200
-Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f894f8-e002-0a2a0a5209dd-0a2a4504ca26-8
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:46 +0200
+Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894f5-7371-0a2a45060019-ca0c7c9a8653-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:42 +0200
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 5E80E7A0088;
- Mon,  4 May 2026 08:45:41 -0400 (EDT)
+ id 69f894f9-1dec-0a2a45040019-ca0c7c9297d7-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:46 +0200
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfout.stl.internal (Postfix) with ESMTP id C7D731D0007D;
+ Mon,  4 May 2026 08:45:44 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Mon, 04 May 2026 08:45:41 -0400
+ by phl-compute-05.internal (MEProxy); Mon, 04 May 2026 08:45:44 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:45:39 -0400 (EDT)
+ 4 May 2026 08:45:43 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,54 +52,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
-	 t=1777898741; x=1777985141; bh=7iadlLD7o7T5q9oaPaN3Fuvzh8+f85PP
-	/NJE+PPPmb8=; b=eoJL885QK7PYjTCxK/YqPr+jDf092UDw7xOjdXwqCmOTrKhZ
-	OtKUGa0e8GtMNypY1LqKqW81X+pb27tE2fmDJWiZ8Jdb/GHoIxUFUxYR6B/oJZYl
-	l95za0rf+qOQrVVJgnNJ64F8NOhX7Isd5/IO5tMeuXT7ih+qYlTr9A0Xly46LyYu
-	yAl4NamYb9m6owp1ce72ce290TXA0VRKFN//nA4UiX5NZBNZDpvRl0PABTQ+hevO
-	vi0jdhMz3vZJ5eh6ObCpJXivn6Rdl83b2crGarGK+KnbFyhXNI2srQX0bTR2Ji4+
-	6iHjosrWCNvcwLmLv33qmmVMutWepL1cDuMijQ==
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm2; t=1777898744; x=1777985144; bh=lDurhCnEVx
+	k5QBuNDNgcwnaqx3Wd1t33ua2Ae6U5h5Y=; b=B6p2GnSnMe6AZ9zcJw2SfwTVVT
+	Nuq6S7BY+oXpUAkqe3kvJZR9SugIUQPvjW6JqGxn+q0Evpmgq9SA8UtG66LeDT7U
+	vFJNud8tSVL5a++J0psfrvv0DkDCUCkFta/nBbFnHZwp3l2XhWx79vz/ZOqmpQ1s
+	lQFnXGWJ5IizNUx+ogM80eOYYvkLpD9iwiW+jEHOxqHDe+sOtcijJLKB9t5elcbg
+	obGKJeSrm5HN1Y8bPtWSyj/55LqWkAbl9fYtUW3CK8XfebE3UJqeoYcju1ejuNR2
+	yiouZr6SKMBYSJiSbbPnPHaOAteaahtgzip4N5hiboMmbjLPelJ5131i7elg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm3; t=1777898741; x=1777985141; bh=7iadlLD7o7T5q9oaPaN3Fuvzh8+f
-	85PP/NJE+PPPmb8=; b=Vd5F+0COL/gebIfuXaBDBtot5kzYBBjALdFp2xNmEwap
-	XYwztbLa8AdHG0HAoSNBSroD+6uCKWL94z095gnQuYULnN2PBsrzzJFINek0jZp5
-	nufi5DVBV70DLhuQGurtQ5XOVM5+DOQRACQY5MckERRr1sKD/CobagnoYRHSNdLk
-	TBrD9+kvB6pj4TVIFvn5DVL7LqQ+TCkNWMPd2x8S1SviHBfuJPPUvOw3jiYjssVY
-	E8+sv3kJ8wwlpy8v6qNIUW0ERmgiYfQYRMkjAP+qzNJ+CyCcbwksa+rLAwRYuXrv
-	MefozsU+OlgaJH7Nfc8Pz53vnmqi/OVlzS+d5OVBkw==
-X-ME-Sender: <xms:9JT4aSXOaIKl2NCHYUVdQzYoXU75nbZLa5_xTSBivE8elw4YHS9ryw>
-    <xme:9JT4aaGWA3OkVNT3nyPT2UEvlNHnmLoHwgK6l29C0mrCEZYIb0L32wehsvvvIKaAY
-    mYsmXKgZf0G0HL8ekZA6tK2VIhZxs84x2izAWgv-zkbygqAx1I>
-X-ME-Received: <xmr:9JT4ac3y6DGTUybWnrzqqVRTuh-Brjdl9rsXrg958Z2nVWjBLy6Fu2xN6Ww4RwrreofEazK-BYMtvp5m1hQ1cBAG1lkDAZ-jfeB0W7whoR4>
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898744; x=
+	1777985144; bh=lDurhCnEVxk5QBuNDNgcwnaqx3Wd1t33ua2Ae6U5h5Y=; b=M
+	cU+zisRjC/V4N4IHRzfMDG4Uth2PttqZt/uSKSs97HJJlO5Nr9s4EmvcvnyapQX3
+	8xk7zECV85S98/pnohD2/u3kem1JoA8y3Nf1FNppfHGivHtRW/MG3f5aVaDoHPuG
+	cHPvaEf/WCF1o1n9iFkYe0NeJELz/nIMIjHE+TYwmmEns/qwUN4Ru6GkPzhSpWeZ
+	29Rac4PMW/DAg2MtTwIc407GgyRDQPd/T0CfihRlQvy07Y6TQ8gIqZAjHt4fOamh
+	bfwuE+y1gtcyn72mpD6hQd5czuhwvqsa1rQyHs73HkUMvhJ0x2TTEIk5WhvkWfPW
+	mgIsEnzy6uPx6/i5QJdLg==
+X-ME-Sender: <xms:-JT4acTqwixw2NJ0eml8Pcp6YMV877QKI0E_bh_f5j8vTk26NXl_oA>
+    <xme:-JT4aQr0xq3l3P0B9wXOTE2FU48pXsZyXwrI4JiCt8YZDRFQxWuM65kJUwY6jkZi0
+    E2B2HNfpqB1Raw2acXUkQTrRGh6R6jqBP1t4whzxnxBbXSH1w>
+X-ME-Received: <xmr:-JT4aSJ3QQVibd2y-eyJobvCCA-P5OPU682s2FcjTBZth_HzAJHUMJHltz4UBHmHCMKGRv_3FLb8U0JNkmu4rXF5yQwudRDu84We-SZYDwM>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcuofgr
-    rhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvihhsih
-    gslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffeutdekgeeh
-    fedvtdfftdfgffeugfehuefhgeevvdeugeevvefhkeeuveeugeejnecuffhomhgrihhnpe
-    hgihhtlhgrsgdrtghomhdpkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgep
-    tdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslh
-    gvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmhhouggvpehsmhht
-    phhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojh
-    gvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihhtrhhi
-    gidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghrnhgvlhdrohhrgh
-    dprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphhtthho
-    pehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:9JT4aUNMZVpKgt4z1moEfLeXVX8mmd4G8NU0Jnm4pV8L4jLlIXI0zQ>
-    <xmx:9ZT4aT4EZuuazsay3vsQ0EnFFfPAjB_MotzNPtNtv15K3TPc5noPJA>
-    <xmx:9ZT4aW3KoOXpYJMGfYznIsHO_O8BESI6Pzq0mY8CNYnyhYPy3YV_hA>
-    <xmx:9ZT4acxfQVXJ2SStFGUSR4yoGE8aep8R3cTlhQb09E1hQokW0DE0Hg>
-    <xmx:9ZT4adSKktatCQkd8qxfNTFrUvNUrutdeqSjaGQ9KNxJdHhhMIY5dQ5T>
+    hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
+    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
+    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
+    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
+    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmh
+    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
+    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
+    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
+    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
+    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
+    rdgtohhm
+X-ME-Proxy: <xmx:-JT4abpv4eI4t1jXVS500yZnemWlajZWDNROHtyB0VRe2C4ucxE-JQ>
+    <xmx:-JT4aSxr66QmtrUjrQcwMglYApyslYl-rr-NxOF16FSahLACNfi5Kg>
+    <xmx:-JT4aXODErMV7Iy5-RBA_O4b2KN5OwV90Y3B-ifWAeyLCem-I4jySQ>
+    <xmx:-JT4af6ROB_8LvS_dEzzbgYzF_l0kLIyGjQpONQ8DegzGSumpVU-xQ>
+    <xmx:-JT4aaf80cQQak_J8iDY-4D-xBNnzLQaR3qMnM1jrX59YYUBprHYQP0P>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -107,115 +108,70 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 00/13] Changes for several CI improvements
-Date: Mon,  4 May 2026 14:35:39 +0200
-Message-ID: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 02/13] Switch Linux builds to use Alpine 3.23 container
+Date: Mon,  4 May 2026 14:35:41 +0200
+Message-ID: <23fbf2c275cfb021161688eb5f0e9013bfb4aa83.1777898148.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
+References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1777898743-52D72D75-2D626FAF/0/0
+X-purgate-ID: tlsNG-ebf023/1777898746-32E743FF-0F06FFE7/0/0
 X-purgate-type: clean
-X-purgate-size: 4887
+X-purgate-size: 1350
 
-- Alpine update
-- Debian trixie
-- test arbitrary linux branch
-- Linux stubdom
-- enable SSH access
+Slowly phase out 3.18 one.
 
-Green pipeline: https://gitlab.com/xen-project/people/marmarek/test-artifacts/-/pipelines/2498055947
+But keep Linux 6.6 on Alpine 3.18 containers - it fails to build on
+Alpine 3.23 (due to GCC 15 defaulting to -std=c23).
 
-Example Linux test:
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+Changes in v4:
+- Alpine 3.23
+- Keep Linux 6.6 on Alpine 3.18
+---
+ .gitlab-ci.yml | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Linux-next (20260504):
-    https://gitlab.com/xen-project/people/marmarek/test-artifacts/-/pipelines/2496653697
-
-A few genuine failures there:
-- kbl-pci-pv-x86_64-gcc-debug:
-   domU gets:
-
-   (domU) [    0.449203] pcifront pci-0: xenbus: state reset occurred, reconnecting
-   (domU) [    0.449426] pcifront pci-0: 22 freeing event channel 8
-
-   and no PCI device ever appears
-
-- zen3p-pvshim-x86-64-gcc-debug
-
-    [    1.133364] ------------[ cut here ]------------
-    [    1.133398] WARNING: arch/x86/xen/multicalls.c:190 at xen_mc_flush+0x198/0x240, CPU#0: swapper/0/1
-    [    1.133457] Modules linked in:
-    [    1.133488] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.1.0-rc1-next-20260430-gb9303e6bff70 #1 PREEMPT(lazy)
-    [    1.133552] RIP: e030:xen_mc_flush+0x198/0x240
-    [    1.133588] Code: 48 8b 43 10 48 8b 7b 20 4c 8b 53 38 4c 8b 43 40 e8 9d 85 14 01 48 89 43 18 48 85 c0 0f 89 1b ff ff ff 8b 3b be 01 00 00 00 90 <0f> 0b 90 65 8b 0d 02 9a 94 02 89 fa 48 c7 c7 78 b5 c1 82 e8 10 6e
-    [    1.133693] RSP: e02b:ffffc9004000bcc0 EFLAGS: 00010086
-    [    1.133730] RAX: ffffffffffffffff RBX: ffff88801da16c40 RCX: ffff88801da17450
-    [    1.133778] RDX: 0000000000000000 RSI: 0000000000000001 RDI: 0000000000000001
-    [    1.133826] RBP: ffff88801da16c40 R08: 0000000000000000 R09: 0000000000000001
-    [    1.133874] R10: 0000000000007ff0 R11: ffffc90040015fff R12: ffff888006570280
-    [    1.133936] R13: 0000000000000000 R14: ffffc90040016000 R15: 8000000000000073
-    [    1.133992] FS:  0000000000000000(0000) GS:ffff888099e14000(0000) knlGS:0000000000000000
-    [    1.134040] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
-    [    1.134045] CR2: ffffc9000083f000 CR3: 0000000003034000 CR4: 0000000000050660
-    [    1.134045] Call Trace:
-    [    1.134045]  <TASK>
-    [    1.134045]  ? xen_mc_issue+0x24/0x90
-    [    1.134045]  xen_leave_lazy_mmu+0x10/0x50
-    [    1.134045]  vmap_range_noflush+0x54d/0x7b0
-    [    1.134045]  __ioremap_caller.isra.0+0x174/0x290
-    [    1.134045]  ? print_s5_reset_status_mmio+0x1c/0x90
-    [    1.134045]  ? __pfx_print_s5_reset_status_mmio+0x10/0x10
-    [    1.134045]  print_s5_reset_status_mmio+0x1c/0x90
-    [    1.134045]  do_one_initcall+0x58/0x240
-    [    1.134045]  kernel_init_freeable+0x1e2/0x240
-    [    1.134045]  ? __pfx_kernel_init+0x10/0x10
-    [    1.134045]  kernel_init+0x15/0x130
-    [    1.134045]  ret_from_fork+0x17e/0x240
-    [    1.134045]  ? __pfx_kernel_init+0x10/0x10
-    [    1.134045]  ret_from_fork_asm+0x1a/0x30
-    [    1.134045]  </TASK>
-    [    1.134045] ---[ end trace 0000000000000000 ]---
-
-    Kinda similar to https://lore.kernel.org/xen-devel/aaBH3EAchUwKhrUA@mail-itl/
-    (which is still not solved)
-
-- zen3p-smoke-x86-64-dom0pvh-gcc-debug and few other PVH dom0 - dom0 crash without printing panic message
-
-Marek Marczykowski-Górecki (13):
-  Add Alpine 3.23 containers
-  Switch Linux builds to use Alpine 3.23 container
-  Add debian rootfs artifact
-  Enable CONFIG_USB_RTL8152 in kernel for hw12 runner
-  Include git in the ARM64 build container too
-  Support building arbitrary Linux branch/tag/commit
-  Add linux-6.12.79-x86_64
-  Save Linux config to artifacts too
-  Add trigger-test job, to run test on a Linux built from a branch/tag
-  Add linux-stubdom dependencies
-  Prepare grub for booting x86_64 HVM domU from a disk
-  Prepare grub for booting x86_64 HVM domU from a cdrom
-  Setup ssh access to test systems
-
- .gitlab-ci.yml                             |  82 ++++++++++++++++--
- containerize                               |   6 +-
- images/alpine/3.18-arm64-build.dockerfile  |   1 +-
- images/alpine/3.23-arm64-base.dockerfile   |   6 +-
- images/alpine/3.23-arm64-build.dockerfile  |  31 +++++++-
- images/alpine/3.23-x86_64-base.dockerfile  |   6 +-
- images/alpine/3.23-x86_64-build.dockerfile |  43 +++++++++-
- images/debian/13-x86_64-base.dockerfile    |   4 +-
- scripts/alpine-rootfs.sh                   |  24 +++++-
- scripts/build-linux.sh                     |  26 ++++--
- scripts/debian-rootfs.sh                   | 100 ++++++++++++++++++++++-
- 11 files changed, 316 insertions(+), 13 deletions(-)
- create mode 100644 images/alpine/3.23-arm64-base.dockerfile
- create mode 100644 images/alpine/3.23-arm64-build.dockerfile
- create mode 100644 images/alpine/3.23-x86_64-base.dockerfile
- create mode 100644 images/alpine/3.23-x86_64-build.dockerfile
- create mode 100644 images/debian/13-x86_64-base.dockerfile
- create mode 100755 scripts/debian-rootfs.sh
-
-base-commit: 76894a5929bc604fb5bdb4aff2f94a6a9df68cdb
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index b86d9aa..5281c1f 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -21,14 +21,14 @@ stages:
+   tags:
+     - arm64
+   variables:
+-    CONTAINER: alpine:3.18-arm64-build
++    CONTAINER: alpine:3.23-arm64-build
+ 
+ .x86_64-artifacts:
+   extends: .artifacts
+   tags:
+     - x86_64
+   variables:
+-    CONTAINER: alpine:3.18-x86_64-build
++    CONTAINER: alpine:3.23-x86_64-build
+ 
+ #
+ # ARM64 artifacts
+@@ -52,6 +52,7 @@ linux-6.6.86-arm64:
+   script: ./scripts/build-linux.sh
+   variables:
+     LINUX_VERSION: 6.6.86
++    CONTAINER: alpine:3.18-arm64-build
+ 
+ #
+ # x86_64 artifacts
+@@ -77,6 +78,7 @@ linux-6.6.56-x86_64:
+     LINUX_VERSION: 6.6.56
+     ARGO_SHA: "cf73819cacc945baca1a7421e5836d1bd481739b"
+     ARGOEXEC_SHA: "d900429f6640acc6f68a3d3a4c945d7da60625d8"
++    CONTAINER: alpine:3.18-x86_64-build
+ 
+ microcode-x86:
+   extends: .x86_64-artifacts
 -- 
 git-series 0.9.1
 
