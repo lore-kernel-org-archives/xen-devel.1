@@ -4,37 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0B5FF885A
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 05:49:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299421.1574035 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D437FFF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 05:52:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299508.1574044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJmBK-0003Ln-Lq; Mon, 04 May 2026 05:49:26 +0000
+	id 1wJmEN-0004uN-8z; Mon, 04 May 2026 05:52:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299421.1574035; Mon, 04 May 2026 05:49:26 +0000
+Received: by outflank-mailman (output) from mailman id 1299508.1574044; Mon, 04 May 2026 05:52:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJmBK-0003Lg-JA; Mon, 04 May 2026 05:49:26 +0000
-Received: by outflank-mailman (input) for mailman id 1299421;
- Mon, 04 May 2026 03:24:45 +0000
+	id 1wJmEN-0004uG-4x; Mon, 04 May 2026 05:52:35 +0000
+Received: by outflank-mailman (input) for mailman id 1299508;
+ Mon, 04 May 2026 05:52:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Samuel.Montgomery61@protonmail.com>)
- id 1wJjvJ-0007UD-0F
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 03:24:45 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wJmEM-0004uA-Bj
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 05:52:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJjvH-008I3R-5a
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 05:24:43 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wJmEL-008b44-KI
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 07:52:33 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Samuel.Montgomery61@protonmail.com>)
- id 69f81128-5cb7-0a2a0a5109dd-0a2a4503b54e-44
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 05:24:42 +0200
-Received: from [185.70.43.167] (helo=mail-43167.protonmail.ch)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Samuel.Montgomery61@protonmail.com>)
- id 69f8117a-672d-0a2a45030019-b9462ba74be5-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 05:24:42 +0200
+ (envelope-from <jbeulich@suse.com>)
+ id 69f83411-5cb7-0a2a0a5109dd-0a2a4502a792-48
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:52:33 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f83421-af86-0a2a45020019-d155802dd575-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:52:33 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-488ba840146so30575075e9.1
+ for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 22:52:33 -0700 (PDT)
+Received: from ?IPV6:2003:ca:b72b:870a:8d83:125f:d0c4:4383?
+ (p200300cab72b870a8d83125fd0c44383.dip0.t-ipconnect.de.
+ [2003:ca:b72b:870a:8d83:125f:d0c4:4383])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a82307f7csm308484405e9.12.2026.05.03.22.52.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 03 May 2026 22:52:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,81 +55,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=protonmail3 header.d=protonmail.com header.i="@protonmail.com" header.h="Date:To:From:Subject:Message-ID:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1777865082; x=1778124282;
-	bh=n6IY1A1TFjd+nC/H+/Qn+1wFazhEj+IW+F2zlnlaC6A=;
-	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=OT0JjJsBw63hd1V8ouI9ocYkxuQIk9ZKyjRFTOxqcMKXwAZpHRxrNILWPQ3l/vxRY
-	 iqORFufSNOM+gGuxFXefzt6xNSqBGd2R7TVFmoum1FmKohUOGWgv67upMboM6WUFO+
-	 G0JE+LfpPh1RXO4eEpmJ5t7yQFu99LU/fzWoz32M05GXR+Y/ZZc06sZfNDacaqGswe
-	 x6t4L7ZiJK8sqo4EIQuh65qjYzco0ecUMoB14bfy0/0D0LzeIONUsy8MixX0TfF+Rj
-	 JyobtkjXUrgsFoD60s3Rka2LVRS7eVMCe96o8XGnEc3fUlQVbMx1QaeM1DLEvzkdke
-	 URnYxmyKFqvGg==
-Date: Mon, 04 May 2026 03:24:40 +0000
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: "Samuel.Montgomery61" <Samuel.Montgomery61@protonmail.com>
-Subject: [RFC] Skip boot memory scrub on platforms with full-memory encryption
-Message-ID: <xJXmemuuJ0kqnGWQ9PWwfFn8_KZVhYSbsAyHFGvDeiqpxUK1Q-ar7Lab7ttRPx-tcEHduS26pU9BkIifbhznT1Qc06vyHfovl1-IXC0cWUU=@protonmail.com>
-Feedback-ID: 16446063:user:proton
-X-Pm-Message-ID: 4204f4dcf239f86d163e20ff008378053a34d9f0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1777873953; x=1778478753; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=V6YnH8dpYeNFgJV3DXIivVeD1klIgbNAMdKqlU3iJZ8=;
+        b=Z6k9AZXvyr9nDu/HbDLBmfETs2F0KyNr2dlWqaP6VLK0BmE3rHuV0EAWh2alNroOFQ
+         7qwEv/Lh1jyCWWON4tB+iRnyW7ULYNPYuNRZ8fJBYcSNqI1xzJyzd6NfiUNEgqvNkae7
+         JfLfsZBcQx/4p9rgkO2/h3PHvOBvjGOlJZ4FGBOJjWe3HYkeW04JX2iP65JDBchOFJba
+         lGGiLk2zc9Om3dx2SBrC5kp9Pc+gjOlSM0RhTuA1CMKyRRldtTd7vm31MVh+Q41PBmLQ
+         ADZm/5iAkOvgvtA4KFJyUJf1pkeXJXB6Fy1ecb4N8Q33JIb1i5yK3DDAjfOHAw5EgzmD
+         9y3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777873953; x=1778478753;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=V6YnH8dpYeNFgJV3DXIivVeD1klIgbNAMdKqlU3iJZ8=;
+        b=Bfygw8kEVw0hjBTNPNkR7IzIwc8pGsUeJmrDoIYGg00/CL49HGX2zYCmRjfM4sqGWY
+         TbLkmDe0SucF1tOaJ9YsvmRvQtIc9mpi45YRTojNQLgulSwT3VCI40XMtcIbvtqArHQJ
+         xk5evI56FPt60JbV7Tw1itaunUh6dWco/WvXSClDxC5Sh6+L4kJj0vA09dsje2TVNGYh
+         GdK0+ZjXO6+SBQESu63NHYiNbv76lajUvDfwvi1ScMqQVXU6j559qXcgl5cggF6hg3kh
+         fOpVMmtcHI7BV3TW5hI58fZIU1ZoCrnt0w2W/IFA1D/68yiToa33eFjczs0biI1rVpfj
+         RxRA==
+X-Gm-Message-State: AOJu0Yyst6UH74rCcRZLLSgN6K75NEQkA/XEYaUmUZ680Da3LT4GF37Y
+	mXEFl9kFI1zbv7foC6tx/FVjQsWUdgwRWagTFyF92w44P31Fsay5wXRhMTkwvg2Szg==
+X-Gm-Gg: AeBDieuYwrcpeFx52RLGFlgwnH0aD8OYuC1BJx4NeDrzn+UxX+idWvdzM5xOfKUEzD+
+	rVZBCmqEeErFSqAsJQGO/D8+uQTy2uXfaRrrCPbyAvNQGPf/jDirdGxaTTNCcZoeYb/EJzttzuD
+	s9RpBGU5gHAYHlfWReqHjmXT8v/JqKsGg8iOvjzRNPdxq5Ww6HJoXl6AI/BD4dj/irolkhdNaMe
+	OMnCZeoUpwxMvA5p7IdasgtBxT8H568szZH0bfFiY+MilTZdTE3ZVAVUZ6wxjetsb4u1jknRtZF
+	U1SrF0IboRkhcMONgFs3xc+d4c/mw5KIgPH3ZlrRMNO5LkrHghyO8VxdHrTilhVLCirt98R2zbu
+	oYZBCFTMKLn/vA+pzHzkUb2UfngY2+Ndo155L5YPks4v+lJ0RrVvLsXQ2KWO/2e1ASvhseE/sOF
+	BmZhoV5FdcaeWu4pDts5f4WSm8Rm0H9KVuO5WnF92IRc0MzlkEc95Z2yeqhNpErj5JwBE8TcyZV
+	gAVHJGBjy+O7+etJRFNsUEb5A51HP6duaLOV/GQlAk/tyRHiMRltYG50e72nocAbY0ZaJA=
+X-Received: by 2002:a05:600c:c4b8:b0:488:79a3:f04c with SMTP id 5b1f17b1804b1-48a98675ca0mr130444065e9.27.1777873952875;
+        Sun, 03 May 2026 22:52:32 -0700 (PDT)
+Message-ID: <48b9dae9-7161-4693-b86b-1448fe79005d@suse.com>
+Date: Mon, 4 May 2026 07:52:32 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-33051d/1777865082-A2766938-F8C2C498/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/4] vpci: allow 32-bit BAR writes with memory decoding
+ enabled
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+ Stewart Hildebrand <stewart.hildebrand@amd.com>
+References: <20260406191203.97662-1-stewart.hildebrand@amd.com>
+ <20260406191203.97662-5-stewart.hildebrand@amd.com>
+ <aesu7sCLTaodcyWL@macbook.local>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <aesu7sCLTaodcyWL@macbook.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1777873953-B3762161-8CBFA387/0/0
 X-purgate-type: clean
-X-purgate-size: 2305
+X-purgate-size: 2427
 
-Hello,
+On 24.04.2026 10:50, Roger Pau Monné wrote:
+> On Mon, Apr 06, 2026 at 03:11:58PM -0400, Stewart Hildebrand wrote:
+>> --- a/xen/drivers/vpci/header.c
+>> +++ b/xen/drivers/vpci/header.c
+>> @@ -670,6 +670,7 @@ static void cf_check bar_write(
+>>  {
+>>      struct vpci_bar *bar = data;
+>>      bool hi = false;
+>> +    uint16_t cmd = 0;
+>>  
+>>      ASSERT(is_hardware_domain(pdev->domain));
+>>  
+>> @@ -683,19 +684,29 @@ static void cf_check bar_write(
+>>          val &= PCI_BASE_ADDRESS_MEM_MASK;
+>>  
+>>      /*
+>> -     * Xen only cares whether the BAR is mapped into the p2m, so allow BAR
+>> -     * writes as long as the BAR is not mapped into the p2m.
+>> +     * Allow 64-bit BAR writes only when the BAR is not mapped in p2m. Always
+>> +     * allow 32-bit BAR writes.
+>>       */
+>>      if ( bar->enabled )
+>>      {
+>> -        /* If the value written is the current one avoid printing a warning. */
+>> -        if ( val != (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
+>> -            gprintk(XENLOG_WARNING,
+>> -                    "%pp: ignored BAR %zu write while mapped\n",
+>> -                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+>> -        return;
+>> -    }
+>> +        if ( bar->type == VPCI_BAR_MEM32 )
+>> +        {
+>> +            if ( val == bar->addr )
+>> +                return;
+>>  
+>> +            cmd = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
+>> +            modify_bars(pdev, cmd, false, false);
+>> +        }
+>> +        else
+>> +        {
+>> +            /* If the value written is the same avoid printing a warning. */
+>> +            if ( val != (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
+>> +                gprintk(XENLOG_WARNING,
+>> +                        "%pp: ignored BAR %zu write while mapped\n",
+>> +                        &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+>> +            return;
+>> +        }
+>> +    }
+>>  
+>>      /*
+>>       * Update the cached address, so that when memory decoding is enabled
+>> @@ -715,6 +726,9 @@ static void cf_check bar_write(
+>>      }
+>>  
+>>      pci_conf_write32(pdev->sbdf, reg, val);
+> 
+> I don't think it matters a lot, but here we are changing the position
+> of the BAR in the host memory map while the mappings are still active.
 
-Xen's boot-time memory scrub is one of the more time-consuming steps
-during boot, particularly on systems with large amounts of RAM. I'd
-like to propose skipping it on systems with hardware full-memory
-encryption (e.g., Intel TME, AMD TSME).
+It would matter if the original address space could be re-used for another
+purpose while those mappings are still there?
 
-These features encrypt all DRAM transparently using an ephemeral key
-generated by the CPU at each boot. The key is not accessible to
-software and does not persist across reboots. This means residual data
-from any previous session where encryption was active is unreadable --
-the same property that boot scrubbing exists to provide.
-
-The important nuance is that Xen needs to confirm encryption has been
-continuously active since the last scrub, not just that it is active
-now. If encryption was only recently enabled in firmware, residual
-plaintext from prior unencrypted sessions could still be present in
-pages that were never overwritten. Possible approaches:
-
-  - Record "encryption active" to an EFI variable each boot; skip the
-    scrub only if the flag is present from the previous boot.
-  - Expose a command-line option for administrators to assert that
-    encryption has been consistently enabled.
-  - Some combination of the two.
-
-The optimization would apply only to the cross-reboot case. Runtime
-scrubbing when domains shut down would be unaffected, since all domains
-share the same key during a running session.
-
-Edge cases worth considering:
-
-  - Memory written by firmware before encryption activation.
-  - Crash/kexec without a full hardware reset (key may not change).
-  - Suspend/resume (some implementations restore the prior key).
-  - Interaction with existing bootscrub=3D command-line options.
-
-As a broader note, multi-key extensions to full-memory encryption (such
-as those used by AMD SEV and Intel TME-MK) could eventually eliminate
-the need for runtime scrubbing as well, by giving each domain its own
-key. This is relevant to the confidential computing work currently
-underway (Teddy Astie's recent AMD SEV RFC), though the boot-scrub
-optimization proposed here is independent and much simpler.
-
-Feedback welcome on whether the reasoning is sound and whether there
-are edge cases I've missed.
-
-Thanks,
-
-Sam
-
-ps. I'm not subscribed to the list, so please CC me in replies.
+Jan
 
