@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D22CD343A
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299769.1574332 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5149EFF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299775.1574377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgG-0001yj-1z; Mon, 04 May 2026 12:45:48 +0000
+	id 1wJsgO-0003FL-Mw; Mon, 04 May 2026 12:45:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299769.1574332; Mon, 04 May 2026 12:45:48 +0000
+Received: by outflank-mailman (output) from mailman id 1299775.1574377; Mon, 04 May 2026 12:45:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgF-0001yc-Vh; Mon, 04 May 2026 12:45:47 +0000
-Received: by outflank-mailman (input) for mailman id 1299769;
- Mon, 04 May 2026 12:45:47 +0000
+	id 1wJsgO-0003En-Fa; Mon, 04 May 2026 12:45:56 +0000
+Received: by outflank-mailman (input) for mailman id 1299775;
+ Mon, 04 May 2026 12:45:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgF-0001kP-5x
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:47 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgN-0002zJ-9q
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgE-001PV9-D1
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:46 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wJsgM-00AF8N-Lg
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:54 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894f8-e002-0a2a0a5209dd-0a2a4504ca26-8
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:46 +0200
-Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f89500-bab6-0a2a0a5309dd-0a2a45059892-12
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:54 +0200
+Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894f9-1dec-0a2a45040019-ca0c7c9297d7-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:46 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id C7D731D0007D;
- Mon,  4 May 2026 08:45:44 -0400 (EDT)
+ id 69f89501-aaa8-0a2a45050019-ca0c7c9a81fd-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:54 +0200
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 31D957A00A9;
+ Mon,  4 May 2026 08:45:53 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Mon, 04 May 2026 08:45:44 -0400
+ by phl-compute-02.internal (MEProxy); Mon, 04 May 2026 08:45:53 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:45:43 -0400 (EDT)
+ 4 May 2026 08:45:51 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,31 +57,31 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1777898744; x=1777985144; bh=lDurhCnEVx
-	k5QBuNDNgcwnaqx3Wd1t33ua2Ae6U5h5Y=; b=B6p2GnSnMe6AZ9zcJw2SfwTVVT
-	Nuq6S7BY+oXpUAkqe3kvJZR9SugIUQPvjW6JqGxn+q0Evpmgq9SA8UtG66LeDT7U
-	vFJNud8tSVL5a++J0psfrvv0DkDCUCkFta/nBbFnHZwp3l2XhWx79vz/ZOqmpQ1s
-	lQFnXGWJ5IizNUx+ogM80eOYYvkLpD9iwiW+jEHOxqHDe+sOtcijJLKB9t5elcbg
-	obGKJeSrm5HN1Y8bPtWSyj/55LqWkAbl9fYtUW3CK8XfebE3UJqeoYcju1ejuNR2
-	yiouZr6SKMBYSJiSbbPnPHaOAteaahtgzip4N5hiboMmbjLPelJ5131i7elg==
+	:subject:to:to; s=fm2; t=1777898753; x=1777985153; bh=6N28n/OuOK
+	FC0lV13jcrj5ZtQAQhOnik8wiu6mipkKI=; b=im8mSYKyU/w3PnUQyU4ZE7Osl0
+	lNThkUuSLHX5hoUAxjK7XlLM4Ref1zz/i1lrXFxKdOFCfbyIMKAw+kTOfG8g8X5g
+	CzPTNHHuHx5giKkl7mN8Jmu3Yyrtr8whbnpLwfXE+tU71mkwn6ag9voXj63H/TTQ
+	t/1qvSBRI4dlZJTiGlTnMTGHBh+vca82SA3/5VzGfw50qoPWC1VJZryoKUaQwlKY
+	7hPQhUx6kOSSaqu5FoftrRsuGEbbr+7ssN1toF0X/NF9Ezbd7u3A3Sp5rJd3mupI
+	nTWmhh25UiMDwx7GR6gFemlprt1RlZMo0JXuioqKAg5VUJXuawgcYvsi4VyA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898744; x=
-	1777985144; bh=lDurhCnEVxk5QBuNDNgcwnaqx3Wd1t33ua2Ae6U5h5Y=; b=M
-	cU+zisRjC/V4N4IHRzfMDG4Uth2PttqZt/uSKSs97HJJlO5Nr9s4EmvcvnyapQX3
-	8xk7zECV85S98/pnohD2/u3kem1JoA8y3Nf1FNppfHGivHtRW/MG3f5aVaDoHPuG
-	cHPvaEf/WCF1o1n9iFkYe0NeJELz/nIMIjHE+TYwmmEns/qwUN4Ru6GkPzhSpWeZ
-	29Rac4PMW/DAg2MtTwIc407GgyRDQPd/T0CfihRlQvy07Y6TQ8gIqZAjHt4fOamh
-	bfwuE+y1gtcyn72mpD6hQd5czuhwvqsa1rQyHs73HkUMvhJ0x2TTEIk5WhvkWfPW
-	mgIsEnzy6uPx6/i5QJdLg==
-X-ME-Sender: <xms:-JT4acTqwixw2NJ0eml8Pcp6YMV877QKI0E_bh_f5j8vTk26NXl_oA>
-    <xme:-JT4aQr0xq3l3P0B9wXOTE2FU48pXsZyXwrI4JiCt8YZDRFQxWuM65kJUwY6jkZi0
-    E2B2HNfpqB1Raw2acXUkQTrRGh6R6jqBP1t4whzxnxBbXSH1w>
-X-ME-Received: <xmr:-JT4aSJ3QQVibd2y-eyJobvCCA-P5OPU682s2FcjTBZth_HzAJHUMJHltz4UBHmHCMKGRv_3FLb8U0JNkmu4rXF5yQwudRDu84We-SZYDwM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetggdotefrod
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898753; x=
+	1777985153; bh=6N28n/OuOKFC0lV13jcrj5ZtQAQhOnik8wiu6mipkKI=; b=m
+	cpYSfP9GT0TaLDKtKpxkPSdnvgrLg/0qr3O4FalT4KkTus1E7Ja7Ag2aU7XDLI43
+	oO9D0+UYexZwSu44aBmnfePAwCr1V5/JhvnxQ9EK4m/Krec2KHalPPvUsdjjiq1U
+	6h/URf+32m5jaXibdT8pjt1OSvysPex0Y8M/7TCqYjfL3wC0k33w6tHxsWjbAMLy
+	bl91peWWfvFbIehU5GyFZ2dFr6xjH8r/s4cepxXBCfm3llA28odQ7IxTv3OIYX2y
+	hWUDq2OTeD69UP1+LmgWbw6MRS08Sr9fYYIrVcYcHbJsXh1VjabsrwUyo8lOgvDA
+	R+S/WfLh4Fqj5jXykRJvA==
+X-ME-Sender: <xms:AZX4adn8VuruvZy0UIXLbkLv3x6NLrAkq0O5envrRgn5YlZ3PQa16Q>
+    <xme:AZX4afuEbU9C22FwVoDXtc2D3dzmA2yhYJfWjKKA9etD84ZfyGuJL1d0bWZ0wpFwI
+    ULpsEysx_mYjmodizfA3CcNm4Ij-NXi_4ffH1J5hnDPDq5ocQ>
+X-ME-Received: <xmr:AZX4ab-zkRsl2jA5tGlLabTbxmA_HnLnEps4hCQdoJ4pHQzpA8x-9KripH6ATb4qn1TSqcRn2pOK-tjiyo-0YurQCc2SDVFE6x_7P4Tn1CU>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekkecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
     hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
@@ -96,11 +96,11 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetgg
     nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
     dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
     rdgtohhm
-X-ME-Proxy: <xmx:-JT4abpv4eI4t1jXVS500yZnemWlajZWDNROHtyB0VRe2C4ucxE-JQ>
-    <xmx:-JT4aSxr66QmtrUjrQcwMglYApyslYl-rr-NxOF16FSahLACNfi5Kg>
-    <xmx:-JT4aXODErMV7Iy5-RBA_O4b2KN5OwV90Y3B-ifWAeyLCem-I4jySQ>
-    <xmx:-JT4af6ROB_8LvS_dEzzbgYzF_l0kLIyGjQpONQ8DegzGSumpVU-xQ>
-    <xmx:-JT4aaf80cQQak_J8iDY-4D-xBNnzLQaR3qMnM1jrX59YYUBprHYQP0P>
+X-ME-Proxy: <xmx:AZX4aZNMPIC6EauEG8pObJXQSmfevSTpI4gE0ScXzE2zd3D4zuFLBw>
+    <xmx:AZX4aZFpEg1q7UnTV_6G1aujrsFX1teFyUEhxJN6Jbj3LpyjenTbsQ>
+    <xmx:AZX4aXSSVy8Qep129rImUV0sKCzbRVV6Ab4Ly6pUqMppQe4k1DWmng>
+    <xmx:AZX4aWvbBseKEpXPUc9ZuEmObxEHxHRYKQE1Y0odLGd6CCVCrK8TIQ>
+    <xmx:AZX4aYgZBPHqAqVQ33yOHc2ydwgyDXsmXES3DhNjfVzFclfxfnsJAhnc>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -108,70 +108,50 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 02/13] Switch Linux builds to use Alpine 3.23 container
-Date: Mon,  4 May 2026 14:35:41 +0200
-Message-ID: <23fbf2c275cfb021161688eb5f0e9013bfb4aa83.1777898148.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 07/13] Add linux-6.12.79-x86_64
+Date: Mon,  4 May 2026 14:35:46 +0200
+Message-ID: <731be3ebc522aeaaf08ee150bc566abc339b501b.1777898148.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1777898746-32E743FF-0F06FFE7/0/0
+X-purgate-ID: tlsNG-c201ff/1777898754-E0DA3443-225C71AA/0/0
 X-purgate-type: clean
-X-purgate-size: 1350
+X-purgate-size: 1009
 
-Slowly phase out 3.18 one.
-
-But keep Linux 6.6 on Alpine 3.18 containers - it fails to build on
-Alpine 3.23 (due to GCC 15 defaulting to -std=c23).
+This is necessary for new Zen4 runner.
+Do not include Argo module in this build, as it isn't compatible with
+6.12 yet.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Changes in v4:
-- Alpine 3.23
-- Keep Linux 6.6 on Alpine 3.18
+Changes in v2:
+- update 6.12.34 to 6.12.60, retaining acks
+Changes in v3:
+- update 6.12.60 to 6.12.79, retaining acks
 ---
- .gitlab-ci.yml | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .gitlab-ci.yml | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index b86d9aa..5281c1f 100644
+index 45006d4..3ba8a31 100644
 --- a/.gitlab-ci.yml
 +++ b/.gitlab-ci.yml
-@@ -21,14 +21,14 @@ stages:
-   tags:
-     - arm64
-   variables:
--    CONTAINER: alpine:3.18-arm64-build
-+    CONTAINER: alpine:3.23-arm64-build
- 
- .x86_64-artifacts:
-   extends: .artifacts
-   tags:
-     - x86_64
-   variables:
--    CONTAINER: alpine:3.18-x86_64-build
-+    CONTAINER: alpine:3.23-x86_64-build
- 
- #
- # ARM64 artifacts
-@@ -52,6 +52,7 @@ linux-6.6.86-arm64:
-   script: ./scripts/build-linux.sh
-   variables:
-     LINUX_VERSION: 6.6.86
-+    CONTAINER: alpine:3.18-arm64-build
- 
- #
- # x86_64 artifacts
-@@ -77,6 +78,7 @@ linux-6.6.56-x86_64:
-     LINUX_VERSION: 6.6.56
-     ARGO_SHA: "cf73819cacc945baca1a7421e5836d1bd481739b"
+@@ -102,6 +102,10 @@ linux-6.6.56-x86_64:
      ARGOEXEC_SHA: "d900429f6640acc6f68a3d3a4c945d7da60625d8"
-+    CONTAINER: alpine:3.18-x86_64-build
+     CONTAINER: alpine:3.18-x86_64-build
  
- microcode-x86:
++linux-6.12.79-x86_64:
++  extends: .x86_64-artifacts
++  script: *linux-script
++
+ linux-git-x86_64:
    extends: .x86_64-artifacts
+   script: ./scripts/build-linux.sh "$LINUX_GIT_VERSION" "$LINUX_GIT_URL"
 -- 
 git-series 0.9.1
 
