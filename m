@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BB1CD342C
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 11:11:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299702.1574252 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A80FF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 11:31:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299711.1574260 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJrD7-0004Ej-O5; Mon, 04 May 2026 11:11:37 +0000
+	id 1wJrWK-0007A7-68; Mon, 04 May 2026 11:31:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299702.1574252; Mon, 04 May 2026 11:11:37 +0000
+Received: by outflank-mailman (output) from mailman id 1299711.1574260; Mon, 04 May 2026 11:31:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJrD7-0004Ec-Jh; Mon, 04 May 2026 11:11:37 +0000
-Received: by outflank-mailman (input) for mailman id 1299702;
- Mon, 04 May 2026 11:11:36 +0000
+	id 1wJrWK-0007A0-2k; Mon, 04 May 2026 11:31:28 +0000
+Received: by outflank-mailman (input) for mailman id 1299711;
+ Mon, 04 May 2026 11:31:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wJrD6-0004EU-Py
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 11:11:36 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wJrWJ-00079u-28
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 11:31:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJrD6-008du0-5K
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 13:11:36 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wJrWI-002415-Dw
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 13:31:26 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69f87edb-e002-0a2a0a5209dd-0a2a45019314-18
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 13:11:36 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f88389-e002-0a2a0a5209dd-0a2a4505b0b0-26
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 13:31:26 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69f87ee7-c1f2-0a2a45010019-d1558030c577-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 13:11:36 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-488af9fdaa7so19585905e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 04:11:36 -0700 (PDT)
+ id 69f8838e-aaa8-0a2a45050019-d155dd2ae5ef-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 13:31:26 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-44a5174670eso1433550f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 04:31:26 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a8fee325asm94758735e9.7.2026.05.04.04.11.34
+ ffacd0b85a97d-44a98b768fdsm24604851f8f.33.2026.05.04.04.31.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 May 2026 04:11:35 -0700 (PDT)
+ Mon, 04 May 2026 04:31:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1777893095; x=1778497895; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1777894286; x=1778499086; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=hlCTRef2XAgV4wftupmArr2/pP1EMbJR9+xydPHNSxs=;
-        b=UH9r4FQqFzQsz1r5XYtkuLYwSZgc074w1DUFTCfXIokHPFjMhABulm3u+jv2j1fE0a
-         sXW/vZqdU4g8dfiyBJBP5dNL/4TsL94uDn2XNj8eOG9PTb/ekUl8JbwN97+8GDlTtFdE
-         JE9C/r0n47Z9qL2lLSTuLAMHZFIdJ7dUetq+hU15PP7piFnBFVuKLQhvbGTegwYJO/8a
-         clsS0MImcKp0mGifbdNklDm8aSzOc+05Pz6E8p2AchdTi7VQ3WkfMzIvLhwbrWWgrm26
-         jN975OdeFobAOcRDGC/+B2MLc2SmPv4kzijNKXsigy8AEoXq7XEzRWps0zR4yIITk2MJ
-         xyWg==
+        bh=0hxkgJFS9D2umZb9rFCDQc6z7aiWZ7JxYsZ+KZkGIA8=;
+        b=VoPtVb0dQqvJj4fN2WlvUG413Yl2w8VKhQgN7pzytkClkwH+9zyimOT+iIVT4B6mZw
+         EPplpTAwFMDwsQmKzqb58MNs6JBOOYgdKGNOQVIPAQbufFRe5qyzHV47fZ7QRNJFGzPW
+         WN0PAOaE7kGykqwDr/gDatg7p89WoZnD5ip1PwVWMeyrAC9K6W8TpQyJXtx4X0vZp+9R
+         BFpgH+CBslRWFjx2VDCUv6J4NvoVRz8ctw4700rEzDd2v7RLjeiqI6Svs2m1cW789x1A
+         V2qnupi/5FzCs3najCL7/MP+3tR0ew5QftnTGlvDIOYqjLM4C2VAjNg606/y2bL5bV6k
+         2WqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777893095; x=1778497895;
+        d=1e100.net; s=20251104; t=1777894286; x=1778499086;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hlCTRef2XAgV4wftupmArr2/pP1EMbJR9+xydPHNSxs=;
-        b=LAPrWWEok/+tuLHXcYVB6GKwzAtZa1MrWHOTHjOP5ClZIewPZVupKMk20M/zVQnwSt
-         SSM2IwOwVrq3NLBZUZCXwsQxiBA7cYn7i7bE9uLX6zvpm7FTvkGThS5+CgJl+QhJ13MG
-         yq/mPboKwwarzAnCXUnZgTPsw9fRlItqe1ivdfECYGB5PiWurQJIYS/mq1Zj0yq6ZdZj
-         nGsnTYuiQn8yl3rNH58zPW5ZuJvubsIKgolqKekg+yi8CRFZ2BoVYCktDle0Euiu40Dt
-         BILcnY7+lMIQriBmZruet3lfH0L+0XIqfMg0i1Q8Pim4hL1PQQBmSA0Jr1QXK9RK0iq3
-         +oqw==
-X-Gm-Message-State: AOJu0YxhMbtK4RxPlOsvTQt7yyZ8hf4PqVpb8+ASkQHleHIuGaDBM+eS
-	YWxxsxBOg8wSuCt9cYugN3/K6yYs4jQA027Kp2AF2NR/wJYy1w5HujSaCooV+T+bDA==
-X-Gm-Gg: AeBDietdTRCP7/XOAFMqkMTG698ClOaVy40gDgHDtoqtnTESBPRoQBzvEoP1pmR1lnB
-	w67qLE4rtyVC0puwHbsFxvtHTjucl58R0UB4ZL2XXyIGII7CvMKD3rnBv7bFm+kKwz52qTG0dJ5
-	8408sXwFFXa/INbK29zaW2EZseHZHt4fKmT9vIg97lFxM09twopRWyplf0324iDLJD4L0SjYw9q
-	r9u/6hEAWA9LN2PPdusTBY7s1MecNYTOeC5t2U3id/H0wf71fr4BHS+8WcxdCdjj6UTRvjbzMBH
-	x6wGXVInDal9vQ51UNYw/9HkQFxm4UhjkGEqzgpWguJDEVLVGnbKIca8zbj0xHk2H+iva/RWRNA
-	YKq/5Kq/NYgtEqQLx7xpgzlMjBzrTuNDSqe0TXSC8VVrkZfwJT5LsC65dg+br+1LQyORiVFZtOO
-	bknIPQW2q57W8gPYLjxlI/B4OwvvxmXEiWo/PG8RogkikYwXDVLLIx28fYy+xa2dOn4H4LMXt78
-	KlzWbASg+X66syEZgBYrS3Z3g==
-X-Received: by 2002:a05:600c:c119:b0:48a:563c:c8c0 with SMTP id 5b1f17b1804b1-48a9853c91dmr119587575e9.7.1777893095479;
-        Mon, 04 May 2026 04:11:35 -0700 (PDT)
-Message-ID: <f6521590-e51c-4f00-bcf8-faee79a5d3a5@suse.com>
-Date: Mon, 4 May 2026 13:11:44 +0200
+        bh=0hxkgJFS9D2umZb9rFCDQc6z7aiWZ7JxYsZ+KZkGIA8=;
+        b=SBevbBNW5moVW9p/ninPaX7MLrQp5PcYT2WoBkEl+cKhHgAjWk8qY4HHHT+A+VDTsc
+         gP0p10gLLNpVC0wYpfm127Er7xX0T4pz3I+rTpX/5D1KLA7tPg19OAP2nlrExv4k8QAQ
+         EEtcXysfDZtFPeVicSS4x85TAU94iEO6JQWvh5zznKXQLQyLC/24CoW2yaSsf3W3SNTl
+         c+H7tY2LIO53CPBfroCzow9nM3Z8N6jc3kO5HAGkhZ8yo8pkwB9mJh7CUpPRZI3eTjsC
+         s/3Y5qYnu0KpPs7lHIITk7Ym2x7j6ZJvueivqioYSCNwqGK1mXqEB9hKOy0DLhdiudsK
+         ckfg==
+X-Forwarded-Encrypted: i=1; AFNElJ/TUjwmSiuVBpbMchlIQDkOrM6B5g5MFeO+FYhYO6UW73qDdR8YOwTMzlnTmwXn4YXT+pJt3+wv6pU=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzvZ0tfOvRJTH9X0IjTQoE6R50WKzGC5bbtKvRRusu5asZ2ir86
+	rA0nvQXT5kbGCCOv529AFJlGjOkey0WfsRVMP8N3Cpy/hj77B5GTtj58GxuOXwBppg==
+X-Gm-Gg: AeBDievHqvcc+dD+GZaAdee5MUsNpY8IBvVgnk6227OtTEbp83cdDHQiaCk5iXf73PS
+	WLnhn2evMqWXVW9Z/zyJqD1GYdpRNUjIBd/29kTH3Bn1NjMp7JrAxTC6ovboxVILw9yyM/kCsY4
+	1bYEMxMU+evtuhmszSF+aiv4OSi7lsl7E5EBu2409e4ER9v0qYl7c8G/WrBGADGiaXIqlulkRrj
+	4VEZ1KO8k9/MBajJjD6FFMl62oh4b4YClovPsw5YD9ROvmlsCZ6J7OhYxeRrlSJW3oZ023+hdRG
+	pAFer8JlK3DqpL0XaDmYdS2IZzkHPk/bgBzt24i2O3LLb7xLXwXWaqTZNNlUASz7ViXIyz/hlxQ
+	a1X0zntBESVzDcT/KCcHRZoFzSYgfyYQP5uhLvWhyoOR5C3VlR0PvYtet5U+uqGbgN1cft9u1+m
+	ekgTKu0uLlmNEb6Tl1xoza+F6Of7rqCvZ/eXS6YN43V++apA70Ev5f5fdH6paOFpciUjkFApiJT
+	h7reJYYVuzl/PT2BfoK3z1QKA==
+X-Received: by 2002:a05:6000:18a5:b0:44a:b0a3:7c1a with SMTP id ffacd0b85a97d-44bb558c806mr14889417f8f.24.1777894285631;
+        Mon, 04 May 2026 04:31:25 -0700 (PDT)
+Message-ID: <62ae456f-3ed2-450d-aaf2-bd9cd10fbec7@suse.com>
+Date: Mon, 4 May 2026 13:31:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/17] hvmloader: allocate MMCONFIG area in the MMIO hole
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
- Alexey Gerasimenko <x1917x@gmail.com>,
- Thierry Escande <thierry.escande@vates.tech>
-References: <20260313163455.790692-1-thierry.escande@vates.tech>
- <20260313163455.790692-12-thierry.escande@vates.tech>
- <afHPdxc72FDGnQoq@macbook.local>
+Subject: Re: [PATCH] x86/cpu: identify uninitialized CPU data using BAD_APICID
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260430114647.94526-1-roger.pau@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,81 +126,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <afHPdxc72FDGnQoq@macbook.local>
+In-Reply-To: <20260430114647.94526-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1777893096-AFF50FF4-589AEF2C/0/0
+X-purgate-ID: tlsNG-c201ff/1777894286-E2969443-43CF1002/0/0
 X-purgate-type: clean
-X-purgate-size: 2387
+X-purgate-size: 1562
 
-On 29.04.2026 11:29, Roger Pau Monné wrote:
-> On Fri, Mar 13, 2026 at 04:35:04PM +0000, Thierry Escande wrote:
->> --- a/tools/firmware/hvmloader/pci.c
->> +++ b/tools/firmware/hvmloader/pci.c
->> @@ -413,6 +413,58 @@ void pci_setup(void)
->>          pci_devfn_decode_type[devfn] |= PCI_COMMAND_MASTER;
->>      }
->>  
->> +    /*
->> +     *  Calculate MMCONFIG area size and squeeze it into the bars array
->> +     *  for assigning a slot in the MMIO hole
->> +     */
->> +    if ( is_running_on_q35 )
->> +    {
->> +        /* disable PCIEXBAR decoding for now */
->> +        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR, 0);
->> +        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR + 4, 0);
->> +
->> +        switch ( PCI_MAX_MCFG_BUSES )
->> +        {
->> +        case 64:
->> +            bar_data = PCIEXBAR_64_BUSES | PCIEXBAR_ENABLE;
->> +            bar_sz = MB(64);
->> +            break;
->> +
->> +        case 128:
->> +            bar_data = PCIEXBAR_128_BUSES | PCIEXBAR_ENABLE;
->> +            bar_sz = MB(128);
->> +            break;
->> +
->> +        case 256:
->> +            bar_data = PCIEXBAR_256_BUSES | PCIEXBAR_ENABLE;
->> +            bar_sz = MB(256);
->> +            break;
->> +
->> +        default:
->> +            /* unsupported number of buses specified */
->> +            BUG();
->> +        }
->> +
->> +        addr_mask = ~(bar_sz - 1);
->> +
->> +        for ( i = 0; i < nr_bars; i++ )
->> +            if ( bars[i].bar_sz < bar_sz )
->> +                break;
->> +
->> +        if ( i != nr_bars )
->> +            memmove(&bars[i+1], &bars[i], (nr_bars-i) * sizeof(*bars));
->> +
->> +        bars[i].is_mem    = 1;
->> +        bars[i].devfn     = PCI_MCH_DEVFN;
->> +        bars[i].bar_reg   = PCI_MCH_PCIEXBAR;
->> +        bars[i].bar_sz    = bar_sz;
->> +        bars[i].addr_mask = addr_mask;
->> +        bars[i].bar_data  = bar_data;
->> +
->> +        mmio_total += bar_sz;
->> +        nr_bars++;
->> +    }
+On 30.04.2026 13:46, Roger Pau Monne wrote:
+> Uninitialized cpu_data[] entries have the apicid field set to BAD_APICID,
+> not boot_cpu_data.apicid.  Fix the check in cpu_smpboot_free() to use the
+> correct condition.
 > 
-> I think it might be best if the ECAM fake BAR is the first element in
-> the bars array, so we ensure it's the first item to consume memory
-> from the low MMIO hole.  Not sure how that will work with the current
-> sorting of the resources based on their size, but it's imperative for
-> hvmloader to attempt to position ECAM ahead of the other device
-> resources IMO.
+> Fixes: 7126b7f806d5 ("x86/CPU: re-work populating of cpu_data[]")
 
-Why would this be?
+I think this isn't correct, and the issue here is me having overlooked a
+dependency between that commit and the one introducing the line which
+you change: 8c15d3d18725 ("x86/SMP: guard socket_cpumask[] access in
+cpu_smpboot_free()"). Both changes were committed close together, but
+they were entirely separate submissions (well over a year apart). Hence
+as an individual patch that latter commit was correct, but on top of
+7126b7f806d5 it would have needed adjustment. Since 7126b7f806d5 wasn't
+backported (while 8c15d3d18725 was), the fix here also shouldn't be
+backported to anything earlier than 4.21 (which indeed the Fixes: tag
+better expresses).
 
 Jan
+
+> --- a/xen/arch/x86/smpboot.c
+> +++ b/xen/arch/x86/smpboot.c
+> @@ -961,8 +961,7 @@ static void cpu_smpboot_free(unsigned int cpu, bool remove)
+>       * In that case the socket number cannot be relied upon, but the respective
+>       * socket_cpumask[] slot also wouldn't have been set.
+>       */
+> -    if ( c[cpu].apicid != boot_cpu_data.apicid &&
+> -         cpumask_empty(socket_cpumask[socket]) )
+> +    if ( c[cpu].apicid != BAD_APICID && cpumask_empty(socket_cpumask[socket]) )
+>      {
+>          xfree(socket_cpumask[socket]);
+>          socket_cpumask[socket] = NULL;
+
 
