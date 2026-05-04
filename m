@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7377CD3423
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 05:38:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299459.1573991 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1492BCD3423
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 05:39:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299467.1573998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJm0E-0007vN-RI; Mon, 04 May 2026 05:37:58 +0000
+	id 1wJm1k-0008Om-3Z; Mon, 04 May 2026 05:39:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299459.1573991; Mon, 04 May 2026 05:37:58 +0000
+Received: by outflank-mailman (output) from mailman id 1299467.1573998; Mon, 04 May 2026 05:39:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJm0E-0007vG-Ne; Mon, 04 May 2026 05:37:58 +0000
-Received: by outflank-mailman (input) for mailman id 1299459;
- Mon, 04 May 2026 05:37:57 +0000
+	id 1wJm1k-0008Of-0t; Mon, 04 May 2026 05:39:32 +0000
+Received: by outflank-mailman (input) for mailman id 1299467;
+ Mon, 04 May 2026 05:39:30 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wJm0C-0007vA-WF
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 05:37:57 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wJm1i-0008OZ-Qk
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 05:39:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJm0B-000epT-UT
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 07:37:55 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wJm1i-008Z8S-6X
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 07:39:30 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69f830a9-2eae-0a2a0a5409dd-0a2a4506a0b2-28
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:37:55 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f830ff-5cb7-0a2a0a5109dd-0a2a450ad1ea-12
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:39:30 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69f830b3-7371-0a2a45060019-d155802fbded-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:37:55 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-488b0046078so28196235e9.1
- for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 22:37:55 -0700 (PDT)
+ id 69f83111-56b3-0a2a450a0019-d155802be025-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:39:29 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so59199975e9.2
+ for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 22:39:29 -0700 (PDT)
 Received: from ?IPV6:2003:ca:b72b:870a:8d83:125f:d0c4:4383?
  (p200300cab72b870a8d83125fd0c44383.dip0.t-ipconnect.de.
  [2003:ca:b72b:870a:8d83:125f:d0c4:4383])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a8eb69698sm436637455e9.1.2026.05.03.22.37.54
+ 5b1f17b1804b1-48a8fede418sm87724495e9.6.2026.05.03.22.39.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 03 May 2026 22:37:54 -0700 (PDT)
+ Sun, 03 May 2026 22:39:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,57 +56,62 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1777873075; x=1778477875; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1777873169; x=1778477969; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=qDtGVv1vn8v2JQN4/+C31OwW8o/xPineQ1nRIC7bTH4=;
-        b=AFE5PTaZkE6D24QBHzfEdUJdttjracpO7mLhA9Ua8UZ+2Q2wPi/Doa1mw1JTNWUDmO
-         pCh3dlLcaIRGsRD59KMwct9iZpfnBrDi9Hzvk7m/mf5Tl5leqy+0YCv0wvGSKUvi039O
-         ztmOPUi0hvMm9NNYV8Qe1e9wuRqYKMuOgpC0NZRoLsbM90pypLmA96RIoQbOFQK4jopn
-         S99l2BN9VcfUF5B1PYMQrGpk3d/waWLeHW/rHwewmxIjjyU/dY+fZvjp2Po80qYyUG+y
-         gddGCJ07jii/hC9qe78e8wSR6onmHNAhSD67O5Me3pOUE9bwZVXFIBz1nSF4ZbDGVU31
-         N/PA==
+        bh=+drOKvTOt2K36rAMHWDvB1x2sJqP6GEdY2GVV39dNcQ=;
+        b=BMIi10WwdBV6ZtqUBulUY+iX8NknGD9uWBqD4gycvhAzwgfxeMmGvOHBIaMExipjts
+         6pz9pVujpGuqrZjNGkO66IFdbeuI2hTlwce6vCkKEWExebMXGD4q4wUXo5wXTQ8ytwv4
+         XkwA/7UimEk47/EwloUfnoZU7/e3QjRtABqb6uYMwpTKLHXy2sLBZVd7+qSsNdKPmQ1X
+         yf/5MFJFQk9DT+93ErKb6LvkGwpX/Z15qha2VVHeTF+3ftaQpIpq6vboUKLSnMWdDVcw
+         d6WxOEZpJoJev8cxqRHqOrn4HAzLpCie/KSENvGfwyvK9SzCKLfAPoyV7Rni+UbftOnw
+         /NSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777873075; x=1778477875;
+        d=1e100.net; s=20251104; t=1777873169; x=1778477969;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qDtGVv1vn8v2JQN4/+C31OwW8o/xPineQ1nRIC7bTH4=;
-        b=UkkJ4ESiBrgc3+ddRlVnAw2ocQPdsxjGzFEPnRjaYdQRgMMUZQL2/vZEaUo9SvUD1l
-         O2h9BVyr0oBzd34vpE/pBNONoh9i6rIl6jfEOs1jjbtEOZkOzTixd8ZWcmWoRwCmZQiF
-         F3Yyw6urzuDxiJDzHiFOCyqNVkIPXOqy6QscBtn83yTRdVLIJOEwNn2AkZ/xUsqZ4G0d
-         sGHjTbOvruhmeKJPdQk7v/84HjhZ3vBjhfWWrr8hB0euF3pWcTonGtSRTckSGh+0FOYB
-         AgfX7l7Y9Nv0hyP5I0ecM+pqb9vQabVUj9UCSuadr2gOpJu6CpDLE64PZE1xeAO5am5A
-         G2hA==
-X-Forwarded-Encrypted: i=1; AFNElJ9i2dpW8Umgcts8c6kk2ssOEfl/LV6Ml+pHj5pKktqG6LYXUubLGr6kIKtvLMplIOd3SXK7r5iMopo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YwQOvUNEBK4H/dd8J+ABFFDR3bNAqCLM5IdNkiVZxXt8Ttd9fAW
-	t3LFd9e7UX8TPFptN4nH3xoABOw3AYZybmjJjMLTI1/L2Gw3ITS9f2b4wHv8Cqm2Sg==
-X-Gm-Gg: AeBDieuvBr5gr3ynnNASCvCh+ftRlPWOG7cxMLW4XaIZ5C4AFtIE7Ps8SeMTKIe+wL3
-	QALMHznSM+12C0fs/He9ZXsD6BxDCHA81vHtE1ZtwBb34XxeLk39ftxzRFqTSeQYWT4MhcX9Mtw
-	lshXYbXLS9HUx5erEa8aNIx/ppqhhlxAxpUwWR+U2VCMzx9akmIuH70gnjoXxg6ueccok1ok0/c
-	H+XT/tnWIh9EO/BFLaaOvL7E4qZoPhZOD9USwWN5fHOGgkfhPQJkX3Vhx7+TsPNpLJ2EygGbOke
-	NLSM8WjY8c7tRk+vjYxoV/2Hxb9ubNL34OfgpVM1GFHxFd+qTBEQZT+RLPzH56cRWGz8y1ZgO5C
-	59wVTB8MZC4sL9aEXEGnKOo0D9BhLbDeTKjTkRvMlls0u+wf5ZxsL6wAjn18XUuyrcbIaQ37Zee
-	TIhtTn/TEwtUpILQp0GBf9LGsOnG3pXU7lxmXqEXj1IeYQfQeETVVIX3kQJUwpKziB0F+s/m/tY
-	T4Hd1jqJGVi3UuqC2BCtdGn4lhXu65uKRlpRbRyo9ikgIpWa7w6RnViSXT2zAv2vWgqKQ8=
-X-Received: by 2002:a05:600c:444c:b0:488:a824:fdff with SMTP id 5b1f17b1804b1-48a9866dcd9mr132888835e9.22.1777873075187;
-        Sun, 03 May 2026 22:37:55 -0700 (PDT)
-Message-ID: <efb254c2-f52a-408d-b225-e4e03935d05e@suse.com>
-Date: Mon, 4 May 2026 07:37:54 +0200
+        bh=+drOKvTOt2K36rAMHWDvB1x2sJqP6GEdY2GVV39dNcQ=;
+        b=X7DdkYiBWWIeS+KQVz9SlR9Gp9z8qWOenYw7dsRjEZv+JYvd1pWrErLcbqMP2URTqW
+         tzGdGpb3S66oNCSurRbSd5CMfcag4Kaz/Xs2NA9ovN+mrmbAqIbSeg5oRTXILdW4PIhD
+         vxWr+sKzuDfeSA721ZVNEeYr6WpylMB/FWHOHbZZ39XyHVk22Mg5bWLLIESWn1noDjOl
+         1fASbQYo1/QyKOMx5KkMMr9wCqA9/SbLHHMRcABO0XFAp4LmzCcQZUYzCp0AU9iq00zc
+         uFTk8ksOiwlX1KBXtK0iieAKta352gFnxsQMQJyf0swmWIckbNlDNT5F2E0dAlQLELny
+         nMqA==
+X-Forwarded-Encrypted: i=1; AFNElJ+MXyV6IN2gsK02EOzE9rJDQo68ZijfV2/CXsImLpfpbOvMY63vTIebOrVtDlIj4Jf5cRAcrR8R8X0=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw7IVUk35z/gAUHq6zMSW9By5M8V6Ki+mVWsYmo2ArJlI8lnlXh
+	t6QPu4H4vnQH6yD1NrKLypcBcQhdSYySdYXMZwQMioHLB4Zt+xmitcN+hLjZwjwbxg==
+X-Gm-Gg: AeBDietWwZSobhrCws2ZPw65Qxg+yJR2UqxPBjSTs9ddRdKgCX4NWgkz7UmA//vikby
+	RMo5pa5d99S/2ptxKbkeZiHOfzrh/2DrQjgwJR53p3drB3qHopQa2IqcW6PrZHHpk6L7FZ4c3Og
+	azXOJN+SP5EKmOY1phyvMbpq37uluUtM1PV2SvpG31pkqRyUJgCmOaqg1Mb47i3KgF1sfMHbquv
+	ZM4SsvJhOqoA+fGySTUetWC7MddYi+RufPDkgygkxG0JmDQEAtYC176nV1eTnl/fJ2y2fhaa5EX
+	zR370UFYtQMW+p9CalJHpQhnH7EOsWhgPhnzhg5AL9+IKPWtRgj31h9Sdj6PFqODjaNJPKYEU1/
+	/0LrSXuntD7KFpNvzNVEpqVFsRKPAfTcCMBBFlgzAuHps8WYymstVLylfBL46ep0nsMFSL83lQN
+	3oGUy2pOvP3fI71SIEBK7FC2u+UOOdQFy54wIUkB8A57s0DrIDgGP817wamBYCnijyWFjEO7U8F
+	RVFvT48T2fuVPf2ngRsMmJIv3tkHeuvUEZeJqpAtL0vruU7hK+sXiYy0Ahp+BQNScObmtbyRrL4
+	NnxTYQ==
+X-Received: by 2002:a05:600c:6389:b0:48a:5501:7995 with SMTP id 5b1f17b1804b1-48a9865d1femr128330705e9.18.1777873169384;
+        Sun, 03 May 2026 22:39:29 -0700 (PDT)
+Message-ID: <6bad1f16-5b9f-4358-b4a2-6b5edafd0bb3@suse.com>
+Date: Mon, 4 May 2026 07:39:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/7] vpci: add SR-IOV support for PVH Dom0
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>
-References: <cover.1775742115.git.mykyta_poturai@epam.com>
- <a0abd984989237d2f36e1628db577fb25af1cdbe.1775742115.git.mykyta_poturai@epam.com>
- <5efddecc-3665-4a53-9eaa-b117370cc0e4@suse.com>
- <5168207f-33ed-4fc4-918e-6c3b454b0efa@epam.com>
+Subject: Re: [PATCH v3 10/12] xen/riscv: introduce p2m_gpa_bits
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1775836193.git.oleksii.kurochko@gmail.com>
+ <87d8050f252fb76e241a40809763e60d9874e902.1775836193.git.oleksii.kurochko@gmail.com>
+ <14ae97df-cb9b-4b43-bb39-6b9395ad918b@suse.com>
+ <cde7a080-4501-4641-8848-2035e2370ab3@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,109 +137,43 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <5168207f-33ed-4fc4-918e-6c3b454b0efa@epam.com>
+In-Reply-To: <cde7a080-4501-4641-8848-2035e2370ab3@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1777873075-CFD7AD75-BD6035A0/0/0
-X-purgate-type: clean
-X-purgate-size: 4201
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1777873169-4576D8B7-FED8BDD7/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1127
 
-On 23.04.2026 12:12, Mykyta Poturai wrote:
-> On 4/21/26 17:43, Jan Beulich wrote:
->> On 09.04.2026 16:01, Mykyta Poturai wrote:
->>> From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+On 23.04.2026 15:47, Oleksii Kurochko wrote:
+> On 4/21/26 11:46 AM, Jan Beulich wrote:
+>> On 10.04.2026 17:54, Oleksii Kurochko wrote:
+>>> common/device-tree/domain-build.c uses p2m_gpa_bits to determine the
+>>> upper bound of the GPA space when searching for unused regions, so it
+>>> must be defined when CONFIG_DOMAIN_BUILD_HELPERS=y.
 >>>
->>> This code is expected to only be used by privileged domains,
->>> unprivileged domains should not get access to the SR-IOV capability.
+>>> The variable is initialised to PADDR_BITS and narrowed in p2m_init() to
+>>> the GPA width of the selected G-stage mode, allowing an external entity
+>>> (e.g. an IOMMU) to restrict it further if needed.
 >>>
->>> Implement RW handlers for PCI_SRIOV_CTRL register to dynamically
->>> map/unmap VF BARS. Recalculate BAR sizes before mapping VFs to account
->>> for possible changes in the system page size register. Also force VFs to
->>> always use emulated reads for command register, this is needed to
->>> prevent some drivers accidentally unmapping BARs.
+>>> p2m_gpa_bits is a global rather than a per-domain value, which is
+>>> acceptable for now because all domains are required to use the same
+>>> G-stage MMU mode, as dom0less common code allocates it per all
+>>> domains.
+>>>
+>>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 >>
->> This apparently refers to the change to vpci_init_header(). Writes are
->> already intercepted. How would a read lead to accidental BAR unmap? Even
->> for writes I don't see how a VF driver could accidentally unmap BARs, as
->> the memory decode bit there is hardwired to 0.
->>
->>> Discovery of VFs is
->>> done by Dom0, which must register them with Xen.
->>
->> If we intercept control register writes, why would we still require
->> Dom0 to report the VFs that appear?
->>
+>> Pretty hesitantly:
 > 
-> Sorry, I don't understand this question. You specifically requested this 
-> to be done this way in V2. Quoting your reply from V2 below.
-> 
->  > Aren't you effectively busy-waiting for these 100ms, by simply 
-> returning "true"
->  > from vpci_process_pending() until the time has passed? This imo is a 
-> no-go. You
->  > want to set a timer and put the vCPU to sleep, to wake it up again 
-> when the
->  > timer has expired. That'll then eliminate the need for the 
-> not-so-nice patch 4.
-> 
->  > Question is whether we need to actually go this far (right away). I 
-> expect you
->  > don't mean to hand PFs to DomU-s. As long as we keep them in the hardware
->  > domain, can't we trust it to set things up correctly, just like we 
-> trust it in
->  > a number of other aspects?
+> Could you please clarify what specifically you don't like here?
 
-How's any of this related to the question I raised here, or your reply
-thereto? If we intercept PCI_SRIOV_CTRL, we know when VFs are created.
-Why still demand Dom0 to report them then?
-
->>> +static int map_vfs(const struct pci_dev *pf_pdev, uint16_t cmd)
->>> +{
->>> +    struct pci_dev *vf_pdev;
->>> +    int rc;
->>> +
->>> +    ASSERT(rw_is_write_locked(&pf_pdev->domain->pci_lock));
->>> +
->>> +    list_for_each_entry(vf_pdev, &pf_pdev->vf_list, vf_list)
->>> +    {
->>> +        rc = vpci_modify_bars(vf_pdev, cmd, false);
->>> +        if ( rc )
->>> +        {
->>> +            gprintk(XENLOG_ERR, "failed to %s VF %pp: %d\n",
->>> +                    (cmd & PCI_COMMAND_MEMORY) ? "map" : "unmap",
->>> +                    &vf_pdev->sbdf, rc);
->>> +            return rc;
->>> +        }
->>> +
->>> +        vf_pdev->vpci->header.guest_cmd &= ~PCI_COMMAND_MEMORY;
->>> +        vf_pdev->vpci->header.guest_cmd |= (cmd & PCI_COMMAND_MEMORY);
->>
->> As mentioned elsewhere as well, this bit is supposed to be 0 for VFs.
-> 
-> There are some devices that expose VFs with the same VID/DID as in the 
-> PF, causing Linux to use normal driver for them and threat them like 
-> normal devices. At some point, those normal drivers try to do a 
-> read-modify-update of the command register and end up writing 0 to 
-> PCI_COMMAND_MEMORY, causing cmd_write to unmap the BARS of that device. 
-> I am not sure, maybe it would be better to just ignore cmd writes for VFs?
-
-No. We should treat r/o bits as r/o (which for this bit implies it not
-controlling BAR mapping).
-
->>> +    sriov_pos = pci_find_ext_capability(pf_pdev, PCI_EXT_CAP_ID_SRIOV);
->>> +    ctrl = pci_conf_read16(pf_pdev->sbdf, sriov_pos + PCI_SRIOV_CTRL);
->>> +
->>> +    if ( (pf_pdev->domain == vf_pdev->domain) && (ctrl & PCI_SRIOV_CTRL_MSE) )
->>> +    {
->>> +        rc = vpci_modify_bars(vf_pdev, PCI_COMMAND_MEMORY, false);
->>
->> Doesn't VF enable also need to be set for the BARs to be mapped?
-> 
-> I don't think so. Enabling memory space logically maps very well to 
-> mapping memory to the guest. I don’t see any benefit of also requiring 
-> VFE bit here.
-
-Iirc the spec is quite explicit in this regard.
+As per earlier comments, this not being per-guest, and implications thereof.
 
 Jan
+
+>> Acked-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Thanks.
+> 
+> ~ Oleksii
+
 
