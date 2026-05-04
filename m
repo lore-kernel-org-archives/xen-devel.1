@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3BE0FF885A
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299789.1574430 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB047FF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299850.1574441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgY-00059N-MN; Mon, 04 May 2026 12:46:06 +0000
+	id 1wJsgp-0007K2-AG; Mon, 04 May 2026 12:46:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299789.1574430; Mon, 04 May 2026 12:46:06 +0000
+Received: by outflank-mailman (output) from mailman id 1299850.1574441; Mon, 04 May 2026 12:46:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgY-00058i-EW; Mon, 04 May 2026 12:46:06 +0000
-Received: by outflank-mailman (input) for mailman id 1299789;
- Mon, 04 May 2026 12:46:04 +0000
+	id 1wJsgp-0007Jt-4L; Mon, 04 May 2026 12:46:23 +0000
+Received: by outflank-mailman (input) for mailman id 1299850;
+ Mon, 04 May 2026 12:46:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgW-0004hA-KS
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:46:04 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df306664a000f373@swg.vates.tech>)
+ id 1wJsgn-00078H-K0
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:46:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgV-008wGN-V4
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:46:03 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f89506-5cb7-0a2a0a5109dd-0a2a4507cc76-40
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:03 +0200
-Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f8950a-229c-0a2a45070019-ca0c7c92b73f-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:03 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 4419D1D00072;
- Mon,  4 May 2026 08:46:02 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Mon, 04 May 2026 08:46:02 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:46:01 -0400 (EDT)
+ id 1wJsgm-008wOo-W5
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:46:21 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df306664a000f373@swg.vates.tech>)
+ id 69f89518-5cb7-0a2a0a5109dd-0a2a450aa660-16
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:20 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df306664a000f373@swg.vates.tech>)
+ id 69f8951c-56b3-0a2a450a0019-b9ff1c228e6d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:20 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 19df306664a000f373.005 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 04 May 2026 12:46:16 +0000
+Received: from [192.168.1.18] (88-175-170-134.subs.proxad.net [88.175.170.134])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 7642186532;
+ Mon,  4 May 2026 14:46:15 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,123 +58,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1777898762; x=1777985162; bh=/ymJBx8GTx
-	CdivGqgtTD1zSfg4O+MOsuDgVQ5lv9Mo8=; b=IoLAfBpHrE9+vgcJr+XguJYmO5
-	sPSgkofYKMKErZXztKRdI3jBEDjASIn0Oa+rSAOyh0rp8ZGFx9m+lR9zR0pmdOni
-	bMpiOn5QM9M7euI/iK/9/kTAlUCMPlzS57TOCNcCSO164tjvlCjVmHANCjQ4Ldr3
-	D4OGgqQnCzJeK4soRMYkFz/8FvPFQYIdJ9mNaa2VuPHrJJZ5NDFd7YkmlyzbWTRO
-	9VWLBwLZmUuobcb8txDz+dNYV2PoHA3PRMdvToDxpTRQyt/2mqurmpNEpqEMJQ/9
-	anoTC9aEbKD3nLGNQG+cf0WJucYznSwld501AXuiuVyUeZiQ2z2IMLbYwi4Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898762; x=
-	1777985162; bh=/ymJBx8GTxCdivGqgtTD1zSfg4O+MOsuDgVQ5lv9Mo8=; b=R
-	vAmDOmYsF1CM4FqU5KEb8VBYiCi8hBkEgnLklPMz8tRX9g1JvQfmm/RMB5ibf4gd
-	60WNcjLn1eCVg/V/OnouYU9ZwkRFDrs41Bpofdk+8dLOd6MDjAcGHSH9LtrAwkIX
-	/uj3X7dfTMaB+CxpSgXRoQdmQif0jkkK8zQ0bcpSPtG+InvaRz8Q1TelJXWmjXhX
-	xtdDqd+ujvAKp0YTWDFs18zXrUj6/MNu9Sdft35J16bl7NlMIIPI2u6aN/vj1QAP
-	4/QBZDOJBnkdjdwtl1OguSUszKT1w4MWrxKwdPRxjOSBuV3Re4qVD/xZakmwToeQ
-	rvG74nnQCPTj1WzuLgbqg==
-X-ME-Sender: <xms:CpX4aWuOWafVUGj--21TZNVRYQds5YyZLF1K3Nk4Zsdtk5YBLe6sbg>
-    <xme:CpX4aSWs5ub1Ilf3QWRIiWzBzpRDlgARW8AF3Hh2l2OvaZuWrTWQQkNzRr0qMpq2f
-    gkLU90Ri_JYDKjJdFAN2qeuIL4xUIuqyG4jCG2ga0ZweRfwDQ>
-X-ME-Received: <xmr:CpX4aaEcD_oROZDbTrabNIzgkn52yeC6vGWvT2XaVnq8Vbqxn1Dn34WW6n9O-T2V8g_RZfRPnRAGQrv9PEycQw_h0rRAnYlQ_PcTOW41NiE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekkecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
-    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
-    gvrhfuihiivgepfeenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmh
-    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
-    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
-    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
-    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
-    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
-    rdgtohhm
-X-ME-Proxy: <xmx:CpX4ac0ANZRGTxRmhQEZsxCIYOCqRGTZjhlNRT5JOZLdbgQVH3KWQw>
-    <xmx:CpX4aUNCW3FgORfWVkP8t1NRuktSiP5zVnTM1oWhDYmt4Akn3UnuzA>
-    <xmx:CpX4aT7CI3Wwq5ViH1TFjwHFBYdOSuOPTsPVG00K4bx-Ka5O25v3SA>
-    <xmx:CpX4aW2wHiw0vNBQFFsq_ynehOg9f_m4xCeUlSI6O8alvJDPfDiPGQ>
-    <xmx:CpX4aRIc0DCDWHZDCDcCNDP6ZV7Ig8bIHJO9M5jXY4oZwtbrNlnPQzTs>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 13/13] Setup ssh access to test systems
-Date: Mon,  4 May 2026 14:35:52 +0200
-Message-ID: <13f837cd9f394d3b4eddb4849156b8ed5d06d31b.1777898148.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
-References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=q1TgSmZVUf3dXKf9bf2uUFbwIpA7FlTLhGnt2rhwGps=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=lUySsOR0jgGmF+HhEUUYa3qzA7m3FUIq1kyUE8gFrhvPinhTOux4sL67xxL7F31lnehIZzPz2
+ kuZMx2B5uG/AjDU5be0wyFohKWRtQWNKH09jZJeQT9lyTQy7Ec5CEGoRGetrLuAmk1jyUdlnF2q
+ vKO8Grb+CRO1unGhEyczgMeA033mCCA6pM7XIUsawlLm+59TOq4taYe4uJ6KSjqxeMBi1TKB1er
+ KkCjRa1/rgRF7IRxOV/vQJOon6iaBx3VzfnKPqqXIpVsJDWosiYabBXPSFTs4y+TPQ5/ixeTB48
+ ex68kzEl9aEkGG+8ymJpr8tV8k72sArqdB3hjoipAejw==
+X-Zone-Loop: 8d9832def169c1c8b2a41beffa9570fc5dc448829fb3
+x-campaign-type: default
+x-transaction-id: 3f9e383b-2881-450b-a3bd-1d7ddc0a7667
+x-swg-uid: 01-92df888f-1250-4cb6-92dd-ab9d4f8d3731
+X-Mailer: Sweego
+Message-ID:
+ <1777898776.8631fc262581453bbf619ec5b2062170.19df306664a000f373@vates.tech>
+x-swg-bid: 1777898776.8631fc262581453bbf619ec5b2062170.19df306664a000f373
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 4 May 2026 14:46:15 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1777898763-1505AC48-0BB3A418/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/amd: Drop allow_unsafe parameter, tune down XSA-9
+ mitigations
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <1776877188.8631fc262581453bbf619ec5b2062170.19db6223737000f373@vates.tech>
+ <fda8cb13-4ac6-4575-aba5-b2fcc3b4e1f9@suse.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+In-Reply-To: <fda8cb13-4ac6-4575-aba5-b2fcc3b4e1f9@suse.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.110.5812edc7bc0bfa36.19df306644a.2fcdf0beede501cf=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1777898775627
+X-purgate-ID: tlsNG-4011c0/1777898780-44F618B7-10128DD2/0/0
 X-purgate-type: clean
-X-purgate-size: 1527
+X-purgate-size: 1939
 
-For this add also bridge package, so xenbr0 can be configured with
-/etc/network/interfaces.
-This allows extracting more logs out of the test system.
+---=Part.110.5812edc7bc0bfa36.19df306644a.2fcdf0beede501cf=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Create empty /etc/network/interfaces, so the 'networking' service starts
-cleanly even if no interfaces are configured this way. This is
-necessary, as dropbear service depends on networking.
+Le 04/05/2026 =C3=A0 12:39, Jan Beulich a =C3=A9crit=C2=A0:
+> On 22=2E04=2E2026 18:58, Teddy Astie wrote:
+>> @@ -1205,19 +1201,12 @@ static void cf_check init_amd(struct cpuinfo_x8=
+6 *c)
+>>   	if (c->family =3D=3D 0x10)
+>>   		__clear_bit(X86_FEATURE_MONITOR, c->x86_capability);
+>>  =20
+>> -	if (!cpu_has_amd_erratum(c, AMD_ERRATUM_121))
+>> -		opt_allow_unsafe =3D 1;
+>> -	else if (opt_allow_unsafe < 0)
+>> -		panic("Xen will not boot on this CPU for security reasons"
+>> -		      "Pass \"allow_unsafe\" if you're trusting all your"
+>> -		      " (PV) guest kernels=2E\n");
+>> -	else if (!opt_allow_unsafe && c =3D=3D &boot_cpu_data)
+>> +	if (cpu_has_amd_erratum(c, AMD_ERRATUM_121))
+>> +	{
+>=20
+> Nit: Misplaced brace (it's Linux style here)=2E But really I don't see w=
+hy
+> braces are added in the first place=2E
+>=20
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Changes in v4:
-- adjust commit message
-- drop DROPBEAR_OPTS=\"-R\"
-Changes in v2:
-- do not allow passwordless login
----
- scripts/alpine-rootfs.sh | 4 ++++
- 1 file changed, 4 insertions(+)
+Yes, they can be removed here=2E
 
-diff --git a/scripts/alpine-rootfs.sh b/scripts/alpine-rootfs.sh
-index f649550..c7fee4b 100755
---- a/scripts/alpine-rootfs.sh
-+++ b/scripts/alpine-rootfs.sh
-@@ -10,6 +10,8 @@ apk --no-cache upgrade
- 
- PKGS=(
-     # System
-+    bridge
-+    dropbear
-     libgcc
-     openrc
-     udev
-@@ -72,6 +74,7 @@ rc-update add loopback sysinit
- rc-update add bootmisc boot
- rc-update add devfs sysinit
- rc-update add dmesg sysinit
-+rc-update add dropbear boot
- rc-update add hostname boot
- rc-update add hwclock boot
- rc-update add hwdrivers sysinit
-@@ -85,6 +88,7 @@ echo "hvc0" >> /etc/securetty
- echo "ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100" >> /etc/inittab
- echo "hvc0::respawn:/sbin/getty -L hvc0 115200 vt100" >> /etc/inittab
- echo "rc_verbose=yes" >> /etc/rc.conf
-+touch /etc/network/interfaces
- echo > /etc/modules
- passwd -d "root" root
- 
+>>   		printk(KERN_WARNING
+>> -		       "*** Xen will not allow creation of DomU-s on"
+>> -		       " this CPU for security reasons=2E ***\n"
+>> -		       KERN_WARNING
+>> -		       "*** Pass \"allow_unsafe\" if you're trusting"
+>> -		       " all your (PV) guest kernels=2E ***\n");
+>> +			   "*** This CPU is affected with erratum 121"
+>> +			   " 64-bits PV guests are able to cause a DoS (XSA-9) ***\n");
+>=20
+> Why the change in indentation?
+>=20
+
+Looks like my editor got confused with the mixed indentation of the=20
+file=2E I can fix this case for the next version of the patch=2E
+
+> There's also punctuation missing between both parts of the log message=
+=2E
+>=20
+
+ok
+
+> Jan
+>=20
+
+Teddy
+
+
 -- 
-git-series 0.9.1
+Teddy Astie | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates s=
+olutions
+
+web: https://vates=2Etech
+---=Part.110.5812edc7bc0bfa36.19df306644a.2fcdf0beede501cf=---
 
