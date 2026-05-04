@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C86FF885A
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299774.1574368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83136CD3436
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299780.1574399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgN-00030O-D0; Mon, 04 May 2026 12:45:55 +0000
+	id 1wJsgT-00040D-Pj; Mon, 04 May 2026 12:46:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299774.1574368; Mon, 04 May 2026 12:45:55 +0000
+Received: by outflank-mailman (output) from mailman id 1299780.1574399; Mon, 04 May 2026 12:46:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgN-000309-75; Mon, 04 May 2026 12:45:55 +0000
-Received: by outflank-mailman (input) for mailman id 1299774;
- Mon, 04 May 2026 12:45:54 +0000
+	id 1wJsgT-0003zB-KL; Mon, 04 May 2026 12:46:01 +0000
+Received: by outflank-mailman (input) for mailman id 1299780;
+ Mon, 04 May 2026 12:45:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgL-0002jD-PM
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:53 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgR-0003qf-Pr
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgL-00AF8N-4b
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:53 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wJsgR-00AFBL-5K
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:59 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894fd-bab6-0a2a0a5309dd-0a2a4507d572-24
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:53 +0200
-Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f894f6-2eae-0a2a0a5409dd-0a2a45069204-44
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:59 +0200
+Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f894ff-229c-0a2a45070019-ca0c7c9ad00d-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:52 +0200
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 9F5257A0095;
- Mon,  4 May 2026 08:45:51 -0400 (EDT)
+ id 69f89506-7371-0a2a45060019-ca0c7c92de8f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:59 +0200
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfout.stl.internal (Postfix) with ESMTP id AB64E1D000DB;
+ Mon,  4 May 2026 08:45:57 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-04.internal (MEProxy); Mon, 04 May 2026 08:45:51 -0400
+ by phl-compute-05.internal (MEProxy); Mon, 04 May 2026 08:45:57 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:45:50 -0400 (EDT)
+ 4 May 2026 08:45:56 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,50 +57,50 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1777898751; x=1777985151; bh=tD30M4kLq4
-	1eZNf2YXsYIAJSLodDcoJVNKG5LxCYvCU=; b=vebFS+rIUtTsgsHuCVXhb34nqD
-	0sDHscOpX28AXFwrPGd98eS+9CgoZJlU6/j8Qpr9wxDB6Y/OVRi6sWucdbHqlkV0
-	pndLeVmZIExU3EK9ScGMq8PlUdpliTeaWrR9JiEXwAG5qmU2i5HAqfo9EHQTYdBf
-	lYawxLdnIqlMQtI9QDfPI6dsPqSxBOwbbs6TR+rM6FjnJ8fTArU9LTJJvC98m4WV
-	Ee0ZT/2UPhAGbArvJFN788JyGX/w8JOgT0NVGsYuqR9JYdaE25uHg2AfulOumtac
-	372yjh+z9ObQTvhE3TqmzMXdexrRkWUTAPNEAsV4ZnbQsTvQS+kD/+VdluBw==
+	:subject:to:to; s=fm2; t=1777898757; x=1777985157; bh=JzEDyjPRPU
+	xC57KHDouSD/8yuPWNMyeGIMSfhE5EUM4=; b=s7vTZMUnNGrTKYlT8ZY+vksdNv
+	t8rwet8wZu7tD2RKHT8GH8uWpT7JzgRz4TWprXJAOxTf2yO6w9oUoukH6H3Ez1r9
+	/VWtpl+DFLpMdJs5ew8SBZepvDWgMkhmkpWdnUD66IRwCeSOzqcVUJ0W5gNXI0d7
+	FivB+VNscRrGEc3+37OXdN9WHgQZ01AertXVkXuQ+YX4ivjzI+yBf8cozvohbBpy
+	MVTEc+wMLUgw/sunMr4wFxFR3+j7iCWEbzD60vjAl/CjvTtwaBDBCUjcbm47Xwaq
+	1/Lqu2l5F/icNFp7FvpgrcuCWIY/Kr6sPHTuFRFDhPYs4HXuoEJ9C1UBAStg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898751; x=
-	1777985151; bh=tD30M4kLq41eZNf2YXsYIAJSLodDcoJVNKG5LxCYvCU=; b=B
-	ipOC5PID10pTO0FITfA0xWq+bqT8RftD8O3BVmn/U25dhoHxVe7aWxYbRjIkmsc8
-	GbYfnvEk/FwKb8UZUfjiLR6ESn+AaiwVqIP1tLTc0h4ji3XrSc+q98JghsqyOFEC
-	9YEYZmarH9lF0yweWcIxwkUUEbdN+j8aVWJDKhShIeIXGRZHN0ZO4mFbKTvVHhi7
-	BfgEjd87nDLWGAwHJiZIlOeEjRQgIGH2vehHzmpfg+ojfsOAJhlrYSM7PlvVwRaG
-	hVoVUiQIXIvQOFxVj82sRbZH3DeUew2K/l/5hOMSGhsfyDnFyPC1b3FLw79u4slW
-	M9ffwYN+mH+4jhcu4P3OQ==
-X-ME-Sender: <xms:_5T4aQmDNGN1PEyY9K_F8yGgrvwOctkvoSurcioSBi5PNVidnTZGww>
-    <xme:_5T4aWvHjiDPGZj71uIwsyiKxAK_llqwWxaPWw3G8VXFdFQ0NZ4FBdDtBpF6QmJpE
-    hixGnRf-21M-rWDrHaRwLH-IANQLtWlv6oyflzBdnF507r1c0g>
-X-ME-Received: <xmr:_5T4aW-dq2fX6osIdV7cSsNfRmnG2juRDeUDFJh9vbday1Q9wgJgfObStT3yk4mHECJLXZLjYTtLJMnIi_K2kwWBI1PDowx68EzsFSuvvAQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetggdotefrod
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898757; x=
+	1777985157; bh=JzEDyjPRPUxC57KHDouSD/8yuPWNMyeGIMSfhE5EUM4=; b=Y
+	7lHbZzEAa+PRli0pRZjEUzBfX/kHiRco4mdPxbcgquonhbdeIgZG7Pts5WjJiIZ6
+	mMIcjSgIWhLcNDdg1oW8n7PSjsyKItraVqOTaULY9pDn43l6awfx9zpDe1Qt66KW
+	s1Iveq3/PQ+yawpETHoYK/pT4WiQhTLM9aNvGxfecVMy5HUuDDoKG52uLiXF2pKl
+	FbnMdlhFCFjQHcGICftLEp3en+gzN5XFdUnOaPjTBywYYk5X9f34GeVsRfo4gA1g
+	fhstOryRVuHGFQ/2FNwlOdzA4xpl8ClL3eO0+4BlHxkuk4PdfDuWsZkTG6c1r/3I
+	As79O5CTJPEZM84JwD9PA==
+X-ME-Sender: <xms:BZX4aUjsPbU_q9vTKcVauh9eRCn9gB3sKjSlA9wLuEnCO4HVM5KG2w>
+    <xme:BZX4aT4xMyuNtv85ReF9jd7xwWm0RWZlDjp3ev67bvZsSGfLPzyKSDU3iScGNLm5h
+    qJmcXmERKdVzRk2lxHBDLRHjK8Hxh982a9PY6PRAL8Q95w8o9Y>
+X-ME-Received: <xmr:BZX4aUY-RC8LNqzJ_J8MEowD824orVbcS6T3kocH1IOzIvZnHulGpclLbmf8X3mjBGxyyL8vtpSHCsreWU_qBtaTZcHezjPdrb4RCKg-nrs>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekkecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
     hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
     ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfelgffg
-    ueffgeejudehieegteeugeefkeejtefghfdvieffieeijefgudeikeegnecuffhomhgrih
-    hnpehgihhtlhgrsgdrtghomhdpkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihii
-    vgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsih
-    gslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmhhouggvpehs
-    mhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprh
-    hojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrhefsegtihht
-    rhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghrnhgvlhdroh
-    hrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomhdprhgtphht
-    thhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:_5T4aYPseD2Y-Nyla1oUdwv0V6mAg3zzOoGNTZ8weAsRZaZimYrMUQ>
-    <xmx:_5T4acEi1Kgqk_ya5FwfRS_Dp5TOkNO67gKHDWO-LiGse8v5rS-yeQ>
-    <xmx:_5T4aeSLdOUJiLN7FWdFCFeQyMktFouqZtAjqdlibP0n-gO92KA-1A>
-    <xmx:_5T4aRuwt2wYF-CYY7mZhq1Gd6CPJ5sqI3h9ZzMN03VGC3PBNYQDxg>
-    <xmx:_5T4afgEqNNHEwXBGzfhOgS-tdtcuUWDIZpzeKIpvfqgMsBu56rDFvYM>
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
+    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
+    gvrhfuihiivgepudenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
+    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmh
+    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
+    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
+    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
+    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
+    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
+    rdgtohhm
+X-ME-Proxy: <xmx:BZX4aQ6SKhKux9w0EsfM7qXZy1-QT4BKLwiAVckNGIs1r22pb3T-zw>
+    <xmx:BZX4afCAVvnaKDWxBc2B6PAWsjeud5aohZQJ_w82XtX-F82-mhPPLw>
+    <xmx:BZX4aeff6OK8kkuMGXxdaRP072BEMu2zdBtlgvcSkHoAeya5ma1UdQ>
+    <xmx:BZX4aWInfueGM6ST8fUBKOJbPRy2fxt6SUnZCBh-TCxX5BpA_Zt5qA>
+    <xmx:BZX4aZuigBqg0CdAWhZ9Fir4LLlNX2OlrXSLSmI56CIqwAvRu5VIgrPA>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -108,158 +108,39 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 06/13] Support building arbitrary Linux branch/tag/commit
-Date: Mon,  4 May 2026 14:35:45 +0200
-Message-ID: <9440095275dd9313f7f8e2a41384e1275be0fcaa.1777898148.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 10/13] Add linux-stubdom dependencies
+Date: Mon,  4 May 2026 14:35:49 +0200
+Message-ID: <11ddf37d6acc5ef3274f3d09f7ea2f0b64b62243.1777898148.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1777898753-15C5CC48-FB090AA6/0/0
+X-purgate-ID: tlsNG-16d1c6/1777898759-CF77FD75-6FF29069/0/0
 X-purgate-type: clean
-X-purgate-size: 4305
-
-Change how kernel version is given to the script - use arguments, to
-avoid confusion between pipeline level variables and job level ones.
-
-The build-linux.sh now can take either just the kernel version (used to be
-LINUX_VERSION variable), or git branch/tag/commit name + git URL (new feature).
-Go with "git init" + "git fetch" instead of "git clone" to support any
-of branch/tag/commit.
-
-This also defines optional linux-git-* jobs which will build the thing
-if LINUX_GIT_VERSION and LINUX_GIT_URL variables are provided for the
-pipeline.
-
-The idea is to define separate CI schedules for the test-artifacts repo
-with LINUX_GIT_URL/LINUX_GIT_VERSION pointing at Linux trees to be
-tested (for example linux-next), and then trigger matching pipelines in
-the xen repo for testing with that version.
+X-purgate-size: 623
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
-Changes in v4:
-- Adjust error message on missing version
-- Extract kernel version from job name
-Changes in v3:
-- pass kernel version via script arguments, not variables
----
- .gitlab-ci.yml         | 29 +++++++++++++++++++++++++----
- scripts/build-linux.sh | 23 +++++++++++++++++------
- 2 files changed, 42 insertions(+), 10 deletions(-)
+ scripts/alpine-rootfs.sh | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 4147be5..45006d4 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -1,5 +1,9 @@
- variables:
-   REGISTRY: registry.gitlab.com/xen-project/hardware/test-artifacts
-+  LINUX_GIT_VERSION:
-+    description: "branch/tag/commit for the linux-git jobs"
-+  LINUX_GIT_URL:
-+    description: "git url for the linux-git jobs"
+diff --git a/scripts/alpine-rootfs.sh b/scripts/alpine-rootfs.sh
+index 3cd3ab9..2671ab5 100755
+--- a/scripts/alpine-rootfs.sh
++++ b/scripts/alpine-rootfs.sh
+@@ -39,6 +39,10 @@ case $UNAME in
  
- stages:
-   - build
-@@ -30,6 +34,13 @@ stages:
-   variables:
-     CONTAINER: alpine:3.23-x86_64-build
- 
-+.linux-tpl:
-+  script: &linux-script
-+  - linux_version="${CI_JOB_NAME}"
-+  - linux_version="${linux_version#linux-}"
-+  - linux_version="${linux_version%%-*}"
-+  - ./scripts/build-linux.sh "${linux_version}"
+             # QEMU
+             libelf
 +
- #
- # ARM64 artifacts
- #
-@@ -49,11 +60,16 @@ alpine-3.23-arm64-rootfs:
- 
- linux-6.6.86-arm64:
-   extends: .arm64-artifacts
--  script: ./scripts/build-linux.sh
-+  script: *linux-script
-   variables:
--    LINUX_VERSION: 6.6.86
-     CONTAINER: alpine:3.18-arm64-build
- 
-+linux-git-arm64:
-+  extends: .arm64-artifacts
-+  script: ./scripts/build-linux.sh "$LINUX_GIT_VERSION" "$LINUX_GIT_URL"
-+  rules:
-+  - if: $LINUX_GIT_VERSION && $LINUX_GIT_URL
-+
- #
- # x86_64 artifacts
- #
-@@ -80,13 +96,18 @@ debian-13-x86_64-rootfs:
- 
- linux-6.6.56-x86_64:
-   extends: .x86_64-artifacts
--  script: ./scripts/build-linux.sh
-+  script: *linux-script
-   variables:
--    LINUX_VERSION: 6.6.56
-     ARGO_SHA: "cf73819cacc945baca1a7421e5836d1bd481739b"
-     ARGOEXEC_SHA: "d900429f6640acc6f68a3d3a4c945d7da60625d8"
-     CONTAINER: alpine:3.18-x86_64-build
- 
-+linux-git-x86_64:
-+  extends: .x86_64-artifacts
-+  script: ./scripts/build-linux.sh "$LINUX_GIT_VERSION" "$LINUX_GIT_URL"
-+  rules:
-+  - if: $LINUX_GIT_VERSION && $LINUX_GIT_URL
-+
- microcode-x86:
-   extends: .x86_64-artifacts
-   script: ./scripts/x86-microcode.sh
-diff --git a/scripts/build-linux.sh b/scripts/build-linux.sh
-index cf0e744..e01b517 100755
---- a/scripts/build-linux.sh
-+++ b/scripts/build-linux.sh
-@@ -1,8 +1,11 @@
- #!/usr/bin/env bash
- 
-+LINUX_VERSION="$1"
-+LINUX_GIT_URL="$2"
-+
- if test -z "${LINUX_VERSION}"
- then
--    >&2 echo "LINUX_VERSION must be set"; exit 1
-+    >&2 echo "Version argument missing"; exit 1
- fi
- 
- set -ex -o pipefail
-@@ -12,11 +15,19 @@ COPYDIR="${WORKDIR}/binaries"
- UNAME=$(uname -m)
- 
- # Build Linux
--MAJOR=${LINUX_VERSION%%.*}
--curl -fsSLO \
--    https://cdn.kernel.org/pub/linux/kernel/v"${MAJOR}".x/linux-"${LINUX_VERSION}".tar.xz
--tar xf linux-"${LINUX_VERSION}".tar.xz
--cd linux-"${LINUX_VERSION}"
-+if [[ -n "${LINUX_GIT_URL}" ]]; then
-+    mkdir linux
-+    cd linux
-+    git init
-+    git fetch --depth=1 "${LINUX_GIT_URL}" "${LINUX_VERSION}"
-+    git checkout FETCH_HEAD
-+else
-+    MAJOR=${LINUX_VERSION%%.*}
-+    curl -fsSLO \
-+        https://cdn.kernel.org/pub/linux/kernel/v"${MAJOR}".x/linux-"${LINUX_VERSION}".tar.xz
-+    tar xf linux-"${LINUX_VERSION}".tar.xz
-+    cd linux-"${LINUX_VERSION}"
-+fi
- 
- make defconfig
- ./scripts/config --enable BRIDGE
++            # Stubdomain
++            grub-bios
++            libseccomp
+             )
+         # libdw used to be part of libelf in Alpine 3.18, but it's a separate
+         # package in 3.22.
 -- 
 git-series 0.9.1
 
