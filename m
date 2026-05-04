@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E88FF885A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A887DCD3430
 	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:46:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299779.1574395 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1299785.1574422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgT-0003wf-Cq; Mon, 04 May 2026 12:46:01 +0000
+	id 1wJsgX-0004qA-5L; Mon, 04 May 2026 12:46:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299779.1574395; Mon, 04 May 2026 12:46:01 +0000
+Received: by outflank-mailman (output) from mailman id 1299785.1574422; Mon, 04 May 2026 12:46:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsgT-0003w9-7B; Mon, 04 May 2026 12:46:01 +0000
-Received: by outflank-mailman (input) for mailman id 1299779;
- Mon, 04 May 2026 12:45:59 +0000
+	id 1wJsgW-0004pk-VY; Mon, 04 May 2026 12:46:04 +0000
+Received: by outflank-mailman (input) for mailman id 1299785;
+ Mon, 04 May 2026 12:46:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgQ-0003im-VN
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:45:59 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wJsgU-0004EC-P1
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:46:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsgQ-002Q9j-Ak
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:45:58 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wJsgU-008wGN-3n
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:46:02 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f89502-2eae-0a2a0a5409dd-0a2a450cd58e-12
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:58 +0200
-Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69f89506-5cb7-0a2a0a5109dd-0a2a4507cc76-24
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:02 +0200
+Received: from [202.12.124.154] (helo=fhigh-b3-smtp.messagingengine.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f89504-62f1-0a2a450c0019-ca0c7c92868f-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:45:57 +0200
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.stl.internal (Postfix) with ESMTP id 343A31D0007D;
- Mon,  4 May 2026 08:45:56 -0400 (EDT)
+ id 69f89509-229c-0a2a45070019-ca0c7c9ac7b5-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:46:01 +0200
+Received: from phl-compute-07.internal (phl-compute-07.internal [10.202.2.47])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id B1CA47A00A9;
+ Mon,  4 May 2026 08:46:00 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Mon, 04 May 2026 08:45:56 -0400
+ by phl-compute-07.internal (MEProxy); Mon, 04 May 2026 08:46:00 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 4 May 2026 08:45:55 -0400 (EDT)
+ 4 May 2026 08:45:59 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,50 +57,50 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1777898756; x=1777985156; bh=ve9wb5iJ3q
-	hyIrumeuNlQiZMz9wNHWfL9RFUX8Adii8=; b=RPsStvbo/PzmF5TMgHDYeNxsTF
-	M9JOlM3b4J+U9ucy6AUqnAsapi5bl5jH4Eule8j3uFS/Thr4FQ1ts9u2uHoTlc+r
-	iBX0g2e1yRYB56HAxtKmHkvS3pPEinTSXTuDg7XgDvNDZqAPi03TGbSefopQ6rR3
-	LMrKmQiLAkjViTXP4XsZaYOb9ayWTTvtZD1k7RbMOp/nzTobxn1GF5hD1qhS1MCL
-	O0LVYdf8LsD+PBF8oErHvc7/odyIsC26tkb9xMTPHRXrBVdunePfSciquG0FrOrm
-	t5sN717mpNrtXTGXU4U/lyWhz3PSFi7PBDwCaXt0rJ7N8puO5PiIPyxJFaOQ==
+	:subject:to:to; s=fm2; t=1777898760; x=1777985160; bh=XX0Dg/7YfK
+	rsJr0bP1RqDlxPQIUTpCyaHF1UQw2fWRQ=; b=nkRlkLPC/WA0AHbfJhP6DjBSEO
+	Saa4DJsoeTnjolHYnKw3wXIVcgBO7z49UgDkqlT/ct9+nKDy4+YFFO4CzOvSaRLO
+	V7M08+YxwAx/oE7RqyoYbZtX0Ra5Vkim/xQYyRYLLYjvRqh14JfLvbpGVPMdqZyL
+	na0hf6SGhO+IY3Mj91zGm5Ed8XmNaRK6tzWUAcihTOjcJDoGRlxTt1pu8FQlDK60
+	E1UQS8AzrHaY0eHySzMLRsXL4Ni7YRNEgWBS51tEEWDkv1KCJzuthUWuoCqBNapt
+	P9r+XgzPhMteOaJMRMSMCvFqpi3vgpe+hM32zI7wJ/j9xgGq+eBeiPnS2jvw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898756; x=
-	1777985156; bh=ve9wb5iJ3qhyIrumeuNlQiZMz9wNHWfL9RFUX8Adii8=; b=J
-	lUijjRKDLhGzu3x0aZAlLpDHDDsGEK+Z+clfWVayU0FY01mu44kuZiEayx9iYKI+
-	KJmTi+jKdMpuXLauRcIMc1kgu4uG+QwuWxczX4GUhHbfG8l2iSjV3jf0lTxyyFdn
-	DHoknauGxZatFr0MPlucOIH/qCHprqKZy0BWxb0x2lazGgNzbazyAZ/E4UC2xpEZ
-	6FZNQTmaxAui9sC5rJvGFn2Xu/VqMgPODkLutHU/EVc0xV9xmIDFrYw9b5mLhax0
-	JgDZFKkdQbTgFUyu7Xe7trAcedwWmAc3YMPuotEa+nsBkXItQUmIeMeeMnaa/JUC
-	Y7PCdyJ4o1bznqKTKG4Pw==
-X-ME-Sender: <xms:BJX4aU13NEBncIpgc6pFO5fzVJJujIerv-tw8DzXWv9oUi2L7WWS6g>
-    <xme:BJX4aV_grlXtr_fGWdu7Q8X3ianLWhzmuZM-7WEpE6HLLXaEPiyagQtB3JJRuGury
-    wP1vi3ON_qCjmmiQt45vBr7QijJkXEHPVTnpRx8sSXm4OZpBA>
-X-ME-Received: <xmr:BJX4aVN1sXVpHY_3Snp4sCNSyskvJoZykb086iI_q5Fx7MVTgIMTVzvwaSx6o2fTN26dEsVQ7nSlgKrn7WbCK7RwcDAa5okgyVogYMZcD-M>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekjecutefuodetggdotefrod
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1777898760; x=
+	1777985160; bh=XX0Dg/7YfKrsJr0bP1RqDlxPQIUTpCyaHF1UQw2fWRQ=; b=N
+	27uBja9WafF7tXG3QkODmosMFQiAaPVt9nSIFCeKpLhLUZUrIy4iZUQOecpB2Cwk
+	+50VwAX0hc0pcw4gkjtvxeZRv17eA1uKXGXvOaWG+c/bIIN8F9OJKiLGkX4DvSmt
+	bnjD6nyhArc63nwCIbPLDQqeQ65dELy+RzYHYmH/OwHJWVxkpnaB2rToS6VMSu3y
+	9X8HViY6bpnG4IwjrfF1p4nB1P/1ijkmwn+4BKZDJN4RzDhL6XdznUNQLRWaFKET
+	0qh2m0CCGth1uPzJlzWPrjfpfzpgDkUlui++EtzH9v3TZM82BpFZd1iIe2dFxSkq
+	a9ywreUarTSgahtoRGI8w==
+X-ME-Sender: <xms:CJX4aQaxbMtpP6yfv0bSck5cZH5U8AKzsfBIevDiaui1GRbOiY2eZw>
+    <xme:CJX4aSSqB8VyW68_l4I9r2YSNsDMDKE0_blY9lWmMjFloHd7vvgPq2kgE75sR9ZYx
+    yv8BOKG-hnaBWNf9VLqfu3GpJNF6aBnG_t3JtsrG9DBS0EYnQ>
+X-ME-Received: <xmr:CJX4aTRcYntFSjIoyJlEXg5j5bfc9plX_OsccEqO-6lx0KZiroE0DlUX4BGiTFhGCUkAiTuSt4Y6MNvC2RFceE_7eHWvqVuyuOAVTQxdhL0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelkeekkecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
     hrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
     ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffeitdeg
-    veffteelvdeghffhvefghfefkeelheeujeejgedvvdfgffejuedtvdelnecuffhomhgrih
-    hnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
-    mhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrg
-    gsrdgtohhmpdhnsggprhgtphhtthhopeehpdhmohguvgepshhmthhpohhuthdprhgtphht
-    thhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrghdprh
-    gtphhtthhopegrnhgurhgvfidrtghoohhpvghrfeestghithhrihigrdgtohhmpdhrtghp
-    thhtohepshhsthgrsggvlhhlihhniheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprh
-    hoghgvrhdrphgruhestghithhrihigrdgtohhmpdhrtghpthhtohepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:BJX4aZewHDTIk5fZxvMVNoQUGcG8PrXvs7-R3DupygNU-mJiZOhowA>
-    <xmx:BJX4aUWXKOlywvLD7ZANrrqh5Wy_xKd0d6hAQLZS-itLMzVesUAMYQ>
-    <xmx:BJX4aRjAyAu6mwJQVnVBFSeWY3mNUBJFB4CWlpAJlz5ZwpAcCA1PVg>
-    <xmx:BJX4aT-iaJ0LWYgpLwKkKXWwdpUgpMyl9dFE5iKl8NBwhttc2CMauA>
-    <xmx:BJX4aawKrsd5meplNHDzItJJPdGV7TZ4zr77fU5Wnn4ExyTzjHzOlkX9>
+    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeuudeh
+    gfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluhhsth
+    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
+    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomhdpnhgspghrtghpthhtohephedpmh
+    houggvpehsmhhtphhouhhtpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdr
+    gigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghnughrvgifrdgtohhophgvrh
+    efsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrggsvghllhhinhhisehkvghr
+    nhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghusegtihhtrhhigidrtghomh
+    dprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggs
+    rdgtohhm
+X-ME-Proxy: <xmx:CJX4aWQkSYWQ9FSNM7eqvlCbLgUqSoHPj3h4Q0CmsNwagawYGt6XWQ>
+    <xmx:CJX4aY4THPDo5Q-x2Bk_VEeEgJGeFwTGLcvvcEVQ7TcvV9p0pt1zTA>
+    <xmx:CJX4aS1BaqSudc4Vt1b4nN9C5oR2JNLPSg1wdHlZ7128zJrz7Q-h9w>
+    <xmx:CJX4aTB2gemWTV99xfxJdWsgKckbr2aJ5eWOMQOLrGl5gwaJv8AzdQ>
+    <xmx:CJX4aSHv7HohQ34Zwt5Uxi57ir3oPZZ3Ymxw7eMXkClu6oZM6KnIAxYu>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -108,85 +108,40 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH v4 09/13] Add trigger-test job, to run test on a Linux built from a branch/tag
-Date: Mon,  4 May 2026 14:35:48 +0200
-Message-ID: <4fdfa09a7ff699f5d51ab9beb95b18ccbd0c0be3.1777898148.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 12/13] Prepare grub for booting x86_64 HVM domU from a cdrom
+Date: Mon,  4 May 2026 14:35:51 +0200
+Message-ID: <4aa490a4f8a26ec86397cef30091cdd3f3598c30.1777898148.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1777898757-F7015CF5-4F876756/0/0
+X-purgate-ID: tlsNG-ef75cf/1777898762-2B77AC48-D4272D76/0/0
 X-purgate-type: clean
-X-purgate-size: 2195
+X-purgate-size: 825
 
-When scheduling pipeline in test-artifacts repo, it can get also
-TEST_TRIGGER_REPO and TEST_TRIGGER_BRANCH variables, to trigger relevant
-pipeline to test just built artifacts.
-Pass ARTIFACTS_REPO+ARTIFACTS_BRANCH to the child pipeline to ensure it
-fetches artifacts from the right job, but avoid xen test pipeline
-inheriting other variables, as they might have unintended consequences
-(for example REGISTRY one).
-For example, to build linux-next and test Xen staging on it, the
-pipeline could be triggered with:
-
-    LINUX_GIT_URL=https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
-    LINUX_GIT_VERSION=master
-    TEST_TRIGGER_REPO=xen-project/hardware/xen
-    TEST_TRIGGER_BRANCH=staging
-
-The triggered xen test pipeline will skip most build jobs.
+The stubdomain test will use it.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-
 ---
-Changes in v4:
-- add inherit:variables:false
----
- .gitlab-ci.yml | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ scripts/alpine-rootfs.sh | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 3ba8a31..b3c2b65 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -4,9 +4,14 @@ variables:
-     description: "branch/tag/commit for the linux-git jobs"
-   LINUX_GIT_URL:
-     description: "git url for the linux-git jobs"
-+  TEST_TRIGGER_REPO:
-+    description: "gitlab repo on which test just built linux, for example 'xen-project/hardware/xen'"
-+  TEST_TRIGGER_BRANCH:
-+    description: "branch in TEST_TRIGGER_REPO to test on, for example 'staging'"
+diff --git a/scripts/alpine-rootfs.sh b/scripts/alpine-rootfs.sh
+index 18f43e6..f649550 100755
+--- a/scripts/alpine-rootfs.sh
++++ b/scripts/alpine-rootfs.sh
+@@ -101,6 +101,9 @@ if [ "$UNAME" = "x86_64" ]; then
+     grub-mkimage -o ${COPYDIR}/grub-core.img \
+         -O i386-pc -p '(hd0,msdos1)/boot/grub2' \
+         boot part_msdos ext2 linux biosdisk configfile normal
++    grub-mkimage -o ${COPYDIR}/grub-core-eltorito.img \
++        -O i386-pc-eltorito -p '(cd)/boot/grub2' \
++        boot part_msdos ext2 linux biosdisk configfile normal iso9660
+ fi
  
- stages:
-   - build
-+  - deploy
- 
- .artifacts:
-   stage: build
-@@ -115,3 +120,20 @@ linux-git-x86_64:
- microcode-x86:
-   extends: .x86_64-artifacts
-   script: ./scripts/x86-microcode.sh
-+
-+trigger-test:
-+  stage: deploy
-+  trigger:
-+    project: $TEST_TRIGGER_REPO
-+    branch: $TEST_TRIGGER_BRANCH
-+    strategy: mirror
-+  inherit:
-+    variables: false
-+  variables:
-+    ARTIFACTS_REPO: $CI_PROJECT_PATH
-+    ARTIFACTS_BRANCH: $CI_COMMIT_REF_NAME
-+    LINUX_JOB_X86_64: linux-git-x86_64
-+    LINUX_JOB_ARM64: linux-git-arm64
-+    BUILD_FOR_TESTS_ONLY: 1
-+  rules:
-+  - if: $TEST_TRIGGER_REPO && $TEST_TRIGGER_BRANCH
+ # Print the contents for the build log
 -- 
 git-series 0.9.1
 
