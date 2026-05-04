@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476EEFF886F
-	for <xen-devel@archiver.kernel.org>; Sun,  3 May 2026 21:21:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299408.1573945 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0CAFF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 05:14:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299427.1573954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJeFb-0005r8-DQ; Sun, 03 May 2026 21:21:19 +0000
+	id 1wJldF-0003IW-Ai; Mon, 04 May 2026 05:14:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299408.1573945; Sun, 03 May 2026 21:21:19 +0000
+Received: by outflank-mailman (output) from mailman id 1299427.1573954; Mon, 04 May 2026 05:14:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJeFb-0005r1-Ab; Sun, 03 May 2026 21:21:19 +0000
-Received: by outflank-mailman (input) for mailman id 1299408;
- Sun, 03 May 2026 21:21:18 +0000
+	id 1wJldF-0003IE-4Y; Mon, 04 May 2026 05:14:13 +0000
+Received: by outflank-mailman (input) for mailman id 1299427;
+ Mon, 04 May 2026 05:14:12 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1wJeFZ-0005qv-TA
- for xen-devel@lists.xenproject.org; Sun, 03 May 2026 21:21:18 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wJldE-0003I8-3y
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 05:14:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJeFY-00GhAp-0W
- for xen-devel@lists.xenproject.org; Sun, 03 May 2026 23:21:16 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wJldC-007IuY-Kf
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 07:14:10 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f7bc0d-2eae-0a2a0a5409dd-0a2a45019980-10
- for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 23:21:15 +0200
-Received: from [103.168.172.149] (helo=fout-a6-smtp.messagingengine.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 69f7bc4a-c1f2-0a2a45010019-67a8ac959d43-3
- for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 23:21:14 +0200
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id CAE51EC0122;
- Sun,  3 May 2026 17:21:13 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Sun, 03 May 2026 17:21:13 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 3 May 2026 17:21:12 -0400 (EDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f82b16-2eae-0a2a0a5409dd-0a2a4507ee38-26
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:14:10 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f82b22-229c-0a2a45070019-d1558036cde2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 07:14:10 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-48896199cbaso32314295e9.1
+ for <xen-devel@lists.xenproject.org>; Sun, 03 May 2026 22:14:10 -0700 (PDT)
+Received: from ?IPV6:2003:ca:b72b:870a:8d83:125f:d0c4:4383?
+ (p200300cab72b870a8d83125fd0c44383.dip0.t-ipconnect.de.
+ [2003:ca:b72b:870a:8d83:125f:d0c4:4383])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a8fee4f79sm68254765e9.20.2026.05.03.22.14.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 03 May 2026 22:14:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,130 +55,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1777843273;
-	 x=1777929673; bh=LbAibiXl37U+LtHIHL0spSBU25Ad9Cjf/ZBzAVYM5OQ=; b=
-	ruOnwgmo7XW+kVGJp6nZxVJXDTT+7hXSMWE0Tj6ZytuB/esNCa7BPpWxlTSG1H5d
-	cGCN7Kpj9FTx2r1nTotE/+gykUXY0WXIUgtmKs91zx/8JKUp5VSKBulLhKQQlxTT
-	Y+7cWPAw9nr0NuqvDltwot/4m08G5HSSz08yzipizy3LfPjtPXMTjtMWwK1x5qpa
-	+KhTvXKObnRvql2+szLmhF+w16VPtVZp25amCo6aA8+z6LXpRIJ7MCRFO2+SmbsY
-	9M7aQwVzr+10Nc1wnjLuJxajtAbvgioh+UHqNWJFG4v2k2S5q/nXUz7xMrQPv9Ui
-	fV+2+p0gCZVpF4CM5BAizQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1777843273; x=1777929673; bh=LbAibiXl37U+LtHIHL0spSBU25Ad9Cjf/ZB
-	zAVYM5OQ=; b=Eyoe3yOjaO6KB9Y1YW0OY8NvR/u0SvjZz5TLUTUJfXfjef9Fn93
-	7C7sKKPLYPeQoP4YnLfmRIvsgkcEMbOygmMJ3uoQ10NR9Nnkpfj/fP7fAp/O3bkA
-	i/aDh0veiLSJOb8Vi4l8Cxz7N+dmOMo2WoA70PsFLu9mGCy6YBGig4aOpFwGJuPp
-	A+NiugRqjcL14mphoqdA6IpD4EW1hZWK5laN5qn9msPJhNOmcs3HPmpTSdcrHh0p
-	4PvVMXsUo4D2BzeITwBQS2FZdsNUvtVUK61l66KNB8AM0xTvwG7WLl0zast5vLJL
-	33MSeieFmLuC6tg13gBJ/9rJ74FWo9TqV1Q==
-X-ME-Sender: <xms:Sbz3acbG7GSGZ3-x2kc_acYrQLlMddn_XRs1XupB-AJvBlW6ezufow>
-    <xme:Sbz3aeRsG8GIG-PaSwR0D28uHDAcq7xD2-sK8ZDHw9YkQLCHDmCVHFACb87hyD-mT
-    x8Gd-lSfW2XGi8-FQlsbJCLESdpsitS-DQzzVoxMLCeYfpz>
-X-ME-Received: <xmr:Sbz3afTHxJn56dm2cFch6qLwmrD05cOLofsMRRZy0s28LlnL-osTgly4ja5kpR0CkZqqjWPvJKRlCnlPzii2JRjE1yIf6n2myAE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdeljedtvdcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghkucfo
-    rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
-    hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeevueejteeg
-    leelteduueevhfetgfffjeevtddvgfeiveehteehleegueelvdejveenucffohhmrghinh
-    epghhithhlrggsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehm
-    rghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsg
-    drtghomhdpnhgspghrtghpthhtohephedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
-    ohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepgigvnhdqug
-    gvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhgpdhrtghpthhtoheprghn
-    ughrvgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopehsshhtrg
-    gsvghllhhinhhisehkvghrnhgvlhdrohhrghdprhgtphhtthhopehrohhgvghrrdhprghu
-    segtihhtrhhigidrtghomh
-X-ME-Proxy: <xmx:Sbz3aSSF_7ZwaxYiZ_vasZrDnVaPMmYDicR5XN6rZs0b_HO8C7rR2g>
-    <xmx:Sbz3aU7Fr6Y2FZS7ytjJOCitCLEAi7SKn7C1xELUGDL0mF89qz9l9A>
-    <xmx:Sbz3ae1v_28RmoKkHyyhd5OF24oy19VSvGaNdG1i8qQSiwa5Yeizjw>
-    <xmx:Sbz3afDdBjkt6GIrVhRa006VST2y3Ra-4Pn1q4ARlsUjuoYtwtPu7A>
-    <xmx:Sbz3aWbbPeANNk_cww6oZyzYibhh323LTl2vaOSwYI5n5D0xoSpWTkMR>
-Feedback-ID: i1568416f:Fastmail
-Date: Sun, 3 May 2026 23:21:10 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v3 02/13] Switch Linux builds to use
- Alpine 3.22 container
-Message-ID: <afe8RoMFDdI1fLft@mail-itl>
-References: <cover.bd2e5bd58e4b316c9c1042b1ca8db51b81fb7ea7.1774999132.git-series.marmarek@invisiblethingslab.com>
- <652a2f219b370af5364d8ef29264acc33a89f676.1774999132.git-series.marmarek@invisiblethingslab.com>
- <bf843de8-dbfb-436c-ac33-ea801ac61b53@amd.com>
- <aczB_KRjioY3KCtA@mail-itl>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1777871650; x=1778476450; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=AtowkhyPRGWDHxAfF0IBdnr6lRIaISsKeQXivwSe6uE=;
+        b=BnPo8PV8bUrgGTSyU3DhdgoU6imNgl2YMO0/F5XkmLoGlv1vcsz2wRGd95FRfoLUgr
+         CiARojRlqECYugdWQsqyzFRwaH6/o0mdDHYxYxKDhTpXOOiC9S2H30MDaKH8Z/YSwkSD
+         78lraIgZbXxETybcmKACNhAlsDevEJwjbsmB+kdO3LdeF3RrsxmQGkRSpEXzvjhX2FJa
+         Sj/okaZG8FFG5tdO0L1lkl8EdXKg5Ndp4bP3NZgjNs+ufB2aYp026uimSFyGlW3TsheX
+         bL9lSe37Y+o/umXL5Rm3Y8whxS+W4OrCDaNIqk9pFtQakwguOTGaKWv+0zPN4iOJTf7G
+         qJ3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777871650; x=1778476450;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AtowkhyPRGWDHxAfF0IBdnr6lRIaISsKeQXivwSe6uE=;
+        b=YkIMCK1zbLP04FLoLiw+ZLMlmeUmqbMy777iUyvIB6z52nhv+wDjG5UuRrWjbi/jaD
+         ml7mNKEiyNygFyzh3EFZvPLI2ERWJdapTd0uoar5qQKyzb1oVZhOc3bJuA8tkpxqWW89
+         UfPFLX3H90bQMhPj3QVNiM7W6qfdwGXdvBtFHXOZ+wwHv7589gEj+2/lqqD+JejvsnDV
+         5a6hkl8UaHTPSsRzxJY6vF8CjVtPBEvSJJdVRXgnfFlLiCzsJlffJ3Q6WrBTWBpYzONI
+         AqibJBSt5Z6vQW15A8Bl1vX2JYWVZ18z1Wf8jwgKEXfKMo5pqHw1olCWUjPIaS4s9fyU
+         iwTg==
+X-Gm-Message-State: AOJu0Yzy46b34/BdcKv/CheVnrh7WuO5q10wQoV0MjtoiII953VXqAqu
+	YkXc3JUCxKiCQuFwRzALSD7V7bC02C+7x0KladEou0sEY0TsC5vrxvduzLco83hupQ==
+X-Gm-Gg: AeBDietbgx2JDXabU9ialFDhmDoPdcp8m0FryHP1TzvOufDUF8QvUsXzznveB1JneCd
+	1iO0rVNssJiHaOPxmYjkPkhuzYIDV0L0sqxA9Tsoe4vZQWOJOh7pJYj07tiAywIICKGZEEBmeib
+	JG9Qw7B9MJKAWPRJXTkBRiCKhxeuZiLgqZi85Mwkl8diaYsMciTiOIC3FK7y63kkUdZgIA1ajSS
+	e/D4AUxTgTjhZEL3njOa0SrrM0wNk7fxWudP7uzwggghbKk4tlWQ/KK5sD6RVIfy07nSvvrpiJR
+	TeTYvWnlX5ZjDZkaMadMN6HHGEIovZh6zwDwjQFgbJDjyvgPmGFgsyj50vaG0gYfUa7pHnysr3A
+	Y7GISsp36VEJ5nyUTI+RxRPRElvARgTIUjMfkcnliQX9fYVnc4iW9SRiu85CMiDrSu8svnzkqKg
+	7wpBwhev/MlyCudDTyjNMXioUNfpdR4mX14ybgaJLHK9hKXf1pO5ewmqX58f8R680tBtV/vwtlH
+	z4x76Q+QzpPi4mFhnYpetlDojR1XniUSPlccWVrvyaCXnjn2VqF1tlRdOvSkZ9atQyGwyE=
+X-Received: by 2002:a05:600c:1604:b0:48a:66a8:9981 with SMTP id 5b1f17b1804b1-48d0562f7efmr31502105e9.27.1777871649736;
+        Sun, 03 May 2026 22:14:09 -0700 (PDT)
+Message-ID: <53c4fb20-8cb9-440a-b37a-d829ec940e1b@suse.com>
+Date: Mon, 4 May 2026 07:14:08 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="aTnhuwifSrVovotV"
-Content-Disposition: inline
-In-Reply-To: <aczB_KRjioY3KCtA@mail-itl>
-X-purgate-ID: tlsNG-d62444/1777843275-BEE63FF4-44483B73/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/svm: Always sync guest CR2 on VMExit
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20260501213826.1291860-1-andrew.cooper3@citrix.com>
+ <alpine.DEB.2.22.394.2605011443580.512397@ubuntu-linux-20-04-desktop>
+ <981a0dad-dcbb-42c8-a840-6f228eb89be1@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <981a0dad-dcbb-42c8-a840-6f228eb89be1@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1777871650-16E67C48-E2DFA8EB/0/0
 X-purgate-type: clean
-X-purgate-size: 2020
+X-purgate-size: 1428
 
+On 02.05.2026 00:21, Andrew Cooper wrote:
+> On 01/05/2026 10:44 pm, Stefano Stabellini wrote:
+>> On Fri, 1 May 2026, Andrew Cooper wrote:
+>>> Under SVM, there are two copies of guest CR2.  One is v->arch.hvm.guest_cr[2]
+>>> and one is in the VMCB.
+>>>
+>>> Xen doesn't intercept CR2 accesses, so this mostly goes unnoticed; hardware
+>>> loads and saves the guest CR2 across VMRUN/VMExit.
+>>>
+>>> For HAP guests (where #PF is not intercepted, and therefore we don't typically
+>>> inject #PF either), this causes the guest CR2 value to be lost on migrate.  As
+>>> migration is cooperative and not done from the #PF handler, this also goes
+>>> unoticed by guests.
+>>>
+>>> It also means that an emulated MOV-from-CR2 reads a stale value.
+>>>
+>>> Reported-by: Stefano Stabellini <sstabellini@kernel.org>
+>>> Fixes: d1bd157fbc9b ("Big merge the HVM full-virtualisation abstractions.")
+>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Tested-by: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> Thanks, sadly I made the mistake of extending my XTF PoC for this.
+> 
+> There are also bugs on the emulated MOV-to-CR2 side, and they're far
+> harder to untangle.
 
---aTnhuwifSrVovotV
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 3 May 2026 23:21:10 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH test-artifacts v3 02/13] Switch Linux builds to use
- Alpine 3.22 container
+Any slightly closer details as to what?
 
-On Wed, Apr 01, 2026 at 08:58:04AM +0200, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> On Wed, Apr 01, 2026 at 08:46:02AM +0200, Orzel, Michal wrote:
-> > Why not 3.23 if it's already there?
->=20
-> Because it wasn't yet when I prepared this patch series :)
->=20
-> I can update again and see if any other changes are needed with 3.23.
-> Other patches are independent of this change.
+> This patch probably wants to go in in this form, accepting that there
+> are issues still to be addressed on the other side.
 
-So, Linux 6.6.56 fails to build there:
-https://gitlab.com/xen-project/people/marmarek/test-artifacts/-/jobs/141912=
-60643
+I agree:
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-This is fixed in Linux 6.6.95, but I can't just drop 6.6.56 as stable
-branches still use it. Alternatively, I could keep this one building on
-Alpine 3.18, as it needs to stay anyway for the same reason.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---aTnhuwifSrVovotV
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmn3vEYACgkQ24/THMrX
-1yxGxwgAhzEnNXzZ8HzXn+on2k7551wKouzGewas3ilx/uQh6xAB/FQtptAu93Kw
-3dYJ1x9b2nNrupOv+Xiwl/wh8jujBnsQ/HYlYSug3ieTid8TiL5dEk9iJIf2R0g5
-J2dX9gNZA6Uu/0LpheHMYC5s/5Jr+zzn1JoXDu+y9U5JJu9j4C8sn5326ztT1UnD
-OrmOblehPYkpQ29pm+y3CfQy1GkZeSyUqf5pninXmX1ycHZ3oCUuJRAZiVxznPkp
-T8uiVEIyNOvspb9Ajl5lJeQwNz7BFEV6j0a/m1mHkv82BkF/0Zs35qsfxmAwCmms
-sINU/w4iom9fCcN28/0Z4SROx+dkfg==
-=YDxd
------END PGP SIGNATURE-----
-
---aTnhuwifSrVovotV--
+Jan
 
