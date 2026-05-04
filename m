@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44F2FF885A
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:33:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1299749.1574295 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713A2FF885A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2026 12:36:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1299759.1574305 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsUJ-0007jn-3x; Mon, 04 May 2026 12:33:27 +0000
+	id 1wJsXO-0008JL-LG; Mon, 04 May 2026 12:36:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1299749.1574295; Mon, 04 May 2026 12:33:27 +0000
+Received: by outflank-mailman (output) from mailman id 1299759.1574305; Mon, 04 May 2026 12:36:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wJsUJ-0007jg-12; Mon, 04 May 2026 12:33:27 +0000
-Received: by outflank-mailman (input) for mailman id 1299749;
- Mon, 04 May 2026 12:33:26 +0000
+	id 1wJsXO-0008JE-Hr; Mon, 04 May 2026 12:36:38 +0000
+Received: by outflank-mailman (input) for mailman id 1299759;
+ Mon, 04 May 2026 12:36:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df2fa95a7000f373@swg.vates.tech>)
- id 1wJsUI-0007ja-G4
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:33:26 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wJsXN-0008J8-PL
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 12:36:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wJsUH-005tC9-Rk
- for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:33:25 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df2fa95a7000f373@swg.vates.tech>)
- id 69f8920a-2eae-0a2a0a5409dd-0a2a4509df14-24
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:33:24 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19df2fa95a7000f373@swg.vates.tech>)
- id 69f89214-2497-0a2a45090019-b9ff1c22adf5-3
- for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:33:24 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19df2fa95a7000f373.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 04 May 2026 12:33:21 +0000
-Received: from [192.168.1.18] (88-175-170-134.subs.proxad.net [88.175.170.134])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 3F1E682C7B;
- Mon,  4 May 2026 14:33:21 +0200 (CEST)
+ id 1wJsXM-00AD9B-TQ
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2026 14:36:36 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f892d4-e002-0a2a0a5209dd-0a2a45078104-0
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:36:36 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f892d4-229c-0a2a45070019-d1558030e85a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 14:36:36 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-488ff90d6c7so38349935e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 04 May 2026 05:36:36 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a8fe93166sm77518115e9.7.2026.05.04.05.36.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 May 2026 05:36:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,189 +53,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=z1SahcxJS9PEhd9nLCjwMi74YvkGkujJc5tcAM5h/cg=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=DgyM5Ng4Ps72VGAYzzpWoq3QdzlPPY6t02VsQgfXkBE2vb4bTTeI41awOP/dQIB06OKoZmzsy
- x260i7Cj0Ccgawp75DmlJzENlv/+Xa0/pol2f2pgiUXb+5B8hYAj7vXM6aBuoflzWo2QKXj4LQU
- HWwE8EvgJv8Pw/v4Ujloui4h8RWhas4JowGP9jUhG7VjRbgZOYiisn9eJVDJ1ITMsdgVfjWhPI5
- yByY9w5dYZ9JnwsaHmOq4bPoPIGf1X4UNwxeIJ5d2DxcvFqXmuWRE3HFROXCYEEpQRhMJz4x846
- y7FKObK2hUvg8+a6XQYcuiaG+WZCSpzHQLgkyxFKFyPQ==
-X-Zone-Loop: 639d19f8d8251d1d763f59e389c23f386502cb7888a1
-x-campaign-type: default
-x-transaction-id: 72b9757b-341d-472b-a8cd-f38d541b56d4
-x-swg-uid: 01-6f80c560-cf2f-424d-aeca-d5d275a3f892
-X-Mailer: Sweego
-Message-ID:
- <1777898001.8631fc262581453bbf619ec5b2062170.19df2fa95a7000f373@vates.tech>
-x-swg-bid: 1777898001.8631fc262581453bbf619ec5b2062170.19df2fa95a7000f373
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Mon, 4 May 2026 14:33:20 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1777898196; x=1778502996; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=uFMYZYyyXm+4Js+sJJbb4IVsuzxzO7AOUyEVnxpYh8w=;
+        b=GXNZUM0o3DMV/AafJk48dLvwh72FgTF6QJTfGg0ZXkmSDoWiZh5DSTISP2oedy6cxk
+         VzerwcE2pP0fPLYcb2DepLmEU9Qg3CnJsQn1A2kNlHOwj+sFJJ0kLNAuY2BiGtXjZ4z5
+         KInHEbEWtlgCTp3Xd/KNuXZMpunJAlTbN3TAKmL30aAm1O6YDiQyJDBt4pBWa8vcDhoK
+         Hez8j16py3mhMeMjLquwS40fUJz5T2gnwct/3WvewAk0UaLF4g2+sKQtx9Z8MuJVbEpp
+         vngYTxdyUlwcrQmIj+x5SLcib2D7CwhIBjBlB0r1tztVP5TulNyGWEqnUHQAC0Xz3hP9
+         9lZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777898196; x=1778502996;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uFMYZYyyXm+4Js+sJJbb4IVsuzxzO7AOUyEVnxpYh8w=;
+        b=hMeASOSHqX5H/8OAsbVT8PlW6Qf2dceziBVSrOIgdfzglFtjwCwUYfxPFz39BLMoeb
+         UJK2y+MI4RaSBGgXC1DuwumHl76113cBsGxyMPnjFjyxjNA4aMIwf+9yP0oy1RXGU56w
+         ui/N2zF1ykqX0ZL0bCQNO7FXUO7FcbR8+3lDlGstjs+HoUIWszW672Ksu88+hrIHwymu
+         IJQ+yjYN5Mb49NLKJ8vX1oJffUmDbmohQFlEs2wOq1B+KoaeIUawyXitecO8853tIkbp
+         Jr3fJkBmbFNCV0wUiVD1Y1B9ixhouzRj1hcb1X7nX4lieD3XjENYa8/dSs8oN0Gl2NyY
+         1hmQ==
+X-Gm-Message-State: AOJu0Ywvrd3M/EJWaAONrwQbNy7fh6JuES9x579CDmEjHHu7MX5OMalU
+	CGwRMgpZQGkAqT2MALkt//dWgZEh/o2FuXnabPIYtG5ke06DkU8zlNEvMP/QX9n9bw==
+X-Gm-Gg: AeBDiev24u/ywgnFow5lR4dqg6NelFo6U3bXtjgmbjF5NXM9XypAKprpb+Cv0VpYvzK
+	HHEgWSaNtYM8BNdLKUrZsOJzchZJXyoZDQFocj8nJwLPxnIy58BJqoOmc/llXzNQn4CvCMZu57y
+	JXcLqrQ0Kwk31X6HxbOgSAH4WLbhuQlQqzYUjjQ85FT2SiT9Qy7jAXYJETg5i+HEqshCix0PnpZ
+	nUVKA8mq8F9d9tiIJjVSspv2h+qHuPs9+btwAq/0DCk0AbbgMNciPND/E1DquOrEJ0ru2QW+Qeb
+	cMVVw+d5cgXH+ih3eRS9YIa88q+QQ0kBW2+EwGaaSrOxgon7S3U+1kPOXuMDeHpIVGY4Vy4VMs0
+	8V/1REPQw5kevj0RFGIU+l1DGuWZF6u5imgHsVAEwWTL1mJgq1K8oVrupye16WdvQlPUJD4Yx3g
+	B8qw88/Uf8cn9JoQDdLltgEUuz0XlKdZ73CseN1y8LdriPXruheHQqvc7M7S7ci3DNnI/Uo9f2h
+	FtPyS+ZQJCpcmLxu8HtL+aG+g==
+X-Received: by 2002:a05:600c:5296:b0:489:1b10:d896 with SMTP id 5b1f17b1804b1-48d12f9147emr2915995e9.0.1777898196237;
+        Mon, 04 May 2026 05:36:36 -0700 (PDT)
+Message-ID: <2945a61e-dcf8-40eb-a3e4-3c8e977f9ebf@suse.com>
+Date: Mon, 4 May 2026 14:36:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/boot: Disable interrupts when establishing SSP
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <20260501191028.1250225-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 11/17] hvmloader: allocate MMCONFIG area in the MMIO hole
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Alexey Gerasimenko <x1917x@gmail.com>,
+ Thierry Escande <thierry.escande@vates.tech>
+References: <20260313163455.790692-1-thierry.escande@vates.tech>
+ <20260313163455.790692-12-thierry.escande@vates.tech>
+ <afHPdxc72FDGnQoq@macbook.local>
+ <f6521590-e51c-4f00-bcf8-faee79a5d3a5@suse.com>
+ <afiPsnPYJCtm7VmH@macbook.local>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-In-Reply-To: <20260501191028.1250225-1-andrew.cooper3@citrix.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.d8.e997219826f44562.19df2fa93bf.8d0c5c40427badda=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1777898001343
-X-purgate-ID: tlsNG-bad1c0/1777898004-496B0A53-1C87D334/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <afiPsnPYJCtm7VmH@macbook.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1777898196-1565BC48-A22DFFBF/0/0
 X-purgate-type: clean
-X-purgate-size: 5340
+X-purgate-size: 3591
 
----=Part.d8.e997219826f44562.19df2fa93bf.8d0c5c40427badda=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 04.05.2026 14:23, Roger Pau Monné wrote:
+> On Mon, May 04, 2026 at 01:11:44PM +0200, Jan Beulich wrote:
+>> On 29.04.2026 11:29, Roger Pau Monné wrote:
+>>> On Fri, Mar 13, 2026 at 04:35:04PM +0000, Thierry Escande wrote:
+>>>> --- a/tools/firmware/hvmloader/pci.c
+>>>> +++ b/tools/firmware/hvmloader/pci.c
+>>>> @@ -413,6 +413,58 @@ void pci_setup(void)
+>>>>          pci_devfn_decode_type[devfn] |= PCI_COMMAND_MASTER;
+>>>>      }
+>>>>  
+>>>> +    /*
+>>>> +     *  Calculate MMCONFIG area size and squeeze it into the bars array
+>>>> +     *  for assigning a slot in the MMIO hole
+>>>> +     */
+>>>> +    if ( is_running_on_q35 )
+>>>> +    {
+>>>> +        /* disable PCIEXBAR decoding for now */
+>>>> +        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR, 0);
+>>>> +        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR + 4, 0);
+>>>> +
+>>>> +        switch ( PCI_MAX_MCFG_BUSES )
+>>>> +        {
+>>>> +        case 64:
+>>>> +            bar_data = PCIEXBAR_64_BUSES | PCIEXBAR_ENABLE;
+>>>> +            bar_sz = MB(64);
+>>>> +            break;
+>>>> +
+>>>> +        case 128:
+>>>> +            bar_data = PCIEXBAR_128_BUSES | PCIEXBAR_ENABLE;
+>>>> +            bar_sz = MB(128);
+>>>> +            break;
+>>>> +
+>>>> +        case 256:
+>>>> +            bar_data = PCIEXBAR_256_BUSES | PCIEXBAR_ENABLE;
+>>>> +            bar_sz = MB(256);
+>>>> +            break;
+>>>> +
+>>>> +        default:
+>>>> +            /* unsupported number of buses specified */
+>>>> +            BUG();
+>>>> +        }
+>>>> +
+>>>> +        addr_mask = ~(bar_sz - 1);
+>>>> +
+>>>> +        for ( i = 0; i < nr_bars; i++ )
+>>>> +            if ( bars[i].bar_sz < bar_sz )
+>>>> +                break;
+>>>> +
+>>>> +        if ( i != nr_bars )
+>>>> +            memmove(&bars[i+1], &bars[i], (nr_bars-i) * sizeof(*bars));
+>>>> +
+>>>> +        bars[i].is_mem    = 1;
+>>>> +        bars[i].devfn     = PCI_MCH_DEVFN;
+>>>> +        bars[i].bar_reg   = PCI_MCH_PCIEXBAR;
+>>>> +        bars[i].bar_sz    = bar_sz;
+>>>> +        bars[i].addr_mask = addr_mask;
+>>>> +        bars[i].bar_data  = bar_data;
+>>>> +
+>>>> +        mmio_total += bar_sz;
+>>>> +        nr_bars++;
+>>>> +    }
+>>>
+>>> I think it might be best if the ECAM fake BAR is the first element in
+>>> the bars array, so we ensure it's the first item to consume memory
+>>> from the low MMIO hole.  Not sure how that will work with the current
+>>> sorting of the resources based on their size, but it's imperative for
+>>> hvmloader to attempt to position ECAM ahead of the other device
+>>> resources IMO.
+>>
+>> Why would this be?
+> 
+> I would assume it's best to have ECAM access in the low 4G (for 32bit
+> OSes) at the expense of some 32bit BARs possibly not fitting in the
+> 32bit space.  But the ECAM space could be placed above 4G, and 32bit
+> OSes might not care much about extended address space capabilities.
 
-Le 01/05/2026 =C3=A0 21:14, Andrew Cooper a =C3=A9crit=C2=A0:
-> Gitlab CI reported a crash on boot on Alder Lake hardware=2E  The bug is=
- years
-> old, making it an incredibly rare occurance:
->=20
->    (XEN) *** DOUBLE FAULT ***
->    (XEN) ----[ Xen-4=2E22-unstable  x86_64  debug=3Dy ubsan=3Dy  Not tai=
-nted ]----
->    (XEN) CPU:    0
->    (XEN) RIP:    e008:[<ffff82d04077bbc4>] arch/x86/setup=2Ec#reinit_bsp=
-_stack+0xfa/0x160
->    (XEN) RFLAGS: 0000000000010202   CONTEXT: hypervisor
->    (XEN) rax: 0000000000000007   rbx: ffff83049a4b0000   rcx: 0000000000=
-0006a2
->    (XEN) rdx: 0000000000000000   rsi: 0000000000000000   rdi: 0000000000=
-000000
->    (XEN) rbp: ffff83049a4b7f00   rsp: ffff83049a4b7ef8   r8:  ffff830497=
-e47000
->    (XEN) r9:  00000000ffffffff   r10: 00000000900c2121   r11: 000000009a=
-392956
->    (XEN) r12: ffff830497e47000   r13: ffff830497e49f40   r14: 0000000000=
-000000
->    (XEN) r15: ffff82d0407dad10   cr0: 0000000080050033   cr4: 0000000000=
-f526e0
->    (XEN) cr3: 0000000043c16000   cr2: fffffffffffffffc
->    (XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000=
-000000
->    (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
->    (XEN) Xen code around <ffff82d04077bbc4> (arch/x86/setup=2Ec#reinit_b=
-sp_stack+0xfa/0x160):
->    (XEN)  00 b9 a2 06 00 00 0f 30 <80> 3d 71 26 f1 ff 00 74 3e 48 8d 93 =
-f8 5f 00 00
->    (XEN) Valid stack range: ffff83049a4b6000-ffff83049a4b8000, sp=3Dffff=
-83049a4b7ef8, tss=2Ersp0=3Dffff83049a4b7fb0
->    (XEN) No stack overflow detected=2E Skipping stack trace=2E
->    (XEN)
->    (XEN) ****************************************
->    (XEN) Panic on CPU 0:
->    (XEN) DOUBLE FAULT -- system shutdown
->    (XEN) ****************************************
->=20
-> This is on the instruction boundary after enabling CET (writing MSR_S_CE=
-T) and
-> prior to establishing SSP=2E  Despite identifying this as a critical win=
-dow
-> where any fault was deadly (the CPU tries to push a shadow stack frame a=
-t 0,
-> hence the CR2 value wrapping around to the top of the address space), I
-> clearly forgot that this meant interrupts too, which are enabled=2E
->=20
-> Along with regular interrupts, NMIs are a problem=2E  Unlike other cases=
- needing
-> NMI safety, we can't use a self NMI and callback, as the stack needs to =
-be
-> empty at the point of enabling Shadow Stacks=2E
->=20
-> Disable interrupts, and turn off the watchdog if it's configured=2E
->=20
-> Note that watchdog_{en,dis}able() do not work here=2E  They cause the wa=
-tchdog
-> NMI to be ignored; they do not inhibit the generation of NMIs=2E
->=20
-> Fixes: b60ab42db2f0 ("x86/shstk: Activate Supervisor Shadow Stacks")
-> Signed-off-by: Andrew Cooper <andrew=2Ecooper3@citrix=2Ecom>
-> ---
-> CC: Jan Beulich <jbeulich@suse=2Ecom>
-> CC: Roger Pau Monn=C3=A9 <roger=2Epau@citrix=2Ecom>
-> CC: Teddy Astie <teddy=2Eastie@vates=2Etech>
->=20
-> The only way I can think of doing this in NMI context is to have the NMI=
- LRET
-> off the NMI stack back to the interrupted context=2E  But this is horrib=
-le to
-> arrange, not to mention different between IDT and FRED=2E
->=20
-> Also, the {disable,setup}_lapic_nmi_watchdog() API is horrible but I don=
-'t
-> have time to make it sane right now, and this needs backporting a long w=
-ay=2E
->=20
-> https://gitlab=2Ecom/xen-project/hardware/xen-staging/-/pipelines/249406=
-9238
-> ---
->   xen/arch/x86/setup=2Ec | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
->=20
-> diff --git a/xen/arch/x86/setup=2Ec b/xen/arch/x86/setup=2Ec
-> index d041cbd5f6f1=2E=2E95ac36beab37 100644
-> --- a/xen/arch/x86/setup=2Ec
-> +++ b/xen/arch/x86/setup=2Ec
-> @@ -908,6 +908,19 @@ static void __init noreturn reinit_bsp_stack(void)
->  =20
->       if ( cpu_has_xen_shstk )
->       {
-> +        bool watchdog =3D (nmi_watchdog =3D=3D NMI_LOCAL_APIC);
-> +
-> +        /*
-> +         * Between enabling CET and establishing SSP, any fault or inte=
-rrupt
-> +         * is fatal=2E  We must arrange for none to happen=2E
-> +         *
-> +         * TODO: Figure out how to perform CET enablement in NMI contex=
-t,
-> +         *       given the constraint that the stack must be empty=2E
-> +         */
-> +        if ( watchdog )
-> +            disable_lapic_nmi_watchdog();
-> +        local_irq_disable();
-> +
->           wrmsrl(MSR_S_CET, xen_msr_s_cet_value());
->  =20
->           /*
-> @@ -932,6 +945,13 @@ static void __init noreturn reinit_bsp_stack(void)
->           }
->           else
->               asm volatile ( "setssbsy" ::: "memory" );
-> +
-> +        local_irq_enable();
-> +        if ( watchdog )
-> +        {
-> +            nmi_watchdog =3D NMI_LOCAL_APIC;
-> +            setup_apic_nmi_watchdog();
-> +        }
->       }
->  =20
->       reset_stack_and_jump(init_done);
->=20
-> base-commit: 61f957d48c78df6c5254b6f54d6170d3bd3d717e
+This doesn't require it to be 1st, though? Ideally we would try to put
+it below 4G if possible (i.e. if all other BARs which aren't 64-bit
+capable still fit), but fall back to putting it above 4G otherwise. In
+all of this it would still be put in the slot that its size demands.
+If we put it first, a significant gap could result between it and the
+first "real" BAR. (Then again a significant gap could also result if
+the number of buses to cover wasn't a power of 2.) Properly making use
+of such a gap would further complicate the code, I expect.
 
-Reviewed-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
+> Should is_64bar be set for the MCFG "fake" BAR?
 
+As per above, maybe when making a 2nd (retry) pass.
 
--- 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.d8.e997219826f44562.19df2fa93bf.8d0c5c40427badda=---
+Jan
 
