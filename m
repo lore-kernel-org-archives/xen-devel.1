@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55820CD342F
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:49:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1300552.1575081 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE3D1CD342F
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:55:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1300504.1575100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDKx-0006lq-1Z; Tue, 05 May 2026 10:49:11 +0000
+	id 1wKDRF-0008Qb-QS; Tue, 05 May 2026 10:55:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1300552.1575081; Tue, 05 May 2026 10:49:11 +0000
+Received: by outflank-mailman (output) from mailman id 1300504.1575100; Tue, 05 May 2026 10:55:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDKw-0006lj-UK; Tue, 05 May 2026 10:49:10 +0000
-Received: by outflank-mailman (input) for mailman id 1300552;
- Tue, 05 May 2026 10:49:09 +0000
+	id 1wKDRF-0008QU-Np; Tue, 05 May 2026 10:55:41 +0000
+Received: by outflank-mailman (input) for mailman id 1300504;
+ Tue, 05 May 2026 10:29:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wKDKv-0006ld-JX
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:49:09 +0000
+ (envelope-from <ukleinek@baylibre.com>) id 1wKD1i-0001Gj-M7
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:29:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKDKu-00DbwM-VS
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:49:08 +0200
+ id 1wKD1g-003A7k-Gc
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:29:18 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 69f9cb23-5cb7-0a2a0a5109dd-0a2a450ad7fc-8
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:49:08 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ (envelope-from <ukleinek@baylibre.com>)
+ id 69f9c666-bab6-0a2a0a5309dd-0a2a450aa878-44
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:29:17 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jbeulich@suse.com>)
- id 69f9cb24-56b3-0a2a450a0019-d155802cb89c-3
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:49:08 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-488a88aeec9so57496285e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:49:08 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48d149de41asm24880285e9.2.2026.05.05.03.49.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 May 2026 03:49:07 -0700 (PDT)
+ (envelope-from <ukleinek@baylibre.com>)
+ id 69f9c67c-56b3-0a2a450a0019-d155dd2ba413-3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:29:16 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-43d734223e4so2954864f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:29:16 -0700 (PDT)
+Received: from localhost
+ (p200300f65f114e082236c6257eff72a1.dip0.t-ipconnect.de.
+ [2003:f6:5f11:4e08:2236:c625:7eff:72a1])
+ by smtp.gmail.com with UTF8SMTPSA id
+ ffacd0b85a97d-45055f2203csm3772962f8f.37.2026.05.05.03.29.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 May 2026 03:29:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,160 +55,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=baylibre-com.20251104.gappssmtp.com header.i="@baylibre-com.20251104.gappssmtp.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1777978148; x=1778582948; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=KzjOlkiNB7SnTWeAjHaOHXklT9eln8RhKriTJ6bsVqo=;
-        b=dizDiL7unM39oBak7g+sjUcQvu9T349hS3QAtfo8YUXak7NFMepNERxVEGPJnNxUiF
-         ax/wZSyX7YTbDBjBhBca3ede7nVJ5SRZpO+/WyDzVY8zCeDwRK1NGW++nBSFMr0C9fFV
-         B9WGp5iaKpTcRmaDTaWvHU29k1QYuAm3x8DVm0cYgKqbKhF2TAiy7PZviac4ONEmR5vI
-         qk5FDMMuYVITC1osxeZf3wDMu821DUnkL945bA1dzFFaetdW9pb3+1ZUskSaoO1gm+yL
-         RFUjJ5EuZZpWz7ahTXVcWKnD2p38pfDVaWr4BOw9yrWHcZGCKWbubYXcbf9X1V5a+xLi
-         ioWg==
+        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777976956; x=1778581756; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jq6G9SCADZgi5j8IAt02Ku+HE9Gjzrrr5m74sKn8VBQ=;
+        b=h4nwx/XVEA601XzxBFHxm28273wEWn3AuKJUXV/a9mUqixGvdzKOI88pBGJDEa+ah3
+         E+7C9IX9G8YYva6SCqEDsFZ505GofUp1SUqtHrVFvww9CnndQORodFAwop0TXiCgVkk7
+         nMS2gPkdsGIGbDXmUQ47K+YSIbWS2rweV5HC2sKHuzOlREy56o95u6rL9fXd1qcTAX9A
+         +Z6tb8SrWEr+Rg1TK/7lvH51S17hv6Sx39OCTfQSY83bgKGzt5AUao2oRhr8HfRp9pGZ
+         /4BA1DazHC6WCVnsUP3ZttsGWdaxuUtKw6JpjFJMr+hfu/IBd4RhRE87zm47Qqc8fYA1
+         BXDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777978148; x=1778582948;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1777976956; x=1778581756;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KzjOlkiNB7SnTWeAjHaOHXklT9eln8RhKriTJ6bsVqo=;
-        b=sfjrZ0x3Ex/lDtavH8j7zzXdRUKQNT8FDIFNFbp9uiN0WpJmtXjtYIb5MjgesreJo+
-         290l3sr/CznGtLR7Ek9ydpv7y5wI5OUbFxI55JBnBnaMa4z121PTG9/ak/S8MYT4LwHg
-         2EWl/J68gPr++3W4iig7CE49i89pUseqvxsWv1yRWxIpM1A+8oK2+Yfjm2Kld0B31ZQo
-         z8tZ8lXhWhZjRFdpXiVmgFTORtygEx6xztatShn1a/qXGeXGDeG66mRqbTdaGvEtoQRo
-         MemPxlpC+6Cg6oOKQgR33jpknxIucHjrzHZFb9u75pMZ0bPetn+YWZKKAGYLXB2f87vP
-         VnQA==
-X-Gm-Message-State: AOJu0YzFR3/u4ScJZKNUy/60KmD8wRgfMKDJzi/41P/6zWabmOjPSCxV
-	WTFu+Vr/7uLx7rNUlWMylh3IKqx2m8g8aaRa1b7lCuDBYkAYpyT/9ToGtUIqjNc0gA==
-X-Gm-Gg: AeBDiesUSPAptBCx8aqZnmyzgw3zJ9fdDCcCf6xXWug0UPdBGAx1vtSfSc+9Usf2vgM
-	lA4VXxZy5naLhQ4Nmkz+dUnKm5SeLx9eQIJw7nkbwFuWeaZ9OPuivFMKcKMJZnlWdWRmdUUZtYD
-	3nxCsJW6RCX0lvRqdp6RalCVQR7auV/3jnJF4c2MwPxKJlskTTu8qrOxyT/juo2eq3iKT2vQwzX
-	Y4Wx3hqcqhiaZQyyfH6U/7bknAK4snOGuPwZ2kvIltW4PqRiUBUNz7DK42vZcru+usDH8ILpE9x
-	6Ky+k82Bh3/5SEqFXCgJeOBZfeTHxteRy/tew+fHczxVh8j/4HKtkpcIkwVLiEhJv10FOlpzELn
-	dyEY7cAGK+o8B6YYUZiZhgH2FrFmmAIZzgCjLAnTwRGylaiJanb0S3GYIh+6b35j2d55WGy/QQ1
-	jX+PWoVIc0cYFkQ2fyZSq1/bN1OSihjzBOm4lzgimrR8Bs/t9gwosYHT7+70dk9bor6iRLXFFYc
-	0RC/iScBrvm2CDmTIJIk07Zvg==
-X-Received: by 2002:a05:600c:a411:b0:48a:7b55:12a6 with SMTP id 5b1f17b1804b1-48a980fc3e7mr162675315e9.0.1777978148121;
-        Tue, 05 May 2026 03:49:08 -0700 (PDT)
-Message-ID: <0267eb6f-1161-45b7-8905-d7aecb78e74c@suse.com>
-Date: Tue, 5 May 2026 12:49:06 +0200
+        bh=jq6G9SCADZgi5j8IAt02Ku+HE9Gjzrrr5m74sKn8VBQ=;
+        b=Qb/Kc4FyAP7KyaJjJ8gzRakRYZBKtvLknheIXh9wESEPd/6H8uCJai8KGWXGPvDBqX
+         mVx6STquCIOst5snoXFUkMKs+SKfX3eWVlyGnzugSwQllDfpat7gPWXbasIEgxfHNWGU
+         IFM5RUUQ99erlkcbuA8aE/pZ1+59wbP85IgD4CG8vKQ5EFLtqF5TcDq7RiwMb+/5SARG
+         RX5OqIVF5Z/3bBrjTLaB072ZfdzxFesIcC6c7dvgA7uFCAyz7kCAHa0nMpQdzrPwYrXw
+         1tPf8QYkTHbVDlWcRF7krF3LnG1kFQgMvgxc0a1mYgKLFG/uedYfIGy3/CUCq6agSISp
+         mCHQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/F8P8+wp0h4rfwRAZ+jhmaQ5i7uXsHNCVSiSx0FrOSkYy6QDUWUQ0s9w54DkorQf/iCV0FeZ0MO7k=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzZT4pnhBy4cehE8L6VAl5r4GzBhQXPhcHElOgIcswQt9tanvts
+	VDuFJDrFRs8ztVpTn+ybxOZcxv75pVEx81sBntwQNAH/wbiTLGIUqrEpjYyt3Q1sERI=
+X-Gm-Gg: AeBDieuyLa3CRtb4iZcb7V/2afJQcAJeCpZh2VcHGMOFNvvtDlcIT4Upn2cT+mkEgx8
+	DjR95co2uMkxkovNypyS4gCUahBQ4zTd0I8Imzhj+pDUbLdmbE4cVKUqSj1XiB0q9vsPtjT7QoR
+	Gyg1ed3zEhxd4Fetv+rzzZl9RtJpzrsxX4XbCIo8450a05fOV8YR0/vIGF0g8NI3WCW8VG2/2V1
+	eTDm5C8dFMTEkMHGFWnC7yIXxbmbof/AeS8fsNj65YBSvgqJiQkIQlwIoT0Z5JmCf3nOXcTIfG4
+	bH1nrTRFWjTlg+NgDakKwHiIS2dh7nxjSTvZw/DzWXnfiaGnsy3W7S1Whcjn/xJRjg0mIuWDOh/
+	0f8xBwKvpAcMs8qFbSQSznfBDBzyPc8G0BfqLxmIRVJSyIVtL8VozKJm9Zt8mcEvdwW3iUfhmyw
+	1ZK+gETbcyoVNSqHmeFX6+596JBXbSz1yyab+9zJjjnFds0WwPZ29QxMGLHptykS+Ke2FuJApKM
+	1yLNm1QK1xJktUxl7UBJZExyg==
+X-Received: by 2002:a05:6000:2004:b0:449:d1f5:7101 with SMTP id ffacd0b85a97d-44fdcf887aamr5474975f8f.12.1777976956342;
+        Tue, 05 May 2026 03:29:16 -0700 (PDT)
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
+To: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Markus Schneider-Pargmann <msp@baylibre.com>
+Subject: [PATCH] xen/platform-pci: Simplify initialization of pci_device_id array
+Date: Tue,  5 May 2026 12:29:09 +0200
+Message-ID: <20260505102909.2380470-2-u.kleine-koenig@baylibre.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] xen/pdx: account for frametable_base_pdx in
- generic pdx_to_page/page_to_pdx
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>
-References: <20260430125103.401811-1-michal.orzel@amd.com>
- <20260430125103.401811-2-michal.orzel@amd.com>
- <afi7HUFoDYabM9VV@macbook.local>
- <65ecf1c0-0844-4ba9-a250-a94aeaf4d251@amd.com>
- <afmYf-ldUxWQXRDL@macbook.local>
- <309b2ff6-c200-47d0-be3f-ec289df641c6@amd.com>
- <0a3583df-2682-426e-a704-aa8711caec0d@suse.com>
- <a90db340-e569-4f77-b5df-dd1a1504f8cf@amd.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <a90db340-e569-4f77-b5df-dd1a1504f8cf@amd.com>
 Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1563; i=u.kleine-koenig@baylibre.com; h=from:subject; bh=zfUmnTuMCPKl1uBG6shy+GoSAItHMkggjMydPWbUatc=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBp+cZ149Ot8luyVHVeurVu/y5CpJvjXDg8c6mH8 bQwgQ+JvwOJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCafnGdQAKCRCPgPtYfRL+ TlRPB/9EtPMzqvPbpzz9rvz0r8PM5VBvrovdLtaMiGTUp2UYkJT6HN7nesS9ghlDesSXQ22OEoJ THMHYGRsjMmAnI536nBTL8eh85DHcs9aLyb6TF1MRDx9Jmd60i1Nn7gWc5fhJ06X9FTsmkiD4iD eZSSrVEWEnzc1722cAvJO3G6OXXz3wJeZOgSEC1h+a2ZF4VodurfW85n7SDV0K3GppKUiFyUwkn RCbFL6azSsiXShHStGggI9wPpou/EduZuSW3nXA75BiCC63pGOhlc7mt0V3xpFADKN8R0z5i+fN B3jawWkKy6xL2MHnXjyjQZ5ssV9IjxNueknS0bq+BSq8LCdH
+X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1777978148-4616A8B7-D89741BE/0/0
+X-purgate-ID: tlsNG-4011c0/1777976957-80E798B7-EC6DBB66/0/0
 X-purgate-type: clean
-X-purgate-size: 3492
+X-purgate-size: 1565
 
-On 05.05.2026 12:46, Orzel, Michal wrote:
-> On 05-May-26 12:40, Jan Beulich wrote:
->> On 05.05.2026 09:35, Orzel, Michal wrote:
->>> On 05-May-26 09:13, Roger Pau Monné wrote:
->>>> On Tue, May 05, 2026 at 08:48:15AM +0200, Orzel, Michal wrote:
->>>>> On 04-May-26 17:28, Roger Pau Monné wrote:
->>>>>> On Thu, Apr 30, 2026 at 02:51:02PM +0200, Michal Orzel wrote:
->>>>>>> The generic pdx_to_page() and page_to_pdx() macros in xen/pdx.h assume
->>>>>>> the frame table starts at PDX 0, which is only true on x86. ARM
->>>>>>> uses a non-zero frametable_base_pdx to offset into the frame table (PPC also
->>>>>>> defines it).
->>>>>>>
->>>>>>> Fix the generic macros to subtract/add frametable_base_pdx, defaulting
->>>>>>> to 0 when the arch does not define it. This makes the generic macros
->>>>>>> correct for all architectures, even though they are only used on x86
->>>>>>> today.
->>>>>>
->>>>>> Hm, I assume this offset was added because the original mask PDX
->>>>>> compression won't (usually) compress the gap between 0 and the start
->>>>>> of RAM.  However the newish offset PDX compression should be able to
->>>>>> compress from 0 to start of RAM, and hence you don't need to apply
->>>>>> an extra PDX offset there?
->>>>>>
->>>>>> If that's indeed the case it might be better to integrate
->>>>>> frametable_base_pdx into the mask compression algorithm itself, so
->>>>>> that on some arches it's a mask plus a decrease.
->>>>> The offset is needed regardless of whether compression is used. With
->>>>> CONFIG_PDX_NONE (no compression, PDX == MFN), if RAM starts at e.g.
->>>>> 0x80000000, the first valid PDX is 0x80000.
->>>>
->>>> OK, so you are doing some (kind of) address space compression (removing
->>>> the leading empty range to the first RAM region) even when PDX is
->>>> disabled.
->>>>
->>>>> Without frametable_base_pdx
->>>>> the frame table would have to be indexed from 0, wasting
->>>>> 0x80000 * sizeof(page_info) of memory just to cover the hole before RAM.
->>>>
->>>> But you don't really "waste" memory, just address space?  Oh, maybe
->>>> not on ARM as it doesn't use pdx_group_valid?  And so you
->>>> unconditionally populate the frametable from PDX 0 to max PDX.
->>> With pdx_group_valid (which this series adds) we wouldn't waste
->>> physical memory for the leading gap. But we'd still waste virtual address
->>> space and the FRAMETABLE_NR check (max_pdx > FRAMETABLE_NR) becomes tighter
->>> because the full range from PDX 0 must fit. For example with RAM starting at 5TB
->>> the virtual offset before the first usable entry would be ~70GB — more than the
->>> entire 32GB FRAMETABLE_SIZE on ARM64.
->>
->> Yet still - this is exactly one of the situations offset compression means
->> to cover. I'm entirely with Roger as to it being undesirable to build a
->> special case variant of "offset compression" into "no compression".
-> In this case, if you don't want to generalize the macros, how should we proceed
-> on Arm if we still need the offset to cover the PDX_NONE variant that we also
-> use? In v1 I just created a local override but Julien wanted to generalize the
-> macros instead. The discussion about switching the default on Arm from mask to
-> offset that is not even selectable on Arm needs to wait for the new release cycle.
+Instead of using a list initializer---that is hard to read unless you know
+the structure of struct pci_device_id by heart---use the PCI_VDEVICE
+macro to assign the needed values and drop all explicit but unneeded
+zeros.
 
-I'm not convinced of that. If you need offset by default, why not enable it by
-default (right now, and potentially even as a backport if there's any bug that
-is being fixed)?
+This doesn't introduce any changes to the compiled result of the array.
 
-Jan
+Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
+---
+Hello,
+
+this is a preparing change for making struct pci_device_id::driver_data
+an anonymous union (similar to
+https://lore.kernel.org/all/cover.1776579304.git.u.kleine-koenig@baylibre.com/).
+This requires named initializers for .driver_data. Dropping the unused
+assignment is still better.
+
+Best regards
+Uwe
+
+ drivers/xen/platform-pci.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
+index 1db82da56db6..f2438232518c 100644
+--- a/drivers/xen/platform-pci.c
++++ b/drivers/xen/platform-pci.c
+@@ -174,11 +174,9 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ }
+ 
+ static const struct pci_device_id platform_pci_tbl[] = {
+-	{PCI_VENDOR_ID_XEN, PCI_DEVICE_ID_XEN_PLATFORM,
+-		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
+-	{PCI_VENDOR_ID_XEN, PCI_DEVICE_ID_XEN_PLATFORM_XS61,
+-		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
+-	{0,}
++	{ PCI_VDEVICE(XEN, PCI_DEVICE_ID_XEN_PLATFORM) },
++	{ PCI_VDEVICE(XEN, PCI_DEVICE_ID_XEN_PLATFORM_XS61) },
++	{ }
+ };
+ 
+ static const struct dev_pm_ops platform_pm_ops = {
+
+base-commit: 254f49634ee16a731174d2ae34bc50bd5f45e731
+-- 
+2.47.3
+
 
