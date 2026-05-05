@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E86CD342F
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:39:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1300526.1575052 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED93CD342F
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:41:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1300534.1575061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDBI-0003lL-MA; Tue, 05 May 2026 10:39:12 +0000
+	id 1wKDD3-0005Dw-0G; Tue, 05 May 2026 10:41:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1300526.1575052; Tue, 05 May 2026 10:39:12 +0000
+Received: by outflank-mailman (output) from mailman id 1300534.1575061; Tue, 05 May 2026 10:41:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDBI-0003lE-JQ; Tue, 05 May 2026 10:39:12 +0000
-Received: by outflank-mailman (input) for mailman id 1300526;
- Tue, 05 May 2026 10:39:12 +0000
+	id 1wKDD2-0005Dp-Ti; Tue, 05 May 2026 10:41:00 +0000
+Received: by outflank-mailman (input) for mailman id 1300534;
+ Tue, 05 May 2026 10:40:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wKDBH-0003l8-VY
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:39:11 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wKDD1-0005Dh-LP
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:40:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKDBH-00C3Op-BA
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:39:11 +0200
+ id 1wKDD1-001j5O-1V
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:40:59 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 69f9c8c8-bab6-0a2a0a5309dd-0a2a4504c33e-20
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:39:11 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f9c92d-2eae-0a2a0a5409dd-0a2a4504eaf2-44
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:40:58 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jgross@suse.com>)
- id 69f9c8cf-1dec-0a2a45040019-c387df82d0a0-3
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:39:11 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id CE9C26A832;
- Tue,  5 May 2026 10:24:22 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7F039593A3;
- Tue,  5 May 2026 10:24:22 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 7nuaHVbF+WmlDwAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 05 May 2026 10:24:22 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 69f9c93a-1dec-0a2a45040019-d1558035b83a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:40:58 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-488a88aeec9so57383955e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:40:58 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a824f9f0dsm374127035e9.15.2026.05.05.03.40.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 May 2026 03:40:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,97 +53,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1777976663; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=1kPsih4iTQHzWl89ILt0g95YzXtWS3e4GyMfMv2igR4=;
-	b=tn3PzYfCPZtySioGtvMgAlbygEOaU/FEtpO2jEf1J6SkLQahFS/xM70sMFDvfyToaLH7XH
-	sQPTPpGQhfV91XLB/47t7gJ/GZ1T6HSiPmn5NL5XPAj1c9Psc488L1swhhACnvsHZaHwcC
-	EgGhEE8Tn/yGA+L2wWg9uSqTkGmt9MU=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=PiLjwjp+
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1777976662; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=1kPsih4iTQHzWl89ILt0g95YzXtWS3e4GyMfMv2igR4=;
-	b=PiLjwjp+GPhSNZPJ8LnSJD3yciFyfyaOd7w2dDeG76KVifcwgNTKNaIC+kLSGSLUPcolOD
-	phK/Icdkl3jYRR8OhlEMTLwnNVJu5xCbvEhf0ag2w0WjZNVW06jrRj0ypeVu/O75D0Ty60
-	1tgoDdAEwiJmIOr58lYJ5hpc0TDJNBQ=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	xen-devel@lists.xenproject.org,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/xen: Fix xen_e820_swap_entry_with_ram()
-Date: Tue,  5 May 2026 12:24:17 +0200
-Message-ID: <20260505102417.208138-1-jgross@suse.com>
-X-Mailer: git-send-email 2.54.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1777977658; x=1778582458; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=b1AumbkpP3P7tQFODhk/CmhVcMS8U1HeqoW3XIkED6k=;
+        b=aIEsHzpE/nR1dY8FwXtlA02lLl//kS9cQzf/hZhYa3AaOLBDvWfNxtSQb8SAiVd/jc
+         npBwEREf3qVcqBncRBmRKwOWMwTlmpyYyscHDTqxPdo1J+KyEb4tp4M4qG8uQEsF4JhB
+         GOc49M8EKmdHofh7vRqYLiDjt4mCdwvSAVIDVCOovB/3lLuzZDqxu6cgxp/anQeifcaO
+         6JIVL29tMOH3r0+lYa+zB2WAVNkfxCC4k7mIYhQpeWd1GH4Dcbf/JQb1HWBZbQeYezhw
+         8Qkahef3oYC8rJ84hPzxg+vi+EQcoZ7KwS4F8ChihHa50F6UdJjDTZN7ryBLN6BxYltW
+         OtOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777977658; x=1778582458;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=b1AumbkpP3P7tQFODhk/CmhVcMS8U1HeqoW3XIkED6k=;
+        b=XDxRTI5wduWQPptL3Lf8J+SBEDK6jKQy31NazhQmttEmn8HVKpWpbL8gl7lKGNGZMi
+         LlAprZDB9zgLqWgoNswOAzy85b018s2DUY/q7VCyRGh08o3ue2T9spmco42oT6t/yL+6
+         qHlt3Ru/nkUK9HAu2HLfxjvWGGlOZSFgUwQ8k7/crvUlyXt/aWjf8ojJMWOR0qHqZvx9
+         0sChUyot8Qbi6j1WW5gVYQstAjv1hZ0gDomEa7pYGXkwzoDYEiD4Y866HCzQo9NEDqBI
+         poSZG9p2IknC0yg4sgOa6bUyU9lL8Ct5kZanFPt8LsAvh13LktD3+5OugB7tADSFzQnC
+         vSpg==
+X-Gm-Message-State: AOJu0YxiAqyRt1frFNzvoWEZGOjOaf57VHFULbtDGb26XDgIgCxOIu+r
+	FznzAKVUdos6JS4yuCfXLqwpo9nuvZpMf0/hhfuXw9Ah3eoNEPCjT/VOYNhaNTZS/g==
+X-Gm-Gg: AeBDievnh9glipruP6Wl6RKIeequRRDO/Lp+Alq4Q/KYCJNCAAqcP7/fXMA/IZJ/zIm
+	QAiF5X2WwVdIN8By0oKpx47zSPkF0Pn75Huv47hv2wdTaA1F/z4Uk//VycYpyHGaFS8vL2lTTdF
+	/Ej7b7WREjVz8440YzAghqEFkdy+vb8mfhAq706sMrH+L7AJHzTkFf7qJUC+rTbtxxrkO0DsMnD
+	tcCJcJ91828KSjxHYb+z6gGvAGcou37fvxRIX8nspmfd3uWCWh95xY0vAJdKTmcJqfNSyT91wXU
+	8qEL1EbRBwRWJlmCXhUK25wHiSf31b0bsuZFZj975h2neOsXtc0BVKz3xJTVJ4al98ory4NsC1v
+	S59eOytTLukTYPLn9FcCam5VMeXpo0Sa34NPcAMgep6x1BuYkcHyBWVQe5f0ggQUs0mY1CZmBhD
+	mis3jAM2iDnHQAYerxkDub1+A9imvQH0BDuenmMO6tYTbP+RBYVqSi/PFm3JGJtyn5Ol2w/vEFH
+	6D7s0A6V4d+2PHPabLG+bPieg==
+X-Received: by 2002:a05:600c:4e4d:b0:489:1ff1:74d3 with SMTP id 5b1f17b1804b1-48a9866a55fmr259355515e9.20.1777977658046;
+        Tue, 05 May 2026 03:40:58 -0700 (PDT)
+Message-ID: <0a3583df-2682-426e-a704-aa8711caec0d@suse.com>
+Date: Tue, 5 May 2026 12:40:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] xen/pdx: account for frametable_base_pdx in
+ generic pdx_to_page/page_to_pdx
+To: "Orzel, Michal" <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Timothy Pearson <tpearson@raptorengineering.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>
+References: <20260430125103.401811-1-michal.orzel@amd.com>
+ <20260430125103.401811-2-michal.orzel@amd.com>
+ <afi7HUFoDYabM9VV@macbook.local>
+ <65ecf1c0-0844-4ba9-a250-a94aeaf4d251@amd.com>
+ <afmYf-ldUxWQXRDL@macbook.local>
+ <309b2ff6-c200-47d0-be3f-ec289df641c6@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <309b2ff6-c200-47d0-be3f-ec289df641c6@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:dkim,suse.com:mid];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_ALL(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: CE9C26A832
-X-purgate-ID: tlsNG-ebf023/1777977551-4B5683FF-70C5D1EB/0/0
+X-purgate-ID: tlsNG-ebf023/1777977658-300413FF-42E4224F/0/0
 X-purgate-type: clean
-X-purgate-size: 1062
+X-purgate-size: 2711
 
-When swapping a not page-aligned E820 map entry with RAM, the start
-address of the modified entry is calculated wrong (the offset into the
-page is subtracted instead of being added to the page address).
+On 05.05.2026 09:35, Orzel, Michal wrote:
+> On 05-May-26 09:13, Roger Pau Monné wrote:
+>> On Tue, May 05, 2026 at 08:48:15AM +0200, Orzel, Michal wrote:
+>>> On 04-May-26 17:28, Roger Pau Monné wrote:
+>>>> On Thu, Apr 30, 2026 at 02:51:02PM +0200, Michal Orzel wrote:
+>>>>> The generic pdx_to_page() and page_to_pdx() macros in xen/pdx.h assume
+>>>>> the frame table starts at PDX 0, which is only true on x86. ARM
+>>>>> uses a non-zero frametable_base_pdx to offset into the frame table (PPC also
+>>>>> defines it).
+>>>>>
+>>>>> Fix the generic macros to subtract/add frametable_base_pdx, defaulting
+>>>>> to 0 when the arch does not define it. This makes the generic macros
+>>>>> correct for all architectures, even though they are only used on x86
+>>>>> today.
+>>>>
+>>>> Hm, I assume this offset was added because the original mask PDX
+>>>> compression won't (usually) compress the gap between 0 and the start
+>>>> of RAM.  However the newish offset PDX compression should be able to
+>>>> compress from 0 to start of RAM, and hence you don't need to apply
+>>>> an extra PDX offset there?
+>>>>
+>>>> If that's indeed the case it might be better to integrate
+>>>> frametable_base_pdx into the mask compression algorithm itself, so
+>>>> that on some arches it's a mask plus a decrease.
+>>> The offset is needed regardless of whether compression is used. With
+>>> CONFIG_PDX_NONE (no compression, PDX == MFN), if RAM starts at e.g.
+>>> 0x80000000, the first valid PDX is 0x80000.
+>>
+>> OK, so you are doing some (kind of) address space compression (removing
+>> the leading empty range to the first RAM region) even when PDX is
+>> disabled.
+>>
+>>> Without frametable_base_pdx
+>>> the frame table would have to be indexed from 0, wasting
+>>> 0x80000 * sizeof(page_info) of memory just to cover the hole before RAM.
+>>
+>> But you don't really "waste" memory, just address space?  Oh, maybe
+>> not on ARM as it doesn't use pdx_group_valid?  And so you
+>> unconditionally populate the frametable from PDX 0 to max PDX.
+> With pdx_group_valid (which this series adds) we wouldn't waste
+> physical memory for the leading gap. But we'd still waste virtual address
+> space and the FRAMETABLE_NR check (max_pdx > FRAMETABLE_NR) becomes tighter
+> because the full range from PDX 0 must fit. For example with RAM starting at 5TB
+> the virtual offset before the first usable entry would be ~70GB — more than the
+> entire 32GB FRAMETABLE_SIZE on ARM64.
 
-Fixes: be35d91c8880 ("xen: tolerate ACPI NVS memory overlapping with Xen allocated memory")
-Reported-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/setup.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Yet still - this is exactly one of the situations offset compression means
+to cover. I'm entirely with Roger as to it being undesirable to build a
+special case variant of "offset compression" into "no compression".
 
-diff --git a/arch/x86/xen/setup.c b/arch/x86/xen/setup.c
-index bb95a05259b8..41251d4cf953 100644
---- a/arch/x86/xen/setup.c
-+++ b/arch/x86/xen/setup.c
-@@ -655,7 +655,7 @@ static void __init xen_e820_swap_entry_with_ram(struct e820_entry *swap_entry)
- 			/* Fill new entry (keep size and page offset). */
- 			entry->type = swap_entry->type;
- 			entry->addr = entry_end - swap_size +
--				      swap_addr - swap_entry->addr;
-+				      swap_entry->addr - swap_addr;
- 			entry->size = swap_entry->size;
- 
- 			/* Convert old entry to RAM, align to pages. */
--- 
-2.54.0
-
+Jan
 
