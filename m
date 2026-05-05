@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABC2CD342F
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:19:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1300480.1575007 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A270CD342F
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:25:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1300489.1575017 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKCre-0006jc-4T; Tue, 05 May 2026 10:18:54 +0000
+	id 1wKCxJ-0008J4-NF; Tue, 05 May 2026 10:24:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1300480.1575007; Tue, 05 May 2026 10:18:54 +0000
+Received: by outflank-mailman (output) from mailman id 1300489.1575017; Tue, 05 May 2026 10:24:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKCre-0006jV-11; Tue, 05 May 2026 10:18:54 +0000
-Received: by outflank-mailman (input) for mailman id 1300480;
- Tue, 05 May 2026 10:18:52 +0000
+	id 1wKCxJ-0008Ix-KY; Tue, 05 May 2026 10:24:45 +0000
+Received: by outflank-mailman (input) for mailman id 1300489;
+ Tue, 05 May 2026 10:24:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wKCrc-0006jP-Qa
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:18:52 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wKCxI-0008Ir-Eq
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:24:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKCrc-00Bzju-69
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:18:52 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wKCxH-005YTf-E6
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:24:43 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69f9c407-2eae-0a2a0a5409dd-0a2a45049894-2
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:18:52 +0200
-Received: from [209.85.208.178] (helo=mail-lj1-f178.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 69f9c40b-1dec-0a2a45040019-d155d0b2ccbe-3
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:18:52 +0200
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-39393ec4ed0so25929751fa.0
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:18:52 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f9c557-2eae-0a2a0a5409dd-0a2a450cc57e-28
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:24:43 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 69f9c56b-62f1-0a2a450c0019-d1558031c951-3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:24:43 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-488b8bc6bc9so31882635e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:24:43 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a824f9f0dsm373141955e9.15.2026.05.05.03.24.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 May 2026 03:24:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,239 +53,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1777976331; cv=none;
-        d=google.com; s=arc-20240605;
-        b=BfQWkc4/422jcjKOTZ12kLrhm4JOz5Z3OHk/amvD1UQ9ENI45elsF7q/cJq9pjNQTt
-         U8i2aTP+D3d8KjT6uSZTWKp0HuQd2mpWnEni9fIzBOomimgIxljjbco8hkliVi8IRU7m
-         mgOHFqDb17Hu4dnxD3CefqWv5yq7FI6pbW9SrSXSJHsO1fUgvTGFQ12zBmYMTLTEADiZ
-         6tG42QyxEsVwpra9GUUX4kpLn57XDoQGiR7zrTeZNrVjGWSwFvd7znVLX2hRLHIDBKM4
-         7+BCcoTlgHklhFthdhwmsS9AQRiIIztHqB9Xmt7HJ4jy35rr9TqWJWzBaJjHUq43qI41
-         nCUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
-        fh=WN+dxI8BWGEvyCtKTDN97slsPx57wxpKUn64COmgY4w=;
-        b=Q2eOkKdXXoLgj064lx4wOadPryifRWHY4IYe2Pdl+yGK9LU3WXVtg5GbAwRbewuGmo
-         wgh5zZ1GWvE6B60Fa9wPNYix4w7J/Id8N+DyOK3BCoZmMKTJnc9XViMIOGGVV4HmVN+w
-         L4Yn3GpKc4tFwe4strJunnd+l1cpmzPq5xXwNdYKVnsHGyIsEYPxdYZgys+Ffo8WrY+r
-         wuNcA0JNeBKUr/nV+aDfEiLC0FYxzT87Mj/HYuYJklQstkFbPVJniK1vkXlkb9k7a5bp
-         195cRTS6CHHoPEnTDSMmjvOUqYFbrw9m2mI7HZvQLmGCh0gYxCia1EO8OH1ADeVA4AD8
-         ET/w==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777976331; x=1778581131; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
-        b=O2VAQ0ZE0sy53svMmr0lDDX36j0uJqndoTAKbCMUy8JFrdVtzLtckIy7DSS+WhI5uy
-         7nF3PsME3TOVAAY31mdiSMY0HddLMC1MZ/vgJAHpKZlw7hjrIApTA0iStynF0MkEEZHa
-         ZiBfquWTSCEwzdsL1gGXvwsSXavOIOo3JTvicai0jfGW0Mg7+ddzDlQxnGTOMVNWCTk+
-         vPSv2cDrPpS2sp0RXQ9YUeYpRz9nnQNPTkx+UUYj/6nFI3rNPrwqXc1i5L3CaSq6pQGU
-         vFqL6d7mKm80Gu3sXn1TOBwVOqWwgExo+SXz95nX3YuzxpsqQ0AVS+GKTNe7+QlrzRLO
-         rK+g==
+        d=suse.com; s=google; t=1777976683; x=1778581483; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=559/gDL5cAkgHSxRcisKiAuG+SV9lJdifh/D33J/iJ4=;
+        b=V3E9wIU4ymQBn/TbADwA7QaJGQjUdyo4cAL5fAeU0qsQLItlppn2YT+bRbaKo/QP1U
+         yPBKKHq2PN9kumo6G63y+b0FtnITgJhSU6jOn/BJeDOPVv9YzxD8oErQIssJuYYJrqJL
+         QBcgGJrBV6IQKc6uMGc3g1VE4w8+L9SRHmJKrX+ofVexNaLPQUWvbAXXYXHIV7Vb8/6v
+         8tW/NdkPoX3hawekykBifoRgHiVlPoY7GZwZ8c6aERC7gEQcs9y7VxmuNYBsjZKZaXd5
+         xll//MGp2pBNNAxdkWly4lxso89uSwwsnkiHW/NOFNHNRrKxnIj9tRiUE2BQIoF8zhz7
+         Wq2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777976331; x=1778581131;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
-        b=kieItZh0IfG2jXHlM6NjoJFbEydIQF+yutPXHq+svxCO0gHjohZMeS4uM6l5TiOyNk
-         XBUmybrtnnDCr0TJU+8NVTY3i1kQ01/YV/NC937ETbaFSQYiBuuH50HkCl+TNT6nyWcE
-         yDN6Rpm5EJ76aLfycL8sKjMzN3PzkVjmjz4GE54WP/ZNMTV7YSBIcR1Zv3q4zWy8GJY/
-         FsV2/8jGukQyGMD+rYP+sthlmhYehA9VrPWFBvGwJTyvNvPmIKYszAhOFehYcn235LlG
-         yZQn413MsiclCmENMpUTDoEgXbzyXW9hj/9WNQNr3UmvBXOasMg9mIVtg5delTLaOLdU
-         u2eQ==
-X-Gm-Message-State: AOJu0YwOI34l5K52Jfkxmhg6Uuv9OzXK0yYTtowO7cGl66ABcKXxmHRI
-	x9NO2nTLr3PkUnhRBoDlPEfcjPnCOtWfUauEnzfX7+yE8d1CwmbbNrp2uX5kbFtuPTSQrK5VBdj
-	MRvrPGfMPbDOjR2EBSff8N4LodS4Ha3M=
-X-Gm-Gg: AeBDieviTR85LL/eHiJXejmDw5wGkqNwY6wJh0xwRPLqsZobxCNPSVMe6ODU6gHpp87
-	GIGw15NVftsZz48EP+JhMW5NQHJa0+rvAU8UWlg6juJQ3/+L3Micxnm8y94uqnPhZnf0j7w/dlE
-	hcMlIGl/fg55+mqvXX5d1yNfvJjWx48wtSzR///WIkUxpKrNYEDg/ybNsGZVYOBWkILLwbbjbeN
-	4kQmwojtyC+1yv1dEIxp3qxNVDdejJvGCJm3cYsPVeVagZXGT8bYd625jWHwNetDhM5o78IqJTu
-	iuvUyElYffY5RFR1
-X-Received: by 2002:a05:6512:10d6:b0:5a4:175d:1278 with SMTP id
- 2adb3069b0e04-5a87f1a0551mr1106353e87.1.1777976331114; Tue, 05 May 2026
- 03:18:51 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1777976683; x=1778581483;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=559/gDL5cAkgHSxRcisKiAuG+SV9lJdifh/D33J/iJ4=;
+        b=ioTg/2rQPcr+2TkH1FESyR0a1twz5zi9Dwk1j8d7Fp3p6VVpf0BH1NCzZDmPsKRf9j
+         e3ikisNB6mFzhbgsboYj1SM30bbO3goHd3TI4KUAmAmXW1rz5qfLOF8vlDrwhqRZ3vpY
+         CNTzgmkzOpNVUfUPoNLfihI5sR1/6I7alSbcAG+bGGSCCHxfqMFe0QLDRf1RME6OOrhR
+         7h/5vW9l98jnkMi6SRu81ylAq/R3CMpuVCFWa8oXyVjrIra8aD3GBmLJOmj5je17bzRE
+         NBfCne230s/s4phVJems2QeoypqGMWjqu64x7if0SmO/wXig7QWWMEqJazjb0trPP3hm
+         Fsdg==
+X-Forwarded-Encrypted: i=1; AFNElJ9iwERY817A5jqKMoftDjsbuvsfDrMxEh1DeJpM2+63QJkck8QrmbmSQDXj8jmmqYWo08utY8h4YIk=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzOY9yA0XLlqPqYXljgXAYlfhm5URtxzEyQKXVagrTBmz1jUHe+
+	0YIwmHhS7n+sSOZ/4ywmHTecdANfJaRMB+nPfkQwcdeXocIByEy35MsI/FUYWupGow==
+X-Gm-Gg: AeBDiesDSV8OJ/2f3gSdxxNf/E3NLa/+gqLRHU5m0VavIr+bNsOrmvk7L6w48PS21mD
+	QL1zaa/emmHMBehVZj0Eg7z0MSJElHXeG8ug63sBHn0kb7m6RLZqhpBLH6jF1h4gIPBIFsvwipC
+	spKJ9aNmM5RuFE8EA7DwEwSESftY681vOB4g5+wUCELYrl5s3HIUghR5tUvOnC1tGhPedjYsnIn
+	Mulcjeo48YowBR7CIP6yjlzXeACqiJguQ3gZVnYPEzz/OL3u4KdHw5Eb7bbnTeldQ9YstMOJp8Z
+	cueTBFkaS/QhR1XxeFZZjY8gvH+ucBL2XjR2bhXUH5DCy0+WYN/sUeD16D1D+p1blNTJUoSO3C/
+	HcrSk4j+jgNnarjo8Wg1g19JbY6H/9YvPJ0mkm3Cyw7t40DV1uutL61zy81Xs393EmNR/ZEfNpP
+	jdxPKMPrKrNsF5/Qvg7EIYbzzYcVW/qVP/qgdgitP6NmRwcybcAsQkBJO71gJzzbeeIZgUb05Nd
+	sMwQgrFoFHpZf2jyds9ZgXmzw==
+X-Received: by 2002:a05:600c:3b2a:b0:488:a797:f0ac with SMTP id 5b1f17b1804b1-48d18cf637amr40888785e9.28.1777976682686;
+        Tue, 05 May 2026 03:24:42 -0700 (PDT)
+Message-ID: <29422b34-b33f-4a25-838f-de6078151e46@suse.com>
+Date: Tue, 5 May 2026 12:24:41 +0200
 MIME-Version: 1.0
-References: <cover.1775125380.git.mykola_kvach@epam.com> <a977e246d1d0a32a6618efd1385ad178779c2a61.1775125380.git.mykola_kvach@epam.com>
- <8B067451-681E-45CA-843A-1F0FD34ABF3C@arm.com>
-In-Reply-To: <8B067451-681E-45CA-843A-1F0FD34ABF3C@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Tue, 5 May 2026 13:18:40 +0300
-X-Gm-Features: AVHnY4Lh2TgfsJXmLLfDTHnZO4AfN0LJzrVBjJSiTtfqzJH9HElEdrL1QbaUmU4
-Message-ID: <CAGeoDV-Caf5CyxPxxJjVsdahsJrr4FETPy7M=xCyB7n8bKrfGg@mail.gmail.com>
-Subject: Re: [PATCH v8 07/13] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jens Wiklander <jens.wiklander@linaro.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Michal Orzel <michal.orzel@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1777976332-2B96A3FF-C99E03BA/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/xen: Fix a potential problem in
+ xen_e820_resolve_conflicts()
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org, x86@kernel.org
+References: <20260505080653.197775-1-jgross@suse.com>
+ <6b241236-ed6d-4ada-beac-8f660bd55185@suse.com>
+ <59b953ce-4b51-4a47-8dba-9895dea33d41@suse.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <59b953ce-4b51-4a47-8dba-9895dea33d41@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1777976683-6E169CF5-DEEE9B63/0/0
 X-purgate-type: clean
-X-purgate-size: 4711
+X-purgate-size: 2990
 
-Hi Bertrand,
+On 05.05.2026 11:13, Jürgen Groß wrote:
+> On 05.05.26 10:43, Jan Beulich wrote:
+>> On 05.05.2026 10:06, Juergen Gross wrote:
+>>> When fixing a conflict in xen_e820_resolve_conflicts(), the loop over
+>>> the E820 map entries needs to be restarted, as the E820 map will have
+>>> been modified by the fix. Otherwise entries might be skipped by
+>>> accident.
+>>>
+>>> Fixes: be35d91c8880 ("xen: tolerate ACPI NVS memory overlapping with Xen allocated memory")
+>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>
+>> First, while trying to review this, isn't there another issue in
+>> xen_e820_swap_entry_with_ram(), in that
+>>
+>> 			entry->addr = entry_end - swap_size +
+>> 				      swap_addr - swap_entry->addr;
+>>
+>>
+>> really means to be
+>>
+>> 			entry->addr = entry_end - swap_size +
+>> 				      swap_entry->addr - swap_addr;
+>>
+>> (affecting non-page-aligned E820 entries)?
+> 
+> Yes, you are right.
+> 
+>>
+>> Further, that function converts swap_entry to the page-aligned superset
+>> of the passed in range. How is it guaranteed that this new range won't
+>> overlap with the predecessor and/or successor one? Wouldn't that need
+>> to be conversion to the page-aligned subset instead?
+> 
+> This is subtle. :-)
+> 
+> We are converting to RAM (usable), so the type value is 1. e820__update_table()
+> will handle overlaps just fine, with higher type values "winning" against lower
+> ones. So any other region overlapping with the new RAM region will result in
+> another conflict in the next loop iteration.
 
-Thank you for the review.
+Oh, wow, and this is a property of the function that one can rely upon?
 
-On Mon, Apr 27, 2026 at 11:22=E2=80=AFAM Bertrand Marquis
-<Bertrand.Marquis@arm.com> wrote:
->
-> Hi Mykola,
->
-> > On 2 Apr 2026, at 12:45, Mykola Kvach <xakep.amatop@gmail.com> wrote:
-> >
-> > From: Mykola Kvach <mykola_kvach@epam.com>
-> >
-> > The FF-A notification SRI interrupt handler was not correctly tied to
-> > CPU hotplug and suspend/resume. As a result, CPUs going offline and
-> > back online could end up with stale or missing handlers, breaking
-> > delivery of FF-A notifications.
-> >
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
->
-> This will probably need a rebase if the harden notification and VM to VM =
-notification
-> serie in FF-A is merged first.
+> Using the page-aligned subset would result in possible memory holes, which would
+> be problematic (the kernel or page tables shouldn't have holes, after all).
 
-I will rebase this patch if the FF-A notification series lands first.
+Aren't such holes normal to occur, e.g. on misaligned RAM/UNUSABLE
+boundaries?
 
->
-> Anyway, changes look good so:
->
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+>> And then, is passing the page-aligned superset to xen_add_remap_nonram()
+>> really appropriate? Why would any leading or trailing space there be
+>> subject to remapping?
+> 
+> How would you want to remap a sub-page physical memory area to another location
+> without affecting the rest of the page? We are reworking the final p2m map here.
 
-Thank you, I will add your Reviewed-by.
+Well, first and foremost: xen_add_remap_nonram() takes and stores byte-
+granular addresses / sizes, with the sole requirement being that the
+offset-into-page be identical between both addresses. That check alone
+already indicates that non-page-aligned addresses are expected to be
+passed into here.
 
-Best regards,
-Mykola
+Further, xen_acpi_os_ioremap() uses the resulting remap table, and is
+byte granular. With the physical address adjustment there, both mappings
+could (theoretically) coexist. But the problem I'm trying to point out
+is that by passing the page-aligned superset into xen_add_remap_nonram()
+you misguide xen_acpi_os_ioremap() (while at the same time
+xen_do_remap_nonram() will do suitable rounding to page boundaries even
+if exact addresses were passed).
 
->
-> Cheers
-> Bertrand
->
-> > ---
-> > xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
-> > 1 file changed, 50 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.=
-c
-> > index 186e726412..513c399594 100644
-> > --- a/xen/arch/arm/tee/ffa_notif.c
-> > +++ b/xen/arch/arm/tee/ffa_notif.c
-> > @@ -360,10 +360,28 @@ static int32_t ffa_notification_bitmap_destroy(ui=
-nt16_t vm_id)
-> >     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0=
-, 0);
-> > }
-> >
-> > -void ffa_notif_init_interrupt(void)
-> > +static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
-> > +
-> > +static int request_sri_irq(void)
-> > {
-> >     int ret;
-> > +    struct irqaction *sri_action =3D &this_cpu(sri_irq);
-> > +
-> > +    sri_action->name =3D "FF-A notif";
-> > +    sri_action->handler =3D notif_irq_handler;
-> > +    sri_action->dev_id =3D NULL;
-> > +    sri_action->free_on_release =3D 0;
-> > +
-> > +    ret =3D setup_irq(notif_sri_irq, 0, sri_action);
-> > +    if ( ret )
-> > +        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
-> > +               notif_sri_irq, ret);
-> >
-> > +    return ret;
-> > +}
-> > +
-> > +void ffa_notif_init_interrupt(void)
-> > +{
-> >     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-> >     {
-> >         /*
-> > @@ -376,14 +394,36 @@ void ffa_notif_init_interrupt(void)
-> >          * pending, while the SPMC in the secure world will not notice =
-that
-> >          * the interrupt was lost.
-> >          */
-> > -        ret =3D request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A=
- notif",
-> > -                          NULL);
-> > -        if ( ret )
-> > -            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %=
-d\n",
-> > -                   notif_sri_irq, ret);
-> > +        request_sri_irq();
-> >     }
-> > }
-> >
-> > +static void deinit_ffa_notif_interrupt(void)
-> > +{
-> > +    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-> > +        release_irq(notif_sri_irq, NULL);
-> > +}
-> > +
-> > +static int cpu_ffa_notif_callback(struct notifier_block *nfb,
-> > +                                  unsigned long action,
-> > +                                  void *hcpu)
-> > +{
-> > +    switch ( action )
-> > +    {
-> > +    case CPU_DYING:
-> > +        deinit_ffa_notif_interrupt();
-> > +        break;
-> > +    default:
-> > +        break;
-> > +    }
-> > +
-> > +    return NOTIFY_DONE;
-> > +}
-> > +
-> > +static struct notifier_block cpu_ffa_notif_nfb =3D {
-> > +    .notifier_call =3D cpu_ffa_notif_callback,
-> > +};
-> > +
-> > void ffa_notif_init(void)
-> > {
-> >     const struct arm_smccc_1_2_regs arg =3D {
-> > @@ -392,7 +432,6 @@ void ffa_notif_init(void)
-> >     };
-> >     struct arm_smccc_1_2_regs resp;
-> >     unsigned int irq;
-> > -    int ret;
-> >
-> >     /* Only enable fw notification if all ABIs we need are supported */
-> >     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
-> > @@ -408,13 +447,11 @@ void ffa_notif_init(void)
-> >         notif_sri_irq =3D irq;
-> >         if ( irq >=3D NR_GIC_SGI )
-> >             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
-> > -        ret =3D request_irq(irq, 0, notif_irq_handler, "FF-A notif", N=
-ULL);
-> > -        if ( ret )
-> > -        {
-> > -            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %=
-d\n",
-> > -                   irq, ret);
-> > +
-> > +        if ( request_sri_irq() )
-> >             return;
-> > -        }
-> > +
-> > +        register_cpu_notifier(&cpu_ffa_notif_nfb);
-> >         fw_notif_enabled =3D true;
-> >     }
-> > }
-> > --
-> > 2.43.0
-> >
->
+Jan
 
