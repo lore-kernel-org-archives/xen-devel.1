@@ -4,60 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FB6FF885A
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:17:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1300470.1575000 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABC2CD342F
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:19:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1300480.1575007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKCqU-000686-Np; Tue, 05 May 2026 10:17:42 +0000
+	id 1wKCre-0006jc-4T; Tue, 05 May 2026 10:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1300470.1575000; Tue, 05 May 2026 10:17:42 +0000
+Received: by outflank-mailman (output) from mailman id 1300480.1575007; Tue, 05 May 2026 10:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKCqU-00067z-Iu; Tue, 05 May 2026 10:17:42 +0000
-Received: by outflank-mailman (input) for mailman id 1300470;
- Tue, 05 May 2026 10:17:42 +0000
+	id 1wKCre-0006jV-11; Tue, 05 May 2026 10:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 1300480;
+ Tue, 05 May 2026 10:18:52 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Luca.Fancellu@arm.com>) id 1wKCqU-00067p-5c
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:17:42 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wKCrc-0006jP-Qa
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:18:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKCqT-001ef6-Hd
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:17:41 +0200
+ id 1wKCrc-00Bzju-69
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:18:52 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Luca.Fancellu@arm.com>)
- id 69f9c3c4-5cb7-0a2a0a5109dd-0a2a4504ae9a-16
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:17:41 +0200
-Received: from [40.107.159.27]
- (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69f9c407-2eae-0a2a0a5409dd-0a2a45049894-2
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:18:52 +0200
+Received: from [209.85.208.178] (helo=mail-lj1-f178.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Luca.Fancellu@arm.com>)
- id 69f9c3c4-1dec-0a2a45040019-286b9f1b1974-3
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:17:40 +0200
-Received: from DUZPR01CA0156.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4bd::19) by DU0PR08MB8322.eurprd08.prod.outlook.com
- (2603:10a6:10:40d::5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
- 2026 10:17:31 +0000
-Received: from DU6PEPF0000A7E3.eurprd02.prod.outlook.com
- (2603:10a6:10:4bd:cafe::48) by DUZPR01CA0156.outlook.office365.com
- (2603:10a6:10:4bd::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.27 via Frontend Transport; Tue,
- 5 May 2026 10:17:31 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DU6PEPF0000A7E3.mail.protection.outlook.com (10.167.8.41) with Microsoft SMTP
- Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.9 via
- Frontend Transport; Tue, 5 May 2026 10:17:30 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com (2603:10a6:10:2d7::16)
- by AS4PR08MB8071.eurprd08.prod.outlook.com (2603:10a6:20b:58a::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.27; Tue, 5 May
- 2026 10:16:27 +0000
-Received: from DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323]) by DU2PR08MB7272.eurprd08.prod.outlook.com
- ([fe80::5d34:206f:373:a323%6]) with mapi id 15.20.9870.023; Tue, 5 May 2026
- 10:16:27 +0000
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69f9c40b-1dec-0a2a45040019-d155d0b2ccbe-3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:18:52 +0200
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-39393ec4ed0so25929751fa.0
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:18:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,158 +48,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=QSNMVL6mEltWiugyZ4OK8Bx80LAq7MZMbZ7SD/CN+qJ8xU4AFi4xMzAQGQdCgND5SWCLYPc0//9hT+gXjpr43WIVvXJ1GCWaXiVLh50xrudSsoLwxBI5DrDg1ybY14P7/2+7ALKt7j8/iliX5WWc+2ppaobPCLPeGvnjLu6a4Zp4NhQ4I4kZlRkdr6WNcK6VqmAaI/MSnAbwT8rjZWA2C62+FMB5GHTFKknbIDXiSo5HKecZ3n3JEkRJH6hKLuhh3oMFBJBcuD6786jlfYXFriXssu/CbYqkCfsrQfqsN4wa1L1JAk9jFxiajmwrLnP/qL7ZyN7oH8+8fuaEodY8LA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6uFyHf5/hq6YqtL7puLplGKtjI5wCkmPtCDmUXyg/2k=;
- b=D4ZJhB/gTTkVI51m9bPWw8R9uVEDGDOn9SE2/T5ta/1+qsPouJ/UudhNmJDFg7hDNKO0EzICVwDKw+a1vn2xhXRZVeSSNgaOHBINKrZifJYPLr3jgFgjwaQCqtfRCMfSHWawg05nAmaVDkL6jseST0w/yidggwSZWEccd+WNUNKrcGl+Lqq+d+j3IREz210YGN2MZSaFDIBLJjLVH11gElAmybRB8D4PGw9BkjejsCxCrLTYmkrEj806k7vNvAF6fxqSP4HbdVuGrCOmnoZUQCTcMT9WHQAlb0s9R/jyHrzhN1LmWLca4CNAU3s9M0AJll0HbAtW+e3BsfoHQrSgQA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=gmail.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6uFyHf5/hq6YqtL7puLplGKtjI5wCkmPtCDmUXyg/2k=;
- b=DKn4hEdh0QRoUU6vqVKzR7tbrA9Nqmeh1MN2c8KsUQACUzRFhs22TLMWOJzEkcenynwl5bmRMzFx0y8Ru1q0OonRcBUdX7SU0nBhHd9R84UXB4bozfnSNuzWiDSlbcX/kQgdI4rX8Omt6rqevFBONeqkTJcxYA5fTIWKLh00bcc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uu8fiDOb6eHPPdejl9tK7R0z95vHl5EGgLMijz27OItoVDxqRD1Fru1lhWr9u5QvhDGuebqplts/nVzHLV8tHmDtGtb6X8BCwIvuvde/VkoJd7A+zJlYkJufTLd9/TudIMdotRht8H5wd/q+s0UCduYsPyuOtDQI4LHq8wXugxtaVUyRQU/ypTveTqN19fHIjQwNT+IYw/LUhQ0+dUw/pIjHNfdz+kowVI9dP352t4UMQmEzNrJlZGlQzTmnsHPz9RTzPc1XTLQPqZ2ZPnXMqXwkYk7C+UhKoDDa+8i8AfU9eA66pCiKtNdaGIdr2DrNqiITcj/BImFU7s+x0pqlLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6uFyHf5/hq6YqtL7puLplGKtjI5wCkmPtCDmUXyg/2k=;
- b=awpwRE9iMU/9ZKIoqdrdN7hAp1zUdBbsVeuFyxheMNaAqrggRvkrJf9iW+euAFF2/iFwBkK5gNqgsUY05Q31QTPGHnfoZyDcEm37+4Me9RMdbJFstMgLfJLbzUhXFWvJNofKaHo7IxUxf48HSJgoOfFbDc3C9l+3H1GG/SDG6MQTZbw93SzJZSE8Fs1Ot675UNZhC6qhjPnjLeiPPt1+ajh8RZVGhQJ/+2VBdcIaLz0Rlita0W7WEPFPuF5s4vsGxLObk2xydu53f0CDC9At1kbyHzAGh8drrxl9ZVeLUMZ0WCZIT61ydqnFU8dRM/fa/cAdctIZAcSN/z6jajshsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6uFyHf5/hq6YqtL7puLplGKtjI5wCkmPtCDmUXyg/2k=;
- b=DKn4hEdh0QRoUU6vqVKzR7tbrA9Nqmeh1MN2c8KsUQACUzRFhs22TLMWOJzEkcenynwl5bmRMzFx0y8Ru1q0OonRcBUdX7SU0nBhHd9R84UXB4bozfnSNuzWiDSlbcX/kQgdI4rX8Omt6rqevFBONeqkTJcxYA5fTIWKLh00bcc=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Romain
- Caritey <Romain.Caritey@microchip.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>
-Subject: Re: [PATCH v4 01/11] xen: arm: fix len type for guest copy functions
-Thread-Topic: [PATCH v4 01/11] xen: arm: fix len type for guest copy functions
-Thread-Index:
- AQHc1xwXYYBcuLui0UypBKVcqnkF/bX10fCAgAeOAYCAAcPSgIAACp8AgAARTACAAAHQgIAAAJwA
-Date: Tue, 5 May 2026 10:16:27 +0000
-Message-ID: <433FDA7B-FF8B-44A5-94CD-6244BE0102C4@arm.com>
-References: <cover.1777303844.git.oleksii.kurochko@gmail.com>
- <e29e6176063f8e7c612a4bfa44ac072d7a686b81.1777303844.git.oleksii.kurochko@gmail.com>
- <53BD54C0-E493-4D04-9CB1-D16B148CA3A9@arm.com>
- <edfb6bc3-ad1a-4185-9966-29bb126a6b3f@suse.com>
- <F9DB9C27-810C-41DB-95DD-D00772CE4385@arm.com>
- <32eddac5-73c7-46c4-8944-99cfe970c803@suse.com>
- <5B084D26-4FE9-4C1A-8C3A-298FB73F34CB@arm.com>
- <3953265a-2bfc-4853-bda5-3450c096ebb2@suse.com>
-In-Reply-To: <3953265a-2bfc-4853-bda5-3450c096ebb2@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3826.700.81.1.6)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	DU2PR08MB7272:EE_|AS4PR08MB8071:EE_|DU6PEPF0000A7E3:EE_|DU0PR08MB8322:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7176aaf4-4694-43a8-62ee-08deaa8f8440
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|366016|7416014|376014|1800799024|38070700021|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info-Original:
- i0n3S8lRAy/3RadB8eyD1HJRVQjwnsFppkOuD8dXtUaxFGEpbVbqQq6BPE95RsWZQFzWtYHvUhYN+vNguOCoezllmd2NTAwbLtmLr9nZ1H6VwNIjUjMRZgVdq/XdoYoSuf7nmqWIOiABLbjW6vtYO93a4CeuVjL2b6y8lKc5Di1XnUNEOierKkR8BsPv4+evSerP2gA29grr+O82upjYQXh7Ch4SOwBp0faAb++EgskysPBSs5KWBsFg77S+vqOc++zxXBZnM6fhCIzVPvlhnBnH+Sski6zKbeMuQP0wftt6JMhJ80df9hFjBVDs8cgK3eGJc0jUDqx91cg1hOgctmdy97hzCOGoEjD9edY9e3rca5nkLlfPfssGjEnes/2f9ArK4pzQMv+tgT/LldgRKDX/1wqbL3b5G5bTBCgWhj2eVNRXWLgfEeHqUzxcH+G16kjE7ak2scB5/9D0pcGoz3v9Jf2iP2xGR1E6NQ+0fHg5256G7mk2NVTWI2UbK2Bft5rga9s1e5UoSTZ4VdsII7a3bXJJlV6GrOH7r3qbN5klcGwC1NR2JYnQyRNDYCbeQp+z7jWQ0Sb606YaBCZQbOZ3xf78dDCXu41dUCPn6Y2aw5itf71DHFprbG77yeWUeL+9k+2dyJTpRLwMBjN8RFFN5Q+qsjO4jbg2w2WMsH84yAa13y/DGE67AYjrDIqzkIVXRrNX+TCebsBwQH9SFv2aZ0Gu5ola+lfdejeCQOFYFlY2TdwI84+nSZBcCIdw
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR08MB7272.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(38070700021)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <7304610B24F69845B301EA95579F95D4@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1777976331; cv=none;
+        d=google.com; s=arc-20240605;
+        b=BfQWkc4/422jcjKOTZ12kLrhm4JOz5Z3OHk/amvD1UQ9ENI45elsF7q/cJq9pjNQTt
+         U8i2aTP+D3d8KjT6uSZTWKp0HuQd2mpWnEni9fIzBOomimgIxljjbco8hkliVi8IRU7m
+         mgOHFqDb17Hu4dnxD3CefqWv5yq7FI6pbW9SrSXSJHsO1fUgvTGFQ12zBmYMTLTEADiZ
+         6tG42QyxEsVwpra9GUUX4kpLn57XDoQGiR7zrTeZNrVjGWSwFvd7znVLX2hRLHIDBKM4
+         7+BCcoTlgHklhFthdhwmsS9AQRiIIztHqB9Xmt7HJ4jy35rr9TqWJWzBaJjHUq43qI41
+         nCUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
+        fh=WN+dxI8BWGEvyCtKTDN97slsPx57wxpKUn64COmgY4w=;
+        b=Q2eOkKdXXoLgj064lx4wOadPryifRWHY4IYe2Pdl+yGK9LU3WXVtg5GbAwRbewuGmo
+         wgh5zZ1GWvE6B60Fa9wPNYix4w7J/Id8N+DyOK3BCoZmMKTJnc9XViMIOGGVV4HmVN+w
+         L4Yn3GpKc4tFwe4strJunnd+l1cpmzPq5xXwNdYKVnsHGyIsEYPxdYZgys+Ffo8WrY+r
+         wuNcA0JNeBKUr/nV+aDfEiLC0FYxzT87Mj/HYuYJklQstkFbPVJniK1vkXlkb9k7a5bp
+         195cRTS6CHHoPEnTDSMmjvOUqYFbrw9m2mI7HZvQLmGCh0gYxCia1EO8OH1ADeVA4AD8
+         ET/w==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1777976331; x=1778581131; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
+        b=O2VAQ0ZE0sy53svMmr0lDDX36j0uJqndoTAKbCMUy8JFrdVtzLtckIy7DSS+WhI5uy
+         7nF3PsME3TOVAAY31mdiSMY0HddLMC1MZ/vgJAHpKZlw7hjrIApTA0iStynF0MkEEZHa
+         ZiBfquWTSCEwzdsL1gGXvwsSXavOIOo3JTvicai0jfGW0Mg7+ddzDlQxnGTOMVNWCTk+
+         vPSv2cDrPpS2sp0RXQ9YUeYpRz9nnQNPTkx+UUYj/6nFI3rNPrwqXc1i5L3CaSq6pQGU
+         vFqL6d7mKm80Gu3sXn1TOBwVOqWwgExo+SXz95nX3YuzxpsqQ0AVS+GKTNe7+QlrzRLO
+         rK+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777976331; x=1778581131;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=q1U65eNbtkKV3mllMX338BcDp2zbFoL57vU+Lzv7wek=;
+        b=kieItZh0IfG2jXHlM6NjoJFbEydIQF+yutPXHq+svxCO0gHjohZMeS4uM6l5TiOyNk
+         XBUmybrtnnDCr0TJU+8NVTY3i1kQ01/YV/NC937ETbaFSQYiBuuH50HkCl+TNT6nyWcE
+         yDN6Rpm5EJ76aLfycL8sKjMzN3PzkVjmjz4GE54WP/ZNMTV7YSBIcR1Zv3q4zWy8GJY/
+         FsV2/8jGukQyGMD+rYP+sthlmhYehA9VrPWFBvGwJTyvNvPmIKYszAhOFehYcn235LlG
+         yZQn413MsiclCmENMpUTDoEgXbzyXW9hj/9WNQNr3UmvBXOasMg9mIVtg5delTLaOLdU
+         u2eQ==
+X-Gm-Message-State: AOJu0YwOI34l5K52Jfkxmhg6Uuv9OzXK0yYTtowO7cGl66ABcKXxmHRI
+	x9NO2nTLr3PkUnhRBoDlPEfcjPnCOtWfUauEnzfX7+yE8d1CwmbbNrp2uX5kbFtuPTSQrK5VBdj
+	MRvrPGfMPbDOjR2EBSff8N4LodS4Ha3M=
+X-Gm-Gg: AeBDieviTR85LL/eHiJXejmDw5wGkqNwY6wJh0xwRPLqsZobxCNPSVMe6ODU6gHpp87
+	GIGw15NVftsZz48EP+JhMW5NQHJa0+rvAU8UWlg6juJQ3/+L3Micxnm8y94uqnPhZnf0j7w/dlE
+	hcMlIGl/fg55+mqvXX5d1yNfvJjWx48wtSzR///WIkUxpKrNYEDg/ybNsGZVYOBWkILLwbbjbeN
+	4kQmwojtyC+1yv1dEIxp3qxNVDdejJvGCJm3cYsPVeVagZXGT8bYd625jWHwNetDhM5o78IqJTu
+	iuvUyElYffY5RFR1
+X-Received: by 2002:a05:6512:10d6:b0:5a4:175d:1278 with SMTP id
+ 2adb3069b0e04-5a87f1a0551mr1106353e87.1.1777976331114; Tue, 05 May 2026
+ 03:18:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
- awwYyadso9LZK+paW3XDO2rBwcrkbKLTC55rAyq9vkkwnNVh291+LViE1hVgY8fNP4NNowVjw8nBal38b67KxMtJUC6fIHWV2cLfbejIyRQeltNFdwM5OSG/kC4Mw5d8Q+yTnSmfSp1n7/TwejBIhWXY0l+wT+ZX0Fz9POLXY9F7kLGdZCzQSR+TQHYgHKG1Nx7PzupQLmKuXH9yob+J2gsmaQMLfy/EFaa4jP8YPTBiakRMjAEZqkB86n3hwy5CAWo2GqXKQxgMh0/0e/te8X2vt9cIUbA/KRHJ2Km917u6cT5fhLgI5RFbcGBOvDAYyVRb8MFjsC8uMGQEen3Gog==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB8071
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DU6PEPF0000A7E3.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	12a35bf7-5610-43d4-dc29-08deaa8f5e4f
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|14060799003|82310400026|35042699022|1800799024|7416014|376014|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	0fdGneR3hzq10hYsOGCgTNv96mtSMezIFV0j2MoFGPFKrv5VrwnVVsrB+5NogVcDwr1PAAGl5XWpS9idpjEH0sPZuitiGyL8LtYHx9yFxWeyYPA6q58TWxdsGdUNLfV8tPB89lFISzNkEogNCYHtskIut2c0/IbgrRAbsVOndNf+6SwrwILONyGijMI1OFOb2GF91E+Au0A9UlCUUWl0xUzWQ3X1pkElNmQ+Q8ujm2r5b1il2nkDg4dqM1BZrMwr2wQ3IrTE2+fDbQ4aUWRW+obZ9ZBGu240Z5EMewUISmfCdXX2ZSdAlFVl4LJaHV/Huy3crtRMwhibCI18btRSj6fYfOqtWxxbxKoIk6b7jxkZvj/ou3C4zT3c9EHD2fbIRNN4mttAJ9C1MI70wGNNTK67e1uQBoMbxzixdVENpx2fMYnB1K2mFqnm/lqotvQZVIFrqkOmQhfqRleOcS4j7Tgz4ohBzS5oNLy81+NkSE2VdyAXCDHK9czUSPJ+or9hYEcWciehBnVnFCiqeL8wcAYjZTFD6jshvX9RCR5MmC2PzDHmHdrgMA43dvHGm/SgLNR35VLZ8HPeoJ0UQ60vMCH6jbAixGaw3FczJC9qNCzu12ssMjTTpC7P+pm2ekdCSGwneQNHEGYMICsB/nYZIfdHnVBcqT2Bdcqh7ZgH7shMJm/PydSDXYEt7Q8a8ydyEt35SXahYaZUbNWD0RWaxsyv/0pOXTvOGJ+T3V79KEA=
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(14060799003)(82310400026)(35042699022)(1800799024)(7416014)(376014)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	DEo2TuZa236UUb7+pPIomGQmeFJsCV8vNIX3Y+rDiKMnjwlNqI27b2FlH0lhYKFrtWzd+LMbqvRKWLKNCMAAK+f3GZjUjiuVBxoWKswZGQxhuItoLU8r6ZGS0PVk2e+3sBKOj91kSEOka2iFP6+Nd0kshwVpxbFT2prVCboKE/5h3eWBpBOlwPOiwo3QmkRg+FF4McKp1pI9grMcBi/PihJi7Yut1I3FaG12TidrsE+SHqXI6xL9IA8Q1IKjclGDMctzAERgLruitdmOteEaAlFAcG4VXHa351OylpHdPzEMyGQVYZesSC1QG+5+wUzJNlb0SXygPLT7O0S/8ZmZcvngI20Qg0lz9htWJZQ+JMIjMyoUXJZ1SY2qPQCQG1KGtA8uOTxVO06lY2ns6s0jjVMETqKLlTgA1U+XkNIzqzwwKypYOxQYwQeUmhu6w3aP
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 10:17:30.8063
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7176aaf4-4694-43a8-62ee-08deaa8f8440
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DU6PEPF0000A7E3.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8322
-X-purgate-ID: tlsNG-ebf023/1777976260-2B1663FF-9010D2A6/0/0
+References: <cover.1775125380.git.mykola_kvach@epam.com> <a977e246d1d0a32a6618efd1385ad178779c2a61.1775125380.git.mykola_kvach@epam.com>
+ <8B067451-681E-45CA-843A-1F0FD34ABF3C@arm.com>
+In-Reply-To: <8B067451-681E-45CA-843A-1F0FD34ABF3C@arm.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Tue, 5 May 2026 13:18:40 +0300
+X-Gm-Features: AVHnY4Lh2TgfsJXmLLfDTHnZO4AfN0LJzrVBjJSiTtfqzJH9HElEdrL1QbaUmU4
+Message-ID: <CAGeoDV-Caf5CyxPxxJjVsdahsJrr4FETPy7M=xCyB7n8bKrfGg@mail.gmail.com>
+Subject: Re: [PATCH v8 07/13] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jens Wiklander <jens.wiklander@linaro.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Michal Orzel <michal.orzel@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ebf023/1777976332-2B96A3FF-C99E03BA/0/0
 X-purgate-type: clean
-X-purgate-size: 2608
+X-purgate-size: 4711
 
-DQoNCj4gT24gNSBNYXkgMjAyNiwgYXQgMTE6MTMsIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
-LmNvbT4gd3JvdGU6DQo+IA0KPiBPbiAwNS4wNS4yMDI2IDEyOjA3LCBMdWNhIEZhbmNlbGx1IHdy
-b3RlOg0KPj4gDQo+PiANCj4+PiBPbiA1IE1heSAyMDI2LCBhdCAxMDowNSwgSmFuIEJldWxpY2gg
-PGpiZXVsaWNoQHN1c2UuY29tPiB3cm90ZToNCj4+PiANCj4+PiBPbiAwNS4wNS4yMDI2IDEwOjI3
-LCBMdWNhIEZhbmNlbGx1IHdyb3RlOg0KPj4+Pj4gT24gNCBNYXkgMjAyNiwgYXQgMDY6MzAsIEph
-biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6DQo+Pj4+PiBPbiAyOS4wNC4yMDI2
-IDEyOjA4LCBMdWNhIEZhbmNlbGx1IHdyb3RlOg0KPj4+Pj4+PiBAQCAtMTM2LDcgKzEzNiw3IEBA
-IHVuc2lnbmVkIGxvbmcgcmF3X2NvcHlfZnJvbV9ndWVzdCh2b2lkICp0bywgY29uc3Qgdm9pZCBf
-X3VzZXIgKmZyb20sDQo+Pj4+Pj4+IHVuc2lnbmVkIGxvbmcgY29weV90b19ndWVzdF9waHlzX2Zs
-dXNoX2RjYWNoZShzdHJ1Y3QgZG9tYWluICpkLA0KPj4+Pj4+PiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFkZHJfdCBncGEsDQo+Pj4+Pj4+ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2b2lkICpidWYsDQo+Pj4+Pj4+IC0gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IGxl
-bikNCj4+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICB1bnNpZ25lZCBsb25nIGxlbikNCj4+Pj4+Pj4gew0KPj4+Pj4+IA0KPj4+Pj4+IE5vdyB0aGF0
-IHdlIGRvIHRoaXMsIHBvdGVudGlhbGx5IHdlIGNvdWxkIGhhdmUgdHJ1bmNhdGlvbiBpbiB0aGUg
-cGxhY2VzIHdoZXJlIHdlIHN0b3JlIGl0cyByZXR1cm4gdmFsdWUNCj4+Pj4+PiBpbnNpZGUgYW4g
-aW50Og0KPj4+Pj4gDQo+Pj4+PiBUaG9zZSB3b3VsZCBzdWZmZXIgZnJvbSB0cnVuY2F0aW9uIGJl
-Zm9yZSBhbmQgYWZ0ZXIgdGhpcyBjaGFuZ2UsIHdvdWxkbid0IHRoZXk/DQo+Pj4+PiBKdXN0IHRo
-YXQgd2hlcmUgdGhlIHRydW5jYXRpb24gb2NjdXJzIGRvZXMgbW92ZS4gSS5lLiBpZiBuZWNlc3Nh
-cnkgdGhleSB3b3VsZA0KPj4+Pj4gd2FudCBkZWFsaW5nIHdpdGggc2VwYXJhdGVseS4NCj4+Pj4g
-DQo+Pj4+IHllcyB0aGF04oCZcyB0cnVlLCB0cnVuY2F0aW9uIHdhcyBhbHJlYWR5IHRoZXJlIGlu
-IGRpZmZlcmVudCBwbGFjZXMsIGRvIHlvdSB3YW50IHRvIGRlYWwgd2l0aCBpdCBzZXBhcmF0ZWx5
-IHNvIHRoYXQNCj4+Pj4gd2UgaGF2ZSBhIEZpeGVzIHRhZyBmb3IgaXQ/DQo+Pj4gDQo+Pj4gSSBh
-bHJlYWR5IHNhaWQgSSdkIGxpa2UgdGhhdCB0byBiZSBkZWFsdCB3aXRoIHNlcGFyYXRlbHksIGRp
-ZG4ndCBJPw0KPj4gDQo+PiBJIHVuZGVyc3Rvb2QgdGhlIOKAnHNlcGFyYXRlbHnigJ0gcGFydC4N
-Cj4+IA0KPj4gV2hhdCBJIHdhcyBhc2tpbmcgaXMgd2hldGhlciB0aGUgcmVhc29uIGlzIHRoYXQg
-dGhpcyBzaG91bGQgYmUgaXRzIG93biBmaXgsIHdpdGggaXRzIG93biBGaXhlcyB0YWcsIHNpbmNl
-IHRoZSB0cnVuY2F0aW9uIHByZWRhdGVzIHRoaXMgcGF0Y2guDQo+IA0KPiBUaGUgcmVhc29uIGlz
-bid0IHNvIG11Y2ggdGhlIEZpeGVzOiB0YWcsIGJ1dCBpbmRlcGVuZGVudCBpc3N1ZXMgZ2VuZXJh
-bGx5DQo+IHdhbnRpbmcgaW5kZXBlbmRlbnQgZml4ZXMuIFRoaXMgYWxzbyBoZWxwcyB3aXRoIGJh
-Y2twb3J0aW5nIChpbiBnZW5lcmFsOw0KPiBtYXliZSBub3Qgc28gbXVjaCBoZXJlKS4NCg0KVGhh
-bmtzLg0KDQpSZXZpZXdlZC1ieTogTHVjYSBGYW5jZWxsdSA8bHVjYS5mYW5jZWxsdUBhcm0uY29t
-Pg0KDQpDaGVlcnMsDQpMdWNhDQoNCg==
+Hi Bertrand,
+
+Thank you for the review.
+
+On Mon, Apr 27, 2026 at 11:22=E2=80=AFAM Bertrand Marquis
+<Bertrand.Marquis@arm.com> wrote:
+>
+> Hi Mykola,
+>
+> > On 2 Apr 2026, at 12:45, Mykola Kvach <xakep.amatop@gmail.com> wrote:
+> >
+> > From: Mykola Kvach <mykola_kvach@epam.com>
+> >
+> > The FF-A notification SRI interrupt handler was not correctly tied to
+> > CPU hotplug and suspend/resume. As a result, CPUs going offline and
+> > back online could end up with stale or missing handlers, breaking
+> > delivery of FF-A notifications.
+> >
+> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+>
+> This will probably need a rebase if the harden notification and VM to VM =
+notification
+> serie in FF-A is merged first.
+
+I will rebase this patch if the FF-A notification series lands first.
+
+>
+> Anyway, changes look good so:
+>
+> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+
+Thank you, I will add your Reviewed-by.
+
+Best regards,
+Mykola
+
+>
+> Cheers
+> Bertrand
+>
+> > ---
+> > xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
+> > 1 file changed, 50 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.=
+c
+> > index 186e726412..513c399594 100644
+> > --- a/xen/arch/arm/tee/ffa_notif.c
+> > +++ b/xen/arch/arm/tee/ffa_notif.c
+> > @@ -360,10 +360,28 @@ static int32_t ffa_notification_bitmap_destroy(ui=
+nt16_t vm_id)
+> >     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0=
+, 0);
+> > }
+> >
+> > -void ffa_notif_init_interrupt(void)
+> > +static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
+> > +
+> > +static int request_sri_irq(void)
+> > {
+> >     int ret;
+> > +    struct irqaction *sri_action =3D &this_cpu(sri_irq);
+> > +
+> > +    sri_action->name =3D "FF-A notif";
+> > +    sri_action->handler =3D notif_irq_handler;
+> > +    sri_action->dev_id =3D NULL;
+> > +    sri_action->free_on_release =3D 0;
+> > +
+> > +    ret =3D setup_irq(notif_sri_irq, 0, sri_action);
+> > +    if ( ret )
+> > +        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
+> > +               notif_sri_irq, ret);
+> >
+> > +    return ret;
+> > +}
+> > +
+> > +void ffa_notif_init_interrupt(void)
+> > +{
+> >     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+> >     {
+> >         /*
+> > @@ -376,14 +394,36 @@ void ffa_notif_init_interrupt(void)
+> >          * pending, while the SPMC in the secure world will not notice =
+that
+> >          * the interrupt was lost.
+> >          */
+> > -        ret =3D request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A=
+ notif",
+> > -                          NULL);
+> > -        if ( ret )
+> > -            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %=
+d\n",
+> > -                   notif_sri_irq, ret);
+> > +        request_sri_irq();
+> >     }
+> > }
+> >
+> > +static void deinit_ffa_notif_interrupt(void)
+> > +{
+> > +    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
+> > +        release_irq(notif_sri_irq, NULL);
+> > +}
+> > +
+> > +static int cpu_ffa_notif_callback(struct notifier_block *nfb,
+> > +                                  unsigned long action,
+> > +                                  void *hcpu)
+> > +{
+> > +    switch ( action )
+> > +    {
+> > +    case CPU_DYING:
+> > +        deinit_ffa_notif_interrupt();
+> > +        break;
+> > +    default:
+> > +        break;
+> > +    }
+> > +
+> > +    return NOTIFY_DONE;
+> > +}
+> > +
+> > +static struct notifier_block cpu_ffa_notif_nfb =3D {
+> > +    .notifier_call =3D cpu_ffa_notif_callback,
+> > +};
+> > +
+> > void ffa_notif_init(void)
+> > {
+> >     const struct arm_smccc_1_2_regs arg =3D {
+> > @@ -392,7 +432,6 @@ void ffa_notif_init(void)
+> >     };
+> >     struct arm_smccc_1_2_regs resp;
+> >     unsigned int irq;
+> > -    int ret;
+> >
+> >     /* Only enable fw notification if all ABIs we need are supported */
+> >     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
+> > @@ -408,13 +447,11 @@ void ffa_notif_init(void)
+> >         notif_sri_irq =3D irq;
+> >         if ( irq >=3D NR_GIC_SGI )
+> >             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
+> > -        ret =3D request_irq(irq, 0, notif_irq_handler, "FF-A notif", N=
+ULL);
+> > -        if ( ret )
+> > -        {
+> > -            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %=
+d\n",
+> > -                   irq, ret);
+> > +
+> > +        if ( request_sri_irq() )
+> >             return;
+> > -        }
+> > +
+> > +        register_cpu_notifier(&cpu_ffa_notif_nfb);
+> >         fw_notif_enabled =3D true;
+> >     }
+> > }
+> > --
+> > 2.43.0
+> >
+>
 
