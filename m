@@ -4,46 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE3D1CD342F
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 10:55:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1300504.1575100 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 568BFFF885A
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2026 11:45:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1300582.1575109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDRF-0008Qb-QS; Tue, 05 May 2026 10:55:41 +0000
+	id 1wKEDF-0007Mr-EC; Tue, 05 May 2026 11:45:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1300504.1575100; Tue, 05 May 2026 10:55:41 +0000
+Received: by outflank-mailman (output) from mailman id 1300582.1575109; Tue, 05 May 2026 11:45:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKDRF-0008QU-Np; Tue, 05 May 2026 10:55:41 +0000
-Received: by outflank-mailman (input) for mailman id 1300504;
- Tue, 05 May 2026 10:29:19 +0000
+	id 1wKEDF-0007Mk-BI; Tue, 05 May 2026 11:45:17 +0000
+Received: by outflank-mailman (input) for mailman id 1300582;
+ Tue, 05 May 2026 11:45:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ukleinek@baylibre.com>) id 1wKD1i-0001Gj-M7
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 10:29:19 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wKEDE-0007Md-4W
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 11:45:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKD1g-003A7k-Gc
- for xen-devel@lists.xenproject.org; Tue, 05 May 2026 12:29:18 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wKEDD-004rNG-HL
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2026 13:45:15 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ukleinek@baylibre.com>)
- id 69f9c666-bab6-0a2a0a5309dd-0a2a450aa878-44
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:29:17 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <ukleinek@baylibre.com>)
- id 69f9c67c-56b3-0a2a450a0019-d155dd2ba413-3
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 12:29:16 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-43d734223e4so2954864f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 03:29:16 -0700 (PDT)
-Received: from localhost
- (p200300f65f114e082236c6257eff72a1.dip0.t-ipconnect.de.
- [2003:f6:5f11:4e08:2236:c625:7eff:72a1])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-45055f2203csm3772962f8f.37.2026.05.05.03.29.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 03:29:16 -0700 (PDT)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69f9d83c-bab6-0a2a0a5309dd-0a2a4503ccc8-40
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 13:45:15 +0200
+Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 69f9d84b-672d-0a2a45030019-d155d0b5cd45-3
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 13:45:15 +0200
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-38def541b0bso49207291fa.1
+ for <xen-devel@lists.xenproject.org>; Tue, 05 May 2026 04:45:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,108 +48,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=baylibre-com.20251104.gappssmtp.com header.i="@baylibre-com.20251104.gappssmtp.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1777981515; cv=none;
+        d=google.com; s=arc-20240605;
+        b=WvP2+1gDFVPHfD0ibEyxdevfi4lpQ9MqbJaIcfi5zpJNgdismJvVzTPSrGTY0YfVLs
+         mLQvgc/w9hk9oyGdSoayC4sYeSlaF1H6Jjlh6yzjvrD9hZ0K2t9Vi5DFW4vqn/u/9Vlm
+         y0VIJmd25LPevbfIs58CvkfiVrsp7cpqR0NaVgo1sf122DygOF0q3BYYhuuxdPvYeHlB
+         9+JU3AnwjH4oHUr+5y1Q+zcJIBq4BeeIW4vvpuqCTKPwhwZlKagnRoU0IBYUtenx29ls
+         ZagnJmP852TdX+ak7eYxHGxhrCcV+30Mv5APXDvbYkaf+yVgwJ734ySn8KgGr6ustXfr
+         cYNw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=6zEpHfFqvUI3K5cIq5lmaqZoX68nLN2ySftFfomzcAc=;
+        fh=uAzoxIkY79cy0zES8IqO07ArU7DBG3jlr2bg4XRVkR0=;
+        b=f66sOzkDcYbZZx76iQSaKYdtDwkzK/BejluqSJ6zm1JAxkAiqG4e/+HZwSBz9MRgTX
+         STbrlLHMQfrnoO7XTaYsGVOs+PcRDQv2t31y5HKgtnARdZoYumyCB/BQuiAEjy6z2voM
+         77xMApO72PxIG+q+Y4F9A1DhsRZrWs1BWQ9fhj581zUcyqE9AwOZh6Ypf+ZvBuQ8Mum4
+         u5M9M8pTeIBl8KEFbTuI5oO2s+kMl9hGKzvIaw+2wFdcFgcGnkOfEDtSSViJEAEMT5Fs
+         Wpw5sP3wWj1Aso0S4KzW76+QJhlfaIwJW+gvo7epotGSZxRRZJffM+SX34SXSrFh7At/
+         pBOQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777976956; x=1778581756; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jq6G9SCADZgi5j8IAt02Ku+HE9Gjzrrr5m74sKn8VBQ=;
-        b=h4nwx/XVEA601XzxBFHxm28273wEWn3AuKJUXV/a9mUqixGvdzKOI88pBGJDEa+ah3
-         E+7C9IX9G8YYva6SCqEDsFZ505GofUp1SUqtHrVFvww9CnndQORodFAwop0TXiCgVkk7
-         nMS2gPkdsGIGbDXmUQ47K+YSIbWS2rweV5HC2sKHuzOlREy56o95u6rL9fXd1qcTAX9A
-         +Z6tb8SrWEr+Rg1TK/7lvH51S17hv6Sx39OCTfQSY83bgKGzt5AUao2oRhr8HfRp9pGZ
-         /4BA1DazHC6WCVnsUP3ZttsGWdaxuUtKw6JpjFJMr+hfu/IBd4RhRE87zm47Qqc8fYA1
-         BXDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777976956; x=1778581756;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1777981515; x=1778586315; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jq6G9SCADZgi5j8IAt02Ku+HE9Gjzrrr5m74sKn8VBQ=;
-        b=Qb/Kc4FyAP7KyaJjJ8gzRakRYZBKtvLknheIXh9wESEPd/6H8uCJai8KGWXGPvDBqX
-         mVx6STquCIOst5snoXFUkMKs+SKfX3eWVlyGnzugSwQllDfpat7gPWXbasIEgxfHNWGU
-         IFM5RUUQ99erlkcbuA8aE/pZ1+59wbP85IgD4CG8vKQ5EFLtqF5TcDq7RiwMb+/5SARG
-         RX5OqIVF5Z/3bBrjTLaB072ZfdzxFesIcC6c7dvgA7uFCAyz7kCAHa0nMpQdzrPwYrXw
-         1tPf8QYkTHbVDlWcRF7krF3LnG1kFQgMvgxc0a1mYgKLFG/uedYfIGy3/CUCq6agSISp
-         mCHQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/F8P8+wp0h4rfwRAZ+jhmaQ5i7uXsHNCVSiSx0FrOSkYy6QDUWUQ0s9w54DkorQf/iCV0FeZ0MO7k=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzZT4pnhBy4cehE8L6VAl5r4GzBhQXPhcHElOgIcswQt9tanvts
-	VDuFJDrFRs8ztVpTn+ybxOZcxv75pVEx81sBntwQNAH/wbiTLGIUqrEpjYyt3Q1sERI=
-X-Gm-Gg: AeBDieuyLa3CRtb4iZcb7V/2afJQcAJeCpZh2VcHGMOFNvvtDlcIT4Upn2cT+mkEgx8
-	DjR95co2uMkxkovNypyS4gCUahBQ4zTd0I8Imzhj+pDUbLdmbE4cVKUqSj1XiB0q9vsPtjT7QoR
-	Gyg1ed3zEhxd4Fetv+rzzZl9RtJpzrsxX4XbCIo8450a05fOV8YR0/vIGF0g8NI3WCW8VG2/2V1
-	eTDm5C8dFMTEkMHGFWnC7yIXxbmbof/AeS8fsNj65YBSvgqJiQkIQlwIoT0Z5JmCf3nOXcTIfG4
-	bH1nrTRFWjTlg+NgDakKwHiIS2dh7nxjSTvZw/DzWXnfiaGnsy3W7S1Whcjn/xJRjg0mIuWDOh/
-	0f8xBwKvpAcMs8qFbSQSznfBDBzyPc8G0BfqLxmIRVJSyIVtL8VozKJm9Zt8mcEvdwW3iUfhmyw
-	1ZK+gETbcyoVNSqHmeFX6+596JBXbSz1yyab+9zJjjnFds0WwPZ29QxMGLHptykS+Ke2FuJApKM
-	1yLNm1QK1xJktUxl7UBJZExyg==
-X-Received: by 2002:a05:6000:2004:b0:449:d1f5:7101 with SMTP id ffacd0b85a97d-44fdcf887aamr5474975f8f.12.1777976956342;
-        Tue, 05 May 2026 03:29:16 -0700 (PDT)
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	Markus Schneider-Pargmann <msp@baylibre.com>
-Subject: [PATCH] xen/platform-pci: Simplify initialization of pci_device_id array
-Date: Tue,  5 May 2026 12:29:09 +0200
-Message-ID: <20260505102909.2380470-2-u.kleine-koenig@baylibre.com>
-X-Mailer: git-send-email 2.47.3
+        bh=6zEpHfFqvUI3K5cIq5lmaqZoX68nLN2ySftFfomzcAc=;
+        b=TbvS1Ulvag5uhqykis3F6VgiWAsvpHjvwVVe81DIZyYM5j213RPqVjNH6XJP+fPe9i
+         ABMdN+GQJ4YFlVvq5MbgZrx8XIPG9BaBp3wvxzby53LlSjZnSXx1sA5oOOSzhz0PCdGo
+         oUAO0ZEf1J78NlhI2J4vS/hwJHT85qYzJDEJS6Ule3gMuNroRCiArX1j3wXjvN63eeT1
+         b10zCcVyJcaPwAWa36nEsroZpqXagiy0URzASm1PvL/zvKQ6nwP20ZnJMouQJSAZBuqA
+         2WZkVaXtyByxbs3df607shTtBc68FsvD6nEA7mArjlSIXofHK1swsTULKuY4ZBKFMxbY
+         IZSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777981515; x=1778586315;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=6zEpHfFqvUI3K5cIq5lmaqZoX68nLN2ySftFfomzcAc=;
+        b=jvYkuiBv9pto670s7kWkTOxp4O00YkpG2NnMoKwSF0QTNSLSLT1uw+oGsn8VMMx51s
+         BZYvx0CXZZtm0N1ZU24PFa8U28W94kTsrCBpcFnBmAYn72IoKUfgquWShA4R/58jyu1h
+         +l4lq57cq/ZHX/2M5lwu6ces9yjzY4XE+lNT33Wx0Ew9nu1JajAHf49ua0esvJ+c0Y5g
+         jEzufqaiyj10DA2THsJXV3qTkx6fXIIwbRAi+oBArwWXzafoSGbe9ibvRlXCI7IriwHD
+         VyX/AJ5FkO0BfXYRJr7koCxCp66eoLC9qYuwukHotVhRQcpC+tcAB9j7oHiNQPVN0gTy
+         FI7A==
+X-Gm-Message-State: AOJu0YyP7fEodNDvOr3SoShgcso2k9N5qgQoV0LihNW7tnWJ5Wkq+ElC
+	ozzvnbu3HnogVMKqA61WFfiVYLHlev2dkYzzN+Vtw9MeRyCTBjRfXSBio0fdTqYYLl06f52P64z
+	QXaF4TBiBp3IlzWHWf0LeimQ5mhsQug4=
+X-Gm-Gg: AeBDies4RC5rz7TO18qYNZY5XHKdCSrGtV5jB9dhP2m7HGNd+PK2jGxF3lS3PZSYk0y
+	KvUYv7HRK+dk0lRAs2gTqNrE0Ywa3ip2pg6R85fDD8HC4se0bnNs8DvnQdyWnWWWjZ+2c4KKS41
+	yEP+jHW1FoiUZv4aFLRWC3YZhzCHDxRx03IGLd5x8owfkaVUMopFp4XwSt6BxVYFIT+kidpcqLw
+	dxDDiMKy4lghnUya6z4Pmzh7cryv/gDHUEwSBD/8OKzllVWGqWE0GZw1KVRvwC5B1XM7DmSsgty
+	sxbgvTll7KC3CjOK
+X-Received: by 2002:a2e:8a95:0:b0:38e:97b2:4b03 with SMTP id
+ 38308e7fff4ca-393b4d50fd8mr11285061fa.31.1777981514434; Tue, 05 May 2026
+ 04:45:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1563; i=u.kleine-koenig@baylibre.com; h=from:subject; bh=zfUmnTuMCPKl1uBG6shy+GoSAItHMkggjMydPWbUatc=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBp+cZ149Ot8luyVHVeurVu/y5CpJvjXDg8c6mH8 bQwgQ+JvwOJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCafnGdQAKCRCPgPtYfRL+ TlRPB/9EtPMzqvPbpzz9rvz0r8PM5VBvrovdLtaMiGTUp2UYkJT6HN7nesS9ghlDesSXQ22OEoJ THMHYGRsjMmAnI536nBTL8eh85DHcs9aLyb6TF1MRDx9Jmd60i1Nn7gWc5fhJ06X9FTsmkiD4iD eZSSrVEWEnzc1722cAvJO3G6OXXz3wJeZOgSEC1h+a2ZF4VodurfW85n7SDV0K3GppKUiFyUwkn RCbFL6azSsiXShHStGggI9wPpou/EduZuSW3nXA75BiCC63pGOhlc7mt0V3xpFADKN8R0z5i+fN B3jawWkKy6xL2MHnXjyjQZ5ssV9IjxNueknS0bq+BSq8LCdH
-X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1777976957-80E798B7-EC6DBB66/0/0
+References: <cover.1775125380.git.mykola_kvach@epam.com> <63b219c3cae5201c5db804f69c3b88ac41c9bdf6.1775125380.git.mykola_kvach@epam.com>
+ <55B2462D-41E5-42CB-9525-39CF4843E95E@arm.com>
+In-Reply-To: <55B2462D-41E5-42CB-9525-39CF4843E95E@arm.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Tue, 5 May 2026 14:45:03 +0300
+X-Gm-Features: AVHnY4Iiroi7TYFgBdAn9YTSTkXYar6w48U2NFr6DOYwy4ITjdNgysHBdDQJoHw
+Message-ID: <CAGeoDV_htcXQ=rsWBbHGcbvwL7E5RKGDy2+p5pRio27dB6J6KA@mail.gmail.com>
+Subject: Re: [PATCH v8 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-33051d/1777981515-28776938-3E2D35FC/0/0
 X-purgate-type: clean
-X-purgate-size: 1565
+X-purgate-size: 2991
 
-Instead of using a list initializer---that is hard to read unless you know
-the structure of struct pci_device_id by heart---use the PCI_VDEVICE
-macro to assign the needed values and drop all explicit but unneeded
-zeros.
+Hi Luca,
 
-This doesn't introduce any changes to the compiled result of the array.
+Thank you for the review.
 
-Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
----
-Hello,
+On Fri, Apr 24, 2026 at 4:36=E2=80=AFPM Luca Fancellu <Luca.Fancellu@arm.co=
+m> wrote:
+>
+> Hi Mykola,
+>
+> > On 2 Apr 2026, at 11:45, Mykola Kvach <xakep.amatop@gmail.com> wrote:
+> >
+> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> >
+> > Store and restore active context and micro-TLB registers.
+> >
+> > Tested on R-Car H3 Starter Kit.
+> >
+> > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> > ---
+> > Changes in V7:
+> > - moved suspend context allocation before pci stuff
+> > ---
+> > xen/drivers/passthrough/arm/ipmmu-vmsa.c | 305 ++++++++++++++++++++++-
+> > 1 file changed, 298 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/pas=
+sthrough/arm/ipmmu-vmsa.c
+> > index ea9fa9ddf3..6765bd3083 100644
+> > --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+> > +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+> > @@ -71,6 +71,8 @@
+> > })
+> > #endif
+> >
+> > +#define dev_dbg(dev, fmt, ...)    \
+> > +    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
+> > #define dev_info(dev, fmt, ...)    \
+> >     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
+> > #define dev_warn(dev, fmt, ...)    \
+> > @@ -130,6 +132,24 @@ struct ipmmu_features {
+> >     unsigned int imuctr_ttsel_mask;
+> > };
+> >
+>
+>
+> > [=E2=80=A6]
+>
+>
+> >
+> > @@ -1340,10 +1608,11 @@ static int ipmmu_add_device(u8 devfn, struct de=
+vice *dev)
+> >     struct iommu_fwspec *fwspec;
+> >
+> > #ifdef CONFIG_HAS_PCI
+> > +    int ret;
+> > +
+> >     if ( dev_is_pci(dev) )
+> >     {
+> >         struct pci_dev *pdev =3D dev_to_pci(dev);
+> > -        int ret;
+> >
+> >         if ( devfn !=3D pdev->devfn )
+> >             return 0;
+> > @@ -1371,6 +1640,15 @@ static int ipmmu_add_device(u8 devfn, struct dev=
+ice *dev)
+> >         /* Let Xen know that the master device is protected by an IOMMU=
+. */
+> >         dt_device_set_protected(dev_to_dt(dev));
+> >     }
+> > +
+> > +#ifdef CONFIG_SYSTEM_SUSPEND
+> > +    if ( ipmmu_alloc_ctx_suspend(dev) )
+> > +    {
+> > +        dev_err(dev, "Failed to allocate context for suspend\n");
+> > +        return -ENOMEM;
+> > +    }
+> > +#endif
+>
+> If this fails the device will remain protected, I suggest we move this on=
+e before `if ( !dev_is_pci(dev) ) { =E2=80=A6 }`
+> block
 
-this is a preparing change for making struct pci_device_id::driver_data
-an anonymous union (similar to
-https://lore.kernel.org/all/cover.1776579304.git.u.kleine-koenig@baylibre.com/).
-This requires named initializers for .driver_data. Dropping the unused
-assignment is still better.
+Good point, thanks.
 
-Best regards
-Uwe
+Yes, this should be fixed. In the original ordering, a failure in
+ipmmu_alloc_ctx_suspend() could leave a non-PCI DT device marked as
+protected even though ipmmu_add_device() returned an error.
 
- drivers/xen/platform-pci.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+I'll reorder the code so dt_device_set_protected() is done only
+after ipmmu_alloc_ctx_suspend() succeeds. This keeps the successful path
+unchanged and avoids leaving stale protected state on failure.
 
-diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
-index 1db82da56db6..f2438232518c 100644
---- a/drivers/xen/platform-pci.c
-+++ b/drivers/xen/platform-pci.c
-@@ -174,11 +174,9 @@ static int platform_pci_probe(struct pci_dev *pdev,
- }
- 
- static const struct pci_device_id platform_pci_tbl[] = {
--	{PCI_VENDOR_ID_XEN, PCI_DEVICE_ID_XEN_PLATFORM,
--		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
--	{PCI_VENDOR_ID_XEN, PCI_DEVICE_ID_XEN_PLATFORM_XS61,
--		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0},
--	{0,}
-+	{ PCI_VDEVICE(XEN, PCI_DEVICE_ID_XEN_PLATFORM) },
-+	{ PCI_VDEVICE(XEN, PCI_DEVICE_ID_XEN_PLATFORM_XS61) },
-+	{ }
- };
- 
- static const struct dev_pm_ops platform_pm_ops = {
+Best regards,
+Mykola
 
-base-commit: 254f49634ee16a731174d2ae34bc50bd5f45e731
--- 
-2.47.3
-
+>
+> The rest looks ok to me, but I=E2=80=99m not an expert of this part.
+>
+> Cheers,
+> Luca
+>
 
