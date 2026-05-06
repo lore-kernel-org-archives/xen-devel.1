@@ -4,46 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B9ECD342C
-	for <xen-devel@archiver.kernel.org>; Wed,  6 May 2026 16:55:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1301984.1576088 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84963CD342C
+	for <xen-devel@archiver.kernel.org>; Wed,  6 May 2026 20:59:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1302065.1576115 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKfX4-0002kz-0n; Wed, 06 May 2026 16:55:34 +0000
+	id 1wKjKc-0001V9-PE; Wed, 06 May 2026 20:58:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1301984.1576088; Wed, 06 May 2026 16:55:33 +0000
+Received: by outflank-mailman (output) from mailman id 1302065.1576115; Wed, 06 May 2026 20:58:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKfX3-0002ks-UF; Wed, 06 May 2026 16:55:33 +0000
-Received: by outflank-mailman (input) for mailman id 1301984;
- Wed, 06 May 2026 16:55:32 +0000
+	id 1wKjKc-0001V1-KX; Wed, 06 May 2026 20:58:58 +0000
+Received: by outflank-mailman (input) for mailman id 1302065;
+ Wed, 06 May 2026 20:58:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wKfX1-0002kg-U0
- for xen-devel@lists.xenproject.org; Wed, 06 May 2026 16:55:32 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1wKjKb-0001Uv-GR
+ for xen-devel@lists.xenproject.org; Wed, 06 May 2026 20:58:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKfX1-00AOY3-AS
- for xen-devel@lists.xenproject.org; Wed, 06 May 2026 18:55:31 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wKjKa-00EinO-FX
+ for xen-devel@lists.xenproject.org; Wed, 06 May 2026 22:58:56 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69fb724a-5cb7-0a2a0a5109dd-0a2a450c9856-48
- for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 18:55:31 +0200
-Received: from [40.107.200.48]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <roger.pau@citrix.com>)
- id 69fb727e-62f1-0a2a450c0019-286bc830edd0-3
- for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 18:55:31 +0200
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by SA2PR03MB5691.namprd03.prod.outlook.com (2603:10b6:806:118::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Wed, 6 May
- 2026 16:55:23 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.20.9891.008; Wed, 6 May 2026
- 16:55:23 +0000
+ (envelope-from <sstabellini@kernel.org>)
+ id 69fbab8d-2eae-0a2a0a5409dd-0a2a4504af5e-8
+ for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 22:58:56 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <sstabellini@kernel.org>)
+ id 69fbab8e-1dec-0a2a45040019-aceafc1feafa-3
+ for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 22:58:55 +0200
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E8FFE432DE;
+ Wed,  6 May 2026 20:58:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93889C2BCB0;
+ Wed,  6 May 2026 20:58:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,129 +50,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j0E2/sAnNNo3uH3/Dp8jJ3i+NCPMqgSXIskZdzwj0Hn5FX1gixvHuy/Zr/5SwxfikeopgzlP7aIYNoh1XjcAbcYacFWJKoMQ1wvNFbT5ZnHtSno/XU77Kb6pV+1/xtbYZhvhnm/ZBxGacCxIs9sgPgjVHmltDydOraZXRrb1T5NY89O8R9b41pojaVe0HiW8kC+h7BK9XSSkVLs2vadlgzcDZ8gepoESs7tnT/gRteT0+bsn5NVDaueeQ+DxvQOrTxwJYY7JYzZLNO8b+2svyEEhLY0RyaK8ZiyI2+MisFmXEoBcu7BMtjyc0dc8+Wu2fJFhbhNrxTFHLVG8WHEN3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vQ63qQv6SMNVbLoZ7q1mqC01ux/BRuiRCRYo4W1MrpU=;
- b=H7D7rZo5du41SsmudzLLBHRgQpaq1L+5EVjnOeZCyNaevx4c93lFWUtr7pN7nMw2p0D4BB0JNIjcDtAKuKU180qU2Z/GrvSo4lNqzqwIwetESisvakFMbNwvTNcrVs6uKDUvzym7NRAezlY1CuPkVx0U87WfMm6Mfl3jdmNjY6qV4LBW00rEmQJegr22BPPFvB4ANev6BPK/iTZ5WsqhKuyvyUYbZnk8Fw8deh4V5/XLwPPxPMiRn4/z3i7SDuWHAe+LL+uFmXJRXsiQnsKiKp7pPJ0UIcStwNRu95Ju0E2kycp2N8hqtJ666p4wRrUHvKja1uXYDGBtjcjY11p+NQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vQ63qQv6SMNVbLoZ7q1mqC01ux/BRuiRCRYo4W1MrpU=;
- b=HZ9rvOvDIyuc8EPSJZhUuTUX1UITiHOwuRaVMXWxHs4PPrt37gHlcg25YbDSS2pdO0aWgIFXgdEHiKbnlY8DuYOKlm0oqyhIFmVn+8qTNo1Ortc7EdIrdY02uEmMD4+UWrfZA1fSUpwTklKiQt+XQ+sIflN8eG57S2s9SMURR90=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Wed, 6 May 2026 18:55:19 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jason Andryuk <jason.andryuk@amd.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v2 0/2] iommu/amd-vi: remove zeroing of MMIO region
-Message-ID: <aftydxyqHXaaZqBx@macbook.local>
-References: <20260506135514.47310-1-roger.pau@citrix.com>
- <aftxLNbCYKnLrEXM@mail-itl>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aftxLNbCYKnLrEXM@mail-itl>
-X-ClientProxiedBy: MR1P264CA0132.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:51::7) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778101133;
+	bh=ygxCrxTmtdcv24MTN9N1JC/G1qLohRd86Aj4uEoj9T0=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=nFQtCTj8ZS7lgsOVZDHIWOc6O0JOvqyXujLxzkeg2Ma1NvSukyFY7DIwSm6zhrm2Z
+	 XCgeaIHhdd1AfF17aXtS7H83p0QM/CogJzykqUhZUrn5y+rqjEQHDnvr3FhbRPJnkX
+	 etz8gpN4csyG832+Ek0qfFWiVycVgspV1oSqynJ8a9XdsV7aGI0XYlgqa7DU+WegWk
+	 t2iFFCwq3m9M+kxbAfse0KMYRoxpCG/QnguCh9XeKnoyXDlkPpTSdgzjKYwJG5zN7v
+	 bhaOc71bziYjb6heDwA9xMjAwSHxIwIOq5xO06NnR33tRnycz6wQrS8OBUTTUj7G/l
+	 0RmMCuMP2IzJA==
+Date: Wed, 6 May 2026 13:58:53 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+cc: Michal Orzel <michal.orzel@amd.com>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <Bertrand.Marquis@arm.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v3] xen/arm: skip holes in physical address space when
+ setting up frametable
+In-Reply-To: <1EAB6ED4-3D64-4074-830B-EB9F8AD88547@arm.com>
+Message-ID: <alpine.DEB.2.22.394.2605061358480.512397@ubuntu-linux-20-04-desktop>
+References: <20260506084137.40913-1-michal.orzel@amd.com> <1EAB6ED4-3D64-4074-830B-EB9F8AD88547@arm.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|SA2PR03MB5691:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3ddfaace-ac37-4e38-df3c-08deab9043bf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|366016|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	IX53AhV4VgHuhKpZkLtG6FZmkrSb6a7wxB8Rhsh7SG32jSv4LEtuwTm9R/tRdhl13OKEKARW9Dh75cdW9cy5T3eJ8flGPcIGj/jUPDBdsPN1VfpweUhv/x4lT60XTM1sydE5aYKCqQwcxDp7WigHkzHU03/AmVZapVU+knRoExjlSIshkh0sEAiArQvVQsmU1Hp932ef+6ukqUAw5AvP/Iw/uxsEKlQdTdtP3TARH9eyIzmCu+ONYIQRHezxzrAS+wGavH07SQ5QE3v/ecf6PWywGAmtiECHA9XotrjuMqeOMrDCmL5mZLq352w+osCa6Pmy5XYtBLzOX9AyaPguC9G1cJgUNjq3TTFfaEfFDDBWXO5bFTpAOEfNH4Wdd+Y55CXesWkQutNlLA2EogQJOM86MxbdBaTW778A2ESOPjkLa5oWLcQeC0Rf6jb78xRRJlftHtJu7b2Z+7DOkSs3UwUNMJaRkB8ygaOdrrCGKaCrZrz2OgCYZvqkRwPIvUMnIjdr+u5Zo6IcGPt6jHHw2TlpZzoa+OoLXrKfpgsSGqAFJMi0OBV3/lrC2AH9AdpQsTOf7jh5c1PSW7BiwyTqcZcHbie0nj7zvEiA4SrDhQC+qP3XF+CYbdre/KXNYXZ3j+OrXFSPP9xXgvl0mDnliT+b/vLoSzy/E/TPu6jX1S4SkwiyJN9D7/CHyrMbMlZj
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?OVFBdFpvOXduQjF1emZNdWlvdEFrQXVNcjhoUzkxN1Y5eW1lSGtJN05GZjVk?=
- =?utf-8?B?dlNndlduVW5vbzBYMllHSUw5MzlxMXJRUFZMU1h5OXBzWUU3R3FOYXIzQkQ2?=
- =?utf-8?B?L2I4UER2OGJVTVdyaHMybFRvOFFMUG1OU2lOS3AvSW55Y2w3VWIva1VJRjFZ?=
- =?utf-8?B?ajhBaDlocWo1SUNlYTN6SHR1eWluVlAxd1B6enp4bE04RitDV2NQcStIaGNt?=
- =?utf-8?B?M3pjQVpiUVR1VU5HWE53Nkc0SXJrblJJOUxVMklQazk5YnNlcGlvSitmL0lH?=
- =?utf-8?B?RUZyejU0RUs4cGlRaDVCNXFmWnM1SHBHdENXNXFMWXRUaTIrK0Fhc3p2dlVV?=
- =?utf-8?B?c3VDVEE3Z003VVl5bXdETWNlQUoxYzM0VXU4NlRjUHdaSGprTmswSnZZeEVo?=
- =?utf-8?B?NGFUVmlHS1hXdHgzSzBnVDRQYno2N0VKUEhoTEtYT1dHQ2FZSmVXdmlyYnQ1?=
- =?utf-8?B?UVhFYlV6cXA3cFhIQ0NmZmtDSzd3eWRBQVIxV2hQS0R5eEZCdTkxNVYweHZk?=
- =?utf-8?B?VWN2b3ltVFRybk9mUnF2SGN2cU5xQjVzbWdWa3haWGVKUE1YVUN4MDV3ZE1q?=
- =?utf-8?B?aDdKQkRvaHZZTlVLTW0yTXJyNFYzWHVlZStaSGdMMkdFQ2JVdC9Nd2Nta2pO?=
- =?utf-8?B?UDViMWY3bkFMV1RObVBxMzlTUnQ4ZG9vNm0vNktIRlhra2k2d3QybFpYM05V?=
- =?utf-8?B?c29QSE4vK2c2MUkvaGE4aWpSbFVxUkc2cHhkZUxVWWNJN3pOUnhkQWJEd0Ro?=
- =?utf-8?B?bUx6NU1nNEVhR1czNHJSRTFXWndSenBqQ2lCb2xEbFVoeFZFMU12N1hFL2JJ?=
- =?utf-8?B?T0lpb2ZtN1Y0WG1kNkN5bFpVVmE3WllXRlQ5VWVweEVsL0lxTFFteGRhaGpy?=
- =?utf-8?B?QWNHWFllS1k0T0dDOGdDbENITWNpTEh4THYrOERYOUZrWm1RazhZM2lmY201?=
- =?utf-8?B?V3VTYlhuZ0F6UllsNzBEVzdUMUNEMUM2cllKYVZuWWU0OW0vMHRwWksxNkUr?=
- =?utf-8?B?cmVjNjVuWEx5dFlDY0JQemhibzVseEpYSHFkakM3L2hnL1NsK2plbHc4eHE0?=
- =?utf-8?B?SXFCcGJSTlBVRjlkYXN0QVBkWGJVWG15YWFsVTFSdEJRU05ZcWZyQk4zZXRF?=
- =?utf-8?B?UTFONjBVaUQ0NFMxc1kyVXFUbDRIOHpLUzFoQmhjS09BdXN4YjBZVm9MSGxT?=
- =?utf-8?B?dldwNlo0MENFNzNSbno2UGhrMGpwNmVXbXhMdHVyMGZTcTdIZngwSTZQUjFF?=
- =?utf-8?B?K3cwbUhLWGxvZmJ3cG0rZkNubUlyckVRcGpmcE52bzVwU2diek4rbkNSY2Jv?=
- =?utf-8?B?bkxmU3pvWjU4Y0pyUHFoS0RIZEpvSklSYTFNdGlLMGVVdUZiYlRzcVRDQ08r?=
- =?utf-8?B?Z01DSHpLUGhTb2ZTT1ZxZlduY0wrMFBBVC9ienNaYXY1eDNHSklodm5jSzJt?=
- =?utf-8?B?Q1BFQjR6NzZVcEV4ckU4Vkx5NDUzeXk1MTNRcWtOcGFYalEzUHRWVEdMZkc5?=
- =?utf-8?B?QWlWTWR0QWpIaHZpM1NFejZsOXhhWmdKd29zUG0yUkJOWUJqdHpyN3l0YlB6?=
- =?utf-8?B?M1BTT3hSYi8vUE5QbDdTTkFZUGlDSG55UlUzZjlrOHpzZGRLZlZSbDNzUFZ4?=
- =?utf-8?B?bDVyUlpNNlovZ3NDVHluUU9kRVZNYVVmN3BLV3IxMHFrZEYrUWlnVkJPY0Vp?=
- =?utf-8?B?dXkzVDBadVJIbmZDTmFxTUhHb0RUeExUMlJGdmlleCtaTWtWanhMZWVHd1NF?=
- =?utf-8?B?eUpsS0l3M21PUkh2TGVVM3UyZno0NFZTb0pnSnduSzBYdlBBVnVhV2RmWVBo?=
- =?utf-8?B?b2h0bXpyMzFEemVxT1Bha21EOXRxUUFjT3ZhR3JpdTFhUFpvdDM3czlCWCtw?=
- =?utf-8?B?RGd2SGt1SG1ZT1ZteExmZG5nSCtCemdlTGNSMktady90aTgzUkZUWDZsV1Vx?=
- =?utf-8?B?TGk1MUY1SjI3MElvYnRIUGZNQlRPT2NablBrcjBMSGJ1MDdBN2JwUmZYUzhu?=
- =?utf-8?B?aGljdi93UGk3N1d1SWNZMGRXQVpRUGt5NGw4QXNuQVc5QjRLNTdEN2JjM0xq?=
- =?utf-8?B?bVFIbStRRFhSNHZwU1Rtb05UdDcvdEc0V29lSkcwNTc3Sm9FV1R0a2VIbFY4?=
- =?utf-8?B?ZFovVUZGbDUwSUZSRlFOSXRIWmRNWXdGNkU1NWVLakF3TlluaFBqL3RhMTBn?=
- =?utf-8?B?amQvVDhiK1UvSUhBWGxJUWJNN2hZZTExLytqUWtUMUNKeCtRZHN2elIrMC84?=
- =?utf-8?B?UVpKQmFvRVh6R1lrVXorbERtVkZ3M3laZjFQdjU1OSs3bW5pcjRXbnBuRC95?=
- =?utf-8?B?ZVdwR0gzcElUMERsMXAxMnVvQ1ZUUWZ5SzJIZDVoeTFBZVgxam9rZz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ddfaace-ac37-4e38-df3c-08deab9043bf
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 16:55:23.6721
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X65THfKAbh1ficGM+nEZM61rEbpcDpvrUJs104ZHK74Ww9um6RW47mvLf38V1ecTMTjq3igLnrWFRHydmDxjEQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR03MB5691
-X-purgate-ID: tlsNG-d25034/1778086531-E357FCF5-CA28E968/0/0
+Content-Type: multipart/mixed; boundary="8323329-515320797-1778101133=:512397"
+X-purgate-ID: tlsNG-ebf023/1778101136-42B633FF-1C15BF66/0/0
 X-purgate-type: clean
-X-purgate-size: 983
+X-purgate-size: 6386
 
-On Wed, May 06, 2026 at 06:49:47PM +0200, Marek Marczykowski-Górecki wrote:
-> On Wed, May 06, 2026 at 03:55:12PM +0200, Roger Pau Monne wrote:
-> > Hello,
-> > 
-> > Unconditionally zeroing the whole IOMMU MMIO region is dangerous, at
-> > least on an upcoming platform this does put the IOMMU in a broken state
-> > that's not recoverable by the init procedure in Xen.
-> > 
-> > Get rid of the zeroing, and instead attempt to disable the IOMMU ahead
-> > of enabling it.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-515320797-1778101133=:512397
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 6 May 2026, Luca Fancellu wrote:
+> Hi Michal,
 > 
-> Just to mention it here, while this looks like a step in the right
-> direction, even better would be to not disable IOMMU at boot, but
-> reconfigure it - to preserve uninterrupted protection when boot time DMA
-> protection is enabled in firmware. But that's definitely more work...
+> > diff --git a/xen/arch/arm/mmu/mm.c b/xen/arch/arm/mmu/mm.c
+> > index 6604f3bf4e6a..c4018a61aa01 100644
+> > --- a/xen/arch/arm/mmu/mm.c
+> > +++ b/xen/arch/arm/mmu/mm.c
+> > @@ -6,18 +6,55 @@
+> 
+> Should we have also #include <xen/bitops.h> because we use
+> find_next_*? Apologies I missed this in previous reviews.
+> 
+> > #include <xen/mm.h>
+> > #include <xen/mm-frame.h>
+> > #include <xen/pdx.h>
+> > +#include <xen/sizes.h>
+> > #include <xen/string.h>
+> > 
+> > -/* Map a frame table to cover physical addresses ps through pe */
+> > -void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+> > +static void __init init_frametable_chunk(unsigned long pdx_s,
+> > +                                         unsigned long pdx_e)
+> > {
+> > -    unsigned long nr_pdxs = mfn_to_pdx(mfn_add(maddr_to_mfn(pe), -1)) -
+> > -                            mfn_to_pdx(maddr_to_mfn(ps)) + 1;
+> > -    unsigned long frametable_size = nr_pdxs * sizeof(struct page_info);
+> > -    mfn_t base_mfn;
+> > -    const unsigned long mapping_size = frametable_size < MB(32) ? MB(2)
+> > -                                                                : MB(32);
+> > +    unsigned long nr_pdxs = pdx_e - pdx_s;
+> > +    unsigned long chunk_size = nr_pdxs * sizeof(struct page_info);
+> > +    unsigned long pfn_align;
+> > +    struct page_info *pg;
+> >     int rc;
+> > +    mfn_t base_mfn;
+> > +
+> > +    /*
+> > +     * In-loop chunks span whole PDX groups, which are always page-size
+> > +     * aligned. The last chunk ending at max_pdx may not be, so round up.
+> > +     */
+> > +    chunk_size = ROUNDUP(chunk_size, PAGE_SIZE);
+> > +
+> > +    /*
+> > +     * Try to align the allocation to the contiguous mapping size so that
+> > +     * map_pages_to_xen() can use the contiguous bit.
+> > +     */
+> > +    pfn_align = ((chunk_size >= MB(32)) ? MB(32) : MB(2)) >> PAGE_SHIFT;
+> > +
+> > +    base_mfn = alloc_boot_pages(chunk_size >> PAGE_SHIFT, pfn_align);
+> > +
+> > +    /*
+> > +     * Resolve the frametable VA via mfn_to_page(pdx_to_mfn(...)) rather
+> > +     * than pdx_to_page() because the generic pdx_to_page() does not subtract
+> > +     * frametable_base_pdx. There's more work to be done to make it generic, so
+> > +     * for now route through mfn_to_page(), which on Arm applies the
+> > +     * frametable_base_pdx offset and yields the correct VA.
+> > +     */
+> > +    pg = mfn_to_page(pdx_to_mfn(pdx_s));
+> > +    rc = map_pages_to_xen((unsigned long)pg, base_mfn,
+> > +                          chunk_size >> PAGE_SHIFT,
+> > +                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
+> > +    if ( rc )
+> > +        panic("Unable to setup the frametable mappings\n");
+> > +
+> > +    memset(pg, 0, nr_pdxs * sizeof(struct page_info));
+> > +    memset(pg + nr_pdxs, -1,
+> > +           chunk_size - nr_pdxs * sizeof(struct page_info));
+> > +}
+> > +
+> > +void __init init_frametable(paddr_t ram_start)
+> > +{
+> > +    unsigned int sidx, nidx, max_idx;
+> > 
+> >     /*
+> >      * The size of paddr_t should be sufficient for the complete range of
+> > @@ -26,24 +63,40 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+> >     BUILD_BUG_ON((sizeof(paddr_t) * BITS_PER_BYTE) < PADDR_BITS);
+> >     BUILD_BUG_ON(sizeof(struct page_info) != PAGE_INFO_SIZE);
+> > 
+> > -    if ( frametable_size > FRAMETABLE_SIZE )
+> > -        panic("The frametable cannot cover the physical region %#"PRIpaddr" - %#"PRIpaddr"\n",
+> > -              ps, pe);
+> > +    /* init_frametable_chunk() allocation alignment assumes 4KB granule */
+> > +    BUILD_BUG_ON(PAGE_SIZE != SZ_4K);
+> > 
+> > -    frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ps));
+> > -    /* Round up to 2M or 32M boundary, as appropriate. */
+> > -    frametable_size = ROUNDUP(frametable_size, mapping_size);
+> > -    base_mfn = alloc_boot_pages(frametable_size >> PAGE_SHIFT, 32<<(20-12));
+> > +    /* In-loop chunks must produce page-aligned frametable regions */
+> > +    BUILD_BUG_ON((PDX_GROUP_COUNT * sizeof(struct page_info)) % PAGE_SIZE);
+> > 
+> > -    rc = map_pages_to_xen(FRAMETABLE_VIRT_START, base_mfn,
+> > -                          frametable_size >> PAGE_SHIFT,
+> > -                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
+> > -    if ( rc )
+> > -        panic("Unable to setup the frametable mappings.\n");
+> > +    max_idx = DIV_ROUND_UP(max_pdx, PDX_GROUP_COUNT);
+> > +    frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ram_start));
+> > +
+> > +    /*
+> > +     * Mapping address in init_frametable_chunk must be page-aligned
+> > +     * for map_pages_to_xen(). Aligning to PDX_GROUP_COUNT guarantees this
+> > +     * because PDX_GROUP_COUNT * sizeof(page_info) is always a multiple of
+> > +     * PAGE_SIZE by construction.
+> > +     */
+> > +    frametable_base_pdx = ROUNDDOWN(frametable_base_pdx, PDX_GROUP_COUNT);
+> > +
+> > +    if ( (max_pdx - frametable_base_pdx) > FRAMETABLE_NR )
+> > +        panic("Frametable too small\n");
+> > +
+> > +    for ( sidx = (frametable_base_pdx / PDX_GROUP_COUNT); ; sidx = nidx )
+> > +    {
+> > +        unsigned int eidx;
+> > +
+> > +        eidx = find_next_zero_bit(pdx_group_valid, max_idx, sidx);
+> > +        nidx = find_next_bit(pdx_group_valid, max_idx, eidx);
+> > +
+> > +        if ( nidx >= max_idx )
+> > +            break;
+> > +
+> > +        init_frametable_chunk(sidx * PDX_GROUP_COUNT, eidx * PDX_GROUP_COUNT);
+> > +    }
+> > 
+> > -    memset(&frame_table[0], 0, nr_pdxs * sizeof(struct page_info));
+> > -    memset(&frame_table[nr_pdxs], -1,
+> > -           frametable_size - (nr_pdxs * sizeof(struct page_info)));
+> > +    init_frametable_chunk(sidx * PDX_GROUP_COUNT, max_pdx);
+> > }
+> 
+> 
+> Apart from that the rest looks ok to me. I’ve also tested for Arm64 MMU/MPU and Arm32 MMU.
+> 
+> Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+> Tested-by: Luca Fancellu <luca.fancellu@arm.com>
 
-Yes, we are aware of this.  But IMO booting with the IOMMU enabled
-will be a new feature, this is strictly a fix that we can "safely"
-backport to stable branches to deal with broken hardware.
-
-Thanks, Roger.
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+--8323329-515320797-1778101133=:512397--
 
