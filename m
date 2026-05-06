@@ -4,55 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A14ECD3439
-	for <xen-devel@archiver.kernel.org>; Wed,  6 May 2026 05:57:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1301156.1575481 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BF0CD342C
+	for <xen-devel@archiver.kernel.org>; Wed,  6 May 2026 07:04:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1301193.1575499 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKVFK-0006eJ-8Y; Wed, 06 May 2026 05:56:34 +0000
+	id 1wKWIh-0000Ec-4L; Wed, 06 May 2026 07:04:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1301156.1575481; Wed, 06 May 2026 05:56:34 +0000
+Received: by outflank-mailman (output) from mailman id 1301193.1575499; Wed, 06 May 2026 07:04:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKVFK-0006cI-2N; Wed, 06 May 2026 05:56:34 +0000
-Received: by outflank-mailman (input) for mailman id 1301156;
- Wed, 06 May 2026 05:56:33 +0000
+	id 1wKWIh-0000EV-0q; Wed, 06 May 2026 07:04:07 +0000
+Received: by outflank-mailman (input) for mailman id 1301193;
+ Wed, 06 May 2026 07:04:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <penny.zheng@amd.com>) id 1wKVFJ-0006YS-1f
- for xen-devel@lists.xenproject.org; Wed, 06 May 2026 05:56:33 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1wKWIe-0000EB-Pj
+ for xen-devel@lists.xenproject.org; Wed, 06 May 2026 07:04:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKVFI-00GH5N-Eb
- for xen-devel@lists.xenproject.org; Wed, 06 May 2026 07:56:32 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wKWIc-0063sG-Kc
+ for xen-devel@lists.xenproject.org; Wed, 06 May 2026 09:04:04 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <penny.zheng@amd.com>)
- id 69fad7fd-bab6-0a2a0a5309dd-0a2a450aec6a-44
- for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 07:56:31 +0200
-Received: from [52.101.85.7]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <penny.zheng@amd.com>)
- id 69fad80d-56b3-0a2a450a0019-346555076118-3
- for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 07:56:31 +0200
-Received: from SA1PR02CA0006.namprd02.prod.outlook.com (2603:10b6:806:2cf::15)
- by SN7PR12MB7177.namprd12.prod.outlook.com (2603:10b6:806:2a5::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Wed, 6 May
- 2026 05:56:23 +0000
-Received: from SN1PEPF00036F3F.namprd05.prod.outlook.com
- (2603:10b6:806:2cf:cafe::9c) by SA1PR02CA0006.outlook.office365.com
- (2603:10b6:806:2cf::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.15 via Frontend Transport; Wed,
- 6 May 2026 05:56:23 +0000
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69fae7df-bab6-0a2a0a5309dd-0a2a4503e474-20
+ for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 09:04:03 +0200
+Received: from [52.101.193.33]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 69fae7e1-672d-0a2a45030019-3465c12148ea-3
+ for <xen-devel@lists.xenproject.org>; Wed, 06 May 2026 09:04:03 +0200
+Received: from PH0PR07CA0005.namprd07.prod.outlook.com (2603:10b6:510:5::10)
+ by SJ2PR12MB8740.namprd12.prod.outlook.com (2603:10b6:a03:53f::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.27; Wed, 6 May
+ 2026 07:01:48 +0000
+Received: from CY4PEPF0000E9CD.namprd03.prod.outlook.com
+ (2603:10b6:510:5:cafe::e0) by PH0PR07CA0005.outlook.office365.com
+ (2603:10b6:510:5::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Wed,
+ 6 May 2026 07:01:48 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF00036F3F.mail.protection.outlook.com (10.167.248.23) with Microsoft
+ CY4PEPF0000E9CD.mail.protection.outlook.com (10.167.241.132) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Wed, 6 May 2026 05:56:23 +0000
-Received: from SHA-L-CHUTZHEN.amd.com (10.180.168.240) by satlexmb07.amd.com
+ 15.20.9891.9 via Frontend Transport; Wed, 6 May 2026 07:01:48 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 6 May
- 2026 00:56:07 -0500
+ 2026 02:01:47 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 6 May
+ 2026 02:01:47 -0500
+Received: from [10.252.145.116] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.17 via Frontend
+ Transport; Wed, 6 May 2026 02:01:45 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,105 +73,139 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ABgYIuFm11r8dreV7cA0DJwFITnbkkyeK5Qo9Php8QrzEeJiU1399+l8JhKRIiVp8zUrs7kQIRv3pAts6y/Tr3K4AxCiXwst48Yzg0+jxNfPrd56oLp3JBGyOjEIR4qnuZkXsWxSwLbzFky5mR+t+OArIUmdJeRV9MmQd1llEaPrToM1xb1fQPWkywTKHeX3TqqpVUTDXWeh2znVcZDgcPFFh7EoLsgG4SgxvM4MuS/xsTx7Ur6EitdpBAYCKolvCDTuHjAP+1wyHoZb+vP9P6k1VEjZWju1zTSvtCGqyE/2sXfEJmSJNalQS54XTJTw/eDmxJefnQtbBqpsG5k/iQ==
+ b=EYPNclZvw+imlcMxyqF8vyIsriVsIoqP3xRR9dYuNDh3yZ+6WTKzkuVqc2WEh+aGKf9LvcuJDCzZRnFyQrwFM1Iz4Vdu0hU4X8q5ViJU7qPNdU48hDG5jXkpf7OrrknYES1r0K8Xtc/v8z3NaD4CknE328WHkmFhRjLAZjaOatOgvCOWjXD2t8BlfZ+Q+JIul+z34NHLZjjPPm/5si99r0kYZVgTu7mpSwqF44DB2Li6KUCCCkZzhL8U5dH7ecFD/UsCKtJre8h/u2dDp8mIB/2KJnlUq/vsNjhg0niqpbWlbdJfiMplXvldYqsAqbVJ/BJgfVsNntWRSxsj10oD1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HtYmF59T1+vlFA/MbHNkN7Ydeg2pEly/nEThOGxN8ek=;
- b=UTFqJlOcgLd+dl2+0nTQkcqINSb54z21kSN91HdVrnNxJG3G65pUIkAG0l2UBgfC8r+M2sNj3LloifFURyTYEw9HjhqWV0kJQyk8Kfcd9xV22NAZI3tJdNim9en8qLaC9zZg+0JfLLLdlmpBKSys+fghtGp0xn6bIhOd2hWKf69y3feHP2wHoB5y5Gu4+OMC1fo6wkAgZpBQLHulgSnI74qnZ9k4o7+NI/qH1q7Oj+jHdUxU0vkAqA7hLq2xpJPoHA3boYhloTb9EGQepRLVYCWyXUd1JgN7LAxdAhKg2f7JurX++qi0RCkEYR5kA1xuvt6g637kp+fyxkMRbxoEBA==
+ bh=Fg+lytjX2eC7vk4fU66yjnfexhWiq5rgVoT1c2N5wDg=;
+ b=Uc0PjT9VMEBzNojtgSRiLM//64RnZodrJm/oaE6PmYDbefM/7qsbkpMNwjGsfCoNo9NiWi763OHds78a0g8gFfA5bkeyC6+Jjcw31gg0Ssmjxq7YVbbEYidfTq9gGyiEJa7QraQ3m0dp0E3gg0NUS/frzmVhWG1Es/5x0AxWgRN7gNAiEGL04jD73Y9TsHxLZOA3RFuQW0BlcJ2/NQdySxH/v5lfO6NT9ms6kzNXnSw+b9R7f8h9riPDRM2xzpncBxayd2CZlJPXvr3he1c7r7Su6XAzoPHbeUf4z247npXGITJiAJ6njOZzzIo0Rwu8VUR7YZOIgCFxg/BgJmKeWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HtYmF59T1+vlFA/MbHNkN7Ydeg2pEly/nEThOGxN8ek=;
- b=t64ULJ4i+DqEEuWnfBNxCbjxcQz6WWxjOt7zc/s7QpKYM4G+PPrfWEtCcrDI+HoSdGOH6/uJfTnD/fcQvbJPLWE6ntXFw+cxPUUGMzFsrqvxaiKY7n4SsXtrBQ1HZd0THLi8YHxCamt4P2RvVyCUWTgLzLl3oDtBe8EISynZ788=
+ bh=Fg+lytjX2eC7vk4fU66yjnfexhWiq5rgVoT1c2N5wDg=;
+ b=zojqloKswAjeR2nh53EBWtLKs2w5lrn6JJuduH+DcPB36l7A1Bpyqc2XfUYrpoKe9q2BSIOjpTZ7s8Xtq9PnHz2+nB2/xQnX299APs0PEdlQmK7md9uV2ch8ZviMXXLtQ2crtaGlF1t+g/kWodQ9vmAa+1S37WsE7dOQW+Zc/ZU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Penny Zheng <penny.zheng@amd.com>
-To: <x86@kernel.org>
-CC: <ray.huang@amd.com>, <Jason.Andryuk@amd.com>,
-	<stefano.stabellini@amd.com>, Penny Zheng <penny.zheng@amd.com>, "Mario
- Limonciello" <mario.limonciello@amd.com>, Yazen Ghannam
-	<yazen.ghannam@amd.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
-	<mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
-	<dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
-	<xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH v1 0/2] x86/amd_node: harden amd_smn_init() against Xen dom0 topology
-Date: Wed, 6 May 2026 13:55:17 +0800
-Message-ID: <20260506055528.476493-1-penny.zheng@amd.com>
-X-Mailer: git-send-email 2.43.0
+Message-ID: <c0e75870-2673-46b2-8ac2-2820fca8eb28@amd.com>
+Date: Wed, 6 May 2026 09:01:44 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] xen/pdx: account for frametable_base_pdx in
+ generic pdx_to_page/page_to_pdx
+To: Jan Beulich <jbeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Teddy Astie <teddy.astie@vates.tech>,
+	<xen-devel@lists.xenproject.org>
+References: <20260430125103.401811-1-michal.orzel@amd.com>
+ <20260430125103.401811-2-michal.orzel@amd.com>
+ <661c18d9-eceb-4a4e-ac2e-37a6931e06b2@suse.com>
+ <d7b30467-50ed-482c-9046-6a51d43bb514@amd.com>
+ <8c5424c1-113a-4f5e-96bf-2613f28b8bac@suse.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <8c5424c1-113a-4f5e-96bf-2613f28b8bac@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3F:EE_|SN7PR12MB7177:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e8aa03c-bfff-4236-e045-08deab3433fb
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CD:EE_|SJ2PR12MB8740:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0e8820b-f4e9-491a-fbf6-08deab3d576a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014|18002099003|56012099003;
+	BCL:0;ARA:13230040|376014|7416014|1800799024|82310400026|36860700016|56012099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	1NVEyBkMl3LqMEGt3NC80/SzFN0Hpg6xvKTMYGPUfbUj+o3m43e3P/GFMl7j8LgTmd0cEyjE0W+LysZM1VytePiUkHviB8EAzKcwVu0EHtPWD5aZKrGpVWDTlMrJQ8ngXg18qI3TEamqGggEjBPY2OunV8flVlCYimLTLEstjWxbUpsxbLJKyNkOhlYYhlVgNgALKsImOrTsw12n2tKTfg84koAlywp+NeqiEdnIViQG9Qmlpmi16qbZemWEYaIpOthItOFH61Ut2l5pG/nfbzcmXef8YbAlOzFMTvM4jDIxHjxcVsSd3PopNc8hmiJnNCraND5uMiFCpAVdU4DP4p/mP7K2KCHzKUTIxS8/VE5EPTGZwFjPXFMmY5boz9+DJBgNjzKLvQB4r8Rn4z8hrLttWi8PsZo2y+oEyFGfa/6v2qg6Uvyezb5PpxpDPpHoWGRv8qrZ7KJWC0937/uhX7JbWQH0hoUjVhKBlfCbzQoCfAlIky3ut9vzQmaNcRVW8Tn68QhTqR6B8+ahXItUsIif120DoNvg/Sgg3W8o14DGguxRl9FAx0JGlMBFL4kFQHiHtXUWWEs+JzstBnRbhkbFVDMaDVlck7J55+x8uVL4vTuJjbde+alI1RENN85yKQJiY0cxTstwu1Y2jD+oe1vc/km3nNpdWvWL8OYEQu+edm7cl/isd25bYM0vvksiJeTTluaQb5lwzsUN92IKsdcJPpEvRKjEKEUxm5wv2Yc=
+	AVFPWnsbekT875JBqNZkCZPNu25949j0nkYXSQX2hUUoabvLlGVVgJARGVWyxEfIfLlVCbYtpIVsz0Enu1k4FKx4fmncX1PyIYXhl0Ne4BNw8b+AK2WzLicQn8dQ5hBnU6hUowv9juyPL/41yqOo3M3tqtwnwYxtj/ADRwk7t+jPcVPbmpVJnpMNkl/MNqaEwesQogAquq5xoiCatdqMBs/I38VkhYwaUOj9oLVSj7vQHWsqEpQFK3FboDgoAflR8xtxMzL0Hwf0G2soGgVfeIMWFPkkMPp509VNHcFJfPzFSK6nPrgmVzUAzkMc5WRPbZOYlONFDSMroff5x5sqqY6Z9ourft3LsBL2fElGUaG05qljyr0W5YWlOxImwNfhkaZshRpvWJlJqKS1P6DUnnDbMCkCm/XeUGZ/OBC898PJQOagDPIzsjkeacNK/6ZYZYhD35h8FTgjkkuPd9f2hSFe2/IPW5SVK+Ima+1GCD62z9ftCb0wRBROB36+6KnzcSdusrTe9Sv2n/BbNwnyEYeGwAhI+Ua6QCrIdNEZbRhXXkp+8kepg1NSSW9OjPh4Uzqjw+GxNG9Con8OAuKWhXAXgtUBG3Z3Ix3qgC5U0R3h1LYT78Go97MywUs+OEVTcVxbpFM+w8mcFfSSZoXmiyUKvlvXYpKubtnY4iy357oXRlanlWV49NGiU305yQo3QXdFCRZRE02Kqh4waWMnq+x2QvXxy4Sr8qfmhfrlkUY=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(82310400026)(36860700016)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	XYJrrHJ4b4FCGJ9KDdD1K1CPGDtG7/qztUH2o+cpSMg3ux0VNL6RooTSTIJIjJxSA3Xo3Y9uisdahDYebfT3F2qXaAXlVWNjVkn1m1CNmKMHUOluzyI3VLwffFiWNWokh6F7wuh6DnLuxdtgo+C14+yDWuTtYGXwsyoR3bhvnv/sExlPskZRmnVCu4Z/J9kL0fsjkTT5oBtQg8tFQny9WoKRm3S1/xaId4/gbCmWNiOguO92d+wV6uqq+ETxsqkdT3mAe3AvsbYeD4Y2mjZx7EdnVpuXm1mloSJJKL6AAplOwRd7M6aRiLJPCCS0gEYk4A0n3sm78JLwEb68X955cb0imcrlDPWfQ9vo2sYZooivw1TFLwS1Vo5ME/edHnDKwsskejCXNuTB6Q9uTK4LDaBqM+oGCcAP9xngdp1yEDH7p6diOoH0xVWiKg8JMoS+
+	o0qT/yoEs3ABHz4tj8yem7OkVtr8v745S1GYmPIL4vWYhLCCWEdsaCFmAhPHOS73Q9ehJ67j0yq2A5DVMaaFoG7h5BNTAUFdjm/p5sleASq54MsplHhFXJkTODNMXZuX5kqgUJzCB69ogoRzIbf6oWLvtQqXcJhOQGQeGd6CulJMaphDubZmH9p+rAI34Ryc4CZLVqcWCZSk6ltOM1PcO4Yzt1c0eUNoTOzSgp/1l+XptDzZG27TwusDCmdQ0CA8vkbvgIz+1AVJzgYYl2BDX7LhRlsWHfKjzc7/PkQ1Mrco1lDZmpQvq+HKjxOxF7Mpv+8cyiwreVkcpFCJ1wFwQETPr84rETbt4MbMQP60Fl35XAzhh1OTRQrj4kdFmNhDc/1fX1hWchrNHD/exfXlicgdcer2C0vE9o8jN9wQUl9/8z9q62pkxkaGqL5JtMJN
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 05:56:23.1329
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 07:01:48.0559
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e8aa03c-bfff-4236-e045-08deab3433fb
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0e8820b-f4e9-491a-fbf6-08deab3d576a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF00036F3F.namprd05.prod.outlook.com
+	CY4PEPF0000E9CD.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7177
-X-purgate-ID: tlsNG-4011c0/1778046991-4797E8B7-CA23AB72/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8740
+X-purgate-ID: tlsNG-33051d/1778051043-2A567938-9167F4E0/0/0
 X-purgate-type: clean
-X-purgate-size: 1221
+X-purgate-size: 2662
 
-While booting a recent linux-next kernel as a Xen PVH dom0 on x86, the kernel
-oopses very early during fs_initcall:
 
-  Oops: divide error: 0000 [#1] SMP NOPTI
-  RIP: 0010:amd_smn_init+0x188/0x2e0
 
-Followed: on a kernel that survives the divide, it will fail by a NULL pointer
-dereference from the first SMN consumer (amd_pmc_probe -> amd_smn_read).
+On 05-May-26 18:11, Jan Beulich wrote:
+> On 05.05.2026 16:52, Orzel, Michal wrote:
+>>
+>>
+>> On 05-May-26 15:05, Jan Beulich wrote:
+>>> On 30.04.2026 14:51, Michal Orzel wrote:
+>>>> --- a/xen/include/xen/pdx.h
+>>>> +++ b/xen/include/xen/pdx.h
+>>>> @@ -132,8 +132,9 @@ void set_pdx_range(unsigned long smfn, unsigned long emfn);
+>>>>   */
+>>>>  bool __mfn_valid(unsigned long mfn);
+>>>>  
+>>>> -#define page_to_pdx(pg)  ((pg) - frame_table)
+>>>> -#define pdx_to_page(pdx) gcc11_wrap(frame_table + (pdx))
+>>>> +#define page_to_pdx(pg) \
+>>>> +    ((unsigned long)((pg) - frame_table) + frametable_base_pdx)
+>>>> +#define pdx_to_page(pdx) gcc11_wrap(frame_table + ((pdx) - frametable_base_pdx))
+>>>
+>>> If you alter these, ...
+>>>
+>>>>  #define mfn_to_pdx(mfn) pfn_to_pdx(mfn_x(mfn))
+>>>>  #define pdx_to_mfn(pdx) _mfn(pdx_to_pfn(pdx))
+>>>
+>>> ... how come these can remain unaltered? Maybe you have some special
+>>> arrangements in Arm code, but surely in generic code transformations done
+>>> should be uniform. After all
+>>>
+>>>     ASSERT(page_to_pdx(pg) == mfn_to_pdx(page_to_mfn(pg)));
+>>>
+>>> (and alike) ought to be universally true for valid inputs.
+>> The invariant holds. There are two transformations on different
+>> boundaries:
+>>
+>>   - PFN <-> PDX: the compression scheme — lives in mfn_to_pdx /
+>>     pdx_to_mfn.
+>>   - PDX <-> frame-table index: +/- frametable_base_pdx — lives in
+>>     page_to_pdx / pdx_to_page (and Arm's page_to_mfn / mfn_to_page).
+>>
+>> On x86 the second is the identity (frametable_base_pdx == 0), so it's
+>> invisible. On Arm it isn't, so it has to appear in the macros that
+>> cross that boundary. Pushing it into mfn_to_pdx as well would mix the
+>> two boundaries and double-apply on Arm (page_to_mfn already adds it).
+> 
+> That's yet more odd. These transformations should equally apply to
+> MFN <-> page (i.e. frame table index) and MFN <-> PDX translations.
+> PDX really is meant to be the frame table index, and at the same
+> time (scaled by PAGE_SHIFT) the direct map index. Both (generally
+> huge) tables equally benefit from whatever compression is in use,
+> and hence also ought to equally benefit from that
+> frametable_base_pdx-only sub-form of offset compression. The
+> anomaly of shrinking only one of the two pretty clearly shouldn't
+> be extended past Arm, and ideally would be addressed there at some
+> point.
+Fair enough. I'll drop this patch and update the second with a local change (as
+in v1 but this time with a comment explaining why) not to extend this behavior
+past Arm and we can try to make things generic next release.
 
-Root cause
-==========
-
-To prevent each dom0 vCPU from looking like an SMT sibling of another
-vCPU, Xen synthesizes guest x2APIC IDs as vcpu_index * 2. This spacing every
-vCPU's APIC ID by 2 can push the synthesized IDs past the package-field
-boundary. Linux then infers more "packages" and therefore more AMD
-nodes via amd_num_nodes() than the platform actually has, while the
-PCI-side host-bridge scan correctly reports the number of root complex.
-
-The fixes are tested on Xen 4.20 PVH dom0 on AMD Zen (16 vCPUs) on top of
-linux-next/master (next-20260505).
-
-Penny Zheng (2):
-  x86/amd_node: avoid divide-by-zero in amd_smn_init() under Xen dom0
-  x86/amd_node: reject SMN access when amd_smn_init() did not complete
-
- arch/x86/kernel/amd_node.c | 23 ++++++++++++++++++++---
- 1 file changed, 20 insertions(+), 3 deletions(-)
-
--- 
-2.43.0
+~Michal
 
 
