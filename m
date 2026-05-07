@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38AC3CD3427
-	for <xen-devel@archiver.kernel.org>; Thu,  7 May 2026 08:59:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1302344.1576367 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9925CD379F
+	for <xen-devel@archiver.kernel.org>; Thu,  7 May 2026 08:59:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1302342.1576351 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKuZl-0004qn-V0; Thu, 07 May 2026 08:59:21 +0000
+	id 1wKuZj-0004BW-Jr; Thu, 07 May 2026 08:59:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1302344.1576367; Thu, 07 May 2026 08:59:21 +0000
+Received: by outflank-mailman (output) from mailman id 1302342.1576351; Thu, 07 May 2026 08:59:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wKuZl-0004q1-Ka; Thu, 07 May 2026 08:59:21 +0000
-Received: by outflank-mailman (input) for mailman id 1302344;
- Thu, 07 May 2026 08:59:19 +0000
+	id 1wKuZj-00048C-3N; Thu, 07 May 2026 08:59:19 +0000
+Received: by outflank-mailman (input) for mailman id 1302342;
+ Thu, 07 May 2026 08:59:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wKuZj-0004BH-EO
- for xen-devel@lists.xenproject.org; Thu, 07 May 2026 08:59:19 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wKuZh-0003zG-Ue
+ for xen-devel@lists.xenproject.org; Thu, 07 May 2026 08:59:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wKuZi-005UsV-RG
- for xen-devel@lists.xenproject.org; Thu, 07 May 2026 10:59:18 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wKuZh-002yCX-BG
+ for xen-devel@lists.xenproject.org; Thu, 07 May 2026 10:59:17 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fc545f-e002-0a2a0a5209dd-0a2a4501ca64-46
- for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 10:59:18 +0200
-Received: from [209.85.208.46] (helo=mail-ed1-f46.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69fc5464-bab6-0a2a0a5309dd-0a2a4503ea28-6
+ for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 10:59:17 +0200
+Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fc5466-c1f2-0a2a45010019-d155d02ecdcd-3
- for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 10:59:18 +0200
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-67c1e0229acso818406a12.1
- for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 01:59:18 -0700 (PDT)
+ id 69fc5465-672d-0a2a45030019-d155da2dc483-3
+ for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 10:59:17 +0200
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so89229266b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 01:59:17 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bc81d5e9583sm57549966b.17.2026.05.07.01.59.16
+ a640c23a62f3a-bc81d5e9583sm57549966b.17.2026.05.07.01.59.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2026 01:59:16 -0700 (PDT)
+ Thu, 07 May 2026 01:59:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778144358; x=1778749158; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1778144356; x=1778749156; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=x4xx6/9HjQw0qDDPVFVAifvL6T1Uk5lWG9wv0V6Tryc=;
-        b=arfaYfjsPY0xibppCmeb4yALQvEfJo5UbdgLTT9a4KcOLx6jj8PA9l4o38QXhvJvDB
-         LRBKkUAXYYIDwYy/A0rxHosR/naXy0Fzh6r+bp/YO1Q4Av3b7J/GmT6nTcT8vPsYcUMo
-         pkP8Z480AIgoxtmXizFhf4Rc4kayEZKKpEOl/dD00VeuwFTBUu12nT109YH4yLR9UGZN
-         MQwvsQy0urlgGUsE0WvQTrL4p7Ld5Y9hskWIfe0hpT+j+E4Ba78SlTLz8JlXNMnNKDVV
-         oIp2Nu4cHVwzuPi9f/8eff6nM3vhrfR/r2ZHzpqKP8NWLe8dTuo3YA4o5Sm9g9qNB/J0
-         DqTg==
+        bh=aBwbjhvethRi23b0lhhRx6kHsUNIa/c7SiSbkmEzovg=;
+        b=pZuoUrET3WFF/aLSI4tBB4MvpisDkk3HZnrWucWF5IiHP3vOB9ysm6a90p/bduvToO
+         KZ3vkQtTj5O+CC3Y1Hn1w2FPkdGDbL5x0PAT+9cm2BtErUwGOH5wR8tA+b8XXaHqTzLk
+         YgMBwo9gYpHSkTNMyOjKC1qGXpSyQUGpY2dVVuqHjLDwv1Xn34Z7EFYEgPUE4puCSnKt
+         SDKzZgaBM7LNVRzF/JUC6wqLpg4XFQ35t96HA7pOYG6cZc0R2tsPJb+IZKEZnAGuaZVC
+         VRnh/pOQuHZ657pJiDoEqJhlVnwX+cHb2g3jUO5LOu9Xh3eeBJ5U5wT3CNlyR+ykHfzH
+         alMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778144358; x=1778749158;
+        d=1e100.net; s=20251104; t=1778144356; x=1778749156;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=x4xx6/9HjQw0qDDPVFVAifvL6T1Uk5lWG9wv0V6Tryc=;
-        b=VSHczLp72NOjb1/r/zD2uBspNDz8ggO2t7LnyCqGz6g1LNAvldjCND7ojPSCaAhb7h
-         u6CHRI+SxSYPe5bA9d9RSAkWrztxCZ/XTEeA4k0NvkeVv7hXdZqA5LJlQbZR+Inyvl4Q
-         SPrJsMI5p1td5UHeIR+GMEd9TvE3KH3V4LmXXKl3HCC6iszyPDqzk7bU0HgUPrfr5veD
-         0pGz5CwhoZVYvR+SECwP8Io22y/QB5T6ulHJaZeYDxHZEn73hAQuQGfdotsmDk404omM
-         N/0Is/7nQfjIdULNmZZW6nfvFfPItHxkzZBXAtO0QED264uGiUXdfuSv4kVEoXpEGFTJ
-         K2Fg==
-X-Gm-Message-State: AOJu0YySDb9GhX2g9ipj4ndCS/378sd+GyQVN6A4hl4qQMBwOJSXSTVG
-	xp9oMPdJTxHM+N+N4AALd90yXQcXsvMJplooEhVxVU9wlqkC5xENBDC7NAmKBg==
-X-Gm-Gg: AeBDiesNM1cwXQIhJsBi0R1RqRMkn10Gic30KDpaNCj9FkNnUyQTabEvMACLZCn9hjM
-	gu4XuNkgj3/Eu5GlUIE3pk9L+3QQDYCieOFiyRizBUDeyDO5qcmbVfXcRjdual3G1DFSW+9VRxb
-	Q3C/RLhqnnyJLBpaA4OtrBUmKyI6m8NgNvUXsNolyLTLhr3m1ZW+EtLGbOnY681WhwTEq7+rotB
-	wbaF8EEn6EhFaByDYX/JWHUXsBCMN29c+ggWbYj1yEZwwfWLRVGU96M4xPAYX6LO6y8umGow7tp
-	jyePTBlvgOOsSo4WnlbKX1Xhag/pPS4NCIf0H+jvJz1/NQXzjyMsiNfPHvedNwxThZoKJW1uJlS
-	51uO4OlOPk1q2Oam2f2zQrXFdPsoNAxcOYrDGXkZCA1FE8nvOpGuJhWZWs0CDWJ9ORk0WdFksWC
-	UfZe2y3R80KMTU84jiezBs/Rby7Egf/LM32zTKTPynGbbZr5cB71OQ5cJkWRQYQaY3xf+HNYeqS
-	2EO
-X-Received: by 2002:a17:907:c06:b0:b9c:9594:e00 with SMTP id a640c23a62f3a-bc56aa4283emr413226166b.1.1778144357643;
-        Thu, 07 May 2026 01:59:17 -0700 (PDT)
+        bh=aBwbjhvethRi23b0lhhRx6kHsUNIa/c7SiSbkmEzovg=;
+        b=VJyMIsU0VTsvMob3kZlGnvdzQfx/PrHwtb55aL58x8jn9QJHbt8AYF3RVMHWDRiKAL
+         +dCXcTsLEgkkEZ7OH5IG5H01jlvzSFE6uf334ioZKoRg9bWXWYEDViw+M9CGvO+KyYkS
+         vSPklRfwjmC7piV1a1jyWO1X3rKbtHmXLJcEuZ8ALf0ZGCcCvpyNZLXYQ8080H2VvDqP
+         YcMp25ODBuxQjKjyjE8AAjydERKBllgQYrCSxacdqEKTF138+KgPwJKm4/O72m7/cbxf
+         hfBfAW/n1ToJPFq2k0qALxINakJA7L24kRiksxL5GuRpGwAZV/w71m1AOxfi+uZwt0RZ
+         XS5A==
+X-Gm-Message-State: AOJu0Ywj10ksI9zn58xULwUEOjrQ2TFX5NG6V7TKl4tsHuvfRsMQeq+u
+	fuA1fIz+nDGOtq+lyYy7L80TJzVdaO9jHdNZf5nV7gl/s6Abb0MPR+Em12x5Vg==
+X-Gm-Gg: AeBDiesipUzNcP6rGpdqX4EnJK3yN9K9JEjY/N2pucSoXm8xgI5QR5UEKyKg3S9VE0M
+	7rOITf8RhP65KePcjbnKWOYrl+4h1enEOIH7HK60WgDF0GIx+yQHFqkz3QHILNpUXq9Nt0pvSQc
+	yf7tjFLAe5u4iLRAMgnIBvIinqTHDYMw2gJfwzyTIkD4w7z1dL76tvF2n0uklUpjGJIMLbmrkUV
+	6dpzpoCPiStQgGkS3id6mcWZPjunXWUDgEp/vlaaSexf71r+5fQWAZA8RV+weMsvTUHRLRUocN2
+	hB90FoonmiJy29o4NRs2moEZmwscr2bWmQvgoHsvK+JbdPLIc4J6s8S6yywSdKHMFJJH76u/FJr
+	KqLJAEXSYPBVyq6s7BzLeO4cbPBT0c9PXhuf0ADjukK6ZP+C54+TBycFds4pcU9dICfROK27AVS
+	N1X7z4ojRoAi688qVaLhkc0YXWb6842kcDizGgkNOfkKvJMnS3vkkU+jOoqU0u+GG/7TK1gdyMo
+	yJL
+X-Received: by 2002:a17:907:1c01:b0:bc3:a4cf:aecd with SMTP id a640c23a62f3a-bc56c520611mr406236566b.14.1778144356168;
+        Thu, 07 May 2026 01:59:16 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,41 +102,30 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 10/11] xen/riscv: add definition of guest RAM banks
-Date: Thu,  7 May 2026 10:58:49 +0200
-Message-ID: <9c04bfe7d7f5510e164567c35e6ea223509f45d5.1778140240.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v5 09/11] xen/riscv: introduce p2m_gpa_bits
+Date: Thu,  7 May 2026 10:58:48 +0200
+Message-ID: <7c04588686638f3c0c53df4b8fd8645991009bff.1778140240.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1778140240.git.oleksii.kurochko@gmail.com>
 References: <cover.1778140240.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1778144358-AC457FF4-4B987711/10/73395122804
+X-purgate-ID: tlsNG-33051d/1778144357-41595938-FB7A37CB/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3241
+X-purgate-size: 3270
 
-The dom0less solution uses defined RAM banks as compile-time constants,
-so introduce macros to describe guest RAM banks.
+common/device-tree/domain-build.c uses p2m_gpa_bits to determine the
+upper bound of the GPA space when searching for unused regions, so it
+must be defined when CONFIG_DOMAIN_BUILD_HELPERS=y.
 
-The reason for 2 banks is that there is typically always a use case for
-low memory under 4 GB, but the bank under 4 GB ends up being small because
-there are other things under 4 GB it can conflict with (interrupt
-controller, PCI BARs, etc.). So a second bank is added above that MMIO
-region (starting at 8 GiB) to provide the remaining RAM; the gap between
-the two banks also exercises code paths handling discontiguous memory.
-For Sv32 guests (34-bit GPA, 16 GiB addressable), bank0 provides 2 GB
-(2–4 GB) and the first 8 GB of bank1 (8–16 GB) is accessible.
+The variable is initialised to PADDR_BITS and narrowed in p2m_init() to
+the GPA width of the selected G-stage mode, allowing an external entity
+(e.g. an IOMMU) to restrict it further if needed.
 
-Extended regions are useful for RISC-V: they could be used to provide a
-"space" for Linux to map grant mappings.
-
-Despite the fact that for every guest MMU mode the GPA could be up
-to 56 bits wide (except Sv32 whose GPA is 34 bits), the combined size
-of both banks is limited to 1018 GB as it is more than enough for most
-use cases.
-
-Add inclusion of asm/guest-layout.h to asm/domain.h to make dom0less
-common code build happy.
+p2m_gpa_bits is a global rather than a per-domain value, which is
+acceptable for now because all domains are required to use the same
+G-stage MMU mode, as dom0less common code allocates it per all
+domains.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
@@ -148,58 +137,79 @@ Changes in v4:
  - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
 ---
 Changes in v3:
- - Move GUEST_RAM*-related defines to asm/p2m.h instead of public header.
+ - Update initialization of p2m_gpa_bits and the comment above.
+ - Rework how p2m_gpa_bits is limited.
+ - Update the commit message.
 ---
 Changes in v2:
  - New patch.
 ---
 ---
- xen/arch/riscv/include/asm/domain.h       |  1 +
- xen/arch/riscv/include/asm/guest-layout.h | 23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/guest-layout.h
+ xen/arch/riscv/include/asm/p2m.h |  3 +++
+ xen/arch/riscv/p2m.c             | 15 +++++++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-index 6c48bf13111d..6044ce0feee0 100644
---- a/xen/arch/riscv/include/asm/domain.h
-+++ b/xen/arch/riscv/include/asm/domain.h
-@@ -7,6 +7,7 @@
- #include <xen/xmalloc.h>
- #include <public/hvm/params.h>
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 638c60ddc2f7..0d1dace1a0d8 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -47,6 +47,9 @@
+ #define P2M_LEVEL_MASK(p2m, lvl) \
+     (P2M_TABLE_OFFSET(p2m, lvl) << P2M_GFN_LEVEL_SHIFT(lvl))
  
-+#include <asm/guest-layout.h>
- #include <asm/p2m.h>
- #include <asm/vtimer.h>
++/* Holds the bit size of GPAs in p2m tables */
++extern unsigned int p2m_gpa_bits;
++
+ #define paddr_bits PADDR_BITS
  
-diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
-new file mode 100644
-index 000000000000..68d95a09394c
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/guest-layout.h
-@@ -0,0 +1,23 @@
-+#ifndef ASM_RISCV_GUEST_LAYOUT_H
-+#define ASM_RISCV_GUEST_LAYOUT_H
+ /* Get host p2m table */
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index f889978cf754..703b9f4d2540 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -11,6 +11,8 @@
+ #include <xen/sections.h>
+ #include <xen/xvmalloc.h>
+ 
++#include <public/domctl.h>
 +
-+#include <public/xen.h>
-+
-+#define GUEST_RAM_BANKS   2
-+
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/flushtlb.h>
+@@ -67,6 +69,12 @@ static const struct gstage_mode_desc gstage_modes[] = {
+ const struct gstage_mode_desc *__ro_after_init max_gstage_mode =
+     &gstage_modes[0];
+ 
 +/*
-+ * The way to find the extended regions (to be exposed to the guest as unused
-+ * address space) relies on the fact that the regions reserved for the RAM
-+ * below are big enough to also accommodate such regions.
++ * Set to the maximum configured support for GPA bits, so the number of GPA
++ * bits can be restricted by an external entity (e.g. IOMMU).
 + */
-+#define GUEST_RAM0_BASE   xen_mk_ullong(0x80000000) /* 2GB of low RAM @ 2GB */
-+#define GUEST_RAM0_SIZE   xen_mk_ullong(0x80000000)
++unsigned int __ro_after_init p2m_gpa_bits = PADDR_BITS;
 +
-+#define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016 GB of RAM @ 8GB */
-+#define GUEST_RAM1_SIZE   xen_mk_ullong(0xFE00000000)
+ static void p2m_free_page(struct p2m_domain *p2m, struct page_info *pg);
+ 
+ static inline void p2m_free_metadata_page(struct p2m_domain *p2m,
+@@ -355,6 +363,7 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+      */
+     static const struct gstage_mode_desc __ro_after_init *m = &gstage_modes[0];
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    unsigned int gpa_bits;
+ 
+     /*
+      * "Trivial" initialisation is now complete.  Set the backpointer so the
+@@ -410,6 +419,12 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+ #   error "Add init of p2m->clean_dcache"
+ #endif
+ 
++    gpa_bits = P2M_GFN_LEVEL_SHIFT(p2m->mode->paging_levels + 1) +
++               P2M_ROOT_EXTRA_BITS;
 +
-+/* TODO: allocate these all dynamically */
-+#define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
-+#define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
++    if ( gpa_bits < p2m_gpa_bits )
++        p2m_gpa_bits = gpa_bits;
 +
-+#endif /* ASM_RISCV_GUEST_LAYOUT_H */
+     return 0;
+ }
+ 
 -- 
 2.54.0
 
