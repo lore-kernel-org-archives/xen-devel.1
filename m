@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A88A1CD37A7
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:43:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1303742.1577048 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA1ECD37AF
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:44:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1303739.1577028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMQh-0006MP-3i; Fri, 08 May 2026 14:43:51 +0000
+	id 1wLMQe-0005ps-58; Fri, 08 May 2026 14:43:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1303742.1577048; Fri, 08 May 2026 14:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 1303739.1577028; Fri, 08 May 2026 14:43:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMQg-0006Ll-T3; Fri, 08 May 2026 14:43:50 +0000
-Received: by outflank-mailman (input) for mailman id 1303742;
- Fri, 08 May 2026 14:43:49 +0000
+	id 1wLMQe-0005od-1f; Fri, 08 May 2026 14:43:48 +0000
+Received: by outflank-mailman (input) for mailman id 1303739;
+ Fri, 08 May 2026 14:43:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wLMQf-00062y-Ev
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:43:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wLMQc-0005Xa-OM
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:43:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLMQd-00EphB-A5
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:43:48 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wLMQc-007XVC-50
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:43:46 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fdf6a1-e002-0a2a0a5209dd-0a2a4507ac04-2
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:48 +0200
-Received: from [209.85.218.48] (helo=mail-ej1-f48.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69fdf689-2eae-0a2a0a5409dd-0a2a45028638-42
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:46 +0200
+Received: from [209.85.218.52] (helo=mail-ej1-f52.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fdf6a4-229c-0a2a45070019-d155da30a8f9-3
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:48 +0200
-Received: by mail-ej1-f48.google.com with SMTP id
- a640c23a62f3a-bc1f0830f44so590070366b.0
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:43:48 -0700 (PDT)
+ id 69fdf6a2-af86-0a2a45020019-d155da34ac9a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:46 +0200
+Received: by mail-ej1-f52.google.com with SMTP id
+ a640c23a62f3a-bc264a50e7fso393112866b.0
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:43:46 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bcac4942068sm90736166b.62.2026.05.08.07.43.46
+ a640c23a62f3a-bcac4942068sm90736166b.62.2026.05.08.07.43.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 07:43:47 -0700 (PDT)
+ Fri, 08 May 2026 07:43:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778251428; x=1778856228; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1778251425; x=1778856225; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fLvC2PpGNSOer61k2601CFg3UXOxaIWR6wu0w95lWf4=;
-        b=gzaj2O2vERQO97xv+7fVNMNjcwRpORuevEuZ72MihGsf3xfVTiN1SdmEDbkRD/xTyp
-         fhspq0WdODITpe0Q9NJLbZFZKD+4EtxlWdzwuNjeJ23mPL1rg/iBebrsJCBz5qDYZwC4
-         lHlpnkGrqX2K3jS3uogKvuJMhwRiMIR+amLFK2ELPDQTbzc1bDoSGuOoiRB7lSr7sXa9
-         r+8nsMCPGmULIW3QulQX0tKKWUAa86p1mL9PRAhK+7W2/AkTAk7WJz2KayC0jo+z6m7L
-         348ackhr+AV2rxSSlu7AyvqzvnR7pj/vS5JCnosm6MAXIQuFk9VM73O+quXuztVvVTFo
-         /Z4Q==
+        bh=xB7Os2MChM3TR6KXilRQ9GrrVvrhO9KwN/leWcO7waQ=;
+        b=ZTcXv4As0mhUaqbZ/HCiD4KCkNRCRLOq6m8vItlSOxVdh7axaljw69rd4bBoNx9fcX
+         d8nz+qwhshOSN0ssUUnupXbPGxSqbLV5J0slMxfEKMMSRGQDaQ4AQKAsB9YGw48E46tG
+         GLEiC6bkOcgBqHrHZQu3lI97yCVsdZYU8Gp4gT/lNdgsYHr3xGsPxoaqnHZLh5a+cTeJ
+         nc0nh9c37EycI3l9LjVqBq+Ipf2eEJ8F0GG9BZzAixykNcnEhZqXTs4DEcp5gxnLsm2M
+         Qcu0oyeuWCyL8tGCLDJtNZb0xwgMLWv089s+oPzw8rHzYnVibF9abDidlXWX2yPBpkUD
+         +naw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778251428; x=1778856228;
+        d=1e100.net; s=20251104; t=1778251425; x=1778856225;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=fLvC2PpGNSOer61k2601CFg3UXOxaIWR6wu0w95lWf4=;
-        b=Z+mdSQ2CCvD2cxu+i9ZOUI2gEZjg4UnLvEQJpjT/yrW0oC20f1RoP3rKi6i/gHYrKO
-         3kiVVC7rTyBtiCM8jWPcD3T0bXerau56KmbAW7iLLjtF+nS015XBbXxxnQK+i5AasZJy
-         4a73A/6ZTH8az18DlKDFYPc2Aj9tZBTwoYYtS+8lojGjyU2soWRWz3uiQD/W31mOtX4O
-         WYUIdU2cXgOKN7tQ3jOHyovdR/Ixu5I96ODZ9r6lOtCm+yi/urPrr6vonr1yppYCV5SH
-         YfPWZpajAl744Ficy8/z5B03i9Kvx611Snw3J/ch/EWgC3Me1zZ3jXX+mYT3KtRnXMAb
-         nwEA==
-X-Gm-Message-State: AOJu0YxZx0XbqEiT0+/nYyC3zqhvBlOsrJO8nv3tq8qlzjxZ9HAvyqnF
-	f47C/IZedpTbqfsBVdJlDwlMfVLHajzsTOqHW3Qh4MxBgca2GOegii7og+DkCg==
-X-Gm-Gg: AeBDiet3fSrE45GdzgchRU55uRbIcJx+MkjhBzINJ3ZsPURcE698fTtwzOq+r2POMFk
-	k+A6Eg/xt+TOpJ+VNMoIwspB1yWEywPqhZl3HSL2PrrfY6JRyNLsuiMWSVoA0ex5CPpO0Nn6npk
-	nN/NAUIuSVquSl4NBUp564DpGTpzQNQ6GAgLOhFlp6qJRoauqhuXGYFDROMTjtMmRFdqrM7gF5O
-	G6q0DtBDisM5pdxySFTuYs2RyftzKd/RNG6qMvEE7MiVrfDHlxwMAzp7BCNStP6a3yn/B75p9dB
-	JfTrKSb+n/ztYcJRFrBO/S7oByoILiTSW3auVHHfSXXC2c6e6Axd2vCoaT4HIgYrlMM4th5i3Hg
-	27dpSHxUGPTg8Q7XeaA4uogVieBin1k83ac62UjaHuMI6QiEPwge+a2iA+qbjcJ4dyQH3Vrmj9+
-	lfd6mD41IzZ5rFM5L7vExF8Fic7JBB5Lk7Ry6WhPdPPE9ApStrNMz19qirgh7zx/pNLTtLlm+D5
-	5bU
-X-Received: by 2002:a17:906:fd87:b0:bc1:b5ef:7541 with SMTP id a640c23a62f3a-bc85cdada2bmr371439566b.22.1778251427956;
-        Fri, 08 May 2026 07:43:47 -0700 (PDT)
+        bh=xB7Os2MChM3TR6KXilRQ9GrrVvrhO9KwN/leWcO7waQ=;
+        b=iURBWlcKczyx27XgWhjSqIPN55vKijCCHRrBDYjhqh4dDPgcwEcuihhEXXu2qDeCMp
+         hKyFth5fi7Eb4nMw8O/OrIhE6eWQHVz9Sf9ln8uz0+Pzj5y7AWhq+ntQ+sVkbyerIVz1
+         94U551Kxu7S/4p7Cj6UTePnJSXF+s6mhPpN/8kIXCdgLmX9vIAqLKoVaBbU1li9WKHvk
+         AuMMNGY1EEuT5VVr8rhDkIJxwDwcYZEVU5GKqIR86/7aTwwWctOeiHWUW4tIZfVTCQdH
+         6y6NfWzUqtuUe+uofKEUu0BUCfOr0RWaF4KH2DWqv/2Yq9JKGIDekmhyWe8vu+rZ69fR
+         g59g==
+X-Gm-Message-State: AOJu0YwSnrCnaQ1NBQbNJZdHstZlx7sKk+jFjQHbu5qmxX2lzhAikwyN
+	ZORp352So6bMLBNiJ02Wi9MxVuHCtjj7j10l1sbeEPobkx4KbBI7bo4+awVkJA==
+X-Gm-Gg: AeBDieuUnjT0pjJB/ronluEqj1QRYZzCl4ksI7wsGInjMob7I5IgQjwxj73zdfUzfX7
+	QWx0Ek0/3jKQ2h4WKOBxP3y+xyGA/9mVadY69jlyTQsOu3vTYD8msOGVaJStWTv4NRNsDWfgmpM
+	oEOah/Ebe2xGw/5BEEK0TH6egaSyvpggNPm50R+1gu1cyGLuY0FsZM8J+wgI9CJFZXhS0WXOPHh
+	Bs0tiEhnpWshB96OIZRq+pgHQfq5ct47nv6rywxUmAU9wzrAaKNsTkzgry07cLmhMhbfhWmotDL
+	Hfl2n3LMCgRqL0PiQQ3gyNM57m3raEXQsxv1cQnxykuh57N2uqtnM0Ryh/C+HPekzaQQFr0dGv5
+	D1E5KDQNXxnXZESjP6ibkaWSGDAJLDAwOzm+mAUhfAA2OzYBoiHJCIwji+dLlTfjrZRIgmv3L4f
+	/wIA5aluQMDkDReHP3dehHKAo/6TwVQhVgASe4xHrrPDZS+7xrwRoWnjvwqwErY9CX6Ek0Sd6wW
+	nKn5Y42z4/yReI=
+X-Received: by 2002:a17:906:f59e:b0:bc6:5f97:8f90 with SMTP id a640c23a62f3a-bcaa9f60b9amr189903266b.3.1778251425147;
+        Fri, 08 May 2026 07:43:45 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,63 +102,219 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 07/26] xen/riscv: implement make_timer_node()
-Date: Fri,  8 May 2026 16:43:09 +0200
-Message-ID: <24f4c2ba7ab00c31b66108f63e6752a3bed2e0f1.1778250616.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 05/26] xen/riscv: introduce guest riscv,isa string
+Date: Fri,  8 May 2026 16:43:07 +0200
+Message-ID: <b2d4f3f7f049837a25bc00bfb1d3da8b984a8b5a.1778250616.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1778250616.git.oleksii.kurochko@gmail.com>
 References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1778251428-28479C48-51C34B81/10/73395122804
+X-purgate-ID: tlsNG-720697/1778251426-80D7F161-4FE5235E/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1561
+X-purgate-size: 6692
 
-Generally, in DT for RISC-V there is a document which describes a timer
-node (riscv,timer.yaml or sifive,clint.yaml), but the Linux timer driver
-is declared with TIMER_OF_DECLARE(riscv_timer, "riscv", ...).
-It matches the CPU node (compatible "riscv"), not the timer node itself.
-It then calls of_find_compatible_node(NULL, NULL, "riscv,timer") only to
-read the optional riscv,timer-cannot-wake-cpu property.
+Introduce generation of the riscv,isa string passed to the guest via the
+Device Tree riscv,isa property.
 
-Since Xen does not care about that property for now, make_timer_node() is
-implemented to return 0, as no timer node needs to be created for RISC-V
-guests.
+Introduce the per-domain isa string and guest isa bitmap, populated
+during domain creation by calling init_guest_isa().
+
+Introduce guest_unsupp to filter out ISA extensions that should not be
+exposed to guests:
+
+- f/d/q/v: FPU and vector context save/restore are not yet implemented
+  for guests.
+- h: Nested virtualisation is not supported.
+- sstc: Xen owns the supervisor timer; guests must use SBI.
+- svade: Xen manages hardware A/D bit updates in stage-2 page tables.
+- svpbmt: Page-based memory types are not yet wired up in stage-2 code.
+
+Drop __initconst for riscv_isa_ext() as it can be used after init stage
+by init_guest_isa().
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v2:
- - Acked-by: Jan Beulich <jbeulich@suse.com>
- - Update the commit message.
+ - s/guest_unsupp_bmp/guest_unsupp.
+ - Drop guest_isa_str.
+ - Provide init_guest_isa() instead of polluting match_isa_ext().
+ - Drop xlen.
+ - Add the comment about guest_unsupp.
+ - Update the way how guest_unsupp is init-ed.
+ - Drop __initconst for riscv_isa_ext[] as it is used in init_guest_isa()
+   which isn't marked as __init as it could be used after init stage.
 ---
 ---
- xen/arch/riscv/domain-build.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ xen/arch/riscv/cpufeature.c             | 59 ++++++++++++++++++++++++-
+ xen/arch/riscv/domain.c                 |  3 ++
+ xen/arch/riscv/include/asm/cpufeature.h |  5 +++
+ xen/arch/riscv/include/asm/domain.h     |  4 ++
+ 4 files changed, 70 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
-index 3063328d96e4..02b293239142 100644
---- a/xen/arch/riscv/domain-build.c
-+++ b/xen/arch/riscv/domain-build.c
-@@ -3,6 +3,7 @@
- #include <xen/fdt-domain-build.h>
- #include <xen/fdt-kernel.h>
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index 92235fdfd5ab..618592e6096a 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -14,6 +14,7 @@
+ #include <xen/errno.h>
  #include <xen/init.h>
-+#include <xen/fdt-kernel.h>
- #include <xen/libfdt/libfdt.h>
- #include <xen/sched.h>
+ #include <xen/lib.h>
++#include <xen/sched.h>
+ #include <xen/sections.h>
  
-@@ -156,3 +157,10 @@ int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
+ #include <asm/cpufeature.h>
+@@ -120,7 +121,7 @@ static int __init dt_get_cpuid_from_node(const struct dt_device_node *cpu,
+  * and strncmp() is used in match_isa_ext() to compare extension names instead
+  * of strncasecmp().
+  */
+-const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
++const struct riscv_isa_ext_data riscv_isa_ext[] = {
+     RISCV_ISA_EXT_DATA(i),
+     RISCV_ISA_EXT_DATA(m),
+     RISCV_ISA_EXT_DATA(a),
+@@ -128,6 +129,7 @@ const struct riscv_isa_ext_data __initconst riscv_isa_ext[] = {
+     RISCV_ISA_EXT_DATA(d),
+     RISCV_ISA_EXT_DATA(q),
+     RISCV_ISA_EXT_DATA(c),
++    RISCV_ISA_EXT_DATA(v),
+     RISCV_ISA_EXT_DATA(h),
+     RISCV_ISA_EXT_DATA(zicntr),
+     RISCV_ISA_EXT_DATA(zicsr),
+@@ -160,6 +162,12 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
+     RISCV_ISA_EXT_DATA(svpbmt),
+ };
  
-     return fdt_end_node(fdt);
- }
++/*
++ * Everything in riscv_isa_ext[] which shouldn't be exposed to guests should
++ * appear here.
++ */
++static __ro_after_init DECLARE_BITMAP(guest_unsupp, RISCV_ISA_EXT_MAX);
 +
-+int __init make_timer_node(const struct kernel_info *kinfo)
+ static bool __init is_lowercase_extension_name(const char *str)
+ {
+     /*
+@@ -480,6 +488,53 @@ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+     return test_bit(id, isa_bitmap);
+ }
+ 
++int init_guest_isa(struct domain *d)
 +{
-+    /* There is no need for timer node for RISC-V. */
++    char *buf = d->arch.guest_isa_str;
++    size_t len = sizeof(d->arch.guest_isa_str);
++
++    bitmap_andnot(d->arch.guest_isa, riscv_isa, guest_unsupp,
++                  RISCV_ISA_EXT_MAX);
++
++#if defined(CONFIG_RISCV_32)
++    if ( snprintf(buf, len, "rv32") >= len )
++        return -ENOBUFS;
++#elif defined(CONFIG_RISCV_64)
++    if ( snprintf(buf, len, "rv64") >= len )
++        return -ENOBUFS;
++#else
++#   error "Unsupported RISC-V bitness"
++#endif
++
++    for ( unsigned int i = 0; i < ARRAY_SIZE(riscv_isa_ext); i++ )
++    {
++        const struct riscv_isa_ext_data *ext = &riscv_isa_ext[i];
++
++        if ( !riscv_isa_extension_available(d->arch.guest_isa, ext->id) )
++            continue;
++
++        if ( ext->id >= RISCV_ISA_EXT_BASE && strlcat(buf, "_", len) >= len )
++            return -ENOBUFS;
++
++        if ( strlcat(buf, ext->name, len) >= len )
++            return -ENOBUFS;
++    }
 +
 +    return 0;
 +}
++
++static void __init init_guest_unsupp(void)
++{
++    set_bit(RISCV_ISA_EXT_f, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_d, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_q, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_v, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_h, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_sstc, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_svade, guest_unsupp);
++    set_bit(RISCV_ISA_EXT_svpbmt, guest_unsupp);
++}
++
+ void __init riscv_fill_hwcap(void)
+ {
+     unsigned int i;
+@@ -527,4 +582,6 @@ void __init riscv_fill_hwcap(void)
+     if ( !all_extns_available )
+         panic("Look why the extensions above are needed in "
+               "https://xenbits.xenproject.org/docs/unstable/misc/riscv/booting.txt\n");
++
++    init_guest_unsupp();
+ }
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index 669dd27d79a3..041aed176f32 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -303,6 +303,9 @@ int arch_domain_create(struct domain *d,
+     if ( is_idle_domain(d) )
+         return 0;
+ 
++    if ( (rc = init_guest_isa(d)) != 0 )
++        goto fail;
++
+     if ( (rc = p2m_init(d, config)) != 0)
+         goto fail;
+ 
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index 0c48d57a03bb..42d13d9dbdbe 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -17,6 +17,8 @@
+  */
+ #define RISCV_ISA_EXT_BASE  26
+ 
++#define RISCV_GUEST_ISA_STR_MAX 256
++
+ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_a,
+     RISCV_ISA_EXT_c,
+@@ -44,7 +46,10 @@ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_MAX
+ };
+ 
++struct domain;
++
+ void riscv_fill_hwcap(void);
++int init_guest_isa(struct domain *d);
+ 
+ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+                                    enum riscv_isa_ext_id id);
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index 6044ce0feee0..664b0b9f9129 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -7,6 +7,7 @@
+ #include <xen/xmalloc.h>
+ #include <public/hvm/params.h>
+ 
++#include <asm/cpufeature.h>
+ #include <asm/guest-layout.h>
+ #include <asm/p2m.h>
+ #include <asm/vtimer.h>
+@@ -94,6 +95,9 @@ struct arch_domain {
+     struct p2m_domain p2m;
+ 
+     struct paging_domain paging;
++
++    DECLARE_BITMAP(guest_isa, RISCV_ISA_EXT_MAX);
++    char guest_isa_str[RISCV_GUEST_ISA_STR_MAX];
+ };
+ 
+ #include <xen/sched.h>
 -- 
 2.54.0
 
