@@ -4,51 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F1F7CD3436
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:39:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1303726.1576975 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9901CD3445
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:43:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1303734.1576993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMMd-00033F-Bc; Fri, 08 May 2026 14:39:39 +0000
+	id 1wLMQZ-0004rz-1E; Fri, 08 May 2026 14:43:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1303726.1576975; Fri, 08 May 2026 14:39:39 +0000
+Received: by outflank-mailman (output) from mailman id 1303734.1576993; Fri, 08 May 2026 14:43:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMMd-000338-8N; Fri, 08 May 2026 14:39:39 +0000
-Received: by outflank-mailman (input) for mailman id 1303726;
- Fri, 08 May 2026 14:39:38 +0000
+	id 1wLMQY-0004rs-Tq; Fri, 08 May 2026 14:43:42 +0000
+Received: by outflank-mailman (input) for mailman id 1303734;
+ Fri, 08 May 2026 14:43:41 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wLMMc-000332-1q
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:39:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wLMQX-0004eg-9J
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:43:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLMMb-003Ice-15
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:39:37 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wLMQV-00Epe9-4T
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:43:40 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 69fdf59b-e002-0a2a0a5209dd-0a2a450acde4-20
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:39:36 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jgross@suse.com>)
- id 69fdf5a8-56b3-0a2a450a0019-c387df83eda0-3
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:39:36 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 6A1DC5C115;
- Fri,  8 May 2026 14:39:36 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 215A5593A7;
- Fri,  8 May 2026 14:39:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id GKQGB6j1/WlcVgAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 08 May 2026 14:39:36 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69fdf689-5cb7-0a2a0a5109dd-0a2a4506c6fc-18
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:40 +0200
+Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 69fdf69c-7371-0a2a45060019-d155da2cd14e-3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:43:40 +0200
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-bc3582acc23so315797566b.3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:43:40 -0700 (PDT)
+Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bcac4942068sm90736166b.62.2026.05.08.07.43.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 May 2026 07:43:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,111 +52,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1778251176; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=qcH0oyDgGShFY8obpKeBe1gSWCv27CYVU+nGbBQx6uk=;
-	b=eIuw8rpP3+bLN054/2BzceWEYq44u78XjU+o/Hk63wuCt6dDM53cF6B9HfXABaLBH2U1xQ
-	p6ltDFfK8+KEsrmabJzOTwdyfB5/COMiL9/p378+C/sLW+lOaj3LjigyBTFzadJe0Vq06w
-	0tPe7/qqbqbmOgDTAWLKAuhLF6d+zvE=
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1778251176; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=qcH0oyDgGShFY8obpKeBe1gSWCv27CYVU+nGbBQx6uk=;
-	b=eIuw8rpP3+bLN054/2BzceWEYq44u78XjU+o/Hk63wuCt6dDM53cF6B9HfXABaLBH2U1xQ
-	p6ltDFfK8+KEsrmabJzOTwdyfB5/COMiL9/p378+C/sLW+lOaj3LjigyBTFzadJe0Vq06w
-	0tPe7/qqbqbmOgDTAWLKAuhLF6d+zvE=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: kevin.brodsky@arm.com,
-	marmarek@invisiblethingslab.com,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH] x86/xen: Tolerate nested XEN_LAZY_MMU entering/leaving
-Date: Fri,  8 May 2026 16:39:33 +0200
-Message-ID: <20260508143933.493013-1-jgross@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778251420; x=1778856220; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3ZMmWO9/I/8K7VzRErw7HfQg64F77t5aimUcSK3Fxfo=;
+        b=HZKLF3BNlv20nh4wH4h5ebWGekK9N6CDpnAgQwEjuVcblZO4ArcEo2iOEdxPjcNRVg
+         R9gvRziEApB1ACoeU88ihhWZ3FTQU6e7+g2+IiL2SDeJrEgPXFmi1JNzskfSkW7D1sw4
+         0IBUgIqQ8tI5xb4jGXK8J3ihtmUcm+tnaZ2VC5g4TG2Mg4EFXoU3AYDffYu6k45+q80B
+         dnFYcIqun42aMS+sCSmyjooILqzyFvQTckLh0gc/jUwv8iCjS8eGd+koTx/M79i0gEmB
+         GcAxW3/BzhzPIKsRmMu+93hVMz6fpJC/j7USAXRXSxD+RqsY3oybJpKOX9VKHsojvmz+
+         v2og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778251420; x=1778856220;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=3ZMmWO9/I/8K7VzRErw7HfQg64F77t5aimUcSK3Fxfo=;
+        b=pCyk3JUsu0oEhgJMXDDQ70CGjF8lqQqYfQulg0/ziDE11pyYT+mDZ3etdWtuoRy0zP
+         3cOEYllIqgIV9t8J+3ZvP9MTi0TtFNqOpQNiOn/hpKtvGGlOp7iK7r+mWguJxsQRsRg7
+         OXoyvRHD9rSSRYc3ao9EkIHSP34oX4LEIiPHj23Pg/ne7CbY0oPHzZSYX0Fp4ZfRjlIU
+         99DUrz5MOHgwT6pyq+ksGA3CPs8/VvwPthN/zhjChC/1bHWeBDJYNIwaosYDeeIauFPz
+         gbHQH7/IF8Osqs5YE5lm2HVfA7ziZM9pkQY0bnv2cE+WenVq6ehVbckoTCB3bzmH7/Im
+         raMg==
+X-Gm-Message-State: AOJu0YyAyPBrVNf/PHKdiQykfqDLLg0eH8GGskGdxk0oNwvw/eqV2LBO
+	VWRw+0vIOlgI7ixPpWGV6kpa5qeppBbaSyqGDz4vwVIRBPRYkYEefvD7ovZm2w==
+X-Gm-Gg: AeBDievOS0+sPHqhOheukB8+FnfG9s3gXNhTBaA1VGjpe3jazAUGEtCTLIVpird8I//
+	0kxfeuKzI7xA6iWiyFQKzCTVNUXjg9XGaxGR3pBQQc+ldGSTjn8zecz7127x9RUvIfmOCT2YtCG
+	K0zPO97+SDhdsMnCaV7nrDHcvMB8sZVueTcZTnLoAGgmioU6i/m4eYYwN7+Zb/Wn2/kGww/B8NJ
+	C0qg2jQvkUantVsU62gTqHGDL1VvTCcDar19FlwB6zUmW9Zh2axxz2SUIEKV5DRYNeo9O/EmH/c
+	gTu8K5M+W3FiNsbW7cvDMTF2DvN9cP52bpxvENadoUOZ7aEqUzHkQx90+OSjG9V4WkhcMEKg4hO
+	I3Cuso5xj12xSHvEIemjpGktZif5rdpV6eL/5xn32Z3SzOshPPyKMFcQ3kS3tWZXAMrfQY/qObg
+	8RJ2wE/lqfcZpefjHCfGmxq68cpFzFsgk4ZoEojHx8NQ02lUQoiNEhLmxCmUvrj2At8Q==
+X-Received: by 2002:a17:906:fd87:b0:bad:f5dd:6740 with SMTP id a640c23a62f3a-bc56aa411e4mr728446366b.3.1778251419579;
+        Fri, 08 May 2026 07:43:39 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v2 01/26] xen: arm: update p2m_set_allocation() prototype
+Date: Fri,  8 May 2026 16:43:03 +0200
+Message-ID: <d0188bacab958c47a7c0ae2a570e2ca1048812c6.1778250616.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <cover.1778250616.git.oleksii.kurochko@gmail.com>
+References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:mid,suse.com:email,imap1.dmz-prg2.suse.org:helo]
-X-purgate-ID: tlsNG-4011c0/1778251176-70F618B7-A88E1767/0/0
-X-purgate-type: clean
-X-purgate-size: 1487
+X-purgate-ID: tlsNG-16d1c6/1778251420-86168D75-213873DA/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 7869
 
-With the support of nested lazy mmu sections it can happen that
-arch_enter_lazy_mmu_mode() is being called twice without a call of
-arch_leave_lazy_mmu_mode() in between, as the lazy_mmu_*() helpers
-are not disabling preemption when checking for nested lazy mmu
-sections.
+p2m_set_allocation() signals preemption redundantly: via a bool *preempted
+out-argument (set to true) and via -ERESTART return code, both at the same
+time. This led to the caller-side ASSERT(preempted == (rc == -ERESTART))
+added solely to document their agreement.
 
-This is a problem when running as a Xen PV guest, as
-xen_enter_lazy_mmu() and xen_leave_lazy_mmu() don't tolerate this
-case.
+Drop the out-argument entirely. The return code alone is sufficient to
+distinguish preemption (-ERESTART) from success (0) or other failures.
+Replace the pointer with a plain bool can_preempt that controls whether
+the preemption check is performed at all, making the previous
+NULL-to-suppress-preemption calling convention explicit and type-safe.
 
-Fix that in xen_enter_lazy_mmu() and xen_leave_lazy_mmu() in order
-not to hurt all other lazy mmu mode users.
+Since p2m_set_allocation() is called by the common dom0less build code,
+move its declaration from the ARM-specific asm/p2m.h to xen/p2m-common.h.
 
-Fixes: 291b3abed657 ("x86/xen: use lazy_mmu_state when context-switching")
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Reported-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- arch/x86/xen/mmu_pv.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+Changes in v2:
+ - new patch
+---
+ xen/arch/arm/include/asm/p2m.h          |  1 -
+ xen/arch/arm/mmu/p2m.c                  | 22 ++++++++--------------
+ xen/arch/riscv/include/asm/paging.h     |  2 +-
+ xen/arch/riscv/p2m.c                    |  7 ++++---
+ xen/arch/riscv/paging.c                 |  7 ++-----
+ xen/common/device-tree/dom0less-build.c |  2 +-
+ xen/include/xen/p2m-common.h            |  2 ++
+ 7 files changed, 18 insertions(+), 25 deletions(-)
 
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index c80d0058efd1..3eee5f84f8a7 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -2145,7 +2145,10 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index 7957dbd96e57..62b37a05f79e 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -232,7 +232,6 @@ void p2m_restore_state(struct vcpu *n);
+ /* Print debugging/statistial info about a domain's p2m */
+ void p2m_dump_info(struct domain *d);
  
- static void xen_enter_lazy_mmu(void)
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted);
+ int p2m_teardown_allocation(struct domain *d);
+ 
+ static inline void p2m_write_lock(struct p2m_domain *p2m)
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 51abf3504fcf..e5c6be7c0890 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -67,10 +67,11 @@ int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
+ 
+ /*
+  * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
++ * Returns 0 for success, -ERESTART if preempted, or a negative error code on
++ * failure.
+  * Call with d->arch.paging.lock held.
+  */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
  {
--	enter_lazy(XEN_LAZY_MMU);
-+	preempt_disable();
-+	if (xen_get_lazy_mode() != XEN_LAZY_MMU)
-+		enter_lazy(XEN_LAZY_MMU);
-+	preempt_enable();
+     struct page_info *pg;
+ 
+@@ -112,11 +113,8 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+             break;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+@@ -125,7 +123,6 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
+ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+ {
+     unsigned long pages = size >> PAGE_SHIFT;
+-    bool preempted = false;
+     int rc;
+ 
+     if ( (size & ~PAGE_MASK) ||          /* Non page-sized request? */
+@@ -133,27 +130,24 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+         return -EINVAL;
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, pages, &preempted);
++    rc = p2m_set_allocation(d, pages, true);
+     spin_unlock(&d->arch.paging.lock);
+ 
+-    ASSERT(preempted == (rc == -ERESTART));
+-
+     return rc;
  }
  
- static void xen_flush_lazy_mmu(void)
-@@ -2182,7 +2185,8 @@ static void xen_leave_lazy_mmu(void)
+ int p2m_teardown_allocation(struct domain *d)
  {
- 	preempt_disable();
- 	xen_mc_flush();
--	leave_lazy(XEN_LAZY_MMU);
-+	if (xen_get_lazy_mode() != XEN_LAZY_NONE)
-+		leave_lazy(XEN_LAZY_MMU);
- 	preempt_enable();
+     int ret = 0;
+-    bool preempted = false;
+ 
+     spin_lock(&d->arch.paging.lock);
+     if ( d->arch.paging.p2m_total_pages != 0 )
+     {
+-        ret = p2m_set_allocation(d, 0, &preempted);
+-        if ( preempted )
++        ret = p2m_set_allocation(d, 0, true);
++        if ( ret == -ERESTART )
+         {
+             spin_unlock(&d->arch.paging.lock);
+-            return -ERESTART;
++            return ret;
+         }
+         ASSERT(d->arch.paging.p2m_total_pages == 0);
+     }
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index e487c89a4ccd..103384723dc5 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -9,7 +9,7 @@ struct page_info;
+ int paging_domain_init(struct domain *d);
+ 
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted);
++                           bool can_preempt);
+ 
+ int paging_ret_to_domheap(struct domain *d, unsigned int nr_pages);
+ int paging_refill_from_domheap(struct domain *d, unsigned int nr_pages);
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 703b9f4d2540..41d6d3d5e699 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -430,15 +430,16 @@ int p2m_init(struct domain *d, const struct xen_domctl_createdomain *config)
+ 
+ /*
+  * Set the pool of pages to the required number of pages.
+- * Returns 0 for success, non-zero for failure.
++ * Returns 0 for success, -ERESTART if preempted, or a negative error code on
++ * failure.
+  * Call with d->arch.paging.lock held.
+  */
+-int p2m_set_allocation(struct domain *d, unsigned long pages, bool *preempted)
++int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc;
+ 
+-    if ( (rc = paging_freelist_adjust(d, pages, preempted)) )
++    if ( (rc = paging_freelist_adjust(d, pages, can_preempt)) )
+         return rc;
+ 
+     /*
+diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+index 76a203edbb0c..35f572689a7c 100644
+--- a/xen/arch/riscv/paging.c
++++ b/xen/arch/riscv/paging.c
+@@ -47,7 +47,7 @@ static int _paging_add_to_freelist(struct domain *d)
  }
  
+ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+-                           bool *preempted)
++                           bool can_preempt)
+ {
+     ASSERT(spin_is_locked(&d->arch.paging.lock));
+ 
+@@ -66,11 +66,8 @@ int paging_freelist_adjust(struct domain *d, unsigned long pages,
+             return rc;
+ 
+         /* Check to see if we need to yield and try again */
+-        if ( preempted && general_preempt_check() )
+-        {
+-            *preempted = true;
++        if ( can_preempt && general_preempt_check() )
+             return -ERESTART;
+-        }
+     }
+ 
+     return 0;
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index 6d6882a34b5a..1058699ab25b 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -747,7 +747,7 @@ static int __init domain_p2m_set_allocation(struct domain *d, uint64_t mem,
+                 domain_p2m_pages(mem, d->max_vcpus);
+ 
+     spin_lock(&d->arch.paging.lock);
+-    rc = p2m_set_allocation(d, p2m_pages, NULL);
++    rc = p2m_set_allocation(d, p2m_pages, false);
+     spin_unlock(&d->arch.paging.lock);
+ 
+     return rc;
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index f0bd9a6b9896..1b44ec8ce36c 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -43,5 +43,7 @@ int __must_check check_get_page_from_gfn(struct domain *d, gfn_t gfn,
+                                          bool readonly, p2m_type_t *p2mt_p,
+                                          struct page_info **page_p);
+ 
++int p2m_set_allocation(struct domain *d, unsigned long pages,
++                       bool can_preempt);
+ 
+ #endif /* _XEN_P2M_COMMON_H */
 -- 
 2.54.0
 
