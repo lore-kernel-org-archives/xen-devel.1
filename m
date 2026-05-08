@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197F2CD37AA
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 05:52:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1303187.1576678 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD2A3CD3436
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 06:11:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1303206.1576696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLE8A-0001qi-00; Fri, 08 May 2026 05:52:10 +0000
+	id 1wLEQc-0005Z0-N4; Fri, 08 May 2026 06:11:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1303187.1576678; Fri, 08 May 2026 05:52:09 +0000
+Received: by outflank-mailman (output) from mailman id 1303206.1576696; Fri, 08 May 2026 06:11:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLE89-0001qa-QW; Fri, 08 May 2026 05:52:09 +0000
-Received: by outflank-mailman (input) for mailman id 1303187;
- Fri, 08 May 2026 05:52:09 +0000
+	id 1wLEQc-0005Yt-KI; Fri, 08 May 2026 06:11:14 +0000
+Received: by outflank-mailman (input) for mailman id 1303206;
+ Fri, 08 May 2026 06:11:13 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wLE88-0001qO-Vp
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 05:52:09 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wLEQb-0005Yn-IJ
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 06:11:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLE87-005pz7-Sk
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 07:52:07 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wLEQa-001eul-GG
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 08:11:12 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 69fd79fe-e002-0a2a0a5209dd-0a2a4506ba88-12
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:52:07 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 69fd7e72-bab6-0a2a0a5309dd-0a2a450399de-42
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 08:11:12 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 69fd7a07-7371-0a2a45060019-d1558035e5aa-3
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:52:07 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-48334ee0aeaso11698255e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 22:52:07 -0700 (PDT)
+ id 69fd7e7f-672d-0a2a45030019-d155dd2da5bc-3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 08:11:11 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-441209fb77eso990530f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 07 May 2026 23:11:11 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e642e2b29sm17617545e9.1.2026.05.07.22.52.06
+ ffacd0b85a97d-4548eb75c29sm1902038f8f.9.2026.05.07.23.11.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 May 2026 22:52:06 -0700 (PDT)
+ Thu, 07 May 2026 23:11:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,61 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1778219527; x=1778824327; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1778220671; x=1778825471; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QiUDegGJK2Q/CSkBpiVME5VeFHxmVrExfgV9xxQPMFo=;
-        b=MVcancLcVb5+GuExsoM5FaertqdRglL5JHAL0UE+A+zcIssAJUebCQQ0vX/m9CuTaA
-         Pb0gKPg/mo3VWNXvKqDBpfh0lKIFZatHFMOtl9xpmdBwiqFUuPEhghGcQ9YQEJxZ75Qn
-         /JV5kan07pUKBjY1puowsrcuiwJrGGlardbqffEkm+tu4bgYH9XhxmVzR6NSG78xVwPP
-         5Kk9Xbjxvq9tcw88ILoU3JONjRIvNWhAvRECCAEFCzTN7G9eYXgAzMH738HDNWIwoDL/
-         L7eE52R3nJb8pt4wT9wbsu7IafbeWR5+6G4iz6lcwzJiGxa6Efw1qeXrgtTLo81NlhJY
-         J9Rw==
+        bh=Arhe0IY7Yg8LUTmLKE0FMC8sOVWLSnJTpAFxjFXGbeI=;
+        b=fDO1pB0afcZqq8PHKE2Gy9y/L2kAT+ZpoTDiO6SmHqbn44n/ScDMayVgSIjTI6Kyd4
+         aErzYgBO4qHqDuf1FFShGHFjNkQJ8atbbDb0rZ6C/6abCMHjHSDjfPr0YWuEPccR8PUt
+         sIg+RnYwBdCYGBmNFydLAgAUlB+kPd0cqOZ60P72Dtf9s8I5XWa9A+/4rCdf1NDN6nJK
+         WXvMZ6rJxNqcjVkcY58n8wHnVug5LGQK3fH2UsjLaz9PiQ5/rkeI5CH0+u529CKMz6pd
+         R/wjNwIYadJbpyQFeLR4aobSg36WiKAOYqXnr37cxS7nFD5fy+2YNV00YRT8QkT9Ha/N
+         Z8bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778219527; x=1778824327;
+        d=1e100.net; s=20251104; t=1778220671; x=1778825471;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QiUDegGJK2Q/CSkBpiVME5VeFHxmVrExfgV9xxQPMFo=;
-        b=KpJu+0/N3EdDrGxqPEsGUX4qaCWIY/wcsk+s8LSabR0JfpSs0OHYp4SyZSJJL/0Gxm
-         rTfq5c328hddZhhoRA8AgjNdIhEXcBB5KtENp/pVIxUcF8okOKhCYn8kWy/pyz1+dvi/
-         bUWGEyqRP71sD3xQztFEmysRZRqd+SrtyKXYbBQ4MmdoZe/lSaYtbTzEvqE/LGhiLE4x
-         sA0uB/t3R8CXe/PYfLn2cWIZT0RFIW9k10sF58Yh8+9TfJjpvtrdJmza+qgbsXOL2L+A
-         /L5c/rYX3vGvopwgV+OmYmeliRQ+Prqk3uK9cnnNuKIGOFrdpi6Lt7Qqwy/R0DOOBCjH
-         elUQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+pM1ohouR93Op1lmp7egIx48Vf8Z6ZZkAdY7FsnasyQ9FxFo6gPauNT/zJ55PKGiLbtmeBKqMZgzk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw+TE4SORGkVxXntUXoDQwI72x15og+S92m/RoZlsrgv/ZyVGou
-	j8nu0hiPywx60MOHyn97W5rwBJygqNMjPyT2siuP4QuPNCcnfAej9mnonrYR2JzXUg==
-X-Gm-Gg: AeBDietheBYQkQMmPDTCj6Ochgbeo44g/e7FSgcUePLWAi2nfuDCClCtCZdUMXvSxt+
-	Vo9RMB+4TJxUCc6IgIDwjkf5N+/jAjsFGGd/u42gvC5ZqJVVGr4RqDfE+UJiaioW++sHuxGZ1B6
-	R9mrAalo2sbACcbWt89J1jnUuJcWsKaTzY4kHSh3upHcNxR47RMfecHx/Z6LI9Dc8yuubhYNjVP
-	PYWuQap20YAdZmZTs9GTAc9l+TPwSo36o5rKrrTeivCIKKLLV2x5pqb1EkuDt8cPx9iJAhbfRWG
-	UtCUgRH95gmR19q/zUG+mrRtvfIttATal7I9RQZXwuKgIMx1VnnXkyjKrIikPr2RDoPzOqoG/Lq
-	JmScGZfGa2svNgZ0gYYVGvsAmHHHRbzbTF9rhvhWIGJQACG5GPLLWXIom4PDOWyR1zmV462yO6Y
-	lt2DI0NLVgLKt/uFfh6jUKL5C136VJSXojFOGnC5fIZL4M8BiAeIJ2WutRsHJ+s870Lrg349VvT
-	HhCtTn5sLrfpkI=
-X-Received: by 2002:a05:600c:1d18:b0:48a:8cb6:88b9 with SMTP id 5b1f17b1804b1-48e51f44621mr169130445e9.22.1778219526625;
-        Thu, 07 May 2026 22:52:06 -0700 (PDT)
-Message-ID: <e9610f70-85b8-44d9-8e13-da26d506d5b7@suse.com>
-Date: Fri, 8 May 2026 07:52:04 +0200
+        bh=Arhe0IY7Yg8LUTmLKE0FMC8sOVWLSnJTpAFxjFXGbeI=;
+        b=dhcN/QdTYIKH7Gz9zSiKPJxtbidCAn0PcBs1OQcPL5NJe9eImJB3bJsBqpaR59LTH5
+         S8Q9xNGD283gWB72WIhA/tY0BdJju8OsBdjl0z/lDANZchnmDTB9RHBYUC7OgeNcLfII
+         wVoZT8Twkex1twuYw67Z8GAXnjDqeHF36Xo13STDaJRK+woMpclvebBs5CGMw+ccA+4H
+         BveRF+3CFDQSYlespthWa5d2PkFPg5q1TNdDmxmoKJdGuJ9A+gzjAJqp1zMcrqFnZkrl
+         u/rqcpvZjZUrZchMBwAh8a07DSrIFsUKiiV2w104WPyUWdc4yjmBttuKqC18WRnWmN6g
+         alsg==
+X-Gm-Message-State: AOJu0YxkuiCoWlYd9uBT3GvgqIGNHayggEtkHUKq0rYQ8rNqzBdJBmYs
+	6Eaj1KY0l4wQqJof8dpBFjJtzd7Mw6SDQ+jwFjixzZw5zkcmPmqytadUnzDAzmcUte4mnAU0gQF
+	ku9U=
+X-Gm-Gg: Acq92OE00bsCdXr+d5+z/uujHphyshvmVzSvojV7dJ1nEuSJ0M4c9osYRpp0l8HuIxL
+	cd7u+SUoy1jgDE8CmN8MlB8JgO534p019Rr/EAxCcvUjzThugxpU6VXrmd5abiLeeJS7aWB8BVl
+	D36/3bWxSHAWLf2wjvIS6umo3MpsCo/UfqKLB4WQ7BtR7tTmqCqmCXEKeJMHwS52JGaXBUQfBRA
+	m4/TbJyl0I+8fOrz6gSDDeTWKzEC5nRenxiNEfjHuLK9EM8vRqbSL+C1ZJyrULdEiwEWLgzjz4j
+	a1HaRsWl6QX1lRixkgFur0DBizjWAy9x4PJGiuoj5HnWD3piNJ6dNUBjA2ld/UVuDQ8204bGyS5
+	+R9P479efef2YpFVslMEHZWLRKACc1saNPPp4/JUSdkCcvazgusb7WEeav3n4N08iHFk3FaLpCm
+	ltRiS4yfUAqy1TzIo1TSJrz5ttU9i7I/pwcbxx316xgG2fduwx0bkDAgN4NfZTFJB1AWXJQzMhg
+	dLG0TcqyaslLnabo3M+4IqpWg==
+X-Received: by 2002:a05:6000:ec7:b0:452:f380:5508 with SMTP id ffacd0b85a97d-452f38056f9mr6299278f8f.0.1778220671255;
+        Thu, 07 May 2026 23:11:11 -0700 (PDT)
+Message-ID: <84e74842-9a2e-42ce-9ec9-2892156353b1@suse.com>
+Date: Fri, 8 May 2026 08:11:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/7] vpci: add SR-IOV support for PVH Dom0
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Mykyta Poturai <Mykyta_Poturai@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>
-References: <cover.1775742115.git.mykyta_poturai@epam.com>
- <a0abd984989237d2f36e1628db577fb25af1cdbe.1775742115.git.mykyta_poturai@epam.com>
- <5efddecc-3665-4a53-9eaa-b117370cc0e4@suse.com>
- <5168207f-33ed-4fc4-918e-6c3b454b0efa@epam.com>
- <efb254c2-f52a-408d-b225-e4e03935d05e@suse.com>
- <d0916f22-b5c0-4c93-935c-4cbe17e626d4@epam.com>
- <e5844c28-aa68-4bf6-8287-a4ceeda3a1d2@suse.com> <878q9vt0lg.fsf@epam.com>
+Subject: Re: [PATCH] CI: collect certain intermediate files as artifacts
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <6d9345e7-7ad9-48f4-8447-3a955305430a@suse.com>
+ <alpine.DEB.2.22.394.2605061748080.1744448@ubuntu-linux-20-04-desktop>
+ <alpine.DEB.2.22.394.2605061753050.1744448@ubuntu-linux-20-04-desktop>
+ <540ef3bd-6fc6-4cf1-a1fe-3def9cfcc114@suse.com>
+ <alpine.DEB.2.22.394.2605071441490.1779943@ubuntu-linux-20-04-desktop>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,85 +130,83 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <878q9vt0lg.fsf@epam.com>
+In-Reply-To: <alpine.DEB.2.22.394.2605071441490.1779943@ubuntu-linux-20-04-desktop>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1778219527-85B6DD75-5E4E99F6/0/0
+X-purgate-ID: tlsNG-33051d/1778220671-3A965938-79FB9B79/0/0
 X-purgate-type: clean
-X-purgate-size: 3575
+X-purgate-size: 3429
 
-On 07.05.2026 22:40, Volodymyr Babchuk wrote:
-> Jan Beulich <jbeulich@suse.com> writes:
->> On 06.05.2026 11:39, Mykyta Poturai wrote:
->>> On 5/4/26 08:37, Jan Beulich wrote:
->>>> On 23.04.2026 12:12, Mykyta Poturai wrote:
->>>>> On 4/21/26 17:43, Jan Beulich wrote:
->>>>>> On 09.04.2026 16:01, Mykyta Poturai wrote:
->>>>>>> From: Stewart Hildebrand <stewart.hildebrand@amd.com>
->>>>>>>
->>>>>>> This code is expected to only be used by privileged domains,
->>>>>>> unprivileged domains should not get access to the SR-IOV capability.
->>>>>>>
->>>>>>> Implement RW handlers for PCI_SRIOV_CTRL register to dynamically
->>>>>>> map/unmap VF BARS. Recalculate BAR sizes before mapping VFs to account
->>>>>>> for possible changes in the system page size register. Also force VFs to
->>>>>>> always use emulated reads for command register, this is needed to
->>>>>>> prevent some drivers accidentally unmapping BARs.
->>>>>>
->>>>>> This apparently refers to the change to vpci_init_header(). Writes are
->>>>>> already intercepted. How would a read lead to accidental BAR unmap? Even
->>>>>> for writes I don't see how a VF driver could accidentally unmap BARs, as
->>>>>> the memory decode bit there is hardwired to 0.
->>>>>>
->>>>>>> Discovery of VFs is
->>>>>>> done by Dom0, which must register them with Xen.
->>>>>>
->>>>>> If we intercept control register writes, why would we still require
->>>>>> Dom0 to report the VFs that appear?
->>>>>>
+On 07.05.2026 23:44, Stefano Stabellini wrote:
+> On Thu, 7 May 2026, Jan Beulich wrote:
+>> On 07.05.2026 02:54, Stefano Stabellini wrote:
+>>> On Wed, 6 May 2026, Stefano Stabellini wrote:
+>>>> On Wed, 6 May 2026, Jan Beulich wrote:
+>>>>> When one of the linking passes fails, additional intermediate files are
+>>>>> still in place. Having them available for analysis of the underlying
+>>>>> problem can be pretty helpful. Collect some into a new intermediates/
+>>>>> directory. (Nothing new will be collected if linking succeeds.)
 >>>>>
->>>>> Sorry, I don't understand this question. You specifically requested this
->>>>> to be done this way in V2. Quoting your reply from V2 below.
+>>>>> While there also make sure xen-syms is collected (into binaries/). This
+>>>>> is rather more useful for analysis of possible problems than its stripped
+>>>>> counterpart.
 >>>>>
->>>>>   > Aren't you effectively busy-waiting for these 100ms, by simply
->>>>> returning "true"
->>>>>   > from vpci_process_pending() until the time has passed? This imo is a
->>>>> no-go. You
->>>>>   > want to set a timer and put the vCPU to sleep, to wake it up again
->>>>> when the
->>>>>   > timer has expired. That'll then eliminate the need for the
->>>>> not-so-nice patch 4.
->>>>>
->>>>>   > Question is whether we need to actually go this far (right away). I
->>>>> expect you
->>>>>   > don't mean to hand PFs to DomU-s. As long as we keep them in the hardware
->>>>>   > domain, can't we trust it to set things up correctly, just like we
->>>>> trust it in
->>>>>   > a number of other aspects?
+>>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>>> ---
+>>>>> As the issue this is meant to help with didn't re-occur with this in
+>>>>> place, the new logic wasn't really tested yet.
 >>>>
->>>> How's any of this related to the question I raised here, or your reply
->>>> thereto? If we intercept PCI_SRIOV_CTRL, we know when VFs are created.
->>>> Why still demand Dom0 to report them then?
->>>>
->>>
->>> The spec states that VFs can take up to 100ms after the VF_ENABLE bit is 
->>> set to become alive. We discussed in the V2 that it is not acceptable to 
->>> do a required 100ms wait in Xen while blocking a domain. And not doing 
->>> that blocking would require some mechanism to only allow a domain to run 
->>> for precisely 99(or more?)ms. You yourself suggested that we can trust 
->>> the hardware domain with registering VFs if we already trust it with 
->>> other PCI-related stuff. Did you change your mind, or am I completely 
->>> misunderstanding this question?
+>>>> It looks OK but please provide a link to a successful pipeline
 >>
->> No, I still think that we can trust hwdom enough. Nevertheless we should
->> aim at being independent of it where possible. And I seem to recall that
->> I had also outlined an approach how to avoid spin-waiting for 100ms in
->> the hypervisor.
+>> Well, I had it in use in
+>> https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2503967215
+>> but does that count, when the issue the change is for didn't really occur?
+>> For now I can't test the additions without having a way to trigger that
+>> symbol table issue (or any other problem at one of the linking stages).
+>> Short of artificially breaking things, that is.
 > 
-> I want to clarify: you are telling that Xen should not wait for hwdom to
-> report VFs and instead create them by itself. Is this correct?
+> Please break it on purpose. Just push to a temporary branch.
+> 
+> 
+>>>> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+>>
+>> Thanks, but the above wants clarifying first, and the below suggests you
+>> actually meant to take back the R-b.
+>>
+>>> Actually, I see that the build script is run with bash -ex so I wonder
+>>> if collect_xen_artefacts would even run if make fails. I think we need: 
+>>>
+>>> trap collect_xen_artefacts EXIT
+>>
+>> I don't feel comfortable making such a change. Furthermore it's unrelated,
+>> as it would mean that on other build failures successfully created final
+>> binaries wouldn't be collected either (after all on x86 it may be only one
+>> of the two links that failed). Plus then it would likely want doing
+>> differently, by making the EXIT hook invoke a new
+>> collect_xen_intermediates(), leaving collect_xen_artefacts() unaltered
+>> (except for the xen-syms addition there)?
+> 
+> "trap collect_xen_artefacts EXIT" was just a quick suggestion to explain
+> the type of change that would be needed to make this work, because as I
+> understand it, it does not work now.
+> 
+> From your comment I don't understand if you think that the patch as is
+> would work as intended or you agree with my comment that it would not
+> work.
 
-If that's technically possible, yes.
+Given the -e passed to bash, I don't expect it to work as is. However, I
+question this behavior. Exiting on error may be okay for any of the
+preparatory commands, but exiting on failure of make feels dubious [1].
+Hence I'm unsure which way to deal with that aspect (i.e. I'd prefer to
+latch the main make's status, collect artifacts, and then exit the
+script with make's status).
+
+Somewhat related: Why is it that collect_xen_artefacts is invoked three
+times, rather than just once at the very bottom of the script? At which
+point it wouldn't even need to be a function.
 
 Jan
+
+[1] E.g. a failed tools build may also be easier to analyze if the
+already built components (libraries in particular) were collected.
 
