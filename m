@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 357C6CD37AD
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:44:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1303781.1577134 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 275E1CD37A7
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2026 14:44:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1303793.1577147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMQz-0001Zs-7v; Fri, 08 May 2026 14:44:09 +0000
+	id 1wLMR2-0002Ie-NL; Fri, 08 May 2026 14:44:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1303781.1577134; Fri, 08 May 2026 14:44:08 +0000
+Received: by outflank-mailman (output) from mailman id 1303793.1577147; Fri, 08 May 2026 14:44:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLMQy-0001V9-49; Fri, 08 May 2026 14:44:08 +0000
-Received: by outflank-mailman (input) for mailman id 1303781;
- Fri, 08 May 2026 14:44:05 +0000
+	id 1wLMR2-0002CY-0e; Fri, 08 May 2026 14:44:12 +0000
+Received: by outflank-mailman (input) for mailman id 1303793;
+ Fri, 08 May 2026 14:44:08 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wLMQv-0000o2-0b
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:44:05 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wLMQx-0001ON-PM
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 14:44:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLMQs-00EphB-Rk
- for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:44:04 +0200
+ id 1wLMQx-005krU-5P
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2026 16:44:07 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fdf6a1-e002-0a2a0a5209dd-0a2a4507ac04-38
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:44:04 +0200
-Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
+ id 69fdf6b7-bab6-0a2a0a5309dd-0a2a4507e0c2-0
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:44:07 +0200
+Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 69fdf6b4-229c-0a2a45070019-d155da2cd5a5-3
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:44:04 +0200
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-b9358dd7f79so346800766b.1
- for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:44:04 -0700 (PDT)
+ id 69fdf6b7-229c-0a2a45070019-d155da2fbd41-3
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 16:44:07 +0200
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-bc1f0f48351so335363166b.1
+ for <xen-devel@lists.xenproject.org>; Fri, 08 May 2026 07:44:07 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bcac4942068sm90736166b.62.2026.05.08.07.44.02
+ a640c23a62f3a-bcac4942068sm90736166b.62.2026.05.08.07.44.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 07:44:03 -0700 (PDT)
+ Fri, 08 May 2026 07:44:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,125 +54,131 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778251444; x=1778856244; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1778251446; x=1778856246; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nHhk3cMIRsy4K9vYVYjAVZnf9kJw2uzZP67LAV96DoQ=;
-        b=sYR1yjTRf5W3Qqp8qwoaYeEV8uEk2A5IW8z2EHg5pCOMaRP/dvPS7O8C3GWWrcSX4F
-         LvYblAh6LN4Gvmtx2VVhMzOSOP1Myrx5lgibRsT+DPMUATEfP58Lfey6cRtXroek1exS
-         2t4wuXNRNvt2xMA+VXvVjMG/B0lDyHSbPf5NCVBO3S87izFfx4HGduX4zVIvcbBWI/Hn
-         tHe2Voy/4hjG3T/WEqhOQ5A3S1hBecL9VcpZTyZjel/mAtDohrYTjOZPLx8JAEdCpALW
-         G8sYCVZNkUfm9q/7Q5ZNkCCv0ECI1snDbVvSa+psdlothe2YqQZpQEPib1vVRgwXi3ZZ
-         5deQ==
+        bh=+FxagSDdgrsLo5AXSdCU3JK7SOuU6ZhFjOmJK7bJpIQ=;
+        b=Atxru7vTqxSEynVdkYkJYvhIcriXjIBzStCSnxcuF0gvfnJKoc8YNxufbr9ad4VZum
+         6YIvNiXlVfFxpYnsEZXP5LL9vb++BzKRf1nDNMsczXqwyMxkUmBU0bfr8WexYtq+JMy5
+         PwYXWOfKJnnWEYpAKczCk9snAIwCiVIlS0wvkSMg9NxeONaJncYNWmWdMB1vYzQyCRYf
+         ilouPAuX7b+/nZ44QoCXhH7xnhaK1RnGdOfrgs3K3WQLfceOUQ5rkaRZUYq74uCZ/dWf
+         nTGxvt3irAQcufQjacuEXbcN8amXXVqTtta76OMlU9JeMMw8sS3Xqd8JbunUj0ZCC7Ut
+         KfiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778251444; x=1778856244;
+        d=1e100.net; s=20251104; t=1778251446; x=1778856246;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=nHhk3cMIRsy4K9vYVYjAVZnf9kJw2uzZP67LAV96DoQ=;
-        b=VZdMPT95AftAJ07chnRB13yRGjF6+M7aipzlHPMbEqtjGne0FUdHtyCQkuPQry4sUJ
-         JzaZiKlFILCeHDFllfnddivCn2qkRS8+RhUWGr7DdyIRW6poV9MUFVLZRI313FajUkxQ
-         s8CFO0Q4RllEw/SMWsTx9ym/8AXTej2j2MXIFgm8caVW/sOhcGersvoVEU4BVlGzgdMn
-         O62h+DleO98SV8ypso+s+TqgGVGPclwnidR2LbOoJdHo8jEtuSV6tYhJjKCY5W0e1bhp
-         EWuoecocWJesusHLRKzs1/t1TKnbJibkQ/j9kYgjYAOyXHCp8JWjkMrRR0lHy1xwUFEv
-         MUNA==
-X-Gm-Message-State: AOJu0YyGRXZzfvSLGlqel7RTOqzPb++TU5cRy2NnwRx/iexvnsMFxsob
-	QQjYTr9XsjriCjzwBgrlH+Aj8DUIRVD/5NnavhWh8BkayBP3DLp73t+gvMvCog==
-X-Gm-Gg: AeBDieuR1iiy4C1M7lf+bNhpfnhZa2t8SD2rlTvGvn3t8UlO5EEIbyG7u8pciQm2plt
-	keN/HNcoy2llTSfXy3hZR03FO1G3NtssqZb3sezXcltdEflW2MFb0xqxdsSYH9cSxLrLzKRjbfZ
-	4jmSqkE9dqnAhJSgMc/GuGmL8VysOrICaQuooRm7n5fQ1/4XQV16uGLwtRXyl/XDbUK25wwXbsa
-	OTZH/iMoSSo1qPyQbuOb8EricoviBPWgAl37xLM9TBNCNrrot5mvFqsBl6Rwc4n5YUUZGToWuoI
-	RrqL6tEKroGK4yqeGzPrTbn/7NDRO07kJUKN+eF+E9dmOcQjqUzS0vY8U329wjiXfq0CiKP6yiY
-	QkDGd4fNoULYzSJKXgQxUkC6g+YmgZyuR4mNGZlz8+2vJk1pUu+4B6SzrU2P1AFiNf8EpqByL0a
-	UXvnUBaDob+LUIKJu8dkVpQKOwmEeAAPedvBIQ/uuqAj4qhr8PapP7E3fYRC0gfaLEMw==
-X-Received: by 2002:a17:907:7b96:b0:b9d:6cef:95fc with SMTP id a640c23a62f3a-bc56dd16fb0mr899141466b.35.1778251443460;
-        Fri, 08 May 2026 07:44:03 -0700 (PDT)
+        bh=+FxagSDdgrsLo5AXSdCU3JK7SOuU6ZhFjOmJK7bJpIQ=;
+        b=AsWiLvD0MOYnLHbL7g3cMeicxila+XZ7yUZHWXeSIC2SgNJi88epo14CNFVkLPdFV0
+         uDcXVjP+xZKMY3Lw5SQdYKeyStw18BhSU7lgox9ZLGf5MZHUFWDZ1Nk4YolfRwrQGdME
+         E9ygYSbTmSsymnIc1cSK+JVIhHdHjQV/1ZI8vSI6lYhj0+A5SGSqZf6yODbTzsfpsFWD
+         2NDfU9eVKBAdTmoRfBt/CxoyG3Y5isQLZQqXzzObHL3Oa15WzeSt82pJqOOaCupCznOZ
+         xwdbB6HMOeGZhnvZNTDYetT8VJtlUO1FJjc9EFqTzLU4HH7tNlL4NTLZnReyuoLBfV8/
+         F4Xg==
+X-Gm-Message-State: AOJu0YzyixuTw/OFIEt+PM8WJ8MR69MuphtEfrZjGe/z4Fm6lPryMH8R
+	rHv8IlN080NLw+8szz/JQIXfNQOLA9v4IzqQfFh2qJHmtJ8C/6lInBDbIACvaw==
+X-Gm-Gg: Acq92OE8tHbzAhNnl+WqMbO0HyrVm5n2NFNXYkS8mQnJ9BUOEXpXhjuv9XI59sr+sK0
+	MJCZ5n5agbRR9GnSE9MDYRUl75qboOwuaeIEWXq4mm74jj+lVHLXk5jaBlHb8A0caalZJwrGSC6
+	is7yQ5etGsHZuLyYyAltxfNDS6Ak0AfrqIaGtE8MIonTX25fQg1BjQlhLFo56Lpj1ifC7BqEQBH
+	y+1H2+/52TA/AoY8jRA+znKCBJYKTNsEAOtySoMMJh7JxNqI+Uf7tM+fAzFyU5y8K9L5TRWXr5D
+	/RbUVEHzZwTbiqbxW6Eo8FfRmO5A541d6orp4qCp8sZd++ZJWbaezdcYNsj101XVV0Lyu9zYa5j
+	RSbetNUQZfe04j8pbZBP+UWoZ0vGJOlJq7qGFAQV2rdq621Gdd/AcwlQtEzIwM2n3N9HtRcmmFp
+	GMTENGnFwYT3mF+K2PlS7HnA/i2SJt8QI/ztQJZtMbT5ohciPzilOUSIBxajuNVyykyQ==
+X-Received: by 2002:a17:907:709:b0:bb7:beb9:b6d5 with SMTP id a640c23a62f3a-bc56da16349mr853129766b.39.1778251446224;
+        Fri, 08 May 2026 07:44:06 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 18/26] xen: move declaration of map_device_irqs_to_domain() to common header
-Date: Fri,  8 May 2026 16:43:20 +0200
-Message-ID: <2c0099a788abedfb0d6a8041203d93bb745e6bbe.1778250616.git.oleksii.kurochko@gmail.com>
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 20/26] xen/riscv: add missing APLIC register offsets, masks to asm/aplic.h.
+Date: Fri,  8 May 2026 16:43:22 +0200
+Message-ID: <736349477470f316da7020c4c1c7e92e37470d31.1778250616.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1778250616.git.oleksii.kurochko@gmail.com>
 References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1778251444-0A971C48-374D17EB/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1778251447-28678C48-FCBD3EF2/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2159
+X-purgate-size: 2205
 
-As map_device_irqs_to_domain() is used unconditionally by common part of
-dom0less code it is moved to common header.
+These definitions are required for correct decoding of APLIC MMIO
+accesses and target configuration, and will be used by both the
+physical and virtual APLIC implementations.
 
-fdt-domain-build.h is chosen as map_device_irqs_to_domain() could be
-also called indirectly in Arm's DOM0-related code.
+No functional change is intended by this patch; it only centralises
+hardware definitions that were previously missing.
 
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in v2:
- - New patch.
----
- xen/arch/arm/include/asm/setup.h   |  3 ---
- xen/include/xen/fdt-domain-build.h | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 3 deletions(-)
+ xen/arch/riscv/include/asm/aplic.h | 35 ++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 0d29b46ea52b..0adfa4993a8f 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -53,9 +53,6 @@ void init_traps(void);
- int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
-                   struct rangeset *iomem_ranges, struct rangeset *irq_ranges);
+diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+index b42b159496b8..e418fc53433b 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
++++ b/xen/arch/riscv/include/asm/aplic.h
+@@ -15,6 +15,11 @@
  
--int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
--                              bool need_mapping, struct rangeset *irq_ranges);
--
- int map_irq_to_domain(struct domain *d, unsigned int irq,
-                       bool need_mapping, const char *devname);
+ #include <asm/imsic.h>
  
-diff --git a/xen/include/xen/fdt-domain-build.h b/xen/include/xen/fdt-domain-build.h
-index 671486c1c837..8612e98dfda5 100644
---- a/xen/include/xen/fdt-domain-build.h
-+++ b/xen/include/xen/fdt-domain-build.h
-@@ -12,6 +12,7 @@
- 
- struct domain;
- struct page_info;
-+struct rangeset;
- struct membanks;
- 
- typedef bool (*alloc_domheap_mem_cb)(struct domain *d, struct page_info *pg,
-@@ -79,6 +80,18 @@ static inline void set_domain_type(struct domain *d, const struct kernel_info *k
- #endif
- }
- 
-+/*
-+ * Retrieves the interrupts configuration from a device tree node and maps
-+ * those interrupts to the target domain.
-+ *
-+ * Returns:
-+ *   < 0 error
-+ *   0   success
-+ */
-+int map_device_irqs_to_domain(struct domain *d, struct dt_device_node *dev,
-+                              bool need_mapping,
-+                              struct rangeset *irq_ranges);
++#define APLIC_REG_OFFSET_MASK   0x3fff
++#define APLIC_TARGET_IPRIO_MASK 0xff
++#define APLIC_TARGET_GUEST_IDX_SHIFT 12
++#define APLIC_TARGET_EIID_MASK  0x7ff
 +
- #endif /* __XEN_FDT_DOMAIN_BUILD_H__ */
+ #define APLIC_DOMAINCFG_RO80    (0x80U << 24)
+ #define APLIC_DOMAINCFG_IE      BIT(8, U)
+ #define APLIC_DOMAINCFG_DM      BIT(2, U)
+@@ -26,6 +31,36 @@
+ #define APLIC_SOURCECFG_SM_LEVEL_HIGH   0x6
+ #define APLIC_SOURCECFG_SM_LEVEL_LOW    0x7
  
- /*
++#define APLIC_DOMAINCFG         0x0000
++#define APLIC_SOURCECFG_BASE    0x0004
++#define APLIC_SOURCECFG_LAST    0x0ffc
++
++#define APLIC_SMSICFGADDR       0x1bc8
++#define APLIC_SMSICFGADDRH      0x1bcc
++
++#define APLIC_SETIP_BASE        0x1c00
++#define APLIC_SETIP_LAST        0x1c7c
++#define APLIC_SETIPNUM          0x1cdc
++
++#define APLIC_CLRIP_BASE        0x1d00
++#define APLIC_CLRIP_LAST        0x1d7c
++#define APLIC_CLRIPNUM          0x1ddc
++
++#define APLIC_SETIE_BASE        0x1e00
++#define APLIC_SETIE_LAST        0x1e7c
++#define APLIC_SETIENUM          0x1edc
++
++#define APLIC_CLRIE_BASE        0x1f00
++#define APLIC_CLRIE_LAST        0x1f7c
++#define APLIC_CLRIENUM          0x1fdc
++
++#define APLIC_SETIPNUM_LE       0x2000
++
++#define APLIC_GENMSI            0x3000
++
++#define APLIC_TARGET_BASE       0x3004
++#define APLIC_TARGET_LAST       0x3ffc
++
+ #define APLIC_TARGET_HART_IDX_SHIFT 18
+ 
+ #define APLIC_IDC_SIZE          32
 -- 
 2.54.0
 
