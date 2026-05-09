@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8115BCD37B9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00F2CD37BB
 	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 10:48:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1304600.1577506 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1304601.1577515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfEP-0001ay-Uo; Sat, 09 May 2026 10:48:25 +0000
+	id 1wLfEQ-0001fu-DX; Sat, 09 May 2026 10:48:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1304600.1577506; Sat, 09 May 2026 10:48:25 +0000
+Received: by outflank-mailman (output) from mailman id 1304601.1577515; Sat, 09 May 2026 10:48:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfEP-0001ap-Pr; Sat, 09 May 2026 10:48:25 +0000
-Received: by outflank-mailman (input) for mailman id 1304600;
+	id 1wLfEQ-0001ez-7j; Sat, 09 May 2026 10:48:26 +0000
+Received: by outflank-mailman (input) for mailman id 1304601;
  Sat, 09 May 2026 10:48:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfEN-0001aT-OQ
+ (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfEN-0001aS-Ej
  for xen-devel@lists.xenproject.org; Sat, 09 May 2026 10:48:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLfEN-0010Ja-5Y
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:23 +0200
+ id 1wLfEM-0010Ja-SC
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:22 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10a2-e002-0a2a0a5209dd-0a2a4504db1e-46
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:23 +0200
+ id 69ff10a2-e002-0a2a0a5209dd-0a2a4504db1e-44
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:22 +0200
 Received: from [49.212.243.89] (helo=www3579.sakura.ne.jp)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10f4-1dec-0a2a45040019-31d4f359d609-3
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:22 +0200
+ id 69ff10f3-1dec-0a2a45040019-31d4f359d5f0-3
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:21 +0200
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2R090834
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2K090834
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 9 May 2026 19:48:03 +0900 (JST)
+ Sat, 9 May 2026 19:48:01 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,23 +52,23 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=rs20250326 header.d=rsg.ci.i.u-tokyo.ac.jp header.i="@rsg.ci.i.u-tokyo.ac.jp"
-DKIM-Signature: a=rsa-sha256; bh=1HZL/g+SoS2O30ERYe2Yb6nxo7jFOLr4qDArV1Di8vs=;
+DKIM-Signature: a=rsa-sha256; bh=+9TsdwOjpr1iHxskLt3f2EYt5zfwd9os5E2Yt8jChVM=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Message-Id:To:Subject:Date;
-        s=rs20250326; t=1778323683; v=1;
-        b=t78Qg2FX6fQPQYjv6ccpjNB5PHM57Z7vH/sFNvFVepBntRbIzBYVxDoFA4Z8zcUH
-         yNwbFuM/ho+hh5SZ7tf+Lkfd6Wii0FvKwt2Neo7Zxyyjj0CPtZ4hhs+44YPVNLLd
-         H36Sm6ApZio0GZOtvJjE7gfl/iPNr1pEm9G79xaqieF17GWnxd4PNKVHVkqEn2ls
-         /0VUSq1OHHAEnBbOUVdWr/eFNLlH0fNvZTrUrycauuM0c2twgV+IGere0olLlQui
-         J1WlwuqN0kKbylZVRId1EEn/7T+bo86HLmzUhdvkZ04CYAklhxjCBTPvbnydSqGn
-         /+uvgM+9RWPYf4U/G5z4Iw==
+        s=rs20250326; t=1778323681; v=1;
+        b=aLv1AfwGALDvOFPckAZuQsHV3Iq6x1BBqVwrJH00u/XyCobZnIeo+UuTjIee/uF1
+         CE7iaauZdwme0etKlR5JtF6nC0R4K2QjXjLnqSFPtJWk2ZWtRkDDChsSXeBDsQYL
+         t4cz59uBHpJkYTCKhAXYsXzKJcJw1fxZKr9JE5pnHcjQV/zCZWpQq4uz5NqOuYUA
+         6z35XYQLT0Y79u8LPa5ntwP90qqvy4sTBUAfjBYPNVktzrWr3HocC6rjxSB+UTXf
+         dAYGRlX4aivYRczJu9IfluABueOT/ha6MU3Piq4vdmWISSPc6JXVQqkGpIhsq0Ym
+         sxPNGql4PziyvN6QUjaK9A==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Sat, 09 May 2026 19:34:38 +0900
-Subject: [PATCH RFC 26/28] qemu-keymap: Use Linux key codes
+Date: Sat, 09 May 2026 19:34:31 +0900
+Subject: [PATCH RFC 19/28] ui/input-barrier: Use Linux key codes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260509-input-v1-26-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260509-input-v1-19-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -88,18 +88,18 @@ Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
         =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-16047
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4832;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3193;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=gcrDwacqS5bkEtnqJY5QTRr0nAfP9KdzJWUdu+r+4i4=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gdv2pyc8enzc0iTzyvf7mQVVX9WD1Rq6ixadzH/JV
- yrMcK6po5SFQYyLQVZMkSWlaDe3RnTtp8KE+BaYOaxMIEMYuDgFYCJC+xn+x7yYeKUtmfn115RK
- 3xvJgtvLP+5/9FLHS22im/b1xpj4EIb/gfX6z9rXXG/80tV+1W2F992I945mHGvOMaadZLTVPBL
- LDwA=
+ bh=c6O0syJR1NIU9Ef/YUHm+OV3aKIWUGDzhmEGlDmaM/E=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gete29q+nqlp3CUa0eKVzCXTcqzHpGl5rly6/9OtT
+ k8dj+7pKGVhEONikBVTZEkp2s2tEV37qTAhvgVmDisTyBAGLk4BmMiLBYwM7x9FPytacndF5S3l
+ 7K2H5K7nWFySMXwgGDir9kdN9TrZDEaGJ1VfTL5p89oVhZ4UyOF8ofTxs8amlCAF+a3TbXacLtj
+ BBAA=
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
-X-purgate-ID: tlsNG-ebf023/1778323703-42B633FF-F2E52775/0/0
+X-purgate-ID: tlsNG-ebf023/1778323702-42D643FF-654C105C/0/0
 X-purgate-type: clean
-X-purgate-size: 4834
+X-purgate-size: 3195
 
 QemuInputEvent now stores Linux key codes for key events. Use those
 codes directly instead of translating between internal key code
@@ -107,123 +107,73 @@ representations.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- qemu-keymap.c | 41 ++++++++++++++++++++---------------------
- 1 file changed, 20 insertions(+), 21 deletions(-)
+ ui/input-barrier.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/qemu-keymap.c b/qemu-keymap.c
-index d4dccf456ef3..d63b6be8ce32 100644
---- a/qemu-keymap.c
-+++ b/qemu-keymap.c
-@@ -11,6 +11,7 @@
-  */
- #include "qemu/osdep.h"
- #include "qemu/notify.h"
-+#include "standard-headers/linux/input-event-codes.h"
- #include "ui/input.h"
+diff --git a/ui/input-barrier.c b/ui/input-barrier.c
+index 0a2198ca5003..eb7f0b952d51 100644
+--- a/ui/input-barrier.c
++++ b/ui/input-barrier.c
+@@ -84,11 +84,11 @@ static const char *cmd_names[] = {
  
- #include <xkbcommon/xkbcommon.h>
-@@ -32,19 +33,17 @@ static FILE *outfile;
+ static kbd_layout_t *kbd_layout;
  
- /* ------------------------------------------------------------------------ */
- 
--static uint32_t qcode_to_number(uint32_t qcode)
-+static uint32_t linux_to_number(uint32_t lnx)
+-static int input_barrier_to_qcode(uint16_t keyid, uint16_t keycode)
++static int input_barrier_to_linux(uint16_t keyid, uint16_t keycode)
  {
--    KeyValue keyvalue;
-     uint32_t number;
+     /* keycode is optional, if it is not provided use keyid */
+-    if (keycode && keycode <= qemu_input_map_xorgkbd_to_qcode_len) {
+-        return qemu_input_map_xorgkbd_to_qcode[keycode];
++    if (keycode && keycode <= qemu_input_map_xorgkbd_to_linux_len) {
++        return qemu_input_map_xorgkbd_to_linux[keycode];
+     }
  
--    keyvalue.type = KEY_VALUE_KIND_QCODE;
--    keyvalue.u.qcode.data = qcode;
--    number = qemu_input_key_value_to_number(&keyvalue);
-+    assert(lnx < qemu_input_map_linux_to_qnum_len);
-+    number = qemu_input_map_linux_to_qnum[lnx];
-     assert(number != 0);
-     return number;
+     if (keyid >= 0xE000 && keyid <= 0xEFFF) {
+@@ -99,10 +99,10 @@ static int input_barrier_to_qcode(uint16_t keyid, uint16_t keycode)
+     if (kbd_layout) {
+         keycode = keysym2scancode(kbd_layout, keyid, NULL, false);
+ 
+-        return qemu_input_key_number_to_qcode(keycode);
++        return qemu_input_key_number_to_linux(keycode);
+     }
+ 
+-    return qemu_input_map_x11_to_qcode[keyid];
++    return qemu_input_map_x11_to_linux[keyid];
  }
  
--static void print_sym(xkb_keysym_t sym, uint32_t qcode, const char *mod)
-+static void print_sym(xkb_keysym_t sym, uint32_t lnx, const char *mod)
- {
-     char name[64];
+ static int input_barrier_to_mouse(uint8_t buttonid)
+@@ -431,23 +431,23 @@ static gboolean writecmd(InputBarrier *ib, struct barrierMsg *msg)
  
-@@ -54,7 +53,7 @@ static void print_sym(xkb_keysym_t sym, uint32_t qcode, const char *mod)
-     xkb_keysym_get_name(sym, name, sizeof(name));
- 
-     /* TODO: make ui/keymap.c parser accept QKeyCode names */
--    fprintf(outfile, "%s 0x%02x%s\n", name, qcode_to_number(qcode), mod);
-+    fprintf(outfile, "%s 0x%02x%s\n", name, linux_to_number(lnx), mod);
- }
- 
- static void walk_map(struct xkb_keymap *map, xkb_keycode_t code, void *data)
-@@ -84,37 +83,37 @@ static void walk_map(struct xkb_keymap *map, xkb_keycode_t code, void *data)
-     fprintf(outfile, "# evdev %d (0x%x), QKeyCode \"%s\", number 0x%x\n",
-             evdev, evdev,
-             QKeyCode_str(qcode),
--            qcode_to_number(qcode));
-+            linux_to_number(evdev));
- 
-     /*
-      * check which modifier states generate which keysyms
-      */
-     xkb_state_update_mask(state,  0, 0, 0,  0, 0, 0);
-     kbase = xkb_state_key_get_one_sym(state, code);
--    print_sym(kbase, qcode, "");
-+    print_sym(kbase, evdev, "");
- 
-     xkb_state_update_mask(state,  0, 0, numlock,  0, 0, 0);
-     knumlock = xkb_state_key_get_one_sym(state, code);
-     if (kbase != knumlock) {
--        print_sym(knumlock, qcode, " numlock");
-+        print_sym(knumlock, evdev, " numlock");
-     }
- 
-     xkb_state_update_mask(state,  shift, 0, 0,  0, 0, 0);
-     kshift = xkb_state_key_get_one_sym(state, code);
-     if (kbase != kshift && knumlock != kshift) {
--        print_sym(kshift, qcode, " shift");
-+        print_sym(kshift, evdev, " shift");
-     }
- 
-     xkb_state_update_mask(state,  altgr, 0, 0,  0, 0, 0);
-     kaltgr = xkb_state_key_get_one_sym(state, code);
-     if (kbase != kaltgr) {
--        print_sym(kaltgr, qcode, " altgr");
-+        print_sym(kaltgr, evdev, " altgr");
-     }
- 
-     xkb_state_update_mask(state,  altgr | shift, 0, 0,  0, 0, 0);
-     kaltgrshift = xkb_state_key_get_one_sym(state, code);
-     if (kshift != kaltgrshift && kaltgr != kaltgrshift) {
--        print_sym(kaltgrshift, qcode, " shift altgr");
-+        print_sym(kaltgrshift, evdev, " shift altgr");
-     }
- }
- 
-@@ -251,16 +250,16 @@ int main(int argc, char *argv[])
-             "# keysyms.  So append them here.\n"
-             "#\n"
-             "\n");
--    print_sym(XKB_KEY_Print,            Q_KEY_CODE_SYSRQ,      "");
--    print_sym(XKB_KEY_Sys_Req,          Q_KEY_CODE_SYSRQ,      "");
--    print_sym(XKB_KEY_Execute,          Q_KEY_CODE_SYSRQ,      "");
-+    print_sym(XKB_KEY_Print,            KEY_SYSRQ,    "");
-+    print_sym(XKB_KEY_Sys_Req,          KEY_SYSRQ,    "");
-+    print_sym(XKB_KEY_Execute,          KEY_SYSRQ,    "");
- 
--    print_sym(XKB_KEY_KP_Decimal,       Q_KEY_CODE_KP_DECIMAL, " numlock");
--    print_sym(XKB_KEY_KP_Separator,     Q_KEY_CODE_KP_DECIMAL, " numlock");
-+    print_sym(XKB_KEY_KP_Decimal,       KEY_KPDOT,    " numlock");
-+    print_sym(XKB_KEY_KP_Separator,     KEY_KPDOT,    " numlock");
- 
--    print_sym(XKB_KEY_Alt_R,            Q_KEY_CODE_ALT_R,      "");
--    print_sym(XKB_KEY_ISO_Level3_Shift, Q_KEY_CODE_ALT_R,      "");
--    print_sym(XKB_KEY_Mode_switch,      Q_KEY_CODE_ALT_R,      "");
-+    print_sym(XKB_KEY_Alt_R,            KEY_RIGHTALT, "");
-+    print_sym(XKB_KEY_ISO_Level3_Shift, KEY_RIGHTALT, "");
-+    print_sym(XKB_KEY_Mode_switch,      KEY_RIGHTALT, "");
- 
-     fprintf(outfile,
-             "\n"
+     /* keyboard */
+     case barrierCmdDKeyDown:
+-        qemu_input_event_send_key_qcode(NULL,
+-                        input_barrier_to_qcode(msg->key.keyid, msg->key.button),
++        qemu_input_event_send_key_linux(NULL,
++                        input_barrier_to_linux(msg->key.keyid, msg->key.button),
+                                         true);
+         break;
+     case barrierCmdDKeyRepeat:
+         for (i = 0; i < msg->repeat.repeat; i++) {
+-            qemu_input_event_send_key_qcode(NULL,
+-                  input_barrier_to_qcode(msg->repeat.keyid, msg->repeat.button),
++            qemu_input_event_send_key_linux(NULL,
++                  input_barrier_to_linux(msg->repeat.keyid, msg->repeat.button),
+                                             false);
+-            qemu_input_event_send_key_qcode(NULL,
+-                  input_barrier_to_qcode(msg->repeat.keyid, msg->repeat.button),
++            qemu_input_event_send_key_linux(NULL,
++                  input_barrier_to_linux(msg->repeat.keyid, msg->repeat.button),
+                                             true);
+         }
+         break;
+     case barrierCmdDKeyUp:
+-        qemu_input_event_send_key_qcode(NULL,
+-                        input_barrier_to_qcode(msg->key.keyid, msg->key.button),
++        qemu_input_event_send_key_linux(NULL,
++                        input_barrier_to_linux(msg->key.keyid, msg->key.button),
+                                         false);
+         break;
+     default:
 
 -- 
 2.54.0
