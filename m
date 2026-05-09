@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70277CD37B7
-	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 10:48:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1304603.1577542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A138CD37B5
+	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 10:48:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1304605.1577556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfER-0002Ql-Vu; Sat, 09 May 2026 10:48:27 +0000
+	id 1wLfEU-0002hy-Ip; Sat, 09 May 2026 10:48:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1304603.1577542; Sat, 09 May 2026 10:48:27 +0000
+Received: by outflank-mailman (output) from mailman id 1304605.1577556; Sat, 09 May 2026 10:48:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfER-0002Qe-Se; Sat, 09 May 2026 10:48:27 +0000
-Received: by outflank-mailman (input) for mailman id 1304603;
- Sat, 09 May 2026 10:48:26 +0000
+	id 1wLfEU-0002h7-Aw; Sat, 09 May 2026 10:48:30 +0000
+Received: by outflank-mailman (input) for mailman id 1304605;
+ Sat, 09 May 2026 10:48:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfEQ-0001il-M6
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 10:48:26 +0000
+ (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfES-0002X5-Gq
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 10:48:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLfEQ-00FIIk-2o
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:26 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wLfER-007lJU-Tw
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:27 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10e4-bab6-0a2a0a5309dd-0a2a4505bea4-20
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:26 +0200
+ id 69ff10ec-5cb7-0a2a0a5109dd-0a2a4508be8e-6
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:27 +0200
 Received: from [49.212.243.89] (helo=www3579.sakura.ne.jp)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10f7-aaa8-0a2a45050019-31d4f359d68d-3
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:25 +0200
+ id 69ff10f9-63b5-0a2a45080019-31d4f359d6d7-3
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:27 +0200
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2L090834
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2B090834
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 9 May 2026 19:48:01 +0900 (JST)
+ Sat, 9 May 2026 19:47:59 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,23 +52,23 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=rs20250326 header.d=rsg.ci.i.u-tokyo.ac.jp header.i="@rsg.ci.i.u-tokyo.ac.jp"
-DKIM-Signature: a=rsa-sha256; bh=8DrbNDimPytD2Lqd2BsnuvqZLeFlu5Z+sunaR47ICfs=;
+DKIM-Signature: a=rsa-sha256; bh=ROUhaRxtDzPB8FJJRyCm0S9ppDBULPhLkvEBb93D+50=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Message-Id:To:Subject:Date;
-        s=rs20250326; t=1778323681; v=1;
-        b=EZUG6OgWnMEi80mWOv2bjQh69KIzj095fUuL+GG0Y+Ocgqc0ySNqx21bn9jTgoBi
-         gIOOXCAYQ6WtAM8ujVLEiqtd9gSR0j4rd4xO7o5RqI2XPMW3/UooD+7tSggeiP4L
-         gE0NUbscSS8YA+Mx1Gfr2UylEtbic/4xW8GTk6m2P9EznvTyEH4iV/4IZA+UHNGx
-         dUmXYXfrVKC7U3HU4oua43HgpUYTg1YNjbSpvneEbJ8jidGE8CTbWnEeqeiXZVip
-         MXUMoqwQTbNunaDlZcL3/vUInNW0z7NbHiONGReOLeJaq1Zb585hY6sdxGHqBKgs
-         ZyyMt54SD4C3BEJvhcbbUw==
+        s=rs20250326; t=1778323679; v=1;
+        b=lzTC9DyfFbto9QQqJIWX4TjTyGPPBAJyLLupmTJeGxRQGJSl/m+z8PbzrGj5hs5Y
+         84QpcOTGt4CAoUiRUmz6+tjrT/UqoeEQb9qAfhRxtUf7YNGY1wd1b3Lf8a0T6c11
+         vor9zI6VjIBEyD7sutt1sCCc/pt+vyuQiA4Lr+CzuVgmzPORLpPOaycOiNXJy1aR
+         KB2DGB0ETvv4v37fuYY7QfFxlZDJE9F4XyhrMnY5UaUcbnwTnYSm5SVr4SuKM/aQ
+         E/5b8EMUHyI+CPmrnRojYg9V7ff5dRTjDhRpOe1G4l0ZZ3zplR32h3OZGA5AouHL
+         XzFQzM4WKw9gg6KvIq+S0g==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Sat, 09 May 2026 19:34:32 +0900
-Subject: [PATCH RFC 20/28] ui/input-legacy: Use Linux key codes
+Date: Sat, 09 May 2026 19:34:22 +0900
+Subject: [PATCH RFC 10/28] hw/input/adb-kbd: Use Linux key codes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260509-input-v1-20-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260509-input-v1-10-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -88,18 +88,18 @@ Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
         =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-16047
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2048;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11545;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=Fw4LZt0Zxdxd+pp/aswa6uqQEJsaIMY4eIVuWOuDFDU=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gRuRrFtN2E/2hy4vFXHjb+T9L3/4tGJiRbZhv8OPb
- n3ll5YdpSwMYlwMsmKKLClFu7k1oms/FSbEt8DMYWUCGcLAxSkAE7nAz/A/x8pUpe/X57bWK/cM
- bW+638299/u5v635S2aD3y8sV8SyMjIsmraO89bZEL2iixLlB53cTK4dZf/jVxn+dprRhGtK56R
- 5AA==
+ bh=IuNc0nZq13Cfg85XfjaPn1/m1nF4glzSwdiuAeVhaoQ=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gUu3xSqPLlG2uVqgmuKU9vDaMn/3f4kTXl74G97Rw
+ mkd//9PRykLgxgXg6yYIktK0W5ujejaT4UJ8S0wc1iZQIYwcHEKwEQi8hn+x/GuUVd/6lP7xX1l
+ htXZq2nLzl24X71jt8LHrOe79m7oMGP4Xyd7QKOyrOl61MacbtUXanklidZJsRM2Meeov2i8r/u
+ FAwA=
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
-X-purgate-ID: tlsNG-c201ff/1778323706-E338A443-BC534A78/0/0
+X-purgate-ID: tlsNG-c1860d/1778323707-C4E78DB1-4D55FD79/0/0
 X-purgate-type: clean
-X-purgate-size: 2050
+X-purgate-size: 11547
 
 QemuInputEvent now stores Linux key codes for key events. Use those
 codes directly instead of translating between internal key code
@@ -107,58 +107,280 @@ representations.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- ui/input-legacy.c | 22 +++++-----------------
- 1 file changed, 5 insertions(+), 17 deletions(-)
+ hw/input/adb-kbd.c | 242 ++++++++++++++++++++++++++---------------------------
+ 1 file changed, 120 insertions(+), 122 deletions(-)
 
-diff --git a/ui/input-legacy.c b/ui/input-legacy.c
-index e2b48dd8f0aa..193c9ae2ef9f 100644
---- a/ui/input-legacy.c
-+++ b/ui/input-legacy.c
-@@ -71,23 +71,11 @@ int index_from_key(const char *key, size_t key_length)
-     return i;
- }
+diff --git a/hw/input/adb-kbd.c b/hw/input/adb-kbd.c
+index 060481d0db6d..c4ef9ebb90c8 100644
+--- a/hw/input/adb-kbd.c
++++ b/hw/input/adb-kbd.c
+@@ -26,6 +26,7 @@
+ #include "hw/input/adb.h"
+ #include "migration/vmstate.h"
+ #include "qemu/module.h"
++#include "standard-headers/linux/input-event-codes.h"
+ #include "ui/input.h"
+ #include "hw/input/adb-keys.h"
+ #include "adb-internal.h"
+@@ -55,124 +56,122 @@ struct ADBKeyboardClass {
+ /* The adb keyboard doesn't have every key imaginable */
+ #define NO_KEY 0xff
  
--static KeyValue *copy_key_value(KeyValue *src)
--{
--    KeyValue *dst = g_new(KeyValue, 1);
--    memcpy(dst, src, sizeof(*src));
--    if (dst->type == KEY_VALUE_KIND_NUMBER) {
--        QKeyCode code = qemu_input_key_number_to_qcode(dst->u.number.data);
--        dst->type = KEY_VALUE_KIND_QCODE;
--        dst->u.qcode.data = code;
--    }
--    return dst;
--}
+-int qcode_to_adb_keycode[] = {
++int linux_to_adb_keycode[] = {
+      /* Make sure future additions are automatically set to NO_KEY */
+-    [0 ... 0xff]               = NO_KEY,
 -
- void qmp_send_key(KeyValueList *keys, bool has_hold_time, int64_t hold_time,
-                   Error **errp)
+-    [Q_KEY_CODE_SHIFT]         = ADB_KEY_LEFT_SHIFT,
+-    [Q_KEY_CODE_SHIFT_R]       = ADB_KEY_RIGHT_SHIFT,
+-    [Q_KEY_CODE_ALT]           = ADB_KEY_LEFT_OPTION,
+-    [Q_KEY_CODE_ALT_R]         = ADB_KEY_RIGHT_OPTION,
+-    [Q_KEY_CODE_CTRL]          = ADB_KEY_LEFT_CONTROL,
+-    [Q_KEY_CODE_CTRL_R]        = ADB_KEY_RIGHT_CONTROL,
+-    [Q_KEY_CODE_META_L]        = ADB_KEY_COMMAND,
+-    [Q_KEY_CODE_META_R]        = ADB_KEY_COMMAND,
+-    [Q_KEY_CODE_SPC]           = ADB_KEY_SPACEBAR,
+-
+-    [Q_KEY_CODE_ESC]           = ADB_KEY_ESC,
+-    [Q_KEY_CODE_1]             = ADB_KEY_1,
+-    [Q_KEY_CODE_2]             = ADB_KEY_2,
+-    [Q_KEY_CODE_3]             = ADB_KEY_3,
+-    [Q_KEY_CODE_4]             = ADB_KEY_4,
+-    [Q_KEY_CODE_5]             = ADB_KEY_5,
+-    [Q_KEY_CODE_6]             = ADB_KEY_6,
+-    [Q_KEY_CODE_7]             = ADB_KEY_7,
+-    [Q_KEY_CODE_8]             = ADB_KEY_8,
+-    [Q_KEY_CODE_9]             = ADB_KEY_9,
+-    [Q_KEY_CODE_0]             = ADB_KEY_0,
+-    [Q_KEY_CODE_MINUS]         = ADB_KEY_MINUS,
+-    [Q_KEY_CODE_EQUAL]         = ADB_KEY_EQUAL,
+-    [Q_KEY_CODE_BACKSPACE]     = ADB_KEY_DELETE,
+-    [Q_KEY_CODE_TAB]           = ADB_KEY_TAB,
+-    [Q_KEY_CODE_Q]             = ADB_KEY_Q,
+-    [Q_KEY_CODE_W]             = ADB_KEY_W,
+-    [Q_KEY_CODE_E]             = ADB_KEY_E,
+-    [Q_KEY_CODE_R]             = ADB_KEY_R,
+-    [Q_KEY_CODE_T]             = ADB_KEY_T,
+-    [Q_KEY_CODE_Y]             = ADB_KEY_Y,
+-    [Q_KEY_CODE_U]             = ADB_KEY_U,
+-    [Q_KEY_CODE_I]             = ADB_KEY_I,
+-    [Q_KEY_CODE_O]             = ADB_KEY_O,
+-    [Q_KEY_CODE_P]             = ADB_KEY_P,
+-    [Q_KEY_CODE_BRACKET_LEFT]  = ADB_KEY_LEFT_BRACKET,
+-    [Q_KEY_CODE_BRACKET_RIGHT] = ADB_KEY_RIGHT_BRACKET,
+-    [Q_KEY_CODE_RET]           = ADB_KEY_RETURN,
+-    [Q_KEY_CODE_A]             = ADB_KEY_A,
+-    [Q_KEY_CODE_S]             = ADB_KEY_S,
+-    [Q_KEY_CODE_D]             = ADB_KEY_D,
+-    [Q_KEY_CODE_F]             = ADB_KEY_F,
+-    [Q_KEY_CODE_G]             = ADB_KEY_G,
+-    [Q_KEY_CODE_H]             = ADB_KEY_H,
+-    [Q_KEY_CODE_J]             = ADB_KEY_J,
+-    [Q_KEY_CODE_K]             = ADB_KEY_K,
+-    [Q_KEY_CODE_L]             = ADB_KEY_L,
+-    [Q_KEY_CODE_SEMICOLON]     = ADB_KEY_SEMICOLON,
+-    [Q_KEY_CODE_APOSTROPHE]    = ADB_KEY_APOSTROPHE,
+-    [Q_KEY_CODE_GRAVE_ACCENT]  = ADB_KEY_GRAVE_ACCENT,
+-    [Q_KEY_CODE_BACKSLASH]     = ADB_KEY_BACKSLASH,
+-    [Q_KEY_CODE_Z]             = ADB_KEY_Z,
+-    [Q_KEY_CODE_X]             = ADB_KEY_X,
+-    [Q_KEY_CODE_C]             = ADB_KEY_C,
+-    [Q_KEY_CODE_V]             = ADB_KEY_V,
+-    [Q_KEY_CODE_B]             = ADB_KEY_B,
+-    [Q_KEY_CODE_N]             = ADB_KEY_N,
+-    [Q_KEY_CODE_M]             = ADB_KEY_M,
+-    [Q_KEY_CODE_COMMA]         = ADB_KEY_COMMA,
+-    [Q_KEY_CODE_DOT]           = ADB_KEY_PERIOD,
+-    [Q_KEY_CODE_SLASH]         = ADB_KEY_FORWARD_SLASH,
+-    [Q_KEY_CODE_ASTERISK]      = ADB_KEY_KP_MULTIPLY,
+-    [Q_KEY_CODE_CAPS_LOCK]     = ADB_KEY_CAPS_LOCK,
+-
+-    [Q_KEY_CODE_F1]            = ADB_KEY_F1,
+-    [Q_KEY_CODE_F2]            = ADB_KEY_F2,
+-    [Q_KEY_CODE_F3]            = ADB_KEY_F3,
+-    [Q_KEY_CODE_F4]            = ADB_KEY_F4,
+-    [Q_KEY_CODE_F5]            = ADB_KEY_F5,
+-    [Q_KEY_CODE_F6]            = ADB_KEY_F6,
+-    [Q_KEY_CODE_F7]            = ADB_KEY_F7,
+-    [Q_KEY_CODE_F8]            = ADB_KEY_F8,
+-    [Q_KEY_CODE_F9]            = ADB_KEY_F9,
+-    [Q_KEY_CODE_F10]           = ADB_KEY_F10,
+-    [Q_KEY_CODE_F11]           = ADB_KEY_F11,
+-    [Q_KEY_CODE_F12]           = ADB_KEY_F12,
+-    [Q_KEY_CODE_PRINT]         = ADB_KEY_F13,
+-    [Q_KEY_CODE_SYSRQ]         = ADB_KEY_F13,
+-    [Q_KEY_CODE_SCROLL_LOCK]   = ADB_KEY_F14,
+-    [Q_KEY_CODE_PAUSE]         = ADB_KEY_F15,
+-
+-    [Q_KEY_CODE_NUM_LOCK]      = ADB_KEY_KP_CLEAR,
+-    [Q_KEY_CODE_KP_EQUALS]     = ADB_KEY_KP_EQUAL,
+-    [Q_KEY_CODE_KP_DIVIDE]     = ADB_KEY_KP_DIVIDE,
+-    [Q_KEY_CODE_KP_MULTIPLY]   = ADB_KEY_KP_MULTIPLY,
+-    [Q_KEY_CODE_KP_SUBTRACT]   = ADB_KEY_KP_SUBTRACT,
+-    [Q_KEY_CODE_KP_ADD]        = ADB_KEY_KP_PLUS,
+-    [Q_KEY_CODE_KP_ENTER]      = ADB_KEY_KP_ENTER,
+-    [Q_KEY_CODE_KP_DECIMAL]    = ADB_KEY_KP_PERIOD,
+-    [Q_KEY_CODE_KP_0]          = ADB_KEY_KP_0,
+-    [Q_KEY_CODE_KP_1]          = ADB_KEY_KP_1,
+-    [Q_KEY_CODE_KP_2]          = ADB_KEY_KP_2,
+-    [Q_KEY_CODE_KP_3]          = ADB_KEY_KP_3,
+-    [Q_KEY_CODE_KP_4]          = ADB_KEY_KP_4,
+-    [Q_KEY_CODE_KP_5]          = ADB_KEY_KP_5,
+-    [Q_KEY_CODE_KP_6]          = ADB_KEY_KP_6,
+-    [Q_KEY_CODE_KP_7]          = ADB_KEY_KP_7,
+-    [Q_KEY_CODE_KP_8]          = ADB_KEY_KP_8,
+-    [Q_KEY_CODE_KP_9]          = ADB_KEY_KP_9,
+-
+-    [Q_KEY_CODE_UP]            = ADB_KEY_UP,
+-    [Q_KEY_CODE_DOWN]          = ADB_KEY_DOWN,
+-    [Q_KEY_CODE_LEFT]          = ADB_KEY_LEFT,
+-    [Q_KEY_CODE_RIGHT]         = ADB_KEY_RIGHT,
+-
+-    [Q_KEY_CODE_HELP]          = ADB_KEY_HELP,
+-    [Q_KEY_CODE_INSERT]        = ADB_KEY_HELP,
+-    [Q_KEY_CODE_DELETE]        = ADB_KEY_FORWARD_DELETE,
+-    [Q_KEY_CODE_HOME]          = ADB_KEY_HOME,
+-    [Q_KEY_CODE_END]           = ADB_KEY_END,
+-    [Q_KEY_CODE_PGUP]          = ADB_KEY_PAGE_UP,
+-    [Q_KEY_CODE_PGDN]          = ADB_KEY_PAGE_DOWN,
+-
+-    [Q_KEY_CODE_POWER]         = ADB_KEY_POWER
++    [0 ... KEY_MAX]  = NO_KEY,
++
++    [KEY_LEFTSHIFT]  = ADB_KEY_LEFT_SHIFT,
++    [KEY_RIGHTSHIFT] = ADB_KEY_RIGHT_SHIFT,
++    [KEY_LEFTALT]    = ADB_KEY_LEFT_OPTION,
++    [KEY_RIGHTALT]   = ADB_KEY_RIGHT_OPTION,
++    [KEY_LEFTCTRL]   = ADB_KEY_LEFT_CONTROL,
++    [KEY_RIGHTCTRL]  = ADB_KEY_RIGHT_CONTROL,
++    [KEY_LEFTMETA]   = ADB_KEY_COMMAND,
++    [KEY_RIGHTMETA]  = ADB_KEY_COMMAND,
++    [KEY_SPACE]      = ADB_KEY_SPACEBAR,
++
++    [KEY_ESC]        = ADB_KEY_ESC,
++    [KEY_1]          = ADB_KEY_1,
++    [KEY_2]          = ADB_KEY_2,
++    [KEY_3]          = ADB_KEY_3,
++    [KEY_4]          = ADB_KEY_4,
++    [KEY_5]          = ADB_KEY_5,
++    [KEY_6]          = ADB_KEY_6,
++    [KEY_7]          = ADB_KEY_7,
++    [KEY_8]          = ADB_KEY_8,
++    [KEY_9]          = ADB_KEY_9,
++    [KEY_0]          = ADB_KEY_0,
++    [KEY_MINUS]      = ADB_KEY_MINUS,
++    [KEY_EQUAL]      = ADB_KEY_EQUAL,
++    [KEY_BACKSPACE]  = ADB_KEY_DELETE,
++    [KEY_TAB]        = ADB_KEY_TAB,
++    [KEY_Q]          = ADB_KEY_Q,
++    [KEY_W]          = ADB_KEY_W,
++    [KEY_E]          = ADB_KEY_E,
++    [KEY_R]          = ADB_KEY_R,
++    [KEY_T]          = ADB_KEY_T,
++    [KEY_Y]          = ADB_KEY_Y,
++    [KEY_U]          = ADB_KEY_U,
++    [KEY_I]          = ADB_KEY_I,
++    [KEY_O]          = ADB_KEY_O,
++    [KEY_P]          = ADB_KEY_P,
++    [KEY_LEFTBRACE]  = ADB_KEY_LEFT_BRACKET,
++    [KEY_RIGHTBRACE] = ADB_KEY_RIGHT_BRACKET,
++    [KEY_ENTER]      = ADB_KEY_RETURN,
++    [KEY_A]          = ADB_KEY_A,
++    [KEY_S]          = ADB_KEY_S,
++    [KEY_D]          = ADB_KEY_D,
++    [KEY_F]          = ADB_KEY_F,
++    [KEY_G]          = ADB_KEY_G,
++    [KEY_H]          = ADB_KEY_H,
++    [KEY_J]          = ADB_KEY_J,
++    [KEY_K]          = ADB_KEY_K,
++    [KEY_L]          = ADB_KEY_L,
++    [KEY_SEMICOLON]  = ADB_KEY_SEMICOLON,
++    [KEY_APOSTROPHE] = ADB_KEY_APOSTROPHE,
++    [KEY_GRAVE]      = ADB_KEY_GRAVE_ACCENT,
++    [KEY_BACKSLASH]  = ADB_KEY_BACKSLASH,
++    [KEY_Z]          = ADB_KEY_Z,
++    [KEY_X]          = ADB_KEY_X,
++    [KEY_C]          = ADB_KEY_C,
++    [KEY_V]          = ADB_KEY_V,
++    [KEY_B]          = ADB_KEY_B,
++    [KEY_N]          = ADB_KEY_N,
++    [KEY_M]          = ADB_KEY_M,
++    [KEY_COMMA]      = ADB_KEY_COMMA,
++    [KEY_DOT]        = ADB_KEY_PERIOD,
++    [KEY_SLASH]      = ADB_KEY_FORWARD_SLASH,
++    [KEY_CAPSLOCK]   = ADB_KEY_CAPS_LOCK,
++
++    [KEY_F1]         = ADB_KEY_F1,
++    [KEY_F2]         = ADB_KEY_F2,
++    [KEY_F3]         = ADB_KEY_F3,
++    [KEY_F4]         = ADB_KEY_F4,
++    [KEY_F5]         = ADB_KEY_F5,
++    [KEY_F6]         = ADB_KEY_F6,
++    [KEY_F7]         = ADB_KEY_F7,
++    [KEY_F8]         = ADB_KEY_F8,
++    [KEY_F9]         = ADB_KEY_F9,
++    [KEY_F10]        = ADB_KEY_F10,
++    [KEY_F11]        = ADB_KEY_F11,
++    [KEY_F12]        = ADB_KEY_F12,
++    [KEY_SYSRQ]      = ADB_KEY_F13,
++    [KEY_SCROLLLOCK] = ADB_KEY_F14,
++    [KEY_PAUSE]      = ADB_KEY_F15,
++
++    [KEY_NUMLOCK]    = ADB_KEY_KP_CLEAR,
++    [KEY_KPEQUAL]    = ADB_KEY_KP_EQUAL,
++    [KEY_KPSLASH]    = ADB_KEY_KP_DIVIDE,
++    [KEY_KPASTERISK] = ADB_KEY_KP_MULTIPLY,
++    [KEY_KPMINUS]    = ADB_KEY_KP_SUBTRACT,
++    [KEY_KPPLUS]     = ADB_KEY_KP_PLUS,
++    [KEY_KPENTER]    = ADB_KEY_KP_ENTER,
++    [KEY_KPDOT]      = ADB_KEY_KP_PERIOD,
++    [KEY_KP0]        = ADB_KEY_KP_0,
++    [KEY_KP1]        = ADB_KEY_KP_1,
++    [KEY_KP2]        = ADB_KEY_KP_2,
++    [KEY_KP3]        = ADB_KEY_KP_3,
++    [KEY_KP4]        = ADB_KEY_KP_4,
++    [KEY_KP5]        = ADB_KEY_KP_5,
++    [KEY_KP6]        = ADB_KEY_KP_6,
++    [KEY_KP7]        = ADB_KEY_KP_7,
++    [KEY_KP8]        = ADB_KEY_KP_8,
++    [KEY_KP9]        = ADB_KEY_KP_9,
++
++    [KEY_UP]         = ADB_KEY_UP,
++    [KEY_DOWN]       = ADB_KEY_DOWN,
++    [KEY_LEFT]       = ADB_KEY_LEFT,
++    [KEY_RIGHT]      = ADB_KEY_RIGHT,
++
++    [KEY_HELP]       = ADB_KEY_HELP,
++    [KEY_INSERT]     = ADB_KEY_HELP,
++    [KEY_DELETE]     = ADB_KEY_FORWARD_DELETE,
++    [KEY_HOME]       = ADB_KEY_HOME,
++    [KEY_END]        = ADB_KEY_END,
++    [KEY_PAGEUP]     = ADB_KEY_PAGE_UP,
++    [KEY_PAGEDOWN]   = ADB_KEY_PAGE_DOWN,
++
++    [KEY_POWER]      = ADB_KEY_POWER
+ };
+ 
+ static void adb_kbd_put_keycode(void *opaque, int keycode)
+@@ -309,14 +308,13 @@ static void adb_keyboard_event(DeviceState *dev, QemuConsole *src,
+                                QemuInputEvent *evt)
  {
-     KeyValueList *p;
--    KeyValue **up = NULL;
-+    unsigned int *up = NULL;
-     int count = 0;
+     KBDState *s = (KBDState *)dev;
+-    int qcode, keycode;
++    int keycode;
  
-     if (!has_hold_time) {
-@@ -95,15 +83,15 @@ void qmp_send_key(KeyValueList *keys, bool has_hold_time, int64_t hold_time,
+-    qcode = qemu_input_linux_to_qcode(evt->key.key);
+-    if (qcode >= ARRAY_SIZE(qcode_to_adb_keycode)) {
++    if (evt->key.key >= ARRAY_SIZE(linux_to_adb_keycode)) {
+         return;
      }
- 
-     for (p = keys; p != NULL; p = p->next) {
--        qemu_input_event_send_key(NULL, copy_key_value(p->value), true);
--        qemu_input_event_send_key_delay(hold_time);
-         up = g_realloc(up, sizeof(*up) * (count+1));
--        up[count] = copy_key_value(p->value);
-+        up[count] = qemu_input_key_value_to_linux(p->value);
-+        qemu_input_event_send_key_linux(NULL, up[count], true);
-+        qemu_input_event_send_key_delay(hold_time);
-         count++;
-     }
-     while (count) {
-         count--;
--        qemu_input_event_send_key(NULL, up[count], false);
-+        qemu_input_event_send_key_linux(NULL, up[count], false);
-         qemu_input_event_send_key_delay(hold_time);
-     }
-     g_free(up);
+-    /* FIXME: take handler into account when translating qcode */
+-    keycode = qcode_to_adb_keycode[qcode];
++    /* FIXME: take handler into account when translating evt->key.key */
++    keycode = linux_to_adb_keycode[evt->key.key];
+     if (keycode == NO_KEY) {  /* We don't want to send this to the guest */
+         trace_adb_device_kbd_no_key();
+         return;
 
 -- 
 2.54.0
