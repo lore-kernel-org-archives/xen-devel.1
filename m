@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A516DCD37B2
-	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 10:48:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1304604.1577551 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70277CD37B7
+	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 10:48:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1304603.1577542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfEU-0002fU-6A; Sat, 09 May 2026 10:48:30 +0000
+	id 1wLfER-0002Ql-Vu; Sat, 09 May 2026 10:48:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1304604.1577551; Sat, 09 May 2026 10:48:30 +0000
+Received: by outflank-mailman (output) from mailman id 1304603.1577542; Sat, 09 May 2026 10:48:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLfEU-0002fN-2g; Sat, 09 May 2026 10:48:30 +0000
-Received: by outflank-mailman (input) for mailman id 1304604;
- Sat, 09 May 2026 10:48:28 +0000
+	id 1wLfER-0002Qe-Se; Sat, 09 May 2026 10:48:27 +0000
+Received: by outflank-mailman (input) for mailman id 1304603;
+ Sat, 09 May 2026 10:48:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfES-0002X2-FY
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 10:48:28 +0000
+ (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>) id 1wLfEQ-0001il-M6
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 10:48:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLfER-007lJU-Sq
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:27 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wLfEQ-00FIIk-2o
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 12:48:26 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10ec-5cb7-0a2a0a5109dd-0a2a4508be8e-4
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:27 +0200
+ id 69ff10e4-bab6-0a2a0a5309dd-0a2a4505bea4-20
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:26 +0200
 Received: from [49.212.243.89] (helo=www3579.sakura.ne.jp)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 69ff10f8-63b5-0a2a45080019-31d4f359d6d6-3
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:27 +0200
+ id 69ff10f7-aaa8-0a2a45050019-31d4f359d68d-3
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 12:48:25 +0200
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2A090834
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 649AlY2L090834
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 9 May 2026 19:47:58 +0900 (JST)
+ Sat, 9 May 2026 19:48:01 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,23 +52,23 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=rs20250326 header.d=rsg.ci.i.u-tokyo.ac.jp header.i="@rsg.ci.i.u-tokyo.ac.jp"
-DKIM-Signature: a=rsa-sha256; bh=SBZa0nIoCp0ki8/Oc5ku4abkqOmqJgEICyF8p7mx+3g=;
+DKIM-Signature: a=rsa-sha256; bh=8DrbNDimPytD2Lqd2BsnuvqZLeFlu5Z+sunaR47ICfs=;
         c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
         h=From:Message-Id:To:Subject:Date;
-        s=rs20250326; t=1778323679; v=1;
-        b=jMm6FSTg3+WzoljBa1xx0VEIo3rCyipLRB/bXqKMrcdNR+6DvkjrOPX+E8rgREyl
-         fuoDukk7jeWjRH1RJb//0ZivG9KN+Ul5uESgLkuohDwIcRoPNt8uRy5T0Gp++vJT
-         4ljy4BIr3xPq7yw9Gpv9nXQvfz4i8pRAk2U38IxKW5FtOqeKZ0ntoI+Lqs3KyDDv
-         nDjEcHNRD6ijVNCuvkoaQ5cAbV5r1D3Dhm5B8CbAEzMIQN3EJEZr5W6C+DSMzgNd
-         cVHxAtdtdiH/vXly+xP1n9bu5GWF/sZlyQ+nRmXFWnTsPqR04jZ5qyvejk2hAT2O
-         axrvfxvwxSeG40g+JiQtnw==
+        s=rs20250326; t=1778323681; v=1;
+        b=EZUG6OgWnMEi80mWOv2bjQh69KIzj095fUuL+GG0Y+Ocgqc0ySNqx21bn9jTgoBi
+         gIOOXCAYQ6WtAM8ujVLEiqtd9gSR0j4rd4xO7o5RqI2XPMW3/UooD+7tSggeiP4L
+         gE0NUbscSS8YA+Mx1Gfr2UylEtbic/4xW8GTk6m2P9EznvTyEH4iV/4IZA+UHNGx
+         dUmXYXfrVKC7U3HU4oua43HgpUYTg1YNjbSpvneEbJ8jidGE8CTbWnEeqeiXZVip
+         MXUMoqwQTbNunaDlZcL3/vUInNW0z7NbHiONGReOLeJaq1Zb585hY6sdxGHqBKgs
+         ZyyMt54SD4C3BEJvhcbbUw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Sat, 09 May 2026 19:34:21 +0900
-Subject: [PATCH RFC 09/28] hw/display/xenfb: Use Linux key codes
+Date: Sat, 09 May 2026 19:34:32 +0900
+Subject: [PATCH RFC 20/28] ui/input-legacy: Use Linux key codes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260509-input-v1-9-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260509-input-v1-20-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260509-input-v1-0-66f18d2edde6@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -88,18 +88,18 @@ Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
         =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
         Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-16047
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1604;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2048;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=Q2mGMH2ClWf3nbm1bPmZWB8Bg9tg0j4lbTXQFfwDMGE=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gUtdcxRqAx2EuLe8LbbcLJ3V2baEYQqb3WGOpp0vp
- j7/IbKxo5SFQYyLQVZMkSWlaDe3RnTtp8KE+BaYOaxMIEMYuDgFYCI9RQy/2Q8qiKx+tYp1h+il
- SjZJSbOzDF2vF/9SspNzeul288a9zYwMdxVK8qJ7uQ2LMkV3Hb/AejX38skJoiU7t+x5kynJVxz
- DBgA=
+ bh=Fw4LZt0Zxdxd+pp/aswa6uqQEJsaIMY4eIVuWOuDFDU=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ+Z/gRuRrFtN2E/2hy4vFXHjb+T9L3/4tGJiRbZhv8OPb
+ n3ll5YdpSwMYlwMsmKKLClFu7k1oms/FSbEt8DMYWUCGcLAxSkAE7nAz/A/x8pUpe/X57bWK/cM
+ bW+638299/u5v635S2aD3y8sV8SyMjIsmraO89bZEL2iixLlB53cTK4dZf/jVxn+dprRhGtK56R
+ 5AA==
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
-X-purgate-ID: tlsNG-c1860d/1778323707-C4A7ADB1-63265AD0/0/0
+X-purgate-ID: tlsNG-c201ff/1778323706-E338A443-BC534A78/0/0
 X-purgate-type: clean
-X-purgate-size: 1606
+X-purgate-size: 2050
 
 QemuInputEvent now stores Linux key codes for key events. Use those
 codes directly instead of translating between internal key code
@@ -107,46 +107,58 @@ representations.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/display/xenfb.c | 21 +++------------------
- 1 file changed, 3 insertions(+), 18 deletions(-)
+ ui/input-legacy.c | 22 +++++-----------------
+ 1 file changed, 5 insertions(+), 17 deletions(-)
 
-diff --git a/hw/display/xenfb.c b/hw/display/xenfb.c
-index 9bf89a1e6223..ee23c483499f 100644
---- a/hw/display/xenfb.c
-+++ b/hw/display/xenfb.c
-@@ -191,29 +191,14 @@ static int xenfb_send_position(struct XenInput *xenfb,
-     return xenfb_kbd_event(xenfb, &event);
+diff --git a/ui/input-legacy.c b/ui/input-legacy.c
+index e2b48dd8f0aa..193c9ae2ef9f 100644
+--- a/ui/input-legacy.c
++++ b/ui/input-legacy.c
+@@ -71,23 +71,11 @@ int index_from_key(const char *key, size_t key_length)
+     return i;
  }
  
--/*
-- * Send a key event from the client to the guest OS
-- * QEMU gives us a QCode.
-- * We have to turn this into a Linux Input layer keycode.
-- *
-- * Wish we could just send scancodes straight to the guest which
-- * already has code for dealing with this...
-- */
-+/* Send a key event from the client to the guest OS */
- static void xenfb_key_event(DeviceState *dev, QemuConsole *src,
-                             QemuInputEvent *evt)
- {
-     struct XenInput *xenfb = (struct XenInput *)dev;
--    int qcode = qemu_input_linux_to_qcode(evt->key.key);
--    int lnx;
- 
--    if (qcode < qemu_input_map_qcode_to_linux_len) {
--        lnx = qemu_input_map_qcode_to_linux[qcode];
--
--        if (lnx) {
--            trace_xenfb_key_event(xenfb, lnx, evt->key.down);
--            xenfb_send_key(xenfb, evt->key.down, lnx);
--        }
+-static KeyValue *copy_key_value(KeyValue *src)
+-{
+-    KeyValue *dst = g_new(KeyValue, 1);
+-    memcpy(dst, src, sizeof(*src));
+-    if (dst->type == KEY_VALUE_KIND_NUMBER) {
+-        QKeyCode code = qemu_input_key_number_to_qcode(dst->u.number.data);
+-        dst->type = KEY_VALUE_KIND_QCODE;
+-        dst->u.qcode.data = code;
 -    }
-+    trace_xenfb_key_event(xenfb, evt->key.key, evt->key.down);
-+    xenfb_send_key(xenfb, evt->key.down, evt->key.key);
- }
+-    return dst;
+-}
+-
+ void qmp_send_key(KeyValueList *keys, bool has_hold_time, int64_t hold_time,
+                   Error **errp)
+ {
+     KeyValueList *p;
+-    KeyValue **up = NULL;
++    unsigned int *up = NULL;
+     int count = 0;
  
- /*
+     if (!has_hold_time) {
+@@ -95,15 +83,15 @@ void qmp_send_key(KeyValueList *keys, bool has_hold_time, int64_t hold_time,
+     }
+ 
+     for (p = keys; p != NULL; p = p->next) {
+-        qemu_input_event_send_key(NULL, copy_key_value(p->value), true);
+-        qemu_input_event_send_key_delay(hold_time);
+         up = g_realloc(up, sizeof(*up) * (count+1));
+-        up[count] = copy_key_value(p->value);
++        up[count] = qemu_input_key_value_to_linux(p->value);
++        qemu_input_event_send_key_linux(NULL, up[count], true);
++        qemu_input_event_send_key_delay(hold_time);
+         count++;
+     }
+     while (count) {
+         count--;
+-        qemu_input_event_send_key(NULL, up[count], false);
++        qemu_input_event_send_key_linux(NULL, up[count], false);
+         qemu_input_event_send_key_delay(hold_time);
+     }
+     g_free(up);
 
 -- 
 2.54.0
