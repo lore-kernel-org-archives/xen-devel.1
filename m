@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F59CD37B8
-	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 22:53:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1305106.1577768 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C31B9CD37B2
+	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 22:53:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1305107.1577770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXT-0005kL-I0; Sat, 09 May 2026 22:52:51 +0000
+	id 1wLqXU-0005uO-1d; Sat, 09 May 2026 22:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1305106.1577768; Sat, 09 May 2026 22:52:51 +0000
+Received: by outflank-mailman (output) from mailman id 1305107.1577770; Sat, 09 May 2026 22:52:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXT-0005j1-7k; Sat, 09 May 2026 22:52:51 +0000
-Received: by outflank-mailman (input) for mailman id 1305106;
+	id 1wLqXT-0005sG-Ok; Sat, 09 May 2026 22:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 1305107;
  Sat, 09 May 2026 22:52:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wLqXQ-00054w-S0
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 22:52:48 +0000
+ id 1wLqXR-000585-AO
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 22:52:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLqXQ-00270l-8r; Sun, 10 May 2026 00:52:48 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wLqXQ-006SzZ-NA; Sun, 10 May 2026 00:52:48 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 69ffba8c-5cb7-0a2a0a5109dd-0a2a4502af40-16
+ id 69ffba4c-bab6-0a2a0a5309dd-0a2a4507d1b8-14
  for <multiple-recipients>; Sun, 10 May 2026 00:52:48 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 69ffb9cf-af86-0a2a45020019-5a9b322294d0-3
- for <multiple-recipients>; Sun, 10 May 2026 00:48:47 +0200
+ id 69ffb9d0-229c-0a2a45070019-5a9b3222c1fe-3
+ for <multiple-recipients>; Sun, 10 May 2026 00:48:48 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wLqTD-000000060LG-11bn; Sat, 09 May 2026 22:48:30 +0000
+ id 1wLqTC-000000060LA-3IS1; Sat, 09 May 2026 22:48:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1wLqTC-0000000DhIX-44HE;
+ Hat Linux)) id 1wLqTC-0000000DhHl-1rbg;
  Sat, 09 May 2026 23:48:26 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -56,12 +56,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=iwNDogNMnm4WL4MqrZc8nsIfoorb7pJAk0uuGh5ggK4=; b=mRIMgmptP6nlE1xwJJE7wWchlj
-	c5hj715Dq8L1J2PI/D8dsuU7xrbXhQSFIt0oyARLK3GdPSMaIrfKJHxkF9HDegFgOkjueS3rlt6/W
-	67i4Frua5/XiZINxBRRzCpomDpKO/csTN/dT245yPE+YO/RGSemOgeVIrNqUFKZUie5YfIuoBg59D
-	g4vHNMHV7b+p80wEm1WwTOrLjMRW61Rdrzxh+x2pC5SJvDvJ5xkIWKHTGA60lHzLK+h51bNW2SkUq
-	GFEo/NItxLK2xl668Yom6hg1gOvV+KTatfa1uufQQBtqoY9AZDAAT79NjCzqnQxh6Fr9HrZUmpbLh
-	cxvDdfFQ==;
+	bh=XMpTG0soXwBy/thkGcHgDsOpdH9egi4Ry9N+LywUSzQ=; b=EKu/r3asoX2SfZ406BfO/egThQ
+	F7iNeLfLoiU4BsuJsLO9wR8exCZfZ16VgO9TgglaLHmvaRE6F70VHCnwl5QPDB/JwnS10nhgau/yJ
+	J7wo3Gx/Lb6KtqMv+CitqIMVfrl98+1mN1P9qTui4wUaHmhIF2QPv9yvu5B+ImTV0eMefXLrJykZI
+	RZJN17BBtlrWPeX5MOsjcAWOEZY+jE7pmxG6iDAaJ3T+mJBuYORNrVKRUOhpuPNI4KwilZw/E9oC2
+	RqxHvK8aRbu2faUJNYRKNfBxBr/ZIi3kMgj6xBoxv/3p4ZSilEZi4CxBzlFx3KoZ7DRnwk1LjYxuB
+	p3RWaigw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,9 +90,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 20/30] KVM: x86: Kill last_tsc_{nsec,write,offset} fields
-Date: Sat,  9 May 2026 23:46:46 +0100
-Message-ID: <20260509224824.3264567-21-dwmw2@infradead.org>
+Subject: [PATCH v4 08/30] KVM: x86: Avoid NTP frequency skew for KVM clock on 32-bit host
+Date: Sat,  9 May 2026 23:46:34 +0100
+Message-ID: <20260509224824.3264567-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
@@ -100,145 +100,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-720697/1778366927-AB762161-F367B231/13/0
+X-purgate-ID: tlsNG-ef75cf/1778366928-09D6FC48-54E68A94/13/0
 X-purgate-type: clean
-X-purgate-size: 5500
+X-purgate-size: 3670
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-These pointlessly duplicate the cur_tsc_{nsec,write,offset} values.
-The only place they were used was where the TSC is stable and a new
-vCPU is being synchronized to the previous setting, in which case the
-cur_tsc_* value is definitely identical.
+Commit 53fafdbb8b21 ("KVM: x86: switch KVMCLOCK base to monotonic raw
+clock") did so only for 64-bit hosts, by capturing the boot offset from
+within the existing clocksource notifier update_pvclock_gtod().
 
-Rename last_tsc_khz and last_tsc_scaling_ratio to cur_tsc_khz and
-cur_tsc_scaling_ratio respectively, since they are properties of the
-current TSC generation.
+That notifier was added in commit 16e8d74d2da9 ("KVM: x86: notifier for
+clocksource changes") but only on x86_64, because its original purpose
+was just to disable the "master clock" mode which is only supported on
+x86_64.
+
+Now that the notifier is used for more than disabling master clock mode,
+enable it for the 32-bit build too so that get_kvmclock_base_ns() can be
+unaffected by NTP sync on 32-bit too.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/include/asm/kvm_host.h |  7 ++-----
- arch/x86/kvm/x86.c              | 32 ++++++++++++++------------------
- 2 files changed, 16 insertions(+), 23 deletions(-)
+ arch/x86/kvm/x86.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index 5348fd5ea3f3..59298a8f78eb 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1486,11 +1486,8 @@ struct kvm_arch {
- 	 * preemption-disabled region, so it must be a raw spinlock.
- 	 */
- 	raw_spinlock_t tsc_write_lock;
--	u64 last_tsc_nsec;
--	u64 last_tsc_write;
--	u32 last_tsc_khz;
--	u64 last_tsc_offset;
--	u64 last_tsc_scaling_ratio;
-+	u32 cur_tsc_khz;
-+	u64 cur_tsc_scaling_ratio;
- 	u64 cur_tsc_nsec;
- 	u64 cur_tsc_write;
- 	u64 cur_tsc_offset;
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 097df58749c3..3c68d2a4c8d0 100644
+index 2179ea2da8e0..1e1834533e98 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -2813,14 +2813,12 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 		vcpu->kvm->arch.user_set_tsc = true;
+@@ -2342,7 +2342,6 @@ static int do_set_msr(struct kvm_vcpu *vcpu, unsigned index, u64 *data)
+ 	return kvm_set_msr_ignored_check(vcpu, index, *data, true);
+ }
  
+-#ifdef CONFIG_X86_64
+ struct pvclock_clock {
+ 	int vclock_mode;
+ 	u64 cycle_last;
+@@ -2400,13 +2399,6 @@ static s64 get_kvmclock_base_ns(void)
+ 	/* Count up from boot time, but with the frequency of the raw clock.  */
+ 	return ktime_to_ns(ktime_add(ktime_get_raw(), pvclock_gtod_data.offs_boot));
+ }
+-#else
+-static s64 get_kvmclock_base_ns(void)
+-{
+-	/* Master clock not used, so we can just use CLOCK_BOOTTIME.  */
+-	return ktime_get_boottime_ns();
+-}
+-#endif
+ 
+ static void kvm_write_wall_clock(struct kvm *kvm, gpa_t wall_clock, int sec_hi_ofs)
+ {
+@@ -10160,6 +10152,7 @@ static void pvclock_irq_work_fn(struct irq_work *w)
+ }
+ 
+ static DEFINE_IRQ_WORK(pvclock_irq_work, pvclock_irq_work_fn);
++#endif
+ 
+ /*
+  * Notification about pvclock gtod data update.
+@@ -10167,26 +10160,26 @@ static DEFINE_IRQ_WORK(pvclock_irq_work, pvclock_irq_work_fn);
+ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
+ 			       void *priv)
+ {
+-	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	struct timekeeper *tk = priv;
+ 
+ 	update_pvclock_gtod(tk);
+ 
++#ifdef CONFIG_X86_64
  	/*
--	 * We also track th most recent recorded KHZ, write and time to
--	 * allow the matching interval to be extended at each write.
-+	 * Track the TSC frequency, scaling ratio, and offset for the current
-+	 * generation. These are used to detect matching TSC writes and to
-+	 * compute the guest TSC from the host clock.
+ 	 * Disable master clock if host does not trust, or does not use,
+ 	 * TSC based clocksource. Delegate queue_work() to irq_work as
+ 	 * this is invoked with tk_core.seq write held.
  	 */
--	kvm->arch.last_tsc_nsec = ns;
--	kvm->arch.last_tsc_write = tsc;
--	kvm->arch.last_tsc_khz = vcpu->arch.virtual_tsc_khz;
--	kvm->arch.last_tsc_offset = offset;
--	kvm->arch.last_tsc_scaling_ratio = vcpu->arch.l1_tsc_scaling_ratio;
-+	kvm->arch.cur_tsc_khz = vcpu->arch.virtual_tsc_khz;
-+	kvm->arch.cur_tsc_scaling_ratio = vcpu->arch.l1_tsc_scaling_ratio;
+-	if (!gtod_is_based_on_tsc(gtod->clock.vclock_mode) &&
++	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode) &&
+ 	    atomic_read(&kvm_guest_has_master_clock) != 0)
+ 		irq_work_queue(&pvclock_irq_work);
++#endif
+ 	return 0;
+ }
  
- 	vcpu->arch.last_guest_tsc = tsc;
+ static struct notifier_block pvclock_gtod_notifier = {
+ 	.notifier_call = pvclock_gtod_notify,
+ };
+-#endif
  
-@@ -2833,8 +2831,6 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 		 * nanosecond time, offset, and write, so if TSCs are in
- 		 * sync, we can match exact offset, and if not, we can match
- 		 * exact software computation in compute_guest_tsc()
--		 *
--		 * These values are tracked in kvm->arch.cur_xxx variables.
- 		 */
- 		kvm->arch.cur_tsc_generation++;
- 		kvm->arch.cur_tsc_nsec = ns;
-@@ -2873,7 +2869,7 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
+ void kvm_setup_xss_caps(void)
+ {
+@@ -10375,9 +10368,9 @@ int kvm_x86_vendor_init(struct kvm_x86_init_ops *ops)
  
- 	offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
--	elapsed = ns - kvm->arch.last_tsc_nsec;
-+	elapsed = ns - kvm->arch.cur_tsc_nsec;
+ 	if (pi_inject_timer == -1)
+ 		pi_inject_timer = housekeeping_enabled(HK_TYPE_TIMER);
+-#ifdef CONFIG_X86_64
+ 	pvclock_gtod_register_notifier(&pvclock_gtod_notifier);
  
- 	if (vcpu->arch.virtual_tsc_khz) {
- 		if (data == 0) {
-@@ -2883,7 +2879,7 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 			 */
- 			synchronizing = true;
- 		} else if (kvm->arch.user_set_tsc) {
--			u64 tsc_exp = kvm->arch.last_tsc_write +
-+			u64 tsc_exp = kvm->arch.cur_tsc_write +
- 						nsec_to_cycles(vcpu, elapsed);
- 			u64 tsc_hz = vcpu->arch.virtual_tsc_khz * 1000LL;
- 			/*
-@@ -2914,14 +2910,14 @@ static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 	 * it's better to try to match offsets from the beginning.
-          */
- 	if (synchronizing &&
--	    vcpu->arch.virtual_tsc_khz == kvm->arch.last_tsc_khz) {
-+	    vcpu->arch.virtual_tsc_khz == kvm->arch.cur_tsc_khz) {
- 		/*
- 		 * If synchronizing, the "last written" TSC value/time
- 		 * recorded by __kvm_synchronize_tsc() should not change
- 		 * (i.e. should be precisely the same as the existing
- 		 * generation).
- 		 */
--		data = kvm->arch.last_tsc_write;
-+		data = kvm->arch.cur_tsc_write;
- 
- 		if (!kvm_check_tsc_unstable()) {
- 			offset = kvm->arch.cur_tsc_offset;
-@@ -3206,7 +3202,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
- 		 * get_kvmclock() to compute kvmclock from the host TSC
- 		 * without needing a vCPU reference.
- 		 */
--		ka->master_tsc_scaling_ratio = ka->last_tsc_scaling_ratio;
-+		ka->master_tsc_scaling_ratio = ka->cur_tsc_scaling_ratio;
- 		tsc_hz = (u64)get_cpu_tsc_khz() * 1000;
- 		if (tsc_hz && kvm_caps.has_tsc_control)
- 			tsc_hz = kvm_scale_tsc(tsc_hz,
-@@ -6075,8 +6071,8 @@ static int kvm_arch_tsc_set_attr(struct kvm_vcpu *vcpu,
- 		raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
- 
- 		matched = (vcpu->arch.virtual_tsc_khz &&
--			   kvm->arch.last_tsc_khz == vcpu->arch.virtual_tsc_khz &&
--			   kvm->arch.last_tsc_offset == offset);
-+			   kvm->arch.cur_tsc_khz == vcpu->arch.virtual_tsc_khz &&
-+			   kvm->arch.cur_tsc_offset == offset);
- 
- 		tsc = kvm_scale_tsc(rdtsc(), vcpu->arch.l1_tsc_scaling_ratio) + offset;
- 		ns = get_kvmclock_base_ns();
-@@ -13520,8 +13516,8 @@ int kvm_arch_enable_virtualization_cpu(void)
- 			 * you may have some problem.  Solving this issue is
- 			 * left as an exercise to the reader.
- 			 */
--			kvm->arch.last_tsc_nsec = 0;
--			kvm->arch.last_tsc_write = 0;
-+			kvm->arch.cur_tsc_nsec = 0;
-+			kvm->arch.cur_tsc_write = 0;
- 		}
- 
++#ifdef CONFIG_X86_64
+ 	if (hypervisor_is_type(X86_HYPER_MS_HYPERV))
+ 		set_hv_tscchange_cb(kvm_hyperv_tsc_notifier);
+ #endif
+@@ -10434,8 +10427,8 @@ void kvm_x86_vendor_exit(void)
+ 					    CPUFREQ_TRANSITION_NOTIFIER);
+ 		cpuhp_remove_state_nocalls(CPUHP_AP_X86_KVM_CLK_ONLINE);
  	}
+-#ifdef CONFIG_X86_64
+ 	pvclock_gtod_unregister_notifier(&pvclock_gtod_notifier);
++#ifdef CONFIG_X86_64
+ 	irq_work_sync(&pvclock_irq_work);
+ 	cancel_work_sync(&pvclock_gtod_work);
+ #endif
 -- 
 2.51.0
 
