@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E19CD37B7
-	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 22:53:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1305109.1577803 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D25CD3447
+	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 22:53:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1305121.1577817 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXZ-0007Co-O5; Sat, 09 May 2026 22:52:57 +0000
+	id 1wLqXf-0007sI-Jt; Sat, 09 May 2026 22:53:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1305109.1577803; Sat, 09 May 2026 22:52:57 +0000
+Received: by outflank-mailman (output) from mailman id 1305121.1577817; Sat, 09 May 2026 22:53:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXZ-0007Bf-G4; Sat, 09 May 2026 22:52:57 +0000
-Received: by outflank-mailman (input) for mailman id 1305109;
- Sat, 09 May 2026 22:52:55 +0000
+	id 1wLqXf-0007re-Bq; Sat, 09 May 2026 22:53:03 +0000
+Received: by outflank-mailman (input) for mailman id 1305121;
+ Sat, 09 May 2026 22:53:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wLqXX-000748-Pe
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 22:52:55 +0000
+ <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1wLqXe-0007ik-0l
+ for xen-devel@lists.xenproject.org; Sat, 09 May 2026 22:53:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLqXX-006SzZ-6b; Sun, 10 May 2026 00:52:55 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wLqXd-006SzZ-Dj; Sun, 10 May 2026 00:53:01 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 69ffba91-bab6-0a2a0a5309dd-0a2a450884bc-28
- for <multiple-recipients>; Sun, 10 May 2026 00:52:55 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 69ffbac8-bab6-0a2a0a5309dd-0a2a45058fce-2
+ for <multiple-recipients>; Sun, 10 May 2026 00:53:01 +0200
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <BATV+34a25b45fb3f66caac6a+8294+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 69ffb9d6-63b5-0a2a45080019-5a9b3222c200-3
- for <multiple-recipients>; Sun, 10 May 2026 00:48:54 +0200
+ <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 69ffb9dc-aaa8-0a2a45050019-5a9b5cc785ee-3
+ for <multiple-recipients>; Sun, 10 May 2026 00:49:00 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wLqTD-000000060LN-26fo; Sat, 09 May 2026 22:48:27 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wLqTD-00000008wzL-0Tzi; Sat, 09 May 2026 22:48:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1wLqTD-0000000DhIz-16xH;
+ Hat Linux)) id 1wLqTD-0000000DhIn-0aFl;
  Sat, 09 May 2026 23:48:27 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=iccKma5DaUh/za+fsn0g6dyqukLvuPzbIDc21T+eVFU=; b=u6RYDSbD4U67hGcbeOF2FyQMxF
-	4dNfxJgj+Jw1VpmpgORUTUZi/lx3jqCjscmmNps9Ktu6RmyhKNQqG8Zrshc/lCMPNKFIfu5ClurIy
-	afITS5d2xHSMWTG1ed+ca466NtWYvBcu88t51HCKij8WUt4q45fFjeqxZY2/6d429QdDCMJqzlYX7
-	P+yZB0umg7J4duqoMjVX9Fgti9c5kdgIh1TnkR32o+5SZVuXwWnuwEIwgF0Q+TO4dsFx/cw9gg56g
-	4jcjQhe2ozp2dKpbnlzBRde2x4i2wfno53zqxKIRk7l41GA2YKpPWUPfJlcBAfuh3NmuEZZFoC7Td
-	q83vedYA==;
+	bh=gfI2hlP2ghO7kkyYaxpeS6acpLBXM/Xjzeg1dOVvOBY=; b=QRXeSw9e0EZn2zrMh0ZMFdeOuH
+	gWYH1Am3+0BI9z6x5jPUh85q3k5sy+S+6PCYf+8U0ulYWYrn5/9WtjOSvz+Fb4yRPvNn8wMEVq2Ee
+	FqXuKANiZmVNTzEwuvyyzfQAkk5rPcDM94g8+018sWE0TCxEZYMBGG0dANDcR7FGqRlFbpFf7uuVt
+	L++xNEjHUy1cqZyLQx3TVzs2EHXd6EoPsZIbj3oBDvKW5wu6DgH0+fohc1QpxXw+gtceIic+69G9B
+	p1nYyIjwdlj0NMHJxzeg3E8VYyVWxIgA+QxNsssMNKPpcSi3HsTIune8KieKthZ++YCViDvVKCj83
+	1riSTOmA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,161 +90,86 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 27/30] KVM: x86: Add KVM_VCPU_TSC_EFFECTIVE_FREQ attribute
-Date: Sat,  9 May 2026 23:46:53 +0100
-Message-ID: <20260509224824.3264567-28-dwmw2@infradead.org>
+Subject: [PATCH v4 24/30] KVM: x86: Avoid gratuitous global clock updates
+Date: Sat,  9 May 2026 23:46:50 +0100
+Message-ID: <20260509224824.3264567-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1778366934-BF77EDB1-33DC7014/13/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-c201ff/1778366940-E119B443-EB3518E7/13/0
 X-purgate-type: clean
-X-purgate-size: 5057
+X-purgate-size: 2521
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Add a read-only per-vCPU attribute that reports the effective TSC and
-APIC bus frequencies as seen by the guest, after hardware TSC scaling
-is applied.
+Eliminate three sources of unnecessary KVM_REQ_GLOBAL_CLOCK_UPDATE:
 
-This allows userspace to populate CPUID leaf 0x40000010 (the "generic"
-timing information leaf used by FreeBSD, XNU, and VMware) with correct
-values, without KVM needing to modify guest CPUID at runtime.
+1. kvm_write_system_time(): The global clock update was a workaround for
+   ever-drifting clocks based on the host's CLOCK_MONOTONIC subject to
+   NTP skew. On booting or resuming a guest, it just leads to running
+   kvm_guest_time_update() twice for each vCPU for no good reason. Use
+   KVM_REQ_CLOCK_UPDATE on the vCPU itself, and only when the clock is
+   being enabled, not disabled.
 
-The effective TSC frequency differs from what userspace requested via
-KVM_SET_TSC_KHZ due to the granularity of hardware scaling and the
-host kernel's measurement of its own TSC frequency.
+2. kvm_arch_vcpu_load(): Use KVM_REQ_CLOCK_UPDATE instead of
+   KVM_REQ_GLOBAL_CLOCK_UPDATE. There is no need to update all vCPUs'
+   clocks when one vCPU is loaded.
 
-The relationship between the attributes in KVM_VCPU_TSC_CTRL:
-
-  KVM_VCPU_TSC_OFFSET: the offset added to the scaled host TSC
-  KVM_VCPU_TSC_SCALE: the raw hardware scaling ratio and frac_bits,
-    for VMClock and precise arithmetic
-  KVM_VCPU_TSC_EFFECTIVE_FREQ: the resulting frequencies in kHz,
-    for populating CPUID leaves
+3. kvm_gen_kvmclock_update(): Skip the periodic global update entirely
+   when in master clock mode, since the clock is defined precisely by
+   the guest TSC and doesn't drift.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- Documentation/virt/kvm/devices/vcpu.rst | 33 +++++++++++++++++++++++++
- arch/x86/include/uapi/asm/kvm.h         |  6 +++++
- arch/x86/kvm/x86.c                      | 23 +++++++++++++++++
- 3 files changed, 62 insertions(+)
+ arch/x86/kvm/x86.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/virt/kvm/devices/vcpu.rst b/Documentation/virt/kvm/devices/vcpu.rst
-index 56562b932280..75d1c2bbb8bc 100644
---- a/Documentation/virt/kvm/devices/vcpu.rst
-+++ b/Documentation/virt/kvm/devices/vcpu.rst
-@@ -326,3 +326,36 @@ host TSC values are converted to guest TSC using the formula:
- Userspace can use this to precisely calculate the guest TSC from the host
- TSC at any given moment. This is needed for accurate migration of guests,
- as described in the documentation for the KVM_VCPU_TSC_OFFSET attribute.
-+
-+4.3 ATTRIBUTE: KVM_VCPU_TSC_EFFECTIVE_FREQ
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+:Parameters: struct kvm_vcpu_tsc_effective_freq
-+
-+Returns:
-+
-+	 ======= ======================================
-+	 -EFAULT Error reading the provided parameter
-+		 address.
-+	 -ENXIO  Attribute not supported (no constant TSC)
-+	 ======= ======================================
-+
-+This read-only attribute reports the effective TSC and APIC bus timer
-+frequencies as observed by the guest, after hardware TSC scaling is
-+applied::
-+
-+  struct kvm_vcpu_tsc_effective_freq {
-+	__u32 tsc_khz;
-+	__u32 bus_khz;
-+  };
-+
-+The tsc_khz field is the guest's effective TSC frequency in kHz. This
-+may differ slightly from what userspace requested via KVM_SET_TSC_KHZ
-+due to the granularity of hardware scaling and the host kernel's
-+measurement of its own TSC frequency.
-+
-+The bus_khz field is the APIC bus timer frequency in kHz.
-+
-+Userspace can use these values to populate CPUID timing leaves for the
-+guest, such as the generic timing leaf at 0x40000010 (EAX=tsc_khz,
-+EBX=bus_khz) or hypervisor-specific equivalents.
-diff --git a/arch/x86/include/uapi/asm/kvm.h b/arch/x86/include/uapi/asm/kvm.h
-index 384be9a53395..196899296f84 100644
---- a/arch/x86/include/uapi/asm/kvm.h
-+++ b/arch/x86/include/uapi/asm/kvm.h
-@@ -962,12 +962,18 @@ struct kvm_hyperv_eventfd {
- #define KVM_VCPU_TSC_CTRL 0 /* control group for the timestamp counter (TSC) */
- #define   KVM_VCPU_TSC_OFFSET 0 /* attribute for the TSC offset */
- #define   KVM_VCPU_TSC_SCALE  1 /* attribute for TSC scaling factor */
-+#define   KVM_VCPU_TSC_EFFECTIVE_FREQ 2 /* attribute for effective frequencies */
- 
- struct kvm_vcpu_tsc_scale {
- 	__u64 tsc_ratio;
- 	__u64 tsc_frac_bits;
- };
- 
-+struct kvm_vcpu_tsc_effective_freq {
-+	__u32 tsc_khz;
-+	__u32 bus_khz;
-+};
-+
- /* x86-specific KVM_EXIT_HYPERCALL flags. */
- #define KVM_EXIT_HYPERCALL_LONG_MODE	_BITULL(0)
- 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 77dfd4455a4e..c15303963686 100644
+index 0656d901fe79..7d9ec0638d28 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -6079,6 +6079,9 @@ static int kvm_arch_tsc_has_attr(struct kvm_vcpu *vcpu,
- 	case KVM_VCPU_TSC_SCALE:
- 		r = kvm_caps.has_tsc_control ? 0 : -ENXIO;
- 		break;
-+	case KVM_VCPU_TSC_EFFECTIVE_FREQ:
-+		r = boot_cpu_has(X86_FEATURE_CONSTANT_TSC) ? 0 : -ENXIO;
-+		break;
- 	default:
- 		r = -ENXIO;
+@@ -2457,13 +2457,13 @@ static void kvm_write_system_time(struct kvm_vcpu *vcpu, gpa_t system_time,
  	}
-@@ -6115,6 +6118,25 @@ static int kvm_arch_tsc_get_attr(struct kvm_vcpu *vcpu,
- 		r = 0;
- 		break;
- 	}
-+	case KVM_VCPU_TSC_EFFECTIVE_FREQ: {
-+		struct kvm_vcpu_tsc_effective_freq freq;
+ 
+ 	vcpu->arch.time = system_time;
+-	kvm_make_request(KVM_REQ_GLOBAL_CLOCK_UPDATE, vcpu);
+ 
+ 	/* we verify if the enable bit is set... */
+-	if (system_time & 1)
++	if (system_time & 1) {
+ 		kvm_gpc_activate(&vcpu->arch.pv_time, system_time & ~1ULL,
+ 				 sizeof(struct pvclock_vcpu_time_info));
+-	else
++		kvm_make_request(KVM_REQ_CLOCK_UPDATE, vcpu);
++	} else
+ 		kvm_gpc_deactivate(&vcpu->arch.pv_time);
+ 
+ 	return;
+@@ -3638,6 +3638,10 @@ static void kvm_gen_kvmclock_update(struct kvm_vcpu *v)
+ 	struct kvm_vcpu *vcpu;
+ 	struct kvm *kvm = v->kvm;
+ 
++	/* In master clock mode, the clock doesn't need periodic updates. */
++	if (kvm->arch.use_master_clock)
++		return;
 +
-+		if (!boot_cpu_has(X86_FEATURE_CONSTANT_TSC)) {
-+			r = -ENXIO;
-+			break;
-+		}
-+
-+		if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, vcpu))
-+			kvm_guest_time_update(vcpu);
-+
-+		freq.tsc_khz = div_u64(vcpu->arch.hw_tsc_hz, 1000);
-+		freq.bus_khz = 1000000 / vcpu->kvm->arch.apic_bus_cycle_ns;
-+		r = -EFAULT;
-+		if (copy_to_user(uaddr, &freq, sizeof(freq)))
-+			break;
-+		r = 0;
-+		break;
-+	}
- 	default:
- 		r = -ENXIO;
- 	}
-@@ -6155,6 +6177,7 @@ static int kvm_arch_tsc_set_attr(struct kvm_vcpu *vcpu,
- 		break;
- 	}
- 	case KVM_VCPU_TSC_SCALE:
-+	case KVM_VCPU_TSC_EFFECTIVE_FREQ:
- 		r = -EINVAL; /* Read only */
- 		break;
- 	default:
+ 	kvm_for_each_vcpu(i, vcpu, kvm) {
+ 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, vcpu);
+ 		kvm_vcpu_kick(vcpu);
+@@ -5339,7 +5343,7 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
+ 		 * kvmclock on vcpu->cpu migration
+ 		 */
+ 		if (!vcpu->kvm->arch.use_master_clock || vcpu->cpu == -1)
+-			kvm_make_request(KVM_REQ_GLOBAL_CLOCK_UPDATE, vcpu);
++			kvm_make_request(KVM_REQ_CLOCK_UPDATE, vcpu);
+ 		if (vcpu->cpu != cpu)
+ 			kvm_make_request(KVM_REQ_MIGRATE_TIMER, vcpu);
+ 		vcpu->cpu = cpu;
 -- 
 2.51.0
 
