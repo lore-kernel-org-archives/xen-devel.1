@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 432E3CD3427
-	for <xen-devel@archiver.kernel.org>; Sun, 10 May 2026 20:59:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1305591.1577875 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DA1CD3427
+	for <xen-devel@archiver.kernel.org>; Sun, 10 May 2026 21:06:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1305612.1577893 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMBEz-0004zy-98; Sun, 10 May 2026 20:59:09 +0000
+	id 1wMBLY-00076O-6G; Sun, 10 May 2026 21:05:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1305591.1577875; Sun, 10 May 2026 20:59:09 +0000
+Received: by outflank-mailman (output) from mailman id 1305612.1577893; Sun, 10 May 2026 21:05:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMBEz-0004zl-3s; Sun, 10 May 2026 20:59:09 +0000
-Received: by outflank-mailman (input) for mailman id 1305591;
- Sun, 10 May 2026 20:59:07 +0000
+	id 1wMBLY-00076H-3Z; Sun, 10 May 2026 21:05:56 +0000
+Received: by outflank-mailman (input) for mailman id 1305612;
+ Sun, 10 May 2026 21:05:54 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wMBEw-0004za-4D
- for xen-devel@lists.xenproject.org; Sun, 10 May 2026 20:59:07 +0000
+ id 1wMBLW-00076B-Fp
+ for xen-devel@lists.xenproject.org; Sun, 10 May 2026 21:05:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wMBEs-002NBx-PP; Sun, 10 May 2026 22:59:05 +0200
+ id 1wMBLV-00FRbJ-PR; Sun, 10 May 2026 23:05:53 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a00f11d-2eae-0a2a0a5409dd-0a2a45078b4e-28
- for <multiple-recipients>; Sun, 10 May 2026 22:59:04 +0200
+ id 6a00f309-2eae-0a2a0a5409dd-0a2a4507d730-10
+ for <multiple-recipients>; Sun, 10 May 2026 23:05:53 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a00f197-229c-0a2a45070019-5a9b3222df74-3
- for <multiple-recipients>; Sun, 10 May 2026 22:59:04 +0200
+ id 6a00f330-229c-0a2a45070019-5a9b3222e5ba-3
+ for <multiple-recipients>; Sun, 10 May 2026 23:05:53 +0200
 Received: from 54-240-197-234.amazon.com ([54.240.197.234]
  helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wMBER-00000007GKB-3RrH; Sun, 10 May 2026 20:58:36 +0000
+ id 1wMBLA-00000007GmD-1vIF; Sun, 10 May 2026 21:05:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,14 +55,14 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=2fh66ArsKe8U1Q1vazOhgHC7ZL/RSaZ7Onoha+m5hJY=; b=vgVEtbex1j5sE2mCcKtcKlE90c
-	nPwt7nAiy4w+dbfimkczHzK87JFH4kM4KgZjrdWnOLksjWypfG3VOs67WLsDD8y03Qqi0InQ2OtXC
-	WYZXB/uvdNqa016XglX2VV6uCC+d7mD0aGi2i+5qfchaeHrFdf3sty4Lsrompyku6pTWNTcvjbBA6
-	vihKszwBl4Nffc6cDeaKKXKEBO+wjUBJltWD5cvYUZtDGAAQUqK1UtUUNUWfxZBhQojEcmQ/90YKn
-	QoO8kKJeV0kpegy7ENLQBcdbTpTH2LoKfQiCkFZBbchm6mcPDsPNSw83iPAmkMo3HqEc0TBTVKeya
-	FAE5luUA==;
-Message-ID: <0c199440c2cfd56a4c8e451134c6a0b1137507d6.camel@infradead.org>
-Subject: [PATCH v4 33/30] KVM: selftests: Add Xen runstate migration test
+	bh=bhNOFvkH719t7i9pQvqgD9PQhJFs6ir/zUj3G3rKD18=; b=k3gDaT7vBcXRudpVf2JczbIT1q
+	5afuzuA0DX9RyNuKWPIbcFfMzM95N5bcyy38ZIevIkLL9zY4zLoghfyqt5mCgw8RfARtFladk4DRS
+	mhEmCZR0wnj1sMkVgMRew2bzKtPMcrFIMBGzMRto5CiJui/yonAWitgBo7DXOG5JF9RIu1i377M2A
+	pgfSLhdq3rJcC+kwSrgxUxqx9iVfay9FgtA+vIZz0+eZTBiF3uABfmOlRptJ3ez23N83pSvwwqWSb
+	icd8XPttOeADBiZBrMnnQzrvU7QGpB/zx9+imXaF4rhTGXJghLDrx3sI7cbaAI/Qvr8bngLVEixRy
+	87Plb/WQ==;
+Message-ID: <66458bbc44f98b7f9742007348a9f70ee8086429.camel@infradead.org>
+Subject: [PATCH v4 32/30] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
  Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson
@@ -78,259 +78,85 @@ To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
  <joey.gouly@arm.com>, kvm@vger.kernel.org,  linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org,
  linux-kselftest@vger.kernel.org
-Date: Sun, 10 May 2026 21:56:35 +0100
+Date: Sun, 10 May 2026 22:05:31 +0100
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-SFVUe3tfsnRVPe9dwb/j"
+	boundary="=-n1rYoFphXBZk9zIVxw0J"
 User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ef75cf/1778446744-0B175C48-6EC8CD65/0/0
+X-purgate-ID: tlsNG-ef75cf/1778447153-28479C48-A21FFE83/0/0
 X-purgate-type: clean
-X-purgate-size: 15302
+X-purgate-size: 9332
 
 
---=-SFVUe3tfsnRVPe9dwb/j
+--=-n1rYoFphXBZk9zIVxw0J
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Test that Xen runstate (steal time) is correctly accounted across a
-simulated live migration using KVM_XEN_VCPU_ATTR and KVM_[GS]ET_CLOCK_GUEST=
-.
+KVM_SET_TSC_KHZ changes the vCPU's TSC scaling ratio but does not
+update the VM-wide cur_tsc_scaling_ratio used by get_kvmclock().
+This causes get_kvmclock() to use a stale (default 1:1) ratio when
+computing the KVM clock, leading to drift between the host-side
+kvmclock and what the guest observes.
 
-The test simulates what a real VMM does during migration:
-1. Creates a VM with Xen HVM config and runstate tracking
-2. Runs the guest to accumulate some kvmclock time
-3. Saves clock (KVM_GET_CLOCK_GUEST), TSC offset, and runstate
-4. Marks the saved state as RUNSTATE_runnable (vCPU not running)
-5. Destroys the source VM
-6. Sleeps 10ms (simulating migration network transfer time)
-7. Creates a new VM and restores all state precisely as saved
-8. Runs the guest and verifies the migration gap appears as steal
-
-The kernel accounts the gap because: on vcpu_load, it transitions from
-RUNSTATE_runnable to RUNSTATE_running, computing delta =3D kvmclock_now -
-state_entry_time. Since kvmclock has advanced past the saved entry time
-(real time elapsed during migration), the delta is added to time_runnable.
+Fix this by calling kvm_synchronize_tsc() after changing the TSC
+frequency. This:
+ - Updates cur_tsc_scaling_ratio (consumed by pvclock_update_vm_gtod_copy)
+ - Ensures the TSC value is continuous across the frequency change
+ - Triggers kvm_track_tsc_matching() for proper masterclock handling
+ - Allows subsequent vCPUs to synchronize via the 1-second slop hack
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- .../selftests/kvm/x86/xen_migration_test.c    | 194 ++++++++++++++++++
- 1 file changed, 194 insertions(+)
- create mode 100644 tools/testing/selftests/kvm/x86/xen_migration_test.c
+ arch/x86/kvm/x86.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/tools/testing/selftests/kvm/x86/xen_migration_test.c b/tools/t=
-esting/selftests/kvm/x86/xen_migration_test.c
-new file mode 100644
-index 000000000000..37e8ace00611
---- /dev/null
-+++ b/tools/testing/selftests/kvm/x86/xen_migration_test.c
-@@ -0,0 +1,194 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Test Xen runstate (steal time) preservation across simulated migration.
-+ *
-+ * Verifies that the kernel correctly accounts the migration gap as
-+ * steal time (runnable) when runstate data is saved and restored
-+ * precisely, but real time elapses during the migration.
-+ *
-+ * The key insight: userspace saves the runstate with state=3DRUNSTATE_run=
-nable
-+ * (the vCPU is not running during migration). On restore, the kernel sees
-+ * that kvmclock has advanced past state_entry_time, and accounts the
-+ * difference as time spent in the runnable state.
-+ */
-+#include <inttypes.h>
-+#include <stdint.h>
-+#include <stdio.h>
-+#include <string.h>
-+#include <unistd.h>
-+
-+#include "test_util.h"
-+#include "kvm_util.h"
-+#include "processor.h"
-+
-+#include <asm/pvclock-abi.h>
-+
-+#define SHINFO_GPA	0xc0000000ULL
-+#define RUNSTATE_GPA	(SHINFO_GPA + 0x1000)
-+
-+#define RUNSTATE_running  0
-+#define RUNSTATE_runnable 1
-+#define RUNSTATE_blocked  2
-+#define RUNSTATE_offline  3
-+
-+struct vcpu_runstate_info {
-+	uint32_t state;
-+	uint64_t state_entry_time;
-+	uint64_t time[4];
-+} __attribute__((packed));
-+
-+static void guest_code(void)
-+{
-+	volatile struct vcpu_runstate_info *rs =3D
-+		(void *)(unsigned long)RUNSTATE_GPA;
-+
-+	/* Report runstate times =E2=80=94 no need to enable kvmclock MSR,
-+	 * the kernel writes runstate using its internal kvmclock. */
-+	GUEST_SYNC_ARGS(0, rs->time[RUNSTATE_runnable],
-+			rs->time[RUNSTATE_running], 0, 0);
-+}
-+
-+static struct kvm_vm *create_xen_vm(struct kvm_vcpu **vcpu)
-+{
-+	struct kvm_vm *vm;
-+	int xen_caps;
-+
-+	vm =3D vm_create_with_one_vcpu(vcpu, guest_code);
-+
-+	xen_caps =3D kvm_check_cap(KVM_CAP_XEN_HVM);
-+	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_SHARED_INFO);
-+	TEST_REQUIRE(xen_caps & KVM_XEN_HVM_CONFIG_RUNSTATE);
-+
-+	/* Map pages */
-+	vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
-+				    SHINFO_GPA, 1, 2, 0);
-+	virt_map(vm, SHINFO_GPA, SHINFO_GPA, 2);
-+
-+	/* Enable Xen HVM with MSR interception (enables runstate tracking) */
-+	struct kvm_xen_hvm_config cfg =3D {
-+		.flags =3D KVM_XEN_HVM_CONFIG_INTERCEPT_HCALL,
-+		.msr =3D 0x40000000,
-+	};
-+	vm_ioctl(vm, KVM_XEN_HVM_CONFIG, &cfg);
-+
-+	/* Set shared_info */
-+	struct kvm_xen_hvm_attr ha =3D {
-+		.type =3D KVM_XEN_ATTR_TYPE_SHARED_INFO,
-+		.u.shared_info.gfn =3D SHINFO_GPA >> 12,
-+	};
-+	vm_ioctl(vm, KVM_XEN_HVM_SET_ATTR, &ha);
-+
-+	/* Set runstate address */
-+	struct kvm_xen_vcpu_attr rs_addr =3D {
-+		.type =3D KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_ADDR,
-+		.u.gpa =3D RUNSTATE_GPA,
-+	};
-+	vcpu_ioctl(*vcpu, KVM_XEN_VCPU_SET_ATTR, &rs_addr);
-+
-+	return vm;
-+}
-+
-+int main(void)
-+{
-+	struct pvclock_vcpu_time_info pvti;
-+	struct kvm_xen_vcpu_attr runstate_save;
-+	struct kvm_vcpu *vcpu;
-+	struct kvm_vm *vm;
-+	struct ucall uc;
-+	uint64_t tsc_offset;
-+	int ret;
-+
-+	/* =3D=3D=3D SOURCE SIDE =3D=3D=3D */
-+	pr_info("=3D=3D=3D Source: create VM and run guest =3D=3D=3D\n");
-+	vm =3D create_xen_vm(&vcpu);
-+
-+	/* Run guest once to accumulate some runstate time */
-+	vcpu_run(vcpu);
-+	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
-+	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
-+
-+	pr_info("  Guest sees: runnable=3D%" PRIu64 " running=3D%" PRIu64 "\n",
-+		uc.args[2], uc.args[3]);
-+
-+	/* Save clock state */
-+	ret =3D __vcpu_ioctl(vcpu, KVM_GET_CLOCK_GUEST, &pvti);
-+	TEST_ASSERT(!ret, "KVM_GET_CLOCK_GUEST failed");
-+
-+	/* Save TSC offset */
-+	tsc_offset =3D vcpu_get_msr(vcpu, MSR_IA32_TSC_ADJUST);
-+
-+	/* Save runstate =E2=80=94 the vCPU is now "runnable" (not running) */
-+	runstate_save.type =3D KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
-+	vcpu_ioctl(vcpu, KVM_XEN_VCPU_GET_ATTR, &runstate_save);
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index ac982652e5e0..833a4f119e22 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -206,6 +206,7 @@ module_param(mitigate_smt_rsb, bool, 0444);
+ #ifdef CONFIG_X86_64
+ static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)=
+;
+ #endif
++static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value);
+ #define KVM_MAX_NR_USER_RETURN_MSRS 16
+=20
+ struct kvm_user_return_msrs {
+@@ -2611,7 +2612,20 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u3=
+2 user_tsc_khz)
+ 			 user_tsc_khz, thresh_lo, thresh_hi);
+ 		use_scaling =3D 1;
+ 	}
+-	return set_tsc_khz(vcpu, user_tsc_khz, use_scaling);
++	if (set_tsc_khz(vcpu, user_tsc_khz, use_scaling))
++		return -1;
 +
 +	/*
-+	 * Transition to runnable state before saving =E2=80=94 the vCPU is
-+	 * not running during migration.
++	 * Re-synchronize the TSC after changing frequency. This ensures
++	 * cur_tsc_scaling_ratio is updated (used by get_kvmclock) and
++	 * the TSC value is continuous across the frequency change.
 +	 */
-+	runstate_save.u.runstate.state =3D RUNSTATE_runnable;
++	{
++		u64 tsc =3D kvm_read_l1_tsc(vcpu, rdtsc());
 +
-+	pr_info("  Saved runstate: running=3D%" PRIu64 " runnable=3D%" PRIu64
-+		" entry=3D%" PRIu64 "\n",
-+		(uint64_t)runstate_save.u.runstate.time_running,
-+		(uint64_t)runstate_save.u.runstate.time_runnable,
-+		(uint64_t)runstate_save.u.runstate.state_entry_time);
-+
-+	uint64_t saved_runnable =3D runstate_save.u.runstate.time_runnable;
-+
-+	kvm_vm_release(vm);
-+
-+	/* =3D=3D=3D MIGRATION GAP =3D=3D=3D */
-+	pr_info("=3D=3D=3D Simulating migration (sleeping 10ms) =3D=3D=3D\n");
-+	usleep(10000);
-+
-+	/* =3D=3D=3D DESTINATION SIDE =3D=3D=3D */
-+	pr_info("=3D=3D=3D Destination: create new VM and restore =3D=3D=3D\n");
-+	vm =3D create_xen_vm(&vcpu);
-+
-+	/* Restore TSC offset */
-+	vcpu_set_msr(vcpu, MSR_IA32_TSC_ADJUST, tsc_offset);
-+
-+	/* Restore clock =E2=80=94 kvmclock will now be ~10ms ahead of the snapsh=
-ot */
-+	vcpu_ioctl(vcpu, KVM_SET_CLOCK_GUEST, &pvti);
-+
-+	/* Restore runstate exactly as saved (state=3Drunnable) */
-+	runstate_save.type =3D KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA;
-+	ret =3D __vcpu_ioctl(vcpu, KVM_XEN_VCPU_SET_ATTR, &runstate_save);
-+	TEST_ASSERT(!ret, "Restore runstate failed: errno %d", errno);
-+
-+	/*
-+	 * Run the guest. When the vCPU enters vcpu_run, the kernel
-+	 * transitions from RUNSTATE_runnable to RUNSTATE_running.
-+	 * It computes: delta =3D kvmclock_now - state_entry_time
-+	 * This delta (which includes the migration gap) is added to
-+	 * time_runnable (steal time).
-+	 */
-+	vcpu_run(vcpu);
-+	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
-+	TEST_ASSERT_EQ(get_ucall(vcpu, &uc), UCALL_SYNC);
-+
-+	uint64_t guest_runnable =3D uc.args[2];
-+	uint64_t guest_running =3D uc.args[3];
-+
-+	pr_info("  Guest sees: runnable=3D%" PRIu64 " running=3D%" PRIu64 "\n",
-+		guest_runnable, guest_running);
-+
-+	uint64_t steal_increase =3D guest_runnable - saved_runnable;
-+	pr_info("  Steal time increase: %" PRIu64 " ns (migration gap)\n",
-+		steal_increase);
-+
-+	/*
-+	 * The steal time increase should be at least 10ms (the sleep)
-+	 * but not more than 5s (allowing for VM creation overhead).
-+	 * The actual gap is from the source's state_entry_time to the
-+	 * destination's kvmclock "now" at vcpu_load time.
-+	 */
-+	TEST_ASSERT(steal_increase >=3D 10000000ULL &&
-+		    steal_increase < 5000000000ULL,
-+		    "Steal time increase %" PRIu64 " ns not in expected range "
-+		    "[10ms, 5s]", steal_increase);
-+
-+	kvm_vm_release(vm);
-+	pr_info("PASS: Migration gap correctly accounted as steal time\n");
++		kvm_synchronize_tsc(vcpu, &tsc);
++	}
 +	return 0;
-+}
+ }
+=20
+ static s64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
 --=20
 2.43.0
 
 
 
---=-SFVUe3tfsnRVPe9dwb/j
+--=-n1rYoFphXBZk9zIVxw0J
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -409,22 +235,22 @@ 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
-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
+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
-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
+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
 
 
---=-SFVUe3tfsnRVPe9dwb/j--
+--=-n1rYoFphXBZk9zIVxw0J--
 
