@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D2ACD3447
-	for <xen-devel@archiver.kernel.org>; Sat,  9 May 2026 22:53:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1305124.1577831 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 287FBCD37AF
+	for <xen-devel@archiver.kernel.org>; Sun, 10 May 2026 06:03:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1305289.1577866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXh-0008Bw-Lr; Sat, 09 May 2026 22:53:05 +0000
+	id 1wLxFh-00046b-Q6; Sun, 10 May 2026 06:02:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1305124.1577831; Sat, 09 May 2026 22:53:05 +0000
+Received: by outflank-mailman (output) from mailman id 1305289.1577866; Sun, 10 May 2026 06:02:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLqXh-00089s-3B; Sat, 09 May 2026 22:53:05 +0000
-Received: by outflank-mailman (input) for mailman id 1305124;
- Sat, 09 May 2026 22:53:02 +0000
+	id 1wLxFh-00046T-Mm; Sun, 10 May 2026 06:02:57 +0000
+Received: by outflank-mailman (input) for mailman id 1305289;
+ Sun, 10 May 2026 06:02:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1wLqXe-0007kw-Ga
- for xen-devel@lists.xenproject.org; Sat, 09 May 2026 22:53:02 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <xakep.amatop@gmail.com>) id 1wLxFg-00046L-QO
+ for xen-devel@lists.xenproject.org; Sun, 10 May 2026 06:02:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLqXd-002c5y-Ts; Sun, 10 May 2026 00:53:01 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 69ffba4c-e002-0a2a0a5209dd-0a2a450ae9e4-24
- for <multiple-recipients>; Sun, 10 May 2026 00:53:01 +0200
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <BATV+9b8b472e89b521af7d3c+8294+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 69ffb9dc-56b3-0a2a450a0019-5a9b5cc7b01a-3
- for <multiple-recipients>; Sun, 10 May 2026 00:49:00 +0200
-Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wLqTD-00000008wzK-0NIx; Sat, 09 May 2026 22:48:28 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1wLqTD-0000000DhIf-06oU;
- Sat, 09 May 2026 23:48:27 +0100
+ id 1wLxFf-00B9iF-3A
+ for xen-devel@lists.xenproject.org; Sun, 10 May 2026 08:02:55 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a001f87-5cb7-0a2a0a5109dd-0a2a450c9010-18
+ for <xen-devel@lists.xenproject.org>; Sun, 10 May 2026 08:02:55 +0200
+Received: from [209.85.208.171] (helo=mail-lj1-f171.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a001f8e-62f1-0a2a450c0019-d155d0abb41b-3
+ for <xen-devel@lists.xenproject.org>; Sun, 10 May 2026 08:02:54 +0200
+Received: by mail-lj1-f171.google.com with SMTP id
+ 38308e7fff4ca-38a01c80c34so25417961fa.0
+ for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 23:02:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,170 +47,252 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
-	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=kOxo26JgkgBnkgpV4u4u6bNS0TzdmD76LNhTnJ/HBkg=; b=S1Qj7ot+NvaVb/ETnLNcOSWLI7
-	a8uV8eSZQIwsFNUiD0HkK8FYHDMAVTpOBbqWewmXi9iTOyErjosby5Pac1eE/QdywtKg3s1IgXLek
-	HsNyTFM+ykVPLWmEpjCYTbzPzXkWq2gBFRY2VWy5lSXutf/hfKCAX5QZID2vs2Qba7bmYbLFSYdHJ
-	e63CuDfT1qC1GqGhST/XGcE8ayKk2efxCazSVC33178g9UgpHiWeSxDzwAU6HGywcZLQDaNc+JTqO
-	f/VY+Sc/cuha12qsM/abTJXD6y2KRPxWwrDd1pwd3HDISKnYc2g96zWw4BFuGCu9pg1BtxPbgj7Dm
-	WQFH5k/g==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Paul Durrant <paul@xen.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Sascha Bischoff <Sascha.Bischoff@arm.com>,
-	Marc Zyngier <maz@kernel.org>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Jack Allister <jalliste@amazon.com>,
-	Dongli Zhang <dongli.zhang@oracle.com>,
-	joe.jin@oracle.com,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 22/30] KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
-Date: Sat,  9 May 2026 23:46:48 +0100
-Message-ID: <20260509224824.3264567-23-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
-References: <20260509224824.3264567-1-dwmw2@infradead.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1778392974; cv=none;
+        d=google.com; s=arc-20240605;
+        b=GrAID9Ic83N7uiGV/RNGIpAfq9AVCTf+BG0HxyJtzeZQ475A++9UgsNC4vE5Zmq3ol
+         T3x7KjupsF2OezQLc7vjZMG+OGrm3/hC7iUhO48lbcfGXtr7JvzdhYOc3R+cv5J/uT1a
+         dOsNo05HwHptBlnDs8kAk1JRDVUHimigdYRTknsCqkh0YOWNZiTv4jVRmicnofKWRlbE
+         bKytrfjFwQYcDhnOXV1aRWnKtyBkWJAehjjkIv5hA2EiCkib6E39Ykp0uqYYNywEY3jM
+         rsnvuZgzvFoCS4fMbVe55t7vcfVevDWGbXRifALKg1XuHhqNXNJvDNLe+1S/tg3QlggL
+         dzrA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
+        fh=uAzoxIkY79cy0zES8IqO07ArU7DBG3jlr2bg4XRVkR0=;
+        b=AjV3iuSZZ87c/O7MX83aZZIY1hBhT5fC/QDVqXu1gePK5BeAo0c/DLVDSaM3Wrf02/
+         lSWun1+cm9BS1nwLRfR2iiO6191Ka5miXeietGa3qDPESYyjtwWnsC5UEC0v2nZ+L+TQ
+         rnQ8sA0rC7p9zpGI59fMCNbQfEnEG25vNwVkr4EKUziTp/SWEzAZW4HP8B3lnV4n4afR
+         HExzbn5pglHNFzDebbGyzfKGZJAAH2+T/us1pmDzQnw5183LyBw5d0TpyS023k4F+CN4
+         kc9SFJbAbrj9Pqm9yJ0Kk06FVpNcXHr2VkY76g4sjAPf5h37/mJilD2F87V305S+iB3p
+         iqHw==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778392974; x=1778997774; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
+        b=rAmyJNIkpP8kE1aMgze2mOBLQlunpDypTu5yhmxBl/JW0HmcbqE4GEfqZtn3GZQURa
+         xKNWoI+CMa4Ng0hqJUJkj/hIAmYW6B0F19ArhM5fZE2vm4RXfg9uxmO3d2t1AIybYOph
+         /U9LmtHhFpjNVa4UTPHhuCziPCJtl9evjSwhd0plW3vCyXCAfCdIvD9eIEHg65FjU0P9
+         msFBdpvik/GHrHfXYtHIvm6K5+TnHWT4vGahOzEuQH7wZ7ekIUg0GQWxIwxjwUnSjHm6
+         D8JAkY8AHBIsj/uCa0GWommCcuiisf+NrDP6/ej5DYd3s1kERfaY9ZBxPH4ryXk/fk7C
+         GHkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778392974; x=1778997774;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
+        b=TT+JuqucG7TcZVkc9B2cTWBWHKWN+n+RyVwYwExV6ORqVKMmW2RDOg+2S01bpd5cYV
+         I6c5FTy8sCEb2EBuWJnt3GJW1t8FNIBnBhE6ptwT3HlqXvmQ2hhZj2il6VSxPfBfaWBq
+         EfhcneUNGNjMV7nNBuiIvzllQTzvIoBX5pzrn70AKvsACIDI7MAZCdCVmveWu9GMOANh
+         6my7L9pwZ2dzi0Yt96A6kpVVo/UQNIWOj4peBp64G/cuZ/Puj3E0/mT673LuIT3GPCUk
+         ilNzdmYjvNQIjS4ec70V/MuGdjiz69qJL9T1wCrOZYNE7mNiQOqqxbQoi/HN9KV80maK
+         qUmA==
+X-Gm-Message-State: AOJu0Yx2E1CqB1LPx1sjaSHqG3scK5Cjot/wn1CBoOSZychYWyQzJlXA
+	lYy/n4pdsAQOBO8nlkUbJjcq9O1DmgbsAx04Negj3dLbd/nTj5qfJB1/Yy5IfMuxZXX9/e89Y77
+	Y9MaVsca18GDbGxBFqxjDNZv6jCYH/+0=
+X-Gm-Gg: Acq92OHSS8lEGRO8JXgZZ6C/psvFWdDFwDAjzY0U+j3HZOvisrJ9Gzj4bipSLppIwrn
+	kUzsnHQK7rzuXOPIl6n+26EC/pu4H0ddV2M/lNwO1VfvDh+H4BLxDwY7qeHSFwxcPx2xrYLm4bG
+	9uWphRG1p6UHCVyW3gFGQj04oAQTuX4cEBtcEFscKS5N4eoTXJzf7OPR4pZFpbsigVmoI0J5bR4
+	cpZxrCYDHGe3G6UnMxYvKssjjA4vovwbPlZ3R1gjlbT0tKV/X4yXRpg7nLidDpYYk4HcAoPcrOp
+	G/GlKA==
+X-Received: by 2002:a05:651c:41c8:b0:394:4e7:9805 with SMTP id
+ 38308e7fff4ca-394081312f7mr13755891fa.19.1778392973629; Sat, 09 May 2026
+ 23:02:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1778366940-727758B7-C95BCE30/13/0
+References: <cover.1775125380.git.mykola_kvach@epam.com> <5e1951e1c17037e020de9c0eecb5fba94edcd9dd.1775125380.git.mykola_kvach@epam.com>
+ <EB3F884F-FCD6-4AE7-84FA-79ABF31EA88E@arm.com> <CAGeoDV80QHdesYQF-J4fg7wYQ6RLNg6u27aQhj4F+JoM4hU3uQ@mail.gmail.com>
+ <CF8E0EB2-3048-4B04-B763-AE5EF1909416@arm.com>
+In-Reply-To: <CF8E0EB2-3048-4B04-B763-AE5EF1909416@arm.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Sun, 10 May 2026 09:02:42 +0300
+X-Gm-Features: AVHnY4Liw9b4vVk0zuGrKmULc20ZcK-O_7r4lptAmDphN-WnqIpD3Sa7zwS3D0Y
+Message-ID: <CAGeoDV_SqVtcAZemSx1Ap0R6JqnbAxoLYCctPEU3DkcuQC-A1g@mail.gmail.com>
+Subject: Re: [PATCH v8 02/13] xen/arm: gic-v2: Implement GIC suspend/resume functions
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-d25034/1778392974-E0D63CF5-B8D4D1B9/0/0
 X-purgate-type: clean
-X-purgate-size: 4581
+X-purgate-size: 6276
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On Fri, May 8, 2026 at 1:57=E2=80=AFPM Luca Fancellu <Luca.Fancellu@arm.com=
+> wrote:
+>
+> Hi Mykola,
+>
+> >
+> >>
+> >>> +        }
+> >>> +
+> >>> +        off =3D i * sizeof(irqs->icfgr);
+> >>> +        for ( j =3D 0; j < ARRAY_SIZE(irqs->icfgr); j++ )
+> >>> +            writel_gicd(irqs->icfgr[j], GICD_ICFGR + off + j * 4);
+> >>> +    }
+> >>> +
+> >>> +    /* Make sure all registers are restored and enable distributor *=
+/
+> >>> +    writel_gicd(gic_ctx.dist.ctlr, GICD_CTLR);
+> >>> +
+> >>> +    /* Restore GIC CPU interface configuration */
+> >>> +    writel_gicc(gic_ctx.cpu.pmr, GICC_PMR);
+> >>> +    writel_gicc(gic_ctx.cpu.bpr, GICC_BPR);
+> >>> +
+> >>> +    /* Enable GIC CPU interface */
+> >>> +    writel_gicc(gic_ctx.cpu.ctlr, GICC_CTLR);
+> >>> +}
+> >>> +
+> >>
+> >> I also see that we don=E2=80=99t save pending SGIs state (by GICD_CPEN=
+DSGIRn/GICD_SPENDSGIRn) or Active Priorities registers
+> >> state (GICC_APRn/GICC_NSAPRn [latter if security extension are there])=
+ as written in [1] =E2=80=9C4.5 Preserving and restoring GIC state=E2=80=9D=
+,
+> >> was it intentional?
+> >
+> > Yes, this was intentional.
+> >
+> > The GICv2 suspend callback is called at a quiescent point in the
+> > SYSTEM_SUSPEND path: all domains are already shut down for suspend, gue=
+st
+> > execution is quiesced, the scheduler is disabled, non-boot CPUs have be=
+en
+> > offlined, and CPU0 enters gic_suspend() with local interrupts disabled.
+> >
+> > For SGIs, I don't consider GICD_CPENDSGIRn/GICD_SPENDSGIRn part of the =
+saved
+> > host GIC context. Xen uses physical SGIs as IPIs, and IPI delivery is a=
+n
+> > internal synchronization mechanism, not architectural state that should=
+ be
+> > replayed after SYSTEM_SUSPEND. Guest SGI state is virtual GIC state and=
+ is not
+> > represented by these physical GICD SGI pending registers.
+>
+> ack, I would maybe mention in the commit message that we exclude transien=
+t IPI/active-priority
+> state at the suspend quiescent point.
 
-There is no reason why the KVM clock cannot be in masterclock mode when
-the TSCs are not in sync, as long as they are at the same *frequency*.
+Ack.
 
-Running at a different frequency would lead to a systemic skew between
-the clock(s) as observed by different vCPUs due to arithmetic precision
-in the scaling. So that should indeed force the clock to be based on the
-host's CLOCK_MONOTONIC_RAW instead of being in masterclock mode where it
-is defined by the guest TSC.
+>
+> >
+> > For GICC_APRn/GICC_NSAPRn, those registers describe active priority sta=
+te for
+> > interrupts already acknowledged by the CPU interface. The final suspend=
+ path is
+> > not expected to run with an active physical interrupt context. If those
+> > registers were non-zero there, restoring only APR/NSAPR would not make =
+the
+> > corresponding interrupt handling context valid after resume, and could =
+instead
+> > leave the CPU interface with stale active priority state.
+>
+> Ok I understand now, but if we are expecting here GICD_ISACTIVERn zeroed,=
+ why are
+> we saving/restoring it? Shouldn=E2=80=99t we instead have a runtime check=
+ that it=E2=80=99s zero and in case
+> it=E2=80=99s not bail out? And in the resume path we would only zero it.
+>
+> Am I missing something?
 
-But when the vCPUs merely have a different TSC *offset*, that's not a
-problem. The offset is applied to that vCPU's kvmclock->tsc_timestamp
-field, and it all comes out in the wash.
+Good questions.
 
-Track frequency matching separately from full TSC matching. Use
-frequency match for master clock eligibility, and full TSC match
-(including offset) only for PVCLOCK_TSC_STABLE_BIT, which tells the
-guest it is safe to skip cross-vCPU monotonicity enforcement.
+Yes, the distinction I should have made clearer is between CPU-interface
+active-priority state and distributor active state.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- arch/x86/include/asm/kvm_host.h |  1 +
- arch/x86/kvm/x86.c              | 27 +++++++++++++++++++++------
- 2 files changed, 22 insertions(+), 6 deletions(-)
+For GICC_APRn/GICC_NSAPRn, I expect the state to be quiesced at this point.
+Those registers track active priorities in the CPU interface. Xen reaches
+gic_suspend() with local interrupts disabled, and for the guest-routed
+interrupt case that can leave a distributor active bit behind, Xen has
+already performed the physical EOI, so the CPU-interface priority has been
+dropped.
+There is no CPU-interface active-priority context that we can meaningfully
+replay after resume.
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index eb81f90284ba..c770c63087cb 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1493,6 +1493,7 @@ struct kvm_arch {
- 	u64 cur_tsc_offset;
- 	u64 cur_tsc_generation;
- 	bool all_vcpus_matched_tsc;
-+	bool all_vcpus_matched_freq;
- 	int nr_vcpus_matched_tsc;
- 
- 	u32 default_tsc_khz;
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index b74fd8b088ad..d36d03b8268e 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -2647,13 +2647,22 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool new_generation)
- 	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
- 
- 	/*
--	 * To use the masterclock, the host clocksource must be based on TSC
--	 * and all vCPUs must have matching TSCs.
-+	 * Track whether all vCPUs have matching TSC offsets (for
-+	 * PVCLOCK_TSC_STABLE_BIT) and matching frequencies (for
-+	 * master clock eligibility).
- 	 */
- 	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc + 1 ==
- 				     atomic_read(&vcpu->kvm->online_vcpus));
-+	if (ka->all_vcpus_matched_tsc)
-+		ka->all_vcpus_matched_freq = true;
- 
--	bool use_master_clock = ka->all_vcpus_matched_tsc &&
-+	/*
-+	 * To use the masterclock, the host clocksource must be based on TSC
-+	 * and all vCPUs must have matching TSC *frequency*. Different offsets
-+	 * are fine — each vCPU's pvclock has its own tsc_timestamp that
-+	 * accounts for its offset.
-+	 */
-+	bool use_master_clock = ka->all_vcpus_matched_freq &&
- 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
- 
- 	/*
-@@ -2817,7 +2826,13 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 	 * Track the TSC frequency, scaling ratio, and offset for the current
- 	 * generation. These are used to detect matching TSC writes and to
- 	 * compute the guest TSC from the host clock.
-+	 *
-+	 * If the frequency changed, master clock mode can no longer be used
-+	 * since the kvmclock scaling factors differ between vCPUs.
- 	 */
-+	if (vcpu->arch.virtual_tsc_khz != kvm->arch.cur_tsc_khz)
-+		kvm->arch.all_vcpus_matched_freq = false;
-+
- 	kvm->arch.cur_tsc_khz = vcpu->arch.virtual_tsc_khz;
- 	kvm->arch.cur_tsc_scaling_ratio = vcpu->arch.l1_tsc_scaling_ratio;
- 
-@@ -3178,7 +3193,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
- 	bool host_tsc_clocksource, vcpus_matched;
- 
- 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
--	vcpus_matched = ka->all_vcpus_matched_tsc;
-+	vcpus_matched = ka->all_vcpus_matched_freq;
- 
- 	/*
- 	 * If the host uses TSC clock, then passthrough TSC as stable
-@@ -3513,7 +3528,7 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
- 
- 	/* If the host uses TSC clocksource, then it is stable */
- 	hv_clock.flags = 0;
--	if (use_master_clock)
-+	if (use_master_clock && ka->all_vcpus_matched_tsc)
- 		hv_clock.flags |= PVCLOCK_TSC_STABLE_BIT;
- 
- 	if (vcpu->pv_time.active) {
-@@ -6340,7 +6355,7 @@ static int kvm_vcpu_ioctl_get_clock_guest(struct kvm_vcpu *v, void __user *argp)
- 
- 	hv_clock.tsc_shift = vcpu->pvclock_tsc_shift;
- 	hv_clock.tsc_to_system_mul = vcpu->pvclock_tsc_mul;
--	hv_clock.flags = PVCLOCK_TSC_STABLE_BIT;
-+	hv_clock.flags = ka->all_vcpus_matched_tsc ? PVCLOCK_TSC_STABLE_BIT : 0;
- 
- 	if (copy_to_user(argp, &hv_clock, sizeof(hv_clock)))
- 		return -EFAULT;
--- 
-2.51.0
+That is different from GICD_ISACTIVERn. In EOImode=3D=3D1, EOIR only drops =
+the
+priority. The interrupt remains active in the distributor until the separat=
+e
+deactivation step. For a guest-routed interrupt Xen's GICv2 guest end path =
+does
+only the physical EOI; deactivation is completed later by the virtual GIC/G=
+ICV
+path when the guest completes the interrupt.
 
+This is why APR/NSAPR and ISACTIVERn are treated differently. For example:
+
+  1. A physical IRQ routed to a guest is acknowledged by Xen.
+  2. The GIC marks the interrupt active in the distributor.
+  3. Xen EOIs it, which drops the physical priority.
+  4. Xen queues/injects the interrupt to the vGIC.
+  5. The guest has not yet run, or the virtual interrupt is not yet deliver=
+able
+     because of guest PMR/priority/local IRQ masking/vGIC state.
+  6. Therefore the guest-side deactivate has not happened yet, and the phys=
+ical
+     distributor active bit remains set.
+
+There is also a late suspend window in the current Xen path: domains are
+suspended and the scheduler is disabled before local IRQs are disabled.
+A guest-routed IRQ can therefore be taken by Xen after the guest is already
+suspended, but before gic_suspend(). Xen can EOI/priority-drop it and queue
+it for the guest, while the guest cannot run and deactivate it before the
+GIC state is saved.
+
+This is the same class of issue handled by Linux for GIC EOImode=3D=3D1. Li=
+nux
+saves/restores the active state because forwarded interrupts can remain act=
+ive
+while passed to a VM [1].
+
+So I don't think GICD_ISACTIVERn should be treated as "must be zero" unless=
+ we
+also add an explicit suspend-abort/quiesce policy for in-flight guest
+interrupts. That would be a different design: detect non-zero active/in-fli=
+ght
+state, unwind suspend, thaw domains, let the guest drain/deactivate the
+interrupts, and retry later. This series does not implement that policy. Gi=
+ven
+the current flow, preserving GICD_ISACTIVERn avoids losing architectural
+interrupt-controller state across suspend/resume.
+
+I am not opposed to such a policy as a follow-up if we want stricter suspen=
+d
+quiescence rules, but I think it should be designed explicitly rather than
+inferred from the GIC save/restore code.
+
+Best regards,
+Mykola
+
+[1] https://patchwork.kernel.org/project/linux-arm-kernel/patch/1447701208-=
+18150-5-git-send-email-marc.zyngier@arm.com/
+
+>
+> >
+> > So I did not add save/restore for GICD_CPENDSGIRn/GICD_SPENDSGIRn or
+> > GICC_APRn/GICC_NSAPRn in this patch. I can add a short comment in v9 to=
+ make
+> > this scope explicit.
+> >
+> > Please let me know if you think there is a suspend/resume path where th=
+is
+> > state still needs to be preserved.
+> >
+> > Best regards,
+> > Mykola
+>
+> Cheers,
+> Luca
+>
 
