@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 287FBCD37AF
-	for <xen-devel@archiver.kernel.org>; Sun, 10 May 2026 06:03:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1305289.1577866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73CE8CD37B2
+	for <xen-devel@archiver.kernel.org>; Sun, 10 May 2026 20:59:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1305593.1577884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLxFh-00046b-Q6; Sun, 10 May 2026 06:02:57 +0000
+	id 1wMBFI-0005H9-Eb; Sun, 10 May 2026 20:59:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1305289.1577866; Sun, 10 May 2026 06:02:57 +0000
+Received: by outflank-mailman (output) from mailman id 1305593.1577884; Sun, 10 May 2026 20:59:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wLxFh-00046T-Mm; Sun, 10 May 2026 06:02:57 +0000
-Received: by outflank-mailman (input) for mailman id 1305289;
- Sun, 10 May 2026 06:02:57 +0000
+	id 1wMBFI-0005H2-AY; Sun, 10 May 2026 20:59:28 +0000
+Received: by outflank-mailman (input) for mailman id 1305593;
+ Sun, 10 May 2026 20:59:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wLxFg-00046L-QO
- for xen-devel@lists.xenproject.org; Sun, 10 May 2026 06:02:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wMBFH-0005FU-9P
+ for xen-devel@lists.xenproject.org; Sun, 10 May 2026 20:59:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wLxFf-00B9iF-3A
- for xen-devel@lists.xenproject.org; Sun, 10 May 2026 08:02:55 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a001f87-5cb7-0a2a0a5109dd-0a2a450c9010-18
- for <xen-devel@lists.xenproject.org>; Sun, 10 May 2026 08:02:55 +0200
-Received: from [209.85.208.171] (helo=mail-lj1-f171.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a001f8e-62f1-0a2a450c0019-d155d0abb41b-3
- for <xen-devel@lists.xenproject.org>; Sun, 10 May 2026 08:02:54 +0200
-Received: by mail-lj1-f171.google.com with SMTP id
- 38308e7fff4ca-38a01c80c34so25417961fa.0
- for <xen-devel@lists.xenproject.org>; Sat, 09 May 2026 23:02:54 -0700 (PDT)
+ id 1wMBFG-003wke-Mc; Sun, 10 May 2026 22:59:26 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a00f152-5cb7-0a2a0a5109dd-0a2a450aec3c-34
+ for <multiple-recipients>; Sun, 10 May 2026 22:59:25 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <BATV+0abf7e93b395bf2e804e+8295+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a00f1ad-56b3-0a2a450a0019-5a9b322292ea-3
+ for <multiple-recipients>; Sun, 10 May 2026 22:59:25 +0200
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wMBEe-00000007GLM-0IXw; Sun, 10 May 2026 20:58:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,251 +50,437 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1778392974; cv=none;
-        d=google.com; s=arc-20240605;
-        b=GrAID9Ic83N7uiGV/RNGIpAfq9AVCTf+BG0HxyJtzeZQ475A++9UgsNC4vE5Zmq3ol
-         T3x7KjupsF2OezQLc7vjZMG+OGrm3/hC7iUhO48lbcfGXtr7JvzdhYOc3R+cv5J/uT1a
-         dOsNo05HwHptBlnDs8kAk1JRDVUHimigdYRTknsCqkh0YOWNZiTv4jVRmicnofKWRlbE
-         bKytrfjFwQYcDhnOXV1aRWnKtyBkWJAehjjkIv5hA2EiCkib6E39Ykp0uqYYNywEY3jM
-         rsnvuZgzvFoCS4fMbVe55t7vcfVevDWGbXRifALKg1XuHhqNXNJvDNLe+1S/tg3QlggL
-         dzrA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
-        fh=uAzoxIkY79cy0zES8IqO07ArU7DBG3jlr2bg4XRVkR0=;
-        b=AjV3iuSZZ87c/O7MX83aZZIY1hBhT5fC/QDVqXu1gePK5BeAo0c/DLVDSaM3Wrf02/
-         lSWun1+cm9BS1nwLRfR2iiO6191Ka5miXeietGa3qDPESYyjtwWnsC5UEC0v2nZ+L+TQ
-         rnQ8sA0rC7p9zpGI59fMCNbQfEnEG25vNwVkr4EKUziTp/SWEzAZW4HP8B3lnV4n4afR
-         HExzbn5pglHNFzDebbGyzfKGZJAAH2+T/us1pmDzQnw5183LyBw5d0TpyS023k4F+CN4
-         kc9SFJbAbrj9Pqm9yJ0Kk06FVpNcXHr2VkY76g4sjAPf5h37/mJilD2F87V305S+iB3p
-         iqHw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778392974; x=1778997774; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
-        b=rAmyJNIkpP8kE1aMgze2mOBLQlunpDypTu5yhmxBl/JW0HmcbqE4GEfqZtn3GZQURa
-         xKNWoI+CMa4Ng0hqJUJkj/hIAmYW6B0F19ArhM5fZE2vm4RXfg9uxmO3d2t1AIybYOph
-         /U9LmtHhFpjNVa4UTPHhuCziPCJtl9evjSwhd0plW3vCyXCAfCdIvD9eIEHg65FjU0P9
-         msFBdpvik/GHrHfXYtHIvm6K5+TnHWT4vGahOzEuQH7wZ7ekIUg0GQWxIwxjwUnSjHm6
-         D8JAkY8AHBIsj/uCa0GWommCcuiisf+NrDP6/ej5DYd3s1kERfaY9ZBxPH4ryXk/fk7C
-         GHkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778392974; x=1778997774;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=z6OihLhbY+E3GNfLoo4qiue9hQsmjnzdWfT2BfQ9lhQ=;
-        b=TT+JuqucG7TcZVkc9B2cTWBWHKWN+n+RyVwYwExV6ORqVKMmW2RDOg+2S01bpd5cYV
-         I6c5FTy8sCEb2EBuWJnt3GJW1t8FNIBnBhE6ptwT3HlqXvmQ2hhZj2il6VSxPfBfaWBq
-         EfhcneUNGNjMV7nNBuiIvzllQTzvIoBX5pzrn70AKvsACIDI7MAZCdCVmveWu9GMOANh
-         6my7L9pwZ2dzi0Yt96A6kpVVo/UQNIWOj4peBp64G/cuZ/Puj3E0/mT673LuIT3GPCUk
-         ilNzdmYjvNQIjS4ec70V/MuGdjiz69qJL9T1wCrOZYNE7mNiQOqqxbQoi/HN9KV80maK
-         qUmA==
-X-Gm-Message-State: AOJu0Yx2E1CqB1LPx1sjaSHqG3scK5Cjot/wn1CBoOSZychYWyQzJlXA
-	lYy/n4pdsAQOBO8nlkUbJjcq9O1DmgbsAx04Negj3dLbd/nTj5qfJB1/Yy5IfMuxZXX9/e89Y77
-	Y9MaVsca18GDbGxBFqxjDNZv6jCYH/+0=
-X-Gm-Gg: Acq92OHSS8lEGRO8JXgZZ6C/psvFWdDFwDAjzY0U+j3HZOvisrJ9Gzj4bipSLppIwrn
-	kUzsnHQK7rzuXOPIl6n+26EC/pu4H0ddV2M/lNwO1VfvDh+H4BLxDwY7qeHSFwxcPx2xrYLm4bG
-	9uWphRG1p6UHCVyW3gFGQj04oAQTuX4cEBtcEFscKS5N4eoTXJzf7OPR4pZFpbsigVmoI0J5bR4
-	cpZxrCYDHGe3G6UnMxYvKssjjA4vovwbPlZ3R1gjlbT0tKV/X4yXRpg7nLidDpYYk4HcAoPcrOp
-	G/GlKA==
-X-Received: by 2002:a05:651c:41c8:b0:394:4e7:9805 with SMTP id
- 38308e7fff4ca-394081312f7mr13755891fa.19.1778392973629; Sat, 09 May 2026
- 23:02:53 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=xVN4cOYEHLvsvTsrs+Mo4ZF+TKkKL5dKm3kNYJ9llFY=; b=qnSpKJ33qhVTOfzu2g2xy/mOWn
+	WgAnKyKONg75//4h4TDKLqKtbEQC7vadz8Gu58pP3oL3ub0M1GFAwcY9vKlYRq/oc8zuJV92NgJwN
+	f0/3F1kmVCbhl4p3jm+cNSRXnfz7h4ZI6Wro/2ShZlH3AuHcVuiCSkNIe2CWQ44+SFexvzRskAKPJ
+	T4d0cDCMojrcEffGmo1ijQzcCVZZp+YHV9S8qlpFnbGMvSBzPvWGFumv+QOsL2MzlaF3y1cNVq0zR
+	1YRaRp9pbvZTesm0G9/tAEwB+YZfloUwHm951aEWeSoah+Ey4FFSi/QSgIo8wW8wNsxc+W7c3bUQ0
+	F7hgqY/A==;
+Message-ID: <6a820ac041d4d289dba2e78eff815443a036fe0d.camel@infradead.org>
+Subject: [PATCH v4 31/30] KVM: selftests: Add Xen/generic CPUID timing leaf
+ test
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
+ <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,  Dave Hansen
+ <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, David
+ Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>, Jonathan
+ Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, Marc
+ Zyngier <maz@kernel.org>, Dongli Zhang <dongli.zhang@oracle.com>, Jack
+ Allister <jalliste@amazon.com>, Joe Jin <joe.jin@oracle.com>, Joey Gouly
+ <joey.gouly@arm.com>, kvm@vger.kernel.org,  linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org,
+ linux-kselftest@vger.kernel.org
+Date: Sun, 10 May 2026 21:58:21 +0100
+In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
+References: <20260509224824.3264567-1-dwmw2@infradead.org>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-Baioh5K8VSQI5oIkCRkB"
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-References: <cover.1775125380.git.mykola_kvach@epam.com> <5e1951e1c17037e020de9c0eecb5fba94edcd9dd.1775125380.git.mykola_kvach@epam.com>
- <EB3F884F-FCD6-4AE7-84FA-79ABF31EA88E@arm.com> <CAGeoDV80QHdesYQF-J4fg7wYQ6RLNg6u27aQhj4F+JoM4hU3uQ@mail.gmail.com>
- <CF8E0EB2-3048-4B04-B763-AE5EF1909416@arm.com>
-In-Reply-To: <CF8E0EB2-3048-4B04-B763-AE5EF1909416@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Sun, 10 May 2026 09:02:42 +0300
-X-Gm-Features: AVHnY4Liw9b4vVk0zuGrKmULc20ZcK-O_7r4lptAmDphN-WnqIpD3Sa7zwS3D0Y
-Message-ID: <CAGeoDV_SqVtcAZemSx1Ap0R6JqnbAxoLYCctPEU3DkcuQC-A1g@mail.gmail.com>
-Subject: Re: [PATCH v8 02/13] xen/arm: gic-v2: Implement GIC suspend/resume functions
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-4011c0/1778446765-7D5868B7-18587396/0/0
+X-purgate-type: clean
+X-purgate-size: 16200
+
+
+--=-Baioh5K8VSQI5oIkCRkB
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1778392974-E0D63CF5-B8D4D1B9/0/0
-X-purgate-type: clean
-X-purgate-size: 6276
 
-On Fri, May 8, 2026 at 1:57=E2=80=AFPM Luca Fancellu <Luca.Fancellu@arm.com=
-> wrote:
->
-> Hi Mykola,
->
-> >
-> >>
-> >>> +        }
-> >>> +
-> >>> +        off =3D i * sizeof(irqs->icfgr);
-> >>> +        for ( j =3D 0; j < ARRAY_SIZE(irqs->icfgr); j++ )
-> >>> +            writel_gicd(irqs->icfgr[j], GICD_ICFGR + off + j * 4);
-> >>> +    }
-> >>> +
-> >>> +    /* Make sure all registers are restored and enable distributor *=
-/
-> >>> +    writel_gicd(gic_ctx.dist.ctlr, GICD_CTLR);
-> >>> +
-> >>> +    /* Restore GIC CPU interface configuration */
-> >>> +    writel_gicc(gic_ctx.cpu.pmr, GICC_PMR);
-> >>> +    writel_gicc(gic_ctx.cpu.bpr, GICC_BPR);
-> >>> +
-> >>> +    /* Enable GIC CPU interface */
-> >>> +    writel_gicc(gic_ctx.cpu.ctlr, GICC_CTLR);
-> >>> +}
-> >>> +
-> >>
-> >> I also see that we don=E2=80=99t save pending SGIs state (by GICD_CPEN=
-DSGIRn/GICD_SPENDSGIRn) or Active Priorities registers
-> >> state (GICC_APRn/GICC_NSAPRn [latter if security extension are there])=
- as written in [1] =E2=80=9C4.5 Preserving and restoring GIC state=E2=80=9D=
-,
-> >> was it intentional?
-> >
-> > Yes, this was intentional.
-> >
-> > The GICv2 suspend callback is called at a quiescent point in the
-> > SYSTEM_SUSPEND path: all domains are already shut down for suspend, gue=
-st
-> > execution is quiesced, the scheduler is disabled, non-boot CPUs have be=
-en
-> > offlined, and CPU0 enters gic_suspend() with local interrupts disabled.
-> >
-> > For SGIs, I don't consider GICD_CPENDSGIRn/GICD_SPENDSGIRn part of the =
-saved
-> > host GIC context. Xen uses physical SGIs as IPIs, and IPI delivery is a=
-n
-> > internal synchronization mechanism, not architectural state that should=
- be
-> > replayed after SYSTEM_SUSPEND. Guest SGI state is virtual GIC state and=
- is not
-> > represented by these physical GICD SGI pending registers.
->
-> ack, I would maybe mention in the commit message that we exclude transien=
-t IPI/active-priority
-> state at the suspend quiescent point.
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Ack.
+Verify that userspace can correctly populate Xen and generic CPUID
+timing leaves using the KVM_VCPU_TSC_EFFECTIVE_FREQ and
+KVM_VCPU_TSC_SCALE attributes.
 
->
-> >
-> > For GICC_APRn/GICC_NSAPRn, those registers describe active priority sta=
-te for
-> > interrupts already acknowledged by the CPU interface. The final suspend=
- path is
-> > not expected to run with an active physical interrupt context. If those
-> > registers were non-zero there, restoring only APR/NSAPR would not make =
-the
-> > corresponding interrupt handling context valid after resume, and could =
-instead
-> > leave the CPU interface with stale active priority state.
->
-> Ok I understand now, but if we are expecting here GICD_ISACTIVERn zeroed,=
- why are
-> we saving/restoring it? Shouldn=E2=80=99t we instead have a runtime check=
- that it=E2=80=99s zero and in case
-> it=E2=80=99s not bail out? And in the resume path we would only zero it.
->
-> Am I missing something?
+This validates that the removal of KVM's runtime Xen CPUID modification
+doesn't break guests: userspace queries the effective TSC and bus
+frequencies, computes the pvclock mul/shift, populates the CPUID leaves,
+and the guest verifies the values match.
 
-Good questions.
+The test exercises:
+ - KVM_VCPU_TSC_EFFECTIVE_FREQ at native and scaled frequencies
+ - KVM_VCPU_TSC_SCALE ratio verification against effective frequency
+ - Generic timing leaf 0x40000010 (EAX=3Dtsc_khz, EBX=3Dbus_khz)
+ - Xen leaf 3 sub-leaf 0 (ECX=3Dguest TSC kHz)
+ - Xen leaf 3 sub-leaf 1 (ECX=3Dmul, EDX=3Dshift)
 
-Yes, the distinction I should have made clearer is between CPU-interface
-active-priority state and distributor active state.
+Gracefully skips TSC scaling tests on hardware without support.
 
-For GICC_APRn/GICC_NSAPRn, I expect the state to be quiesced at this point.
-Those registers track active priorities in the CPU interface. Xen reaches
-gic_suspend() with local interrupts disabled, and for the guest-routed
-interrupt case that can leave a distributor active bit behind, Xen has
-already performed the physical EOI, so the CPU-interface priority has been
-dropped.
-There is no CPU-interface active-priority context that we can meaningfully
-replay after resume.
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ tools/testing/selftests/kvm/Makefile.kvm      |   1 +
+ .../selftests/kvm/x86/xen_cpuid_timing_test.c | 232 ++++++++++++++++++
+ 2 files changed, 233 insertions(+)
+ create mode 100644 tools/testing/selftests/kvm/x86/xen_cpuid_timing_test.c
 
-That is different from GICD_ISACTIVERn. In EOImode=3D=3D1, EOIR only drops =
-the
-priority. The interrupt remains active in the distributor until the separat=
-e
-deactivation step. For a guest-routed interrupt Xen's GICv2 guest end path =
-does
-only the physical EOI; deactivation is completed later by the virtual GIC/G=
-ICV
-path when the guest completes the interrupt.
+diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selft=
+ests/kvm/Makefile.kvm
+index fb935ae3bf38..50f02116249f 100644
+--- a/tools/testing/selftests/kvm/Makefile.kvm
++++ b/tools/testing/selftests/kvm/Makefile.kvm
+@@ -139,6 +139,7 @@ TEST_GEN_PROGS_x86 +=3D x86/xss_msr_test
+ TEST_GEN_PROGS_x86 +=3D x86/debug_regs
+ TEST_GEN_PROGS_x86 +=3D x86/tsc_msrs_test
+ TEST_GEN_PROGS_x86 +=3D x86/vmx_pmu_caps_test
++TEST_GEN_PROGS_x86 +=3D x86/xen_cpuid_timing_test
+ TEST_GEN_PROGS_x86 +=3D x86/xen_shinfo_test
+ TEST_GEN_PROGS_x86 +=3D x86/xen_vmcall_test
+ TEST_GEN_PROGS_x86 +=3D x86/sev_init2_tests
+diff --git a/tools/testing/selftests/kvm/x86/xen_cpuid_timing_test.c b/tool=
+s/testing/selftests/kvm/x86/xen_cpuid_timing_test.c
+new file mode 100644
+index 000000000000..f574343ed449
+--- /dev/null
++++ b/tools/testing/selftests/kvm/x86/xen_cpuid_timing_test.c
+@@ -0,0 +1,232 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Test that userspace can correctly populate Xen and generic CPUID
++ * timing leaves using KVM_VCPU_TSC_EFFECTIVE_FREQ.
++ *
++ * This validates that the removal of KVM's runtime Xen CPUID modification
++ * doesn't break guests, because userspace has all the information needed.
++ */
++#include <stdint.h>
++#include <string.h>
++#include <unistd.h>
++
++#include "test_util.h"
++#include "kvm_util.h"
++#include "processor.h"
++
++#include <asm/pvclock-abi.h>
++
++#define XEN_CPUID_BASE		0x40000100
++#define XEN_CPUID_LEAF(n)	(XEN_CPUID_BASE + (n))
++#define GENERIC_TIMING_LEAF	0x40000010
++
++/* Values set by host, verified by guest */
++static uint32_t expected_tsc_khz;
++static uint32_t expected_bus_khz;
++static uint32_t expected_tsc_mul;
++static int8_t   expected_tsc_shift;
++static uint64_t host_khz;
++
++static void guest_code(void)
++{
++	uint32_t eax, ebx, ecx, edx;
++
++	/* Check generic timing leaf 0x40000010 */
++	__cpuid(GENERIC_TIMING_LEAF, 0, &eax, &ebx, &ecx, &edx);
++	GUEST_ASSERT_EQ(eax, expected_tsc_khz);
++	GUEST_ASSERT_EQ(ebx, expected_bus_khz);
++
++	/* Check Xen leaf 3, sub-leaf 0: ECX =3D guest TSC frequency */
++	__cpuid(XEN_CPUID_LEAF(3), 0, &eax, &ebx, &ecx, &edx);
++	GUEST_ASSERT_EQ(ecx, expected_tsc_khz);
++
++	/* Check Xen leaf 3, sub-leaf 1: ECX =3D mul, EDX =3D shift */
++	__cpuid(XEN_CPUID_LEAF(3), 1, &eax, &ebx, &ecx, &edx);
++	GUEST_ASSERT_EQ(ecx, expected_tsc_mul);
++	GUEST_ASSERT_EQ((int8_t)edx, expected_tsc_shift);
++
++	GUEST_SYNC(0);
++}
++
++static void add_cpuid_entry(struct kvm_vcpu *vcpu, uint32_t function,
++			    uint32_t index, uint32_t eax, uint32_t ebx,
++			    uint32_t ecx, uint32_t edx)
++{
++	struct kvm_cpuid2 *cpuid =3D vcpu->cpuid;
++	struct kvm_cpuid_entry2 *entry;
++	int n =3D cpuid->nent;
++
++	vcpu->cpuid =3D realloc(vcpu->cpuid,
++			      sizeof(*cpuid) + (n + 1) * sizeof(*entry));
++	cpuid =3D vcpu->cpuid;
++	cpuid->nent =3D n + 1;
++
++	entry =3D &cpuid->entries[n];
++	memset(entry, 0, sizeof(*entry));
++	entry->function =3D function;
++	entry->index =3D index;
++	entry->flags =3D KVM_CPUID_FLAG_SIGNIFCANT_INDEX;
++	entry->eax =3D eax;
++	entry->ebx =3D ebx;
++	entry->ecx =3D ecx;
++	entry->edx =3D edx;
++}
++
++/*
++ * Compute pvclock mul/shift from frequency, matching kvm_get_time_scale()=
+.
++ */
++static void compute_tsc_mul_shift(uint64_t tsc_hz, uint32_t *mul, int8_t *=
+shift)
++{
++	uint64_t scaled =3D 1000000000ULL;
++	uint64_t base =3D tsc_hz;
++	int32_t s =3D 0;
++	uint32_t base32;
++
++	while (base > scaled * 2 || base >> 32) {
++		base >>=3D 1;
++		s--;
++	}
++	base32 =3D (uint32_t)base;
++	while (base32 <=3D scaled || scaled >> 32) {
++		if (scaled >> 32 || base32 & (1U << 31))
++			scaled >>=3D 1;
++		else
++			base32 <<=3D 1;
++		s++;
++	}
++	*mul =3D (uint32_t)((scaled << 32) / base32);
++	*shift =3D (int8_t)s;
++}
++
++static void run_test(uint64_t tsc_khz)
++{
++	struct kvm_vcpu *vcpu;
++	struct kvm_vm *vm;
++	struct ucall uc;
++	struct { uint32_t tsc_khz; uint32_t bus_khz; } freq;
++	struct kvm_device_attr freq_attr =3D {
++		.group =3D KVM_VCPU_TSC_CTRL,
++		.attr =3D 2, /* KVM_VCPU_TSC_EFFECTIVE_FREQ */
++		.addr =3D (uint64_t)(uintptr_t)&freq,
++	};
++
++	vm =3D vm_create_with_one_vcpu(&vcpu, guest_code);
++
++	if (tsc_khz) {
++		pr_info("Testing at TSC frequency %lu kHz\n", tsc_khz);
++		vcpu_ioctl(vcpu, KVM_SET_TSC_KHZ, (void *)(unsigned long)tsc_khz);
++	} else {
++		pr_info("Testing at native TSC frequency\n");
++	}
++
++	vcpu_ioctl(vcpu, KVM_GET_DEVICE_ATTR, &freq_attr);
++
++	/* If scaling wasn't applied, skip this frequency */
++	if (tsc_khz && freq.tsc_khz =3D=3D host_khz) {
++		pr_info("  TSC scaling not available, skipping\n");
++		kvm_vm_release(vm);
++		return;
++	}
++
++	pr_info("  Effective TSC: %u kHz, Bus: %u kHz\n", freq.tsc_khz, freq.bus_=
+khz);
++
++	/* Also exercise KVM_VCPU_TSC_SCALE if available */
++	{
++		struct { uint64_t ratio; uint64_t frac_bits; } scale;
++		struct kvm_device_attr scale_attr =3D {
++			.group =3D KVM_VCPU_TSC_CTRL,
++			.attr =3D 1, /* KVM_VCPU_TSC_SCALE */
++			.addr =3D (uint64_t)(uintptr_t)&scale,
++		};
++
++		if (!__vcpu_ioctl(vcpu, KVM_HAS_DEVICE_ATTR, &scale_attr)) {
++			vcpu_ioctl(vcpu, KVM_GET_DEVICE_ATTR, &scale_attr);
++			pr_info("  TSC scale: ratio=3D%lu frac_bits=3D%lu\n",
++				scale.ratio, scale.frac_bits);
++
++			/*
++			 * Verify: applying the ratio to the host TSC frequency
++			 * should give approximately the effective frequency.
++			 */
++			if (tsc_khz) {
++				uint64_t computed =3D ((__uint128_t)host_khz * scale.ratio) >> scale.f=
+rac_bits;
++				int64_t diff =3D (int64_t)computed - (int64_t)freq.tsc_khz;
++
++				TEST_ASSERT(diff >=3D -1 && diff <=3D 1,
++					    "TSC_SCALE ratio mismatch: computed %lu vs effective %u (diff %ld=
+)",
++					    computed, freq.tsc_khz, diff);
++			}
++		}
++	}
++
++	compute_tsc_mul_shift((uint64_t)freq.tsc_khz * 1000,
++			      &expected_tsc_mul, &expected_tsc_shift);
++
++	expected_tsc_khz =3D freq.tsc_khz;
++	expected_bus_khz =3D freq.bus_khz;
++
++	sync_global_to_guest(vm, expected_tsc_khz);
++	sync_global_to_guest(vm, expected_bus_khz);
++	sync_global_to_guest(vm, expected_tsc_mul);
++	sync_global_to_guest(vm, expected_tsc_shift);
++
++	/* Populate CPUID leaves as a VMM would */
++	add_cpuid_entry(vcpu, GENERIC_TIMING_LEAF, 0,
++			freq.tsc_khz, freq.bus_khz, 0, 0);
++	add_cpuid_entry(vcpu, XEN_CPUID_LEAF(3), 0,
++			0, 0, freq.tsc_khz, 0);
++	add_cpuid_entry(vcpu, XEN_CPUID_LEAF(3), 1,
++			0, 0, expected_tsc_mul,
++			(uint32_t)(uint8_t)expected_tsc_shift);
++
++	vcpu_set_cpuid(vcpu);
++
++	pr_info("  pvclock mul=3D%u shift=3D%d\n", expected_tsc_mul, expected_tsc=
+_shift);
++
++	vcpu_run(vcpu);
++	TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
++
++	switch (get_ucall(vcpu, &uc)) {
++	case UCALL_ABORT:
++		REPORT_GUEST_ASSERT(uc);
++		break;
++	case UCALL_SYNC:
++		break;
++	default:
++		TEST_FAIL("Unexpected ucall");
++	}
++
++	kvm_vm_release(vm);
++}
++
++int main(void)
++{
++	uint64_t freq;
++	struct kvm_vcpu *vcpu;
++	struct kvm_vm *vm;
++	struct kvm_device_attr attr =3D {
++		.group =3D KVM_VCPU_TSC_CTRL,
++		.attr =3D 2,
++	};
++
++	TEST_REQUIRE(sys_clocksource_is_based_on_tsc());
++
++	/* Check KVM_VCPU_TSC_EFFECTIVE_FREQ is supported */
++	vm =3D vm_create_with_one_vcpu(&vcpu, guest_code);
++	TEST_REQUIRE(!__vcpu_ioctl(vcpu, KVM_HAS_DEVICE_ATTR, &attr));
++	host_khz =3D __vcpu_ioctl(vcpu, KVM_GET_TSC_KHZ, NULL);
++	kvm_vm_release(vm);
++
++	/* Native frequency */
++	run_test(0);
++
++	/* Scaled frequencies =E2=80=94 skip if TSC scaling not available */
++	for (freq =3D 1000000; freq <=3D 4000000; freq +=3D 1000000) {
++		if (freq =3D=3D host_khz)
++			continue;
++		run_test(freq);
++	}
++
++	pr_info("PASS: All CPUID timing leaf tests passed\n");
++	return 0;
++}
+--=20
+2.43.0
 
-This is why APR/NSAPR and ISACTIVERn are treated differently. For example:
 
-  1. A physical IRQ routed to a guest is acknowledged by Xen.
-  2. The GIC marks the interrupt active in the distributor.
-  3. Xen EOIs it, which drops the physical priority.
-  4. Xen queues/injects the interrupt to the vGIC.
-  5. The guest has not yet run, or the virtual interrupt is not yet deliver=
-able
-     because of guest PMR/priority/local IRQ masking/vGIC state.
-  6. Therefore the guest-side deactivate has not happened yet, and the phys=
-ical
-     distributor active bit remains set.
 
-There is also a late suspend window in the current Xen path: domains are
-suspended and the scheduler is disabled before local IRQs are disabled.
-A guest-routed IRQ can therefore be taken by Xen after the guest is already
-suspended, but before gic_suspend(). Xen can EOI/priority-drop it and queue
-it for the guest, while the guest cannot run and deactivate it before the
-GIC state is saved.
+--=-Baioh5K8VSQI5oIkCRkB
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-This is the same class of issue handled by Linux for GIC EOImode=3D=3D1. Li=
-nux
-saves/restores the active state because forwarded interrupts can remain act=
-ive
-while passed to a VM [1].
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
+ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
+MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
+a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
+jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
+GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
+aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
+nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
+8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
+HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
+IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
+KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
+BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
+QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
+ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
+/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
+uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
+xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
+W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
+c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
+VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
+NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
+sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
+w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
+i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
+kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
+0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
+ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
+blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
+hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
+VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
+HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
+ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
+AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
+cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
+cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
+AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
+aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
+hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
+iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
+8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
+JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
+xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
+EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
+B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
+MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
+KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
+Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
+nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
+WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
+W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
+nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
+g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
+9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
+9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
+sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
+a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
+ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
+AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
+dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
+MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
+YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
+4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
+6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
+QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
+nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
+MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
+VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
+ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2MDUxMDIwNTgy
+MVowLwYJKoZIhvcNAQkEMSIEIOs+sVtBDqNMC2S7uVGkKA5SADE6/V5PHWpeY5hohXohMGQGCSsG
+AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
+cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
+VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
+cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIALmACwOgyLop+
+YOTggLSg+h4I46+NTsqWW29MkL15XRfMiYwzVU70RXsHl5I9AseAVYYWtWIQw4p0yXQp6CZvQnmV
+P+ZVOogEQfemPFQVSnrgbPJ1aOUZbWFRcZiCpExegtvv18l998XG4wXaKdOpcF6oQnNjh/XcmpTn
+4nvIL8S+vxZBe4FrAnY1Se2IkS9m0CTCDCnNd+6rv663fYUJLqj07QcyR1v56StlqXutr62B3ZSg
+p3Wl7WURPUyZfvQv/NUS2qOPqV+7SePdHvJ2zT2S0GkmbAQX5LSe/mrKiOuy34gmp7drjaxzmd27
+kUMA+4MFCggGs4aBHqEPwjoLxo0tETVLe8E1D10MsCEkI4afz7xOJ+S4gYTz1ib3BbsMTpMquNCD
+WAPzadkJA5sSx5ItuLVbV0w9mq7TT/Ueyogjv11nF6c/Gv0lO6UezkvT2Sk6aoAMGvlUwYMyiTY6
+4hDvhQqNvIHOb0qRc88gaJxsjioig2ukOhEw4S0blYcqoA2gh5q4yYAiMkszFYQ+I283e3IPeIMg
+rcoi3rR/lfC3bUtyRi7ZDaFX3O/BSDynQsjmHxuz0jy8hM4JVg/UvYQMyELGsYcthMOHn5fHdDnr
+3Jny1s4zfjzDuX6tE3OSbtbUZsTCzMdGXRYdCAeHpAXh03cGLqrozifAgT8HO6wAAAAAAAA=
 
-So I don't think GICD_ISACTIVERn should be treated as "must be zero" unless=
- we
-also add an explicit suspend-abort/quiesce policy for in-flight guest
-interrupts. That would be a different design: detect non-zero active/in-fli=
-ght
-state, unwind suspend, thaw domains, let the guest drain/deactivate the
-interrupts, and retry later. This series does not implement that policy. Gi=
-ven
-the current flow, preserving GICD_ISACTIVERn avoids losing architectural
-interrupt-controller state across suspend/resume.
 
-I am not opposed to such a policy as a follow-up if we want stricter suspen=
-d
-quiescence rules, but I think it should be designed explicitly rather than
-inferred from the GIC save/restore code.
-
-Best regards,
-Mykola
-
-[1] https://patchwork.kernel.org/project/linux-arm-kernel/patch/1447701208-=
-18150-5-git-send-email-marc.zyngier@arm.com/
-
->
-> >
-> > So I did not add save/restore for GICD_CPENDSGIRn/GICD_SPENDSGIRn or
-> > GICC_APRn/GICC_NSAPRn in this patch. I can add a short comment in v9 to=
- make
-> > this scope explicit.
-> >
-> > Please let me know if you think there is a suspend/resume path where th=
-is
-> > state still needs to be preserved.
-> >
-> > Best regards,
-> > Mykola
->
-> Cheers,
-> Luca
->
+--=-Baioh5K8VSQI5oIkCRkB--
 
