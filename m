@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A17EACD4F24
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88543CD343F
 	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2026 17:10:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1307274.1578983 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1307276.1579007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqc5-0005fJ-1v; Tue, 12 May 2026 17:09:45 +0000
+	id 1wMqc7-0006Fs-Ll; Tue, 12 May 2026 17:09:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1307274.1578983; Tue, 12 May 2026 17:09:45 +0000
+Received: by outflank-mailman (output) from mailman id 1307276.1579007; Tue, 12 May 2026 17:09:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqc4-0005ef-VH; Tue, 12 May 2026 17:09:44 +0000
-Received: by outflank-mailman (input) for mailman id 1307274;
- Tue, 12 May 2026 17:09:43 +0000
+	id 1wMqc7-0006Fj-Ih; Tue, 12 May 2026 17:09:47 +0000
+Received: by outflank-mailman (input) for mailman id 1307276;
+ Tue, 12 May 2026 17:09:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wMqc3-0005XT-D3
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:09:43 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wMqc6-0005xD-1w
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:09:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wMqc2-00HVXc-Q6
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:09:42 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wMqc5-00AZDT-F1
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:09:45 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a035eaa-5cb7-0a2a0a5109dd-0a2a450a84bc-40
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:42 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a035eca-e002-0a2a0a5209dd-0a2a45078240-26
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:45 +0200
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a035ed6-56b3-0a2a450a0019-d1558032c817-3
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:42 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4891e5b9c1fso53835975e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 10:09:42 -0700 (PDT)
+ id 6a035ed9-229c-0a2a45070019-d1558036e1eb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:45 +0200
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-488a8ca4aadso53136715e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 10:09:45 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.18]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fc8cccf90sm10838845e9.0.2026.05.12.10.09.40
+ 5b1f17b1804b1-48fc8cccf90sm10838845e9.0.2026.05.12.10.09.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 10:09:41 -0700 (PDT)
+ Tue, 12 May 2026 10:09:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778605782; x=1779210582; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1778605784; x=1779210584; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=j/x0rT1oB7OVwr8zqPawvId6h6lac1Z+SScMfAw/LeE=;
-        b=aX1Lyq+Px+KI01SjPa6ASdPvaDCV/EOHsqRaNMl06VQxpdbqvQWd02AgwMkqMUFcaE
-         QjGWmpMj0NPkzYPpRpCQ+DrHGByu8Sk/yKTpuY5mXYONiC+44b7JmILgKehRzmo3IaSn
-         7/D2dx8IsHA0mESVHeqyVTxfYdq5O9Pjhn3xoydCPAnXah49o7UEbHeV7mIa9ojyUvyL
-         LxzeBVqwJhMXENYiKWfHeRfSUKR0PhtoBv4903Yqm+xlMpFSUo5FfpPjcATIphlqRG1R
-         DbnNLqoOJiAzzieB859na/lp7dO03blR8fE7mGXzMcFMTST3Dvgo8t0r26Iwx1wBVacS
-         af3Q==
+        bh=XXX7LiIDl3A+pjPnWv0DkG9B7a9KxTjMmrGlAN2uPmo=;
+        b=VWCqtQu9XJmjbzceO96JPfwoRYiZGQOusmT5/rBDrzxvI6P8YORsDVhS5MHneEwMbs
+         Xata0uBfRfHfsRSRY84BLfZuwb9fL9kr0JMNAepgjUzHr59qk28T0n/9Id/hIObNaY8J
+         XQeeJ9ucIsPJDfl11tO+Lv3tNx3gEeWUwXFr7z8QwrWc9rEWEssYExHscQEJg40TRfK7
+         0MSlxY4U30NZgtSYyHCiiqsDbG9gkeMAEKgiHfKe4kPq9UaEheBLIXpRLREKZo46NLTJ
+         jHRd2D1wGY5yc7mTAC7L4BXLGV44lIPu+SpmHXCGFMenCzbKxFwIDfXTWEApKkXm3JQd
+         8iKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778605782; x=1779210582;
+        d=1e100.net; s=20251104; t=1778605784; x=1779210584;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=j/x0rT1oB7OVwr8zqPawvId6h6lac1Z+SScMfAw/LeE=;
-        b=aeQ4Rj46u2cWh1zbJ1jzHjetGELiYlHLwHcpmqcAKstVWSdLj7xV7N/vtooYvQYnEP
-         nvIY/TEQSC5dS+/eJU0qu1Uzhv2DHKagQPa07DtVlil375VTTuUokGQDxjaVL9tg7Ru2
-         tlEDD2xj6aaJFdIYHUuOxZFSLjHbpY2F4AjzvSA8jvul/Dzyz4Cjvgc4w9uf3txlalqG
-         BeqiojUtHduk4L7oszvWtUc1+hlwq8WiVqQ1nmFTwmDuBT+14yS8ZtjuUruvZk1sQUov
-         wvQ9BduhU4vkYclLZIpz3hFWBB8nZxzGip7SUM803AJddvHKnzzjORoI/3rr5lkJnvi6
-         /G1Q==
-X-Gm-Message-State: AOJu0YxUHd8GDsKxtPMdf8k9kKkY/jYllYsKeolYdqkK9o1sykOfvP27
-	pbmjw+FJ3J+WqcKl1xMPMipa4pCXfHuMY7ScH+YfLXTM0uBmKtEVVDTYrDhd1g==
-X-Gm-Gg: Acq92OFAOmArw3ZTNgdlkcGi+Ur/uQ6qPV5dTLUpGSUGVBmHceW8xBkqcEFaBcAFxeD
-	xul8tT2nAz1uSM4DNaXqKQIWbDlarM4KzBKjPE7MnV14pGvoRFGrtkUbsQEW5zTGs5fc0H9bntI
-	lUqpyFO7dIm9AKK9zN+ZljStyvHMz4DIh9G8rjF8mIFlRzHE9yeORKJkeSeN83t7lZLDpmKIehv
-	PzGLFiln+/phqyD6/pfK52EONEy7JXn3onCFMbnDx2OpkBOHS/+uhmK5EDXlP2yTdECS61KIwo3
-	IZRjFSTUpboLmuMxvzYfIhLpN//a27fh92XRtwqyQaYMh+f/M6w68jEDdJ/NTtdN5BAqsiqMp1O
-	d/Rgcpe70CzEauyg70SAIymnVUzBEmZpUF5L6lQAig4lqi47CJ1NZg3fVa8Yj2HTIYozkkHi+pM
-	krQ6aqSy9QiMu8RK1L2VXsRZiM8g==
-X-Received: by 2002:a05:600c:a11a:b0:48e:635a:18d2 with SMTP id 5b1f17b1804b1-48e8fe4dc0bmr45550805e9.2.1778605781824;
-        Tue, 12 May 2026 10:09:41 -0700 (PDT)
+        bh=XXX7LiIDl3A+pjPnWv0DkG9B7a9KxTjMmrGlAN2uPmo=;
+        b=N9f/rUhvTqgC8V0/YhL6XAUhXEVK3531rbu4f7HRy5EEYPwveTp7I4AeUiMD++5aZ5
+         HG0AgOgbRpwwH/hnQbfYcCw9IFChv6A6Qo0donoLehRl4TvNKJRcU6X+LyRXkFSB8JW2
+         5zayS+3h6gMX52j+FNGX5ZpZs2MpkZZGYC+X47kYJR9YNvzRNIhOuxJCsaijzRFFhlUy
+         uNtijB0pfoybVIFNZc6Vly4EPHPZfzRUR6wAtSseR2tFJ3tCECnYgkAdkKKCKml2+3QU
+         7PwYZFYJ/oUt9xBZoIpAnmMCrWjjw8x9pcuordZwglm3LdUttMzblAwj8OHweqdKvl0S
+         4zdQ==
+X-Gm-Message-State: AOJu0Ywsf9hUm62rrHN3faP+nziBm+jqoP+Cqs6Hcn/xPQY3v02IQjyA
+	3b4Hvfi8Ayy9IQKcB1K0WykeYcFU1wLdMrHIfOurVHirjMjrSLmA2/xBQluHCA==
+X-Gm-Gg: Acq92OEQcSPRBqQNCeTbx4q8ELVYrkiA/e49p9C8JjA5jsmcd7J6x57iCoSM8uv6Goe
+	BGkEYNyDVgGvb13ueBzdB3Wg9L/6oqEhu3xgpA5hhOEJFYl1VICDlexQt/ajkaHFi7MuttIsSlw
+	/OzJY2z96ORXeDRSzQT6GQoqUXCvJh36x2kC+DENqVo+d+3M4hCqGToHMB+NjpuMSrDZLmlzomx
+	i6eMNQIKq46twG6tPQvmyavP5wzVvrp42I2K0j3DyeVuEp/C7gzRaESFC6zBVZlxD6jWStmecm8
+	AuQ8Aieax6UxYsDKhw34zqUTD8MemT5zfHOTbkpf9ZHeMQ+/e/wt6Rc1FwHFUmozqgF5LnG4BK8
+	hSBqcm5gCeusJkhw3H6bpx2tYh2JV4rtAjaV50XtiA5o+2q2nBGdmIkPEB+iRihUYp+6EQhadbA
+	JxXC9OCozH65aOrSt/BaxYfNAs3A==
+X-Received: by 2002:a05:600c:37c6:b0:48e:7f22:d90 with SMTP id 5b1f17b1804b1-48e7f7de432mr182800855e9.4.1778605784332;
+        Tue, 12 May 2026 10:09:44 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,149 +95,285 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>,
-	Luca Fancellu <luca.fancellu@arm.com>
-Subject: [PATCH v9 01/13] xen/arm: Add suspend and resume timer helpers
-Date: Tue, 12 May 2026 20:07:08 +0300
-Message-ID: <178c6b2d729d6d341e3647cb63f36af9df6c3301.1778605274.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v9 03/13] xen/arm: gic-v3: tolerate retained redistributor LPI state across CPU_OFF
+Date: Tue, 12 May 2026 20:07:10 +0300
+Message-ID: <ddf37bff562e7e2055ee049ab63111c5a2a2e611.1778605274.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1778605274.git.mykola_kvach@epam.com>
 References: <cover.1778605274.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1778605782-6FF598B7-1695E299/0/0
+X-purgate-ID: tlsNG-ef75cf/1778605785-2887FC48-52A15AD8/0/0
 X-purgate-type: clean
-X-purgate-size: 5064
+X-purgate-size: 10164
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Timer interrupts must be disabled while the system is suspended to prevent
-spurious wake-ups. Suspending timers in Xen consists of disabling the
-physical timer and the hypervisor timer on the current CPU. The virtual
-timer does not need explicit handling here, as it is already disabled on
-vCPU context switch and its state is restored per-vCPU on the next context
-restore.
+PSCI does not guarantee that a GICv3 redistributor is powered down across
+CPU_OFF -> CPU_ON.
 
-Resuming consists of raising TIMER_SOFTIRQ, which prompts the generic
-timer code to reprogram the hypervisor timer with the correct timeout.
+DEN0022F.b says CPU_OFF powers down the calling core (5.5) and CPU_ON
+brings the core back with a defined initial CPU state (5.6, 6.4).
+However, PSCI leaves interrupt migration and GIC re-initialization to the
+supervisory software/firmware stack: the caller must migrate interrupts
+away before CPU_OFF (5.5.2), and the execution context that is lost in a
+powerdown state must be saved and restored by software (6.8). PSCI also
+calls out GIC management explicitly in 6.8, including retargeting SPIs,
+preventing PPIs/SGIs from targeting a powered down CPU, and reinitializing
+the CPU interface after CPU_ON.
 
-Xen does not use or expose the physical timer, so it remains disabled
-across suspend/resume.
+This matches the GIC architecture. IHI0069H.b Chapter 11.1 requires the PE
+and CPU interface to share a power domain, but explicitly allows the
+associated redistributor, distributor, and ITS to remain powered while the
+PE and CPU interface are off. All other GIC power-management behavior is
+IMPLEMENTATION DEFINED. DEN0050D Chapter 4.2, "Generic Interrupt
+Controller (GIC)", says the GICv3 redistributor may live either in the AP
+core power domain or in a relatively always-on parent domain. So after
+CPU_OFF -> CPU_ON a secondary CPU can legitimately come back to a live
+redistributor with GICR_CTLR.EnableLPIs still set.
 
-Introduce a new helper, disable_phys_hyp_timers(), to encapsulate disabling
-of the physical and hypervisor timers.
+Handle that case in the LPI setup path instead of assuming a fully reset
+redistributor.
 
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+The LPI path needs special care because the GIC spec makes redistributor
+LPI state sticky and partially implementation defined. IHI0069H.b 5.1.1
+and 5.1.2 say that changing GICR_PROPBASER or GICR_PENDBASER while
+GICR_CTLR.EnableLPIs == 1 is UNPREDICTABLE. After clearing EnableLPIs,
+software must wait for GICR_CTLR.RWP == 0 before touching the pending
+table. The architecture also permits implementations where, once
+EnableLPIs has been set, clearing it again is not guaranteed to work.
+Where an ITS is present, the spec strongly recommends moving LPIs to
+another redistributor before clearing EnableLPIs.
+
+Because of that, treat a retained EnableLPIs state as valid when the
+redistributor still points at Xen's expected PROPBASER/PENDBASER tables.
+Only try to clear EnableLPIs when the retained configuration does not
+match Xen's state, and wait for RWP before reprogramming the tables.
+
+This is also consistent with platform firmware reality: PSCI and the GIC
+architecture allow platform-specific redistributor power handling, and not
+all platform firmware implementations force a full redistributor power-off
+through implementation-defined controls during CPU_OFF. Xen therefore needs
+to tolerate retained redistributor state on secondary CPU bring-up.
+
+Keep gicv3_populate_rdist() resident as well, because gicv3_cpu_init()
+reuses it on secondary CPU bring-up after init.
+
+Tested using Xen's non-boot CPU disable/enable path on Arm
+FVP_Base_RevC-2xAEMvA, both with and without:
+-C gic_distributor.allow-LPIEN-clear=1
+-C gic_distributor.GICR-clear-enable-supported=1
+and on Orange Pi 5.
+
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-Changes in V7:
-  - Dropped EL1/EL2 wording; use "physical timer" and "hypervisor timer"
-  - Renamed helper to disable_phys_hyp_timers() to reflect its actual scope
-  - Clarified virtual timer handling (disabled on vCPU switch-out, restored
-    on context restore) and added comments in suspend/resume paths
-  - Added resume comment explaining which timers are restored by
-    TIMER_SOFTIRQ
+Changes in v9:
+- move gicv3_do_wait_for_rwp prototype from its related header to gic.h
+- drop __init from gicv3_populate_rdist(), which is reused on secondary
+  CPU bring-up after boot
+- changed print format for smp_processor_id in gicv3_populate_rdist func
+- cosmetic changes
 ---
- xen/arch/arm/include/asm/time.h |  5 ++++
- xen/arch/arm/time.c             | 44 ++++++++++++++++++++++++++++-----
- 2 files changed, 43 insertions(+), 6 deletions(-)
+ xen/arch/arm/gic-v3-lpi.c      | 77 +++++++++++++++++++++++++++++++++-
+ xen/arch/arm/gic-v3.c          | 23 ++++++----
+ xen/arch/arm/include/asm/gic.h |  4 ++
+ 3 files changed, 94 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
-index c194dbb9f5..9313b157ea 100644
---- a/xen/arch/arm/include/asm/time.h
-+++ b/xen/arch/arm/include/asm/time.h
-@@ -105,6 +105,11 @@ void preinit_xen_time(void);
+diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+index 9ee338edc2..36bb45738e 100644
+--- a/xen/arch/arm/gic-v3-lpi.c
++++ b/xen/arch/arm/gic-v3-lpi.c
+@@ -81,6 +81,13 @@ static DEFINE_PER_CPU(struct lpi_redist_data, lpi_redist);
+ #define MAX_NR_HOST_LPIS   (lpi_data.max_host_lpi_ids - LPI_OFFSET)
+ #define HOST_LPIS_PER_PAGE      (PAGE_SIZE / sizeof(union host_lpi))
  
- void force_update_vcpu_system_time(struct vcpu *v);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+void time_suspend(void);
-+void time_resume(void);
-+#endif /* CONFIG_SYSTEM_SUSPEND */
++#define GICR_PROPBASER_XEN_MASK  GENMASK_ULL(51, 12)
++/*
++ * For retained redistributor state, match the pending table by address only.
++ * Attribute bits such as PTZ may not read back with the programmed value.
++ */
++#define GICR_PENDBASER_XEN_MASK  GENMASK_ULL(51, 16)
 +
- #endif /* __ARM_TIME_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-index 6955b2788f..fff8e4aca6 100644
---- a/xen/arch/arm/time.c
-+++ b/xen/arch/arm/time.c
-@@ -296,6 +296,14 @@ static void check_timer_irq_cfg(unsigned int irq, const char *which)
- static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_hyp);
- static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, irq_virt);
- 
-+/* Disable physical and hypervisor timers on the current CPU */
-+static inline void disable_phys_hyp_timers(void)
-+{
-+    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
-+    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
-+    isb();
-+}
-+
- /* Set up the timer interrupt on this CPU */
- void init_timer_interrupt(void)
+ static union host_lpi *gic_get_host_lpi(uint32_t plpi)
  {
-@@ -306,9 +314,7 @@ void init_timer_interrupt(void)
-     WRITE_SYSREG64(0, CNTVOFF_EL2);     /* No VM-specific offset */
-     /* Do not let the VMs program the physical timer, only read the physical counter */
-     WRITE_SYSREG(CNTHCTL_EL2_EL1PCTEN, CNTHCTL_EL2);
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Physical timer disabled */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Hypervisor's timer disabled */
--    isb();
-+    disable_phys_hyp_timers();
- 
-     hyp_action->name = "hyptimer";
-     hyp_action->handler = htimer_interrupt;
-@@ -333,9 +339,7 @@ void init_timer_interrupt(void)
-  */
- static void deinit_timer_interrupt(void)
- {
--    WRITE_SYSREG(0, CNTP_CTL_EL0);    /* Disable physical timer */
--    WRITE_SYSREG(0, CNTHP_CTL_EL2);   /* Disable hypervisor's timer */
--    isb();
-+    disable_phys_hyp_timers();
- 
-     release_irq(timer_irq[TIMER_HYP_PPI], NULL);
-     release_irq(timer_irq[TIMER_VIRT_PPI], NULL);
-@@ -375,6 +379,34 @@ void domain_set_time_offset(struct domain *d, int64_t time_offset_seconds)
-     /* XXX update guest visible wallclock time */
+     union host_lpi *block;
+@@ -296,6 +303,60 @@ static int gicv3_lpi_set_pendtable(void __iomem *rdist_base)
+     return 0;
  }
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+void time_suspend(void)
++static uint64_t gicv3_lpi_expected_proptable(void)
 +{
-+    /* CNTV already disabled by virt_timer_save() during vcpu context switch. */
-+    disable_phys_hyp_timers();
++    return virt_to_maddr(lpi_data.lpi_property);
 +}
 +
-+void time_resume(void)
++static uint64_t gicv3_lpi_expected_pendtable(void)
 +{
++    return virt_to_maddr(this_cpu(lpi_redist).pending_table);
++}
++
++static bool gicv3_lpi_tables_match(void __iomem *rdist_base)
++{
++    uint64_t propbase, pendbase;
++
++    if ( !lpi_data.lpi_property || !this_cpu(lpi_redist).pending_table )
++        return false;
++
++    propbase = readq_relaxed(rdist_base + GICR_PROPBASER);
++    pendbase = readq_relaxed(rdist_base + GICR_PENDBASER);
++
++    return ((propbase & GICR_PROPBASER_XEN_MASK) ==
++            (gicv3_lpi_expected_proptable() & GICR_PROPBASER_XEN_MASK)) &&
++           ((pendbase & GICR_PENDBASER_XEN_MASK) ==
++            (gicv3_lpi_expected_pendtable() & GICR_PENDBASER_XEN_MASK));
++}
++
++static int gicv3_lpi_disable_lpis(void __iomem *rdist_base)
++{
++    uint32_t reg = readl_relaxed(rdist_base + GICR_CTLR);
++    int ret;
++
++    if ( !(reg & GICR_CTLR_ENABLE_LPIS) )
++        return 0;
++
++    writel_relaxed(reg & ~GICR_CTLR_ENABLE_LPIS, rdist_base + GICR_CTLR);
++
 +    /*
-+     * Raising TIMER_SOFTIRQ triggers generic timer code to reprogram the
-+     * hypervisor timer with the correct timeout (not known here).
-+     *
-+     * Xen doesn't use or expose the physical timer, so it remains disabled
-+     * across suspend/resume.
-+     *
-+     * The virtual timer state is restored per-vCPU on the next context switch.
-+     *
-+     * No further action is needed to restore timekeeping after power down,
-+     * since the system counter is unaffected. See ARM DDI 0487 L.a, D12.1.2
-+     * "The system counter must be implemented in an always-on power domain."
++     * The spec only guarantees programmability when we have observed the bit
++     * cleared. Where clearing is supported, RWP must reach 0 before touching
++     * PROPBASER/PENDBASER again.
 +     */
-+    raise_softirq(TIMER_SOFTIRQ);
++    wmb();
++
++    ret = gicv3_do_wait_for_rwp(rdist_base);
++    if ( ret )
++        return ret;
++
++    reg = readl_relaxed(rdist_base + GICR_CTLR);
++    if ( reg & GICR_CTLR_ENABLE_LPIS )
++        return -EBUSY;
++
++    return 0;
 +}
 +
-+#endif /* CONFIG_SYSTEM_SUSPEND */
+ /*
+  * Tell a redistributor about the (shared) property table, allocating one
+  * if not already done.
+@@ -374,7 +435,21 @@ int gicv3_lpi_init_rdist(void __iomem * rdist_base)
+     /* Make sure LPIs are disabled before setting up the tables. */
+     reg = readl_relaxed(rdist_base + GICR_CTLR);
+     if ( reg & GICR_CTLR_ENABLE_LPIS )
+-        return -EBUSY;
++    {
++        if ( gicv3_lpi_tables_match(rdist_base) )
++            return -EBUSY;
 +
- static int cpu_time_callback(struct notifier_block *nfb,
-                              unsigned long action,
-                              void *hcpu)
++        ret = gicv3_lpi_disable_lpis(rdist_base);
++        if ( ret == -EBUSY )
++        {
++            printk(XENLOG_ERR
++                   "GICv3: CPU%u: LPIs still enabled with unexpected redistributor tables\n",
++                   smp_processor_id());
++            return -EINVAL;
++        }
++        if ( ret )
++            return ret;
++    }
+ 
+     ret = gicv3_lpi_set_pendtable(rdist_base);
+     if ( ret )
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index 7f365cdbe9..cc0569a157 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -274,8 +274,8 @@ static void gicv3_enable_sre(void)
+     isb();
+ }
+ 
+-/* Wait for completion of a distributor change */
+-static void gicv3_do_wait_for_rwp(void __iomem *base)
++/* Wait for completion of a distributor/redistributor write-pending change. */
++int gicv3_do_wait_for_rwp(void __iomem *base)
+ {
+     uint32_t val;
+     bool timeout = false;
+@@ -295,17 +295,22 @@ static void gicv3_do_wait_for_rwp(void __iomem *base)
+     } while ( 1 );
+ 
+     if ( timeout )
++    {
+         dprintk(XENLOG_ERR, "RWP timeout\n");
++        return -ETIMEDOUT;
++    }
++
++    return 0;
+ }
+ 
+ static void gicv3_dist_wait_for_rwp(void)
+ {
+-    gicv3_do_wait_for_rwp(GICD);
++    (void)gicv3_do_wait_for_rwp(GICD);
+ }
+ 
+ static void gicv3_redist_wait_for_rwp(void)
+ {
+-    gicv3_do_wait_for_rwp(GICD_RDIST_BASE);
++    (void)gicv3_do_wait_for_rwp(GICD_RDIST_BASE);
+ }
+ 
+ static void gicv3_wait_for_rwp(int irq)
+@@ -857,7 +862,7 @@ static bool gicv3_enable_lpis(void)
+     return true;
+ }
+ 
+-static int __init gicv3_populate_rdist(void)
++static int gicv3_populate_rdist(void)
+ {
+     int i;
+     uint32_t aff;
+@@ -925,15 +930,15 @@ static int __init gicv3_populate_rdist(void)
+                     gicv3_set_redist_address(rdist_addr, procnum);
+ 
+                     ret = gicv3_lpi_init_rdist(ptr);
+-                    if ( ret && ret != -ENODEV )
++                    if ( ret && ret != -ENODEV && ret != -EBUSY )
+                     {
+-                        printk("GICv3: CPU%d: Cannot initialize LPIs: %u\n",
++                        printk("GICv3: CPU%u: Cannot initialize LPIs: %d\n",
+                                smp_processor_id(), ret);
+                         break;
+                     }
+                 }
+ 
+-                printk("GICv3: CPU%d: Found redistributor in region %d @%p\n",
++                printk("GICv3: CPU%u: Found redistributor in region %d @%p\n",
+                         smp_processor_id(), i, ptr);
+                 return 0;
+             }
+@@ -953,7 +958,7 @@ static int __init gicv3_populate_rdist(void)
+         } while ( !(typer & GICR_TYPER_LAST) );
+     }
+ 
+-    dprintk(XENLOG_ERR, "GICv3: CPU%d: mpidr 0x%"PRIregister" has no re-distributor!\n",
++    dprintk(XENLOG_ERR, "GICv3: CPU%u: mpidr 0x%"PRIregister" has no re-distributor!\n",
+             smp_processor_id(), cpu_logical_map(smp_processor_id()));
+ 
+     return -ENODEV;
+diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
+index fbf0d69edd..9293aa56e2 100644
+--- a/xen/arch/arm/include/asm/gic.h
++++ b/xen/arch/arm/include/asm/gic.h
+@@ -301,6 +301,10 @@ extern int gicv_setup(struct domain *d);
+ extern void gic_save_state(struct vcpu *v);
+ extern void gic_restore_state(struct vcpu *v);
+ 
++#ifdef CONFIG_GICV3
++int gicv3_do_wait_for_rwp(void __iomem *base);
++#endif
++
+ #ifdef CONFIG_SYSTEM_SUSPEND
+ /* Suspend/resume */
+ extern int gic_suspend(void);
 -- 
 2.43.0
 
