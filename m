@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 357AFCD4F42
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2026 17:10:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1307283.1579047 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A9BCD4F3C
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2026 17:10:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1307291.1579087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqcE-0007IU-Fh; Tue, 12 May 2026 17:09:54 +0000
+	id 1wMqcL-0000HX-FO; Tue, 12 May 2026 17:10:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1307283.1579047; Tue, 12 May 2026 17:09:54 +0000
+Received: by outflank-mailman (output) from mailman id 1307291.1579087; Tue, 12 May 2026 17:10:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqcE-0007I9-9w; Tue, 12 May 2026 17:09:54 +0000
-Received: by outflank-mailman (input) for mailman id 1307283;
- Tue, 12 May 2026 17:09:53 +0000
+	id 1wMqcL-0000FZ-7b; Tue, 12 May 2026 17:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 1307291;
+ Tue, 12 May 2026 17:09:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wMqcD-0007Av-Q1
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:09:53 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wMqcI-00084X-T5
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:09:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wMqcD-007RzZ-6w
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:09:53 +0200
+ id 1wMqcI-007RzZ-9l
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:09:58 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a035ec9-2eae-0a2a0a5409dd-0a2a4501afae-36
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:53 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ id 6a035ec9-2eae-0a2a0a5409dd-0a2a4501afae-42
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:58 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a035ee1-c1f2-0a2a45010019-d155802cc06e-3
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:53 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-488a9033b2cso53223425e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 10:09:53 -0700 (PDT)
+ id 6a035ee6-c1f2-0a2a45010019-d155802dbd81-3
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:58 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-488b0046078so48589885e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 10:09:58 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.26.18]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fc8cccf90sm10838845e9.0.2026.05.12.10.09.51
+ 5b1f17b1804b1-48fc8cccf90sm10838845e9.0.2026.05.12.10.09.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 10:09:51 -0700 (PDT)
+ Tue, 12 May 2026 10:09:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778605792; x=1779210592; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1778605797; x=1779210597; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pT1AJ8vJVr+Es3f8Ijw7DVXZgIihu6GcB10i8wyJqXY=;
-        b=XQaNkCv8e/xa6SJp6IaorzUiICTIe73+1JmcUsd7VJNI0RZcR/jVPptk9XT+g4F8XT
-         dpgdWPnMiKlTQPjnBTk7R7O/LBC8bki+4WzgRIelT0JFTndVNaBdBlT9UkgC24RfqeHi
-         bCuebZD7KY52QT8zBbzic4P7578bpyk174LxK9ItpjjjFapdw/SB0I85P8m2LAZqa7n/
-         V1eop4xuJVZGvu5Iij9vfSL0VVVJa2NGkzOp2b8k+TOsrb8V3tEb41kZHw225i7HAiiw
-         cSSgBR8CPd4SUxa5tVMRGafOHG5YNJZ5aDx90aOq9oWTMuLS5x21NwQ7xu7W6moho+uW
-         xTCg==
+        bh=Qsze4I9Yt/cMI8M+tY/BjiP5Otbdm5FY4KxVXe9YCJU=;
+        b=AAplRYV8rMejoKhWP2iI5KYR3jhS94dbaV8i23b/5m4XGMGJDoP7OlpkVvuwS2Q7xN
+         kQ/aodTJpgRz5p1b6p7S/tEF1sr2E2B39Lo/Es1royG84ySfOnZxOY1iQu6kTPvdBji5
+         QwdI8p/9DwyZnDRHMsPXvARSI0RDjV4RDj3P397X5Elo1wD94FKYr3J2bncufuMCUvRB
+         zGx9qBgL7PfHvUio05D1QVfTztFIXVOjs5iYimejj1toxoE+OoB+0T/8epQH1b0tmxeL
+         H/WSQ4a4Y/EjHuzVPCXBJ1tWzoXImwN4wWs52yMcQlYTHrq9Nv9DBJbMv54NZPbIi/4i
+         YsEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778605792; x=1779210592;
+        d=1e100.net; s=20251104; t=1778605797; x=1779210597;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=pT1AJ8vJVr+Es3f8Ijw7DVXZgIihu6GcB10i8wyJqXY=;
-        b=TenhDgYb3Qkuxlbo6e+xIykiN77Qb26G4xBrgHnmruAXNWm+zKDD811w1t6nvZLnnM
-         lIPvSfAxsvp9j+UFFm5srk3KuD0Bfq1pGjSeL0IjsIlVyA3R8oacExbAPXAUtYq1yWuZ
-         tW7A3dEJ4J1uGvyxlSNsDRqXbqB/WFjEQ492mLKo5coS4piZwX2BYT+hR2QCNPtaTnTc
-         ImYh2sNqDK01ZtRnSmmC8CKQG8cuxnBcConKb+gmvRT0JMvYETH0NuXpFiIwXJeR68lo
-         6Kaj9nYTzBcKjhh6mnaNmsZHodj4H+ec6RcGLcuuDkdPPzk4o1sTwwMVx3Nxog2gT0Of
-         y4Mg==
-X-Gm-Message-State: AOJu0YzpJJL9q5yNmz9vUVyTuSIeXrRBJxIyBjUtiGkvB6O3yjh7kAzM
-	mvkY3wvhIPmkkUJJ7KeboRfU+oM8QvVKB21AYkC7Ubv3IVfkUVo7mDoGxVMmCg==
-X-Gm-Gg: Acq92OHfz1CjpF/tiBPvlJR8Ais0/YSYfZOnUJe12xXnbNF/XnV7xbg8CF450W+kCAR
-	8DZpVYMQ2uMZCMm3Ov2xHbnztZKQ1c8lrGlF7RMx8hZUYW19PAisKeOeebwJ8aDW/az2smWpZSx
-	kpzFAvdYPwGaxXyZne4KO46JYRLwsakaT1ItmhVYSqzHB2xi6qoLuRF4jo/NQIUqQF9bygu4Jrb
-	IBmbyPVdkKE4v7QHpHd4TnT72kT+ESyexAuwpNqRI0sx5IdvUlKqV1fhWaiTJGiZvha9zPznRDN
-	dem1VqLHSc3omvQp5aYdvdpX5AnQ6+/7Mt51AN8MjXLn0Gle8aa6UKeBp/K+NS0SDfXyeaJJHHj
-	3oazqu/gZOMW8sp86uTt/IzT16FqanYobOfW6VT63a7XHvxRzxq9B2TVoO8gkGSpnwSyUymNL7t
-	w8Dt1a28it85GM4kC3kZsvmYYe+A==
-X-Received: by 2002:a05:600c:4ec7:b0:48e:51f8:eb37 with SMTP id 5b1f17b1804b1-48e706d8ad9mr242690535e9.25.1778605791897;
-        Tue, 12 May 2026 10:09:51 -0700 (PDT)
+        bh=Qsze4I9Yt/cMI8M+tY/BjiP5Otbdm5FY4KxVXe9YCJU=;
+        b=i2/z9x+EUVG9TdespivNlyXYkONUdhX+BOTWfPDpI2xr/nGcalBxOTqflQgCbr7yil
+         qnjAInXsk7WoO3GHzc4dULNpRdSRL9bSGwMvGDizh6AMJFpORAxog5nuy83ar4iJdvVy
+         gNHsj+Oomt/c4Ds57hs7NlStGxd9q/E/FkQUGAGYccbnoXgiKV/fulC8oTWHWHx6joaK
+         ItmviNcpNXRFi5LALlY/JBVTIBH54tAnRSZdInZ2OnzeQPTU55zAcDLwIJkCUpOU5vAj
+         jWhWutdQcUIyT3ySXrv7J2rHO2P7rmdCiBLzDijCdCoUQYxFkZIjowzat0q+STBLGLdv
+         xNDA==
+X-Gm-Message-State: AOJu0Yy3tfi+P5PmyVZl2y/jJENV5vOr/ZetMvdms7PESqVNykH4mLyu
+	u7NEL/LG0kgwcn8NGm9pDJv+TK3DeetUCmsR6ySr43w9liinUty/ROriuy+1dA==
+X-Gm-Gg: Acq92OFehrvUxPKUSJlVVi4A/MuAM5GSY3DASD6M8CbUEnShfugeV0T8XDzXQWY7NXt
+	mSJBGFV2oGMO45/xH8FKRSVt6Ut6TfuBDwr7+I6JIc7ew62qc1qv7UmSGn8B+YjammrAVmpD2Kj
+	hYvnhBGwNsNRl/AekKOXcIx1j5rSGfbWoSvu0rJ+RkApfgqS9fb30fthx8JtbpeXR/aqosV0MJG
+	IKVaCKloYPkjF68D2cPGJYSP0+ofKa1Y3TYakKVy+lMrji04J6gADSlg4I5oJfvMJLZ6OwO/djs
+	Sc/EnYbeVGZsnnPRE8Ir+HNVYsUXvHovxSdYsfBw2M8Rmnf1XPCzL4e3xqA8nQ9hRAflvbyCMa7
+	zr9bq2gf7zc7m1gPAz7ZwrhwJY0s+0HnUVop/aTEEfWnmOOxEfhCdJXj0nw+JNaHhtapIAq3W2t
+	Uh2vXBx+fVYeAqt8Dqe2L83zXp2w==
+X-Received: by 2002:a05:600c:8b28:b0:489:149a:f9e7 with SMTP id 5b1f17b1804b1-48e706e1ce9mr265592235e9.27.1778605797177;
+        Tue, 12 May 2026 10:09:57 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,474 +95,527 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v9 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-Date: Tue, 12 May 2026 20:07:15 +0300
-Message-ID: <4162aa58c351677a4a267fe85989c6d4e07487d8.1778605274.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v9 12/13] xen/arm: Add vPSCI SYSTEM_SUSPEND policy
+Date: Tue, 12 May 2026 20:07:19 +0300
+Message-ID: <06448a30ef6694a55ac85d4c8c78ca2d71342430.1778605274.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1778605274.git.mykola_kvach@epam.com>
 References: <cover.1778605274.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1778605793-B715BFF4-1027C592/0/0
+X-purgate-ID: tlsNG-d62444/1778605798-B5F40FF4-B662D68F/0/0
 X-purgate-type: clean
-X-purgate-size: 13768
+X-purgate-size: 16491
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Store and restore active context and micro-TLB registers.
+Introduce CONFIG_HAS_HWDOM_SYSTEM_SUSPEND as an architecture-selected
+capability for platforms where the hardware domain can be parked with
+SHUTDOWN_suspend without calling hwdom_shutdown().
 
-Tested on R-Car H3 Starter Kit.
+Expose PSCI SYSTEM_SUSPEND as a vPSCI operation for all domains. For
+non-control domains, including the hardware domain when it is not acting as a
+control domain, the call is handled as a guest/domain suspend request and
+parks the domain in SHUTDOWN_suspend.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Control domains need additional sequencing because their SYSTEM_SUSPEND
+request is used to coordinate host-wide suspend. A non-last awake control
+domain may be parked in SHUTDOWN_suspend without requiring the host suspend
+path to be available. The last awake control domain is treated as the point
+where the request becomes a host-suspend request, and it may only proceed
+when all non-control domains are already in SHUTDOWN_suspend and the host
+suspend path is available.
+
+Keep the control-domain sequencing and domain-readiness checks out of
+PSCI_FEATURES. They are per-attempt runtime conditions rather than stable PSCI
+function availability. Advertise SYSTEM_SUSPEND as implemented by vPSCI and
+enforce the sequencing policy in the call handler.
+
+Select HAS_HWDOM_SYSTEM_SUSPEND independently from CONFIG_SYSTEM_SUSPEND so
+that SHUTDOWN_suspend from the hardware domain can be treated as a domain
+suspend state rather than as a hardware-domain initiated host shutdown. This
+does not by itself imply that host-wide suspend is available.
+
+Add host_system_suspend_allowed() to combine the host PSCI SYSTEM_SUSPEND
+capability with runtime blockers reported by Xen-owned subsystems. Add
+runtime blockers for registered serial, IOMMU, GIC and SMMUv3 MSI IRQ paths
+lacking suspend/resume support. These blockers are runtime based, so they
+only apply to drivers or paths that Xen actually uses on the platform. For
+SMMUv3, the blocker applies only when Xen actually uses the MSI IRQ path,
+since resume does not restore the SMMU *_IRQ_CFGn MSI registers yet.
+
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Changes in V9:
-- set dt_device_set_protected() only after ipmmu_alloc_ctx_suspend()
-  succeeds, so DT devices do not remain protected on allocation failure.
+ xen/arch/arm/Kconfig                  |   1 +
+ xen/arch/arm/gic.c                    |   6 ++
+ xen/arch/arm/include/asm/psci.h       |   3 +
+ xen/arch/arm/include/asm/suspend.h    |  10 ++-
+ xen/arch/arm/psci.c                   |   7 ++
+ xen/arch/arm/suspend.c                |  40 +++++++++
+ xen/arch/arm/vpsci.c                  | 114 +++++++++++++++++++++++---
+ xen/common/Kconfig                    |   3 +
+ xen/common/domain.c                   |   7 +-
+ xen/drivers/char/serial.c             |  12 +++
+ xen/drivers/passthrough/arm/iommu.c   |   4 +
+ xen/drivers/passthrough/arm/smmu-v3.c |   4 +
+ xen/include/xen/serial.h              |   1 +
+ xen/include/xen/suspend.h             |   2 +
+ 14 files changed, 201 insertions(+), 13 deletions(-)
 
-Changes in V7:
-- moved suspend context allocation before pci stuff
----
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 319 +++++++++++++++++++++--
- 1 file changed, 304 insertions(+), 15 deletions(-)
-
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index fa9ab9cb13..e1b47a5824 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -71,6 +71,8 @@
- })
- #endif
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 79622b46a1..54a5bfb9ae 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -19,6 +19,7 @@ config ARM
+ 	select HAS_ALTERNATIVE if HAS_VMAP
+ 	select HAS_DEVICE_TREE_DISCOVERY
+ 	select HAS_DOM0LESS
++	select HAS_HWDOM_SYSTEM_SUSPEND if !MPU
+ 	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+ 	select HAS_STACK_PROTECTOR
+ 	select HAS_UBSAN
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 7727ffed5a..a5efcaeb4c 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -26,6 +26,7 @@
+ #include <asm/device.h>
+ #include <asm/io.h>
+ #include <asm/gic.h>
++#include <asm/suspend.h>
+ #include <asm/vgic.h>
+ #include <asm/acpi.h>
  
-+#define dev_dbg(dev, fmt, ...)    \
-+    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
- #define dev_info(dev, fmt, ...)    \
-     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
- #define dev_warn(dev, fmt, ...)    \
-@@ -130,6 +132,24 @@ struct ipmmu_features {
-     unsigned int imuctr_ttsel_mask;
- };
- 
+@@ -44,6 +45,11 @@ static void __init __maybe_unused build_assertions(void)
+ void register_gic_ops(const struct gic_hw_operations *ops)
+ {
+     gic_hw_ops = ops;
++
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+struct ipmmu_reg_ctx {
-+    unsigned int imttlbr0;
-+    unsigned int imttubr0;
-+    unsigned int imttbcr;
-+    unsigned int imctr;
-+};
-+
-+struct ipmmu_vmsa_backup {
-+    struct device *dev;
-+    unsigned int *utlbs_val;
-+    unsigned int *asids_val;
-+    struct list_head list;
-+};
-+
++    if ( !ops->suspend || !ops->resume )
++        host_system_suspend_disable("GIC driver lacks suspend/resume support");
 +#endif
-+
- /* Root/Cache IPMMU device's information */
- struct ipmmu_vmsa_device {
-     struct device *dev;
-@@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
-     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
-     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
-     const struct ipmmu_features *features;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
-+#endif
- };
- 
- /*
-@@ -547,6 +570,245 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
-     spin_unlock_irqrestore(&mmu->lock, flags);
  }
  
+ static void clear_cpu_lr_mask(void)
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index bb3c73496e..142fa1bfe5 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -24,6 +24,9 @@ void call_psci_cpu_off(void);
+ void call_psci_system_off(void);
+ void call_psci_system_reset(void);
+ int call_psci_system_suspend(void);
 +#ifdef CONFIG_SYSTEM_SUSPEND
++bool psci_system_suspend_allowed(void);
++#endif
+ 
+ /* Range of allocated PSCI function numbers */
+ #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+index 2d9fc331fc..87db12eac3 100644
+--- a/xen/arch/arm/include/asm/suspend.h
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -38,7 +38,15 @@ extern struct resume_cpu_context resume_cpu_context;
+ 
+ int prepare_resume_ctx(void);
+ void hyp_resume(void);
+-#endif /* CONFIG_SYSTEM_SUSPEND */
++bool host_system_suspend_allowed(void);
++void host_system_suspend_disable(const char *reason);
 +
-+static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
-+static LIST_HEAD(ipmmu_devices_backup);
++#else /* !CONFIG_SYSTEM_SUSPEND */
 +
-+static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
++static inline bool host_system_suspend_allowed(void) { return false; }
++static inline void host_system_suspend_disable(const char *reason) {}
 +
-+static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
-+                                   unsigned int utlb)
++#endif
+ 
+ #endif /* ARM_SUSPEND_H */
+ 
+diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+index e05dae1133..e9d78668fd 100644
+--- a/xen/arch/arm/psci.c
++++ b/xen/arch/arm/psci.c
+@@ -41,6 +41,13 @@ static bool __ro_after_init has_psci_system_suspend;
+ 
+ #define PSCI_RET(res)   ((int32_t)(res).a0)
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++bool psci_system_suspend_allowed(void)
 +{
-+    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
++    return has_psci_system_suspend;
 +}
++#endif
 +
-+static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
+ int call_psci_cpu_on(int cpu)
+ {
+     struct arm_smccc_res res;
+diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+index 6ea4a0f9cc..a571035d2c 100644
+--- a/xen/arch/arm/suspend.c
++++ b/xen/arch/arm/suspend.c
+@@ -1,9 +1,49 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <asm/psci.h>
+ #include <asm/suspend.h>
+ 
++#include <xen/lib.h>
++#include <xen/serial.h>
 +
-+    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
-+            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
-+            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
-+
-+    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
-+    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
-+    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
-+    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
-+}
-+
-+static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs  = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
-+
-+    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
-+    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
-+    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
-+    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
-+}
-+
+ struct resume_cpu_context resume_cpu_context;
+ 
 +/*
-+ * Xen: Unlike Linux implementation, Xen uses a single driver instance
-+ * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
-+ * callbacks to be invoked for each IPMMU device. So, we need to iterate
-+ * through all registered IPMMUs performing required actions.
++ * Non-PSCI infrastructure can make host suspend impossible even when the PSCI
++ * SYSTEM_SUSPEND conduit is present, e.g. when a Xen-owned driver has no valid
++ * suspend/resume path.
 + *
-+ * Also take care of restoring special settings, such as translation
-+ * table format, etc.
++ * This gate is checked only when the last awake control domain attempts to
++ * turn a guest SYSTEM_SUSPEND request into a host-suspend request.
 + */
-+static int __must_check ipmmu_suspend(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
++static bool host_system_suspend_runtime_allowed = true;
 +
-+    if ( !iommu_enabled )
++static bool host_serial_suspend_allowed(void)
++{
++    if ( serial_suspend_supported() )
++        return true;
++
++    printk_once(XENLOG_INFO
++                "Host SYSTEM_SUSPEND blocked: serial driver lacks suspend/resume support\n");
++
++    return false;
++}
++
++bool host_system_suspend_allowed(void)
++{
++    return psci_system_suspend_allowed() &&
++           host_serial_suspend_allowed() &&
++           host_system_suspend_runtime_allowed;
++}
++
++void host_system_suspend_disable(const char *reason)
++{
++    host_system_suspend_runtime_allowed = false;
++
++    printk(XENLOG_INFO "Host SYSTEM_SUSPEND blocked: %s\n",
++           reason ? reason : "unsupported suspend/resume path");
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+index ac6af6118f..48a963ae3e 100644
+--- a/xen/arch/arm/vpsci.c
++++ b/xen/arch/arm/vpsci.c
+@@ -5,6 +5,7 @@
+ 
+ #include <asm/current.h>
+ #include <asm/domain.h>
++#include <asm/suspend.h>
+ #include <asm/vgic.h>
+ #include <asm/vpsci.h>
+ #include <asm/event.h>
+@@ -219,6 +220,89 @@ static void do_psci_0_2_system_reset(void)
+     domain_shutdown(d,SHUTDOWN_reboot);
+ }
+ 
++/*
++ * Serialise SYSTEM_SUSPEND policy decisions with the domain suspend transition,
++ * so multiple control domains cannot all observe each other as still awake.
++ */
++static DEFINE_SPINLOCK(vpsci_system_suspend_lock);
++
++static bool domain_in_suspend_state(struct domain *d)
++{
++    bool suspended;
++
++    spin_lock(&d->shutdown_lock);
++    suspended = d->is_shut_down && d->shutdown_code == SHUTDOWN_suspend;
++    spin_unlock(&d->shutdown_lock);
++
++    return suspended;
++}
++
++static int32_t domain_psci_system_suspend_policy(struct domain *d)
++{
++    struct domain *other;
++    bool last_awake_control_domain = true;
++    bool awake_non_control_domain = false;
++
++    /* Only control domains participate in sequencing policy. */
++    if ( !is_control_domain(d) )
 +        return 0;
 +
-+    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
++    rcu_read_lock(&domlist_read_lock);
 +
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
++    for_each_domain ( other )
 +    {
-+        if ( ipmmu_is_root(mmu) )
++        bool suspended;
++
++        if ( other == d )
++            continue;
++
++        suspended = domain_in_suspend_state(other);
++        if ( suspended )
++            continue;
++
++        if ( is_control_domain(other) )
 +        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_backup_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_backup(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+
-+    return 0;
-+}
-+
-+static void ipmmu_resume(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
-+    {
-+        uint32_t reg;
-+
-+        /* Do not use security group function */
-+        reg = IMSCTLR + mmu->features->control_offset_base;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) & ~IMSCTLR_USE_SECGRP);
-+
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            /* Use stage 2 translation table format */
-+            reg = IMSAUXCTLR + mmu->features->control_offset_base;
-+            ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_restore_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_restore(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+}
-+
-+static int ipmmu_alloc_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+    unsigned int *utlbs_val, *asids_val;
-+    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+
-+    utlbs_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !utlbs_val )
-+        return -ENOMEM;
-+
-+    asids_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !asids_val )
-+    {
-+        xfree(utlbs_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data = xzalloc(struct ipmmu_vmsa_backup);
-+    if ( !backup_data )
-+    {
-+        xfree(utlbs_val);
-+        xfree(asids_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data->dev = dev;
-+    backup_data->utlbs_val = utlbs_val;
-+    backup_data->asids_val = asids_val;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+    list_add(&backup_data->list, &ipmmu_devices_backup);
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+
-+    return 0;
-+}
-+
-+#ifdef CONFIG_HAS_PCI
-+static void ipmmu_free_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data, *tmp;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry_safe( backup_data, tmp, &ipmmu_devices_backup, list )
-+    {
-+        if ( backup_data->dev == dev )
-+        {
-+            list_del(&backup_data->list);
-+            xfree(backup_data->utlbs_val);
-+            xfree(backup_data->asids_val);
-+            xfree(backup_data);
++            last_awake_control_domain = false;
 +            break;
 +        }
++
++        awake_non_control_domain = true;
 +    }
 +
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+#endif /* CONFIG_HAS_PCI */
++    rcu_read_unlock(&domlist_read_lock);
 +
-+#endif /* CONFIG_SYSTEM_SUSPEND */
++    /*
++     * Another control domain is still awake. This request is only the first
++     * phase of the sequencing: park this control domain and leave the host
++     * running. Host-wide suspend gates must not block this intermediate state.
++     */
++    if ( !last_awake_control_domain )
++        return 0;
 +
- static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
- {
-     uint64_t ttbr;
-@@ -559,6 +821,9 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
-         return ret;
- 
-     domain->context_id = ret;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[ret] = &root_pgtable[ret];
-+#endif
- 
-     /*
-      * TTBR0
-@@ -615,6 +880,9 @@ static void ipmmu_domain_destroy_context(struct ipmmu_vmsa_domain *domain)
-     ipmmu_ctx_write_root(domain, IMCTR, IMCTR_FLUSH);
-     ipmmu_tlb_sync(domain);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[domain->context_id] = NULL;
-+#endif
-     ipmmu_domain_free_context(domain->mmu->root, domain->context_id);
- }
- 
-@@ -1338,10 +1606,11 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     struct iommu_fwspec *fwspec;
- 
- #ifdef CONFIG_HAS_PCI
-+    int ret;
-+
-     if ( dev_is_pci(dev) )
-     {
-         struct pci_dev *pdev = dev_to_pci(dev);
--        int ret;
- 
-         if ( devfn != pdev->devfn )
-             return 0;
-@@ -1358,17 +1627,24 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     if ( !to_ipmmu(dev) )
-         return -ENODEV;
- 
--    if ( !dev_is_pci(dev) )
-+    if ( !dev_is_pci(dev) && dt_device_is_protected(dev_to_dt(dev)) )
-     {
--        if ( dt_device_is_protected(dev_to_dt(dev)) )
--        {
--            dev_err(dev, "Already added to IPMMU\n");
--            return -EEXIST;
--        }
-+        dev_err(dev, "Already added to IPMMU\n");
-+        return -EEXIST;
-+    }
- 
--        /* Let Xen know that the master device is protected by an IOMMU. */
--        dt_device_set_protected(dev_to_dt(dev));
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    if ( ipmmu_alloc_ctx_suspend(dev) )
++    /*
++     * This is the last awake control domain. It must not be parked unless the
++     * request can proceed as a host-suspend request; otherwise Xen would lose
++     * the last domain that can coordinate the system suspend.
++     */
++    if ( awake_non_control_domain )
 +    {
-+        dev_err(dev, "Failed to allocate context for suspend\n");
-+        return -ENOMEM;
-     }
-+#endif
++        printk(XENLOG_DEBUG
++               "SYSTEM_SUSPEND denied: last awake control domain dom%u requested host suspend while non-control domains are still awake\n",
++               d->domain_id);
++        return PSCI_DENIED;
++    }
 +
-+    /* Let Xen know that the master device is protected by an IOMMU. */
-+    if ( !dev_is_pci(dev) )
-+        dt_device_set_protected(dev_to_dt(dev));
++    /*
++     * Host-wide gates are relevant only for the last-control-domain case. They
++     * must not block parking of a non-last control domain, but they must reject
++     * the last control domain when host suspend is not available.
++     */
++    if ( !host_system_suspend_allowed() )
++        return PSCI_NOT_SUPPORTED;
 +
- #ifdef CONFIG_HAS_PCI
-     if ( dev_is_pci(dev) )
++    return 0;
++}
++
+ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+ {
+     int32_t rc;
+@@ -232,10 +316,6 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+     if ( is_64bit_domain(d) && is_thumb )
+         return PSCI_INVALID_ADDRESS;
+ 
+-    /* SYSTEM_SUSPEND is not supported for the hardware domain yet */
+-    if ( is_hardware_domain(d) )
+-        return PSCI_NOT_SUPPORTED;
+-
+     /* Ensure that all CPUs other than the calling one are offline */
+     domain_lock(d);
+     for_each_vcpu ( d, v )
+@@ -252,16 +332,29 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+     if ( rc )
+         return PSCI_DENIED;
+ 
+-    rc = domain_shutdown(d, SHUTDOWN_suspend);
++    spin_lock(&vpsci_system_suspend_lock);
++
++    rc = domain_psci_system_suspend_policy(d);
++    if ( !rc )
++    {
++        rc = domain_shutdown(d, SHUTDOWN_suspend);
++        if ( rc )
++            rc = PSCI_DENIED;
++        else
++        {
++            rctx->ctxt = ctxt;
++            rctx->wake_cpu = current;
++        }
++    }
++
++    spin_unlock(&vpsci_system_suspend_lock);
++
+     if ( rc )
      {
-@@ -1377,26 +1653,28 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         struct pci_host_bridge *bridge;
-         struct iommu_fwspec *fwspec_bridge;
-         unsigned int utlb_osid0 = 0;
--        int ret;
- 
-         bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
-         if ( !bridge )
-         {
-             dev_err(dev, "Failed to find host bridge\n");
--            return -ENODEV;
-+            ret = -ENODEV;
-+            goto free_suspend_ctx;
-         }
- 
-         fwspec_bridge = dev_iommu_fwspec_get(dt_to_dev(bridge->dt_node));
-         if ( fwspec_bridge->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find host bridge uTLB\n");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         if ( fwspec->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find uTLB");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         rcar4_pcie_osid_regs_init(bridge);
-@@ -1405,7 +1683,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         if ( ret < 0 )
-         {
-             dev_err(dev, "No unused OSID regs\n");
--            return ret;
-+            goto free_suspend_ctx;
-         }
-         reg_id = ret;
- 
-@@ -1420,7 +1698,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         {
-             rcar4_pcie_osid_bdf_clear(bridge, reg_id);
-             rcar4_pcie_osid_reg_free(bridge, reg_id);
--            return ret;
-+            goto free_suspend_ctx;
-         }
+         free_vcpu_guest_context(ctxt);
+-        return PSCI_DENIED;
++        return rc;
      }
- #endif
-@@ -1429,6 +1707,13 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-              dev_name(fwspec->iommu_dev), fwspec->num_ids);
  
-     return 0;
-+#ifdef CONFIG_HAS_PCI
-+ free_suspend_ctx:
+-    rctx->ctxt = ctxt;
+-    rctx->wake_cpu = current;
+-
+     gprintk(XENLOG_DEBUG,
+             "SYSTEM_SUSPEND requested, epoint=%#"PRIregister", cid=%#"PRIregister"\n",
+             epoint, cid);
+@@ -287,10 +380,9 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+     case PSCI_0_2_FN32_SYSTEM_RESET:
+     case PSCI_1_0_FN32_PSCI_FEATURES:
+     case ARM_SMCCC_VERSION_FID:
+-        return 0;
+     case PSCI_1_0_FN32_SYSTEM_SUSPEND:
+     case PSCI_1_0_FN64_SYSTEM_SUSPEND:
+-        return is_hardware_domain(current->domain) ? PSCI_NOT_SUPPORTED : 0;
++        return 0;
+     default:
+         return PSCI_NOT_SUPPORTED;
+     }
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 5ff71480ee..816a1a4ecb 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -140,6 +140,9 @@ config HAS_EX_TABLE
+ config HAS_FAST_MULTIPLY
+ 	bool
+ 
++config HAS_HWDOM_SYSTEM_SUSPEND
++	bool
++
+ config HAS_IOPORTS
+ 	bool
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index bb9e210c28..d3edfb2a13 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1375,6 +1375,11 @@ void __domain_crash(struct domain *d)
+     domain_shutdown(d, SHUTDOWN_crash);
+ }
+ 
++static inline bool want_hwdom_shutdown(uint8_t reason)
++{
++    return !IS_ENABLED(CONFIG_HAS_HWDOM_SYSTEM_SUSPEND) ||
++           reason != SHUTDOWN_suspend;
++}
+ 
+ int domain_shutdown(struct domain *d, u8 reason)
+ {
+@@ -1391,7 +1396,7 @@ int domain_shutdown(struct domain *d, u8 reason)
+         d->shutdown_code = reason;
+     reason = d->shutdown_code;
+ 
+-    if ( is_hardware_domain(d) )
++    if ( is_hardware_domain(d) && want_hwdom_shutdown(reason) )
+         hwdom_shutdown(reason);
+ 
+     if ( d->is_shutting_down )
+diff --git a/xen/drivers/char/serial.c b/xen/drivers/char/serial.c
+index adb312d796..cc2b5b5dee 100644
+--- a/xen/drivers/char/serial.c
++++ b/xen/drivers/char/serial.c
+@@ -497,6 +497,8 @@ const struct vuart_info *serial_vuart_info(int idx)
+ 
+ #ifdef CONFIG_SYSTEM_SUSPEND
+ 
++static bool __read_mostly serial_suspend_available = true;
++
+ void serial_suspend(void)
+ {
+     int i;
+@@ -513,6 +515,11 @@ void serial_resume(void)
+             com[i].driver->resume(&com[i]);
+ }
+ 
++bool serial_suspend_supported(void)
++{
++    return serial_suspend_available;
++}
++
+ #endif /* CONFIG_SYSTEM_SUSPEND */
+ 
+ void __init serial_register_uart(int idx, struct uart_driver *driver,
+@@ -521,6 +528,11 @@ void __init serial_register_uart(int idx, struct uart_driver *driver,
+     /* Store UART-specific info. */
+     com[idx].driver = driver;
+     com[idx].uart   = uart;
++
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+    ipmmu_free_ctx_suspend(dev);
-+#endif
-+    return ret;
++    if ( !driver->suspend || !driver->resume )
++        serial_suspend_available = false;
 +#endif
  }
  
- static int ipmmu_iommu_domain_init(struct domain *d)
-@@ -1490,6 +1775,10 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-     .add_device      = ipmmu_add_device,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend         = ipmmu_suspend,
-+    .resume          = ipmmu_resume,
-+#endif
- };
+ void __init serial_async_transmit(struct serial_port *port)
+diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/arm/iommu.c
+index 100545e23f..420b9fbdf0 100644
+--- a/xen/drivers/passthrough/arm/iommu.c
++++ b/xen/drivers/passthrough/arm/iommu.c
+@@ -19,6 +19,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/iommu.h>
+ #include <xen/lib.h>
++#include <xen/suspend.h>
  
- static __init int ipmmu_init(struct dt_device_node *node, const void *data)
+ #include <asm/device.h>
+ 
+@@ -46,6 +47,9 @@ void __init iommu_set_ops(const struct iommu_ops *ops)
+     }
+ 
+     iommu_ops = ops;
++
++    if ( !ops->suspend || !ops->resume )
++        host_system_suspend_disable("IOMMU driver lacks suspend/resume support");
+ }
+ 
+ int __init iommu_hardware_setup(void)
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index 82c8ead979..443dd0e893 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -91,6 +91,7 @@
+ #include <asm/io.h>
+ #include <asm/iommu_fwspec.h>
+ #include <asm/platform.h>
++#include <asm/suspend.h>
+ 
+ #include "smmu-v3.h"
+ 
+@@ -1903,6 +1904,9 @@ static void arm_smmu_setup_msis(struct arm_smmu_device *smmu)
+ 		}
+ 	}
+ 
++	host_system_suspend_disable(
++		"SMMUv3 MSI IRQ path is unsupported for host suspend");
++
+ 	/* Add callback to free MSIs on teardown */
+ 	devm_add_action(dev, arm_smmu_free_msis, dev);
+ }
+diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
+index 8e18445552..418b00ead0 100644
+--- a/xen/include/xen/serial.h
++++ b/xen/include/xen/serial.h
+@@ -137,6 +137,7 @@ const struct vuart_info* serial_vuart_info(int idx);
+ /* Serial suspend/resume. */
+ void serial_suspend(void);
+ void serial_resume(void);
++bool serial_suspend_supported(void);
+ #endif
+ 
+ /*
+diff --git a/xen/include/xen/suspend.h b/xen/include/xen/suspend.h
+index 6f94fd53b0..a941331035 100644
+--- a/xen/include/xen/suspend.h
++++ b/xen/include/xen/suspend.h
+@@ -6,6 +6,8 @@
+ #if __has_include(<asm/suspend.h>)
+ #include <asm/suspend.h>
+ #else
++struct domain;
++
+ static inline void arch_domain_resume(struct domain *d) {}
+ #endif
+ 
 -- 
 2.43.0
 
