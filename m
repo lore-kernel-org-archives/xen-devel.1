@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA44CD343F
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2026 17:10:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1307294.1579093 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D76CD343F
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2026 17:58:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1307398.1579120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqcM-0000Qh-8W; Tue, 12 May 2026 17:10:02 +0000
+	id 1wMrMa-0003VD-Iy; Tue, 12 May 2026 17:57:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1307294.1579093; Tue, 12 May 2026 17:10:02 +0000
+Received: by outflank-mailman (output) from mailman id 1307398.1579120; Tue, 12 May 2026 17:57:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wMqcL-0000Oq-U9; Tue, 12 May 2026 17:10:01 +0000
-Received: by outflank-mailman (input) for mailman id 1307294;
- Tue, 12 May 2026 17:10:00 +0000
+	id 1wMrMa-0003Tz-Fu; Tue, 12 May 2026 17:57:48 +0000
+Received: by outflank-mailman (input) for mailman id 1307398;
+ Tue, 12 May 2026 17:57:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wMqcJ-0008JG-V4
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:10:00 +0000
+ (envelope-from <luca.fancellu@arm.com>) id 1wMrMZ-0003OZ-45
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 17:57:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wMqcJ-00HVbk-Bv
- for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:09:59 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wMrMW-009D7s-Vd
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2026 19:57:46 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a035ee6-5cb7-0a2a0a5109dd-0a2a4507b76a-2
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:59 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a035ee7-229c-0a2a45070019-d1558029c526-3
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:09:59 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-488af9fdaa7so33351435e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 10:09:59 -0700 (PDT)
-Received: from EPUAKYIW02F7.. ([45.12.26.18]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fc8cccf90sm10838845e9.0.2026.05.12.10.09.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 10:09:57 -0700 (PDT)
+ (envelope-from <luca.fancellu@arm.com>)
+ id 6a036a11-bab6-0a2a0a5309dd-0a2a4502963a-14
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:57:46 +0200
+Received: from [217.140.110.172] (helo=foss.arm.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.56.1)
+ (envelope-from <luca.fancellu@arm.com>)
+ id 6a036a19-af86-0a2a45020019-d98c6eacd7ce-1
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2026 19:57:46 +0200
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E6CC51684;
+ Tue, 12 May 2026 10:57:39 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A60AE3F85F;
+ Tue, 12 May 2026 10:57:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,402 +51,411 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778605798; x=1779210598; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ibGyBzTWotDComsaOUE0ixj57R/0uTs4BWKAvB2xeVg=;
-        b=KC25qTOVAhEmuxwwYEr6lHcuM//ugu9+kW5sqVHg9zKVn6uxFZB+dvkI+csnHr1l+A
-         QN8kvMClmBDEWqb9sp4Z2R2bvB+ZOZBzCnJtHScxH4jj7xKj/+i8tNW+I+VwXIPfqFrE
-         /7pBR0hJuHuP7krjkiglL1bcdBcFagejA3+bRTZLCJhVrIf2hrk/y3n/aBEcFamEOtjI
-         DhyY7Rqy0O0jdYUDsuB724FE7u9W8PASsPr9LtXdPok3p5AYrkHpE98T42XdnyOc0grC
-         ROY0O+7n62GGw8rq5rUELY0SQpmD8F8k3yc15kXuFo3f1L739HLyIcamQHjsbvLSv4Jw
-         wcvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778605798; x=1779210598;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ibGyBzTWotDComsaOUE0ixj57R/0uTs4BWKAvB2xeVg=;
-        b=aQS90JYfzd8F0UdOujDLBmZxSjCiu3GN7wyIzonZTVnIFyENrZUpOieckn8aI/jlYH
-         q7WjdEklzgcqJNPkl4VluErLaVFQ6Bl28BxR6K8Cn0/ZT9+sdaVnuS44A1z3TDwAPo9T
-         PYclqaJbsPYDgny6y3egawo51Ft2CGZBAHkttCmDYdBnxUF+mGSQzdhdjn3qpma1G3av
-         tDfPZYxJsiX9l5nr3YSsqRmnzIMU+Xa0x23g9LM43iyVkkih5Za0lF7WFGjCwhB+kTS/
-         OEwFvaACPaR/9FjEWkBgQmlw6h6VjtSDhU6E9VqPzxkyfYiG65Za/Ecu0YEBQpoLcD5H
-         GhKg==
-X-Gm-Message-State: AOJu0YwRh9y9Iwh0yDonJqnUNN4Srfc7osturxquVeFEtGVx+67YpwPh
-	xsDlB2JjYNs7FrS/JSk73nch0n/qhn4vtbvXah4oVvJLEi7N4ig+WYh3unIhKg==
-X-Gm-Gg: Acq92OHTFyxpq7iJD8zwzFUXxLn1RtuS49dAr9+esHsPBmhBOkplWEf8I3hc2a32TLX
-	8DAMLehwvKmbA4lEjfJiRp9gvtmkcLJfDI6W1yWmvCb9FEIxxDyA+dSx3q5espbrM7b288R+XKd
-	DS3oxGrsJ7E5lA1xFhEsmN0fM+Dz9zDHib1m9LnkD0wJl7L5rhGbBE1TTzY0I23lK8ReXk7VZwQ
-	V0fRa00uj7hCljpr6MmIaxhHgP2uw7Z5WNPWbzj+Nj2Em0KwdcvQAXwy9uwer0PpY1VU/wF8pzV
-	a9fEnLdHtgrYMCPmeoAxsQmls2A3eCWUiD5nT1T2p6XNjIjorqis0ocb+8J9SOzGWP2CpLHT571
-	6rX2EN+G+CaN36njrNNkshFOLFkhj8NyBY5oSAnMdbhwTBNLkYqf9SO9N5yvIofQOb9zBYe5Fwx
-	3XWZbwtQ1QIxEM40W6TR3eN2SD92gslHLnJdhf
-X-Received: by 2002:a05:600c:3f0f:b0:488:a797:f0ac with SMTP id 5b1f17b1804b1-48e9007290cmr63915715e9.28.1778605798406;
-        Tue, 12 May 2026 10:09:58 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1778608665; bh=pUlihSCtoluRvHSQDgApxcwFy6+3MCxnxU+k0Ku8GtY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=TBbSArrt/uJJn0ZPk8KH0Uc5HoDBRzJdPOfk8dunk+ud0bHsMl8NKbiZWoZgLAzT7
+	 H1utUjad+9BZPz3jIv7WhTjgsdbkydUJkoqCHDyRc05g/kAu3vjp9V2ISgAS/aBdci
+	 WYTxFgBrnxLIPkUxhHhiVBRnDADroFY1jgRm7rGk=
+From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
+Cc: Harry Ramsey <harry.ramsey@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v9 13/13] xen/arm: Add host system suspend backend
-Date: Tue, 12 May 2026 20:07:20 +0300
-Message-ID: <2268857aa7eef95444169564c17f7e9a6f59b1c5.1778605274.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1778605274.git.mykola_kvach@epam.com>
-References: <cover.1778605274.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v6 2/3] arm/mpu: Introduce `v8r_el1_msa` device tree property for domains
+Date: Tue, 12 May 2026 18:57:28 +0100
+Message-Id: <20260512175729.1915120-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260512175729.1915120-1-luca.fancellu@arm.com>
+References: <20260512175729.1915120-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1778605799-22772C48-87001D5D/0/0
+X-purgate-ID: tlsNG-720697/1778608666-A9B70161-2DB769CA/0/0
 X-purgate-type: clean
-X-purgate-size: 11802
+X-purgate-size: 12627
 
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Harry Ramsey <harry.ramsey@arm.com>
 
-Add the Xen-wide suspend/resume backend used after a control-domain
-vPSCI SYSTEM_SUSPEND request has been accepted. The vPSCI policy,
-runtime driver blockers and control-domain sequencing checks are handled
-by the preceding commit; this change adds the code that actually drives
-the host suspend attempt.
+Add a new device tree property `v8r_el1_msa` to select the MSA (memory
+system architecture) at EL1 for Armv8-R architecture: MPU or MMU, the
+former is the default if the property is not passed.
 
-The backend runs from a tasklet scheduled on pCPU0, because non-boot CPUs
-are disabled during suspend. It freezes domains, disables the scheduler
-and then disables non-boot CPUs.
+Implement the dom0less path to parse the new device tree property, add
+a new domctl hypercall input parameter `v8r_el1_msa` for arm and
+add the sanitisation in arch_sanitise_domain_config(), the parameter
+is intended to be used on CONFIG_MPU systems and returns an error if
+selected for MMU.
 
-Host-side suspend participants are handled in phases. IOMMU and console
-state are suspended first. Local IRQs are then disabled before suspending
-timer and GIC state. On resume or failure, the completed suspend phases
-are unwound in reverse: GIC and timer state are restored while IRQs are
-still disabled, local IRQs are restored, and then console and IOMMU state
-are restored.
+While there, add explicit padding and check that it's zero during
+arch domain config sanitisation, given the breaking change, bump the
+XEN_DOMCTL_INTERFACE_VERSION.
 
-On boot, init_ttbr is normally initialized during secondary CPU hotplug.
-On uniprocessor systems this can leave init_ttbr uninitialized, so set it
-from the boot CPU before entering suspend.
-
-Note: the code is behind CONFIG_HAS_SYSTEM_SUSPEND, which is currently
-only selected when UNSUPPORTED is set and MPU is not set.
-
-Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Signed-off-by: Harry Ramsey <harry.ramsey@arm.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-Changes in V9:
-- Split vPSCI availability policy, runtime host-suspend blockers and the
-  domain-readiness precheck into the preceding commit.
-- Trigger the host suspend backend from the control-domain SYSTEM_SUSPEND
-  path.
-- Reorder the host suspend/resume phases so the timer is suspended with
-  local IRQs disabled and local IRQs are restored after the GIC and timer
-  resume paths, before the console and IOMMU resume paths.
-- Move HAS_HWDOM_SYSTEM_SUSPEND and related logic to policy patch.
-
-Changes in V8:
-- Add a pre-suspend check in system_suspend() after scheduler_disable() to
-  require all domains to be in the shut down state with SHUTDOWN_suspend
-  before proceeding with the global suspend flow.
-- Drop the common-level depends on !ARM_64 || !SYSTEM_SUSPEND from
-  CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND and model the ARM64 suspend case
-  with an arch-selected capability instead.
-- Rename CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND to
-  CONFIG_HAS_HWDOM_SYSTEM_SUSPEND.
-- Rename need_hwdom_shutdown() to want_hwdom_shutdown().
-
-Changes in V7:
-- Control domain is responsible for host suspend.
-- Add an empty inline host_system_suspend() function when SYSTEM_SUSPEND
-  config is disabled.
-- Use IS_ENABLED() for config checking instead of #ifdef.
-- Replace #ifdef checks in domain_shutdown() with IS_ENABLED() to simplify
-  control flow.
-- Factor hardware domain shutdown condition into a helper
-  (need_hwdom_shutdown()) to avoid preprocessor directives inside the
-  function.
-- Squash with iommu suspend/resume commit.
+v6:
+ - Add explicit padding to `struct xen_arch_domainconfig` and check it
+ - Provide common v8r_el1_msa_domain_sanitise_config() for MMU/MPU
+ - During domu_dt_v8r_el1_msa_parse() set PMSA when property not present
+ - constify *node in domu_dt_v8r_el1_msa_parse()
+ - Print full path of the node in domu_dt_v8r_el1_msa_parse() error msgs
+ - typo fixing
+v5:
+ - follow the way domu_dt_sci_parse and ARM_SCI is doing, but
+   return error if property is present in MMU systems.
+ - Align the commit message on the new changes
+ - fix documentation
+ - fix multiline comment
+ - drop the explicit padding from struct xen_arch_domainconfig
+v4:
+- Rework the patch to have the v8r_el1_msa input parameter more
+  enclosed in the Armv8-A (mmu)/Armv8-R (mpu) space.
+v3:
+- Improve commit message and device tree property description
+- Remove macro protection
+- Remove unused function is_mpu_domain
+- Code formatting
 ---
- xen/arch/arm/Kconfig               |   1 +
- xen/arch/arm/include/asm/mm.h      |   2 +
- xen/arch/arm/include/asm/suspend.h |   2 +
- xen/arch/arm/mmu/smpboot.c         |   2 +-
- xen/arch/arm/suspend.c             | 140 +++++++++++++++++++++++++++++
- xen/arch/arm/vpsci.c               |  10 ++-
- 6 files changed, 154 insertions(+), 3 deletions(-)
+ docs/misc/arm/device-tree/booting.txt   | 14 +++++
+ xen/arch/arm/dom0less-build.c           | 74 +++++++++++++++++++++++++
+ xen/arch/arm/domain.c                   | 37 +++++++++++++
+ xen/arch/arm/include/asm/domain.h       |  4 ++
+ xen/arch/arm/include/asm/domain_build.h | 10 ++++
+ xen/arch/arm/mpu/arm32/mm.c             |  7 +++
+ xen/arch/arm/mpu/arm64/mm.c             |  7 +++
+ xen/include/public/arch-arm.h           |  7 +++
+ xen/include/public/domctl.h             |  4 +-
+ 9 files changed, 162 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 54a5bfb9ae..119bc00674 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -9,6 +9,7 @@ config ARM_64
- 	select 64BIT
- 	select HAS_DOMAIN_TYPE
- 	select HAS_FAST_MULTIPLY
-+	select HAS_SYSTEM_SUSPEND if !MPU && UNSUPPORTED
- 	select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 977b4286082f..f73839df090b 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -322,6 +322,20 @@ with the following properties:
+     Should be used together with scmi-smc-passthrough Xen command line
+     option.
  
- config ARM
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 2eb8465aa9..de119cad3a 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -360,6 +360,8 @@ static inline void page_set_xenheap_gfn(struct page_info *p, gfn_t gfn)
-     } while ( (y = cmpxchg(&p->u.inuse.type_info, x, nx)) != x );
- }
++- v8r_el1_msa
++
++    A string property specifying whether, on Armv8-R systems at EL1, a domain
++    should use PMSAv8 (MPU) or VMSAv8 (MMU).
++
++    - "mmu"
++    Enables VMSAv8 at EL1. This requires hardware support and is only
++    optionally available on AArch64. Not supported on AArch32.
++
++    - "mpu"
++    Enables PMSAv8 at EL1. This is the default behavior when the property is
++    not passed. This configuration requires static allocation (xen,static-mem)
++    and direct mapping (direct-map).
++
+ Under the "xen,domain" compatible node, one or more sub-nodes are present
+ for the DomU kernel and ramdisk.
  
-+void set_init_ttbr(lpae_t *root);
-+
- #endif /*  __ARCH_ARM_MM__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
-index 87db12eac3..a194dbb21a 100644
---- a/xen/arch/arm/include/asm/suspend.h
-+++ b/xen/arch/arm/include/asm/suspend.h
-@@ -40,11 +40,13 @@ int prepare_resume_ctx(void);
- void hyp_resume(void);
- bool host_system_suspend_allowed(void);
- void host_system_suspend_disable(const char *reason);
-+void host_system_suspend(struct domain *d);
- 
- #else /* !CONFIG_SYSTEM_SUSPEND */
- 
- static inline bool host_system_suspend_allowed(void) { return false; }
- static inline void host_system_suspend_disable(const char *reason) {}
-+static inline void host_system_suspend(struct domain *d) {}
- 
- #endif
- 
-diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
-index 37e91d72b7..ff508ecf40 100644
---- a/xen/arch/arm/mmu/smpboot.c
-+++ b/xen/arch/arm/mmu/smpboot.c
-@@ -72,7 +72,7 @@ static void clear_boot_pagetables(void)
-     clear_table(boot_third);
- }
- 
--static void set_init_ttbr(lpae_t *root)
-+void set_init_ttbr(lpae_t *root)
- {
-     /*
-      * init_ttbr is part of the identity mapping which is read-only. So
-diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-index a571035d2c..b1cc67fbdb 100644
---- a/xen/arch/arm/suspend.c
-+++ b/xen/arch/arm/suspend.c
-@@ -1,10 +1,16 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- 
-+#include <asm/gic.h>
- #include <asm/psci.h>
- #include <asm/suspend.h>
- 
-+#include <xen/console.h>
-+#include <xen/cpu.h>
-+#include <xen/iommu.h>
- #include <xen/lib.h>
-+#include <xen/sched.h>
- #include <xen/serial.h>
-+#include <xen/tasklet.h>
- 
- struct resume_cpu_context resume_cpu_context;
- 
-@@ -44,6 +50,140 @@ void host_system_suspend_disable(const char *reason)
-            reason ? reason : "unsupported suspend/resume path");
- }
- 
-+/* Xen suspend. data identifies the domain that initiated suspend. */
-+static void system_suspend(void *data)
-+{
-+    int status;
-+    unsigned long flags;
-+    struct domain *d = (struct domain *)data;
-+
-+    BUG_ON(system_state != SYS_STATE_active);
-+
-+    system_state = SYS_STATE_suspend;
-+
-+    printk("Xen suspending...\n");
-+
-+    freeze_domains();
-+    scheduler_disable();
-+
-+    /*
-+     * Non-boot CPUs have to be disabled on suspend and enabled on resume
-+     * (hotplug-based mechanism). Disabling non-boot CPUs will lead to PSCI
-+     * CPU_OFF to be called by each non-boot CPU. Depending on the underlying
-+     * platform capabilities, this may lead to the physical powering down of
-+     * CPUs.
-+     */
-+    status = disable_nonboot_cpus();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_nonboot_cpus;
-+    }
-+
-+    console_start_sync();
-+    status = iommu_suspend();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_end_sync;
-+    }
-+
-+    status = console_suspend();
-+    if ( status )
-+    {
-+        dprintk(XENLOG_ERR, "Failed to suspend the console, err=%d\n", status);
-+        system_state = SYS_STATE_resume;
-+        goto resume_iommu;
-+    }
-+
-+    local_irq_save(flags);
-+
-+    time_suspend();
-+
-+    status = gic_suspend();
-+    if ( status )
-+    {
-+        system_state = SYS_STATE_resume;
-+        goto resume_time;
-+    }
-+
-+    set_init_ttbr(xen_pgtable);
-+
-+    /*
-+     * Enable identity mapping before entering suspend to simplify
-+     * the resume path
-+     */
-+    update_boot_mapping(true);
-+
-+    if ( prepare_resume_ctx() )
-+    {
-+        status = call_psci_system_suspend();
-+        /*
-+         * If suspend is finalized properly by above system suspend PSCI call,
-+         * the code below in this 'if' branch will never execute. Execution
-+         * will continue from hyp_resume which is the hypervisor's resume point.
-+         * In hyp_resume CPU context will be restored and since link-register is
-+         * restored as well, it will appear to return from prepare_resume_ctx.
-+         * The difference in returning from prepare_resume_ctx on system suspend
-+         * versus resume is in function's return value: on suspend, the return
-+         * value is a non-zero value, on resume it is zero. That is why the
-+         * control flow will not re-enter this 'if' branch on resume.
-+         */
-+        if ( status )
-+            dprintk(XENLOG_WARNING, "PSCI system suspend failed, err=%d\n",
-+                    status);
-+    }
-+
-+    system_state = SYS_STATE_resume;
-+    update_boot_mapping(false);
-+
-+    gic_resume();
-+
-+ resume_time:
-+    time_resume();
-+
-+    local_irq_restore(flags);
-+
-+    console_resume();
-+
-+ resume_iommu:
-+    iommu_resume();
-+
-+ resume_end_sync:
-+    console_end_sync();
-+
-+ resume_nonboot_cpus:
-+    /*
-+     * The rcu_barrier() has to be added to ensure that the per cpu area is
-+     * freed before a non-boot CPU tries to initialize it (_free_percpu_area()
-+     * has to be called before the init_percpu_area()). This scenario occurs
-+     * when non-boot CPUs are hot-unplugged on suspend and hotplugged on resume.
-+     */
-+    rcu_barrier();
-+    enable_nonboot_cpus();
-+
-+    scheduler_enable();
-+    thaw_domains();
-+
-+    system_state = SYS_STATE_active;
-+
-+    printk("Resume (status %d)\n", status);
-+
-+    domain_resume(d);
-+}
-+
-+static DECLARE_TASKLET(system_suspend_tasklet, system_suspend, NULL);
-+
-+void host_system_suspend(struct domain *d)
-+{
-+    system_suspend_tasklet.data = (void *)d;
-+    /*
-+     * The suspend procedure has to be finalized by the pCPU#0 (non-boot pCPUs
-+     * will be disabled during the suspend).
-+     */
-+    tasklet_schedule_on_cpu(&system_suspend_tasklet, 0);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
-index 48a963ae3e..79100cbb1e 100644
---- a/xen/arch/arm/vpsci.c
-+++ b/xen/arch/arm/vpsci.c
-@@ -237,7 +237,8 @@ static bool domain_in_suspend_state(struct domain *d)
-     return suspended;
- }
- 
--static int32_t domain_psci_system_suspend_policy(struct domain *d)
-+static int32_t domain_psci_system_suspend_policy(struct domain *d,
-+                                                 bool *host_suspend)
- {
-     struct domain *other;
-     bool last_awake_control_domain = true;
-@@ -300,6 +301,7 @@ static int32_t domain_psci_system_suspend_policy(struct domain *d)
-     if ( !host_system_suspend_allowed() )
-         return PSCI_NOT_SUPPORTED;
- 
-+    *host_suspend = true;
+diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+index 52cf788a45ea..fecdb33d3e3a 100644
+--- a/xen/arch/arm/dom0less-build.c
++++ b/xen/arch/arm/dom0less-build.c
+@@ -302,6 +302,77 @@ static int __init domu_dt_sci_parse(struct dt_device_node *node,
      return 0;
  }
  
-@@ -310,6 +312,7 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
-     struct vcpu *v;
-     struct domain *d = current->domain;
-     bool is_thumb = epoint & 1;
-+    bool host_suspend = false;
-     struct resume_info *rctx = &d->arch.resume_ctx;
- 
-     /* THUMB set is not allowed with 64-bit domain */
-@@ -334,7 +337,7 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
- 
-     spin_lock(&vpsci_system_suspend_lock);
- 
--    rc = domain_psci_system_suspend_policy(d);
-+    rc = domain_psci_system_suspend_policy(d, &host_suspend);
-     if ( !rc )
-     {
-         rc = domain_shutdown(d, SHUTDOWN_suspend);
-@@ -359,6 +362,9 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
-             "SYSTEM_SUSPEND requested, epoint=%#"PRIregister", cid=%#"PRIregister"\n",
-             epoint, cid);
- 
-+    if ( host_suspend )
-+        host_system_suspend(d);
++static int __init
++domu_dt_v8r_el1_msa_parse(const struct dt_device_node *node,
++                          struct xen_domctl_createdomain *d_cfg,
++                          unsigned int flags)
++{
++    bool property_present = dt_property_read_bool(node, "v8r_el1_msa");
 +
-     return rc;
++    if ( !IS_ENABLED(CONFIG_MPU) )
++    {
++        d_cfg->arch.v8r_el1_msa = XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_NONE;
++
++        if ( !property_present )
++            return 0;
++
++        printk(XENLOG_ERR
++               "Not supported 'v8r_el1_msa' DT property found for domain %s\n",
++               dt_node_full_name(node));
++        return -EINVAL;
++    }
++
++    if ( !property_present )
++        d_cfg->arch.v8r_el1_msa = XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA;
++    else
++    {
++        const char *v8r_el1_msa;
++        int ret = dt_property_read_string(node, "v8r_el1_msa", &v8r_el1_msa);
++
++        if ( ret )
++            return ret;
++
++        if ( !strcmp(v8r_el1_msa, "mpu") )
++            d_cfg->arch.v8r_el1_msa = XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA;
++        else if ( !strcmp(v8r_el1_msa, "mmu") )
++            d_cfg->arch.v8r_el1_msa = XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_VMSA;
++        else
++        {
++            printk(XENLOG_ERR
++                   "v8r_el1_msa value (%s) not valid for domain %s\n",
++                   v8r_el1_msa, dt_node_full_name(node));
++            return -EINVAL;
++        }
++    }
++
++    switch ( d_cfg->arch.v8r_el1_msa )
++    {
++    case XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA:
++        if ( !(flags & CDF_staticmem) || !(flags & CDF_directmap) )
++        {
++            printk(XENLOG_ERR
++                   "PMSA is not valid for domain (%s) without static allocation and direct map (v8r_el1_msa)\n",
++                   dt_node_full_name(node));
++            return -EINVAL;
++        }
++        break;
++
++    case XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_VMSA:
++        if ( !has_v8r_vmsa_support() )
++        {
++            printk(XENLOG_ERR
++                   "Platform doesn't support VMSA at EL1 (v8r_el1_msa)\n");
++            return -EINVAL;
++        }
++        break;
++
++    default:
++        return -EINVAL;
++    }
++
++    return 0;
++}
++
+ int __init arch_parse_dom0less_node(struct dt_device_node *node,
+                                     struct boot_domain *bd)
+ {
+@@ -315,6 +386,9 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
+     if ( domu_dt_sci_parse(node, d_cfg) )
+         panic("Error getting SCI configuration\n");
+ 
++    if ( domu_dt_v8r_el1_msa_parse(node, d_cfg, flags) )
++        panic("Error getting v8r_el1_msa configuration\n");
++
+     if ( !dt_property_read_u32(node, "nr_spis", &d_cfg->arch.nr_spis) )
+     {
+         int vpl011_virq = GUEST_VPL011_SPI;
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 26380a807cad..e579c3b1bb3c 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -18,6 +18,7 @@
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
+ #include <asm/current.h>
++#include <asm/domain_build.h>
+ #include <asm/event.h>
+ #include <asm/gic.h>
+ #include <asm/guest_atomics.h>
+@@ -538,6 +539,24 @@ void vcpu_switch_to_aarch64_mode(struct vcpu *v)
+     v->arch.hcr_el2 |= HCR_RW;
  }
  
++static bool v8r_el1_msa_domain_sanitise_config(
++    const struct xen_domctl_createdomain *config)
++{
++    uint8_t v8r_el1_msa = config->arch.v8r_el1_msa;
++
++    if ( !IS_ENABLED(CONFIG_MPU) )
++        return v8r_el1_msa == XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_NONE;
++
++    if ( IS_ENABLED(CONFIG_ARM_32) )
++        return v8r_el1_msa == XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA;
++
++    if ( IS_ENABLED(CONFIG_ARM_64) )
++        return (v8r_el1_msa == XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA) ||
++               (v8r_el1_msa == XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_VMSA);
++
++    return false;
++}
++
+ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+ {
+     unsigned int max_vcpus;
+@@ -554,6 +573,14 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
+ 
++    /* Check config structure padding */
++    if ( config->arch.pad )
++    {
++        dprintk(XENLOG_INFO,
++                "Invalid domain configuration during domain creation\n");
++        return -EINVAL;
++    }
++
+     /* Check feature flags */
+     if ( sve_vl_bits > 0 )
+     {
+@@ -630,6 +657,12 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
+ 
++    if ( !v8r_el1_msa_domain_sanitise_config(config) )
++    {
++        dprintk(XENLOG_INFO, "Unsupported v8r_el1_msa value\n");
++        return -EINVAL;
++    }
++
+     return sci_domain_sanitise_config(config);
+ }
+ 
+@@ -722,6 +755,10 @@ int arch_domain_create(struct domain *d,
+     d->arch.sve_vl = config->arch.sve_vl;
+ #endif
+ 
++#ifdef CONFIG_MPU
++    d->arch.v8r_el1_msa = config->arch.v8r_el1_msa;
++#endif
++
+     if ( (rc = sci_domain_init(d, config)) != 0 )
+         goto fail;
+ 
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index b24f02d269be..ac7300e41fcd 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -112,6 +112,10 @@ struct arch_domain
+ #endif
+ 
+     struct resume_info resume_ctx;
++
++#ifdef CONFIG_MPU
++    uint8_t v8r_el1_msa;
++#endif
+ }  __cacheline_aligned;
+ 
+ struct arch_vcpu
+diff --git a/xen/arch/arm/include/asm/domain_build.h b/xen/arch/arm/include/asm/domain_build.h
+index 6674dac5e2f8..13e88fc0891b 100644
+--- a/xen/arch/arm/include/asm/domain_build.h
++++ b/xen/arch/arm/include/asm/domain_build.h
+@@ -19,6 +19,16 @@ int prepare_acpi(struct domain *d, struct kernel_info *kinfo);
+ 
+ int add_ext_regions(unsigned long s_gfn, unsigned long e_gfn, void *data);
+ 
++#ifdef CONFIG_MPU
++/* Utility function to determine if an Armv8-R processor supports VMSA. */
++bool has_v8r_vmsa_support(void);
++#else
++static inline bool has_v8r_vmsa_support(void)
++{
++    return false;
++}
++#endif /* CONFIG_MPU */
++
+ #endif
+ 
+ /*
+diff --git a/xen/arch/arm/mpu/arm32/mm.c b/xen/arch/arm/mpu/arm32/mm.c
+index a4673c351141..702bea804acd 100644
+--- a/xen/arch/arm/mpu/arm32/mm.c
++++ b/xen/arch/arm/mpu/arm32/mm.c
+@@ -5,6 +5,8 @@
+ #include <asm/mpu.h>
+ #include <asm/sysregs.h>
+ #include <asm/system.h>
++#include <public/arch-arm.h>
++#include <public/domctl.h>
+ 
+ #define GENERATE_WRITE_PR_REG_CASE(num, pr)               \
+     case num:                                             \
+@@ -38,6 +40,11 @@
+         break;                                            \
+     }
+ 
++bool has_v8r_vmsa_support(void)
++{
++    return false;
++}
++
+ /*
+  * Armv8-R supports direct access and indirect access to the MPU regions through
+  * registers:
+diff --git a/xen/arch/arm/mpu/arm64/mm.c b/xen/arch/arm/mpu/arm64/mm.c
+index ed643cad4073..b8abcc6f7bc6 100644
+--- a/xen/arch/arm/mpu/arm64/mm.c
++++ b/xen/arch/arm/mpu/arm64/mm.c
+@@ -5,6 +5,8 @@
+ #include <asm/mpu.h>
+ #include <asm/sysregs.h>
+ #include <asm/system.h>
++#include <public/arch-arm.h>
++#include <public/domctl.h>
+ 
+ /*
+  * The following are needed for the cases: GENERATE_WRITE_PR_REG_CASE
+@@ -32,6 +34,11 @@
+         break;                                                  \
+     }
+ 
++bool has_v8r_vmsa_support(void)
++{
++    return system_cpuinfo.mm64.msa_frac == MM64_MSA_FRAC_VMSA_SUPPORT;
++}
++
+ /*
+  * Armv8-R supports direct access and indirect access to the MPU regions through
+  * registers:
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index cd563cf70684..7d6f87e8b2b1 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -330,6 +330,10 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ #define XEN_DOMCTL_CONFIG_ARM_SCI_NONE      0
+ #define XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC  1
+ 
++#define XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_NONE    0
++#define XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA    1
++#define XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_VMSA    2
++
+ struct xen_arch_domainconfig {
+     /* IN/OUT */
+     uint8_t gic_version;
+@@ -355,6 +359,9 @@ struct xen_arch_domainconfig {
+     uint32_t clock_frequency;
+     /* IN */
+     uint8_t arm_sci_type;
++    /* IN */
++    uint8_t v8r_el1_msa;
++    uint16_t pad;
+ };
+ #endif /* __XEN__ || __XEN_TOOLS__ */
+ 
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 8f6708c0a7cd..23124547f347 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -30,9 +30,9 @@
+  * fields) don't require a change of the version.
+  * Stable ops are NOT covered by XEN_DOMCTL_INTERFACE_VERSION!
+  *
+- * Last version bump: Xen 4.19
++ * Last version bump: Xen 4.22
+  */
+-#define XEN_DOMCTL_INTERFACE_VERSION 0x00000017
++#define XEN_DOMCTL_INTERFACE_VERSION 0x00000018
+ 
+ /*
+  * NB. xen_domctl.domain is an IN/OUT parameter for this operation.
 -- 
-2.43.0
+2.34.1
 
 
