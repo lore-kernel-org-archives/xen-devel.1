@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B66CD4F46
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:12:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309488.1580543 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8524FCD4F3C
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:12:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309492.1580570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjud-0004DW-GF; Fri, 15 May 2026 04:12:35 +0000
+	id 1wNjuj-00053N-NW; Fri, 15 May 2026 04:12:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309488.1580543; Fri, 15 May 2026 04:12:35 +0000
+Received: by outflank-mailman (output) from mailman id 1309492.1580570; Fri, 15 May 2026 04:12:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjud-0004DG-A7; Fri, 15 May 2026 04:12:35 +0000
-Received: by outflank-mailman (input) for mailman id 1309488;
- Fri, 15 May 2026 04:12:33 +0000
+	id 1wNjuj-00052z-GI; Fri, 15 May 2026 04:12:41 +0000
+Received: by outflank-mailman (input) for mailman id 1309492;
+ Fri, 15 May 2026 04:12:40 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjub-0003vu-IH
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:12:33 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjui-0004xX-Mx
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:12:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjua-000yVE-Ul
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:12:32 +0200
+ id 1wNjui-000yVE-38
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:12:40 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069d26-bab6-0a2a0a5309dd-0a2a4504b2a4-6
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:12:32 +0200
-Received: from [52.101.125.129]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
+ id 6a069d26-bab6-0a2a0a5309dd-0a2a4504b2a4-14
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:12:40 +0200
+Received: from [40.107.74.93]
+ (helo=OS0P286CU010.outbound.protection.outlook.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c35-1dec-0a2a45040019-34657d8136d2-9
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:32 +0200
+ id 6a069c44-1dec-0a2a45040019-286b4a5dedd0-4
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:39 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
- 2026 04:08:29 +0000
+ 2026 04:08:34 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:28 +0000
+ 04:08:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IXjTWfZR+3kWly/5vOglg3MtVqix3dpi2eQw9ah7we8HlVQth7Xk+L8xkCNEi29EsQ7UBg7uTqCJt05gV6mlRcEnM4NhtbTyqod6iY+Oi9eR8zLL5AERzfXj2XCwtAz3s3dILLePV/OZEKgrNH3EDeS1a5dYtwCNId6QqjJ1Q8f0JmWSOIwzzjL1w7iRz2vpGZofgnGxfKfX9c5lJIXPdoPplNVOuTgZvNJf/NVGEytqlxm45IyOpfdLsIpe1FFHldRGfBlLNrdGazqzIUtOF3eZovvCrH7Auuy0cztcOhqJuW7fRw/zBT/GI9cx09x4TcA8WGh7fXxlreFGbKJASQ==
+ b=EaMLNYa3RCkFZn9Ou4MuWZ+BQTd/LdhEIwfzfGqgN7UErUp8lTxNkvaWhju0Xt6Uli6fnfLkGGSKT2FHTdc2TdOlfwJK/IKiDnMzjH6ZRluf7ySroD5LfIE9zoazbLZWp3Wku3Tk8yOxI47yDFB5i4NI21efzHz9DD0HsZ+vTek+wE6nsdujp63chsFClXviI3y9Uscn/9Td68YsDzAhOhycqumaspe5+BqUimkkkmWDQdaHZF/gwwQrKATl7QBSoeCjsMKDPtHulpQL37mHhrbfvCo/4feGOditlqmRXel3WUtRNKc8zE6SpEBqxAimTqvakmzNEexRNfoAjRHOnA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u3FWv0GhzR6Z08YwvEAu3rWkS08OimUL4UXo8Xw0smY=;
- b=GI1JsAnORKFapx3wQt4vFhLnrC9C04au+YIaXMiz49egE0CXAkzbVl8arOAiMiwpu/c/O1xuQrmI/I5wN+mD/IO4NOYPeL9EIwzEL7mFrkdU0qbTmS7girWrh7vbuGKnXZQhX6jjSwZG0rOYYqpaMTTuK2HENuXVznNdGC1Y5btIGU2848fKmfN8ZIAANH5/KyWnsBUyLzqpi5Qpta459duVfA8C/Pcpe1RzoPDZgZ/zXSy1S20cb0544/afEnk3AO/ZV5hBSuGVbj1qaTdFzw4OWFaCMvT63hapgZlpsICWDvp75c7yyIDFEL/dKeF5MT9TUwHDNOVDYY1YZ1nkmA==
+ bh=GEdXsCdriXn7T5hiFjbS6jzjWemTNnbeU0cz8lWbPus=;
+ b=PrDcd/wYAL0OdhAwxUSTkPisMnEu/FSLf150+HLudg2uwI8a9hPlLfcqoeVqJkZekGRwHQjM81/hTeBkY5QutHkZ5gnl1VWb0adoJVlgLRF5drH5keN2amwF6FUMqqdcRjnqXW8/BtDWnuwaGxerCXA+RsTfuD4btZij7iuuvBG37TdelvJSwyBO+HnO/ChMTW5mMID7Fsivl+FELVA+z1GSIcZhlTZHYrlzakSOts1vl+MHIzHnHGgJAeBdIcxet0HSgLz95ermsOqu6iCpWoqRzQ++RBWofU0hvWDnXA3ULKZE/FcaTzFIEnqzuray3eDwGmIfnJcuhKb5v31bMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u3FWv0GhzR6Z08YwvEAu3rWkS08OimUL4UXo8Xw0smY=;
- b=EVdBhsnLh8sWAEI128zfUS0PEhAKbwuLjAK8hZK6q7Rrtwxm3lMxfrFRrjYvdCO46Ew2qXBNuwoZlwTzLRwQIS5myx0Bqb0QwnL7Ezh2Mp/KQfWVHFjmHn5FXIydZ4XohKwJ4rhe8+zF26mM8O4VTe9tCjhB3r0//I090w5uHsA=
+ bh=GEdXsCdriXn7T5hiFjbS6jzjWemTNnbeU0cz8lWbPus=;
+ b=QR0/ATtgGo8OYIdmXHLZdPhHEHQY9X6s6MnP1LAyHZTlZutJNZDyIUO69VKuU0kcJ95eqKK6+eBK8JODa7XYHoWcq9LAKW4XgrSWpJgYI2vixzdYi2F/kS6RV/xhY2FLAogSeiXvHiNZRH8qTymX282mwr+WRm5+nD5aHNcF3fc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,190 +86,216 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 13/26] xen/arm/cca: destroy RECs during Realm relinquish
-Date: Fri, 15 May 2026 13:07:59 +0900
-Message-ID: <20260515040812.983626-14-den@valinux.co.jp>
+Subject: [RFC PATCH v1 17/26] xen/arm/cca: populate Realm DATA granules
+Date: Fri, 15 May 2026 13:08:03 +0900
+Message-ID: <20260515040812.983626-18-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCPR01CA0066.jpnprd01.prod.outlook.com
- (2603:1096:405:2::30) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0214.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c5::10) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5e3134ae-414d-4cb7-8b08-08deb2379eb2
+X-MS-Office365-Filtering-Correlation-Id: e605dfe3-f4a1-45dc-bca5-08deb237a07a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	ZbIuGgSzAP8xk/gIBp71eHploo10DeHDf7sMinyg3HS6zWii518J5F9LAu3n0dH4ELAHSRuW+oM2jkfNl+g9KoMlTNQiYGuabCjoSwZvVu19q/KcK7Mbb5KOvDRmA+z9xgTLbdujrwtOjZ63Ekd8ViL1kkUfL7zAJvea2wdkxdXS4gQ+OazatjCG1tsLHxZkVT1kOq7vdgujjht1PQqA77cjSVE2Y6JhznPCxO65t4U8/gFkbTY26s7hVbmnC609hVkImQQa4Hx9l0zfTDxUAX3QDwvHuZ3decxnplDUHvl9UoSiSFLNBpe5d618+EHhUyglmgwVe0bOU70TH2Wfs92Iu8PgYGqfjELE+jXwmIMhR+NC3lGpNsUWZjos7fAL8FPwGNx1He01XLwchnOdMHLBloCUd6r5usOrR4nsyE6teKHGcq8s1k6dQ0JcJKJnWtIvn3ZWzHe+4Cb3VejZhIfGJ0ZSQVwWFR8LymKfWyNTMcY4o//c3c8pL0YSLSlYfPD2VRRBjPXGMJKMo4pXCeRqrsN4km56QEseUj7TSd63Be3gi/ZL45698ezPrUTq2pp4jHj08JCOu8EuiSx8czQx/pLIYf2eGjVuPtTXDgfW0WJvz3WM4jBrU50rpjvQMg08JWUTTNO9ab9DhnyvuXbMsWYkkflPqN/I3AXa4d15LaN9XCPNPunAR9YkwZtN
+	Bj2zXttabehEEd/UdabDsCpV2yv5f/IEvr1gxNje3iBuAL68C8lwVfj3B2hxvBysQPnPHXTVf19owy66K/A+HlJJhwxNBkBLme2t4lyzOnErs2kv4KEkH4TneUglebPLPVfguP2WdjCrZ+J78Hj0PvkB9lZmBy/qytngxvRaiqgRJZ2fj+xRz3+9JaE4Iohndmil5Mut2T4SDNengq6ex5BxoZSubTF7cpr0MkyoZsl3BfADa5k5GyuXPQjYyHR8N+OTYTz6LHrJOpf/OY99+r6l0Sir1AzZ2KKjKofGyjBhaMfa6NMEvF6JnBrDgttOCA6vX4IKeX+EGWxsPVEj6iA21/akOn5uFOWrMSyH4QQYjLZID3HueaYRPdFQLYPupI8h9cvENh28bSgcDgJ+rbvwQGgshZ+aOKtoIb2rBPuAP6cAAuO+9kkZy40dhkYyGgaCZ12U8/MY/XQudO2qqNK639cP5krLfEl5rmKfRoFKYJg//d2O5uNEkMNU/6oTmsyJ70l7FotsWgMiJQd/remU/UP4Iu9DJnrw6m2uYVbjs+Xci9RCajlQmQ7zHifI4Ef3fFCqMyuTMtdCv8c2G+Sg8Le1TtMwD1RJmXujsGDkrYDtmlowDqfFm3QhQku70lZu3iZrsjoek2gNFUu1PezVqwZz8I/8sLRuU8/6yc6aFMpPs9OL47H9iYSh7Thp
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?rzFfkBtTiACIx5FNERO7+qcdGAQF/nexYtYrwA0XoEDt+s++ZvpxMmT/F6TO?=
- =?us-ascii?Q?ddaTm7Lond+JFPLgb+4zbCG0Ax0aVoZbfP5j6RFDAfFYT/noqA1KeVE8upZ8?=
- =?us-ascii?Q?gG3xO0QuNxmulWQZ3N8oRV5+t4DG3lE2EuBVevvvvZkb0/Rst2KUhQ3fPBRC?=
- =?us-ascii?Q?HuLyPS4q7ZvVX0ySM9hQv2mJAc3AAaUssKwFy6Frln7S51GTd1a9JzVvykic?=
- =?us-ascii?Q?poOKxOzZrzFiCanPbACv0X3MNhKi8zsjLGaWnBLo1ha2yasMdqgiZcSIaDrj?=
- =?us-ascii?Q?fqysX5MSpiZkj/1FS5zpHsQuxT6iS17xC7eELmf/YD69vOLc2rLj+EWyWLyR?=
- =?us-ascii?Q?h7IVwe9YEnEfJDtKbcrbJmTnetMa3ufXu1xk5nBr/a6q+wB5fB7DAGuV0C3n?=
- =?us-ascii?Q?hto5IlRbqSkAfii+cQ4/elC7VyjhDzCsEHU2iUbNJJtQFKIP6ddSEjLXh2c1?=
- =?us-ascii?Q?SIYDtmLRU0uZHRQ6m9o9pusJmpRyedjJMbCYK++c2RDleYQOB74woBfmMZzv?=
- =?us-ascii?Q?QUC7AmZdOovb5/xfytT8JdNsuz4c+68bSC585GmSEaGzbbp6f8NSxQ3KaI+9?=
- =?us-ascii?Q?MOix1hbL0huAIsQjVUouVqte4lZr35envA3bDgpCTubEhWlL3cP2mmvtTJ4x?=
- =?us-ascii?Q?GsNhV7qSxSC7mD2P1RH80ONhigw3ZTX3D6ss52CweHS8kXMAWWQE4eU8uyCB?=
- =?us-ascii?Q?5Nberif62uKDjUdlfH0tZPcEG8VpAsv8VVGRfHkc8FKMNEzF4ig0nB1yXDFU?=
- =?us-ascii?Q?pOaqK8kbMsIcPv6hufwMHrHNSpICU3SN3p2UVPmODZBSHrovdTMcwAl/Rcmo?=
- =?us-ascii?Q?VpLxQuQeXzbHrdMX2jPKgB4237MBbKfbNsXYlv1ysLaoSpjpQKA15qZxLSfM?=
- =?us-ascii?Q?ElME+VXp8JnpyMoRhDIqxkBWESJcoATT8YM1Zw1DzZc3+2bpwHjEou00IAym?=
- =?us-ascii?Q?YGa6viBElVTJ05RtSRv8B2Ms0ra2AXs4uhdPA9Qb38sccS9aVH72F8POlM4O?=
- =?us-ascii?Q?v0F2QFq8YxFOHvLSkRylXfmfzxslV4e6Nzi+yuj+1xyehb/T50B4u9xzG4BW?=
- =?us-ascii?Q?wbtpsCbxnamF9HqMK0RzP7BucSkThn326lSG4p4VqI+s5Aubjnyi8SitSAHF?=
- =?us-ascii?Q?2qQ2eq296VggSIJbRsKYfXntWSWenaNXA5TXfeHs0+EssfoGi0W4gI+I0BRr?=
- =?us-ascii?Q?BQqMS5RzO0b5FPWVlp404MErNQEn7/f32xtLgCVI7aHXbbJoo4L3DS7eQoLW?=
- =?us-ascii?Q?lJ1mkWrirMEQqdLQrdyIaPPDzRvXt1CuRpW7e4H0uhnl3pNjImP+mLwW3Hjy?=
- =?us-ascii?Q?Lf7JINDFs3X8sbMUcJTG2DwbLNhxah+bdqkBekZ7BvgA6+QxhcjP4A2pijQp?=
- =?us-ascii?Q?85ZegI7sT3lchbW+1fUOkKsQmivk0iUiQReuJey04FoWxvSWToEO1/NPLY5l?=
- =?us-ascii?Q?AvzyYef10YaYbUv0fQR8GNBLFTrQ34eZJBzS1eK3+OAXRYaD6f7AbRKLvv5i?=
- =?us-ascii?Q?hM0V5+pC3Gv+jgfYEJH0D46RnayROaTV+nh8J3iyw86YbH/eleYTf+9mrG/I?=
- =?us-ascii?Q?+U/+s2R4xIpQC2XFaYXsv1prIC2K002f9CSJu2SXJZi0B5UZIUko+She+xbd?=
- =?us-ascii?Q?IwX4tHLZEeWjjeshwLl4EuQbxR6WryR1frN9q7TTfYp1RaHxlzxqkkUlUW9T?=
- =?us-ascii?Q?2ASVhtH8Zx4vkp8t3VKyaAAKwQ2C1g1Xg7c4YLj65kIz1zc6OcFI+Kg2GY5x?=
- =?us-ascii?Q?b9fA9rSMC5r7Q9WCyocDl2h3U8jsZcMM4/rVMSMylC919yn0jwbL?=
+	=?us-ascii?Q?SyVUP4/IPCsdCMd15WMwfOp+ZtHVhAQytaLtho/vz5+nIYaOQNkjPHQrv4Of?=
+ =?us-ascii?Q?v0/zSaGiK5PGt4aS8bnSVVF6MSH8yXbiLpquigqbfqAateOcHPAdIrp1lvC/?=
+ =?us-ascii?Q?mtwu3yb8q1eE89tfvdhLIyXfITDubbj82JumzIAves/82FA+LXBmSp27s519?=
+ =?us-ascii?Q?yWobfVVkgirMHB8GllXo6n7HWIXK+IVkwfSz4sUdI0AVDnuifejq5wa6fSEs?=
+ =?us-ascii?Q?fVT8cf65f4GK5CHTpYzr890ntSb5p4EPCa5MqBSQwN+R11OAPuaqHf1UiQCZ?=
+ =?us-ascii?Q?+Pi0fCmrLLknY5xtMmA1dG9YXu19jqTWEPiAnDXEZpsLbmWfcKYt6qgV6b+j?=
+ =?us-ascii?Q?gx1mH7C879caBF5t/t3XdtBf7fi35PPR6e6M8yZalex3k7Kx08yFFBIIhMZV?=
+ =?us-ascii?Q?yBYaMBu4QDomoPjBczDmv5SxEIy0TxuxCGkbUmOZJP2N4ZZuWj88tPIsykyg?=
+ =?us-ascii?Q?6n2BmINIvlKzqhxCyDognHuf5794WLM/vkr7vG3r6fcU5Y2wE3pG/dUfcVho?=
+ =?us-ascii?Q?TnAyfd19+duh9oU0/BOIRugklyOt+SZto/Hi8w7nX7RXdrqSbim2YNkuEdSk?=
+ =?us-ascii?Q?zDK4GLJQB1AZk44wPNXsd+OkAKqagsQp45XOEHbt4ouGORwmQN/j7X3PQviL?=
+ =?us-ascii?Q?UG3mz9Zf+9WLTK7ilu2nQQX1YLMN5u0EDES+KEkze0FYQ12slkDdkMXIrb1z?=
+ =?us-ascii?Q?sOpuP1Hr17QbKgkvfJUayZBu7lUeALMcZXCwzRKP0JN/FEe6Nyb75LS3dF4e?=
+ =?us-ascii?Q?hKSn+R3TuWifrLxNSNjXuEudXe5I7X8Z+BNhPYoRWmjZV6gBBoinmFxQ8ZNG?=
+ =?us-ascii?Q?4u+s8/oeJKseAQqjs8zrDtNeD4d0q3jYVrzVbIEHAqKIrq6tXGEGOtEkFWHf?=
+ =?us-ascii?Q?Aej7217mVbeZ+gefweaXv5Sa03P8vgiTxTRZWcJuUPBxDURWigptznPr/LLv?=
+ =?us-ascii?Q?z7/yRNjX4UG+ng6+OZ3taV5wt3lj5ilYvuMluOTuIb3j4DcWSyCknn1GIgos?=
+ =?us-ascii?Q?0NShI8peRT9eFMmHohjF/awqcp7MDzBvvIXUyJcdeDWff2P6P/3tkr8vzT6g?=
+ =?us-ascii?Q?/b4a0D8PGmiDi1EH3koJBm/z8KsaY5BOpFdKFSbONy8QZUQLG8Tvy8mlUlYe?=
+ =?us-ascii?Q?OP8yWFwk7KrUoNAXBIwXUlcC6EHnFl4giGAkvQAN2/WlImLj0FVdtIhfdozy?=
+ =?us-ascii?Q?R0pY1H0fBJSlLosYAqnd8a1Nus4JhPU9NPgBL8EGOKQMjh32qf0yZU53P7lI?=
+ =?us-ascii?Q?hsKzPjZ+bOw5PjxtAHu7XdHYba1BBLUpXqLHlwOSB3D3VUrq5zFDKg5MN33A?=
+ =?us-ascii?Q?JwEqL8ZjHaP7y4G+6PZYICzUuKZFngzacECOpt0jhUPiIW5PZt5qhMyOL8Gv?=
+ =?us-ascii?Q?GnnAh5C9Q1N8DpVZTZuu3LNUtNBunY4GolGAafy5/By9Ui2JdguoEiLOaPuo?=
+ =?us-ascii?Q?w1moMOQ/LQ3R3a0z22IAANsne+oHA3bQ1D9UFagHBQzRqjzdgYQhO6kL6W8Q?=
+ =?us-ascii?Q?6Ybiw7UCH1QQQTyDBiGMB/eQ84vW3VeMyMkfRTykE8aRR+sR0M430N01aG5c?=
+ =?us-ascii?Q?IjJsMj6vePhV7SSCuASprQL6A4Rp9Ic95y0rzXiE4fCY9Nn9ya9cQL5Vjx9v?=
+ =?us-ascii?Q?TLvAFaKNJxBECFHcTjdhyDkamgpGz3f7fzXkyrGhR5MWmakhdotAMsvqT8xQ?=
+ =?us-ascii?Q?nqjBnS+/w0EljZvloWtETG67KqWQTpQtAtpNNp/7UMNGGzoXUVUYmDHNKC8Z?=
+ =?us-ascii?Q?AvH4BpNWuCHmNsgtXImB/1ahSVk3lxfAlNpu7f7nMilRl5ebT7fe?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e3134ae-414d-4cb7-8b08-08deb2379eb2
+X-MS-Exchange-CrossTenant-Network-Message-Id: e605dfe3-f4a1-45dc-bca5-08deb237a07a
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:28.9253
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:31.9085
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X4IWjT81l1Glcn1oU+UaHW8xEXpsZQ2qS2jVoLP8JygD1f2lrE0k70DsElq/0sAOOQkmxi8KkTfz1J64MdIryw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: HaKEkwrk4Xet+1ljFxLabMxIlJE/N1cJDZ2cB3DgbkKRId1rSH76Md0Y/lv1A+DkSq99284reELpOB3EtR2B4A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
-X-purgate-ID: tlsNG-ebf023/1778818112-4014E3FF-E7C63A26/0/0
+X-purgate-ID: tlsNG-ebf023/1778818119-435683FF-6B50311F/13/0
 X-purgate-type: clean
-X-purgate-size: 3000
+X-purgate-size: 4337
 
-Destroy each REC, reclaim its auxiliary pages through SRO, then release
-the REC granule after the RMM has returned it.
+Move initial guest RAM out of the p2m, delegate it, and map it into the
+Realm with measurement enabled.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/cca/state.c | 81 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 81 insertions(+)
+ xen/arch/arm/cca/build.c | 124 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 124 insertions(+)
 
-diff --git a/xen/arch/arm/cca/state.c b/xen/arch/arm/cca/state.c
-index c85ef56a1297..72dbb83841d7 100644
---- a/xen/arch/arm/cca/state.c
-+++ b/xen/arch/arm/cca/state.c
-@@ -122,6 +122,22 @@ static int arm_cca_relinquish_abandoned_pages(struct domain *d)
+diff --git a/xen/arch/arm/cca/build.c b/xen/arch/arm/cca/build.c
+index 10f61b5038ef..8e607e97b99c 100644
+--- a/xen/arch/arm/cca/build.c
++++ b/xen/arch/arm/cca/build.c
+@@ -664,3 +664,127 @@ static int arm_cca_build_rtts(struct domain *d, paddr_t base,
+ 
      return 0;
  }
- 
-+static int arm_cca_rmi_rec_destroy_complete(struct vcpu *v)
-+{
-+    struct arm_cca_sro_mem_xfer xfer = {
-+        .pages = v->arch.cca.aux_pages,
-+        .nr_pages = &v->arch.cca.nr_aux,
-+        .abandoned_pages = &v->domain->arch.cca.abandoned_pages,
-+    };
-+    struct arm_smccc_res res;
-+    int rc;
 +
-+    rc = arm_cca_rmi_rec_destroy(v->arch.cca.rec, &res);
-+    rc = arm_cca_sro_complete_mem_transfer(rc, &res, &xfer);
++/*
++ * DEN0137 2.0-bet1 - D1.2.3 Initialize memory of New Realm flow.
++ */
++static int arm_cca_create_data_pages(struct domain *d, gfn_t base_gfn,
++                                     unsigned long nr_pages,
++                                     uint64_t *rmi_result)
++{
++    struct page_info *scratch_pg;
++    void *scratch;
++    unsigned long i, work = 0;
++    int rc = 0;
++
++    if ( !d->arch.cca.data_pages )
++    {
++        d->arch.cca.data_pages = xzalloc_array(struct arm_cca_data_page_record,
++                                               nr_pages);
++        if ( !d->arch.cca.data_pages )
++            return -ENOMEM;
++    }
++
++    scratch_pg = arm_cca_alloc_host_page();
++    if ( !scratch_pg )
++        return -ENOMEM;
++
++    scratch = map_domain_page(page_to_mfn(scratch_pg));
++
++    for ( i = d->arch.cca.nr_data_pages; i < nr_pages; ++i )
++    {
++        paddr_t ipa = gfn_to_gaddr(gfn_add(base_gfn, i));
++        struct page_info *page;
++        p2m_type_t p2mt;
++        mfn_t mfn;
++        void *src;
++        struct arm_smccc_res res;
++        bool removed = false, delegated = false;
++
++        page = get_page_from_gfn(d, gfn_x(gfn_add(base_gfn, i)), &p2mt,
++                                 P2M_ALLOC);
++        if ( !page )
++        {
++            rc = -ENOENT;
++            break;
++        }
++
++        if ( p2mt != p2m_ram_rw )
++        {
++            put_page(page);
++            rc = -EINVAL;
++            break;
++        }
++
++        mfn = page_to_mfn(page);
++        src = map_domain_page(mfn);
++        memcpy(scratch, src, PAGE_SIZE);
++        unmap_domain_page(src);
++
++        rc = guest_physmap_remove_page(d, gfn_add(base_gfn, i), mfn, 0);
++        if ( rc != 0 )
++        {
++            put_page(page);
++            break;
++        }
++        removed = true;
++        d->arch.cca.build_unrecoverable = true;
++
++        rc = arm_cca_delegate_granule(page_to_maddr(page));
++        if ( rc != 0 )
++            goto err_page;
++        delegated = true;
++
++        /*
++         * TODO: If plain RAM should be left out of RIM, have the toolstack
++         * pass explicit measured ranges (kernel, initrd, DTB, etc.) and use
++         * DATA_MAP outside those ranges. Do not infer this from page contents.
++         */
++        rc = arm_cca_rmi_rtt_data_map_init(
++            d->arch.cca.rd, page_to_maddr(page), ipa,
++            page_to_maddr(scratch_pg),
++            ARM_CCA_RMI_DATA_FLAGS_MEASURE_CONTENT, &res);
++        rc = arm_cca_build_record_rmi_failure(rmi_result, rc, &res);
++        if ( rc != 0 )
++            goto err_page;
++
++        d->arch.cca.data_pages[i].ipa = ipa;
++        d->arch.cca.data_pages[i].pa = mfn_to_maddr(mfn);
++        d->arch.cca.nr_data_pages++;
++
++        put_page(page);
++
++        if ( arm_cca_build_should_preempt(++work,
++                                          ARM_CCA_BUILD_PREEMPT_PAGES,
++                                          ARM_CCA_BUILD_FORCE_PREEMPT_PAGES) )
++        {
++            rc = -ERESTART;
++            break;
++        }
++
++        continue;
++
++err_page:
++        if ( delegated )
++        {
++            if ( arm_cca_undelegate_build_page(d, page) )
++                delegated = false;
++            else
++            {
++                d->arch.cca.data_pages[i].ipa = INVALID_PADDR;
++                d->arch.cca.data_pages[i].pa = page_to_maddr(page);
++                d->arch.cca.nr_data_pages++;
++            }
++        }
++
++        put_page(page);
++        if ( removed && !delegated )
++            free_domheap_page(page);
++        break;
++    }
++
++    unmap_domain_page(scratch);
++    free_domheap_page(scratch_pg);
 +
 +    return rc;
 +}
-+
- static int arm_cca_rmi_realm_destroy_complete(struct domain *d)
- {
-     struct arm_cca_sro_mem_xfer xfer = {
-@@ -269,6 +285,67 @@ static int arm_cca_teardown_rtts(struct domain *d)
-     return 0;
- }
- 
-+static int arm_cca_vcpu_free_rec_page(struct vcpu *v)
-+{
-+    int rc;
-+
-+    if ( !v->arch.cca.rec_page )
-+        return 0;
-+
-+    rc = arm_cca_undelegate_granule(page_to_maddr(v->arch.cca.rec_page));
-+    if ( rc != 0 )
-+        return rc;
-+
-+    free_domheap_page(v->arch.cca.rec_page);
-+    v->arch.cca.rec_page = NULL;
-+
-+    return 0;
-+}
-+
-+static int arm_cca_vcpu_relinquish_resources(struct vcpu *v)
-+{
-+    int rc;
-+
-+    if ( v->arch.cca.rec != INVALID_PADDR )
-+    {
-+        rc = arm_cca_rmi_rec_destroy_complete(v);
-+        if ( rc != 0 )
-+            return rc;
-+
-+        v->arch.cca.rec = INVALID_PADDR;
-+    }
-+
-+    /*
-+     * arm_cca_sro_complete_mem_transfer() consumes REC_DESTROY reclaim
-+     * requests.  Remaining REC auxiliary pages would mean Xen cannot prove
-+     * that the granules have been returned by the RMM.
-+     */
-+    if ( v->arch.cca.nr_aux != 0 )
-+        return -EIO;
-+
-+    return arm_cca_vcpu_free_rec_page(v);
-+}
-+
-+static int arm_cca_teardown_recs(struct domain *d)
-+{
-+    unsigned int i;
-+    int rc;
-+
-+    for ( i = 0; i < d->max_vcpus; ++i )
-+    {
-+        struct vcpu *v = d->vcpu[i];
-+
-+        if ( v == NULL )
-+            continue;
-+
-+        rc = arm_cca_vcpu_relinquish_resources(v);
-+        if ( rc != 0 )
-+            return rc;
-+    }
-+
-+    return 0;
-+}
-+
- static int arm_cca_destroy_realm(struct domain *d)
- {
-     int rc;
-@@ -330,6 +407,10 @@ int arm_cca_domain_relinquish_resources(struct domain *d)
-     if ( rc != 0 )
-         return rc;
- 
-+    rc = arm_cca_teardown_recs(d);
-+    if ( rc != 0 )
-+        return rc;
-+
-     rc = arm_cca_destroy_realm(d);
-     if ( rc != 0 )
-         return rc;
 -- 
 2.51.0
 
