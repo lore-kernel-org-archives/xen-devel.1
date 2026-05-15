@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD580CD4F4D
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 19:20:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1310188.1581080 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C0DCD343F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 19:20:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1310184.1581052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNy5N-00074F-Nl; Fri, 15 May 2026 19:20:37 +0000
+	id 1wNy5K-0006LE-IS; Fri, 15 May 2026 19:20:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1310188.1581080; Fri, 15 May 2026 19:20:37 +0000
+Received: by outflank-mailman (output) from mailman id 1310184.1581052; Fri, 15 May 2026 19:20:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNy5N-00073N-8O; Fri, 15 May 2026 19:20:37 +0000
-Received: by outflank-mailman (input) for mailman id 1310188;
- Fri, 15 May 2026 19:20:36 +0000
+	id 1wNy5K-0006K9-Bg; Fri, 15 May 2026 19:20:34 +0000
+Received: by outflank-mailman (input) for mailman id 1310184;
+ Fri, 15 May 2026 19:20:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3AXIHagYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 1wNy5M-0006mi-58
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 19:20:36 +0000
+ <3_HEHagYKCVUF1xA6z3BB381.zB9K1A-01I1885FGF.K1ACEB61zG.BE3@flex--seanjc.bounces.google.com>)
+ id 1wNy5J-0006Dh-0E
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 19:20:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNy5L-00BXCT-HR
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 21:20:35 +0200
+ id 1wNy5I-0039nU-CT
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 21:20:32 +0200
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3AXIHagYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 6a0771fd-2eae-0a2a0a5409dd-0a2a4502be44-14
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:20:35 +0200
-Received: from [209.85.215.201] (helo=mail-pg1-f201.google.com)
+ <3_HEHagYKCVUF1xA6z3BB381.zB9K1A-01I1885FGF.K1ACEB61zG.BE3@flex--seanjc.bounces.google.com>)
+ id 6a0771fd-2eae-0a2a0a5409dd-0a2a4502be44-4
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:20:32 +0200
+Received: from [209.85.210.201] (helo=mail-pf1-f201.google.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <3AXIHagYKCVoK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@flex--seanjc.bounces.google.com>)
- id 6a077201-af86-0a2a45020019-d155d7c9d14c-3
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:20:35 +0200
-Received: by mail-pg1-f201.google.com with SMTP id
- 41be03b00d2f7-c82726f7b0bso138388a12.3
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 12:20:34 -0700 (PDT)
+ <3_HEHagYKCVUF1xA6z3BB381.zB9K1A-01I1885FGF.K1ACEB61zG.BE3@flex--seanjc.bounces.google.com>)
+ id 6a0771fd-af86-0a2a45020019-d155d2c9a97b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:20:30 +0200
+Received: by mail-pf1-f201.google.com with SMTP id
+ d2e1a72fcca58-8230d6d54a5so1056912b3a.1
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 12:20:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +52,44 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1778872833; x=1779477633; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1778872829; x=1779477629; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=VjouJF8LEnMo7j8C1cTkogOjB+phr08sb021HWXTXd8=;
-        b=Qc/EW38vpzfAFNPJw3W3+EbKaB2LQjl8H0PM6LRzFXDlHqZ/WR7Ag/y6cgJ9uQxr3t
-         XiomlN/erBqlWfLEs4VvRnnsgRp+nV41WX0dvNGFeNjwnFXrw46TaMSDjJPSGAd39IT7
-         Z8f1KBCa9Zsw7kNhP6XbDfxezIXm9AyZz6a4pSEkTTcbZ0fr2K3GGmAKFkhDR2KSgswf
-         7DgcQhbwHQSTK/12imqil9C8qf3UqckBufMx4mx+RilmphIyxKfgKR4PMydN4uGmSqpk
-         Y2RruS4KVTQM2cUfwuVvjJhqGVPslnKLOu0HctuvVUAW06npA7VNCq3tWDpURHwMKO4D
-         HhYg==
+        bh=ikDY1x359wvY/+q3wacNdXpEm487YvEWh2udCoEd+NA=;
+        b=OZbRHsKSLwHbxyLI5+CWSdjSTBsqE8EudA31+iur5m2mHA9m7kbCMKJDxtOE++2Gyo
+         eYE+8lHk/tsDy/59f+DIuJMur4LZF64iF9p7izC8id8yM3MMqoh1ZnsWwx5ssJQWjSpi
+         kBpfAUFfp2s5pYdLPFWNeVMmwxHUHHPy/wiaGbbOBYMu7/vFrYwD/KQ+z5+i/OI4jTkV
+         EqFDPC5WaBcQYuHvevhhMRiZ6cfjr9ZnGrTeqVK6jJEWMkzE0dAYAas0LdpR9fR7Qcx7
+         vuohKhpFKbYsJLUUWM2fqloZc8OdL6CE9sx95S/MDX6C54d/coD1hJ2IDiLEbWWJDBQI
+         zI3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778872833; x=1779477633;
+        d=1e100.net; s=20251104; t=1778872829; x=1779477629;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VjouJF8LEnMo7j8C1cTkogOjB+phr08sb021HWXTXd8=;
-        b=mI8FuUSgdkAsdOhx3Gkvewg6fbYOzcHV9sBvkfoKMELdivriAApp0W/FIdTzM6XOb3
-         Xyp8BquDBOmZ5UUppE7mZyvO1Zpwt45KJeOTVahFmll40US+SxSHsIKj3DQgueJkWT9x
-         1H2mJJcKL4NhHEK09GuhQzCsUQJ2LMgKliCfqv9wyBLWtsQjQCXd9bkxOZtcodT1q4Cc
-         0hRZvfw0YqDKvx83Og4qu/WPzd/tLifmiRw2EJDYpHQARmpYpF8zsyrg2P6PEuD7EuZu
-         1bTv0h85p2o8aW4zDQhYLWt53eOJjOZIEqlCRi5/6/b+QqWNDFTWdagBBRWxPzsAyUig
-         IuFQ==
-X-Forwarded-Encrypted: i=1; AFNElJ//p85kLNn0Am3oRL3/mqiipytvsPSOYwd+5x1zBDA7YjDy5mX/ROW/NqEO7IE6HmYlXb5mZfbeDlg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YybZV5RVwj+rVcXuHWa9SUdHDXBPGE/l1NZKQJ2ut3iz6L0JUia
-	QF91QghhmvEC2nqk56D31TQVjGUtCQGOnrivuUUG0z3q95KpBbJ05NFaIkPKm7JkI95yvpmt7AA
-	Cla9pwg==
-X-Received: from pfbcg6.prod.google.com ([2002:a05:6a00:2906:b0:836:ed4a:203f])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a20:72ab:b0:3a0:d88:6d6b
- with SMTP id adf61e73a8af0-3b22ecf592fmr6792680637.49.1778872833039; Fri, 15
- May 2026 12:20:33 -0700 (PDT)
+        bh=ikDY1x359wvY/+q3wacNdXpEm487YvEWh2udCoEd+NA=;
+        b=Hs4L9/FZLFqhdccCgX/U8VTLxPm4XI48XP+KaU4nPNTY/8MOZ7eGLbtb+59OpdZiaP
+         9F+ERlO2KUSoY+J6sZ7S0CVQz4h+MWRHt/0UV7Yl4oHOr0Kyb4v3c0DcagFEAkEsAFFA
+         uMgWgRcK/O8CGUaxGg7y6U4pdtWOvSAvr64/sCwi4uggSc44KXMJKzF9fD1YiB/M1qLK
+         2tMW5Ms3d8vZSHE098adoyILIeI/v9VfqOwGwNjrqfJU7FVAZGit3MoNhh6ORQjo0+2u
+         mgGc6xFWveIkVje3odZr0P+F1f+xwovzbzCYXfAo3gYlXixSIRFRndyPC0UUFLMLt7MR
+         X9vQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/v8fklv3MCI598bFORUqa5jb9KyUB8ECtvQPiwBdZDCxabIcp0bCi7pxmiv8stihT3ikf+6jdJs34=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YydalLHPiNji+gaSu12owcMwnKoCGOB+Cziwf2f2U5L/dpNBwq6
+	GYx+gkxnCzvkelWpfXGn8nf7lXxqxb/oUdZyenw/5Y0Ne0aGz8PlkrefYbNKlOyKz7dls3KTtK9
+	zczR0bA==
+X-Received: from pfbgg10.prod.google.com ([2002:a05:6a00:630a:b0:83a:d498:99fb])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a00:a907:b0:835:447b:a2ac
+ with SMTP id d2e1a72fcca58-83f18d5b8f5mr8777489b3a.5.1778872828431; Fri, 15
+ May 2026 12:20:28 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 15 May 2026 12:19:09 -0700
+Date: Fri, 15 May 2026 12:19:05 -0700
 In-Reply-To: <20260515191942.1892718-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20260515191942.1892718-1-seanjc@google.com>
 X-Mailer: git-send-email 2.54.0.563.g4f69b47b94-goog
-Message-ID: <20260515191942.1892718-9-seanjc@google.com>
-Subject: [PATCH v3 08/41] clocksource: hyper-v: Drop wrappers to sched_clock
- save/restore helpers
+Message-ID: <20260515191942.1892718-5-seanjc@google.com>
+Subject: [PATCH v3 04/41] x86/sev: Move check for SNP Secure TSC support to tsc_early_init()
 From: Sean Christopherson <seanjc@google.com>
 To: Kiryl Shutsemau <kas@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
 	Sean Christopherson <seanjc@google.com>, "K. Y. Srinivasan" <kys@microsoft.com>, 
@@ -110,100 +109,53 @@ Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov <vkuznets@redh
 	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
 	Thomas Gleixner <tglx@linutronix.de>, David Woodhouse <dwmw@amazon.co.uk>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-720697/1778872835-AB762161-EC9D79B5/0/0
+X-purgate-ID: tlsNG-720697/1778872831-A9B70161-310994C1/0/0
 X-purgate-type: clean
-X-purgate-size: 3392
+X-purgate-size: 1533
 
-Now that all of the Hyper-V reference counter sched_clock code is located
-in a single file, drop the superfluous wrappers for the save/restore flows.
+Move the check on having a Secure TSC to the common tsc_early_init() so
+that it's obvious that having a Secure TSC is conditional, and to prepare
+for adding TDX to the mix (blindly initializing *both* SNP and TDX TSC
+logic looks especially weird).
 
 No functional change intended.
 
-Reviewed-by: Michael Kelley <mhklinux@outlook.com>
-Tested-by: Michael Kelley <mhklinux@outlook.com>
+Cc: Tom Lendacky <thomas.lendacky@amd.com>
+Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- drivers/clocksource/hyperv_timer.c | 34 +++++-------------------------
- include/clocksource/hyperv_timer.h |  2 --
- 2 files changed, 5 insertions(+), 31 deletions(-)
+ arch/x86/coco/sev/core.c | 3 ---
+ arch/x86/kernel/tsc.c    | 3 ++-
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clocksource/hyperv_timer.c b/drivers/clocksource/hyperv_timer.c
-index 72b966340a46..69c1c7264e5d 100644
---- a/drivers/clocksource/hyperv_timer.c
-+++ b/drivers/clocksource/hyperv_timer.c
-@@ -472,17 +472,6 @@ static void resume_hv_clock_tsc(struct clocksource *arg)
- 	hv_set_msr(HV_MSR_REFERENCE_TSC, tsc_msr.as_uint64);
- }
+diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
+index 14ced854cd83..39fb50697542 100644
+--- a/arch/x86/coco/sev/core.c
++++ b/arch/x86/coco/sev/core.c
+@@ -2029,9 +2029,6 @@ void __init snp_secure_tsc_init(void)
+ 	unsigned long tsc_freq_mhz;
+ 	void *mem;
  
--/*
-- * Called during resume from hibernation, from overridden
-- * x86_platform.restore_sched_clock_state routine. This is to adjust offsets
-- * used to calculate time for hv tsc page based sched_clock, to account for
-- * time spent before hibernation.
-- */
--void hv_adj_sched_clock_offset(u64 offset)
--{
--	hv_sched_clock_offset -= offset;
--}
+-	if (!cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC))
+-		return;
 -
- #ifdef HAVE_VDSO_CLOCKMODE_HVCLOCK
- static int hv_cs_enable(struct clocksource *cs)
- {
-@@ -548,12 +537,14 @@ static void (*old_restore_sched_clock_state)(void);
-  * based clocksource, proceeds from where it left off during suspend and
-  * it shows correct time for the timestamps of kernel messages after resume.
-  */
--static void save_hv_clock_tsc_state(void)
-+static void hv_save_sched_clock_state(void)
- {
-+	old_save_sched_clock_state();
-+
- 	hv_ref_counter_at_suspend = hv_read_reference_counter();
- }
+ 	mem = early_memremap_encrypted(sev_secrets_pa, PAGE_SIZE);
+ 	if (!mem) {
+ 		pr_err("Unable to get TSC_FACTOR: failed to map the SNP secrets page.\n");
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 7e639c0a94a2..243999692aea 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -1559,7 +1559,8 @@ void __init tsc_early_init(void)
+ 	if (is_early_uv_system())
+ 		return;
  
--static void restore_hv_clock_tsc_state(void)
-+static void hv_restore_sched_clock_state(void)
- {
- 	/*
- 	 * Adjust the offsets used by hv tsc clocksource to
-@@ -561,23 +552,8 @@ static void restore_hv_clock_tsc_state(void)
- 	 * adjusted value = reference counter (time) at suspend
- 	 *                - reference counter (time) now.
- 	 */
--	hv_adj_sched_clock_offset(hv_ref_counter_at_suspend - hv_read_reference_counter());
--}
--/*
-- * Functions to override save_sched_clock_state and restore_sched_clock_state
-- * functions of x86_platform. The Hyper-V clock counter is reset during
-- * suspend-resume and the offset used to measure time needs to be
-- * corrected, post resume.
-- */
--static void hv_save_sched_clock_state(void)
--{
--	old_save_sched_clock_state();
--	save_hv_clock_tsc_state();
--}
-+	hv_sched_clock_offset -= (hv_ref_counter_at_suspend - hv_read_reference_counter());
+-	snp_secure_tsc_init();
++	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC))
++		snp_secure_tsc_init();
  
--static void hv_restore_sched_clock_state(void)
--{
--	restore_hv_clock_tsc_state();
- 	old_restore_sched_clock_state();
- }
- 
-diff --git a/include/clocksource/hyperv_timer.h b/include/clocksource/hyperv_timer.h
-index d48dd4176fd3..a4c81a60f53d 100644
---- a/include/clocksource/hyperv_timer.h
-+++ b/include/clocksource/hyperv_timer.h
-@@ -38,8 +38,6 @@ extern void hv_remap_tsc_clocksource(void);
- extern unsigned long hv_get_tsc_pfn(void);
- extern struct ms_hyperv_tsc_page *hv_get_tsc_page(void);
- 
--extern void hv_adj_sched_clock_offset(u64 offset);
--
- static __always_inline bool
- hv_read_tsc_page_tsc(const struct ms_hyperv_tsc_page *tsc_pg,
- 		     u64 *cur_tsc, u64 *time)
+ 	if (!determine_cpu_tsc_frequencies(true))
+ 		return;
 -- 
 2.54.0.563.g4f69b47b94-goog
 
