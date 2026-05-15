@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B16CDCD4F3C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB4ECCD4F47
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:11:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309435.1580518 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1309427.1580492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjtw-0001z3-G3; Fri, 15 May 2026 04:11:52 +0000
+	id 1wNjtr-000137-8w; Fri, 15 May 2026 04:11:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309435.1580518; Fri, 15 May 2026 04:11:52 +0000
+Received: by outflank-mailman (output) from mailman id 1309427.1580492; Fri, 15 May 2026 04:11:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjtw-0001yr-CC; Fri, 15 May 2026 04:11:52 +0000
-Received: by outflank-mailman (input) for mailman id 1309435;
- Fri, 15 May 2026 04:11:50 +0000
+	id 1wNjtr-00012Z-1K; Fri, 15 May 2026 04:11:47 +0000
+Received: by outflank-mailman (input) for mailman id 1309427;
+ Fri, 15 May 2026 04:11:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjtu-0001he-Ft
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:11:50 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjtp-0000cR-HX
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:11:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjtt-0052Iz-SF
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:11:49 +0200
+ id 1wNjto-0052Iz-To
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:11:44 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069cda-e002-0a2a0a5209dd-0a2a4505a2ee-26
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:11:49 +0200
+ id 6a069cda-e002-0a2a0a5209dd-0a2a4505a2ee-16
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:11:44 +0200
 Received: from [52.101.125.85]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c47-aaa8-0a2a45050019-34657d55753b-9
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:49 +0200
+ id 6a069c47-aaa8-0a2a45050019-34657d55753b-6
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:44 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYCP286MB3682.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:3c2::11)
  with Microsoft SMTP Server (version=TLS1_2,
@@ -43,7 +43,7 @@ Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:38 +0000
+ 04:08:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bkv1vfI5O59KWDyXSA5ViGCg2IXxkdwp7owGBtNvMwvokpEomtjQnXw+JxUN9uamIOV1l+YqoK059pLHKbU69Sm7OI4vFocvHSFWQl0MjctEz+sJ8VQqn8aqIuxFFI44khV3vFW/25kexn/xCFrN5dR7nSe0P9ElRbqK0zEh8efvOkpON6K7QjDwW5bXZcKv2M3YHVDYQ3F4tk18r5Xq9e9075efGYRILKJA5RABY80xqnZk5cieAF0DyMJNP5SAeQSFv2IdK1FgXv/1+v3CwAP8TMuBR4Cu3x/qSpPvf7AfhKClFbbpj7CTCUezZeEDhZ6lvUUuIpLiJte0Gv2Aew==
+ b=efameixzV3YdFN2nHjhRRAOH5H4xfgb4WQ2AoAJyKC8q+1m3ptBVkOzjD03zgtJznD7jKMZ9yaVgnaaBbN4ah9KUqWIgnojfG+y/KkxmRbIYy5Q6rOFhcU+rjNI4qipvdq3CxKJZHEFFt6CzaSWwXKzUAXwQxz9wjh5qlD4o7tGKf9VnemBU+XkpTjqWOutxJBTM3QIVhXH+b0UfxpQT6PCKdA/Zg1rbA1EdlfOQlsQMR8JFEZ/TTSBuvkY1ovIynAFzaerlsxV1p+HAJwCX19TK/vwaeQehie4dHTNbNn6/7svmn1Ha0SyUawXsOpYG+L9eQiwNRlfXuU824v0FJQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uUEonI82EmDhnjoUm3kfT18UbhTpOT2nksAcbviCf7Q=;
- b=aQET2pp3uemV1zGmgN4xkf4vVcB/GNIMFESSnVQ8oH1oTOSRsEZRP1PeMnPxwpwiR6uELxY2BvUfpv6jClZDrkl0ib0mXvcEKQ8KlB3jeuUVCRzZ8b5RjjsR50mLWX68mNxU//yEBmSOS67B7lsST8ufDnl4R4AfhpzVSq92Jsw3eI94/imqCtgL5GjbVWHFJxB6tQ0FCQLvCV+ZwS36q14U/yZ55qQ5brpVpTCIYipVJXFRxYViZ30XHdSRZz7r0IXFAmCNz051pPJCkUSiXwc3gB6U8A7fYvad0o+ZNR+lwLDTx59pujoTW34Nnz1adi2WdMTh3e0Nry76tv4Gog==
+ bh=WZt2u209lxJwRTGsQreVWEB2rCTZ+thSoguR7zx4+Mw=;
+ b=jXRttVjpvxTyf219O4xrYBUfZ8lHl3Fx/rPnFhwDV1E9lEWfPp2jvwGX5JYmDiZoHQesjUtSl9O+Ebq1HUTot+BI5fPeBrPhZEuytmtrW3lzUhIgfAQEcY1k3SLngQuqswdZdMr56+ql2/0dLvE+Lc04GYcM9/z8ncrTBw9U9kGTyrvJ9c/gd3/0TCVk5v5YgsyLsMzwLc4rjF+yCiWdfDlF6J1MJzt1nftVA1hROjKw/1yirbNWPh6nQaO8YbqEFR5ivpN2qpETEeP4C6Gk85LyPUXrUdZmjsE0Lu2E1/0Mc37XuPk5f219xoxdywhGacPqqrfNiPnaSATcINYN+A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uUEonI82EmDhnjoUm3kfT18UbhTpOT2nksAcbviCf7Q=;
- b=t2jBLsht4aP6S3U9ddLn94eyqQhRlH5Y92wfAh7Wb/+CCPHJ8Jo+9eRNMdIYVykhJY5dDigF+GdemaHqSa+z24WBWG9DMIh8llGVyTJjNNEQ3zc3yqtTPLzj5DnEwMlnTVyWHudmU1xXVdGn7Mby809KLOsflwoJ4OY+FwxDlCI=
+ bh=WZt2u209lxJwRTGsQreVWEB2rCTZ+thSoguR7zx4+Mw=;
+ b=ZFCmTGG3gO6wGvuT9WMaeIGF9mjaYPRDTeMxxg04l1qk2i7qD6fQ9BBgMnGcsEgu9oCWoHDrE65jBemd4ZoxP2mYIkfwhq7Xkj5d5a4kQ7JO8iCwOd9nbO+1zhmXkloYmeRxqsrQQ1pxRrkpqNF4tiDCEwmbLmcTpXGJBGJoGaA=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,426 +86,831 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 25/26] libxl/arm: add and validate Realm guest support
-Date: Fri, 15 May 2026 13:08:11 +0900
-Message-ID: <20260515040812.983626-26-den@valinux.co.jp>
+Subject: [RFC PATCH v1 22/26] xen/arm/cca: add Realm REC enter path
+Date: Fri, 15 May 2026 13:08:08 +0900
+Message-ID: <20260515040812.983626-23-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYWPR01CA0030.jpnprd01.prod.outlook.com
- (2603:1096:400:aa::17) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0236.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c7::12) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYCP286MB3682:EE_
-X-MS-Office365-Filtering-Correlation-Id: 951d4835-653b-4b40-954d-08deb237a440
+X-MS-Office365-Filtering-Correlation-Id: 29718a0d-624e-42b4-f1dd-08deb237a2d1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|3023799003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	xyVH9c1JnYSO8Iq457ifJbqmB9wu/Ow82h3fCkxDUhQnx4XaNu3xFC4EEMars0sNMlB43ljs72aEdjhwPxbug3tWPjGyRFXdyRqe0sjQ29jEJuGVm4tu7tpEkz+cpDFVpQdGYC8iqrKbWu/nnGB+S6NsTkXJdUbf8rKFFatwedSZE1P8UsL0dKgTIia3UFZvWHVDFGmurZiloztiHsOuwrLgv2lMaH/EnH8Ganne9SOYxYXj1nhaFHykPGT4svG8JZuMZSif6qGI4RvSDntiyPGgE+hMUqMDUbsRodSeyrODa+I8mRslMVCkv/sA86gN5zqphHwvUnSbIiJxX/tx4/HT51mhW7gVXQqIyZYgJ5WGKBywqlbbz5byuj9hhrv4nK4/bS8pewT3a4r0aOrMO5wkoITfXWucX6WS5iQmGagv+xlYl9LgbOsyjoSoKW/KRDYS6iyb27efNEW3amzlcLC1ga0MYWjy+dOQZJR73/AnqxEAQttJxph6mzfNkXdcxduMOfYoHN4w29XKH0JOI2+vAubexFAevdqnktXkMvjTbMkXtBcNgzbZalAlKoVgjfrKiBJo0IvzWg34AA2iZ09tRitBplvr9nK41D18YWnbQV81+/MUX48PvDsGtk/a1WOGANskXdAUcxdjajYvrVna3kbzvq2HdX2kfoNt1ebkG+/2nF7Y0FKH6gLD3TrXDgc5o6fCptQ/MTGqoBFFBQ==
+	bopRT44LQqsNg23U5FdXaQZRE3fQ0y9lcr4G8M9Qo5yMUreTLmRDGEkISUkEh759PBRplMBq50aSkaH9fmI/kn1qZnG9ZM6yX2Fy/cs7a/4qPWUOdBdQUJzxWvFj76Gw9ijiKTYAh+bFa3SVxm8J8qegxdRcR32Ejkc5l/6VRLS1cIimru19K7vr+TGGonvCFtgmdvfbQ6J1Ys2dthrRKpuQ35i5i74ZpqsRDNpsr+JeU4lyIc63PQ5M0L/ZYUkvtJvqwvaecfBSaSl9z9QUJUuAtlsOyMOo0+PY9+mQjwOIjpW4NBODBOn77WtuoTIN+vujcJZE7N43oGHdUGYCcf02Fd3+Vur3ekhV+ZXHuDNyZ3k1sJjhmehnl4mhHDS4oKXFBUOMr6fd3U+pCyFXmOMSJU7S2cd0kHDoKq3ldllT8igJu0W7rayErXG8mXW2KCVe2TyB3tA5WcQmfVr/HfYQkw7I0vnoaHbblZsXsvXex5HS9ASEb2PcJRzUTH4OUYbsoNEv9Ipe8J3Z+t4rCAqXaHvwkIuexyTeWMlafxb8JuxuVEyabsSpXTyfwnZvjhYETNnPBxuMBRh3s+g155FgGgp+shRshOOIYrajQ3bdEZA5wNtcY6kEqZ13VS31gouvm+C7FVib9VZW4e0PCIj6F0iHaXF5VuY7I0EdndVCnGTaFCVIRzPBAEwoVzRf
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(3023799003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?a6M73JlCkqorr190fg7qoJy+9ouidG5qvLfQPRyF5ABjhap60jc3Arq0/CWP?=
- =?us-ascii?Q?UrYdtt9w0FTcYmcrWNkRARFdUdwEFTiWr2ADpvE+Lo4t06zkGOOGLR1WLUy3?=
- =?us-ascii?Q?IQPESn5Eco4/pRk1/bX97eZgRq9kToO0OcNpl6EUFzJxBQ3fwZOauHrcj3y7?=
- =?us-ascii?Q?nxtG/r2tJQCxqVUCxrO1/MF+AXEMX36Zb3heHDVjrWepxXIrJtENnnQg/hzS?=
- =?us-ascii?Q?MByWTPw7AJmB2by4XE2whrB2oFOyfjdJKpTRRHjZZEA99zvi7dx1CV169Iwq?=
- =?us-ascii?Q?Gs6AJBWs+on45cis5xc/eKuHgzLvxomxkfZsjtpmYzc4QeHMPzvk9iM37pYX?=
- =?us-ascii?Q?/iD6Nrnc+CHGynNcIfKP8kSMTOT3144hE2/crTgEoDP733k/1yN/kbDIlX/y?=
- =?us-ascii?Q?wL+YP297NsQZ8Os+lfmlAYM9hsdKgAM4wBKXxOISfpKTOBpbRZaDoK3QGz8Z?=
- =?us-ascii?Q?0kSGMDWVKgqAYrgL/8ulLhIr9MELZgmLu/I4id6vNrTJ4Tuo6FGIU/tp6kEy?=
- =?us-ascii?Q?Q74GUWQKcJJpnsmNytT0Mbr7JnTGVo5s6PnR9NNDUeHdMTLh6CWr8HY4Ba1c?=
- =?us-ascii?Q?aliJSOhFL8vM2QMyw5J2E2duG8Fr4f6jzKErlDqFvJGksKAuwnUmfu+cuGv2?=
- =?us-ascii?Q?OLmRVJorPd5/YtLSef/aGbT5YpY4LiCGHyAe/r5HZ1qqkFaWawtPs8oh+wk1?=
- =?us-ascii?Q?CAbJDzeQ6v7CnFQri2W5qvBgTBaFG0RCBTZWWO/bSKToFZQBqjSXRzdohTTs?=
- =?us-ascii?Q?WH5G8AE4HI1mWSrIVgV5QiZZzuhJ096WsTEMbMBo7Phn3YDIdTWQ3ispyrQ7?=
- =?us-ascii?Q?6W4kmsQM7jHAkSFSeSvTieXbFc4Vrcl4shRYJnQS5wPj5CiaoivhS3qRpP0k?=
- =?us-ascii?Q?r5uNWDKCZbw9UL2Hsxnogxz+mhFuuh7THicgDZXGWTI9auSqiAGu2FePtKpv?=
- =?us-ascii?Q?o8tH1v/UXhsYMdVh7Din7wb7Gzjc8AmA+Pdl7R+ESlb938Ri3VpBE3cNMY1T?=
- =?us-ascii?Q?yfZ+qOwGB1S1LZaOwyheJrxyWZZuTQGm3VeCEvfRKJMWrQ2Ti5u1IIoj3QCd?=
- =?us-ascii?Q?YueuJdm5zfMrGauuMohAEzEc/oHsffOmWJGqy0v1D6HFyWQwdlGQtQ/IKlQP?=
- =?us-ascii?Q?vDjFQwIafO85OOUXRrrhKmEkJJakvJiSLvxjVsb5IRP4NexG/e0siXfZPKi4?=
- =?us-ascii?Q?aeekDWTdF1V93/DjP0jA8i5oIjfP3G51X/ZpHcL/sM6DV/+295IQXnN36N9Z?=
- =?us-ascii?Q?ougokPWCLr34n6/CC9jsV0RoGJ8aCEA7gGgoog//v2yOi9+FCK/clAgHgDZr?=
- =?us-ascii?Q?YXUpGDbyx28V+Af8wD0hOyXQANvaxMOxLFy2lmrR9cfBopqV4OnLX4P1jA6x?=
- =?us-ascii?Q?EQaBsc5KFun1OPuPhDtzse/LArGgh25DS7C+uFSJQuk5Ln/YTDS9+MHa/D3Z?=
- =?us-ascii?Q?f+cU8qch5JOHqnHMLomhXvPejyQcNKXcLo7p49SxScoI8QwETxTlMnkKENKM?=
- =?us-ascii?Q?qZDNsj+xPoSTAC/T2tiXgnIXWQg4sVFx1vi116SqLu7gKLxXHDk4WqnYVmbf?=
- =?us-ascii?Q?jh7M2veGWuXMpTlJwlm/WHLjtx81bralKirigGtAbQ+KcUJ6rLE5lQK9AidA?=
- =?us-ascii?Q?psPZ6PhWA+iCgT4wfzapu3q7I+tXM6xiO+T7jkFbMgf4YB4+4t+paceczkSS?=
- =?us-ascii?Q?2PSRkamP03m6pDmN/RpXf4RK2hr+q/mRInv+W7sZ0IwACWOK6viy9YUCQynW?=
- =?us-ascii?Q?6t5fWfowutGYqabdPalgqwwZWSgw5kG0RcMmW/exEdK/S7BvLFNz?=
+	=?us-ascii?Q?9ckVzyc2dNMCdWnehXYETIQ4hV0gd8waLorXzy0YL2tzZH1Zz0VI4CJgEtu2?=
+ =?us-ascii?Q?CJ3lLUaakIcSvgMw7UA3Ld8nERzeU6UQF9ywQiy5Zpn8rVsCcrZIcQFN7BSO?=
+ =?us-ascii?Q?qhxq9avg3XG9RvxzQQkF8KmzH9vYcAt2k4ytB+5rf1JOLzBrnIo877Vvwy3I?=
+ =?us-ascii?Q?X+NM5zceFXXip8Qz6bX4WRl2/fr+qqJpvimF+/eHLK3GKBj6lrQiqJy4o0oW?=
+ =?us-ascii?Q?zVqjCMEaKIOK13KXecuCgAHTkiP04YAw9IgZ4cnhW09FET7CEVCqcjSMwXzG?=
+ =?us-ascii?Q?orzsZUkSC7nF89ecMkNPqAOIIIXr7dXaGvSsZI/km+H98DN8dfcCx1EZdV8g?=
+ =?us-ascii?Q?uMg/IuC38T24si1mBAGVJ1Rb75Ip2lF19ZYvY5xaZpYdjMWBNOmT0J1Gnx2H?=
+ =?us-ascii?Q?jlNxE10gDSQtCjiZUN5urjkbOsmeBUrfcNeN60q8Aqxhu2QZ39R210DrkeT3?=
+ =?us-ascii?Q?fpA/inI4dgvltDmf+C/3vbPmayBHGUJ+MZD0G9q19oLNVA0huBx3XOKR0qto?=
+ =?us-ascii?Q?UGZ67OHe98FhllWHXRUFBDsYtdCFJdaXiTZZdw4pISFn2utyqROYBmkRL3yI?=
+ =?us-ascii?Q?WAzauwzDukKFONcXkPVaGlvCKGVyGxbrMOxD5kOC6B0zKrteSpUiBg+R3dyA?=
+ =?us-ascii?Q?XsYT8lCn4dDa36omsVvZue/j5+kYSUxl+rmLZuk06tgaz8J2bBY96ztN1w0P?=
+ =?us-ascii?Q?4Ju1GoLvo7vkwyDuTceGK4NVIMc/+FAJrIky8rsG3UYs5WohOeZTcj8Oi+H+?=
+ =?us-ascii?Q?RAKR4E/WqMTiWMlIUohpCB1WJ7LrTw2o2gEgUvIKRWL5e+qOgRRhKL0Akl5h?=
+ =?us-ascii?Q?Tg+HlyiyGO5c2UxMQjL3UGTkZUkdwA1N5KLU2ecjltua9AwyOsH8zRAnFx9A?=
+ =?us-ascii?Q?2+v3bc+3rbqcr8myh818C13tE+B+zUfICbOJlspRddbbNUYlNTZVYJlS7dBA?=
+ =?us-ascii?Q?LuBn0FYZy/RAYSEUOcUI9C+ViikaipaDF4jgYTsWuU8H2stR2G31dFZABont?=
+ =?us-ascii?Q?QroMwpMd5KypvzfZjHCoE+IYHDNClVJA1B8K4+3JBYi8afNc0zRRP15qb+ZG?=
+ =?us-ascii?Q?sT0IVDQ8MRVvGMiQYHNfpZUDzN8sG3e6ej1Pibzz2mL4oD8pD7Uqy2saPEOy?=
+ =?us-ascii?Q?w9VVBGQIAUDRC7HxabVCnklVz4mWgc5DeoeHEYcNdaCgyzczzSTCTfg40yuZ?=
+ =?us-ascii?Q?LCBrE89vSssGLXwWRSW+zTdFHD8lFCsd/fqrVFZVGhvCFcgtsRLMW6PaueBO?=
+ =?us-ascii?Q?X0sPFHqzvxfthdAwPHB/8J7QwIj6KsBnBhB6ry/PtcZ71daZYH7VG5RwtMGW?=
+ =?us-ascii?Q?x03fjlxAW24/MmCADhzQZV+hHsz8Q7NSI9Akl7Ph7tjOdraJihjGyvKyzbcX?=
+ =?us-ascii?Q?6P8kLgta4qcOBH3cGfeI1pg1FRStMCnuWIbC6Dsx0TqI6owkAHh0sA+1ojFj?=
+ =?us-ascii?Q?TKzJfUmBxSl1bg+JjLqfLvAap70nqS+Vpzd6MIXRF/HX6KshgWgLwc4oku/M?=
+ =?us-ascii?Q?6KW9GR8j01xR3EbSLe3rWCwppG+3GGS9FEDvramNmMf7PhV7VRMuSCORoCuP?=
+ =?us-ascii?Q?H5E8okzNPr/nzGskMVbOD5CaeOYLxkO/rkvuLjici6SBarSVSRLTOxJd4HrS?=
+ =?us-ascii?Q?ADbPhvRE2CvdD9mHyGWKm/Q3AaZK6gZjBmjDlA8HWAjzFIY+AqowCwJ5GpuB?=
+ =?us-ascii?Q?P8RttjDNBkLGTpm9Z18p8ppDBcwtEmYi53/eVCjnTqbwkUOtVwZk6+2CuKqx?=
+ =?us-ascii?Q?cc2F+i/8+fTjvIis4HVp+v2uAhB+FX2+n00Z7h0YR/yjcwW8kdHD?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 951d4835-653b-4b40-954d-08deb237a440
+X-MS-Exchange-CrossTenant-Network-Message-Id: 29718a0d-624e-42b4-f1dd-08deb237a2d1
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:38.2658
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:35.8483
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5b2FR7uXDT2eB2WNVwsnnYxYGQxWxOEYCngAVlM2urrUSxeM/QOoDpk2dhgnOj/49/5dGmkuzqetReOd6nfnJg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: fKmsCdjKJ8vpx90DBOIOfW/OxaAq3UQvlUw2NLGvjh6rHLTKZIyrdWhNugOgiihwwfqFGLUjPgn2q8Qxv135Uw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3682
-X-purgate-ID: tlsNG-c201ff/1778818129-E2997443-C02D1EAF/0/0
+X-purgate-ID: tlsNG-c201ff/1778818124-E0C65443-40950EE5/0/0
 X-purgate-type: clean
-X-purgate-size: 12215
+X-purgate-size: 25164
 
-Add realm=true for Arm guests, reject unsupported combinations, and call
-the CCA finalization domctl after the guest is built.
+Add the RMI_REC_ENTER loop for Realm vCPUs. Handle host events,
+vGIC/timer sync, WFI/WFE, MMIO and PSCI exits.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- docs/man/xl.cfg.5.pod.in         |  46 +++++++++-
- tools/include/libxl.h            |   5 ++
- tools/libs/light/libxl_arm.c     | 140 ++++++++++++++++++++++++++-----
- tools/libs/light/libxl_create.c  |   2 +
- tools/libs/light/libxl_types.idl |   1 +
- tools/xl/xl_parse.c              |   2 +
- 6 files changed, 173 insertions(+), 23 deletions(-)
+ xen/arch/arm/cca/rec.c               | 672 +++++++++++++++++++++++++++
+ xen/arch/arm/domain.c                |   4 +
+ xen/arch/arm/include/asm/arm64/hsr.h |   1 +
+ xen/arch/arm/include/asm/hsr.h       |   4 +
+ 4 files changed, 681 insertions(+)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 2f77016ecfae..7ca7dba4d29d 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -1704,6 +1704,47 @@ i.e. enable grants if backend-domid != 0.
+diff --git a/xen/arch/arm/cca/rec.c b/xen/arch/arm/cca/rec.c
+index 8314a7a45d95..efff7fa48745 100644
+--- a/xen/arch/arm/cca/rec.c
++++ b/xen/arch/arm/cca/rec.c
+@@ -1,14 +1,56 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Dedicated Realm REC execution path for Xen/Arm.
++ *
++ * Key points:
++ * - The Realm executes under RMM. When it accesses emulated devices, the RMM
++ *   causes a REC exit and provides ESR/FAR/HPFAR plus exit metadata in the REC
++ *   exit buffer. With RMI v2.0, vGIC LR state is exchanged through the real
++ *   ICH registers rather than REC run-buffer fields (unlike RMI v1.x).
++ * - Xen bridges such exits into the existing Arm MMIO emulation backend
++ *   (try_handle_mmio_regops), which already services vGIC and other emulated
++ *   devices for non-Realm guests. The emulation reads the guest GPRs and may
++ *   return a value to the guest. We propagate that value back to the RMM on
++ *   the next REC enter using the RMI REC_ENTER flags/gpr0 contract.
++ * - Around REC enter/exit, Xen synchronizes the vGIC directly with the ICH
++ *   registers and feeds the REC exit timer snapshot into Realm-specific
++ *   timer state.
++ */
  
- =back
++#include <xen/bug.h>
++#include <xen/errno.h>
+ #include <xen/lib.h>
+ #include <xen/sched.h>
++#include <xen/softirq.h>
+ #include <xen/timer.h>
+ #include <xen/xmalloc.h>
  
-+=item B<realm=BOOLEAN>
-+
-+B<Arm only.> Create the guest as an Arm CCA Realm guest.
-+
-+Realm guests use the Arm PVH guest model and currently support only a
-+minimal configuration:
-+
-+=over 4
-+
-+=item *
-+
-+type=E<quot>pvhE<quot>
-+
-+=item *
-+
-+guest RAM fully contained within the first guest RAM bank
-+
-+=item *
-+
-+GICv3 only
-+
-+=item *
-+
-+Xen-generated device tree only
-+
-+=item *
-+
-+no passthrough, no virtio, no Xen grant or IOMMU exposure to the guest,
-+and no ACPI
-+
-+=back
-+
-+When B<realm=true>, Realm DTBs set the PSCI method to B<"smc">. They do
-+not expose the Xen hypervisor node because this series does not provide
-+Xen PV interfaces for Realm guests.
-+
-+Realm guests may use B<vuart="sbsa_uart"> only when Xen was built with
-+B<CONFIG_ARM_CCA_REALM_DEBUG_VUART=y>. This is a host-visible clear-text
-+debug console for Realm debug access, not a confidentiality-oriented guest
-+access path.
-+
- =item B<tee="STRING">
+ #include <asm/cca.h>
++#include <asm/current.h>
++#include <asm/domain.h>
++#include <asm/event.h>
++#include <asm/gic.h>
++#include <asm/gic_v3_defs.h>
++#include <asm/hsr.h>
++#include <asm/mm.h>
++#include <asm/mmio.h>
++#include <asm/p2m.h>
++#include <asm/processor.h>
++#include <asm/psci.h>
++#include <asm/sysregs.h>
++#include <asm/system.h>
+ #include <asm/time.h>
+ #include <asm/vgic.h>
  
- B<Arm only.> Set TEE type for the guest. TEE is a Trusted Execution
-@@ -3096,6 +3137,10 @@ vuart = "sbsa_uart"
- 
- Currently, only the "sbsa_uart" model is supported for ARM.
- 
-+For Realm guests, B<vuart="sbsa_uart"> is supported with the same device
-+model only when B<CONFIG_ARM_CCA_REALM_DEBUG_VUART=y>. The guest kernel should
-+use C<ttyAMA0>.
++#include <public/sched.h>
 +
- =back
- 
- =over 4
-@@ -3249,4 +3294,3 @@ documentation. Patches to improve incomplete items (or any other item)
- are gratefully received on the xen-devel@lists.xenproject.org mailing
- list. Please see L<https://wiki.xenproject.org/wiki/Submitting_Xen_Project_Patches> for
- information on how to submit a patch to Xen.
--
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 7c098edab663..9b9398401029 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -293,6 +293,11 @@
-  */
- #define LIBXL_HAVE_BUILDINFO_ARM_GIC_VERSION 1
++#include "rmi.h"
++
++struct arm_cca_mmio_ctxt {
++    const struct arm_cca_rmi_rec_exit *exit;
++    register_t result;
++};
++
+ struct arm_cca_timer {
+     struct vcpu *v;
+     unsigned int irq;
+@@ -23,6 +65,13 @@ struct arm_cca_vcpu_timers {
+     struct timer wfx;
+ };
  
 +/*
-+ * libxl_domain_build_info has the realm field.
++ * Keep Realm guests on the GICv3 sysreg CPU interface. This vGIC path has no
++ * IRQ/FIQ bypass, so ICC_SRE_EL1 is exposed as a fixed SRE|DFB|DIB value.
 + */
-+#define LIBXL_HAVE_BUILDINFO_ARM_REALM 1
++#define ARM_CCA_ICC_SRE_EL1_VALUE \
++    (GICC_SRE_EL2_SRE | GICC_SRE_EL2_DFB | GICC_SRE_EL2_DIB)
 +
- /*
-  * libxl_domain_build_info has the arch_arm.tee field.
-  */
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 7e9f8a1bc366..fa13703bb98b 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -80,6 +80,70 @@ static const char *gicv_to_string(libxl_gic_version gic_version)
-     }
- }
- 
-+static bool arm_guest_is_realm(const libxl_domain_build_info *info)
-+{
-+    return libxl_defbool_val(info->realm);
-+}
-+
-+static int arm_realm_reject(libxl__gc *gc, const char *what)
-+{
-+    LOG(ERROR, "Realm guests do not support %s", what);
-+    return ERROR_INVAL;
-+}
-+
-+static int arm_realm_check_config(libxl__gc *gc,
-+                                  const libxl_domain_config *d_config)
-+{
-+    const libxl_domain_build_info *const info = &d_config->b_info;
-+    const uint64_t bank0_memkb = GUEST_RAM0_SIZE >> 10;
-+
-+    if ( !arm_guest_is_realm(info) )
-+        return 0;
-+
-+    if ( info->type != LIBXL_DOMAIN_TYPE_PVH )
-+        return arm_realm_reject(gc, "non-PVH build types");
-+
-+    if ( info->target_memkb > bank0_memkb || info->max_memkb > bank0_memkb )
-+        return arm_realm_reject(gc, "guest RAM beyond the first RAM bank");
-+
-+    if ( info->device_tree )
-+        return arm_realm_reject(gc, "partial device trees");
-+
-+    if ( libxl_defbool_val(info->acpi) )
-+        return arm_realm_reject(gc, "ACPI");
-+
-+    if ( info->arch_arm.gic_version != LIBXL_GIC_VERSION_V3 )
-+        return arm_realm_reject(gc, "non-GICv3 interrupt controllers");
-+
-+    if ( info->tee != LIBXL_TEE_TYPE_NONE )
-+        return arm_realm_reject(gc, "TEE/FF-A plumbing");
-+
-+    if ( info->num_irqs || info->num_iomem )
-+        return arm_realm_reject(gc, "IRQ/IOMEM passthrough");
-+
-+    if ( info->num_vnuma_nodes )
-+        return arm_realm_reject(gc, "vNUMA");
-+
-+    if ( d_config->c_info.passthrough != LIBXL_PASSTHROUGH_DISABLED )
-+        return arm_realm_reject(gc, "passthrough mode");
-+
-+    if ( d_config->num_pcidevs || d_config->num_dtdevs )
-+        return arm_realm_reject(gc, "passthrough devices");
-+
-+    if ( d_config->num_disks || d_config->num_nics ||
-+         d_config->num_virtios || d_config->num_vkbs ||
-+         d_config->num_p9s || d_config->num_pvcallsifs )
-+        return arm_realm_reject(gc, "frontend/backend devices");
-+
-+    if ( d_config->num_vtpms || d_config->num_vfbs ||
-+         d_config->num_vdispls || d_config->num_vsnds ||
-+         d_config->num_channels || d_config->num_usbctrls ||
-+         d_config->num_usbdevs )
-+        return arm_realm_reject(gc, "auxiliary frontend devices");
-+
-+    return 0;
-+}
-+
- int libxl__arch_domain_prepare_config(libxl__gc *gc,
-                                       libxl_domain_config *d_config,
-                                       struct xen_domctl_createdomain *config)
-@@ -92,6 +156,10 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     uint32_t virtio_mmio_irq = GUEST_VIRTIO_MMIO_SPI_FIRST;
-     int rc;
- 
-+    rc = arm_realm_check_config(gc, d_config);
-+    if ( rc )
-+        return rc;
-+
-     /*
-      * If pl011 vuart is enabled then increment the nr_spis to allow allocation
-      * of SPI VIRQ for pl011.
-@@ -617,7 +685,7 @@ static int make_cpus_node(libxl__gc *gc, void *fdt, int nr_cpus,
-     return 0;
- }
- 
--static int make_psci_node(libxl__gc *gc, void *fdt)
-+static int make_psci_node(libxl__gc *gc, void *fdt, bool realm)
+ static void arm_cca_timer_update_irq(struct arm_cca_timer *timer)
  {
-     int res;
- 
-@@ -628,7 +696,7 @@ static int make_psci_node(libxl__gc *gc, void *fdt)
-                               "arm,psci-0.2", "arm,psci");
-     if (res) return res;
- 
--    res = fdt_property_string(fdt, "method", "hvc");
-+    res = fdt_property_string(fdt, "method", realm ? "smc" : "hvc");
-     if (res) return res;
- 
-     res = fdt_property_cell(fdt, "cpu_off", PSCI_cpu_off);
-@@ -1363,7 +1431,7 @@ next_resize:
-         FDT( make_root_properties(gc, vers, fdt) );
-         FDT( make_chosen_node(gc, fdt, !!dom->modules[0].blob, state, info) );
-         FDT( make_cpus_node(gc, fdt, info->max_vcpus, ainfo) );
--        FDT( make_psci_node(gc, fdt) );
-+        FDT( make_psci_node(gc, fdt, arm_guest_is_realm(info)) );
- 
-         FDT( make_memory_nodes(gc, fdt, dom) );
- 
-@@ -1384,7 +1452,13 @@ next_resize:
-         }
- 
-         FDT( make_timer_node(gc, fdt, ainfo, state->clock_frequency) );
--        FDT( make_hypervisor_node(gc, fdt, vers) );
-+        /*
-+         * Common domain creation may still allocate grant-table resources,
-+         * but this is the guest-visible path to them. Realm guests
-+         * deliberately omit Xen PV interfaces, including grant-table space.
-+         */
-+        if (!arm_guest_is_realm(info))
-+            FDT( make_hypervisor_node(gc, fdt, vers) );
- 
-         if (info->arch_arm.vuart == LIBXL_VUART_TYPE_SBSA_UART)
-             FDT( make_vpl011_uart_node(gc, fdt, ainfo, dom) );
-@@ -1427,7 +1501,7 @@ next_resize:
-          * The iommu node should be created only once for all virtio-mmio
-          * devices.
-          */
--        if (iommu_needed)
-+        if (iommu_needed && !arm_guest_is_realm(info))
-             FDT( make_xen_iommu_node(gc, fdt) );
- 
-         if (pfdt)
-@@ -1559,6 +1633,9 @@ static int finalize_hypervisor_node(libxl__gc *gc,
-     libxl_dominfo info;
-     int offset, rc;
- 
-+    if ( arm_guest_is_realm(b_info) )
-+        return 0;
-+
-     offset = fdt_path_offset(fdt, "/hypervisor");
-     if (offset < 0)
-         return offset;
-@@ -1732,31 +1809,50 @@ int libxl__arch_domain_finalise_hw_description(libxl__gc *gc,
-     return 0;
+     register_t ctl = timer->ctl;
+@@ -88,3 +137,626 @@ void arm_cca_vcpu_timer_destroy(struct vcpu *v)
+     kill_timer(&timers->wfx);
+     XFREE(v->arch.cca.timers);
  }
- 
-+static int arm_realm_finalize_guest(libxl__gc *gc, struct xc_dom_image *dom)
++
++static void arm_cca_timer_program(struct arm_cca_timer *timer)
 +{
++    s_time_t expires;
++
++    migrate_timer(&timer->timer, timer->v->processor);
++
++    if ( timer->ctl & CNTx_CTL_ENABLE )
++    {
++        expires = (timer->cval > boot_count)
++                  ? ticks_to_ns(timer->cval - boot_count)
++                  : 0;
++        set_timer(&timer->timer, expires);
++    }
++    else
++        stop_timer(&timer->timer);
++}
++
++static void arm_cca_timer_sync(struct arm_cca_timer *timer,
++                               register_t ctl, uint64_t cval)
++{
++    timer->ctl = ctl;
++    timer->cval = cval;
++
++    arm_cca_timer_program(timer);
++    arm_cca_timer_update_irq(timer);
++}
++
++static register_t arm_cca_mmio_read_reg(void *ctxt, int reg)
++{
++    struct arm_cca_mmio_ctxt *mmio = ctxt;
++
++    /*
++     * This callback is used only when Xen's MMIO core emulates a write and
++     * asks for the store data.  For a Realm emulatable Data Abort, the RMM ABI
++     * does not provide a full guest GPR file indexed by ESR_EL2.ISS.SRT.
++     * Instead, the write data is provided in run.exit.gprs[0].
++     *
++     * For an emulated read, arm_cca_mmio_write_reg() below captures the value
++     * produced by the device model and arm_cca_set_mmio_result() returns it to
++     * the RMM in run.enter.gprs[0].  The RMM then writes it back to the
++     * faulting guest register selected by ESR_EL2.ISS.SRT.
++     */
++    return mmio->exit->gprs[0];
++}
++
++static void arm_cca_mmio_write_reg(void *ctxt, int reg, register_t value)
++{
++    struct arm_cca_mmio_ctxt *mmio = ctxt;
++
++    mmio->result = value;
++}
++
++static const struct mmio_regops arm_cca_mmio_regops = {
++    .read = arm_cca_mmio_read_reg,
++    .write = arm_cca_mmio_write_reg,
++};
++
++static void check_for_pcpu_work(void)
++{
++    ASSERT(!local_irq_is_enabled());
++
++    while ( softirq_pending(smp_processor_id()) )
++    {
++        local_irq_enable();
++        do_softirq();
++        local_irq_disable();
++    }
++}
++
++static void arm_cca_service_host_events(void)
++{
++    ASSERT(!local_irq_is_enabled());
++
++    local_irq_enable();
++    local_irq_disable();
++    check_for_pcpu_work();
++}
++
++static void arm_cca_check_for_vcpu_work(struct vcpu *v)
++{
++    if ( likely(!v->arch.need_flush_to_ram) )
++        return;
++
++    check_for_pcpu_work();
++
++    local_irq_enable();
++    p2m_flush_vm(v);
++    local_irq_disable();
++}
++
++static void noreturn arm_cca_wait_forever(struct vcpu *v)
++{
++    for ( ; ; )
++    {
++        /* Scheduler helpers expect local IRQs enabled when taking locks */
++        local_irq_enable();
++        vcpu_block();
++        local_irq_disable();
++        arm_cca_service_host_events();
++    }
++}
++
++static void arm_cca_wait_until_online(struct vcpu *v)
++{
++    while ( test_bit(_VPF_down, &v->pause_flags) )
++    {
++        /* Scheduler helpers expect local IRQs enabled when taking locks */
++        local_irq_enable();
++        vcpu_block();
++        local_irq_disable();
++        arm_cca_service_host_events();
++    }
++}
++
++static bool arm_cca_wfxt_expired(register_t timeout)
++{
++    return (int64_t)(get_cycles() - timeout) >= 0;
++}
++
++static void arm_cca_wait_until_wfxt_timeout(struct vcpu *v,
++                                            register_t timeout)
++{
++    s_time_t expires;
++
++    ASSERT(!local_irq_is_enabled());
++
++    if ( arm_cca_wfxt_expired(timeout) )
++        return;
++
++    expires = (timeout > boot_count) ? ticks_to_ns(timeout - boot_count) : 0;
++
++    set_bit(_VPF_blocked, &v->pause_flags);
++    smp_mb__after_atomic();
++
++    arch_vcpu_block(v);
++
++    if ( local_events_need_delivery_nomask() || arm_cca_wfxt_expired(timeout) )
++    {
++        clear_bit(_VPF_blocked, &v->pause_flags);
++        return;
++    }
++
++    migrate_timer(&v->arch.cca.timers->wfx, v->processor);
++    set_timer(&v->arch.cca.timers->wfx, expires);
++
++    raise_softirq(SCHEDULE_SOFTIRQ);
++
++    /* Let the scheduler softirq run while the WFxT timer can unblock us. */
++    local_irq_enable();
++    local_irq_disable();
++
++    stop_timer(&v->arch.cca.timers->wfx);
++    arm_cca_service_host_events();
++}
++
++static void noreturn arm_cca_domain_crash(struct vcpu *v)
++{
++    domain_crash(v->domain);
++    arm_cca_wait_forever(v);
++}
++
++/* DEN0137 2.0-bet1 - D1.6.1 Interrupt flow. */
++static void arm_cca_prepare_rec_enter(struct arm_cca_rmi_rec_run *run,
++                                      unsigned long entry_flags,
++                                      const register_t *entry_gprs)
++{
++    register_t hcr;
++
++    memset(&run->enter, 0, sizeof(run->enter));
++    run->enter.flags = entry_flags;
++    memcpy(run->enter.gprs, entry_gprs, sizeof(run->enter.gprs));
++
++    /*
++     * RMI v2.0 removes the run-buffer GIC fields. The RMM validates and
++     * consumes the real ICH_LR<n>_EL2 state left by the Host, so flush Xen's
++     * vGIC model directly into hardware before REC_ENTER.
++     */
++    vgic_sync_to_lrs();
++
++    /*
++     * DEN0137 A6.1 requires ICH_HCR_EL2.En to be clear on REC exit. Re-enable
++     * the virtual CPU interface for the next Realm entry while preserving the
++     * rest of the GIC CPU interface state carried in ICH_HCR_EL2.
++     */
++    hcr = READ_SYSREG(ICH_HCR_EL2);
++    WRITE_SYSREG(hcr | GICH_HCR_EN, ICH_HCR_EL2);
++    isb();
++}
++
++/* DEN0137 2.0-bet1 - D1.6.1 Interrupt flow. */
++static void arm_cca_sync_vgic_exit(struct vcpu *v)
++{
++    /*
++     * In RMI v2.0 the RMM leaves the GIC owner Plane state in the hardware
++     * ICH registers on REC exit. Consume it directly through Xen's generic
++     * vGIC LR sync path.
++     */
++    isb();
++    vgic_sync_from_lrs(v);
++}
++
++/*
++ * DEN0137 2.0-bet1 - D1.6.2 Timer interrupt delivery flow.
++ * Keep the REC exit timer snapshot in Realm-specific state.  The normal
++ * v->arch.{phys,virt}_timer state is tied to non-Realm EL1 context switch
++ * save/restore and must not be overwritten with RMM-owned timer state.
++ */
++static void arm_cca_sync_rec_exit(struct vcpu *v,
++                                  const struct arm_cca_rmi_rec_exit *exit)
++{
++    arm_cca_sync_vgic_exit(v);
++    arm_cca_timer_sync(&v->arch.cca.timers->phys,
++                       exit->cntp_ctl, exit->cntp_cval);
++    arm_cca_timer_sync(&v->arch.cca.timers->virt,
++                       exit->cntv_ctl, exit->cntv_cval);
++}
++
++static paddr_t arm_cca_mmio_lookup_gpa(paddr_t ipa)
++{
++    /*
++     * Realm creation currently sets RmiRealmParams::s2sz to p2m_ipa_bits.
++     * Use the Realm's own s2sz here if that becomes per-domain later.
++     */
++    unsigned int ipa_bits = p2m_ipa_bits;
++    paddr_t mask;
++    paddr_t prot_bit;
++
++    if ( ipa_bits == 0 || ipa_bits > sizeof(paddr_t) * 8 )
++        return ipa;
++
++    mask = GENMASK_ULL(ipa_bits - 1, 0);
++
++    ipa &= mask;
++
++    /*
++     * DEN0137 2.0-bet1 - A5.2.1 Realm IPA space and D2.1 Realm shared
++     * memory protocol description.
++     *
++     * RMM reports the IPA which caused the REC exit.  In Realm IPA
++     * space, bit[s2sz - 1] is the protection attribute; if it is set,
++     * the access is to the Unprotected alias.  Xen's MMIO handlers are
++     * registered against the ordinary guest physical address, so use the
++     * lower alias as the lookup key rather than retrying after failure.
++     */
++    prot_bit = (paddr_t)1 << (ipa_bits - 1);
++    if ( ipa & prot_bit )
++    {
++        ipa &= ~prot_bit;
++    }
++
++    return ipa;
++}
++
++static void arm_cca_set_mmio_result(unsigned long *entry_flags,
++                                    register_t *entry_gprs,
++                                    register_t value)
++{
++    *entry_flags |= ARM_CCA_RMI_REC_ENTER_FLAG_EMUL_MMIO;
++    entry_gprs[0] = value;
++}
++
++static void arm_cca_request_sea(unsigned long *entry_flags,
++                                register_t *entry_gprs)
++{
++    *entry_flags |= ARM_CCA_RMI_REC_ENTER_FLAG_INJECT_SEA;
++    entry_gprs[0] = 0;
++}
++
++static bool
++arm_cca_rec_enter_failed_after_shutdown(const struct vcpu *v,
++                                        const struct arm_smccc_res *res)
++{
++    return v->domain->is_shutting_down &&
++           arm_cca_rmi_status_is(arm_cca_rmi_result(res),
++                                 ARM_CCA_RMI_ERROR_REALM);
++}
++
++/* DEN0137 2.0-bet1 - D1.3.4 MMIO emulation flow. */
++static void arm_cca_handle_mmio(struct vcpu *v,
++                                const struct arm_cca_rmi_rec_exit *exit,
++                                unsigned long *entry_flags,
++                                register_t *entry_gprs)
++{
++    union hsr hsr = { .bits = exit->esr };
++    paddr_t raw_gpa = ((paddr_t)(exit->hpfar & HPFAR_MASK) << (12 - 4)) |
++                      (exit->far & ~PAGE_MASK);
++    mmio_info_t info = {
++        .dabt = hsr.dabt,
++        .gpa = raw_gpa,
++    };
++    struct arm_cca_mmio_ctxt ctxt = {
++        .exit = exit,
++        .result = 0,
++    };
++    enum io_state state;
++
++    if ( !hsr.dabt.valid )
++    {
++        gprintk(XENLOG_INFO,
++                "ARM CCA: MMIO abort without valid syndrome esr=%#lx far=%#llx hpfar=%#llx\n",
++                exit->esr,
++                (unsigned long long)exit->far,
++                (unsigned long long)exit->hpfar);
++        arm_cca_request_sea(entry_flags, entry_gprs);
++        return;
++    }
++
++    info.dabt_instr.state = INSTR_VALID;
++    info.gpa = arm_cca_mmio_lookup_gpa(raw_gpa);
++
++    state = try_handle_mmio_regops(v, &info, &arm_cca_mmio_regops, &ctxt);
++
++    if ( state == IO_HANDLED )
++    {
++        arm_cca_set_mmio_result(entry_flags, entry_gprs, ctxt.result);
++    }
++    else
++    {
++        gprintk(XENLOG_INFO,
++                "ARM CCA: MMIO emulation failed state=%d raw_gpa=%#llx gpa=%#llx esr=%#lx\n",
++                state,
++                (unsigned long long)raw_gpa,
++                (unsigned long long)info.gpa,
++                exit->esr);
++        arm_cca_request_sea(entry_flags, entry_gprs);
++    }
++}
++
++/*
++ * DEN0137 2.0-bet1 - D1.4.1 PSCI_CPU_ON flow.
++ * Xen reuses the same completion hook for related PSCI exits.
++ */
++static void
++arm_cca_handle_psci_complete(struct vcpu *v,
++                             const struct arm_cca_rmi_rec_exit *exit)
++{
++    unsigned int target = vaffinity_to_vcpuid(exit->gprs[1]);
++    struct vcpu *target_vcpu;
++    struct arm_smccc_res res;
++    bool wake = false;
 +    int rc;
 +
-+    if (dom->rambank_size[1] != 0) {
-+        LOG(ERROR, "Realm guests must fit entirely within the first RAM bank");
-+        return ERROR_INVAL;
++    if ( target >= v->domain->max_vcpus )
++    {
++        gprintk(XENLOG_ERR, "ARM CCA: invalid PSCI target vCPU %u\n",
++                target);
++        arm_cca_domain_crash(v);
 +    }
 +
-+    rc = xc_arm_cca_init_realm(CTX->xch, dom->guest_domid,
-+                               GUEST_RAM_BASE >> XC_PAGE_SHIFT,
-+                               dom->rambank_size[0]);
-+    if (rc < 0) {
-+        LOGE(ERROR, "xc_arm_cca_init_realm failed");
-+        return ERROR_FAIL;
++    target_vcpu = v->domain->vcpu[target];
++    if ( target_vcpu == NULL || target_vcpu->arch.cca.rec == INVALID_PADDR )
++    {
++        gprintk(XENLOG_ERR,
++                "ARM CCA: missing target REC for PSCI target vCPU %u\n",
++                target);
++        arm_cca_domain_crash(v);
 +    }
 +
-+    return 0;
++    rc = arm_cca_rmi_psci_complete(v->arch.cca.rec, target_vcpu->arch.cca.rec,
++                                   PSCI_SUCCESS, &res);
++    if ( rc != 0 )
++    {
++        gprintk(XENLOG_ERR,
++                "ARM CCA: RMI_PSCI_COMPLETE failed status=%#x data=%#lx\n",
++                arm_cca_rmi_status_code(arm_cca_rmi_result(&res)),
++                (unsigned long)arm_cca_rmi_result_data(
++                    arm_cca_rmi_result(&res)));
++        arm_cca_domain_crash(v);
++    }
++
++    if ( exit->gprs[0] == PSCI_0_2_FN32_CPU_ON ||
++         exit->gprs[0] == PSCI_0_2_FN64_CPU_ON )
++    {
++        wake = test_and_clear_bit(_VPF_down, &target_vcpu->pause_flags);
++        if ( wake )
++            vcpu_wake(target_vcpu);
++    }
 +}
 +
- int libxl__arch_build_dom_finish(libxl__gc *gc,
-                                  libxl_domain_build_info *info,
-                                  struct xc_dom_image *dom,
-                                  libxl__domain_build_state *state)
- {
--    int rc = 0, ret;
--
--    if (info->arch_arm.vuart != LIBXL_VUART_TYPE_SBSA_UART) {
--        rc = 0;
--        goto out;
-+    int ret;
++static void arm_cca_handle_psci_exit(struct vcpu *v,
++                                     const struct arm_cca_rmi_rec_exit *exit)
++{
++    switch ( exit->gprs[0] )
++    {
++    case PSCI_0_2_FN32_CPU_SUSPEND:
++    case PSCI_0_2_FN64_CPU_SUSPEND:
++        /* Scheduler helpers expect local IRQs enabled when taking locks */
++        local_irq_enable();
++        vcpu_block_unless_event_pending(v);
++        local_irq_disable();
++        arm_cca_service_host_events();
++        break;
 +
-+    if (info->arch_arm.vuart == LIBXL_VUART_TYPE_SBSA_UART) {
-+        ret = xc_dom_vuart_init(CTX->xch,
-+                                XEN_DOMCTL_VUART_TYPE_VPL011,
-+                                dom->guest_domid,
-+                                dom->console_domid,
-+                                dom->vuart_gfn,
-+                                &state->vuart_port);
-+        if (ret < 0) {
-+            LOG(ERROR, "xc_dom_vuart_init failed\n");
-+            return ERROR_FAIL;
++    case PSCI_0_2_FN32_CPU_OFF:
++        if ( !test_and_set_bit(_VPF_down, &v->pause_flags) )
++            vcpu_sleep_nosync(v);
++        arm_cca_wait_until_online(v);
++        break;
++
++    case PSCI_0_2_FN32_CPU_ON:
++    case PSCI_0_2_FN64_CPU_ON:
++    case PSCI_0_2_FN32_AFFINITY_INFO:
++    case PSCI_0_2_FN64_AFFINITY_INFO:
++        arm_cca_handle_psci_complete(v, exit);
++        break;
++
++    case PSCI_0_2_FN32_SYSTEM_OFF:
++        domain_shutdown(v->domain, SHUTDOWN_poweroff);
++        arm_cca_wait_forever(v);
++
++    case PSCI_0_2_FN32_SYSTEM_RESET:
++        domain_shutdown(v->domain, SHUTDOWN_reboot);
++        arm_cca_wait_forever(v);
++
++    default:
++        gprintk(XENLOG_ERR,
++                "ARM CCA: unsupported PSCI exit fid=%#lx\n",
++                exit->gprs[0]);
++        arm_cca_domain_crash(v);
++    }
++}
++
++
++/*
++ * DEN0137 2.0-bet1 - D1.3.3 REC exit due to Data Abort fault flow.
++ */
++static void arm_cca_handle_sync_exit(struct vcpu *v,
++                                     const struct arm_cca_rmi_rec_exit *exit,
++                                     unsigned long *entry_flags,
++                                     register_t *entry_gprs)
++{
++    union hsr hsr = { .bits = exit->esr };
++
++    switch ( hsr.ec )
++    {
++    case HSR_EC_WFI_WFE:
++        /*
++         * DEN0137 2.0-bet1 - A4.3.4.1 REC exit due to WFI or WFE.
++         * WFET/WFIT exits provide the timeout value in rec_exit.gprs[0].
++         * Treat a non-zero timeout as authoritative because the same section
++         * only guarantees ESR.ISS.TI for this exit class.
++         */
++        if ( (hsr.bits & HSR_WFI_WFE_WFXT) || exit->gprs[0] )
++        {
++            arm_cca_wait_until_wfxt_timeout(v, exit->gprs[0]);
++            break;
 +        }
-     }
- 
--    ret = xc_dom_vuart_init(CTX->xch,
--                            XEN_DOMCTL_VUART_TYPE_VPL011,
--                            dom->guest_domid,
--                            dom->console_domid,
--                            dom->vuart_gfn,
--                            &state->vuart_port);
--    if (ret < 0) {
--        rc = ERROR_FAIL;
--        LOG(ERROR, "xc_dom_vuart_init failed\n");
--    }
-+    if (arm_guest_is_realm(info))
-+        return arm_realm_finalize_guest(gc, dom);
- 
--out:
--    return rc;
-+    return 0;
- }
- 
- int libxl__arch_vnuma_build_vmemrange(libxl__gc *gc,
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index bfc9149096a3..1401697ab1d4 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -407,6 +407,8 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
-         libxl_defbool_setdefault(&b_info->nested_hvm,               false);
-     }
- 
-+    libxl_defbool_setdefault(&b_info->realm, false);
 +
-     if (b_info->max_grant_version == LIBXL_MAX_GRANT_DEFAULT) {
-         if (info.cap_gnttab_v2)
-             b_info->max_grant_version = 2;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index a7893460f013..d2fa3535ab18 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -657,6 +657,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     ("apic",             libxl_defbool),
-     ("dm_restrict",      libxl_defbool),
-     ("tee",              libxl_tee_type),
-+    ("realm",            libxl_defbool),
-     ("u", KeyedUnion(None, libxl_domain_type, "type",
-                 [("hvm", Struct(None, [("firmware",         string),
-                                        ("bios",             libxl_bios_type),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 48c72dce9c6d..742c203a0326 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -3058,6 +3058,8 @@ skip_usbdev:
-         }
-     }
- 
-+    xlu_cfg_get_defbool(config, "realm", &b_info->realm, 0);
++        /* Scheduler helpers expect local IRQs enabled when taking locks */
++        local_irq_enable();
++        if ( hsr.bits & HSR_WFI_WFE_WFE )
++            vcpu_yield();
++        else
++            vcpu_block_unless_event_pending(v);
 +
-     if (!xlu_cfg_get_string (config, "sve", &buf, 1)) {
-         e = libxl_sve_type_from_string(buf, &b_info->arch_arm.sve_vl);
-         if (e) {
++        local_irq_disable();
++        arm_cca_service_host_events();
++        break;
++
++    case HSR_EC_DATA_ABORT_LOWER_EL:
++        /* vGIC MMIO paths expect local IRQs enabled for spin_lock_irq */
++        local_irq_enable();
++        arm_cca_handle_mmio(v, exit, entry_flags, entry_gprs);
++        local_irq_disable();
++        break;
++
++    default:
++        gprintk(XENLOG_ERR,
++                "ARM CCA: unsupported REC sync exit ec=%#x esr=%#lx\n",
++                hsr.ec, exit->esr);
++        arm_cca_domain_crash(v);
++    }
++}
++
++/* DEN0137 2.0-bet1 - D1.3.1 Realm entry and exit flow. */
++void noreturn arm_cca_vcpu_run(struct vcpu *v)
++{
++    struct arm_cca_rmi_rec_run *run;
++    struct arm_smccc_res res;
++    unsigned long entry_flags;
++    register_t entry_gprs[ARM_CCA_RMI_REC_NR_GPRS];
++    int rc;
++
++    ASSERT(v == current);
++    ASSERT(!is_idle_vcpu(v));
++
++    if ( !is_vcpu_realm(v) )
++    {
++        gprintk(XENLOG_ERR,
++                "ARM CCA: entered Realm run loop for non-Realm vCPU\n");
++        arm_cca_domain_crash(v);
++    }
++
++    if ( v->domain->arch.vgic.version != GIC_V3 )
++    {
++        gprintk(XENLOG_ERR,
++                "ARM CCA: only GICv3 Realms are supported\n");
++        arm_cca_domain_crash(v);
++    }
++
++    if ( v->arch.cca.run == NULL || v->arch.cca.timers == NULL ||
++         v->arch.cca.run_pa == INVALID_PADDR )
++    {
++        gprintk(XENLOG_ERR,
++                "ARM CCA: REC runtime state is not bound\n");
++        arm_cca_domain_crash(v);
++    }
++
++    if ( v->arch.cca.rec == INVALID_PADDR )
++    {
++        gprintk(XENLOG_ERR, "ARM CCA: REC is not bound\n");
++        arm_cca_domain_crash(v);
++    }
++
++    run = v->arch.cca.run;
++    entry_flags = ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFI |
++                  ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFE;
++    memset(entry_gprs, 0, sizeof(entry_gprs));
++
++    local_irq_disable();
++    for ( ; ; )
++    {
++        arm_cca_check_for_vcpu_work(v);
++        arm_cca_service_host_events();
++
++        arm_cca_prepare_rec_enter(run, entry_flags, entry_gprs);
++        entry_flags = ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFI |
++                      ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFE;
++        memset(entry_gprs, 0, sizeof(entry_gprs));
++        rc = arm_cca_rmi_rec_enter(v->arch.cca.rec, v->arch.cca.run_pa, &res);
++        if ( rc != 0 )
++        {
++            if ( arm_cca_rec_enter_failed_after_shutdown(v, &res) )
++            {
++                gprintk(XENLOG_INFO,
++                        "ARM CCA: Realm domain is shutting down; "
++                        "stopping vCPU\n");
++                arm_cca_wait_forever(v);
++            }
++
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: RMI_REC_ENTER failed status=%#x data=%#lx\n",
++                    arm_cca_rmi_status_code(arm_cca_rmi_result(&res)),
++                    (unsigned long)arm_cca_rmi_result_data(
++                        arm_cca_rmi_result(&res)));
++            arm_cca_domain_crash(v);
++        }
++
++        arm_cca_sync_rec_exit(v, &run->exit);
++
++        switch ( run->exit.exit_reason )
++        {
++        case ARM_CCA_RMI_EXIT_IRQ:
++        case ARM_CCA_RMI_EXIT_FIQ:
++            arm_cca_service_host_events();
++            break;
++
++        case ARM_CCA_RMI_EXIT_PSCI:
++            arm_cca_handle_psci_exit(v, &run->exit);
++            break;
++
++        case ARM_CCA_RMI_EXIT_RIPAS_CHANGE:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: RIPAS change exits are unsupported\n");
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_SYNC:
++            arm_cca_handle_sync_exit(v, &run->exit, &entry_flags,
++                                     entry_gprs);
++            break;
++
++        case ARM_CCA_RMI_EXIT_HOST_CALL:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: Host call exits are unsupported (imm=%#x)\n",
++                    (unsigned int)run->exit.imm);
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_SERROR:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: SError exit from Realm REC\n");
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_S2AP_CHANGE:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: S2AP change exits are unsupported "
++                    "range=%#lx-%#lx\n",
++                    (unsigned long)run->exit.s2ap_base,
++                    (unsigned long)run->exit.s2ap_top);
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_VDEV_REQUEST:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: VDEV request exits are unsupported "
++                    "id=%#lx:%#lx\n",
++                    (unsigned long)run->exit.vdev_id_1,
++                    (unsigned long)run->exit.vdev_id_2);
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_VDEV_VALIDATE_MAPPING:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: VDEV mapping validation exits are unsupported "
++                    "range=%#lx-%#lx pa=%#lx\n",
++                    (unsigned long)run->exit.dev_mem_base,
++                    (unsigned long)run->exit.dev_mem_top,
++                    (unsigned long)run->exit.dev_mem_pa);
++            arm_cca_domain_crash(v);
++
++        case ARM_CCA_RMI_EXIT_VSMMU_COMMAND:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: VSMMU command exits are unsupported "
++                    "vsmmu=%#lx\n",
++                    (unsigned long)run->exit.vsmmu);
++            arm_cca_domain_crash(v);
++
++        default:
++            gprintk(XENLOG_ERR,
++                    "ARM CCA: unknown REC exit reason %#x\n",
++                    (unsigned int)run->exit.exit_reason);
++            arm_cca_domain_crash(v);
++        }
++    }
++}
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index d2ee90248a44..c8330e7c969c 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -302,6 +302,10 @@ static void noreturn continue_new_vcpu(struct vcpu *prev)
+ 
+     if ( is_idle_vcpu(current) )
+         reset_stack_and_jump(idle_loop);
++#ifdef CONFIG_ARM_CCA
++    else if ( is_vcpu_realm(current) )
++        arm_cca_vcpu_run(current);
++#endif
+     else if ( is_32bit_domain(current->domain) )
+         /* check_wakeup_from_wait(); */
+         reset_stack_and_jump(return_to_new_vcpu32);
+diff --git a/xen/arch/arm/include/asm/arm64/hsr.h b/xen/arch/arm/include/asm/arm64/hsr.h
+index 1495ccddeab6..7cdddd6ae903 100644
+--- a/xen/arch/arm/include/asm/arm64/hsr.h
++++ b/xen/arch/arm/include/asm/arm64/hsr.h
+@@ -86,6 +86,7 @@
+ #define HSR_SYSREG_PMINTENCLR_EL1 HSR_SYSREG(3,0,c9,c14,2)
+ #define HSR_SYSREG_MAIR_EL1       HSR_SYSREG(3,0,c10,c2,0)
+ #define HSR_SYSREG_AMAIR_EL1      HSR_SYSREG(3,0,c10,c3,0)
++#define HSR_SYSREG_ICC_DIR_EL1    HSR_SYSREG(3,0,c12,c11,1)
+ #define HSR_SYSREG_ICC_SGI1R_EL1  HSR_SYSREG(3,0,c12,c11,5)
+ #define HSR_SYSREG_ICC_ASGI1R_EL1 HSR_SYSREG(3,1,c12,c11,6)
+ #define HSR_SYSREG_ICC_SGI0R_EL1  HSR_SYSREG(3,2,c12,c11,7)
+diff --git a/xen/arch/arm/include/asm/hsr.h b/xen/arch/arm/include/asm/hsr.h
+index 9b91b28c48e3..29a91bf866f1 100644
+--- a/xen/arch/arm/include/asm/hsr.h
++++ b/xen/arch/arm/include/asm/hsr.h
+@@ -168,6 +168,10 @@ union hsr {
+ #endif
+ };
+ 
++/* HSR.EC == HSR_EC_WFI_WFE */
++#define HSR_WFI_WFE_WFE    (_AC(1, UL) << 0)
++#define HSR_WFI_WFE_WFXT   (_AC(1, UL) << 1)
++
+ /* HSR.EC == HSR_CP{15,14,10}_32 */
+ #define HSR_CP32_OP2_MASK (0x000e0000)
+ #define HSR_CP32_OP2_SHIFT (17)
 -- 
 2.51.0
 
