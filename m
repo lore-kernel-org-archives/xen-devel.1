@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75EE1CD343F
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:11:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309423.1580474 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EAADCD343F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:11:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309432.1580510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjtp-0000cr-Kz; Fri, 15 May 2026 04:11:45 +0000
+	id 1wNjtt-0001c4-VT; Fri, 15 May 2026 04:11:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309423.1580474; Fri, 15 May 2026 04:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 1309432.1580510; Fri, 15 May 2026 04:11:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjtp-0000ck-II; Fri, 15 May 2026 04:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 1309423;
- Fri, 15 May 2026 04:11:43 +0000
+	id 1wNjtt-0001bm-Qd; Fri, 15 May 2026 04:11:49 +0000
+Received: by outflank-mailman (input) for mailman id 1309432;
+ Fri, 15 May 2026 04:11:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjtn-0000aU-EI
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:11:43 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjtr-0001A8-Pz
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:11:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjtm-0052Iz-Qq
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:11:42 +0200
+ id 1wNjtr-0052Iz-6G
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:11:47 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069cda-e002-0a2a0a5209dd-0a2a4505a2ee-12
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:11:42 +0200
+ id 6a069cda-e002-0a2a0a5209dd-0a2a4505a2ee-22
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:11:47 +0200
 Received: from [52.101.125.85]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c47-aaa8-0a2a45050019-34657d55753b-4
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:42 +0200
+ id 6a069c47-aaa8-0a2a45050019-34657d55753b-8
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:46 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYCP286MB3682.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:3c2::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
- 2026 04:08:37 +0000
+ 2026 04:08:39 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:37 +0000
+ 04:08:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=I+Mwv9doEpL2dG4jZioqU2Kknggnd98GpjjzPGosMa2iRRSIp6O/nfW0SyX1YVmZ5bVDOxQrL6auDQDck15aeaymVVih2OZH0UpegmKXsSo1Q16LjKwR8nMg3vNTMkH/62VALPW4e6tpbkqzDRWEGckPJr36d9WiIbus+TZ34z1wsztEUBKMv0+z9WGAxikikzD+WFC7odBPh9wT7Kc+kep3K8aXT7rFVaP1dKLo2E6zNmBjwEqxusqN1FBTCOzUNfPQ9DdLTtNOL6cN5hJTnG6CXdj1o1hOQ0DmR0b96e2K2smWXb9UfsQ9xK6HYPCYQWucLaUISw3ExLj6CTQQ6g==
+ b=csRRytBgoUiTNTiGYAWfRvR038K87mpAVDc1ToAnhFL/4PRstmBF1oSwr0rGUBDgj+5kQ2t+sOliElPlg2B31xfhU6ZUKFmoexColqKyfnYZorqK1mcSccwUSgyfAKl/jCrsBAXsDwGNYIodOGsUh6co3RLZoDfdCibJ2c5KiDkUK97bihHGWn9lMVTCKKAN1JHXHXbzF5rc8smiTXf32CeVjBpsVhNBrlwF3wUrc/mG3n5dw1d7d3aqsfDXV4XgU0uWuXIxcsjUf4by4UQXMd7xCGRmRbuwLyCdr4wINvaPyR12G3cEIGc53LqhR7xmPC1SqadM+HDVEg1jF4MhlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0GEQq9mUrsUO2xmFWtA16fpenonSWpgtrYzSVQj3dvs=;
- b=Q5s2yI/O1dtr+dmoLh13LvNx5cH63OY4ijrIl6nw7vFPLyLa9c8ToSyyeL+uoQdFPwU6sDj+hC+FjWppeNX+mErOPTrtkJPbRSQW76a2b+bG9guohPOsxjRR99TERYSucUp1zlDgUitCgmsMegTD2gy+CCQnhSiCYzRoq0f5O38mQ6R+t5Q5aFr0W157+GgmDOAYMPzVI/B8xn6QyilAOfKoXAbA5F20Wb5V94bZ1I8DIz4W2iAc9TQ0BV1EVzmMAlm9p0hA/RmRuly402F20go1Bzrh65IY4ikDTsODxuy28xVGxCh6KohNVn2k+cVybBNqQV4yQB4oo8sJBlWthg==
+ bh=RPhd/zOT+Y6mzSTQOAaKE/lOmvaSbNYRD4sELEkar04=;
+ b=GoLx3Bim8gBqVZhpHe2XXSE0zlTspOgiBoYZLXy9RKB0AHUaKCf1p8pLZZAxhy0IvelX7it+wYabXB9fufRGic8avukbSn+x/RZ7D1T3e5y9O6Arl7QaS2dovdGpQVpLKvnifioKt0zib+VTsP3t3LSjJpN9MxLNC72VZLhBug4C5do3jbKkd03qRqqf+Q9bEJcwG3sIMhPlvVzDZIb9OwXT3HEQfh5+YmzEcIfcDXAKw6dzfVZw4BvW7pTBkLTZW7Y98gbne0PXclN2g9XQIW4cAoIc117blM9+cXWwrt9QqNZ+jrEZMhyPeuDNJzWH30VSbIB76q1Q1qq5bKYyxw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0GEQq9mUrsUO2xmFWtA16fpenonSWpgtrYzSVQj3dvs=;
- b=RyEXpRN6OGjpLer46tyyDBhwLNmLMLbql9h3MIev/DmRhiuOOAFcX4gjsbXBvBgrSQCidx0WgvJxeWzEDfrlgX+Ljpli6fMm5sRl6+7S624Ha28MNiuNuOy/sb+wMMVJwLy8WKTxgjnw7GjbV+GVNukR7U0nMDltN2hqWRbLF44=
+ bh=RPhd/zOT+Y6mzSTQOAaKE/lOmvaSbNYRD4sELEkar04=;
+ b=jA92sWMZwZvPzmmMQvhDvVPHZ491YctGlVZNjZFPsR1LkZtbHrE/zuDCQcx5p/8HGPhok4X9/ZG01WROQVQHjh6j6gbsBNISSnILdLo5IsRn70hXiwtFB+0tC5Dm0sGjj7kgkf3BN1+u1Thp/vH0MeJ2rdUjG30uIcsPEAF1g0U=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,270 +86,185 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 19/26] xen/arm: io: add register-backed MMIO emulation helpers
-Date: Fri, 15 May 2026 13:08:05 +0900
-Message-ID: <20260515040812.983626-20-den@valinux.co.jp>
+Subject: [RFC PATCH v1 26/26] docs: arm: add an Arm CCA Realm guest guide
+Date: Fri, 15 May 2026 13:08:12 +0900
+Message-ID: <20260515040812.983626-27-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYXPR01CA0066.jpnprd01.prod.outlook.com
- (2603:1096:403:a::36) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYWPR01CA0022.jpnprd01.prod.outlook.com
+ (2603:1096:400:aa::9) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYCP286MB3682:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7b2df52-2116-46b7-47cf-08deb237a16b
+X-MS-Office365-Filtering-Correlation-Id: 4f853f27-7630-47c1-8aaa-08deb237a4bf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|3023799003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	U6VlV6gaUUfaFI/K38P8Q6Hk6DXv19NQxfciuaNyiSVmmkDP55JiTinpy1unUtgqIc5jMOxDxSaXST9+O1wmei5UluCUisXXAry5Uv05ltp6INJ/pCEI2IEF7uvPCTsnJ/3pW+C5tQkzf9IN/swiEckqisKgZm5tG2kEqATSyNLXnQiyJRmY8UuJDekFkWzjvMBENBKDdYyPn01v0vg6U5gQgkBLqkeMaOpbg7cqLUMBpEQL/QCi5MykHz0b6+T0mmHMg/7r0a+FSQzs3nKa7/LWyRMXDe0CU8z628rZQk9IrUSatm3yAPctr8XylnsBnl/f5pjpBAi78HXKWdlwZ8bQqvB4us49hZhkNPPP6Mo3yOnaGzJ3zmZP2ikPcJyid/DL3EqswIv/oVuR8YgFGQsFNKl9J10niu/I1ft8q55a7t4kKmXpFdBZS9S8rRieX2zVtbwmfcrHOB2QxS8FSKdCSmmkF0Tp9whvNBiIIKziuwyoZhH1/jgLNO88jnTCXvj+qs3/2BndH8nd2K6EFttzH+dAhpltLoBCtfzDAiNtzkxqqB3xc1UHBXahfkQ2vJgCFZYa1EGxMJxjL8aMv8hByZ+aKeCiyVhkl3RLV+snHlxqBMGRBPGR8kjKEXQ0sKCVkcurqvyMEOrgO+7jIYhmdN3nj2jeswoYsyDXmopHqDNJvSu9lbaW2Cr6W5Km
+	iG8bhiNBf3L8V91D6ZjRADtT05IP3NeIAIxnrwgEgThks037t9/K0NWSIvIkwYIMdxKUPblV+RCYcjUqDXW/mS6Br0Sn0JiKr5gdNjLTvrrhz+smyV/xkIlsl66IE42sanTvwQQ1pDFisboRRm63GmT6cRWpsj8PC5q0V+c3APTsxp8lVB6gGtOnyY5b0aAxqA46Zf2HjYkYu3M8NupKk0GiEmglngnuD8Y33RiaVT7mEl0ZNKVP0zyOGcpWDryKIaS3wIAasHCbBT76As4QowBy7f1D/DDoX82xlLF6hejB1QRvEOp5bNUHMYB7ljCdb+ZCFo1ue0B45ZMN82WC0+C3rW1S0FBB2Yt6bt+CGnIlHq/veZB0/wo38LoB4m6sczAjxFrzP6CwKHfOfyeOW1wPwgdg3dULR5mUBgwI9jhWRxRUEmMS+9gv5o5BmU9CDGzSkhTH03mDjFXW4OU+KLMhX1N4kyqgoStDU5EnSgGTzOJi2BcEXcfPXFyRKgOzb9bBlnjoH85LK7lolFD0x7N94N9d6zWwzKzFkmXVslXSNG/iSFxFhmag8Lzqeq/yIhlCX3+lVphHahYOY9Nw22yRheDrcxGEChEKsDCiWzQLpO1hV1ICvILnVmfCMNwwMTJCF12s104tg4kr00N488GaHn8B34+fG98W2l7oERB25v9uvHHKcKi2IPCLFVzv
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(3023799003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?1TmzJpbSXKjXTSC1euq3fKDSjNjFiE5+1oHbFYwBkUmWEVChL4zbTi2qzGjj?=
- =?us-ascii?Q?LbEtSSHiS/uGghDQ1R8v8PiV4uAl52fvzGtlDOPKwX5LwpI+SdNy5SsaTsJe?=
- =?us-ascii?Q?eGFXzd9MGV5W22RAeWguEdz3Kofaf5Dr1NurRho8Ag1UesFO3wizzppFjOkr?=
- =?us-ascii?Q?mEcztkSwzlH9Gst7IAscjZvKGRKrat/fy1EgEArMc0gId8t23q4oHmIbtIKA?=
- =?us-ascii?Q?mhuEo6CO2CqaDKB16jRdRqYN66mrSom0YMBRY6N/NOGLNy1do55IIvfnlMNQ?=
- =?us-ascii?Q?fiMRCBuHGgplKrFmMgvdbiAgDf4y86TZeHmtbE0QcoalAS6t/9CR9V7NFhs2?=
- =?us-ascii?Q?l4Pk5n/QGQ76RXKe5BaSpYkjh/v1y6Ji9DPNCCE0oUnSPCutuuIEmghdjclo?=
- =?us-ascii?Q?TuRJvaevy/gIj2UP+mydXKiXsSn/yenKmK2s4oaEDGesWH9EwoJvwJCUF6NR?=
- =?us-ascii?Q?Y62hZKEue61y38nzzizqu/ct0wYiXRhM08Hgzzd8QjF98NXx8sqW5/HOkaOY?=
- =?us-ascii?Q?hII6i5q68MWjXoGOfazvkH3gXNX+qSWDeuIUoRm17jlWCON298wuTXbNjZvg?=
- =?us-ascii?Q?0vg4kocY4XKhtiAUMCFgfoZhaP8xjSC8YFZ18T4KgivTIPzMX+XhLFOMI2lE?=
- =?us-ascii?Q?EjWQtBYydDVIMb2a9yeZaU1oX45KUG+JYw4eZAoqCr/y2wBiZ7A7OERYUZ5H?=
- =?us-ascii?Q?yEB/ddC/DDSrgzMZkdqgrRPHV4Aw5namRSpmTciWdIVfePBO4b3XLBKwHxSs?=
- =?us-ascii?Q?xRa9kOpZxhCdATcMMXA04OWEQQ7+cAEXCH+IJ9n0mUiCRiFWqCNXKRuRQfSC?=
- =?us-ascii?Q?iP2965Pii0Aj63CuBsLS04o6SSlIvY6+ZeiWALVZTFqigaa5qSMjp8HIcTtm?=
- =?us-ascii?Q?ADIy32Bj9IMQTocHB/yPZWGuQeoTNvKLtBZe+EwLv0tdjHO5L7BUddXwMbf8?=
- =?us-ascii?Q?5S3duTHG04GeWaLg3NHmTVwVC8tKTyAwzLSrSzR1lYL92KYJNPBVTGdqKE1j?=
- =?us-ascii?Q?FPGxOnBm3tVhWyPu9T/4Pka7l3vXBtb3AVq1TBNLXlIL3oXThbmFCwPEbxSS?=
- =?us-ascii?Q?FHgqlMMLOHzZ+yYuTlbcqa7xivCqivMTjHwfgNUp8TOOzFaemlhZL7L9O8av?=
- =?us-ascii?Q?SL0WXjhGRLxlOV0RVriHhy5Nv42W/+xpQuDARMcnxrdwcEs2gVE7aA7qtX2i?=
- =?us-ascii?Q?XggeGia70bvB/F9z5b2qUeSvRXJMyB2QAod9iV3QGUt5wNy6EilrOa2+66T1?=
- =?us-ascii?Q?eV307le+48yue/0754eO8letHWAOXxN9NyThlq2bFuAYrfXM8dNjCPZ0nELO?=
- =?us-ascii?Q?Qz4Q5udw52kNT8cIyeYs04je0ARpT+tMdZYN0BZQ3zcaC3bUcDqJl1KzE3ab?=
- =?us-ascii?Q?dZgQr5iOYVLhZOABicGwpuquTZCAd8K85y3HhcvK48aewXxowz1Q3wGCmZTZ?=
- =?us-ascii?Q?tDqNB7bIe0GlXBdipqsJb/y1s+wWnogKKEGcuB4fj8zNj5/vpZGMXjtPtcM+?=
- =?us-ascii?Q?196Erg1KBOZbftqXPewyNIZTcmNjf8DvmKVZf8LYiYMuH4wDXr8/nwoqgdDX?=
- =?us-ascii?Q?1JxWrPM2s1b/tny0RwdPsGWN3P0ICmSLOHMHwY7DKi4uIXHvRtoRLBtmmEd/?=
- =?us-ascii?Q?Z0tyAl7GHdfLhWQWRFj2mrRtoLruPyqGnq7ngM4HHBtu8QGrQ7KYbsLLlmf/?=
- =?us-ascii?Q?0BBpPP06UtzbyArFRY6tRIA0lPXRhGtAVqatH2Lk0T3FI5YKW6AkD9wt8O7b?=
- =?us-ascii?Q?puTOoYoj5cn2X1zj9UP57WWmHNMRdp6n6foyw4FU+i6unmiAF7Cq?=
+	=?us-ascii?Q?+cJcZPgjEmq59e9SLGOzXici+gJsDcvJRdrWGxJt6Qd31+BTNcKaVRuolP7D?=
+ =?us-ascii?Q?Ndw7DdpT5auWAD7MBEjttse3rEqyDkA31DhHuX6qKvU7/uFsv66u70SgTXxA?=
+ =?us-ascii?Q?Avn47i01nOsWEB2k9zdRaJCpBa/LVQRVDZp7ixtnsvuJzwJmBe9G3W/cPwZk?=
+ =?us-ascii?Q?zPJes4mSvKnm09u0qr5mg4vOaXAdfVv9MVeA7eJbxC8pyPoEzQYFADw7edTi?=
+ =?us-ascii?Q?MgXksWbbmGNFPbCEYIjSmfOd8sPWbAK53hqvkimj1cEeDGxTJPUHnjr80e/k?=
+ =?us-ascii?Q?R2wxBsUUlCsMlRIQjdBuNcRpqqLzcduAm8oyOrawJaabpNecwLlzIMjJd+aR?=
+ =?us-ascii?Q?/YNz9LF3oiJjLTqmVUutYOnTQZYQ6vcCLvFSvit3c6VJ3FaiuZvJFvlv4fQB?=
+ =?us-ascii?Q?1useXdN6P1I+SGUNXlCs/r0KXVl8SGFlPWdh6lXJV1EJsnVp0biTg/lbbTH6?=
+ =?us-ascii?Q?PTMkp/Q9u6LLWmOEfiU1KhoAUPuZa5bECGkwi3+V1szxf7frKR5TnIoPu3ig?=
+ =?us-ascii?Q?IugdqaG5GfUV1FnKPG3EKBDXTGeiAuI9mAesXazQthnqhISj/VV5H5X8NJFj?=
+ =?us-ascii?Q?oe0u4fhiM7mFsbGr/HyJi+XP9wNXWOC2+pgs/3gGbBqp7G8aVfwj/mgJWhsT?=
+ =?us-ascii?Q?XsV4WO3T9kn4dClRdJCcjqlXxcRyhLVsJvNKaqWHSzrhunJJmO2XSS2SaDb4?=
+ =?us-ascii?Q?6XNPrzRTwvTJAQ/aPiJ1SQpOeSOoaPhYtZ/P8lVpdIC3qvQQl/V1aXmF7XuI?=
+ =?us-ascii?Q?BznPcOR9Sq4BzRKmEAO+oAWgTdH78Gx2pKXlbRb7FbQpqXpBhFHHEPEtCvZ7?=
+ =?us-ascii?Q?UeQVXo2f7t99JOX+JbI6g0yTkcaUiBH9Y6WxgdheJyIlu/WIXK5ErCqTavg5?=
+ =?us-ascii?Q?3dJCYvdktLYagDJFjBKrt4mEWMsH9nVB3GeEeBMnSbkM9ZUKQJ+ODY29Po2A?=
+ =?us-ascii?Q?K6f9oVq/sBcC1zr0PZQCC5hu1HT9QXadn3DwNwVCkuS76C2PST5c75TR9jN2?=
+ =?us-ascii?Q?hMt7lrBuRRpadZWJAzy9p76icSdu4c9kUXKFpWN+kVtvjncBsnKJ9pUJ9Zgm?=
+ =?us-ascii?Q?FyFArrCVacA7iS31fnWH2av7Y50GmQSs6PePfeB+Txyc6N7ipKBPcGk48EX9?=
+ =?us-ascii?Q?oNr1hz4CKghCFCt9U4eIxrWI14v0pTuo5SI9X4JlCr0E5f3YN2z4Qr/KF5/L?=
+ =?us-ascii?Q?ZSef8o6TTHYCSHcw/jsBKF9OaCAa29DDEHi2xCj757ySUlp9f7ezJzivdsCC?=
+ =?us-ascii?Q?jJ6GZK0glNoPHaPF8+WRj9nazDn/7PjEyqOAMz94UGG3QH5GR1KNfevKcWqj?=
+ =?us-ascii?Q?f9BLtwZpVlrrgKRc/SEpsno3SolOoo5RV+0XZ9wf4VZea53CMJEffPfNcgq+?=
+ =?us-ascii?Q?b+oaYAxS/2P5DZJb29ZzQ9kSiGfi6M9KG9zfKsbYo80m5WRnY0PshHJauFXI?=
+ =?us-ascii?Q?YpQmTcI3qpHh4B1YcFgi/C4l1J3bA/KxeA3Pzpq/Y1oO+pWBUl8Eyj99A84t?=
+ =?us-ascii?Q?JRib/ResCZa1UjaODlrqrSpApLUN4FP/x4e8xNXA//XIsckBqe8E7DQfSI1C?=
+ =?us-ascii?Q?m5bJ+3XgYVdTiG75b7dzT9z+A5nl78UbJYhl/mDUSiR6YgOrNJfKu8PG7xGJ?=
+ =?us-ascii?Q?LzB6/05j0zcJUz59qaJ8WSKAi6/opkljyuJHpJIdAZEGbKFu0XwO2zUr47Tf?=
+ =?us-ascii?Q?Y3+K9Ht1V8cRhw57NRCqSgRRMRlvdcjXTrnDkKOg2gxKJmOB+eMbz9ngYm7m?=
+ =?us-ascii?Q?EOkCtAR68DoVEgdOv86he2kkunFAKhbBW+RlrWXpheRSQIoeIXap?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7b2df52-2116-46b7-47cf-08deb237a16b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f853f27-7630-47c1-8aaa-08deb237a4bf
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:33.4860
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:39.0799
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fWJX4PNgNnE8pIFC2EfpPAEqrDSr5j/1uJl6p+6iMhtMBr9RaIllisFo+4Kkx+r7hxxb5bfwzio9e8Clq8qm+A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Dl9+tJWufWZGF17Cg5QgYTJS8Us9TpfUQYut/AxzExUGFiCwHRlgcdZumL7OfD5i4IugtkhIS3zXtrzGt4Fm7A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3682
-X-purgate-ID: tlsNG-c201ff/1778818122-E1B9E443-EA4EBE55/0/0
+X-purgate-ID: tlsNG-c201ff/1778818126-DAD6F443-8A34C642/0/0
 X-purgate-type: clean
-X-purgate-size: 7058
+X-purgate-size: 4119
 
-Allow the Arm MMIO emulator to use a caller-provided register backend.
-Realm exits carry GPR state in RecRun, not in guest_cpu_user_regs().
+Document the Realm guest model, the current build/runtime flow, and the
+limits deliberately left outside this implementation.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/include/asm/mmio.h | 11 ++++
- xen/arch/arm/io.c               | 99 +++++++++++++++++++++++++--------
- 2 files changed, 88 insertions(+), 22 deletions(-)
+ docs/hypervisor-guide/arm/cca-realm.rst | 83 +++++++++++++++++++++++++
+ docs/hypervisor-guide/arm/index.rst     |  1 +
+ 2 files changed, 84 insertions(+)
+ create mode 100644 docs/hypervisor-guide/arm/cca-realm.rst
 
-diff --git a/xen/arch/arm/include/asm/mmio.h b/xen/arch/arm/include/asm/mmio.h
-index b22cfdac5be9..b8a640dc6ee7 100644
---- a/xen/arch/arm/include/asm/mmio.h
-+++ b/xen/arch/arm/include/asm/mmio.h
-@@ -62,6 +62,14 @@ typedef int (*mmio_read_t)(struct vcpu *v, mmio_info_t *info,
- typedef int (*mmio_write_t)(struct vcpu *v, mmio_info_t *info,
-                             register_t r, void *priv);
+diff --git a/docs/hypervisor-guide/arm/cca-realm.rst b/docs/hypervisor-guide/arm/cca-realm.rst
+new file mode 100644
+index 000000000000..9a0a63220bfb
+--- /dev/null
++++ b/docs/hypervisor-guide/arm/cca-realm.rst
+@@ -0,0 +1,83 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++======================
++Arm CCA Realm support
++======================
++
++Overview
++========
++
++Xen can create Arm CCA Realm guests and run their vCPUs with
++``RMI_REC_ENTER``.
++
++The initial support implements the DEN0137 2.0-bet1 Realm lifecycle: Xen
++creates the RD and RTTs, initializes RIPAS, populates measured DATA granules,
++creates RECs, and activates the Realm.
++
++Guest creation model
++====================
++
++Realm guest creation is exposed through ``libxl`` with ``realm=true``.
++
++Realm guests are currently restricted to:
++
++* 64-bit Arm PVH
++* GICv3
++* a Xen-generated device tree
++* guest RAM fully contained within the first guest RAM bank
++
++When ``realm=true`` is selected, Realm DTBs set the PSCI method to ``"smc"``
++and do not include the Xen hypervisor node, because Xen PV interfaces are not
++exposed to Realm guests. The only supported virtual console is
++``vuart="sbsa_uart"``.
++
++This VUART is a host-visible clear-text debug channel. It is accepted only when
++``CONFIG_ARM_CCA_REALM_DEBUG_VUART=y`` and is not suitable for
++confidentiality-oriented Realm deployments.
++
++Runtime model
++=============
++
++Each Realm vCPU has a REC and a ``RecRun`` buffer shared between Xen and the
++RMM in non-secure memory. Xen enters the Realm with ``RMI_REC_ENTER``. On
++return, the RMM provides an ``RmiRecExit`` describing why the REC stopped.
++
++Before handling an exit, Xen synchronizes the Realm-side vGIC and timer state
++needed by the host model. The current path handles the exits needed by this
++series: host interrupt returns, emulatable MMIO, a small GICv3 sysreg subset,
++``WFI/WFE``, PSCI, and RIPAS changes. Other exits are treated as unsupported.
++
++Current implementation notes
++============================
++
++* Initial Realm RAM population currently measures all populated DATA
++  granules.  There is no separate interface for passing measured ranges
++  from the toolstack.
++
++* Xen tracks up to 64 accepted donation pages for one memory-transferring
++  SRO. This is a Xen implementation cap, not an RMI limit.
++
++* Xen checks that host RAM is fine-tracked conventional memory and ensures
++  GPT L1s exist before it creates Realms.
++
++Known limitations
++=================
++
++The initial support is small in scope.
++
++* No Dom0less Realm launch at Xen boot
++* No Xen PV, grant-table based, or virtio device exposure to Realm guests
++* No passthrough or Realm device assignment, including VDEV/VSMMU handling
++* No ACPI support
++* No Multi-Plane Realms or S2AP change exits
++* No Realm LPA2, SVE, or PMU support
++* Fixed Live Firmware Activation policy, ``RMI_LFA_DISALLOW``
++* Shared MEC policy only
++* Fixed zero Realm Personalization Value
++* No non-4KB RMI granule or non-1GB tracking-region configuration support
++* No Realm shared-memory mappings via
++  ``RMI_RTT_UNPROT_MAP`` / ``RMI_RTT_UNPROT_UNMAP``
++* No ``RMI_EXIT_HOST_CALL`` handling
++* No hardware-backed vIRQ deactivation in the ``ICC_DIR_EL1`` emulation path
++
++This document should be updated as the Xen/Arm Realm feature set expands.
+diff --git a/docs/hypervisor-guide/arm/index.rst b/docs/hypervisor-guide/arm/index.rst
+index 7aae4a0a0301..feac2b4230c3 100644
+--- a/docs/hypervisor-guide/arm/index.rst
++++ b/docs/hypervisor-guide/arm/index.rst
+@@ -6,4 +6,5 @@ ARM
+ .. toctree::
+    :maxdepth: 2
  
-+typedef register_t (*mmio_reg_read_t)(void *ctxt, int reg);
-+typedef void (*mmio_reg_write_t)(void *ctxt, int reg, register_t value);
-+
-+struct mmio_regops {
-+    mmio_reg_read_t read;
-+    mmio_reg_write_t write;
-+};
-+
- struct mmio_handler_ops {
-     mmio_read_t read;
-     mmio_write_t write;
-@@ -83,6 +91,9 @@ struct vmmio {
- 
- enum io_state try_handle_mmio(struct cpu_user_regs *regs,
-                               mmio_info_t *info);
-+enum io_state try_handle_mmio_regops(struct vcpu *v, mmio_info_t *info,
-+                                     const struct mmio_regops *regops,
-+                                     void *ctxt);
- void register_mmio_handler(struct domain *d,
-                            const struct mmio_handler_ops *ops,
-                            paddr_t addr, paddr_t size, void *priv);
-diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
-index 9707cadcf80e..9ce9fe1c1528 100644
---- a/xen/arch/arm/io.c
-+++ b/xen/arch/arm/io.c
-@@ -47,12 +47,36 @@ static const struct mmio_handler unmapped_handler = {
-     .ops = &unmapped_ops
- };
- 
-+struct mmio_guest_regs {
-+    struct cpu_user_regs *regs;
-+};
-+
-+static register_t mmio_guest_read_reg(void *ctxt, int reg)
-+{
-+    struct mmio_guest_regs *guest = ctxt;
-+
-+    return get_user_reg(guest->regs, reg);
-+}
-+
-+static void mmio_guest_write_reg(void *ctxt, int reg, register_t value)
-+{
-+    struct mmio_guest_regs *guest = ctxt;
-+
-+    set_user_reg(guest->regs, reg, value);
-+}
-+
-+static const struct mmio_regops mmio_guest_regops = {
-+    .read = mmio_guest_read_reg,
-+    .write = mmio_guest_write_reg,
-+};
-+
- static enum io_state handle_read(const struct mmio_handler *handler,
-                                  struct vcpu *v,
--                                 mmio_info_t *info)
-+                                 mmio_info_t *info,
-+                                 const struct mmio_regops *regops,
-+                                 void *ctxt)
- {
-     const struct hsr_dabt dabt = info->dabt;
--    struct cpu_user_regs *regs = guest_cpu_user_regs();
-     /*
-      * Initialize to zero to avoid leaking data if there is an
-      * implementation error in the emulation (such as not correctly
-@@ -66,22 +90,24 @@ static enum io_state handle_read(const struct mmio_handler *handler,
-     ASSERT((r & ~GENMASK((1U << info->dabt.size) * 8 - 1, 0)) == 0);
- 
-     r = sign_extend(dabt, r);
--
--    set_user_reg(regs, dabt.reg, r);
-+    regops->write(ctxt, dabt.reg, r);
- 
-     return IO_HANDLED;
- }
- 
- static enum io_state handle_write(const struct mmio_handler *handler,
-                                   struct vcpu *v,
--                                  mmio_info_t *info)
-+                                  mmio_info_t *info,
-+                                  const struct mmio_regops *regops,
-+                                  void *ctxt)
- {
-     const struct hsr_dabt dabt = info->dabt;
--    struct cpu_user_regs *regs = guest_cpu_user_regs();
-+    register_t value;
-     int ret;
- 
--    ret = handler->ops->write(v, info, get_user_reg(regs, dabt.reg),
--                              handler->priv);
-+    value = regops->read(ctxt, dabt.reg);
-+    ret = handler->ops->write(v, info, value, handler->priv);
-+
-     return ret ? IO_HANDLED : IO_ABORT;
- }
- 
-@@ -183,10 +209,13 @@ void try_decode_instruction(const struct cpu_user_regs *regs,
-     }
- }
- 
--enum io_state try_handle_mmio(struct cpu_user_regs *regs,
--                              mmio_info_t *info)
-+static enum io_state __try_handle_mmio(struct vcpu *v,
-+                                       struct cpu_user_regs *regs,
-+                                       mmio_info_t *info,
-+                                       const struct mmio_regops *regops,
-+                                       void *ctxt,
-+                                       bool allow_ioreq)
- {
--    struct vcpu *v = current;
-     const struct mmio_handler *handler = NULL;
-     int rc;
- 
-@@ -202,17 +231,22 @@ enum io_state try_handle_mmio(struct cpu_user_regs *regs,
-     if ( !handler )
-     {
-         bool trap_unmapped = v->domain->options &
--                                         XEN_DOMCTL_CDF_trap_unmapped_accesses;
--        rc = try_fwd_ioserv(regs, v, info);
--        if ( rc == IO_HANDLED )
--            return handle_ioserv(regs, v);
--        else if ( rc == IO_UNHANDLED && !trap_unmapped )
-+                             XEN_DOMCTL_CDF_trap_unmapped_accesses;
-+
-+        if ( allow_ioreq )
-         {
--            /* Fallback to the unmapped handler. */
--            handler = &unmapped_handler;
--        } else {
--            return rc;
-+            rc = try_fwd_ioserv(regs, v, info);
-+            if ( rc == IO_HANDLED )
-+                return handle_ioserv(regs, v);
-+            else if ( rc != IO_UNHANDLED )
-+                return rc;
-         }
-+
-+        if ( trap_unmapped )
-+            return IO_UNHANDLED;
-+
-+        /* Fallback to the unmapped handler. */
-+        handler = &unmapped_handler;
-     }
- 
-     /*
-@@ -228,9 +262,30 @@ enum io_state try_handle_mmio(struct cpu_user_regs *regs,
-      * instruction on the emulated MMIO region.
-      */
-     if ( info->dabt.write )
--        return handle_write(handler, v, info);
-+        return handle_write(handler, v, info, regops, ctxt);
-     else
--        return handle_read(handler, v, info);
-+        return handle_read(handler, v, info, regops, ctxt);
-+}
-+
-+enum io_state try_handle_mmio(struct cpu_user_regs *regs,
-+                              mmio_info_t *info)
-+{
-+    struct mmio_guest_regs guest = { .regs = regs };
-+
-+    return __try_handle_mmio(current, regs, info, &mmio_guest_regops,
-+                             &guest, true);
-+}
-+
-+enum io_state try_handle_mmio_regops(struct vcpu *v, mmio_info_t *info,
-+                                     const struct mmio_regops *regops,
-+                                     void *ctxt)
-+{
-+    ASSERT(v != NULL);
-+    ASSERT(regops != NULL);
-+    ASSERT(regops->read != NULL);
-+    ASSERT(regops->write != NULL);
-+
-+    return __try_handle_mmio(v, NULL, info, regops, ctxt, false);
- }
- 
- void register_mmio_handler(struct domain *d,
++   cca-realm
+    firmware/arm-scmi
 -- 
 2.51.0
 
