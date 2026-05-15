@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106D5CD4F46
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:08:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309338.1580365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51682CD343F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:08:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309336.1580348 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqg-0001nj-3j; Fri, 15 May 2026 04:08:30 +0000
+	id 1wNjqe-0001Nj-Gr; Fri, 15 May 2026 04:08:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309338.1580365; Fri, 15 May 2026 04:08:30 +0000
+Received: by outflank-mailman (output) from mailman id 1309336.1580348; Fri, 15 May 2026 04:08:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqf-0001nc-WD; Fri, 15 May 2026 04:08:30 +0000
-Received: by outflank-mailman (input) for mailman id 1309338;
- Fri, 15 May 2026 04:08:29 +0000
+	id 1wNjqe-0001Nc-Dt; Fri, 15 May 2026 04:08:28 +0000
+Received: by outflank-mailman (input) for mailman id 1309336;
+ Fri, 15 May 2026 04:08:27 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjqe-0001Qf-Ti
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:29 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjqc-0001NQ-T6
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjqe-00GbfP-9N
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:28 +0200
+ id 1wNjqb-00GbfP-Qc
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:25 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-40
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:28 +0200
+ id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-32
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:24 +0200
 Received: from [52.101.125.129]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c35-1dec-0a2a45040019-34657d8136d2-5
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:28 +0200
+ id 6a069c35-1dec-0a2a45040019-34657d8136d2-3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:24 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
- 2026 04:08:21 +0000
+ 2026 04:08:19 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:21 +0000
+ 04:08:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mxT8Nm01DxQ+CSw70GAGjBHeQDZxXsxCXvUdjgAcAGQFDrnjRvIPb0v5dR82AbK4mU/ZmxiImCppKI9kVkSdm2au34w1ivelCkTrvbhmPJvBmSU0el0AmtUExCSChoQW5mLQ2B5+r0bPWP1TomeGQ2t7VYQZbnRjZS8S2nTq8tluAhk7TndDOCgFkPm0tNVEbG6yT9Pi4pR1vL1fivWKEPNGC/VcaE3AZou/2LMVGkq/I9aoXGZkZG5vtfzKdnEYVkdepvS8Se+cbZ8ccDhD7ppyQ3dPc/6dgxYpT8SSf+iBhTk+Q/BNwY9Xq4UUUeJTKqenVRfmwLgbPDCA/Px6/w==
+ b=OJxL/IMpQJmUgRs5VxGI2XICEhI0T5gC1vXu7RVdLRjyOvg3Q1naipgsfgabtHM9Ubh05H06f99AqtlTozYNDO6H80s97StjGz7cXZGRpfFHn1ElYGNoNVUQ5bGeJFEiisXAZZkMcQnv6uX7ohPqNLb6U70k9baqPyCzdgCAX9EXgS30jm5xYheS5Ry24UvZgxQx6/ScXNyRte+7Psih6fLyLhiDYgemdJeCF/KwCFaIwr6N86CaX91MwL92UN0rFZsQ3RdfOjQ0EQ64nxUf8Af/zztrJ7mRjHJtvuMJ9eKqyS65f7v/2gcdlswp8NRp7kJmQI/xdwdk6hWWKlGQVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vAyjwFNK4w1A5HZVai7iWdh30Be5cNwrdAR6jGy2XIc=;
- b=Z50oCDTnpGtzwpC1QfdNgCWghQZ38YhxL632nerZXi5VVrelPgxgue0yYENBy5APj9uU3lh/ogQ+K/wa5i4M5kGFoA0jhUjnw59OJk+SEG1p7cUQXwiW0IswV/Kd5D9c9/0puZoU3aBxfnTZwtXh41+/P8Meuj7V4zULop0WW8J/LAHbpfvxAOiqRnKqdZ+wL+McGJqeYmKw+4Ona4pRdXpgQTavmcYOACt/mVrl69P3wy6hE+p6uyveaVmt9tRB9xe95hsGbcv5Jdw0c9eOyiVitid/JLf/h79cXB+mrsGbsg7iDA8LcsrkQjJhn9bNa2lpYdcWXVOARLL3UjBoBw==
+ bh=zRhAUy+m4ZSSA0NruENsBXlnXW5tyOZSqdGUD5wIM0s=;
+ b=EpJZGwSGz6JOqw3WAskam2PoOMh0S4o9azLj8jWg3jRuW/zPR7KKX8VHbSEC9jQkVNOHguOMb/rc32PxvckU7SgTtA5yOJtqoc4UBCkoJU6kqkHzdRMs0hPPpj0a+oi0sAUTV/P+t6om8iiAidnJy7zQUyJcilylvgiZ/iHzy+bosQJRd/aqHBp5MLBTc1nkttoTTwpBNbrYbPDxtYE6asurPzfW+G/dDDnyY3Z9FkG+8a7mrPgj9egtchynQ16sBq1Ar3FRhM87vGAJOtOKvbljhJ4CML6BVKDhL92yCX6/1upFRfMVWkhTYJrvVWa6H+hrkPVPQ26SFm3KAGeYKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vAyjwFNK4w1A5HZVai7iWdh30Be5cNwrdAR6jGy2XIc=;
- b=lY2HshufvoyA1OK7cF1JdeKoRxeUYhIrG8BSA/iLHWDgoSxVG73zKzide+fYPO9chXSAW8+5bzt6fsoJrPSQmUrevt94QUtv1bpD2hHrVuSp7khyzyCna273PKr5QyZNnBYQxyxjHAUbMITlXyB+HuyW3M4VAMJ4nwy3+A263SM=
+ bh=zRhAUy+m4ZSSA0NruENsBXlnXW5tyOZSqdGUD5wIM0s=;
+ b=nuV4Os6NjRJN9CESTPR8Andtnci3UYfD0h6cIi7wBNyfMzXeEwO0DCpidsuKhUtgYa/JwQOneFKBa0+1XL6X5VOlTA+zZK57WI2f7gOOUms7C7tm68Fuqy+pf4id2KLGHAnQAKRvRXd1x0G2hnha1L8KF3qcLpA/8vLdjRoZXCQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,476 +86,523 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 03/26] xen/arm/cca: add RMI v2.0 lifecycle wrappers
-Date: Fri, 15 May 2026 13:07:49 +0900
-Message-ID: <20260515040812.983626-4-den@valinux.co.jp>
+Subject: [RFC PATCH v1 01/26] xen/arm/cca: add RMI v2.0 ABI definitions
+Date: Fri, 15 May 2026 13:07:47 +0900
+Message-ID: <20260515040812.983626-2-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY4P301CA0031.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:2be::17) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0278.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c9::19) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2aef2e53-e2ce-4d94-eb75-08deb23799f6
+X-MS-Office365-Filtering-Correlation-Id: aaaf22c6-02f3-4dbc-8e00-08deb237990c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|3023799003|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	/rU923jkb4jSayiWGlSsyfPnwdA+OJ7a6TfSsz1vmPLwENGRc10ZuCPj6Qgsn5MRSfivXryT6/kvnIEo+oDeTGKAKVJnfoWxkgn7YdNvzwVYE0wxYCMkgJwlL8C7j7Ekt29qoJu1vonAqW2thxovGJC8tsG8LIX1EWFV0FEp1cLnbXAsKL7S6AxILqTLOmBouLEpMTDZO1YadASo9gLDI31/bDEvUyrOw7vJiXpwC8u6CoyrEBihQqTTts2MI2k6DPmCaS6up3yut0Ebs/iC/cJKgP+tItk1m08gZ+Zs5i6IKdIacRTXvTYORlshNST+pg3e1FEb541PwqTDd3BiQbqKDJmrZInQTM/5IJkMlAA5Cb4bNRif+D7W1DGwVQLiIyulySa0wraJWuN53m/vS6wmVDO1f6wOcPXzSAcGr1xeIHC+kD2KdeOEdd/Th7w7RHp8qZavJ3v/7lSttAB4JS7tqkW3nAAmNECTjkVPInH4z6b7cJP0++qSe6WqNCVvknDhAx38PUR1bps8qioyRuufOwC7p9X1GNLwfVBCCo3Mo/V1zkMsnvvUiXONMV2hSWRThxO0H5+f3BLBo0gol8rJEPG1l5XMMcMurewAvw20DvJ8fdpTWBVgO4+CPENnxJGCa9o2e95cf4hd4mwDua29pWmp8HFPyzef0SA+fXAiORM+2yXIO35VY/jo0iSc
+	CDvH6HKxcW4p9SA4LCABu0v1dAiH/jgC9IM+mY7LlKBUCGsxTOx8fMURl/ppDiL8poSiMMdqwqkMtdQooen6h09CMtLgKEMChCNI5QMgq3wWE6xye2FcXnX4YqZD+sjNy3BlFgU46ur8mEeqbUckzrdxTbl1vqLYo90EpdA0RHjCWch9+vV7OvaKRECeh+pCiQLrj90gODXXnGpqXPrQkVEfiE0EIerTjaEooTNXbZ+u1NJUDwAg9E+JK/sibBzOsSIOjCZp53swQJ/GR1YCNipr9xYeickySCdh8nkyC0PWXmbYPC8bjUq7QubC+khiUpzh9ZPMKcfJOGMBjkaiPHawl471ihWnsg9hBy/ITFN/0DnDp4g2h3oMfR4w+u951aWWeZocq69gjHcHB35/+hxDDM5MhvSqw1b+ope18BpcGUCTQWq+LZOsBceZI4s745e1CLkKAdLEOtHsnBq50v2tpSiY+NWy7GNa5vlxAxNFF+AytaVx0SbTeZ2qR7UqDiIJtPx+XkLncCa3JaUA1g4U5yilTTKGbRHzX5oFiQiLy6hmZAue1dyEKu7Kd7/RzDUFyhU1lFyn6zRTWJv83VZ1XuuikIQqtaw4eQlCbD5kGkmmD+p/dRzt1jK8Ok6H9suJkvK1SJUiNa43l2S7Yh8FjIu1KmH9GSbCCwewMSHzKg8kZIMBhaAsHciwfqA5
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(3023799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?4/tZAFWLDyojmP1204mU6uTODmN+qgtb/ul3ayL+jyRo9Z/fXvrW6OIjTM7m?=
- =?us-ascii?Q?miM7GpevQ7hfp8gdIbrtazM6X8BoipajO5KeTMRD1z9/gBx8DeOPyJs6ynZE?=
- =?us-ascii?Q?addcbDX1NDTo/No5GFzHPv3MBfSX7jKRmaMhnqfIPdBBPtvhSs3XRAWXz1Sw?=
- =?us-ascii?Q?BVYTe1M2zk/EkD30Bj61GisVp8JfyL7iQyvIc5PoRldkL1Y/UdWzfYckpgTC?=
- =?us-ascii?Q?O5dFuw2q+eT0LhGTMdr+J+Ujmqa+ooKxOyWiR10XqnWeT7zZxritNHyrTinp?=
- =?us-ascii?Q?GzBaSI3GbpGq/L39A2vCWpOXJKKYHj1wwAhWENVe+CWYMGKUxwsmfL40ExVf?=
- =?us-ascii?Q?MX//MrTlrT3i2CaKYXOnW0U7NIqUoO6IFCc/JOL5Mrmz4IyP8Z9xSVnuBvrp?=
- =?us-ascii?Q?abcss/qt5bAq27jtCsB4U9a7RJXzo/WVIYpg9Do4TlukgI8GZLSqN27ljCku?=
- =?us-ascii?Q?AGWOohSVdxhimwErHOMHVPO8e4isukk2ZVEefyp+JTs+kKfGHzRzYsdUWiuw?=
- =?us-ascii?Q?9SgCuidaY5O1nizn66KIuFQaBp1zYkTvOIyEtvlU1GKTYkflyaW7qWCpFNt0?=
- =?us-ascii?Q?zHNEraM/7g/aD/UvK0mkXO53Y68dTtA/bluCgif31xPQsRjAiqu6OJh++ubG?=
- =?us-ascii?Q?OR34P0R1jGlb8Rvww/3fNxrh7Uo6lOEJB0VocHC6i44A+PU9PTLr0Yma7eXS?=
- =?us-ascii?Q?C5YlTmyVn1R/cm4bqkfOf88f9CU5mh6EEW6qbE0PgHeB6P9mn8yyH+4NUxP1?=
- =?us-ascii?Q?L/lo/2albLDDRPz0M248O8iew/W4oYOa2JO7f+VS05ithh/ZZmCNRjVHMjS2?=
- =?us-ascii?Q?wj7Drt8XXjtItWtj7tYNW0xCeVVp/dJ67yZagzR4BTdwGUtX8iyLz1j9bghw?=
- =?us-ascii?Q?yWsyEVnTGTCfuSo5MbTE1825UerfYo+ineUNXe4bPasFIauJUFhptsyqEHe6?=
- =?us-ascii?Q?PZvp0rWymv4+dayE5DgPYmi3A0ETXjUbfuvMSCjHRSNZYQR1YlmuKPkPNH7M?=
- =?us-ascii?Q?55qElkxzYKSqfNjDUzGPl/pSpHEaItY+NqUJhYUpBcTLCNA77ziuvN2LHAx/?=
- =?us-ascii?Q?vfLjO+BKZRSapVJ04Q0JhuXAXobhWxhgjxbxafA+lqQlMEe4cfKDKJ18VcVf?=
- =?us-ascii?Q?iQvydeleM/SGU+V7IEqfzs4wUbKIm4NplJRgzLuBOsVUMCojT1qca05NaCD8?=
- =?us-ascii?Q?N5i1DCfQgU/N07FHn6s9X0ROdZ/jLOPHPTHBY4FJ91vFt+xSDBiOKwvrfuJp?=
- =?us-ascii?Q?Xo/YGmjU9CEtGVJyVCoz2/616l/DEpqL9bsUFl3gTR82V7UZMCNZtjd/oqp2?=
- =?us-ascii?Q?jf56VRd1whbAEv8a2PCWiCgRs+MHGyFtf5GTvt7ZaSSAPpAB5S/V6UyUSdxr?=
- =?us-ascii?Q?DscjBLabBx3bD+hRIJEaAxdSJjl4jqq8wspAlgyvmBzh8o+bMg3JTlxDRzn5?=
- =?us-ascii?Q?uFW+L4YZg6MzYvUhIZgYgwkX6EpKqQ8p+Zl6TiMQ58W2jbmblB8DhYpN1Q69?=
- =?us-ascii?Q?HGklVIMOvFKa6G01weoFAtALHGCvNAM+/GAXMcjaFA0JR9VRCg5LkKyQ5ZPD?=
- =?us-ascii?Q?OxNvqj+qmyFvrdmutbBjgNnxIKzy5uav7Umy3d/VnWLfVECcAH3IaqVSfVrB?=
- =?us-ascii?Q?oa7rE+KOUvPNfP6v/qKZvwfL1KwMlKil5o1xf1Api3xcmcx6w+twn5f/A1Ao?=
- =?us-ascii?Q?9t/e0qw18YCQkXRAK+srODjPBXCRV19XW5xxfqOPMRHifbq9VNCdWDSPPrnB?=
- =?us-ascii?Q?sMeRoH5e1S1DYouPamBs0LirbAplUqsbfU8ePk7llSIAhEqYoYZp?=
+	=?us-ascii?Q?F4Uk3HRBrs89kPJMw1ucVJGpiLhQIu8FXgafrnPGlA6zgVBYrIXIj0BjkHyM?=
+ =?us-ascii?Q?wMYmw+O08osWDQg3rDKmQphNs0tvHBwgHFF2IMPOKq00WBHQPChYi5naUMHh?=
+ =?us-ascii?Q?zOUMPPsVVL/VadTKF2Q3VLVZZXFuK6W+seHy4PEokKtlA1RoP5odeHkDecyZ?=
+ =?us-ascii?Q?cUUKSAZddpkrZlEAmXmqx5IWs2pviYEZADXtXtQzb3yMxLhLdUDSyPdZyagk?=
+ =?us-ascii?Q?1KlGYi7kk5+aAS3D+CYig9rAA+S90up7xKwJUvkVFzsoJIYbyUHl9MQwzcJL?=
+ =?us-ascii?Q?tbCCS2IYL7pE33OULr3XZjv52aJ99XaRqvUElf6pbdlji6GEAhOwhts7F9qJ?=
+ =?us-ascii?Q?a3uBW4EXSc+ARrM1yoBouuNGSDtMc+RpWbiDAF1SbvNXPYAwypBCHfWeqtP0?=
+ =?us-ascii?Q?GbvFMg8neVzg00nl6d5aa9bUqD1jrw15fwB9T8iVuSTSiqcNd0VkzaMfjSLg?=
+ =?us-ascii?Q?qln/lH0O4W7L5jFtj59srCxnyny7eTUVS2Eaq1K31yspPmNmdBDhlN2vAXxI?=
+ =?us-ascii?Q?ZBM897AC+VO/iLZBI6ezR+37NoZg92kFFAGVSM2OuDD1pb/8Q5pQGTGI6z+t?=
+ =?us-ascii?Q?yQ+pDenq9wp5HXcnAiT5Jc2FN6uTliTtBq6NpJN36TTrr+7LxoXt5LlIHMij?=
+ =?us-ascii?Q?5eZRq8/jaUyme5D4lwA21eopCU/8HNqEeZL2CjTVQw/U/QrT4dSsfoSsLpjp?=
+ =?us-ascii?Q?8t/+FKUZgW9xMlk/eRi4C4w36v5slQ9JA1mlMzC4bIdqrnpWvd93H3575xss?=
+ =?us-ascii?Q?gOIRarah30GhLYE1ZjMjukwU4tdQ6PJbw3nznQOdAeZ4+/ZucopGsCXY3Ykj?=
+ =?us-ascii?Q?sPErhRWj6cJWiIALNQEm8unZuzJvPz6rzY6ryothstpvHXxC4G2e1BoLQj6y?=
+ =?us-ascii?Q?XSobeozkxsB8KpbknDaXpv5Z63cTU2bf5KrWej8Wfm2isqlF/ls42QRxSl00?=
+ =?us-ascii?Q?7PCWlgBBAUA0yr/V6G6B9yrXLs7lKIpY+bZZBI+mxYHkvMiWlMTIkHylGSf7?=
+ =?us-ascii?Q?dzlSVRWxSSBHFqSSHrX9/zwDTqMW9cAh13ANXC9z5jxNHUHf7iVvcv3lNUIa?=
+ =?us-ascii?Q?Z/ukZN9zI0r0PWOsaY4uRoJAU4sw6KI5zo7QeXnijuUzMR3ADZcrcMY92gsI?=
+ =?us-ascii?Q?jC8gOK8iqeNzv0sA0vdMMbo1QS3hG0dQEba6oQw5hoq7bvbRncPAMiHSYbHi?=
+ =?us-ascii?Q?ofbamnfmJYRFiNrVFr4G8bjsRdXzNX5QYdLNaDkRHwj8jU6dYpxsJQqghQIN?=
+ =?us-ascii?Q?TpyqYh3ToC+6sA4ovF4Xj3+py+fgo9gtC0XCItlDL0hZ5dicE/d32qRCT4m4?=
+ =?us-ascii?Q?MUJf8OdRzrKHY+QDdGozroAOBHcZLMeJiKHunWtDZvjwbuPj5FlyBimMQhcV?=
+ =?us-ascii?Q?oqQ+W0Nf7tiUeKn4pyEtXWsx3kragq7UnMov29wa0YP8F9+bCmTcqHFcnDl/?=
+ =?us-ascii?Q?re8SYwL/eNvXa5ViVZI+a0ob1RU6+a9ZRFwi+xGcIBUS6HmqyOCvzjat5GYZ?=
+ =?us-ascii?Q?cioa98kONJh0E8Ilj6UDhGW65blhIsdiaMkHjVtVutMZDWmNwPTZQIlY1BOE?=
+ =?us-ascii?Q?hauhJ6StGlw87IHOFP6AMem5F2KMpDCLt/GVqN5LOC2n8OW652vq1qCHcFhH?=
+ =?us-ascii?Q?tp21yC4fXKMESbqOG+ANQWePA9kL5Ixq184/2j554DMdeSOw59/zDoc71dh9?=
+ =?us-ascii?Q?x75TTW8ic9sT49q5D4yArE7bc2fT3xaYHRnC/UdmiM6/X5UBqZTlAWAGGEQv?=
+ =?us-ascii?Q?EuYo1HqNuDXEQviKxU2LR7ZgntV4X5/M2bk93Pq2HpJ7bGx7UyJR?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2aef2e53-e2ce-4d94-eb75-08deb23799f6
+X-MS-Exchange-CrossTenant-Network-Message-Id: aaaf22c6-02f3-4dbc-8e00-08deb237990c
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:20.9857
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:19.4652
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: n5HtbHoJaFIKAr31MmkGmKotGKQ6LwNrdv9AUIcp/+cxoDIqw6yXkaPf6We3/JiFJ7uH9qk/Im9ISxHjqBwWxw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: c0zwo4KnvoNu3ZI3OGRLcjuWw3kuT1WDQJYqyygfFCuhX3Zi5687kjxNYHlblNPcRoqYi12+EeuTbPLi0CRN+w==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
-X-purgate-ID: tlsNG-ebf023/1778818108-2A37F3FF-6843D637/0/0
+X-purgate-ID: tlsNG-ebf023/1778818104-2B3673FF-C2C68BD9/0/0
 X-purgate-type: clean
-X-purgate-size: 14387
+X-purgate-size: 21249
 
-Wrap the Realm, REC, RTT, SRO and PSCI calls used by Xen. Keep the
-stateful completion rules close to the raw RMI call boundary and avoid
-code duplication.
+Define the RMI v2.0 commands and types Xen needs to manage Realm VPEs.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/cca/rmi.c | 271 +++++++++++++++++++++++++++++++++++++++++
- xen/arch/arm/cca/rmi.h |  88 +++++++++++++
- 2 files changed, 359 insertions(+)
+ xen/arch/arm/cca/rmi-abi.h | 433 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 433 insertions(+)
+ create mode 100644 xen/arch/arm/cca/rmi-abi.h
 
-diff --git a/xen/arch/arm/cca/rmi.c b/xen/arch/arm/cca/rmi.c
-index d37f1226f834..5661d35e30da 100644
---- a/xen/arch/arm/cca/rmi.c
-+++ b/xen/arch/arm/cca/rmi.c
-@@ -56,6 +56,46 @@ static int arm_cca_rmi_initiate_sro(unsigned long fid,
-         cpu_relax();
-     }
- }
-+
-+static int arm_cca_rmi_complete_no_mem_transfer(struct arm_smccc_res *res)
-+{
-+    unsigned long handle;
-+    uint64_t result = arm_cca_rmi_result(res);
-+
-+    if ( !arm_cca_rmi_status_is(result, ARM_CCA_RMI_INCOMPLETE) )
-+        return arm_cca_rmi_result_to_errno(result);
-+
-+    /*
-+     * The initiating command returns the SRO handle in X1.  Once
-+     * the operation is continued, X1 is not a stable handle output:
-+     * completion returns the initiating command's output registers.
-+     *
-+     * See DEN0137 2.0-bet1 - B4.3.2 and B4.3.2.1
-+     */
-+    handle = res->a1;
-+
-+    while ( arm_cca_rmi_status_is(result, ARM_CCA_RMI_INCOMPLETE) ||
-+            arm_cca_rmi_status_is(result, ARM_CCA_RMI_BUSY) )
-+    {
-+        if ( arm_cca_rmi_status_is(result, ARM_CCA_RMI_INCOMPLETE) )
-+        {
-+            /*
-+             * This helper is only for commands specified as stateful but not
-+             * memory-transferring.  Callers with donate/reclaim flows handle SROs
-+             * themselves because they must own the backing-page lifetime.
-+             */
-+            if ( arm_cca_rmi_sro_mem_req(result) !=
-+                 ARM_CCA_RMI_OP_MEM_REQ_NONE )
-+                return -EOPNOTSUPP;
-+        }
-+
-+        arm_cca_rmi_op_continue(handle, ARM_CCA_RMI_CONTINUE_KEEP_GOING, res);
-+        result = arm_cca_rmi_result(res);
-+    }
-+
-+    return arm_cca_rmi_result_to_errno(result);
-+}
-+
- int arm_cca_rmi_version(unsigned long requested_revision,
-                         unsigned long *revision_lower,
-                         unsigned long *revision_higher)
-@@ -168,3 +208,234 @@ int arm_cca_rmi_gpt_l1_create(paddr_t base)
- 
-     return arm_cca_rmi_res_to_errno(&res);
- }
-+
-+int arm_cca_rmi_granule_range_delegate(paddr_t base, paddr_t top,
-+                                       paddr_t *out_top)
-+{
-+    struct arm_smccc_res res;
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_GRANULE_RANGE_DELEGATE_FID,
-+                                  base, top, 0, 0, 0, &res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    rc = arm_cca_rmi_complete_no_mem_transfer(&res);
-+    if ( rc == 0 && out_top != NULL )
-+        *out_top = res.a1;
-+
-+    return rc;
-+}
-+
-+int arm_cca_rmi_granule_range_undelegate(paddr_t base, paddr_t top,
-+                                         paddr_t *out_top)
-+{
-+    struct arm_smccc_res res;
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_GRANULE_RANGE_UNDELEGATE_FID,
-+                                  base, top, 0, 0, 0, &res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    rc = arm_cca_rmi_complete_no_mem_transfer(&res);
-+    if ( rc == 0 && out_top != NULL )
-+        *out_top = res.a1;
-+
-+    return rc;
-+}
-+
-+int arm_cca_rmi_realm_create(paddr_t rd, paddr_t params_ptr,
-+                             struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_REALM_CREATE_FID,
-+                                  rd, params_ptr, 0, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_realm_activate(paddr_t rd, struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_REALM_ACTIVATE_FID, rd, 0, 0, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_realm_terminate(paddr_t rd, struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_REALM_TERMINATE_FID,
-+                                  rd, 0, 0, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    rc = arm_cca_rmi_res_to_errno(res);
-+
-+    if ( !arm_cca_rmi_status_is(arm_cca_rmi_result(res),
-+                                ARM_CCA_RMI_INCOMPLETE) )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_realm_destroy(paddr_t rd, struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_REALM_DESTROY_FID,
-+                                  rd, 0, 0, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_rec_create(paddr_t rd, paddr_t rec, paddr_t params_ptr,
-+                           struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_REC_CREATE_FID,
-+                                  rd, rec, params_ptr, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_rec_destroy(paddr_t rec, struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_REC_DESTROY_FID,
-+                                  rec, 0, 0, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_rec_enter(paddr_t rec, paddr_t run, struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_REC_ENTER_FID, rec, run, 0, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_op_continue(unsigned long handle, unsigned long flags,
-+                            struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_OP_CONTINUE_FID,
-+                       handle, flags, 0, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_op_cancel(unsigned long handle, struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_OP_CANCEL_FID, handle, 0, 0, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_op_mem_donate(unsigned long handle, paddr_t list,
-+                              unsigned long list_count,
-+                              struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_OP_MEM_DONATE_FID,
-+                       handle, list, list_count, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_op_mem_reclaim(unsigned long handle, paddr_t list,
-+                               unsigned long list_count,
-+                               struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_OP_MEM_RECLAIM_FID,
-+                       handle, list, list_count, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_rtt_create(paddr_t rd, paddr_t rtt, paddr_t ipa,
-+                           unsigned long level, struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RTT_CREATE_FID,
-+                                  rd, rtt, ipa, level, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_rtt_destroy(paddr_t rd, paddr_t ipa, unsigned long level,
-+                            struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RTT_DESTROY_FID,
-+                                  rd, ipa, level, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_rtt_set_ripas(paddr_t rd, paddr_t rec, paddr_t base,
-+                              paddr_t top, struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RTT_SET_RIPAS_FID,
-+                                  rd, rec, base, top, 0, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_rtt_data_map_init(paddr_t rd, paddr_t data, paddr_t ipa,
-+                                  paddr_t src, unsigned long flags,
-+                                  struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RTT_DATA_MAP_INIT_FID,
-+                                  rd, data, ipa, src, flags, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_rtt_data_unmap(paddr_t rd, paddr_t base, paddr_t top,
-+                               unsigned long flags, unsigned long oaddr,
-+                               struct arm_smccc_res *res)
-+{
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RTT_DATA_UNMAP_FID,
-+                                  rd, base, top, flags, oaddr, res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    return arm_cca_rmi_complete_no_mem_transfer(res);
-+}
-+
-+int arm_cca_rmi_psci_complete(paddr_t calling_rec, paddr_t target_rec,
-+                              int64_t status, struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_PSCI_COMPLETE_FID,
-+                       calling_rec, target_rec, (unsigned long)status,
-+                       0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-diff --git a/xen/arch/arm/cca/rmi.h b/xen/arch/arm/cca/rmi.h
-index 4cd0bc64ccf5..589c12b24e79 100644
---- a/xen/arch/arm/cca/rmi.h
-+++ b/xen/arch/arm/cca/rmi.h
-@@ -110,6 +110,51 @@ static inline int arm_cca_rmi_res_to_errno(const struct arm_smccc_res *res)
- {
-     return arm_cca_rmi_result_to_errno(arm_cca_rmi_result(res));
- }
-+
-+static inline unsigned long arm_cca_rmi_sro_mem_req(uint64_t result)
-+{
-+    uint64_t incomplete_data = arm_cca_rmi_result_data(result);
-+
-+    return arm_cca_rmi_field_get(
-+        incomplete_data, ARM_CCA_RMI_RESULT_INCOMPLETE_MEM_SHIFT,
-+        ARM_CCA_RMI_RESULT_INCOMPLETE_MEM_WIDTH);
-+}
-+
-+static inline bool arm_cca_rmi_sro_can_cancel(uint64_t result)
-+{
-+    uint64_t incomplete_data = arm_cca_rmi_result_data(result);
-+
-+    return arm_cca_rmi_field_get(
-+        incomplete_data, ARM_CCA_RMI_RESULT_INCOMPLETE_CAN_CANCEL_SHIFT,
-+        ARM_CCA_RMI_RESULT_INCOMPLETE_CAN_CANCEL_WIDTH) ==
-+           ARM_CCA_RMI_OP_CAN_CANCEL;
-+}
-+
-+static inline paddr_t arm_cca_rmi_addr_desc_4k_pa(uint64_t desc)
-+{
-+    return arm_cca_rmi_field_get(desc, ARM_CCA_RMI_ADDR_DESC_4K_ADDR_SHIFT,
-+                                 ARM_CCA_RMI_ADDR_DESC_4K_ADDR_WIDTH)
-+           << PAGE_SHIFT;
-+}
-+
-+static inline unsigned long arm_cca_rmi_addr_desc_4k_size(uint64_t desc)
-+{
-+    return arm_cca_rmi_field_get(desc, ARM_CCA_RMI_ADDR_DESC_4K_SZ_SHIFT,
-+                                 ARM_CCA_RMI_ADDR_DESC_4K_SZ_WIDTH);
-+}
-+
-+static inline unsigned long arm_cca_rmi_addr_desc_4k_count(uint64_t desc)
-+{
-+    return arm_cca_rmi_field_get(desc, ARM_CCA_RMI_ADDR_DESC_4K_CNT_SHIFT,
-+                                 ARM_CCA_RMI_ADDR_DESC_4K_CNT_WIDTH);
-+}
-+
-+static inline unsigned long arm_cca_rmi_addr_desc_4k_state(uint64_t desc)
-+{
-+    return arm_cca_rmi_field_get(desc, ARM_CCA_RMI_ADDR_DESC_4K_ST_SHIFT,
-+                                 ARM_CCA_RMI_ADDR_DESC_4K_ST_WIDTH);
-+}
-+
- int arm_cca_rmi_version(unsigned long requested_revision,
-                         unsigned long *revision_lower,
-                         unsigned long *revision_higher);
-@@ -123,4 +168,47 @@ int arm_cca_rmi_granule_tracking_get(paddr_t base, paddr_t top,
-                                      unsigned long *state, paddr_t *out_top);
- int arm_cca_rmi_gpt_l1_create(paddr_t base);
- 
-+int arm_cca_rmi_granule_range_delegate(paddr_t base, paddr_t top,
-+                                       paddr_t *out_top);
-+int arm_cca_rmi_granule_range_undelegate(paddr_t base, paddr_t top,
-+                                         paddr_t *out_top);
-+
-+int arm_cca_rmi_realm_create(paddr_t rd, paddr_t params_ptr,
-+                             struct arm_smccc_res *res);
-+int arm_cca_rmi_realm_activate(paddr_t rd, struct arm_smccc_res *res);
-+int arm_cca_rmi_realm_terminate(paddr_t rd, struct arm_smccc_res *res);
-+int arm_cca_rmi_realm_destroy(paddr_t rd, struct arm_smccc_res *res);
-+
-+int arm_cca_rmi_rec_create(paddr_t rd, paddr_t rec, paddr_t params_ptr,
-+                           struct arm_smccc_res *res);
-+int arm_cca_rmi_rec_destroy(paddr_t rec, struct arm_smccc_res *res);
-+int arm_cca_rmi_rec_enter(paddr_t rec, paddr_t run, struct arm_smccc_res *res);
-+
-+int arm_cca_rmi_op_continue(unsigned long handle, unsigned long flags,
-+                            struct arm_smccc_res *res);
-+int arm_cca_rmi_op_cancel(unsigned long handle, struct arm_smccc_res *res);
-+int arm_cca_rmi_op_mem_donate(unsigned long handle, paddr_t list,
-+                              unsigned long list_count,
-+                              struct arm_smccc_res *res);
-+int arm_cca_rmi_op_mem_reclaim(unsigned long handle, paddr_t list,
-+                               unsigned long list_count,
-+                               struct arm_smccc_res *res);
-+
-+int arm_cca_rmi_rtt_create(paddr_t rd, paddr_t rtt, paddr_t ipa,
-+                           unsigned long level, struct arm_smccc_res *res);
-+int arm_cca_rmi_rtt_destroy(paddr_t rd, paddr_t ipa, unsigned long level,
-+                            struct arm_smccc_res *res);
-+int arm_cca_rmi_rtt_set_ripas(paddr_t rd, paddr_t rec, paddr_t base,
-+                              paddr_t top, struct arm_smccc_res *res);
-+
-+int arm_cca_rmi_rtt_data_map_init(paddr_t rd, paddr_t data, paddr_t ipa,
-+                                  paddr_t src, unsigned long flags,
-+                                  struct arm_smccc_res *res);
-+int arm_cca_rmi_rtt_data_unmap(paddr_t rd, paddr_t base, paddr_t top,
-+                               unsigned long flags, unsigned long oaddr,
-+                               struct arm_smccc_res *res);
-+
-+int arm_cca_rmi_psci_complete(paddr_t calling_rec, paddr_t target_rec,
-+                              int64_t status, struct arm_smccc_res *res);
-+
- #endif /* ARM_CCA_RMI_H */
+diff --git a/xen/arch/arm/cca/rmi-abi.h b/xen/arch/arm/cca/rmi-abi.h
+new file mode 100644
+index 000000000000..7afb1ae05bca
+--- /dev/null
++++ b/xen/arch/arm/cca/rmi-abi.h
+@@ -0,0 +1,433 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * RMI v2.0 ABI definitions used by Xen from DEN0137 2.0-bet1.
++ */
++
++#ifndef ARM_CCA_RMI_ABI_H
++#define ARM_CCA_RMI_ABI_H
++
++#include <xen/types.h>
++
++#define ARM_CCA_RMI_ABI_VERSION_MAJOR      2U
++#define ARM_CCA_RMI_ABI_VERSION_MINOR      0U
++#define ARM_CCA_RMI_ABI_VERSION            \
++    (((uint32_t)ARM_CCA_RMI_ABI_VERSION_MAJOR << 16) | \
++     ARM_CCA_RMI_ABI_VERSION_MINOR)
++
++#define ARM_CCA_RMI_VERSION_GET_MAJOR(_v)  ((_v) >> 16)
++#define ARM_CCA_RMI_VERSION_GET_MINOR(_v)  ((_v) & 0xffffU)
++
++#define ARM_CCA_RMI_FID_BASE               0xC4000150U
++#define ARM_CCA_RMI_FID(_off)              (ARM_CCA_RMI_FID_BASE + (_off))
++
++/* DEN0137 2.0-bet1 - B4.5 RMI commands */
++#define ARM_CCA_RMI_VERSION_FID                   ARM_CCA_RMI_FID(0x0)
++#define ARM_CCA_RMI_RTT_DATA_MAP_INIT_FID         ARM_CCA_RMI_FID(0x3)
++#define ARM_CCA_RMI_REALM_ACTIVATE_FID            ARM_CCA_RMI_FID(0x7)
++#define ARM_CCA_RMI_REALM_CREATE_FID              ARM_CCA_RMI_FID(0x8)
++#define ARM_CCA_RMI_REALM_DESTROY_FID             ARM_CCA_RMI_FID(0x9)
++#define ARM_CCA_RMI_REC_CREATE_FID                ARM_CCA_RMI_FID(0xa)
++#define ARM_CCA_RMI_REC_DESTROY_FID               ARM_CCA_RMI_FID(0xb)
++#define ARM_CCA_RMI_REC_ENTER_FID                 ARM_CCA_RMI_FID(0xc)
++#define ARM_CCA_RMI_RTT_CREATE_FID                ARM_CCA_RMI_FID(0xd)
++#define ARM_CCA_RMI_RTT_DESTROY_FID               ARM_CCA_RMI_FID(0xe)
++#define ARM_CCA_RMI_RTT_READ_ENTRY_FID            ARM_CCA_RMI_FID(0x11)
++#define ARM_CCA_RMI_RTT_DEV_VALIDATE_FID          ARM_CCA_RMI_FID(0x13)
++#define ARM_CCA_RMI_PSCI_COMPLETE_FID             ARM_CCA_RMI_FID(0x14)
++#define ARM_CCA_RMI_FEATURES_FID                  ARM_CCA_RMI_FID(0x15)
++#define ARM_CCA_RMI_RTT_FOLD_FID                  ARM_CCA_RMI_FID(0x16)
++#define ARM_CCA_RMI_RTT_INIT_RIPAS_FID            ARM_CCA_RMI_FID(0x18)
++#define ARM_CCA_RMI_RTT_SET_RIPAS_FID             ARM_CCA_RMI_FID(0x19)
++#define ARM_CCA_RMI_VSMMU_CREATE_FID              ARM_CCA_RMI_FID(0x1a)
++#define ARM_CCA_RMI_VSMMU_DESTROY_FID             ARM_CCA_RMI_FID(0x1b)
++#define ARM_CCA_RMI_RMM_CONFIG_SET_FID            ARM_CCA_RMI_FID(0x1e)
++#define ARM_CCA_RMI_PSMMU_IRQ_NOTIFY_FID          ARM_CCA_RMI_FID(0x1f)
++#define ARM_CCA_RMI_PDEV_ABORT_FID                ARM_CCA_RMI_FID(0x24)
++#define ARM_CCA_RMI_PDEV_COMMUNICATE_FID          ARM_CCA_RMI_FID(0x25)
++#define ARM_CCA_RMI_PDEV_CREATE_FID               ARM_CCA_RMI_FID(0x26)
++#define ARM_CCA_RMI_PDEV_DESTROY_FID              ARM_CCA_RMI_FID(0x27)
++#define ARM_CCA_RMI_PDEV_GET_STATE_FID            ARM_CCA_RMI_FID(0x28)
++#define ARM_CCA_RMI_PDEV_STREAM_KEY_REFRESH_FID   ARM_CCA_RMI_FID(0x2a)
++#define ARM_CCA_RMI_PDEV_SET_PUBKEY_FID           ARM_CCA_RMI_FID(0x2b)
++#define ARM_CCA_RMI_PDEV_STOP_FID                 ARM_CCA_RMI_FID(0x2c)
++#define ARM_CCA_RMI_RTT_AUX_CREATE_FID            ARM_CCA_RMI_FID(0x2d)
++#define ARM_CCA_RMI_RTT_AUX_DESTROY_FID           ARM_CCA_RMI_FID(0x2e)
++#define ARM_CCA_RMI_RTT_AUX_FOLD_FID              ARM_CCA_RMI_FID(0x2f)
++#define ARM_CCA_RMI_VDEV_ABORT_FID                ARM_CCA_RMI_FID(0x35)
++#define ARM_CCA_RMI_VDEV_COMMUNICATE_FID          ARM_CCA_RMI_FID(0x36)
++#define ARM_CCA_RMI_VDEV_CREATE_FID               ARM_CCA_RMI_FID(0x37)
++#define ARM_CCA_RMI_VDEV_DESTROY_FID              ARM_CCA_RMI_FID(0x38)
++#define ARM_CCA_RMI_VDEV_GET_STATE_FID            ARM_CCA_RMI_FID(0x39)
++#define ARM_CCA_RMI_VDEV_UNLOCK_FID               ARM_CCA_RMI_FID(0x3a)
++#define ARM_CCA_RMI_RTT_SET_S2AP_FID              ARM_CCA_RMI_FID(0x3b)
++#define ARM_CCA_RMI_VDEV_COMPLETE_FID             ARM_CCA_RMI_FID(0x3e)
++#define ARM_CCA_RMI_VDEV_GET_INTERFACE_REPORT_FID ARM_CCA_RMI_FID(0x80)
++#define ARM_CCA_RMI_VDEV_GET_MEASUREMENTS_FID     ARM_CCA_RMI_FID(0x81)
++#define ARM_CCA_RMI_VDEV_LOCK_FID                 ARM_CCA_RMI_FID(0x82)
++#define ARM_CCA_RMI_VDEV_START_FID                ARM_CCA_RMI_FID(0x83)
++#define ARM_CCA_RMI_VSMMU_EVENT_NOTIFY_FID        ARM_CCA_RMI_FID(0x86)
++#define ARM_CCA_RMI_PSMMU_ACTIVATE_FID            ARM_CCA_RMI_FID(0x87)
++#define ARM_CCA_RMI_PSMMU_DEACTIVATE_FID          ARM_CCA_RMI_FID(0x88)
++#define ARM_CCA_RMI_PSMMU_ST_L2_CREATE_FID        ARM_CCA_RMI_FID(0x8b)
++#define ARM_CCA_RMI_PSMMU_ST_L2_DESTROY_FID       ARM_CCA_RMI_FID(0x8c)
++#define ARM_CCA_RMI_DPT_L0_CREATE_FID             ARM_CCA_RMI_FID(0x8d)
++#define ARM_CCA_RMI_DPT_L0_DESTROY_FID            ARM_CCA_RMI_FID(0x8e)
++#define ARM_CCA_RMI_DPT_L1_CREATE_FID             ARM_CCA_RMI_FID(0x8f)
++#define ARM_CCA_RMI_DPT_L1_DESTROY_FID            ARM_CCA_RMI_FID(0x90)
++#define ARM_CCA_RMI_GRANULE_TRACKING_GET_FID      ARM_CCA_RMI_FID(0x91)
++#define ARM_CCA_RMI_GRANULE_TRACKING_SET_FID      ARM_CCA_RMI_FID(0x93)
++#define ARM_CCA_RMI_RMM_CONFIG_GET_FID            ARM_CCA_RMI_FID(0x9c)
++#define ARM_CCA_RMI_VSMMU_EVENT_COMPLETE_FID      ARM_CCA_RMI_FID(0x9e)
++#define ARM_CCA_RMI_PSMMU_EVENT_DISCARD_FID       ARM_CCA_RMI_FID(0xa0)
++#define ARM_CCA_RMI_GRANULE_RANGE_DELEGATE_FID    ARM_CCA_RMI_FID(0xa1)
++#define ARM_CCA_RMI_GRANULE_RANGE_UNDELEGATE_FID  ARM_CCA_RMI_FID(0xa2)
++#define ARM_CCA_RMI_GPT_L1_CREATE_FID             ARM_CCA_RMI_FID(0xa3)
++#define ARM_CCA_RMI_GPT_L1_DESTROY_FID            ARM_CCA_RMI_FID(0xa4)
++#define ARM_CCA_RMI_RTT_DATA_MAP_FID              ARM_CCA_RMI_FID(0xa5)
++#define ARM_CCA_RMI_RTT_DATA_UNMAP_FID            ARM_CCA_RMI_FID(0xa6)
++#define ARM_CCA_RMI_RTT_DEV_MAP_FID               ARM_CCA_RMI_FID(0xa7)
++#define ARM_CCA_RMI_RTT_DEV_UNMAP_FID             ARM_CCA_RMI_FID(0xa8)
++#define ARM_CCA_RMI_RTT_ARCH_DEV_MAP_FID          ARM_CCA_RMI_FID(0xa9)
++#define ARM_CCA_RMI_RTT_ARCH_DEV_UNMAP_FID        ARM_CCA_RMI_FID(0xaa)
++#define ARM_CCA_RMI_RTT_UNPROT_MAP_FID            ARM_CCA_RMI_FID(0xab)
++#define ARM_CCA_RMI_RTT_UNPROT_UNMAP_FID          ARM_CCA_RMI_FID(0xac)
++#define ARM_CCA_RMI_RTT_AUX_PROT_MAP_FID          ARM_CCA_RMI_FID(0xad)
++#define ARM_CCA_RMI_RTT_AUX_PROT_UNMAP_FID        ARM_CCA_RMI_FID(0xae)
++#define ARM_CCA_RMI_RTT_AUX_UNPROT_MAP_FID        ARM_CCA_RMI_FID(0xaf)
++#define ARM_CCA_RMI_RTT_AUX_UNPROT_UNMAP_FID      ARM_CCA_RMI_FID(0xb0)
++#define ARM_CCA_RMI_REALM_TERMINATE_FID           ARM_CCA_RMI_FID(0xb1)
++#define ARM_CCA_RMI_RMM_ACTIVATE_FID              ARM_CCA_RMI_FID(0xb2)
++#define ARM_CCA_RMI_OP_CONTINUE_FID               ARM_CCA_RMI_FID(0xb3)
++#define ARM_CCA_RMI_PDEV_STREAM_CONNECT_FID       ARM_CCA_RMI_FID(0xb4)
++#define ARM_CCA_RMI_PDEV_STREAM_DISCONNECT_FID    ARM_CCA_RMI_FID(0xb5)
++#define ARM_CCA_RMI_PDEV_STREAM_COMPLETE_FID      ARM_CCA_RMI_FID(0xb6)
++#define ARM_CCA_RMI_PDEV_STREAM_KEY_PURGE_FID     ARM_CCA_RMI_FID(0xb7)
++#define ARM_CCA_RMI_OP_MEM_DONATE_FID             ARM_CCA_RMI_FID(0xb8)
++#define ARM_CCA_RMI_OP_MEM_RECLAIM_FID            ARM_CCA_RMI_FID(0xb9)
++#define ARM_CCA_RMI_OP_CANCEL_FID                 ARM_CCA_RMI_FID(0xba)
++#define ARM_CCA_RMI_VSMMU_FEATURES_FID            ARM_CCA_RMI_FID(0xbb)
++#define ARM_CCA_RMI_VSMMU_CMD_GET_FID             ARM_CCA_RMI_FID(0xbc)
++#define ARM_CCA_RMI_VSMMU_CMD_COMPLETE_FID        ARM_CCA_RMI_FID(0xbd)
++
++/* DEN0137 2.0-bet1 - B4.6.1 RmiAddrBlockSize type */
++#define ARM_CCA_RMI_PAGE_L3                 0U
++#define ARM_CCA_RMI_BLOCK_L2                1U
++#define ARM_CCA_RMI_BLOCK_L1                2U
++#define ARM_CCA_RMI_BLOCK_L0                3U
++
++/* DEN0137 2.0-bet1 - B4.6.5 RmiAddrRangeDesc4KB type */
++#define ARM_CCA_RMI_ADDR_DESC_4K_SZ_SHIFT   0U
++#define ARM_CCA_RMI_ADDR_DESC_4K_SZ_WIDTH   2U
++#define ARM_CCA_RMI_ADDR_DESC_4K_CNT_SHIFT  2U
++#define ARM_CCA_RMI_ADDR_DESC_4K_CNT_WIDTH  10U
++#define ARM_CCA_RMI_ADDR_DESC_4K_ADDR_SHIFT 12U
++#define ARM_CCA_RMI_ADDR_DESC_4K_ADDR_WIDTH 40U
++#define ARM_CCA_RMI_ADDR_DESC_4K_ST_SHIFT   63U
++#define ARM_CCA_RMI_ADDR_DESC_4K_ST_WIDTH   1U
++
++/* DEN0137 2.0-bet1 - B4.6.10 RmiContinueBeyond type */
++#define ARM_CCA_RMI_CONTINUE_KEEP_GOING     0U
++#define ARM_CCA_RMI_CONTINUE_STOP           1U
++
++/* DEN0137 2.0-bet1 - B4.6.12 RmiDataFlags type */
++#define ARM_CCA_RMI_DATA_FLAGS_MEASURE_SHIFT 0U
++#define ARM_CCA_RMI_DATA_FLAGS_MEASURE_WIDTH 1U
++
++/* DEN0137 2.0-bet1 - B4.6.13 RmiDataMeasureContent type */
++#define ARM_CCA_RMI_NO_MEASURE_CONTENT       0U
++#define ARM_CCA_RMI_MEASURE_CONTENT          1U
++
++#define ARM_CCA_RMI_DATA_FLAGS_MEASURE_CONTENT \
++    (ARM_CCA_RMI_MEASURE_CONTENT << ARM_CCA_RMI_DATA_FLAGS_MEASURE_SHIFT)
++
++/* DEN0137 2.0-bet1 - B4.6.22 RmiFeature type */
++#define ARM_CCA_RMI_FEATURE_FALSE                         0U
++#define ARM_CCA_RMI_FEATURE_TRUE                          1U
++
++/* DEN0137 2.0-bet1 - B4.6.23 RmiFeatureRegister0 type */
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_S2SZ_SHIFT          0U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_S2SZ_WIDTH          8U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_LPA2_SHIFT          8U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_LPA2_WIDTH          1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_SHIFT           9U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_WIDTH           1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_VL_SHIFT        10U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_VL_WIDTH        4U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_BPS_SHIFT       14U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_BPS_WIDTH       6U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_WPS_SHIFT       20U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_WPS_WIDTH       6U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_SHIFT           26U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_WIDTH           1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_NUM_CTRS_SHIFT  27U
++#define ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_NUM_CTRS_WIDTH  5U
++
++/* DEN0137 2.0-bet1 - B4.6.24 RmiFeatureRegister1 type */
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_4KB_SHIFT  0U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_4KB_WIDTH  1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_16KB_SHIFT 1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_16KB_WIDTH 1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_64KB_SHIFT 2U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_64KB_WIDTH 1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_256_SHIFT     3U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_256_WIDTH     1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_384_SHIFT     4U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_384_WIDTH     1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_512_SHIFT     5U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_512_WIDTH     1U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_MAX_RECS_ORDER_SHIFT   6U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_MAX_RECS_ORDER_WIDTH   4U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_L0GPTSZ_SHIFT          10U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_L0GPTSZ_WIDTH          4U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_PPS_SHIFT              14U
++#define ARM_CCA_RMI_FEATURE_REGISTER_1_PPS_WIDTH              3U
++
++/* DEN0137 2.0-bet1 - B4.6.27 RmiFeatureRegister4 type */
++#define ARM_CCA_RMI_FEATURE_REGISTER_4_MEC_COUNT_SHIFT 0U
++#define ARM_CCA_RMI_FEATURE_REGISTER_4_MEC_COUNT_WIDTH 64U
++
++/* DEN0137 2.0-bet1 - B4.6.29 RmiGranuleSize type */
++#define ARM_CCA_RMI_GRANULE_SIZE_4KB         0U
++#define ARM_CCA_RMI_GRANULE_SIZE_16KB        1U
++#define ARM_CCA_RMI_GRANULE_SIZE_64KB        2U
++
++/* DEN0137 2.0-bet1 - B4.6.30 RmiHashAlgorithm type */
++#define ARM_CCA_RMI_HASH_SHA_256            0U
++#define ARM_CCA_RMI_HASH_SHA_512            1U
++#define ARM_CCA_RMI_HASH_SHA_384            2U
++
++/* DEN0137 2.0-bet1 - B4.6.35 RmiMecPolicy type */
++#define ARM_CCA_RMI_MEC_POLICY_SHARED       0U
++#define ARM_CCA_RMI_MEC_POLICY_PRIVATE      1U
++
++/* DEN0137 2.0-bet1 - B4.6.36 RmiMemCategory type */
++#define ARM_CCA_RMI_MEM_CATEGORY_CONVENTIONAL 0U
++#define ARM_CCA_RMI_MEM_CATEGORY_DEV_NCOH     1U
++#define ARM_CCA_RMI_MEM_CATEGORY_DEV_COH      2U
++
++/* DEN0137 2.0-bet1 - B4.6.37 RmiOpCanCancel type */
++#define ARM_CCA_RMI_OP_CANNOT_CANCEL        0U
++#define ARM_CCA_RMI_OP_CAN_CANCEL           1U
++
++/* DEN0137 2.0-bet1 - B4.6.38 RmiOpMemContig type */
++#define ARM_CCA_RMI_OP_MEM_NON_CONTIG       0U
++#define ARM_CCA_RMI_OP_MEM_CONTIG           1U
++
++/* DEN0137 2.0-bet1 - B4.6.39 RmiOpMemDonateReq type */
++#define ARM_CCA_RMI_OP_DONATE_BLK_SIZE_SHIFT   0U
++#define ARM_CCA_RMI_OP_DONATE_BLK_SIZE_WIDTH   2U
++#define ARM_CCA_RMI_OP_DONATE_BLK_COUNT_SHIFT  2U
++#define ARM_CCA_RMI_OP_DONATE_BLK_COUNT_WIDTH  14U
++#define ARM_CCA_RMI_OP_DONATE_MEM_CONTIG_SHIFT 16U
++#define ARM_CCA_RMI_OP_DONATE_MEM_CONTIG_WIDTH 1U
++#define ARM_CCA_RMI_OP_DONATE_MEM_STATE_SHIFT  17U
++#define ARM_CCA_RMI_OP_DONATE_MEM_STATE_WIDTH  1U
++
++/* DEN0137 2.0-bet1 - B4.6.40 RmiOpMemReq type */
++#define ARM_CCA_RMI_OP_MEM_REQ_NONE         0U
++#define ARM_CCA_RMI_OP_MEM_REQ_DONATE       1U
++#define ARM_CCA_RMI_OP_MEM_REQ_RECLAIM      2U
++
++/* DEN0137 2.0-bet1 - B4.6.41 RmiOpMemState type */
++#define ARM_CCA_RMI_OP_MEM_DELEGATED        0U
++#define ARM_CCA_RMI_OP_MEM_UNDELEGATED      1U
++
++/* DEN0137 2.0-bet1 - B4.6.60 RmiRealmFlags0 type */
++#define ARM_CCA_RMI_REALM_FLAGS0_MEC_POLICY_SHIFT 7U
++#define ARM_CCA_RMI_REALM_FLAGS0_MEC_POLICY_WIDTH 2U
++#define ARM_CCA_RMI_REALM_FLAGS0_MEC_POLICY(policy) \
++    ((uint64_t)(policy) << ARM_CCA_RMI_REALM_FLAGS0_MEC_POLICY_SHIFT)
++
++/* DEN0137 2.0-bet1 - B4.6.62 RmiRealmParams type */
++#define ARM_CCA_RMI_PARAMS_SIZE             0x1000U
++#define ARM_CCA_RMI_RPV_SIZE                64U
++
++struct arm_cca_rmi_realm_params {
++    uint64_t flags0;
++    uint8_t  s2sz;
++    uint8_t  __pad0[0x10 - 0x09];
++    uint8_t  sve_vl;
++    uint8_t  __pad1[0x18 - 0x11];
++    uint8_t  num_bps;
++    uint8_t  __pad2[0x20 - 0x19];
++    uint8_t  num_wps;
++    uint8_t  __pad3[0x28 - 0x21];
++    uint8_t  pmu_num_ctrs;
++    uint8_t  __pad4[0x30 - 0x29];
++    uint8_t  hash_algo;
++    uint8_t  __pad5[0x38 - 0x31];
++    uint64_t num_aux_planes;
++    uint8_t  __pad6[0x400 - 0x40];
++    uint8_t  rpv[ARM_CCA_RMI_RPV_SIZE];
++    uint64_t ats_plane;
++    uint8_t  __pad7[0x808 - 0x448];
++    uint64_t rtt_base;
++    int64_t  rtt_level_start;
++    uint32_t rtt_num_start;
++    uint8_t  __pad8[0x820 - 0x81c];
++    uint64_t flags1;
++    uint8_t  __pad9[0xf80 - 0x828];
++    uint64_t aux_rtt_base[3];
++    uint8_t  __pad10[ARM_CCA_RMI_PARAMS_SIZE - 0xf98];
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.63 RmiRecCreateFlags type */
++#define ARM_CCA_RMI_REC_CREATE_RUNNABLE     (1UL << 0)
++
++/* DEN0137 2.0-bet1 - B4.6.64 RmiRecEnter type */
++#define ARM_CCA_RMI_REC_ENTER_SIZE          0x800U
++#define ARM_CCA_RMI_REC_NR_GPRS             31U
++
++struct arm_cca_rmi_rec_enter {
++    uint64_t flags;
++    uint8_t  __pad0[0x200 - 0x008];
++    uint64_t gprs[ARM_CCA_RMI_REC_NR_GPRS];
++    uint8_t  __pad1[ARM_CCA_RMI_REC_ENTER_SIZE -
++                    (0x200 + ARM_CCA_RMI_REC_NR_GPRS * 8)];
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.65 RmiRecEnterFlags type */
++#define ARM_CCA_RMI_REC_ENTER_FLAG_EMUL_MMIO        (1UL << 0)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_INJECT_SEA       (1UL << 1)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFI         (1UL << 2)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_TRAP_WFE         (1UL << 3)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_RIPAS_RESPONSE   (1UL << 4)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_S2AP_RESPONSE    (1UL << 5)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_DEV_MEM_RESPONSE (1UL << 6)
++#define ARM_CCA_RMI_REC_ENTER_FLAG_FORCE_P0         (1UL << 7)
++
++/* DEN0137 2.0-bet1 - B4.6.66 RmiRecExit type */
++#define ARM_CCA_RMI_REC_EXIT_SIZE           0x800U
++
++struct arm_cca_rmi_rec_exit {
++    uint8_t  exit_reason;
++    uint8_t  __pad0[0x100 - 0x001];
++    uint64_t esr;
++    uint64_t far;
++    uint64_t hpfar;
++    uint64_t rtt_tree;
++    uint8_t  __pad1[0x200 - 0x120];
++    uint64_t gprs[ARM_CCA_RMI_REC_NR_GPRS];
++    uint8_t  __pad2[0x400 - (0x200 + ARM_CCA_RMI_REC_NR_GPRS * 8)];
++    uint64_t cntp_ctl;
++    uint64_t cntp_cval;
++    uint64_t cntv_ctl;
++    uint64_t cntv_cval;
++    uint8_t  __pad3[0x500 - 0x420];
++    uint64_t ripas_base;
++    uint64_t ripas_top;
++    uint8_t  ripas_value;
++    uint8_t  __pad4[0x520 - 0x511];
++    uint64_t s2ap_base;
++    uint64_t s2ap_top;
++    uint64_t vdev_id_1;
++    uint64_t vdev_id_2;
++    uint64_t dev_mem_base;
++    uint64_t dev_mem_top;
++    uint64_t dev_mem_pa;
++    uint8_t  __pad5[0x600 - 0x558];
++    uint16_t imm;
++    uint8_t  __pad6[0x608 - 0x602];
++    uint64_t plane;
++    uint8_t  __pad7[0x700 - 0x610];
++    uint8_t  pmu_ovf_status;
++    uint8_t  __pad8[0x710 - 0x701];
++    uint64_t vsmmu;
++    uint8_t  __pad9[ARM_CCA_RMI_REC_EXIT_SIZE - 0x718];
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.67 RmiRecExitReason type */
++#define ARM_CCA_RMI_EXIT_SYNC                  0U
++#define ARM_CCA_RMI_EXIT_IRQ                   1U
++#define ARM_CCA_RMI_EXIT_FIQ                   2U
++#define ARM_CCA_RMI_EXIT_PSCI                  3U
++#define ARM_CCA_RMI_EXIT_RIPAS_CHANGE          4U
++#define ARM_CCA_RMI_EXIT_HOST_CALL             5U
++#define ARM_CCA_RMI_EXIT_SERROR                6U
++#define ARM_CCA_RMI_EXIT_S2AP_CHANGE           7U
++#define ARM_CCA_RMI_EXIT_VDEV_REQUEST          8U
++#define ARM_CCA_RMI_EXIT_VDEV_VALIDATE_MAPPING 9U
++#define ARM_CCA_RMI_EXIT_VSMMU_COMMAND         10U
++
++/* DEN0137 2.0-bet1 - B4.6.69 RmiRecParams type */
++#define ARM_CCA_RMI_REC_CREATE_NR_GPRS      8U
++
++struct arm_cca_rmi_rec_params {
++    uint64_t flags;
++    uint8_t  __pad0[0x100 - 0x008];
++    uint64_t mpidr;
++    uint8_t  __pad1[0x200 - 0x108];
++    uint64_t pc;
++    uint8_t  __pad2[0x300 - 0x208];
++    uint64_t gprs[ARM_CCA_RMI_REC_CREATE_NR_GPRS];
++    uint8_t  __pad3[ARM_CCA_RMI_PARAMS_SIZE -
++                    (0x300 + ARM_CCA_RMI_REC_CREATE_NR_GPRS * 8)];
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.70 RmiRecRun type */
++#define ARM_CCA_RMI_REC_RUN_SIZE            0x1000U
++
++struct arm_cca_rmi_rec_run {
++    struct arm_cca_rmi_rec_enter enter;
++    struct arm_cca_rmi_rec_exit  exit;
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.73 RmiResult type */
++#define ARM_CCA_RMI_RESULT_STATUS_SHIFT     0U
++#define ARM_CCA_RMI_RESULT_STATUS_WIDTH     8U
++#define ARM_CCA_RMI_RESULT_DATA_SHIFT       8U
++
++/* DEN0137 2.0-bet1 - B4.6.74 RmiResultDataIncomplete type */
++#define ARM_CCA_RMI_RESULT_INCOMPLETE_MEM_SHIFT        0U
++#define ARM_CCA_RMI_RESULT_INCOMPLETE_MEM_WIDTH        2U
++#define ARM_CCA_RMI_RESULT_INCOMPLETE_CAN_CANCEL_SHIFT 2U
++#define ARM_CCA_RMI_RESULT_INCOMPLETE_CAN_CANCEL_WIDTH 1U
++
++/* DEN0137 2.0-bet1 - B4.6.77 RmiRipas type */
++#define ARM_CCA_RMI_RIPAS_EMPTY             0U
++#define ARM_CCA_RMI_RIPAS_RAM               1U
++#define ARM_CCA_RMI_RIPAS_DESTROYED         2U
++#define ARM_CCA_RMI_RIPAS_DEV               3U
++
++/* DEN0137 2.0-bet1 - B4.6.78 RmiRmmConfig type */
++#define ARM_CCA_RMI_RMM_CONFIG_SIZE         0x1000U
++#define ARM_CCA_RMI_TRACKING_4KB_REGION_1GB 0U
++
++struct arm_cca_rmi_rmm_config {
++    uint8_t  tracking_region_size;
++    uint8_t  __pad0[0x8 - 0x1];
++    uint8_t  rmi_granule_size;
++    uint8_t  __pad1[ARM_CCA_RMI_RMM_CONFIG_SIZE - 0x9];
++} __packed;
++
++/* DEN0137 2.0-bet1 - B4.6.80 RmiRttAddrType type */
++#define ARM_CCA_RMI_ADDR_TYPE_NONE          0U
++#define ARM_CCA_RMI_ADDR_TYPE_SINGLE        1U
++#define ARM_CCA_RMI_ADDR_TYPE_LIST          2U
++
++/* DEN0137 2.0-bet1 - B4.6.93 RmiStatusCode type */
++#define ARM_CCA_RMI_SUCCESS                 0U
++#define ARM_CCA_RMI_ERROR_INPUT             1U
++#define ARM_CCA_RMI_ERROR_REALM             2U
++#define ARM_CCA_RMI_ERROR_REC               3U
++#define ARM_CCA_RMI_ERROR_RTT               4U
++#define ARM_CCA_RMI_ERROR_NOT_SUPPORTED     5U
++#define ARM_CCA_RMI_ERROR_DEVICE            6U
++#define ARM_CCA_RMI_ERROR_RTT_AUX           7U
++#define ARM_CCA_RMI_ERROR_PSMMU_ST          8U
++#define ARM_CCA_RMI_ERROR_DPT               9U
++#define ARM_CCA_RMI_BUSY                    10U
++#define ARM_CCA_RMI_ERROR_GLOBAL            11U
++#define ARM_CCA_RMI_ERROR_TRACKING          12U
++#define ARM_CCA_RMI_INCOMPLETE              13U
++#define ARM_CCA_RMI_BLOCKED                 14U
++#define ARM_CCA_RMI_ERROR_GPT               15U
++#define ARM_CCA_RMI_ERROR_GRANULE           16U
++
++/* DEN0137 2.0-bet1 - B4.6.94 RmiTrackingRegionState type */
++#define ARM_CCA_RMI_TRACKING_RESERVED       0U
++#define ARM_CCA_RMI_TRACKING_NONE           1U
++#define ARM_CCA_RMI_TRACKING_FINE           2U
++#define ARM_CCA_RMI_TRACKING_COARSE         3U
++
++#endif /* ARM_CCA_RMI_ABI_H */
 -- 
 2.51.0
 
