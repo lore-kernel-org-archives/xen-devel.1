@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B84CD4F3D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1904CD4F48
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 11:55:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309889.1580899 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1309894.1580943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNr88-0004vl-G2; Fri, 15 May 2026 11:55:00 +0000
+	id 1wNr8D-00063w-10; Fri, 15 May 2026 11:55:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309889.1580899; Fri, 15 May 2026 11:55:00 +0000
+Received: by outflank-mailman (output) from mailman id 1309894.1580943; Fri, 15 May 2026 11:55:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNr88-0004v1-Bb; Fri, 15 May 2026 11:55:00 +0000
-Received: by outflank-mailman (input) for mailman id 1309889;
- Fri, 15 May 2026 11:54:59 +0000
+	id 1wNr8C-00062H-Q0; Fri, 15 May 2026 11:55:04 +0000
+Received: by outflank-mailman (input) for mailman id 1309894;
+ Fri, 15 May 2026 11:55:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1wNr87-0004s4-1F
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 11:54:59 +0000
+ (envelope-from <Mykyta_Poturai@epam.com>) id 1wNr8A-0005iU-Sc
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 11:55:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNr86-00Abbl-DX
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 13:54:58 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wNr8A-00Abfr-7u
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 13:55:02 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 6a070990-e002-0a2a0a5209dd-0a2a450aa776-8
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 13:54:58 +0200
-Received: from [52.101.70.125]
- (helo=AS8PR04CU009.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a070992-5cb7-0a2a0a5109dd-0a2a4506b864-10
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 13:55:02 +0200
+Received: from [52.101.66.84]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 6a070991-56b3-0a2a450a0019-3465467d29db-4
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 13:54:58 +0200
+ id 6a070995-7371-0a2a45060019-34654254c125-4
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 13:55:02 +0200
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by PA4PR03MB6926.eurprd03.prod.outlook.com
- (2603:10a6:102:e4::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Fri, 15 May
- 2026 11:54:55 +0000
+ (2603:10a6:102:30d::12) by PAWPR03MB10041.eurprd03.prod.outlook.com
+ (2603:10a6:102:359::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
+ 2026 11:55:00 +0000
 Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
  ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.20.9913.009; Fri, 15 May 2026
- 11:54:55 +0000
+ 11:55:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,31 +57,32 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Snuy+/Ydv9IS9NNHSrazbS8S2KXSVad1Fk9NbnK3sdxyXkHv/L2dtPvSuARonY+w6zVahRz7EBMIZPpbfGl/7IdZEiQe0y+zY19ywjbq26CXELqnYGUHhNqOd/nLaou+Ib8C9AQKvToT3d6GP4EFr5Ynm/MoQ+QniHBWQqtk5anb+0jNdZZSupCDseX79YXNN3vMvgg8sXbUHIrtnbNAcmYkEKkSKE9NLWuQl5rsQ7SooS7Ssh1x64fP3P6CmeoOvwlTgGTejgENLsqNjei56gIE/IXm0lJupAxsuoX53AptLIEqyTfDtEcqvvTArFdgx286w4wdgdRu3skziVPSYw==
+ b=Xvd5ox8lCacXHvewJSoAkqfJvd6/dfeGcZTsYeEhVszfS/xITvLsQdY/PbeKg1S+81la/W96Q+KVUcL7WiDStiiO4w566917/EhifZ596D5+FA3GQhj35SRCabofgl9XMag0Lt+tI0H3BxBjjGXR137JS8aMOyK9vLQqKX5Cb1SIhsk5Z0ZqXQe1riUix2RGSdxqU72n1FmIaJ500HQFnYNeNqkDcGRyDjB+uVY7AGqKuaKkxqKa4x/7qU2uXo2mtIVOq+sQrs/VfJcXOzRRuDi1VVnbpzI/4FHdPL+37YfvKAJDkYpLVmXA4OerL2SwXa/D6TW+fvVkx5IGfvzqcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MhGSJeVHTRH7CAcL+cB5KNt1t+/dEP9CdloVh0N4g78=;
- b=jkLpAfmIVHca36S6icMq30wDyZYtmLEPyif4U9s2b6prr80A9kUGmc+w01et/JJa3RL/iqSqeQvbwYtsU2u9qGEehd40N8u64mbd0Q3L0PXfr/lRyE0KPcnuD6Ko8cX2MTdTw4Kda9l1x/oO+gwAWTVdIEfjCgB8/hJHXjoLRO0A2qYxvzBzau3aCii102J4XZD2E3gWAx6YF26T7+aSMr8M/7AaYVbvwDY4Dowammlip0MKNUhIslW+kyVLBz3SSlS8DL0975q6mRnjyPFI3HvQDL2cwkwMT4DWl84ay4VyRkNhIK7ANLiAeG593916bGC0mFYd72+NqhX0UoBdUQ==
+ bh=ZGvS3Z0LQ8kTmqlPZB0z2Geh8xllBaRZzc/PcFgMUJc=;
+ b=Bhyil7I3BUXxvve3EkzPzWxfXrtSBX9ztHIpx+loUoGro8lIT2e0w6TA/tbzJumQMRWwNALPksJkXzOBdherIrrDyuOgCLZT232ihMLPVxDDKuIEaNLm/Z/hv6WlV5Wta9BmvxOL0LfzYfG/cEb+pUfmvNUYG3n9DOcwHI7DbhFT74bYhEITZ4wXwsAiS3HxjzhxqGlcV3rrOBSUisLsiPrRdDEAcQ4waogW9rpM+rqb6L5M0Gyq9TCNuqoYv8urYjd8oXQO8PSWAc48PsoBYIYaE9J/QJp7If0pMFY6WNZjwilk8TPDcVWlhXitHiQ9cRN3tdtR06Kv82NbdKMqRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MhGSJeVHTRH7CAcL+cB5KNt1t+/dEP9CdloVh0N4g78=;
- b=JYXou3GXG4cKitsmoVYyC87XDBzN5GnnFx3h3QchgTFzVG8SahLk3AAJ5NoajWA/9VZtVykUL3ch2ukF7BQ81OZhmqWu1KXCcVI4Qp5WnVe2+dE4gBHJ0Xn6JX6Cz4alz9q16cgOAqGg7GIWN3jw0NFxQr9HPJ8lhYJNXybcDNYWpMwkYep1w7Y2bTgqIfw8+v6cHUheLjRUegv/VT8MamQ5zns5hs7O4c4XEr2PlDB/e19ktecYs/6OvGNIkJ7qAQm/6kXXz/GWvhhfpfkvsYO1/nlRiKh2lm3h7A1nfqPIFv1BU+WzhKz+w9kw/yqTGhVVH8z9PqYbJOvK/jJmig==
+ bh=ZGvS3Z0LQ8kTmqlPZB0z2Geh8xllBaRZzc/PcFgMUJc=;
+ b=lo6fnlPY5/8817h88VZIgEVD6TaiOgCrV+UPog2Zz2KEUsKmuMli9RUkTdyKVTcGSRRUfsPnEK3/P8x4YmtVF/pxdQ6oxYwHZ/GqnVSEpegBiU6eTd+iJYxkMXy0TOfEyJZZq9wp9nIRCC8/+5tsBIsNA1biv1kkpop8jA1TnTXEj69YaMx1N2T1Hs9XcE9aj4AXxw2de+iyEURBRp1U0r8D6JH8/4BaaHCwqVdjOep/sUXbZGuFYOOVM2vzEzjP9nB9VZmnp1pjzTG+vTACnytftkWP0eEChFxy80il8TUyB05Lpqi6Jr4l7nltgG69ViXKvTW7dInpIfEEB674yg==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v8 1/6] arm/irq: Keep track of irq affinities
-Thread-Topic: [PATCH v8 1/6] arm/irq: Keep track of irq affinities
-Thread-Index: AQHc5GGlhAXHchguZ0CmpA+A7r8r9w==
-Date: Fri, 15 May 2026 11:54:55 +0000
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
+ Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v8 6/6] docs: Document CPU hotplug
+Thread-Topic: [PATCH v8 6/6] docs: Document CPU hotplug
+Thread-Index: AQHc5GGoBdOGHWvGVUGtOnMe3K2aGw==
+Date: Fri, 15 May 2026 11:55:00 +0000
 Message-ID:
- <72c0423562c81fe1bc90aaaf1f79599a94e771ca.1778845596.git.mykyta_poturai@epam.com>
+ <e6e99b166f17a463f0e0fe46c2a0dfa37af3bf06.1778845596.git.mykyta_poturai@epam.com>
 References: <cover.1778845596.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1778845596.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -91,284 +92,209 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PA4PR03MB6926:EE_
-x-ms-office365-filtering-correlation-id: 4ee603f3-306f-4d06-2e97-08deb278c83e
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|PAWPR03MB10041:EE_
+x-ms-office365-filtering-correlation-id: 879b4254-ce83-4198-b073-08deb278cad0
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|22082099003|18002099003|56012099003|38070700021|11063799003;
+ BCL:0;ARA:13230040|376014|366016|1800799024|11063799003|22082099003|38070700021|56012099003|18002099003;
 x-microsoft-antispam-message-info:
- pLwNM8Er6ig/o1Q7nkTpSfBLQCjxJLFBpPY3Rwo9rONhG1VD+wWlfaLgY3w+yWkrpCj8FrpkULZkgDdmLw7BejBL7mvdzFcwKzt+b5G8kU9W57jP8f4HugBgsmI8xpuPzChNHAILJa3QikG4XlEO7aAvFM8JnlBYeWHNc451+iqvZXQeYPzwNdBCX45pUnTacn+/i5f/tYYdigXePRcxglZASwHAmIdBQrgVgWyG1IfINgUjnp8dXvVb4VyPLvNjBnNRWcp91l0Jq5Y8SjOQYOqw91y/XTcus9OKRMocqeL9C1iy/9ZquDpVcIXx7+5xKP2djxYvObC+m5M9XpiX6XTGKSKFYXRxfbbZ0OjlgOCrU3iYIDKDblz+2v0lh9wsOXBfcSbQdivcKXdO9bHwKqAfC3S8hV8OsGhlF3A21UwG2Y24AW+kk8Fe8PzArc0/nszB3kfXffDG2hUC9jS2qE4+SUlFB4azeOZUiScrjIlv99tPCcL8NMPxkCVrDYSBFYCDrgQQTMuytMJc+U/UHO9yeGlA3bd+HkwWd9J8kwuo8VMYtcuSLgSxhMgc1ONLBbr0cZTD0+k9Tsl+BIHuyzBqe21Xwb+39TwJbaW0Zrv7IC/bcLPsYpdashQS+1BG7l9OHSWIGynCOSpjjmHrJsX9TMYBdoBXxj0WxnyGWcJm2oVLnCriotVPtXQvOfqup4olYLGDIlwdilpf6n8ELWfzttZfF8Z8fggV+Kobo17KE8YR3SCNt0mZ+2cA2k24
+ 4+OiTyNXc2VaawV7LA0U9P8tToYSvZ6JyXo28gMA58KlW+QHmJkvaL2Gs9uVT8/YHjmuinskbLxIcED6yKz047vSQYlWl7Ut95xvMFvUG+m6PiZ7Vi6QtQVJV+Y0XU7+056tr/9tWqm4Jfj/FDJBxNAMeEqXMYS4Q6c8b+iaO0WbCJgp/O8QsafB484q9nM8p05wtROkd5TJY/EnKIpvpjztvBoxuVUKqxmvjUlBbmiETSele34vRteGYirCDIk9kb+3G32HSmsKDReL2nAiHANa+Nw7fo7v3NO5GRikI8VW2DYsZTLxAbk1uIxGTlS49mfQVjInxDjF/2+mCaU+iwkLkdR2E+5mrYfdEJzc7n+G/S1IhUHOQ34LKrlyX/GxUF6+y8kH33royP1OsFy+67l+EhqI0JLmdZqTNh7uC4HDTEQrLNJ0/vcjBJWkSooN3SHyykLLmzGuVv7buPOWgw+q/uJWGvAZ+Ek60HvlytTxmt8gB0hbaE9vqtDHIN2i+bR5lubQa9s/5Jd6tKUJDOt2hh17TNmT15D7LwPQidaYJzT1c8IQCOEPAw5n/GD1XlalDCLazZ/9yGP0GNl6KdU9uQCdQRrufH5UwRRkATFH8J0Wl6kAhU/U0/7DY9bGO7CUDgCWI5zXLXOFcODEm6Lo2GkoeGN8J0exwhZxa1fNk/LJsxtHign89YcteMzqY+dJ3H8r65FujAp07eXkYeMNuYTP0kvF7HlOXNGbSbztyCnCiSY/JiOzuYIwXwCc
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(18002099003)(56012099003)(38070700021)(11063799003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(11063799003)(22082099003)(38070700021)(56012099003)(18002099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?w7tFQc4EaOeUK15ooJaNHTskvIt+ccLep8Tuyco6gYx/dahIFTsrWFdLYa?=
- =?iso-8859-1?Q?oMn6yoVdm9+b2ieHqm/VQxhZkYfInq+tY0C4FRpaNYHDN/H8OfuxEw7cwn?=
- =?iso-8859-1?Q?o9bFRyR6eEzHjDO/f5jhlnjs2PKxZUWFVVqHFX9uS7MMz83+mrD5Zsx+AH?=
- =?iso-8859-1?Q?s/5pqIUZPsZ6DXO4oDHDN/2xfecAIu7bI28i3FVBaw0diBzhkG7/sdzgw2?=
- =?iso-8859-1?Q?iIyn1sIPlQ+AvxOOddMRQHOoxMAJoflWCBuJA46d0mJyTfK+T5/8FbJoZz?=
- =?iso-8859-1?Q?TB5NeRVoQWNwb86OiF/lS9KuUol0kAp1quIJ6Rvl/tB9MK6W0h1ECx2Wfl?=
- =?iso-8859-1?Q?pnrGtHMyx7yj6bfzb/c+PDCyXxIede1xeIsJB+3gavYgWRk+IflhnQovMZ?=
- =?iso-8859-1?Q?H8JzR45BaKq3nTx9UkaER8w798AuvAEK3BlaJ7AIZSsVa6yEKZ26K30Ij4?=
- =?iso-8859-1?Q?jQqT9oAUzcqy19CXAk2xBu2CNFHOC/x4A7kMn39/ZAZdTtQ6UeTTWUByYI?=
- =?iso-8859-1?Q?heOgP2jHfvHhl01wZYKMFY3wJRELEU5Yg+g7/Fkxqqxe8RiR0XwDhflc29?=
- =?iso-8859-1?Q?IiSACpoN23DenxAE/B0RCV4l5lnaC4qrfFq8QMTs/dv/msbrUj5O+PizyH?=
- =?iso-8859-1?Q?8D0gmykMpHK5Z918JXA6u4vDfJV0qqoLltMvYVbilXyYncJvBRuK3LSE5h?=
- =?iso-8859-1?Q?Mtr0LAh0j2iNLh2L44aWB1h0p3LodCsoerCyJBT8P+IxtnQHyPQL38dPdj?=
- =?iso-8859-1?Q?BvbkQXDT3YXf97ZwMFyiN4nyKsS23UGaTYPRpJhfXh2PPr8KXW8Nrqbbf9?=
- =?iso-8859-1?Q?5BSRN/oWfFi24wEdvwbgGIo5HzoB0kDznrABXOZQAWnq1WzkvWcTuOXGsW?=
- =?iso-8859-1?Q?vAk/5UwTZhpm0zgCMMBEeKwzOpay52VNJOKNwwf6AySeD/UJU/44Bhl9RY?=
- =?iso-8859-1?Q?lc/hQO1WQR0Ax8krReJe7YCtA+h5iyUNEHYabVY/zf7WiMMTxdAqr3akKx?=
- =?iso-8859-1?Q?Da73FZw5R3+qftgQ+hhnOyca2kqgA8zUEfgWfmQyXeC/u/xuHgWNQyfMPZ?=
- =?iso-8859-1?Q?ZM/BpBCIxv8ZtXbPWu6kWRHzRsaGY34EcRXjxkTRnyMAkoexDtNhfIUw9Z?=
- =?iso-8859-1?Q?iV/nhfTb4fTJu4M4TZKgj+iJHHIMGXJEg+D3/IRthqFYVLPQ63CYWgWQsr?=
- =?iso-8859-1?Q?nTHlSw372Vjohu8n6ub8dDiJGmL4vR3TNbDvDfA5+A9uRxSj1TYCRQIF3y?=
- =?iso-8859-1?Q?vJ1hjouaJVu9bKxicYRxwMAOt8XpwoIp6w3n9dYg9DkaZ92eYjncWtBIZx?=
- =?iso-8859-1?Q?CqgkfkCV5Hv3Te4Jt/mFAz8PHbUWx11S8PdPjvbl2pve8l0rC4JjURTkMu?=
- =?iso-8859-1?Q?CRMBaA0tKjfSB65NY2Q+HUy0/+6ujA7Nz5iijbHj7Co1Ssf3t6w3Xl/+9R?=
- =?iso-8859-1?Q?+wm+8Esm+vxgcqlIJnTlYxJqVEY4jv8G/U8xTGCUEaNWDr8vggZkIhrCDC?=
- =?iso-8859-1?Q?gL85IysEFIdbF+2eISJ+n3s3eGyMvSzChADj4Hs4uKy0e9JoGth9+W1WIE?=
- =?iso-8859-1?Q?0Seo5sKfQhQqxbsYiHTl7w5YfhwZbmr0/+nsBI8ZrmsAQrAhmxDNu/Et1W?=
- =?iso-8859-1?Q?E+e1v1crEs73uKd/tKbYWkViYtfJFCQEWnYWiRUJywlzyT7xrHV+LvolYv?=
- =?iso-8859-1?Q?GyBpyY0FsyaDz6Q/CZ8qJ5JFi7fnmuM6fSE+LEGF74tEp4I2EBOQ0fefwZ?=
- =?iso-8859-1?Q?v5512uT5XChLhtH/bdYRl8KFx4vbHPRU+WOoKylGOcXNjtLaImgdfRMYfZ?=
- =?iso-8859-1?Q?YxAAxSLhl2qk3MTDRg/vBV274zQwvNA=3D?=
+ =?iso-8859-1?Q?/E76yz3O02+JEVmc4dz7WOdng03Rd+6Mkt63L0nSES7R5psYbX2TVX/HU7?=
+ =?iso-8859-1?Q?wZLcbmk6vXI1igiGl9iN803ErJKilQlS+fcHzvzRw4MZXS8fnpKk3P4JSP?=
+ =?iso-8859-1?Q?NxoeXalGpuiMzBdc224SI0wTj6On7PO10j6ahCoJ/9pVKch7HVhsvEAMH+?=
+ =?iso-8859-1?Q?usywcBDjrYyJy+80SyeuzP2k+wBvIPtLRw+QJB89MZVaQIgTnY7ExUrMec?=
+ =?iso-8859-1?Q?mou9Vkbjw0mZo4dAue0xFqOvfT7wF7V84WKu+8ybl0zlslZtO6LXEBdGUx?=
+ =?iso-8859-1?Q?qIjn7kB+JJJHINC/iMeYr4IZacGjHHF+Lc4mKuBec9cqprsqXIgKwkmG07?=
+ =?iso-8859-1?Q?JfAjPExuosafGWqKgLdj040nA8a3Y7N6hkRWIDGUK0MyD5MmkUrSESSQo7?=
+ =?iso-8859-1?Q?jMOLpKjU4+Bbv5V2gcY420xsrNEM/fropg/OEvCFGKahvYrVLYfCBAiVRc?=
+ =?iso-8859-1?Q?sHp1Iv8ZLLWTBudIKxQ1XpMRjERhpeEyX1rYudWJrUCnYwUT2hNLNzKmFP?=
+ =?iso-8859-1?Q?+K2zGb4U3ZysFOEeBvj1YyaS8rNsQVD756HNRk6FXE/yRRuLF0i+CR6Hl+?=
+ =?iso-8859-1?Q?n1MxMjc1RjnAG82RCQLRlZfa5/rTkCc4+hHA60ps1Pbq6fAvtJ1y37+sAd?=
+ =?iso-8859-1?Q?HEgPS/NHlkxhTFlO4bTCammvWs7u2tmdnq8MsODjp1uift3EpaeG/aZlsp?=
+ =?iso-8859-1?Q?e+rumSIdIGzQE+zETEgsipWm9/pIaGV1BHymLubX6gU3rHNGKTjHxX4KZE?=
+ =?iso-8859-1?Q?b9bc4mpt9C++pxDy9/GdtFwiWSAdEJvBT2EalraMTInmDX4s62lqXT3RWs?=
+ =?iso-8859-1?Q?K5UlBVeO1cacC4XBVcR/HgLDjGXUeqre/cPekpgduFyGK2PBhjMfe73qRW?=
+ =?iso-8859-1?Q?V/Cx2yviCs1w87s2e9Tv4k3Ln/MNmuJ3LAZwwwNDol9rtuSbiZG+B2ztpk?=
+ =?iso-8859-1?Q?snyAnGgvS22vsheUzQSJ56yi7q1rbo8V+8IiUW0KnZ9xUd8WkV3Ow6yLiv?=
+ =?iso-8859-1?Q?ynlZa/Pf0Dl51YmQxbzwI9UxwbsG+SsZBfW30j8OjDeDBR0/1J1hQDOlju?=
+ =?iso-8859-1?Q?3dfc7dGSwpLsNuSqmqoLYINDh4lNnackM4lK+Mm0n4lVo43rukd3nzaYcR?=
+ =?iso-8859-1?Q?nfgOhM+xXKZ9EbqQYF4BO/n2vcaup8OEr2oAR/0IL0wFFBrKEB7NbkpB+5?=
+ =?iso-8859-1?Q?IHRqKXHx/sy01BriQfRC2ryagPy/yZCB7MVgafQfF/+ygPe/pv2Q74myAl?=
+ =?iso-8859-1?Q?TSRasmWFg0Opt6OyWz38WWahXrQqe9qqATXmZa3qRvQDUSFAiDMMtIBOEd?=
+ =?iso-8859-1?Q?PbKIF0S8gVhINCPRVXc6w1Tsleydkl2huPdJmK/F9uJQOrcHUUT/1zoL3d?=
+ =?iso-8859-1?Q?mz0oh/KXn3XQ78U5h/VAdZeDK6fq8xvm9ra94dbB0jNHgRUu+spEBuU3Ot?=
+ =?iso-8859-1?Q?2OrDB9cLbclz7aw1CeNMqQ8A0/f0kl9UH29eGHEIz9jTPBhPL5OCp9AA94?=
+ =?iso-8859-1?Q?XC5gboeGpTo6nbBqJF51OpNIIgETfxQpcU9Hy22OF2/nhW+unAuNeHKA8w?=
+ =?iso-8859-1?Q?68U59lk3yfwN/6BqyrYojNq30cR7BAadmywvKseJ52SPDLDSTMoWF9R7w2?=
+ =?iso-8859-1?Q?rPHSzwcTb/5oqvcLbVmCJp0tqKjkKJE6kjv+YakxHu+EQ0N2q8th2eekng?=
+ =?iso-8859-1?Q?XovAMO5Wl8qr+DL3lE/alT4+7IPGslDdJVTrtN6KEU2PkOf4G6qd90gi7X?=
+ =?iso-8859-1?Q?wXKdplEjGOJp2VzTC0/DVyibCzn6VH8rLIevZChV2i5beZmGh3GlKy1eUd?=
+ =?iso-8859-1?Q?UqgLvJjWWu+8+kRExG/jfMGIpqxVfHY=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ee603f3-306f-4d06-2e97-08deb278c83e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 May 2026 11:54:55.8111
+X-MS-Exchange-CrossTenant-Network-Message-Id: 879b4254-ce83-4198-b073-08deb278cad0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 May 2026 11:55:00.1201
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 7VH8yQHnDiXEazKaq/MnALjWxTFEsshPBt/VlZWgTZQpJr+0+vlYBr3aeQRg2rX7guF/ew7YpfSjAJwtNX0riA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6926
-X-purgate-ID: tlsNG-4011c0/1778846098-7236B8B7-D21091B9/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: I24eQVDuQILocZ5jvkxOiD8pQHl/xdbrOURYhqJY/woe5SNjXBjyVDrbjNn0RI3IFJqxJUVG8OM6K0ApyVwASQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB10041
+X-purgate-ID: tlsNG-16d1c6/1778846102-8E98AD75-2C7EFC66/0/0
 X-purgate-type: clean
-X-purgate-size: 7495
-
-Currently on Arm the desc->affinity mask of an irq is never updated,
-which makes it hard to know the actual affinity of an interrupt. Fix
-this by updating the field in irq_set_affinity. Changing desc->affinity
-requires desc->lock to be held, so add an assertion to ensure that
-callers of irq_set_affinity are doing so correctly.
-
-With desc->lock now being required for irq_set_affinity, add locking
-around calls to it where it was missing.
+X-purgate-size: 4040
 
 Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-
 ---
+v7->v8:
+* remove support status update
+* update config option name
+
 v6->v7:
-* update commit message
-* fix possible locking on null desc
-* collect RBs
+* add testing and limitations
 
 v5->v6:
-* add missing locking around irq_set_affinity calls
+* no changes
 
 v4->v5:
-* add locking
+* s/supported/implemented/
+* update SUPPORT.md
 
 v3->v4:
+* update configuration section
+
+v2->v3:
 * patch introduced
 ---
- xen/arch/arm/gic-vgic.c          |  2 ++
- xen/arch/arm/irq.c               |  9 +++++++--
- xen/arch/arm/vgic.c              | 14 ++++++++++++--
- xen/arch/arm/vgic/vgic-mmio-v2.c | 11 +++++------
- xen/arch/arm/vgic/vgic.c         | 21 +++++++++++++--------
- 5 files changed, 39 insertions(+), 18 deletions(-)
+ docs/misc/cpu-hotplug.txt | 97 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+ create mode 100644 docs/misc/cpu-hotplug.txt
 
-diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
-index fae80e6cd2..28ad4903b4 100644
---- a/xen/arch/arm/gic-vgic.c
-+++ b/xen/arch/arm/gic-vgic.c
-@@ -232,7 +232,9 @@ static void gic_update_one_lr(struct vcpu *v, int i)
-             if ( test_bit(GIC_IRQ_GUEST_MIGRATING, &p->status) )
-             {
-                 struct vcpu *v_target =3D vgic_get_target_vcpu(v, irq);
-+                spin_lock(&p->desc->lock);
-                 irq_set_affinity(p->desc, cpumask_of(v_target->processor))=
-;
-+                spin_unlock(&p->desc->lock);
-                 clear_bit(GIC_IRQ_GUEST_MIGRATING, &p->status);
-             }
-         }
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 73e58a5108..7204bc2b68 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -216,10 +216,15 @@ static inline struct domain *irq_get_domain(struct ir=
-q_desc *desc)
-     return irq_get_guest_info(desc)->d;
- }
-=20
-+/* Must be called with desc->lock held */
- void irq_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
- {
--    if ( desc !=3D NULL )
--        desc->handler->set_affinity(desc, mask);
-+    if ( desc =3D=3D NULL )
-+        return;
+diff --git a/docs/misc/cpu-hotplug.txt b/docs/misc/cpu-hotplug.txt
+new file mode 100644
+index 0000000000..d2ed1d6b8b
+--- /dev/null
++++ b/docs/misc/cpu-hotplug.txt
+@@ -0,0 +1,97 @@
++CPU Hotplug
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 +
-+    ASSERT(spin_is_locked(&desc->lock));
-+    cpumask_copy(desc->affinity, mask);
-+    desc->handler->set_affinity(desc, mask);
- }
-=20
- int request_irq(unsigned int irq, unsigned int irqflags,
-diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-index 6647071ad4..c59f6873db 100644
---- a/xen/arch/arm/vgic.c
-+++ b/xen/arch/arm/vgic.c
-@@ -445,7 +445,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
-=20
-     if ( list_empty(&p->inflight) )
-     {
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         return true;
-     }
-@@ -453,7 +455,9 @@ bool vgic_migrate_irq(struct vcpu *old, struct vcpu *ne=
-w, unsigned int irq)
-     if ( !list_empty(&p->lr_queue) )
-     {
-         vgic_remove_irq_from_queues(old, p);
-+        spin_lock(&p->desc->lock);
-         irq_set_affinity(p->desc, cpumask_of(new->processor));
-+        spin_unlock(&p->desc->lock);
-         spin_unlock_irqrestore(&old->arch.vgic.lock, flags);
-         vgic_inject_irq(new->domain, new, irq, true);
-         return true;
-@@ -473,6 +477,7 @@ void arch_move_irqs(struct vcpu *v)
-     struct domain *d =3D v->domain;
-     struct pending_irq *p;
-     struct vcpu *v_target;
-+    unsigned long flags;
-     int i;
-=20
-     /*
-@@ -494,7 +499,13 @@ void arch_move_irqs(struct vcpu *v)
-         p =3D irq_to_pending(v_target, virq);
-=20
-         if ( v_target =3D=3D v && !test_bit(GIC_IRQ_GUEST_MIGRATING, &p->s=
-tatus) )
-+        {
-+            if ( !p->desc )
-+                continue;
-+            spin_lock_irqsave(&p->desc->lock, flags);
-             irq_set_affinity(p->desc, cpu_mask);
-+            spin_unlock_irqrestore(&p->desc->lock, flags);
-+        }
-     }
- }
-=20
-@@ -574,8 +585,8 @@ void vgic_enable_irqs(struct vcpu *v, uint32_t r, unsig=
-ned int n)
-         spin_unlock_irqrestore(&v_target->arch.vgic.lock, flags);
-         if ( p->desc !=3D NULL )
-         {
--            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             spin_lock_irqsave(&p->desc->lock, flags);
-+            irq_set_affinity(p->desc, cpumask_of(v_target->processor));
-             /*
-              * The irq cannot be a PPI, we only support delivery of SPIs
-              * to guests.
-@@ -944,4 +955,3 @@ void vgic_check_inflight_irqs_pending(struct vcpu *v, u=
-nsigned int rank, uint32_
-  * indent-tabs-mode: nil
-  * End:
-  */
--
-diff --git a/xen/arch/arm/vgic/vgic-mmio-v2.c b/xen/arch/arm/vgic/vgic-mmio=
--v2.c
-index b7c2d7ce99..fc04741ca1 100644
---- a/xen/arch/arm/vgic/vgic-mmio-v2.c
-+++ b/xen/arch/arm/vgic/vgic-mmio-v2.c
-@@ -159,24 +159,23 @@ static void vgic_mmio_write_target(struct vcpu *vcpu,
-     for ( i =3D 0; i < len; i++ )
-     {
-         struct vgic_irq *irq =3D vgic_get_irq(vcpu->domain, NULL, intid + =
-i);
-+        struct irq_desc *desc =3D irq_to_desc(irq->hwintid);
-=20
--        spin_lock_irqsave(&irq->irq_lock, flags);
-+        spin_lock_irqsave(&desc->lock, flags);
-+        spin_lock(&irq->irq_lock);
-=20
-         irq->targets =3D (val >> (i * 8)) & cpu_mask;
-         if ( irq->targets )
-         {
-             irq->target_vcpu =3D vcpu->domain->vcpu[ffs(irq->targets) - 1]=
-;
-             if ( irq->hw )
--            {
--                struct irq_desc *desc =3D irq_to_desc(irq->hwintid);
--
-                 irq_set_affinity(desc, cpumask_of(irq->target_vcpu->proces=
-sor));
--            }
-         }
-         else
-             irq->target_vcpu =3D NULL;
-=20
--        spin_unlock_irqrestore(&irq->irq_lock, flags);
-+        spin_unlock(&irq->irq_lock);
-+        spin_unlock_irqrestore(&desc->lock, flags);
-         vgic_put_irq(vcpu->domain, irq);
-     }
- }
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index b2c0e1873a..1c44236c4f 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -812,22 +812,27 @@ void arch_move_irqs(struct vcpu *v)
-     {
-         struct vgic_irq *irq =3D vgic_get_irq(d, NULL, i + VGIC_NR_PRIVATE=
-_IRQS);
-         unsigned long flags;
-+        irq_desc_t *desc;
-=20
-         if ( !irq )
-             continue;
-=20
--        spin_lock_irqsave(&irq->irq_lock, flags);
--
--        /* Only hardware mapped vIRQs that are targeting this vCPU. */
--        if ( irq->hw && irq->target_vcpu =3D=3D v)
-+        if ( !irq->hw )
-         {
--            irq_desc_t *desc =3D irq_to_desc(irq->hwintid);
-+            vgic_put_irq(d, irq);
-+            continue;
-+        }
-=20
-+        desc =3D irq_to_desc(irq->hwintid);
-+        spin_lock_irqsave(&desc->lock, flags);
-+        spin_lock(&irq->irq_lock);
++CPU hotplug is a feature that allows pCPU cores to be added to or removed =
+from a
++running system without requiring a reboot. It is implemented on x86 and Ar=
+m64
++architectures.
 +
-+        /* Only hardware mapped vIRQs that are targeting this vCPU. */
-+        if ( irq->target_vcpu =3D=3D v )
-             irq_set_affinity(desc, cpumask_of(v->processor));
--        }
-=20
--        spin_unlock_irqrestore(&irq->irq_lock, flags);
--        vgic_put_irq(d, irq);
-+        spin_unlock(&irq->irq_lock);
-+        spin_unlock_irqrestore(&desc->lock, flags);
-     }
- }
-=20
++Implementation Details
++----------------------
++
++CPU hotplug is implemented through the `XEN_SYSCTL_CPU_HOTPLUG_*` sysctl c=
+alls.
++The specific calls are:
++
++- `XEN_SYSCTL_CPU_HOTPLUG_ONLINE`: Brings a pCPU online
++- `XEN_SYSCTL_CPU_HOTPLUG_OFFLINE`: Takes a pCPU offline
++- `XEN_SYSCTL_CPU_HOTPLUG_SMT_ENABLE`: Enables SMT threads (x86 only)
++- `XEN_SYSCTL_CPU_HOTPLUG_SMT_DISABLE`: Disables SMT threads (x86 only)
++
++All cores can be disabled, assuming hardware support, except for the boot =
+core.
++Sysctl calls are routed to the boot core before doing any actual up/down
++operations on other cores.
++
++If there are Xen-bound interrupts pinned to the pCPU being offlined, they =
+will
++be automatically migrated to other online pCPUs. Interrupts used by guest
++domains are handled by the scheduler when it reschedules the vCPUs to a ne=
+w,
++online, pCPU. When a pCPU is being onlined, some Xen-bound interrupts will=
+ get
++redistributed to the newly onlined pCPU to prevent imbalance.
++
++If pCPU being offlined has some vCPUs pinned to it, they will be automatic=
+ally
++unpinned and migrated to other online pCPUs.
++
++Limitations
++-----------
++
++On Arm64 cpu hotplug is currently not compatible with ITS, due to an issue=
+s with
++the redistributor assignment.
++
++On Arm64 there can be problems with FFA if secure FW support notification =
+ABI.
++
++Configuration
++-------------
++
++The presence of the feature is controlled by CONFIG_CPU_ONLINE_OFFLINE opt=
+ion.
++It is enabled by default on x86 architecture. On Arm64, the option is disa=
+bled
++by default and marked as EXPERT. xen-hptool userspace tool is built
++unconditionally.
++
++Usage
++-----
++
++Disable core:
++
++$ xen-hptool cpu-offline 2
++Prepare to offline CPU 2
++(XEN) Removing cpu 2 from runqueue 0
++CPU 2 offlined successfully
++
++Enable core:
++
++$ xen-hptool cpu-online 2
++Prepare to online CPU 2
++(XEN) Bringing up CPU2
++(XEN) GICv3: CPU2: Found redistributor in region 0 @00000a004005c000
++(XEN) CPU2: Guest atomics will try 1 times before pausing the domain
++(XEN) CPU 2 booted.
++(XEN) Adding cpu 2 to runqueue 0
++CPU 2 onlined successfully
++
++Disabling a core with pinned vCPUs:
++
++$ xl vcpu-pin 0 3 3 3
++$ xl vcpu-pin 0 2 3 3
++$ xl vcpu-pin 0 1 3 3
++$ xl vcpu-pin 0 0 3 3
++$ xen-hptool cpu-offline 3
++Prepare to offline CPU 3
++(XEN) Breaking affinity for d0v0
++(XEN) Breaking affinity for d0v1
++(XEN) Breaking affinity for d0v2
++(XEN) Breaking affinity for d0v3
++(XEN) Removing cpu 3 from runqueue 0
++CPU 3 offlined successfully
++
++Testing
++-------
++
++The CPU hotplug feature has been tested on both x86 and Arm64 QEMU setups =
+and on
++R-Car Gen5 (Arm64) hardware.
++
++The tests included:
++- Offlining and onlining cores with no pinned vCPUs
++- Offlining cores with pinned vCPUs
++- Offlining cores with Xen-bound interrupts
++- Offlining all cores except the boot core
++- Offlining the boot core (expected to fail)
++- Enabling and disabling SMT threads (x86 only)
++- Ofllining cores to which guests with passthrough devices are pinned
 --=20
 2.51.2
 
