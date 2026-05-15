@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A999CD4F47
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E95CD4F46
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309343.1580398 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1309337.1580353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqj-0002Sb-6H; Fri, 15 May 2026 04:08:33 +0000
+	id 1wNjqe-0001Qi-QH; Fri, 15 May 2026 04:08:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309343.1580398; Fri, 15 May 2026 04:08:33 +0000
+Received: by outflank-mailman (output) from mailman id 1309337.1580353; Fri, 15 May 2026 04:08:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqi-0002Qg-V0; Fri, 15 May 2026 04:08:32 +0000
-Received: by outflank-mailman (input) for mailman id 1309343;
- Fri, 15 May 2026 04:08:31 +0000
+	id 1wNjqe-0001QW-Ln; Fri, 15 May 2026 04:08:28 +0000
+Received: by outflank-mailman (input) for mailman id 1309337;
+ Fri, 15 May 2026 04:08:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjqh-0001yd-5f
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:31 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjqd-0001NR-SY
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjqg-00GbfP-Hq
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:30 +0200
+ id 1wNjqd-00GbfP-8j
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:27 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-44
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:30 +0200
+ id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-36
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:26 +0200
 Received: from [52.101.125.129]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c35-1dec-0a2a45040019-34657d8136d2-7
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:30 +0200
+ id 6a069c35-1dec-0a2a45040019-34657d8136d2-4
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:26 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
- 2026 04:08:23 +0000
+ 2026 04:08:20 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:23 +0000
+ 04:08:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LRKDfWZzRHBANJNy49uEbFMb3rLvwdeb57/irzeo6WdfiA3gxykkTse40rL0mm3XidTwi5cz5AeUFsJ+BhY86kuGX2gXTRa9fkcmzHRC9S+xUuE79DH27T4R3fMsp3EhmX+c6yVs+Y0ZXzivJ5EH1dYP6riRrVSfXnplSwvDPhGPlVMY+r7/70G1KWO38rnwURELXx2UI7x2Jw2F/uIPRtAOgDDXZqsEPjozXvVdr2u0fFXZ86IHfeJ8XKOpLq6sTC/Os4Rypi6b/SS7W0a+5y0+T5oR1LmWX0xqO0EhkImlAj4FEMXxMSVYholWVNmfZsw+CZZ9tGH4HjNCe13LZw==
+ b=fsBNMxPdzUGbCqyDTUfE0JdM1ndGTEDEJAhNShKaXKWqiWyEzkRN4HarF6XjiFzuv0mDoKty6Aarw8jAdG5HBO76Y+Pow+qBUTzno0yE7JraKuXG/mre4VCu7VpzuIeOejIqFFeS40K8prRER3ha+j3TuSspJ+UQ6YIu85T3YtfZ3NwM0vpJD//oHdtO7qN73lOsUStGtnvEAvMsYV27/JjzNAlKlWfm0KUQrCzLtUFophM2CyhsbeWiz8vdelx4ulIy5ymZaq7V5P4oqPt+zfXcbRfafnqxKBQjitKgwIiW46VYrzVDNHIRpauUphHloZm3xerewlv0K7zD5/SjyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ihotna9f+5bqGkkQOWVVME5/dELv08SRAliM5aVHxjs=;
- b=V7VKBFZ7QWs9lqLvfnNHp58L2+D2Z521RAVHcJ6SX1UQFrPaOLsikmdCtdalTVC7gcvq8F5aC2r4TJq+eKizgEybYlpI+51EW8aZhl5dzRCgdbdAhN2Hdhk74/xgIuyb7JCQnWcgWHYAWWGhQg6ENxj+bXhCt6vpDZE/9h7s4S84n7vbotAEe2bZT0amYEQh03RYe7CiZxWQG4vJI0nI7qFRSwKG+AqXD05NjVuVH2aDoGMArPNWcnJeXObS7opRzTTJ53k8uVpgJFbDkh3F4e4vfI1jsaTiEDgGSBEVXV/bMfwdEmcy1c7qJ6w0CGYJpQd4Ot5/ceHEuLd8xwuNPQ==
+ bh=P+LWGLET1pPPxjg9pYTqsoCrj/kofsydU9ywUKvFgV0=;
+ b=WzF2LBA7mlelkQLIqFzGBJkUXWmw0FoRCrijYvapMbsZ5tsY37dBrs0GI7TYZLIaslVib9DO3McvX7UWv8JbFfGKr9I18Uziy/pqIN02iF73pFWbFPCOQGs5rE03ClgQlrII0CUkiD4UM0GrSPHz/PsPEGNWikjG+Dq36ZLD6oXt3kyy5Sp1F/g3Qotb/iigvA8yOmIsB4abBFxfJOqPukGzM/Vd0j1pYyKMbUxUvTYayEomoeEtKBObveIFg4AUCJ8kkHiuGsLwYpr7nboNOCSm7tfwEmLKoLxV7A/9MJREAWsqPss1Q6uTsQVB55hr6tLiWEha9j0cwyBAyTE1ag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ihotna9f+5bqGkkQOWVVME5/dELv08SRAliM5aVHxjs=;
- b=KNW3CvgfQOw03hq0KYuZMiSXcLlHHlv1aQhLHhjCF0IDJbrWt+ORR/CNqA+LJNJ7JNbcc7wz4ZhQE/y+w/g9vXxoDFsarNar5wVDaEa2dApiUKjmKQV6GNEwTAT9SepGyYDllXTC7mPQT6YpBPYwJSMIl/h0xdrlyerz/YYmW+4=
+ bh=P+LWGLET1pPPxjg9pYTqsoCrj/kofsydU9ywUKvFgV0=;
+ b=t6ey0ZgpEWUB3nPmyfpP5JY1U8zRruXCdTftNX9JtSUEEuRUgMD0qYo/X9RhyArS0JWevAt4c5R4GY/Se8CuHoSVxeCeDdMwx9LPTo3KHGe0XKMIW+QZJjoJBZXVzl4IEpRg3FOpIpsRw5G+ZvTjObttwTglIm8H29T8kSjY2Jc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,273 +86,444 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 06/26] xen/arm/cca: add Realm granule helpers
-Date: Fri, 15 May 2026 13:07:52 +0900
-Message-ID: <20260515040812.983626-7-den@valinux.co.jp>
+Subject: [RFC PATCH v1 02/26] xen/arm/cca: add RMI v2.0 SMCCC core wrappers
+Date: Fri, 15 May 2026 13:07:48 +0900
+Message-ID: <20260515040812.983626-3-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0351.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:7c::20) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYWP286CA0022.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:262::8) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4d0cf795-6dfd-449f-4b10-08deb2379b4e
+X-MS-Office365-Filtering-Correlation-Id: eccc8f08-adf6-4905-2cc4-08deb2379985
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|18002099003|22082099003|56012099003;
+	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|3023799003|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	4xOloNydJfkoTZbHuGUYSjjx5YR2Y+tlevsyTFdyUb1YpzEVkPjNHvoY0rRnPez2fnFGO5wSuTtQDPOBAMsuzgnQGJ2nVU17gS4YPDrvpApNOT7sYZx0fmNaSOpGrG1sftxySvqlucQP7lxHvT79KY1BwYgoLvz1+amv3QWFa6AST4b42VWN32ulTYk+JsHhVizNc0DEJGF+qIiS7hege9EzLGg9CP6YA/SJ6Ckx/WgiUV9pIkwlRPel+qACm0A4waCcjYNIoE3Xz8nXp32/7E6Ls0TpaXm7SJjKzLMKxak01vqGFndLR6YrE1qEAkL9TOVdG0Uz7qL/SIl9LgEa3KC3hDWOpQLgAfpZcDxeIRyhVXgB3dgC7KgUaLET67UtKTuBdkOT0/jJWLur/dqkGSYFQGjEi29BFRFVfI1H9BCuDl+Kox+DsL8I8BtI8Tv1Oe2vrd00A5ELAqfMKCuhGTvRpxkt3+1kpRROhmQ72N9+2loC2yTPmAt7I1O4RoDUSDkxyIK8GIOAfZ2ASDx8IHcIOkgabInEmpFiDijaG6pzLIMplR/V7OZbNFvpg+3+ZJ3W2Wqc36LKajbXVa4t4NJzlazJVvq7GEtF0GkyFY1pNvGcwxrs8ISIrPzCE+uwEVB4PIGG+z8taB8dQx73j5ojw0tnpXRg0+9A7bO6KELzt1KD7reu7SomCOOi/MGO
+	Ktjp5SOA5ZmootcF7MkvC1UkSmJ08GXJujPkRQYVUI1UBOP9WMgrywzdgvKLd/d+BrhBmjkFxL8Gm0/9JTqotZDl/qmp5MDbMqWvfZaBirRo6llDO4epD8aNn7q9EijdJWA+yqoxvdFUfGmbNVHw4eZICxdPO1sM3sQ841+oIjXqw72w1ZCl2z7527aZOE/E69LAKdCHqbeif5zVl72atu1IA0VWWJUWjAzD263ONkkpkj/B5RiI5N+zJRX6G0l6j0CZD7006r00mSZHpWOaKyCvrxGTUrk3Gt0wKnZI7mLIK/fzw8VzUXHyqI147rgWVbNsW4lGjzQbecZOAqlkvf0MA1fVegYJ1jJKPWMZ5FbQboVcfpIWKVEi9o7Z3ndDvo895T8W6ehL9kc2pEKvD70lawXPMG59o3Dt0CApb3gqHmQwfLP8ffxkr4wnN2EsyhrXpmkUskMUXULGyL5aGggxYiRjIpiPkcoxGkGY//WF3zGkx1oY8jWfaAJhvxDj+I1UYhbRq1eSkPUUT878awVSFUT/hs0U7CfkxvhrQezE+QHqcxE3ikArk19iY6aUbPVSLs4itVn7eigqVNDpHakNRqjo2i7AYxUFZWqClektid5FP/y8Gj2rgKbwIKqu3nVGRXukaagpaqnAZD5s9/M7TURi12LssV4YxiDM5I5kejEsijA2eOOtMukIhWeE
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(3023799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?B/NmlldLWfuemefkQ0J1njZ9YxbgphWW3fwqvgtXV1A2nwrDJGjWn5crCGWA?=
- =?us-ascii?Q?W5INu6X05W1ZMH9ylng7jh5cT2XAEmL9m1aXbj4eU0szolDrV73JLYAC9mnj?=
- =?us-ascii?Q?brI7LFFmKDKY7IXaVEH0loCHFkocfBRcukMPMgu40p6couJhWRitlMIp41Mw?=
- =?us-ascii?Q?85jl2wxGLiJqjILMDV+YFPRlljpe2nnlsUqXD4WaqIJt6sPXa8dIA4bN9DKS?=
- =?us-ascii?Q?lpdDiJzZtg2VG04F2AA93/uz9HhFfZG/nVGeI8jq0Qe1zEPNImXlmPOVfwYl?=
- =?us-ascii?Q?j/UIfOqRxYFQtkyXG0aFD8JiNDXyU3+e/R4mAm2cMK3LQBgM4c0jtfEY3QYD?=
- =?us-ascii?Q?pZLaLI66KJhpzesw9xf/CA7Xzp1A1jw+eTOqMxmmfAKw9dVskPiN96tZt0fR?=
- =?us-ascii?Q?uip9qx4YyJKtm1Y9WVovW8xzLi42UicVm598TWOpPDFVgJQ62yqGIV2i7BcQ?=
- =?us-ascii?Q?1uW5SOJ1WWiAPyx+TojqFhDFbsRCPWi+ekV0pbwPKBhRphW5ysJytWnB93xz?=
- =?us-ascii?Q?mSFQS4FM9vViZND0VE7cKtNzDFK2I0qv5Y3fWusq+eoMBd3cgMLaaK+lSTyy?=
- =?us-ascii?Q?xPyDBeRWxYgxTB2Er5jC+OLX+nb6WOGNeHMhS7dWWIKFFTbLrfiWBUSW6ePs?=
- =?us-ascii?Q?boj6O+MztSd4KuChHEBcnitgYJGpbarUpAyes59Zfq1ilkoKqtdRDHlaXv3X?=
- =?us-ascii?Q?YlNn5HAaQeix28pj3qFGkyiVW5+nvOMomqPhmU3QG7M0cT6kybvnb0sDLfZ/?=
- =?us-ascii?Q?43wDrFX1K+ez7gq4j5ensaNWS45mCyhXkBo10NIl1nQQjdKipmWQFVgK3YHy?=
- =?us-ascii?Q?WJ6Lsmlo/3QZjNN8ZjaKQwu0dpYRlAlV1IS9XCTs4q40oj2558dH8nTt7QsB?=
- =?us-ascii?Q?if0TyjKOOeUxrCb3KDq3ZNjJUjjNlO6ZH1vRkiKlcfU3WHih0WwYzP840K3E?=
- =?us-ascii?Q?K3RC1hp8xhZl1Jg0WhtL2+08cVch7Bv+7EooCEtjyFjmYyOVB1udrXCy+H3t?=
- =?us-ascii?Q?gYv09v/6Do6k7z+BIENV04yCt86APrPpXCRY9Qrz/ZtApAX2RztIeWotJabW?=
- =?us-ascii?Q?eV160IpL63SWfj9bLCOKVwmChj+8CZrl1p+MVFBua9Y7mEHbyHaWORT+LxEL?=
- =?us-ascii?Q?S0EjnWmJW4YBGUJSigSOG2DZLKcp7qUWGvRhN417x+d7MkC1fQRnaJVdRcbQ?=
- =?us-ascii?Q?kDdXG7Aa3UKz/452bZxueHjzUpy+A9T+ZghJpcRx2zUgK/HPqQTpn7aUUrKY?=
- =?us-ascii?Q?vGF6MLQtDgg9ZOc5mv0u6yHg0Wd7l57bP6QY7onQ6zyIO4d5aTFP6nTRkJSL?=
- =?us-ascii?Q?mhlTMgopau4Ek9iC4vqA0iMUdZ2vrZDyihzY9P6uSqg9+yWNfhOTlZ31xl/F?=
- =?us-ascii?Q?u/JoAJ69OQ3AF3/8RMPXMdhxf8Sn8tc/NIG3qbmks5N9wb6SPlC0KJSAdgH/?=
- =?us-ascii?Q?yO1fv+VukYCd3v7lxXsPDBAooTSThaZ5leBlXaHW5jiXNjs4AL42kgI/wVCf?=
- =?us-ascii?Q?0gKiW7WwXF5es99awA1IZBgrrKw8RrLZ6sQRJT2QSysP9HVKFLYwXM7aTsI8?=
- =?us-ascii?Q?1ep7fGns8rQU0o0MXnwwR6FttnJdFm8w2NR2i5TFXwPuzMje+AxXOaD1V5dn?=
- =?us-ascii?Q?DfQiRQt/D+p4u1NgXJALPhP/r4J8IKBE8bTVZajM7V5nELLf4cIwfujW5RAL?=
- =?us-ascii?Q?VyxdW0Xe8TKjBB+DrEumbYNbmsM1bsmOxxZZALJnQVTIdRZJ+LtROIzEB+Cc?=
- =?us-ascii?Q?HoxaTx2O1yX8J3gfK8dywucEe3XJaOYN/sjtoMYn1gKixiQ7+SO6?=
+	=?us-ascii?Q?MzikmfylkyWYuwHXBbTVJI3zBFFxCQiuyDHl6jfx5mY6QdNm8JxMaTe5GtPV?=
+ =?us-ascii?Q?0/5Km5GhbfJtfHv8PlvMFa9aGiDxO6FlXWQ9SL+lc+kvVWe7GfdbI3Np/jUz?=
+ =?us-ascii?Q?EqExI0r0Xi+3MJ2TTtddCI3WrWnQZrFb20FXJIF8dGPN6Xo2j0dFyJaQnNLW?=
+ =?us-ascii?Q?4hNwGZX4DUi4uRhZUu2+kkKWo22C+QMlESNNxZD4mzduyJ6Uot8KavOCN6QJ?=
+ =?us-ascii?Q?7S77umBjN3ENMDtAVqmH8pO3R7JzqiYp+D6lCBtxxS6itvLTYEMQuPDDgIcb?=
+ =?us-ascii?Q?6ldMJZodV8CoS3xQejR8sy30K1f2r9WcSXtDdNrd5oT0CtPcJkDrNanBcrEM?=
+ =?us-ascii?Q?PGLv8DjmTbydRA68MIEhghfKm+w2Dq179v/OLHGKxpc/mqnNYHN5bbvx3X4e?=
+ =?us-ascii?Q?A7C4wFWrql/J/PltxIrh1VuvjNE0MQXMDH6Gv33SpeUefxsLx359zLxoCZsb?=
+ =?us-ascii?Q?Ks9LuvJFAZiSjGzOPMMdQrs3g4p/d3kFdJRlcmZAE7wOUkanQXwh5TYKixkE?=
+ =?us-ascii?Q?mMeWEkKdA2cTDUO3RS34N4dT8uVz6+VJTdS+OZIMvbhpQY60Jmz9TaJLOWtv?=
+ =?us-ascii?Q?muZqyqbjQRuLzEgQQYfnZ/vAndNXFMvk4AWI+iRXjl+AXnDRe74zKlhUl4cv?=
+ =?us-ascii?Q?UR1r4tK4IMuUKlwoqgAvB4KxxxBmWdcCVnAyYYhbn2NOAtGt1tQNmQ3zN0kD?=
+ =?us-ascii?Q?Hae0yHFsBUoJcfvonRFLOvPYnW5rRP5mx39yW6LdXmFmCQKBX51wINgaxmfv?=
+ =?us-ascii?Q?2hDdIuS6/a4Wxg+T4xHYiNb6TQnk000cJJL4L5hNu1IV1af9IE1/0PsLdMGF?=
+ =?us-ascii?Q?gOg4HFhkizlJH2UNlnJKv+T6egZBdy954GLHoUGxfz1Bf/oFc1o8Hn+ztIKR?=
+ =?us-ascii?Q?lQ2j1btZ7FRF3mmzaxW874WpyZEr/nDh6+bNfUA1yWtJ6nQtBCnaSJVkV0Th?=
+ =?us-ascii?Q?/bSldMXnjv9JU3VFpp2gPrRe6JeaFEDRH0VTZfnu5QpsnpM2x6oOpb+Rc900?=
+ =?us-ascii?Q?KjL6VXjEF/4/Xn8d3BR7QXKNYFFHVlSuLYFjV+Jox58QJUUjEKPyTaFkVxDj?=
+ =?us-ascii?Q?ysIlCABiciryRG6SVLawAcAjyaFPQwd+pA1zW4lBcnmov5khZZMH0sqqyh9U?=
+ =?us-ascii?Q?qC9qJS3J8KcKiMKExwFLbwag3cIC3t0/jUfbTxBK2Mi+w5XP+RKjdXOXNqMs?=
+ =?us-ascii?Q?cBd/9Xco3CYnU0s0diXNIMIIXnOHYWLU5TNAWC8LBBrplKDgSGBiCXX1rrUG?=
+ =?us-ascii?Q?zoSbg5iDrKUEewuZzViVNN3qRPnwQ6QY7siJIEIFeD0kgleISzqZzqw4M54h?=
+ =?us-ascii?Q?DqexADQ8WA78jpbT0jGAvyP45UVDgUFlxGrFlJ3pPSyNdiSAq4NFZH4sQ72e?=
+ =?us-ascii?Q?YKKe+z5FLzw5QfLtZenO6nLHw7eIoMzPDvZoVhFdmCCUnYTulf/hckYSzhpw?=
+ =?us-ascii?Q?nPevvTS/sbhhww2aFNZoGQEEqWAp2zGgP5mI1ia4UsQBh8AvBAVg+09p2LAo?=
+ =?us-ascii?Q?tUaQ/bBRSvAWIs5xaID+Tto3ZxvrCSo+G2J1EexXvwrcw60FJPnGpAoW+5Tc?=
+ =?us-ascii?Q?RH64qsJAVl0x0aP4owrOMIgrzMaFDv3fPo+sY3ugKNCV2U8YF+HL6DwBtyYa?=
+ =?us-ascii?Q?tD0H3kZ9NufytGRTVJ8MgWhoVlKvDYak52MK30V1KIriracyAbnOywAYEZ49?=
+ =?us-ascii?Q?FxotZkWI50eakz2xQHwpwpHoz0gxYJsL4gQheRs4S6I7HYCIwkBuYDAwEpjx?=
+ =?us-ascii?Q?5JnsR1tDV1/2xD34hqgUgaUeURL+CUUgxDNBAclAX6DFxjF81Xpn?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d0cf795-6dfd-449f-4b10-08deb2379b4e
+X-MS-Exchange-CrossTenant-Network-Message-Id: eccc8f08-adf6-4905-2cc4-08deb2379985
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:23.2284
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:20.2334
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eLQcFzsyGfA4ofz/BDkAV+PlLZHi3RxBZO1KWm2KmhM3yKDSXfNg3scZtmjgKr2RgcvHyTv75J5cZRSSLFVHhg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: kgc96NLvs5dmVvzHBBLcachmHOSpTKY63oMlbxaSG+/TUpR3Xjt+16jFuykAC9Axj3rcjcL9U3X034acG73OSw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
-X-purgate-ID: tlsNG-ebf023/1778818110-41D7C3FF-ADB2B77D/0/0
+X-purgate-ID: tlsNG-ebf023/1778818106-2A5603FF-DB93292C/0/0
 X-purgate-type: clean
-X-purgate-size: 5664
+X-purgate-size: 11679
 
-Add the memory-tracking preflight and the single-granule delegate
-helpers. Realm-owned pages have to come from fine, conventional
-tracking regions.
+Add the common SMC path and the early RMI calls used to probe and
+configure the RMM. The rest of the series can build on typed helpers
+rather than spelling out registers each time.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/cca/Makefile      |   1 +
- xen/arch/arm/cca/granule.c     | 150 +++++++++++++++++++++++++++++++++
- xen/arch/arm/include/asm/cca.h |   5 ++
- 3 files changed, 156 insertions(+)
- create mode 100644 xen/arch/arm/cca/granule.c
+ xen/arch/arm/Kconfig      |  14 ++++
+ xen/arch/arm/Makefile     |   1 +
+ xen/arch/arm/cca/Makefile |   1 +
+ xen/arch/arm/cca/rmi.c    | 170 ++++++++++++++++++++++++++++++++++++++
+ xen/arch/arm/cca/rmi.h    | 126 ++++++++++++++++++++++++++++
+ 5 files changed, 312 insertions(+)
+ create mode 100644 xen/arch/arm/cca/Makefile
+ create mode 100644 xen/arch/arm/cca/rmi.c
+ create mode 100644 xen/arch/arm/cca/rmi.h
 
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 79622b46a10d..dc99020c96de 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -118,6 +118,20 @@ config ARM_EFI
+ 	  UEFI firmware. A UEFI stub is provided to allow Xen to
+ 	  be booted as an EFI application.
+ 
++config ARM_CCA
++	bool "Arm Confidential Compute Architecture support (UNSUPPORTED)" if UNSUPPORTED
++	depends on ARM_64 && MMU
++	default n
++	help
++	  Build Xen's Arm CCA / RMM support for Arm Realm guests on
++	  Armv9 platforms.
++
++	  This enables the NS hypervisor-side Realm creation and execution
++	  paths, including the RMI ABI wrappers, Realm build/finalize
++	  flows and REC run loop.
++
++	  This support is experimental. If unsure, say N.
++
+ config GICV2
+ 	bool "GICv2 driver"
+ 	default y
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 982c6c396a05..953dcbbe6626 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -8,6 +8,7 @@ ifneq ($(CONFIG_NO_PLAT),y)
+ obj-y += platforms/
+ endif
+ obj-y += firmware/
++obj-$(CONFIG_ARM_CCA) += cca/
+ obj-$(CONFIG_TEE) += tee/
+ obj-$(CONFIG_HAS_VPCI) += vpci.o
+ 
 diff --git a/xen/arch/arm/cca/Makefile b/xen/arch/arm/cca/Makefile
-index aaa04e3b914b..7f20d43323c3 100644
---- a/xen/arch/arm/cca/Makefile
-+++ b/xen/arch/arm/cca/Makefile
-@@ -1,2 +1,3 @@
-+obj-y += granule.o
- obj-y += rmi.o
- obj-y += state.o
-diff --git a/xen/arch/arm/cca/granule.c b/xen/arch/arm/cca/granule.c
 new file mode 100644
-index 000000000000..d2be4d240f19
+index 000000000000..9c351f901dfd
 --- /dev/null
-+++ b/xen/arch/arm/cca/granule.c
-@@ -0,0 +1,150 @@
++++ b/xen/arch/arm/cca/Makefile
+@@ -0,0 +1 @@
++obj-y += rmi.o
+diff --git a/xen/arch/arm/cca/rmi.c b/xen/arch/arm/cca/rmi.c
+new file mode 100644
+index 000000000000..d37f1226f834
+--- /dev/null
++++ b/xen/arch/arm/cca/rmi.c
+@@ -0,0 +1,170 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Internal Xen RMI command wrappers for DEN0137 2.0-bet1 / RMI v2.0.
++ */
 +
-+#include <xen/bootinfo.h>
 +#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
 +
-+#include <asm/cca.h>
++#include <asm/processor.h>
++#include <asm/smccc.h>
 +
 +#include "rmi.h"
 +
-+static paddr_t __init arm_cca_l0gpt_size(unsigned long features1)
-+{
-+    unsigned long l0gptsz = arm_cca_rmi_field_get(
-+        features1, ARM_CCA_RMI_FEATURE_REGISTER_1_L0GPTSZ_SHIFT,
-+        ARM_CCA_RMI_FEATURE_REGISTER_1_L0GPTSZ_WIDTH);
++#define ARM_CCA_RMI_INITIATE_SRO_BUSY_RETRIES 1000000U
 +
-+    return 1ULL << (30 + l0gptsz);
++static void arm_cca_rmi_invoke(unsigned long fid,
++                               unsigned long arg0,
++                               unsigned long arg1,
++                               unsigned long arg2,
++                               unsigned long arg3,
++                               unsigned long arg4,
++                               struct arm_smccc_res *res)
++{
++    arm_smccc_1_0_smc(fid, arg0, arg1, arg2, arg3, arg4, 0, 0, res);
 +}
 +
-+static int __init arm_cca_verify_memory_tracking(paddr_t start, paddr_t end)
++static int arm_cca_rmi_initiate_sro(unsigned long fid,
++                                    unsigned long arg0,
++                                    unsigned long arg1,
++                                    unsigned long arg2,
++                                    unsigned long arg3,
++                                    unsigned long arg4,
++                                    struct arm_smccc_res *res)
 +{
-+    while ( start < end )
-+    {
-+        unsigned long category, state;
-+        paddr_t next;
-+        int rc;
-+
-+        rc = arm_cca_rmi_granule_tracking_get(start, end, &category, &state,
-+                                              &next);
-+        if ( rc != 0 )
-+            return rc;
-+
-+        if ( category != ARM_CCA_RMI_MEM_CATEGORY_CONVENTIONAL ||
-+             state != ARM_CCA_RMI_TRACKING_FINE ||
-+             next <= start || next > end )
-+        {
-+            printk(XENLOG_ERR
-+                   "ARM CCA: memory [%#" PRIpaddr ", %#" PRIpaddr
-+                   ") is not fine-tracked conventional memory\n",
-+                   start, end);
-+            return -EOPNOTSUPP;
-+        }
-+
-+        start = next;
-+    }
-+
-+    return 0;
-+}
-+
-+static int __init arm_cca_create_gpts(paddr_t start, paddr_t end,
-+                                      paddr_t l0gpt_size)
-+{
-+    paddr_t base = ROUNDDOWN(start, l0gpt_size);
-+    paddr_t stop = ROUNDUP(end, l0gpt_size);
-+
-+    while ( base < stop )
-+    {
-+        int rc = arm_cca_rmi_gpt_l1_create(base);
-+
-+        if ( rc != 0 )
-+        {
-+            printk(XENLOG_ERR
-+                   "ARM CCA: failed to create GPT L1 for %#" PRIpaddr "\n",
-+                   base);
-+            return rc;
-+        }
-+
-+        base += l0gpt_size;
-+    }
-+
-+    return 0;
-+}
-+
-+int __init arm_cca_prepare_host_memory(unsigned long features1)
-+{
-+    const struct membanks *mem = bootinfo_get_mem();
-+    paddr_t l0gpt_size = arm_cca_l0gpt_size(features1);
-+    unsigned int i;
-+    int rc;
-+
-+    for ( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        paddr_t start = mem->bank[i].start;
-+        paddr_t end = start + mem->bank[i].size;
-+
-+        rc = arm_cca_verify_memory_tracking(start, end);
-+        if ( rc != 0 )
-+            return rc;
-+
-+        rc = arm_cca_create_gpts(start, end, l0gpt_size);
-+        if ( rc != 0 )
-+            return rc;
-+    }
-+
-+    return 0;
-+}
-+
-+static int arm_cca_process_granule_range(paddr_t start, paddr_t end,
-+                                         bool delegate)
-+{
-+    paddr_t cur = start;
-+    int rc;
++    unsigned int retries = 0;
 +
 +    /*
-+     * arm_cca_prepare_host_memory() checks that host DRAM is fine-tracked and
-+     * has GPT L1 metadata before any Realm-owned granule can be delegated.
++     * Conform to DEN0137 2.0-bet1 B4.3.2.5 Programming model for an SRO:
++     * retry the initiating command while it returns RMI_BUSY.  Once a handle
++     * is returned, progress is driven through RMI_OP_CONTINUE.
++     *
++     * Initial RMI_BUSY is expected to be transient.  Keep the retry loop
++     * finite so a broken RMM cannot spin Xen forever.
 +     */
-+    if ( start >= end || !IS_ALIGNED(start, PAGE_SIZE) ||
-+         !IS_ALIGNED(end, PAGE_SIZE) )
-+        return -EINVAL;
-+
-+    while ( cur < end )
++    while ( true )
 +    {
-+        paddr_t out_top = INVALID_PADDR;
++        arm_cca_rmi_invoke(fid, arg0, arg1, arg2, arg3, arg4, res);
 +
-+        if ( delegate )
-+            rc = arm_cca_rmi_granule_range_delegate(cur, end, &out_top);
-+        else
-+            rc = arm_cca_rmi_granule_range_undelegate(cur, end, &out_top);
++        if ( !arm_cca_rmi_status_is(arm_cca_rmi_result(res),
++                                    ARM_CCA_RMI_BUSY) )
++            return 0;
 +
-+        if ( rc != 0 )
-+            return rc;
++        if ( retries == ARM_CCA_RMI_INITIATE_SRO_BUSY_RETRIES )
++            return -EBUSY;
++        retries++;
 +
-+        if ( out_top <= cur || out_top > end )
-+            return -EIO;
-+
-+        cur = out_top;
++        cpu_relax();
 +    }
++}
++int arm_cca_rmi_version(unsigned long requested_revision,
++                        unsigned long *revision_lower,
++                        unsigned long *revision_higher)
++{
++    struct arm_smccc_res res;
++    int rc;
++
++    arm_cca_rmi_invoke(ARM_CCA_RMI_VERSION_FID,
++                       requested_revision, 0, 0, 0, 0, &res);
++
++    rc = arm_cca_rmi_res_to_errno(&res);
++
++    if ( revision_lower != NULL )
++        *revision_lower = res.a1;
++
++    if ( revision_higher != NULL )
++        *revision_higher = res.a2;
++
++    return rc;
++}
++
++unsigned long arm_cca_rmi_features(unsigned long index)
++{
++    struct arm_smccc_res res;
++
++    arm_cca_rmi_invoke(ARM_CCA_RMI_FEATURES_FID, index, 0, 0, 0, 0, &res);
++
++    return arm_cca_rmi_res_to_errno(&res) ? 0 : res.a1;
++}
++
++int arm_cca_rmi_rmm_config_get(paddr_t cfg_ptr, struct arm_smccc_res *res)
++{
++    arm_cca_rmi_invoke(ARM_CCA_RMI_RMM_CONFIG_GET_FID,
++                       cfg_ptr, 0, 0, 0, 0, res);
++
++    return arm_cca_rmi_res_to_errno(res);
++}
++
++int arm_cca_rmi_rmm_config_set(paddr_t cfg_ptr)
++{
++    struct arm_smccc_res res;
++
++    arm_cca_rmi_invoke(ARM_CCA_RMI_RMM_CONFIG_SET_FID,
++                       cfg_ptr, 0, 0, 0, 0, &res);
++
++    return arm_cca_rmi_res_to_errno(&res);
++}
++
++int arm_cca_rmi_rmm_activate(struct arm_smccc_res *res)
++{
++    int rc;
++
++    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RMM_ACTIVATE_FID,
++                                  0, 0, 0, 0, 0, res);
++    if ( rc != 0 )
++        return rc;
++
++    return arm_cca_rmi_res_to_errno(res);
++}
++
++int arm_cca_rmi_granule_tracking_get(paddr_t base, paddr_t top,
++                                     unsigned long *category,
++                                     unsigned long *state, paddr_t *out_top)
++{
++    struct arm_smccc_res res;
++    int rc;
++
++    arm_cca_rmi_invoke(ARM_CCA_RMI_GRANULE_TRACKING_GET_FID,
++                       base, top, 0, 0, 0, &res);
++
++    rc = arm_cca_rmi_res_to_errno(&res);
++    if ( rc != 0 )
++        return rc;
++
++    /*
++     * Note that X3 is not defined by DEN0137 2.0-bet1 B4.5.10.1.3.  The
++     * tested TF-RMM v2.0 PoC branch, also followed by the KVM host series,
++     * returns range progress there.
++     */
++    *category = res.a1;
++    *state = res.a2;
++    *out_top = res.a3;
 +
 +    return 0;
 +}
 +
-+/* DEN0137 2.0-bet1 - D1.1.1 Granule delegation flow. */
-+int arm_cca_delegate_granule(paddr_t granule)
++int arm_cca_rmi_gpt_l1_create(paddr_t base)
 +{
-+    if ( !IS_ALIGNED(granule, PAGE_SIZE) )
-+        return -EINVAL;
++    struct arm_smccc_res res;
++    int rc;
 +
-+    return arm_cca_process_granule_range(granule, granule + PAGE_SIZE, true);
++    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_GPT_L1_CREATE_FID,
++                                  base, 0, 0, 0, 0, &res);
++    if ( rc != 0 )
++        return rc;
++
++    if ( arm_cca_rmi_is_success(&res) ||
++         arm_cca_rmi_status_is(arm_cca_rmi_result(&res),
++                               ARM_CCA_RMI_ERROR_GPT) )
++        return 0;
++
++    /*
++     * Xen CCA supports immediate GPT L1 creation, or an existing GPT L1
++     * reported as RMI_ERROR_GPT.  If creation needs a memory-transferring
++     * SRO, leave CCA unavailable for now.
++     */
++    if ( arm_cca_rmi_status_is(arm_cca_rmi_result(&res),
++                               ARM_CCA_RMI_INCOMPLETE) )
++        return -EOPNOTSUPP;
++
++    return arm_cca_rmi_res_to_errno(&res);
++}
+diff --git a/xen/arch/arm/cca/rmi.h b/xen/arch/arm/cca/rmi.h
+new file mode 100644
+index 000000000000..4cd0bc64ccf5
+--- /dev/null
++++ b/xen/arch/arm/cca/rmi.h
+@@ -0,0 +1,126 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Internal Xen RMI command API.
++ *
++ * This header exposes typed wrappers and helpers for the subset of RMI
++ * commands used by Xen. Raw ABI constants live in rmi-abi.h.
++ */
++#ifndef ARM_CCA_RMI_H
++#define ARM_CCA_RMI_H
++
++#include <xen/bitops.h>
++#include <xen/bug.h>
++#include <xen/errno.h>
++#include <xen/page-size.h>
++
++#include <asm/smccc.h>
++
++#include "rmi-abi.h"
++
++static inline uint64_t arm_cca_rmi_field_get(uint64_t value,
++                                             unsigned int shift,
++                                             unsigned int width)
++{
++    ASSERT(width != 0 && shift < 64U && width <= 64U - shift);
++
++    return (value & GENMASK_ULL(shift + width - 1, shift)) >> shift;
 +}
 +
-+/* DEN0137 2.0-bet1 - D1.1.2 Granule undelegation flow. */
-+int arm_cca_undelegate_granule(paddr_t granule)
++static inline uint64_t arm_cca_rmi_result(const struct arm_smccc_res *res)
 +{
-+    if ( !IS_ALIGNED(granule, PAGE_SIZE) )
-+        return -EINVAL;
-+
-+    return arm_cca_process_granule_range(granule, granule + PAGE_SIZE, false);
++    return res->a0;
 +}
-diff --git a/xen/arch/arm/include/asm/cca.h b/xen/arch/arm/include/asm/cca.h
-index 6bf644fbcee5..c35d51f750a3 100644
---- a/xen/arch/arm/include/asm/cca.h
-+++ b/xen/arch/arm/include/asm/cca.h
-@@ -2,6 +2,7 @@
- #ifndef ARM_CCA_H
- #define ARM_CCA_H
- 
-+#include <xen/init.h>
- #include <xen/types.h>
- 
- /*
-@@ -79,4 +80,8 @@ void arm_cca_vcpu_destroy(struct vcpu *v);
- void *arm_cca_alloc_rec_run(void);
- void arm_cca_free_rec_run(void *run);
- 
-+int arm_cca_delegate_granule(paddr_t granule);
-+int arm_cca_undelegate_granule(paddr_t granule);
-+int arm_cca_prepare_host_memory(unsigned long features1) __init;
 +
- #endif /* ARM_CCA_H */
++static inline bool arm_cca_rmi_is_success(const struct arm_smccc_res *res)
++{
++    return arm_cca_rmi_result(res) == ARM_CCA_RMI_SUCCESS;
++}
++
++static inline bool arm_cca_rmi_result_is_smccc_unknown(uint64_t result)
++{
++    return result == (uint64_t)ARM_SMCCC_ERR_UNKNOWN_FUNCTION;
++}
++
++static inline unsigned int arm_cca_rmi_status_code(uint64_t result)
++{
++    return arm_cca_rmi_field_get(result, ARM_CCA_RMI_RESULT_STATUS_SHIFT,
++                                 ARM_CCA_RMI_RESULT_STATUS_WIDTH);
++}
++
++static inline uint64_t arm_cca_rmi_result_data(uint64_t result)
++{
++    return result >> ARM_CCA_RMI_RESULT_DATA_SHIFT;
++}
++
++static inline bool arm_cca_rmi_status_is(uint64_t result, unsigned int status)
++{
++    return arm_cca_rmi_status_code(result) == status;
++}
++
++static inline bool arm_cca_rmi_status_is_error(uint64_t result)
++{
++    unsigned int status;
++
++    if ( arm_cca_rmi_result_is_smccc_unknown(result) )
++        return false;
++
++    status = arm_cca_rmi_status_code(result);
++
++    switch ( status )
++    {
++    case ARM_CCA_RMI_ERROR_INPUT:
++    case ARM_CCA_RMI_ERROR_REALM:
++    case ARM_CCA_RMI_ERROR_REC:
++    case ARM_CCA_RMI_ERROR_RTT:
++    case ARM_CCA_RMI_ERROR_NOT_SUPPORTED:
++    case ARM_CCA_RMI_ERROR_DEVICE:
++    case ARM_CCA_RMI_ERROR_RTT_AUX:
++    case ARM_CCA_RMI_ERROR_PSMMU_ST:
++    case ARM_CCA_RMI_ERROR_DPT:
++    case ARM_CCA_RMI_ERROR_GLOBAL:
++    case ARM_CCA_RMI_ERROR_TRACKING:
++    case ARM_CCA_RMI_ERROR_GPT:
++    case ARM_CCA_RMI_ERROR_GRANULE:
++        return true;
++
++    default:
++        return false;
++    }
++}
++
++static inline int arm_cca_rmi_result_to_errno(uint64_t result)
++{
++    /*
++     * SRO progress states are not errno failures.  The SRO helpers keep
++     * inspecting the raw result in X0 through struct arm_smccc_res.
++     */
++    if ( result == ARM_CCA_RMI_SUCCESS ||
++         arm_cca_rmi_status_is(result, ARM_CCA_RMI_INCOMPLETE) ||
++         arm_cca_rmi_status_is(result, ARM_CCA_RMI_BUSY) )
++        return 0;
++
++    if ( arm_cca_rmi_result_is_smccc_unknown(result) ||
++         arm_cca_rmi_status_is(result, ARM_CCA_RMI_ERROR_NOT_SUPPORTED) )
++        return -EOPNOTSUPP;
++
++    return -EIO;
++}
++
++static inline int arm_cca_rmi_res_to_errno(const struct arm_smccc_res *res)
++{
++    return arm_cca_rmi_result_to_errno(arm_cca_rmi_result(res));
++}
++int arm_cca_rmi_version(unsigned long requested_revision,
++                        unsigned long *revision_lower,
++                        unsigned long *revision_higher);
++unsigned long arm_cca_rmi_features(unsigned long index);
++int arm_cca_rmi_rmm_config_get(paddr_t cfg_ptr, struct arm_smccc_res *res);
++int arm_cca_rmi_rmm_config_set(paddr_t cfg_ptr);
++int arm_cca_rmi_rmm_activate(struct arm_smccc_res *res);
++
++int arm_cca_rmi_granule_tracking_get(paddr_t base, paddr_t top,
++                                     unsigned long *category,
++                                     unsigned long *state, paddr_t *out_top);
++int arm_cca_rmi_gpt_l1_create(paddr_t base);
++
++#endif /* ARM_CCA_RMI_H */
 -- 
 2.51.0
 
