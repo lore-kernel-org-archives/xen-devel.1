@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E95CD4F46
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309337.1580353 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3A40CD4F3C
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309359.1580447 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqe-0001Qi-QH; Fri, 15 May 2026 04:08:28 +0000
+	id 1wNjqz-0004i7-GC; Fri, 15 May 2026 04:08:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309337.1580353; Fri, 15 May 2026 04:08:28 +0000
+Received: by outflank-mailman (output) from mailman id 1309359.1580447; Fri, 15 May 2026 04:08:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqe-0001QW-Ln; Fri, 15 May 2026 04:08:28 +0000
-Received: by outflank-mailman (input) for mailman id 1309337;
- Fri, 15 May 2026 04:08:28 +0000
+	id 1wNjqz-0004h0-5V; Fri, 15 May 2026 04:08:49 +0000
+Received: by outflank-mailman (input) for mailman id 1309359;
+ Fri, 15 May 2026 04:08:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjqd-0001NR-SY
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:28 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjqx-0004Hz-Ic
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjqd-00GbfP-8j
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wNjqw-0051ua-V3
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:46 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-36
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:26 +0200
-Received: from [52.101.125.129]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a069c36-bab6-0a2a0a5309dd-0a2a450c90bc-16
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:46 +0200
+Received: from [52.101.228.84]
+ (helo=OS0P286CU011.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c35-1dec-0a2a45040019-34657d8136d2-4
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:26 +0200
+ id 6a069c4b-62f1-0a2a450c0019-3465e45466d0-4
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:46 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
- by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
+ by TYCP286MB3682.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:3c2::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
- 2026 04:08:20 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
+ 2026 04:08:38 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:20 +0000
+ 04:08:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fsBNMxPdzUGbCqyDTUfE0JdM1ndGTEDEJAhNShKaXKWqiWyEzkRN4HarF6XjiFzuv0mDoKty6Aarw8jAdG5HBO76Y+Pow+qBUTzno0yE7JraKuXG/mre4VCu7VpzuIeOejIqFFeS40K8prRER3ha+j3TuSspJ+UQ6YIu85T3YtfZ3NwM0vpJD//oHdtO7qN73lOsUStGtnvEAvMsYV27/JjzNAlKlWfm0KUQrCzLtUFophM2CyhsbeWiz8vdelx4ulIy5ymZaq7V5P4oqPt+zfXcbRfafnqxKBQjitKgwIiW46VYrzVDNHIRpauUphHloZm3xerewlv0K7zD5/SjyA==
+ b=CL7k9eAPnqhprtJL9gq5e6Uvy1RbIs0+K4ile2ZQU/gp19XQxVncZNG0Zvaog81fp/26iu51TNwGeWK6WjLPRlkWoq1WeVv7xM0CW27CI2tFEdRi+18Y8C8DKJ1GuKjsaOqoD2+KeVHd0mHl4AUiPr5SPY+cG4PDxIkj3qYgBs/WXYZR2YCOJTRp5Fgt8WMDCb2GQqMH2s+ftUZwOoybquSWEOcnZUwAwjEaqT8gOFK1T227mnLotM9sACIffpaZzaJoDA+GRYZ85NQtTng+r32GpOhRufUGmB34YErV/fbaHRATFG6wCPFy2z7PDnAoWEIiFtSzCeK3MBc9QpogIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P+LWGLET1pPPxjg9pYTqsoCrj/kofsydU9ywUKvFgV0=;
- b=WzF2LBA7mlelkQLIqFzGBJkUXWmw0FoRCrijYvapMbsZ5tsY37dBrs0GI7TYZLIaslVib9DO3McvX7UWv8JbFfGKr9I18Uziy/pqIN02iF73pFWbFPCOQGs5rE03ClgQlrII0CUkiD4UM0GrSPHz/PsPEGNWikjG+Dq36ZLD6oXt3kyy5Sp1F/g3Qotb/iigvA8yOmIsB4abBFxfJOqPukGzM/Vd0j1pYyKMbUxUvTYayEomoeEtKBObveIFg4AUCJ8kkHiuGsLwYpr7nboNOCSm7tfwEmLKoLxV7A/9MJREAWsqPss1Q6uTsQVB55hr6tLiWEha9j0cwyBAyTE1ag==
+ bh=j+krazXWRn2IuLifiPb7Tk1sDo3QwLMY07VSIfj1R9Q=;
+ b=JLf/JE1AvzGG77CrgGrsAcnKvu/5rl5t7Dox0sd3K0A3AGhdJmn8Q4MH6idQDO4uuK1mU2DlPCJmnY4YMzc9euGhVFm4K6C5nchPOd+Ud9wU5J/N0rKmPRws9P6Un+lKcZ8kJiuHCInDEzH7rbEdurk/6xmihINLkcEMBWBgHRCr6VJ33KDh3haqXklaWVm408zfZg39q8rjvnWoC3nteTPO9EWPgen34TpirXfFIvEVYOS+j7LzcIfHE0m/iT05RlX3pIpH67F64QVXDakpjb+YEpuga+Ykk1nySmoM+vz2ReJwJ/ooqmf1J/LbWeiVVRQ3Y92RK0oTB987GV7R/A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P+LWGLET1pPPxjg9pYTqsoCrj/kofsydU9ywUKvFgV0=;
- b=t6ey0ZgpEWUB3nPmyfpP5JY1U8zRruXCdTftNX9JtSUEEuRUgMD0qYo/X9RhyArS0JWevAt4c5R4GY/Se8CuHoSVxeCeDdMwx9LPTo3KHGe0XKMIW+QZJjoJBZXVzl4IEpRg3FOpIpsRw5G+ZvTjObttwTglIm8H29T8kSjY2Jc=
+ bh=j+krazXWRn2IuLifiPb7Tk1sDo3QwLMY07VSIfj1R9Q=;
+ b=MPyNR1bU7ii98HiiopIPDw1iBTNpNIDdn2KSbNyhCczDdz+Pk5z+S/ZNh3pr3iAHJHtmEBuZAqpFHetM2DMeIy4oDeG5d/FXoBoHbyeEHYjICYDrfD9j3tJW/kyIoHJhXSjhs2i4VltMZkF4/XHyARm2iS0UyZHyNxvTWSnbMW4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,444 +86,322 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 02/26] xen/arm/cca: add RMI v2.0 SMCCC core wrappers
-Date: Fri, 15 May 2026 13:07:48 +0900
-Message-ID: <20260515040812.983626-3-den@valinux.co.jp>
+Subject: [RFC PATCH v1 24/26] xen/arm, tools: add domctl for Realm finalization
+Date: Fri, 15 May 2026 13:08:10 +0900
+Message-ID: <20260515040812.983626-25-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYWP286CA0022.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:262::8) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0208.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:385::18) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
-X-MS-Office365-Filtering-Correlation-Id: eccc8f08-adf6-4905-2cc4-08deb2379985
+X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYCP286MB3682:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca413a0f-f277-485f-1923-08deb237a3bd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|3023799003|18002099003|22082099003|56012099003;
+	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	Ktjp5SOA5ZmootcF7MkvC1UkSmJ08GXJujPkRQYVUI1UBOP9WMgrywzdgvKLd/d+BrhBmjkFxL8Gm0/9JTqotZDl/qmp5MDbMqWvfZaBirRo6llDO4epD8aNn7q9EijdJWA+yqoxvdFUfGmbNVHw4eZICxdPO1sM3sQ841+oIjXqw72w1ZCl2z7527aZOE/E69LAKdCHqbeif5zVl72atu1IA0VWWJUWjAzD263ONkkpkj/B5RiI5N+zJRX6G0l6j0CZD7006r00mSZHpWOaKyCvrxGTUrk3Gt0wKnZI7mLIK/fzw8VzUXHyqI147rgWVbNsW4lGjzQbecZOAqlkvf0MA1fVegYJ1jJKPWMZ5FbQboVcfpIWKVEi9o7Z3ndDvo895T8W6ehL9kc2pEKvD70lawXPMG59o3Dt0CApb3gqHmQwfLP8ffxkr4wnN2EsyhrXpmkUskMUXULGyL5aGggxYiRjIpiPkcoxGkGY//WF3zGkx1oY8jWfaAJhvxDj+I1UYhbRq1eSkPUUT878awVSFUT/hs0U7CfkxvhrQezE+QHqcxE3ikArk19iY6aUbPVSLs4itVn7eigqVNDpHakNRqjo2i7AYxUFZWqClektid5FP/y8Gj2rgKbwIKqu3nVGRXukaagpaqnAZD5s9/M7TURi12LssV4YxiDM5I5kejEsijA2eOOtMukIhWeE
+	WjI/btMcqFI0QZ2fBdJ37mLXCzdesxaTukRozNf6fW3C7Jv6PWYPrna+RiuwA67yMwdzUOgpklLV0n38DogTCIsEOzoZP1mBguUy4fP/t0A6PoAMLwmRGvVF1MAVb+O0hD1bIFn0pL9/mimfZh/xNWo8DGySx/2VG/needNjvFLFWtHbOEtBa7pYM3CQS/m/Y0ttwFbU8dgz0WJ+xEBo+1osAfYhxEoXXpNp035ISkLjxEAKdH4lFw2cGbAgWIz4lRh4ohVv1v3qrrWnRd29h7vjQidWmsGCP5KOxXix76CC1FDdh/Cfh++PvxmmFkMLFvnLto1OU7nrBMpyBLdNXdPZNAY2Bwh09G7VP+a/WH6rD0xB7aYulIC+R/G5aefRk5lvyZd8K5Xsq6bKjlC81vvSetYGP+25T8RRk/W8ywis/qHQTNLQ/73u0q/M9mCX9Oi1n46u4E35aEtrQ0sXmDP/0Ft8O/NwZci58CufHfGS9g9LBZyD3uOgE86V5Wxjv8MzT0MPWDesKCp/0ip4SVcdIhpB0C+ZcH3p8Le1cz7y0BRLYCPtB6p3cPo9ybxqBSbTDPYHMcGqr3dMxjVkIOCPsoCXkCpDJep0XvwMAHvgz8qTIVd3iNzEn6DYBS9JfDnI2swEGNzOqKcCxrj99aGHbw/43XWaQAXxj88kytlk3fQTFu6+fVBuwNpfYEr+
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(3023799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?MzikmfylkyWYuwHXBbTVJI3zBFFxCQiuyDHl6jfx5mY6QdNm8JxMaTe5GtPV?=
- =?us-ascii?Q?0/5Km5GhbfJtfHv8PlvMFa9aGiDxO6FlXWQ9SL+lc+kvVWe7GfdbI3Np/jUz?=
- =?us-ascii?Q?EqExI0r0Xi+3MJ2TTtddCI3WrWnQZrFb20FXJIF8dGPN6Xo2j0dFyJaQnNLW?=
- =?us-ascii?Q?4hNwGZX4DUi4uRhZUu2+kkKWo22C+QMlESNNxZD4mzduyJ6Uot8KavOCN6QJ?=
- =?us-ascii?Q?7S77umBjN3ENMDtAVqmH8pO3R7JzqiYp+D6lCBtxxS6itvLTYEMQuPDDgIcb?=
- =?us-ascii?Q?6ldMJZodV8CoS3xQejR8sy30K1f2r9WcSXtDdNrd5oT0CtPcJkDrNanBcrEM?=
- =?us-ascii?Q?PGLv8DjmTbydRA68MIEhghfKm+w2Dq179v/OLHGKxpc/mqnNYHN5bbvx3X4e?=
- =?us-ascii?Q?A7C4wFWrql/J/PltxIrh1VuvjNE0MQXMDH6Gv33SpeUefxsLx359zLxoCZsb?=
- =?us-ascii?Q?Ks9LuvJFAZiSjGzOPMMdQrs3g4p/d3kFdJRlcmZAE7wOUkanQXwh5TYKixkE?=
- =?us-ascii?Q?mMeWEkKdA2cTDUO3RS34N4dT8uVz6+VJTdS+OZIMvbhpQY60Jmz9TaJLOWtv?=
- =?us-ascii?Q?muZqyqbjQRuLzEgQQYfnZ/vAndNXFMvk4AWI+iRXjl+AXnDRe74zKlhUl4cv?=
- =?us-ascii?Q?UR1r4tK4IMuUKlwoqgAvB4KxxxBmWdcCVnAyYYhbn2NOAtGt1tQNmQ3zN0kD?=
- =?us-ascii?Q?Hae0yHFsBUoJcfvonRFLOvPYnW5rRP5mx39yW6LdXmFmCQKBX51wINgaxmfv?=
- =?us-ascii?Q?2hDdIuS6/a4Wxg+T4xHYiNb6TQnk000cJJL4L5hNu1IV1af9IE1/0PsLdMGF?=
- =?us-ascii?Q?gOg4HFhkizlJH2UNlnJKv+T6egZBdy954GLHoUGxfz1Bf/oFc1o8Hn+ztIKR?=
- =?us-ascii?Q?lQ2j1btZ7FRF3mmzaxW874WpyZEr/nDh6+bNfUA1yWtJ6nQtBCnaSJVkV0Th?=
- =?us-ascii?Q?/bSldMXnjv9JU3VFpp2gPrRe6JeaFEDRH0VTZfnu5QpsnpM2x6oOpb+Rc900?=
- =?us-ascii?Q?KjL6VXjEF/4/Xn8d3BR7QXKNYFFHVlSuLYFjV+Jox58QJUUjEKPyTaFkVxDj?=
- =?us-ascii?Q?ysIlCABiciryRG6SVLawAcAjyaFPQwd+pA1zW4lBcnmov5khZZMH0sqqyh9U?=
- =?us-ascii?Q?qC9qJS3J8KcKiMKExwFLbwag3cIC3t0/jUfbTxBK2Mi+w5XP+RKjdXOXNqMs?=
- =?us-ascii?Q?cBd/9Xco3CYnU0s0diXNIMIIXnOHYWLU5TNAWC8LBBrplKDgSGBiCXX1rrUG?=
- =?us-ascii?Q?zoSbg5iDrKUEewuZzViVNN3qRPnwQ6QY7siJIEIFeD0kgleISzqZzqw4M54h?=
- =?us-ascii?Q?DqexADQ8WA78jpbT0jGAvyP45UVDgUFlxGrFlJ3pPSyNdiSAq4NFZH4sQ72e?=
- =?us-ascii?Q?YKKe+z5FLzw5QfLtZenO6nLHw7eIoMzPDvZoVhFdmCCUnYTulf/hckYSzhpw?=
- =?us-ascii?Q?nPevvTS/sbhhww2aFNZoGQEEqWAp2zGgP5mI1ia4UsQBh8AvBAVg+09p2LAo?=
- =?us-ascii?Q?tUaQ/bBRSvAWIs5xaID+Tto3ZxvrCSo+G2J1EexXvwrcw60FJPnGpAoW+5Tc?=
- =?us-ascii?Q?RH64qsJAVl0x0aP4owrOMIgrzMaFDv3fPo+sY3ugKNCV2U8YF+HL6DwBtyYa?=
- =?us-ascii?Q?tD0H3kZ9NufytGRTVJ8MgWhoVlKvDYak52MK30V1KIriracyAbnOywAYEZ49?=
- =?us-ascii?Q?FxotZkWI50eakz2xQHwpwpHoz0gxYJsL4gQheRs4S6I7HYCIwkBuYDAwEpjx?=
- =?us-ascii?Q?5JnsR1tDV1/2xD34hqgUgaUeURL+CUUgxDNBAclAX6DFxjF81Xpn?=
+	=?us-ascii?Q?U+XofrQgZd0H5H47ZXWh21gtZoDVSe0ShuWC+pi9zFAohvZtQYe86iNuWIHi?=
+ =?us-ascii?Q?QLiomfJkri71vUMivTAXZNHImCLsySaXkNBDmHhHbF1s0V7CoamaCZjajr7l?=
+ =?us-ascii?Q?Q2VYMfTBKXIMuWqX3nHvCfzRAt4bROoS9nEOrWVKkfP/u3+31VJgIR4twOro?=
+ =?us-ascii?Q?X0XFtjM1Ld6J+QcEnT8JEZQEb9f+cdv5fCUfKGYLXoXZQzkbBW8hrNr0PvPk?=
+ =?us-ascii?Q?GVttty0OEf9O7Agq7TInHgRV7mBBrd71QhgtUYqFheMmuOSzcIdgDLsgwRyF?=
+ =?us-ascii?Q?1xbG8JLACQNiq5oPtOXsQzzYQNsuuH83o4aiCTN96+86zqCk2Suz2uivBXdP?=
+ =?us-ascii?Q?ZIJ7seVEa5z56CoBC6c53FsQQNlF3q5EU92aCAIl9wcu+VQzPgfakvoF5iwh?=
+ =?us-ascii?Q?Nly0gGe/Adh7SAW/Mi3juTsHVfVMUMKqujvT53+9kS+CsrvufChPR4hle7zX?=
+ =?us-ascii?Q?MPtxgPQRjcIUVqnEXrwNkpH++LstlKgw6dvjtgHOaH+FoeXTYOYjsW8+BMhH?=
+ =?us-ascii?Q?TIPSxRvDrq8RhU0Akp715XlxV29BPdFY+lWwx0HugjSz1rSrC+w2/mg8IzUW?=
+ =?us-ascii?Q?gNbgfiQGOwNM7L2v8XMCJcG8w98XJk6wfIRBhb1LdLQo7u0Z2dsKPB7cmTzK?=
+ =?us-ascii?Q?aMNMP2K+kOMzzEFYcQEbWke5+rDl8goFJ+zMXm528Ee25lsBZkkPGTIVaJ+6?=
+ =?us-ascii?Q?6MGqYIKJWVLhXaM9XJz3JQeh/BHgk9UafSGNP9pTzK66+zR7rSgHrTFrSUdO?=
+ =?us-ascii?Q?/WjzkxOhmwQenVDtVy0OnaCmgMjOrXYwvgidDhYdx+dFdvbQhkR/oHfbTG0m?=
+ =?us-ascii?Q?kzZdGFWSvSXlcqkzLxfPreUWoSn9FQ3kQyxZo8xb31/4NkmviSBHJn/Vq+T1?=
+ =?us-ascii?Q?UuhQOOVD+P6JaMFFOgPvC4vQro3twGQFkaT2i9WYJhu+3VyVfvWmEldlD7nC?=
+ =?us-ascii?Q?r4XxALkGiVxPGVpeacLxGBHUPDp2wxjuoGJYBG7Mf3yuK/r6j/aHylUbmqFQ?=
+ =?us-ascii?Q?J9sZqUEQW9PN9oM/LqWAgmNxnDjSxg76rqF9IOircVJdnsAuxCjCd6+MVAFK?=
+ =?us-ascii?Q?pujxmYdlfHnsBSL0LBRFClkvbbz/zCENYJ+q3fPM6lCs/0AlNVrNTyLneRX7?=
+ =?us-ascii?Q?Ld1Mx6T1WQ4ZRh3TAhHe3CzXaTY6DV82R7RJN5sYQ8/FY6M/nfDeONNPc0gX?=
+ =?us-ascii?Q?3cZndHYSwEFu79UEZqVTn8gHvCCmKX5wfAanCMS0V5M8Ew1sxdglXVQTufqR?=
+ =?us-ascii?Q?Eot9e0GzW60BuNgTgBtW4OMIN2xnqYc/2SJDP9rmK2N46czVfxZezU8GL7nw?=
+ =?us-ascii?Q?CA89c31yPhbGjOeUZwRK3r0bDdp2y8z5AoD64IuHBaypSz8ixJZ9wP1Dd07d?=
+ =?us-ascii?Q?qWp5NDfe5NJTzkdx0LFJyc0+YBhqLomOZEURK/HYooBWJHdL3BDBDhO9Bj/w?=
+ =?us-ascii?Q?8GkTw/bMODv2aCErysakD4U4goG9j50Lo5FDl8DUGk9RS6SWb1Y5R41F1Nzl?=
+ =?us-ascii?Q?WkCpBmZYH0X+VscaowAljBzQ3IxmI9kpfsRiznIOZs7we67wIBL9+7gP2AnU?=
+ =?us-ascii?Q?bquK087LCw0orDNMYfZSEXSaiN+BP6vwrOsRcri/xL7s8lg23dy/yAZu65T6?=
+ =?us-ascii?Q?CLifDfqIwRglVoXPnn/M+gug2hCGrHq3catl39M5p8J/TmCIcMTZX2BZBhnD?=
+ =?us-ascii?Q?DdGfgVyjrHZuQFPtM0YQG+bTzwYpeLCPKYtHSe1aVWqr51YpeTJemlBKvsUI?=
+ =?us-ascii?Q?5PGtgSt98FdYw2oXemy/TV7AsdGeMZVRiWeUW5wr+oQN+mzNyTVd?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: eccc8f08-adf6-4905-2cc4-08deb2379985
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca413a0f-f277-485f-1923-08deb237a3bd
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:20.2334
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:37.3843
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kgc96NLvs5dmVvzHBBLcachmHOSpTKY63oMlbxaSG+/TUpR3Xjt+16jFuykAC9Axj3rcjcL9U3X034acG73OSw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
-X-purgate-ID: tlsNG-ebf023/1778818106-2A5603FF-DB93292C/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: CkEcoTcGI3uIg/Nj9WvUHfWEoISyR2xVINWWy+kZ2XKXN25J6kT4nA4hykN53YoJG1/+INXPZ3S3BMTACgE3XQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3682
+X-purgate-ID: tlsNG-d25034/1778818126-F487BCF5-411EC66D/0/0
 X-purgate-type: clean
-X-purgate-size: 11679
+X-purgate-size: 8872
 
-Add the common SMC path and the early RMI calls used to probe and
-configure the RMM. The rest of the series can build on typed helpers
-rather than spelling out registers each time.
+Add the domctl, libxc wrapper and XSM permission used by libxl to turn a
+paused Arm guest into a Realm. RMI failures are reported back as-is.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/Kconfig      |  14 ++++
- xen/arch/arm/Makefile     |   1 +
- xen/arch/arm/cca/Makefile |   1 +
- xen/arch/arm/cca/rmi.c    | 170 ++++++++++++++++++++++++++++++++++++++
- xen/arch/arm/cca/rmi.h    | 126 ++++++++++++++++++++++++++++
- 5 files changed, 312 insertions(+)
- create mode 100644 xen/arch/arm/cca/Makefile
- create mode 100644 xen/arch/arm/cca/rmi.c
- create mode 100644 xen/arch/arm/cca/rmi.h
+ tools/flask/policy/modules/xen.if   |  1 +
+ tools/include/xenctrl.h             | 12 ++++++
+ tools/libs/ctrl/xc_domain.c         | 37 ++++++++++++++++++
+ xen/arch/arm/domctl.c               | 60 +++++++++++++++++++++++++++++
+ xen/include/public/domctl.h         | 12 ++++++
+ xen/xsm/flask/hooks.c               |  3 ++
+ xen/xsm/flask/policy/access_vectors |  2 +
+ 7 files changed, 127 insertions(+)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 79622b46a10d..dc99020c96de 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -118,6 +118,20 @@ config ARM_EFI
- 	  UEFI firmware. A UEFI stub is provided to allow Xen to
- 	  be booted as an EFI application.
+diff --git a/tools/flask/policy/modules/xen.if b/tools/flask/policy/modules/xen.if
+index ef7d8f438c65..5eb2d98341e9 100644
+--- a/tools/flask/policy/modules/xen.if
++++ b/tools/flask/policy/modules/xen.if
+@@ -98,6 +98,7 @@ define(`create_domain_common', `
+ 		vuart_op
+ 		set_llc_colors
+ 		get_domain_state
++		arm_cca_op
+ 	};
+ 	allow $1 $2:security check_context;
+ 	allow $1 $2:shadow enable;
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index d5dbf69c8968..149e15f7c531 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -808,6 +808,18 @@ int xc_dom_vuart_init(xc_interface *xch,
+                       xen_pfn_t gfn,
+                       evtchn_port_t *evtchn);
  
-+config ARM_CCA
-+	bool "Arm Confidential Compute Architecture support (UNSUPPORTED)" if UNSUPPORTED
-+	depends on ARM_64 && MMU
-+	default n
-+	help
-+	  Build Xen's Arm CCA / RMM support for Arm Realm guests on
-+	  Armv9 platforms.
-+
-+	  This enables the NS hypervisor-side Realm creation and execution
-+	  paths, including the RMI ABI wrappers, Realm build/finalize
-+	  flows and REC run loop.
-+
-+	  This support is experimental. If unsure, say N.
-+
- config GICV2
- 	bool "GICv2 driver"
- 	default y
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 982c6c396a05..953dcbbe6626 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -8,6 +8,7 @@ ifneq ($(CONFIG_NO_PLAT),y)
- obj-y += platforms/
- endif
- obj-y += firmware/
-+obj-$(CONFIG_ARM_CCA) += cca/
- obj-$(CONFIG_TEE) += tee/
- obj-$(CONFIG_HAS_VPCI) += vpci.o
- 
-diff --git a/xen/arch/arm/cca/Makefile b/xen/arch/arm/cca/Makefile
-new file mode 100644
-index 000000000000..9c351f901dfd
---- /dev/null
-+++ b/xen/arch/arm/cca/Makefile
-@@ -0,0 +1 @@
-+obj-y += rmi.o
-diff --git a/xen/arch/arm/cca/rmi.c b/xen/arch/arm/cca/rmi.c
-new file mode 100644
-index 000000000000..d37f1226f834
---- /dev/null
-+++ b/xen/arch/arm/cca/rmi.c
-@@ -0,0 +1,170 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Internal Xen RMI command wrappers for DEN0137 2.0-bet1 / RMI v2.0.
++ * Finalize a paused ARM domain as a Realm backed by RMM. The toolstack is
++ * expected to have already built a normal ARM guest image in the domain RAM.
++ *
++ * Returns 0 on success, or -1 with errno set. If Xen receives an RMI error
++ * result from RMM, libxc logs the raw RMI result and reports EPROTO.
 + */
++int xc_arm_cca_init_realm(xc_interface *xch,
++                          uint32_t domid,
++                          xen_pfn_t base_gfn,
++                          uint64_t nr_pages);
 +
-+#include <xen/errno.h>
-+
-+#include <asm/processor.h>
-+#include <asm/smccc.h>
-+
-+#include "rmi.h"
-+
-+#define ARM_CCA_RMI_INITIATE_SRO_BUSY_RETRIES 1000000U
-+
-+static void arm_cca_rmi_invoke(unsigned long fid,
-+                               unsigned long arg0,
-+                               unsigned long arg1,
-+                               unsigned long arg2,
-+                               unsigned long arg3,
-+                               unsigned long arg4,
-+                               struct arm_smccc_res *res)
+ /**
+  * This function returns information about the XSAVE state of a particular
+  * vcpu of a domain. If extstate->size and extstate->xfeature_mask are 0,
+diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+index 01c0669c8863..3cb8da9cc07d 100644
+--- a/tools/libs/ctrl/xc_domain.c
++++ b/tools/libs/ctrl/xc_domain.c
+@@ -345,6 +345,43 @@ int xc_dom_vuart_init(xc_interface *xch,
+     return rc;
+ }
+ 
++int xc_arm_cca_init_realm(xc_interface *xch,
++                          uint32_t domid,
++                          xen_pfn_t base_gfn,
++                          uint64_t nr_pages)
 +{
-+    arm_smccc_1_0_smc(fid, arg0, arg1, arg2, arg3, arg4, 0, 0, res);
-+}
-+
-+static int arm_cca_rmi_initiate_sro(unsigned long fid,
-+                                    unsigned long arg0,
-+                                    unsigned long arg1,
-+                                    unsigned long arg2,
-+                                    unsigned long arg3,
-+                                    unsigned long arg4,
-+                                    struct arm_smccc_res *res)
-+{
-+    unsigned int retries = 0;
-+
-+    /*
-+     * Conform to DEN0137 2.0-bet1 B4.3.2.5 Programming model for an SRO:
-+     * retry the initiating command while it returns RMI_BUSY.  Once a handle
-+     * is returned, progress is driven through RMI_OP_CONTINUE.
-+     *
-+     * Initial RMI_BUSY is expected to be transient.  Keep the retry loop
-+     * finite so a broken RMM cannot spin Xen forever.
-+     */
-+    while ( true )
-+    {
-+        arm_cca_rmi_invoke(fid, arg0, arg1, arg2, arg3, arg4, res);
-+
-+        if ( !arm_cca_rmi_status_is(arm_cca_rmi_result(res),
-+                                    ARM_CCA_RMI_BUSY) )
-+            return 0;
-+
-+        if ( retries == ARM_CCA_RMI_INITIATE_SRO_BUSY_RETRIES )
-+            return -EBUSY;
-+        retries++;
-+
-+        cpu_relax();
-+    }
-+}
-+int arm_cca_rmi_version(unsigned long requested_revision,
-+                        unsigned long *revision_lower,
-+                        unsigned long *revision_higher)
-+{
-+    struct arm_smccc_res res;
++    struct xen_domctl domctl = {};
 +    int rc;
 +
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_VERSION_FID,
-+                       requested_revision, 0, 0, 0, 0, &res);
++    memset(&domctl, 0, sizeof(domctl));
 +
-+    rc = arm_cca_rmi_res_to_errno(&res);
++    domctl.cmd = XEN_DOMCTL_arm_cca_op;
++    domctl.domain = domid;
++    domctl.u.arm_cca_op.cmd = XEN_DOMCTL_ARM_CCA_OP_INIT_REALM;
++    domctl.u.arm_cca_op.flags = 0;
++    domctl.u.arm_cca_op.base_gfn = base_gfn;
++    domctl.u.arm_cca_op.nr_pages = nr_pages;
 +
-+    if ( revision_lower != NULL )
-+        *revision_lower = res.a1;
++    rc = do_domctl(xch, &domctl);
++    if ( rc < 0 )
++    {
++        if ( domctl.u.arm_cca_op.rmi_result )
++        {
++            xc_report_error(xch, XC_INTERNAL_ERROR,
++                            "xc_arm_cca_init_realm failed with raw RMI "
++                            "result 0x%llx",
++                            (unsigned long long)
++                            domctl.u.arm_cca_op.rmi_result);
++            errno = EPROTO;
++            return -1;
++        }
 +
-+    if ( revision_higher != NULL )
-+        *revision_higher = res.a2;
++        return rc;
++    }
 +
 +    return rc;
 +}
 +
-+unsigned long arm_cca_rmi_features(unsigned long index)
+ int xc_domain_getinfo_single(xc_interface *xch,
+                              uint32_t domid,
+                              xc_domaininfo_t *info)
+diff --git a/xen/arch/arm/domctl.c b/xen/arch/arm/domctl.c
+index ad914c915f81..36461eeda633 100644
+--- a/xen/arch/arm/domctl.c
++++ b/xen/arch/arm/domctl.c
+@@ -16,6 +16,7 @@
+ #include <xen/types.h>
+ #include <xsm/xsm.h>
+ #include <public/domctl.h>
++#include <public/sched.h>
+ 
+ void arch_get_domain_info(const struct domain *d,
+                           struct xen_domctl_getdomaininfo *info)
+@@ -49,6 +50,42 @@ static int handle_vuart_init(struct domain *d,
+     return rc;
+ }
+ 
++static int handle_arm_cca_init_realm(struct domain *d,
++                                     struct xen_domctl_arm_cca_op *cca_op)
 +{
-+    struct arm_smccc_res res;
-+
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_FEATURES_FID, index, 0, 0, 0, 0, &res);
-+
-+    return arm_cca_rmi_res_to_errno(&res) ? 0 : res.a1;
-+}
-+
-+int arm_cca_rmi_rmm_config_get(paddr_t cfg_ptr, struct arm_smccc_res *res)
-+{
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_RMM_CONFIG_GET_FID,
-+                       cfg_ptr, 0, 0, 0, 0, res);
-+
-+    return arm_cca_rmi_res_to_errno(res);
-+}
-+
-+int arm_cca_rmi_rmm_config_set(paddr_t cfg_ptr)
-+{
-+    struct arm_smccc_res res;
-+
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_RMM_CONFIG_SET_FID,
-+                       cfg_ptr, 0, 0, 0, 0, &res);
-+
-+    return arm_cca_rmi_res_to_errno(&res);
-+}
-+
-+int arm_cca_rmi_rmm_activate(struct arm_smccc_res *res)
-+{
++#ifdef CONFIG_ARM_CCA
++    uint64_t rmi_result = 0;
 +    int rc;
++#endif
 +
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_RMM_ACTIVATE_FID,
-+                                  0, 0, 0, 0, 0, res);
-+    if ( rc != 0 )
-+        return rc;
++    if ( cca_op->flags )
++        return -EINVAL;
 +
-+    return arm_cca_rmi_res_to_errno(res);
-+}
++    cca_op->rmi_result = 0;
 +
-+int arm_cca_rmi_granule_tracking_get(paddr_t base, paddr_t top,
-+                                     unsigned long *category,
-+                                     unsigned long *state, paddr_t *out_top)
-+{
-+    struct arm_smccc_res res;
-+    int rc;
-+
-+    arm_cca_rmi_invoke(ARM_CCA_RMI_GRANULE_TRACKING_GET_FID,
-+                       base, top, 0, 0, 0, &res);
-+
-+    rc = arm_cca_rmi_res_to_errno(&res);
-+    if ( rc != 0 )
-+        return rc;
++#ifdef CONFIG_ARM_CCA
++    rc = arm_cca_domain_finalize(d, _gfn(cca_op->base_gfn),
++                                 cca_op->nr_pages, &rmi_result);
 +
 +    /*
-+     * Note that X3 is not defined by DEN0137 2.0-bet1 B4.5.10.1.3.  The
-+     * tested TF-RMM v2.0 PoC branch, also followed by the KVM host series,
-+     * returns range progress there.
++     * Once Realm data conversion starts, the original guest RAM image can no
++     * longer be trusted after a failed finalization attempt.
 +     */
-+    *category = res.a1;
-+    *state = res.a2;
-+    *out_top = res.a3;
++    if ( rc == -EIO )
++        domain_shutdown(d, SHUTDOWN_crash);
 +
-+    return 0;
-+}
-+
-+int arm_cca_rmi_gpt_l1_create(paddr_t base)
-+{
-+    struct arm_smccc_res res;
-+    int rc;
-+
-+    rc = arm_cca_rmi_initiate_sro(ARM_CCA_RMI_GPT_L1_CREATE_FID,
-+                                  base, 0, 0, 0, 0, &res);
-+    if ( rc != 0 )
-+        return rc;
-+
-+    if ( arm_cca_rmi_is_success(&res) ||
-+         arm_cca_rmi_status_is(arm_cca_rmi_result(&res),
-+                               ARM_CCA_RMI_ERROR_GPT) )
-+        return 0;
-+
-+    /*
-+     * Xen CCA supports immediate GPT L1 creation, or an existing GPT L1
-+     * reported as RMI_ERROR_GPT.  If creation needs a memory-transferring
-+     * SRO, leave CCA unavailable for now.
-+     */
-+    if ( arm_cca_rmi_status_is(arm_cca_rmi_result(&res),
-+                               ARM_CCA_RMI_INCOMPLETE) )
-+        return -EOPNOTSUPP;
-+
-+    return arm_cca_rmi_res_to_errno(&res);
-+}
-diff --git a/xen/arch/arm/cca/rmi.h b/xen/arch/arm/cca/rmi.h
-new file mode 100644
-index 000000000000..4cd0bc64ccf5
---- /dev/null
-+++ b/xen/arch/arm/cca/rmi.h
-@@ -0,0 +1,126 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Internal Xen RMI command API.
-+ *
-+ * This header exposes typed wrappers and helpers for the subset of RMI
-+ * commands used by Xen. Raw ABI constants live in rmi-abi.h.
-+ */
-+#ifndef ARM_CCA_RMI_H
-+#define ARM_CCA_RMI_H
-+
-+#include <xen/bitops.h>
-+#include <xen/bug.h>
-+#include <xen/errno.h>
-+#include <xen/page-size.h>
-+
-+#include <asm/smccc.h>
-+
-+#include "rmi-abi.h"
-+
-+static inline uint64_t arm_cca_rmi_field_get(uint64_t value,
-+                                             unsigned int shift,
-+                                             unsigned int width)
-+{
-+    ASSERT(width != 0 && shift < 64U && width <= 64U - shift);
-+
-+    return (value & GENMASK_ULL(shift + width - 1, shift)) >> shift;
-+}
-+
-+static inline uint64_t arm_cca_rmi_result(const struct arm_smccc_res *res)
-+{
-+    return res->a0;
-+}
-+
-+static inline bool arm_cca_rmi_is_success(const struct arm_smccc_res *res)
-+{
-+    return arm_cca_rmi_result(res) == ARM_CCA_RMI_SUCCESS;
-+}
-+
-+static inline bool arm_cca_rmi_result_is_smccc_unknown(uint64_t result)
-+{
-+    return result == (uint64_t)ARM_SMCCC_ERR_UNKNOWN_FUNCTION;
-+}
-+
-+static inline unsigned int arm_cca_rmi_status_code(uint64_t result)
-+{
-+    return arm_cca_rmi_field_get(result, ARM_CCA_RMI_RESULT_STATUS_SHIFT,
-+                                 ARM_CCA_RMI_RESULT_STATUS_WIDTH);
-+}
-+
-+static inline uint64_t arm_cca_rmi_result_data(uint64_t result)
-+{
-+    return result >> ARM_CCA_RMI_RESULT_DATA_SHIFT;
-+}
-+
-+static inline bool arm_cca_rmi_status_is(uint64_t result, unsigned int status)
-+{
-+    return arm_cca_rmi_status_code(result) == status;
-+}
-+
-+static inline bool arm_cca_rmi_status_is_error(uint64_t result)
-+{
-+    unsigned int status;
-+
-+    if ( arm_cca_rmi_result_is_smccc_unknown(result) )
-+        return false;
-+
-+    status = arm_cca_rmi_status_code(result);
-+
-+    switch ( status )
++    if ( rc == -EIO && rmi_result )
 +    {
-+    case ARM_CCA_RMI_ERROR_INPUT:
-+    case ARM_CCA_RMI_ERROR_REALM:
-+    case ARM_CCA_RMI_ERROR_REC:
-+    case ARM_CCA_RMI_ERROR_RTT:
-+    case ARM_CCA_RMI_ERROR_NOT_SUPPORTED:
-+    case ARM_CCA_RMI_ERROR_DEVICE:
-+    case ARM_CCA_RMI_ERROR_RTT_AUX:
-+    case ARM_CCA_RMI_ERROR_PSMMU_ST:
-+    case ARM_CCA_RMI_ERROR_DPT:
-+    case ARM_CCA_RMI_ERROR_GLOBAL:
-+    case ARM_CCA_RMI_ERROR_TRACKING:
-+    case ARM_CCA_RMI_ERROR_GPT:
-+    case ARM_CCA_RMI_ERROR_GRANULE:
-+        return true;
-+
-+    default:
-+        return false;
++        cca_op->rmi_result = rmi_result;
++        return rc;
 +    }
++
++    return rc;
++#else
++    return -EOPNOTSUPP;
++#endif
 +}
 +
-+static inline int arm_cca_rmi_result_to_errno(uint64_t result)
-+{
-+    /*
-+     * SRO progress states are not errno failures.  The SRO helpers keep
-+     * inspecting the raw result in X0 through struct arm_smccc_res.
-+     */
-+    if ( result == ARM_CCA_RMI_SUCCESS ||
-+         arm_cca_rmi_status_is(result, ARM_CCA_RMI_INCOMPLETE) ||
-+         arm_cca_rmi_status_is(result, ARM_CCA_RMI_BUSY) )
-+        return 0;
+ long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+                     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+ {
+@@ -177,6 +214,29 @@ long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+ 
+         return rc;
+     }
++    case XEN_DOMCTL_arm_cca_op:
++    {
++        struct xen_domctl_arm_cca_op *cca_op = &domctl->u.arm_cca_op;
 +
-+    if ( arm_cca_rmi_result_is_smccc_unknown(result) ||
-+         arm_cca_rmi_status_is(result, ARM_CCA_RMI_ERROR_NOT_SUPPORTED) )
-+        return -EOPNOTSUPP;
++        switch ( cca_op->cmd )
++        {
++        case XEN_DOMCTL_ARM_CCA_OP_INIT_REALM:
++        {
++            long rc = handle_arm_cca_init_realm(d, cca_op);
 +
-+    return -EIO;
-+}
++            if ( rc == -ERESTART )
++                rc = hypercall_create_continuation(__HYPERVISOR_domctl,
++                                                   "h", u_domctl);
++            else if ( rc == -EIO && cca_op->rmi_result &&
++                      copy_to_guest(u_domctl, domctl, 1) )
++                rc = -EFAULT;
 +
-+static inline int arm_cca_rmi_res_to_errno(const struct arm_smccc_res *res)
-+{
-+    return arm_cca_rmi_result_to_errno(arm_cca_rmi_result(res));
-+}
-+int arm_cca_rmi_version(unsigned long requested_revision,
-+                        unsigned long *revision_lower,
-+                        unsigned long *revision_higher);
-+unsigned long arm_cca_rmi_features(unsigned long index);
-+int arm_cca_rmi_rmm_config_get(paddr_t cfg_ptr, struct arm_smccc_res *res);
-+int arm_cca_rmi_rmm_config_set(paddr_t cfg_ptr);
-+int arm_cca_rmi_rmm_activate(struct arm_smccc_res *res);
++            return rc;
++        }
++        default:
++            return -EINVAL;
++        }
++    }
+     case XEN_DOMCTL_dt_overlay:
+         return dt_overlay_domctl(d, &domctl->u.dt_overlay);
+     default:
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 8f6708c0a7cd..2562647d93d3 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -1201,6 +1201,16 @@ struct xen_domctl_vuart_op {
+                                  */
+ };
+ 
++/* XEN_DOMCTL_arm_cca_op */
++struct xen_domctl_arm_cca_op {
++#define XEN_DOMCTL_ARM_CCA_OP_INIT_REALM  0
++        uint32_t cmd;              /* IN - XEN_DOMCTL_ARM_CCA_OP_* */
++        uint32_t flags;            /* IN - reserved, must be zero */
++        uint64_aligned_t base_gfn;   /* IN - first guest RAM gfn to protect */
++        uint64_aligned_t nr_pages;   /* IN - number of 4K pages to protect */
++        uint64_aligned_t rmi_result; /* OUT - raw RMI result on -EIO */
++};
 +
-+int arm_cca_rmi_granule_tracking_get(paddr_t base, paddr_t top,
-+                                     unsigned long *category,
-+                                     unsigned long *state, paddr_t *out_top);
-+int arm_cca_rmi_gpt_l1_create(paddr_t base);
+ /* XEN_DOMCTL_vmtrace_op: Perform VM tracing operations. */
+ struct xen_domctl_vmtrace_op {
+     uint32_t cmd;           /* IN */
+@@ -1368,6 +1378,7 @@ struct xen_domctl {
+ #define XEN_DOMCTL_gsi_permission                88
+ #define XEN_DOMCTL_set_llc_colors                89
+ #define XEN_DOMCTL_get_domain_state              90 /* stable interface */
++#define XEN_DOMCTL_arm_cca_op                    91
+ #define XEN_DOMCTL_gdbsx_guestmemio            1000
+ #define XEN_DOMCTL_gdbsx_pausevcpu             1001
+ #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
+@@ -1429,6 +1440,7 @@ struct xen_domctl {
+         struct xen_domctl_monitor_op        monitor_op;
+         struct xen_domctl_psr_alloc         psr_alloc;
+         struct xen_domctl_vuart_op          vuart_op;
++        struct xen_domctl_arm_cca_op        arm_cca_op;
+         struct xen_domctl_vmtrace_op        vmtrace_op;
+         struct xen_domctl_paging_mempool    paging_mempool;
+ #if defined(__arm__) || defined(__aarch64__)
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 28522dcbd271..f95552992a26 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -805,6 +805,9 @@ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
+     case XEN_DOMCTL_vuart_op:
+         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__VUART_OP);
+ 
++    case XEN_DOMCTL_arm_cca_op:
++        return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__ARM_CCA_OP);
 +
-+#endif /* ARM_CCA_RMI_H */
+     case XEN_DOMCTL_get_cpu_policy:
+         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__GET_CPU_POLICY);
+ 
+diff --git a/xen/xsm/flask/policy/access_vectors b/xen/xsm/flask/policy/access_vectors
+index bbb9c117ec4a..dee895bef673 100644
+--- a/xen/xsm/flask/policy/access_vectors
++++ b/xen/xsm/flask/policy/access_vectors
+@@ -253,6 +253,8 @@ class domain2
+     set_llc_colors
+ # XEN_DOMCTL_get_domain_state
+     get_domain_state
++# XEN_DOMCTL_arm_cca_op
++    arm_cca_op
+ }
+ 
+ # Similar to class domain, but primarily contains domctls related to HVM domains
 -- 
 2.51.0
 
