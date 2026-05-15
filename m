@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91916CD4F48
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309340.1580381 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C473CD4F42
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309356.1580438 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqh-00024C-VG; Fri, 15 May 2026 04:08:31 +0000
+	id 1wNjqy-0004N1-2N; Fri, 15 May 2026 04:08:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309340.1580381; Fri, 15 May 2026 04:08:31 +0000
+Received: by outflank-mailman (output) from mailman id 1309356.1580438; Fri, 15 May 2026 04:08:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqh-00023W-LV; Fri, 15 May 2026 04:08:31 +0000
-Received: by outflank-mailman (input) for mailman id 1309340;
- Fri, 15 May 2026 04:08:30 +0000
+	id 1wNjqx-0004MU-SP; Fri, 15 May 2026 04:08:47 +0000
+Received: by outflank-mailman (input) for mailman id 1309356;
+ Fri, 15 May 2026 04:08:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjqf-0001nN-Th
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:30 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjqw-0004BB-Gt
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjqf-00GbfP-9l
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:29 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wNjqv-0051ua-Td
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:45 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c0b-2eae-0a2a0a5409dd-0a2a4504bda6-42
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:29 +0200
-Received: from [52.101.125.129]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a069c36-bab6-0a2a0a5309dd-0a2a450c90bc-14
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:45 +0200
+Received: from [52.101.228.84]
+ (helo=OS0P286CU011.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c35-1dec-0a2a45040019-34657d8136d2-6
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:29 +0200
+ id 6a069c4b-62f1-0a2a450c0019-3465e45466d0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:45 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
- by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
+ by TYCP286MB3682.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:3c2::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
- 2026 04:08:21 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
+ 2026 04:08:35 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:21 +0000
+ 04:08:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mTaEbr6yRRq0aXvYCtBaJkIVY2thhsVNnScppWcep2Ie5zC1kfPd8tlk6tGy7CWhO+IhekcDDt8uQAXlrijDTlXfBAn8UUgd5lUhoO12WbRd/GxjBJzrxt7vBBeI2uN7if99lpT3ycYfJSjm2hOZe/GIjDLvS7Ilh9IA7bqbxUJM79xmMfnzpFcXb0SOTZCdQhxup9sDubjwm/GE7kNVHyT+0uD6QRPBkqTw13CNFRbrHa4DSqLJjuXdSp97Ic6SeEr4bCmunjFV3zida/bm/QSHeQOMsB3IVDg8RZRSr/vlI8yGE4Dkq5ZLRmU8t1k7wS8eaJ5SHeBpxaWMon8coA==
+ b=arrFO6a2sjzq/3ApCdKsYNAQyoNnWnEDCNbpZPW7MwZTmuB+TIWfpAtskWAJT0cFbiq4eTuRuGbVRplyuU8JFqD9a9FaXqUFn6AJNb+WGSOnTzAONlx+wCXA/kde7frUyxSbVT6wFiKBogR+rJt2YYPuYJH2ItwAy/7wHJx4FuSZ/OpFxCtybYLrdF+f3pfI9uypYvoYVQ2nQIAEyJDYZpRsYxkhtnMNg6ZrQnVU+PUGg78mXvw1S2DQ7+VL+3zHVYJjyrF12YyF2wRWhWeGt1nYzOCKRsyC/UAFjnBFS87LH16Lczu42+BVj8JBVoHaYZMQJhFCtfEvS83rYhhi0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GHrMD1ZRwMJqiJUr8zXCjReMk57kt2vx8gsp61dgHdY=;
- b=BMTlo11NVJUJKLoF1fFHOT3BLVHDvz3jz97w0j7z0YCY43sWy5nixffvvuSF+SB7+WXYojmREaiVfkdD61l1RHLiaMK1yCJUwUw4lJEz3Knfpir53zi1+yOTILlwhJYACcSQ6vaa83dFs1/V4HXZkzJWjh4GSHN46DXf26GFAvf5WcsJzh5PKJpDdNkxpeudCCL8yqMua5pi7aYUNUrSvmrqPGPNSXfjDHvhIq5SYcMrSWR1Sl5y9XcQCWAbGa1/FzDVEmQd9FRWMMybrJn2AV+sHvq3EY1X5RtbIO+niEU/LL64RBpEsToBBA78JVJDfXZgrUDW+eBl5ShY5ILaPQ==
+ bh=DiTfP5ChOZW8sjqcWWmT0T9qF7NP3o4lD8/7QRCmBhE=;
+ b=CjnNAGqTHYoAbp1Xe64vovWBsdR0EY58EwBsuMQNcshiah8wBa9/vhUNjaFE6RMwIDzXsZG+aLraYVOlPCBNiuSNarQtOERkgoXhpx1pNIxYmEAs+JYErPPHWNOGQkU5E2omK0JvWMf0XfMv/hLW/U5C3yD75xcgDr6/Xf0+SnLvUFwM9cuJHEWuuyyjjK2STsE8V9ZROq1RSVTf2Iu4CMFiBmjETQhtERONrj7Lx/8t/POAlJRqm/pLJjl2r2lxHpBgpZRU3XV3hAdi6I4D28J9s+ge/ELHMrmuTfuo8d1nuHLNzqFwn5ycuhjXkYXQjkcoWrYaQjiZY5vFtNZiew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GHrMD1ZRwMJqiJUr8zXCjReMk57kt2vx8gsp61dgHdY=;
- b=YO8H+Lk3yXoDNDOwAngEecsWQQt5tReFNepMSlG24T+naXz9urWWiv77rubuCHdLFDzlyfKx5AfOp+Our6Ncu2lnr985EUpmoJm9fK5qTH6Tx2IMP0y2DQFPl5Yq7IolVdW0h3VR7vJ3f+OuELokQLtvdOuy5OPZ2YybWcofT+I=
+ bh=DiTfP5ChOZW8sjqcWWmT0T9qF7NP3o4lD8/7QRCmBhE=;
+ b=OU8p56epggxR3lOdRHCHF9J2jpw97Vb+Eb5pywnrAtbdGMaP13EpZlEEmgjhEGMwYwRA+dGhPhBbDpuoq/zmPmnlCoYgMUWmsCGvDFOFKHU2zqsT7J6xAUoHjUq4VEbmZt9Hntos7L2SWThCP1aJhIOuRHECiH0FcUaxz4MmdRI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,314 +86,539 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 04/26] xen/arm/cca: add Realm domain and vCPU state
-Date: Fri, 15 May 2026 13:07:50 +0900
-Message-ID: <20260515040812.983626-5-den@valinux.co.jp>
+Subject: [RFC PATCH v1 18/26] xen/arm/cca: create RECs and activate Realms
+Date: Fri, 15 May 2026 13:08:04 +0900
+Message-ID: <20260515040812.983626-19-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0352.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:7c::19) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCPR01CA0207.jpnprd01.prod.outlook.com
+ (2603:1096:405:7a::8) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63cdcc5a-39d3-40a8-b9c4-08deb2379a6b
+X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYCP286MB3682:EE_
+X-MS-Office365-Filtering-Correlation-Id: fb795c32-8e36-470c-25b1-08deb237a0f2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|18002099003|22082099003|56012099003;
+	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	ZwoBko41sEgLYwrUrKmeEfiYFlxIgyph0mcsCSU6JEuJRI57Bf2AmHyd+NkzxkU/qbzAvY0Q8REFvkQYIBLvhRrsumiz/QPMc5vHVEfgTCEJJWEfvEIwypZKuyGwCns4rCIp+6WQOrTwxxptYN6cvYoN1rnlJVvDk9gq5hbW0Ohb5fjf4P/rUvA4WgPrlvpYzELkwsiJzJYtv6Fa2QnFHPJQOZ219S4HHsxwGgdOWawnKm80SreoBbRCwAHtT7ja6WMRH1plXasL2BJ0W5lCzGEW3Hllz5cfn1GNqqH1XRBObuaqICFtd/fgYxqwkFJsRUPpq22IGHVl5XFVkJ8BxA4nKhIzyfm2nwzrBhIypNIaSs1KMgypdVJM/YMCSMeD5BcNRfQI8lYA3a7qMMSWsEz538opakLw2v6P1DtIDhLGb5IytSKUz1U72CsmbFWvtYo4L5Q5vZCOqEi6s0pwDPnS3Sq1SS4pr9nWsAjmGozKqVLfRIxkGQoIVfX5YkqB25W2SQrWfLo3IPVgut2ukEHuQkdMV3E+KTR2gmLEUXNdPFGTmIBkrMiPKnYpDV3Sk3YyyMH7AuzHwmZ7Ebe2yfa0KnFkD6DEn1T23RU//UXaHFpLu/yvjd+Zh4tN7oEao/bmz23EqjKTnET3YB4hcErcU4z4lBqSIuQLREhyangYt7ShhhlKoZLAIf1wbitx
+	u7BvWJ4Xum8DAsKkj2EhOWUimA2PvaUXZ/mihCxXPz6O3MGU28JAI22PMl9z9REpqTBkD8NIhqyKzI18H5x5vJgv9k+s1W54SYUAgMA/G4fslBR4/LEuczWBK24e9m4gxjom/BQua4Pprwdm02ailsBEBR1d1Nn3okyZ04LK1Im3VGAh/aDve9rqhTysArYSxb5oqGsv5ueAAAXIRKliDFvkyPRvbzd6B6rCqGF962Lpf85exNd+2mgEeAFkZb49sKXyq0hbWatLNmaU7coqvePS/dSkN1o8O3Y1SlQrpbyBFHhNnIJ0b+dgjyyohPO2V2d8bwG7uiC7vfKXIoiya2sWvgrC3EaD4F/FtkUrq3yz9y2CY2Z0ucXUmxOTsz10JtSc/V6JrbLzGsjADmEfTX2Ub9+XQd5EVtVRWGP8Rf7tnE4EMHQ8hZo8uvjzFdB1X5LkyDJ5Y2Yq1b/S2MKcmogbD0eipp6VwP5Ft3xwOv6VzxPmV+97ewF7Tr5ZEtNQmmy7LK+MF6BtvfjPP2ayGKJukqj5zgT18kXPdn2nAelINIxqnV7Yz1+dTZolQ1Z20JjpIfQe4CzLccn+w+swNhWhNOVPIgXgpozOG7djZH+90jdooOfVDEqzx3nKlG7Bx/sfJRAfYyksXX1xSnzUtJhAUbjrXSrtf9HxYEq4jyjAgwYrdcXCozVcalHTM00V
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?rH48G1WSS7ntts+uU4P35t2pPu2uGKffcwDNg8in9D3Xn/sWMzZwaa0Ufq/7?=
- =?us-ascii?Q?374LKqjJR/uPgRl6sA94QBBW2Laq89SuLpA57ok78I8mmdVqcF/15wkgnBon?=
- =?us-ascii?Q?/tQhjGbp/VEAO8CSMqTZ5R/b7JOwUz/00lsFXYIrMtLKSM3InZLGgfdGXFxf?=
- =?us-ascii?Q?tDcitylIUNvpMoAhauXf2WlK2hTDq25gaqAzc8SeeJnO+TXeOW0EGDgbguRe?=
- =?us-ascii?Q?yR6K4TjBOWRQJV+6FeMFlPwX8aJ4kk7ZMP30/nymSpePKgMtuqTrf34EQNqt?=
- =?us-ascii?Q?TyknlgVo/Wji2fSFjiHyW9tbFOcPVuPTkKBl+sYHfdXUUmMJxVPVxYLq4/9Y?=
- =?us-ascii?Q?DFR+Z3f2lEHuFBv1KXQVP4Tx1SimuJpK4PYbrgY9l3bDNSush8JhkTMF27NN?=
- =?us-ascii?Q?kf3eiRZU8g1AN9Zwm2PRivqYEiy89iS29RJz8/e8RckvpjnRm8+1WMMTX7BZ?=
- =?us-ascii?Q?iVv4wOBHH6ON2Brw1CIy+9UiiVN8Z8hP0Yg91vQLt0rCHLYEC815PrYCqH5A?=
- =?us-ascii?Q?Ny1+WD2ko6FQ5T++gek2iyref+l62Nsi8uYSUyyVVtbBMgT9I6DPDpOrFCtj?=
- =?us-ascii?Q?7tQlgbDixBW0ywIkfl3WmmxOoipDOJuVWUXYlSaCiruv8WfIa7bwuMUDufqk?=
- =?us-ascii?Q?pzxoIyNsJ5+6iX04P34Eg+sYz4vnzMcbUVeBKYUEowfMSkW1o5HQKRHsBFkx?=
- =?us-ascii?Q?54o3jzO4Pq+MMcnJrpXTofkkYAuMosWraxxgUoZmizWlvwmTH4gtDjOLeL8d?=
- =?us-ascii?Q?GMi8gqbe9IlZWKZMRGkxCCcn7Z/QqTSFEjX2Mx8/UJqHDUE4VlBUvaCDpxbO?=
- =?us-ascii?Q?Td6Lncb+NuNK17un8BDmQ0ygbISEPllUQHJsY4HVxevIJxjjIqssY9TjCL2u?=
- =?us-ascii?Q?UCecuttsmBe4hGqK/6uLsmEH+9vO8LMF/+Lkk/a/Yfsgcal5DaaN+opATJvW?=
- =?us-ascii?Q?hN4Pf5rfynfb/24WbNQOFWyhzW8L5Bvq84/xCZkoHAA/MTiYQm/FOsr092uO?=
- =?us-ascii?Q?ZaiEJq893izYSp7gZL1DS4Zyb3xrDv68s1JfauPASRew44wk2y3GEE8pCNVf?=
- =?us-ascii?Q?bzg0WC+St7wjlWB1MznRWwZMl03bPm3gOkDCmJeXnc+5f+JBhQrA2XHzQviA?=
- =?us-ascii?Q?qH8dCKtNo+2iVvOEljRG2Q9RQ9/O2ER+ZXGlwa+9wuj+Tt15BI9+vQlxGxiC?=
- =?us-ascii?Q?4sBzypVZ2RY+AV5Ti4Kq+uuBU0xkp6CWnvwZTREu8rzUAZegW4Z5o4mlMNE6?=
- =?us-ascii?Q?SiELhZpkydBeYYGN9MavW2RNMVANn/C6YFVERXTSWOnYcJXrjRVG17JhOUEP?=
- =?us-ascii?Q?nY8ClzuIW8cwM01jUB5pSEVLC3Ywj52e75wgz92LuJQJl9awjFcRgJrfWDJu?=
- =?us-ascii?Q?HtLvPZheW+M8+uKI0t03x2CkNYiDzqLDwye/jXzAR2QXjZs+QaorZxLJDp1y?=
- =?us-ascii?Q?kd+TiRExB6H/spI9ei0bKFS0txBI+6urOBAZ4k2n0pTwrIHd3vbfz1VhEZjC?=
- =?us-ascii?Q?6lBeaxXIJ7m8VjZQPNksva8JU2Z1J1LX88ds/TrWnsop5RIOzWmj34XrMiyc?=
- =?us-ascii?Q?AFBVg2g4Ivp7IWg9HlHcpdgHlyJIBPDpK7TnNvURdHUdgWdowV4vkBGB+++y?=
- =?us-ascii?Q?TZsmT9IVYHhPkQ/NXp/rxfLT+9qtMClMhYtWzCYKxOTdtNMe5nw9dqLarHyy?=
- =?us-ascii?Q?9kTVORNn6gRlLlVIuqsT72iTJpLN/YfnvxaQM3cWubvE/qQzq9ZgvO79aNC9?=
- =?us-ascii?Q?ejLPkquqgtO+UrvGJ7fVfpKWwWSsa+BmgZpJ4OyeaRYfG/fXjALg?=
+	=?us-ascii?Q?nI6bvk9tLDVNkqMhy0HhrNlnaKdZzQbiBTU9Hy1FyD20e8C2kmeUi8G2tJDh?=
+ =?us-ascii?Q?qdJWDj3LGF4ny/BfWG5SMRRoObC9t/lkh6oiDnOrtnhtAEuAnUXiGxwYe1zi?=
+ =?us-ascii?Q?VixVjxxGZRmRZtXGuCQaZGiosTjVUuuAUSTO6BZ8h7PKGonIj3tCEHIwbKS8?=
+ =?us-ascii?Q?bCTsWNqTSdnEIw6Vn4CJG6E+xKrOJFp1PdpGLpWsZVPNlCU0vpk37noR9K8t?=
+ =?us-ascii?Q?pewT2oI3M3IkTWwRkre4bPXhkrTrV18nK7h69ZVKXV5hUxqgnajxhnffiqND?=
+ =?us-ascii?Q?vDmGh6mH6kE2UX7jrpsAVxDrXcalvA0tqZlqXr7a8Vj0Ypc915EHt5mDJ2pp?=
+ =?us-ascii?Q?ey0vME6/X02PrYHCGrXusMTSvev5n8IPK03rJO5NMInnEoXn+ltm3MbSpGeU?=
+ =?us-ascii?Q?c3ByP2W7AaX27ovnsCucYBKQSPnXRlKUfPZPtKD8XAWg5ZGEtPTMgxenNA+Y?=
+ =?us-ascii?Q?y/25Ss44hNo1xxl61ela5NfXlP+dvYHq2iliWEgn6NTrv3CUrukf8CrYAjQE?=
+ =?us-ascii?Q?nNgGLGZIbdx36HuQ8HKt9butCDcu9wgx7gP7je+zlUGrQrS72kQZx8S/fyuI?=
+ =?us-ascii?Q?eI3lhtUsqlkinoYr/4+5i15WSiHY+BUcf5Y5zt63XdA6C5zRCburkfOZrSUY?=
+ =?us-ascii?Q?4so5xyxd2OZYjyX1EEd3lfbzOwyoSivUHYWwqeN3pHvnacvcWCccz2zplXQI?=
+ =?us-ascii?Q?J6oZf7U1WMtCEtAWsp7W/S0BvYsW0MHvVFJUyuDIT6QQP3xLfI452XgCL8sD?=
+ =?us-ascii?Q?tlozVIscK9ge4FgJOvDcZi7JQNnuZa1y+vFdtyHlf83pPRkxXB9gD4I0vlsB?=
+ =?us-ascii?Q?WJ/4WFvL/HV/xvDw1/LjfVs5199JecMh3BjyRMw89dCoAV8hQwkbFTT8ufPO?=
+ =?us-ascii?Q?Sg70vqq1PGbAx1hDLu7xksGKu1ObIdiu1BOJdgJboPaOrESbQ2gukqsjVVtK?=
+ =?us-ascii?Q?TYehlUmdYFAQm6R4516vIiJ9uvmjcoO1B8QeO+EAvjmuD0g/CWat7cCV6ruc?=
+ =?us-ascii?Q?IBePCdBYlnDmqHP8o+Ue63pFXGvNUdgZsScRK6ZLhxrifvwhqTxgnzso6hE/?=
+ =?us-ascii?Q?1BNEZ//0Y7H7qq89MtCKu19aaSYBWkFLSi74nej8rjZyYwxo4niil498LeLI?=
+ =?us-ascii?Q?4prKz+CZENkNDpkdtZVQNc1f8ET5pIB9Tirq49vhb2fO6wTng6JfrRPpcGor?=
+ =?us-ascii?Q?h5yMC0a22wKDT2VqW80o1uEwPdH7GJJHUVZGtgJSSMeasPhBUIZxF6sN+cr7?=
+ =?us-ascii?Q?lOGBxhOSONIkjORaLr7YVkum7+1dOKqzhO0uhyr+JR/za+oR95fKZhXbYDbg?=
+ =?us-ascii?Q?NaME434TDhz0WqdWBxUi79bDiQqxXJjk8iF1eXyNYou76qe8Wn4brv6xq84g?=
+ =?us-ascii?Q?BBcKx+mt3j3NVdh/RnCh+k6qnyzxeh3a3z4tehTlGzMiupUrhlskw43Y5ehV?=
+ =?us-ascii?Q?382JzTQGocwj3kdo2fs+dJTKtW1rSbYxJ/a2XR/nDih0Ctfty4Vo3ghYuyVF?=
+ =?us-ascii?Q?dShHG5+1BZ6pojjZFIKY0O72IKBODWXfrkPpVEFvus/f4UJ60JZS50wyDnNS?=
+ =?us-ascii?Q?2k8Yn497mYSSI323+VOvgmubbLo2KBFfqa1VbuGs5FrUH41uZzRfMWaqs0ck?=
+ =?us-ascii?Q?fSj4146h6pwCBgvqWSlUFX670sIAfN9BfDa3jGD5w+wSeIgLBK024LrMLRuQ?=
+ =?us-ascii?Q?1HUkx26q5TRf6ebj+c84O4SFAa1TOY9gJa0OTuqueLUnd5E8pspvrFM3grfJ?=
+ =?us-ascii?Q?4csUPIhSLEuQmjPCHVWToGqPaf/RFw4JZnUoqH7S0inp6zRv6mmx?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63cdcc5a-39d3-40a8-b9c4-08deb2379a6b
+X-MS-Exchange-CrossTenant-Network-Message-Id: fb795c32-8e36-470c-25b1-08deb237a0f2
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:21.7474
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:32.6936
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TNRBO4+UpP2KShOZ2d/+cX5cNYJBst/cxA+omQEtPwX0hTNCvUFe7Ej8wCOhreNaCCnEPI6enYJ3Hcj1xVPEuA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
-X-purgate-ID: tlsNG-ebf023/1778818109-413773FF-243BD070/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: zyQwljqCxvJtSjUcUkD7Y7JW7k74wXQFr8l4xs7a/waImBRF6pysRyedWtULpXhNQkITK+7vPdcCrQsnZ6C6hg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3682
+X-purgate-ID: tlsNG-d25034/1778818125-F5784CF5-C1540339/0/0
 X-purgate-type: clean
-X-purgate-size: 6468
+X-purgate-size: 14710
 
-Add the per-domain and per-vCPU state needed before Realm objects are
-created: Realm state, RMI feature snapshots, REC bookkeeping and RecRun
-lifetime.
+Finish the restartable build path with REC creation and Realm
+activation. Keep enough state to continue after preemption or abort
+cleanly.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- xen/arch/arm/cca/Makefile         |  1 +
- xen/arch/arm/cca/state.c          | 68 +++++++++++++++++++++++++++++++
- xen/arch/arm/domain.c             | 14 +++++++
- xen/arch/arm/include/asm/cca.h    | 42 +++++++++++++++++++
- xen/arch/arm/include/asm/domain.h | 16 ++++++++
- 5 files changed, 141 insertions(+)
- create mode 100644 xen/arch/arm/cca/state.c
- create mode 100644 xen/arch/arm/include/asm/cca.h
+ xen/arch/arm/Kconfig           |  11 ++
+ xen/arch/arm/cca/Makefile      |   1 +
+ xen/arch/arm/cca/build.c       | 333 +++++++++++++++++++++++++++++++++
+ xen/arch/arm/cca/state.c       |   7 +
+ xen/arch/arm/include/asm/cca.h |  26 +++
+ 5 files changed, 378 insertions(+)
 
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index dc99020c96de..3635a79af272 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -132,6 +132,17 @@ config ARM_CCA
+ 
+ 	  This support is experimental. If unsure, say N.
+ 
++config ARM_CCA_REALM_DEBUG_VUART
++	bool "Debug VUART console for Arm Realm guests"
++	depends on ARM_CCA && SBSA_VUART_CONSOLE
++	help
++	  Allow Arm CCA Realm guests to use the emulated SBSA UART console.
++
++	  The VUART is a host-visible clear-text debug channel. It is useful
++	  for Realm debug access while there is no better guest access
++	  path, but confidentiality-oriented configurations should disable it
++	  and rely on attested in-Realm services instead.
++
+ config GICV2
+ 	bool "GICv2 driver"
+ 	default y
 diff --git a/xen/arch/arm/cca/Makefile b/xen/arch/arm/cca/Makefile
-index 9c351f901dfd..aaa04e3b914b 100644
+index bf6d9b58ebec..0e66280012b7 100644
 --- a/xen/arch/arm/cca/Makefile
 +++ b/xen/arch/arm/cca/Makefile
-@@ -1 +1,2 @@
+@@ -3,3 +3,4 @@ obj-y += realm.o
  obj-y += rmi.o
-+obj-y += state.o
-diff --git a/xen/arch/arm/cca/state.c b/xen/arch/arm/cca/state.c
-new file mode 100644
-index 000000000000..a47d9cd7b6fd
---- /dev/null
-+++ b/xen/arch/arm/cca/state.c
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
+ obj-y += sro.o
+ obj-y += state.o
++obj-y += build.o
+diff --git a/xen/arch/arm/cca/build.c b/xen/arch/arm/cca/build.c
+index 8e607e97b99c..29eb0c6057b0 100644
+--- a/xen/arch/arm/cca/build.c
++++ b/xen/arch/arm/cca/build.c
+@@ -788,3 +788,336 @@ err_page:
+ 
+     return rc;
+ }
 +
-+#include <xen/lib.h>
-+#include <xen/mm.h>
-+#include <xen/sched.h>
-+
-+#include <asm/cca.h>
-+
-+#include "rmi.h"
-+
-+static void arm_cca_reset_domain_state(struct domain *d)
++static void arm_cca_adopt_rec_aux_pages(struct vcpu *v,
++                                        struct page_info **pending_aux,
++                                        unsigned int *nr_pending_aux)
 +{
-+    d->arch.cca.realm_active = false;
-+    d->arch.cca.rd = INVALID_PADDR;
-+    d->arch.cca.rmi_features0 = 0;
-+    d->arch.cca.rmi_features1 = 0;
++    unsigned int i;
++
++    for ( i = 0; i < *nr_pending_aux; ++i )
++    {
++        ASSERT(v->arch.cca.nr_aux < ARRAY_SIZE(v->arch.cca.aux_pages));
++        v->arch.cca.aux_pages[v->arch.cca.nr_aux++] = pending_aux[i];
++        pending_aux[i] = NULL;
++    }
++
++    *nr_pending_aux = 0;
 +}
 +
-+static void arm_cca_reset_vcpu_state(struct vcpu *v)
++static int arm_cca_rmi_rec_create_complete(struct domain *d, struct vcpu *v,
++                                           paddr_t rec, paddr_t params,
++                                           uint64_t *rmi_result)
 +{
-+    v->arch.cca.rec = INVALID_PADDR;
-+    v->arch.cca.run = NULL;
-+    v->arch.cca.run_pa = INVALID_PADDR;
++    struct page_info *pending_aux[ARM_CCA_MAX_REC_AUX] = { NULL };
++    unsigned int nr_pending_aux = 0;
++    struct arm_cca_sro_mem_xfer xfer = {
++        .pages = pending_aux,
++        .nr_pages = &nr_pending_aux,
++        .abandoned_pages = &d->arch.cca.abandoned_pages,
++    };
++    struct arm_smccc_res res;
++    int rc;
++
++    if ( v->arch.cca.nr_aux > ARRAY_SIZE(v->arch.cca.aux_pages) )
++        return -EIO;
++
++    xfer.max_pages = ARRAY_SIZE(v->arch.cca.aux_pages) - v->arch.cca.nr_aux;
++
++    rc = arm_cca_rmi_rec_create(d->arch.cca.rd, rec, params, &res);
++    rc = arm_cca_sro_complete_mem_transfer(rc, &res, &xfer);
++    rc = arm_cca_build_record_rmi_failure(rmi_result, rc, &res);
++
++    if ( rc != 0 && nr_pending_aux != 0 )
++    {
++        /*
++         * Accepted REC auxiliary pages are returned only when the SRO reports
++         * RMI_OP_MEM_REQ_RECLAIM.  If it ends before then, Xen has no separate
++         * reclaim operation for them.
++         */
++        d->arch.cca.build_unrecoverable = true;
++    }
++
++    if ( nr_pending_aux != 0 )
++        arm_cca_adopt_rec_aux_pages(v, pending_aux, &nr_pending_aux);
++
++    return rc;
 +}
 +
-+void arm_cca_domain_init(struct domain *d)
++static int arm_cca_create_rec(struct domain *d, struct vcpu *v, bool runnable,
++                              uint64_t *rmi_result)
 +{
-+    arm_cca_reset_domain_state(d);
-+}
++    struct cpu_user_regs *regs;
++    struct arm_cca_rmi_rec_params *params;
++    struct page_info *rec_pg = NULL;
++    struct page_info *params_pg = NULL;
++    bool rec_delegated = false, run_created = false;
++    void *va;
++    int rc = -ENOMEM;
 +
-+void arm_cca_domain_destroy(struct domain *d)
-+{
-+    arm_cca_reset_domain_state(d);
-+}
++    rec_pg = arm_cca_alloc_host_page();
++    if ( !rec_pg )
++        goto out;
 +
-+void arm_cca_vcpu_init(struct vcpu *v)
-+{
-+    arm_cca_reset_vcpu_state(v);
-+}
++    params_pg = arm_cca_alloc_host_page();
++    if ( !params_pg )
++        goto out;
 +
-+void arm_cca_vcpu_destroy(struct vcpu *v)
-+{
-+    if ( v->arch.cca.run )
++    if ( !v->arch.cca.run )
++    {
++        v->arch.cca.run = arm_cca_alloc_rec_run();
++        if ( !v->arch.cca.run )
++            goto out;
++        v->arch.cca.run_pa = virt_to_maddr(v->arch.cca.run);
++        run_created = true;
++    }
++
++    rc = arm_cca_delegate_granule(page_to_maddr(rec_pg));
++    if ( rc != 0 )
++        goto out;
++    rec_delegated = true;
++
++    va = map_domain_page(page_to_mfn(params_pg));
++    params = va;
++    regs = &v->arch.cpu_info->guest_cpu_user_regs;
++
++    /*
++     * REC_CREATE takes an RmiRecMpidr affinity value, not a full MPIDR_EL1.
++     * DEN0137 2.0-bet1 - B4.6.68 RmiRecMpidr type.
++     */
++    arm_cca_rec_params_init(params, vcpuid_to_vaffinity(v->vcpu_id),
++                            regs->pc, runnable);
++    params->gprs[0] = regs->x0;
++    params->gprs[1] = regs->x1;
++    params->gprs[2] = regs->x2;
++    params->gprs[3] = regs->x3;
++
++    unmap_domain_page(va);
++
++    rc = arm_cca_rmi_rec_create_complete(d, v, page_to_maddr(rec_pg),
++                                         page_to_maddr(params_pg),
++                                         rmi_result);
++    if ( rc != 0 )
++        goto out;
++
++    arm_cca_rec_run_init(v->arch.cca.run);
++
++    v->arch.cca.rec_page = rec_pg;
++    v->arch.cca.rec = page_to_maddr(rec_pg);
++    rc = 0;
++
++out:
++    if ( params_pg )
++        free_domheap_page(params_pg);
++
++    if ( rc != 0 && rec_pg )
++        arm_cca_free_or_abandon_build_page(d, rec_pg, rec_delegated);
++
++    if ( rc != 0 && run_created )
++    {
 +        arm_cca_free_rec_run(v->arch.cca.run);
++        v->arch.cca.run = NULL;
++        v->arch.cca.run_pa = INVALID_PADDR;
++    }
 +
-+    arm_cca_reset_vcpu_state(v);
++    return rc;
 +}
 +
-+void *arm_cca_alloc_rec_run(void)
++/* DEN0137 2.0-bet1 - D1.2.4 REC creation flow. */
++static int arm_cca_create_recs(struct domain *d, uint64_t *rmi_result)
 +{
-+    void *run;
++    unsigned int i;
++    int rc;
 +
-+    BUILD_BUG_ON(sizeof(struct arm_cca_rmi_rec_run) !=
-+                 ARM_CCA_RMI_REC_RUN_SIZE);
++    for ( i = 0; i < d->max_vcpus; ++i )
++    {
++        struct vcpu *v = d->vcpu[i];
 +
-+    run = alloc_xenheap_page();
-+    if ( run == NULL )
-+        return NULL;
++        ASSERT(v);
 +
-+    clear_page(run);
++        rc = arm_cca_create_rec(d, v, i == 0, rmi_result);
++        if ( rc != 0 )
++            return rc;
 +
-+    return run;
++    }
++
++    return 0;
 +}
 +
-+void arm_cca_free_rec_run(void *run)
++static void arm_cca_build_state_clear(struct domain *d)
 +{
-+    free_xenheap_page(run);
++    d->arch.cca.build_phase = ARM_CCA_BUILD_NONE;
++    d->arch.cca.build_unrecoverable = false;
++    d->arch.cca.build_abort_rmi_result = 0;
++    d->arch.cca.build_base_gfn = INVALID_GFN;
++    d->arch.cca.build_nr_pages = 0;
++    d->arch.cca.build_next_ipa = INVALID_PADDR;
++    d->arch.cca.build_rtt_level = 0;
 +}
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 26380a807cad..4b6115491c59 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -482,6 +482,10 @@ int arch_vcpu_create(struct vcpu *v)
-     v->arch.saved_context.sp = (register_t)v->arch.cpu_info;
-     v->arch.saved_context.pc = (register_t)continue_new_vcpu;
- 
-+#ifdef CONFIG_ARM_CCA
-+    arm_cca_vcpu_init(v);
-+#endif
 +
-     /* Idle VCPUs don't need the rest of this setup */
-     if ( is_idle_vcpu(v) )
-         return rc;
-@@ -526,6 +530,9 @@ fail:
- 
- void arch_vcpu_destroy(struct vcpu *v)
- {
-+#ifdef CONFIG_ARM_CCA
-+    arm_cca_vcpu_destroy(v);
-+#endif
-     if ( is_sve_domain(v->domain) )
-         sve_context_free(v);
-     vcpu_timer_destroy(v);
-@@ -642,6 +649,10 @@ int arch_domain_create(struct domain *d,
- 
-     BUILD_BUG_ON(GUEST_MAX_VCPUS < MAX_VIRT_CPUS);
- 
-+#ifdef CONFIG_ARM_CCA
-+    arm_cca_domain_init(d);
-+#endif
++static void arm_cca_build_state_start(struct domain *d, gfn_t base_gfn,
++                                      unsigned long nr_pages)
++{
++    d->arch.cca.build_phase = ARM_CCA_BUILD_VALIDATE;
++    d->arch.cca.build_unrecoverable = false;
++    d->arch.cca.build_abort_rmi_result = 0;
++    d->arch.cca.build_base_gfn = base_gfn;
++    d->arch.cca.build_nr_pages = nr_pages;
++    d->arch.cca.build_next_ipa = INVALID_PADDR;
++    d->arch.cca.build_rtt_level = 0;
++}
 +
- #ifdef CONFIG_IOREQ_SERVER
-     ioreq_domain_init(d);
- #endif
-@@ -786,6 +797,9 @@ void arch_domain_destroy(struct domain *d)
- {
-     resume_ctx_reset(&d->arch.resume_ctx);
++static int arm_cca_build_state_check(struct domain *d, gfn_t base_gfn,
++                                     unsigned long nr_pages)
++{
++    if ( d->arch.cca.build_phase == ARM_CCA_BUILD_NONE )
++    {
++        arm_cca_build_state_start(d, base_gfn, nr_pages);
++        return 0;
++    }
++
++    if ( !gfn_eq(d->arch.cca.build_base_gfn, base_gfn) ||
++         d->arch.cca.build_nr_pages != nr_pages )
++        return -EBUSY;
++
++    return 0;
++}
++
++static int arm_cca_domain_finalize_abort(struct domain *d)
++{
++    unsigned int i;
++    bool fatal = d->arch.cca.build_unrecoverable;
++    int rc;
++
++    rc = arm_cca_domain_relinquish_resources(d);
++    if ( rc != 0 )
++    {
++        if ( rc == -ERESTART )
++            return rc;
++
++        return -EIO;
++    }
++
++    for ( i = 0; i < d->max_vcpus; ++i )
++    {
++        struct vcpu *v = d->vcpu[i];
++
++        if ( v == NULL )
++            continue;
++
++        arm_cca_vcpu_destroy(v);
++        arm_cca_vcpu_init(v);
++    }
++
++    return fatal ? -EIO : 0;
++}
++
++int arm_cca_domain_finalize(struct domain *d, gfn_t base_gfn,
++                            unsigned long nr_pages,
++                            uint64_t *rmi_result)
++{
++    paddr_t base = gfn_to_gaddr(base_gfn);
++    struct arm_smccc_res res;
++    uint64_t abort_rmi_result;
++    int abort_rc, rc;
++
++    if ( rmi_result )
++        *rmi_result = 0;
++
++    rc = arm_cca_build_state_check(d, base_gfn, nr_pages);
++    if ( rc != 0 )
++        return rc;
++
++    for ( ;; )
++    {
++        switch ( d->arch.cca.build_phase )
++        {
++        case ARM_CCA_BUILD_VALIDATE:
++            rc = arm_cca_validate_domain(d, base_gfn, nr_pages);
++            if ( rc != 0 )
++            {
++                arm_cca_build_state_clear(d);
++                return rc;
++            }
++            rc = arm_cca_probe(d);
++            if ( rc != 0 )
++            {
++                arm_cca_build_state_clear(d);
++                return rc;
++            }
++            d->arch.cca.build_phase = ARM_CCA_BUILD_CREATE_REALM;
++            fallthrough;
++
++        case ARM_CCA_BUILD_CREATE_REALM:
++            rc = arm_cca_create_realm(d, rmi_result);
++            if ( rc != 0 )
++                goto err;
++            d->arch.cca.build_phase = ARM_CCA_BUILD_BUILD_RTTS;
++            fallthrough;
++
++        case ARM_CCA_BUILD_BUILD_RTTS:
++            rc = arm_cca_build_rtts(d, base, nr_pages, rmi_result);
++            if ( rc == -ERESTART )
++                return rc;
++            if ( rc != 0 )
++                goto err;
++            d->arch.cca.build_phase = ARM_CCA_BUILD_CREATE_DATA;
++            fallthrough;
++
++        case ARM_CCA_BUILD_CREATE_DATA:
++            rc = arm_cca_create_data_pages(d, base_gfn, nr_pages, rmi_result);
++            if ( rc == -ERESTART )
++                return rc;
++            if ( rc != 0 )
++                goto err;
++            d->arch.cca.build_phase = ARM_CCA_BUILD_CREATE_REC;
++            fallthrough;
++
++        case ARM_CCA_BUILD_CREATE_REC:
++            rc = arm_cca_create_recs(d, rmi_result);
++            if ( rc != 0 )
++                goto err;
++            d->arch.cca.build_phase = ARM_CCA_BUILD_ACTIVATE;
++            fallthrough;
++
++        case ARM_CCA_BUILD_ACTIVATE:
++            rc = arm_cca_rmi_realm_activate(d->arch.cca.rd, &res);
++            rc = arm_cca_build_record_rmi_failure(rmi_result, rc, &res);
++            if ( rc != 0 )
++                goto err;
++            d->arch.cca.build_phase = ARM_CCA_BUILD_BIND;
++            fallthrough;
++
++        case ARM_CCA_BUILD_BIND:
++            d->arch.cca.realm_active = true;
++            arm_cca_build_state_clear(d);
++            return 0;
++
++        case ARM_CCA_BUILD_ABORT:
++            abort_rmi_result = d->arch.cca.build_abort_rmi_result;
++            rc = arm_cca_domain_finalize_abort(d);
++            if ( rc == -ERESTART )
++                return rc;
++            /* The original build error is gone after a continuation. */
++            if ( rc == 0 )
++                rc = -EIO;
++            if ( rc == -EIO && rmi_result )
++                *rmi_result = abort_rmi_result;
++            return rc;
++
++        default:
++            rc = -EINVAL;
++            goto err;
++        }
++    }
++
++err:
++    d->arch.cca.build_abort_rmi_result = rmi_result ? *rmi_result : 0;
++    d->arch.cca.build_phase = ARM_CCA_BUILD_ABORT;
++
++    abort_rc = arm_cca_domain_finalize_abort(d);
++    if ( abort_rc == -ERESTART )
++        return abort_rc;
++
++    return abort_rc ?: rc;
++}
+diff --git a/xen/arch/arm/cca/state.c b/xen/arch/arm/cca/state.c
+index 72dbb83841d7..d85a20a9e7d2 100644
+--- a/xen/arch/arm/cca/state.c
++++ b/xen/arch/arm/cca/state.c
+@@ -32,6 +32,13 @@ static void arm_cca_reset_domain_state(struct domain *d)
+     d->arch.cca.nr_data_pages = 0;
+     d->arch.cca.relinquish_data_idx = 0;
+     d->arch.cca.realm_terminate_done = false;
++    d->arch.cca.build_phase = ARM_CCA_BUILD_NONE;
++    d->arch.cca.build_unrecoverable = false;
++    d->arch.cca.build_abort_rmi_result = 0;
++    d->arch.cca.build_base_gfn = INVALID_GFN;
++    d->arch.cca.build_nr_pages = 0;
++    d->arch.cca.build_next_ipa = INVALID_PADDR;
++    d->arch.cca.build_rtt_level = 0;
  
-+#ifdef CONFIG_ARM_CCA
-+    arm_cca_domain_destroy(d);
-+#endif
-     tee_free_domain_ctx(d);
-     /* IOMMU page table is shared with P2M, always call
-      * iommu_domain_destroy() before p2m_final_teardown().
+     for ( i = 0; i < ARRAY_SIZE(d->arch.cca.realm_sro_pages); ++i )
+         d->arch.cca.realm_sro_pages[i] = NULL;
 diff --git a/xen/arch/arm/include/asm/cca.h b/xen/arch/arm/include/asm/cca.h
-new file mode 100644
-index 000000000000..1be43327119e
---- /dev/null
+index d69e95a10010..5e6b11a3693d 100644
+--- a/xen/arch/arm/include/asm/cca.h
 +++ b/xen/arch/arm/include/asm/cca.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef ARM_CCA_H
-+#define ARM_CCA_H
-+
-+#include <xen/types.h>
-+
-+/*
-+ * Keep the public ARM CCA arch header independent from the internal RMI ABI
-+ * definitions that live under arch/arm/cca/.
-+ *
-+ * DEN0137 2.0-bet1 - B3.99 RecAuxCount caps the implementation-defined
-+ * number of REC auxiliary granules.  REC_CREATE gets them through SRO
-+ * donation.
-+ */
-+#define ARM_CCA_MAX_REC_AUX 16U
-+
-+struct domain;
-+struct vcpu;
-+
-+struct arm_cca_domain_state {
-+    bool realm_active;
-+    paddr_t rd;
-+    unsigned long rmi_features0;
-+    unsigned long rmi_features1;
+@@ -2,6 +2,7 @@
+ #ifndef ARM_CCA_H
+ #define ARM_CCA_H
+ 
++#include <xen/compiler.h>
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ #include <xen/types.h>
+@@ -41,6 +42,18 @@ struct arm_cca_data_page_record {
+     paddr_t pa;
+ };
+ 
++enum arm_cca_build_phase {
++    ARM_CCA_BUILD_NONE,
++    ARM_CCA_BUILD_VALIDATE,
++    ARM_CCA_BUILD_CREATE_REALM,
++    ARM_CCA_BUILD_BUILD_RTTS,
++    ARM_CCA_BUILD_CREATE_DATA,
++    ARM_CCA_BUILD_CREATE_REC,
++    ARM_CCA_BUILD_ACTIVATE,
++    ARM_CCA_BUILD_BIND,
++    ARM_CCA_BUILD_ABORT,
 +};
 +
-+struct arm_cca_vcpu_state {
-+    paddr_t rec;
-+    void *run;
-+    paddr_t run_pa;
-+};
+ struct arm_cca_domain_state {
+     bool realm_active;
+     paddr_t rd;
+@@ -70,6 +83,15 @@ struct arm_cca_domain_state {
+     /* Realm destruction state for domain_relinquish_resources(). */
+     unsigned long relinquish_data_idx;
+     bool realm_terminate_done;
 +
-+void arm_cca_domain_init(struct domain *d);
-+void arm_cca_domain_destroy(struct domain *d);
-+
-+void arm_cca_vcpu_init(struct vcpu *v);
-+void arm_cca_vcpu_destroy(struct vcpu *v);
-+
-+void *arm_cca_alloc_rec_run(void);
-+void arm_cca_free_rec_run(void *run);
-+
-+#endif /* ARM_CCA_H */
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-index 46a5cdc0c800..25230c18d16b 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -3,6 +3,7 @@
++    /* Continuable Realm construction state for XEN_DOMCTL_arm_cca_op. */
++    enum arm_cca_build_phase build_phase;
++    bool build_unrecoverable;
++    uint64_t build_abort_rmi_result;
++    gfn_t build_base_gfn;
++    unsigned long build_nr_pages;
++    paddr_t build_next_ipa;
++    unsigned int build_rtt_level;
+ };
  
- #include <xen/cache.h>
- #include <xen/timer.h>
-+#include <asm/cca.h>
- #include <asm/page.h>
- #include <asm/p2m.h>
- #include <asm/suspend.h>
-@@ -96,6 +97,9 @@ struct arch_domain
-     /* ARM SCI driver's specific data */
-     void *sci_data;
- #endif
-+#ifdef CONFIG_ARM_CCA
-+    struct arm_cca_domain_state cca;
-+#endif
+ struct arm_cca_vcpu_state {
+@@ -85,8 +107,12 @@ struct arm_cca_vcpu_state {
+ void arm_cca_domain_init(struct domain *d);
+ void arm_cca_domain_destroy(struct domain *d);
+ int arm_cca_domain_relinquish_resources(struct domain *d);
++int arm_cca_domain_finalize(struct domain *d, gfn_t base_gfn,
++                            unsigned long nr_pages,
++                            uint64_t *rmi_result);
  
-     struct resume_info resume_ctx;
- }  __cacheline_aligned;
-@@ -207,6 +211,10 @@ struct arch_vcpu
-     /* Timer registers  */
-     register_t cntkctl;
+ void arm_cca_vcpu_init(struct vcpu *v);
++void noreturn arm_cca_vcpu_run(struct vcpu *v);
+ void arm_cca_vcpu_destroy(struct vcpu *v);
  
-+#ifdef CONFIG_ARM_CCA
-+    struct arm_cca_vcpu_state cca;
-+#endif
-+
-     struct vtimer phys_timer;
-     struct vtimer virt_timer;
-     bool   vtimer_initialized;
-@@ -224,6 +232,14 @@ struct arch_vcpu
- void vcpu_show_registers(struct vcpu *v);
- void vcpu_switch_to_aarch64_mode(struct vcpu *v);
- 
-+#ifdef CONFIG_ARM_CCA
-+#define is_domain_realm(d) ((d)->arch.cca.realm_active)
-+#define is_vcpu_realm(v) is_domain_realm((v)->domain)
-+#else
-+#define is_domain_realm(d) ({ (void)(d); false; })
-+#define is_vcpu_realm(v) ({ (void)(v); false; })
-+#endif
-+
- /*
-  * Due to the restriction of GICv3, the number of vCPUs in AFF0 is
-  * limited to 16, thus only the first 4 bits of AFF0 are legal. We will
+ void *arm_cca_alloc_rec_run(void);
 -- 
 2.51.0
 
