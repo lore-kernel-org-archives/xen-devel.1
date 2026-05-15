@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3A40CD4F3C
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:09:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309359.1580447 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACDF4CD343F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 04:11:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309421.1580465 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqz-0004i7-GC; Fri, 15 May 2026 04:08:49 +0000
+	id 1wNjtf-0000FZ-90; Fri, 15 May 2026 04:11:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309359.1580447; Fri, 15 May 2026 04:08:49 +0000
+Received: by outflank-mailman (output) from mailman id 1309421.1580465; Fri, 15 May 2026 04:11:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNjqz-0004h0-5V; Fri, 15 May 2026 04:08:49 +0000
-Received: by outflank-mailman (input) for mailman id 1309359;
- Fri, 15 May 2026 04:08:47 +0000
+	id 1wNjtf-0000FM-5T; Fri, 15 May 2026 04:11:35 +0000
+Received: by outflank-mailman (input) for mailman id 1309421;
+ Fri, 15 May 2026 04:11:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <den@valinux.co.jp>) id 1wNjqx-0004Hz-Ic
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:08:47 +0000
+ (envelope-from <den@valinux.co.jp>) id 1wNjtd-0008TI-UM
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 04:11:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNjqw-0051ua-V3
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:08:46 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wNjtd-007AXG-AM
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:11:33 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c36-bab6-0a2a0a5309dd-0a2a450c90bc-16
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:46 +0200
-Received: from [52.101.228.84]
- (helo=OS0P286CU011.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a069cda-5cb7-0a2a0a5109dd-0a2a450291b6-14
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:11:33 +0200
+Received: from [40.107.74.73]
+ (helo=OS0P286CU010.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <den@valinux.co.jp>)
- id 6a069c4b-62f1-0a2a450c0019-3465e45466d0-4
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:46 +0200
+ id 6a069c3a-af86-0a2a45020019-286b4a49ea93-7
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 06:08:32 +0200
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
- by TYCP286MB3682.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:3c2::11)
+ by TYYP286MB3981.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:156::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
- 2026 04:08:38 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Fri, 15 May
+ 2026 04:08:29 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9846.025; Fri, 15 May 2026
- 04:08:38 +0000
+ 04:08:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CL7k9eAPnqhprtJL9gq5e6Uvy1RbIs0+K4ile2ZQU/gp19XQxVncZNG0Zvaog81fp/26iu51TNwGeWK6WjLPRlkWoq1WeVv7xM0CW27CI2tFEdRi+18Y8C8DKJ1GuKjsaOqoD2+KeVHd0mHl4AUiPr5SPY+cG4PDxIkj3qYgBs/WXYZR2YCOJTRp5Fgt8WMDCb2GQqMH2s+ftUZwOoybquSWEOcnZUwAwjEaqT8gOFK1T227mnLotM9sACIffpaZzaJoDA+GRYZ85NQtTng+r32GpOhRufUGmB34YErV/fbaHRATFG6wCPFy2z7PDnAoWEIiFtSzCeK3MBc9QpogIg==
+ b=Vzp0DKcA1h0AGCQoph9JD1OGGeJohyGDop9/XptVxLEtF9MtJeztTMNgc78XH64CgSHd6QwjoWlYdzfuTAXt5ygb+Y7Zn5dkDsHQbud9hp6gHRycqpfHnhU92r8abLgSqmfx5G5JJ3cuYfPhjk1zUc1/sxe2J4pJ0U0+Q3Hv0BSLOMZMEQ7OYs5LHrYPTwbemlCi2AF25J5A/vLT/w5zx+ZxBES4wGx7r7eJJ6oXWhR9TaEs4yqiK8GtNebb8c5pVYbeBBijQDRhTZJyH4z8g8h0VAOg4oQX4c7UzC+WGaajOjyiIUG7hcO4w/3FJqO6vPw1teiFEzMd1buk0c9zyg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j+krazXWRn2IuLifiPb7Tk1sDo3QwLMY07VSIfj1R9Q=;
- b=JLf/JE1AvzGG77CrgGrsAcnKvu/5rl5t7Dox0sd3K0A3AGhdJmn8Q4MH6idQDO4uuK1mU2DlPCJmnY4YMzc9euGhVFm4K6C5nchPOd+Ud9wU5J/N0rKmPRws9P6Un+lKcZ8kJiuHCInDEzH7rbEdurk/6xmihINLkcEMBWBgHRCr6VJ33KDh3haqXklaWVm408zfZg39q8rjvnWoC3nteTPO9EWPgen34TpirXfFIvEVYOS+j7LzcIfHE0m/iT05RlX3pIpH67F64QVXDakpjb+YEpuga+Ykk1nySmoM+vz2ReJwJ/ooqmf1J/LbWeiVVRQ3Y92RK0oTB987GV7R/A==
+ bh=K4GVaM6Ba/cf6m/qACnohRbb9uPse9KRbMYMMHWB/6M=;
+ b=OB18H0zIh8mTGRWoi5E35Tj6w32vtVqmsCoyEaq5WWko8EumtMKq2p+SLDO5XDsz99bX21EzMCplZKU2JssBngRkQ5Fv0gxpKFwLtPRzEp2Q2D/YAmnJlA27BMLnokZWXQIYE2wkjq9ghjVMDvY2GNpwlk3kEjxp1xUm2JTnaTInqepB6ZO44CiaYB2/p7Xmn0q2KbcqvfJzKxJXwIL3M3PXpZrBFAXyClOElOvvziMgiOiw2dTSA4Fa3gOigWiyrAwyYE5SFIRTB9sczgAwXObGvnii3w6izCAFW6WtKGM1vX+Zb10CSmxAVKFrl4QqGl3CjCbAlBOXVsYRrf1O/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j+krazXWRn2IuLifiPb7Tk1sDo3QwLMY07VSIfj1R9Q=;
- b=MPyNR1bU7ii98HiiopIPDw1iBTNpNIDdn2KSbNyhCczDdz+Pk5z+S/ZNh3pr3iAHJHtmEBuZAqpFHetM2DMeIy4oDeG5d/FXoBoHbyeEHYjICYDrfD9j3tJW/kyIoHJhXSjhs2i4VltMZkF4/XHyARm2iS0UyZHyNxvTWSnbMW4=
+ bh=K4GVaM6Ba/cf6m/qACnohRbb9uPse9KRbMYMMHWB/6M=;
+ b=FU8zoInqj974caCRTisQEA3Bygdx6b2i7111pWBHoFnHlU5F5q2l1bdjvoaToXyQvlrdwfYLCgVe7RRVqvvcPjYnwps1E2sO/7QqXq81BGetOyMpU0xgdTwbgLdT3+Rl/OwDq0Axq3WmQxwACjY8AG0WapiO7NbwOsCLYcvwF9g=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Koichiro Den <den@valinux.co.jp>
@@ -86,322 +86,502 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 24/26] xen/arm, tools: add domctl for Realm finalization
-Date: Fri, 15 May 2026 13:08:10 +0900
-Message-ID: <20260515040812.983626-25-den@valinux.co.jp>
+Subject: [RFC PATCH v1 14/26] xen/arm/cca: validate Realm construction inputs
+Date: Fri, 15 May 2026 13:08:00 +0900
+Message-ID: <20260515040812.983626-15-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260515040812.983626-1-den@valinux.co.jp>
 References: <20260515040812.983626-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0208.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:385::18) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TY6P286CA0015.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:3b9::12) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYCP286MB3682:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca413a0f-f277-485f-1923-08deb237a3bd
+X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB3981:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ab2625d-3e26-4aad-b152-08deb2379f25
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|10070799003|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info:
-	WjI/btMcqFI0QZ2fBdJ37mLXCzdesxaTukRozNf6fW3C7Jv6PWYPrna+RiuwA67yMwdzUOgpklLV0n38DogTCIsEOzoZP1mBguUy4fP/t0A6PoAMLwmRGvVF1MAVb+O0hD1bIFn0pL9/mimfZh/xNWo8DGySx/2VG/needNjvFLFWtHbOEtBa7pYM3CQS/m/Y0ttwFbU8dgz0WJ+xEBo+1osAfYhxEoXXpNp035ISkLjxEAKdH4lFw2cGbAgWIz4lRh4ohVv1v3qrrWnRd29h7vjQidWmsGCP5KOxXix76CC1FDdh/Cfh++PvxmmFkMLFvnLto1OU7nrBMpyBLdNXdPZNAY2Bwh09G7VP+a/WH6rD0xB7aYulIC+R/G5aefRk5lvyZd8K5Xsq6bKjlC81vvSetYGP+25T8RRk/W8ywis/qHQTNLQ/73u0q/M9mCX9Oi1n46u4E35aEtrQ0sXmDP/0Ft8O/NwZci58CufHfGS9g9LBZyD3uOgE86V5Wxjv8MzT0MPWDesKCp/0ip4SVcdIhpB0C+ZcH3p8Le1cz7y0BRLYCPtB6p3cPo9ybxqBSbTDPYHMcGqr3dMxjVkIOCPsoCXkCpDJep0XvwMAHvgz8qTIVd3iNzEn6DYBS9JfDnI2swEGNzOqKcCxrj99aGHbw/43XWaQAXxj88kytlk3fQTFu6+fVBuwNpfYEr+
+	aihSdoJdb3v91Qyr/Y1S1HMn4l8pCP5kPB4BtPyIqrbpLLLOizR59eKjmsV9A9NGlChig78LtQzc2HrY38zQ4PFSkJuzL3QOaAB7prSMrS+KrtAGM5Y5/YVyuXfNrysr9lA2cBL68KqCd7C4z10XrL11xynhrb3PHcdM1IqkKeIa7h9rc5ScWU4QM4ZSeGIhoLiONvORVDIYRMxo+U1z1rOfy/BGIPsShnJFeWnCoapq/g1Wo2kq3uviPejQvb4ehFNiWkN9iUDi0BkauC4GC+Y7CXKTakkxXQ5W9WAHMrM1KxGj4z44u/Nb/tbNxDVIdGJW0COixymXWvJqUNFQlClkPK7pXn26037GHylItmKFv39o1HFYLpZKpmE+vu1V8pEnFh2LuMGnPzY1pf/Uqu/3EasB5nTqXN6Nk5JHyICxV+kHfwfr6zgRXrnJBT8xwToJ1I22/hHwIz+AoGMzjmX1n/PPdekrWYRNoJBF+8zXk13xLDcFrzFlMFARVUBzSwtd+tH20lCfX9Rfh3OC5X2948t1+YBU/IhBQxXNsAuzg8/NfjfvmJiZAzWbBHr9UvA4Murix9MKKtM4hbZSx9LOwFkLr3LAzuiHpFzr5zyejBfU+ROtf0YyzAVN8LpHi3e1FvBKzDpCMMgD2B9KC19ezAGjJaEroS88j7TNNmrXnQ4Yl3dhEbbFMqhs1Jn1
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(10070799003)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?U+XofrQgZd0H5H47ZXWh21gtZoDVSe0ShuWC+pi9zFAohvZtQYe86iNuWIHi?=
- =?us-ascii?Q?QLiomfJkri71vUMivTAXZNHImCLsySaXkNBDmHhHbF1s0V7CoamaCZjajr7l?=
- =?us-ascii?Q?Q2VYMfTBKXIMuWqX3nHvCfzRAt4bROoS9nEOrWVKkfP/u3+31VJgIR4twOro?=
- =?us-ascii?Q?X0XFtjM1Ld6J+QcEnT8JEZQEb9f+cdv5fCUfKGYLXoXZQzkbBW8hrNr0PvPk?=
- =?us-ascii?Q?GVttty0OEf9O7Agq7TInHgRV7mBBrd71QhgtUYqFheMmuOSzcIdgDLsgwRyF?=
- =?us-ascii?Q?1xbG8JLACQNiq5oPtOXsQzzYQNsuuH83o4aiCTN96+86zqCk2Suz2uivBXdP?=
- =?us-ascii?Q?ZIJ7seVEa5z56CoBC6c53FsQQNlF3q5EU92aCAIl9wcu+VQzPgfakvoF5iwh?=
- =?us-ascii?Q?Nly0gGe/Adh7SAW/Mi3juTsHVfVMUMKqujvT53+9kS+CsrvufChPR4hle7zX?=
- =?us-ascii?Q?MPtxgPQRjcIUVqnEXrwNkpH++LstlKgw6dvjtgHOaH+FoeXTYOYjsW8+BMhH?=
- =?us-ascii?Q?TIPSxRvDrq8RhU0Akp715XlxV29BPdFY+lWwx0HugjSz1rSrC+w2/mg8IzUW?=
- =?us-ascii?Q?gNbgfiQGOwNM7L2v8XMCJcG8w98XJk6wfIRBhb1LdLQo7u0Z2dsKPB7cmTzK?=
- =?us-ascii?Q?aMNMP2K+kOMzzEFYcQEbWke5+rDl8goFJ+zMXm528Ee25lsBZkkPGTIVaJ+6?=
- =?us-ascii?Q?6MGqYIKJWVLhXaM9XJz3JQeh/BHgk9UafSGNP9pTzK66+zR7rSgHrTFrSUdO?=
- =?us-ascii?Q?/WjzkxOhmwQenVDtVy0OnaCmgMjOrXYwvgidDhYdx+dFdvbQhkR/oHfbTG0m?=
- =?us-ascii?Q?kzZdGFWSvSXlcqkzLxfPreUWoSn9FQ3kQyxZo8xb31/4NkmviSBHJn/Vq+T1?=
- =?us-ascii?Q?UuhQOOVD+P6JaMFFOgPvC4vQro3twGQFkaT2i9WYJhu+3VyVfvWmEldlD7nC?=
- =?us-ascii?Q?r4XxALkGiVxPGVpeacLxGBHUPDp2wxjuoGJYBG7Mf3yuK/r6j/aHylUbmqFQ?=
- =?us-ascii?Q?J9sZqUEQW9PN9oM/LqWAgmNxnDjSxg76rqF9IOircVJdnsAuxCjCd6+MVAFK?=
- =?us-ascii?Q?pujxmYdlfHnsBSL0LBRFClkvbbz/zCENYJ+q3fPM6lCs/0AlNVrNTyLneRX7?=
- =?us-ascii?Q?Ld1Mx6T1WQ4ZRh3TAhHe3CzXaTY6DV82R7RJN5sYQ8/FY6M/nfDeONNPc0gX?=
- =?us-ascii?Q?3cZndHYSwEFu79UEZqVTn8gHvCCmKX5wfAanCMS0V5M8Ew1sxdglXVQTufqR?=
- =?us-ascii?Q?Eot9e0GzW60BuNgTgBtW4OMIN2xnqYc/2SJDP9rmK2N46czVfxZezU8GL7nw?=
- =?us-ascii?Q?CA89c31yPhbGjOeUZwRK3r0bDdp2y8z5AoD64IuHBaypSz8ixJZ9wP1Dd07d?=
- =?us-ascii?Q?qWp5NDfe5NJTzkdx0LFJyc0+YBhqLomOZEURK/HYooBWJHdL3BDBDhO9Bj/w?=
- =?us-ascii?Q?8GkTw/bMODv2aCErysakD4U4goG9j50Lo5FDl8DUGk9RS6SWb1Y5R41F1Nzl?=
- =?us-ascii?Q?WkCpBmZYH0X+VscaowAljBzQ3IxmI9kpfsRiznIOZs7we67wIBL9+7gP2AnU?=
- =?us-ascii?Q?bquK087LCw0orDNMYfZSEXSaiN+BP6vwrOsRcri/xL7s8lg23dy/yAZu65T6?=
- =?us-ascii?Q?CLifDfqIwRglVoXPnn/M+gug2hCGrHq3catl39M5p8J/TmCIcMTZX2BZBhnD?=
- =?us-ascii?Q?DdGfgVyjrHZuQFPtM0YQG+bTzwYpeLCPKYtHSe1aVWqr51YpeTJemlBKvsUI?=
- =?us-ascii?Q?5PGtgSt98FdYw2oXemy/TV7AsdGeMZVRiWeUW5wr+oQN+mzNyTVd?=
+	=?us-ascii?Q?Uh9OEppHmW7KV3wU6PlB2OasRrFxf34qvVqTbP2VYThslsIJP2wlHUdyuiw4?=
+ =?us-ascii?Q?bJPdZJ+9QZqlGQfcBcw1IybyOt/7L1A+dfte9KZnvHQHfzZh5nl0+3nhElaG?=
+ =?us-ascii?Q?fTzAG/rwDITYE8TlTRNgtyAfKqyAeLchra7dpu+MTD33wyWZ5Njl9iLkC6Og?=
+ =?us-ascii?Q?RaxtkGOcZte4Zmx7w8tXtAtCkMaVuB1eyK6CHFgajyvXs4xf8Meaes3H9ICx?=
+ =?us-ascii?Q?OozjIjW2ukmRz8g6OvmSbxcXcmfSVBv137VvYUTz/8Gb4miu4Wj254esHThU?=
+ =?us-ascii?Q?8w6Uu11GU2I91kMwFd+YxM0h1NGnLrn8z15JzuqbllW/Bu3nGY18n7dsVzS0?=
+ =?us-ascii?Q?tyCPB3hku2MzTWU/BfjFfsqUzAAzyQrd6yF65E6dGXArJsmVzd7k2lfAKNW+?=
+ =?us-ascii?Q?DeO+vvSaMBfevUNYN+/C1czewvAtJCI/FGXYgQYNiG41LncZp0iLD//lHoe8?=
+ =?us-ascii?Q?LFx6l/Uzon0HyxRh+3kIU6sTS5rszGCzpJXt7AD5uuiA6832RRM9T4FMk5L1?=
+ =?us-ascii?Q?I8H4EMupfmkSFTGAQ5HAxDO/ismAKcA/oH+SpYhVFt2R0H/ngfgiE3pc0UO1?=
+ =?us-ascii?Q?Vb3bPJkWRoGqMbTaR47vD2gz8IOkPwubrJNYyRhS6EVTDB2hCotsALU+cma5?=
+ =?us-ascii?Q?4bT3htG6US/jztIQLFaCgu/VeMf7knGXYJPygPAWf+5hpGXMbaECYrwMLt3w?=
+ =?us-ascii?Q?loGsCHVvzQbZs41+HrA0k4XFMOVeYXymD16efJ+OBeahvObqkjizA2tjHZwb?=
+ =?us-ascii?Q?gd3DGQKfx5BtpwkFAhjlnbHjMIzPC+H+MiWVGMw01rFNJLXf8Yrru8ET7n9K?=
+ =?us-ascii?Q?/IphHFYF1yELmNRGXZBiHbmr3gTdQfJL+6T/cXxF9W9XxEkP2J/IV2PAiF44?=
+ =?us-ascii?Q?7gl5zWdfXlhO5hxPnLLpWNKZrA50jYCxT5vIP8AlQFooj5bAO4IQ4u1/yvpn?=
+ =?us-ascii?Q?d2QpiC+mHlqi5v95dmW+XwXBrgg1vI5fak9oznjcdGKY10fInYMCCmqxVmPk?=
+ =?us-ascii?Q?aAr8IJmsNnnDAOmS4tbc3KGJK3CApt9bXXCpg66M/OfqHAI2yFUSGxrMFqWR?=
+ =?us-ascii?Q?nHCJe3/87VZ6yIgbU0Yyx/1+RVOv2yPe+AIIjScHAbBxRxzZb1BMyFcyPRqV?=
+ =?us-ascii?Q?EXVZUg+bGUpCInaFjSsz37MfLeqtli7bXrvNCO7Lv2lJKoMAaZ0dzij1KcEZ?=
+ =?us-ascii?Q?G/e8eIHEoTlv3djETxFZ2+ifQiz40ftewYputlk3VARZa7ZwmD5gpvEar7jo?=
+ =?us-ascii?Q?NZxnHR1jtKjFwcOhf8fBMGdV0WMkvAevKZI8Ti4oulDjs5Yb0My/MjZ/1xGB?=
+ =?us-ascii?Q?Nukq/7SZz8Fl/STDr4le67JCuuhHSy+avy3SK4g5oaFF0TOV9USVen3tGrEf?=
+ =?us-ascii?Q?87kF8deA6y3WvHSj5Ck4ebV0SXaiUKnsHQDsvo2nJxC8EqusgkNwzGCOOMsz?=
+ =?us-ascii?Q?RPKA2J06jcF47zP8T6O/qXxyRGymBXbTMjXuFJm+gyZDPIHSMUo0WY+ILSQe?=
+ =?us-ascii?Q?BnFbzMmP4DMYhO6b4YJ4l5JpyHaCJ+oQlV0lWIHquTUCs+rKyQr6qoqaPVR1?=
+ =?us-ascii?Q?/cHEdd8oY3FX+12WUJXNccr0l1K43sgFhu1ohZWNkUdrKvLieSBA15Ty0uY3?=
+ =?us-ascii?Q?VUMArqTU59a62sgodrK5adwfGY/rvce7jilVFFBNEX4O8agpXY5wm1TUDkr7?=
+ =?us-ascii?Q?u2nbXM4DsYvkjQ4/Pppr2PI/sMhjUWna4nW3GGp9GixXjaEX9osp87zlKzwi?=
+ =?us-ascii?Q?HB8C5JYpU/gUHsIzhz85KkdgJlO01VjoGV9eQjuFltjC3Kh1V4BH?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca413a0f-f277-485f-1923-08deb237a3bd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ab2625d-3e26-4aad-b152-08deb2379f25
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:37.3843
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 04:08:29.6865
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CkEcoTcGI3uIg/Nj9WvUHfWEoISyR2xVINWWy+kZ2XKXN25J6kT4nA4hykN53YoJG1/+INXPZ3S3BMTACgE3XQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3682
-X-purgate-ID: tlsNG-d25034/1778818126-F487BCF5-411EC66D/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: mCFhhMx0nBjgUIFtyN61KX/ZkYDJVqjGJTOJE6Iy881LAEkF6bvI9CokLXxuo4XUQk7ll4S02YcmlWDobZSatQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB3981
+X-purgate-ID: tlsNG-720697/1778818113-A8145161-891DA07A/0/0
 X-purgate-type: clean
-X-purgate-size: 8872
+X-purgate-size: 13840
 
-Add the domctl, libxc wrapper and XSM permission used by libxl to turn a
-paused Arm guest into a Realm. RMI failures are reported back as-is.
+Check the domain shape, RAM layout and RMM feature set before starting a
+Realm build. The domctl range is treated as the protected Realm RAM.
 
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- tools/flask/policy/modules/xen.if   |  1 +
- tools/include/xenctrl.h             | 12 ++++++
- tools/libs/ctrl/xc_domain.c         | 37 ++++++++++++++++++
- xen/arch/arm/domctl.c               | 60 +++++++++++++++++++++++++++++
- xen/include/public/domctl.h         | 12 ++++++
- xen/xsm/flask/hooks.c               |  3 ++
- xen/xsm/flask/policy/access_vectors |  2 +
- 7 files changed, 127 insertions(+)
+ xen/arch/arm/cca/build.c | 411 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 411 insertions(+)
+ create mode 100644 xen/arch/arm/cca/build.c
 
-diff --git a/tools/flask/policy/modules/xen.if b/tools/flask/policy/modules/xen.if
-index ef7d8f438c65..5eb2d98341e9 100644
---- a/tools/flask/policy/modules/xen.if
-+++ b/tools/flask/policy/modules/xen.if
-@@ -98,6 +98,7 @@ define(`create_domain_common', `
- 		vuart_op
- 		set_llc_colors
- 		get_domain_state
-+		arm_cca_op
- 	};
- 	allow $1 $2:security check_context;
- 	allow $1 $2:shadow enable;
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index d5dbf69c8968..149e15f7c531 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -808,6 +808,18 @@ int xc_dom_vuart_init(xc_interface *xch,
-                       xen_pfn_t gfn,
-                       evtchn_port_t *evtchn);
- 
+diff --git a/xen/arch/arm/cca/build.c b/xen/arch/arm/cca/build.c
+new file mode 100644
+index 000000000000..f333813e10a0
+--- /dev/null
++++ b/xen/arch/arm/cca/build.c
+@@ -0,0 +1,411 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/errno.h>
++#include <xen/lib.h>
++#include <xen/mm.h>
++#include <xen/domain_page.h>
++#include <xen/sched.h>
++#include <xen/sizes.h>
++#include <xen/xmalloc.h>
++
++#include <asm/arm64/sve.h>
++#include <asm/cca.h>
++#include <asm/domain.h>
++#include <asm/event.h>
++#include <asm/p2m.h>
++#include <asm/vpl011.h>
++
++#include "rmi.h"
++#include "sro.h"
++
 +/*
-+ * Finalize a paused ARM domain as a Realm backed by RMM. The toolstack is
-+ * expected to have already built a normal ARM guest image in the domain RAM.
-+ *
-+ * Returns 0 on success, or -1 with errno set. If Xen receives an RMI error
-+ * result from RMM, libxc logs the raw RMI result and reports EPROTO.
++ * Xen CCA currently accepts only 4KB RMI granules.  With 512 entries per RTT,
++ * the table spans here are 512GB, 1GB, and 2MB respectively.
 + */
-+int xc_arm_cca_init_realm(xc_interface *xch,
-+                          uint32_t domid,
-+                          xen_pfn_t base_gfn,
-+                          uint64_t nr_pages);
++#define ARM_CCA_L0_TABLE_SPAN   GB(512)
++#define ARM_CCA_L1_TABLE_SPAN   GB(1)
++#define ARM_CCA_L2_TABLE_SPAN   SZ_2M
++#define ARM_CCA_REALM_MAX_PAGES (GUEST_RAM0_SIZE >> PAGE_SHIFT)
++#define ARM_CCA_BUILD_PREEMPT_TABLES       64U
++#define ARM_CCA_BUILD_FORCE_PREEMPT_TABLES 256U
++#define ARM_CCA_BUILD_PREEMPT_PAGES        1024UL
++#define ARM_CCA_BUILD_FORCE_PREEMPT_PAGES  4096UL
++#define ARM_CCA_REALM_MAX_IPA_BITS_WITHOUT_LPA2 48U
 +
- /**
-  * This function returns information about the XSAVE state of a particular
-  * vcpu of a domain. If extstate->size and extstate->xfeature_mask are 0,
-diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
-index 01c0669c8863..3cb8da9cc07d 100644
---- a/tools/libs/ctrl/xc_domain.c
-+++ b/tools/libs/ctrl/xc_domain.c
-@@ -345,6 +345,43 @@ int xc_dom_vuart_init(xc_interface *xch,
-     return rc;
- }
- 
-+int xc_arm_cca_init_realm(xc_interface *xch,
-+                          uint32_t domid,
-+                          xen_pfn_t base_gfn,
-+                          uint64_t nr_pages)
++static struct page_info *arm_cca_alloc_host_page(void)
 +{
-+    struct xen_domctl domctl = {};
-+    int rc;
++    struct page_info *pg;
++    void *va;
 +
-+    memset(&domctl, 0, sizeof(domctl));
++    pg = alloc_domheap_page(NULL, 0);
++    if ( !pg )
++        return NULL;
 +
-+    domctl.cmd = XEN_DOMCTL_arm_cca_op;
-+    domctl.domain = domid;
-+    domctl.u.arm_cca_op.cmd = XEN_DOMCTL_ARM_CCA_OP_INIT_REALM;
-+    domctl.u.arm_cca_op.flags = 0;
-+    domctl.u.arm_cca_op.base_gfn = base_gfn;
-+    domctl.u.arm_cca_op.nr_pages = nr_pages;
++    va = map_domain_page(page_to_mfn(pg));
++    clear_page(va);
++    unmap_domain_page(va);
 +
-+    rc = do_domctl(xch, &domctl);
-+    if ( rc < 0 )
-+    {
-+        if ( domctl.u.arm_cca_op.rmi_result )
-+        {
-+            xc_report_error(xch, XC_INTERNAL_ERROR,
-+                            "xc_arm_cca_init_realm failed with raw RMI "
-+                            "result 0x%llx",
-+                            (unsigned long long)
-+                            domctl.u.arm_cca_op.rmi_result);
-+            errno = EPROTO;
-+            return -1;
-+        }
++    return pg;
++}
 +
-+        return rc;
-+    }
++static unsigned int arm_cca_feature_field(unsigned long features,
++                                          unsigned int shift,
++                                          unsigned int width)
++{
++    return arm_cca_rmi_field_get(features, shift, width);
++}
++
++static bool arm_cca_feature_is_true(unsigned long features, unsigned int shift)
++{
++    return arm_cca_feature_field(features, shift, 1U) ==
++           ARM_CCA_RMI_FEATURE_TRUE;
++}
++
++static int arm_cca_build_record_rmi_failure(uint64_t *rmi_result, int rc,
++                                            const struct arm_smccc_res *res)
++{
++    uint64_t result = arm_cca_rmi_result(res);
++
++    if ( rc != 0 && rmi_result &&
++         (arm_cca_rmi_status_is_error(result) ||
++          arm_cca_rmi_result_is_smccc_unknown(result)) )
++        *rmi_result = result;
 +
 +    return rc;
 +}
 +
- int xc_domain_getinfo_single(xc_interface *xch,
-                              uint32_t domid,
-                              xc_domaininfo_t *info)
-diff --git a/xen/arch/arm/domctl.c b/xen/arch/arm/domctl.c
-index ad914c915f81..36461eeda633 100644
---- a/xen/arch/arm/domctl.c
-+++ b/xen/arch/arm/domctl.c
-@@ -16,6 +16,7 @@
- #include <xen/types.h>
- #include <xsm/xsm.h>
- #include <public/domctl.h>
-+#include <public/sched.h>
- 
- void arch_get_domain_info(const struct domain *d,
-                           struct xen_domctl_getdomaininfo *info)
-@@ -49,6 +50,42 @@ static int handle_vuart_init(struct domain *d,
-     return rc;
- }
- 
-+static int handle_arm_cca_init_realm(struct domain *d,
-+                                     struct xen_domctl_arm_cca_op *cca_op)
++static bool arm_cca_undelegate_build_page(struct domain *d,
++                                          struct page_info *pg)
 +{
-+#ifdef CONFIG_ARM_CCA
-+    uint64_t rmi_result = 0;
-+    int rc;
-+#endif
++    paddr_t pa = page_to_maddr(pg);
++    int rc = arm_cca_undelegate_granule(pa);
 +
-+    if ( cca_op->flags )
++    if ( rc != 0 )
++    {
++        /* No successful undelegation means no RMM wipe guarantee. */
++        printk(XENLOG_ERR
++               "%pd: ARM CCA: failed to undelegate abandoned granule %#"
++               PRIpaddr "\n",
++               d, pa);
++        return false;
++    }
++
++    return true;
++}
++
++/*
++ * Return true when the caller can forget pg.  A false return means
++ * undelegation failed, so the caller must keep the page tracked.
++ */
++static bool arm_cca_free_build_page(struct domain *d, struct page_info *pg,
++                                    bool delegated)
++{
++    if ( !pg )
++        return true;
++
++    if ( delegated && !arm_cca_undelegate_build_page(d, pg) )
++        return false;
++
++    free_domheap_page(pg);
++
++    return true;
++}
++
++static void arm_cca_free_or_abandon_build_page(struct domain *d,
++                                               struct page_info *pg,
++                                               bool delegated)
++{
++    if ( !arm_cca_free_build_page(d, pg, delegated) )
++        page_list_add_tail(pg, &d->arch.cca.abandoned_pages);
++}
++
++static bool arm_cca_gfn_range_contains(gfn_t base, gfn_t end,
++                                       gfn_t start, gfn_t next)
++{
++    return gfn_x(base) <= gfn_x(start) && gfn_x(next) <= gfn_x(end);
++}
++
++static bool arm_cca_gfn_range_overlaps(gfn_t base, gfn_t end,
++                                       gfn_t start, gfn_t next)
++{
++    return gfn_x(start) < gfn_x(end) && gfn_x(base) < gfn_x(next);
++}
++
++/*
++ * Initial Realm support has no separate private/shared memory metadata.
++ * Treat the domctl range as the whole protected Realm RAM contract: every
++ * mapped entry in the range must be writable RAM, and no other valid guest
++ * mapping may remain outside it apart from Arm magic pages, which are not
++ * exposed through the Realm device tree.
++ *
++ * p2m_get_entry() can return block mappings, so reject entries which only
++ * partly overlap the Realm RAM range. Otherwise one p2m block could make
++ * memory outside the measured/protected range guest-visible.
++ */
++static int arm_cca_validate_ram_layout(struct domain *d, gfn_t base_gfn,
++                                       unsigned long nr_pages)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    gfn_t end_gfn = gfn_add(base_gfn, nr_pages);
++    gfn_t magic_base = _gfn(GUEST_MAGIC_BASE >> PAGE_SHIFT);
++    gfn_t magic_end = _gfn((GUEST_MAGIC_BASE + GUEST_MAGIC_SIZE) >>
++                           PAGE_SHIFT);
++    gfn_t gfn, end;
++    int rc = 0;
++
++    p2m_read_lock(p2m);
++
++    gfn = p2m->lowest_mapped_gfn;
++    end = gfn_add(p2m->max_mapped_gfn, 1);
++
++    while ( gfn_x(gfn) < gfn_x(end) )
++    {
++        unsigned int order;
++        p2m_type_t t;
++        bool valid;
++        mfn_t mfn = p2m_get_entry(p2m, gfn, &t, NULL, &order, &valid);
++        gfn_t next = gfn_next_boundary(gfn, order);
++
++        if ( arm_cca_gfn_range_overlaps(base_gfn, end_gfn, gfn, next) )
++        {
++            if ( !valid || mfn_eq(mfn, INVALID_MFN) ||
++                 t != p2m_ram_rw ||
++                 !arm_cca_gfn_range_contains(base_gfn, end_gfn, gfn, next) )
++            {
++                rc = -EINVAL;
++                break;
++            }
++        }
++        else if ( valid && !mfn_eq(mfn, INVALID_MFN) &&
++                  !arm_cca_gfn_range_contains(magic_base, magic_end, gfn,
++                                              next) )
++        {
++            rc = -EINVAL;
++            break;
++        }
++
++        gfn = next;
++    }
++
++    p2m_read_unlock(p2m);
++
++    return rc;
++}
++
++static int arm_cca_validate_domain(struct domain *d, gfn_t base_gfn,
++                                   unsigned long nr_pages)
++{
++    unsigned int i;
++    int rc;
++
++    if ( is_hardware_domain(d) )
++        return -EOPNOTSUPP;
++
++    if ( !is_hvm_domain(d) )
++        return -EOPNOTSUPP;
++
++    if ( is_32bit_domain(d) )
++        return -EOPNOTSUPP;
++
++    if ( d->max_vcpus == 0 || d->vcpu[0] == NULL )
++        return -EOPNOTSUPP;
++
++    for ( i = 1; i < d->max_vcpus; ++i )
++        if ( d->vcpu[i] == NULL )
++            return -EOPNOTSUPP;
++
++    if ( d->arch.vgic.version != GIC_V3 )
++        return -EOPNOTSUPP;
++
++    if ( d->creation_finished )
++        return -EPERM;
++
++    if ( is_domain_realm(d) )
++        return -EEXIST;
++
++    if ( domain_has_vpl011(d) &&
++         !IS_ENABLED(CONFIG_ARM_CCA_REALM_DEBUG_VUART) )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: Realm VUART debug console is disabled for %pd\n",
++               d);
++        return -EOPNOTSUPP;
++    }
++
++    if ( gfn_x(base_gfn) != (GUEST_RAM_BASE >> PAGE_SHIFT) )
++        return -EOPNOTSUPP;
++
++    if ( nr_pages == 0 || nr_pages > ARM_CCA_REALM_MAX_PAGES )
 +        return -EINVAL;
 +
-+    cca_op->rmi_result = 0;
-+
-+#ifdef CONFIG_ARM_CCA
-+    rc = arm_cca_domain_finalize(d, _gfn(cca_op->base_gfn),
-+                                 cca_op->nr_pages, &rmi_result);
-+
 +    /*
-+     * Once Realm data conversion starts, the original guest RAM image can no
-+     * longer be trusted after a failed finalization attempt.
++     * domain_tot_pages() also includes Arm magic pages outside guest RAM, so
++     * it is only a sanity upper bound for the protected RAM range.
 +     */
-+    if ( rc == -EIO )
-+        domain_shutdown(d, SHUTDOWN_crash);
++    if ( nr_pages > domain_tot_pages(d) )
++        return -EINVAL;
 +
-+    if ( rc == -EIO && rmi_result )
-+    {
-+        cca_op->rmi_result = rmi_result;
++    rc = arm_cca_validate_ram_layout(d, base_gfn, nr_pages);
++    if ( rc != 0 )
 +        return rc;
-+    }
 +
-+    return rc;
-+#else
-+    return -EOPNOTSUPP;
-+#endif
++    return 0;
 +}
 +
- long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
-                     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
- {
-@@ -177,6 +214,29 @@ long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
- 
-         return rc;
-     }
-+    case XEN_DOMCTL_arm_cca_op:
++static int arm_cca_validate_realm_features0(struct domain *d)
++{
++    unsigned long features0 = d->arch.cca.rmi_features0;
++    unsigned int max_ipa_bits;
++    unsigned int num_bps, num_wps;
++
++    max_ipa_bits = arm_cca_feature_field(
++        features0, ARM_CCA_RMI_FEATURE_REGISTER_0_S2SZ_SHIFT,
++        ARM_CCA_RMI_FEATURE_REGISTER_0_S2SZ_WIDTH);
++    if ( p2m_ipa_bits > max_ipa_bits )
 +    {
-+        struct xen_domctl_arm_cca_op *cca_op = &domctl->u.arm_cca_op;
-+
-+        switch ( cca_op->cmd )
-+        {
-+        case XEN_DOMCTL_ARM_CCA_OP_INIT_REALM:
-+        {
-+            long rc = handle_arm_cca_init_realm(d, cca_op);
-+
-+            if ( rc == -ERESTART )
-+                rc = hypercall_create_continuation(__HYPERVISOR_domctl,
-+                                                   "h", u_domctl);
-+            else if ( rc == -EIO && cca_op->rmi_result &&
-+                      copy_to_guest(u_domctl, domctl, 1) )
-+                rc = -EFAULT;
-+
-+            return rc;
-+        }
-+        default:
-+            return -EINVAL;
-+        }
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd requires %u-bit IPA, RMM supports %u-bit IPA\n",
++               d, p2m_ipa_bits, max_ipa_bits);
++        return -EOPNOTSUPP;
 +    }
-     case XEN_DOMCTL_dt_overlay:
-         return dt_overlay_domctl(d, &domctl->u.dt_overlay);
-     default:
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 8f6708c0a7cd..2562647d93d3 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1201,6 +1201,16 @@ struct xen_domctl_vuart_op {
-                                  */
- };
- 
-+/* XEN_DOMCTL_arm_cca_op */
-+struct xen_domctl_arm_cca_op {
-+#define XEN_DOMCTL_ARM_CCA_OP_INIT_REALM  0
-+        uint32_t cmd;              /* IN - XEN_DOMCTL_ARM_CCA_OP_* */
-+        uint32_t flags;            /* IN - reserved, must be zero */
-+        uint64_aligned_t base_gfn;   /* IN - first guest RAM gfn to protect */
-+        uint64_aligned_t nr_pages;   /* IN - number of 4K pages to protect */
-+        uint64_aligned_t rmi_result; /* OUT - raw RMI result on -EIO */
-+};
 +
- /* XEN_DOMCTL_vmtrace_op: Perform VM tracing operations. */
- struct xen_domctl_vmtrace_op {
-     uint32_t cmd;           /* IN */
-@@ -1368,6 +1378,7 @@ struct xen_domctl {
- #define XEN_DOMCTL_gsi_permission                88
- #define XEN_DOMCTL_set_llc_colors                89
- #define XEN_DOMCTL_get_domain_state              90 /* stable interface */
-+#define XEN_DOMCTL_arm_cca_op                    91
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1429,6 +1440,7 @@ struct xen_domctl {
-         struct xen_domctl_monitor_op        monitor_op;
-         struct xen_domctl_psr_alloc         psr_alloc;
-         struct xen_domctl_vuart_op          vuart_op;
-+        struct xen_domctl_arm_cca_op        arm_cca_op;
-         struct xen_domctl_vmtrace_op        vmtrace_op;
-         struct xen_domctl_paging_mempool    paging_mempool;
- #if defined(__arm__) || defined(__aarch64__)
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 28522dcbd271..f95552992a26 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -805,6 +805,9 @@ static int cf_check flask_domctl(struct domain *d, unsigned int cmd,
-     case XEN_DOMCTL_vuart_op:
-         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__VUART_OP);
- 
-+    case XEN_DOMCTL_arm_cca_op:
-+        return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__ARM_CCA_OP);
++    /*
++     * Xen CCA currently leaves RmiRealmParams::flags0.lpa2, sve, and pmu
++     * clear.  Reject configurations that would need those Realm features
++     * instead of silently creating a Realm with different behavior.
++     */
++    if ( p2m_ipa_bits > ARM_CCA_REALM_MAX_IPA_BITS_WITHOUT_LPA2 )
++    {
++        if ( !arm_cca_feature_is_true(
++                 features0, ARM_CCA_RMI_FEATURE_REGISTER_0_LPA2_SHIFT) )
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requires LPA2 for %u-bit IPA, "
++                   "but RMM does not report LPA2 support\n",
++                   d, p2m_ipa_bits);
++        else
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requires LPA2 for %u-bit IPA, "
++                   "but Xen CCA does not enable Realm LPA2 yet\n",
++                   d, p2m_ipa_bits);
++        return -EOPNOTSUPP;
++    }
 +
-     case XEN_DOMCTL_get_cpu_policy:
-         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__GET_CPU_POLICY);
- 
-diff --git a/xen/xsm/flask/policy/access_vectors b/xen/xsm/flask/policy/access_vectors
-index bbb9c117ec4a..dee895bef673 100644
---- a/xen/xsm/flask/policy/access_vectors
-+++ b/xen/xsm/flask/policy/access_vectors
-@@ -253,6 +253,8 @@ class domain2
-     set_llc_colors
- # XEN_DOMCTL_get_domain_state
-     get_domain_state
-+# XEN_DOMCTL_arm_cca_op
-+    arm_cca_op
- }
- 
- # Similar to class domain, but primarily contains domctls related to HVM domains
++    if ( is_sve_domain(d) )
++    {
++        if ( !arm_cca_feature_is_true(
++                 features0, ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_SHIFT) )
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requests SVE, "
++                   "but RMM does not report SVE support\n",
++                   d);
++        else
++        {
++            unsigned int max_sve_vl = arm_cca_feature_field(
++                features0, ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_VL_SHIFT,
++                ARM_CCA_RMI_FEATURE_REGISTER_0_SVE_VL_WIDTH);
++
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requests SVE; RMM supports %u-bit VL, "
++                   "but Xen CCA does not enable Realm SVE yet\n",
++                   d, (max_sve_vl + 1U) * SVE_VL_MULTIPLE_VAL);
++        }
++        return -EOPNOTSUPP;
++    }
++
++    num_bps = arm_cca_feature_field(
++        features0, ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_BPS_SHIFT,
++        ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_BPS_WIDTH);
++    if ( num_bps == 0 )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd RMM reports reserved NUM_BPS value 0\n", d);
++        return -EOPNOTSUPP;
++    }
++
++    num_wps = arm_cca_feature_field(
++        features0, ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_WPS_SHIFT,
++        ARM_CCA_RMI_FEATURE_REGISTER_0_NUM_WPS_WIDTH);
++    if ( num_wps == 0 )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd RMM reports reserved NUM_WPS value 0\n", d);
++        return -EOPNOTSUPP;
++    }
++
++    if ( d->options & XEN_DOMCTL_CDF_vpmu )
++    {
++        if ( !arm_cca_feature_is_true(
++                 features0, ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_SHIFT) )
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requests PMU, "
++                   "but RMM does not report PMU support\n",
++                   d);
++        else
++        {
++            unsigned int num_ctrs = arm_cca_feature_field(
++                features0,
++                ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_NUM_CTRS_SHIFT,
++                ARM_CCA_RMI_FEATURE_REGISTER_0_PMU_NUM_CTRS_WIDTH);
++
++            printk(XENLOG_G_ERR
++                   "ARM CCA: %pd requests PMU; RMM supports %u counters, "
++                   "but Xen CCA does not enable Realm PMU yet\n",
++                   d, num_ctrs);
++        }
++        return -EOPNOTSUPP;
++    }
++
++    return 0;
++}
++
++static int arm_cca_validate_realm_features1(struct domain *d)
++{
++    unsigned long features1 = d->arch.cca.rmi_features1;
++    unsigned int max_recs_order, max_recs;
++
++    if ( !arm_cca_feature_is_true(
++             features1,
++             ARM_CCA_RMI_FEATURE_REGISTER_1_RMI_GRAN_SZ_4KB_SHIFT) )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd requires 4KB RMI granules, "
++               "but RMM does not report 4KB RMI granule support\n",
++               d);
++        return -EOPNOTSUPP;
++    }
++
++    if ( !arm_cca_feature_is_true(
++             features1, ARM_CCA_RMI_FEATURE_REGISTER_1_HASH_SHA_256_SHIFT) )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd requires SHA-256 Realm measurements, "
++               "but RMM does not report SHA-256 support\n",
++               d);
++        return -EOPNOTSUPP;
++    }
++
++    max_recs_order = arm_cca_feature_field(
++        features1, ARM_CCA_RMI_FEATURE_REGISTER_1_MAX_RECS_ORDER_SHIFT,
++        ARM_CCA_RMI_FEATURE_REGISTER_1_MAX_RECS_ORDER_WIDTH);
++    max_recs = (1U << max_recs_order) - 1U;
++    if ( d->max_vcpus > max_recs )
++    {
++        printk(XENLOG_G_ERR
++               "ARM CCA: %pd requires %u RECs, RMM supports %u RECs\n",
++               d, d->max_vcpus, max_recs);
++        return -EOPNOTSUPP;
++    }
++
++    return 0;
++}
++
++static int arm_cca_validate_realm_features(struct domain *d)
++{
++    int rc;
++
++    rc = arm_cca_validate_realm_features0(d);
++    if ( rc != 0 )
++        return rc;
++
++    return arm_cca_validate_realm_features1(d);
++}
 -- 
 2.51.0
 
