@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E4DDCD4851
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 06:33:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1309597.1580636 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EC9CD4851
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 06:40:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1309605.1580644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNm6I-0004XV-Mx; Fri, 15 May 2026 06:32:46 +0000
+	id 1wNmDw-0006cN-Dq; Fri, 15 May 2026 06:40:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1309597.1580636; Fri, 15 May 2026 06:32:46 +0000
+Received: by outflank-mailman (output) from mailman id 1309605.1580644; Fri, 15 May 2026 06:40:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNm6I-0004XO-Ja; Fri, 15 May 2026 06:32:46 +0000
-Received: by outflank-mailman (input) for mailman id 1309597;
- Fri, 15 May 2026 06:32:46 +0000
+	id 1wNmDw-0006cG-AV; Fri, 15 May 2026 06:40:40 +0000
+Received: by outflank-mailman (input) for mailman id 1309605;
+ Fri, 15 May 2026 06:40:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wNm6I-0004XI-28
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:32:46 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wNmDv-0006cA-Id
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 06:40:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNm6H-009baf-AX
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 08:32:45 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wNmDu-005L8B-Fv
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 08:40:38 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a06be07-bab6-0a2a0a5309dd-0a2a450ab714-18
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 08:32:45 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a06bfe1-5cb7-0a2a0a5109dd-0a2a45058c72-42
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 08:40:38 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a06be0d-56b3-0a2a450a0019-d155dd30e4c9-3
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 08:32:45 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-45d96d21e82so986157f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 14 May 2026 23:32:45 -0700 (PDT)
+ id 6a06bfe6-aaa8-0a2a45050019-d155dd2eb430-3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 08:40:38 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-449d6c68ed8so7673335f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 14 May 2026 23:40:38 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48febe6b60csm7973375e9.6.2026.05.14.23.32.44
+ ffacd0b85a97d-45d9ed2f738sm12030454f8f.16.2026.05.14.23.40.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 May 2026 23:32:44 -0700 (PDT)
+ Thu, 14 May 2026 23:40:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1778826765; x=1779431565; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1778827238; x=1779432038; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=nhUAK+YyTl1z3qYEKR9NLomFdozpuVBKk6zzjbyF/Ow=;
-        b=YgnwrO0i711aA4l5mmusYiWHQFp0cZ2qpnC7R8liPlEwvE9r2XyzZXQa+WEaqd9HcW
-         lcOHsgA1/V60g8CELX+fowuzwpblITsZxaO/bjagyqzvJqxntAP6XLrPgTx1L24VMHol
-         0MxXfN/bIcyvwEcJdKSTZkHcGEP7AJ9MCt4hjd/jTFh1IYqaWkl/uvaAvapWOQkwaLkk
-         gCOWqK6ZC2jLyCyPYTyo7bElGL6g1dYU0jwexwl91TExnz9CfDNR8u0Si1xRcSdXLl6C
-         TuMngPu878CsZBg4h9+GfFQ+M1vptlMUzozTDPmcLNDlZoOrmty9UIAtn4iIJG6wEA2k
-         4H4w==
+        bh=Sj6p9Rb9rj1T2xc7AXcOf08AoWG+0nx/4mDVyeSILWM=;
+        b=UC4Qnt+c8oRJprtkJ8dCGBsPPmPmkt8uei2qhTU2OXMPQj1uS5WYxRkz+wUoZUg744
+         aCI8dkREn8qfLObOBLY5sdOZoTswwKvb9V5rBcjw+QFI7orChtIrMTB2rNfai14EVIq7
+         XtpW/7cR+91iA7jak+lS1PBrcgmmmldQgkzcLFXBQeykbwWDgzwDzpaPywtePvmkxeIz
+         BMcZ5NB/JJ+Sd5PzNJhgt1y0j2SsT/j7XRgcVT0IcPzTki/MMhfqINEmoppaZcXGTrGX
+         rSu7Ebo+Gj8/yXH+sdhYQn38ls+JMClwiE/rD0MNFfiv65BSPQaQNTggTRhkF/EJ3yH1
+         oQvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778826765; x=1779431565;
+        d=1e100.net; s=20251104; t=1778827238; x=1779432038;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nhUAK+YyTl1z3qYEKR9NLomFdozpuVBKk6zzjbyF/Ow=;
-        b=mLeU536ejkcJz+KYMNxx+r7ef5ZedeTbwkGqZzkAtQFMCQpho/514DJIPM1ttAdALo
-         pW2ghEXk5YaBBsSCD2bAew+zApgdTYnGVlbL8j1h6SW7JoC32wKJbyVSQBNjgBRL6Yce
-         F2DyccJmqIOijTh2oHw3TmM7WpDdKXkhYZZsCsbaUWOEiI/HRjI7tWxQSfzeRLM+qIlh
-         ZaGl1JJX6Nyhj9OrelJm+XAazw+TCl8jAHpp1U4N2PA262RPfBeqcigH3xRTOWlz3Vom
-         xbQMkk3i3j8Q16vomI4jhqSidqmZzfievb7lz0jVSvTlSRlGqiChAT8G6MMpsFQcg130
-         shcw==
-X-Forwarded-Encrypted: i=1; AFNElJ/eWA49dKm7N1MGFYTh+xMNrDd/oE+0cQRtUc53IT5OfDEA9b7jK52lzkJ/M0AiBV+7XC5LlxIj+QY=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxibN0+LX8hRo7ztXyY2Fj9sLx8b+WgbPiLOsv7l+zHriqs7ikK
-	vc1POc5+VgE6Vx0mjEWQk990X28POEHe0s+PVFAjpjrTC+D6mzR59VUkJE0TgswHsA==
-X-Gm-Gg: Acq92OENmwFYUI6w835KfoDAGrt2RKWAgvmN0lVTGM0zPhM1fxWIedpNao0ACDiHYs2
-	GPQMG3uWbwIpRCOr0U1erOkPuh1m8rCGpIVtpbhBS/QAr53hNNNFSh68yq2j61+3+L/jt2/pZvL
-	MLSNhYCXkLdtgerO4AFPbJ94+Xmb8cxIShRV+6eVtEHegMLJQWGnbvCMUh1xYq3kmnXJa+DJmAb
-	3G2tZDqrBS4kJAQAU7jAqu+LNM9V6mGb3kv3m0JJBCjzfW/5y7L2gAPh3P5mChgCpu/E8jKvccK
-	EKmtRalSKmF6TrJgMlorE6NmWxFJ5WFxcRHc+1bs36f9t5XROcaXq8UYkpezNmbHU6knv/5dBP6
-	9lCzZml8e+57ijQ1UyLqJBaL/1nSDOjOOB942bHRYfU1iAT8iL2lF86Dho647i6qruBuR30k8XC
-	gQUKPXLKcakUD90Ch0wt0yAIm6hkIrVsdcWzPkidMIdcycui+WcolAkogon5RIjDHiIop3m0VE9
-	sbcZIzAc7r8FCsaKXl3r49thg==
-X-Received: by 2002:a05:600c:34c7:b0:48a:54fd:54ea with SMTP id 5b1f17b1804b1-48fe60ecd93mr35809795e9.12.1778826764782;
-        Thu, 14 May 2026 23:32:44 -0700 (PDT)
-Message-ID: <1019524f-bbe0-46b3-b742-d7404732bc66@suse.com>
-Date: Fri, 15 May 2026 08:32:43 +0200
+        bh=Sj6p9Rb9rj1T2xc7AXcOf08AoWG+0nx/4mDVyeSILWM=;
+        b=Q6rusclgvpXXksQRLwcJrmI4naJxXPJZ/kW5DtZ7tAQ344tqIhqFVGi3Gn/gXPIc18
+         FqIHFuYXOUyUFGaiMQGSr6krxZNTF5+brCQG92ydvdmfVX1GFGMjWzSVaTjw0CZg+7fu
+         ZSXi6D6/eQykLodNP8s2EetpctQmJ5noHD+5XJS97FgEweRQjEUJ/sKLS7Rctci+aUW+
+         GYceT0u2Vk7Zr7/+JoB0v25hycV+UQA2PXfAcm3VZure/bQqf9037rXNPYK/LPn0KY1A
+         uIJ0TYkgpxooZ0rSltBuLYC59/y8zex9a3RkhMv8srGsaDOTD/3ulFHRq1o1Q0zsF+um
+         H21A==
+X-Gm-Message-State: AOJu0YzTcXKnHdru/LWVjieJJ++vR2TQCVQA2IxY+s7vciBSGn2N9aAD
+	sVcP0LG7UlJ4ZLwEcrYTBIP5AOiOA3V1Frn57wBZRc2NitFH+tJ+dDzTTI9Rk5PTrw==
+X-Gm-Gg: Acq92OGBCzn0kSOZwtka4F3IF0MwMejl04ztGvabWCWZBGRgktPU/ATjEoiMNZbLx9J
+	3jVJmbYIFP5T3qdppWJYegYtU/0Jg8m7bP5TYuf0W/egyQWfqD9KfHcCI+lnN1bw3OK17Ux0QEl
+	BbwPGjN4vgv2/61yVrJ8CXGxac5ec3FnkECPlte00FyCuykjUrhbegoU0dYfMLZs2CUUf0PXg4l
+	R9W5VoqwqMYGPJKNWnlnEQQE2ykFF1WWljFN6L1zii75ryEU5qeDTyAey0S4LVzMJ5o9Xqdl70G
+	yFNmhQkBWsNgjN639IWXBv8KSA34NMO4n+v897XMYva5VUtZvha8ex1U+7jm6eMeebPTJGWQ44j
+	AYYp+0uDBOPQxK1aqlXlooxSrZ1v6apFYjAO8nrSQEecJJfpW1xQnUvwgZpn90+q8Pq0EI68Pox
+	vPgYcl4gEGvUXAd2bc9o85OfuaTzjYCqzTWysgwUvqKhY3ZNyIaHWz3cD5uN1vkH1VQQmN7uWbH
+	eNy90UIh4RihuI=
+X-Received: by 2002:a05:6000:2f83:b0:43d:26a2:f8c3 with SMTP id ffacd0b85a97d-45e5c594fe3mr3141705f8f.35.1778827237837;
+        Thu, 14 May 2026 23:40:37 -0700 (PDT)
+Message-ID: <b0db6548-4c82-49ab-8909-e5d6bba8942e@suse.com>
+Date: Fri, 15 May 2026 08:40:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto/vmac: adjust for Misra C:2012 rule 17.5
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
- <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <036752dc-5333-4d01-acaf-ed450e09fe48@suse.com>
- <7ef99f0e-2847-49d8-8701-8243e4b073ed@citrix.com>
+Subject: Re: [PATCH 2/5] x86/time: move BCD_TO_BIN() uses
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <b36b6f2f-2b0e-462d-9846-4a1b4d7edef9@suse.com>
+ <2c5af8f9-05f6-43c4-afb4-a50cbacd2d49@suse.com>
+ <agQ8tRY3Kya6RasY@macbook.local>
+ <d37322ac-fdf9-48bb-91e3-3e8d560fa758@suse.com>
+ <agSRm3T0Y3EfuqFb@macbook.local>
+ <d70965fe-5039-4a9a-a470-a9d2a0bc6ebe@suse.com>
+ <agTMLgTwsKf96IpL@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,34 +133,72 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <7ef99f0e-2847-49d8-8701-8243e4b073ed@citrix.com>
+In-Reply-To: <agTMLgTwsKf96IpL@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1778826765-7236B8B7-EFC504A4/0/0
+X-purgate-ID: tlsNG-c201ff/1778827238-D8B78443-D4E11181/0/0
 X-purgate-type: clean
-X-purgate-size: 825
+X-purgate-size: 3132
 
-On 14.05.2026 20:07, Andrew Cooper wrote:
-> On 13/05/2026 4:51 pm, Jan Beulich wrote:
->> ... ("The function argument corresponding to a parameter declared to have
->> an array type shall have an appropriate number of elements"). Instead of
->> casts, (ab)use unions.
+On 13.05.2026 21:08, Roger Pau Monné wrote:
+> On Wed, May 13, 2026 at 05:15:41PM +0200, Jan Beulich wrote:
+>> On 13.05.2026 16:58, Roger Pau Monné wrote:
+>>> On Wed, May 13, 2026 at 12:39:46PM +0200, Jan Beulich wrote:
+>>>> On 13.05.2026 10:56, Roger Pau Monné wrote:
+>>>>> On Tue, May 12, 2026 at 04:59:03PM +0200, Jan Beulich wrote:
+>>>>>> ---
+>>>>>> How come RTC_ALWAYS_BCD is compile-time constant 1? And then even with an
+>>>>>> inverted comment? Looks like we've inherited this from Linux, and even in
+>>>>>> Linus'es current tree it's still this same way. Yet all half-way recent
+>>>>>> chipsets I'm aware of properly implement the DM bit in reg B. Might this
+>>>>>> be another 32-bit leftover?
+>>>>>
+>>>>> *shrugs* I don't know.  Seems like Linux is still doing it, so it's
+>>>>> likely safer for us to continue doing it also?  We had no reports of
+>>>>> it being problematic, albeit one could argue it would be best to
+>>>>> prevent such reports by doing the right thing.
+>>>>
+>>>> That's my point. If we did this as specified, we'd unbreak systems with the
+>>>> DM bit set correctly, but we'd break (hypothetical) systems with it bogusly
+>>>> set. Like with a few other fixes, perhaps we should correct it, but provide
+>>>> a command line option to restore old behavior?
+>>>
+>>> Possibly, but I would do after 4.22 has branched, just in case.
 >>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> Of course.
+>>
+>>> One thing I've noticed, is that Xen don't attempts to set
+>>> RTC_DM_BINARY in REG_B, shouldn't it try to set the bit when probing
+>>> for the CMOS?  Since it assumes BCD mode it should at least try to set
+>>> it?
+>>
+>> For one - don't you mean "clear it"? But then - no, that bit is purely
+>> informational aiui. Changing it won't alter what the date/time registers
+>> hold (only how they're updated). Hence by fiddling with it we'd corrupt
+>> information (breaking OSes which properly respect the bit).
 > 
-> The Rule 17.5 violations aren't reported against this function.
+> Yes, sorry, clear it.  The (possibly very outdated) specification I
+> have contains:
+> 
+> DM – The data mode (DM) bit indicates whether time
+> and calendar updates are to use binary or BCD formats. The
+> DM bit is written by the processor program and maybe read
+> by the program, but is not modified by any internal functions
+> or RESET. A "1" in DM signifies binary data, while a "0" in
+> DM specifies binary-coded-decimal (BCD) data.
+> 
+> To me the "DM bit is written by the processor program" reads as if it
+> could be set by the OS, but maybe that just means the bit is writable,
+> but it doesn't affect the format of the field really.
 
-The report is against uses of aes_encryption() from this function.
-
->  They look to be addressed by one of your other patches.
-
-I don't think so. That other patch is independent.
-
-> Which rules is this addressing?  I can't locate anything referencing
-> this function.
-
-It's still very much 17.5, which the job runs also confirm (the other patch
-didn't eliminate the violations here, while this patch does).
+Well, it does affect the format of the field, but not right when the bit
+is written. Aiui it will have an effect when the next update cycle runs,
+as then the right kind of arithmetic (BCD or binary) need to be applied
+by the chip (or what was a separate chip back at the time when those
+specs were written). (The other "written by the processor program" of
+course applies when date/time are fully updated. At that point the OS
+can pick DM to its liking, and it would then better store the date/time
+fields in the respective format.)
 
 Jan
 
