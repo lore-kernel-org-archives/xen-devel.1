@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA079CD4F3C
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 19:26:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1310449.1581380 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AAFCD4F48
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2026 20:10:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1310529.1581389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNyAb-0007UP-9S; Fri, 15 May 2026 19:26:01 +0000
+	id 1wNyr6-0006R1-E6; Fri, 15 May 2026 20:09:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1310449.1581380; Fri, 15 May 2026 19:26:01 +0000
+Received: by outflank-mailman (output) from mailman id 1310529.1581389; Fri, 15 May 2026 20:09:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wNyAb-0007UB-4i; Fri, 15 May 2026 19:26:01 +0000
-Received: by outflank-mailman (input) for mailman id 1310449;
- Fri, 15 May 2026 19:25:59 +0000
+	id 1wNyr6-0006Qu-Ac; Fri, 15 May 2026 20:09:56 +0000
+Received: by outflank-mailman (input) for mailman id 1310529;
+ Fri, 15 May 2026 20:09:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3F3IHagYKCXAgSObXQUccUZS.QcalSb-RSjSZZWghg.lSbdfcXSQh.cfU@flex--seanjc.bounces.google.com>)
- id 1wNyAZ-00077N-1z
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 19:25:59 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1wNyr5-0006Qm-G7
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 20:09:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wNyAY-001IlE-EL
- for xen-devel@lists.xenproject.org; Fri, 15 May 2026 21:25:58 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3F3IHagYKCXAgSObXQUccUZS.QcalSb-RSjSZZWghg.lSbdfcXSQh.cfU@flex--seanjc.bounces.google.com>)
- id 6a077320-2eae-0a2a0a5409dd-0a2a4503cbae-44
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:25:58 +0200
-Received: from [209.85.214.201] (helo=mail-pl1-f201.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <3F3IHagYKCXAgSObXQUccUZS.QcalSb-RSjSZZWghg.lSbdfcXSQh.cfU@flex--seanjc.bounces.google.com>)
- id 6a077218-672d-0a2a45030019-d155d6c9d85a-3
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 21:20:57 +0200
-Received: by mail-pl1-f201.google.com with SMTP id
- d9443c01a7336-2b99eb06178so4590515ad.2
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 12:20:57 -0700 (PDT)
+ id 1wNyr4-002IP9-SZ
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2026 22:09:54 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <pr-tracker-bot@kernel.org>)
+ id 6a077ce3-bab6-0a2a0a5309dd-0a2a4501e286-48
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 22:09:54 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <pr-tracker-bot@kernel.org>)
+ id 6a077d91-c1f2-0a2a45010019-aceafc1f982a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2026 22:09:54 +0200
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id A964A41A82;
+ Fri, 15 May 2026 20:09:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D942C2BCC7;
+ Fri, 15 May 2026 20:09:52 +0000 (UTC)
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 198953930A08; Fri, 15 May 2026 20:10:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,121 +53,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1778872856; x=1779477656; darn=lists.xenproject.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=7w7qT+Z66rWfxvtZ1IzSRlO054bgZsKsszMlQ0FarYw=;
-        b=GdRZBXoDubWRQ0zH583sJDD1+A1b8/Obsly2MSkjZnIA7JiVa2wWTP8iy9t70Fm5na
-         ZWnrf+923J0dEeQimmJ0rRk2axnfQj2lu5zFlq8NzqwkDmLYDkPMpgcGOGrO2t8MeiOZ
-         sMEcWuFF7NOxpH0fLestiD0POJOxMC5oTV7daaYC81/CR6gRggCx+hRjqckNJ7TsB2BF
-         OGupgmM+uvW7XgKn4utJ8K1L679oJViXjslYuRy8OyWs0eMJpwR408ivRLs7VabDQpCu
-         kRDqpSk3oU7rvEAHo6PymmizbjUaLivOIIP+7jS3lQinIViwRgClz/00WwvcQvFn63Jc
-         bTfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778872856; x=1779477656;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7w7qT+Z66rWfxvtZ1IzSRlO054bgZsKsszMlQ0FarYw=;
-        b=ViwxGkbzDMGGOjbnB3IrYu//LTRXT7gWOpvCGX8k/7nMvR+5hxaY3ltAKmejRDeP/p
-         6LPU4y1F81YLCLQNuzm6oG15Y7cQlUzhGmjxi1KmD4hj6dVr0zCRBuT32hp0k0Xp7YMK
-         dey0NaXiyxKJrXuFShqcb6K4VxNhwsSGzmRnMRaPAJ0kKEKVqwwVFbEUp2OLh8jPogQ1
-         ZWFtsbCpJpMC5h+UurDRc4Ge45B7KkBSU46MMNeMqXBZ5wvjflUEP5E72GYqOhI0esNB
-         0v/wRuyHen3tE+D9xO8NAibZdXSayKnQE8OUm9b4DlfnsrlYutggBpGZSGAUK0G7NWnp
-         E5xg==
-X-Forwarded-Encrypted: i=1; AFNElJ+d+P10VcNrYKS53uXPtyXt6yH9Viej+tNFVlTmIbcxUcFTHqzqNBa7H93ncOXSr4dehx8ogYqrHYE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yzm2wZkTAwUPeNk1k8C6d2Nndh46qjHLRMtRaXWw4/pyqFlj6Wo
-	EgP2ks5/wIWsKsbYsFmMsJXaGlawivxbXLqyWgaJ1hZW2jOtus2UETPizi69KGnjfilVYwimBO4
-	PcYBWfw==
-X-Received: from plcm4.prod.google.com ([2002:a17:902:f204:b0:2b0:b12e:1b07])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:ee09:b0:2b4:62bd:ee3
- with SMTP id d9443c01a7336-2bd7e937a4bmr42674815ad.33.1778872855638; Fri, 15
- May 2026 12:20:55 -0700 (PDT)
-Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 15 May 2026 12:19:24 -0700
-In-Reply-To: <20260515191942.1892718-1-seanjc@google.com>
-Mime-Version: 1.0
-References: <20260515191942.1892718-1-seanjc@google.com>
-X-Mailer: git-send-email 2.54.0.563.g4f69b47b94-goog
-Message-ID: <20260515191942.1892718-24-seanjc@google.com>
-Subject: [PATCH v3 23/41] x86/kvmclock: Refactor handling of
- PVCLOCK_TSC_STABLE_BIT during kvmclock_init()
-From: Sean Christopherson <seanjc@google.com>
-To: Kiryl Shutsemau <kas@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Sean Christopherson <seanjc@google.com>, "K. Y. Srinivasan" <kys@microsoft.com>, 
-	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	John Stultz <jstultz@google.com>
-Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, x86@kernel.org, 
-	linux-coco@lists.linux.dev, kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, 
-	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
-	Thomas Gleixner <tglx@linutronix.de>, David Woodhouse <dwmw@amazon.co.uk>
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-33051d/1778872858-41794938-29D1E97F/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20201202 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:In-Reply-To:References:Date:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778875792;
+	bh=Jpo5cAcPIqiEuvJJmcqYaYUh19IoUNTWvZHKdkp974U=;
+	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+	b=ETFxj9DfueE9AXQ3v0RpmbNNfi0V/7HmOc8V3BRwgvnU4sHdxcIcRQtvONSvufx96
+	 +LVoQ83ONgdFIQ7/9fJJrdk/A3HdtFM7KzDDAKPlyVtkLPIKc1aLTsWKbYFqNx3vBa
+	 r3AvxSL1QHVXgDBXw0e++Y0pGLCXR0FxIGo/wvnvkLBreo1GY7qdcU25Y+EvPnoYUC
+	 PB09Wf8TKRsNWLT+TR6MaOFXY/a8sqKy6AyfINQxNNe12I+7+9YP5KNwHz0l66ctdq
+	 3gS67VPduUnbdCFWiaKUgmaYFUsGoy5rLscTgoPJci7bc+jUmYmwcKef9wzbbiHD0b
+	 Zoqf8BYcpXnwA==
+Subject: Re: [GIT PULL] xen: branch for v7.1-rc4
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20260515130004.1571139-1-jgross@suse.com>
+References: <20260515130004.1571139-1-jgross@suse.com>
+X-PR-Tracked-List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
+X-PR-Tracked-Message-Id: <20260515130004.1571139-1-jgross@suse.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-7.1b-rc4-tag
+X-PR-Tracked-Commit-Id: 4594437880ce347ac8438758fd91543f70da1aa9
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 4844e7c4c2697afe63f2b925e2384e0c724cb2be
+Message-Id: <177887580600.138467.1546973588089628432.pr-tracker-bot@kernel.org>
+Date: Fri, 15 May 2026 20:10:06 +0000
+To: Juergen Gross <jgross@suse.com>
+Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, sstabellini@kernel.org
+X-purgate-ID: tlsNG-d62444/1778875794-AFB56FF4-0289A142/0/0
 X-purgate-type: clean
-X-purgate-size: 1806
+X-purgate-size: 363
 
-Clean up the setting of PVCLOCK_TSC_STABLE_BIT during kvmclock init to
-make it somewhat obvious that pvclock_read_flags() must be called *after*
-pvclock_set_flags().
+The pull request you sent on Fri, 15 May 2026 15:00:04 +0200:
 
-Note, in theory, a different PV clock could have set PVCLOCK_TSC_STABLE_BIT
-in the supported flags, i.e. reading flags only if
-KVM_FEATURE_CLOCKSOURCE_STABLE_BIT is set could very, very theoretically
-result in a change in behavior.  In practice, the kernel only supports a
-single PV clock.
+> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-7.1b-rc4-tag
 
-Signed-off-by: Sean Christopherson <seanjc@google.com>
----
- arch/x86/kernel/kvmclock.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/4844e7c4c2697afe63f2b925e2384e0c724cb2be
 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index 8df6adcd6cd8..ccb2aff89b2f 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -306,7 +306,7 @@ static __init void kvm_sched_clock_init(bool stable)
- 
- void __init kvmclock_init(void)
- {
--	u8 flags;
-+	bool stable = false;
- 
- 	if (!kvm_para_available() || !kvmclock)
- 		return;
-@@ -333,11 +333,18 @@ void __init kvmclock_init(void)
- 	kvm_register_clock("primary cpu clock");
- 	pvclock_set_pvti_cpu0_va(hv_clock_boot);
- 
--	if (kvm_para_has_feature(KVM_FEATURE_CLOCKSOURCE_STABLE_BIT))
-+	if (kvm_para_has_feature(KVM_FEATURE_CLOCKSOURCE_STABLE_BIT)) {
- 		pvclock_set_flags(PVCLOCK_TSC_STABLE_BIT);
- 
--	flags = pvclock_read_flags(&hv_clock_boot[0].pvti);
--	kvm_sched_clock_init(flags & PVCLOCK_TSC_STABLE_BIT);
-+		/*
-+		 * Check if the clock is stable *after* marking TSC_STABLE as a
-+		 * valid flag.
-+		 */
-+		stable = pvclock_read_flags(&hv_clock_boot[0].pvti) &
-+			 PVCLOCK_TSC_STABLE_BIT;
-+	}
-+
-+	kvm_sched_clock_init(stable);
- 
- 	tsc_register_calibration_routines(kvm_get_tsc_khz, kvm_get_tsc_khz);
- 
+Thank you!
+
 -- 
-2.54.0.563.g4f69b47b94-goog
-
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
