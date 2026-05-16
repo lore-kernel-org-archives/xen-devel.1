@@ -4,51 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38473CD4F25
-	for <xen-devel@archiver.kernel.org>; Sat, 16 May 2026 07:43:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1310706.1581425 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A63CD4F3C
+	for <xen-devel@archiver.kernel.org>; Sat, 16 May 2026 15:05:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1310871.1581453 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wO9fa-0006xQ-NO; Sat, 16 May 2026 07:42:46 +0000
+	id 1wOGa2-00081N-2k; Sat, 16 May 2026 15:05:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1310706.1581425; Sat, 16 May 2026 07:42:46 +0000
+Received: by outflank-mailman (output) from mailman id 1310871.1581453; Sat, 16 May 2026 15:05:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wO9fa-0006xJ-Kj; Sat, 16 May 2026 07:42:46 +0000
-Received: by outflank-mailman (input) for mailman id 1310706;
- Sat, 16 May 2026 07:42:45 +0000
+	id 1wOGa1-00081G-Tl; Sat, 16 May 2026 15:05:29 +0000
+Received: by outflank-mailman (input) for mailman id 1310871;
+ Sat, 16 May 2026 15:05:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <pbonzini@redhat.com>) id 1wO9fZ-0006xD-9H
- for xen-devel@lists.xenproject.org; Sat, 16 May 2026 07:42:45 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wOGa0-0007yz-Mw
+ for xen-devel@lists.xenproject.org; Sat, 16 May 2026 15:05:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wO9fY-00CepP-AR
- for xen-devel@lists.xenproject.org; Sat, 16 May 2026 09:42:44 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wOGa0-000ziQ-38
+ for xen-devel@lists.xenproject.org; Sat, 16 May 2026 17:05:28 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <pbonzini@redhat.com>)
- id 6a081fca-e002-0a2a0a5209dd-0a2a450bd0be-16
- for <xen-devel@lists.xenproject.org>; Sat, 16 May 2026 09:42:44 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <pbonzini@redhat.com>)
- id 6a081ff2-212f-0a2a450b0019-aa0a817ce189-3
- for <xen-devel@lists.xenproject.org>; Sat, 16 May 2026 09:42:43 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-111-C2qozkjxOF6c4Hglw-NMVQ-1; Sat,
- 16 May 2026 03:42:38 -0400
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 39F2518005B2; Sat, 16 May 2026 07:42:34 +0000 (UTC)
-Received: from [10.44.32.24] (unknown [10.44.32.24])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 0353F180034E; Sat, 16 May 2026 07:42:22 +0000 (UTC)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0887a1-e002-0a2a0a5209dd-0a2a4501bb9e-10
+ for <xen-devel@lists.xenproject.org>; Sat, 16 May 2026 17:05:28 +0200
+Received: from [209.85.208.47] (helo=mail-ed1-f47.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0887b7-c1f2-0a2a45010019-d155d02feda3-3
+ for <xen-devel@lists.xenproject.org>; Sat, 16 May 2026 17:05:28 +0200
+Received: by mail-ed1-f47.google.com with SMTP id
+ 4fb4d7f45d1cf-676a89de629so1519912a12.1
+ for <xen-devel@lists.xenproject.org>; Sat, 16 May 2026 08:05:28 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.26.18]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6830fc1a0b4sm3268676a12.0.2026.05.16.08.05.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 May 2026 08:05:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,202 +52,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1778917362;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ZuYuwk7J/15Ge1PYKnSZO6EKNDeWPqqx6skfRaS0DUA=;
-	b=Y4yle8ABpHncRfbAYwgDeECEjKnVSAGjBsC54sB/92rJi0m7+j+xcewE34gbVa6nsajkKR
-	Z6Z+jdPc88uHC3r1JJQw4GmmD20DI9kCCYbQ0/bFUx5Y7k3gc/JCqZ81wjIke21z/VC31E
-	eNBWIA5AfmjSBjxVoY+YF1BqOTmg/UA=
-X-MC-Unique: C2qozkjxOF6c4Hglw-NMVQ-1
-X-Mimecast-MFC-AGG-ID: C2qozkjxOF6c4Hglw-NMVQ_1778917355
-Message-ID: <3cb683b4-973a-4b3e-a5d5-a8baa8a70eb0@redhat.com>
-Date: Sat, 16 May 2026 09:42:19 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778943927; x=1779548727; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oVrXc3Z0YNDU/cSa9N1k1VbjjSsyEmY6q4/XgcyD2jQ=;
+        b=Hgiw9ISKgj1hJD7s85SqDvJNFXB0cCjF0Qz5KJSz0T38GFKn9hGvbEhYhMui5Te/z0
+         7LE+aKKopBl7yDxfTrVj+9ot8JJqwV9JrWekIsnp50OvgHeTsCRUKjWVkRkzt1z4XOVz
+         atoSy8Urf5bPazK+TpB80s1BwWkCWH0N2OHBoIoAYXaQq8WxKvQ50K+jzqzKzv7aT5Dd
+         MmpOvPhWFuDmak8di5g+1/17xGGFFn7ycf5V4hsPBCACTi8Z9JewC6bIvzCkE1qNB/OP
+         15RAKGhxF7x4S8MOkrToat8lVB8/cntLS2VQynBVPwyMOhVuvHhVx4Rmn9esGR/SsofL
+         UYeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778943927; x=1779548727;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=oVrXc3Z0YNDU/cSa9N1k1VbjjSsyEmY6q4/XgcyD2jQ=;
+        b=JmEzob0VOz7F9E9P/GxrmRWJmYP+XrmeKkkpkBY1n+IVKzopB2K3mUcqeoiAX4+cQ1
+         tFBVya+PMYohAl/iJRG2UjtIukweNI6LB+3c6mXToeefUvnn9DIv8AgNhicXkP/RjC2r
+         qEqnHv93KMIG/rVJi44yl8q1hnxoA5SnGlc6TgmgiD48PtzhcWVwjXMOK10pYajy2e4s
+         bIhBtbLmbB8+qHsxiTRap/qlB45Q2TM29aBDO+/3PTywi/Vp4M0LHLyCJAkppGWTnHLo
+         cm3BY0iJQkR1Chc+h+4o+YQCsEQDu0HltrKJKeokgEs8KMMgogsujvidyMcfpRylOJ5j
+         duBg==
+X-Gm-Message-State: AOJu0YxdjhJDdsZdRY0nr4tHsm6NoR7Ao2qi4v/+j0os7NdqTo/Tbx8R
+	kUKMw6pSVye7nQ6xG5tgYeV27kUnRmgjZZGGdgsr9kZYCEGBHn52/CIZIhIDXQ==
+X-Gm-Gg: Acq92OFV8pEjJqnQV0zv8uxmyrM0yxKRg2oTSYVkTmAJ8OWJXqpP6Zw6+9JU5E6ii3m
+	BerhXAax8v+lD/Ki6Egq7QwIEw35G4udbZ/4Q/Mm0a+rF8jTT8QnnvqZEZ+bfv32iSfAAvfP4qH
+	qUd6fg1Duskb/iLm+Htw8XDp5+F8RdK1Mlg/fnI8Pw20+vIEkuciS5iy10R09z4Bb+JyzWYWv6p
+	npH+626qGyxJprzu+ORR1TxwZbGFUjAf8YclSm3lriBCQHicARArRk6OC5Yc5HdOO17IkVzgkuX
+	YGM7Ra2y+2vqpWCbq3ArQ4bXL0Z/PYrffT4/mJ9/x1AN5TaUpZ0Nl00Joay7wj6RcC4qf5HnmjT
+	rnzxOT539Jczsk57txiBScv0ceQJB5huiJcQZ1FMoXfoQzDiPge8Y/b6J0I91+zDODUsPY1bNo8
+	UWwCQgmeaAcpkQ+aevEzF4IcddGGwutiVjgBtu
+X-Received: by 2002:a05:6402:556:b0:67e:9e04:31d0 with SMTP id 4fb4d7f45d1cf-683bd779fe2mr2819853a12.23.1778943927569;
+        Sat, 16 May 2026 08:05:27 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 2/2] xen/common: llc-coloring: reject empty color tokens
+Date: Sat, 16 May 2026 18:03:12 +0300
+Message-ID: <0820f91dd0499e5f66f8961b5e27fe0a0ff9be35.1778925998.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1778925998.git.mykola_kvach@epam.com>
+References: <cover.1778925998.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 40/41] x86/tsc: Add standalone helper for getting CPU
- frequency from CPUID
-To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
- <kas@kernel.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
- Ajay Kaher <ajay.kaher@broadcom.com>,
- Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Andy Lutomirski
- <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- Juergen Gross <jgross@suse.com>, Daniel Lezcano <daniel.lezcano@kernel.org>,
- Thomas Gleixner <tglx@kernel.org>, John Stultz <jstultz@google.com>
-Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>,
- Vitaly Kuznetsov <vkuznets@redhat.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd
- <sboyd@kernel.org>, x86@kernel.org, linux-coco@lists.linux.dev,
- kvm@vger.kernel.org, linux-hyperv@vger.kernel.org,
- virtualization@lists.linux.dev, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>,
- Thomas Gleixner <tglx@linutronix.de>, David Woodhouse <dwmw@amazon.co.uk>
-References: <20260515191942.1892718-1-seanjc@google.com>
- <20260515191942.1892718-41-seanjc@google.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Autocrypt: addr=pbonzini@redhat.com; keydata=
- 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
-In-Reply-To: <20260515191942.1892718-41-seanjc@google.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: ibwQT72NlQgiYDuBQhexYWejXBhRkpwrdJ5xW0dr9mw_1778917355
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1778917364-1BF7EF3B-4DB72D10/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1778943928-B7555FF4-863ECD26/0/0
 X-purgate-type: clean
-X-purgate-size: 3678
+X-purgate-size: 1894
 
-On 5/15/26 21:19, Sean Christopherson wrote:
-> Extract the guts of cpu_khz_from_cpuid() to a standalone helper that
-> doesn't restrict the usage to Intel CPUs.  This will allow sharing the
-> core logic with kvmclock, as (a) CPUID.0x16 may be enumerated alongside
-> kvmclock, and (b) KVM generally doesn't restrict CPUID based on vendor.
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Even for native there's no real reason to restrict to Intel, I think. 
-native_calibrate_tsc() only limits itself because historically (prior to 
-commit 604dc9170f24, "x86/tsc: Use CPUID.0x16 to calculate missing 
-crystal frequency", 2019-05-09) it used a hardcoded table of crystal 
-frequencies.
+parse_color_config() currently accepts delimiters where a color value
+is expected because simple_strtoul() returns zero without advancing the
+input pointer. This makes strings such as ",2-6", "-10,19-20" or
+"1,,2" look as if an empty value was color 0.
 
-Of course paranoia applies, but for virtualization, if the leaf exists 
-there is no reason not to trust it.
+Also add the missing newline to the DT color parsing error message.
 
-Thanks,
+Fixes: 6cdea3444eaf ("xen/arm: add Dom0 cache coloring support")
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ xen/common/llc-coloring.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-Paolo
-
-> No functional change intended.
-> 
-> Signed-off-by: Sean Christopherson <seanjc@google.com>
-> ---
->   arch/x86/include/asm/tsc.h |  1 +
->   arch/x86/kernel/tsc.c      | 37 +++++++++++++++++++++++--------------
->   2 files changed, 24 insertions(+), 14 deletions(-)
-> 
-> diff --git a/arch/x86/include/asm/tsc.h b/arch/x86/include/asm/tsc.h
-> index f458be688512..c145f5707b52 100644
-> --- a/arch/x86/include/asm/tsc.h
-> +++ b/arch/x86/include/asm/tsc.h
-> @@ -91,6 +91,7 @@ struct cpuid_tsc_info {
->   };
->   extern int cpuid_get_tsc_info(struct cpuid_tsc_info *info);
->   extern int cpuid_get_tsc_freq(struct cpuid_tsc_info *info);
-> +extern int cpuid_get_cpu_freq(unsigned int *cpu_khz);
->   
->   extern void tsc_early_init(void);
->   extern void tsc_init(void);
-> diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-> index 1b569954ae5e..745fa2052c74 100644
-> --- a/arch/x86/kernel/tsc.c
-> +++ b/arch/x86/kernel/tsc.c
-> @@ -719,6 +719,24 @@ int cpuid_get_tsc_freq(struct cpuid_tsc_info *info)
->   	return 0;
->   }
->   
-> +int cpuid_get_cpu_freq(unsigned int *cpu_khz)
-> +{
-> +	unsigned int eax_base_mhz, ebx, ecx, edx;
-> +
-> +	*cpu_khz = 0;
-> +
-> +	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
-> +		return -ENOENT;
-> +
-> +	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
-> +
-> +	if (!eax_base_mhz)
-> +		return -ENOENT;
-> +
-> +	*cpu_khz = eax_base_mhz * 1000;
-> +	return 0;
-> +}
-> +
->   /**
->    * native_calibrate_tsc - determine TSC frequency
->    * Determine TSC frequency via CPUID, else return 0.
-> @@ -754,13 +772,8 @@ unsigned long native_calibrate_tsc(void)
->   	 * clock, but we can easily calculate it to a high degree of accuracy
->   	 * by considering the crystal ratio and the CPU speed.
->   	 */
-> -	if (!info.crystal_khz && boot_cpu_data.cpuid_level >= CPUID_LEAF_FREQ) {
-> -		unsigned int eax_base_mhz, ebx, ecx, edx;
-> -
-> -		cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx, &ecx, &edx);
-> -		info.crystal_khz = eax_base_mhz * 1000 *
-> -			info.denominator / info.numerator;
-> -	}
-> +	if (!info.crystal_khz && !cpuid_get_cpu_freq(&cpu_khz))
-> +		info.crystal_khz = cpu_khz * info.denominator / info.numerator;
->   
->   	if (!info.crystal_khz)
->   		return 0;
-> @@ -787,19 +800,15 @@ unsigned long native_calibrate_tsc(void)
->   
->   static unsigned long cpu_khz_from_cpuid(void)
->   {
-> -	unsigned int eax_base_mhz, ebx_max_mhz, ecx_bus_mhz, edx;
-> +	unsigned int cpu_khz;
->   
->   	if (boot_cpu_data.x86_vendor != X86_VENDOR_INTEL)
->   		return 0;
->   
-> -	if (boot_cpu_data.cpuid_level < CPUID_LEAF_FREQ)
-> +	if (cpuid_get_cpu_freq(&cpu_khz))
->   		return 0;
->   
-> -	eax_base_mhz = ebx_max_mhz = ecx_bus_mhz = edx = 0;
-> -
-> -	cpuid(CPUID_LEAF_FREQ, &eax_base_mhz, &ebx_max_mhz, &ecx_bus_mhz, &edx);
-> -
-> -	return eax_base_mhz * 1000;
-> +	return cpu_khz;
->   }
->   
->   /*
+diff --git a/xen/common/llc-coloring.c b/xen/common/llc-coloring.c
+index 2606cb0977..5d00d4b40e 100644
+--- a/xen/common/llc-coloring.c
++++ b/xen/common/llc-coloring.c
+@@ -64,14 +64,21 @@ static int __init parse_color_config(const char *buf, unsigned int colors[],
+ 
+     while ( *s != '\0' )
+     {
++        const char *endp;
+         unsigned int color, start, end;
+ 
+-        start = simple_strtoul(s, &s, 0);
++        start = simple_strtoul(s, &endp, 0);
++        if ( endp == s )
++            goto fail;
++        s = endp;
+ 
+         if ( *s == '-' )    /* Range */
+         {
+             s++;
+-            end = simple_strtoul(s, &s, 0);
++            end = simple_strtoul(s, &endp, 0);
++            if ( endp == s )
++                goto fail;
++            s = endp;
+         }
+         else                /* Single value */
+             end = start;
+@@ -334,7 +341,7 @@ int __init domain_set_llc_colors_from_str(struct domain *d, const char *str)
+     err = parse_color_config(str, colors, max_nr_colors, &num_colors);
+     if ( err )
+     {
+-        printk(XENLOG_ERR "Error parsing LLC color configuration");
++        printk(XENLOG_ERR "Error parsing LLC color configuration\n");
+         xfree(colors);
+         return err;
+     }
+-- 
+2.43.0
 
 
