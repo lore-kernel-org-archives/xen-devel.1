@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460C4CD4F47
-	for <xen-devel@archiver.kernel.org>; Sun, 17 May 2026 15:53:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1311234.1581488 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA56CD4F4A
+	for <xen-devel@archiver.kernel.org>; Sun, 17 May 2026 17:28:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1311323.1581497 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOdnv-0004wY-1C; Sun, 17 May 2026 15:53:23 +0000
+	id 1wOfHo-0000eY-Gm; Sun, 17 May 2026 17:28:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1311234.1581488; Sun, 17 May 2026 15:53:23 +0000
+Received: by outflank-mailman (output) from mailman id 1311323.1581497; Sun, 17 May 2026 17:28:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOdnu-0004wR-UE; Sun, 17 May 2026 15:53:22 +0000
-Received: by outflank-mailman (input) for mailman id 1311234;
- Sun, 17 May 2026 13:38:26 +0000
+	id 1wOfHo-0000eR-De; Sun, 17 May 2026 17:28:20 +0000
+Received: by outflank-mailman (input) for mailman id 1311323;
+ Sun, 17 May 2026 17:28:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <yashsuthar983@gmail.com>) id 1wObhK-0003F3-QC
- for xen-devel@lists.xenproject.org; Sun, 17 May 2026 13:38:26 +0000
+ (envelope-from <olekstysh@gmail.com>) id 1wOfHm-0000e3-Ph
+ for xen-devel@lists.xenproject.org; Sun, 17 May 2026 17:28:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wObhK-0009gY-2g
- for xen-devel@lists.xenproject.org; Sun, 17 May 2026 15:38:26 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wOfHl-000Wbw-HZ
+ for xen-devel@lists.xenproject.org; Sun, 17 May 2026 19:28:17 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <yashsuthar983@gmail.com>)
- id 6a09c4cf-bab6-0a2a0a5309dd-0a2a4502e032-2
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 15:38:26 +0200
-Received: from [209.85.214.178] (helo=mail-pl1-f178.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <yashsuthar983@gmail.com>)
- id 6a09c4d0-af86-0a2a45020019-d155d6b2dcfc-3
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 15:38:25 +0200
-Received: by mail-pl1-f178.google.com with SMTP id
- d9443c01a7336-2bab2548e8bso5562085ad.0
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 06:38:25 -0700 (PDT)
-Received: from yash-Bravo-15-B5DD.local ([14.99.167.142])
+ (envelope-from <olekstysh@gmail.com>)
+ id 6a09fa0e-bab6-0a2a0a5309dd-0a2a4508d522-38
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 19:28:17 +0200
+Received: from [209.85.167.50] (helo=mail-lf1-f50.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <olekstysh@gmail.com>)
+ id 6a09fab0-63b5-0a2a45080019-d155a732ac14-3
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 19:28:17 +0200
+Received: by mail-lf1-f50.google.com with SMTP id
+ 2adb3069b0e04-5a8f9841616so1340385e87.0
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 10:28:17 -0700 (PDT)
+Received: from [192.168.0.112] ([91.123.151.42])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2bd5cfe64a9sm119689685ad.53.2026.05.17.06.38.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 May 2026 06:38:23 -0700 (PDT)
+ 2adb3069b0e04-5a9164bc12asm2792303e87.42.2026.05.17.10.28.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 17 May 2026 10:28:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,102 +53,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779025104; x=1779629904; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7Up+AAAQj+csNMtbAdRw7R9ZHQCbCzjkAYPzeriCxm8=;
-        b=Pg9sdmm5yyc2RrI4QqDPfzuHYDAu6R4439w2+KGzZYDhjlvBlf4RSdBWLQPP+HnYl4
-         lGPvL7TqCTsiAQPvZ8KzspKQ6GwyrweHefCahdy5Mqos27GfUmaAcmTDVypsub77XM7N
-         C7Zx0+nhGm57bFC1Qpv+I4lLuCB5Zg/CliT96KNjqG5KC1aq8UdDDPaoMKEAkUJ+CFpH
-         vdN4XxbyPZxiBBThNZqVdG7d3WCBjBmMpK8aGnlq17d7/5J2Ixt2hwCIfLkZtaNjTvQa
-         Qevx9MgriJT8/kRlUXturrKloMNjnxJ344RijxwjEgc4R3JWstnFmOcufpyasPNxXQa2
-         Qpbg==
+        d=gmail.com; s=20251104; t=1779038896; x=1779643696; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=f0nZfOiwNgvR4Mbx8ZzVOWKx6v/Kdg4ziHaQGgZUnOE=;
+        b=T4tp0G3oCiKTSMnP13gggPQJ7Xiy8H+TWxmRwpBWzLPZ62eknv5zOYH0FmSK8sL4jA
+         Dj9cbhJV2EQR0nPXXs0TjpIsh6EvqLD8KEx+HYhZotzTC1BwymhUL9ic7pg6b9L/rqq/
+         A5QeHKBWPT+MvfAnKVHoJVhZD2bRiHGuM16WWstjl5Dg4R9td35Nya3jZ43CyExx38u0
+         vdjXkP9PubD/a3ROrxevZF9uHsUBigr6Kkv2uQMUbXeNDzhk87CvGeEsiPrM0oWuqWBA
+         ysVgcNTIp3eQ2NgKnhsO6ZusTopTPFgUl+OdCzGKUz5gRAqZhNZwFIlqgatL0sTNAQzj
+         WhcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779025104; x=1779629904;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7Up+AAAQj+csNMtbAdRw7R9ZHQCbCzjkAYPzeriCxm8=;
-        b=TXTGz4x8gAHLGByFCFrS+4tILwR1LL6TgwWNn8Wg0BB2rMOmoKIY+m9elGM6zhjz1r
-         1H2PRojFJJ3mt+yQnvhun6LLyrrOohRTIiiWLYrLTJk/LuM9zm0pjDRA8KFGmrhgaPq2
-         9yLTY0HXg8dd7lNo00nRY0ILLBvX8O26HR1z10Xyk42liTQ/EkSAT61YRu+vngnRL62K
-         jP9vNgh/DknWizZopc2uFrVn0YppvZLQAgetMSNMwhjqZ3Mb1H1Qf7UXERqqXLucpHHG
-         /Sxs6w+pWMv2on4KFPJ/PUwh3x0h1tbM9nZMesqxe4J8Pw3redfx0E+AEtxxZQP/ph+F
-         N4lg==
-X-Forwarded-Encrypted: i=1; AFNElJ+Z9ehiacpEcDYRHKm43wI2+qYCsc6O+1sIzlGIzRLoIA13Ew2+PNtRljTG82WXtdPlSbC+f4MsLag=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx7VV//xPeyRiaoTynECDHaVmyWGkNGr0cnuCF4hujr4042PpIj
-	33TJZi5iSRhp5Sr9iEEToeFw/vbXrlFeNmtRArZUsGnCPZF6H3JfHSBr
-X-Gm-Gg: Acq92OGgDB/QpA9lVmqPzOCOYyeuU3pPtUIQ0b+f+jfc9A8wS0qlqWcm072oyNBSv7l
-	dLDiJYabIN360QlMVjQBRgzEP47JWPEX7y0t6bAcgE+eKZCH54iIDgdzN+6PkoY9YoY1j+WvdP3
-	1VB7NWAeGMmMnlH9uMIHWy1gJ9yqSArSYxILS22Gck9FdhwkfayS+2eWfOqufDqmhFT9AtUrkTk
-	akTzueS1Udtw9UYo9Zm86MpDA0v5IcGnVY3kmXM7lXA9RwlypOyQ7OPyimCTkbOK8mgdwswluFC
-	f1R50wdnIqnksex+ugzXVOg7o+5OuiVIuIHY+gJvgClsMqO9endIgN0Yuw8TI8jFNTQbFAvcTsv
-	D++L20A+HGpizd5q26iBOHlQM50Q/S41dtejvhWIKofQu0KIDvxHj0KaoK2hO8Syr7lxjNzYuTB
-	PAujOJEswKXKRsveeDRnKO64AKlZp0Q4/i4GOtjS2aE7CTfZoJ/QVfYy4=
-X-Received: by 2002:a17:902:e743:b0:2b4:696b:7bb7 with SMTP id d9443c01a7336-2bd7e8ae070mr127427075ad.15.1779025103805;
-        Sun, 17 May 2026 06:38:23 -0700 (PDT)
-From: Yash Suthar <yashsuthar983@gmail.com>
-To: jgross@suse.com,
-	sstabellini@kernel.org
-Cc: oleksandr_tyshchenko@epam.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	Yash Suthar <yashsuthar983@gmail.com>
-Subject: [PATCH] xen: balloon: Replace sprintf() with sysfs_emit()
-Date: Sun, 17 May 2026 19:08:17 +0530
-Message-ID: <20260517133817.29691-1-yashsuthar983@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20251104; t=1779038896; x=1779643696;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=f0nZfOiwNgvR4Mbx8ZzVOWKx6v/Kdg4ziHaQGgZUnOE=;
+        b=mOChkLCTc/KpZZEsIUA0kgZLPCI3aj3Wc/vroms48GJmTP0IySP6x/zciHODgDlkpG
+         caAt9M4405XKF9nK+5RxEYfGU1a7nUpy+qN+p4Rj5IW1AcJl794plaQQ0+GUFn1PRK/m
+         SuquE38tKZHa2PMbnENxX5OmDIBbGc63qKocg48eZPNu57NWxL7tHhe4bwPV6MBXLwfn
+         fAT9Aw1UNqH8dzxWzRUbf4sGjN3zTeQHeidPtEp2c0BmjGCnHPZEsn1SoTJcnndHUalY
+         2JfA1Nk4sMtAwh7jY/GHDen1twwpd3Cdkqll0wk49PyCClrdc3KKj5xd61sJEYFKnJ0f
+         W1zg==
+X-Gm-Message-State: AOJu0Yw0chOMzkClMI+8zzwFsEMa4nREdLvCLIxHbqGOrLNGqs/1N2+p
+	MXEFHgqUHGp/J0NvLcLcNF++tyXVj5cED6hX37LywNXKChj2at30IxWO
+X-Gm-Gg: Acq92OF7TZKW7j/avk6wfz/SNh2BpgjNqASfN5UtHPa7JaI1XnSrtQzN0KpLNX3rkrA
+	A59z2UaOd5AKoJXYYnN0m6cwC+F9exZLEmr7Cc8GUkNUGpY7kPlUpdKEbNfFtFSFY+eELalWtRi
+	NQsEiWYG4bNH6cgoSCesdBhAYsGnFK9lNj8us4+6xSF9gf/Qyl0DegY9j7sI1Umf+nJi6ojonHd
+	Q0EAxi+q51z2VReE3SmoVEQWk7gycHA2NGVB52XJ9yC2unHvApV4fBlPqaFVMmZJIbdP5Niumzc
+	6nuJUo8q2NN/1U6WXJgrj3RH7BdyNtNP3qjKqpXFlVHY8uhViSsN4xebwPyaR6CUM+9MtEZvS6i
+	nYk4Kb2q0+X+ItjKe2LghCuBq1HuLPOJMPT9PLIW2UDoo4z8RxtecbkdW0POttYSghxk/GLPq8X
+	PeeqhWaNHp7JCPJ92JfYEDMqoy/XUXgp6YMgKZ
+X-Received: by 2002:a05:6512:3d88:b0:5a4:1798:31ba with SMTP id 2adb3069b0e04-5aa0e7321e5mr4498476e87.21.1779038896127;
+        Sun, 17 May 2026 10:28:16 -0700 (PDT)
+Message-ID: <a99d4c20-446c-4c5c-b95c-8b317eb1a0c2@gmail.com>
+Date: Sun, 17 May 2026 20:28:13 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1779025106-82F6E161-133FE200/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 10/13] xen/arm64: Save/restore CPU context across
+ SYSTEM_SUSPEND
+To: Luca Fancellu <Luca.Fancellu@arm.com>,
+ Mykola Kvach <xakep.amatop@gmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Mykola Kvach <mykola_kvach@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1778605274.git.mykola_kvach@epam.com>
+ <46bbc9e008a65dd86fb2b368e4751eb7d2014afa.1778605274.git.mykola_kvach@epam.com>
+ <7254EEC1-315F-41EB-B623-5CACAD7255E9@arm.com>
+Content-Language: en-US
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+In-Reply-To: <7254EEC1-315F-41EB-B623-5CACAD7255E9@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1779038897-B6975DB1-D2455346/0/0
 X-purgate-type: clean
-X-purgate-size: 1548
+X-purgate-size: 3168
 
-Replace sprintf() calls with sysfs_emit() to follow current kernel
-coding standards.
 
-sysfs_emit() is the preferred method for formatting sysfs output as it
-provides better bounds checking and is more secure.
 
-Signed-off-by: Yash Suthar <yashsuthar983@gmail.com>
----
- drivers/xen/xen-balloon.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On 5/14/26 20:20, Luca Fancellu wrote:
+> Hi Mykola,
 
-diff --git a/drivers/xen/xen-balloon.c b/drivers/xen/xen-balloon.c
-index b293d7652f15..67b0e2dbe84a 100644
---- a/drivers/xen/xen-balloon.c
-+++ b/drivers/xen/xen-balloon.c
-@@ -138,7 +138,7 @@ EXPORT_SYMBOL_GPL(xen_balloon_init);
- 				   struct device_attribute *attr,	\
- 				   char *buf)				\
- 	{								\
--		return sprintf(buf, format, ##args);			\
-+		return sysfs_emit(buf, format, ##args);			\
- 	}								\
- 	static DEVICE_ATTR_RO(name)
- 
-@@ -155,7 +155,7 @@ static DEVICE_BOOL_ATTR(scrub_pages, 0644, xen_scrub_pages);
- static ssize_t target_kb_show(struct device *dev, struct device_attribute *attr,
- 			      char *buf)
- {
--	return sprintf(buf, "%lu\n", PAGES2KB(balloon_stats.target_pages));
-+	return sysfs_emit(buf, "%lu\n", PAGES2KB(balloon_stats.target_pages));
- }
- 
- static ssize_t target_kb_store(struct device *dev,
-@@ -180,7 +180,7 @@ static DEVICE_ATTR_RW(target_kb);
- static ssize_t target_show(struct device *dev, struct device_attribute *attr,
- 			   char *buf)
- {
--	return sprintf(buf, "%llu\n",
-+	return sysfs_emit(buf, "%llu\n",
- 		       (unsigned long long)balloon_stats.target_pages
- 		       << PAGE_SHIFT);
- }
--- 
-2.43.0
+Hello Mykola and Luca
+
+Mykola, I have no further comments on this patch, but I think Luca has 
+raised a valid point. Once that is resolved (or clarified why no change 
+is needed), feel free to add my:
+Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+
+see below
+
+> 
+>>
+>> +#ifdef CONFIG_SYSTEM_SUSPEND
+>> +/*
+>> + * int prepare_resume_ctx(void)
+>> + *
+>> + * CPU context saved here will be restored on resume in hyp_resume function.
+>> + * prepare_resume_ctx shall return a non-zero value. Upon restoring context
+>> + * hyp_resume shall return value zero instead. From C code that invokes
+>> + * prepare_resume_ctx, the return value is interpreted to determine whether
+>> + * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
+>> + */
+>> +FUNC(prepare_resume_ctx)
+>> +        ldr   x0, =resume_cpu_context
+>> +
+>> +        /* Store callee-saved registers */
+>> +        stp   x19, x20, [x0, #RESUME_CTX_X19]
+>> +        stp   x21, x22, [x0, #RESUME_CTX_X21]
+>> +        stp   x23, x24, [x0, #RESUME_CTX_X23]
+>> +        stp   x25, x26, [x0, #RESUME_CTX_X25]
+>> +        stp   x27, x28, [x0, #RESUME_CTX_X27]
+>> +        stp   x29, lr, [x0, #RESUME_CTX_X29]
+>> +
+>> +        /* Store stack-pointer */
+>> +        mov   x2, sp
+>> +        str   x2, [x0, #RESUME_CTX_SP]
+>> +
+>> +        /* Store system control registers */
+>> +        mrs   x2, VBAR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_VBAR_EL2]
+>> +        mrs   x2, VTCR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_VTCR_EL2]
+>> +        mrs   x2, VTTBR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_VTTBR_EL2]
+>> +        mrs   x2, TPIDR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_TPIDR_EL2]
+>> +        mrs   x2, MDCR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_MDCR_EL2]
+>> +        mrs   x2, HSTR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_HSTR_EL2]
+>> +        mrs   x2, CPTR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_CPTR_EL2]
+>> +        mrs   x2, HCR_EL2
+>> +        str   x2, [x0, #RESUME_CTX_HCR_EL2]
+> 
+> Do you think we should save also CNTHCTL_EL2? Apologies it escaped my first review,
+> but I see we program it in the boot cpu path + secondary cpu path: init_timer_interrupt().
+
+
+Yes, CNTHCTL_EL2 is programmed by init_timer_interrupt() during the 
+initialization of both boot and secondary CPUs. Whether it needs to be 
+saved here depends on the resume path:
+
+  - If the resume handler (after prepare_resume_ctx() returns 0) 
+re-invokes timer initialization, it is already covered.
+  - If not, CNTHCTL_EL2 should be added to struct resume_cpu_context and 
+included in the save/restore assembly.
+
+If I understand the current flow correctly:
+  - Secondary CPUs wake up via hotplug, so they execute 
+start_secondary()->init_timer_interrupt() and configure CNTHCTL_EL2.
+  - The boot CPU wakes up via hyp_resume() and jumps straight back to C 
+code, which appears to bypass init_timer_interrupt() call. At least I 
+have not spotted where system_suspend() would re-invoke it.
+
+
+> 
+> The rest looks ok.
+> 
+> Cheers,
+> Luca
+> 
+> 
 
 
