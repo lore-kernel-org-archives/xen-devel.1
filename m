@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AADCD37AC
-	for <xen-devel@archiver.kernel.org>; Sun, 17 May 2026 15:13:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1311281.1581479 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460C4CD4F47
+	for <xen-devel@archiver.kernel.org>; Sun, 17 May 2026 15:53:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1311234.1581488 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOdAl-0007dg-7Q; Sun, 17 May 2026 15:12:55 +0000
+	id 1wOdnv-0004wY-1C; Sun, 17 May 2026 15:53:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1311281.1581479; Sun, 17 May 2026 15:12:55 +0000
+Received: by outflank-mailman (output) from mailman id 1311234.1581488; Sun, 17 May 2026 15:53:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOdAl-0007dZ-3Y; Sun, 17 May 2026 15:12:55 +0000
-Received: by outflank-mailman (input) for mailman id 1311281;
- Sun, 17 May 2026 15:12:54 +0000
+	id 1wOdnu-0004wR-UE; Sun, 17 May 2026 15:53:22 +0000
+Received: by outflank-mailman (input) for mailman id 1311234;
+ Sun, 17 May 2026 13:38:26 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1wOdAj-0007dT-Ss
- for xen-devel@lists.xenproject.org; Sun, 17 May 2026 15:12:54 +0000
+ (envelope-from <yashsuthar983@gmail.com>) id 1wObhK-0003F3-QC
+ for xen-devel@lists.xenproject.org; Sun, 17 May 2026 13:38:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wOdAj-005ro4-50
- for xen-devel@lists.xenproject.org; Sun, 17 May 2026 17:12:53 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wObhK-0009gY-2g
+ for xen-devel@lists.xenproject.org; Sun, 17 May 2026 15:38:26 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6a09dae3-e002-0a2a0a5209dd-0a2a45098bc2-4
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 17:12:53 +0200
-Received: from [209.85.208.169] (helo=mail-lj1-f169.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6a09daf4-2497-0a2a45090019-d155d0a9cd1d-3
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 17:12:52 +0200
-Received: by mail-lj1-f169.google.com with SMTP id
- 38308e7fff4ca-393c40246afso18785471fa.1
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 08:12:52 -0700 (PDT)
-Received: from [192.168.0.112] ([91.123.151.42])
+ (envelope-from <yashsuthar983@gmail.com>)
+ id 6a09c4cf-bab6-0a2a0a5309dd-0a2a4502e032-2
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 15:38:26 +0200
+Received: from [209.85.214.178] (helo=mail-pl1-f178.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <yashsuthar983@gmail.com>)
+ id 6a09c4d0-af86-0a2a45020019-d155d6b2dcfc-3
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 15:38:25 +0200
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-2bab2548e8bso5562085ad.0
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2026 06:38:25 -0700 (PDT)
+Received: from yash-Bravo-15-B5DD.local ([14.99.167.142])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-395882c41c1sm5715151fa.12.2026.05.17.08.12.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 17 May 2026 08:12:51 -0700 (PDT)
+ d9443c01a7336-2bd5cfe64a9sm119689685ad.53.2026.05.17.06.38.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 May 2026 06:38:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,320 +53,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779030772; x=1779635572; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=z15437ihNsBn2bknoWGnhSYwX6Gf3shYweS8Kz4hD5w=;
-        b=JLGRq2zJkZUeiVv/tgQIfF8vRAICe+eZA57UAsL7RG5CuG/ee25rd6+4hI0RtNWIJh
-         csdf5ksRe5SFrpWUYfhv/3ZrNgXM5peCvrE0reoHQc1IXz7pi2jMO9UOIRfDBn964T8v
-         quiSb9CQKPOhdLYKDn5A2xAk9RDivUEfKQqxEELofBim7/cwhcnoZdrEFKi+MjiUpv/m
-         89DMXocQl0llW4B2Xmy9VT5BjMe7+TCgEw8k7gVkIo49KY+obY4NeUD8x6FqclWqaMBp
-         lqDHeqLSqKDR1rjao2Q2ej94lKDJpe4SBIjZ8RMkULnCWNsHsCxPAG7TtvdlqS8v3KS8
-         I9mw==
+        d=gmail.com; s=20251104; t=1779025104; x=1779629904; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7Up+AAAQj+csNMtbAdRw7R9ZHQCbCzjkAYPzeriCxm8=;
+        b=Pg9sdmm5yyc2RrI4QqDPfzuHYDAu6R4439w2+KGzZYDhjlvBlf4RSdBWLQPP+HnYl4
+         lGPvL7TqCTsiAQPvZ8KzspKQ6GwyrweHefCahdy5Mqos27GfUmaAcmTDVypsub77XM7N
+         C7Zx0+nhGm57bFC1Qpv+I4lLuCB5Zg/CliT96KNjqG5KC1aq8UdDDPaoMKEAkUJ+CFpH
+         vdN4XxbyPZxiBBThNZqVdG7d3WCBjBmMpK8aGnlq17d7/5J2Ixt2hwCIfLkZtaNjTvQa
+         Qevx9MgriJT8/kRlUXturrKloMNjnxJ344RijxwjEgc4R3JWstnFmOcufpyasPNxXQa2
+         Qpbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779030772; x=1779635572;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=z15437ihNsBn2bknoWGnhSYwX6Gf3shYweS8Kz4hD5w=;
-        b=WR0Kqo0KEwYcyo5TMm2Zz8ETNOE/W1ooNMdZEjJJgrtgoWMZ/WWvE/1cN8WHZxHPtu
-         ZklBfunvySlSvELR93OSzFZHYjX42kUB1qiSXMBV+m9OHZVUEnWx/i58dP1098l9aza9
-         00/cFzCh8v9GfwTLs8/bbbwvE+JCwVPakIm8biPCUnaWsvpL7gZf1ozeSOaKLs3Tl1JP
-         ZbtOwCFWAIiLoUY15x2a/r2k9pL+NddpMeFunjbagcg8v1j+uXqePx7rHmoxX3bNVyEV
-         AEaXKUgI6OM2I4Jm4pBHV/9LTzuKuPSTLUfEmjN0h+AD14LEYxlxGIJyFP+lKO1g+6KT
-         6+Qg==
-X-Gm-Message-State: AOJu0Yzs64FPMNlYzmpQCCbJHqU41OM3Q51CbIIT3NixHgR9iTM/FJ9+
-	t+WPlkyp4xrjrKZVz6ak1im71QPVEDnevgMEmOyLZs1x6K4MC69W3ud8
-X-Gm-Gg: Acq92OFmynKw2TWYs5lKlz6/N2s+g4rj5kq7i17JxwDbfZehAgqSz4dbDRbchf69BD9
-	jT8ZVLTg8CYqDXim5xhdWb/DTZM0G1ZnPcb3a+0AL/+2R6KKGkd7hWHYtBuh492CmJIS5/tT8oY
-	Q1NDyX1lhvCkFSudUVc1XQVEh3JamLFna3lz5aaOrUSxot+IJPLFs1NsD55lPwyrAo4NwiHfPAb
-	9gc188pBCAJpTZkhVj6LyYyQdHbR7tgsMUxHr51f50vvup17r6xL5HgN6x95LxUuxT8r/VgrVZ7
-	gbU7pY381HB26Sbcdq0KuxAsvBjxwMjCSf7C8G2WLOWmUWDEhf2j7l5lGTogR1Nke7bGIh6faSw
-	YVHd8A4VN5M+PfsKk9lArbNcjmnEbfIgj+oZk7t3gDwEElaY2eAEmN/Y74zLOjjmFX3IhR/Bzw7
-	HkvgrEaPR+WvbsN08oob995Fktew==
-X-Received: by 2002:a2e:a995:0:b0:38e:186e:350e with SMTP id 38308e7fff4ca-39561a26af2mr33975421fa.7.1779030771927;
-        Sun, 17 May 2026 08:12:51 -0700 (PDT)
-Message-ID: <636cda11-bc98-44e9-a333-5a61cc86e0dd@gmail.com>
-Date: Sun, 17 May 2026 18:12:48 +0300
+        d=1e100.net; s=20251104; t=1779025104; x=1779629904;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7Up+AAAQj+csNMtbAdRw7R9ZHQCbCzjkAYPzeriCxm8=;
+        b=TXTGz4x8gAHLGByFCFrS+4tILwR1LL6TgwWNn8Wg0BB2rMOmoKIY+m9elGM6zhjz1r
+         1H2PRojFJJ3mt+yQnvhun6LLyrrOohRTIiiWLYrLTJk/LuM9zm0pjDRA8KFGmrhgaPq2
+         9yLTY0HXg8dd7lNo00nRY0ILLBvX8O26HR1z10Xyk42liTQ/EkSAT61YRu+vngnRL62K
+         jP9vNgh/DknWizZopc2uFrVn0YppvZLQAgetMSNMwhjqZ3Mb1H1Qf7UXERqqXLucpHHG
+         /Sxs6w+pWMv2on4KFPJ/PUwh3x0h1tbM9nZMesqxe4J8Pw3redfx0E+AEtxxZQP/ph+F
+         N4lg==
+X-Forwarded-Encrypted: i=1; AFNElJ+Z9ehiacpEcDYRHKm43wI2+qYCsc6O+1sIzlGIzRLoIA13Ew2+PNtRljTG82WXtdPlSbC+f4MsLag=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yx7VV//xPeyRiaoTynECDHaVmyWGkNGr0cnuCF4hujr4042PpIj
+	33TJZi5iSRhp5Sr9iEEToeFw/vbXrlFeNmtRArZUsGnCPZF6H3JfHSBr
+X-Gm-Gg: Acq92OGgDB/QpA9lVmqPzOCOYyeuU3pPtUIQ0b+f+jfc9A8wS0qlqWcm072oyNBSv7l
+	dLDiJYabIN360QlMVjQBRgzEP47JWPEX7y0t6bAcgE+eKZCH54iIDgdzN+6PkoY9YoY1j+WvdP3
+	1VB7NWAeGMmMnlH9uMIHWy1gJ9yqSArSYxILS22Gck9FdhwkfayS+2eWfOqufDqmhFT9AtUrkTk
+	akTzueS1Udtw9UYo9Zm86MpDA0v5IcGnVY3kmXM7lXA9RwlypOyQ7OPyimCTkbOK8mgdwswluFC
+	f1R50wdnIqnksex+ugzXVOg7o+5OuiVIuIHY+gJvgClsMqO9endIgN0Yuw8TI8jFNTQbFAvcTsv
+	D++L20A+HGpizd5q26iBOHlQM50Q/S41dtejvhWIKofQu0KIDvxHj0KaoK2hO8Syr7lxjNzYuTB
+	PAujOJEswKXKRsveeDRnKO64AKlZp0Q4/i4GOtjS2aE7CTfZoJ/QVfYy4=
+X-Received: by 2002:a17:902:e743:b0:2b4:696b:7bb7 with SMTP id d9443c01a7336-2bd7e8ae070mr127427075ad.15.1779025103805;
+        Sun, 17 May 2026 06:38:23 -0700 (PDT)
+From: Yash Suthar <yashsuthar983@gmail.com>
+To: jgross@suse.com,
+	sstabellini@kernel.org
+Cc: oleksandr_tyshchenko@epam.com,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Yash Suthar <yashsuthar983@gmail.com>
+Subject: [PATCH] xen: balloon: Replace sprintf() with sysfs_emit()
+Date: Sun, 17 May 2026 19:08:17 +0530
+Message-ID: <20260517133817.29691-1-yashsuthar983@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 08/13] iommu/ipmmu-vmsa: Implement suspend/resume
- callbacks
-To: Luca Fancellu <Luca.Fancellu@arm.com>,
- Mykola Kvach <xakep.amatop@gmail.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Mykola Kvach <mykola_kvach@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1778605274.git.mykola_kvach@epam.com>
- <4162aa58c351677a4a267fe85989c6d4e07487d8.1778605274.git.mykola_kvach@epam.com>
- <28587F96-D8A1-46FA-91B0-D9A30E55EFC9@arm.com>
-Content-Language: en-US
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <28587F96-D8A1-46FA-91B0-D9A30E55EFC9@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1779030772-41165A53-7D061DD8/0/0
+X-purgate-ID: tlsNG-720697/1779025106-82F6E161-133FE200/0/0
 X-purgate-type: clean
-X-purgate-size: 8134
+X-purgate-size: 1548
 
+Replace sprintf() calls with sysfs_emit() to follow current kernel
+coding standards.
 
+sysfs_emit() is the preferred method for formatting sysfs output as it
+provides better bounds checking and is more secure.
 
-On 5/14/26 18:57, Luca Fancellu wrote:
-> Hi Mykola,
+Signed-off-by: Yash Suthar <yashsuthar983@gmail.com>
+---
+ drivers/xen/xen-balloon.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Hello Luca and Mykola
-
-> 
->>
->> diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
->> index fa9ab9cb13..e1b47a5824 100644
->> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
->> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
->> @@ -71,6 +71,8 @@
->> })
->> #endif
->>
->> +#define dev_dbg(dev, fmt, ...)    \
->> +    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
->> #define dev_info(dev, fmt, ...)    \
->>      dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
->> #define dev_warn(dev, fmt, ...)    \
->> @@ -130,6 +132,24 @@ struct ipmmu_features {
->>      unsigned int imuctr_ttsel_mask;
->> };
->>
->> +#ifdef CONFIG_SYSTEM_SUSPEND
->> +
->> +struct ipmmu_reg_ctx {
->> +    unsigned int imttlbr0;
->> +    unsigned int imttubr0;
->> +    unsigned int imttbcr;
->> +    unsigned int imctr;
->> +};
->> +
->> +struct ipmmu_vmsa_backup {
->> +    struct device *dev;
->> +    unsigned int *utlbs_val;
->> +    unsigned int *asids_val;
->> +    struct list_head list;
->> +};
->> +
->> +#endif
->> +
->> /* Root/Cache IPMMU device's information */
->> struct ipmmu_vmsa_device {
->>      struct device *dev;
->> @@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
->>      struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
->>      unsigned int utlb_refcount[IPMMU_UTLB_MAX];
->>      const struct ipmmu_features *features;
->> +#ifdef CONFIG_SYSTEM_SUSPEND
->> +    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
->> +#endif
->> };
->>
->> /*
->> @@ -547,6 +570,245 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
->>      spin_unlock_irqrestore(&mmu->lock, flags);
->> }
->>
->> +#ifdef CONFIG_SYSTEM_SUSPEND
->> +
->> +static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
->> +static LIST_HEAD(ipmmu_devices_backup);
->> +
->> +static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
->> +
->> +static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
->> +                                   unsigned int utlb)
->> +{
->> +    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
->> +}
->> +
->> +static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
->> +{
->> +    struct ipmmu_vmsa_backup *backup_data;
->> +
->> +    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
->> +
->> +    spin_lock(&ipmmu_devices_backup_lock);
->> +
->> +    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
->> +    {
->> +        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
->> +        unsigned int i;
->> +
->> +        if ( to_ipmmu(backup_data->dev) != mmu )
->> +            continue;
->> +
->> +        for ( i = 0; i < fwspec->num_ids; i++ )
->> +        {
->> +            unsigned int utlb = fwspec->ids[i];
->> +
->> +            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
->> +            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
->> +        }
->> +    }
->> +
->> +    spin_unlock(&ipmmu_devices_backup_lock);
->> +}
->> +
->> +static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
->> +{
->> +    struct ipmmu_vmsa_backup *backup_data;
->> +
->> +    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
->> +
->> +    spin_lock(&ipmmu_devices_backup_lock);
->> +
->> +    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
->> +    {
->> +        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
->> +        unsigned int i;
->> +
->> +        if ( to_ipmmu(backup_data->dev) != mmu )
->> +            continue;
->> +
->> +        for ( i = 0; i < fwspec->num_ids; i++ )
->> +        {
->> +            unsigned int utlb = fwspec->ids[i];
->> +
->> +            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
->> +            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
->> +        }
->> +    }
->> +
->> +    spin_unlock(&ipmmu_devices_backup_lock);
->> +}
->> +
->> +static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
->> +{
->> +    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
->> +    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
->> +
->> +    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
->> +
->> +    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
->> +    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
->> +    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
->> +    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
->> +}
->> +
->> +static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
->> +{
->> +    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
->> +    struct ipmmu_reg_ctx *regs  = mmu->reg_backup[domain->context_id];
-> 
-> NIT: There is a double space before the `=`
-> 
->> +
->> +    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
->> +
->> +    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
->> +    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
->> +    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
->> +    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
-> 
-> I see in ipmmu_tlb_invalidate() we do:
-> dsb(sy);
-> ipmmu_tlb_sync(domain);
-> 
-> Is it safe to omit them here?
-
-Luca, good question, thanks. Below my understanding (which might be wrong):
-
-The IMCTR_FLUSH bit here is not an explicit TLB invalidation request — 
-it is required by the HW whenever context registers are modified 
-(regardless of whether an actual TLB flush is the intent). For example, 
-ipmmu_domain_init_context() similarly writes:
-
-ipmmu_ctx_write_root(domain, IMCTR,
-                      IMCTR_VA64 | IMCTR_INTEN | IMCTR_FLUSH | IMCTR_MMUEN);
-
-and does not follow it with dsb(sy) / ipmmu_tlb_sync().
-
-In contrast, ipmmu_tlb_invalidate() does include the sync because it is 
-an explicit flush request from the P2M framework, and we need a 
-guarantee that the invalidation has completed before proceeding.
-
-Here, we are simply restoring context registers after resume, there is 
-no caller waiting on flush completion, so the additional synchronization 
-is not necessary from my PoV.
-
-
-> 
->> +}
->> +
->> +/*
->> + * Xen: Unlike Linux implementation, Xen uses a single driver instance
->> + * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
->> + * callbacks to be invoked for each IPMMU device. So, we need to iterate
->> + * through all registered IPMMUs performing required actions.
->> + *
->> + * Also take care of restoring special settings, such as translation
->> + * table format, etc.
->> + */
->> +static int __must_check ipmmu_suspend(void)
->> +{
->> +    struct ipmmu_vmsa_device *mmu;
->> +
->> +    if ( !iommu_enabled )
->> +        return 0;
->> +
->> +    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
->> +
->> +    spin_lock(&ipmmu_devices_lock);
->> +
->> +    list_for_each_entry( mmu, &ipmmu_devices, list )
->> +    {
->> +        if ( ipmmu_is_root(mmu) )
->> +        {
->> +            unsigned int i;
->> +
->> +            for ( i = 0; i < mmu->num_ctx; i++ )
->> +            {
->> +                if ( !mmu->domains[i] )
->> +                    continue;
->> +                ipmmu_domain_backup_context(mmu->domains[i]);
->> +            }
->> +        }
->> +        else
->> +            ipmmu_utlbs_backup(mmu);
->> +    }
->> +
->> +    spin_unlock(&ipmmu_devices_lock);
->> +
->> +    return 0;
->> +}
->> +
->> +static void ipmmu_resume(void)
->> +{
->> +    struct ipmmu_vmsa_device *mmu;
->> +
->> +    if ( !iommu_enabled )
->> +        return;
->> +
->> +    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
->> +
->> +    spin_lock(&ipmmu_devices_lock);
->> +
->> +    list_for_each_entry( mmu, &ipmmu_devices, list )
-> 
-> This loop has an ordering problem because we can run ipmmu_utlbs_restore() before
-> the root ipmmu is restored (ipmmu_probe() uses `list_add()`).
-> Maybe going twice on the list, restoring first the root and in the second round the rest
-> should work.
-> 
-> Cheers,
-> Luca
-> 
-> 
+diff --git a/drivers/xen/xen-balloon.c b/drivers/xen/xen-balloon.c
+index b293d7652f15..67b0e2dbe84a 100644
+--- a/drivers/xen/xen-balloon.c
++++ b/drivers/xen/xen-balloon.c
+@@ -138,7 +138,7 @@ EXPORT_SYMBOL_GPL(xen_balloon_init);
+ 				   struct device_attribute *attr,	\
+ 				   char *buf)				\
+ 	{								\
+-		return sprintf(buf, format, ##args);			\
++		return sysfs_emit(buf, format, ##args);			\
+ 	}								\
+ 	static DEVICE_ATTR_RO(name)
+ 
+@@ -155,7 +155,7 @@ static DEVICE_BOOL_ATTR(scrub_pages, 0644, xen_scrub_pages);
+ static ssize_t target_kb_show(struct device *dev, struct device_attribute *attr,
+ 			      char *buf)
+ {
+-	return sprintf(buf, "%lu\n", PAGES2KB(balloon_stats.target_pages));
++	return sysfs_emit(buf, "%lu\n", PAGES2KB(balloon_stats.target_pages));
+ }
+ 
+ static ssize_t target_kb_store(struct device *dev,
+@@ -180,7 +180,7 @@ static DEVICE_ATTR_RW(target_kb);
+ static ssize_t target_show(struct device *dev, struct device_attribute *attr,
+ 			   char *buf)
+ {
+-	return sprintf(buf, "%llu\n",
++	return sysfs_emit(buf, "%llu\n",
+ 		       (unsigned long long)balloon_stats.target_pages
+ 		       << PAGE_SHIFT);
+ }
+-- 
+2.43.0
 
 
