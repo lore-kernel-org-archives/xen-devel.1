@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E5FCD4F52
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 15:23:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1312034.1582228 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 196D5CD4F49
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 15:34:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1312085.1582254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOznv-0003DF-84; Mon, 18 May 2026 15:22:51 +0000
+	id 1wOzyW-00078y-0K; Mon, 18 May 2026 15:33:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1312034.1582228; Mon, 18 May 2026 15:22:51 +0000
+Received: by outflank-mailman (output) from mailman id 1312085.1582254; Mon, 18 May 2026 15:33:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOznv-0003D3-4N; Mon, 18 May 2026 15:22:51 +0000
-Received: by outflank-mailman (input) for mailman id 1312034;
- Mon, 18 May 2026 15:22:50 +0000
+	id 1wOzyV-00078r-U0; Mon, 18 May 2026 15:33:47 +0000
+Received: by outflank-mailman (input) for mailman id 1312085;
+ Mon, 18 May 2026 15:33:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea7d1000f373@swg.vates.tech>)
- id 1wOznu-0003BM-3p
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 15:22:50 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wOzyU-00078J-VQ
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 15:33:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wOznt-00AUfW-G9
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 17:22:49 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea7d1000f373@swg.vates.tech>)
- id 6a0b2ec3-2eae-0a2a0a5409dd-0a2a4509caf4-16
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:49 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea7d1000f373@swg.vates.tech>)
- id 6a0b2ec2-2497-0a2a45090019-b9ff1c229311-6
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:49 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19e3baea7d1000f373.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 18 May 2026 15:22:42 +0000
-Received: from localhost.localdomain (88-175-170-134.subs.proxad.net
- [88.175.170.134]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id EF3F98109B;
- Mon, 18 May 2026 17:22:41 +0200 (CEST)
+ id 1wOzyU-00AWpt-7Y
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 17:33:46 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0b314a-bab6-0a2a0a5309dd-0a2a45078cc2-26
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:33:46 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0b3159-229c-0a2a45070019-d155802fc86e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:33:46 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4891e5b9c1fso20359615e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 08:33:46 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45e6a135f0csm19579704f8f.27.2026.05.18.08.33.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 May 2026 08:33:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,339 +52,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=O6ocY0J81NVJcReSQBFthd8sYgfa3BLGnk02uzct2iw=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=ZrZPJ3s/fleYX/xAysYJ6HoF8iTG+nxLxXGyBOyWze9EpmaheIRgzg7xUVJcAT7XpNRe7/Pvj
- nPqkPggKwizR6iCYMTUDzHaoWj9G8a4fGQx0U6Hzib+wWfiW6YhjRipYIzHaDUW6RpFl+SlE8EK
- cFqJciEuoyRIyo7AjMyOj3+7TjjvueZ7Og9t6kAawQjo+zZv9OeGQKHd4JNBP8FazAyKZiUQM+l
- 0xTTl2bD6DVC3gFsdZLYqnkg7OMcPUD107ITIFkpgJirbPbP3lZ2ywfjZbx/vdD1vc5vymA4Lhj
- OPUEtYTXexGhN67R2ybkLpRKeU7tXgKj55l0X8p0gC2Q==
-X-Zone-Loop: 2c2c7f5aebc096ebbb0e05f1a44c4488354743e3b1d5
-x-campaign-type: default
-x-transaction-id: 8e04ef81-ca38-477e-a597-392152684044
-x-swg-uid: 01-acdefb6b-ad92-4dfd-a095-c0c107a09548
-X-Mailer: Sweego
-Message-ID:
- <1779117762.8631fc262581453bbf619ec5b2062170.19e3baea7d1000f373@vates.tech>
-x-swg-bid: 1779117762.8631fc262581453bbf619ec5b2062170.19e3baea7d1000f373
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Teddy Astie <teddy.astie@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 3/5] pci: Use pci_sbdf_t in pci_device_detect()
-Date: Mon, 18 May 2026 17:21:27 +0200
-In-Reply-To: <cover.1779116255.git.teddy.astie@vates.tech>
-References: <cover.1779116255.git.teddy.astie@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1779118425; x=1779723225; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=ttAFH9En8RKoxwxbEZQby/iBflt+QkURqBpl3u3nteE=;
+        b=VcK73qmHILzm8N9ihTSNTmAsTISkc2vgBK0EyNVyVQo2Updp65aFqLSmxc7wzhFuZt
+         dsadzM1IrPjqPLtSRVYw5t5HarMKupSnCOi6FM8kCcPTQs9BKaK1a/uFnaL+aZYb9haa
+         BhyKkLM/wmoJ+1iu92/SSL22bY+/IprlDXDUXZDdmIniTWo/G/98aQfCj6CzD6EfKoaC
+         HHUr4b+UwQ92AYLXmVMt+Xpk6xHVEsmGdbhGgvydyRGZRnpdO32deMpUPC1rwJy2ZG2v
+         T6p8YriaHfT45H6htiK1Aq7SQ+q1FJ8G8omH5YqctlvBS6F1yfmtQVncJdBftUA3xSx7
+         nU4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779118425; x=1779723225;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ttAFH9En8RKoxwxbEZQby/iBflt+QkURqBpl3u3nteE=;
+        b=UL+Wk3RE0r9WrH18+66HcEk4K5LJ6cpg2NEm3r81aH+Dl6fPq5mzyHjWtUkn3Ph/gP
+         Nf3CcqPA2FGRZ7RK9e6cuBDjoE3f1imgXLxu7ctRern15H9uFCuIUTCsz99zWPj9THpy
+         FjzPg9kqHh8Kcc03RBiqcp34aBcmtesRhrVZKsTpdiU2Rt3fJD+/yv7Rwl5KQgmYogOE
+         8vXXcjKAcvEgApUT5vUaHiyLvyhZJN9o8toDKtHfRfyplhcffX7hXX90fDeRBGKcolWy
+         zp8laUe03jx1m/sT5CqnkOTbu/PO9iUFHPJUxUEtRfmY7RmaR2ZMgLRvKWX1WSOpy1Wl
+         a8tA==
+X-Forwarded-Encrypted: i=1; AFNElJ+3f7JkFred6Ze9HsRHHgDBdV6K4G+P3rLBcuuw1ZQSeJnkDq/yLqsF+CN6YcrQFU0WvMJtN6y1XzM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyikHZncwkp0WYnZXsHIoi81zVMFv0Eb600hyzaFZE3M3SwfxAW
+	DMT+VWHloK1F3qjRH5tnEtMAoKij4dWFx6GEtAIWxYtRmZCOq/4EYd2j7WO31u39bQ==
+X-Gm-Gg: Acq92OHWy4HHXN7P5ZTTZkgYyUhq8bcSDSKqLDkiOCdKNLHVUFYaR+S09Wp0LEzNUHI
+	9IqDAbm/6uOyX6ZYQS0w34zWpuBYd0U/1SBfpOnksAGUOfaBA0xNsV6c1mxcM2A5J8zNNFRQihs
+	sIiXmA7exFzTyEEWBn6mlOXWSYs1D7HMGc623q3lvdp8NYrb85AfVJbqIbywv+JrHYn3zqBfzQq
+	VoA2AsTujj/7LCUEUsWgA4QLF+5WSFlwuGM93Tx6lzUOcs2oBXOeT9/iN/il4oYvaSo0hW0agbZ
+	YLQHYfCtOA5iRjHYIb8CEtvsgCKu+iKf48v4O0k9u0LzPItz76UNuU5sU8ebYQ7T+RPt63Mf77B
+	4gNQpKy9ewkTqMoxm7NIFq3ph3rGtiLyIGIv+cKyFu9s54i6Fp7blywGt6zTmr1aMYCHjLXHbU6
+	ETOUJPkvQObrYVAxKglYxvqDYNuz1efTkQEs3EAPfLDUT1F9eAZsFMTKyTsh0SFzEU+JGGZfpTl
+	qS4cSb4ORqUHDk=
+X-Received: by 2002:a05:600c:4e87:b0:48a:768b:eea9 with SMTP id 5b1f17b1804b1-48fe60e51bamr254801655e9.4.1779118425440;
+        Mon, 18 May 2026 08:33:45 -0700 (PDT)
+Message-ID: <8b076265-8559-40cd-ac65-418e7b3c9e7e@suse.com>
+Date: Mon, 18 May 2026 17:33:44 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.e12.78b7f5f2db119c52.19e3baea65b.9c8c7b9182c5f9=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1779117762139
-X-purgate-ID: tlsNG-bad1c0/1779117769-4015DA53-E145900E/0/0
-X-purgate-type: clean
-X-purgate-size: 10736
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/26] xen/riscv: Implement construct_domain()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
+ <3b1c60095c8a963e7df3ca5025e637e678f5ee71.1778250616.git.oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <3b1c60095c8a963e7df3ca5025e637e678f5ee71.1778250616.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1779118426-23B78C48-187BEEBB/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1944
 
----=Part.e12.78b7f5f2db119c52.19e3baea65b.9c8c7b9182c5f9=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 08.05.2026 16:43, Oleksii Kurochko wrote:
+> Implement construct_domain() function for RISC-V, which performs initial setup
+> for the domain's first vCPU, loads the kernel, initrd, and device tree,
+> and sets up guest CPU registers for boot.
+> 
+> It also creates additional vCPUs up to max_vcpus and assigns the device tree
+> address and boot cpuid in registers.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Use a single pci_sbdf_t instead of each of its part as individual parameter=
-s=2E
+Acked-by: Jan Beulich <jbeulich@suse.com>
+with ...
 
-Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
----
- xen/drivers/char/ehci-dbgp=2Ec       | 35 ++++++++++++++----------------
- xen/drivers/passthrough/pci=2Ec      | 16 +++++++-------
- xen/drivers/passthrough/vtd/dmar=2Ec | 33 +++++++++++-----------------
- xen/include/xen/pci=2Eh              |  2 +-
- 4 files changed, 38 insertions(+), 48 deletions(-)
+> --- /dev/null
+> +++ b/xen/arch/riscv/domain-build.c
+> @@ -0,0 +1,52 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +
+> +#include <xen/fdt-domain-build.h>
+> +#include <xen/fdt-kernel.h>
+> +#include <xen/init.h>
+> +#include <xen/sched.h>
+> +
+> +#include <asm/current.h>
+> +#include <asm/guest_access.h>
+> +
+> +int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+> +{
+> +    struct vcpu *v = d->vcpu[0];
+> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(v);
+> +
+> +    BUG_ON(v->is_initialised);
+> +
+> +    /*
+> +     * At the moment *_load() don't return value and will just panic()
+> +     * inside.
+> +     * TODO: it will be good to change that.
+> +     */
+> +    kernel_load(kinfo);
+> +    initrd_load(kinfo, copy_to_guest_phys);
+> +    dtb_load(kinfo, copy_to_guest_phys);
+> +
+> +    regs->sepc = kinfo->entry;
+> +
+> +    /* Guest boot cpuid = 0 */
+> +    regs->a0 = 0;
+> +    regs->a1 = kinfo->dtb_paddr;
+> +
+> +    for ( unsigned int i = 1; i < d->max_vcpus; i++ )
+> +    {
+> +        const struct vcpu *tmp_v = vcpu_create(d, i);
+> +
+> +        if ( !tmp_v )
+> +        {
+> +            printk("Failed to allocate %pd v%d\n", d, i);
 
-diff --git a/xen/drivers/char/ehci-dbgp=2Ec b/xen/drivers/char/ehci-dbgp=
-=2Ec
-index a5c79f56fc=2E=2E39a047eb3f 100644
---- a/xen/drivers/char/ehci-dbgp=2Ec
-+++ b/xen/drivers/char/ehci-dbgp=2Ec
-@@ -681,16 +681,14 @@ static int dbgp_control_msg(struct ehci_dbgp *dbgp, =
-unsigned int devnum,
-     return ret;
- }
-=20
--static unsigned int __init __find_dbgp(u8 bus, u8 slot, u8 func)
-+static unsigned int __init __find_dbgp(pci_sbdf_t sbdf)
- {
--    uint32_t class =3D pci_conf_read32(PCI_SBDF(0, bus, slot, func),
--                                     PCI_CLASS_REVISION);
-+    uint32_t class =3D pci_conf_read32(sbdf, PCI_CLASS_REVISION);
-=20
-     if ( (class >> 8) !=3D PCI_CLASS_SERIAL_USB_EHCI )
-         return 0;
-=20
--    return pci_find_cap_offset(PCI_SBDF(0, bus, slot, func),
--                               PCI_CAP_ID_EHCI_DEBUG);
-+    return pci_find_cap_offset(sbdf, PCI_CAP_ID_EHCI_DEBUG);
- }
-=20
- static unsigned int __init find_dbgp(struct ehci_dbgp *dbgp,
-@@ -704,20 +702,20 @@ static unsigned int __init find_dbgp(struct ehci_dbg=
-p *dbgp,
-         {
-             for ( func =3D 0; func < 8; func++ )
-             {
-+                pci_sbdf_t sbdf =3D PCI_SBDF(0, bus, slot, func);
-                 unsigned int cap;
-=20
--                if ( !pci_device_detect(0, bus, slot, func) )
-+                if ( !pci_device_detect(sbdf) )
-                 {
-                     if ( !func )
-                         break;
-                     continue;
-                 }
-=20
--                cap =3D __find_dbgp(bus, slot, func);
-+                cap =3D __find_dbgp(sbdf);
-                 if ( !cap || ehci_num-- )
-                 {
--                    if ( !func && !(pci_conf_read8(PCI_SBDF(0, bus, slot,=
- func),
--                                                   PCI_HEADER_TYPE) & 0x8=
-0) )
-+                    if ( !func && !(pci_conf_read8(sbdf, PCI_HEADER_TYPE)=
- & 0x80) )
-                         break;
-                     continue;
-                 }
-@@ -1510,25 +1508,24 @@ void __init ehci_dbgp_init(void)
-     }
-     else if ( strncmp(opt_dbgp + 4, "@pci", 4) =3D=3D 0 )
-     {
--        unsigned int bus, slot, func;
--
--        e =3D parse_pci(opt_dbgp + 8, NULL, &bus, &slot, &func);
-+        pci_sbdf_t sbdf =3D PCI_SBDF(0, 0, 0, 0);
-+       =20
-+        e =3D parse_pci_sbdf(opt_dbgp + 8, &sbdf);
-         if ( !e || *e )
-             return;
-=20
--        dbgp->bus =3D bus;
--        dbgp->slot =3D slot;
--        dbgp->func =3D func;
-+        dbgp->bus =3D sbdf=2Ebus;
-+        dbgp->slot =3D sbdf=2Edev;
-+        dbgp->func =3D sbdf=2Efn;
-=20
--        if ( !pci_device_detect(0, bus, slot, func) )
-+        if ( !pci_device_detect(sbdf) )
-             return;
-=20
--        dbgp->cap =3D __find_dbgp(bus, slot, func);
-+        dbgp->cap =3D __find_dbgp(sbdf);
-         if ( !dbgp->cap )
-             return;
-=20
--        dbgp_printk("Using EHCI debug port on %02x:%02x=2E%u\n",
--                    bus, slot, func);
-+        dbgp_printk("Using EHCI debug port on %pp\n", &sbdf);
-     }
-     else
-         return;
-diff --git a/xen/drivers/passthrough/pci=2Ec b/xen/drivers/passthrough/pci=
-=2Ec
-index 464bb0fee4=2E=2E7b2898bd5a 100644
---- a/xen/drivers/passthrough/pci=2Ec
-+++ b/xen/drivers/passthrough/pci=2Ec
-@@ -1166,11 +1166,11 @@ out:
-     return ret;
- }
-=20
--bool __init pci_device_detect(u16 seg, u8 bus, u8 dev, u8 func)
-+bool __init pci_device_detect(pci_sbdf_t sbdf)
- {
-     u32 vendor;
-=20
--    vendor =3D pci_conf_read32(PCI_SBDF(seg, bus, dev, func), PCI_VENDOR_=
-ID);
-+    vendor =3D pci_conf_read32(sbdf, PCI_VENDOR_ID);
-     /* some broken boards return 0 or ~0 if a slot is empty: */
-     if ( (vendor =3D=3D 0xffffffffU) || (vendor =3D=3D 0x00000000U) ||
-          (vendor =3D=3D 0x0000ffffU) || (vendor =3D=3D 0xffff0000U) )
-@@ -1221,24 +1221,24 @@ static int __init cf_check _scan_pci_devices(struc=
-t pci_seg *pseg, void *arg)
-         {
-             for ( func =3D 0; func < 8; func++ )
-             {
--                if ( !pci_device_detect(pseg->nr, bus, dev, func) )
-+                pci_sbdf_t sbdf =3D PCI_SBDF(pseg->nr, bus, dev, func);
-+
-+                if ( !pci_device_detect(sbdf) )
-                 {
-                     if ( !func )
-                         break;
-                     continue;
-                 }
-=20
--                pdev =3D alloc_pdev(pseg, bus, PCI_DEVFN(dev, func));
-+                pdev =3D alloc_pdev(pseg, bus, sbdf=2Edevfn);
-                 if ( !pdev )
-                 {
-                     printk(XENLOG_WARNING "%pp: alloc_pdev failed\n",
--                           &PCI_SBDF(pseg->nr, bus, dev, func));
-+                           &sbdf);
-                     return -ENOMEM;
-                 }
-=20
--                if ( !func && !(pci_conf_read8(PCI_SBDF(pseg->nr, bus, de=
-v,
--                                                        func),
--                                               PCI_HEADER_TYPE) & 0x80) )
-+                if ( !func && !(pci_conf_read8(sbdf, PCI_HEADER_TYPE) & 0=
-x80) )
-                     break;
-             }
-         }
-diff --git a/xen/drivers/passthrough/vtd/dmar=2Ec b/xen/drivers/passthroug=
-h/vtd/dmar=2Ec
-index c36f4bbd7b=2E=2E9f9b639eba 100644
---- a/xen/drivers/passthrough/vtd/dmar=2Ec
-+++ b/xen/drivers/passthrough/vtd/dmar=2Ec
-@@ -382,7 +382,7 @@ static int __init acpi_parse_dev_scope(
-             if ( iommu_verbose )
-                 printk(VTDPREFIX " endpoint: %pp\n", &dev_sbdf);
-=20
--            if ( drhd && pci_device_detect(seg, dev_sbdf=2Ebus, dev_sbdf=
-=2Edev, dev_sbdf=2Efn) )
-+            if ( drhd && pci_device_detect(dev_sbdf) )
-             {
-                 if ( pci_conf_read8(dev_sbdf,
-                                     PCI_CLASS_DEVICE + 1) !=3D 0x03
-@@ -505,7 +505,6 @@ acpi_parse_one_drhd(struct acpi_dmar_header *header)
-         acpi_register_drhd_unit(dmaru);
-     else
-     {
--        u8 b, d, f;
-         unsigned int i =3D 0;
-         union {
-             const void *raw;
-@@ -519,18 +518,16 @@ acpi_parse_one_drhd(struct acpi_dmar_header *header)
-         for ( p=2Eraw =3D dev_scope_start; i < dmaru->scope=2Edevices_cnt=
-;
-               i++, p=2Eraw +=3D p=2Escope->length )
-         {
-+            pci_sbdf_t sbdf =3D PCI_SBDF(drhd->segment, dmaru->scope=2Ede=
-vices[i]);
-+
-             if ( p=2Escope->entry_type =3D=3D ACPI_DMAR_SCOPE_TYPE_IOAPIC=
- ||
-                  p=2Escope->entry_type =3D=3D ACPI_DMAR_SCOPE_TYPE_HPET )
-                 continue;
-=20
--            b =3D PCI_BUS(dmaru->scope=2Edevices[i]);
--            d =3D PCI_SLOT(dmaru->scope=2Edevices[i]);
--            f =3D PCI_FUNC(dmaru->scope=2Edevices[i]);
--
--            if ( !pci_device_detect(drhd->segment, b, d, f) )
-+            if ( !pci_device_detect(sbdf) )
-                 printk(XENLOG_WARNING VTDPREFIX
-                        " Non-existent device (%pp) in this DRHD's scope!\=
-n",
--                       &PCI_SBDF(drhd->segment, b, d, f));
-+                       &sbdf);
-         }
-=20
-         acpi_register_drhd_unit(dmaru);
-@@ -559,17 +556,14 @@ static int __init register_one_rmrr(struct acpi_rmrr=
-_unit *rmrru)
-=20
-     for ( ; i < rmrru->scope=2Edevices_cnt; i++ )
-     {
--        u8 b =3D PCI_BUS(rmrru->scope=2Edevices[i]);
--        u8 d =3D PCI_SLOT(rmrru->scope=2Edevices[i]);
--        u8 f =3D PCI_FUNC(rmrru->scope=2Edevices[i]);
-+        pci_sbdf_t sbdf =3D PCI_SBDF(rmrru->segment, rmrru->scope=2Edevic=
-es[i]);
-=20
--        if ( pci_device_detect(rmrru->segment, b, d, f) =3D=3D 0 )
-+        if ( pci_device_detect(sbdf) =3D=3D 0 )
-         {
-             dprintk(XENLOG_WARNING VTDPREFIX,
-                     " Non-existent device (%pp) is reported"
-                     " in RMRR [%"PRIx64", %"PRIx64"]'s scope!\n",
--                    &PCI_SBDF(rmrru->segment, b, d, f),
--                    rmrru->base_address, rmrru->end_address);
-+                    &sbdf, rmrru->base_address, rmrru->end_address);
-             ignore =3D true;
-         }
-         else
-@@ -753,15 +747,13 @@ static int __init register_one_satc(struct acpi_satc=
-_unit *satcu)
-=20
-     for ( ; i < satcu->scope=2Edevices_cnt; i++ )
-     {
--        uint8_t b =3D PCI_BUS(satcu->scope=2Edevices[i]);
--        uint8_t d =3D PCI_SLOT(satcu->scope=2Edevices[i]);
--        uint8_t f =3D PCI_FUNC(satcu->scope=2Edevices[i]);
-+        pci_sbdf_t sbdf =3D PCI_SBDF(satcu->segment, satcu->scope=2Edevic=
-es[i]);
-=20
--        if ( !pci_device_detect(satcu->segment, b, d, f) )
-+        if ( !pci_device_detect(sbdf) )
-         {
-             dprintk(XENLOG_WARNING VTDPREFIX,
-                     " Non-existent device (%pp) is reported in SATC scope=
-!\n",
--                    &PCI_SBDF(satcu->segment, b, d, f));
-+                    &sbdf);
-             ignore =3D true;
-         }
-         else
-@@ -1184,8 +1176,9 @@ int cf_check intel_iommu_get_reserved_device_memory(
- static int __init cf_check parse_rmrr_param(const char *str)
- {
-     const char *s =3D str, *cur, *stmp;
--    unsigned int seg, bus, dev, func, dev_count;
-+    unsigned int dev_count;
-     unsigned long start, end;
-+    pci_sbdf_t sbdf;
-=20
-     do {
-         if ( nr_rmrr >=3D MAX_USER_RMRR )
-diff --git a/xen/include/xen/pci=2Eh b/xen/include/xen/pci=2Eh
-index 7bfc59cd75=2E=2Ed816dcad05 100644
---- a/xen/include/xen/pci=2Eh
-+++ b/xen/include/xen/pci=2Eh
-@@ -218,7 +218,7 @@ static always_inline bool pcidevs_trylock(void)
- #endif
-=20
- bool pci_known_segment(u16 seg);
--bool pci_device_detect(u16 seg, u8 bus, u8 dev, u8 func);
-+bool pci_device_detect(pci_sbdf_t sbdf);
- int scan_pci_devices(void);
- enum pdev_type pdev_type(u16 seg, u8 bus, u8 devfn);
- int find_upstream_bridge(u16 seg, u8 *bus, u8 *devfn, u8 *secbus);
---=20
-2=2E52=2E0
+... %u used here and ...
 
+> +            break;
+> +        }
+> +
+> +        dprintk(XENLOG_INFO, "Created vcpu %pv\n", tmp_v);
 
+... this line preferably dropped. Can do when committing, provided you agree.
 
--- 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.e12.78b7f5f2db119c52.19e3baea65b.9c8c7b9182c5f9=---
+Jan
 
