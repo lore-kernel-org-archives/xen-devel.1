@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DCFACD4F3C
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 15:23:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1312033.1582218 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD1CCD4F3C
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 15:23:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1312036.1582237 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOzns-0002x9-Qv; Mon, 18 May 2026 15:22:48 +0000
+	id 1wOznz-0003YD-FG; Mon, 18 May 2026 15:22:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1312033.1582218; Mon, 18 May 2026 15:22:48 +0000
+Received: by outflank-mailman (output) from mailman id 1312036.1582237; Mon, 18 May 2026 15:22:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOzns-0002x2-OC; Mon, 18 May 2026 15:22:48 +0000
-Received: by outflank-mailman (input) for mailman id 1312033;
- Mon, 18 May 2026 15:22:47 +0000
+	id 1wOznz-0003Y4-Bt; Mon, 18 May 2026 15:22:55 +0000
+Received: by outflank-mailman (input) for mailman id 1312036;
+ Mon, 18 May 2026 15:22:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea399000f373@swg.vates.tech>)
- id 1wOznq-0002k2-VT
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 15:22:47 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baeac47000f373@swg.vates.tech>)
+ id 1wOznx-0003Uv-Lg
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 15:22:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wOznq-00AUfW-BZ
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 17:22:46 +0200
+ id 1wOznx-00AUlP-25
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 17:22:53 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea399000f373@swg.vates.tech>)
- id 6a0b2ec3-2eae-0a2a0a5409dd-0a2a4509caf4-10
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:46 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baeac47000f373@swg.vates.tech>)
+ id 6a0b2ec3-2eae-0a2a0a5409dd-0a2a4509caf4-24
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:53 +0200
 Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baea399000f373@swg.vates.tech>)
- id 6a0b2ec2-2497-0a2a45090019-b9ff1c229311-5
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:46 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e3baeac47000f373@swg.vates.tech>)
+ id 6a0b2ec2-2497-0a2a45090019-b9ff1c229311-7
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 17:22:52 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19e3baea399000f373.003 for <xen-devel@lists.xenproject.org>
+ 19e3baeac47000f373.006 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 18 May 2026 15:22:41 +0000
+ Mon, 18 May 2026 15:22:43 +0000
 Received: from localhost.localdomain (88-175-170-134.subs.proxad.net
  [88.175.170.134]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id EA8E58109B;
- Mon, 18 May 2026 17:22:40 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id E8FF98109B;
+ Mon, 18 May 2026 17:22:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,21 +60,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=DMsS6OuWI2swmoCfXAUejCXwpwezHtuCMEyc4nCO7IY=;
+ q=dns/txt; s=selector1; bh=lCuB8OipHgX7QjdQDTipGB47RFvpJl4Bz4q0RfmxJBs=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=F5vXHc9KMtWQnCfn3MmykSbPQQKZKXatP6jKygnpcbW8+R50HhMvU+qDGpILcU9m+PhSMzNkm
- HQnK4naQzhDPf5U353YSPLdaj+rQFKHBHyQT3ACUYXTSfraDj5ZNv2VS+FH+Qy0wp65TPmM9njJ
- 9NTYD/inXqKe9DCIe5udF5ALxlMcI7s1sdo9EdslNVGGpOjyCthROciJnujK1G4k3Yt30B6yexl
- F6C36ce07g+quo1GzFLzRhfj/B6L3wyNphPZSY1cilV7rYUGzsxyvGbSx8Wtaegbvy5tVPCINJn
- 0tNMvkoGIrwkDJCgbkEILcBjU4B+uaL90XE1b2p3hjwQ==
-X-Zone-Loop: ff5ee602e1ae896fa8d348c55ce55d8e79f12edab487
+ b=hd9rHajzEWY8wNJdy32McJlSpsmZH1RhuUBwriwGo8dXVbzUxDs+3/VrwtNxSaN63Lj8HRQjd
+ QXxoLePCqjCMEJc+qXL4mEZbB60ZAweyHu5x0ZEBCfWGUvnfW1S6BswrfFO6i/2Rk91npC5HDgr
+ y+HcXqw1/uW4OGkcXVdwMNHj2Qjr+ikJGKcx+NuJEuAySuMnJxoh/rkEVC8vbFzt6lfO5IbRvOi
+ St/gN7WEqpl5dxjY4BhQYIAf9GOqDvuciO3/D2qn2pWaHxXlzV2lWONGkPgRNH2WD5mHntmhGEA
+ +SB6y5zOUkm4nLovGyb09ZJV5bovDbSIlogrhlEGw72w==
+X-Zone-Loop: 8591f7294167705024c8cd2dfe97522cd371b033b7a3
 x-campaign-type: default
-x-transaction-id: 0bc51ccf-2099-41c9-a0df-6316906fcf66
-x-swg-uid: 01-ea55e85e-ab1e-4dc9-8b5b-38b35974fd4b
+x-transaction-id: 834ff78e-68be-46b5-b992-e9341c612e6d
+x-swg-uid: 01-57342fb2-2da4-44a0-a703-05dace5f91f6
 X-Mailer: Sweego
 Message-ID:
- <1779117761.8631fc262581453bbf619ec5b2062170.19e3baea399000f373@vates.tech>
-x-swg-bid: 1779117761.8631fc262581453bbf619ec5b2062170.19e3baea399000f373
+ <1779117763.8631fc262581453bbf619ec5b2062170.19e3baeac47000f373@vates.tech>
+x-swg-bid: 1779117763.8631fc262581453bbf619ec5b2062170.19e3baeac47000f373
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -82,167 +82,275 @@ X-Originating-IP: [37.26.189.201]
 From: Teddy Astie <teddy.astie@vates.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 2/5] vtd: Use pci_sbdf_t in acpi_parse_dev_scope()
-Date: Mon, 18 May 2026 17:21:26 +0200
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH 4/5] pci: Parse into pci_sbdf_t directly
+Date: Mon, 18 May 2026 17:21:28 +0200
 In-Reply-To: <cover.1779116255.git.teddy.astie@vates.tech>
 References: <cover.1779116255.git.teddy.astie@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.e11.3c2322387242062c.19e3baea229.9e26cb71c0c8c4a4=-"
+Content-Type: multipart/alternative; boundary="-=Part.e13.6ca638ed955f5b82.19e3baeaa36.1a70f84ed571b8b4=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1779117761065
-X-purgate-ID: tlsNG-bad1c0/1779117766-40762A53-2671C2FB/0/0
+X-Bm-Transport-Timestamp: 1779117763126
+X-purgate-ID: tlsNG-bad1c0/1779117773-40B60A53-503FCAF6/0/0
 X-purgate-type: clean
-X-purgate-size: 6252
+X-purgate-size: 9094
 
----=Part.e11.3c2322387242062c.19e3baea229.9e26cb71c0c8c4a4=-
+---=Part.e13.6ca638ed955f5b82.19e3baeaa36.1a70f84ed571b8b4=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Use a dedicated pci_sbdf_t struct that we update instead of recreating
-one each time we need it=2E
+Use the newly introduced parse_pci_sbdf() and parse_pci_sbdf_seg() in order
+to parse into a pci_sbdf_t directly instead of reconstructing it afterward=
+=2E
 
 Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
 ---
- xen/drivers/passthrough/vtd/dmar=2Ec | 42 ++++++++++++------------------
- 1 file changed, 16 insertions(+), 26 deletions(-)
+ xen/drivers/char/ns16550=2Ec               | 24 +++++++++++-----------
+ xen/drivers/char/xhci-dbc=2Ec              |  6 +++---
+ xen/drivers/passthrough/amd/iommu_acpi=2Ec | 26 ++++++++++++------------
+ xen/drivers/passthrough/vtd/dmar=2Ec       |  7 +++----
+ 4 files changed, 31 insertions(+), 32 deletions(-)
 
-diff --git a/xen/drivers/passthrough/vtd/dmar=2Ec b/xen/drivers/passthroug=
-h/vtd/dmar=2Ec
-index 2a756831a6=2E=2Ec36f4bbd7b 100644
---- a/xen/drivers/passthrough/vtd/dmar=2Ec
-+++ b/xen/drivers/passthrough/vtd/dmar=2Ec
-@@ -310,7 +310,7 @@ static int __init acpi_parse_dev_scope(
- {
-     struct acpi_ioapic_unit *acpi_ioapic_unit;
-     const struct acpi_dmar_device_scope *acpi_scope;
--    u16 bus, sub_bus, sec_bus;
-+    u16 sub_bus, sec_bus;
-     const struct acpi_dmar_pci_path *path;
-     struct acpi_drhd_unit *drhd =3D type =3D=3D DMAR_TYPE ?
-         container_of(scope, struct acpi_drhd_unit, scope) : NULL;
-@@ -332,29 +332,26 @@ static int __init acpi_parse_dev_scope(
-=20
-     while ( start < end )
+diff --git a/xen/drivers/char/ns16550=2Ec b/xen/drivers/char/ns16550=2Ec
+index 878da27f2e=2E=2Efa2d0e5991 100644
+--- a/xen/drivers/char/ns16550=2Ec
++++ b/xen/drivers/char/ns16550=2Ec
+@@ -1572,22 +1572,22 @@ static bool __init parse_positional(struct ns16550=
+ *uart, char **str)
+ #ifdef CONFIG_HAS_PCI
+     if ( *conf =3D=3D ',' && *++conf !=3D ',' )
      {
-+        pci_sbdf_t dev_sbdf;
-         acpi_scope =3D start;
-         path =3D (const void *)(acpi_scope + 1);
-         depth =3D (acpi_scope->length - sizeof(*acpi_scope)) / sizeof(*pa=
-th);
--        bus =3D acpi_scope->bus;
-+        dev_sbdf =3D PCI_SBDF(seg, acpi_scope->bus, path->dev, path->fn);
+-        unsigned int b, d, f;
++        pci_sbdf_t sbdf;
 =20
-         while ( --depth > 0 )
-         {
--            bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path->fn=
-),
--                                 PCI_SECONDARY_BUS);
-+            dev_sbdf=2Ebus =3D pci_conf_read8(dev_sbdf, PCI_SECONDARY_BUS=
-);
-             path++;
-         }
-=20
-         switch ( acpi_scope->entry_type )
-         {
-         case ACPI_DMAR_SCOPE_TYPE_BRIDGE:
--            sec_bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path=
-->fn),
--                                     PCI_SECONDARY_BUS);
--            sub_bus =3D pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path=
-->fn),
--                                     PCI_SUBORDINATE_BUS);
-+            sec_bus =3D pci_conf_read8(dev_sbdf, PCI_SECONDARY_BUS);
-+            sub_bus =3D pci_conf_read8(dev_sbdf, PCI_SUBORDINATE_BUS);
-             if ( iommu_verbose )
-                 printk(VTDPREFIX " bridge: %pp start=3D%x sec=3D%x sub=3D=
-%x\n",
--                       &PCI_SBDF(seg, bus, path->dev, path->fn),
--                       acpi_scope->bus, sec_bus, sub_bus);
-+                       &dev_sbdf, acpi_scope->bus, sec_bus, sub_bus);
-=20
-             dmar_scope_add_buses(scope, sec_bus, sub_bus);
-             gfx_only =3D false;
-@@ -362,8 +359,7 @@ static int __init acpi_parse_dev_scope(
-=20
-         case ACPI_DMAR_SCOPE_TYPE_HPET:
-             if ( iommu_verbose )
--                printk(VTDPREFIX " MSI HPET: %pp\n",
--                       &PCI_SBDF(seg, bus, path->dev, path->fn));
-+                printk(VTDPREFIX " MSI HPET: %pp\n", &dev_sbdf);
-=20
-             if ( drhd )
-             {
-@@ -374,9 +370,7 @@ static int __init acpi_parse_dev_scope(
-                 if ( !acpi_hpet_unit )
-                     goto out;
-                 acpi_hpet_unit->id =3D acpi_scope->enumeration_id;
--                acpi_hpet_unit->bus =3D bus;
--                acpi_hpet_unit->dev =3D path->dev;
--                acpi_hpet_unit->func =3D path->fn;
-+                acpi_hpet_unit->bdf =3D dev_sbdf=2Ebdf;
-                 list_add(&acpi_hpet_unit->list, &drhd->hpet_list);
-=20
-                 gfx_only =3D false;
-@@ -386,16 +380,15 @@ static int __init acpi_parse_dev_scope(
-=20
-         case ACPI_DMAR_SCOPE_TYPE_ENDPOINT:
-             if ( iommu_verbose )
--                printk(VTDPREFIX " endpoint: %pp\n",
--                       &PCI_SBDF(seg, bus, path->dev, path->fn));
-+                printk(VTDPREFIX " endpoint: %pp\n", &dev_sbdf);
-=20
--            if ( drhd && pci_device_detect(seg, bus, path->dev, path->fn)=
- )
-+            if ( drhd && pci_device_detect(seg, dev_sbdf=2Ebus, dev_sbdf=
-=2Edev, dev_sbdf=2Efn) )
-             {
--                if ( pci_conf_read8(PCI_SBDF(seg, bus, path->dev, path->f=
-n),
-+                if ( pci_conf_read8(dev_sbdf,
-                                     PCI_CLASS_DEVICE + 1) !=3D 0x03
-                                     /* PCI_BASE_CLASS_DISPLAY */ )
-                     gfx_only =3D false;
--                else if ( !seg && !bus && path->dev =3D=3D 2 && !path->fn=
- )
-+                else if ( !seg && !dev_sbdf=2Ebus && path->dev =3D=3D 2 &=
-& !path->fn )
-                     igd_drhd_address =3D drhd->address;
-             }
-=20
-@@ -403,8 +396,7 @@ static int __init acpi_parse_dev_scope(
-=20
-         case ACPI_DMAR_SCOPE_TYPE_IOAPIC:
-             if ( iommu_verbose )
--                printk(VTDPREFIX " IOAPIC: %pp\n",
--                       &PCI_SBDF(seg, bus, path->dev, path->fn));
-+                printk(VTDPREFIX " IOAPIC: %pp\n", &dev_sbdf);
-=20
-             if ( drhd )
-             {
-@@ -413,9 +405,7 @@ static int __init acpi_parse_dev_scope(
-                 if ( !acpi_ioapic_unit )
-                     goto out;
-                 acpi_ioapic_unit->apic_id =3D acpi_scope->enumeration_id;
--                acpi_ioapic_unit->ioapic=2Ebdf=2Ebus =3D bus;
--                acpi_ioapic_unit->ioapic=2Ebdf=2Edev =3D path->dev;
--                acpi_ioapic_unit->ioapic=2Ebdf=2Efunc =3D path->fn;
-+                acpi_ioapic_unit->ioapic=2Einfo =3D dev_sbdf=2Ebdf;
-                 list_add(&acpi_ioapic_unit->list, &drhd->ioapic_list);
-=20
-                 gfx_only =3D false;
-@@ -431,7 +421,7 @@ static int __init acpi_parse_dev_scope(
-             gfx_only =3D false;
-             continue;
-         }
--        scope->devices[didx++] =3D PCI_BDF(bus, path->dev, path->fn);
-+        scope->devices[didx++] =3D dev_sbdf=2Ebdf;
-         start +=3D acpi_scope->length;
+-        conf =3D parse_pci(conf, NULL, &b, &d, &f);
++        conf =3D parse_pci_sbdf(conf, &sbdf);
+         if ( !conf )
+             PARSE_ERR_RET("Bad port PCI coordinates");
+-        uart->pci_device =3D PCI_SBDF(0, b, d, f);
++        uart->pci_device =3D sbdf;
+         uart->ps_bdf_enable =3D true;
      }
 =20
+     if ( *conf =3D=3D ',' && *++conf !=3D ',' )
+     {
+-        unsigned int b, d, f;
++        pci_sbdf_t sbdf;
+=20
+-        if ( !parse_pci(conf, NULL, &b, &d, &f) )
++        if ( !parse_pci_sbdf(conf, &sbdf) )
+             PARSE_ERR_RET("Bad bridge PCI coordinates");
+-        uart->pci_bridge =3D PCI_SBDF(0, b, d, f);
++        uart->pci_bridge =3D sbdf;
+         uart->pb_bdf_enable =3D true;
+     }
+ #endif
+@@ -1671,22 +1671,22 @@ static bool __init parse_namevalue_pairs(char *str=
+, struct ns16550 *uart)
+=20
+         case port_bdf:
+         {
+-            unsigned int b, d, f;
++            pci_sbdf_t sbdf;
+=20
+-            if ( !parse_pci(param_value, NULL, &b, &d, &f) )
++            if ( !parse_pci_sbdf(param_value, &sbdf) )
+                 PARSE_ERR_RET("Bad port PCI coordinates\n");
+-            uart->pci_device =3D PCI_SBDF(0, b, d, f);
++            uart->pci_device =3D sbdf;
+             uart->ps_bdf_enable =3D true;
+             break;
+         }
+=20
+         case bridge_bdf:
+         {
+-            unsigned int b, d, f;
++            pci_sbdf_t sbdf;
+=20
+-            if ( !parse_pci(param_value, NULL, &b, &d, &f) )
++            if ( !parse_pci_sbdf(param_value, &sbdf) )
+                 PARSE_ERR_RET("Bad bridge PCI coordinates\n");
+-            uart->pci_bridge =3D PCI_SBDF(0, b, d, f);
++            uart->pci_bridge =3D sbdf;
+             uart->pb_bdf_enable =3D true;
+             break;
+         }
+diff --git a/xen/drivers/char/xhci-dbc=2Ec b/xen/drivers/char/xhci-dbc=2Ec
+index c1ff528de6=2E=2Ec7fd554be0 100644
+--- a/xen/drivers/char/xhci-dbc=2Ec
++++ b/xen/drivers/char/xhci-dbc=2Ec
+@@ -1357,9 +1357,9 @@ static int __init cf_check xhci_parse_dbgp(const cha=
+r *opt_dbgp)
+     }
+     else if ( strncmp(opt_dbgp + 4, "@pci", 4) =3D=3D 0 )
+     {
+-        unsigned int bus, slot, func;
++        pci_sbdf_t sbdf;
+=20
+-        e =3D parse_pci(opt_dbgp + 8, NULL, &bus, &slot, &func);
++        e =3D parse_pci_sbdf(opt_dbgp + 8, &sbdf);
+         if ( !e || (*e && *e !=3D ',') )
+         {
+             printk(XENLOG_ERR
+@@ -1368,7 +1368,7 @@ static int __init cf_check xhci_parse_dbgp(const cha=
+r *opt_dbgp)
+             return -EINVAL;
+         }
+=20
+-        dbc->sbdf =3D PCI_SBDF(0, bus, slot, func);
++        dbc->sbdf =3D sbdf;
+     }
+     opt =3D e;
+=20
+diff --git a/xen/drivers/passthrough/amd/iommu_acpi=2Ec b/xen/drivers/pass=
+through/amd/iommu_acpi=2Ec
+index 39ae637959=2E=2E7b40da33ae 100644
+--- a/xen/drivers/passthrough/amd/iommu_acpi=2Ec
++++ b/xen/drivers/passthrough/amd/iommu_acpi=2Ec
+@@ -682,8 +682,8 @@ static int __init cf_check parse_ivrs_ioapic(const cha=
+r *str)
+ {
+     const char *s =3D str;
+     unsigned long id;
+-    unsigned int seg, bus, dev, func;
+     unsigned int idx;
++    pci_sbdf_t sbdf;
+=20
+     if ( *s !=3D '[' )
+         return -EINVAL;
+@@ -692,7 +692,7 @@ static int __init cf_check parse_ivrs_ioapic(const cha=
+r *str)
+     if ( *s !=3D ']' || *++s !=3D '=3D' )
+         return -EINVAL;
+=20
+-    s =3D parse_pci(s + 1, &seg, &bus, &dev, &func);
++    s =3D parse_pci_sbdf(s + 1, &sbdf);
+     if ( !s || *s )
+         return -EINVAL;
+=20
+@@ -707,7 +707,7 @@ static int __init cf_check parse_ivrs_ioapic(const cha=
+r *str)
+         }
+     }
+=20
+-    ioapic_sbdf[idx]=2Esbdf =3D PCI_SBDF(seg, bus, dev, func);
++    ioapic_sbdf[idx]=2Esbdf =3D sbdf;
+     ioapic_sbdf[idx]=2Eid =3D id;
+     ioapic_sbdf[idx]=2Ecmdline =3D true;
+=20
+@@ -719,7 +719,7 @@ static int __init cf_check parse_ivrs_hpet(const char =
+*str)
+ {
+     const char *s =3D str;
+     unsigned long id;
+-    unsigned int seg, bus, dev, func;
++    pci_sbdf_t sbdf;
+=20
+     if ( *s !=3D '[' )
+         return -EINVAL;
+@@ -728,12 +728,12 @@ static int __init cf_check parse_ivrs_hpet(const cha=
+r *str)
+     if ( id !=3D (typeof(hpet_sbdf=2Eid))id || *s !=3D ']' || *++s !=3D '=
+=3D' )
+         return -EINVAL;
+=20
+-    s =3D parse_pci(s + 1, &seg, &bus, &dev, &func);
++    s =3D parse_pci_sbdf(s + 1, &sbdf);
+     if ( !s || *s )
+         return -EINVAL;
+=20
+     hpet_sbdf=2Eid =3D id;
+-    hpet_sbdf=2Esbdf =3D PCI_SBDF(seg, bus, dev, func);
++    hpet_sbdf=2Esbdf =3D sbdf;
+     hpet_sbdf=2Einit =3D HPET_CMDL;
+=20
+     return 0;
+@@ -1399,13 +1399,13 @@ static int __init cf_check parse_ivmd_param(const =
+char *s)
+         }
+=20
+         do {
+-            unsigned int seg, bus, dev, func;
++            pci_sbdf_t sbdf;
+=20
+             if ( nr_ivmd >=3D ARRAY_SIZE(user_ivmds) )
+                 return -E2BIG;
+=20
+-            s =3D parse_pci(s + 1, &seg, &bus, &dev, &func);
+-            if ( !s || seg )
++            s =3D parse_pci_sbdf(s + 1, &sbdf);
++            if ( !s || sbdf=2Eseg )
+                 return -EINVAL;
+=20
+             user_ivmds[nr_ivmd]=2Estart_address =3D start << PAGE_SHIFT;
+@@ -1413,16 +1413,16 @@ static int __init cf_check parse_ivmd_param(const =
+char *s)
+             user_ivmds[nr_ivmd]=2Eheader=2Eflags =3D ACPI_IVMD_UNITY |
+                                                ACPI_IVMD_READ | ACPI_IVMD=
+_WRITE;
+             user_ivmds[nr_ivmd]=2Eheader=2Elength =3D sizeof(*user_ivmds)=
+;
+-            user_ivmds[nr_ivmd]=2Eheader=2Edevice_id =3D PCI_BDF(bus, dev=
+, func);
++            user_ivmds[nr_ivmd]=2Eheader=2Edevice_id =3D sbdf=2Ebdf;
+             user_ivmds[nr_ivmd]=2Eheader=2Etype =3D ACPI_IVRS_TYPE_MEMORY=
+_ONE;
+=20
+             if ( *s =3D=3D '-' )
+             {
+-                s =3D parse_pci(s + 1, &seg, &bus, &dev, &func);
+-                if ( !s || seg )
++                s =3D parse_pci_sbdf(s + 1, &sbdf);
++                if ( !s || sbdf=2Eseg )
+                     return -EINVAL;
+=20
+-                user_ivmds[nr_ivmd]=2Eaux_data =3D PCI_BDF(bus, dev, func=
+);
++                user_ivmds[nr_ivmd]=2Eaux_data =3D sbdf=2Ebdf;
+                 if ( user_ivmds[nr_ivmd]=2Eaux_data <
+                      user_ivmds[nr_ivmd]=2Eheader=2Edevice_id )
+                     return -EINVAL;
+diff --git a/xen/drivers/passthrough/vtd/dmar=2Ec b/xen/drivers/passthroug=
+h/vtd/dmar=2Ec
+index 9f9b639eba=2E=2Edafe1b62f6 100644
+--- a/xen/drivers/passthrough/vtd/dmar=2Ec
++++ b/xen/drivers/passthrough/vtd/dmar=2Ec
+@@ -1215,7 +1215,7 @@ static int __init cf_check parse_rmrr_param(const ch=
+ar *str)
+         do {
+             bool def_seg =3D false;
+=20
+-            stmp =3D parse_pci_seg(s + 1, &seg, &bus, &dev, &func, &def_s=
+eg);
++            stmp =3D parse_pci_sbdf_seg(s + 1, &sbdf, &def_seg);
+             if ( !stmp )
+                 return -EINVAL;
+=20
+@@ -1224,12 +1224,11 @@ static int __init cf_check parse_rmrr_param(const =
+char *str)
+              * Segment will be replaced with one from first device=2E
+              */
+             if ( user_rmrrs[nr_rmrr]=2Edev_count && def_seg )
+-                seg =3D PCI_SEG(user_rmrrs[nr_rmrr]=2Esbdf[0]);
++                sbdf=2Eseg =3D PCI_SEG(user_rmrrs[nr_rmrr]=2Esbdf[0]);
+=20
+             /* Keep sbdf's even if they differ and later report an error=
+=2E */
+             dev_count =3D user_rmrrs[nr_rmrr]=2Edev_count;
+-            user_rmrrs[nr_rmrr]=2Esbdf[dev_count] =3D
+-               PCI_SBDF(seg, bus, dev, func)=2Esbdf;
++            user_rmrrs[nr_rmrr]=2Esbdf[dev_count] =3D sbdf=2Esbdf;
+=20
+             user_rmrrs[nr_rmrr]=2Edev_count++;
+             s =3D stmp;
 --=20
 2=2E52=2E0
 
@@ -255,5 +363,5 @@ XCP-ng & Xen Orchestra - Vates s=
 olutions
 
 web: https://vates=2Etech
----=Part.e11.3c2322387242062c.19e3baea229.9e26cb71c0c8c4a4=---
+---=Part.e13.6ca638ed955f5b82.19e3baeaa36.1a70f84ed571b8b4=---
 
