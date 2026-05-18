@@ -4,44 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA583CD343F
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 22:47:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1312280.1582418 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 164A4CD343F
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 23:39:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1312304.1582434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wP6jq-0004u0-8e; Mon, 18 May 2026 22:47:06 +0000
+	id 1wP7Xf-00047s-5d; Mon, 18 May 2026 23:38:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1312280.1582418; Mon, 18 May 2026 22:47:06 +0000
+Received: by outflank-mailman (output) from mailman id 1312304.1582434; Mon, 18 May 2026 23:38:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wP6jq-0004tt-4q; Mon, 18 May 2026 22:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 1312280;
- Mon, 18 May 2026 22:47:04 +0000
+	id 1wP7Xf-00047l-2N; Mon, 18 May 2026 23:38:35 +0000
+Received: by outflank-mailman (input) for mailman id 1312304;
+ Mon, 18 May 2026 23:38:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <edgar.iglesias@gmail.com>) id 1wP6jo-0004tm-RT
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 22:47:04 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+b63a902a6511c8cff3bf+8303+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wP7Xa-00047e-9L
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 23:38:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wP6jn-00FpFG-Pc
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 00:47:03 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <edgar.iglesias@gmail.com>)
- id 6a0b969d-5cb7-0a2a0a5109dd-0a2a450aecd4-16
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:47:03 +0200
-Received: from [209.85.167.43] (helo=mail-lf1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <edgar.iglesias@gmail.com>)
- id 6a0b96e7-56b3-0a2a450a0019-d155a72be199-3
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:47:03 +0200
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-5a8d1f43432so5188872e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 15:47:03 -0700 (PDT)
-Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5a9164c5712sm3557137e87.59.2026.05.18.15.46.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 15:47:00 -0700 (PDT)
+ id 1wP7XZ-00A6xQ-LF
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 01:38:29 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+b63a902a6511c8cff3bf+8303+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a0ba2ec-bab6-0a2a0a5309dd-0a2a4509affa-6
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 01:38:28 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <BATV+b63a902a6511c8cff3bf+8303+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a0ba2f3-2497-0a2a45090019-5a9b3222c666-3
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 01:38:27 +0200
+Received: from 54-240-197-225.amazon.com ([54.240.197.225]
+ helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wP7XL-00000005GUS-2sDo; Mon, 18 May 2026 23:38:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,77 +51,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779144423; x=1779749223; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=U1w+VKmunW76L59Lsi4VNBjY+pQBi8an71eLD+gWmuU=;
-        b=P0EZcu4fc8ZzyLQ/9XNMgE3YZU1td0+7hIk4tO1vvJkgLn1ZgUHulHcuwxlI9WMv/H
-         POvGYgeyPS/Jbev80uJbcj6ogVeg+8hQDfNyRiLqNnEG27qThm0RBV/azUwV8Y2MguV0
-         /cTqTXVPJDUwFYlL/jcvhg2g+TFV10dVrWZAT+T+KXvLL5abZ7InSngOzh1KbTBucNe2
-         +1WyXQRR6KDS1p7ejR9pTV3kSRZnVoUD26Zocku9O3IQXNMHCZXHN5kZiqIVT+BNb9Yi
-         MTJFC7OYYYkm08AXjh0KedbtMFs92ties4VQ+WKtpLDdsiiB2B2uqi7FD5HU72wZBBsx
-         r0dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779144423; x=1779749223;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=U1w+VKmunW76L59Lsi4VNBjY+pQBi8an71eLD+gWmuU=;
-        b=C0c7ORbLmRBAotFz7II70d3rHuOyqQfrJG73KuLmcmnpZFpwCBBNloAQBEj6ugCknR
-         alXJu/XKlW+ZoMlYu2ug9s4fUPKz+N4c0/7MPix+K710ZpaTUIotQh/R78zRqWT6fN8k
-         ffbCNSRGjUubhv4LaqjgtSrTb3+j0PaOx+e98uujSbCsvP1r0nQMD+OesfoyYythAk7L
-         693BB5XHHgGRCDol76mdrQO3LqZjFkU+3jn0z9Akh5x3tLUSdTpjckphnJTo2UtxCHxH
-         7H2MhdoI/ORABhxTnUU9dNKVkIA+3qMBgqCkaLCl8X2u3mtXeXrzLw3Km4tcjKUm1R8w
-         zasg==
-X-Gm-Message-State: AOJu0YxN5P7vG5K40B8b1pE7VzwaBpmtYA5ExQYV7mtsjyMQRQe0qeTs
-	F3uKU//Zy73AmtvxHY+HpDfAVJFRMgUgLArDBpCkAhsv1192jyhqHVNKiyZVmw==
-X-Gm-Gg: Acq92OEM1PUwqtpvpAxMHB3ldpFAdGxqHQNSd2ySmX6yQn1xSSVUpRkH2A7UUqoKN7/
-	wCiInyF275DZQYXXQqkHMnOBdBwJ0p03+mdM6RVahWk3lPKBiTwam+jiCOSiI7GnWZwXW5S9MqU
-	TpbpbAhRiG7kVtXHnDMS4IB6FOozZpuvNqFpC8350ghukKCUPVFvfooJmN11OVRKlVs+h1CkqcI
-	MsUbrRbZQVTyHW2CDMaWpE7UqhTBX+R0FPX25SvEwUE+2HZRY2m2mxB27KSuntfS8ZFAdVvlCf+
-	Qc5nOQuME3/abTt5Vf9cNnQaPyLp6n8FKUjPABgT27Sstsuz1HcMji08098kFqFGHAvbDDowEcE
-	wteUpBjniTQ/W6dXfbJPaKKJXQWTgIeVQQK3L+K8lDpuY38FckmaHBqCkJzxf2/LPJv0HfZvbvE
-	McHoRGZnQodabtvzRbn6KIxqCheQ64RM87Z7dmS9cS1ruPUxkjRzKoQ+vX9EI=
-X-Received: by 2002:a05:6512:1317:b0:5a8:f6fd:eb15 with SMTP id 2adb3069b0e04-5aa0e73c73emr5059619e87.24.1779144422770;
-        Mon, 18 May 2026 15:47:02 -0700 (PDT)
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	Volodymyr_Babchuk@epam.com,
-	edgar.iglesias@amd.com
-Subject: [PATCH v1 0/1] xen/arm: gic-v3: Fix wake-up loop in gicv3_enable_redist
-Date: Tue, 19 May 2026 00:46:51 +0200
-Message-ID: <20260518224652.422864-1-edgar.iglesias@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=ybRa/FKcrPbhXiFoMzbhw3eRNrNHkp49lvJnD4jyFgA=; b=dtdG+4Gdeg84QaH+8VNriJYoBT
+	WyboTRG7NvCI0iX/6Bh8KJOFRRhm3RzTgBjF+Md6KFnV5ODJhXyUBICKCBGFZZbW+f5VOiOihaK4p
+	Dx48fZ9qPlQhHdU4VhwMXWSngojfty/OM4XQ31H/+/VLzJp4RPfaQB5G9e9xzqnJj8txjasWjfdBu
+	vqtGwP+FW1dxS+GwNI76wn9utdQyT8VMRMsIkA5+LOKG5EYz0lTId0nHb9QuQigjq1WzcPHfGLWg/
+	7iT5QG4j5VP7zfEZprEQRdrxpJd2Y4/MKHfxTYHCUbiPvEozcoXvsnsTgh9gDubohNxpI3LjyPeju
+	IroO6uTQ==;
+Message-ID: <7260682b21c28d1299e58400b9a2f4b8d23bd434.camel@infradead.org>
+Subject: Re: [PATCH v3 00/41] x86: Try to wrangle PV clocks vs. TSC
+From: David Woodhouse <dwmw2@infradead.org>
+To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
+ <kas@kernel.org>,  Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan"
+ <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu
+ <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Long Li
+ <longli@microsoft.com>, Ajay Kaher <ajay.kaher@broadcom.com>, Alexey
+ Makhalov <alexey.makhalov@broadcom.com>,  Jan Kiszka
+ <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, Andy
+ Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Juergen Gross <jgross@suse.com>, Daniel Lezcano
+ <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, John Stultz
+ <jstultz@google.com>
+Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov
+ <vkuznets@redhat.com>, Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Boris Ostrovsky
+ <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>,
+ x86@kernel.org,  linux-coco@lists.linux.dev, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org,  virtualization@lists.linux.dev,
+ linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org, Michael
+ Kelley <mhklinux@outlook.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Nikunj A Dadhania <nikunj@amd.com>, Thomas Gleixner <tglx@linutronix.de>
+Date: Tue, 19 May 2026 00:38:13 +0100
+In-Reply-To: <20260515191942.1892718-1-seanjc@google.com>
+References: <20260515191942.1892718-1-seanjc@google.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-sVYMF3zPsR6TVbl8qGQi"
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1779144423-733738B7-9887B7AE/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-bad1c0/1779147508-3777AA53-0135CA1A/0/0
 X-purgate-type: clean
-X-purgate-size: 417
+X-purgate-size: 11024
 
-From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Hi, 
+--=-sVYMF3zPsR6TVbl8qGQi
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I ran into this issue with a poll loop in gicv3_enable_redist
-while exploring QEMU fault-injection techniques in the context
-of safety certification.
+On Fri, 2026-05-15 at 12:19 -0700, Sean Christopherson wrote:
+> Dave/Thomas/Peter/Boris, what's the going rate for bribes to take somethi=
+ng
+> like this through the tip tree?
+>=20
+> The bulk of the changes are in kvmclock and TSC, but pretty much every
+> hypervisor's guest-side code gets touched at some point.=C2=A0 I am reaon=
+sably
+> confident in the correctness of the KVM changes.=C2=A0 Michael tested Hyp=
+er-V in
+> v2, and while there were conflicts when rebasing, they were largely
+> superficial (and I've just jinxed myself).=C2=A0 For all other hypervisor=
+s, assume
+> the code is compile-tested only, but those changes are all quite small an=
+d
+> straightforward.
+>=20
+> The only changes that are questionable/contentious are the last two patch=
+es,
+> which have KVM-as-a-guest use CPUID 0x16 to get the CPU frequency, even o=
+n
+> AMD (that's the dubious part).=C2=A0 I very deliberately put them last, s=
+o that
+> they can be dropped at will (I don't care terribly if those patches land)=
+.
+> To merge them, I would want explicit Acks from Paolo and David W.
+>=20
+> So, except for the last two patches, to get the stuff I really care about
+> landed, I think/hope it's just the TSC and guest-side CoCo changes that n=
+eed
+> reviews/acks?
+>=20
+> The primary goal of this series is (or at least was, when I started) to
+> fix flaws with SNP and TDX guests where a PV clock provided by the untrus=
+ted
+> hypervisor is used instead of the secure/trusted TSC that is controlled b=
+y
+> trusted firmware.
+>=20
+> The secondary goal is to draft off of the SNP and TDX changes to slightly
+> modernize running under KVM.=C2=A0 Currently, KVM guests will use TSC for
+> clocksource, but not sched_clock.=C2=A0 And they ignore Intel's CPUID-bas=
+ed TSC
+> and CPU frequency enumeration, even when using the TSC instead of kvmcloc=
+k.
+> And if the host provides the core crystal frequency in CPUID.0x15, then K=
+VM
+> guests can use that for the APIC timer period instead of manually calibra=
+ting
+> the frequency.
+>=20
+> The tertiary goal is to clean up all of the PV clock code to deduplicate =
+logic
+> across hypervisors, and to hopefully make it all easier to maintain going
+> forward.
 
-Cheers,
-Edgar
+I booted this in qemu with -cpu host,+invtsc,+vmware-cpuid-freq
 
-Edgar E. Iglesias (1):
-  xen/arm: gic-v3: Fix wake-up loop in gicv3_enable_redist
+I was expecting to see it eschew the kvmclock and use *only* the TSC.
+Is there even any need for 'tsc-early' given that it's *told* the TSC
+frequency in CPUID? Shouldn't it have detected that the TSC is known
+before init_tsc_clocksource() runs?
 
- xen/arch/arm/gic-v3.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+And then it even spent some time at boot actually using the kvmclock as
+clocksource... when ideally I don't think it would even have *enabled*
+it at all?
 
--- 
-2.43.0
+[    0.000000] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles:=
+ 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000000] tsc: Detected 2400.000 MHz processor
+[    0.008205] TSC deadline timer available
+[    0.008270] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0=
+xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.159085] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, =
+max_idle_ns: 19112604467 ns
+[    0.164074] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles:=
+ 0x22983777dd9, max_idle_ns: 440795300422 ns
+[    0.229087] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xfffffff=
+f, max_idle_ns: 1911260446275000 ns
+[    0.337095] clocksource: Switched to clocksource kvm-clock
+[    0.345246] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, m=
+ax_idle_ns: 2085701024 ns
+[    0.356201] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x229=
+83777dd9, max_idle_ns: 440795300422 ns
+[    0.360560] clocksource: Switched to clocksource tsc
 
+
+--=-sVYMF3zPsR6TVbl8qGQi
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
+ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
+MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
+a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
+jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
+GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
+aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
+nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
+8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
+HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
+IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
+KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
+BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
+QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
+ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
+/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
+uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
+xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
+W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
+c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
+VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
+NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
+sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
+w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
+i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
+kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
+0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
+ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
+blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
+hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
+VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
+HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
+ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
+AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
+cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
+cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
+AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
+aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
+hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
+iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
+8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
+JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
+xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
+EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
+B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
+MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
+KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
+Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
+nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
+WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
+W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
+nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
+g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
+9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
+9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
+sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
+a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
+ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
+AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
+dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
+MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
+YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
+4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
+6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
+QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
+nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
+MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
+VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
+ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2MDUxODIzMzgx
+M1owLwYJKoZIhvcNAQkEMSIEICdpbo3FRjD2AASiln/oatPqw6OBqIGwJ89vQ7u8KoDcMGQGCSsG
+AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
+cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
+VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
+cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIAX3Y4/TDg29Zl
+OlYDg5rl4FNcTkhdLPPU4NOnexpsV0ImspXiP9DmV6XCtGHlUzwU2QVmWEAKJ5gcWJDG109BJ4iD
+MxCvKPxWGIQv6XhRTnNHXdRVR47Cmi0iBkwH1qYGkPLDbevrZBye+PMkGo0xfTStett2FKx3J5kZ
+XveIeeAsSHlgf9mzo04N/SXhFZ1diqosTRs0bKrQTR8Yq4+23+HQgdCWfqie4gzeHaS8ncTOSQD3
+f9Gg2ntNVonQT8aaPU/oRVMRFX5vwmVT5dq6V2lTibWpW8DEHsfm3CKkQLMqbUJaKXzNuzMbPjDA
+py895Q8WQZJt7hDj5JpDRW2Wt0RaZP1MoaLDgWPs7DfY8WczAExYq9ChG2KtIVCJB5Ulvv+NMkpL
+rGHKe6CciVeN4AIXq2O81rpIo/u2X25skg7WLWMgWg/w/0lfODLGUMPUca0JN5eT2Rhr7gUFR/J8
+JUCGPPKTRJ8bQTPUXuck3zhspeWr65nn2W5NkR97txju6m8/UDGCwGwAKt/IogxYX9q2msD8/XJ7
+lXJ3YVePKePxCJuryW7H6tm70i/Xz2vpt37ctLT0gWm8Hk2gC54DxPqWicyaoLKityRxYrxL4God
+6oWdil4yhCPpUix045UYkrFJwSxgRwc3b4bDLKPNjAY+tmYkzEJiyID4znkkJsYAAAAAAAA=
+
+
+--=-sVYMF3zPsR6TVbl8qGQi--
 
