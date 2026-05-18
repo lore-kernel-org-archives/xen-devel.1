@@ -4,39 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BE2CD343F
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 22:37:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1312269.1582408 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A0BCD4F4A
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 22:47:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1312281.1582426 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wP6Zm-00035L-7U; Mon, 18 May 2026 22:36:42 +0000
+	id 1wP6jt-000576-FK; Mon, 18 May 2026 22:47:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1312269.1582408; Mon, 18 May 2026 22:36:42 +0000
+Received: by outflank-mailman (output) from mailman id 1312281.1582426; Mon, 18 May 2026 22:47:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wP6Zm-00035E-3z; Mon, 18 May 2026 22:36:42 +0000
-Received: by outflank-mailman (input) for mailman id 1312269;
- Mon, 18 May 2026 22:36:41 +0000
+	id 1wP6jt-00056z-Br; Mon, 18 May 2026 22:47:09 +0000
+Received: by outflank-mailman (input) for mailman id 1312281;
+ Mon, 18 May 2026 22:47:08 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wP6Zl-000358-8t
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 22:36:41 +0000
+ (envelope-from <edgar.iglesias@gmail.com>) id 1wP6js-00056m-H4
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 22:47:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wP6Zk-00HTli-4e
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 00:36:40 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wP6jr-004ZjV-TO
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 00:47:07 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0b9452-2eae-0a2a0a5409dd-0a2a45048334-8
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:36:40 +0200
-Received: from [209.85.208.177] (helo=mail-lj1-f177.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0b9477-1dec-0a2a45040019-d155d0b1b8e3-3
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:36:39 +0200
-Received: by mail-lj1-f177.google.com with SMTP id
- 38308e7fff4ca-393c93a0166so31155171fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 15:36:39 -0700 (PDT)
+ (envelope-from <edgar.iglesias@gmail.com>)
+ id 6a0b969b-e002-0a2a0a5209dd-0a2a4503a918-40
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:47:07 +0200
+Received: from [209.85.167.45] (helo=mail-lf1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <edgar.iglesias@gmail.com>)
+ id 6a0b96eb-672d-0a2a45030019-d155a72dd8e4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 00:47:07 +0200
+Received: by mail-lf1-f45.google.com with SMTP id
+ 2adb3069b0e04-5a8fbe18b1dso4771316e87.2
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 15:47:07 -0700 (PDT)
+Received: from gmail.com (213-67-3-247-no600.tbcn.telia.com. [213.67.3.247])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-395882c41c1sm14934341fa.12.2026.05.18.15.47.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 May 2026 15:47:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,320 +53,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1779143799; cv=none;
-        d=google.com; s=arc-20240605;
-        b=OF+Uj7cfKnYGSyn668pydX58vrnnvHoyY9yY8pNUCbLCX2a9o+fsN0f1dhucS3Zbfr
-         xXqdw3qZUls7GDSUpd+r7y9O/Dlqc+YirRVB98PuzudLf7z3P+ORyW5X0O2AGNO3JGCj
-         vQrxlsmGn5k3gAYoVFXwlVfB7JASGSikRBStfXozyE8t3oQVyEIWFF97tLycHuPqCP66
-         MYZ3e4srd0SivZhRZlbSLFpYHwla8MWJh6Da32Y33BuOdB16SPvyznYjZSUvMmNaYoZI
-         SiChD/GUcH+2ck7bj6MG7ArYv7v+QKoEtjR2V3SOu0xuaapBQ2jkI8IU2tUAS+6nNY/7
-         REUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=vxjc9Rh85UVDLOa6UVs+hSnPillcyypzCV/sXZmXpZM=;
-        fh=URHEk7klKxjqc5bXwxtPgt12zwbJaOVjsCphaVnE7cw=;
-        b=S2iIOZn2NA5XtDcw7FRGgDeyxeznBBR1RPqQwMd7Yl/3wNvJ6MrTOVRq5UInQYelQO
-         pMJCrFmdeCiibGW4M+8bRbQP6WcedIQ0hJkn9PO2jmFyBR7pMG7DjvpURzz/eylRf3vP
-         3/uuzopnKdTbwZFp6ilVPsMTuanrE9+DPxthprU2dHgt9klsjXoFFxZTbTUu1RjmVgEW
-         oxEo8QWaAqrC478K2cH7+iyWx+fgWQ9M3on3TSg5piPNSfLFMZxUdoNOIz44tpV8HQFc
-         Jmm3K4QFjbPC8jT/jnpDGuCgaM6+6mch/Lpy0TepuBUJZVawG+BaiID1yAVN22Or//CA
-         2FGA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779143799; x=1779748599; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1779144427; x=1779749227; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vxjc9Rh85UVDLOa6UVs+hSnPillcyypzCV/sXZmXpZM=;
-        b=k7q4nOB1an6n7Ev76exccvK76OaSUynCgabgMMv4vlf9zj0k7UrfIKlDoIvnDSU0sm
-         aphpJtxtpFdDLIPbvewpGTApHYg6FKiJ1ms16WseL9k1wRIoEDaaDMAHv+ZCM1Lfqk4n
-         H+bUiesnuAlkedxWDrESg/PciLV70j7ovxrB/QTJvPyRk4CJgzUQRFkGQ7IfkzrR2MDV
-         9xp8ptSKHdpCWkPOiWWwdapeRZo1LMKyT/ry4gjSQKt7IvSKh/8sNi6ccFaQeDKnYs8+
-         evvBH8DnhcGZsAVNpkuVz2DHPfNwFoWSi17FcTYc+Bna0ADMRbu4mMTjjjlNd+/lpYJB
-         6pCw==
+        bh=gj9Q26Xnp9vgzseXLrlgwBsXJj51q6a2TH2ZhhhDnDU=;
+        b=MYk0ymf8NLJITWwGuDHhYlIvtikKwbOhBTDvTHyLfR1P0H1un/bxgTOY5yhGixhdBd
+         RWC+Na9BNPUjA1ATrTyzwqWq3GzeRho/rYPSIcDwupJ6ttnn52/fOcbhSENa/lr6LIyR
+         nUMqLHOdULNZCjLziUkKw2zlrdKwvaIftkL6bliaNoHZCmtPW6gwVAwbVhpdluCE84+T
+         hhpe7/oDOdHrOvn4rGM7Y9jdGZ94HEx1OEEEJW7zbnfSU4YkxHNnCvitLicUWEw8F/ud
+         Z0LsiEKbTbKSYW6J63E3M02OUhN9Zbu79reMmrrPQZaLiaLw7KcsFG7Z5Wp9nPwDTlKo
+         oUrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779143799; x=1779748599;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1779144427; x=1779749227;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=vxjc9Rh85UVDLOa6UVs+hSnPillcyypzCV/sXZmXpZM=;
-        b=n/NTni7nTVAsoLyfpkYQ4uGqXxuVCXAJtOVa8biES5PWdll8Q7rKWaX5uiF11U0e8V
-         kfecnLCFV0UWpv/bNvq5yEw80c7zudQWesi4si3f7HA+CJKlHXkz3W+CyrVIo2W7NW4v
-         udJ3KC16fkIwXeMz61kIjNWeo98dJX6JYuKyf9ZOqAe3l5JCI6TDTxTU/9e1/C0cnd22
-         zrR5RVUeLqEg0l68sI52ZopFvUwaFEq8HK3WoXB8AnU5KPdJamATH3Snpnka5dtoNuPz
-         vjUALWbABAy/ibtgRGS3K2+bYeW2vCRYs68pU7uz1x69A7S9ahe5XYUCpBHCwYP8uV7h
-         HTFg==
-X-Gm-Message-State: AOJu0YzsCDBnu9XOJxq+dBoY7bhmswFfKYpPDmdMnpvUQySRAAU8iWiS
-	g6rq22VbhOzco+2YH3MYu01BEzxvCz1yxoEfUGvMkoV0YY1Hz4dB3CJ646vF8Vw9qQEY6m1L9pH
-	vBGCBvpbTeALtjI5W/afsH2wXmfWUPmQ=
-X-Gm-Gg: Acq92OHYvybMqGnhritMEDwqEvtB8/D7I1owTPsAl2OZCCAN/Bi+bprvKwt4ErDdP2K
-	1cLjrJYTYsx+U6Z160wtytlgBuBSxXc2PSedNJAhyrIhnNULJUyJgjGazMWLnG8njiVIghI0jCw
-	hSnCwq+S9A8Gi3IcWYjUzRLCgbdkwqUMZJQUorQoszj43sG+BmlxSmRe07MQdQFL2uqQ0r+irsl
-	wksc4RphuTk4azHKAIwlHgB6JG+cof+Ky+k0/yTyaEXB9j6yMtwFySgxfEspbUqTUz00d53kEq3
-	KPa0
-X-Received: by 2002:a05:651c:515:b0:393:975b:5634 with SMTP id
- 38308e7fff4ca-39561c8b784mr49655891fa.11.1779143799011; Mon, 18 May 2026
- 15:36:39 -0700 (PDT)
+        bh=gj9Q26Xnp9vgzseXLrlgwBsXJj51q6a2TH2ZhhhDnDU=;
+        b=iC8l+KbxuFcMqD5Cji3xYdYM0yk2oUNojimRIlovdJYrVKzOiQ9IQ5IAWiitAIl7bq
+         1lR3irqJNxD7Bv8g9uM1A4JdcJYP5YU6WIoTRjvECVTd4ERCkFB4KZqWcY4nFCedqKL8
+         Lh5EFLKFd3AtbDsrqIL3Twbj2BZJNvtVTUcIJJ+FXOZezwUFrJXR5ilGcVtAsGWmHq03
+         PdspdyNA+vQK7azJN3+e5+mHr0DrzI8ps61xvilGAq1QLbDXUYD6aRU5joBY/RAMV6b9
+         qGw9dzxwvUnzulVIP6kU8AvCJ0taoWbxeVktgRVYcLR/jgkDqEoNgzuMgM+r3f49iRlo
+         EFYQ==
+X-Gm-Message-State: AOJu0YzeYnXV0a5aEqndnDgzRV/HIt4jGc8RBeCLiNLuOQnRmvhcebg+
+	z5BKiHeZxafYQJ02a4emP8WfiiMwAHKHxXB2O8ZVMXzj+7ho+vnsA/wDwhZIHQ==
+X-Gm-Gg: Acq92OEh/AYPlq0zjaQs5yOi8IA2VILh5ooDsF7bB+Vi5LHYssFsE1rF+moMnq8C8Xy
+	i1D9rW/5FXMBe7LGel3neuq7qstxzB4Ly5JfFxLIXqTOmBQKXdSYLthipL2ui06vWGaXJ2oS0o1
+	235xEXrtnJyLfEpHn/4FemuY7cdGdPuYgN/7+F0hNHE2JOKwJL/zvyvFeVM8AEXyfsJYUbIMxEs
+	EVuFgyq3Q5KN8bblBPInYpLu20FJe9XR+p+Jq8gEDc7kDggPXDKV9/UjDmuDBx3ipSaTBeMHqk/
+	U7lUl8mfir6K5LpLol6+EHQ2uC4xbzcLwHaPKJaSx+anIK7b4v/+JtshdY885iPzalWU9qW6Y/x
+	Fr8ZJkZ0Jz60k/NgdkF3LT50yoI9+pP8Zo5LI+wYU47IZ3LSt+fXTyu4hsGbMLhxarPKthgHHs4
+	Iug9/xML6LYBIgyZ3sn1o2CscCLGhc/eHwrkrXIq94xnv6ITZ4Du9Gb4VILIA=
+X-Received: by 2002:a05:6512:3a85:b0:5a8:f984:142c with SMTP id 2adb3069b0e04-5aa0e742944mr4597322e87.12.1779144426918;
+        Mon, 18 May 2026 15:47:06 -0700 (PDT)
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	julien@xen.org,
+	bertrand.marquis@arm.com,
+	michal.orzel@amd.com,
+	Volodymyr_Babchuk@epam.com,
+	edgar.iglesias@amd.com
+Subject: [PATCH v1 1/1] xen/arm: gic-v3: Fix wake-up loop in gicv3_enable_redist
+Date: Tue, 19 May 2026 00:46:52 +0200
+Message-ID: <20260518224652.422864-2-edgar.iglesias@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260518224652.422864-1-edgar.iglesias@gmail.com>
+References: <20260518224652.422864-1-edgar.iglesias@gmail.com>
 MIME-Version: 1.0
-References: <cover.1778605274.git.mykola_kvach@epam.com> <bd79226263c1dd9c915a7fffd4f92b194af864ee.1778605274.git.mykola_kvach@epam.com>
- <5323B63C-7F37-418C-97C6-0A94F9D03B4F@arm.com>
-In-Reply-To: <5323B63C-7F37-418C-97C6-0A94F9D03B4F@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Tue, 19 May 2026 01:36:27 +0300
-X-Gm-Features: AVHnY4Ku4LoE7n8DvxKqiqS6D51-CFgb9rxrL3rIPk1MoKeL7dmPSVikAsYebDE
-Message-ID: <CAGeoDV-fkfUh_+tQ=kddHdPiaGJhgSdFsm79qCWhAyJ6sS0tdw@mail.gmail.com>
-Subject: Re: [PATCH v9 05/13] xen/arm: gic-v3: add ITS suspend/resume support
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1779143799-2B5683FF-DB206C5E/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1779144427-3B56F938-E1191340/0/0
 X-purgate-type: clean
-X-purgate-size: 7917
+X-purgate-size: 849
 
-Hi Luca,
+From: "Edgar E. Iglesias" <edgar.iglesias@amd.com>
 
-Thank you for the detailed review.
+timeout starts as false and is only set on the timeout break, so the
+loop always exits after one iteration and a stuck redistributor is
+silently treated as woken. Use while ( 1 ) to match the sibling
+gicv3_do_wait_for_rwp().
 
-On Thu, May 14, 2026 at 5:46=E2=80=AFPM Luca Fancellu <Luca.Fancellu@arm.co=
-m> wrote:
->
-> Hi Mykola,
->
-> > On 12 May 2026, at 18:07, Mykola Kvach <xakep.amatop@gmail.com> wrote:
-> >
-> > From: Mykola Kvach <mykola_kvach@epam.com>
-> >
-> > Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
-> > working after firmware powers the GIC down. Save and restore the ITS
-> > CTLR, CBASER and BASER registers, and re-establish the collection mappi=
-ng
-> > on resume.
-> >
-> > Add list_for_each_entry_continue_reverse() in list.h for the ITS suspen=
-d
-> > error path that needs to roll back partially saved state.
-> >
-> > Based on Linux commit dba0bc7b76dc:
-> > "irqchip/gic-v3-its: Add ability to save/restore ITS state".
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > ---
-> > Changes in V9:
-> > - fix the ITS suspend/resume coding-style nits;
-> > - preserve the saved GITS_CTLR state while masking the read-only
-> >  QUIESCENT bit.
-> >
-> > Changes in V8:
-> > - Reword the CBASER/CWRITER comment to match Xen and drop the stale Lin=
-ux
-> >  cmd_write reference.
-> > - Clarify the list_for_each_entry_continue_reverse() comment.
-> > - Factor out per-ITS helpers for collection setup and resume.
-> > - Restore each ITS and re-establish its collection mapping in the same
-> >  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
-> >  un-restored instance.
-> > - panic in case when resume of an ITS failed
-> > - cleanup baser cache during suspend
-> > ---
-> > xen/arch/arm/gic-v3-its.c             | 133 ++++++++++++++++++++++++--
-> > xen/arch/arm/gic-v3.c                 |  11 ++-
-> > xen/arch/arm/include/asm/gic_v3_its.h |  23 +++++
-> > xen/include/xen/list.h                |  14 +++
-> > 4 files changed, 171 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-> > index 9005ce8ce5..582c26d964 100644
-> > --- a/xen/arch/arm/gic-v3-its.c
-> > +++ b/xen/arch/arm/gic-v3-its.c
-> > @@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
-> >     return its_send_command(its, cmd);
-> > }
-> >
-> > +static int gicv3_its_setup_collection_single(struct host_its *its,
-> > +                                             unsigned int cpu)
-> > +{
-> > +    int ret;
-> > +
-> > +    ret =3D its_send_cmd_mapc(its, cpu, cpu);
-> > +    if ( ret )
-> > +        return ret;
-> > +
-> > +    ret =3D its_send_cmd_sync(its, cpu);
-> > +    if ( ret )
-> > +        return ret;
-> > +
-> > +    return gicv3_its_wait_commands(its);
-> > +}
-> > +
-> > /* Set up the (1:1) collection mapping for the given host CPU. */
-> > int gicv3_its_setup_collection(unsigned int cpu)
-> > {
-> > @@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
-> >
-> >     list_for_each_entry(its, &host_its_list, entry)
-> >     {
-> > -        ret =3D its_send_cmd_mapc(its, cpu, cpu);
-> > -        if ( ret )
-> > -            return ret;
-> > -
-> > -        ret =3D its_send_cmd_sync(its, cpu);
-> > -        if ( ret )
-> > -            return ret;
-> > -
-> > -        ret =3D gicv3_its_wait_commands(its);
-> > +        ret =3D gicv3_its_setup_collection_single(its, cpu);
-> >         if ( ret )
-> >             return ret;
-> >     }
-> > @@ -1210,6 +1218,113 @@ int gicv3_its_init(void)
-> >     return 0;
-> > }
-> >
-> > +#ifdef CONFIG_SYSTEM_SUSPEND
-> > +int gicv3_its_suspend(void)
-> > +{
-> > +    struct host_its *its;
-> > +    int ret;
-> > +
-> > +    list_for_each_entry( its, &host_its_list, entry )
-> > +    {
-> > +        unsigned int i;
-> > +        void __iomem *base =3D its->its_base;
-> > +
-> > +        /*
-> > +         * By the time Xen reaches gic_suspend(), every domain is alre=
-ady in
-> > +         * SHUTDOWN_suspend, so ITS-targeting interrupt sources are ex=
-pected
-> > +         * to have been quiesced by the owning OS before SYSTEM_SUSPEN=
-D.
-> > +         */
-> > +        /* Preserve saved GITS_CTLR state, excluding read-only QUIESCE=
-NT. */
-> > +        its->suspend_ctx.ctlr =3D readl_relaxed(base + GITS_CTLR) &
-> > +                                ~GITS_CTLR_QUIESCENT;
-> > +        ret =3D gicv3_disable_its(its);
-> > +        if ( ret )
-> > +        {
-> > +            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-> > +            goto err;
-> > +        }
-> > +
-> > +        its->suspend_ctx.cbaser =3D readq_relaxed(base + GITS_CBASER);
-> > +
-> > +        for ( i =3D 0; i < GITS_BASER_NR_REGS; i++ )
-> > +        {
-> > +            uint64_t baser =3D readq_relaxed(base + GITS_BASER0 + i * =
-8);
-> > +
-> > +            its->suspend_ctx.baser[i] =3D 0;
-> > +
-> > +            if ( !(baser & GITS_VALID_BIT) )
-> > +                continue;
-> > +
-> > +            its->suspend_ctx.baser[i] =3D baser;
-> > +        }
-> > +    }
-> > +
-> > +    return 0;
-> > +
-> > + err:
-> > +    list_for_each_entry_continue_reverse( its, &host_its_list, entry )
-> > +        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTL=
-R);
-> > +
-> > +    return ret;
-> > +}
-> > +
-> > +static int gicv3_its_resume_single(struct host_its *its, unsigned int =
-cpu)
-> > +{
-> > +    void __iomem *base =3D its->its_base;
-> > +    unsigned int i;
-> > +    int ret;
-> > +
-> > +    /*
-> > +     * Make sure that the ITS is disabled. If it fails to quiesce,
-> > +     * don't restore it since writing to CBASER or BASER<n>
-> > +     * registers is undefined according to the GIC v3 ITS
->
-> s/undefined/unpredictable/ ?
+Fixes: bc183a0235 ("xen/arm: Add support for GIC v3")
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+---
+ xen/arch/arm/gic-v3.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ack.
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index 7f365cdbe9..f03217282e 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -828,7 +828,7 @@ static int gicv3_enable_redist(void)
+         }
+         cpu_relax();
+         udelay(1);
+-    } while ( timeout );
++    } while ( 1 );
+ 
+     if ( timeout )
+     {
+-- 
+2.43.0
 
->
-> > +     * Specification.
-> > +     */
-> > +    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
-> > +    ret =3D gicv3_disable_its(its);
-> > +    if ( ret )
-> > +        return ret;
-> > +
-> > +    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
-> > +
-> > +    /*
-> > +     * Writing CBASER resets CREADR to 0, so reset CWRITER to
-> > +     * keep the command queue pointers aligned.
-> > +     */
-> > +    writeq_relaxed(0, base + GITS_CWRITER);
-> > +
-> > +    /* Restore GITS_BASER from the value cache. */
-> > +    for ( i =3D 0; i < GITS_BASER_NR_REGS; i++ )
-> > +    {
-> > +        uint64_t baser =3D its->suspend_ctx.baser[i];
-> > +
-> > +        if ( !(baser & GITS_VALID_BIT) )
-> > +            continue;
-> > +
-> > +        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
-> > +    }
-> > +
-> > +    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-> > +
-> > +    return gicv3_its_setup_collection_single(its, cpu);
->
-> This will always issue a MAPC V=3D1, in the section 5.3.9 it sais it=E2=
-=80=99s "unpredictable
-> if there are interrupts that are mapped to the specified collection and t=
-he
-> collection is currently mapped to a Redistributor, unless MAPC is followe=
-d by MOVALL=E2=80=9D,
-> in this case the redistributor is the same but the specs don=E2=80=99t sa=
-y anything about this case,
-> it=E2=80=99s generally unpredictable if we are remapping an already-live =
-collection.
->
-> I see Linux reply the MAPC V=3D1 only if the collection is stored in the =
-ITS (not memory backed),
-> our col_id is `cpu`, which I believe that for the suspend path is always =
-zero (?), so by looking into
-> HCC we could check if we need to issue the MAPC or not.
->
-> if ( cpu < GITS_TYPER_HCC(readq_relaxed(base + GITS_TYPER)) )
->     return gicv3_its_setup_collection_single(its, cpu);
->
-> return 0;
->
-
-Good point, I agree.
-
-Replaying MAPC unconditionally is not needed here and may be unsafe for
-memory-backed collections. Since Xen currently uses col_id =3D=3D cpu, I wi=
-ll
-add the HCC check before calling gicv3_its_setup_collection_single(), as
-you suggested.
-
-I will also add a short comment to make clear that the check is about the
-CollectionID being ITS-held.
-
-Best regards,
-Mykola
 
