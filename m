@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02DECD4F3C
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 12:18:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1311824.1581956 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7CECCD4F52
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2026 13:14:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1311843.1581973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOwux-000090-KK; Mon, 18 May 2026 12:17:55 +0000
+	id 1wOxnb-0008Jy-L7; Mon, 18 May 2026 13:14:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1311824.1581956; Mon, 18 May 2026 12:17:55 +0000
+Received: by outflank-mailman (output) from mailman id 1311843.1581973; Mon, 18 May 2026 13:14:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wOwux-00008t-HX; Mon, 18 May 2026 12:17:55 +0000
-Received: by outflank-mailman (input) for mailman id 1311824;
- Mon, 18 May 2026 12:17:53 +0000
+	id 1wOxnb-0008Jr-Ha; Mon, 18 May 2026 13:14:23 +0000
+Received: by outflank-mailman (input) for mailman id 1311843;
+ Mon, 18 May 2026 13:14:23 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wOwuv-00008n-F9
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 12:17:53 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1wOxna-0008JZ-To
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 13:14:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wOwuu-008Ifu-H6
- for xen-devel@lists.xenproject.org; Mon, 18 May 2026 14:17:52 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wOxna-009DFo-64
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2026 15:14:22 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0b0370-bab6-0a2a0a5309dd-0a2a4501e80e-2
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 14:17:52 +0200
-Received: from [209.85.167.42] (helo=mail-lf1-f42.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0b0370-c1f2-0a2a45010019-d155a72abcbc-3
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 14:17:52 +0200
-Received: by mail-lf1-f42.google.com with SMTP id
- 2adb3069b0e04-5a8c94cefcdso1774652e87.0
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 05:17:52 -0700 (PDT)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6a0b10ab-e002-0a2a0a5209dd-0a2a4502a610-10
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 15:14:21 +0200
+Received: from [52.101.201.42]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6a0b10ab-af86-0a2a45020019-3465c92ae39e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2026 15:14:20 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by BY5PR03MB5111.namprd03.prod.outlook.com (2603:10b6:a03:1e2::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Mon, 18 May
+ 2026 13:14:15 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%7]) with mapi id 15.21.0025.022; Mon, 18 May 2026
+ 13:14:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,335 +55,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1779106671; cv=none;
-        d=google.com; s=arc-20240605;
-        b=MQ8ljygVSvRL1Coa0sU9ekiRknsA7sn7NtZdx/FzpxgfRwqAeVA8Z8SVJnjTgcUV44
-         Gd+IeBEQYMeAQdiSWFLDSOzKib60O67rP0cQw16e4Kjgm067HeiP/oY/LTC+RYLMWIOC
-         eugazIsrPtBy8ZDIU55xsislCz7G+PGZ3tsyKL6cFmJfAruG9REIOjVWpWidb16KbCWa
-         OS5XiOmm6m8zVKNVAicUwTeLwd/J5bfIOo3xf9JV2QiKQltuLLt/UPpPDFvK0bUbYq44
-         MAZZXm2E7JXRe3aYV7Fg5n0EGAJxjPxd2ksBZRodJVv6TMhWFw7m3aIBqCmrjkPZNGCb
-         Qr3Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=QUDDMeEAjWqLVQMALbxRXsM4w6DolEPsRZbXDVvo8PI=;
-        fh=uAzoxIkY79cy0zES8IqO07ArU7DBG3jlr2bg4XRVkR0=;
-        b=Bn22LNxZT/i9FUKMnZSCkaxoeSOpD4vCHCyuwv36t524o1ToBJks/+ttMVv2SRhNKW
-         RGM4yHA1EkD9asDB20hpem3gWXAIYpBBzhiGKqno0GPEbLI8gBDhg3aLnpZ37gjdUSjv
-         bKkY8++inMlRRTluJPvd2JY+0Tn+IgyY1BXyXGw+ueHI72D1BrQ45swJnHODGp5j6CBB
-         HAxiIYERA7AjYnbRNhbqZBLK4dcOuLzB+QI7HXxWYDnTDf/sY+2AZ+Bjlc9xBHAF2D9b
-         1PBcBVSPGWHwMo5QRIG3wFJywEgLfJyKH6pOwflhjIAYE2YjlEAyyp284Ed+xebRDSc/
-         5dEw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779106671; x=1779711471; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QUDDMeEAjWqLVQMALbxRXsM4w6DolEPsRZbXDVvo8PI=;
-        b=b5MEPDz23rdjv/xb3N3/Wm9ScdYZ6hfpyWLRS9x+jzpRbclZFi30U/AbtVBrtIOUHc
-         QHdfewVg5kknplYPPaLGYPuTVERsqzcYYAJs4kS12I/Fv3bdyumeHblPogivu70+ttYe
-         aAyG8mNdY4MeD0ZwoJO3IADoYDAKyTE3kWQD1g24vG6o489sSpO/c5Wp5+srgcjLPKU1
-         x1vrOQW5gJWzajbHfpX+d4eHGhYYpd960lYXDvPaKVHVj5jPvfnLBUZa4I9621XdXUpD
-         VTw4+OhiHFXE+/a+6S1FBGH2bS/CWtVGafOopjxUQt3V92+JDhA5f8RGPDJnOYTbd0NA
-         JCHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779106671; x=1779711471;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=QUDDMeEAjWqLVQMALbxRXsM4w6DolEPsRZbXDVvo8PI=;
-        b=F5vCeqTcmNfwJtkNADpBm4+gV1pYV+1fd2fWZHcztkozjr2gWzWx2AuLLi8CKeGHfR
-         s7iFHn4lvdWyVH9U4cg8ABW/f07gK+evX5Ng42gu8v9SszFUxMxG6dCb2//Qau0CcWOE
-         scHRGIQllEfvWPGqzVJj7cEl81Ek5QIx40XA1/i83Jjpx2xqH5j20y9NKeMGYWn4sOXv
-         LammYXa380ivAMmbTmbcUDVoJiN0fzkF2m96fLENMPhJ9YqNq+beZn/D5eNN0zE3lfxR
-         eBlwekfdHLZgMWGWTHx8oLhVM5DQUu6kNHP2zaIMA331+MwEM/6Zo+CJWigMsWrOPdZa
-         pPfw==
-X-Gm-Message-State: AOJu0YyJUVIPc9Jr+s3KsaMLW+z751RnS9AjkIgqpwaOSqDFuuP0fdFI
-	CiUayTIrr2/OhVnxdfGZlOO4KKSJSOHXdTb8lVk6aumV7kr3IbjxzBGpJutgK3pRorFn71xE0Wt
-	4HIbTzFa32Y0UiAapg+wU+12RDc8pPrY=
-X-Gm-Gg: Acq92OGO4ZeJ2u3fI29hhgw4/GnKO1LFUlUHPl8oh8xqC5Egun0MqMyCyKNZHv6GgDE
-	UvZn4UwY8ngmo6buTkgl2so0HAH+uYwOlha/2Q5c3NBMdUcYD6pdHqdO3qfEqbUesd9JoZkBo0H
-	8hMkK+GbLDwePWXpDspwBAnsUVrqK6SyVQ0GJO7wYjXE6nuIrkMJQUXSrg/pc1E4rAGIQ0n7euz
-	/FYXSn0a4kvUIDlG0KAJBSC+Lpk33QJtthiQv05q9jBPcy0IkIgyPyREJPF/1BAetn9YjREfMWK
-	NMCsr2OPRKlr5QY=
-X-Received: by 2002:a05:6512:39d0:b0:5a8:9b6a:5749 with SMTP id
- 2adb3069b0e04-5aa0e7649eemr4462110e87.28.1779106671271; Mon, 18 May 2026
- 05:17:51 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vGSterGOJEwV89HAjCcxXmzfJvI0aQOE4d5iYZ7EDqVjeCFXTg0tJvOnrl79P51Mm8nFx1BrC+VuVZXq75M5sLrXhBd0avyLHEqaTUYOd7SBvpsjk5sFiZ+Nj1YJPg0xs7b2yEhlL/Vy5AWQG9CabH9dTjqkO4JnLOLfHghBRPxoXKhnKLyHkMPapwT9MpbGA6JdwN+i9rwrr1F2gR59P+NnqMcFooLgmsZAxDJ8GB1ZQEZwjPKC5TK9CCWKz9iZk8dgt5K6kSKoFk4N34DYMJx8R7Qn7QnrJOwHEEH/Vd3nrP0ACoQ2U76rxMkIghFq48i8ZashN7qtnIJ+ZQ2Nmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YmWCXDgj2ZZ2XpOGe/Bk8AcX6edLOrCqiS8EDz8T5GY=;
+ b=eO+IR2qpYQqOoEyb3Gciu7dL//aZwy2yiDSNAtoYKrmGfut4WFJfiWBsjYaqvnAqOwBGLI+hZ/YI9FNA7C/l2br9RZ5Pj/Ybj5PKIwoCifL0cvfigZLoFsYe3777LnjA6/loFnGGO6zgyTNxJ/fRJzIRKteV05vpAoDm7qv4GeGp7YNncAxwss3yf5nQiSVDj/KMCsxGpckp8G2pryvfasUsVjGRHprOKdDQhf3CmNPmi3ao2Zq1fB5FhYBQR6f/VrGhEjWbKUWEpBeZu3Uo6BBMCMDTs3b9zefheXiNgHmjM8rL2X8q8FRsveG9km5ocVP/0UJEySx1jSJBqELGAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YmWCXDgj2ZZ2XpOGe/Bk8AcX6edLOrCqiS8EDz8T5GY=;
+ b=pIsHuvXcGYauXgdb/sNX6a+cd1oC3BWdojgZiMQdR/6hrh+AmOAlWauOdHCcIH2YWEXKDmYOJb5CbGJVQ/erQi66tRCBSL9ZuytG1THS1kuXWtwvdIXrjWmhPe/P3Dz/hgn88rL6y1CgVBzOAtjBTAp5aEHDVTdLiDfs/w+duck=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [RFC v1 1/7] x86/hvm: Move description into hvm_emulate_ctxt
+Date: Mon, 18 May 2026 14:13:58 +0100
+Message-ID: <20260518131404.3716969-2-ross.lagerwall@citrix.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260518131404.3716969-1-ross.lagerwall@citrix.com>
+References: <20260518131404.3716969-1-ross.lagerwall@citrix.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P265CA0036.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ae::12) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
 MIME-Version: 1.0
-References: <cover.1778605274.git.mykola_kvach@epam.com> <4162aa58c351677a4a267fe85989c6d4e07487d8.1778605274.git.mykola_kvach@epam.com>
- <28587F96-D8A1-46FA-91B0-D9A30E55EFC9@arm.com>
-In-Reply-To: <28587F96-D8A1-46FA-91B0-D9A30E55EFC9@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Mon, 18 May 2026 15:17:40 +0300
-X-Gm-Features: AVHnY4KnOHtCHpYNiS22fApRj8XdYJuznv52g3PGeMYztESxGRZ5nyaNtC1Vqsw
-Message-ID: <CAGeoDV8ucuOL2BfquiMtY7_1jmxhse93RZQkTchC=FHiQg3q8A@mail.gmail.com>
-Subject: Re: [PATCH v9 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Mykola Kvach <mykola_kvach@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d62444/1779106672-B695FFF4-25BDDE76/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|BY5PR03MB5111:EE_
+X-MS-Office365-Filtering-Correlation-Id: 582fbf76-f75a-4997-4cfd-08deb4df5c3a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|22082099003|56012099003|18002099003|3023799003|11063799003;
+X-Microsoft-Antispam-Message-Info:
+	HRCXS+IwIDFXK82aFXQSl5d7uD1HxrDKfqPZWzTLXPDKOnq4FIo91PWwnLSi5RoQT4IiHDqXbcdDiKGaDykmQH3HwcLOpo/fuFRyRNnwJwKtLvv1qsuWkPd9dNBstnXox7/78bgI2g2xIIfvgkcmLuk1H/8x4koIFzeYDxq3YKQUHCFr2CR2HN5XOfbJQEZxMXUFfeSopO9vAmA54kejpuOMRjMKe92Ik1TaQJ2F9DilGdfwncCwbWBCNzBYAC4NV8dcr8+uiGIt3Wve7gjuZqjh2D1nho59kl09a6hEIobVR20puvNidPp5rs3dWzgIbuHO2PGM80kzFbYMoEYmB369c3Ivpbd3mm/shJt6sB9h1/JtvNqOcz5LjP3RBiBQiHTc7TSR7DwW/D//Xp9flxL3yI8qnHi89ZqCdO9k3tpKicwVOeD4gSUpuaCtyoAXxMsXTxWfRaWp61Vbwj/dkSfCs5+gdbyHymYOE2iiKk7WNEbRjr6Amk+r0+ZL9kcg3+gyF6vNhKtpZ9nGxP9AZWVP9ic6IKLee1YJdy0LfFEcfy6rbbkq3+/LwCoA+iwu7PklPhc1WEtfKTtaO51eYw/3tov1XLaNNItJpClg55iIRiBQOzQcZlO+Oh1dzQzPKw8jcAYiipQvajuq0dyv+7vnek0Hdu+/4WiEEuPMrmk80HsNy3gU/qbx9RqdBkmC
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(22082099003)(56012099003)(18002099003)(3023799003)(11063799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?O+A/Bl2ZWPhuTYGHSgaTqyHRBclGHAaju5oZydYZgY481LSzSKtm7hZ/8RAs?=
+ =?us-ascii?Q?2fpDlgDx4pp7mrNS28I6s5CKJ1dAYJpv2F+ykQ2qGz2rN/FfV/LqoVTkdFBk?=
+ =?us-ascii?Q?vjijCDfMKujpnxhevqzKVr/inzIbv2U4gpYqiQt42CL5k47a9qI2pCxJCPe9?=
+ =?us-ascii?Q?8haDCLm/x0GhVByGI5BHnMMbxSMmUeoS953wLZIOXXxOuHaWMQNkXOOC2MNP?=
+ =?us-ascii?Q?6O4uqjWlonDGksZY+CKGWIFbSXhvAe/nTJU05eBJj5lnb35ZeANqueUbuoQX?=
+ =?us-ascii?Q?Gpym9CPVRtMA3vunQw5Mh3ellDMwVg3lozjEEw4QneLB1PGZ7W+wvlCW7TsN?=
+ =?us-ascii?Q?5Mfs2+5tQqq9tAeNn284g5hy8lcpoQEQoHr5IPuevepY5sm/XJ7ZjkY2tUCo?=
+ =?us-ascii?Q?Nnk+Qwyq6t6nWkFszQyQAIPccTphyr92MwjGhJgI1lB/BH7Lu1U5L8SIL4ET?=
+ =?us-ascii?Q?jqdaIA4yJyXnOtkybD5A6azAJIRmy+Yu+UM/ZzyYFhO3DOD6TSmBiKTImHt1?=
+ =?us-ascii?Q?e3auodqeZDXYBmzz7GyIT1n3tLXhIaKoYe6vNiEk1GBCdkH3a3iYvdAKwA0E?=
+ =?us-ascii?Q?mmGxeOWnzKOA+XloRIUFqgY00PotJaQGXX9iAvsO4zZYMh2Q+1RJW1WbNLgT?=
+ =?us-ascii?Q?4beH+tOh9VX6zfJwEG0tNp4t9VidSCJhnOaGMIwMjdgqt8HBBtED64+YoA2T?=
+ =?us-ascii?Q?QGjt9dbxdfi7L/Z3BMpNIJgBrDBkRySkpe74RV0GzfIAUDQnyEjPtwWXtiGq?=
+ =?us-ascii?Q?H5S5bXnzG1y5WoYXIfd24PJeWFcKGZNH3wsM41kaf+PhprYa8LibwPELSrdm?=
+ =?us-ascii?Q?JcHZtG48+AH2PEy9gD18iD4qhGqdRfoYqikNa7xIiLghfnjqITSfFlqHFSzN?=
+ =?us-ascii?Q?ipQfuEgeyUh1YlQqLr8lgNp8Gr+7mkZ5wDYu8WKPL9gnTl0R1JlSg58C9dCh?=
+ =?us-ascii?Q?Sw/X0qLkDd2r3jMN4oySLfqreGfelOiE2BL9KLYSExShJrn0vHSF+h/P2fVE?=
+ =?us-ascii?Q?76zh2Es48XNMPn03Lk0UiPXRM/dkp7DMxo5gdgYRCwj2ZLvv6rTvu4hmwCTJ?=
+ =?us-ascii?Q?1LoTQOYxkM93x3kuX3NsEDI+1hpRTv+6Fpr4FMTS/fukDMRyW9Ufl5X0kDMK?=
+ =?us-ascii?Q?Aob52rR601d43l7afqmwEAgc4Fggqh3eYLZ0uymeMPX46OJtwP4/73NKkyPs?=
+ =?us-ascii?Q?xbyZeeZuu0ceYnQdE9jLzbXVhcnDZhsqHTVEUoCS3lomKZiHB4+L7T3/aGvh?=
+ =?us-ascii?Q?2gjO4104l0ZIDIDd/kSMphAwqgC49BY2KQwVgZVyTzEV+NoV9zQslGusxDwA?=
+ =?us-ascii?Q?poP2kS++/1o+14/+zuaf/dmKoJUGExmlJGsbfGzQEw7Hc3BWzR6vunhkZdMV?=
+ =?us-ascii?Q?xWE4uPZqcv6I0ZSdU4l/4AMKE1p0ci7ay5SP2ZNrdloLqLYW5aIdHA64zoWo?=
+ =?us-ascii?Q?+Gc2JA2Qzkd6wnw2+C7U4QCE7v4pLw9VHiJ4IXkXImJy2SPQSB1sRWSKq8J5?=
+ =?us-ascii?Q?DAXIiygnTH+2b6YqHSjE6dJmzBdwdZuBs6XmNdHiytROKhH6OtDbdbXbQfc1?=
+ =?us-ascii?Q?dZFOTz7ucEr5QWpTh4R6aUxMX7TP8CaOJRtcUvlt5tSHiuK0Wex4md2gNfYK?=
+ =?us-ascii?Q?P1PFi1d664pd01+uZQyTSawXYhDcHCB627uuJhxCBUx/rVdY9W5n2F5ov3Ln?=
+ =?us-ascii?Q?Bz6GJxCCaQw+9iPXBC3drVvrviSTU/kRdClE2hKun7tb1u7s1ItWo7FUOouM?=
+ =?us-ascii?Q?E8aaiXzx/erFcxgL03V/ncL0GeLPeto=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 582fbf76-f75a-4997-4cfd-08deb4df5c3a
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 13:14:15.2762
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BJL1Gzg3GvdpT0EYqhGUv4bpsvwT0jKT/Bvjdpkftdn1+64WWuP9fw9z6lzHSg5RJL/xJ37scNXpmSh40Y4tFuRIiBYxz/OEJa3oYIq6OiM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5111
+X-purgate-ID: tlsNG-720697/1779110061-8077A161-4D9ECB49/0/0
 X-purgate-type: clean
-X-purgate-size: 7739
+X-purgate-size: 6095
 
-Hi Luca,
+This will be needed to split up hvm_emulate_one_insn().
 
-Thank you for the review.
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+---
+ xen/arch/x86/hvm/emulate.c             | 4 +++-
+ xen/arch/x86/hvm/hvm.c                 | 2 +-
+ xen/arch/x86/hvm/io.c                  | 6 +++---
+ xen/arch/x86/hvm/ioreq.c               | 2 +-
+ xen/arch/x86/hvm/svm/emulate.c         | 4 ++--
+ xen/arch/x86/hvm/vmx/realmode.c        | 2 +-
+ xen/arch/x86/include/asm/hvm/emulate.h | 2 ++
+ 7 files changed, 13 insertions(+), 9 deletions(-)
 
-On Thu, May 14, 2026 at 6:58=E2=80=AFPM Luca Fancellu <Luca.Fancellu@arm.co=
-m> wrote:
->
-> Hi Mykola,
->
-> >
-> > diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/pas=
-sthrough/arm/ipmmu-vmsa.c
-> > index fa9ab9cb13..e1b47a5824 100644
-> > --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> > +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> > @@ -71,6 +71,8 @@
-> > })
-> > #endif
-> >
-> > +#define dev_dbg(dev, fmt, ...)    \
-> > +    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
-> > #define dev_info(dev, fmt, ...)    \
-> >     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
-> > #define dev_warn(dev, fmt, ...)    \
-> > @@ -130,6 +132,24 @@ struct ipmmu_features {
-> >     unsigned int imuctr_ttsel_mask;
-> > };
-> >
-> > +#ifdef CONFIG_SYSTEM_SUSPEND
-> > +
-> > +struct ipmmu_reg_ctx {
-> > +    unsigned int imttlbr0;
-> > +    unsigned int imttubr0;
-> > +    unsigned int imttbcr;
-> > +    unsigned int imctr;
-> > +};
-> > +
-> > +struct ipmmu_vmsa_backup {
-> > +    struct device *dev;
-> > +    unsigned int *utlbs_val;
-> > +    unsigned int *asids_val;
-> > +    struct list_head list;
-> > +};
-> > +
-> > +#endif
-> > +
-> > /* Root/Cache IPMMU device's information */
-> > struct ipmmu_vmsa_device {
-> >     struct device *dev;
-> > @@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
-> >     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
-> >     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
-> >     const struct ipmmu_features *features;
-> > +#ifdef CONFIG_SYSTEM_SUSPEND
-> > +    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
-> > +#endif
-> > };
-> >
-> > /*
-> > @@ -547,6 +570,245 @@ static void ipmmu_domain_free_context(struct ipmm=
-u_vmsa_device *mmu,
-> >     spin_unlock_irqrestore(&mmu->lock, flags);
-> > }
-> >
-> > +#ifdef CONFIG_SYSTEM_SUSPEND
-> > +
-> > +static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
-> > +static LIST_HEAD(ipmmu_devices_backup);
-> > +
-> > +static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
-> > +
-> > +static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
-> > +                                   unsigned int utlb)
-> > +{
-> > +    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
-> > +}
-> > +
-> > +static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
-> > +{
-> > +    struct ipmmu_vmsa_backup *backup_data;
-> > +
-> > +    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
-> > +
-> > +    spin_lock(&ipmmu_devices_backup_lock);
-> > +
-> > +    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-> > +    {
-> > +        struct iommu_fwspec *fwspec =3D dev_iommu_fwspec_get(backup_da=
-ta->dev);
-> > +        unsigned int i;
-> > +
-> > +        if ( to_ipmmu(backup_data->dev) !=3D mmu )
-> > +            continue;
-> > +
-> > +        for ( i =3D 0; i < fwspec->num_ids; i++ )
-> > +        {
-> > +            unsigned int utlb =3D fwspec->ids[i];
-> > +
-> > +            backup_data->asids_val[i] =3D ipmmu_imuasid_read(mmu, utlb=
-);
-> > +            backup_data->utlbs_val[i] =3D ipmmu_imuctr_read(mmu, utlb)=
-;
-> > +        }
-> > +    }
-> > +
-> > +    spin_unlock(&ipmmu_devices_backup_lock);
-> > +}
-> > +
-> > +static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
-> > +{
-> > +    struct ipmmu_vmsa_backup *backup_data;
-> > +
-> > +    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
-> > +
-> > +    spin_lock(&ipmmu_devices_backup_lock);
-> > +
-> > +    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-> > +    {
-> > +        struct iommu_fwspec *fwspec =3D dev_iommu_fwspec_get(backup_da=
-ta->dev);
-> > +        unsigned int i;
-> > +
-> > +        if ( to_ipmmu(backup_data->dev) !=3D mmu )
-> > +            continue;
-> > +
-> > +        for ( i =3D 0; i < fwspec->num_ids; i++ )
-> > +        {
-> > +            unsigned int utlb =3D fwspec->ids[i];
-> > +
-> > +            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
-> > +            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
-> > +        }
-> > +    }
-> > +
-> > +    spin_unlock(&ipmmu_devices_backup_lock);
-> > +}
-> > +
-> > +static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *doma=
-in)
-> > +{
-> > +    struct ipmmu_vmsa_device *mmu =3D domain->mmu->root;
-> > +    struct ipmmu_reg_ctx *regs =3D mmu->reg_backup[domain->context_id]=
-;
-> > +
-> > +    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->con=
-text_id);
-> > +
-> > +    regs->imttlbr0 =3D ipmmu_ctx_read_root(domain, IMTTLBR0);
-> > +    regs->imttubr0 =3D ipmmu_ctx_read_root(domain, IMTTUBR0);
-> > +    regs->imttbcr  =3D ipmmu_ctx_read_root(domain, IMTTBCR);
-> > +    regs->imctr    =3D ipmmu_ctx_read_root(domain, IMCTR);
-> > +}
-> > +
-> > +static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *dom=
-ain)
-> > +{
-> > +    struct ipmmu_vmsa_device *mmu =3D domain->mmu->root;
-> > +    struct ipmmu_reg_ctx *regs  =3D mmu->reg_backup[domain->context_id=
-];
->
-> NIT: There is a double space before the `=3D`
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index bb1bb03ac4e9..a96d7814f91c 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2868,7 +2868,7 @@ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
+     struct hvm_emulate_ctxt ctx = {};
+     int rc;
+ 
+-    hvm_emulate_init_once(&ctx, NULL, guest_cpu_user_regs());
++    hvm_emulate_init_once(&ctx, NULL, NULL, guest_cpu_user_regs());
+ 
+     switch ( kind )
+     {
+@@ -2929,6 +2929,7 @@ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
+ void hvm_emulate_init_once(
+     struct hvm_emulate_ctxt *hvmemul_ctxt,
+     hvm_emulate_validate_t *validate,
++    const char *descr,
+     struct cpu_user_regs *regs)
+ {
+     struct vcpu *curr = current;
+@@ -2941,6 +2942,7 @@ void hvm_emulate_init_once(
+     hvmemul_get_seg_reg(x86_seg_ss, hvmemul_ctxt);
+ 
+     hvmemul_ctxt->validate = validate;
++    hvmemul_ctxt->descr = descr;
+     hvmemul_ctxt->ctxt.regs = regs;
+     hvmemul_ctxt->ctxt.cpu_policy = curr->domain->arch.cpu_policy;
+     hvmemul_ctxt->ctxt.force_writeback = true;
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index f759a397c557..de399bd9024a 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -3835,7 +3835,7 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
+     bool should_emulate = false;
+     struct hvm_emulate_ctxt ctxt;
+ 
+-    hvm_emulate_init_once(&ctxt, NULL, regs);
++    hvm_emulate_init_once(&ctxt, NULL, NULL, regs);
+ 
+     if ( opt_hvm_fep )
+     {
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 23a5ea0e6197..d9838c36d330 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -55,16 +55,16 @@ bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
+     struct hvm_emulate_ctxt ctxt;
+     int rc;
+ 
+-    hvm_emulate_init_once(&ctxt, validate, guest_cpu_user_regs());
++    hvm_emulate_init_once(&ctxt, validate, descr, guest_cpu_user_regs());
+ 
+     switch ( rc = hvm_emulate_one(&ctxt, VIO_no_completion) )
+     {
+     case X86EMUL_UNHANDLEABLE:
+-        hvm_dump_emulation_state(XENLOG_G_WARNING, descr, &ctxt, rc);
++        hvm_dump_emulation_state(XENLOG_G_WARNING, ctxt.descr, &ctxt, rc);
+         return false;
+ 
+     case X86EMUL_UNRECOGNIZED:
+-        hvm_dump_emulation_state(XENLOG_G_WARNING, descr, &ctxt, rc);
++        hvm_dump_emulation_state(XENLOG_G_WARNING, ctxt.descr, &ctxt, rc);
+         hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
+         break;
+ 
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index a5fa97e149ba..42ff796c6cb9 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
+@@ -39,7 +39,7 @@ bool arch_vcpu_ioreq_completion(enum vio_completion completion)
+     {
+         struct hvm_emulate_ctxt ctxt;
+ 
+-        hvm_emulate_init_once(&ctxt, NULL, guest_cpu_user_regs());
++        hvm_emulate_init_once(&ctxt, NULL, NULL, guest_cpu_user_regs());
+         vmx_realmode_emulate_one(&ctxt);
+         hvm_emulate_writeback(&ctxt);
+ 
+diff --git a/xen/arch/x86/hvm/svm/emulate.c b/xen/arch/x86/hvm/svm/emulate.c
+index 1f5436c8ea5d..1dd830a31bd7 100644
+--- a/xen/arch/x86/hvm/svm/emulate.c
++++ b/xen/arch/x86/hvm/svm/emulate.c
+@@ -71,7 +71,7 @@ unsigned int svm_get_insn_len(struct vcpu *v, unsigned int instr_enc)
+ #endif
+ 
+     ASSERT(v == current);
+-    hvm_emulate_init_once(&ctxt, NULL, guest_cpu_user_regs());
++    hvm_emulate_init_once(&ctxt, NULL, NULL, guest_cpu_user_regs());
+     hvm_emulate_init_per_insn(&ctxt, NULL, 0);
+     state = x86_decode_insn(&ctxt.ctxt, hvmemul_insn_fetch);
+     if ( IS_ERR_OR_NULL(state) )
+@@ -116,7 +116,7 @@ unsigned int svm_get_task_switch_insn_len(void)
+     struct x86_emulate_state *state;
+     unsigned int emul_len, modrm_reg;
+ 
+-    hvm_emulate_init_once(&ctxt, NULL, guest_cpu_user_regs());
++    hvm_emulate_init_once(&ctxt, NULL, NULL, guest_cpu_user_regs());
+     hvm_emulate_init_per_insn(&ctxt, NULL, 0);
+     state = x86_decode_insn(&ctxt.ctxt, hvmemul_insn_fetch);
+     if ( IS_ERR_OR_NULL(state) )
+diff --git a/xen/arch/x86/hvm/vmx/realmode.c b/xen/arch/x86/hvm/vmx/realmode.c
+index ff44ddcfa627..9879533280d0 100644
+--- a/xen/arch/x86/hvm/vmx/realmode.c
++++ b/xen/arch/x86/hvm/vmx/realmode.c
+@@ -163,7 +163,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
+     if ( intr_info & INTR_INFO_VALID_MASK )
+         __vmwrite(VM_ENTRY_INTR_INFO, 0);
+ 
+-    hvm_emulate_init_once(&hvmemul_ctxt, NULL, regs);
++    hvm_emulate_init_once(&hvmemul_ctxt, NULL, NULL, regs);
+ 
+     /* Only deliver interrupts into emulated real mode. */
+     if ( !(curr->arch.hvm.guest_cr[0] & X86_CR0_PE) &&
+diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
+index 178ac32e151f..2801d14d5455 100644
+--- a/xen/arch/x86/include/asm/hvm/emulate.h
++++ b/xen/arch/x86/include/asm/hvm/emulate.h
+@@ -30,6 +30,7 @@ struct hvm_emulate_ctxt {
+      * filtering.
+      */
+     hvm_emulate_validate_t *validate;
++    const char *descr;
+ 
+     /* Cache of 16 bytes of instruction. */
+     uint8_t insn_buf[16];
+@@ -74,6 +75,7 @@ void hvm_emulate_one_vm_event(enum emul_kind kind,
+ void hvm_emulate_init_once(
+     struct hvm_emulate_ctxt *hvmemul_ctxt,
+     hvm_emulate_validate_t *validate,
++    const char *descr,
+     struct cpu_user_regs *regs);
+ /* Must be called once before each instruction emulated. */
+ void hvm_emulate_init_per_insn(
+-- 
+2.53.0
 
-Ack.
-
->
-> > +
-> > +    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->co=
-ntext_id);
-> > +
-> > +    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
-> > +    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
-> > +    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
-> > +    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
->
-> I see in ipmmu_tlb_invalidate() we do:
-> dsb(sy);
-> ipmmu_tlb_sync(domain);
->
-> Is it safe to omit them here?
->
-> > +}
-> > +
-> > +/*
-> > + * Xen: Unlike Linux implementation, Xen uses a single driver instance
-> > + * for handling all IPMMUs. There is no framework for ipmmu_suspend/re=
-sume
-> > + * callbacks to be invoked for each IPMMU device. So, we need to itera=
-te
-> > + * through all registered IPMMUs performing required actions.
-> > + *
-> > + * Also take care of restoring special settings, such as translation
-> > + * table format, etc.
-> > + */
-> > +static int __must_check ipmmu_suspend(void)
-> > +{
-> > +    struct ipmmu_vmsa_device *mmu;
-> > +
-> > +    if ( !iommu_enabled )
-> > +        return 0;
-> > +
-> > +    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
-> > +
-> > +    spin_lock(&ipmmu_devices_lock);
-> > +
-> > +    list_for_each_entry( mmu, &ipmmu_devices, list )
-> > +    {
-> > +        if ( ipmmu_is_root(mmu) )
-> > +        {
-> > +            unsigned int i;
-> > +
-> > +            for ( i =3D 0; i < mmu->num_ctx; i++ )
-> > +            {
-> > +                if ( !mmu->domains[i] )
-> > +                    continue;
-> > +                ipmmu_domain_backup_context(mmu->domains[i]);
-> > +            }
-> > +        }
-> > +        else
-> > +            ipmmu_utlbs_backup(mmu);
-> > +    }
-> > +
-> > +    spin_unlock(&ipmmu_devices_lock);
-> > +
-> > +    return 0;
-> > +}
-> > +
-> > +static void ipmmu_resume(void)
-> > +{
-> > +    struct ipmmu_vmsa_device *mmu;
-> > +
-> > +    if ( !iommu_enabled )
-> > +        return;
-> > +
-> > +    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
-> > +
-> > +    spin_lock(&ipmmu_devices_lock);
-> > +
-> > +    list_for_each_entry( mmu, &ipmmu_devices, list )
->
-> This loop has an ordering problem because we can run ipmmu_utlbs_restore(=
-) before
-> the root ipmmu is restored (ipmmu_probe() uses `list_add()`).
-> Maybe going twice on the list, restoring first the root and in the second=
- round the rest
-> should work.
-
-Ack, good point.
-
-I will split the resume path into two passes: restore the Root IPMMU contex=
-t
-state first, then restore the micro-TLB state on Cache IPMMUs afterwards.
-
-Best regards,
-Mykola
 
