@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77C1CD4F54
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 04:55:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1313072.1583654 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861A7CD4F5E
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 04:55:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1313117.1583660 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPYxG-00037q-Ah; Wed, 20 May 2026 04:54:50 +0000
+	id 1wPYxG-0003Ap-Id; Wed, 20 May 2026 04:54:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1313072.1583654; Wed, 20 May 2026 04:54:50 +0000
+Received: by outflank-mailman (output) from mailman id 1313117.1583660; Wed, 20 May 2026 04:54:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPYxG-00037m-84; Wed, 20 May 2026 04:54:50 +0000
-Received: by outflank-mailman (input) for mailman id 1313072;
- Tue, 19 May 2026 13:48:38 +0000
+	id 1wPYxG-0003Ab-F2; Wed, 20 May 2026 04:54:50 +0000
+Received: by outflank-mailman (input) for mailman id 1313117;
+ Tue, 19 May 2026 14:21:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <cody.zuschlag@gmail.com>) id 1wPKoI-0003dj-Jf
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 13:48:38 +0000
+ (envelope-from <cody.zuschlag@gmail.com>) id 1wPLKJ-0003QF-H0
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 14:21:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPKoH-0071ua-Vw
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 15:48:38 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wPLKI-00CZHo-Pm
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 16:21:42 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <cody.zuschlag@gmail.com>)
- id 6a0c6a31-e002-0a2a0a5209dd-0a2a4508b8e2-14
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 15:48:37 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a0c71e9-e002-0a2a0a5209dd-0a2a45058182-34
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 16:21:42 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <cody.zuschlag@gmail.com>)
- id 6a0c6a35-63b5-0a2a45080019-d1558036a4bb-3
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 15:48:37 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-48fde648a71so26188345e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 06:48:37 -0700 (PDT)
+ id 6a0c71f6-aaa8-0a2a45050019-d155802ad5d9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 16:21:42 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-48fe26a177cso26714345e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 07:21:42 -0700 (PDT)
 Received: from localhost.localdomain ([2a01:e0a:e14:c050:d89c:b9ee:3c77:9607])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45da15a6454sm47044875f8f.34.2026.05.19.06.48.35
+ 5b1f17b1804b1-48fe4dac000sm336300305e9.0.2026.05.19.07.21.41
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 May 2026 06:48:36 -0700 (PDT)
+ Tue, 19 May 2026 07:21:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,39 +55,39 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779198517; x=1779803317; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779200502; x=1779805302; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=47TB1hZahUbrGTp+tRN8YySgvXEl2GQ3Glx2CwxaA4o=;
-        b=hbOiVOKShZ/Bw183Gm6VXURvOb/4MIdjn26d3HosFuG9KTPLLnZjVeZKT/kLmvBnwa
-         dYt6xOryx0kLxNf89ByeAOndkCbORR71c4bnh4wIM7oJuG2xVGfddpbUFdBsr8a8PVQz
-         StxGCboMh2RBGmy4YFO8kyqEqrWuapuYsS2l5QVaXfEEHhvZc6AHIml5UaAVL+fg1QVv
-         lZRliyHknF3/DuidpHEQb+1fVJAvogMgD3Cww3ugNViYacAitZiE1oROyHxizg19FIl7
-         VvwSMev+BQHExMujl0k6n+YyHQgVl3pRS900mEBb9GBNgnDJLDhe7EaFDHiYiXOv/6h6
-         LVwQ==
+        bh=Q3AfrNvrGJyfWtYnCetB4c6I4+sD7SJx4sUA/4sR3s8=;
+        b=SS0G/rwlgXbD4Bl8FW71wpk/frvDHBOKUgwAC5ssQorgl4KcQylBJu8uvXZgC9QHWQ
+         nDTLCjW2Qhtc+rH2hBhf2R8TOTHaz+jBEGOHRh/pf0KLmsQ7377EKbNOXapvexhU/xZN
+         iwWAuQJMdVxDG1qxG4OS9xSdZviusBa9hi6AE8gfe7XpMpAGFGYa+DOX1VWRXSTJ9aaq
+         7LrJRZgZfgll+nYdCTKdRXGmZE6UVxvjbaOPwj70yuJlFnsjqOBPnmXuMVYdqkxbLOKH
+         MHOEplbKOJceTncYRUlQ7eIJChufdGunpgKDkAgAEENz1O8GS49fmtohF7R3ZDLv/9Rz
+         4WhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779198517; x=1779803317;
+        d=1e100.net; s=20251104; t=1779200502; x=1779805302;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=47TB1hZahUbrGTp+tRN8YySgvXEl2GQ3Glx2CwxaA4o=;
-        b=dgbBTcCbTgBmz25wv9nOqPQpCx65c7T7T4aRmr0xRx9FaMAB8re2X6hvl0XWOiyNgi
-         U6tMjF7/Qv4VtIiPnMhrLJlqR8+WIX3o+wgdBMhvyiUr4+86hCO6S+FqffEfmdsURLEV
-         U6FosdCsNRmu2s5UnC4rENV5gwmSnCF4exJlfLAp3IAMGb0Zmk4qPj+w5guMMa6piUY3
-         5rERKuq5Yp6UwhMQjmo3kaGe9H8JsRRYBYpmTAUSzOhW38zH0wwwI/kaLOgipvOjbNa0
-         tyEV1zHFq/aMHJx/rRihO7H0yqahavEqhBCBg/+Q9nn+qt1r2P1r1IQ26rEv35o6zTdP
-         6Zzg==
-X-Gm-Message-State: AOJu0Ywd9IsStOeVQAKKVrOlGV5+AtrkPljG2U/6v6uSWuiLmjb+4X7r
-	HNhk30MWruqP4ijvsPtSKXz2YWxwbyVesW7KZt/vAuqHoBXd6SEPEGWHZ0tOrKTswSI=
-X-Gm-Gg: Acq92OFwmNm0LVN8SuYIWI3wropg8Rijq+OmbILChyZF8PeytnMPVVKxwq+fGfJG/Vc
-	VlRon/XNi7s3MP5kzMi7b+Jv5crceCci9KVUPZ+CmCYF1oskV0TE47DfJGSGVYC99N216x3PL7w
-	p24v6C1zXDak/sWTmwfANocnrXDnJohgI9bYi+jgc531IGo8Wx7FkOHQiMfkzTAnUKN9iw44l5r
-	JF+FUuRJRHc+POJP6fnkHr4iGS9AUY7H+rMWqsgr6Oijt37V834V7RShHNFnGS/5bFjjelypRAz
-	0XZWUW/+82zeeA1ZYsDzs+m5pkp99MJRVa/hgy/Ymt2ZOVc5/OsTn4huQ/dSa7hOA4ExZ83b+eE
-	xkjaFJfReU+TQIT8pPx30OVihNqP6IrOjWZeugVRUXRDHMNqVMy2L0n60PWUnd29smlCZB17ZF7
-	WFkQhuO0WKdHR0xQtuPCz/S3zKjffL0fHK3amMKaluR/h0VZqm3eHNQbT5kNwZs5i7
-X-Received: by 2002:a05:600c:41c7:b0:488:a502:8955 with SMTP id 5b1f17b1804b1-48fd6325dc2mr217213535e9.4.1779198516731;
-        Tue, 19 May 2026 06:48:36 -0700 (PDT)
+        bh=Q3AfrNvrGJyfWtYnCetB4c6I4+sD7SJx4sUA/4sR3s8=;
+        b=L7rqMT2jlFg7T7JQ+7kDQBIP1QEBpNantIpCv+NhG5fGrifnkUbe9HdP4K0nOlbGUt
+         5NoWjRfz3lzwyH6XCf2CdY4ZSU7Uxvc3LHt8Sop3EP6oA4FCM1CEUQZ+qSjfYKCdBEs4
+         xuFRqcC/WiVrQJqomxIFVExk2fMJQ4bC+q/511WjuFn7FT6n1jh8b+zVJuB7jXrs5TcJ
+         1gaU3OoVvg1djukACFrTZ/EzLtyx9+YG4yYNtd1aEwbkY/5ygBR4EwaNJcCiD1Ih2686
+         MAPvRvGIft9IgulysC/17BEvl49/Fw77Db6PNF/ZVKklDOG3B1kpCp8DEtsnqz3sZHPh
+         +5Yw==
+X-Gm-Message-State: AOJu0YzBYWNzA6v0Yr+qhWxUrIpaYHsJBROekutN0LXBW3Vas7BTiJl6
+	t1VBkX342NH50mmkvFllOKPLd3dH86wj2Vf7VHbGldk1PNpNinhQcfxU3imP1GvY0CQ=
+X-Gm-Gg: Acq92OFYwxdPeVeubj9pPDIUFbVyfNkjnC1cSNP79YdXfcLI3KpK7IPGcDE1Ong4IIH
+	VL7GhEKhsfiCUl25cNF5qA9Kug+dxv3f28MAKNew785ivlyL/TLU2kLgrTVq+cfD0N4kp4vhoPU
+	VzRdQy/iVQiZAq+7YJSCKL9Xi+U74sZxRHDzANAzqYxM0QAFdJ4jhAbUBX+U1daVxgfI1qOpEdt
+	uZJEInR0zY7HPLhZIrUjyxsTMEeHc0DohDMyMZMue+ZAgtdVmvNpQ+ZzKiArqyGxEiSKcq6kB3+
+	GANfd4dLMha5dFUlzwYb/v09HhddfFzCRlv4fdbf9PBJHVXdfmfMTAiv0Xn1nf+RCIh3aoXPZ0f
+	9bkhOnG7SUbzFIp97VBCii3OYtKKJLm0l2dr0LpMLwnoUOJ3z93vhN/sigJcq8BL3I4T7EKJkjU
+	+TAowreBtZkWDbNaKFUiEYW5oDWgOh0cdsDaXitYi0Y3OLo/AO7nozO9hrBY2S/RRR
+X-Received: by 2002:a05:600d:8448:b0:48f:fb0d:8d86 with SMTP id 5b1f17b1804b1-48ffb0d8ea0mr211479815e9.32.1779200502063;
+        Tue, 19 May 2026 07:21:42 -0700 (PDT)
 From: Cody Zuschlag <cody.zuschlag@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -98,30 +98,15 @@ Cc: andrew.cooper3@citrix.com,
 	roger.pau@citrix.com,
 	sstabellini@kernel.org,
 	Cody Zuschlag <cody.zuschlag@gmail.com>
-Subject: [PATCH] docs/process: document AI-assisted patch tags
-Date: Tue, 19 May 2026 15:44:18 +0200
-Message-ID: <20260519134417.16024-2-cody.zuschlag@gmail.com>
+Subject: [PATCH v2] docs/process: document AI-assisted patch tags
+Date: Tue, 19 May 2026 16:20:12 +0200
+Message-ID: <20260519142011.30276-2-cody.zuschlag@gmail.com>
 X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779198517-BC159DB1-A86A7BA2/0/0
+X-purgate-ID: tlsNG-c201ff/1779200502-DB16D443-E9A5EB0D/0/0
 X-purgate-type: clean
-X-purgate-size: 2332
-
-This patch adds lightweight guidance for AI-assisted patch
-
-attribution via an Assisted-by tag.
-
-The proposal is inspired by similar Linux kernel documentation,
-
-while keeping the Xen guidance intentionally minimal and aligned
-
-with the existing sending-patches documentation.
-
-Feedback welcome.
-
-
-docs/process: document AI-assisted patch tags
+X-purgate-size: 1900
 
 Add documentation for the Assisted-by tag to clarify how
 AI-assisted tooling may be disclosed in Xen patches.
@@ -129,16 +114,14 @@ AI-assisted tooling may be disclosed in Xen patches.
 The guidance is inspired by similar work in the Linux kernel
 documentation.
 
+Assisted-by: ChatGPT
 Signed-off-by: Cody Zuschlag <cody.zuschlag@gmail.com>
 ---
  docs/process/sending-patches.pandoc | 22 ++++++++++++++++++++++
  1 file changed, 22 insertions(+)
- mode change 100644 => 100755 docs/process/sending-patches.pandoc
 
 diff --git a/docs/process/sending-patches.pandoc b/docs/process/sending-patches.pandoc
-old mode 100644
-new mode 100755
-index 798ecceb..b61584f9
+index 798ecceb..b61584f9 100644
 --- a/docs/process/sending-patches.pandoc
 +++ b/docs/process/sending-patches.pandoc
 @@ -195,6 +195,25 @@ E.g.:
