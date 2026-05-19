@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A7FCD4F5B
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2026 09:29:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1312658.1582731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF9A2CD4F5B
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2026 09:37:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1312675.1582750 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPGl3-0004fb-B5; Tue, 19 May 2026 09:29:01 +0000
+	id 1wPGtU-0006nk-Cg; Tue, 19 May 2026 09:37:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1312658.1582731; Tue, 19 May 2026 09:29:01 +0000
+Received: by outflank-mailman (output) from mailman id 1312675.1582750; Tue, 19 May 2026 09:37:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPGl3-0004fU-8b; Tue, 19 May 2026 09:29:01 +0000
-Received: by outflank-mailman (input) for mailman id 1312658;
- Tue, 19 May 2026 09:29:00 +0000
+	id 1wPGtU-0006na-8D; Tue, 19 May 2026 09:37:44 +0000
+Received: by outflank-mailman (input) for mailman id 1312675;
+ Tue, 19 May 2026 09:37:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wPGl2-0004ev-3P
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 09:29:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wPGtT-0006nF-71
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 09:37:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPGl1-00BKXa-FX
- for xen-devel@lists.xenproject.org; Tue, 19 May 2026 11:28:59 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wPGtS-00BMV2-JC
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2026 11:37:42 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a0c2d53-5cb7-0a2a0a5109dd-0a2a4502c00e-30
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 11:28:59 +0200
-Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a0c2d5b-af86-0a2a45020019-d155d035c0ba-3
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 11:28:59 +0200
-Received: by mail-ed1-f53.google.com with SMTP id
- 4fb4d7f45d1cf-67e2498f3a7so7372797a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 02:28:59 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
- [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bd4f4dec855sm685143466b.37.2026.05.19.02.28.57
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0c2f52-2eae-0a2a0a5409dd-0a2a4503e3e8-40
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 11:37:42 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0c2f66-672d-0a2a45030019-d155802bb8ba-3
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 11:37:42 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-488a88aeec9so39363405e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 19 May 2026 02:37:42 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48fe5ab3977sm343673985e9.9.2026.05.19.02.37.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 May 2026 02:28:58 -0700 (PDT)
+ Tue, 19 May 2026 02:37:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,142 +52,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779182939; x=1779787739; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=oilnvXpTVqeZORRPfv32DCf56jL3MsGxny/s4Jkcn58=;
-        b=F/lt2Ttcfiwwt/ejm1geGSOaQcT2nWHlJKow025K+XAs18fJNB31s8+tPxxMrHY8YE
-         kWhoBDMpXuCu4J8UYfbY4AuVhfZ3p+0NTOAQ2AdlWHO8twyOBWOOqzIDXH5120FVbqSq
-         rV7tcrJcnhjhBJGQX948raP6P1FYQWA1JzXEzRC4MTlnGrRZWOW4ALCEoH+QhySc5bGO
-         Sa14laVqSIF24KEcM4oE/P0ysmIM7AuoELknx3o5fRHUSlxnTTXFHlDWLd2239ft8Coy
-         5FIgdvJIKjS3dmcOEssN6VGDd34KWcFdWyjRMoS74GrkA+CavOOYCHeAojbQEG/gkR5v
-         qlcQ==
+        d=suse.com; s=google; t=1779183462; x=1779788262; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=57pwnHxMPCxaGBZNl8cs6PC7ps1WywDh+7AYGFUot5k=;
+        b=feZgPsLOcIrllOuKrxaB9856pKf+EmNc0zVMtbqWRS4EQtiHW9EQqQq4pkbUzrab0L
+         X/kvXfumNGq8GSZmytCMhKLRTLG7wMPXI8iWnB5dB2avwl4AkPLgaLMq4SI54W2npZZY
+         XF2EQUuTMYe7kJ/ks012q+juLHbsMSwbZnqV5Tieu52TfBz6La60ykNLoKscqqs4lW8k
+         C0aD2LngX39ZooTGbeZkvXdmP9wEqNKNoJCwKLZ7rbS0/Pdszy5Deq7lc3BE4hiF2HyI
+         hRksogVlrvx6PXDobSk2OEd5jPwYUWRiTEn182AZ0cY93Dmz0LSMpROfAQ4TCFbKTcSe
+         nSxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779182939; x=1779787739;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oilnvXpTVqeZORRPfv32DCf56jL3MsGxny/s4Jkcn58=;
-        b=snbPZH3dK49evG2p4tTs3JhogpASIoUvX3RC5Erwd2HQ3Y72RO6STxd1cDALhQB6ST
-         nwJ0Vg00ZvIC/K/PuYHQvvpqWaQBsErKdTGRAoVEhi/EAo0firMvbLMDLTLWjslGJKak
-         DqbPFZvFUG7Lx3mz3nkSWlyJ8Y/3grwkIvaCHhTojYHHUaCmjI+qCRS9/xULOrmP+bca
-         eC/xbm5lvjWLTXkETeghwwbr1DKGS03fuHoDsPm46fs7Z0Eczr/kKHSr+JtTO2Tatz7v
-         rin7EdhDABv7MYs+rEY7/mqw+rsCsZgBkcUbIOlWCwYSboQ0LkUKJ/fmoR11JLb5SOWs
-         hvkw==
-X-Forwarded-Encrypted: i=1; AFNElJ++aznIv3cR/H5zzICZaGDE7Hm8w02AQ6rKnA73Gkc/+EKvZhvLUtbX5SjQuNMqr+481ZtjZw29IuM=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyEkk+OtxfGoW7SchjPtGX14SOs8AjeWYcQy4frDcetI/oKjSIE
-	oG9WJaAsIq7xw0mx4ge+sPU7gO3PEMA8pmiQZ0vC41cDGaRafdP0OrCE
-X-Gm-Gg: Acq92OGPiZYzxjBjC0gh8r9YMdII5ZytkksGbwow97H2w9hhOG3EhL7h/Q96CueSjhv
-	tHSSdtddVUaiZyRv/8SKb0ewRxF5OXC0ey4sdmbeabl9WVJd6gx+xDzpjJmkgRxBqUk9ZX3AqoF
-	aicMG2B01S2OhXew7DUIY6NgEz77HnVzMtURSlyTCn9RWZe1uJp1NbPI3vw6Lo4z/lakH4xj8Ok
-	0DFMbLAY2/JUtIpXz9iJtH9Qm0/bFPKpsyAk2CyWQvoibDxnOJlbYt619Z7G4Ehs9xhzq8IfMCf
-	Ff/RQFBcGq4fjaHiC7j3bLZ6UpbnyOO6jjG2nNw/7UqnsiYh0HY4yeDPQc12huHZ+XY4VUw/jSv
-	IiDIQq6hDGslX/YJoHF14LuYLFgQbssgYlbwDbVmqmIGMuUVdyMjSqg6aMIk7qiFVHh1WvoaBNW
-	G+WeIXryV6c1US33L+lIzafZcZew8Pahul2Q/YzMAhxRQcS/REHwDIIedMyyIEAVgAwa743ljnR
-	bOFHPhNVIwGKw==
-X-Received: by 2002:a17:907:1c0d:b0:bd2:bd3:1ef8 with SMTP id a640c23a62f3a-bd517a99797mr972760566b.35.1779182938736;
-        Tue, 19 May 2026 02:28:58 -0700 (PDT)
-Message-ID: <7f2a1dcd-482a-4821-bb14-54e804a703e8@gmail.com>
-Date: Tue, 19 May 2026 11:28:57 +0200
+        d=1e100.net; s=20251104; t=1779183462; x=1779788262;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=57pwnHxMPCxaGBZNl8cs6PC7ps1WywDh+7AYGFUot5k=;
+        b=FN3fIfnPuo1yC8OqjLKr8MijNPfJ5VfQXovJ68Co5foOwGJ9ojFGfJohJmx2UMq8j9
+         4pK/VLPTjd+gfDWMlufgoL8GLVM/oY3zorkQBw/Dk43rZ2zoUxeMcUz40jQ5oazM2PeG
+         Ceo9LiUhdOBwIdfhbPLRfpvn1uVP9uG1mT0qLmTOo+DAzKTgkWYeTg67TyJjMzjI/2yX
+         NhR/9unv1kMkiYMcOEOBbnuEf4dYUX99OyC+H0fltw3YVYEd2mm4d+8p2NnnI4dc3dwx
+         Y6MwEdudRqkMPDDlNpKcWXPdi+UqfzdvTgGWICj6YtBx+UCYODXkQdPVLmJHClDu4EVC
+         bVtg==
+X-Forwarded-Encrypted: i=1; AFNElJ8RnUrJzKDQA5HTnrj8DwpTv7Tg/C5qCNLEF4k97jo8oXFIv/dQ3Fzsot7iAEnNLdPa2pVYgg14zXs=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yzf2CSbxxBooHAJAdzdjYK1dpw9zhoRrmlXxWg9o+ah6oo6jCl0
+	+JBO5UzUdMc91MUrQ8Z6wi5WcEPEsUNnbBqudo3r8iNSTzt/qB9oFiMTzHwtCybc0g==
+X-Gm-Gg: Acq92OFalsSr+GejATrit95Ga4qLOYkP5/E/V+p2lf7ekal+tf+LH2pYxlc4+OGhuCx
+	Zaf/vR7QNh4MGlJFHuhay+Ei6ZA2g6Jc16X9Of4i+VDuw20MpTEXAdFUiHtmeBitwurvMdCjwGV
+	hKIqSsCnuumcCGzuYWgtJVqortzJxX6Gcrpc15OkQ5LQqK6oZaKV4IQ+XhmgszFik+TVBtS4iJj
+	ZA21a2GNXa9X+Qoj6Flbnv6DueHX140QbTN8PE+UDZ6Eq8dWeiFa3vVZ07l2ourg9pT9paPUg2N
+	l/dkwCMto0rfafZL627P30bP9BfTBHBHIjh4qdlEEOx7C99XPnrh4F+AWC4MtFN8ecaU2BQATBy
+	4Yh9Pw66eAKN/0ez4EHjriKl+HeLv91UabB9rBZ79QAQfP0rDu8QZGq2+TExv/5xvH0NiYsZW1S
+	SpVH0angm8/SW5iHpL6/KIkxdkLQCscS2a5ovFHCaeqReomUlu5katw/ZmSWxcqSrFffxWWE0QR
+	ImOks5BNnZ6E8Q=
+X-Received: by 2002:a05:600c:8210:b0:48a:5c23:cab with SMTP id 5b1f17b1804b1-48fe6322447mr270923715e9.19.1779183461808;
+        Tue, 19 May 2026 02:37:41 -0700 (PDT)
+Message-ID: <2be07ba3-879b-4c79-8103-b4951ab4cf53@suse.com>
+Date: Tue, 19 May 2026 11:37:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/26] xen/riscv: Implement construct_domain()
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
+Subject: Re: [PATCH v1 2/3] xen/domain: fix UBSAN null pointer dereference in
+ vcpu_info_reset()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
- <3b1c60095c8a963e7df3ca5025e637e678f5ee71.1778250616.git.oleksii.kurochko@gmail.com>
- <8b076265-8559-40cd-ac65-418e7b3c9e7e@suse.com>
+References: <cover.1779179301.git.oleksii.kurochko@gmail.com>
+ <09ae75638f9e7991163ed3633e7a60461d93da70.1779179301.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <8b076265-8559-40cd-ac65-418e7b3c9e7e@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <09ae75638f9e7991163ed3633e7a60461d93da70.1779179301.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1779182939-A9573161-27225067/10/73395122804
+X-purgate-ID: tlsNG-33051d/1779183462-36F42938-45DFF5D3/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 2114
+X-purgate-size: 1792
 
-
-
-On 5/18/26 5:33 PM, Jan Beulich wrote:
-> On 08.05.2026 16:43, Oleksii Kurochko wrote:
->> Implement construct_domain() function for RISC-V, which performs initial setup
->> for the domain's first vCPU, loads the kernel, initrd, and device tree,
->> and sets up guest CPU registers for boot.
->>
->> It also creates additional vCPUs up to max_vcpus and assigns the device tree
->> address and boot cpuid in registers.
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On 19.05.2026 10:39, Oleksii Kurochko wrote:
+> vcpu_info_reset() maps v->vcpu_info_area.map to the per-vcpu slot inside
+> the domain's shared_info page for vcpus with id < XEN_LEGACY_MAX_VCPUS,
+> and falls back to dummy_vcpu_info for vcpus beyond that limit.
 > 
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-> with ...
+> However, it does not guard against d->shared_info being NULL.  The
+> shared_info() macro expands to a member access through d->shared_info,
+> so when an architecture does not allocate a shared_info page the
+> dereference triggers UBSAN:
+>   UBSAN: Undefined behaviour in common/domain.c:325:10
+>   member access within null pointer of type 'struct shared_info_t'
 > 
->> --- /dev/null
->> +++ b/xen/arch/riscv/domain-build.c
->> @@ -0,0 +1,52 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +
->> +#include <xen/fdt-domain-build.h>
->> +#include <xen/fdt-kernel.h>
->> +#include <xen/init.h>
->> +#include <xen/sched.h>
->> +
->> +#include <asm/current.h>
->> +#include <asm/guest_access.h>
->> +
->> +int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
->> +{
->> +    struct vcpu *v = d->vcpu[0];
->> +    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(v);
->> +
->> +    BUG_ON(v->is_initialised);
->> +
->> +    /*
->> +     * At the moment *_load() don't return value and will just panic()
->> +     * inside.
->> +     * TODO: it will be good to change that.
->> +     */
->> +    kernel_load(kinfo);
->> +    initrd_load(kinfo, copy_to_guest_phys);
->> +    dtb_load(kinfo, copy_to_guest_phys);
->> +
->> +    regs->sepc = kinfo->entry;
->> +
->> +    /* Guest boot cpuid = 0 */
->> +    regs->a0 = 0;
->> +    regs->a1 = kinfo->dtb_paddr;
->> +
->> +    for ( unsigned int i = 1; i < d->max_vcpus; i++ )
->> +    {
->> +        const struct vcpu *tmp_v = vcpu_create(d, i);
->> +
->> +        if ( !tmp_v )
->> +        {
->> +            printk("Failed to allocate %pd v%d\n", d, i);
+> Extend the existing fallback condition to also cover the case where no
+> shared_info page has been allocated, mapping the vcpu to dummy_vcpu_info
+> instead. This is the correct behaviour: dummy_vcpu_info already serves
+> as the safe stand-in for vcpus that have no usable shared_info slot.
 > 
-> ... %u used here and ...
-> 
->> +            break;
->> +        }
->> +
->> +        dprintk(XENLOG_INFO, "Created vcpu %pv\n", tmp_v);
-> 
-> ... this line preferably dropped. Can do when committing, provided you agree.
+> Fixes: 295514ff75506 ("common: convert vCPU info area registration")
 
-I agree with these changes.
+I question this, largely (but not only) because I also ...
 
-Thanks a lot.
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+> RISC-V does not allocate a shared_info page at the momemnt because its
+> guests run in dom0less mode and do not use the Xen PV ABI, so
+> d->shared_info remains NULL throughout domain lifetime.
 
-~ Oleksii
+... question this mode of operation. Yes, you may (for now) be able to get
+away without, but e.g. event channels will want supporting at some point.
+Which will require a shared info page. Better put that in place right away,
+even if the guests you test with don't use it (yet). Certain other common
+code also assumes d->shared_info to never be NULL for an alive domain.
+
+Jan
 
