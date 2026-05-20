@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 452D9CD4F54
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 23:20:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314639.1584619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FF61CD4F54
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 23:29:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314645.1584628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPqCw-0002Uv-NN; Wed, 20 May 2026 23:20:10 +0000
+	id 1wPqLT-0003Gy-FB; Wed, 20 May 2026 23:28:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314639.1584619; Wed, 20 May 2026 23:20:10 +0000
+Received: by outflank-mailman (output) from mailman id 1314645.1584628; Wed, 20 May 2026 23:28:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPqCw-0002Uo-KX; Wed, 20 May 2026 23:20:10 +0000
-Received: by outflank-mailman (input) for mailman id 1314639;
- Wed, 20 May 2026 23:20:09 +0000
+	id 1wPqLT-0003Gr-CT; Wed, 20 May 2026 23:28:59 +0000
+Received: by outflank-mailman (input) for mailman id 1314645;
+ Wed, 20 May 2026 23:28:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wPqCt-0002OX-4O
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:20:09 +0000
+ id 1wPqLR-0003Gk-8C
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:28:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPqCs-00Bg3h-8c
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 01:20:06 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wPqLQ-00ER7h-KB
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 01:28:56 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0e416b-bab6-0a2a0a5309dd-0a2a4507d388-30
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 01:20:06 +0200
+ id 6a0e43af-5cb7-0a2a0a5109dd-0a2a4509d0ca-4
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 01:28:56 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0e41a5-229c-0a2a45070019-5a9b3222e65c-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 01:20:06 +0200
-Received: from 54-240-197-227.amazon.com ([54.240.197.227]
+ id 6a0e437c-2497-0a2a45090019-5a9b3222cb42-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 01:27:56 +0200
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=freeip.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wPqCi-00000007jhq-2nJv; Wed, 20 May 2026 23:19:56 +0000
+ id 1wPqKI-00000007k6c-2Lp0; Wed, 20 May 2026 23:27:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,15 +56,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=wlYFn8GBTQgMJlzaCY8sTYxsTwtwyZW+CWVEV8yuRNg=; b=mDR37hnk/SJuewmW4PB24JELvz
-	L6h2M2SoPugGLQcuTcmZFWo2eA4uAzDkcJ151D8Y0Exm/w8TOKAQU+1rlhmcCto5lW6YB9eu8OOAB
-	AL9iswB5MYvnoQpSVQdegij6yVUqfaZnBcwTb2m6Mk7DuGN4ihbJik2XW5/BMEbLoDTT1onNtydf1
-	Vlwc1Wpy6qFSiCh5aSxK5Fk4FQc/RGv6mr8v8dEiduA67RGf8FM1Qw8ZgKPBL4kPWnCmHkqhP+KAV
-	qIWqftJswGG4HcbR4scZMvtEYBXoeFvPw2Mrp00vjWgnSucSDqiujwb0jQ+7aecNVrMl2EG9nCp/9
-	JgMyeXbg==;
-Message-ID: <315885e0eb060a1b946aad729195e38e0e0681c8.camel@infradead.org>
-Subject: Re: [PATCH v3 26/41] x86/kvmclock: WARN if wall clock is read while
- kvmclock is suspended
+	bh=0UzuSR0lFFJs1N60oRVgd42d8TN/MZ03m79/Hebs0z8=; b=VuBJdjEN0/uT7sj94JtlpAkBp9
+	LDdR/TyFbfJKsiSumGNgT740rb91vcwWSgmRTSR6CMc65vxif6nf/7K/BEPlbtJ/mBcP/kyVwe31w
+	psHRWYEdc+o3ePDDb7V7xqxOkMLJW0iy4bREcDCdBtlGV+MCOYotcag5SLX6iXZ403/d8/RkHXIKt
+	5giThODgbhwwZz+ofkLsuniqBuyHX8Rn9+Hbs1/iYEiV/AC2MtcDgiHdVEgx9pQFQ3uIOLh7Ol32m
+	KOeLiGbhvxvVZdnYnFGzgzHH1duez5FrKcjMDRmfVsR8NJ1MiT6W+/q9R9x8nm4nxvgNBVHMQEYYP
+	0rSE7VqQ==;
+Message-ID: <423b37f056f0d4d596d5f4cc73802fb1079ecf63.camel@infradead.org>
+Subject: Re: [PATCH v3 27/41] x86/kvmclock: Enable kvmclock on APs during
+ onlining if kvmclock isn't sched_clock
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
  <kas@kernel.org>,  Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan"
@@ -86,48 +86,60 @@ Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov
  linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org, Michael
  Kelley <mhklinux@outlook.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Nikunj A Dadhania <nikunj@amd.com>, Thomas Gleixner <tglx@linutronix.de>
-Date: Thu, 21 May 2026 00:19:54 +0100
-In-Reply-To: <20260515191942.1892718-27-seanjc@google.com>
+Date: Thu, 21 May 2026 00:27:44 +0100
+In-Reply-To: <20260515191942.1892718-28-seanjc@google.com>
 References: <20260515191942.1892718-1-seanjc@google.com>
-	 <20260515191942.1892718-27-seanjc@google.com>
+	 <20260515191942.1892718-28-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-Z/YBhRco24UWCS5fKwHY"
+	boundary="=-QWJZ7uXErmxFQ92K7UlO"
 User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ef75cf/1779319206-2015DC48-C9A93793/0/0
+X-purgate-ID: tlsNG-bad1c0/1779319676-41165A53-7F90EBC1/13/0
 X-purgate-type: clean
-X-purgate-size: 8044
+X-purgate-size: 8752
 
 
---=-Z/YBhRco24UWCS5fKwHY
+--=-QWJZ7uXErmxFQ92K7UlO
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Fri, 2026-05-15 at 12:19 -0700, Sean Christopherson wrote:
-> WARN if kvmclock is still suspended when its wallclock is read, i.e. when
-> the kernel reads its persistent clock.=C2=A0 The wallclock subtly depends=
- on
-> the BSP's kvmclock being enabled, and returns garbage if kvmclock is
-> disabled.
+> In anticipation of making x86_cpuinit.early_percpu_clock_init(), i.e.
+> kvm_setup_secondary_clock(), a dedicated sched_clock hook that will be
+> invoked if and only if kvmclock is set as sched_clock, ensure APs enable
+> their kvmclock during CPU online.=C2=A0 While a redundant write to the MS=
+R is
+> technically ok, skip the registration when kvmclock is sched_clock so tha=
+t
+> it's somewhat obvious that kvmclock *needs* to be enabled during early
+> bringup when it's being used as sched_clock.
 >=20
+> Plumb in the BSP's resume path purely for documentation purposes.=C2=A0 B=
+oth
+> KVM (as-a-guest) and timekeeping/clocksource hook syscore_ops, and it's
+> not super obvious that using KVM's hooks would be flawed.=C2=A0 E.g. it w=
+ould
+> work today, because KVM's hooks happen to run after/before timekeeping's
+> hooks during suspend/resume, but that's sheer dumb luck as the order in
+> which syscore_ops are invoked depends entirely on when a subsystem is
+> initialized and thus registers its hooks.
+>=20
+> Opportunsitically make the registration messages more precise to help
+> debug issues where kvmclock is enabled too late.
+
+That's a hard word to type, isn't it?
+
+> Opportunstically WARN in kvmclock_{suspend,resume}() to harden against
+> future bugs.
+
+So is that :)
+
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
-
-Although I still hate the whole KVM wallclock thing, as the kvmclock
-itself is monotonic_raw, so adding that to the wallclock epoch is kind
-of wrong.
-
-Maybe the host should updated the wallclock occasionally to keep it up
-to date...
-
-
-Or maybe the guest should prefer the KVM_HC_CLOCK_PAIRING hypercall if
-it exists, over kvm-wallclock.
-
---=-Z/YBhRco24UWCS5fKwHY
+--=-QWJZ7uXErmxFQ92K7UlO
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -206,22 +218,22 @@ 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
-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
+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
-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
+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
 
 
---=-Z/YBhRco24UWCS5fKwHY--
+--=-QWJZ7uXErmxFQ92K7UlO--
 
