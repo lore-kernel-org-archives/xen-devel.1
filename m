@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19D34CD4F3D
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314394.1584349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40AB1CD4F54
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314396.1584367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDl-00045F-Ps; Wed, 20 May 2026 21:12:53 +0000
+	id 1wPoDn-0004W5-CW; Wed, 20 May 2026 21:12:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314394.1584349; Wed, 20 May 2026 21:12:53 +0000
+Received: by outflank-mailman (output) from mailman id 1314396.1584367; Wed, 20 May 2026 21:12:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDl-000458-N3; Wed, 20 May 2026 21:12:53 +0000
-Received: by outflank-mailman (input) for mailman id 1314394;
- Wed, 20 May 2026 21:12:52 +0000
+	id 1wPoDn-0004Vy-9O; Wed, 20 May 2026 21:12:55 +0000
+Received: by outflank-mailman (input) for mailman id 1314396;
+ Wed, 20 May 2026 21:12:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wPoDk-00044Z-4c
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:52 +0000
+ (envelope-from <mfo@igalia.com>) id 1wPoDl-000450-D3
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPoDj-00EDfE-H6
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:51 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wPoDk-00BUA1-P8
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:52 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23cc-e002-0a2a0a5209dd-0a2a4502d6f0-10
+ id 6a0e23cb-bab6-0a2a0a5309dd-0a2a4503e78a-14
  for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:51 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23d2-af86-0a2a45020019-d561b338a816-3
+ id 6a0e23d3-672d-0a2a45030019-d561b338e6d0-3
  for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:51 +0200
 Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
  helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wPoDS-0041Tq-O9; Wed, 20 May 2026 23:12:35 +0200
+ id 1wPoDc-0041Tq-C8; Wed, 20 May 2026 23:12:44 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,20 +56,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=QWDJ2OzZaJom0a60jnwGYvvAozNLoOMpVxRWdTCYrLY=; b=k0wISdlG2PRGKql4/MXlPi0po4
-	EfelhhvuoBBZAUZY1KGzV8lbvG53iTgc3x9kKP66naKIZNo7xHGstbidJ6sMr0YL4w3vMBC/hnTwv
-	0GdgVAjRGCRlGhMoW+ofgtEzcU6REh6OX0BSJVUP00+BD7qD5i1Us2ijJlI3NbLqyG3FyoZ2zCXps
-	N2ETl/O8vHJyASsxVO2zCNbjpA/m9aYC+q1GAqVJufiNSgYUQJCEq5+Uo8aK1A0GdukhrAs/TosIB
-	xdFYNv7CSitO+KF2Rwm1wI8dc8b99jTvpIBDZtbZjWMclDN64XwsDUXbzEnJXMsZnImd8KZkl+F7P
-	1HCZg+bQ==;
+	bh=gJKjWXfILv4BRccqYgfSFnf+b13WkiYn/6GuwfAO050=; b=hbcb4LsaBlq3hBRBoiPoGkUpqZ
+	aT2CHNIPR/K5BMimvBDH/sPdEcTqCzIGc98CxKvCC+2NBKGrfRs6n7Mi/9uBsqsff+2jnB5ZnKkIm
+	NuSHyh5rDrKK3QQbbjbaw6F8iO7uorMIIeshBHymTwfEE2mnCGhRYOgifQbzKvQHt22bF565InE+F
+	FZQ598/RljxuizulzinIcd7BHjTUJzsY4jFPmOfvyHICX29nSADoWz/Vh5jFhyxy1W9WDCf0g6F96
+	1PhzdCgWxWWqCY7KVCoJ49nFx2rl+DapUKM6cGKFUhHbWf36P6RH06UWBSXq9iXlf/h0J6nyVs00k
+	i8DFXIVQ==;
 From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Wed, 20 May 2026 18:12:05 -0300
-Subject: [PATCH v3 1/4] x86/asm: move inline string functions to
- <asm/string_inline.h>
+Date: Wed, 20 May 2026 18:12:07 -0300
+Subject: [PATCH v3 3/4] x86/cpuid: fix unbootable VMs by really inlining
+ memcmp() in hypervisor_cpuid_base()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-pvh-kasan-inline-v3-1-bede769c6ec7@igalia.com>
+Message-Id: <20260520-pvh-kasan-inline-v3-3-bede769c6ec7@igalia.com>
 References: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
 In-Reply-To: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
 To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
@@ -78,137 +78,43 @@ To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
  Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
  Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>, 
- kernel test robot <lkp@intel.com>
+ xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
 X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-720697/1779311571-B0979161-D1A88A3B/0/0
+X-purgate-ID: tlsNG-33051d/1779311571-3B360938-660D8FB8/0/0
 X-purgate-type: clean
-X-purgate-size: 4424
+X-purgate-size: 1458
 
-In next patch, inline string functions are included from 'boot/string.c'.
+Even with __builtin the compiler may decide to use the out of line function
+instead of the inline implementation.
 
-Using the header <asm/string.h> is problematic for a couple of reasons (*)
-(i.e., build errors), which can be addressed, but introduce unnecessary
-complexity and regression risk (beyond these _found_ couple of reasons).
+The existing code is broken with gcc-14/15 but not gcc-12/13 (Ubuntu 25.10)
+and vmlinux no longer boots with CONFIG_PVH if CONFIG_KASAN_GENERIC is set.
 
-Using a new header <asm/string_inline.h> is simpler and transparent to
-existing users of <asm/string.h>, with less changes to 'boot/string.c'
-and its users (eg 'boot/compressed/string.c' and 'purgatory/purgatory.ro'),
-which minimize regression risk.
+For testing purposes, if the size argument is reduced from 12 to 8 then the
+compiler decides to use the inline implementation; that shows results vary.
 
-No functional change intended.
+Switch the builtin to the inline implementation to address it.
 
-(*) Reasons not to include <asm/string.h> in 'boot/string.c':
-
-1) 'boot/string.c' is built for 16-bit/real mode thus some type and word
-size errors happen when <asm/string.h> include, e.g., <asm/string_64.h>.
-
-This can be addressed with '#ifndef _SETUP' (defined by 'boot/Makefile').
-
-2) 'boot/string.c' is included by 'boot/compressed/string.c' which is
-the source of 'purgatory/string.o', linked by 'purgatory/purgatory.ro'
-(CONFIG_KEXEC_FILE).
-
-In 64BIT, <asm/string.h> includes <asm/string_64.h>, which references
-__memset() and __memmove() with KCFI_REFERENCE(), ie, __ADDRESSABLE();
-however, 'purgatory/purgatory.ro' is not linked with implementations.
-
-So, CONFIG_KEXEC_FILE and CONFIG_CFI without CONFIG_KASAN hit errors:
-
-  >> ld.lld: error: undefined symbol: __memset
-     >>> referenced by string.c
-     >>>               arch/x86/purgatory/purgatory.ro:\
-                       (__UNIQUE_ID_addressable___memset_0)
-  --
-  >> ld.lld: error: undefined symbol: __memmove
-     >>> referenced by string.c
-     >>>               arch/x86/purgatory/purgatory.ro:\
-                       (__UNIQUE_ID_addressable___memmove_1)
-
-(Note: this is not hit with CONFIG_KASAN because 'boot/compressed/string.c'
-adds aliases __memset()/__memmove() to memset()/memmove() in that case.)
-
-This can be addressed with 'CFLAGS_string.o := -D__DISABLE_EXPORTS' so to
-disable KCFI_REFERENCE() in 'purgatory/Makefile' (it removes CC_FLAGS_CFI
-anyway).
-
-...
-
-However, since a change in this series would need more changes to address
-errors it causes, it is reasonable to change the series not to cause them,
-by using a separate header with _just_ inline string functions.
-
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202605140922.q7IlUv7o-lkp@intel.com/
+Fixes: 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
 Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/include/asm/string.h        | 21 +--------------------
- arch/x86/include/asm/string_inline.h | 26 ++++++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 20 deletions(-)
+ arch/x86/include/asm/cpuid/api.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
-index 9cb5aae7fba9ffcf0f5af8f939d30467750ccaa9..8a849bb5d0c7100a2a1820ec0af9fc9f850727fd 100644
---- a/arch/x86/include/asm/string.h
-+++ b/arch/x86/include/asm/string.h
-@@ -8,25 +8,6 @@
- # include <asm/string_64.h>
- #endif
- 
--static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
--{
--	void *ret = to;
--
--	asm volatile("rep movsb"
--		     : "+D" (to), "+S" (from), "+c" (len)
--		     : : "memory");
--	return ret;
--}
--
--static __always_inline void *__inline_memset(void *s, int v, size_t n)
--{
--	void *ret = s;
--
--	asm volatile("rep stosb"
--		     : "+D" (s), "+c" (n)
--		     : "a" ((uint8_t)v)
--		     : "memory");
--	return ret;
--}
-+#include <asm/string_inline.h>
- 
- #endif /* _ASM_X86_STRING_H */
-diff --git a/arch/x86/include/asm/string_inline.h b/arch/x86/include/asm/string_inline.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..ffcfa6583d2bc7b91d078888518d0e80248af940
---- /dev/null
-+++ b/arch/x86/include/asm/string_inline.h
-@@ -0,0 +1,26 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_X86_STRING_INLINE_H
-+#define _ASM_X86_STRING_INLINE_H
-+
-+static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
-+{
-+	void *ret = to;
-+
-+	asm volatile("rep movsb"
-+		     : "+D" (to), "+S" (from), "+c" (len)
-+		     : : "memory");
-+	return ret;
-+}
-+
-+static __always_inline void *__inline_memset(void *s, int v, size_t n)
-+{
-+	void *ret = s;
-+
-+	asm volatile("rep stosb"
-+		     : "+D" (s), "+c" (n)
-+		     : "a" ((uint8_t)v)
-+		     : "memory");
-+	return ret;
-+}
-+
-+#endif /* _ASM_X86_STRING_INLINE_H */
+diff --git a/arch/x86/include/asm/cpuid/api.h b/arch/x86/include/asm/cpuid/api.h
+index 82eddfa2347b32b76c2ea9b85f005ca5416ac71f..2d9f3d4d63de6e721f275d9e80d372edbdfedf30 100644
+--- a/arch/x86/include/asm/cpuid/api.h
++++ b/arch/x86/include/asm/cpuid/api.h
+@@ -204,7 +204,7 @@ static inline u32 cpuid_base_hypervisor(const char *sig, u32 leaves)
+ 		 * from PVH early boot code before instrumentation is set up
+ 		 * and memcmp() itself may be instrumented.
+ 		 */
+-		if (!__builtin_memcmp(sig, signature, 12) &&
++		if (!__inline_memcmp(sig, signature, 12) &&
+ 		    (leaves == 0 || ((eax - base) >= leaves)))
+ 			return base;
+ 	}
 
 -- 
 2.51.0
