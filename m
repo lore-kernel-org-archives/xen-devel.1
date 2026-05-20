@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC20ACD4F3C
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 14:43:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314035.1584045 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 741E5CD4F3C
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 14:45:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314040.1584053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPi8w-0002qL-6Y; Wed, 20 May 2026 14:43:30 +0000
+	id 1wPiAs-0003KB-HR; Wed, 20 May 2026 14:45:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314035.1584045; Wed, 20 May 2026 14:43:30 +0000
+Received: by outflank-mailman (output) from mailman id 1314040.1584053; Wed, 20 May 2026 14:45:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPi8w-0002qE-2y; Wed, 20 May 2026 14:43:30 +0000
-Received: by outflank-mailman (input) for mailman id 1314035;
- Wed, 20 May 2026 14:43:29 +0000
+	id 1wPiAs-0003K4-E8; Wed, 20 May 2026 14:45:30 +0000
+Received: by outflank-mailman (input) for mailman id 1314040;
+ Wed, 20 May 2026 14:45:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wPi8v-0002q8-6f
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 14:43:29 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wPiAr-0003Ju-7D
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 14:45:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPi8u-0081b5-If
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 16:43:28 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wPiAq-00DOsN-Je
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 16:45:28 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a0dc888-5cb7-0a2a0a5109dd-0a2a45018db4-26
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 16:43:28 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a0dc907-2eae-0a2a0a5409dd-0a2a450bd9b8-10
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 16:45:28 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a0dc890-c1f2-0a2a45010019-d155802dcc11-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 16:43:28 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-48984d29fe3so55127045e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 07:43:28 -0700 (PDT)
+ id 6a0dc906-212f-0a2a450b0019-d1558035c84c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 16:45:26 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4891e5b9c1fso43654415e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 07:45:26 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fed253f93sm130787775e9.16.2026.05.20.07.43.27
+ ffacd0b85a97d-45e6a135f0csm35919031f8f.27.2026.05.20.07.45.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 May 2026 07:43:27 -0700 (PDT)
+ Wed, 20 May 2026 07:45:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,54 +53,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Autocrypt:Content-Language:Cc:To:Subject:From:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1779288208; x=1779893008; darn=lists.xenproject.org;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=1nbudUEqnTAxYGN5Oi8IfyVVCmUa+WSp+/nGr6qgW0w=;
-        b=KoAQrQ6VA9DQ5JISjkHQys8Nr3ZR82yZCbSkcwUFCiF+gspZAcF9hwsfsonKk4ou1p
-         7dzQ2kPyaX/DAXbfOv9bBT1CtbUjIb3x1PyESH5f9KZThIAEsZIdInrEi/6v2n6+QgMD
-         1e8MznzMNiNITVT+J0vyXEjuS3e8Wk8YYp0Kl3gGkeyLcoKvB7u1wVi69TdOdPndiCnF
-         ARPEwZj/lNZW5ebyUhKFfWZthzy8pg+yFkn0LnJEJY9zpD6BQ63qz/6S3lDbWskRvDIk
-         fxBUgtM0SjUMb5f4eQ4xXpBO9cb3FScmmsiqDbo1YmTkwMcFxeTteHVYMCyfFcsZEYVz
-         J31A==
+        d=suse.com; s=google; t=1779288326; x=1779893126; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=dHoS210MxadB7J4xOPvWHIDlEyec0VM05s2uEJ0dyVw=;
+        b=Pvk57zP8fFiBvShKpIeEr3aoe+BZ3XqX2heBLNpXopYS4NM5NOoNqMlFhRHZD22+Zv
+         KHGZBVq5sXl/gDg9RSgd5/GQ3ioTltdquEZt6BRmyayjlV6+3zyC0WIpmSPKEgppfaOu
+         OAdTRqPLngHs+WQWheMVd1aSxCh1yfIRcjo7yCZgOWGaShPXoeApVQeHHXVHi7dyLXdP
+         stq67/rwsjUOORXG72TPMXqloIR9tkb9f1Eo3f7bT5VPXqL6LgpLl+nK6EWyVOD/koPT
+         wvvNECQT+zbzO3+8hULcMhvzACzeJBsFVC+kainFKDQbNcG2qQkHbwc3R5kvHah9t9Is
+         xw3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779288208; x=1779893008;
-        h=content-transfer-encoding:autocrypt:content-language:cc:to:subject
-         :from:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=1nbudUEqnTAxYGN5Oi8IfyVVCmUa+WSp+/nGr6qgW0w=;
-        b=D6e/LuSSCTWTsr2G55lklAAl7BmOcPQ32yx1FjsvUVGJyupKkGhPZHjCF7s+vwHCaM
-         IRqMmqxysqykhk+yDencOo/D/R//fZ1jATxmk7Af/0bIMXzadE8JZND3oCzumMLiAIst
-         KP6dB/lzXiosBDohT8Y32pMsEjtpDPlMACnQvQtGFreYf+/jpOdPh2NKuc1pWpwpmebG
-         09PXs3Dq6ArJdtvX68biFhDl/H0RAHAqahbxoes3W2FyHn9FlH6mH+olV03VgGXFAwc7
-         mfa8LdZs1aWnyzfOs06KGjPg/XH81nJ+lQuEmwQo4f/O31HSFY3pByEYuQ8ddP6asDLg
-         P3Pg==
-X-Gm-Message-State: AOJu0YyiyMZZb4dwT/wUUMHtu8f2BTlEm0e1nOiHPnhu+OGvkuWM6mTF
-	Q7dwO93zLCgca2xAH5SDWmQvjHt3n4NPx7K447IKo0gK5KTA9+e5BIUWr7x2Dy/XNzjA37KN4gv
-	1SYw=
-X-Gm-Gg: Acq92OEWHfMcXH0bBDfRmnBM4p0BVq833mYtRQpQ8/MndqTNMBRS9RNvTo+L8Vh0kR7
-	Ao/lIG40kRXEBfRWyghiRQbnrZfKeiRzTxFPmsBP6IsJC+k3G7FHNRCsO4NxKrKwTo6v2DeXrlN
-	hDmKmHUtMxUwwbayYIkqZTI8gWjqUGglnw+otlbdgMK0OrraCnwN+MEdq5z4GUprg2fpSnM2zt/
-	C7tAkvXphoQcij43B2Mah6XM4tglXNnvXbuUjun2+Q6xTWl1aGfVK/so8RpGUMwh3kLqQNTjw+S
-	cvhS4LQ8DaeyHpyPJTa4wvV4rRD+341oM0YKUiV+Hm3BTuLpXjysrTsJP3lMr3FrEna5mWT+8cK
-	EymbM6dhN31G2ll3kORzUdn2BOBvakUXRhKH4wKQwWXoONfSb1nnBb+/ASqW81F4AyQFKA+ISXc
-	Kem6iR0pBKVpR29XHAsM5WRAdJQjUpe798gnw6p96CQiYTN+EDAlVZwVkiYjlv0YfnDGl8n4ohJ
-	ouBTeXDsvz90H4=
-X-Received: by 2002:a05:600c:4f13:b0:485:30d4:6b9e with SMTP id 5b1f17b1804b1-48fe6328bb7mr414252495e9.21.1779288207813;
-        Wed, 20 May 2026 07:43:27 -0700 (PDT)
-Message-ID: <a3e034a4-621a-45ad-9b96-9a85cbe5eafd@suse.com>
-Date: Wed, 20 May 2026 16:43:26 +0200
+        d=1e100.net; s=20251104; t=1779288326; x=1779893126;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dHoS210MxadB7J4xOPvWHIDlEyec0VM05s2uEJ0dyVw=;
+        b=estBXF3mG8AfHWj5aR9zUfVbCB1YYDS76Ne5piJPkxkpWbqCI3W/WOpTVoe5R3K3PN
+         MciJJIt6ZPLBgz8eQLAEh9bPOpTbnbGVtMhi0HMhmDxAGA51JEjJhG/DtRO1CenF4ZeJ
+         waVZ1GhmKNSG1Z8TRO6dPjxPuDjPyX2WsvyKMfdg/VfGJOA4/fpiL5vYr26CwgpAW1LW
+         Ggo+SnMb/D1Avfjc4llwQRiXqu2+pp5fLjw9NNxdbLBCxtUU40khFAMLrgLqcZbGEqG2
+         veRXCGLh/MtfOUcbPPbeZEJBBs2msGiaEAN3phmbUgTHwAEpcU3kfhlq266sMtuhXzur
+         66ZQ==
+X-Gm-Message-State: AOJu0Ywde/J17V9v0X0omc2Opb5NghryrTOaje0fb5KtCPLD6OzjAq0B
+	T+PGvXrGwOygwd8tUlimtsvRCVAOeeQysTrX669zoewTJ7FhGQhDTFwfaryTR0D5ufuLPtEDcTu
+	EWFA=
+X-Gm-Gg: Acq92OH2jgTqTPswMmLKqtkC9/LVQSjJeHjItdCtFjLIayGGZvjFzpITt/IdxfFcnk1
+	cshEpc7bEfiNgvdrJ+l6qP03eqKfpJCwtA7Rb//BIxe/RofcOgkIT273UUFQ2YNbw0aRbf+QaF1
+	WXwYSr2A89CEdLyV9yYCS/GRCABTQOFdCu/CPJIFkQGQ2XKGbnqmMoLKXPZ9Ng/XmOyiJefAKcO
+	pnxcsaUE81oYWcwMt7ct0hVb9O/BrnyWcDxmXpn9SNNhxoOjCEjeC8DMTG3VTzcn9XOSGqis4l5
+	OzG/8LnCCN78zIk47XgqjS6aHA3PsUtl8bwCfHKDKJugxsQDWXhs5HhVtwf5WlpVwaTbiMLgfZD
+	f+MpOYmqGWP+8yL6o2DHTiUaLNwEfD41gaIbhNE10IFtb3qfeyZbvXEdxPFn3qXjJI0X3BGvxGi
+	gZC9l0TRyFXFiYA5x8IVuXBGgLpyJW0I6uhv0rBtPb9pfYltlcQ5f5vQ2FXRDvBdxTpBddB4f5F
+	OqqNb5NqciYM8CWcndnN2PSCA==
+X-Received: by 2002:a05:600c:c096:b0:48f:d1b8:9aaa with SMTP id 5b1f17b1804b1-48fe60e525bmr279995405e9.6.1779288325690;
+        Wed, 20 May 2026 07:45:25 -0700 (PDT)
+Message-ID: <38b28709-eddc-4dc7-9e8e-92db67d20ea7@suse.com>
+Date: Wed, 20 May 2026 16:45:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: [PATCH RFC v3 1/3] time: add "NOW() good" indicator
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH RFC v3 0/3] x86/time: avoid early uses of NOW() to return zero
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <a3e034a4-621a-45ad-9b96-9a85cbe5eafd@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -125,17 +134,97 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <a3e034a4-621a-45ad-9b96-9a85cbe5eafd@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1779288208-AE55DFF4-D7EBF1CA/0/0
+X-purgate-ID: tlsNG-42698a/1779288326-21F84F3B-A81C7090/0/0
 X-purgate-type: clean
-X-purgate-size: 245
+X-purgate-size: 2742
 
-Two new prereq patches were added in response to review feedback.
+printk_start_of_line() checks for a value of 0 right now. In order to be
+able to have NOW() return at least monotonically increasing values, that
+needs replacing by an explicit indicator.
 
-1: time: add "NOW() good" indicator
-2: x86/Intel: split model-specific freq calculation off of intel_log_freq()
-3: x86/time: avoid early uses of NOW() to return zero
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Arm and RISC-V may want to consider whether their initial get_cycles()
+can't be moved yet earlier, such that the indicator also can be set
+yet earlier.
+---
+v3: New.
 
-Jan
+--- a/xen/arch/arm/time.c
++++ b/xen/arch/arm/time.c
+@@ -145,6 +145,7 @@ void __init preinit_xen_time(void)
+         panic("Timer: Cannot initialize platform timer\n");
+ 
+     boot_count = get_cycles();
++    NOW_good = true;
+ }
+ 
+ static void __init init_dt_xen_time(void)
+--- a/xen/arch/riscv/time.c
++++ b/xen/arch/riscv/time.c
+@@ -87,6 +87,7 @@ void __init preinit_xen_time(void)
+         panic("%s: ACPI isn't supported\n", __func__);
+ 
+     boot_clock_cycles = get_cycles();
++    NOW_good = true;
+ 
+     /* set_xen_timer must have been set by sbi_init() already */
+     ASSERT(set_xen_timer);
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -2657,6 +2657,7 @@ void __init early_time_init(void)
+ 
+     set_time_scale(&t->tsc_scale, tmp);
+     t->stamp.local_tsc = boot_tsc_stamp;
++    NOW_good = true;
+ 
+     init_percpu_time();
+ 
+--- a/xen/common/time.c
++++ b/xen/common/time.c
+@@ -22,6 +22,8 @@
+ #include <asm/div64.h>
+ #include <asm/domain.h>
+ 
++bool __ro_after_init NOW_good;
++
+ /* Nonzero if YEAR is a leap year (every 4 years,
+    except every 100th isn't, and every 400th is).  */
+ #define __isleap(year) \
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -975,11 +975,10 @@ static void printk_start_of_line(const c
+         }
+         /* fall through */
+     case TSM_BOOT:
+-        sec = NOW();
+-        nsec = do_div(sec, 1000000000);
+-
+-        if ( sec | nsec )
++        if ( NOW_good )
+         {
++            sec = NOW();
++            nsec = do_div(sec, 1000000000);
+             snprintf(tstr, sizeof(tstr), "[%5"PRIu64".%06"PRIu64"] ",
+                      sec, nsec / 1000);
+             break;
+--- a/xen/include/xen/time.h
++++ b/xen/include/xen/time.h
+@@ -63,6 +63,12 @@ struct tm wallclock_time(uint64_t *ns);
+ /* Chosen so (NOW() + delta) wont overflow without an uptime of 200 years */
+ #define STIME_DELTA_MAX ((s_time_t)((uint64_t)~0ULL>>2))
+ 
++/*
++ * Indicator that the value returned by NOW() is good (earlier invocations may
++ * return zero or very small, merely monotonically increasing values).
++ */
++extern bool NOW_good;
++
+ /* Explicitly OR with 1 just in case version number gets out of sync. */
+ #define version_update_begin(v) (((v) + 1) | 1)
+ #define version_update_end(v)   ((v) + 1)
+
 
