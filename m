@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04501CD4F3C
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 12:51:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1313937.1583964 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D43CD4F54
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 12:57:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1313950.1583972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPgOT-00008n-OJ; Wed, 20 May 2026 12:51:25 +0000
+	id 1wPgUT-00019h-Al; Wed, 20 May 2026 12:57:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1313937.1583964; Wed, 20 May 2026 12:51:25 +0000
+Received: by outflank-mailman (output) from mailman id 1313950.1583972; Wed, 20 May 2026 12:57:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPgOT-00008g-KY; Wed, 20 May 2026 12:51:25 +0000
-Received: by outflank-mailman (input) for mailman id 1313937;
- Wed, 20 May 2026 12:51:23 +0000
+	id 1wPgUT-00019a-81; Wed, 20 May 2026 12:57:37 +0000
+Received: by outflank-mailman (input) for mailman id 1313950;
+ Wed, 20 May 2026 12:57:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <accek@invisiblethingslab.com>) id 1wPgOR-00007V-H5
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 12:51:23 +0000
+ (envelope-from <Edwin.Thankachan@electrifex.com>) id 1wPgUR-00019O-FR
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 12:57:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPgOQ-00GBSv-QO
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 14:51:22 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wPgUQ-0045TN-O7
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 14:57:34 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <accek@invisiblethingslab.com>)
- id 6a0dae46-e002-0a2a0a5209dd-0a2a4508e9da-14
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 14:51:22 +0200
-Received: from [103.168.172.147] (helo=fout-a4-smtp.messagingengine.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <accek@invisiblethingslab.com>)
- id 6a0dae48-63b5-0a2a45080019-67a8ac939e4b-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 14:51:21 +0200
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.phl.internal (Postfix) with ESMTP id 1E1D5EC00A5;
- Wed, 20 May 2026 08:51:19 -0400 (EDT)
-Received: from phl-imap-10 ([10.202.2.85])
- by phl-compute-02.internal (MEProxy); Wed, 20 May 2026 08:51:19 -0400
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 0F0BC216008A; Wed, 20 May 2026 08:51:18 -0400 (EDT)
+ (envelope-from <Edwin.Thankachan@electrifex.com>)
+ id 6a0dafb4-5cb7-0a2a0a5109dd-0a2a4504a6fa-38
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 14:57:34 +0200
+Received: from [3.110.59.181] (helo=repost.tmes-in.trendmicro.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Edwin.Thankachan@electrifex.com>)
+ id 6a0dafbd-1dec-0a2a45040019-036e3bb5c06f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 14:57:34 +0200
+Received: from 52.101.227.96_.trendmicro.com (unknown [172.26.60.77])
+ by repost.tmes-in.trendmicro.com (Postfix) with SMTP id 560E910000699
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 12:57:32 +0000 (UTC)
+Received: from MA0PR01CU009.outbound.protection.outlook.com (unknown
+ [52.101.227.96])
+ by repre.tmes-in.trendmicro.com (Trend Micro Email Security) with ESMTPS id
+ 67B34100002F0
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 12:57:03 +0000 (UTC)
+Received: from PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:11d::6)
+ by PNYPR01MB11012.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:2a7::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
+ 2026 12:57:01 +0000
+Received: from PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::81f0:38bd:ddb5:ab49]) by PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::81f0:38bd:ddb5:ab49%6]) with mapi id 15.21.0048.013; Wed, 20 May 2026
+ 12:57:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,175 +62,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm3 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1779281479; x=1779367879; bh=Jxj4b47lg2
-	xi5Nsw0TfkSeTWxLc0RwisqW7frdYveYM=; b=guqbbH7AgGxL8WPIVjyqho33wZ
-	5DVVWfngNM7flttNq8DJQL1E0xv2ysnzEsIEKVpRIs869h2v1UC8qFOT6DPpHkic
-	54C/B87MxqtBfmQ0pevftSQTSEKeWKZfGKC7A5jF8nHLqWqpAubpAjTtl7kMX0in
-	1yPLcqedVTi+wap2Wx83y8zbpQ3MO8CHVIFhUVIIpM3gSOH4xlIeYdO59NhD96B+
-	sAV9A4phEv1R86twE4rn+Uag54+HnuoDJY/Y3TN8YqQWfu4htyt/9NKPnOvxpcQJ
-	hfVTpI0hs87UwmbwlGb2zDoaobE5RSTwL1oaitAuMizASs2GZ8/iLT09q1sw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1779281479; x=
-	1779367879; bh=Jxj4b47lg2xi5Nsw0TfkSeTWxLc0RwisqW7frdYveYM=; b=o
-	idn6j/y5I0yK9UNSJCbJGelri8VrrqQs5MxJ+VlfrFx8I2gM4LaTnfMwoqIS1DRY
-	sULKEubT6bCRslxOKKL3jQD/GrPK/7zmmJwPDhgnn7ENOs9589+K4GCgYyqc/Qxa
-	49Nll2IEqxNJ0q7Y+4j+TJ8sX6mwsdvIv4njtdmPPAPZbqUafbR/FrafG963sd+X
-	Y0MeiAhRa2MuIbj6Kow73/nH4dO8llzlHbtEtunW2IjFUfa+1c/K/WBVBO4N4BZ9
-	I6KXgySvHBmku6dBRfS9oUbTruFkPexfBJYtspTgdg0n8KEGJSE4eHhgOAEPSDGa
-	RlwBvhSPmNiEx3pAK4Xjg==
-X-ME-Sender: <xms:Rq4Nag7dunH4LlK52QCdqRuZPoCN2dRnQJkv3T0yBBsMw5SX2HqOdg>
-    <xme:Rq4NasuGoRfxBzws7584pcNOxm3xGf3UYtas37iHBQrafCGkueh3G2GbJ8Dte0PKi
-    2xu7Y9WGoa5XIFHBP4CJA3SwuVUX7sgDPQr5PTbHl5kTFHxR2w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddugeegieejucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepofggfffhvfevkfgjfhfutgfgsehtqhertdertdejnecuhfhrohhmpefuiiihmhho
-    nhcutegtvggurgnkshhkihcuoegrtggtvghksehinhhvihhsihgslhgvthhhihhnghhslh
-    grsgdrtghomheqnecuggftrfgrthhtvghrnhepheeghedvueetffegkeduteeuiedvkeej
-    ffeggfevffeffffghfetvdelgfetkedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrg
-    hrrghmpehmrghilhhfrhhomheprggttggvkhesihhnvhhishhisghlvghthhhinhhgshhl
-    rggsrdgtohhmpdhnsggprhgtphhtthhopedufedpmhhouggvpehsmhhtphhouhhtpdhrtg
-    hpthhtohepmhhitghhrghlrdhorhiivghlsegrmhgurdgtohhmpdhrtghpthhtohepughp
-    shhmihhthhesrghpvghrthhushhsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepsg
-    gvrhhtrhgrnhgurdhmrghrqhhuihhssegrrhhmrdgtohhmpdhrtghpthhtoheprghnughr
-    vgifrdgtohhophgvrhefsegtihhtrhhigidrtghomhdprhgtphhtthhopehrohhgvghrrd
-    hprghusegtihhtrhhigidrtghomhdprhgtphhtthhopehvohhlohguhihmhihrpggsrggs
-    tghhuhhksegvphgrmhdrtghomhdprhgtphhtthhopeholhgvkhhsihhirdhkuhhrohgthh
-    hkohesghhmrghilhdrtghomhdprhgtphhtthhopehmrghrmhgrrhgvkhesihhnvhhishhi
-    sghlvghthhhinhhgshhlrggsrdgtohhmpdhrtghpthhtohepshhsthgrsggvlhhlihhnih
-    eskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:Rq4NahLRS6RXJM0b9n0u56qSmeUr2EIVk1BdolZxuDf69qDgwKrskQ>
-    <xmx:Rq4NajrQI9BzycuNuczjnEIEWUxQEUUOVmzh5BmSNzEELbmEiGvgfQ>
-    <xmx:Rq4NanvPtabc9GRkWO1PXkerJZtldcS2QF8vJg9IFdxIkWpEz3InkQ>
-    <xmx:Rq4NalIl4FAI020XVeaLXcXD745UZT-Y0qoNmkIfdgmnuZZirynebQ>
-    <xmx:R64NatxzoUsANYSZG1oJQfKZjHbz6H4IvLWQi_9yCPhXk8mZ3RUngNlZ>
-Feedback-ID: i792e4853:Fastmail
-X-Mailer: MessagingEngine.com Webmail Interface
+Authentication-Results: eu.smtp.expurgate.cloud; none
+X-TM-MAIL-RECEIVED-TIME: 1779281823.424000
+X-TM-MAIL-UUID: f19e9acd-0f21-43d1-929f-844febccb025
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZNv7k2HbeZ3C60kCVReRWyKQ2b1uY5puHJRtuIazPF1oVM8qKGxiG/5Pc5zp3C9ZttwMQymp7iXVpiJaHeH/CcLMXEzUFGW64Wb/fG1XjiyMDc9oYbizU9dZRj4LokDPNMCsZ3QoAa8viQTRiPGvFspKjMvv0yxIv3IxSleUl8Z3/vlL0V14GjeImQJnZ3tldKHeUBSnAkyJamq9mreejEj9O1XApLyWNmMxGPZHHOe6c9HL9tQvTaPTqbxRVX5zFRRaCcSSMz5ngWtX9YEBBlrQ7D59wvmm3yy7DX2XZIIN+exxObCf0amdTb17BEKswD88EOOxiPKocZ0TYSzulw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=c/rHjlZbXHG+RAYrjfiUIq+PxBLk66amCccPTg02BgA=;
+ b=PJr2mk/wJQy2ZO2fgVm1Its76aTtuH2SOG0bqcNiIliMv6xxC6yqRf7aTWRW/h6uNt8O0ZAeokX9BT3ZdTzEAoUeQGAr/rpJNopmzzzPFUdxXUE7kFmcMuHYCqcRo8RE8t+/JKSLNDzVUgOKvKEJYH62jJ16GqZ+m939PZ05LyqH/4As+0DJQEcNdGfWyohBz2xg4dWFJc0oyMdw5Z2iXxumPXxp7b0ZTrHx8rVJ1mGOZcAwcSvfZqoNVSc1G7WTlT56ksxkLrRr6iuR+QEVR022KikRLCsREHizESGYJ2IYCLsbvBkywJ8rWhduYOrxIpvPazpXM7Y53vXQU7pauQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=electrifex.com; dmarc=pass action=none
+ header.from=electrifex.com; dkim=pass header.d=electrifex.com; arc=none
+From: Edwin Thankachan <Edwin.Thankachan@electrifex.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: unsubscribe
+Thread-Topic: unsubscribe
+Thread-Index: AQHc6FghEC3STlxKe0KikvTZD7+mZw==
+Date: Wed, 20 May 2026 12:57:01 +0000
+Message-ID:
+ <PN0PR01MB892424B0AE38BCAAACB0C659EC012@PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=electrifex.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PN0PR01MB8924:EE_|PNYPR01MB11012:EE_
+x-ms-office365-filtering-correlation-id: f1a7b0bc-d3cc-4b6f-0cc3-08deb66f48e1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|366016|1800799024|376014|8096899003|56012099003|18002099003|38070700021|13003099007;
+x-microsoft-antispam-message-info:
+ j6qVIh6e/95Y0T0ZGMPGLtrNM1bmkTVm6aYR6EXMuRW8Tjq3ueNVj6KCKL4l4/3ICJGAG+hZoMnp4zoqh0FBzatQWNbzG3gBNEgAt5q9sHpcbovJdYlAMt3EH3SLN1lvsjm3wud0r3g7kbs0TQ4ecNR8qhmE1eItqmBdnL5RqZphVQQ2UomRdkOcUe1zLG3lFD8g05jmjfNLPqe+7KtGw1sV24qTKNEApkbj1GZJ1Lg9CWdHBSqb3WE7wuRV3Ltk/rYoXcTzQSwKBPY4HKBjZkYgPe1mtNopX168vB+WZG1yYEDIpxOeA1eJrbGs38xFzxeveNe43bhqQ8QQu6WTJMBzlkA9bZaqTV0ZjQEFCNFdLBA1erthxPP2aVGS+3tcnjkT63lcp8J5WmTQ+Qyd+YyHdfiBzcvuJsgFOfxlRxUZE7mZ0GUKIagpQ3XFVowBNQU2H8JiKYleeuZifkiYIrFeFI42B7frilh4mwyeVdHvwjbAtUStJjau/EFd7Z5AIcIMlqC7zbv+2eYUUZLjMCzTPv+X8PtZLRZrPr71jXSxWGlWkz3ATm6uM14qX+vCFmIMHs22NVSGEhHf6CP/RYAWsVCI7no2zjCdkLXfpge82PJnFCPJcr/7bf3b/cmntJDX8gMWV7h1+mGN4JXXDxQIHNnTtC4ThLnWZ/gFswDM2NmrgSvW+r5SGds4QEDG
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(8096899003)(56012099003)(18002099003)(38070700021)(13003099007);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?tMiW3J176mOqoidxLCl1Ve8RkFm5BsVUc/u3RGE1hW0PCxvvbFKMqbn0dU?=
+ =?iso-8859-1?Q?b36U5dB6vE/o9dx/CUeUbFO0HnrVthj7NSR+BTsG6o5QFKbFSC046ftymC?=
+ =?iso-8859-1?Q?FBRGGQ1KEL5leLSa4YJi9vye57PnYnJSmiddqnVYws/H2viU4bGcDDAgZc?=
+ =?iso-8859-1?Q?aX3o0qeSZcgRGBG2RURXdaolHKn/izSczJHBBwDOM/6QPEjrv0ioreOZkK?=
+ =?iso-8859-1?Q?1f0hDaORps5ubrKzFTgHY/qWxErzE6dAogar/L5I0WbRXYRfzYcnJmDgkf?=
+ =?iso-8859-1?Q?/m0FvYDCa85CBQdwChArRCXUU2lClBUsIsmw10xlEEUMxP5pGqsAW/8MPn?=
+ =?iso-8859-1?Q?RQd1n88imVmbZcv/9D0OO+zVZ/wt8i62k8ykoaM1ms+0JBIFKm3p2rqxPQ?=
+ =?iso-8859-1?Q?DDqBp1aEldYhwAdGr6GCqaorJZAnoOatIOPIoqXjf9QXb6qKXH+XSvybbU?=
+ =?iso-8859-1?Q?ikrqFhP7o7g9VJOeGuYGFVP76BUG83lPqTJ8AOVpXIfs4EHcP33rEsp9en?=
+ =?iso-8859-1?Q?pTo1F7TuBF04nuMIzkznzBP84QppI4IBvdBBHtd5kvNscdO/S9EsAB1FvJ?=
+ =?iso-8859-1?Q?KhX5Idc8MDV9CQOHk+NKxUschgrDqkca3m2XR5Iqg8Wi5aCZvNkppp1jms?=
+ =?iso-8859-1?Q?VcYCRbDrI24dmje+rnmJ0+ZFSEYbsZ5mAWI8PU6dYDSDr+FwdpKPrw/rPU?=
+ =?iso-8859-1?Q?o8Hmr+cUX98tovJzZm0u5KEtRBsW30T74U12GTfAlFkNdfxNAW03wKJiMd?=
+ =?iso-8859-1?Q?vzNbn7UBgMZN3+JqUvhFSYbz6jP7mka/NDR4cyfW4g1bTvfsHkTd/2917a?=
+ =?iso-8859-1?Q?D9Aksuc4mSe1m5JR8apXJXO3U9eSoWHp8x7+chZyb6LtNUyIIIIzTctW36?=
+ =?iso-8859-1?Q?+r+M38AXo9Vdz7s80fc+a3H4r+groUpv1eUQJsorWqBZ3ZfJO5wa6kff0q?=
+ =?iso-8859-1?Q?ecVpqjQPALMyAzvnap40PoYLxkTZZL1RREsSqzs57BX6igT06pqzrNAnKN?=
+ =?iso-8859-1?Q?o8Px4LSBxtkarXl3sNFFGUVX/J3WOoNUmAewCCEKAgIUaPcQwtHrr6ru6T?=
+ =?iso-8859-1?Q?d/qBWZXj6vCkMQHmCiikVt5vJArgwENDZC+7ASh+1d5+ccqZrG7LESJX9u?=
+ =?iso-8859-1?Q?O4ByBZXrqsXK404V2i2u59Ip/x3pqQjmvQ3jdmW89H6lYHUBtlqb9n6ei+?=
+ =?iso-8859-1?Q?JciBcPHzmZYhI4HtZeMgkJKlW6v4uiqU2fHAtDZA93UxuW6GM1DFGwXQDe?=
+ =?iso-8859-1?Q?Hrh6aBV6epEYsyHNALcDdmIFiYKZl40aYHEYOiFTKD/k1y0jSAmYS0rb8y?=
+ =?iso-8859-1?Q?K4+LtTSNzEpIj7emvA5SC7I4y+N/D+9gm/NoY+uE32vuec6mHg/GvGdPpX?=
+ =?iso-8859-1?Q?WwM35PMG2IGqByGyIxg+T0dw57KDpf2V6CMESw4MyGprtOOPeOGYAd0j5y?=
+ =?iso-8859-1?Q?wiTgdQWHFyhIqko5Sl9IZnZKpqqtEgxlWPUwp9jdFBNdwGOSer6ZaSggfQ?=
+ =?iso-8859-1?Q?P3AYz1rHnbKoUyRA6kqfpUevRgEQeyUQxtMfHaVT4trKaQgA1qCj3f3ISc?=
+ =?iso-8859-1?Q?MG0OjyBPoHq9XN5AleleSpCrrst0YXT/4gkSG0p0ebf4YEGGK5v8DvTaxt?=
+ =?iso-8859-1?Q?vvfo4tFckA6QlwkD8FjnLaNZ6sylBtsdXau25pNoXrEW84VlWDfbbCiEAZ?=
+ =?iso-8859-1?Q?5bISTjV4H9dfwJsDaGj9Y2BPyk2LOOGhkR/TFtL1gqaJGDrQw3WgaXo64Y?=
+ =?iso-8859-1?Q?ThyP0rdM12tHfPdHCutH7gHQc4xoYQeoo8bjFVSxtB+kA+o7dFGewc2fQG?=
+ =?iso-8859-1?Q?V5PcyMV7+mPPnobJG4M5b1eNZa/BZZQ=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_PN0PR01MB892424B0AE38BCAAACB0C659EC012PN0PR01MB8924INDP_"
 MIME-Version: 1.0
-X-ThreadId: AjnajP81mqMc
-Date: Wed, 20 May 2026 14:50:57 +0200
-From: =?UTF-8?Q?Szymon_Aceda=C5=84ski?= <accek@invisiblethingslab.com>
-To: "Jan Beulich" <jbeulich@suse.com>
-Cc: oleksii.kurochko@gmail.com, "Andrew Cooper" <andrew.cooper3@citrix.com>,
- "Marek Marczykowski" <marmarek@invisiblethingslab.com>,
- "Stefano Stabellini" <sstabellini@kernel.org>,
- "Julien Grall" <julien@xen.org>,
- "Bertrand Marquis" <bertrand.marquis@arm.com>,
- "Michal Orzel" <michal.orzel@amd.com>,
- "Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- "Teddy Astie" <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Message-Id: <b7708cbf-ea9f-4ba1-a93d-3981eacabbc7@app.fastmail.com>
-In-Reply-To: <31ee4635-0eaa-41cd-8fad-223fb11cb9bc@suse.com>
-References: 
- <5ee376dc0df448437f386ab2606c42d63a515ca1.1779194154.git.accek@invisiblethingslab.com>
- <809b9976089eaf02e864684461ced4e939dbcc83.1779271357.git.accek@invisiblethingslab.com>
- <31ee4635-0eaa-41cd-8fad-223fb11cb9bc@suse.com>
-Subject: Re: [PATCH v2 for-4.22] EFI: Fix boot from a device without a file system
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-c1860d/1779281481-B7D7BDB1-1810D5C3/0/0
+X-Exchange-RoutingPolicyChecked:
+	JpaM87Zpxgz1W7KrN1DRAylwoiQiYMr8dM5sYdk6F2tNBu+tvqUCGepmF2/VZvwyhz0k0xlmYbDkMj51Wv7N79WB8E+QtES4U78xH57Dr8Iq5i7KsUuZ34Ull20CN+75VQRTMbyttmQoG4TgncuBSwbvVuA+eGRlTbpfn8mB6r/O8oDIf8Xa0oOxKKMwooD3CVEetQngMDXY05Wkuimk8pexC/f8+whs45dZtMjyq/+etuM6d7MRwugGDge36VH98dwIsIANEJIdwT1a+ybhxg1+TRV6EtiLdE4+l2mS5sxORexNBnCIqsfSVI3giiX3Jro+w7Onm5BsTGgg4GWRXQ==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	PSTOvTWdEDWPuZIRhdXXXa6qftjJVhU6snDFuckaUGVT83rrXk0sZ/AJKJ+J2aWyuD0apz0AnKP98YjoqO6kZCwqNM00Kxar80OUelpmMaHc1niczjzfhLIR2Zbl+Lcr1V0lo19QBC+S+NqcSfU/4zwPYRkw9w0nVCZ4pYxDfBCxUz1rKHp0ctXhs4/XU8HKLAYARGQMrVcFKbvVPXMSPGQfs/fEzzPGiCzseRRdU5zz/+4wKKQs7wIWTFui9pZkcXw+o2xkLJbTc2sQhs+EwYBs5kkTCGDjq/L4LLsA586CPxyQByGSSAkY6n/qB0TH1sg8CDkqXkPx1mQGUR/hlx0d9hFByhbgUh9zxrBPP/6LkhY8kT081IshJc+OUN+Qjn98R+6Zkahnn4V6eQ/H1shFVKgQylXfLgahtX5u76gObx4bbAr8JUWWaYDoa49PpxR3ebIPVX99gZFozrPh+7kc2fZjxzaTwa/6YdITlZ0PVVPHSo3/4suHsbIX+zp5jq6NDfTBuFpOmOS7fBSaGQuXoaXhmpbsi/Ybrq/zCFrZsUk7LSiEiwN5RTqDiPfvjtqsd9m1HgWiZ2aNMThqv3em5xIO8mwuqJixWWiWG4U=
+X-OriginatorOrg: electrifex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PN0PR01MB8924.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1a7b0bc-d3cc-4b6f-0cc3-08deb66f48e1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 May 2026 12:57:01.3366
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f2626450-e675-4872-bae6-db17376f7643
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: AJFTomfYFu1BcHPABh6G0j6F4GTlP5tvTN/qJ30tGSII8Jt7Q7GK9TXSLcNVXaOsPm1i7Gu1xLXJ6o+dI8mF/GT4H4vraVmovkocZBewcfo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNYPR01MB11012
+X-TM-AS-ERS: 52.101.227.96-0.0.0.0
+X-TMASE-Version: StarCloud-1.3-9.2.1014-29954.006
+X-TMASE-Result: 10--13.282000-7.000000
+X-TMASE-MatchedRID: UTY1qVrtKF9loDh19hwAerQD5tVOK8yYrVnDQjOPUSHvl/sSkP3Ta16n
+	qcxwgJci72nfH9xa/ZiDzVKzxtpbxripA0mFNtPDMtANETYcEGtayaf9MuAM8ZwmoyicyUk4Iia
+	XEuKQ0BKif1w5aAHlEujWIKCroftba1MlcefkD6XzHErngGz1SYnzDhr8bhSP4gefAI4RchD7Jq
+	mA7t7dY2joepJqlXhIZaJ+QcJBnf6O3MZEKZpyL/Qu6ZqDKgUEuUeJCuB9aL1SMzx3ql2YQ8yfx
+	QnKP1ktleSnBtsiioMjkgvxkEq0rOH7RHkgEpGy4z6zHqVW+oLkDloO+14I74mRx7OV7pazHeL4
+	9luCA8ViyuQOZndK/eaOLqeqLSisprKwPj9bdNtK6tUNC8nCvL7hGwTSDQ8bVZnNYkc0+t4+FfD
+	c5UEa8Q==
+X-TMASE-XGENCLOUD: b9071cae-6cf2-487d-8aa1-5e1fd76a34e5-0-0-200-0
+X-TM-Deliver-Signature: AC2BCFEB34BD7A0F3935DF3D7888CA61
+X-TM-Addin-Auth: RTgpVicZ8LJXWeWfrMxi9SpMJiUQl/HNcGOrX6GtZfOAvEcwzPiv9GljyRR
+	3d+Gv2bMbUMEGmNK1IeLYGRDQmoiRqM1iOykiZiEEevndFPvNDSFdRJ/UA0FZAWPFFald0+baD0
+	BMaxwZui2HntY3IUyxiWLD43HL+vUMDZXJXd/m7xbcTuX1xUTQbH/BH3pXdnDm2W6tuKxEj6bOj
+	lVaRuOVLMl8pPPlKgvD7+5agyVpOe+a3/+sD0roFoH5l+krh1XZvZ+6iueABxVZ1VJoU6HZPk3D
+	B+dvdlIyfDRJwsKX946G/G9EyfpAxDofL+93pLyASnuKOQuO9a/QbVJTuw==.p32+CUB2VKEYP9
+	dLTFbZd7dQg1TnoMJRD+wXuROBd8yJept6rs8TJM9Q8LbSO27m1/BBU1zM8+lCQHUOO21DJSSQ3
+	lzThdvbfFBQj7Y9wqVY6PQGnecHp/teGhoLpD3Xx/HKwa4GeUSLzD+hX0oRynjfHmNNBD7PRwY3
+	WLSo3HSNKqyJnzI7xTTNE5ezJyMEjl/+pfappd0fVKxzXw2OPlK4W7zMsGbzElQMHryEBZiwGxo
+	IVh7cVxyYF4XPiA/wZDke/9RMxLveoqxcvSprulrOVajYEhQjf+GJheOwxuZ6dRjjk2ltTjuGyO
+	BgWec0ugSVdZXuUEheQODx6HM1Sg==
+X-TM-Addin-ProductCode: EMS
+X-purgate-ID: tlsNG-ebf023/1779281854-2B96A3FF-B4FB2D9E/0/0
 X-purgate-type: clean
-X-purgate-size: 3595
+X-purgate-size: 3227
 
-On Wed, May 20, 2026, at 1:58 PM, Jan Beulich wrote:
-> On 20.05.2026 12:30, Szymon Aceda=C5=84ski wrote:
-> > @@ -1526,31 +1537,33 @@ void EFIAPI __init noreturn efi_start(EFI_HA=
-NDLE ImageHandle,
-> > =20
-> >          gop =3D efi_get_gop(&gop_handle);
-> > =20
-> > -        /* Get the file system interface. */
-> > -        dir_handle =3D get_parent_handle(loaded_image, &file_name);
-> > -
-> >          /* Read and parse the config file. */
-> >          if ( read_section(loaded_image, L"config", &cfg, NULL) )
-> >              PrintStr(L"Using builtin config file\r\n");
-> > -        else if ( !cfg_file_name && file_name )
-> > +        else
-> >          {
-> > -            CHAR16 *tail;
-> > +            ensure_dir_handle(loaded_image, &dir_handle, &file_name=
-);
-> > =20
-> > -            while ( (tail =3D point_tail(file_name)) !=3D NULL )
-> > +            if ( !cfg_file_name )
-> >              {
-> > -                wstrcpy(tail, L".cfg");
-> > -                if ( read_file(dir_handle, file_name, &cfg, NULL) )
-> > -                    break;
-> > -                *tail =3D 0;
-> > +                CHAR16 *tail;
-> > +
-> > +                while ( (tail =3D point_tail(file_name)) !=3D NULL )
-> > +                {
-> > +                    wstrcpy(tail, L".cfg");
-> > +                    if ( read_file(dir_handle, file_name, &cfg, NUL=
-L) )
-> > +                        break;
-> > +                    *tail =3D 0;
-> > +                }
-> > +                if ( !tail )
-> > +                    blexit(L"No configuration file found.");
-> > +                PrintStr(L"Using configuration file '");
-> > +                PrintStr(file_name);
-> > +                PrintStr(L"'\r\n");
-> >              }
-> > -            if ( !tail )
-> > -                blexit(L"No configuration file found.");
-> > -            PrintStr(L"Using configuration file '");
-> > -            PrintStr(file_name);
-> > -            PrintStr(L"'\r\n");
-> > +            else if ( !read_file(dir_handle, cfg_file_name, &cfg, N=
-ULL) )
-> > +                blexit(L"Configuration file not found.");
-> >          }
-> > -        else if ( !read_file(dir_handle, cfg_file_name, &cfg, NULL)=
- )
-> > -            blexit(L"Configuration file not found.");
-> >          pre_parse(&cfg);
-> > =20
-> >          if ( section.w )
->=20
-> Seeing in particular this hunk - why not have read_file() call the new=
- function?
+--_000_PN0PR01MB892424B0AE38BCAAACB0C659EC012PN0PR01MB8924INDP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-This is because get_parent_handle not only sets dir_handle, but also sets
-file_name to something like xen.efi or BOOTX64.EFI. The quoted code then
-replaces .efi with .cfg to get the path to the config file to load:
-> > +                while ( (tail =3D point_tail(file_name)) !=3D NULL )
-> > +                {
-> > +                    wstrcpy(tail, L".cfg");
-> > +                    if ( read_file(dir_handle, file_name, &cfg, NUL=
-L) )
 
-I considered calling ensure_dir_handle() from read_file() for the other
-call sites, but this would:
-- still leave the explicit call in the quoted hunk, so it's a bit
-  inconsistent (most calls implicit, one explicit)
-- requires passing loaded_image to read_file + changing dir_handle
-  argument to a pointer
 
-Happy to do it in v3 if you think the call-site savings outweigh
-the inconsistency and the extra argument.
+Best Regards,
 
-> Most of the churn here would then go away.
+Edwin Thankachan
 
-The hunk above is the restructure of two else-if branches into a single
-else block with ensure_dir_handle() on top. Most of the churn is
-indentation.
+Embedded Software Engineer
 
-Szymon
 
-(ACK on sending new patch versions as new threads)
+Electrifex Technologies Pvt. Ltd.,
+
+Trans Asia Cyber Park, Infopark SEZ Phase 2,
+
+Kochi 682303, Kerala, India
+
+Web:     www.electrifex.com<http://www.electrifex.com/>
+
+
+--_000_PN0PR01MB892424B0AE38BCAAACB0C659EC012PN0PR01MB8924INDP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 11pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div id=3D"Signature" class=3D"elementToProof">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 11pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<p style=3D"text-align: left; text-indent: 0px; background-color: rgb(255, =
+255, 255); margin: 0px;">
+<span style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService,=
+ Calibri, Helvetica, sans-serif; font-size: 11pt; color: black;">Best Regar=
+ds,</span></p>
+<div style=3D"background-color: rgb(255, 255, 255); margin: 0px;">
+<p style=3D"margin-top: 0px; margin-bottom: 0px;"><span style=3D"font-famil=
+y: Calibri, sans-serif; font-size: 11pt; color: black;">Edwin Thankachan</s=
+pan></p>
+<div style=3D"margin-top: 0px; margin-bottom: 0px; font-family: Calibri, sa=
+ns-serif; font-size: 11pt; color: black;">
+<br>
+</div>
+<div style=3D"margin-top: 0px; margin-bottom: 0px; font-family: Calibri, sa=
+ns-serif; font-size: 11pt; color: black;">
+Embedded Software Engineer</div>
+<div style=3D"margin-top: 0px; margin-bottom: 0px; font-family: Calibri, sa=
+ns-serif; font-size: 11pt; color: black;">
+<br>
+</div>
+<p style=3D"margin-top: 0px; margin-bottom: 0px;"><span style=3D"font-famil=
+y: Calibri, sans-serif; font-size: 11pt; color: black;">Electrifex Technolo=
+gies Pvt. Ltd.,&nbsp;</span></p>
+<p style=3D"margin: 0px;"><span style=3D"font-family: Calibri, sans-serif; =
+font-size: 11pt; color: black;">Trans Asia Cyber Park, Infopark SEZ Phase 2=
+,&nbsp;</span></p>
+<div style=3D"margin: 0px; font-family: Calibri, sans-serif; font-size: 11p=
+t; color: black;">
+Kochi 682303, Kerala, India<br>
+<br>
+</div>
+<div style=3D"margin: 0px; font-family: Calibri, sans-serif; font-size: 11p=
+t; color: black;">
+Web: &nbsp;&nbsp; &nbsp;<a href=3D"http://www.electrifex.com/" id=3D"LPlnkO=
+WAd7422fc4-03a2-5f56-4d3e-22e985e7e014" title=3D"http://www.electrifex.com/=
+" style=3D"margin: 0px; text-align: left;">www.electrifex.com</a></div>
+</div>
+<div style=3D"margin-top: 0px; margin-bottom: 0px; font-family: Calibri, sa=
+ns-serif; font-size: 11pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+</div>
+</body>
+</html>
+
+--_000_PN0PR01MB892424B0AE38BCAAACB0C659EC012PN0PR01MB8924INDP_--
+
 
