@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE880CD4F5E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314397.1584376 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4183CD5BAC
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314393.1584341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDo-0004km-Kq; Wed, 20 May 2026 21:12:56 +0000
+	id 1wPoDi-0003rs-JZ; Wed, 20 May 2026 21:12:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314397.1584376; Wed, 20 May 2026 21:12:56 +0000
+Received: by outflank-mailman (output) from mailman id 1314393.1584341; Wed, 20 May 2026 21:12:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDo-0004ke-HC; Wed, 20 May 2026 21:12:56 +0000
-Received: by outflank-mailman (input) for mailman id 1314397;
- Wed, 20 May 2026 21:12:55 +0000
+	id 1wPoDi-0003rl-GL; Wed, 20 May 2026 21:12:50 +0000
+Received: by outflank-mailman (input) for mailman id 1314393;
+ Wed, 20 May 2026 21:12:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wPoDn-0004Yv-Nf
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:55 +0000
+ (envelope-from <mfo@igalia.com>) id 1wPoDf-0003rf-5c
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPoDn-008pPL-3p
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:55 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wPoDe-00EDfE-4R
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:46 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23b7-5cb7-0a2a0a5109dd-0a2a4508e012-12
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:55 +0200
+ id 6a0e23a3-e002-0a2a0a5209dd-0a2a450ad53a-38
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:45 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23d6-63b5-0a2a45080019-d561b338cf20-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:55 +0200
+ id 6a0e23cd-56b3-0a2a450a0019-d561b338982c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:45 +0200
 Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
  helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wPoDg-0041Tq-SN; Wed, 20 May 2026 23:12:49 +0200
+ id 1wPoDX-0041Tq-LQ; Wed, 20 May 2026 23:12:39 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,20 +56,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=L3Sr9rY5U1mD/3546TE+xOT1mBFRY3YzwAzYlEgEGo8=; b=MDSYObuCLhGGk3kLSDRFhFo0Xr
-	hAIFZMraCR/zpz1BmNe4aoczkzyiHAXFjnXpDpxnphQoyvLq8CMCKa/daqplYQ0ZGPjtubRWcFU1I
-	vyjvOjZNCKvKVm9kSyi24rbD4Ifnjo2u7jOZdS0PQoHU3sho5bq012deIlao81PuWi7nOTJDy5mza
-	Oiue8g2rZRvjjf9rNjL7aPMpOO1GC55ui6B6OicxChee+axFMIyKVR274WRUaSgaxcKGFExPSlaBX
-	G15x18CAzivBk+085CCxq2+BIt+ySRxPDl95qPMz/JmWHE+SCvK8lZbPsO9a0oHdTH0lYbDFmXdec
-	Jrxy5LIg==;
+	bh=jkpwXdcnHe1Zv/dlRDcrtsBOp/xquKy8TUTUHmBcL1U=; b=dUzRobAH+mthZRI7uJWLVNLyzp
+	VzF6Bb3s2HtliD6A5H1iVmP+juxYJyBrAKi0u3b6IzPD7xxn3tJZu4+pTkKVyHx1iGbbiFQi3kPAN
+	ugqtXjeWMYGekFisfkeO73ZivU9lMcTqya+RfRgfeJPR0vT/yjy06/PAV9vdtl6rDJ9MTXpjC88wl
+	USF3MRMam86DLoz+EQfXXgXdrkyE9L7F71NTIl54eAbnR9PDlu56Sz2bGugTotwnjUh4bdTiOo5K5
+	j1UmrI8ZtiOuItOS8zCt+derjk76bYCwNfRFr4pU//xD+jHew5EmJsng1KBijgbHnAuAv39pt+MfK
+	XlQFtNZA==;
 From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Wed, 20 May 2026 18:12:08 -0300
-Subject: [PATCH v3 4/4] x86/pvh: fix unbootable VMs by really inlining
- memset() in xen_prepare_pvh()
+Date: Wed, 20 May 2026 18:12:06 -0300
+Subject: [PATCH v3 2/4] x86/asm, x86/boot: expose inline memcmp
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-pvh-kasan-inline-v3-4-bede769c6ec7@igalia.com>
+Message-Id: <20260520-pvh-kasan-inline-v3-2-bede769c6ec7@igalia.com>
 References: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
 In-Reply-To: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
 To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
@@ -80,47 +79,68 @@ To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
 Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
 X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-c1860d/1779311575-B6F72DB1-146F5E81/0/0
+X-purgate-ID: tlsNG-4011c0/1779311565-7196E8B7-FCAD2D12/0/0
 X-purgate-type: clean
-X-purgate-size: 1474
+X-purgate-size: 2056
 
-Even with __builtin the compiler may decide to use the out of line function
-instead of the inline implementation.
+Move the inline memcmp function currently only available in 'boot/string.c'
+and its users (eg, 'boot/compressed/string.c' and 'purgatory/purgatory.ro')
+into the inline string functions header <asm/string_inline.h> to be reused.
 
-This particular one (still) generated the inline implementation as expected
-(at least in these compiler versions), but this is not guaranteed to remain
-the case, as seen with the previous commit.
+Note that the inline memcmp() returns 0/1, not -1/0/1 as regular memcmp()
+(reported by David Laight <david.laight.linux@gmail.com>), which is not
+caused or changed by this commit; this will be addressed separately.
 
-Switch the builtin to the inline implementation to prevent a similar issue.
-
-Fixes: fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
 Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/platform/pvh/enlighten.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/x86/boot/string.c               |  6 ++----
+ arch/x86/include/asm/string_inline.h | 11 +++++++++++
+ 2 files changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/platform/pvh/enlighten.c b/arch/x86/platform/pvh/enlighten.c
-index f2053cbe9b0ce3d2178938269607c652ae8f528e..cb442cbd9d828619421babb281bfe9759edbca8a 100644
---- a/arch/x86/platform/pvh/enlighten.c
-+++ b/arch/x86/platform/pvh/enlighten.c
-@@ -8,6 +8,7 @@
- #include <asm/hypervisor.h>
- #include <asm/e820/api.h>
- #include <asm/x86_init.h>
-+#include <asm/string.h>
+diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
+index ac0f900ebc47efa81c92e1bb2010ea41677899c4..544681d046c3f87101309ffaca0c90512a244856 100644
+--- a/arch/x86/boot/string.c
++++ b/arch/x86/boot/string.c
+@@ -15,6 +15,7 @@
+ #include <linux/errno.h>
+ #include <linux/limits.h>
+ #include <asm/asm.h>
++#include <asm/string_inline.h>
+ #include "ctype.h"
+ #include "string.h"
  
- #include <asm/xen/interface.h>
+@@ -31,10 +32,7 @@
  
-@@ -129,7 +130,7 @@ void __init xen_prepare_pvh(void)
- 	 * This must not compile to "call memset" because memset() may be
- 	 * instrumented.
- 	 */
--	__builtin_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
-+	__inline_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
+ int memcmp(const void *s1, const void *s2, size_t len)
+ {
+-	bool diff;
+-	asm("repe cmpsb"
+-	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
+-	return diff;
++	return __inline_memcmp(s1, s2, len);
+ }
  
- 	hypervisor_specific_init(xen_guest);
+ /*
+diff --git a/arch/x86/include/asm/string_inline.h b/arch/x86/include/asm/string_inline.h
+index ffcfa6583d2bc7b91d078888518d0e80248af940..91ed89bfdfa9b148002441e94f48039b17f70391 100644
+--- a/arch/x86/include/asm/string_inline.h
++++ b/arch/x86/include/asm/string_inline.h
+@@ -23,4 +23,15 @@ static __always_inline void *__inline_memset(void *s, int v, size_t n)
+ 	return ret;
+ }
  
++/* Note: this memcmp() returns 0/1, not -1/0/1 as regular memcmp(). */
++static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_t len)
++{
++	bool diff;
++
++	asm("repe cmpsb"
++	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
++
++	return diff;
++}
++
+ #endif /* _ASM_X86_STRING_INLINE_H */
 
 -- 
 2.51.0
