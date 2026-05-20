@@ -4,41 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B1BCD4F3D
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:02:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314386.1584332 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19D34CD4F3D
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314394.1584349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPo3j-00025J-OH; Wed, 20 May 2026 21:02:31 +0000
+	id 1wPoDl-00045F-Ps; Wed, 20 May 2026 21:12:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314386.1584332; Wed, 20 May 2026 21:02:31 +0000
+Received: by outflank-mailman (output) from mailman id 1314394.1584349; Wed, 20 May 2026 21:12:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPo3j-00025C-Le; Wed, 20 May 2026 21:02:31 +0000
-Received: by outflank-mailman (input) for mailman id 1314386;
- Wed, 20 May 2026 21:02:31 +0000
+	id 1wPoDl-000458-N3; Wed, 20 May 2026 21:12:53 +0000
+Received: by outflank-mailman (input) for mailman id 1314394;
+ Wed, 20 May 2026 21:12:52 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3YyEOagYKCTYkWSfbUYggYdW.UgepWf-VWnWddaklk.pWfhjgbWUl.gjY@flex--seanjc.bounces.google.com>)
- id 1wPo3i-000256-Rb
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:02:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mfo@igalia.com>) id 1wPoDk-00044Z-4c
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPo3h-00ECMP-O6
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:02:29 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3YyEOagYKCTYkWSfbUYggYdW.UgepWf-VWnWddaklk.pWfhjgbWUl.gjY@flex--seanjc.bounces.google.com>)
- id 6a0e215f-bab6-0a2a0a5309dd-0a2a450c8e8a-8
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:02:29 +0200
-Received: from [209.85.216.73] (helo=mail-pj1-f73.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <3YyEOagYKCTYkWSfbUYggYdW.UgepWf-VWnWddaklk.pWfhjgbWUl.gjY@flex--seanjc.bounces.google.com>)
- id 6a0e2164-62f1-0a2a450c0019-d155d849dc15-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:02:29 +0200
-Received: by mail-pj1-f73.google.com with SMTP id
- 98e67ed59e1d1-365e70c39d0so5049843a91.0
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 14:02:29 -0700 (PDT)
+ id 1wPoDj-00EDfE-H6
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:51 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <mfo@igalia.com>)
+ id 6a0e23cc-e002-0a2a0a5209dd-0a2a4502d6f0-10
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:51 +0200
+Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <mfo@igalia.com>)
+ id 6a0e23d2-af86-0a2a45020019-d561b338a816-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:51 +0200
+Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
+ helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wPoDS-0041Tq-O9; Wed, 20 May 2026 23:12:35 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,149 +49,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779310947; x=1779915747; darn=lists.xenproject.org;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IMxqN6rGG5Sakxt9VTCj2ZelG+Z0Re7U8JKIeB5aot8=;
-        b=fKpg+CLza4LQIEiudT6O8mJg+ekZQTt0hSYxMJuZkri5saeTEuHzfqViXy53gCHZds
-         /Mb5y2mG0sNPFokq+6biRvOgd8LqC2Q28kYDoWs0M3t9XaS2PZxBK+YtWJfw+BzLVClR
-         q7hI75Yf54uGLWvpMnVxFnUEuGtAxurR+tmkX0Grb/IPVuqqEU3Aew13ngL9gJJgOmn/
-         uzkpD/VySrbNuZf+jAy7GzG5gCsDhojdhVtsm47CQNWdTq7tqhea+pU+1/H+rUnxJ6Gm
-         lTtmpgzL3hEG+L4SXSQy+xfe42R6z0VudGTWp82QoVZKtOz6lYgih3kyXWQJdp2mspXy
-         0l+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779310947; x=1779915747;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=IMxqN6rGG5Sakxt9VTCj2ZelG+Z0Re7U8JKIeB5aot8=;
-        b=MCqDPvkI+eUChcV5ydeqvLAy4FHY0ZJzhUHZOxm6MI5b9Lqd+3Ek4OlBjOvTgq6Dv5
-         8iKAuW2l/bI65Lm1CXkKM3u1oG3uBvsBiRISMqLrXJeDlZw9lkNIvZJyEZdsmQ1mPUrM
-         RzPSiLviEqRdn1cCtITwiOpguJmmx/lPsZnZU/70om5lXv2QE36y+fdTsZ3zP6Ktjoqs
-         9o8NsJfem0JNcS/Go5VlJLY87QfXFrv/mu7QD3BVTDNDD4iDE8Db9Bk18TqYjtA20amd
-         ED/I3gCA9iVsf83XrcYKXf6pNvUuPGQgZuqb6Vlmr/iNQfsScPpPMbQt/1gscN9tiQbP
-         eZSA==
-X-Forwarded-Encrypted: i=1; AFNElJ9z7AO2ttSQnvmLmNKEYtgMnwt3ilhAMdIrM4HR9d3Ug4j8AkRzhh906Kf6Rl7u0kz6HHp7zL+z+H0=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzAVphiZvf9qic1pWLQ5EyhEztsI9GUY4hOaeB4cIgX/8GDULUA
-	lt4AQsDe+0FmqgbJ9MTUttEQjrJRRq8d6jE5X5XiV+6SO2Q3eZ2p/l1hzPd1avcdE2CmnhQ41zc
-	RLkdiNA==
-X-Received: from pgnp19.prod.google.com ([2002:a63:7f53:0:b0:c82:7805:9e4d])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6300:279a:10b0:39b:dea7:5626
- with SMTP id adf61e73a8af0-3b308856ca4mr1798637.35.1779310947183; Wed, 20 May
- 2026 14:02:27 -0700 (PDT)
-Date: Wed, 20 May 2026 14:02:26 -0700
-In-Reply-To: <c347d65f555ad1e10a0e87ee57c5879c7046d0e7.camel@infradead.org>
-Mime-Version: 1.0
-References: <20260515191942.1892718-1-seanjc@google.com> <20260515191942.1892718-7-seanjc@google.com>
- <c347d65f555ad1e10a0e87ee57c5879c7046d0e7.camel@infradead.org>
-Message-ID: <ag4hYu0O71QrLW2y@google.com>
-Subject: Re: [PATCH v3 06/41] x86/acrn: Mark TSC frequency as known when using
- ACRN for calibration
-From: Sean Christopherson <seanjc@google.com>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: Kiryl Shutsemau <kas@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
-	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	John Stultz <jstultz@google.com>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
-	Vitaly Kuznetsov <vkuznets@redhat.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, x86@kernel.org, 
-	linux-coco@lists.linux.dev, kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, 
-	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
-	Thomas Gleixner <tglx@linutronix.de>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
+	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=QWDJ2OzZaJom0a60jnwGYvvAozNLoOMpVxRWdTCYrLY=; b=k0wISdlG2PRGKql4/MXlPi0po4
+	EfelhhvuoBBZAUZY1KGzV8lbvG53iTgc3x9kKP66naKIZNo7xHGstbidJ6sMr0YL4w3vMBC/hnTwv
+	0GdgVAjRGCRlGhMoW+ofgtEzcU6REh6OX0BSJVUP00+BD7qD5i1Us2ijJlI3NbLqyG3FyoZ2zCXps
+	N2ETl/O8vHJyASsxVO2zCNbjpA/m9aYC+q1GAqVJufiNSgYUQJCEq5+Uo8aK1A0GdukhrAs/TosIB
+	xdFYNv7CSitO+KF2Rwm1wI8dc8b99jTvpIBDZtbZjWMclDN64XwsDUXbzEnJXMsZnImd8KZkl+F7P
+	1HCZg+bQ==;
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+Date: Wed, 20 May 2026 18:12:05 -0300
+Subject: [PATCH v3 1/4] x86/asm: move inline string functions to
+ <asm/string_inline.h>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1779310949-E0B64CF5-B9D4BC25/0/0
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260520-pvh-kasan-inline-v3-1-bede769c6ec7@igalia.com>
+References: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
+In-Reply-To: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
+To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>, 
+ kernel test robot <lkp@intel.com>
+X-Mailer: b4 0.14.2
+X-purgate-ID: tlsNG-720697/1779311571-B0979161-D1A88A3B/0/0
 X-purgate-type: clean
-X-purgate-size: 2904
+X-purgate-size: 4424
 
-On Wed, May 20, 2026, David Woodhouse wrote:
-> On Fri, 2026-05-15 at 12:19 -0700, Sean Christopherson wrote:
-> > Mark the TSC frequency as known when using ACRN's PV CPUID information.
-> > Per commit 81a71f51b89e ("x86/acrn: Set up timekeeping") and common sen=
-se,
-> > the TSC freq is explicitly provided by the hypervisor.
-> >=20
-> > Signed-off-by: Sean Christopherson <seanjc@google.com>
-> > ---
-> > =C2=A0arch/x86/kernel/cpu/acrn.c | 1 +
-> > =C2=A01 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-> > index c1506cb87d8c..2da3de4d470e 100644
-> > --- a/arch/x86/kernel/cpu/acrn.c
-> > +++ b/arch/x86/kernel/cpu/acrn.c
-> > @@ -29,6 +29,7 @@ static void __init acrn_init_platform(void)
-> > =C2=A0	/* Install system interrupt handler for ACRN hypervisor callback=
- */
-> > =C2=A0	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callba=
-ck);
-> > =C2=A0
-> > +	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
-> > =C2=A0	tsc_register_calibration_routines(acrn_get_tsc_khz,
-> > =C2=A0					=C2=A0 acrn_get_tsc_khz);
->=20
-> I'd feel slightly happier doing that from within acrn_get_tsc_khz()
-> itself....
+In next patch, inline string functions are included from 'boot/string.c'.
 
-Ya, though as you note below, this is really a comment on the overall serie=
-s.
+Using the header <asm/string.h> is problematic for a couple of reasons (*)
+(i.e., build errors), which can be addressed, but introduce unnecessary
+complexity and regression risk (beyond these _found_ couple of reasons).
 
-Waiting to set the cap until the calibration routine is actually run does p=
-revent
-the case where the something registers a calibration routine, but its routi=
-ne is
-never run.
+Using a new header <asm/string_inline.h> is simpler and transparent to
+existing users of <asm/string.h>, with less changes to 'boot/string.c'
+and its users (eg 'boot/compressed/string.c' and 'purgatory/purgatory.ro'),
+which minimize regression risk.
 
-However, because the cap is sticky, it doesn't handle the scenario where it=
-s
-routine _does_ run, but the kernel ultimately throws away its calibration i=
-n favor
-of something else.
+No functional change intended.
 
-Further complicating things is that ~half of the paravirt flows already for=
-ce set
-caps before their routines are invoked:
+(*) Reasons not to include <asm/string.h> in 'boot/string.c':
 
-  snp_secure_tsc_init(), jailhouse_init_platform(), ms_hyperv_init_platform=
-(),
-  vmware_set_capabilities()
+1) 'boot/string.c' is built for 16-bit/real mode thus some type and word
+size errors happen when <asm/string.h> include, e.g., <asm/string_64.h>.
 
-Rather than trying to convince everyone that waiting is better, despite tha=
-t
-approach still being flawed, I chose to handle this by ensuring that once t=
-he TSC
-is marked known and/or reliable, the kernel won't replace the calibration r=
-outine
-with a "lesser" source:
+This can be addressed with '#ifndef _SETUP' (defined by 'boot/Makefile').
 
-  x86/tsc: Rejects attempts to override TSC calibration with lesser routine
+2) 'boot/string.c' is included by 'boot/compressed/string.c' which is
+the source of 'purgatory/string.o', linked by 'purgatory/purgatory.ro'
+(CONFIG_KEXEC_FILE).
 
-That doesn't completely prevent the kernel from being stupid, but it should=
- prevent
-both the case where X's routine is registered but never run, as well as the=
- case
-where it's run but ultimately ignored.
+In 64BIT, <asm/string.h> includes <asm/string_64.h>, which references
+__memset() and __memmove() with KCFI_REFERENCE(), ie, __ADDRESSABLE();
+however, 'purgatory/purgatory.ro' is not linked with implementations.
 
-> which I note is 'static inline'. I'm vaguely surprised that even builds
-> (although it does).
+So, CONFIG_KEXEC_FILE and CONFIG_CFI without CONFIG_KASAN hit errors:
 
-Heh, KVM x86 (in the host) does stupid things like this too.  E.g. kvm_pdpt=
-r_read()
-is a static inline, but then wired up as a function pointer in three differ=
-ent
-places.
+  >> ld.lld: error: undefined symbol: __memset
+     >>> referenced by string.c
+     >>>               arch/x86/purgatory/purgatory.ro:\
+                       (__UNIQUE_ID_addressable___memset_0)
+  --
+  >> ld.lld: error: undefined symbol: __memmove
+     >>> referenced by string.c
+     >>>               arch/x86/purgatory/purgatory.ro:\
+                       (__UNIQUE_ID_addressable___memmove_1)
 
-> Probably nicer to move it explicitly out of line in acrn.c though.
->=20
-> Most of that should be a comment on patch  2 of the series, I guess?
+(Note: this is not hit with CONFIG_KASAN because 'boot/compressed/string.c'
+adds aliases __memset()/__memmove() to memset()/memmove() in that case.)
+
+This can be addressed with 'CFLAGS_string.o := -D__DISABLE_EXPORTS' so to
+disable KCFI_REFERENCE() in 'purgatory/Makefile' (it removes CC_FLAGS_CFI
+anyway).
+
+...
+
+However, since a change in this series would need more changes to address
+errors it causes, it is reasonable to change the series not to cause them,
+by using a separate header with _just_ inline string functions.
+
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: https://lore.kernel.org/oe-kbuild-all/202605140922.q7IlUv7o-lkp@intel.com/
+Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
+---
+ arch/x86/include/asm/string.h        | 21 +--------------------
+ arch/x86/include/asm/string_inline.h | 26 ++++++++++++++++++++++++++
+ 2 files changed, 27 insertions(+), 20 deletions(-)
+
+diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
+index 9cb5aae7fba9ffcf0f5af8f939d30467750ccaa9..8a849bb5d0c7100a2a1820ec0af9fc9f850727fd 100644
+--- a/arch/x86/include/asm/string.h
++++ b/arch/x86/include/asm/string.h
+@@ -8,25 +8,6 @@
+ # include <asm/string_64.h>
+ #endif
+ 
+-static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
+-{
+-	void *ret = to;
+-
+-	asm volatile("rep movsb"
+-		     : "+D" (to), "+S" (from), "+c" (len)
+-		     : : "memory");
+-	return ret;
+-}
+-
+-static __always_inline void *__inline_memset(void *s, int v, size_t n)
+-{
+-	void *ret = s;
+-
+-	asm volatile("rep stosb"
+-		     : "+D" (s), "+c" (n)
+-		     : "a" ((uint8_t)v)
+-		     : "memory");
+-	return ret;
+-}
++#include <asm/string_inline.h>
+ 
+ #endif /* _ASM_X86_STRING_H */
+diff --git a/arch/x86/include/asm/string_inline.h b/arch/x86/include/asm/string_inline.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..ffcfa6583d2bc7b91d078888518d0e80248af940
+--- /dev/null
++++ b/arch/x86/include/asm/string_inline.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _ASM_X86_STRING_INLINE_H
++#define _ASM_X86_STRING_INLINE_H
++
++static __always_inline void *__inline_memcpy(void *to, const void *from, size_t len)
++{
++	void *ret = to;
++
++	asm volatile("rep movsb"
++		     : "+D" (to), "+S" (from), "+c" (len)
++		     : : "memory");
++	return ret;
++}
++
++static __always_inline void *__inline_memset(void *s, int v, size_t n)
++{
++	void *ret = s;
++
++	asm volatile("rep stosb"
++		     : "+D" (s), "+c" (n)
++		     : "a" ((uint8_t)v)
++		     : "memory");
++	return ret;
++}
++
++#endif /* _ASM_X86_STRING_INLINE_H */
+
+-- 
+2.51.0
+
 
