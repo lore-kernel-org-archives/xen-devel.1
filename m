@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07072CD5BAB
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314395.1584355 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52434CD4F3D
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:19:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314427.1584386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDm-00047x-1n; Wed, 20 May 2026 21:12:54 +0000
+	id 1wPoKG-0006eU-BD; Wed, 20 May 2026 21:19:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314395.1584355; Wed, 20 May 2026 21:12:54 +0000
+Received: by outflank-mailman (output) from mailman id 1314427.1584386; Wed, 20 May 2026 21:19:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDl-00047O-TC; Wed, 20 May 2026 21:12:53 +0000
-Received: by outflank-mailman (input) for mailman id 1314395;
- Wed, 20 May 2026 21:12:52 +0000
+	id 1wPoKG-0006eN-7j; Wed, 20 May 2026 21:19:36 +0000
+Received: by outflank-mailman (input) for mailman id 1314427;
+ Wed, 20 May 2026 21:19:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wPoDk-00044l-Px
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:52 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1wPoKD-0006eH-1J
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:19:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPoDk-005Gae-63
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:52 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mfo@igalia.com>)
- id 6a0e23c0-2eae-0a2a0a5409dd-0a2a450789f8-14
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:52 +0200
-Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <mfo@igalia.com>)
- id 6a0e23d3-229c-0a2a45070019-d561b338a818-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:52 +0200
-Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
- helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wPoDN-0041Tq-R0; Wed, 20 May 2026 23:12:30 +0200
+ id 1wPoKC-00BUls-3D
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:19:32 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a0e250d-2eae-0a2a0a5409dd-0a2a450b9da4-44
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:19:31 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6a0e2563-212f-0a2a450b0019-5a9b322297a2-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:19:31 +0200
+Received: from [54.240.197.227] (helo=freeip.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1wPoK1-00000007aua-0ZJM; Wed, 20 May 2026 21:19:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,194 +50,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=HMYOPdGU8sl7pv2qCjbJUiNAmrkkLYxcfG9BmUTr1j0=; b=G5/E2wwpP3qOYwkqsVagOvWPkD
-	sNR91BuKo1uImAfen8tomjkL5x3iaLKBFF87LMWLTEGsgPyPfcwsYqtdaXP5UtLliXfonRM3u/OCo
-	F+/fM2JBLm0FyO4zhizXA9k4YQgNriAGCIb+Mg8vUEPjtdxglxrBn79WEkEpMnzIoG3KBxQxpvjVr
-	J0uIHqZxstPkw5ExB7jI3mLXriokseheA5NpjN4G896npCFWzy3IeRLQNGWdc/1PnQUkrhXhnx1UK
-	rSldvJPksowRssF8w3czF1Wf1ZWtsxSt5U+nWeL7fagxxh30ACgyrvYGoMeB1OofoTs0pfvhEe2+X
-	pxKGyQDg==;
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Subject: [PATCH v3 0/4] x86/pvh: fix unbootable VMs again (PVH + KASAN)
-Date: Wed, 20 May 2026 18:12:04 -0300
-Message-Id: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=2T02KkRcNqHQW1Lp9kmhoNiqh8itBq6Uvl0wCCT1Bio=; b=RzgYSL+9m9JvdNIyWP36q3XkJO
+	Nk3v7gLu9PPih2xcac5s9Zwy3uEdKi88oue80vbclyxBfh/sEdrtKY/4tkb4u+2V6dyul19hJO4gc
+	F+IAuYrKjGIODQTeJwY49IPc7k6cvnN3zZzZo7h2KgwYQ3fqUpfOttTbg7dpxsLlpdzuFNbOeo2wa
+	sP7p5x5a5ECsFi23z9NcBMQdkqcQEveo1E78SK4uMA1bc85cdi5x+slspcFgNztkUxM0b8/Y8rkQ4
+	PBJWktM5UgvY3+/uw83eoZxMYhqNsqzbpXonsL/v2P3+B6YkDkmIvfdYPyuicJB1nlD4zSVmnNjvI
+	bGwYbeCA==;
+Message-ID: <621e10bdc9e297c6c600b561d8fa25c3b62968bc.camel@infradead.org>
+Subject: Re: [PATCH v3 02/41] x86/tsc: Add helper to register CPU and TSC
+ freq calibration routines
+From: David Woodhouse <dwmw2@infradead.org>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Kiryl Shutsemau <kas@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
+ "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang
+ <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, Dexuan Cui
+ <decui@microsoft.com>, Long Li <longli@microsoft.com>, Ajay Kaher
+ <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen
+ <dave.hansen@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Peter
+ Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, Daniel
+ Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+ John Stultz <jstultz@google.com>, Rick Edgecombe
+ <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Boris Ostrovsky
+ <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>,
+ x86@kernel.org,  linux-coco@lists.linux.dev, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org,  virtualization@lists.linux.dev,
+ linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org, Michael
+ Kelley <mhklinux@outlook.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+ Nikunj A Dadhania <nikunj@amd.com>, Thomas Gleixner <tglx@linutronix.de>
+Date: Wed, 20 May 2026 22:19:19 +0100
+In-Reply-To: <ag4dMc2B3JQi4vxU@google.com>
+References: <20260515191942.1892718-1-seanjc@google.com>
+	 <20260515191942.1892718-3-seanjc@google.com>
+	 <44e0d60548d317fd59895f18bd17220dfb2f834b.camel@infradead.org>
+	 <ag4dMc2B3JQi4vxU@google.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-VYaNBcSebu2vVTBLAdmQ"
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKQjDmoC/33NQQ6CMBCF4auQrq2hQ23FlfcwLkqZwkQspDWNh
- nB3CytNjMv/JfPNzCIGwshOxcwCJoo0+hzVrmC2N75DTm1uBiWoUgLwKfX8ZqLxnPxAHrlCZ6z
- WTjSgWT6bAjp6buTlmrun+BjDa/uQxLr+wZLgJdeoRC0rKW0NZ+rMQGZvxztbtQSfgv4hQBbAH
- nRzbK1zynwJy7K8AZCPjPPzAAAA
-X-Change-ID: 20260422-pvh-kasan-inline-6efac77f1b27
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>, 
- kernel test robot <lkp@intel.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-ef75cf/1779311572-22F76C48-C353EFC2/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-42698a/1779311971-20C7DF3B-A42CEB32/0/0
 X-purgate-type: clean
-X-purgate-size: 6162
+X-purgate-size: 10525
 
-The issue of unbootable VMs with CONFIG_PVH due to CONFIG_KASAN is back.
 
-Booting directly from vmlinux (instead of bzImage) now fails with gcc-14/15
-(but works with gcc-12/13) if CONFIG_KASAN_GENERIC is set, on Ubuntu 25.10.
+--=-VYaNBcSebu2vVTBLAdmQ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-The PVH code is required/supposed not to use the KASAN memory access check
-in the kernel entry point as KASAN has not yet been setup, or an exception
-is hit and the boot fails.
+T24gV2VkLCAyMDI2LTA1LTIwIGF0IDEzOjQ0IC0wNzAwLCBTZWFuIENocmlzdG9waGVyc29uIHdy
+b3RlOgo+IAo+ICvCoMKgwqDCoMKgwqAgLyoKPiArwqDCoMKgwqDCoMKgwqAgKiBJZiB0aGUgVFND
+IGNvdW50cyBhdCBhIGNvbnN0YW50IGZyZXF1ZW5jeSBhY3Jvc3MgUC9UIHN0YXRlcywgY291bnRz
+Cj4gK8KgwqDCoMKgwqDCoMKgICogaW4gZGVlcCBDLXN0YXRlcywgYW5kIHRoZSBUU0MgaGFzbid0
+IGJlZW4gbWFya2VkIHVuc3RhYmxlLCB0cmVhdCB0aGUKPiArwqDCoMKgwqDCoMKgwqAgKiBUU0Mg
+cmVsaWFibGUsIGFzIGd1YXJhbnRlZWQgYnkgS1ZNLsKgIE5vdGUsIHRoZSBUU0MgdW5zdGFibGUg
+Y2hlY2sKPiArwqDCoMKgwqDCoMKgwqAgKiBleGlzdHMgcHVyZWx5IHRvIGhvbm9yIHRoZSBUU0Mg
+YmVpbmcgbWFya2VkIHVuc3RhYmxlIHZpYSBjb21tYW5kCj4gK8KgwqDCoMKgwqDCoMKgICogbGlu
+ZSwgYW55IHJ1bnRpbWUgZGV0ZWN0aW9uIG9mIGFuIHVuc3RhYmxlIHdpbGwgaGFwcGVuIGFmdGVy
+IHRoaXMuCj4gK8KgwqDCoMKgwqDCoMKgICovCj4gK8KgwqDCoMKgwqDCoCBpZiAoYm9vdF9jcHVf
+aGFzKFg4Nl9GRUFUVVJFX0NPTlNUQU5UX1RTQykgJiYKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+Ym9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJFX05PTlNUT1BfVFNDKSAmJgo+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAhY2hlY2tfdHNjX3Vuc3RhYmxlKCkpCiAgICB7IAo+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHRzY19wcm9wZXJ0aWVzID0gVFNDX0ZSRVFfS05PV05fQU5EX1JFTElBQkxF
+OwoKICAgIGt2bWNsb2NrID0gMDsgLyogV2h5IHVzZSBpdCBpZiB0aGUgVFNDIHdvcmtzPyBUaGUg
+a3ZtY2xvY2sgZXhpc3RzCiAgICAgICAgICAgICAgICAgICAgICpwdXJlbHkqIHRvIHdvcmsgYXJv
+dW5kIGEgVFNDIHdoaWNoICpkb2Vzbid0KgogICAgICAgICAgICAgICAgICAgICBoYXZlIHRob3Nl
+IHByb3BlcnRpZXMgY2hlY2tlZCBhYm92ZS4gKi8KICAgIH0KCkkgd2FzIGdvaW5nIHRvIHNheSBQ
+VkNMT0NLX1RTQ19TVEFCTEVfQklULCBhbmQgbWF5YmUgd2Ugc2hvdWxkIGNoZWNrCnRoYXQgKnRv
+byogZm9yIHBhcmFub2lhPyBCdXQgaG9wZWZ1bGx5IHRoZSBjaGVja3MgeW91IGhhdmUgYWJvdmUg
+YXJlCmVxdWl2YWxlbnQ/Cgo+ICsKPiArwqDCoMKgwqDCoMKgIGt2bV90c2Nfa2h6X2NwdWlkID0g
+a3ZtX3BhcmFfdHNjX2toeigpOwo+ICsKPiArwqDCoMKgwqDCoMKgIC8qCj4gK8KgwqDCoMKgwqDC
+oMKgICogSWYgcHJvdmlkZWQsIHVzZSB0aGUgVFNDIChhbmQgQVBJQyBidXMpIGZyZXF1ZW5jeSBw
+cm92aWRlZCBpbiBLVk0ncwo+ICvCoMKgwqDCoMKgwqDCoCAqIFBWIENQVUlEIGxlYWYgZXZlbiBp
+ZiBrdm1jbG9jayBpdHNlbGYgaXMgZGlzYWJsZWQgdmlhIGNvbW1hbmQgbGluZS4KPiArwqDCoMKg
+wqDCoMKgwqAgKiBUaGUgUFYgQ1BVSUQgaW5mb3JtYXRpb24gaXNuJ3QgZGVwZW5kZW50IG9uIGt2
+bWNsb2NrIGluIGFueSB3YXksIGFuZAo+ICvCoMKgwqDCoMKgwqDCoCAqIGluIGZhY3QgdXNpbmcg
+dGhlIHByZWNpc2UgaW5mb3JtYXRpb24gaXMgKm1vcmUqIGltcG9ydGFudCB3aGVuIHRoZQo+ICvC
+oMKgwqDCoMKgwqDCoCAqIHVzZXIgaGFzIGV4cGxpY2l0bHkgZGlzYWJsZWQga3ZtY2xvY2sgdG8g
+Zm9yY2UgdGhlIGtlcm5lbCB0byB1c2UgdGhlCj4gK8KgwqDCoMKgwqDCoMKgICogVFNDIGFzIGl0
+cyBjbG9ja3NvdXJjZS4KPiArwqDCoMKgwqDCoMKgwqAgKi8KPiArwqDCoMKgwqDCoMKgIGlmICgh
+a3ZtY2xvY2spIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoa3ZtX3RzY19r
+aHpfY3B1aWQpCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHRzY19yZWdpc3Rlcl9jYWxpYnJhdGlvbl9yb3V0aW5lcyhrdm1fZ2V0X3RzY19raHosCj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAga3Zt
+X2dldF9jcHVfa2h6LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHRzY19wcm9wZXJ0aWVzKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCByZXR1cm47Cj4gK8KgwqDCoMKgwqDCoCB9Cj4gKwoKClJlZ2FyZGxlc3Mgb2YgdGhl
+IGFib3ZlLCB3aHkgbm90IGp1c3QgcmVnaXN0ZXIgdGhlc2UgaGVyZQp1bmNvbmRpdGlvbmFsbHks
+IGFuZCByZW1vdmUgdGhlIGxhdGVyIGNhbGwgdGhhdCBkb2VzIHRoZSBzYW1lPwo=
 
-This was previously described and addressed with __builtin_mem{cmp,set}():
-- commit 661362e3dcab ("xen, pvh: fix unbootable VMs (PVH + KASAN - AMD_MEM_ENCRYPT)")
-- commit 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
-- commit fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
 
-However, even with __builtin the compiler may decide to use the out of line
-function instead of the inline implementation. So, that does not really fix
-the issue unconditionally; see details below.
+--=-VYaNBcSebu2vVTBLAdmQ
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-In order to address this, it's required to switch to inline implementations
-that do not depend on the compiler.
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
+ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
+MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
+a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
+jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
+GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
+aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
+nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
+8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
+HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
+IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
+KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
+BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
+QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
+QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
+ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
+/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
+uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
+xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
+W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
+c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
+VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
+NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
+sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
+w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
+i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
+kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
+0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
+ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
+blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
+hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
+VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
+HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
+ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
+AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
+cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
+cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
+AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
+aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
+hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
+iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
+8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
+JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
+xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
+EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
+B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
+MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
+KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
+Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
+nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
+WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
+W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
+nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
+g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
+9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
+9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
+sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
+a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
+ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
+AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
+dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
+Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
+MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
+YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
+4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
+6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
+QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
+nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
+MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
+VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
+ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2MDUyMDIxMTkx
+OVowLwYJKoZIhvcNAQkEMSIEINhvu80Esasizc/IrdUGbWb0meAtd12BJXV3+c9suECwMGQGCSsG
+AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
+cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
+VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
+cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIAjn/O/SoEwAbs
+YaXatoOuo8GSukimv9TlOJECjOZobWrlR4CEhwquW+XWRwlyZ8+eQQ4xu8AooNdh52B0fRNE3DeT
+u65bXJuPgiLZuFlLy1iom72SwPtRrtlfQZPYQfYJl2SKVrr6bujGyhrSnO3tuZE/LOKXfFWiP3Yj
+I9+Z89WHkGl2eY+Q4ZjUw0eK/fJre2PBt1BdpFHjxZG1WWhYGYIUoSZ62kNkxTWfrd2C3xr9Lzy0
+wNSBOFB00yP3AgCAFhjHQmpkDTrugWIhsRmi8pvzVKxwaepUciccAe4Tx3CgCoIP5Q5KXknnIu1i
+9my+2+xsG7JpVzRSgJj59jLNkQqlwCT57gIA5bQ5UNUYgxiBlT0mK5Q+ISXIMn6a9PIy78Z3bCam
+TwWWH57PNX3g2yr3yxWNs1MgT9Z+RLpVp/ywq6in29MOkjDPJkPlVUc2qNLqfoXwDwDv0YlehAPA
+D15sxI/yfeAVZVbOHZCIx47lSJRqAITMiHqY/qptT5u7eP0XtgczvRvyPZMzBIelPI3Ti7Be4bm9
+UQTCTXCO37ARS3qnHAmQQW24h0KRCp9yXkmD4F17iP4aci79W6+jP8HQ+qzj+AhrsZEp9ix1NBo/
+niFXiIy7mz2DN0n3EATdDw1AtJuGs82eyYjgQ6dpqEmw3xFsdXBGln/AkowqCXIAAAAAAAA=
 
-There's such a memset() in <asm/string.h> and memcmp() in 'boot/string.c'.
-Use them instead of builtins in PVH entry.
 
-Testing:
-
-- Booting from vmlinux (fixed) and bzImage (still works) using
-  allnoconfig + CONFIG_PVH + CONFIG_KASAN with gcc-12/13/14/15.
-
-- Building with CONFIG_KEXEC_FILE, CONFIG_CFI and !CONFIG_KASAN with LLVM 20
-  (check for a build error related to <asm/string.h>, not caught previously).
-
-Details/Debugging:
-
-- Only CONFIG_PVH (works):
-
-  make allnoconfig
-  ./scripts/config \
-    -e 64BIT -e HYPERVISOR_GUEST -e PVH \
-    -e SERIAL_8250 -e SERIAL_8250_CONSOLE
-  make olddefconfig
-  make -j$(nproc) vmlinux
-
-  qemu-system-x86_64 \
-    -accel kvm -nodefaults -nographic -serial stdio \
-    -kernel vmlinux -append 'console=ttyS0'
-  ...
-  SeaBIOS (version ...)
-  Booting from ROM...
-  Linux version ...
-  ...
-  <Ctrl-C>
-
-- With CONFIG_KASAN (fails)
-
-  ./scripts/config -e KASAN
-  make olddefconfig
-  make -j$(nproc) vmlinux
-
-  qemu-system-x86_64 \
-    -accel kvm -nodefaults -nographic -serial stdio \
-    -kernel vmlinux -append 'console=ttyS0'
-  ...
-  SeaBIOS (version ...)
-  Booting from ROM...
-  <QEMU reboot loop, flashing the text above>
-
-- Debugging:
-
-  Enable debug info and rebuild.
-
-  QEMU: enable and wait for GDB, stop rebooting, remain running.
-
-  qemu-system-x86_64 \
-    -s -S -no-reboot -no-shutdown \
-    <other options>
-
-  gdb vmlinux
-  (gdb) target remote localhost:1234
-  ...
-  (gdb) c
-  ...
-  Thread 2 received signal SIGQUIT, Quit.
-  ...
-  (gdb) info threads
-    Id   Target Id                    Frame
-    1    Thread 1.1 (CPU#0 [running]) bytes_is_nonzero (
-      start=0xfffffbfff031eebe <error: Cannot access memory at address 0xfffffbfff031eebe>, size=1)
-      at .../linux/mm/kasan/generic.c:98
-  * 2    Thread 1.2 (CPU#1 [halted ]) 0x00000000000fd0a9 in ?? ()
-  ...
-  (gdb) thr 1
-  ...
-  (gdb) bt
-  #0  bytes_is_nonzero (start=0xfffffbfff031eebe <error: Cannot access memory at address 0xfffffbfff031eebe>, size=1)
-      at .../linux/mm/kasan/generic.c:98
-  #1  memory_is_nonzero (start=0xfffffbfff031eebe, end=0xfffffbfff031eebf) at .../linux/mm/kasan/generic.c:115
-  #2  memory_is_poisoned_n (addr=0xffffffff818f75f0, size=8) at .../linux/mm/kasan/generic.c:140
-  #3  memory_is_poisoned (addr=0xffffffff818f75f0, size=8) at .../linux/mm/kasan/generic.c:172
-  #4  check_region_inline (addr=0xffffffff818f75f0, size=8, write=false, ret_ip=18446744071585002062)
-      at .../linux/mm/kasan/generic.c:191
-  #5  kasan_check_range (addr=addr@entry=0xffffffff818f75f0, size=size@entry=8, write=write@entry=false,
-      ret_ip=18446744071585002062) at .../linux/mm/kasan/generic.c:200
-  #6  0xffffffff813eb283 in __asan_loadN (addr=addr@entry=0xffffffff818f75f0, size=size@entry=8)
-      at .../linux/mm/kasan/generic.c:278
-  #7  0xffffffff815df24e in memcmp (cs=cs@entry=0xffffffff818f75f0, ct=ct@entry=0x1be2fe4, count=<optimized out>,
-      count@entry=12) at .../linux/lib/string.c:683
-  #8  0xffffffff81ba2323 in cpuid_base_hypervisor (sig=0xffffffff818f75f0 "XenVMMXenVMM", leaves=2)
-      at .../linux/arch/x86/include/asm/cpuid/api.h:206
-  #9  xen_cpuid_base () at .../linux/arch/x86/include/asm/xen/hypervisor.h:46
-  #10 xen_prepare_pvh () at .../linux/arch/x86/platform/pvh/enlighten.c:119
-  #11 0x0000000001ba2588 in ?? ()
-  #12 0x0000000000000000 in ?? ()
-  (gdb)
-
-  Frames #7-#8 show the non-builtin memcmp() (lib/string.c) was called
-  even with __builtin_memcmp() being used in cpuid_base_hypervisor().
-
-Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
----
-Changes in v3:
-- Create and use a separate header for inline string functions
-  to fix a build error reported by kernel test robot (patch 1).
-- That also removes '#ifndef _SETUP/#endif' in <asm/string.h>.
-- Link to v2: https://lore.kernel.org/r/20260427-pvh-kasan-inline-v2-0-2c57b8dcff6a@igalia.com
-
-Changes in v2:
-- Add comment about the return value of __inline_memcmp() in patch 1. (v3: now 2)
-- Add 'Reviewed-by: Juergen Gross' in patches 2 and 3 (v3: now 3 and 4).
-- Link to v1: https://lore.kernel.org/r/20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com
-
----
-Mauricio Faria de Oliveira (4):
-      x86/asm: move inline string functions to <asm/string_inline.h>
-      x86/asm, x86/boot: expose inline memcmp
-      x86/cpuid: fix unbootable VMs by really inlining memcmp() in hypervisor_cpuid_base()
-      x86/pvh: fix unbootable VMs by really inlining memset() in xen_prepare_pvh()
-
- arch/x86/boot/string.c               |  6 ++----
- arch/x86/include/asm/cpuid/api.h     |  2 +-
- arch/x86/include/asm/string.h        | 21 +-------------------
- arch/x86/include/asm/string_inline.h | 37 ++++++++++++++++++++++++++++++++++++
- arch/x86/platform/pvh/enlighten.c    |  3 ++-
- 5 files changed, 43 insertions(+), 26 deletions(-)
----
-base-commit: 80dd246accce631c328ea43294e53b2b2dd2aa32
-change-id: 20260422-pvh-kasan-inline-6efac77f1b27
-
-Best regards,
--- 
-Mauricio Faria de Oliveira <mfo@igalia.com>
-
+--=-VYaNBcSebu2vVTBLAdmQ--
 
