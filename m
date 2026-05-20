@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4183CD5BAC
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314393.1584341 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07072CD5BAB
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 21:13:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314395.1584355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDi-0003rs-JZ; Wed, 20 May 2026 21:12:50 +0000
+	id 1wPoDm-00047x-1n; Wed, 20 May 2026 21:12:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314393.1584341; Wed, 20 May 2026 21:12:50 +0000
+Received: by outflank-mailman (output) from mailman id 1314395.1584355; Wed, 20 May 2026 21:12:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPoDi-0003rl-GL; Wed, 20 May 2026 21:12:50 +0000
-Received: by outflank-mailman (input) for mailman id 1314393;
- Wed, 20 May 2026 21:12:49 +0000
+	id 1wPoDl-00047O-TC; Wed, 20 May 2026 21:12:53 +0000
+Received: by outflank-mailman (input) for mailman id 1314395;
+ Wed, 20 May 2026 21:12:52 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wPoDf-0003rf-5c
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:49 +0000
+ (envelope-from <mfo@igalia.com>) id 1wPoDk-00044l-Px
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 21:12:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPoDe-00EDfE-4R
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:46 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wPoDk-005Gae-63
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 23:12:52 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23a3-e002-0a2a0a5209dd-0a2a450ad53a-38
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:45 +0200
+ id 6a0e23c0-2eae-0a2a0a5409dd-0a2a450789f8-14
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:52 +0200
 Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <mfo@igalia.com>)
- id 6a0e23cd-56b3-0a2a450a0019-d561b338982c-3
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:45 +0200
+ id 6a0e23d3-229c-0a2a45070019-d561b338a818-3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2026 23:12:52 +0200
 Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
  helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wPoDX-0041Tq-LQ; Wed, 20 May 2026 23:12:39 +0200
+ id 1wPoDN-0041Tq-R0; Wed, 20 May 2026 23:12:30 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,100 +49,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=jkpwXdcnHe1Zv/dlRDcrtsBOp/xquKy8TUTUHmBcL1U=; b=dUzRobAH+mthZRI7uJWLVNLyzp
-	VzF6Bb3s2HtliD6A5H1iVmP+juxYJyBrAKi0u3b6IzPD7xxn3tJZu4+pTkKVyHx1iGbbiFQi3kPAN
-	ugqtXjeWMYGekFisfkeO73ZivU9lMcTqya+RfRgfeJPR0vT/yjy06/PAV9vdtl6rDJ9MTXpjC88wl
-	USF3MRMam86DLoz+EQfXXgXdrkyE9L7F71NTIl54eAbnR9PDlu56Sz2bGugTotwnjUh4bdTiOo5K5
-	j1UmrI8ZtiOuItOS8zCt+derjk76bYCwNfRFr4pU//xD+jHew5EmJsng1KBijgbHnAuAv39pt+MfK
-	XlQFtNZA==;
+	s=20170329; h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+	Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=HMYOPdGU8sl7pv2qCjbJUiNAmrkkLYxcfG9BmUTr1j0=; b=G5/E2wwpP3qOYwkqsVagOvWPkD
+	sNR91BuKo1uImAfen8tomjkL5x3iaLKBFF87LMWLTEGsgPyPfcwsYqtdaXP5UtLliXfonRM3u/OCo
+	F+/fM2JBLm0FyO4zhizXA9k4YQgNriAGCIb+Mg8vUEPjtdxglxrBn79WEkEpMnzIoG3KBxQxpvjVr
+	J0uIHqZxstPkw5ExB7jI3mLXriokseheA5NpjN4G896npCFWzy3IeRLQNGWdc/1PnQUkrhXhnx1UK
+	rSldvJPksowRssF8w3czF1Wf1ZWtsxSt5U+nWeL7fagxxh30ACgyrvYGoMeB1OofoTs0pfvhEe2+X
+	pxKGyQDg==;
 From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Wed, 20 May 2026 18:12:06 -0300
-Subject: [PATCH v3 2/4] x86/asm, x86/boot: expose inline memcmp
+Subject: [PATCH v3 0/4] x86/pvh: fix unbootable VMs again (PVH + KASAN)
+Date: Wed, 20 May 2026 18:12:04 -0300
+Message-Id: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-pvh-kasan-inline-v3-2-bede769c6ec7@igalia.com>
-References: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
-In-Reply-To: <20260520-pvh-kasan-inline-v3-0-bede769c6ec7@igalia.com>
+X-B4-Tracking: v=1; b=H4sIAKQjDmoC/33NQQ6CMBCF4auQrq2hQ23FlfcwLkqZwkQspDWNh
+ nB3CytNjMv/JfPNzCIGwshOxcwCJoo0+hzVrmC2N75DTm1uBiWoUgLwKfX8ZqLxnPxAHrlCZ6z
+ WTjSgWT6bAjp6buTlmrun+BjDa/uQxLr+wZLgJdeoRC0rKW0NZ+rMQGZvxztbtQSfgv4hQBbAH
+ nRzbK1zynwJy7K8AZCPjPPzAAAA
+X-Change-ID: 20260422-pvh-kasan-inline-6efac77f1b27
 To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
  Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
  x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
  Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
  Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
+ xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>, 
+ kernel test robot <lkp@intel.com>
 X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-4011c0/1779311565-7196E8B7-FCAD2D12/0/0
+X-purgate-ID: tlsNG-ef75cf/1779311572-22F76C48-C353EFC2/0/0
 X-purgate-type: clean
-X-purgate-size: 2056
+X-purgate-size: 6162
 
-Move the inline memcmp function currently only available in 'boot/string.c'
-and its users (eg, 'boot/compressed/string.c' and 'purgatory/purgatory.ro')
-into the inline string functions header <asm/string_inline.h> to be reused.
+The issue of unbootable VMs with CONFIG_PVH due to CONFIG_KASAN is back.
 
-Note that the inline memcmp() returns 0/1, not -1/0/1 as regular memcmp()
-(reported by David Laight <david.laight.linux@gmail.com>), which is not
-caused or changed by this commit; this will be addressed separately.
+Booting directly from vmlinux (instead of bzImage) now fails with gcc-14/15
+(but works with gcc-12/13) if CONFIG_KASAN_GENERIC is set, on Ubuntu 25.10.
+
+The PVH code is required/supposed not to use the KASAN memory access check
+in the kernel entry point as KASAN has not yet been setup, or an exception
+is hit and the boot fails.
+
+This was previously described and addressed with __builtin_mem{cmp,set}():
+- commit 661362e3dcab ("xen, pvh: fix unbootable VMs (PVH + KASAN - AMD_MEM_ENCRYPT)")
+- commit 416a33c9afce ("x86/cpu: fix unbootable VMs by inlining memcmp() in hypervisor_cpuid_base()")
+- commit fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
+
+However, even with __builtin the compiler may decide to use the out of line
+function instead of the inline implementation. So, that does not really fix
+the issue unconditionally; see details below.
+
+In order to address this, it's required to switch to inline implementations
+that do not depend on the compiler.
+
+There's such a memset() in <asm/string.h> and memcmp() in 'boot/string.c'.
+Use them instead of builtins in PVH entry.
+
+Testing:
+
+- Booting from vmlinux (fixed) and bzImage (still works) using
+  allnoconfig + CONFIG_PVH + CONFIG_KASAN with gcc-12/13/14/15.
+
+- Building with CONFIG_KEXEC_FILE, CONFIG_CFI and !CONFIG_KASAN with LLVM 20
+  (check for a build error related to <asm/string.h>, not caught previously).
+
+Details/Debugging:
+
+- Only CONFIG_PVH (works):
+
+  make allnoconfig
+  ./scripts/config \
+    -e 64BIT -e HYPERVISOR_GUEST -e PVH \
+    -e SERIAL_8250 -e SERIAL_8250_CONSOLE
+  make olddefconfig
+  make -j$(nproc) vmlinux
+
+  qemu-system-x86_64 \
+    -accel kvm -nodefaults -nographic -serial stdio \
+    -kernel vmlinux -append 'console=ttyS0'
+  ...
+  SeaBIOS (version ...)
+  Booting from ROM...
+  Linux version ...
+  ...
+  <Ctrl-C>
+
+- With CONFIG_KASAN (fails)
+
+  ./scripts/config -e KASAN
+  make olddefconfig
+  make -j$(nproc) vmlinux
+
+  qemu-system-x86_64 \
+    -accel kvm -nodefaults -nographic -serial stdio \
+    -kernel vmlinux -append 'console=ttyS0'
+  ...
+  SeaBIOS (version ...)
+  Booting from ROM...
+  <QEMU reboot loop, flashing the text above>
+
+- Debugging:
+
+  Enable debug info and rebuild.
+
+  QEMU: enable and wait for GDB, stop rebooting, remain running.
+
+  qemu-system-x86_64 \
+    -s -S -no-reboot -no-shutdown \
+    <other options>
+
+  gdb vmlinux
+  (gdb) target remote localhost:1234
+  ...
+  (gdb) c
+  ...
+  Thread 2 received signal SIGQUIT, Quit.
+  ...
+  (gdb) info threads
+    Id   Target Id                    Frame
+    1    Thread 1.1 (CPU#0 [running]) bytes_is_nonzero (
+      start=0xfffffbfff031eebe <error: Cannot access memory at address 0xfffffbfff031eebe>, size=1)
+      at .../linux/mm/kasan/generic.c:98
+  * 2    Thread 1.2 (CPU#1 [halted ]) 0x00000000000fd0a9 in ?? ()
+  ...
+  (gdb) thr 1
+  ...
+  (gdb) bt
+  #0  bytes_is_nonzero (start=0xfffffbfff031eebe <error: Cannot access memory at address 0xfffffbfff031eebe>, size=1)
+      at .../linux/mm/kasan/generic.c:98
+  #1  memory_is_nonzero (start=0xfffffbfff031eebe, end=0xfffffbfff031eebf) at .../linux/mm/kasan/generic.c:115
+  #2  memory_is_poisoned_n (addr=0xffffffff818f75f0, size=8) at .../linux/mm/kasan/generic.c:140
+  #3  memory_is_poisoned (addr=0xffffffff818f75f0, size=8) at .../linux/mm/kasan/generic.c:172
+  #4  check_region_inline (addr=0xffffffff818f75f0, size=8, write=false, ret_ip=18446744071585002062)
+      at .../linux/mm/kasan/generic.c:191
+  #5  kasan_check_range (addr=addr@entry=0xffffffff818f75f0, size=size@entry=8, write=write@entry=false,
+      ret_ip=18446744071585002062) at .../linux/mm/kasan/generic.c:200
+  #6  0xffffffff813eb283 in __asan_loadN (addr=addr@entry=0xffffffff818f75f0, size=size@entry=8)
+      at .../linux/mm/kasan/generic.c:278
+  #7  0xffffffff815df24e in memcmp (cs=cs@entry=0xffffffff818f75f0, ct=ct@entry=0x1be2fe4, count=<optimized out>,
+      count@entry=12) at .../linux/lib/string.c:683
+  #8  0xffffffff81ba2323 in cpuid_base_hypervisor (sig=0xffffffff818f75f0 "XenVMMXenVMM", leaves=2)
+      at .../linux/arch/x86/include/asm/cpuid/api.h:206
+  #9  xen_cpuid_base () at .../linux/arch/x86/include/asm/xen/hypervisor.h:46
+  #10 xen_prepare_pvh () at .../linux/arch/x86/platform/pvh/enlighten.c:119
+  #11 0x0000000001ba2588 in ?? ()
+  #12 0x0000000000000000 in ?? ()
+  (gdb)
+
+  Frames #7-#8 show the non-builtin memcmp() (lib/string.c) was called
+  even with __builtin_memcmp() being used in cpuid_base_hypervisor().
 
 Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
 ---
+Changes in v3:
+- Create and use a separate header for inline string functions
+  to fix a build error reported by kernel test robot (patch 1).
+- That also removes '#ifndef _SETUP/#endif' in <asm/string.h>.
+- Link to v2: https://lore.kernel.org/r/20260427-pvh-kasan-inline-v2-0-2c57b8dcff6a@igalia.com
+
+Changes in v2:
+- Add comment about the return value of __inline_memcmp() in patch 1. (v3: now 2)
+- Add 'Reviewed-by: Juergen Gross' in patches 2 and 3 (v3: now 3 and 4).
+- Link to v1: https://lore.kernel.org/r/20260422-pvh-kasan-inline-v1-0-7e6194344c92@igalia.com
+
+---
+Mauricio Faria de Oliveira (4):
+      x86/asm: move inline string functions to <asm/string_inline.h>
+      x86/asm, x86/boot: expose inline memcmp
+      x86/cpuid: fix unbootable VMs by really inlining memcmp() in hypervisor_cpuid_base()
+      x86/pvh: fix unbootable VMs by really inlining memset() in xen_prepare_pvh()
+
  arch/x86/boot/string.c               |  6 ++----
- arch/x86/include/asm/string_inline.h | 11 +++++++++++
- 2 files changed, 13 insertions(+), 4 deletions(-)
+ arch/x86/include/asm/cpuid/api.h     |  2 +-
+ arch/x86/include/asm/string.h        | 21 +-------------------
+ arch/x86/include/asm/string_inline.h | 37 ++++++++++++++++++++++++++++++++++++
+ arch/x86/platform/pvh/enlighten.c    |  3 ++-
+ 5 files changed, 43 insertions(+), 26 deletions(-)
+---
+base-commit: 80dd246accce631c328ea43294e53b2b2dd2aa32
+change-id: 20260422-pvh-kasan-inline-6efac77f1b27
 
-diff --git a/arch/x86/boot/string.c b/arch/x86/boot/string.c
-index ac0f900ebc47efa81c92e1bb2010ea41677899c4..544681d046c3f87101309ffaca0c90512a244856 100644
---- a/arch/x86/boot/string.c
-+++ b/arch/x86/boot/string.c
-@@ -15,6 +15,7 @@
- #include <linux/errno.h>
- #include <linux/limits.h>
- #include <asm/asm.h>
-+#include <asm/string_inline.h>
- #include "ctype.h"
- #include "string.h"
- 
-@@ -31,10 +32,7 @@
- 
- int memcmp(const void *s1, const void *s2, size_t len)
- {
--	bool diff;
--	asm("repe cmpsb"
--	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
--	return diff;
-+	return __inline_memcmp(s1, s2, len);
- }
- 
- /*
-diff --git a/arch/x86/include/asm/string_inline.h b/arch/x86/include/asm/string_inline.h
-index ffcfa6583d2bc7b91d078888518d0e80248af940..91ed89bfdfa9b148002441e94f48039b17f70391 100644
---- a/arch/x86/include/asm/string_inline.h
-+++ b/arch/x86/include/asm/string_inline.h
-@@ -23,4 +23,15 @@ static __always_inline void *__inline_memset(void *s, int v, size_t n)
- 	return ret;
- }
- 
-+/* Note: this memcmp() returns 0/1, not -1/0/1 as regular memcmp(). */
-+static __always_inline int __inline_memcmp(const void *s1, const void *s2, size_t len)
-+{
-+	bool diff;
-+
-+	asm("repe cmpsb"
-+	    : "=@ccnz" (diff), "+D" (s1), "+S" (s2), "+c" (len));
-+
-+	return diff;
-+}
-+
- #endif /* _ASM_X86_STRING_INLINE_H */
-
+Best regards,
 -- 
-2.51.0
+Mauricio Faria de Oliveira <mfo@igalia.com>
 
 
