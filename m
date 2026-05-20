@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 341A2CD4F54
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 22:40:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1314558.1584529 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E74CD4F3D
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2026 22:40:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1314562.1584540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPpa8-0000FA-E2; Wed, 20 May 2026 22:40:04 +0000
+	id 1wPpaY-00018t-QE; Wed, 20 May 2026 22:40:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1314558.1584529; Wed, 20 May 2026 22:40:04 +0000
+Received: by outflank-mailman (output) from mailman id 1314562.1584540; Wed, 20 May 2026 22:40:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wPpa8-0000E6-AO; Wed, 20 May 2026 22:40:04 +0000
-Received: by outflank-mailman (input) for mailman id 1314558;
- Wed, 20 May 2026 22:40:03 +0000
+	id 1wPpaY-00018m-ME; Wed, 20 May 2026 22:40:30 +0000
+Received: by outflank-mailman (input) for mailman id 1314562;
+ Wed, 20 May 2026 22:40:29 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wPpa7-0008IC-Bb
- for xen-devel@lists.xenproject.org; Wed, 20 May 2026 22:40:03 +0000
+ id 1wPpaX-00018V-F2
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2026 22:40:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wPpa5-00HZa5-0E
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 00:40:02 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wPpaW-00HZiQ-SO
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 00:40:28 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0e383d-e002-0a2a0a5209dd-0a2a4501945c-6
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 00:40:00 +0200
+ id 6a0e3832-2eae-0a2a0a5409dd-0a2a4504d034-28
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 00:40:28 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+a57aa1d5a46c52e8d71d+8305+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0e3840-c1f2-0a2a45010019-5a9b3222dfac-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 00:40:00 +0200
+ id 6a0e385c-1dec-0a2a45040019-5a9b3222c03e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 00:40:28 +0200
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=freeip.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wPpZu-00000007hX4-39AK; Wed, 20 May 2026 22:39:50 +0000
+ id 1wPpaO-00000007hZG-2ad3; Wed, 20 May 2026 22:40:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,15 +56,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=DtDH8j0NQKmUGV97Jxz9ELEov3a5u9SumjQAgzWnX0k=; b=EUutVYgwMU8x7Umh1WP+INCI0R
-	y8Lwa60qjt+2RfzfYtBTtlJSR6+/DdDzzFw/U6lYyfqNxJnWcgC8Ibt4aVxOPQRN4peTsfL3vRs4C
-	3UJ90JNqkrEd414rCqZaTn2mRewNe+bkLZcEdF5MI+WZ0gsVnexuCPkJ9EBYzJAoQ3mO++RivLXzy
-	d0m0DV4+0ZOwQX46H7ELhq0VdyMIYgRVhYXAan1mzFiKGjJ+nELMRiJ7OTJkXmHSx/tO9RHg2GT4W
-	RZN1CS6bBvoJDPfqeXIopnptfYj6P4JIsdVDsZmUL4l01tr+pIGDbyKT1kEvcEJy/a4XAa/PuqkV+
-	oxXhD3DQ==;
-Message-ID: <e04f557315fbd7c6cdef142198abd62531ff7db8.camel@infradead.org>
-Subject: Re: [PATCH v3 19/41] x86/kvmclock: Move kvm_sched_clock_init() down
- in kvmclock.c
+	bh=saT8MuuzWPlbn7ifIKzdCzwT8XCvT9iD6bVie5w2WH0=; b=vW4Wh/kJdDtKuHu85EdUIZf+rL
+	nbgqpReFiX1VGK4Gl5ELGsborIWNu6QYoCKzfiLZKWCsmK8A9k5X1gTFpZE3S8EfYmQl2gBcGkjcR
+	TJAETEZPbdhF/aciJn09nWNi4EzlzUKIKyNViXM37VIv7DhVF/L4ZgSxhbXH0Gw9AgPcG44PTik4y
+	nA3hzJXF4KTSMlx5UGpA0AqCpYkSEHO5t8VFBCLrfkdqYyrXbmqeboBO3Ml8S5el2qlU04jo0uwJF
+	D1D4kaISS3rmhc3JEHNF1g1ylaLmX+haOFm4ZRFtG3gEjNr0Y95h/8aFlCUiDMvExdtJthmzDQBVd
+	WwQWzUIQ==;
+Message-ID: <4a260cf6b85dd895e005fe255bf25efd995e27d5.camel@infradead.org>
+Subject: Re: [PATCH v3 20/41] x86/xen/time: Mark
+ xen_setup_vsyscall_time_info() as __init
 From: David Woodhouse <dwmw2@infradead.org>
 To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
  <kas@kernel.org>,  Paolo Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan"
@@ -86,43 +86,34 @@ Cc: Rick Edgecombe <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov
  linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org, Michael
  Kelley <mhklinux@outlook.com>, Tom Lendacky <thomas.lendacky@amd.com>,
  Nikunj A Dadhania <nikunj@amd.com>, Thomas Gleixner <tglx@linutronix.de>
-Date: Wed, 20 May 2026 23:39:49 +0100
-In-Reply-To: <20260515191942.1892718-20-seanjc@google.com>
+Date: Wed, 20 May 2026 23:40:18 +0100
+In-Reply-To: <20260515191942.1892718-21-seanjc@google.com>
 References: <20260515191942.1892718-1-seanjc@google.com>
-	 <20260515191942.1892718-20-seanjc@google.com>
+	 <20260515191942.1892718-21-seanjc@google.com>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-RlSQbiMm4CS3La34h7if"
+	boundary="=-zpoYd5Qa1cV0TiUes6bQ"
 User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d62444/1779316800-AC457FF4-50CDDE17/0/0
+X-purgate-ID: tlsNG-ebf023/1779316828-40F753FF-DCAF0657/0/0
 X-purgate-type: clean
-X-purgate-size: 8045
+X-purgate-size: 7615
 
 
---=-RlSQbiMm4CS3La34h7if
+--=-zpoYd5Qa1cV0TiUes6bQ
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Fri, 2026-05-15 at 12:19 -0700, Sean Christopherson wrote:
-> Move kvm_sched_clock_init() "down" so that it can reference the global
-> kvm_clock structure without needing a forward declaration.
->=20
-> Opportunistically mark the helper as "__init" instead of "inline" to make
-> its usage more obvious; modern compilers don't need a hint to inline a
-> single-use function, and an extra CALL+RET pair during boot is a complete
-> non-issue.=C2=A0 And, if the compiler ignores the hint and does NOT inlin=
-e the
-> function, the resulting code may not get discarded after boot due lack of
-> an __init annotation.
->=20
-> No functional change intended.
+> Annotate xen_setup_vsyscall_time_info() as being used only during kernel
+> initialization; it's called only by xen_time_init(), which is already
+> tagged __init.
 >=20
 > Signed-off-by: Sean Christopherson <seanjc@google.com>
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
---=-RlSQbiMm4CS3La34h7if
+--=-zpoYd5Qa1cV0TiUes6bQ
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -201,22 +192,22 @@ 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
-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
+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
-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
+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
 
 
---=-RlSQbiMm4CS3La34h7if--
+--=-zpoYd5Qa1cV0TiUes6bQ--
 
