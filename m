@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB576CD5BAC
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315657.1585426 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E48CD5BAF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1315654.1585397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VS-0002w8-N5; Thu, 21 May 2026 17:48:26 +0000
+	id 1wQ7VP-00022n-9F; Thu, 21 May 2026 17:48:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315657.1585426; Thu, 21 May 2026 17:48:26 +0000
+Received: by outflank-mailman (output) from mailman id 1315654.1585397; Thu, 21 May 2026 17:48:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VS-0002us-G5; Thu, 21 May 2026 17:48:26 +0000
-Received: by outflank-mailman (input) for mailman id 1315657;
- Thu, 21 May 2026 17:48:24 +0000
+	id 1wQ7VP-00022J-2g; Thu, 21 May 2026 17:48:23 +0000
+Received: by outflank-mailman (input) for mailman id 1315654;
+ Thu, 21 May 2026 17:48:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VQ-0002II-8U
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:24 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VN-0001ku-Pf
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQ7VP-00Bm0f-KX
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:23 +0200
+ id 1wQ7VN-00Bm0f-5b
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:21 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-34
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:23 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-28
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:21 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f4567-63b5-0a2a45080019-d1558031d8d5-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:23 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4891c00e7aeso47876185e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:23 -0700 (PDT)
+ id 6a0f4564-63b5-0a2a45080019-d155802ccc81-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:21 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-48984d29fe3so69350735e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:21 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.22
+ 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 10:48:22 -0700 (PDT)
+ Thu, 21 May 2026 10:48:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779385703; x=1779990503; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779385700; x=1779990500; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bYofrAN/dcAoG9hDe+IfNA2SsTYiSmdr/xpb0ZlcVh4=;
-        b=G6C+bS0+JTYOObzRjMmA99ds9kbALIgc1lE5AwYRL9ir/NoPzc048QTIHgg7GveKuB
-         Ngl1r8+ADqN0PhkMocAiLtpbXZrSVlsKvPCwUILXvP6MyqTUnp6msmaeh9ORWaDck83E
-         Sb+oRpyNZVMgoz1XI5jd1K0C0slE6sITL4i/ioYjTUifScR4tNfQr62VSVSrfS4k6vd9
-         dzYcOrAQiQ743pgm/lG19vLgx0ZzF69EJa2bGD3dQhwx1gpBTSERvR0DHkqh6Yis6V2N
-         l14fxBOi5D1mBQ0LvbIY2TnaI1CKh2TZpTn9BBKaVwB5qLnpTP5tnNE6zPG2Cno+TrUm
-         VTEQ==
+        bh=bhFqA0ujOchoRkzWCwRDd18LeOSHm2z8hzgN4OjK95I=;
+        b=l4JYUnGO2DaDJ/MfJMah0A3PVHKAFMvYRPzuIzZgiPR1OFBgrLP8WJjYbfk0FUik/V
+         eCFObcYEs14xg07JeFuDMWs+ji2d+dMIBBVliildhnYZ2Ps12zeRRHVCKKQ/L/C5XZU3
+         rC2DpImN0TTBg3R33jjkXkuDN6j7GfiOlJ0wbMhfC73Zsrp+L35ALwVPWCAwEZRakzzK
+         y6YV3c0S9aSBeP1gznVFzIzDl/4C5sodmxbjtTZsmsBVw+Bl/4YDiWDEQaSnqLBR8+0R
+         It3zygcj4srKG8OpI4eWgIsi166NXB+xqzQODqtXD/VdcZ0W1ecupQbchHf8/8TA0TUc
+         Befg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779385703; x=1779990503;
+        d=1e100.net; s=20251104; t=1779385700; x=1779990500;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=bYofrAN/dcAoG9hDe+IfNA2SsTYiSmdr/xpb0ZlcVh4=;
-        b=tKK8BxgiT7fHfIgC6sExy9fIQE+X0SHwEQtxN//pQblfTEQOdiE756s25guZmYbf1H
-         4T0IsFIS1vPvNmRMCVe0qp31ELRZvzWoPWbgKx5o08Ih9jHfSmib93qqeMCEdCdwWP05
-         /yPKjKuk0W2AraMkbio93W9Vu/QUpIYUHM+F/NT/myvIzdQuwoRZTjWnIm9xhkEdLAXz
-         rVjhkUEGBb9cGFuDGmnTpz3rNFsvO+OAx/3gM8kAR1p4QN9goeFUwbfjIxFKSlgeLf6/
-         ng6eI0CHg01Rr79d/iqywiUDecgf0l+6riolHiBmRg96rMGFro/38BcGvAXykW9n0lWL
-         /e0g==
-X-Gm-Message-State: AOJu0YxBoeE90Mudt97Es/UySfI8uHEQ0Ew8J6eVVk3f3cZufUuFyMds
-	9+Zh2K5ZNSd55uvf4FYbCiO8kt1njtbt9Sz+cDtkTM6w2VSBKF2h4ajC2sZ1az9E
-X-Gm-Gg: Acq92OFy4libvI7jpGNX1mBQ9gIxIlkbFddngCZGb4MNtIPcuHQpeO7rlpuMupSpyYC
-	uxVB6K4IRiRZkRcbtMoxjhmCZDa7Awl3M8IsUKZ/PAM8nEYFcTBwBViyZUR5Sl5yA/3rtX5tnkG
-	7g+NaN5F+Oewm6siCSvX1cYObOcowM/dmW+jkZ/t5aCUxLzBaQiFOtnmWW0hjIr0eUYlpm+AV8m
-	b0x8ECQDi+2i9n2MkSMrwAFziqFJrRwDWqWmcK0q4lMGbe7zehCnUR9skO2HEJUyAEqXDA1Dtu8
-	cQYjNnoHZWeGTpUgSbeSHTArldcw6BUge0j1uWKWa050L5VpBi+BQp49BMukhioGdXPWGoVxna+
-	WGXvKfojhWkozHKOQaHqxy8UdVPRPm3QHYeiZwhgRZ5ikI/3qIB9hBHJyGAwavyUVDl6PyOhELu
-	NRb51EvSoJxfhosXiZoGAeZyLn+fq/1txtGvnpRBNXgckRbHs=
-X-Received: by 2002:a05:600c:3153:b0:490:3893:c71 with SMTP id 5b1f17b1804b1-49038930e25mr44973285e9.5.1779385702886;
-        Thu, 21 May 2026 10:48:22 -0700 (PDT)
+        bh=bhFqA0ujOchoRkzWCwRDd18LeOSHm2z8hzgN4OjK95I=;
+        b=IoXRQXDroUCxYSAkMW9z8HsXRdN4gaYO1so80mmF8oXobgjuT6+O3RhxAeK2kCeejA
+         V3q91DpemV02dqZx4ENvnMAPG4S2Oc2sLzqrb7/6LW2hsPY6xPJz/rAvDM0lDg0atQZ6
+         +GphF1pQhDfqHants5fLca/mXc8Ot4u4c/UeGYUkektFcpf6E4xVs9nlZimA2qeT2l7h
+         yjDFkzb6+5hfrW6UTtjoOMXvyZs2Cxzgon4/T/e1N6bJYqToJ2C9m8PWB3WDbMG8rfvL
+         lp7/LN+Xi7h5aAI/voN9MySjYyB+yxcqBVQ5tK2ag6JvUHemMQi07bY/E7hn+41NtLkY
+         k3gQ==
+X-Gm-Message-State: AOJu0YzYHbXKxo7EVYVQsG41OvO8QKKpFMlqciOWtfLGu5Z9muo+/r5v
+	R7I9/5ihP5YimDpzTWN6oBrM7GJkBVo2xwsT8gMvmGdS78VE/W1e33WQnuejrUdH
+X-Gm-Gg: Acq92OHo3aVOqav3ga0u+oJDhx48UOXQXXU8qNVSSPUBUplr0yTUnXRPo/Dfe0SOFmz
+	6QUq+R0IEDLKNXkQM6azwFd4VYw49dc2ouQyQQGIvZGfRp/Wkhea8B/rDmSJAhCHBKxLV84a8hZ
+	FfMeAWHw6EnDCH2mjWqbh2cJ5kPpHbVQmkiFeOFvbyED+jCFP/TyWD1/HgkA/dQDvwl9C3baPhD
+	CaeKT28PUreaYhfQrTol/UbxkKuGMgqUw9kMI66CHrt6UkzcmGqwJkz125+OXBTvvQacrfC4pVo
+	8MdwGIxUxdfgccwjPFjt6HKX9Y2sRs7+JNztTGtantgvFBIZxUvLyyEsFzbqeGiJmN+OkwX/UrZ
+	oX70jRM8C/XCSSUGKU7KontqrRMiwjvT3sNE4bLd+pl7rz0EGDgRRIMNyt0ZZZCWDVYebTWcb3P
+	zYT67Mo31f3EzxLe2GRF5xcteidw==
+X-Received: by 2002:a05:600c:1c0d:b0:48f:fe2a:107b with SMTP id 5b1f17b1804b1-49036048699mr70867295e9.7.1779385700421;
+        Thu, 21 May 2026 10:48:20 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -96,487 +96,366 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v10 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
-Date: Thu, 21 May 2026 20:45:26 +0300
-Message-ID: <9cb404f9327e203594127495ff9aedcf96c18377.1779385072.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v10 05/13] xen/arm: gic-v3: add ITS suspend/resume support
+Date: Thu, 21 May 2026 20:45:23 +0300
+Message-ID: <95930674d4639727b9cdf4f52b4a23b6df60c3c4.1779385072.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1779385072.git.mykola_kvach@epam.com>
 References: <cover.1779385072.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779385703-B596DDB1-0A7CA317/0/0
+X-purgate-ID: tlsNG-c1860d/1779385701-B797DDB1-2A1C7773/0/0
 X-purgate-type: clean
-X-purgate-size: 14404
+X-purgate-size: 11107
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Store and restore active context and micro-TLB registers.
+Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
+working after firmware powers the GIC down.
 
-On resume, restore Root IPMMU context state before restoring Cache IPMMU
-micro-TLB state. Cache IPMMUs select Root contexts through their micro-TLB
-configuration, so restoring Cache micro-TLBs before the Root context
-registers are restored can expose stale or uninitialized context state.
+Save and restore the ITS CTLR, CBASER and BASER registers. On resume,
+re-establish the collection mapping only when the collection is held in
+the ITS itself. Memory-backed collections are restored through the
+restored GITS_BASER tables and must not be remapped unconditionally.
 
-Tested on R-Car H3 Starter Kit.
+Add list_for_each_entry_continue_reverse() in list.h for the ITS suspend
+error path that needs to roll back partially saved state.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Based on Linux commit dba0bc7b76dc:
+"irqchip/gic-v3-its: Add ability to save/restore ITS state".
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
 Changes in V10:
-- Iterate over registered IPMMUs in reverse order during resume so Root IPMMU
-  context state is restored before Cache IPMMU micro-TLB state.
+- Replay MAPC on resume only for collections held in the ITS itself, as
+  indicated by GITS_TYPER.HCC. Memory-backed collections are restored
+  through GITS_BASER and are no longer remapped unconditionally.
+- Make the current Xen col_id == cpu assumption explicit in the ITS
+  resume path.
+- Use "unpredictable" instead of "undefined" in the CBASER/BASER restore
+  comment.
 
 Changes in V9:
-- set dt_device_set_protected() only after ipmmu_alloc_ctx_suspend()
-  succeeds, so DT devices do not remain protected on allocation failure.
+- fix the ITS suspend/resume coding-style nits;
+- preserve the saved GITS_CTLR state while masking the read-only
+  QUIESCENT bit.
 
-Changes in V7:
-- moved suspend context allocation before pci stuff
+Changes in V8:
+- Reword the CBASER/CWRITER comment to match Xen and drop the stale Linux
+  cmd_write reference.
+- Clarify the list_for_each_entry_continue_reverse() comment.
+- Factor out per-ITS helpers for collection setup and resume.
+- Restore each ITS and re-establish its collection mapping in the same
+  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
+  un-restored instance.
+- panic in case when resume of an ITS failed
+- cleanup baser cache during suspend
 ---
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 323 +++++++++++++++++++++--
- 1 file changed, 308 insertions(+), 15 deletions(-)
+ xen/arch/arm/gic-v3-its.c             | 146 ++++++++++++++++++++++++--
+ xen/arch/arm/gic-v3.c                 |  11 +-
+ xen/arch/arm/include/asm/gic_v3_its.h |  28 +++++
+ xen/include/xen/list.h                |  14 +++
+ 4 files changed, 189 insertions(+), 10 deletions(-)
 
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index fa9ab9cb13..2e54fa63d6 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -71,6 +71,8 @@
- })
- #endif
- 
-+#define dev_dbg(dev, fmt, ...)    \
-+    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
- #define dev_info(dev, fmt, ...)    \
-     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
- #define dev_warn(dev, fmt, ...)    \
-@@ -130,6 +132,24 @@ struct ipmmu_features {
-     unsigned int imuctr_ttsel_mask;
- };
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+struct ipmmu_reg_ctx {
-+    unsigned int imttlbr0;
-+    unsigned int imttubr0;
-+    unsigned int imttbcr;
-+    unsigned int imctr;
-+};
-+
-+struct ipmmu_vmsa_backup {
-+    struct device *dev;
-+    unsigned int *utlbs_val;
-+    unsigned int *asids_val;
-+    struct list_head list;
-+};
-+
-+#endif
-+
- /* Root/Cache IPMMU device's information */
- struct ipmmu_vmsa_device {
-     struct device *dev;
-@@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
-     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
-     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
-     const struct ipmmu_features *features;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
-+#endif
- };
- 
- /*
-@@ -547,6 +570,249 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
-     spin_unlock_irqrestore(&mmu->lock, flags);
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 7560d46c6d..dd53209865 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
+     return its_send_command(its, cmd);
  }
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
-+static LIST_HEAD(ipmmu_devices_backup);
-+
-+static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
-+
-+static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
-+                                   unsigned int utlb)
++static int gicv3_its_setup_collection_single(struct host_its *its,
++                                             unsigned int cpu)
 +{
-+    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
-+}
-+
-+static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
-+            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+
-+    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
-+    {
-+        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
-+        unsigned int i;
-+
-+        if ( to_ipmmu(backup_data->dev) != mmu )
-+            continue;
-+
-+        for ( i = 0; i < fwspec->num_ids; i++ )
-+        {
-+            unsigned int utlb = fwspec->ids[i];
-+
-+            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
-+            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+
-+static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
-+
-+    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
-+    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
-+    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
-+    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
-+}
-+
-+static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
-+{
-+    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
-+    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
-+
-+    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
-+
-+    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
-+    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
-+    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
-+    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
-+}
-+
-+/*
-+ * Xen: Unlike Linux implementation, Xen uses a single driver instance
-+ * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
-+ * callbacks to be invoked for each IPMMU device. So, we need to iterate
-+ * through all registered IPMMUs performing required actions.
-+ *
-+ * Also take care of restoring special settings, such as translation
-+ * table format, etc.
-+ */
-+static int __must_check ipmmu_suspend(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return 0;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    list_for_each_entry( mmu, &ipmmu_devices, list )
-+    {
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_backup_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_backup(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+
-+    return 0;
-+}
-+
-+static void ipmmu_resume(void)
-+{
-+    struct ipmmu_vmsa_device *mmu;
-+
-+    if ( !iommu_enabled )
-+        return;
-+
-+    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
-+
-+    spin_lock(&ipmmu_devices_lock);
-+
-+    /*
-+     * IPMMUs are registered with list_add(), with Root IPMMU probed first.
-+     * Walk backwards to restore Root contexts before Cache micro-TLBs.
-+     */
-+    list_for_each_entry_reverse( mmu, &ipmmu_devices, list )
-+    {
-+        uint32_t reg;
-+
-+        /* Do not use security group function */
-+        reg = IMSCTLR + mmu->features->control_offset_base;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) & ~IMSCTLR_USE_SECGRP);
-+
-+        if ( ipmmu_is_root(mmu) )
-+        {
-+            unsigned int i;
-+
-+            /* Use stage 2 translation table format */
-+            reg = IMSAUXCTLR + mmu->features->control_offset_base;
-+            ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
-+
-+            for ( i = 0; i < mmu->num_ctx; i++ )
-+            {
-+                if ( !mmu->domains[i] )
-+                    continue;
-+                ipmmu_domain_restore_context(mmu->domains[i]);
-+            }
-+        }
-+        else
-+            ipmmu_utlbs_restore(mmu);
-+    }
-+
-+    spin_unlock(&ipmmu_devices_lock);
-+}
-+
-+static int ipmmu_alloc_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data;
-+    unsigned int *utlbs_val, *asids_val;
-+    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+
-+    utlbs_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !utlbs_val )
-+        return -ENOMEM;
-+
-+    asids_val = xzalloc_array(unsigned int, fwspec->num_ids);
-+    if ( !asids_val )
-+    {
-+        xfree(utlbs_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data = xzalloc(struct ipmmu_vmsa_backup);
-+    if ( !backup_data )
-+    {
-+        xfree(utlbs_val);
-+        xfree(asids_val);
-+        return -ENOMEM;
-+    }
-+
-+    backup_data->dev = dev;
-+    backup_data->utlbs_val = utlbs_val;
-+    backup_data->asids_val = asids_val;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+    list_add(&backup_data->list, &ipmmu_devices_backup);
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+
-+    return 0;
-+}
-+
-+#ifdef CONFIG_HAS_PCI
-+static void ipmmu_free_ctx_suspend(struct device *dev)
-+{
-+    struct ipmmu_vmsa_backup *backup_data, *tmp;
-+
-+    spin_lock(&ipmmu_devices_backup_lock);
-+
-+    list_for_each_entry_safe( backup_data, tmp, &ipmmu_devices_backup, list )
-+    {
-+        if ( backup_data->dev == dev )
-+        {
-+            list_del(&backup_data->list);
-+            xfree(backup_data->utlbs_val);
-+            xfree(backup_data->asids_val);
-+            xfree(backup_data);
-+            break;
-+        }
-+    }
-+
-+    spin_unlock(&ipmmu_devices_backup_lock);
-+}
-+#endif /* CONFIG_HAS_PCI */
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
- {
-     uint64_t ttbr;
-@@ -559,6 +825,9 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
-         return ret;
- 
-     domain->context_id = ret;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[ret] = &root_pgtable[ret];
-+#endif
- 
-     /*
-      * TTBR0
-@@ -615,6 +884,9 @@ static void ipmmu_domain_destroy_context(struct ipmmu_vmsa_domain *domain)
-     ipmmu_ctx_write_root(domain, IMCTR, IMCTR_FLUSH);
-     ipmmu_tlb_sync(domain);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    domain->mmu->root->reg_backup[domain->context_id] = NULL;
-+#endif
-     ipmmu_domain_free_context(domain->mmu->root, domain->context_id);
- }
- 
-@@ -1338,10 +1610,11 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     struct iommu_fwspec *fwspec;
- 
- #ifdef CONFIG_HAS_PCI
 +    int ret;
 +
-     if ( dev_is_pci(dev) )
-     {
-         struct pci_dev *pdev = dev_to_pci(dev);
--        int ret;
- 
-         if ( devfn != pdev->devfn )
-             return 0;
-@@ -1358,17 +1631,24 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-     if ( !to_ipmmu(dev) )
-         return -ENODEV;
- 
--    if ( !dev_is_pci(dev) )
-+    if ( !dev_is_pci(dev) && dt_device_is_protected(dev_to_dt(dev)) )
-     {
--        if ( dt_device_is_protected(dev_to_dt(dev)) )
--        {
--            dev_err(dev, "Already added to IPMMU\n");
--            return -EEXIST;
--        }
-+        dev_err(dev, "Already added to IPMMU\n");
-+        return -EEXIST;
-+    }
- 
--        /* Let Xen know that the master device is protected by an IOMMU. */
--        dt_device_set_protected(dev_to_dt(dev));
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    if ( ipmmu_alloc_ctx_suspend(dev) )
-+    {
-+        dev_err(dev, "Failed to allocate context for suspend\n");
-+        return -ENOMEM;
-     }
-+#endif
++    ret = its_send_cmd_mapc(its, cpu, cpu);
++    if ( ret )
++        return ret;
 +
-+    /* Let Xen know that the master device is protected by an IOMMU. */
-+    if ( !dev_is_pci(dev) )
-+        dt_device_set_protected(dev_to_dt(dev));
++    ret = its_send_cmd_sync(its, cpu);
++    if ( ret )
++        return ret;
 +
- #ifdef CONFIG_HAS_PCI
-     if ( dev_is_pci(dev) )
++    return gicv3_its_wait_commands(its);
++}
++
+ /* Set up the (1:1) collection mapping for the given host CPU. */
+ int gicv3_its_setup_collection(unsigned int cpu)
+ {
+@@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
+ 
+     list_for_each_entry(its, &host_its_list, entry)
      {
-@@ -1377,26 +1657,28 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         struct pci_host_bridge *bridge;
-         struct iommu_fwspec *fwspec_bridge;
-         unsigned int utlb_osid0 = 0;
--        int ret;
- 
-         bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
-         if ( !bridge )
-         {
-             dev_err(dev, "Failed to find host bridge\n");
--            return -ENODEV;
-+            ret = -ENODEV;
-+            goto free_suspend_ctx;
-         }
- 
-         fwspec_bridge = dev_iommu_fwspec_get(dt_to_dev(bridge->dt_node));
-         if ( fwspec_bridge->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find host bridge uTLB\n");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         if ( fwspec->num_ids < 1 )
-         {
-             dev_err(dev, "Failed to find uTLB");
--            return -ENXIO;
-+            ret = -ENXIO;
-+            goto free_suspend_ctx;
-         }
- 
-         rcar4_pcie_osid_regs_init(bridge);
-@@ -1405,7 +1687,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         if ( ret < 0 )
-         {
-             dev_err(dev, "No unused OSID regs\n");
+-        ret = its_send_cmd_mapc(its, cpu, cpu);
+-        if ( ret )
 -            return ret;
-+            goto free_suspend_ctx;
-         }
-         reg_id = ret;
- 
-@@ -1420,7 +1702,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-         {
-             rcar4_pcie_osid_bdf_clear(bridge, reg_id);
-             rcar4_pcie_osid_reg_free(bridge, reg_id);
+-
+-        ret = its_send_cmd_sync(its, cpu);
+-        if ( ret )
 -            return ret;
-+            goto free_suspend_ctx;
-         }
+-
+-        ret = gicv3_its_wait_commands(its);
++        ret = gicv3_its_setup_collection_single(its, cpu);
+         if ( ret )
+             return ret;
      }
- #endif
-@@ -1429,6 +1711,13 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
-              dev_name(fwspec->iommu_dev), fwspec->num_ids);
- 
+@@ -1211,6 +1219,126 @@ int gicv3_its_init(void)
      return 0;
-+#ifdef CONFIG_HAS_PCI
-+ free_suspend_ctx:
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    ipmmu_free_ctx_suspend(dev);
-+#endif
-+    return ret;
-+#endif
  }
  
- static int ipmmu_iommu_domain_init(struct domain *d)
-@@ -1490,6 +1779,10 @@ static const struct iommu_ops ipmmu_iommu_ops =
-     .unmap_page      = arm_iommu_unmap_page,
-     .dt_xlate        = ipmmu_dt_xlate,
-     .add_device      = ipmmu_add_device,
 +#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend         = ipmmu_suspend,
-+    .resume          = ipmmu_resume,
++int gicv3_its_suspend(void)
++{
++    struct host_its *its;
++    int ret;
++
++    list_for_each_entry( its, &host_its_list, entry )
++    {
++        unsigned int i;
++        void __iomem *base = its->its_base;
++
++        /*
++         * By the time Xen reaches gic_suspend(), every domain is already in
++         * SHUTDOWN_suspend, so ITS-targeting interrupt sources are expected
++         * to have been quiesced by the owning OS before SYSTEM_SUSPEND.
++         */
++        /* Preserve saved GITS_CTLR state, excluding read-only QUIESCENT. */
++        its->suspend_ctx.ctlr = readl_relaxed(base + GITS_CTLR) &
++                                ~GITS_CTLR_QUIESCENT;
++        ret = gicv3_disable_its(its);
++        if ( ret )
++        {
++            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++            goto err;
++        }
++
++        its->suspend_ctx.cbaser = readq_relaxed(base + GITS_CBASER);
++
++        for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
++        {
++            uint64_t baser = readq_relaxed(base + GITS_BASER0 + i * 8);
++
++            its->suspend_ctx.baser[i] = 0;
++
++            if ( !(baser & GITS_VALID_BIT) )
++                continue;
++
++            its->suspend_ctx.baser[i] = baser;
++        }
++    }
++
++    return 0;
++
++ err:
++    list_for_each_entry_continue_reverse( its, &host_its_list, entry )
++        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTLR);
++
++    return ret;
++}
++
++static int gicv3_its_resume_single(struct host_its *its, unsigned int cpu)
++{
++    void __iomem *base = its->its_base;
++    unsigned int i;
++    int ret;
++    uint64_t typer;
++    unsigned int col_id = cpu; /* Xen currently uses col_id == cpu. */
++
++    /*
++     * Make sure that the ITS is disabled. If it fails to quiesce,
++     * don't restore it since writing to CBASER or BASER<n>
++     * registers is unpredictable according to the GIC v3 ITS
++     * Specification.
++     */
++    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
++    ret = gicv3_disable_its(its);
++    if ( ret )
++        return ret;
++
++    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
++
++    /*
++     * Writing CBASER resets CREADR to 0, so reset CWRITER to
++     * keep the command queue pointers aligned.
++     */
++    writeq_relaxed(0, base + GITS_CWRITER);
++
++    /* Restore GITS_BASER from the value cache. */
++    for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
++    {
++        uint64_t baser = its->suspend_ctx.baser[i];
++
++        if ( !(baser & GITS_VALID_BIT) )
++            continue;
++
++        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
++    }
++
++    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
++
++    typer = readq_relaxed(base + GITS_TYPER);
++
++    /*
++     * Only collections with IDs below HCC are held in the ITS itself
++     * and lose their state across an ITS reset/power loss. Memory-backed
++     * collections are restored by restoring GITS_BASER and must not be
++     * remapped here.
++     */
++    if ( col_id < GITS_TYPER_HCC(typer) )
++        return gicv3_its_setup_collection_single(its, cpu);
++
++    return 0;
++}
++
++void gicv3_its_resume(void)
++{
++    struct host_its *its;
++    unsigned int cpu = smp_processor_id();
++    int ret;
++
++    list_for_each_entry( its, &host_its_list, entry )
++    {
++        ret = gicv3_its_resume_single(its, cpu);
++        if ( ret )
++            panic("GICv3: ITS@%"PRIpaddr": failed to restore during resume: %d\n",
++                   its->addr, ret);
++    }
++}
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index 64fd772d65..6e0ca6c50d 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -2184,10 +2184,14 @@ static int gicv3_suspend(void)
+     if ( ret )
+         goto out_enable_iface;
+ 
+-    ret = gicv3_disable_redist();
++    ret = gicv3_its_suspend();
+     if ( ret )
+         goto out_enable_iface;
+ 
++    ret = gicv3_disable_redist();
++    if ( ret )
++        goto out_its_resume;
++
+     /* Save GICR configuration */
+     gicv3_redist_wait_for_rwp();
+ 
+@@ -2227,6 +2231,9 @@ static int gicv3_suspend(void)
+ 
+     return 0;
+ 
++ out_its_resume:
++    gicv3_its_resume();
++
+  out_enable_iface:
+     if ( gicv3_enable_redist() )
+         panic("GICv3: Failed to re-enable redistributor after suspend abort\n");
+@@ -2353,6 +2360,8 @@ static void gicv3_resume(void)
+ 
+     gicv3_redist_wait_for_rwp();
+ 
++    gicv3_its_resume();
++
+     WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
+     isb();
+ 
+diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
+index fc5a84892c..0f8cb16e41 100644
+--- a/xen/arch/arm/include/asm/gic_v3_its.h
++++ b/xen/arch/arm/include/asm/gic_v3_its.h
+@@ -43,6 +43,11 @@
+ #define GITS_CTLR_QUIESCENT             BIT(31, UL)
+ #define GITS_CTLR_ENABLE                BIT(0, UL)
+ 
++#define GITS_TYPER_HCC_SHIFT            24
++#define GITS_TYPER_HCC_MASK             0xffUL
++#define GITS_TYPER_HCC(r)               (((r) >> GITS_TYPER_HCC_SHIFT) & \
++                                                 GITS_TYPER_HCC_MASK)
++
+ #define GITS_TYPER_PTA                  BIT(19, UL)
+ #define GITS_TYPER_DEVIDS_SHIFT         13
+ #define GITS_TYPER_DEVIDS_MASK          (0x1fUL << GITS_TYPER_DEVIDS_SHIFT)
+@@ -129,6 +134,13 @@ struct host_its {
+     spinlock_t cmd_lock;
+     void *cmd_buf;
+     unsigned int flags;
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct suspend_ctx {
++        uint32_t ctlr;
++        uint64_t cbaser;
++        uint64_t baser[GITS_BASER_NR_REGS];
++    } suspend_ctx;
 +#endif
  };
  
- static __init int ipmmu_init(struct dt_device_node *node, const void *data)
+ /* Map a collection for this host CPU to each host ITS. */
+@@ -204,6 +216,11 @@ uint64_t gicv3_its_get_cacheability(void);
+ uint64_t gicv3_its_get_shareability(void);
+ unsigned int gicv3_its_get_memflags(void);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++int gicv3_its_suspend(void);
++void gicv3_its_resume(void);
++#endif
++
+ #else
+ 
+ #ifdef CONFIG_ACPI
+@@ -271,6 +288,17 @@ static inline int gicv3_its_make_hwdom_dt_nodes(const struct domain *d,
+     return 0;
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++static inline int gicv3_its_suspend(void)
++{
++    return 0;
++}
++
++static inline void gicv3_its_resume(void)
++{
++}
++#endif
++
+ #endif /* CONFIG_HAS_ITS */
+ 
+ #endif
+diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
+index 98d8482dab..2aab274157 100644
+--- a/xen/include/xen/list.h
++++ b/xen/include/xen/list.h
+@@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_head *list,
+          &(pos)->member != (head);                                        \
+          (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
+ 
++/**
++ * list_for_each_entry_continue_reverse - iterate backwards from the given point
++ * @pos:    the type * to use as a loop cursor.
++ * @head:   the head for your list.
++ * @member: the name of the list_head within the struct.
++ *
++ * Iterate over list of given type backwards, starting from the element previous
++ * to the current one in list order.
++ */
++#define list_for_each_entry_continue_reverse(pos, head, member)           \
++    for ((pos) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
++         &(pos)->member != (head);                                        \
++         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
++
+ /**
+  * list_for_each_entry_from - iterate over list of given type from the
+  *                            current point
 -- 
 2.43.0
 
