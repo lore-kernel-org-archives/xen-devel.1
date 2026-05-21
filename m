@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2606ACD5BB5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE3ACD5BB4
 	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315656.1585417 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1315652.1585381 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VR-0002bs-4V; Thu, 21 May 2026 17:48:25 +0000
+	id 1wQ7VN-0001kn-Iu; Thu, 21 May 2026 17:48:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315656.1585417; Thu, 21 May 2026 17:48:25 +0000
+Received: by outflank-mailman (output) from mailman id 1315652.1585381; Thu, 21 May 2026 17:48:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VR-0002aY-0s; Thu, 21 May 2026 17:48:25 +0000
-Received: by outflank-mailman (input) for mailman id 1315656;
- Thu, 21 May 2026 17:48:23 +0000
+	id 1wQ7VN-0001kc-Fn; Thu, 21 May 2026 17:48:21 +0000
+Received: by outflank-mailman (input) for mailman id 1315652;
+ Thu, 21 May 2026 17:48:20 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VP-00022P-9u
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:23 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VL-0001KV-Vl
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQ7VO-00Bm0f-Lk
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:22 +0200
+ id 1wQ7VL-00BluR-BU
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:19 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-32
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:22 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-22
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:19 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f4566-63b5-0a2a45080019-d155802ba517-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:22 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-48a3e9862f0so36844985e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:22 -0700 (PDT)
+ id 6a0f4563-63b5-0a2a45080019-d155802ec0fe-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:19 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4903f7a90d1so3694485e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:19 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.21
+ 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 10:48:21 -0700 (PDT)
+ Thu, 21 May 2026 10:48:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,178 +54,311 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779385702; x=1779990502; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779385699; x=1779990499; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=F0jUJYHm37yuKRA04SvTDMOB3esx5h23DnnVhZYfk0I=;
-        b=Dtby69b6q3/TRktc/8pj/Tv2o8HqHWeuvPDbkRYiHnM1TMeNsUNw4JzC8NSGi4RgAR
-         2gJihOephrb0uXPSw1Py6i8FyKoMpnTomcI88zuIl6Qgb2NjUs6SVJrr/7EXhtSeTJAe
-         JoZ6dJAi+jgeRL/47hidfovaoEMyP28L3YxtBBqOWhGm3M04Ma5cxrF7JszjnOlrRLav
-         W2UC97i5dGHk+514kdAiC0SjK+lpopuXTHLj5Jtv6Zxi7YiefozfFUsBEn1uRZPlen84
-         Z6F8s7J61lVY7/tCoSZ2yyTj4P/QIYCW0Kz5mdFn5L0qta06K5Y4nSwok5P9hGmuK0sD
-         PTfQ==
+        bh=EXJbJP8MzENl4VsPg33jnVV005m1Xgxxkwr1fiQgkQc=;
+        b=MFB5BzYskP1KR+6tv0f1isY05Mp9DKgnKJRYvOMYXovJzMcne26mQXnOrow4Sb5vqk
+         WhZqHZdF1whj6NoKQwFuyp7L2uWnRGG2grpmpKlPMU+BpmVTpRcZdlbEV5qimhMXmR2k
+         RMxrtSPL+r0IW4+eWy9Nq/nyGSSyZyaB/rizIkk9phhmjdzqdkv6+YR5bvQFsTmsiQHh
+         ZMkbrn8dRWjxkL2QrPNSozQVe7ZbFJApnZQN94s1rHVAByQV53rtiL8bKu2/Eq78gJ7S
+         kzei0ZH7vfKVcqe3CPy+UISiNhEvsTbcuj1pSUIu2w4UsJMpVfYrDXARUT9c+d+OcvzK
+         cvPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779385702; x=1779990502;
+        d=1e100.net; s=20251104; t=1779385699; x=1779990499;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=F0jUJYHm37yuKRA04SvTDMOB3esx5h23DnnVhZYfk0I=;
-        b=GV0p9BX26dqG5Kd5rHaVPBCZgKSwXN2UmznZ+CE/yawLENFAzux+9IVRNwk5UhBjdq
-         iXj1aMx9R2VQZZQO5yg9Zb8JlF0nqrU1uRIbOCMr42X4HMFZKBrWVB39dfpJRIYyMizF
-         wspf+quH0ateWgyRVYk8uiZ63RBRRVCjk6GkSKjqL4wL4TZt9SKX7CF4IQU1Okg7RUc4
-         O5iRdzRUGOjewUgHBYmBe5Hfzru5Xj1FzodELDEdQhKAdpDxQ50vkGQ1706EDsz48WNp
-         lurOXl+EN+VQKWdSMaMMqEw2mSgcT4AJIMM5Xb9PRKkETrNe1bJSyqlIaI+0zMWdCFqw
-         8p4A==
-X-Gm-Message-State: AOJu0YxOEG50tEHTxAVwly0UjCP/3NPrw7gxNMVVtmKaf6n5e+CcBDCj
-	K4N9KeeAX0KDFvXzUB15Oi+9GF4C5NJOUd3LDHUV8GX1ejdqCvZKJ5kqyF9gczoo
-X-Gm-Gg: Acq92OEU+DQGVsNK+0YWJXnv37sEUQLCDg80k3MnM3TVtL+0RZ5J4lpPZqxuMMSlbKi
-	Tro0qt6N8/m8xznMPHfDrSGzU8nBfIG+mKgXvRjXMD1+m/MOiEHT8gsdNRpzAHW3WNssqid5Run
-	w6q47cawafWtLl2Dtkd8tc4kWHRH05Ee7z/0EY/O7L1NsyB55tW4tN28NF5o19oYeGWLUoI8bT1
-	72keGEsp6gnOXwYR8PxIN4bgU8dXqcPrxdrpmfhIRl28bh172A6MFi/T8NQ1PPevahnt8w1D8HU
-	8HwtVih5XZwHqb4VoEmauXCDsehv97YeMjSh245uqHJcOlYqF5e7VyWCX66TIjDAv2Cx4tstKjF
-	pAnzlU34HVikvTnA8Pk6ZL+lbwoHzwf19VU9e9Oj/ZxLfEzHqEAX09dJACYN3Uad6oUryk0GooU
-	T4/yvilT4p4RG4RP23pxQN+ILQfed+VB/SGRvh
-X-Received: by 2002:a05:600c:3b1f:b0:490:f7c:b19 with SMTP id 5b1f17b1804b1-49035fcbd6bmr44775865e9.0.1779385702074;
-        Thu, 21 May 2026 10:48:22 -0700 (PDT)
+        bh=EXJbJP8MzENl4VsPg33jnVV005m1Xgxxkwr1fiQgkQc=;
+        b=cu/Xxnak14t1m/ZBG7gX4ZlRZtJDpbOK84hSdFQgKGBlGzUwMT4LIagAT5wUH21fNU
+         wi1j3mfAfKKn/kIFdav6+D9QQyuPxk+toYaJn+qHn5n4J+hIYpcvre0WRhVXIY86pc1A
+         F7c4TwqW0uMSEltcWeot2lhx7mEGgfQopkMWXdlcDh20Gye+IVFS/8gZs6R/BzctdGBv
+         MXNYTeU/Ppk7g9beQQy26fgIlmc59m3/Tm6UyPpsRxFrsimxNqGS1Ee7g+iuCGQj4Rny
+         uYrW+g0iH8TRLVlclOpAA4Hbq6K02J9MI6ViKSYWRsr3XL143yKoEzFp0vIh67rIw2mp
+         OeDw==
+X-Gm-Message-State: AOJu0Ywu56JUuNuUJ1DNmKn8nk7CU5/ecMSonXavch50+WwIqCXOGnmI
+	At8yZsCw5A8nWqNcQBgzWhTl/55N4eQ0vj1dvnY92ejoT+/jaGzJ4P3cPwUqtiEk
+X-Gm-Gg: Acq92OGYmij+pPEHf0w1mHbNgKKtHYzSBXnAeVyscHZzOou+VJMGFAxyh9DDG7Wz/OL
+	AbrMkgu7oV80gO7AIVVXGw07fhmqI3kpSNLg6mUGGQib2loWYb5zoI6itfdDgI+xIRR/bGLrQCo
+	lNB0kN0Me1rP0NmbTrQ4jBSqwCSWMvZVxaqmOrQ6M5+uOdDLpahho4z4irI/TZEvXL5svOQR0XT
+	aLA7oZhWt8GJ3VicgvGK0F1INSL3y7GuH1Vy/sLz5FuszrrTPh8FQqJz9o1vBZTP6agF59RaEyz
+	/i7aFCslG2seGC0GJtUzVNmmOdlF8BbdUsWQ/ZVr1wlKooMk2mwYH+uPtdsdXddfTpXtLQUyisE
+	fj8hv22Wx0YFDo+5qKrfai386w/l9/Eseo88Sd0k2mXxpMzqw2pHO7cSObNQv2g/ifJkQTYCCpq
+	DO5DdrdVA+tBcvxQJiL33GggEzXA==
+X-Received: by 2002:a05:600c:858c:b0:490:778:4fec with SMTP id 5b1f17b1804b1-490360f28f7mr43420375e9.33.1779385698610;
+        Thu, 21 May 2026 10:48:18 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Luca Fancellu <luca.fancellu@arm.com>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Michal Orzel <michal.orzel@amd.com>
-Subject: [PATCH v10 07/13] xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
-Date: Thu, 21 May 2026 20:45:25 +0300
-Message-ID: <0c0bf3551f32cfc15ae2006988d3324bdca59b18.1779385072.git.mykola_kvach@epam.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v10 03/13] xen/arm: gic-v3: tolerate retained redistributor LPI state across CPU_OFF
+Date: Thu, 21 May 2026 20:45:21 +0300
+Message-ID: <34155c346c31582699f269d7c50f7dcd8aedafa9.1779385072.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1779385072.git.mykola_kvach@epam.com>
 References: <cover.1779385072.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779385702-BF370DB1-AD20EAAE/0/0
+X-purgate-ID: tlsNG-c1860d/1779385699-C5784DB1-414DB1AA/0/0
 X-purgate-type: clean
-X-purgate-size: 3700
+X-purgate-size: 9602
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-The FF-A notification SRI interrupt handler was not correctly tied to
-CPU hotplug and suspend/resume. As a result, CPUs going offline and
-back online could end up with stale or missing handlers, breaking
-delivery of FF-A notifications.
+PSCI does not guarantee that a GICv3 redistributor is powered down across
+CPU_OFF -> CPU_ON.
+
+DEN0022F.b says CPU_OFF powers down the calling core (5.5) and CPU_ON
+brings the core back with a defined initial CPU state (5.6, 6.4).
+However, PSCI leaves interrupt migration and GIC re-initialization to the
+supervisory software/firmware stack: the caller must migrate interrupts
+away before CPU_OFF (5.5.2), and the execution context that is lost in a
+powerdown state must be saved and restored by software (6.8). PSCI also
+calls out GIC management explicitly in 6.8, including retargeting SPIs,
+preventing PPIs/SGIs from targeting a powered down CPU, and reinitializing
+the CPU interface after CPU_ON.
+
+This matches the GIC architecture. IHI0069H.b Chapter 11.1 requires the PE
+and CPU interface to share a power domain, but explicitly allows the
+associated redistributor, distributor, and ITS to remain powered while the
+PE and CPU interface are off. All other GIC power-management behavior is
+IMPLEMENTATION DEFINED. DEN0050D Chapter 4.2, "Generic Interrupt
+Controller (GIC)", says the GICv3 redistributor may live either in the AP
+core power domain or in a relatively always-on parent domain. So after
+CPU_OFF -> CPU_ON a secondary CPU can legitimately come back to a live
+redistributor with GICR_CTLR.EnableLPIs still set.
+
+Handle that case in the LPI setup path instead of assuming a fully reset
+redistributor.
+
+The LPI path needs special care because the GIC spec makes redistributor
+LPI state sticky and partially implementation defined. IHI0069H.b 5.1.1
+and 5.1.2 say that changing GICR_PROPBASER or GICR_PENDBASER while
+GICR_CTLR.EnableLPIs == 1 is UNPREDICTABLE. After clearing EnableLPIs,
+software must wait for GICR_CTLR.RWP == 0 before touching the pending
+table. The architecture also permits implementations where, once
+EnableLPIs has been set, clearing it again is not guaranteed to work.
+Where an ITS is present, the spec strongly recommends moving LPIs to
+another redistributor before clearing EnableLPIs.
+
+Because of that, treat a retained EnableLPIs state as valid when the
+redistributor still points at Xen's expected PROPBASER/PENDBASER tables.
+Only try to clear EnableLPIs when the retained configuration does not
+match Xen's state, and wait for RWP before reprogramming the tables.
+
+This is also consistent with platform firmware reality: PSCI and the GIC
+architecture allow platform-specific redistributor power handling, and not
+all platform firmware implementations force a full redistributor power-off
+through implementation-defined controls during CPU_OFF. Xen therefore needs
+to tolerate retained redistributor state on secondary CPU bring-up.
+
+Keep gicv3_populate_rdist() resident as well, because gicv3_cpu_init()
+reuses it on secondary CPU bring-up after init.
+
+Tested using Xen's non-boot CPU disable/enable path on Arm
+FVP_Base_RevC-2xAEMvA, both with and without:
+-C gic_distributor.allow-LPIEN-clear=1
+-C gic_distributor.GICR-clear-enable-supported=1
+and on Orange Pi 5.
 
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa_notif.c | 63 ++++++++++++++++++++++++++++--------
- 1 file changed, 50 insertions(+), 13 deletions(-)
+Changes in v10:
+- Drop unrelated gicv3_populate_rdist() printk() format cleanups to keep
+  the patch focused on retained redistributor LPI state.
 
-diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-index 186e726412..513c399594 100644
---- a/xen/arch/arm/tee/ffa_notif.c
-+++ b/xen/arch/arm/tee/ffa_notif.c
-@@ -360,10 +360,28 @@ static int32_t ffa_notification_bitmap_destroy(uint16_t vm_id)
-     return ffa_simple_call(FFA_NOTIFICATION_BITMAP_DESTROY, vm_id, 0, 0, 0);
- }
+Changes in v9:
+- move gicv3_do_wait_for_rwp prototype from its related header to gic.h
+- drop __init from gicv3_populate_rdist(), which is reused on secondary
+  CPU bring-up after boot
+- changed print format for smp_processor_id in gicv3_populate_rdist func
+- cosmetic changes
+---
+ xen/arch/arm/gic-v3-lpi.c      | 77 +++++++++++++++++++++++++++++++++-
+ xen/arch/arm/gic-v3.c          | 15 ++++---
+ xen/arch/arm/include/asm/gic.h |  4 ++
+ 3 files changed, 90 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+index 9ee338edc2..847da26ff7 100644
+--- a/xen/arch/arm/gic-v3-lpi.c
++++ b/xen/arch/arm/gic-v3-lpi.c
+@@ -81,6 +81,13 @@ static DEFINE_PER_CPU(struct lpi_redist_data, lpi_redist);
+ #define MAX_NR_HOST_LPIS   (lpi_data.max_host_lpi_ids - LPI_OFFSET)
+ #define HOST_LPIS_PER_PAGE      (PAGE_SIZE / sizeof(union host_lpi))
  
--void ffa_notif_init_interrupt(void)
-+static DEFINE_PER_CPU_READ_MOSTLY(struct irqaction, sri_irq);
++#define GICR_PROPBASER_XEN_MASK  GENMASK_ULL(51, 12)
++/*
++ * For retained redistributor state, match the pending table by address only.
++ * Attribute bits such as PTZ may not read back with the programmed value.
++ */
++#define GICR_PENDBASER_XEN_MASK  GENMASK_ULL(51, 16)
 +
-+static int request_sri_irq(void)
+ static union host_lpi *gic_get_host_lpi(uint32_t plpi)
  {
-     int ret;
-+    struct irqaction *sri_action = &this_cpu(sri_irq);
-+
-+    sri_action->name = "FF-A notif";
-+    sri_action->handler = notif_irq_handler;
-+    sri_action->dev_id = NULL;
-+    sri_action->free_on_release = 0;
-+
-+    ret = setup_irq(notif_sri_irq, 0, sri_action);
-+    if ( ret )
-+        printk(XENLOG_ERR "ffa: setup_irq irq %u failed: error %d\n",
-+               notif_sri_irq, ret);
- 
-+    return ret;
-+}
-+
-+void ffa_notif_init_interrupt(void)
-+{
-     if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-     {
-         /*
-@@ -376,14 +394,36 @@ void ffa_notif_init_interrupt(void)
-          * pending, while the SPMC in the secure world will not notice that
-          * the interrupt was lost.
-          */
--        ret = request_irq(notif_sri_irq, 0, notif_irq_handler, "FF-A notif",
--                          NULL);
--        if ( ret )
--            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
--                   notif_sri_irq, ret);
-+        request_sri_irq();
-     }
+     union host_lpi *block;
+@@ -296,6 +303,60 @@ static int gicv3_lpi_set_pendtable(void __iomem *rdist_base)
+     return 0;
  }
  
-+static void deinit_ffa_notif_interrupt(void)
++static uint64_t gicv3_lpi_expected_proptable(void)
 +{
-+    if ( fw_notif_enabled && notif_sri_irq < NR_GIC_SGI )
-+        release_irq(notif_sri_irq, NULL);
++    return virt_to_maddr(lpi_data.lpi_property);
 +}
 +
-+static int cpu_ffa_notif_callback(struct notifier_block *nfb,
-+                                  unsigned long action,
-+                                  void *hcpu)
++static uint64_t gicv3_lpi_expected_pendtable(void)
 +{
-+    switch ( action )
++    return virt_to_maddr(this_cpu(lpi_redist).pending_table);
++}
++
++static bool gicv3_lpi_tables_match(void __iomem *rdist_base)
++{
++    uint64_t propbase, pendbase;
++
++    if ( !lpi_data.lpi_property || !this_cpu(lpi_redist).pending_table )
++        return false;
++
++    propbase = readq_relaxed(rdist_base + GICR_PROPBASER);
++    pendbase = readq_relaxed(rdist_base + GICR_PENDBASER);
++
++    return ((propbase & GICR_PROPBASER_XEN_MASK) ==
++            (gicv3_lpi_expected_proptable() & GICR_PROPBASER_XEN_MASK)) &&
++           ((pendbase & GICR_PENDBASER_XEN_MASK) ==
++            (gicv3_lpi_expected_pendtable() & GICR_PENDBASER_XEN_MASK));
++}
++
++static int gicv3_lpi_disable_lpis(void __iomem *rdist_base)
++{
++    uint32_t reg = readl_relaxed(rdist_base + GICR_CTLR);
++    int ret;
++
++    if ( !(reg & GICR_CTLR_ENABLE_LPIS) )
++        return 0;
++
++    writel_relaxed(reg & ~GICR_CTLR_ENABLE_LPIS, rdist_base + GICR_CTLR);
++
++    /*
++     * The spec only guarantees programmability when we have observed the bit
++     * cleared. Where clearing is supported, RWP must reach 0 before touching
++     * PROPBASER/PENDBASER again.
++     */
++    wmb();
++
++    ret = gicv3_do_wait_for_rwp(rdist_base, GICR_CTLR_RWP);
++    if ( ret )
++        return ret;
++
++    reg = readl_relaxed(rdist_base + GICR_CTLR);
++    if ( reg & GICR_CTLR_ENABLE_LPIS )
++        return -EBUSY;
++
++    return 0;
++}
++
+ /*
+  * Tell a redistributor about the (shared) property table, allocating one
+  * if not already done.
+@@ -374,7 +435,21 @@ int gicv3_lpi_init_rdist(void __iomem * rdist_base)
+     /* Make sure LPIs are disabled before setting up the tables. */
+     reg = readl_relaxed(rdist_base + GICR_CTLR);
+     if ( reg & GICR_CTLR_ENABLE_LPIS )
+-        return -EBUSY;
 +    {
-+    case CPU_DYING:
-+        deinit_ffa_notif_interrupt();
-+        break;
-+    default:
-+        break;
++        if ( gicv3_lpi_tables_match(rdist_base) )
++            return -EBUSY;
++
++        ret = gicv3_lpi_disable_lpis(rdist_base);
++        if ( ret == -EBUSY )
++        {
++            printk(XENLOG_ERR
++                   "GICv3: CPU%u: LPIs still enabled with unexpected redistributor tables\n",
++                   smp_processor_id());
++            return -EINVAL;
++        }
++        if ( ret )
++            return ret;
++    }
+ 
+     ret = gicv3_lpi_set_pendtable(rdist_base);
+     if ( ret )
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index dfd5d44603..a2553e647e 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -275,7 +275,7 @@ static void gicv3_enable_sre(void)
+ }
+ 
+ /* Wait for completion of a distributor/redistributor change */
+-static void gicv3_do_wait_for_rwp(void __iomem *base, uint32_t rwp_bit)
++int gicv3_do_wait_for_rwp(void __iomem *base, uint32_t rwp_bit)
+ {
+     uint32_t val;
+     bool timeout = false;
+@@ -299,17 +299,22 @@ static void gicv3_do_wait_for_rwp(void __iomem *base, uint32_t rwp_bit)
+     } while ( 1 );
+ 
+     if ( timeout )
++    {
+         dprintk(XENLOG_ERR, "RWP timeout\n");
++        return -ETIMEDOUT;
 +    }
 +
-+    return NOTIFY_DONE;
-+}
-+
-+static struct notifier_block cpu_ffa_notif_nfb = {
-+    .notifier_call = cpu_ffa_notif_callback,
-+};
-+
- void ffa_notif_init(void)
- {
-     const struct arm_smccc_1_2_regs arg = {
-@@ -392,7 +432,6 @@ void ffa_notif_init(void)
-     };
-     struct arm_smccc_1_2_regs resp;
-     unsigned int irq;
--    int ret;
- 
-     /* Only enable fw notification if all ABIs we need are supported */
-     if ( ffa_fw_supports_fid(FFA_NOTIFICATION_BITMAP_CREATE) &&
-@@ -408,13 +447,11 @@ void ffa_notif_init(void)
-         notif_sri_irq = irq;
-         if ( irq >= NR_GIC_SGI )
-             irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
--        ret = request_irq(irq, 0, notif_irq_handler, "FF-A notif", NULL);
--        if ( ret )
--        {
--            printk(XENLOG_ERR "ffa: request_irq irq %u failed: error %d\n",
--                   irq, ret);
-+
-+        if ( request_sri_irq() )
-             return;
--        }
-+
-+        register_cpu_notifier(&cpu_ffa_notif_nfb);
-         fw_notif_enabled = true;
-     }
++    return 0;
  }
+ 
+ static void gicv3_dist_wait_for_rwp(void)
+ {
+-    gicv3_do_wait_for_rwp(GICD, GICD_CTLR_RWP);
++    (void)gicv3_do_wait_for_rwp(GICD, GICD_CTLR_RWP);
+ }
+ 
+ static void gicv3_redist_wait_for_rwp(void)
+ {
+-    gicv3_do_wait_for_rwp(GICD_RDIST_BASE, GICR_CTLR_RWP);
++    (void)gicv3_do_wait_for_rwp(GICD_RDIST_BASE, GICR_CTLR_RWP);
+ }
+ 
+ static void gicv3_wait_for_rwp(int irq)
+@@ -861,7 +866,7 @@ static bool gicv3_enable_lpis(void)
+     return true;
+ }
+ 
+-static int __init gicv3_populate_rdist(void)
++static int gicv3_populate_rdist(void)
+ {
+     int i;
+     uint32_t aff;
+@@ -929,7 +934,7 @@ static int __init gicv3_populate_rdist(void)
+                     gicv3_set_redist_address(rdist_addr, procnum);
+ 
+                     ret = gicv3_lpi_init_rdist(ptr);
+-                    if ( ret && ret != -ENODEV )
++                    if ( ret && ret != -ENODEV && ret != -EBUSY )
+                     {
+                         printk("GICv3: CPU%d: Cannot initialize LPIs: %u\n",
+                                smp_processor_id(), ret);
+diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
+index fbf0d69edd..84e146b832 100644
+--- a/xen/arch/arm/include/asm/gic.h
++++ b/xen/arch/arm/include/asm/gic.h
+@@ -301,6 +301,10 @@ extern int gicv_setup(struct domain *d);
+ extern void gic_save_state(struct vcpu *v);
+ extern void gic_restore_state(struct vcpu *v);
+ 
++#ifdef CONFIG_GICV3
++int gicv3_do_wait_for_rwp(void __iomem *base, uint32_t rwp_bit);
++#endif
++
+ #ifdef CONFIG_SYSTEM_SUSPEND
+ /* Suspend/resume */
+ extern int gic_suspend(void);
 -- 
 2.43.0
 
