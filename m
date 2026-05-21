@@ -4,60 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E46ECD5BB0
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 16:43:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315603.1585337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB576CD5BAC
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1315657.1585426 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ6US-0004zs-5E; Thu, 21 May 2026 16:43:20 +0000
+	id 1wQ7VS-0002w8-N5; Thu, 21 May 2026 17:48:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315603.1585337; Thu, 21 May 2026 16:43:20 +0000
+Received: by outflank-mailman (output) from mailman id 1315657.1585426; Thu, 21 May 2026 17:48:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ6US-0004zl-26; Thu, 21 May 2026 16:43:20 +0000
-Received: by outflank-mailman (input) for mailman id 1315603;
- Thu, 21 May 2026 16:43:19 +0000
+	id 1wQ7VS-0002us-G5; Thu, 21 May 2026 17:48:26 +0000
+Received: by outflank-mailman (input) for mailman id 1315657;
+ Thu, 21 May 2026 17:48:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Bertrand.Marquis@arm.com>) id 1wQ6UQ-0004za-Rr
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 16:43:19 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VQ-0002II-8U
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQ6UQ-008Eus-7d
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 18:43:18 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wQ7VP-00Bm0f-KX
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:23 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Bertrand.Marquis@arm.com>)
- id 6a0f3617-bab6-0a2a0a5309dd-0a2a4509d3ba-14
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 18:43:17 +0200
-Received: from [52.101.83.16]
- (helo=GVXPR05CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Bertrand.Marquis@arm.com>)
- id 6a0f3625-2497-0a2a45090019-346553104174-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 18:43:17 +0200
-Received: from CWLP265CA0355.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5a::31)
- by PR3PR08MB5739.eurprd08.prod.outlook.com (2603:10a6:102:8e::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Thu, 21 May
- 2026 16:43:13 +0000
-Received: from AMS1EPF00000049.eurprd04.prod.outlook.com
- (2603:10a6:401:5a:cafe::4) by CWLP265CA0355.outlook.office365.com
- (2603:10a6:401:5a::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Thu, 21
- May 2026 16:43:13 +0000
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS1EPF00000049.mail.protection.outlook.com (10.167.16.133) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
- Frontend Transport; Thu, 21 May 2026 16:43:10 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com (2603:10a6:102:84::13)
- by DB9PR08MB7424.eurprd08.prod.outlook.com (2603:10a6:10:36f::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Thu, 21 May
- 2026 16:42:06 +0000
-Received: from PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e]) by PR3PR08MB5593.eurprd08.prod.outlook.com
- ([fe80::aae1:6871:afc4:620e%5]) with mapi id 15.21.0025.020; Thu, 21 May 2026
- 16:42:05 +0000
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-34
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:23 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0f4567-63b5-0a2a45080019-d1558031d8d5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:23 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4891c00e7aeso47876185e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:23 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 10:48:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,173 +52,532 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=fail;
- b=Ywx4axVu1ee8yeBk/f5u4CKMJ2PbqH+JX7w8jD0+AqlQ6PcSUc/q1wQ7pcbL1IPrAOecDfM3LICCXj5u4sYTb2jerlG3QFBaPK3vPdRif31lutdUJeSMPcO8dQwXTQ+RnWqXoC2irWYYSq4ngJGppELKLgnIhsq8Vr+yLXCAXk1cXJhoU6dceugoWBmquV3HV9wtDNK+2yxHSPBtnAdp9HGCpcRPMzlotn3xtg/V+tqBcajtAhJJCTs9faHpGLcRecuxzfqod2GDcHnSQZB4mqdcoAn6vf/lGNjS8CAI2pfVdoWip18Ib5GDxv7IowNRHYe1PDnJUpwRaZ1Ntj58ZA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+SdlPMyloHC0VrrtOvIDK8uAYHwMZWx5pkK7oS8qsZM=;
- b=kNtXzW+offceVo1Mf3lujNsRJXruNib79kQFrpdVxdWVCIaeGpI7mD+F5ui7WZNLL8Q/fVGIHLJNYLsi/51tVPdNyOp2NbS1W/6FBBXqWg1pP92WFDyrI/u4K+/IAMPlNnacxicpzxVmomZM3SEgGS9K4yqX90e32lqNTLnrmitrlZ8EDBQTf2yRfl15rS0s+ELdPUFRz/Lip0ulOuwXvUPsV0FIxsRY5sNBj9+aEwJbZoOgOl+VnRY2C1aGjPaGDqx4pv4sAnZe1UvOita/Agf1VokvetENoY6pAs6OZnO5K8rfR6ohnBng8/isuf/gr+11F2HwlI4pXf63hs+lbQ==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=suse.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=fail (48)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+SdlPMyloHC0VrrtOvIDK8uAYHwMZWx5pkK7oS8qsZM=;
- b=LDRTovtiQS0IXUBD4BWs2nkx+9k5l7FDnLyYJhPML1Bol1/GIRMzsXH3KmeRiWOhVVBa3FQQ1v1WpOqI7C+gjU75YGJn55vKZ7cyK6v5S43+1jusRU2S8K1kETAiLmBgBFgdtgWATBpDinJ5fjG8vFVPRFzj6bI51s1eDtMV9DI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T7eMa4dGjP0mCEGT93/SknJc80pcAdggzAd+Al+jhnA2hRKEqtpEGlRhfe0Ha7ezUgmV+i8zGe0tWLvMNETuooFHTnbTeQe5rS9+cbEeAYUzxmrtNxVvh3i43nxpD8EEgqrHGZTdRMiYiYukNI0ZZ7LcS+6cpdBb1aQqVLnn1ESjUNzv0hyFP5sz8BIgyVLRe5ps05UudMYcr6eF7RXwtKcrxxoJBfQvSL8LbctSXbu1T565/Umo6NSxDEkut9sl7wc2xvzUdQKuHX6Mae4zNKD8vTC/0hUg5iTYv9AB6bI7pfs5bbryfQgCMxkrVtvjSBSW4OJEupwyCJHBaRE2qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+SdlPMyloHC0VrrtOvIDK8uAYHwMZWx5pkK7oS8qsZM=;
- b=C2bk5ZPLuuyE4nwsafFgQJI/3zNY0Lq4bZ3Ko83ouTaICy3v3nLAT0wqfnwM9ylwzNZ2UGrpXwGElFzfkz4ICwQ1TaIHtVsTTtMo9We6uGe9GDwUEqdGkr2J/O9RC/m+PaDryfRxXG5zQw786TG+MjSFiGxvEHWDJftIkEZYZqqXkIvMss0SaKtvZh6x2UHTULsUHxLxiUG6gwxjiCkFV5Z1+cl8SByfRbdyxf8SdNOg5ALdB7anOTGtNp7umyeY3hB0a3jD28/IZXxhBIq5v8yPffag4Ca8R0NvFXmR7pOxl0KGI5NQKU0GM6jW9EVxn2geKiuW5fDo/wBkbDKq8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+SdlPMyloHC0VrrtOvIDK8uAYHwMZWx5pkK7oS8qsZM=;
- b=LDRTovtiQS0IXUBD4BWs2nkx+9k5l7FDnLyYJhPML1Bol1/GIRMzsXH3KmeRiWOhVVBa3FQQ1v1WpOqI7C+gjU75YGJn55vKZ7cyK6v5S43+1jusRU2S8K1kETAiLmBgBFgdtgWATBpDinJ5fjG8vFVPRFzj6bI51s1eDtMV9DI=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>, Volodymyr
- Babchuk <volodymyr_babchuk@epam.com>
-Subject: Re: [PATCH v2] Arm: do a 4th linking pass if necessary
-Thread-Topic: [PATCH v2] Arm: do a 4th linking pass if necessary
-Thread-Index: AQHc6RnGu1utUAlrJk+sIf0YXyTZG7YYr0OA
-Date: Thu, 21 May 2026 16:42:05 +0000
-Message-ID: <74846C01-4D54-4DFE-A6B6-9D4DC0301D3E@arm.com>
-References: <59fc2b14-073b-42a6-8f30-503ad789fbab@suse.com>
-In-Reply-To: <59fc2b14-073b-42a6-8f30-503ad789fbab@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3864.500.181)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	PR3PR08MB5593:EE_|DB9PR08MB7424:EE_|AMS1EPF00000049:EE_|PR3PR08MB5739:EE_
-X-MS-Office365-Filtering-Correlation-Id: 43c1be5e-cfe5-45d6-1174-08deb7580b5b
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|22082099003|56012099003|38070700021|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info-Original:
- 58nn2JAY22Q4IDrWC7T1dOE4iNh6u5nMmMANMprl/Wtxd9R8Jku0SnbqtPqqXFDdEcCSjYdUyPkkXbQ8i2jU98IcvjtkSgQNBxWh7mG4iqYvV7JY3kbapgfMOmBsXZ3Mj5kp80BzcyeJdytw+5nYxXIxzfIjAZFePj0LHxQiHhZmYGIyp2dFREcoEcQPTNErTztOavfrv3aPIXFbndL3uNZ5M+XjTLMP3XxYPedCH6Bag2uNPJQOPlaSxogwAegHUZe64+k+3vTHldBZE9+VFaMd3ffwQdWT2M6YNREdGMz/cZkbQ8YPgF+3uFuIJw1PUzgWc20FZfEhcg75fLCECqDDMbAR/2p/EZov1z1oJWJeoz4Gnov9zkOE7hZw9MdTLaaIdSnZ1CsgO4/A22VU3h+GocDATPwT26Vr3EWBujTU5zN/+O5XU9a1OYPaMvQl2FQJGtlX1YPO99fmg2d4BUOg98oUBxNRyJhST8FH7EvQ1bXZSVGUdPW5M/saiBw1Ekiir4i4Ng1vE/37vpq9TD+nHWe/kuaT4uQvGl6KiKMuysQkQBj4J4jN3ywQeAZEHBVKwSLzSMw/CUs2oczvor3clC59dQfSJvie6/5Yr7O0NrXD33+BiNZ47jeMMb5PiMJXkGahr7K+hbxk+w7YNfCIcanKjA/T9Re9qFXcx05252CjViErFpOvpRvJ1kVKADxciZAnbhpq96gnHWY+8ltrds2msV3rWyQFabfMEX6j2+Bmv0r8cUt8hLqhjNiT
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(22082099003)(56012099003)(38070700021)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <63F974E5C27062419ABB9A4B32916418@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779385703; x=1779990503; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bYofrAN/dcAoG9hDe+IfNA2SsTYiSmdr/xpb0ZlcVh4=;
+        b=G6C+bS0+JTYOObzRjMmA99ds9kbALIgc1lE5AwYRL9ir/NoPzc048QTIHgg7GveKuB
+         Ngl1r8+ADqN0PhkMocAiLtpbXZrSVlsKvPCwUILXvP6MyqTUnp6msmaeh9ORWaDck83E
+         Sb+oRpyNZVMgoz1XI5jd1K0C0slE6sITL4i/ioYjTUifScR4tNfQr62VSVSrfS4k6vd9
+         dzYcOrAQiQ743pgm/lG19vLgx0ZzF69EJa2bGD3dQhwx1gpBTSERvR0DHkqh6Yis6V2N
+         l14fxBOi5D1mBQ0LvbIY2TnaI1CKh2TZpTn9BBKaVwB5qLnpTP5tnNE6zPG2Cno+TrUm
+         VTEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779385703; x=1779990503;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=bYofrAN/dcAoG9hDe+IfNA2SsTYiSmdr/xpb0ZlcVh4=;
+        b=tKK8BxgiT7fHfIgC6sExy9fIQE+X0SHwEQtxN//pQblfTEQOdiE756s25guZmYbf1H
+         4T0IsFIS1vPvNmRMCVe0qp31ELRZvzWoPWbgKx5o08Ih9jHfSmib93qqeMCEdCdwWP05
+         /yPKjKuk0W2AraMkbio93W9Vu/QUpIYUHM+F/NT/myvIzdQuwoRZTjWnIm9xhkEdLAXz
+         rVjhkUEGBb9cGFuDGmnTpz3rNFsvO+OAx/3gM8kAR1p4QN9goeFUwbfjIxFKSlgeLf6/
+         ng6eI0CHg01Rr79d/iqywiUDecgf0l+6riolHiBmRg96rMGFro/38BcGvAXykW9n0lWL
+         /e0g==
+X-Gm-Message-State: AOJu0YxBoeE90Mudt97Es/UySfI8uHEQ0Ew8J6eVVk3f3cZufUuFyMds
+	9+Zh2K5ZNSd55uvf4FYbCiO8kt1njtbt9Sz+cDtkTM6w2VSBKF2h4ajC2sZ1az9E
+X-Gm-Gg: Acq92OFy4libvI7jpGNX1mBQ9gIxIlkbFddngCZGb4MNtIPcuHQpeO7rlpuMupSpyYC
+	uxVB6K4IRiRZkRcbtMoxjhmCZDa7Awl3M8IsUKZ/PAM8nEYFcTBwBViyZUR5Sl5yA/3rtX5tnkG
+	7g+NaN5F+Oewm6siCSvX1cYObOcowM/dmW+jkZ/t5aCUxLzBaQiFOtnmWW0hjIr0eUYlpm+AV8m
+	b0x8ECQDi+2i9n2MkSMrwAFziqFJrRwDWqWmcK0q4lMGbe7zehCnUR9skO2HEJUyAEqXDA1Dtu8
+	cQYjNnoHZWeGTpUgSbeSHTArldcw6BUge0j1uWKWa050L5VpBi+BQp49BMukhioGdXPWGoVxna+
+	WGXvKfojhWkozHKOQaHqxy8UdVPRPm3QHYeiZwhgRZ5ikI/3qIB9hBHJyGAwavyUVDl6PyOhELu
+	NRb51EvSoJxfhosXiZoGAeZyLn+fq/1txtGvnpRBNXgckRbHs=
+X-Received: by 2002:a05:600c:3153:b0:490:3893:c71 with SMTP id 5b1f17b1804b1-49038930e25mr44973285e9.5.1779385702886;
+        Thu, 21 May 2026 10:48:22 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Luca Fancellu <luca.fancellu@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v10 08/13] iommu/ipmmu-vmsa: Implement suspend/resume callbacks
+Date: Thu, 21 May 2026 20:45:26 +0300
+Message-ID: <9cb404f9327e203594127495ff9aedcf96c18377.1779385072.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1779385072.git.mykola_kvach@epam.com>
+References: <cover.1779385072.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
- Zdhms4m6LLuRKP0I3a5hKwsPhJ5DnhqUDscCsdlPkIhB2cB/BT8MxBPNQb9S1jr6uzoDlW0bvDOT5kQSYOOxQWpeLROHgxL2D/EAuLOHIP1QhipmD/Kwb/xp0NhT3mnFmDUBAEmTnBNxt3Vn+VVre3fnw94AxRyHhEHVBMgXN3VnrdZtLqpVBGfsroi75WyEC3umg/fLM5eRoKlSy1bv/h1fH28xpJxx2BO9q65Q3xin/tyEEM586G4wLG95hWedUxYwnuYpeY4Ow5DSVGpNyPqYu5fxmfAiNY5khACCvFdrabdbJzGOQcE/OzYr9o7b0lhpYYJVZcTNBp8tiT0hVw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB7424
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AMS1EPF00000049.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	5a3e3b7d-169e-487f-c2ba-08deb757e497
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|35042699022|1800799024|14060799003|376014|82310400026|56012099003|22082099003|18002099003|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	J5aYUpoBvnvpkysDfzfx+4WHEclv9HXa3tntTkNJXUXtdUSk6ddQUJLNS1P8yMqQYRXr7RjLQnERnWhXYxXQKP7iH4qgbNrgtuOhguVk1Xu6IO1O/Oy1a3FEZK2y6j4aM/o+27LXT87bJkesDfEW0CALqs3YrlkHZpL0I3gggl7/PH6aGoipDY2cSG/a+GwCFksLS1OnrsjIe6A9pz1qNwH+Tm1jGkkOcLHXDbr4DVVxgXSrpEB5xIluIDVEQNAFhR5uke7O2RLke6ohAq0UMYdAdANt4aSMNJAohPNMsME9NI4mNbw9KCRtkYoQNoyWN8SAtQxkbqcT3Iv/AV10OPlKesrssU/s1fbtW2Z/reNTaM+GSoSefegSIdaCxxV1ftZLgOSm2beFZv+iZIjTpt6sqmBXrLPe83DTZj5xfrQiA2TwsgURBSxhXQ5ig59tPIw6W6OPwmwdVNdw6iwRgGVDVlXr8N4A3XZTvNqoifqVu0uCesGbv7+C9nymOmbig+POfq+f8shHo1mYfs1cSP6tLjtQFKcTA/TLccSHQfKHcFUS+tXvEW5WLt3C3Bk1SywWKSOXXLYfTgiQYh3ZfYiyiPWdcq3MQ4UuJxN7tJWSF1ZpoKCxw/8+pjwlDJneZ2xm/9yxYTDX0tZSnydXjd89XSLuwbjP5c9m67XiWVTpwdTccW0CmrUNJdroKAUKPlrgVUlUEPP4Xy2l/L+Fy1RJWd6zkdd3bH10+LNCxyQ=
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(35042699022)(1800799024)(14060799003)(376014)(82310400026)(56012099003)(22082099003)(18002099003)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	44RiZ20zm070Ic0NZ91E1c++Uos5bCnUtqlDi4jy8cPC8e78FCCgcy1ttFdZeeBDUNs9HmyfrFqKUoou4NKAMwZnH2yxQlhhYyo3uPPL6pPjoQUy5CNGBPa4KBh3mI60V4eIG63kKiQKyM4DwSWvyhLCKrfOBUjPkXOzz3id6ktLcNYgoXKdD6+6bnHcUITfPnR0E1YdJ/McW2hJp27UrD9dOEna/v51Zk7Ff6ubmcS2Y979Q8gDjUrFa7SWgVhdLSduBzZxFm8HitsGNUpc/teSfWD0kffsrwrS1yxeJ4/eRPnuXVIZcOd8PZ+CHLw4tkaX9vsq7QtDsnpVK8FSSOVjWqAi2Ok/kVXk1+eHw70wI7Wrhl0ch0Nio6XvphGlEHgp1uZpr46o7JYLOEQxF2gHJdUBm7lW3grgRwzWShYeuZWQQdyzqw+EPCh8pceM
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 16:43:10.7752
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 43c1be5e-cfe5-45d6-1174-08deb7580b5b
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AMS1EPF00000049.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5739
-X-purgate-ID: tlsNG-bad1c0/1779381797-37B78A53-EC319B78/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1779385703-B596DDB1-0A7CA317/0/0
 X-purgate-type: clean
-X-purgate-size: 4730
+X-purgate-size: 14404
 
-SGkgSmFuLA0KDQo+IE9uIDIxIE1heSAyMDI2LCBhdCAxNDowMiwgSmFuIEJldWxpY2ggPGpiZXVs
-aWNoQHN1c2UuY29tPiB3cm90ZToNCj4gDQo+IFRoZSAucm9kYXRhIGdyb3d0aCBiZXR3ZWVuIDFz
-dCBhbmQgMm5kIGxpbmtpbmcgcGFzc2VzIG1heSBhZmZlY3QgdGhlDQo+IG51bWJlciBvZiBzdHVi
-cyB0aGUgbGlua2VyIHdhbnRzIHRvIGluc2VydCwgd2hpY2ggaW4gdHVybiBhZmZlY3RzIHRoZQ0K
-PiBudW1iZXIgb2Ygc3ltYm9scy4gSWYgc3ltYm9sIHRhYmxlIHNpemVzIGNoYW5nZSBhZnRlciB0
-aGUgMm5kIGxpbmtpbmcNCj4gcGFzcywgaW5zZXJ0IGFub3RoZXIgb25lIGJlZm9yZSB0aGUgZmlu
-YWwgb25lLiAoQXMgYSBjb21tZW50IGluIExpbnV4IHB1dHMNCj4gaXQsICJJbiB0aGVvcnkgaXQn
-cyBwb3NzaWJsZSB0aGlzIHJlc3VsdHMgaW4gZXZlbiBtb3JlIHN0dWJzLCBidXQNCj4gdW5saWtl
-bHkuIikNCj4gDQo+IFRvIHVzZSB0aGUgJChjb21wYXJlLXN5bWJvbC10YWJsZXMpIG1hY3JvIGlu
-IGEgc2hlbGwgImlmIiwgaXQgbmVlZHMNCj4gc2xpZ2h0bHkgYWRqdXN0aW5nIChhbmQgdGhlbiB3
-cmFwcGluZyB0byBiZSBydW4gaW4gYSBzdWItc2hlbGwpLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0KDQpBY2tlZC1ieTogQmVydHJhbmQgTWFy
-cXVpcyA8YmVydHJhbmQubWFycXVpc0Bhcm0uY29tPg0KDQpDaGVlcnMNCkJlcnRyYW5kDQoNCj4g
-LS0tDQo+IFRoZXJlJ3MgaW1vIG5vIGdvb2QgRml4ZXM6IHRhZywgc2luY2UgKGFpdWkpIHN0dWJz
-ICh2ZW5lZXJzKSBtYXkgYWxzbyBiZQ0KPiBpbnNlcnRlZCBmb3IgcmVhc29ucyBvdGhlciB0aGFu
-IGVycmF0YSB3b3JrYXJvdW5kcy4NCj4gDQo+IEZvciBjb250ZXh0OiBUaGUgQ29ydGV4IEE1MyBl
-cnJhdHVtIDg0MzQxOSB3b3JrYXJvdW5kIGluIEdOVSBsZCBjb21lcyBpbg0KPiB0d28gZmxhdm9y
-czogSW4gdGhlIGdlbmVyYWwgY2FzZSBhIHN0dWIgaXMgaW5zZXJ0ZWQsIGJ1dCBpZiB0aGUgcHJv
-YmxlbQ0KPiBBRFJQIGNhbiBiZSByZXBsYWNlZCBieSBBRFIgKGkuZS4gdGhlIHRhcmdldCBzeW1i
-b2wgaXMgd2l0aGluIMKxMU1iKSwgdGhlbg0KPiB0aGF0J3MgcHJlZmVycmVkIGFuZCBubyBzdHVi
-IGlzIG5lZWRlZC4gVGhlIGFkZGl0aW9uIG9mIHRoZSBzeW1ib2wgdGFibGUNCj4gZGF0YSBpcyB3
-aGF0IHRoZW4gcmVzdWx0cyBpbiB0aGUgc3R1Yi1sZXNzIGZvcm0gdG8gbm8gbG9uZ2VyIGJlIHVz
-YWJsZSBpbg0KPiBhZmZlY3RlZCBjb25maWd1cmF0aW9ucy4gQSBwb3NzaWJsZSBjb3VudGVybWVh
-c3VyZSBjb3VsZCBiZSB0byBtb3ZlDQo+IC5yb2RhdGEgYWhlYWQgb2YgLnRleHQuIChBbHNvLCBm
-cm9tIGxvb2tpbmcgYXQgZ2VuZXJhdGVkIGNvZGUsIGl0IG1heSB3ZWxsDQo+IGJlIHRoYXQgbmV3
-ZXIgZ2NjIHNpbXBseSBhdm9pZHMgcHJvZHVjaW5nIHByb2JsZW1hdGljIGluc24gc2VxdWVuY2Vz
-LikNCj4gDQo+IExpbnV4IHNpbXBseSBjb21wYXJlcyBvYmplY3QgZmlsZSBzaXplcywgYnV0IEkg
-Y29uc2lkZXIgdGhhdCBmcmFnaWxlOiBBDQo+IGNoYW5nZSBpbiBzaXplIG9mIG9uZSBvZiB0aGUg
-c3ltYm9sIHRhYmxlIGNvbnN0aXR1ZW50cyBtYXkgbm90IG5lY2Vzc2FyaWx5DQo+IGNoYW5nZSB0
-aGUgb2JqZWN0IGZpbGUgc2l6ZSwgZHVlIHRvIHBhZGRpbmcgd2hpY2ggbWF5IGJlIGluIHVzZS4N
-Cj4gDQo+IE9uY2Ugd2UgZ2VuZXJhbGl6ZSBsaW5raW5nLCB3ZSBtYXkgd2FudCB0byBpbnRyb2R1
-Y2UgYW4gZXF1aXZhbGVudCBvZg0KPiBMaW51eCdlcyBLQUxMU1lNU19FWFRSQV9QQVNTIGFzIHdl
-bGwuIEkgZG9uJ3QgdGhpbmsgZG9pbmcgdGhpcyByaWdodCBoZXJlDQo+IHdvdWxkIG1ha2Ugb3Zl
-cmx5IG11Y2ggc2Vuc2UsIHRob3VnaC4NCj4gLS0tDQo+IHYyOiBBZGQgInNldCAtZSIuDQo+IA0K
-PiAtLS0gYS94ZW4vYXJjaC9hcm0vTWFrZWZpbGUNCj4gKysrIGIveGVuL2FyY2gvYXJtL01ha2Vm
-aWxlDQo+IEBAIC05OSw5ICs5OSwyMSBAQCAkKFRBUkdFVCktc3ltczogJChvYmp0cmVlKS9wcmVs
-aW5rLm8gJChvDQo+IHwgJChvYmp0cmVlKS90b29scy9zeW1ib2xzICQoYWxsX3N5bWJvbHMpIC0t
-c3lzdiAtLXNvcnQgXA0KPiA+ICQoZG90LXRhcmdldCkuMi5TDQo+ICQoTUFLRSkgJChidWlsZCk9
-JChARCkgJChkb3QtdGFyZ2V0KS4yLm8NCj4gLSAkKGNhbGwgY29tcGFyZS1zeW1ib2wtdGFibGVz
-LCAkKGRvdC10YXJnZXQpLjEubywgJChkb3QtdGFyZ2V0KS4yLm8pDQo+ICsgaWYgISB7ICQoY2Fs
-bCBjb21wYXJlLXN5bWJvbC10YWJsZXMsICQoZG90LXRhcmdldCkuMS5vLCAkKGRvdC10YXJnZXQp
-LjIubykgPi9kZXYvbnVsbDsgfTsgXA0KPiArIHRoZW4gXA0KPiArIHNldCAtZTsgXA0KPiArICQo
-TEQpICQoWEVOX0xERkxBR1MpIC1UICQob2JqKS94ZW4ubGRzICQ8ICQoYnVpbGRfaWRfbGlua2Vy
-KSBcDQo+ICsgICAgJChkb3QtdGFyZ2V0KS4yLm8gLW8gJChkb3QtdGFyZ2V0KS4yOyBcDQo+ICsg
-JChOTSkgLXBhIC0tZm9ybWF0PXN5c3YgJChkb3QtdGFyZ2V0KS4yIFwNCj4gKyB8ICQob2JqdHJl
-ZSkvdG9vbHMvc3ltYm9scyAkKGFsbF9zeW1ib2xzKSAtLXN5c3YgLS1zb3J0IFwNCj4gKyA+ICQo
-ZG90LXRhcmdldCkuMy5TOyBcDQo+ICsgJChNQUtFKSAkKGJ1aWxkKT0kKEBEKSAkKGRvdC10YXJn
-ZXQpLjMubzsgXA0KPiArICQoY2FsbCBjb21wYXJlLXN5bWJvbC10YWJsZXMsICQoZG90LXRhcmdl
-dCkuMi5vLCAkKGRvdC10YXJnZXQpLjMubyk7IFwNCj4gKyBlbHNlIFwNCj4gKyBsbiAtc2YgJChk
-b3QtdGFyZ2V0KS4yLm8gJChkb3QtdGFyZ2V0KS4zLm87IFwNCj4gKyBmaQ0KPiAkKExEKSAkKFhF
-Tl9MREZMQUdTKSAtVCAkKG9iaikveGVuLmxkcyAkPCAkKGJ1aWxkX2lkX2xpbmtlcikgXA0KPiAt
-ICAgICQoZG90LXRhcmdldCkuMi5vIC1vICRADQo+ICsgICAgJChkb3QtdGFyZ2V0KS4zLm8gLW8g
-JEANCj4gJChOTSkgLXBhIC0tZm9ybWF0PXN5c3YgJEAgXA0KPiB8ICQob2JqdHJlZSkvdG9vbHMv
-c3ltYm9scyAtLWFsbC1zeW1ib2xzIC0teGVuc3ltcyAtLXN5c3YgLS1zb3J0IFwNCj4gPiAkQC5t
-YXANCj4gLS0tIGEveGVuL3NjcmlwdHMvS2J1aWxkLmluY2x1ZGUNCj4gKysrIGIveGVuL3Njcmlw
-dHMvS2J1aWxkLmluY2x1ZGUNCj4gQEAgLTY1LDcgKzY1LDcgQEAgZGVmaW5lIGNvbXBhcmUtc3lt
-Ym9sLXRhYmxlcw0KPiAgICAgJChPQkpEVU1QKSAtdCAkKEBEKS8uY3N0LiQkJCQgPiAkKDEpLnN5
-bTsgXA0KPiAgICAgbG4gLWYgJCgyKSAkKEBEKS8uY3N0LiQkJCQ7IFwNCj4gICAgICQoT0JKRFVN
-UCkgLXQgJChARCkvLmNzdC4kJCQkID4gJCgyKS5zeW07IFwNCj4gLSAgICBybSAtZiAkKEBEKS8u
-Y3N0LiQkJCQNCj4gKyAgICBybSAtZiAkKEBEKS8uY3N0LiQkJCQ7IFwNCj4gICAgIGRpZmYgLXUg
-JCgxKS5zeW0gJCgyKS5zeW0NCj4gZW5kZWYNCj4gDQoNCg==
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+
+Store and restore active context and micro-TLB registers.
+
+On resume, restore Root IPMMU context state before restoring Cache IPMMU
+micro-TLB state. Cache IPMMUs select Root contexts through their micro-TLB
+configuration, so restoring Cache micro-TLBs before the Root context
+registers are restored can expose stale or uninitialized context state.
+
+Tested on R-Car H3 Starter Kit.
+
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+Changes in V10:
+- Iterate over registered IPMMUs in reverse order during resume so Root IPMMU
+  context state is restored before Cache IPMMU micro-TLB state.
+
+Changes in V9:
+- set dt_device_set_protected() only after ipmmu_alloc_ctx_suspend()
+  succeeds, so DT devices do not remain protected on allocation failure.
+
+Changes in V7:
+- moved suspend context allocation before pci stuff
+---
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 323 +++++++++++++++++++++--
+ 1 file changed, 308 insertions(+), 15 deletions(-)
+
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index fa9ab9cb13..2e54fa63d6 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -71,6 +71,8 @@
+ })
+ #endif
+ 
++#define dev_dbg(dev, fmt, ...)    \
++    dev_print(dev, XENLOG_DEBUG, fmt, ## __VA_ARGS__)
+ #define dev_info(dev, fmt, ...)    \
+     dev_print(dev, XENLOG_INFO, fmt, ## __VA_ARGS__)
+ #define dev_warn(dev, fmt, ...)    \
+@@ -130,6 +132,24 @@ struct ipmmu_features {
+     unsigned int imuctr_ttsel_mask;
+ };
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++struct ipmmu_reg_ctx {
++    unsigned int imttlbr0;
++    unsigned int imttubr0;
++    unsigned int imttbcr;
++    unsigned int imctr;
++};
++
++struct ipmmu_vmsa_backup {
++    struct device *dev;
++    unsigned int *utlbs_val;
++    unsigned int *asids_val;
++    struct list_head list;
++};
++
++#endif
++
+ /* Root/Cache IPMMU device's information */
+ struct ipmmu_vmsa_device {
+     struct device *dev;
+@@ -142,6 +162,9 @@ struct ipmmu_vmsa_device {
+     struct ipmmu_vmsa_domain *domains[IPMMU_CTX_MAX];
+     unsigned int utlb_refcount[IPMMU_UTLB_MAX];
+     const struct ipmmu_features *features;
++#ifdef CONFIG_SYSTEM_SUSPEND
++    struct ipmmu_reg_ctx *reg_backup[IPMMU_CTX_MAX];
++#endif
+ };
+ 
+ /*
+@@ -547,6 +570,249 @@ static void ipmmu_domain_free_context(struct ipmmu_vmsa_device *mmu,
+     spin_unlock_irqrestore(&mmu->lock, flags);
+ }
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++
++static DEFINE_SPINLOCK(ipmmu_devices_backup_lock);
++static LIST_HEAD(ipmmu_devices_backup);
++
++static struct ipmmu_reg_ctx root_pgtable[IPMMU_CTX_MAX];
++
++static uint32_t ipmmu_imuasid_read(struct ipmmu_vmsa_device *mmu,
++                                   unsigned int utlb)
++{
++    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)));
++}
++
++static void ipmmu_utlbs_backup(struct ipmmu_vmsa_device *mmu)
++{
++    struct ipmmu_vmsa_backup *backup_data;
++
++    dev_dbg(mmu->dev, "Handle micro-TLBs backup\n");
++
++    spin_lock(&ipmmu_devices_backup_lock);
++
++    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
++    {
++        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
++        unsigned int i;
++
++        if ( to_ipmmu(backup_data->dev) != mmu )
++            continue;
++
++        for ( i = 0; i < fwspec->num_ids; i++ )
++        {
++            unsigned int utlb = fwspec->ids[i];
++
++            backup_data->asids_val[i] = ipmmu_imuasid_read(mmu, utlb);
++            backup_data->utlbs_val[i] = ipmmu_imuctr_read(mmu, utlb);
++        }
++    }
++
++    spin_unlock(&ipmmu_devices_backup_lock);
++}
++
++static void ipmmu_utlbs_restore(struct ipmmu_vmsa_device *mmu)
++{
++    struct ipmmu_vmsa_backup *backup_data;
++
++    dev_dbg(mmu->dev, "Handle micro-TLBs restore\n");
++
++    spin_lock(&ipmmu_devices_backup_lock);
++
++    list_for_each_entry( backup_data, &ipmmu_devices_backup, list )
++    {
++        struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(backup_data->dev);
++        unsigned int i;
++
++        if ( to_ipmmu(backup_data->dev) != mmu )
++            continue;
++
++        for ( i = 0; i < fwspec->num_ids; i++ )
++        {
++            unsigned int utlb = fwspec->ids[i];
++
++            ipmmu_imuasid_write(mmu, utlb, backup_data->asids_val[i]);
++            ipmmu_imuctr_write(mmu, utlb, backup_data->utlbs_val[i]);
++        }
++    }
++
++    spin_unlock(&ipmmu_devices_backup_lock);
++}
++
++static void ipmmu_domain_backup_context(struct ipmmu_vmsa_domain *domain)
++{
++    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
++    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
++
++    dev_dbg(mmu->dev, "Handle domain context %u backup\n", domain->context_id);
++
++    regs->imttlbr0 = ipmmu_ctx_read_root(domain, IMTTLBR0);
++    regs->imttubr0 = ipmmu_ctx_read_root(domain, IMTTUBR0);
++    regs->imttbcr  = ipmmu_ctx_read_root(domain, IMTTBCR);
++    regs->imctr    = ipmmu_ctx_read_root(domain, IMCTR);
++}
++
++static void ipmmu_domain_restore_context(struct ipmmu_vmsa_domain *domain)
++{
++    struct ipmmu_vmsa_device *mmu = domain->mmu->root;
++    struct ipmmu_reg_ctx *regs = mmu->reg_backup[domain->context_id];
++
++    dev_dbg(mmu->dev, "Handle domain context %u restore\n", domain->context_id);
++
++    ipmmu_ctx_write_root(domain, IMTTLBR0, regs->imttlbr0);
++    ipmmu_ctx_write_root(domain, IMTTUBR0, regs->imttubr0);
++    ipmmu_ctx_write_root(domain, IMTTBCR,  regs->imttbcr);
++    ipmmu_ctx_write_all(domain,  IMCTR,    regs->imctr | IMCTR_FLUSH);
++}
++
++/*
++ * Xen: Unlike Linux implementation, Xen uses a single driver instance
++ * for handling all IPMMUs. There is no framework for ipmmu_suspend/resume
++ * callbacks to be invoked for each IPMMU device. So, we need to iterate
++ * through all registered IPMMUs performing required actions.
++ *
++ * Also take care of restoring special settings, such as translation
++ * table format, etc.
++ */
++static int __must_check ipmmu_suspend(void)
++{
++    struct ipmmu_vmsa_device *mmu;
++
++    if ( !iommu_enabled )
++        return 0;
++
++    printk(XENLOG_DEBUG "ipmmu: Suspending...\n");
++
++    spin_lock(&ipmmu_devices_lock);
++
++    list_for_each_entry( mmu, &ipmmu_devices, list )
++    {
++        if ( ipmmu_is_root(mmu) )
++        {
++            unsigned int i;
++
++            for ( i = 0; i < mmu->num_ctx; i++ )
++            {
++                if ( !mmu->domains[i] )
++                    continue;
++                ipmmu_domain_backup_context(mmu->domains[i]);
++            }
++        }
++        else
++            ipmmu_utlbs_backup(mmu);
++    }
++
++    spin_unlock(&ipmmu_devices_lock);
++
++    return 0;
++}
++
++static void ipmmu_resume(void)
++{
++    struct ipmmu_vmsa_device *mmu;
++
++    if ( !iommu_enabled )
++        return;
++
++    printk(XENLOG_DEBUG "ipmmu: Resuming...\n");
++
++    spin_lock(&ipmmu_devices_lock);
++
++    /*
++     * IPMMUs are registered with list_add(), with Root IPMMU probed first.
++     * Walk backwards to restore Root contexts before Cache micro-TLBs.
++     */
++    list_for_each_entry_reverse( mmu, &ipmmu_devices, list )
++    {
++        uint32_t reg;
++
++        /* Do not use security group function */
++        reg = IMSCTLR + mmu->features->control_offset_base;
++        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) & ~IMSCTLR_USE_SECGRP);
++
++        if ( ipmmu_is_root(mmu) )
++        {
++            unsigned int i;
++
++            /* Use stage 2 translation table format */
++            reg = IMSAUXCTLR + mmu->features->control_offset_base;
++            ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
++
++            for ( i = 0; i < mmu->num_ctx; i++ )
++            {
++                if ( !mmu->domains[i] )
++                    continue;
++                ipmmu_domain_restore_context(mmu->domains[i]);
++            }
++        }
++        else
++            ipmmu_utlbs_restore(mmu);
++    }
++
++    spin_unlock(&ipmmu_devices_lock);
++}
++
++static int ipmmu_alloc_ctx_suspend(struct device *dev)
++{
++    struct ipmmu_vmsa_backup *backup_data;
++    unsigned int *utlbs_val, *asids_val;
++    struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
++
++    utlbs_val = xzalloc_array(unsigned int, fwspec->num_ids);
++    if ( !utlbs_val )
++        return -ENOMEM;
++
++    asids_val = xzalloc_array(unsigned int, fwspec->num_ids);
++    if ( !asids_val )
++    {
++        xfree(utlbs_val);
++        return -ENOMEM;
++    }
++
++    backup_data = xzalloc(struct ipmmu_vmsa_backup);
++    if ( !backup_data )
++    {
++        xfree(utlbs_val);
++        xfree(asids_val);
++        return -ENOMEM;
++    }
++
++    backup_data->dev = dev;
++    backup_data->utlbs_val = utlbs_val;
++    backup_data->asids_val = asids_val;
++
++    spin_lock(&ipmmu_devices_backup_lock);
++    list_add(&backup_data->list, &ipmmu_devices_backup);
++    spin_unlock(&ipmmu_devices_backup_lock);
++
++    return 0;
++}
++
++#ifdef CONFIG_HAS_PCI
++static void ipmmu_free_ctx_suspend(struct device *dev)
++{
++    struct ipmmu_vmsa_backup *backup_data, *tmp;
++
++    spin_lock(&ipmmu_devices_backup_lock);
++
++    list_for_each_entry_safe( backup_data, tmp, &ipmmu_devices_backup, list )
++    {
++        if ( backup_data->dev == dev )
++        {
++            list_del(&backup_data->list);
++            xfree(backup_data->utlbs_val);
++            xfree(backup_data->asids_val);
++            xfree(backup_data);
++            break;
++        }
++    }
++
++    spin_unlock(&ipmmu_devices_backup_lock);
++}
++#endif /* CONFIG_HAS_PCI */
++
++#endif /* CONFIG_SYSTEM_SUSPEND */
++
+ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
+ {
+     uint64_t ttbr;
+@@ -559,6 +825,9 @@ static int ipmmu_domain_init_context(struct ipmmu_vmsa_domain *domain)
+         return ret;
+ 
+     domain->context_id = ret;
++#ifdef CONFIG_SYSTEM_SUSPEND
++    domain->mmu->root->reg_backup[ret] = &root_pgtable[ret];
++#endif
+ 
+     /*
+      * TTBR0
+@@ -615,6 +884,9 @@ static void ipmmu_domain_destroy_context(struct ipmmu_vmsa_domain *domain)
+     ipmmu_ctx_write_root(domain, IMCTR, IMCTR_FLUSH);
+     ipmmu_tlb_sync(domain);
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++    domain->mmu->root->reg_backup[domain->context_id] = NULL;
++#endif
+     ipmmu_domain_free_context(domain->mmu->root, domain->context_id);
+ }
+ 
+@@ -1338,10 +1610,11 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+     struct iommu_fwspec *fwspec;
+ 
+ #ifdef CONFIG_HAS_PCI
++    int ret;
++
+     if ( dev_is_pci(dev) )
+     {
+         struct pci_dev *pdev = dev_to_pci(dev);
+-        int ret;
+ 
+         if ( devfn != pdev->devfn )
+             return 0;
+@@ -1358,17 +1631,24 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+     if ( !to_ipmmu(dev) )
+         return -ENODEV;
+ 
+-    if ( !dev_is_pci(dev) )
++    if ( !dev_is_pci(dev) && dt_device_is_protected(dev_to_dt(dev)) )
+     {
+-        if ( dt_device_is_protected(dev_to_dt(dev)) )
+-        {
+-            dev_err(dev, "Already added to IPMMU\n");
+-            return -EEXIST;
+-        }
++        dev_err(dev, "Already added to IPMMU\n");
++        return -EEXIST;
++    }
+ 
+-        /* Let Xen know that the master device is protected by an IOMMU. */
+-        dt_device_set_protected(dev_to_dt(dev));
++#ifdef CONFIG_SYSTEM_SUSPEND
++    if ( ipmmu_alloc_ctx_suspend(dev) )
++    {
++        dev_err(dev, "Failed to allocate context for suspend\n");
++        return -ENOMEM;
+     }
++#endif
++
++    /* Let Xen know that the master device is protected by an IOMMU. */
++    if ( !dev_is_pci(dev) )
++        dt_device_set_protected(dev_to_dt(dev));
++
+ #ifdef CONFIG_HAS_PCI
+     if ( dev_is_pci(dev) )
+     {
+@@ -1377,26 +1657,28 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+         struct pci_host_bridge *bridge;
+         struct iommu_fwspec *fwspec_bridge;
+         unsigned int utlb_osid0 = 0;
+-        int ret;
+ 
+         bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
+         if ( !bridge )
+         {
+             dev_err(dev, "Failed to find host bridge\n");
+-            return -ENODEV;
++            ret = -ENODEV;
++            goto free_suspend_ctx;
+         }
+ 
+         fwspec_bridge = dev_iommu_fwspec_get(dt_to_dev(bridge->dt_node));
+         if ( fwspec_bridge->num_ids < 1 )
+         {
+             dev_err(dev, "Failed to find host bridge uTLB\n");
+-            return -ENXIO;
++            ret = -ENXIO;
++            goto free_suspend_ctx;
+         }
+ 
+         if ( fwspec->num_ids < 1 )
+         {
+             dev_err(dev, "Failed to find uTLB");
+-            return -ENXIO;
++            ret = -ENXIO;
++            goto free_suspend_ctx;
+         }
+ 
+         rcar4_pcie_osid_regs_init(bridge);
+@@ -1405,7 +1687,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+         if ( ret < 0 )
+         {
+             dev_err(dev, "No unused OSID regs\n");
+-            return ret;
++            goto free_suspend_ctx;
+         }
+         reg_id = ret;
+ 
+@@ -1420,7 +1702,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+         {
+             rcar4_pcie_osid_bdf_clear(bridge, reg_id);
+             rcar4_pcie_osid_reg_free(bridge, reg_id);
+-            return ret;
++            goto free_suspend_ctx;
+         }
+     }
+ #endif
+@@ -1429,6 +1711,13 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
+              dev_name(fwspec->iommu_dev), fwspec->num_ids);
+ 
+     return 0;
++#ifdef CONFIG_HAS_PCI
++ free_suspend_ctx:
++#ifdef CONFIG_SYSTEM_SUSPEND
++    ipmmu_free_ctx_suspend(dev);
++#endif
++    return ret;
++#endif
+ }
+ 
+ static int ipmmu_iommu_domain_init(struct domain *d)
+@@ -1490,6 +1779,10 @@ static const struct iommu_ops ipmmu_iommu_ops =
+     .unmap_page      = arm_iommu_unmap_page,
+     .dt_xlate        = ipmmu_dt_xlate,
+     .add_device      = ipmmu_add_device,
++#ifdef CONFIG_SYSTEM_SUSPEND
++    .suspend         = ipmmu_suspend,
++    .resume          = ipmmu_resume,
++#endif
+ };
+ 
+ static __init int ipmmu_init(struct dt_device_node *node, const void *data)
+-- 
+2.43.0
+
 
