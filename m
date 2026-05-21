@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E48CD5BAF
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315654.1585397 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7578ECD5BB0
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1315649.1585355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VP-00022n-9F; Thu, 21 May 2026 17:48:23 +0000
+	id 1wQ7VK-00017m-Pb; Thu, 21 May 2026 17:48:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315654.1585397; Thu, 21 May 2026 17:48:23 +0000
+Received: by outflank-mailman (output) from mailman id 1315649.1585355; Thu, 21 May 2026 17:48:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VP-00022J-2g; Thu, 21 May 2026 17:48:23 +0000
-Received: by outflank-mailman (input) for mailman id 1315654;
- Thu, 21 May 2026 17:48:21 +0000
+	id 1wQ7VK-00017f-M0; Thu, 21 May 2026 17:48:18 +0000
+Received: by outflank-mailman (input) for mailman id 1315649;
+ Thu, 21 May 2026 17:48:17 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VN-0001ku-Pf
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:21 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VJ-00017S-73
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQ7VN-00Bm0f-5b
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:21 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wQ7VI-00BluR-Ii
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:16 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-28
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:21 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a0f4548-bab6-0a2a0a5309dd-0a2a4505c21c-12
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:16 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f4564-63b5-0a2a45080019-d155802ccc81-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:21 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-48984d29fe3so69350735e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:21 -0700 (PDT)
+ id 6a0f4560-aaa8-0a2a45050019-d1558031e459-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:16 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-490388fd0dbso9362045e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:16 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.19
+ 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 10:48:20 -0700 (PDT)
+ Thu, 21 May 2026 10:48:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,42 +52,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779385700; x=1779990500; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bhFqA0ujOchoRkzWCwRDd18LeOSHm2z8hzgN4OjK95I=;
-        b=l4JYUnGO2DaDJ/MfJMah0A3PVHKAFMvYRPzuIzZgiPR1OFBgrLP8WJjYbfk0FUik/V
-         eCFObcYEs14xg07JeFuDMWs+ji2d+dMIBBVliildhnYZ2Ps12zeRRHVCKKQ/L/C5XZU3
-         rC2DpImN0TTBg3R33jjkXkuDN6j7GfiOlJ0wbMhfC73Zsrp+L35ALwVPWCAwEZRakzzK
-         y6YV3c0S9aSBeP1gznVFzIzDl/4C5sodmxbjtTZsmsBVw+Bl/4YDiWDEQaSnqLBR8+0R
-         It3zygcj4srKG8OpI4eWgIsi166NXB+xqzQODqtXD/VdcZ0W1ecupQbchHf8/8TA0TUc
-         Befg==
+        d=gmail.com; s=20251104; t=1779385696; x=1779990496; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=x4159oRt/HJtjR5zuxsLlhFZFH8epi6PhD6RsyzvFnc=;
+        b=WbDRSTHRYqK0RVfTIzObla3Tb9Hz9PCFOZ5kLtXmA3BNgZNP8xLcEhUosn4Swn+9PH
+         qXwg430HH4JHIC3FuWL6oqw4ewH5wbtC+Yaj+X61/KSJxnSGIVyTTD/xbsMb48R+CM6l
+         dNR+hiGrnr7WA5UWlfRHATqMtWy0xGc4E3DY2UGnADDEaEsu6nkoIoulvsBKvMk2Ijam
+         +YuSDU39TY72R9u58giECrDi0FRq/B5OLKPNo6fgwVU0TUm7PVC7lzdyc+IMVLvvcrd0
+         83yiq8y5xj6nPTB18SBnaP084hXwkCuf/s9SouFokQ5ZC6wRrpf67OR4BaDvlFUlXl2W
+         fv7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779385700; x=1779990500;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=bhFqA0ujOchoRkzWCwRDd18LeOSHm2z8hzgN4OjK95I=;
-        b=IoXRQXDroUCxYSAkMW9z8HsXRdN4gaYO1so80mmF8oXobgjuT6+O3RhxAeK2kCeejA
-         V3q91DpemV02dqZx4ENvnMAPG4S2Oc2sLzqrb7/6LW2hsPY6xPJz/rAvDM0lDg0atQZ6
-         +GphF1pQhDfqHants5fLca/mXc8Ot4u4c/UeGYUkektFcpf6E4xVs9nlZimA2qeT2l7h
-         yjDFkzb6+5hfrW6UTtjoOMXvyZs2Cxzgon4/T/e1N6bJYqToJ2C9m8PWB3WDbMG8rfvL
-         lp7/LN+Xi7h5aAI/voN9MySjYyB+yxcqBVQ5tK2ag6JvUHemMQi07bY/E7hn+41NtLkY
-         k3gQ==
-X-Gm-Message-State: AOJu0YzYHbXKxo7EVYVQsG41OvO8QKKpFMlqciOWtfLGu5Z9muo+/r5v
-	R7I9/5ihP5YimDpzTWN6oBrM7GJkBVo2xwsT8gMvmGdS78VE/W1e33WQnuejrUdH
-X-Gm-Gg: Acq92OHo3aVOqav3ga0u+oJDhx48UOXQXXU8qNVSSPUBUplr0yTUnXRPo/Dfe0SOFmz
-	6QUq+R0IEDLKNXkQM6azwFd4VYw49dc2ouQyQQGIvZGfRp/Wkhea8B/rDmSJAhCHBKxLV84a8hZ
-	FfMeAWHw6EnDCH2mjWqbh2cJ5kPpHbVQmkiFeOFvbyED+jCFP/TyWD1/HgkA/dQDvwl9C3baPhD
-	CaeKT28PUreaYhfQrTol/UbxkKuGMgqUw9kMI66CHrt6UkzcmGqwJkz125+OXBTvvQacrfC4pVo
-	8MdwGIxUxdfgccwjPFjt6HKX9Y2sRs7+JNztTGtantgvFBIZxUvLyyEsFzbqeGiJmN+OkwX/UrZ
-	oX70jRM8C/XCSSUGKU7KontqrRMiwjvT3sNE4bLd+pl7rz0EGDgRRIMNyt0ZZZCWDVYebTWcb3P
-	zYT67Mo31f3EzxLe2GRF5xcteidw==
-X-Received: by 2002:a05:600c:1c0d:b0:48f:fe2a:107b with SMTP id 5b1f17b1804b1-49036048699mr70867295e9.7.1779385700421;
-        Thu, 21 May 2026 10:48:20 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779385696; x=1779990496;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=x4159oRt/HJtjR5zuxsLlhFZFH8epi6PhD6RsyzvFnc=;
+        b=sr8Hafkqa4w0CXc7UpdVLbhMe9SKA5fsTc1sAqPCQks0DmQtwb4LpbwEmvo/SgH4E/
+         AwVhm3CJNx+fPXYbTHTxFmaSWOI6cKXuDBS0Gs0QXd66WNH2iFEuJYeId0aqHXrjMs9Z
+         GwgBNI5GXG8PP+mCr/p75AIvtoOKszY09nTMJ7zwz2JkZRPTtmjcBvBqjWQTrKJbYocN
+         dxoX1viSQQTIguKicVwIhYW4huSpS9cFaPnBQZ4bQpEDJSTVjI4yXuegExvScEvNIwD9
+         WGPBAgFHHzk5Jhc+5tnTTyKqWBuGEcFDf9SFBTs3JbcpAWR9brHwvG4eK2AE54XWlNDl
+         xQoQ==
+X-Gm-Message-State: AOJu0Yz1/GBl2Oy3lpMs/BiG59IYLO2XI27z5o0XtQyaDca5rHX4hja9
+	1EnxI3MtCJ6NehPOv1x1p7oAz9rLtFf15lvAYMtlLAeJB0LngoZ5JIckOhiqfWY9
+X-Gm-Gg: Acq92OEfydtEaFk6VpyV/x0wKWAZYRuUDOUDDxQJlp2ARRfhFxpY9YahE/J/+N1+iJi
+	ccea5LD44+xHIHMeerXU5rIvJ0K1PStfCGorbQj4NKX1jilYDqOsIiQ9dxM6MhNnFqYJoZ0IbTC
+	Fc1CeKhiSrE+wJ5+C8AsKIPp1bJXngoJk4ok364NohzwQhkXegk7D7hLoy7UzP85960RHuFlvo4
+	WQ/UVGUADGBrCC07PBd5oh2y5Ygwgs0JW3u9vabYsVQbNkgw0UlF/oPQElAu1xmK9+vMTWlNH4t
+	HJ/S9gLvf5wVR30Gx4pqeYq2DvK/ua6ojvCYUNINciF8uoPBA9itJoSDz+45e/1rGsHY/uIBoI1
+	3gk1YpGgykmowsF2jA61jOzfqgICbA4y7AUVpod2sDdnTR9GxtP9qejtI+lIu2vpeo60HKKUPU9
+	Cu9DPu8/Z0Z/RXtrS3whofxETXYA==
+X-Received: by 2002:a05:600c:32af:b0:48a:65ad:1881 with SMTP id 5b1f17b1804b1-49036056678mr38944315e9.13.1779385695369;
+        Thu, 21 May 2026 10:48:15 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -100,362 +99,184 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v10 05/13] xen/arm: gic-v3: add ITS suspend/resume support
-Date: Thu, 21 May 2026 20:45:23 +0300
-Message-ID: <95930674d4639727b9cdf4f52b4a23b6df60c3c4.1779385072.git.mykola_kvach@epam.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v10 00/13] Add initial Xen Suspend-to-RAM support on ARM64
+Date: Thu, 21 May 2026 20:45:18 +0300
+Message-ID: <cover.1779385072.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1779385072.git.mykola_kvach@epam.com>
-References: <cover.1779385072.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779385701-B797DDB1-2A1C7773/0/0
+X-purgate-ID: tlsNG-c201ff/1779385696-E3B8E443-52E1A399/0/0
 X-purgate-type: clean
-X-purgate-size: 11107
+X-purgate-size: 8294
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-Handle system suspend/resume for GICv3 with an ITS present so LPIs keep
-working after firmware powers the GIC down.
+This is part 2 of the ARM Xen system suspend/resume patch series, based
+on earlier work by Mirela Simonovic and Mykyta Poturai.
 
-Save and restore the ITS CTLR, CBASER and BASER registers. On resume,
-re-establish the collection mapping only when the collection is held in
-the ITS itself. Memory-backed collections are restored through the
-restored GITS_BASER tables and must not be remapped unconditionally.
+Part 1, covering guest suspend functionality, is already in mainline.
 
-Add list_for_each_entry_continue_reverse() in list.h for the ITS suspend
-error path that needs to roll back partially saved state.
+NOTE: Host-wide suspend/resume support is guarded by CONFIG_SYSTEM_SUSPEND,
+which can currently only be selected when UNSUPPORTED is set, and thus the
+host suspend backend is neither enabled by default nor built in supported
+configurations. The separate HAS_HWDOM_SYSTEM_SUSPEND policy bit only changes
+how ARM treats SHUTDOWN_suspend from the hardware domain; it does not enable
+the host-wide suspend backend by itself.
 
-Based on Linux commit dba0bc7b76dc:
-"irqchip/gic-v3-its: Add ability to save/restore ITS state".
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+This version is ported to Xen master and includes extensive improvements
+based on reviewer feedback. The patch series restructures code to improve
+robustness and maintainability, and implements initial ARM64 host-wide
+Suspend-to-RAM support driven by control-domain PSCI SYSTEM_SUSPEND
+requests. vPSCI also exposes SYSTEM_SUSPEND as a domain suspend operation
+for all domains; attempt-time host-suspend policy failures are reported as
+PSCI_DENIED rather than hidden through PSCI_FEATURES.
+
+Key updates in this series:
+ - Introduced architecture-specific suspend/resume infrastructure
+ - Integrated GICv2/GICv3 suspend and resume, including memory-backed context
+   save/restore with error handling
+ - Added time and IRQ suspend/resume hooks, ensuring correct timer/interrupt
+   state across suspend cycles
+ - Implemented proper PSCI SYSTEM_SUSPEND invocation and version checks
+ - Added vPSCI SYSTEM_SUSPEND policy for domain suspend and host-wide
+   control-domain sequencing
+ - Improved state management and recovery in error cases during suspend/resume
+ - Added support for IPMMU-VMSA/SMMUv3 context save/restore
+ - Added support for GICv3 eSPI registers context save/restore
+ - Added support for ITS registers context save/restore
 ---
-Changes in V10:
-- Replay MAPC on resume only for collections held in the ITS itself, as
-  indicated by GITS_TYPER.HCC. Memory-backed collections are restored
-  through GITS_BASER and are no longer remapped unconditionally.
-- Make the current Xen col_id == cpu assumption explicit in the ITS
-  resume path.
-- Use "unpredictable" instead of "undefined" in the CBASER/BASER restore
-  comment.
 
-Changes in V9:
-- fix the ITS suspend/resume coding-style nits;
-- preserve the saved GITS_CTLR state while masking the read-only
-  QUIESCENT bit.
-
-Changes in V8:
-- Reword the CBASER/CWRITER comment to match Xen and drop the stale Linux
-  cmd_write reference.
-- Clarify the list_for_each_entry_continue_reverse() comment.
-- Factor out per-ITS helpers for collection setup and resume.
-- Restore each ITS and re-establish its collection mapping in the same
-  loop, so a failed ITS resume is not followed by MAPC/SYNC on that
-  un-restored instance.
-- panic in case when resume of an ITS failed
-- cleanup baser cache during suspend
+TODOs:
+ - Enable "xl suspend" support on ARM
+ - Add suspend/resume CI test for ARM (QEMU if feasible)
+ - PCI suspend ?
 ---
- xen/arch/arm/gic-v3-its.c             | 146 ++++++++++++++++++++++++--
- xen/arch/arm/gic-v3.c                 |  11 +-
- xen/arch/arm/include/asm/gic_v3_its.h |  28 +++++
- xen/include/xen/list.h                |  14 +++
- 4 files changed, 189 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 7560d46c6d..dd53209865 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -335,6 +335,22 @@ static int its_send_cmd_inv(struct host_its *its,
-     return its_send_command(its, cmd);
- }
- 
-+static int gicv3_its_setup_collection_single(struct host_its *its,
-+                                             unsigned int cpu)
-+{
-+    int ret;
-+
-+    ret = its_send_cmd_mapc(its, cpu, cpu);
-+    if ( ret )
-+        return ret;
-+
-+    ret = its_send_cmd_sync(its, cpu);
-+    if ( ret )
-+        return ret;
-+
-+    return gicv3_its_wait_commands(its);
-+}
-+
- /* Set up the (1:1) collection mapping for the given host CPU. */
- int gicv3_its_setup_collection(unsigned int cpu)
- {
-@@ -343,15 +359,7 @@ int gicv3_its_setup_collection(unsigned int cpu)
- 
-     list_for_each_entry(its, &host_its_list, entry)
-     {
--        ret = its_send_cmd_mapc(its, cpu, cpu);
--        if ( ret )
--            return ret;
--
--        ret = its_send_cmd_sync(its, cpu);
--        if ( ret )
--            return ret;
--
--        ret = gicv3_its_wait_commands(its);
-+        ret = gicv3_its_setup_collection_single(its, cpu);
-         if ( ret )
-             return ret;
-     }
-@@ -1211,6 +1219,126 @@ int gicv3_its_init(void)
-     return 0;
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+int gicv3_its_suspend(void)
-+{
-+    struct host_its *its;
-+    int ret;
-+
-+    list_for_each_entry( its, &host_its_list, entry )
-+    {
-+        unsigned int i;
-+        void __iomem *base = its->its_base;
-+
-+        /*
-+         * By the time Xen reaches gic_suspend(), every domain is already in
-+         * SHUTDOWN_suspend, so ITS-targeting interrupt sources are expected
-+         * to have been quiesced by the owning OS before SYSTEM_SUSPEND.
-+         */
-+        /* Preserve saved GITS_CTLR state, excluding read-only QUIESCENT. */
-+        its->suspend_ctx.ctlr = readl_relaxed(base + GITS_CTLR) &
-+                                ~GITS_CTLR_QUIESCENT;
-+        ret = gicv3_disable_its(its);
-+        if ( ret )
-+        {
-+            writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-+            goto err;
-+        }
-+
-+        its->suspend_ctx.cbaser = readq_relaxed(base + GITS_CBASER);
-+
-+        for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
-+        {
-+            uint64_t baser = readq_relaxed(base + GITS_BASER0 + i * 8);
-+
-+            its->suspend_ctx.baser[i] = 0;
-+
-+            if ( !(baser & GITS_VALID_BIT) )
-+                continue;
-+
-+            its->suspend_ctx.baser[i] = baser;
-+        }
-+    }
-+
-+    return 0;
-+
-+ err:
-+    list_for_each_entry_continue_reverse( its, &host_its_list, entry )
-+        writel_relaxed(its->suspend_ctx.ctlr, its->its_base + GITS_CTLR);
-+
-+    return ret;
-+}
-+
-+static int gicv3_its_resume_single(struct host_its *its, unsigned int cpu)
-+{
-+    void __iomem *base = its->its_base;
-+    unsigned int i;
-+    int ret;
-+    uint64_t typer;
-+    unsigned int col_id = cpu; /* Xen currently uses col_id == cpu. */
-+
-+    /*
-+     * Make sure that the ITS is disabled. If it fails to quiesce,
-+     * don't restore it since writing to CBASER or BASER<n>
-+     * registers is unpredictable according to the GIC v3 ITS
-+     * Specification.
-+     */
-+    WARN_ON(readl_relaxed(base + GITS_CTLR) & GITS_CTLR_ENABLE);
-+    ret = gicv3_disable_its(its);
-+    if ( ret )
-+        return ret;
-+
-+    writeq_relaxed(its->suspend_ctx.cbaser, base + GITS_CBASER);
-+
-+    /*
-+     * Writing CBASER resets CREADR to 0, so reset CWRITER to
-+     * keep the command queue pointers aligned.
-+     */
-+    writeq_relaxed(0, base + GITS_CWRITER);
-+
-+    /* Restore GITS_BASER from the value cache. */
-+    for ( i = 0; i < GITS_BASER_NR_REGS; i++ )
-+    {
-+        uint64_t baser = its->suspend_ctx.baser[i];
-+
-+        if ( !(baser & GITS_VALID_BIT) )
-+            continue;
-+
-+        writeq_relaxed(baser, base + GITS_BASER0 + i * 8);
-+    }
-+
-+    writel_relaxed(its->suspend_ctx.ctlr, base + GITS_CTLR);
-+
-+    typer = readq_relaxed(base + GITS_TYPER);
-+
-+    /*
-+     * Only collections with IDs below HCC are held in the ITS itself
-+     * and lose their state across an ITS reset/power loss. Memory-backed
-+     * collections are restored by restoring GITS_BASER and must not be
-+     * remapped here.
-+     */
-+    if ( col_id < GITS_TYPER_HCC(typer) )
-+        return gicv3_its_setup_collection_single(its, cpu);
-+
-+    return 0;
-+}
-+
-+void gicv3_its_resume(void)
-+{
-+    struct host_its *its;
-+    unsigned int cpu = smp_processor_id();
-+    int ret;
-+
-+    list_for_each_entry( its, &host_its_list, entry )
-+    {
-+        ret = gicv3_its_resume_single(its, cpu);
-+        if ( ret )
-+            panic("GICv3: ITS@%"PRIpaddr": failed to restore during resume: %d\n",
-+                   its->addr, ret);
-+    }
-+}
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index 64fd772d65..6e0ca6c50d 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -2184,10 +2184,14 @@ static int gicv3_suspend(void)
-     if ( ret )
-         goto out_enable_iface;
- 
--    ret = gicv3_disable_redist();
-+    ret = gicv3_its_suspend();
-     if ( ret )
-         goto out_enable_iface;
- 
-+    ret = gicv3_disable_redist();
-+    if ( ret )
-+        goto out_its_resume;
-+
-     /* Save GICR configuration */
-     gicv3_redist_wait_for_rwp();
- 
-@@ -2227,6 +2231,9 @@ static int gicv3_suspend(void)
- 
-     return 0;
- 
-+ out_its_resume:
-+    gicv3_its_resume();
-+
-  out_enable_iface:
-     if ( gicv3_enable_redist() )
-         panic("GICv3: Failed to re-enable redistributor after suspend abort\n");
-@@ -2353,6 +2360,8 @@ static void gicv3_resume(void)
- 
-     gicv3_redist_wait_for_rwp();
- 
-+    gicv3_its_resume();
-+
-     WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
-     isb();
- 
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
-index fc5a84892c..0f8cb16e41 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -43,6 +43,11 @@
- #define GITS_CTLR_QUIESCENT             BIT(31, UL)
- #define GITS_CTLR_ENABLE                BIT(0, UL)
- 
-+#define GITS_TYPER_HCC_SHIFT            24
-+#define GITS_TYPER_HCC_MASK             0xffUL
-+#define GITS_TYPER_HCC(r)               (((r) >> GITS_TYPER_HCC_SHIFT) & \
-+                                                 GITS_TYPER_HCC_MASK)
-+
- #define GITS_TYPER_PTA                  BIT(19, UL)
- #define GITS_TYPER_DEVIDS_SHIFT         13
- #define GITS_TYPER_DEVIDS_MASK          (0x1fUL << GITS_TYPER_DEVIDS_SHIFT)
-@@ -129,6 +134,13 @@ struct host_its {
-     spinlock_t cmd_lock;
-     void *cmd_buf;
-     unsigned int flags;
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    struct suspend_ctx {
-+        uint32_t ctlr;
-+        uint64_t cbaser;
-+        uint64_t baser[GITS_BASER_NR_REGS];
-+    } suspend_ctx;
-+#endif
- };
- 
- /* Map a collection for this host CPU to each host ITS. */
-@@ -204,6 +216,11 @@ uint64_t gicv3_its_get_cacheability(void);
- uint64_t gicv3_its_get_shareability(void);
- unsigned int gicv3_its_get_memflags(void);
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+int gicv3_its_suspend(void);
-+void gicv3_its_resume(void);
-+#endif
-+
- #else
- 
- #ifdef CONFIG_ACPI
-@@ -271,6 +288,17 @@ static inline int gicv3_its_make_hwdom_dt_nodes(const struct domain *d,
-     return 0;
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+static inline int gicv3_its_suspend(void)
-+{
-+    return 0;
-+}
-+
-+static inline void gicv3_its_resume(void)
-+{
-+}
-+#endif
-+
- #endif /* CONFIG_HAS_ITS */
- 
- #endif
-diff --git a/xen/include/xen/list.h b/xen/include/xen/list.h
-index 98d8482dab..2aab274157 100644
---- a/xen/include/xen/list.h
-+++ b/xen/include/xen/list.h
-@@ -535,6 +535,20 @@ static inline void list_splice_init(struct list_head *list,
-          &(pos)->member != (head);                                        \
-          (pos) = list_entry((pos)->member.next, typeof(*(pos)), member))
- 
-+/**
-+ * list_for_each_entry_continue_reverse - iterate backwards from the given point
-+ * @pos:    the type * to use as a loop cursor.
-+ * @head:   the head for your list.
-+ * @member: the name of the list_head within the struct.
-+ *
-+ * Iterate over list of given type backwards, starting from the element previous
-+ * to the current one in list order.
-+ */
-+#define list_for_each_entry_continue_reverse(pos, head, member)           \
-+    for ((pos) = list_entry((pos)->member.prev, typeof(*(pos)), member);  \
-+         &(pos)->member != (head);                                        \
-+         (pos) = list_entry((pos)->member.prev, typeof(*(pos)), member))
-+
- /**
-  * list_for_each_entry_from - iterate over list of given type from the
-  *                            current point
+Detailed changelogs can be found in each patch.
+
+Changes in v10:
+- Clarify the vPSCI SYSTEM_SUSPEND policy summary: keep SYSTEM_SUSPEND
+  advertised once implemented and return PSCI_DENIED, rather than
+  PSCI_NOT_SUPPORTED, for attempt-time host-suspend policy failures.
+- Tighten GICv2/GICv3 suspend/resume based on review feedback: avoid
+  reserved interrupt register ranges, check visible active-priority state,
+  restore configuration before enable state, and re-enable the redistributor
+  before restoring CPU/virtual interface state on abort paths.
+- Refine ITS resume so MAPC is replayed only for ITS-backed collections and
+  clarify the collection-ID assumptions.
+- Rework IPMMU and SMMUv3 resume/suspend handling, including root-before-cache
+  IPMMU restore ordering and disabling SMMU interrupt generation before
+  suspend.
+- Save and restore CNTHCTL_EL2 in the arm64 CPU resume context and simplify
+  the resume trampoline/context hand-off.
+- Re-apply boot CPU errata/workaround handling after SYSTEM_SUSPEND and move
+  set_init_ttbr() declaration to asm/mmu/mm.h.
+- Update patch 12 details: shorten SYSTEM_SUSPEND blocker logs, use %pd for
+  control-domain logging, mark serial_suspend_available as __ro_after_init,
+  and mention the xen/suspend.h struct domain forward declaration.
+
+Changes in v9:
+- Split the control-domain SYSTEM_SUSPEND flow so host availability,
+  runtime blockers and domain-readiness checks are handled separately from
+  the host suspend backend.
+- Gate vPSCI SYSTEM_SUSPEND on cached host PSCI support and Xen runtime
+  suspend blockers, and log firmware support during initialization.
+- Fold the arm64 resume trampoline into the CPU context save/restore patch
+  and use asm-offsets-generated RESUME_CTX_* definitions for the assembly
+  save/restore path.
+- Tighten the GICv2/GICv3/ITS/IPMMU/SMMUv3 suspend/resume paths based on
+  review feedback, including state-save/restore fixes and safer failure
+  handling.
+- Reorder the host suspend/resume phases so timer and GIC state are
+  handled with local IRQs disabled and restored before console/IOMMU
+  resume.
+
+Changes in v8:
+- Rebased to latest master and refreshed the series accordingly.
+- Added a new GICv3 patch to tolerate retained redistributor LPI state
+  across CPU_OFF/CPU_ON.
+- GICv2 suspend now disables the CPU interface and distributor before
+  saving state.
+- GICv3 suspend/resume fixes the redistributor base used for LPI state.
+- ITS and SMMUv3 suspend/resume paths were tightened, with safer
+  restore/rollback handling and stricter fatal-error handling.
+- System suspend now checks that all domains are already in
+  SHUTDOWN_suspend before proceeding, and renames the hardware-domain
+  suspend capability/helper for clearer semantics.
+- Fixed alignment/cleanup issues in the low-level suspend/resume code.
+
+Changes in v7:
+- Timer helper renamed/clarified; virtual/hyper/phys handling documented.
+- GICv2 uses one context block; restore saved CTLR; panic on alloc failure.
+- GICv3/eSPI/ITS always suspend/resume; restore LPI/eSPI; rdist timeout.
+- IPMMU suspend context allocated before PCI setup.
+- System suspend: control domain drives host suspend.
+- Dropped v6 IRQ descriptor restore patches; use setup_irq and re-register
+  local IRQs on resume instead.
+
+For earlier changelogs, please refer to the previous cover letters.
+
+Mirela Simonovic (5):
+  xen/arm: Add suspend and resume timer helpers
+  xen/arm: gic-v2: Implement GIC suspend/resume functions
+  xen/arm64: Save/restore CPU context across SYSTEM_SUSPEND
+  xen/arm: Implement PSCI SYSTEM_SUSPEND call (host interface)
+  xen/arm: Add host system suspend backend
+
+Mykola Kvach (7):
+  xen/arm: gic-v3: tolerate retained redistributor LPI state across
+    CPU_OFF
+  xen/arm: gic-v3: Implement GICv3 suspend/resume functions
+  xen/arm: gic-v3: add ITS suspend/resume support
+  xen/arm: tee: keep init_tee_secondary() for hotplug and resume
+  xen/arm: ffa: fix notification SRI across CPU hotplug/suspend
+  xen/arm: smmu-v3: add suspend/resume handlers
+  xen/arm: Add vPSCI SYSTEM_SUSPEND policy
+
+Oleksandr Tyshchenko (1):
+  iommu/ipmmu-vmsa: Implement suspend/resume callbacks
+
+ xen/arch/arm/Kconfig                     |   2 +
+ xen/arch/arm/Makefile                    |   1 +
+ xen/arch/arm/arm64/asm-offsets.c         |  21 +
+ xen/arch/arm/arm64/head.S                | 122 ++++++
+ xen/arch/arm/cpuerrata.c                 |   7 +-
+ xen/arch/arm/gic-v2.c                    | 226 +++++++++++
+ xen/arch/arm/gic-v3-its.c                | 146 ++++++-
+ xen/arch/arm/gic-v3-lpi.c                |  80 +++-
+ xen/arch/arm/gic-v3.c                    | 482 ++++++++++++++++++++++-
+ xen/arch/arm/gic.c                       |  35 ++
+ xen/arch/arm/include/asm/arm64/sysregs.h |   5 +
+ xen/arch/arm/include/asm/cpuerrata.h     |   1 +
+ xen/arch/arm/include/asm/gic.h           |  16 +
+ xen/arch/arm/include/asm/gic_v3_defs.h   |   3 +
+ xen/arch/arm/include/asm/gic_v3_its.h    |  28 ++
+ xen/arch/arm/include/asm/mmu/mm.h        |   2 +
+ xen/arch/arm/include/asm/psci.h          |   4 +
+ xen/arch/arm/include/asm/suspend.h       |  37 ++
+ xen/arch/arm/include/asm/time.h          |   5 +
+ xen/arch/arm/mmu/smpboot.c               |   2 +-
+ xen/arch/arm/psci.c                      |  38 +-
+ xen/arch/arm/suspend.c                   | 210 ++++++++++
+ xen/arch/arm/tee/ffa_notif.c             |  63 ++-
+ xen/arch/arm/tee/tee.c                   |   2 +-
+ xen/arch/arm/time.c                      |  44 ++-
+ xen/arch/arm/vpsci.c                     | 120 +++++-
+ xen/common/Kconfig                       |   3 +
+ xen/common/domain.c                      |   7 +-
+ xen/drivers/char/serial.c                |  12 +
+ xen/drivers/passthrough/arm/iommu.c      |   4 +
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 323 ++++++++++++++-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 190 +++++++--
+ xen/include/xen/list.h                   |  14 +
+ xen/include/xen/serial.h                 |   1 +
+ xen/include/xen/suspend.h                |   2 +
+ 35 files changed, 2154 insertions(+), 104 deletions(-)
+ create mode 100644 xen/arch/arm/suspend.c
+
 -- 
 2.43.0
 
