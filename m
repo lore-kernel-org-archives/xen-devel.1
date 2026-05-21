@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12BE7CD5BAB
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 21:38:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315986.1585606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACF14CD5BAF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 21:53:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1316006.1585615 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQB5n-0007IU-2K; Thu, 21 May 2026 21:38:11 +0000
+	id 1wQBKG-0002oc-87; Thu, 21 May 2026 21:53:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315986.1585606; Thu, 21 May 2026 21:38:11 +0000
+Received: by outflank-mailman (output) from mailman id 1316006.1585615; Thu, 21 May 2026 21:53:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQB5m-0007IN-Vt; Thu, 21 May 2026 21:38:10 +0000
-Received: by outflank-mailman (input) for mailman id 1315986;
- Thu, 21 May 2026 21:38:09 +0000
+	id 1wQBKG-0002oV-5E; Thu, 21 May 2026 21:53:08 +0000
+Received: by outflank-mailman (input) for mailman id 1316006;
+ Thu, 21 May 2026 21:53:07 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+d535bf5a2932b236163f+8306+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wQB5l-0007H7-Ai
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 21:38:09 +0000
+ id 1wQBKF-0002oP-GE
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 21:53:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQB5k-004QCS-Nf
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 23:38:08 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wQBKE-003ydx-FC; Thu, 21 May 2026 23:53:06 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+d535bf5a2932b236163f+8306+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0f7b06-5cb7-0a2a0a5109dd-0a2a45068074-24
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 23:38:08 +0200
+ id 6a0f7ebf-e002-0a2a0a5209dd-0a2a450cde72-2
+ for <multiple-recipients>; Thu, 21 May 2026 23:53:05 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+d535bf5a2932b236163f+8306+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a0f7b3f-7371-0a2a45060019-5a9b3222d02c-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 23:38:07 +0200
+ id 6a0f7ec1-62f1-0a2a450c0019-5a9b32229816-3
+ for <multiple-recipients>; Thu, 21 May 2026 23:53:05 +0200
 Received: from 54-240-197-239.amazon.com ([54.240.197.239]
  helo=u09cd745991455d.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wQB5W-000000094VX-0s0t; Thu, 21 May 2026 21:37:56 +0000
+ id 1wQBK0-000000095A5-459f; Thu, 21 May 2026 21:52:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,119 +50,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=sto4vrdGp1xVl4xxluQsgqhSN4UEkQ/MLv3WN0D9yfk=; b=LXuT3nYEMlTaLuHFZsDAwQQvD9
-	pfHkh+x/71+8eRSzLdbvIb+OkRxVn+tiRFMYGWHM7wM8LBg1x2bFQ+M5AHHQrhQeQMW0MPHL5wvYy
-	RUqo2JBmVRWytz/ctqc2HPucGt82uc+lZyOMeI71JDmbBiynF84n7QBT3V1RoVmA1Ij91D73WiRra
-	It3PtIKXpGwPeoVfphgLTvCkr8EnW66WQua5aZbvBpPUumSBqmcmrLkCiwtg+PR4/TAiaPLgYMft7
-	VsfAGiDbelE3Slzj1KKF5w1MGZC5JtqkO4SxcNNPBF+kUIbeMPkkB7+6Oi5X77Z82swELNGdJuL8D
-	z9VxHj8A==;
-Message-ID: <ba007c2797b98adc39a23a82c2f44d73e2301f75.camel@infradead.org>
-Subject: Re: [PATCH v3 02/41] x86/tsc: Add helper to register CPU and TSC
- freq calibration routines
+	bh=lQm3XTbI80oVhehBjbAuKtJa9CPDd69/S5bnpm9lMHU=; b=YIYHCGEZRxwx/UUbFZUWbgIEQQ
+	gIewyfR79ILiDfa4YbMDamIBYvhGuG2PXygUjdfM5S4xzCBmnFvsv/mWxbs2Pvnu169oxJY1aXqD5
+	gP/NgJZdzLDQmP9Yx0D5Aylx+VnmjB/r9e9G9FBmketmaAuA9n602778rHHKHgTAthZLtdKGiEj0u
+	hyzYy0a6I/0MccuSvdzG//WMVsLbGT0sQyfoeck+KJo0IAfLsPmH916B6aB7REqHPci+AkAQ8vFoT
+	Z2SufJoWcwXGklfEYAdWkbLUbGcBQxVnTiq8mew7nfTXVVWxrgI3dljn1l057r54TuLgM1LbzwV8Q
+	J3WG9daA==;
+Message-ID: <3ad6cd109480772ade3c11f23b9c1d7a9855d67e.camel@infradead.org>
+Subject: Re: [PATCH v4 27/30] KVM: x86: Add KVM_VCPU_TSC_EFFECTIVE_FREQ
+ attribute
 From: David Woodhouse <dwmw2@infradead.org>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Kiryl Shutsemau <kas@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang
- <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, Dexuan Cui
- <decui@microsoft.com>, Long Li <longli@microsoft.com>, Ajay Kaher
- <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Dave Hansen
- <dave.hansen@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Peter
- Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, Daniel
- Lezcano <daniel.lezcano@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- John Stultz <jstultz@google.com>, Rick Edgecombe
- <rick.p.edgecombe@intel.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>,
- x86@kernel.org,  linux-coco@lists.linux.dev, kvm@vger.kernel.org,
- linux-hyperv@vger.kernel.org,  virtualization@lists.linux.dev,
- linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org, Michael
- Kelley <mhklinux@outlook.com>, Tom Lendacky <thomas.lendacky@amd.com>,
- Nikunj A Dadhania <nikunj@amd.com>, Thomas Gleixner <tglx@linutronix.de>
-Date: Thu, 21 May 2026 22:37:52 +0100
-In-Reply-To: <ag92Ze_FADmL1llo@google.com>
-References: <20260515191942.1892718-1-seanjc@google.com>
-	 <20260515191942.1892718-3-seanjc@google.com>
-	 <44e0d60548d317fd59895f18bd17220dfb2f834b.camel@infradead.org>
-	 <ag9wz3RiJOtVZrK0@google.com>
-	 <342098f6bfe1e4c7b233433df8f79713b4220614.camel@infradead.org>
-	 <ag92Ze_FADmL1llo@google.com>
+To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson
+ <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
+ <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,  Dave Hansen
+ <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
+ <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Paul
+ Durrant <paul@xen.org>, Jonathan Cameron <jic23@kernel.org>, Sascha
+ Bischoff <Sascha.Bischoff@arm.com>, Marc Zyngier <maz@kernel.org>, Joey
+ Gouly <joey.gouly@arm.com>, Jack Allister <jalliste@amazon.com>, Dongli
+ Zhang <dongli.zhang@oracle.com>,  joe.jin@oracle.com, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org,  linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org,  linux-kselftest@vger.kernel.org
+Date: Thu, 21 May 2026 22:52:51 +0100
+In-Reply-To: <20260509224824.3264567-28-dwmw2@infradead.org>
+References: <20260509224824.3264567-1-dwmw2@infradead.org>
+	 <20260509224824.3264567-28-dwmw2@infradead.org>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-0JYzVT5JMNJwWPKngpYY"
+	boundary="=-kieuLTxJtkGwFtplrKxg"
 User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-16d1c6/1779399487-8E78DD75-CCA3CCFE/0/0
+X-purgate-ID: tlsNG-d25034/1779400385-F4C79CF5-A8603D8F/0/0
 X-purgate-type: clean
-X-purgate-size: 8941
+X-purgate-size: 8988
 
 
---=-0JYzVT5JMNJwWPKngpYY
+--=-kieuLTxJtkGwFtplrKxg
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2026-05-21 at 14:17 -0700, Sean Christopherson wrote:
-> =C2=A0
-> > That seems reasonable. Where does the call to
-> > native_calibrate_tsc()
-> > happen; is that from determine_cpu_tsc_frequencies()?=20
+On Sat, 2026-05-09 at 23:46 +0100, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
 >=20
-> Yep.
-
-Great, thanks.
-
-> static bool __init determine_cpu_tsc_frequencies(bool early,
-> 						 unsigned int
-> known_cpu_khz,
-> 						 unsigned int
-> known_tsc_khz)
-> {
-> 	/* Make sure that cpu and tsc are not already calibrated */
-> 	WARN_ON(cpu_khz || tsc_khz);
+> Add a read-only per-vCPU attribute that reports the effective TSC and
+> APIC bus frequencies as seen by the guest, after hardware TSC scaling
+> is applied.
 >=20
-> 	if (early) {
-> 		/*
-> 		 * Early CPU calibration can only use methods that
-> are available
-> 		 * early in boot (obviously).
-> 		 */
-> 		if (known_cpu_khz)
-> 			cpu_khz =3D known_cpu_khz;
-> 		else
-> 			cpu_khz =3D native_calibrate_cpu_early();
-> 		if (known_tsc_khz)
-> 			tsc_khz =3D known_tsc_khz;
-> 		else
-> 			tsc_khz =3D native_calibrate_tsc();
-> 	} else {
-> 		cpu_khz =3D pit_hpet_ptimer_calibrate_cpu();
-> 	}
+> This allows userspace to populate CPUID leaf 0x40000010 (the "generic"
+> timing information leaf used by FreeBSD, XNU, and VMware) with correct
+> values, without KVM needing to modify guest CPUID at runtime.
+>=20
+> The effective TSC frequency differs from what userspace requested via
+> KVM_SET_TSC_KHZ due to the granularity of hardware scaling and the
+> host kernel's measurement of its own TSC frequency.
 
+As I do another pass on this series, I don't think I can stand by that
+claim.
 
-If, after all that, we still end up in the case where we *do* have to
-calibrate it against a legacy timer (which sadly IIRC is the case even
-on some fairly modern AMD generations), could we round the answer?
+Even on AMD where we only have a 32-bit shift for TSC scaling, that's
+still 0.23 PPM, or about half a Hz precision when scaling a 2400MHz
+TSC.
 
-We currently have *far* more precision than accuracy, leading to values
-like 2399997kHz which change every boot (and end up being what gets
-*advertised* to guests on such a host... and then unless we're careful
-to avoid it, we end up trying to *scale* a different host's TSC down
-from 2399998 to 2399997 for a guest which is migrated from the first
-host...)
+And this API was returning kHz anyway! So it was as likely to be
+*introducing* inaccuracy by returning 2299999kHz when userspace had
+actually asked for 2300000 and the real rate ended up being
+2399999.9995.
 
-We should just fix them (e.g. to 2400000kHz) and let NTP sort them out.
+I think I'll drop it; and userspace should just use KVM_GET_TSC_KHZ.
 
-Something like "round to the nearest MHz if that's within =C2=B110PPM"?
+That does leave userspace still needing a way to get the APIC bus
+frequency, to populate CPUID. So maybe I'll just make an attribute
+which returns that as a single value.
+
+Or *maybe* KVM should just populate leaf 0x40000010 in its default
+template? I thought we decided not to do that though, as unsuspecting
+userspace might pass it through uncorrected from the default values? We
+could put *zero* in the TSC part, but that just seems like it's another
+potential weirdness for the guest to see.
 
 
 
---=-0JYzVT5JMNJwWPKngpYY
+--=-kieuLTxJtkGwFtplrKxg
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -242,22 +216,22 @@ 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
-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
+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
-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
+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
 
 
---=-0JYzVT5JMNJwWPKngpYY--
+--=-kieuLTxJtkGwFtplrKxg--
 
