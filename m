@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E0FCD5BAC
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1315653.1585391 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC30CD5BAF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2026 17:48:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1315662.1585459 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VO-0001zB-TF; Thu, 21 May 2026 17:48:22 +0000
+	id 1wQ7VX-0003w6-9F; Thu, 21 May 2026 17:48:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1315653.1585391; Thu, 21 May 2026 17:48:22 +0000
+Received: by outflank-mailman (output) from mailman id 1315662.1585459; Thu, 21 May 2026 17:48:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQ7VO-0001yz-O9; Thu, 21 May 2026 17:48:22 +0000
-Received: by outflank-mailman (input) for mailman id 1315653;
- Thu, 21 May 2026 17:48:21 +0000
+	id 1wQ7VW-0003u3-Ui; Thu, 21 May 2026 17:48:30 +0000
+Received: by outflank-mailman (input) for mailman id 1315662;
+ Thu, 21 May 2026 17:48:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VM-0001XX-Qn
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:21 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQ7VU-0003M8-E1
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 17:48:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQ7VM-00BluR-6Y
- for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:20 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wQ7VT-00HNF5-Q1
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2026 19:48:27 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f452f-bab6-0a2a0a5309dd-0a2a4508d226-24
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:20 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a0f4551-5cb7-0a2a0a5109dd-0a2a4503b258-18
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:27 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a0f4563-63b5-0a2a45080019-d155802cc078-3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:20 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4903f7a90d1so3694595e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:20 -0700 (PDT)
+ id 6a0f456b-672d-0a2a45030019-d155802ad8d0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 19:48:27 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4891c00e7aeso47876575e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 10:48:27 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.18
+ 5b1f17b1804b1-49033d8e24bsm74565925e9.10.2026.05.21.10.48.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 10:48:19 -0700 (PDT)
+ Thu, 21 May 2026 10:48:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,40 +54,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779385699; x=1779990499; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779385707; x=1779990507; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=a8X7iUE4miDneD3kr0bugCzpGNvoBSglF6ML/JnN4R8=;
-        b=eAThH8jzGH2w2jaFSidw1m0g142gEjQsJYPewxqvtZM67EqPmGIpRCjM8o7mFdDGl+
-         Psvc0bWm6An2g53SVi1+xluDhM0KHTiACEiUkkNjoONsppn8af12Q03VWFg8ceuoAZHq
-         5wR9bT+9iITlhgVyXWCMyEVdZyfr0em/YJDSkEhdVMu70D4hk1nGChhIar9O/wBnpl/Y
-         arSyJzq9SYxIgiOFmUzm+wOOHt+wEkVsJuL5RfcKFwmpscUo+BpamERXUNcLAixuCAYw
-         J3rSc/nWFo/8pTVN1RPuXT5A16K837wTBAHYEpaH4UOXV3torqkgCzpMRb6C3kLAyNz4
-         MUmw==
+        bh=xH+CdyKs4JSeNRtHkAqySvPXuG95ECPS3iRUPK1CuT4=;
+        b=nYgklPOz6MJnn5IShbCtfiy9XtYB3nxnUHCRapavg59xlsP3dYol77pHGGOMPuIqWt
+         rFKKaS7D6/xB1Bfbr1RhMCImqAdzhruj++qMDA0ymMX58slPaZnqrBWez3tjd6DuDxHG
+         wRapnx3xIbat/Jdy1sGXdicjsll9Arr9x/3zr4nGdnyqiYi3dUCRF48POQVW0lrbjqYa
+         mdB/7ysr/eEejJ8RTe0X9zafLvNqwrjGsNTW07PR7qt5ysB78v9pGspIm7A/MnRrFRK4
+         NeCItqeiDcGoFI8+ls3pM2ycmvnGo3Rt2V1ut343kVo9cDRRCeEBB2XX201yR1BeHVto
+         +xoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779385699; x=1779990499;
+        d=1e100.net; s=20251104; t=1779385707; x=1779990507;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=a8X7iUE4miDneD3kr0bugCzpGNvoBSglF6ML/JnN4R8=;
-        b=DgxCADAajwoTvdCp+HhiJb6H3Jl+qGIuLbIQal0G/XpowlC+wi7oq3p9Fg0kpsWjmn
-         nDqQmKoq3sziaX/iEfBz17bmoONlPPH6nHCj8kyheRkKAfjZ0yzj2sdmXpxuWXnDO5oJ
-         5qHbS2SOSRXw9B48TcpPXKfI78QOnVik7sAkIi6A2MQqSidMwzIT9hU79x3vrPF4u+/Y
-         FJzvE7lqJZ431G2+4CotPuAyC/gtWWNVAVYLkFcEaZaSlBnmjlg0XcKoINC0xwXziAmQ
-         3JakRzgIchd1LPUxTtP5uEB91o+9yqAp2rJOCeIS0gf5yw3fEK5SsR/tXfhMdhXf9ewK
-         E3ZA==
-X-Gm-Message-State: AOJu0YwBzfs6qISZtmqF1wuXB5/VhZ7Gk8nLnArxT4UMtoba0ky7GHwu
-	VLti+ASTBhZRRpOzMHFVppbWqew7aQwLJjjK500BCN/UWr71GuNjwyx9zqKx9sPu
-X-Gm-Gg: Acq92OEjK3Z2geNphJgzKbINXINv44Zkc5E9HYEnoCUQmCdeDNJTxF1M+BaREmHHdm0
-	08CbaB5CRrrueB1hKNYdZ8PKAvi6qbN/Rue8fidWPQuULWst7hWKOW4T4W0BXiFkO7OIqyFi3ks
-	/bntj/28Og1tUKkbNXJFTey53eIpy/EZ26KJ6PYSgWRLBxlfKoPqjnYsKD0PLDda9b7ERnuQ0F3
-	sFqMur3f9bx5ar8DdsNYSyXQjojGLByiwWy5frTMvD6FYSuVuWc3ZQY17QTId8bXj9SkYOMrAI0
-	544ugZpVUpkAFCIpzIlsGIVpcTNryuU5YK6CDh0RW1iXcX1H85zLDPYBhltZrdrJaa2VT95Ynzp
-	TZNMIxSq983Au4KDBA+tjKUhZnIguT84WLvwPXHMhbZ9Wov/5SFlGWv/wGnuDd8Q4iDJzEGX+ZB
-	BXi0wMsyFBb0KP8Qv3eCU1qNLswg==
-X-Received: by 2002:a05:600c:8596:b0:48a:5339:ef0e with SMTP id 5b1f17b1804b1-4903604ccb3mr48025785e9.3.1779385699432;
-        Thu, 21 May 2026 10:48:19 -0700 (PDT)
+        bh=xH+CdyKs4JSeNRtHkAqySvPXuG95ECPS3iRUPK1CuT4=;
+        b=UVyYQiNRquysV2VIDxyzkQqXg4ncRw3UyqFfC31hUubeiXiFThP+ftjnSWi9spb+Bf
+         /5pXpdvOasYvhDaRpb2QxzWu3Q3yeAWsfmEljDFveuC01bhkZCrU8rkMQeXbMYTojdkh
+         DwFBqFIhgurXBW/p6ghLYZJ/T3nZKgvfs66AHvBU8YnFeiI6c0SKUMIZWpfOIFUCqMKi
+         ytHJnRc3MYIfiSel/4SzflQ9LJfznh3XDA/if1+LflHvmAKDtLxa1UlctPHF/btYlWfM
+         9CBugP6S3Yo8zDejZuKa12BXHM2ZK391b+L+7Dk8gHq1jyU2tex0eTC+zBULr1xWgUEI
+         Brjg==
+X-Gm-Message-State: AOJu0YxwMtF2W3mJ1g4VfeikFOgldvdp0kOiBsT8vGrihXYHMvur+fbh
+	vyy9s+7BcD1DD0b7BLyCBvTFH54IFNMmqnpSUNZb9vdb1x7JvGuoKq5i4DoquekK
+X-Gm-Gg: Acq92OFrFSM52+M6B+RjDPt5N+U05gfbU7GtCpV47P5nhHmd5jfyEhtq1reiBz9XkPx
+	EFzRN2uU/qZ+aR6cHaMMqPBXLxftFx5wrEhxsQI6PjQZq5Pow+Y2cHIQkLY6iXLG/3gBgKD1uXB
+	e23BBmbgQI/gCy5ZA443+roldcHiPzwsOhPOE74gCHztt2qzKJh8g5CAu75tMf/fdSebD2Zv0/1
+	KxO+jHe1SlhvjS2nRWbtkd1xI2AhNFJbsyxo7YUzM1Dqn3ISPX3f1OiQrlNzMn+7ohFfZGZIWUl
+	gYU5rKlaLYD2z/HO/OfxRgD9kqafRNIyRXJu/in22Dy+DLWnJtM9ufQvt088CPPndSRFbsP1cCp
+	sZhURNR6XdSfLhaGbljvC9wO6xOIgd+OtcqpjEY1DDY9ivtQP5by7Musd5PB3Hhm6RnmHv6alFY
+	gSloVrhepQOphZl/xPUVId/93lAykNdyzh0SE9
+X-Received: by 2002:a05:600c:3513:b0:490:32da:30d with SMTP id 5b1f17b1804b1-4903605f0edmr56575805e9.9.1779385707107;
+        Thu, 21 May 2026 10:48:27 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -96,627 +96,551 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v10 04/13] xen/arm: gic-v3: Implement GICv3 suspend/resume functions
-Date: Thu, 21 May 2026 20:45:22 +0300
-Message-ID: <67f47fe59e2d3f66583c3a7ae82db036d57dc07a.1779385072.git.mykola_kvach@epam.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v10 12/13] xen/arm: Add vPSCI SYSTEM_SUSPEND policy
+Date: Thu, 21 May 2026 20:45:30 +0300
+Message-ID: <1d49511fff3ef5f77bc2d4daac00e6895c1359b1.1779385072.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1779385072.git.mykola_kvach@epam.com>
 References: <cover.1779385072.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779385700-B6169DB1-2BAA46EE/0/0
+X-purgate-ID: tlsNG-33051d/1779385707-4086B938-8B9365E2/0/0
 X-purgate-type: clean
-X-purgate-size: 21029
+X-purgate-size: 17397
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-System suspend may lead to a state where GIC would be powered down.
-Therefore, Xen should save/restore the context of GIC on suspend/resume.
+Introduce CONFIG_HAS_HWDOM_SYSTEM_SUSPEND as an architecture-selected
+capability for platforms where the hardware domain can be parked with
+SHUTDOWN_suspend without calling hwdom_shutdown().
 
-Note that the context consists of states of registers which are
-controlled by the hypervisor. Other GIC registers which are accessible
-by guests are saved/restored on context switch.
+Expose PSCI SYSTEM_SUSPEND as a vPSCI operation for all domains. For
+non-control domains, including the hardware domain when it is not acting
+as a control domain, the call is handled as a guest/domain suspend request
+and parks the domain in SHUTDOWN_suspend.
 
-Before continuing suspend, also verify that the physical CPU interface
-has no Group 1 active-priority state left. Use ICC_CTLR_EL1.PRIbits to
-decide which ICC_AP1R<n>_EL1 registers are implemented, so Xen does not
-read an unimplemented AP1R register.
+Control domains need additional sequencing because their SYSTEM_SUSPEND
+request is used to coordinate host-wide suspend. A non-last awake control
+domain may be parked in SHUTDOWN_suspend without requiring the host
+suspend path to be available. The last awake control domain is treated as
+the point where the request becomes a host-suspend request, and it may
+only proceed when all non-control domains are already in SHUTDOWN_suspend
+and the host suspend path is available.
+
+Keep the control-domain sequencing and domain-readiness checks out of
+PSCI_FEATURES. They are per-attempt runtime conditions rather than stable
+PSCI function availability. Advertise SYSTEM_SUSPEND as implemented by
+vPSCI and report attempt-time policy failures as PSCI_DENIED.
+
+Select HAS_HWDOM_SYSTEM_SUSPEND independently from CONFIG_SYSTEM_SUSPEND
+so that SHUTDOWN_suspend from the hardware domain can be treated as a
+domain suspend state rather than as a hardware-domain initiated host
+shutdown. This does not by itself imply that host-wide suspend is
+available.
+
+Add host_system_suspend_allowed() to combine the host PSCI SYSTEM_SUSPEND
+capability with runtime blockers reported by Xen-owned subsystems. Add
+runtime blockers for registered serial, IOMMU, GIC and SMMUv3 MSI IRQ
+paths lacking suspend/resume support. These blockers are runtime based,
+so they only apply to drivers or paths that Xen actually uses on the
+platform. For SMMUv3, the blocker applies only when Xen actually uses the
+MSI IRQ path, since resume does not restore the SMMU *_IRQ_CFGn MSI
+registers yet.
+
+Add a struct domain forward declaration to xen/suspend.h so the generic
+header can expose arch_domain_resume() without requiring a full domain.h
+include.
 
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
 Changes in V10:
-- abort suspend when the physical Group 1 active-priority state is still
-  present, deriving accessible ICC_AP1R<n>_EL1 registers from
-  ICC_CTLR_EL1.PRIbits;
-- re-enable the redistributor before restoring CPU and virtual interface
-  state on the suspend abort path;
-- panic if the redistributor cannot be re-enabled on the suspend abort path;
-- avoid saving/restoring reserved GICD_IPRIORITYR and GICD_IROUTER entries
-  for a partially populated last SPI block;
-- disable Distributor group forwarding while preserving affinity routing
-  state before restoring Distributor configuration;
-- disable SPI/eSPI forwarding and wait for RWP before restoring
-  GICD_ICFGR<n>.Int_config.
+- Return PSCI_DENIED rather than PSCI_NOT_SUPPORTED when the last awake
+  control domain cannot proceed to host suspend, keeping PSCI_FEATURES
+  stable once SYSTEM_SUSPEND is advertised.
+- Shorten SYSTEM_SUSPEND blocker messages and use %pd when logging the
+  control domain.
+- Mark serial_suspend_available as __ro_after_init.
+- Mention the struct domain forward declaration added to xen/suspend.h.
 
 Changes in V9:
-- fix the suspend-context comment typo and split dist_ctx declarations;
-- restore ICC_IGRPEN1_EL1 on the suspend error path;
-- re-initialize GICD_IGROUPRnE during resume;
-- restore GICD_IROUTER only after re-enabling ARE_NS during resume.
-
-Changes in V8:
-- use right rdist base for prop/pend baser and ctrl
-
-Changes in V7:
-- restore LPI regs on resume
-- add timeout during redist disabling
-- squash with suspend/resume handling for GICv3 eSPI registers
-- drop ITS guard paths so suspend/resume always runs; switch missing ctx
-  allocation to panic
-- trim TODO comments; narrow redistributor storage to PPI icfgr
-- keep distributor context allocation even without ITS; adjust resume
-  to use GENMASK(31, 0) for clearing enables
-- drop storage of the SGI configuration register, as SGIs are always
-  edge-triggered
+- Select HAS_HWDOM_SYSTEM_SUSPEND independently from CONFIG_SYSTEM_SUSPEND
+  so that hardware-domain SHUTDOWN_suspend support is not tied to
+  host-wide system suspend availability.
+- Add runtime host suspend blockers for Xen-owned subsystems lacking
+  suspend/resume support.
+- Keep vPSCI SYSTEM_SUSPEND advertised through PSCI_FEATURES and enforce
+  control-domain sequencing in the call handler.
 ---
- xen/arch/arm/gic-v3-lpi.c                |   3 +
- xen/arch/arm/gic-v3.c                    | 458 ++++++++++++++++++++++-
- xen/arch/arm/include/asm/arm64/sysregs.h |   5 +
- xen/arch/arm/include/asm/gic_v3_defs.h   |   3 +
- 4 files changed, 466 insertions(+), 3 deletions(-)
+ xen/arch/arm/Kconfig                  |   1 +
+ xen/arch/arm/gic.c                    |   6 ++
+ xen/arch/arm/include/asm/psci.h       |   3 +
+ xen/arch/arm/include/asm/suspend.h    |  10 ++-
+ xen/arch/arm/psci.c                   |   7 ++
+ xen/arch/arm/suspend.c                |  40 +++++++++
+ xen/arch/arm/vpsci.c                  | 114 +++++++++++++++++++++++---
+ xen/common/Kconfig                    |   3 +
+ xen/common/domain.c                   |   7 +-
+ xen/drivers/char/serial.c             |  12 +++
+ xen/drivers/passthrough/arm/iommu.c   |   4 +
+ xen/drivers/passthrough/arm/smmu-v3.c |   4 +
+ xen/include/xen/serial.h              |   1 +
+ xen/include/xen/suspend.h             |   2 +
+ 14 files changed, 201 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
-index 847da26ff7..a63c8c4979 100644
---- a/xen/arch/arm/gic-v3-lpi.c
-+++ b/xen/arch/arm/gic-v3-lpi.c
-@@ -467,6 +467,9 @@ static int cpu_callback(struct notifier_block *nfb, unsigned long action,
-     switch ( action )
-     {
-     case CPU_UP_PREPARE:
-+        if ( system_state == SYS_STATE_resume )
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 79622b46a1..54a5bfb9ae 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -19,6 +19,7 @@ config ARM
+ 	select HAS_ALTERNATIVE if HAS_VMAP
+ 	select HAS_DEVICE_TREE_DISCOVERY
+ 	select HAS_DOM0LESS
++	select HAS_HWDOM_SYSTEM_SUSPEND if !MPU
+ 	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+ 	select HAS_STACK_PROTECTOR
+ 	select HAS_UBSAN
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 7727ffed5a..60488c95b4 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -26,6 +26,7 @@
+ #include <asm/device.h>
+ #include <asm/io.h>
+ #include <asm/gic.h>
++#include <asm/suspend.h>
+ #include <asm/vgic.h>
+ #include <asm/acpi.h>
+ 
+@@ -44,6 +45,11 @@ static void __init __maybe_unused build_assertions(void)
+ void register_gic_ops(const struct gic_hw_operations *ops)
+ {
+     gic_hw_ops = ops;
++
++#ifdef CONFIG_SYSTEM_SUSPEND
++    if ( !ops->suspend || !ops->resume )
++        host_system_suspend_disable("GIC driver lacks suspend support");
++#endif
+ }
+ 
+ static void clear_cpu_lr_mask(void)
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index bb3c73496e..142fa1bfe5 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -24,6 +24,9 @@ void call_psci_cpu_off(void);
+ void call_psci_system_off(void);
+ void call_psci_system_reset(void);
+ int call_psci_system_suspend(void);
++#ifdef CONFIG_SYSTEM_SUSPEND
++bool psci_system_suspend_allowed(void);
++#endif
+ 
+ /* Range of allocated PSCI function numbers */
+ #define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
+diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/asm/suspend.h
+index c848fc6340..50dc6e9fdf 100644
+--- a/xen/arch/arm/include/asm/suspend.h
++++ b/xen/arch/arm/include/asm/suspend.h
+@@ -39,7 +39,15 @@ extern struct resume_cpu_context resume_cpu_context;
+ 
+ int prepare_resume_ctx(void);
+ void hyp_resume(void);
+-#endif /* CONFIG_SYSTEM_SUSPEND */
++bool host_system_suspend_allowed(void);
++void host_system_suspend_disable(const char *reason);
++
++#else /* !CONFIG_SYSTEM_SUSPEND */
++
++static inline bool host_system_suspend_allowed(void) { return false; }
++static inline void host_system_suspend_disable(const char *reason) {}
++
++#endif
+ 
+ #endif /* ARM_SUSPEND_H */
+ 
+diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+index e05dae1133..e9d78668fd 100644
+--- a/xen/arch/arm/psci.c
++++ b/xen/arch/arm/psci.c
+@@ -41,6 +41,13 @@ static bool __ro_after_init has_psci_system_suspend;
+ 
+ #define PSCI_RET(res)   ((int32_t)(res).a0)
+ 
++#ifdef CONFIG_SYSTEM_SUSPEND
++bool psci_system_suspend_allowed(void)
++{
++    return has_psci_system_suspend;
++}
++#endif
++
+ int call_psci_cpu_on(int cpu)
+ {
+     struct arm_smccc_res res;
+diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+index 6ea4a0f9cc..98ddd46a47 100644
+--- a/xen/arch/arm/suspend.c
++++ b/xen/arch/arm/suspend.c
+@@ -1,9 +1,49 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
++#include <asm/psci.h>
+ #include <asm/suspend.h>
+ 
++#include <xen/lib.h>
++#include <xen/serial.h>
++
+ struct resume_cpu_context resume_cpu_context;
+ 
++/*
++ * Non-PSCI infrastructure can make host suspend impossible even when the PSCI
++ * SYSTEM_SUSPEND conduit is present, e.g. when a Xen-owned driver has no valid
++ * suspend/resume path.
++ *
++ * This gate is checked only when the last awake control domain attempts to
++ * turn a guest SYSTEM_SUSPEND request into a host-suspend request.
++ */
++static bool host_system_suspend_runtime_allowed = true;
++
++static bool host_serial_suspend_allowed(void)
++{
++    if ( serial_suspend_supported() )
++        return true;
++
++    printk_once(XENLOG_INFO
++                "Host SYSTEM_SUSPEND blocked: serial unsupported\n");
++
++    return false;
++}
++
++bool host_system_suspend_allowed(void)
++{
++    return psci_system_suspend_allowed() &&
++           host_serial_suspend_allowed() &&
++           host_system_suspend_runtime_allowed;
++}
++
++void host_system_suspend_disable(const char *reason)
++{
++    host_system_suspend_runtime_allowed = false;
++
++    printk(XENLOG_INFO "Host SYSTEM_SUSPEND blocked: %s\n",
++           reason ? reason : "unsupported suspend/resume path");
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+index ac6af6118f..0bae42c1bd 100644
+--- a/xen/arch/arm/vpsci.c
++++ b/xen/arch/arm/vpsci.c
+@@ -5,6 +5,7 @@
+ 
+ #include <asm/current.h>
+ #include <asm/domain.h>
++#include <asm/suspend.h>
+ #include <asm/vgic.h>
+ #include <asm/vpsci.h>
+ #include <asm/event.h>
+@@ -219,6 +220,89 @@ static void do_psci_0_2_system_reset(void)
+     domain_shutdown(d,SHUTDOWN_reboot);
+ }
+ 
++/*
++ * Serialise SYSTEM_SUSPEND policy decisions with the domain suspend transition,
++ * so multiple control domains cannot all observe each other as still awake.
++ */
++static DEFINE_SPINLOCK(vpsci_system_suspend_lock);
++
++static bool domain_in_suspend_state(struct domain *d)
++{
++    bool suspended;
++
++    spin_lock(&d->shutdown_lock);
++    suspended = d->is_shut_down && d->shutdown_code == SHUTDOWN_suspend;
++    spin_unlock(&d->shutdown_lock);
++
++    return suspended;
++}
++
++static int32_t domain_psci_system_suspend_policy(struct domain *d)
++{
++    struct domain *other;
++    bool last_awake_control_domain = true;
++    bool awake_non_control_domain = false;
++
++    /* Only control domains participate in sequencing policy. */
++    if ( !is_control_domain(d) )
++        return 0;
++
++    rcu_read_lock(&domlist_read_lock);
++
++    for_each_domain ( other )
++    {
++        bool suspended;
++
++        if ( other == d )
++            continue;
++
++        suspended = domain_in_suspend_state(other);
++        if ( suspended )
++            continue;
++
++        if ( is_control_domain(other) )
++        {
++            last_awake_control_domain = false;
 +            break;
++        }
 +
-         rc = gicv3_lpi_allocate_pendtable(cpu);
-         if ( rc )
-             printk(XENLOG_ERR "Unable to allocate the pendtable for CPU%lu\n",
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index a2553e647e..64fd772d65 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1076,12 +1076,12 @@ out:
-     return res;
- }
- 
--static void gicv3_hyp_disable(void)
-+static void gicv3_hyp_enable(bool enable)
- {
-     register_t hcr;
- 
-     hcr = READ_SYSREG(ICH_HCR_EL2);
--    hcr &= ~GICH_HCR_EN;
-+    hcr = enable ? (hcr | GICH_HCR_EN) : (hcr & ~GICH_HCR_EN);
-     WRITE_SYSREG(hcr, ICH_HCR_EL2);
-     isb();
- }
-@@ -1188,7 +1188,7 @@ static void gicv3_disable_interface(void)
-     spin_lock(&gicv3.lock);
- 
-     gicv3_cpu_disable();
--    gicv3_hyp_disable();
-+    gicv3_hyp_enable(false);
- 
-     spin_unlock(&gicv3.lock);
- }
-@@ -1924,6 +1924,450 @@ static bool gic_dist_supports_lpis(void)
-     return (readl_relaxed(GICD + GICD_TYPER) & GICD_TYPE_LPIS);
- }
- 
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+
-+/* This struct represents a block of 32 IRQs */
-+struct dist_irq_block {
-+    uint32_t icfgr[2];
-+    uint32_t ipriorityr[8];
-+    uint64_t irouter[32];
-+    uint32_t isactiver;
-+    uint32_t isenabler;
-+};
-+
-+struct redist_ctx {
-+    uint32_t ctlr;
-+    uint32_t icfgr; /* only PPIs stored */
-+    uint32_t igroupr;
-+    uint32_t ipriorityr[8];
-+    uint32_t isactiver;
-+    uint32_t isenabler;
-+
-+    uint64_t pendbase;
-+    uint64_t propbase;
-+};
-+
-+/* GICv3 registers to be saved/restored on system suspend/resume */
-+struct gicv3_ctx {
-+    struct dist_ctx {
-+        uint32_t ctlr;
-+        struct dist_irq_block *irqs;
-+        struct dist_irq_block *espi_irqs;
-+    } dist;
-+
-+    /* have only one rdist structure for last running CPU during suspend */
-+    struct redist_ctx rdist;
-+
-+    struct cpu_ctx {
-+        uint32_t ctlr;
-+        uint32_t pmr;
-+        uint32_t bpr;
-+        uint32_t sre_el2;
-+        uint32_t grpen;
-+    } cpu;
-+};
-+
-+static struct gicv3_ctx gicv3_ctx;
-+
-+static void __init gicv3_alloc_context(void)
-+{
-+    uint32_t blocks = DIV_ROUND_UP(gicv3_info.nr_lines, 32);
-+
-+    /* The spec allows for systems without any SPIs */
-+    if ( blocks > 1 )
-+    {
-+        gicv3_ctx.dist.irqs = xzalloc_array(struct dist_irq_block, blocks - 1);
-+        if ( !gicv3_ctx.dist.irqs )
-+            panic("Failed to allocate memory for GICv3 suspend context\n");
++        awake_non_control_domain = true;
 +    }
 +
-+#ifdef CONFIG_GICV3_ESPI
-+    if ( !gic_number_espis() )
-+        return;
-+
-+    blocks = gic_number_espis() / 32;
-+    gicv3_ctx.dist.espi_irqs = xzalloc_array(struct dist_irq_block, blocks);
-+    if ( !gicv3_ctx.dist.espi_irqs )
-+        panic("Failed to allocate memory for GICv3 eSPI suspend context\n");
-+#endif
-+}
-+
-+static int gicv3_disable_redist(void)
-+{
-+    void __iomem *waker = GICD_RDIST_BASE + GICR_WAKER;
-+    s_time_t deadline;
++    rcu_read_unlock(&domlist_read_lock);
 +
 +    /*
-+     * Avoid infinite loop if Non-secure does not have access to GICR_WAKER.
-+     * See Arm IHI 0069H.b, 12.11.42 GICR_WAKER:
-+     *     When GICD_CTLR.DS == 0 and an access is Non-secure accesses to this
-+     *     register are RAZ/WI.
++     * Another control domain is still awake. This request is only the first
++     * phase of the sequencing: park this control domain and leave the host
++     * running. Host-wide suspend gates must not block this intermediate state.
 +     */
-+    if ( !(readl_relaxed(GICD + GICD_CTLR) & GICD_CTLR_DS) )
++    if ( !last_awake_control_domain )
 +        return 0;
 +
-+    deadline = NOW() + MILLISECS(1000);
-+
-+    writel_relaxed(readl_relaxed(waker) | GICR_WAKER_ProcessorSleep, waker);
-+    while ( (readl_relaxed(waker) & GICR_WAKER_ChildrenAsleep) == 0 )
++    /*
++     * This is the last awake control domain. It must not be parked unless the
++     * request can proceed as a host-suspend request; otherwise Xen would lose
++     * the last domain that can coordinate the system suspend.
++     */
++    if ( awake_non_control_domain )
 +    {
-+        if ( NOW() > deadline )
-+        {
-+            printk("GICv3: Timeout waiting for redistributor to sleep\n");
-+            return -ETIMEDOUT;
-+        }
-+        cpu_relax();
-+        udelay(10);
++        printk(XENLOG_DEBUG
++               "SYSTEM_SUSPEND denied for %pd: non-control domains awake\n",
++               d);
++        return PSCI_DENIED;
 +    }
++
++    /*
++     * Host-wide gates are relevant only for the last-control-domain case. They
++     * must not block parking of a non-last control domain, but they must deny
++     * the last control domain when host suspend is not currently available.
++     */
++    if ( !host_system_suspend_allowed() )
++        return PSCI_DENIED;
 +
 +    return 0;
 +}
 +
-+#define GET_SPI_REG_OFFSET(name, is_espi) \
-+    ((is_espi) ? GICD_##name##nE : GICD_##name)
-+
-+static void gicv3_store_spi_irq_block(struct dist_irq_block *irqs,
-+                                      unsigned int i, unsigned int nr_irqs,
-+                                      bool is_espi)
-+{
-+    void __iomem *base;
-+    unsigned int irq, nr_priority_regs;
-+
-+    ASSERT(nr_irqs && nr_irqs <= 32);
-+    nr_priority_regs = DIV_ROUND_UP(nr_irqs, 4);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ICFGR, is_espi) + i * sizeof(irqs->icfgr);
-+    irqs->icfgr[0] = readl_relaxed(base);
-+    irqs->icfgr[1] = readl_relaxed(base + 4);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(IPRIORITYR, is_espi);
-+    base += i * sizeof(irqs->ipriorityr);
-+    for ( irq = 0; irq < nr_priority_regs; irq++ )
-+        irqs->ipriorityr[irq] = readl_relaxed(base + 4 * irq);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(IROUTER, is_espi);
-+    base += i * sizeof(irqs->irouter);
-+    for ( irq = 0; irq < nr_irqs; irq++ )
-+        irqs->irouter[irq] = readq_relaxed_non_atomic(base + 8 * irq);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ISACTIVER, is_espi);
-+    base += i * sizeof(irqs->isactiver);
-+    irqs->isactiver = readl_relaxed(base);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ISENABLER, is_espi);
-+    base += i * sizeof(irqs->isenabler);
-+    irqs->isenabler = readl_relaxed(base);
-+}
-+
-+static void gicv3_restore_spi_irq_config(struct dist_irq_block *irqs,
-+                                         unsigned int i, unsigned int nr_irqs,
-+                                         bool is_espi)
-+{
-+    void __iomem *base;
-+    unsigned int irq, nr_priority_regs;
-+
-+    ASSERT(nr_irqs && nr_irqs <= 32);
-+    nr_priority_regs = DIV_ROUND_UP(nr_irqs, 4);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ICFGR, is_espi) + i * sizeof(irqs->icfgr);
-+    writel_relaxed(irqs->icfgr[0], base);
-+    writel_relaxed(irqs->icfgr[1], base + 4);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(IPRIORITYR, is_espi);
-+    base += i * sizeof(irqs->ipriorityr);
-+    for ( irq = 0; irq < nr_priority_regs; irq++ )
-+        writel_relaxed(irqs->ipriorityr[irq], base + 4 * irq);
-+}
-+
-+static void gicv3_restore_spi_irq_routing(struct dist_irq_block *irqs,
-+                                          unsigned int i, unsigned int nr_irqs,
-+                                          bool is_espi)
-+{
-+    void __iomem *base;
-+    unsigned int irq;
-+
-+    ASSERT(nr_irqs && nr_irqs <= 32);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(IROUTER, is_espi);
-+    base += i * sizeof(irqs->irouter);
-+    for ( irq = 0; irq < nr_irqs; irq++ )
-+        writeq_relaxed_non_atomic(irqs->irouter[irq], base + 8 * irq);
-+}
-+
-+static void gicv3_disable_spi_irq_block(unsigned int i, bool is_espi)
-+{
-+    void __iomem *base;
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ICENABLER, is_espi) + i * 4;
-+    writel_relaxed(GENMASK(31, 0), base);
-+}
-+
-+static void gicv3_restore_spi_irq_state(struct dist_irq_block *irqs,
-+                                        unsigned int i, bool is_espi)
-+{
-+    void __iomem *base;
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ISENABLER, is_espi);
-+    base += i * sizeof(irqs->isenabler);
-+    writel_relaxed(irqs->isenabler, base);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ICACTIVER, is_espi) + i * 4;
-+    writel_relaxed(GENMASK(31, 0), base);
-+
-+    base = GICD + GET_SPI_REG_OFFSET(ISACTIVER, is_espi);
-+    base += i * sizeof(irqs->isactiver);
-+    writel_relaxed(irqs->isactiver, base);
-+}
-+
-+static int gicv3_check_ap1r(unsigned int n, register_t apr)
-+{
-+    if ( !apr )
-+        return 0;
-+
-+    printk(XENLOG_ERR "GICv3: suspend aborted: ICC_AP1R%u_EL1=%#"
-+           PRIregister"\n", n, apr);
-+
-+    return -EBUSY;
-+}
-+
-+static int gicv3_check_active_priorities(register_t ctlr)
-+{
-+    unsigned int pribits = MASK_EXTR(ctlr, ICC_CTLR_EL1_PRIBITS_MASK) + 1;
-+    int ret;
-+
-+    /*
-+     * Xen enables physical Group 1 interrupts through ICC_IGRPEN1_EL1,
-+     * so only the physical Group 1 active-priority registers are relevant
-+     * here. Use ICC_CTLR_EL1.PRIbits for the physical CPU interface, not
-+     * ICH_VTR_EL2, which describes the virtual interface. ICC_AP1R1_EL1 is
-+     * only implemented with at least 6 physical priority bits, and
-+     * ICC_AP1R2_EL1/ICC_AP1R3_EL1 with at least 7.
-+     */
-+    switch ( pribits )
-+    {
-+    case 8:
-+    case 7:
-+        ret = gicv3_check_ap1r(3, READ_SYSREG(ICC_AP1R3_EL1));
-+        if ( ret )
-+            return ret;
-+        ret = gicv3_check_ap1r(2, READ_SYSREG(ICC_AP1R2_EL1));
-+        if ( ret )
-+            return ret;
-+        /* Fall through */
-+    case 6:
-+        ret = gicv3_check_ap1r(1, READ_SYSREG(ICC_AP1R1_EL1));
-+        if ( ret )
-+            return ret;
-+        /* Fall through */
-+    default:
-+        return gicv3_check_ap1r(0, READ_SYSREG(ICC_AP1R0_EL1));
-+    }
-+}
-+
-+static int gicv3_suspend(void)
-+{
-+    unsigned int i, nr_irqs;
-+    void __iomem *base;
-+    int ret;
-+    struct redist_ctx *rdist = &gicv3_ctx.rdist;
-+
-+    /* Save GICC configuration */
-+    gicv3_ctx.cpu.ctlr     = READ_SYSREG(ICC_CTLR_EL1);
-+    gicv3_ctx.cpu.pmr      = READ_SYSREG(ICC_PMR_EL1);
-+    gicv3_ctx.cpu.bpr      = READ_SYSREG(ICC_BPR1_EL1);
-+    gicv3_ctx.cpu.sre_el2  = READ_SYSREG(ICC_SRE_EL2);
-+    gicv3_ctx.cpu.grpen    = READ_SYSREG(ICC_IGRPEN1_EL1);
-+
-+    gicv3_disable_interface();
-+
-+    ret = gicv3_check_active_priorities(gicv3_ctx.cpu.ctlr);
-+    if ( ret )
-+        goto out_enable_iface;
-+
-+    ret = gicv3_disable_redist();
-+    if ( ret )
-+        goto out_enable_iface;
-+
-+    /* Save GICR configuration */
-+    gicv3_redist_wait_for_rwp();
-+
-+    base = GICD_RDIST_BASE;
-+
-+    rdist->ctlr = readl_relaxed(base + GICR_CTLR);
-+
-+    rdist->propbase = readq_relaxed(base + GICR_PROPBASER);
-+    rdist->pendbase = readq_relaxed(base + GICR_PENDBASER);
-+
-+    base = GICD_RDIST_SGI_BASE;
-+
-+    /* Save priority on PPI and SGI interrupts */
-+    for ( i = 0; i < NR_GIC_LOCAL_IRQS / 4; i++ )
-+        rdist->ipriorityr[i] = readl_relaxed(base + GICR_IPRIORITYR0 + 4 * i);
-+
-+    rdist->isactiver = readl_relaxed(base + GICR_ISACTIVER0);
-+    rdist->isenabler = readl_relaxed(base + GICR_ISENABLER0);
-+    rdist->igroupr   = readl_relaxed(base + GICR_IGROUPR0);
-+    rdist->icfgr     = readl_relaxed(base + GICR_ICFGR1);
-+
-+    /* Save GICD configuration */
-+    gicv3_dist_wait_for_rwp();
-+    gicv3_ctx.dist.ctlr = readl_relaxed(GICD + GICD_CTLR);
-+
-+    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
-+    {
-+        nr_irqs = min(32U, gicv3_info.nr_lines - i * 32);
-+        gicv3_store_spi_irq_block(gicv3_ctx.dist.irqs + i - 1, i, nr_irqs,
-+                                  false);
-+    }
-+
-+#ifdef CONFIG_GICV3_ESPI
-+    for ( i = 0; i < gic_number_espis() / 32; i++ )
-+        gicv3_store_spi_irq_block(gicv3_ctx.dist.espi_irqs + i, i, 32, true);
-+#endif
-+
-+    return 0;
-+
-+ out_enable_iface:
-+    if ( gicv3_enable_redist() )
-+        panic("GICv3: Failed to re-enable redistributor after suspend abort\n");
-+
-+    gicv3_hyp_enable(true);
-+    WRITE_SYSREG(gicv3_ctx.cpu.grpen, ICC_IGRPEN1_EL1);
-+    isb();
-+
-+    return ret;
-+}
-+
-+static void gicv3_resume(void)
-+{
-+    int ret;
-+    unsigned int i, nr_irqs;
-+    uint32_t dist_ctlr;
-+    void __iomem *base;
-+    struct redist_ctx *rdist = &gicv3_ctx.rdist;
-+
-+    dist_ctlr = gicv3_ctx.dist.ctlr & GICD_CTLR_ARE_NS;
-+
-+    /* Disable group forwarding while preserving affinity routing state. */
-+    writel_relaxed(dist_ctlr, GICD + GICD_CTLR);
-+    gicv3_dist_wait_for_rwp();
-+
-+    /*
-+     * IHI0069H.b 12.9.9 says changing GICD_ICFGR<n>.Int_config
-+     * while the interrupt is individually enabled is UNPREDICTABLE.
-+     * Disable SPIs first; 4.7.1 defines GICD_ICENABLER<n>, n > 0,
-+     * as the per-SPI disable mechanism.
-+     */
-+    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
-+        gicv3_disable_spi_irq_block(i, false);
-+
-+#ifdef CONFIG_GICV3_ESPI
-+    for ( i = 0; i < gic_number_espis() / 32; i++ )
-+        gicv3_disable_spi_irq_block(i, true);
-+#endif
-+
-+    gicv3_dist_wait_for_rwp();
-+
-+    for ( i = NR_GIC_LOCAL_IRQS; i < gicv3_info.nr_lines; i += 32 )
-+        writel_relaxed(GENMASK(31, 0), GICD + GICD_IGROUPR + (i / 32) * 4);
-+
-+    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
-+    {
-+        nr_irqs = min(32U, gicv3_info.nr_lines - i * 32);
-+        gicv3_restore_spi_irq_config(gicv3_ctx.dist.irqs + i - 1, i, nr_irqs,
-+                                     false);
-+    }
-+
-+#ifdef CONFIG_GICV3_ESPI
-+    for ( i = 0; i < gic_number_espis() / 32; i++ )
-+    {
-+        writel_relaxed(GENMASK(31, 0), GICD + GICD_IGROUPRnE + i * 4);
-+        gicv3_restore_spi_irq_config(gicv3_ctx.dist.espi_irqs + i, i, 32,
-+                                     true);
-+    }
-+#endif
-+
-+    if ( dist_ctlr )
-+    {
-+        for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
-+        {
-+            nr_irqs = min(32U, gicv3_info.nr_lines - i * 32);
-+            gicv3_restore_spi_irq_routing(gicv3_ctx.dist.irqs + i - 1, i,
-+                                          nr_irqs, false);
-+        }
-+
-+#ifdef CONFIG_GICV3_ESPI
-+        for ( i = 0; i < gic_number_espis() / 32; i++ )
-+            gicv3_restore_spi_irq_routing(gicv3_ctx.dist.espi_irqs + i, i,
-+                                          32, true);
-+#endif
-+    }
-+
-+    for ( i = 1; i < DIV_ROUND_UP(gicv3_info.nr_lines, 32); i++ )
-+        gicv3_restore_spi_irq_state(gicv3_ctx.dist.irqs + i - 1, i, false);
-+
-+#ifdef CONFIG_GICV3_ESPI
-+    for ( i = 0; i < gic_number_espis() / 32; i++ )
-+        gicv3_restore_spi_irq_state(gicv3_ctx.dist.espi_irqs + i, i, true);
-+#endif
-+
-+    writel_relaxed(gicv3_ctx.dist.ctlr, GICD + GICD_CTLR);
-+    gicv3_dist_wait_for_rwp();
-+
-+    ret = gicv3_lpi_init_rdist(GICD_RDIST_BASE);
-+    /*
-+     * If LPIs are already enabled, assume firmware or the still-powered
-+     * redistributor has valid PROPBASER/PENDBASER and skip reprogramming.
-+     * Return -EBUSY so callers can ignore this case.
-+     */
-+    if ( ret && ret != -ENODEV && ret != -EBUSY )
-+        panic("GICv3: Failed to re-initialize LPIs during resume\n");
-+    else if ( ret == -EBUSY ) /* extra checks, just to be sure */
-+    {
-+        base = GICD_RDIST_BASE;
-+        if ( readq_relaxed(base + GICR_PROPBASER) != rdist->propbase ||
-+             readq_relaxed(base + GICR_PENDBASER) != rdist->pendbase )
-+            panic("GICv3: LPIs already enabled with unexpected PROPBASER/PENDBASER during resume\n");
-+    }
-+
-+    /* Restore GICR (Redistributor) configuration */
-+    if ( gicv3_enable_redist() )
-+        panic("GICv3: Failed to re-enable redistributor during resume\n");
-+
-+    base = GICD_RDIST_SGI_BASE;
-+
-+    writel_relaxed(GENMASK(31, 0), base + GICR_ICENABLER0);
-+    gicv3_redist_wait_for_rwp();
-+
-+    for ( i = 0; i < NR_GIC_LOCAL_IRQS / 4; i++ )
-+        writel_relaxed(rdist->ipriorityr[i], base + GICR_IPRIORITYR0 + i * 4);
-+
-+    writel_relaxed(rdist->isactiver, base + GICR_ISACTIVER0);
-+    writel_relaxed(rdist->igroupr,   base + GICR_IGROUPR0);
-+    writel_relaxed(rdist->icfgr,     base + GICR_ICFGR1);
-+
-+    gicv3_redist_wait_for_rwp();
-+
-+    writel_relaxed(rdist->isenabler, base + GICR_ISENABLER0);
-+    writel_relaxed(rdist->ctlr, GICD_RDIST_BASE + GICR_CTLR);
-+
-+    gicv3_redist_wait_for_rwp();
-+
-+    WRITE_SYSREG(gicv3_ctx.cpu.sre_el2, ICC_SRE_EL2);
-+    isb();
-+
-+    /* Restore CPU interface (System registers) */
-+    WRITE_SYSREG(gicv3_ctx.cpu.pmr,   ICC_PMR_EL1);
-+    WRITE_SYSREG(gicv3_ctx.cpu.bpr,   ICC_BPR1_EL1);
-+    WRITE_SYSREG(gicv3_ctx.cpu.ctlr,  ICC_CTLR_EL1);
-+    WRITE_SYSREG(gicv3_ctx.cpu.grpen, ICC_IGRPEN1_EL1);
-+    isb();
-+
-+    gicv3_hyp_init();
-+}
-+
-+#endif /* CONFIG_SYSTEM_SUSPEND */
-+
- /* Set up the GIC */
- static int __init gicv3_init(void)
+ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
  {
-@@ -1998,6 +2442,10 @@ static int __init gicv3_init(void)
+     int32_t rc;
+@@ -232,10 +316,6 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+     if ( is_64bit_domain(d) && is_thumb )
+         return PSCI_INVALID_ADDRESS;
  
-     gicv3_hyp_init();
+-    /* SYSTEM_SUSPEND is not supported for the hardware domain yet */
+-    if ( is_hardware_domain(d) )
+-        return PSCI_NOT_SUPPORTED;
+-
+     /* Ensure that all CPUs other than the calling one are offline */
+     domain_lock(d);
+     for_each_vcpu ( d, v )
+@@ -252,16 +332,29 @@ static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t cid)
+     if ( rc )
+         return PSCI_DENIED;
  
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    gicv3_alloc_context();
-+#endif
+-    rc = domain_shutdown(d, SHUTDOWN_suspend);
++    spin_lock(&vpsci_system_suspend_lock);
 +
- out:
-     spin_unlock(&gicv3.lock);
++    rc = domain_psci_system_suspend_policy(d);
++    if ( !rc )
++    {
++        rc = domain_shutdown(d, SHUTDOWN_suspend);
++        if ( rc )
++            rc = PSCI_DENIED;
++        else
++        {
++            rctx->ctxt = ctxt;
++            rctx->wake_cpu = current;
++        }
++    }
++
++    spin_unlock(&vpsci_system_suspend_lock);
++
+     if ( rc )
+     {
+         free_vcpu_guest_context(ctxt);
+-        return PSCI_DENIED;
++        return rc;
+     }
  
-@@ -2037,6 +2485,10 @@ static const struct gic_hw_operations gicv3_ops = {
+-    rctx->ctxt = ctxt;
+-    rctx->wake_cpu = current;
+-
+     gprintk(XENLOG_DEBUG,
+             "SYSTEM_SUSPEND requested, epoint=%#"PRIregister", cid=%#"PRIregister"\n",
+             epoint, cid);
+@@ -287,10 +380,9 @@ static int32_t do_psci_1_0_features(uint32_t psci_func_id)
+     case PSCI_0_2_FN32_SYSTEM_RESET:
+     case PSCI_1_0_FN32_PSCI_FEATURES:
+     case ARM_SMCCC_VERSION_FID:
+-        return 0;
+     case PSCI_1_0_FN32_SYSTEM_SUSPEND:
+     case PSCI_1_0_FN64_SYSTEM_SUSPEND:
+-        return is_hardware_domain(current->domain) ? PSCI_NOT_SUPPORTED : 0;
++        return 0;
+     default:
+         return PSCI_NOT_SUPPORTED;
+     }
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 5ff71480ee..816a1a4ecb 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -140,6 +140,9 @@ config HAS_EX_TABLE
+ config HAS_FAST_MULTIPLY
+ 	bool
+ 
++config HAS_HWDOM_SYSTEM_SUSPEND
++	bool
++
+ config HAS_IOPORTS
+ 	bool
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index bb9e210c28..d3edfb2a13 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1375,6 +1375,11 @@ void __domain_crash(struct domain *d)
+     domain_shutdown(d, SHUTDOWN_crash);
+ }
+ 
++static inline bool want_hwdom_shutdown(uint8_t reason)
++{
++    return !IS_ENABLED(CONFIG_HAS_HWDOM_SYSTEM_SUSPEND) ||
++           reason != SHUTDOWN_suspend;
++}
+ 
+ int domain_shutdown(struct domain *d, u8 reason)
+ {
+@@ -1391,7 +1396,7 @@ int domain_shutdown(struct domain *d, u8 reason)
+         d->shutdown_code = reason;
+     reason = d->shutdown_code;
+ 
+-    if ( is_hardware_domain(d) )
++    if ( is_hardware_domain(d) && want_hwdom_shutdown(reason) )
+         hwdom_shutdown(reason);
+ 
+     if ( d->is_shutting_down )
+diff --git a/xen/drivers/char/serial.c b/xen/drivers/char/serial.c
+index adb312d796..e5348b5445 100644
+--- a/xen/drivers/char/serial.c
++++ b/xen/drivers/char/serial.c
+@@ -497,6 +497,8 @@ const struct vuart_info *serial_vuart_info(int idx)
+ 
+ #ifdef CONFIG_SYSTEM_SUSPEND
+ 
++static bool __ro_after_init serial_suspend_available = true;
++
+ void serial_suspend(void)
+ {
+     int i;
+@@ -513,6 +515,11 @@ void serial_resume(void)
+             com[i].driver->resume(&com[i]);
+ }
+ 
++bool serial_suspend_supported(void)
++{
++    return serial_suspend_available;
++}
++
+ #endif /* CONFIG_SYSTEM_SUSPEND */
+ 
+ void __init serial_register_uart(int idx, struct uart_driver *driver,
+@@ -521,6 +528,11 @@ void __init serial_register_uart(int idx, struct uart_driver *driver,
+     /* Store UART-specific info. */
+     com[idx].driver = driver;
+     com[idx].uart   = uart;
++
++#ifdef CONFIG_SYSTEM_SUSPEND
++    if ( !driver->suspend || !driver->resume )
++        serial_suspend_available = false;
++#endif
+ }
+ 
+ void __init serial_async_transmit(struct serial_port *port)
+diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/arm/iommu.c
+index 100545e23f..547048af05 100644
+--- a/xen/drivers/passthrough/arm/iommu.c
++++ b/xen/drivers/passthrough/arm/iommu.c
+@@ -19,6 +19,7 @@
+ #include <xen/device_tree.h>
+ #include <xen/iommu.h>
+ #include <xen/lib.h>
++#include <xen/suspend.h>
+ 
+ #include <asm/device.h>
+ 
+@@ -46,6 +47,9 @@ void __init iommu_set_ops(const struct iommu_ops *ops)
+     }
+ 
+     iommu_ops = ops;
++
++    if ( !ops->suspend || !ops->resume )
++        host_system_suspend_disable("IOMMU driver lacks suspend support");
+ }
+ 
+ int __init iommu_hardware_setup(void)
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index be8028c036..1b6bb1bc5f 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -91,6 +91,7 @@
+ #include <asm/io.h>
+ #include <asm/iommu_fwspec.h>
+ #include <asm/platform.h>
++#include <asm/suspend.h>
+ 
+ #include "smmu-v3.h"
+ 
+@@ -1903,6 +1904,9 @@ static void arm_smmu_setup_msis(struct arm_smmu_device *smmu)
+ 		}
+ 	}
+ 
++	host_system_suspend_disable(
++		"SMMUv3 MSI IRQ path is unsupported for host suspend");
++
+ 	/* Add callback to free MSIs on teardown */
+ 	devm_add_action(dev, arm_smmu_free_msis, dev);
+ }
+diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
+index 8e18445552..418b00ead0 100644
+--- a/xen/include/xen/serial.h
++++ b/xen/include/xen/serial.h
+@@ -137,6 +137,7 @@ const struct vuart_info* serial_vuart_info(int idx);
+ /* Serial suspend/resume. */
+ void serial_suspend(void);
+ void serial_resume(void);
++bool serial_suspend_supported(void);
  #endif
-     .iomem_deny_access   = gicv3_iomem_deny_access,
-     .do_LPI              = gicv3_do_LPI,
-+#ifdef CONFIG_SYSTEM_SUSPEND
-+    .suspend             = gicv3_suspend,
-+    .resume              = gicv3_resume,
-+#endif
- };
  
- static int __init gicv3_dt_preinit(struct dt_device_node *node, const void *data)
-diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
-index f3c11d871e..2261620316 100644
---- a/xen/arch/arm/include/asm/arm64/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-@@ -16,6 +16,11 @@
- #define ICC_SRE_EL1               S3_0_C12_C12_5
- #define ICC_IGRPEN1_EL1           S3_0_C12_C12_7
- 
-+#define ICC_AP1R0_EL1             S3_0_C12_C9_0
-+#define ICC_AP1R1_EL1             S3_0_C12_C9_1
-+#define ICC_AP1R2_EL1             S3_0_C12_C9_2
-+#define ICC_AP1R3_EL1             S3_0_C12_C9_3
+ /*
+diff --git a/xen/include/xen/suspend.h b/xen/include/xen/suspend.h
+index 6f94fd53b0..a941331035 100644
+--- a/xen/include/xen/suspend.h
++++ b/xen/include/xen/suspend.h
+@@ -6,6 +6,8 @@
+ #if __has_include(<asm/suspend.h>)
+ #include <asm/suspend.h>
+ #else
++struct domain;
 +
- #define ICH_VSEIR_EL2             S3_4_C12_C9_4
- #define ICC_SRE_EL2               S3_4_C12_C9_5
- #define ICH_HCR_EL2               S3_4_C12_C11_0
-diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/include/asm/gic_v3_defs.h
-index 3714cfeb7d..f741587322 100644
---- a/xen/arch/arm/include/asm/gic_v3_defs.h
-+++ b/xen/arch/arm/include/asm/gic_v3_defs.h
-@@ -94,12 +94,15 @@
- #define GICD_TYPE_LPIS               (1U << 17)
+ static inline void arch_domain_resume(struct domain *d) {}
+ #endif
  
- #define GICD_CTLR_RWP                (1UL << 31)
-+#define GICD_CTLR_DS                 (1U << 6)
- #define GICD_CTLR_ARE_NS             (1U << 4)
- #define GICD_CTLR_ENABLE_G1A         (1U << 1)
- #define GICD_CTLR_ENABLE_G1          (1U << 0)
- #define GICD_IROUTER_SPI_MODE_ANY    (1UL << 31)
- 
- #define GICC_CTLR_EL1_EOImode_drop   (1U << 1)
-+#define ICC_CTLR_EL1_PRIBITS_SHIFT   8
-+#define ICC_CTLR_EL1_PRIBITS_MASK    (0x7U << ICC_CTLR_EL1_PRIBITS_SHIFT)
- 
- #define GICR_WAKER_ProcessorSleep    (1U << 1)
- #define GICR_WAKER_ChildrenAsleep    (1U << 2)
 -- 
 2.43.0
 
