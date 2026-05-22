@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B406CD5BB4
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 14:07:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1316904.1586258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D351CD5BB4
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 14:38:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1316928.1586265 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQQWm-0005Bw-Bf; Fri, 22 May 2026 14:07:04 +0000
+	id 1wQR12-0002lF-Fb; Fri, 22 May 2026 14:38:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1316904.1586258; Fri, 22 May 2026 14:07:04 +0000
+Received: by outflank-mailman (output) from mailman id 1316928.1586265; Fri, 22 May 2026 14:38:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQQWm-0005Bp-7B; Fri, 22 May 2026 14:07:04 +0000
-Received: by outflank-mailman (input) for mailman id 1316904;
- Fri, 22 May 2026 14:07:03 +0000
+	id 1wQR12-0002l8-Cl; Fri, 22 May 2026 14:38:20 +0000
+Received: by outflank-mailman (input) for mailman id 1316928;
+ Fri, 22 May 2026 14:38:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e4ffc5040000f373@swg.vates.tech>)
- id 1wQQWl-0005Bj-9m
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 14:07:03 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wQR11-0002l2-0w
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 14:38:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQQWk-00HM8M-F8
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 16:07:02 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e4ffc5040000f373@swg.vates.tech>)
- id 6a106302-e002-0a2a0a5209dd-0a2a4501b31e-10
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 16:07:02 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.19e4ffc5040000f373@swg.vates.tech>)
- id 6a106161-c1f2-0a2a45010019-b9ff1c228737-3
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 16:00:01 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 19e4ffc5040000f373.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 22 May 2026 13:59:56 +0000
-Received: from l14 (unknown [82.67.99.167])
- (Authenticated sender: anthony.perard)
- by mail2.vates.fr (Postfix) with ESMTPSA id A5EAB86883;
- Fri, 22 May 2026 15:59:55 +0200 (CEST)
+ id 1wQR10-00F4u5-5V
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 16:38:18 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a106a4c-bab6-0a2a0a5309dd-0a2a4508a598-16
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 16:38:18 +0200
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a106a59-63b5-0a2a45080019-d155dd30c4c2-3
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 16:38:18 +0200
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-45e7c636e74so4103798f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 07:38:18 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
+ [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45eb6d71688sm4824656f8f.33.2026.05.22.07.38.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 May 2026 07:38:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,71 +52,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=trPP9zCnq/DNHH93lw4AzppJBhl01iJkUPZBcD91A4I=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=sScD1muRs9QPyWj+ZW907HiWbVa6UCGI8l6vpFTkxFzmFIzpRavdey4AoIcxeO0cSQhKzV83I
- y7x4pixPcWRldKsNI2V/amslD4hyXrdt1ubs3g1QTPmwYd41Ncyt62fpfaFJ2b9tJnFf6Qbsf+8
- hO7X9aGbqgPE2aTc8FUJn1oPdeZHbcfrgZ78rlmsq4KgjY4y8xUweolBydgkpnHn0eoKgKkrMgP
- squ4IeJMUqwISKo8UikBm0st6tQV50FsBqzhOJKDU5FLUyYbt7tfv/hFmpdj1D+QK0dsBSrjZZW
- Seriy0wzylzaFwmQzzgZ3B0QyBa21WZPJ+a1GMw7QtZA==
-X-Zone-Loop: 2b5189212417b7aa3721f8c9ce1e449a627fd952e20a
-x-campaign-type: default
-x-transaction-id: 3b7559f0-3cd8-48a4-9a49-f35a90d96292
-x-swg-uid: 01-48aa02c6-8360-47df-b35c-3c74cd8aaabd
-X-Mailer: Sweego
-Message-ID:
- <1779458396.8631fc262581453bbf619ec5b2062170.19e4ffc5040000f373@vates.tech>
-x-swg-bid: 1779458396.8631fc262581453bbf619ec5b2062170.19e4ffc5040000f373
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Fri, 22 May 2026 15:59:55 +0200
-From: Anthony PERARD <anthony.perard@vates.tech>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 12/13] Prepare grub for booting x86_64 HVM domU from a
- cdrom
-References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
- <4aa490a4f8a26ec86397cef30091cdd3f3598c30.1777898148.git-series.marmarek@invisiblethingslab.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779460697; x=1780065497; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=M/pRn9LZJwgy+bbz37lqQwUBSagf9USWQAtm+xtRkCw=;
+        b=UnZ2FM5zveq2NI3yixVKdq2z4AFRLASETzl0n4FCBH3LnIK1JBoE+SdGNrf2dEymN3
+         axzq+EK287V+5HPCO8DRZAEbuhsqJLBitK8f9sEjKlTry3pifi7BLi+qeBiGdWe9X7OP
+         0Bhek6PK5lqlpbHoSIkmKjLt16I+5FEAG31D+Ka/D8lmhV5RlMSKM9gXhDPLJSs17xUT
+         Z0tSFuiq9SaVfjXUM68hfCWrzofbEMwtcJn/+lU9CAmeIDWI1U0a8OCAnwrLaCpMOvVg
+         fBCi0TEDB0oWnpA1A8btbQI6SvKviwlL9P/Ox3rlIy6PaqLKleQui4AzVuDQBvh1nMPN
+         62lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779460697; x=1780065497;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=M/pRn9LZJwgy+bbz37lqQwUBSagf9USWQAtm+xtRkCw=;
+        b=qbE3YwUaSt78aQ2NiprFFg+osZkSLveHikJbHPfTvmF3wBoFTF7Cio4hEe9WERA4fx
+         /wuTElTjJjesMQavggHJo3hqizvzt81Q3uOQU5eislTYeis6KGbPLIS4ILMgu4vwwQ3r
+         G3yEh1kT6/rDbyZgMEwW7JP8Vw7uOUKOtCokwtljwu2J4ZZ96JLarZfDZ2Yy1vRiP/nn
+         ecblsQijpH1mVn+Tso4DpSsHVL9j5Bz9TbFi8xT9sFleP0lOt6sdI+tSb3ckg2QnRWHX
+         +0wv5lk1e2e/x9Qou4qNGMB5zITBWVZ0wBUP92qhTt5K0J9UGiHyMziUh+ur4YHwra+a
+         +DqQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9Zt5lxbVbNbl2o0wITENbrNo+NBp/nPaZEt9Ewd2nXwmzkp4wplgu7rNEBYrMjsJrJOCt9ZCXH+8o=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YxJQ921Dwe2vUAazdpKGU4SeOKxCJ1sMvOKwYZLDgJY3d1tVE3W
+	BrPCni0AdFB2/zHlBXFLY/GgVXIrWQW2WDk9dZkTDefsWpq+0piVXB00
+X-Gm-Gg: Acq92OFGqkMaA3YkKFn0LmFiowipRLa8Mxh/RGYHFZo3pjMekbDXDDryJzzUJYup9dk
+	aOUJuJh3xiaf+wFbgo92EaA/YuLcB7+ERD+lIw6f6/JeWKaXfNRN6mWDpxYrghme/nHT1g2h25P
+	qcb5TslnbcMxg2WOrX3kaKzTFd0o0CuAChMFY7YwyTbtSqCv1c+rF9/JnqPbAyZYB6h26TYKTnP
+	LkG27Y1JzTJuUznzvy4Ap991hhWmybrwTtQBRKCWUL9RY41FvauzyKwxo1kNHuu18sAhdbgduEB
+	RF2ZhnQbKCzJdc8Eembl46ffL0OB7Ph/5obH1zT5DATCQgO4kyhEj6MPd+WKliZJk1lemwQm2oe
+	Y527poPtUB9zXZArGuFSxFlXwD6A7CFq07WU4xEUTfhYEo9X/ucJMH+5bOziS0d1Le64D6IHsuR
+	672vwwq08t5ypJ9oQzmbst6uRCdFFulQA7iihkPaiU/2SJxjzxCnxZqZ3uxB6dWeb68LPz/1cRm
+	vw=
+X-Received: by 2002:a05:6000:461b:b0:45e:73b3:4515 with SMTP id ffacd0b85a97d-45eb38b7a8bmr5508596f8f.35.1779460697355;
+        Fri, 22 May 2026 07:38:17 -0700 (PDT)
+Message-ID: <40fa9628-73ab-48cf-9ff4-c87f0595065f@gmail.com>
+Date: Fri, 22 May 2026 16:38:15 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <4aa490a4f8a26ec86397cef30091cdd3f3598c30.1777898148.git-series.marmarek@invisiblethingslab.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.125c.d0896bdb58dc422d.19e4ffc4e8e.e62b2899c3dec311=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1779458395790
-X-purgate-ID: tlsNG-d62444/1779458401-ADBA8FF4-5A5CC185/13/0
-X-purgate-type: clean
-X-purgate-size: 634
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/26] xen/riscv: introduce init interrupt controller
+ operations
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1778250616.git.oleksii.kurochko@gmail.com>
+ <286a8b99ad7c107fc46c346f7c075617740fa194.1778250616.git.oleksii.kurochko@gmail.com>
+ <a94a55e0-b6c7-45ed-bc9f-76022f02b1fa@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <a94a55e0-b6c7-45ed-bc9f-76022f02b1fa@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1779460698-C487BDB1-3ACCDBFD/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4016
 
----=Part.125c.d0896bdb58dc422d.19e4ffc4e8e.e62b2899c3dec311=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, May 04, 2026 at 02:35:51PM +0200, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> The stubdomain test will use it=2E
->=20
-> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethings=
-lab=2Ecom>
-
-Reviewed-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
-
-Thanks,
 
 
--- 
-Anthony Perard | Vates XCP-ng Developer
+On 5/21/26 3:25 PM, Jan Beulich wrote:
+> On 08.05.2026 16:43, Oleksii Kurochko wrote:
+>> Introduce intc_hw_init_ops structure to avoid risky mix of init
+>> function and non-init function.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in v2:
+>>   - New patch.
+>> ---
+>>   xen/arch/riscv/aplic.c            |  7 +++++--
+>>   xen/arch/riscv/include/asm/intc.h | 10 +++++++---
+>>   xen/arch/riscv/intc.c             | 10 ++++++++--
+>>   3 files changed, 20 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+>> index 739e8dab3498..97dc0ef731f0 100644
+>> --- a/xen/arch/riscv/aplic.c
+>> +++ b/xen/arch/riscv/aplic.c
+>> @@ -306,12 +306,15 @@ static const hw_irq_controller aplic_xen_irq_type = {
+>>   
+>>   static const struct intc_hw_operations aplic_ops = {
+>>       .info                = &aplic_info,
+>> -    .init                = aplic_init,
+>>       .host_irq_type       = &aplic_xen_irq_type,
+>>       .handle_interrupt    = aplic_handle_interrupt,
+>>       .set_irq_type        = aplic_set_irq_type,
+>>   };
+>>   
+>> +static const struct intc_hw_init_ops __initdata aplic_init_ops = {
+>> +    .init                = aplic_init,
+>> +};
+> 
+> const wants to pair with __initconst. Then:
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> 
+Thanks.
 
-XCP-ng & Xen Orchestra - Vate=
-s solutions
+> However, I have another comment for consideration:
+> 
+>> --- a/xen/arch/riscv/intc.c
+>> +++ b/xen/arch/riscv/intc.c
+>> @@ -12,9 +12,13 @@
+>>   
+>>   static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
+>>   
+>> -void __init register_intc_ops(const struct intc_hw_operations *ops)
+>> +static const struct intc_hw_init_ops *__initdata intc_hw_init_ops;
+>> +
+>> +void __init register_intc_ops(const struct intc_hw_operations *ops,
+>> +                              const struct intc_hw_init_ops *init_ops)
+>>   {
+>>       intc_hw_ops = ops;
+>> +    intc_hw_init_ops = init_ops;
+>>   }
+> 
+> Again following what we do e.g. in x86'es IOMMU code, instead of passing
+> two pointers to the function, have struct intc_hw_init_ops have a
+> const struct intc_hw_operations * member which then can be used to
+> set intc_hw_ops here? Both will always come in pairs anyway.
 
-web: https://vates=2Etech
----=Part.125c.d0896bdb58dc422d.19e4ffc4e8e.e62b2899c3dec311=---
+It makes sense to me.
+
+So I will do the following:
+
+@@ -350,7 +351,7 @@ static int __init aplic_preinit(struct 
+dt_device_node *node, const void *dat)
+
+      dt_irq_xlate = aplic_irq_xlate;
+
+-    register_intc_ops(&aplic_ops, &aplic_init_ops);
++    register_intc_ops(&aplic_init_ops);
+
+      /* Enable supervisor external interrupt */
+      csr_set(CSR_SIE, BIT(IRQ_S_EXT, UL));
+diff --git a/xen/arch/riscv/include/asm/intc.h 
+b/xen/arch/riscv/include/asm/intc.h
+index 8b498e43b33f..3d84fcc51d1a 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -42,14 +42,14 @@ struct intc_hw_operations {
+  };
+
+  struct intc_hw_init_ops {
++    const struct intc_hw_operations *ops;
+      /* Initialize the intc and the boot CPU */
+      int (*init)(void);
+  };
+
+  void intc_preinit(void);
+
+-void register_intc_ops(const struct intc_hw_operations *ops,
+-                       const struct intc_hw_init_ops *init_ops);
++void register_intc_ops(const struct intc_hw_init_ops *init_ops);
+
+  void intc_init(void);
+
+diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
+index 8649160403f7..3600d23bdb5b 100644
+--- a/xen/arch/riscv/intc.c
++++ b/xen/arch/riscv/intc.c
+@@ -14,10 +14,9 @@ static const struct intc_hw_operations 
+*__ro_after_init intc_hw_ops;
+
+  static const struct intc_hw_init_ops *__initdata intc_hw_init_ops;
+
+-void __init register_intc_ops(const struct intc_hw_operations *ops,
+-                              const struct intc_hw_init_ops *init_ops)
++void __init register_intc_ops(const struct intc_hw_init_ops *init_ops)
+  {
+-    intc_hw_ops = ops;
++    intc_hw_ops = init_ops->ops;
+      intc_hw_init_ops = init_ops;
+  }
+
+Thanks.
+
+~ Oleksii
+
 
