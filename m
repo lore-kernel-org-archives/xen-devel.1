@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93BE5CD5BB4
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 06:20:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1316309.1585696 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CFECD5BAF
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 06:40:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1316336.1585724 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQJFO-0008R1-Mi; Fri, 22 May 2026 06:20:38 +0000
+	id 1wQJYG-00056F-Pi; Fri, 22 May 2026 06:40:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1316309.1585696; Fri, 22 May 2026 06:20:38 +0000
+Received: by outflank-mailman (output) from mailman id 1316336.1585724; Fri, 22 May 2026 06:40:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQJFO-0008Qu-K4; Fri, 22 May 2026 06:20:38 +0000
-Received: by outflank-mailman (input) for mailman id 1316309;
- Fri, 22 May 2026 06:20:37 +0000
+	id 1wQJYG-000568-Mp; Fri, 22 May 2026 06:40:08 +0000
+Received: by outflank-mailman (input) for mailman id 1316336;
+ Fri, 22 May 2026 06:40:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wQJFN-0008Qo-Pb
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 06:20:37 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wQJYF-00054K-8D
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 06:40:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQJFN-00FxJO-1i
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 08:20:37 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wQJYE-00DWME-DJ
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 08:40:06 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0ff5b3-e002-0a2a0a5209dd-0a2a4507c00c-6
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:20:36 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a0ff5b4-229c-0a2a45070019-d1558030d944-3
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:20:36 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-48e82c23840so55592605e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 23:20:36 -0700 (PDT)
-Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490454a0b82sm21875725e9.9.2026.05.21.23.20.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 23:20:35 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0ffa43-2eae-0a2a0a5409dd-0a2a4503dd1a-18
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:40:06 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a0ffa45-672d-0a2a45030019-d1558033f1c7-3
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:40:05 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-488ab2db91aso72807585e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 23:40:05 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490454ea134sm25151995e9.8.2026.05.21.23.40.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 May 2026 23:40:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,96 +53,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779430836; x=1780035636; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=i3goxrv/Y8kshOF/CZ2G/Qlx2qpoE+dQMyCjx1mFAtc=;
-        b=ZrT2JnO2XoX1zxkX+NrzATyniYY9sCOT3AjLQRRWv3bRKf2YNckPH5NBw6sW1rrugo
-         +XMDu2uXTcy81n3wFHqb9hZFLxOmhyhplw/FtQXP4dU2JndTGX1IN3g9mY+6qiuT0R+6
-         7IYlcZrLmpRYJyBQljJzI6XRADGC6f9azFnLFvxoPsf+DnMzwuH4xa5SqV6S4i/MIC2Z
-         sf2UZxIKI0ehAw00gXva5w+1PSq6B8I6Z4MjvIqZjJ7vTDsFPBXShtriazS3cuFE+OhF
-         vGZdMqU10dPCws8+Mn/Zmsj2Ku3qL/3gp518lJs7OQEygurVkJrzyj05Q7Yw9hq9YiUS
-         qb9g==
+        d=suse.com; s=google; t=1779432005; x=1780036805; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=HkWB3b716oQDbUQg3DPfRxUzoUOFI7+RS8DSdaj562Q=;
+        b=O4OxGbuQ8/sghVZ+XIRLBnHPaZNozs/ongV21AWbnFo0l/rzByXNQN7H1/n1j+Tont
+         oC3k9gHY3o2fMs68wd8BFIEL4W70C87+hFX1b5mnB/b2mnEg5lMv2z5EsClaccNUzvPv
+         C73MBdCPKHme1TlBR/A+x6hzP1C5cW8/6gLSTnjbVKvYCVYdMYDLHXwG1tHaDmv7pYkF
+         atwTYkng0GfOSh7wM2Q77nhlo4zQ5uY1bbRUJgisT62pKRfokgVeG2F1xVnCm0O148lL
+         ZYoml+sjJ7fcEh20mXEvH5KT55QPdDL64+njTaFAqnDcA/14Dcv1xvsqmI0H1eeTycmA
+         xKng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779430836; x=1780035636;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1779432005; x=1780036805;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=i3goxrv/Y8kshOF/CZ2G/Qlx2qpoE+dQMyCjx1mFAtc=;
-        b=U1+L3a06wAZpi3CqRMwl00aw7OjsrkF3Y7itZYmFrOsjHX6EiEFgGr8Rb+XzYhdVzR
-         amSVbAYv21SE/38NN4cp5E2r64MHxcgIIESNL/ku8/2OCKqVMyJMTadeR3fdZs0kuR1k
-         WmIz9pNIZsck0N91dbbBzVpd1x/RCA5/9FyKx7fdZBAZh4OSyl9+Z8qZPHd9b1UoNdF1
-         hwbfcQUaJ1+A5A8kAGA4hN+2YcGrqhHXruMLDzJ3XhwbFD0QP5k7u1xVQl1fkMZOZxXV
-         kKm9HqR9T6HZ8hcQh+fLzdt+1fVJiM+EjsFeYa4WoCsEP95Dh55VUni3yeyMFAOqzzt8
-         IiNA==
-X-Gm-Message-State: AOJu0Yyq3Yp9hxCg4kK7ayP6GGWDEJMTf7OKFmYjytdFDaobMFnrJpto
-	M5BsRJobtbrRz1fcOQu9yzIcZz/pnp6xxGzD3ykPjTbGtIg9uVmfjvHwASpvcwyn
-X-Gm-Gg: Acq92OEAtJrB9wVN9QHE2hvFLWFvlFIh5U0MDWoMLYiiWSEjOMrq+MZBd3CJEetBCru
-	mVKxxwjWm6lRe2ceP0nLpS4T4fBVfYxc0DK48wUvOcHOKqNm3wYepd+SWhiJUyBoB4ItXNnrUf7
-	qLzYRoqYwNkvs5H63qF5sbny2h5Nb4Uy/2lMfzgntSi5Z6A2SCMgMqzZWKh+sS6nZ6cQd5igKLc
-	n0hP2p8pwNuHJHSkb/ST949ZM9PB6ZaGHwKFAulcs5APE7bAHIpwYHG306pWFpkbqVSp8cgqbAp
-	TnZFhIVnfSCZlc9MQq5HTMUBf2GvXw4ulSg0HkWBhKIpt9E9WOoS83SH9CO9JMMNJVZr2Fx892N
-	oMtMIb1FMhhm1b8jSWhuouE55WEvoV6Dnu7iRMdzP9YkTB8/e2ZmUcmMhkonKFzSyNZNydEDJvF
-	7kSM5+TUd/IQ0djiYSlkRNY+cLoN7AQ9hclOtJYbzEarEewsA=
-X-Received: by 2002:a05:600c:3b02:b0:489:201c:dc46 with SMTP id 5b1f17b1804b1-490424b2cf1mr22975655e9.12.1779430836207;
-        Thu, 21 May 2026 23:20:36 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 0/2] xen/arm: handle Dom0 vCPU limits from GICv3 redistributors
-Date: Fri, 22 May 2026 09:18:25 +0300
-Message-ID: <cover.1779430299.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
+        bh=HkWB3b716oQDbUQg3DPfRxUzoUOFI7+RS8DSdaj562Q=;
+        b=cTOSe6kIQpCMK+pozf8JlwEfwv9kUWhqYui6hqz+pcYJ/D6wrEXczKA0HdA73TXHCc
+         CTNImck5upd59DpGbpLirARnEnxb3zXq789WIYaP141rIrQvkvDLDvWRCqN5Uq221+ZE
+         Vg0lJ4T/VdjQU9RCmv7JRQv4NUfdYAjxUcEeJExMKeqpIq3JVJuud50GCtCQ28h1yzjq
+         5C0+Z+Q5xN1gKFFfvgGiJK1zFE2HRHlle9EMsjCLRJQekSY/aiLVfoyyLv1tuRNYHafE
+         6Vf8b+6xVONTaRFKgbATriMo+k5W8IZLRp/4IlBiX0nUdLiMJrzTEqHcLlLrjFFhsUob
+         XMKw==
+X-Forwarded-Encrypted: i=1; AFNElJ9iQb8grtrIvg5R2HMR0kOAgDiuY0SkdPuWzw+xH3ob/BR/EuEDWQtkpamh7HVuMt8jxYyc1SHjENM=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwNs56JjtZZfZSDxoMfq1bodF/LkgzKjpExsYV+ida2aD2Yoh0r
+	Y5WsyDCuAoTumH3cFyjNRTTOm/e2stDfHMR3CoyzGxhtd7KocUPSsw+BxWLwF0++gg==
+X-Gm-Gg: Acq92OGYMD11BJZHZDTPeua+xyfIDzIx/t/Nq4ZJfb6CvDcbjNJK3j0cAummqwonp9v
+	0YiwgR8GNvHaDONr8UUy0Vem2EVhOga+33w8Cb5e7Ut+hes95aefU3ybKit0vXjcuR+nR3qzzq4
+	vvz3MnDATFxMHoEc1QLY0om45wMDacXX9Mj/+wlaodjyM/hkI8aqf6JbgwEz/PcHHCRRnvRHCVE
+	sK/dSIjlpIKfBrpdf9+lBo4wG0KwIIUKU88w1784IVHE3URI7NzsmuOSuH4sO/rylaCWqu6hAKA
+	SqjZtDmfcfLcYLOtTapz7Jw00Zf617sqpafkETGKtynNBXVgLhUnSHNIP0qcYEFCa4ZVlBvOwfz
+	3AX9yWW7kgYVqgekrKwRzEZ6oH0vRHWbLt416igJJFOYom0/gb2TyvfK+q6uysgOG1fJzcwuE7J
+	Q16sDQZk05P1qiiBybI5/3NggPTi54LzvRZLINyMx4n/RhoLnkaSxcVtUPln4XR4UZtKTGVWcET
+	aQIMIteedfHaN8=
+X-Received: by 2002:a05:600c:4688:b0:490:4224:e0a2 with SMTP id 5b1f17b1804b1-49042ae265bmr24797115e9.33.1779432003603;
+        Thu, 21 May 2026 23:40:03 -0700 (PDT)
+Message-ID: <984c91b8-3d2c-4431-bdf1-4a333ac341d1@suse.com>
+Date: Fri, 22 May 2026 08:40:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1779430836-09F6EC48-4923BBF8/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] vPCI: resolve MISRA R10.1 boolean arithmetic type
+ violation
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <e23266191a366abe66d8104783d97578aa8734a4.1779428826.git.dmytro_prokopchuk1@epam.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <e23266191a366abe66d8104783d97578aa8734a4.1779428826.git.dmytro_prokopchuk1@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1779432005-38348938-9916B21C/0/0
 X-purgate-type: clean
-X-purgate-size: 1477
+X-purgate-size: 1573
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+(extending Cc list)
 
-This series fixes and documents a Dom0 construction corner case on
-Arm GICv3 systems where Dom0 uses the host redistributor layout.
+On 22.05.2026 08:13, Dmytro Prokopchuk1 wrote:
+> --- a/xen/drivers/vpci/header.c
+> +++ b/xen/drivers/vpci/header.c
+> @@ -586,7 +586,7 @@ static void cf_check bar_write(
+>          if ( val != (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
+>              gprintk(XENLOG_WARNING,
+>                      "%pp: ignored BAR %zu write while mapped\n",
+> -                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+> +                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 : 0));
+>          return;
+>      }
+>  
+> @@ -647,7 +647,7 @@ static void cf_check guest_mem_bar_write(const struct pci_dev *pdev,
+>          if ( guest_addr != bar->guest_addr )
+>              gprintk(XENLOG_WARNING,
+>                      "%pp: ignored guest BAR %zu write while mapped\n",
+> -                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+> +                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 : 0));
+>          return;
+>      }
+>      bar->guest_addr = guest_addr;
 
-When the requested Dom0 vCPU count exceeds the number of virtual
-redistributor frames covered by the exposed host-layout GICR regions,
-the vGICv3 per-vCPU init path rejects the first uncovered vCPU. However,
-the generic vGIC init path ignored that error, so vcpu_create() could
-succeed with an invalid per-vCPU vGIC state. Dom0 could then observe more
-possible CPUs than Xen can back with emulated redistributors and hang
-during secondary CPU bring-up.
+Well. If I'm not mistaken we had discussed situations like this (long ago).
+Imo the added verbosity gets in the way of readability. If we absolutely
+cannot or don't want to deviate such constructs (of which I expect we have
+more), then we ought to consider alternatives (like changing the variables'
+types in the case here).
 
-The first patch propagates the per-vCPU vGIC init failure and fixes the
-host-layout redistributor region count when all hardware regions have
-been consumed. With the fix, Dom0 construction stops creating secondary
-vCPUs at the first vCPU whose redistributor frame is not covered, while
-preserving the existing best-effort Dom0 policy and allowing Dom0 to boot
-with the vCPUs created before the failure.
+As to deviating: rules.rst, according to my reading, says that &, |, ^, or
+shifts would be okay to use with a bool operand. What's wrong with also
+permitting this for other operators?
 
-The second patch documents the resulting Arm GICv3 constraint for
-dom0_max_vcpus.
-
-Mykola Kvach (2):
-  xen/arm: propagate vGIC vCPU init failures
-  docs: Document Arm GICv3 limit for dom0_max_vcpus
-
- docs/misc/xen-command-line.pandoc |  8 ++++++++
- xen/arch/arm/vgic-v3.c            |  3 ++-
- xen/arch/arm/vgic.c               | 10 +++++++---
- 3 files changed, 17 insertions(+), 4 deletions(-)
-
--- 
-2.43.0
-
+Jan
 
