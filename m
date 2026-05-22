@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8205CD5BAF
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 06:13:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1316301.1585688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA20CD4F5B
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2026 06:20:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1316310.1585705 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQJ8l-0006L5-1s; Fri, 22 May 2026 06:13:47 +0000
+	id 1wQJFQ-0000D6-Te; Fri, 22 May 2026 06:20:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1316301.1585688; Fri, 22 May 2026 06:13:47 +0000
+Received: by outflank-mailman (output) from mailman id 1316310.1585705; Fri, 22 May 2026 06:20:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQJ8k-0006Ky-Ut; Fri, 22 May 2026 06:13:46 +0000
-Received: by outflank-mailman (input) for mailman id 1316301;
- Fri, 22 May 2026 06:13:46 +0000
+	id 1wQJFQ-0000Cz-Qm; Fri, 22 May 2026 06:20:40 +0000
+Received: by outflank-mailman (input) for mailman id 1316310;
+ Fri, 22 May 2026 06:20:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1wQJ8j-0006Ks-Qs
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 06:13:45 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wQJFO-0008RG-U8
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 06:20:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQJ8j-009h4Z-6l
- for xen-devel@lists.xenproject.org; Fri, 22 May 2026 08:13:45 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wQJFO-00DS7I-9x
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2026 08:20:38 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6a0ff403-2eae-0a2a0a5409dd-0a2a45029930-38
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:13:45 +0200
-Received: from [40.107.130.76]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6a0ff418-af86-0a2a45020019-286b824cb247-3
- for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:13:45 +0200
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
- by PAVPR03MB9232.eurprd03.prod.outlook.com (2603:10a6:102:32f::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 06:13:39 +0000
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba%3]) with mapi id 15.21.0048.016; Fri, 22 May 2026
- 06:13:39 +0000
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0ff5ae-bab6-0a2a0a5309dd-0a2a4504ab7a-22
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:20:38 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a0ff5b6-1dec-0a2a45040019-d155802bc54c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 22 May 2026 08:20:38 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-488af9fdaa7so33186895e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 21 May 2026 23:20:38 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.24.36]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490454a0b82sm21875725e9.9.2026.05.21.23.20.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 23:20:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,143 +52,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Px2lZzmUJiAX5+wLOWezHi+88VpkZ1YpsXZZcmv9BlakVqh/NbGipaSe1zlaZy9xv3cTY9CNDRPRQp64zAqlLkaNSLvK9G19aKX1x0KWMh5kg8qlLRW1e0AUCo7kzxuWZEFMjBgwr7YObzbKKrlDRMsNTwLbZMP9d/NIf1ux8GABJ/gOJHvZh9jZvuLfznGE8mZEn9OHd7ioy3yMT5m2YCsFHgrw8Xiqtl3rsGWf01iYqiZ4QA051yTMX5pZco8SjHKSiMBf09BYzDzhDcNdUUWQzPWaiQTrqfiaeUGm8ANypQSSbtUBeJ9gZIdjzsbw1ucvXsis15rxRsgYLy3a6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cSzIkcZnBN1lM7Zv/8++NndRVXnA68TaGTwQobbZpQ4=;
- b=GimbDMOIDurDmlFc4AQopGnhj3YjxLiTFSPtNqyuHbFKQHixHZP2hCyv1/An2LCmLDRoe+RBwKChyibtj50bNdB70HcRVoBbXB93/BRBufFCBuvPIfZX+HTmEXfZdw7DNNvhDJUbK3U+VDdrILEovDdqZQc5xuuyiIGP5WUmpu9xNG4IZTtj4D+zwtTQBGee3NEa7ykrUZDSPS+d2bKbHhVaqpno3g1YJJC6M/dUtXKQGN6fjcN426NWxqD6bsMQYNfaV+PU3/0j+TM/6AFVtQPYZHNvse7SQsjC7pGgFAMB5ScD9WyxA8xle5jbdNLostoO9YXbwmwifmOCrAO/Zg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cSzIkcZnBN1lM7Zv/8++NndRVXnA68TaGTwQobbZpQ4=;
- b=cXND0Eu6jiqMyFK1anwtMhOcaWhHDo2zJp825M9F6rUezJMzhW4Wo7vi3Ih5anvziU5JU7EwrfvJRwEnjXWjbJOqws6DxVYludgiMRCheT/jqduKe6Uf2jAqwyfsyTpNAelVHqdxDc0xNK2qbFb7QiJC2UStDwUQUMfZLSMGavfdzKsKgIx0o51UQxVRRhPmjOFW7oVBw8i6pJzNZGfKsubZdowpkn+pbnw2TQzVcLx4ZyMo6d7aqwddUH7FM/Sf243Zk4tMvSxMvJfXONl/cLBCA3QH8w+rfI+Pi0Po/grgL6Dtp9MB3AxMW9Ra//j5pAkbCS+g5HjFlM7c9FEV4g==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Stewart Hildebrand
-	<stewart.hildebrand@amd.com>
-Subject: [PATCH] vPCI: resolve MISRA R10.1 boolean arithmetic type violation
-Thread-Topic: [PATCH] vPCI: resolve MISRA R10.1 boolean arithmetic type
- violation
-Thread-Index: AQHc6bIh2sSAML9OckiCBnGq/+88iw==
-Date: Fri, 22 May 2026 06:13:39 +0000
-Message-ID:
- <e23266191a366abe66d8104783d97578aa8734a4.1779428826.git.dmytro_prokopchuk1@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|PAVPR03MB9232:EE_
-x-ms-office365-filtering-correlation-id: c6dac1fe-26b8-4090-1168-08deb7c94447
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|1800799024|366016|42112799006|38070700021|56012099003|18002099003|11063799006;
-x-microsoft-antispam-message-info:
- DROTYvEnvoldsNKobNNziH8CdnblQjPcoiy/475aTlr4sIt2zoLndIOLjIuQQQC16GJdotCL2A9ww6b3vnOebHcdoYmxMtMlm66zoJMeTb21kjgBd0bWKxmxCBcqtUikqsMEpWuPjSXJUXmoT681YRm83ldlZ6Akg0Taz8v+j+OGKufllYxT9gDSCPqEj3AVqxgqtPxtYIy0we3pKEBnIf/1B/+laGp2ggo7AHDyZCjmrmVVcd6icUvcoR4tEhTj/rzE4miYhZ4z1QgiUHkRuZWJnu+qVoA9wrKYudtSQ4NAZJaEv1JXEgBAtXiYBx6UYbNsJ0WMaHHIwGStfn21f7K6o5A61Y4GIYSKXV0mt3eiEJINcsx5XVFEQzKMESeruHXoSBEfQOulzM48doxJJSGwW8kWBC/Sbkqpla5vLY7TBaB71+KMy7hzxRym/awWvKhEAxHj/5GTB7OtQ2fKFjV8SREdL2ekbN6ck62P5SsIXGW7ve8iYg7BcMz3NvscwW11v4jVc1c1nMBdbLwPI4+qBBSIcqM2IEMk5v4rgmOY2wV+/6oyGp+963p6L3XKzXK1nLK3pE2kuKCH2ZsZUxOaLxEtYb+PmgclESBO7MaIhFRqyjEUmYF32yWYKX7qDC38twmq5ey6nUaEsgYqblNZ+iVilPs5/F7IEHeuZhNt8uIIcYY/zh4txWMz4KHoeyn5j1jyUzrmRl2fPf7KOise6oWkKooZZC9UmJNJyJkgdX9PNOG36vGBmoo94IU6
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(42112799006)(38070700021)(56012099003)(18002099003)(11063799006);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?OZpSmYu4mwPGRygdwdyC7/ovEB/FnVzqKmhjniy9+g/w2tugokJzgQqK33?=
- =?iso-8859-1?Q?xJXSyCwVN0bN831FNlXARLHavWIu/2x2UYgOe62bmPFPj16+CZ/MJYt48O?=
- =?iso-8859-1?Q?vpNvMOkOljVZH6mljpVelt++l0ClvPEu/9co9J1mXY59DuJdxSiuP0OViR?=
- =?iso-8859-1?Q?RewoqUHe+H0urpZZCfbiQMmR3dSv74xwTN2uspMbWvtRjnxoqkz3GBsQDf?=
- =?iso-8859-1?Q?rT9Ce/emMzl6EPDMVpWMGdTKUphYKcajM3KLshduYhj6y4Npa/x4Q5c1yz?=
- =?iso-8859-1?Q?gdyt6Mp+uiZrJkyslFljMUV8Mq15Wb7ek0k9k88RLhEfo2iJKztmZGAgae?=
- =?iso-8859-1?Q?WtGIZxksebwAXyEFv3CB9ZNnZGSJmDTZClL5N15dGv11CTAEegFjAQXHNi?=
- =?iso-8859-1?Q?gdbJEeQxd5BJXAVqDG0miXHeLBcVoXNMjKkUdN1eAkKPp+xoLuEQO/Fw+G?=
- =?iso-8859-1?Q?ck1qc3xa/V5MB5a1OgHNUVIOg7KN7n1aUwpZpFdsLOUkIe8F95nUY6EAB3?=
- =?iso-8859-1?Q?lAazcMDxhvRPpHs85XdGqihO6LzxEybB6kEDcgerP49+76BSaBPAvBgTew?=
- =?iso-8859-1?Q?D8WNca7A1Z82wMWng824SsWGndoYXP0Tq9U996xfapTbbrGL08QT+jg/1B?=
- =?iso-8859-1?Q?1wlP8yQ/dzZQyhbIA69yF8Dg2wu2ax1hs+20SVRSLl2BDYNgXoWWlq07UH?=
- =?iso-8859-1?Q?FWrCp9NIUM79DGeg3mFnjY5W3k3T1dyt/DYzbGDi5GjutdyKMSC9oWUSt/?=
- =?iso-8859-1?Q?CUM19SfJ7eht61AlsMDsV+BhI0sDckdC3kjgGhRM4dv7QFUZAaxoOp+7z6?=
- =?iso-8859-1?Q?qYOSK0t7YJx1gceWUPHrznaFAU74/Bn4b00lzdaqY9pXWq4bXnBGXQolEg?=
- =?iso-8859-1?Q?gQVjCHVE574RzbT5JDOD8mFSuE83/dkZiGEYhufVDnnFQ5YsskzzX3wFZH?=
- =?iso-8859-1?Q?xZ4VJEMDJSKqZ/5gYz/+rz3PL5Rk6DpqGXa/gAKntloxaYcNfyzVbm1AKr?=
- =?iso-8859-1?Q?NSb8KRIsQDG0r2FT2jiVvlG67uVLJ89iwpEWpaX6xrFf7U6xrgwhf2aeuJ?=
- =?iso-8859-1?Q?dOS4GbHxBxciITca98wiH1LThTR3V6gxndyYBUu/XEKnGaouN/B01UTXJO?=
- =?iso-8859-1?Q?G6ZWtyjmheVjCv12cRd7+bZ2yNS6YoFgHiayhtsT9zHeV+S3kMiIm9P9Yr?=
- =?iso-8859-1?Q?WHlK6N3hI2eZ51EUG2+odJko0NBbSyQCL+7byR96mVRsn0IaTjFe9EAeYB?=
- =?iso-8859-1?Q?glGWg9mvBLDnTpZfmQn7wrKhtCylBMXy/u1HcDCzcQRcY6B/VrF7h6H8F6?=
- =?iso-8859-1?Q?A8Ek6LJrmtn+r7P/0nFtqFVMDl0Khe9/vr1zpTejQBz74MzMQ2OJL3zZz7?=
- =?iso-8859-1?Q?ilBlrSG3Dme5YCGPvn8CpzAYlSPMt8THW0rb5rHm/n55i7pF5cLx3jMdZi?=
- =?iso-8859-1?Q?U/rosxrVZqBIu6J83dbVfX6Ys1vEeE/aXWAj6ISzD2QSuIVxKZVrsun6Qd?=
- =?iso-8859-1?Q?UqpjL9a0HyESfRorr7O/XthJuqVVIi+3VcNMoxicTwBCzvubp5RcdgF/9E?=
- =?iso-8859-1?Q?LNDmRIaZLqzQ1JxH0CWz+lm2FwYA+h+iotQdxU+tC21ms49Xgj0jfRaXb6?=
- =?iso-8859-1?Q?50LjQVpYsW5+loqe18Oqvr+bUtG4mUaPL6GJkLqYnNh6zfwsbf5poeKArU?=
- =?iso-8859-1?Q?qHaiMWg5w6+OrPzB+wx1oNVqhIFKLYGUkf/QaRRZkxCF6MbmBTjnpGLm/0?=
- =?iso-8859-1?Q?uuJiSUBBe+SHN9gGinhMGf3niVXuybCkw7/FXlzB7kF1IybfB9v8Up2C+H?=
- =?iso-8859-1?Q?VOEnEbAuMUsF+sS3QG++UK081WNrcxs=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779430838; x=1780035638; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OXWRI7l7nK7SIe4W1b4avZ/Bw1tdkEXb3sGKmZFhqOg=;
+        b=ozY1tmOXhhdQQKc1kcwqjZ8FXx4C06qjCBT+0IXu8r6ivxqLEZ2nKcX3o07U/IqW8/
+         3tPKw74SWWK5QCd4bvey2PB/OUtNRgpHMSzgoqEEC8R6+yvmSM0CZ/hKKhWs1jECvRDp
+         SjqbUMkZm0Boa/UEQXrSsZspjzMEO3BfBZoCxOjuys5YD7/49j24elziiboszYFV7BGI
+         LO9JGc/yFDdJxQT0dIl+0Nu9GT925XUbw5gd8y5G8fv1kCGDqYNVZX5OqTEOWhQLjkMV
+         JwzeZf2b00bOG6uY0CAaIplZcUFuDu911V5OqCA17lfCSmOZahAb4CVP1wj1NMz9iEQ6
+         jATA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779430838; x=1780035638;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=OXWRI7l7nK7SIe4W1b4avZ/Bw1tdkEXb3sGKmZFhqOg=;
+        b=dvrDkcaaDUxH1A76uj0OzoM4MIyrJ1BMNh/OEiCBK2BdzB6SZw9GNiGjCbA55ELipo
+         dliT8+YNnwPCT1U8qWXXOSUWAvZDWvoeK/1p1wI8K7sSNa68aL5TOzOjTHz1k1EcDXQJ
+         EJyX/FaaTeW0loFyQ8E06VLwS7nuqcJN5o45jVeKFiKU2gHYGtDvXnNuUQERSHMjnSuc
+         u9kvewWQc0SJEOMAW9H3u2f1EOoUTZh0SsS1R6xfaWtL1jNoBU/M0FBFt/I4fFBO2fY5
+         wS+5gCrAxdZNj325AFoutaXTJMPJq5eVAtwvqIeaRxHQil+4cqEI5iOgUAFe2dd3OIh1
+         22uw==
+X-Gm-Message-State: AOJu0YzZgOUTNEJd9HyZ3iYrGqIhguGiY7ug8+c65Qkjq17UWI/xXHSl
+	Up0C5geqEsS24FbhRiacX9g0IHOOiJSMACCWl9iuSUk/M3sbrsslvIew21QZxoJL
+X-Gm-Gg: Acq92OGQsGgCl/2BcEEsItXb7vY5zPonkEQ+1JtVKHeTmEwtnJAFGhX7ueyX1Li3VCm
+	jqVbeux2teCs2Xy+Q520RsSTJ7etyf8XILDMrpMcsZCbvmKwTiUVd1ytf6h+Mkh2QGiaKBiaeJn
+	ZgkOQizzrXIbOvNNIeYoiG2qtHgqgwIkkQN2YdtWEFf+JoNwckVp6/7XDrtqAW6QDAwDmuj9U29
+	xptrGVMSpI8LUkbxhp8tAuskPu93M7TsnG4WQLSJhNj2tO1oik5K1kEe1YPe8nCsBzeddMHKkob
+	sZoOlgkMWwS7qvt//dsbsyped7vXF9tmdno+FqpVmh4qM0zUGX8YMGviLISUVkmH3FAGrdBFkII
+	L1FrMuxl2wUiKd3XsjPzwTxybR+9t+dW50J1r9Cqx0EKTrN41ns+p5J2j9mn0cFA9ls0psgW96j
+	MxYMroMhk7cdOdKJc2YmBMl9Pfyg==
+X-Received: by 2002:a05:600c:3547:b0:48f:e230:8caa with SMTP id 5b1f17b1804b1-490428f2dc2mr20958225e9.30.1779430837544;
+        Thu, 21 May 2026 23:20:37 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 1/2] xen/arm: propagate vGIC vCPU init failures
+Date: Fri, 22 May 2026 09:18:26 +0300
+Message-ID: <f9a0308092deb2135d32ad9fc2c5ccafc8a7320e.1779430299.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1779430299.git.mykola_kvach@epam.com>
+References: <cover.1779430299.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6dac1fe-26b8-4090-1168-08deb7c94447
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 May 2026 06:13:39.4629
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: un+vYQZIqXktoHKVAEih5IcRB0EKJSOujd1weP+pNVDBUogiUxQIaA1HFHwnXGzqQAPhSzlvWtd7sKRzbExWVvARXO88+xsvYiwMJ9gv/bo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR03MB9232
-X-purgate-ID: tlsNG-720697/1779430425-80979161-9C4D3E7E/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1779430838-2997A3FF-8ED48185/0/0
 X-purgate-type: clean
-X-purgate-size: 1645
+X-purgate-size: 4972
 
-MISRA C Rule 10.1 states: "Operands shall not be of an
-inappropriate essential type".
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-Boolean values cannot be directly used in arithmetic operations.
-Convert boolean to integer in vPCI header bar index calculation
-using the ternary operator to satisfy strict type checking rule.
+The vGIC per-vCPU init callback can fail. In particular, GICv3 rejects
+a vCPU when the domain's redistributor layout has no MMIO slot covering
+that vCPU. However, the generic vGIC init path ignored the callback
+return value, so vcpu_create() could succeed with an invalid vGICv3
+per-vCPU state.
 
-No functional changes.
+This can be reproduced on FVP Base RevC by exposing a 2 MiB GICv3
+redistributor region to Dom0 and booting Xen with:
 
-Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+    maxcpus=1 dom0_max_vcpus=64
+
+The host GICv3 redistributor range is:
+
+    region 0: 0x0000002f100000 - 0x0000002f300000
+
+With Xen's guest redistributor frame size of 128 KiB, that range covers
+16 guest redistributors. vCPU16 and above have no corresponding
+redistributor slot.
+
+Before this fix, Xen detected the missing redistributors:
+
+    d0: Unable to find a re-distributor for VCPU 16
+    ...
+    d0: Unable to find a re-distributor for VCPU 63
+
+but ignored the error and continued as if the secondary vCPUs had been
+created correctly. Dom0 then saw 64 possible CPUs and could hang during
+secondary CPU bring-up:
+
+    smp: Bringing up secondary CPUs ...
+    d0v15: vGICR: SGI: unhandled word write ... to ICACTIVER0
+
+Propagate the vGIC vcpu_init() error so the caller can stop creating
+secondary vCPUs. With this fix, Dom0 construction reports:
+
+    d0: Unable to find a re-distributor for VCPU 16
+    Failed to allocate d0v16
+
+and the guest continues booting with the vCPUs created before the
+failure:
+
+    smp: Brought up 1 node, 16 CPUs
+
+Free the private IRQ rank allocated by vcpu_vgic_init() on this error
+path. The caller will still run the generic vCPU creation cleanup, but
+XFREE() clears the pointer so that cleanup remains idempotent.
+
+Also fix the host-layout redistributor region count for the case where
+the requested vCPU count is larger than the capacity of all host
+redistributor regions. The old code always stored i + 1 after the loop.
+That is correct when the loop stops inside a valid region because the
+requested vCPU count is covered. If the loop exits after consuming all
+hardware regions, i is already equal to the number of allocated regions,
+so i + 1 records one region too many.
+
+In the same FVP setup, that off-by-one made Xen describe host-layout
+GICR state beyond the populated redistributor region list. Dom0 then
+accessed the GICR MMIO window described in its device tree, but Xen could
+not match the access to a valid emulated redistributor frame. During
+debugging this was seen as an unexpected vGICR access followed by a
+guest panic:
+
+    d0v0: vGICR: unknown gpa read address 000000002f10ffe8
+    pc : gic_iterate_rdists+0x4c/0x104
+    Kernel panic - not syncing: Attempted to kill the idle task!
+
+Keep the existing best-effort Dom0 policy: a failure to create a
+secondary vCPU stops the secondary vCPU creation loop, but does not fail
+the whole Dom0 boot.
+
+Fixes: ea37fd21110b ("xen/arm: split vgic driver into generic and vgic-v2 driver")
+Fixes: 54ec59f6b0b3 ("xen/arm: vgic-v3: Don't create empty re-distributor regions")
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
 ---
-Test CI pipeline:
-https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2545399814
----
- xen/drivers/vpci/header.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/arm/vgic-v3.c |  3 ++-
+ xen/arch/arm/vgic.c    | 10 +++++++---
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index a760d8c32f..2b7f78728d 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -586,7 +586,7 @@ static void cf_check bar_write(
-         if ( val !=3D (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
-             gprintk(XENLOG_WARNING,
-                     "%pp: ignored BAR %zu write while mapped\n",
--                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
-+                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 :=
- 0));
-         return;
+diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
+index 77517c3030..360778eb32 100644
+--- a/xen/arch/arm/vgic-v3.c
++++ b/xen/arch/arm/vgic-v3.c
+@@ -1834,7 +1834,8 @@ static int vgic_v3_domain_init(struct domain *d)
+          * not match the number of pCPUs). Update the number of regions to
+          * avoid exposing unused region as they will not get emulated.
+          */
+-        d->arch.vgic.nr_regions = i + 1;
++        d->arch.vgic.nr_regions = (i == vgic_v3_hw.nr_rdist_regions) ?
++                                   i : i + 1;
+ 
+         d->arch.vgic.intid_bits = vgic_v3_hw.intid_bits;
      }
-=20
-@@ -647,7 +647,7 @@ static void cf_check guest_mem_bar_write(const struct p=
-ci_dev *pdev,
-         if ( guest_addr !=3D bar->guest_addr )
-             gprintk(XENLOG_WARNING,
-                     "%pp: ignored guest BAR %zu write while mapped\n",
--                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
-+                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 :=
- 0));
-         return;
-     }
-     bar->guest_addr =3D guest_addr;
---=20
+diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+index 6647071ad4..e55e484493 100644
+--- a/xen/arch/arm/vgic.c
++++ b/xen/arch/arm/vgic.c
+@@ -368,7 +368,7 @@ void domain_vgic_free(struct domain *d)
+ 
+ int vcpu_vgic_init(struct vcpu *v)
+ {
+-    int i;
++    int i, ret;
+ 
+     v->arch.vgic.private_irqs = xzalloc(struct vgic_irq_rank);
+     if ( v->arch.vgic.private_irqs == NULL )
+@@ -377,7 +377,12 @@ int vcpu_vgic_init(struct vcpu *v)
+     /* SGIs/PPIs are always routed to this VCPU */
+     vgic_rank_init(v->arch.vgic.private_irqs, 0, v->vcpu_id);
+ 
+-    v->domain->arch.vgic.handler->vcpu_init(v);
++    ret = v->domain->arch.vgic.handler->vcpu_init(v);
++    if ( ret )
++    {
++        XFREE(v->arch.vgic.private_irqs);
++        return ret;
++    }
+ 
+     memset(&v->arch.vgic.pending_irqs, 0, sizeof(v->arch.vgic.pending_irqs));
+     for (i = 0; i < 32; i++)
+@@ -944,4 +949,3 @@ void vgic_check_inflight_irqs_pending(struct vcpu *v, unsigned int rank, uint32_
+  * indent-tabs-mode: nil
+  * End:
+  */
+-
+-- 
 2.43.0
+
 
