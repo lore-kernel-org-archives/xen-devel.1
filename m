@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61133CD5BC7
-	for <xen-devel@archiver.kernel.org>; Sun, 24 May 2026 00:02:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1318180.1586558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B62CD5BC8
+	for <xen-devel@archiver.kernel.org>; Sun, 24 May 2026 00:02:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1318177.1586539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQwIh-0002WP-8M; Sun, 24 May 2026 00:02:39 +0000
+	id 1wQwIa-00020s-OG; Sun, 24 May 2026 00:02:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1318180.1586558; Sun, 24 May 2026 00:02:39 +0000
+Received: by outflank-mailman (output) from mailman id 1318177.1586539; Sun, 24 May 2026 00:02:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wQwIh-0002W8-34; Sun, 24 May 2026 00:02:39 +0000
-Received: by outflank-mailman (input) for mailman id 1318180;
- Sun, 24 May 2026 00:02:38 +0000
+	id 1wQwIa-00020j-LV; Sun, 24 May 2026 00:02:32 +0000
+Received: by outflank-mailman (input) for mailman id 1318177;
+ Sun, 24 May 2026 00:02:31 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wQwIg-0002Sn-1d
- for xen-devel@lists.xenproject.org; Sun, 24 May 2026 00:02:38 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wQwIZ-0001n8-35
+ for xen-devel@lists.xenproject.org; Sun, 24 May 2026 00:02:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wQwIf-005yCJ-E1
- for xen-devel@lists.xenproject.org; Sun, 24 May 2026 02:02:37 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wQwIY-005yAt-FY
+ for xen-devel@lists.xenproject.org; Sun, 24 May 2026 02:02:30 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a123fb2-e002-0a2a0a5209dd-0a2a4502816c-38
- for <xen-devel@lists.xenproject.org>; Sun, 24 May 2026 02:02:37 +0200
-Received: from [52.101.125.80]
+ id 6a123fa3-2eae-0a2a0a5409dd-0a2a450c9d92-46
+ for <xen-devel@lists.xenproject.org>; Sun, 24 May 2026 02:02:30 +0200
+Received: from [52.101.125.127]
  (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a124018-af86-0a2a45020019-34657d50d7f2-4
- for <xen-devel@lists.xenproject.org>; Sun, 24 May 2026 02:02:37 +0200
+ id 6a124013-62f1-0a2a450c0019-34657d7f2312-4
+ for <xen-devel@lists.xenproject.org>; Sun, 24 May 2026 02:02:30 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by OS9P286MB4275.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:2ca::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Sun, 24 May
- 2026 00:02:33 +0000
+ 2026 00:02:28 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0048.016; Sun, 24 May 2026
- 00:02:33 +0000
+ 00:02:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mefU6PraNR7PEz8+XUZO1X7VadVogLNBRy9swjuCETpWD0h3CcEbyKrp+yUH85hhm5ZKUbA9CzkwnELYl7rPn5cKfZu2bHFPdbFJ9OFSxl7ha1YNlmYXHTjk961HJVE2RSePQ62JsznrRbEQr3d6mZNH1+Vi0GNbbmHa1bzR8HxHRfWINwteyURoEeMSD+6bzWojQD5ScqWIVHlOmOdv/mEgV+WG2ZtqXbH48m0QsForbInjMnhp5jIj5CPhAQpsGNfV8hhBYUmpYmdnEtu/xDN+/FriE8OgebYjjBGQajwACwSO7CLcBLeLaYceX8vwlvTgmRawQXIBoPlFEN54+w==
+ b=KFr1mfrAx7rNqF+hvL6SYtx52/aMH2athAbZg12Q65BcKhPerre+70If0MTRJ0yakbs3TQG1CKpKa/aZyBeoQFJA324jddF3fr6wF1GqVoncZSHHxRZmPfDc1h6hmE2N7X5ZTUFsOZ/X8B79HAThBGwUi7oNEKXhkGjF3IbgFLd8iFVKPjNufpy1Ef2WWmowWvCtI0mMXSTBnhHODoM60pJx7/2DjWxx5p6z04Q49925nbY1/C1/d1KznbXK9ObQN0W8UfvjDQKBYBOws7nGVb94iW+jplrmdlOCb6QG35BXqW8Hy9NeEj6O7+GXzszPH+jTK8dYDUCe8uL2gcXVow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WVIHzGP7xPG+QeB7F8sNCSVrdxqJXbQqFgu/3yZPit0=;
- b=e+mcNfU2BzWjwNhQe+1c8ivVxFCumRJswBO+4qcszFfzM5RpstpCFycIwYqBfDkRpV1U4bcodtlqWzxsAxwSdxuyaW7AFIzzGHC3ffpiDvDvltISytN9Z9ZPDtX/l/sF+DCjirE2guXANSToFItymmeKjguEQ2uyGW1ODrxVxHrh9ELsiLQK1YL1FlZVHt/O+67z5MKEn2yZi3aYzH7SSGCyR7Z9KkufHgsin/QbSP+FQPcs8k/ekp+Nw9Xjo2lnZ6N636dpPAn04Z2iBktGiO+5zeiqg+YemOkuCm5ca0s2kfUkU0GVbwO3iMR+bmvcIst8r4TjUx/h0RdqiROG3w==
+ bh=2UfY/3UMMggWHpVy8hTvzn9Q/XVS99ND9b9p8Gen/A8=;
+ b=R+nv58p/w2FBN7x+0o/VBUN5tKnZ9zKAf8fkll0bo5tPdXl/xJZhOQaaC8OZ6Jov7PUZlgpqY5q1eebKOyaCG/2AOXs+B5NFFtZpvLY1ZqqW3yiIm/QGaRJMhvdeT6Jdxm9hK7smtLf2ypVIgZWD5IZzYGl1o/mJt8KSJfkHNkSAxktSQ4sDUO9TkZkF74lESWVmRuuou22nrBC8xvXVGlxXQpKibDKFCWk7j1GGtxVAbE9NwkTlhygLwi+tjypa/F8hbC5Sxp6noAE9r0p2vL8sTdegNN2C7fpfMQALb37kto3fQLFYjIoCTGWIlXGdpzFRy2oTAXKcDNyG+ijYCA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WVIHzGP7xPG+QeB7F8sNCSVrdxqJXbQqFgu/3yZPit0=;
- b=uUCFMeZ6s0Tztnt425HoYusX0mARTsM8x+ho0Jei8n4Zydxv1C3fUca3MwuCgOKG1O2u34vvl5T43fSlUsAJJyKxEi883K7qgBhVIM1RiQL2NbqXAGzwbdZElmZ2KweQdNHIDG1sBI+WgAHiOaG9FVMwoNO+nIDJ0eAmD7w1/P4=
+ bh=2UfY/3UMMggWHpVy8hTvzn9Q/XVS99ND9b9p8Gen/A8=;
+ b=idq0Xw8FXNUNpAylWnYEsWot+JrpoHNK1mVK/F9o/GKpt+7nfm9TWFJNm0UJU2tWg4RafIakP6JODVl/TRVji7popEFYcKp4qKedQ3wzP6X2SyBuLt9zVRbBfkJbD0scIM9NqqBShtinlwPeOfz52Hzmhl66twXNDObf2vDUo6U=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
@@ -88,260 +88,182 @@ Cc: andrew.cooper3@citrix.com,
 	dfaggioli@suse.com,
 	gwd@xenproject.org,
 	Hirokazu Takahashi <taka@valinux.co.jp>
-Subject: [PATCH 04/21] xen/arm: Configure NUMA affinity for populated memory banks
-Date: Sun, 24 May 2026 09:01:52 +0900
-Message-ID: <20260524000209.292370-5-taka@valinux.co.jp>
+Subject: [PATCH 02/21] xen/arm: NUMA helper functions via Device Tree helpers
+Date: Sun, 24 May 2026 09:01:50 +0900
+Message-ID: <20260524000209.292370-3-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260524000209.292370-1-taka@valinux.co.jp>
 References: <20260524000209.292370-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0369.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:79::13) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0362.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:79::16) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|OS9P286MB4275:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93085a46-e6ce-491a-b2fc-08deb927c191
+X-MS-Office365-Filtering-Correlation-Id: df9bbf5e-7fda-4f2b-7e7d-08deb927be96
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|7416014|376014|366016|22082099003|18002099003|56012099003;
+	BCL:0;ARA:13230040|1800799024|10070799003|7416014|376014|366016|22082099003|18002099003|56012099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	1NTHi9kcwwryqCBSper2HnSXkdNuqsOu0+eBBM6pTDvSLZRND/ixN8FztL1vCR7988Ampf2lWXzwoZZhwn/T4BxfQnQzCzfWVqEh9tS5bQBMseaCprqGLDtpPH9HqOdSwgUA/jgnwzg5bX1j8A/OPIo5v2KK0sHRwf/c3OmeeoQK4+2u+rxD05KlVPa8pl0qoNr9C9YCw7PbaAueT4USIg14Yym5Elo10LN9od75yC5RDVb+lwzKfdMiEu5I0uJxvLyuz+l1LZKZ4CPbqwlqJmSPkHADUeJPZr0D0/YOJp8R1DopG7ac/Wr8LKipNOWIcmzS/I62keviFbLgc7CHAQxLB+vS93SmrRm7lGa5pHbdyyjAevCjJQJdH7SWsll2/zIG6pec9ryQPJ+L7Ua2dxIEqI1i6iIRO7A7sKJs4tUPDg5UpG+q+tFdeBVVRmu5QgXvynOQ6ZlXGs48n0P3BRNv9rTp7CadSB0nuC9Sow7UpR6h4F2zJ6/yrVEnhEKRlK/HsXnpCSuMA+QkZTjx7I0ajPplS7Eri3QzBrgpLeOrhHw91x5DQORLtaDMNY69iIGr4AoEnmV2wnKwpaDPmsXrSxSuxFaLWtXgrPcKMG2gblY+3Pk9Hcp2CUrVOQO7Tim5TTZ4tCdUEHGRo5wH89CJxV/VZSY1IbYnAHgvuZ5Lj4MCY3kfOPfyPSF425EX
+	MDNCcxtxK0T2M49WJme8aLzQgtWjoM7ulHUY74PoPexnCPzJabwdncCJI4gzgz3XAVxjcIdSne2WCEGV5bqTqqUH3LVzjoYoZBG9BF2lBqh9CJZq8GJxFEz5tBQ77ag8qW9x9cZvSarAge8CJ63EUdemnxqajSwNNO3/gtBDmgNSF7M31vVDwc7Y/WwbawxA6rNmftq4sJ4ndE9RBSSzR3vH9bZKQfSjOLQxK80LSB1a0YI+F1wfB9mTAmf2sqYSaZvZx/xmnCksplq6iYvRsEnN1xlRHRGhKFbTFNXZChFnS82vXnR21SKC6CDpSXHWc5mEeDmAog3BvaMHwzrg93u9xVwCUcbiPfsbhKai0Z6hwSMnSVZ65nReqVdk7hrCfJQRRRiu4FLg+jwTtcbCDIRw7mhZzwM+++DUwlSmKjq/0koZYJUfitv8YCOl85bbDoAChCBlLcW29Oynhx8m++MYdzyb0pAu8JdbioyAw3nflRyk1r7cCD72Hm6lNzFoPxPuM3v3gDOL/HFbX+UjJgub/RwjBO7Ojp+saPkj0YCfW5xw8da1U0dfLuFxq+gwLbj6i3naNS6ywBMKV+8Vs4H/ScLVxj/rLJKXLRVJX61eASa9Dt5nei9X2oN80IlNBYZeK+IvJRJFivw2UlnoaqZNLiYqp8cT5sVM6aRf1fGiY4IWql/fQrKxo7xQ1fYX
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(7416014)(376014)(366016)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(7416014)(376014)(366016)(22082099003)(18002099003)(56012099003)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?XECKhY1rSWj2c0XCKAUrMpJ6BwxDNm/mGbmT3EqLf+IUoykStYHgzBKPkT3q?=
- =?us-ascii?Q?+yqFc4pyZN2Mk28Z/Bu6bBT2Yv5AsAoUbmcUyhPb9jDrjOPL0/m0wy6yUp26?=
- =?us-ascii?Q?yF6V0VB5ll7bjYMY1OSlEc9u3HvmXd/9X4AKIMXAL07sDIXpBKxRiFvwJRIE?=
- =?us-ascii?Q?CUlpSnprIfh8SUPI1YJl8dko7eZUPUFTy3XOVtMjoCgNvZ5tw+2lerKwT1RJ?=
- =?us-ascii?Q?zjuhh0bECS26fZSGV5v7ZArUYZOV/S2Lsvaz+/KVNhWEiKvbvCD5OnoTUIey?=
- =?us-ascii?Q?MqbHLYqSKfSH1DdKoMeT6WxtZ9WX3Z508ZrFna37ivtqJMU+miBJHbmHiScO?=
- =?us-ascii?Q?p/Lj/UxjpDLDYotUqUMVhN9VVscODHVXDyJV6V6A0P89NzcTuOPDQBH1lQ+8?=
- =?us-ascii?Q?6F2cMSGYxXrNU6tpy2xA8jMUCgguMn3Hu3pzaByu/DMxKY2pRPiGXxO4rAl3?=
- =?us-ascii?Q?t+T9tnVVzrntI/3mNN7HPQBDIuut8korPxDkIPCvXb82eI+kt/fp4SFQn++n?=
- =?us-ascii?Q?DAlkUvJz5m4+XirjUF6k+HXxyxj0I3uaNc5IunjK/ZvT/04NvGge7XaG+Rg6?=
- =?us-ascii?Q?V3JfD8WDaUSre6qHaC6ugdT616KU3pg/vJgqB1ZjCeMD8F3769rDL9mitYFv?=
- =?us-ascii?Q?mM6Q/zDp6FDJm1r0BD9snyouD88SJYYE0ZETUJG4UiDKx+3pdNOE6C1kuLR/?=
- =?us-ascii?Q?XZThINv+OHZ3QuJHMdJRe6QRVBTuqri7V2pbG8TWKffDzM0lbfDEEQ/yhhwQ?=
- =?us-ascii?Q?PXYEXcDsskN6W8CUSJJ7lD83HVLycFulOEKjP6r/nlIqF/hta+nRb1Byma0+?=
- =?us-ascii?Q?QpYLhCxJjEr6ogO/RhuJSh/QYtNwSQ7gF9BiAjlNaszN62Df/IrRxhwex9rb?=
- =?us-ascii?Q?/sqGsPzvsVzcDLOX+bG/f1vBAPwgVjRLm2i83ZFSzZzn2uYC/bSJWxboidx7?=
- =?us-ascii?Q?3csiNYhmY0ni2gfEoqSzc9Svu/7wz5dmVXAlTOuJFaV/PkwdiCaYYUfKChll?=
- =?us-ascii?Q?FdM++juOkhRAVI3Kq6ziI+KIBD7xuNLnNVc8iKHrgo5s8JmdrOqSUyARxHHd?=
- =?us-ascii?Q?va0bJR71xdCEJGOcUtGKFp9hzaffMy23Mww4hTNIcQvwr+4woxPsyPMs/K7v?=
- =?us-ascii?Q?/CPOMcQHfte89Z4yl68oTkhAaJaqcv9BT5Q3f7S8AS8GMXHyrIQT0gvyklCT?=
- =?us-ascii?Q?X3CsHIZEuWWZT7uoX+xFslR+QiUvKWjYlJz2eTZPo+NlADpf1S27U9m5zsia?=
- =?us-ascii?Q?Obfx30CuVrifSD7yFHCPDbBy9Ht88eCiKpYDXkAJF8zsFuQ65WvaUmjSzI2R?=
- =?us-ascii?Q?+10jts3oJ8eCLgCi2GkdfZ/EGrj27FCkS6Pdf9pnnCuuGNQkiWT+bgl6Eejw?=
- =?us-ascii?Q?LnRsrFRkvkqSHQaTVSlL166nCNLipn3snBs2UyzWia2ne1WLe1Cl4Z9iMMod?=
- =?us-ascii?Q?sASSt4uKLGN0hsz23Mc5oEYjVAiO3kGG0kmVxdQbksfE4KVe8rZ2d+StS8O1?=
- =?us-ascii?Q?SVFp079eK1f5dOn0yYBhH4idEVGa5dMO5sltWWxxN+B6BVfhgqe6IvhRpTzX?=
- =?us-ascii?Q?C2gPhgX6FOEFwoIogsd3q0i+qBZBod4GDd1xucVK/WBr0wVuAq+UaihTfxQU?=
- =?us-ascii?Q?MgJ0WdWLXz9bR94E81JATbRyXMcCSayayikBZctPkrgHtRKPuCqT2ziFd/aT?=
- =?us-ascii?Q?vYOKBnNlhwjEuinDEl7ArZoSITeFKkgtyivzSIwJ6giCzmxpppUjQmHTlLMe?=
- =?us-ascii?Q?WAJ1gtqNQPezFUJAikbTukgd+taCvr1iUvD7cWH2Tj1WTqsscH2fhoPL2vZz?=
-X-MS-Exchange-AntiSpam-MessageData-1: 8BZSR9vUGrSIjA==
+	=?us-ascii?Q?xBjJUdMFMY2sxBaqThQafBvuvY41q7wOhHhlGA9vHKGIqAJf1ra5iPqbLrvy?=
+ =?us-ascii?Q?veFEsaOFoGxRo9aCIHzrj09vL1NbDC5ULBVF2Alscu9bFwQe7TLDjub25j59?=
+ =?us-ascii?Q?vwUuFQW90PN0QIatyFRHmrPcqgZ1VhKNuewpwtEJSjxouC6NlRRhbnqRIp3i?=
+ =?us-ascii?Q?M8UruoWv40xK36fdB9NmpSHlT5Z5UODuWBBrz3Un4v8VbNI/0xkGOW2LDAHD?=
+ =?us-ascii?Q?pInzs06KoSUJS7JryyusYOIhTPE2jE9mLPGcN9Fs37d4wB3rbmLxnuOaUt0q?=
+ =?us-ascii?Q?OgbKL2y18bNjAhg+ghuCxBXNHYy59mrQQBV8e2x8xUkITp67naQHN3lK0NgP?=
+ =?us-ascii?Q?z3srmDzDynJ7teRAZMHd3IdRCOi2S/ruddNhUA42dt6qmYO46qNJg6ZfpQZS?=
+ =?us-ascii?Q?V4/T7TsXxTWTZbabQYBVB8b43a4Jz9JMCe45Ct8Wi+bfU21+cr8Drw3vhi12?=
+ =?us-ascii?Q?HymLYw1NfxeRKYG7zJE5Y6fwaatc4DuH0zjHotCn0fgvoa0Rq0xM10f6A8bs?=
+ =?us-ascii?Q?O1DM3eD5P5Z5xsC1ifsNogfsVOBkH7lFlzWw+V/ykExWNbCOfF4Bm2GzVdHg?=
+ =?us-ascii?Q?yN5kCWu7Yzu/lpoM+0gRMdfA5FlaBE40QE1WIUsFqchcsbatKruEHa5lS0iJ?=
+ =?us-ascii?Q?T4ec8Fe93PMQVUhFOt+OQSmP7wOsOrULUJEAJF6WklE+ndby9zqHBLxh3MOM?=
+ =?us-ascii?Q?OutbVn/uELTTZJRUR38z+QGHoWFMNDO5/i0s7FNhc5pjrrGQztHjuWIaubJ3?=
+ =?us-ascii?Q?RS2A/eAXnHaelmnH3+4Ir0EIdGgtnQnnyT3r3+CJJv6Urtpp93kWcu0qNS+i?=
+ =?us-ascii?Q?0x8U1Gd44azrS+V6aVXGy7v9ht/OLX28RpVC5A6tIaPBbiDojtufCuXYwChU?=
+ =?us-ascii?Q?0GFXAz/bQ5WkAAAF56nKI3FKWiV6FzQ3loDJCn7q8o2smrm5EvucXJBE7xzW?=
+ =?us-ascii?Q?rfFf19FNs5Nxft5j5/hCSP0Cd/0oNs8KubGrGo6zAFbEkoMGtkKzdIbRLtCz?=
+ =?us-ascii?Q?cBeq1pPxJL3IxXoNEhzHuFkpryoN7a4EFDtE1AdP8D7KtWi9yU85GIvQnWNT?=
+ =?us-ascii?Q?QkPq9NhR7gTrgfNSdD1AjEL7/tQKqLZfoD8ZG2apa6UqN4dqlvwvcjITzj33?=
+ =?us-ascii?Q?hfw1aUsZdO3NJu48/wTvyTDmPzoM+2l3r82CHbGgt7ZLVyhO8gf0va6En5VQ?=
+ =?us-ascii?Q?kyqL/8116FXEEuUd3ki/OVpxbl27P2ZZijx8SaBG9uT219zwshyyygFFIKTv?=
+ =?us-ascii?Q?ZeOYegLsZn0TQxBnBs/h2Z2ixVT0rskkePMVrb6q88YAAymseQBcE1WkiuWK?=
+ =?us-ascii?Q?rEW6GSM3f/34g4vkS7+NYvda0DOPjXsTy93+foSdwySmTbCPb9iaS9gXv+gp?=
+ =?us-ascii?Q?Xx2KxUiI9OLczKBBFqj4bQu7jnqpR1NtxYl+5JuMF2/32ZA96oLvMbNEsMVx?=
+ =?us-ascii?Q?FBu5RKFYFXoVFdxeDC364qgTYYc0XaAKCn4bR89h4JFVOFcxBVImkxXTETmK?=
+ =?us-ascii?Q?aIt2LbNDVJhOjMQ1KPeOUnP2BcSTz/yyIeyJoafbyfHxQk7Xy3PwBEWKVU2Y?=
+ =?us-ascii?Q?0AKoWiVt1058TiPNm153nRoRhm50Q1HCbM4B3GWrUwcY22+wqgIDBe+vO0AN?=
+ =?us-ascii?Q?AAjMeWijit5zFyxdDaMCw+gGe74j7hqYqOgZuSl+wq75l+8f0FtjjFWykUoA?=
+ =?us-ascii?Q?cF39ADzBxUiAjlp55umyn2PZwvTAu6VQyo0/kc+oNVGmrES/hg3FvgMftDP2?=
+ =?us-ascii?Q?vCMY1ka42A7crobhwXNRCL3I4iSxDqSqWSDHpdRvByInWXtm+G6rF+A/zGp+?=
+X-MS-Exchange-AntiSpam-MessageData-1: rH2jOF8uG9UzAQ==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93085a46-e6ce-491a-b2fc-08deb927c191
+X-MS-Exchange-CrossTenant-Network-Message-Id: df9bbf5e-7fda-4f2b-7e7d-08deb927be96
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 May 2026 00:02:33.6397
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 May 2026 00:02:28.6628
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GqCf37imG9GErcyKDXFmJbjs6gvZ9FFm7KWEcRdYST2jd3LGyoIu5zh8jY01S9lzI16+NNGwVlg1baK3pVtAcQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: am0fyNu7DBvXQXk9xWtx4Pwz73oA+e9rNhxrG57p1JHBU2sFe46eqij5blOWpD1oIwCrJoyKqHexCuonuRPsWQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS9P286MB4275
-X-purgate-ID: tlsNG-720697/1779580957-A8B78161-D1620810/0/0
+X-purgate-ID: tlsNG-d25034/1779580950-F4A7ACF5-FAAA2D2F/0/0
 X-purgate-type: clean
-X-purgate-size: 6123
+X-purgate-size: 2693
 
-Configure NUMA affinity for the populated memory banks. The NUMA
-node ID for each memory bank is retrieved from the Device Tree.
+Implement the NUMA helper functions for ARM Xen by invoking
+the Device Tree-based NUMA helper functions.
 ---
- xen/arch/arm/include/asm/numa.h       |  1 +
- xen/arch/arm/numa.c                   |  7 +++++++
- xen/arch/arm/setup.c                  |  2 +-
- xen/common/device-tree/bootinfo-fdt.c |  8 ++++++++
- xen/common/device-tree/numa.c         | 29 +++++++++++++++++++++++++++
- xen/include/xen/bootinfo.h            | 23 +++++++++++++++++++++
- xen/include/xen/dt-numa.h             |  1 +
- 7 files changed, 70 insertions(+), 1 deletion(-)
+ xen/arch/arm/Makefile           |  1 +
+ xen/arch/arm/include/asm/numa.h | 18 +++++++++++
+ xen/arch/arm/numa.c             | 53 +++++++++++++++++++++++++++++++++
+ 3 files changed, 72 insertions(+)
+ create mode 100644 xen/arch/arm/include/asm/numa.h
+ create mode 100644 xen/arch/arm/numa.c
 
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 982c6c396a..d732918dac 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -51,6 +51,7 @@ obj-y += setup.o
+ obj-y += shutdown.o
+ obj-y += smp.o
+ obj-y += smpboot.o
++obj-$(CONFIG_NUMA) += numa.o
+ obj-$(CONFIG_SYSCTL) += sysctl.o
+ obj-y += time.o
+ obj-y += traps.o
 diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index a1fa54f2e7..6f1ccb4eb3 100644
---- a/xen/arch/arm/include/asm/numa.h
+new file mode 100644
+index 0000000000..a1fa54f2e7
+--- /dev/null
 +++ b/xen/arch/arm/include/asm/numa.h
-@@ -12,6 +12,7 @@ typedef u8 nodeid_t;
- extern bool numa_disabled(void);
- extern unsigned int numa_node_to_arch_nid(nodeid_t n);
- extern u8 __node_distance(nodeid_t a, nodeid_t b);
-+extern void numa_memory_affinity_init(void);
- 
- #define arch_want_default_dmazone() (num_online_nodes() > 1)
- 
+@@ -0,0 +1,18 @@
++#ifndef _ASM_ARM_NUMA_H
++#define _ASM_ARM_NUMA_H 1
++
++#include <xen/cpumask.h>
++#include <xen/vmap.h>
++#include <xen/dt-numa.h>
++
++typedef u8 nodeid_t;
++
++#define ZONE_ALIGN (1UL << (MAX_ORDER+PAGE_SHIFT))
++
++extern bool numa_disabled(void);
++extern unsigned int numa_node_to_arch_nid(nodeid_t n);
++extern u8 __node_distance(nodeid_t a, nodeid_t b);
++
++#define arch_want_default_dmazone() (num_online_nodes() > 1)
++
++#endif /* _ASM_ARM_NUMA_H */
 diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
-index 080d7892ae..15cad3d267 100644
---- a/xen/arch/arm/numa.c
+new file mode 100644
+index 0000000000..080d7892ae
+--- /dev/null
 +++ b/xen/arch/arm/numa.c
-@@ -36,6 +36,13 @@ int __init arch_numa_setup(const char *opt)
-     return 0;
- }
- 
-+void __init numa_memory_affinity_init(void)
-+{
-+    dt_numa_memory_affinity_init();
-+
-+    numa_initmem_init(0x0UL, 0x1UL << (PADDR_BITS - 12));
-+}
-+
- int __init arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
- {
-     return bootinfo_get_ram_range(idx, start, end);
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index c0202d9ff6..cdabf536b0 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -352,7 +352,7 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
-     acpi_boot_table_init();
- 
- #ifdef CONFIG_NUMA
--    numa_initmem_init(0x0UL, 0x1UL << (PADDR_BITS - 12));
-+    numa_memory_affinity_init();
- #endif /* CONFIG_NUMA */
- 
-     end_boot_allocator();
-diff --git a/xen/common/device-tree/bootinfo-fdt.c b/xen/common/device-tree/bootinfo-fdt.c
-index 272b5a6c0a..2d0e809231 100644
---- a/xen/common/device-tree/bootinfo-fdt.c
-+++ b/xen/common/device-tree/bootinfo-fdt.c
-@@ -121,6 +121,9 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-     const __be32 *cell;
-     u32 reg_cells = address_cells + size_cells;
-     paddr_t start, size;
-+#ifdef CONFIG_DEVICE_TREE_NUMA
-+    uint32_t nid;
-+#endif /* CONFIG_DEVICE_TREE_NUMA */
- 
-     if ( !device_tree_node_is_available(fdt, node) )
-         return 0;
-@@ -136,6 +139,10 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-     if ( !prop )
-         return -ENOENT;
- 
-+#ifdef CONFIG_DEVICE_TREE_NUMA
-+    nid = device_tree_get_u32(fdt, node, "numa-node-id", 0U);
-+#endif /* CONFIG_DEVICE_TREE_NUMA */
-+
-     cell = (const __be32 *)prop->data;
-     banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
- 
-@@ -158,6 +165,7 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-         mem->bank[mem->nr_banks].start = start;
-         mem->bank[mem->nr_banks].size = size;
-         mem->bank[mem->nr_banks].type = type;
-+        set_numa_nodeid(&mem->bank[mem->nr_banks], nid);
-         mem->nr_banks++;
-     }
- 
-diff --git a/xen/common/device-tree/numa.c b/xen/common/device-tree/numa.c
-index 06f2c8b102..539ddfccc5 100644
---- a/xen/common/device-tree/numa.c
-+++ b/xen/common/device-tree/numa.c
-@@ -22,3 +22,32 @@ u8 dt_node_distance(u8 a, u8 b)
-     return LOCAL_DISTANCE;
- }
- 
+@@ -0,0 +1,53 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Initialize memory affinity by registering bootinfo memory banks into Xen's
-+ * NUMA subsystem.
++ * Helper functions for ARM NUMA.
++ *
++ * Copyright (c) 2026 VA Linux Systems Japan K.K.
++ * Author: Hirokazu Takahashi <taka@valinux.co.jp>
 + */
-+void __init dt_numa_memory_affinity_init(void)
-+{
-+    const struct membanks *mem = bootinfo_get_mem();
-+    unsigned int bank;
-+    nodeid_t nid;
 +
-+    numa_fw_nid_name = "DT";
-+
-+    for ( bank = 0 ; bank < mem->nr_banks; bank++ )
-+    {
-+        nid = get_numa_nodeid(&mem->bank[bank]);
-+
-+        if (numa_memblks_available())
-+        {
-+            numa_update_node_memblks(nid, nid, mem->bank[bank].start, mem->bank[bank].size, false);
-+        }
-+        else
-+        {
-+            dprintk(XENLOG_WARNING,
-+                "Too many numa entries, try bigger NR_NODE_MEMBLKS!\n");
-+            numa_fw_bad();
-+            break;
-+        }
-+    }
-+}
-diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
-index 7923be2b38..d01a28b359 100644
---- a/xen/include/xen/bootinfo.h
-+++ b/xen/include/xen/bootinfo.h
-@@ -7,6 +7,7 @@
- #include <xen/macros.h>
- #include <xen/xmalloc.h>
- #include <xen/errno.h>
++#include <xen/bootinfo.h>
++#include <xen/init.h>
 +#include <xen/numa.h>
- 
- #define NR_MEM_BANKS 256
- #define NR_SHMEM_BANKS 32
-@@ -56,6 +57,9 @@ struct shmem_membank_extra {
- struct membank {
-     paddr_t start;
-     paddr_t size;
-+#ifdef CONFIG_DEVICE_TREE_NUMA
-+    uint32_t numa_id;
-+#endif /* CONFIG_DEVICE_TREE_NUMA */
-     union {
-         enum membank_type type;
- #ifdef CONFIG_STATIC_SHM
-@@ -228,4 +232,23 @@ static inline int bootinfo_get_ram_range(unsigned int idx, paddr_t *start, paddr
-     return 0;
- }
- 
-+#ifdef CONFIG_DEVICE_TREE_NUMA
-+static inline uint32_t get_numa_nodeid(const struct membank *bank)
-+{
-+    if ( numa_disabled() ) return 0U;
 +
-+    return bank->numa_id;
++#if CONFIG_ACPI_NUMA
++#error "ACPI NUMA isn't supported yet."
++#endif /* CONFIG_ACPI_NUMA */
++
++
++bool arch_numa_disabled(void)
++{
++    return false;
 +}
 +
-+static inline void set_numa_nodeid(struct membank *bank, uint32_t nid)
++unsigned int numa_node_to_arch_nid(nodeid_t n)
 +{
-+    if ( numa_disabled() ) nid = 0U;
-+
-+    bank->numa_id = nid;
++    return numa_node_to_dt_nid(n);
 +}
-+#else /* CONFIG_DEVICE_TREE_NUMA */
-+#define get_numa_nodeid(bank) (0)
-+#define set_numa_nodeid(bank, nid) {}
-+#endif /* CONFIG_DEVICE_TREE_NUMA */
 +
- #endif /* XEN_BOOTINFO_H */
-diff --git a/xen/include/xen/dt-numa.h b/xen/include/xen/dt-numa.h
-index 721e8955fa..c6939d0928 100644
---- a/xen/include/xen/dt-numa.h
-+++ b/xen/include/xen/dt-numa.h
-@@ -14,6 +14,7 @@ static inline unsigned int numa_node_to_dt_nid(u32 n)
- #ifdef CONFIG_DEVICE_TREE_NUMA
- 
- u8 dt_node_distance(u8 a, u8 b);
-+void dt_numa_memory_affinity_init(void);
- 
- #endif /* CONFIG_DEVICE_TREE_NUMA */
- 
++u8 __node_distance(nodeid_t a, nodeid_t b)
++{
++    return dt_node_distance(a, b);
++}
++
++int __init arch_numa_setup(const char *opt)
++{
++    /* parse "numa=" option */
++    return 0;
++}
++
++int __init arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
++{
++    return bootinfo_get_ram_range(idx, start, end);
++}
++
++bool __init arch_numa_unavailable(void)
++{
++    return false;
++}
++
++void __init numa_fw_bad(void)
++{
++    printk(KERN_ERR "%s NUMA info is broken.\n", numa_fw_nid_name);
++}
++
 -- 
 2.43.0
 
