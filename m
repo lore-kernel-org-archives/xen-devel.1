@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74959CD5BB1
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 13:21:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319264.1586963 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF54CD5BB1
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 16:32:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319362.1587005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRVEr-0000bT-PH; Mon, 25 May 2026 13:21:01 +0000
+	id 1wRYDV-0001H1-2Z; Mon, 25 May 2026 16:31:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319264.1586963; Mon, 25 May 2026 13:21:01 +0000
+Received: by outflank-mailman (output) from mailman id 1319362.1587005; Mon, 25 May 2026 16:31:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRVEr-0000bM-LW; Mon, 25 May 2026 13:21:01 +0000
-Received: by outflank-mailman (input) for mailman id 1319264;
- Mon, 25 May 2026 13:21:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wRVEq-0000ON-IX
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 13:21:00 +0000
+	id 1wRYDU-0001Gu-VM; Mon, 25 May 2026 16:31:48 +0000
+Received: by outflank-mailman (input) for mailman id 1319362;
+ Mon, 25 May 2026 16:31:47 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <xakep.amatop@gmail.com>) id 1wRYDT-0001Go-GJ
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 16:31:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRVEp-00DYzL-Uo
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 15:20:59 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wRYDS-00FFFO-Pu
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 18:31:46 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a144ca0-bab6-0a2a0a5309dd-0a2a4504bc44-26
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:59 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a144cbb-1dec-0a2a45040019-d1558036b511-3
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:59 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4906869f0cbso6852675e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 06:20:59 -0700 (PDT)
-Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4904526ca21sm247101985e9.3.2026.05.25.06.20.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 06:20:58 -0700 (PDT)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a147953-e002-0a2a0a5209dd-0a2a4508da4c-34
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 18:31:46 +0200
+Received: from [209.85.167.53] (helo=mail-lf1-f53.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a147972-63b5-0a2a45080019-d155a735ddca-3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 18:31:46 +0200
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-5a8cb92f26aso10419033e87.1
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 09:31:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,150 +48,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1779726706; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TW74qCTXuNcoEDs+JwjELR+Rmu+P+pjMdnxYa05fTiWEIDCBK5Pjn7kJ/rDltv3jRG
+         JBxjZ/twu3Jyvo3gNtDpVE9PfVLPDw3wAt0yLNMdBaSV8VWV5wFHFMWqS+6yEaGn8xuK
+         +lQAAn92Idk68FfggzFiaDE75NlQ6bfhGSBDwARZ7qj1ZsOthJqrqKO5IH0fz4zOEDAm
+         VD3d/YsXXxlV1HcHHy/Y+UocmbIiKzuzS1O/jclu+LyFB8Jbn/Iq6zte/2xBxC8jlnMU
+         fTQkA94r9cyg/A9+1vSydtEe2VAN22IOsyakloHx91IiTETf/qAgkeHCSh5xtNhRgRzJ
+         cF0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=bdjHvJti1PFGKhzoVezSMAeyJZDGbVl6BB/kPZLIlDY=;
+        fh=9JZxiMpSfuLqiQWy+/Qm7fbwQ+MYsT4GTch2ySqG6FU=;
+        b=RDg8EY3RqMTzqcCNj529l6Nq0K8Q0/+NNRkq8S0X8GvVzgHjhENRd4dj2Le1Ye2gz8
+         x9haK7DQds0t8M0Ks48cZCIQgII788RgeCR7jj3Z2mSHE6epgsN4b++M7TxurikRuViW
+         XTsiYP9nXW9yarYjKvw3t9NAxa81TSqcUJmfOp0pYiR23wDzWsKu7wQSi/GhyIDT2Vtp
+         N/H3FCT3h5eELk8/UZgPx/O/9M4R7LMBLmC6RXZNjlG2qjs5xk51A0/Q0VtIZNhE2W2n
+         tTUIodRTRHS2QieB4OOQExLHkUfH5kOOjj2bCZcFvXG4mYRw1BXNKhRYW37+a11jKztN
+         hr+A==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779715259; x=1780320059; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1779726706; x=1780331506; darn=lists.xenproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Y01U/cIdeBHcv5iWEI8HdRJZlY3tdB5kvE1STP1YdwU=;
-        b=lXidjKzQ9FDcmeQfJHsotFVw6fopOjayFqcLzGrZVxk90XRsQBUrwuInxdCm00ITmC
-         h6yvCfIR74XV0uE+Zcw8+OaR+A4My2SQQaHL+8P2HQzJCMTTckpZ/OCUTSZ55dexowu6
-         OKVsXmLerkgjLvIpG2AEd9F2hVg++fc9FBDOpKKXtv6OWjH2R9hIZggI2hffWtOZxRDD
-         lH9GMcZ9cNMUQLM9kgWTlKzrAUN6fqDD+5TFcUsh05Kj2MZEm9KtgcEqj225EjaovPq4
-         vj+I+ve8K8o/oqTrwEkCdlRgGdI/qwo+ooDQBl1MsxnrmpyS8n/lykTTkoH0xn85ih55
-         XYkA==
+        bh=bdjHvJti1PFGKhzoVezSMAeyJZDGbVl6BB/kPZLIlDY=;
+        b=rH6y+YZMTI0WxeSl7vVgcMx265xN/fqMrZ8poD0M5sSVyhtpRnKqu1Om2vTm2UqZdF
+         Pf/DTs8CS6GisVXx2r1hjWAAbBFVPJhvVGkRQk4Jbi8XYMDtYTwuJxE3xGX07HHri+pd
+         D2e7Uw+1GRMWn4RmxQqZ18kiCsUFmg6jNfJ//DqJe1CZq5vUojNOimJR/CXmYuGvj5lq
+         9wYB+qbgOViNZr+B/7rTAIew+KsaHIkslqTDrgNyZnMA5Doe4Vk43Tmu6jMBPk9LXtO5
+         LK0MI/RgfnEnk3B5HBP51cMtlaQWL8bQcxUJMpdxGqZMITI5R3eBawlpg7koiFC1TeQ3
+         gwAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779715259; x=1780320059;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1779726706; x=1780331506;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Y01U/cIdeBHcv5iWEI8HdRJZlY3tdB5kvE1STP1YdwU=;
-        b=QFMbJTzJCXzh9LDcxcZo1fSjqq/3I+O2CCtIqKFw83cKeOBdqiNMFmPujI78ZprE2g
-         tfzcnScsZDm0r/TAAUz2J9HbLJeV6v6t6A5E2oXIxqtXYvJG/2BlxMxQurzigXcqKD9U
-         n1g+Rj1diLlZ/3fKRxiDtmxkWFau4qAM0/apACQ4jWgxwYH+xVRNrJNfYDnyjCHA2Y6F
-         Kw/+QegPnd71Bd6REKqvHnRDEJ3Ryx6Wl5t9cAGqDBgLLziQaxWRRHWbxHxC+btFyXyN
-         MRhW3uOwYYWQWwHnDJ8vdbf3pRDuxIMEoAMPzT/0Ak40sNko8xbLo20FHIMZCwccpatW
-         qvkw==
-X-Gm-Message-State: AOJu0Yz1kwA8UVtt0xh995QW363H4952h7cAXQ9rTecjsgcusLtHNWe1
-	OJ8zti6fioGz0j73vJTTCXJxqMwmThZeh44vsvXO1HGCVLpklkXao7vECfTiv45a
-X-Gm-Gg: Acq92OFArsnl9RVpN7oMIG6yEPia1OWFchmW3ezrYPctbVsogcTnPAxXpJL+PEeibt8
-	ac7giFR/giZAnM0qTj/JWFHel0yYe26oFMUntSASYxjwq6qHfi2Z31Z5EbfWHCDohKyPfHvwJ6s
-	uEM4/kbjfJ+hb04RF5o/YRtyhIjBlJUBGu03YcUcVzi9Swqbm02HJcVb+CxjVDYfX+yCEQ1GM7V
-	mc5MHB6HdpjTQK+FoxWvjs7TBIMznOUtnU9MbCqQPNOCikfM711f4WCJjaSf/3H1FJxlxPEtb2W
-	ji89dcWYDKOAcZtcontrq0XYZGGHWiQzchRulEJD/WAMEfWbWcBF4BZmbocg880FVkgcRu0iAdu
-	eckYr6m6bc93Si+eMHL+9+Em6xorgTzUwE7udvPS/7QGhsICTSSCebG3y258gMRaGjSk4TTM0Ds
-	+kRAn1BrDsw87lIGB3qARXBVyT4/yYS7jtN4214POZOY5djzdpadm/PrETsbuURlF+3A==
-X-Received: by 2002:a05:600c:4510:b0:48f:d5a0:284e with SMTP id 5b1f17b1804b1-490428e03b8mr229165155e9.28.1779715259120;
-        Mon, 25 May 2026 06:20:59 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 2/3] xen/domain: fix UBSAN null pointer dereference of d->shared_info
-Date: Mon, 25 May 2026 15:20:43 +0200
-Message-ID: <04dd784b6b9a4dfca9a313ea8802d8d514d65021.1779712171.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <cover.1779712171.git.oleksii.kurochko@gmail.com>
-References: <cover.1779712171.git.oleksii.kurochko@gmail.com>
+        bh=bdjHvJti1PFGKhzoVezSMAeyJZDGbVl6BB/kPZLIlDY=;
+        b=YF4mhSznY6h5YrKnY3h1mFvqz0DzYeutH8gYkiAUCPQpnsEEwzBq5NFy8hHs26sWv8
+         oBLxaVvjLK2XoNLIRXm3VNSJ0GVys/wQZYtSsM5WOIRNH+cp/g4pD25hmvD+QFo0DGgx
+         IHbHC7/LDyvHbXVTfX6A2Mfe+fJ3RYZebYdasiolAJsgCKUi/vOMzclnlqnbLVWxoYEO
+         BZ3D63Z7oBekEKasrCmBmk+tyRFSE1FxSmYbtnbwIfDAOLDWKYWf3LqwRRvCtdD8Vdnk
+         R5MTY0VaECnjffJjElyxpL2OGGMwZnUf9CHMoss05rzl7rKwlHMEo9DaZZGLMpOTjWTG
+         caZA==
+X-Gm-Message-State: AOJu0YymPq8+CRj+3NNNMdeZTmd7CwcjJuVqLhXkEBkZn7qtY8kNOxaV
+	TPh/zaYfT8kuM1OPOe0/rRWeBCQ21jykSf83U8Yc2DPXqzDHoqEdnn1g54LoL/resQ9M3kTEqpj
+	nO+9fdVYwzvLRD0JU+bqONxl7fZHDlh0=
+X-Gm-Gg: Acq92OEL4Fp84pQ+rZL0P+qZsoveKXKc4GBeoGXUxt+wEEBCYL9oUrcSKBGJS0AyXqi
+	V1twyaZ7Ov+9UlTYzKJo4XcDaP7M/q+K0CjKCVIhcrHD897ouj8L0cqQBafWct+gFDDURxutWSr
+	XnJEgNpH0H56AwDP16Aqm54S1nnp0LeB+T3ExjrSL1brR9kwOQonDF2dXCOEqtruHJdY9iiN49R
+	UQm1tSAMi3ACb/uV6CqBDxd+shiZJLLaox+XQDEcmDR4IH4SvNrSYLQ4s3RUAu70elk8pswr3fc
+	J2K0
+X-Received: by 2002:ac2:54bc:0:b0:5a8:6b89:5e5b with SMTP id
+ 2adb3069b0e04-5aa323cf6admr3635114e87.36.1779726705738; Mon, 25 May 2026
+ 09:31:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1779715259-40B733FF-A7992848/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3702
+References: <9ae4f7dd49f5b1f761193adae573c2675c92e883.1779051035.git.mykola_kvach@epam.com>
+ <ag+C21L9WoH3ngg8@kraken>
+In-Reply-To: <ag+C21L9WoH3ngg8@kraken>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Mon, 25 May 2026 19:31:33 +0300
+X-Gm-Features: AVHnY4K5F0OU4tmh7fdxYvq7UIAaTrEP1RX1L81qx53F7Ov3mquqO3EjVwIDgJI
+Message-ID: <CAGeoDV-Tpt4Qa2fdWCwFdAfvcOSyssnyBn3w_fEvArJxf7eiww@mail.gmail.com>
+Subject: Re: [RFC PATCH] device-tree: size first hwdom bank for boot modules
+To: dmukhin@ford.com
+Cc: xen-devel@lists.xenproject.org, Mykola Kvach <mykola_kvach@epam.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c1860d/1779726706-BE577DB1-01B0C2FC/0/0
+X-purgate-type: clean
+X-purgate-size: 8052
 
-It is legal to have d->shared_info equal to NULL for architectures which
-support only the FIFO ABI for event channel management.
+On Fri, May 22, 2026 at 1:10=E2=80=AFAM <dmukhin@ford.com> wrote:
+>
+> Hi Mykola,
+>
+> The patch looks good!
+>
+> I would try to add a CI coverage for QEMU aarch64 tests, since QEMU
+> supports multiple RAM banks topology.
+>
+> What do you think?
+>
+> Also, few remarks below.
+>
+> On Sun, May 17, 2026 at 11:57:56PM +0300, Mykola Kvach wrote:
+> > From: Mykola Kvach <mykola_kvach@epam.com>
+> >
+> > With LLC coloring enabled, the hardware domain memory comes from
+> > allocate_hwdom_memory(), not from the fixed direct-map banks used when
+> > coloring is off.
+> >
+> > Commit de99f3263555 ("device-tree: Improve hwdom memory allocation for
+> > DMA") made that allocator sort free host regions by ascending address s=
+o
+> > Dom0 gets DMA-capable low memory first. The first bank filter still onl=
+y
+> > required 128MB. That can select a low region which is large enough for
+> > the heuristic, but not large enough for place_modules() to put the Dom0
+> > kernel, generated DTB and initrd contiguously in bank 0.
+> >
+> > Ask arch code for any additional first-bank size requirement. On Arm,
+> > compute it from the actual Dom0 kernel placement, rounded initrd size a=
+nd
+> > generated DTB size hint. For 64-bit Image kernels, include the text off=
+set
+> > from the candidate bank start, because the returned requirement is comp=
+ared
+> > with a bank size measured from that start. The hint covers both the nor=
+mal
+> > Device Tree path and the minimal DTB created for ACPI boot.
+> >
+> > Check the first-bank threshold against the size which will actually be
+> > assigned to Dom0, after capping the host region by the remaining unassi=
+gned
+> > Dom0 memory. Otherwise a large host region could pass the test but stil=
+l
+> > produce a first guest bank too small for place_modules().
+> >
+> > Use the typed min()/max() helpers for this normal allocation arithmetic=
+;
+> > MIN()/MAX() are intended for preprocessor-style contexts and skip the t=
+ype
+> > checking provided by the lowercase helpers.
+> >
+> > This keeps the DMA-oriented allocation policy from de99f3263555 while
+> > preventing a too-small bank 0 from reaching place_modules().
+> >
+> > Fixes: de99f3263555 ("device-tree: Improve hwdom memory allocation for =
+DMA")
+> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> > ---
+> > Test/setup notes:
+> >
+> > The failure was reproduced on a Renesas H3ULCB/R-Car H3 (r8a7795)
+> > arm64 board booted through U-Boot/TFTP and using huge initrd.
+> >
+> > Relevant Xen command line excerpt:
+> >   dom0_mem=3D2048M llc-coloring=3Don
+> >
+> > Boot module layout from Xen:
+> >   MODULE[2]: 0x0000000084000040-0x000000008e75d92f Ramdisk
+> >   MODULE[3]: 0x00000000a0000000-0x00000000a3ffffff Kernel
+> >   MODULE[4]: 0x00000000a4000000-0x00000000a400ffff XSM Policy
+> >
+> > The initrd is about 168MB. With LLC coloring enabled and the low-addres=
+s
+> > allocation policy from de99f3263555, Dom0 can receive a 192MB first ban=
+k:
+> >   d0 BANK[0] 0x00000048000000-0x00000054000000 (192MB)
+> >
+> > That bank satisfies the old 128MB minimum but is too small for the
+> > rounded Dom0 kernel, generated DTB and initrd placement. The observed
+> > failure before this patch was:
+> >   Panic on CPU 0:
+> >   Not enough memory in the first bank for the kernel+dtb+initrd
+> >
+> > With this patch, the same boot skips the too-small low region for bank =
+0
+> > and reaches Dom0:
+> >   d0 BANK[0] 0x00000057000000-0x00000084000000 (720MB)
+> >   d0 BANK[1] 0x0000008e800000-0x000000c0000000 (792MB)
+> >   d0 BANK[2] 0x00000500000000-0x00000521800000 (536MB)
+> >   d0: extended region 0: 0x48000000->0x54000000
+> >   Loading zImage from 0x00000000a0000000 to 0x57000000-0x5b000000
+> >   Loading d0 initrd from 0x0000000084000040 to 0x5f200000-0x6995d8f0
+> >   Loading d0 DTB to 0x5f000000-0x5f011c80
+> >   Linux version 5.10.194-yocto-standard
+> > ---
+> >  xen/arch/arm/acpi/domain_build.c        |  2 --
+> >  xen/arch/arm/domain_build.c             |  8 ++++++
+> >  xen/arch/arm/include/asm/domain_build.h |  4 +++
+> >  xen/arch/arm/include/asm/kernel.h       |  8 ++++++
+> >  xen/arch/arm/kernel.c                   | 35 +++++++++++++++++++++++++
+> >  xen/common/device-tree/domain-build.c   | 27 ++++++++++++++-----
+> >  xen/include/xen/fdt-kernel.h            |  8 ++++++
+> >  7 files changed, 83 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/xen/arch/arm/acpi/domain_build.c b/xen/arch/arm/acpi/domai=
+n_build.c
+> > index 249d899c33..db16f7fa94 100644
+> > --- a/xen/arch/arm/acpi/domain_build.c
+> > +++ b/xen/arch/arm/acpi/domain_build.c
+> > @@ -26,8 +26,6 @@
+> >  #undef virt_to_mfn
+> >  #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
+> >
+> > -#define ACPI_DOM0_FDT_MIN_SIZE 4096
+> > -
+> >  static int __init acpi_iomem_deny_access(struct domain *d)
+> >  {
+> >      acpi_status status;
+> > diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> > index 1efddc60ef..226e053c68 100644
+> > --- a/xen/arch/arm/domain_build.c
+> > +++ b/xen/arch/arm/domain_build.c
+> > @@ -115,6 +115,14 @@ int __init parse_arch_dom0_param(const char *s, co=
+nst char *e)
+> >                               (IS_ENABLED(CONFIG_STATIC_SHM) ?         =
+\
+> >                                (NR_SHMEM_BANKS * (160 + 16)) : 0))
+> >
+> > +paddr_t __init dom0_get_fdt_size_hint(void)
+> > +{
+> > +    if ( !acpi_disabled )
+> > +        return ACPI_DOM0_FDT_MIN_SIZE;
+> > +
+> > +    return fdt_totalsize(device_tree_flattened) + DOM0_FDT_EXTRA_SIZE;
+>
+> I would invert the condition so it is read more straightforward:
+>
+>     if ( acpi_disabled )
+>         return fdt_totalsize(device_tree_flattened) + DOM0_FDT_EXTRA_SIZE=
+;
+>
+>     return ACPI_DOM0_FDT_MIN_SIZE;
+>
+> [..]
+> > diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+> > index b72585b7fe..3644663e2f 100644
+> > --- a/xen/arch/arm/kernel.c
+> > +++ b/xen/arch/arm/kernel.c
+> > @@ -128,6 +128,41 @@ static paddr_t __init kernel_zimage_place(struct k=
+ernel_info *info)
+> >      return load_addr;
+> >  }
+> >
+> > +static paddr_t __init kernel_placement_size(paddr_t load_addr, paddr_t=
+ len)
+> > +{
+> > +    return ROUNDUP(load_addr + len, MB(2)) - load_addr;
+> > +}
+> > +
+> > +paddr_t __init arch_get_min_first_bank_size(struct kernel_info *info,
+> > +                                            paddr_t bank_start)
+> > +{
+> > +    const struct boot_module *mod =3D info->bd.initrd;
+> > +    const paddr_t initrd_len =3D ROUNDUP(mod ? mod->size : 0, MB(2));
+> > +    const paddr_t dtb_len =3D ROUNDUP(dom0_get_fdt_size_hint(), MB(2))=
+;
+> > +    paddr_t kernsize;
+> > +
+> > +#ifdef CONFIG_HAS_DOMAIN_TYPE
+>
+> Perhaps use `IS_ENABLED(CONFIG_HAS_DOMAIN_TYPE)` to reduce ifdefery?
+> My impression that IS_ENABLED() is preferred.
+>
+> > +    if ( (info->type =3D=3D DOMAIN_64BIT) && (info->image.start =3D=3D=
+ 0) )
+> > +    {
+> > +        paddr_t load_addr =3D bank_start + info->image.text_offset;
+> > +
+> > +        /*
+> > +         * The caller compares this value with a size measured from
+> > +         * bank_start, so include the text offset before the kernel.
+> > +         */
+> > +        kernsize =3D ROUNDUP(load_addr + info->image.len, MB(2)) - ban=
+k_start;
+> > +        return kernsize + initrd_len + dtb_len;
+> > +    }
+> > +#endif
+> > +
+> > +    if ( info->image.start =3D=3D 0 )
+>
+> Here too: invert the condition?
+>
+>        if ( info->image.start )
+>            kernsize =3D kernel_placement_size(info->image.start, info->im=
+age.len);
+>        else
+>            ...
 
-Having d->shared_info == NULL leads to a UBSAN issue on such architectures:
-  UBSAN: Undefined behaviour in common/domain.c:325:10
-         member access within null pointer of type 'struct shared_info_t'
+I think I will keep the explicit info->image.start =3D=3D 0 check here.
 
-vcpu_info_reset() maps v->vcpu_info_area.map to the per-vcpu slot inside
-the domain's shared_info page for vcpus with id < XEN_LEGACY_MAX_VCPUS,
-and falls back to dummy_vcpu_info for vcpus beyond that limit.
-Extend the existing fallback condition to also cover the case where no
-shared_info page has been allocated, mapping the vcpu to dummy_vcpu_info
-instead. This is the correct behaviour: dummy_vcpu_info already serves
-as the safe stand-in for vcpus that have no usable shared_info slot.
+In this code, start =3D=3D 0 is an established special case rather than jus=
+t
+a numeric input to the helper. kernel_zimage_place() handles it
+explicitly as the position-independent image case where Xen chooses the
+load address. Keeping the branch in the same form matches the surrounding
+code and keeps that special case visible.
 
-Additionally, if an architecture supports only the FIFO ABI, setup_ports()
-should be updated to avoid a NULL pointer dereference of d->shared_info,
-since in that case there will be no pending events in
-shared_info->evtchn_pending and the pending flag of the FIFO event channel
-does not need to be set to true.
-update_domain_wallclock_time() accesses d->shared_info via shared_info()
-macro. On architectures that do not allocate a shared_info page (currently
-RISC-V, which runs guests in dom0less mode without the PV ABI), this causes
-a NULL dereference. The early return is safe: if there is no shared_info
-page, there is nothing to update. For all existing architectures (x86, ARM)
-that do allocate it, the guard is never taken and behavior is unchanged.
-
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in v2:
- - Update commit message + subject.
- - Drop Fixes tag.
- - Handle migration of pending events from 2L and FIFO ABIs when arch
-   support only FIFO ABI.
- - Update the commit message.
- - Protect some other places in common code from NULL pointer deref of
-   d->shared_info.
- - Drop R-by: Baptiste ... as some extra checks are added.
----
- xen/common/domain.c     | 2 +-
- xen/common/event_fifo.c | 3 ++-
- xen/common/time.c       | 3 +++
- 3 files changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index bb9e210c2895..e64b7df9b704 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -320,7 +320,7 @@ void vcpu_info_reset(struct vcpu *v)
-     struct domain *d = v->domain;
- 
-     v->vcpu_info_area.map =
--        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS)
-+        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS && d->shared_info)
-          ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
-          : &dummy_vcpu_info);
- }
-diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 37cba9bc4564..59d9bf4c7ec0 100644
---- a/xen/common/event_fifo.c
-+++ b/xen/common/event_fifo.c
-@@ -562,7 +562,8 @@ static void setup_ports(struct domain *d, unsigned int prev_evtchns)
- 
-         evtchn = evtchn_from_port(d, port);
- 
--        if ( guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-+        if ( d->shared_info &&
-+             guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-             evtchn->pending = true;
- 
-         evtchn_fifo_set_priority(d, evtchn, EVTCHN_FIFO_PRIORITY_DEFAULT);
-diff --git a/xen/common/time.c b/xen/common/time.c
-index 04a65f00b35c..1ee49a8b0d13 100644
---- a/xen/common/time.c
-+++ b/xen/common/time.c
-@@ -94,6 +94,9 @@ void update_domain_wallclock_time(struct domain *d)
-     uint32_t *wc_version;
-     uint64_t sec;
- 
-+    if ( !d->shared_info )
-+        return;
-+
-     spin_lock(&wc_lock);
- 
-     wc_version = &shared_info(d, wc_version);
--- 
-2.54.0
-
+Best regards,
+Mykola
 
