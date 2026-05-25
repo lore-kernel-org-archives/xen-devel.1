@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82885CD5BB1
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 12:34:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319244.1586936 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C11CD5BB1
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 13:21:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319263.1586954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRUVY-0001dK-Sd; Mon, 25 May 2026 12:34:12 +0000
+	id 1wRVEq-0000OQ-EV; Mon, 25 May 2026 13:21:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319244.1586936; Mon, 25 May 2026 12:34:12 +0000
+Received: by outflank-mailman (output) from mailman id 1319263.1586954; Mon, 25 May 2026 13:21:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRUVY-0001dD-Pe; Mon, 25 May 2026 12:34:12 +0000
-Received: by outflank-mailman (input) for mailman id 1319244;
- Mon, 25 May 2026 12:34:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wRUVW-0001d7-Uc
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 12:34:10 +0000
+	id 1wRVEq-0000OH-Az; Mon, 25 May 2026 13:21:00 +0000
+Received: by outflank-mailman (input) for mailman id 1319263;
+ Mon, 25 May 2026 13:20:59 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wRVEp-0000Am-7A
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 13:20:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRUVW-000UM1-AW
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 14:34:10 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wRVEo-00FBlO-Ce
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 15:20:58 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a144183-bab6-0a2a0a5309dd-0a2a4502ce5a-46
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 14:34:10 +0200
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a144cb6-2eae-0a2a0a5409dd-0a2a450bc874-2
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:58 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a1441c2-af86-0a2a45020019-d1558030ad0e-3
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 14:34:10 +0200
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4891c0620bcso59159005e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 05:34:10 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
- [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6c9b980sm24572047f8f.3.2026.05.25.05.34.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 May 2026 05:34:08 -0700 (PDT)
+ id 6a144cba-212f-0a2a450b0019-d1558029ec5d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:58 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-49056b9f04aso23460195e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 06:20:58 -0700 (PDT)
+Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4904526ca21sm247101985e9.3.2026.05.25.06.20.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 May 2026 06:20:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,99 +52,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779712450; x=1780317250; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=EtOkphMfX6TR5pyMQMgePijKmseksZc4kKw2RdMlj8k=;
-        b=G7szZoMEhrTKaFpim04Ahzo2dY9UMzrg17lQoxAy6uFZly0zJde6uRDb+2flPHB6dV
-         7GdE5LQcl+u9emTf+0zLLP9v6YrR1rhdbnDpJOiCgSJsiNM/rPQWLce3bRksJo6CSRxX
-         mAxSIodMiwaV4xcAe2jlti3a/vjOnQrOpZvWtty1V7Wr72EzhfvtTFYxu/seHXlvqCjE
-         OazIDrbG/MqwISjyF4legM4rtrqTeuLGmAsjqHRPtkWmXOkcCSYqkFDmUEV/Lca6ubvc
-         DP9TNTB++KniejoidsxbIm2I1/RmtwAyDfw+ADCBky4rEuojdjM1WR6VnK8Yf4TQTJYp
-         nbwA==
+        d=gmail.com; s=20251104; t=1779715258; x=1780320058; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mhYowuyAWGSpmaN++lAXXVAbSyUZzptdaqiWvdE8iRk=;
+        b=h+NL8aXgs+6cVmWHqSA0JpneZl8KikOtvxPqpozCYSp8U4ATGEHA1gnyBqlKxIK19o
+         aV2e6JfL/ZbSmLM0xaW6Tjtg/1O+G129/9vZ6OEF/nTr2vSVN5HPvCxz5yYEazovHobF
+         nF/CamXqZSt2v0HqldWtFyAlC2SE5LlcrhwgMfL28nca5QHdAgwB0KmdlwRkDJfmdVrg
+         ERM8O8sQgmiuo/nQf/INcLh72FnD8jSQ2f7/F50P3XJY9DtpzoVnJKzd9dfOtwvrbNZt
+         6oKYrIsOoLrtjbOzSJCuDrtm6HswiQ4+nnwCj8/g+TUENKs60SkJLj/hgaDh88CVMX/L
+         nTkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779712450; x=1780317250;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EtOkphMfX6TR5pyMQMgePijKmseksZc4kKw2RdMlj8k=;
-        b=jXZZYx2u4OgOEMFx1V7YbNqOYFUxFp34khutQ6uWvNBOLa85KT5WMCemQVeZroMjGa
-         RqpDB+OSwfhk5w06NSsAfyRiNkD+Z52U+xB041fCinzYF9iGl5CiP7/zOi9jOqE4OM6K
-         fbnKq2LFa9LwLXx0qAqW+u5YciPZU8oC9jir4R07+RRPcBhj8f2PSmh5Ss8ctGiXrz+X
-         AUE9DE1JJcTxkHohLEjgzCWfteaPhWA+O83SeHH7S98YY6IsZsH26iX3AFJsAbS6Jo03
-         jTJ5uos9wel2WIk2AHMyNP2o4Pafd+8USfwIMTQyT/4DvhtvioUYWxqf0QLdaNsjach3
-         hv1Q==
-X-Forwarded-Encrypted: i=1; AFNElJ+Tq3JfWGpo+jXhs/ATs+2xoXt4joXwQUYws50TPE05vUXlU+0EWFtBGA+f1OykQf5ZggQBYsXqlKQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzFcS9M63abfx2tvwHpU8o7wjUlgoiBPrl7nQK+9wyXE8k9j2Fp
-	uLBe3o0e+EmELqekyG9DA5PkJ1AS2VUY8d4k3eRadJpmXWIepPmSZJZ7A8Y24Kcl
-X-Gm-Gg: Acq92OHi3H/E7fNPYEAj00rddPHdRb+DgWxmvWhbze8mINwBmNqy9kVkR/IWJtapgL5
-	jkQ/pwZNXOOvh/jWNiQcP24NoG5hzz1CfMxml1Kuto7LT8W34Gr4nCwi4NQ/x0De6NziYf9kFj2
-	6ZrLDwGU+2SX11fxeyIpd8LippjpVXB2cBF/g8fo/X9gj8FqXgX6pZZivobIgGmp5NPTJKH6dqf
-	3haMWG1zk32g25UrK0Frx/ztxojeSOdgVo/zMMw0/jp27XAdYQ8m1qEwagWaTjnBaASy/w1M3VI
-	X153wme3DcimLS77rESRvEx1WlTg0dDs5u1cI5VQPjPqmBDDl2OTtKEU67Z3uHLvXzRnLkyRCql
-	cL/a0wVtaRCVttLUKC8LsEqFUj0WloodUlVnbbkvk6qbSkzwrRxTxb7iDzCswNynQDP5+EsqI8h
-	Whp83GLKf5FvD/l8yNaynfz7IXhdy4TI9F/aPmbQTzLfprbp4ZruzwmT0v8cyY769tRt+ELUKeS
-	j8iH8ZuS7XT9KeNY88+N6Md
-X-Received: by 2002:a05:600c:8b86:b0:490:58f4:ba2f with SMTP id 5b1f17b1804b1-49058f4bb2fmr128821105e9.23.1779712449270;
-        Mon, 25 May 2026 05:34:09 -0700 (PDT)
-Message-ID: <43b1050a-24fe-40ec-ba9a-9fcce498b51d@gmail.com>
-Date: Mon, 25 May 2026 14:34:07 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: gic-v3: Preserve ARE_NS when disabling the
- distributor
-To: "Orzel, Michal" <michal.orzel@amd.com>,
- Mykola Kvach <xakep.amatop@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Luca Fancellu <luca.fancellu@arm.com>,
- Mykola Kvach <mykola_kvach@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <0bc584018c025ee9fa5557276b9f3914ca9205d4.1779200467.git.mykola_kvach@epam.com>
- <f784f8f5-e0b7-424e-82c1-c98cdf070cd3@amd.com>
-Content-Language: en-US
+        d=1e100.net; s=20251104; t=1779715258; x=1780320058;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=mhYowuyAWGSpmaN++lAXXVAbSyUZzptdaqiWvdE8iRk=;
+        b=kk7+fqIbhCIIDTwyDaOEDkq/mKs6hbsrGxQDDgyXWvn4J+xOMi6oOiZ14ka8icBhTv
+         BfefXh/SfWzx6g8jnQF1me/7JnRhW3dA7Lm+RbFh+c4ZEFHf1S554SjRKs3o7x2aRcMS
+         Z6Z+WHS0XjsF1nWnkx91rfwWa4gz/bRKcXe0qemE3g20+jOIH7Ms3mZNhgEdTqjoFoJ5
+         wL+YSf9+n8Xw+F+XE9QDCsL620pzqlkbWbLClPAw97b0JMdK7Stw8X181666ZaRF9mR3
+         9GlittDzn/dZKQAw85VAjVVGPAebuKW/czORr8/2eKydlXkieB5EEBtMa+Y85rn40ebD
+         ObDQ==
+X-Gm-Message-State: AOJu0YxYWIesY9YZVrhaL3sT4EEq1wjqW9Nn4a1S5QCjVKlF5idAVjmE
+	E9yi4QHJ5XtAmWuSe0TVIzGQmK8lklfmuicqt8BM+Wcu7ejGeGchoYuiRFUi+1ci
+X-Gm-Gg: Acq92OF/gtmQviSEOplrzxK2Yh8imyQmnXjb2hCK2/lEPswWBvb4cAiOp2LMAhhvyJ6
+	BSSF2uzVOBEettAVqXZ2+3Up7yqj6GRLjwTld4lOyOPJMl5y3OM+h/WEImhxGxAkbda4+TobMnu
+	4GeLoMVLEyv/mAaBAUYZpP4O/kb1TyUyxukBiCRHeVVwl3js4P+46TDNg4u61JhApX85oI0at5F
+	+XB8ahC26uax7m3exbt7YylFBEOvlq1qTCXq5A6yw9AFy1KAz69d8fEwdYveMgveGIXfqsDM5HE
+	BXo5OqSZ3R1ksxgeBWpzow4fofORCYTiEo0YLoVihYX/auJRrOp6wKH70dB5jfKiRv4Mr+WVAF2
+	D24v+q1DigtWQd4ZONRKoNd6u/L60Zp1mJvz7zZuQWAiW1ANRM4ueb7MHLwVYOicM/e4aKsw8O6
+	oNAYoxtqpsfJqnqNoh/Cb471SuMNLejD9IrtOWfLTtgyYZkcJi/JxyxnW4OlAZaEb6vZaM96BCh
+	lxG
+X-Received: by 2002:a05:600c:8b12:b0:490:5191:6e1a with SMTP id 5b1f17b1804b1-490519170d7mr184485815e9.24.1779715257471;
+        Mon, 25 May 2026 06:20:57 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f784f8f5-e0b7-424e-82c1-c98cdf070cd3@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1779712450-AAF6E161-B90EC5F1/10/73395122804
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Subject: [PATCH v2 1/3] xen/riscv: fix switch_stack_and_jump() for range beyond 1M
+Date: Mon, 25 May 2026 15:20:42 +0200
+Message-ID: <21bc40d4a09bb4cfe0999430ea7e65b369fd4033.1779712171.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <cover.1779712171.git.oleksii.kurochko@gmail.com>
+References: <cover.1779712171.git.oleksii.kurochko@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1779715258-18B60F3B-4DFE5F36/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1185
+X-purgate-size: 2202
 
+The `j` instruction (JAL x0) used in switch_stack_and_jump() is a
+J-type instruction with only a ±1MB range, and that this can
+be exceeded in some configurations, causing a linker error:
 
+  relocation truncated to fit: R_RISCV_JAL against `<symbol>'
 
-On 5/25/26 12:18 PM, Orzel, Michal wrote:
-> 
-> On 19-May-26 16:31, Mykola Kvach wrote:
->> From: Mykola Kvach <mykola_kvach@epam.com>
->>
->> gicv3_dist_init() disables the distributor before reprogramming the
->> global interrupt state. It used to do this by writing 0 to GICD_CTLR.
->>
->> On a system where firmware has already enabled Non-secure affinity
->> routing, a zero write clears the Non-secure view's GICD_CTLR.ARE_NS bit.
->> Arm IHI 0069H.b, section 2.3.3 ("Changing affinity routing enables"),
->> states that changing GICD_CTLR.ARE_NS from 1 to 0 is UNPREDICTABLE. The
->> GICD_CTLR register description in section 12.9.4 carries the same rule
->> for the ARE_NS field.
->>
->> Preserve ARE_NS while clearing the group enable bits. If firmware left
->> ARE_NS clear, the value written is still 0, preserving the existing
->> initialization flow.
->>
->> Fixes: bc183a0235e0 ("xen/arm: Add support for GIC v3")
->> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-> 
-> @Oleksii, can we ask for a release ack here?
+Replace `j` with `jr` (JALR x0) via an explicit register, which has
+unlimited range.
 
-Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Found in a downstream branch when UBSAN instrumentation was enabled.
 
-Thanks.
+Note that the `tail` instruction looks more natural here, but `jr` is
+chosen instead to avoid depending on how the assembler expands `tail`
+and which scratch register it uses (`t1` in GAS), which would need to
+be listed in the clobber section of `asm volatile`.
 
-~ Oleksii
+Fixes: e66003e7be199 ("xen/riscv: introduce setup_initial_pages")
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+---
+Changes in v2:
+ - Update the commit message and subject
+---
+ xen/arch/riscv/include/asm/current.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index 5fbee8182caa..cc004670d18c 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -51,11 +51,11 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
+ #define vcpu_guest_cpu_user_regs(vcpu) \
+     (&(vcpu)->arch.cpu_info->guest_cpu_user_regs)
+ 
+-#define switch_stack_and_jump(stack, fn) do {               \
+-    asm volatile (                                          \
+-            "mv sp, %0\n"                                   \
+-            "j " #fn :: "r" (stack), "X" (fn) : "memory" ); \
+-    unreachable();                                          \
++#define switch_stack_and_jump(stack, fn) do {                    \
++    asm volatile (                                               \
++            "mv sp, %0\n"                                        \
++            "jr %1" :: "r" (stack), "r" (fn) : "memory" );       \
++    unreachable();                                               \
+ } while ( false )
+ 
+ #define get_per_cpu_offset() __per_cpu_offset[smp_processor_id()]
+-- 
+2.54.0
+
 
