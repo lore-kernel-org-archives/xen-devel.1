@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07BC4CD5BD2
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 13:21:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319265.1586972 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B005CCD5BB1
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 13:21:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319262.1586946 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRVEu-0000pv-0T; Mon, 25 May 2026 13:21:04 +0000
+	id 1wRVEp-0000Au-8L; Mon, 25 May 2026 13:20:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319265.1586972; Mon, 25 May 2026 13:21:03 +0000
+Received: by outflank-mailman (output) from mailman id 1319262.1586946; Mon, 25 May 2026 13:20:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRVEt-0000pm-So; Mon, 25 May 2026 13:21:03 +0000
-Received: by outflank-mailman (input) for mailman id 1319265;
- Mon, 25 May 2026 13:21:02 +0000
+	id 1wRVEp-0000An-3y; Mon, 25 May 2026 13:20:59 +0000
+Received: by outflank-mailman (input) for mailman id 1319262;
+ Mon, 25 May 2026 13:20:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wRVEs-0000h4-6e
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 13:21:02 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wRVEo-0000Ag-5F
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 13:20:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRVEr-00HD0O-It
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 15:21:01 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wRVEm-00HD0O-4H
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 15:20:56 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a144c9e-e002-0a2a0a5209dd-0a2a450cd30e-22
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:21:01 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a144ca3-e002-0a2a0a5209dd-0a2a4507d8d2-18
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:55 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a144cbd-62f1-0a2a450c0019-d155802cdc96-3
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:21:01 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4905529b933so13307365e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 06:21:01 -0700 (PDT)
+ id 6a144cb7-229c-0a2a45070019-d1558031c98b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 15:20:55 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4903974854dso34799285e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 06:20:55 -0700 (PDT)
 Received: from fedora (user-109-243-69-121.play-internet.pl. [109.243.69.121])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4904526ca21sm247101985e9.3.2026.05.25.06.20.59
+ 5b1f17b1804b1-4904526ca21sm247101985e9.3.2026.05.25.06.20.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 06:21:00 -0700 (PDT)
+ Mon, 25 May 2026 06:20:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,103 +52,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779715261; x=1780320061; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LnvKC3uKIYyQyLpDODWpeTmvo1taBNlFPdhQ7OBPgd4=;
-        b=i7ULngCd7rwk9j1/VqYvxIFyrV5pT00sKpQDMGBHxXu8XJyl/bTHG/r4UJ8JktD6mB
-         Qps3FRJlBa8pV45gwVWb0Vq8dHCMglahS4QUuoU5fnn6UWq+d4xXbdOPGHzjQb06UoHm
-         jGNzUfX4wiw83TmdhEloSv2XI/Dc7UcbM0Pbp3YC4qFXvJySvW9i7KJ+8twzWjRgoOqq
-         KOb+D2BXfXfpH9wpJJ7VBcsrI9Y2BR4+LojhS2ItBrQiztXnwRf6jRPy/HiHHtjGkzJ2
-         oz+N5xtg2ZEUnU22SEqTWkeijyh97tQW+PWAinu+OwijOXdHt0w9wVI+vEFjVhiyx3qN
-         x2bw==
+        d=gmail.com; s=20251104; t=1779715255; x=1780320055; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XMUQgueOvck0avhmAwj6liffR1ga2OajXM2qCf6dYKk=;
+        b=RyDB1+ZDdKMQOqUZIaGLy3yCp5dpOtVlf4xHrAg9Z0D0mdxNjTza0oa/HMYFJewVq1
+         OeloX3iZ0YUvvSu3chYds4IylYWZTnLQEcjAFzpX3t/wmEgKM6g1gP8rKtDDPIbjHQgL
+         i4LmOUbpJi/8v8y9b/qW/D2b7ZETPycK6LucuM6EnGiLlNBD+TFUm7wdBwGyMwLqhCkD
+         ue2zkZWw7zGLbHKYwzf6Hm/q0gePgFmJ2TX8xxQcRa9XgiiCO17Uvp8ITcUSqbeH56rj
+         uSri3vy9nvMyj8Kvd+tOjE5ym7R6/2Dgipw6/iHiqNCOoQSADF9yf4Q42kdMcxEipQBJ
+         A7qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779715261; x=1780320061;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=LnvKC3uKIYyQyLpDODWpeTmvo1taBNlFPdhQ7OBPgd4=;
-        b=AIt0GyLzMV5uS0H8UdeVpxNfgBLgB/z7/x3BICpU+1J36dqn6jsRp4xekXDeGL2z+D
-         k2YYlZgBrY61mvYgWe9TnIU8HoM0grVFPS30Vel4vZVHO2LB4qMsLM2ddRKWKKvV7lhD
-         FFKUtXaHVGpbSRLmMqo98lNPtpAYXiwe/M1EEBBBgGoEm3oKWaSDowrVhLnHSdf5zQNu
-         e+iyp5e9XmKvuMXigde1OdfHmZRgSCGir0FCZr7t335kPYbcrupHlQp1zVjQVADRjCb8
-         zMUKJ++vJ+b5btZKMrWaR8eHKrlerWDpoLYVYkzLof8LlzSjIVvWfvz1nJ3Stf1UUyFo
-         J2pg==
-X-Gm-Message-State: AOJu0YwVHyixmNY+ZsSyJlf9PK70h98IrofZGz6vKHg2ybo1llKOlLul
-	Nf7MVxQ9D4irsH4wVA1C6raGQodooHvt1B+Npw8n5HlRB97N/i/h+wAQI6lPun1n
-X-Gm-Gg: Acq92OHi4C9iyo0LphWtY06F1WmhhBhhL7KBXr44xrc0FC+gO7pSK+S61gMiI7vfrVn
-	GkssFVzN6/2IPbajcwyn3HeaeuJvq3D1QqSSfyeJji/wXX1DHPXhToE1a4QgydUVwoEilAyMk08
-	7C83oWZ14gyLC7Vl3y5CNYVjav1PdNPdo45RI+xA55oyeuJXrgNNJTUMmCvHUzgouzGHa7aivnk
-	ZOtTxABfMKYvjKDfVD0GBGRfQj4Afqh0odlAel1OjRNR9wt95aHpIkqg/mMneOhosGDS/50C7Nk
-	6XqzDAuylfVMsrrdkrg2hUVyGj2A58P6dowgf1HS7flDfXWhVGeYpQ6ovggofdYHUt24h9ssc0z
-	9UeGKDeWQl7zootq2V01xJJ2baz3h0gBb1vtK983J2+2MTg6iiAMhkAbPP6VESCnYLSaSWgT4GX
-	IuEAKAP7W0fuFZqUo+Fno9NTBD5XxZO0LznhCnMuiamXBti71WqfjSrw7XKSe8OhxeyA==
-X-Received: by 2002:a05:600c:4510:b0:48a:53ea:140b with SMTP id 5b1f17b1804b1-490428ddf15mr222949465e9.28.1779715260801;
-        Mon, 25 May 2026 06:21:00 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779715255; x=1780320055;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XMUQgueOvck0avhmAwj6liffR1ga2OajXM2qCf6dYKk=;
+        b=P5qcslFnk3FOxmWuOb3V5sq8Tgrbn4mcWh5ULtI9fPrmGV2nkIbaeEEfwsW/orOCKt
+         t1AbhR9+9FyOWVDgU674LZHbOGZtTxSSeYB3KOQXWXdPiNeDgKBT5EB2tizXcukrZzW2
+         Tn0MyiDdUkKxIb7WWFVM7KoKkvr/zZE76XlZBSTT8kFLIAGvpbsviVycZvwZTaqPF201
+         eqDytS+E7dSuCjpGIWkkhR8HLYxSYkU+rbF3UxHvPUZ0+DzWBOGYqb13DXH1GmUHXvxP
+         rtPKPYkUc8FmIT6sGg0nyapj8OtFxwJ9Ix3yc4UmtMuqXSqVu8WO+Wv7w2o89tb4QKwu
+         20bA==
+X-Gm-Message-State: AOJu0Yy3PUKCr3pWEjor4mRS0TO0NLhtMYrcQHVh03B6Ab1ObvhH4twP
+	W4OjGL5XlCW7r5VIVaPQ71ApJ1IhApaU0TBHtkNJZHTRasrhCLiAu+l/Q5IaauPi
+X-Gm-Gg: Acq92OHHVQT6T0h9epz4dEKEcjqlQCaqOndFR+q5GHMr1QqLpy9FeteIY8o4U6YIL5m
+	mjqzkDPa9oUPl9nyfR6CsAlaoxG+wcmfF1zk3XIXUSwsih93mRmGhCq0LIW4/qxvKeIjua4n3rB
+	TpYOaX0lwa2uShNPvQZu9jLf/aC/TMpiXal4zaYisiecRzxY+tn5py2h0IzRM0LF3qLKiE3m0J+
+	Hz2e6ToSGntmwTpV615UwAdMRmToLX3/331zoGhf/+qAovZKGrX0hOHeAOKcGD1ITgdlkxiY6sq
+	ea4pB5bgzZwq0a+fXIZfALR+/CThFd1RXRnTDD1ti6Cjx6oVqwHFjdoH+BxTzodwWYsqWYue543
+	YP52s5QQa38I4GRakyc3I5BMED3Nj83GNTIMe4dd3VaeKWZnMBk3kzIb+xVzlspwH2q7G7SfYnU
+	KWvSW9tru1mqfSAJLxDZHksi+/xTUK30PfdUryxl6iUEzuyBd14sU24CHYa8K4kgM4Yg==
+X-Received: by 2002:a05:600c:3593:b0:488:8bdd:cfcc with SMTP id 5b1f17b1804b1-4904225ae0emr271143925e9.0.1779715255244;
+        Mon, 25 May 2026 06:20:55 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	David Gibson <david@gibson.dropbear.id.au>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Subject: [PATCH v2 3/3] libfdt: fix UBSAN null pointer in fdt_property()
-Date: Mon, 25 May 2026 15:20:44 +0200
-Message-ID: <248482e608157a7156f7bb6d8a809540a50f3f86.1779712171.git.oleksii.kurochko@gmail.com>
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v2 0/3] UBSAN fixes
+Date: Mon, 25 May 2026 15:20:41 +0200
+Message-ID: <cover.1779712171.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <cover.1779712171.git.oleksii.kurochko@gmail.com>
-References: <cover.1779712171.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1779715261-E1B6CCF5-167C92D7/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1779715255-21969C48-F752855C/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1556
+X-purgate-size: 809
 
-fdt_property() unconditionally calls memcpy(ptr, val, len) even when
-len is zero and val is NULL.  This is a legitimate calling convention
-for adding empty FDT properties such as "interrupt-controller", which
-carry no payload.
+During Baptiste Le Duc's work on adding CI stuff for RISC-V several UBSAN
+issues were found.
 
-However, compilers that treat memcpy as nonnull on its pointer arguments
-will fire UBSAN before observing that len is zero.
+This patch series resolves the found issues.
 
-Guard the memcpy() with a check on len so it is skipped entirely when
-there is no payload to copy, bringing the code in line with the
-nonnull contract.
+CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2551001500
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Signed-off-by: David Gibson <david@gibson.dropbear.id.au>
-Origin: git://git.kernel.org/pub/scm/utils/dtc/dtc.git f57e7df35df4
-
-Fixes: f0ea06558068 ("libfdt: add version 1.3.0")
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 ---
 Changes in v2:
- - Backport patch from https://github.com/dgibson/dtc/commit/f57e7df35df4a301961cbbf9433ba4e85c2ee5ed
+ - Address comments from ML.
 ---
- xen/common/libfdt/fdt_sw.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/libfdt/fdt_sw.c b/xen/common/libfdt/fdt_sw.c
-index 4c569ee7eb0d..96d4cf571319 100644
---- a/xen/common/libfdt/fdt_sw.c
-+++ b/xen/common/libfdt/fdt_sw.c
-@@ -330,7 +330,8 @@ int fdt_property(void *fdt, const char *name, const void *val, int len)
- 	ret = fdt_property_placeholder(fdt, name, len, &ptr);
- 	if (ret)
- 		return ret;
--	memcpy(ptr, val, len);
-+	if (len)
-+		memcpy(ptr, val, len);
- 	return 0;
- }
- 
+Oleksii Kurochko (3):
+  xen/riscv: fix switch_stack_and_jump() for range beyond 1M
+  xen/domain: fix UBSAN null pointer dereference of d->shared_info
+  libfdt: fix UBSAN null pointer in fdt_property()
+
+ xen/arch/riscv/include/asm/current.h | 10 +++++-----
+ xen/common/domain.c                  |  2 +-
+ xen/common/event_fifo.c              |  3 ++-
+ xen/common/libfdt/fdt_sw.c           |  3 ++-
+ xen/common/time.c                    |  3 +++
+ 5 files changed, 13 insertions(+), 8 deletions(-)
+
 -- 
 2.54.0
 
