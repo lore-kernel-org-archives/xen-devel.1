@@ -4,62 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B645CD5BD0
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 10:19:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319142.1586854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 063D0CD5BB1
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2026 10:31:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319153.1586864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRSOQ-0004Co-J9; Mon, 25 May 2026 10:18:42 +0000
+	id 1wRSat-00072k-Ml; Mon, 25 May 2026 10:31:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319142.1586854; Mon, 25 May 2026 10:18:42 +0000
+Received: by outflank-mailman (output) from mailman id 1319153.1586864; Mon, 25 May 2026 10:31:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRSOQ-0004Ch-GR; Mon, 25 May 2026 10:18:42 +0000
-Received: by outflank-mailman (input) for mailman id 1319142;
- Mon, 25 May 2026 10:18:41 +0000
+	id 1wRSat-00072d-Jy; Mon, 25 May 2026 10:31:35 +0000
+Received: by outflank-mailman (input) for mailman id 1319153;
+ Mon, 25 May 2026 10:31:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1wRSOO-0004Cb-TV
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 10:18:41 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wRSar-00072X-Jc
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 10:31:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRSOO-004BM4-7W
- for xen-devel@lists.xenproject.org; Mon, 25 May 2026 12:18:40 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wRSaq-000HQ9-HR
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2026 12:31:32 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a1421c9-e002-0a2a0a5209dd-0a2a4505c0ba-46
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 12:18:39 +0200
-Received: from [52.101.53.26]
- (helo=BL0PR03CU003.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a1421fe-aaa8-0a2a45050019-3465351a901d-3
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 12:18:39 +0200
-Received: from MN2PR03CA0012.namprd03.prod.outlook.com (2603:10b6:208:23a::17)
- by MN2PR12MB4287.namprd12.prod.outlook.com (2603:10b6:208:1dd::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.19; Mon, 25 May
- 2026 10:18:34 +0000
-Received: from BL02EPF0001A104.namprd05.prod.outlook.com
- (2603:10b6:208:23a:cafe::5) by MN2PR03CA0012.outlook.office365.com
- (2603:10b6:208:23a::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.20 via Frontend Transport; Mon, 25
- May 2026 10:18:34 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BL02EPF0001A104.mail.protection.outlook.com (10.167.241.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Mon, 25 May 2026 10:18:34 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 25 May
- 2026 05:18:33 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 25 May
- 2026 05:18:32 -0500
-Received: from [10.71.196.80] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Mon, 25 May 2026 05:18:31 -0500
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a1424db-e002-0a2a0a5209dd-0a2a4501a00a-48
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 12:31:32 +0200
+Received: from [209.85.218.47] (helo=mail-ej1-f47.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a142504-c1f2-0a2a45010019-d155da2fbd4d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 12:31:32 +0200
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-bdbcc6c4500so646485066b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 25 May 2026 03:31:32 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-69-121.play-internet.pl.
+ [109.243.69.121]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bddc2c4e3d5sm389245266b.15.2026.05.25.03.31.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 May 2026 03:31:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,100 +52,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iMWco5inqDgGGF7zgFQjIViUK5DdsaYU/acGa4LCzjxogZ5ib0DooiqK4xOR1wM7muZbAwrxSXP6EtAIRqK8FJNgoIdRW72cwSVC4/kGrlsBywpJXmeBiGfr/q7jXsn7hZF/6+Y7HjJIEvCH7iB9tMgWhgVPPSGwfy75HPV+VRzY13NyeMaNYNJ/D17VUYvxMQZV1O3V2yZTD+N+0yMjmvZmrWAMkVM6tNlZETOMnEpiUbVOormkjK9/n8E8GawPq5/UA3TRPbsqbHum4zZC9s998mQHzzuQFZrjtvlKvOgaRnKptpCPYZR4Huy5LC+VYoiC9/fZIqTQcoSm0g8aMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y1c9lQ3wZ/NaJa5sV0AexiH1fCfTRpsF7NxGI19Zg14=;
- b=V+05kZtYeCY/jKSINUW7cx7mk23Rf5BoX5/wvEFK532Pfrb3JRN97F3ACEBNwZZG6VyAqXYJWROiB9MxNUqoTyuCVhicHN9BBILPJhvTm1PLeB60UYsOGtTR+YVWk2YhuFl3wOwY8W8D+jk5UIQ+qkVhswacZTi1QX9LrT/SCL05rOiMj4gcYuY559RT5wuRyM5MK4YksjppLNSU5cv3yHsy9A4hmBx5SFxTmY6inUarflcZnxKoLkpFpIABTwj7RZSOoTwDanXFmfda2bviGW9SN5IjmNKddG9BGMKggWkDcy8nF3U+QA1JmjKgSZLrmKPCTza3ycWVBU4CYbnfww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y1c9lQ3wZ/NaJa5sV0AexiH1fCfTRpsF7NxGI19Zg14=;
- b=QmcPWBkkEhACiRkzt8gnpqxKCJf9nEe2hzsVpoW99EABCT6DEMOiAyE813nXcGl5smQjX6Eqb3DIbwPWjVnC+bdTo6SOxUApiB9xXy7fhLhkymwWrl0btvQh4ROJkK38h0QAmuTS2d6sh0q2kddItIp8cdWj4s7XMmxGbAuu7Cs=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <f784f8f5-e0b7-424e-82c1-c98cdf070cd3@amd.com>
-Date: Mon, 25 May 2026 12:18:31 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779705092; x=1780309892; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=vLWh1GxdQcROq+aAV7QgtzGQetrtaB+xsOL2qAt5NDY=;
+        b=A5GGErHxWsh0CMHHd26hG50Fu7uwixJGkTbZpKEW+dyalkmOznvKuIoaij/uqTAzWw
+         Pr5iUQHmNHmVC4y2OKaIZgziazsOKc1g4AAWdpq0wCQVrlqVoCSr82ZjUIL1ieU2Ccuh
+         RWJsGccbY2OL9tF0ciGpiAvdKovoeVX5xyRtZivBFtmlfaOoVQBMOLIWKperhZ6kFYLN
+         nKiLS70LkSocdcx2FVqFy5Goenk6XGfW8mzHX5mcEixrhynb3L4pUP15Fm+XnknDMq5A
+         kzdQDQihPiizx/FiDmKN9Y/e29ge51s/xF+1c+38Ry1+MLCwYmsBLpXpS60NYtaKE9fs
+         3FWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779705092; x=1780309892;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vLWh1GxdQcROq+aAV7QgtzGQetrtaB+xsOL2qAt5NDY=;
+        b=mlfhZcyIVtcmpT6mX1HzoAEhg5xkhC0Co11E6UY75BuC6H46TCYXiorl10dqhw04aF
+         8X2WFDNPNqXu1Q8c2M8AC+rPuuxV7e+DKdO7TMXl9+y37m8x93JZPnX5LZuVGbWeUT/o
+         M9nzuIsCdRggpwalKc0vGrb0PczjePB8KIyo4QWkjKGxZazyEY1C5yJgS9scgrJZZEOm
+         GmObWLcMDIE+P2e0Dep5qpN1Fe85AJuoyLuf4wHv57266R+JLhXQ4HNjP98eCwj4AOdP
+         lfdezbcVtGT7J7+AYnRY53cOhfCcUZzH8oSSMPKgIC5kXPFufaMJsHmvfHtXHfNpVU4K
+         LBhA==
+X-Forwarded-Encrypted: i=1; AFNElJ/DwjoOtS2ToJZpcPJTqJk36Lc+4FOMxGMc6ejFM5S7/ebKQMXI4zhgVV+0TlrD0pe8sPRZb2tU5xQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywl7GNzlC5t+4dki2+6vIEFoR6mRjJXYGt5Eo27p/7vYTtIXeeN
+	/QHfhWrTBiz+30Dsot8caLn3smYtM1Ky6Jmfxpqh3hMCaTkLcGuooRak
+X-Gm-Gg: Acq92OFKspEKC6wfa9u0b65T0m+oUfKBixUYuJvSnAbOeGkXjNHNFFyLbrwuUvLyGo6
+	7FFEI/eyyzR0i8u1V+/eZ/V7RYWxwJKzBgQtxvryh4RY1IR5gqdi/OgjpzgDkJeYVw+TkCZ1FRW
+	69YpJNCp32C3ai+2pgy6zBkOxuZwwpGczbBRvQf6jLdDVouCMotJMkPc9EPTr3Ft4zpcfCQjRtL
+	3HFged2+6H4L+6itpeFrUIrli1Wo3O0W/ouy6/tc1GajwfFI3AmcR6lYl3ktTWFGF+m+rOYwNsq
+	bifLsonYdWouyXPi1p/oIAh5CHkTxjOqNd+JQb11QjhmZvW+mLIV92tN4t1+Ka0VOE/jJw7Vn3q
+	4tRbAAd7Q0RL+fN/9HOfqECySawcDdwSVfpPQZECSiAoIEOQz4OurLUsLyoHEQrxTUioLha0ER0
+	5yvYQnglftdZpKWrhbapGUkn5GPYR+sYyD2xTCiJvKS1XFOdV7hQusk8JnIoBT41/fkHAB1ZVZz
+	7A=
+X-Received: by 2002:a17:906:df09:b0:be2:d66:eb21 with SMTP id a640c23a62f3a-be20d66f9e0mr41406366b.26.1779705091644;
+        Mon, 25 May 2026 03:31:31 -0700 (PDT)
+Message-ID: <021315b7-7ac3-4cf3-8089-2de244b64de5@gmail.com>
+Date: Mon, 25 May 2026 12:31:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: gic-v3: Preserve ARE_NS when disabling the
- distributor
-To: Mykola Kvach <xakep.amatop@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: Luca Fancellu <luca.fancellu@arm.com>, Mykola Kvach
-	<mykola_kvach@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
- Grall" <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Oleksii Kurochko
-	<oleksii.kurochko@gmail.com>
-References: <0bc584018c025ee9fa5557276b9f3914ca9205d4.1779200467.git.mykola_kvach@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 0/2] xen/common: llc-coloring parser fixes
+To: "Orzel, Michal" <michal.orzel@amd.com>,
+ Mykola Kvach <xakep.amatop@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Carlo Nonato <carlo.nonato@minervasys.tech>,
+ Marco Solieri <marco.solieri@minervasys.tech>,
+ Luca Miccio <luca.miccio@amd.com>, Mykola Kvach <mykola_kvach@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1779388510.git.mykola_kvach@epam.com>
+ <1524b146-cb05-441b-a055-ce3337d83b44@amd.com>
 Content-Language: en-US
-In-Reply-To: <0bc584018c025ee9fa5557276b9f3914ca9205d4.1779200467.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1524b146-cb05-441b-a055-ce3337d83b44@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A104:EE_|MN2PR12MB4287:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1497a9e7-6a61-498e-0f9c-08deba46fa8e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|22082099003|56012099003|18002099003|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	e3MiNPELZCd5klBOeJbuhv7ge3dB8nAQS4RInunSDGRNhTYG9ubqpRxks9a6ZwOgqg7+xrZkwJul3H0ozsPhcjDCOIR56dPPUXYTvBB8qz8waE2+TUg7wGU0wyEai6dV9KkJSPhK0bBiApWJI4bIU/a8NfUFStTIppj1ppLueNGfl3nIs4SDTlSTA55AL3g7M4/TK1lZOzzbIWi+hNKZ5SobnhAJRD91hcy7T7HxCFp0WiuuyYTZ/3Tu5EIgNsAwdfBNkFTuqrLYcDa4wxo73UZfY0yl5gKsW3eRF/TjIRhmJt0Tmemw/ebAyupAdTqv6q/GNDcVAaLwprG7Ktujai/nfT+3gx89Xg4Kk7OuiPsdVrHjuwcGuDjyEP00SRYSR+Gc3ugIAY2iAH9B2kOT+eTv3+nZeFqjvXRCgHvYaYJAZqe16sD5IDOdwNGbPNTxdWOzrO//HcZ0BwjFHG7PI4O0U2QrDpSDF35AXRCdZXByFRb//4rnkAW4U03UvWe4vyvRIwLX/WprPVI4L0VsItLts2cyoYTfQ24guQrpjpXrU6Vt2NuQMiBQsjBXrYxverT2gT4MN63EipRpX/gVL0zQ+/MTuhhAJZ50L6mbM07gJ299CMoqlhVa+KsZJ6Y0OObIHA4t1utQDfzvftQk4pqtmG+x3s0wSr79zxeFZWKBznskEMXwQnmLKUeUaEU1I7Qp1yCheywiLoSeKgWRrZIThZu8kcMTx7vB66OTx/0=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(22082099003)(56012099003)(18002099003)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	hZ9ud70jx2H3AV4ODoNaC20FgJUBmXkAwe15C5JTuUxv1Hjhl5T5LDYuaBJYXVt6/5RLHkW0H9zLwIkzQaAHfacUqyskjAk7oPixElBy5/XxFhDEydozV4HbIYASjr7mNhaO4H/5QrcbsgvPVoNzTxYPHZGzOdbDzVOrQvSuA/l8wBryrGiYDKGhHxwK5aNAVKSlUqTq5QczrVBXH32ecxPRu9JvNAgBfQiljdP69IoratEUallf8g7FfKrSsSZHL69lbnTSWE3L+rMhCMK8ApdshEUJQsCQqKLIe+1KW6+lQFmH+rXqB02BDTVnThbdRa+McWee+XPdYfCatNbucocXfzOO1nen9HVOhgLanolskARVgonnSfInh49BFevKVupmvnjSy1Fl8UvjAfolHABFk3NgTT79ql3hJF+OC7j8LkuSx0OhDaIUsEIVUOYC
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 10:18:34.6832
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1497a9e7-6a61-498e-0f9c-08deba46fa8e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0001A104.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4287
-X-purgate-ID: tlsNG-c201ff/1779704319-E0660443-A860B16C/0/0
-X-purgate-type: clean
-X-purgate-size: 1036
+X-purgate-ID: tlsNG-d62444/1779705092-AFD51FF4-A9685F57/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 219
 
 
-On 19-May-26 16:31, Mykola Kvach wrote:
-> From: Mykola Kvach <mykola_kvach@epam.com>
+
+On 5/25/26 12:06 PM, Orzel, Michal wrote:
+> CC: Oleksii
 > 
-> gicv3_dist_init() disables the distributor before reprogramming the
-> global interrupt state. It used to do this by writing 0 to GICD_CTLR.
-> 
-> On a system where firmware has already enabled Non-secure affinity
-> routing, a zero write clears the Non-secure view's GICD_CTLR.ARE_NS bit.
-> Arm IHI 0069H.b, section 2.3.3 ("Changing affinity routing enables"),
-> states that changing GICD_CTLR.ARE_NS from 1 to 0 is UNPREDICTABLE. The
-> GICD_CTLR register description in section 12.9.4 carries the same rule
-> for the ARE_NS field.
-> 
-> Preserve ARE_NS while clearing the group enable bits. If firmware left
-> ARE_NS clear, the value written is still 0, preserving the existing
-> initialization flow.
-> 
-> Fixes: bc183a0235e0 ("xen/arm: Add support for GIC v3")
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+> @Oleksii, can we ask for your release ack for this series?
 
-@Oleksii, can we ask for a release ack here?
+Release-Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-~Michal
+Thanks.
 
+~ Oleksii
 
