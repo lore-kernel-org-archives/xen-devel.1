@@ -4,44 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08C1CD5BC8
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 09:44:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319674.1587194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 677FACD5BDE
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 09:46:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319732.1587212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRoKH-0000jw-1r; Tue, 26 May 2026 09:43:53 +0000
+	id 1wRoMY-0003hR-8S; Tue, 26 May 2026 09:46:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319674.1587194; Tue, 26 May 2026 09:43:53 +0000
+Received: by outflank-mailman (output) from mailman id 1319732.1587212; Tue, 26 May 2026 09:46:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRoKG-0000jU-Tv; Tue, 26 May 2026 09:43:52 +0000
-Received: by outflank-mailman (input) for mailman id 1319674;
- Tue, 26 May 2026 09:43:50 +0000
+	id 1wRoMY-0003hK-5D; Tue, 26 May 2026 09:46:14 +0000
+Received: by outflank-mailman (input) for mailman id 1319732;
+ Tue, 26 May 2026 09:46:13 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wRoKE-0000B5-H6
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 09:43:50 +0000
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 1wRoMW-0003h7-Rd
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 09:46:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRoKD-002r8y-TG
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 11:43:49 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wRoMW-00750H-7P
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 11:46:12 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a156b51-5cb7-0a2a0a5109dd-0a2a450ad64c-20
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:49 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <freddy77@gmail.com>)
- id 6a156b55-56b3-0a2a450a0019-d1558029c583-3
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:49 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-49048e043e5so28146625e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 02:43:49 -0700 (PDT)
-Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
- [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6d70c51sm36522744f8f.36.2026.05.26.02.43.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 02:43:48 -0700 (PDT)
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 6a156bdf-5cb7-0a2a0a5109dd-0a2a450c9962-18
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:46:11 +0200
+Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <vijayanand.jitta@oss.qualcomm.com>)
+ id 6a156be1-62f1-0a2a450c0019-cddcb4835c28-3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:46:11 +0200
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64Q6MQsP3263573
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 09:46:09 GMT
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ecnhs3sxc-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 09:46:09 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2ba15e384c7so72057445ad.3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 02:46:09 -0700 (PDT)
+Received: from [10.219.57.109] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2beb58b2ebcsm121223885ad.49.2026.05.26.02.45.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 May 2026 02:46:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,202 +63,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	+tNWCjXxY3vDlbxeyc6dAiioLTzJiUtHmEfK77uv8QU=; b=fr1+vbDENVQY5Zkc
+	AWKEyhljX0yFvxH6I1SvWUMTfp19xN/S0yh+TGoyD9Cl2mMP1B+cxYr4CMbB+3HK
+	i6mgb6GJt0ChQnVW/edYstQ2ZQ/3qEyz7787O7HhTjAw4XPZE3hs5gii8npI7Amv
+	SV4YTLdzF9yQsyRYbZhe8MXQpEJ8I1OBPDETlM0oT+VsBZIO/86gjRfEn9vRxRhD
+	fa7RK+Fn5PB0Yls+1QT2cAgdVoCp2+ET9/qfV+TNX1+bxgF2y68cg7pgqK+nzx0o
+	z9PP/dkyTpf4v2k4Ml/cIFZEvKeM5ltrMipw4x5NALhFjWWhKMw9d8b7GJjlf880
+	lK0fmQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779788629; x=1780393429; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BYgK6iR894mAqSXBIRezXknZ0unnX59SBgdgZD/Yaro=;
-        b=Ytk/LwkWOnfwfd6J3cyH5tWUfbV9ck4QJJ4s3x1gVeaIZTGYN8QJTnGz0fF8hOa79b
-         902y+Oia6tMDqid2HBa6VbIyQZoQRHIgEFOwLs83BgwvNmR83mb17xKlEPBgmlythuiX
-         NFD6fTEMyVQPXuOEpMy8LQZsBn3AwuGJ8ZVTJQeAgfgfJR1Q6oUw1AkFHSJmTed7OH0+
-         ZGJk2GDIWdrqIrESycHNoDLEBQ5zOAR7BAZlg8qQImc+SEgFz5xwOekYIiAfeZCmBXcm
-         Ne/CxYpZIOQ59QpidtRJdnlVz1DFIUj4YzqcqvznWiwkdZYoYGqKE5bkCHF6C+S+NpVw
-         atsA==
+        d=oss.qualcomm.com; s=google; t=1779788768; x=1780393568; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+tNWCjXxY3vDlbxeyc6dAiioLTzJiUtHmEfK77uv8QU=;
+        b=RymuX7ov/dCOz+tj1ywGcbX9BZlWAi35xlAi9Zk5KPBaKlnDR7UqORPX70UZDpz854
+         4WPrB9/NJG1HHGkamDg2Cq7LZJY2Rrog97m/1X7ZDayciGtpff5Cwkiw0HqGQCZsJtg8
+         1KDgy0cIaeUnKC00tvniZOx1mcljKzzsBz9DxvcdWKcM0k+FMPIRhn2x8AfQ/sf+Vkkb
+         iXPeMqwxyCB6HNi7/rU85h8USzuxh8JjlL5R4Rg4NM3vSOBO6iEKBpLo6y5aZopSGk5i
+         N01Vos1tsxK/Z5nZqmWolvBsIocfJhxDeBWV40+8fhya6dQKBk7g3nzSMMkDmpbuDjLX
+         Grwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779788629; x=1780393429;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=BYgK6iR894mAqSXBIRezXknZ0unnX59SBgdgZD/Yaro=;
-        b=gbSpOo6I4NMOCnYGOEFCwzb4+OGRX7/Y8yG0rYt4soGHzsUdebc8bjrbWJqpgTjSMI
-         VKkWg4M4YDyLY3MRxdYgYWTajzwdroLyYK6F5Jf+NxSRxUFgCyHJSSp4cO/GzlZ8K3f7
-         Zzd8I9D/aPcowZT4AAi0k36bgYyHluADgtXhqn5AvinvkMiGb2fFJ3LeCzQsZ45W8vKn
-         7p+yQRfecW4Sk3e58GSomn3sfRhz/g/9vrl6aVn4mNzN0IEaUBnkAWESuk8mfLaYvT/W
-         5ID0H643jL6EgiJHHldqfchCNcHK2K42UaMir10GRoGhnnNqtDgEZydsv0LqBsa0+lI6
-         6abg==
-X-Gm-Message-State: AOJu0Yyo+Tpp/dIlHydbBgOO8mGxv9rygyirOhC7CBN+0P2kZ9t1HDdk
-	RDRWj5WGV8YuPCneLn7RAqJkwWxkuOcog/lk+mLLJn8/LYLs9FWE3wqqIT+eC+6d
-X-Gm-Gg: Acq92OECe+USF50uO2hfrt/QzWMeuakTol0p4vxXpV6QYXfoFcQaJv+m7YGLSVbZl5P
-	14LSan85EocKN8d2NURULWVFQRwTnHLxO+P+zVrEXysfnPrqUIQyujmjjZDLmdYIL2/xk11m6tu
-	RLEzbUujC9npR1Fx88BlFQzefy5c7SMYzN8nT+/en/RaRZwolC58fOAQ+WoUQhwzgoT5Go7r3jp
-	CaN249xH175zbOL796rN8Pwo5lrkfhUR5XPa/Lsubpbl7uqI0+4M87Hv0K1mVledoelHgmoM8h+
-	71TuUZYJuO2cgqsDuxahyDi8RYKt66Bb7D95Om44cKdGcPFB/dASwyXLAdSCa146RUNUdtLy1T5
-	bw71ESaI3paKGtATs24wnCnaodZFFvDmsdLo50F90P1cr2R2z9rfXVBkfr7HEZI5IJzE6S8Ilru
-	BD2Kn3ZDfz+rJ14BQoDqbCT9jmgIufLqF+qQHNuh+BkC4s6E9rncEaWw676abZNtG5J9yObFBz0
-	rMeQ6YxfnZIgRWmDMJkH5kubw==
-X-Received: by 2002:a05:6000:40cf:b0:452:273:5cd6 with SMTP id ffacd0b85a97d-45eb367fe78mr31935951f8f.1.1779788629128;
-        Tue, 26 May 2026 02:43:49 -0700 (PDT)
-From: Frediano Ziglio <freddy77@gmail.com>
-X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 8/9] libs/guest: fill directly iov structure
-Date: Tue, 26 May 2026 10:43:19 +0100
-Message-ID: <20260526094324.12286-9-frediano.ziglio@cloud.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260526094324.12286-1-frediano.ziglio@cloud.com>
-References: <20260526094324.12286-1-frediano.ziglio@cloud.com>
+        d=1e100.net; s=20251104; t=1779788768; x=1780393568;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+tNWCjXxY3vDlbxeyc6dAiioLTzJiUtHmEfK77uv8QU=;
+        b=YMlxl7YyJOw0iBTiBsnEGJ5xAWOrHKRltEUc7E1lEqcticzkBeTJ5blIbJZlmj8bQi
+         v6WUeHqlYDc9yV1y3paDGxA4ZgGx8h5XwnPCiFNlzDzUHyPp9NRXEMAv7g8HTh/nEODk
+         uuiW5hFNWo8MFxL4/kljLMmmL8ImWw+6dVdBWjowsL5Ng76+Q9o/+8FSvSN5cYBL/pbt
+         uBZQuWY7DgIIayzVqUKecqEyUqMp/0pwDlgg0V8MOMKsVPdbjhQ842T1Lps8MbK4WRuT
+         E9B6k1Od5nBOjYwg5ppFWE4hH1Z3niRExFyl74A7M5yz6N/MrYLoi3c97d3rjdl2qlav
+         wy5g==
+X-Forwarded-Encrypted: i=1; AFNElJ/JgSdx/oAhy9asbTkMcYs4XztWFqj4SlZo4W52GNlHHFAJLUYGAm+b+zd+2X0RiN2zhb+2UAIj91w=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyvCwp4atoEYM1q+yCYaCqVUvF37BB9T9Gdxet87RjUMagR4O+6
+	GoXYVTQ33fbPxs+Ounq8aUbCV7Vg2KFQN2l2l0gKjUSY/cht8OZpuvAfQ01d059dt//IdDBBq+n
+	XH8mEHCQkZx8laTI9Xxs26l1Xsmco03man89WL+Z0+I/wXd9MUj4tZdZjhI6feo/RbQCSHA==
+X-Gm-Gg: Acq92OGgArQEzxVwp/je/bISfPfH7l/dWRXC3pJTPp0YKClHbQaxxRcTEbDu6ItyKpg
+	NtW05B8rnbNmcKp1h1gj/3Ym7mfcIs2knKddS6fGWeZfQrF8QBRcLRKl8O9NHMplMP9gPxLQQAs
+	fz373bzfkv/oQY6Hcwg1k3tltm1SAO+JN/Mclaicr7XvyjON4iOKB7EazuYmermK9RxndfLXBb6
+	yuetJtONQ0qmGr0cCX1d8IavIJiqcufsYBfmCoKHICKlHIbVncIRLWqrNUAGhBvp2c2KQ9zI87O
+	nPuDzgju+LVQbUjWpklGLvMNQu5JXro7afPXXQbwVyKRt/NVPTWdgAJC3zuGXWSrPqeLtpYRo31
+	rWF71+ZfPtQFn5/5MswrwB2pY0KDfuJDLuRL8v4EL7o92FPS5jLXUID7m
+X-Received: by 2002:a17:903:41c2:b0:2ba:e42a:231e with SMTP id d9443c01a7336-2beb064837dmr200645575ad.37.1779788768356;
+        Tue, 26 May 2026 02:46:08 -0700 (PDT)
+X-Received: by 2002:a17:903:41c2:b0:2ba:e42a:231e with SMTP id d9443c01a7336-2beb064837dmr200645035ad.37.1779788767805;
+        Tue, 26 May 2026 02:46:07 -0700 (PDT)
+Message-ID: <f2eb5c9d-a78b-401c-8796-f7ef7a8d7386@oss.qualcomm.com>
+Date: Tue, 26 May 2026 15:15:55 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1779788629-71F698B7-2100B5B3/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v15 0/3] of: parsing of multi #{iommu,msi}-cells in maps
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Nipun Gupta <nipun.gupta@amd.com>,
+        Nikhil Agarwal
+ <nikhil.agarwal@amd.com>,
+        Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, Marc Zyngier <maz@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Thomas Gleixner <tglx@kernel.org>,
+        Saravana Kannan <saravanak@kernel.org>,
+        Richard Zhu <hongxing.zhu@nxp.com>,
+        Lucas Stach <l.stach@pengutronix.de>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas
+ <bhelgaas@google.com>, Frank Li <Frank.Li@nxp.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-pci@vger.kernel.org, imx@lists.linux.dev,
+        xen-devel@lists.xenproject.org, linux-arm-msm@vger.kernel.org,
+        Charan Teja Kalla <charan.kalla@oss.qualcomm.com>
+References: <20260520-parse_iommu_cells-v15-0-b5f99ad4e7e8@oss.qualcomm.com>
+ <20260526-finicky-crafty-hare-eae27c@quoll>
+Content-Language: en-US
+From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+In-Reply-To: <20260526-finicky-crafty-hare-eae27c@quoll>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=Vd3H+lp9 c=1 sm=1 tr=0 ts=6a156be1 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Jo8nEopC4ZUABtMbiE8A:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: GQfrH0x0B2Epxi2YuNM5fhHuv8oN4jne
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI2MDA4NCBTYWx0ZWRfX/kRp6zdY9Myj
+ Zl+rO9EYBLTiD3hhY317fWVvsocoeYFq1tTaGom5qfKwH1fxls4VHYX4iuLwdDC6T99Kc7w2Djn
+ Sq6Y19OuW7u+QLTvDGKjO+L9blrgnGHcakoFVTjM4TJrodnY/6ZTdB/bJvaHennfsZ/aeuJ3pSB
+ ITyNt2lKuYC6JSbBoDeX+j+eEHnYgNYPbcq3vmt3HUds052fTzDGkhDogaMSB6Wc10p1z0UOH/n
+ fP4JwPH/DRCUSBaC3tDNVijIpfGlxRhfhqXBybLOJXBFm/GSvxn8/NRIkUx4or/LG4QWQelNc+f
+ uMqsV7fyRBQVBJj/vgVkv2llS26HNMfs5+WjuHj2fjhrIw23T49cLEQ1QPbcGI5lqatwMHU5gP5
+ tBvp73ZXMtc2PjmnBazZF/7sMCVYWgVRxGXajWk0Ss5sX5Da50avrdU1GHyNWH1ANLCkWA7AsXM
+ UFR3JwTexNJUPaQx8VQ==
+X-Proofpoint-ORIG-GUID: GQfrH0x0B2Epxi2YuNM5fhHuv8oN4jne
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-26_02,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 phishscore=0 adultscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605260084
+X-purgate-ID: tlsNG-d25034/1779788771-E0D63CF5-2CBDFA86/0/0
 X-purgate-type: clean
-X-purgate-size: 4540
+X-purgate-size: 2848
 
-From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-Instead of storing page pointers into an array and lately adding to
-iov vector add the pages directly to iov to avoid "guest_data"
-array.
 
-Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
----
- tools/libs/guest/xg_sr_common.h |  1 -
- tools/libs/guest/xg_sr_save.c   | 62 ++++++++++++---------------------
- 2 files changed, 22 insertions(+), 41 deletions(-)
+On 5/26/2026 11:42 AM, Krzysztof Kozlowski wrote:
+> On Wed, May 20, 2026 at 01:32:39PM +0530, Vijayanand Jitta wrote:
+>> So far our parsing of {iommu,msi}-map properties has always blindly
+>> assumed that the output specifiers will always have exactly 1 cell.
+>> This typically does happen to be the case, but is not actually enforced
+>> (and the PCI msi-map binding even explicitly states support for 0 or 1
+>> cells) - as a result we've now ended up with dodgy DTs out in the field
+>> which depend on this behaviour to map a 1-cell specifier for a 2-cell
+>> provider, despite that being bogus per the bindings themselves.
+>>
+>> Since there is some potential use[1] in being able to map at least
+>> single input IDs to multi-cell output specifiers (and properly support
+>> 0-cell outputs as well), add support for properly parsing and using the
+>> target nodes' #cells values, albeit with the unfortunate complication of
+>> still having to work around expectations of the old behaviour too.
+>> 							-- Robin.
+>>
+>> Unlike single #{}-cell, it is complex to establish a linear relation
+>> between input 'id' and output specifier for multi-cell properties, thus
+>> it is always expected that len never going to be > 1.
+>>
+>> These changes have been tested on QEMU for the arm64 architecture.
+> 
+> So there is no real user for that. That's unconvincing. I would assume
+> that at least you have real user where you test it.
+> 
+> If you want to speed up acceptance of your patches, then also I would
+> prefer to see at least one more user, beside Qualcomm. IOW, show how you
+> solve other people problems, not only yours.
+> 
+> Best regards,
+> Krzysztof
+> 
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 77312bae9cf5..797b4d1a7da1 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -215,7 +215,6 @@ struct xc_sr_context_save_buffers
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     xen_pfn_t types[MAX_BATCH_SIZE];
-     int errors[MAX_BATCH_SIZE];
--    void *guest_data[MAX_BATCH_SIZE];
-     void *local_pages[MAX_BATCH_SIZE];
-     struct iovec iov[MAX_BATCH_SIZE + 2]; /* headers + data */
-     uint64_t rec_pfns[MAX_BATCH_SIZE];
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 7d8055a3f9e8..593268f176a6 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -88,7 +88,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     xc_interface *xch = ctx->xch;
-     xen_pfn_t *mfns, *types;
-     void *guest_mapping = NULL;
--    void **guest_data;
-     void **local_pages;
-     int *errors, rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-@@ -114,9 +113,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     types = ctx->save.buffers->types;
-     /* Errors from attempting to map the gfns. */
-     errors = ctx->save.buffers->errors;
--    /* Pointers to page data to send.  Mapped gfns or local allocations. */
--    guest_data = ctx->save.buffers->guest_data;
--    memset(guest_data, 0, sizeof(*guest_data) * nr_pfns);
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = ctx->save.buffers->local_pages;
-     memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
-@@ -159,6 +155,19 @@ static int write_batch(struct xc_sr_context *ctx)
-         mfns[nr_pages++] = mfns[i];
-     }
- 
-+    hdrs.rec.length = sizeof(hdrs.page_data);
-+    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
-+
-+    hdrs.page_data.count = nr_pfns;
-+
-+    iov[0].iov_base = &hdrs;
-+    iov[0].iov_len = sizeof(hdrs);
-+
-+    iov[1].iov_base = rec_pfns;
-+    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
-+
-+    iovcnt = 2;
-+
-     if ( nr_pages > 0 )
-     {
-         guest_mapping = xenforeignmemory_map(
-@@ -200,60 +209,33 @@ static int write_batch(struct xc_sr_context *ctx)
-                 else
-                     goto err;
-             }
-+            else if ( iov[iovcnt-1].iov_base + iov[iovcnt-1].iov_len != page )
-+            {
-+                iov[iovcnt].iov_base = page;
-+                iov[iovcnt].iov_len = PAGE_SIZE;
-+                iovcnt++;
-+            }
-             else
--                guest_data[i] = page;
-+            {
-+                iov[iovcnt-1].iov_len += PAGE_SIZE;
-+            }
- 
-             rc = -1;
-             ++p;
-         }
-     }
- 
--    hdrs.rec.length = sizeof(hdrs.page_data);
--    hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
-     hdrs.rec.length += nr_pages * PAGE_SIZE;
- 
--    hdrs.page_data.count = nr_pfns;
--
-     for ( i = 0; i < nr_pfns; ++i )
-         rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
- 
--    iov[0].iov_base = &hdrs;
--    iov[0].iov_len = sizeof(hdrs);
--
--    iov[1].iov_base = rec_pfns;
--    iov[1].iov_len = nr_pfns * sizeof(*rec_pfns);
--
--    iovcnt = 2;
--
--    if ( nr_pages )
--    {
--        for ( i = 0; i < nr_pfns; ++i )
--        {
--            if ( !guest_data[i] )
--                continue;
--
--            if ( iov[iovcnt-1].iov_base + iov[iovcnt-1].iov_len != guest_data[i] )
--            {
--                iov[iovcnt].iov_base = guest_data[i];
--                iov[iovcnt].iov_len = PAGE_SIZE;
--                iovcnt++;
--            }
--            else
--            {
--                iov[iovcnt-1].iov_len += PAGE_SIZE;
--            }
--            --nr_pages;
--        }
--    }
--
-     if ( writev_exact(ctx->fd, iov, iovcnt) )
-     {
-         PERROR("Failed to write page data to stream");
-         goto err;
-     }
- 
--    /* Sanity check we have sent all the pages we expected to. */
--    assert(nr_pages == 0);
-     rc = ctx->save.nr_batch_pfns = 0;
- 
-  err:
--- 
-2.54.0
+Hi Krzysztof,
 
+Thank you for the feedback.
+
+The upstream user for the multi-cell iommu-map support is the Lemans
+platform's VPU device, which requires iommu-map entries targeting a
+2-cell IOMMU node. We are currently working on the glymur series [1]
+and once that is finalized we will post the Lemans patches as well.
+
+That said, I think this series can go through independently for the
+following reasons:
+
+1. Correctness fix: The iommu-map/msi-map bindings have always
+   specified that the output cell count is determined by
+   #iommu-cells/#msi-cells on the target node. The kernel has been
+   silently ignoring this and assuming 1 cell. This patch makes the
+   kernel respect the binding specification.
+
+2. Backward compatibility preserved: The of_check_bad_map() workaround
+   handles existing deployed DTs that target 2-cell IOMMU nodes with
+   1-cell entries. This series has been tested on the glymur platform
+   [1], which uses iommu-map with 1-cell specifiers, and the existing
+   parsing continues to work correctly.
+
+Thanks,
+Vijay
+
+[1] https://lore.kernel.org/all/20260515-glymur-v6-5-f6a99cb43a24@oss.qualcomm.com/
 
