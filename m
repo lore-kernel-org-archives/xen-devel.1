@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E6FCD6E41
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A4ACD6E42
 	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 09:44:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319671.1587176 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1319675.1587199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRoKE-0000B3-Cp; Tue, 26 May 2026 09:43:50 +0000
+	id 1wRoKH-0000om-JU; Tue, 26 May 2026 09:43:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319671.1587176; Tue, 26 May 2026 09:43:50 +0000
+Received: by outflank-mailman (output) from mailman id 1319675.1587199; Tue, 26 May 2026 09:43:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRoKE-0000Ah-8i; Tue, 26 May 2026 09:43:50 +0000
-Received: by outflank-mailman (input) for mailman id 1319671;
- Tue, 26 May 2026 09:43:48 +0000
+	id 1wRoKH-0000oA-Cd; Tue, 26 May 2026 09:43:53 +0000
+Received: by outflank-mailman (input) for mailman id 1319675;
+ Tue, 26 May 2026 09:43:51 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wRoKC-0008Is-LI
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 09:43:48 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wRoKF-0000JN-99
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 09:43:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRoKC-00C7jc-16
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 11:43:48 +0200
+ id 1wRoKE-00C7nY-LC
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 11:43:50 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a156b54-e002-0a2a0a5209dd-0a2a450396a4-0
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:48 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ id 6a156b54-e002-0a2a0a5209dd-0a2a450396a4-32
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:50 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a156b53-672d-0a2a45030019-d155dd31d024-3
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:47 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-44ccbd3290aso9039456f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 02:43:47 -0700 (PDT)
+ id 6a156b56-672d-0a2a45030019-d155dd36d93b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 11:43:50 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-43fe62837baso6040774f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 02:43:50 -0700 (PDT)
 Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
  [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6d70c51sm36522744f8f.36.2026.05.26.02.43.45
+ ffacd0b85a97d-45eb6d70c51sm36522744f8f.36.2026.05.26.02.43.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 02:43:46 -0700 (PDT)
+ Tue, 26 May 2026 02:43:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,197 +55,151 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779788627; x=1780393427; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779788630; x=1780393430; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hbvSYSz9jX9dafFppGzkbKpTIPtHmNPQUeh/EgdczHs=;
-        b=RZysriK+S4QhPT7Dx+KuXjr7lR9V1nMKldFtJs0+K3O/rSjCg9QxCarUyLPJP0+LEO
-         ur0BErc3+pTYZbHSI86/40y1ZZju9/QQzfGEIqzqhVTdQM65MzgJkbN3FAy2VM8ues6O
-         CBLqgOYAKS4/6M4IwB7hLgjgztHFZMeKMQbvOp0vlxdHKGdPr+snnzKrIbRLtdh7bR7A
-         XgsdfQ922TuQ7Jagh6u760AUrrG7ijuaRBq6icF0HCToxb8GrDK0mmWBpNltbDY0w1JH
-         l/jHUCVwk/6FBYHs/dJoQPINpBOzl1zwg/GZh0/ylX7ZGZia+gx1ZYjNmiTMqdko5qSP
-         zWqg==
+        bh=54F7jVLbDw17JTD+SKyHXt9Aa2Yn2dAnayA0OhhrPec=;
+        b=V2KmXBFYoKq/VlpbqIx8zJ+WaLngZzzW75yTPjnrod4EoC/guQLFSp0jjl7JPiyTrg
+         Vh4ZCKL346SKRzDv8jTxWNyj03yh2O+1K+hi5lLDU5s5ju89ee4qu6V3XSoNpl/ZoH1y
+         81WukOOiCp5MKh+4bZjsW5WIZo3SwjIHaq6cuArioHsKVo4wtYZ6i3fVBgRyqbyNMsCF
+         QTzIP6eNvko78ZAsdBUZ+Sbdo03QJHLsCWqgAgGXRo6mMQmls8jTLkoLiaeQBpOJ1FKL
+         ETY3Uf+HZZ/hIfjfDLt/wyVT1ykAgpf8GKsDtCRWHFT9OtiqeK8Ra/+O8LnuoUxZcOVv
+         QLfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779788627; x=1780393427;
+        d=1e100.net; s=20251104; t=1779788630; x=1780393430;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=hbvSYSz9jX9dafFppGzkbKpTIPtHmNPQUeh/EgdczHs=;
-        b=U+SKtbAYA0KZwggFAD5Lhg5PZLBRwjgXAKbE4an5mppRXHE1DN3qXxQ9kLQ818fgNC
-         SI0h8fsauZbh031GxTqD5b0L0sIABj2OtZr7TchaPY+XfZQFBSlolYWdR95qtwxXyFOZ
-         lDhl5BdDQFzt4JMQ27MJ50TIpKJ38IVZr8TddxK1WBUL93P+LVnWZDpnv4CbdJzfLqBG
-         IwSmoAidYTU7PyhcScR+iwinbcEWjQdgxE4JOlgyWhyf1JTGZk0Cu+C1P9fbZDLnRnv8
-         t+lyuVXdTvXjL4EM3Dp2s4yNMXBFuIgNgrf/szwhvyoZRDN7z1cznju4AAFCrhFGhO6F
-         rN2w==
-X-Gm-Message-State: AOJu0Yy49jd1gfl3gA9x+VoFyDHv+cvdmsbPX+P2oV14gnl05ltjMS1l
-	QVgZIX6wLJpFeLuYBw/DrJukmK1R0Id/68nF1fI8HB3+gyxZa7bx3v11mDR1KU/m
-X-Gm-Gg: Acq92OH7IhAZMVeHQ8qec7zcAJB46HzVwsTXawAuURN0Z7ffF+l29OzPntj8ucU9g6C
-	8K58SfA0fiDOx2RSV+CNBKiz5Qy5im6P6e3Qv1t23reIyteJbdafH4Myc711ahGguhzPbxgCsgm
-	wEbUeki5w+wii34XfbZ55fqdZJ1H9v5R/mszBFh54EwlOKpXgrnAfs158tkUi+EySIRpn9XbP4Q
-	63msboMyc1RvwjLp2rmmYikPG8iKkJOgepu2fQ/Od9y8yN9hEFZG40dlcVMDHDtkS2nt6YKe1Ok
-	R1lP8vggd6BBE4V6ZHeubUPy3DQMo5FhoaiBJIpG7Xe0EhNP+YyAqY+UF7NuJzu+qiSHB07mSif
-	/y3v1Coa7Ecokbwv5OFh2lJr/pGLFpSqO/TlxRBxTjXfFUA++s3ApUwCufzTl+LndUmxXXJPdSd
-	pdRQmmsVKE3WAdRQwItpwiqRMDsvGT6yCqc+Cto5Dbe1na4uB6535uZyYTsW9xGkqDPukmhZuhd
-	JYaYclLbHzzkothOCmlYmpIqJoDu68SUAmn
-X-Received: by 2002:a05:6000:2888:b0:44f:da26:cbb4 with SMTP id ffacd0b85a97d-45eb38bae90mr31288289f8f.21.1779788626944;
-        Tue, 26 May 2026 02:43:46 -0700 (PDT)
+        bh=54F7jVLbDw17JTD+SKyHXt9Aa2Yn2dAnayA0OhhrPec=;
+        b=D7EeYBTQfuvArcRzQ6zRHwSL8yY/44hdsuuXe1wS99Efpg4mKYOampcrCwLcWtHdjB
+         amPI0Y31Ypt0tgAV6BwyO6vkKsDMChPPelhIqpZUddKsxyEeBa7YxiReaqnX1OcsKvY9
+         KC4MCgoe3npTCHOaxu13FPozgUwUTinlMt8durV0FhkUdMCl4sZFKUUrNhO3wVc3ArkY
+         qFtaPXbf8yUslIC9plQ9t6zc2Q8wg/ORzdrgU0GIAfj3/nn/VZKaiGBQ9P9DZhLdewYM
+         KWeN68ngTbE3KfYmHzK2T7UbDIK06TXd7fYsSs4KFe690YcMjIicOqq9FAJE+lVzYEJo
+         /2Gw==
+X-Gm-Message-State: AOJu0YxVHhD/elu53+y0F/XD4Mx2vPZhcA4kPUmMXm9clViVG8iE0JTf
+	SQZNdvbVnKB2SjlyHE3CNRpiE3uGfLG9hmvpwNcLgaKo9dyekm4GpgypNCrh2i6v
+X-Gm-Gg: Acq92OFqD+aCOLJ+mH+SLmiKELiQHykVyCIRNdXdRUGo8fTUlV5wjCwTSAKupdcvZVC
+	nGCM7Ij+s3IBnqjH45rPRBVpI5nHJR9UEOy8DOFu4wLqahqOgVBOHH+RjosePk7DH05ojb1+nLi
+	XWNOVmpstRYLHNF3rZmlgFcNxvsbcLuoqSK7Wa8jzviPG7lB2NqWdKesltD177Td+QaXsnScSyG
+	EubSTlf3l0IIkPdVoiV4+3aZb+6Tj723D+ePdgx4fbKljuVkyC4cDDiikjL9EuLqIz9EaHGiM4y
+	OPud70ThLzqA6v2l9cek6r0JBGBZz5jdgkh5wUDdc4hwk9OZtlcPgn22FlfoErqgLh1e86Mgr0d
+	zXBRnYoPLOKs7fWhlEfINvkAU58IPdyuezqQKSbjx+nkZulApktrvTnLxxq4gEriOIwBhGOyLMI
+	3psZiZZ3bxS9qxZECcDwaXkUXmjXRZUssckPOsNWz8GS/70u11f/te83Kx0DrJ95SG1D/U2x8Fo
+	kPIYhXeMhlrPc/ZdvMl+xZsXoEVU4bz2kfmU8WQq4ZkCzk=
+X-Received: by 2002:a05:6000:2508:b0:45e:65a3:badf with SMTP id ffacd0b85a97d-45eb39e1f43mr31281958f8f.21.1779788629960;
+        Tue, 26 May 2026 02:43:49 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
+Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Frediano Ziglio <frediano.ziglio@citrix.com>
-Subject: [PATCH v3 6/9] libs/call: cache up to 4 pages in hypercall bounce buffers
-Date: Tue, 26 May 2026 10:43:17 +0100
-Message-ID: <20260526094324.12286-7-frediano.ziglio@cloud.com>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v3 9/9] libs/ctrl: Allows writev_exact to change iov array
+Date: Tue, 26 May 2026 10:43:20 +0100
+Message-ID: <20260526094324.12286-10-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260526094324.12286-1-frediano.ziglio@cloud.com>
 References: <20260526094324.12286-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1779788627-41794938-6F500648/0/0
+X-purgate-ID: tlsNG-33051d/1779788630-41D91938-12F8B3E5/0/0
 X-purgate-type: clean
-X-purgate-size: 4985
+X-purgate-size: 3234
 
-From: Edwin Török <edwin.torok@citrix.com>
+From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-During migration there are a lot of mmap/munmap calls,
-because `xc_get_pfn_type_batch` exceeds the default hypercall bounce
-buffer cache size, and needs to allocate every time it is called.
+Avoid having to allocate and copy the array if a partial write
+happens.
+The implementation in tools/libs/store/xs.c already use this
+signature and method.
 
-`munmap` is slow, especially in a PV Dom0 (takes an emulation fault),
-so is best avoided.
-
-Eventually it'd be good if the memory pool from  xmalloc_tlsf.c
-was reused here, but for now make it handle the commonly encountered
-sizes (so far up to 4 pages).
-
-Signed-off-by: Edwin Török <edwin.torok@citrix.com>
 Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
 --
 Changes since v2:
 - change prefix in subject.
 ---
- tools/libs/call/buffer.c  | 28 +++++++++++++++++-----------
- tools/libs/call/core.c    |  3 ++-
- tools/libs/call/private.h |  8 +++++---
- 3 files changed, 24 insertions(+), 15 deletions(-)
+ tools/libs/ctrl/xc_private.c | 26 +++++---------------------
+ tools/libs/ctrl/xc_private.h |  2 +-
+ 2 files changed, 6 insertions(+), 22 deletions(-)
 
-diff --git a/tools/libs/call/buffer.c b/tools/libs/call/buffer.c
-index 2579b8c71986..15d2f98a6b71 100644
---- a/tools/libs/call/buffer.c
-+++ b/tools/libs/call/buffer.c
-@@ -56,13 +56,13 @@ static void *cache_alloc(xencall_handle *xcall, size_t nr_pages)
-     if ( xcall->buffer_current_allocations > xcall->buffer_maximum_allocations )
-         xcall->buffer_maximum_allocations = xcall->buffer_current_allocations;
- 
--    if ( nr_pages > 1 )
-+    if ( nr_pages > ARRAY_SIZE(xcall->buffer_cache) )
-     {
-         xcall->buffer_cache_toobig++;
-     }
--    else if ( xcall->buffer_cache_nr > 0 )
-+    else if ( xcall->buffer_cache_nr[nr_pages-1] > 0 )
-     {
--        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
-+        p = xcall->buffer_cache[nr_pages-1][--xcall->buffer_cache_nr[nr_pages-1]];
-         xcall->buffer_cache_hits++;
-     }
-     else
-@@ -84,10 +84,10 @@ static int cache_free(xencall_handle *xcall, void *p, size_t nr_pages)
-     xcall->buffer_total_releases++;
-     xcall->buffer_current_allocations--;
- 
--    if ( nr_pages == 1 &&
--         xcall->buffer_cache_nr < BUFFER_CACHE_SIZE )
-+    if ( nr_pages && nr_pages < ARRAY_SIZE(xcall->buffer_cache) &&
-+         xcall->buffer_cache_nr[nr_pages-1] < BUFFER_CACHE_SIZE )
-     {
--        xcall->buffer_cache[xcall->buffer_cache_nr++] = p;
-+        xcall->buffer_cache[nr_pages-1][xcall->buffer_cache_nr[nr_pages-1]++] = p;
-         rc = 1;
-     }
- 
-@@ -108,17 +108,23 @@ void buffer_release_cache(xencall_handle *xcall)
-     DBGPRINTF("current allocations:%d maximum allocations:%d",
-               xcall->buffer_current_allocations,
-               xcall->buffer_maximum_allocations);
--    DBGPRINTF("cache current size:%d",
--              xcall->buffer_cache_nr);
-+    for ( unsigned i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
-+    {
-+        DBGPRINTF("cache current size[%u pages]:%d", i+1,
-+                xcall->buffer_cache_nr[i]);
-+    }
-     DBGPRINTF("cache hits:%d misses:%d toobig:%d",
-               xcall->buffer_cache_hits,
-               xcall->buffer_cache_misses,
-               xcall->buffer_cache_toobig);
- 
--    while ( xcall->buffer_cache_nr > 0 )
-+    for ( unsigned i = 0; i < ARRAY_SIZE(xcall->buffer_cache_nr); ++i )
-     {
--        p = xcall->buffer_cache[--xcall->buffer_cache_nr];
--        osdep_free_pages(xcall, p, 1);
-+        while ( xcall->buffer_cache_nr[i] > 0 )
-+        {
-+            p = xcall->buffer_cache[i][--xcall->buffer_cache_nr[i]];
-+            osdep_free_pages(xcall, p, i + 1);
-+        }
-     }
- 
-     cache_unlock(xcall);
-diff --git a/tools/libs/call/core.c b/tools/libs/call/core.c
-index 02c4f8e1aefa..dd8877c1a0bd 100644
---- a/tools/libs/call/core.c
-+++ b/tools/libs/call/core.c
-@@ -14,6 +14,7 @@
+diff --git a/tools/libs/ctrl/xc_private.c b/tools/libs/ctrl/xc_private.c
+index bb0f81d6f389..946fc307aabd 100644
+--- a/tools/libs/ctrl/xc_private.c
++++ b/tools/libs/ctrl/xc_private.c
+@@ -635,7 +635,7 @@ int write_exact(int fd, const void *data, size_t size)
+ /*
+  * MiniOS's libc doesn't know about writev(). Implement it as multiple write()s.
   */
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt)
++int writev_exact(int fd, struct iovec *iov, int iovcnt)
+ {
+     int rc, i;
  
- #include <stdlib.h>
-+#include <string.h>
+@@ -649,9 +649,8 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+     return 0;
+ }
+ #else
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt)
++int writev_exact(int fd, struct iovec *iov, int iovcnt)
+ {
+-    struct iovec *local_iov = NULL;
+     int rc = 0, iov_idx = 0, saved_errno = 0;
+     ssize_t len;
  
- #include "private.h"
+@@ -686,23 +685,9 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+                 len -= iov[iov_idx++].iov_len;
+             else
+             {
+-                /* Partial write of iov[iov_idx]. Copy iov so we can adjust
+-                 * element iov_idx and resubmit the rest. */
+-                if ( !local_iov )
+-                {
+-                    local_iov = malloc(iovcnt * sizeof(*iov));
+-                    if ( !local_iov )
+-                    {
+-                        saved_errno = ENOMEM;
+-                        rc = -1;
+-                        goto out;
+-                    }
+-
+-                    iov = memcpy(local_iov, iov, iovcnt * sizeof(*iov));
+-                }
+-
+-                local_iov[iov_idx].iov_base += len;
+-                local_iov[iov_idx].iov_len  -= len;
++                /* Partial write of iov[iov_idx]. */
++                iov[iov_idx].iov_base += len;
++                iov[iov_idx].iov_len  -= len;
+                 break;
+             }
+         }
+@@ -711,7 +696,6 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+     saved_errno = 0;
  
-@@ -44,7 +45,7 @@ xencall_handle *xencall_open(xentoollog_logger *logger, unsigned open_flags)
-     xentoolcore__register_active_handle(&xcall->tc_ah);
+  out:
+-    free(local_iov);
+     errno = saved_errno;
+     return rc;
+ }
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index b5892ae8dc1e..3af996e9002e 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -383,7 +383,7 @@ int xc_flush_mmu_updates(xc_interface *xch, struct xc_mmu *mmu);
+ /* Return 0 on success; -1 on error setting errno. */
+ int read_exact(int fd, void *data, size_t size); /* EOF => -1, errno=0 */
+ int write_exact(int fd, const void *data, size_t size);
+-int writev_exact(int fd, const struct iovec *iov, int iovcnt);
++int writev_exact(int fd, struct iovec *iov, int iovcnt);
  
-     xcall->flags = open_flags;
--    xcall->buffer_cache_nr = 0;
-+    memset(xcall->buffer_cache_nr, 0, sizeof(xcall->buffer_cache_nr));
- 
-     xcall->buffer_total_allocations = 0;
-     xcall->buffer_total_releases = 0;
-diff --git a/tools/libs/call/private.h b/tools/libs/call/private.h
-index 9c3aa432efe2..8e6a20897534 100644
---- a/tools/libs/call/private.h
-+++ b/tools/libs/call/private.h
-@@ -31,13 +31,15 @@ struct xencall_handle {
-     Xentoolcore__Active_Handle tc_ah;
- 
-     /*
--     * A simple cache of unused, single page, hypercall buffers
-+     * A simple cache of unused, small, hypercall buffers
-+     * buffer_cache[i]'s size is (i+1) pages
-      *
-      * Protected by a global lock.
-      */
- #define BUFFER_CACHE_SIZE 4
--    int buffer_cache_nr;
--    void *buffer_cache[BUFFER_CACHE_SIZE];
-+#define BUFFER_CACHE_NRPAGES 4
-+    int buffer_cache_nr[BUFFER_CACHE_NRPAGES];
-+    void *buffer_cache[BUFFER_CACHE_NRPAGES][BUFFER_CACHE_SIZE];
- 
-     /*
-      * Hypercall buffer statistics. All protected by the global
+ int xc_ffs8(uint8_t x);
+ int xc_ffs16(uint16_t x);
 -- 
 2.54.0
 
