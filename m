@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 538DFCD5BB1
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 12:41:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319835.1587311 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4789CD5BC8
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 12:50:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1319879.1587330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRr60-0006Is-0P; Tue, 26 May 2026 12:41:20 +0000
+	id 1wRrEU-0000yi-Jc; Tue, 26 May 2026 12:50:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319835.1587311; Tue, 26 May 2026 12:41:19 +0000
+Received: by outflank-mailman (output) from mailman id 1319879.1587330; Tue, 26 May 2026 12:50:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRr5z-0006Ih-SF; Tue, 26 May 2026 12:41:19 +0000
-Received: by outflank-mailman (input) for mailman id 1319835;
- Tue, 26 May 2026 12:41:18 +0000
+	id 1wRrEU-0000xL-B8; Tue, 26 May 2026 12:50:06 +0000
+Received: by outflank-mailman (input) for mailman id 1319879;
+ Tue, 26 May 2026 12:48:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1wRr5y-0006E2-Ia
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 12:41:18 +0000
+ (envelope-from <cassiogabrielcontato@gmail.com>) id 1wRrDD-0008PP-3V
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 12:48:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRr5x-00GcHe-UZ
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 14:41:17 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wRrDC-00Agmw-Fd
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 14:48:46 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a1594e1-2eae-0a2a0a5409dd-0a2a4504c02e-40
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 14:41:17 +0200
-Received: from [40.93.194.33]
- (helo=SN4PR0501CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a1594ec-1dec-0a2a45040019-285dc2215851-3
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 14:41:17 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by SJ0PR03MB7128.namprd03.prod.outlook.com (2603:10b6:a03:4e7::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Tue, 26 May
- 2026 12:41:14 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%7]) with mapi id 15.21.0048.019; Tue, 26 May 2026
- 12:41:14 +0000
+ (envelope-from <cassiogabrielcontato@gmail.com>)
+ id 6a15969c-e002-0a2a0a5209dd-0a2a450cc9f2-42
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 14:48:46 +0200
+Received: from [74.125.82.180] (helo=mail-dy1-f180.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <cassiogabrielcontato@gmail.com>)
+ id 6a1596ac-62f1-0a2a450c0019-4a7d52b4b5f4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 14:48:46 +0200
+Received: by mail-dy1-f180.google.com with SMTP id
+ 5a478bee46e88-3025d725a05so24371879eec.1
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 05:48:45 -0700 (PDT)
+Received: from [192.168.1.18] (177-4-162-74.user3p.v-tal.net.br.
+ [177.4.162.74]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30451f20561sm9516837eec.10.2026.05.26.05.48.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 May 2026 05:48:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,175 +53,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AMNwPw6Wh1L3irFcfTAMRSniApzFzrb+G7QrhcNyl4XvIfheVnvz7iR6eY3+qoEcyiYULzJ2k1/4q5DpOaGTYdgO5mnlVkJf2WhaS9ipBjbbjcrOfbkpB67u38a8R/797Q9IlOXxGiBC68LokXtz2dmIPw7u0JHMWgRUEnH4liYnCYsMtEf9ILmmRMUvWEntht83j/tQOzyVtQmbZbmWaHETnx9YiTNTIgSF58hASlK2316j8bvV1Zs7LZi9Fb9Ql0JVv2ksWAet9zMewA+tQX5R0bzDbTXB3b45TK2kM22eGAgJ/TFt2brRWmkMeCMrwWi6f96PJbjFGL2e/d0OLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m6q4xOqMf7DWj9QDMbGFMqw094yOSXyRHKf8SQZEleY=;
- b=it6JOBZ5HqtKo75mHdDgdQKtYTtBKtFFDdxDdB7jaWW0ywhk4dkx9kbfLNUZKu8rz6TYp07HSHgChReErEwepyzM0aCZcvMvCiprtBP6JfmAujFt8XrpHiixUP0iHSzJhnEAUlxLwJKzd+ieEgSgdoHtGNPxUHP9exPclumR8mJs62pB+OrbE1+mwl+JEQlPBLs8WMAbKajNb5AgqodFunDz3a5Pj5MqnEfRIswDC+cRy7QUJ3pBc8Bjrb9AkJEyTkNoCb+5BZ4HJ5VsbG/4z24bk+0kdLODxOBi31sAvtMEeNMbSbXJEneXT9NRMW5snTdb5gqcBCZhkouwe5EYmg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=m6q4xOqMf7DWj9QDMbGFMqw094yOSXyRHKf8SQZEleY=;
- b=hUj05kd1HnBrsW7ZdCEki6z1TkbDC/82oh7ITfgwdxoK/MhhWPSM7kHs4Hvr1L9RFqRBogkemlIl3QaPsatM6ugEzbkVtxKzHMnWg4RLvxJRE8wX41Hv6lRIcRuSKFUHUjd2VwKtdlnwjqd9YyO1IpMJPwfdyx72PqS1CBt5Rvc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jason Andryuk <jason.andryuk@amd.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v1 6/6] nestedsvm: Allow destroying the domain fully
-Date: Tue, 26 May 2026 13:40:27 +0100
-Message-ID: <20260526124027.573412-7-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260526124027.573412-1-ross.lagerwall@citrix.com>
-References: <20260526124027.573412-1-ross.lagerwall@citrix.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0159.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:188::20) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:MIME-Version:Subject:Date:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779799724; x=1780404524; darn=lists.xenproject.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KzFzYUS5xkTaeTcSd6mKOHfBy/NkiDE68cAiMBc0jmA=;
+        b=MkSxzFayEtZDD1ikZLyWWPy6mpdAeUZWiiSNvnNrQoH0bliW+HKCR6YR38hT3qzb+2
+         LA4TzoCLwQrTwUVek1N+ovzIPGPLry7mAHevs4sIoZPGEOP8jUomWfCAUMbUsz3uCF3A
+         zswl431J/Z+f+nqr4R5ppU6aJbANxIBULhnlc/q7T4nVQe3IJvnTXzfbXPxFmfAv/ER3
+         TH0P9CmDgqpKeRC6v/WPiQnLbH+GswWNJkzrRCOUHfJNSwS1U752VnduFL9Icf4iTJgb
+         qZt7b2viyEd1OcCL5AdDXiPR++J8GRqZg5Sa19xdkmlm/tMvZoJKFyJlUu9SX/2lq6e1
+         47ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779799724; x=1780404524;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=KzFzYUS5xkTaeTcSd6mKOHfBy/NkiDE68cAiMBc0jmA=;
+        b=L+inZHai61QHK+m8INAYb+JogDA4SyBSwXpVEPGHE935grjfkLu4qFlOwg6k9qPFu7
+         +kJOO+JGwIp9EZpcuazY91MVCcS6cLpKLXCLNaUb0MKKGPEgVtms8PSjnI+6aksYJu/a
+         1NY93JAAFBOlmuAjhXKS7erS426wYtAbFYg8yU1rxML3os64hoh9UALHgyW+b0fAoMHC
+         dihx6C+muqnA4HelqS+7p+RNq4z4lb+DCQk02ntmAOmWj2EHEbGEGbpKuT8pULc/7vlV
+         NwhH1qIlkNp6x+mPkwz1GfQfAqMZD9jnikkXHKU9/RiVgcJAnhWhkHlFC6cpxJHhBOpJ
+         XDpQ==
+X-Gm-Message-State: AOJu0YxTqPtyL05xUMeo7j5cQ3WL/QLwLUkA4LjnJ2G7q1mkoKQ29zyj
+	nx2PL5b52IX4wPbzG37Tz8SQiN+xtgGPlTtNK98SYxMTjv1200MdNb+W
+X-Gm-Gg: Acq92OGltfWY9rFFEafGZntkZWulq/d2w7OqP0kHkez4tcCWA/+tPwHr3UEPzHOSi+a
+	Yf8u9bIVDeQtnj8yENMDF2rOgFdo+ZObOf9MchdkBE8nFS39JbgDygg18lcbY0uIMk1MxxQLqdd
+	3YLeW9GQyOnRidLplFVBpDnBContYIhDE/sUzg/Ks4h8rA0jlAlUbJn2r7Re5cSp1rxgSuqt/Yp
+	hxhm0v3z7GFxQPBW4w/cgnrjmgxkam+YZciBh5GApToUAbSXsXugBW04TUvn7p5d6UXGnyRnngJ
+	KVysefZmSorIq3sTiP/lFY+I/6CbuYh13bmP4PuxnlSX22BqvqxL2Fk8oNynQRYHZoVVK7ev9Se
+	wo31MKknPhhIqPLnL/Suiwc+PAl2fkn9KJ2RYFKP+tgnGxVc27jdUriR7ItLpwgH6xkiak7weDi
+	eYVwVBFByGt11QUox0sTurBcHDc1aa5o/ArFcUugZr0t24znGy32VTpOnukOBJk6rlhmiaqqz6t
+	Crk8W/GsjRp
+X-Received: by 2002:a05:7300:cd99:b0:304:188d:d0be with SMTP id 5a478bee46e88-30449156f8cmr7666135eec.16.1779799724191;
+        Tue, 26 May 2026 05:48:44 -0700 (PDT)
+From: =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
+Date: Tue, 26 May 2026 09:48:27 -0300
+Subject: [PATCH 2/2] ALSA: xen-front: Connect event channel after stream
+ prepare
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SJ0PR03MB7128:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5444aa20-f354-4bc1-8dd0-08debb2412a8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|11063799006|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	v+EXLnaEQIhhd+Yee9qxjeVWXwxJdXl6DECAvTKgPHozyvu4KVg8xNMDYhQCOIsKEwOFNk+cN2OGicW81+dXwYTTaD8wU5Oq2RGrHu+/QQBI4u6APbphw6rmJobHSes0B0UTsaJ4JuRHn7dcaIr72w5LvUAUHK6dUpxvzUDiNY/VyLgdJrKtPw/IOTZGKeiIhfuRovZ1JviePOQsyRoDDFp+yE5f6n0leVgRg78idEfgW5QZy88PoUluo4ekS2pYc2fv6UA2Zy8Vi/J0ybXPyU4pQJXlqpgDonVW9UP/6gNNjdSwfDK3Yr1TK2a3IPKjQpNKdvVF/tdPyLlXv+uDUXj2asAkAaBraE0IcFTOzaCXqdQsq3UK0RHcfK/18uxInMdSudjL6YeIJ8ljxWW+5/YejqNe7Xl0QVVFgkNAof1BxFAmg99kBx1GzFBrSNURqP+tRNLG4TgDQ23FWmmUsX3flQqI9T3vjhXsL25G5LlObvi8gzQ2aiMa7SNvgLe4Fk2lDo3+8DLQaPwcSUENPfHUGpYeNGK6RmDiGJdxha4FCeqouXw0umaEkWSfMtyOHG9pMmeadcBvsKSoA95qjsmQM4JYtdvBZlPiouzgPSW+L+On2tqcvFRSkP6fwnr6xC2RjGcIxh1yzNLDVKcUsUP/ng+YkTcaUS8P/DporhUZDlSzzdyIjMIQsul0OBk8
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(11063799006)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?6T9azilw98jXlirA1UJRefzCEk24NSkA4Ong6B6rksQ3c88WfpgR12qKxnYx?=
- =?us-ascii?Q?cxpQKoW1ahBDUg+FO2HBs/4clNoPj3fBRnOltTkK9hy7vGbUVnN/RZpF5Vn8?=
- =?us-ascii?Q?K6Cgieq6X5RS1borI0rYZjAKe3GrrryVUp7Ypsmuam/xWGkfRJDiM2uM7q1g?=
- =?us-ascii?Q?6jLzWCU3G9v3FZvFgMS8Fzj1PIdnd2wqErDCPh8oMfE02GyDTgrfmsRt3Dtk?=
- =?us-ascii?Q?9H32+eq9Pf//fHp1ynL7AVIpC1ywgWvpMpkPx18c14HQsBY2Xu49u2a1TAVY?=
- =?us-ascii?Q?K4mdfOKld17YMbhCQUiU3K3IUjNleuYRZP6UbUqdXWw97olhwj8rmNsHGArE?=
- =?us-ascii?Q?tk7zogUvaU3TfWJGhRR6K+m5xLG4gPt0J2L/OGR1vHxTtmdRw70ayNM8i0Tm?=
- =?us-ascii?Q?jpYyVACsKi/rRv5Jiprf8Mt82R54L5I0WhZ0/Ei0Fc8eIjY3KeBAldtqQ8Tw?=
- =?us-ascii?Q?+LuopbUiTgL7OLBo41cwytAy0Zv2Voj57mS1CGnPKZ8bvtrFWZxMBrZWZT85?=
- =?us-ascii?Q?tIpvN8MkG9XXTT8PYWDcl4xk0xxIWUH6YFMe1hSsDqaGljkUbSEKKTc3NWWz?=
- =?us-ascii?Q?IHpkZ1aV6Q1/eG/X6EeEMBbK1xDADbE6647cO+J1LMK91NgOnAJZjKNtwA0P?=
- =?us-ascii?Q?KuJz7LnQCQSkxgB8TeYo1n9nQ/ycBV6EemSjU474Iq5H+bo5pv70tVDmMCNb?=
- =?us-ascii?Q?1JbfJdYfGoby85QCLsmtIHpardNPsKM8+aeurPDysbzTQkBPBn0I9gEyNM1s?=
- =?us-ascii?Q?sWFn6iYg/9HCk6JKTceqAfYW/sMFu8oGXcED2k9lAadZghWZeBtQm3Iiay2x?=
- =?us-ascii?Q?+CpK9RjMl8RoqBEymJ9Lv3r1Zn6Zg2K8C2Dx4sJAlIJJZlEfAmcI573jBwEK?=
- =?us-ascii?Q?yfDQBRYXXB4uwF85e26N5O7B6qcYmjftm0Wd5s8NYEJIltrK5/1oFEdw27B+?=
- =?us-ascii?Q?p6/JdibJio7wEzrhWAiDscz1ipgpm9/qFm6RzGLxotbGyjNG7bMS2EUjsH4Z?=
- =?us-ascii?Q?uVWFkEwm21DT6zYJyE2lgqgx9fdL7H92HO205IYZnfeSsTs3JbarMCnHqRTD?=
- =?us-ascii?Q?ff3x9kfR7dPBvKwaJjHE3Wo3gOB272YWay5mlkR5eDMsZQReqrP/QrY6WV5j?=
- =?us-ascii?Q?6Z6hfGjaekh4LdFqVeM3gD5WQ/3jri7torutaoQYRWyGOs4ZzvhYi35C1qgi?=
- =?us-ascii?Q?YLhcRghCPZS8NEmbrCyehlvGmhhYinrApuP4815rH0cmLcCGgc5E8Cl51qvM?=
- =?us-ascii?Q?T1hfUB0KErjnB3Tqj/oVIUDfvR1mgqMlxfHCDIfrBzpjoEGpn6wO0kKWLsD/?=
- =?us-ascii?Q?m5zHTtASfKZg3598JC7ALGHWWY/D05mH7loNwpUzQmLIrhNfHzTHcd93lQaZ?=
- =?us-ascii?Q?FcvT3zzEUOELa1P8IcNMSY+oLnZoy7PDII7yfbxh4YPXPVf+m+jb1w9r2yWj?=
- =?us-ascii?Q?1vrYf97rWbF5BM7IQiPtO5xCXxDY7QTuVU2ymZhYltWMYphPdoXfQQr9+jFj?=
- =?us-ascii?Q?jS7vRx0c/HJJESgZEd0oZEOiZt78dv5FHFLeMpecmoiFgK7zdFJ01M1zobIO?=
- =?us-ascii?Q?VeHNm7B5dH73vUTwnlZjm9CSD3wauilJiVB1YmUw8mf1Qj9WwQ+Z0q/LB6Oi?=
- =?us-ascii?Q?fvBOXiZNqOugF9KC7k1xfCuCJLhHIlY2GZn0KIe/5hz5/1v8/nQydL020ZN7?=
- =?us-ascii?Q?9d3MW0NZ+8shZtgU8xoOJjZjdOdnFAWvpx6be+f/gJO4TYaQBB1KiPijyAQ/?=
- =?us-ascii?Q?QHlDpZp5KEGC5hDasrQIIpKFOGTlXlE=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5444aa20-f354-4bc1-8dd0-08debb2412a8
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 12:41:14.1026
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +yH1+XuSgsFZNzDSGuQ6SH3H5p3/u2cjDyuRyCm+PQEq3gt5rXVkpoYzWmQ1Y1WBO5HvWYRU4eSlUfR+KzYMTJ3QhxjRjjLe/USOuGmAhns=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB7128
-X-purgate-ID: tlsNG-ebf023/1779799277-4396A3FF-0B101CBB/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260526-alsa-xen-event-channel-fixes-v1-2-91d3a6a50778@gmail.com>
+References: <20260526-alsa-xen-event-channel-fixes-v1-0-91d3a6a50778@gmail.com>
+In-Reply-To: <20260526-alsa-xen-event-channel-fixes-v1-0-91d3a6a50778@gmail.com>
+To: Takashi Iwai <tiwai@suse.com>, 
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
+ Jaroslav Kysela <perex@perex.cz>
+Cc: xen-devel@lists.xenproject.org, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6113;
+ i=cassiogabrielcontato@gmail.com; h=from:subject:message-id;
+ bh=vlLMVEi4mc8JanxVJ4cRF3k2qZw2pWROuD5ZLWy8lr4=;
+ b=owGbwMvMwCV2IdZeKur/u2bG02pJDFmi05ZMEt7+9+1C28rcdPNvQW7GF7lsFX6I7du/9n/a1
+ hL3eJsPHaUsDGJcDLJiiiyrkxZZ7ul6cLU+boUHzBxWJpAhDFycAjCRSi9Ghjn8jK6XEorLNIwL
+ CjLqvO8kOe91Ldz1U6l0ZoHX0e9eZxgZVv2rZPjn22DTbf8/XWu/7PVUl10bTwQJJfHpFL+Xvb6
+ aHwA=
+X-Developer-Key: i=cassiogabrielcontato@gmail.com; a=openpgp;
+ fpr=AB62A239BC8AE0D57F5EA848D05D3F1A5AFFEE83
+X-purgate-ID: tlsNG-d25034/1779799726-E2169CF5-D2402B03/0/0
 X-purgate-type: clean
-X-purgate-size: 2795
+X-purgate-size: 6115
 
-Unmapping the virtual VMCB is performed near the end of the domain
-destroy procedure but the mapped guest frame prevents domain destroy
-from getting to that point. This means guests that call VMRUN cannot
-be fully destroyed.
+The request channel must be connected from ALSA .open(), because hw-rule
+queries and the stream open request use it. The event channel is
+different: XENSND_EVT_CUR_POS handling uses ALSA runtime buffer and
+period geometry, and the corresponding Xen stream parameters are not
+submitted to the backend until .prepare() sends XENSND_OP_OPEN.
 
-Move the unmap of the virtual VMCB earlier to fix the issue.
+Currently .open() connects both channels. A backend current-position
+event, or a stale event queued for an earlier stream instance, can
+therefore reach xen_snd_front_alsa_handle_cur_pos() before
+runtime->buffer_size and runtime->period_size are valid.
 
-Fixes: bcf557675d85 ("x86: properly use map_domain_page() in nested HVM code")
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Add a per-channel connection helper, connect only the request channel in
+.open(), connect the event channel after a successful stream prepare,
+and disconnect it before stream close/free. Re-check the event-channel
+state after taking ring_io_lock so disconnecting the event channel
+synchronizes against a threaded IRQ that passed the initial lockless
+state test. Keep defensive runtime geometry checks in the position
+handler.
+
+Fixes: 1cee559351a7 ("ALSA: xen-front: Implement ALSA virtual sound driver")
+Signed-off-by: Cássio Gabriel <cassiogabrielcontato@gmail.com>
 ---
- xen/arch/x86/hvm/svm/nestedhvm.h |  1 +
- xen/arch/x86/hvm/svm/nestedsvm.c | 15 +++++++++++++--
- xen/arch/x86/hvm/svm/svm.c       |  1 +
- 3 files changed, 15 insertions(+), 2 deletions(-)
+ sound/xen/xen_snd_front_alsa.c    | 17 ++++++++++++-----
+ sound/xen/xen_snd_front_evtchnl.c | 20 +++++++++++++-------
+ sound/xen/xen_snd_front_evtchnl.h |  2 ++
+ 3 files changed, 27 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
-index 9bfed5ffd71b..9bb04a043430 100644
---- a/xen/arch/x86/hvm/svm/nestedhvm.h
-+++ b/xen/arch/x86/hvm/svm/nestedhvm.h
-@@ -48,6 +48,7 @@ bool cf_check nsvm_vmcb_guest_intercepts_event(
-     struct vcpu *v, unsigned int vector, int errcode);
- bool cf_check nsvm_vmcb_hap_enabled(struct vcpu *v);
- enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v);
-+void cf_check nsvm_domain_relinquish_resources(struct domain *d);
+diff --git a/sound/xen/xen_snd_front_alsa.c b/sound/xen/xen_snd_front_alsa.c
+index dc626480123a..a6dd196f73d6 100644
+--- a/sound/xen/xen_snd_front_alsa.c
++++ b/sound/xen/xen_snd_front_alsa.c
+@@ -378,7 +378,7 @@ static int alsa_open(struct snd_pcm_substream *substream)
  
- /* Interrupts, vGIF */
- void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v);
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index d4fd838ca0b6..6f4684f5c21b 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -110,8 +110,6 @@ void cf_check nsvm_vcpu_destroy(struct vcpu *v)
-         svm->ns_merged_msrpm = NULL;
-     }
+ 	stream_clear(stream);
  
--    hvm_unmap_guest_frame(nv->nv_vvmcx, 1);
--    nv->nv_vvmcx = NULL;
-     if ( nv->nv_n2vmcx )
-     {
-         free_vmcb(nv->nv_n2vmcx);
-@@ -122,6 +120,19 @@ void cf_check nsvm_vcpu_destroy(struct vcpu *v)
-     svm->ns_iomap = NULL;
+-	xen_snd_front_evtchnl_pair_set_connected(stream->evt_pair, true);
++	xen_snd_front_evtchnl_set_connected(&stream->evt_pair->req, true);
+ 
+ 	ret = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_FORMAT,
+ 				  alsa_hw_rule, stream,
+@@ -498,6 +498,8 @@ static int alsa_hw_free(struct snd_pcm_substream *substream)
+ 	struct xen_snd_front_pcm_stream_info *stream = stream_get(substream);
+ 	int ret;
+ 
++	xen_snd_front_evtchnl_set_connected(&stream->evt_pair->evt, false);
++
+ 	ret = xen_snd_front_stream_close(&stream->evt_pair->req);
+ 	stream_free(stream);
+ 	return ret;
+@@ -532,6 +534,7 @@ static int alsa_prepare(struct snd_pcm_substream *substream)
+ 			return ret;
+ 
+ 		stream->is_open = true;
++		xen_snd_front_evtchnl_set_connected(&stream->evt_pair->evt, true);
+ 	}
+ 
+ 	return 0;
+@@ -571,20 +574,24 @@ void xen_snd_front_alsa_handle_cur_pos(struct xen_snd_front_evtchnl *evtchnl,
+ {
+ 	struct snd_pcm_substream *substream = evtchnl->u.evt.substream;
+ 	struct xen_snd_front_pcm_stream_info *stream = stream_get(substream);
++	struct snd_pcm_runtime *runtime = substream->runtime;
+ 	snd_pcm_uframes_t delta, new_hw_ptr, cur_frame;
+ 
+-	cur_frame = bytes_to_frames(substream->runtime, pos_bytes);
++	if (!runtime->buffer_size || !runtime->period_size)
++		return;
++
++	cur_frame = bytes_to_frames(runtime, pos_bytes);
+ 
+ 	delta = cur_frame - stream->be_cur_frame;
+ 	stream->be_cur_frame = cur_frame;
+ 
+ 	new_hw_ptr = (snd_pcm_uframes_t)atomic_read(&stream->hw_ptr);
+-	new_hw_ptr = (new_hw_ptr + delta) % substream->runtime->buffer_size;
++	new_hw_ptr = (new_hw_ptr + delta) % runtime->buffer_size;
+ 	atomic_set(&stream->hw_ptr, (int)new_hw_ptr);
+ 
+ 	stream->out_frames += delta;
+-	if (stream->out_frames > substream->runtime->period_size) {
+-		stream->out_frames %= substream->runtime->period_size;
++	if (stream->out_frames > runtime->period_size) {
++		stream->out_frames %= runtime->period_size;
+ 		snd_pcm_period_elapsed(substream);
+ 	}
+ }
+diff --git a/sound/xen/xen_snd_front_evtchnl.c b/sound/xen/xen_snd_front_evtchnl.c
+index 09e4c1d05636..17a30452c0cc 100644
+--- a/sound/xen/xen_snd_front_evtchnl.c
++++ b/sound/xen/xen_snd_front_evtchnl.c
+@@ -94,6 +94,9 @@ static irqreturn_t evtchnl_interrupt_evt(int irq, void *dev_id)
+ 
+ 	guard(mutex)(&channel->ring_io_lock);
+ 
++	if (unlikely(channel->state != EVTCHNL_STATE_CONNECTED))
++		return IRQ_HANDLED;
++
+ 	prod = page->in_prod;
+ 	/* Ensure we see ring contents up to prod. */
+ 	virt_rmb();
+@@ -430,8 +433,8 @@ int xen_snd_front_evtchnl_publish_all(struct xen_snd_front_info *front_info)
+ 	return ret;
  }
  
-+void cf_check nsvm_domain_relinquish_resources(struct domain *d)
-+{
-+    struct vcpu *v;
-+    struct nestedvcpu *nv;
-+
-+    for_each_vcpu ( d, v )
-+    {
-+        nv = &vcpu_nestedhvm(v);
-+        hvm_unmap_guest_frame(nv->nv_vvmcx, 1);
-+        nv->nv_vvmcx = NULL;
-+    }
-+}
-+
- int cf_check nsvm_vcpu_reset(struct vcpu *v)
+-void xen_snd_front_evtchnl_pair_set_connected(struct xen_snd_front_evtchnl_pair *evt_pair,
+-					      bool is_connected)
++void xen_snd_front_evtchnl_set_connected(struct xen_snd_front_evtchnl *channel,
++					 bool is_connected)
  {
-     struct nestedsvm *svm = &vcpu_nestedsvm(v);
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 209edcba321a..e6b5c9ec3b9c 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -2422,6 +2422,7 @@ static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
-     .nhvm_vmcx_hap_enabled = nsvm_vmcb_hap_enabled,
-     .nhvm_intr_blocked = nsvm_intr_blocked,
-     .nhvm_hap_walk_L1_p2m = nsvm_hap_walk_L1_p2m,
-+    .nhvm_domain_relinquish_resources = nsvm_domain_relinquish_resources,
+ 	enum xen_snd_front_evtchnl_state state;
  
-     .get_reg = svm_get_reg,
-     .set_reg = svm_set_reg,
+@@ -440,13 +443,16 @@ void xen_snd_front_evtchnl_pair_set_connected(struct xen_snd_front_evtchnl_pair
+ 	else
+ 		state = EVTCHNL_STATE_DISCONNECTED;
+ 
+-	scoped_guard(mutex, &evt_pair->req.ring_io_lock) {
+-		evt_pair->req.state = state;
++	scoped_guard(mutex, &channel->ring_io_lock) {
++		channel->state = state;
+ 	}
++}
+ 
+-	scoped_guard(mutex, &evt_pair->evt.ring_io_lock) {
+-		evt_pair->evt.state = state;
+-	}
++void xen_snd_front_evtchnl_pair_set_connected(struct xen_snd_front_evtchnl_pair *evt_pair,
++					      bool is_connected)
++{
++	xen_snd_front_evtchnl_set_connected(&evt_pair->req, is_connected);
++	xen_snd_front_evtchnl_set_connected(&evt_pair->evt, is_connected);
+ }
+ 
+ void xen_snd_front_evtchnl_pair_clear(struct xen_snd_front_evtchnl_pair *evt_pair)
+diff --git a/sound/xen/xen_snd_front_evtchnl.h b/sound/xen/xen_snd_front_evtchnl.h
+index 8400261ac466..f6ebdb09c029 100644
+--- a/sound/xen/xen_snd_front_evtchnl.h
++++ b/sound/xen/xen_snd_front_evtchnl.h
+@@ -77,6 +77,8 @@ void xen_snd_front_evtchnl_free_all(struct xen_snd_front_info *front_info);
+ int xen_snd_front_evtchnl_publish_all(struct xen_snd_front_info *front_info);
+ 
+ void xen_snd_front_evtchnl_flush(struct xen_snd_front_evtchnl *evtchnl);
++void xen_snd_front_evtchnl_set_connected(struct xen_snd_front_evtchnl *channel,
++					 bool is_connected);
+ 
+ void xen_snd_front_evtchnl_pair_set_connected(struct xen_snd_front_evtchnl_pair *evt_pair,
+ 					      bool is_connected);
+
 -- 
-2.53.0
+2.54.0
 
 
