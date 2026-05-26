@@ -4,40 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9162DCD6E40
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 14:53:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1319973.1587419 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF6FCD5BC8
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 15:08:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1320020.1587437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRt9X-0003v8-2o; Tue, 26 May 2026 14:53:07 +0000
+	id 1wRtO5-000783-FD; Tue, 26 May 2026 15:08:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1319973.1587419; Tue, 26 May 2026 14:53:07 +0000
+Received: by outflank-mailman (output) from mailman id 1320020.1587437; Tue, 26 May 2026 15:08:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRt9W-0003uo-VX; Tue, 26 May 2026 14:53:06 +0000
-Received: by outflank-mailman (input) for mailman id 1319973;
- Tue, 26 May 2026 14:53:06 +0000
+	id 1wRtO5-00077w-C4; Tue, 26 May 2026 15:08:09 +0000
+Received: by outflank-mailman (input) for mailman id 1320020;
+ Tue, 26 May 2026 15:08:08 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1wRt9W-0003tv-AM
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 14:53:06 +0000
+ (envelope-from <jgross@suse.com>) id 1wRtO4-00077i-E2
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 15:08:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRt9V-00DAdi-Mk
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 16:53:05 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wRtO3-00BHE7-Pz
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 17:08:07 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mfo@igalia.com>)
- id 6a15b3ce-e002-0a2a0a5209dd-0a2a450acc28-8
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 16:53:05 +0200
-Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <mfo@igalia.com>)
- id 6a15b3d1-56b3-0a2a450a0019-d561b338b71c-3
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 16:53:05 +0200
-Received: from 186-249-145-161.shared.desktop.com.br ([186.249.145.161]
- helo=[192.168.1.68]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1wRt9U-008TwX-CT; Tue, 26 May 2026 16:53:04 +0200
+ (envelope-from <jgross@suse.com>)
+ id 6a15b750-2eae-0a2a0a5409dd-0a2a4505aa02-14
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:07 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jgross@suse.com>)
+ id 6a15b757-aaa8-0a2a45050019-c387df83a5f8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:07 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3348767479;
+ Tue, 26 May 2026 15:08:07 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D79085A280;
+ Tue, 26 May 2026 15:08:06 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id fIlCM1a3FWqUVQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 26 May 2026 15:08:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,80 +60,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Cc:To:In-Reply-To:References:Message-Id:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=L3Sr9rY5U1mD/3546TE+xOT1mBFRY3YzwAzYlEgEGo8=; b=TFfbZM3IVCe7bLF1pen0oFglI9
-	HTAI6yIrD2Gg0QVnwokdz1pXUAVJtb7hIrrmnNha9t7eOmhF5Ysx/U6xGn0VQx6vto16KLFrrj9SR
-	d5crj92d0FUNleg2g1o0LH1IX+CJijWoyevMnfvLCoSA9nzPEsZrcB5SCzfLSlV6n4NoaqUspGG3L
-	4/gkvo2aUFoc+9l+uQzU3zlSMwJ7fU5WZVquW3asjZDLvF8QPHU2mQHxoXxZ5ubwBoRs2oNWt1MPr
-	NGCsMBJIgJJ3u0gnC5BXfxGe61gr22kRvKe05py6xTl15MS0QkJn20DqpQuXX1RuDN2AUje79vYCK
-	L8Uc4siw==;
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-Date: Tue, 26 May 2026 11:52:36 -0300
-Subject: [PATCH v4 4/4] x86/pvh: fix unbootable VMs by really inlining
- memset() in xen_prepare_pvh()
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1779808087; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zqSqltL1GnVn7PKoSl94YXnAsN5DYo+RIglrQTaw6ZE=;
+	b=IhRRJLg1s5P5gbD17rJX9mZp818QbdvrFXhyx343oE+IaY0Kh+yGSPyqhhevxSLMM9kMpW
+	xtcnReEWjm/8c1ay8xDj7uC+n3hhkvcCe5rSHQ151k0Qtc23cNKrxsvH+aYeIB3X9PRiY5
+	6dAf2+JidkGM8r4dXSxeKh8mWnX64GU=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1779808087; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zqSqltL1GnVn7PKoSl94YXnAsN5DYo+RIglrQTaw6ZE=;
+	b=IhRRJLg1s5P5gbD17rJX9mZp818QbdvrFXhyx343oE+IaY0Kh+yGSPyqhhevxSLMM9kMpW
+	xtcnReEWjm/8c1ay8xDj7uC+n3hhkvcCe5rSHQ151k0Qtc23cNKrxsvH+aYeIB3X9PRiY5
+	6dAf2+JidkGM8r4dXSxeKh8mWnX64GU=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	linux-trace-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 1/5] x86/xen: Drop lazy mode from trace entries
+Date: Tue, 26 May 2026 17:05:10 +0200
+Message-ID: <20260526150514.129330-2-jgross@suse.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260526150514.129330-1-jgross@suse.com>
+References: <20260526150514.129330-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260526-pvh-kasan-inline-v4-4-a310e6a25ecd@igalia.com>
-References: <20260526-pvh-kasan-inline-v4-0-a310e6a25ecd@igalia.com>
-In-Reply-To: <20260526-pvh-kasan-inline-v4-0-a310e6a25ecd@igalia.com>
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>, 
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: kernel-dev@igalia.com, linux-kernel@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Mauricio Faria de Oliveira <mfo@igalia.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-4011c0/1779807185-7EF8B8B7-5731982A/0/0
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-2.79 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.19)[-0.967];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,suse.com:mid];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[]
+X-purgate-ID: tlsNG-c201ff/1779808087-D877A443-962DE9F9/0/0
 X-purgate-type: clean
-X-purgate-size: 1474
+X-purgate-size: 2996
 
-Even with __builtin the compiler may decide to use the out of line function
-instead of the inline implementation.
+Drop the lazy mode (cpu or mmu) from the xen_mc_batch and xen_mc_issue
+trace entries.
 
-This particular one (still) generated the inline implementation as expected
-(at least in these compiler versions), but this is not guaranteed to remain
-the case, as seen with the previous commit.
+This is done in preparation of removing the xen_lazy_mode percpu
+variable.
 
-Switch the builtin to the inline implementation to prevent a similar issue.
-
-Fixes: fbe5a6dfe492 ("xen, pvh: fix unbootable VMs by inlining memset() in xen_prepare_pvh()")
-Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/platform/pvh/enlighten.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/x86/xen/xen-ops.h     | 11 +++++++----
+ include/trace/events/xen.h | 33 +++++++++++++++++++--------------
+ 2 files changed, 26 insertions(+), 18 deletions(-)
 
-diff --git a/arch/x86/platform/pvh/enlighten.c b/arch/x86/platform/pvh/enlighten.c
-index f2053cbe9b0ce3d2178938269607c652ae8f528e..cb442cbd9d828619421babb281bfe9759edbca8a 100644
---- a/arch/x86/platform/pvh/enlighten.c
-+++ b/arch/x86/platform/pvh/enlighten.c
-@@ -8,6 +8,7 @@
- #include <asm/hypervisor.h>
- #include <asm/e820/api.h>
- #include <asm/x86_init.h>
-+#include <asm/string.h>
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index 6808010ac379..dc892f421f25 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -98,7 +98,7 @@ static inline void xen_mc_batch(void)
  
- #include <asm/xen/interface.h>
+ 	/* need to disable interrupts until this entry is complete */
+ 	local_irq_save(flags);
+-	trace_xen_mc_batch(xen_get_lazy_mode());
++	trace_xen_mc_batch(flags);
+ 	__this_cpu_write(xen_mc_irq_flags, flags);
+ }
  
-@@ -129,7 +130,7 @@ void __init xen_prepare_pvh(void)
- 	 * This must not compile to "call memset" because memset() may be
- 	 * instrumented.
- 	 */
--	__builtin_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
-+	__inline_memset(&pvh_bootparams, 0, sizeof(pvh_bootparams));
+@@ -114,13 +114,16 @@ void xen_mc_flush(void);
+ /* Issue a multicall if we're not in a lazy mode */
+ static inline void xen_mc_issue(unsigned mode)
+ {
+-	trace_xen_mc_issue(mode);
++	bool flush = !(xen_get_lazy_mode() & mode);
++	unsigned long flags = this_cpu_read(xen_mc_irq_flags);
  
- 	hypervisor_specific_init(xen_guest);
+-	if ((xen_get_lazy_mode() & mode) == 0)
++	trace_xen_mc_issue(flush, flags);
++
++	if (flush)
+ 		xen_mc_flush();
  
-
+ 	/* restore flags saved in xen_mc_batch */
+-	local_irq_restore(this_cpu_read(xen_mc_irq_flags));
++	local_irq_restore(flags);
+ }
+ 
+ /* Set up a callback to be called when the current batch is flushed */
+diff --git a/include/trace/events/xen.h b/include/trace/events/xen.h
+index e3f139f0bc78..ad384969e2cb 100644
+--- a/include/trace/events/xen.h
++++ b/include/trace/events/xen.h
+@@ -12,24 +12,29 @@
+ struct multicall_entry;
+ 
+ /* Multicalls */
+-DECLARE_EVENT_CLASS(xen_mc__batch,
+-	    TP_PROTO(enum xen_lazy_mode mode),
+-	    TP_ARGS(mode),
++TRACE_EVENT(xen_mc_batch,
++	    TP_PROTO(unsigned long flags),
++	    TP_ARGS(flags),
+ 	    TP_STRUCT__entry(
+-		    __field(enum xen_lazy_mode, mode)
++		    __field(unsigned long, flags)
+ 		    ),
+-	    TP_fast_assign(__entry->mode = mode),
+-	    TP_printk("start batch LAZY_%s",
+-		      (__entry->mode == XEN_LAZY_MMU) ? "MMU" :
+-		      (__entry->mode == XEN_LAZY_CPU) ? "CPU" : "NONE")
++	    TP_fast_assign(__entry->flags = flags),
++	    TP_printk("start batch lazy flags %lx", __entry->flags)
+ 	);
+-#define DEFINE_XEN_MC_BATCH(name)			\
+-	DEFINE_EVENT(xen_mc__batch, name,		\
+-		TP_PROTO(enum xen_lazy_mode mode),	\
+-		     TP_ARGS(mode))
+ 
+-DEFINE_XEN_MC_BATCH(xen_mc_batch);
+-DEFINE_XEN_MC_BATCH(xen_mc_issue);
++TRACE_EVENT(xen_mc_issue,
++	    TP_PROTO(bool flush, unsigned long flags),
++	    TP_ARGS(flush, flags),
++	    TP_STRUCT__entry(
++		    __field(unsigned long, flags)
++		    __field(bool, flush)
++		    ),
++	    TP_fast_assign(__entry->flush = flush;
++			   __entry->flags = flags;
++		    ),
++	    TP_printk("flush: %s, flags %lx",
++		      __entry->flush ? "yes" : "no", __entry->flags)
++	);
+ 
+ TRACE_DEFINE_SIZEOF(ulong);
+ 
 -- 
-2.51.0
+2.54.0
 
 
