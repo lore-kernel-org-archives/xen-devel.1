@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3096FCD5BD0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 15:08:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1320019.1587427 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 050F8CD5BD2
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2026 15:08:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1320022.1587446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRtO1-0006ur-9J; Tue, 26 May 2026 15:08:05 +0000
+	id 1wRtOB-0007PL-MK; Tue, 26 May 2026 15:08:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1320019.1587427; Tue, 26 May 2026 15:08:05 +0000
+Received: by outflank-mailman (output) from mailman id 1320022.1587446; Tue, 26 May 2026 15:08:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wRtO1-0006uk-68; Tue, 26 May 2026 15:08:05 +0000
-Received: by outflank-mailman (input) for mailman id 1320019;
- Tue, 26 May 2026 15:08:04 +0000
+	id 1wRtOB-0007PE-J4; Tue, 26 May 2026 15:08:15 +0000
+Received: by outflank-mailman (input) for mailman id 1320022;
+ Tue, 26 May 2026 15:08:13 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1wRtO0-0006ue-6s
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 15:08:04 +0000
+ (envelope-from <jgross@suse.com>) id 1wRtO9-0007Ne-Qk
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 15:08:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wRtNy-004DTL-Ks
- for xen-devel@lists.xenproject.org; Tue, 26 May 2026 17:08:02 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wRtO9-00BHE7-6i
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2026 17:08:13 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6a15b73d-bab6-0a2a0a5309dd-0a2a450780bc-36
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:02 +0200
+ id 6a15b750-2eae-0a2a0a5409dd-0a2a4505aa02-22
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:13 +0200
 Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jgross@suse.com>)
- id 6a15b752-229c-0a2a45070019-c387df83c8d8-3
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:02 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 6a15b75c-aaa8-0a2a45050019-c387df839eee-3
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 17:08:13 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C673F75EE0;
- Tue, 26 May 2026 15:08:01 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B5B4075EA1;
+ Tue, 26 May 2026 15:08:12 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F41F75A280;
- Tue, 26 May 2026 15:08:00 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7AECC5A280;
+ Tue, 26 May 2026 15:08:12 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Nu2JOlC3FWqKVQAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 26 May 2026 15:08:00 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id xZX0HFy3FWqaVQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 26 May 2026 15:08:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,29 +60,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1779808082; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=yHeVRInwBdhPTyeUIDm80iXzexAaKjc6iJ7mRCvzf0o=;
-	b=X0hCaH5Ou04bGdmMjYXA7Yqxh3MId+vNVUstba3gVRcIA6NAUvBiDiV4u4ukWBTJ2S8fp3
-	m2ehEj3GKRUju2JgDxSEKJeiLovzeWykcBmopzGBkLtNoozneGCoBPWZUO6XGChOz5Ud+S
-	+KJFFKXJG6hyXvKgCRwzQynUUt8+qkk=
+	t=1779808092; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=htKnackiGTLT6ra2yiyVCBoM5uojYzGpE60av2lvlE4=;
+	b=PFA/dfob5jaYx8ziU/VgRy6SDe4zshqEhaFAiCgmyGJnLa9BG79cjVXHb65SY6s2PpEOb6
+	ZelH9pCmaDauo7y1BTg/Wh4jQRtBNhSDp8kzKI+gHROm+cpqhCaDqubzp97my98RgEFJfP
+	QRRvI7r+TZvT/QvfBIZsUjLJE/Ufimk=
 Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=mAHAXM8U
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1779808081; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=yHeVRInwBdhPTyeUIDm80iXzexAaKjc6iJ7mRCvzf0o=;
-	b=mAHAXM8Ueb0PCWr1RCbutCZZ08Xj5nRqwQhdLaSrM6zsJ2Mb3Iv4zOofJwXY71hi2F2Gs4
-	sWCh8bDq4rd/fYAHkzUW1mO64zXFnilEpth71ndsfqpvE26qeA3jbJtDXb427q4/XcHR9a
-	+Vmtr4/LRyq8Ntr92MIUzmQgIv46/gc=
+	t=1779808092; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=htKnackiGTLT6ra2yiyVCBoM5uojYzGpE60av2lvlE4=;
+	b=PFA/dfob5jaYx8ziU/VgRy6SDe4zshqEhaFAiCgmyGJnLa9BG79cjVXHb65SY6s2PpEOb6
+	ZelH9pCmaDauo7y1BTg/Wh4jQRtBNhSDp8kzKI+gHROm+cpqhCaDqubzp97my98RgEFJfP
+	QRRvI7r+TZvT/QvfBIZsUjLJE/Ufimk=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
-	x86@kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	virtualization@lists.linux.dev
+	x86@kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Thomas Gleixner <tglx@kernel.org>,
@@ -91,90 +91,288 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	xen-devel@lists.xenproject.org,
-	Andrew Morton <akpm@linux-foundation.org>,
-	David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	"Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Subject: [PATCH 0/5] x86/xen: Get rid of Xen private lazy MMU mode tracking
-Date: Tue, 26 May 2026 17:05:09 +0200
-Message-ID: <20260526150514.129330-1-jgross@suse.com>
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 2/5] x86/xen: Change interface of xen_mc_issue()
+Date: Tue, 26 May 2026 17:05:11 +0200
+Message-ID: <20260526150514.129330-3-jgross@suse.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260526150514.129330-1-jgross@suse.com>
+References: <20260526150514.129330-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: C673F75EE0
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spamd-Result: default: False [-2.79 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	NEURAL_HAM_SHORT(-0.19)[-0.968];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:mid,suse.com:dkim];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	URIBL_BLOCKED(0.00)[suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DWL_DNSWL_BLOCKED(0.00)[suse.com:dkim];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	R_RATELIMIT(0.00)[to_ip_from(RLkdkdrsxe9hqhhs5ask8616i6)];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
-X-purgate-ID: tlsNG-ef75cf/1779808082-0A772C48-5DE2F2AC/0/0
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[]
+X-purgate-ID: tlsNG-c201ff/1779808093-DAF6E443-1EE9DBBB/0/0
 X-purgate-type: clean
-X-purgate-size: 1246
+X-purgate-size: 7686
 
-With generic lazy MMU mode tracking being available, there is no real
-need for having Xen PV specific code to track lazy MMU mode, too.
+Today xen_mc_issue() is deciding whether to call xen_mc_flush() or not
+based on the lazy mode input parameter passed.
 
-This makes it possible to drop two paravirt hooks.
+Modify this interface to pass a boolean indicating whether the flush
+should be done.
 
-Note that this series is based on my series "x86/xen: Do some Xen-PV
-related cleanups" [1].
+For querying lazy mmu mode use the is_lazy_mmu_mode_active() helper.
 
-[1]: https://lore.kernel.org/lkml/20260522152114.77319-1-jgross@suse.com/
+This is done in preparation for dropping the xen_lazy_mode percpu
+variable.
 
-Juergen Gross (5):
-  x86/xen: Drop lazy mode from trace entries
-  x86/xen: Change interface of xen_mc_issue()
-  mm: Refactor lazy_mmu_mode_pause() and lazy_mmu_mode_resume()
-  x86/xen: Get rid of last XEN_LAZY_MMU uses
-  x86/xen: Replace generic lazy tracking with cpu specific one
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/xen/enlighten_pv.c |  8 ++++----
+ arch/x86/xen/mmu_pv.c       | 38 ++++++++++++++++++-------------------
+ arch/x86/xen/xen-ops.h      |  3 +--
+ 3 files changed, 24 insertions(+), 25 deletions(-)
 
- arch/x86/include/asm/paravirt.h       |  9 ++--
- arch/x86/include/asm/paravirt_types.h | 11 +----
- arch/x86/include/asm/xen/hypervisor.h | 25 +---------
- arch/x86/kernel/paravirt.c            |  6 +--
- arch/x86/xen/enlighten_pv.c           | 30 +++++-------
- arch/x86/xen/mmu_pv.c                 | 66 +++++++++------------------
- arch/x86/xen/xen-ops.h                | 12 +++--
- include/linux/pgtable.h               | 56 ++++++++++++++++++-----
- include/trace/events/xen.h            | 33 ++++++++------
- 9 files changed, 112 insertions(+), 136 deletions(-)
-
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index ed2d7a3756ce..428189f5d437 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -544,7 +544,7 @@ static void xen_set_ldt(const void *addr, unsigned entries)
+ 
+ 	MULTI_mmuext_op(mcs.mc, op, 1, NULL, DOMID_SELF);
+ 
+-	xen_mc_issue(XEN_LAZY_CPU);
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);
+ }
+ 
+ static void xen_load_gdt(const struct desc_ptr *dtr)
+@@ -649,7 +649,7 @@ static void xen_load_tls(struct thread_struct *t, unsigned int cpu)
+ 	load_TLS_descriptor(t, cpu, 1);
+ 	load_TLS_descriptor(t, cpu, 2);
+ 
+-	xen_mc_issue(XEN_LAZY_CPU);
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);
+ }
+ 
+ static void xen_load_gs_index(unsigned int idx)
+@@ -1011,7 +1011,7 @@ static void xen_load_sp0(unsigned long sp0)
+ 
+ 	mcs = xen_mc_entry(0);
+ 	MULTI_stack_switch(mcs.mc, __KERNEL_DS, sp0);
+-	xen_mc_issue(XEN_LAZY_CPU);
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);
+ 	this_cpu_write(cpu_tss_rw.x86_tss.sp0, sp0);
+ }
+ 
+@@ -1071,7 +1071,7 @@ static void xen_write_cr0(unsigned long cr0)
+ 
+ 	MULTI_fpu_taskswitch(mcs.mc, (cr0 & X86_CR0_TS) != 0);
+ 
+-	xen_mc_issue(XEN_LAZY_CPU);
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);
+ }
+ 
+ static void xen_write_cr4(unsigned long cr4)
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index cd80406be9c6..51dbdc67c73c 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -290,7 +290,7 @@ static void xen_set_pmd_hyper(pmd_t *ptr, pmd_t val)
+ 	u.val = pmd_val_ma(val);
+ 	xen_extend_mmu_update(&u);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+@@ -333,7 +333,7 @@ static bool xen_batched_set_pte(pte_t *ptep, pte_t pteval)
+ 	u.val = pte_val_ma(pteval);
+ 	xen_extend_mmu_update(&u);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	return true;
+ }
+@@ -380,7 +380,7 @@ static void xen_ptep_modify_prot_commit(struct vm_area_struct *vma,
+ 	u.val = pte_val_ma(pte);
+ 	xen_extend_mmu_update(&u);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ }
+ 
+ /* Assume pteval_t is equivalent to all the other *val_t types. */
+@@ -474,7 +474,7 @@ static void xen_set_pud_hyper(pud_t *ptr, pud_t val)
+ 	u.val = pud_val_ma(val);
+ 	xen_extend_mmu_update(&u);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+@@ -557,7 +557,7 @@ static void __init xen_set_p4d_hyper(p4d_t *ptr, p4d_t val)
+ 
+ 	__xen_set_p4d_hyper(ptr, val);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+@@ -589,7 +589,7 @@ static void xen_set_p4d(p4d_t *ptr, p4d_t val)
+ 	if (user_ptr)
+ 		__xen_set_p4d_hyper((p4d_t *)user_ptr, val);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ }
+ 
+ __visible p4dval_t xen_p4d_val(p4d_t p4d)
+@@ -816,7 +816,7 @@ static void __xen_pgd_pin(struct mm_struct *mm, pgd_t *pgd)
+ 			   PFN_DOWN(__pa(user_pgd)));
+ 	}
+ 
+-	xen_mc_issue(0);
++	xen_mc_issue(true);
+ }
+ 
+ static void xen_pgd_pin(struct mm_struct *mm)
+@@ -933,7 +933,7 @@ static void __xen_pgd_unpin(struct mm_struct *mm, pgd_t *pgd)
+ 
+ 	__xen_pgd_walk(mm, pgd, xen_unpin_page, USER_LIMIT);
+ 
+-	xen_mc_issue(0);
++	xen_mc_issue(true);
+ }
+ 
+ static void xen_pgd_unpin(struct mm_struct *mm)
+@@ -1309,7 +1309,7 @@ static noinline void xen_flush_tlb(void)
+ 	op->cmd = MMUEXT_TLB_FLUSH_LOCAL;
+ 	MULTI_mmuext_op(mcs.mc, op, 1, NULL, DOMID_SELF);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+@@ -1329,7 +1329,7 @@ static void xen_flush_tlb_one_user(unsigned long addr)
+ 	op->arg1.linear_addr = addr & PAGE_MASK;
+ 	MULTI_mmuext_op(mcs.mc, op, 1, NULL, DOMID_SELF);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+@@ -1366,7 +1366,7 @@ static void xen_flush_tlb_multi(const struct cpumask *cpus,
+ 
+ 	MULTI_mmuext_op(mcs.mc, &args->op, 1, NULL, DOMID_SELF);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ }
+ 
+ static unsigned long xen_read_cr3(void)
+@@ -1425,7 +1425,7 @@ static void xen_write_cr3(unsigned long cr3)
+ 	else
+ 		__xen_write_cr3(false, 0);
+ 
+-	xen_mc_issue(XEN_LAZY_CPU);  /* interrupts restored */
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);  /* interrupts restored */
+ }
+ 
+ /*
+@@ -1460,7 +1460,7 @@ static void __init xen_write_cr3_init(unsigned long cr3)
+ 
+ 	__xen_write_cr3(true, cr3);
+ 
+-	xen_mc_issue(XEN_LAZY_CPU);  /* interrupts restored */
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);  /* interrupts restored */
+ }
+ 
+ static int xen_pgd_alloc(struct mm_struct *mm)
+@@ -1622,7 +1622,7 @@ static inline void xen_alloc_ptpage(struct mm_struct *mm, unsigned long pfn,
+ 		    !pinned)
+ 			__pin_pagetable_pfn(MMUEXT_PIN_L1_TABLE, pfn);
+ 
+-		xen_mc_issue(XEN_LAZY_MMU);
++		xen_mc_issue(!is_lazy_mmu_mode_active());
+ 	}
+ }
+ 
+@@ -1652,7 +1652,7 @@ static inline void xen_release_ptpage(unsigned long pfn, unsigned level)
+ 
+ 		__set_pfn_prot(pfn, PAGE_KERNEL);
+ 
+-		xen_mc_issue(XEN_LAZY_MMU);
++		xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 		ClearPagePinned(page);
+ 	}
+@@ -1875,7 +1875,7 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
+ 	 */
+ 	xen_mc_batch();
+ 	__xen_write_cr3(true, __pa(init_top_pgt));
+-	xen_mc_issue(XEN_LAZY_CPU);
++	xen_mc_issue(xen_get_lazy_mode() != XEN_LAZY_CPU);
+ 
+ 	/* We can't that easily rip out L3 and L2, as the Xen pagetables are
+ 	 * set out this way: [L4], [L1], [L2], [L3], [L1], [L1] ...  for
+@@ -2266,7 +2266,7 @@ static void xen_zap_pfn_range(unsigned long vaddr, unsigned int order,
+ 		if (out_frames)
+ 			out_frames[i] = virt_to_pfn((void *)vaddr);
+ 	}
+-	xen_mc_issue(0);
++	xen_mc_issue(true);
+ }
+ 
+ /*
+@@ -2309,7 +2309,7 @@ static void xen_remap_exchanged_ptes(unsigned long vaddr, int order,
+ 		set_phys_to_machine(virt_to_pfn((void *)vaddr), mfn);
+ 	}
+ 
+-	xen_mc_issue(0);
++	xen_mc_issue(true);
+ }
+ 
+ /*
+@@ -2450,7 +2450,7 @@ static noinline void xen_flush_tlb_all(void)
+ 	op->cmd = MMUEXT_TLB_FLUSH_ALL;
+ 	MULTI_mmuext_op(mcs.mc, op, 1, NULL, DOMID_SELF);
+ 
+-	xen_mc_issue(XEN_LAZY_MMU);
++	xen_mc_issue(!is_lazy_mmu_mode_active());
+ 
+ 	preempt_enable();
+ }
+diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
+index dc892f421f25..dc265bdda24d 100644
+--- a/arch/x86/xen/xen-ops.h
++++ b/arch/x86/xen/xen-ops.h
+@@ -112,9 +112,8 @@ static inline struct multicall_space xen_mc_entry(size_t args)
+ void xen_mc_flush(void);
+ 
+ /* Issue a multicall if we're not in a lazy mode */
+-static inline void xen_mc_issue(unsigned mode)
++static inline void xen_mc_issue(bool flush)
+ {
+-	bool flush = !(xen_get_lazy_mode() & mode);
+ 	unsigned long flags = this_cpu_read(xen_mc_irq_flags);
+ 
+ 	trace_xen_mc_issue(flush, flags);
 -- 
 2.54.0
 
