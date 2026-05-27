@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D1D7CD6E41
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2026 14:04:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1320496.1587809 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2CFCD5BD5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2026 14:04:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1320498.1587828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSErs-0007Hg-Mj; Wed, 27 May 2026 14:04:20 +0000
+	id 1wSErv-0007rD-G7; Wed, 27 May 2026 14:04:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1320496.1587809; Wed, 27 May 2026 14:04:20 +0000
+Received: by outflank-mailman (output) from mailman id 1320498.1587828; Wed, 27 May 2026 14:04:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSErs-0007H6-IO; Wed, 27 May 2026 14:04:20 +0000
-Received: by outflank-mailman (input) for mailman id 1320496;
- Wed, 27 May 2026 14:04:19 +0000
+	id 1wSErv-0007qi-8S; Wed, 27 May 2026 14:04:23 +0000
+Received: by outflank-mailman (input) for mailman id 1320498;
+ Wed, 27 May 2026 14:04:22 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vishal.moola@gmail.com>) id 1wSErr-0006rS-5X
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 14:04:19 +0000
+ (envelope-from <vishal.moola@gmail.com>) id 1wSEru-0007et-FG
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 14:04:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSErq-007NXm-Hg
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 16:04:18 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wSErt-007Nbf-RE
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 16:04:21 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a16f9de-e002-0a2a0a5209dd-0a2a4509cc72-24
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:18 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a16f9e1-5cb7-0a2a0a5109dd-0a2a4505b586-22
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:21 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a16f9e2-2497-0a2a45090019-d155802ef19e-3
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:18 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-49050bfe053so22221805e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:04:18 -0700 (PDT)
+ id 6a16f9e5-aaa8-0a2a45050019-d155dd2df0c9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:21 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-43d73422431so8369225f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:04:21 -0700 (PDT)
 Received: from fedora (cpc92878-cmbg18-2-0-cust539.5-4.cable.virginm.net.
  [86.16.54.28]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-45edb558f52sm6693771f8f.14.2026.05.27.07.04.16
+ ffacd0b85a97d-45edb558f52sm6693771f8f.14.2026.05.27.07.04.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 07:04:17 -0700 (PDT)
+ Wed, 27 May 2026 07:04:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779890658; x=1780495458; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779890661; x=1780495461; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c2LXP0rk0yvbCFBliNg/BHdi3EXRn2M/q6qufOUbEAs=;
-        b=WYybxjT5baaCAvYRRqpuFfyXorjtlexHbH5skaDJb75JhawTOmvhfwcNINT9KL7SN7
-         9zzYBWxvODPeAKaADOrOqQpsmK556CA9NvbHuHBe+Y3g1wB6WZKbq0bYdgkI1sdSQsYM
-         7kKoIkK+3o8hzYxjYZ/9PIHltWXN6nopRR6dkEcMgSchzyR7SbvSGd4TY0cgxuRkd/3q
-         j1k1XmgkYRHxDgfcedu81yavJoKDOpiBkh+h+uWi0t9BeLmYvQmIl1JW2yJl4bbJXgdJ
-         8WMGnrNVNbUk5EX9P4AWVXt+eb3KmBpfBm8nqWjPrlPqzxYif/aw+E08yHM5TXhvJPhx
-         jaNw==
+        bh=6e5970dOoz9fKbdnw0tfYlfryhDGT/Rrpa19h5wLuiY=;
+        b=eOBXwpVKkQA6Qc7ODOHDcfb/EGJxy3BAd9s5rCGxTbpGXPy8v76xWd0K2evdCldGlJ
+         SkBE27kG4zob2SuJaequ/2svxHS12Kq2uTnQmt5k9ZNV6l7r4cXfkbAz8a8rljvP/LSl
+         vVqaWDt0gxSn/Mx/3CfFkx4mseAqbKG35Ee3J6cIgp7OLQVNHgkNH4JOg9LE0FdaGbpS
+         veZ59/XDevlZgeE22hjUdufQAziMUQXsb36+NDIFTLGW0AfdaXRumxidpSZmPon0r1i9
+         2RD+xfh3TbzjeckE34pYvURPsUvJeOrqNnWwIGWMjeIxg6tK8Sl+dl9tlqLjqe4YIY79
+         HyhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779890658; x=1780495458;
+        d=1e100.net; s=20251104; t=1779890661; x=1780495461;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=c2LXP0rk0yvbCFBliNg/BHdi3EXRn2M/q6qufOUbEAs=;
-        b=kCtgbcU9uVXXa1lG8DqLVTbQ8e44xwIACY9bwb/Z9ZUnYxkRtM1RexvHVxMRru0mSl
-         etv+bqEpQDTH+ZJuiMeOlNi5gTV2xWA9lEraNV/M0B3/KdNbJ2jPIUYyEGu1ZLPLFpBP
-         y0AFM5Okh8FF+oQRFzHZloC2rnMsQPduRu1Wu2cFBslydzD1Afin/hU9WRUmiUbDGR4O
-         1aguZCrISJQROvyRTSFr8JJY0om1i2KU+YJtY4cZdJPdWzlkueN2jT0sMojBtuCziF99
-         cn0vfge3QaqCDFT62MZCbUZFSyfyiGPVzBYPEnvS3QY6f6i5VdPtg4UVt6+6+xWT+nBQ
-         BNYQ==
-X-Forwarded-Encrypted: i=1; AFNElJ8ZjU2T6lN7jaIHkhbmOD5QsHglF4Mq3uAnN5T6vX9mmy8/mAiwKPcvz8jzt8R2t67cj+gmoyXfGmk=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yw88A97UGr4595Y9EZQEQYysyXvqHPweIorOCiK/A+PVoeszpSE
-	ZpbUcaG5dTrS1p7rmF2TG+r3mH5FoMXTliJhhFsXi1aiX/kxwfAR+23J
-X-Gm-Gg: Acq92OFpkGO/1pT0qGQtWCr5GBiMV4FGKF0XZHLNRXnxTvqvcp0xspbd9vCVcDTaFa6
-	Vj9WJedgqSsUz2AvkXa3zWY2KVN2C6HVCHxEooS4NldHJUCajUHmQ3W7w0JnP8H11m8lrstwqSO
-	V81WbtzMI1g7GiGeoUVOU0PVJAE2ryP0OuAxPabqkjpEFYISp5hV6vruB1ATMy4ZV/Mrl+08DJo
-	0BDK2Ax6823mMXpOIRMqYIY5LPjtHngovL/EQGpReu5FNMuplFAdcNmdzic2yk5JqEAO1rwndv8
-	QGtRAkkGdueAPIptpAGhcJftEoZoorCRXB0bA1oe5AVbpl8SQg7TSP3dchfu288VpZy3/c87ESV
-	y/v+imUIbyFJ/He0Kzm2gezp4/pFJ+kmrxzZvZGp6Y6gLgTaq8D9niCthDBE6hInNpM2wuPdiUN
-	5HIhGiv+61AnoysN/trneiIOv9Ni2Yf3iWwfEZYb6umZh3AxdjYxjnkSVR5ap0QAP1REfO1cMiN
-	Tvpus/hMsLwh8S2DgO4cljYw2KIlGZiS6obUJ1PxlUb
-X-Received: by 2002:a05:600c:1553:b0:490:53b0:9e53 with SMTP id 5b1f17b1804b1-49053b0a086mr320397125e9.1.1779890657764;
-        Wed, 27 May 2026 07:04:17 -0700 (PDT)
+        bh=6e5970dOoz9fKbdnw0tfYlfryhDGT/Rrpa19h5wLuiY=;
+        b=OLEnpBX04UKr7UGCyGxA1X92MlX22dFoJn2eigRgHhxhHWkFSQkiGcRUz0ZcRhOzOK
+         Whdk8bYH3leZBZ+tJ3P2IPc/Hn0oGCkvqOFIDnW1kWErFePduXwNPNoysxOzjhMO9T8v
+         tGMwlDayXjDYh8m6iokjPB9gQWwRkFWy7nqBbEKSIi6T+VBS6FIJwy9CI7+0/6mLZsdt
+         ND72n2yWe9dQX7Xe8F7NsMZJD20NVgwh6oMl5PsGIQK6cXEQDGye/Bkg4ffjxpk/oLhj
+         ltynvwlIeaMP007teNQ+QIRf50ad1OU9sed2KlHERkX/RQVyzX8O512oIu66/emBHG2F
+         WOHA==
+X-Forwarded-Encrypted: i=1; AFNElJ8B/YxhRhIvs/YKpDHM1oGr2jiD46zWSGkWPK23TQnssUqKSHBDdhPtncV2nVYqd/GPwKMcHCEx1w8=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyDDJrljLQOZ+T/4D5PVsggkREYk1iiGyh3kplzhBTjXj7sMYVf
+	hGhO3EfUwawPk4GfaT+uliuUVH5ZGTaAgJojcHDke8DjNQIuXY5IYFVA
+X-Gm-Gg: Acq92OErchV7slpIOlV3rD7HrSpKOcEUZsw8e1ThN9WatIASNIJfm1CC4Ns/sW5ulke
+	ZdIwGFH23F/YrQxV0H/kXxu7gJAOX3y79Hvj9NW8HHgPwJBwXw98tdsGI+jXEGN8tqYF+XW16bJ
+	9SOeToDkvFYBqmY4T6fP1fqDS1wXYy/mW42tUBn3YpJ3LenXH5nKfEJSA4McUPYEll5a+ys2m+H
+	DD/7BhKl8g4iW/aFHHPQjjX0Le5ED2N9cpuEsYwJFIMbp4tVXD21SBpSW6gCQD0HeRicQWfeMol
+	YWBD946paUDtUH7tndnqwRoiYj+GfhNp2+QFFzsNdWRjMpZ6L4q/HfzMck6BEjnh8aaEaotaj/c
+	n4z+ySfQujVH/m8Le50G7h+6nfdOEZeX9Oqtfc7q3bksUR2PEXFRr/DCv0bcn0bbsdXH3x3DD0U
+	aWyrxPs5ZgbdHAGA7dqtOBRzmGyUVQaNgXSoCxU7x0HGuPzq+7Gp8/AvU7Q5pRCw969Xxg1abPG
+	dyVuzvgfUVFLJlH9JaneB1Jw+W7mrlPSw==
+X-Received: by 2002:a05:6000:4707:b0:45e:75c5:1a6a with SMTP id ffacd0b85a97d-45eb38bcb3fmr37810576f8f.33.1779890660721;
+        Wed, 27 May 2026 07:04:20 -0700 (PDT)
 From: Vishal Moola <vishal.moola@gmail.com>
 To: Dave Hansen <dave.hansen@intel.com>,
 	linux-mm@kvack.org,
@@ -108,58 +108,53 @@ Cc: Mike Rapoport <rppt@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Vishal Moola <vishal.moola@gmail.com>
-Subject: [PATCH 6/9] x86/mm: Convert sync_global_pgds_l4() to ptdescs
-Date: Wed, 27 May 2026 15:03:13 +0100
-Message-ID: <20260527140316.294621-7-vishal.moola@gmail.com>
+Subject: [PATCH 8/9] x86/xen: Convert xen_mm_pin_all() to ptdescs
+Date: Wed, 27 May 2026 15:03:15 +0100
+Message-ID: <20260527140316.294621-9-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260527140316.294621-1-vishal.moola@gmail.com>
 References: <20260527140316.294621-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1779890658-37F7EA53-6C38714A/0/0
+X-purgate-ID: tlsNG-c201ff/1779890661-E338A443-E4976255/0/0
 X-purgate-type: clean
-X-purgate-size: 1497
+X-purgate-size: 1161
 
-Convert sync_global_pgds_l4() to ptdescs in preparation for the
-eventual splitting of ptdescs from struct page.
+Convert xen_mm_pin_all() to ptdescs in preparation for the eventual
+splitting of ptdescs from struct page. Continue checking PagePinned
+through the underlying page as we do not have a per-memdesc api for
+page flags yet.
 
 Signed-off-by: Vishal Moola <vishal.moola@gmail.com>
 ---
- arch/x86/mm/init_64.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ arch/x86/xen/mmu_pv.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
-index e89b51aea2cf..a6ccb83f2d26 100644
---- a/arch/x86/mm/init_64.c
-+++ b/arch/x86/mm/init_64.c
-@@ -174,7 +174,7 @@ static void sync_global_pgds_l4(unsigned long start, unsigned long end)
- 	for (addr = start; addr <= end; addr = ALIGN(addr + 1, PGDIR_SIZE)) {
- 		pgd_t *pgd_ref = pgd_offset_k(addr);
- 		const p4d_t *p4d_ref;
--		struct page *page;
-+		struct ptdesc *ptdesc;
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index 3eee5f84f8a7..b2f6e7b7c545 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -828,15 +828,15 @@ static void xen_pgd_pin(struct mm_struct *mm)
+  */
+ void xen_mm_pin_all(void)
+ {
+-	struct page *page;
++	struct ptdesc *ptdesc;
  
- 		/*
- 		 * With folded p4d, pgd_none() is always false, we need to
-@@ -187,15 +187,15 @@ static void sync_global_pgds_l4(unsigned long start, unsigned long end)
- 			continue;
+ 	spin_lock(&init_mm.page_table_lock);
+ 	spin_lock(&pgd_lock);
  
- 		spin_lock(&pgd_lock);
--		list_for_each_entry(page, &pgd_list, lru) {
-+		list_for_each_entry(ptdesc, &pgd_list, pt_list) {
- 			pgd_t *pgd;
- 			p4d_t *p4d;
- 			spinlock_t *pgt_lock;
+-	list_for_each_entry(page, &pgd_list, lru) {
+-		if (!PagePinned(page)) {
+-			__xen_pgd_pin(&init_mm, (pgd_t *)page_address(page));
+-			SetPageSavePinned(page);
++	list_for_each_entry(ptdesc, &pgd_list, pt_list) {
++		if (!PagePinned(ptdesc_page(ptdesc))) {
++			__xen_pgd_pin(&init_mm, (pgd_t *)ptdesc_address(ptdesc));
++			SetPageSavePinned(ptdesc_page(ptdesc));
+ 		}
+ 	}
  
--			pgd = (pgd_t *)page_address(page) + pgd_index(addr);
-+			pgd = (pgd_t *)ptdesc_address(ptdesc) + pgd_index(addr);
- 			p4d = p4d_offset(pgd, addr);
- 			/* the pgt_lock only for Xen */
--			pgt_lock = &pgd_page_get_mm(page)->page_table_lock;
-+			pgt_lock = &pgd_page_get_mm(ptdesc_page(ptdesc))->page_table_lock;
- 			spin_lock(pgt_lock);
- 
- 			if (!p4d_none(*p4d_ref) && !p4d_none(*p4d))
 -- 
 2.54.0
 
