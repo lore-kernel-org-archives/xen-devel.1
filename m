@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6B6CD6E46
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1739CD5BD0
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2026 14:04:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1320491.1587760 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1320495.1587798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSErl-00060G-9p; Wed, 27 May 2026 14:04:13 +0000
+	id 1wSErr-0006v4-Id; Wed, 27 May 2026 14:04:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1320491.1587760; Wed, 27 May 2026 14:04:13 +0000
+Received: by outflank-mailman (output) from mailman id 1320495.1587798; Wed, 27 May 2026 14:04:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSErl-0005zT-68; Wed, 27 May 2026 14:04:13 +0000
-Received: by outflank-mailman (input) for mailman id 1320491;
- Wed, 27 May 2026 14:04:12 +0000
+	id 1wSErr-0006uj-Ae; Wed, 27 May 2026 14:04:19 +0000
+Received: by outflank-mailman (input) for mailman id 1320495;
+ Wed, 27 May 2026 14:04:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vishal.moola@gmail.com>) id 1wSErj-0005xG-Vh
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 14:04:11 +0000
+ (envelope-from <vishal.moola@gmail.com>) id 1wSErq-0006fh-7K
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 14:04:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSErj-007NSK-Bg
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 16:04:11 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wSErp-007NWT-JI
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 16:04:17 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a16f9d1-e002-0a2a0a5209dd-0a2a450ce74a-42
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:11 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a16f9e1-5cb7-0a2a0a5109dd-0a2a4505b586-2
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:17 +0200
+Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <vishal.moola@gmail.com>)
- id 6a16f9db-62f1-0a2a450c0019-d1558036b0ad-3
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:11 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-49039a8851fso62330125e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:04:11 -0700 (PDT)
+ id 6a16f9e1-aaa8-0a2a45050019-d155da29e59f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 16:04:17 +0200
+Received: by mail-ej1-f41.google.com with SMTP id
+ a640c23a62f3a-bd4f8260e4eso2081869366b.1
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:04:17 -0700 (PDT)
 Received: from fedora (cpc92878-cmbg18-2-0-cust539.5-4.cable.virginm.net.
  [86.16.54.28]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-45edb558f52sm6693771f8f.14.2026.05.27.07.04.09
+ ffacd0b85a97d-45edb558f52sm6693771f8f.14.2026.05.27.07.04.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 07:04:10 -0700 (PDT)
+ Wed, 27 May 2026 07:04:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779890651; x=1780495451; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1779890657; x=1780495457; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JDtbAu0FdDQr0xPj+QYmQdEcSfPjgFyi+UN5Ynqy4tE=;
-        b=oIFCPnylFYx8YE55wNrNFbd2ypu8fn/b3s+/2zPNLW/OCzTkcNizB1TEi0zvJT0c2n
-         GD50xDmjmZMyk1XZe1S3B1rj+2zDlWQEbIkySU3AAq/UtR0RLKu8BYXD4Ma+1vE6ae2g
-         HUGitwDX+23LndvlL9/u0Sm+/gPbRnhs++4SoS4dcCoTnxgGVrVO2YccbG991Cw1OuwT
-         qNQvDZWnf4NCQdcYssRAy0yeEmblSwcVjXvjrwrpA6QSui0Ts1rSDzJVGLR3nxL+6G9i
-         6NUURgJofhtwj3ULAIhuz/nR7Iz23C8CVU76m9TLjHiT7DdewK8PsEwkZhEh8BAk4ci/
-         rxhQ==
+        bh=StiDcvF5NcsOIMzOzw/wp6rwR3a8/aCyRzqbH6oZvSA=;
+        b=DUBZN+kBxri6T029tjHeepqnc8mt7Evg8Th0OajQZEnglCG7KA3eqKJfzhzU3xG0Ku
+         m3VRqTXn2qqifqIcygro6Fg2E9YdAHMWt6bybc/gGmjnuriZ1jICNnma51KsFLek9+pF
+         hKnIJ0S4C2h76kBkpZYhK4A7+lhMbvMSYk7oNVAY1wakpRkNuQZuL9XVCckoMM/ndZ+0
+         7/P08Rrs5rHBjjNPhkfsh7qzBTa6/WyiSTNDmwlzRU4dZu3KdowgthadNqNovdrdRU0W
+         7QTWGxzk5rPw+/nGDOgDfin1dsNM9Nfc4O22li9YNXfXHM4IvRfIJTpLSIZZhZp6+reI
+         PQaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779890651; x=1780495451;
+        d=1e100.net; s=20251104; t=1779890657; x=1780495457;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=JDtbAu0FdDQr0xPj+QYmQdEcSfPjgFyi+UN5Ynqy4tE=;
-        b=pXZ5KzDU2Xt3+xmwX4XENlIBA4ONCGEfIGC+pCYP+GN49oPFxXL/C0dJuyaMKKrapg
-         O5uYqo20+UWIGsCehGWYoLE/BMaQn7tikAMbz+WfrLy/r/gdUSSvmjgmaoyZAV183mZO
-         ycYaXIvMS3wbYIY6/O9FR2M1hucuYhJ/8nVxxHv8y8/+H5aJVtXE27zHiaA8bx5UDEaQ
-         R0Jrn1TDy9ORuHg6mHvFNtzatdwHo+CHUl9bDy0tOyvDz3PZAwqZMPLuduRV1hTSfH4E
-         OFBYsk5pmY0ChGVOtq3uo27WHg7ieXnbzvfhy5viVNTwnRVWtjvOTab/I3ol9Biw90an
-         cnNw==
-X-Forwarded-Encrypted: i=1; AFNElJ93rUfVFNN1g8D96TAfAVRIXFBw+QQBIoh/2bReofds0UxjBfl3eMxWiD2g68x4qWYYDJ8mo2Bmfpw=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YzACPxrp0PhoghS+x7olhl1DiK+Y2GF7AfW56cEcObsIgf5+uS4
-	VENAEMgH49Usrb3P9ghcMzjps6j4eV3Tv3KYxMd99dmlaJfWNIzdNFMc
-X-Gm-Gg: Acq92OFJeV7de5p/ZgFj+hZs7gkAxgrmSrEfKBimYz9aNPmICeLkP1sPxl9cb6SkY5j
-	Qg15sDUhSkX16uOEeX9Z+DBGZN94Ueemgaom0sSoxG9FUlBO8NGeYH024FyOPYF996OUZ0Alsqg
-	BTkUR2KLe4jjfiK/ypkRIR0X2fCVZh8HNY5BaJleT2js2P5g6gKN9aIY9SxmlbhtzWPrlmU63MI
-	tQFTsJpK5isFVWbHuWkmmcEsotzxj7hqqxX8gn0wInyFlOJFBBkwn3Paj2+NkMLJclGCi/Ketm4
-	OSElMoyZ6Tp6M5j4evWog8rmXA8/PRQjJOrvt8aB50LrNyH5w4rqw1cwdRaq3zz1+O/734sBYL/
-	RRa0Wm8Vdfr6rAy4dFTJnS5BfG118sCqXyN9wy4ZxGQqNfbZ/SBBU3hsvmhHiL3QFabWsYbAIop
-	KcTFIRyN5QLgMAzJcvwRUtMKIeE1chHjpVWU0ZypAdZdJKLE0ihzXYNeHEyC0U0ZFlfl64PhCHs
-	aOxEZU3KMnaqQlOD77U2Q3ZY8V976sCDoUln5dbOrNA
-X-Received: by 2002:a05:600c:6383:b0:490:4717:970f with SMTP id 5b1f17b1804b1-4904717984dmr382832315e9.14.1779890650342;
-        Wed, 27 May 2026 07:04:10 -0700 (PDT)
+        bh=StiDcvF5NcsOIMzOzw/wp6rwR3a8/aCyRzqbH6oZvSA=;
+        b=lEZLENRG6hSVDobMdi1WdSaWkWlXwYutUyGOXqIxVew+yDpjGVMOeunEShKQETQ8Tt
+         1i9+r+iT7wXsSQWcy8Yrbo1sXIs80rA3oeKsg+4XZASrdzZ6g7IX9V0xnc6GJlmyyWUs
+         tc1ZTZy0vsgb0vHu7KNcfv0tS1KIfSlU9mkB+wefhGtFntEI11BVEkg92pdUuXRb71Un
+         MP0xilrTLlUjAQlu6wfDITfVJvm4ltt+Ym3rvm+/uU8fmByPiaMP4e0DaFD5hsc1915O
+         xaWzJREbRqLMCIbzrknh6vcOedI8PegQnS4wxntaiYCdRiCJZwd8o+yfHsMXw78scJkB
+         0Dsw==
+X-Forwarded-Encrypted: i=1; AFNElJ/9oOtamipWO9Cvt4gj9tR57phkEywylEjggnx/mjpf6YVc4MT5uICuAOm8iAxX6pPMlfW9KyRLN60=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yw29Vq/4fA5e2J0Iu6E2im16Mf2USbDpmIT1ClU1xWXMuqCLZOa
+	DZqbS2plauZDRm5vaNlT1shKZic9mEzXnzkkHFPk95YQhYLe0X1soyvl
+X-Gm-Gg: Acq92OEwWkdbtQujYm0lwuP/SZvbkfQmB2HSnIc6LlhtxJqdDANC6/N/YpNv1xu3q4P
+	F9UM1C2HrEjFhU8je0rA3zPLRJ/3KzTlYsr/GO0k6dXJ2BK5hfl5hCb1i+Ekkmz6r8a8QZPIqfN
+	mYL0g6gfKtSxaqPAt0cxytJOHw6onHW81cc4NDMNmZ8FTPTBLoCccrgect37mV/Wl2hE2/OhNRi
+	y+s0UFEH4kKju6LvMtkKNUQXwKFq7c1N8VBqdDLTuDc5yxplziKSxDEYkkEhVxG6F+SKZyhz1tY
+	TxtXCAZ0feHWf0umx9TGYy1W6BmzOHgsAg/e+6ewOOC7FfGMMfq3NbHyGXVzxh2amZHp4fGXBIG
+	AsZwrco/uABfsL6EuRf9ePETdftuXmkipoN5TYE84EOcJMR5HMyarYWO7jxGJ4L3XoI7rxUTT+G
+	PpJbJ55DBm1ny2SkOeKr26QrbVjWYXJ+Bk0RaSoiHspdl3UloORFu9qF/I7YxhvLaqObm5LYM6I
+	0PYLUn/i4oOvKxIk2JjVPvn0KV8xWNvdg==
+X-Received: by 2002:a17:907:3e03:b0:bd9:1fb:9941 with SMTP id a640c23a62f3a-bdd25cec1f0mr1328155766b.29.1779890656754;
+        Wed, 27 May 2026 07:04:16 -0700 (PDT)
 From: Vishal Moola <vishal.moola@gmail.com>
 To: Dave Hansen <dave.hansen@intel.com>,
 	linux-mm@kvack.org,
@@ -108,49 +108,56 @@ Cc: Mike Rapoport <rppt@kernel.org>,
 	Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Vishal Moola <vishal.moola@gmail.com>
-Subject: [PATCH 1/9] x86/mm/pat: Use IS_ENABLED() instead of ifdef
-Date: Wed, 27 May 2026 15:03:08 +0100
-Message-ID: <20260527140316.294621-2-vishal.moola@gmail.com>
+Subject: [PATCH 5/9] x86/mm: Convert sync_global_pgds_l5() to ptdescs
+Date: Wed, 27 May 2026 15:03:12 +0100
+Message-ID: <20260527140316.294621-6-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260527140316.294621-1-vishal.moola@gmail.com>
 References: <20260527140316.294621-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1779890651-E377ECF5-F5EE87C9/0/0
+X-purgate-ID: tlsNG-c201ff/1779890657-E3788443-8F7770FC/0/0
 X-purgate-type: clean
-X-purgate-size: 1012
+X-purgate-size: 1410
 
-Use IS_ENABLED() to check if we are on 32 bit. This standardizes this
-check with the other 32 bit check in the file. No functional changes.
+Convert sync_global_pgds_l5() to ptdescs in preparation for the
+eventual splitting of ptdescs from struct page.
 
 Signed-off-by: Vishal Moola <vishal.moola@gmail.com>
 ---
- arch/x86/mm/pat/set_memory.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ arch/x86/mm/init_64.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/mm/pat/set_memory.c b/arch/x86/mm/pat/set_memory.c
-index d023a40a1e03..3b9032a3f315 100644
---- a/arch/x86/mm/pat/set_memory.c
-+++ b/arch/x86/mm/pat/set_memory.c
-@@ -888,8 +888,8 @@ static void __set_pmd_pte(pte_t *kpte, unsigned long address, pte_t pte)
- {
- 	/* change init_mm */
- 	set_pte_atomic(kpte, pte);
--#ifdef CONFIG_X86_32
--	{
-+
-+	if (IS_ENABLED(CONFIG_X86_32)) {
- 		struct page *page;
+diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
+index df27379d4bb4..e89b51aea2cf 100644
+--- a/arch/x86/mm/init_64.c
++++ b/arch/x86/mm/init_64.c
+@@ -136,7 +136,7 @@ static void sync_global_pgds_l5(unsigned long start, unsigned long end)
  
- 		list_for_each_entry(page, &pgd_list, lru) {
-@@ -905,7 +905,6 @@ static void __set_pmd_pte(pte_t *kpte, unsigned long address, pte_t pte)
- 			set_pte_atomic((pte_t *)pmd, pte);
- 		}
- 	}
--#endif
- }
+ 	for (addr = start; addr <= end; addr = ALIGN(addr + 1, PGDIR_SIZE)) {
+ 		const pgd_t *pgd_ref = pgd_offset_k(addr);
+-		struct page *page;
++		struct ptdesc *ptdesc;
  
- static pgprot_t pgprot_clear_protnone_bits(pgprot_t prot)
+ 		/* Check for overflow */
+ 		if (addr < start)
+@@ -146,13 +146,13 @@ static void sync_global_pgds_l5(unsigned long start, unsigned long end)
+ 			continue;
+ 
+ 		spin_lock(&pgd_lock);
+-		list_for_each_entry(page, &pgd_list, lru) {
++		list_for_each_entry(ptdesc, &pgd_list, pt_list) {
+ 			pgd_t *pgd;
+ 			spinlock_t *pgt_lock;
+ 
+-			pgd = (pgd_t *)page_address(page) + pgd_index(addr);
++			pgd = (pgd_t *)ptdesc_address(ptdesc) + pgd_index(addr);
+ 			/* the pgt_lock only for Xen */
+-			pgt_lock = &pgd_page_get_mm(page)->page_table_lock;
++			pgt_lock = &pgd_page_get_mm(ptdesc_page(ptdesc))->page_table_lock;
+ 			spin_lock(pgt_lock);
+ 
+ 			if (!pgd_none(*pgd_ref) && !pgd_none(*pgd))
 -- 
 2.54.0
 
