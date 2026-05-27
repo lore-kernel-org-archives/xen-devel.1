@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CB3CD5BD2
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2026 01:21:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1320276.1587629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C2DCD4F54
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2026 05:29:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1320340.1587661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wS2xQ-0001gg-EQ; Wed, 27 May 2026 01:21:16 +0000
+	id 1wS6pW-0007Ba-NW; Wed, 27 May 2026 05:29:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1320276.1587629; Wed, 27 May 2026 01:21:16 +0000
+Received: by outflank-mailman (output) from mailman id 1320340.1587661; Wed, 27 May 2026 05:29:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wS2xQ-0001gZ-Aq; Wed, 27 May 2026 01:21:16 +0000
-Received: by outflank-mailman (input) for mailman id 1320276;
- Wed, 27 May 2026 01:21:14 +0000
+	id 1wS6pW-0007BS-Hp; Wed, 27 May 2026 05:29:22 +0000
+Received: by outflank-mailman (input) for mailman id 1320340;
+ Wed, 27 May 2026 05:29:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wS2xO-0001gG-Db
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 01:21:14 +0000
+ (envelope-from <tiwai@suse.de>) id 1wS6pV-0007BM-7A
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 05:29:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wS2xN-00B6JG-Bv
- for xen-devel@lists.xenproject.org; Wed, 27 May 2026 03:21:13 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1wS6pU-00D7PG-3P
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2026 07:29:20 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a1646ea-e002-0a2a0a5209dd-0a2a45078a68-22
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 03:21:13 +0200
-Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6a164709-229c-0a2a45070019-d155da2de053-3
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 03:21:13 +0200
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-bd01481e592so1555400566b.2
- for <xen-devel@lists.xenproject.org>; Tue, 26 May 2026 18:21:13 -0700 (PDT)
-Received: from EPUAKYIW02F7.. ([45.12.25.69]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bddc5ece286sm550541266b.40.2026.05.26.18.21.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 18:21:12 -0700 (PDT)
+ (envelope-from <tiwai@suse.de>)
+ id 6a16811f-bab6-0a2a0a5309dd-0a2a4508e7b8-26
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:29:20 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <tiwai@suse.de>)
+ id 6a16812f-63b5-0a2a45080019-c387df82b786-3
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 07:29:19 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 513BB6B16B;
+ Wed, 27 May 2026 05:29:19 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 18F825A669;
+ Wed, 27 May 2026 05:29:19 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id bW+UBC+BFmqDJAAAD6G6ig
+ (envelope-from <tiwai@suse.de>); Wed, 27 May 2026 05:29:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,115 +61,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779844873; x=1780449673; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rZBAxVK5rUdy7lBSH0quiPGXRXut68rQ9vHGC1gb/6Y=;
-        b=OQY0j1WXAaxilTEglP2AC8y1IMCMVA1GgsFnlC5bdGwNqD8zZw0m0jJBQfts0jFee2
-         /SP3lf41FK0tvLuZDVx81TDcL+vly3iWagz9zuVnRvhSb6YsbEp7TJph4stPfvt953IC
-         HljfZdd0gUqTVchK335BUBolFQUrAdOQuSQ1U6SEc07VwHQtiQvulDIRjhzTQWpJT4Cd
-         UlMMr1ip/PIRykJGfVWv21DPX4UhUorZr8+ji+pfCSegLmIK2IN0OweIaMVz5I38dSfg
-         b5BEWMCzh2KMgVOCnxZFmrju6Lz+cj+XZPf0u6m766rKhh20nRSJpbl9sbOUEDkFsSHZ
-         +QEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779844873; x=1780449673;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rZBAxVK5rUdy7lBSH0quiPGXRXut68rQ9vHGC1gb/6Y=;
-        b=BBg45ofLUWENMhqi7w3xm0Mh0NC/uGIQKFEYczBGq5q6ObdonGql9u90uWpqIWHcF7
-         Sarvgn+DV64goy+6cK/vG2h6nEsKpt4fvvMTD1SZIPuUEYQEXSx1C5WmhQ1rFSBYFiqg
-         IqUi2m/am9FaOzD82Z/735s4oeL+jO9lHvxY+rhL6EULdclG/5XrOlnaWIOn5jCgCtB0
-         a4A+3/fYnFB0SF9vZE2kxxEDoVJs/qOcNiPhbF2DGOoELAuFD8W1zHAj1GVagDSRqhvM
-         NLq8tAnucWCBGRHlpHSf1FuoJ43mNv6BH1UDPjA2SSNpr1PCAm839Rd969b0B1faTBnj
-         qTGw==
-X-Gm-Message-State: AOJu0YzHN6HIfpJMjuHCBjPGYHnrqkxDVIUJbhhU9RLZzptUpcd2g7El
-	Hb7kS8SR4+rVq3hiVXpgkPfU4vCV0t1FtQdcnZ4ehx5goIFZcJJeBVnSvvz8Kg==
-X-Gm-Gg: Acq92OFaY8OGqVJrxgjdLrdszEtJ7UScsu3NYqaTQO0yf2XCWK9ZGUz1DoW3VpPcJZh
-	Ov/2c+JmjEQSfCWhsn9e3Fjjur34J4tR+alzVvNmxwGV9+au+Z1iDIe/ygQPUliK7V4qbIfrO+h
-	K2wcxvAwKyubwZ7Yx9v0F6CCzeJDEssxkRDDNXh1SzoY74arK3mmh2u+QMuM9upgiWjfAK1Dms8
-	nTNzZR5tM+rXGa47LoHTn6o+BybS41BOkUGTRmw5YRP5nhGASRKXonHTcmBJPV9OlkIbBT3UNNf
-	kRxcm7FmNoPuRONg5Z9iqEklSb+F/IhgjPNh9wuamwEvbgBBqpDMGbjTaczHBT4JEapQOmPOK8W
-	0BAmTuY+a3LuCjYJgAxTayWVJDZBoi9RC9FLADdT/dT2nfr7kqBOi01HQy8pLdAaDnqeq4wrFK3
-	PALOi4JhfVM2BAgHWst8wGRdTt6FkWgCFQmU0wda0D+PdGJOg=
-X-Received: by 2002:a17:907:3e03:b0:bd8:6ac6:d722 with SMTP id a640c23a62f3a-bdd25cecef9mr1216612266b.24.1779844872631;
-        Tue, 26 May 2026 18:21:12 -0700 (PDT)
-From: Mykola Kvach <xakep.amatop@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Mykola Kvach <mykola_kvach@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.22 v2 0/2] xen/arm: handle vGIC vCPU init failures
-Date: Wed, 27 May 2026 04:18:49 +0300
-Message-ID: <cover.1779840898.git.mykola_kvach@epam.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1779859759; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svuX77SW8vnbvuY432YXCcgyEAAoT9OnatmzUJsU5Pk=;
+	b=hWxMEwfmpqMqKDMjXAi52ezDrZCFmGq8YvEz6dwU7w3z6No1nM0gIJpp8cNEwRmlPlz83r
+	y3SwZqzfiu74rXVgK4K7ae0pVwtLeXBwr/1bzfQ6qs1HPRMrKcqUbAO+roq8rIC/k6lIVO
+	nHfFonC9cV9Z5kM2yDmYlk70Iz1noJ4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1779859759;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svuX77SW8vnbvuY432YXCcgyEAAoT9OnatmzUJsU5Pk=;
+	b=/c9o9AeZx/AgzOkNrdfyls5JuD0cV+Xo7TSwUxhCRyyZrMIKWJwdWkWqNfFDbC9nnWed+Y
+	Zk+hBmRZXb1sZ+Dg==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=hWxMEwfm;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="/c9o9AeZ"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1779859759; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svuX77SW8vnbvuY432YXCcgyEAAoT9OnatmzUJsU5Pk=;
+	b=hWxMEwfmpqMqKDMjXAi52ezDrZCFmGq8YvEz6dwU7w3z6No1nM0gIJpp8cNEwRmlPlz83r
+	y3SwZqzfiu74rXVgK4K7ae0pVwtLeXBwr/1bzfQ6qs1HPRMrKcqUbAO+roq8rIC/k6lIVO
+	nHfFonC9cV9Z5kM2yDmYlk70Iz1noJ4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1779859759;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=svuX77SW8vnbvuY432YXCcgyEAAoT9OnatmzUJsU5Pk=;
+	b=/c9o9AeZx/AgzOkNrdfyls5JuD0cV+Xo7TSwUxhCRyyZrMIKWJwdWkWqNfFDbC9nnWed+Y
+	Zk+hBmRZXb1sZ+Dg==
+Date: Wed, 27 May 2026 07:29:18 +0200
+Message-ID: <87y0h5whch.wl-tiwai@suse.de>
+From: Takashi Iwai <tiwai@suse.de>
+To: =?ISO-8859-1?Q?C=E1ssio?= Gabriel <cassiogabrielcontato@gmail.com>
+Cc: Takashi Iwai <tiwai@suse.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	xen-devel@lists.xenproject.org,
+	linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] ALSA: xen-front: Fix event channel stream lifetime bugs
+In-Reply-To: <20260526-alsa-xen-event-channel-fixes-v1-0-91d3a6a50778@gmail.com>
+References: <20260526-alsa-xen-event-channel-fixes-v1-0-91d3a6a50778@gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/30.2 Mule/6.0
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1779844873-0A971C48-801E5C30/0/0
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: 513BB6B16B
+X-Spamd-Result: default: False [-3.51 / 50.00];
+	BAYES_HAM(-3.00)[99.99%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid,suse.de:dkim,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-purgate-ID: tlsNG-c1860d/1779859759-B596DDB1-135ADA63/0/0
 X-purgate-type: clean
-X-purgate-size: 2343
+X-purgate-size: 959
 
-From: Mykola Kvach <mykola_kvach@epam.com>
+On Tue, 26 May 2026 14:48:25 +0200,
+Cássio Gabriel wrote:
+> 
+> Fix two related event-channel issues in the Xen ALSA frontend.
+> 
+> The first patch resets the event channel's expected incoming event
+> id when a stream is cleared, and drops stale queued events from
+> the previous stream instance.
+> 
+> The second patch keeps the request channel connected from .open(),
+> where it is needed for hw-rule queries and stream open requests,
+> but delays the event channel until after a successful .prepare().
+> This prevents current-position events from reaching the ALSA position
+> handler before runtime buffer and period geometry are valid.
+> 
+> Signed-off-by: Cássio Gabriel <cassiogabrielcontato@gmail.com>
+> ---
+> Cássio Gabriel (2):
+>       ALSA: xen-front: Reset event channel state on stream clear
+>       ALSA: xen-front: Connect event channel after stream prepare
 
-This series fixes two related GICv3 host-layout issues exposed when a
-boot-time domain requests more vCPUs than the guest-visible
-redistributor MMIO regions can cover.
+Applied both patches now to for-next branch.  Thanks.
 
-For domains using the host memory layout, Xen exposes GICv3
-redistributor MMIO regions based on the host layout. Each vCPU needs a
-virtual redistributor frame covered by one of those regions. On FVP with
-a 2 MiB redistributor region, only 16 128 KiB guest redistributor frames
-are covered; a request for 64 vCPUs leaves vCPU16 and above without a
-corresponding redistributor frame.
 
-The vGICv3 per-vCPU init path detects this and rejects the first
-uncovered vCPU, but the generic vGIC init path ignored that error. As a
-result, vcpu_create() could succeed with invalid per-vCPU vGIC state, and
-the guest could observe more possible CPUs than Xen can back with
-emulated redistributors.
-
-There was also an off-by-one in the host-layout redistributor region
-count when all hardware regions had been consumed. That could make Xen
-describe a guest-visible GICR MMIO region beyond the populated
-redistributor region list. A guest access to that exposed window would
-then fail to match any emulated redistributor frame.
-
-Patch 1 fixes the vCPU creation path by propagating per-vCPU vGIC init
-failures, and also fixes the related host-layout redistributor region
-count so Xen does not expose an unbacked GICR window.
-
-Patch 2 documents the resulting Arm GICv3 host-layout constraint for
-boot-time domains and keeps dom0_max_vcpus documentation generic.
-
-Changes in v2:
-- use min(i + 1U, vgic_v3_hw.nr_rdist_regions) for the host-layout
-  redistributor region count.
-- keep the trailing blank line at the end of xen/arch/arm/vgic.c.
-- move the detailed GICv3 host-layout documentation from dom0_max_vcpus
-  to the Arm device-tree booting documentation.
-- add Michal's Reviewed-by tag to patch 1.
-
-Mykola Kvach (2):
-  xen/arm: propagate vGIC vCPU init failures
-  docs/arm: Document GICv3 vCPU limit for host-layout domains
-
- docs/misc/arm/device-tree/booting.txt | 9 +++++++++
- docs/misc/xen-command-line.pandoc     | 3 +++
- xen/arch/arm/vgic-v3.c                | 2 +-
- xen/arch/arm/vgic.c                   | 9 +++++++--
- 4 files changed, 20 insertions(+), 3 deletions(-)
-
--- 
-2.43.0
-
+Takashi
 
