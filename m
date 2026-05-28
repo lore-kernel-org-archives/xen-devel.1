@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA5FCD6E45
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C99CCD6E48
 	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2026 00:28:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1320867.1588003 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1320863.1587966 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSObi-0008AJ-42; Thu, 28 May 2026 00:28:18 +0000
+	id 1wSObc-0007Hz-Vp; Thu, 28 May 2026 00:28:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1320867.1588003; Thu, 28 May 2026 00:28:18 +0000
+Received: by outflank-mailman (output) from mailman id 1320863.1587966; Thu, 28 May 2026 00:28:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSObi-0008A6-02; Thu, 28 May 2026 00:28:18 +0000
-Received: by outflank-mailman (input) for mailman id 1320867;
- Thu, 28 May 2026 00:28:16 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1wSObc-0007Hr-SV; Thu, 28 May 2026 00:28:12 +0000
+Received: by outflank-mailman (input) for mailman id 1320863;
+ Thu, 28 May 2026 00:28:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1wSObg-0007lo-3E
- for xen-devel@lists.xenproject.org; Thu, 28 May 2026 00:28:16 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1wSOba-0007He-GT
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2026 00:28:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSObe-006N05-BN
- for xen-devel@lists.xenproject.org; Thu, 28 May 2026 02:28:14 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1wSObZ-00CjPB-St
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2026 02:28:09 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a178bc5-e002-0a2a0a5209dd-0a2a4508c6ae-38
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 02:28:14 +0200
-Received: from [209.85.208.42] (helo=mail-ed1-f42.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a178c07-bab6-0a2a0a5309dd-0a2a450194b6-10
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 02:28:09 +0200
+Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <xakep.amatop@gmail.com>)
- id 6a178c1e-63b5-0a2a45080019-d155d02ab409-3
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 02:28:14 +0200
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-68aad378a26so928249a12.0
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 17:28:14 -0700 (PDT)
+ id 6a178c19-c1f2-0a2a45010019-d155da36b835-3
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 02:28:09 +0200
+Received: by mail-ej1-f54.google.com with SMTP id
+ a640c23a62f3a-bd3d7c29b4dso1773747866b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 27 May 2026 17:28:09 -0700 (PDT)
 Received: from EPUAKYIW02F7.. ([45.12.25.69]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bddc5ece286sm655205266b.40.2026.05.27.17.28.12
+ a640c23a62f3a-bddc5ece286sm655205266b.40.2026.05.27.17.28.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 17:28:13 -0700 (PDT)
+ Wed, 27 May 2026 17:28:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,42 +52,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779928094; x=1780532894; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bPfJ90vz5LA/T++PBxy4wc5LMm+G5DLn0jpA+XJFuNE=;
-        b=BXD4QNGsvIDsUXTrirQe9itgDHx3UchKuz7kh5pCGLXeN+YKcTho3L72dPg+VLFTzu
-         A9X0jzfHWOQP2QLnPKT62qb/kxXs/vsvF44WhGE1M/Ad4y4vt3Ym95NsHXhZhza65ngQ
-         mynaFabY+teMH8tOddVhPfHZ2OahGTothJLVaiWO6vLaOTrrML56kobXJLL3hBBPnqRk
-         MCdV6hQs3TqJIuazdF+yGRsnurJ1KW1N6ZcIn+mEW+vcxDAdV15Rk3li3ETvwLp7pibG
-         sOy7kmD8kh0azeZKDMRel5WO4yjKVq+j+be/lJ+2sRh7aE0CSgVaomCHI/Oua+yRGoIH
-         5aLw==
+        d=gmail.com; s=20251104; t=1779928089; x=1780532889; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=havkcPvmIjUNQ6L52uTakTmu7Gyt5Yv9I1018A5p+IM=;
+        b=C9ikIMdfABwzNxPOqQ4rS/w9HoG1NQPormVueq0HeLWejvEjdFhjbhc5TZwBd8cJno
+         QQW+Fm/DMeUu9w5Ho1cDZFjjRgHu7/G2YfT8ASYYY/F9h8Et0fMeqb6bi/sazo7TZT9l
+         P6dXaNBfSzastNbZNv694YCLMooE82YDv3GKgevOo0DdbM9ALLOkhHgro66k49oUswLM
+         oXGlDU6FQHqKmWUexmyUxmrwp0UQqlDs8O9UDSxaEzSK3vW+ZmJd7241rnPyQg1y4tdE
+         gTwnnKPjIZgcSxXFZHxBJyIv0gytKLhrSSKEno4A6gjG3VTXqrJCLw35s6AK9rjBwg10
+         O78g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779928094; x=1780532894;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=bPfJ90vz5LA/T++PBxy4wc5LMm+G5DLn0jpA+XJFuNE=;
-        b=PQKnwF+CLO8wDTohClNDGRyEhmQ3g/XrS86aQrpVUloLi2SsIQ8cJIuLdvJkhE5G9D
-         MDo2m7qXsFFd23ntkbsv5F/DOsFaHzlflh+Pw42p/GQ+S5yay1pE7rMOg1nTD/DGUFug
-         Qdoroq5qZK1NheG6aZE6mAck/jBmveuwm4qvr/NCIRGJUWOAsJeXDDh3ClO1ii4TmaZp
-         NdWIpGVAnwHsXc3FmGJkTRLYTkK1jj9wGDO0wSp8nM4YgM8mhvLNLiNe2dJ3Lz77DPCd
-         vT5/uABpTrmDNMjlu3yaq3AWjbycCvXzgf+BfDrblIsw7/kqRi+r6Ssb6vBk4W8fpqc+
-         mG6Q==
-X-Gm-Message-State: AOJu0Yyk0R2g6OGvQ5/jYRikrVWlwPHsvfTdlky3XIC9G/FPI5J6NWnH
-	nRVsXOQFsudmF3Qe0+KIVyMXAQvS/lQCrBzimVn/gX7C9q+HzkRsplH4e3rk/g==
-X-Gm-Gg: Acq92OGHgy3kHozN49LBSs1sWjgg0EGlaMyUqKWLDge2ARVkQY4ZsJAmIluaY4zn5RI
-	S7ryjI7V5tjr0i1JrhlGC8iyOGNHVLRf6thtbRRVsirURGgvb5nFh9WM+9pqNmAkshM2e5qWqsB
-	dXBpl9cnpMlkjnxsCQHAJMgnn2vgpWNzjx/l3qGR+sXBdAY0p4fPXmM6BLOqz2NczlfIqAN7Uq6
-	hoLxosWrm/ujqdHIVHVTH5bpmgLnAIPwUBNQnzj1QVxBjnfyKTXofh/yozsdsQBRVlAkngMXThc
-	lA0Q1YzxoOeRhp5v95Rahym/uEyoO6vF7aqE1MEJTOBMkfJroOdzla8PqcFSWMrO9gpbEcvdrKa
-	egipMO94GahEczt59W0LaKC4cZqrOYqVTB8Q7B5QUe2cZCpNq72mDJ8JJKSmVIP6S91Qnv53EKu
-	yyV+NAt9Ov/eXhn4eYRkt8iBSk80iE7M7DfGnM
-X-Received: by 2002:a17:907:b5a9:b0:bd5:7a3:a58b with SMTP id a640c23a62f3a-bdd269b6a00mr1129029066b.46.1779928093812;
-        Wed, 27 May 2026 17:28:13 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779928089; x=1780532889;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=havkcPvmIjUNQ6L52uTakTmu7Gyt5Yv9I1018A5p+IM=;
+        b=oODYo5lhoIYhVUVjYaZyBUiLfHGfYvEeDwlPnxkGcXX0jqhTKFn4pu1QmR5OdlzBeF
+         60BAvYsCvUc5Qq8cUD3t+zLRvTWWZwCWVsAwAPaOC7RePi11Jel/zVcaG+R5noWODQQc
+         awwefykv2OBco0EM9VLXa2iaqnOhnLUyzHazKzhpbrnEnsDaevlt01ivY+QRu27veW4j
+         QE+tCfas8CnPAB0o1FAmwKob8TC0adG8DYrnzKzHR5tcjzRESsXseI2bNopAWyUVrf1l
+         83enrAF57JCVABrFgHmyWQJl7dWL1Fb+07htKu64DNMAwqKFcQTM6CLhLM6FsZJtgnbE
+         crOw==
+X-Gm-Message-State: AOJu0YzC0IUjDkREO1nS0ROjmIxd+ER9npCrothguvoLuf5SjX4O5UB3
+	Q6cTAIiMYVRVvuAXPnxqhrunAklTNiKFkpYSdnBvbqTbGDa/Y+BdyTDcHOA3ag==
+X-Gm-Gg: Acq92OFJHVoP/M7nJkieq+TzKa6rYQU63dpMcOJZfIiaRxqZhGyxuuV2eCWpNaSs5gZ
+	sKPlnpu8U6uR3tCw4fCFQx6GqaLGPM974D/T4vnIjA/ssVLb+o8z9r3Jg0DVPdsC4IiX16/XgfJ
+	poGOiKo4gR7jnPouTLJPxTiAwXtl0cAD8KcDDI/Dbq/ULVlE3ToviOAXMx5YuCET4bnIEy9IRIK
+	VFZCI1HdBZnUksdbta/pIx+xw40JlvfTigcmgDT3h6L/IyDhHXebw+Ld2epWQgUtrcfyVLP1ejA
+	PywDBSmorPXodTKV75RAxSRp0c2yc0TkXCsEVWduQGKSnOUzyBN0NCPoKLBWM4J2a1s3hMHS9Ee
+	F99iq2F9MuviqESAECyS1UkO3rzkns/OytuZkAQvI1kWqV+NsufjyIwxLZfG7fbI84HuqsO7NFQ
+	rtk4pT0Ut1gTVlzoWAEQ/McwP+bxgRioczXvSBMyk+9GDcaQE=
+X-Received: by 2002:a17:907:9729:b0:bd4:8b66:c374 with SMTP id a640c23a62f3a-bdd22944971mr1442622166b.9.1779928089236;
+        Wed, 27 May 2026 17:28:09 -0700 (PDT)
 From: Mykola Kvach <xakep.amatop@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Mykola Kvach <mykola_kvach@epam.com>,
@@ -95,160 +94,123 @@ Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Luca Fancellu <luca.fancellu@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 4/4] xen/arm: its: handle dma-noncoherent on GIC and ITS nodes
-Date: Thu, 28 May 2026 03:25:52 +0300
-Message-ID: <43b0e8f6b25588ba1cfc22d367e5ed6b303a4978.1779922874.git.mykola_kvach@epam.com>
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 0/4] xen/arm: gicv3: defer host LPI init and split ITS/LPI quirk scopes
+Date: Thu, 28 May 2026 03:25:48 +0300
+Message-ID: <cover.1779922874.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1779922874.git.mykola_kvach@epam.com>
-References: <cover.1779922874.git.mykola_kvach@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1779928094-BFD7BDB1-690D32EC/0/0
+X-purgate-ID: tlsNG-d62444/1779928089-B6342FF4-CCBC408E/0/0
 X-purgate-type: clean
-X-purgate-size: 5082
+X-purgate-size: 4421
 
 From: Mykola Kvach <mykola_kvach@epam.com>
 
-The DT dma-noncoherent property describes the bus coherency of the device
-represented by the node. On an ITS subnode, that is memory accessed by that
-ITS, so add GICV3_QUIRK_MEM_NC_NS to the corresponding host_its before
-programming GITS tables and allocating ITTs.
+Hi all,
 
-When the property is present on the top-level GIC node, it describes the
-Redistributor side of the LPI path. Collect it in
-gicv3_lpi_init_host_lpis() and apply it only to the host LPI policy used
-for GICR_PROPBASER and GICR_PENDBASER setup.
+This series fixes the ordering of host LPI state initialization relative to
+ITS quirk discovery, and then cleans up how ITS-private and host
+LPI/Redistributor quirk effects are represented.
 
-Do not inherit the property between parent and child nodes: ITS-node
-non-coherency does not change the global host LPI policy, and GIC-node
-non-coherency does not change per-ITS quirk_flags.
+Patch 1 is the release-critical fix. It moves host LPI initialization after
+gicv3_its_init(), so that the host LPI allocation path observes the ITS
+quirks discovered during ITS initialization. This patch is intended for
+4.22.
 
-ACPI is left unchanged; this patch only consumes the DT dma-noncoherent
-property.
+Patches 2-4 are follow-up cleanup and DT attribute handling. They are included
+to show the intended direction and to avoid carrying the old global ITS quirk
+model forward, but they are not required for taking the 4.22 fix if the
+release freeze makes that preferable.
 
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+The main change from v1 is that this version no longer tries to pre-initialize
+ITS quirks before host LPI setup. Instead, the minimal fix is to defer the
+existing host LPI initialization until after ITS initialization. The follow-up
+patches then split the quirk state by scope:
+
+  * per-ITS flags are used for memory/state accessed by a particular ITS, such
+    as GITS_CBASER, GITS_BASER<n> and ITT memory;
+
+  * host LPI flags are used for shared Redistributor/LPI state, such as
+    GICR_PROPBASER and GICR_PENDBASER.
+
+This avoids relying on an implicit global aggregation of per-ITS quirk state.
+If an ITS-discovered quirk also affects the host LPI/Redistributor path, that
+effect is now expressed explicitly through the quirk entry's lpi_flags.
+
+The series also handles the DT dma-noncoherent property according to the node
+where it appears. An ITS subnode property affects only the corresponding ITS.
+A top-level GIC node property affects only the host LPI/Redistributor policy.
+The property is not inherited implicitly between the parent GIC node and ITS
+subnodes.
+
+The Orange Pi 5 / RK3588-specific quirk patch from v1 has been dropped. The
+previous version modelled the issue as a 32-bit ITS addressing restriction.
+This version handles the relevant non-coherent/non-shareable GIC integration
+through the standard DT dma-noncoherent property on the GIC and ITS nodes
+instead.
 ---
-Changes in v2:
-- Split v1's dma-noncoherent handling into explicit ITS-node and GIC-node
-  scopes.
-- Apply an ITS subnode property only to the matching host_its quirk_flags.
-- Collect the top-level GIC property from gic-v3-lpi.c before host LPI
-  allocations use host_lpi_flags.
----
- xen/arch/arm/gic-v3-its.c | 21 +++++++++++++++++++--
- xen/arch/arm/gic-v3-lpi.c | 22 +++++++++++++++++++++-
- 2 files changed, 40 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index e055914763..606b127487 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -134,6 +134,21 @@ static const struct its_quirk *__init gicv3_its_find_quirk(
-     return NULL;
- }
- 
-+static void __init gicv3_its_collect_fw_attrs(struct host_its *hw_its)
-+{
-+    /*
-+     * An ITS subnode property describes memory transactions made by that ITS.
-+     * Do not inherit it into the global host LPI/Redistributor policy.
-+     */
-+    if ( !hw_its->dt_node ||
-+         !dt_property_read_bool(hw_its->dt_node, "dma-noncoherent") )
-+        return;
-+
-+    hw_its->quirk_flags |= GICV3_QUIRK_MEM_NC_NS;
-+    printk("GICv3: ITS @%#"PRIpaddr" marked dma-noncoherent\n",
-+           hw_its->addr);
-+}
-+
- static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
- {
-     const struct its_quirk *quirk = gicv3_its_find_quirk(hw_its);
-@@ -144,6 +159,8 @@ static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
-         gicv3_lpi_update_host_flags(quirk->lpi_flags);
-         printk("GICv3: enabling workaround for ITS: %s\n", quirk->desc);
-     }
-+
-+    gicv3_its_collect_fw_attrs(hw_its);
- }
- 
- uint64_t gicv3_mem_get_cacheability(uint32_t flags)
-@@ -578,7 +595,7 @@ static int gicv3_disable_its(struct host_its *hw_its)
-     return -ETIMEDOUT;
- }
- 
--static int gicv3_its_init_single_its(struct host_its *hw_its)
-+static int __init gicv3_its_init_single_its(struct host_its *hw_its)
- {
-     uint64_t reg;
-     int i, ret;
-@@ -1221,7 +1238,7 @@ static void gicv3_its_acpi_init(void)
- 
- #endif
- 
--int gicv3_its_init(void)
-+int __init gicv3_its_init(void)
- {
-     struct host_its *hw_its;
-     int ret;
-diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
-index 35f93e4756..c6f17b9b2d 100644
---- a/xen/arch/arm/gic-v3-lpi.c
-+++ b/xen/arch/arm/gic-v3-lpi.c
-@@ -7,7 +7,9 @@
-  * Copyright (C) 2016,2017 - ARM Ltd
-  */
- 
-+#include <xen/acpi.h>
- #include <xen/cpu.h>
-+#include <xen/device_tree.h>
- #include <xen/lib.h>
- #include <xen/mm.h>
- #include <xen/param.h>
-@@ -101,6 +103,20 @@ void __init gicv3_lpi_update_host_flags(uint32_t flags)
-     host_lpi_flags |= flags;
- }
- 
-+static void __init gicv3_lpi_collect_fw_attrs(void)
-+{
-+    /*
-+     * A top-level GIC node property describes the Redistributor side of the
-+     * LPI path. Do not inherit it into per-ITS policy.
-+     */
-+    if ( !acpi_disabled ||
-+         !dt_property_read_bool(dt_interrupt_controller, "dma-noncoherent") )
-+        return;
-+
-+    gicv3_lpi_update_host_flags(GICV3_QUIRK_MEM_NC_NS);
-+    printk("GICv3: GIC node marked dma-noncoherent for host LPI tables\n");
-+}
-+
- static union host_lpi *gic_get_host_lpi(uint32_t plpi)
- {
-     union host_lpi *block;
-@@ -442,7 +458,7 @@ integer_param("max_lpi_bits", max_lpi_bits);
-  * to the page with the actual "union host_lpi" entries. Our LPI limit
-  * avoids excessive memory usage.
-  */
--int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
-+int __init gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
- {
-     unsigned int nr_lpi_ptrs;
-     int rc;
-@@ -450,6 +466,10 @@ int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
-     /* We rely on the data structure being atomically accessible. */
-     BUILD_BUG_ON(sizeof(union host_lpi) > sizeof(unsigned long));
- 
-+    gicv3_lpi_collect_fw_attrs();
-+    if ( host_lpi_flags )
-+        printk("GICv3: host LPI workaround flags: %#x\n", host_lpi_flags);
-+
-     /*
-      * An implementation needs to support at least 14 bits of LPI IDs.
-      * Tell the user about it, the actual number is reported below.
+Changes since v1
+
+* Reordered the series so that the minimal host LPI initialization ordering fix
+  is first. Patch 1 is intended for 4.22.
+
+* Dropped the v1 ITS pre-initialization hook.
+
+* Moved the existing gicv3_lpi_init_host_lpis() call after gicv3_its_init()
+  instead, so host LPI state is allocated after ITS workaround discovery.
+
+* Checked the return value from gicv3_lpi_init_host_lpis() and made failure
+  fatal once the ITS/LPI path is enabled.
+
+* Replaced the old single global ITS quirk state with separate per-ITS and
+  host LPI quirk scopes.
+
+* Removed the implicit aggregation of all per-ITS quirks into the host LPI
+  policy. Host LPI effects are now expressed explicitly with lpi_flags.
+
+* Kept per-ITS flags for ITS-private allocations:
+  - GITS_CBASER;
+  - GITS_BASER<n>;
+  - ITT memory.
+
+* Kept host LPI flags for Redistributor/LPI state:
+  - GICR_PROPBASER;
+  - GICR_PENDBASER.
+
+* Refactored ITS quirk matching from fixed IIDR/mask fields to a generic
+  match(hw_its, data) callback plus opaque data.
+
+* Kept first-match semantics explicit. More specific entries must be listed
+  before broader IIDR-only entries.
+
+* Added a reusable IIDR matcher and used it after checking the Renesas
+  machine compatibles for the R-Car Gen4 quirk.
+
+* Split dma-noncoherent handling by DT node scope:
+  - ITS subnode dma-noncoherent affects only the matching ITS;
+  - top-level GIC dma-noncoherent affects only the host LPI/Redistributor
+    policy.
+
+* Dropped the Orange Pi 5 / RK3588-specific quirk patch from v1. The
+  non-coherent GIC integration is now handled through DT dma-noncoherent
+  properties instead of a Xen-side platform quirk.
+
+Mykola Kvach (4):
+  xen/arm: gic: defer host LPI allocation until after ITS init
+  xen/arm: its: separate ITS and host LPI quirk scopes
+  xen/arm: its: refactor ITS quirk matching
+  xen/arm: its: handle dma-noncoherent on GIC and ITS nodes
+
+ xen/arch/arm/gic-v3-its.c             | 171 ++++++++++++++++----------
+ xen/arch/arm/gic-v3-lpi.c             |  66 ++++++++--
+ xen/arch/arm/gic-v3.c                 |  14 ++-
+ xen/arch/arm/include/asm/gic_v3_its.h |  19 ++-
+ 4 files changed, 190 insertions(+), 80 deletions(-)
+
 -- 
 2.43.0
 
