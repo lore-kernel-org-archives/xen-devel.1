@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E7DCD6E44
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2026 14:58:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1321304.1588195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E854CCD4F54
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2026 15:01:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1321371.1588203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wScBX-0003b3-C8; Thu, 28 May 2026 14:58:11 +0000
+	id 1wScE8-0005h1-Ny; Thu, 28 May 2026 15:00:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1321304.1588195; Thu, 28 May 2026 14:58:11 +0000
+Received: by outflank-mailman (output) from mailman id 1321371.1588203; Thu, 28 May 2026 15:00:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wScBX-0003aw-7Z; Thu, 28 May 2026 14:58:11 +0000
-Received: by outflank-mailman (input) for mailman id 1321304;
- Thu, 28 May 2026 14:58:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wScE8-0005gu-L9; Thu, 28 May 2026 15:00:52 +0000
+Received: by outflank-mailman (input) for mailman id 1321371;
+ Thu, 28 May 2026 15:00:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1wScBV-0003Wu-NY
- for xen-devel@lists.xenproject.org; Thu, 28 May 2026 14:58:09 +0000
+ (envelope-from <bernhard.kaindl@citrix.com>) id 1wScE7-0005go-A5
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2026 15:00:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wScBV-00AwUB-4C
- for xen-devel@lists.xenproject.org; Thu, 28 May 2026 16:58:09 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wScE6-008W3a-My
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2026 17:00:50 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6a1857ec-2eae-0a2a0a5409dd-0a2a450be03e-36
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 16:58:09 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a185891-5cb7-0a2a0a5109dd-0a2a450aebd6-30
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 17:00:50 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6a185800-212f-0a2a450b0019-a065830891c0-3
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 16:58:08 +0200
+ id 6a1858a1-56b3-0a2a450a0019-a0658309e4a4-3
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2026 17:00:50 +0200
 Received: from debian.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id D1E6F4336E49;
- Thu, 28 May 2026 10:57:03 -0400 (EDT)
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 53CEC82553ED;
+ Thu, 28 May 2026 10:59:35 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,123 +52,143 @@ Authentication-Results: eu.smtp.expurgate.cloud; none
 From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 2/2] xen/mm: Fix off-by-one stopping tail merge in reserve_offlined_page
-Date: Thu, 28 May 2026 15:55:55 +0100
-Message-Id: <b177222a50bb11647589f3143b8ba9771535b7d9.1779980089.git.bernhard.kaindl@citrix.com>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 1/2] tools/tests/native: Add test for offlined buddy head PFN_ORDER
+Date: Thu, 28 May 2026 15:58:20 +0100
+Message-Id: <347e2d21f12b3cd7b3fa6204cad978e4cf375bf3.1779980244.git.bernhard.kaindl@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <cover.1779980089.git.bernhard.kaindl@citrix.com>
-References: <cover.1779980089.git.bernhard.kaindl@citrix.com>
+In-Reply-To: <cover.1779980244.git.bernhard.kaindl@citrix.com>
+References: <cover.1779980244.git.bernhard.kaindl@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1779980289-2007BF3B-218EF66C/0/0
+X-purgate-ID: tlsNG-4011c0/1779980450-6FB5F8B7-9BA205A8/0/0
 X-purgate-type: clean
-X-purgate-size: 4855
+X-purgate-size: 4958
 
-reserve_offlined_page() reserves pages marked for offlining and
-returns free buddies from the remaining healthy tail pages back
-to the free list.
+Add a regression test that reproduces and documents an inconsistent
+PFN_ORDER observed when the head page of a free buddy is offlined.
 
-Consider an order-2 buddy (4 pages) with the following layout:
-+---------------+---------------+---------------+---------------+
-| head page       tail page 1,    tail page 2     tail page 3   |
-| PFN_ORDER(pg)   marked as to                                  |
-| == 2            be offlined                                   |
-+---------------+---------------+---------------+---------------+
+When the head of a free buddy is offlined it remains annotated with its
+original PFN_ORDER while offline, even though the buddy has been split
+into single pages. This mismatch is surprising and can hinder debugging,
+although it does not currently cause functional failures.
 
-The expected result after removing tail page 1 and returning the
-remaining healthy pages to the free list would be:
+What the test does:
+- Seed a single order-1 buddy on the heap and offline the head page.
+- Document the current failing behaviour by asserting (EXPECT_FAIL)
+  that the offlined head's PFN_ORDER is (not) 0.
+- Allocate the successor to prevent a merge, online the page, and
+  verify that onlining restores the PFN_ORDER to 0.
 
-+---------------+               +---------------+---------------+
-| single page   | offlined page | head page       tail page     |
-| PFN_ORDER(pg) | not returned  | PFN_ORDER(pg)                 |
-| == 0          | to the heap   | == 1                          |
-+---------------+               +---------------+---------------+
+How to run:
+    make -C tools/tests/native TARGETS=offline-head-order test
 
-A trivial off-by-one error in the growth loop stops the growth loop
-early before the tail end of the original buddy and we end up with:
+Example failing output (current behaviour):
+- Test assertion failed as expected at offline-head-order.c:40:
+  Offlined former buddy head should be order0
 
-+---------------+               +---------------+---------------+
-| single page   | offlined page | single page   | single page   |
-| PFN_ORDER(pg) | not returned  | PFN_ORDER(pg) | PFN_ORDER(pg) |
-| == 0          | to the heap   | == 0          | == 0          |
-+---------------+               +---------------+---------------+
+This test is intended as a regression test and should be updated
+with the same commit that resets the PFN_ORDER to 0 on offlining.
 
-If the offlined page was in a much larger buddy, this would lead
-to much more memory not available for higher order allocations
-requiring the full tail end of the original buddy for allocation.
-
-Fix the growth loop to correctly grow the buddy to the tail end
-to make the full allocation unit available for future allocation
-and update the test case to confirm the expected result and to
-prevent regressions in the future.
-
-Update the test case to verify the fix and prevent future regressions.
-
-Fixes: e4865c2315 ('Page offline support in Xen side')
 Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 ---
- tools/tests/native/offline-merge-tail.c | 8 +-------
- xen/common/page_alloc.c                 | 4 +++-
- 2 files changed, 4 insertions(+), 8 deletions(-)
+ tools/tests/native/offline-head-order.c | 87 +++++++++++++++++++++++++
+ 1 file changed, 87 insertions(+)
+ create mode 100644 tools/tests/native/offline-head-order.c
 
-diff --git a/tools/tests/native/offline-merge-tail.c b/tools/tests/native/offline-merge-tail.c
-index 11c79e3ecc1b..1893b23c7249 100644
---- a/tools/tests/native/offline-merge-tail.c
-+++ b/tools/tests/native/offline-merge-tail.c
-@@ -53,11 +53,7 @@ static void test_merge_tail_pair(int start_mfn)
-      * Offlining page 1 results in splitting the original order-2 buddy into:
-      * - pages[0] as an order-0 buddy
-      * - pages[1] is the offlined page, removed from the free list
--     * - pages[2] as an order-0 buddy
--     * - pages[3] as an order-0 buddy:
--     * +---------------+               +---------------+---------------+
--     * | single page   | offlined page | single page   | single page   |
--     * +---------------+               +---------------+---------------+
-+     * - pages[2] and pages[3] as an unaligned order-1 buddy
-      *
-      * Tail 2 & 3 are aligned, so they should be merged into an order-1 buddy:
-      * +---------------+               +---------------+---------------+
-@@ -71,14 +67,12 @@ static void test_merge_tail_pair(int start_mfn)
-     ASSERT(pages[1].u.free.first_dirty == INVALID_DIRTY_IDX);
- 
-     /* The tail pair is expected to be merged into one order-1 buddy. */
--    EXPECT_FAIL_BEGIN();
-     CHECK(PFN_ORDER(&pages[2]) == 1,
-           "The pair of tail pages should be merged into an order-1 buddy");
-     CHECK(pages[2].u.free.first_dirty == 1, "In tail buddy, the 2nd is dirty");
-     /* The tail page of the merged buddy does not use first_dirty. */
-     CHECK(pages[3].u.free.first_dirty == INVALID_DIRTY_IDX,
-           "Tail page of the merged buddy should not set first_dirty");
--    EXPECT_FAIL_END(3);
- }
- 
- int main(int argc, char *argv[])
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index d923ae02ade0..dd0b7c67008d 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1427,11 +1427,13 @@ static int reserve_offlined_page(struct page_info *head)
- 
-         next_order = cur_order = 0;
- 
-+        /* Attempt to grow the order (size) of the buddy as much as possible. */
-         while ( cur_order < head_order )
-         {
-             next_order = cur_order + 1;
- 
--            if ( (cur_head + (1 << next_order)) >= (head + ( 1 << head_order)) )
-+            /* Do not grow to next_order if it would go beyond the buddy. */
-+            if ( (cur_head + (1 << next_order)) > (head + ( 1 << head_order)) )
-                 goto merge;
- 
-             /* Do not grow to next_order if cur_head is not aligned to it. */
+diff --git a/tools/tests/native/offline-head-order.c b/tools/tests/native/offline-head-order.c
+new file mode 100644
+index 000000000000..5c666a319523
+--- /dev/null
++++ b/tools/tests/native/offline-head-order.c
+@@ -0,0 +1,87 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Tests using offline_page() to verify reserve_offlined_page()
++ *
++ * The workflow tested here is offlining a free page:
++ *
++ * 1. offline_page() calls mark_page_offlined() to mark the page.
++ * 2. It calls reserve_heap_page() to find the containing buddy.
++ * 3. It calls reserve_offlined_page() to reserve the marked pages within
++ *    that buddy.
++ *
++ * reserve_offlined_page() then:
++ *
++ * 1. Removes the buddy, a 2^order group of pages, from the free list.
++ * 2. Finds size-aligned spans of healthy pages within it.
++ * 3. Rebuilds healthy buddies from those spans and
++ *    adds them back to the free list via page_list_add_scrub().
++ * 4. Moves offlined subpages to the offlined page lists.
++ *
++ * Copyright (C) 2026 Cloud Software Group
++ */
++#define TEST_ENABLE_XC_DOMAIN_C
++#include "harness/native.h"
++
++static void test_offline_head_order(int start_mfn)
++{
++    struct page_info *page = frame_table + start_mfn;
++    uint32_t status = 0;
++
++    /* Seed a single order-1 buddy onto the heap. */
++    test_page_list_add_buddy(page, order1);
++    ASSERT(PFN_ORDER(page) == 1);
++    /* Offline the head page. */
++    ASSERT(offline_page(page_to_mfn(page), 0, &status) == 0);
++    ASSERT(status == PG_OFFLINE_OFFLINED);
++
++    /* Confirm the status of the page as status offlined. */
++    status = 0;
++    ASSERT(query_page_offline(page_to_mfn(page), &status) == 0);
++    ASSERT(status == PG_OFFLINE_STATUS_OFFLINED);
++
++    /* Check the order of the offlined head page. */
++    EXPECT_FAIL_BEGIN(); /* PFN_ORDER(page) should 0, but is still 1 */
++    ASSERT(PFN_ORDER(page) == 0);
++    EXPECT_FAIL_END(1);
++
++    /*
++     * Allocate the successor page of the offlined page. This prevents
++     * the normal successor page merge when the page is re-onlined below.
++     */
++    struct page_info *pg = alloc_domheap_pages(dom1, order0, 0);
++    ASSERT(pg == page + 1);
++    ASSERT(FREE_PAGES == 0);
++
++    /*
++     * The order of the split head page is still 1. Online the page again to
++     * confirm that onlining it causes the order to be corrected to 0.
++     */
++    ASSERT(PFN_ORDER(page) == 1);
++
++    /* Online the offlined former head page. */
++    ASSERT(online_page(page_to_mfn(page), &status) == 0);
++    ASSERT(status & PG_ONLINE_ONLINED);
++    ASSERT(FREE_PAGES == 1);
++
++    /*
++     * Confirm the order of the onlined former head page is 0, independently
++     * of the order returned by PFN_ORDER() for the offlined page. This should
++     * always be successful because page_offlined_list only contains single
++     * pages and online_page() ignores PFN_ORDER(pg) of the page. It calls
++     * free_heap_pages() passing the order hardcoded to 0. This causes it to
++     * pass the given order 0 to page_list_add_scrub(). This causes it to set
++     * the order of the page to 0 before it adds the page to the free list.
++     */
++    ASSERT(PFN_ORDER(page) == 0);
++}
++
++int main(int argc, char *argv[])
++{
++    const char *topic = "Test offlined head page to be updated to PFN_ORDER 0";
++    if ( !parse_args(argc, argv, topic) )
++        return EXIT_FAILURE;
++
++    init_page_alloc_tests();
++    RUN_TESTCASE("TOHP", test_offline_head_order, 2);
++    return test_complete();
++}
 -- 
 2.39.5
 
