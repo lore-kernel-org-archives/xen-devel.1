@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64C2CD6E50
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 14:45:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1322212.1588519 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9276FCD6E56
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 14:45:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1322204.1588464 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSySS-0004Kp-6a; Fri, 29 May 2026 14:45:08 +0000
+	id 1wSySK-0002lt-BC; Fri, 29 May 2026 14:45:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1322212.1588519; Fri, 29 May 2026 14:45:08 +0000
+Received: by outflank-mailman (output) from mailman id 1322204.1588464; Fri, 29 May 2026 14:45:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSySS-0004KQ-0a; Fri, 29 May 2026 14:45:08 +0000
-Received: by outflank-mailman (input) for mailman id 1322212;
- Fri, 29 May 2026 14:45:06 +0000
+	id 1wSySK-0002le-81; Fri, 29 May 2026 14:45:00 +0000
+Received: by outflank-mailman (input) for mailman id 1322204;
+ Fri, 29 May 2026 14:44:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3b6YZagYKCXoqcYlhaemmejc.amkvcl-bctcjjgqrq.vclnpmhcar.mpe@flex--seanjc.bounces.google.com>)
- id 1wSySQ-0003pl-39
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 14:45:06 +0000
+ <3aKYZagYKCXMjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 1wSySJ-0002eQ-J9
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 14:44:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSySP-00FvB4-Fp
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 16:45:05 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1wSySI-005qKS-W6
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 16:44:59 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3b6YZagYKCXoqcYlhaemmejc.amkvcl-bctcjjgqrq.vclnpmhcar.mpe@flex--seanjc.bounces.google.com>)
- id 6a19a66f-2eae-0a2a0a5409dd-0a2a450c88da-18
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:45:05 +0200
-Received: from [209.85.214.202] (helo=mail-pl1-f202.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ <3aKYZagYKCXMjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 6a19a655-5cb7-0a2a0a5109dd-0a2a450ba186-46
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:44:58 +0200
+Received: from [209.85.216.73] (helo=mail-pj1-f73.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <3b6YZagYKCXoqcYlhaemmejc.amkvcl-bctcjjgqrq.vclnpmhcar.mpe@flex--seanjc.bounces.google.com>)
- id 6a19a66f-62f1-0a2a450c0019-d155d6cab40c-3
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:45:05 +0200
-Received: by mail-pl1-f202.google.com with SMTP id
- d9443c01a7336-2ba5f794825so112106045ad.0
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 07:45:04 -0700 (PDT)
+ <3aKYZagYKCXMjVReaTXffXcV.TfdoVe-UVmVccZjkj.oVegifaVTk.fiX@flex--seanjc.bounces.google.com>)
+ id 6a19a669-212f-0a2a450b0019-d155d849dcad-3
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:44:58 +0200
+Received: by mail-pj1-f73.google.com with SMTP id
+ 98e67ed59e1d1-36b982ec338so1811706a91.0
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 07:44:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +52,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1780065903; x=1780670703; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1780065896; x=1780670696; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=H0GwXhoguEvRGovrleKtlxRg6q5h/dMOER9+6opKAAY=;
-        b=hvNffYvQ/D54LpXmOYRyyyO9ByIH0rcRHvQN1CRRR/953LWD/v/k/6lJlgPquI3mP6
-         sgx08gjaeZXLvONVrgiOxdTpedgXr1an5HaZfJcCxHiSY8vGRXPhqlftJpOUXWFH2HSv
-         hfbTja6KmI/tZe16c1Z+xvDrGTEWitpld67+DG/uuPTKct7b0nETss6OR1VNU1d7ZZpj
-         I1Zoy4UpNEEHqYelt7C88HVYnC6RTdk3ICl2FE3G+05/mxT6MTJ0FJihgLZo1Gb7K5cQ
-         gxC2HSjnbpBa8TK5K9Y/qNSgJz6KWSb53/9ZwsLV1LiKjgxudWDzylu4QeC8rMTXvhEl
-         BGYg==
+        bh=Q/Ssx6Evg+apl0YO4v5bDvJ7vmmhU3NWEJgFIU1d/78=;
+        b=LhtWt9jkYEK+cdCFgV6fJQphooXitVUnfpijn90NyS/SqqCpvcADA7UJ82LcEg7pXz
+         EgpafOZODlLxSwcKKcmnniau/OZLzF7KZLsRd1KtyrTYdA8ouz4/zqUqNPlfsx5eTNVd
+         /wTCdn1F57z1rIhJ2Yksf1I1PdRsNYuA6b/QDEuWvjUhYEyNuidR3SCEzqP2HPTreUu3
+         K0aGT+PUM6uRoID8PcXhlg0gi8HC4cQG+x1rUbnBwTABAz/IiKZmslaIvUUr2QOAPG4T
+         5fjVWMQ5xQkPjIHni0K4CChm29oy+gLTc/eRsTd+95ga6Y0ZhN3VJ/WxqSIzTFKaEVsR
+         CLsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780065903; x=1780670703;
+        d=1e100.net; s=20251104; t=1780065896; x=1780670696;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=H0GwXhoguEvRGovrleKtlxRg6q5h/dMOER9+6opKAAY=;
-        b=rmJQvJhFaZY/UCUMdSAzXHtHnoMuI5KEC7i1mogezrC+u8zrEKtICrXuLwHy+R/Lgg
-         j+f5CVo4iqU6j6UT2d2Vp1EFydhcumam6PVYH6YijqaK9XA7D9LnAKaLrEDlnPVetIqg
-         duP6NYXqlGTIQg8edKjElVIMjNlnbEUN03OAmApq2FvK3FgUnYZARMtzViqs2AMiVubU
-         Ii8GJ907N3HjyXHGGzoh3q9FFJ0HC6+N8VUbemy4vdIm+dbqu+tokc56c8Mb0yiP6p/p
-         rg6v62w0lyLTMTW98z2+oGSUDm4LFS/wVgOtSslc2U2AiR1boAjdd/0vZqlTiNBNy9A3
-         F5hw==
-X-Forwarded-Encrypted: i=1; AFNElJ8VfrlwJDiZUfNQ2CmV/n4BDue84jEh/7mLue29RW8b4RAW1mXVkKRNfk/dMx738UvlzXn7YpT+YMs=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yypwf7NW3/uSeW+yWAX8dS5pa7rw1p4Cld4WeVuCoCC7T1k+Lh/
-	RQX7haAW3XfXmcbjnHiocqh020mCft3TRaxYWE+TMYHzqErgM+UdY8fe+B8xJFuiS0UrGXf5OXB
-	qYj/zSg==
-X-Received: from pgc24.prod.google.com ([2002:a05:6a02:2f98:b0:c80:192c:51ff])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:c94c:b0:2b2:be01:5532
- with SMTP id d9443c01a7336-2bf3686d1dcmr856725ad.35.1780065903103; Fri, 29
- May 2026 07:45:03 -0700 (PDT)
+        bh=Q/Ssx6Evg+apl0YO4v5bDvJ7vmmhU3NWEJgFIU1d/78=;
+        b=fVmuV7LwZyXifob8HM9eytrDkSawGS/UQoxKNBzpEf4BO/flKEfphLd4JHT69cNMxI
+         R69V5kmV8yDU+oRpjMDf1/sUwewWC0ckIBfT0WE3bkMo6xrA68OruMf5nrQFaXA78slt
+         Mo0LSH3BkQl7qMtw9yKsuaDUr2pdJ8wMbBrcn155GzdGvqSp0UMWbS+HgNG4teRW6FsL
+         ziwalid4xxLF8JA691N4CJblHTbs0gy/wkdeTp5sIQXjz49dsJc2FoyW5iPuIXHWBQ+S
+         Tc7x+1D1xmFfANEgdmxeb+gNT80MdOEHSV1b0/fQjM1POCr/IwXsX8jeE1GwKd1jGaGV
+         RT2g==
+X-Forwarded-Encrypted: i=1; AFNElJ/3OPHo5WxxIRGPQ78JOIzLJ2vTPQC+22BgXfdjHvOpm9eRevqZcLM1eR/D1tYj2LrVLh6RNxattaQ=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YwFuGJno49wqVCmsPnbEhAH8VCOU7olHgobbLfbsQjD2XSD6T8b
+	KRZbdOGoVh4jgCRA4QUqunGCCop446yp7bXEhSR+SxCmPYZDXqiHpb1ZlfEghk/bnNnuH4e8G44
+	TiCP+Og==
+X-Received: from pjnu11.prod.google.com ([2002:a17:90a:890b:b0:36b:8d3f:d136])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:1dd1:b0:368:ac5f:d31b
+ with SMTP id 98e67ed59e1d1-36bbd006f90mr3628748a91.24.1780065896168; Fri, 29
+ May 2026 07:44:56 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 29 May 2026 07:43:57 -0700
+Date: Fri, 29 May 2026 07:43:51 -0700
 In-Reply-To: <20260529144435.704127-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20260529144435.704127-1-seanjc@google.com>
 X-Mailer: git-send-email 2.54.0.823.g6e5bcc1fc9-goog
-Message-ID: <20260529144435.704127-11-seanjc@google.com>
-Subject: [PATCH v4 10/47] x86/tsc: Consolidate forcing of X86_FEATURE_TSC_KNOWN_FREQ
- for PV code
+Message-ID: <20260529144435.704127-5-seanjc@google.com>
+Subject: [PATCH v4 04/47] x86/sev: Don't override CPU frequency calibration
+ for SNP's Secure TSC
 From: Sean Christopherson <seanjc@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
 	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -112,158 +112,44 @@ Cc: "H. Peter Anvin" <hpa@zytor.com>, Rick Edgecombe <rick.p.edgecombe@intel.com
 	David Woodhouse <dwmw2@infradead.org>, Michael Kelley <mhklinux@outlook.com>, 
 	Thomas Gleixner <tglx@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-d25034/1780065905-D996DCF5-F5EF5524/0/0
+X-purgate-ID: tlsNG-42698a/1780065898-19F6EF3B-D043C1B6/0/0
 X-purgate-type: clean
-X-purgate-size: 6001
+X-purgate-size: 1454
 
-Now that all paravirt code that explicitly specifies the TSC frequency
-also sets X86_FEATURE_TSC_KNOWN_FREQ, replace all of the one-off code
-and simply set X86_FEATURE_TSC_KNOWN_FREQ if the TSC frequency is known.
+Don't override the kernel's CPU frequency calibration routine when
+registering SNP's Secure TSC calibration routine.  SNP (the architecture)
+provides zero guarantees that the CPU runs at the same frequency as the
+TSC.  The justification for clobbering the CPU routine was:
 
-Do NOT force set TSC_KNOWN_FREQ if the "known" TSC frequency was provided
-by the user.  Per commit bd35c77e32e4 ("x86/tsc: Add tsc_early_khz command
-line parameter"), one of the goals of the param is to allow the refined
-calibration work "to do meaningful error checking".
+  Since the difference between CPU base and TSC frequency does not apply
+  in this case, the same callback is being used.
 
-Note, preferring the user-provided TSC frequency over the frequency from
-the hypervisor or trusted firmware, while simultaneously not treating the
-user-provided frequency as gospel, is obviously incongruous.  Sweep the
-problem under the rug for now to avoid opening a big can of worms that
-likely doesn't have a great answer.
+but that's simply not true.  E.g. if APERF/MPERF is exposed to the VM, then
+the CPU frequency absolutely does matter.
 
-No functional change intended.
+While relying on heuristics and/or the untrusted hypervisor to provide the
+CPU frequency isn't ideal, it's at least not outright wrong.
 
+Fixes: 73bbf3b0fbba ("x86/tsc: Init the TSC for Secure TSC guests")
+Cc: Nikunj A Dadhania <nikunj@amd.com>
+Cc: Tom Lendacky <thomas.lendacky@amd.com>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/coco/sev/core.c       | 1 -
- arch/x86/coco/tdx/tdx.c        | 1 -
- arch/x86/kernel/cpu/acrn.c     | 2 --
- arch/x86/kernel/cpu/mshyperv.c | 1 -
- arch/x86/kernel/cpu/vmware.c   | 2 --
- arch/x86/kernel/jailhouse.c    | 1 -
- arch/x86/kernel/kvmclock.c     | 1 -
- arch/x86/kernel/tsc.c          | 9 +++++++++
- arch/x86/xen/time.c            | 1 -
- 9 files changed, 9 insertions(+), 10 deletions(-)
+ arch/x86/coco/sev/core.c | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
-index bc5ae9ef74da..72313b36b6f5 100644
+index ed0ac52a765e..665de1aea0ee 100644
 --- a/arch/x86/coco/sev/core.c
 +++ b/arch/x86/coco/sev/core.c
-@@ -2027,7 +2027,6 @@ unsigned int __init snp_secure_tsc_init(void)
+@@ -2046,7 +2046,6 @@ void __init snp_secure_tsc_init(void)
  
- 	secrets = (__force struct snp_secrets_page *)mem;
+ 	snp_tsc_freq_khz = SNP_SCALE_TSC_FREQ(tsc_freq_mhz * 1000, secrets->tsc_factor);
  
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
+-	x86_platform.calibrate_cpu = securetsc_get_tsc_khz;
+ 	x86_platform.calibrate_tsc = securetsc_get_tsc_khz;
  
- 	rdmsrq(MSR_AMD64_GUEST_TSC_FREQ, tsc_freq_mhz);
-diff --git a/arch/x86/coco/tdx/tdx.c b/arch/x86/coco/tdx/tdx.c
-index 5d7976359220..ab463c2b2dab 100644
---- a/arch/x86/coco/tdx/tdx.c
-+++ b/arch/x86/coco/tdx/tdx.c
-@@ -1205,7 +1205,6 @@ unsigned int __init tdx_tsc_init(void)
- 
- 	/* TSC is the only reliable clock in TDX guest */
- 	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 
- 	return info.tsc_khz;
- }
-diff --git a/arch/x86/kernel/cpu/acrn.c b/arch/x86/kernel/cpu/acrn.c
-index 0303fe6a2efa..ad8f2da8003b 100644
---- a/arch/x86/kernel/cpu/acrn.c
-+++ b/arch/x86/kernel/cpu/acrn.c
-@@ -33,8 +33,6 @@ static void __init acrn_init_platform(void)
- {
- 	/* Install system interrupt handler for ACRN hypervisor callback */
- 	sysvec_install(HYPERVISOR_CALLBACK_VECTOR, sysvec_acrn_hv_callback);
--
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- }
- 
- static bool acrn_x2apic_available(void)
-diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
-index 733e12d5a7dd..f8653fc05a40 100644
---- a/arch/x86/kernel/cpu/mshyperv.c
-+++ b/arch/x86/kernel/cpu/mshyperv.c
-@@ -575,7 +575,6 @@ static void __init ms_hyperv_init_platform(void)
- 	    ms_hyperv.misc_features & HV_FEATURE_FREQUENCY_MSRS_AVAILABLE) {
- 		x86_init.hyper.get_tsc_khz = hv_get_tsc_khz;
- 		x86_init.hyper.get_cpu_khz = hv_get_tsc_khz;
--		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	}
- 
- 	if (ms_hyperv.priv_high & HV_ISOLATION) {
-diff --git a/arch/x86/kernel/cpu/vmware.c b/arch/x86/kernel/cpu/vmware.c
-index 7c8cf4885e82..2d0624c66799 100644
---- a/arch/x86/kernel/cpu/vmware.c
-+++ b/arch/x86/kernel/cpu/vmware.c
-@@ -390,8 +390,6 @@ static void __init vmware_set_capabilities(void)
- {
- 	setup_force_cpu_cap(X86_FEATURE_CONSTANT_TSC);
- 	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
--	if (vmware_tsc_khz)
--		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	if (vmware_hypercall_mode == CPUID_VMWARE_FEATURES_ECX_VMCALL)
- 		setup_force_cpu_cap(X86_FEATURE_VMCALL);
- 	else if (vmware_hypercall_mode == CPUID_VMWARE_FEATURES_ECX_VMMCALL)
-diff --git a/arch/x86/kernel/jailhouse.c b/arch/x86/kernel/jailhouse.c
-index 4034e08c5f11..e4d7d9e2cd69 100644
---- a/arch/x86/kernel/jailhouse.c
-+++ b/arch/x86/kernel/jailhouse.c
-@@ -255,7 +255,6 @@ static void __init jailhouse_init_platform(void)
- 	pr_debug("Jailhouse: PM-Timer IO Port: %#x\n", pmtmr_ioport);
- 
- 	precalibrated_tsc_khz = setup_data.v1.tsc_khz;
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 
- 	pci_probe = 0;
- 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index ec888eef74aa..69752b170e0a 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -117,7 +117,6 @@ static inline void kvm_sched_clock_init(bool stable)
-  */
- static unsigned int __init kvm_get_tsc_khz(void)
- {
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	return pvclock_tsc_khz(this_cpu_pvti());
- }
- 
-diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 362596612442..8cef918486db 100644
---- a/arch/x86/kernel/tsc.c
-+++ b/arch/x86/kernel/tsc.c
-@@ -1569,6 +1569,15 @@ void __init tsc_early_init(void)
- 	if (!known_tsc_khz && x86_init.hyper.get_tsc_khz)
- 		known_tsc_khz = x86_init.hyper.get_tsc_khz();
- 
-+	/*
-+	 * Mark the TSC frequency as known if it was obtained from a hypervisor
-+	 * or trusted firmware.  Don't mark the frequency as known if the user
-+	 * specified the frequency, as the user-provided frequency is intended
-+	 * as a "starting point", not a known, guaranteed frequency.
-+	 */
-+	if (known_tsc_khz && !tsc_early_khz)
-+		setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
-+
- 	if (!determine_cpu_tsc_frequencies(true, known_cpu_khz, known_tsc_khz))
- 		return;
- 	tsc_enable_sched_clock();
-diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
-index 1adb44fdddb2..487ad838c441 100644
---- a/arch/x86/xen/time.c
-+++ b/arch/x86/xen/time.c
-@@ -43,7 +43,6 @@ static unsigned int __init xen_tsc_khz(void)
- 	struct pvclock_vcpu_time_info *info =
- 		&HYPERVISOR_shared_info->vcpu_info[0].time;
- 
--	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
- 	return pvclock_tsc_khz(info);
- }
- 
+ 	early_memunmap(mem, PAGE_SIZE);
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
 
