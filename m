@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA240CD6E4A
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 12:48:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1322074.1588419 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24F83CD6E50
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 14:45:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1322203.1588455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSwdh-0003BL-7a; Fri, 29 May 2026 12:48:37 +0000
+	id 1wSySI-0002Y7-Vq; Fri, 29 May 2026 14:44:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1322074.1588419; Fri, 29 May 2026 12:48:37 +0000
+Received: by outflank-mailman (output) from mailman id 1322203.1588455; Fri, 29 May 2026 14:44:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSwdh-0003BE-4W; Fri, 29 May 2026 12:48:37 +0000
-Received: by outflank-mailman (input) for mailman id 1322074;
- Fri, 29 May 2026 12:48:36 +0000
+	id 1wSySI-0002Y0-TK; Fri, 29 May 2026 14:44:58 +0000
+Received: by outflank-mailman (input) for mailman id 1322203;
+ Fri, 29 May 2026 14:44:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1wSwdg-0003AO-0b
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 12:48:36 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <3ZqYZagYKCXEhTPcYRVddVaT.RdbmTc-STkTaaXhih.mTcegdYTRi.dgV@flex--seanjc.bounces.google.com>)
+ id 1wSySH-0001zV-IG
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 14:44:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSwdf-002VpK-De
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 14:48:35 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 6a198b0f-bab6-0a2a0a5309dd-0a2a4509d2b4-40
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 14:48:35 +0200
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <bernhard.kaindl@citrix.com>)
- id 6a198b22-2497-0a2a45090019-a0658309bde0-3
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 14:48:35 +0200
-Received: from debian.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 873A082767E7;
- Fri, 29 May 2026 08:47:19 -0400 (EDT)
+ id 1wSySG-005qKS-V4
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 16:44:56 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <3ZqYZagYKCXEhTPcYRVddVaT.RdbmTc-STkTaaXhih.mTcegdYTRi.dgV@flex--seanjc.bounces.google.com>)
+ id 6a19a668-5cb7-0a2a0a5109dd-0a2a450193e4-0
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:44:56 +0200
+Received: from [209.85.216.73] (helo=mail-pj1-f73.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from
+ <3ZqYZagYKCXEhTPcYRVddVaT.RdbmTc-STkTaaXhih.mTcegdYTRi.dgV@flex--seanjc.bounces.google.com>)
+ id 6a19a667-c1f2-0a2a45010019-d155d849e867-3
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 16:44:56 +0200
+Received: by mail-pj1-f73.google.com with SMTP id
+ 98e67ed59e1d1-3663cbff31cso9157855a91.2
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 07:44:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,46 +50,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 7/7] tools/libs/stat/xenstat.c: Extend the "no maximum" sentinel for max_pages
-Date: Fri, 29 May 2026 13:44:01 +0100
-Message-Id: <3b0adba2cbdb73e16a1c29e081dda9167547ce57.1780058608.git.bernhard.kaindl@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <cover.1780058608.git.bernhard.kaindl@citrix.com>
-References: <cover.1780058608.git.bernhard.kaindl@citrix.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1780058915-4156BA53-B990E7C5/0/0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1780065895; x=1780670695; darn=lists.xenproject.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
+        bh=BmTkJVHUffmv2iD67o3GahQBnXBWwXEIKjsjKzRmdQg=;
+        b=Gw7szUH6Vcz40Mn+4g+W9wIGjb8HiWQH93sXRge4IsapFk3ySatozUwoHDq78AnO/k
+         uc38agznM39UTVN1U8yVlastdxGmejU1SzogHlBTiLV4jkNHAV1x/V1M7lR6J7gHvtre
+         +mHNc+p7L92476gijI8GyWG+MRQImX+3wGDVRYSp7Bf0gcNrm1h8TNbSLZWkKn74T0F+
+         KXh7Oqr8gaidcOijJaNNSbCPQUP0IOuP0OjZb81y4P/R9ISCx/dTylcCOXu1f/RqKy4j
+         d0bwiJ3HJE+aCP7ZUsnHwBFZizpGDBB6U9FJmysxo1p9XW/+0y7pAxnCnJ+xXq5Z/B3r
+         Ucng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780065895; x=1780670695;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BmTkJVHUffmv2iD67o3GahQBnXBWwXEIKjsjKzRmdQg=;
+        b=eSLHz9MJ+zSruYhCXBVpKMS9r7GmkMQjCxevgCzqmcE/nnSXd0BEUKTJ1UK8IVUUoF
+         Q8vRdJbxMPKRa2pfMvLg6y6Ziw1lrvQ8eTI6JrgreX5BKnAnmtl5Ugo/rdBRwnTbYFgl
+         +gbK7Ea3SUNksI+KNRsSd9bRgtbzea4Kbqv5Jvger59VLNxJ2b70ZK55C/mKGh0gfcaR
+         K28jC6xkdf6qBfGV1EPQ1ESwfloE+w0EPQaGpjzr/2RIqfw8vBL5QiTsdX+pv6tedVdX
+         ZeR/pkY6nGMjfYp4ZcG/QCZcmyir//I2GffnE6m/9aVA4TjvzlTQ4oqqa1R+LvLuiEKq
+         IwoA==
+X-Forwarded-Encrypted: i=1; AFNElJ+A8VdiJv6cxB/vPqkoMQ8T8QoDqsif+ZVlyL8tZ7AD952oZNVMPmtlRV70i6JIQMAvy7cfadVFFss=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YzzlRpQ1qti28T+sXq7nkpPt4mRqxzQZMvQik8a6hrBQ41hf6Kq
+	Hi3GnD6V5yzsUayazk2mrfDzxAaxJsfJSYpEEeVUbz1nFbmXp8WIEQJEgqA33+MQE/ZS2hxwQNa
+	0QtAj9g==
+X-Received: from pjbfv16.prod.google.com ([2002:a17:90b:e90:b0:36b:7407:9b72])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:2fcf:b0:36b:9c4a:e05d
+ with SMTP id 98e67ed59e1d1-36bbcfe11camr4074961a91.17.1780065894470; Fri, 29
+ May 2026 07:44:54 -0700 (PDT)
+Reply-To: Sean Christopherson <seanjc@google.com>
+Date: Fri, 29 May 2026 07:43:50 -0700
+In-Reply-To: <20260529144435.704127-1-seanjc@google.com>
+Mime-Version: 1.0
+References: <20260529144435.704127-1-seanjc@google.com>
+X-Mailer: git-send-email 2.54.0.823.g6e5bcc1fc9-goog
+Message-ID: <20260529144435.704127-4-seanjc@google.com>
+Subject: [PATCH v4 03/47] x86/sev: Mark TSC as reliable when configuring
+ Secure TSC
+From: Sean Christopherson <seanjc@google.com>
+To: Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	Kiryl Shutsemau <kas@kernel.org>, Sean Christopherson <seanjc@google.com>, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
+	Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, John Stultz <jstultz@google.com>
+Cc: "H. Peter Anvin" <hpa@zytor.com>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+	Vitaly Kuznetsov <vkuznets@redhat.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stephen Boyd <sboyd@kernel.org>, kvm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev, 
+	linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev, 
+	xen-devel@lists.xenproject.org, David Woodhouse <dwmw@amazon.co.uk>, 
+	Tom Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>, 
+	David Woodhouse <dwmw2@infradead.org>, Michael Kelley <mhklinux@outlook.com>, 
+	Thomas Gleixner <tglx@linutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-d62444/1780065896-AE95FFF4-F63DC245/0/0
 X-purgate-type: clean
-X-purgate-size: 908
+X-purgate-size: 1723
 
-In xenstat_get_node(), update the "no maximum" sentinel for max_pages
-from UINT_MAX to ULONG_MAX, which is converted to (unsigned long long)-1.
+Move the code to mark the TSC as reliable from sme_early_init() to
+snp_secure_tsc_init().  The only reader of TSC_RELIABLE is the aptly
+named check_system_tsc_reliable(), which runs in tsc_init(), i.e.
+after snp_secure_tsc_init().
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+This will allow consolidating the handling of TSC_KNOWN_FREQ and
+TSC_RELIABLE when overriding the TSC calibration routine.
+
+Cc: Tom Lendacky <thomas.lendacky@amd.com>
+Reviewed-by: Nikunj A Dadhania <nikunj@amd.com>
+Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
+Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- tools/libs/stat/xenstat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/coco/sev/core.c      | 2 ++
+ arch/x86/mm/mem_encrypt_amd.c | 3 ---
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libs/stat/xenstat.c b/tools/libs/stat/xenstat.c
-index 8bab2e66a7fe..376136871487 100644
---- a/tools/libs/stat/xenstat.c
-+++ b/tools/libs/stat/xenstat.c
-@@ -221,7 +221,7 @@ xenstat_node *xenstat_get_node(xenstat_handle * handle, unsigned int flags)
- 			    ((unsigned long long)domaininfo[i].tot_pages)
- 			    * handle->page_size;
- 			domain->max_mem =
--			    domaininfo[i].max_pages == UINT_MAX
-+			    domaininfo[i].max_pages == ULONG_MAX
- 			    ? (unsigned long long)-1
- 			    : (unsigned long long)(domaininfo[i].max_pages
- 						   * handle->page_size);
+diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
+index ecd77d3217f3..ed0ac52a765e 100644
+--- a/arch/x86/coco/sev/core.c
++++ b/arch/x86/coco/sev/core.c
+@@ -2037,6 +2037,8 @@ void __init snp_secure_tsc_init(void)
+ 	secrets = (__force struct snp_secrets_page *)mem;
+ 
+ 	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
++	setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
++
+ 	rdmsrq(MSR_AMD64_GUEST_TSC_FREQ, tsc_freq_mhz);
+ 
+ 	/* Extract the GUEST TSC MHZ from BIT[17:0], rest is reserved space */
+diff --git a/arch/x86/mm/mem_encrypt_amd.c b/arch/x86/mm/mem_encrypt_amd.c
+index 2f8c32173972..6c3af974c7c2 100644
+--- a/arch/x86/mm/mem_encrypt_amd.c
++++ b/arch/x86/mm/mem_encrypt_amd.c
+@@ -535,9 +535,6 @@ void __init sme_early_init(void)
+ 		 */
+ 		x86_init.resources.dmi_setup = snp_dmi_setup;
+ 	}
+-
+-	if (sev_status & MSR_AMD64_SNP_SECURE_TSC)
+-		setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
+ }
+ 
+ void __init mem_encrypt_free_decrypted_mem(void)
 -- 
-2.39.5
+2.54.0.823.g6e5bcc1fc9-goog
 
 
