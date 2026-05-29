@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32BDCCD6E4A
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 15:08:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1322446.1588717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502B9CD6E50
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2026 15:08:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1322450.1588725 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSyp0-0006lv-4T; Fri, 29 May 2026 15:08:26 +0000
+	id 1wSyp8-0007DJ-BN; Fri, 29 May 2026 15:08:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1322446.1588717; Fri, 29 May 2026 15:08:26 +0000
+Received: by outflank-mailman (output) from mailman id 1322450.1588725; Fri, 29 May 2026 15:08:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wSyp0-0006ll-1V; Fri, 29 May 2026 15:08:26 +0000
-Received: by outflank-mailman (input) for mailman id 1322446;
- Fri, 29 May 2026 15:08:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wSyp8-0007Ck-8U; Fri, 29 May 2026 15:08:34 +0000
+Received: by outflank-mailman (input) for mailman id 1322450;
+ Fri, 29 May 2026 15:08:32 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <35asZagYKCfougcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@flex--seanjc.bounces.google.com>)
- id 1wSyoz-0006iP-0V
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 15:08:25 +0000
+ <37asZagYKCQQwierngksskpi.gsq1ir-hizippmwxw.1irtvsnigx.svk@flex--seanjc.bounces.google.com>)
+ id 1wSyp6-0007At-U8
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 15:08:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wSyoy-002uwf-DS
- for xen-devel@lists.xenproject.org; Fri, 29 May 2026 17:08:24 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1wSyp5-00BVDF-GG
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2026 17:08:31 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <35asZagYKCfougcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@flex--seanjc.bounces.google.com>)
- id 6a19abcf-e002-0a2a0a5209dd-0a2a4503e0ae-30
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 17:08:24 +0200
-Received: from [209.85.215.201] (helo=mail-pg1-f201.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ <37asZagYKCQQwierngksskpi.gsq1ir-hizippmwxw.1irtvsnigx.svk@flex--seanjc.bounces.google.com>)
+ id 6a19abec-2eae-0a2a0a5409dd-0a2a4506b9e2-8
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 17:08:31 +0200
+Received: from [209.85.214.201] (helo=mail-pl1-f201.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
- <35asZagYKCfougcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@flex--seanjc.bounces.google.com>)
- id 6a19abe6-672d-0a2a45030019-d155d7c9ed02-3
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 17:08:24 +0200
-Received: by mail-pg1-f201.google.com with SMTP id
- 41be03b00d2f7-c82ac893940so7119245a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 08:08:23 -0700 (PDT)
+ <37asZagYKCQQwierngksskpi.gsq1ir-hizippmwxw.1irtvsnigx.svk@flex--seanjc.bounces.google.com>)
+ id 6a19abed-7371-0a2a45060019-d155d6c9d110-3
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 17:08:31 +0200
+Received: by mail-pl1-f201.google.com with SMTP id
+ d9443c01a7336-2bf160f7191so7902165ad.3
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2026 08:08:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +52,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date:Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1780067302; x=1780672102; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1780067309; x=1780672109; darn=lists.xenproject.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:from:to:cc:subject:date:message-id:reply-to;
-        bh=N9FJGXb1rHvCmGDbAStTerw3YHwheVCgedyMSiUJO9w=;
-        b=fnF78wHADr4EI/QTQR6MlTLlhAX0nIH8MlyxnND2S2lWQHqEki7zTQ5Pz4uCeaBbYT
-         jikgxgnxUFSZaCY2Equ7x1+GT7U/32aWwFAZVNCaDJjjIQiP7/5kjsDAWCRXsBf98u50
-         4f/XOIu5qTwwQNa+Cv4PltpAxCoFbjsUoWusgsdHKdr42VJDvbzfAew/MYJ3X77BJgH4
-         X2lW5tbUYWaGtB7bl6AwFERixgs8bas5FIC9m1YkaSJhe/bpTyP9spBAIDcaZrdHG+bi
-         P7t8g6IVhLuLa5q0QplWJhTkI2vwPx1UW+SAMCa0h/VV1fgJTzE92cRKR9KQZ1gp36G/
-         CsxA==
+        bh=EFwMDca4i0UUfWhYRWZx1hhbmviPyyt5LCM1/HLShPA=;
+        b=hLIlMKa8CvKj1FZ/1WyFxZJXQhrdWXTkfDWqDtWLIXTtQRy/AWA9zCzxFNNMjnELHP
+         upDDiliJc8oaWif95eWreY4XyHURBzSUj3/EbUU4u1KJ5erpYy0zWzYpblQAHeQLXjsJ
+         7xK7NysyVJy/cLbNer60XisI4LoqUgiiTR5R/1QlX1kIizTN+yw8mtj3M/u+haTE4vDG
+         2NHwbDs8HBlxqImhMe/Nrssr0AtvqTDh70jOIg4oeiD1EPK2s7BFlTYRZSv3KRKjtmWs
+         ZwfTiclHbjh6LIkYZn+3tj1R240apCD2V+hiUtE2FraAlJn+Va8NitBUDkjo0zyC4XS/
+         E2Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780067302; x=1780672102;
+        d=1e100.net; s=20251104; t=1780067309; x=1780672109;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:reply-to:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=N9FJGXb1rHvCmGDbAStTerw3YHwheVCgedyMSiUJO9w=;
-        b=q5+Xiindk0moyyMOLQ4f80xNmYQBnOm8UMWFVuHQgEsDdmegSBagNWATSH92kqUciK
-         4Ms1Hgdxi9CnuqvPXcfeQD94+vidKkCEtpUwQTd9KWtmMA3RBmI31ZFqQJaXWKTA3a/U
-         NekoiJg0qK/yKB96owcUNaqQ2SiwvQhwvRJepmZCQfmBNlYarlG99vgFg7V+mPXFg9Hs
-         3xciMQGiqQTANUHotdXIE5RJGDAIlqZq9eeAf5AMGif+/MQvbUGYFD83zPGjiK19i7B5
-         eXSRPAIeBy00xzeNLkWlorUiCzXV4n2kr99uSWx0zFwTMIviDJoyNMQG8q0RE6HPg6WD
-         fbqA==
-X-Forwarded-Encrypted: i=1; AFNElJ86JxKdP6Yj46FFVcn5cYTC5J9fmtnzzjy8sfo2l4MSw7lAwOw5mYBctZMCji+fyy+Mpqb8t40s/tg=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx3L+IRm9OQdRVc8YradH2CA5oiBPDErpMYH/BTM3okBcuKPnjf
-	BJIxhq4hVtXe5FYitn2X4J7JgSr3Jz8sEcvgI5HNscOCtVuNf4tLyFKRbNKXcvu79dQM1Xmg2H2
-	7CCzkQg==
-X-Received: from pgvi7.prod.google.com ([2002:a65:61a7:0:b0:c85:82f6:34de])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a21:594:b0:3b3:2703:111
- with SMTP id adf61e73a8af0-3b411e9b75cmr3575842637.44.1780067301940; Fri, 29
- May 2026 08:08:21 -0700 (PDT)
+        bh=EFwMDca4i0UUfWhYRWZx1hhbmviPyyt5LCM1/HLShPA=;
+        b=nTSGhbBxZY7M94rAfRWQJO1JKX5TNzeagGKTNSjpmBAb7Bj02PL0HUsqLmYzjaoaMI
+         YsW3bsI8srrc3gceQ4r1QgAByVUknxozs5MJs9TpSfTlcO/e617vy6xWaK9C+Vzh2PrX
+         9uaXjNpKdPueqIaVQKWt8fbfbx0gMaW7XFA6KCOPMcaJTRImrdkPj7QvSBi6igfwsa1K
+         z9AmSD5FXLLC1BpQ0qRJ2bNQkGpvcQZDImNMGlXuUbMn2+GNmEjx3GsA7xmYzSsh0HMd
+         btfe47cfGybf3AtbqtYilNHAN32SXxtwXepwrIDkcnSJ5dWt/mRQcy4ce11b6lEM6Pka
+         m+Gg==
+X-Forwarded-Encrypted: i=1; AFNElJ8VrfNPgN7hJsojhiz0KFtH6tNpJkGkPhB29hYiLoUiD29E98dGdhHJ0XQKicZ7D0kTu3UAgPRUK2U=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywg4cEie3rgjNLSfW2OGLXh/cqqdiqD3CwZuJ2+AA4Tj4pFDK88
+	0o0nYqpBO2kGsbMMRmpp8jxKnGqKCkPz38CaOR4Ir96g1Nt2W7JPCiclOzBFL18+9eUV1aZrFD0
+	y/7wGBw==
+X-Received: from plbjy6.prod.google.com ([2002:a17:903:42c6:b0:2bd:d2c2:2776])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:eccf:b0:2bf:3126:44b6
+ with SMTP id d9443c01a7336-2bf368bd5dfmr2325645ad.40.1780067309070; Fri, 29
+ May 2026 08:08:29 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Fri, 29 May 2026 08:08:20 -0700
+Date: Fri, 29 May 2026 08:08:26 -0700
 In-Reply-To: <20260529144435.704127-1-seanjc@google.com>
 Mime-Version: 1.0
 References: <20260529144435.704127-1-seanjc@google.com>
 X-Mailer: git-send-email 2.54.0.823.g6e5bcc1fc9-goog
-Message-ID: <20260529150820.714844-1-seanjc@google.com>
-Subject: [PATCH v4 41/47] x86/kvmclock: WARN if wall clock is read while
- kvmclock is suspended
+Message-ID: <20260529150827.714968-1-seanjc@google.com>
+Subject: [PATCH v4 44/47] x86/paravirt: Don't use a PV sched_clock in CoCo
+ guests with trusted TSC
 From: Sean Christopherson <seanjc@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
 	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
@@ -112,69 +112,42 @@ Cc: "H . Peter Anvin" <hpa@zytor.com>, Rick Edgecombe <rick.p.edgecombe@intel.co
 	David Woodhouse <dwmw2@infradead.org>, Michael Kelley <mhklinux@outlook.com>, 
 	Thomas Gleixner <tglx@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-33051d/1780067304-39B7C938-9D80C75C/0/0
+X-purgate-ID: tlsNG-16d1c6/1780067311-8EF89D75-DEE7E71A/0/0
 X-purgate-type: clean
-X-purgate-size: 2065
+X-purgate-size: 1335
 
-WARN if kvmclock is still suspended when its wallclock is read, i.e. when
-the kernel reads its persistent clock.  The wallclock subtly depends on
-the BSP's kvmclock being enabled, and returns garbage if kvmclock is
-disabled.
+Silently ignore attempts to switch to a paravirt sched_clock when running
+as a CoCo guest with trusted TSC.  In hand-wavy theory, a misbehaving
+hypervisor could attack the guest by manipulating the PV clock to affect
+guest scheduling in some weird and/or predictable way.  More importantly,
+reading TSC on such platforms is faster than any PV clock, and sched_clock
+is all about speed.
 
 Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/kernel/kvmclock.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/x86/kernel/tsc.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index 5dfac79a5d30..73fabfac2bc9 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -53,6 +53,8 @@ static struct pvclock_vsyscall_time_info *hvclock_mem;
- DEFINE_PER_CPU(struct pvclock_vsyscall_time_info *, hv_clock_per_cpu);
- EXPORT_PER_CPU_SYMBOL_GPL(hv_clock_per_cpu);
- 
-+static bool kvmclock_suspended;
+diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
+index 7bcf757bf551..036916953f4a 100644
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -283,6 +283,15 @@ bool using_native_sched_clock(void)
+ int __init __paravirt_set_sched_clock(u64 (*func)(void), bool stable,
+ 				      void (*save)(void), void (*restore)(void))
+ {
++	/*
++	 * Don't replace TSC with a PV clock when running as a CoCo guest and
++	 * the TSC is secure/trusted; PV clocks are emulated by the hypervisor,
++	 * which isn't in the guest's TCB.
++	 */
++	if (cc_platform_has(CC_ATTR_GUEST_SNP_SECURE_TSC) ||
++	    boot_cpu_has(X86_FEATURE_TDX_GUEST))
++		return -EPERM;
 +
- /*
-  * The wallclock is the time of day when we booted. Since then, some time may
-  * have elapsed since the hypervisor wrote the data. So we try to account for
-@@ -60,6 +62,7 @@ EXPORT_PER_CPU_SYMBOL_GPL(hv_clock_per_cpu);
-  */
- static void kvm_get_wallclock(struct timespec64 *now)
- {
-+	WARN_ON_ONCE(kvmclock_suspended);
- 	wrmsrq(msr_kvm_wall_clock, slow_virt_to_phys(&wall_clock));
- 	preempt_disable();
- 	pvclock_read_wallclock(&wall_clock, this_cpu_pvti(), now);
-@@ -119,6 +122,7 @@ static void kvm_save_sched_clock_state(void)
- 	 * to the old address prior to reconfiguring kvmclock would clobber
- 	 * random memory.
- 	 */
-+	kvmclock_suspended = true;
- 	kvmclock_disable();
- }
- 
-@@ -131,16 +135,19 @@ static void kvm_setup_secondary_clock(void)
- 
- static void kvm_restore_sched_clock_state(void)
- {
-+	kvmclock_suspended = false;
- 	kvm_register_clock("primary cpu, sched_clock resume");
- }
- 
- static void kvmclock_suspend(struct clocksource *cs)
- {
-+	kvmclock_suspended = true;
- 	kvmclock_disable();
- }
- 
- static void kvmclock_resume(struct clocksource *cs)
- {
-+	kvmclock_suspended = false;
- 	kvm_register_clock("primary cpu, clocksource resume");
- }
+ 	if (!stable)
+ 		clear_sched_clock_stable();
  
 -- 
 2.54.0.823.g6e5bcc1fc9-goog
