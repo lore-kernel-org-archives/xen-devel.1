@@ -4,39 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61757CD6E49
-	for <xen-devel@archiver.kernel.org>; Sat, 30 May 2026 18:19:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323049.1589054 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB1CCD6E49
+	for <xen-devel@archiver.kernel.org>; Sat, 30 May 2026 18:26:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1323105.1589063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wTOHD-00006H-S6; Sat, 30 May 2026 18:19:15 +0000
+	id 1wTONt-0001o4-DQ; Sat, 30 May 2026 18:26:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323049.1589054; Sat, 30 May 2026 18:19:15 +0000
+Received: by outflank-mailman (output) from mailman id 1323105.1589063; Sat, 30 May 2026 18:26:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wTOHD-000069-Mu; Sat, 30 May 2026 18:19:15 +0000
-Received: by outflank-mailman (input) for mailman id 1323049;
- Sat, 30 May 2026 16:47:58 +0000
+	id 1wTONt-0001nx-A5; Sat, 30 May 2026 18:26:09 +0000
+Received: by outflank-mailman (input) for mailman id 1323105;
+ Sat, 30 May 2026 18:26:08 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ludloff@gmail.com>) id 1wTMqs-0003gl-4D
- for xen-devel@lists.xenproject.org; Sat, 30 May 2026 16:47:58 +0000
+ (envelope-from <mfo@igalia.com>) id 1wTONp-0001mm-ES
+ for xen-devel@lists.xenproject.org; Sat, 30 May 2026 18:26:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wTMqr-00GoxY-1o
- for xen-devel@lists.xenproject.org; Sat, 30 May 2026 18:47:57 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1wTONo-00C4mB-CJ
+ for xen-devel@lists.xenproject.org; Sat, 30 May 2026 20:26:04 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ludloff@gmail.com>)
- id 6a1b14b6-e002-0a2a0a5209dd-0a2a4509ecfe-2
- for <xen-devel@lists.xenproject.org>; Sat, 30 May 2026 18:47:56 +0200
-Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <ludloff@gmail.com>)
- id 6a1b14bc-2497-0a2a45090019-d155da2cc99b-3
- for <xen-devel@lists.xenproject.org>; Sat, 30 May 2026 18:47:56 +0200
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-bdbac72ac1fso1782475366b.3
- for <xen-devel@lists.xenproject.org>; Sat, 30 May 2026 09:47:56 -0700 (PDT)
+ (envelope-from <mfo@igalia.com>)
+ id 6a1b2b53-e002-0a2a0a5209dd-0a2a4502cabc-32
+ for <xen-devel@lists.xenproject.org>; Sat, 30 May 2026 20:26:04 +0200
+Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <mfo@igalia.com>)
+ id 6a1b2bba-af86-0a2a45020019-d561b338baea-3
+ for <xen-devel@lists.xenproject.org>; Sat, 30 May 2026 20:26:03 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+ by fanzine2.igalia.com with esmtps 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1wTONE-00ALEi-Em; Sat, 30 May 2026 20:25:28 +0200
+Received: from webmail.service.igalia.com ([192.168.21.45])
+ by mail.igalia.com with esmtp (Exim)
+ id 1wTONC-003hJ2-2f; Sat, 30 May 2026 20:25:28 +0200
+Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
+ by webmail.service.igalia.com with esmtp (Exim 4.98.2)
+ (envelope-from <mfo@igalia.com>) id 1wTONB-00000005YVY-1bPX;
+ Sat, 30 May 2026 20:25:25 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,102 +56,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Cc:To:Subject:Message-ID:Date:From:Reply-To:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1780159676; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ZxPZ0cDgSCkzMVF0ftm3KBiK4Z7VXILbOU2q4QH2Yx1i0ajb8oAwpYi8xJsXEzE3Up
-         32lyFqXVVOyP8HyP6SLvt05oVh9s0YYvpOcHqj/vVlQD1X5YurcOjP+PLcdPLgiyoJ71
-         tNV8Xch1tXJq7SwIt0rLYow68MeLHElVcxzxjarLmtcL3s05PoXKMknPQ0VGkUPNM91j
-         xDBR3ij2tboGq/v/0Cx4PokCZV4FnN58mHUTU7zCm6LMXxrQZGLkP1akdRQMwD/po8oE
-         MPWrqwokXggbZgmTox30xyKu6a4LFELQSpmX+AgZUeVlmleqxq3MikZBnVO+nMObkibK
-         2+Mw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:reply-to:mime-version
-         :dkim-signature;
-        bh=uDjMWTL59bSew6EuBBjyiKQsK4J1StRuWvcVY3hIZ9s=;
-        fh=nQ0n5IRvn5oDuL13sJT0ECbnSOSXNW/e0yo4t0+LRNg=;
-        b=csS7lH2nuHhpaUyL3cIzrKddk1MzXA3fPvmRBG6IYJDHKhCXan+Jl4CbVs9i5zaTVq
-         SxyLOG7ylJfMBH6g/e0TB+IFAGS4RUO/E5PsvXILZH8/bzU8GQAUvvEKCFVX2raFj6i3
-         UYrOB3gz0YbaAIZwDsTnBXmIAsQCyE9Z/glQGvaijLev+ufBHgH7K9NfmNbS8o/GlJ36
-         kT76hVVhWIK+lyZpn1VGCZ7YfmUCL7JpYTSzk8+CSvojKRnrDWOnLtR/4IS0Rth4imFs
-         9G7oOQy+DZqvOnaIaSvjgIUwU9M0owVfhWyiGCnFHOBC3Wpftu/QTVOPehDN4cshmTHk
-         a4Xg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780159676; x=1780764476; darn=lists.xenproject.org;
-        h=cc:to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uDjMWTL59bSew6EuBBjyiKQsK4J1StRuWvcVY3hIZ9s=;
-        b=KgO/mPdl6CyR+rn+YiB9BLdcgHbniv91JJz2syR+dF5Pi/CC+NeFEBhFn7xqbNDSYR
-         nEcVcV+i8oPjMpw/TNTRmG6IO79SB0ilYVWbEQRT+sfiyEZXCWAGuvGEjCzK6RPhqI0M
-         +GkGLCnyU8SgPQClRvjkHN8EV97soA5Qg/d/8uBH8jEcfeyF/6/rEaT/rgBx2NBp/ktm
-         /aFoaZljpIHDrQ4K9/3+qcqn1VskkELkiBpyU3SvdjZQESas3Yyxhvge4dToAc/pkqwA
-         6x1/4aRYpjxk0YXZcwBnQg+dL0PU6RUOQff98Ucty7vpGhMoF/dhgfdTOiUHHKwYQAZP
-         21WA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780159676; x=1780764476;
-        h=cc:to:subject:message-id:date:from:reply-to:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=uDjMWTL59bSew6EuBBjyiKQsK4J1StRuWvcVY3hIZ9s=;
-        b=JkRimZM9vZIZBLIH9phU6deUHd19AK16h/I1F0F0Rk7ghjNDvGYtaeJoZWO38xmwBK
-         etEuKVW+46+S+78+2f4Mp+gwUwKRQT1CojFBJqJNESUVwRU4e9acjsKq2U0Nw2boWDnL
-         AfKAmvjTRrEQsJesNwp9cNW0RN1jIXQuQG6Y3IzZxqLMDCc/lYk9/326Z5dOr+tXd0SL
-         wXp9OTACr9z21IC5eP0w4Aih/HEd/ZvcxEcAfEVOYXdc2VHzT6w+i7ODZ83kY5Q9FjzA
-         Z/oCLED+hzKrlo3bwRBU5Nx38g4XsMeTl/Q9T+prCjTrS8edoTeRcO4Zb2wsV7AxOCS/
-         JwVg==
-X-Forwarded-Encrypted: i=1; AFNElJ+Pw/4C4hlSi4XAbJD7JoQklTTg9KZCJiB/82bmgwQ+8aeK8c5XTJKdToMSrjLCyX/X/mIQLx1IlQo=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yxts8+46BVoUTKdBtenOE63Jz16yI+OuXH8VSpfcwfaH3hnB0ZC
-	1/Ke9+9CUAzIAbKNmhiTlq67ULy30b3L6A7i5vjKdXB42lFhIa0IEbssBf8icDaWUmnpRCpp/NZ
-	mtzzyCwSwQZ4gvX+0SjjnB38yRKo6hhE=
-X-Gm-Gg: Acq92OE920v1GFvHfkvMRkqvozPEU142TcMBE+LSgtijV075FQji28Src0Eu7F58s9S
-	4bKuBKtV12wf1IZ0SnDQozt+oTvcZ2sDcIXL/Pudy48ebb5/Tueu6FPm72qIAASNOrAx+jSakZh
-	Ga/Rm6HqDGp1YEkFBUdROgkYh8fLZNu9tWAvP6buEevTwvYeBMIkHI3RqD7dXNPsdsLDr9DbiXH
-	0+Cx5PkByfnahvVCHTNS7fsOr/LS+HlVl/g651C48M1BiuZ8YwEnuOMgW0wqdEb5DJJIXhIQufe
-	VaAtKQH0A54+AzTGl3NnAOnIh7aySMWx3AyfEoxxlbAxVzsLMw==
-X-Received: by 2002:a17:907:80a:b0:bae:d29c:4e28 with SMTP id
- a640c23a62f3a-beab3850c0emr227580166b.12.1780159676193; Sat, 30 May 2026
- 09:47:56 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Content-Transfer-Encoding:Content-Type:Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:MIME-Version"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:Message-ID:References:
+	In-Reply-To:Subject:Cc:To:From:Date:MIME-Version:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=+CEMRaJFugQuRP0/DJTzv+8chqmTJilMImwXMol396E=; b=BR3yV6wgeIxWYy5xNZ+xGvXXS7
+	02mPLhQgHJHn9BspRzTnC/IQvF+JGiFsFf2dUclCkPtWfbZ3dI1KvC4JytpgZzEHagH4Z/dAcGiBt
+	rRNwIqjzQiHXUPQw5IGP4QQ+JobrnhM377GGSuAIw5crru1gwV6c5db0f0uM5jjf4yQgLzvY05b6W
+	nGi7bTAwAgysJJDvp5XGHtmL56IA0Ob6gy5nxUwo3SM9Pkv59buwRJ8TFqXTOoT+WyMf/o4EJogcQ
+	erTteuHigGB4uQkUubfJ0Ul6ITZ/pqB0G3lWZ6C71yx1edTTtdwZnNBtB5Tl1NVteGnR3BRDk3ZdU
+	ybdqi6ZQ==;
 MIME-Version: 1.0
-Reply-To: ludloff@gmail.com
-From: Christian Ludloff <ludloff@gmail.com>
-Date: Sat, 30 May 2026 09:47:44 -0700
-X-Gm-Features: AVHnY4LzRI4mtM2MVMA9vVPgTReaIAtSfV8wr74SnOQ4vnVCBcmxdNjiRFE8TOw
-Message-ID: <CAKSQd8XBoaUf7MyvPJCv_DHeuEd-DtRYb5GnAofkbJTP89LLMw@mail.gmail.com>
-Subject: Re: [PATCH v4 15/47] KVM: x86: Officially define CPUID 0x40000010 as
- PV Timing Info (TSC and Bus)
-To: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
-	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	Kiryl Shutsemau <kas@kernel.org>, "K. Y. Srinivasan" <kys@microsoft.com>, 
-	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
-	Ajay Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov <alexey.makhalov@broadcom.com>, 
-	Jan Kiszka <jan.kiszka@siemens.com>, Andy Lutomirski <luto@kernel.org>, 
-	Peter Zijlstra <peterz@infradead.org>, Juergen Gross <jgross@suse.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, John Stultz <jstultz@google.com>, 
-	"H. Peter Anvin" <hpa@zytor.com>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
-	Vitaly Kuznetsov <vkuznets@redhat.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	Stephen Boyd <sboyd@kernel.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-coco@lists.linux.dev, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, xen-devel@lists.xenproject.org, 
-	David Woodhouse <dwmw@amazon.co.uk>, Tom Lendacky <thomas.lendacky@amd.com>, 
-	Nikunj A Dadhania <nikunj@amd.com>, David Woodhouse <dwmw2@infradead.org>, 
-	Michael Kelley <mhklinux@outlook.com>, Thomas Gleixner <tglx@linutronix.de>, 
-	bcm-kernel-feedback-list@broadcom.com
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-bad1c0/1780159676-8A38AA53-A06BA55E/0/0
+Date: Sat, 30 May 2026 15:25:25 -0300
+From: Mauricio Faria de Oliveira <mfo@igalia.com>
+To: Borislav Petkov <bp@alien8.de>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Dave
+ Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
+ <hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Alexey Dobriyan
+ <adobriyan@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, kernel test robot <lkp@intel.com>
+Subject: Re: [PATCH v4 0/4] x86/pvh: fix unbootable VMs again (PVH + KASAN)
+In-Reply-To: <20260527204736.GBahdYaKk6kAkIUYE3@fat_crate.local>
+References: <20260526-pvh-kasan-inline-v4-0-a310e6a25ecd@igalia.com>
+ <20260527204736.GBahdYaKk6kAkIUYE3@fat_crate.local>
+Message-ID: <274609541a0c7c6b49b386001967dd2b@igalia.com>
+X-Sender: mfo@igalia.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1780165564-8057B161-0EE46CF7/0/0
 X-purgate-type: clean
-X-purgate-size: 323
+X-purgate-size: 1811
 
-> + *  # EAX: (Virtual) TSC frequency in kHz.
-> + *  # EBX: (Virtual) Bus (local APIC timer) frequency in kHz.
-> + *  # ECX, EDX: Reserved (must be zero).
+Thanks for having a look at this.
 
-Can someone from Broadcom please speak up as to
-what a non-ECX value signifies for their HV? (Asking
-because I see a value of 2, not a must-be-zero.)
+On 2026-05-27 17:47, Borislav Petkov wrote:
+> On Tue, May 26, 2026 at 11:52:32AM -0300, Mauricio Faria de Oliveira wrote:
+>> The issue of unbootable VMs with CONFIG_PVH due to CONFIG_KASAN is back.
+> 
+> ... and we care about that particular configuration because...?
 
---
-C.
+PVH and KASAN can be enabled independently for their own purposes
+(startup entry point and debugging), but when combined, KASAN might
+break booting via the PVH entry point. There are precedents for
+disabling KASAN instrumentation in specific code paths, including this
+one (see listed commits), so addressing this issue/regression seems
+reasonable.
+
+In this instance, the use case is to speed up the dev-test cycle when
+debugging on VMs: PVH allows booting directly from vmlinux, avoiding the
+need to build/compress and decompress bzImage, while KASAN helps detect
+issues early.
+
+> 
+>>  arch/x86/boot/string.c               |  6 ++----
+>>  arch/x86/include/asm/cpuid/api.h     |  2 +-
+>>  arch/x86/include/asm/string.h        | 21 +-------------------
+>>  arch/x86/include/asm/string_inline.h | 37 ++++++++++++++++++++++++++++++++++++
+>>  arch/x86/platform/pvh/enlighten.c    |  3 ++-
+>>  5 files changed, 43 insertions(+), 26 deletions(-)
+> 
+> I fail to see justification for those gymnastics.
+
+Briefly, this is a side effect of reusing code from 'boot/string.c'
+through <asm/string.h>, which introduces additional complications;
+please see patch 1 for details.
+
+These complications could be avoided by not reusing that code and
+instead adding slightly duplicated code [1] directly to <asm/string.h>,
+if that is preferred. 
+
+Please let me know your thoughts.
+
+Thanks,
+
+[1]
+https://lore.kernel.org/all/324ef97b16f52e0ccc72f6381d1b5dd2@igalia.com/
+
+-- 
+Mauricio
 
