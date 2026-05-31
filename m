@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1013ACD6E56
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8B0CD6E5E
 	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2026 22:48:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323478.1589248 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1323491.1589271 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxN-0007hI-Ox; Sun, 31 May 2026 22:48:33 +0000
+	id 1wToxS-00009F-0l; Sun, 31 May 2026 22:48:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323478.1589248; Sun, 31 May 2026 22:48:33 +0000
+Received: by outflank-mailman (output) from mailman id 1323491.1589271; Sun, 31 May 2026 22:48:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxN-0007fx-DS; Sun, 31 May 2026 22:48:33 +0000
-Received: by outflank-mailman (input) for mailman id 1323478;
- Sun, 31 May 2026 22:48:32 +0000
+	id 1wToxR-00007H-8i; Sun, 31 May 2026 22:48:37 +0000
+Received: by outflank-mailman (input) for mailman id 1323491;
+ Sun, 31 May 2026 22:48:36 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wToxM-0007Tq-LR
- for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:32 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wToxP-0008Ff-S5
+ for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wToxM-00BFyL-2D
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:32 +0200
+ id 1wToxP-00BFyL-82
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:35 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cba9e-5cb7-0a2a0a5109dd-0a2a4508c056-24
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:32 +0200
+ id 6a1cba9e-5cb7-0a2a0a5109dd-0a2a4508c056-32
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:35 +0200
 Received: from [52.101.228.92]
  (helo=OS0P286CU011.outbound.protection.outlook.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cbabb-63b5-0a2a45080019-3465e45c1533-5
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:31 +0200
+ id 6a1cbabb-63b5-0a2a45080019-3465e45c1533-8
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:34 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by TY1P286MB3278.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2e1::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Sun, 31 May
- 2026 22:48:24 +0000
+ 2026 22:48:33 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0071.015; Sun, 31 May 2026
- 22:48:24 +0000
+ 22:48:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,235 +57,128 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GhzpwkBhKvbFzTNhACp5SEuTeee9C7hhyt/3Ppih9lX8sSezcpXvsz0P6oPiLU0T4KmwxFtIEZD72SYGwmYBmB6il6wZYL7FB0ZahEZGodg9ZGNsvoaA0n9S6Ln5U9mSrsoJB1KNlyWzAY5GqSnui+8C+YZJyu6xITzMlyB+4Zj10V+dsWiESJTJ+LXqmZPpdtL7xkrQ5jkfChPYFkV1ErgiQ6tR5VjimBuRvkLXu0PM3a0YYuNLb+1bcwa2nWOdJodaOmBE345wXQXAI1WfqI71nxGydUuANzVeECnBYI9XzOSf+MSiFdEbOcf99/kPQ2DEOC8FssG1fazmrdIysQ==
+ b=c6Q5mtityzBd7qYg2foubso2g4yc7t8YIdZFfKJuF2WOk/oYQyadIadSnb96FNNNc2u4+4laOpP1s4/BJKiQRZXvU2sbXKOc/wGygTSjAR1kev1cCn0MEPf1W5dzSI3glWSqpTUn2kEnboegPmSEehE1IpqJuwBwpxx5lsRfj/s3mFyzmOSPkNF9q441fYb7lTw65NkIeBu/eEDYFAurgt5vgsQoxPRn+dFLjW5O7/q0ZmmFhwWbWbdWivUJ5yt11TcCY2rim4TwN4jTL8hG1rFTmL8e/bEM3zJlcQRdJz+9sWNCmDMwuDaQlUjLvYFgv+yxurD7irL4hTHTiDFjPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h1fpEhty/L0qcXw9KcXU8OLmSzP52ezRWu7E5NXmfus=;
- b=dHb2LgQS8Gni1HzEbE4mUDHK8TrYvJ4ecp4bjGk6dPowI2xTIMF6+X1RD7Hitg8WQyhMI2PzOfX98wEtxk/1BdViS3hMNf1hp0xz068vOJMdC4xpWSYT4G8INjxS16B4Du6M47nls3nQFmHnINNE4oNJ6Y019I6Am9GfQMSi8tfmkZhSdtzeA5fICcOp23qjaKf4FHn5mAWadPBHtr2MX6peTwZBffTc+E/3vMxLkHy0wJi/xeTa9shZccgjLjWDTlO2zSuFdtfQub24RvztO7Dua4J8A/CTK1qxhfnEEU7E0nrJmX94/YhiUP6c5p/4a7aIP4kY9YJBwiNrnndLMQ==
+ bh=blu4oOd7tpGPVUBQPLctq+uqUO6TNkR+RChL3tWjD80=;
+ b=Qh16dJHsz0wWcE0ZzY+1DmXKRyQMfbCG9QlZY0Dg6Os6CJ0IjHV+UQUlrdgn2JS0BhM6jVzRzifx6VEYSl14WDCLG4mbB+F8Vny2uepS8mO5u5bMVLUzgw5suG9Ez6MwJen87N39vda9odOgctHnSS9sGXDarzwujkyIjQPc/QOPl58qgMZM1UVxWLbRXOvvFVCp79Z05QVAJh+IV9+LsBZbAarbCyMGelB8pIgxsYUS8RUSzLzhCi/MWyti1fnmfYwnnFmhCAKsCL1SgnT0qoKjtkgu6FPRnw6kIdU0wWL0AmFT35XjuzwgXPfAFtrBsgVqo5H481FwZGFbggdQ8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h1fpEhty/L0qcXw9KcXU8OLmSzP52ezRWu7E5NXmfus=;
- b=rKPGCe1sb7nEtR+McraBYzKZr0kBnkds7LDGPt8t/AEUKQuRzfviWmsSnegJla4gOs8imR2W7Mqa9YKZ2tPdLr6GLGAew1vbLODeUhSurxE3s1q5usREu427Uk6xex24S6JmL6dOOjEIqEqYgYhpikIUIR2GPjZCXcSzZOWoK7Y=
+ bh=blu4oOd7tpGPVUBQPLctq+uqUO6TNkR+RChL3tWjD80=;
+ b=na/x5IqZvYaUXrQQRgowSu+s5ndA9SRjc3EOIJqqCk6QOJ6bQ7Xwyy1qtZjZO15iR6yOmjUnZupMH5MKzr2pnE69APRkCG3//4SxaKzlNBBCDGZZarw0GoI6rAig5D1170TeKJ4+LrCsTIOFjyetFbV+42ymdG6NtUJmGploE2s=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
 Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 12/24] tools/libs/guest: Allocate vNUMA memory from associated pNUMA nodes
-Date: Mon,  1 Jun 2026 07:47:42 +0900
-Message-ID: <20260531224755.9481-13-taka@valinux.co.jp>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 17/24] xen/arm: Set Domain-0 node affinity from dom0_nodes option
+Date: Mon,  1 Jun 2026 07:47:47 +0900
+Message-ID: <20260531224755.9481-18-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260531224755.9481-1-taka@valinux.co.jp>
 References: <20260531224755.9481-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY6PR01CA0039.jpnprd01.prod.outlook.com
- (2603:1096:405:3bd::12) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCPR01CA0085.jpnprd01.prod.outlook.com
+ (2603:1096:405:3::25) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY1P286MB3278:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e4fca19-caef-4e56-1eb1-08debf66b8bf
+X-MS-Office365-Filtering-Correlation-Id: e609a69b-af85-4586-7c9f-08debf66be0c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|10070799003|1800799024|366016|6133799003|56012099006|18002099003|22082099003;
+	BCL:0;ARA:13230040|376014|10070799003|1800799024|366016|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	VUPKfffV0InkQ2UIAVIe8T+rDD3Wj9GgynshFFk3rO8JQRWR1Sx7embUR3x33h8bTVvlAxn/2/6wFrr+wOJLjf2McKnktJTLfvRtxWn4wITnuIh0lkn2JDJ0bZIztWVngmKQt4pEuB46rH4Yj2UBkFJPQx35t8L/v4Wz8+ZJSdxCqt8OdF+i3vjW9AFmGvLt5gYXBykoqa4i3lTrxZE+LDLqAJSQR2MYR8fittMOk/yAkOfO9RhU6p969bg1E0zA8FjL9guY2nFpp9liSL1O430UlDHR5TmPdIIuziy3cVBb9eK3W+AAqrXw73uDpDQZgHtlOwnE5ssLhYBnK2Zbp232xpu31RCrAo4gtQh/baTRKoPai+baLZK3XQxA/86e8d6I2DI/HPMCNXBwleR2yV9I4cxmnFF1vGvgBaBrIsN5O846pdg0aPclqeXqufSGGxLjqBox7ircR7qRgT24zTeSvVzDS5YaFS+2ncMWHq/f5CiHy7yqNByk9SUhXhiz+Ur00M4TMEO5LvDTemiV6/EkI8HW0wJSnx0kkFvh9tf4iV0ZsU5XPf1w+E7VQYg9mIw0FjXseszDlEZtc7IOcoluEs3BKbi870Kq9MtXN0IPQUXqe5yI6vN2aYVTbfSZXrJctHe2rgO3XNyGmimhH8azmnZDMGGtVzoJ+MqNSExH2HvGTdYFD8vZUIF1LHJH
+	7dplkf+LJiv01GKxtVK3w7saMsXcJLX8P8xpRrz/lN/JfCWm/Fyx6SPWv9xO6dNLh/2Sj3gpbKCjhG112wU/jfnXG0pA05JPaZnxGDbB2VWh6Mm+o83PnwLlJgg4w7fHLBbDoUM1lEEkiqNhQLE+GVh9p+KSAqmVkZ5gzA2AB8O8h152fl8EhIbgl0e8A6y7xSp/f9HTVCYGhWx2kDffpFpgwdGnEBOezjMTwj4ydUbd+7UtoMVuzzHqSW9sq6/UAKau5+YTlEYWeCwstU9MIPTlgYow4rsKX8RHOTMyJVJZQfbEAgW6hZqIHeKUjMEI+9UO2/ea121lW3ojtQH3Uwoqulx5n1XZ/9ycyL070invM1bH76PBls0PkiPh/wpdYdyZHUJyNsL+EvWI+jIIcW9U7e/dGFi1c3KCTi1Ojeq2FnJMk8+IMcnCx/+62ziOxQf2KbXSTwbrERj17ri3ChYcQPXTeGcWaEVhwh4I1TU/f1y41KVP6CsorqWh/2vwj/JFKR4em04pwbrGdc9Hn/WdXJbBBKG1fEPTL8VJUvf7NrB2+mrOBznC2gISmV64pT0Ve4u5cvIIJeSvVC4Ai3QWIi8ybxKdVGP16/tnMcwgj++y3Elao6nMkRVs5/9hXbHvn2mSF7fGBv5VFxDOZCVW+6KOiGAfo7qHh56Hx/vrx7fpaVORECgrkH3QtPH+
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(6133799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?XWMi24sZE91OrLqwAda0Vldz8WN9DnR4sX+Z/blioztWshUkKxeIpGtq1LuX?=
- =?us-ascii?Q?Y1z3jfOsGzR+mb0V31FmG6EgelyjrNZVbqfbxQX3KTCmCl2Svl6XKvrjm+rK?=
- =?us-ascii?Q?2Vzae9kyFigOUBV8JqhM/qW8DCx8iIWv8G3Z8rqGi5ZQsHDVLTlh68z70LX4?=
- =?us-ascii?Q?62Q8SPljvVIwY/zRhY37vOkyks0Xin4E1cOv9RgxOp8ZyJ6lSEJvZNG+st7f?=
- =?us-ascii?Q?VjwZMIQcFtvKO5CcVt2w6VLIJA5+CYbBKP9KAwZ8fn2bgeldlCVN8P0Lb6BX?=
- =?us-ascii?Q?W/19Bq+nN3mjMEJdz35cuGm6jjp/uZZAnVGtfmJbDZopQEvwwnbwSva4RANT?=
- =?us-ascii?Q?2gVsyPRx0JJs6f6dxxTFuy1kO3IyqNpzEX42QWyr6XeP6CEoLfJcIMx7fdGy?=
- =?us-ascii?Q?ZWKaDVupqpgiAjvx6vetUrYXpls9c2WfSXsAsx4qLSU2MPNNYBpm54soI4A4?=
- =?us-ascii?Q?4FkbpLTJBzxa+2Bqxk8AL3/DhlelOdK2eoqxcJtG/r1fjG7FKvMs6XO4yJK3?=
- =?us-ascii?Q?TLByvYNPyXBM5i9lfAdT4b0JMe6WNsO1sCTAViDjZi2acATrnY0W9T6RWYZD?=
- =?us-ascii?Q?ZSAKk1YK9Ey0yfVD9dLIp/SbrePLIgLYLyEEShQQL1t6n3Y2S+W+UxuymZvM?=
- =?us-ascii?Q?q97LPjATaj7cQ0r3SCeiq6fa7tKIZtOnCYA46cstqwz3gD2DGwJ1nRARR5wF?=
- =?us-ascii?Q?HnDhrfRd6QLNLKoaDH+B4b7fKQuIXsbGL7/ioBHOI7BFEJuEDLH0aayvM+J+?=
- =?us-ascii?Q?T/3cjX6cn+Tgb1roEDfY48SXsqedzRL9hIaZLHxDns1wT4evUhOAQ9RVnnjW?=
- =?us-ascii?Q?qJB13mWe3ESHKA00zxofNWFR4yIAFLlGwwjgSl/oKeIpsDk/E2rh+FPnLMcv?=
- =?us-ascii?Q?VcTpwG6GZjVVUjERUHPU9xqNanFePxa/VomgQbtXK6uH9aYaIs5LEI3iun56?=
- =?us-ascii?Q?jMZfEYi69os1zJoZJdoi0LfLei5BSxHS9yGiiQ8h7vWtPTmvpOSJ2c6JJh4+?=
- =?us-ascii?Q?XcuWWE2ovLWDR7oEp8VX0Wo0XRtmMcMOoYUcqivyH3E69kDHPbEnfOFUZKvF?=
- =?us-ascii?Q?Lkvj8YzZX+KmkWLtn1WumGqop4vfokoWRqQt97yZ2M95I1hcP/LyMGlTXhUk?=
- =?us-ascii?Q?B9p2Gyo4GTjsq5VZSOBeDe83jsp5Un8dHCminsB/5zd4lsxu4ZVo5GY044gr?=
- =?us-ascii?Q?oe69J2eTPS+22d47SM9d545lJDs+mQGLFbYmQcdbSYh8F/LPIpVZnb/Owy0Y?=
- =?us-ascii?Q?lwym7L8dUvEh9rFCg3+WSxKcLrubfkan05jjWp0BWxZ0T27nN0fZQsAx96oE?=
- =?us-ascii?Q?WKnC2UwDHZxYQeRLYcEgxQ3PS2fPgS+/+yur8VfBTEaTQoXCig/ICy44MqYj?=
- =?us-ascii?Q?hDxjJ5oD1JCR6UETxwXekQdd/jEdbQCfJvxJ1a2z9KVnJz7ODvRmdxwuV+R8?=
- =?us-ascii?Q?856pQtxIU8DHzmu7buL22U8uzKp+plVkYULS28ejOTlGo0K/iqM503/uDv4/?=
- =?us-ascii?Q?NXydER79mVnCw6hTIj9fDxxybahbqonBTMu01PlkmcmBlXQxoSKjMMiIXfkQ?=
- =?us-ascii?Q?ky7qNNL+EHXtA8uSTYJK9+W32dG5wShm2s8c8z9hWQwuyAgvNlijIkUD5dRt?=
- =?us-ascii?Q?fIrgxyvNM+2qUcnCP/OtPwUMZUM+ck2jFgJFFumt2vuerIdhvlj6E4zNyZBo?=
- =?us-ascii?Q?l7Qhyjmr9VJtcal5bUtlmnz2pPf7DEr+ZOK0H4gvlpeRJaFfxZCrLk1RUYAh?=
- =?us-ascii?Q?6qE0ExjLuwTLTTduOKEOYnYGIzAewvdqtCirQlakS4cBGkOR+Bh7h34ks27e?=
-X-MS-Exchange-AntiSpam-MessageData-1: bSk9cEScBah0cw==
+	=?us-ascii?Q?y5foH1bkD5vNMmq+xnBBLa/hoHMUOW7ZdugNRiQWz3LlJBiJ0ErcFN6vhP5v?=
+ =?us-ascii?Q?tIyyru4qlS4caakRQqGIBLh0742snkT7hIwX9H0fSP/Zc27hfufIgTgTyru2?=
+ =?us-ascii?Q?/li+HzpJhjITP1qD5yn+ZzpquZ0apjj+1BhWMPqi5BYf5Ph3E8hBMLDFKhJu?=
+ =?us-ascii?Q?el5DNzmARHOeKafOAq5Da3L6gxOFToQhU41uEczuqL//xxU36DJyIANygFld?=
+ =?us-ascii?Q?ljGKdCefujg6HprpoXaSK5OkIjaZ9KgYj+8ZR5BqN0nAM76jocdwXxmTxaGH?=
+ =?us-ascii?Q?dz3X9QD3B3FgKE/QawiW18PK+Ah9kO1Zg8SAerCSuFWwU8QAC00rm0Myh8YQ?=
+ =?us-ascii?Q?pSFhT49l5MZg+X4sN50nlTxoTLBTcSNNpsAuk1Ri1nMXMx3r3V9g/rnAWyw9?=
+ =?us-ascii?Q?wV9K9Q0seFMuz5zhmdwRr0jKyFSAJg6ll/9HdvuZzGnvY3V0n43KqUoqPaT/?=
+ =?us-ascii?Q?6epyKPOqwmkkyGaySY5JL77RZ+RLkOOjlSUNbHAHD34XC96RwKEzcBR+PWDU?=
+ =?us-ascii?Q?heLB9LW4r4S5QTOC84KgRcOJtqlzi1p7ZvUfU6ENA2MaRF9pa4hx0vHivNZb?=
+ =?us-ascii?Q?Z5IOLTIrihf/I0rCY919khOQm4wFawp+qBK/eOkoxZSjB1hltqh+zjuaUPJX?=
+ =?us-ascii?Q?ossgXftc2mZqFnp3S2PQR9oPUeyiRXDKHslbgf7jtP7DiK9PNZn5yVKXQSJ6?=
+ =?us-ascii?Q?b/VSPP9ih2kGPIXV/jJ/FrcP9JTaryu3kRi8EoKO6bonjfFFzXWsd0K/IUXd?=
+ =?us-ascii?Q?250ZBOq3FinEz0tlCYm+43qdh4nCliNRV/JudzluUtK73rRIZ2FSH1zGC+wp?=
+ =?us-ascii?Q?Hd8hym2g26YbvIUAjhC9ibueqi1d+zyJt86lekrRfxh5pxosOFkQ6FeeQ8/N?=
+ =?us-ascii?Q?BvuKzM/nogna1kV2dK2Vp97UFl+vVKAQfZDElfgcDqmcWoCDwvteD1YIoN6N?=
+ =?us-ascii?Q?w8VxHprQat5AfqC6Z6YbV3FYMFZEUhWvPV8nIHJaMKPZwGuOmRe3BYe+Tsr3?=
+ =?us-ascii?Q?Fbhn8yvF2XL3bzh8HfyffyxCTaq1h6wA76k1Bpq4jR1YfX40yIUYhD590pbt?=
+ =?us-ascii?Q?dlQ+1VtD2Z4hU1kjgtU0YI7lc5CSnJHleX9dAB1Rb1ZlfShzD7FIRnV8GE/v?=
+ =?us-ascii?Q?vwGOaEEZIOWrI0SE/sRU11Cx+t/F6bpwSmTbuWtmTZPSfhy/H3G5qRS8Hyxy?=
+ =?us-ascii?Q?6yrgauhglIWRpquzwXK7O/eXgFTi0f3BVKjef1K8sgiAFxk5NZWheWqWZmvN?=
+ =?us-ascii?Q?+stCXi46oC5N2mnYbMxrDd89PdMx8NzDxZhPeAD67Dl9yLIlScjwebih+uqc?=
+ =?us-ascii?Q?Z7LWKvmPeD6JtTcBCyBNORopJI+U8824I0pR0gCOmFReyBTjvvHUl58Tui+8?=
+ =?us-ascii?Q?CGOxA+WiaevK1D3QHz3yHtZ5SV0zA+/HeP5Cj5LVfEEGB65Qs9Hf9waeU2SZ?=
+ =?us-ascii?Q?+YYBAzuB9rZaEikOILuN7HQTQcMzPi7JCeCd4QDViB5U9vxrLq13kwmB0F5j?=
+ =?us-ascii?Q?UwrOv/O11Pc8EVMIWhuFLCnMwrvYPV7vDpv9BUpC6vKCZsxZtwQAyRXnayt8?=
+ =?us-ascii?Q?SgH8oW6Tc/Rg3+3at08ABSiD6MZ1BgNTAtoj3vStnmQFIeNhfGdbbit2eLs/?=
+ =?us-ascii?Q?+YEC8GJxmaiZwDQm00KQ9H5Q9BXkXYqYhiyX/DGWLsZ+7ACtqtrHEmV7BK6N?=
+ =?us-ascii?Q?8UCZE8UjMjpITJN6y3VSY466SNrlOvK/0UYr0IIhfn0F05FSEN+0OGioIxYU?=
+ =?us-ascii?Q?aZ019nSTIc7Hfa4LEvi2Ejyg0GAoXO+Z2ohU8nKO4Ee6QBafY2tdCEGTfR+O?=
+X-MS-Exchange-AntiSpam-MessageData-1: E9WIAQlcVeMvAw==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e4fca19-caef-4e56-1eb1-08debf66b8bf
+X-MS-Exchange-CrossTenant-Network-Message-Id: e609a69b-af85-4586-7c9f-08debf66be0c
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:24.0787
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:32.9773
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Gbzln7Sm0ZiTZuUcTuvY5WDOh1t267EYITLxLDcA0/2doDGmQ2iEQQcpaRxrQrWUHmor8k5tTWU7Z/KSN2kwFQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: DFndWUW8O5/K5CEwNnShd7ByTIxEJ3oaiLZwFBIzpZflF8IkLWz+bFNTZiU+ZebpuGgEgY4MphXef2A33FNa9g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY1P286MB3278
-X-purgate-ID: tlsNG-c1860d/1780267712-BE776DB1-9FC8536B/0/0
+X-purgate-ID: tlsNG-c1860d/1780267715-BC965DB1-8B909A34/0/0
 X-purgate-type: clean
-X-purgate-size: 5735
+X-purgate-size: 1124
 
-Allocate memory for domU vNUMA nodes from the physical NUMA
-nodes specified in the domU configuration file.
+Set Domain-0's node affinity to run on the NUMA nodes specified via the
+'dom0_nodes' boot command line option. If the option is omitted, the
+node affinity is configured to use all available NUMA nodes managed by
+Xen. When Xen is built with CONFIG_NUMA disabled, the node affinity
+falls back to using only NUMA node 0.
 ---
- tools/libs/guest/xg_dom_arm.c | 62 +++++++++++++++++++++++++++--------
- 1 file changed, 49 insertions(+), 13 deletions(-)
+ xen/arch/arm/domain_build.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/tools/libs/guest/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
-index c8d0918506..6beab17e48 100644
---- a/tools/libs/guest/xg_dom_arm.c
-+++ b/tools/libs/guest/xg_dom_arm.c
-@@ -236,7 +236,7 @@ static int set_mode(xc_interface *xch, uint32_t domid, const char *guest_type)
-  */
- static int populate_one_size(struct xc_dom_image *dom, int pfn_shift,
-                              xen_pfn_t base_pfn, xen_pfn_t *nr_pfns,
--                             xen_pfn_t *extents)
-+                             xen_pfn_t *extents, unsigned int memflags)
- {
-     /* The mask for this level */
-     const uint64_t mask = ((uint64_t)1<<(pfn_shift))-1;
-@@ -274,7 +274,7 @@ static int populate_one_size(struct xc_dom_image *dom, int pfn_shift,
-         extents[i] = base_pfn + (i<<pfn_shift);
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index f4187512b0..2518909ed0 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2027,6 +2027,13 @@ void __init create_dom0(void)
+     if ( llc_coloring_enabled && (rc = dom0_set_llc_colors(dom0)) )
+         panic("Error initializing LLC coloring for %pd (rc = %d)\n", dom0, rc);
  
-     nr = xc_domain_populate_physmap(dom->xch, dom->guest_domid, count,
--                                    pfn_shift, 0, extents);
-+                                    pfn_shift, memflags, extents);
-     if ( nr <= 0 ) return nr;
-     DOMPRINTF("%s: populated %#x/%#x entries with shift %d",
-               __FUNCTION__, nr, count, pfn_shift);
-@@ -285,10 +285,12 @@ static int populate_one_size(struct xc_dom_image *dom, int pfn_shift,
- }
- 
- static int populate_guest_memory(struct xc_dom_image *dom,
--                                 xen_pfn_t base_pfn, xen_pfn_t nr_pfns)
-+                                 xen_pfn_t base_pfn, xen_pfn_t nr_pfns,
-+                                 unsigned int nid)
- {
-     int rc = 0;
-     xen_pfn_t allocsz, pfn, *extents;
-+    unsigned int memflags = 0U;
- 
-     extents = calloc(1024*1024,sizeof(xen_pfn_t));
-     if ( extents == NULL )
-@@ -303,6 +305,16 @@ static int populate_guest_memory(struct xc_dom_image *dom,
-               (uint64_t)(base_pfn + nr_pfns) << XC_PAGE_SHIFT,
-               (uint64_t)nr_pfns >> (20-XC_PAGE_SHIFT));
- 
-+    if ( dom->nr_vmemranges > 0 )
-+    {
-+        memflags = XENMEMF_exact_node(dom->vnode_to_pnode[nid]);
++    nodes_and(dom0_nodes, dom0_nodes, node_online_map);
++    if ( nodes_empty(dom0_nodes) )
++        dom0_nodes = node_online_map;
 +
-+        DOMPRINTF("%s:     on pNODE%u for vNODE%u",
-+              __FUNCTION__,
-+              dom->vnode_to_pnode[nid],
-+              nid);
-+    }
++    dom0->node_affinity = dom0_nodes;
++    dom0->auto_node_affinity = false;
 +
-     for ( pfn = 0; pfn < nr_pfns; pfn += allocsz )
-     {
-         allocsz = min_t(int, 1024*1024, nr_pfns - pfn);
-@@ -312,7 +324,7 @@ static int populate_guest_memory(struct xc_dom_image *dom,
-         {
-             allocsz = 1;
-             rc = populate_one_size(dom, PFN_4K_SHIFT,
--                                   base_pfn + pfn, &allocsz, extents);
-+                                   base_pfn + pfn, &allocsz, extents, memflags);
-             if (rc < 0) break;
-             if (rc > 0) continue;
-             /* Failed to allocate a single page? */
-@@ -321,22 +333,22 @@ static int populate_guest_memory(struct xc_dom_image *dom,
- #endif
+     if ( vcpu_create(dom0, 0) == NULL )
+         panic("Error creating %pdv0\n", dom0);
  
-         rc = populate_one_size(dom, PFN_512G_SHIFT,
--                               base_pfn + pfn, &allocsz, extents);
-+                               base_pfn + pfn, &allocsz, extents, memflags);
-         if ( rc < 0 ) break;
-         if ( rc > 0 ) continue;
- 
-         rc = populate_one_size(dom, PFN_1G_SHIFT,
--                               base_pfn + pfn, &allocsz, extents);
-+                               base_pfn + pfn, &allocsz, extents, memflags);
-         if ( rc < 0 ) break;
-         if ( rc > 0 ) continue;
- 
-         rc = populate_one_size(dom, PFN_2M_SHIFT,
--                               base_pfn + pfn, &allocsz, extents);
-+                               base_pfn + pfn, &allocsz, extents, memflags);
-         if ( rc < 0 ) break;
-         if ( rc > 0 ) continue;
- 
-         rc = populate_one_size(dom, PFN_4K_SHIFT,
--                               base_pfn + pfn, &allocsz, extents);
-+                               base_pfn + pfn, &allocsz, extents, memflags);
-         if ( rc < 0 ) break;
-         if ( rc == 0 )
-         {
-@@ -415,12 +427,36 @@ static int meminit(struct xc_dom_image *dom)
-     assert(ramsize == 0); /* Too much RAM is rejected above */
- 
-     /* setup initial p2m and allocate guest memory */
--    for ( i = 0; i < GUEST_RAM_BANKS && dom->rambank_size[i]; i++ )
-+    if ( dom->nr_vmemranges > 0 )
-     {
--        if ((rc = populate_guest_memory(dom,
--                                        bankbase[i] >> XC_PAGE_SHIFT,
--                                        dom->rambank_size[i])))
--            return rc;
-+        ramsize = (uint64_t)dom->total_pages << XC_PAGE_SHIFT;
-+
-+        for ( i = 0; i < dom->nr_vmemranges; i++ )
-+        {
-+            ramsize -= dom->vmemranges[i].end - dom->vmemranges[i].start;
-+        }
-+
-+        assert(ramsize == 0);
-+
-+        for ( i = 0; i < dom->nr_vmemranges; i++ )
-+        {
-+            if ((rc = populate_guest_memory(dom,
-+                    dom->vmemranges[i].start  >> XC_PAGE_SHIFT,
-+                    (dom->vmemranges[i].end - dom->vmemranges[i].start) >> XC_PAGE_SHIFT,
-+                    dom->vmemranges[i].nid)))
-+                return rc;
-+        }
-+    }
-+    else
-+    {
-+        for ( i = 0; i < GUEST_RAM_BANKS && dom->rambank_size[i]; i++ )
-+        {
-+            if ((rc = populate_guest_memory(dom,
-+                                            bankbase[i] >> XC_PAGE_SHIFT,
-+                                            dom->rambank_size[i],
-+                                            0U)))
-+                return rc;
-+        }
-     }
- 
-     /*
 -- 
 2.43.0
 
