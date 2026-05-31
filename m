@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 832C0CD6E62
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4A4CD6E56
 	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2026 22:48:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323458.1589189 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1323454.1589152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxA-0005U2-M4; Sun, 31 May 2026 22:48:20 +0000
+	id 1wTox4-0004VL-D5; Sun, 31 May 2026 22:48:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323458.1589189; Sun, 31 May 2026 22:48:20 +0000
+Received: by outflank-mailman (output) from mailman id 1323454.1589152; Sun, 31 May 2026 22:48:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxA-0005TX-HE; Sun, 31 May 2026 22:48:20 +0000
-Received: by outflank-mailman (input) for mailman id 1323458;
- Sun, 31 May 2026 22:48:18 +0000
+	id 1wTox4-0004VE-9w; Sun, 31 May 2026 22:48:14 +0000
+Received: by outflank-mailman (input) for mailman id 1323454;
+ Sun, 31 May 2026 22:48:14 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wTox8-00059X-4Q
- for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:18 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wTox3-0004Uu-TJ
+ for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wTox7-00261G-HE
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:17 +0200
+ id 1wTox3-00261G-AD
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:13 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cba69-2eae-0a2a0a5409dd-0a2a45099642-32
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:17 +0200
+ id 6a1cba69-2eae-0a2a0a5409dd-0a2a45099642-24
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:12 +0200
 Received: from [40.107.74.96]
  (helo=OS0P286CU010.outbound.protection.outlook.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cbaaa-2497-0a2a45090019-286b4a60e9a3-7
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:17 +0200
+ id 6a1cbaaa-2497-0a2a45090019-286b4a60e9a3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:12 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by TYWP286MB2972.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2fe::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Sun, 31 May
- 2026 22:48:13 +0000
+ 2026 22:48:07 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0071.015; Sun, 31 May 2026
- 22:48:13 +0000
+ 22:48:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Od+V9dmP565wnVYERljt2oJQdklz9OYZg92vI+8vrSNdciRXaicb6XBQ16VJQjQbRVOU+kRlN6bl7dqDEOGwRMZdv4mWgLjHq4Mg2mNvEt9mLX6p+BYqobyhQWr9bhcWVOvtUI4D4ChgOQupEAc5F9t/7o1Er4a9rg9zBhHD6kvXBHRpQ8LZM/GjRas7LZVQvKNga3TQuftEfJXqWUu95aj3Z+uOSHfVx41k8VmcYw/F63NDbE8k71BgHC0purSTkfoiTJN3VnayaGIe81JdoveWVY0M03Cmu5/ADPduOsJ91ZX9suM/YAA1ob75kFavuQaeO8U8Ix8tzHcBXUwv0g==
+ b=kaCXhhX0s9QaqCwhpcb7oUWF7lFuuh04ls/ou7jyiX1WfNs/SjNyaH5xTQqhuSPHqTI1JnTNo3Wi2Q4wLSAhGFxgLGlsbjNCrAhzNkQEgvgYrqWSBkDZGfm423IOtYicxeTKQxwH67Ay624vrX6gbbHeVJuBrZzfeNpL//uLI1srIsIPz15dkzWHlVjxZZrm5Dlcn3SH5TvvkUscEkm3lRrgjEwfx5sUpUUoQZbGQ2gJdUlw8e4iuoGr7GsZBWOPOhlhG53by8FMO9aSJKNA93HAAPaW3o3o1c+qO0qO9TRC0rIbXdFdAn3yuo1oCHKio8mbRS/b2WyC8bEc2Ysj+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=09ikRB9p2K6n1IXPIFviZ3O5z7V9MxCaGsEM2APynDM=;
- b=DRR5+wra/23dHP4cMmtC+pj1zrg0liXjoz1tvA3XPmKHVZ2kb3x7j3/8f9WCVInDsY7SJ2KjqvWK+777GV7sz3MGtXesl2a/bJfd08cGHUGl+AqRXLFWhNgk3a0AA/q8qI+nrvkvO7+DjOdczQiQ1dOSP+5rH5rj3y2QaEn/v/aNEbIpjmhjv0lEhUsYuasAx7RFdAnkJx90lSD6GWNad5VKP/X2ithAH35WXGGWJurHk/D3nfNFhdFd9pZobFxnu/MpaVRtFt5BLeP1rY2fDESnL3tSSse83CJ6CM/D/7F8FhWEKP8Hzl5zF+qbpxTV0AjVzfjk292EcQNprfbSNg==
+ bh=WVIHzGP7xPG+QeB7F8sNCSVrdxqJXbQqFgu/3yZPit0=;
+ b=JWow5qs0u1YptLeVYcOpSoeJUt4f1Xj4rE7cnjlofTS5B/y4PYVvGnLZ/hQxFuSSYRFmabRbk96bwvpu4erkvyV1OUrWUfGhU6ezcguJ4o7QE1XYRyX4w9oL/+2gwXfCCRheSGcU1ZriBUufXcHa3VnpvhyOTeCxGNT1HtswBz904NmjWU7D0LUz3a7cBKjOswsJ3v0IsACQS7gzaYHe5rOowW6XbsBoFZHORLDyx6g0nk+DMJMCBSxa5IHnzD8Ks+3qwymc+souAZNn/QB64BaD58uqGJTzWKCur9JrA54tcxlDDIwak6DNf4XWusI3fy/fLugv9/us6RKKTVtpgA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=09ikRB9p2K6n1IXPIFviZ3O5z7V9MxCaGsEM2APynDM=;
- b=r5T84K1YW8aj+HqmUr66H7bKEudgDIelq8grofprLWHrVzFYUGuee+nGMItzpfhn8Hsz2lWoNK84up5eYjJUOYwuWvK+MuGPQKcX5HFx3znnSnISaZtoFgw9OduSRVT1yKyfzC3its8wgFHk9wllLEV6srP3F+X/LVv2rHw3jGU=
+ bh=WVIHzGP7xPG+QeB7F8sNCSVrdxqJXbQqFgu/3yZPit0=;
+ b=fRZRkTtTEfWtId4Qgq6MmsseBIzf+s5Hz5s3yddKMCiNR4eCgDks4/HNfnvQZcPzMM7yjSpreXs77Hd7MqxgQ25csb4m1rctoenNXdn82ezknzrP2/VhJXGPUMGMcj2oVHg9qsKIZDBbtECsA5YkAztK2kt3KFGm624F9Ihg20o=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
@@ -85,523 +85,260 @@ Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 07/24] xen/device-tree: Parse 'cpu-map' node for CPU topology exploration
-Date: Mon,  1 Jun 2026 07:47:37 +0900
-Message-ID: <20260531224755.9481-8-taka@valinux.co.jp>
+Subject: [PATCH v2 04/24] xen/arm: Configure NUMA affinity for populated memory banks
+Date: Mon,  1 Jun 2026 07:47:34 +0900
+Message-ID: <20260531224755.9481-5-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260531224755.9481-1-taka@valinux.co.jp>
 References: <20260531224755.9481-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY4PR01CA0032.jpnprd01.prod.outlook.com
- (2603:1096:405:2bd::13) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TY4P301CA0065.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:36a::14) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TYWP286MB2972:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0beea134-44a3-46d6-b48b-08debf66b257
+X-MS-Office365-Filtering-Correlation-Id: eff574b1-6fe0-4d9d-227c-08debf66aedb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|10070799003|1800799024|366016|7416014|376014|22082099003|18002099003|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	RA+mYr1790mNnsV72laVkOZ4rNPvbmcQIIxI/GHNqfERuPT6pspYqACd1OkOBIqN5cfU1QnNwn3ilJnYqyc2g/K9pN89cOjpuSmDrxZK26hcLKxKN94e8JW7n7I5xfy9cDM5AsWqhqsEbPQsOlyoUba4iBMMW1ltVZFr+paS6bYOjP74Hh+QiSrGvYlIwIkjrvWr0uDcJveswgVraj196vIE8yHhcPX9Go/M5cHfsfmT7muTw2Wn0z+yT5M+sh7kFOaNaiYKudMpB1Ni9R54MTcr/TfH2vaTKmXNJHTniHvUf/FkYb56eUVVACmVwdaEYTx+qivK+Z2wkz+ZNuXZ59TA8rDJNzvNdZO7Xlp2m6sC2Hqvuf8xU5WHyb88jRHqU4XCixNm59wJQgJFvnbHjtibjqDCv9QH/ibbqouHK6cVBhZEXSMB3HwWS2mXGA+lTFOxoFL/jEQZmYcgfRGno1falLksR3m02ScBOe/jtW9Zyg/NdBxIv3498LjBLNCschMW0ZAtnYo+8eGzLr6dh62xkdKHJdkh8YaHsyks6cPfSyw/0/kGCBXf66EqXJ3rKEhZ/sUxgCMFktZHcOM9Wq/3EkCbT8p8IYwKK9A8ebUmLzlqYAmmscnv8Lr5s3Uo7C6s1mcGw55HnUqx5bkGPr6PEnrRKO6R9CFXeDwq7l0fTAa5uw4ynIyUBZmJQS84
+	nmF05ctm3WYYwhR4ulAh7a3Z9MiSR3afq87OJqnKhwu+ODeJtsOQDTTj+j7h96UhaIE/if2u+GQya86nB5yEFP4gAYtZXwBNhjDym0/8GUO3WBOVjyg/0VdvAciZHGhmzKwu2jNPMdbGtWA6komG67UQsRfvX8Kj+Tixq8DbfRqr4r5d0JGLveE2EwIqtF86uT9CZGrDwlPmPrpPijhdBlx1beQTchu5EAsj8pPVDdM6gZGiqWxHXgAYBwHGP5JdbZYr9onfQu76Szu1CQsDA80NRU3n3/YQMf82c8Oh29ChuhmdJQhJ5S94xMexqK93jqTlzz3NoqRlZa3Ww4jqXPeC8i1TfGM8jnQSFmJjcvzbtFCQlP+JGCE00fa2mQEa0pmUwxEGdGE/dBRdZytqPVksM0IL2gJqK5rdBGCoJg9ReAQ6DUT8AU6R5lqKcwou8Q4FX8SQu9Bc7vpKj3TOHaIQSlNPh+SiDwZflzJ/QyZ79utOiTpkpKFaRVfpje7Um0wOTRoyoxBpZanIdwS5Be2kIGx5/sFeB2aqlD1B9G5fQDWBNTTVzlFVkBpFtVpMMeecAJq467coL+oBjvAzd2P33LQBpT4PxmfmWd/+GssnvnzOhRRJLneR/CjoRRCL6Y8hUGUyJrUipJjUSB4b6guOU/KJYc8wWtktvqofCM1HaRsD7jkbonJ1c7Wt6qw0
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(1800799024)(366016)(7416014)(376014)(22082099003)(18002099003)(56012099006);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?CGnrTKkN2CyW/JrNmm53ZkVEw9mHwkDNBw05XuVDN/WNjJ6b+5DJKvT7DH2i?=
- =?us-ascii?Q?POGVq9yFelU+QTLF0nIzbkDPxkf39HxzL6CklkVv3szlZxejfDmz40MF1BfK?=
- =?us-ascii?Q?ZMcmGYK67s3H70MsxaM7BzDPNVTvIVho/S5po/9VBWdtzTDsn616+LALSrLH?=
- =?us-ascii?Q?IC4lZQ5d3CJ76lIkFAhQU8aNqNtSnCalV5ivN6RwCBLp+Jgdhg+RJgDNElGi?=
- =?us-ascii?Q?j5UyNLISTNeq00A+BBTysczq/cCk26hSX70yTJ5XGWsJu8Vl4NUdSHqFTVg4?=
- =?us-ascii?Q?mpmHkRpPQXSE5jsk7s0ibghncpKfXm2cC9z5ZSEkctYOqBM45F3flqH6Jl+D?=
- =?us-ascii?Q?KfpU+2V/sxCWKvy8Sb8iIdBJDxyo0aAieM4o7TuuKPXBe9rCNdljrsU+nn90?=
- =?us-ascii?Q?aijF/EyvrMWKGIJ/HtWT3nYlj09kpz2jlX1qVY71F369Z0alXyIfVZrCt+OX?=
- =?us-ascii?Q?+cDRefKcTT0c6GF79n7JgZy7NeA3gjTtH+hiKyU6sXK00f/QNlB5nnTvjO5n?=
- =?us-ascii?Q?wo3NFwi19JVME3LB3s30dTkSEMdET6Yw4cGdHppiZk1IpMNCMr9Rdupw1d1d?=
- =?us-ascii?Q?cy11z7YD/N7zh8OXldxV+PxQPSXmKDd985XAI4mzFNIjoZMcAn5uAl3qPAlO?=
- =?us-ascii?Q?vsufoLKIufmyeZTd2/dlAZHqMCFrrnQGouZh27ry9oTekOggiXqBaFOov3dL?=
- =?us-ascii?Q?+TMVkMOrjdv7hW847Lbgw044lP+Cy6WSp4NyvA+ZCgVLlmpemWs5xGHchin4?=
- =?us-ascii?Q?hrq3wiXmxcnzgKfp3RcFAJ6ju0V7wn0olfd/mbeSPP8AkscAJeN2nRkIKC+x?=
- =?us-ascii?Q?AFHBC6Ovgc6ASNgIqRvRMQPmh7ekc4XcH0UNW39U+FlgiYll+4mTWhzMgaCL?=
- =?us-ascii?Q?Tz3Cef0Soh3yeljHM2bkOUozFv84K8v+wsLnJDMVh0IGnCQhlp3wmDbmsXVg?=
- =?us-ascii?Q?Fkm1Db2RQjR6TsBWEHftrxkMvpMAcAea+tidho7Dr5MNJX7eu6STywslchMH?=
- =?us-ascii?Q?ZrVBspU/QChzlQ1r91BvP/sJtVUQPziE6SwyMKwdAPvA9sp3hCkRqBPOSDZh?=
- =?us-ascii?Q?wHk/Ipw+DgU/2ST+gKH2g1TCVi8lpJybD/yfhTd63Sd47KjivGqBZyQ4JpHZ?=
- =?us-ascii?Q?5ec4gzySFMxr/7CIsYLSYunC5YjmTpS4sVWUx3xRCuFjISavgERwSFITfs7H?=
- =?us-ascii?Q?LjnD+YpB9VPehXybW3QmnfCe1l4HOb5rYqKE4cCBfdORMJc3ojaBRv4ENPqc?=
- =?us-ascii?Q?HvJQvhTx6vg1NBPUeqdpU4oeEM97S4GTh6zNPZEsNc9OMDyml3TrQsrOXSJ/?=
- =?us-ascii?Q?eB93Kbxi68/MGwyJnWqTYhBNtxzqjK8xbH3dnZr9dJmkpc57PY+JTY/vhrDo?=
- =?us-ascii?Q?lsoe0zB6PJuHV1af3kW5Ejl2KvTPBd7yzwzRTixPgnqtCEi3U8N3t0zml+Lw?=
- =?us-ascii?Q?uQp7O/8nXURdWJ2u5tWNZ3sRRiobfbAWjgBiWtvqtMze1pNS0fcWdaGlUHC6?=
- =?us-ascii?Q?da/DXsT97WcsAN1QMbAEuHemaNimzYGGdKi0ZUDSGGmPZTQckrVCmj9cMq5i?=
- =?us-ascii?Q?Vl/Ln6EE55RhMj77s1QNZcH3Xa9b24Z6A9w9xxm5YxX1dJTWYNSY8AhBzu28?=
- =?us-ascii?Q?RXexHN2lZ/E9EprLJw+keYsTVvYGmWBv665AlPim2xizBJUk9A3BsQmv/H2e?=
- =?us-ascii?Q?r48Wvlm0/car64SoA95XB3Y3UcM3cMGFJUJ8oDI+Tbu+FfhjUPKRy8Ye0oVZ?=
- =?us-ascii?Q?/S43PfOCXpTwPhPqlY4OltPy8vyVz1oMbtfipbhabT0da+fsTwp5FrQJ6QBu?=
-X-MS-Exchange-AntiSpam-MessageData-1: tv7tSO75kUFUug==
+	=?us-ascii?Q?108GtXEKqCTHLflj7hVMOK503QlBOE9bmZTwJp9TvhfoFDqtfekkF9TVZAh5?=
+ =?us-ascii?Q?nvZQByh8+4F8sduNHl/R7zNR1Jgh+QcpUD7Rrvl0nGEtCg53LBbHe0AnCH7l?=
+ =?us-ascii?Q?cZksLeleD+MjfEoYWlLMJ1f/Hqp1Um6J1P8oDiRvwWKMaQxfsl9+jL/yCwHd?=
+ =?us-ascii?Q?mUowfuIMH5XAKAnIV3rVaff3Mr1M6mnzzZAHeyLaBOxEyngO6LQExSBlxkpp?=
+ =?us-ascii?Q?r8a9MU0ekE8mVl2rDnU+giU8VMOuG6hrA5IL9eZXln6NaicIfEL792u/2p1o?=
+ =?us-ascii?Q?AOKbUOVMIhekINCApR9Cgu28seSQscJyRdOHsk6iDz4hGMu4n43GuEQEF7cz?=
+ =?us-ascii?Q?H9xZ+nKc8IW/V3Sykr3VVLew9sDuy0B+N4ceauMJPj09k0c0M7FAC/t4SyrB?=
+ =?us-ascii?Q?8uswg13sCr+qV16Aw6aZ1kOvoVh5WBvcoXlQM+OnKCBrhu0n7l28CDimzfWG?=
+ =?us-ascii?Q?Czv+q5y+sOOxd4TsGW8DidRYhkJZ3/z4kmFwcznzD56KzVIpgzCMZ8kZ6juI?=
+ =?us-ascii?Q?EJK4+hIFjrd4TjYq/PlbPUFPCr6POI8P8IIHMPDRyWvIIezCX29cGrOEP25W?=
+ =?us-ascii?Q?rZhH3r2AhgXnBON+olpssX4/6kOopJvG4nAWfIntsIxuDbVw660blRTeda7n?=
+ =?us-ascii?Q?ODgTlDjHzcqJu5HRCJJu9K3Hv1BeZrEJ7BlPKxNmXz9+gP+bEyzmTqOoDYzD?=
+ =?us-ascii?Q?LVFPcQ0W2ciTWO/J0w6N3mqswfgiWC/3KJpfDN8eY4JCFyJlDHViGTZ64qVq?=
+ =?us-ascii?Q?yE45vR+hQ1WQ3hCRj21jFcohVjeuLx44JeJ5SMrK0/UWN2bjP+u4J4z7FMcX?=
+ =?us-ascii?Q?EvRbEo0NTacvCNHjtWqOw7cnFdTUpn7YUClP0ZgS7csPEXK+C8UloStH9tcQ?=
+ =?us-ascii?Q?a8fLQkMu3qw/JjPw12arfdNFMmcoCQnR7Xtpkb4aiXvJNkuz7eyf+8zxhf2t?=
+ =?us-ascii?Q?sb3FvB+22H6G52RVj3IleTVScbVUMEYRS7iGKzPbhUcRSS7w7+ZJDna+aVWZ?=
+ =?us-ascii?Q?J5DjtShvaOscgkVA/NEsNbRPmI6o0Rmen7lUBrYk7P49c8aD5QaKdpGMz4O7?=
+ =?us-ascii?Q?sXGTOSWMBOiYn0DGHNiqF3nQgtfIbUApgMZL/Ho5GIfVqhwZYTPTaPFCgcap?=
+ =?us-ascii?Q?gXB//GlLRh9odUD5l8dTROxLHBMzCPgb8c0ubgD8E7HKIpyxwm5lMjf21ROo?=
+ =?us-ascii?Q?rkia0HV6vppyS+9KtKbSBjINCqvpy+flZoyqUi6n60Zhv2vBOt3NAEpVIDfM?=
+ =?us-ascii?Q?gYQivcuEwlC/c6BaWL5WJey73iMYKYOLTa/973Ur02JmIdQbldI/VioIVZsu?=
+ =?us-ascii?Q?XJkC/swgedCFRbl5wNnY7Yw4OCX59bzlnSyfYYNDAVHQVDVB1wcN098H7BCt?=
+ =?us-ascii?Q?7drgA8X8kkmaFU4uOUexR6Y+m/pnS8xRYG0HG3JjxK5Undwboz4kRdjrwVWh?=
+ =?us-ascii?Q?UhRXA1brrtCjdkiD+qMv62PyiXlWpMzbliCUeZHxtGJft3P2mRUex4F+Dab5?=
+ =?us-ascii?Q?aYcf7N6MQpUFpLXnFSy8Q5PhFCYa//WYyHi8HmwH342slLquU5+oVjyNzo01?=
+ =?us-ascii?Q?7ca35SOtfbkaSvzhypZzbD0ouWy4rtW7lLRVyLmFCEG/3KQ/CZWQcXdTW2br?=
+ =?us-ascii?Q?lF2tDWEFSP3jAJTTw6EW9GhLQepuIV91nyjSU4/izQGdvPcUmLqWHZsSd2vQ?=
+ =?us-ascii?Q?DYtLe08aNLSSvzcSREn/eoeoz8DSnrfJ2WSHirSYp1Vh+p/3EXxluX/3ZWT4?=
+ =?us-ascii?Q?c9ImvE4VHC17kKF87E54eCC2DkJLVX9FiPT/HGmOqcte+FCWhtz/dakTWeiN?=
+X-MS-Exchange-AntiSpam-MessageData-1: QyWxSkM8Y3mjTw==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0beea134-44a3-46d6-b48b-08debf66b257
+X-MS-Exchange-CrossTenant-Network-Message-Id: eff574b1-6fe0-4d9d-227c-08debf66aedb
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:13.3377
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:07.5845
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZmHs8pbVzBvTiVjOW3eG0wi9/r7qSCRDjkNoRFIU7fqtqVAU7IXzKFZ/AtqfONc17Efaw0jiPrW7oEDk9lX6LA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: QDI3Pv4L/moz2VlZCEeY4g//rZeuSu6IYWM33iw9nEBKJXoRjeSb95hUFOO1b+tAIg6NakdNDp8i0NpwXYGj9A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWP286MB2972
-X-purgate-ID: tlsNG-bad1c0/1780267697-37F7EA53-CE9D9EDE/0/0
+X-purgate-ID: tlsNG-bad1c0/1780267692-40D67A53-CD208037/0/0
 X-purgate-type: clean
-X-purgate-size: 12559
+X-purgate-size: 6123
 
-Parse the 'cpu-map' node in the Device Tree to extract CPU topology
-information. If the 'cpu-map' node is absent, fall back to
-generating the topology data from the NUMA information. This
-generation assumes exactly one socket per NUMA node and that SMT
-is unsupported.
+Configure NUMA affinity for the populated memory banks. The NUMA
+node ID for each memory bank is retrieved from the Device Tree.
 ---
- xen/arch/arm/Kconfig                  |   1 +
- xen/arch/arm/smpboot.c                |   6 +
- xen/common/Kconfig                    |   3 +
- xen/common/device-tree/Makefile       |   1 +
- xen/common/device-tree/cpu-topology.c | 306 ++++++++++++++++++++++++++
- xen/include/xen/cpu-topology.h        |  42 ++++
- 6 files changed, 359 insertions(+)
- create mode 100644 xen/common/device-tree/cpu-topology.c
- create mode 100644 xen/include/xen/cpu-topology.h
+ xen/arch/arm/include/asm/numa.h       |  1 +
+ xen/arch/arm/numa.c                   |  7 +++++++
+ xen/arch/arm/setup.c                  |  2 +-
+ xen/common/device-tree/bootinfo-fdt.c |  8 ++++++++
+ xen/common/device-tree/numa.c         | 29 +++++++++++++++++++++++++++
+ xen/include/xen/bootinfo.h            | 23 +++++++++++++++++++++
+ xen/include/xen/dt-numa.h             |  1 +
+ 7 files changed, 70 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index e67219e949..c673ca345f 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -102,6 +102,7 @@ endchoice
- config ARM_NUMA
- 	bool "Device tree based NUMA support (UNSUPPORTED)" if UNSUPPORTED
-     select DEVICE_TREE_NUMA
-+    select DT_CPU_TOPOLOGY
- 	help
- 	  Device tree based NUMA support. The "numa-node-id" property in
- 	  the CPU and memory nodes of a Device Tree defines the NUMA node
-diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
-index eafa195504..6bcf7e7f53 100644
---- a/xen/arch/arm/smpboot.c
-+++ b/xen/arch/arm/smpboot.c
-@@ -24,6 +24,7 @@
- #include <xen/warning.h>
- #include <xen/irq.h>
- #include <xen/console.h>
-+#include <xen/cpu-topology.h>
- #include <asm/cpuerrata.h>
- #include <asm/gic.h>
- #include <asm/procinfo.h>
-@@ -248,6 +249,8 @@ static void __init dt_smp_init_cpus(void)
-         else
-             tmp_map[i] = hwid;
+diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
+index a1fa54f2e7..6f1ccb4eb3 100644
+--- a/xen/arch/arm/include/asm/numa.h
++++ b/xen/arch/arm/include/asm/numa.h
+@@ -12,6 +12,7 @@ typedef u8 nodeid_t;
+ extern bool numa_disabled(void);
+ extern unsigned int numa_node_to_arch_nid(nodeid_t n);
+ extern u8 __node_distance(nodeid_t a, nodeid_t b);
++extern void numa_memory_affinity_init(void);
  
-+        map_cpuid_to_node(i, cpu); /* pass the info to dt_init_cpu_topology() */
+ #define arch_want_default_dmazone() (num_online_nodes() > 1)
+ 
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+index 080d7892ae..15cad3d267 100644
+--- a/xen/arch/arm/numa.c
++++ b/xen/arch/arm/numa.c
+@@ -36,6 +36,13 @@ int __init arch_numa_setup(const char *opt)
+     return 0;
+ }
+ 
++void __init numa_memory_affinity_init(void)
++{
++    dt_numa_memory_affinity_init();
 +
- #ifdef CONFIG_DEVICE_TREE_NUMA
-         if ( tmp_map[i] != MPIDR_INVALID )
-         {
-@@ -294,7 +297,10 @@ void __init smp_init_cpus(void)
++    numa_initmem_init(0x0UL, 0x1UL << (PADDR_BITS - 12));
++}
++
+ int __init arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
+ {
+     return bootinfo_get_ram_range(idx, start, end);
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index c0202d9ff6..cdabf536b0 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -352,7 +352,7 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
+     acpi_boot_table_init();
+ 
+ #ifdef CONFIG_NUMA
+-    numa_initmem_init(0x0UL, 0x1UL << (PADDR_BITS - 12));
++    numa_memory_affinity_init();
+ #endif /* CONFIG_NUMA */
+ 
+     end_boot_allocator();
+diff --git a/xen/common/device-tree/bootinfo-fdt.c b/xen/common/device-tree/bootinfo-fdt.c
+index 272b5a6c0a..2d0e809231 100644
+--- a/xen/common/device-tree/bootinfo-fdt.c
++++ b/xen/common/device-tree/bootinfo-fdt.c
+@@ -121,6 +121,9 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
+     const __be32 *cell;
+     u32 reg_cells = address_cells + size_cells;
+     paddr_t start, size;
++#ifdef CONFIG_DEVICE_TREE_NUMA
++    uint32_t nid;
++#endif /* CONFIG_DEVICE_TREE_NUMA */
+ 
+     if ( !device_tree_node_is_available(fdt, node) )
+         return 0;
+@@ -136,6 +139,10 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
+     if ( !prop )
+         return -ENOENT;
+ 
++#ifdef CONFIG_DEVICE_TREE_NUMA
++    nid = device_tree_get_u32(fdt, node, "numa-node-id", 0U);
++#endif /* CONFIG_DEVICE_TREE_NUMA */
++
+     cell = (const __be32 *)prop->data;
+     banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
+ 
+@@ -158,6 +165,7 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
+         mem->bank[mem->nr_banks].start = start;
+         mem->bank[mem->nr_banks].size = size;
+         mem->bank[mem->nr_banks].type = type;
++        set_numa_nodeid(&mem->bank[mem->nr_banks], nid);
+         mem->nr_banks++;
      }
  
-     if ( acpi_disabled )
-+    {
-         dt_smp_init_cpus();
-+        dt_init_cpu_topology();
-+    }
-     else
-         acpi_smp_init_cpus();
+diff --git a/xen/common/device-tree/numa.c b/xen/common/device-tree/numa.c
+index 06f2c8b102..539ddfccc5 100644
+--- a/xen/common/device-tree/numa.c
++++ b/xen/common/device-tree/numa.c
+@@ -22,3 +22,32 @@ u8 dt_node_distance(u8 a, u8 b)
+     return LOCAL_DISTANCE;
+ }
  
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 89fa7d10c7..a1db4fcf17 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -188,6 +188,9 @@ config VM_EVENT
- config NEEDS_LIBELF
- 	bool
- 
-+config DT_CPU_TOPOLOGY
-+	bool
-+
- config DEVICE_TREE_NUMA
- 	select NUMA
- 	bool
-diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
-index 658aa293c4..bbe60297aa 100644
---- a/xen/common/device-tree/Makefile
-+++ b/xen/common/device-tree/Makefile
-@@ -1,6 +1,7 @@
- obj-y += bootfdt.init.o
- obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += bootinfo-fdt.init.o
- obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += bootinfo.init.o
-+obj-$(CONFIG_DT_CPU_TOPOLOGY) += cpu-topology.o
- obj-y += device-tree.o
- obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.init.o
- obj-$(filter $(CONFIG_DOM0LESS_BOOT),$(CONFIG_HAS_DEVICE_TREE_DISCOVERY)) += dom0less-build.init.o
-diff --git a/xen/common/device-tree/cpu-topology.c b/xen/common/device-tree/cpu-topology.c
-new file mode 100644
-index 0000000000..82a366f3f6
---- /dev/null
-+++ b/xen/common/device-tree/cpu-topology.c
-@@ -0,0 +1,306 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
 +/*
-+ * Derived from Linux kernel 7.0's $drivers/base/arch_topology.c
-+ * Parse cpu topology information.
-+ *
-+ * Copyright (c) 2026 VA Linux Systems Japan K.K.
-+ * Author: Hirokazu Takahashi <taka@valinux.co.jp>
++ * Initialize memory affinity by registering bootinfo memory banks into Xen's
++ * NUMA subsystem.
 + */
-+
-+#include <xen/cpu.h>
-+#include <xen/cpumask.h>
-+#include <xen/delay.h>
-+#include <xen/device_tree.h>
-+#include <xen/cpu-topology.h>
-+#include <xen/numa.h>
-+#include <xen/domain_page.h>
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+
-+static struct dt_device_node * __initdata dt_cpu_table[NR_CPUS];
-+
-+struct cpu_topology __ro_after_init cpu_topology[NR_CPUS] = {
-+    [0 ... NR_CPUS-1] = {-1, -1, -1, 0}
-+};
-+
-+static void __init setup_siblings_masks(unsigned int cpuid)
++void __init dt_numa_memory_affinity_init(void)
 +{
-+    struct cpu_topology *cpu_topo, *cpuid_topo = &cpu_topology[cpuid];
-+    int cpu;
++    const struct membanks *mem = bootinfo_get_mem();
++    unsigned int bank;
++    nodeid_t nid;
 +
-+    /* update core and thread sibling masks */
-+    for_each_possible_cpu(cpu) {
-+        cpu_topo = &cpu_topology[cpu];
++    numa_fw_nid_name = "DT";
 +
-+        if (cpuid_topo->package_id != cpu_topo->package_id)
-+            continue;
-+
-+        cpumask_set_cpu(cpuid, &cpu_topo->core_sibling);
-+        cpumask_set_cpu(cpu, &cpuid_topo->core_sibling);
-+
-+        if (cpuid_topo->cluster_id != cpu_topo->cluster_id)
-+            continue;
-+
-+        if (cpuid_topo->cluster_id >= 0) {
-+            cpumask_set_cpu(cpu, &cpuid_topo->cluster_sibling);
-+            cpumask_set_cpu(cpuid, &cpu_topo->cluster_sibling);
-+        }
-+
-+        if (cpuid_topo->core_id != cpu_topo->core_id)
-+            continue;
-+
-+        cpumask_set_cpu(cpuid, &cpu_topo->thread_sibling);
-+        cpumask_set_cpu(cpu, &cpuid_topo->thread_sibling);
-+    }
-+}
-+
-+static struct dt_device_node * __init dt_find_child_node_by_name(struct dt_device_node *from, const char *name)
-+{
-+    struct dt_device_node *np;
-+    struct dt_device_node *dt = from;
-+
-+    dt_for_each_child_node(dt, np)
-+        if ( np->name && (dt_node_cmp(np->name, name) == 0) )
-+            break;
-+
-+    return np;
-+}
-+
-+void __init map_cpuid_to_node(u32 cpuid, struct dt_device_node *cpu_node)
-+{
-+    dt_cpu_table[cpuid] = cpu_node;
-+}
-+
-+static int __init cpu_node_to_id(struct dt_device_node *cpu_node)
-+{
-+    int cpu;
-+    bool found = false;
-+
-+    for_each_possible_cpu(cpu) {
-+        found = (cpu_node == dt_cpu_table[cpu]);
-+        if (found)
-+            return cpu;
-+    }
-+
-+    return -ENODEV;
-+}
-+
-+/*
-+ * This function returns the logic cpu number of the node.
-+ */
-+static int __init get_cpu_for_node(struct dt_device_node *node)
-+{
-+    struct dt_device_node *cpu_node = dt_parse_phandle(node, "cpu", 0);
-+
-+    if (!cpu_node)
-+        return -ENOENT;
-+
-+    return cpu_node_to_id(cpu_node);
-+}
-+
-+static int __init parse_core(struct dt_device_node *core, int package_id,
-+                int cluster_id, int core_id)
-+{
-+    char name[20];
-+    bool leaf = true;
-+    int i = 0;
-+    int cpu;
-+
-+    do {
-+        struct dt_device_node *t;
-+
-+        snprintf(name, sizeof(name), "thread%d", i);
-+        t = dt_find_child_node_by_name(core, name);
-+
-+        if (!t)
-+            break;
-+
-+        leaf = false;
-+        cpu = get_cpu_for_node(t);
-+        if (cpu >= 0) {
-+            cpu_topology[cpu].package_id = package_id;
-+            cpu_topology[cpu].cluster_id = cluster_id;
-+            cpu_topology[cpu].core_id = core_id;
-+            cpu_topology[cpu].thread_id = i;
-+        } else if (cpu != -ENODEV) {
-+            printk(XENLOG_ERR "ERROR: %pOF: Can't get CPU for thread\n", t);
-+            return -EINVAL;
-+        }
-+        i++;
-+    } while (1);
-+
-+    cpu = get_cpu_for_node(core);
-+    if (cpu >= 0) {
-+        if (!leaf) {
-+            printk(XENLOG_ERR "ERROR: %pOF: Core has both threads and CPU\n",
-+                   core);
-+            return -EINVAL;
-+        }
-+
-+        cpu_topology[cpu].package_id = package_id;
-+        cpu_topology[cpu].cluster_id = cluster_id;
-+        cpu_topology[cpu].core_id = core_id;
-+    } else if (leaf && cpu != -ENODEV) {
-+        printk(XENLOG_ERR "ERROR: %pOF: Can't get CPU for leaf core\n", core);
-+        return -EINVAL;
-+    }
-+
-+    return 0;
-+}
-+
-+static int __init parse_cluster(struct dt_device_node *cluster, int package_id,
-+                int cluster_id, int depth)
-+{
-+    char name[20];
-+    bool leaf = true;
-+    bool has_cores = false;
-+    int core_id = 0;
-+    int i, ret;
-+
-+    /*
-+     * First check for child clusters; we currently ignore any
-+     * information about the nesting of clusters and present the
-+     * scheduler with a flat list of them.
-+     */
-+    i = 0;
-+    do {
-+        struct dt_device_node *c;
-+
-+        snprintf(name, sizeof(name), "cluster%d", i);
-+        c = dt_find_child_node_by_name(cluster, name);
-+
-+        if (!c)
-+            break;
-+
-+        leaf = false;
-+        ret = parse_cluster(c, package_id, i, depth + 1);
-+        if (depth > 0)
-+            printk(XENLOG_WARNING "WARNING: Topology for clusters of clusters not yet supported\n");
-+        if (ret != 0)
-+            return ret;
-+        i++;
-+    } while (1);
-+
-+    /* Now check for cores */
-+    i = 0;
-+    do {
-+        struct dt_device_node *c;
-+
-+        snprintf(name, sizeof(name), "core%d", i);
-+        c = dt_find_child_node_by_name(cluster, name);
-+
-+        if (!c)
-+            break;
-+
-+        has_cores = true;
-+
-+        if (depth == 0) {
-+            printk(XENLOG_ERR "ERROR: %pOF: cpu-map children should be clusters\n", c);
-+            return -EINVAL;
-+        }
-+
-+        if (leaf) {
-+            ret = parse_core(c, package_id, cluster_id, core_id++);
-+            if (ret != 0)
-+                return ret;
-+        } else {
-+            printk(XENLOG_ERR "ERROR: %pOF: Non-leaf cluster with core %s\n",
-+                   cluster, name);
-+            return -EINVAL;
-+        }
-+
-+        i++;
-+    } while (1);
-+
-+    if (leaf && !has_cores)
-+        printk(XENLOG_WARNING "WARNING: %pOF: empty cluster\n", cluster);
-+
-+    return 0;
-+}
-+
-+static int __init parse_socket(struct dt_device_node *socket)
-+{
-+    char name[20];
-+    bool has_socket = false;
-+    int package_id = 0, ret;
-+
-+    do {
-+        struct dt_device_node *c;
-+
-+        snprintf(name, sizeof(name), "socket%d", package_id);
-+        c = dt_find_child_node_by_name(socket, name);
-+
-+        if (!c)
-+            break;
-+
-+        has_socket = true;
-+        ret = parse_cluster(c, package_id, -1, 0);
-+        if (ret != 0)
-+            return ret;
-+
-+        package_id++;
-+    } while (1);
-+
-+    if (!has_socket)
-+        ret = parse_cluster(socket, 0, -1, 0);
-+
-+    return ret;
-+}
-+
-+/*
-+ * Generate cpu topology information when cpu-map node doesn't exist.
-+ * It assumes that the cpu doesn't have SMT and all CPUs on a NUMA
-+ * node belong to the same socket.
-+ */
-+static void __init fixup_topology(void)
-+{
-+    int cpu;
-+    int clid = 0;
-+    int pkgid = 0;
-+
-+    for_each_possible_cpu(cpu)
++    for ( bank = 0 ; bank < mem->nr_banks; bank++ )
 +    {
-+        struct cpu_topology *cpu_topo = &cpu_topology[cpu];
++        nid = get_numa_nodeid(&mem->bank[bank]);
 +
-+        cpu_topo->package_id = cpu_to_node(cpu);
-+        if (cpu_topo->package_id != pkgid)
++        if (numa_memblks_available())
 +        {
-+            pkgid = cpu_topo->package_id;
-+            clid = 0;
++            numa_update_node_memblks(nid, nid, mem->bank[bank].start, mem->bank[bank].size, false);
 +        }
-+        cpu_topo->cluster_id = clid++;
-+        cpu_topo->core_id = 0;
-+        cpu_topo->thread_id = 0;
++        else
++        {
++            dprintk(XENLOG_WARNING,
++                "Too many numa entries, try bigger NR_NODE_MEMBLKS!\n");
++            numa_fw_bad();
++            break;
++        }
 +    }
 +}
-+
-+int __init parse_dt_topology(void)
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+index 7923be2b38..d01a28b359 100644
+--- a/xen/include/xen/bootinfo.h
++++ b/xen/include/xen/bootinfo.h
+@@ -7,6 +7,7 @@
+ #include <xen/macros.h>
+ #include <xen/xmalloc.h>
+ #include <xen/errno.h>
++#include <xen/numa.h>
+ 
+ #define NR_MEM_BANKS 256
+ #define NR_SHMEM_BANKS 32
+@@ -56,6 +57,9 @@ struct shmem_membank_extra {
+ struct membank {
+     paddr_t start;
+     paddr_t size;
++#ifdef CONFIG_DEVICE_TREE_NUMA
++    uint32_t numa_id;
++#endif /* CONFIG_DEVICE_TREE_NUMA */
+     union {
+         enum membank_type type;
+ #ifdef CONFIG_STATIC_SHM
+@@ -228,4 +232,23 @@ static inline int bootinfo_get_ram_range(unsigned int idx, paddr_t *start, paddr
+     return 0;
+ }
+ 
++#ifdef CONFIG_DEVICE_TREE_NUMA
++static inline uint32_t get_numa_nodeid(const struct membank *bank)
 +{
-+    struct dt_device_node *cpus;
-+    struct dt_device_node *map;
++    if ( numa_disabled() ) return 0U;
 +
-+    cpus = dt_find_node_by_path("/cpus");
-+
-+    if ( !cpus )
-+    {
-+        printk(XENLOG_ERR "ERROR: No CPU information found in DT\n");
-+        return -EINVAL;
-+    }
-+
-+    map = dt_find_child_node_by_name(cpus, "cpu-map");
-+    if ( !map )
-+        return -ENOENT;
-+
-+    return parse_socket(map);
++    return bank->numa_id;
 +}
 +
-+void __init dt_init_cpu_topology(void)
++static inline void set_numa_nodeid(struct membank *bank, uint32_t nid)
 +{
-+    int cpu;
++    if ( numa_disabled() ) nid = 0U;
 +
-+    if (parse_dt_topology())
-+        fixup_topology();
-+
-+    for_each_possible_cpu(cpu)
-+        setup_siblings_masks(cpu);
++    bank->numa_id = nid;
 +}
-diff --git a/xen/include/xen/cpu-topology.h b/xen/include/xen/cpu-topology.h
-new file mode 100644
-index 0000000000..8445f5786d
---- /dev/null
-+++ b/xen/include/xen/cpu-topology.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++#else /* CONFIG_DEVICE_TREE_NUMA */
++#define get_numa_nodeid(bank) (0)
++#define set_numa_nodeid(bank, nid) {}
++#endif /* CONFIG_DEVICE_TREE_NUMA */
 +
-+#ifndef XEN_CPU_TOPOLOGY_H
-+#define XEN_CPU_TOPOLOGY_H
-+
-+#include <xen/types.h>
-+#include <xen/device_tree.h>
-+
-+struct cpu_topology {
-+    int thread_id;
-+    int core_id;
-+    int cluster_id;
-+    int package_id;
-+    cpumask_t thread_sibling;
-+    cpumask_t core_sibling;
-+    cpumask_t cluster_sibling;
-+};
-+
-+
-+#ifdef CONFIG_DT_CPU_TOPOLOGY
-+extern struct cpu_topology cpu_topology[NR_CPUS];
-+
-+void map_cpuid_to_node(u32 cpuid, struct dt_device_node *cpu_node);
-+void dt_init_cpu_topology(void);
-+
-+#elif CONFIG_DEVICE_TREE_PARSE
-+
-+static inline void map_cpuid_to_node(u32 cpuid, struct dt_device_node *cpu_node) {}
-+static inline void dt_init_cpu_topology(void) {}
-+
-+#endif /* CONFIG_DEVICE_TREE_PARSE */
-+
-+#endif /* XEN_CPU_TOPOLOGY_H */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #endif /* XEN_BOOTINFO_H */
+diff --git a/xen/include/xen/dt-numa.h b/xen/include/xen/dt-numa.h
+index 721e8955fa..c6939d0928 100644
+--- a/xen/include/xen/dt-numa.h
++++ b/xen/include/xen/dt-numa.h
+@@ -14,6 +14,7 @@ static inline unsigned int numa_node_to_dt_nid(u32 n)
+ #ifdef CONFIG_DEVICE_TREE_NUMA
+ 
+ u8 dt_node_distance(u8 a, u8 b);
++void dt_numa_memory_affinity_init(void);
+ 
+ #endif /* CONFIG_DEVICE_TREE_NUMA */
+ 
 -- 
 2.43.0
 
