@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3175CD6E60
-	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2026 22:48:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323472.1589234 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96827CD6E57
+	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2026 22:48:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1323480.1589260 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxL-0007Gm-Ln; Sun, 31 May 2026 22:48:31 +0000
+	id 1wToxQ-0008Ok-NR; Sun, 31 May 2026 22:48:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323472.1589234; Sun, 31 May 2026 22:48:31 +0000
+Received: by outflank-mailman (output) from mailman id 1323480.1589260; Sun, 31 May 2026 22:48:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wToxL-0007G0-Fv; Sun, 31 May 2026 22:48:31 +0000
-Received: by outflank-mailman (input) for mailman id 1323472;
- Sun, 31 May 2026 22:48:30 +0000
+	id 1wToxQ-0008NE-8W; Sun, 31 May 2026 22:48:36 +0000
+Received: by outflank-mailman (input) for mailman id 1323480;
+ Sun, 31 May 2026 22:48:34 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <taka@valinux.co.jp>) id 1wToxK-000732-9p
- for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:30 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1wToxN-0007hS-Nk
+ for xen-devel@lists.xenproject.org; Sun, 31 May 2026 22:48:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wToxJ-00BFyL-Mv
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:29 +0200
+ id 1wToxN-00BFyL-4B
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 00:48:33 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cba9e-5cb7-0a2a0a5109dd-0a2a4508c056-18
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:29 +0200
+ id 6a1cba9e-5cb7-0a2a0a5109dd-0a2a4508c056-28
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:33 +0200
 Received: from [52.101.228.92]
  (helo=OS0P286CU011.outbound.protection.outlook.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <taka@valinux.co.jp>)
- id 6a1cbabb-63b5-0a2a45080019-3465e45c1533-3
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:29 +0200
+ id 6a1cbabb-63b5-0a2a45080019-3465e45c1533-6
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 00:48:32 +0200
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
  by TY1P286MB3278.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2e1::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Sun, 31 May
- 2026 22:48:25 +0000
+ 2026 22:48:29 +0000
 Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0071.015; Sun, 31 May 2026
- 22:48:25 +0000
+ 22:48:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qkng8pdB40bOngRy4VPOI3CpFigMMbOBmcth24d84ePYynjcrkP/4beY0urPZKOdWSGECUGsf0igmW1cw7sb81dfHZXWHMZpGP4OwNZRFW2ScWcNOi+ojE+ZBWS8m3njBI82p3Ussohowopr82RCPkNevKd+T+9frXo8B2jHTu5uft6Sqqr4mGbzCmJNu/eccrX4jmQOHvl/5dL2kgyuAOpMVWm0T7bubhpj/cjQ15Ji3VYEfSRv9YX4x8dcR5e8GIFjxZml5371aTu+crjocPIo8dQtRo8dEyfmFpsLzNBpRES3GKA2HyMHw56VvXf8YrwdcSu0INjDqZL1kpDYDg==
+ b=LH645p5Tyh9SuZcgihSaeZL/hM9dbpGypGgpOJuwyo93Lq5E+D2vTH3arZiwhGnUSyzW88MVWaRAmHyYeFnbbsCQPysZFQaoCiqOme1TEQIYDnNsNfaWfjU47iUvEtg+2qPc51BXQxNher1UM2qUAzgLnBouuwksJfNwyBmTbM1cJOY6xn4pQrueoCA9oyH5g+1AYIioo29eZbUt2BoHYYzm3h3zx3KlcOMPoEl3bqzsXBHL/eHIozRFK5SX4QTda0RiK+k4CktZMSjyTZ0Ovu0HNmyRApDbj/a0lknYKkvXNfbGF4GdcMC1Qwdup2qs/oAFyKrfWwFO84oHgZ5Lig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7/1jjuePRl2BihluZPqQwpapSqp5qYBLP0RAoKJuUMM=;
- b=XdPmrDFCfAHC+6bEw3AzR9ZgmdgqGVHRullXTTPhlDoW8Vh4bHw3hgvEQIfzIwmdUwtyGxqM96TrfoyucODDEZELOH6V2lzbst+8x/t5MmDPtMb/4cqiwHEar1dcMN963BuqBywW66UuMJ7VFksphg6EQrwidyXUDHIUoc30nWOKSBL7XY/nzqEtuwBVqL/JYGX5CPvbaJhh5n7LP7S7SF1iBR3K8RulQXQJXYBfo85lKtPbF+TrDMIBmR1rR313xYroU6PoRHiV4L3ZB0VBcbeT8iCEy1iwZoXFNwh+fRmRCfUznH6kEnVkEoHpfHPf9YmGqh2PrYAYA9ZlgdAs/w==
+ bh=5vjE+i4Pyy0yY3FTsKfqjfjpLb47e4a4LegkVylR5Ng=;
+ b=zA5o2bPkcmTKsU9gkrdgUO3ALTwvk/L0G2gxYBtoBXKqZP1kXhigfTtnDnsuqPFswmHdmwtL8waDOaLnwnY6FA6CAYu1WCHVCb8FVpbkFsnwMBdB3/+6toTFBQc2Ym4cTHFo/f1FYFU85eWYOk7mrV1OmvtZuyAH9/SP1dPVPEGUylIf3Bk06myAOgxzEQpcWx0xyq38bEpSAaqzmJFOLJPVHP9fatskfq0TcKFRi2M6um4x+fnhpN/l03Lt6Tm8CCGey/kWIRGs69pvq7hE0OWpn6gOO8fMQR0x3v9E+KZHH3Jb8Ee/yF6bxrb2uauW2FVAye/k+dHP5ixK8tqqiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7/1jjuePRl2BihluZPqQwpapSqp5qYBLP0RAoKJuUMM=;
- b=V2t8hQQYfN9swYxsjRnEUMT7+FTLIJMqj4oMKtu/9mYVaujCyUpHgL+VOg0C+YiFUrXR6ey1/NeaOrnNV+aonoD/bxRPgoXrClNYFGaQahYOwiqaaiDldypuxqVyEDiZOgsGPGc0Z2EPLRrDNLZIOovnOFp5hOS3SfqQC0D9XMs=
+ bh=5vjE+i4Pyy0yY3FTsKfqjfjpLb47e4a4LegkVylR5Ng=;
+ b=YjFPGhv23AhC6UmxObqW8Eq1zFOdjYT2HVPbC/Wg+i1JwlOsxxPWgzSgh/b1SP5O3H4syN8U+DhPqXh/VmrypjEfwgPgu29QkiZ+CKlYBTi+90kRkBeQ//sQJxMxnv4gAI67DWO8VUpKFF4B0MtktUbWD0BTw6MeguQ2EzSI45I=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Hirokazu Takahashi <taka@valinux.co.jp>
@@ -78,175 +78,137 @@ To: xen-devel@lists.xenproject.org
 Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 13/24] tools/libxl: Add 'numa-node-id' property to DomU memory nodes
-Date: Mon,  1 Jun 2026 07:47:43 +0900
-Message-ID: <20260531224755.9481-14-taka@valinux.co.jp>
+Subject: [PATCH v2 15/24] tools/libxl: Create 'distance-map' node in DomU Device Tree
+Date: Mon,  1 Jun 2026 07:47:45 +0900
+Message-ID: <20260531224755.9481-16-taka@valinux.co.jp>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260531224755.9481-1-taka@valinux.co.jp>
 References: <20260531224755.9481-1-taka@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TY6PR01CA0031.jpnprd01.prod.outlook.com
- (2603:1096:405:3bd::13) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TY6PR01CA0038.jpnprd01.prod.outlook.com
+ (2603:1096:405:3bd::18) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:604:458::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY1P286MB3278:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1c5f87ad-c412-4a6e-129f-08debf66b9c7
+X-MS-Office365-Filtering-Correlation-Id: 299f53b1-bda7-413b-d05f-08debf66bbe0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|376014|10070799003|1800799024|366016|6133799003|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	T1mouqI8oX/Qv0sQojux+Q+ytCkgl85Q9fvZLZOLnYkYJV2mUj5a9kWB0azAiLzGJcCqAO5+naCdTHueAvliFdp1k6gwxe6IvqSL84HpHcRqPAozpmtWqRtVXpapyrKcS46MKz26OF9caIMKEU7p+jFxJY+8p1/kdQMM6MWscaXn67orgvJdI/s2CcdszKqXkgffXiwb2Xvi4LgJwHMzMzxEwTOTERHSJLk9JLf+vFowQRQrcboNUl7mgl141+4nqvZPhR0ILu/5GR+wt5eRxzkV8kapaC7rCkSrWJT/A9gJSw/bTsRC166Jo1FpTQbzY1JK0db4wPS9mSac/gdpCZOcLDKoQ/wyQ2UZUB8jT5iN4AivFQ6u8KQ+HMUDIMz+WcOAi9KfWxV3rKQ2bhwo/7bi52lb2EtafmnocvUIA1jXOL9udgCHmGX1Gma7Ucjiw9p5ayBPwF/lUOOT9eRBIQ61PLRd837XqCWnRZLq+18MwWWWVC0YM5fQKZIahW8z52KW4NYgXCj5R4vw0hLLWJJd+VRSOkJ8LQUoM/nHVOgUKii3iYoZ1MWWAOs4mpj8lOgmLn1gryq213BaOP/N/9M0GuEgaVceQN67f20OJXinRI/TbDfzt5ej0TYPfsNjR8GqqGKoQa3lxtR7B85oDOrBVnUTXHbTFud/GrhzaTuT6V8+RFCe+6XO6+bLP1Qd
+	auvvSF/S1nxpM/lcQtTLg1WvEmxBOjloLQKTjTAgz/nuTzODcHXs7Ltbb4XpDa99AgGs4shKTls3xEkySZ868eVaW0ETiUu/IoNpCW2ygmzBe9d4opKRPDfEoZXq0RXYVk/lofxtcfKsyukPnFo2zL2R2YnbkkoI2JR08psxImHGMIuaEOXE6uvcjDSSDnolWDu9R8YCmlT0VC16ai1+NcA96UdXRvCiRK4I1oRFETeQ9vifo136uQGa7jyeIPNbdPJEZMluA23vxjP8sTNTksPh+VrwDXwbqIgXFxVbRGjUor59OQD087xuyceLmJlj7UWcm2d+Sd5Pui68hd1mvJAFks8RdOxBBh+nOfkI9LT1mO0f4sZV7zulnWv4BE3Bwhae2/76MjHPswvjweY7GRwj5I21dXAkLaICi3cjeXF3Rj7+XSoV1/VzSb87pzmrFB4CV1r02gq4XvoWlV5PVmXarW0wIdK5+kzThOeETFMpixB/nRPSigvZrf4NnHeNqggjbNuOs5ep/uFoimB2Z4V0Nf84sQNvxHKo99K0KSX/a9ntdtYYQaj2gdjnv1NQgnY0jRz5E6nf+cGHmiA5sRUrivJZ6XOwFIsKfHFssxFUlx7IjLhzSuilywMy2Z8ZZky5k2HDWOAuOtr+BzFMSAjDPZpsVQhxlpY5d8+SWPDHuf9WMuv8uDo5cgwnIhjp
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(6133799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?5xlKcwDJXm81g43lhZ56okgF6RDlsU7ejF1YBUJymdeUYpt460qyoR6JyM8V?=
- =?us-ascii?Q?RN/yQYQDjNYD/UysF2xXUerkQUjl4Yp4mgSfx13ocKVWPSbPypyyCBOx4MFm?=
- =?us-ascii?Q?it2T3UOEvts5pzArVIDCvRfcF7W/KD80qmHSZsM8VXowKwJCJVJ1AIgcxVlC?=
- =?us-ascii?Q?SubyRghV86vWjBxAL2TMQ6qD0mejhLE8f9HTi7q+kgjyr2ioqOpbL1eHUiPO?=
- =?us-ascii?Q?DTjDU1fctMnzyJtqTgkEdr6K/gQ78IEFcn+ao4Z+bCuMi27MncEgGxoZ/uIh?=
- =?us-ascii?Q?LDmtEBfjvJa/vmrkB8Yrr468n22ZIyikQp6hL3f6FwUZywKKmj39xpfwAbrH?=
- =?us-ascii?Q?RqY/3IPTgIzHtdA95UrUphYh93pfBrXdCrH91p3uDrYUhEujkbq2YsKhmm0h?=
- =?us-ascii?Q?DFjdptvOpr5+iduUOy1avB1Pr7WvXck1tcsJ1Krbyvs3Fch+WKLYTTPVqF8W?=
- =?us-ascii?Q?no+x6VD8/m2JI461KQ9fQ8uHHqeM5juKX9mdsWaJ3npOwjEf+jzKc8grwtpK?=
- =?us-ascii?Q?s8aFXS1iSvin6gYbA5SNkvKl7+gCInyT+5t6fhmU69837u99qj2PQ0l8SMqa?=
- =?us-ascii?Q?2RfsV2OV1Q8El8IxGZARQtNJiW2hl8HD+EfFIqKP5wJyD1cVy/mOYWitYBA6?=
- =?us-ascii?Q?wz+5RT/tLztrf5wZSvBCerCoWUmD3oNUOsCxl3LwTXvUAtuVuK7RL3b9NBkA?=
- =?us-ascii?Q?4QaB+4g9a0IVKekInluv+ay661VPRZ9alcidPOiJYeBxdGgopK5ceHPhEtdv?=
- =?us-ascii?Q?GtCUyKiJfJf7yyiB4FLhKfVVIUHUZoanxuISkegIHjYMjTsVqJ2eECg1QQh4?=
- =?us-ascii?Q?qAHo3sxYrww0atKylWfDfBxKT2NrnaQB15MtcUecoEQ8PX1NYe9fjwIuDeEo?=
- =?us-ascii?Q?xkd5LcEk1vVHE2VM1WQI32HbruEAAaXAjGlPOHR5tmiLVNvqQsNvN175fJFD?=
- =?us-ascii?Q?KQhLFS2ucMd7vhMl8as96LXeR4cavjm/7bY94kWCX0BurvKBSqPG7gG5dQQa?=
- =?us-ascii?Q?f9ignM268TTAokrEzSDM5AhJmaegCQZAVMIUT41s8tOByTVLS150T+e2Idkh?=
- =?us-ascii?Q?4HEecqm2eN24CibH8s5HPcZFY1PVJ64dUyLYNeAQzvwJxT+kq6QlIAPOCCiL?=
- =?us-ascii?Q?pK6jcMD59IVK0jCAo2clKnuvBkY0FdMT+HHr5wLDOzgNNK7DM9azwIFFz7GX?=
- =?us-ascii?Q?Jszn9TofACwZU9tLdZTbf0Mcn6dsYkPCqhi/KS+Sh2RmnuJitNXZ9NgVgIxN?=
- =?us-ascii?Q?dTPrlTVBzmdgq5s8PsdD2cam7D4clgbzLzsl+eiSMMo4kIPRRNsG9e5ozyTC?=
- =?us-ascii?Q?8R4rB7LB28LvfnhG/1NI++edGzUqbynK9jKR/tOrY7ND713iu6HIWjRkXC4P?=
- =?us-ascii?Q?6mKVQngIh1geu8MuDuvQ/HIqgP9eKC1CeazkyLMzAdxJG3zoBr546twbtG+W?=
- =?us-ascii?Q?nmD+TszW15VahJ4ohgz5CHyHFMEdGmShSo/s2DWmAmD3rOAnaLY6HcFoVxBU?=
- =?us-ascii?Q?iV4/ssZhPHlGgIOV6Q9NhW09Xf+lYWchf8FjTPIAJatG9AQUPqNO1IQe2++e?=
- =?us-ascii?Q?g20UAaKqxMOC8ASQcxGSpXQL1cC6tfw8D1/681jYso2aX3GCCbRq+t/PFJbt?=
- =?us-ascii?Q?n/ZyNhVIDTiXFQw2cLjzeaDPptRIAhekKAn6YRcQQJvqSE9A+akDQjPCWTko?=
- =?us-ascii?Q?6QNSoOUztbmMNqyC4Oc0oYXmf3RZsiiqG//6Sw0VnX3dIbpsCrPtZHWkH29D?=
- =?us-ascii?Q?DxRKZFaSQ3sfmLhyFQLHqpiDyuWESf7p6peFMTOIN2uD31Xq8vq/xdNE3kMM?=
-X-MS-Exchange-AntiSpam-MessageData-1: ITtX9Vx1/3BWQg==
+	=?us-ascii?Q?9UanKKOCxZi5m3rEHuAqFl7ewkHNHkheXWOuRXGO5Ah1QJKIHu7C8J+iRgQ5?=
+ =?us-ascii?Q?/+nfgejz6Iu81MLrz68IcMLgt9GaaZcxyAGxx3xqXBSqvTT6UCu/PERdRYxe?=
+ =?us-ascii?Q?U9OK+qrFens143MyI+CnJJmz+sjxAHa7+9W095yiJuERI3528A8jnyPTi0gQ?=
+ =?us-ascii?Q?5qEE0KNKfevrsrvmiHHNylCnxVN6VISAAyoUQ3itUAW2sYeHHNy3FRQePrhA?=
+ =?us-ascii?Q?U+jo+FjsetDZHn/N4entD0eWe2hHQOg8hhfPp/zOHmkiLfW0nFx/zuDa0BW2?=
+ =?us-ascii?Q?ZtI/SX9TBuxbOB/a3+e9ylGY5vnOn5Zx83V/JswRQzHfD7GHGM2TN1cNF/Yj?=
+ =?us-ascii?Q?1GSKashohqvPtOnl6Zvps/kpUNlRIKAifOyl9Um2h3TZRdmcCn0Py3HoaU8K?=
+ =?us-ascii?Q?32K+K0wncoDGsV/nN7Z04qJ7nPFw9QV53XCdHzSRjlPKegsURKkypgnpsvUm?=
+ =?us-ascii?Q?9DykY2Nh2Gs6vFUfYlhoZjqFPfzPn5oW/WMRGPY0NpptatWwPblsTbCm5WfJ?=
+ =?us-ascii?Q?xL0q14yYHj14ep5YkO021r8Vy9rCb4aNtadrsps6+85AHKphxYtQoVaBjDkX?=
+ =?us-ascii?Q?i/GwsWR66EbgXD9Tww1w7/doekT+QSgpy1JGoFYn6o719KQDmK6YYATJgnTP?=
+ =?us-ascii?Q?QPvuKutpr+rsSDBS2Sl07cX+C6I1VUnWf+HEyobRXXzHJv9kAfbSrW+CLRZw?=
+ =?us-ascii?Q?QpNVICiMbJySAIq15ppRQxNlXfk0ntLSwktOdeGyg8o1AkkRrOGxPLzS6l60?=
+ =?us-ascii?Q?N7T+DjbbWq+HUV935A7sto3sW9GhoP47rtzAr5X9EmcA4VwA4PzVIsiD26Vu?=
+ =?us-ascii?Q?gYcy0Iu2oR9yxgSYyJ/fYucJqUops40aGe4ttipQ1IPcTEL93mynUH3fbHay?=
+ =?us-ascii?Q?AjrR1BGp5Loq43PGaUQlSFbWIsqRk52QQDDyZcBC5qEYwlpBkIJ5U0B6gwFW?=
+ =?us-ascii?Q?cb/cjb/uphtSvoNCNXFN8nfLlk7VozFh034ldFmPz1x8cJXYJSUlotMfL/mL?=
+ =?us-ascii?Q?ffScq/uOteqaRIGhKMcQsYIb6Pn3mX7SmzwLjGBEk9n+f/sa+MTMMm8bYYUU?=
+ =?us-ascii?Q?XjdRRI/HjO1KK7Sdhv+Ev0LDVHKi+39dfhcfQJtkghGB6hzHKmB327joi6HW?=
+ =?us-ascii?Q?gvkjtHYL77DAisd3Ss7Y90NIrinBxxPFLOkdyy2Co+gSL1qd7S37l4Yac1YV?=
+ =?us-ascii?Q?ddyqE1bVbBTzy6wxXgaMKMmqT2ig2WWSylx/9RvxIaoP96uy3NfQwbsOlsi7?=
+ =?us-ascii?Q?QhZHcMwgXQp2vhwzXLrWBk4Z5dNjpgYKkwpE/M86wWxMo7ipZ+FG5TpP21VQ?=
+ =?us-ascii?Q?IHJT8q4aEODmNxpNb5zmwAG5gHy7KFbsZ4oqch+FYz3feWgDYk3obhToM74m?=
+ =?us-ascii?Q?UfAztpf7zmKhcCn+4dbmAiO85cknW2M581yRgDY13y/4/CnS+FEPwn/35AhC?=
+ =?us-ascii?Q?dyLUxwdnJuEKEBaEjscH9xaeQnyqdrlVUvdyjIsv+0w0ewdbxNz8B1IsXdzn?=
+ =?us-ascii?Q?lCTpTYG33FH6I7y3lFkBXmEpyVgxyfLmj2gxccBNPbedMhSK2Z3JNXdT9WVX?=
+ =?us-ascii?Q?DwfCHuCD8aoJ3lZxxWl7yWocYxE/+D3B1pIWe3vlNvAHWu8TjbahIJVHAe07?=
+ =?us-ascii?Q?tpweLtIaKf/LouVzRjmOhjUdn4k8eJ8PpY/aqpUC+l1SMbjfxyKlIQGSPK8A?=
+ =?us-ascii?Q?uxczIeMLZXkbOuz8S0q8lqXA/DBbJ2X8CHXMvz5baq7hqvjBT87iD7e77Qkz?=
+ =?us-ascii?Q?VHBi6c71FTZU2Id94RGqTfmWZ/w8vdyiuJEoYCvjPEyqVSoj2kdl4Vb+8R87?=
+X-MS-Exchange-AntiSpam-MessageData-1: MK5cR7io9xoDeA==
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c5f87ad-c412-4a6e-129f-08debf66b9c7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 299f53b1-bda7-413b-d05f-08debf66bbe0
 X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:25.8217
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 22:48:29.3582
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: age/xR9+c2G4rxOvGrucGUSC4Wz2Ae83LE0Wr5Rz/vxYKGvGCdjt6ZsJOWC5t0B1EvdeVsUHJ/RCGTh0QPmBUA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: sWx9NwwGGG9/qk380X191uOiCYKYIBokaZAOMXhd6bfh25XF2kvYef+oQTHrTZOyhWHGcvgO4od4j/Rlz7B0tA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY1P286MB3278
-X-purgate-ID: tlsNG-c1860d/1780267709-B757FDB1-1A447DF3/0/0
+X-purgate-ID: tlsNG-c1860d/1780267713-C5784DB1-B0A279DA/0/0
 X-purgate-type: clean
-X-purgate-size: 3839
+X-purgate-size: 2062
 
-Add the 'numa-node-id' property to the memory nodes in the Device
-Tree passed to DomU. The NUMA node to which each memory node
-belongs is determined based on the virtual NUMA configuration
-specified in the xl domain configuration file.
+Create the 'distance-map' node in the Device Tree passed to DomU.
+This information is retrieved from the virtual NUMA configuration
+in the xl domain configuration file.
 ---
- tools/libs/light/libxl_arm.c | 50 +++++++++++++++++++++++++++++-------
- 1 file changed, 41 insertions(+), 9 deletions(-)
+ tools/libs/light/libxl_arm.c | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
 diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 7e9f8a1bc3..6eae33cdd2 100644
+index 4b0ed99229..466bee95ad 100644
 --- a/tools/libs/light/libxl_arm.c
 +++ b/tools/libs/light/libxl_arm.c
-@@ -670,25 +670,53 @@ static int make_optee_node(libxl__gc *gc, void *fdt)
+@@ -738,6 +738,39 @@ static int make_memory_nodes(libxl__gc *gc, void *fdt,
+     return 0;
  }
  
- static int make_memory_nodes(libxl__gc *gc, void *fdt,
-+                             const libxl_domain_build_info *b_info,
-                              const struct xc_dom_image *dom)
- {
-     int res, i;
-     const char *name;
-     const uint64_t bankbase[] = GUEST_RAM_BANK_BASES;
- 
--    for (i = 0; i < GUEST_RAM_BANKS; i++) {
--        name = GCSPRINTF("memory@%"PRIx64, bankbase[i]);
-+    if (dom->nr_vmemranges == 0 ) {
-+        for (i = 0; i < GUEST_RAM_BANKS; i++) {
-+            name = GCSPRINTF("memory@%"PRIx64, bankbase[i]);
- 
--        LOG(DEBUG, "Creating placeholder node /%s", name);
-+            LOG(DEBUG, "Creating placeholder node /%s", name);
- 
-+            res = fdt_begin_node(fdt, name);
-+            if (res) return res;
++static int make_numa_distance_map(libxl__gc *gc, void *fdt,
++                                  const libxl_domain_build_info *b_info)
++{
++    int i, j;
++    uint32_t *matrix;
++    int nr_nodes = b_info->num_vnuma_nodes;
++    int idx = 0;
++    int res;
 +
-+            res = fdt_property_string(fdt, "device_type", "memory");
-+            if (res) return res;
++    if (nr_nodes == 0) return 0;
 +
-+            res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
-+                                1, 0, 0);
-+            if (res) return res;
++    res = fdt_begin_node(fdt, "distance-map");
++    if (res) return res;
 +
-+            res = fdt_end_node(fdt);
-+            if (res) return res;
++    res = fdt_property_string(fdt, "compatible", "numa-distance-map-v1");
++    if (res) return res;
++
++    matrix = libxl__malloc(gc, sizeof(uint32_t) * nr_nodes * nr_nodes * 3);
++
++    for (i = 0; i < nr_nodes; i++) {
++        for (j = 0; j < nr_nodes; j++) {
++            matrix[idx++] = cpu_to_fdt32(i);
++            matrix[idx++] = cpu_to_fdt32(j);
++            matrix[idx++] = cpu_to_fdt32(b_info->vnuma_nodes[i].distances[j]);
 +        }
-+
-+        return 0;
 +    }
 +
-+    for (i = 0; i < dom->nr_vmemranges; i++) {
-+        uint64_t start_addr = dom->vmemranges[i].start;
-+        uint64_t size = dom->vmemranges[i].end - start_addr;
-+        uint32_t nid = dom->vmemranges[i].nid;
-+        uint64_t regs[2] = { cpu_to_fdt64(start_addr), cpu_to_fdt64(size) };
++    res = fdt_property(fdt, "distance-matrix", matrix, sizeof(uint32_t) * idx);
++    if (res) return res;
 +
-+        name = GCSPRINTF("memory@%"PRIx64, start_addr);
-         res = fdt_begin_node(fdt, name);
-         if (res) return res;
- 
-         res = fdt_property_string(fdt, "device_type", "memory");
-         if (res) return res;
- 
--        res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
--                                1, 0, 0);
-+        res = fdt_property(fdt, "reg", regs, sizeof(uint64_t) * 2);
-+        if (res) return res;
++    return fdt_end_node(fdt);
++}
 +
-+        res = fdt_property_u32(fdt, "numa-node-id", nid);
-         if (res) return res;
+ static int make_gicv2_node(libxl__gc *gc, void *fdt,
+                            uint64_t gicd_base, uint64_t gicd_size,
+                            uint64_t gicc_base, uint64_t gicc_size)
+@@ -1407,6 +1440,8 @@ next_resize:
  
-         res = fdt_end_node(fdt);
-@@ -1365,7 +1393,7 @@ next_resize:
-         FDT( make_cpus_node(gc, fdt, info->max_vcpus, ainfo) );
-         FDT( make_psci_node(gc, fdt) );
+         FDT( make_memory_nodes(gc, fdt, info, dom) );
  
--        FDT( make_memory_nodes(gc, fdt, dom) );
-+        FDT( make_memory_nodes(gc, fdt, info, dom) );
- 
++        FDT( make_numa_distance_map(gc, fdt, info) );
++
          switch (info->arch_arm.gic_version) {
          case LIBXL_GIC_VERSION_V2:
-@@ -1716,10 +1744,14 @@ int libxl__arch_domain_finalise_hw_description(libxl__gc *gc,
-     if (res)
-         return res;
- 
--    for (i = 0; i < GUEST_RAM_BANKS; i++) {
--        const uint64_t size = (uint64_t)dom->rambank_size[i] << XC_PAGE_SHIFT;
-+    if (d_config->b_info.num_vnuma_nodes == 0) {
-+        for (i = 0; i < GUEST_RAM_BANKS; i++) {
-+            const uint64_t size = (uint64_t)dom->rambank_size[i] << XC_PAGE_SHIFT;
- 
--        finalise_one_node(gc, fdt, "/memory", bankbase[i], size);
-+            finalise_one_node(gc, fdt, "/memory", bankbase[i], size);
-+        }
-+    } else {
-+        LOG(DEBUG, "vNUMA enabled: skipping memory node finalisation as nodes are already populated");
-     }
- 
-     if (dom->acpi_modules[0].data) {
+             FDT( make_gicv2_node(gc, fdt,
 -- 
 2.43.0
 
