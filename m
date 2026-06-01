@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D32ACD5BD1
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2026 15:44:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323939.1589617 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6307CCD6E55
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2026 15:44:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1323944.1589644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wU4oF-0006Q6-3P; Mon, 01 Jun 2026 15:44:11 +0000
+	id 1wU4oM-0007FQ-17; Mon, 01 Jun 2026 15:44:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323939.1589617; Mon, 01 Jun 2026 15:44:11 +0000
+Received: by outflank-mailman (output) from mailman id 1323944.1589644; Mon, 01 Jun 2026 15:44:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wU4oE-0006Pu-Vl; Mon, 01 Jun 2026 15:44:10 +0000
-Received: by outflank-mailman (input) for mailman id 1323939;
- Mon, 01 Jun 2026 15:44:10 +0000
+	id 1wU4oL-0007EW-RZ; Mon, 01 Jun 2026 15:44:17 +0000
+Received: by outflank-mailman (input) for mailman id 1323944;
+ Mon, 01 Jun 2026 15:44:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wU4oE-0006P3-Aj
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 15:44:10 +0000
+ (envelope-from <roger.pau@citrix.com>) id 1wU4oK-0006xe-Eg
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 15:44:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wU4oD-00BHey-Nr
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 17:44:09 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wU4oJ-0007hv-RN
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 17:44:15 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <roger.pau@citrix.com>)
- id 6a1da8c8-e002-0a2a0a5209dd-0a2a4505dc48-4
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:09 +0200
-Received: from [40.93.198.34]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a1da8cc-2eae-0a2a0a5409dd-0a2a450ba75c-12
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:15 +0200
+Received: from [52.101.85.22]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <roger.pau@citrix.com>)
- id 6a1da8c7-aaa8-0a2a45050019-285dc622e7f9-3
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:09 +0200
+ id 6a1da8cc-212f-0a2a450b0019-346555167c7f-4
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:15 +0200
 Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by BN8PR03MB5027.namprd03.prod.outlook.com (2603:10b6:408:db::17)
+ by LV3PR03MB7453.namprd03.prod.outlook.com (2603:10b6:408:1a6::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Mon, 1 Jun 2026
- 15:44:05 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Mon, 1 Jun 2026
+ 15:44:11 +0000
 Received: from CH7PR03MB7860.namprd03.prod.outlook.com
  ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
  ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.21.0071.014; Mon, 1 Jun 2026
- 15:44:05 +0000
+ 15:44:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,556 +57,622 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pEp7C70pj+Jz+Hcs9cXrk9OuxDKbk117A4/OaTRt2vTDQmeQ250y/Xf5iZA5ZkgPbwb2j+BlJ4CFGS/l9YH75CGL4Co/tONN4QLXH7x38Pg2tKTHYkS2DVhYCZKZvmmkb99y3NtE52fJEIQj5PXcQKppaaSJa/MZb6AnpwDwIx7qXZZZpFVe1WNdG08fHtSmaFgIn1H3xvuUNvT/dOZ6n0DyIaR6Bte1mMZQ0g2QksKmDYJthkBTpZllSOaBF8XWxiMXzYiorEarCY6Y0IQCuQv3MzXvMfe0zwR55O+qfY+DkdYrGRKSMqsqkqYP5QimJmvv4YdAgDBFtepfGsAxAA==
+ b=uQx0a8Rr5iutAkcp2r6oOMB/S/zHyey9ohjai1lCRRpMdX6UcBn9VIrUaOJOdpqExaRHAIm7/9zv+aPLv3lDPbo74OGT7Lm6hArFCoRCrChlW5qpD7/SEfhNAzo4Dz7GfTwphH+Uszjz3ROHuttRv8UV8DTnietW0Uec3v7SnXF7QQ2FWbHp9gEn+RWkI74G4IfIdSC6bYAhluaocOiq5OqRG3hXgeYgbtvI6x5jYAOmleQmfpbXgBdBiP3oKPm79ebfrihDdNEaTqIrFFBVplIr9JtXWpYkTIxCgpAiOFB1IPu0QAo/Y+vSNfSCeArG7lXtd+t0wXvztNHNLXtPhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rz97qywwJLfTsLwGTN3c/x5dL1I1CWkX0dn7p+InnZs=;
- b=Y4n6j1P96/M/7S6Q7YbyPj1Q2DbG6wh0kazIXYPIIvxOH+cDOLhuI+Q9QCTRBRVbq5qnkNRXzfezhl4jdCwjdLVjrfMb24993bORt+QQulTBFnn1mDlZqf7LTrukwnARNbXAVe8YnBNat7AjZGOs6gIopzuyEaOqbrbgwiJwjc065r1d92pbetCBwjSXf25FDL+WWFZ80sEMgExEz5kFwp8JYm4B188Z27sRvtg1VfllTwQTqJyzPcT5Xfq9cTQ7X0bB307/+yCjCbP0Q/v2Ar5mZWwEmN6tppccHaXyX0/Ogutpl5MbgadLNvzFr33/nICFaQRZ7nfjWBQKWqemxg==
+ bh=baK8cjPkKPNArYKcbk9tpmKQdKKjM8clHoyqodwv1j4=;
+ b=PbEP1Z58ExsHi25tScLMeLt0XCtVpJIuW/mWyyL41fLBvd9cuujiQM2kE7W+N88dCJSHEjnE8R4pe1vyCKrW0M8rPmnoB/TOgQe7rBWBAf1aQ4H1+2OG2wnXn6KMB67aoFFpyFAcvb2si7hLX82k8PlRLThklvusDF3I43SAUsU42lfxfHOIGPj2FgJQlmfmXRAuO2dp2hCJx8MSaXi8dbbo+m+vv+KJdnwzsHTBL/C4nnmaYpTcnPqzN0d963a6niXCZix1E+7Lga0He3gQwjzVU+Tn6Ul2r94Ut2I+TeqCn6p5JfJV4qHY1sudgCZG1kGwPO11ZV6tNY8NGbS+bA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rz97qywwJLfTsLwGTN3c/x5dL1I1CWkX0dn7p+InnZs=;
- b=AMBzBG0NKXBe0azjNHV7tpab+03DCrRik5PJK1h+0BSc1znw2jlTvFFrOu04lKvFs/LULawqLSJM9O381bHqp7H5O50bd6fiAKMrSp09UiUf0fp7/j3Dgz3WR2ctQIyHb0YgCnQREeZjf7dtZcledVsmUoCwxVoRZDQ6FuPpkXY=
+ bh=baK8cjPkKPNArYKcbk9tpmKQdKKjM8clHoyqodwv1j4=;
+ b=xE3Aqk2LdihK8ojuKKM+9LKwAPMnt9TCrQwV3MHRIwHeDi0n3rJkHeQZ80pMYZroLk0/ZyyUzJgpUa65lHgH7kdhgrWfYeEueUoaXqrvfVkuJR2/9B5nZQ9ah6TQZCIY+lVqT+p/zDy62q1wXSTRjHn5R1M7VigMU0ywA0mwm4A=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Roger Pau Monne <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH for-4.22 2/5] tools/macros: adjust ROUNDUP() interface to match hypervisor
-Date: Mon,  1 Jun 2026 17:43:29 +0200
-Message-ID: <20260601154332.30797-3-roger.pau@citrix.com>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH for-4.22 4/5] tests/numa: add unit tests for NUMA setup logic
+Date: Mon,  1 Jun 2026 17:43:31 +0200
+Message-ID: <20260601154332.30797-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260601154332.30797-1-roger.pau@citrix.com>
 References: <20260601154332.30797-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BN9PR03CA0098.namprd03.prod.outlook.com
- (2603:10b6:408:fd::13) To CH7PR03MB7860.namprd03.prod.outlook.com
+X-ClientProxiedBy: LV3P220CA0013.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:408:234::34) To CH7PR03MB7860.namprd03.prod.outlook.com
  (2603:10b6:610:24e::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|BN8PR03MB5027:EE_
-X-MS-Office365-Filtering-Correlation-Id: b0dee85a-29ac-41c2-8d85-08debff49c8d
+X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|LV3PR03MB7453:EE_
+X-MS-Office365-Filtering-Correlation-Id: e29966c8-4112-46aa-6fce-08debff4a055
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|56012099006|11063799006|6133799003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|6133799003|22082099003|56012099006|3023799007|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	CenyeQSKmY6qwazr0Nx5POgYu28gTHmSEznHbqU8yvlA6qfppvqTHdywbzBgZLVSirwx8whRIImvoUh7ngbuh4Fb7+t7hubYtZZJDShjGcDOhHsx583eS7MceudMgvipIhiCBP3hGTzNekJji5uvDP5Rd8N00EzBaLthDYdU9b+4JSccXRMGhlr8Uh/YqWRgo3ePIsmiymRBmTTER8syHWj/1W35HobIGCUanPbfPAjPeWvAfEs1FdggvWyEYQh9jeQbEh+7NbI0AG7xF1vkizmHGw0pY7Dh67QV0QOx0BJzlkaYZa0Q4s9u0F6rqd4WbEqYtGf3lb30X+rRyQ+EEeVroYWilcjMglIDgpoVakcKXg2t9gneKhz3+OQbwVAOEp/X9lw2kvtzNYrEjuXD8OulrtLsCcRI/HiNcFn6RD2IdUHAPVhqTDCqMrIufRZH4uUS1vHsSACdZgArEsYtjXFYc9Gz32W/W0cNxyiJTpGhXBOzqdGGenkh1eflAOzml0qLjGbf2Az8nA44mZ0C6J+wTHXRhtyYm93DGOEHkf8RuqqGtAV/ON//aY4pg0+sg56QP7rojSd4rUDKRZLN/6jtnXHaUrMoxYFEMjF49L+7K8VuWFfXL/o1ExDMi/u7TFYe5zqkOMZcELQcoAYso7uLPSXRL5SstiVbAAGiW2611lKapzaRL/tL1WE4GKX6
+	o1PVk/IwI/1Vnh8fSMuOPDRYZsuGNC4Bv77B8xNKkkURdcw9LzxYbrRYkFGE+BPBu78Kv54MVxgHvpgvnJk3Kb9UZEUYSq7zuZXxeK1EvoYzy+dEBYVDTgdkc8ZE/5b0m0spZ2vqTtAKYQ0rRFr9pJ5bsjq0ksIYgyVjzIn3hWWDcodYY9cP5BHO+Mo2G/ZU6qVwH8QYR3NxcjCXENqfRtKQb3/4Cw+DNTYvJnXrpFmYYxceioxqZ+6aG5eMTHHXzoR8EmE3nvWs2QKFdn9xcmXRLv/Kw6joNlGxBR7XiWqSC/QDfGXYSRZwoUnlfcUmUn7bZt3vlxVm0BGYLx/QFQN3qEzvBB3wNDyGTS6drtolONuBY33wb8kryJGFruJ16gwz1qU36qr+DwE6Jh4IAV8d56icfpRJsZoQVihC3c+WVjIC+IGAHwXxaS2X3VKLlVJfo1JHcAz8KisVIeQkjgtT0byyoaMQlDY0UNoB/7FoaQiHbVFv35Y6MvzK6TasexfzOz/tL8IxOVslildpjMIqp6qywg3IG0Jp1upd/p8cvscMaQAffu/LZOJrb0sTkdBaS7l6fF7tq/tn0B+z4sm3PBDB7deOwbvxeUpjhVgXdnhnToKwF05GZnrwRTHq9lSAvmKScwfUK7vICO6PvM05eMNBOKc/cHK5Cr0DYBlyktnij+du9/Srvsy+czBA
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099006)(11063799006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(6133799003)(22082099003)(56012099006)(3023799007)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cWQ4dXozckJvVEJCUjl1cGdxbUZ4T1FsSmtGVlVlbmNOSU1zTmVRWmFpZXVN?=
- =?utf-8?B?RjdrZmdNeXVrK05veVpaS3J4TVcyU3B1QXBlNlI3bGtVMUZJd20zVjFobGV1?=
- =?utf-8?B?WFJOL200V2tUNjgzUSt5eWhWcDJjT2o0OHJJSVVXRTc4TWplR0JrUkxEb0lL?=
- =?utf-8?B?Y0ZYa1Fta2R0WUd5dWJOTGhjK1gvTTBha3AyTjQwYnJFdUtITTErRUR1UjdE?=
- =?utf-8?B?c2JzRWhzQVVoeExpb1dQaStuUnJHa0FZTWVkQTZIa0ZHSnFoeUNmQ1d1bnVp?=
- =?utf-8?B?b29aWUM1cThlMDNjWGxXeWFCdlVRbVZyN3M0TTQ0bmFCd0NzYWRxOXZRSEJk?=
- =?utf-8?B?ZW12UnYydzRUUmkxME12ZkZQZ29MKzFXU2hURnVMRkFCOW1hZUhiSUlGTXV3?=
- =?utf-8?B?TXVuOTZYRVYvVmZXT0YzMzFCWjYyakZBSk1KcisxdnBOdVBSVkVoaEg1OUZD?=
- =?utf-8?B?RUloZGY5NVZIZjAzdXc0M1dVS3NOQWVIRDFibEtrUmdPcWdNM1BiVTBjUFYr?=
- =?utf-8?B?ZnN1UjlXaUk3Mk1HUDVmZTk3VmFOV0hUNHNyUjBUT3hEYXBKZzZYS1VFUWpq?=
- =?utf-8?B?YmtzQWc3OEpES0NtRGw0dnErbE9UN1NHQnZpblc2K0Zaa0Zwb1I5Z2dDTWow?=
- =?utf-8?B?bDhkRWl4RUp4SlkwTjNqbkFZSXBPWDNoa2phRWhmYklDNUNSYXdPanZENDg4?=
- =?utf-8?B?cjFCRThhMFBXbVQrb3l2K2pWK1VrVGFFS1N4cXU1czVtSzJMVHBETTBncll0?=
- =?utf-8?B?ZlJ4ZU5XWmF3L0lqODFNZU95dnJyRjF1aVV1Tkdlb2dqVkpXTlNlaCtGR3M2?=
- =?utf-8?B?RWozVitacjJKU01IcmZ5RHcxVDhMUjhZQWtuNm8xVlA5SkhpQVpSMmFzWFhW?=
- =?utf-8?B?eU1EcU1ZVmRhRGYvM240WHpydnNabzkxNU1ZUVFmazdGTkNFQzlwVmlMVjVG?=
- =?utf-8?B?d095bjFRSDFpNXJ3K3QzOXlUWW5GUkNGeWphZjNpZ1JGSG56R0pvM0xIcXVy?=
- =?utf-8?B?VEdib3BZdGZjZVhtVUtLWGYvZHgrdkZZSkF2VzZ0SEZUMnhwcHYvQWgxNmZr?=
- =?utf-8?B?eTF6TWExeXZqOWNkblFMeVQ0YUt2TlVUK0Q0cUNwYUZQbjZUVXJwb2p5NnJ0?=
- =?utf-8?B?WjhRaEVvYlkxREpqQ2gzcFhINXZmeGZWSWV4M0lUemNjVHYwRGlGaTRZQit6?=
- =?utf-8?B?ZmozWHNYUitBT0JkZFJZNW16Y0hKNmtIL0FUaVJZQlNVUmNUUHRibU9DYm56?=
- =?utf-8?B?Q0hINTdpZXlyQkFlMnArRTZPYWJobmtOOVhqRzBCeEN6Wm50cEt5R093K3o0?=
- =?utf-8?B?RERZdnNDeVlHK1ZLRmN4d3Bwb1MvNE1USytpS25kZnJQbTI5OFBBei9ZeHE4?=
- =?utf-8?B?UFlQZ0N4K2J1eFdWc1AvWSsxYmg3TWRMUHFrbUdZU3FjNjBxaEF2YnRvdUhv?=
- =?utf-8?B?SHB2VDFYOUdISmhKT1lodWtvNUIwa0Rka29scTlOcDQwRlpWbzB2amc4c1NU?=
- =?utf-8?B?SFQrUmdEWVNndXpOMHpHTHRqYlBuMWlNVHVFcVpKK1d1ZG1CdTlYVHV1YmJp?=
- =?utf-8?B?UXFDSFg0SkFYOFNyaThiSHd4NTk0Z3RaK2VLL2hZZ3YvMi9hYTE4M29ldlg2?=
- =?utf-8?B?bnVhdCt2cnk5Qk01Z0xFMlhUNXp0SnhPMUdHWkZ4MGNsY0RUM25FaVo5Z2c4?=
- =?utf-8?B?NHlzc2lld1FLTENBd0V2SlRZaGNGcVBuelN0bzJJdDJ2ZXpiR3AyNlhmT0xw?=
- =?utf-8?B?SnFLbjdBMTJFMFdxNmlnNVlMdWRpWWNmdTlUQkFBayt6dWdaZGNTYXNTTExN?=
- =?utf-8?B?bGprQWRQbmg2QVVzRlZFOWNObXkyUEpxcHY3dHUvckpPNlRONjRpRlF1QVY2?=
- =?utf-8?B?NjlGSDhWQmhnUXZERG5GMGxmV3lHQk1xODB1d1FSR0l2LzlSNEJWSVRDeG54?=
- =?utf-8?B?ektUNDJtdjA3THphdFEvVEhmZ0dqNGR2NVFIclpOUCttK2w4UDMrTFhIVjU2?=
- =?utf-8?B?MG1HSjhpYkY0ZGxMVlJHbC9aRzlNMzMvb2ZtV2pyQ3YxemF4T3hTVnVDWXFo?=
- =?utf-8?B?bHR3S25ucTZ0TE13NzJIZzZ3SG1tL0dUNnF0RlNhZzNVUDZ1VXVPZ1ZMU0E0?=
- =?utf-8?B?T3BDVzNoc2JSYzhsL0labU1VMVZLcS9ITER3UU1hc2xta2xWV3pGQjZMQTFB?=
- =?utf-8?B?cTJsZVlnWVZ3amlzcmRHMDNVNUV3NGVqeHo3SW5aR1FmTlZqbElVSEVtbnEr?=
- =?utf-8?B?RG1vYlVpSTVESmtYajBVei9mb0ZrbnFWdjFGc1J6MVNzd1lDZml6SldJSUI2?=
- =?utf-8?B?Q2F2U0hTc2NFSEh1ZjZodUlqYk84RGkzNWVWUzFVb1AwZ2VGQ3JiZz09?=
+	=?utf-8?B?U3RTaTl4SmtGN3V3MjJubTRwWHFQZ3JrZEJLL3RmaXNYTUE2ZGM4UFpLS2VG?=
+ =?utf-8?B?SlI3SVN0cnJVKzZrRzV1clZ0L2VFdG5WWGJGVk1lZytsL1BxTDRlT3pDeEtu?=
+ =?utf-8?B?MEx5VzYzQ2dOcXZ5MUg3RWZwbTc1YXhlN2picHN6cmtlREc0U2EvUUlDbjlV?=
+ =?utf-8?B?aVdFaVhTMjRVVGJJSHZUdUdObkZKSG0vQUNQNDhTd1JjaENWSW1sUTY4aWJn?=
+ =?utf-8?B?a21CbHYwYjh5NHRzVkJOZnY5NHJCQjJDOUZpdUtZc3hTdGpob3VsWjlRRGwr?=
+ =?utf-8?B?T3A0V0ZCdmIzNEZmUmo2VHF0K1VzbnJGQ2hKWjV5VnJERTVJWHJLNUpacHBa?=
+ =?utf-8?B?YVV4U05CN1g3Q3ZHSlhvelRCWU51R1FQVDVNL0RSMW53L0swc3BQRGtyMjZE?=
+ =?utf-8?B?NHM2ekwvOTE3ZzFISGNWendMOVZuQmpCWXBhUHcrYW8waG9sK1NoaVFMSitu?=
+ =?utf-8?B?dEFkKzZLZ2paSEdLWXdLL0J5UXd2b0E0d0JUNngwc0xySnAxbUxTMnlINXJz?=
+ =?utf-8?B?Wm5LeWVWc0g5c0J5RlRoRmRSazRyQ05ZTnZ5TE03WWhTcUFWQTBTRnhpK1Jl?=
+ =?utf-8?B?Ykd3Z2UzZlNSamVLUFNEcHBHY1A0Y0N5YTRqTmtDUWQ4cDFjZGRtWnBwbWhM?=
+ =?utf-8?B?d2l6RE05eHYxdUQxbGNpanZvZ3pmKzZZeUN4WHJ3M0tvYkVlbFRmT3kyMEhL?=
+ =?utf-8?B?SlAzTENGcHY3aVg1U3d1N3hrN2I2ajR6ZkZOdFdxUXlQek85eGlyS0VqZ0J1?=
+ =?utf-8?B?aVcxZ21EalduekluWE1obEhwYzgvSjl5N2JUYVAxQUZxcUxqSExMUXp6UTAy?=
+ =?utf-8?B?dC9rZ1RVTnVKSGliUjVseENHRlpnWkJsa3A1QmU1WTI2eFNyMC9BOTJIK0RW?=
+ =?utf-8?B?andXSDdvdWp3L0JaYmdELzZLZzhpV2J2R1pCbE91cXdDYmVmeVFGOElOaFRq?=
+ =?utf-8?B?NExwMjlZYVdCSmlVRDY0VmZlNUhva3lwdlBlOVVpUFQ1SVN4NWtTY3NBakh1?=
+ =?utf-8?B?aDhuSitHKzNxTlBjNHVxVU4yNzN2bUpPRUQzeHcvbENMZDgyVmt4OWFtWnhH?=
+ =?utf-8?B?TGpKck8ycDRGWGpCZ0lVWmh6bWpMT2hYN1lUN1V4NzdzRUpPOEVGVDloSXBM?=
+ =?utf-8?B?SlFOeWxSQkU1VkxJLzNBQWZsVmYxdkMrdUdHNHB3MjR4a2tmdG0wamtYUWhK?=
+ =?utf-8?B?MWJCTWMzR254S1Y4NlFtMzZWYVNoMGZWT2w2SStlWC9kN01MdkthV0s4dlVl?=
+ =?utf-8?B?QjRkN2FHTzBxcU5Ubk1zSEdhRW5NMlcyc0sxbDNIdmVsUit5NXQybER1OFAv?=
+ =?utf-8?B?UGlOY3pUUGlVZGRndGRjKzN4c3VyRnMreThNMWkvMGNZQWs4cUM3UDJLNnVa?=
+ =?utf-8?B?bWFxc0VORU5xVnVwdnZXZTE1RzVQZHorTFB4YVpoRmtiaE10RXZYdVpzSCtl?=
+ =?utf-8?B?Y2JCaHVoZ2plZHNDYXRxVnliSVgvWnA4TVF2KzU1b1UyKzJnZ0xzRnVNRTZT?=
+ =?utf-8?B?RkVtZVVJMkV5UHlCWDg2MVd5YnNDYXJxRmtzZFV4RWp3c2txUVVTbCsvVW81?=
+ =?utf-8?B?RU1ROVFXck1WbVBwWGJ6ODhZd1hNRUZxa1B2Y285TklmRGNpUER5RHh2Z3VP?=
+ =?utf-8?B?em1QM0NjNnpGQm05dG41Y0N2U2NmQ2VEUHJrZHdNUDN0eFphTU4ybUtEeEd6?=
+ =?utf-8?B?NnUxZlVFMklUV1g5Mm0rUjM2SSs3SG5tcG12azkySXNSajNyc2xvM2JBLy8z?=
+ =?utf-8?B?cG11UHhHbjlwMEFQbFFsN0dwUXZqMzFYT3Qvc2gyb2xpV0tRb2x5MDBoN1g1?=
+ =?utf-8?B?VTM0WUhvTGJrK3ZCK1ZzZEhqZFN6UkZVYTFMRTFNVXlDSEFaaWpsTVZmR3Ax?=
+ =?utf-8?B?TGtNK0JEclZmMitlK3B3c2lKSjBwU3dqanY2citsM2o2SHdRZGdzSytGUGU0?=
+ =?utf-8?B?OUhaaWNMdjIyRW84aCtNRG14dWlONTBFZlNYY1k4MDQrU2VjbHJ5WmQxMTNI?=
+ =?utf-8?B?OWRxQU1tclIxaFZxa21QZHgvbWRQKzRIMmJnSUc1WC9ScWtxQk9FSlpSU0ZI?=
+ =?utf-8?B?KzRiMjZZQTN4Z2NUQXhCdlpHZlU1UU43Z3ZVZi8xcWVONi91UW8xWGpkb3BT?=
+ =?utf-8?B?c3V1c2lmOE9raDdISWlUMlBCOHZxZUt4ZFp5S25pYmtySTU3V3ZEZUNRK1JM?=
+ =?utf-8?B?SFE3d1F1dEpLSWM4cnM5YmM3VGgxa3ArZEkyYnFKVmxUUytuaWtNSjR2bFlv?=
+ =?utf-8?B?RHcvVzE3b09GTGRlcUhnUTdYejRlTlU0R1FZdDdMZCtZK0g2RktzUmFYS3Qv?=
+ =?utf-8?B?Tzd0VzZlY081UmFnQk92VGExTWtKYUwxYzVMWGpiUEhyWXNCYVpadz09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0dee85a-29ac-41c2-8d85-08debff49c8d
+X-MS-Exchange-CrossTenant-Network-Message-Id: e29966c8-4112-46aa-6fce-08debff4a055
 X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 15:44:05.4547
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 15:44:11.7686
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yopaAGplkIF4jPcmvsvl0gN+IvTEjlEb8mwSwrn7N11WmKa+4eS1vd0as2S9eSeYLedHpIdOR0JAVv7UlEisGg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5027
-X-purgate-ID: tlsNG-c201ff/1780328649-E119B443-F488259D/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: fKyOdufeE4GPjuixbZrC1rmJQd3zA2IqDgjFow/DsHzmbwFvezwkDGxDKZ9EqaCeoOkjso16zUFvmuWbfjtaRg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7453
+X-purgate-ID: tlsNG-42698a/1780328655-1BD7FF3B-97355DDE/0/0
 X-purgate-type: clean
-X-purgate-size: 19673
+X-purgate-size: 14975
 
-Adjust user-space callers to use the new interface.  No functional change
-intended.
+NUMA setup, like PDX, requires certain amount of logic to configure the
+internal structures and parameters for NUMA operation.  Introduce some very
+basic testing that allows building and testing NUMA setup logic in as a
+user-space unit test.  This allows feeding synthetic memory affinity and
+map to the logic, allowing to reproduce bugs that would otherwise need
+access to real systems with such a configuration.
+
+For the time being introduce a single test case, based on a known working
+NUMA setup for an AMD Turin system.  Also the testing after setup is
+currently limited to ensuring the start and end RAM region addresses fall
+into a correctly setup memory block.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- tools/console/daemon/io.c                 |  2 +-
- tools/include/xen-tools/common-macros.h   |  4 +---
- tools/libs/call/buffer.c                  |  3 ++-
- tools/libs/foreignmemory/linux.c          |  2 +-
- tools/libs/gnttab/freebsd.c               |  2 +-
- tools/libs/gnttab/linux.c                 |  2 +-
- tools/libs/guest/xg_core.c                |  2 +-
- tools/libs/guest/xg_dom_arm.c             |  6 +++---
- tools/libs/guest/xg_dom_x86.c             |  2 +-
- tools/libs/guest/xg_private.h             |  4 ++--
- tools/libs/guest/xg_sr_common.c           |  6 +++---
- tools/libs/guest/xg_sr_stream_format.h    |  2 +-
- tools/libs/light/libxl_arm_acpi.c         | 24 +++++++++++------------
- tools/libs/light/libxl_create.c           |  2 +-
- tools/libs/light/libxl_sr_stream_format.h |  2 +-
- tools/libs/light/libxl_stream_read.c      |  2 +-
- tools/libs/light/libxl_stream_write.c     |  4 ++--
- tools/misc/xen-mfndump.c                  |  2 +-
- tools/ocaml/libs/xc/xenctrl_stubs.c       |  2 +-
- tools/xenstored/core.c                    |  4 ++--
- tools/xenstored/domain.c                  |  9 +++++----
- tools/xenstored/watch.c                   |  2 +-
- 22 files changed, 45 insertions(+), 45 deletions(-)
+ tools/tests/Makefile         |   1 +
+ tools/tests/numa/.gitignore  |   2 +
+ tools/tests/numa/Makefile    |  47 ++++++++
+ tools/tests/numa/harness.h   | 184 +++++++++++++++++++++++++++++
+ tools/tests/numa/test-numa.c | 222 +++++++++++++++++++++++++++++++++++
+ 5 files changed, 456 insertions(+)
+ create mode 100644 tools/tests/numa/.gitignore
+ create mode 100644 tools/tests/numa/Makefile
+ create mode 100644 tools/tests/numa/harness.h
+ create mode 100644 tools/tests/numa/test-numa.c
 
-diff --git a/tools/console/daemon/io.c b/tools/console/daemon/io.c
-index 43d4973c247c..b6c46d11dea7 100644
---- a/tools/console/daemon/io.c
-+++ b/tools/console/daemon/io.c
-@@ -1233,7 +1233,7 @@ static int set_fds(int fd, short events)
- 		/* Round up to 2^8 boundary, in practice this just
- 		 * make newsize larger than current_array_size.
- 		 */
--		newsize = ROUNDUP(nr_fds + 1, 8);
-+		newsize = ROUNDUP(nr_fds + 1, 1U << 8);
- 
- 		new_fds = realloc(fds, sizeof(struct pollfd)*newsize);
- 		if (!new_fds)
-diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
-index 9838a108aaea..9e2799178235 100644
---- a/tools/include/xen-tools/common-macros.h
-+++ b/tools/include/xen-tools/common-macros.h
-@@ -68,9 +68,7 @@
-     })
- #endif
- 
--#ifndef ROUNDUP
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--#endif
-+#define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
- 
- #define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
- #define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
-diff --git a/tools/libs/call/buffer.c b/tools/libs/call/buffer.c
-index 2579b8c71986..155e4f9d43eb 100644
---- a/tools/libs/call/buffer.c
-+++ b/tools/libs/call/buffer.c
-@@ -155,7 +155,8 @@ struct allocation_header {
- 
- void *xencall_alloc_buffer(xencall_handle *xcall, size_t size)
- {
--    size_t actual_size = ROUNDUP(size + sizeof(struct allocation_header), PAGE_SHIFT);
-+    size_t actual_size = ROUNDUP(size + sizeof(struct allocation_header),
-+                                 PAGE_SIZE);
-     int nr_pages = actual_size >> PAGE_SHIFT;
-     struct allocation_header *hdr;
- 
-diff --git a/tools/libs/foreignmemory/linux.c b/tools/libs/foreignmemory/linux.c
-index 12f959765abd..6d2f30cdf1b6 100644
---- a/tools/libs/foreignmemory/linux.c
-+++ b/tools/libs/foreignmemory/linux.c
-@@ -198,7 +198,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handle *fmem,
-          */
-         privcmd_mmapbatch_t ioctlx;
-         xen_pfn_t *pfn;
--        unsigned int pfn_arr_size = ROUNDUP((num * sizeof(*pfn)), XC_PAGE_SHIFT);
-+        unsigned int pfn_arr_size = ROUNDUP(num * sizeof(*pfn), XC_PAGE_SIZE);
-         int os_page_size = sysconf(_SC_PAGESIZE);
- 
-         if ( pfn_arr_size <= os_page_size )
-diff --git a/tools/libs/gnttab/freebsd.c b/tools/libs/gnttab/freebsd.c
-index d69d928a165e..801274478217 100644
---- a/tools/libs/gnttab/freebsd.c
-+++ b/tools/libs/gnttab/freebsd.c
-@@ -74,7 +74,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
-     int domids_stride;
-     unsigned int refs_size = ROUNDUP(count *
-                                      sizeof(struct ioctl_gntdev_grant_ref),
--                                     XC_PAGE_SHIFT);
-+                                     XC_PAGE_SIZE);
-     int os_page_size = getpagesize();
- 
-     domids_stride = (flags & XENGNTTAB_GRANT_MAP_SINGLE_DOMAIN) ? 0 : 1;
-diff --git a/tools/libs/gnttab/linux.c b/tools/libs/gnttab/linux.c
-index 7286c1d4fe83..829877e64baa 100644
---- a/tools/libs/gnttab/linux.c
-+++ b/tools/libs/gnttab/linux.c
-@@ -101,7 +101,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
-         map = alloca(map_size);
-     else
-     {
--        map_size = ROUNDUP(map_size, XC_PAGE_SHIFT);
-+        map_size = ROUNDUP(map_size, XC_PAGE_SIZE);
-         map = mmap(NULL, map_size, PROT_READ | PROT_WRITE,
-                    MAP_PRIVATE | MAP_ANON | MAP_POPULATE, -1, 0);
-         if ( map == MAP_FAILED )
-diff --git a/tools/libs/guest/xg_core.c b/tools/libs/guest/xg_core.c
-index f83436d6cbf8..d3640f0ef891 100644
---- a/tools/libs/guest/xg_core.c
-+++ b/tools/libs/guest/xg_core.c
-@@ -696,7 +696,7 @@ xc_domain_dumpcore_via_callback(xc_interface *xch,
-     for ( i = 1; i < sheaders->num; i++ )
-         sheaders->shdrs[i].sh_offset += fixup;
-     offset += fixup;
--    dummy_len = ROUNDUP(offset, PAGE_SHIFT) - offset; /* padding length */
-+    dummy_len = ROUNDUP(offset, PAGE_SIZE) - offset; /* padding length */
-     offset += dummy_len;
- 
-     /* pages */
-diff --git a/tools/libs/guest/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
-index c8d091850622..739ec1c33837 100644
---- a/tools/libs/guest/xg_dom_arm.c
-+++ b/tools/libs/guest/xg_dom_arm.c
-@@ -364,12 +364,12 @@ static int meminit(struct xc_dom_image *dom)
- 
-     /* Convenient */
-     const uint64_t kernbase = dom->kernel_seg.vstart;
--    const uint64_t kernend = ROUNDUP(dom->kernel_seg.vend, 21/*2MB*/);
-+    const uint64_t kernend = ROUNDUP(dom->kernel_seg.vend, MB(2));
-     const uint64_t kernsize = kernend - kernbase;
-     const uint64_t dtb_size = dom->devicetree_blob ?
--        ROUNDUP(dom->devicetree_size, XC_PAGE_SHIFT) : 0;
-+        ROUNDUP(dom->devicetree_size, XC_PAGE_SIZE) : 0;
-     const uint64_t ramdisk_size = dom->modules[0].blob ?
--        ROUNDUP(dom->modules[0].size, XC_PAGE_SHIFT) : 0;
-+        ROUNDUP(dom->modules[0].size, XC_PAGE_SIZE) : 0;
-     const uint64_t modsize = dtb_size + ramdisk_size;
-     const uint64_t ram128mb = bankbase[0] + (128<<20);
- 
-diff --git a/tools/libs/guest/xg_dom_x86.c b/tools/libs/guest/xg_dom_x86.c
-index 268936efe25b..9af83535944a 100644
---- a/tools/libs/guest/xg_dom_x86.c
-+++ b/tools/libs/guest/xg_dom_x86.c
-@@ -678,7 +678,7 @@ static int alloc_magic_pages_hvm(struct xc_dom_image *dom)
-     {
-         if ( dom->cmdline )
-         {
--            dom->cmdline_size = ROUNDUP(strlen(dom->cmdline) + 1, 3);
-+            dom->cmdline_size = ROUNDUP(strlen(dom->cmdline) + 1, 1U << 3);
-             start_info_size += dom->cmdline_size;
-         }
-     }
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index 285229cf82a3..31a79bccf75e 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -135,7 +135,7 @@ typedef uint64_t x86_pgentry_t;
- #define PAGE_SIZE_X86           (1UL << PAGE_SHIFT_X86)
- #define PAGE_MASK_X86           (~(PAGE_SIZE_X86-1))
- 
--#define NRPAGES(x) (ROUNDUP(x, PAGE_SHIFT) >> PAGE_SHIFT)
-+#define NRPAGES(x) (ROUNDUP(x, PAGE_SIZE) >> PAGE_SHIFT)
- 
- static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
-                                       unsigned gwidth)
-@@ -167,7 +167,7 @@ int pin_table(xc_interface *xch, unsigned int type, unsigned long mfn,
-  */
- #define M2P_SHIFT       L2_PAGETABLE_SHIFT_PAE
- #define M2P_CHUNK_SIZE  (1 << M2P_SHIFT)
--#define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), M2P_SHIFT)
-+#define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), M2P_CHUNK_SIZE)
- #define M2P_CHUNKS(_m)  (M2P_SIZE((_m)) >> M2P_SHIFT)
- 
- #if defined(__x86_64__) || defined(__i386__)
-diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
-index 7ccdc3b1f6aa..54dde924a7c0 100644
---- a/tools/libs/guest/xg_sr_common.c
-+++ b/tools/libs/guest/xg_sr_common.c
-@@ -56,11 +56,11 @@ const char *rec_type_to_str(uint32_t type)
- int write_split_record(struct xc_sr_context *ctx, struct xc_sr_record *rec,
-                        void *buf, size_t sz)
- {
--    static const char zeroes[(1u << REC_ALIGN_ORDER) - 1] = { 0 };
-+    static const char zeroes[REC_ALIGN - 1] = { 0 };
- 
-     xc_interface *xch = ctx->xch;
-     typeof(rec->length) combined_length = rec->length + sz;
--    size_t record_length = ROUNDUP(combined_length, REC_ALIGN_ORDER);
-+    size_t record_length = ROUNDUP(combined_length, REC_ALIGN);
-     struct iovec parts[] = {
-         { &rec->type,       sizeof(rec->type) },
-         { &combined_length, sizeof(combined_length) },
-@@ -110,7 +110,7 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
-         return -1;
-     }
- 
--    datasz = ROUNDUP(rhdr.length, REC_ALIGN_ORDER);
-+    datasz = ROUNDUP(rhdr.length, REC_ALIGN);
- 
-     if ( datasz )
-     {
-diff --git a/tools/libs/guest/xg_sr_stream_format.h b/tools/libs/guest/xg_sr_stream_format.h
-index 8a0da26f7543..4310f4311e65 100644
---- a/tools/libs/guest/xg_sr_stream_format.h
-+++ b/tools/libs/guest/xg_sr_stream_format.h
-@@ -53,7 +53,7 @@ struct xc_sr_rhdr
- };
- 
- /* All records must be aligned up to an 8 octet boundary */
--#define REC_ALIGN_ORDER               (3U)
-+#define REC_ALIGN                     (1U << 3)
- /* Somewhat arbitrary - 128MB */
- #define REC_LENGTH_MAX                (128U << 20)
- 
-diff --git a/tools/libs/light/libxl_arm_acpi.c b/tools/libs/light/libxl_arm_acpi.c
-index ba874c3d3224..ac8165de15b6 100644
---- a/tools/libs/light/libxl_arm_acpi.c
-+++ b/tools/libs/light/libxl_arm_acpi.c
-@@ -107,12 +107,12 @@ int libxl__get_acpi_size(libxl__gc *gc,
-     if (rc < 0)
-         goto out;
- 
--    *out = ROUNDUP(size, 3) +
--           ROUNDUP(sizeof(struct acpi_table_rsdp), 3) +
--           ROUNDUP(sizeof(struct acpi_table_xsdt), 3) +
--           ROUNDUP(sizeof(struct acpi_table_gtdt), 3) +
--           ROUNDUP(sizeof(struct acpi_table_fadt), 3) +
--           ROUNDUP(sizeof(dsdt_anycpu_arm_len), 3);
-+    *out = ROUNDUP(size, 1U << 3) +
-+           ROUNDUP(sizeof(struct acpi_table_rsdp), 1U << 3) +
-+           ROUNDUP(sizeof(struct acpi_table_xsdt), 1U << 3) +
-+           ROUNDUP(sizeof(struct acpi_table_gtdt), 1U << 3) +
-+           ROUNDUP(sizeof(struct acpi_table_fadt), 1U << 3) +
-+           ROUNDUP(sizeof(dsdt_anycpu_arm_len), 1U << 3);
- 
- out:
-     return rc;
-@@ -128,7 +128,7 @@ static int libxl__allocate_acpi_tables(libxl__gc *gc,
- 
-     acpitables[RSDP].addr = GUEST_ACPI_BASE;
-     acpitables[RSDP].size = sizeof(struct acpi_table_rsdp);
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[RSDP].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[RSDP].size, 1U << 3);
- 
-     acpitables[XSDT].addr = GUEST_ACPI_BASE + dom->acpi_modules[0].length;
-     /*
-@@ -137,11 +137,11 @@ static int libxl__allocate_acpi_tables(libxl__gc *gc,
-      */
-     acpitables[XSDT].size = sizeof(struct acpi_table_xsdt) +
-                             sizeof(uint64_t) * 2;
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[XSDT].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[XSDT].size, 1U << 3);
- 
-     acpitables[GTDT].addr = GUEST_ACPI_BASE + dom->acpi_modules[0].length;
-     acpitables[GTDT].size = sizeof(struct acpi_table_gtdt);
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[GTDT].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[GTDT].size, 1U << 3);
- 
-     acpitables[MADT].addr = GUEST_ACPI_BASE + dom->acpi_modules[0].length;
- 
-@@ -150,15 +150,15 @@ static int libxl__allocate_acpi_tables(libxl__gc *gc,
-         goto out;
- 
-     acpitables[MADT].size = size;
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[MADT].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[MADT].size, 1U << 3);
- 
-     acpitables[FADT].addr = GUEST_ACPI_BASE + dom->acpi_modules[0].length;
-     acpitables[FADT].size = sizeof(struct acpi_table_fadt);
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[FADT].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[FADT].size, 1U << 3);
- 
-     acpitables[DSDT].addr = GUEST_ACPI_BASE + dom->acpi_modules[0].length;
-     acpitables[DSDT].size = dsdt_anycpu_arm_len;
--    dom->acpi_modules[0].length += ROUNDUP(acpitables[DSDT].size, 3);
-+    dom->acpi_modules[0].length += ROUNDUP(acpitables[DSDT].size, 1U << 3);
- 
-     assert(dom->acpi_modules[0].length <= GUEST_ACPI_SIZE);
-     dom->acpi_modules[0].data = libxl__zalloc(gc, dom->acpi_modules[0].length);
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 6fd62d140389..a8b0c8c50070 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -600,7 +600,7 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-                 .opts = 0, /* .opts will be set below */
-                 .nr = b_info->altp2m_count,
-             },
--            .vmtrace_size = ROUNDUP(b_info->vmtrace_buf_kb << 10, XC_PAGE_SHIFT),
-+            .vmtrace_size = ROUNDUP(b_info->vmtrace_buf_kb << 10, XC_PAGE_SIZE),
-             .cpupool_id = info->poolid,
-         };
- 
-diff --git a/tools/libs/light/libxl_sr_stream_format.h b/tools/libs/light/libxl_sr_stream_format.h
-index f8f4723c2e91..b02c954a388e 100644
---- a/tools/libs/light/libxl_sr_stream_format.h
-+++ b/tools/libs/light/libxl_sr_stream_format.h
-@@ -29,7 +29,7 @@ typedef struct libxl__sr_rec_hdr
- } libxl__sr_rec_hdr;
- 
- /* All records must be aligned up to an 8 octet boundary */
--#define REC_ALIGN_ORDER              3U
-+#define REC_ALIGN                    (1U << 3)
- 
- #define REC_TYPE_END                    0x00000000U
- #define REC_TYPE_LIBXC_CONTEXT          0x00000001U
-diff --git a/tools/libs/light/libxl_stream_read.c b/tools/libs/light/libxl_stream_read.c
-index e64e8f0eadec..99c7607b6c54 100644
---- a/tools/libs/light/libxl_stream_read.c
-+++ b/tools/libs/light/libxl_stream_read.c
-@@ -511,7 +511,7 @@ static void record_header_done(libxl__egc *egc,
-         return;
-     }
- 
--    size_t bytes_to_read = ROUNDUP(rec->hdr.length, REC_ALIGN_ORDER);
-+    size_t bytes_to_read = ROUNDUP(rec->hdr.length, REC_ALIGN);
-     rec->body = libxl__malloc(NOGC, bytes_to_read);
- 
-     rc = setup_read(stream, "record body",
-diff --git a/tools/libs/light/libxl_stream_write.c b/tools/libs/light/libxl_stream_write.c
-index 98d44597a732..9ea64369352f 100644
---- a/tools/libs/light/libxl_stream_write.c
-+++ b/tools/libs/light/libxl_stream_write.c
-@@ -119,7 +119,7 @@ static void setup_generic_write(libxl__egc *egc,
-                                 void *body,
-                                 sws_record_done_cb cb)
- {
--    static const uint8_t zero_padding[1U << REC_ALIGN_ORDER] = { 0 };
-+    static const uint8_t zero_padding[REC_ALIGN] = { 0 };
- 
-     libxl__datacopier_state *dc = &stream->dc;
-     int rc;
-@@ -136,7 +136,7 @@ static void setup_generic_write(libxl__egc *egc,
-         return;
-     }
- 
--    size_t padsz = ROUNDUP(hdr->length, REC_ALIGN_ORDER) - hdr->length;
-+    size_t padsz = ROUNDUP(hdr->length, REC_ALIGN) - hdr->length;
-     uint32_t length = hdr->length;
- 
-     /* Insert header */
-diff --git a/tools/misc/xen-mfndump.c b/tools/misc/xen-mfndump.c
-index 28687afbf01a..99a0b1d3b5c0 100644
---- a/tools/misc/xen-mfndump.c
-+++ b/tools/misc/xen-mfndump.c
-@@ -10,7 +10,7 @@
- 
- #include <xen-tools/common-macros.h>
- 
--#define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), 21)
-+#define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), MB(2))
- #define is_mapped(pfn_type) (!((pfn_type) & 0x80000000UL))
- 
- #define ERROR(msg, args...) fprintf(stderr, msg, ## args)
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index c55f73b265b2..7f6381cdd2fe 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -221,7 +221,7 @@ CAMLprim value stub_xc_domain_create(value xch_val, value wanted_domid, value co
- 	if ( altp2m_nr != (uint16_t)altp2m_nr )
- 		caml_invalid_argument("altp2m_count");
- 
--	vmtrace_size = ROUNDUP(vmtrace_size << 10, XC_PAGE_SHIFT);
-+	vmtrace_size = ROUNDUP(vmtrace_size << 10, XC_PAGE_SIZE);
- 	if ( vmtrace_size != (uint32_t)vmtrace_size )
- 		caml_invalid_argument("vmtrace_buf_kb");
- 
-diff --git a/tools/xenstored/core.c b/tools/xenstored/core.c
-index d6d462b7bc82..86c86b3e9a77 100644
---- a/tools/xenstored/core.c
-+++ b/tools/xenstored/core.c
-@@ -466,7 +466,7 @@ int set_fd(int fd, short events)
- 		/* Round up to 2^8 boundary, in practice this just
- 		 * make newsize larger than current_array_size.
- 		 */
--		newsize = ROUNDUP(nr_fds + 1, 8);
-+		newsize = ROUNDUP(nr_fds + 1, 1U << 8);
- 
- 		new_fds = realloc(poll_fds, sizeof(struct pollfd)*newsize);
- 		if (!new_fds)
-@@ -3067,7 +3067,7 @@ static int dump_state_node(const void *ctx, struct connection *conn,
- 	head.length += node->hdr.num_perms * sizeof(*sn.perms);
- 	head.length += pathlen;
- 	head.length += node->hdr.datalen;
--	head.length = ROUNDUP(head.length, 3);
-+	head.length = ROUNDUP(head.length, 1U << 3);
- 
- 	if (fwrite(&head, sizeof(head), 1, fp) != 1)
- 		return dump_state_node_err(data, "Dump node head error");
-diff --git a/tools/xenstored/domain.c b/tools/xenstored/domain.c
-index 2db452144dd4..a880ff678ef9 100644
---- a/tools/xenstored/domain.c
-+++ b/tools/xenstored/domain.c
-@@ -2159,7 +2159,7 @@ const char *dump_state_connections(FILE *fp)
- 		if (ret)
- 			return ret;
- 		head.length += sc.data_in_len + sc.data_out_len;
--		head.length = ROUNDUP(head.length, 3);
-+		head.length = ROUNDUP(head.length, 1U << 3);
- 		if (c->domain) {
- 			sc.fields |= XS_STATE_CONN_FIELDS_UNIQ_ID;
- 			head.length += sizeof(uint64_t);
-@@ -2232,7 +2232,8 @@ void read_state_connection(const void *ctx, const void *state)
- 		unsigned long off;
- 
- 		off = sizeof(*sc) + sc->data_in_len + sc->data_out_len;
--		domain->unique_id = *(uint64_t *)(state + ROUNDUP(off, 3));
-+		domain->unique_id =
-+		    *(uint64_t *)(state + ROUNDUP(off, 1U << 3));
- 	}
- }
- 
-@@ -2308,7 +2309,7 @@ static int dump_state_domain(const void *k, void *v, void *arg)
- 	n_quota = get_quota_size(domain->acc, &rec_len);
- 	rec_len += n_quota * sizeof(sd->quota_val[0]);
- 	rec_len += sizeof(*sd);
--	rec_len = ROUNDUP(rec_len, 3);
-+	rec_len = ROUNDUP(rec_len, 1U << 3);
- 
- 	record = talloc_size(NULL, rec_len + sizeof(*head));
- 	if (!record)
-@@ -2372,7 +2373,7 @@ const char *dump_state_glb_quota(FILE *fp)
- 	n_quota = get_quota_size(quotas, &rec_len);
- 	rec_len += n_quota * sizeof(glb->quota_val[0]);
- 	rec_len += sizeof(*glb);
--	rec_len = ROUNDUP(rec_len, 3);
-+	rec_len = ROUNDUP(rec_len, 1U << 3);
- 
- 	record = talloc_size(NULL, rec_len + sizeof(*head));
- 	if (!record)
-diff --git a/tools/xenstored/watch.c b/tools/xenstored/watch.c
-index a9a06e9e4816..309c5bb66bef 100644
---- a/tools/xenstored/watch.c
-+++ b/tools/xenstored/watch.c
-@@ -349,7 +349,7 @@ const char *dump_state_watches(FILE *fp, struct connection *conn,
- 		}
- 
- 		head.length += path_len + token_len;
--		head.length = ROUNDUP(head.length, 3);
-+		head.length = ROUNDUP(head.length, 1U << 3);
- 		if (fwrite(&head, sizeof(head), 1, fp) != 1)
- 			return "Dump watch state error";
- 
+diff --git a/tools/tests/Makefile b/tools/tests/Makefile
+index 6477a4386dda..fc0ed8091510 100644
+--- a/tools/tests/Makefile
++++ b/tools/tests/Makefile
+@@ -4,6 +4,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ SUBDIRS-y :=
+ SUBDIRS-y += domid
+ SUBDIRS-y += mem-claim
++SUBDIRS-y += numa
+ SUBDIRS-y += paging-mempool
+ SUBDIRS-y += pdx
+ SUBDIRS-y += rangeset
+diff --git a/tools/tests/numa/.gitignore b/tools/tests/numa/.gitignore
+new file mode 100644
+index 000000000000..0710a767f400
+--- /dev/null
++++ b/tools/tests/numa/.gitignore
+@@ -0,0 +1,2 @@
++/numa.h
++/test-numa
+diff --git a/tools/tests/numa/Makefile b/tools/tests/numa/Makefile
+new file mode 100644
+index 000000000000..5235f9d6297f
+--- /dev/null
++++ b/tools/tests/numa/Makefile
+@@ -0,0 +1,47 @@
++XEN_ROOT=$(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++TARGETS := test-numa
++
++.PHONY: all
++all: $(TARGETS)
++
++.PHONY: run
++run: $(TARGETS)
++ifeq ($(CC),$(HOSTCC))
++	set -e;             \
++	for test in $? ; do \
++		./$$test ;  \
++	done
++else
++	$(warning HOSTCC != CC, will not run test)
++endif
++
++.PHONY: clean
++clean:
++	$(RM) -- *.o $(TARGETS) $(DEPS_RM) numa.h
++
++.PHONY: distclean
++distclean: clean
++	$(RM) -- *~
++
++.PHONY: install
++install: all
++	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
++	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC)/tests
++
++.PHONY: uninstall
++uninstall:
++	$(RM) -- $(patsubst %,$(DESTDIR)$(LIBEXEC)/tests/%,$(TARGETS))
++
++numa.h: $(XEN_ROOT)/xen/include/xen/numa.h
++	sed -e '/^#[[:space:]]*include/d' <$< >$@
++
++CFLAGS += -D__XEN_TOOLS__
++CFLAGS += $(APPEND_CFLAGS)
++CFLAGS += $(CFLAGS_xeninclude)
++
++test-numa: test-numa.c numa.h
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) -o $@ $< $(APPEND_CFLAGS)
++
++-include $(DEPS_INCLUDE)
+diff --git a/tools/tests/numa/harness.h b/tools/tests/numa/harness.h
+new file mode 100644
+index 000000000000..71ff9c792191
+--- /dev/null
++++ b/tools/tests/numa/harness.h
+@@ -0,0 +1,184 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Unit tests for NUMA setup.
++ *
++ * Copyright (C) 2026 Cloud Software Group
++ */
++
++#ifndef _TEST_HARNESS_
++#define _TEST_HARNESS_
++
++#include <assert.h>
++#include <errno.h>
++#include <inttypes.h>
++#include <stdbool.h>
++#include <stdint.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++#include <xen-tools/bitops.h>
++#include <xen-tools/common-macros.h>
++
++#define CONFIG_DEBUG
++#define CONFIG_NUMA
++#define CONFIG_NR_NUMA_NODES 64
++#define NR_CPUS 256
++#define MAX_RANGES 128
++#define PADDR_BITS 52
++
++#define __init
++#define __initdata
++#define __ro_after_init
++#define __read_mostly
++
++#define printk printf
++#define XENLOG_INFO ""
++#define XENLOG_DEBUG ""
++#define XENLOG_WARNING ""
++#define KERN_INFO ""
++#define KERN_ERR ""
++#define KERN_WARNING ""
++#define KERN_DEBUG ""
++
++#define PAGE_SHIFT    12
++/* Some libcs define PAGE_SIZE in limits.h. */
++#undef  PAGE_SIZE
++#define PAGE_SIZE     (1L << PAGE_SHIFT)
++#define MAX_ORDER     18 /* 2 * PAGETABLE_ORDER (9) */
++
++#define PFN_DOWN(x)   ((x) >> PAGE_SHIFT)
++#define PFN_UP(x)     (((x) + PAGE_SIZE-1) >> PAGE_SHIFT)
++
++#define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
++#define mfn_to_pdx(mfn)   (mfn)
++#define paddr_to_pdx(pa)  ((pa) >> PAGE_SHIFT)
++#define mfn_to_maddr(mfn) ((mfn) << PAGE_SHIFT)
++
++#define ASSERT assert
++#define ASSERT_UNREACHABLE() assert(0)
++
++/* For the purposes of the testing assume arch NID == Xen NID. */
++#define numa_node_to_arch_nid(n) (n)
++
++typedef uint64_t paddr_t;
++#define PRIpaddr "016" PRIx64
++
++typedef unsigned long mfn_t;
++typedef uint8_t nodeid_t;
++
++#define __set_bit set_bit
++#define __clear_bit clear_bit
++
++static inline unsigned int find_next_bit(
++    const unsigned long *addr, unsigned int size, unsigned int off)
++{
++    unsigned int i;
++
++    ASSERT(size <= BITS_PER_LONG);
++
++    for ( i = off; i < size; i++ )
++        if ( !!(*addr & (1UL << i)) )
++            return i;
++
++    return size;
++}
++
++#define find_first_bit(b, s) find_next_bit(b, s, 0)
++
++/* Minimal cpumask support. */
++typedef struct cpumask{ DECLARE_BITMAP(bits, NR_CPUS); } cpumask_t;
++
++#define cpumask_clear_cpu(c, m) clear_bit((c), (m)->bits)
++
++/* Define the nodemask helpers used. */
++typedef struct nodemask{ DECLARE_BITMAP(bits, CONFIG_NR_NUMA_NODES); } nodemask_t;
++
++#define node_set(node, dst) set_bit((node), (dst).bits)
++
++#define first_node(n) __first_node(&(n), CONFIG_NR_NUMA_NODES)
++static inline int __first_node(const nodemask_t *srcp, unsigned int s)
++{
++    return min(s, find_next_bit(srcp->bits, s, 0));
++}
++
++#define next_node(n, m) __next_node((n), &(m), CONFIG_NR_NUMA_NODES)
++static inline int __next_node(unsigned int n, const nodemask_t *srcp,
++                              unsigned int s)
++{
++    return min(s, find_next_bit(srcp->bits, s, n + 1));
++}
++
++#define nodes_or(dst, src1, src2) \
++    bitmap_or((dst).bits, (src1).bits, (src2).bits, CONFIG_NR_NUMA_NODES)
++
++static inline bool nodemask_test(unsigned int node, const nodemask_t *dst)
++{
++    return test_bit(node, dst->bits);
++}
++
++#define node_set_online(node)	   set_bit((node), node_online_map.bits)
++
++#define cycle_node(n, src) __cycle_node((n), &(src), MAX_NUMNODES)
++static inline int __cycle_node(int n, const nodemask_t *maskp,
++                               unsigned int nbits)
++{
++    unsigned int nxt = __next_node(n, maskp, nbits);
++
++    if ( nxt == nbits )
++        nxt = __first_node(maskp, nbits);
++
++    return nxt;
++}
++
++#define for_each_node_mask(node, mask)                  \
++    for ( (node) = first_node(mask);                    \
++          (node) < MAX_NUMNODES;                        \
++          (node) = next_node((node), (mask)) )
++
++/*
++ * Dummy helper to satisfy allocate_cachealigned_memnodemap(), the memory
++ * allocation is instead done in vmap_contig().
++ */
++static inline mfn_t alloc_boot_pages(unsigned long nr, unsigned long align)
++{
++    return 0;
++}
++
++static inline void *vmap_contig(mfn_t mfn, unsigned int nr)
++{
++    assert(!mfn);
++    return calloc(PAGE_SIZE, nr);
++}
++
++static inline void panic(const char *msg)
++{
++    printf("%s\n", msg);
++    abort();
++}
++
++/* Dummy implementations to satisfy the build. */
++static inline bool arch_numa_disabled(void)
++{
++    return false;
++}
++
++static inline void numa_fw_bad(void) { }
++
++static inline bool arch_numa_unavailable(void)
++{
++    return false;
++}
++
++#include "numa.h"
++
++#endif
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/tools/tests/numa/test-numa.c b/tools/tests/numa/test-numa.c
+new file mode 100644
+index 000000000000..bced68d4d7f1
+--- /dev/null
++++ b/tools/tests/numa/test-numa.c
+@@ -0,0 +1,222 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Unit tests for NUMA setup.
++ *
++ * Copyright (C) 2026 Cloud Software Group
++ */
++
++#include "harness.h"
++
++static paddr_t mem_hotplug;
++unsigned int __read_mostly nr_cpu_ids = NR_CPUS;
++
++#include "../../xen/common/numa.c"
++
++static void numa_reset_state(void)
++{
++    bitmap_clear(processor_nodes_parsed.bits, CONFIG_NR_NUMA_NODES);
++    bitmap_clear(memory_nodes_parsed.bits, CONFIG_NR_NUMA_NODES);
++    bitmap_clear(memblk_hotplug, NR_NODE_MEMBLKS);
++    memset(numa_nodes, 0, sizeof(numa_nodes));
++    memset(node_memblk_range, 0, sizeof(node_memblk_range));
++    memset(memblk_nodeid, 0, sizeof(memblk_nodeid));
++    memset(node_data, 0, sizeof(node_data));
++    memset(node_to_cpumask, 0, sizeof(node_to_cpumask));
++    memset(cpu_to_node, NUMA_NO_NODE, sizeof(cpu_to_node));
++    num_node_memblks = 0;
++    memnode_shift = 0;
++    memnodemapsize = 0;
++    if ( memnodemap != _memnodemap )
++        free(memnodemap);
++    memnodemap = NULL;
++    bitmap_clear(node_online_map.bits, CONFIG_NR_NUMA_NODES);
++    node_set(1, node_online_map);
++}
++
++struct mem_affinity {
++    /* Ranges are defined as [start, end]. */
++    paddr_t start, end;
++    unsigned int nid;
++};
++
++struct mem_range {
++    /* Ranges are defined as [start, end]. */
++    paddr_t start, end;
++};
++
++const static struct mem_range *ram;
++
++int arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
++{
++    if ( idx >= MAX_RANGES || !ram[idx].end )
++        return -ENOENT;
++
++    *start = ram[idx].start;
++    *end = ram[idx].end + 1;
++
++    return 0;
++}
++
++static void print_ranges(const struct mem_affinity *r)
++{
++    unsigned int i;
++
++    printf("Affinity ranges:\n");
++    for ( i = 0; i < MAX_RANGES; i++ )
++    {
++        if ( !r[i].end )
++            break;
++
++        printf(" NID %u [%" PRIpaddr ", %" PRIpaddr "]\n",
++               r[i].nid, r[i].start, r[i].end);
++    }
++
++    printf("RAM ranges:\n");
++    for ( i = 0; i < MAX_RANGES; i++ )
++    {
++        if ( !ram[i].end )
++            break;
++
++        printf(" [%" PRIpaddr ", %" PRIpaddr "]\n",
++               ram[i].start, ram[i].end);
++    }
++}
++
++static bool test_paddr(paddr_t addr)
++{
++    mfn_t mfn = PFN_DOWN(addr);
++    unsigned int idx = mfn >> memnode_shift;
++    unsigned int nid;
++
++    if ( idx >= memnodemapsize )
++    {
++        printf("Fail: MFN %lx -> IDX %u outside of memnodemap range\n",
++               mfn, idx);
++        return false;
++    }
++
++    nid = memnodemap[idx];
++    if ( nid >= MAX_NUMNODES )
++    {
++        printf("Fail: MFN %lx -> NID %u >= MAX_NUMNODES (%u)\n",
++               mfn, nid, MAX_NUMNODES);
++        return false;
++    }
++
++    if ( !node_data[nid].node_spanned_pages )
++    {
++        printf("Fail: MFN %lx -> NID %u without spanned pages\n",
++               mfn, nid);
++        return false;
++
++    }
++
++    if ( !node_data[nid].node_spanned_pages )
++    {
++        printf("Fail: MFN %lx -> NID %u without spanned pages\n",
++               mfn, nid);
++        return false;
++
++    }
++
++    if ( !node_data[nid].node_spanned_pages )
++    {
++        printf("Fail: MFN %lx outside NID range [%013lx, %013lx]\n",
++               mfn, node_data[nid].node_start_pfn,
++               node_data[nid].node_start_pfn +
++               node_data[nid].node_spanned_pages - 1);
++        return false;
++    }
++
++    return true;
++}
++
++int main(int argc, char **argv)
++{
++    static const struct {
++        struct mem_affinity affinity[MAX_RANGES];
++        struct mem_range ram[MAX_RANGES];
++    } tests[] = {
++        /* AMD Turin system. */
++        {
++            .affinity = {
++                { .nid = 0, .start = 0x00000000000ULL, .end = 0x0000009ffffULL },
++                { .nid = 0, .start = 0x000000c0000ULL, .end = 0x000afffffffULL },
++                { .nid = 0, .start = 0x00100000000ULL, .end = 0x0c04fffffffULL },
++                { .nid = 1, .start = 0x0c050000000ULL, .end = 0x0fc4fffffffULL },
++                { .nid = 1, .start = 0x10000000000ULL, .end = 0x183ffffffffULL },
++            },
++            .ram = {
++                { .start = 0x00000000000ULL, .end = 0x0000009ffffULL },
++                { .start = 0x00000100000ULL, .end = 0x0007590ffffULL },
++                { .start = 0x000759d1000ULL, .end = 0x00075a0ffffULL },
++                { .start = 0x00076000000ULL, .end = 0x00094c73fffULL },
++                { .start = 0x0009b5ff000ULL, .end = 0x0009fff9fffULL },
++                { .start = 0x0009ffff000ULL, .end = 0x0009fffffffULL },
++                { .start = 0x00100010000ULL, .end = 0x0fc4fffffffULL },
++                { .start = 0x10000000000ULL, .end = 0x183f7ffffffULL },
++                { .start = 0x183f8800000ULL, .end = 0x183faabffffULL },
++            },
++        },
++    };
++    int ret_code = EXIT_SUCCESS;
++
++    /* Dummy firmware interface provider name, use TST for TEST. */
++    numa_fw_nid_name = "TST";
++
++    for ( unsigned int i = 0 ; i < ARRAY_SIZE(tests); i++ )
++    {
++        paddr_t min = ~(paddr_t)0, max = 0;
++        unsigned int j;
++
++        numa_reset_state();
++
++        ram = tests[i].ram;
++
++        for ( j = 0;
++              j < ARRAY_SIZE(tests[i].affinity) && tests[i].affinity[j].end;
++              j++ )
++        {
++            const struct mem_affinity *affinity = &tests[i].affinity[j];
++            paddr_t length = affinity->end - affinity->start + 1;
++
++            if ( !numa_update_node_memblks(affinity->nid, affinity->nid,
++                                           affinity->start, length, false) )
++            {
++                printf("Fail to add NID %u [%" PRIpaddr ", %" PRIpaddr "]\n",
++                        affinity->nid, affinity->start, affinity->end);
++                ret_code = EXIT_FAILURE;
++                continue;
++            }
++
++            min = min(min, affinity->start);
++            max = max(max, affinity->end);
++        }
++
++        if ( !numa_process_nodes(min, max + 1) )
++        {
++                printf("Unable to process nodes\n");
++                print_ranges(tests[i].affinity);
++                ret_code = EXIT_FAILURE;
++                continue;
++        }
++
++        for ( j = 0;
++              j < ARRAY_SIZE(tests[i].ram) && tests[i].ram[j].end;
++              j++ )
++            if ( !test_paddr(tests[i].ram[j].start) ||
++                 !test_paddr(tests[i].ram[j].end) )
++                ret_code = EXIT_FAILURE;
++    }
++
++    return ret_code;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.53.0
 
