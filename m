@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 431C0CD6E55
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2026 15:44:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1323945.1589649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46907CD6E55
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2026 16:52:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1324003.1589671 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wU4oM-0007My-JZ; Mon, 01 Jun 2026 15:44:18 +0000
+	id 1wU5rr-00036j-Dj; Mon, 01 Jun 2026 16:51:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1323945.1589649; Mon, 01 Jun 2026 15:44:18 +0000
+Received: by outflank-mailman (output) from mailman id 1324003.1589671; Mon, 01 Jun 2026 16:51:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wU4oM-0007MW-Du; Mon, 01 Jun 2026 15:44:18 +0000
-Received: by outflank-mailman (input) for mailman id 1323945;
- Mon, 01 Jun 2026 15:44:17 +0000
+	id 1wU5rr-00036c-9b; Mon, 01 Jun 2026 16:51:59 +0000
+Received: by outflank-mailman (input) for mailman id 1324003;
+ Mon, 01 Jun 2026 16:51:57 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger.pau@citrix.com>) id 1wU4oL-00078o-FD
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 15:44:17 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1wU5rp-00036W-MD
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 16:51:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wU4oK-0007hv-Rg
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 17:44:16 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1wU5ro-007rbR-J9
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2026 18:51:56 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <roger.pau@citrix.com>)
- id 6a1da8cc-2eae-0a2a0a5409dd-0a2a450ba75c-16
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:16 +0200
-Received: from [52.101.85.22]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <roger.pau@citrix.com>)
- id 6a1da8cc-212f-0a2a450b0019-346555167c7f-5
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 17:44:16 +0200
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com (2603:10b6:610:24e::14)
- by LV3PR03MB7453.namprd03.prod.outlook.com (2603:10b6:408:1a6::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Mon, 1 Jun 2026
- 15:44:14 +0000
-Received: from CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343]) by CH7PR03MB7860.namprd03.prod.outlook.com
- ([fe80::f5ba:35df:1c9f:b343%4]) with mapi id 15.21.0071.014; Mon, 1 Jun 2026
- 15:44:14 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a1db8a1-2eae-0a2a0a5409dd-0a2a4502d39c-8
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 18:51:56 +0200
+Received: from [202.12.124.149] (helo=fout-b6-smtp.messagingengine.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6a1db8aa-af86-0a2a45020019-ca0c7c95ba89-3
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2026 18:51:55 +0200
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfout.stl.internal (Postfix) with ESMTP id 252051D0004D;
+ Mon,  1 Jun 2026 12:51:54 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-03.internal (MEProxy); Mon, 01 Jun 2026 12:51:54 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 1 Jun 2026 12:51:51 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,226 +52,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=M75WuklhbttYkAJGfpsimMWxVvqQX/NmkLqtQ74Mu2/HbO/oBGvADoTTZ0cBv2TbZpUqRs9wFGMEMdvp1jV/l0atECxSbP+C18fSVdhHE8EilxNFdxZmj169B5VjBlmq6+OHk8wmfyQ4KDGX401qonfPsXHveMYC5yp4ziEv+Yk8sl7Dxj520O/aX0SsU3V/DFyFG6gd/mi50GBpBWZlryzbUv0HA2T2lBqCz2cwV5i9rD7e7+Mn4yqbvyjD+20630nNIb3zGlsInjbLGJfE1DwskFntphw4flWY5zQq3TJTPwBYOEfRdCBvJx2PZs8kDL0J1z1MLUW+6zrDINtEvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gLxPZPhUumrMhLXcS8jOcQqLOD7g9VReX2rfeaQLJt8=;
- b=jYPnB8VUUQaKuL8NjDZ6LS1ANds8LIs+JjUHIWT9rqql9au2MjTQ3F7H6yHgdixCfDV5lrSdfde6i4MhIG3xk8GPQMX4CL/GStbrAnP/J4XRmQGHA/l9gKGDsbLgrnDSblERXBdO3w+0GyXySGNtmsMBWvejc/+4VelwhiHgsBAcYp7dkEDnRyuoscdIGIk5Vk3+0KiJ/fm5F7HuhJjKN0RGxILcSaCokKGAfQsOX+UsE81c+GvI3lpTAxHZaFnUsLvbjvKt7tX/7UZBvioaEEQPcDXaHFjRdp5Jx9Md9WWdgEirKY2mr4BJwrJrmhK3uYrfLki70O74Fzhf829wXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gLxPZPhUumrMhLXcS8jOcQqLOD7g9VReX2rfeaQLJt8=;
- b=B2UrWOgZyvkZo8PXYrvn3bbDvH2H/M3IfPQ3Q4+nf0CKNmpt3dA/wt4Ek8vH3AfxyLz4aoOfxU78CATFTmTlpgStbKps6lQ+40dVLWVkeCWYdkC09zJp9AejMqvF5Eev8vWGZVQK7opFFa7rY1Jo6zwKGR1vpQTt2aTtnORoVz8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm3 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1780332713;
+	 x=1780419113; bh=Bp+9MOScam9lOoXhydIkVSIh4E4kHXVGuRysJxb9gAQ=; b=
+	ROfkr8u6TADcVQiKvPEpzJs3z9VPhb+pCrDSz0MEwQH0qB7BKz+c8+94KsGKeue6
+	wX4OJWaK4SPr+S6PD4+2CrHpbyEIBEhVPCPBz7z+MsJncp5mgj6o0X+5oycw8/6d
+	ftCty3uNKuBG95f7xruSc3IH9GRYaA4ZT2nlOSeNzu8eRGYmt5RCNX+YRboMoWmy
+	UvVk3XhJYvuqNfOVttO71ja2fYZjpUFEQNREr9QFrba9e4fvvg3yAG5l52RVh9lM
+	QTTVN362dYzw23kE8Yqa9FqbrVb4Qc6LIGoBmu9bUqQ2U8DxyYgWafKtAkIwXcvd
+	MBhEk4IMHi2D5h6F4oFZ8A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1780332713; x=1780419113; bh=Bp+9MOScam9lOoXhydIkVSIh4E4kHXVGuRy
+	sJxb9gAQ=; b=OLuUmepe+aT6caXlbf9r4gYaySQwsNL6OliLfpj5MfKHFQbqEdZ
+	hRlZAESfjPgVadMwCvxY4taW8pb18z3LtUtmmnmHpV3VNi2d+dFUCdV65CILb1Dy
+	6Talb7cBrdmOqzFeeEUqIW4HA8P/Tt9EB//PemWz+iEZm8eqvLSRczeOPCrhYnUJ
+	m7HLcwsgwRy/ulLSdEoPVWuingR3edNb28u0Jjwv7AvbvhYpSiw/FOyWTK+/Y5t2
+	oIhwYAIFFx/JWamcFu3p+HyeCcDUZneicPrpsLGD4qppR8SSwsEb+TIIfJ/7lvOe
+	J/rCmkZrNO9qHv6R0jRc6DE4YtssgC6NZDw==
+X-ME-Sender: <xms:qbgdanbXP1KSU-l4-R3zSRMrRleIfpUI4VDwxCXT-iB6Q8L5oLOVCw>
+    <xme:qbgdatSnt3Bg2vR6THoPM76XNC-oy7UgjqmemWYUvdR-Z1-dVdqhzYpyuWTGNoPyb
+    0X8xihviR4ZHh4aJp4V53S1KB39_CJwdGpw4z-HxBvLiKFt>
+X-ME-Received: <xmr:qbgdaiSAfTHIfKV4T6AUBKSsDenK1k9GGcBZmMlb61CURD__Q1Rwk9AflV8v>
+X-ME-Proxy-Cause: dmFkZTF8ZORvIiqa2GF3r95fxIL7C9UupxJFMVBEs9eVzH/hTahm4J2V0yTCVYD8gOmUnr
+    moaZUNsyrJ+Z+Q0dNXg4qoxRe2qHURR6GPUqA3IZ/WpPNrf67x+nmXAEwRyTi7jhpgeOKi
+    EbNA4neG9ciWp9hOtu9xXMBQgIhe24QPbCLVG0N6dJZYREDQ0Ea/KlbhGfa/ZCUgVBZrva
+    vwZwerOoAqwSo78d4QDtUAQdOJsegnDQq3jaKWDRK6j+zeJE/q670nZCGyvRAkmpNa+kiC
+    H+kHUqPW3iP/AJ9wfgEeWamYqTGbSEJ6IcsaiWvEnZN8XfcnasriTC1xIVoJ4rn3Yg4IK1
+    SGFmz22jyvktI/gjDvMQwCZHlzgBmU+6zuHuaYTG2qb20GoTGxVPQbajTDhBce7rlo78qh
+    DhQWye7mWxhSwDVxdExD/xKF3SwIwXX6ofeD+cYVaWm1Hq22QMddjuYyYuht3B6RbuMbhk
+    nthBfbqivTmpYLTeTn7KH6gUY0GwtNDCo+MwNU7kWdq5CjuSKHxaQQDj3I/atjM7Y83Jec
+    hneoTv4/Mmd0TB2wqFkkl0kb+tJjCb8r3bw0gBr583lYQRCQWVQIjr+2gju7Vg/GXmpdRf
+    WejGRtFGHALvC6dymKsTq43aMrQ9R2HXhy8nXmzqwLaQd0/y8eL8ImvkiBRQ
+X-ME-Proxy: <xmx:qbgdapQRYbJP8scUtAaOMZVZe86MqeoC6Mau_MUGgcJcBiN9oXvdhA>
+    <xmx:qbgdav4wpeqk9krgF9cjNnG3xxDX09dUIGd37JXUxurRTY3m3c5oWw>
+    <xmx:qbgdat1pfsTpUCZf7fkVuC_MBqsyIPn0SoW4pqhz5nBu_NDltXzflg>
+    <xmx:qbgdaiDp5NDCMX040B_EZcF4-06UCEhv_dcVbjPfNuTnYy6GBaVdAw>
+    <xmx:qbgdasYWswfVcWey13q_POlySTSrYiViRTAbUvFE1g5gaZFfjsTq53Rw>
+Feedback-ID: i1568416f:Fastmail
+Date: Mon, 1 Jun 2026 18:51:49 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	xen-devel@lists.xenproject.org,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH for-4.22 5/5] xen/numa: fix setup of non-aligned memory affinity ranges
-Date: Mon,  1 Jun 2026 17:43:32 +0200
-Message-ID: <20260601154332.30797-6-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260601154332.30797-1-roger.pau@citrix.com>
-References: <20260601154332.30797-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BN0PR04CA0109.namprd04.prod.outlook.com
- (2603:10b6:408:ec::24) To CH7PR03MB7860.namprd03.prod.outlook.com
- (2603:10b6:610:24e::14)
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
+Message-ID: <ah24pfWb_orPRaJG@mail-itl>
+References: <cover.30e6171ddf1c6a72eadf4af0a77c892d4f18d811.1777898148.git-series.marmarek@invisiblethingslab.com>
+ <13f837cd9f394d3b4eddb4849156b8ed5d06d31b.1777898148.git-series.marmarek@invisiblethingslab.com>
+ <1779458083.8631fc262581453bbf619ec5b2062170.19e4ff78945000f373@vates.tech>
+ <alpine.DEB.2.22.394.2605261201180.182011@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH7PR03MB7860:EE_|LV3PR03MB7453:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1575ac56-c659-450b-6c91-08debff4a1dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|6133799003|22082099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	UJ0bJe0sYLFZRiVoQJme9C8PJtit1ef14PABpI8jZ+NNdpRGvV+npHgAws3JAx5ggQErgrS2OauMb3kGo2Cc25FLs5lG3mGF83X7F15gtBre1cra4cUq4kuyPIajSnqq2LNjOBZIPq7ckooB75EOJyNKNFEd5lP6likFaeI8fsBclCnA8OH2eLL0/24WeKFafUBSes8FVfDn4MPiVGI672bim8Q8qHNDeuJ1tdyRkRaDZ73XdkwkFFZoTVx2IjQbrqZwudFFCyUR0Ll4Z9jw+77VkXuXXYWJmGIe5MqkiG8rsDTRqJsu6+dO7ugtASUSUgSiRtXAjcblToeCeK3/Fg+wTy+8YSPnv0OuDAI7qgQUVucneqgdegkqmhhs/NtwhxzPl5H8ZKEcr+1WvOQwTpizxQ2vOqyzQAFzeWFFDq5iUbID4z4VnvyldGjWZiSsainHbc6smcWKdcTSB3AMGDv5mw7ctWmucbRuLBsieVM9ei+nVrK37un6E3S3hEdV6iwdCzt3MvNfCdILow8YInRny+J4PrEU20SE4PLFcAS+5s2vn8f1SDIwY2obN0x5FqUxpwAxqNE2YZpY8iF3fHUwE4LcG2YkMsV2K+gmVbJHPbVk74PyQtkkjkIn/uw8xWZqpCLcjBetCL8HkEBrBFAGWvOnifGGK1MNFeQllVUYwoHX1m7XBJaT1+PuI7rU
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7860.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(6133799003)(22082099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SUR6cWQ0bnBrYXJpKytZTHVZOW5sU0ZrcmpMMDNsMFZTSXZkK243YmhBaTZs?=
- =?utf-8?B?ZXdxbllJU3ZmY2hod2VlK01FeElNVGhXRXpYVDU2RGFmOWcrNGFFdmZucjJU?=
- =?utf-8?B?T1owY3NwWkpNL0JEREF0cWFYWktzMk9FT0RYWDVFZ1krSWlQQmdaeWJRb0th?=
- =?utf-8?B?dDNpL3JIWTFjRGJZa0VOei9zVnBNOHduVHFodHBZSHJmMm1nUmQvQXl3dHZ6?=
- =?utf-8?B?VFZhdUN1Mk8zYlhmOEJqZGNDMm5CeDRZLys0UTh6VEJWdkN1cXp1S0NjVmp1?=
- =?utf-8?B?NUV3a0FRbVM5T3lJbnpDdCtIM1JBZ3JqOFpwUGZsUnVHL25kLzJQekhtV3pB?=
- =?utf-8?B?U2cvckRXTmltRXprb1JKWFAyRkxQQU1KN1ltcHBTcEZYMHJWb2hUQTRPSC9G?=
- =?utf-8?B?T1VTc0JKSXgvSkQya3BNUFBsMlg3R0YvaysrclFNOFZmc3EvYUxDMGEyUTlC?=
- =?utf-8?B?NGo2Q3Bkd3ZmYWp5TU13bG04WGxYeU5hTnVOSzd4Z0JYdEFjZEhMOUFOWWd4?=
- =?utf-8?B?MWc3RmtnMDZ5NXFlTFk4UGVLNnlSa2xsdFZFc3c0TWJ4a0lORndBYktVWTRx?=
- =?utf-8?B?NkMzbE83eHFyWTVRRHUzUXRlWlI4cmlPcjBaYkxGYWpvbEhzakszUjFZaGpP?=
- =?utf-8?B?aDFJVWdLTmVrWHN1V0xNUm5RSCtiT1paU0NSb0FINXhwSm1PR1h0aWR0eDlK?=
- =?utf-8?B?Nk9oM1lHQ2E0aExJek44dnRrMFYxQWpKNDU2S09mdEE0clpxVFh6dmszb01X?=
- =?utf-8?B?T2lPTDZ3eW9YbTRoVGJ3VTJrY053VWhxK1ZvYUNLWkpNUXQyckRKd3cxMGRF?=
- =?utf-8?B?VDgzdWxIbTlHcFdGWjFFMldENUJMcEtjNEtyY29uNEVFUEtPUGlEUE8vM3RM?=
- =?utf-8?B?S0V5TDRnSnhHMzVTSEZVTWd5RTZBbC9uOERrWjNtT3lwNmV6SldOQko5UHlj?=
- =?utf-8?B?NmlCRG12R2lUQ0hjRTZodnd2QUFmZzUvcmtrMWdmd1JkR2RRSzJlbzQ0UGxY?=
- =?utf-8?B?WE5MUU1zdmxUc3F5NjZKZm91d1I4K0M5bjBlSzhyekJCRXlsQStCUDRMMmF0?=
- =?utf-8?B?ZW50M2xGR0NzR05mQjE3MXRLbUdEbHVoVTkraXY1aEVTTWpMcEt4UHpFaWNQ?=
- =?utf-8?B?M2ZZbHBZL0MwNnJwaHVxUkFINU5mRHE3bmlJN3daS3ZMMU5TOUtYNU1TQURL?=
- =?utf-8?B?U0lEUjcyYTZLSVNRTnZtbUUwQWdBMlV1a3R5WlczNDdyOWR4WFpxM0ZmaG55?=
- =?utf-8?B?UHAxMENVZ3ZEckdVV2crSmFZai80VEZXazBjbmxodHIweDlRTnhFejZwV3hh?=
- =?utf-8?B?S3hVVE5qaURRdmhFV2psTUlSaDk3RmxZeXBmZFI3UkJqUGFBcEFES08wemRK?=
- =?utf-8?B?MERGVzVxVGgxOVBHcDgrRzQxZ3l5ZzBBdktpVVYyVGZVN3NxLzk0UHUraC82?=
- =?utf-8?B?MW9pQWI2R1pUTmhYVzVwc1dKK3F1WkswanQvOHB0NmpNUHpyL1J0WG9kWWs0?=
- =?utf-8?B?ckc5VWR6cllmTFlhbmpJVkRyaVExUEk1V0ZkM0UyYThwZVFRbDRIWFErK25n?=
- =?utf-8?B?dkY4RWtZZXN0MmpadnI3bUMwQUN0Q3pKWi9qbWJhOC9sY3FDMDFyQytJa0Qv?=
- =?utf-8?B?cm1QWU5yMXdnWCtacVJpY0ZZM1VGNUJoeWtLM1Rya2tJWVhueGxtTC9CdTlu?=
- =?utf-8?B?dFFRU2dEWVZnanJ1bjlRbEFDT0dvc0s1R1ZUNXA1ekJEbGtQYWh1S3lzWnBa?=
- =?utf-8?B?MjkyNW5ERXpLa2tKWUJtbWZZTlZVNWdTWFRPUXdUVUVzTkNMQTRGdE5xMTdk?=
- =?utf-8?B?MVZLdVFydGpKTEVDby9JQ2k2ZjZEMnplMDdRQStpdFFmVEJpWXRPOTB1U1VR?=
- =?utf-8?B?ZlE2SDB5V2JjOUdtT2RQMGxxZUxFeFJHWXplZHB1Qk02MlVkNDNSNlBpb0ZY?=
- =?utf-8?B?ZlFlMXJBV0NhU1RLblcvL01hME9IYjhoS1dqNnFNRWIwcE5sQjEyVkN4RElZ?=
- =?utf-8?B?cU9xa2Z5bWlsUVNmZkw5YWNkaFUzVzltY1RWTnlhcHpFaFFxTzBhbnQzTDR4?=
- =?utf-8?B?SGVhZVk3dWI4aHhmNlE1aDIzdUhaQUo0Rnl1VXBqMWZvUkN6NGJnMUkyRFdP?=
- =?utf-8?B?cE4rZ1BHVXQreW1mNHlNVTFsZVR1eDRpVURGQi8rdFMvWXhhK0hMOEEzK0lH?=
- =?utf-8?B?NUdlZnpLdnpOTy9Zb1hDa0dEQS85YjM4ckM5Z2J4SFJlSGl0NG5LdEcrTWFo?=
- =?utf-8?B?U3o5UXR4L0p4KzNhZ2pwMkhLYW1pZzBpUmdWM2l2emsranhCV0dpNEd1Z0Uv?=
- =?utf-8?B?MWRVdW9HbzhFcklZWTRIL0JSWTJIT3M3b3hQTlVqcDcxMUF5MGU1UT09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1575ac56-c659-450b-6c91-08debff4a1dc
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7860.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 15:44:14.3372
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3YsYoe4fTTdBvC25oSKWqBxcH74TYvnrKYs7mCojV8Chj4EilVY17ZgTa3d8WQoDZx9I2ddvD4rN5RpyQwcJuQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7453
-X-purgate-ID: tlsNG-42698a/1780328656-23374F3B-1A02A1E0/0/0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="JyKwHnCynqH97rP0"
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.22.394.2605261201180.182011@ubuntu-linux-20-04-desktop>
+X-purgate-ID: tlsNG-720697/1780332716-8117D161-D5057401/0/0
 X-purgate-type: clean
-X-purgate-size: 5449
+X-purgate-size: 2276
 
-The logic to populate memnodemap in populate_memnodemap() assumes that all
-ranges are aligned to the hash shift, this however is only true for the
-first address in a memory affinity node.  Any subsequent ranges belonging
-to the same node might not be aligned to the hash shift value.
 
-Such lack of alignment causes issues to the logic in populate_memnodemap(),
-as then the tail of the range might not be properly accounted for and setup
-in memnodemap.  Fix this by forcing the start address of all regions to
-be aligned to the hash shift; if such alignment causes a region overlap it
-would always be between regions on the same node, and hence will never
-cause setup issues of the memnodemap array.
+--JyKwHnCynqH97rP0
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 1 Jun 2026 18:51:49 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	xen-devel@lists.xenproject.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH test-artifacts v4 13/13] Setup ssh access to test systems
 
-Introduce two additional test cases to the user-space NUMA setup unit
-testing, first test case is the native memory affinity and memory map of
-the system where this issue was found, second test case is a simplification
-to demonstrate the original problem more clearly.
+On Tue, May 26, 2026 at 12:02:23PM -0700, Stefano Stabellini wrote:
+> On Fri, 22 May 2026, Anthony PERARD wrote:
+> > On Mon, May 04, 2026 at 02:35:52PM +0200, Marek Marczykowski-G=C3=B3rec=
+ki wrote:
+> > > For this add also bridge package, so xenbr0 can be configured with
+> > > /etc/network/interfaces.
+> > > This allows extracting more logs out of the test system.
+> > >=20
+> > > Create empty /etc/network/interfaces, so the 'networking' service sta=
+rts
+> > > cleanly even if no interfaces are configured this way. This is
+> > > necessary, as dropbear service depends on networking.
+> > >=20
+> > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethi=
+ngslab.com>
+> >=20
+> > Reviewed-by: Anthony PERARD <anthony.perard@vates.tech>
+>=20
+> Since Anthony has reviewed the entire series, on the whole series:
+>=20
+> Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
-Fixes: 1666086b0044 ("x86/NUMA: improve memnode_shift calculation for multi node system")
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- tools/include/xen-tools/common-macros.h |  1 +
- tools/tests/numa/test-numa.c            | 45 +++++++++++++++++++++++++
- xen/common/numa.c                       |  8 ++++-
- 3 files changed, 53 insertions(+), 1 deletion(-)
+Thanks.
 
-diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-tools/common-macros.h
-index 9e2799178235..88b4a0e5a693 100644
---- a/tools/include/xen-tools/common-macros.h
-+++ b/tools/include/xen-tools/common-macros.h
-@@ -69,6 +69,7 @@
- #endif
- 
- #define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
-+#define ROUNDDOWN(x, a) ((x) & ~((a) - 1))
- 
- #define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
- #define MASK_INSR(v, m) (((v) * ((m) & -(m))) & (m))
-diff --git a/tools/tests/numa/test-numa.c b/tools/tests/numa/test-numa.c
-index bced68d4d7f1..8122e63a88ed 100644
---- a/tools/tests/numa/test-numa.c
-+++ b/tools/tests/numa/test-numa.c
-@@ -158,6 +158,51 @@ int main(int argc, char **argv)
-                 { .start = 0x183f8800000ULL, .end = 0x183faabffffULL },
-             },
-         },
-+        /* System with unaligned affinity memblock. */
-+        {
-+            .affinity = {
-+                { .nid = 0, .start = 0x00000000000ULL, .end = 0x000afffffffULL },
-+                { .nid = 0, .start = 0x00100000000ULL, .end = 0x0fc4fffffffULL },
-+                { .nid = 0, .start = 0x10000000000ULL, .end = 0x103ffffffffULL },
-+                { .nid = 1, .start = 0x10400000000ULL, .end = 0x203ffffffffULL },
-+            },
-+            .ram = {
-+                { .start = 0x00000000000ULL, .end = 0x0000009ffffULL },
-+                { .start = 0x00000100000ULL, .end = 0x000165bffffULL },
-+                { .start = 0x00016600000ULL, .end = 0x0001aa1dfffULL },
-+                { .start = 0x0001aa1f000ULL, .end = 0x0001aa53fffULL },
-+                { .start = 0x0001aab8000ULL, .end = 0x0001aac6fffULL },
-+                { .start = 0x0001aacc000ULL, .end = 0x0006f3fefffULL },
-+                { .start = 0x00075dff000ULL, .end = 0x00075dfffffULL },
-+                { .start = 0x00076000000ULL, .end = 0x000a7ffffffULL },
-+                { .start = 0x00100010000ULL, .end = 0x0fc43ffffffULL },
-+                { .start = 0x0fc45000000ULL, .end = 0x0fc47ffffffULL },
-+                { .start = 0x0fc49000000ULL, .end = 0x0fc4bffffffULL },
-+                { .start = 0x0fc4d000000ULL, .end = 0x0fc4d3bffffULL },
-+                { .start = 0x0fc4f000000ULL, .end = 0x0fc4f0fffffULL },
-+                { .start = 0x10000000000ULL, .end = 0x203fd7fffffULL },
-+            },
-+        },
-+        /*
-+         * Reduction of the issue above: introduce an unaligned middle region
-+         * with regards to the hash shift.
-+         */
-+        {
-+            .affinity = {
-+                { .nid = 0, .start = 0x00000ULL, .end = 0x00fffULL },
-+                /*
-+                 * The offset of the region below is not aligned with the hash
-+                 * shift: the shift calculation only takes into account the
-+                 * start of node address.
-+                 */
-+                { .nid = 0, .start = 0x01000ULL, .end = 0x04fffULL },
-+                { .nid = 1, .start = 0x14000ULL, .end = 0x14fffULL },
-+            },
-+            .ram = {
-+                { .start = 0x00000ULL, .end = 0x04fffULL },
-+                { .start = 0x14000ULL, .end = 0x14fffULL },
-+            },
-+        },
-     };
-     int ret_code = EXIT_SUCCESS;
- 
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-index 8544a1598218..8b2f29597f30 100644
---- a/xen/common/numa.c
-+++ b/xen/common/numa.c
-@@ -396,7 +396,13 @@ static int __init populate_memnodemap(const struct node *nodes,
- 
-     for ( i = 0; i < numnodes; i++ )
-     {
--        unsigned long spdx = paddr_to_pdx(nodes[i].start);
-+        /*
-+         * Round down start address: if start is not aligned to the memnodemap
-+         * chunk size the tail remainder might not be added.  Overlaps created
-+         * by rounding will fall into the same NUMA region.
-+         */
-+        unsigned long spdx = ROUNDDOWN(paddr_to_pdx(nodes[i].start),
-+                                       1UL << shift);
-         unsigned long epdx = paddr_to_pdx(nodes[i].end - 1);
- 
-         if ( spdx > epdx )
--- 
-2.53.0
+I seem to have forgotten the "test-artifacts" subject tag (adding now).
 
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--JyKwHnCynqH97rP0
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmoduKUACgkQ24/THMrX
+1yzSzAf/cl2bQdr4zpb2k0MhiPhGWceR70SBbSuG4jRy9QOo5T5nvj0cjn0BK/Lw
+W/brm9G0INq47RZ3VbPnhQ6Rla4VMoaKFRcpZ8XY5K5CPUfgywXTAW/ziiwcOTG3
+LRyAErfktwyesTGFand9TIHuoOBRYRYIHZ50xA7/gv70hmGo+7Zoqjf9FzkJH6SF
+L8Z0mC0BvpWQaJvAk4OvSc0YtWFJM2LyJ55/xMuyUA3vwHxdaAILf97y4bIe9Ll4
+VpQGQmj/FAgh5Ej9uzDsaFua2Atyp3BPkZ7eh2OaiIcbIa7/VbhNF1NWN/78DI9R
+K1DlnTUaA6jl2kE4y6ievNZ1w6ajjQ==
+=6kMR
+-----END PGP SIGNATURE-----
+
+--JyKwHnCynqH97rP0--
 
