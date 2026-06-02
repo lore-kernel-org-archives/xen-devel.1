@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4973CD6E69
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 17:46:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325329.1590824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D995DCD6E60
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 17:46:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325330.1590830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUTCE-0003sU-Hk; Tue, 02 Jun 2026 17:46:34 +0000
+	id 1wUTCE-0003uy-T8; Tue, 02 Jun 2026 17:46:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325329.1590824; Tue, 02 Jun 2026 17:46:34 +0000
+Received: by outflank-mailman (output) from mailman id 1325330.1590830; Tue, 02 Jun 2026 17:46:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUTCE-0003sN-Ew; Tue, 02 Jun 2026 17:46:34 +0000
-Received: by outflank-mailman (input) for mailman id 1325329;
+	id 1wUTCE-0003uE-Km; Tue, 02 Jun 2026 17:46:34 +0000
+Received: by outflank-mailman (input) for mailman id 1325330;
  Tue, 02 Jun 2026 17:46:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wUTCD-0003sB-Lw
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wUTCD-0003sA-Lw
  for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 17:46:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUTCD-000Wkd-1I
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 19:46:33 +0200
+ id 1wUTCC-000Wkd-GL
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 19:46:32 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1f16e4-e002-0a2a0a5209dd-0a2a4505893a-26
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 19:46:33 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ id 6a1f16e4-e002-0a2a0a5209dd-0a2a4505893a-24
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 19:46:32 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1f16f8-aaa8-0a2a45050019-d1558032b5db-3
+ id 6a1f16f8-aaa8-0a2a45050019-d155802fd542-3
  for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 19:46:32 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4906869f0cbso110976635e9.1
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49068493267so68071765e9.1
  for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 10:46:32 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b0e19b0bsm88089975e9.6.2026.06.02.10.46.31
+ 5b1f17b1804b1-490b0e19b0bsm88089975e9.6.2026.06.02.10.46.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 02 Jun 2026 10:46:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -53,41 +53,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=citrix.com; s=google; t=1780422392; x=1781027192; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HHASvQZs+zF2C1SU8gUqZSMwu6r/GwtcIhf6JxzqkdA=;
-        b=nnrGo4CvCVufqq5XPfvb0xn9dN6pfXGn1/dhFwPsUTXddfICPHRM8HoHJp58Cp4VMD
-         wUYwvUmComH69LJRhchZAW69WBE0rELSlm2rjT8wlSjVHSqV0neDYU14CMgGKqFrtw0C
-         REkJYOQ083lBxBydKqH/n9o0kI5zV2gC/vo34=
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1vQU8SMDliXCdanFS8zXxLohLWQBLw69EX+A7rkuK70=;
+        b=hfFWzRBa2FA+343c0hE9hi0VRCm+p9SpEr4c00svy/6m3Mz7XuTXV77+C4Ifpzbc3i
+         vdWk1fUJ3v8JNAF8vr7zIE7eaT6pA++wuVDhqfwPOrUKjlIPvsPs8zmp5Cbt0OZogx3X
+         zKAVAl1cMlu3ksjC8XL09TbQ7oiPPVG2NAWac=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20251104; t=1780422392; x=1781027192;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=HHASvQZs+zF2C1SU8gUqZSMwu6r/GwtcIhf6JxzqkdA=;
-        b=skNVOd+gjRLbUA0+frKmC7o0jNadcijGy1C5YjxL5fKJ6Mt+WkzWwQFP2LbCBg4AWl
-         jWTjPQMShzPvbff9S5jZTZnfNUCXqD9hB5A5wo2vPsO2exdKrJOpEbx160bUC0UGi/DN
-         rE1Mh30YIzIh0ZFFOYhz+vYDBCXFyaC5/rRb9AGJHzbaG3uwZATs9W+SwmP21Rw4uTC1
-         D2+YPqZW8fKsmRagm7cXb8LqSmL9ZzfRVOcJ1B0p5f61Cab1wbKUtYdlAGoKnKAzsI20
-         qsu6zrvFhkakk5B2EP0V/Vjpss91cMitaAplyDN29Gu0pimWnc8LyWe8vxQcKpc+SFP2
-         pAmQ==
-X-Gm-Message-State: AOJu0YxJYtGuXdVO9xxx3OOLhX2ReljxkGL9iSKzsdhmEdwqXC8W198p
-	3XlWr+VHiKNkWsG4x49lgifF3mhewWzwXH1GvzuyG5Soh2Vhmd9vJSfel0xuoKtrGLzemPMJcV2
-	KXn0G
-X-Gm-Gg: Acq92OFLmLB0nDxfh7lxUX45+fgJq9rfQhk2RzkbP+7NSy677y9nuge7VacPapM3vzN
-	EBn1CvOgMvs2S2/J2t1td4lATmJgpYWqOPa09+iRgOiSQtIUWWDvGicv7rry71SfmUr1A0YE/ic
-	mycNvPPfsA+XtTnLqn/JfJYuGzWX+uEDxgQp2oLQWT8YnWFX4WdA+xvtnuTSBISd0IzSArSOlOZ
-	uY83TIdp4p6dDhNTk+gNsF+GjfEMcSnecX8SkkhAZzO9MkmzD6zM3jhtf9PZ2mOHeoTTwd3tiBS
-	c7Skjq4NgJwXOAErR+epaTQrwYWUyBe37fbIcM3DGafQtjvB7GFdmXnrpXQSNQmyVRh33xpYG6M
-	UBEqldCBiVlPlfV+MODqZvNPC6e5e47QkJPbOr9KKyhBoHbLBE+EPuvHygeAlTLxlyFNMKW/ncL
-	T+2o5gHD/TL8knHpCukZmBIInZHu1og4OENzq3TOxcq769izNIWmVdgbHsDuG5FJclffbKp80Zx
-	k/aoXC82O0YKeU=
-X-Received: by 2002:a05:600c:3593:b0:490:5466:8591 with SMTP id 5b1f17b1804b1-490b5072a72mr13299655e9.12.1780422392129;
-        Tue, 02 Jun 2026 10:46:32 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1vQU8SMDliXCdanFS8zXxLohLWQBLw69EX+A7rkuK70=;
+        b=rI8leDvV9Kh4a47XAJGXbJQiAI8mJorAMtfy/h6myYJwbt4YBU8nEsTy94h4ib37zX
+         m5teMa/ehPLWkfFufFn5PtMW2PadLj3S/NIB83Gp41whv9Tj17r/unlNGeHRdmMgKVWE
+         lMG8vssEoJCbBp2aVGOEqWwdcHbbVYc+MMhlo3M1HH2X4zkdW18Eq8QTXMlgKsoU5bhN
+         dO5Vi0bbVvsqpOF09oIItbU9AhqdTW10d/2E0nN71GxG+xFr1YbugHRcRbHGX5RAUNes
+         pFlZ9RUn+n9Bt8NhEdXRsfFHZPsCLBTcLfHInBzHqB/wfjoYR69qVz9xybXHx9bnx8d9
+         Vm6w==
+X-Gm-Message-State: AOJu0YwEIMxlaPZQOZVSfMs2dd4zRA/rDUca0bpWV7ezvk7EGjxrDgsc
+	lmI33axwGZq/dacgbdtEOcOW3UtJY5CREn7zI1h9Iew2jODyT3E57xLh1RoCruBIOWsNzQaGfs2
+	OYn6z
+X-Gm-Gg: Acq92OGpq7bY+JHYHsP7R2ayPImoDTnmR+Y6anzPmVBnwcjJS7ERC4OOZt0JhvKuKmW
+	hObWQ7TYExZTPrefxRxfYQRUZBChoAxQOcp/UAqDzXSMzmRU5NduQrxHDdgh/951awRnaNU/t0D
+	Ugp9nGLgyTHJ0s97soCYd+IBeZVOtkpCRckwal8KDNYC76wU83q1/V8RWlvFzA3xitLh6AcdhXg
+	Cz+331kGeCzJjt/GM/z+8gKwyEhTZUKjc/Wwf1MOuUOIF/15Qips0ha96MYZFwUv/5DbSyD0APw
+	eiWQL6XMdWOPjuVwEiwJMUsigI83ISF8vuFWe/5NvPj7lznbB3EQkrdgjAae3Esa7UWqjRLlCCU
+	Zt150EaHcBk7FhmLTFnlAdNlu0+8qIsNe1kcm8MQRcxlSu/juCwiv5imSpEqeriJuOwojug65xy
+	+GNpRRDec8Y6AHANGcT/iYTds+iBv1Qh6GadJch20DGtNAVAz/rtpFHwMKlaGNsZ9khqiLMpOvI
+	H/QqzL89TAWe6lLlGhvaJq/Aw==
+X-Received: by 2002:a05:600c:6304:b0:490:9804:afdc with SMTP id 5b1f17b1804b1-490b50a669amr10176205e9.23.1780422391440;
+        Tue, 02 Jun 2026 10:46:31 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -96,51 +95,28 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"consulting @ bugseng . com" <consulting@bugseng.com>,
 	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH 1/2] x86/shadow: Deviate multi.h as being included multiple times
-Date: Tue,  2 Jun 2026 18:46:28 +0100
-Message-Id: <20260602174629.2649448-2-andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.22 0/2] Finish fixes for eclair-x86_64-allcode
+Date: Tue,  2 Jun 2026 18:46:27 +0100
+Message-Id: <20260602174629.2649448-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260602174629.2649448-1-andrew.cooper3@citrix.com>
-References: <20260602174629.2649448-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1780422392-D857B443-6F64AA09/0/0
+X-purgate-ID: tlsNG-c201ff/1780422392-DBD67443-7FEDD0E2/0/0
 X-purgate-type: clean
-X-purgate-size: 1109
+X-purgate-size: 439
 
-Introduce a range to search for the devation marker.
+Depends on Jan's "[PATCH v3] x86/PV: drop a local variable from
+pv_emulate_gate_op()" which is ready to go in but not committed yet.
 
-This resolves a MISRA D4.10 violation.
+Andrew Cooper (2):
+  x86/shadow: Deviate multi.h as being included multiple times
+  CI: Mark eclair-x86_64-allcode as blocking now that it's clean
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: consulting@bugseng.com <consulting@bugseng.com>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
+ automation/gitlab-ci/analyze.yaml | 1 -
+ xen/arch/x86/mm/shadow/multi.h    | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-v2:
- * Use a range to search for the devation marker.
-
-I can't for the life of me get adjusting the deviation config to work.
----
- xen/arch/x86/mm/shadow/multi.h | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/xen/arch/x86/mm/shadow/multi.h b/xen/arch/x86/mm/shadow/multi.h
-index fc86d7a8d9cd..3f2562d25e9b 100644
---- a/xen/arch/x86/mm/shadow/multi.h
-+++ b/xen/arch/x86/mm/shadow/multi.h
-@@ -8,6 +8,7 @@
-  * Parts based on earlier work by Michael A Fetterman, Ian Pratt et al.
-  */
- 
-+/* SAF-8-safe inclusion procedure left to caller */
- extern int
- SHADOW_INTERNAL_NAME(sh_map_and_validate_gl1e, GUEST_LEVELS)(
-     struct vcpu *v, mfn_t gl1mfn, void *new_gl1p, u32 size);
 -- 
 2.39.5
 
