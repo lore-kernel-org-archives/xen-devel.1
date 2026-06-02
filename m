@@ -4,44 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D995DCD6E60
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 17:46:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325330.1590830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C486CD6E5D
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 18:49:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325359.1590851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUTCE-0003uy-T8; Tue, 02 Jun 2026 17:46:34 +0000
+	id 1wUUAm-0005Dc-AX; Tue, 02 Jun 2026 18:49:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325330.1590830; Tue, 02 Jun 2026 17:46:34 +0000
+Received: by outflank-mailman (output) from mailman id 1325359.1590851; Tue, 02 Jun 2026 18:49:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUTCE-0003uE-Km; Tue, 02 Jun 2026 17:46:34 +0000
-Received: by outflank-mailman (input) for mailman id 1325330;
- Tue, 02 Jun 2026 17:46:33 +0000
+	id 1wUUAm-0005DV-7e; Tue, 02 Jun 2026 18:49:08 +0000
+Received: by outflank-mailman (input) for mailman id 1325359;
+ Tue, 02 Jun 2026 18:49:06 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wUTCD-0003sA-Lw
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 17:46:33 +0000
+ (envelope-from <bp@alien8.de>) id 1wUUAk-0005DP-1K
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 18:49:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUTCC-000Wkd-GL
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 19:46:32 +0200
+ id 1wUUAj-00CbGC-Ao
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 20:49:05 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1f16e4-e002-0a2a0a5209dd-0a2a4505893a-24
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 19:46:32 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ (envelope-from <bp@alien8.de>)
+ id 6a1f2577-2eae-0a2a0a5409dd-0a2a4505ae22-40
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 20:49:05 +0200
+Received: from [65.109.113.108] (helo=mail.alien8.de)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1f16f8-aaa8-0a2a45050019-d155802fd542-3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 19:46:32 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-49068493267so68071765e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 10:46:32 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
- [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b0e19b0bsm88089975e9.6.2026.06.02.10.46.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 10:46:31 -0700 (PDT)
+ (envelope-from <bp@alien8.de>)
+ id 6a1f25a0-aaa8-0a2a45050019-416d716ce830-3
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 20:49:05 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 382AF40E00BA; 
+ Tue,  2 Jun 2026 18:49:04 +0000 (UTC)
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id EI8TXzxJ_DQh; Tue,  2 Jun 2026 18:48:54 +0000 (UTC)
+Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::16])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7E21D40E015D;
+ Tue,  2 Jun 2026 18:48:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,71 +57,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1780422392; x=1781027192; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1vQU8SMDliXCdanFS8zXxLohLWQBLw69EX+A7rkuK70=;
-        b=hfFWzRBa2FA+343c0hE9hi0VRCm+p9SpEr4c00svy/6m3Mz7XuTXV77+C4Ifpzbc3i
-         vdWk1fUJ3v8JNAF8vr7zIE7eaT6pA++wuVDhqfwPOrUKjlIPvsPs8zmp5Cbt0OZogx3X
-         zKAVAl1cMlu3ksjC8XL09TbQ7oiPPVG2NAWac=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780422392; x=1781027192;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1vQU8SMDliXCdanFS8zXxLohLWQBLw69EX+A7rkuK70=;
-        b=rI8leDvV9Kh4a47XAJGXbJQiAI8mJorAMtfy/h6myYJwbt4YBU8nEsTy94h4ib37zX
-         m5teMa/ehPLWkfFufFn5PtMW2PadLj3S/NIB83Gp41whv9Tj17r/unlNGeHRdmMgKVWE
-         lMG8vssEoJCbBp2aVGOEqWwdcHbbVYc+MMhlo3M1HH2X4zkdW18Eq8QTXMlgKsoU5bhN
-         dO5Vi0bbVvsqpOF09oIItbU9AhqdTW10d/2E0nN71GxG+xFr1YbugHRcRbHGX5RAUNes
-         pFlZ9RUn+n9Bt8NhEdXRsfFHZPsCLBTcLfHInBzHqB/wfjoYR69qVz9xybXHx9bnx8d9
-         Vm6w==
-X-Gm-Message-State: AOJu0YwEIMxlaPZQOZVSfMs2dd4zRA/rDUca0bpWV7ezvk7EGjxrDgsc
-	lmI33axwGZq/dacgbdtEOcOW3UtJY5CREn7zI1h9Iew2jODyT3E57xLh1RoCruBIOWsNzQaGfs2
-	OYn6z
-X-Gm-Gg: Acq92OGpq7bY+JHYHsP7R2ayPImoDTnmR+Y6anzPmVBnwcjJS7ERC4OOZt0JhvKuKmW
-	hObWQ7TYExZTPrefxRxfYQRUZBChoAxQOcp/UAqDzXSMzmRU5NduQrxHDdgh/951awRnaNU/t0D
-	Ugp9nGLgyTHJ0s97soCYd+IBeZVOtkpCRckwal8KDNYC76wU83q1/V8RWlvFzA3xitLh6AcdhXg
-	Cz+331kGeCzJjt/GM/z+8gKwyEhTZUKjc/Wwf1MOuUOIF/15Qips0ha96MYZFwUv/5DbSyD0APw
-	eiWQL6XMdWOPjuVwEiwJMUsigI83ISF8vuFWe/5NvPj7lznbB3EQkrdgjAae3Esa7UWqjRLlCCU
-	Zt150EaHcBk7FhmLTFnlAdNlu0+8qIsNe1kcm8MQRcxlSu/juCwiv5imSpEqeriJuOwojug65xy
-	+GNpRRDec8Y6AHANGcT/iYTds+iBv1Qh6GadJch20DGtNAVAz/rtpFHwMKlaGNsZ9khqiLMpOvI
-	H/QqzL89TAWe6lLlGhvaJq/Aw==
-X-Received: by 2002:a05:600c:6304:b0:490:9804:afdc with SMTP id 5b1f17b1804b1-490b50a669amr10176205e9.23.1780422391440;
-        Tue, 02 Jun 2026 10:46:31 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"consulting @ bugseng . com" <consulting@bugseng.com>,
-	Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: [PATCH for-4.22 0/2] Finish fixes for eclair-x86_64-allcode
-Date: Tue,  2 Jun 2026 18:46:27 +0100
-Message-Id: <20260602174629.2649448-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=alien8 header.d=alien8.de header.i="@alien8.de" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1780426134; bh=gxy9i9FFvFhWXdjT/xh3AljV8dg0OtulHYJ71ySt4sI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=KxTBmQNRLIIDTgn03xIkm4JiSfQNgj4A53/DBf8Zk1l19kTr8JH26hpk0m323uYtq
+	 Zq0chQprcuU2EQQea9dMk6LPH127tKWCJ2siaRA9UNCYF2dWqTyxHmaBa6Zvr8N5jN
+	 GRsYm07tvh7Bp9y4Q6MOCfrKjCalhjq2fPaiNKC/3Z5Ux07OAsQEI5GHIcR49B36qT
+	 4Z2SYNYXdMma4Hh+HmAawzmNM8InIzUVdv59RBbtNAbFOIAxbFiA/y5xGMAEBMWoKr
+	 oyDaenykAXiqbS7CZOUvYteJX3sA2y3c9p61f4L52ZZzVo4saJxB+gpLPlVh/5oGYe
+	 s5PBS0GlkaGoHcZ1umxUtYFoCDVLItfXH7+gVinw1ALbFYun8JdaJe1Q+lcNkoH2yC
+	 R9ZUM3L2l1yBaah4kdJCuYBW6A7/nkn02olv3eiBEWhUTFuwHfDFHgztVD5plCLOyb
+	 JWKGlCs0u16IXiWKeJeR8/DVjkH+UW8RMwNJKJJ9tm/XEg5wcarpinzk37bGcLcxib
+	 AgghQjW+PNxXhgTvhWpN23Z7h1u/eDqHEU7bmb2BInWoFSKQQqaemNiUinSlMHEuZI
+	 LvyCelgGfBHWttRrQkHDjxkLZlrSvRx2GhaD3p5L07cX1kvmD/eqfC4aIgP+EaO/19
+	 c8GMhlrBSEvwrXnV9S3lKOqU=
+Date: Tue, 2 Jun 2026 11:48:23 -0700
+From: Borislav Petkov <bp@alien8.de>
+To: Penny Zheng <penny.zheng@amd.com>
+Cc: x86@kernel.org, ray.huang@amd.com, Jason.Andryuk@amd.com,
+	stefano.stabellini@amd.com,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Yazen Ghannam <yazen.ghannam@amd.com>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 0/2] x86/amd_node: harden amd_smn_init() against Xen
+ dom0 topology
+Message-ID: <20260602184823.GKah8ld2QJLm28xoa9@fat_crate.local>
+References: <20260506055528.476493-1-penny.zheng@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1780422392-DBD67443-7FEDD0E2/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260506055528.476493-1-penny.zheng@amd.com>
+X-purgate-ID: tlsNG-c201ff/1780426145-E1D9D443-1E3BDAC7/0/0
 X-purgate-type: clean
-X-purgate-size: 439
+X-purgate-size: 1508
 
-Depends on Jan's "[PATCH v3] x86/PV: drop a local variable from
-pv_emulate_gate_op()" which is ready to go in but not committed yet.
+On Wed, May 06, 2026 at 01:55:17PM +0800, Penny Zheng wrote:
+> While booting a recent linux-next kernel as a Xen PVH dom0 on x86, the kernel
+> oopses very early during fs_initcall:
+> 
+>   Oops: divide error: 0000 [#1] SMP NOPTI
+>   RIP: 0010:amd_smn_init+0x188/0x2e0
+> 
+> Followed: on a kernel that survives the divide, it will fail by a NULL pointer
+> dereference from the first SMN consumer (amd_pmc_probe -> amd_smn_read).
+> 
+> Root cause
+> ==========
+> 
+> To prevent each dom0 vCPU from looking like an SMT sibling of another
+> vCPU, Xen synthesizes guest x2APIC IDs as vcpu_index * 2. This spacing every
+> vCPU's APIC ID by 2 can push the synthesized IDs past the package-field
+> boundary. Linux then infers more "packages" and therefore more AMD
+> nodes via amd_num_nodes() than the platform actually has, while the
+> PCI-side host-bridge scan correctly reports the number of root complex.
 
-Andrew Cooper (2):
-  x86/shadow: Deviate multi.h as being included multiple times
-  CI: Mark eclair-x86_64-allcode as blocking now that it's clean
+Does that work?
 
- automation/gitlab-ci/analyze.yaml | 1 -
- xen/arch/x86/mm/shadow/multi.h    | 1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+diff --git a/arch/x86/kernel/amd_node.c b/arch/x86/kernel/amd_node.c
+index 0be01725a2a4..0f1ad1883883 100644
+--- a/arch/x86/kernel/amd_node.c
++++ b/arch/x86/kernel/amd_node.c
+@@ -249,6 +249,9 @@ static int __init amd_smn_init(void)
+ 	u16 count, num_roots, roots_per_node, node, num_nodes;
+ 	struct pci_dev *root;
+ 
++	if (cpu_feature_enabled(X86_FEATURE_HYPERVISOR))
++		return 0;
++
+ 	if (!cpu_feature_enabled(X86_FEATURE_ZEN))
+ 		return 0;
+ 
+
+Totally untested ofc.
 
 -- 
-2.39.5
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
 
