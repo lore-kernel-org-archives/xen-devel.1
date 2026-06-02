@@ -4,43 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 297E5CD6E57
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 16:11:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325235.1590724 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC35CD6E60
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 16:14:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325244.1590733 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wURi3-0002lj-Ct; Tue, 02 Jun 2026 16:11:19 +0000
+	id 1wURkd-0003R2-Ow; Tue, 02 Jun 2026 16:13:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325235.1590724; Tue, 02 Jun 2026 16:11:19 +0000
+Received: by outflank-mailman (output) from mailman id 1325244.1590733; Tue, 02 Jun 2026 16:13:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wURi3-0002lc-AG; Tue, 02 Jun 2026 16:11:19 +0000
-Received: by outflank-mailman (input) for mailman id 1325235;
- Tue, 02 Jun 2026 16:11:17 +0000
+	id 1wURkd-0003Qv-LW; Tue, 02 Jun 2026 16:13:59 +0000
+Received: by outflank-mailman (input) for mailman id 1325244;
+ Tue, 02 Jun 2026 16:13:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wURi1-0002lQ-ET
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 16:11:17 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Zhao.Jiaqing@amd.com>) id 1wURkb-0003Qo-VI
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 16:13:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wURi0-00CobM-CX
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 18:11:16 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1wURkb-00FG85-Bs
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 18:13:57 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a1f007f-2eae-0a2a0a5409dd-0a2a45028210-42
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 18:11:16 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a1f00a4-af86-0a2a45020019-d1558031b049-3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 18:11:16 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-490afc47455so8585665e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 09:11:16 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-148-111.play-internet.pl.
- [109.243.148.111]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b5625d03sm535185e9.2.2026.06.02.09.11.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jun 2026 09:11:14 -0700 (PDT)
+ (envelope-from <Zhao.Jiaqing@amd.com>)
+ id 6a1f012c-e002-0a2a0a5209dd-0a2a4503dd8a-40
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 18:13:56 +0200
+Received: from [52.101.61.4]
+ (helo=DM1PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <Zhao.Jiaqing@amd.com>)
+ id 6a1f0143-672d-0a2a45030019-34653d04d8fb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 18:13:56 +0200
+Received: from PH0PR07CA0089.namprd07.prod.outlook.com (2603:10b6:510:f::34)
+ by DM3PR12MB9436.namprd12.prod.outlook.com (2603:10b6:8:1af::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Tue, 2 Jun 2026
+ 16:13:51 +0000
+Received: from SN1PEPF000397B0.namprd05.prod.outlook.com
+ (2603:10b6:510:f:cafe::a4) by PH0PR07CA0089.outlook.office365.com
+ (2603:10b6:510:f::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Tue, 2
+ Jun 2026 16:13:51 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SN1PEPF000397B0.mail.protection.outlook.com (10.167.248.54) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.5 via Frontend Transport; Tue, 2 Jun 2026 16:13:51 +0000
+Received: from zjiaqing-dev.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 2 Jun
+ 2026 11:13:48 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,225 +64,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780416676; x=1781021476; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=kZCWKpFU0Slsi/y/84Q91F1zdbL72w77c1tDe5aTnAk=;
-        b=Itr5d8doOU1zlYZGh5rALEhEEcOpqurMueVeoXTT6BLfbY4MzC6OwDAX17Uee1Zg8P
-         QVV27A9+F6A36kOYLrmsMhP7umrI9iJtx5BOGpV0GageGgyoVv01bMzKr6yDiUZX3uK0
-         HxpeX7L22BVM0Lv54OGYD5mMQc3bGevpDZGVZPI+v2dYl2pG73+91FhZiktHK8fzQrmw
-         QlJdVa4d5sr7FzVD0svQw32+UcXqaA71dmI1LL3tGT5OYnLkt/zqjDIBNz3BKaaA9whQ
-         6ScDZokhbLSI9HcS977vWRKvmCpYZ8JPNj2V+TwZ5xrM7z/a3muQMDxD1kEaeTYbo+mJ
-         OxwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780416676; x=1781021476;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kZCWKpFU0Slsi/y/84Q91F1zdbL72w77c1tDe5aTnAk=;
-        b=fPr5Qi5Wi8vbq9BlZzKvS7diVX3ln3J1nkw0F+jbgt2ZEv4iQnRjG3yEChbmiazf9C
-         7bC5Z7BA3zwCx1GChx8thKAxJVHMUKUsDA7oI1IPngaWXXlXKJnQ36NwuqOc1bMIIABD
-         GgSypDi3TntsKIkRFs2hJM5al2Yg8iv24xEr9GGDgoYmhLYNCW8/FHP0A5lVKpuJ2fKz
-         leR2m2ctuwuSHPAaBjIAH108t9kW0YHPlhfMdVRy/tHNOjwiAx1PJ6hcNmo0oIOrNcYF
-         IN34wuqV3iQ/zZJLd/WpA+qT12RIPgRMn6gTWKywUJl+ab3QoXM9JumF7+rRHct1bn9+
-         3Igg==
-X-Forwarded-Encrypted: i=1; AFNElJ8HSmp7FPq7pINxO4JAGAXysvfigO4nPwI4wF+31APq3s/qpZH8CvzbRHsOD2cZW8wIxql2Mi+fMqQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YxN0zO+oYHCKBOkmXA97BJ5Ckm5gv/3eg18sygHerkvkU7LgihT
-	JXGWhfSBomC80d+gkkIY0vYfULxZzvkaooe/mDfd/ZQLkXOj3Zj2nRl8
-X-Gm-Gg: Acq92OHakjVLL2jOlH0b3rkR4aasXY8OjmSezM1BgcFdI+UPjO45s+7LOxNAj1PZaRw
-	InIj+QNkdZwAa/wzHHOxvfDZfx7Lycry+wHScV+yoxTLm2DuByiIOwZm6oavJvDIRjIlTLTa/sw
-	vXQYcHYudb6nTKA8OKhldKhXaK7exvUGXrTT7Z1JcqXx1MYI5O0fSi0okGS27fpI9+Iid+VIE7v
-	4hjRgYLps7jLoWN6rG1TFkNKT2i18dTbyyRcCmriSCeJo3xtOygGNRyRMuuK3ZW7WEhIxY+BILQ
-	4jI347AzY8m0JGBcpS3ZtBM3/vFN+Py0DiVM6UgbZXufeF7oOcHo1bUmPnsQ4CS1JpqqtYgDMkx
-	wyjuBlVDw439+LWWtkE6dp7VXu5ztfqHm2Pr5+pe1rY3zEq85gPKssEWLFr6fW4OeU+7mWYY51L
-	Oa2FrAPkMHpJULgu1wBDuUWP5l5oOjLolkhUeiK6o/4tDV28QL9Ufj9HRo0mvaPzUEPBXYqDfDy
-	qZeSGWtifK80rIWZTaMLPyy5iU=
-X-Received: by 2002:a05:600c:3b14:b0:490:44eb:c1e0 with SMTP id 5b1f17b1804b1-490b50a3657mr6553975e9.21.1780416675411;
-        Tue, 02 Jun 2026 09:11:15 -0700 (PDT)
-Message-ID: <fb1b1194-5855-49d9-99fc-d35a3038833c@gmail.com>
-Date: Tue, 2 Jun 2026 18:11:13 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CEC+S1LnzucJm+jsTMOqmzS4bH6by/5g4MttIT7+sFD0R/3ZBOH4ljU7BtJxWseCB/R8BvoJNDrO1xBg2J9X7aqo12WFlRsUrPoeTTCn72kx3S6ZQblKcKIj5CkMdm45nvXHXw50OY9KQtCi16KhKqLOYrwyZOfXIMjaEsYuI8901gnXOPXEwp+Ba79D/9Ag8YO4dn2z8rc4QEG/szsZKat+6h2AtuhO5/oTteWo7Z3N2TGqgTaSV0l9ZiH9QUqMRecta5svXKQyJ2MMU1NYtYwBy71Q270BlqdCVYy/Cf5bERSDo0lyDKcu1nC3+VEEjs2xU9/lNlcRbV38xvuycg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/5wjExFgrECeZXo0LIdaPSLBa1YW2XcC2RuGP6B0jas=;
+ b=pkjSGwVkDZ/R5fwkNfI33BwxtC92RvhKI/YdB1ps8ufM9Fdx+81Xrh0iLhOFiPlRwGB5QbDar2CG6/Cve3MWHAWLj/UXcpgkB1hf7RwPZnRRRgZvCceAZ6b5K9xYNoniMmrEWbB5JM2aVYqNtmfpRTTMdH2M7jG492qv5uDqdWnVqphh2dv+ghO+iyNNmO9gt1Oqnsr6kT5+E4Q5kNcyDIhpnh72bzQCnIXzmb2q9mua0bCqDin9TWUMoQMSUMGVFxHh079wDc9e0FEAQ1tejM60iL3HOq0aRi3aAvKO9kTNxj14CFgmc7YRxMCPGzw/yBi39Mid0tTv/n7e5v0TOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/5wjExFgrECeZXo0LIdaPSLBa1YW2XcC2RuGP6B0jas=;
+ b=Czcyq1sKF3oj7ijx2aN+4bqlJj/cKSmmlL2GLqO8iPVKFZVp4a0KnJNw83bOejItHWn519HYDHZk/qwGyUZoKH7mni22hhNZ2slb3HZDLaKsBvf760WF1t5nG2AKPRdVZpOojqTP4GRXzCVKQ6s7YU1uGXkUuTjS698cZFOUefo=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+Subject: [PATCH v5 1/3] ns16550: properly initialize booleans in uart_param[]
+Date: Wed, 3 Jun 2026 00:13:20 +0800
+Message-ID: <20260602161322.1039349-2-Zhao.Jiaqing@amd.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260602161322.1039349-1-Zhao.Jiaqing@amd.com>
+References: <20260602161322.1039349-1-Zhao.Jiaqing@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] xen/domain: fix UBSAN null pointer dereference of
- d->shared_info
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1779712171.git.oleksii.kurochko@gmail.com>
- <04dd784b6b9a4dfca9a313ea8802d8d514d65021.1779712171.git.oleksii.kurochko@gmail.com>
- <3aef7763-aea3-496a-8c18-d3659f590373@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <3aef7763-aea3-496a-8c18-d3659f590373@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1780416676-B0979161-281B9044/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 6292
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B0:EE_|DM3PR12MB9436:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3d5cf7b-8e04-405e-f307-08dec0c1ef85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700016|82310400026|376014|18002099003|11063799006|22082099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	p1PomzSsby15stbCKIWzrBKMl33iPhJ5lrWDFyEVX2FKoiF/neQFaDjl6S30TpcjKBbJaFmqKIiMqsTUKTHlq1X+5Y9mKXZTUh0F6guVeyzt0vYUPNMDpMZx1Tnu7qrx7rMfIr0XDw+alrpFN5hjUHx8bLof8upm3fs2UI9L21j+svqAXNKchuIgWxMpIEQVqWOK3NW7dO/zRjpk3/5uua77enV0Io6e96GycoUixyp9ZO7LLp/Wgs3SunJFugMF2OjF4WeC438pbwAaF7ZCN61SZ2KdFuFY/Pisvldb9nB2QN7/rkAyg5fcRuJrhqZXu+usbOE2taj8SmuUw0wg5jb1p4O7z4E2hC/l+lE4IHi7D3O+YvQOCKRUJT+7yCiLA8JhIpmI2lLiVu6p68e0RPFDZbmaUjU1M2c9e06GGfN8CWLkRpslKcPfW/BRbQ+LiQL7rvO4MVsW7maptEjKEDFTyD7mQZOHZPNquI7ns6Fz9odJUcvHgLtjlGY+AeblI/FfKvDpD8ANO7ocTEO8nCso8LDFYr7cHug5acBzLvHzTYw/LYmGvLSPAJ651EFJlAAkGbrZHQ6ltqOHNBCuTOPk1463DrqHHJsWM639pjSTS3po2hLn7PLc/01a5wdBayuxAwrYfKcFVTipj+CnY1WWNmnRk57l3OLAlNxtRrx1DTXw0/xK4IeXH8rP+FXYmPGay5HMDiwuMkU9khlgcpc+OuiTnYCsesz1cjnb1nw=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(18002099003)(11063799006)(22082099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	t512x3lGK5WudAovyL7kdJG9qQnLEIXopT6ppQY20fS/6o/hUOuOF+vbJdH+FGzpJZKlIe0GncAwdUD4aXtvsgK8u/YtfuOgcVOcRs/exXAV7aRriIExGEgW7FEU3P6HSp5VMNDkMZy6+k+chPvXStFqFaMBZH9MXJN7tGFSc5bdSonvB+8+dkyXuLCHdKJQQXaLluNFvGQWTtqcoA1psEPSvH23/FNC01rMpJdwLro7ZW9Y5bxRLv+1eaVE4EJaFp8AXwcdOoexH8tTWGZ46q0ZDINKA9FzJYme6EY86nuHcdauxyGoOa3E47tD585uuLAxLX27I/yNhYcNGZPjAToZfQe7nN4R/x1HVnsSaUQA0gXnKiFZFL5oliajBYZ6bEdVmBxgW0HKvIPYl6sqZbT9WGUo1t/TwtH1BgKNWgWbRwfonhH7ZbnqtlVdsnr2
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2026 16:13:51.2304
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3d5cf7b-8e04-405e-f307-08dec0c1ef85
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF000397B0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR12MB9436
+X-purgate-ID: tlsNG-33051d/1780416836-36547938-6C50B3FA/0/0
+X-purgate-type: clean
+X-purgate-size: 3928
 
+.bar0 and .mmio in struct ns16550_config_param are booleans, hence they
+should be initialized with "true", not "1". No functional change.
 
+Signed-off-by: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+---
+ xen/drivers/char/ns16550.c | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-On 6/2/26 1:19 PM, Jan Beulich wrote:
-> On 25.05.2026 15:20, Oleksii Kurochko wrote:
->> It is legal to have d->shared_info equal to NULL for architectures which
->> support only the FIFO ABI for event channel management.
->>
->> Having d->shared_info == NULL leads to a UBSAN issue on such architectures:
->>    UBSAN: Undefined behaviour in common/domain.c:325:10
->>           member access within null pointer of type 'struct shared_info_t'
->>
->> vcpu_info_reset() maps v->vcpu_info_area.map to the per-vcpu slot inside
->> the domain's shared_info page for vcpus with id < XEN_LEGACY_MAX_VCPUS,
->> and falls back to dummy_vcpu_info for vcpus beyond that limit.
->> Extend the existing fallback condition to also cover the case where no
->> shared_info page has been allocated, mapping the vcpu to dummy_vcpu_info
->> instead. This is the correct behaviour: dummy_vcpu_info already serves
->> as the safe stand-in for vcpus that have no usable shared_info slot.
->>
->> Additionally, if an architecture supports only the FIFO ABI, setup_ports()
->> should be updated to avoid a NULL pointer dereference of d->shared_info,
->> since in that case there will be no pending events in
->> shared_info->evtchn_pending and the pending flag of the FIFO event channel
->> does not need to be set to true.
->> update_domain_wallclock_time() accesses d->shared_info via shared_info()
->> macro. On architectures that do not allocate a shared_info page (currently
->> RISC-V, which runs guests in dom0less mode without the PV ABI), this causes
->> a NULL dereference. The early return is safe: if there is no shared_info
->> page, there is nothing to update. For all existing architectures (x86, ARM)
->> that do allocate it, the guard is never taken and behavior is unchanged.
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> ---
->> Changes in v2:
->>   - Update commit message + subject.
->>   - Drop Fixes tag.
->>   - Handle migration of pending events from 2L and FIFO ABIs when arch
->>     support only FIFO ABI.
-> 
-> What does this item describe? On an arch supporting only FIFO, how could
-> evtchn need migrating from 2L?
-
-Agree this item is inaccurate.
-
-evtchn_init() always calls evtchn_2l_init(d) first 
-(event_channel.c:1627), so every domain starts with 2L regardless of 
-arch (of course, it is just initialization of evtchn_port_ops which 
-aren't really used when only FIFO is supported).
-
-setup_ports() is called during the guest-initiated 2L→FIFO transition 
-(event_fifo.c:637), not at arch init time. There is no arch that 
-supports "only FIFO" as a starting state and that is why it is needed to 
-guard setup_ports() against NULL d->shared_info when migrating 2L 
-pending state to FIFO even 2L wasn't really used by an arch with only 
-FIFO support.
-
-I Will drop this item to not confuse.
-
-> 
->>   - Update the commit message.
->>   - Protect some other places in common code from NULL pointer deref of
->>     d->shared_info.
-> 
-> What I'm still missing is the description clarifying why other uses don't
-> need guarding (or that there simply are no other uses, which - however -
-> I doubt).
-
-I will add an explicit paragraph mentioning that the 2L ops in 
-event_2l.c are unreachable for a domain with no shared_info.
-
-The only place which isn't covered now is  domctl.c:108 
-(virt_to_mfn(d->shared_info)) is only reached via the 
-XEN_DOMCTL_getdomaininfo path and
-as RISC-V doesn't use it now it could be left as it is what also could 
-be added to commit message.
-
-> 
->> --- a/xen/common/domain.c
->> +++ b/xen/common/domain.c
->> @@ -320,7 +320,7 @@ void vcpu_info_reset(struct vcpu *v)
->>       struct domain *d = v->domain;
->>   
->>       v->vcpu_info_area.map =
->> -        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS)
->> +        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS && d->shared_info)
->>            ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
->>            : &dummy_vcpu_info);
->>   }
-> 
-> At the example of this: The extra conditionals are dead code on x86 and
-> Arm. While the status of the respective Misra rule is still uncertain
-> for Xen, imo we'd be better off avoiding the introduction of new dead
-> code. Which in turn means we may need some kind of abstraction to have
-> these extra conditionals in place only for arch-es not supporting
-> shared-info at all.
-
-What about then add config HAS_SHARED_INFO to xen/common/Kconfig and then:
-
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index e64b7df9b704..58442ce1f952 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -319,10 +319,14 @@ void vcpu_info_reset(struct vcpu *v)
-  {
-      struct domain *d = v->domain;
-
-+#ifdef CONFIG_HAS_SHARED_INFO
-      v->vcpu_info_area.map =
--        ((v->vcpu_id < XEN_LEGACY_MAX_VCPUS && d->shared_info)
--         ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
--         : &dummy_vcpu_info);
-+        (v->vcpu_id < XEN_LEGACY_MAX_VCPUS)
-+        ? (vcpu_info_t *)&shared_info(d, vcpu_info[v->vcpu_id])
-+        : &dummy_vcpu_info;
-+#else
-+    v->vcpu_info_area.map = &dummy_vcpu_info;
-+#endif
-  }
-
-  static struct domain *alloc_domain_struct(void)
-diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 59d9bf4c7ec0..3d7104100f0b 100644
---- a/xen/common/event_fifo.c
-+++ b/xen/common/event_fifo.c
-@@ -562,9 +562,10 @@ static void setup_ports(struct domain *d, unsigned 
-int prev_evtchns)
-
-          evtchn = evtchn_from_port(d, port);
-
--        if ( d->shared_info &&
--             guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-+#ifdef CONFIG_HAS_SHARED_INFO
-+        if ( guest_test_bit(d, port, &shared_info(d, evtchn_pending)) )
-              evtchn->pending = true;
-+#endif
-
-          evtchn_fifo_set_priority(d, evtchn, EVTCHN_FIFO_PRIORITY_DEFAULT);
-      }
-diff --git a/xen/common/time.c b/xen/common/time.c
-index 1ee49a8b0d13..da8403949102 100644
---- a/xen/common/time.c
-+++ b/xen/common/time.c
-@@ -94,8 +94,9 @@ void update_domain_wallclock_time(struct domain *d)
-      uint32_t *wc_version;
-      uint64_t sec;
-
--    if ( !d->shared_info )
--        return;
-+#ifndef CONFIG_HAS_SHARED_INFO
-+    return;
-+#endif
-
-      spin_lock(&wc_lock);
-
-Thanks.
-
-~ Oleksii
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 878da27f2e..ed4e29ec25 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -758,7 +758,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = (UART_LSR_THRE | UART_LSR_TEMT),
+-        .mmio = 1,
++        .mmio = true,
+         .max_ports = 1,
+     },
+     [param_oxford] = {
+@@ -768,7 +768,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .mmio = 1,
++        .mmio = true,
+         .max_ports = 1, /* It can do more, but we would need more custom code.*/
+     },
+     [param_oxford_2port] = {
+@@ -778,7 +778,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .mmio = 1,
++        .mmio = true,
+         .max_ports = 2,
+     },
+     [param_pericom_1port] = {
+@@ -787,7 +787,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
++        .bar0 = true,
+         .max_ports = 1,
+     },
+     [param_pericom_2port] = {
+@@ -796,7 +796,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
++        .bar0 = true,
+         .max_ports = 2,
+     },
+     /*
+@@ -809,7 +809,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
++        .bar0 = true,
+         .max_ports = 4,
+     },
+     [param_pericom_8port] = {
+@@ -818,7 +818,7 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 16,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
++        .bar0 = true,
+         .max_ports = 8,
+     },
+     [param_exar_xr17v352] = {
+@@ -827,8 +827,8 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 256,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
+-        .mmio = 1,
++        .bar0 = true,
++        .mmio = true,
+         .max_ports = 2,
+     },
+     [param_exar_xr17v354] = {
+@@ -837,8 +837,8 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 256,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
+-        .mmio = 1,
++        .bar0 = true,
++        .mmio = true,
+         .max_ports = 4,
+     },
+     [param_exar_xr17v358] = {
+@@ -847,8 +847,8 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 256,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
+-        .mmio = 1,
++        .bar0 = true,
++        .mmio = true,
+         .max_ports = 8,
+     },
+     [param_intel_lpss] = {
+@@ -857,8 +857,8 @@ static const struct ns16550_config_param __initconst uart_param[] = {
+         .reg_width = 1,
+         .fifo_size = 64,
+         .lsr_mask = UART_LSR_THRE,
+-        .bar0 = 1,
+-        .mmio = 1,
++        .bar0 = true,
++        .mmio = true,
+         .max_ports = 1,
+     },
+ };
+-- 
+2.53.0
 
 
