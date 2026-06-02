@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA4ACD6E60
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 12:30:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1324916.1590419 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B98CD6E64
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 12:34:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1324922.1590428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUOGH-0003SZ-7j; Tue, 02 Jun 2026 12:30:25 +0000
+	id 1wUOJu-00040W-N3; Tue, 02 Jun 2026 12:34:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1324916.1590419; Tue, 02 Jun 2026 12:30:25 +0000
+Received: by outflank-mailman (output) from mailman id 1324922.1590428; Tue, 02 Jun 2026 12:34:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUOGH-0003SS-4x; Tue, 02 Jun 2026 12:30:25 +0000
-Received: by outflank-mailman (input) for mailman id 1324916;
- Tue, 02 Jun 2026 12:30:23 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wUOJu-00040P-KG; Tue, 02 Jun 2026 12:34:10 +0000
+Received: by outflank-mailman (input) for mailman id 1324922;
+ Tue, 02 Jun 2026 12:34:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wUOGF-0003SM-HN
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 12:30:23 +0000
+ (envelope-from <jbeulich@suse.com>) id 1wUOJt-00040J-N7
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 12:34:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUOGE-00857q-Tl
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 14:30:22 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wUOJs-003dD2-9h
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 14:34:08 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a1eccdb-e002-0a2a0a5209dd-0a2a4505c6e6-26
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 14:30:22 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a1ecdb6-bab6-0a2a0a5309dd-0a2a4501e892-38
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 14:34:08 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a1eccde-aaa8-0a2a45050019-d155802cc541-3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 14:30:22 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-490ae94a89eso14457575e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 05:30:22 -0700 (PDT)
+ id 6a1ecdbf-c1f2-0a2a45010019-d1558032c885-3
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 14:34:07 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-490a76757e5so19132405e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 05:34:07 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b0e88fdesm67332375e9.14.2026.06.02.05.30.21
+ ffacd0b85a97d-45ef354bb62sm31560900f8f.19.2026.06.02.05.34.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jun 2026 05:30:21 -0700 (PDT)
+ Tue, 02 Jun 2026 05:34:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1780403422; x=1781008222; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1780403647; x=1781008447; darn=lists.xenproject.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=2KBv5uO2ztxtyUJM6aKgCnkl3X/WD9NrViNsDXoc/cM=;
-        b=VCgEAdNGENWTBBsImmAMQUkqOZWvyNi08J/xMZSzhclGwOxnxmKIA/sXI++Uf7TAnp
-         rDQjQ97Ii71jooXQFTpg7phLT08zc+A7dwNAyGvLTF3H7Ky7OlPbQC4+n+ABaZNgVhvw
-         i0ffrLh6CGaSblxcjFhmxTs95v1N4T7IwRfUNUonhbEr0MIq6SIvz6KaRkiVtXKzJWzv
-         duJta1mjPGDDUJSSh4xe5+VApy9XLNH3FHwFVRBg1rCkbBwJxpGwwnhdLpbHQ+F3XkO3
-         SLeNimX+Qo8pKXyok9iIpl4wcsL+FU8fdOJ8oIwvA1iERdKUsV6NxMjRsOOTzLHF/u6Q
-         7Gcg==
+        bh=XxRAOdqncPw7XcxaRahzadj5xAHP7JVO+s9v1bLI3SY=;
+        b=SVuuAidJhdcdNjXLI6t3MnT9Mp8GTA3jcVMYQr4in41oleJcJC4CNRN62Lzgwrrdio
+         4M+06n98KgedqNMvOof6xhGJ3hP9c6//hT00jRkhgdfuV/rL23uHfrv6UvHsrPJcJWtj
+         I2UFSwITc9aP7QZqeIE5q9d7sMoDUmurKaG6ILg5v8SVBSlkkcwCsaa8aFHDhKJ3cT7x
+         ql+yJtU6aqBZ3FG0toIj5VlLTJucpqHWegeIg5bN6SC00xL1IP4oYAgjs6vXKV6gFQWn
+         TN9hPFb5t3/3pH3MbpT8gYl+rJ3nKgSxlscvyJx+VNfVVmZ9A/fxoQeUY4Zk/h7xpQkU
+         omsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780403422; x=1781008222;
+        d=1e100.net; s=20251104; t=1780403647; x=1781008447;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2KBv5uO2ztxtyUJM6aKgCnkl3X/WD9NrViNsDXoc/cM=;
-        b=EBddj+adlzGVfCMSZdFb4SnN2BPmBCFtSM4vzfAPNt34s4qU1sbqQ1scqPj9M6jiLk
-         lTKVSsRgRHA4ZvmaYhH1dvXc6qDkBL0BXpSiBkoxYVzxEEdEZ27cuy3qbY1QPb4Sd6oM
-         Aim1Qzmln04QxkNWuX1ETJ1uvbE8B2mY48AJL7eDk/7nNZek+nGURGdXoGq4H4aMRn4W
-         qnaRLA3Y9LfeVzKPriymZJmmD44GndYLjJveBn17W2Y/kG+KqFT7/JqgVWPOY73PD9gI
-         kS1GsTj9AJ6eDytdBokdbz8J6bM7So0JW9ecNjDazOukg2CaYmonkKmF92+bFUXoAUTB
-         CfLQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/Nd7JfBN5Hq5aw4X75XOj01cqSGm6Am8rZF2b3ScGoPQP6NT65B5w/ZdbLVU5RuLnIb0EXzaojBjQ=@lists.xenproject.org
-X-Gm-Message-State: AOJu0Yx56zz3nVo3tVBrzSeEG8bWNVXjLdTxN7W5xH1njLsHVuFymYvL
-	Tg1zoUOrlYm4cCYQljiKOsNX6DWbrXUmX0MaM7hZqMOdDpeQ0O7TvvGXFS8P1kyBHQ==
-X-Gm-Gg: Acq92OEd0dzezsd5puB06yri4ZNGHbFuxmCm0jPVGoCf/3XexevALvXc5zkgdIuQI1h
-	2mQlgZKyFcNz4srEaW44ExXE/ZWH6YF1XmyJsiYG42do1moUuoS9Kka5/V8pHa6rFOpXPdcSW9D
-	ijvNgiRzeMlLaAzhXktQdIiKA+U93d5FBfhF3wYsLo2MYN9AOBGgaTmKG30Rw7xbfBcbBocStOP
-	DsuP/afX19T0HUmJDTXEZdJ3DX95APH9rMfRFYSlE7hSne7z2MztjKCK6y8el2aH4nbZE5eR7sO
-	mC6w4RoXCyoDuWXjMmNNr2eTDF8fuXJ4RmPAdvVocEXZWvpBu6s52AG6miZx2rzFC3n6Gb2+GTM
-	Dr5HjZp4LYB2bWKPVJQzitQUUHKqDULAtwN/szrSTaOHq1rag56Qi+IgQ6OcdagAbXGjSAk64m1
-	/BxiTfyiSqhjoNFyKKjAu8FNLjdBNS7SvM/fCy1CnftCiURyHDfCZHI4o6TyIv3eY+c0hDqXdvJ
-	IIr/dNMj6iCxxyhNVcq57pdjA==
-X-Received: by 2002:a05:600c:870c:b0:490:b2a6:8c2b with SMTP id 5b1f17b1804b1-490b2a68d7cmr38688625e9.10.1780403422013;
-        Tue, 02 Jun 2026 05:30:22 -0700 (PDT)
-Message-ID: <4cdee2ea-8673-4280-8b62-c95485cbcc35@suse.com>
-Date: Tue, 2 Jun 2026 14:30:28 +0200
+        bh=XxRAOdqncPw7XcxaRahzadj5xAHP7JVO+s9v1bLI3SY=;
+        b=kQlE47w7+AhbeTGGlkzJAOnCEZqvxi2a2QvBg6d4DTtfr90f932JHMHtaegL3V6iu7
+         LHEfoSHzYxC2vDXJ2bypKoGPDnmWku8UTNSKSqZ6zqh9dyx0no7y3xPmiH2WFAuPsegW
+         o16iylClQNJWRML2JRoN5jL26UuARxOtbMLxHvLawJtSmHkQrNcUyHYZe3k6VuOZf4kw
+         AECH7gyQfP5Z90lwnXcHR0hc4r6oTwH8zlUnv8uKoPTRgzcMHuxZpNoqKKIkesgkQUhk
+         a4wbV3a/92seAUEYB5ZkBsJxSK1TxgNiwPB1ap1qwoRulkuiXp2AUQKyiuiVb7REEx3x
+         ez8Q==
+X-Forwarded-Encrypted: i=1; AFNElJ+a4TTFBIZKK5wC3K5HsbM0iTbwuBPgoj2tUaIaSiMoNM396R0vy+cOeX6TFVM/PhnKGdY1978CSks=@lists.xenproject.org
+X-Gm-Message-State: AOJu0YyUkDjPgYoyDrrcbM5J38ECFJuA26NsLWmNF5nuiw9lWW7RgZvW
+	+UbbeQaXox7E5S0n18FBhhE/jMRCkVH4D3I1FhLYKfyf61Z2p67d/ilt8zxZLbALuXneNwSIemS
+	Hlfk=
+X-Gm-Gg: Acq92OG0iWvquormFaz+LzINcey9V7mziw7kSrmNzVK1ZTHngNcarNi4GMzbiSPxoDQ
+	h0MrDlgI8bXMfH9AdXlzOFpFl/+dT3FFC8iIgvvaPpfIZifF7lASGj9uTaVVG3LytOzUrpDiEr/
+	vEmZfcKKZgnFgVP2OXaT0/1ogc+LG3ErqFo5ggS6R7lVfxSUI38l4WdzPnI1COn6eD9Nz+uZpch
+	k1Iq8XxyJYM3wK3cAdWMGYR3N8Zjn8xqcKRJLaUsItz+NPO/YYyFUHI1ea0fI1oRKRUmiI0hZcT
+	LZDuuB7K6FWQsd5iCBT64L6WDNwhROJXzma/J8ne7hOPcmgCqsQsAyrfqHFVTVfQYQgVlPg9ec2
+	8JLfjKhkgjinWAxBfJ6STtlSTu1WjUXpHWim+CenPn7gKoiM74m7/quMIC9qSiTbNl/bt3xVym8
+	1GSLmLGhK+iKj7bral1l+hr/68sYZ9TaYThyw/quSyxi5T0IhkPpsQnqRaijIaQZVat5eTUBP1s
+	BDQYbxrEf1t++HCzx467nsvwQ==
+X-Received: by 2002:a05:600c:8582:b0:490:51e9:deba with SMTP id 5b1f17b1804b1-490a293b7c1mr219476425e9.27.1780403647145;
+        Tue, 02 Jun 2026 05:34:07 -0700 (PDT)
+Message-ID: <979ceb84-f254-4cbf-a33c-8d4557a12b11@suse.com>
+Date: Tue, 2 Jun 2026 14:34:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] xen/mm: Normalize per-domain page counters, >16 TiB
- per domain
-To: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-References: <cover.1780058608.git.bernhard.kaindl@citrix.com>
+Subject: Re: [PATCH] xen/efi: Use blexit() instead of BUG_ON() in read_file()
+To: =?UTF-8?Q?Szymon_Aceda=C5=84ski?= <accek@invisiblethingslab.com>
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, xen-devel@lists.xenproject.org
+References: <20260602122441.2961974-1-accek@invisiblethingslab.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,50 +128,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cover.1780058608.git.bernhard.kaindl@citrix.com>
+In-Reply-To: <20260602122441.2961974-1-accek@invisiblethingslab.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1780403422-D8145443-01E39937/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1780403647-AD1ADFF4-61F6180D/0/0
 X-purgate-type: clean
-X-purgate-size: 1996
+X-purgate-size: 833
 
-On 29.05.2026 14:43, Bernhard Kaindl wrote:
-> Summary of a comment by Jan Beulich motivating this submission:
->> Considering that systems (and hence guests) only ever get larger, we
->> should consider to normalize per-domain page counters to unsigned long.
+On 02.06.2026 14:24, Szymon Acedański wrote:
+> Follow-up to 880e40b187aa ("xen/efi: Fix boot from a device without
+> a file system"), which added a BUG_ON() guard in read_file().
 > 
-> This series enables supporting guests >16 TiB in the future
-> once the system support for machines >16 TiB is implemented.
+> But as Jan pointed out, before ExitBootServices BUG_ON()
+> is not functional. It results in a hang with no message.
 > 
-> 1. xen/mm: Normalize common per-domain page counters to unsigned long
-> 2. x86/mm: Normalize X86 per-domain page counters to unsigned long
-> 3. xen/mm: Static memory: Widen assign_pages(nr) to unsigned long
-> 4. xen/mm: Static memory: Widen domstatic plumbing to unsigned long
-> 5. xen/mm: device-tree: Widen static page counts to unsigned long
-> 6. xen/arch/x86/dom0_build.c: Extend the upper limit for Dom0's max_pages
-> 7. tools/libs/stat/xenstat.c: Extend the "no maximum" sentinel for max_pages
+> On the other hand blexit() prints a message and returns back
+> to the bootloader.
 > 
-> This series is based on the NUMA claim sets v7 series:
-> https://lists.xen.org/archives/html/xen-devel/2026-05/msg00363.html
-> 
-> Suggested-by: Jan Beulich <jbeulich@suse.com>
-> Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
-> 
-> Bernhard Kaindl (7):
->   xen/mm: Normalize common per-domain page counters to unsigned long
->   x86/mm: Normalize X86 per-domain page counters to unsigned long
->   xen/mm: Static memory: Widen assign_pages(nr) to unsigned long
->   xen/mm: Static memory: Widen domstatic plumbing to unsigned long
->   xen/mm: device-tree: Widen static page counts to unsigned long
->   xen/arch/x86/dom0_build.c: Extend the upper limit for Dom0's max_pages
->   tools/libs/stat/xenstat.c: Extend the "no maximum" sentinel for
->     max_pages
+> Link: https://lore.kernel.org/xen-devel/bb0f007e-697e-4501-97ea-3b59cf494ec6@suse.com/T/#m4725c8cbc0946a5533aea03fc240267ef139648d
 
-Btw, I have no copy of this last patch in may mailbox. Going from the
-list archive, imo using ULONG_MAX is as bad as UINT_MAX: There'll be the
-same issue again when the field type changes another time. This really
-needs abstracting properly, imo. Yet then I'm not a toolstack
-maintainer ...
+While Linux uses Link:, as per sending-patches.pandoc we don't. It wants
+to be Reported-by: instead, and there wants to be a Fixes: tag.
+
+> Signed-off-by: Szymon Acedański <accek@invisiblethingslab.com>
+
+With the above properly sorted:
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
