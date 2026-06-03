@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C851CD6E64
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 08:53:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325896.1591258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B981CCD6E55
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 08:54:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325915.1591278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUhM6-0003OD-9J; Wed, 03 Jun 2026 08:53:42 +0000
+	id 1wUhN4-0004pu-0F; Wed, 03 Jun 2026 08:54:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325896.1591258; Wed, 03 Jun 2026 08:53:42 +0000
+Received: by outflank-mailman (output) from mailman id 1325915.1591278; Wed, 03 Jun 2026 08:54:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUhM6-0003Nc-2z; Wed, 03 Jun 2026 08:53:42 +0000
-Received: by outflank-mailman (input) for mailman id 1325896;
- Wed, 03 Jun 2026 08:53:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wUhM4-0003L5-Bh
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 08:53:40 +0000
+	id 1wUhN3-0004pn-Tp; Wed, 03 Jun 2026 08:54:41 +0000
+Received: by outflank-mailman (input) for mailman id 1325915;
+ Wed, 03 Jun 2026 08:54:41 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1wUhN2-0004pc-VX
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 08:54:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUhM3-006GVP-OU
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 10:53:39 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wUhN2-006N2H-Bx
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 10:54:40 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1feb8e-e002-0a2a0a5209dd-0a2a450ac73c-26
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:53:39 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1feb93-56b3-0a2a450a0019-d155802da550-3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:53:39 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-490b3e03939so3652785e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 01:53:39 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
- [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b7c6b966sm24070335e9.2.2026.06.03.01.53.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 01:53:38 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a1febba-5cb7-0a2a0a5109dd-0a2a450cd138-44
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:54:40 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a1febcf-62f1-0a2a450c0019-d1558034e5dc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:54:40 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-490b4a8e28bso8090485e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 01:54:39 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490b79d64e8sm32676405e9.0.2026.06.03.01.54.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Jun 2026 01:54:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,228 +53,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1780476819; x=1781081619; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=w38Yjl39w+6P4RkuP/+W/4L2yeNf72EBMIuJEUD/P7o=;
-        b=R9bwjgl7k1Xl5kEe1Q6UPbX2RhhBioOCLWyOXTZZn/zi76FHc99LYcR49+wIuX1W8q
-         rA1B3ARTsQcvBDhhzitKUt+HmbWRA528TRAEkbYse5fPTbyTwRkFZ6JnsapKeOkzXamf
-         WinV+Y2+hpWSuSkH90h2SPJabNQB/6w2Bt1hM=
+        d=suse.com; s=google; t=1780476879; x=1781081679; darn=lists.xenproject.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=MvCg0eeCMW6aRP6vqfCPBGQJAFMK+FvjHRVTwGL3U2I=;
+        b=e5PV1IbrcdPnra6WNLJKf3xXLr5zuWNUMtv7tez+jsgqWG/DovcwpEtq2Wg52JYspK
+         d3lQSXqgdahaIu1RXkkquNA777VeYyiccoDHlUg8ThRJslCEmRp1UkJKC8HEJpW4AkaT
+         hoYmfYGq1WYy9bu0GwHdoAvuTIIc2+q3JMIznGp/m3h+u3OUHNREbxmZa8BNeIGH2k1L
+         xlTzUFsrgP1rTCkMA1ArlkCVAIrmmnd2nyCFb5UgtOmKHXvVRU1Nv8N6XYx3DT29UbO1
+         6zhgC0t+BkHAj+FnLdFVmiz7EghU8BY/r99oruHItSeed/R1awednfW/xbfb08oqr4Bn
+         nw6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780476819; x=1781081619;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=w38Yjl39w+6P4RkuP/+W/4L2yeNf72EBMIuJEUD/P7o=;
-        b=WIWkHERV33QAV1EnILeqGrP+PugI7OyUJIFaWSeBYyxtPgk0UITuGomqygE+VtIYag
-         iKzzZ5j1jHjGWtW/Usn//L6WKhCIU4U+FICSe0l+Ed01/J3jr5sBiMkIzm7uF6vmVg6H
-         Ml7w9Z07QDnWysV/4IxQ+CKgHqhmXfibsaVdxtUnDLQnEwkt/Nqmn/0NMXOOr7oa9mcs
-         OBj0vwVrBrtAqwIXIiguiH+BKW1zJMqRmCYre/5GxpGb8Alnznv93HBErp9XYO7HBO7+
-         vCrtlv6Qk5DmyzQ2E058fO1UhNEcmRPS1SnEDkjqoTyT4kX97jBcrYUjRYnmCulUDM9I
-         dJ0Q==
-X-Gm-Message-State: AOJu0Yy0UEIk/Hy7J//mIS2MSDca6HP+Vtn+Bv5TjMq/qfnsEx/L91OL
-	YgyhebnVo+HZn9Lyr+AlnWZ56zPy9StjB2PhEkjgC6MiYU7bPYBJHbwwJcvivqjldPK5hzx/4M+
-	6lL3F
-X-Gm-Gg: Acq92OEdDO66Nu3rhUBCnntiY0kxe7wBIjSNUQ+AyN+FdvJqhgO/hp45l8VRTh4Ikju
-	l9kpAVfWZDVXD+Wb45z001KL/OhCkO0TxqZ+4e2HwlHuPOqk5kS0wqmNx64xKMPRddb+uuTsI4t
-	BpiBgMEb0/6rAR+eQQ8nPY36iIE6R7/I5gUyY++eYJHe+x9GAi94qqJDUZu+wt+XAcJ/tUkE2Q6
-	WhJFLz+VmSyYqyJHQ1TXKwZoV6hiQZv2yk+Z2RsJ8VUXq6ygEXPsxBBf5B1xGI6Ha02tiTBxtg3
-	2SiFyXJCYkBprt+Uz1NFNuCDsGeRiHDLLLkcOKY8NfY+pX+OGufaYfzXWV78gJwHOwcei5cMcLX
-	uXUNDmeIOX1D866c1NPlnd/c0a1vRsZng/hFKXNKMCgS3gebLGzpY7EngprhmPNHNgzxi5l64Zd
-	f1KxM6DQzf5LIamK0hViX3RSDIxOxNleApHB6lqAHKhVQLtcwYsrwCmKsUM6ijxfRGoKrJIcdoY
-	4cN3yxL6bbiDzw=
-X-Received: by 2002:a05:600c:8b2a:b0:490:3cf0:8d81 with SMTP id 5b1f17b1804b1-490b614df8dmr29300895e9.13.1780476818608;
-        Wed, 03 Jun 2026 01:53:38 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 1/2] tools/configure: Detect the presence of liblz4
-Date: Wed,  3 Jun 2026 09:53:30 +0100
-Message-Id: <20260603085331.2704108-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260603085331.2704108-1-andrew.cooper3@citrix.com>
-References: <20260603085331.2704108-1-andrew.cooper3@citrix.com>
+        d=1e100.net; s=20251104; t=1780476879; x=1781081679;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MvCg0eeCMW6aRP6vqfCPBGQJAFMK+FvjHRVTwGL3U2I=;
+        b=dDiLmuh8jWO0Nv1xUvBEtLjgfOR0Q3uc4v+t2hVkUYehkb1Wg2lULgRVLKR9yEUxG2
+         w4PKTUhuyIbU4pvPk1U7A0y/EI9yWORYB1Hosgz4tMv+OvlBur5whCGq6hcJTUduKzhu
+         1778nJbgd+r2fDvBgc3swkVUiF7uXzrFgWWD2Vt+v3rYheR63uiol2AYhCnxNfswUBpk
+         o+7BwIEWB8nmDVgDRF1lk4XKqOzZYVTK6j8UJ0SXkvmQRW/DM/wjpNFiGy9jNlo/o8sD
+         yvMRXX2yga9lEhf449MFT62EVOH8qJl7cd83WtiqWzo+39etMc1dSQlZP1HZa/+czukl
+         dIFg==
+X-Forwarded-Encrypted: i=1; AFNElJ9f5XzAtTzgkPIxbvYadPi7mpJJhtTh67XFDsoRsoKZalW2YRmgrl46k72vD+GZjimefFWbtVDAMgY=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Yz3or97CCexlmLuE1JMiAfEIpJAXJ2W8JGHz0COyjQ2meptVOYQ
+	VzzHMMdJIxHPB8frfiuSAPaP3PIOx6F0ZL9GYRT56SwOeAB3Zm9oeJ0BgfV2lUbwRA==
+X-Gm-Gg: Acq92OEo6WGr5jXNR9rSGfjmEPZFIL5xoWNtYd+EmRgLSp5ML2gnEv1j6FYuongMtzg
+	EJ7gnySzxS+QdKwqryYs2z5cUc6Yhd8Gk9GxDGS9scEpO5eVGatJ9WwDt51QII6tVMxPVd0QASL
+	qa0nxzFWroEe60XN/wMD7cOCRlMoJxkWW4gqOIZnXauen7+IpX0LpTUKnxnqIV0M9klMp6mifdC
+	VLU0aNQmPs3ZbdskzeJBL8ToVxcJ2S2d6TnlOVF/VvuB+UsC4HJviKKncLc0lXa+KMi01FXZNvl
+	jHKi8WOzEVJY6qfBV6p9GyImaBl2NeoKlPd1IAq5nxW9OzIX7NBP+cNvKAnwfRk/lZEu+HxK9JA
+	6PN3Vdg+hNp/1hRCMfBiqQp53N91PHd3NSL8J/nkSIaLXgOS79PzSN9hfCW2/7m0V4qevjt9YHi
+	EvB7xugaAL9Pfse/F++DGtCFIjZ/8wz+R/44aNqlGz9mN+/6z+3DWqyoT2UZZ4MHiJppQD6OrV3
+	s9EKP/2rn1T0byba6QZVWpBUA==
+X-Received: by 2002:a05:600c:470a:b0:490:4f91:5519 with SMTP id 5b1f17b1804b1-490b5e51b3bmr41098265e9.18.1780476879472;
+        Wed, 03 Jun 2026 01:54:39 -0700 (PDT)
+Message-ID: <d17f835b-3095-4d08-b2bd-7ab69e08db45@suse.com>
+Date: Wed, 3 Jun 2026 10:54:38 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1780476819-70F618B7-EB8F556F/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 5741
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-4.22 5/5] xen/numa: fix setup of non-aligned memory
+ affinity ranges
+From: Jan Beulich <jbeulich@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260601154332.30797-1-roger.pau@citrix.com>
+ <20260601154332.30797-6-roger.pau@citrix.com>
+ <de557b90-e5dd-468b-ac34-dcf463e95cad@suse.com>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <de557b90-e5dd-468b-ac34-dcf463e95cad@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1780476880-E2B74CF5-377995DB/0/0
+X-purgate-type: clean
+X-purgate-size: 1083
 
-As with other compression libraries, group liblz4 into ZLIB_{CFLAGS,LIBS}.
+On 03.06.2026 10:53, Jan Beulich wrote:
+> On 01.06.2026 17:43, Roger Pau Monne wrote:
+>> --- a/xen/common/numa.c
+>> +++ b/xen/common/numa.c
+>> @@ -396,7 +396,13 @@ static int __init populate_memnodemap(const struct node *nodes,
+>>  
+>>      for ( i = 0; i < numnodes; i++ )
+>>      {
+>> -        unsigned long spdx = paddr_to_pdx(nodes[i].start);
+>> +        /*
+>> +         * Round down start address: if start is not aligned to the memnodemap
+>> +         * chunk size the tail remainder might not be added.  Overlaps created
+>> +         * by rounding will fall into the same NUMA region.
+>> +         */
+>> +        unsigned long spdx = ROUNDDOWN(paddr_to_pdx(nodes[i].start),
+>> +                                       1UL << shift);
+> 
+> Imo this rounding would better be done ...
+> 
+>>          unsigned long epdx = paddr_to_pdx(nodes[i].end - 1);
+>>  
+>>          if ( spdx > epdx )
+> 
+> ... only after this check (and then perhaps also after the subsequent if()).
 
-Add the packages to the Debian Trixie build containers for coverage.
+Oh, and: With that adjustment
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Juergen Gross <jgross@suse.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-Rebuild the containers when pushed.
----
- automation/build/debian/13-arm64v8.dockerfile |  1 +
- automation/build/debian/13-x86_64.dockerfile  |  1 +
- tools/configure                               | 79 +++++++++++++++++++
- tools/configure.ac                            |  4 +
- 4 files changed, 85 insertions(+)
-
-diff --git a/automation/build/debian/13-arm64v8.dockerfile b/automation/build/debian/13-arm64v8.dockerfile
-index b9062ee8b443..ee9bb841eb92 100644
---- a/automation/build/debian/13-arm64v8.dockerfile
-+++ b/automation/build/debian/13-arm64v8.dockerfile
-@@ -28,6 +28,7 @@ RUN <<EOF
-         wget
-         # libxenguest dombuilder
-         libbz2-dev
-+        liblz4-dev
-         liblzma-dev
-         liblzo2-dev
-         libzstd-dev
-diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
-index 2c6c9d4a5098..e0a722595233 100644
---- a/automation/build/debian/13-x86_64.dockerfile
-+++ b/automation/build/debian/13-x86_64.dockerfile
-@@ -29,6 +29,7 @@ RUN <<EOF
-         wget
-         # libxenguest dombuilder
-         libbz2-dev
-+        liblz4-dev
-         liblzma-dev
-         liblzo2-dev
-         libzstd-dev
-diff --git a/tools/configure b/tools/configure
-index 6f69b0b52634..bf14864cfb03 100755
---- a/tools/configure
-+++ b/tools/configure
-@@ -669,6 +669,8 @@ PTHREAD_CFLAGS
- EXTFS_LIBS
- ZLIB_LIBS
- ZLIB_CFLAGS
-+liblz4_LIBS
-+liblz4_CFLAGS
- libzstd_LIBS
- libzstd_CFLAGS
- FETCHER
-@@ -885,6 +887,8 @@ pixman_CFLAGS
- pixman_LIBS
- libzstd_CFLAGS
- libzstd_LIBS
-+liblz4_CFLAGS
-+liblz4_LIBS
- libjsonc_CFLAGS
- libjsonc_LIBS
- LIBNL3_CFLAGS
-@@ -1638,6 +1642,9 @@ Some influential environment variables:
-               C compiler flags for libzstd, overriding pkg-config
-   libzstd_LIBS
-               linker flags for libzstd, overriding pkg-config
-+  liblz4_CFLAGS
-+              C compiler flags for liblz4, overriding pkg-config
-+  liblz4_LIBS linker flags for liblz4, overriding pkg-config
-   libjsonc_CFLAGS
-               C compiler flags for libjsonc, overriding pkg-config
-   libjsonc_LIBS
-@@ -9458,6 +9465,78 @@ printf "%s\n" "yes" >&6; }
-      ZLIB_LIBS="$ZLIB_LIBS $libzstd_LIBS"
- fi
- 
-+pkg_failed=no
-+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for liblz4" >&5
-+printf %s "checking for liblz4... " >&6; }
-+
-+if test -n "$liblz4_CFLAGS"; then
-+    pkg_cv_liblz4_CFLAGS="$liblz4_CFLAGS"
-+ elif test -n "$PKG_CONFIG"; then
-+    if test -n "$PKG_CONFIG" && \
-+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"liblz4\""; } >&5
-+  ($PKG_CONFIG --exists --print-errors "liblz4") 2>&5
-+  ac_status=$?
-+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-+  test $ac_status = 0; }; then
-+  pkg_cv_liblz4_CFLAGS=`$PKG_CONFIG --cflags "liblz4" 2>/dev/null`
-+		      test "x$?" != "x0" && pkg_failed=yes
-+else
-+  pkg_failed=yes
-+fi
-+ else
-+    pkg_failed=untried
-+fi
-+if test -n "$liblz4_LIBS"; then
-+    pkg_cv_liblz4_LIBS="$liblz4_LIBS"
-+ elif test -n "$PKG_CONFIG"; then
-+    if test -n "$PKG_CONFIG" && \
-+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"liblz4\""; } >&5
-+  ($PKG_CONFIG --exists --print-errors "liblz4") 2>&5
-+  ac_status=$?
-+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-+  test $ac_status = 0; }; then
-+  pkg_cv_liblz4_LIBS=`$PKG_CONFIG --libs "liblz4" 2>/dev/null`
-+		      test "x$?" != "x0" && pkg_failed=yes
-+else
-+  pkg_failed=yes
-+fi
-+ else
-+    pkg_failed=untried
-+fi
-+
-+
-+
-+if test $pkg_failed = yes; then
-+   	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+printf "%s\n" "no" >&6; }
-+
-+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-+        _pkg_short_errors_supported=yes
-+else
-+        _pkg_short_errors_supported=no
-+fi
-+        if test $_pkg_short_errors_supported = yes; then
-+	        liblz4_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "liblz4" 2>&1`
-+        else
-+	        liblz4_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "liblz4" 2>&1`
-+        fi
-+	# Put the nasty error message in config.log where it belongs
-+	echo "$liblz4_PKG_ERRORS" >&5
-+
-+	true
-+elif test $pkg_failed = untried; then
-+     	{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+printf "%s\n" "no" >&6; }
-+	true
-+else
-+	liblz4_CFLAGS=$pkg_cv_liblz4_CFLAGS
-+	liblz4_LIBS=$pkg_cv_liblz4_LIBS
-+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-+printf "%s\n" "yes" >&6; }
-+	ZLIB_CFLAGS="$ZLIB_CFLAGS -DHAVE_LZ4 $liblz4_CFLAGS"
-+     ZLIB_LIBS="$ZLIB_LIBS $liblz4_LIBS"
-+fi
-+
- 
- 
- ac_fn_c_check_header_compile "$LINENO" "ext2fs/ext2fs.h" "ac_cv_header_ext2fs_ext2fs_h" "$ac_includes_default"
-diff --git a/tools/configure.ac b/tools/configure.ac
-index ecd45e782eb8..74b9f56025cb 100644
---- a/tools/configure.ac
-+++ b/tools/configure.ac
-@@ -403,6 +403,10 @@ PKG_CHECK_MODULES([libzstd], [libzstd],
-     [ZLIB_CFLAGS="$ZLIB_CFLAGS -DHAVE_ZSTD $libzstd_CFLAGS"
-      ZLIB_LIBS="$ZLIB_LIBS $libzstd_LIBS"],
-     [true])
-+PKG_CHECK_MODULES([liblz4], [liblz4],
-+    [ZLIB_CFLAGS="$ZLIB_CFLAGS -DHAVE_LZ4 $liblz4_CFLAGS"
-+     ZLIB_LIBS="$ZLIB_LIBS $liblz4_LIBS"],
-+    [true])
- AC_SUBST([ZLIB_CFLAGS])
- AC_SUBST([ZLIB_LIBS])
- AX_CHECK_EXTFS
--- 
-2.39.5
-
+Jan
 
