@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C453FCD6E64
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 08:53:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325897.1591263 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3384ECD6E55
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 08:53:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325895.1591251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUhM6-0003VY-IP; Wed, 03 Jun 2026 08:53:42 +0000
+	id 1wUhM5-0003M2-Vd; Wed, 03 Jun 2026 08:53:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325897.1591263; Wed, 03 Jun 2026 08:53:42 +0000
+Received: by outflank-mailman (output) from mailman id 1325895.1591251; Wed, 03 Jun 2026 08:53:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUhM6-0003Ux-Cm; Wed, 03 Jun 2026 08:53:42 +0000
-Received: by outflank-mailman (input) for mailman id 1325897;
+	id 1wUhM5-0003Lv-Sl; Wed, 03 Jun 2026 08:53:41 +0000
+Received: by outflank-mailman (input) for mailman id 1325895;
  Wed, 03 Jun 2026 08:53:40 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wUhM4-0003L6-Dq
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wUhM4-0003Ku-3K
  for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 08:53:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUhM3-006GVP-Qd
+ id 1wUhM3-006GWh-91
  for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 10:53:39 +0200
-Received: from [10.42.69.12] (helo=localhost)
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1feb91-e002-0a2a0a5209dd-0a2a450cddea-16
+ id 6a1feb8e-5cb7-0a2a0a5109dd-0a2a450988b8-16
  for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:53:39 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a1feb93-62f1-0a2a450c0019-d155802cc043-3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:53:39 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4903f7a90d1so113292725e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 01:53:39 -0700 (PDT)
+ id 6a1feb92-2497-0a2a45090019-d1558032b8ac-3
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 10:53:38 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-490b7866869so5154805e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 01:53:38 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490b7c6b966sm24070335e9.2.2026.06.03.01.53.38
+ 5b1f17b1804b1-490b7c6b966sm24070335e9.2.2026.06.03.01.53.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 01:53:38 -0700 (PDT)
+ Wed, 03 Jun 2026 01:53:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,469 +53,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1780476819; x=1781081619; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7G9hdlfubYAVkY5BTqL/WBD4kbNC0poE5EI/Mq9Bxg0=;
-        b=CwCbnY1b5UdGD0Eu1sUlOOofdu+IQaHFUCyaTwsaWsUTZvmtAYzf1WXoe+tj5F5lwB
-         hBHTKeIBTzFCJ3cGiA+VtARLKMHxD7AvBwK1zOz/Cjwt9BwT4QQhUA3IMAqWxlnKS7jS
-         b7xMQhJ9rd7KLXU0GjfiD+v0fWK8OAZSktwj0=
+        d=citrix.com; s=google; t=1780476818; x=1781081618; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=51sWtCRS4J99P4zhCE42T3n9PAMZGO1IQnnN5g2LOlo=;
+        b=ImHNjhDaQSWfu9ISIYBezYgUHW1zLob6VP9srTe2uHGkmoxR+fDxweC93uFoxLkYuE
+         eJ5kWZ3q03y8sBf4Sl8zCoOOOmWPW+3L3kRNXNuvESsaZIeZlz5VfArlwg2adWs7ugo8
+         DmN3gf9Wd4IHRbVntfmMyqhXiEt3BcckgSqPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780476819; x=1781081619;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=7G9hdlfubYAVkY5BTqL/WBD4kbNC0poE5EI/Mq9Bxg0=;
-        b=Yn7h+MowgG+NyjmZywyJqZaYJrEPNjQ2YWTZdXuDsuccIe7MIM3NjUg2s18ultMw5P
-         DNjgFIaW0MGhITtZNwA5IARRmHCr1lJb4WrKaxHJq48DJOhNgrDNEuUTp8y7zcq6r944
-         AK4uHvONbRd7NBte7Ktba1jrV6hESpzx88A9Souu2wVRfx/F14kwoTC57BCyIv7Sinnq
-         kOHHLFJYmiHzPOulM8kCIm6ncfRG+yhKQ4ESR6vf+/m2AzlA3Sc9Cdl3zNGoXmjsMrR3
-         qahf1Lqv8qQ0bwxLYulrHdSjoa7kCp+sRuoHHfu/q7NW0jEcx10YDBtOiFahzA97lCZl
-         olbg==
-X-Gm-Message-State: AOJu0YwZ5u0aODpvpX+yJoGjGNCUbdX6trJ2bhhY+nRhXq7Lwu/xjkHC
-	jPR90WOCiI70qj44JU3o73O3Tbi+2UrmUSPEVg30dKWWkQEUM5DP5OOerlXMN5X74oHsWowUaiF
-	vQ7YK
-X-Gm-Gg: Acq92OGaJyMVW8s3DTXGh5YMsgPX+2evR9WVmpENBxTFVskqcmKGT9ZyQrP+Pxvvonj
-	YiydUhuuWFGD5XNIU5og7bE2rrOJiZuiSa9FbnKHY2Gh8lSfZpVvD7eLj84ingsL7ANOC5t8RBZ
-	oVGwroL73oEU0y8dXO0Exo9XHSYi41tBTOxGHtsalfFRBUReKPJjxFsmTB1NVRM9+DrDky94zfX
-	kSWetca0paH80Zy2sV32xxHxN7Ffxivj78c9N+j5U0wSdpV1IMUNawRrr1cy9gW3c9zHCCE4KDv
-	1NL7qWqx8NXC8KzB9N4yo+hcsv6xIyCs3BBv08Dded+5j7JS92DYNO2cEDhrmDvzdpm9tF6HPkR
-	0sY4eb88MeqwZa3fKFcv6mBX6BnzYpgWCM/5wxiftAaa51O0gNps7lLGus1kbMvkEMBQ/JM9e69
-	EO9cwQtm8uERK/yOLPE3uVn5u+8AmZWyJZV10mKf+PcGihxI4gSbAqrS1Y5Ovv93+CSrhRPpwfD
-	ux6/yP4AULaFdsW8X/wXi6CwA==
-X-Received: by 2002:a05:600c:1d86:b0:48a:58ae:9938 with SMTP id 5b1f17b1804b1-490b5fe95ebmr39488945e9.19.1780476819121;
-        Wed, 03 Jun 2026 01:53:39 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1780476818; x=1781081618;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=51sWtCRS4J99P4zhCE42T3n9PAMZGO1IQnnN5g2LOlo=;
+        b=EzN/i+qXW0uolthZhfg2EAs35L6DXoKwXfq/pppj/MKEZoSOCs0N10G80v/85O5Lsj
+         YkIoE0F8ECCaA+JGoGNDtbkiPXe2TX/tC2zV4W8HqKY9SeZ1ZnHNoBkOV93GNNNXuKbw
+         QjO23ldG40hcngl4rU+kiqAaz4upBD1Yw8IJAC9+hsoNj2O2LPo9aTaRl/e8I/8sYTkG
+         4QBp6c3jSFar+dK0CEVU5kb3D80DYmmDRyBsDu67mPtQFb2f5xUoU1uZReCf599TL5jI
+         +feLOkBH6KhkeR0S/00K2OJKzab8XrNsSV9LerSZAruZ0qhnK6n5H5mOwOHxn6gJqB0N
+         evxw==
+X-Gm-Message-State: AOJu0Yy0g6TezWLYi0n0Od2MbGw9NHmRg3LEYEir9lD/lT10vhTOuBEC
+	oGd26d7bdRLaO5CFnKeO4EQrbA9tjM5SPYM7huube9MqdTsrcg0c4V5ZRvGZPf+wyzlMZ12T0wj
+	EvKrn
+X-Gm-Gg: Acq92OGv/ib97OpfTOVkqYggepYDtHv5w79Hf2hF0D+YBnLFe224w+ReXNQQ1seYKhn
+	1o5/WJk9lhDIpaQx7RlEc/Irq5ioVNbTQ6+gm7L57+KnweddzRHvZcb+eykmkxc/lS/n0HxYeEK
+	0AhxjnprcCKv16R5zHWj1AYdsbpd/Kmy1/+7pLE5t2UPtrPBwlzamHYHC5wkbOU5h5ZA0CTnrx/
+	40aouzUlClMb7hbVJJ2YBQinGtD494tEyOrFg9Hm8+xRFR5Prl+R+6pctROpLFEUOJvnru/gw/f
+	nhBVGlMr/UVjqOwfilvGue0l0Bc5b6V12H6pt1CijnPdhSSgTm0HnYXq9O9HIo6l33qrZ5AavtS
+	iOcKKelx/Ei36jvoe9lYFPmegZHIzrGnBos9LGDL8GdkfS9oAd3Go7F+2cWz50FF8qoM8AMqMcF
+	/KRQdNBGGMmHwiWOu3K9GGtdvUe9WCL6X7pRHqKQT3AP9bnf3K7Ws5jVqRp/cv1jH9jAiy+LUgx
+	sB0Au5rHqOHmnc=
+X-Received: by 2002:a05:600c:4510:b0:490:a298:3859 with SMTP id 5b1f17b1804b1-490b60f001amr36093385e9.24.1780476818036;
+        Wed, 03 Jun 2026 01:53:38 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 2/2] tools/libs/guest: Use the system liblz4 in the bzimage loader
-Date: Wed,  3 Jun 2026 09:53:31 +0100
-Message-Id: <20260603085331.2704108-3-andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.22(?) 0/2] tools: Use the system liblz4 package
+Date: Wed,  3 Jun 2026 09:53:29 +0100
+Message-Id: <20260603085331.2704108-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260603085331.2704108-1-andrew.cooper3@citrix.com>
-References: <20260603085331.2704108-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1780476819-D996DCF5-EAD92777/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 11004
+X-purgate-ID: tlsNG-bad1c0/1780476819-42F76A53-E5AFDBEC/0/0
+X-purgate-type: clean
+X-purgate-size: 1272
 
-Right now lz4, unlike every other compression scheme, unconditionally uses
-Xen's unsafe decompressor.  Make it consistent with all other compression
-schemes by using liblz4.
+Switch to using the system liblz4.
 
-The unsafe decompression is still required for the MiniOS build, so rename
-xg_dom_decompress_lz4.c to xg_dom_decompress_unsafe_lz4.c and drop the
-non-MiniOS content.
+This brings libxenguest's lz4 decompression in line all the others, rather
+than using the unsafe decompressor from Xen (itself a port of Linux's unsafe
+decompressor).
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Juergen Gross <jgross@suse.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
+Andrew Cooper (2):
+  tools/configure: Detect the presence of liblz4
+  tools/libs/guest: Use the system liblz4 in the bzimage loader
+
+ automation/build/debian/13-arm64v8.dockerfile |   1 +
+ automation/build/debian/13-x86_64.dockerfile  |   1 +
+ tools/configure                               |  79 ++++++++++
+ tools/configure.ac                            |   4 +
  tools/libs/guest/Makefile.common              |   2 +-
  tools/libs/guest/xg_dom_bzimageloader.c       | 128 +++++++++++++++-
  tools/libs/guest/xg_dom_decompress.h          |   6 -
  tools/libs/guest/xg_dom_decompress_lz4.c      | 143 ------------------
  tools/libs/guest/xg_dom_decompress_unsafe.h   |   2 +
  .../libs/guest/xg_dom_decompress_unsafe_lz4.c |  39 +++++
- 6 files changed, 169 insertions(+), 151 deletions(-)
+ 10 files changed, 254 insertions(+), 151 deletions(-)
  delete mode 100644 tools/libs/guest/xg_dom_decompress.h
  delete mode 100644 tools/libs/guest/xg_dom_decompress_lz4.c
  create mode 100644 tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
 
-diff --git a/tools/libs/guest/Makefile.common b/tools/libs/guest/Makefile.common
-index b928a4a246a9..86b1f160e536 100644
---- a/tools/libs/guest/Makefile.common
-+++ b/tools/libs/guest/Makefile.common
-@@ -46,7 +46,6 @@ OBJS-y                 += xg_dom_core.o
- OBJS-y                 += xg_dom_boot.o
- OBJS-y                 += xg_dom_elfloader.o
- OBJS-$(CONFIG_X86)     += xg_dom_bzimageloader.o
--OBJS-$(CONFIG_X86)     += xg_dom_decompress_lz4.o
- OBJS-$(CONFIG_X86)     += xg_dom_hvmloader.o
- OBJS-$(CONFIG_ARM)     += xg_dom_armzimageloader.o
- OBJS-y                 += xg_dom_binloader.o
-@@ -59,6 +58,7 @@ OBJS-$(CONFIG_ARM)     += xg_dom_arm.o
- ifeq ($(CONFIG_LIBXC_MINIOS),y)
- OBJS-y                 += xg_dom_decompress_unsafe.o
- OBJS-y                 += xg_dom_decompress_unsafe_bzip2.o
-+OBJS-y                 += xg_dom_decompress_unsafe_lz4.o
- OBJS-y                 += xg_dom_decompress_unsafe_lzma.o
- OBJS-y                 += xg_dom_decompress_unsafe_lzo1x.o
- OBJS-y                 += xg_dom_decompress_unsafe_xz.o
-diff --git a/tools/libs/guest/xg_dom_bzimageloader.c b/tools/libs/guest/xg_dom_bzimageloader.c
-index 1fb4e5a1f728..32b3c682a447 100644
---- a/tools/libs/guest/xg_dom_bzimageloader.c
-+++ b/tools/libs/guest/xg_dom_bzimageloader.c
-@@ -32,7 +32,6 @@
- #include <inttypes.h>
- 
- #include "xg_private.h"
--#include "xg_dom_decompress.h"
- 
- #include <xen-tools/common-macros.h>
- 
-@@ -623,6 +622,133 @@ static int xc_try_zstd_decode(
- 
- #endif
- 
-+#if defined(HAVE_LZ4)
-+
-+#include <lz4.h>
-+
-+#define ARCHIVE_MAGICNUMBER 0x184C2102
-+
-+static int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-+{
-+    size_t outsize, insize;
-+    unsigned char *outbuf = NULL, *inp = *blob, *outp;
-+    uint32_t chunksize;
-+
-+    /* Magic, descriptor byte, and trailing size field. */
-+    if ( *size <= 8 )
-+    {
-+        DOMPRINTF("LZ4: insufficient input data");
-+        goto err;
-+    }
-+
-+    insize = *size - 4;
-+    outsize = get_unaligned_le32(*blob + insize);
-+
-+    if ( xc_dom_kernel_check_size(dom, outsize) )
-+    {
-+        DOMPRINTF("LZ4: output too large");
-+        goto err;
-+    }
-+
-+    outbuf = malloc(outsize);
-+    if ( !outbuf )
-+    {
-+        DOMPRINTF("LZ4: failed to alloc memory");
-+        goto err;
-+    }
-+    outp = outbuf;
-+
-+    chunksize = get_unaligned_le32(inp);
-+    if ( chunksize == ARCHIVE_MAGICNUMBER )
-+    {
-+        inp    += 4;
-+        insize -= 4;
-+    }
-+    else
-+    {
-+        DOMPRINTF("LZ4: invalid header");
-+        goto err;
-+    }
-+
-+    for ( ;; )
-+    {
-+        int dst_len, len;
-+
-+        if ( insize < 4 )
-+        {
-+            DOMPRINTF("LZ4: missing data");
-+            goto err;
-+        }
-+
-+        chunksize = get_unaligned_le32(inp);
-+        inp    += 4;
-+        insize -= 4;
-+
-+        if ( chunksize == ARCHIVE_MAGICNUMBER )
-+            continue;
-+
-+        if ( chunksize > insize )
-+        {
-+            DOMPRINTF("LZ4: insufficient input data");
-+            goto err;
-+        }
-+
-+        dst_len = outsize - (outp - outbuf);
-+        len = LZ4_decompress_safe((const void *)inp,
-+                                  (void *)outp, chunksize, dst_len);
-+
-+        if ( len < 0 )
-+        {
-+            DOMPRINTF("LZ4: decoding failed");
-+            goto err;
-+        }
-+
-+        outp   += len;
-+        inp    += chunksize;
-+        insize -= chunksize;
-+
-+        if ( insize == 0 )
-+            break;
-+    }
-+
-+    if ( (outp - outbuf) != outsize )
-+    {
-+        DOMPRINTF("LZ4: got 0x%zx bytes instead of 0x%zx",
-+                  outp - outbuf, outsize);
-+        goto err;
-+    }
-+
-+    if ( xc_dom_register_external(dom, outbuf, outsize) )
-+    {
-+        DOMPRINTF("LZ4: error registering stream output");
-+        goto err;
-+    }
-+
-+    DOMPRINTF("%s: LZ4 decompress OK, 0x%zx -> 0x%zx",
-+              __FUNCTION__, insize, outsize);
-+
-+    *blob = outbuf;
-+    *size = outsize;
-+
-+    return 0;
-+
-+ err:
-+    free(outbuf);
-+    return -1;
-+}
-+
-+#else /* !defined(HAVE_LZ4) */
-+
-+static int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-+{
-+    xc_dom_panic(dom->xch, XC_INTERNAL_ERROR,
-+                 "%s: LZ4 decompress support unavailable\n",
-+                 __FUNCTION__);
-+    return -1;
-+}
-+
-+#endif
-+
- #endif /* !__MINIOS__ */
- 
- struct setup_header {
-diff --git a/tools/libs/guest/xg_dom_decompress.h b/tools/libs/guest/xg_dom_decompress.h
-deleted file mode 100644
-index d7a45f730d67..000000000000
---- a/tools/libs/guest/xg_dom_decompress.h
-+++ /dev/null
-@@ -1,6 +0,0 @@
--#ifdef __MINIOS__
--# include "xg_dom_decompress_unsafe.h"
--#endif
--
--int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size);
--
-diff --git a/tools/libs/guest/xg_dom_decompress_lz4.c b/tools/libs/guest/xg_dom_decompress_lz4.c
-deleted file mode 100644
-index 53ef0bf328ed..000000000000
---- a/tools/libs/guest/xg_dom_decompress_lz4.c
-+++ /dev/null
-@@ -1,143 +0,0 @@
--#include <stdio.h>
--#include <stdlib.h>
--#include <inttypes.h>
--#include <stdint.h>
--
--#include INCLUDE_ENDIAN_H
--
--#define XG_NEED_UNALIGNED
--#include "xg_private.h"
--#include "xg_dom_decompress.h"
--
--#define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
--
--typedef uint8_t u8;
--typedef uint16_t u16;
--typedef uint32_t u32;
--typedef uint64_t u64;
--
--#define likely(a) a
--#define unlikely(a) a
--
--static inline uint16_t le16_to_cpu(uint16_t v)
--{
--#if BYTE_ORDER == BIG_ENDIAN
--    return __builtin_bswap16(v);
--#else
--    return v;
--#endif
--}
--
--#include "../../xen/include/xen/lz4.h"
--#include "../../xen/common/decompress.h"
--
--#ifndef __MINIOS__
--
--#include "../../xen/common/lz4/decompress.c"
--
--#define ARCHIVE_MAGICNUMBER 0x184C2102
--
--int xc_try_lz4_decode(
--	struct xc_dom_image *dom, void **blob, size_t *psize)
--{
--	int ret = -1;
--	unsigned char *inp = *blob, *output, *outp;
--	ssize_t size = *psize - 4;
--	size_t out_len, dest_len, chunksize;
--	const char *msg;
--
--	if (size < 4) {
--		msg = "input too small";
--		goto exit_0;
--	}
--
--	out_len = get_unaligned_le32(inp + size);
--	if (xc_dom_kernel_check_size(dom, out_len)) {
--		msg = "Decompressed image too large";
--		goto exit_0;
--	}
--
--	output = malloc(out_len);
--	if (!output) {
--		msg = "Could not allocate output buffer";
--		goto exit_0;
--	}
--	outp = output;
--
--	chunksize = get_unaligned_le32(inp);
--	if (chunksize == ARCHIVE_MAGICNUMBER) {
--		inp += 4;
--		size -= 4;
--	} else {
--		msg = "invalid header";
--		goto exit_2;
--	}
--
--	for (;;) {
--		if (size < 4) {
--			msg = "missing data";
--			goto exit_2;
--		}
--		chunksize = get_unaligned_le32(inp);
--		if (chunksize == ARCHIVE_MAGICNUMBER) {
--			inp += 4;
--			size -= 4;
--			continue;
--		}
--		inp += 4;
--		size -= 4;
--		if (chunksize > size) {
--			msg = "insufficient input data";
--			goto exit_2;
--		}
--
--		dest_len = out_len - (outp - output);
--		ret = lz4_decompress_unknownoutputsize(inp, chunksize, outp,
--				&dest_len);
--		if (ret < 0) {
--			msg = "decoding failed";
--			goto exit_2;
--		}
--
--		ret = -1;
--		outp += dest_len;
--		size -= chunksize;
--
--		if (size == 0)
--		{
--			if ( xc_dom_register_external(dom, output, out_len) )
--			{
--				msg = "Error registering stream output";
--				goto exit_2;
--			}
--			*blob = output;
--			*psize = out_len;
--			return 0;
--		}
--
--		if (size < 0) {
--			msg = "data corrupted";
--			goto exit_2;
--		}
--
--		inp += chunksize;
--	}
--
--exit_2:
--	free(output);
--exit_0:
--	DOMPRINTF("LZ4 decompression error: %s\n", msg);
--	return ret;
--}
--
--#else /* __MINIOS__ */
--
--#include "../../xen/common/unlz4.c"
--
--int xc_try_lz4_decode(
--    struct xc_dom_image *dom, void **blob, size_t *size)
--{
--    return xc_dom_decompress_unsafe(unlz4, dom, blob, size);
--}
--
--#endif
-diff --git a/tools/libs/guest/xg_dom_decompress_unsafe.h b/tools/libs/guest/xg_dom_decompress_unsafe.h
-index ac6b94288d5e..5bc222207653 100644
---- a/tools/libs/guest/xg_dom_decompress_unsafe.h
-+++ b/tools/libs/guest/xg_dom_decompress_unsafe.h
-@@ -16,6 +16,8 @@ int xc_dom_decompress_unsafe(
- 
- int xc_try_bzip2_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-     __attribute__((visibility("internal")));
-+int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-+    __attribute__((visibility("internal")));
- int xc_try_lzma_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-     __attribute__((visibility("internal")));
- int xc_try_lzo1x_decode(struct xc_dom_image *dom, void **blob, size_t *size)
-diff --git a/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c b/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
-new file mode 100644
-index 000000000000..405143aa6182
---- /dev/null
-+++ b/tools/libs/guest/xg_dom_decompress_unsafe_lz4.c
-@@ -0,0 +1,39 @@
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <inttypes.h>
-+#include <stdint.h>
-+
-+#include INCLUDE_ENDIAN_H
-+
-+#define XG_NEED_UNALIGNED
-+#include "xg_private.h"
-+#include "xg_dom_decompress.h"
-+
-+#define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
-+
-+typedef uint8_t u8;
-+typedef uint16_t u16;
-+typedef uint32_t u32;
-+typedef uint64_t u64;
-+
-+#define likely(a) a
-+#define unlikely(a) a
-+
-+static inline uint16_t le16_to_cpu(uint16_t v)
-+{
-+#if BYTE_ORDER == BIG_ENDIAN
-+    return __builtin_bswap16(v);
-+#else
-+    return v;
-+#endif
-+}
-+
-+#include "../../xen/include/xen/lz4.h"
-+#include "../../xen/common/decompress.h"
-+#include "../../xen/common/unlz4.c"
-+
-+int xc_try_lz4_decode(
-+    struct xc_dom_image *dom, void **blob, size_t *size)
-+{
-+    return xc_dom_decompress_unsafe(unlz4, dom, blob, size);
-+}
+
+base-commit: c069c014f21fd1f5925d8c30c18adb4f26381475
 -- 
 2.39.5
 
