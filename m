@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F5F5CD6E57
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2026 19:43:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1325412.1590896 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFAECD6E57
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 01:42:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1325560.1590905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUV0s-0007jW-1A; Tue, 02 Jun 2026 19:42:58 +0000
+	id 1wUacC-00038C-Qp; Wed, 03 Jun 2026 01:41:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1325412.1590896; Tue, 02 Jun 2026 19:42:58 +0000
+Received: by outflank-mailman (output) from mailman id 1325560.1590905; Wed, 03 Jun 2026 01:41:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUV0r-0007jP-UD; Tue, 02 Jun 2026 19:42:57 +0000
-Received: by outflank-mailman (input) for mailman id 1325412;
- Tue, 02 Jun 2026 19:42:56 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wUacC-00037z-Kd; Wed, 03 Jun 2026 01:41:52 +0000
+Received: by outflank-mailman (input) for mailman id 1325560;
+ Wed, 03 Jun 2026 01:41:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sstabellini@kernel.org>) id 1wUV0q-0007jJ-AD
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 19:42:56 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1wUacB-00037t-B1
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 01:41:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUV0p-000yzA-C6
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2026 21:42:55 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wUacA-004mis-G8
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 03:41:50 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <sstabellini@kernel.org>)
- id 6a1f321e-bab6-0a2a0a5309dd-0a2a4504c01c-20
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 21:42:55 +0200
+ id 6a1f863e-5cb7-0a2a0a5109dd-0a2a450ba794-14
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 03:41:50 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <sstabellini@kernel.org>)
- id 6a1f323e-1dec-0a2a45040019-ac6904fed762-3
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jun 2026 21:42:55 +0200
+ id 6a1f865d-212f-0a2a450b0019-ac6904fed0b8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 03:41:49 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 7A8B860098;
- Tue,  2 Jun 2026 19:42:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E89F41F00893;
- Tue,  2 Jun 2026 19:42:52 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 5E0F060208;
+ Wed,  3 Jun 2026 01:41:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF42B1F00898;
+ Wed,  3 Jun 2026 01:41:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,79 +52,88 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780429373;
-	bh=A20g0DYnwPA9DU+zwyH2wh96dcB5DraK8CrJUGAdDm8=;
+	s=k20260515; t=1780450908;
+	bh=4VkB5kc3PN84M5JMJ/MIzDthVmbG3h6t64cl1Hk3kTE=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References;
-	b=ToP8wfXyComJ5oTw09xJO+LaGDkG9LL3Rc1dQd155ngtdaHWaHV+vjg4dPZnRwpaC
-	 LFjuW1oN4kS6DXaurs7dclT329xCam/wQRbgO0rWKdAH6sLzCjJIICWDeu2H6P2btt
-	 T5d2PnXs/nfwdF/i6Ez2XWtW+CFOOxBbsuDyaIKHvZEh1QI7+59jrDE7DmBjwlxrLA
-	 DzRLHJOitax1l18UMDheEUgTjhplBNXxmYiVg39N5KDGFervri/0wkjYTsmoXtHAIm
-	 9r4XnDjzzmyKckC1XimUdcR/XcekusrKkp9BR4vo4MleYltYPEFmxHxyTXvtA3VIpv
-	 dLndIV3R4naVQ==
-Date: Tue, 2 Jun 2026 12:42:52 -0700 (PDT)
+	b=YytALTjDOod/BeokbH9WLm6Uh3fBHOjA3SKuFa5fPJyu3yKfWM+Fk8p51JP/2b9ge
+	 shdpWpicgocamF29uyll8w1hDMnWRTcRhX9YGqgVd6HRYQ2bKqqycbwlg2cN1x2VJg
+	 tGoFgFPUBundy9FMk8tu5PZEIJ6623G+U8XwLOsW4gVhvemzV0m+CJIkhvEUGfjG/g
+	 u8O1VWJrwYuXdiJcWZW0AhLRV1WHjf6T7aG5WmFrSxlDev0hJTGvMu+MTmYBkCos09
+	 OaJwk5KCJykM9TfuKtghPFGMD/+kiSxMV+Kxa3xOs1iOcsdjbwR9Rqmv51EqR/dhlT
+	 VflUlLq6PWK2A==
+Date: Tue, 2 Jun 2026 18:41:46 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-cc: Xen-devel <xen-devel@lists.xenproject.org>, 
+To: Jan Beulich <jbeulich@suse.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, 
     Anthony PERARD <anthony.perard@vates.tech>, 
-    Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
-    Julien Grall <julien@xen.org>, 
+    Michal Orzel <michal.orzel@amd.com>, 
     =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Nicola Vetrini <nicola.vetrini@bugseng.com>
-Subject: Re: [PATCH 2/2] CI: Mark eclair-x86_64-allcode as blocking now that
- it's clean
-In-Reply-To: <20260602174629.2649448-3-andrew.cooper3@citrix.com>
-Message-ID: <alpine.DEB.2.22.394.2606021242330.550703@ubuntu-linux-20-04-desktop>
-References: <20260602174629.2649448-1-andrew.cooper3@citrix.com> <20260602174629.2649448-3-andrew.cooper3@citrix.com>
+    Stewart Hildebrand <stewart.hildebrand@amd.com>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] vPCI: resolve MISRA R10.1 boolean arithmetic type
+ violation
+In-Reply-To: <62abdafd-a49c-46e0-b529-0646a8d2425a@suse.com>
+Message-ID: <alpine.DEB.2.22.394.2606021840110.550703@ubuntu-linux-20-04-desktop>
+References: <e23266191a366abe66d8104783d97578aa8734a4.1779428826.git.dmytro_prokopchuk1@epam.com> <984c91b8-3d2c-4431-bdf1-4a333ac341d1@suse.com> <alpine.DEB.2.22.394.2605261508390.182011@ubuntu-linux-20-04-desktop>
+ <62abdafd-a49c-46e0-b529-0646a8d2425a@suse.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-195285751-1780429373=:550703"
-X-purgate-ID: tlsNG-ebf023/1780429375-411763FF-8590947C/0/0
+Content-Type: text/plain; charset=US-ASCII
+X-purgate-ID: tlsNG-42698a/1780450910-20678F3B-68DE4BF8/0/0
 X-purgate-type: clean
-X-purgate-size: 1376
+X-purgate-size: 2537
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-195285751-1780429373=:550703
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 2 Jun 2026, Andrew Cooper wrote:
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Anthony PERARD <anthony.perard@vates.tech>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Julien Grall <julien@xen.org>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Nicola Vetrini <nicola.vetrini@bugseng.com>
-
-Assuming the pipeline is clean:
-
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-
-
-> ---
->  automation/gitlab-ci/analyze.yaml | 1 -
->  1 file changed, 1 deletion(-)
+On Tue, 2 Jun 2026, Jan Beulich wrote:
+> On 27.05.2026 00:12, Stefano Stabellini wrote:
+> > On Fri, 22 May 2026, Jan Beulich wrote:
+> >> (extending Cc list)
+> >>
+> >> On 22.05.2026 08:13, Dmytro Prokopchuk1 wrote:
+> >>> --- a/xen/drivers/vpci/header.c
+> >>> +++ b/xen/drivers/vpci/header.c
+> >>> @@ -586,7 +586,7 @@ static void cf_check bar_write(
+> >>>          if ( val != (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
+> >>>              gprintk(XENLOG_WARNING,
+> >>>                      "%pp: ignored BAR %zu write while mapped\n",
+> >>> -                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+> >>> +                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 : 0));
+> >>>          return;
+> >>>      }
+> >>>  
+> >>> @@ -647,7 +647,7 @@ static void cf_check guest_mem_bar_write(const struct pci_dev *pdev,
+> >>>          if ( guest_addr != bar->guest_addr )
+> >>>              gprintk(XENLOG_WARNING,
+> >>>                      "%pp: ignored guest BAR %zu write while mapped\n",
+> >>> -                    &pdev->sbdf, bar - pdev->vpci->header.bars + hi);
+> >>> +                    &pdev->sbdf, bar - pdev->vpci->header.bars + (hi ? 1 : 0));
+> >>>          return;
+> >>>      }
+> >>>      bar->guest_addr = guest_addr;
+> >>
+> >> Well. If I'm not mistaken we had discussed situations like this (long ago).
+> >> Imo the added verbosity gets in the way of readability. If we absolutely
+> >> cannot or don't want to deviate such constructs (of which I expect we have
+> >> more), then we ought to consider alternatives (like changing the variables'
+> >> types in the case here).
+> >>
+> >> As to deviating: rules.rst, according to my reading, says that &, |, ^, or
+> >> shifts would be okay to use with a bool operand. What's wrong with also
+> >> permitting this for other operators?
+> > 
+> > In my opinion, if we are going to treat bool as its own type, it makes
+> > sense not to silently mix bools into arithmetic with int types. I also
+> > do not find this patch less readable -- I actually find it more
+> > readable, since it makes it more obvious that hi is a bool.
 > 
-> diff --git a/automation/gitlab-ci/analyze.yaml b/automation/gitlab-ci/analyze.yaml
-> index 9bf032931fc4..673110d40ed3 100644
-> --- a/automation/gitlab-ci/analyze.yaml
-> +++ b/automation/gitlab-ci/analyze.yaml
-> @@ -62,7 +62,6 @@ eclair-x86_64-allcode:
->        CONFIG_XEN_GUEST=y
->        CONFIG_XHCI=y
->        CONFIG_XSM=y
-> -  allow_failure: true
->  
->  eclair-x86_64-testing:
->    extends: eclair-x86_64-allcode
-> -- 
-> 2.39.5
-> 
---8323329-195285751-1780429373=:550703--
+> Well, okay, we have different opinions there. This reply of yours applies
+> to the first paragraph of my earlier reply though, despite its placement.
+> What about the aspect mentioned in the second paragraph?
+
+You mean "then we ought to consider alternatives (like changing the
+variables' types in the case here)" ?
+
+Other alternatives could be OK, but also this patch as-is is OK to me.
 
