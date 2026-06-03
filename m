@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5235CD6E55
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 13:06:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1326223.1591650 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D737CD6E60
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 13:06:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1326228.1591695 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUlIZ-00050E-Vf; Wed, 03 Jun 2026 13:06:19 +0000
+	id 1wUlIf-00068y-DD; Wed, 03 Jun 2026 13:06:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1326223.1591650; Wed, 03 Jun 2026 13:06:19 +0000
+Received: by outflank-mailman (output) from mailman id 1326228.1591695; Wed, 03 Jun 2026 13:06:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUlIZ-000507-Si; Wed, 03 Jun 2026 13:06:19 +0000
-Received: by outflank-mailman (input) for mailman id 1326223;
- Wed, 03 Jun 2026 13:06:18 +0000
+	id 1wUlIf-00068o-9x; Wed, 03 Jun 2026 13:06:25 +0000
+Received: by outflank-mailman (input) for mailman id 1326228;
+ Wed, 03 Jun 2026 13:06:23 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <freddy77@gmail.com>) id 1wUlIY-0004zv-AD
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 13:06:18 +0000
+ (envelope-from <freddy77@gmail.com>) id 1wUlId-0005fU-Ft
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 13:06:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUlIX-007IV7-N7
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 15:06:17 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wUlIc-007IYC-St
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 15:06:22 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2026c1-bab6-0a2a0a5309dd-0a2a450ae342-16
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 15:06:17 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a2026c8-bab6-0a2a0a5309dd-0a2a4509cd16-40
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 15:06:22 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <freddy77@gmail.com>)
- id 6a2026c9-56b3-0a2a450a0019-d155802aac1f-3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 15:06:17 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-490bb83a3f6so357775e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 06:06:17 -0700 (PDT)
+ id 6a2026ce-2497-0a2a45090019-d155dd31e4ad-3
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 15:06:22 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-45ef372c58aso2818108f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 06:06:22 -0700 (PDT)
 Received: from localhost.localdomain (5.116.208.46.dyn.plus.net.
  [46.208.116.5]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2ec711sm7254825f8f.12.2026.06.03.06.06.15
+ ffacd0b85a97d-4601f2ec711sm7254825f8f.12.2026.06.03.06.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 06:06:16 -0700 (PDT)
+ Wed, 03 Jun 2026 06:06:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,120 +53,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780491977; x=1781096777; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hmV5aeQ33UccOsNO+ZfDPPQsqDB1cLMygIKOpc1+2bg=;
-        b=n7eoLNbq+LLcATOLR2ilEK0r623VL3EH01FoR/2GsT473pzYI+EC5wHGgqe4KoPuw6
-         uD1TNib9uLQpvMDs+c3T92tL2UWi8pI2kRU+yY16B/lpYBhFtmIGFh48c4b/Jw0lnSFN
-         zyY5YBvmLekR3+KHYs8YGiGvCn9FdH64RNuqBZ56cx9J7y5Ka1LPf2CVuZH7aoZqWhvF
-         mK6e+X5GgTXCSiWNLQfdOdNp96Ji8UZopgIkmMdsGex02WeG47KiApI22eQHs03Krs+n
-         QZH/NpO/ZozfdDFKYe1Ryyk/mexZuTF0HUdq/JFavbwTVzbIn+hiQ0pctUrYG/twv+Wu
-         auHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780491977; x=1781096777;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1780491982; x=1781096782; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hmV5aeQ33UccOsNO+ZfDPPQsqDB1cLMygIKOpc1+2bg=;
-        b=W3wRYXHscc3yMKYHBt/rIoayHtLPAnPqNL47tQNVONq1To0H/jQ32f0WO8qBw9bDmk
-         Rz2hCMa03Eo9y744+JFRjTO43nYcDzDmPAbX1MzbTlGQmz3i2l+846cEsC4mh4h8Qk+s
-         bgnsmHaMk6p1+Oji0GgfzunpcxydP/WDR4S1kg5UxyfVwByUbntwDPf44Z+ziKGOtWFy
-         21n3n3Y/1y53QIeutWLZYZEUEM8IX8ymT1yIJSQ/ERo0+GV5IrqRbFLYFw6zP87xPW76
-         sGUZ19KBWc/fEmZFqdv3Y+KUWl7HJcDkq3CQT5RV5D5wXXQ7VIRIPpBe3N8/Ko3ee83O
-         LcRw==
-X-Gm-Message-State: AOJu0YwmLTD+lxFUjw0poK7QDnrvKI7uvpVjSdnOGKv5UHrNsA2XDSin
-	kSn2bAf+BYNYbsFqBx17scrmAN2fWh0pkA37IrVR7Q3sI37OAGV1o1XaLmaejFCz
-X-Gm-Gg: Acq92OGGMsoSzaQQFy9g2m7iWuTBBSUIw14UWmrDnMBKtqQuv0sJZb2QpvXYBmDFS/v
-	xi08lZZJY1orTHdN97f+uMv3rhPVqpvwBvVVyna7/D7pP1HonOKCCb5lI0P8g/DWMCFnf8mrTwA
-	NPflqJHvv62Z5qx9z2+Hy72duQhuyFwNlNKXS+m5iqlAfwdmG68zEzPPggyNCJswEXFy2zKRz6A
-	JMf6DsZELrWSZCnzLFkBd3QE4vbbYmENeKNgMIkMNOhi8+W04f2UTEFkNsImO9TNa31w23VshMU
-	A3oHY6W8OjeOAJ537lqzksY6W0IskJWLcxN8k5TGM+CJ+rPM3U+NFWrbd0GhWQ/ZUD4jb9xDJIp
-	UV+QNjNXecslwGBnYFa0OCgZbgPZ/Sn0RUcXQpSrf+FHUA0mL+uRneap0meqbznYnr04mujSddL
-	0kh2yOZjPshVhP6oqHMCYb77j4lV0gNJeJ/3O2ldHvRGVs45QK+yHXKPpzl8WGQtVVKCHOLN6qs
-	sGJwgcixCRxKIwXrNTioM95youvHa6T34Qz
-X-Received: by 2002:a05:600c:c103:b0:490:9bc2:bf8b with SMTP id 5b1f17b1804b1-490b5e79656mr41657875e9.5.1780491976873;
-        Wed, 03 Jun 2026 06:06:16 -0700 (PDT)
+        bh=ngHaiXVcIZgsSzheol0Gqpgp4lQa4ltKlhodC4+DNtk=;
+        b=gbcqRJTbXZ/KrrbJsX0qctBQVUa8KUGVs4wXZ9ZbMcWuCz+Nut92FaxVXL9lF3F2K3
+         yo7kQfqE8W2Ck8NqiFlvfhaIi+xVs0G5lAd++Gqr3l00nTJuuyYXJHIiwi3XFdJtsZGK
+         FgXJ/dp7yliq8W07cWeeiCQYujwwaDn1VlgViLGt6eOd6cLyO6evO8B4yJ+cWQoMXaMX
+         AmW6Mj2TWiRGtHbQrr6t5VHigP7P9Ue/o6uNp3Pu/+DGACyo9cJdndQ3gPL20UpF3yVK
+         cVry8ddG3E2+UtUi13HrsOn/STW00AIOHIVOb1T9JwV//9iOA7gpDFa63CJ++PoRGWj/
+         HE7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780491982; x=1781096782;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ngHaiXVcIZgsSzheol0Gqpgp4lQa4ltKlhodC4+DNtk=;
+        b=TXW7IglQiFOjji7KvQwyudstIBndwHX3f5Y/0pxGCGeGWFfeWPZhssdDrB2TWRtEo1
+         vKRDSy3Lf13uB5gwuf80CtJdBUwjdCCLytWYa0N7ziFGIynCKqE9B6ZCgXG4HYKaHtF/
+         6Ve8Tyg3rSlq9rpM33iBV4aR8bytK7uSZv7EF/1Tm/BSdgaUUEtxFrvHo9S7HYVNLqMg
+         KBrIp5/caRfzVPb/u5/W1GL9cl4Jcq1o4GVUnBBiQLHwsKNt0KiO0PZeT+8L9sKo/Y8+
+         ZuSifTB24wMMHiTFA2yT3zRvW/0impAjYpTy8l0ZUxwIBNHFCxAgWlj3rV9OyINmtKJ/
+         MoQQ==
+X-Gm-Message-State: AOJu0YxzUneePm39btn0yT12YS2rFOIR3n+/sGFT9H97/kC4GW8sGloP
+	G+mA9EQmCtqPcQmatevEoARILCnOxchTlAu1k2jt466MVwTOqxvYmvYLgXIXcK5t
+X-Gm-Gg: Acq92OE+mf5Ggrwfy5jeZTnrS/fogo1YUzhjE09RtOWGk0azIuYmf/qx/Y4FRoD8Zfq
+	cWnuJbeOGXHBkzPjsVFLgVvk8zxFj2p00YnKRvaa+hfGqfsBPjRoqp//h7gaaYS7dN1h87lfUyB
+	Pksglqh6t9Lf0QE1oj8ua020jSpA4FRU8iudVN0tyfuCSn+lYVFE67sWhRZJ8TZF/IpGWSfk9vL
+	A7mveFu/JvK5HMUBPBYmOVXEiEtOe3sqXpB8Tfwc3M41jFXo6R3VaJhv5odZhQBlsCUU1V2haID
+	SqdNPH30KY25Fw4Tc86BBBPjSXUBPn7YYU5IqinlEBxGPh+ivORIsOEJMSWbqskPytzmrZ2JwXG
+	k8kKpoqA8U3q+F7U/9hpDgt59/zmyAsxYd/U7hCmwJWIIDxBeZSMwGFquFnyIxWD0CKOWlu+lZj
+	IzlrqEpWiRzO1lPXgtzDNJOZWXbHPMK3336b8IfrrZ1kQm1x+W9/50Ys5Ge08vhjNs2aio1aiPD
+	CzD2vuWAGs1ujzdvbEH6DiYIgGrxJCCY5JK
+X-Received: by 2002:a5d:5989:0:b0:45e:eef5:b51e with SMTP id ffacd0b85a97d-4602181fafdmr5032385f8f.23.1780491981925;
+        Wed, 03 Jun 2026 06:06:21 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
 X-Google-Original-From: Frediano Ziglio <frediano.ziglio@cloud.com>
 To: xen-devel@lists.xenproject.org
-Cc: Frediano Ziglio <frediano.ziglio@citrix.com>,
+Cc: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v4 00/16] xenguest optimisations
-Date: Wed,  3 Jun 2026 14:05:47 +0100
-Message-ID: <20260603130603.776452-1-frediano.ziglio@cloud.com>
+	Juergen Gross <jgross@suse.com>,
+	Frediano Ziglio <frediano.ziglio@citrix.com>
+Subject: [PATCH v4 05/16] libs/guest: allocate various migration arrays just once
+Date: Wed,  3 Jun 2026 14:05:52 +0100
+Message-ID: <20260603130603.776452-6-frediano.ziglio@cloud.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260603130603.776452-1-frediano.ziglio@cloud.com>
+References: <20260603130603.776452-1-frediano.ziglio@cloud.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1780491977-709668B7-352EAB86/0/0
+X-purgate-ID: tlsNG-bad1c0/1780491982-89D85A53-6F8A59D2/0/0
 X-purgate-type: clean
-X-purgate-size: 2305
+X-purgate-size: 6496
 
-From: Frediano Ziglio <frediano.ziglio@citrix.com>
+From: Edwin Török <edwin.torok@citrix.com>
 
-Reduce some number of parts passed to writev.
-Avoid possible allocation sending data with writev.
-Reduce number of allocations sending memory state.
+Allocate these array just once at the start of migration,
+using the maximum batch size, and free them at the end.
 
-Implement and use new Xen and Linux kernel ABI to copy foreign memory.
-This new ABI allows to replace theexpensive  map/copy/unmap sequence
-with a single call.
-
-Changes since v1:
-- add commit to cache up to 4 pages in hypercall;
-- add other 2 commits reducing chunks passed to write/writev.
-
+Signed-off-by: Edwin Török <edwin.torok@citrix.com>
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+--
 Changes since v2:
-- update patches commit prefixes;
-- add other 2 optisations.
+- change prefix in subject.
 
 Changes since v3:
-- address some comments;
-- add patches for foreign copy optimisation.
+- fix comment style
+---
+ tools/libs/guest/xg_sr_common.h | 13 +++++++
+ tools/libs/guest/xg_sr_save.c   | 66 +++++++++++++--------------------
+ 2 files changed, 39 insertions(+), 40 deletions(-)
 
-Edwin Török (3):
-  libs/guest: allocate various migration arrays just once
-  libs/call: cache up to 4 pages in hypercall bounce buffers
-  PoC: libs/guest: use foreign copy during migration
-
-Frediano Ziglio (12):
-  libs/guest: Reduce number of parts in write_split_record
-  libs/guest: Reduce number of I/O vectors in write_batch
-  libs/guest: Reduce number of I/O vectors in write_batch
-  libs/guest: Use a single write_exact in write_headers
-  libs/guest: avoids using 2 indexes
-  libs/guest: fill directly iov structure
-  libs/ctrl: Allows writev_exact to change iov array
-  libs/guest: add xg_foreignmemory_copy_{from,to}
-  xen: implement new foreign copy hypercall
-  privcmd: Add definition for new Linux privcmd to access new Xen
-    hypercall
-  libs/guest: use new hypercall if available
-  libs/guest: finalize PoC
-
- public-abi/memory.h                   |  40 ++++-
- tools/include/xen-sys/Linux/privcmd.h |  10 ++
- tools/libs/call/buffer.c              |  28 ++--
- tools/libs/call/core.c                |   3 +-
- tools/libs/call/private.h             |   8 +-
- tools/libs/ctrl/xc_private.c          |  26 +--
- tools/libs/ctrl/xc_private.h          |   2 +-
- tools/libs/guest/xg_sr_common.c       |  95 ++++++++++-
- tools/libs/guest/xg_sr_common.h       |  21 +++
- tools/libs/guest/xg_sr_restore.c      | 100 ++++++------
- tools/libs/guest/xg_sr_save.c         | 225 +++++++++++---------------
- xen/common/memory.c                   | 133 +++++++++++++++
- xen/include/public/memory.h           |  40 ++++-
- 13 files changed, 512 insertions(+), 219 deletions(-)
-
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index f1573aefcb..82549b5589 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -209,6 +209,18 @@ static inline int update_blob(struct xc_sr_blob *blob,
+     return 0;
+ }
+ 
++struct xc_sr_context_save_buffers
++{
++    xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
++    xen_pfn_t mfns[MAX_BATCH_SIZE];
++    xen_pfn_t types[MAX_BATCH_SIZE];
++    int errors[MAX_BATCH_SIZE];
++    void *guest_data[MAX_BATCH_SIZE];
++    void *local_pages[MAX_BATCH_SIZE];
++    struct iovec iov[MAX_BATCH_SIZE + 2]; /* Headers + data. */
++    uint64_t rec_pfns[MAX_BATCH_SIZE];
++};
++
+ struct xc_sr_context
+ {
+     xc_interface *xch;
+@@ -244,6 +256,7 @@ struct xc_sr_context
+             unsigned long *deferred_pages;
+             unsigned long nr_deferred_pages;
+             xc_hypercall_buffer_t dirty_bitmap_hbuf;
++            struct xc_sr_context_save_buffers *buffers;
+         } save;
+ 
+         struct /* Restore data. */
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 8c4e760f8d..7d8055a3f9 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -86,16 +86,16 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = NULL, *types = NULL;
++    xen_pfn_t *mfns, *types;
+     void *guest_mapping = NULL;
+-    void **guest_data = NULL;
+-    void **local_pages = NULL;
+-    int *errors = NULL, rc = -1;
++    void **guest_data;
++    void **local_pages;
++    int *errors, rc = -1;
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+-    uint64_t *rec_pfns = NULL;
+-    struct iovec *iov = NULL; int iovcnt = 0;
++    uint64_t *rec_pfns;
++    struct iovec *iov; int iovcnt = 0;
+     struct {
+         struct xc_sr_rhdr rec;
+         struct xc_sr_rec_page_data_header page_data;
+@@ -105,26 +105,24 @@ static int write_batch(struct xc_sr_context *ctx)
+     };
+ 
+     assert(nr_pfns != 0);
++    assert(nr_pfns <= MAX_BATCH_SIZE);
++    assert(ctx->save.buffers);
+ 
+     /* Mfns of the batch pfns. */
+-    mfns = malloc(nr_pfns * sizeof(*mfns));
++    mfns = ctx->save.buffers->mfns;
+     /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
++    types = ctx->save.buffers->types;
+     /* Errors from attempting to map the gfns. */
+-    errors = malloc(nr_pfns * sizeof(*errors));
++    errors = ctx->save.buffers->errors;
+     /* Pointers to page data to send.  Mapped gfns or local allocations. */
+-    guest_data = calloc(nr_pfns, sizeof(*guest_data));
++    guest_data = ctx->save.buffers->guest_data;
++    memset(guest_data, 0, sizeof(*guest_data) * nr_pfns);
+     /* Pointers to locally allocated pages.  Need freeing. */
+-    local_pages = calloc(nr_pfns, sizeof(*local_pages));
++    local_pages = ctx->save.buffers->local_pages;
++    memset(local_pages, 0, sizeof(*local_pages) * nr_pfns);
+     /* iovec[] for writev(). */
+-    iov = malloc((nr_pfns + 2) * sizeof(*iov));
+-
+-    if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
+-    {
+-        ERROR("Unable to allocate arrays for a batch of %u pages",
+-              nr_pfns);
+-        goto err;
+-    }
++    iov = ctx->save.buffers->iov;
++    rec_pfns = ctx->save.buffers->rec_pfns;
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+     {
+@@ -210,14 +208,6 @@ static int write_batch(struct xc_sr_context *ctx)
+         }
+     }
+ 
+-    rec_pfns = malloc(nr_pfns * sizeof(*rec_pfns));
+-    if ( !rec_pfns )
+-    {
+-        ERROR("Unable to allocate %zu bytes of memory for page data pfn list",
+-              nr_pfns * sizeof(*rec_pfns));
+-        goto err;
+-    }
+-
+     hdrs.rec.length = sizeof(hdrs.page_data);
+     hdrs.rec.length += nr_pfns * sizeof(*rec_pfns);
+     hdrs.rec.length += nr_pages * PAGE_SIZE;
+@@ -267,17 +257,13 @@ static int write_batch(struct xc_sr_context *ctx)
+     rc = ctx->save.nr_batch_pfns = 0;
+ 
+  err:
+-    free(rec_pfns);
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+     for ( i = 0; local_pages && i < nr_pfns; ++i )
++    {
+         free(local_pages[i]);
+-    free(iov);
+-    free(local_pages);
+-    free(guest_data);
+-    free(errors);
+-    free(types);
+-    free(mfns);
++        local_pages[i] = NULL;
++    }
+ 
+     return rc;
+ }
+@@ -805,18 +791,18 @@ static int setup(struct xc_sr_context *ctx)
+ 
+     dirty_bitmap = xc_hypercall_buffer_alloc_pages(
+         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
+-    ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
+-                                  sizeof(*ctx->save.batch_pfns));
+     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
++    ctx->save.buffers = calloc(1, sizeof(*ctx->save.buffers));
+ 
+-    if ( !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
++    if ( !dirty_bitmap || !ctx->save.deferred_pages || !ctx->save.buffers)
+     {
+-        ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+-              " deferred pages");
++        ERROR("Unable to allocate memory for dirty bitmaps, deferred pages"
++              " and various batch buffers");
+         rc = -1;
+         errno = ENOMEM;
+         goto err;
+     }
++    ctx->save.batch_pfns = ctx->save.buffers->batch_pfns;
+ 
+     rc = 0;
+ 
+@@ -840,7 +826,7 @@ static void cleanup(struct xc_sr_context *ctx)
+     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
+                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     free(ctx->save.deferred_pages);
+-    free(ctx->save.batch_pfns);
++    free(ctx->save.buffers);
+ }
+ 
+ /*
 -- 
 2.54.0
 
