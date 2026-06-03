@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B01CD6E55
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 14:28:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1326586.1592000 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D87D3CD6E57
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2026 14:30:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1326594.1592010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUmZU-0005JW-9b; Wed, 03 Jun 2026 14:27:52 +0000
+	id 1wUmbx-0007TH-Mj; Wed, 03 Jun 2026 14:30:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1326586.1592000; Wed, 03 Jun 2026 14:27:52 +0000
+Received: by outflank-mailman (output) from mailman id 1326594.1592010; Wed, 03 Jun 2026 14:30:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wUmZU-0005JP-69; Wed, 03 Jun 2026 14:27:52 +0000
-Received: by outflank-mailman (input) for mailman id 1326586;
- Wed, 03 Jun 2026 14:27:51 +0000
+	id 1wUmbx-0007TA-Ie; Wed, 03 Jun 2026 14:30:25 +0000
+Received: by outflank-mailman (input) for mailman id 1326594;
+ Wed, 03 Jun 2026 14:30:24 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1wUmZT-0005JJ-A9
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 14:27:51 +0000
+ (envelope-from <bernhard.kaindl@citrix.com>) id 1wUmbw-0007T0-Ts
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 14:30:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wUmZS-0073ug-N4
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 16:27:50 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1wUmbw-007VNB-60
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2026 16:30:24 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a2039e2-e002-0a2a0a5209dd-0a2a450695e0-2
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 16:27:50 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a2039e6-7371-0a2a45060019-d155dd2fd05c-3
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 16:27:50 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-45ef56d9b67so4227137f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 07:27:50 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f360bd6sm8492883f8f.36.2026.06.03.07.27.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 07:27:49 -0700 (PDT)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 6a203a7a-bab6-0a2a0a5309dd-0a2a4507e73c-18
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 16:30:23 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 6a203a7e-229c-0a2a45070019-a0658309e722-3
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Jun 2026 16:30:23 +0200
+Received: from debian.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id BC50E8181B0B;
+ Wed,  3 Jun 2026 10:29:04 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,192 +48,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1780496870; x=1781101670; darn=lists.xenproject.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=PskSbrUCnmHESNWYUNpNeSr6enLDZQdnwF1ihtcUwDc=;
-        b=CUR90Gnuvrv6AIfcuACFF3rFoJ7TXE/75KyVjx+d8rpmZ6O512HhgMLhVpt1Jj/UbF
-         xtVkc5gubex/r1vAbY2QZ1j9M7WFrtcR4jAKO+Jr3xtNu0T42/Q9xn3hG/22xME/4V9t
-         BUDwSINj7/N5XyPl30Qp1GH5cgyLQw4MnlrASBt/jhAOMQKkcsllUl6agwZtjgVxXNWa
-         4QdrXK7nkLQaqpkfGGK/BFihDfvrgv1/fik3ePZAnzy5N1FCNmRu+TQtvag4P+KpbhDD
-         uSoFL04bDvTXuRCf8KMNnrX+NCWPI/VXnN1UH36FmFuKeivNq/729GftIiIQfdIbWXpv
-         cbpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780496870; x=1781101670;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PskSbrUCnmHESNWYUNpNeSr6enLDZQdnwF1ihtcUwDc=;
-        b=o1gVQ798l/i7xZUK0mrzktE2In6l0FIULCiU+5cwNSYq2eD/2Lp9Le0wEZCU6R10M7
-         tt1Zaqa0Up7S4VADAa+G3zeiMMCMkpxc41z/tztoQXxy/y2OYVB2pMir6aa3bQVtkp5E
-         nk/nnYCYiIQ72wYeDH42SlC9eUolgJCLntH6PmLpNHu+7bk9iWa+Eu20AOtuP+KPxRie
-         1Sw4BjKdUCvJA+4Szc0O5i9zF82KaiEWAN/GlAYkUIjOXRWNis6pDh/sccyS2i7iy+sf
-         2iKba61FwBgval4T/svelwfnEE7rC14D4awsJUQ94spb+S3s25rt3+FU+Hc1NsB0Ruzn
-         ap3A==
-X-Gm-Message-State: AOJu0YyhxgBKCTgWswluxbFrstf7pO2wBoEz0bBuTRBBlzNucQmnCHOM
-	UW7sBBDV7AvEeFLEKKxpIeexpbKXha1pOEmuDsN+EEN0TpJ7D7BVzmEqhLZLxo2cBg==
-X-Gm-Gg: Acq92OGqLjgNcKII0zj4tn1sL0aEMBYynQdy02o3YYp+waLNIULOpqPoMtsOjc2Zh+2
-	zpf9xkUiStgJSAqHQyMwBeGUVLmgBvVO4R5blwX3xR38s0/84rnNXCKd522wseZBgokvb7zD3u3
-	YFKEKiOGQT3m2pExG0F0T2nG+FSYjVfev/BxDcrkbsCnsfb7MN32DvQ4Va1VDHnsNsMTW/YJdd1
-	PESei6E+zm1gRNlsZW2O6NR65lYDLuefyDwvbTOZrBBYnhUQeVBhhSSi2iFD0Ko+PgEu558ldUu
-	wm/JhbBZ2C+H2QtNEMtRppnc1f+NZ8wa7oq3lUI7aB/D8D++h6rvUgqhR+HQ23E8ljz9j2m0emi
-	ehYcfg2ltzf+ONBUWJ8fImx827ObtxpwUKiOUfS4aOV0aBkxmcu2FsJYsnMYSK6Aig9wH9Noolk
-	rt7uu62JRuzD+S34+L5Ceom+Y5SKfttkUKCQIxKEdu8b69P7t4s/9UbaIBqjpRX+aLCgYz/j/gc
-	7p6g0wh/uu4U0KpywVx0NPMmA==
-X-Received: by 2002:a5d:64c9:0:b0:45e:a314:ce0c with SMTP id ffacd0b85a97d-460218aae0cmr5574675f8f.1.1780496869859;
-        Wed, 03 Jun 2026 07:27:49 -0700 (PDT)
-Message-ID: <40e127c4-98da-41d7-b7a7-6298553d2f7d@suse.com>
-Date: Wed, 3 Jun 2026 16:27:48 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Bernhard Kaindl <bernhard.kaindl@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 0/2] xen/mm: Fix off-by-one for tail merge in reserve_offlined_page()
+Date: Wed,  3 Jun 2026 15:27:20 +0100
+Message-Id: <cover.1780496798.git.bernhard.kaindl@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/x86: Change stub page freeing to fix smt=0
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
- Jason Andryuk <jason.andryuk@amd.com>
-References: <20260526203114.40882-1-jason.andryuk@amd.com>
- <ah26nl95MgqhPPAi@macbook.local>
- <5cdfca65-50f8-487a-a146-86e1a68f459c@amd.com>
- <ah5_0vvipY2Wch-x@macbook.local>
- <cf275fef-27fb-4d73-bbc8-9a75c1836608@amd.com>
- <aiA3T2DvE0v6uwoC@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aiA3T2DvE0v6uwoC@macbook.local>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1780496870-86369D75-61544CF5/0/0
+X-purgate-ID: tlsNG-ef75cf/1780497023-23175C48-2253BD39/0/0
 X-purgate-type: clean
-X-purgate-size: 5571
+X-purgate-size: 2419
 
-On 03.06.2026 16:16, Roger Pau Monné wrote:
-> On Wed, Jun 03, 2026 at 10:03:53AM -0400, Jason Andryuk wrote:
->> On 2026-06-02 03:01, Roger Pau Monné wrote:
->>> On Mon, Jun 01, 2026 at 05:07:52PM -0400, Jason Andryuk wrote:
->>>> On 2026-06-01 13:00, Roger Pau Monné wrote:
->>>>> On Tue, May 26, 2026 at 04:31:14PM -0400, Jason Andryuk wrote:
->>>>>> A single stubs page is initialized with 0xcc and re-used, with multiple
->>>>>> CPUs each using a portion of the shared page.  In cpu_smpboot_free(),
->>>>>> each stubs area is checked against 0xcc.  When all are set to 0xcc, the
->>>>>> page is freed.
->>>>>>
->>>>>> Booting a system with smt=0, CPU0 is initially setup, allocating the
->>>>>> stubs page and initializing to 0xcc.  When more CPUs are brought up,
->>>>>> CPU1 is initialized and then immediately brough offline as it is the
->>>>>> sibling of CPU0.  Since the page was initially memset with 0xcc,
->>>>>> cpu_smpboot_free() finds all stubs as 0xcc and frees the page.
->>>>>> However, the page is still assigned to CPU0 and continues to be assigned
->>>>>> to other CPUs.
->>>>>>
->>>>>> Meanwhile the page can be reallocated, which can lead to misbehavior.
->>>>>> The particular instance was the stubs page re-used as a page table which
->>>>>> later faulted when the entry was all 0xcc.
->>>>>>
->>>>>> Change to initializing the page as 0xd6/STUB_BUF_FREE, and initializing
->>>>>> individual stubs as 0xcc/STUB_BUF_USED.  0xd6 now indicates unused, and
->>>>>> 0xcc indicates used/assigned.  When freeing a CPU, the stub is set to
->>>>>> 0xd6, and the page is freed if all stubs are 0xd6.  Initializing with
->>>>>> STUB_BUF_FREE lets cpu_smpboot_free() a page that was only ever
->>>>>> partially used.
->>>>>>
->>>>>> 0xd6/UDB is a 1 byte invalid opcode, which is similar to the existing
->>>>>> use of 0xcc.  0xd6 is used to identify bug frames, but the stub addr
->>>>>> (e.g. 0xffff82d07fffe000) fails the is_active_kernel_text() check.  It
->>>>>> should be okay to use here.
->>>>>>
->>>>>> Fixes: 7a66ac8d1633 ("x86: move syscall trampolines off the stack")
->>>>>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->>>>>> ---
->>>>>> It would be nice to use get_page()/put_page() to let count_info handle
->>>>>> reference counting, but they require an owning domain.
->>>>>>
->>>>>> The listed Fixes introduced the use of 0xcc, but the smt commit may have
->>>>>> made it more problematic.
->>>>>> Fixes: d8f974f1a646 ("x86: command line option to avoid use of secondary hyper-threads")
->>>>>
->>>>> Speaking with Andrew, we believe it might be easier to simply forego
->>>>> the freeing of the page, possibly something like:
->>>>>
->>>>> diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
->>>>> index ff05955bae40..62c6cbf4b561 100644
->>>>> --- a/xen/arch/x86/smpboot.c
->>>>> +++ b/xen/arch/x86/smpboot.c
->>>>> @@ -990,19 +990,12 @@ static void cpu_smpboot_free(unsigned int cpu, bool remove)
->>>>>        {
->>>>>            mfn_t mfn = _mfn(per_cpu(stubs.mfn, cpu));
->>>>>            unsigned char *stub_page = map_domain_page(mfn);
->>>>> -        unsigned int i;
->>>>>            memset(stub_page + STUB_BUF_CPU_OFFS(cpu), 0xcc, STUB_BUF_SIZE);
->>>>> -        for ( i = 0; i < STUBS_PER_PAGE; ++i )
->>>>> -            if ( stub_page[i * STUB_BUF_SIZE] != 0xcc )
->>>>> -                break;
->>>>>            unmap_domain_page(stub_page);
->>>>>            destroy_xen_mappings(per_cpu(stubs.addr, cpu) & PAGE_MASK,
->>>>>                                 (per_cpu(stubs.addr, cpu) | ~PAGE_MASK) + 1);
->>>>>            per_cpu(stubs.addr, cpu) = 0;
->>>>> -        per_cpu(stubs.mfn, cpu) = 0;
->>>>> -        if ( i == STUBS_PER_PAGE )
->>>>> -            free_domheap_page(mfn_to_page(mfn));
->>>>>        }
->>>>>        if ( IS_ENABLED(CONFIG_PV32) )
->>>
->>> I think I've made an oversight in the code above: if all 32 CPUs
->>> sharing the same stubs page are offlined, the reference to the stubs
->>> page is possibly lost (if CPUs are not parked) and a new stubs page
->>> would be allocated if any of those CPUs is brought back online, thus
->>> leaking the previous allocation.  The simplest way to solve this would
->>> be to introduce an array that indexes the stub pages, and replace the
->>> logic in cpu_smpboot_alloc() that figures out whether stubs.mfn is set
->>> for adjacent CPUs.
->>
->> Right, but I thought Andrew's point was that offlining 32 CPUs is
->> unrealistic, so don't even bother tracking.  If CPUs are offlined (and you
->> somehow keep running), you can leak the page.
-> 
-> I thin we should avoid freeing the page and ensure it's always reused,
-> rather than possibly leaking it.  It's also possible there's a single
-> trailing CPU using the last stubs page alone, and offlining and
-> onlining it would trigger such a page leak, without requiring a block
-> of 32 CPUs going offline.
-> 
-> Entering an ACPI sleep state causes all APs to be offlined (see the
-> disable_nonboot_cpus() call in enter_state()), and it would be
-> undesirable that putting a system to sleep causes page leaking.
+After offlining pages, reserve_offlined_page() attempts to grow larger
+buddies between the offlined pages, but due to an off-by-one, this
+fails at the tail end of the span of pages of the containing buddy.
 
-Suspend is handled specially by some CPU notifier handlers, see in
-particular common/percpu.c:cpu_percpu_callback(). That in particular
-means that per-CPU data survives suspend/resume. Which may be possible
-to leverage here to avoid a leak across S3 (and perhaps even across
-the pretty similar parking), while still accepting a leak for "real"
-CPU offlining. (Which isn't to say that avoiding leaks altogether
-wouldn't be the most desirable goal.)
+As requested for backporting the fix, the first patch fixes the
+issue while the second patch adds the regression test for it.
 
-Jan
+Consider an order-2 buddy (4 pages) with the following layout:
++---------------+---------------+---------------+---------------+
+| head page       tail page 1,    tail page 2     tail page 3   |
+| PFN_ORDER(pg)   marked as to                                  |
+| == 2            be offlined                                   |
++---------------+---------------+---------------+---------------+
+
+The expected result after removing tail page 1 and returning the
+remaining healthy pages to the free list would be:
+
++---------------+               +---------------+---------------+
+| single page   | offlined page | head page       tail page     |
+| PFN_ORDER(pg) | not returned  | PFN_ORDER(pg)                 |
+| == 0          | to the heap   | == 1                          |
++---------------+               +---------------+---------------+
+
+A trivial off-by-one error in the growth loop stops the growth loop
+early before the tail end of the original buddy and we end up with:
+
++---------------+               +---------------+---------------+
+| single page   | offlined page | single page   | single page   |
+| PFN_ORDER(pg) | not returned  | PFN_ORDER(pg) | PFN_ORDER(pg) |
+| == 0          | to the heap   | == 0          | == 0          |
++---------------+               +---------------+---------------+
+
+You can pull this series with the regression test environment to run it:
+$ git pull git@gitlab.com:bernhardkaindl/xen.git offline-merge-tail-v2
+$ make -C tools/tests/native TARGETS=offline-merge-tail test
+
+Fixes: e4865c2315 ('Page offline support in Xen side')
+Signed-off-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+
+Bernhard Kaindl (2):
+  xen/mm: Fix off-by-one preventing tail merge in
+    reserve_offlined_page()
+  tools/tests: Add regression test for tail buddy growth
+
+ tools/tests/native/offline-merge-tail.c | 81 +++++++++++++++++++++++++
+ xen/common/page_alloc.c                 |  4 +-
+ 2 files changed, 84 insertions(+), 1 deletion(-)
+ create mode 100644 tools/tests/native/offline-merge-tail.c
+
+-- 
+2.39.5
+
 
