@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4285CD6E7C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9470BCD6E6D
 	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2026 15:08:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1328016.1592683 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1328041.1592742 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wV9gA-0004ub-DE; Thu, 04 Jun 2026 15:08:18 +0000
+	id 1wV9gD-00061X-U3; Thu, 04 Jun 2026 15:08:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1328016.1592683; Thu, 04 Jun 2026 15:08:18 +0000
+Received: by outflank-mailman (output) from mailman id 1328041.1592742; Thu, 04 Jun 2026 15:08:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wV9gA-0004u3-7s; Thu, 04 Jun 2026 15:08:18 +0000
-Received: by outflank-mailman (input) for mailman id 1328016;
- Thu, 04 Jun 2026 15:02:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1wV9gD-0005zn-7U; Thu, 04 Jun 2026 15:08:21 +0000
+Received: by outflank-mailman (input) for mailman id 1328041;
+ Thu, 04 Jun 2026 15:02:13 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dimitri.daskalakis1@gmail.com>) id 1wV9a4-00042c-BJ
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 15:02:00 +0000
+ (envelope-from <dimitri.daskalakis1@gmail.com>) id 1wV9aH-0004B2-32
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 15:02:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wV9a3-001rSt-OC
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 17:01:59 +0200
+ id 1wV9aG-00ALgh-Fd
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 17:02:12 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dimitri.daskalakis1@gmail.com>)
- id 6a219360-2eae-0a2a0a5409dd-0a2a4507c166-22
- for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 17:01:59 +0200
-Received: from [209.85.215.175] (helo=mail-pg1-f175.google.com)
+ id 6a21936d-bab6-0a2a0a5309dd-0a2a45078eda-38
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 17:02:12 +0200
+Received: from [209.85.214.172] (helo=mail-pl1-f172.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <dimitri.daskalakis1@gmail.com>)
- id 6a219365-229c-0a2a45070019-d155d7afc424-3
- for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 17:01:59 +0200
-Received: by mail-pg1-f175.google.com with SMTP id
- 41be03b00d2f7-c85ba774551so327339a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 08:01:58 -0700 (PDT)
-Received: from localhost ([2a03:2880:7ff:5e::])
+ id 6a219373-229c-0a2a45070019-d155d6acb425-3
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 17:02:12 +0200
+Received: by mail-pl1-f172.google.com with SMTP id
+ d9443c01a7336-2c0c1e0b0faso6078675ad.0
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 08:02:11 -0700 (PDT)
+Received: from localhost ([2a03:2880:7ff:1::])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c85df0bdbe4sm5661594a12.32.2026.06.04.08.01.56
+ d9443c01a7336-2c16609df79sm62219485ad.42.2026.06.04.08.02.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 08:01:56 -0700 (PDT)
+ Thu, 04 Jun 2026 08:02:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,41 +55,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780585317; x=1781190117; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1780585330; x=1781190130; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jnSLmeLJV6kE0iVS5+3SJmFGhHsRiD3c0F7TGZf1V5w=;
-        b=iJ1YGbqoa8QOMwaWUrkdZORVJR6dj/LiNaQRp8CVVAEzaHuNhmZiPE3z1Mmk0/Hjgi
-         E/p+xnWqmcJ5/o2YExAjA7nMYPPyk7SZGqqPhaLLfyK9ULrwec6b3USG8tewMeuxkVcN
-         92hXBlUmqDx/lU6LekzhC3Utn+vkn8LTujDJx3j98TD5tJk+ABnhNJcvlfc0Hk6XgSqs
-         Hk9+iuhzlkO2Sutk1FlGdBnPtp7A/89TrzTqasfwF7VqCixbxJkL9AEl0Bci/eg6sFIq
-         C4c/9NcRx6nRDS2C0xK96SnFJ87o0P9Hm40TRmICbJXCxf+7R1m2OOIKATgyIFEvvXa2
-         f5gg==
+        bh=DQ5QlRlqJf2BWfjEpgZtMhqYoBzzggdHeyuHigzWBDQ=;
+        b=IOcZNkdmJQuDr7JHH+JExjDNRdKXBZJ6jbrpGw6VSMmEYZ95rilPkA7twiDZBzhxW+
+         Xbom02EC93Xf2KvYEGvMUnzHzqKZ/LY43Ea9RhNfVAZAon2U0Iz51kp6Mx4UamRNi94Y
+         7c37Fdxtwb4bVPo3NrNRiaDfnc062M1DPeOk2V6yInMIEKaSUePGKiNYinFRljjsqrtf
+         xyPurDnKkZX8be1piPqCOFg+TCqc+fiJfuj5gU0RGrnivuX7xgHvJRzL8AzwzVNNliqn
+         9dXOSBNllP856xNPmc9TNN85E86sLHXmUdti2RUx+DgHEO52PXPqNwwK0VsFR1bzCOgM
+         TnVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780585317; x=1781190117;
+        d=1e100.net; s=20251104; t=1780585330; x=1781190130;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=jnSLmeLJV6kE0iVS5+3SJmFGhHsRiD3c0F7TGZf1V5w=;
-        b=BJHTgApGjPvDQNPlNWEjXZ5aPrYUIkoFiOSaEkVo3yXtlgTaFbMqQEdGzGC/dGaDFA
-         ZfUsdbO14JA8AsnG+FLjuhXSHCSfN3AXMK6h7A1O7v4y3MzPwKqa/O+wPEJ96GIiPGr/
-         +YT4v0GwQybvg5v+4wu99B9lZFv1Crx2mSqZ01tAJHdtOq4bZHl324wneNYp/WqGxM6r
-         aNzQ+isFWlWXdsSuINuV4k9LLzHPPvYXhdn6MnuFvKp8fBw1eDTihtLjmsqkIzcb5RuQ
-         E08nkzeXyIROQTIMd1lCz7bryh6hYcH6dHnviSGTJO6Ya9jzrLsHAR5oo5C9xPzXWgV2
-         DYxQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+pYb4iQNvEq2MHtsOe7/bcn2orHzEmpMMyTtL8Hltlib8jgpBlgmhfTbR3gmuUdaDkAZKcQV51/hE=@lists.xenproject.org
-X-Gm-Message-State: AOJu0YyDYvERzjmYJrPDsBtaeSi5MFguahb/p9SVL6Fv3J6MQoJwtOuw
-	izVR52maVsURVC97hF06Z/4QzhZ9nBlhkSAIaFmfPFMbUu49/KF7XC3l
-X-Gm-Gg: Acq92OGLsChzySuSyABvpeF7cNdZVgQk3o87GxWjQBq95Ofh0KYNXpgsUGkDGL7zEtq
-	wB6olwUlDyVvfV4ZcyJKR/LyZn9yPX9fz0+GHq894RXEyDm5Q4f3yf5KDYGoIl0VHyC1cAJJxLm
-	R0Dc28M8hGmaO+Kolh5Ej6X3YIRfjTwkWNPJi94fGRGtLCsoe3x9EO6nKlzRQ3L92GRu9sMpTJ6
-	vx7txiFhFVMcV4DDf0PKEBML0cVKK4veqb5Fw6YlFAFiAW6VrSiLHbuJkAVbekKAPU+saBXKnjk
-	YoshaSsPpsmeHZV4eGCBH5OVvilyj0yeIDNuH877pjGaiLvRb3ES+h3o0U0RDWyYgzvpFLbPOrX
-	byPihT6pXtobVh38V3nM3RRzDNSLMU+4KEEqKKGRKgvMEWAyqikihTcRP/Iqz0v4uCpjad1FnuM
-	inRhN+0Khcbaa3GAW1lsQBIy4C56DW3xk4nDRVpPI=
-X-Received: by 2002:a05:6a21:6083:b0:3a3:a9c4:3d60 with SMTP id adf61e73a8af0-3b4975cdbe8mr9228482637.27.1780585316708;
-        Thu, 04 Jun 2026 08:01:56 -0700 (PDT)
+        bh=DQ5QlRlqJf2BWfjEpgZtMhqYoBzzggdHeyuHigzWBDQ=;
+        b=rvWqdHz6AM8hLj+zo/L0mM65sLKbaRX8CiL1pYkyyxBPM1Y679XlfogLDubRQ3Nk56
+         pwg5nQb/oGUJjo+4zGNzuhJ/vJhTIqdJqZvZx8d3F3qKchdLbJf7YOqoSXwD7l+QzajE
+         XGNgOpfWBBIpKek42HsenG/A2mL16aE9iLTiEHfjJDyJMsCrGqIIXzWzcXZN3bnvdGc1
+         qIpwka+3PqgJzD0Y2F+CeiFeeHKPp8O8Vl8T3vXu5tt9Inyk/SYTuqc1ew0vdreMSYxX
+         UHKhys5QSGXlbRkk1iQQcOVuZWDnBaGc/0rMwGHvpRb3XomxYx376Jik7LaEhzic96wO
+         l2Qg==
+X-Forwarded-Encrypted: i=1; AFNElJ+hA32efAg5hUUQrcvCCO3eZwtgh6N+vFmJN3C2tBdN1iB+ak/6e2658Wvr5PmPg2XSehEIBJNUgyo=@lists.xenproject.org
+X-Gm-Message-State: AOJu0Ywc3HEGkPRKCPZHYxHugyddPnajmE4TnqbSiaNo1CX4xVHgAjNQ
+	6PtYHzQGvA4iHr2kI2XCrTB72LlfmnhMAZUHRJWg/hZljdcO/J3ZqoQU
+X-Gm-Gg: Acq92OEbBq5gP+3o7aJwYhYB5AFyBN5NT7ZgAFPTTMOXEKKT5iIMN9DzWuVBFMZze98
+	RRDw9dmsMSLqol07/sNl08Lq4pJEVvi+g+W4EwZuCVfst5o10ETpNeqJrlITnpf+9zB3/AcDm8g
+	z+BcXY7+6m/atICO4bcvrj6S6ggN86zVpXRcAPAN255AlxtUsMXqDyelgsQhq9aDORwZY09LEpU
+	a9VHD7j9+Uw8YvbexftAthsyY0f1mY9aGezBfb/yzx9bJOokBSHK9BafTXOStnzO5MOJ14IgF7p
+	UfW9WHEt16WJwyxDH1/1eFBnv9PvyXMBnuWQ7krEb/lSTd4xpR1p7yMXn+uC9MF60RCv7R9xf5Z
+	6n8kH0DJtT/KmPpaao+tV1aQqZ7i9tAzWRCHTWB8AhQNTLIiiR1Ej8f2fjbAo8Eqi9o8wrw1qn2
+	kgM6lJEuCGSuvudBcHIDAwORhPwGuTuyWudqVtvIpnL/aSKxYQ
+X-Received: by 2002:a17:903:1b07:b0:2c0:eee2:fc45 with SMTP id d9443c01a7336-2c163a28b9fmr86640905ad.4.1780585329440;
+        Thu, 04 Jun 2026 08:02:09 -0700 (PDT)
 From: Dimitri Daskalakis <dimitri.daskalakis1@gmail.com>
 To: Bjorn Helgaas <bhelgaas@google.com>
 Cc: linux-pci@vger.kernel.org,
@@ -122,71 +122,80 @@ Cc: linux-pci@vger.kernel.org,
 	linux-s390@vger.kernel.org,
 	kvm@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [RFC 01/12] PCI: Add helpers to identify SR-IOV PFs/VFs.
-Date: Thu,  4 Jun 2026 08:01:42 -0700
-Message-ID: <20260604150153.3619662-2-dimitri.daskalakis1@gmail.com>
+Subject: [RFC 09/12] PCI: Add helper to compute VF Routing ID to pci.h
+Date: Thu,  4 Jun 2026 08:01:50 -0700
+Message-ID: <20260604150153.3619662-10-dimitri.daskalakis1@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260604150153.3619662-1-dimitri.daskalakis1@gmail.com>
 References: <20260604150153.3619662-1-dimitri.daskalakis1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1780585319-0956BC48-CEA36D05/0/0
+X-purgate-ID: tlsNG-ef75cf/1780585332-08F66C48-6AC9C3F4/0/0
 X-purgate-type: clean
-X-purgate-size: 1975
+X-purgate-size: 2035
 
 From: Dimitri Daskalakis <daskald@meta.com>
 
-Throughout core the pci_dev attribute is_physfn is used to determine
-whether or not a PF has SR-IOV active. And is_virtfn is used to check
-if a device is a SR-IOV VF.
+The VF RID computation is identical for SR-IOV and SIOV. Add a common
+helper so we can share the logic across both.
 
-These attributes should be generalized to represent PFs/VFs for any type
-of virtualization. So in preparation, wrap the existing usage in
-helpers and use helpers in subsequent patches to ease the transition.
+No functional changes.
 
 Assisted-by: Claude:claude-opus-4.7
 Signed-off-by: Dimitri Daskalakis <daskald@meta.com>
 ---
- include/linux/pci.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/pci/iov.c |  8 ++++----
+ drivers/pci/pci.h | 12 ++++++++++++
+ 2 files changed, 16 insertions(+), 4 deletions(-)
 
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 2c4454583c11..28892243f49f 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -604,6 +604,16 @@ static inline struct pci_dev *pci_physfn(struct pci_dev *dev)
- 	return dev;
+diff --git a/drivers/pci/iov.c b/drivers/pci/iov.c
+index 4aed4f6a42c3..5d65413ce98d 100644
+--- a/drivers/pci/iov.c
++++ b/drivers/pci/iov.c
+@@ -25,16 +25,16 @@ int pci_iov_virtfn_bus(struct pci_dev *dev, int vf_id)
+ {
+ 	if (!pci_is_sriov_physfn(dev))
+ 		return -EINVAL;
+-	return dev->bus->number + ((dev->devfn + dev->sriov->offset +
+-				    dev->sriov->stride * vf_id) >> 8);
++	return pci_virtfn_routing_id(dev, dev->sriov->offset,
++				  dev->sriov->stride, vf_id) >> 8;
  }
  
-+static inline bool pci_is_sriov_physfn(const struct pci_dev *dev)
+ int pci_iov_virtfn_devfn(struct pci_dev *dev, int vf_id)
+ {
+ 	if (!pci_is_sriov_physfn(dev))
+ 		return -EINVAL;
+-	return (dev->devfn + dev->sriov->offset +
+-		dev->sriov->stride * vf_id) & 0xff;
++	return pci_virtfn_routing_id(dev, dev->sriov->offset,
++				  dev->sriov->stride, vf_id) & 0xff;
+ }
+ EXPORT_SYMBOL_GPL(pci_iov_virtfn_devfn);
+ 
+diff --git a/drivers/pci/pci.h b/drivers/pci/pci.h
+index 73b913bcb87a..45411960fd2e 100644
+--- a/drivers/pci/pci.h
++++ b/drivers/pci/pci.h
+@@ -1017,6 +1017,18 @@ static inline int pci_resource_num_to_vf_bar(int resno)
+ }
+ #endif /* CONFIG_PCI_IOV */
+ 
++#if defined(CONFIG_PCI_IOV) || defined(CONFIG_PCI_SIOV)
++/*
++ * Compute the Routing ID (bus/devfn) for a VF or SDI under @pf, given the
++ * capability's offset and stride.
++ */
++static inline u16 pci_virtfn_routing_id(struct pci_dev *pf, u16 offset,
++				     u16 stride, int id)
 +{
-+	return dev->is_physfn;
++	return (pf->bus->number << 8) + pf->devfn + offset + stride * id;
 +}
++#endif
 +
-+static inline bool pci_is_sriov_virtfn(const struct pci_dev *dev)
-+{
-+	return dev->is_virtfn;
-+}
-+
- struct pci_dev *pci_alloc_dev(struct pci_bus *bus);
- 
- #define	to_pci_dev(n) container_of(n, struct pci_dev, dev)
-@@ -1277,6 +1287,7 @@ void pcibios_setup_bridge(struct pci_bus *bus, unsigned long type);
- void pci_sort_breadthfirst(void);
- #define dev_is_pci(d) ((d)->bus == &pci_bus_type)
- #define dev_is_pf(d) ((dev_is_pci(d) ? to_pci_dev(d)->is_physfn : false))
-+#define dev_is_sriov_pf(d) ((dev_is_pci(d) ? pci_is_sriov_physfn(to_pci_dev(d)) : false))
- 
- /* Generic PCI functions exported to card drivers */
- 
-@@ -2207,6 +2218,7 @@ static inline struct pci_dev *pci_dev_get(struct pci_dev *dev) { return NULL; }
- 
- #define dev_is_pci(d) (false)
- #define dev_is_pf(d) (false)
-+#define dev_is_sriov_pf(d) (false)
- static inline bool pci_acs_enabled(struct pci_dev *pdev, u16 acs_flags)
- { return false; }
- static inline int pci_irqd_intx_xlate(struct irq_domain *d,
+ #ifdef CONFIG_PCIE_TPH
+ void pci_restore_tph_state(struct pci_dev *dev);
+ void pci_save_tph_state(struct pci_dev *dev);
 -- 
 2.52.0
 
