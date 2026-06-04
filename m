@@ -4,58 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BD1CD6E6E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98363CD6E75
 	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2026 23:47:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1328743.1593056 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1328744.1593065 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVHm3-0001C1-4Q; Thu, 04 Jun 2026 23:46:55 +0000
+	id 1wVHm7-0001PT-Gd; Thu, 04 Jun 2026 23:46:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1328743.1593056; Thu, 04 Jun 2026 23:46:55 +0000
+Received: by outflank-mailman (output) from mailman id 1328744.1593065; Thu, 04 Jun 2026 23:46:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVHm3-0001Bu-0l; Thu, 04 Jun 2026 23:46:55 +0000
-Received: by outflank-mailman (input) for mailman id 1328743;
- Thu, 04 Jun 2026 23:46:53 +0000
+	id 1wVHm7-0001PM-DG; Thu, 04 Jun 2026 23:46:59 +0000
+Received: by outflank-mailman (input) for mailman id 1328744;
+ Thu, 04 Jun 2026 23:46:58 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1wVHm1-0001Bo-I2
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 23:46:53 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1wVHm6-0001P6-Mv
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2026 23:46:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wVHm0-00Biis-GZ
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 01:46:52 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1wVHm6-00Biis-3j
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 01:46:58 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6a220e1f-5cb7-0a2a0a5109dd-0a2a4504cb40-28
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 01:46:51 +0200
-Received: from [52.101.62.26]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a220e44-5cb7-0a2a0a5109dd-0a2a4505a1a0-16
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 01:46:57 +0200
+Received: from [52.101.201.8]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6a220e6a-1dec-0a2a45040019-34653e1a393b-3
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 01:46:51 +0200
-Received: from MN0PR05CA0017.namprd05.prod.outlook.com (2603:10b6:208:52c::21)
- by DM4PR12MB5819.namprd12.prod.outlook.com (2603:10b6:8:63::22) with
- Microsoft SMTP Server (version=TLS1_2,
+ id 6a220e6d-aaa8-0a2a45050019-3465c9080b28-4
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 01:46:57 +0200
+Received: from BY3PR04CA0009.namprd04.prod.outlook.com (2603:10b6:a03:217::14)
+ by IA0PR12MB7676.namprd12.prod.outlook.com (2603:10b6:208:432::5)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.8; Thu, 4 Jun 2026
- 23:46:43 +0000
-Received: from BL6PEPF00020E60.namprd04.prod.outlook.com
- (2603:10b6:208:52c:cafe::1e) by MN0PR05CA0017.outlook.office365.com
- (2603:10b6:208:52c::21) with Microsoft SMTP Server (version=TLS1_3,
+ 23:46:49 +0000
+Received: from CO1PEPF00012E64.namprd05.prod.outlook.com
+ (2603:10b6:a03:217:cafe::14) by BY3PR04CA0009.outlook.office365.com
+ (2603:10b6:a03:217::14) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.8 via Frontend Transport; Thu, 4
- Jun 2026 23:46:43 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF00020E60.mail.protection.outlook.com (10.167.249.21) with Microsoft
+ Jun 2026 23:46:48 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CO1PEPF00012E64.mail.protection.outlook.com (10.167.249.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Thu, 4 Jun 2026 23:46:43 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.92.5 via Frontend Transport; Thu, 4 Jun 2026 23:46:48 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 4 Jun
- 2026 18:46:43 -0500
+ 2026 18:46:46 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 4 Jun
+ 2026 18:46:46 -0500
 Received: from fedora.mshome.net (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Thu, 4 Jun 2026 18:46:42 -0500
+ Transport; Thu, 4 Jun 2026 18:46:45 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,82 +73,171 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b6JQg1YUgLSWV/9UsBg9gTuGQO0kg45Jj9+e37RXAbYF1vSTmT85D3bH4J8g6EeGymD98kF8EKwAb1MQzAdMAKKgU7Qj9Ru2VaeXakG3VAf8CI+u6BWRh0cvHWkCH4pCMM/uQPviOM2Bfs3kSyo2bbAsVaPeM/HYXk3U+/t5LEGAEi2r0dcgVVEusO0ddMBLysPE/vqeFd4cOHiQCiSWZuUZSsJmLlhimR850kLosiTLjsmgHzDTPJLp3np/JNj50ss8+0xA32tbE74qbqRnCF3+wraOkRnirUBY47ezrKgl9MUxcl/GVcq20/sQNkqYcjeuSiCMddVE3fZqfN5QiA==
+ b=beMpzYk4BI7eulFjYHWel2XpVSAhjCvZzVlnOh8LrisyDA+IVCWsV2W6nie7BvsT6QMcTZoMI0BXxqj904XKmT8CUyLU+0bJVxhopKMuZBSHxxGGxdb7E7ULw0k49t2/jER6/qI8ZGF3H8SyYilfSPb22/O9jLPHkuRxnNYfOUxSU5OlbnEhs71VHBiw4xX8bsRu3NwqUM/T7XnpTv6n4YNHbTjCQZQMEtp7NTuif6nmsBlGXYx2HSdR/ymuxHLvKfLaRRKd/WAdjHDeZMBksR+pydWzj8f6m+eZ6jeIpBhrBrr77ZyfmtSKS9WEJh3wxxYvzes0b+3p6w2Zl+UwcA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZwCksKfILv1JCX2VIL7HBGHWudnziVFXLEMwV2cvdo4=;
- b=Dw1uakKTDqrRijGnhU7KxcvAM2QwqnRpN5nwUSI3Ch5pLdvXXTb8V90tLCWrqEclYPBgTpqAiPeGgEYC1qrnpG9qX114GFC8v8v6J6Dr7BDq3qgdOEqGPaPjWoxww//PV07Ml9t4sGv8dfbwaYdREnFWvfuDKDEZTmpAcs/k+0EPmqhDspsJn0TpqHE3Ws6C9hJPtmg3mMSqSugeAGfoFdx65o3uB5fvPvK5wIaiTRgx9EVAHAP/0lb9clknVQ4CQAzeh7VegjZrkerhd+es8Dp+xgX/pomYVhnPxoXoThuqfemVl0/HzCT1H54ncopwmPSP5byr7kYCe1+CgV6PKQ==
+ bh=N/K276bWRhEK1HjFm+MjFQzRZlMZ7rWNjT0GqIZRCag=;
+ b=j1Wc8WLJ1F5UFf19dT9G4l9upk+VYynKOXU0fMWFZqkalFXBnLUKhuK+x75YZea3vJVNysFxfUnzejB6MmNoaWv9332aY5cUGIUIPg7TKCv7r/epI2VctET07WCbonrJiwC2srhKgDKzUc3N9GlP2FCqx87thyCuZ9apd/LgFHKdkvcUjIUMimiGjxxU77Oss9Iqo7yuhJ/PLUqNPhKsDPy+ggpRBeymJQ/NdVoDVSvVsTF8VQaPLTjKPCFvmkNrma9Ul27ehexS96IAsAviM5IaAp4sful9eI2OfdfaQUhKUSh/iHecAxfdFECoJoxd4eoSf9QJKDQ1YSx/bYce1Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZwCksKfILv1JCX2VIL7HBGHWudnziVFXLEMwV2cvdo4=;
- b=3di9JRgmoR4euCnMNIWqkOrXi1Fld1FqgRBu3cMkiwTgS+6ZsXmVjGgTdrl3sZHpNF0BuFQ/N/qCeFObi8Nmt+6jvuEtKfr/Pgk/Q/mV9CgaCc4NfgNHcOUpGGrixqFFejcuYZqC5FozTmWzo4d/UA10xGrAF4ftzPxqg9UT1cA=
+ bh=N/K276bWRhEK1HjFm+MjFQzRZlMZ7rWNjT0GqIZRCag=;
+ b=zj2X3jfAuLFLbQ4Lia/yqhldc+tapSuSgpTTv5LV9s0Gme1ikhQZBXV8uv4cWEhvUDsPK4mjaJLm2l8NMl5h9nEBE+tN8urSH07xBMlnfspYmO18Z8+IhEuMr11cEVYkkfjD8IKUzWuWdrDt5aXM6dQgNcXWB+cVKgVY/4SD0wo=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 From: Jason Andryuk <jason.andryuk@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Jason Andryuk <jason.andryuk@amd.com>, Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Teddy Astie
 	<teddy.astie@vates.tech>
-Subject: [PATCH v2 0/3] xen/x86: Change stub page freeing to fix smt=0
-Date: Thu, 4 Jun 2026 19:18:34 -0400
-Message-ID: <20260604231837.804560-1-jason.andryuk@amd.com>
+Subject: [PATCH v2 2/3] xen/x86: Split out page_walk_mfn() helper
+Date: Thu, 4 Jun 2026 19:18:36 -0400
+Message-ID: <20260604231837.804560-3-jason.andryuk@amd.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260604231837.804560-1-jason.andryuk@amd.com>
+References: <20260604231837.804560-1-jason.andryuk@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00020E60:EE_|DM4PR12MB5819:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2383ccb5-1c39-43c7-7065-08dec2938846
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E64:EE_|IA0PR12MB7676:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3daf67a8-94bd-4328-83b9-08dec2938b16
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700016|56012099006|18002099003|11063799006;
+	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|376014|22082099003|18002099003|6133799003|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	GwjszNfZLqlEz0PxIWpyoHHPhxYC7tFRqEnfjz/Wbru+Yq/7UKlOTumGVjZeo24zQ5tQqRn22ejZJdc6l6glwHFSDlwc/hbnwBL38aSkhtbPkpWK+H587o2grmzNhRyg+Exj+PjOED5zoI9UEq459NVsrKCxbJX4iAmPS6ostuiUsDwroGuuM67rC0Hu/YWRIgcIuOXqdZp/OgwdChaIQnt0bpYc/31zqqwfqOTYCHtptSKpMCyXU/+PWGIzqhn5RzyN+qpbASyowA1/bnKmIYkRH8Wofrkvb6bUaHtxqUrfjcCiXDrwlFZyRmBU+FZQf5CFxWD/QwTeFa3Sx5xQdKXd1cIMUnEp5A8RVXmAfDT90b3tGTNGEn2FT2G9H4TGtD3Orx3NT8tSCw2L6eUM7X6HseOQGaVV71cE7zhCJyU2pT1YRogIZniO6YXePOl+4yubB/zvmexy6B3xstS2/zP0MJnyXQwKb/3gSPOkv3eFrO4LSpJ4K4jnnlDjQIQWwgknOd7lnRZ0iAW3Bjsev2NhbCEWdXOy2rNAXsrd2GsNci4F1gYehl1VRI+38QeeiJAn8uw9Sk209iYxolEkYjBC1wwGjoFiXW8yt7wPNmaTVcCumTe9TYdygzXK0Ef4eyrLVkUyuIK2kyYE3sWcB10SVPN5FP2ZJUZb7UFaejf59FKUD93hDTOB17GbC1iiwffZ6BdXj5lkkL30Doe1zj2TI1U8E/qPnJ0/teX04S8=
+	1GzPG10W9udahPG7+IIKmBkWwdmcR4/EpwuW5VdPBxA7r3nK1pOtDUQIt/pMWSMvd48fzSMHpk563fSKSSmlqlN48g/6dBZ197kcRUfHy5tyhLmvt/iNG51OWM9SYrnFh5WN6Cm4NdngWQPZxvia2rl3wtaFm+Ou2Tnls6BLDKEnIn3fqAmT74r13/Xc+QK+f/sZ6+e7wpF5YjfqOy7zNAxmtTfYrrCqFDmmsKWIfCVhe/bXmBp30BG9TfldZyLHStMz0Y3iX60GqiBIkKh9yzcxvWk8V2x9XFNHZJzBYAGtmHTV1WYH6neMO21lOGoysqdtr440G64p/J0sVdbwe4p2PjnU0Ph3e6PvV1RCjSsscQ8v2G40j6pkDASffoBlQ4VEmFvFt3iJilgd3nNe3Q1dPuyZwh17DmMbFCHtxzIC+UceFV7PGKT661ywBbAvUNR06L8ndzcaqjxV4Bxoprm/LNSdYOT4iok9GIPwrzqjdDTgOOeRPGhgantEmIJISYHpgz2mqr80sr+asymaPSuZ1TfyZ5S6Fm5DXK02LRjVbeUZq0lmS5eA9kKV8+YWZwUI6zbCPfZSZWFadDXFTKP0iubJqNO41p9ZhskfmezhC20ojgzvljBZxzHJUYLAfV0frVgyKnWgPv5Yy/5iykFaAHVAI1CkzE8+h3bw0KNpscnbcuz5Ob1g3TCPRmsJL6ESqswUmVLu9bPmscKi2l7qU/jQJd3DKvb0FLK7wbs=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(56012099006)(18002099003)(11063799006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(22082099003)(18002099003)(6133799003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	dKlyG4vMytzekext18+S5oTy2RJcx48T8G1XqlPkDm2kqeiA3/cp7ePuPYcT3vkzjOynMOq/BZ8U3x5ywgVOjHsUiO3f0CHw27Rpk6jqghKgLTBpc4FItIWLy48ynRa6908JEVfeZEwR0v1W8p1F7Jv0lS6qDh7K+DdgmQn7j/j0nlqC/Vgzj/CZwniJb9tZrlFpwjb4oGrMcJhwa8MqCjwPcdOmqQFI4ashiogUUbGVfDCItgfO/ctFzinNBOCZaOjxTKskW+/gjbLPFzUyIPZCt+BjF4O9G5I12W/RsFnmDxbM7sIq6+2rm6MT4Eo9b62Z07G8QpOz9JGpTe7jYoWKHYPeUpR05+VhjNDnu99NrEK+iAjySQ6nTjDEwBXBnqzaFaVBZ8cDlcH+ktZKs8azXPObIq5xjeHoYKWNQZzwRBgFqEcro6AuGMalvFRA
+	V5q3+SvOcLlyRD62FvFNBNBs2Sy5KNRLr6VLUhZjn3AV+mdJU3zbtpXLlO5mNpOxygVvu5pY2Lv3RjrmF2jfpn7dDERHNeZpeIEDUDmszpr/Y/KSGDVNX9Rng/fiTfgwU/ZhmwHM4XOw9Mgff1oHydd48OhIy1uf+3K3boulKZedpAlZiBlzgw2kxoRe8X0d+TSv+M/zq5DcJtTKnREy6NnweZKPNoB7QQkXOykiWZaeRMs9FscMK057aihOb48fMGMU/gcy+dLG2XmTANf+37BbI8/V1RnSte7ne4uaNJHcuF47tV288ig9b/sbfxb9Lt++Si5aMYC+6lA9j45DdLbvWWe56N7n91QketJHmK8A8/OeyhyhWy4fWYaHVCIIIGfV2JMISuT0BxEdDzOuEaf9AuzN2rKzm5h/Oqqn1GH4S6fI1h1xeUtUiMkn4C5O
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 23:46:43.5039
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 23:46:48.1335
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2383ccb5-1c39-43c7-7065-08dec2938846
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3daf67a8-94bd-4328-83b9-08dec2938b16
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF00020E60.namprd04.prod.outlook.com
+	CO1PEPF00012E64.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5819
-X-purgate-ID: tlsNG-ebf023/1780616811-43F6D3FF-FFAABADA/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7676
+X-purgate-ID: tlsNG-c201ff/1780616817-D9971443-86B4A269/0/0
 X-purgate-type: clean
-X-purgate-size: 520
+X-purgate-size: 3566
 
-This is a different approach to fixing the stub page handling that is
-broken with !CONFIG_PV and smt=0.
+do_page_walk() returns a mapping of the underlying address.  Split out
+page_walk_mfn() which returns the mfn_ti, and have do_page_walk() use
+that.
 
-Jason Andryuk (3):
-  xen/x86: Remove unneeded stub_page setting
-  xen/x86: Split out page_walk_mfn() helper
-  xen/x86: Change stub page allocation/free logic
+The new standalone page_walk_mfn() is generally useful for looking up the
+MFN pointed to by an a virtual address.  It will be used in the x86 CPU
+stub logic to determine if a stub page is already populated.
 
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
  xen/arch/x86/include/asm/mm.h |  1 +
- xen/arch/x86/smpboot.c        | 32 ++++++++++++++++++++------------
  xen/arch/x86/x86_64/mm.c      | 31 +++++++++++++++++++++----------
- 3 files changed, 42 insertions(+), 22 deletions(-)
+ 2 files changed, 22 insertions(+), 10 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 06c20ab8de..6dc5115093 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -587,6 +587,7 @@ void audit_domains(void);
+ void make_cr3(struct vcpu *v, mfn_t mfn);
+ pagetable_t update_cr3(struct vcpu *v);
+ int vcpu_destroy_pagetables(struct vcpu *v);
++mfn_t page_walk_mfn(unsigned long cr3, unsigned long addr);
+ void *do_page_walk(struct vcpu *v, unsigned long addr);
+ 
+ /* Allocator functions for Xen pagetables. */
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 8eadab7933..d197dce9f8 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -59,29 +59,26 @@ extern unsigned int compat_machine_to_phys_mapping[];
+ 
+ #endif /* CONFIG_PV32 */
+ 
+-void *do_page_walk(struct vcpu *v, unsigned long addr)
++mfn_t page_walk_mfn(unsigned long cr3, unsigned long addr)
+ {
+-    unsigned long mfn = pagetable_get_pfn(v->arch.guest_table);
++    unsigned long mfn = cr3;
+     l4_pgentry_t l4e, *l4t;
+     l3_pgentry_t l3e, *l3t;
+     l2_pgentry_t l2e, *l2t;
+     l1_pgentry_t l1e, *l1t;
+ 
+-    if ( !is_pv_vcpu(v) || !is_canonical_address(addr) )
+-        return NULL;
+-
+     l4t = map_domain_page(_mfn(mfn));
+     l4e = l4t[l4_table_offset(addr)];
+     unmap_domain_page(l4t);
+     if ( !(l4e_get_flags(l4e) & _PAGE_PRESENT) )
+-        return NULL;
++        return INVALID_MFN;
+ 
+     l3t = map_l3t_from_l4e(l4e);
+     l3e = l3t[l3_table_offset(addr)];
+     unmap_domain_page(l3t);
+     mfn = l3e_get_pfn(l3e);
+     if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) || !mfn_valid(_mfn(mfn)) )
+-        return NULL;
++        return INVALID_MFN;
+     if ( (l3e_get_flags(l3e) & _PAGE_PSE) )
+     {
+         mfn += PFN_DOWN(addr & ((1UL << L3_PAGETABLE_SHIFT) - 1));
+@@ -93,7 +90,7 @@ void *do_page_walk(struct vcpu *v, unsigned long addr)
+     unmap_domain_page(l2t);
+     mfn = l2e_get_pfn(l2e);
+     if ( !(l2e_get_flags(l2e) & _PAGE_PRESENT) || !mfn_valid(_mfn(mfn)) )
+-        return NULL;
++        return INVALID_MFN;
+     if ( (l2e_get_flags(l2e) & _PAGE_PSE) )
+     {
+         mfn += PFN_DOWN(addr & ((1UL << L2_PAGETABLE_SHIFT) - 1));
+@@ -105,10 +102,24 @@ void *do_page_walk(struct vcpu *v, unsigned long addr)
+     unmap_domain_page(l1t);
+     mfn = l1e_get_pfn(l1e);
+     if ( !(l1e_get_flags(l1e) & _PAGE_PRESENT) || !mfn_valid(_mfn(mfn)) )
+-        return NULL;
++        return INVALID_MFN;
+ 
+  ret:
+-    return map_domain_page(_mfn(mfn)) + (addr & ~PAGE_MASK);
++    return _mfn(mfn);
++}
++
++void *do_page_walk(struct vcpu *v, unsigned long addr)
++{
++    mfn_t mfn;
++
++    if ( !is_pv_vcpu(v) || !is_canonical_address(addr) )
++        return NULL;
++
++    mfn = page_walk_mfn(pagetable_get_pfn(v->arch.guest_table), addr);
++    if ( !mfn_valid(mfn) )
++        return NULL;
++
++    return map_domain_page(mfn) + (addr & ~PAGE_MASK);
+ }
+ 
+ /*
 -- 
 2.54.0
 
