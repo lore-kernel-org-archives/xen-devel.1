@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22535CD6E5D
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 04:15:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1328907.1593137 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD31CD6E5D
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 05:21:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1328925.1593146 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVLxJ-0007Ga-0i; Fri, 05 Jun 2026 04:14:49 +0000
+	id 1wVMzr-00021H-MQ; Fri, 05 Jun 2026 05:21:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1328907.1593137; Fri, 05 Jun 2026 04:14:48 +0000
+Received: by outflank-mailman (output) from mailman id 1328925.1593146; Fri, 05 Jun 2026 05:21:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVLxI-0007GT-Te; Fri, 05 Jun 2026 04:14:48 +0000
-Received: by outflank-mailman (input) for mailman id 1328907;
- Fri, 05 Jun 2026 04:14:47 +0000
+	id 1wVMzr-00021A-JM; Fri, 05 Jun 2026 05:21:31 +0000
+Received: by outflank-mailman (input) for mailman id 1328925;
+ Fri, 05 Jun 2026 05:21:30 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+25760b9178a0880d3e7d+8321+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1wVLxF-0007GN-Fx
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 04:14:47 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <xakep.amatop@gmail.com>) id 1wVMzq-000213-4h
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 05:21:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wVLxE-00CPB1-3B
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 06:14:44 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+25760b9178a0880d3e7d+8321+infradead.org+hch@bombadil.srs.infradead.org>)
- id 6a224cfa-5cb7-0a2a0a5109dd-0a2a4508e4d8-32
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 06:14:43 +0200
-Received: from [198.137.202.133] (helo=bombadil.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
- (envelope-from
- <BATV+25760b9178a0880d3e7d+8321+infradead.org+hch@bombadil.srs.infradead.org>)
- id 6a224d31-63b5-0a2a45080019-c689ca85a07c-3
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 06:14:42 +0200
-Received: from hch by bombadil.infradead.org with local (Exim 4.99.1 #2 (Red
- Hat Linux)) id 1wVLx1-000000004Gb-1FHI;
- Fri, 05 Jun 2026 04:14:31 +0000
+ id 1wVMzp-006Ddi-3d
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 07:21:29 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a225cb0-bab6-0a2a0a5309dd-0a2a450697ca-48
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:21:28 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6a225cd8-7371-0a2a45060019-d155802be5eb-3
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:21:28 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-490b4a8e28bso12167305e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2026 22:21:28 -0700 (PDT)
+Received: from EPUAKYIW02F7.. ([45.12.26.204])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490c2c9ea37sm31922435e9.0.2026.06.04.22.21.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Jun 2026 22:21:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,63 +53,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=LJ7z4fiMTAZ7fAzEyfiZAHwdxVS2Jyf7F7sA34zhgfk=; b=SA0RTFbtw7++xeqM4/TBi2XyHl
-	OsNHxj9gdfi0UgM2EebSZZ5pP6ZD20zBkoA1aRnOH1iKaGBpFvTFyAA6LA9t4HDaVEdA7kTTbx1N3
-	UC9hF8blJBELprFrQ3F0S6pjYGlbCpJnJERQ5XapS7co2zJQCzPJZukheGd7mSzvM+9W2g1fNkurp
-	s9n+QHKcf2b02WissFhhCZMd8QUsS4UOjeN/RYUWc1PPTNQF2fENqoiFet+BZXyy+T5KAY5KkP7ix
-	Sy0Jy0Z9FTKpx0xD56IQ30IR1Y43bLhYMCck7lQouY6AJ7p8xjxiJ1odiPKjhItw8K+cdyeNIydU8
-	epqVkWfQ==;
-Date: Thu, 4 Jun 2026 21:14:31 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Dimitri Daskalakis <dimitri.daskalakis1@gmail.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, linux-pci@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <chleroy@kernel.org>,
-	Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
-	Oliver O'Halloran <oohall@gmail.com>,
-	Niklas Schnelle <schnelle@linux.ibm.com>,
-	Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>,
-	Alexander Gordeev <agordeev@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Sven Schnelle <svens@linux.ibm.com>,
-	Alex Williamson <alex@shazbot.org>, Jason Gunthorpe <jgg@ziepe.ca>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Ankit Agrawal <ankita@nvidia.com>,
-	Leon Romanovsky <leon@kernel.org>, Juergen Gross <jgross@suse.com>,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780636888; x=1781241688; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=O1mQfU8nVubaPNeVbtqSYXyI1fcXaMwz8rsvcS3hlZ4=;
+        b=Wtk3PwK9C4TLsHvkaqP/7Pa/eQhYko/uCEo893Bo1XSywWRBGyZDKCl8bW8HJfKTjn
+         wNwxMkhf30m55uiUK++aGxVmE4hfk7IhYBx6guMk/e4ioKbRLDjqxD6/dOqjo9LyQCIx
+         SOyy6e8tQ4I86wUvtxe45cWZwkP1eaIqr5RuBfRTpxBtvOW7x65QUBBYpHa9+K6R+F5l
+         vQqR+SlOD2LKukXnuJmonpBpdL0/n84cvacmCFCd8SbRTApFSgmLnqfvCNjryq36UHVv
+         mpGb7/H/ey1l2pxKLBOxZt1aEEKD0yn42qG+a2cLCcD6lYUWOGmQ9QTyx0CMSJOf6Hc8
+         DyxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780636888; x=1781241688;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=O1mQfU8nVubaPNeVbtqSYXyI1fcXaMwz8rsvcS3hlZ4=;
+        b=BgpZtMTeY8FsFT7b3rjDEct9O+UXHngbA9ZOwru94De/Xs3dSsqwPN5YDxfJSYdckN
+         WggCRmNF5jEeAs1bPaLygOgXwNJ+V+Yu8eggHQhRUPg/hkVFLQk1TtlWlEF9b207DFcz
+         kqm/cQbUt+t22D9RcfJkiv+/Y3Ztzxmp7zrhhxGc1+sloT8L0Xlt3ksnmXs+iNjAKAxT
+         no9K67KLvZxiZYtH2Q9ZwB8ANApXFEVEe3DafMZtZ+skOHW7c78/MSJa1vBP5tS5T/hD
+         xwwn7o7Aqp/z5aFM52W5ANOzq/gf//g026IWhX38vVzoyzWxImP6r1T5fwN6bQA4a1Xb
+         HC2g==
+X-Gm-Message-State: AOJu0YyVFr08QKfRWWOqCsnINXjm5u65A1M66xDlfhg0h7W8pMMVubyb
+	7as78iYxFoCpsL7G6eVgJs5hZcYxSbtzlxB8OlHl+cyg0z5CLFeq7kmo8sUxeg==
+X-Gm-Gg: Acq92OGiDxvb6vgQzYtdwKzi4kk5ASQfXWuIdqOMXR7p2gd5jn4hfHNlFCjf4+bwzyW
+	Re9sFV+jzCm1wQzlEIIl8nE4sHdiOmlJUe2qpe7cc/ZmAvqL0aQ1hR9MnAzFztziUIc8xl/J+0p
+	loK2ZoQq9ZiKbeyt2JYJQR9znkS7BRyxou+qrM3OiRKzHuwEkfICGCb6lys5YOd8t9bZ6dNz87a
+	FOvsFcsWsfCsysw1uuK7RmSuOmUUb7u3XsY4SG6N4BcTweKCOM9A3nJC9arvXaIs0O77wotUj0G
+	BwjapK2noyuuFoJVdpUDtQdXSSwgdHp/Eui/8wWPghlg5zlc9SxVFdThtbk+TwlJzNB6XLusozT
+	6x3JCN/lo5mHhDk4lOqNkLM47MywXVTZZvzi9vM9tIzPLFmM/NzjrenuJPSVcd05q6m73D6cuK7
+	HxG341+4RGYUzIxIBnLOAufzn8dD6BHfnJy9fOqg==
+X-Received: by 2002:a05:600c:19d2:b0:490:bb45:79da with SMTP id 5b1f17b1804b1-490c25af9a3mr23949615e9.13.1780636888119;
+        Thu, 04 Jun 2026 22:21:28 -0700 (PDT)
+From: Mykola Kvach <xakep.amatop@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Keith Busch <kbusch@kernel.org>,
-	Alexander Duyck <alexanderduyck@fb.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Dimitri Daskalakis <daskald@meta.com>,
-	linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org,
-	kvm@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [RFC 00/12] PCI: Add support for Scalable I/O Virtualization
-Message-ID: <aiJNJ0zP5BocG-Yy@infradead.org>
-References: <20260604150153.3619662-1-dimitri.daskalakis1@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH for-4.22 v2 0/2] xen/arm: validate hwdom first bank boot placement
+Date: Fri,  5 Jun 2026 08:19:06 +0300
+Message-ID: <cover.1780602987.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260604150153.3619662-1-dimitri.daskalakis1@gmail.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1780632883-BFF7ADB1-27899243/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1780636888-85361D75-EDA92A00/0/0
 X-purgate-type: clean
-X-purgate-size: 268
+X-purgate-size: 1731
 
-On Thu, Jun 04, 2026 at 08:01:41AM -0700, Dimitri Daskalakis wrote:
-> From: Dimitri Daskalakis <daskald@meta.com>
-> 
-> Scalable I/O Virtualization (SIOV) is the next-generation alternative
-> to SR-IOV.
+From: Mykola Kvach <mykola_kvach@epam.com>
 
-It's not.  It is a yet another very different technology.
+With LLC coloring enabled, the hardware domain memory is allocated by
+allocate_hwdom_memory() instead of relying on the fixed direct-map
+layout. Since de99f3263555 ("device-tree: Improve hwdom memory
+allocation for DMA"), the allocator prefers lower host regions, but the
+first-bank filter still only enforces the old 128MB heuristic.
+
+A low candidate bank can satisfy that heuristic while still being
+unsuitable for the Arm kernel/DTB/initrd placement rules. Split the Arm
+placement logic into reusable helpers first, then validate the candidate
+hardware-domain bank 0 against those helpers before allocating it.
+
+Changes in v2:
+- Split the previous single patch into a behavior-preserving Arm
+  placement refactoring and a separate hardware-domain first-bank fix.
+- Rename find_module_placement() and place_modules() to use DTB/initrd
+  terminology.
+- Pass ramend to find_dtb_initrd_placement().
+- Update the stale tools/libs/guest/xg_dom_arm.c reference.
+
+Link to v1:
+  https://patchew.org/Xen/4f862bb2dc323914b8120b0f16af7516140cf42b.1780065103.git.mykola._5Fkvach@epam.com/
+
+Mykola Kvach (2):
+  xen/arm: split DTB/initrd placement helpers
+  device-tree: device-tree: validate hwdom bank 0 boot placement
+
+ xen/arch/arm/acpi/domain_build.c        |   2 -
+ xen/arch/arm/domain_build.c             |   8 +
+ xen/arch/arm/include/asm/domain_build.h |   4 +
+ xen/arch/arm/include/asm/kernel.h       |   9 ++
+ xen/arch/arm/kernel.c                   | 190 ++++++++++++++++++------
+ xen/common/device-tree/domain-build.c   |  30 ++--
+ xen/include/xen/fdt-kernel.h            |   9 ++
+ 7 files changed, 192 insertions(+), 60 deletions(-)
+
+-- 
+2.43.0
+
 
