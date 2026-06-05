@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1978DCD6E79
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 14:42:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1329553.1593604 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0217ECD6E7D
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 14:42:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1329557.1593636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVVka-0000LU-6S; Fri, 05 Jun 2026 14:42:20 +0000
+	id 1wVVkf-000136-8G; Fri, 05 Jun 2026 14:42:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1329553.1593604; Fri, 05 Jun 2026 14:42:20 +0000
+Received: by outflank-mailman (output) from mailman id 1329557.1593636; Fri, 05 Jun 2026 14:42:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVVka-0000LN-3a; Fri, 05 Jun 2026 14:42:20 +0000
-Received: by outflank-mailman (input) for mailman id 1329553;
- Fri, 05 Jun 2026 14:42:19 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1wVVkZ-0000LD-15
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 14:42:19 +0000
+	id 1wVVkf-00012l-2R; Fri, 05 Jun 2026 14:42:25 +0000
+Received: by outflank-mailman (input) for mailman id 1329557;
+ Fri, 05 Jun 2026 14:42:23 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1wVVkd-0000m1-FT
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 14:42:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wVVkY-007rPg-11
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 16:42:18 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1wVVkc-00BGpY-SC
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 16:42:22 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a22e03a-5cb7-0a2a0a5109dd-0a2a4505b646-28
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:17 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a22e03f-bab6-0a2a0a5309dd-0a2a450baf3c-24
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:22 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a22e049-aaa8-0a2a45050019-d155dd2eede9-3
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:17 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-45eeba68948so1318226f8f.1
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:42:17 -0700 (PDT)
+ id 6a22e04e-212f-0a2a450b0019-d155802ef124-3
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:22 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-490b64c8311so23289905e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:42:22 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f3444fesm27983183f8f.20.2026.06.05.07.42.14
+ ffacd0b85a97d-4601f3444fesm27983183f8f.20.2026.06.05.07.42.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jun 2026 07:42:15 -0700 (PDT)
+ Fri, 05 Jun 2026 07:42:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,40 +52,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1780670537; x=1781275337; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=h5vYZ/rkpgKfFpxFCKmaZZBwe24StYh9tUaWXPqFAVM=;
-        b=lEbEqnhHhFFb+jWS1E09Q8U3bvIYkbGM0JGdIjNrkv7vl0fWiAztI/dLhKyv22CkT4
-         J0UbZEArfyl+rAgXcskgtWayzaco2E2Knxqy5wz01AdzWruNSM6RnwKy8uxvWEmI4oYP
-         uVQ2hTiWnNeUTF9pSXRi9v3SNY8zVAV2uea4U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780670537; x=1781275337;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=citrix.com; s=google; t=1780670542; x=1781275342; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h5vYZ/rkpgKfFpxFCKmaZZBwe24StYh9tUaWXPqFAVM=;
-        b=FP9ev5zjNL8DjuXD8OeJKWNd4nv1zEYypMwtkK39QJ/1ucunkPo2ctweqCCX5r6cbN
-         UnFTAK/g2AZzf6NR+4O3CY35ZCcbSH5PGPepBtDYf08Hs3YN+4vCbZC4Iqj7VUcbghfb
-         BfNOXoBguALGXWglu294QS3F/IXmcWVlN0XYckvTJbsiDWcOPO478B2oAdoN08czGRlq
-         Axtq65/lsibkBeFNaDbp/KJ3B4J8nOCeox8PnyLYfrJXBbB7DJXzpKkdZ9xETgieknm3
-         E44mGi48eq0MJ3KCxVr5A1A74WSYkCW4nDWNWfDn7Ln/aJZjnrJLGMLg25VhXLEbEkOv
-         oXhg==
-X-Gm-Message-State: AOJu0YzDOpdfx2n71oMc0+9YxFyXDzZG0zBjWxWhDgQW3yUT1HESIOti
-	lU2ZEl6ZRnunuct8mnqcZ+kwCSGCV8K/+mj3/iQXl+JlcAdFwbUHtc0pUSDkCvDz2jDl/ZCxGdn
-	JuN5k
-X-Gm-Gg: Acq92OHLqEtDBR7a2jEjRUIpjaHEU2qY7SIk4f6Hvmvql2RbetxEgL7AXBf0Oe/QkpT
-	yt4ChQJzG7Yfr4tyZH3qw/hf4CE0WR9XlgYAG1yk5LKMQcNaVjoBg9Gif9kzpNcHTceXFnVT/QW
-	qo2cyrgd9kcTSHVk+dnP0qCjZu1i+Wx1R1oOVaCOL6K8y0na9Q/PhbMhJBrJ3XIVeio+x/gLbXu
-	vTdGf7EnXOuQVjx9V28msfSmFp/MmITj65IoRwz8bKcB0eMjVtSOfr6jMJgpvMs9tIqwVsnvz2q
-	Ft5sqHqHcdcc3mjNz+1KKxohSanSpgN3HZ+UDC3bVE6SPpwPS1L8EuOm8Hrn66rPXm1t8RCMN+u
-	Ac1yrxnHTVOz3XajCxpVdzlcZtS40nTkY+PnZK5f+EfNr5J5z/YI1IzPWYJhDBpq4+PmM7Dk4qQ
-	sb3drde6ZaGGXM9qDZtCijLQ9CxuX+opw+J52TaURmEjZm5lgwYS08D6A9PA1Q2k0nsaeYilKEh
-	W2OUgBlYJznAjY=
-X-Received: by 2002:a05:6000:468e:b0:460:2477:2284 with SMTP id ffacd0b85a97d-46030630b07mr4204560f8f.39.1780670536811;
-        Fri, 05 Jun 2026 07:42:16 -0700 (PDT)
+        bh=WHSitOhb+fGyBshbpHWrYGdo1A/rKyctL6BP8wXOLww=;
+        b=jK6edHwLtF0f7Pjs7ecdI4SOe+gtBNR37yQB6VR9QfyqAzPB/m+WBhKk5VF2mDf6BO
+         Pa9VdeJmIm9WLuEL/PYefidu8eQ2idKsD0rwm0OldRgiYu1PT8Qs4wJ/I5U/PbStud9I
+         oPaRlaMJPmVy78kOcIYTpqirM6hPuf6zH0xZs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780670542; x=1781275342;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=WHSitOhb+fGyBshbpHWrYGdo1A/rKyctL6BP8wXOLww=;
+        b=duu6m2tBlYV26BKK52a3zULTkTTrgM8vW88mq71nYqmcnCae9nXFw3nRp9/51k+qr2
+         0E2WFBCFSVnZ5ZeznFkXc+S9o+lqb+Z1TarftFduwksCoY2gCF8vrhbF6Z9t7rjDUmJ6
+         Lnpjbj2k1YKR2CXpd+kJ/ih9eOhImtTIQbCGnKeRYzBymks2xOEHJUAuJvb/B9v+/stj
+         cIec4/GsY7+5U7I76wdEmZkW3zUkosEIeNaLKmpTJ/qgcdTevQOHfcWW1wAeUqVVdLlh
+         xLgTkO4owhtkpbQ6U0VqIgjncZ8yu6rKg1Ew2aM0Tb4l09Dj7LEZviB1o3UE7Dfy5wb5
+         +hDA==
+X-Gm-Message-State: AOJu0YzB4uR8tPx2m4NViTHL68nMBvh1Sj2rHaOyj4XzG4nUKPQcA1hE
+	ppm6duFmvqUvpPeT1ebejZAlcV1T8TOMXNzO0eFo5Qq+YsqsIJdKkIolIuXurUn9vbpC+9uxltx
+	c7fFO
+X-Gm-Gg: Acq92OHwHiiTlZkMNzqFu9e4tZchvOXN4ZSVSSVUWs9X7Dbi1I7EdukcJQc8uyl9hfb
+	JPeckRcOh8dub3N6RJlddMFFTd56sxCAwgsB0C/yIjrO+3aYD1Gy+Rti+7JlamUsSAMHAIapZM7
+	/l/528MwrTHKMvpakLJ/oqmls9poW+9XpW3xlPtWttzZ9tAF+b2+5bSjBFfka3M8OvteICjxi+a
+	ywvSw5btxjqkd/cdn2j2qMVtDkIewm4xN+w4j5O8N47VmB+BPpVdMpItC7qhOxzxLGmkLS9VHwA
+	+CUcCMvpJ/qjpjwpxvqoF2P9bG8UCUlVFaNr97b/WO8bx7VSphnRk4sxfpHvlQ/xsZY5+/ZnRri
+	D9JwtR+iReEnfSrsdiDk+sxEVKirn8wZLe02HrDR6VyRP4HA03yVtx5xnzFkWKUf5E4wVCSnGZh
+	RWrMnDh/aDaT6sPLgebXT2qqvOXata5AGbNA+a87/4+tc8gcbrQx0Ov12XMSJvZzc4bvs9ld1vl
+	xxlLuqXUXPaIwzK4/WRfUxfEw==
+X-Received: by 2002:a05:600c:3e0a:b0:490:b724:dbe3 with SMTP id 5b1f17b1804b1-490c25a07c4mr60870635e9.8.1780670542117;
+        Fri, 05 Jun 2026 07:42:22 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -97,48 +97,160 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH for-4.22 0/6] CI: Update distros for build tests
-Date: Fri,  5 Jun 2026 15:42:07 +0100
-Message-Id: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/6] CI: Add Ubuntu 26.04
+Date: Fri,  5 Jun 2026 15:42:11 +0100
+Message-Id: <20260605144213.2749656-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
+References: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1780670537-D9772443-3F6BB843/0/0
-X-purgate-type: clean
-X-purgate-size: 1518
+X-purgate-ID: tlsNG-42698a/1780670542-2087FF3B-9655E4F8/10/63158204843
+X-purgate-type: spam
+X-purgate-size: 3755
 
-Refresh which distros we do build testing with
+Swap yajl for json-c, given the deprecation of the former.
 
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2579549654
+Add 26.04 GCC/Clang debug/non-debug jobs.  Drop the 24.04 debug jobs to keep
+the overall job count down.
 
-Andrew Cooper (6):
-  CI: Drop test-artefacts/Makefile
-  CI: Swap ocaml-nox for ocaml in newer Debian/Ubuntu
-  CI: Drop Ubuntu 16.04
-  CI: Add Ubuntu 26.04
-  CI: Update Fedora to 43
-  CI: Update Opensuse 15.6 to 16.0
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ .../build/ubuntu/26.04-x86_64.dockerfile      | 74 +++++++++++++++++++
+ automation/gitlab-ci/build.yaml               | 22 ++++--
+ 2 files changed, 90 insertions(+), 6 deletions(-)
+ create mode 100644 automation/build/ubuntu/26.04-x86_64.dockerfile
 
- automation/build/debian/12-arm64v8.dockerfile |  2 +-
- automation/build/debian/12-x86_32.dockerfile  |  2 +-
- automation/build/debian/12-x86_64.dockerfile  |  2 +-
- automation/build/debian/13-arm64v8.dockerfile |  2 +-
- automation/build/debian/13-x86_32.dockerfile  |  2 +-
- automation/build/debian/13-x86_64.dockerfile  |  2 +-
- ...x86_64.dockerfile => 43-x86_64.dockerfile} |  4 +-
- ...dockerfile => leap-16.0-x86_64.dockerfile} | 16 ++----
- .../build/ubuntu/22.04-x86_64.dockerfile      |  2 +-
- .../build/ubuntu/24.04-x86_64.dockerfile      |  2 +-
- ..._64.dockerfile => 26.04-x86_64.dockerfile} | 15 ++++-
- automation/gitlab-ci/build.yaml               | 57 ++++++++++---------
- automation/tests-artifacts/Makefile           | 19 -------
- 13 files changed, 59 insertions(+), 68 deletions(-)
- rename automation/build/fedora/{41-x86_64.dockerfile => 43-x86_64.dockerfile} (95%)
- rename automation/build/opensuse/{leap-15.6-x86_64.dockerfile => leap-16.0-x86_64.dockerfile} (84%)
- rename automation/build/ubuntu/{16.04-x86_64.dockerfile => 26.04-x86_64.dockerfile} (81%)
- delete mode 100644 automation/tests-artifacts/Makefile
-
+diff --git a/automation/build/ubuntu/26.04-x86_64.dockerfile b/automation/build/ubuntu/26.04-x86_64.dockerfile
+new file mode 100644
+index 000000000000..64729c00f2a6
+--- /dev/null
++++ b/automation/build/ubuntu/26.04-x86_64.dockerfile
+@@ -0,0 +1,74 @@
++# syntax=docker/dockerfile:1
++FROM --platform=linux/amd64 ubuntu:26.04
++LABEL maintainer.name="The Xen Project"
++LABEL maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++
++RUN <<EOF
++#!/bin/bash
++    set -e
++
++    useradd --create-home user
++
++    apt-get update
++
++    DEPS=(
++        # Xen
++        bison
++        build-essential
++        checkpolicy
++        clang
++        flex
++        python3-minimal
++
++        # Tools (general)
++        ca-certificates
++        cpio
++        git-core
++        gzip
++        patch
++        perl
++        pkg-config
++        wget
++        # libxenguest dombuilder
++        libbz2-dev
++        libzstd-dev
++        liblzo2-dev
++        liblzma-dev
++        zlib1g-dev
++        # libacpi
++        acpica-tools
++        # libxl
++        uuid-dev
++        libjson-c-dev
++        # RomBIOS
++        bcc
++        bin86
++        # xentop
++        libncurses5-dev
++        # Python bindings
++        python3-dev
++        python3-setuptools
++        # Ocaml bindings/oxenstored
++        ocaml
++        ocaml-findlib
++
++        # Stubdom download/extract
++        bzip2
++
++        # Qemu build
++        libglib2.0-dev
++        libpixman-1-dev
++        meson
++        ninja-build
++        python3-packaging
++        python3-venv
++    )
++
++    apt-get -y --no-install-recommends install "${DEPS[@]}"
++    rm -rf /var/lib/apt/lists/*
++EOF
++
++USER user
++WORKDIR /build
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 5a933e42f1ab..6d27cc8eb613 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -652,20 +652,30 @@ ubuntu-24.04-x86_64-clang:
+   variables:
+     CONTAINER: ubuntu:24.04-x86_64
+ 
+-ubuntu-24.04-x86_64-clang-debug:
+-  extends: .clang-x86-64-build-debug
++ubuntu-24.04-x86_64-gcc:
++  extends: .gcc-x86-64-build
+   variables:
+     CONTAINER: ubuntu:24.04-x86_64
+ 
+-ubuntu-24.04-x86_64-gcc:
++ubuntu-26.04-x86_64-clang:
++  extends: .clang-x86-64-build
++  variables:
++    CONTAINER: ubuntu:26.04-x86_64
++
++ubuntu-26.04-x86_64-clang-debug:
++  extends: .clang-x86-64-build-debug
++  variables:
++    CONTAINER: ubuntu:26.04-x86_64
++
++ubuntu-26.04-x86_64-gcc:
+   extends: .gcc-x86-64-build
+   variables:
+-    CONTAINER: ubuntu:24.04-x86_64
++    CONTAINER: ubuntu:26.04-x86_64
+ 
+-ubuntu-24.04-x86_64-gcc-debug:
++ubuntu-26.04-x86_64-gcc-debug:
+   extends: .gcc-x86-64-build-debug
+   variables:
+-    CONTAINER: ubuntu:24.04-x86_64
++    CONTAINER: ubuntu:26.04-x86_64
+ 
+ opensuse-leap-15.6-clang:
+   extends: .clang-x86-64-build
 -- 
 2.39.5
 
