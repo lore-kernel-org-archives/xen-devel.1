@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1056CD6E7D
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 14:42:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1329555.1593622 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1978DCD6E79
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2026 14:42:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1329553.1593604 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVVkd-0000mO-Oa; Fri, 05 Jun 2026 14:42:23 +0000
+	id 1wVVka-0000LU-6S; Fri, 05 Jun 2026 14:42:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1329555.1593622; Fri, 05 Jun 2026 14:42:23 +0000
+Received: by outflank-mailman (output) from mailman id 1329553.1593604; Fri, 05 Jun 2026 14:42:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wVVkd-0000mG-KP; Fri, 05 Jun 2026 14:42:23 +0000
-Received: by outflank-mailman (input) for mailman id 1329555;
- Fri, 05 Jun 2026 14:42:21 +0000
+	id 1wVVka-0000LN-3a; Fri, 05 Jun 2026 14:42:20 +0000
+Received: by outflank-mailman (input) for mailman id 1329553;
+ Fri, 05 Jun 2026 14:42:19 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1wVVkb-0000ca-Q1
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 14:42:21 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper3@citrix.com>) id 1wVVkZ-0000LD-15
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 14:42:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wVVkb-007rPg-6g
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 16:42:21 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1wVVkY-007rPg-11
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2026 16:42:18 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a22e044-5cb7-0a2a0a5109dd-0a2a450ac698-20
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:21 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ id 6a22e03a-5cb7-0a2a0a5109dd-0a2a4505b646-28
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:17 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6a22e04c-56b3-0a2a450a0019-d1558029ed4b-3
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:20 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-490ac357c55so24191315e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:42:20 -0700 (PDT)
+ id 6a22e049-aaa8-0a2a45050019-d155dd2eede9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 16:42:17 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-45eeba68948so1318226f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 05 Jun 2026 07:42:17 -0700 (PDT)
 Received: from localhost.localdomain (host-78-146-242-105.as13285.net.
  [78.146.242.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f3444fesm27983183f8f.20.2026.06.05.07.42.17
+ ffacd0b85a97d-4601f3444fesm27983183f8f.20.2026.06.05.07.42.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jun 2026 07:42:18 -0700 (PDT)
+ Fri, 05 Jun 2026 07:42:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,41 +53,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1780670540; x=1781275340; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mQEQfqBsSeliopGBCIw5LmeQFTkv0Y/GgRDYWXBZgps=;
-        b=MZdTXcHeukN/N/iRasFwrXSfUyuJc2HUspQHYAwQ8lCrpfvdPio3F3n5knpt/zNpq4
-         TbwflCj3MTU76CDZLv8NDPynpSLWUloZRuTR1X4SZw2R2vFz31DzducnjzRVqyGIQiZV
-         uGStxtJIjbVjPCpDv4uOtKSGknhc6NF62OtYM=
+        d=citrix.com; s=google; t=1780670537; x=1781275337; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=h5vYZ/rkpgKfFpxFCKmaZZBwe24StYh9tUaWXPqFAVM=;
+        b=lEbEqnhHhFFb+jWS1E09Q8U3bvIYkbGM0JGdIjNrkv7vl0fWiAztI/dLhKyv22CkT4
+         J0UbZEArfyl+rAgXcskgtWayzaco2E2Knxqy5wz01AdzWruNSM6RnwKy8uxvWEmI4oYP
+         uVQ2hTiWnNeUTF9pSXRi9v3SNY8zVAV2uea4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780670540; x=1781275340;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mQEQfqBsSeliopGBCIw5LmeQFTkv0Y/GgRDYWXBZgps=;
-        b=E6FiBSvGDOJc1+E3BgfxWjoGjoFs9MMW0fUx6dcZ7WFlLqNe7Ltl+EOh2CBp0nOR4Q
-         NkeK86SZRldvaTl0/iVM9Wg+8/OnOCAN7svYJrDzZgCWw8cViF4CFXGqQK2FlZYpS8CD
-         MR1JdovEZx0D0f5OwnilpDb0i44K529x+3Z0O3d+985qNkRmqVIC4koE5uFoBEVs/KlI
-         E0LvwqatLf84YIEdd2APsoiXwxB2F1CJ3omkvBDw5niCmsoWsx2eDCOcFfQ10eWRAmlE
-         Rn+0B/9hxZgEYkRig8GZm7ffchHuZWE4hQc0SnkS5cTC8F89fhzIG5CzvHQGDElk+OgU
-         rD6w==
-X-Gm-Message-State: AOJu0Yw3iRfer/xgSNtlyqvUGiNgrfgQYlKYP7iUY3kHlh1+xLIP0NK9
-	Ut8PiA+lfmYDqr5djtU+VjfrnwQqTUWtb/57Y/+0W4zhbHSp6alGPs9x1uMZbw5As3TbB+IfRot
-	/u2kA
-X-Gm-Gg: Acq92OFKJa2mkwseMzYicXGZQQubPCob2xV2GpgbY1ipPhyTw0FB+plfj/RMWP1jFH+
-	MYWXI0hEzIlToGvbZJazWo0qywXLzKw2UAfShQRM3Ft+/1fC+D2KStslRdM+Oqr9Ut9/mIWvxXI
-	Q7Yx2ShhZkWul8xdM7NkqyVMbXV7RxTOrIvhzyG0fBSKJ0lgOhUqTQZN5XwsDtrPQwbMFSf3Q5g
-	IfjYfLF9vvjObxOle5HEJVbd+fRmPISdZzw50hRVPGnA5wqvNAc3HUauMDO9Y/+qRmOutKXgIDM
-	U4usSrYQ6yFl0obwL+Wo+1AB5fEqf0P+HlDMIB0ey+p/ygip23HxZ4edPIDiYyoJUdRnYMZczfx
-	o9ltHfyk/laRaSEMvGjzosSfcfhwHSsk7S0A781HG2DUB/UuBPiKqaXrDOr8VVfUPcN6A41BVv9
-	irkfU8fkiVOI3dzsS29xBHgqDDnefloXKe6xY7JXZXnbXh0h0eX0qg3SHpuqwvaUWebC1hMdq7V
-	0U4mMD4ll8FwFs=
-X-Received: by 2002:a05:600c:358d:b0:490:958f:2a5e with SMTP id 5b1f17b1804b1-490c25b22d7mr71221475e9.13.1780670539833;
-        Fri, 05 Jun 2026 07:42:19 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1780670537; x=1781275337;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=h5vYZ/rkpgKfFpxFCKmaZZBwe24StYh9tUaWXPqFAVM=;
+        b=FP9ev5zjNL8DjuXD8OeJKWNd4nv1zEYypMwtkK39QJ/1ucunkPo2ctweqCCX5r6cbN
+         UnFTAK/g2AZzf6NR+4O3CY35ZCcbSH5PGPepBtDYf08Hs3YN+4vCbZC4Iqj7VUcbghfb
+         BfNOXoBguALGXWglu294QS3F/IXmcWVlN0XYckvTJbsiDWcOPO478B2oAdoN08czGRlq
+         Axtq65/lsibkBeFNaDbp/KJ3B4J8nOCeox8PnyLYfrJXBbB7DJXzpKkdZ9xETgieknm3
+         E44mGi48eq0MJ3KCxVr5A1A74WSYkCW4nDWNWfDn7Ln/aJZjnrJLGMLg25VhXLEbEkOv
+         oXhg==
+X-Gm-Message-State: AOJu0YzDOpdfx2n71oMc0+9YxFyXDzZG0zBjWxWhDgQW3yUT1HESIOti
+	lU2ZEl6ZRnunuct8mnqcZ+kwCSGCV8K/+mj3/iQXl+JlcAdFwbUHtc0pUSDkCvDz2jDl/ZCxGdn
+	JuN5k
+X-Gm-Gg: Acq92OHLqEtDBR7a2jEjRUIpjaHEU2qY7SIk4f6Hvmvql2RbetxEgL7AXBf0Oe/QkpT
+	yt4ChQJzG7Yfr4tyZH3qw/hf4CE0WR9XlgYAG1yk5LKMQcNaVjoBg9Gif9kzpNcHTceXFnVT/QW
+	qo2cyrgd9kcTSHVk+dnP0qCjZu1i+Wx1R1oOVaCOL6K8y0na9Q/PhbMhJBrJ3XIVeio+x/gLbXu
+	vTdGf7EnXOuQVjx9V28msfSmFp/MmITj65IoRwz8bKcB0eMjVtSOfr6jMJgpvMs9tIqwVsnvz2q
+	Ft5sqHqHcdcc3mjNz+1KKxohSanSpgN3HZ+UDC3bVE6SPpwPS1L8EuOm8Hrn66rPXm1t8RCMN+u
+	Ac1yrxnHTVOz3XajCxpVdzlcZtS40nTkY+PnZK5f+EfNr5J5z/YI1IzPWYJhDBpq4+PmM7Dk4qQ
+	sb3drde6ZaGGXM9qDZtCijLQ9CxuX+opw+J52TaURmEjZm5lgwYS08D6A9PA1Q2k0nsaeYilKEh
+	W2OUgBlYJznAjY=
+X-Received: by 2002:a05:6000:468e:b0:460:2477:2284 with SMTP id ffacd0b85a97d-46030630b07mr4204560f8f.39.1780670536811;
+        Fri, 05 Jun 2026 07:42:16 -0700 (PDT)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -97,158 +97,48 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 2/6] CI: Swap ocaml-nox for ocaml in newer Debian/Ubuntu
-Date: Fri,  5 Jun 2026 15:42:09 +0100
-Message-Id: <20260605144213.2749656-3-andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.22 0/6] CI: Update distros for build tests
+Date: Fri,  5 Jun 2026 15:42:07 +0100
+Message-Id: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
-References: <20260605144213.2749656-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1780670540-7D1848B7-51E8B651/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 5304
+X-purgate-ID: tlsNG-c201ff/1780670537-D9772443-3F6BB843/0/0
+X-purgate-type: clean
+X-purgate-size: 1518
 
-Ocaml 4.08 and earlier had the compiler package depend on graphics, and
-therefore on X.  Ocaml 4.09 and later dropped this dependency.
+Refresh which distros we do build testing with
 
-Debian and Ubuntu versions with Ocaml 4.08 and earlier (which are Debian
-Bullseye/11, and Ubuntu Focal/20.04 and earlier) had ocaml-nox packages with
-this dependency stripped, which we use to keep the size of the containers
-down.
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2579549654
 
-In newer versions of Debian and Ubuntu, ocaml-nox is just a transitional
-package referring back to ocaml.  Ubuntu Resolute/26.04 has finally removed
-this transitional package.  For all versions where ocaml-nox is just a
-transitional package, swap to the ocaml package.
+Andrew Cooper (6):
+  CI: Drop test-artefacts/Makefile
+  CI: Swap ocaml-nox for ocaml in newer Debian/Ubuntu
+  CI: Drop Ubuntu 16.04
+  CI: Add Ubuntu 26.04
+  CI: Update Fedora to 43
+  CI: Update Opensuse 15.6 to 16.0
 
-No functional change.
+ automation/build/debian/12-arm64v8.dockerfile |  2 +-
+ automation/build/debian/12-x86_32.dockerfile  |  2 +-
+ automation/build/debian/12-x86_64.dockerfile  |  2 +-
+ automation/build/debian/13-arm64v8.dockerfile |  2 +-
+ automation/build/debian/13-x86_32.dockerfile  |  2 +-
+ automation/build/debian/13-x86_64.dockerfile  |  2 +-
+ ...x86_64.dockerfile => 43-x86_64.dockerfile} |  4 +-
+ ...dockerfile => leap-16.0-x86_64.dockerfile} | 16 ++----
+ .../build/ubuntu/22.04-x86_64.dockerfile      |  2 +-
+ .../build/ubuntu/24.04-x86_64.dockerfile      |  2 +-
+ ..._64.dockerfile => 26.04-x86_64.dockerfile} | 15 ++++-
+ automation/gitlab-ci/build.yaml               | 57 ++++++++++---------
+ automation/tests-artifacts/Makefile           | 19 -------
+ 13 files changed, 59 insertions(+), 68 deletions(-)
+ rename automation/build/fedora/{41-x86_64.dockerfile => 43-x86_64.dockerfile} (95%)
+ rename automation/build/opensuse/{leap-15.6-x86_64.dockerfile => leap-16.0-x86_64.dockerfile} (84%)
+ rename automation/build/ubuntu/{16.04-x86_64.dockerfile => 26.04-x86_64.dockerfile} (81%)
+ delete mode 100644 automation/tests-artifacts/Makefile
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Anthony PERARD <anthony.perard@vates.tech>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Juergen Gross <jgross@suse.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
- automation/build/debian/12-arm64v8.dockerfile   | 2 +-
- automation/build/debian/12-x86_32.dockerfile    | 2 +-
- automation/build/debian/12-x86_64.dockerfile    | 2 +-
- automation/build/debian/13-arm64v8.dockerfile   | 2 +-
- automation/build/debian/13-x86_32.dockerfile    | 2 +-
- automation/build/debian/13-x86_64.dockerfile    | 2 +-
- automation/build/ubuntu/22.04-x86_64.dockerfile | 2 +-
- automation/build/ubuntu/24.04-x86_64.dockerfile | 2 +-
- 8 files changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/automation/build/debian/12-arm64v8.dockerfile b/automation/build/debian/12-arm64v8.dockerfile
-index c0e08a010f6a..5cc4de822cc6 100644
---- a/automation/build/debian/12-arm64v8.dockerfile
-+++ b/automation/build/debian/12-arm64v8.dockerfile
-@@ -46,7 +46,7 @@ RUN <<EOF
-         # Golang bindings
-         golang-go
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # for test phase, qemu-* jobs
-diff --git a/automation/build/debian/12-x86_32.dockerfile b/automation/build/debian/12-x86_32.dockerfile
-index 447152d7e5e4..3457eca78203 100644
---- a/automation/build/debian/12-x86_32.dockerfile
-+++ b/automation/build/debian/12-x86_32.dockerfile
-@@ -38,7 +38,7 @@ RUN <<EOF
-         python3-dev
-         python3-setuptools
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
-     )
- 
-diff --git a/automation/build/debian/12-x86_64.dockerfile b/automation/build/debian/12-x86_64.dockerfile
-index 4e533ee879fd..afb16f371126 100644
---- a/automation/build/debian/12-x86_64.dockerfile
-+++ b/automation/build/debian/12-x86_64.dockerfile
-@@ -50,7 +50,7 @@ RUN <<EOF
-         # Golang bindings
-         golang-go
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # for test phase, qemu-* jobs
-diff --git a/automation/build/debian/13-arm64v8.dockerfile b/automation/build/debian/13-arm64v8.dockerfile
-index b9062ee8b443..1a29ad153cea 100644
---- a/automation/build/debian/13-arm64v8.dockerfile
-+++ b/automation/build/debian/13-arm64v8.dockerfile
-@@ -46,7 +46,7 @@ RUN <<EOF
-         # Golang bindings
-         golang-go
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # for test phase, qemu-* jobs
-diff --git a/automation/build/debian/13-x86_32.dockerfile b/automation/build/debian/13-x86_32.dockerfile
-index 464b4fc55e38..204d3c1e6dd0 100644
---- a/automation/build/debian/13-x86_32.dockerfile
-+++ b/automation/build/debian/13-x86_32.dockerfile
-@@ -38,7 +38,7 @@ RUN <<EOF
-         python3-dev
-         python3-setuptools
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
-     )
- 
-diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
-index 2c6c9d4a5098..ebf28a69e278 100644
---- a/automation/build/debian/13-x86_64.dockerfile
-+++ b/automation/build/debian/13-x86_64.dockerfile
-@@ -50,7 +50,7 @@ RUN <<EOF
-         # Golang bindings
-         golang-go
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # for test phase, qemu-* jobs
-diff --git a/automation/build/ubuntu/22.04-x86_64.dockerfile b/automation/build/ubuntu/22.04-x86_64.dockerfile
-index 6ae7f4faa859..47aadc0548ab 100644
---- a/automation/build/ubuntu/22.04-x86_64.dockerfile
-+++ b/automation/build/ubuntu/22.04-x86_64.dockerfile
-@@ -51,7 +51,7 @@ RUN <<EOF
-         python3-dev
-         python3-setuptools
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # Stubdom download/extract
-diff --git a/automation/build/ubuntu/24.04-x86_64.dockerfile b/automation/build/ubuntu/24.04-x86_64.dockerfile
-index 84777d188c0d..a41632d5cf6c 100644
---- a/automation/build/ubuntu/24.04-x86_64.dockerfile
-+++ b/automation/build/ubuntu/24.04-x86_64.dockerfile
-@@ -51,7 +51,7 @@ RUN <<EOF
-         python3-dev
-         python3-setuptools
-         # Ocaml bindings/oxenstored
--        ocaml-nox
-+        ocaml
-         ocaml-findlib
- 
-         # Stubdom download/extract
 -- 
 2.39.5
 
