@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60793CD8C9D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D837CD8CAD
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2026 14:55:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1331713.1594346 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1331708.1594315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNp-0003Uk-Vk; Mon, 08 Jun 2026 14:55:21 +0000
+	id 1wWbNm-0002ZP-2h; Mon, 08 Jun 2026 14:55:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1331713.1594346; Mon, 08 Jun 2026 14:55:21 +0000
+Received: by outflank-mailman (output) from mailman id 1331708.1594315; Mon, 08 Jun 2026 14:55:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1wWbNp-0003Rk-BT; Mon, 08 Jun 2026 14:55:21 +0000
-Received: by outflank-mailman (input) for mailman id 1331713;
- Mon, 08 Jun 2026 14:55:17 +0000
+	id 1wWbNl-0002VL-IU; Mon, 08 Jun 2026 14:55:17 +0000
+Received: by outflank-mailman (input) for mailman id 1331708;
+ Mon, 08 Jun 2026 14:55:14 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1wWbNl-0002P5-7L
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2026 14:55:17 +0000
+ id 1wWbNg-0001Ob-GY
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2026 14:55:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1wWbNk-00EcHE-Jv; Mon, 08 Jun 2026 16:55:16 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1wWbNf-00EcD6-TP; Mon, 08 Jun 2026 16:55:11 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7d0-5cb7-0a2a0a5109dd-0a2a45018424-8
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:16 +0200
+ id 6a26d7c5-5cb7-0a2a0a5109dd-0a2a4504aa90-26
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:11 +0200
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.56.1)
  (envelope-from
  <BATV+89cebe4ba06156b53a55+8324+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6a26d7d2-c1f2-0a2a45010019-5a9b3222ea9c-3
- for <multiple-recipients>; Mon, 08 Jun 2026 16:55:15 +0200
+ id 6a26d7ce-1dec-0a2a45040019-5a9b32229a8c-3
+ for <multiple-recipients>; Mon, 08 Jun 2026 16:55:10 +0200
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wWbNR-0000000Dtx9-2t34; Mon, 08 Jun 2026 14:54:58 +0000
+ id 1wWbNR-0000000DtxF-3M66; Mon, 08 Jun 2026 14:54:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.2 #2 (Red
- Hat Linux)) id 1wWbNR-00000000NEY-1Xm3;
+ Hat Linux)) id 1wWbNR-00000000NFK-45z6;
  Mon, 08 Jun 2026 15:54:57 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:
-	From:Reply-To:Cc:Content-ID:Content-Description;
-	bh=IKIepJVZTrQvr9mzOQ+/HkJi9FX0zbFmsPkvIgbqGRE=; b=I1BaiAVqVDGDPY/DJMfHhsDzqI
-	CPaFVooL4qZtsnnTM+BJwtuHplzLKHiqwoTwUFmsxyhp8F4R84fIgwZo6ogTKuhj9fkpx4ut5Gp3l
-	IfafIQl9SY/azFshGwtcrlVKWkYSRIBL6wDcajc855HYrOd04CU0E2bjvkeHkfY+hLnN7l4Js/5aE
-	YIk+mSzqTIWhBiKDQBe+XySRSaCwD8KnrAc55L3VozM0FU2qVB7d1OBFwwJTwhC98Rds/89Llm3jC
-	4rodbhz/ZkeR8oF2GB8tc0CbRQiirP/U7D2WaNY2CAnwj15OkbXzSRBg4i4dZQhThFNUmI3XkRK/Y
-	He1oCUBA==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
+	Cc:Content-Type:Content-ID:Content-Description;
+	bh=kzo7us9axLE6O2exw0Cl6U5WHgHBbewVPWCB3bErZOE=; b=RGeLi7GjoSXYplCK7Jkv0M+NUZ
+	d3RESPAK3OJqd9O/Y6CBJzjRWyo+LmbRbYXU17ZRiNIF5jRN/1AelT3Pp7TCUWDm2bDspYBdl8om3
+	K5LV2Wpn+lijtTE0bITDN+lqpHd8EGL9BOTxPTq0oHdwHicvt6BAUUIY8oE4emduAdzw1OFQ4x7YQ
+	Pe7emlltLqC6oNqj+gHa2Ex8FZ2suXd+M4Yo5H3xQUFch1KSl8iFV/oRtJO0+igNGXiPQ63poo9UT
+	0+em0x8c/zUkuqgc+gKdNziudceC23aF8P+fHaZHRCFsOTBdkmb9hsvqPKzYnchYajaEz0ZrhRJya
+	q4GZk7fA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -90,109 +90,113 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 01/34] KVM: x86/xen: Do not corrupt KVM clock in kvm_xen_shared_info_init()
-Date: Mon,  8 Jun 2026 15:47:42 +0100
-Message-ID: <20260608145455.89187-2-dwmw2@infradead.org>
+Subject: [PATCH v5 13/34] KVM: x86: Use get_kvmclock() in kvm_get_wall_clock_epoch()
+Date: Mon,  8 Jun 2026 15:47:54 +0100
+Message-ID: <20260608145455.89187-14-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260608145455.89187-1-dwmw2@infradead.org>
 References: <20260608145455.89187-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d62444/1780930515-ACE52FF4-025FBCFA/0/0
+X-purgate-ID: tlsNG-ebf023/1780930511-427613FF-7D56AF36/0/0
 X-purgate-type: clean
-X-purgate-size: 4433
+X-purgate-size: 3112
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The KVM clock is an interesting thing. It is defined as "nanoseconds
-since the guest was created", but in practice it runs at two *different*
-rates — or three different rates, if you count implementation bugs.
+Now that get_kvmclock() correctly handles TSC scaling and captures both
+wallclock and kvmclock from the same TSC reading,
+kvm_get_wall_clock_epoch() can simply call it instead of duplicating
+the pvclock computation.
 
-Definition A is that it runs synchronously with the CLOCK_MONOTONIC_RAW
-of the host, with a delta of kvm->arch.kvmclock_offset.
+This eliminates the last instance of the "definition C" kvmclock
+calculation that computed nanoseconds directly from the host TSC
+without accounting for guest TSC scaling.
 
-But that version doesn't actually get used in the common case, where the
-host has a reliable TSC and the guest TSCs are all running at the same
-rate and in sync with each other, and kvm->arch.use_master_clock is set.
-
-In that common case, definition B is used: There is a reference point in
-time at kvm->arch.master_kernel_ns (again a CLOCK_MONOTONIC_RAW time),
-and a corresponding host TSC value kvm->arch.master_cycle_now. This
-fixed point in time is converted to guest units (the time offset by
-kvmclock_offset and the TSC Value scaled and offset to be a guest TSC
-value) and advertised to the guest in the pvclock structure. While in
-this 'use_master_clock' mode, the fixed point in time never needs to be
-changed, and the clock runs precisely in time with the guest TSC, at the
-rate advertised in the pvclock structure.
-
-The third definition C is implemented in kvm_get_wall_clock_epoch() and
-__get_kvmclock(), using the master_cycle_now and master_kernel_ns fields
-but converting the *host* TSC cycles directly to a value in nanoseconds
-instead of scaling via the guest TSC.
-
-One might naïvely think that all three definitions are identical, since
-CLOCK_MONOTONIC_RAW is not skewed by NTP frequency corrections; all
-three are just the result of counting the host TSC at a known frequency,
-or the scaled guest TSC at a known precise fraction of the host's
-frequency. The problem is with arithmetic precision, and the way that
-frequency scaling is done in a division-free way by multiplying by a
-scale factor, then shifting right. In practice, all three ways of
-calculating the KVM clock will suffer a systemic drift from each other.
-
-Eventually, definition C should just be eliminated. Commit 451a707813ae
-("KVM: x86/xen: improve accuracy of Xen timers") worked around it for
-the specific case of Xen timers, which are defined in terms of the KVM
-clock and suffered from a continually increasing error in timer expiry
-times. That commit notes that get_kvmclock_ns() is non-trivial to fix
-and says "I'll come back to that", which remains true.
-
-Definitions A and B do need to coexist, the former to handle the case
-where the host or guest TSC is suboptimally configured. But KVM should
-be more careful about switching between them, and the discontinuity in
-guest time which could result.
-
-In particular, KVM_REQ_MASTERCLOCK_UPDATE will take a new snapshot of
-time as the reference in master_kernel_ns and master_cycle_now, yanking
-the guest's clock back to match definition A at that moment.
-
-When invoked from in 'use_master_clock' mode, kvm_update_masterclock()
-should probably *adjust* kvm->arch.kvmclock_offset to account for the
-drift, instead of yanking the clock back to definition A. But in the
-meantime there are a bunch of places where it just doesn't need to be
-invoked at all.
-
-To start with: there is no need to do such an update when a Xen guest
-populates the shared_info page. This seems to have been a hangover from
-the very first implementation of shared_info which automatically
-populated the vcpu_info structures at their default locations, but even
-then it should just have raised KVM_REQ_CLOCK_UPDATE on each vCPU
-instead of using KVM_REQ_MASTERCLOCK_UPDATE. And now that userspace is
-expected to explicitly set the vcpu_info even in its default locations,
-there's not even any need for that either.
-
-Fixes: 629b5348841a ("KVM: x86/xen: update wallclock region")
-Reviewed-by: Paul Durrant <paul@xen.org>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/xen.c | 2 --
- 1 file changed, 2 deletions(-)
+ arch/x86/kvm/x86.c | 59 +++++++---------------------------------------
+ 1 file changed, 9 insertions(+), 50 deletions(-)
 
-diff --git a/arch/x86/kvm/xen.c b/arch/x86/kvm/xen.c
-index 91fd3673c09a..82e34edbfdbd 100644
---- a/arch/x86/kvm/xen.c
-+++ b/arch/x86/kvm/xen.c
-@@ -98,8 +98,6 @@ static int kvm_xen_shared_info_init(struct kvm *kvm)
- 	wc->version = wc_version + 1;
- 	read_unlock_irq(&gpc->lock);
- 
--	kvm_make_all_cpus_request(kvm, KVM_REQ_MASTERCLOCK_UPDATE);
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 7ae6a7705353..fc9366b83912 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -3494,63 +3494,22 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+  * wallclock and kvmclock times, and subtracting one from the other.
+  *
+  * Fall back to using their values at slightly different moments by
+- * calling ktime_get_real_ns() and get_kvmclock_ns() separately.
++ * calling ktime_get_real_ns() and get_kvmclock() separately.
+  */
+ uint64_t kvm_get_wall_clock_epoch(struct kvm *kvm)
+ {
+-#ifdef CONFIG_X86_64
+-	struct pvclock_vcpu_time_info hv_clock;
+-	struct kvm_arch *ka = &kvm->arch;
+-	unsigned long seq, local_tsc_khz;
+-	struct timespec64 ts;
+-	uint64_t host_tsc;
 -
- out:
- 	srcu_read_unlock(&kvm->srcu, idx);
- 	return ret;
+-	do {
+-		seq = read_seqcount_begin(&ka->pvclock_sc);
+-
+-		local_tsc_khz = 0;
+-		if (!ka->use_master_clock)
+-			break;
+-
+-		/*
+-		 * The TSC read and the call to get_cpu_tsc_khz() must happen
+-		 * on the same CPU.
+-		 */
+-		get_cpu();
+-
+-		local_tsc_khz = get_cpu_tsc_khz();
+-
+-		if (local_tsc_khz &&
+-		    !kvm_get_walltime_and_clockread(&ts, &host_tsc))
+-			local_tsc_khz = 0; /* Fall back to old method */
+-
+-		put_cpu();
+-
+-		/*
+-		 * These values must be snapshotted within the seqcount loop.
+-		 * After that, it's just mathematics which can happen on any
+-		 * CPU at any time.
+-		 */
+-		hv_clock.tsc_timestamp = ka->master_cycle_now;
+-		hv_clock.system_time = ka->master_kernel_ns + ka->kvmclock_offset;
++	struct kvm_clock_data data;
+ 
+-	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
++	get_kvmclock(kvm, &data);
+ 
+ 	/*
+-	 * If the conditions were right, and obtaining the wallclock+TSC was
+-	 * successful, calculate the KVM clock at the corresponding time and
+-	 * subtract one from the other to get the guest's epoch in nanoseconds
+-	 * since 1970-01-01.
++	 * If get_kvmclock() captured both wallclock and kvmclock from the
++	 * same TSC reading, use them for a precise epoch calculation.
+ 	 */
+-	if (local_tsc_khz) {
+-		kvm_get_time_scale(NSEC_PER_SEC, local_tsc_khz * NSEC_PER_USEC,
+-				   &hv_clock.tsc_shift,
+-				   &hv_clock.tsc_to_system_mul);
+-		return ts.tv_nsec + NSEC_PER_SEC * ts.tv_sec -
+-			__pvclock_read_cycles(&hv_clock, host_tsc);
+-	}
+-#endif
+-	return ktime_get_real_ns() - get_kvmclock_ns(kvm);
++	if (data.flags & KVM_CLOCK_REALTIME)
++		return data.realtime - data.clock;
++
++	return ktime_get_real_ns() - data.clock;
+ }
+ 
+ /*
 -- 
 2.54.0
 
